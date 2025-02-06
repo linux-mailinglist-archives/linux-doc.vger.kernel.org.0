@@ -1,118 +1,336 @@
-Return-Path: <linux-doc+bounces-37135-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37137-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93FAFA2A48B
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 10:34:32 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 12F6DA2A49D
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 10:35:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2FAC81676B8
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 09:34:29 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1903218883F5
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 09:35:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36BB8227BAC;
-	Thu,  6 Feb 2025 09:30:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D99E22CBF3;
+	Thu,  6 Feb 2025 09:32:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Ezp08FrK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8803617A586
-	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 09:30:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0FF222C355;
+	Thu,  6 Feb 2025 09:32:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738834252; cv=none; b=K30F5kl5Qb6Xk8dIOsdNgzoo4b2lAXaRyCKpnYWUayjco0zyFgh82UGG+T+m6+O/W+BCB9rbAJH2D70WvWGfJ2QQBk4OH7rhO0iBEJWXLjhdd2HZ76nfmn/QGpu0OalkbvPYdOIABVtd+JBPyYnLo/wrKxQZLjZ4DHsuQm92bhA=
+	t=1738834323; cv=none; b=a5c7Vttvh3LFtqejCbHobt6i1soPr8CjULFQm/M51Nwn+HL+LS1vSLYBDdC7Vg0whi7omR34Hp1wXSzZwWJsgS/IKy6JzyiH+S/lNZ5mcGD1OA/0B/OWzGF9QL+b/WL6Tv03wpHDrFOlutqpAl9K5d+GDx4s4ApTUtyHA3cwO/c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738834252; c=relaxed/simple;
-	bh=Y18W78DDacVBLpk7PrrIOqLKZ+MXb+MEFrYJWPkLRho=;
+	s=arc-20240116; t=1738834323; c=relaxed/simple;
+	bh=ebn36sY7VM8LnTISOZn8OjLwV8d2NBTHyEeM0+XORdo=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LU451R7TmxHgZGYwHWLCE5A8kankovpVZf00t+H6flXjiFgD96LYku1reQpPc4jtPBNzzfzvS2LdJ29xPPFEa5CzcyYqeroMNl8ziTKNBtZDDUQ8HB7gCP6QyygiqghFGm8v2UAWN9MeN89OZKG+EbA0swn9kRnKfXYtHjzVXpo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <mkl@pengutronix.de>)
-	id 1tfyDJ-0005ui-3U; Thu, 06 Feb 2025 10:30:25 +0100
-Received: from moin.white.stw.pengutronix.de ([2a0a:edc0:0:b01:1d::7b] helo=bjornoya.blackshift.org)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <mkl@pengutronix.de>)
-	id 1tfyDF-003mWx-2b;
-	Thu, 06 Feb 2025 10:30:21 +0100
-Received: from pengutronix.de (pd9e59fec.dip0.t-ipconnect.de [217.229.159.236])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	(Authenticated sender: mkl-all@blackshift.org)
-	by smtp.blackshift.org (Postfix) with ESMTPSA id 6474B3BB259;
-	Thu, 06 Feb 2025 09:30:21 +0000 (UTC)
-Date: Thu, 6 Feb 2025 10:30:20 +0100
-From: Marc Kleine-Budde <mkl@pengutronix.de>
-To: Charles Han <hanchunchao@inspur.com>
-Cc: manivannan.sadhasivam@linaro.org, thomas.kopp@microchip.com, 
-	mailhol.vincent@wanadoo.fr, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
-	cem@kernel.org, djwong@kernel.org, corbet@lwn.net, linux-can@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-xfs@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH] Documentation: Remove repeated word in docs
-Message-ID: <20250206-quirky-malachite-mamba-598802-mkl@pengutronix.de>
-References: <20250206091530.4826-1-hanchunchao@inspur.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=bBb6lbIp9lz5daZ+pzDp+mW4+bzc+KQm8vcyBJ98ZatHcr/kUUR9y0QbJfS7ovkIrq+7BxjAnuFXqg0sLSoz3zmEk7RM436iQPRoFa3RV33k7c0oJbdYWvFe4bimkg64CJmAGVY2241n/WW+9ZLEpTLPkjWVoL9b0pge6DzwIsE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Ezp08FrK; arc=none smtp.client-ip=198.175.65.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1738834321; x=1770370321;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=ebn36sY7VM8LnTISOZn8OjLwV8d2NBTHyEeM0+XORdo=;
+  b=Ezp08FrKX3ZON+A5Fq586XEFH8nqv5G3NhqXVfdtRzmskwbDY4ge3Fv5
+   RlSRKMKPRXelA8vZMyQ5yyqphhNEZrbnsvTWglWgyJQg0srFZoerkWUpV
+   GvQootZv68fl67EAzQPN6AW5TUQ/VGbheEuxwiv7/GdoiacNA/VDcPjf/
+   oCFyF6S0wc8dBQOx5pAJ8dptn2VyJXgLpCAJ2CSHnWEYVLU9J70PHZWTr
+   UpFq6Lp+xNTqvPLQkpP+E7S2F2v1TtI0CSCfHTpRegnOeQLs2pgEa99x8
+   uISHSSpowshvDYIwC7o5VJdT81CPdX0477OsyOWTiyg/haBM9ychCT4aV
+   Q==;
+X-CSE-ConnectionGUID: 62+eE7tkSm2miI1+lp5wbg==
+X-CSE-MsgGUID: tJZhJor9RHa8Bq+/6TM70A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="43090439"
+X-IronPort-AV: E=Sophos;i="6.13,264,1732608000"; 
+   d="scan'208";a="43090439"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2025 01:32:00 -0800
+X-CSE-ConnectionGUID: rOxyr2INRNKjy6DjPbY1vQ==
+X-CSE-MsgGUID: MaJHPNCPSqiEYN89QW45yg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,264,1732608000"; 
+   d="scan'208";a="111126000"
+Received: from lkp-server01.sh.intel.com (HELO d63d4d77d921) ([10.239.97.150])
+  by orviesa006.jf.intel.com with ESMTP; 06 Feb 2025 01:31:55 -0800
+Received: from kbuild by d63d4d77d921 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1tfyEi-000wgd-0M;
+	Thu, 06 Feb 2025 09:31:52 +0000
+Date: Thu, 6 Feb 2025 17:31:29 +0800
+From: kernel test robot <lkp@intel.com>
+To: Uday Shankar <ushankar@purestorage.com>,
+	Breno Leitao <leitao@debian.org>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
+	Simon Horman <horms@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	netdev@vger.kernel.org,
+	Linux Memory Management List <linux-mm@kvack.org>,
+	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
+	linux-doc@vger.kernel.org, Uday Shankar <ushankar@purestorage.com>
+Subject: Re: [PATCH v2 1/2] net, treewide: define and use MAC_ADDR_LEN
+Message-ID: <202502061751.GNyqzMGp-lkp@intel.com>
+References: <20250204-netconsole-v2-1-5ef5eb5f6056@purestorage.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="hm4ctlzjszhq6mov"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250206091530.4826-1-hanchunchao@inspur.com>
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: mkl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+In-Reply-To: <20250204-netconsole-v2-1-5ef5eb5f6056@purestorage.com>
+
+Hi Uday,
+
+kernel test robot noticed the following build warnings:
+
+[auto build test WARNING on c2933b2befe25309f4c5cfbea0ca80909735fd76]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Uday-Shankar/net-treewide-define-and-use-MAC_ADDR_LEN/20250205-054620
+base:   c2933b2befe25309f4c5cfbea0ca80909735fd76
+patch link:    https://lore.kernel.org/r/20250204-netconsole-v2-1-5ef5eb5f6056%40purestorage.com
+patch subject: [PATCH v2 1/2] net, treewide: define and use MAC_ADDR_LEN
+config: x86_64-allyesconfig (https://download.01.org/0day-ci/archive/20250206/202502061751.GNyqzMGp-lkp@intel.com/config)
+compiler: clang version 19.1.3 (https://github.com/llvm/llvm-project ab51eccf88f5321e7c60591c5546b254b6afab99)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250206/202502061751.GNyqzMGp-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202502061751.GNyqzMGp-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   In file included from drivers/scsi/qla4xxx/ql4_os.c:8:
+   In file included from include/linux/blkdev.h:9:
+   In file included from include/linux/blk_types.h:10:
+   In file included from include/linux/bvec.h:10:
+   In file included from include/linux/highmem.h:8:
+   In file included from include/linux/cacheflush.h:5:
+   In file included from arch/x86/include/asm/cacheflush.h:5:
+   In file included from include/linux/mm.h:2224:
+   include/linux/vmstat.h:504:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     504 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     505 |                            item];
+         |                            ~~~~
+   include/linux/vmstat.h:511:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     511 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     512 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/vmstat.h:524:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     524 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     525 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/scsi/qla4xxx/ql4_os.c:15:
+>> drivers/scsi/qla4xxx/ql4_def.h:148:9: warning: 'MAC_ADDR_LEN' macro redefined [-Wmacro-redefined]
+     148 | #define MAC_ADDR_LEN                    6       /* in bytes */
+         |         ^
+   include/linux/if_ether.h:23:9: note: previous definition is here
+      23 | #define MAC_ADDR_LEN (3 * ETH_ALEN - 1)
+         |         ^
+   4 warnings generated.
+--
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8188ee/dm.c:4:
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8188ee/../wifi.h:11:
+   In file included from include/linux/etherdevice.h:20:
+   In file included from include/linux/if_ether.h:19:
+   In file included from include/linux/skbuff.h:17:
+   In file included from include/linux/bvec.h:10:
+   In file included from include/linux/highmem.h:8:
+   In file included from include/linux/cacheflush.h:5:
+   In file included from arch/x86/include/asm/cacheflush.h:5:
+   In file included from include/linux/mm.h:2224:
+   include/linux/vmstat.h:504:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     504 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     505 |                            item];
+         |                            ~~~~
+   include/linux/vmstat.h:511:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     511 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     512 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/vmstat.h:524:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     524 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     525 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8188ee/dm.c:8:
+>> drivers/net/wireless/realtek/rtlwifi/rtl8188ee/reg.h:1230:9: warning: 'MAC_ADDR_LEN' macro redefined [-Wmacro-redefined]
+    1230 | #define MAC_ADDR_LEN                            6
+         |         ^
+   include/linux/if_ether.h:23:9: note: previous definition is here
+      23 | #define MAC_ADDR_LEN (3 * ETH_ALEN - 1)
+         |         ^
+   4 warnings generated.
+--
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8192ee/dm.c:4:
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8192ee/../wifi.h:11:
+   In file included from include/linux/etherdevice.h:20:
+   In file included from include/linux/if_ether.h:19:
+   In file included from include/linux/skbuff.h:17:
+   In file included from include/linux/bvec.h:10:
+   In file included from include/linux/highmem.h:8:
+   In file included from include/linux/cacheflush.h:5:
+   In file included from arch/x86/include/asm/cacheflush.h:5:
+   In file included from include/linux/mm.h:2224:
+   include/linux/vmstat.h:504:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     504 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     505 |                            item];
+         |                            ~~~~
+   include/linux/vmstat.h:511:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     511 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     512 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/vmstat.h:524:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     524 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     525 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8192ee/dm.c:8:
+>> drivers/net/wireless/realtek/rtlwifi/rtl8192ee/reg.h:1192:9: warning: 'MAC_ADDR_LEN' macro redefined [-Wmacro-redefined]
+    1192 | #define MAC_ADDR_LEN                            6
+         |         ^
+   include/linux/if_ether.h:23:9: note: previous definition is here
+      23 | #define MAC_ADDR_LEN (3 * ETH_ALEN - 1)
+         |         ^
+   4 warnings generated.
+--
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8723ae/dm.c:4:
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8723ae/../wifi.h:11:
+   In file included from include/linux/etherdevice.h:20:
+   In file included from include/linux/if_ether.h:19:
+   In file included from include/linux/skbuff.h:17:
+   In file included from include/linux/bvec.h:10:
+   In file included from include/linux/highmem.h:8:
+   In file included from include/linux/cacheflush.h:5:
+   In file included from arch/x86/include/asm/cacheflush.h:5:
+   In file included from include/linux/mm.h:2224:
+   include/linux/vmstat.h:504:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     504 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     505 |                            item];
+         |                            ~~~~
+   include/linux/vmstat.h:511:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     511 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     512 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/vmstat.h:524:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     524 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     525 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8723ae/dm.c:8:
+>> drivers/net/wireless/realtek/rtlwifi/rtl8723ae/reg.h:1194:9: warning: 'MAC_ADDR_LEN' macro redefined [-Wmacro-redefined]
+    1194 | #define MAC_ADDR_LEN                            6
+         |         ^
+   include/linux/if_ether.h:23:9: note: previous definition is here
+      23 | #define MAC_ADDR_LEN (3 * ETH_ALEN - 1)
+         |         ^
+   4 warnings generated.
+--
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8723be/dm.c:4:
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8723be/../wifi.h:11:
+   In file included from include/linux/etherdevice.h:20:
+   In file included from include/linux/if_ether.h:19:
+   In file included from include/linux/skbuff.h:17:
+   In file included from include/linux/bvec.h:10:
+   In file included from include/linux/highmem.h:8:
+   In file included from include/linux/cacheflush.h:5:
+   In file included from arch/x86/include/asm/cacheflush.h:5:
+   In file included from include/linux/mm.h:2224:
+   include/linux/vmstat.h:504:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     504 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     505 |                            item];
+         |                            ~~~~
+   include/linux/vmstat.h:511:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     511 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     512 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/vmstat.h:524:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     524 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     525 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8723be/dm.c:8:
+>> drivers/net/wireless/realtek/rtlwifi/rtl8723be/reg.h:1245:9: warning: 'MAC_ADDR_LEN' macro redefined [-Wmacro-redefined]
+    1245 | #define MAC_ADDR_LEN                            6
+         |         ^
+   include/linux/if_ether.h:23:9: note: previous definition is here
+      23 | #define MAC_ADDR_LEN (3 * ETH_ALEN - 1)
+         |         ^
+   4 warnings generated.
+--
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8821ae/dm.c:4:
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8821ae/../wifi.h:11:
+   In file included from include/linux/etherdevice.h:20:
+   In file included from include/linux/if_ether.h:19:
+   In file included from include/linux/skbuff.h:17:
+   In file included from include/linux/bvec.h:10:
+   In file included from include/linux/highmem.h:8:
+   In file included from include/linux/cacheflush.h:5:
+   In file included from arch/x86/include/asm/cacheflush.h:5:
+   In file included from include/linux/mm.h:2224:
+   include/linux/vmstat.h:504:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     504 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     505 |                            item];
+         |                            ~~~~
+   include/linux/vmstat.h:511:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     511 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     512 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/vmstat.h:524:43: warning: arithmetic between different enumeration types ('enum zone_stat_item' and 'enum numa_stat_item') [-Wenum-enum-conversion]
+     524 |         return vmstat_text[NR_VM_ZONE_STAT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~ ^
+     525 |                            NR_VM_NUMA_EVENT_ITEMS +
+         |                            ~~~~~~~~~~~~~~~~~~~~~~
+   In file included from drivers/net/wireless/realtek/rtlwifi/rtl8821ae/dm.c:8:
+>> drivers/net/wireless/realtek/rtlwifi/rtl8821ae/reg.h:1274:9: warning: 'MAC_ADDR_LEN' macro redefined [-Wmacro-redefined]
+    1274 | #define MAC_ADDR_LEN                    6
+         |         ^
+   include/linux/if_ether.h:23:9: note: previous definition is here
+      23 | #define MAC_ADDR_LEN (3 * ETH_ALEN - 1)
+         |         ^
+   4 warnings generated.
 
 
---hm4ctlzjszhq6mov
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH] Documentation: Remove repeated word in docs
-MIME-Version: 1.0
+vim +/MAC_ADDR_LEN +148 drivers/scsi/qla4xxx/ql4_def.h
 
-On 06.02.2025 17:15:29, Charles Han wrote:
-> Remove the repeated word "to" docs.
->=20
-> Signed-off-by: Charles Han <hanchunchao@inspur.com>
+afaf5a2d341d33 David Somayajulu 2006-09-19  144  
+afaf5a2d341d33 David Somayajulu 2006-09-19  145  /*
+afaf5a2d341d33 David Somayajulu 2006-09-19  146   * Misc
+afaf5a2d341d33 David Somayajulu 2006-09-19  147   */
+afaf5a2d341d33 David Somayajulu 2006-09-19 @148  #define MAC_ADDR_LEN			6	/* in bytes */
+afaf5a2d341d33 David Somayajulu 2006-09-19  149  #define IP_ADDR_LEN			4	/* in bytes */
+2a49a78ed3c8d7 Vikas Chaudhary  2010-04-28  150  #define IPv6_ADDR_LEN			16	/* IPv6 address size */
+afaf5a2d341d33 David Somayajulu 2006-09-19  151  #define DRIVER_NAME			"qla4xxx"
+afaf5a2d341d33 David Somayajulu 2006-09-19  152  
 
-Feel free to take the patch.
-
-Acked-by: Marc Kleine-Budde <mkl@pengutronix.de>
-
-regards,
-Marc
-
---=20
-Pengutronix e.K.                 | Marc Kleine-Budde          |
-Embedded Linux                   | https://www.pengutronix.de |
-Vertretung N=C3=BCrnberg              | Phone: +49-5121-206917-129 |
-Amtsgericht Hildesheim, HRA 2686 | Fax:   +49-5121-206917-9   |
-
---hm4ctlzjszhq6mov
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEn/sM2K9nqF/8FWzzDHRl3/mQkZwFAmekgSoACgkQDHRl3/mQ
-kZxdTAf5AdW1/IcCxxcCFzVXksRmp7Q0bHOPaSlom8ycnTbaN6nNbYeqeXv3mGMg
-5oBVg1sY2aWUW7r3V28h4HzCA9T+G7j2v2Mfv6whc3wTVCUIlTMbVqB+qL6ot0wM
-5p1JnlRrqjzdC5ufv1lgpbtYM7/BzHGq1ae6t5R6Ddye4F582kzTW+FmVQ/pgscg
-TpwH0NX1OTft3WvbXYzd50r/ycrhcG3buoY4/c28q08w1kgs2YDin8Nr/kn2r29G
-hd/lh4XOIG8JSmNojd1trXc+SWE9e271AO//+wFp2PUQXuF3FltKFn9o8Yf83nVE
-kqUDEwktUZjxMRDxtv54braGka5XSg==
-=WoBM
------END PGP SIGNATURE-----
-
---hm4ctlzjszhq6mov--
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
