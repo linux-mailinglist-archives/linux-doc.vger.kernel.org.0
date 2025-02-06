@@ -1,154 +1,161 @@
-Return-Path: <linux-doc+bounces-37247-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37261-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6A88A2B3C0
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:06:54 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9104DA2B3EC
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:10:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 72E64188AB3E
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:06:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DAF181886B6B
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:10:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C834B1DE4C2;
-	Thu,  6 Feb 2025 21:06:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1487A1DE3B8;
+	Thu,  6 Feb 2025 21:08:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nrZBVxoE"
+	dkim=fail reason="key not found in DNS" (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b="L+QWLl/N"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from sienna.cherry.relay.mailchannels.net (sienna.cherry.relay.mailchannels.net [23.83.223.165])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 103121DE2A7;
-	Thu,  6 Feb 2025 21:06:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.41
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738875994; cv=none; b=GhfTTqhojRv5TJhsXZJC4j4YysRJ5KS6IWQvlfZC0VaFtyHdo3tNh4KyUfUhdz3IQ37Y1bLPpOYf+nG1rjULkQ/FxnqMtSi8yvtZYj9RjUeSZkVzQTBEZAV21OMvepaJ9XlQrlkKFTg0xpw25IGPeFJNfLbsimOnHmQR9TBnp0A=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738875994; c=relaxed/simple;
-	bh=WnxIsln6SeTusJyOWF0V7uWhxW3uWu/uAV3yLKwXn1U=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TbKNG7Z3Kv+EVo+sPbAwCNKKyKVbVwx2KVgentKKUdQPAODbbar/ZYRHwEofet0ir2vYKch0Aj79Rk1KRiL4IWD7hhvsz4lnCXry8M9m74GGsDMn7xakl3LXJa2CJqf9gZOer7M9p1r1DkvKvVTWxxEQ95D0TST4EYeyoRRYAi0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nrZBVxoE; arc=none smtp.client-ip=209.85.216.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-2fa1e25e337so847324a91.1;
-        Thu, 06 Feb 2025 13:06:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1738875992; x=1739480792; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BjMZZDjHtCceqfzd+zK9UkArZCmEsWhxxeyu2AQZCbw=;
-        b=nrZBVxoEjU27zzPZVHK3dJorygFxhdsnBeAYM9qcH2w4ah9U5mBKNSsjw3rcR/2M04
-         xEX8F5T+JuLJAgu7EeMAvQS3e1ClYXc4qPZs/RFF5C8YWEVGxyjd9ZpGUw6uZyPH3NEu
-         yYdj5XM/QXXw0nyZT+h0lRMyRlKAw0ArgypHAY/3pLW5BmdIql2Y80wrBEqg5Xckp3Ot
-         rHQBwG16q2jslG5nT8uwVtSh8uibg6a0WXzF6rBVFtsDbQetdEwmu67Y5hgbwFD8e3vs
-         yp5lEUcQuTywY3+iN08L2YjiK+Itp5twc4uuNa8IcSc+lVizjV72c6DSrYujnpCQR9jR
-         ei5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738875992; x=1739480792;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BjMZZDjHtCceqfzd+zK9UkArZCmEsWhxxeyu2AQZCbw=;
-        b=uL3ElFZpaYQ8mPEdQAcl7h0NzZrYua25YZPFVBuT5lwjA1LhUF+xe6nwhGBkhfEAxW
-         tNYcTpHaAdkvk2i752Zf0tS0beuvUhiNyob3kwo6FZSQ7wJPRrhc3T6AGW7Z2MvZtabf
-         EbOwyHzDNyv2tx32jxogmLxGDxum+e5iuv1HCxwIJBz6QODibfGKjTDLpWzdtZK8S0G1
-         S+Pk+3PXEuZM33qfffT2YmTGI+3dhn2FcDj88Cv5vXfITe9jvBhs1ziVbrB6k0Z56kiZ
-         3nk1K7YZV48hG+zySsqpcH3NK/1J6pwjsbKdYjMBD/mjIt2m4BfczuXppH2T8fJqxQwW
-         raxg==
-X-Forwarded-Encrypted: i=1; AJvYcCUkthufrsltSrAsY8YI1pYKkntlTTYwbUrHtf7G25dcVwMweStnFewz4sJdBnSsaLnndZMxXIDnJneJX2ZE@vger.kernel.org, AJvYcCUxhUdfSkZRoDpCsS/2oVlWuiOdj8lrKIZZv5Zmt34btzpcsTqNVUd8HDyMOg/lsMCtZbFp9WD7R6/Z@vger.kernel.org, AJvYcCVbR7hDuoN+9M9REGcegRg9E+j1do7BuAhv0ClikqM3ENNJbOpAh+VnVBbgBb95HjUuP/h5wjYiefx5roRwXw==@vger.kernel.org, AJvYcCWRh8At3ZZRKlt76jTjXztnlLTAtWO7WELIArZBML+J9G/uIJAZFDgOMcvHhsOaQshfwa7iKOeoVss=@vger.kernel.org, AJvYcCXHsSt5HFHYj9HcnhJHK6fgxFKxsL1ksIGdZuEkfr/XNLwkCMKltTcYbhBUmIhlTy6E6uYOZsTd9Ozrxw==@vger.kernel.org, AJvYcCXLfJy8PGeQTXXwmnYo0zgzgZJtcv73hrJXvKi8XxxHvrMC3CbtVKxUbRwtysRYvSseVp/OOWhPmx9z@vger.kernel.org
-X-Gm-Message-State: AOJu0YzDLXQ7fcbWOO4DzSOVFujwmoE/gIOlvhAMekIpUpfVdV+cq7OX
-	W0SgOB8VqhSLlbLSKdf5d/4Uri5oj+GBQL8+dt6U2MLjbrrC1kA+
-X-Gm-Gg: ASbGncs2zW6eOXT9meH4ZjwgqoYdq5SWOgT1ZyrG04QPmmmpbvV7VCUatO4owLXYQZH
-	FYNRaGyiWVYgRfhx4/SztHjyPPLpDTfi4BuyIBdP0acx5uFoxmbjDOIvwksSm+fJfJF1gYPs5+s
-	K5EqBzMgPPy6DRXmdpgTRU/7yxFYSaCLfJErmQHwbP9piVlucmuU2TwoFpWl9byMjhbjT56TtiX
-	zgLz+R6n2vhurETyN1+pCanY2fx+zrhCuCRd+qkUOtO+IQpLO1W4V2mWqFPicPDBLf0zrge0L2f
-	Zx3TP2yODm7rMv59tuQrJ96ur+0U
-X-Google-Smtp-Source: AGHT+IH78/uCL9JiB7gG2UlgfTf9jp7yPy30ClKcc0/9tpp9zOrpumyNaOrCnZmQL5OMHTgXCvjCaA==
-X-Received: by 2002:a17:90b:4b8c:b0:2fa:f8d:65e7 with SMTP id 98e67ed59e1d1-2fa23f43a0emr821750a91.2.1738875992197;
-        Thu, 06 Feb 2025 13:06:32 -0800 (PST)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2fa17618064sm1089562a91.41.2025.02.06.13.06.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Feb 2025 13:06:31 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Thu, 6 Feb 2025 13:06:30 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: Alistair Popple <apopple@nvidia.com>
-Cc: akpm@linux-foundation.org, dan.j.williams@intel.com, linux-mm@kvack.org,
-	Alison Schofield <alison.schofield@intel.com>, lina@asahilina.net,
-	zhang.lyra@gmail.com, gerald.schaefer@linux.ibm.com,
-	vishal.l.verma@intel.com, dave.jiang@intel.com, logang@deltatee.com,
-	bhelgaas@google.com, jack@suse.cz, jgg@ziepe.ca,
-	catalin.marinas@arm.com, will@kernel.org, mpe@ellerman.id.au,
-	npiggin@gmail.com, dave.hansen@linux.intel.com, ira.weiny@intel.com,
-	willy@infradead.org, djwong@kernel.org, tytso@mit.edu,
-	linmiaohe@huawei.com, david@redhat.com, peterx@redhat.com,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org,
-	nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
-	linux-xfs@vger.kernel.org, jhubbard@nvidia.com, hch@lst.de,
-	david@fromorbit.com, chenhuacai@kernel.org, kernel@xen0n.name,
-	loongarch@lists.linux.dev
-Subject: Re: [PATCH v7 19/20] fs/dax: Properly refcount fs dax pages
-Message-ID: <f5e487d8-6466-442b-ae97-a7c294dc531e@roeck-us.net>
-References: <cover.472dfc700f28c65ecad7591096a1dc7878ff6172.1738709036.git-series.apopple@nvidia.com>
- <b5c33b201b9dc0131d8bb33b31661645c68bf398.1738709036.git-series.apopple@nvidia.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1EBF1CEAC8;
+	Thu,  6 Feb 2025 21:08:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.223.165
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1738876089; cv=pass; b=dlxOGyRmehnQK0YndB+Dua3z+qPECV0VgLVwlJbIbqlDXkC5aZK0C4wpZNTt+cmbyk5TQlD/SsRgIUVlo+8RaMaBPbZRF4hVxr8U3M42I+ZeSy4ucRYuyMV+mmfNwPhdOsTp1axvMUBjnzDNGJRIrTjWYppTLh4WhvZED51GPNI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1738876089; c=relaxed/simple;
+	bh=7L31dPYGw7Pxe40Cf9TC1lYjwHWfvUUWN98ZTOblSOw=;
+	h=From:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc:Date; b=ae+oKpktqWMSBQociRFcI6RMsNzIPpcPtWbEiccaq8IxLeMeGCUE6Ot8pHfUIYiQR8ljBV8nu9+rBrBLaX0Abnit/366iYErhSGTGMVzEBfuafJ8YpWK4B8F35xgcNmjHe/C0Ev8yYgk2GM0MFYNAolU/MxtPeXbhLx8B3bhrVY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai; spf=pass smtp.mailfrom=invicto.ai; dkim=fail (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b=L+QWLl/N reason="key not found in DNS"; arc=pass smtp.client-ip=23.83.223.165
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=invicto.ai
+X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
+Received: from relay.mailchannels.net (localhost [127.0.0.1])
+	by relay.mailchannels.net (Postfix) with ESMTP id 309A64E4B48;
+	Thu,  6 Feb 2025 21:08:01 +0000 (UTC)
+Received: from fr-int-smtpout8.hostinger.io (trex-0.trex.outbound.svc.cluster.local [100.127.46.110])
+	(Authenticated sender: hostingeremail)
+	by relay.mailchannels.net (Postfix) with ESMTPA id 339CA4E563E;
+	Thu,  6 Feb 2025 21:07:56 +0000 (UTC)
+ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1738876080; a=rsa-sha256;
+	cv=none;
+	b=3qk3bG01wNKYS3Z+8vCipPFu1fafB2gVQ8idDweUjahL4roEX1CAaTH/Wsh8fzFIbTKMwY
+	yDVcCjluTsMM3VwRFoNpVGXQvr4LDzB3+hN/WmtJ85CcvipdHg8YCU1aDUFeuIRHI2DJs8
+	EMmQTbvFOKS75GZO9H80olQj/Vuag5zWqnLbRUiL6e3NOypO4qUqgPldo+VgwjNX0Ya6pl
+	VR2ZtSPgkTgkM7KBybcs/AeMbg8r6Vn8ulToc9GUqW0j7sseuX/WU+/CYTsN3jKDHk1BRR
+	1vSMkH7MgcoqrfwDKLzFXd2dYtlqdqThK3Y1DZF0p+kAHKwzzcj2Qoi1Pr8oIg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mailchannels.net;
+	s=arc-2022; t=1738876080;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:dkim-signature;
+	bh=mboWAuygJDRJOd489iUzrH063I+FbtqSBfcS25mYKxc=;
+	b=wDcNfOaR/miavz00fjUHj1sAX7Y7Ogdv8KP0IwFRxJTUll56iQUC9HlZ1iWy2XQEpbVmWD
+	S11DUCHoPCjfi63v4OeuB8mBBaZaIktjsKfwqaLgJkqAmxULSwRE8gkUsQVpNik3zGLga9
+	UqbJRFcH3QYTY67w4GkCWDRB4qgG8d7TbIUa1IBTxZ6EmBTdnKck/Pve3M3V+HsFAuDciD
+	FuD66l+yCOJwkSGfKqUREGtjpMa89UXG8VD9AMv2B5YSPJfHKKCkog32FtWMdfkj9Q46rD
+	Gt0a3PwH0oLbiYb4d+a5Bb0n5mT758gnXXvdT5digTYfBcWtQp81vw8P/evgQg==
+ARC-Authentication-Results: i=1;
+	rspamd-8586946c78-xmhdh;
+	auth=pass smtp.auth=hostingeremail smtp.mailfrom=kurti@invicto.ai
+X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
+X-MC-Relay: Neutral
+X-MailChannels-SenderId: hostingeremail|x-authuser|kurti@invicto.ai
+X-MailChannels-Auth-Id: hostingeremail
+X-Trouble-Callous: 7200ee0e378d10d3_1738876081058_1262071984
+X-MC-Loop-Signature: 1738876081058:3642678018
+X-MC-Ingress-Time: 1738876081058
+Received: from fr-int-smtpout8.hostinger.io (fr-int-smtpout8.hostinger.io
+ [89.116.146.204])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
+	by 100.127.46.110 (trex/7.0.2);
+	Thu, 06 Feb 2025 21:08:01 +0000
+From: Alban Kurti <kurti@invicto.ai>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=invicto.ai;
+	s=hostingermail-a; t=1738876074;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=mboWAuygJDRJOd489iUzrH063I+FbtqSBfcS25mYKxc=;
+	b=L+QWLl/NIGljSUgPyFWB0NYmjel8p4RdAxtIbPYzN3RoZTFasyqPIN0TcwWC0wweDt6F3f
+	Wae/td6B5LnjGTEgJDcf1jxTsLdKlece/X2KKxS1PQZ8FfOM/Ydd2/kdYAWEXgQMoJyGRr
+	rSzh6yeqnMQtwoQyq9cizGTyAbAO0g8KLffMjD1MaJzzkB9cKCIZVo0VmRpF2qCynbztxi
+	e1tgkWFvhvELjp94fKyLWW9ShCAA1aX7pOTVh/rXfZB15XTIrjuMW2hAfikGwmTHq358NU
+	1bItBnuaRwZjxUB3hWBSWjit9K3CX5IRqqs8XAekFNZWnliMT88DEfEqcwBW9w==
+Subject: [PATCH v3 2/6] rust: error: add missing newline to pr_warn! calls
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b5c33b201b9dc0131d8bb33b31661645c68bf398.1738709036.git-series.apopple@nvidia.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250206-printing_fix-v3-2-a85273b501ae@invicto.ai>
+References: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
+In-Reply-To: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
+To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
+ Benno Lossin <benno.lossin@proton.me>, 
+ Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
+ Trevor Gross <tmgross@umich.edu>, Jonathan Corbet <corbet@lwn.net>, 
+ David Gow <davidgow@google.com>, Dirk Behme <dirk.behme@de.bosch.com>, 
+ Asahi Lina <lina@asahilina.net>, Wedson Almeida Filho <wedsonaf@gmail.com>, 
+ Wedson Almeida Filho <walmeida@microsoft.com>, 
+ "Andreas Hindborg (Samsung)" <nmi@metaspace.dk>, Tejun Heo <tj@kernel.org>, 
+ Fiona Behrens <me@kloenk.dev>, 
+ Vincenzo Palazzo <vincenzopalazzodev@gmail.com>, 
+ Xiangfei Ding <dingxiangfei2009@gmail.com>
+Cc: rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Alban Kurti <kurti@invicto.ai>, 
+ Martin Rodriguez Reboredo <yakoyoku@gmail.com>, 
+ Fox Chen <foxhlchen@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1738876070; l=1035;
+ i=kurti@invicto.ai; s=20250206; h=from:subject:message-id;
+ bh=7L31dPYGw7Pxe40Cf9TC1lYjwHWfvUUWN98ZTOblSOw=;
+ b=5NY9J+xUMZNQlhO9wORf3WMxkYDAqjsEjCtxJK8zBrAIV7XPj9JP9Ro5v6D3uNgJWCm9XMLJy
+ ob7o4tT+2VhBeOsvnpmhcjTGPmajbIXZUEwVmj6Ti3ejd5n1zIDqinY
+X-Developer-Key: i=kurti@invicto.ai; a=ed25519;
+ pk=D1lKs+JFapuEVI9zJ2QUTLSf5u4aT12tG0ny6vMMuOc=
+Date: Thu, 06 Feb 2025 21:07:53 +0000 (UTC)
+X-CM-Analysis: v=2.4 cv=PMNd+uqC c=1 sm=1 tr=0 ts=67a524aa a=9/DLicljd4JGVkZ5BRdAJQ==:117 a=9/DLicljd4JGVkZ5BRdAJQ==:17 a=IkcTkHD0fZMA:10 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=a7_a2XaVlCDEdv-p5PoA:9 a=QEXdDO2ut3YA:10
+X-CM-Envelope: MS4xfGaF6Dw32A7ngSBQwII2tyW85uHilPVB+nnbOOKMIurIo3X5lTWumOjJpiONd6WfhobJa0a8iyYUl1UOeV0RTUDSBC8ATVeZie9E+o+5f3B0LL3tEiKj W+n6ZC6yVV2L9Y4RyyqJAfdjyEbdIkp8prrs3FknMmYgq8U9Yj9NpZ8iQd9tth6sBmKtoQ5KY9c1hrF3/+zfwzseaqyVtpucqJOYMKf0XFQbyTgPVm8RZbu2 bpSskbFmTXpLfclX2YOvSmq/2b9g/7LhCzI3HIdHyqR8QuFnzx5pD0HwB9jS6dc99h2lJ7Uo3vGnkGUrxJsdKfujw3M2tFbCTq7C1AwD/nGo9sk6nOs4B53B 4AefMfFjZnBWWRKyOCUw7A9KCsRM5+anbbm8FdE0dhfvxlDwGKd1ifAEx1gvMqARall3RuSPAXjV3qAvJr6p7HnqtgCF2YSYzfmvJY2hCVSfC+LSR990yL2f RAn9GKmuXi19K/RpEp5AsBuf1zgOsMTthwGBINHHNY8HbMXvVf+N+GG1gizuAQVg2oBWpAdbBdiL4SnXAi0IrCJpRG72qjSGaM85ZFJx4fJV8Vsorp62Vj9r 7G3UQjvHjq1tfDif1KbzcxPsqoDdLwL5slI/XJlXhEWUb4BlBiBoaD24DIgTYBLnjfiY1P/L103qERPjV4HI7GNKbxUQhZZOq1UQvmmyAuljxS6T7T/8p47t 0asC7Be5OKTZxSzVSlAO3t+XdPJqHY+O1w8WvRdPn+q08c9FDGZLJj0URZwxUKMuMEdMJlYRS3yRt6zVNobxO90/KYLQZSosLmeI+KSKAOOY8ykASz4LtN+X JUbfqrQ4tjvXlgiXS5W+ksiohqCem21Hu0diFGoKm62kVGc3WTZbL34L2TJW4umrgGQGnWCvzBivtX59ozdqsvSNe9yVFT4nZkat1kIltDAdwMKoALhkuDjW QS6Kk/PeYaA/f9y
+ IkOZ1INlKCkgL68dOn+usqQZ4/TouDeF8
+X-AuthUser: kurti@invicto.ai
 
-On Wed, Feb 05, 2025 at 09:48:16AM +1100, Alistair Popple wrote:
-> Currently fs dax pages are considered free when the refcount drops to
-> one and their refcounts are not increased when mapped via PTEs or
-> decreased when unmapped. This requires special logic in mm paths to
-> detect that these pages should not be properly refcounted, and to
-> detect when the refcount drops to one instead of zero.
-> 
-> On the other hand get_user_pages(), etc. will properly refcount fs dax
-> pages by taking a reference and dropping it when the page is
-> unpinned.
-> 
-> Tracking this special behaviour requires extra PTE bits
-> (eg. pte_devmap) and introduces rules that are potentially confusing
-> and specific to FS DAX pages. To fix this, and to possibly allow
-> removal of the special PTE bits in future, convert the fs dax page
-> refcounts to be zero based and instead take a reference on the page
-> each time it is mapped as is currently the case for normal pages.
-> 
-> This may also allow a future clean-up to remove the pgmap refcounting
-> that is currently done in mm/gup.c.
-> 
-> Signed-off-by: Alistair Popple <apopple@nvidia.com>
-> Reviewed-by: Dan Williams <dan.j.williams@intel.com>
-> 
-> ---
-...
-> -static inline unsigned long dax_page_share_put(struct page *page)
-> +static inline unsigned long dax_folio_put(struct folio *folio)
->  {
-> -	WARN_ON_ONCE(!page->share);
-> -	return --page->share;
-> +	unsigned long ref;
-> +
-> +	if (!dax_folio_is_shared(folio))
-> +		ref = 0;
-> +	else
-> +		ref = --folio->share;
-> +
-> +	WARN_ON_ONCE(ref < 0);
+Added missing newline at the end of pr_warn! usage
+so the log is not missed.
 
-Kind of unlikely for an unsigned long to ever be < 0.
+Fixes: 6551a7fe0acb ("rust: error: Add Error::from_errno{_unchecked}()")
+Reported-by: Miguel Ojeda <ojeda@kernel.org>
+Closes: https://github.com/Rust-for-Linux/linux/issues/1139
+Signed-off-by: Alban Kurti <kurti@invicto.ai>
+---
+ rust/kernel/error.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-[ thanks to coverity for noticing ]
+diff --git a/rust/kernel/error.rs b/rust/kernel/error.rs
+index f6ecf09cb65f4ebe9b88da68b3830ae79aa4f182..a194d83e6835c03b84cc849b641ce8fff548047d 100644
+--- a/rust/kernel/error.rs
++++ b/rust/kernel/error.rs
+@@ -107,7 +107,7 @@ pub fn from_errno(errno: crate::ffi::c_int) -> Error {
+         } else {
+             // TODO: Make it a `WARN_ONCE` once available.
+             crate::pr_warn!(
+-                "attempted to create `Error` with out of range `errno`: {}",
++                "attempted to create `Error` with out of range `errno`: {}\n",
+                 errno
+             );
+             code::EINVAL
 
-Guenter
+-- 
+2.48.1
+
 
