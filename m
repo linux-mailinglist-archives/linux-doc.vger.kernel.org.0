@@ -1,186 +1,123 @@
-Return-Path: <linux-doc+bounces-37263-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37267-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32305A2B3F1
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:10:55 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D1D1EA2B431
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:31:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1433A188337D
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:11:00 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1F4263A0FC7
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:31:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 175441DF731;
-	Thu,  6 Feb 2025 21:08:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E5525221DB2;
+	Thu,  6 Feb 2025 21:31:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="key not found in DNS" (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b="U7JYa2M6"
+	dkim=pass (1024-bit key) header.d=gentwo.org header.i=@gentwo.org header.b="FYcvTqLE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from seahorse.cherry.relay.mailchannels.net (seahorse.cherry.relay.mailchannels.net [23.83.223.161])
+Received: from gentwo.org (gentwo.org [62.72.0.81])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0ED81DF270;
-	Thu,  6 Feb 2025 21:08:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.223.161
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738876098; cv=pass; b=u3KzmXEa0EopA4R/s2HYFbr85gx7B2QKHPSWUFqoP8Y9Tt2wUDI53+u42BQ26oB21X3YSla1LJq1bte3AHx4SPIEQJKKVCduHE/868PQktKEKdXlT3Ds3zPKjjJsdj5Jl8/Zkho1GhDPDmSopasQahpN0vqCbC3pHIllEJW+7zM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738876098; c=relaxed/simple;
-	bh=Dk/Fa6RXmzhRQdv0qguvoAWvZrZfOdR+7TeALJAqGSU=;
-	h=From:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc:Date; b=YhCx5pulkj2ld3lGW0XcEVVB+lnq2kYG6wCVnWbrobsx+kT7XLYYm9YG21lEWvrtxIMEW5f57FGdjKM47uMMpEVxCXnTXqZxvt+cEW5lf5U91GwdduyoitrddXUoxjBRu24YMBfAcjS9xw3mryk7CM5pidyrgxu2g7W0CX+oKjY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai; spf=pass smtp.mailfrom=invicto.ai; dkim=fail (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b=U7JYa2M6 reason="key not found in DNS"; arc=pass smtp.client-ip=23.83.223.161
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=invicto.ai
-X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id 10B931645E9;
-	Thu,  6 Feb 2025 21:08:09 +0000 (UTC)
-Received: from fr-int-smtpout8.hostinger.io (trex-9.trex.outbound.svc.cluster.local [100.124.213.208])
-	(Authenticated sender: hostingeremail)
-	by relay.mailchannels.net (Postfix) with ESMTPA id A45EE163EE6;
-	Thu,  6 Feb 2025 21:08:01 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1738876088; a=rsa-sha256;
-	cv=none;
-	b=bSP/4kCY+vXD9FHAxK3ECGmENi3QY9qfv3WNjT9q6RmtIe2NwGbacVflLTsg04thapOsw5
-	542Bh9ogmjPfH74tatv+o2zhd9nzx7Pm4jPvPjHnioAgLiNViSBTJyQOMpmChE5pa+cQ2J
-	mOSED40yGGEHzchoy9qT3vcaKJOV0KdLTTE/3CYyeV6sdiJRXtYV2jFFKxvMtSQjEhhQd5
-	odBn5V4Oa1XGALrhMQyf0YAiy2NqeeWKjdtPUIepTpapylqa0HzrXxchOTJS6b8YWe12An
-	5vDj5d/Wl+PoS9zNt9Ugi/eMyyZggVTroq+6LMrtbG2FMIHFdpgboZSMkOvc2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net;
-	s=arc-2022; t=1738876088;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:dkim-signature;
-	bh=ZhpLIq9iFJvhqgLiSK+xAjgUUwQGLpQH0XTHM0rA0ss=;
-	b=JXkee8M3XhyFrvzjNs0CsX81WRQvumaYdDz21pSlZdeS7MdL4aAGmE6S47GowWOkFWRV0z
-	NDd8YCeQrRmYflseICMBc/BchCBofoGkzBUDqyWimBoUYVXQkp4KJvMGtrUZT90o8/Ujo9
-	7pGS2ZZ+t4NuLy9uQUJBIELfTWKJOtuYWvNVa8VX+w/pgijua/r+Hs62E2NepWgshPLR4R
-	DAFmZfQLBgdJTIG4JikCI6WLe0qHKv88k28Lm8lJ//IC0HQM/bg7qQBTH2HLImpknbtKYW
-	7GhsjVklkM3EhLtsriUkhFfuMsFEjK2pMBj0k7bO1bbATn35uiroOS1TJzIj/g==
-ARC-Authentication-Results: i=1;
-	rspamd-8586946c78-zkzf8;
-	auth=pass smtp.auth=hostingeremail smtp.mailfrom=kurti@invicto.ai
-X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: hostingeremail|x-authuser|kurti@invicto.ai
-X-MailChannels-Auth-Id: hostingeremail
-X-Plucky-Tart: 67652802074b8bf0_1738876088589_1794236910
-X-MC-Loop-Signature: 1738876088589:3020997883
-X-MC-Ingress-Time: 1738876088589
-Received: from fr-int-smtpout8.hostinger.io (fr-int-smtpout8.hostinger.io
- [89.116.146.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.124.213.208 (trex/7.0.2);
-	Thu, 06 Feb 2025 21:08:08 +0000
-From: Alban Kurti <kurti@invicto.ai>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=invicto.ai;
-	s=hostingermail-a; t=1738876078;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ZhpLIq9iFJvhqgLiSK+xAjgUUwQGLpQH0XTHM0rA0ss=;
-	b=U7JYa2M6zLbgdq3dD+J/69XFuwQeETLwF7W9BocTEUKgIUrVBmITzyXod12WJrq+4nH/Y/
-	ZaZ4UsdUr3l9xWbdmaS1fCpfW8IQNvZeIaFEyQE2E027rfvbNNulBAwhZHpiEZ3EJQoX6h
-	2ZMy2xsBC5FZGgaEc9CyxefZOjbI1X5vlW9TwjbABqiCDi5Es2F+XaDasKdG0IejXiuA+i
-	G/UwIorbDOBolcL3JQ74WXQ956stcQPBfAcNTIIyGA88tYm8ukYpEcHVs85OwoscUbFLRp
-	gJJUgKrl0M/9cKDGWn3H/baEmzdw0bE0JQsdbHdbRYOsaCCJgGjIoVfT9LmKAg==
-Subject: [PATCH v3 6/6] rust: samples: add missing newline to pr_info!
- calls in rust_print_main
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38AA819AD70;
+	Thu,  6 Feb 2025 21:31:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.72.0.81
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1738877490; cv=none; b=iHgpsMX8hZyqN0MOtKICdvfpBErtDwntmszqDDVtKVaWtsqW3hIAwRZNkqpcRjIT44KGCM3zyrWFzMI1uScxy9//01WHKx+hFw+sHyECaXzcnjvZ6/UD7ZhTfWNotYEP7IxVHtQ4pNAYWbdePwUkYx2Q0Aa442H0zczAUKJM+oU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1738877490; c=relaxed/simple;
+	bh=F2jqlpwTo2MW743dx82l7OJPk/nMa2jFFcu4kDo1YtI=;
+	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=nSbRUK0YsNLmJLpnM/UdRPq83CDd9yQaj1geLi8b8bXsP5RvpQau/V4xRoIv+Vp6gur8s3DdF3ll+80uSQwKowJN81oy7MUyG8MH6ou81gTxmEX4C1acxQ7hCHcuz7Ld7lGE2pkvQqzmwcpqZK927bjVnP6E0wZKhfx1XrFPzDI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=gentwo.org; spf=pass smtp.mailfrom=gentwo.org; dkim=pass (1024-bit key) header.d=gentwo.org header.i=@gentwo.org header.b=FYcvTqLE; arc=none smtp.client-ip=62.72.0.81
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=gentwo.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gentwo.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gentwo.org;
+	s=default; t=1738869076;
+	bh=F2jqlpwTo2MW743dx82l7OJPk/nMa2jFFcu4kDo1YtI=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=FYcvTqLETvIDV898S86+xT9SbePWJllnFgwWELTqoYC+Ih5/O0lacqyjKvIwxKeYl
+	 0bRynm64ajsLxhkOs9IC2kkFJOFCeX8dIdo5rb/+Td+a2jaoRxPwY+5pkECXs4UPOq
+	 jRDzNL1vUjiJGkL0HmYhRBF7jwa5kXwPsOZoma2c=
+Received: by gentwo.org (Postfix, from userid 1003)
+	id 257D54028B; Thu,  6 Feb 2025 11:11:16 -0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+	by gentwo.org (Postfix) with ESMTP id 215A9400CA;
+	Thu,  6 Feb 2025 11:11:16 -0800 (PST)
+Date: Thu, 6 Feb 2025 11:11:16 -0800 (PST)
+From: "Christoph Lameter (Ampere)" <cl@gentwo.org>
+To: Jessica Clarke <jrtc27@jrtc27.com>
+cc: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>, luto@kernel.org, 
+    xin@zytor.com, kirill.shutemov@linux.intel.com, palmer@dabbelt.com, 
+    tj@kernel.org, andreyknvl@gmail.com, brgerst@gmail.com, ardb@kernel.org, 
+    dave.hansen@linux.intel.com, jgross@suse.com, will@kernel.org, 
+    akpm@linux-foundation.org, arnd@arndb.de, corbet@lwn.net, 
+    dvyukov@google.com, richard.weiyang@gmail.com, ytcoode@gmail.com, 
+    tglx@linutronix.de, hpa@zytor.com, seanjc@google.com, 
+    paul.walmsley@sifive.com, aou@eecs.berkeley.edu, justinstitt@google.com, 
+    jason.andryuk@amd.com, glider@google.com, ubizjak@gmail.com, 
+    jannh@google.com, bhe@redhat.com, vincenzo.frascino@arm.com, 
+    rafael.j.wysocki@intel.com, ndesaulniers@google.com, mingo@redhat.com, 
+    catalin.marinas@arm.com, junichi.nomura@nec.com, nathan@kernel.org, 
+    ryabinin.a.a@gmail.com, dennis@kernel.org, bp@alien8.de, 
+    kevinloughlin@google.com, morbo@google.com, dan.j.williams@intel.com, 
+    julian.stecklina@cyberus-technology.de, peterz@infradead.org, 
+    kees@kernel.org, kasan-dev@googlegroups.com, x86@kernel.org, 
+    linux-arm-kernel@lists.infradead.org, linux-riscv@lists.infradead.org, 
+    linux-kernel@vger.kernel.org, linux-mm@kvack.org, llvm@lists.linux.dev, 
+    linux-doc@vger.kernel.org
+Subject: Re: [PATCH 00/15] kasan: x86: arm64: risc-v: KASAN tag-based mode
+ for x86
+In-Reply-To: <29A74A26-E922-4A4F-9B4A-8DB0336B99DF@jrtc27.com>
+Message-ID: <94f81328-a135-b99b-7f73-43fb77bd7292@gentwo.org>
+References: <cover.1738686764.git.maciej.wieczor-retman@intel.com> <8bd9c793-aac6-a330-ea8f-3bde0230a20b@gentwo.org> <F974BA79-80D8-4414-9DFD-1EEF9395143C@jrtc27.com> <72837fcd-97a8-c213-0098-c8f308c3415d@gentwo.org>
+ <29A74A26-E922-4A4F-9B4A-8DB0336B99DF@jrtc27.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250206-printing_fix-v3-6-a85273b501ae@invicto.ai>
-References: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
-In-Reply-To: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
-To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <benno.lossin@proton.me>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Jonathan Corbet <corbet@lwn.net>, 
- David Gow <davidgow@google.com>, Dirk Behme <dirk.behme@de.bosch.com>, 
- Asahi Lina <lina@asahilina.net>, Wedson Almeida Filho <wedsonaf@gmail.com>, 
- Wedson Almeida Filho <walmeida@microsoft.com>, 
- "Andreas Hindborg (Samsung)" <nmi@metaspace.dk>, Tejun Heo <tj@kernel.org>, 
- Fiona Behrens <me@kloenk.dev>, 
- Vincenzo Palazzo <vincenzopalazzodev@gmail.com>, 
- Xiangfei Ding <dingxiangfei2009@gmail.com>
-Cc: rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Alban Kurti <kurti@invicto.ai>, 
- Martin Rodriguez Reboredo <yakoyoku@gmail.com>, 
- Fox Chen <foxhlchen@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1738876070; l=1836;
- i=kurti@invicto.ai; s=20250206; h=from:subject:message-id;
- bh=Dk/Fa6RXmzhRQdv0qguvoAWvZrZfOdR+7TeALJAqGSU=;
- b=/d2nSDIhhSGGJCAwLpmENScPF0743qpkJbNwez1ylf7fHFNs9PHDMxMFTvGR1ulXE/IKNc9O8
- rn0sNEtWgyLBh7g6iVOTC4ifbPpn/mCxliUNgQjSo+niH0wXfM4ewem
-X-Developer-Key: i=kurti@invicto.ai; a=ed25519;
- pk=D1lKs+JFapuEVI9zJ2QUTLSf5u4aT12tG0ny6vMMuOc=
-Date: Thu, 06 Feb 2025 21:07:57 +0000 (UTC)
-X-CM-Analysis: v=2.4 cv=PMNd+uqC c=1 sm=1 tr=0 ts=67a524ae a=9/DLicljd4JGVkZ5BRdAJQ==:117 a=9/DLicljd4JGVkZ5BRdAJQ==:17 a=IkcTkHD0fZMA:10 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=FcvrMFPuEi2Jl8-4TIoA:9 a=QEXdDO2ut3YA:10
-X-CM-Envelope: MS4xfBc1mrP7eMiwYiSWN9lpbOhKgdKFPuGHKx/mBwefHzzLTAFz+TZoaVWCdSpFfFDYzHr3It4Ma8aGSRrsx/uEEeBd/FLUDMf9V3IaIKDNd0FBRpw+Gra1 KDMBpGiCMUz6b8sHhojlsOtJyll4454/+A/KQJ/10sFsWW//UpEpoK7d+3V0ocg5rf20FF+qdCqU3RAvUZlDEp69nRMG6VLmvRrOttd+PsPIOp3vXA3L0HF/ aW+gwaLUMlDUpLeZAavIhRIw7hJ9vC7N1JwnFFpcZmBbd7cVKoyznH/ZJMSqufXvhezcqiL+XRxH5ry+n+JESq78tuDH6tphGmsDEdEwYZdZcktcFspfW52a rY0CM6Jn+D+A3Scxpqq0XUjokT7MKgBmMoBfFFYyhGfOzgDF3iUwkLlsQ1lWj+ZKXXPpZDvcXmLWRk7BTfXl/4tGjffzd1WpwQf+yFehTmRWLGxkOChuEoJl g0TikBpKKS4lj4iVwJPubSTxjrLJlG6Pe1XbNq+/NN8osFfpd6eovj1xsF2DLcF217KH4111vifzlp1gKVUomP5iEn1lk/+JvCmICJIJj54OkYw15aCnddGa AsvQ1LeEsvcWAzp9D27EUj3JcW/+blfVydwGJW1gZH2kx6Owb4WU6AO9d4qJdvi+6vJFA0YCQ2xV3aD9rsG92ocY6xUsJcx0Bmiion20U7R6guNV1leZrU0w 0c9Vdq0SG9PAYnU+0zqCOUCQHATTYtq7e9+xdM3yaWe4EI16h9nidWptEfCDnVASvFfx7joWGdshXJTnG4nQ6tBmlhqgUR9qH4iBOL2fLofMJYkM9JBk24jB CnMNGwxzpxOV/WsgPUKxo2fA+AIw9zpIm83K2BpfCqwNFqdh7R/ZMb60gphRqSXyH6W7fUGvN9B4ekUo2zwdxo/ew964CaLpEMto8qelT7VnwyEfGr1yGGPX Q0taS07mn/Fl8mu
- KB/AjWO/b3zDfPvVNzxB3Iylb4ONl3WXg
-X-AuthUser: kurti@invicto.ai
+Content-Type: multipart/mixed; boundary="8323329-815475849-1738869076=:2425008"
 
-The sample code in samples/rust/rust_print_main.rs contained pr_info!
-calls without a newline. This commit updates those calls, ensuring
-that the output is properly formatted when the sample is run.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Fixes: f431c5c581fa ("samples: rust: print: Add sample code for Arc printing")
-Fixes: 47cb6bf7860c ("rust: use derive(CoercePointee) on rustc >= 1.84.0")
-Reported-by: Miguel Ojeda <ojeda@kernel.org>
-Closes: https://github.com/Rust-for-Linux/linux/issues/1139
-Signed-off-by: Alban Kurti <kurti@invicto.ai>
----
- samples/rust/rust_print_main.rs | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+--8323329-815475849-1738869076=:2425008
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8BIT
 
-diff --git a/samples/rust/rust_print_main.rs b/samples/rust/rust_print_main.rs
-index 7e8af5f176a33925881c7d65b34c823028b7b93b..7ef3cecc65a15627276699c691273608253c9df5 100644
---- a/samples/rust/rust_print_main.rs
-+++ b/samples/rust/rust_print_main.rs
-@@ -23,10 +23,10 @@ fn arc_print() -> Result {
-     let b = UniqueArc::new("hello, world", GFP_KERNEL)?;
- 
-     // Prints the value of data in `a`.
--    pr_info!("{}", a);
-+    pr_info!("{}\n", a);
- 
-     // Uses ":?" to print debug fmt of `b`.
--    pr_info!("{:?}", b);
-+    pr_info!("{:?}\n", b);
- 
-     let a: Arc<&str> = b.into();
-     let c = a.clone();
-@@ -42,7 +42,7 @@ fn arc_print() -> Result {
- 
-         use core::fmt::Display;
-         fn arc_dyn_print(arc: &Arc<dyn Display>) {
--            pr_info!("Arc<dyn Display> says {arc}");
-+            pr_info!("Arc<dyn Display> says {arc}\n");
-         }
- 
-         let a_i32_display: Arc<dyn Display> = Arc::new(42i32, GFP_KERNEL)?;
-@@ -53,7 +53,7 @@ fn arc_dyn_print(arc: &Arc<dyn Display>) {
-     }
- 
-     // Pretty-prints the debug formatting with lower-case hexadecimal integers.
--    pr_info!("{:#x?}", a);
-+    pr_info!("{:#x?}\n", a);
- 
-     Ok(())
- }
+On Thu, 6 Feb 2025, Jessica Clarke wrote:
 
--- 
-2.48.1
+> On 5 Feb 2025, at 18:51, Christoph Lameter (Ampere) <cl@gentwo.org> wrote:
+> > On Ampere Processor hardware there is no penalty since the logic is build
+> > into the usual read/write paths. This is by design. There may be on other
+> > platforms that cannot do this.
+>
+> You helpfully cut out all the explanation of where the performance
+> penalty comes from. But if it’s as you say I can only assume your
+> design chooses to stall all stores until they have actually written, in
+> which case you have a performance cost compared with hardware that
+> omitted MTE or optimises for non-synchronous MTE. The literature on MTE
+> agrees that it is not no penalty (but can be low penalty). I don’t
+> really want to have some big debate here about the ins and outs of MTE,
+> it’s not the place for it, but I will stand up and point out that
+> claiming MTE to be “no performance penalty” is misrepresentative of the
+> truth
 
+I cannot share details since this information has not been released to be
+public yet. I hear that a whitepaper will be coming soon to explain this
+feature. The AmpereOne processors have been released a couple of months
+ago.
+
+I also see that KASAN_HW_TAGS exist but this means that the tags can only
+be used with CONFIG_KASAN which is a kernel configuration for debug
+purposes.
+
+What we are interested in is a *production* implementation with minimal
+software overhead that will be the default on ARM64 if the appropriate
+hardware is detected. That in turn will hopefully allow other software
+instrumentation that is currently used to keep small objects secure and in
+turn creates overhead.
+
+--8323329-815475849-1738869076=:2425008--
 
