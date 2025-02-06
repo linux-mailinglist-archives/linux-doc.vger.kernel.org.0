@@ -1,421 +1,387 @@
-Return-Path: <linux-doc+bounces-37106-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37110-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D692A29FAD
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 05:33:23 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id A5516A2A06E
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 06:56:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 18F45160EE6
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 04:33:08 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7D24C1887306
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 05:56:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33F4F17C21C;
-	Thu,  6 Feb 2025 04:32:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 517221FE45E;
+	Thu,  6 Feb 2025 05:56:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ia0gaxSa"
+	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="C5lzBKn0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+Received: from mail-m32109.qiye.163.com (mail-m32109.qiye.163.com [220.197.32.109])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25ABA16EB54;
-	Thu,  6 Feb 2025 04:32:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.19
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738816331; cv=fail; b=SLGUD5RxwSn22ZvlG6riEQKVig36Q+SmrSU2/LJ3/T/qHJytGGh9CgWlv6eO1RldPqXm7xOurMfhbceos0OQivdm8I9mVDVMRLwpf6l/XG055cyblVcFbWfxkEoAJUJ0oD/9DdD0jgII2FBKjFw8BEWZEEY9Q25/HlXBSWZ2h2E=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738816331; c=relaxed/simple;
-	bh=oImKCwuik/YXM2Johvgd1oc02EfXkfg8IW6WfyNiJaQ=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=dPgzu2djtEShfzKKNrN37ayYrL9BDNdP4bn5IS9G8DUl/Z5dSLj+dtgz+36KwcGNEzy7Q7omEqR2Gph5PeSy/b4+sXyczz22gi0azVHFfv8LHgXPb4gEzEAohtuOJEUDSe7xHzB70ExgDbOVmK+mQWMcgQI+EPEU5JGZqWYP7w8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ia0gaxSa; arc=fail smtp.client-ip=198.175.65.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1738816328; x=1770352328;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=oImKCwuik/YXM2Johvgd1oc02EfXkfg8IW6WfyNiJaQ=;
-  b=ia0gaxSa4ysnS/rXpVPHwg7LzPT3dfZtBJ14/D4fNbiLDoclJRHOk9ob
-   VqjaKjtgQ2E6ZrGFH8mlmKJIUiKg0gPiQah2lSXpNm/LkfClwYqOwn0MS
-   tvtb0jJgtqH3cbmNIzOttdAhmogS1w+QtAE+LHHMekvQoypD+NqypqRW5
-   tW0nXxIvnDeSBzASeBVMoPps5aCSj5yW+MPkKo3Ek085tozdQh0SXMPjW
-   WK0e4QMeMVvP0N1ppNLOsSH3yUw8qwoMjyiy4siKd7maXmm8NGvC/PTFv
-   Ak+qz73V/GFMFPyB3sTT4kJ8mQrh9okMr/PjJqloqBiLxzRToELbuZeYX
-   Q==;
-X-CSE-ConnectionGUID: pLJZ0YGbT1ytB/WfgZI8Rg==
-X-CSE-MsgGUID: 2SUGMK+yQKWOkOicB3z8UA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="39282452"
-X-IronPort-AV: E=Sophos;i="6.13,263,1732608000"; 
-   d="scan'208";a="39282452"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Feb 2025 20:32:07 -0800
-X-CSE-ConnectionGUID: Xt8YsoWYTFWIDesPOx4Afw==
-X-CSE-MsgGUID: OKOefC11Ty6pCMGFrQXouQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.13,263,1732608000"; 
-   d="scan'208";a="111679806"
-Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
-  by fmviesa009.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 05 Feb 2025 20:32:05 -0800
-Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
- ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Wed, 5 Feb 2025 20:32:04 -0800
-Received: from ORSEDG602.ED.cps.intel.com (10.7.248.7) by
- orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44 via Frontend Transport; Wed, 5 Feb 2025 20:32:04 -0800
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (104.47.56.173)
- by edgegateway.intel.com (134.134.137.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.44; Wed, 5 Feb 2025 20:32:04 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bmXvDB7gzjJa5YvltffhZKe/HBul5/TTn8NnXkSdjPX6Q+QFMZ2QVVG1w3ZqNtcjdguQdp8L/y22jwDRWI7LGbHlOQhdmM4xI65HY1sBL1Sfz0dMpYKENXnP94S2s+tX6tfVRwSSEa/csKEvfCh3NzH40U2hhX8JmJC51d7UljSPVBK/b1DUHPTqDbI2IjnmWARsDTeE2Wt0afISx/56wKxLSplYjTsqLIIvkhmO0gZriiozoDTE8lWXPnn29x5FHkl+QIO8Cwm4ETjT3iUrm/Xd34NsoXUcAxcgJb3QJFNEGrPatxBni4LG8mrzHXNB6FyG+caqnEcDlTLYxbPvJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mk+ZxzYKXiLDWtKu3AD0ty3j1GdvIxC1oJM1HmbL8iY=;
- b=TiH7Jn29X7Z3uA9uLvWNspUqPlB/zgW/Tdj9zdagn8usSv/KIO2o7Tgfnok+tWTSFim68HBdX4LnBUSfkrBBZhj8qNzNWsZMwzOaeKDv1uoKt+kHh/mlW7qFLWQ1jYBP5o2m7Ka9DREEY/mNWJ1x+D90pk68HfbfRs4+/gDNl2BaTmAgc8B+mavM7RhDZi/eipCSUBobS9vj/ymGOfblSVXXoUHAolEVdLqv8X28YyYcGCy4U73lMmiUKoFyl3PwqAz2kXaONFQ8CbNSIk+v+qZnywU3O0cCbesjzdMtwPhrl5GnHcQqnWC91w/YYtMkkIj1p2KO94AWPKdhOi6/vQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from PH0PR11MB5830.namprd11.prod.outlook.com (2603:10b6:510:129::20)
- by DS0PR11MB7802.namprd11.prod.outlook.com (2603:10b6:8:de::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.10; Thu, 6 Feb
- 2025 04:32:01 +0000
-Received: from PH0PR11MB5830.namprd11.prod.outlook.com
- ([fe80::c80d:3b17:3f40:10d6]) by PH0PR11MB5830.namprd11.prod.outlook.com
- ([fe80::c80d:3b17:3f40:10d6%4]) with mapi id 15.20.8422.009; Thu, 6 Feb 2025
- 04:32:01 +0000
-From: "Song, Yoong Siang" <yoong.siang.song@intel.com>
-To: "Fijalkowski, Maciej" <maciej.fijalkowski@intel.com>
-CC: "David S . Miller" <davem@davemloft.net>, Eric Dumazet
-	<edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
-	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Willem de Bruijn
-	<willemb@google.com>, "Bezdeka, Florian" <florian.bezdeka@siemens.com>,
-	Donald Hunter <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
-	Bjorn Topel <bjorn@kernel.org>, "Karlsson, Magnus"
-	<magnus.karlsson@intel.com>, Jonathan Lemon <jonathan.lemon@gmail.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>, Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>, Jesper Dangaard Brouer
-	<hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, "Damato, Joe"
-	<jdamato@fastly.com>, Stanislav Fomichev <sdf@fomichev.me>, Xuan Zhuo
-	<xuanzhuo@linux.alibaba.com>, Mina Almasry <almasrymina@google.com>, "Daniel
- Jurgens" <danielj@nvidia.com>, Andrii Nakryiko <andrii@kernel.org>, "Eduard
- Zingerman" <eddyz87@gmail.com>, Mykola Lysenko <mykolal@fb.com>, "Martin
- KaFai Lau" <martin.lau@linux.dev>, Song Liu <song@kernel.org>, Yonghong Song
-	<yonghong.song@linux.dev>, KP Singh <kpsingh@kernel.org>, Hao Luo
-	<haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>, Shuah Khan
-	<shuah@kernel.org>, Alexandre Torgue <alexandre.torgue@foss.st.com>, "Jose
- Abreu" <joabreu@synopsys.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	"Nguyen, Anthony L" <anthony.l.nguyen@intel.com>, "Kitszel, Przemyslaw"
-	<przemyslaw.kitszel@intel.com>, Faizal Rahim
-	<faizal.abdul.rahim@linux.intel.com>, Choong Yong Liang
-	<yong.liang.choong@linux.intel.com>, "Bouska, Zdenek"
-	<zdenek.bouska@siemens.com>, "netdev@vger.kernel.org"
-	<netdev@vger.kernel.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>, "linux-doc@vger.kernel.org"
-	<linux-doc@vger.kernel.org>, "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
-	"linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
-	"linux-stm32@st-md-mailman.stormreply.com"
-	<linux-stm32@st-md-mailman.stormreply.com>,
-	"linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "intel-wired-lan@lists.osuosl.org"
-	<intel-wired-lan@lists.osuosl.org>, "xdp-hints@xdp-project.net"
-	<xdp-hints@xdp-project.net>
-Subject: RE: [PATCH bpf-next v8 4/5] igc: Refactor empty packet insertion into
- a reusable function
-Thread-Topic: [PATCH bpf-next v8 4/5] igc: Refactor empty packet insertion
- into a reusable function
-Thread-Index: AQHbd3eRdwLqM9RAOUG+CEwq4T8dPbM4pMYAgAAd5GCAAB6EAIAAzl9w
-Date: Thu, 6 Feb 2025 04:32:01 +0000
-Message-ID: <PH0PR11MB583003D5657395162DD4253AD8F62@PH0PR11MB5830.namprd11.prod.outlook.com>
-References: <20250205024116.798862-1-yoong.siang.song@intel.com>
- <20250205024116.798862-5-yoong.siang.song@intel.com> <Z6NaFkPBZA18oILE@boxer>
- <PH0PR11MB58305176708A48DD8EA60B96D8F72@PH0PR11MB5830.namprd11.prod.outlook.com>
- <Z6OMwvk9zANCD8jI@boxer>
-In-Reply-To: <Z6OMwvk9zANCD8jI@boxer>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH0PR11MB5830:EE_|DS0PR11MB7802:EE_
-x-ms-office365-filtering-correlation-id: bd21ca59-1bf1-44bc-3099-08dd4667333e
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?gHf8zeb3MO2HWcZerOcIfn/0PTvqm3GdUWLfYeOUB4Ncd+knGbFwYbiZeBpT?=
- =?us-ascii?Q?c+Amipwo9SZq9aH5jkmIfDURLXt9cMtKisFPgWGX8j0J3uLkvzMKGd8a85iC?=
- =?us-ascii?Q?Hus3aWfrYzlppfaknxi9ZyKBbp942KLr77czudzvWmmFqnFidjPcIQdFOhag?=
- =?us-ascii?Q?LW0rvQ1H0sd7u7m1cnJC6fu3w8p8Gr1QtEWjfrub7Rxws5zE84Q9RDnJIvc2?=
- =?us-ascii?Q?TOvz2JFwOI8Uk9vQ894rDU8yDZbt/H7wasYX/MjStM1X+qsIGxcpr2a1zpub?=
- =?us-ascii?Q?v/qjU6by3nX0lpm2xo/2BYXEfsmGbbUR4oXdy5JTCuoPw6nQ3fMdqJPquh8r?=
- =?us-ascii?Q?pUSBKcwRoMo9jRoiRKWRVplEgCxnTeX+g8SUMwEHQVwe7E+899GnzosqNtcR?=
- =?us-ascii?Q?mEzrzapNXtaZDoIZEboQ4JdDQFIg6unuhqI8dB+1iqgNEGtSJ7EJMerNvUdI?=
- =?us-ascii?Q?Rp9HOz8y8s41UYPYUKVdMQQ867L9GYuNVWbdZxWGVv7WnytcSLy9LBjoU5dw?=
- =?us-ascii?Q?J/Ts9Elv0Mr6qSnzva5L7eDzhqrcj6qmFM83Jsyk3a4RIM10iO3AFBs1CxA+?=
- =?us-ascii?Q?FDsLxKXSWTVeMrfyspN9vj2RmS8d1hkzoeby/C6/xK0Y2g3n/Maqhj+OQyNQ?=
- =?us-ascii?Q?E2c3u96wDAXvvs2f+VmM+eiC9HWlXteBUcXc+9uCpxzw35q6P2CV63Ech4Uq?=
- =?us-ascii?Q?21oPYKJCju0vCTYLLrR6sa/4nVWDAM6MlOQwOribsQdII/Bv8enkMD98EGXW?=
- =?us-ascii?Q?qQjdLmsEzsb6Sc5gHnsBCfHc8NnNo68jkV8dfPccMLIKEBV1ety5eq6THkHm?=
- =?us-ascii?Q?vO7hgW1EOEvKlmTlNFugvepHyxSBzd00AvEf7Y0h3x2FVW+9QgSOzogpkqQZ?=
- =?us-ascii?Q?VNIFKKl2LavF3zL5HtLjDhZ0o4tEGkxLy9W34urLM86Jtw9lP8kjYdBDpsOf?=
- =?us-ascii?Q?R2X9OlT52C97p3k/YyAjpOAOh4nvAUo+vXle2IRGI1kiznT4SBOZ03QJZmYg?=
- =?us-ascii?Q?a10K5+rCt6Ea0EDkLvXoz1bV/AE5z0WbFgHVFRdAcw3gXnciQMVBwhkOT66R?=
- =?us-ascii?Q?qsaz0l8MAgQW8JP5bwDgRK7WCoAY4+0LWDRGJ9coMgJgZ5DxfDcUXhHsouo4?=
- =?us-ascii?Q?DV+7QjKv1y9JkCF27XXQ30jB+RTHlM57ynMMRhw8vzYAyi8ndYVGW2YUBpj+?=
- =?us-ascii?Q?rg+gbP6D+ty9tqghYrnIi/2jrvME7E+PqQxn72u5TlyqIkjTC2A0FyzocYm9?=
- =?us-ascii?Q?73HHegdUrlULCtK8PVXIXkdt60qIUT+8IVUB5MFic4Au2S59wzNd3fuOXx5J?=
- =?us-ascii?Q?vjDmJD7f4mgHHQ0XGx5unoeIDX17OaxVd4vr+N9di65mNz+/CdOyRBbG4X6D?=
- =?us-ascii?Q?MUcpBA0oBQy4U0PQ1vxQCMSBeIs3810jh+tocbl02eagH5Dp80rlwCmRJe2h?=
- =?us-ascii?Q?qg1Szo//GpT4eHJMCQG4bZjVPlo5x1Js?=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR11MB5830.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(38070700018);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?67kvq3ixt3beHEzAvhvPkJte2KK5J25N19sjd1gyyvAjvwvxCk1a7cjfsK/h?=
- =?us-ascii?Q?xQlxbZWvSDmQOylVkbHps/q/I8grOXAx0iF4bOAZn0xUtq6WcE08LfmYjOeX?=
- =?us-ascii?Q?EmY2LHOvlHJRiQarmjAQjzyzNZRUbSrFnF9lNI+ZWqKiu6YiiAct67rKGMxP?=
- =?us-ascii?Q?3zVve8PZhJXIy9bc1yyjLecBebiZJe64qtaUDoLcpOy+dRbq0OYjYTqiRcCe?=
- =?us-ascii?Q?Nu26NWRCqv+Tr5TjLaaaQ7g3AOZYBQgxmqMRHccQ8y/9ps7OYXb9SzpaAyba?=
- =?us-ascii?Q?+s9XGcOFsSIicoTvLx3KIMkDrMWcGYImHhdiNDFuLZh4Uc1nAG5eByQxCtU2?=
- =?us-ascii?Q?vxfr++aVb8d+4k1dRO8H73hwhjXtcvJpvqhz0hQDgKJ8+NxA/RK0pqXgluRQ?=
- =?us-ascii?Q?gQK/WhFjbZ2lB4PedVe6xneFAEOAAOlH5WI1HafFQxfKQtI1QiSWRxCKgomZ?=
- =?us-ascii?Q?YDsaZveCzH/xyUA/yduTEYVLiuVKlU2qhnrIbykwTvFPlVobur24/PsE8kIu?=
- =?us-ascii?Q?j7ilveky1tMmcSghEOVjMoDFr07A3sg0zfsRbgibcUVuq99tjnGJZltM0ms8?=
- =?us-ascii?Q?T2iDavpQ6ljA5W3gKgXNV8MWBNyQgBK2C1R1ow2rCKtaJIpC6/6i9cOjTaKi?=
- =?us-ascii?Q?bW9ex8AZ7oep9F0BB6vOx9d06EHxS4GaH7nMRY2HKNKgTcts+p3PArPrKf80?=
- =?us-ascii?Q?BuhIYa7X7WvZx/yx+IA/ZDNtMFYwkl/NkOQK8KfG7dmzmERYRaBK2L2NdNcz?=
- =?us-ascii?Q?7DiCpsgH/WdP86OFkD5keG7jmGMcZK9t+mogLT+VNeWXmIUeGioWKdHjIrEf?=
- =?us-ascii?Q?+EeKGrBpu2Jf90u/YWh/jKYZ8+ZwlVt4pYvbR0VaHCwTpneNXD7E+gJ7mf8C?=
- =?us-ascii?Q?MokPOQtvvOvR3KdV8XR6Nd2d0x1K9VuKZGLjgn60zuppuR1ImhszWm1aIk0c?=
- =?us-ascii?Q?3eLwHvwEcpRhhNvypfrWQC5k60ndyCCa0PEqLcXrXYlAYz57zXIySe3cpfM6?=
- =?us-ascii?Q?Yk83Bu95QkNaPVoYxraqttus+8R5JYAy49D0dFyMpNOYkFYoKHI0cTll3Vvo?=
- =?us-ascii?Q?598VTOpMlIvngVLKb5z5dk+gZH5BVAanajzie/EtA9JiCZyADsBoQPBooZOq?=
- =?us-ascii?Q?9XUUqo6EUBzQPwcPbn67XplQZJM+SjEgXKmEwFbcVULFWp5pf6mB01a+JMIp?=
- =?us-ascii?Q?/Pvk5UFhn2HYHYjyRinfTsZYUuyzBOlxsFAyfk31qpg2rpfiCY5AmXkJubS0?=
- =?us-ascii?Q?tVsCBiQaYPuG79KeN9hYV6CWpWd+9+LNQwSYyXC661PbDdRnlfZmv294S/WX?=
- =?us-ascii?Q?b7rxV09NlFiL5B4uKfcXfQ35EdW2+45ckBju2LtXwMV+vo/BhIT0vKqr3+EK?=
- =?us-ascii?Q?QdQkyPDCEBjVBOhOEAVvQIXBgmu7L7XgBtRUrs44xnQbRx/0K6DUIai2c4UJ?=
- =?us-ascii?Q?S/gWGkgAuZN1CbHnoQ6XLSLSR0FbwdSBkbHKgLtUN7Z1ZUKvIAsdrThm0BGM?=
- =?us-ascii?Q?g6kV9lr7MMpvsYEUSoNjznPkdxaLemVnTUmXQvQxXo3ZCpCpzn1biKkiZBRO?=
- =?us-ascii?Q?JdFuB/ykV7KGzbXx9lmrmyPCqyrsDrRqezij5qIWmFEB1LxZqHFBI9pTXLdy?=
- =?us-ascii?Q?jw=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8D191F60A
+	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 05:56:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.109
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1738821377; cv=none; b=gFOmFhs7aVaqg+YdQC05QBuVfF26fxbOn6imRnGg/BkIr0hqpJn2Iw1jorvYOa4xBVCjIx49t1SBEd19Ob3+W8rfS+4PXrDFiDkuBpckIawaAgb1ND62dtmDKp6VgLmTY2kpuS1Hfpa3vGFQsJxWGfroFM3+aqFRsazmBSHVdBA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1738821377; c=relaxed/simple;
+	bh=YniBHOk2xc/UWgxoBavNaHgPNapiK1RGAhoT2eaZiKY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=jsX+CHz0fq29kELuMM8uJwZ95kN0VVhlEwF6Dkz5Bd2+dfXW1mASBF9ROfkFM9DHp3PogVzM1BxDEfDQoVAlyOKjXw+coyaCGk+zDUFr9mM7tfKs/91HgMET2CS4XNkERWl0+fJUIZC+VzuDd8c3xnrA97QYJ0uvnR9XcLR9Q1M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=C5lzBKn0; arc=none smtp.client-ip=220.197.32.109
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
+Received: from localhost.localdomain (unknown [1.193.57.36])
+	by smtp.qiye.163.com (Hmail) with ESMTP id a46ac7f1;
+	Thu, 6 Feb 2025 10:26:59 +0800 (GMT+08:00)
+From: zhangwei <zhangwei@cqsoftware.com.cn>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev,
+	corbet@lwn.net
+Cc: zhaoshuo@cqsoftware.com.cn,
+	zhaoyuehui@cqsoftware.com.cn,
+	maoyuxian@cqsoftware.com.cn,
+	linux-doc@vger.kernel.org,
+	zhangwei <zhangwei@cqsoftware.com.cn>
+Subject: [PATCH 1/3] docs/zh_CN: Add self-protection index Chinese translation
+Date: Thu,  6 Feb 2025 10:26:46 +0800
+Message-ID: <f663c0c2ef258689ca235f3e6594504dc4b98a3e.1738807847.git.zhangwei@cqsoftware.com.cn>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <cover.1738807847.git.zhangwei@cqsoftware.com.cn>
+References: <cover.1738807847.git.zhangwei@cqsoftware.com.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB5830.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bd21ca59-1bf1-44bc-3099-08dd4667333e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Feb 2025 04:32:01.1616
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 7XUVbZCxYB9/hJBmWYIEp57+igpWrNQBlzQWc/UqCxFMY/30WXFED4ixrPLb6GuXDXiTIbBbIPomP/qUQi0IQZrOtMtcpDfIFzWC/HCVmwA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB7802
-X-OriginatorOrg: intel.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGh0YVk1CTRpNHk9KTBlPS1YVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUpCSFVOTFVITVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
+	JLS1kG
+X-HM-Tid: 0a94d914ff6c03abkunma46ac7f1
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ME06ITo*CDITSwk1Lg4sUTU5
+	PSsKCilVSlVKTEhDQ0tDQ0lLTE1CVTMWGhIXVQETGhUcDB4SOxgKCBQdDwwaCR5VGBQWVRgVRVlX
+	WRILWUFZSlVKQkhVTkxVSE1ZV1kIAVlBSk9IQk43Bg++
+DKIM-Signature:a=rsa-sha256;
+	b=C5lzBKn0NGK0y/nMO9ODg7uC/DCh4DclcorVjGoNqQBSsoRNuGrUAhjZIbyWLhYN/0jeIb5hFHMy5/DYHxW8ll/YbEFADPBMhjefk/2/PISb2UculchkGRIO+7kB7Y/xuU6/3StQQT9jAw4WBTq8tEfeLVdtfXCgQ8sLXfsieGM=; s=default; c=relaxed/relaxed; d=cqsoftware.com.cn; v=1;
+	bh=kLHB2nteNeS6BLtczXM1Ez49tXwO4GP9LNSvOnniMCU=;
+	h=date:mime-version:subject:message-id:from;
 
-On Thursday, February 6, 2025 12:08 AM, Fijalkowski, Maciej <maciej.fijalko=
-wski@intel.com> wrote:
->On Wed, Feb 05, 2025 at 03:43:19PM +0100, Song, Yoong Siang wrote:
->> On Wednesday, February 5, 2025 8:31 PM, Fijalkowski, Maciej<maciej.fijal=
-kowski@intel.com> wrote:
->> >On Wed, Feb 05, 2025 at 10:41:15AM +0800, Song Yoong Siang wrote:
->> >> Refactor the code for inserting an empty packet into a new function
->> >> igc_insert_empty_packet(). This change extracts the logic for inserti=
-ng
->> >> an empty packet from igc_xmit_frame_ring() into a separate function,
->> >> allowing it to be reused in future implementations, such as the XDP
->> >> zero copy transmit function.
->> >>
->> >> This patch introduces no functional changes.
->> >>
->> >> Signed-off-by: Song Yoong Siang <yoong.siang.song@intel.com>
->> >
->> >Your SoB should be last in the set of tags.
->> >
->>
->> Noted. Thanks for the tips.
->>
->> >> Reviewed-by: Faizal Rahim <faizal.abdul.rahim@linux.intel.com>
->> >> ---
->> >>  drivers/net/ethernet/intel/igc/igc_main.c | 42 ++++++++++++---------=
---
->> >>  1 file changed, 22 insertions(+), 20 deletions(-)
->> >>
->> >> diff --git a/drivers/net/ethernet/intel/igc/igc_main.c
->> >b/drivers/net/ethernet/intel/igc/igc_main.c
->> >> index 21f318f12a8d..553d6d82af0d 100644
->> >> --- a/drivers/net/ethernet/intel/igc/igc_main.c
->> >> +++ b/drivers/net/ethernet/intel/igc/igc_main.c
->> >> @@ -1566,6 +1566,26 @@ static bool igc_request_tx_tstamp(struct igc_a=
-dapter
->> >*adapter, struct sk_buff *s
->> >>  	return false;
->> >>  }
->> >>
->> >> +static void igc_insert_empty_packet(struct igc_ring *tx_ring)
->> >> +{
->> >> +	struct igc_tx_buffer *empty_info;
->> >> +	struct sk_buff *empty;
->> >> +	void *data;
->> >> +
->> >> +	empty_info =3D &tx_ring->tx_buffer_info[tx_ring->next_to_use];
->> >> +	empty =3D alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
->> >> +	if (!empty)
->> >> +		return;
->> >> +
->> >> +	data =3D skb_put(empty, IGC_EMPTY_FRAME_SIZE);
->> >> +	memset(data, 0, IGC_EMPTY_FRAME_SIZE);
->> >> +
->> >> +	igc_tx_ctxtdesc(tx_ring, 0, false, 0, 0, 0);
->> >> +
->> >> +	if (igc_init_tx_empty_descriptor(tx_ring, empty, empty_info) < 0)
->> >> +		dev_kfree_skb_any(empty);
->> >
->> >I still don't like the fact igc_insert_empty_packet() doesn't communica=
-te
->> >to caller whether it successfully produced descriptors or not.
->> >
->> >Look at this from igc_xmit_frame_ring() POV:
->> >- at the beginning you peek at Tx ring whether there is required amount=
- of
->> >  descriptors free to be used
->> >- but then here's your additional routine which might consume two more
->> >  descs and you are not aware of the status
->> >- then you continue to further produce descriptors assuming there is
->> >  enough space in Tx ring
->> >
->> >Right now igc_init_tx_empty_descriptor() returns -EBUSY when ring is fu=
-ll.
->> >How can that happen in the first place + what if it would *really* happ=
-en
->> >though? You just continue with your Tx flow.
->> >
->> >What I'm trying to say here is, at least from correctness POV, you shou=
-ld
->> >take into the account two potential descriptors for launchtime feature
->> >when calling igc_maybe_stop_tx(). And igc_init_tx_empty_descriptor()
->> >should not really care about space in ring, it should be a caller's job=
- to
->> >call it only when it will be sure it's safe to do so.
->> >
->>
->> Agree with you.
->>
->> In db0b124f02ba ("igc: Enhance Qbv scheduling by using first flag bit"),
->> the 2 descriptors needed by empty packet is already taken into
->> consideration by changing igc_maybe_stop_tx(tx_ring, count + 3) to
->> igc_maybe_stop_tx(tx_ring, count + 5), so not enough ring space issue wi=
-ll not
->> happened. However, the comment session is not updated, maybe i can updat=
-e
->> it in next version of this patch as below:
->>
->> @@ -1586,6 +1608,7 @@ static netdev_tx_t igc_xmit_frame_ring(struct sk_b=
-uff
->*skb,
->>          *      + 1 desc for skb_headlen/IGC_MAX_DATA_PER_TXD,
->>          *      + 2 desc gap to keep tail from touching head,
->>          *      + 1 desc for context descriptor,
->> +        *      + 2 desc for inserting an empty packet for launch time,
->>          * otherwise try next time
->>          */
->>         for (f =3D 0; f < skb_shinfo(skb)->nr_frags; f++)
->
->Ahh good then, I didn't pay enough attention to comment. So it meant that
->first two entries from comment were covered by @count and 2 desc gap + 1
->ctxt desc were behind '3', previously.
->
+Translate .../security/self-protection.rst into Chinese.
 
-Yes, you are right.
+Update the translation through commit b080e52110ea
+("docs: update self-protection __ro_after_init status")
 
->>
->> Since number of descriptor needed is guaranteed. I will take out the
->> igc_desc_unused() checking in igc_init_tx_empty_descriptor().
->
->Yes
->
->> However, empty packet insertion might fail due to skb allocation failure
->> and DMA mapping error. How about i make sure skb allocation and DMA
->> mapping working, before proceed to fill in igc_tx_buffer, context desc,
->> and data desc?
->> IMHO, because these two errors are unlikely to happen, print a kernel
->> warning msg should be enough.
->>
->> @@ -1108,20 +1108,12 @@ static int igc_init_empty_frame(struct igc_ring =
-*ring,
->>         return 0;
->>  }
->>
->> -static int igc_init_tx_empty_descriptor(struct igc_ring *ring,
->> +static void igc_init_tx_empty_descriptor(struct igc_ring *ring,
->>                                         struct sk_buff *skb,
->>                                         struct igc_tx_buffer *first)
->>  {
->>         union igc_adv_tx_desc *desc;
->>         u32 cmd_type, olinfo_status;
->> -       int err;
->> -
->> -       if (!igc_desc_unused(ring))
->> -               return -EBUSY;
->> -
->> -       err =3D igc_init_empty_frame(ring, first, skb);
->> -       if (err)
->> -               return err;
->>
->>         cmd_type =3D IGC_ADVTXD_DTYP_DATA | IGC_ADVTXD_DCMD_DEXT |
->>                    IGC_ADVTXD_DCMD_IFCS | IGC_TXD_DCMD |
->> @@ -1140,8 +1132,6 @@ static int igc_init_tx_empty_descriptor(struct igc=
-_ring
->*ring,
->>         ring->next_to_use++;
->>         if (ring->next_to_use =3D=3D ring->count)
->>                 ring->next_to_use =3D 0;
->> -
->> -       return 0;
->>  }
->>
->>  #define IGC_EMPTY_FRAME_SIZE 60
->> @@ -1567,6 +1557,38 @@ static bool igc_request_tx_tstamp(struct igc_adap=
-ter
->*adapter, struct sk_buff *s
->>         return false;
->>  }
->>
->> +static void igc_insert_empty_packet(struct igc_ring *tx_ring)
->> +{
->> +       struct igc_tx_buffer *empty_info;
->> +       struct sk_buff *empty;
->> +       void *data;
->> +
->> +       empty_info =3D &tx_ring->tx_buffer_info[tx_ring->next_to_use];
->> +       empty =3D alloc_skb(IGC_EMPTY_FRAME_SIZE, GFP_ATOMIC);
->> +       if (unlikely(!empty)) {
->> +               netdev_warn(tx_ring->netdev,
->> +                           "Fail to alloc skb for empty packet\n");
->
->That should be at least ratelimited I think, but what really is the
+Reviewed-by: Yanteng Si <si.yanteng@linux.dev>
+Reviewed-by: Yuxian Mao <maoyuxian@cqsoftware.com.cn>
+Signed-off-by: zhangwei <zhangwei@cqsoftware.com.cn>
+---
+ .../translations/zh_CN/security/index.rst     |   2 +-
+ .../zh_CN/security/self-protection.rst        | 271 ++++++++++++++++++
+ 2 files changed, 272 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/security/self-protection.rst
 
-No problem, I will add net_ratelimit() checking.
+diff --git a/Documentation/translations/zh_CN/security/index.rst b/Documentation/translations/zh_CN/security/index.rst
+index 0aacecabf0c0..9a6345dd90b8 100644
+--- a/Documentation/translations/zh_CN/security/index.rst
++++ b/Documentation/translations/zh_CN/security/index.rst
+@@ -18,6 +18,7 @@
+    credentials
+    lsm
+    sak
++   self-protection
+    siphash
+    tpm/index
+    digsig
+@@ -29,6 +30,5 @@ TODOLIST:
+ * keys/index
+ * lsm-development
+ * SCTP
+-* self-protection
+ * secrets/index
+ * ipe
+diff --git a/Documentation/translations/zh_CN/security/self-protection.rst b/Documentation/translations/zh_CN/security/self-protection.rst
+new file mode 100644
+index 000000000000..3c8a68b1e1be
+--- /dev/null
++++ b/Documentation/translations/zh_CN/security/self-protection.rst
+@@ -0,0 +1,271 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++:Original: Documentation/security/self-protection.rst
++
++:翻译:
++
++ 张巍 zhangwei <zhangwei@cqsoftware.com.cn>
++
++============
++内核自我保护
++============
++
++内核自我保护是指在Linux内核中设计与实现的各种系统与结构
++以防止内核本身的安全漏洞问题。它涵盖了广泛问题，包括去除
++整个类的漏洞，阻止安全漏洞利用方法，以及主动检测攻击尝
++试。并非所有的话题都在本文中涉及，但它应该为了解内核自我
++保护提供一个合理的起点，并解答常见的问题。（当然，欢迎提
++交补丁！）
++
++在最坏的情况下，我们假设一个非特权的本地攻击者对内核内存
++有任意读写访问权限。虽然在许多情况下，漏洞被利用时并不会
++提供此级别的访问权限，但如果我们能防御最坏情况，也能应对
++权限较低的攻击。一个更高的标准，且需要牢记的是保护内核免
++受具有特权的本地攻击者的攻击，因为root用户可以有更多权限。
++（尤其是当他们能够加载任意内核模块时）
++
++成功的自我保护的目标是：有效、默认开启、不需要开发者主动
++选择、没有性能影响、不妨碍内核调试、并且没有测试。虽然很
++难满足所有的这些目标，但明确提到这些目标非常重要，因为这
++些方面需要被探索、解决或接受。
++
++==========
++攻击面缩减
++==========
++
++防止安全漏洞最基本的防御方式是减少可以被用来重定向执行的
++内核区域。这包括限制用户公开使用的API、使内核API更难被错
++误使用、最小化可写内核内存区域等。
++
++严格的内核内存权限
++-------------------
++
++当所有内核内存都是可写的，攻击者可以轻松地重定向执行流。
++为了减少这种攻击目标的可用性，内核需要更严格的权限集来
++保护其内存。
++
++可执行代码和只读数据必须不可写
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++任何具有可执行内存的区域必须不可写，显然这也包括内核文本
++本身。我们还必须考虑其他地方：内核模块、JIT内存等，（在
++某些情况下，为了支持像指令替代、断点、kprobes等功能，这些
++区域会暂时被设置为可写。如果这些功能必须存在于内核中，它
++们的实现方式是：在更新期间将内存临时设置可写，然后再恢复
++为原始权限。）
++
++为了支持这一点，CONFIG_STRICT_KERNEL_RWX 和
++CONFIG_STRICT_MODULE_RWX 的设计旨在确保代码不可写，数据不
++可执行，以及只读数据既不可写也不可执行。
++
++大多数架构默认支持这些选项，且用户无法选择。对于一些像arm
++这种希望能够选择这些选项的架构，可以在架构Kconfig中选择
++ARCH_OPTIONAL_KERNEL_RWX以启用Kconfig提示。
++CONFIG_ARCH_OPTIONAL_KERNEL_RWX_DEFAULT决定在启用
++ARCH_OPTIONAL_KERNEL_RWX时的默认设置。
++
++函数指针和敏感变量必须不可写
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++内核内存中有大量的函数指针，这些指针被内核查找并用于继续执行
++（例如，描述符/向量表、文件/网络等操作结构等）。这些变量的数
++量必须减少到最低限度
++
++许多像这样的变量可以通过设置为"const"来实现只读，从而使它们
++存放在内核的.rodata段而非.data段，从而获得内核严格内存权限的
++保护。
++
++对于在_init是仅初始化一次的变量，可以使用_ro_after_init属性
++进行标记。
++
++剩下的变量通常是那些更新频率较低的（例如GDT）。这些变量需要另
++一个机制（类似于上述提到的对内核代码所做的临时例外），以便在
++其余生命周期内保持只读状态。（例如，在进行更新时，只有执行
++更新的CPU线程会被授予对内存的不可中断写入访问权限。）
++
++将内核内存与用户空间内存分隔开
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++内核绝对不可以执行用户空间内存，同时，内核也不得在没有明确预
++期的情况下访问用户内存空间。这些规则可以通过一些硬件限制来支
++持（如x86的SMEP/SMAP，ARM的PXN/PAN）或通过仿真（如ARM的内存
++域）来强制执行。通过这种方式阻止用户空间内存的访问，攻击者就
++无法将执行和数据解析转移到易于控制的用户空间内存，从而迫使攻
++击完全在内核中进行。
++
++减少对系统调用的访问
++--------------------
++
++对于64位系统，一种消除许多系统调用最简单的方法是构建时不启用
++CONFIG_CONPAT。然而，这种情况通常不可行。
++
++“seccomp”系统为用户空间提供了一种可选功能，提供了一种减少可供
++运行中进程使用内核入口点数量的方法。这限制了可以访问内核代码
++的范围，可能降低了某个特定漏洞被攻击者利用的可能性。
++
++一个改进的方向是创建有效的方法，仅允许受信任的进程访问例如兼
++容模式、用户命名空间、BPF创建和性能分析等功能。这将把内核入口
++点范围限制在通常可以被非特权用户空间进程访问的较常见集合中
++
++限制对内核模块的访问
++--------------------
++
++内核绝不应允许非特权用户加载特定的内核模块，因为这可能为攻击者
++提供一个意外扩展的可用攻击面的方法。（通过已预定义子系统按需加
++载模块，如MODULE_ALIAS_*，被认为是“预期的”，但即便如此，也应对
++这些情况给予更多的关注。）例如，通过非特权的套接字API加载文件
++系统模块是没有意义的：只有root用户或物理本地用户应该触发文件系
++统模块的加载。（在某些情况下，这甚至可能存在争议。）
++
++为了防止特权用户的攻击，系统可能需要完全禁止模块加载（例如，通
++过单体内核构建或modules_disabled sysctl），或者使用签名模块（例
++如，CONFIG_MODULE_SIG_FORCE或通过LoadPin保护的dm-crypt），以防
++止root用户通过模块加载器加载任意内核代码。
++
++内存完整性
++----------
++
++内核中有许多内存结构在攻击过程中被定期泛滥用以获取执行控制，迄今
++为止，最常见的是堆栈缓冲区溢出，在这种攻击中，堆栈上存储的返回地
++址被覆盖。除此之外，还有许多其他类型的攻击，防护措施也应运而生。
++
++堆栈缓冲区溢出
++--------------
++
++经典的堆栈缓冲区溢出攻击是指超出栈上分配的变量预期大小，从而将一
++个受控值写入栈帧的返回地址。最常见的防御措施是堆栈保护
++（CONFIG_STACKPROTECTOR），它在函数返回前会验证栈上的“stack canary”。
++其他防御措施还包括影子堆栈等。
++
++堆栈深度溢出
++------------
++
++一个不太容易被理解的攻击方式是利用bug触发内核通过深度函数调用或
++大的堆栈分配来消耗堆栈内存。通过这种攻击，攻击者可以将数据写入内
++核预分配堆栈空间之外的敏感结构。为了更好的防护这种攻击，必须进行
++两项重要的更改：将敏感的线程信息结构转移到其他地方，并在堆栈底部
++添加一个故障内存洞，以捕获这些溢出
++
++栈内存完整性
++------------
++
++用于跟踪堆空闲列表的结构可以在分配和释放时进行完整性检查，以确保它
++们不会被用来操作其它内存区域。
++
++计算器完整性
++------------
++
++内核中的许多地方使用原子计数器来跟踪对象引用或执行类似的生命周期管
++理。当这些计数器可能发生溢出时（无论是上溢还是下溢），这通常会暴露
++出使用后释放（use-after-free）漏洞。通过捕捉原子计数器溢出，这类漏
++洞就可以消失。
++
++大小计算溢出检测
++----------------
++
++与计算器溢出类似，整数溢出（通常是大小计算）需要在运行时进行检测，
++以防止这类在传统上会导致能够写入内核缓冲区末尾之外的漏洞。
++
++概率性防御
++----------
++
++尽管许多防御措施可以被认定是确定的（例如，只读内存不能写入），但
++有些确保措施仅提供统计防御，即攻击者必须收集足够的关于运行系统的
++信息才能突破防御。尽管这些防御并不完美，但它们确实提供了有意义的
++保护。
++
++栈保护、迷惑技术和其他秘密
++--------------------------
++
++值得注意的是，像之前讨论的栈保护这样的技术，从技术上来说是统计性防
++御，因为它们依赖于一个秘密值，而这样的值可能会通过信息泄露漏洞而被
++发现。
++
++对于想JIT（及时翻译器）这样的情况，其中可执行内容可能部分由用户空间
++控制，也需要类似的秘密之来迷惑。
++
++至关重要的是，所使用的秘密值必须是独立的（例如，每个栈使用不同的栈
++保护值），并且具有高熵（例如，随机数生成器（RNG）是否正常工作？），
++以最大限度地提高其成功率。
++
++内核地址空间布局随机化（KASLR）
++-------------------------------
++
++由于内核内存的位置几乎总是攻击成功的关键因素，因此使内核内存位置变
++得非确定性会增加攻击的难度。（请注意，这反过来提高了信息泄露的价
++值，因为泄露的信息可以用来发现目标内存位置。）
++
++文本和模块基址
++--------------
++
++通过在启动时重新设定内核的物理基地址和虚拟基地址
++（CONFIG_RANDOMIZE_BASE）,那些需要利用内核代码的攻击将会受阻。此外
++通过偏移模块加载基地址，意味着即使系统每次启动时按相同顺序加载同一
++组模块，这些模块也不会与内核文本的其余部分公用一个基地址。
++
++堆栈基地址
++----------
++
++如果进程之间内核堆栈的基地址不相同，甚至在不同系统调用之间也不相同，
++那么栈上或超出栈的目标位置就会变得更加难以确定。
++
++动态内存基址
++------------
++
++很多内核的动态内存（例如kmalloc，vmalloc等）由于早期启动初始化的顺
++序，最终布局是相对确定的。如果这些区域的基地址在启动之间不相同，攻
++击者就无法轻易定位它们，必须依赖于针对该区域的信息泄露才能成功。
++
++结构布局
++--------
++
++通过在每次构建时对敏感结构的布局进行随机化处理，攻击这必须将攻击调
++节到已知的内核版本，或者泄露足够的内核内存来确定结构布局，然后才能
++对其进行操作。
++
++防止信息泄露
++------------
++
++由于敏感结构的位置是攻击的主要目标，因此防止内核内存地址和内核内存
++内容泄露非常重要（因为它们可能包含内核地址或者其他敏感数据，例如
++栈保护值）。
++
++内核地址
++--------
++
++将内核地址打印到用户空间会泄露有关内核内存布局的敏感信息。在使用任
++何打印符号打印原始地址时，目前%px,%p[ad]（和在某些情况下的%p[sSb]）
++时。使用这些格式符写入的文件需要限制为只有特权进程可读。
++
++在4.14及以前的内核版本中，使用%p格式符打印的是原始地址。从4.15-rcl
++版本开始，使用%p格式符打印的地址会在打印前进行哈希处理。
++
++[*]如果启用KALLSYMS并且符号查找失败，则打印原始地址；如果没有启用
++KALLSYSM，则会直接打印原始地址。
++
++唯一标识符
++----------
++
++内核内存地址绝不可能用作向用户空间公开的标识符。相反，应该使用原子
++计数器，IDR（ID映射表）或类似的唯一标识符。
++
++内存初始化
++----------
++
++复制到用户空间的内存必须始终被完全初始化，如果没有显式地使用memset()
++函数进行初始化，那就需要修改编译器，确保清除结构中的空洞。
++
++内存清除
++--------
++
++在释放内存时，最好对内存内容进行清除处理，以防止攻击者重用内存中以前
++的内容。例如，在系统调用返回时清除堆栈（CONFIG_GCC_PLUGIN_STACKLEAK）,
++在释放堆内容是清除其内容。这有助于防止许多未初始化变量攻击、堆栈内容
++泄露、堆内容泄露以及使用后释放攻击（user-after-free）。
++
++目标追踪
++--------
++
++为了帮助消除导致内核地址被写入用户空间的各种错误，需要跟踪写入的目标。
++如果缓冲区的目标是用户空间（例如，基于seq_file的/proc文件），则应该自
++动审查敏感值。
+-- 
+2.47.1
 
->problem to make these routines return status and check them on caller
->side?
->
-
-Ok, I will add return value and handle the case where the insertion of
-an empty frame fails and explain the reason behind.
-
-Thanks & Regards
-Siang
 
