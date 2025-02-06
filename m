@@ -1,412 +1,336 @@
-Return-Path: <linux-doc+bounces-37162-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37164-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A203CA2A8E7
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 13:58:46 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FB7DA2A9D3
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 14:28:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 000E7166B1A
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 12:58:44 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CC74D3A49E4
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 13:28:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 98F9622E3E8;
-	Thu,  6 Feb 2025 12:58:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C95DF1EA7D6;
+	Thu,  6 Feb 2025 13:28:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="in2WNXv4"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sAzPesXY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2380B22DFB4
-	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 12:58:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 998CB1EA7C2;
+	Thu,  6 Feb 2025 13:28:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738846720; cv=none; b=ihTtivQQpzQ2VvjVEU/7fxmgev7hhRcJ/JSgtw+GOW5kiuT44InM5L0ibU38blCYpigdnL0IpkKfxHmZyzxhLRzQhIddIV9JIVEqCx7/c4a1/G4Edeih13VfrD1tJ9SNwBGkB7VkqUkD2FLr12zXSaMmw4982xVcHLeA98YGte0=
+	t=1738848492; cv=none; b=JbhRkbIPWq3zHohp0aorHzsUNifXjS2zkXJKzhVnRP+rnhG4G1NoyVN+zRMX0//lK866RYEtqC1UesalCALRsNW68GX6IxrIr0GoL7ybatxGfniminB33TxVH6vFrtjl5tJ1q/ue4mv/AP+t97vssWI8SVofqf3PhGBwlgLvqHM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738846720; c=relaxed/simple;
-	bh=YPo3jlgfj6pYVWVh3PTavNUslwdRyi6ulAHh04Z/rP0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Xo8CYnW60RwLkSaG8KjTMbWgeC9drYXH4AKOxMmo5xPHdgRIGoOqPPuDDODGRC1wfUm7uS7TA4jB7gSD8hLVW3oi97lzVdEqKHzpZ9AVAg+eEnXb9y0txa+lCnIk7j+q8YX6+6QOPfTGXzJg/KMESiQmvBtRlAGfIv0tWRh23Po=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=in2WNXv4; arc=none smtp.client-ip=209.85.218.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-ab7157cf352so392947566b.0
-        for <linux-doc@vger.kernel.org>; Thu, 06 Feb 2025 04:58:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1738846716; x=1739451516; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=t9nxlc2gVdRgkfK+9g7k7PvXPxIVZmZ3lhTkJf7wy0M=;
-        b=in2WNXv4GHSoaxX84iVj8a8AueEekZUZ6o9GdSs9YsbqVV2jf4KHng9r5yZqDFOlb8
-         GIbVD88MARBmM9gkLtkFwNasftCizWuAlnR6yAYcDJAf/BKxUJSVyOeW7g4+u7Tw18Kp
-         R2pFFxZeYigH8fZHcIFYNjURng+dueD/NWjSw88ZZcgqT5/D8OpTcy/OWkth4qXxBqY1
-         voI01WNtTD3UXUf8vBcAGZcW+2CS4CFbKRgmZdnB7BLJfRPtOhYJTdwSx2jLzT1gHK4d
-         s8AjaWqaies7u5Id2zWt4AFCUtPD1zY7EzeQAyFn0T4ekg23HuZuc+ajo+wFbYgbfrAn
-         zUtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738846716; x=1739451516;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=t9nxlc2gVdRgkfK+9g7k7PvXPxIVZmZ3lhTkJf7wy0M=;
-        b=t+DmJfOEX+xSGz+jOQbhhVGyK/8+BX6HhHmdm/ZyHngZreEXGbKygmsyG0i/GlrfKu
-         qS+lXWRIaQiO3B9CrxukCDw8syedpgQMDuW/GR0ErQzwr2pYy7bLWPqyYttwWn3WGIw7
-         A1N3y6SpYdKeqEkJjfihKHwYqGlcJaoawif7ldM0GzPuBkIRs1b2TWl1OrXrYbNfGj+H
-         aUIDYv1oS2zzPHPKaWtWM2ags/AFcR013rRQu+ZsO7W693xEPVPl72nhJ7UF1jPUzvcU
-         VjAh1mI3uklUQX/CDA7Qg0AfnC8PpWaKoEeYtEreE5bXskdqVnaZkk73jYOT2qzP73IJ
-         /hLA==
-X-Forwarded-Encrypted: i=1; AJvYcCU7O7bEiEhCLnLuu8H2Aq3NYJalLIWvgStEkUprPIVoYrXyDd8jQS7f8cXkckKOQn+ruP51/WplmFg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzF0VOjqbfp6x7JvFjleZFusPClXJyvVXrGEwSmJ7Qrnd3RtSdH
-	riQIJJTw8YxBhKomFYH6G9xLrefC7dchj/fyrmb9Ph87/uHE/kKqd54N9MbfJmc=
-X-Gm-Gg: ASbGnctO83iUpyIX5bOwCTUfO7WCnd3XFG5ufwlnxtwva+YsxJT4Q1Pnl8SvnY+WnTX
-	PA3Qt8J7z/bgYgDzJxO1M6dQ0fST5Sk6oxZO0AGXrdfCnrXsNWwBC7iNTGBT8LGhbG3CeyWHCoA
-	RbL343vFiXPp3/cMlgSTT24X3pQkUSRQ60ou9MHw6MHzT5NBTgyU+xftzdkvxwBs3+nZIskiw0h
-	u6SmbQkFt+JDUyKiw9jkwDyrEFlEkgTfzwDhS2Uw62SkI/5Zo8Lh8MWzoY9hByIAtDZIOLaJpsV
-	D2gyyyZAQO/q62MnCHFODhH1Qg==
-X-Google-Smtp-Source: AGHT+IECG2Og4HOQAjuT4F+XFrfhk8Mhc4LucLG60WazGfhVmFMGz2JtXe62pSAA9VTn2VX8teci1g==
-X-Received: by 2002:a17:907:6d21:b0:ab6:8bb8:af2e with SMTP id a640c23a62f3a-ab76e913b7amr351703766b.26.1738846716275;
-        Thu, 06 Feb 2025 04:58:36 -0800 (PST)
-Received: from [192.168.68.163] ([212.105.145.75])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ab773339e82sm96240266b.143.2025.02.06.04.58.34
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 Feb 2025 04:58:35 -0800 (PST)
-Message-ID: <3b07c400-e1a8-46b9-a5af-81239dd316f3@linaro.org>
-Date: Thu, 6 Feb 2025 12:58:33 +0000
+	s=arc-20240116; t=1738848492; c=relaxed/simple;
+	bh=Gd1a6I/rgNkLBhg+heY/5rsHpIz19/CKISEK4EbgRGk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=OYJustdyogVkqn1Q+ftHrdopEpcDAryfLMnm6dPi/faS7NCI+nPfS3imAAbnxO7nrkKn1PcbLkxOa5sXsroP/jzH9wTn+sTBC21gPtzKMyJGh8BKTMAcJsIwp/+Oez6DrPLAho3M3pEMTs3fbSYUr20xAw5LQVzXaiVQn2Ds+JQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sAzPesXY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 834C8C4CEDD;
+	Thu,  6 Feb 2025 13:28:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1738848492;
+	bh=Gd1a6I/rgNkLBhg+heY/5rsHpIz19/CKISEK4EbgRGk=;
+	h=From:To:Cc:Subject:Date:From;
+	b=sAzPesXYT5XjA43mn9mjFSddx+URHz4e/EE+TI3tjsmUlMnvvxe3jqJrb2ZlJ1bFe
+	 B7+8xsYs0Lf82U6R5w7KQ/X3thA0P5Vsv1IuUIZmkZkTuKAjpJ4muaWX7EGNTjUhC4
+	 bZV2MS1WewT5ByL1wNIty3jPoHW4H3Vyor5VoLRrdG99UAFuY9bBiBQc4dDvz1yc/B
+	 m4Lis+O+AukrcalbjmakOOzhODUgl5kkuuVbQyLwPVyALQK8q98kZUlzRx0UPIQiAE
+	 OI2uNPgsj+QWMfQrPrWgpfkFk3ouWr/Kzq4PvmvXT8ljEvVyUKp1Hs2LJmIW688fhH
+	 LSkXPLg4eF0bg==
+From: Mike Rapoport <rppt@kernel.org>
+To: linux-kernel@vger.kernel.org
+Cc: Alexander Graf <graf@amazon.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Andy Lutomirski <luto@kernel.org>,
+	Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Ashish Kalra <ashish.kalra@amd.com>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Borislav Petkov <bp@alien8.de>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Eric Biederman <ebiederm@xmission.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	James Gowans <jgowans@amazon.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Pratyush Yadav <ptyadav@amazon.de>,
+	Rob Herring <robh+dt@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Saravana Kannan <saravanak@google.com>,
+	Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Usama Arif <usama.arif@bytedance.com>,
+	Will Deacon <will@kernel.org>,
+	devicetree@vger.kernel.org,
+	kexec@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-doc@vger.kernel.org,
+	linux-mm@kvack.org,
+	x86@kernel.org
+Subject: [PATCH v4 00/14] kexec: introduce Kexec HandOver (KHO)
+Date: Thu,  6 Feb 2025 15:27:40 +0200
+Message-ID: <20250206132754.2596694-1-rppt@kernel.org>
+X-Mailer: git-send-email 2.47.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v19 11/11] perf: arm_pmuv3: Add support for the Branch
- Record Buffer Extension (BRBE)
-To: Rob Herring <robh@kernel.org>, Mark Rutland <mark.rutland@arm.com>
-Cc: linux-arm-kernel@lists.infradead.org, linux-perf-users@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- kvmarm@lists.linux.dev, Will Deacon <will@kernel.org>,
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>,
- Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>,
- Joey Gouly <joey.gouly@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>,
- Zenghui Yu <yuzenghui@huawei.com>,
- Anshuman Khandual <anshuman.khandual@arm.com>
-References: <20250202-arm-brbe-v19-v19-0-1c1300802385@kernel.org>
- <20250202-arm-brbe-v19-v19-11-1c1300802385@kernel.org>
- <0415d354-0c44-4fff-b92b-b0f5c9c72b11@linaro.org>
- <CAL_JsqKTNDQn9omG3g=6Rb4Nwt6hG9Gw7-VXL_fjQeEQmmtJQg@mail.gmail.com>
- <630f630d-241e-45f5-b449-243147fb888b@linaro.org>
- <CAL_JsqKY8MjD=iFf6MiT04WmCHYUxGtWG9JfX5-5fuG32F77qQ@mail.gmail.com>
- <3c7e1ce0-9a5d-43fb-9767-8e4ca92a450d@linaro.org>
- <CAL_JsqKHGROJa1EW94iy1XzCadEst-hPWZY2BmxKgMB93nDp4w@mail.gmail.com>
-Content-Language: en-US
-From: James Clark <james.clark@linaro.org>
-In-Reply-To: <CAL_JsqKHGROJa1EW94iy1XzCadEst-hPWZY2BmxKgMB93nDp4w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
+From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
+
+Hi,
+
+This a next version of Alex's "kexec: Allow preservation of ftrace buffers"
+series (https://lore.kernel.org/all/20240117144704.602-1-graf@amazon.com),
+just to make things simpler instead of ftrace we decided to preserve
+"reserve_mem" regions.
+
+The patches are also available in git:
+https://git.kernel.org/rppt/h/kho/v4
 
 
-On 05/02/2025 4:15 pm, Rob Herring wrote:
-> On Wed, Feb 5, 2025 at 8:38 AM James Clark <james.clark@linaro.org> wrote:
->> On 04/02/2025 3:03 pm, Rob Herring wrote:
->>> On Tue, Feb 4, 2025 at 6:03 AM James Clark <james.clark@linaro.org> wrote:
->>>> On 03/02/2025 5:58 pm, Rob Herring wrote:
->>>>> On Mon, Feb 3, 2025 at 10:53 AM James Clark <james.clark@linaro.org> wrote:
->>>>>> On 03/02/2025 12:43 am, Rob Herring (Arm) wrote:
->>>>>>> From: Anshuman Khandual <anshuman.khandual@arm.com>
->>>>>>>
->>>>>>> The ARMv9.2 architecture introduces the optional Branch Record Buffer
->>>>>>> Extension (BRBE), which records information about branches as they are
->>>>>>> executed into set of branch record registers. BRBE is similar to x86's
->>>>>>> Last Branch Record (LBR) and PowerPC's Branch History Rolling Buffer
->>>>>>> (BHRB).
->>>
->>> [...]
->>>
->>>>>>> +     /*
->>>>>>> +      * Require that the event filter and branch filter permissions match.
->>>>>>> +      *
->>>>>>> +      * The event and branch permissions can only mismatch if the user set
->>>>>>> +      * at least one of the privilege branch filters in PERF_SAMPLE_BRANCH_PLM_ALL.
->>>>>>> +      * Otherwise, the core will set the branch sample permissions in
->>>>>>> +      * perf_copy_attr().
->>>>>>> +      */
->>>>>>> +     if ((event->attr.exclude_user != !(branch_type & PERF_SAMPLE_BRANCH_USER)) ||
->>>>>>> +         (event->attr.exclude_kernel != !(branch_type & PERF_SAMPLE_BRANCH_KERNEL)) ||
->>>>>>
->>>>>> I don't think this one is right. By default perf_copy_attr() copies the
->>>>>> exclude_ settings into the branch settings so this works, but if the
->>>>>> user sets any _less_ permissive branch setting this fails. For example:
->>>>>>
->>>>>>      # perf record -j any,u -- true
->>>>>>      Error:
->>>>>>      cycles:PH: PMU Hardware or event type doesn't support branch stack
->>>>>>      sampling.
->>>>>>
->>>>>> Here we want the default sampling permissions (exclude_kernel == 0,
->>>>>> exclude_user == 0), but only user branch records, which doesn't match.
->>>>>> It should be allowed because it doesn't include anything that we're not
->>>>>> allowed to see.
->>>>>
->>>>> I know it is allowed(on x86), but why would we want that? If you do
->>>>> something even more restricted:
->>>>>
->>>>> perf record -e cycles:k -j any,u -- true
->>>>>
->>>>> That's allowed on x86 and gives you samples with user addresses. But
->>>>> all the events happened in the kernel. How does that make any sense?
->>>>>
->>>>> I suppose in your example, we could avoid attaching branch stack on
->>>>> samples from the kernel. However, given how my example works, I'm
->>>>> pretty sure that's not what x86 does.
->>>>>
->>>>> There's also combinations that are allowed, but record no samples.
->>>>> Though I think that was with guest events. I've gone with reject
->>>>> non-sense combinations as much as possible. We can easily remove those
->>>>> restrictions later if needed. Changing the behavior later (for the
->>>>> same configuration) wouldn't be good.
->>>>>
->>>>>
->>>>
->>>> Rejecting ones that produce no samples is fair enough, but my example
->>>> does produce samples. To answer the question "why would we want that?",
->>>> nothing major, but there are a few small reasons:
->>>>
->>>>     * Perf includes both user and kernel by default, so the shortest
->>>>       command to only gather user branches doesn't work (-j any,u)
->>>>     * The test already checks for branch stack support like this, so old
->>>>       Perf test versions don't work
->>>
->>> I would be more concerned about this one except that *we* wrote that
->>> test. (I'm not sure why we wrote a new test rather than adapting
->>> record_lbr.sh...)
->>>
->>
->> record_lbr.sh was added 6 months ago, test_brstack.sh 3 years ago so
->> it's the other way around.
-> 
-> Sigh...
-> 
->> Although record_lbr.sh also tests --call-graph and --stitch-lbr as well,
->> so I think it's fine for test_brstack.sh to test only --branch-filter
->> options at the lowest level.
->>
->> Looking at that test though I see there is a capability
->> "/sys/devices/cpu/caps/branches". I'm wondering whether we should be
->> adding that on the Arm PMU for BRBE?
-> 
-> I noticed that too. I suppose we should. Though I suppose that could
-> give weird results if userspace is expecting LBR. Adding that would
-> make record_lbr.sh run and then the LBR callgraph test is going to
-> fail.
+Kexec today considers itself purely a boot loader: When we enter the new
+kernel, any state the previous kernel left behind is irrelevant and the
+new kernel reinitializes the system.
 
-Looks like we should add it. The "branches" cap seems to imply that any 
-of the branch recording options are supported.
+However, there are use cases where this mode of operation is not what we
+actually want. In virtualization hosts for example, we want to use kexec
+to update the host kernel while virtual machine memory stays untouched.
+When we add device assignment to the mix, we also need to ensure that
+IOMMU and VFIO states are untouched. If we add PCIe peer to peer DMA, we
+need to do the same for the PCI subsystem. If we want to kexec while an
+SEV-SNP enabled virtual machine is running, we need to preserve the VM
+context pages and physical memory. See "pkernfs: Persisting guest memory
+and kernel/device state safely across kexec" Linux Plumbers
+Conference 2023 presentation for details:
 
-For --call-graph=lbr, that's a special branch type 
-PERF_SAMPLE_BRANCH_CALL_STACK which we reject as not supported in BRBE. 
-The test already does an additional skip if --call-graph=lbr isn't 
-supported over the top of checking the branches cap. But there are other 
-sub tests that don't use that option that should pass. They are only 
-checking for non zero branch stack entries.
+  https://lpc.events/event/17/contributions/1485/
 
-> 
->> Ignoring the tests, the man pages (and some pages on the internet) give
->> this example: "--branch-filter any_ret,u,k". This doesn't work either
->> because it doesn't match the default exclude_hv option. It just seems a
->> bit awkward and incompatible to me, for not much gain.
->>
->>>>     * You might only be optimising userspace, but still interested in the
->>>>       proportion of time spent or particular place in the kernel
->>>
->>> How do you see that? It looks completely misleading to me. 'perf
->>> report' seems to only list branch stack addresses in this case. There
->>> doesn't seem to be any matching of the event address to branch stack
->>> addresses.
->>>
->>
->> Perf script will show everything with all it's various options, or
->> --branch-history on perf report will show both too. Also there are tools
->> other than Perf, AutoFDO seems like something that BRBE can be used with.
->>
->>>>     * Consistency with existing implementations and for people porting
->>>>       existing tools to Arm
->>>>     * It doesn't cost anything to support it (I think we just
->>>>       only check if exclude_* is set rather than !=)
->>>>     * Permissions checks should be handled by the core code so that
->>>>       they're consistent
->>>>     * What's the point of separate branch filters anyway if they always
->>>>       have to match the event filter?
->>>
->>> IDK, I wish someone could tell me. I don't see the usecase for them
->>> being mismatched.
->>>
->>> In any case, I don't care too much one way or the other what we do
->>> here. If everyone thinks we should relax this, then that's fine with
->>> me.
->>>
->>
->> Seeing the branch history from userspace that led up to a certain thing
->> in the kernel happening doesn't seem like that much of an edge case to
->> me. If you always have to have both on then you lose the userspace
->> branch history because the buffer isn't that big and gets overwritten.
-> 
-> Okay, let's drop this check...
-> 
->>>> Some of these things could be fixed in Perf, but not in older versions.
->>>> Even if we can't think of a real use case now, it doesn't sound like the
->>>> driver should be so restrictive of an option that doesn't do any harm.
->>>>
->>>>>> This also makes the Perf branch test skip because it uses
->>>>>> any,save_type,u to see if BRBE exists.
->>>>>
->>>>> Yes, I plan to update that if we keep this behavior.
->>>>>
->>>>>>> +         (!is_kernel_in_hyp_mode() &&
->>>>>>> +          (event->attr.exclude_hv != !(branch_type & PERF_SAMPLE_BRANCH_HV))))
->>>>>>> +             return false;
->>>>>>> +
->>>>>>> +     event->hw.branch_reg.config = branch_type_to_brbfcr(event->attr.branch_sample_type);
->>>>>>> +     event->hw.extra_reg.config = branch_type_to_brbcr(event->attr.branch_sample_type);
->>>>>>> +
->>>>>>> +     return true;
->>>>>>> +}
->>>>>>> +
->>>>>> [...]
->>>>>>> +static const int brbe_type_to_perf_type_map[BRBINFx_EL1_TYPE_DEBUG_EXIT + 1][2] = {
->>>>>>> +     [BRBINFx_EL1_TYPE_DIRECT_UNCOND] = { PERF_BR_UNCOND, 0 },
->>>>>>
->>>>>> Does the second field go into 'new_type'? They all seem to be zero so
->>>>>> I'm not sure why new_type isn't ignored instead of having it mapped.
->>>>>
->>>>> Well, left over from when all the Arm specific types were supported.
->>>>> So yeah, that can be simplified.
->>>>>
->>>>>>> +     [BRBINFx_EL1_TYPE_INDIRECT] = { PERF_BR_IND, 0 },
->>>>>>> +     [BRBINFx_EL1_TYPE_DIRECT_LINK] = { PERF_BR_CALL, 0 },
->>>>>>> +     [BRBINFx_EL1_TYPE_INDIRECT_LINK] = { PERF_BR_IND_CALL, 0 },
->>>>>>> +     [BRBINFx_EL1_TYPE_RET] = { PERF_BR_RET, 0 },
->>>>>>> +     [BRBINFx_EL1_TYPE_DIRECT_COND] = { PERF_BR_COND, 0 },
->>>>>>> +     [BRBINFx_EL1_TYPE_CALL] = { PERF_BR_CALL, 0 },
->>>>>>> +     [BRBINFx_EL1_TYPE_ERET] = { PERF_BR_ERET, 0 },
->>>>>>> +     [BRBINFx_EL1_TYPE_IRQ] = { PERF_BR_IRQ, 0 },
->>>>>>
->>>>>> How do ones that don't map to anything appear in Perf? For example
->>>>>> BRBINFx_EL1_TYPE_TRAP is missing, and the test that was attached to the
->>>>>> previous versions fails because it doesn't see the trap that jumps to
->>>>>> the kernel, but it does still see the ERET back to userspace:
->>>>>>
->>>>>>       [unknown]/trap_bench+0x20/-/-/-/0/ERET/-
->>>>>>
->>>>>> In older versions we'd also have BRBINFx_EL1_TYPE_TRAP mapping to
->>>>>> PERF_BR_SYSCALL so you could see it go into the kernel before the return:
->>>>>>
->>>>>>       trap_bench+0x1C/[unknown]/-/-/-/0/SYSCALL/-
->>>>>>       [unknown]/trap_bench+0x20/-/-/-/0/ERET/-
->>>>>
->>>>> My read of that was we should see a CALL in this case. Whether SVC
->>>>> generates a TRAP or CALL depends on HFGITR_EL2.SVC_EL0 (table D18-2).
->>>>> I assumed "SVC due to HFGITR_EL2.SVC_EL0" means when SVC_EL0 is set
->>>>> (and set has additional conditions). We have SVC_EL0 cleared, so that
->>>>> should be a CALL. Maybe the FVP has this wrong?
->>>>>
->>>>
->>>> The test is doing this rather than a syscall:
->>>>
->>>>      asm("mrs %0, ID_AA64ISAR0_EL1" : "=r" (val));   /* TRAP + ERET */
->>>>
->>>> So I think trap is right. Whether that should be mapped to SYSCALL or
->>>> some other branch type I don't know, but the point is that it's missing now.
->>>
->>> We aren't supporting any of the Arm specific traps/exceptions. One
->>> reason is for consistency with x86 like you just argued for. The only
->>
->> Does x86 leave holes in the program flow though, or is it complete? IMO
->> it makes it harder for tools to make sense of the branch buffer if there
->> are things like an ERET with no previous trap to match it up to.
-> 
-> I'll have to test that. x86 has SYSRET for "syscall return". We added
-> ERET which maps to x86 interrupt return. So I guess x86 only records
-> syscalls and their returns. There's also "sw interrupt" on x86 which
-> gets mapped to PERF_BR_UNKNOWN. I don't think there's any way for us
-> to distinguish a syscall return from any other exception return.
-> 
+To start us on the journey to support all the use cases above, this patch
+implements basic infrastructure to allow hand over of kernel state across
+kexec (Kexec HandOver, aka KHO). As a really simple example target, we use
+memblock's reserve_mem.
+With this patch set applied, memory that was reserved using "reserve_mem"
+command line options remains intact after kexec and it is guaranteed to
+reside at the same physical address.
 
-Any return type is fine really, as long as you can potentially make 
-sense of it in the end.
+== Alternatives ==
 
->>> exception types supported are syscall and IRQ. Part of the issue is
->>> there is no userspace control over enabling all the extra Arm ones.
->>> There's no way to say enable all branches except debug, fault, etc.
->>> exceptions. If we want to support these, I think there should be user
->>> control over enabling them. But that can come later if there's any
->>> demand for them.
->>>
->>> Rob
->>
->> In this patchset we enable PERF_BR_IRQ with PERF_SAMPLE_BRANCH_ANY,
->> without any way to selectively disable it. I would assume trap could be
->> done with the same option.
-> 
-> If I was designing the interface, I would make PERF_BR_IRQ separately
-> controllable. But we're kind of stuck with what x86 did. I suppose we
-> could add a negative 'noirq' option.
-> 
-> Are you of the opinion that we should enable everything or some subset
-> of them? There's basically inst/data/algn faults, FIQ, SError, and
-> debug. The debug ones seem questionable to me, or at least ones you'd
-> want to opt-in for. For FIQ, if that's used by secure world, do we
-> want non-secure world recording when FIQs happen? Could the timing of
-> those be used maliciously?
-> 
+There are alternative approaches to (parts of) the problems above:
 
-I would say include everything that's already filling the buffer and can 
-affect the program flow, even if they have to map to unknown or some 
-slightly off mapping. These tools are supposed to increase visibility, 
-not hide it. If silicon and buffer space are being consumed by branches, 
-let userspace decide if it wants to do anything with them or not. It 
-doesn't sound like changing 'unknown' to a more specific type in the 
-future would be a breaking change.
+  * Memory Pools [1] - preallocated persistent memory region + allocator
+  * PRMEM [2] - resizable persistent memory regions with fixed metadata
+                pointer on the kernel command line + allocator
+  * Pkernfs [3] - preallocated file system for in-kernel data with fixed
+                  address location on the kernel command line
+  * PKRAM [4] - handover of user space pages using a fixed metadata page
+                specified via command line
 
-Except for any security stuff of course, if FIQ is an issue because of 
-that, filter it out.
+All of the approaches above fundamentally have the same problem: They
+require the administrator to explicitly carve out a physical memory
+location because they have no mechanism outside of the kernel command
+line to pass data (including memory reservations) between kexec'ing
+kernels.
 
->> If we're filtering some of them out it might be worth documenting that
->> "PERF_SAMPLE_BRANCH_ANY" doesn't actually mean 'any' branch type on Arm,
->> and some types are recorded but discarded out before sending to userspace.
->>
->> There could be some confusion when there are partially filled or empty
->> branch buffers, and the reason wouldn't be that there weren't any
->> branches recorded, but they were all filtered out even with the 'any'
->> option.
-> 
-> Fair enough. I think we need Mark to chime in here. He was questioning
-> the need for these.
-> 
-> Rob
+KHO provides that base foundation. We will determine later whether we
+still need any of the approaches above for fast bulk memory handover of for
+example IOMMU page tables. But IMHO they would all be users of KHO, with
+KHO providing the foundational primitive to pass metadata and bulk memory
+reservations as well as provide easy versioning for data.
 
-I suppose you could say any branches that leave and return to the same 
-place in userspace aren't useful, like trap and eret (but isn't syscall 
-the same, and we have those?). But that's only if you filter out kernel. 
-With both enabled the trap actually goes somewhere and I'm sure that's 
-interesting to someone.
+== Overview ==
 
-It might be fine to say that the types that we have now don't match up 
-well enough, so we can revisit this in the future and add them in with 
-the right types rather than a potentially breaking change from unknown. 
-I will leave it to you.
+We introduce a metadata file that the kernels pass between each other. How
+they pass it is architecture specific. The file's format is a Flattened
+Device Tree (fdt) which has a generator and parser already included in
+Linux. When the root user enables KHO through /sys/kernel/kho/active, the
+kernel invokes callbacks to every driver that supports KHO to serialize
+its state. When the actual kexec happens, the fdt is part of the image
+set that we boot into. In addition, we keep a "scratch regions" available
+for kexec: A physically contiguous memory regions that is guaranteed to
+not have any memory that KHO would preserve.  The new kernel bootstraps
+itself using the scratch regions and sets all handed over memory as in use.
+When drivers initialize that support KHO, they introspect the fdt and
+recover their state from it. This includes memory reservations, where the
+driver can either discard or claim reservations.
 
-I was mainly stuck on the permissions issue which seemed like a blocker. 
-I noticed this one because the test was actually testing it, but you're 
-right these more obscure branch types in userspace aren't exactly the 
-MVP of BRBE.
+== Limitations ==
 
-Although I will say that leaving the associated ERETs in but filtering 
-out the thing that took it there is a bit odd. Maybe that's just a 
-personal thing without much technical merit.
+Currently KHO is only implemented for file based kexec. The kernel
+interfaces in the patch set are already in place to support user space
+kexec as well, but it is still not implemented it yet inside kexec tools.
 
-A lot of words to say I don't really know for sure either.
+== How to Use ==
+
+To use the code, please boot the kernel with the "kho=on" command line
+parameter.
+KHO will automatically create scratch regions. If you want to set the
+scratch size explicitly you can use "kho_scratch=" command line parameter.
+For instance, "kho_scratch=512M,256M" will create a global scratch area of
+512Mib and per-node scrath areas of 256Mib.
+
+Make sure to to have a reserved memory range requested with reserv_mem
+command line option. Then before you invoke file based "kexec -l", activate
+KHO:
+
+  # echo 1 > /sys/kernel/kho/active
+  # kexec -l Image --initrd=initrd -s
+  # kexec -e
+
+The new kernel will boot up and contain the previous kernel's reserve_mem
+contents at the same physical address as the first kernel.
+
+== Changelog ==
+
+v3 -> v4:
+  - Major rework of scrach management. Rather than force scratch memory
+    allocations only very early in boot now we rely on scratch for all
+    memblock allocations.
+  - Use simple example usecase (reserv_mem instead of ftrace)
+  - merge all KHO functionality into a single kernel/kexec_handover.c file
+  - rename CONFIG_KEXEC_KHO to CONFIG_KEXEC_HANDOVER
+
+v1 -> v2:
+  - Removed: tracing: Introduce names for ring buffers
+  - Removed: tracing: Introduce names for events
+  - New: kexec: Add config option for KHO
+  - New: kexec: Add documentation for KHO
+  - New: tracing: Initialize fields before registering
+  - New: devicetree: Add bindings for ftrace KHO
+  - test bot warning fixes
+  - Change kconfig option to ARCH_SUPPORTS_KEXEC_KHO
+  - s/kho_reserve_mem/kho_reserve_previous_mem/g
+  - s/kho_reserve/kho_reserve_scratch/g
+  - Remove / reduce ifdefs
+  - Select crc32
+  - Leave anything that requires a name in trace.c to keep buffers
+    unnamed entities
+  - Put events as array into a property, use fingerprint instead of
+    names to identify them
+  - Reduce footprint without CONFIG_FTRACE_KHO
+  - s/kho_reserve_mem/kho_reserve_previous_mem/g
+  - make kho_get_fdt() const
+  - Add stubs for return_mem and claim_mem
+  - make kho_get_fdt() const
+  - Get events as array from a property, use fingerprint instead of
+    names to identify events
+  - Change kconfig option to ARCH_SUPPORTS_KEXEC_KHO
+  - s/kho_reserve_mem/kho_reserve_previous_mem/g
+  - s/kho_reserve/kho_reserve_scratch/g
+  - Leave the node generation code that needs to know the name in
+    trace.c so that ring buffers can stay anonymous
+  - s/kho_reserve/kho_reserve_scratch/g
+  - Move kho enums out of ifdef
+  - Move from names to fdt offsets. That way, trace.c can find the trace
+    array offset and then the ring buffer code only needs to read out
+    its per-CPU data. That way it can stay oblivient to its name.
+  - Make kho_get_fdt() const
+
+v2 -> v3:
+
+  - Fix make dt_binding_check
+  - Add descriptions for each object
+  - s/trace_flags/trace-flags/
+  - s/global_trace/global-trace/
+  - Make all additionalProperties false
+  - Change subject to reflect subsysten (dt-bindings)
+  - Fix indentation
+  - Remove superfluous examples
+  - Convert to 64bit syntax
+  - Move to kho directory
+  - s/"global_trace"/"global-trace"/
+  - s/"global_trace"/"global-trace"/
+  - s/"trace_flags"/"trace-flags"/
+  - Fix wording
+  - Add Documentation to MAINTAINERS file
+  - Remove kho reference on read error
+  - Move handover_dt unmap up
+  - s/reserve_scratch_mem/mark_phys_as_cma/
+  - Remove ifdeffery
+  - Remove superfluous comment
+
+Alexander Graf (9):
+  memblock: Add support for scratch memory
+  kexec: Add Kexec HandOver (KHO) generation helpers
+  kexec: Add KHO parsing support
+  kexec: Add KHO support to kexec file loads
+  kexec: Add config option for KHO
+  kexec: Add documentation for KHO
+  arm64: Add KHO support
+  x86: Add KHO support
+  memblock: Add KHO support for reserve_mem
+
+Mike Rapoport (Microsoft) (5):
+  mm/mm_init: rename init_reserved_page to init_deferred_page
+  memblock: add MEMBLOCK_RSRV_KERN flag
+  memblock: introduce memmap_init_kho_scratch()
+  x86/setup: use memblock_reserve_kern for memory used by kernel
+  Documentation: KHO: Add memblock bindings
+
+ Documentation/ABI/testing/sysfs-firmware-kho  |   9 +
+ Documentation/ABI/testing/sysfs-kernel-kho    |  53 ++
+ .../admin-guide/kernel-parameters.txt         |  24 +
+ .../kho/bindings/memblock/reserve_mem.yaml    |  41 +
+ .../bindings/memblock/reserve_mem_map.yaml    |  42 +
+ Documentation/kho/concepts.rst                |  80 ++
+ Documentation/kho/index.rst                   |  19 +
+ Documentation/kho/usage.rst                   |  60 ++
+ Documentation/subsystem-apis.rst              |   1 +
+ MAINTAINERS                                   |   3 +
+ arch/arm64/Kconfig                            |   3 +
+ arch/x86/Kconfig                              |   3 +
+ arch/x86/boot/compressed/kaslr.c              |  52 +-
+ arch/x86/include/asm/setup.h                  |   4 +
+ arch/x86/include/uapi/asm/setup_data.h        |  13 +-
+ arch/x86/kernel/e820.c                        |  18 +
+ arch/x86/kernel/kexec-bzimage64.c             |  36 +
+ arch/x86/kernel/setup.c                       |  39 +-
+ arch/x86/realmode/init.c                      |   2 +
+ drivers/of/fdt.c                              |  36 +
+ drivers/of/kexec.c                            |  42 +
+ include/linux/cma.h                           |   2 +
+ include/linux/kexec.h                         |  37 +
+ include/linux/kexec_handover.h                |  10 +
+ include/linux/memblock.h                      |  38 +-
+ kernel/Kconfig.kexec                          |  13 +
+ kernel/Makefile                               |   1 +
+ kernel/kexec_file.c                           |  19 +
+ kernel/kexec_handover.c                       | 808 ++++++++++++++++++
+ kernel/kexec_internal.h                       |  16 +
+ mm/Kconfig                                    |   4 +
+ mm/internal.h                                 |   5 +-
+ mm/memblock.c                                 | 247 +++++-
+ mm/mm_init.c                                  |  19 +-
+ 34 files changed, 1775 insertions(+), 24 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-firmware-kho
+ create mode 100644 Documentation/ABI/testing/sysfs-kernel-kho
+ create mode 100644 Documentation/kho/bindings/memblock/reserve_mem.yaml
+ create mode 100644 Documentation/kho/bindings/memblock/reserve_mem_map.yaml
+ create mode 100644 Documentation/kho/concepts.rst
+ create mode 100644 Documentation/kho/index.rst
+ create mode 100644 Documentation/kho/usage.rst
+ create mode 100644 include/linux/kexec_handover.h
+ create mode 100644 kernel/kexec_handover.c
+
+
+base-commit: 2014c95afecee3e76ca4a56956a936e23283f05b
+-- 
+2.47.2
 
 
