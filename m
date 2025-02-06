@@ -1,308 +1,241 @@
-Return-Path: <linux-doc+bounces-37107-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37111-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id D266AA2A008
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 06:21:42 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 86D29A2A082
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 07:04:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B2C2E18884C3
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 05:21:46 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CCFF33A1C69
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 06:04:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A2BD223308;
-	Thu,  6 Feb 2025 05:21:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B292A20D4E2;
+	Thu,  6 Feb 2025 06:04:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="SJbC8piE"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="YuzxF3sc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f100.google.com (mail-ed1-f100.google.com [209.85.208.100])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6234913A41F
-	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 05:21:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A95512E64A;
+	Thu,  6 Feb 2025 06:04:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738819297; cv=none; b=FfuiVwOcEQAtOqNDkqKPtf/Qlnsu+4vw+3fYgQF/D74F6Wj+3Y5wDl8BD8Yb5wVYdRjnqx6gC+57Nv+KNs+RsRwc6ZGoG7+S62Hy1Izct5Ih8VKeCJITlM+NnuB6AfKUi3T4nxseRfM/cCktGz8l756fmZ2t0uIzIrAxRM2y8Zk=
+	t=1738821864; cv=none; b=hQJE9fK6jsLkhcJLBYTBYaRlGRjmgLNJ93z5+iIGWCE+Rr/axwSOJRnwsBA4Q8RSkkNvhsJzZKYrp1dfD+IAJsnnqKeVJjnuGmpzOjgXWZmtwTZ/bc7XcncMV2NzlTi99gmaVT+5LeQ45psSK3SgvHsodv6fHz9xDz21EhZMEwM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738819297; c=relaxed/simple;
-	bh=BroGEX3nunAdikjx03Lrr0TXP2Y+6z/r/wQ8/CLIkPU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SgrJt8qZeGTfPl9khTPhKSUI2/h2E+HjRxF8/L7+xeZJz8W5Bj0xOvZG4rntDZoabGlSuF7r2oPC5Z70fdqeavfYJ3kSbBEpYiQd5mB8d7BJ214UAmwTZWsD2+dxkfzKouZROOC7zNsnMVyoWBJE5ermL40kGOZ0woTPuDDsdK4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=SJbC8piE; arc=none smtp.client-ip=209.85.208.100
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=purestorage.com
-Received: by mail-ed1-f100.google.com with SMTP id 4fb4d7f45d1cf-5dcd9c38f66so3097007a12.1
-        for <linux-doc@vger.kernel.org>; Wed, 05 Feb 2025 21:21:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=purestorage.com; s=google2022; t=1738819293; x=1739424093; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=otzVsN1NW+U9mK3ObL5P0pr2UFgS62iOxxgXBwBSQ+o=;
-        b=SJbC8piEB6uYrqUfMLXlOPryFjaiRBfK/WMMVt2NkpFkue2aiGeoPrd0Dagr5g1DAR
-         L+rRPC+7PFtdkXYMMvaodEhEOhMpxo1KqQ3pzIBU6mi4+yX0HGfnQsuObx710OTMnS0s
-         vBsX3l38MuHv4gw8vk4CRR8IapLeQFEVhCxJoAnKFCR/NTkDy4SVWx5qNzVv/lY5Nij+
-         Pz04Q/bTpmw4zrg/lI01s6TcQleKiXHZUTRXH/gLjg2tXFVZWD+0YFsWV/D2999jg65H
-         RotzVa2vmMpj29MdwEdoZ/XOONV4pQVEDqpFxwE1UdIPOgiCmM27zc0DudkNidL7xr7k
-         Fuzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1738819293; x=1739424093;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=otzVsN1NW+U9mK3ObL5P0pr2UFgS62iOxxgXBwBSQ+o=;
-        b=iIl801RLZJty4CDMW0ogmoYyIqkDhjxaemDPnGhotfZ6FUwjpOoTyCXMXkpm1rv29F
-         TnyLL5nId+fxqXsv4/fv049iRjVaghN2FGimugszZOptpdYV8QihQvGEe05ED9zRQ1eo
-         rqqx58daWLdH2Ap7LpjyAeNtP636AFFl/d3mEKrQFKkOzYExwqy8JvpPp3gVMuRE304i
-         Apl02tsy8+2nXaGqb38YjCcGUSgGAIy6KlXeF4BeR4G/mFiIYqoeX/5NTecbJdYfbhHd
-         7DjzAhwYgczhu/QPZ1kC7OvKQNv4ArGiO6+R/ZuwHQzLw6qA+jdn9EkH7iMQGIn/ESLc
-         4X4A==
-X-Forwarded-Encrypted: i=1; AJvYcCUWzvmpI3+eVDZuxjbw70JLuyDUiYqlFCKtmrYuHjN1l2pQPh6nbT+H5x9huxJtnBE7kouXhJ/j9ng=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx+UJh3ukbS95lPyjLwyRT/p8QvipbNu26sfYoLepTmlr0llUlf
-	Uy+AFgTdflHdTvMJODm0x1MD78Aq4ie9KgcxC2sgTLaSur70O7gr4tDuKyvnPHvUg7+PkN3c74F
-	5BBvgLOiTKSLIsEUgldzoMUPHq/aB7j8F
-X-Gm-Gg: ASbGncuK6X2lCaiV73ACNQgTOOIGRWbqZBDa63KSe4n5aDyDyqqZcYLln57CGASCoYr
-	PsqEWRzoX3ShOuYiIw7/bHvmlQZSwEHDxLuv54EWPrb5qRrI4NrExGMVVHNEByxdmiEf/abwLpe
-	eIZOKDd68U88MtNirCPUBUYa0yk0p84PP9PWOmvf0jSAaX6ZP7VC4W2+g0+Bq8UlFOQXXsm/1pf
-	zZxpjtVqNIkNwsAN6mluMlaCKXvPxio23eYfLY95+UGVJueMeaPN2X7oAQdkUwhn0frsCG6N1km
-	X7vltktZIhZRwu2phto9oTopn5rTZO2c6mfcsrs=
-X-Google-Smtp-Source: AGHT+IEOeUong+iqEZmE/uaY2diPiB8AmCybH/LMhnwCuyEOfGjLLgOGIi3uenVtSrG1ZH7jt6SIEBI035c5
-X-Received: by 2002:a17:907:1c0f:b0:ab6:726e:b14d with SMTP id a640c23a62f3a-ab76e9d8cb5mr212784566b.23.1738819292450;
-        Wed, 05 Feb 2025 21:21:32 -0800 (PST)
-Received: from c7-smtp-2023.dev.purestorage.com ([208.88.159.128])
-        by smtp-relay.gmail.com with ESMTPS id a640c23a62f3a-ab77332cb2dsm1017866b.186.2025.02.05.21.21.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Feb 2025 21:21:32 -0800 (PST)
-X-Relaying-Domain: purestorage.com
-Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [10.7.70.36])
-	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 4605634032D;
-	Wed,  5 Feb 2025 22:21:31 -0700 (MST)
-Received: by dev-ushankar.dev.purestorage.com (Postfix, from userid 1557716368)
-	id 3BEC3E55FE0; Wed,  5 Feb 2025 22:21:31 -0700 (MST)
-From: Uday Shankar <ushankar@purestorage.com>
-Date: Wed, 05 Feb 2025 22:21:31 -0700
-Subject: [PATCH v3 2/2] netconsole: allow selection of egress interface via
- MAC address
+	s=arc-20240116; t=1738821864; c=relaxed/simple;
+	bh=Pe6IaHTX391MqDHCNWa0MVeqtZ4mbqerMM/d7pDOBKw=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=iI1IV5DTC40iFlTQuuaZvY2leSONgGrJ77muBwAiwx43U+ZFYQ92l6xnvzB2SvZDFq0QlenF4Mlojexo6A2Av2gcmwpXx8IZoK8EUFEWoXmAhlGe6gldrKQmMJz9dozC08fWDW3O2SQg5tmEmjWDdBTa1H9TzGhiS8+4fGrGMdg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=YuzxF3sc; arc=none smtp.client-ip=192.198.163.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1738821863; x=1770357863;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Pe6IaHTX391MqDHCNWa0MVeqtZ4mbqerMM/d7pDOBKw=;
+  b=YuzxF3sctxxcfpE8tn7EJrXLm9ShCSxfi+RzYrGMutyaRMpDmzxgQFjx
+   tN5xg9who6zK9GErIQ6k6UwUp29xRLItwLEmDIF5KW1rx7sjocEA6d86o
+   q9itZQxqRHmL7sbdsbt8hmxPzxeTlCtMU7TaJzmv+vfdbA3mt/Mnlgxk2
+   f2vkpO2zjvDLdWeQkLQ+ej3rlPEgnMuYNDVMBIhO6a35v8QuvhfejV2Ez
+   hVSSwjp6HJRrQd2lL80EtE63chn6qJI2uf4aE5lphEt5kbfPAPMzH8E77
+   yL0/x6nTjGkK9gNY46a6hKiY7Xs89jhSp8tqlLEvyB7K1cFnby8X7RmaG
+   Q==;
+X-CSE-ConnectionGUID: 7sCdfVUsQdChUQ+6+bKCXw==
+X-CSE-MsgGUID: NItXFjNoRNSsBjg/BTPrCQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="50050961"
+X-IronPort-AV: E=Sophos;i="6.13,263,1732608000"; 
+   d="scan'208";a="50050961"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Feb 2025 22:04:21 -0800
+X-CSE-ConnectionGUID: 9ShAARQRQrak3ZyvbVEGQw==
+X-CSE-MsgGUID: k80VA+UAT/eMOsZqSnBpKA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,263,1732608000"; 
+   d="scan'208";a="110944343"
+Received: from p12ill20yoongsia.png.intel.com ([10.88.227.38])
+  by fmviesa006.fm.intel.com with ESMTP; 05 Feb 2025 22:04:10 -0800
+From: Song Yoong Siang <yoong.siang.song@intel.com>
+To: "David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Willem de Bruijn <willemb@google.com>,
+	Florian Bezdeka <florian.bezdeka@siemens.com>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Bjorn Topel <bjorn@kernel.org>,
+	Magnus Karlsson <magnus.karlsson@intel.com>,
+	Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+	Jonathan Lemon <jonathan.lemon@gmail.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	John Fastabend <john.fastabend@gmail.com>,
+	Joe Damato <jdamato@fastly.com>,
+	Stanislav Fomichev <sdf@fomichev.me>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Mina Almasry <almasrymina@google.com>,
+	Daniel Jurgens <danielj@nvidia.com>,
+	Song Yoong Siang <yoong.siang.song@intel.com>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Eduard Zingerman <eddyz87@gmail.com>,
+	Mykola Lysenko <mykolal@fb.com>,
+	Martin KaFai Lau <martin.lau@linux.dev>,
+	Song Liu <song@kernel.org>,
+	Yonghong Song <yonghong.song@linux.dev>,
+	KP Singh <kpsingh@kernel.org>,
+	Hao Luo <haoluo@google.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Jose Abreu <joabreu@synopsys.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Tony Nguyen <anthony.l.nguyen@intel.com>,
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+	Faizal Rahim <faizal.abdul.rahim@linux.intel.com>,
+	Choong Yong Liang <yong.liang.choong@linux.intel.com>,
+	Bouska Zdenek <zdenek.bouska@siemens.com>
+Cc: netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	bpf@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org,
+	intel-wired-lan@lists.osuosl.org,
+	xdp-hints@xdp-project.net
+Subject: [PATCH bpf-next v9 0/5] xsk: TX metadata Launch Time support
+Date: Thu,  6 Feb 2025 14:04:03 +0800
+Message-Id: <20250206060408.808325-1-yoong.siang.song@intel.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250205-netconsole-v3-2-132a31f17199@purestorage.com>
-References: <20250205-netconsole-v3-0-132a31f17199@purestorage.com>
-In-Reply-To: <20250205-netconsole-v3-0-132a31f17199@purestorage.com>
-To: Breno Leitao <leitao@debian.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, 
- =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>, 
- Simon Horman <horms@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, 
- Johannes Berg <johannes@sipsolutions.net>, Jonathan Corbet <corbet@lwn.net>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-wireless@vger.kernel.org, linux-doc@vger.kernel.org, 
- Uday Shankar <ushankar@purestorage.com>
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 
-Currently, netconsole has two methods of configuration - module
-parameter and configfs. The former interface allows for netconsole
-activation earlier during boot (by specifying the module parameter on
-the kernel command line), so it is preferred for debugging issues which
-arise before userspace is up/the configfs interface can be used. The
-module parameter syntax requires specifying the egress interface name.
-This requirement makes it hard to use for a couple reasons:
-- The egress interface name can be hard or impossible to predict. For
-  example, installing a new network card in a system can change the
-  interface names assigned by the kernel.
-- When constructing the module parameter, one may have trouble
-  determining the original (kernel-assigned) name of the interface
-  (which is the name that should be given to netconsole) if some stable
-  interface naming scheme is in effect. A human can usually look at
-  kernel logs to determine the original name, but this is very painful
-  if automation is constructing the parameter.
+This series expands the XDP TX metadata framework to allow user
+applications to pass per packet 64-bit launch time directly to the kernel
+driver, requesting launch time hardware offload support. The XDP TX
+metadata framework will not perform any clock conversion or packet
+reordering.
 
-For these reasons, allow selection of the egress interface via MAC
-address when configuring netconsole using the module parameter. Update
-the netconsole documentation with an example of the new syntax.
-Selection of egress interface by MAC address via configfs is far less
-interesting (since when this interface can be used, one should be able
-to easily convert between MAC address and interface name), so it is left
-unimplemented.
+Please note that the role of Tx metadata is just to pass the launch time,
+not to enable the offload feature. Users will need to enable the launch
+time hardware offload feature of the device by using the respective
+command, such as the tc-etf command.
 
-Signed-off-by: Uday Shankar <ushankar@purestorage.com>
-Reviewed-by: Breno Leitao <leitao@debian.org>
-Tested-by: Breno Leitao <leitao@debian.org>
----
- Documentation/networking/netconsole.rst |  6 +++-
- include/linux/netpoll.h                 |  6 ++++
- net/core/netpoll.c                      | 51 +++++++++++++++++++++++++--------
- 3 files changed, 50 insertions(+), 13 deletions(-)
+Although some devices use the tc-etf command to enable their launch time
+hardware offload feature, xsk packets will not go through the etf qdisc.
+Therefore, in my opinion, the launch time should always be based on the PTP
+Hardware Clock (PHC). Thus, i did not include a clock ID to indicate the
+clock source.
 
-diff --git a/Documentation/networking/netconsole.rst b/Documentation/networking/netconsole.rst
-index 94c4680fdf3e7e1a0020d11b44547acfd68072a5..90a1bbb52918a0163828f4e96c89781e0bc6856b 100644
---- a/Documentation/networking/netconsole.rst
-+++ b/Documentation/networking/netconsole.rst
-@@ -45,7 +45,7 @@ following format::
- 	r             if present, prepend kernel version (release) to the message
- 	src-port      source for UDP packets (defaults to 6665)
- 	src-ip        source IP to use (interface address)
--	dev           network interface (eth0)
-+	dev           network interface name (eth0) or MAC address
- 	tgt-port      port for logging agent (6666)
- 	tgt-ip        IP address for logging agent
- 	tgt-macaddr   ethernet MAC address for logging agent (broadcast)
-@@ -62,6 +62,10 @@ or using IPv6::
- 
-  insmod netconsole netconsole=@/,@fd00:1:2:3::1/
- 
-+or using a MAC address to select the egress interface::
-+
-+   linux netconsole=4444@10.0.0.1/22:33:44:55:66:77,9353@10.0.0.2/12:34:56:78:9a:bc
-+
- It also supports logging to multiple remote agents by specifying
- parameters for the multiple agents separated by semicolons and the
- complete string enclosed in "quotes", thusly::
-diff --git a/include/linux/netpoll.h b/include/linux/netpoll.h
-index f91e50a76efd4b016381c632456397eea1ea877f..1ade65b59be49cfdcf86ed6e938287b949aa9f58 100644
---- a/include/linux/netpoll.h
-+++ b/include/linux/netpoll.h
-@@ -25,7 +25,13 @@ union inet_addr {
- struct netpoll {
- 	struct net_device *dev;
- 	netdevice_tracker dev_tracker;
-+	/*
-+	 * Either dev_name or dev_mac can be used to specify the local
-+	 * interface - dev_name is used if it is a nonempty string, else
-+	 * dev_mac is used.
-+	 */
- 	char dev_name[IFNAMSIZ];
-+	u8 dev_mac[ETH_ALEN];
- 	const char *name;
- 
- 	union inet_addr local_ip, remote_ip;
-diff --git a/net/core/netpoll.c b/net/core/netpoll.c
-index 62b4041aae1ae8c7dc47c89fb40b14bbd4ad0e0e..327c409b1974b9ecc1e078c78ca090b05c3ca9dd 100644
---- a/net/core/netpoll.c
-+++ b/net/core/netpoll.c
-@@ -501,7 +501,8 @@ void netpoll_print_options(struct netpoll *np)
- 		np_info(np, "local IPv6 address %pI6c\n", &np->local_ip.in6);
- 	else
- 		np_info(np, "local IPv4 address %pI4\n", &np->local_ip.ip);
--	np_info(np, "interface '%s'\n", np->dev_name);
-+	np_info(np, "interface name '%s'\n", np->dev_name);
-+	np_info(np, "local ethernet address '%pM'\n", np->dev_mac);
- 	np_info(np, "remote port %d\n", np->remote_port);
- 	if (np->ipv6)
- 		np_info(np, "remote IPv6 address %pI6c\n", &np->remote_ip.in6);
-@@ -570,11 +571,18 @@ int netpoll_parse_options(struct netpoll *np, char *opt)
- 	cur++;
- 
- 	if (*cur != ',') {
--		/* parse out dev name */
-+		/* parse out dev_name or dev_mac */
- 		if ((delim = strchr(cur, ',')) == NULL)
- 			goto parse_failed;
- 		*delim = 0;
--		strscpy(np->dev_name, cur, sizeof(np->dev_name));
-+
-+		np->dev_name[0] = '\0';
-+		eth_broadcast_addr(np->dev_mac);
-+		if (!strchr(cur, ':'))
-+			strscpy(np->dev_name, cur, sizeof(np->dev_name));
-+		else if (!mac_pton(cur, np->dev_mac))
-+			goto parse_failed;
-+
- 		cur = delim;
- 	}
- 	cur++;
-@@ -679,27 +687,45 @@ int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
- }
- EXPORT_SYMBOL_GPL(__netpoll_setup);
- 
-+/*
-+ * Returns a pointer to a string representation of the identifier used
-+ * to select the egress interface for the given netpoll instance. buf
-+ * must be a buffer of length at least MAC_ADDR_STR_LEN + 1.
-+ */
-+static char *egress_dev(struct netpoll *np, char *buf)
-+{
-+	if (np->dev_name[0])
-+		return np->dev_name;
-+
-+	snprintf(buf, MAC_ADDR_STR_LEN, "%pM", np->dev_mac);
-+	return buf;
-+}
-+
- int netpoll_setup(struct netpoll *np)
- {
-+	struct net *net = current->nsproxy->net_ns;
-+	char buf[MAC_ADDR_STR_LEN + 1];
- 	struct net_device *ndev = NULL;
- 	bool ip_overwritten = false;
- 	struct in_device *in_dev;
- 	int err;
- 
- 	rtnl_lock();
--	if (np->dev_name[0]) {
--		struct net *net = current->nsproxy->net_ns;
-+	if (np->dev_name[0])
- 		ndev = __dev_get_by_name(net, np->dev_name);
--	}
-+	else if (is_valid_ether_addr(np->dev_mac))
-+		ndev = dev_getbyhwaddr_rcu(net, ARPHRD_ETHER, np->dev_mac);
-+
- 	if (!ndev) {
--		np_err(np, "%s doesn't exist, aborting\n", np->dev_name);
-+		np_err(np, "%s doesn't exist, aborting\n", egress_dev(np, buf));
- 		err = -ENODEV;
- 		goto unlock;
- 	}
- 	netdev_hold(ndev, &np->dev_tracker, GFP_KERNEL);
- 
- 	if (netdev_master_upper_dev_get(ndev)) {
--		np_err(np, "%s is a slave device, aborting\n", np->dev_name);
-+		np_err(np, "%s is a slave device, aborting\n",
-+		       egress_dev(np, buf));
- 		err = -EBUSY;
- 		goto put;
- 	}
-@@ -707,7 +733,8 @@ int netpoll_setup(struct netpoll *np)
- 	if (!netif_running(ndev)) {
- 		unsigned long atmost;
- 
--		np_info(np, "device %s not up yet, forcing it\n", np->dev_name);
-+		np_info(np, "device %s not up yet, forcing it\n",
-+			egress_dev(np, buf));
- 
- 		err = dev_open(ndev, NULL);
- 
-@@ -741,7 +768,7 @@ int netpoll_setup(struct netpoll *np)
- 			if (!ifa) {
- put_noaddr:
- 				np_err(np, "no IP address for %s, aborting\n",
--				       np->dev_name);
-+				       egress_dev(np, buf));
- 				err = -EDESTADDRREQ;
- 				goto put;
- 			}
-@@ -772,13 +799,13 @@ int netpoll_setup(struct netpoll *np)
- 			}
- 			if (err) {
- 				np_err(np, "no IPv6 address for %s, aborting\n",
--				       np->dev_name);
-+				       egress_dev(np, buf));
- 				goto put;
- 			} else
- 				np_info(np, "local IPv6 %pI6c\n", &np->local_ip.in6);
- #else
- 			np_err(np, "IPv6 is not supported %s, aborting\n",
--			       np->dev_name);
-+			       egress_dev(np, buf));
- 			err = -EINVAL;
- 			goto put;
- #endif
+To simplify the test steps, I modified the xdp_hw_metadata bpf self-test
+tool in such a way that it will set the launch time based on the offset
+provided by the user and the value of the Receive Hardware Timestamp, which
+is against the PHC. This will eliminate the need to discipline System Clock
+with the PHC and then use clock_gettime() to get the time.
+
+Please note that AF_XDP lacks a feedback mechanism to inform the
+application if the requested launch time is invalid. So, users are expected
+to familiar with the horizon of the launch time of the device they use and
+not request a launch time that is beyond the horizon. Otherwise, the driver
+might interpret the launch time incorrectly and react wrongly. For stmmac
+and igc, where modulo computation is used, a launch time larger than the
+horizon will cause the device to transmit the packet earlier that the
+requested launch time.
+
+Although there is no feedback mechanism for the launch time request
+for now, user still can check whether the requested launch time is
+working or not, by requesting the Transmit Completion Hardware Timestamp.
+
+V9:
+  - Remove the igc_desc_unused() checking (Maciej)
+  - Ensure that skb allocation and DMA mapping work before proceeding to
+    fill in igc_tx_buffer info, context desc, and data desc (Maciej)
+  - Rate limit the error messages (Maciej)
+  - Update the comment to indicate that the 2 descriptors needed by the
+    empty frame are already taken into consideration (Maciej)
+  - Handle the case where the insertion of an empty frame fails and
+    explain the reason behind (Maciej)
+  - put self SOB tag as last tag (Maciej)
+
+V8: https://lore.kernel.org/netdev/20250205024116.798862-1-yoong.siang.song@intel.com/
+  - check the number of used descriptor in xsk_tx_metadata_request()
+    by using used_desc of struct igc_metadata_request, and then decreases
+    the budget with it (Maciej)
+  - submit another bug fix patch to set the buffer type for empty frame (Maciej):
+    https://lore.kernel.org/netdev/20250205023603.798819-1-yoong.siang.song@intel.com/
+
+V7: https://lore.kernel.org/netdev/20250204004907.789330-1-yoong.siang.song@intel.com/
+  - split the refactoring code of igc empty packet insertion into a separate
+    commit (Faizal)
+  - add explanation on why the value "4" is used as igc transmit budget
+    (Faizal)
+  - perform a stress test by sending 1000 packets with 10ms interval and
+    launch time set to 500us in the future (Faizal & Yong Liang)
+
+V6: https://lore.kernel.org/netdev/20250116155350.555374-1-yoong.siang.song@intel.com/
+  - fix selftest build errors by using asprintf() and realloc(), instead of
+    managing the buffer sizes manually (Daniel, Stanislav)
+
+V5: https://lore.kernel.org/netdev/20250114152718.120588-1-yoong.siang.song@intel.com/
+  - change netdev feature name from tx-launch-time to tx-launch-time-fifo
+    to explicitly state the FIFO behaviour (Stanislav)
+  - improve the looping of xdp_hw_metadata app to wait for packet tx
+    completion to be more readable by using clock_gettime() (Stanislav)
+  - add launch time setup steps into xdp_hw_metadata app (Stanislav)
+
+V4: https://lore.kernel.org/netdev/20250106135506.9687-1-yoong.siang.song@intel.com/
+  - added XDP launch time support to the igc driver (Jesper & Florian)
+  - added per-driver launch time limitation on xsk-tx-metadata.rst (Jesper)
+  - added explanation on FIFO behavior on xsk-tx-metadata.rst (Jakub)
+  - added step to enable launch time in the commit message (Jesper & Willem)
+  - explicitly documented the type of launch_time and which clock source
+    it is against (Willem)
+
+V3: https://lore.kernel.org/netdev/20231203165129.1740512-1-yoong.siang.song@intel.com/
+  - renamed to use launch time (Jesper & Willem)
+  - changed the default launch time in xdp_hw_metadata apps from 1s to 0.1s
+    because some NICs do not support such a large future time.
+
+V2: https://lore.kernel.org/netdev/20231201062421.1074768-1-yoong.siang.song@intel.com/
+  - renamed to use Earliest TxTime First (Willem)
+  - renamed to use txtime (Willem)
+
+V1: https://lore.kernel.org/netdev/20231130162028.852006-1-yoong.siang.song@intel.com/
+
+Song Yoong Siang (5):
+  xsk: Add launch time hardware offload support to XDP Tx metadata
+  selftests/bpf: Add launch time request to xdp_hw_metadata
+  net: stmmac: Add launch time support to XDP ZC
+  igc: Refactor empty frame insertion for launch time support
+  igc: Add launch time support to XDP ZC
+
+ Documentation/netlink/specs/netdev.yaml       |   4 +
+ Documentation/networking/xsk-tx-metadata.rst  |  62 +++++++
+ drivers/net/ethernet/intel/igc/igc.h          |   1 +
+ drivers/net/ethernet/intel/igc/igc_main.c     | 141 +++++++++++----
+ drivers/net/ethernet/stmicro/stmmac/stmmac.h  |   2 +
+ .../net/ethernet/stmicro/stmmac/stmmac_main.c |  13 ++
+ include/net/xdp_sock.h                        |  10 ++
+ include/net/xdp_sock_drv.h                    |   1 +
+ include/uapi/linux/if_xdp.h                   |  10 ++
+ include/uapi/linux/netdev.h                   |   3 +
+ net/core/netdev-genl.c                        |   2 +
+ net/xdp/xsk.c                                 |   3 +
+ tools/include/uapi/linux/if_xdp.h             |  10 ++
+ tools/include/uapi/linux/netdev.h             |   3 +
+ tools/testing/selftests/bpf/xdp_hw_metadata.c | 168 +++++++++++++++++-
+ 15 files changed, 394 insertions(+), 39 deletions(-)
 
 -- 
 2.34.1
