@@ -1,54 +1,54 @@
-Return-Path: <linux-doc+bounces-37210-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37212-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06F69A2B01E
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 19:15:33 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A6D82A2B02C
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 19:15:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1638E3A1B31
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 18:15:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C5F803A3627
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 18:15:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D25F719E7ED;
-	Thu,  6 Feb 2025 18:14:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A0E919F464;
+	Thu,  6 Feb 2025 18:14:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="nBPCLegJ"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="f65KJvU3"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B64F519AA56;
-	Thu,  6 Feb 2025 18:14:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A68419CC31;
+	Thu,  6 Feb 2025 18:14:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.198
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738865687; cv=none; b=SHi7cGWzd3nbIJ/Rs5zY+QSyt3QC8SE8R8TRGAx9DEECdY/j44C/lbIwp4wr6iPO4i01IhmTK6+6xiPkszHnSftDTaNxbMaQgYY8ASUm/E0Lv4MgXzBnTfuP4Tf7zxD/2twzTUt/lT4NcaQ4dr+VYQUgEVfnU6nX+kVDlM/NTuo=
+	t=1738865690; cv=none; b=RQhXoUH4kHH6SnPXZl55H8EZ4MdOcgccSLCLjGmN62yM3a6Y1xn/HLBCH+utrAkk/yYhi6W/JhBmnfzJC3Rtd/zuWIxJV388dZAXDFpQlwc38ri7mjB2z2SGWj96oFw/h9sRQs3B1v7BM8qgopcCr6Ny9HDDDJju01plVudwYvk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738865687; c=relaxed/simple;
-	bh=diueLtVurK1bq9TsP2vsizIWDfl0U9KkiT7L96pMHg0=;
+	s=arc-20240116; t=1738865690; c=relaxed/simple;
+	bh=tP4FzPrCeVIMWNwddPUjqnyzyVCPqF82tIEg9jFbTuw=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=qXRsWRUbK619XAmnVnUJI/7LQog1jKdhNsVh6L+761iT6mesHC1YA9k1EW8XvGKyU3tf/1P/GYURmi+Ct44PKJbWZBrdOGwrjVmELU3EQcfujDxGqhS8Q1t79td6jGCSXSwLJNMg9uUR0GSJCGh3S1WUMt7c8UOlKY0wff9ZU3I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=nBPCLegJ; arc=none smtp.client-ip=217.70.183.198
+	 In-Reply-To:To:Cc; b=o4/Dsg/81ZF0PAh59gGhHfZ06zyPvR/7i1EkbJ5gLSj5RtupJPgGxnGfVe8FyKInRp87Gp+7PDQP45uMfoewfdwxldHtEX+djEk1o1ZPoJSa80p6yI/EpSvw2KmGxSGCfCqRVcds/af6QsiZoDZMN4NlM0UoaT3EH9io2aiYGMU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=f65KJvU3; arc=none smtp.client-ip=217.70.183.198
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 607F4442D6;
-	Thu,  6 Feb 2025 18:14:41 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 370CB43297;
+	Thu,  6 Feb 2025 18:14:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1738865684;
+	t=1738865687;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=o9jzTvNrSGUeVzkBEfyBdb91nDpav0kBKqx6oQfnKpo=;
-	b=nBPCLegJruzf6a2wi9/QUC/Mhs97RRCoDm+Jvo+kYm8mkViCn6fCDb1+x0xjKECU7hAc8L
-	JEkOJP5JLTesKSzlsjHst7jHL5ubylUej3mRr2Xi+bAnMwqjkecvFt29ctX3CtYtd7GC13
-	jg2gBU+ufpNkO7+xtgo9jBeBB0YeDYjyzsmu17EfhGzrAVi1fy46pwp8zXc6xEERMCqj2a
-	lB9wKSL253jKcIJQgMeqSmEXFPsY8ul2J0XpAuscq3I2fiCKHMYoKNcPwNqsLVtQjSVOyI
-	b8tsZU6xXgOYcNDUlGWiaiDM0shH0L0tG8rRXvIghg8qqQb4exE3WSKlxcncBw==
+	bh=bA3l5r5TezclsqpRm22nq8eHPme2k8afvoNTGTGzecw=;
+	b=f65KJvU3ja4MsQN1B0ue3lbORqGGh8mh49JLGgJapyJwuY9HYkNeIYmemJFOkneBBfgYHb
+	dD+193/LZ6bLdNdthWwJBqulxfQwZT3pa3Hc6ga6teLuqPdI7+j183RYEpcP8HfDXTRQrU
+	W6U4zEs1cw0WDH15qVU6P371aJFIN09GVRe+yZc7BEosX1Ef6hAqesm9lZTu2MEIqRPzOL
+	r/Sb1x8k3ITpoulWEjGXACPz1PqnI/OaSro1KMRlofQl+dXo+3h1k/pJte/KV6PhGjyzrI
+	3Pvq0WBq+5D0mGRwP3SXbGTB5XplGFVIcca6BhvjIgN9FWO3vgwMIEjzv8tZrg==
 From: Luca Ceresoli <luca.ceresoli@bootlin.com>
-Date: Thu, 06 Feb 2025 19:14:18 +0100
-Subject: [PATCH v6 03/26] drm/bridge: panel: use drm_bridge_is_panel()
- instead of open code
+Date: Thu, 06 Feb 2025 19:14:19 +0100
+Subject: [PATCH v6 04/26] drm/bridge: panel: drm_panel_bridge_remove: warn
+ when called on non-panel bridge
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,7 +57,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250206-hotplug-drm-bridge-v6-3-9d6f2c9c3058@bootlin.com>
+Message-Id: <20250206-hotplug-drm-bridge-v6-4-9d6f2c9c3058@bootlin.com>
 References: <20250206-hotplug-drm-bridge-v6-0-9d6f2c9c3058@bootlin.com>
 In-Reply-To: <20250206-hotplug-drm-bridge-v6-0-9d6f2c9c3058@bootlin.com>
 To: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, 
@@ -94,9 +94,9 @@ X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvjedtkecutefuodetggdotef
  dhrtghpthhtoheptghlrghuughiuhdrsggviihnvggrsehtuhigohhnrdguvghvpdhrtghpthhtohepmhdrshiihihprhhofihskhhisehsrghmshhunhhgrdgtohhmpdhrtghpthhtoheptghorhgsvghtsehlfihnrdhnvghtpdhrtghpthhtohepshhimhhonhgrsehffhiflhhlrdgthhdprhgtphhtthhopegurhhiqdguvghvvghlsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhg
 X-GND-Sasl: luca.ceresoli@bootlin.com
 
-drm_panel_bridge_remove() reads bridge->funcs to find out whether this is a
-panel bridge or another kind of bridge. drm_bridge_is_panel() is made
-exactly for that, so use it.
+This function is for panel_bridge instances only. The silent return when
+invoked on other bridges might hide actual errors, so avoid them to go
+unnoticed.
 
 Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 
@@ -104,22 +104,25 @@ Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 
 This patch was added in v6.
 ---
- drivers/gpu/drm/bridge/panel.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/bridge/panel.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/bridge/panel.c b/drivers/gpu/drm/bridge/panel.c
-index 6e88339dec0f5faee690b7c53e8dcd0f1ee2281c..0c5db13b11dcb90ee88b9932b91aa05fc48d59bd 100644
+index 0c5db13b11dcb90ee88b9932b91aa05fc48d59bd..c57036b06493a6922e2cae38bcd1733930ff0073 100644
 --- a/drivers/gpu/drm/bridge/panel.c
 +++ b/drivers/gpu/drm/bridge/panel.c
-@@ -322,7 +322,7 @@ void drm_panel_bridge_remove(struct drm_bridge *bridge)
+@@ -322,8 +322,10 @@ void drm_panel_bridge_remove(struct drm_bridge *bridge)
  	if (!bridge)
  		return;
  
--	if (bridge->funcs != &panel_bridge_bridge_funcs)
-+	if (!drm_bridge_is_panel(bridge))
+-	if (!drm_bridge_is_panel(bridge))
++	if (!drm_bridge_is_panel(bridge)) {
++		drm_warn(bridge->dev, "%s: called on non-panel bridge!\n", __func__);
  		return;
++	}
  
  	panel_bridge = drm_bridge_to_panel_bridge(bridge);
+ 
 
 -- 
 2.34.1
