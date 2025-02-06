@@ -1,97 +1,100 @@
-Return-Path: <linux-doc+bounces-37133-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37131-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B16EA2A42E
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 10:25:52 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35A9CA2A3F6
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 10:17:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3CAB6188896A
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 09:25:57 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 722B23A6DEA
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 09:16:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F3C0225A2B;
-	Thu,  6 Feb 2025 09:25:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b="itGR2muV"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 527E0225A3E;
+	Thu,  6 Feb 2025 09:17:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m1973171.qiye.163.com (mail-m1973171.qiye.163.com [220.197.31.71])
+Received: from unicom146.biz-email.net (unicom146.biz-email.net [210.51.26.146])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A7DB1FCCE4
-	for <linux-doc@vger.kernel.org>; Thu,  6 Feb 2025 09:25:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.71
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7480B12B94;
+	Thu,  6 Feb 2025 09:16:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.51.26.146
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738833947; cv=none; b=l95M0lON6ggFg7nV7hg0vkyMq/CLTExBbL/NFyFvUVg0D/DyaLXfINXdEE2LMFO6jyusUakdCH18XpZsriOk7j5biCHg6JrIq1XC5KVwhm4GiI5ZjnI/+JrLOp5OJ5SpNRi1wQmTmQEMNXFxNErcBtUzHnNnfiX+WFC157fzjRw=
+	t=1738833423; cv=none; b=bTrkyUSMA3MlufX1gnQLp6DXEEbFqVKHfjmBzu41pm9uKxgRJ/G2ZhCGxD4EQWDBsL6wkdW2rjC4TRcmsYAmoXv8tQGO2NLrDG1TVzfCyrNeptExvRiQbdFT8eP1AhLMWHk2F8LWGFPBB5pgXxU65lexXtmUCdV7G3Jcycalv1w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738833947; c=relaxed/simple;
-	bh=8Wd/00C/A6R/PW6fEizTG2/KyMxLNUP43T8DNu+k63w=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=JqIn3YYqYGxo1sSThaAi8+99kzQxLMALC0Fe7Xj87w+MNRzzVyq5HeHiwfyun30iq54oV+ePsC9/kxn/GdqF1shwN02jynjYYlbCHd81vkSDRMSUL0ehNGtxlbSN+X3m0swMrmN3UQpNeVAQ01RJfEhl6imTLymefBMHJaarys4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn; spf=pass smtp.mailfrom=cqsoftware.com.cn; dkim=pass (1024-bit key) header.d=cqsoftware.com.cn header.i=@cqsoftware.com.cn header.b=itGR2muV; arc=none smtp.client-ip=220.197.31.71
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cqsoftware.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cqsoftware.com.cn
-Received: from [192.168.5.122] (unknown [1.193.57.36])
-	by smtp.qiye.163.com (Hmail) with ESMTP id a51107d6;
-	Thu, 6 Feb 2025 17:10:18 +0800 (GMT+08:00)
-Message-ID: <a4cfc03b-61c9-46c9-bf0b-f1e92ed8b599@cqsoftware.com.cn>
-Date: Thu, 6 Feb 2025 17:10:18 +0800
+	s=arc-20240116; t=1738833423; c=relaxed/simple;
+	bh=J4Jw6hCfAnfFcT8LYUjoO+YszJi+kEUP6N7RQM56PQ0=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=J8+9ZIokNpglmlYxla245GvUH4As7F+S6GvFwyy+3f0XJTjw3KoBEoXIu8tNHzkmeXGEFHGXNC02QphYAPql5aFprl6dcH3ePCHP7d2z6g+94XWpdITGPyehW5YO4hfH4EQPqhUe/f7CRX8xlNIcn40bI/ocAqgR1xls+ZwCp3A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=inspur.com; spf=pass smtp.mailfrom=inspur.com; arc=none smtp.client-ip=210.51.26.146
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=inspur.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=inspur.com
+Received: from unicom146.biz-email.net
+        by unicom146.biz-email.net ((D)) with ASMTP (SSL) id EDW00134;
+        Thu, 06 Feb 2025 17:15:34 +0800
+Received: from localhost.localdomain (10.94.12.153) by
+ jtjnmail201609.home.langchao.com (10.100.2.9) with Microsoft SMTP Server id
+ 15.1.2507.39; Thu, 6 Feb 2025 17:15:33 +0800
+From: Charles Han <hanchunchao@inspur.com>
+To: <mkl@pengutronix.de>, <manivannan.sadhasivam@linaro.org>,
+	<thomas.kopp@microchip.com>, <mailhol.vincent@wanadoo.fr>, <robh@kernel.org>,
+	<krzk+dt@kernel.org>, <conor+dt@kernel.org>, <cem@kernel.org>,
+	<djwong@kernel.org>, <corbet@lwn.net>
+CC: <linux-can@vger.kernel.org>, <devicetree@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-xfs@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, Charles Han <hanchunchao@inspur.com>
+Subject: [PATCH] Documentation: Remove repeated word in docs
+Date: Thu, 6 Feb 2025 17:15:29 +0800
+Message-ID: <20250206091530.4826-1-hanchunchao@inspur.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: zhangwei@cqsoftware.com.cn
-Subject: Re: [PATCH 0/3] Translation self-protection.rst into chinese
-To: alexs@kernel.org, si.yanteng@linux.dev, corbet@lwn.net
-Cc: zhaoshuo@cqsoftware.com.cn, zhaoyuehui@cqsoftware.com.cn,
- maoyuxian@cqsoftware.com.cn, linux-doc@vger.kernel.org
-References: <cover.1738807847.git.zhangwei@cqsoftware.com.cn>
-From: zhangwei <zhangwei@cqsoftware.com.cn>
-In-Reply-To: <cover.1738807847.git.zhangwei@cqsoftware.com.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGk9DVklJTh5PSR9OHRoeHVYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUpCSFVOTFVITVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
-	JLS1kG
-X-HM-Tid: 0a94da863f4a03abkunma51107d6
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MzI6Pio6MjIXSwgjHyMILAEL
-	ThIwFC9VSlVKTEhDQ0hIS0pCSEJLVTMWGhIXVQETGhUcDB4SOxgKCBQdDwwaCR5VGBQWVRgVRVlX
-	WRILWUFZSlVKQkhVTkxVSE1ZV1kIAVlBSktLQzcG
-DKIM-Signature:a=rsa-sha256;
-	b=itGR2muVzJi0Uivwo06/EFzyXs1M8lGeCuhC4xSY2RLgkXMKAXE1tSIPIfg2zlWKjZw3kFguBRTysIuS9col+8gf3k72Ekq0UNBGTQ+XaIK4C+4JGacqB0GZogneZkzV5B6U99IH5dRvT7EwbQAbM6uLE895aSd19A5o/8rwqm4=; s=default; c=relaxed/relaxed; d=cqsoftware.com.cn; v=1;
-	bh=Yh6yCllE/e0fq+wL0g60xubcR/dSxKSANRb5Z+7MIxg=;
-	h=date:mime-version:subject:message-id:from;
+tUid: 2025206171534bc23d4d50169965adca0608dc6528377
+X-Abuse-Reports-To: service@corp-email.com
+Abuse-Reports-To: service@corp-email.com
+X-Complaints-To: service@corp-email.com
+X-Report-Abuse-To: service@corp-email.com
 
+Remove the repeated word "to" docs.
 
-在 2025/2/6 10:26, zhangwei 写道:
-> Translate self-protection.rst into Chinese
-> and add index.rst under keys and secrets
->
-> zhangwei (3):
->    docs/zh_CN: Add self-protection index Chinese translation
->    Translate .../security/keys/index.rst into Chinese
->    Translate .../security/secrets/index.rst into Chinese
->
->   .../translations/zh_CN/security/index.rst     |   2 +-
->   .../zh_CN/security/keys/index.rst             |  24 ++
->   .../zh_CN/security/secrets/index.rst          |  18 ++
->   .../zh_CN/security/self-protection.rst        | 271 ++++++++++++++++++
->   4 files changed, 314 insertions(+), 1 deletion(-)
->   create mode 100644 Documentation/translations/zh_CN/security/keys/index.rst
->   create mode 100644 Documentation/translations/zh_CN/security/secrets/index.rst
->   create mode 100644 Documentation/translations/zh_CN/security/self-protection.rst
+Signed-off-by: Charles Han <hanchunchao@inspur.com>
+---
+ .../devicetree/bindings/net/can/microchip,mcp251xfd.yaml        | 2 +-
+ Documentation/filesystems/xfs/xfs-online-fsck-design.rst        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-I forgot to change to V3 send and forgot to add changelog,
-
-I'm going to resubmit
-
-Thanks,
-
-zhangwei
+diff --git a/Documentation/devicetree/bindings/net/can/microchip,mcp251xfd.yaml b/Documentation/devicetree/bindings/net/can/microchip,mcp251xfd.yaml
+index 2a98b26630cb..c155c9c6db39 100644
+--- a/Documentation/devicetree/bindings/net/can/microchip,mcp251xfd.yaml
++++ b/Documentation/devicetree/bindings/net/can/microchip,mcp251xfd.yaml
+@@ -40,7 +40,7 @@ properties:
+ 
+   microchip,rx-int-gpios:
+     description:
+-      GPIO phandle of GPIO connected to to INT1 pin of the MCP251XFD, which
++      GPIO phandle of GPIO connected to INT1 pin of the MCP251XFD, which
+       signals a pending RX interrupt.
+     maxItems: 1
+ 
+diff --git a/Documentation/filesystems/xfs/xfs-online-fsck-design.rst b/Documentation/filesystems/xfs/xfs-online-fsck-design.rst
+index 12aa63840830..994f9e5638ee 100644
+--- a/Documentation/filesystems/xfs/xfs-online-fsck-design.rst
++++ b/Documentation/filesystems/xfs/xfs-online-fsck-design.rst
+@@ -4521,7 +4521,7 @@ Both online and offline repair can use this strategy.
+ | For this second effort, the ondisk parent pointer format as originally   |
+ | proposed was ``(parent_inum, parent_gen, dirent_pos) → (dirent_name)``.  |
+ | The format was changed during development to eliminate the requirement   |
+-| of repair tools needing to to ensure that the ``dirent_pos`` field       |
++| of repair tools needing to ensure that the ``dirent_pos`` field       |
+ | always matched when reconstructing a directory.                          |
+ |                                                                          |
+ | There were a few other ways to have solved that problem:                 |
+-- 
+2.43.0
 
 
