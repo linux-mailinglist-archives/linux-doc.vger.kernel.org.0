@@ -1,163 +1,169 @@
-Return-Path: <linux-doc+bounces-37264-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37268-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01778A2B3FB
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:16:06 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B606AA2B44A
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 22:41:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DA85B188A047
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:16:10 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 40F561665C9
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2025 21:41:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D12C71DD0D6;
-	Thu,  6 Feb 2025 21:16:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EE9E2222597;
+	Thu,  6 Feb 2025 21:41:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="key not found in DNS" (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b="bVvxAaAD"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="l5NBXOdv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from slategray.cherry.relay.mailchannels.net (slategray.cherry.relay.mailchannels.net [23.83.223.169])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAB9E15B54A;
-	Thu,  6 Feb 2025 21:15:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.223.169
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738876561; cv=pass; b=ihTZEuzpfN6eBzTLuoZXBE/7VR+oGSBzKe84twk8cmzhCvMZpzacOsmYcyT+qnEzwTSfx30xglefms80ZDbFCX02Z15WPjtrA1LaCQqNG7OXrpnP/x0fDBmsh8K4xMYqynk3YrE0yVLzXdwYqs7WSbubwg3d8dNz94izR8p37hE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738876561; c=relaxed/simple;
-	bh=1lB3R1po6WZgdxaHmY/1OrqiJzK67pHd7MlXm4BGTbs=;
-	h=From:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc:Date; b=hkrQL5kxT36jxTFWxBd7g2/bf8AQ1w4abFW7wMkRMidCevfumMeZnYqMVTiHca3rGiPrnSMZEv7tKvOlLHUiojThlyEqba8zUuUMsBzjeLtMD53ITIvWB6xCwm7JOC6q5dLG22aqHsIILpwal8glNxIWrc5kDkQCyAqyjYEEnNE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai; spf=pass smtp.mailfrom=invicto.ai; dkim=fail (0-bit key) header.d=invicto.ai header.i=@invicto.ai header.b=bVvxAaAD reason="key not found in DNS"; arc=pass smtp.client-ip=23.83.223.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=invicto.ai
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=invicto.ai
-X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id 358F523E23;
-	Thu,  6 Feb 2025 21:08:03 +0000 (UTC)
-Received: from fr-int-smtpout8.hostinger.io (trex-0.trex.outbound.svc.cluster.local [100.127.46.110])
-	(Authenticated sender: hostingeremail)
-	by relay.mailchannels.net (Postfix) with ESMTPA id 972352365D;
-	Thu,  6 Feb 2025 21:07:58 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1738876082; a=rsa-sha256;
-	cv=none;
-	b=1Ro95qpUCKFjFPLJNu8SqmKrowz8ebWLBK0ke4hxfPF7go44Bgl8i1EC+3KuECSPtyVOAm
-	Q7MaNFWG8DAJpsHxFK678m7tL76MlHbhD5aV3PVJSOfc1QfAuE3HyNpBNKPF/fpxvvdmgL
-	1kBuX1D4eFwY7E3BHy0xJW09EgDH9hYKoLHtVVrRFk/jZZyrCR6S3ZFimNZIIwaUhnqgDu
-	8GwHQTq8RznFaNzrmBIWLzoc8iwDacIq4nqYZ2juVsndjpWWdSWydLypR3lSqJEQB8jOZG
-	syltYKifmR28IuR34GxD+HN73RqWXJfnxZ4BnJpYDc1vRpbOi2UgyRskOvZStA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net;
-	s=arc-2022; t=1738876082;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:dkim-signature;
-	bh=ao/6CpQGIug2s3g4qNBT7wztDldQnzKpiipkzTE6D5o=;
-	b=5IC4YPNGJIo8Kydl+twjBmAJRqqTcmKAbOJbs1voRM45xPEH+XB+nWW2CBuvF2XIRNM5cL
-	tsmrRDjFw01Dr6eeCDwk8ikdRFeG8Noor1f3qDlM2snYDsSLIrRW/ypvSDoq53siy4LaPS
-	2VPaB8ARQ97I/BurZW3JZF1rkh9SlfaEatgo/Wa4hzmfWxfWtUPoSkAMSi9W5LGN5pVxXE
-	u1T9gsPNggSjf0yr4rJigyz1uyJKyusMmC6OsodPzD4jaaiyaWkFRAjfUcN28o79UCQZFI
-	Rd5q18ovfYGJGIGN+qA/XWHeomZqvUYzzHTXNvNWyW3XLQG1voemmPJJWQmqew==
-ARC-Authentication-Results: i=1;
-	rspamd-8586946c78-qtn6w;
-	auth=pass smtp.auth=hostingeremail smtp.mailfrom=kurti@invicto.ai
-X-Sender-Id: hostingeremail|x-authuser|kurti@invicto.ai
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: hostingeremail|x-authuser|kurti@invicto.ai
-X-MailChannels-Auth-Id: hostingeremail
-X-Abaft-Thoughtful: 2d3304e215659c98_1738876082965_3725378742
-X-MC-Loop-Signature: 1738876082965:1669363260
-X-MC-Ingress-Time: 1738876082965
-Received: from fr-int-smtpout8.hostinger.io (fr-int-smtpout8.hostinger.io
- [89.116.146.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.127.46.110 (trex/7.0.2);
-	Thu, 06 Feb 2025 21:08:02 +0000
-From: Alban Kurti <kurti@invicto.ai>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=invicto.ai;
-	s=hostingermail-a; t=1738876076;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ao/6CpQGIug2s3g4qNBT7wztDldQnzKpiipkzTE6D5o=;
-	b=bVvxAaADvjx5XLZNsFSnJWB7Q5KkJg0iuA88QTQ/4UDAlzQyo9dCwTL07g0XUI727AxmqF
-	zF1RPn+3/utlITDKEQlxqb8dZo6+gg4qK4/qbGZT7T8InS3BnC1olO3WzLl0JQNPCFYBAa
-	0UMmVPuiMJbNU8lc9tw8wa53kr47Bpt9I8Rqf7BDD6WScFb2v5tBEZVYciNhIJ8zvwNc8H
-	KmOeICzsGOvkaLLmJR7TVSN8I7yojm92tvgkWM+lvk1Gh2awrHv8OkPD4CowSiMul88buq
-	isNsIMcxVNk72Lc2/vi4K6LVbE8w+EFOtx15QmQkbQtXnEXbnzjL6u2OTuXuqw==
-Subject: [PATCH v3 4/6] rust: sync: add missing newline in locked_by log
- example
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65E5F222594;
+	Thu,  6 Feb 2025 21:41:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1738878092; cv=none; b=fJBTFImgVkjk9V3aarN0WCYC3nN/LeMBFr3yQ15CSwT8hLN/wW/3E6IftJmijnY8XkvDgZmofb0NgVw86E2RY0A3+hfvXFzLvIISUKOeP6yvYJt9Ymujx7zrcJJWSGKvF8obTMv4VNnjWiCI8MLdqisqWdSwBXyzd8MQtjEYGf8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1738878092; c=relaxed/simple;
+	bh=3OgHs6tzCrAw+gGCDLhhtpN/agDfB2Z70E0T/xuo+TU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=XLYY6e5WWYljEyU53ViN74p/ZZ8EUOD8JtNPlt1o7i77xOJ0BVbsrm3AHnEt15Wd/HGvlYe1cZk0rXWNxN3rKt27o/JMVlgCtoXsiU+UUmjacGfm3X7XkitWjrw5tyhO3uhClsP6wefZ4KAJoCFBIYw0oC0q+7ztpxMh3wTSuTs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=l5NBXOdv; arc=none smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1738878091; x=1770414091;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=3OgHs6tzCrAw+gGCDLhhtpN/agDfB2Z70E0T/xuo+TU=;
+  b=l5NBXOdvEmt50CBu7EhIPS5nDnbbFqktQfe/OOuK+GKmbohNTiDpcWWs
+   +1K9yo1QEZQ2E948NANx2eQ8+r7XTZB0+nd/xDzaf0BbVHsHMRbfD5hek
+   o0MO4QqpFxi1UyhxeA/NZEFwODwv8BGb0ZALTdv275UtmKEc/9KxB7kna
+   KSqOAgT1W6jqPQBxvwtYQuDbf3cK4mOczSdnpi65oXav0R54sd3doAE4D
+   kNuvyU3Bw2VnuOHuHHGiQqhcnjmI4x+qJBnF853cYmhGUGfcp8SyVQFZB
+   WnrfmV6HrtM7kfRS7JpsFqnuzf2thfvn+Ap6rLtvlSz1W4q6In1q1wXMy
+   g==;
+X-CSE-ConnectionGUID: jVKHkCj9QZSnbmvsBk9qVg==
+X-CSE-MsgGUID: CaHsI2tsRSW9fFDHjNMjYg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11336"; a="42345047"
+X-IronPort-AV: E=Sophos;i="6.13,265,1732608000"; 
+   d="scan'208";a="42345047"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2025 13:41:28 -0800
+X-CSE-ConnectionGUID: 6H771ns0SpuSxG9hNzP1oQ==
+X-CSE-MsgGUID: Z+csMKT7SBO/Wvx19isNiQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; 
+   d="scan'208";a="116528569"
+Received: from dnelso2-mobl.amr.corp.intel.com (HELO [10.125.111.17]) ([10.125.111.17])
+  by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2025 13:41:27 -0800
+Message-ID: <239de2b9-0787-4105-a481-418dbd4d861e@intel.com>
+Date: Thu, 6 Feb 2025 13:41:29 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/15] kasan: x86: arm64: risc-v: KASAN tag-based mode for
+ x86
+To: "Christoph Lameter (Ampere)" <cl@gentwo.org>,
+ Jessica Clarke <jrtc27@jrtc27.com>
+Cc: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>, luto@kernel.org,
+ xin@zytor.com, kirill.shutemov@linux.intel.com, palmer@dabbelt.com,
+ tj@kernel.org, andreyknvl@gmail.com, brgerst@gmail.com, ardb@kernel.org,
+ dave.hansen@linux.intel.com, jgross@suse.com, will@kernel.org,
+ akpm@linux-foundation.org, arnd@arndb.de, corbet@lwn.net,
+ dvyukov@google.com, richard.weiyang@gmail.com, ytcoode@gmail.com,
+ tglx@linutronix.de, hpa@zytor.com, seanjc@google.com,
+ paul.walmsley@sifive.com, aou@eecs.berkeley.edu, justinstitt@google.com,
+ jason.andryuk@amd.com, glider@google.com, ubizjak@gmail.com,
+ jannh@google.com, bhe@redhat.com, vincenzo.frascino@arm.com,
+ rafael.j.wysocki@intel.com, ndesaulniers@google.com, mingo@redhat.com,
+ catalin.marinas@arm.com, junichi.nomura@nec.com, nathan@kernel.org,
+ ryabinin.a.a@gmail.com, dennis@kernel.org, bp@alien8.de,
+ kevinloughlin@google.com, morbo@google.com, dan.j.williams@intel.com,
+ julian.stecklina@cyberus-technology.de, peterz@infradead.org,
+ kees@kernel.org, kasan-dev@googlegroups.com, x86@kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-riscv@lists.infradead.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org, llvm@lists.linux.dev,
+ linux-doc@vger.kernel.org, "Shutemov, Kirill" <kirill.shutemov@intel.com>
+References: <cover.1738686764.git.maciej.wieczor-retman@intel.com>
+ <8bd9c793-aac6-a330-ea8f-3bde0230a20b@gentwo.org>
+ <F974BA79-80D8-4414-9DFD-1EEF9395143C@jrtc27.com>
+ <72837fcd-97a8-c213-0098-c8f308c3415d@gentwo.org>
+ <29A74A26-E922-4A4F-9B4A-8DB0336B99DF@jrtc27.com>
+ <94f81328-a135-b99b-7f73-43fb77bd7292@gentwo.org>
+From: Dave Hansen <dave.hansen@intel.com>
+Content-Language: en-US
+Autocrypt: addr=dave.hansen@intel.com; keydata=
+ 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
+In-Reply-To: <94f81328-a135-b99b-7f73-43fb77bd7292@gentwo.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250206-printing_fix-v3-4-a85273b501ae@invicto.ai>
-References: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
-In-Reply-To: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
-To: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Benno Lossin <benno.lossin@proton.me>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Jonathan Corbet <corbet@lwn.net>, 
- David Gow <davidgow@google.com>, Dirk Behme <dirk.behme@de.bosch.com>, 
- Asahi Lina <lina@asahilina.net>, Wedson Almeida Filho <wedsonaf@gmail.com>, 
- Wedson Almeida Filho <walmeida@microsoft.com>, 
- "Andreas Hindborg (Samsung)" <nmi@metaspace.dk>, Tejun Heo <tj@kernel.org>, 
- Fiona Behrens <me@kloenk.dev>, 
- Vincenzo Palazzo <vincenzopalazzodev@gmail.com>, 
- Xiangfei Ding <dingxiangfei2009@gmail.com>
-Cc: rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Alban Kurti <kurti@invicto.ai>, 
- Martin Rodriguez Reboredo <yakoyoku@gmail.com>, 
- Fox Chen <foxhlchen@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1738876070; l=1151;
- i=kurti@invicto.ai; s=20250206; h=from:subject:message-id;
- bh=1lB3R1po6WZgdxaHmY/1OrqiJzK67pHd7MlXm4BGTbs=;
- b=T2Q3yA6xogxLqNEE7t5drQ/TCrHRborZiGAai2Ql3KXdyLGKyixlfgH1IPiFUFaAQdR4bEWyB
- BqAoG05NfyrBrI/phI06pVPYyK9VqR6ZMg7WxcRoyolWYcC70lLeki1
-X-Developer-Key: i=kurti@invicto.ai; a=ed25519;
- pk=D1lKs+JFapuEVI9zJ2QUTLSf5u4aT12tG0ny6vMMuOc=
-Date: Thu, 06 Feb 2025 21:07:55 +0000 (UTC)
-X-CM-Envelope: MS4xfNJAmCzuHi2orbdWWk7lB74rjaapN9N8+53MQ/FHyFECiF7kuvBHA5DfX6TCj3cLKJnUaQhp6fGDmlFoc8aEqqBS8RlwS8Ri+WCX02TcGWCXOgwTyQV/ y5/UaSF75T7oo/FG59DEjnX0++CbmR1c2DebI2VcCjMIYbEwd/TzC012ilfGe4MNso4oaO42VgB7wiuLXuOgm9JOTDWnaLKhanzjzca5Wuxrvd1ZeyvAxUBq DT3U6iKrpY1LVtRg+DQNCx1D2YYb7Gat07FUbZgR78MxZqFCZj3ADVs30yolixQ497I2KaS2YDoJCMjPrcqKWxlvO3FomlUvqUQsxp21qD+PYK+yZowri7Xr sRSeMhM8ptzPDqw/TgzoAQZSauS9td6mP8NZOm0k+SWrhkpLwh367IljKaRI+ZToNDwZ9+G+3RqZxD77YRWsp+Tr4ygwlCVD0Tj9KtRaLAbz8JZMDrhniWmx j4PyPGdke0tbKiUQ5KClZ8zCqRf+YANGBnRh6PFqqBv9mF4nt+czyztiGRWcmZJ0jXk6nP2HTMvI8y7mpOW+F/+uw7Gr4tXDEwFZgzvIsPgskx0dinZiusuy GopnleOgR1jVZbs7ekpSXY7ivmL+gEojPF+k2DdFaVNqTcgUFqZ3MVXcQSEz/26H24AdeqSIO4pQAp6WRI0UDVLhhYoqBbLlobtpTaFT05ZGT+K8l3e1ee47 aIgi3xzatQoUdBRTBtV+xh8+6J7kceEhZo5hhVsO4kby/XDtlHP3fGFMNtgiy8NMLvVbSeT1TEO9k/rKeNdCsPR5C51ffFPxItW5rfO04NcQjoeqvri4wNhv QB0SO7sShKHyijxDCGtmPClTw7OKyaEaQI2Z9Jsg/1kq3FDjpyx16F1dT6oH1uuylG7eppiy+LBjVHLBb/3OHLwdMlFhL39SCmS+9MuXClr3Qy9bUGZZfyZR BNUrKZW5a7BXvi/
- P/ll+xr5V2zC5/Jr1DK3feMCs9P1eRpxS
-X-CM-Analysis: v=2.4 cv=PMNd+uqC c=1 sm=1 tr=0 ts=67a524ac a=9/DLicljd4JGVkZ5BRdAJQ==:117 a=9/DLicljd4JGVkZ5BRdAJQ==:17 a=IkcTkHD0fZMA:10 a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=HeOr5W89t27ReWMoupIA:9 a=QEXdDO2ut3YA:10
-X-AuthUser: kurti@invicto.ai
 
-The pr_info! example in rust/kernel/sync/locked_by.rs was missing
-a newline. This patch appends the missing newline to ensure
-that log messages for locked resources display correctly.
+On 2/6/25 11:11, Christoph Lameter (Ampere) wrote:
+> I also see that KASAN_HW_TAGS exist but this means that the tags can only
+> be used with CONFIG_KASAN which is a kernel configuration for debug
+> purposes.
+> 
+> What we are interested in is a *production* implementation with minimal
+> software overhead that will be the default on ARM64 if the appropriate
+> hardware is detected. 
 
-Fixes: 7b1f55e3a984 ("rust: sync: introduce `LockedBy`")
-Reported-by: Miguel Ojeda <ojeda@kernel.org>
-Closes: https://github.com/Rust-for-Linux/linux/issues/1139
-Signed-off-by: Alban Kurti <kurti@invicto.ai>
----
- rust/kernel/sync/locked_by.rs | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Ahh, interesting. I'd assumed that once folks had in-hardware tag checks
+that they'd just turn on CONFIG_KASAN and be happy.  Guess not!
 
-diff --git a/rust/kernel/sync/locked_by.rs b/rust/kernel/sync/locked_by.rs
-index a7b244675c2b96a36a6fe2e3ddd9a68e6ea01cb7..61f100a45b3507c750c1e3c405f9a8f67ced5346 100644
---- a/rust/kernel/sync/locked_by.rs
-+++ b/rust/kernel/sync/locked_by.rs
-@@ -55,7 +55,7 @@
- /// fn print_bytes_used(dir: &Directory, file: &File) {
- ///     let guard = dir.inner.lock();
- ///     let inner_file = file.inner.access(&guard);
--///     pr_info!("{} {}", guard.bytes_used, inner_file.bytes_used);
-+///     pr_info!("{} {}\n", guard.bytes_used, inner_file.bytes_used);
- /// }
- ///
- /// /// Increments `bytes_used` for both the directory and file.
+> That in turn will hopefully allow other software instrumentation
+> that is currently used to keep small objects secure and in turn
+> creates overhead.
+OK, so KASAN as-is is too broad. Are you saying that the kernel
+_currently_ have "software instrumentation" like SLAB
+redzoning/poisoning and you'd like to see MTE used to replace those?
 
--- 
-2.48.1
-
+Are you just interested in small objects?  What counts as small?  I
+assume it's anything roughly <PAGE_SIZE.
 
