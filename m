@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-37351-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37353-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C13CA2BE7D
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Feb 2025 09:55:08 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 22B06A2BE97
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Feb 2025 09:59:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D2E3F169FC3
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Feb 2025 08:55:06 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 38836188B963
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Feb 2025 08:59:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA1AB1B653C;
-	Fri,  7 Feb 2025 08:54:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 304DA1B4159;
+	Fri,  7 Feb 2025 08:59:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="IMbX3HWe"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="jeWFhEhU"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3A841B0420;
-	Fri,  7 Feb 2025 08:54:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12DF91A9B48;
+	Fri,  7 Feb 2025 08:59:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738918484; cv=none; b=uMvbG7RLtl9lYr8xfcoNCaNUds2SP2vHqWkbcLQ9EgToBwyxJsB0rSotW/0DxSpLiJdGdWf5Hst5XfiyxiFGMi3CW2wyTcV1v7e9LWZzRCu1rGl3PDobgVF/jsnWhunpyQKMIbR+IZQBsPk00PIClOOCo12O7ZeB3NXPWk4FTv4=
+	t=1738918753; cv=none; b=bJmcFYcsflnFFQ9Cv5eddlaKEhkbpinox9h5nUdmxidWuGj0YGWdHZGV7wDvOXWWks/zFJUhlkwmwu1SIsKigGnpwg8WFCP8cFv+ZTTNIe2eYJja+NX1pvNY7GFZTG/EMZp9v/HtAtG/10bpa8QxFSk78nFAGh/wsOLUtRI3qUA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738918484; c=relaxed/simple;
-	bh=8AUVapBfJ+dKFt4S4I3xRiOQpU+SfNOYrHYg76dXSVM=;
+	s=arc-20240116; t=1738918753; c=relaxed/simple;
+	bh=Q4j27tE8EcIHMIt1PgSMISXAmVSJEvtj2JTSOQQaBgs=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=P2qFtTwb0OG11ZTHHU2/th9KedEMIb5nxSBJ0SQtiJqsSVN/rlYP/cVMwOg9SojE29NsHw8Gv7/XPdOkJgDeoaKfEH2yqkbGfS30wfVHs2NcXGu5YjpobN3ZHLvnNlNDVyUvHziJYB9Q5g2ztA6Zxcz27K7oWLRNXlIZbQov3k0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=IMbX3HWe; arc=none smtp.client-ip=217.70.183.197
+	 MIME-Version:Content-Type; b=B7B/7npqvgR3HLiAvMqlPDZbZtKwRSpGh2DcycJmbb804zzvI20AluD+17wXs0Gq0pzVYWSsqq4wo/Fm/rEZL0sX7UgxcEQakJCk0OVPlIFXnc4sbYWKifofsyYjGfk19WSbcHEklS7QLch2SwmSxhsBIlHKR2Ksw85To1Kp2xc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=jeWFhEhU; arc=none smtp.client-ip=217.70.183.197
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id D3C65443A5;
-	Fri,  7 Feb 2025 08:54:29 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 766B44439C;
+	Fri,  7 Feb 2025 08:59:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1738918474;
+	t=1738918748;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=wn7hxWkM/cWBO7IgNnUs/y74YeSzIcIWM0x5ZDLkpdk=;
-	b=IMbX3HWevbzexCXvLrDPdCGV4DgqsZikJxEUhZloTqBXMrb7K5iBqUZzsswJsec98HBthn
-	tP4V8cASf0MG5GOAVmfB0so2WYFTXSwYTb6FfAQTNwgXqzUfqXTWdcjGuzIawsP2FaCedv
-	4rBDaTsXH9EYzmPHV21Zf0T6c1mC482iupiejkS0t+LLhdXxA0nmme0t7ZcMSCtahBBKCi
-	s4iX7aHyI+gTPDWBaJBWGJcVxPnFomj9RcbuSVw+ocSbDiiReNMvBiIWYkMMsotEZWnNd1
-	dFxmwaQRSxvzt/z1Hi/mtOcNnRYXPFxVWTv/HhjJn35KZSHb4QDNXAK9x3KJfw==
-Date: Fri, 7 Feb 2025 09:54:28 +0100
+	bh=HS5RaRTjPPs886uKnPgM9Gu4eihbomnvhbN7rWX9FJs=;
+	b=jeWFhEhU3AQBw6HUma0NVg4uS9fJGRBckJvDPWZ6YuxA4UwHthsb/TZsi3FG3QeaxWxcX+
+	0VPhcFKQBKr7SMFDKGes8Y4TvHYYk+d6c/qzbN1B56KyiSkebZ68WK4X8R8tmzna8TT0OJ
+	q0o9NYIDYRa0ZG9zbJz/8hN73ihXnes/B8UghLrw5G740zV+AjqsUEJDeDjVL/m6/kiqLb
+	wVREEubJnZJYbHoKQlT+I8ODosFtev9JhuWRdSzv3WOBz8Z7DYXAJ4ursFyC4sFKpu7pz8
+	NQ1baJE3OfzTX5GvrPaONZndiwdcqMlEnVIuqC4imfdG1KUCCDFlE6y8yVZiQw==
+Date: Fri, 7 Feb 2025 09:59:04 +0100
 From: Luca Ceresoli <luca.ceresoli@bootlin.com>
 To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 Cc: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, Jagan
@@ -70,13 +70,13 @@ Cc: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, Jagan
  dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
  linux-arm-kernel@lists.infradead.org, Paul Kocialkowski
  <paul.kocialkowski@bootlin.com>
-Subject: Re: [PATCH v6 08/26] drm/bridge: panel: add a panel_bridge to every
- panel
-Message-ID: <20250207095428.244f0f91@booty>
-In-Reply-To: <iucfx6tewwazxnonivajmdqqaexdfn6izwxwlv2l5t3256uwfy@sp4cm5eifdt3>
+Subject: Re: [PATCH v6 04/26] drm/bridge: panel: drm_panel_bridge_remove:
+ warn when called on non-panel bridge
+Message-ID: <20250207095904.478df621@booty>
+In-Reply-To: <cpe634qeg46gfph6diw7lshdiolnpmuik3nmd4fpayg4st5r55@5bcfdwjme7z7>
 References: <20250206-hotplug-drm-bridge-v6-0-9d6f2c9c3058@bootlin.com>
-	<20250206-hotplug-drm-bridge-v6-8-9d6f2c9c3058@bootlin.com>
-	<iucfx6tewwazxnonivajmdqqaexdfn6izwxwlv2l5t3256uwfy@sp4cm5eifdt3>
+	<20250206-hotplug-drm-bridge-v6-4-9d6f2c9c3058@bootlin.com>
+	<cpe634qeg46gfph6diw7lshdiolnpmuik3nmd4fpayg4st5r55@5bcfdwjme7z7>
 Organization: Bootlin
 X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
@@ -89,90 +89,23 @@ Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-GND-State: clean
 X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvkeekgecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkjghfohfogggtgfesthejredtredtvdenucfhrhhomhepnfhutggrucevvghrvghsohhlihcuoehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeeglefffefghefhtddvfeeufeeiveekgffgleekieduteekkeetvdehudekgfdvvdenucffohhmrghinhepsghoohhtlhhinhdrtghomhenucfkphepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegtvgejvgemiegtgegvmeeitggtjeemleekgeejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegtvgejvgemiegtgegvmeeitggtjeemleekgeejpdhhvghlohepsghoohhthidpmhgrihhlfhhrohhmpehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeefjedprhgtphhtthhopegumhhithhrhidrsggrrhihshhhkhhovheslhhinhgrrhhordhorhhgpdhrtghpthhtohepshhimhhonhgrsehffhiflhhlrdgthhdprhgtphhtthhopehinhhkihdruggrvgesshgrmhhsuhhnghdrt
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvkeekiecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkjghfohfogggtgfesthejredtredtvdenucfhrhhomhepnfhutggrucevvghrvghsohhlihcuoehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeeglefffefghefhtddvfeeufeeiveekgffgleekieduteekkeetvdehudekgfdvvdenucffohhmrghinhepsghoohhtlhhinhdrtghomhenucfkphepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegtvgejvgemiegtgegvmeeitggtjeemleekgeejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegtvgejvgemiegtgegvmeeitggtjeemleekgeejpdhhvghlohepsghoohhthidpmhgrihhlfhhrohhmpehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeefjedprhgtphhtthhopegumhhithhrhidrsggrrhihshhhkhhovheslhhinhgrrhhordhorhhgpdhrtghpthhtohepshhimhhonhgrsehffhiflhhlrdgthhdprhgtphhtthhopehinhhkihdruggrvgesshgrmhhsuhhnghdrt
  ghomhdprhgtphhtthhopehjrghgrghnsegrmhgrrhhulhgrshholhhuthhiohhnshdrtghomhdprhgtphhtthhopehmrdhsiiihphhrohifshhkihesshgrmhhsuhhnghdrtghomhdprhgtphhtthhopegtrghtrghlihhnrdhmrghrihhnrghssegrrhhmrdgtohhmpdhrtghpthhtohepfihilhhlsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehshhgrfihnghhuoheskhgvrhhnvghlrdhorhhg
 X-GND-Sasl: luca.ceresoli@bootlin.com
 
-On Fri, 7 Feb 2025 04:49:21 +0200
+On Fri, 7 Feb 2025 04:22:25 +0200
 Dmitry Baryshkov <dmitry.baryshkov@linaro.org> wrote:
 
-> On Thu, Feb 06, 2025 at 07:14:23PM +0100, Luca Ceresoli wrote:
-> > Adding a panel does currently not add a panel_bridge wrapping it. Usually
-> > the panel_bridge creation happens when some other driver (e.g. the previous
-> > bridge or the encoder) calls *_of_get_bridge() and the following element in
-> > the pipeline is a panel.
-> > 
-> > This has some drawbacks:
-> > 
-> >  * the panel_bridge is not created in the context of the driver of the
-> >    underlying physical device (the panel driver), but of some other driver
-> >  * that "other driver" is not aware of whether the returned drm_bridge
-> >    pointer is a panel_bridge created on the fly, a pre-existing
-> >    panel_bridge or a non-panel bridge
-> >  * removal of a panel_bridge requires calling drm_panel_bridge_remove(),
-> >    but the "other driver" doesn't know whether this is needed because it
-> >    doesn't know whether it has created a panel_bridge or not
-> > 
-> > So far this approach has been working because devm and drmm ensure the
-> > panel bridge would be dealloacted at some later point. However with the
-> > upcoming implementation of dynamic bridge lifetime this will get more
-> > complicated.
-> > 
-> > Correct removal of a panel_bridge might possibly be obtained by adding more
-> > devm/drmm technology to have it freed correctly at all times. However this
-> > would add more complexity and not help making lifetime more understandable.
-> > 
-> > Use a different approach instead: always create a panel_bridge with a
-> > drm_panel, thus matching the lifetime of the drm_panel and the panel_bridge
-> > wrapping it. This makes lifetime much more straightforward to understand
-> > and to further develop on.
-> > 
-> > With the panel_bridge always created, the functions to get a bridge
-> > [devm_drm_of_get_bridge() and drmm_of_get_bridge()] become simpler because
-> > the bridge they are looking for exists already (if it can exist at all). In
-> > turn, this is implemented based on a variant of
-> > drm_of_find_panel_or_bridge() that only looks for panels:
-> > of_drm_find_bridge_by_endpoint(). In the future
-> > drm_of_find_panel_or_bridge() can be progressively removed because there
-> > will never be a panel not exposing a bridge.
-> > 
-> > Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
-> > 
-> > ---
-> > 
-> > This patch was added in v6.
-> > ---
-> >  drivers/gpu/drm/bridge/panel.c | 74 +++++++++++++++++++++++++++++++++---------
-> >  include/drm/drm_panel.h        |  8 +++++
-> >  2 files changed, 66 insertions(+), 16 deletions(-)
-> >   
+> On Thu, Feb 06, 2025 at 07:14:19PM +0100, Luca Ceresoli wrote:
+> > This function is for panel_bridge instances only. The silent return when
+> > invoked on other bridges might hide actual errors, so avoid them to go
+> > unnoticed.  
 > 
-> LGTM, minor issue below.
-> 
-> > @@ -1018,6 +1067,11 @@ struct drm_bridge *devm_drm_panel_bridge_add_typed(struct device *dev,
-> >  {
-> >  	struct drm_bridge **ptr, *bridge;
-> >  
-> > +	if (panel->bridge) {
-> > +		DRM_DEBUG("panel %s: returning existing bridge=%p", dev_name(dev), panel->bridge);
-> > +		return panel->bridge;
-> > +	}  
-> 
-> Shouldn't the rest of the function also be removed as you do in other
-> cases?
+> Is there a real case of something using this function in a wrong way?
 
-Indeed it should.
-
-And even more, I now realize drm_panel_bridge_add_typed() should also
-become a simple 'return panel->bridge', like its devm and drmm
-variants, and its code, implementing the actual creation of a panel
-bridge, move to an internal function. Otherwise this patch is a bug:
-existing drivers which do call drm_panel_bridge_add_typed() would end
-up in having two panel_bridges for the same panel.
-
-I must say the process of developing this patch together with the
-hotplug work was "convoluted" to say the least, which probably explains
-why this got unnoticed so far.
+I don't know, but there was one in my v5 code. Having this warning
+would have saved me a lot of debugging, so it looked useful for future
+developers.
 
 Luca
 
