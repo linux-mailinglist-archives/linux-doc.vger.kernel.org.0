@@ -1,87 +1,88 @@
-Return-Path: <linux-doc+bounces-37609-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37611-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C385DA2F765
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 19:40:50 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC84AA2F76F
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 19:41:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D28233A8AFE
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 18:40:37 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 486901622BE
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 18:41:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6504A25743E;
-	Mon, 10 Feb 2025 18:39:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4BAA325A2C5;
+	Mon, 10 Feb 2025 18:41:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="iDKSD2jA"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="SHqJlH/I"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07DD1257432
-	for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 18:39:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6277543AA1
+	for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 18:41:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739212780; cv=none; b=FcIY5MRfptaKSCRs/RZZoAbwLxPXSI/e+GT/fjifEdsREzUv6ETtZC22yA/9TNyp7UpeHsb93EBm0raoDrH6CdgV7/kyyL0RGBu+crGlotNFpHG/4o1AtLbws+rq3xDanXknc5spuRlsb4oKw1Xz25LRG8bcbb4ktiBP/092dpY=
+	t=1739212865; cv=none; b=IoJmEjop5A+kiNT6SDC1gJibx3lWIH8zJz/0cZOQ0r4QuFj9T2RT9cdTpudoZ7CQtNsykRDsKS5DPZP2XBK/TyVN4ZIZBNgUakT7hJuQnPzE8vwsluZYphiLTiENLnbI6JYh26IrR1ILUUC1IOACAJhvriOjdEXyoN7xGHwQhdY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739212780; c=relaxed/simple;
-	bh=x/sZGvUzfxRrq9nYLFJINjPTLTHbf/GtI9WuU9nK5ys=;
+	s=arc-20240116; t=1739212865; c=relaxed/simple;
+	bh=RiumRp+8jT3r88kVofJLy7fpR5zAXNhnYTLlo61sQv0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oQvtL2+gm41w+nTWguF7OH/aqb28pZrStSLceP4cYwiSwLcKAnIdzDoLd3sRbS4/B+/ZgK5pbk0iYq6BI6BgRFl5lKzmDLFu7alTSE4L/Emei1iaOFxVRxyRawyqyNFG8l/rWn/KtJfBcVCTFhPuee0p7R9OOT6Iy01uVszYEx8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=iDKSD2jA; arc=none smtp.client-ip=170.10.129.124
+	 In-Reply-To:Content-Type; b=H/mLuw94jd12A2E1GX97LYcjIaR6K3WLyvfs9qWt0KLCNyHgyN0/qUDSAqIzf4QzTbytyX65UsRfOxKQmtTWpQcJglbUXor+GLDZjCi6cRTsJgZ1Zi83ReG5/0R88c2usD6YVud8tZsEhwwQjpOrrqME4kUgNVvZ6J7LSrKNJKM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=SHqJlH/I; arc=none smtp.client-ip=170.10.129.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1739212776;
+	s=mimecast20190719; t=1739212862;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=uYWKjcQduNIKs9dJZokUUBWiThkKPtNIV6gvjS6SD6Q=;
-	b=iDKSD2jAzyupcjZIyRshZ+Uq4gBeosVmwh/L+M1BkBRjqYnIfrIMq79PLoryfpmMZd8qBb
-	V2v+25xdv7AF39++W50po+Cdihd51rocr5CymQ4/sPHIg6nB3sR60ySDpa2hPj501y0J/J
-	3EPpBdi10E6vYFMrAQNxTtA1asM4hfM=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=g1KV9WSg/lyUU/31KD2wiBY4CVQnFn2Ocr7fjoXlBPA=;
+	b=SHqJlH/I0s93cqBdCHvhtWrVbcz8fAEv8Q3Uqcm6Kio6XlHaMrG/Lq4suM5Ey7TnMKpnDQ
+	fOvyNb8syIDiGjWsad+9ytXbgwSJL1uG65xiRqmmqRVK3fbXsxSvmNx54YsDxqSmtDV96m
+	rcC/UV3IpIHwfaNWGgwMy3M/VhIHTNI=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-641-hSvXF4RHM4qlhgjAh0SbSw-1; Mon, 10 Feb 2025 13:39:35 -0500
-X-MC-Unique: hSvXF4RHM4qlhgjAh0SbSw-1
-X-Mimecast-MFC-AGG-ID: hSvXF4RHM4qlhgjAh0SbSw
-Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-43628594d34so27730765e9.2
-        for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 10:39:35 -0800 (PST)
+ us-mta-213-ihqeFdWCOfaVDhgHj87Qhw-1; Mon, 10 Feb 2025 13:41:00 -0500
+X-MC-Unique: ihqeFdWCOfaVDhgHj87Qhw-1
+X-Mimecast-MFC-AGG-ID: ihqeFdWCOfaVDhgHj87Qhw
+Received: by mail-wr1-f72.google.com with SMTP id ffacd0b85a97d-38ddee8329eso689754f8f.1
+        for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 10:41:00 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739212774; x=1739817574;
+        d=1e100.net; s=20230601; t=1739212859; x=1739817659;
         h=content-transfer-encoding:in-reply-to:organization:autocrypt
          :content-language:from:references:cc:to:subject:user-agent
          :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=uYWKjcQduNIKs9dJZokUUBWiThkKPtNIV6gvjS6SD6Q=;
-        b=i0/L0UqYuyEJCEuv2sxRUdRO0lF8VORgp+BCjNzyBsK98XBpHwuTsnszrLEIWfRbCx
-         maFZYCq0sW1LWLdcK/0DBQkKlgH8tq8rp9NG7+z/v7U9XWU4ZOxhXrnpJ+1+LxSD3Xza
-         kT2QQeHee3qlpr72QYkuWQ+yZBlwyv5Vtk0OI2AnNUkZp6yyIPPv/QayVS9Q5YnQCuxl
-         79HeYHKVcq//6G7rB+3k7lAXQN2Z3eXphGOoD6+aadjXpGewKaD3thh3eyIzi/HZfwid
-         TEDJDnpNmM4Kzsvg2rUG0ExwbJY/jsK3ghzS/xTHBf47n6Pcs48iJbsTecH3Irnula64
-         Q3WQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUGEMWCw/eW8byQIX7RuF1J2UUScgA8HSPn3/pJqgSx0tmT6EIdEFp2+k9rQHA2rviy4RHMCQZvWuI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxkwJAAfFXO1uOPB1obnd9wyP0Qgf4XLpUUHJMqGVfPKHPinJ97
-	FO5EjbOBzQpvJxtD/5EtL+CYD//EGciGosURpHVtmwtn8DrtkcMKUYIwPfoxwb9cma6LnU6OOFi
-	ugJ3/lO8s0qbqTble9yVKf8jpU/lAaRj2MTlUG+EfvNGzKI6EKxx0N20qHg==
-X-Gm-Gg: ASbGncvij2aR+0lHd+FXu7XQ2iXCkPRSFfTKchN7LQbcuZ/HmcTbrR/IaJxEHIwgVdH
-	/pZnpjMYw1U8Jv1wav/8KW1xf391QUiiB3TO3fDwsD0y94RqhwT4SeZxqrWJja1G23n7CGj/Nv8
-	Ga3Pr1UvdsICX3WT2DD06n/5P7+BhVkuGN+LnAK0pQnhOwee6ALmBq6P60x2ZpKEzOx3QPAzXDj
-	6BCT6XJQR2GO0oS+6NaNqisHrvFJrdJJTEkMOLV6WxDIxrxXCRxFV72jM11cQVDeWFRlRg0qffd
-	6LIM4B3acvIcEjJbV5gsSsgys1SkGraEPXY=
-X-Received: by 2002:a05:6000:1fad:b0:38d:ce70:8bdf with SMTP id ffacd0b85a97d-38dce708d90mr10228202f8f.37.1739212774663;
-        Mon, 10 Feb 2025 10:39:34 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGvxARJ76HOuGFHzWjgTSgJca+XchsbC+N32+KUziB434soeJwYLOC+oL+ipLCoVO9VZXSzlQ==
-X-Received: by 2002:a05:6000:1fad:b0:38d:ce70:8bdf with SMTP id ffacd0b85a97d-38dce708d90mr10228169f8f.37.1739212774160;
-        Mon, 10 Feb 2025 10:39:34 -0800 (PST)
-Received: from [192.168.3.141] (p5b0c6c7f.dip0.t-ipconnect.de. [91.12.108.127])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-38dd2e0765esm7764114f8f.82.2025.02.10.10.39.31
+        bh=g1KV9WSg/lyUU/31KD2wiBY4CVQnFn2Ocr7fjoXlBPA=;
+        b=kvkX/k32WBrtuwZJKwnFjtPr3uya6jREeMYvIwdGDoxbkBtgd/PHKYNopHOzpihZF1
+         l5/lHOxX2rLs2dL+ypi8lcYCs+tth5tG7UQb974l5o0MtAeO6KXLu72dIp1zyY4Fclyb
+         L7paR+Z2kvZ6/BaStzs/qtkdO/cKNVFtpaBGwKJEDBjjdKijEcUTRwfWnq/WgA+gifCf
+         aONfokckbE8UXKrgoCXzqRChNHDeEWobK33q6f+l5Gj/hFnn+K82CY6D2P0Zr3HbpnZ2
+         83JFyiOg1xbaTdAmX9x0SoL/6reR74NNRfDdRZCpfW6Nj/6sg4+t4z0fL0fBVVNqfOb3
+         uOnA==
+X-Forwarded-Encrypted: i=1; AJvYcCUlL94Z1691stdofAKgq3Wum4YBjMzQZq3e4M11u4PuQ8587hrnCi15HnOmTQKDfQ+qc1no4cBKGoo=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxjK9aknV/p9BnfiE38x/Bu4P0c+ZU51WJpDyGGJtSltkojqdGC
+	d1ema14HdLkof/BmsW2Z4F3JraEE4ceCwWGRHv6hwumzJ3uaXqiAr8fkudtzDFIv+nTXRpzkKtJ
+	Qq5PSRF0mCzoFh6DcDStMAKJ98HnaCA9zRnt6gVkZ+o06qRdJ4B/7Dygw1A==
+X-Gm-Gg: ASbGncuKbXoVAzuVJ0xF1BGU+A4u/oqN/aAnwi+b1RmcAlksfVY17etRkMRmmBAGMlC
+	rlMmhaMEPOg1185X7YIlEiQkMrOpOuEnmQgD/ThKvpHlVBU/AZeRWP8GIMSRNqjZjl7Y4lPuMOJ
+	okXkcOaxGJJAXA4zsZ77JWUHBOZ94x+sdUb/8MUYcA3crNeJspV9ZqvBCleXYkJYoI1RnM3BUti
+	bp7TN9ZBIFNUmySgQ4i0ocbr8payWf1Toi38fu8jKu1amULLRnP2z0MOEzMzXcqsTti+JCY8VPV
+	4s+5MwVy3LuvBumAAg5A9pRDmiGYIZVfD2qM9J1wc6pM+/dFO1oOuOP4ODNPNu1Wzw0kYvU4i2b
+	S6HeePhddSmYjIpKytpkbuz9ik/ZJBcVU
+X-Received: by 2002:a05:6000:4023:b0:38d:e420:3984 with SMTP id ffacd0b85a97d-38de4203c6fmr720454f8f.39.1739212859652;
+        Mon, 10 Feb 2025 10:40:59 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHGdyRFSrPW6CDaatY3A9b5Pbjiq+vqKKBwRSMaTLmNlwLMqalsMGCRptdeQalX+PBAO6tSww==
+X-Received: by 2002:a05:6000:4023:b0:38d:e420:3984 with SMTP id ffacd0b85a97d-38de4203c6fmr720406f8f.39.1739212859214;
+        Mon, 10 Feb 2025 10:40:59 -0800 (PST)
+Received: from ?IPV6:2003:cb:c734:b800:12c4:65cd:348a:aee6? (p200300cbc734b80012c465cd348aaee6.dip0.t-ipconnect.de. [2003:cb:c734:b800:12c4:65cd:348a:aee6])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-439471bf782sm28276465e9.39.2025.02.10.10.40.56
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 10 Feb 2025 10:39:32 -0800 (PST)
-Message-ID: <48dec767-3e14-480e-a3df-1298315894f6@redhat.com>
-Date: Mon, 10 Feb 2025 19:39:30 +0100
+        Mon, 10 Feb 2025 10:40:58 -0800 (PST)
+Message-ID: <0c8640f5-2a80-45ff-a922-476a5fd5f82d@redhat.com>
+Date: Mon, 10 Feb 2025 19:40:56 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -89,8 +90,7 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 12/20] mm/memory: Enhance insert_page_into_pte_locked()
- to create writable mappings
+Subject: Re: [PATCH v7 13/20] mm/memory: Add vmf_insert_page_mkwrite()
 To: Alistair Popple <apopple@nvidia.com>, akpm@linux-foundation.org,
  dan.j.williams@intel.com, linux-mm@kvack.org
 Cc: Alison Schofield <alison.schofield@intel.com>, lina@asahilina.net,
@@ -108,7 +108,7 @@ Cc: Alison Schofield <alison.schofield@intel.com>, lina@asahilina.net,
  david@fromorbit.com, chenhuacai@kernel.org, kernel@xen0n.name,
  loongarch@lists.linux.dev
 References: <cover.472dfc700f28c65ecad7591096a1dc7878ff6172.1738709036.git-series.apopple@nvidia.com>
- <7db953c8cc5a066b4aa23dbdf049c6f35cce7b99.1738709036.git-series.apopple@nvidia.com>
+ <e98b7e6bed4c1c63feac7b907439168388ecc9fd.1738709036.git-series.apopple@nvidia.com>
 From: David Hildenbrand <david@redhat.com>
 Content-Language: en-US
 Autocrypt: addr=david@redhat.com; keydata=
@@ -156,19 +156,77 @@ Autocrypt: addr=david@redhat.com; keydata=
  jPrnvUsUUsjRoRNJjKKA/REq+sAnhkNPPZ/NNMjaZ5b8Tovi8C0tmxiCHaQYqj7G2rgnT0kt
  WNyWQQ==
 Organization: Red Hat
-In-Reply-To: <7db953c8cc5a066b4aa23dbdf049c6f35cce7b99.1738709036.git-series.apopple@nvidia.com>
+In-Reply-To: <e98b7e6bed4c1c63feac7b907439168388ecc9fd.1738709036.git-series.apopple@nvidia.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 04.02.25 23:48, Alistair Popple wrote:
-> In preparation for using insert_page() for DAX, enhance
-> insert_page_into_pte_locked() to handle establishing writable
-> mappings.  Recall that DAX returns VM_FAULT_NOPAGE after installing a
-> PTE which bypasses the typical set_pte_range() in finish_fault.
+> Currently to map a DAX page the DAX driver calls vmf_insert_pfn. This
+> creates a special devmap PTE entry for the pfn but does not take a
+> reference on the underlying struct page for the mapping. This is
+> because DAX page refcounts are treated specially, as indicated by the
+> presence of a devmap entry.
+> 
+> To allow DAX page refcounts to be managed the same as normal page
+> refcounts introduce vmf_insert_page_mkwrite(). This will take a
+> reference on the underlying page much the same as vmf_insert_page,
+> except it also permits upgrading an existing mapping to be writable if
+> requested/possible.
 > 
 > Signed-off-by: Alistair Popple <apopple@nvidia.com>
-> Suggested-by: Dan Williams <dan.j.williams@intel.com>
-> Reviewed-by: Dan Williams <dan.j.williams@intel.com>
+> 
+> ---
+> 
+> Changes for v7:
+>   - Fix vmf_insert_page_mkwrite by removing pfn gunk as suggested by
+>     David.
+> 
+> Updates from v2:
+> 
+>   - Rename function to make not DAX specific
+> 
+>   - Split the insert_page_into_pte_locked() change into a separate
+>     patch.
+> 
+> Updates from v1:
+> 
+>   - Re-arrange code in insert_page_into_pte_locked() based on comments
+>     from Jan Kara.
+> 
+>   - Call mkdrity/mkyoung for the mkwrite case, also suggested by Jan.
+> ---
+>   include/linux/mm.h |  2 ++
+>   mm/memory.c        | 21 +++++++++++++++++++++
+>   2 files changed, 23 insertions(+)
+> 
+> diff --git a/include/linux/mm.h b/include/linux/mm.h
+> index 7b1068d..6567ece 100644
+> --- a/include/linux/mm.h
+> +++ b/include/linux/mm.h
+> @@ -3544,6 +3544,8 @@ int vm_map_pages(struct vm_area_struct *vma, struct page **pages,
+>   				unsigned long num);
+>   int vm_map_pages_zero(struct vm_area_struct *vma, struct page **pages,
+>   				unsigned long num);
+> +vm_fault_t vmf_insert_page_mkwrite(struct vm_fault *vmf, struct page *page,
+> +			bool write);
+>   vm_fault_t vmf_insert_pfn(struct vm_area_struct *vma, unsigned long addr,
+>   			unsigned long pfn);
+>   vm_fault_t vmf_insert_pfn_prot(struct vm_area_struct *vma, unsigned long addr,
+> diff --git a/mm/memory.c b/mm/memory.c
+> index 41befd9..b88b488 100644
+> --- a/mm/memory.c
+> +++ b/mm/memory.c
+> @@ -2622,6 +2622,27 @@ static vm_fault_t __vm_insert_mixed(struct vm_area_struct *vma,
+>   	return VM_FAULT_NOPAGE;
+>   }
+>   
+> +vm_fault_t vmf_insert_page_mkwrite(struct vm_fault *vmf, struct page *page,
+> +			bool write)
+> +{
+> +	struct vm_area_struct *vma = vmf->vma;
+> +	pgprot_t pgprot = vma->vm_page_prot;
+
+Probably could have avoided that temp without harming readability
 
 Acked-by: David Hildenbrand <david@redhat.com>
 
