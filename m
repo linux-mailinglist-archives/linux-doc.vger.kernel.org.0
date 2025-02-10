@@ -1,62 +1,59 @@
-Return-Path: <linux-doc+bounces-37527-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37532-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E865DA2E8E7
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:32 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E2983A2E8EE
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 63F1F7A2857
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:17:36 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BE2A63A59A2
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:18:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4FAD1C760A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F01911CEACB;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nO62iX7S"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gkyTn+T4"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C1131C5F1F;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBEC01CAA76;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739182704; cv=none; b=gcW9Gn+bKdnIrTlNa6NyjhJAP3mdsJRKFsjtt96dXi5cOViLPdgxixKNs4HXlZjEFTO+rP7gl3SAr0uLCIHePSNfF+YW4rdJfVVf0LAVfd8XS3EpnMGt4rRYIjhFfpEaM4rSKbQA7ikuzsF0K4n9EMy4rAcRwf2f2sNvowwaROA=
+	t=1739182704; cv=none; b=aXhi9IW+tpNRMJEjT16Ubv2Icbgh1DRglQfZb4nVytm6sbei2KPvNZ0TML5wRQAhs42pOEzeSQA6fiDnzfpTDEjqIFFnGBpDKgp2R8z9otijkB/qcNluDoCAw/e2eHsqQJyn2fbeDOaCqbNRHguH5DeQBlYStFJvKlaeqYXfikI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1739182704; c=relaxed/simple;
-	bh=LI59JQtyPV/HF12ShAdqHJX2HFF3NXc8/5bk+IONPNM=;
+	bh=Tj1nz2RZBql0geo5lraeHUCDCc6IdX7LSdJsN5wj1mY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=raoHHuRsIlSqI0R0d7e/ryHcoViV9+i+huj+4s/YkWZHHAQ1UQ1196OApwfVM4UcWcirHilaqBhLfP0A/zvLpGy7OckzCK4w3x/eaVK+1rGi21ZgFhRWS66k93MSJqYWxukbvXFRiAwqmPLbss2ybzDMzQ3pMuy9A1M2t8m+Rdk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nO62iX7S; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFD75C4CEEB;
+	 MIME-Version; b=TT+stvLAcUFpEKtBvbImHQ0Dj/I+rli9lBcXZCNfygEPnEO4O7zj6PdZIz/HjapbrWDJq9/PofVKeSftm817wT0T+G88IbqpyvtpiouBbHqTLndS/0jKYqvVruJTUPPeS9xd8PRjDqmuWD4A8ahgTnLfLvv/VIHyvXx86435MlM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gkyTn+T4; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBB2BC4CEEE;
 	Mon, 10 Feb 2025 10:18:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1739182704;
-	bh=LI59JQtyPV/HF12ShAdqHJX2HFF3NXc8/5bk+IONPNM=;
+	bh=Tj1nz2RZBql0geo5lraeHUCDCc6IdX7LSdJsN5wj1mY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=nO62iX7S28S3shm7FksdxtyPreI2cGS6vi10HoQx+ObzswtwhDDeWQtpScBku+cfh
-	 gFhql5aAGvyOhNISZ5EmnbovIYanDSAbdfvNYT+CKFtBe6ShOJXPBPH62dZPUtSFsH
-	 /9DXMZ5Za8qeXXjLFCBjJMQBdOUmiKF9a8r90j1LbiNP7OuZPI3Fz/XJt3ZLjQ3cy7
-	 OMmb8sI73yuK0P0M54zqtxXza6o7rx4Jrr4iEiW7RQFwdUnO4k3Fsk2ZOmgg/S37TM
-	 /1gYxlDf5k72He6hNuyZAtv/irgoR/KpiU0WidVNS2SX97c5eB1TEpJO0gNkTo0o2C
-	 8nocUmRXPqJ7A==
+	b=gkyTn+T46XmjwUvB/NsFZsATTY/D6pP/CIlfrDaTdKfLuO7Kd+EPuT2Q0fOpEGyRp
+	 U4I8VplC4l0zulyZbxvHIU2A5wUEyR3x6TXDHdVF2JSnmKY47bYLha5H17eE/0Fgdr
+	 F7WFjVRuy/POEFg/mIPz9fypejZtXihLQJZc9PMxZOqUvybP9GYM+cC77fMPLZQzbT
+	 eEsb7flvm3GCMb8uR0AsnDXaR8ilHtSN875HSnv434GiNHrHtWkwzpce7D0zIvh0/T
+	 2mppWRtGG2Oe8X7LnxSdXktEELekU1oBMMmKUYVYpKSAH6gfPnV6gxkw/ii0YImvm2
+	 qUGi38cKe2Hhg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1thQru-00000006Cia-0CEy;
+	id 1thQru-00000006Cie-0IyP;
 	Mon, 10 Feb 2025 11:18:22 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Chao Yu <mchehab+huawei@kernel.org>,
-	Jaegeuk Kim <mchehab+huawei@kernel.org>,
-	linux-f2fs-devel@lists.sourceforge.net,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 07/27] ABI: sysfs-fs-f2fs: fix date tags
-Date: Mon, 10 Feb 2025 11:17:56 +0100
-Message-ID: <336ab631c0636e419282a38e7dd5b5cfb52fcd2d.1739182025.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 08/27] ABI: sysfs-power: fix a what tag
+Date: Mon, 10 Feb 2025 11:17:57 +0100
+Message-ID: <508051136ea2e07e0dd7fa41ff40382387c24ba8.1739182025.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1739182025.git.mchehab+huawei@kernel.org>
 References: <cover.1739182025.git.mchehab+huawei@kernel.org>
@@ -69,36 +66,29 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Some date tags are missing colons. Add them to comply with
-ABI description and produce right results when converted to html/pdf.
+There is one What tag that it is using semicolon instead of colon.
+
+Fix it to comply with ABI description and produce right results when
+converted to html/pdf.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/ABI/testing/sysfs-fs-f2fs | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/ABI/testing/sysfs-power | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 3e1630c70d8a..e44bb614964b 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -347,7 +347,7 @@ Description:	Used to control configure extension list:
- 		- [c] means add/del cold file extension
+diff --git a/Documentation/ABI/testing/sysfs-power b/Documentation/ABI/testing/sysfs-power
+index a3942b1036e2..2192478e83cf 100644
+--- a/Documentation/ABI/testing/sysfs-power
++++ b/Documentation/ABI/testing/sysfs-power
+@@ -131,7 +131,7 @@ Description:
+ 		CAUTION: Using it will cause your machine's real-time (CMOS)
+ 		clock to be set to a random invalid time after a resume.
  
- What:		/sys/fs/f2fs/<disk>/unusable
--Date		April 2019
-+Date:		April 2019
- Contact:	"Daniel Rosenberg" <drosen@google.com>
- Description:	If checkpoint=disable, it displays the number of blocks that
- 		are unusable.
-@@ -355,7 +355,7 @@ Description:	If checkpoint=disable, it displays the number of blocks that
- 		would be unusable if checkpoint=disable were to be set.
- 
- What:		/sys/fs/f2fs/<disk>/encoding
--Date		July 2019
-+Date:		July 2019
- Contact:	"Daniel Rosenberg" <drosen@google.com>
- Description:	Displays name and version of the encoding set for the filesystem.
- 		If no encoding is set, displays (none)
+-What;		/sys/power/pm_trace_dev_match
++What:		/sys/power/pm_trace_dev_match
+ Date:		October 2010
+ Contact:	James Hogan <jhogan@kernel.org>
+ Description:
 -- 
 2.48.1
 
