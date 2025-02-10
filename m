@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-37551-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37545-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56483A2E908
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:19:05 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFDD6A2E900
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E5942162C02
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:19:03 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D55AC3A5933
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:18:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7339F1DF977;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F8481DEFD2;
 	Mon, 10 Feb 2025 10:18:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PSuyVYxs"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JOB2SwnE"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C1751DE88C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 150EA1D5CE8;
 	Mon, 10 Feb 2025 10:18:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739182705; cv=none; b=YIztloD1iAvrVfRRiMcGIbeZNXrH8WbtEXu7fL05KfIoMpLdTfqNX8IZOY7q/muK25ECUhbwjwhqXigbxRBF4si481v6S9ssKmxJg2+c4mJA5Ay37dU3WMFjaIttUuVumkN257ruAqFih5gXr0n2QVrvb8F3CCaCabwrAjZJxuw=
+	t=1739182705; cv=none; b=VSe50Kj5rBhcjRyhIfKRKopqgjVKV68Ob4IKBzOuDzUuUIhfPGYQ0TVwgvlc4TRxTLxkCh0MZN0BIWDmv1aiTlbsn+FQHsqglgC8+tMnvGhLLEdRv7TIPiivcNgNG+t2vb73Qvf4lHGRkj7f7aJemrnYWf49qb/lJ7sXV0aNHO8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1739182705; c=relaxed/simple;
-	bh=AgZgjsWlXG6CLe0lkuaH95ZdpSYmb1IEeyegxlm7uno=;
+	bh=5Ehk+UnXsY+f4nC8KlN3P04pRtl7e+QgRfiunel5DWg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=J2hHHPu2NZa1dEqWohchMW2m4zd3NIhUIaCaswmAThIppcNxzUf8OCw6/erCruTYU3mKIr70H6MnAV7Mqem5Yj6mZYtu5IA1D+7LeRS9rZN2NholVmwXCn+VrvDSglSoZgAaEKktlNujRysJeAV+4v8cocezzrDGCRAODBS4WoA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PSuyVYxs; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3569CC4CEFE;
+	 MIME-Version; b=EXkeOOziBPdgN5w/gZq0ckSevCY5ddGq6LAcEP9k3qfwW+eGOwJ/42gDZmSfGk8XnisNpMalNnURGAsbTf8ll+MADaDQO9CbmeXa4rJscf4xJnsm56cZvAdOj2jkVpMIYVZz3OsSCnfOwTWH8XiffVaRHGrwvdRCnqJWQBIgL0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JOB2SwnE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E829C116D0;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1739182704;
-	bh=AgZgjsWlXG6CLe0lkuaH95ZdpSYmb1IEeyegxlm7uno=;
+	bh=5Ehk+UnXsY+f4nC8KlN3P04pRtl7e+QgRfiunel5DWg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=PSuyVYxsCe57ajvGphKwFMfxv95i4EQhsqHxLKP3zMy8yBLV82VsvM4yK1V4snjcx
-	 VYZuf95Ts35b5AsFHbU19H7AIw1+Iqo8SJ8fwKG5cEJWEwmXYMCFJYfuGhETlZsj4c
-	 bpdYAg8QcMGqa2UWe1LuuFZyXuc76dmxLGEV8p9VtBUdRCOC5/dPYqgdz90tVmQ3lt
-	 LSHR6tNBKvNjHfIPb5J0EPinj7/niJ2TWqGYope2yzFgufCHWUjplfzMqoYkvQhMlc
-	 PGKy+W2cPSlxgDLLrbyrR7U/ImrvF4NuK602BetNeMNgWxf4YMsBmDcZav5i7xVZ3v
-	 ut1eMrE6LZa8g==
+	b=JOB2SwnEwLEat9BCdCQ8eJtn2FdkoUJfMDpEMoohH34xD34BjnamPjqmgBlDcWt98
+	 prp8/UxdPNnmXBLmLb6x8arPl2Hze3U777bjN/nUdU9xd+1xqRxQpGFN7LEYIeFb8F
+	 tzZwmjj2eWVehRDGp5ODZL+PJrvRBAyWCE79LbvL8P2TIKHVKRzFxZpKWgE99YIHIw
+	 0ns9HKVw/Y1KyPH4co5CDxJ+OpNEWKomsjj7ElFbQzRtVPCccls+r/Oz2m4x/pKYC5
+	 vlmkt2UlcclHvSBkPNIDQomkIq98qtPIkqD7blIqbTWxWHHi7pev4xcgVvrZESq9tI
+	 iEfsO0+170dUA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1thQru-00000006CjQ-1cfu;
+	id 1thQru-00000006CjU-1jh5;
 	Mon, 10 Feb 2025 11:18:22 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -51,9 +51,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 20/27] docs: sphinx/kernel_abi: parse ABI files only once
-Date: Mon, 10 Feb 2025 11:18:09 +0100
-Message-ID: <5205c53838b6ea25f4cdd4cc1e3d17c0141e75a6.1739182025.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 21/27] docs: admin-guide/abi: split files from symbols
+Date: Mon, 10 Feb 2025 11:18:10 +0100
+Message-ID: <30e3cf2a8aeef23ca889de60a90f7de141e0dc0e.1739182025.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1739182025.git.mchehab+huawei@kernel.org>
 References: <cover.1739182025.git.mchehab+huawei@kernel.org>
@@ -66,259 +66,163 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Right now, the logic parses ABI files on 4 steps, one for each
-directory. While this is fine in principle, by doing that, not
-all symbol cross-references will be created.
+Now that get_abi has gained support for filtering its output,
+split ABI symbols from files at the html output.
 
-Change the logic to do the parsing only once in order to get
-a global dictionary to be used when creating ABI cross-references.
+That makes pages smaller and easier to navigate.
+
+As an additional bonus, as it will paralelize files handling,
+it gives an additional performance improvement.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/admin-guide/abi-obsolete.rst |   2 +-
- Documentation/admin-guide/abi-removed.rst  |   2 +-
- Documentation/admin-guide/abi-stable.rst   |   2 +-
- Documentation/admin-guide/abi-testing.rst  |   2 +-
- Documentation/sphinx/kernel_abi.py         | 115 ++++++++++++---------
- scripts/lib/abi/abi_parser.py              |  22 ++--
- 6 files changed, 81 insertions(+), 64 deletions(-)
+ Documentation/admin-guide/abi-obsolete-files.rst |  7 +++++++
+ Documentation/admin-guide/abi-obsolete.rst       |  1 +
+ Documentation/admin-guide/abi-readme-file.rst    |  6 ++++++
+ Documentation/admin-guide/abi-removed-files.rst  |  7 +++++++
+ Documentation/admin-guide/abi-removed.rst        |  1 +
+ Documentation/admin-guide/abi-stable-files.rst   |  7 +++++++
+ Documentation/admin-guide/abi-stable.rst         |  1 +
+ Documentation/admin-guide/abi-testing-files.rst  |  7 +++++++
+ Documentation/admin-guide/abi-testing.rst        |  1 +
+ Documentation/admin-guide/abi.rst                | 15 +++++++++++++++
+ 10 files changed, 53 insertions(+)
+ create mode 100644 Documentation/admin-guide/abi-obsolete-files.rst
+ create mode 100644 Documentation/admin-guide/abi-readme-file.rst
+ create mode 100644 Documentation/admin-guide/abi-removed-files.rst
+ create mode 100644 Documentation/admin-guide/abi-stable-files.rst
+ create mode 100644 Documentation/admin-guide/abi-testing-files.rst
 
+diff --git a/Documentation/admin-guide/abi-obsolete-files.rst b/Documentation/admin-guide/abi-obsolete-files.rst
+new file mode 100644
+index 000000000000..3061a916b4b5
+--- /dev/null
++++ b/Documentation/admin-guide/abi-obsolete-files.rst
+@@ -0,0 +1,7 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Obsolete ABI Files
++==================
++
++.. kernel-abi:: obsolete
++   :no-symbols:
 diff --git a/Documentation/admin-guide/abi-obsolete.rst b/Documentation/admin-guide/abi-obsolete.rst
-index 6d4d9ab7b8c3..bdef91d2cea4 100644
+index bdef91d2cea4..640f3903e847 100644
 --- a/Documentation/admin-guide/abi-obsolete.rst
 +++ b/Documentation/admin-guide/abi-obsolete.rst
-@@ -9,4 +9,4 @@ marked to be removed at some later point in time.
- The description of the interface will document the reason why it is
+@@ -10,3 +10,4 @@ The description of the interface will document the reason why it is
  obsolete and when it can be expected to be removed.
  
--.. kernel-abi:: ABI/obsolete
-+.. kernel-abi:: obsolete
+ .. kernel-abi:: obsolete
++   :no-files:
+diff --git a/Documentation/admin-guide/abi-readme-file.rst b/Documentation/admin-guide/abi-readme-file.rst
+new file mode 100644
+index 000000000000..6172e4ccbda2
+--- /dev/null
++++ b/Documentation/admin-guide/abi-readme-file.rst
+@@ -0,0 +1,6 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++ABI README
++==========
++
++.. kernel-abi:: README
+diff --git a/Documentation/admin-guide/abi-removed-files.rst b/Documentation/admin-guide/abi-removed-files.rst
+new file mode 100644
+index 000000000000..f1bdfadd2ec4
+--- /dev/null
++++ b/Documentation/admin-guide/abi-removed-files.rst
+@@ -0,0 +1,7 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Removed ABI Files
++=================
++
++.. kernel-abi:: removed
++   :no-symbols:
 diff --git a/Documentation/admin-guide/abi-removed.rst b/Documentation/admin-guide/abi-removed.rst
-index 9fc78af6f077..bea0608b8442 100644
+index bea0608b8442..88832d3eacd6 100644
 --- a/Documentation/admin-guide/abi-removed.rst
 +++ b/Documentation/admin-guide/abi-removed.rst
-@@ -3,4 +3,4 @@
- ABI removed symbols
+@@ -4,3 +4,4 @@ ABI removed symbols
  ===================
  
--.. kernel-abi:: ABI/removed
-+.. kernel-abi:: removed
+ .. kernel-abi:: removed
++   :no-files:
+diff --git a/Documentation/admin-guide/abi-stable-files.rst b/Documentation/admin-guide/abi-stable-files.rst
+new file mode 100644
+index 000000000000..f867738fc178
+--- /dev/null
++++ b/Documentation/admin-guide/abi-stable-files.rst
+@@ -0,0 +1,7 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Stable ABI Files
++================
++
++.. kernel-abi:: stable
++   :no-symbols:
 diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
-index c47c2a295865..33637c0d4fd5 100644
+index 33637c0d4fd5..528c68401f4b 100644
 --- a/Documentation/admin-guide/abi-stable.rst
 +++ b/Documentation/admin-guide/abi-stable.rst
-@@ -12,4 +12,4 @@ for at least 2 years.
- Most interfaces (like syscalls) are expected to never change and always
+@@ -13,3 +13,4 @@ Most interfaces (like syscalls) are expected to never change and always
  be available.
  
--.. kernel-abi:: ABI/stable
-+.. kernel-abi:: stable
+ .. kernel-abi:: stable
++   :no-files:
+diff --git a/Documentation/admin-guide/abi-testing-files.rst b/Documentation/admin-guide/abi-testing-files.rst
+new file mode 100644
+index 000000000000..1da868e42fdb
+--- /dev/null
++++ b/Documentation/admin-guide/abi-testing-files.rst
+@@ -0,0 +1,7 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++Testing ABI Files
++=================
++
++.. kernel-abi:: testing
++   :no-symbols:
 diff --git a/Documentation/admin-guide/abi-testing.rst b/Documentation/admin-guide/abi-testing.rst
-index 40b31985e587..55054985a8ff 100644
+index 55054985a8ff..6153ebd38e2d 100644
 --- a/Documentation/admin-guide/abi-testing.rst
 +++ b/Documentation/admin-guide/abi-testing.rst
-@@ -18,4 +18,4 @@ Programs that use these interfaces are strongly encouraged to add their
- name to the description of these interfaces, so that the kernel
+@@ -19,3 +19,4 @@ name to the description of these interfaces, so that the kernel
  developers can easily notify them if any changes occur.
  
--.. kernel-abi:: ABI/testing
-+.. kernel-abi:: testing
-diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index 0a4057183208..964f586de171 100644
---- a/Documentation/sphinx/kernel_abi.py
-+++ b/Documentation/sphinx/kernel_abi.py
-@@ -49,6 +49,13 @@ from abi_parser import AbiParser
+ .. kernel-abi:: testing
++   :no-files:
+diff --git a/Documentation/admin-guide/abi.rst b/Documentation/admin-guide/abi.rst
+index 64e772bde943..15a2dcb1388c 100644
+--- a/Documentation/admin-guide/abi.rst
++++ b/Documentation/admin-guide/abi.rst
+@@ -4,6 +4,9 @@
+ Linux ABI description
+ =====================
  
- __version__ = "1.0"
- 
-+logger = logging.getLogger('kernel_abi')
-+path = os.path.join(srctree, "Documentation/ABI")
++ABI symbols
++-----------
 +
-+# Parse ABI symbols only once
-+kernel_abi = AbiParser(path, logger=logger)
-+kernel_abi.parse_abi()
-+kernel_abi.check_issues()
+ .. toctree::
+    :maxdepth: 2
  
- def setup(app):
- 
-@@ -64,14 +71,15 @@ class KernelCmd(Directive):
-     u"""KernelABI (``kernel-abi``) directive"""
- 
-     required_arguments = 1
--    optional_arguments = 2
-+    optional_arguments = 3
-     has_content = False
-     final_argument_whitespace = True
--    logger = logging.getLogger('kernel_abi')
-     parser = None
- 
-     option_spec = {
-         "debug": directives.flag,
-+        "no-symbols": directives.flag,
-+        "no-files":  directives.flag,
-     }
- 
-     def run(self):
-@@ -79,62 +87,67 @@ class KernelCmd(Directive):
-         if not doc.settings.file_insertion_enabled:
-             raise self.warning("docutils: file insertion disabled")
- 
--        path = os.path.join(srctree, "Documentation", self.arguments[0])
--        self.parser = AbiParser(path, logger=self.logger)
--        self.parser.parse_abi()
--        self.parser.check_issues()
--
--        node = self.nested_parse(None, self.arguments[0])
--        return node
--
--    def nested_parse(self, data, fname):
-         env = self.state.document.settings.env
-         content = ViewList()
-         node = nodes.section()
- 
--        if data is not None:
--            # Handles the .rst file
--            for line in data.split("\n"):
--                content.append(line, fname, 0)
-+        abi_type = self.arguments[0]
- 
--            self.do_parse(content, node)
-+        if "no-symbols" in self.options:
-+            show_symbols = False
-+        else:
-+            show_symbols = True
- 
-+        if "no-files" in self.options:
-+            show_file = False
-+        else:
-+            show_file = True
+@@ -11,3 +14,15 @@ Linux ABI description
+    abi-testing
+    abi-obsolete
+    abi-removed
 +
-+        tab_width = self.options.get('tab-width',
-+                                     self.state.document.settings.tab_width)
++ABI files
++---------
 +
-+        old_f = None
-+        n = 0
-+        n_sym = 0
-+        for msg, f, ln in kernel_abi.doc(show_file=show_file,
-+                                            show_symbols=show_symbols,
-+                                            filter_path=abi_type):
-+            n_sym += 1
-+            msg_list = statemachine.string2lines(msg, tab_width,
-+                                                 convert_whitespace=True)
-+            if "debug" in self.options:
-+                lines = [
-+                    "", "",  ".. code-block:: rst",
-+                    "    :linenos:", ""
-+                ]
-+                for m in msg_list:
-+                    lines.append("    " + m)
-+            else:
-+                lines = msg_list
++.. toctree::
++   :maxdepth: 2
 +
-+            for line in lines:
-+                # sphinx counts lines from 0
-+                content.append(line, f, ln - 1)
-+                n += 1
-+
-+            if f != old_f:
-+                # Add the file to Sphinx build dependencies
-+                env.note_dependency(os.path.abspath(f))
-+
-+                old_f = f
-+
-+            # Sphinx doesn't like to parse big messages. So, let's
-+            # add content symbol by symbol
-+            if content:
-+                self.do_parse(content, node)
-+                content = ViewList()
-+
-+        if show_symbols and not show_file:
-+            logger.verbose("%s ABI: %i symbols (%i ReST lines)" % (abi_type, n_sym, n))
-+        elif not show_symbols and show_file:
-+            logger.verbose("%s ABI: %i files (%i ReST lines)" % (abi_type, n_sym, n))
-         else:
--            # Handles the ABI parser content, symbol by symbol
--
--            old_f = fname
--            n = 0
--            for msg, f, ln in self.parser.doc():
--                msg_list = statemachine.string2lines(msg, tab_width,
--                                                     convert_whitespace=True)
--                if "debug" in self.options:
--                    lines = [
--                        "", "",  ".. code-block:: rst",
--                        "    :linenos:", ""
--                    ]
--                    for m in msg_list:
--                        lines.append("    " + m)
--                else:
--                    lines = msg_list
--
--                for line in lines:
--                    # sphinx counts lines from 0
--                    content.append(line, f, ln - 1)
--                    n += 1
--
--                if f != old_f:
--                    # Add the file to Sphinx build dependencies
--                    env.note_dependency(os.path.abspath(f))
--
--                    old_f = f
--
--                # Sphinx doesn't like to parse big messages. So, let's
--                # add content symbol by symbol
--                if content:
--                    self.do_parse(content, node)
--                    content = ViewList()
--
--            self.logger.info("%s: parsed %i lines" % (fname, n))
-+            logger.verbose("%s ABI: %i data (%i ReST lines)" % (abi_type, n_sym, n))
- 
-         return node.children
- 
-diff --git a/scripts/lib/abi/abi_parser.py b/scripts/lib/abi/abi_parser.py
-index 6fac461d794c..87d1b9e14bb3 100644
---- a/scripts/lib/abi/abi_parser.py
-+++ b/scripts/lib/abi/abi_parser.py
-@@ -266,12 +266,20 @@ class AbiParser:
-     def parse_readme(self, nametag, fname):
-         """Parse ABI README file"""
- 
-+        nametag["what"] = ["ABI file contents"]
-+        nametag["path"] = "README"
-         with open(fname, "r", encoding="utf8", errors="backslashreplace") as fp:
--            nametag["description"] = "```\n"
-             for line in fp:
--                nametag["description"] += "  " + line
-+                match = self.re_tag.match(line)
-+                if match:
-+                    new = match.group(1).lower()
- 
--            nametag["description"] += "```\n"
-+                    match = self.re_valid.search(new)
-+                    if match:
-+                        nametag["description"] += "\n:" + line
-+                        continue
-+
-+                nametag["description"] += line
- 
-     def parse_file(self, fname, path, basename):
-         """Parse a single file"""
-@@ -459,12 +467,8 @@ class AbiParser:
-                     continue
- 
-             if filter_path:
--                if filter_path == "README":
--                    if not names[0].endswith("README"):
--                        continue
--                else:
--                    if v.get("path") != filter_path:
--                        continue
-+                if v.get("path") != filter_path:
-+                    continue
- 
-             msg = ""
- 
++   abi-readme-file
++   abi-stable-files
++   abi-testing-files
++   abi-obsolete-files
++   abi-removed-files
 -- 
 2.48.1
 
