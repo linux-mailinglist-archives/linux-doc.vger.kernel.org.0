@@ -1,133 +1,190 @@
-Return-Path: <linux-doc+bounces-37521-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37523-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9998A2E6F4
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 09:51:44 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E39A6A2E833
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:51:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 33E50188761B
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 08:51:45 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 65A483A9870
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 09:51:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 063E81C2304;
-	Mon, 10 Feb 2025 08:51:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C62921C3C01;
+	Mon, 10 Feb 2025 09:51:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b="kDKx3syL"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="QWMoJ5gO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7013B1BEF93
-	for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 08:51:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 045742E628;
+	Mon, 10 Feb 2025 09:51:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739177481; cv=none; b=EI/3nR7eFD+iPkt+y3R7oVHDud+cFCP+t7y5rFQftkRGCGqnOEUC0VsDzV1hseLpYrWk3+CBg2yPQojvLACvutzyb7oagwJKpsuYLcGaHo17xVuhO8Zta8Oopz9RBafjFGJbIb/u/HPgLJ9NqCKExTueQXeNM27ywb8MmqMWChU=
+	t=1739181067; cv=none; b=rJb4nmAbfekHXNOZf3CjBHniI77uAxDnAUDVvS5iqRpv1pIEKHkW8s/jr0qff09JHyMyEVf6V6pDVVkpoJUlNFkffNrN6YIIAhHeZJwaNp13DE/WLOAhKmaYTduiL7qv12C/S4RPMFOM3FfkfGCa0x5RoHQtvn+Ll/0n/PhLAak=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739177481; c=relaxed/simple;
-	bh=VSzvEUtYvjxhDq0cVB8QwX2GVIYpCJhal4JA989MpgU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ecANZdl3D4K4piKiQceWya/axvHfzz+qBOd5Tfk9WosrKgJvURbVWV3JhQpI0WrraRRkEhGH2Rgx10w17jf7AjJIxny/Q/21TQGD3b/CXRAa7ZSKrJe3VUAD1gYbiheD2vrXrKtCQeswQQupyAiSOBucZxU6s0n29Tn2S1PrdhM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com; spf=pass smtp.mailfrom=bytedance.com; dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b=kDKx3syL; arc=none smtp.client-ip=209.85.214.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bytedance.com
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2162b5d2e1fso8091365ad.3
-        for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 00:51:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1739177479; x=1739782279; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=utidBFegZ51RGnMTlrNDFUXWPuVtA3XlELFoY8vS94Q=;
-        b=kDKx3syL6JUbijii361+LOUCkKZotau11RmUB/U6nMDXQmkCUx7uOiEmurKL3GCQA1
-         aJ09NECtPyIHFxSL4lJf/7oPxKPtkOiVAjdL4usYb/P3YMP9IndfIdx40ph14oPZTC4j
-         f8tNoWIhSWsADbHQTdBBaMovrvIFRV3R4ddAoQvsJv2CKEhqW1/EP6Hoh1qrKhug1v+j
-         MmkoU8Qzrqj/mi6k5tnrblUkEvQWfy2Wvn6e9onSdvpcjSrDT0YwB0BDqnBuqoKfc7hz
-         yV8bn/CEeV3nSmV+Hsv59Jhqo/Q2/+JMxMx115O60oMiXVav9XxbDc32U4z3da8g25dM
-         NwCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739177479; x=1739782279;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=utidBFegZ51RGnMTlrNDFUXWPuVtA3XlELFoY8vS94Q=;
-        b=YZ5P8j008qWgFHuBjirFwXXQ3fonsVYCU54nJLS9/sIp9vsF4u18Na2+0l292thvtk
-         CT+krBKr6ad3ELvsFkxFmkfifP0iMMN3gNazRZmPnhM4K1ib5iE/1XtSqeYQg6S8X6hQ
-         80HaICFnUu1tj76fGCc8n0kmbwm52VtrE9tyTRTp59HLHoGIUAw85/93zMpkWTYQ+G8Z
-         /g/UP8VPhSTSTrz8KgyRkSz2p9R8mHc7FwNZPsgAhj/h9dAtRMtsyktmdjtA5PRZQC5Y
-         WPYtf8OSxri8mvgP3z86FpyyTtgt1XoVXgGZ3C/3jTf9YZfWVlCZ6BBipA1c2fzEOKEa
-         KWBA==
-X-Forwarded-Encrypted: i=1; AJvYcCXV1quXdDJn5x6HJ4TJm8kIK6sAhcQHunfC8StAIg/QLrme9wkCh870hxtrJnzIVS2hWvQgC55p+gw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxZTisM/vCQV4KlAPkgIAxv3cPhcjDGF7xuGA1qDxFsD9homvHg
-	l82ZrwyQRDeaPKHvm5W5YK+bf+ixnwZKSTZKbp1K3TPSm8Txf5/NNWUezQQy/tA=
-X-Gm-Gg: ASbGnct44Jl5Xu0dLKhBPALHkbMUrW1KVFTbVJCjhyVCn4YoXTb1SjlM2y/vWX6VYtt
-	+Pf8YrzRutEmQMw8oECefznJ5V9GtumNCA6PzD4Jnr4yvMDTbr2CNDmd0Yaoe05bv1bKj7OWGB7
-	gzE3hve4Io2Eg0R3NMxsI1wQDLuCVjUvU8Kfc7MRR0xhuPRRuCInDWSYyCIiNMnzSAzkLVjecNw
-	Z7Q58NVKHbDCyge5besGOElX0agXClz5oMlD0OBp9GdfcJVJi8AOiFh5UqoAOnFvqaFuY8YokIA
-	Utdk86WDjhaai3LAkFd7FXeD6yPEoaulG/lA
-X-Google-Smtp-Source: AGHT+IFUAdqXpu41mRA06Wl+FpWQb86T1CsWpESUEKDSpA71vOybRUd1sXXsypiSFJ1qz8iIhavMOw==
-X-Received: by 2002:a17:902:f791:b0:215:2bfb:3cd7 with SMTP id d9443c01a7336-21f4e758bfamr82501645ad.10.1739177479311;
-        Mon, 10 Feb 2025 00:51:19 -0800 (PST)
-Received: from [10.4.234.23] ([139.177.225.244])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-21f3687c7b6sm72982115ad.196.2025.02.10.00.51.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 10 Feb 2025 00:51:18 -0800 (PST)
-Message-ID: <271250dc-d54d-4eb8-9d73-0535d2a24a26@bytedance.com>
-Date: Mon, 10 Feb 2025 16:51:09 +0800
+	s=arc-20240116; t=1739181067; c=relaxed/simple;
+	bh=L/47NT1D33AXwhb7bm+RpJCwbuPNbjYzSmLMznvjFWw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ObhMYx9gh23jvTv45/YpdxSGr2aU2ol5nMFxujV6WbMHKUzo6is4MPofJFYc9iI9+ZXBJJC26NDmJpxV/RZpfqv7krDSGIbpvyEqW/omlL3flt1jgeFABNdqIBk9baDvMlgHA4QzvFm/9RP7G1tLZ20ut6NGfFtr94bc5CLvHas=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=QWMoJ5gO; arc=none smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1739181066; x=1770717066;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=L/47NT1D33AXwhb7bm+RpJCwbuPNbjYzSmLMznvjFWw=;
+  b=QWMoJ5gOmbr1ei3AfxJZ4WdPbw+/zj46qq2SJQzE77gqegORRziW9XSX
+   U9XsF4iJMNQ/DRQoiwzePgZenCMvdcub3rH0bZLmZ7JPwEaTYGNQz1l4T
+   QQrrLbiKfpd1VKfjnuEZf726n+5prXwYwiKOcHo0+JcYl5HeudUH0wPTI
+   brNxxrOksP7X1w/O9ggNNUlA5sBK3RmrVNosJfsZTZHOiAn+N3LSdGjVp
+   g7/CV9PbUqlND9uDLiq4nVT6NsaFEo3B45Z3c51YedstqJ2FmEiXLvpk2
+   kb7JkAqoe94c5qYXuRMM+YA0j6T51SfHeR0JPXBNWQJ6c4pggwmcknku0
+   Q==;
+X-CSE-ConnectionGUID: MykdgzrHTvirkLw2jCF5HQ==
+X-CSE-MsgGUID: B5JxyzdJTW2g8mTyNl9kEw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11340"; a="42595860"
+X-IronPort-AV: E=Sophos;i="6.13,274,1732608000"; 
+   d="scan'208";a="42595860"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 01:51:05 -0800
+X-CSE-ConnectionGUID: xmjUZU8AToy/ZXqkagaATg==
+X-CSE-MsgGUID: Q/eVqaqlQgO8mCvrCPpGMA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,274,1732608000"; 
+   d="scan'208";a="112777594"
+Received: from mev-dev.igk.intel.com ([10.237.112.144])
+  by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 01:51:00 -0800
+Date: Mon, 10 Feb 2025 10:47:26 +0100
+From: Michal Swiatkowski <michal.swiatkowski@linux.intel.com>
+To: Tariq Toukan <tariqt@nvidia.com>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>, netdev@vger.kernel.org,
+	Saeed Mahameed <saeedm@nvidia.com>, Gal Pressman <gal@nvidia.com>,
+	Leon Romanovsky <leonro@nvidia.com>,
+	Simon Horman <horms@kernel.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Jiri Pirko <jiri@resnulli.us>, Jonathan Corbet <corbet@lwn.net>,
+	Leon Romanovsky <leon@kernel.org>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	John Fastabend <john.fastabend@gmail.com>,
+	Richard Cochran <richardcochran@gmail.com>,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-rdma@vger.kernel.org, bpf@vger.kernel.org,
+	William Tu <witu@nvidia.com>
+Subject: Re: [PATCH net-next 06/15] net/mlx5e: reduce the max log mpwrq sz
+ for ECPF and reps
+Message-ID: <Z6nLLsMa4njyLrIV@mev-dev.igk.intel.com>
+References: <20250209101716.112774-1-tariqt@nvidia.com>
+ <20250209101716.112774-7-tariqt@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Re: [PATCH v2 0/3] Fix and cleanup and extend cpu.stat
-Content-Language: en-US
-To: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>
-Cc: =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
- Jonathan Corbet <corbet@lwn.net>, Ingo Molnar <mingo@redhat.com>,
- Peter Zijlstra <peterz@infradead.org>, Juri Lelli <juri.lelli@redhat.com>,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Dietmar Eggemann <dietmar.eggemann@arm.com>,
- Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>,
- Mel Gorman <mgorman@suse.de>, Valentin Schneider <vschneid@redhat.com>,
- Andrew Morton <akpm@linux-foundation.org>, Yury Norov
- <yury.norov@gmail.com>, Thomas Gleixner <tglx@linutronix.de>,
- Bitao Hu <yaoma@linux.alibaba.com>, Chen Ridong <chenridong@huawei.com>,
- "open list:CONTROL GROUP (CGROUP)" <cgroups@vger.kernel.org>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>
-References: <20250125052521.19487-1-wuyun.abel@bytedance.com>
- <bb16ae49-f591-4ab3-8d27-f649619b266b@bytedance.com>
- <Z6J8wbuXgiz_ly-q@slm.duckdns.org>
-From: Abel Wu <wuyun.abel@bytedance.com>
-In-Reply-To: <Z6J8wbuXgiz_ly-q@slm.duckdns.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250209101716.112774-7-tariqt@nvidia.com>
 
-On 2/5/25 4:46 AM, Tejun Heo Wrote:
-> On Mon, Feb 03, 2025 at 04:11:27PM +0800, Abel Wu wrote:
->> Ping :)
->>
->> On 1/25/25 1:25 PM, Abel Wu Wrote:
->>> Patch 1: fixes an issue that forceidle time can be inconsistant with
->>> other cputimes.
->>>
->>> Patch 2: cleans up the #ifdef mess in cpu.stat.
+On Sun, Feb 09, 2025 at 12:17:07PM +0200, Tariq Toukan wrote:
+> From: William Tu <witu@nvidia.com>
 > 
-> I wasn't sure whether the new code was materially better than the existing.
-> Can we try without this patch?
+> For the ECPF and representors, reduce the max MPWRQ size from 256KB (18)
+> to 128KB (17). This prepares the later patch for saving representor
+> memory.
 > 
->>> Patch 3: extend run_delay accounting to cgroup to show how severely
->>> a cgroup is stalled.
+> With Striding RQ, there is a minimum of 4 MPWQEs. So with 128KB of max
+> MPWRQ size, the minimal memory is 4 * 128KB = 512KB. When creating page
+> pool, consider 1500 mtu, the minimal page pool size will be 512KB/4KB =
+> 128 pages = 256 rx ring entries (2 entries per page).
 > 
-> I'm not necessarily against adding this. Johannes, what do you think?
+> Before this patch, setting RX ringsize (ethtool -G rx) to 256 causes
+> driver to allocate page pool size more than it needs due to max MPWRQ
+> is 256KB (18). Ex: 4 * 256KB = 1MB, 1MB/4KB = 256 pages, but actually
+> 128 pages is good enough. Reducing the max MPWRQ to 128KB fixes the
+> limitation.
+> 
+> Signed-off-by: William Tu <witu@nvidia.com>
+> Signed-off-by: Tariq Toukan <tariqt@nvidia.com>
+> ---
+>  drivers/net/ethernet/mellanox/mlx5/core/en.h      |  2 --
+>  .../net/ethernet/mellanox/mlx5/core/en/params.c   | 15 +++++++++++----
+>  2 files changed, 11 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/net/ethernet/mellanox/mlx5/core/en.h b/drivers/net/ethernet/mellanox/mlx5/core/en.h
+> index 979fc56205e1..534fdd27c8de 100644
+> --- a/drivers/net/ethernet/mellanox/mlx5/core/en.h
+> +++ b/drivers/net/ethernet/mellanox/mlx5/core/en.h
+> @@ -95,8 +95,6 @@ struct page_pool;
+>  #define MLX5_MPWRQ_DEF_LOG_STRIDE_SZ(mdev) \
+>  	MLX5_MPWRQ_LOG_STRIDE_SZ(mdev, order_base_2(MLX5E_RX_MAX_HEAD))
+>  
+> -#define MLX5_MPWRQ_MAX_LOG_WQE_SZ 18
+> -
+>  /* Keep in sync with mlx5e_mpwrq_log_wqe_sz.
+>   * These are theoretical maximums, which can be further restricted by
+>   * capabilities. These values are used for static resource allocations and
+> diff --git a/drivers/net/ethernet/mellanox/mlx5/core/en/params.c b/drivers/net/ethernet/mellanox/mlx5/core/en/params.c
+> index 64b62ed17b07..e37d4c202bba 100644
+> --- a/drivers/net/ethernet/mellanox/mlx5/core/en/params.c
+> +++ b/drivers/net/ethernet/mellanox/mlx5/core/en/params.c
+> @@ -10,6 +10,9 @@
+>  #include <net/page_pool/types.h>
+>  #include <net/xdp_sock_drv.h>
+>  
+> +#define MLX5_MPWRQ_MAX_LOG_WQE_SZ 18
+> +#define MLX5_REP_MPWRQ_MAX_LOG_WQE_SZ 17
+> +
+>  static u8 mlx5e_mpwrq_min_page_shift(struct mlx5_core_dev *mdev)
+>  {
+>  	u8 min_page_shift = MLX5_CAP_GEN_2(mdev, log_min_mkey_entity_size);
+> @@ -103,18 +106,22 @@ u8 mlx5e_mpwrq_log_wqe_sz(struct mlx5_core_dev *mdev, u8 page_shift,
+>  			  enum mlx5e_mpwrq_umr_mode umr_mode)
+>  {
+>  	u8 umr_entry_size = mlx5e_mpwrq_umr_entry_size(umr_mode);
+> -	u8 max_pages_per_wqe, max_log_mpwqe_size;
+> +	u8 max_pages_per_wqe, max_log_wqe_size_calc;
+> +	u8 max_log_wqe_size_cap;
+>  	u16 max_wqe_size;
+>  
+>  	/* Keep in sync with MLX5_MPWRQ_MAX_PAGES_PER_WQE. */
+>  	max_wqe_size = mlx5e_get_max_sq_aligned_wqebbs(mdev) * MLX5_SEND_WQE_BB;
+>  	max_pages_per_wqe = ALIGN_DOWN(max_wqe_size - sizeof(struct mlx5e_umr_wqe),
+>  				       MLX5_UMR_FLEX_ALIGNMENT) / umr_entry_size;
+> -	max_log_mpwqe_size = ilog2(max_pages_per_wqe) + page_shift;
+> +	max_log_wqe_size_calc = ilog2(max_pages_per_wqe) + page_shift;
+> +
+> +	WARN_ON_ONCE(max_log_wqe_size_calc < MLX5E_ORDER2_MAX_PACKET_MTU);
+>  
+> -	WARN_ON_ONCE(max_log_mpwqe_size < MLX5E_ORDER2_MAX_PACKET_MTU);
+> +	max_log_wqe_size_cap = mlx5_core_is_ecpf(mdev) ?
+> +			   MLX5_REP_MPWRQ_MAX_LOG_WQE_SZ : MLX5_MPWRQ_MAX_LOG_WQE_SZ;
+>  
+> -	return min_t(u8, max_log_mpwqe_size, MLX5_MPWRQ_MAX_LOG_WQE_SZ);
+> +	return min_t(u8, max_log_wqe_size_calc, max_log_wqe_size_cap);
 
-Hi Johannes, it would be very appreciated if you can take a look at this.
-The newest version is:
+Changing the variable name looks like uneccessary complication, as it is
+still used for the same purpouse.
 
-https://lore.kernel.org/lkml/20250209061322.15260-3-wuyun.abel@bytedance.com/
+I remember there were some patches to devlink for supporting changing
+the representor parameters. Is it sth different or you decided to only
+change the default value to fix the memory problem? (sorry, maybe I miss
+the devlink series).
 
-Thanks!
+Anyway, looks fine, thanks:
+Reviewed-by: Michal Swiatkowski <michal.swiatkowski@linux.intel.com>
 
+>  }
+>  
+>  u8 mlx5e_mpwrq_pages_per_wqe(struct mlx5_core_dev *mdev, u8 page_shift,
+> -- 
+> 2.45.0
 
