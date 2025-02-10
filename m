@@ -1,163 +1,353 @@
-Return-Path: <linux-doc+bounces-37621-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37623-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18CD3A2F8A3
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 20:27:54 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id A2814A2F8C9
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 20:38:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5156D188790B
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 19:27:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 41EF4188A4FB
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 19:38:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A7D6E2566FE;
-	Mon, 10 Feb 2025 19:27:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 283EF25742E;
+	Mon, 10 Feb 2025 19:38:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XC1jqVmk"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="UtP5y4Yr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7940B2566CB;
-	Mon, 10 Feb 2025 19:27:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28F201F4636
+	for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 19:38:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739215669; cv=none; b=OMMpPTPasbOi5/ZDC7FP3EdBtSug29erAO7d3DIkmjkDJcG2KdnziYLiIJIRH75kUveLNgSxEkSQZl/omUT22UPogxK1ao4oIbK6SnhpavpRe/7+Z8YY27QhTfVCwgbKtwyfzB780IX1Etwf0IGNB8CuidFnd6t6B1NWOYCTfrY=
+	t=1739216292; cv=none; b=mJuxSugWqclMoot2CFReDzRlhk22PoGXkdMRtSOqOBhnL/wINRQL8c4iqQBt4IKTo6bxJDJwHzo//DeNwjpIeAyyeiSzFSy/lDV+eeeTLaKbhqSb7LKavI2wcAcm/xbaIq5tncKZzcFnRoBNLPGDMPQ1HGr2Gj5MqyYQxvcM/sw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739215669; c=relaxed/simple;
-	bh=I1srf/if4T44Admu2U0Lb/obhkkyKynLmn43hK8odaA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fM9WXupB4oWgCVfExxFtHQks3VeLAhd4JP/tON8FkIc2fEMc3RJ3rPUEwpxiWPdhsRIZLbKASjzNDh5RD5M8tsc+zlB6JTsm4CsNvQ/fY4woaXlXxNeGs1gXSOlKRFesHQEoSk0OnIyRdtZ6ibTcgv23XgMQiO1SQKE9DhhYBwE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XC1jqVmk; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0932FC4CED1;
-	Mon, 10 Feb 2025 19:27:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1739215669;
-	bh=I1srf/if4T44Admu2U0Lb/obhkkyKynLmn43hK8odaA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=XC1jqVmkTGXmdNARhxDcMByE1sgwEe68PAo4peSTft+yvG7h4Kco6Q9zSctHzO9J8
-	 100+RSXWikuUDVSfPzKdubwp1QYXRxshu/dBN5whVXUebi2LEQkwQaiCwRp5sgtfOn
-	 jc3jK2BmDk7t+loX1C3f6iWdC1qYyqdSlzpH42+cfmy6oUBcC6VtB8rbEkXtnAZod1
-	 99xAqdSE9oODQ4gDYnZ6n+TyHOD7Y14ovzd0nSDD2co+AnQcOy4gxvgaK9sYO9p/nZ
-	 qjan9tk6vFmDrlZOwAtrurbpKmvEVNw2PT/eFWEeuBGN77dDjk4KI/Tgp6DoWOHIfJ
-	 w+O6GKmac9E+g==
-Message-ID: <2fe7a404-be2c-4ac8-8980-2b3d07a74bca@kernel.org>
-Date: Mon, 10 Feb 2025 20:27:34 +0100
+	s=arc-20240116; t=1739216292; c=relaxed/simple;
+	bh=apI3TaNZZL36DYa7Oiv1+x3h78ZZQgNoP4cKlZ77AWk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=l0r7DXfIYMgRt/zBREP26VKzNda1PVBpyD7f7Mj712t3UKsx/O3srIfGx8AdsUpScqYezTmJFWd5K+zdzcv6SKzdYa1/cjA0yZVaKkBvfA86YW4frr0aYRk2UByYJdjxAIeBlNEwCNTUEV0BTkJkryYw42W94TZRClIX4yZltXA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UtP5y4Yr; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1739216288;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=MCWz0QKB/3zA+wyPgSQYXWNTlsWbH4Vu3NwNK9eMowA=;
+	b=UtP5y4YrC1pXYufZxEZPPslSmSH/8v3Y3WvMrBxzNAnVt2I3Hx7OSsHo5YcuyHvM0L0BAc
+	zoOuc88gNEXhYq1M6XFVuli56bK2U47AaNNOsU/umrrbjMWvatKnnuKF0wQyiH2MO8iCqH
+	KIIHoh5XO5x/UNcjue3xUM8hVK+DfJs=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-488-w_nW1Mx1O9CcJEyITEOcWQ-1; Mon, 10 Feb 2025 14:38:07 -0500
+X-MC-Unique: w_nW1Mx1O9CcJEyITEOcWQ-1
+X-Mimecast-MFC-AGG-ID: w_nW1Mx1O9CcJEyITEOcWQ
+Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-4392fc6bceaso13131735e9.2
+        for <linux-doc@vger.kernel.org>; Mon, 10 Feb 2025 11:38:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739216286; x=1739821086;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=MCWz0QKB/3zA+wyPgSQYXWNTlsWbH4Vu3NwNK9eMowA=;
+        b=OfYGQ3cix656vXiq1oiKizRBtH7GRIJLRJ0rFE+PkPxbPIMVSs/YsmJ92UeJUSD00F
+         WHvTn+t/KqAwrx2Sed2/qAYRRPpEuPNiBlCq+OOfioHmBEeV/lHrRJ7tIvZGo38nGukI
+         ckpTvJ6f0YIkwVDPzpofiV7I69if2vq3Nklm9Ar0bqWnZFgMnq6V35AnQ+ylsmR0aoSX
+         n5IJnNaa4k97R3twd3uog8fFCaW1p4cJNsVKrDfVkWP5gDnnDJmpjHs9m/0WJjkpuiPD
+         pH3Mi9tnt1skiDRJfBuAZ+fSHFX41tthXqjHEm3orrBYvDo5fE9jylqo4kh0hzS3d+LC
+         ye6A==
+X-Gm-Message-State: AOJu0YzJVC18rEPSpPuojvBza9i2bzv51n8LHhuNlux6HjahUSoj1Ry6
+	x/0xzg+3jEoD9blQ4EPdEFEv0ckaW/4MiwlDMhGacgH2olujk6EDKipBnTcHqXeKehYckVzLwrq
+	Q1AJWO9eL1aIr6qyVmYSZlHRxdq0XVvfU1v9Bysl3lLn3AXXSKecJuCRlxw==
+X-Gm-Gg: ASbGncs5qw9vfxLXQDnl/h/ywQt4npj4szhGQZ8RR7cDXUJppbTR93BdJvHs986PXJp
+	YG21TGZqcbjY7V9iQ5OZsC8nwFhtFsLPsleC9YFrphrqwJWWx8CnJywFvsCv/uSXE7zAFNz0aBu
+	RnmyJr327BIJoha5oyDdBVIxJSY0XzhDxB9eJvONwLIjk69H/TMBUAlmH6gGkKrzcGFv3aCkeom
+	Hht2CaxuecfiMk1y1i41/cGNNi16xp8VIqppg0FkZlwioa66V4Q6G9lFRkAaqkCKItk/Y7PUXOK
+	SS7hvgQ4tU8KUHHkzSknsfjRMzDRHnT5Gye4Fh5f/EFrvA1ocF1XKoL+Z+JsaikUQQ==
+X-Received: by 2002:a05:600c:1e0e:b0:431:5e3c:2ff0 with SMTP id 5b1f17b1804b1-439249889a8mr117184855e9.8.1739216286106;
+        Mon, 10 Feb 2025 11:38:06 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEHEaOpDMG7a/03CRbYKSofR+ckzDf4tR3vs9lDmaTs2zKGFHodBnTigVeQlsjTuu7+8Xv9cw==
+X-Received: by 2002:a05:600c:1e0e:b0:431:5e3c:2ff0 with SMTP id 5b1f17b1804b1-439249889a8mr117184625e9.8.1739216285660;
+        Mon, 10 Feb 2025 11:38:05 -0800 (PST)
+Received: from localhost (p200300cbc734b80012c465cd348aaee6.dip0.t-ipconnect.de. [2003:cb:c734:b800:12c4:65cd:348a:aee6])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4390d94db77sm189019515e9.15.2025.02.10.11.38.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 10 Feb 2025 11:38:04 -0800 (PST)
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Cc: linux-doc@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linux-mm@kvack.org,
+	nouveau@lists.freedesktop.org,
+	linux-trace-kernel@vger.kernel.org,
+	linux-perf-users@vger.kernel.org,
+	damon@lists.linux.dev,
+	David Hildenbrand <david@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	=?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alex Shi <alexs@kernel.org>,
+	Yanteng Si <si.yanteng@linux.dev>,
+	Karol Herbst <kherbst@redhat.com>,
+	Lyude Paul <lyude@redhat.com>,
+	Danilo Krummrich <dakr@kernel.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Oleg Nesterov <oleg@redhat.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	SeongJae Park <sj@kernel.org>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Jann Horn <jannh@google.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	Peter Xu <peterx@redhat.com>,
+	Alistair Popple <apopple@nvidia.com>,
+	Jason Gunthorpe <jgg@nvidia.com>
+Subject: [PATCH v2 00/17] mm: fixes for device-exclusive entries (hmm)
+Date: Mon, 10 Feb 2025 20:37:42 +0100
+Message-ID: <20250210193801.781278-1-david@redhat.com>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 14/14] Documentation: KHO: Add memblock bindings
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Mike Rapoport <rppt@kernel.org>, linux-kernel@vger.kernel.org,
- Alexander Graf <graf@amazon.com>, Andrew Morton <akpm@linux-foundation.org>,
- Andy Lutomirski <luto@kernel.org>, Anthony Yznaga
- <anthony.yznaga@oracle.com>, Arnd Bergmann <arnd@arndb.de>,
- Ashish Kalra <ashish.kalra@amd.com>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Borislav Petkov <bp@alien8.de>, Catalin Marinas <catalin.marinas@arm.com>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- David Woodhouse <dwmw2@infradead.org>, Eric Biederman
- <ebiederm@xmission.com>, Ingo Molnar <mingo@redhat.com>,
- James Gowans <jgowans@amazon.com>, Jonathan Corbet <corbet@lwn.net>,
- Mark Rutland <mark.rutland@arm.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, "H. Peter Anvin"
- <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>,
- Pratyush Yadav <ptyadav@amazon.de>, Rob Herring <robh+dt@kernel.org>,
- Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
- Stanislav Kinsburskii <skinsburskii@linux.microsoft.com>,
- Steven Rostedt <rostedt@goodmis.org>, Thomas Gleixner <tglx@linutronix.de>,
- Tom Lendacky <thomas.lendacky@amd.com>, Usama Arif
- <usama.arif@bytedance.com>, Will Deacon <will@kernel.org>,
- devicetree@vger.kernel.org, kexec@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
- linux-mm@kvack.org, x86@kernel.org
-References: <20250206132754.2596694-1-rppt@kernel.org>
- <20250206132754.2596694-15-rppt@kernel.org>
- <45df0d7a-622a-4268-9683-c5c6067483c3@kernel.org>
- <Z6jFZII5b-j7hzkj@kernel.org>
- <a3cca0ed-64ca-4921-bb4c-27c0e06b78c6@kernel.org>
- <Z6kTCvex3DGhB-3C@kernel.org>
- <18529b1f-dc79-4c85-a485-a0a2cdd48670@kernel.org>
- <aa4ec16a-b35f-41b0-92f7-40b3eb64124a@kernel.org>
- <20250210191539.GA3765641@nvidia.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 fv0=
-In-Reply-To: <20250210191539.GA3765641@nvidia.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 10/02/2025 20:15, Jason Gunthorpe wrote:
-> On Sun, Feb 09, 2025 at 09:50:37PM +0100, Krzysztof Kozlowski wrote:
->>> Ah, neat, that would almost solve the problem but you wrote:
->>>
->>> +$id: http://devicetree.org/schemas/memblock/reserve_mem.yaml#
->>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->>>
->>> so no, this does not work like that. You use devicetree here namespace
->>> and ignore its rules.
->>
->> ... and that obviously is barely parseable, so maybe one more try:
->> "You use here devicetree namespace but ignore its rules."
-> 
-> It makes sense to me, there should be zero cross-over of the two
-> specs, KHO should be completely self defined and stand alone.
-> 
-> There is some documentation missing, I think. This yaml describes one
-> node type, but the entire overall structure of the fdt does not seem
-> to have documentation?
+Against mm-hotfixes-stable for now.
 
-A lot of ABI is missing there and undocumented like: node name (which
-for every standard DT would be a NAK), few properties. This binding
-describes only subset while skipping all the rest and effectively
-introducing implied/undocumented ABI.
+Discussing the PageTail() call in make_device_exclusive_range() with
+Willy, I recently discovered [1] that device-exclusive handling does
+not properly work with THP, making the hmm-tests selftests fail if THPs
+are enabled on the system.
 
-Best regards,
-Krzysztof
+Looking into more details, I found that hugetlb is not properly fenced,
+and I realized that something that was bugging me for longer -- how
+device-exclusive entries interact with mapcounts -- completely breaks
+migration/swapout/split/hwpoison handling of these folios while they have
+device-exclusive PTEs.
+
+The program below can be used to allocate 1 GiB worth of pages and
+making them device-exclusive on a kernel with CONFIG_TEST_HMM.
+
+Once they are device-exclusive, these folios cannot get swapped out
+(proc$pid/smaps_rollup will always indicate 1 GiB RSS no matter how
+much one forces memory reclaim), and when having a memory block onlined
+to ZONE_MOVABLE, trying to offline it will loop forever and complain about
+failed migration of a page that should be movable.
+
+# echo offline > /sys/devices/system/memory/memory136/state
+# echo online_movable > /sys/devices/system/memory/memory136/state
+# ./hmm-swap &
+... wait until everything is device-exclusive
+# echo offline > /sys/devices/system/memory/memory136/state
+[  285.193431][T14882] page: refcount:2 mapcount:0 mapping:0000000000000000
+  index:0x7f20671f7 pfn:0x442b6a
+[  285.196618][T14882] memcg:ffff888179298000
+[  285.198085][T14882] anon flags: 0x5fff0000002091c(referenced|uptodate|
+  dirty|active|owner_2|swapbacked|node=1|zone=3|lastcpupid=0x7ff)
+[  285.201734][T14882] raw: ...
+[  285.204464][T14882] raw: ...
+[  285.207196][T14882] page dumped because: migration failure
+[  285.209072][T14882] page_owner tracks the page as allocated
+[  285.210915][T14882] page last allocated via order 0, migratetype
+  Movable, gfp_mask 0x140dca(GFP_HIGHUSER_MOVABLE|__GFP_COMP|__GFP_ZERO),
+  id 14926, tgid 14926 (hmm-swap), ts 254506295376, free_ts 227402023774
+[  285.216765][T14882]  post_alloc_hook+0x197/0x1b0
+[  285.218874][T14882]  get_page_from_freelist+0x76e/0x3280
+[  285.220864][T14882]  __alloc_frozen_pages_noprof+0x38e/0x2740
+[  285.223302][T14882]  alloc_pages_mpol+0x1fc/0x540
+[  285.225130][T14882]  folio_alloc_mpol_noprof+0x36/0x340
+[  285.227222][T14882]  vma_alloc_folio_noprof+0xee/0x1a0
+[  285.229074][T14882]  __handle_mm_fault+0x2b38/0x56a0
+[  285.230822][T14882]  handle_mm_fault+0x368/0x9f0
+...
+
+This series fixes all issues I found so far. There is no easy way to fix
+without a bigger rework/cleanup. I have a bunch of cleanups on top (some
+previous sent, some the result of the discussion in v1) that I will send
+out separately once this landed and I get to it.
+
+I wish we could just use some special present PROT_NONE PTEs instead of
+these (non-present, non-none) fake-swap entries; but that just results in
+the same problem we keep having (lack of spare PTE bits), and staring at
+other similar fake-swap entries, that ship has sailed.
+
+With this series, make_device_exclusive() doesn't actually belong into
+mm/rmap.c anymore, but I'll leave moving that for another day.
+
+I only tested this series with the hmm-tests selftests due to lack of HW,
+so I'd appreciate some testing, especially if the interaction between
+two GPUs wanting a device-exclusive entry works as expected.
+
+<program>
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/mman.h>
+#include <sys/ioctl.h>
+#include <linux/types.h>
+#include <linux/ioctl.h>
+
+#define HMM_DMIRROR_EXCLUSIVE _IOWR('H', 0x05, struct hmm_dmirror_cmd)
+
+struct hmm_dmirror_cmd {
+	__u64 addr;
+	__u64 ptr;
+	__u64 npages;
+	__u64 cpages;
+	__u64 faults;
+};
+
+const size_t size = 1 * 1024 * 1024 * 1024ul;
+const size_t chunk_size = 2 * 1024 * 1024ul;
+
+int main(void)
+{
+	struct hmm_dmirror_cmd cmd;
+	size_t cur_size;
+	int fd, ret;
+	char *addr, *mirror;
+
+	fd = open("/dev/hmm_dmirror1", O_RDWR, 0);
+	if (fd < 0) {
+		perror("open failed\n");
+		exit(1);
+	}
+
+	addr = mmap(NULL, size, PROT_READ | PROT_WRITE,
+		    MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if (addr == MAP_FAILED) {
+		perror("mmap failed\n");
+		exit(1);
+	}
+	madvise(addr, size, MADV_NOHUGEPAGE);
+	memset(addr, 1, size);
+
+	mirror = malloc(chunk_size);
+
+	for (cur_size = 0; cur_size < size; cur_size += chunk_size) {
+		cmd.addr = (uintptr_t)addr + cur_size;
+		cmd.ptr = (uintptr_t)mirror;
+		cmd.npages = chunk_size / getpagesize();
+		ret = ioctl(fd, HMM_DMIRROR_EXCLUSIVE, &cmd);
+		if (ret) {
+			perror("ioctl failed\n");
+			exit(1);
+		}
+	}
+	pause();
+	return 0;
+}
+</program>
+
+[1] https://lkml.kernel.org/r/25e02685-4f1d-47fa-be5b-01ff85bb0ce2@redhat.com
+
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: "Jérôme Glisse" <jglisse@redhat.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Alex Shi <alexs@kernel.org>
+Cc: Yanteng Si <si.yanteng@linux.dev>
+Cc: Karol Herbst <kherbst@redhat.com>
+Cc: Lyude Paul <lyude@redhat.com>
+Cc: Danilo Krummrich <dakr@kernel.org>
+Cc: David Airlie <airlied@gmail.com>
+Cc: Simona Vetter <simona@ffwll.ch>
+Cc: Masami Hiramatsu <mhiramat@kernel.org>
+Cc: Oleg Nesterov <oleg@redhat.com>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: SeongJae Park <sj@kernel.org>
+Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>
+Cc: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+Cc: Vlastimil Babka <vbabka@suse.cz>
+Cc: Jann Horn <jannh@google.com>
+Cc: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: Peter Xu <peterx@redhat.com>
+Cc: Alistair Popple <apopple@nvidia.com>
+Cc: Jason Gunthorpe <jgg@nvidia.com>
+
+v1 -> v2:
+ * "mm/rmap: convert make_device_exclusive_range() to make_device_exclusive()"
+  -> Fix and simplify return value handling when calling dmirror_atomic_map()
+  -> Fix parameter order when calling make_device_exclusive()
+  [both things were fixed by the separate cleanups I previously sent, realized
+   it when re-testing the fixes here only]
+  -> Heavily extend documentation of make_device_exclusive()
+ * "mm/rmap: implement make_device_exclusive() using folio_walk instead of
+    rmap walk"
+  -> Keep MMU_NOTIFY_EXCLUSIVE, and update comments/description
+ * "mm/rmap: handle device-exclusive entries correctly in try_to_migrate_one()"
+  -> Handle PageHWPoison with device-private pages differently
+ * Added a bunch of "handle device-exclusive entries correctly" fixes,
+   now handling all page_vma_mapped_walk() callers correctly
+ * Added "mm/rmap: avoid -EBUSY from make_device_exclusive()" to fix some
+   hmm selftest failures I saw while testing under memory pressure
+ * Plenty of comment/description updates and improvements
+
+David Hildenbrand (17):
+  mm/gup: reject FOLL_SPLIT_PMD with hugetlb VMAs
+  mm/rmap: reject hugetlb folios in folio_make_device_exclusive()
+  mm/rmap: convert make_device_exclusive_range() to
+    make_device_exclusive()
+  mm/rmap: implement make_device_exclusive() using folio_walk instead of
+    rmap walk
+  mm/memory: detect writability in restore_exclusive_pte() through
+    can_change_pte_writable()
+  mm: use single SWP_DEVICE_EXCLUSIVE entry type
+  mm/page_vma_mapped: device-exclusive entries are not migration entries
+  kernel/events/uprobes: handle device-exclusive entries correctly in
+    __replace_page()
+  mm/ksm: handle device-exclusive entries correctly in
+    write_protect_page()
+  mm/rmap: handle device-exclusive entries correctly in
+    try_to_unmap_one()
+  mm/rmap: handle device-exclusive entries correctly in
+    try_to_migrate_one()
+  mm/rmap: handle device-exclusive entries correctly in
+    page_vma_mkclean_one()
+  mm/page_idle: handle device-exclusive entries correctly in
+    page_idle_clear_pte_refs_one()
+  mm/damon: handle device-exclusive entries correctly in
+    damon_folio_young_one()
+  mm/damon: handle device-exclusive entries correctly in
+    damon_folio_mkold_one()
+  mm/rmap: keep mapcount untouched for device-exclusive entries
+  mm/rmap: avoid -EBUSY from make_device_exclusive()
+
+ Documentation/mm/hmm.rst                    |   2 +-
+ Documentation/translations/zh_CN/mm/hmm.rst |   2 +-
+ drivers/gpu/drm/nouveau/nouveau_svm.c       |   5 +-
+ include/linux/mmu_notifier.h                |   2 +-
+ include/linux/rmap.h                        |   5 +-
+ include/linux/swap.h                        |   7 +-
+ include/linux/swapops.h                     |  27 +-
+ kernel/events/uprobes.c                     |  13 +-
+ lib/test_hmm.c                              |  41 +-
+ mm/damon/ops-common.c                       |  23 +-
+ mm/damon/paddr.c                            |  10 +-
+ mm/gup.c                                    |   3 +
+ mm/ksm.c                                    |   9 +-
+ mm/memory.c                                 |  28 +-
+ mm/mprotect.c                               |   8 -
+ mm/page_idle.c                              |   9 +-
+ mm/page_table_check.c                       |   5 +-
+ mm/page_vma_mapped.c                        |   3 +-
+ mm/rmap.c                                   | 469 +++++++++-----------
+ 19 files changed, 315 insertions(+), 356 deletions(-)
+
+
+base-commit: e5b2a356dc8a88708d97bd47cca3b8f7ed7af6cb
+-- 
+2.48.1
+
 
