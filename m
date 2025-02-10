@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-37540-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37543-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39046A2E8F7
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:49 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 758A5A2E903
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 06F7D3A6069
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:18:40 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 477A1188B90F
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:19:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22A491DE2C4;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C2BF1DEFC5;
 	Mon, 10 Feb 2025 10:18:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IHo34MQI"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fwdoaYtC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E59921CCEF0;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0C181CEE8D;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739182705; cv=none; b=DqczleZ9U4kpG/hbKLTcIUEpMoXxaawBCX1LIajbEFVwgAy0zVsCyO5Te3fwTmFV2jy3AmuLQJ4fC8Td5jwYPhRQThMnv/1bvYYllYIng0QVjQn4r5ASl7Twrqy3A3qzyYgMzSdekuhj/KPcczv6GTJfPW2uWjvK5demeA3N6ZQ=
+	t=1739182705; cv=none; b=QIUktodGyE2/X51BFsdvYDRoadyM/3zB5sOVwmNSFhRKxzZ2v9qN1W+T44WRHtammJUhNaiB31rpcuFimmkqyd24tgY7M0RJbmcJM+0hu8GqVwdy7ILb++dmQnxOhEMk+pfXHFLGClQcbtihdiM+ySKzWWfA/4vbQIBntg82kME=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1739182705; c=relaxed/simple;
-	bh=spRvL9h02iTAJSEHfQOVuBNItXh/grPCVfWPr/wssWY=;
+	bh=ioH67mGmMrR7TV2QvHCqqT6mvSN3es7X+oI3VVv4IjM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=J8gLj+h6h2dBubt8k3FDFCkBgTXcTPsZsMW3lNUhNFdc0WjBnOBiec6iorKAmZVVqrmArfdD7cEcyI0D/1SdIanfgxExoUzhq94JkqqQcPvj5bHutMy7qSsyXU9DS5Z28WL2grTo+745Tz2Ic6APE9H0d9qPhk9oe9vedShsB14=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IHo34MQI; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34B1FC4CEFB;
+	 MIME-Version; b=ABGP6tIMw9pBFaZCKDyg/cqcyVo1wVok/PsGr8kETcz7UD6oFFiDqY37WvbugE9eMFYnJYXVIP2DY1TTnJRSCe2Cy4o4HrARVuWH5plSj6W48NcQ7igapst/W/NLkI7H2XdhrTFduK0YnoI0+zR1Wnw5o1oosqWXuzIzPtJoGdQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fwdoaYtC; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3577CC4CEFF;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1739182704;
-	bh=spRvL9h02iTAJSEHfQOVuBNItXh/grPCVfWPr/wssWY=;
+	bh=ioH67mGmMrR7TV2QvHCqqT6mvSN3es7X+oI3VVv4IjM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=IHo34MQIYvI4tRCMSCstmstYvqbBEfTHMQXmKUIGTec6Yrl9EsfwMehg16PPsfcyM
-	 0XlLnySYsqBKvs2hKTxDbcNtZLoZoU8yFd/cPQbddJyEzjHdKPvZPATc5XgdXfCJif
-	 0VEkmRoSAUcoVTQJLf/CS7TVndRl3/0rfafbg3sSb673cgLL1tor+BoIGyR+knusdh
-	 0rq0rBdmf1/jm0F8eUIZ74ZLROSIt/HhY+d2UQGRD2w8ux8Wb8RUe/NWrCyvTAcdst
-	 jJorHi3+H4lBnEckXCLEqpDOyhRfLP/V8yLTtZ6r492QlAKTvgOUKPAo4OkkVBVZrg
-	 PnrynWeeWfC0g==
+	b=fwdoaYtCc+OirL8GqRT1NghqS9E2w2ZR5RR3fxw7lsS97vO4TirSEaAEMCKJZwmDb
+	 InealSIMP6amc6kBOzISZ0pR/X78zIiVB580WxYWU1UM+fw7VJykB61cY3Yro8pdiT
+	 DADYVLrRWeO58wRzjXrkxT0nWWWCvuhGoG6e+Tkq94auRqhjwQ/e1+IlpR7LCh2P3O
+	 lT3fcIoIUQBO6liwIqQ6jW35d843UYapg6oi/eH8AuM1beQbUZafiQdJBuua22xc7/
+	 ahKFh5bLHnC6QSixfK8YPyGda79H44rhwdkBuPBlHUFDFczQZUloNKCoYxIxKLmV3s
+	 UuEzLIqFGtjOw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1thQru-00000006CjE-1Ivf;
+	id 1thQru-00000006CjI-1PFj;
 	Mon, 10 Feb 2025 11:18:22 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -51,9 +51,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 17/27] docs: sphinx/kernel_abi: properly split lines
-Date: Mon, 10 Feb 2025 11:18:06 +0100
-Message-ID: <d4ad5b977799616544376210364d5cec686119ef.1739182025.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 18/27] scripts/get_abi.pl: Add filtering capabilities to rest output
+Date: Mon, 10 Feb 2025 11:18:07 +0100
+Message-ID: <41e108e816e46434aa596e5c0d25d227cb9f0fe5.1739182025.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1739182025.git.mchehab+huawei@kernel.org>
 References: <cover.1739182025.git.mchehab+huawei@kernel.org>
@@ -66,39 +66,77 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Sphinx doesn't like to have lines split with str.split("\n").
-
-Instead, it uses its own splitter, with handles line breaks the way
-Spinx expects. Not using it cause issues at the output files.
+This way, Sphinx ABI extension can parse symbols only once, while
+keep displaying results in separate files.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/kernel_abi.py | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ scripts/lib/abi/abi_parser.py | 21 +++++++++++++++------
+ 1 file changed, 15 insertions(+), 6 deletions(-)
 
-diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index 742ebd35454f..0a4057183208 100644
---- a/Documentation/sphinx/kernel_abi.py
-+++ b/Documentation/sphinx/kernel_abi.py
-@@ -36,7 +36,7 @@ import os
- import re
- import sys
+diff --git a/scripts/lib/abi/abi_parser.py b/scripts/lib/abi/abi_parser.py
+index 1db6c54fc65a..b20d5c9d920e 100644
+--- a/scripts/lib/abi/abi_parser.py
++++ b/scripts/lib/abi/abi_parser.py
+@@ -160,6 +160,7 @@ class AbiParser:
+                         self.data[fdata.key] = {
+                             "what": [content],
+                             "file": [fdata.file_ref],
++                            "path": fdata.ftype,
+                             "line_no": fdata.ln,
+                         }
  
--from docutils import nodes
-+from docutils import nodes, statemachine
- from docutils.statemachine import ViewList
- from docutils.parsers.rst import directives, Directive
- from sphinx.util.docutils import switch_source_input
-@@ -105,7 +105,8 @@ class KernelCmd(Directive):
-             old_f = fname
-             n = 0
-             for msg, f, ln in self.parser.doc():
--                msg_list = msg.split("\n")
-+                msg_list = statemachine.string2lines(msg, tab_width,
-+                                                     convert_whitespace=True)
-                 if "debug" in self.options:
-                     lines = [
-                         "", "",  ".. code-block:: rst",
+@@ -182,8 +183,6 @@ class AbiParser:
+                 if new_what:
+                     fdata.label = ""
+ 
+-                    self.data[fdata.key]["type"] = fdata.ftype
+-
+                     if "description" in self.data[fdata.key]:
+                         self.data[fdata.key]["description"] += "\n\n"
+ 
+@@ -299,6 +298,7 @@ class AbiParser:
+         fdata.nametag = {}
+         fdata.nametag["what"] = [f"File {path}/{basename}"]
+         fdata.nametag["type"] = "File"
++        fdata.nametag["path"] = fdata.ftype
+         fdata.nametag["file"] = [fdata.file_ref]
+         fdata.nametag["line_no"] = 1
+         fdata.nametag["description"] = ""
+@@ -427,7 +427,8 @@ class AbiParser:
+ 
+         return new_desc + "\n\n"
+ 
+-    def doc(self, output_in_txt=False, show_file=True):
++    def doc(self, output_in_txt=False, show_symbols=True, show_file=True,
++            filter_path=None):
+         """Print ABI at stdout"""
+ 
+         part = None
+@@ -435,12 +436,20 @@ class AbiParser:
+                              key=lambda x: (x[1].get("type", ""),
+                                             x[1].get("what"))):
+ 
+-            wtype = v.get("type", "Var")
++            wtype = v.get("type", "Symbol")
+             file_ref = v.get("file")
+             names = v.get("what", [""])
+ 
+-            if not show_file and wtype == "File":
+-                continue
++            if wtype == "File":
++                if not show_file:
++                    continue
++            else:
++                if not show_symbols:
++                    continue
++
++            if filter_path:
++                if v.get("path") != filter_path:
++                    continue
+ 
+             msg = ""
+ 
 -- 
 2.48.1
 
