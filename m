@@ -1,133 +1,193 @@
-Return-Path: <linux-doc+bounces-37525-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37530-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C7E3A2E853
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:55:36 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 84574A2E8E8
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 251C0167392
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 09:55:35 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id B612F1889975
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:18:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EF011C5D6C;
-	Mon, 10 Feb 2025 09:54:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0EA51CAA81;
+	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ZoCYTq3D"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PX0+CSSl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73A551C4A0E;
-	Mon, 10 Feb 2025 09:54:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C2361C68A6;
+	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739181286; cv=none; b=lMzv1kiJsKJPDr52rzeyB0LdQ18y1sO3xPZ+lqMkWXyE72rtn+XcZEDPRoibNLFKJBOxmW26X5Fl3CkB7NC3Y3MExJbz33J0qIeeijVvwOqDb83jf4w6lqXq1u78MmxGTww56wqf0JVqey5jgovBxvE2U3fWLOWHXEw61cuZNhY=
+	t=1739182704; cv=none; b=j+5Ec3I5e8ZwSPl10H8WO6Wx5VGnGA+98uTJi6GYASy6NykD0guxHr/R3WynguYN5wKTtDAgQQoXdQozOrqdy2pRFPayuC25Yv8nqG9c6u7QjtYq6aVCB7BpEQrR350gl6rRNEQNDjULkzwjZ0e6RNgESEFhlSKHS7+b5BLl+HE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739181286; c=relaxed/simple;
-	bh=ho9n3VcfJkszLgQBZ71Nls4seClP+D2Y17joOZ6Dau0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=exkExM+CTYGiWaYNysdhV5vpqD/AlePoP7su3MAm7xj4QZYXGTZXMZyupadp1KsoeyNf3so/DEkivwvG7d3CwvyJOe06xtqW3j8VdlJpttBsyZWpq+03KCPPlcryjAv3fGBjfDkYXe9nlsiEBHjTbJSGsDsdteYCc9N/p5+5s48=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ZoCYTq3D; arc=none smtp.client-ip=192.198.163.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1739181284; x=1770717284;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ho9n3VcfJkszLgQBZ71Nls4seClP+D2Y17joOZ6Dau0=;
-  b=ZoCYTq3D2HtrRlS1qjz1lnrEIUUlggNsCdARqjSzAwBiZuL51ncOn7mW
-   bu3zCQ9/KtvZPkvaAjt9siLd8BzZ317djkS751SZeV6NTHp5HaPoii9Y8
-   xNqOQvorZbx9Ptz/aTJ5IrHzmswrRqh9eM+pJIw7jjBjKNZvVOuC6wdqO
-   Phzj6KlZHOxgtqhZAvwyfoAQ6hrLAtu2//QvsbtbGk5rEkjoNbfd2qpFQ
-   kTzYyoUmEqtaez7opa7PjgJFTO5axlxlUBkbPBTwMBM3VXnuA5L8sJBly
-   qZP1eBXbeDobwsjPF2gGmzwt02oWHcZCROPON1QEBPNvkeNI1OOSA6tpR
-   A==;
-X-CSE-ConnectionGUID: 3ciKh5CGQy+TqSzQO75toQ==
-X-CSE-MsgGUID: rriZIlVATjKobi0U4tgHvQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11340"; a="50392912"
-X-IronPort-AV: E=Sophos;i="6.13,274,1732608000"; 
-   d="scan'208";a="50392912"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 01:54:43 -0800
-X-CSE-ConnectionGUID: suYm/ui8Qh6NIvYsBsUajg==
-X-CSE-MsgGUID: x2SrYlPpQQyEY6kS13ph6w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.13,274,1732608000"; 
-   d="scan'208";a="111977801"
-Received: from mev-dev.igk.intel.com ([10.237.112.144])
-  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2025 01:54:38 -0800
-Date: Mon, 10 Feb 2025 10:51:02 +0100
-From: Michal Swiatkowski <michal.swiatkowski@linux.intel.com>
-To: Tariq Toukan <tariqt@nvidia.com>
-Cc: "David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Eric Dumazet <edumazet@google.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>, netdev@vger.kernel.org,
-	Saeed Mahameed <saeedm@nvidia.com>, Gal Pressman <gal@nvidia.com>,
-	Leon Romanovsky <leonro@nvidia.com>,
-	Simon Horman <horms@kernel.org>,
-	Donald Hunter <donald.hunter@gmail.com>,
-	Jiri Pirko <jiri@resnulli.us>, Jonathan Corbet <corbet@lwn.net>,
-	Leon Romanovsky <leon@kernel.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Jesper Dangaard Brouer <hawk@kernel.org>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Richard Cochran <richardcochran@gmail.com>,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-rdma@vger.kernel.org, bpf@vger.kernel.org,
-	William Tu <witu@nvidia.com>, Daniel Jurgens <danielj@nvidia.com>
-Subject: Re: [PATCH net-next 08/15] net/mlx5e: set the tx_queue_len for
- pfifo_fast
-Message-ID: <Z6nMBi26yyFjQQJK@mev-dev.igk.intel.com>
-References: <20250209101716.112774-1-tariqt@nvidia.com>
- <20250209101716.112774-9-tariqt@nvidia.com>
+	s=arc-20240116; t=1739182704; c=relaxed/simple;
+	bh=p8iRm7Gznn3ekKIRR91V/psR21ij9bK+0II7DymWAjA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=MSgn0I/gDmkRJrmgJoypVHV/o6sYc3/UEzm5QukM40winVb7dBBdDIOMlNQ8BZXGSc/XB7qEnpHRry4j/fcBaRxsC3whfdJuN4cV9ho+2CXhhzcOrJ6/BjyHp3TiN2Od0CCK44E83hOTtGXwDG4g6m/N/uAL+lzYTXbIP8fwho0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PX0+CSSl; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C56D2C4CEE6;
+	Mon, 10 Feb 2025 10:18:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1739182703;
+	bh=p8iRm7Gznn3ekKIRR91V/psR21ij9bK+0II7DymWAjA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=PX0+CSSljZXtmDbUPsW3q/1UEAZkcJHQHMj/eR0Q8uSPrNmrv7jqsd3H+YWo1xOM/
+	 HjMrHdx6LlY4VekopfJmqAvseecf+sebvVrDYeBP2E4GKMMrmkGAF7v22e90DTf2Ge
+	 mjxsRdCf7qv3lINGQIUrTR/CKUR1x2WI5IgNnSnIRO7tiHp3FFc+3cqvsj/9hsWnKh
+	 QUvK4DWNq98U6G9Jmn/ZLIwMSS34I6YncKIZUQdrGDo3GiokB90neYSGG7qvgPEeX+
+	 u8zr8PFfVeA+4pAnIe0oPCCKpjgmBbYQ3zyMgD9kNY5qkMBCxcJD7jQPVUsrPO+vlG
+	 qr78nANSqX06Q==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1thQrt-00000006Ci9-3Zgs;
+	Mon, 10 Feb 2025 11:18:21 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+	Chao Yu <mchehab+huawei@kernel.org>,
+	Jaegeuk Kim <mchehab+huawei@kernel.org>,
+	James Clark <james.clark@linaro.org>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Mike Leach <mike.leach@linaro.org>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Tony Luck <tony.luck@intel.com>,
+	bpf@vger.kernel.org,
+	coresight@lists.linaro.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-f2fs-devel@lists.sourceforge.net,
+	linux-hardening@vger.kernel.org,
+	linux-wireless@vger.kernel.org
+Subject: [PATCH 00/27] Improve ABI documentation generation
+Date: Mon, 10 Feb 2025 11:17:49 +0100
+Message-ID: <cover.1739182025.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250209101716.112774-9-tariqt@nvidia.com>
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-On Sun, Feb 09, 2025 at 12:17:09PM +0200, Tariq Toukan wrote:
-> From: William Tu <witu@nvidia.com>
-> 
-> By default, the mq netdev creates a pfifo_fast qdisc. On a
-> system with 16 core, the pfifo_fast with 3 bands consumes
-> 16 * 3 * 8 (size of pointer) * 1024 (default tx queue len)
-> = 393KB. The patch sets the tx qlen to representor default
-> value, 128 (1<<MLX5E_REP_PARAMS_DEF_LOG_SQ_SIZE), which
-> consumes 16 * 3 * 8 * 128 = 49KB, saving 344KB for each
-> representor at ECPF.
-> 
-> Signed-off-by: William Tu <witu@nvidia.com>
-> Reviewed-by: Daniel Jurgens <danielj@nvidia.com>
-> Signed-off-by: Tariq Toukan <tariqt@nvidia.com>
-> ---
->  drivers/net/ethernet/mellanox/mlx5/core/en_rep.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c b/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c
-> index da399adc8854..07f38f472a27 100644
-> --- a/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c
-> +++ b/drivers/net/ethernet/mellanox/mlx5/core/en_rep.c
-> @@ -889,6 +889,8 @@ static void mlx5e_build_rep_netdev(struct net_device *netdev,
->  	netdev->ethtool_ops = &mlx5e_rep_ethtool_ops;
->  
->  	netdev->watchdog_timeo    = 15 * HZ;
-> +	if (mlx5_core_is_ecpf(mdev))
-> +		netdev->tx_queue_len = 1 << MLX5E_REP_PARAMS_DEF_LOG_SQ_SIZE;
->  
->  #if IS_ENABLED(CONFIG_MLX5_CLS_ACT)
->  	netdev->hw_features    |= NETIF_F_HW_TC;
+Hi Jon/Greg,
 
-Reviewed-by: Michal Swiatkowski <michal.swiatkowski@linux.intel.com>
+This series replace get_abi.pl with a Python version.
 
-> -- 
-> 2.45.0
+I originally started it due to some issues I noticed when searching for
+ABI symbols. While I could just go ahead and fix the already existing
+script, I noticed that the script maintainance didn't have much care over
+all those years, probably because it is easier to find Python programmers
+those days.
+
+Also, the code is complex and was not using modules or classes and
+were using lots of global variables.
+
+So, I decided to rewrite it in Python. I started with a manual conversion
+for each function. Yet, to avoid future maintainership issues, I opted to
+divide the main code on three classes, each on a sepaparate file.
+
+Just like the original RFC, I opted to keep the Sphinx kernel-abi module
+on three different phases:
+
+- call get_abi.py as an exec file;
+- import AbiParser on a minimal integration scenario;
+- cleanup the code to avoid needing to parse line numbers from the text.
+
+This way, if something goes wrong, it would be easier to just revert any
+offending patches, It also provides a better rationale about what each
+logical change is doing.
+
+The initial patches on this series do some preparation work and
+cleans some ABI symbol bugs that lack ":" delimiter.
+
+I opted to place on this series the Sphinx and Python version updates.
+
+I still have ~10 patches here with additional cleanups, from the original
+series I sent as RFC but let's get the main changes merged first.
+
+Mauro Carvalho Chehab (27):
+  docs: sphinx: remove kernellog.py file
+  docs: sphinx/kernel_abi: adjust coding style
+  docs: admin-guide: abi: add SPDX tags to ABI files
+  ABI: sysfs-class-rfkill: fix kernelversion tags
+  ABI: sysfs-bus-coresight-*: fix kernelversion tags
+  ABI: sysfs-driver-dma-idxd: fix date tags
+  ABI: sysfs-fs-f2fs: fix date tags
+  ABI: sysfs-power: fix a what tag
+  scripts/documentation-file-ref-check: don't check perl/python scripts
+  scripts/get_abi.py: add a Python tool to generate ReST output
+  scripts/get_abi.py: add support for symbol search
+  docs: use get_abi.py for ABI generation
+  scripts/lib/abi/abi_parser.py: optimize parse_abi() function
+  scripts/lib/abi/abi_parser.py: use an interactor for ReST output
+  docs: sphinx/kernel_abi: use AbiParser directly
+  docs: sphinx/kernel_abi: reduce buffer usage for ABI messages
+  docs: sphinx/kernel_abi: properly split lines
+  scripts/get_abi.pl: Add filtering capabilities to rest output
+  scripts/get_abi.pl: add support to parse ABI README file
+  docs: sphinx/kernel_abi: parse ABI files only once
+  docs: admin-guide/abi: split files from symbols
+  docs: sphinx/automarkup: add cross-references for ABI
+  docs: sphinx/kernel_abi: avoid warnings during Sphinx module init
+  scripts/lib/abi/abi_parser.py: Rename title name for ABI files
+  scripts/lib/abi/abi_parser.py: make it backward-compatible with Python
+    3.6
+  scripts/get_abi.py: add support for undefined ABIs
+  scripts/get_abi.pl: drop now obsoleted script
+
+ Documentation/ABI/removed/sysfs-class-rfkill  |    2 +-
+ Documentation/ABI/stable/sysfs-class-rfkill   |   12 +-
+ .../ABI/stable/sysfs-driver-dma-idxd          |    4 +-
+ .../testing/sysfs-bus-coresight-devices-cti   |   78 +-
+ .../testing/sysfs-bus-coresight-devices-tpdm  |   52 +-
+ Documentation/ABI/testing/sysfs-fs-f2fs       |    4 +-
+ Documentation/ABI/testing/sysfs-power         |    2 +-
+ .../admin-guide/abi-obsolete-files.rst        |    7 +
+ Documentation/admin-guide/abi-obsolete.rst    |    6 +-
+ Documentation/admin-guide/abi-readme-file.rst |    6 +
+ .../admin-guide/abi-removed-files.rst         |    7 +
+ Documentation/admin-guide/abi-removed.rst     |    6 +-
+ .../admin-guide/abi-stable-files.rst          |    7 +
+ Documentation/admin-guide/abi-stable.rst      |    6 +-
+ .../admin-guide/abi-testing-files.rst         |    7 +
+ Documentation/admin-guide/abi-testing.rst     |    6 +-
+ Documentation/admin-guide/abi.rst             |   17 +
+ Documentation/sphinx/automarkup.py            |   47 +
+ Documentation/sphinx/kernel_abi.py            |  162 ++-
+ Documentation/sphinx/kerneldoc.py             |   14 +-
+ Documentation/sphinx/kernellog.py             |   22 -
+ Documentation/sphinx/kfigure.py               |   81 +-
+ scripts/documentation-file-ref-check          |    2 +-
+ scripts/get_abi.pl                            | 1103 -----------------
+ scripts/get_abi.py                            |  214 ++++
+ scripts/lib/abi/abi_parser.py                 |  628 ++++++++++
+ scripts/lib/abi/abi_regex.py                  |  234 ++++
+ scripts/lib/abi/helpers.py                    |   38 +
+ scripts/lib/abi/system_symbols.py             |  378 ++++++
+ 29 files changed, 1830 insertions(+), 1322 deletions(-)
+ create mode 100644 Documentation/admin-guide/abi-obsolete-files.rst
+ create mode 100644 Documentation/admin-guide/abi-readme-file.rst
+ create mode 100644 Documentation/admin-guide/abi-removed-files.rst
+ create mode 100644 Documentation/admin-guide/abi-stable-files.rst
+ create mode 100644 Documentation/admin-guide/abi-testing-files.rst
+ delete mode 100644 Documentation/sphinx/kernellog.py
+ delete mode 100755 scripts/get_abi.pl
+ create mode 100755 scripts/get_abi.py
+ create mode 100644 scripts/lib/abi/abi_parser.py
+ create mode 100644 scripts/lib/abi/abi_regex.py
+ create mode 100644 scripts/lib/abi/helpers.py
+ create mode 100644 scripts/lib/abi/system_symbols.py
+
+-- 
+2.48.1
+
+
 
