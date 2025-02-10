@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-37532-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37531-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2983A2E8EE
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 37BA1A2E8ED
 	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BE2A63A59A2
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 138DF3A5933
 	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:18:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F01911CEACB;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECD4B1CD213;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gkyTn+T4"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gFpCRKsh"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBEC01CAA76;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABBEC1C9EAA;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739182704; cv=none; b=aXhi9IW+tpNRMJEjT16Ubv2Icbgh1DRglQfZb4nVytm6sbei2KPvNZ0TML5wRQAhs42pOEzeSQA6fiDnzfpTDEjqIFFnGBpDKgp2R8z9otijkB/qcNluDoCAw/e2eHsqQJyn2fbeDOaCqbNRHguH5DeQBlYStFJvKlaeqYXfikI=
+	t=1739182704; cv=none; b=U7gfJsu9A+uQ9duiZ8cM5Rjm+cfNCDMIcEWceG5hhTZEXGnl84trxkRQvz5K3x5UHoH/RpA6TDPzoJ+RHLpU0ik3oET+k8tjnK39yAgkG0PAVTWqLrOMRjaVakz9vcLEr6YEEgZXVEkBpunGaDE3Hkv8MlNcxDl3nUu5mfrIOjo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1739182704; c=relaxed/simple;
-	bh=Tj1nz2RZBql0geo5lraeHUCDCc6IdX7LSdJsN5wj1mY=;
+	bh=0f7tLKTuX4jKgrpwqlZrJAjeosOKAdyvIyBElssJbRg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=TT+stvLAcUFpEKtBvbImHQ0Dj/I+rli9lBcXZCNfygEPnEO4O7zj6PdZIz/HjapbrWDJq9/PofVKeSftm817wT0T+G88IbqpyvtpiouBbHqTLndS/0jKYqvVruJTUPPeS9xd8PRjDqmuWD4A8ahgTnLfLvv/VIHyvXx86435MlM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gkyTn+T4; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBB2BC4CEEE;
+	 MIME-Version; b=TH0KdMLjuG287DZ83q8iiu35qPSfJ1sIs+tHevNiOC/NnEamv7gPeHKvbaRx5LPkYSM9+k1l/2qNi9ClM5WtqfdY0pA8fzZA+VZHWTV88hQqFa+/m/g/owwZRQvrqzkM4J5ro285uRjoPLBZjbkYn0p1ianGyFU+LxP3d/sYxs8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gFpCRKsh; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8DFFC4CEEC;
 	Mon, 10 Feb 2025 10:18:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1739182704;
-	bh=Tj1nz2RZBql0geo5lraeHUCDCc6IdX7LSdJsN5wj1mY=;
+	bh=0f7tLKTuX4jKgrpwqlZrJAjeosOKAdyvIyBElssJbRg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=gkyTn+T46XmjwUvB/NsFZsATTY/D6pP/CIlfrDaTdKfLuO7Kd+EPuT2Q0fOpEGyRp
-	 U4I8VplC4l0zulyZbxvHIU2A5wUEyR3x6TXDHdVF2JSnmKY47bYLha5H17eE/0Fgdr
-	 F7WFjVRuy/POEFg/mIPz9fypejZtXihLQJZc9PMxZOqUvybP9GYM+cC77fMPLZQzbT
-	 eEsb7flvm3GCMb8uR0AsnDXaR8ilHtSN875HSnv434GiNHrHtWkwzpce7D0zIvh0/T
-	 2mppWRtGG2Oe8X7LnxSdXktEELekU1oBMMmKUYVYpKSAH6gfPnV6gxkw/ii0YImvm2
-	 qUGi38cKe2Hhg==
+	b=gFpCRKshyXHPkW8Pa5qqFE3RBtolfl3uSLLR2Hk5loLvpXm8nj4A8eACN+usbv/bv
+	 uWP7YJPfufIbhDBoiqvZJujd+XO3SW1eH7m2l1jYB/Lh1ly7aPr+XuUHBFBergkTTI
+	 7nLoBbs8vK0dru3uRub8c2Nah/aIisbdDaPcS0Y415idsCFFHBK94C0HNVD40FpZ0V
+	 eq3OleQfskY91HFwxKnaiyjNp8I4sYmGz5UYgjfBSgBhWqpiJyN7tMfhiC154noBmh
+	 DRZ6cXPJ0qAyCa+Yuro/r95eu0DyaJhgI4oS0HKWB3TZDyX5N2c/1ukFej3JNqULNO
+	 tGEu5KGABbmsQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1thQru-00000006Cie-0IyP;
+	id 1thQru-00000006Cii-0PuR;
 	Mon, 10 Feb 2025 11:18:22 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -51,9 +51,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 08/27] ABI: sysfs-power: fix a what tag
-Date: Mon, 10 Feb 2025 11:17:57 +0100
-Message-ID: <508051136ea2e07e0dd7fa41ff40382387c24ba8.1739182025.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 09/27] scripts/documentation-file-ref-check: don't check perl/python scripts
+Date: Mon, 10 Feb 2025 11:17:58 +0100
+Message-ID: <712bfc8412ee5ad8ab43dd21a8c30fc858eff5a6.1739182025.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1739182025.git.mchehab+huawei@kernel.org>
 References: <cover.1739182025.git.mchehab+huawei@kernel.org>
@@ -66,29 +66,31 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-There is one What tag that it is using semicolon instead of colon.
+Such scripts may have regular expressions, which would make the
+parser confusing. Also, they shouldn't hardcode filenames there,
+so skipping them is OK.
 
-Fix it to comply with ABI description and produce right results when
-converted to html/pdf.
+While here, also don't check references on extensions used for file
+backup and patch rej/orig.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/ABI/testing/sysfs-power | 2 +-
+ scripts/documentation-file-ref-check | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/ABI/testing/sysfs-power b/Documentation/ABI/testing/sysfs-power
-index a3942b1036e2..2192478e83cf 100644
---- a/Documentation/ABI/testing/sysfs-power
-+++ b/Documentation/ABI/testing/sysfs-power
-@@ -131,7 +131,7 @@ Description:
- 		CAUTION: Using it will cause your machine's real-time (CMOS)
- 		clock to be set to a random invalid time after a resume.
+diff --git a/scripts/documentation-file-ref-check b/scripts/documentation-file-ref-check
+index 68083f2f1122..408b1dbe7884 100755
+--- a/scripts/documentation-file-ref-check
++++ b/scripts/documentation-file-ref-check
+@@ -92,7 +92,7 @@ while (<IN>) {
+ 	next if ($f =~ m,^Next/,);
  
--What;		/sys/power/pm_trace_dev_match
-+What:		/sys/power/pm_trace_dev_match
- Date:		October 2010
- Contact:	James Hogan <jhogan@kernel.org>
- Description:
+ 	# Makefiles and scripts contain nasty expressions to parse docs
+-	next if ($f =~ m/Makefile/ || $f =~ m/\.sh$/);
++	next if ($f =~ m/Makefile/ || $f =~ m/\.(sh|py|pl|~|rej|org|orig)$/);
+ 
+ 	# It doesn't make sense to parse hidden files
+ 	next if ($f =~ m#/\.#);
 -- 
 2.48.1
 
