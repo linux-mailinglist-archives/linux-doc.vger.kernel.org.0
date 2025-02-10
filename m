@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-37526-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37533-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2A82A2E8E4
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:29 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 219C2A2E8F1
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 11:18:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6BF451625C2
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:18:28 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E4C9D3A6634
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Feb 2025 10:18:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4A921C7002;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F40181CF5C0;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I1HSStpA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rdzypHRA"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C1E91C5F36;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C48461CAA86;
 	Mon, 10 Feb 2025 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739182704; cv=none; b=HQGm/nJ6g1Oc+tSdZD5k6DEUMbetZ6YrByU5TJlVa4o+wjP4a1VzH+HlW9RHhuY1dR7LRCJZLcO9ZzDn6tup9JC8U1yH7n2jvJsSK7J467tJSq1ZthubWbzJmc7bk36Vc+KU61Fze2/URApFLh8pAFHZ3ZxHPujkQZlozxouxyg=
+	t=1739182704; cv=none; b=uzuF8nJBe+1IHz1ZC3xxOfk8PpiUGibAglYCHuEm7XIye7otQ2bXA076S8V7sUzkptaHuytvK7UtYDbdaUbqUVCCcEM2RgvzxWmkMWc/1rWiWNGWh/CfZ+RFKbKUyif/waoSfdWyF0+z39P2S5E3Lomm19trRdwJXGMdJvGHtqo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1739182704; c=relaxed/simple;
-	bh=Y/6DtB75n/8IACU5oUa83ZoIRDQNO5zVfF736uCoidc=;
+	bh=IFfJ6jqxdTobj9ECUn0r6qKV42rp7aK/OvTRbD8u8YE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=IHavOLiluzi7i5eXJTujD7K7YyFrnF4HBWs62nhdO2tR5lHVjCoMbKzQrQUwjoEEHQF9+bxj5kKCf3mEA9MSh5paFHejsSpX4ejGm2zirGaJkYz6N4sSCVeumJSBFB7Opoka1hQTNY+BvMoNceieZh7c6PbrY41CW3v+G5zxvp8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I1HSStpA; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D304EC4CEE9;
+	 MIME-Version; b=noFJlVXIayFzcmTdOwltPAaTBHdw+eW7104M3Wd9YttStC0nIcE5Y1buMwYfafrjcez9DinEBp8rshbgMsFkeyaNrleds9h0UmR0Fr1J37BoS22Gsh1oxhxULM6hsiecX5Dwyhi3FLu67PFltiWuuMVbuG28Bv2uTjQ2H7F0j8I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rdzypHRA; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3586C4CEED;
 	Mon, 10 Feb 2025 10:18:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1739182703;
-	bh=Y/6DtB75n/8IACU5oUa83ZoIRDQNO5zVfF736uCoidc=;
+	s=k20201202; t=1739182704;
+	bh=IFfJ6jqxdTobj9ECUn0r6qKV42rp7aK/OvTRbD8u8YE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=I1HSStpAtk4WlHpVXY8ZdwGC4LK6ZafR37XI7tcVAEbHNDEH8xsWqZVb9iKXj84iy
-	 uXs3MiHsr5pS7WWY0/070X+e6CBPWcGM74V3ufLHT6S0IqMSpISwF/U0kSxWqPBljV
-	 iwmsfbGxv0hDbfOZTKbs7QIROlMPh9FkDI+v3xGvPU08qqlqNEeunnjq9u+bYJVmyU
-	 GmsP61o3zSD2IURCCsKL7+gbK8Hg7b7MqqlNvt4l8maSVxNEc4SRTvCyoXBV5X7lU3
-	 896Xl9reJRYq3+usvLE3X/XvnHLQ4es/Hkbcdsh84txoXRJ63Iw08ZWHb6UGXxvmlO
-	 ++7Vyw/mTDOxg==
+	b=rdzypHRAXrS/ucSvlHVj2dy1C/7ki2pi+g4AxaC7uSp9LQ5BE1T2X7pvImYl2S2Iz
+	 igCSRPGzVTaUz+F+PM+3nBBZN0SOWG6fKDKka3c1PWX+FIZEVHpzK3IO6mQV5vW33z
+	 KCnVtJEw4vdy2FvCJLkoVQNHZujmY3li+TmO/Je/DBTQrpql5D2G7V7VQxeVQQ3b4w
+	 vjlu8IV9FsZMJJE95VJ9FgTWm3ZoS2N3VBQGxCVevB3xhFW+epQu1QV5L/NicGKJBr
+	 PXKiu+YvX5QGJ5RBkTkmDK2ehF1/FIxVxGeD3R0s+GXhfHbsX49lI2sFbCnq7XQja1
+	 fvyIO3VSlyVAA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1thQrt-00000006CiG-3pT6;
+	id 1thQrt-00000006CiK-3wTB;
 	Mon, 10 Feb 2025 11:18:21 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -51,9 +51,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 02/27] docs: sphinx/kernel_abi: adjust coding style
-Date: Mon, 10 Feb 2025 11:17:51 +0100
-Message-ID: <02a9ec0fab61e4c94b9c2ff555bc0e9d93f59100.1739182025.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 03/27] docs: admin-guide: abi: add SPDX tags to ABI files
+Date: Mon, 10 Feb 2025 11:17:52 +0100
+Message-ID: <8c7bfe676e7349ea2d1930bf918d54e27d15ae9e.1739182025.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <cover.1739182025.git.mchehab+huawei@kernel.org>
 References: <cover.1739182025.git.mchehab+huawei@kernel.org>
@@ -66,71 +66,69 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Make pylint and flake8 happier with this module's coding style
+Such files are missing SPDX tags containing the licensing information.
+
+Add them.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/kernel_abi.py | 25 ++++++++++++-------------
- 1 file changed, 12 insertions(+), 13 deletions(-)
+ Documentation/admin-guide/abi-obsolete.rst | 2 ++
+ Documentation/admin-guide/abi-removed.rst  | 2 ++
+ Documentation/admin-guide/abi-stable.rst   | 2 ++
+ Documentation/admin-guide/abi-testing.rst  | 2 ++
+ Documentation/admin-guide/abi.rst          | 2 ++
+ 5 files changed, 10 insertions(+)
 
-diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index 8401562cb5d9..38653f5706c0 100644
---- a/Documentation/sphinx/kernel_abi.py
-+++ b/Documentation/sphinx/kernel_abi.py
-@@ -32,32 +32,31 @@ u"""
- 
- """
- 
--import codecs
- import os
-+import re
- import subprocess
- import sys
--import re
- 
--from docutils import nodes, statemachine
-+from docutils import nodes
- from docutils.statemachine import ViewList
- from docutils.parsers.rst import directives, Directive
--from docutils.utils.error_reporting import ErrorString
- from sphinx.util.docutils import switch_source_input
- from sphinx.util import logging
- 
--__version__  = '1.0'
-+__version__ = "1.0"
+diff --git a/Documentation/admin-guide/abi-obsolete.rst b/Documentation/admin-guide/abi-obsolete.rst
+index 594e697aa1b2..b655615917f1 100644
+--- a/Documentation/admin-guide/abi-obsolete.rst
++++ b/Documentation/admin-guide/abi-obsolete.rst
+@@ -1,3 +1,5 @@
++.. SPDX-License-Identifier: GPL-2.0
 +
+ ABI obsolete symbols
+ ====================
  
- def setup(app):
- 
-     app.add_directive("kernel-abi", KernelCmd)
--    return dict(
--        version = __version__
--        , parallel_read_safe = True
--        , parallel_write_safe = True
--    )
-+    return {
-+        "version": __version__,
-+        "parallel_read_safe": True,
-+        "parallel_write_safe": True
-+    }
+diff --git a/Documentation/admin-guide/abi-removed.rst b/Documentation/admin-guide/abi-removed.rst
+index f9e000c81828..ba941c1af178 100644
+--- a/Documentation/admin-guide/abi-removed.rst
++++ b/Documentation/admin-guide/abi-removed.rst
+@@ -1,3 +1,5 @@
++.. SPDX-License-Identifier: GPL-2.0
 +
+ ABI removed symbols
+ ===================
  
- class KernelCmd(Directive):
--
-     u"""KernelABI (``kernel-abi``) directive"""
+diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
+index fc3361d847b1..5d738f345333 100644
+--- a/Documentation/admin-guide/abi-stable.rst
++++ b/Documentation/admin-guide/abi-stable.rst
+@@ -1,3 +1,5 @@
++.. SPDX-License-Identifier: GPL-2.0
++
+ ABI stable symbols
+ ==================
  
-     required_arguments = 1
-@@ -99,8 +98,8 @@ class KernelCmd(Directive):
+diff --git a/Documentation/admin-guide/abi-testing.rst b/Documentation/admin-guide/abi-testing.rst
+index 19767926b344..a867e6578bf7 100644
+--- a/Documentation/admin-guide/abi-testing.rst
++++ b/Documentation/admin-guide/abi-testing.rst
+@@ -1,3 +1,5 @@
++.. SPDX-License-Identifier: GPL-2.0
++
+ ABI testing symbols
+ ===================
  
-         if "debug" in self.options:
-             code_block = "\n\n.. code-block:: rst\n    :linenos:\n"
--            for l in lines.split("\n"):
--                code_block += "\n    " + l
-+            for line in lines.split("\n"):
-+                code_block += "\n    " + line
-             lines = code_block + "\n\n"
- 
-         line_regex = re.compile(r"^\.\. LINENO (\S+)\#([0-9]+)$")
+diff --git a/Documentation/admin-guide/abi.rst b/Documentation/admin-guide/abi.rst
+index bcab3ef2597c..64e772bde943 100644
+--- a/Documentation/admin-guide/abi.rst
++++ b/Documentation/admin-guide/abi.rst
+@@ -1,3 +1,5 @@
++.. SPDX-License-Identifier: GPL-2.0
++
+ =====================
+ Linux ABI description
+ =====================
 -- 
 2.48.1
 
