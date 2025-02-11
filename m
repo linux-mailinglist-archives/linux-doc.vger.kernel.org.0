@@ -1,111 +1,154 @@
-Return-Path: <linux-doc+bounces-37792-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37795-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21DE9A30F59
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Feb 2025 16:13:34 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 109EBA30FBC
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Feb 2025 16:27:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 17F0F1884F15
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Feb 2025 15:13:39 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 24E7F7A1B53
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Feb 2025 15:26:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0382326BD8C;
-	Tue, 11 Feb 2025 15:13:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A122250C12;
+	Tue, 11 Feb 2025 15:27:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="D2V1cLiJ"
+	dkim=pass (1024-bit key) header.d=digikod.net header.i=@digikod.net header.b="K8n3ZcGH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch [45.157.188.10])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8209326BD9C
-	for <linux-doc@vger.kernel.org>; Tue, 11 Feb 2025 15:13:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BACE253320
+	for <linux-doc@vger.kernel.org>; Tue, 11 Feb 2025 15:27:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.157.188.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739286802; cv=none; b=f8q/BZX62eESfqcfYvUCZq4fTSK/8WvL1T/HXSc5YzjofdyeRdTnYlAwyKpLrnACZR2/i6CQfJNIarTTEjoDhHQ7x4b55WVaQXXYQAVgniOWkrTbU48XyHxfILS1snFVMr6eG9TTb3plB/t6GyufuGMVA7tnOi/6S0jZfa5UvkE=
+	t=1739287657; cv=none; b=KwR9ziVi1FuqgNBgL3/OpfVPWItrf9rXJ1MkJnmpmlnhyP27F0sMyjhLCFvCTC6C/BqXNVB0IfP7/WBZ3aE/ukyEDQ6y72EQfzV/6sfHfpc2lffLFYzIRA/DT25Zzaphn5xeptP3ilGEndZWAMturGSSdF0eGw1A9xCizAahFpo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739286802; c=relaxed/simple;
-	bh=mUqIrnwhWNS1eUYHflUCG59cMmLG51YBJlJc2kQt3xQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=j0dBysdT7/v9B9jB9swiRQtYOs5I1chG3TTFR89XeQsHbPS19HXUxbA2fqNp7Zbvb93JeqQJ9K3/uUIDbNySKoOM9MeWEiDNnWMsyZQp3bfSDcTM7+6GKh3xY3AAC43uZJ0SXhJM1qlUjTt41gdv4SxvVwZmXbDOe7tZ5/V6QYQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=D2V1cLiJ; arc=none smtp.client-ip=209.85.214.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-21f6d264221so40173725ad.1
-        for <linux-doc@vger.kernel.org>; Tue, 11 Feb 2025 07:13:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1739286801; x=1739891601; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XDoWjnrtvpJSvgutaR7cMhwzc6WeB6ixV6uyeXHs8hE=;
-        b=D2V1cLiJLM+a419IVGvSckxu13anRCQLMdP4BgRwuqhBDPgtljpgTqtb0xjiDALnTR
-         Jc1ovL5M9SXMXBhGDxxtMaFAn+24jvly0v915kJXTeLb5UK3pvoI8IA3mNshL5wsgsIn
-         /qCq1hjGw6Pp1ir6hZUpvr6b6Wc3l4wH+NLEN/HhKWSRO8Y6VaxJvUhNYPJokqIa5FEc
-         q1cQDWeNg/dYbm4FFpZ7ugpXt5MxJ1WSMKd8xOsQOamiOEQ5UzOw4U8md6cSZiI5+T1I
-         GcXPZkdqXs4D4JTQJo7fQFwdxabVU0wKucXUsDAVbzXuraYDpbCaQnr/p46W/RWqT+Sl
-         3vxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739286801; x=1739891601;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XDoWjnrtvpJSvgutaR7cMhwzc6WeB6ixV6uyeXHs8hE=;
-        b=EpjwS1ECdpBbEZE2ZSRPjBRX7bGXXoGegNy/TY62L5AoSpXewJOFNG4xv8bcM5J1bb
-         5OkKbW/NtWIzW6zOWRAgkajkJDYXMeEnyGP+baMEqg0IwpftVnBxAWCNVSTraz6qEXJ1
-         kKhx8zKCNyK0fzaicQPKeQZGH4MJCwy4MX8npZq3QHKKuVUDfNHp8OAEJh+FXRLp8FKd
-         AzP0Q5P6DZDzGBYGJUSE+BS23HYM6eVnRCa2wrl0Q68eiUvJOX64JwZ3MSyehEZc80lA
-         L6h0zrJPrUXcCJymAawEAR23PSY70g8mN/gMA4UIA7ju9iBhju26NbtN0SFcoFjFEi+4
-         8xaw==
-X-Gm-Message-State: AOJu0YwOpsW5UYx/BGhZCfa4vmWknXiKVUz7D2reMObG3X3uRaPlpJAa
-	KqCeUuviE6YZ6GTM13F48nlGayIhgJvfu1UpSHLooiHRywBYUkLb
-X-Gm-Gg: ASbGncuV1l/kRdBR79mXF45pHZSkhA8sgdqF/8WdnzsG0oJHqGrGf9nBGLauGzdTeGx
-	iYxcRFmzW7MHAiuVRH18NPm4d3YyjNi5cwnA2NX9Fc0KUkjq/lGKK9So1XcZ6yp7oKgkhtcnSmx
-	NUrCj79QT+7eZoLNvK8E7g6aVTw7eRa4zM/UrE23HwcQ4kCfpsYJmmZASMqKxKWtawuNgCCx2WU
-	nZcBDq8uUU90vuM+8AxNgpS2dnHxn/rMlrczshwA1QxSTpu2D/v4ytUmH6CgXH6TwKxnu+/ido5
-	IzsDn+S9wx3yv9kY3/ddXMBU2PFIEEidKnk=
-X-Google-Smtp-Source: AGHT+IEuv7eUQ8yR90LRpRUAGfXhBY9tNeRzxwx6R+B6uQigDl+NYqz4305aYYtYC6v3YGkWr4boLA==
-X-Received: by 2002:a05:6a21:3405:b0:1e2:88b:4f1b with SMTP id adf61e73a8af0-1ee03b662f7mr29612062637.39.1739286800702;
-        Tue, 11 Feb 2025 07:13:20 -0800 (PST)
-Received: from forest.jssaten.edu ([210.212.85.151])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ad55b80564asm2643973a12.65.2025.02.11.07.13.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Feb 2025 07:13:20 -0800 (PST)
-From: Rohit Yadav <rohityadavconnect@gmail.com>
-To: skhan@linuxfoundation.org
-Cc: linux-doc@vger.kernel.org,
-	Rohit Yadav <rohityadavconnect@gmail.com>
-Subject: [PATCH] docs: mm/damon: Fix spelling error in monitoring_intervals_tuning_example.rst
-Date: Tue, 11 Feb 2025 20:43:13 +0530
-Message-ID: <20250211151314.147912-1-rohityadavconnect@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	s=arc-20240116; t=1739287657; c=relaxed/simple;
+	bh=kWTtxQVrKConfwTAlQFCjUwbPtW/PdbSVcS+IchiLDw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=R0fhzo0QSMqJpKksJ4x3OrZmbTG4jwmDM4P3SMsbhZrP46jEdezrbbQjjA11iRO3iyyuQRnX+TC1pUkT1V83Ig+ySwlGTDfUIOZ/rHn3/NG+NkPMmYUXBGrn/M6ChLrGHs0ONXnfGwg++yHbZ/lKJz9e6JESWvQGX8iB0T+ZQxM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=digikod.net; spf=pass smtp.mailfrom=digikod.net; dkim=pass (1024-bit key) header.d=digikod.net header.i=@digikod.net header.b=K8n3ZcGH; arc=none smtp.client-ip=45.157.188.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=digikod.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=digikod.net
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch [10.4.36.107])
+	by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YslRw1dx3zRf8;
+	Tue, 11 Feb 2025 16:17:32 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digikod.net;
+	s=20191114; t=1739287052;
+	bh=p1zuxEihrnjNC82+T9NtIGxS+saUSJKm1xCyiLMo7yo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=K8n3ZcGHTLsbVnm/9ObmaLdoY0hoVTRfvtXySszJEAXG07pA/PcDdmv3xiYkpUuDg
+	 akTtkMOg6Zp2dVMAy0NJPZva0xqVpYbZX6cVYbIA81qakDeDa9BUauaEqaDjw/EDA1
+	 cJJENcKGIUOCHW+Z/OXVlhP1CYRE8iSxIfRHl3nk=
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4YslRv5H2szBCt;
+	Tue, 11 Feb 2025 16:17:31 +0100 (CET)
+Date: Tue, 11 Feb 2025 16:17:30 +0100
+From: =?utf-8?Q?Micka=C3=ABl_Sala=C3=BCn?= <mic@digikod.net>
+To: =?utf-8?Q?G=C3=BCnther?= Noack <gnoack@google.com>
+Cc: linux-security-module@vger.kernel.org, 
+	Tahera Fahimi <fahimitahera@gmail.com>, Tanya Agarwal <tanyaagarwal25699@gmail.com>, 
+	Daniel Burgener <dburgener@linux.microsoft.com>, tools@kernel.org, linux-doc@vger.kernel.org, 
+	Alejandro Colomar <alx@kernel.org>, linux-man@vger.kernel.org
+Subject: Re: [PATCH 1/2] landlock: Minor typo and grammar fixes in IPC
+ scoping documentation
+Message-ID: <20250211.Ree5bu6Eph2p@digikod.net>
+References: <20250124154445.162841-1-gnoack@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250124154445.162841-1-gnoack@google.com>
+X-Infomaniak-Routing: alpha
 
-Corrected 'multipled' to 'multiplied' to improve documentation clarity.
+On Fri, Jan 24, 2025 at 03:44:44PM +0000, Günther Noack wrote:
+> * Fix some whitespace, punctuation and minor grammar
+> * Add a missing sentence about the minimum ABI version,
+>   to stay in line with the section next to it
+> 
+> Cc: Mickaël Salaün <mic@digikod.net>
+> Cc: Tahera Fahimi <fahimitahera@gmail.com>
+> Cc: Tanya Agarwal <tanyaagarwal25699@gmail.com>
+> Signed-off-by: Günther Noack <gnoack@google.com>
 
-Signed-off-by: Rohit Yadav <rohityadavconnect@gmail.com>
----
- Documentation/mm/damon/monitoring_intervals_tuning_example.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Looks good, thanks!
 
-diff --git a/Documentation/mm/damon/monitoring_intervals_tuning_example.rst b/Documentation/mm/damon/monitoring_intervals_tuning_example.rst
-index 334a854efb40..33eaa423adee 100644
---- a/Documentation/mm/damon/monitoring_intervals_tuning_example.rst
-+++ b/Documentation/mm/damon/monitoring_intervals_tuning_example.rst
-@@ -36,7 +36,7 @@ Then, list the DAMON-found regions of different access patterns, sorted by the
- "access temperature".  "Access temperature" is a metric representing the
- access-hotness of a region.  It is calculated as a weighted sum of the access
- frequency and the age of the region.  If the access frequency is 0 %, the
--temperature is multipled by minus one.  That is, if a region is not accessed,
-+temperature is multiplied by minus one.  That is, if a region is not accessed,
- it gets minus temperature and it gets lower as not accessed for longer time.
- The sorting is in temperature-ascendint order, so the region at the top of the
- list is the coldest, and the one at the bottom is the hottest one. ::
--- 
-2.43.0
+I'm going to take this patch in my tree with the changes explained
+below. You can send a v2 with the second patch according to the reviews.
 
+As a side note, applying the patch series from this thread with b4
+doesn't work because they apply to different repositories.
+
+Dealing with duplicated doc in two repositories is not practical and
+adds work to everyone...  Could we move the non-libc syscall man pages
+to the kernel repository?
+
+> ---
+>  Documentation/userspace-api/landlock.rst | 4 ++--
+>  include/uapi/linux/landlock.h            | 6 ++++--
+>  2 files changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/Documentation/userspace-api/landlock.rst b/Documentation/userspace-api/landlock.rst
+> index d639c61cb472..ca8b325d53e5 100644
+> --- a/Documentation/userspace-api/landlock.rst
+> +++ b/Documentation/userspace-api/landlock.rst
+> @@ -329,11 +329,11 @@ non-sandboxed process, we can specify this restriction with
+>  A sandboxed process can connect to a non-sandboxed process when its domain is
+>  not scoped. If a process's domain is scoped, it can only connect to sockets
+>  created by processes in the same scope.
+> -Moreover, If a process is scoped to send signal to a non-scoped process, it can
+> +Moreover, if a process is scoped to send signal to a non-scoped process, it can
+>  only send signals to processes in the same scope.
+>  
+>  A connected datagram socket behaves like a stream socket when its domain is
+> -scoped, meaning if the domain is scoped after the socket is connected , it can
+> +scoped, meaning if the domain is scoped after the socket is connected, it can
+>  still :manpage:`send(2)` data just like a stream socket.  However, in the same
+>  scenario, a non-connected datagram socket cannot send data (with
+>  :manpage:`sendto(2)`) outside its scope.
+> diff --git a/include/uapi/linux/landlock.h b/include/uapi/linux/landlock.h
+> index 33745642f787..048a2c77c4eb 100644
+> --- a/include/uapi/linux/landlock.h
+> +++ b/include/uapi/linux/landlock.h
+> @@ -268,7 +268,7 @@ struct landlock_net_port_attr {
+>   * ~~~~~~~~~~~~~~~~
+>   *
+>   * These flags enable to restrict a sandboxed process to a set of network
+> - * actions. This is supported since the Landlock ABI version 4.
+> + * actions. This is supported since Landlock ABI version 4.
+
+If that's OK with you, I'll move this sentence to a standalone paragraph
+like the one you added below:
+
++ * actions.
++ *
++ * This is supported since Landlock ABI version 4.
+
+>   *
+>   * The following access rights apply to TCP port numbers:
+>   *
+> @@ -291,11 +291,13 @@ struct landlock_net_port_attr {
+>   * Setting a flag for a ruleset will isolate the Landlock domain to forbid
+>   * connections to resources outside the domain.
+>   *
+> + * This is supported since Landlock ABI version 6.
+> + *
+>   * Scopes:
+>   *
+>   * - %LANDLOCK_SCOPE_ABSTRACT_UNIX_SOCKET: Restrict a sandboxed process from
+>   *   connecting to an abstract UNIX socket created by a process outside the
+> - *   related Landlock domain (e.g. a parent domain or a non-sandboxed process).
+> + *   related Landlock domain (e.g., a parent domain or a non-sandboxed process).
+>   * - %LANDLOCK_SCOPE_SIGNAL: Restrict a sandboxed process from sending a signal
+>   *   to another process outside the domain.
+>   */
+> -- 
+> 2.48.1.262.g85cc9f2d1e-goog
+> 
+> 
 
