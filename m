@@ -1,125 +1,122 @@
-Return-Path: <linux-doc+bounces-37949-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-37953-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11ED2A33EC5
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2025 13:06:36 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C40DA33EF1
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2025 13:18:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E2E037A2157
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2025 12:05:38 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D45293A9468
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2025 12:17:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8571321D3FC;
-	Thu, 13 Feb 2025 12:06:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4014B221566;
+	Thu, 13 Feb 2025 12:17:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OmrPXy85"
+	dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b="gj50goYM";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="KGIXqOEX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from fhigh-a4-smtp.messagingengine.com (fhigh-a4-smtp.messagingengine.com [103.168.172.155])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E08F21D3EF;
-	Thu, 13 Feb 2025 12:06:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F8C8227EB4;
+	Thu, 13 Feb 2025 12:17:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=103.168.172.155
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739448388; cv=none; b=gIBtgA4/BMKkeaxBWhDLITLKnjSri2jpf2XOZ7deS9BrVRX2uBz1WeJk7QWqr7Vp9vzJu+RmaclPffHifxe5kEz/tx1EZvWfa/K24XcloWOJ1krV8XnI/PTCAEMazLWDOntABg5/fXi4b8weFKdaV3O1zBhwJW2C9bPU7RYoWZo=
+	t=1739449029; cv=none; b=EhgSIJIkqlxN1V++c5J7HVVLeymcm4wleVG63U65TddQJ0w+A52deI/8he7OVoKbhqzq4xOxZalNKhJ8ZSHhBaSuJVX7YT9jPpzZQ+QWlZSPKhY5Zb+yNptZoDm2Qyzy3trT0ryR3UAB7PCOt+cXhzOYVWRcQsSWtrHMGhCclz0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739448388; c=relaxed/simple;
-	bh=hlPjUyTzbn/CpVeUfGXZ6ojH2AiMhs+zPylzYlG0MLM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XukvjZ4qhHRhz1VFnXjsC4BikdD0eljZB5wGZRxHgewMuIozGFRzyHKc1C20EtLO327kP73neXKZp7XKx3wII2oIwBYlzZrXM/j/kCAvEiYQYvG+7D/ped7niLZmPvj9urC+BoGQYzSDec+thhb1jmVfBGnlfH5NKX9HLY5PX6Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OmrPXy85; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA5C0C4CEE2;
-	Thu, 13 Feb 2025 12:06:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1739448387;
-	bh=hlPjUyTzbn/CpVeUfGXZ6ojH2AiMhs+zPylzYlG0MLM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=OmrPXy8576+hCzdAghdtJzOZY9/yQAmrqg4hEvurF0rlOms+FPLOvsmfhVRFddzv4
-	 IJWu30zSiX0gHWkaFdOQhedSWiFkGwk4crdShaRMkA4SIYNbaqnWV+rDma+hUES5nd
-	 tDrhyF6XWCkjAahuyvjhD0UeCZjpqYN4sYf42ZyDeyycaTIhVBIS9DW1fkFC8Mki+0
-	 RfE8gbcpLNFrqb/9QMTeKTxfAvl6d5h03gfX/SITQsk5jJ4ScOgoIDPwU2oO/V/Ffi
-	 g8c8GFMZlLywu2kZh0zb3IQQgEu5cgTovKunMJ6LoV8PO182BWnbToFM6iSk6nNNvC
-	 s2fc+hPOTPUTQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1tiXz7-0000000BIVK-1q6H;
-	Thu, 13 Feb 2025 13:06:25 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Vegard Nossum <vegard.nossum@oracle.com>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH RFCv2 5/5] docs: use kernel-doc.py script for kerneldoc output
-Date: Thu, 13 Feb 2025 13:06:18 +0100
-Message-ID: <3e6c607ac65550036f743cb5daf8e8c524515e0b.1739447912.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <cover.1739447912.git.mchehab+huawei@kernel.org>
-References: <cover.1739447912.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1739449029; c=relaxed/simple;
+	bh=vlhlBzSkIneMGWYQBwFyfnTl25nGWzLsKGHhhsEs/qs=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=E6jJV1M3iln5CXusHDIk+9L9WvHDN5ygQXtdHzwl0W3wVM+WYTLyxCGRuw1y2psA0eZcMN/LMQdSZvo6t4VYS5ValGruu9JRIOK9YPrcNuv7BIaaKQREU+KCuOVG4CkWXbZIoGJlzdp2h6djLJLHNaAM54Qhzg3r3A2TbBHhHEM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de; spf=pass smtp.mailfrom=arndb.de; dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b=gj50goYM; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=KGIXqOEX; arc=none smtp.client-ip=103.168.172.155
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
+Received: from phl-compute-11.internal (phl-compute-11.phl.internal [10.202.2.51])
+	by mailfhigh.phl.internal (Postfix) with ESMTP id 4B8C811401A0;
+	Thu, 13 Feb 2025 07:17:05 -0500 (EST)
+Received: from phl-imap-11 ([10.202.2.101])
+  by phl-compute-11.internal (MEProxy); Thu, 13 Feb 2025 07:17:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1739449025;
+	 x=1739535425; bh=vlhlBzSkIneMGWYQBwFyfnTl25nGWzLsKGHhhsEs/qs=; b=
+	gj50goYMrgEWpERcjDoQkgN9f3pgpWRaH9UTa9EeXqLr+vNsHhkSI10rDN2pRbPs
+	0dMsVZxIK8KbQJ+T7z0GfbemKmz7GcdahAp3mx+r+hvixy8hF7f7FN4zuGEm0grg
+	+OIwutIYnvZv9OcE9iL+nhLx7OG2D2dV+ja54OB39VnqKVdjTR/Pl9L2ckVtpLYf
+	nTOuF3/3/bFKCEEYaN6BQIbqw6bhYP6BfvS50t7yqcgctyoWAG4ACjticINh6EMo
+	jyNIMqrJOUGp/xRm9Y81r2U55gJz7ysedkHH4N2Nmfocl6tineRAWXK30FfDarhb
+	QnVbj5L6tsNXrDuw38j+sQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1739449025; x=
+	1739535425; bh=vlhlBzSkIneMGWYQBwFyfnTl25nGWzLsKGHhhsEs/qs=; b=K
+	GIXqOEXDGqLOiIjohIg/UsrKcsUsFtJQspSxYVUbqFU2MmRVSknGiAGOdHheWGKY
+	OT68kTYQCcvgc1Hr+5SJm0XWij0WkkhrP9aALWDJRbpMpu57WwTp6Md0Os+bSZ5j
+	v4JCkkKw6HtLiEW7PR0PT8cfTKOV/bw9r3rakcK8c81GB/mO/vWNxso1AwNTIlVP
+	JoTeaL8Kx0XIW8t/zEDvWal1fNogVXF/1apPPdqNUX4KgrCrGwJj1SJAmdDwOT5S
+	+KZxke609KApqoVkYMmInLZvrCjdGUc3chIcZyGQr8gwMJ0BIzXc83ULenyZfDvg
+	edV28qdFhn7EjVVoUkxQA==
+X-ME-Sender: <xms:weKtZxZ2Jx0SogXKgrce2SjWTjH38dKFCmZc39GEp1sDVs3S0TbyhA>
+    <xme:weKtZ4YnIxba5f_D6pt-4Ddpe2s4Uw3nT0sCRfd8VgWa25I8OCEAy8cHqGhtfw3Z-
+    _-vVmtxmZuU-ScxE3g>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdegieejhecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+    uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
+    hnthhsucdlqddutddtmdenucfjughrpefoggffhffvvefkjghfufgtgfesthejredtredt
+    tdenucfhrhhomhepfdetrhhnugcuuegvrhhgmhgrnhhnfdcuoegrrhhnugesrghrnhgusg
+    druggvqeenucggtffrrghtthgvrhhnpefhtdfhvddtfeehudekteeggffghfejgeegteef
+    gffgvedugeduveelvdekhfdvieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmh
+    epmhgrihhlfhhrohhmpegrrhhnugesrghrnhgusgdruggvpdhnsggprhgtphhtthhopeeh
+    pdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehmtghhvghhrggsodhhuhgrfigvih
+    eskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheptghorhgsvghtsehlfihnrdhnvghtpdhr
+    tghpthhtoheplhhinhhugidqrghrtghhsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtg
+    hpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphht
+    thhopehlihhnuhigqdhkvghrnhgvlhesvhhgvghrrdhkvghrnhgvlhdrohhrgh
+X-ME-Proxy: <xmx:weKtZz-QYp083JbvMAwwfYxmY3dIwwRyfVC1pJyvFu4paKpmoSO4jg>
+    <xmx:weKtZ_pwh3ESfCs4C12dD4F52BjHrnepmhkcN64rV-I_fx4sFyqDzw>
+    <xmx:weKtZ8p65zSwpqVmaWg9jlnDriUkxQ4bY-czD3PyRW4ZE5sYXgzvaA>
+    <xmx:weKtZ1Rg_13YwDOe9KgRY6eNSAXZxhNHKHsmkvGB94yG2QK4j3psMQ>
+    <xmx:weKtZ1k722L4lapCobovkiUcJ5fLaEUOUgSgs--Xdnd5DGEk9anU9dE->
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+	id EFD6F2220072; Thu, 13 Feb 2025 07:17:04 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Date: Thu, 13 Feb 2025 13:16:34 +0100
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
+ "Linux Doc Mailing List" <linux-doc@vger.kernel.org>,
+ "Jonathan Corbet" <corbet@lwn.net>
+Cc: Linux-Arch <linux-arch@vger.kernel.org>, linux-kernel@vger.kernel.org
+Message-Id: <607d3acb-0950-4ce3-b8b4-46fdeca3ce0d@app.fastmail.com>
+In-Reply-To: 
+ <6d69b25e9c720e0e7fc037928695ece7c8a35034.1739447912.git.mchehab+huawei@kernel.org>
+References: <cover.1739447912.git.mchehab+huawei@kernel.org>
+ <6d69b25e9c720e0e7fc037928695ece7c8a35034.1739447912.git.mchehab+huawei@kernel.org>
+Subject: Re: [PATCH RFCv2 1/5] include/asm-generic/io.h: fix kerneldoc markup
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Switch to the new version when producing documentation.
+On Thu, Feb 13, 2025, at 13:06, Mauro Carvalho Chehab wrote:
+> Kerneldoc requires a "-" after the name of a function for it
+> to be recognized as a function.
+>
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/Makefile            | 2 +-
- Documentation/conf.py             | 2 +-
- Documentation/sphinx/kerneldoc.py | 5 -----
- 3 files changed, 2 insertions(+), 7 deletions(-)
+Acked-by: Arnd Bergmann <arnd@arndb.de>
 
-diff --git a/Documentation/Makefile b/Documentation/Makefile
-index 52c6c5a3efa9..a35de321b084 100644
---- a/Documentation/Makefile
-+++ b/Documentation/Makefile
-@@ -60,7 +60,7 @@ endif #HAVE_LATEXMK
- # Internal variables.
- PAPEROPT_a4     = -D latex_paper_size=a4
- PAPEROPT_letter = -D latex_paper_size=letter
--KERNELDOC       = $(srctree)/scripts/kernel-doc
-+KERNELDOC       = $(srctree)/scripts/kernel-doc.py
- KERNELDOC_CONF  = -D kerneldoc_srctree=$(srctree) -D kerneldoc_bin=$(KERNELDOC)
- ALLSPHINXOPTS   =  $(KERNELDOC_CONF) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
- ifneq ($(wildcard $(srctree)/.config),)
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 0c2205d536b3..655be15267f0 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -540,7 +540,7 @@ pdf_documents = [
- # kernel-doc extension configuration for running Sphinx directly (e.g. by Read
- # the Docs). In a normal build, these are supplied from the Makefile via command
- # line arguments.
--kerneldoc_bin = '../scripts/kernel-doc'
-+kerneldoc_bin = '../scripts/kernel-doc.py'
- kerneldoc_srctree = '..'
- 
- # ------------------------------------------------------------------------------
-diff --git a/Documentation/sphinx/kerneldoc.py b/Documentation/sphinx/kerneldoc.py
-index be5b8fbf373f..39ddae6ae7dd 100644
---- a/Documentation/sphinx/kerneldoc.py
-+++ b/Documentation/sphinx/kerneldoc.py
-@@ -62,11 +62,6 @@ class KernelDocDirective(Directive):
-         env = self.state.document.settings.env
-         cmd = [env.config.kerneldoc_bin, '-rst', '-enable-lineno']
- 
--        # Pass the version string to kernel-doc, as it needs to use a different
--        # dialect, depending what the C domain supports for each specific
--        # Sphinx versions
--        cmd += ['-sphinx-version', sphinx.__version__]
--
-         filename = env.config.kerneldoc_srctree + '/' + self.arguments[0]
-         export_file_patterns = []
- 
--- 
-2.48.1
-
+I assume this will be merged through the documentation tree,
+let me know if you prefer me to add it to the asm-generic
+tree instead.
 
