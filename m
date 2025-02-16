@@ -1,136 +1,131 @@
-Return-Path: <linux-doc+bounces-38263-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-38266-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9D16A3773B
-	for <lists+linux-doc@lfdr.de>; Sun, 16 Feb 2025 20:35:19 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CFCCA37763
+	for <lists+linux-doc@lfdr.de>; Sun, 16 Feb 2025 21:06:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 641D33B0452
-	for <lists+linux-doc@lfdr.de>; Sun, 16 Feb 2025 19:34:32 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A7DB23AA49D
+	for <lists+linux-doc@lfdr.de>; Sun, 16 Feb 2025 20:06:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 749251AA1D2;
-	Sun, 16 Feb 2025 19:33:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A23FB78F4B;
+	Sun, 16 Feb 2025 20:06:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="YofqQONP"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="POwq6qL8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78B191442F4;
-	Sun, 16 Feb 2025 19:33:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.17.22
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0879C9454
+	for <linux-doc@vger.kernel.org>; Sun, 16 Feb 2025 20:06:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739734416; cv=none; b=l0ZIm2DwL/+aP+CSKABQ62w6pvdNnHbE5WxYdhwOmtpYVYc2nbaPar2+ZFybKbwWxDc63TA0xPPGYoSHFh2isVqYdYtRaVXMIZhpmvY4JMZnWeA0usAvQYc588wDpZq75xctMosUm08Bi9TyoUdQF/E0gJTNr8qJ/iwr7ak1+Z4=
+	t=1739736369; cv=none; b=CkOOTbHUxvfmxWccYF1yUCon5C0FSwnDXPYQqZL2nQ70bWkfd5YihQNWbB6R3fvPYu0ggqtyZanRew7qwGhm1VOHdbizYE6pCCQn51iOQ75zqIVwiCb9DkyrgWm/R9Wu4y0AjcFHR9sesr/A1uwgZp+pCnMPaPC/EqOIvj9Luyc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739734416; c=relaxed/simple;
-	bh=ID+lTHjLVqPJ/7xdhI9bJLFn9teO4+JhdZK9zVjbwuc=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=a2mj0F8Wy2b8WxQC5VZ5tojosZmjZcX4rW9fG13TDf7OKbTMrUrUL+ETdKk+OyfhLK30gV1w/hCrtJy1JtGHCV+s77eGlxiH5aY+hstIn+0BmbidAu6pRoB+oz2t6uEq48ICiHH8tETXWbbVs8VZ5o69yfOwxxOEOudlOLXqcsY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=YofqQONP; arc=none smtp.client-ip=212.227.17.22
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
-	s=s31663417; t=1739734402; x=1740339202; i=w_armin@gmx.de;
-	bh=RuoP/0xYYt9z3bJOrdWbm40zFLkGkpfWsyjNl2p49Lk=;
-	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:cc:
-	 content-transfer-encoding:content-type:date:from:message-id:
-	 mime-version:reply-to:subject:to;
-	b=YofqQONPxkGF4mtz3bgvN9Z6scS4u6nIMlN84xIgZhvl7oFm/grcrAJAaT0Vh7Zp
-	 ElVzIsr8LYJDk7DW5hghn3QcnZghUH4mJfuBNgZg8LGxJAJ0uk9bpjZIP3xmFZ3AT
-	 AxxEgg426ujptIlghdvrsfbeV1O2q4y/IY+5SEz+ZTk33joGBwt4PwE1KifCN4s0J
-	 rcMD+JuNl0LuATfNqI59CVMaFPU8/0q1dPc3D6iHkGhjOmt+5ek2NZoJwCcDrhPJ9
-	 yHS/jvtq+ZDP2OuctWX+o6IGTuciKWltBk0KJInAeKDT0VzRy6iOUvVCueTdAEBoK
-	 X8x+Mdxw9YsvV85l2A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from mx-amd-b650.fritz.box ([87.177.78.219]) by mail.gmx.net
- (mrgmx104 [212.227.17.168]) with ESMTPSA (Nemesis) id
- 1M89L1-1tf3Z30C3f-00EZn7; Sun, 16 Feb 2025 20:33:22 +0100
-From: Armin Wolf <W_Armin@gmx.de>
-To: james@equiv.tech,
-	markpearson@lenovo.com,
-	jorge.lopez2@hp.com
-Cc: jdelvare@suse.com,
-	linux@roeck-us.net,
-	linux-hwmon@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	hdegoede@redhat.com,
-	ilpo.jarvinen@linux.intel.com,
-	platform-driver-x86@vger.kernel.org,
-	corbet@lwn.net,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v2 8/8] platform/x86: wmi: Update documentation regarding the GUID-based API
-Date: Sun, 16 Feb 2025 20:32:51 +0100
-Message-Id: <20250216193251.866125-9-W_Armin@gmx.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250216193251.866125-1-W_Armin@gmx.de>
-References: <20250216193251.866125-1-W_Armin@gmx.de>
+	s=arc-20240116; t=1739736369; c=relaxed/simple;
+	bh=4rRb0s9I0b2SOLT/SYo9wgeXlV2XY6V+k9haqlrm5YQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ixylaacko3OPwO7NjvjqQoE8wXVRoVgxOyGoitsBXi7pIHGml+aC0iKKTNBHXukMEOrON13Maeunfq78Aor5QbdykhVLKvMJsbGnIEzucvNkIP8NhEXoE46DOMoC5xsx64Mt+S/uSmxE3xPsDI7EYkSE5aEPCRv3/J8fNXOAnAg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=POwq6qL8; arc=none smtp.client-ip=209.85.160.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-471ede4b8e5so2080741cf.2
+        for <linux-doc@vger.kernel.org>; Sun, 16 Feb 2025 12:06:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1739736367; x=1740341167; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=EAP1KD1zZ0LDFgrnzNE0CA0YlB1kpZiKhEpfx68P448=;
+        b=POwq6qL8u8qTkPBmXLlm5JlCC3xefaiWzw0DVJwvtpcc3h8N8sRkZz5bulUv2U6Rbx
+         dhbPV0pLW8qYrCLzlzTXQsZEEuMpei8lZ4X9682CovRpDFWxDI/YZ7eOrxCBKsvPEroX
+         0VAJ8+JUi24Plbw4wBezXfI1407rvKghGGXk13BqRTY7UfnQIaNv79JKCNS74laeklwP
+         z8b4vZe1Q+ngyhy7CbaTk18K5MD4VZdXYq48tpTk8Zg8uZJzQPmDMLX+L7OBHXLvC2vy
+         sMcHaKdFjghFyNmqJb8WWHU6LXAw0XehRek8y+xEsauPZmqxUqR/WH+JpDNcnbPwusGR
+         2fCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739736367; x=1740341167;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EAP1KD1zZ0LDFgrnzNE0CA0YlB1kpZiKhEpfx68P448=;
+        b=ntmasqA1d6P1Ov7zPiFHPpSoR0K/U5aeTFg5p3QB3YtA/G9cPXXDVNC5bWHb0T1yjQ
+         /mGwB0NJx779pg7DR4PBSyHaj8KF1ty80Q7x8UbJ2KNnC0jRKPKD1Rfx/zwtvHek3alc
+         a1MnvxOHSTaE4BqxIYTtV5q2CTNd7UI31ZE6VXxB4ZVXfC/mVdPJ0ix7vZrC1Xmhu3nX
+         LQ2mtykC4Pi9GD0oTroW35zFkCbXPVqrOzRaTpyTzihFiCbUci8lni3s0ygkiF4y5d4k
+         yckrTuOZIWnJiY7Ylt+C4vrRw/Z6SIq5gDqBOw9bJX6O8I7L8THjgZjwlncRohqXHzLo
+         KmtA==
+X-Forwarded-Encrypted: i=1; AJvYcCUQhNGWM6dZYhXNWD7JclDimj7kdmnwUbwC3BUV8ObKcBVOqEelws50/Q6+oA+USpGI+4bzryvalWQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwZmtjEmgQ1O7axa/6q14OzuqQ0yAwJo9IlP46ESKNbUxF1KoJi
+	AxcsH/Xe8nsfbHdzssah3XKkqVYpRSTmow7bweXydJRk/k2CP9+0T6v+GKY8swnemTC0O64+UzR
+	duBDowVQI2FN7cUConZ7PhZ8S7FA=
+X-Gm-Gg: ASbGncvL3R3WQi3uu37x7DISBWiJkn1djmg/rSDIyWmuoMjlR/sNkWwkXduI9s3HKIY
+	PMgdurScpgPlWcy/qjhdfU94fyn0Rv7T3dlsWTx7w3xwr8J7pXtliMmHnTr8j6mpXG53Z+eOlfk
+	Q=
+X-Google-Smtp-Source: AGHT+IGMJnTzbXTh9ELT1cBFq6Q+uf6saBfPcbkuFGKb+pRYe6Suqup61hJzj18QOo4GbFyv7cGrTTg73jw91ibrb4E=
+X-Received: by 2002:ac8:590a:0:b0:471:ba98:a1d3 with SMTP id
+ d75a77b69052e-471dbcc8a65mr96701251cf.11.1739736366922; Sun, 16 Feb 2025
+ 12:06:06 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+References: <20250216160644.18924-1-andres.emb.sys@gmail.com> <874j0tvm43.fsf@trenco.lwn.net>
+In-Reply-To: <874j0tvm43.fsf@trenco.lwn.net>
+From: Andres Urian <andres.emb.sys@gmail.com>
+Date: Sun, 16 Feb 2025 15:05:56 -0500
+X-Gm-Features: AWEUYZmokXvRusmiPvx8MGUmZQXRVUqlYmqkeNqcXe7mK7iCJHEMh-ENyudH4L8
+Message-ID: <CAMihqu_uw-51wXMTxo9YLHF8VGcdywzMZukePvbL5m=C37jfBQ@mail.gmail.com>
+Subject: Re: [PATCH] Documentation:gpu: fixed spelling mistake
+To: Jonathan Corbet <corbet@lwn.net>, airlied@gmail.com, simona@ffwll.ch, 
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de
+Cc: skhan@linuxfoundation.org, linux-doc@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:unI5ci7/U0jgo6xrp2Iof2EdkjfoF+u7bew6UozWBxMoO0QG1zv
- Dz1J2CiXVy9iS4ngz4eN/f1rHLYCgOLZJJQg3jvzL2zgSnWhzwRQJYvGVsg9AbljWV5p7VR
- Vgd0veZj6PKMsrC0Vrr9LE98hZGhE4HugjH6bVKr1Nys+FghONDc4R6t6RyJ3yEM1Cgs6R/
- EPEDxptMriX8ZmRlbSP8g==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:zAsFx4RIdlg=;5gtkmqYph3E3jIVY4WKohVAAftX
- 24bLG9z7I0K0O9d44CS17M65bLznB6lLCQclU4oINLun0YoqIxiKLE/zA5uod56STGWQQpdiP
- wZPmDxZVKd3KQ/oZdPXs+++wm+I+bAmM0yxUe4lIN/QXoXVP5n4Fy7OO8LjjTP554oWDf762K
- gYTbBVFNVv5onqQBnDESJvejKvzeQtzdEwlbb5PKN8eWG43ookylgKlj81rjLEBcqh/0jqawa
- VnOxz1vp1wMCLBp9ldUHpQEKRnhxIvALHVrKPtVWLfGOBWpjeVNCfsp5H3I/Oo2hQLqYwDkp1
- u872kRg5AyBfwBgvuqXEM3ze8aMXxYyUtYhFwsTOerFgcPuBvJABNFStoIroubAztzPG5iipH
- uuJKPj91QjouYgjjDXbMBRkY7V7hEJNFm8rnVmC/6OkqUrS3uDkzdWWgF8/en677aDtI8DnW7
- oi2r7rfDtF3y2gLIaMf3UJmZRyKqNxHJ9QUod01uLHbSAJd/i0kE400MnjjkX8bgxI/ly1N/r
- 6nc/pjpnW/cgb/DvjMYHPeCTc03ESCM3b+i9SjvkeGRxAKaaMrLQVnQGqr68ahbbnbNE7xgq9
- 7qnCTdF/Ne9/cGv42XmGA6XUpbFeY3QF1lfZD+1enad9gJT2+9ODxRo5r0n4MirVthObbgRSr
- zBiAjsOXjqi+v8gukmvzHwT3zQyDoIn42bz93D3LvqB7HulKmyXpLiozhNXq8SeZ+lR0j9pfm
- cpz3GvhF/ktHTKfTRuTd+UFPG5a2T30YljsNy91dyZMzvzrHaDGLIOX8fZUk4JfG/21i58rE1
- O9ab4kLcrQbCSGPX35v9hODDn6jXyI1HaJ3/g+UXYUOOqx+trilI5VoXoMmsrx37qscB6ewd0
- JyP+zTo+3x3d0YNey3AEhoG9JVttwhHP935gIfRdbl9bCjqFak36Ye2W/iuMl9vzhJ0JEbOoE
- zGEOY5nsU+XS1cY9ial28hZzcR8MhUt8IzO2VidhPZ1RIhnmLs5G4M1WcYikPXuiERV41B6Kz
- MJaLYNkf/XszAO44x6sqyWRKE49uDMyxck1DDLwxYYjMfztcLNyJ86H3ZW+J4opZHAP7d/9G4
- /UN8MlaY78d5xRCcxSw+PljjlGJlZKSneiehN0bKR+pnlXUsbjvDm8zqWL2lRS53V0Gh8+qLI
- +lJusQl8Fq9XkrLnQ1Jv6rAP6Bxo2lTyNwQkL5krcDs37vNTksjQWTGBSTlTFhwCBo1zAe7km
- JqQFekdZ+5lU9Ncjoykh0DqYku2SBBrCfPjgqmy/mNcECkY02+EKJCwkPoKFTOXoTxTsvkjTq
- 46Qj8LCrrbLgcY6EpET3Ch5qe82AfkMPWks7/6Z322flJroiE5bDqoP+EO2eVc40Lr1L//Gms
- +QQz5mi3mdX60beRbtI+e/IRkzP1PMFbzy73fHUFZ7erekAgAmdO06hwL5
 
-Warn WMI driver developers to not use GUID-based and non-GUID-based
-functions for querying WMI data blocks and handling WMI events
-simultaneously on the same device, as this will corrupt the WMI device
-state and might thus lead to erratic behaviour.
+On Sun, Feb 16, 2025 at 12:24=E2=80=AFPM Jonathan Corbet <corbet@lwn.net> w=
+rote:
+>
+> Andres Urian Florez <andres.emb.sys@gmail.com> writes:
+>
+> > Fixed spelling mistake identified by codespell in the drm-uapi
+> > documentation
+> >
+> > Signed-off-by: Andres Urian Florez <andres.emb.sys@gmail.com>
+> > ---
+> >  Documentation/gpu/drm-uapi.rst | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/Documentation/gpu/drm-uapi.rst b/Documentation/gpu/drm-uap=
+i.rst
+> > index 69f72e71a96e..64e002c6383c 100644
+> > --- a/Documentation/gpu/drm-uapi.rst
+> > +++ b/Documentation/gpu/drm-uapi.rst
+> > @@ -518,7 +518,7 @@ ENOSPC:
+> >  EPERM/EACCES:
+> >          Returned for an operation that is valid, but needs more privil=
+eges.
+> >          E.g. root-only or much more common, DRM master-only operations=
+ return
+> > -        this when called by unpriviledged clients. There's no clear
+> > +        this when called by unprivileged clients. There's no clear
+> >          difference between EACCES and EPERM.
+>
+> This is a fine patch, but it should really have been copied to the DRM
+> maintainers; I think scripts/get_maintainer.pl should have told you
+> that?
+>
+> Thanks,
+>
+> jon
 
-Signed-off-by: Armin Wolf <W_Armin@gmx.de>
-=2D--
- Documentation/wmi/driver-development-guide.rst | 4 ++++
- 1 file changed, 4 insertions(+)
+Sorry, including missing maintainers.
 
-diff --git a/Documentation/wmi/driver-development-guide.rst b/Documentatio=
-n/wmi/driver-development-guide.rst
-index f7e1089a0559..99ef21fc1c1e 100644
-=2D-- a/Documentation/wmi/driver-development-guide.rst
-+++ b/Documentation/wmi/driver-development-guide.rst
-@@ -96,6 +96,10 @@ on a given machine.
- Because of this, WMI drivers should use the state container design patter=
-n as described in
- Documentation/driver-api/driver-model/design-patterns.rst.
-
-+.. warning:: Using both GUID-based and non-GUID-based functions for query=
-ing WMI data blocks and
-+             handling WMI events simultaneously on the same device is gua=
-ranteed to corrupt the
-+             WMI device state and might lead to erratic behaviour.
-+
- WMI method drivers
- ------------------
-
-=2D-
-2.39.5
-
+Thanks,
+Andres
 
