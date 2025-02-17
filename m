@@ -1,31 +1,31 @@
-Return-Path: <linux-doc+bounces-38379-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-38382-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A828A38D70
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 21:41:20 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id C302BA38D7E
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 21:42:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B045D189362D
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 20:41:04 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9A79B3B1631
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 20:41:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 718FD2397AA;
-	Mon, 17 Feb 2025 20:40:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A761923DE85;
+	Mon, 17 Feb 2025 20:40:46 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1A2623909C
-	for <linux-doc@vger.kernel.org>; Mon, 17 Feb 2025 20:40:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F391C23C8CD
+	for <linux-doc@vger.kernel.org>; Mon, 17 Feb 2025 20:40:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739824840; cv=none; b=tCRCZjgour9gcnGLjdlcPOHoBDEsOrfPZsgrBlvt9L74HbqLbJcBr3msIjic9fb53Brv+q4m/6si4E+kfo2vj0gQ8F8MBur6n2FqvRfHX39/4O5Pi/ojNwXn17ZAwsZeLItYOf7zSqq7IqROQp7GflIXO2aGyPAPl6tMdaUBHaE=
+	t=1739824846; cv=none; b=ZDLocIt9HJgpgCjVerL68jQUpd9OsJHRYxFhL0sBgg8k2UmJkKcfb/irSzGp5g4VEqlSafQ8XJpn+XqotX+EMLy4HhPDr6iA9osfP4fzT81izVLKMGuAlgDsZF/PGPOJhqh4KDZpn/0lhK3CXw8uRNfgXw+uFpxPKo+tF+rhoDM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739824840; c=relaxed/simple;
-	bh=EF+OIGuQjAmSVRDImJKX1B6EES2YYainDrFd5e7QM38=;
+	s=arc-20240116; t=1739824846; c=relaxed/simple;
+	bh=jLe5imhlTfSQ9SJacpu+JrReHBHI3E83Cv9BqUFVZfk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Jia38bnb1+0/ft9zZ27zOXkrL4nM3VMeh6ByonE/Z3vCR0sKNyL2QTGiRf+p2dZe2U8Ews4KxdrJVk2ospa9yWcQcxYHknHLp+UOjlPehx8nGE2BeqGgLS07mrHM7rIiKXpbtMAHNsZg18HfNtVMBzrJ89jm2fuHB/LPKaz+0io=
+	 In-Reply-To:To:Cc; b=rhjpK3R6/w7QAVZkNJUJ1YyU9Tjd82F/Rvkxa185gQ7+wQ3JtGRbiI/RyMhI9cuxWsPxwUn3VI30BN7HX/4654QO9gRMXt5hHehyebfyKNj2pG4x9bL5N5p7ZwymW01fRkxVGwKwB3t/p5+fSbkN5OL6pHLoHRJTAyH8mG/seTY=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
@@ -33,22 +33,22 @@ Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
 	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tk7uZ-0007oK-CW; Mon, 17 Feb 2025 21:40:15 +0100
+	id 1tk7uZ-0007oJ-CW; Mon, 17 Feb 2025 21:40:15 +0100
 Received: from dude05.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::54])
 	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 	(Exim 4.96)
 	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tk7uX-001TFx-32;
+	id 1tk7uX-001TFy-30;
 	Mon, 17 Feb 2025 21:40:13 +0100
 Received: from localhost ([::1] helo=dude05.red.stw.pengutronix.de)
 	by dude05.red.stw.pengutronix.de with esmtp (Exim 4.96)
 	(envelope-from <a.fatoum@pengutronix.de>)
-	id 1tk7uX-000W9t-2R;
+	id 1tk7uX-000W9t-2S;
 	Mon, 17 Feb 2025 21:40:13 +0100
 From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Date: Mon, 17 Feb 2025 21:39:44 +0100
-Subject: [PATCH v3 04/12] reboot: describe do_kernel_restart's cmd argument
- in kernel-doc
+Date: Mon, 17 Feb 2025 21:39:45 +0100
+Subject: [PATCH v3 05/12] reboot: rename now misleading
+ __hw_protection_shutdown symbols
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,7 +57,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250217-hw_protection-reboot-v3-4-e1c09b090c0c@pengutronix.de>
+Message-Id: <20250217-hw_protection-reboot-v3-5-e1c09b090c0c@pengutronix.de>
 References: <20250217-hw_protection-reboot-v3-0-e1c09b090c0c@pengutronix.de>
 In-Reply-To: <20250217-hw_protection-reboot-v3-0-e1c09b090c0c@pengutronix.de>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -81,31 +81,79 @@ X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
 X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
 X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-A W=1 build rightfully complains about the function's kernel-doc
-being incomplete.
+The __hw_protection_shutdown function name has become misleading
+since it can cause either a shutdown (poweroff) or a reboot
+depending on its argument.
 
-Describe its single parameter to fix this.
+To avoid further confusion, let's rename it, so it doesn't suggest
+that a poweroff is all it can do.
 
 Reviewed-by: Tzung-Bi Shih <tzungbi@kernel.org>
 Signed-off-by: Ahmad Fatoum <a.fatoum@pengutronix.de>
 ---
- kernel/reboot.c | 3 +++
- 1 file changed, 3 insertions(+)
+ include/linux/reboot.h | 8 ++++----
+ kernel/reboot.c        | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
+diff --git a/include/linux/reboot.h b/include/linux/reboot.h
+index e97f6b8e858685b4b527daa8920a31eabcf91622..53c64e31b3cfdcb6b6dfe4def45fbb40c29f5144 100644
+--- a/include/linux/reboot.h
++++ b/include/linux/reboot.h
+@@ -188,17 +188,17 @@ extern void orderly_reboot(void);
+  */
+ enum hw_protection_action { HWPROT_ACT_SHUTDOWN, HWPROT_ACT_REBOOT };
+ 
+-void __hw_protection_shutdown(const char *reason, int ms_until_forced,
+-			      enum hw_protection_action action);
++void __hw_protection_trigger(const char *reason, int ms_until_forced,
++			     enum hw_protection_action action);
+ 
+ static inline void hw_protection_reboot(const char *reason, int ms_until_forced)
+ {
+-	__hw_protection_shutdown(reason, ms_until_forced, HWPROT_ACT_REBOOT);
++	__hw_protection_trigger(reason, ms_until_forced, HWPROT_ACT_REBOOT);
+ }
+ 
+ static inline void hw_protection_shutdown(const char *reason, int ms_until_forced)
+ {
+-	__hw_protection_shutdown(reason, ms_until_forced, HWPROT_ACT_SHUTDOWN);
++	__hw_protection_trigger(reason, ms_until_forced, HWPROT_ACT_SHUTDOWN);
+ }
+ 
+ /*
 diff --git a/kernel/reboot.c b/kernel/reboot.c
-index f348f1ba9e22675ac1183149ba19f39be12edacd..6185cfe5d4ee910daf057884a7ff8dcf1e80df28 100644
+index 6185cfe5d4ee910daf057884a7ff8dcf1e80df28..c1f11d5e085e4d2fffc841a624c8b650aba276b8 100644
 --- a/kernel/reboot.c
 +++ b/kernel/reboot.c
-@@ -229,6 +229,9 @@ EXPORT_SYMBOL(unregister_restart_handler);
+@@ -1008,7 +1008,7 @@ static void hw_failure_emergency_schedule(enum hw_protection_action action,
+ }
+ 
  /**
-  *	do_kernel_restart - Execute kernel restart handler call chain
+- * __hw_protection_shutdown - Trigger an emergency system shutdown or reboot
++ * __hw_protection_trigger - Trigger an emergency system shutdown or reboot
   *
-+ *	@cmd: pointer to buffer containing command to execute for restart
-+ *		or %NULL
-+ *
-  *	Calls functions registered with register_restart_handler.
-  *
-  *	Expected to be called from machine_restart as last step of the restart
+  * @reason:		Reason of emergency shutdown or reboot to be printed.
+  * @ms_until_forced:	Time to wait for orderly shutdown or reboot before
+@@ -1022,8 +1022,8 @@ static void hw_failure_emergency_schedule(enum hw_protection_action action,
+  * pending even if the previous request has given a large timeout for forced
+  * shutdown/reboot.
+  */
+-void __hw_protection_shutdown(const char *reason, int ms_until_forced,
+-			      enum hw_protection_action action)
++void __hw_protection_trigger(const char *reason, int ms_until_forced,
++			     enum hw_protection_action action)
+ {
+ 	static atomic_t allow_proceed = ATOMIC_INIT(1);
+ 
+@@ -1043,7 +1043,7 @@ void __hw_protection_shutdown(const char *reason, int ms_until_forced,
+ 	else
+ 		orderly_poweroff(true);
+ }
+-EXPORT_SYMBOL_GPL(__hw_protection_shutdown);
++EXPORT_SYMBOL_GPL(__hw_protection_trigger);
+ 
+ static int __init reboot_setup(char *str)
+ {
 
 -- 
 2.39.5
