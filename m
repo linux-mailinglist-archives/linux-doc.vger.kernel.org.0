@@ -1,310 +1,204 @@
-Return-Path: <linux-doc+bounces-38291-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-38295-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E1EDA37C00
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 08:19:49 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D4DCA37C6C
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 08:41:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 152A2188E921
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 07:19:12 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4C23A7A37E3
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2025 07:40:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B2DC1990C4;
-	Mon, 17 Feb 2025 07:18:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C45CE198E84;
+	Mon, 17 Feb 2025 07:41:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="cXkZ6oMP"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dRBy5t4/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f226.google.com (mail-pl1-f226.google.com [209.85.214.226])
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2523918DB1C
-	for <linux-doc@vger.kernel.org>; Mon, 17 Feb 2025 07:18:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.226
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E272619048F;
+	Mon, 17 Feb 2025 07:41:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739776739; cv=none; b=psubhsxc5YbGIw0ljz3lZBQZWREZMMgl3FYHPPCK4XpoNT9gk1yBMBydYkSlqjpda7TDLUi/1F5kuWLxAiQ7dsURCB9ih6P6bbnqOj/6uROw1mlqHSU6v4CO/sZm38LNN61EjTySNJs2F8nnXWRPIh6rrJoITV6a1B/3G4VvjbQ=
+	t=1739778064; cv=none; b=OprjeVvO4NJepRU6y3wi1YbYxJ0ehoPjhNMBrQr43mRmnc0Z2qa4teOsy1tJH6oxLIloHcDHJOOs1RApci6iW8WDI7NO7alMQb/53Q6+vv0Ed43TNgShH1itD1/qIl9bmH3S6bTDWxRv7X6VyLiOH92gY+9ACAId8/h92ZBGe9w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739776739; c=relaxed/simple;
-	bh=ndXTYWnD0dGmJ/CTps1hj3PgFz/Squ4fkXCPkynjP7Q=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=QCILoEZ+D5aolGTaFCbEhB/N8F1lF02CUYS7gtwvl9UJ/ol8sOsPrnO03a3Lb6Ri4lBCphDG2HkWr5QX2Kp0WS/UuhzOdjcPS5wCELbEtVCVNhrn183DcllNJMXLy1+z1K/1TXMflCgN8pE3cj4xJKG+AMBhQbakbyAOtcCSstQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=cXkZ6oMP; arc=none smtp.client-ip=209.85.214.226
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=purestorage.com
-Received: by mail-pl1-f226.google.com with SMTP id d9443c01a7336-220d132f16dso57694505ad.0
-        for <linux-doc@vger.kernel.org>; Sun, 16 Feb 2025 23:18:56 -0800 (PST)
+	s=arc-20240116; t=1739778064; c=relaxed/simple;
+	bh=VoU6E0WdPE64Io1VqSxCePnL4gVF+u9gsNgh81Je13w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=XTkdf0+A+1Fxv/uql33Dd3Ib03O+wfkC2dlmaFzbjiXvQstSW2rCPSsnHJQoHpgB6V2VIj2/nDyTZBGJl3pIadNe9Xn3iPIIrazW3d+V8l8bORR9A4EjV3HMUomejQuPE6AH8ZbF8BRR+ZKJlL9RjsQRgfIy1QwLJtIyNGLEj60=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dRBy5t4/; arc=none smtp.client-ip=209.85.218.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-aaedd529ba1so476196466b.1;
+        Sun, 16 Feb 2025 23:41:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=purestorage.com; s=google2022; t=1739776736; x=1740381536; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=HkZ3MuwsfFvPuUcCGF9IbI3/TlNqWSAvIHqD4D2Ewrs=;
-        b=cXkZ6oMPQ+SpaEweayNzDI+ZwwBfjHCPkuyhb5xcKhqJJA7FBI83b9h+9VfkJihcPd
-         17upt3j4O7t9ee8W73IkxcJLgLhK+phbXiRtPi44ntRbDTD/mrH/9hQMCFCYIi+fC+9F
-         ayNiVCqXRK/xhFZ6tNJwEGVtY5yrNvU8hQHmOwC6y7KVvLsl89tqgmlrSGr80Scdk/ha
-         JgnT/5y01tr9RfPOL2U/l4rco4Cr18Kcki+IXl0JrYGektIXrno0ESf202qUeKcq9R7r
-         oe20/tVhsrsuudfKfPRHMoglQYpm0elkGe1OiawTfnsBp8+q1hlMNQ7jz7JvdJg6SmX7
-         D9+g==
+        d=gmail.com; s=20230601; t=1739778061; x=1740382861; darn=vger.kernel.org;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :reply-to:message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pzm/LRbGKENUzuNI+IxhBxnLqSxOmoILk4BSzuWk9EU=;
+        b=dRBy5t4/NC6ZOerrk/9S/0dRWMdK666xPZzk0UQAnw1woyt1QHFopFSJM1gLgCs3+O
+         CC+74NXwjR1gnvi3Ktz6lywx8j5y9wQ7dVZb2O5ZOlklJwNQ/ecY3jqyGgUSKTuKClio
+         4qRtKYrqFBxvKx4B1E1NE9SCBSToP5nhUv+odhzGvYQ1PQhM20eMuqOZBJfKW1GXnvNW
+         WrLYEY56EpmtZIjIjY2VSpzyFw+VSKiKq3zn8tK5h4U+yWfJfn1EkBRueoXHs3A8qCvG
+         3MeMkLOyq9JTRSEYG0liWMgAXTs0wDNaSICqA4B5DzX9t4l5qifmBgcrnGnnuu2A+nv9
+         V2ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1739776736; x=1740381536;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=HkZ3MuwsfFvPuUcCGF9IbI3/TlNqWSAvIHqD4D2Ewrs=;
-        b=JK4AuFfiI53zNIoSlrT84/DrWQYnUOxHrDH4FZF77oCxMm22e0yEPu/B08QkyNPWFX
-         Jwy5SNiB2KiSZkGavV/pcKGVAbeQQjq2AIhwFbdhdUPsUyxEsnVzzBbBiwZQgVbpdudK
-         xqI24wy9x6Hg0XFIsGJASisuZmlQHGLHlrntkgxEXJ3kKkavOfLrlZrUBHjGQT8OaWij
-         PPCMGqpAOjsV2lrwV206Sn56TPh45+e0tanGbKoD7JFXaNZ4vELFTG07P6gyCGFc3x79
-         mSi/ZO10Gh6CIMSmYBTMggFa5eZMlrJ9oniO5PXnLTc/czAZYpvYlEDfPnI16lFZJDZP
-         ySsg==
-X-Forwarded-Encrypted: i=1; AJvYcCUcKYM3qDxY9/CGrzxblSUqAH6hruPczs6GKmsv6z5U4YWGhU6tzWJLcX/Ic/Ssm+DQ5gp0z7ZzW3w=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzfSrySDrABJu33UpGQyZdbitvZdu0EEC4DG6+WwHxyQYqRhM6+
-	sxfd+1sMLeMS3KvJQUZd0odaz35yNjxpcv9SdDOEqrAaZoZJTyPiuFeV5JppdYzMVLNBrNLZbgD
-	mC0gozKhkjTedmi3RhTzvHW62dfKU0rXXTxlI3+jLlS/rscjq
-X-Gm-Gg: ASbGncvLvkRUVTHM0wWZFU13dVuarqNKmcWwKi/TPCU3BbgrO6FUMNTxTeUTY+XuoNs
-	BNixQF3O5X5eCUSOL0mvmrnR6JJEiG2OyvUaC295RNwydRm+1rKmbwZf7NRLYi5Ot9FwF/f5v7P
-	tXIH+WZEFbw5qIR6MIP3tQ4VBLcK4sgJba6Ejm6gMU+7Vu0IlDPgdPRyBtkiH+kuaYkXYKA25Ah
-	9Dea8cI1vGFvJN67s4eh0c4K7V/Osaw0Kv+fAH5LDZ0Nu7dxvdWikYVViCZiz2KZqX9XprHYHii
-	kXpSMvfWrFo0NdcOh+UP00FX
-X-Google-Smtp-Source: AGHT+IH96NV5yBtPS25vId79PqydhpDNQgmuOjjt2XC/Hk1zsR9+IC6loQzK3G+yPc2QpSiwVLYpjqreq5wq
-X-Received: by 2002:a17:902:e802:b0:220:ff3f:6ccb with SMTP id d9443c01a7336-221040ac211mr119503775ad.42.1739776736316;
-        Sun, 16 Feb 2025 23:18:56 -0800 (PST)
-Received: from c7-smtp-2023.dev.purestorage.com ([2620:125:9017:12:36:3:5:0])
-        by smtp-relay.gmail.com with ESMTPS id d9443c01a7336-220d5201ce8sm4332605ad.18.2025.02.16.23.18.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Feb 2025 23:18:56 -0800 (PST)
-X-Relaying-Domain: purestorage.com
-Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [IPv6:2620:125:9007:640:7:70:36:0])
-	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 90A893407B1;
-	Mon, 17 Feb 2025 00:18:55 -0700 (MST)
-Received: by dev-ushankar.dev.purestorage.com (Postfix, from userid 1557716368)
-	id 8BD3FE56BB5; Mon, 17 Feb 2025 00:18:55 -0700 (MST)
-From: Uday Shankar <ushankar@purestorage.com>
-Date: Mon, 17 Feb 2025 00:18:46 -0700
-Subject: [PATCH net-next v4 3/3] netconsole: allow selection of egress
- interface via MAC address
+        d=1e100.net; s=20230601; t=1739778061; x=1740382861;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :reply-to:message-id:subject:cc:to:from:date:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=pzm/LRbGKENUzuNI+IxhBxnLqSxOmoILk4BSzuWk9EU=;
+        b=g9QFRd6pAsDI2J+DuoxqNBr93z4w+ZsXGieMChRwG4DtsD7o7Q8tiI6aIwHOk9UQVi
+         4nGlK4nurbNX5dx0d3pxS3++VRXl7Gho82IijdU9MdvGrutKll8jFW2rsB1WjVNNkHxb
+         e8JgdbBKSw94CI6PiHpp9ydvngvFl6zTIWTfs2E+++5lrvU1sfSf8oCOdQ9elRvXl0W9
+         dOiQzHLIiayz6l3978c6ShLYb+yZuBM4qzrNQswhcSmM8WDDSurrroZEfAqGTXaq2PSZ
+         VR/fGYIJipmumlQZm95VUYOE+cFhBuj6kSYJy+fHI8QwjN3yweeieECedJGoLMPNn6Vm
+         9d4A==
+X-Forwarded-Encrypted: i=1; AJvYcCXHjFeWDHi0rbB+OTz6CHGYvJ72Qp1lHF6lvLt62vJHlr/vj8yQ4Qd8KPFMGPt7nXhBfF2DncQyUVE=@vger.kernel.org, AJvYcCXHnHJ6iMlJYexQNxtyDXu1CLyiNmjqsnQ0wMB9ryOMt3YLllsJezrOzD3Xhm+Aqo1jhjEO@vger.kernel.org
+X-Gm-Message-State: AOJu0YyEmEHZ1Djymko7xHCyhbyTVvYUjEAdQZI7vYP+WdBtJSvPcsMx
+	8/kfikR6+PlhxJy3zrIvYEKiroTLqGl7eWuqjsSQ7OFQejPK3PaCGVPAeber
+X-Gm-Gg: ASbGncu+YzHLH+BWg6BEM6w0/82kj5qbiccW45TgzLY7N6LhmUPunw1scYaxFrc3y2M
+	Eom/j6floztdJ+kU4Qgc0CGAq6CZaoJadXUzegNoDYXB+5BdnBjXQAiQHFMGOWSZnfqNabtuwob
+	hA2vt0z3qJP+sT09F4fpl4CZbvGfcvSjhw0mCnD4JR8PPVXEAKps79V4bjZTO8fLfjo6b0oo3rJ
+	QrZjMJbk1UjrdZluUHxhznIPOZ8rtyAu+H0kY6etpSmV2tQXB4EO3nEX0kHTDJdymQ6VWn8f9tU
+	4itWaBDMV9a/msU=
+X-Google-Smtp-Source: AGHT+IETS/YYr1RBO5fl70gVw0CWTL6RUYYKxZj05+dv94R3beiRNefTK0Mf6pkYtj2puE6D08pH0Q==
+X-Received: by 2002:a05:6402:510b:b0:5dc:a44e:7644 with SMTP id 4fb4d7f45d1cf-5e035ff9cacmr21077071a12.2.1739778060956;
+        Sun, 16 Feb 2025 23:41:00 -0800 (PST)
+Received: from localhost ([185.92.221.13])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-aba5337634bsm844028766b.91.2025.02.16.23.41.00
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Sun, 16 Feb 2025 23:41:00 -0800 (PST)
+Date: Mon, 17 Feb 2025 07:41:00 +0000
+From: Wei Yang <richard.weiyang@gmail.com>
+To: Alan Huang <mmpgouride@gmail.com>
+Cc: Boqun Feng <boqun.feng@gmail.com>, Wei Yang <richard.weiyang@gmail.com>,
+	paulmck@kernel.org, frederic@kernel.org, neeraj.upadhyay@kernel.org,
+	rcu@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] doc/RCU/listRCU: fix an example code snippets
+Message-ID: <20250217074100.2wyy6akdr2j464wx@master>
+Reply-To: Wei Yang <richard.weiyang@gmail.com>
+References: <20250101082306.10404-1-richard.weiyang@gmail.com>
+ <Z7Ka8Z5RS_OwyL_G@Mac.home>
+ <CDB3A2E0-A891-491E-9F7D-F09843F1A3E3@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250217-netconsole-v4-3-0c681cef71f1@purestorage.com>
-References: <20250217-netconsole-v4-0-0c681cef71f1@purestorage.com>
-In-Reply-To: <20250217-netconsole-v4-0-0c681cef71f1@purestorage.com>
-To: Breno Leitao <leitao@debian.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, 
- =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>, 
- Simon Horman <horms@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, 
- Johannes Berg <johannes@sipsolutions.net>, Jonathan Corbet <corbet@lwn.net>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-wireless@vger.kernel.org, linux-doc@vger.kernel.org, 
- Uday Shankar <ushankar@purestorage.com>
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CDB3A2E0-A891-491E-9F7D-F09843F1A3E3@gmail.com>
+User-Agent: NeoMutt/20170113 (1.7.2)
 
-Currently, netconsole has two methods of configuration - module
-parameter and configfs. The former interface allows for netconsole
-activation earlier during boot (by specifying the module parameter on
-the kernel command line), so it is preferred for debugging issues which
-arise before userspace is up/the configfs interface can be used. The
-module parameter syntax requires specifying the egress interface name.
-This requirement makes it hard to use for a couple reasons:
-- The egress interface name can be hard or impossible to predict. For
-  example, installing a new network card in a system can change the
-  interface names assigned by the kernel.
-- When constructing the module parameter, one may have trouble
-  determining the original (kernel-assigned) name of the interface
-  (which is the name that should be given to netconsole) if some stable
-  interface naming scheme is in effect. A human can usually look at
-  kernel logs to determine the original name, but this is very painful
-  if automation is constructing the parameter.
+On Mon, Feb 17, 2025 at 10:22:53AM +0800, Alan Huang wrote:
+>On Feb 17, 2025, at 10:12, Boqun Feng <boqun.feng@gmail.com> wrote:
+>> 
+>> Hi Wei,
+>> 
+>> The change loosk good to me, thanks!
+>> 
+>> I queued the patch for futher reviews and tests with some changes in the
+>> commit log (for title formating and a bit more explanation), please see
+>> below.
+>> 
+>> Regards,
+>> Boqun
+>> 
+>> On Wed, Jan 01, 2025 at 08:23:06AM +0000, Wei Yang wrote:
+>>> The example code for "Eliminating Stale Data" looks not correct:
+>>> 
+>>>  * rcu_read_unlock() should put after kstrdup()
+>>>  * spin_unlock() should be called before return
+>>> 
+>>> Signed-off-by: Wei Yang <richard.weiyang@gmail.com>
+>> [...]
+>> 
+>> 
+>> ------------------>8
+>> Subject: [PATCH] doc/RCU/listRCU: Fix an example code snippets
+>> 
+>> The example code for "Eliminating Stale Data" looks not correct:
+>> 
+>> * rcu_read_unlock() should put after kstrdup(), because otherwise
+>> entry may get freed while kstrdup() is being called.
+>> 
+>> * spin_unlock() should be called before return, otherwise the
+>> function would return with the lock of the entry held.
+>> 
+>> Hence fix these.
+>> 
+>> Signed-off-by: Wei Yang <richard.weiyang@gmail.com>
+>> Link: https://lore.kernel.org/r/20250101082306.10404-1-richard.weiyang@gmail.com
+>> Signed-off-by: Boqun Feng <boqun.feng@gmail.com>
+>> ---
+>> Documentation/RCU/listRCU.rst | 3 ++-
+>> 1 file changed, 2 insertions(+), 1 deletion(-)
+>> 
+>> diff --git a/Documentation/RCU/listRCU.rst b/Documentation/RCU/listRCU.rst
+>> index ed5c9d8c9afe..8df50fcd69fd 100644
+>> --- a/Documentation/RCU/listRCU.rst
+>> +++ b/Documentation/RCU/listRCU.rst
+>> @@ -348,9 +348,10 @@ to accomplish this would be to add a ``deleted`` flag and a ``lock`` spinlock to
+>> rcu_read_unlock();
+>> return AUDIT_BUILD_CONTEXT;
+>> }
+>> - rcu_read_unlock();
+>> if (state == AUDIT_STATE_RECORD)
+>> *key = kstrdup(e->rule.filterkey, GFP_ATOMIC);
+>> + spin_unlock(&e->lock);
+>
+>According to the above quick quiz, we should return with the lock held.
+>
 
-For these reasons, allow selection of the egress interface via MAC
-address when configuring netconsole using the module parameter. Update
-the netconsole documentation with an example of the new syntax.
-Selection of egress interface by MAC address via configfs is far less
-interesting (since when this interface can be used, one should be able
-to easily convert between MAC address and interface name), so it is left
-unimplemented.
+Thanks, I think you have some reason.
 
-Signed-off-by: Uday Shankar <ushankar@purestorage.com>
-Reviewed-by: Breno Leitao <leitao@debian.org>
-Tested-by: Breno Leitao <leitao@debian.org>
----
- Documentation/networking/netconsole.rst |  6 +++-
- include/linux/netpoll.h                 |  6 ++++
- net/core/netpoll.c                      | 51 +++++++++++++++++++++++++--------
- 3 files changed, 50 insertions(+), 13 deletions(-)
+If my understanding is correct, the example here is to emphasize we could
+still access the value out of critical section but with spinlock held.
 
-diff --git a/Documentation/networking/netconsole.rst b/Documentation/networking/netconsole.rst
-index 84803c59968a3237012fab821f432eb531aba45c..4b0f32ed5c635dbce594bc09e5d25c7654350779 100644
---- a/Documentation/networking/netconsole.rst
-+++ b/Documentation/networking/netconsole.rst
-@@ -47,7 +47,7 @@ following format::
- 	r             if present, prepend kernel version (release) to the message
- 	src-port      source for UDP packets (defaults to 6665)
- 	src-ip        source IP to use (interface address)
--	dev           network interface (eth0)
-+	dev           network interface name (eth0) or MAC address
- 	tgt-port      port for logging agent (6666)
- 	tgt-ip        IP address for logging agent
- 	tgt-macaddr   ethernet MAC address for logging agent (broadcast)
-@@ -64,6 +64,10 @@ or using IPv6::
+In current example, we don't return e(struct audit_entry) from
+audit_filter_task(). So no one suppose to release the spinlock again. This
+looks to be a mistake.
+
+My suggestion is to release the lock after kstrdup() to make the example more
+intact. But with a comment to explain the purpose here.
+
+Also I found we miss the second parameter key here.
+
+diff --git a/Documentation/RCU/listRCU.rst b/Documentation/RCU/listRCU.rst
+index ed5c9d8c9afe..a3e7f8ff3a81 100644
+--- a/Documentation/RCU/listRCU.rst
++++ b/Documentation/RCU/listRCU.rst
+@@ -334,7 +334,7 @@ If the system-call audit module were to ever need to reject stale data, one way
+ to accomplish this would be to add a ``deleted`` flag and a ``lock`` spinlock to the
+ ``audit_entry`` structure, and modify audit_filter_task() as follows::
  
-  insmod netconsole netconsole=@/,@fd00:1:2:3::1/
- 
-+or using a MAC address to select the egress interface::
-+
-+   linux netconsole=4444@10.0.0.1/22:33:44:55:66:77,9353@10.0.0.2/12:34:56:78:9a:bc
-+
- It also supports logging to multiple remote agents by specifying
- parameters for the multiple agents separated by semicolons and the
- complete string enclosed in "quotes", thusly::
-diff --git a/include/linux/netpoll.h b/include/linux/netpoll.h
-index f91e50a76efd4b016381c632456397eea1ea877f..1ade65b59be49cfdcf86ed6e938287b949aa9f58 100644
---- a/include/linux/netpoll.h
-+++ b/include/linux/netpoll.h
-@@ -25,7 +25,13 @@ union inet_addr {
- struct netpoll {
- 	struct net_device *dev;
- 	netdevice_tracker dev_tracker;
-+	/*
-+	 * Either dev_name or dev_mac can be used to specify the local
-+	 * interface - dev_name is used if it is a nonempty string, else
-+	 * dev_mac is used.
-+	 */
- 	char dev_name[IFNAMSIZ];
-+	u8 dev_mac[ETH_ALEN];
- 	const char *name;
- 
- 	union inet_addr local_ip, remote_ip;
-diff --git a/net/core/netpoll.c b/net/core/netpoll.c
-index 62b4041aae1ae8c7dc47c89fb40b14bbd4ad0e0e..64c08b845c92bb2a2165de6dfba95dede2b581db 100644
---- a/net/core/netpoll.c
-+++ b/net/core/netpoll.c
-@@ -501,7 +501,8 @@ void netpoll_print_options(struct netpoll *np)
- 		np_info(np, "local IPv6 address %pI6c\n", &np->local_ip.in6);
- 	else
- 		np_info(np, "local IPv4 address %pI4\n", &np->local_ip.ip);
--	np_info(np, "interface '%s'\n", np->dev_name);
-+	np_info(np, "interface name '%s'\n", np->dev_name);
-+	np_info(np, "local ethernet address '%pM'\n", np->dev_mac);
- 	np_info(np, "remote port %d\n", np->remote_port);
- 	if (np->ipv6)
- 		np_info(np, "remote IPv6 address %pI6c\n", &np->remote_ip.in6);
-@@ -570,11 +571,18 @@ int netpoll_parse_options(struct netpoll *np, char *opt)
- 	cur++;
- 
- 	if (*cur != ',') {
--		/* parse out dev name */
-+		/* parse out dev_name or dev_mac */
- 		if ((delim = strchr(cur, ',')) == NULL)
- 			goto parse_failed;
- 		*delim = 0;
--		strscpy(np->dev_name, cur, sizeof(np->dev_name));
-+
-+		np->dev_name[0] = '\0';
-+		eth_broadcast_addr(np->dev_mac);
-+		if (!strchr(cur, ':'))
-+			strscpy(np->dev_name, cur, sizeof(np->dev_name));
-+		else if (!mac_pton(cur, np->dev_mac))
-+			goto parse_failed;
-+
- 		cur = delim;
- 	}
- 	cur++;
-@@ -679,27 +687,45 @@ int __netpoll_setup(struct netpoll *np, struct net_device *ndev)
- }
- EXPORT_SYMBOL_GPL(__netpoll_setup);
- 
-+/*
-+ * Returns a pointer to a string representation of the identifier used
-+ * to select the egress interface for the given netpoll instance. buf
-+ * must be a buffer of length at least MAC_ADDR_STR_LEN + 1.
-+ */
-+static char *egress_dev(struct netpoll *np, char *buf)
-+{
-+	if (np->dev_name[0])
-+		return np->dev_name;
-+
-+	snprintf(buf, MAC_ADDR_STR_LEN, "%pM", np->dev_mac);
-+	return buf;
-+}
-+
- int netpoll_setup(struct netpoll *np)
- {
-+	struct net *net = current->nsproxy->net_ns;
-+	char buf[MAC_ADDR_STR_LEN + 1];
- 	struct net_device *ndev = NULL;
- 	bool ip_overwritten = false;
- 	struct in_device *in_dev;
- 	int err;
- 
- 	rtnl_lock();
--	if (np->dev_name[0]) {
--		struct net *net = current->nsproxy->net_ns;
-+	if (np->dev_name[0])
- 		ndev = __dev_get_by_name(net, np->dev_name);
--	}
-+	else if (is_valid_ether_addr(np->dev_mac))
-+		ndev = dev_getbyhwaddr(net, ARPHRD_ETHER, np->dev_mac);
-+
- 	if (!ndev) {
--		np_err(np, "%s doesn't exist, aborting\n", np->dev_name);
-+		np_err(np, "%s doesn't exist, aborting\n", egress_dev(np, buf));
- 		err = -ENODEV;
- 		goto unlock;
- 	}
- 	netdev_hold(ndev, &np->dev_tracker, GFP_KERNEL);
- 
- 	if (netdev_master_upper_dev_get(ndev)) {
--		np_err(np, "%s is a slave device, aborting\n", np->dev_name);
-+		np_err(np, "%s is a slave device, aborting\n",
-+		       egress_dev(np, buf));
- 		err = -EBUSY;
- 		goto put;
- 	}
-@@ -707,7 +733,8 @@ int netpoll_setup(struct netpoll *np)
- 	if (!netif_running(ndev)) {
- 		unsigned long atmost;
- 
--		np_info(np, "device %s not up yet, forcing it\n", np->dev_name);
-+		np_info(np, "device %s not up yet, forcing it\n",
-+			egress_dev(np, buf));
- 
- 		err = dev_open(ndev, NULL);
- 
-@@ -741,7 +768,7 @@ int netpoll_setup(struct netpoll *np)
- 			if (!ifa) {
- put_noaddr:
- 				np_err(np, "no IP address for %s, aborting\n",
--				       np->dev_name);
-+				       egress_dev(np, buf));
- 				err = -EDESTADDRREQ;
- 				goto put;
+-	static enum audit_state audit_filter_task(struct task_struct *tsk)
++	static enum audit_state audit_filter_task(struct task_struct *tsk, char **key)
+ 	{
+ 		struct audit_entry *e;
+ 		enum audit_state   state;
+@@ -349,8 +349,11 @@ to accomplish this would be to add a ``deleted`` flag and a ``lock`` spinlock to
+ 					return AUDIT_BUILD_CONTEXT;
+ 				}
+ 				rcu_read_unlock();
++				/* With spinlock held, it is ok to access 'e' out
++                                 * of critial section */
+ 				if (state == AUDIT_STATE_RECORD)
+ 					*key = kstrdup(e->rule.filterkey, GFP_ATOMIC);
++				spin_unlock(&e->lock);
+ 				return state;
  			}
-@@ -772,13 +799,13 @@ int netpoll_setup(struct netpoll *np)
- 			}
- 			if (err) {
- 				np_err(np, "no IPv6 address for %s, aborting\n",
--				       np->dev_name);
-+				       egress_dev(np, buf));
- 				goto put;
- 			} else
- 				np_info(np, "local IPv6 %pI6c\n", &np->local_ip.in6);
- #else
- 			np_err(np, "IPv6 is not supported %s, aborting\n",
--			       np->dev_name);
-+			       egress_dev(np, buf));
- 			err = -EINVAL;
- 			goto put;
- #endif
+ 		}
+
+Does it make sense to you?
+
 
 -- 
-2.34.1
-
+Wei Yang
+Help you, Help me
 
