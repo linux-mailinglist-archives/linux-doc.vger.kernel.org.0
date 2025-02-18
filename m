@@ -1,186 +1,247 @@
-Return-Path: <linux-doc+bounces-38528-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-38543-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A5F3A3A6DE
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2025 20:09:26 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A16DA3A759
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2025 20:26:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id CEEFA188C6DF
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2025 19:09:19 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 43D1A176C04
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2025 19:24:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 101901F5855;
-	Tue, 18 Feb 2025 19:08:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 012A02356A7;
+	Tue, 18 Feb 2025 19:23:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="YDAZAG9D"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OBjICclE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com (mail-dm3nam02on2086.outbound.protection.outlook.com [40.107.95.86])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7134E1EB5D8;
-	Tue, 18 Feb 2025 19:08:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.95.86
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739905731; cv=fail; b=Jss8agZ5Vc0k5MUXMhf2Y9MN5KzEtlWcwRWKnybIM8WB5+xhjvve9P18NgkxSjFC0N9lX2mXsqJCbxoU3my2hGJLLJatORwrDJf/jqz+ojjW9f2mpTZUOLxJYuhgZnsMhus6gMHxNUhZvo53zFFzUUSRmMmqEAkh5Knb5pShEq0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739905731; c=relaxed/simple;
-	bh=DhfieRT9Pcv+zohdnAD7e7RkdZMEwH0YyZUVXzJ1Xy8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=s9YTJ87Ydk2S6rKUe3TDhMz75znnkwGIYpAoM9iNpnwE8Yxnv7dNoKfRZPIMQfgtQiT2I2p13ePr9KNAnTBSRqJhaPAGhasjAKOhzZjZ3LP5MsFfzALXRnm2qGJqNqJ6fH7h+ojGl+/97Js6Y0Gwm2AQYmqIo4liTnVagNbpKIA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=YDAZAG9D; arc=fail smtp.client-ip=40.107.95.86
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XsMFncUJ4RsbdxSm8T8VVmR3O785ywqOt/fHTspH6mmxVXIkzgues45HwIrzM8BqM0nGYBqRbrMFYdqcDgLZgTAZ26p7yTEqoPymaLZhT9gSE/E3Yj1Nd4WyG7GClhYqpKsyILQ+aflZxZS28mKjxmVv94vYf6gRhQ27z+aHAr8nUjujOvCeZ19uN0dZIo6lieHr4zH9KiVKFU11niuR4G3ZYNXyFX535aYXMcXtpQOM1P5LQ8IpSY8RY9JsVuHTp3cH2FH1BzT6BwVCyQRb36SGHc6ExktxM0S3/mRM0lPPM/kDgW0BGKfDQZ8gGIL4iwNjOHMwlHW0uoF4htXZWw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Vy3ZmTEZc8uPz8RaYZfoySzu8h/56i3D6jUensxZ6SE=;
- b=LrdjQ2jlJzY+S6iWXRAdmLWxOncWb1MkBSBW+OFSlLhmMJawgUZ1VYmRaOMaJFStVzL/w35VznxrxmCl8wgyVTiABBwkFxDhEUyGuRSC4CYdkuhdmwBd1e349yPcDy45R8ufF4veloljhKUrl9f54pWoD3fh72nVdLJiro0kk7RWgYgcdtkUY5splSykj2GSQ1HPAcmxAh4N2MD5sgGRGJnV/UsLFrMrtRL5uegFOow7Krz5FqKOa3Qfh+eAkGf0lF5t17lUcazpibDUTq35nUNhrqPOkPpKMAUIOxYYDKG4IrOY+UPBxXIJbFTGKXHVk/lAt2MLWgELaoM1mLWdfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Vy3ZmTEZc8uPz8RaYZfoySzu8h/56i3D6jUensxZ6SE=;
- b=YDAZAG9Dbr8qpWge71DOXKrsujaKbsUxuQ1Xu7+NCQv1dgFUgthozEhvYAosbXhFRRPTCXXixvQekJ2/g7BqcpCpvbFYKmRRfg+HRfDcWgi0xMR8teiBJfw7tctUIx4POu07xiUayyaYAd/F/qtut/KZgpyqrkR7TqzYTlCvWTmdSuDlppAmj2XjBVBEIKb9MMQjuhlSItKV+syvhIJEm7eGI5lFc8fwNRXdkLA3JqbDNn1WhhQvK36JZXutp8jAfBH6evfOcEA+qkGSskXNY3Yr4TYjxPrwB4YU473EgVbsnO9oZrBetkO4J2/P5tajizSaXqx+BMHar+1SS2JEbg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by SN7PR12MB7370.namprd12.prod.outlook.com (2603:10b6:806:299::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.19; Tue, 18 Feb
- 2025 19:08:47 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.8445.019; Tue, 18 Feb 2025
- 19:08:47 +0000
-Date: Tue, 18 Feb 2025 15:08:46 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Nicolin Chen <nicolinc@nvidia.com>
-Cc: kevin.tian@intel.com, corbet@lwn.net, will@kernel.org, joro@8bytes.org,
-	suravee.suthikulpanit@amd.com, robin.murphy@arm.com,
-	dwmw2@infradead.org, baolu.lu@linux.intel.com, shuah@kernel.org,
-	linux-kernel@vger.kernel.org, iommu@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
-	eric.auger@redhat.com, jean-philippe@linaro.org, mdf@kernel.org,
-	mshavit@google.com, shameerali.kolothum.thodi@huawei.com,
-	smostafa@google.com, ddutile@redhat.com, yi.l.liu@intel.com,
-	patches@lists.linux.dev
-Subject: Re: [PATCH v6 13/14] iommu/arm-smmu-v3: Report events that belong to
- devices attached to vIOMMU
-Message-ID: <20250218190846.GA4183890@nvidia.com>
-References: <cover.1737754129.git.nicolinc@nvidia.com>
- <b71a5b132e8ba771998c5b810675f10b100d4ff3.1737754129.git.nicolinc@nvidia.com>
- <20250218171821.GG4099685@nvidia.com>
- <Z7TRNL0u0YmN30ax@nvidia.com>
- <20250218185046.GK4099685@nvidia.com>
- <Z7TZP3jXlRzweFE8@nvidia.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z7TZP3jXlRzweFE8@nvidia.com>
-X-ClientProxiedBy: BL1PR13CA0158.namprd13.prod.outlook.com
- (2603:10b6:208:2bd::13) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B49691F584F;
+	Tue, 18 Feb 2025 19:23:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1739906609; cv=none; b=pwBs2ttKW2W0JudLehA7nTiKHkKX+B3HvynF2PndpCyUDxq12zQ1nvd+cyYW9piD2ofYjBsQqUhTKiXdjkCloO9qRHOezULN5NHVL+yY5OXQD4eGd9WRlAWuTZUZ5tZD+lDnXRNzTMLKiijiSMRRuh+qA9r9yxUUaclT3ZgpyOs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1739906609; c=relaxed/simple;
+	bh=tHGA5G2WYkatnmKUK3lUU0vRU387uRxbNlWbdsK5rwE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Shifk4dB9Ra4mkFj3C6w0ffoiitU/biZJdQ1GZnNk3BAJ/Q/Qu7Jwhf8/RdGQU1ZxBSNCkJvW501cbLUgHl6v8Bkt86t5OvIZtqtGLLkEHaLlmW+MAH/VWzp6oq9YZsLQ5LXiMcEt/fqBda/ZgU6IvnkvGbvSt8swAF5iLw7YL8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OBjICclE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F610C4CEEE;
+	Tue, 18 Feb 2025 19:23:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1739906609;
+	bh=tHGA5G2WYkatnmKUK3lUU0vRU387uRxbNlWbdsK5rwE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=OBjICclEAhuFsYzZQCfh187X4A70ZB8kLhlGB+G0Y1WH52H1IVUzEefn3Yr47eVzD
+	 SRCMzEexqdZQKEQDRkNQd05L5cnaPhfvHF7iBXIoRaAHKU59bKop6m/vjg5FIw9yaq
+	 CemDgQZneYRRgnQCG6eFr9+Q4ya7+dcrDxZZAoyrTeZxwQ9v4mfA8xJSw3/kY2KYuw
+	 wWA3MAaso2buF5NziFfkUx0EqYV8hQXGpshjYnV3PeyUoYeIL5u2b7yTGTkxd/M1PX
+	 SOyARhe5rafluU1t/PdE80Q+y0wcP8OQTC04wtwMR48UIsqdCtOcg35iQ9NPMQ5a+W
+	 aKmBt9T9L4pGQ==
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-3f3e0498beaso55035b6e.1;
+        Tue, 18 Feb 2025 11:23:29 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCUydrDvMsjlG0S5RSi/SGB0HJHyud9/73NldlGgxh1LjchF7xxaSrxRoD+/KvZSrQ2JxmA12o1HzmfE@vger.kernel.org, AJvYcCV2EvD4F2b8wX+PBWPRkzlPlDDdsX6dS5krwOxtEQYsTOytuOS19TAsZ8oIKdEgEJd+Qa4sdcDnoa0=@vger.kernel.org, AJvYcCVz4ni+AQ5ZntpEs4sANscnw1xQRk+h1/S5ENwcKqQ9/8CwoBBeR8VpNK4S7ONrfrjyNxmZxC3K8kfx/m8=@vger.kernel.org, AJvYcCWZhiLzhIq8Rov14dLShZTZJ77KIzuciU4seJ1VFlVFHZPepGrlyfop0pi9hrQuVRPn64CSlYo2+rUCPWVV@vger.kernel.org, AJvYcCWdyjueOjhCKGL1Da03mtQPBpG6wREcNobR7jLCTEWlUl1Gf7rDQtdwxFP0WKY29AdNp+eB6BFNqh/T@vger.kernel.org
+X-Gm-Message-State: AOJu0YzFY/guWF5YHN284cEA9+g22sgajlJfdKvQZlIslWox2ZvH8S+s
+	MAs4GOAYHLxxnUxg32L56Q/SM92k8kCqUQgVrn9/2wux14V9BtXSMxeoeNrh/6JLOuOZlFwW8Vp
+	fe25i76PjMw9aKZT45HHRrNvIXGc=
+X-Google-Smtp-Source: AGHT+IFnQSrEOQ5XyF8kcORbR22aIZWDMKNGLzVsGwRAAbFTPsjQg/3r9VLhR4uCpNrzjbTL59N8kAtr10x5ERBjPf4=
+X-Received: by 2002:a05:6808:188b:b0:3f4:9e6:fb7 with SMTP id
+ 5614622812f47-3f40eefb38fmr790244b6e.1.1739906608509; Tue, 18 Feb 2025
+ 11:23:28 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|SN7PR12MB7370:EE_
-X-MS-Office365-Filtering-Correlation-Id: 51f16f42-b207-4ca1-2548-08dd504fabb9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?8DxonPmCCs2mlHzyGp7IWujOdKrmjyUdVbyjELwoSq6ri3ZzUjwumVHkXsB9?=
- =?us-ascii?Q?lnJM3Fe9ve+oRzSkmYWU9ve+atcTNXE+/UsYmFwPBu7Xo5j7I8KoFLHyOe6E?=
- =?us-ascii?Q?dBvh4kySf5MQCK1ey3RIXnVdcaxYBXoBgzpnaAk4WZB0+4l9GvtiUnWQnmH0?=
- =?us-ascii?Q?qp0a9WS4BnjNqGMJvUQDQebhBnsCKnF9swNL45SC0l08UWC7ly/4d+g5Tszs?=
- =?us-ascii?Q?fweX1paGxCRFldHzk5NC6Ma2YH2lQ+IW84AVgU5QIZFOxIiAcUtvOT7jhmjB?=
- =?us-ascii?Q?PWxWNOKGeyDwlDIqODkjD+8D2B4swJCe5mIbz/67W0hnSF239wEr0nux38OV?=
- =?us-ascii?Q?0v9N7kN2wn4lg0h6s7YIg+OVpcumozJ9tZ1kzRRK579ZMWWY5AxSWd83nvhC?=
- =?us-ascii?Q?5RczQfHNQtK5F6bped+S8pxjz2K5A7TRPGeLS+jXuBtv16Kxfs+j7ih8Brbe?=
- =?us-ascii?Q?0TmANKT1e1tlR7ihB6PfOG8xNgZeVvw9DAwBXxKmA1uYnUjQeJjbkEZ+PFHP?=
- =?us-ascii?Q?xtkSQF9YDB5TEsiraolaUil6ucufSsJtkAZdBHOwVxao/XRJZF6877VsjJjW?=
- =?us-ascii?Q?/LR11BRc2ChL7+jiQajVK76Ww44EzC4v4K+DT115o4rBmawNKvK01gDDf0gO?=
- =?us-ascii?Q?+UnM9z8g0CLK3CMqfuAu+r6OKnw3LlcmmeLJu+400oVdzVh42LQsvtGRWZfk?=
- =?us-ascii?Q?6powrEoOz7h9z+ywrxVVdnJCOli40W1qeLRTZ2ao9Ys9UAxiRpQ8kgucyUem?=
- =?us-ascii?Q?hzDVGeJ982/aRHah9FBPHJem/dML4imJmUChuKXizJLSv65oP6eYfypCQoRg?=
- =?us-ascii?Q?0WmUW6L8uPP7Aiz7SqfO0i1Ua7w6MxcOVlrkfp69zhB0/o74TyVyWjdTTjF/?=
- =?us-ascii?Q?XWbbpH0hKuCn7t/WCOdP5khE87zMwSq3FWOKBIfItDqVCebM1EMMNVvB6JcP?=
- =?us-ascii?Q?LP5eCdAFfoQjm8G+bcrIS2Lj5aUnJmkewVEimYE8p5e8Viwc5seL+MYlrlwu?=
- =?us-ascii?Q?3MhnK4oW1XY+TU0ljYksC6w3cfGPV6U/GrPpF1I8IiLVMfvmdPbwjBqCPIm+?=
- =?us-ascii?Q?yha5BNORH6uVeT3tOxmj6nh76QPCyZTPp4rliIwD0w1QTOg9+U6IVIDg62xq?=
- =?us-ascii?Q?eRuwh+SGefCMddpIMGm6ckAMMfiPsVedAheEiswu6MCGai5LbtZGfyL1lko2?=
- =?us-ascii?Q?dFYwuUxs+sxa9uFR8X9EqCsHotn4ocGO/tU6eZwTZ5PdAYmJ2fYC9aJthiUt?=
- =?us-ascii?Q?4ilWofBC5bNj88hBA5e1xDV/RqjUt2jMuEh55EX6BGNPk4KgPdDtUi3/YaZd?=
- =?us-ascii?Q?vv3qAMtz+jNu+fIjIOa4CxqdWeNaf2AmGtsCKc67I+E3CsSLvvoR8srz5v1s?=
- =?us-ascii?Q?hHUYkv8vDSKx/QLduZzv82fGPbNs?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?IylQSCWdibOWM3OqQMbI1fjxs2tM20DO7FQaNXRtXlr/yyFtSLjTQqtnqTwP?=
- =?us-ascii?Q?yFQnZcBf4EVWZxiWieXKm2CJf0FMKLGoah8eqbuk9JkSJO+CxNiGFZzVFcQ4?=
- =?us-ascii?Q?B5z6mEsI3UC1GartqF3c8m+iSLajnCR+tRLYdhESllVQgHp2JYWKCD7qLCOI?=
- =?us-ascii?Q?973xiEq7cNIf9izGitdHsypZJe/5mHWk6f11rrRz/2dfVZIXgwhVQygam3pb?=
- =?us-ascii?Q?5qaZod48gBgS2qASh/b4GuXb3VALyXoVLu5FHVZM7g2UlHibE0Ra+gBK06XR?=
- =?us-ascii?Q?1vrMgeVnNTJ4Ix7FPTEgKlKHAJPe6JqkNvScjafau0Rv9QQgTQcCAWDwZ5pp?=
- =?us-ascii?Q?DUqjdzB2ZJV/ZUwCzotsU3AlA+nBJWtSDSZRFRvcmll1E0wy855uZh8y6Cll?=
- =?us-ascii?Q?+cFMG3CvZCA7wfOxVQOqhLOffGPs0lG/kbGABGoc3OYFG3ZmaHRFUJvLBNik?=
- =?us-ascii?Q?tEgxvWTlACo+0qiYwAPFNRjp+eWovSWvI/+Oub/+ZhPVqOfdhIQIh24lBHAL?=
- =?us-ascii?Q?oMpiyhgYjwiIC6n42Cko4o61eEE84juoO1b5cUFBgcBX4Q7z3/VAyLwo32Q0?=
- =?us-ascii?Q?gubITwxuDU+wTX9m+DiY3DEjQo8awfIe6dfD1ix5IZmeb1WEZ1HuNOz7vZfX?=
- =?us-ascii?Q?8DmInCaFS5BETeXu6el9YETyKbyqEf2jaNA+prfdeRzNu1SNgUJ2Ruvlga6Y?=
- =?us-ascii?Q?Cy4xAfhqn6gYq7+Ee55FY47e9RegglaSeAnR3clnj9OPtXM/XQhXoZjBfZeT?=
- =?us-ascii?Q?3UiJcsSkiagwR3jZtV1EslE8iS4QigwBg3NVjbepRyfxGMdO9fXCgIks2ItU?=
- =?us-ascii?Q?qaLp9TsgPDQHWPamX8bJslnqx/lHWCfV7IzU3aArKXEc+EI7Tsr+z3rY2i9r?=
- =?us-ascii?Q?31vkqmciWLY8GjFxmMoaFUa2oNDjOaRVK8NEXkdsVSYPxvBSGvtlalUxf03b?=
- =?us-ascii?Q?nTG5d6aB6baJQ41jqozjx7/tXeOEG/qLA5vn3cOdIP4TbnnYYxdVDDo0JyiJ?=
- =?us-ascii?Q?7iqMfAwi5AGAnz4nn4cDQMRLlvek1bqehfcZ5qM/n7GO919CigaNGVdeZBg4?=
- =?us-ascii?Q?2qEhLw6AtkLAUs19BRpfZOiSU5HoRGiKlGQan/HADjhGQWgceDTSBowYOFmq?=
- =?us-ascii?Q?83T2TEKeL5lLeMVcYhUuprczv7tzsLqX/iAjmMFkF6wqQrpoFh2NzA8TbaHi?=
- =?us-ascii?Q?PlmBDjHEtN3hWlUZbiRZ8Dv4+eMBFEu2qd8V67tqLpsbgEJo8KJMP3LRgkns?=
- =?us-ascii?Q?bHosujathdwmC6AgGC32d5rBevyy3jLFjvHW/fPnZVoZmXHAJhnIXxy721lA?=
- =?us-ascii?Q?va6qjzOl3nHIR/wCBYmyQVO0IXGT0mYtjhcbCF2veJrvR/G+JxMS2RTmcOl/?=
- =?us-ascii?Q?xmZYtLbXoDQBZsUIcH8s4xrlXWjerh6afkZOhiQHrs1W6au3JZgQjRs7jJFI?=
- =?us-ascii?Q?4ZzB2cSLVqI1UvApQPZG5MFjCQtbU0J2rBMcGMBobq+Ixd1EdEfEzFIGJx62?=
- =?us-ascii?Q?3yiApIF0LsSKO8+e0iCetINOCZi4wJ8ph1QDm91ds6Gcfv+KYoMfqDWA2WYK?=
- =?us-ascii?Q?01d/AVjuhEplBkgj1vsfkEUe14ULL6vufCntF7wc?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51f16f42-b207-4ca1-2548-08dd504fabb9
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2025 19:08:47.1411
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dg1UgpOOV2JLCaNvN95jlZZ7O/u0k0bXiR9Ec6mHyjJEcjHRw76L2ZTi35a7owvo
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7370
+References: <20250211103737.447704-1-sumitg@nvidia.com> <20250211104428.dibsnxmkiluzixvz@vireshk-i7>
+ <b45d0d81-e4f7-474e-a146-0075a6145cc2@huawei.com> <868d4c2a-583a-4cbb-a572-d884090a7134@nvidia.com>
+ <8d5e0035-d8fe-49ef-bda5-f5881ff96657@huawei.com> <94bdab73-adc4-4b43-9037-5639f23e3d1e@nvidia.com>
+In-Reply-To: <94bdab73-adc4-4b43-9037-5639f23e3d1e@nvidia.com>
+From: "Rafael J. Wysocki" <rafael@kernel.org>
+Date: Tue, 18 Feb 2025 20:23:17 +0100
+X-Gmail-Original-Message-ID: <CAJZ5v0iAg6HFROHctYQwW=V9XiV8p3XVYgeKUcX4qBgfwQK6Ow@mail.gmail.com>
+X-Gm-Features: AWEUYZnjK1GpyeSViY75mprA6AS3e808U82IVCn4oReC-_uewxJCKtkO01zA8nA
+Message-ID: <CAJZ5v0iAg6HFROHctYQwW=V9XiV8p3XVYgeKUcX4qBgfwQK6Ow@mail.gmail.com>
+Subject: Re: [Patch 0/5] Support Autonomous Selection mode in cppc_cpufreq
+To: Sumit Gupta <sumitg@nvidia.com>, "zhenglifeng (A)" <zhenglifeng1@huawei.com>
+Cc: Viresh Kumar <viresh.kumar@linaro.org>, rafael@kernel.org, lenb@kernel.org, 
+	robert.moore@intel.com, corbet@lwn.net, linux-pm@vger.kernel.org, 
+	linux-acpi@vger.kernel.org, linux-doc@vger.kernel.org, 
+	acpica-devel@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	linux-tegra@vger.kernel.org, treding@nvidia.com, jonathanh@nvidia.com, 
+	sashal@nvidia.com, vsethi@nvidia.com, ksitaraman@nvidia.com, 
+	sanjayc@nvidia.com, bbasu@nvidia.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 18, 2025 at 11:02:23AM -0800, Nicolin Chen wrote:
-> > > > This already holds the streams_mutex across all of this, do you think
-> > > > we should get rid of the vmaster_rwsem and hold the streams_mutex on
-> > > > write instead?
-> > > 
-> > > They are per master v.s. per smmu. The latter one would make master
-> > > commits/attaches exclusive, which feels unnecessary to me, although
-> > > it would make the code here slightly cleaner..
-> > 
-> > I'd pay the cost on the attach side to have a single lock on the fault
-> > side..
-> 
-> OK. Maybe a small patch to turn the streams_mutex to streams_rwsem?
+On Fri, Feb 14, 2025 at 8:09=E2=80=AFAM Sumit Gupta <sumitg@nvidia.com> wro=
+te:
+>
+>
+>
+> On 12/02/25 16:22, zhenglifeng (A) wrote:
+> > External email: Use caution opening links or attachments
+> >
+> >
+> > On 2025/2/11 22:08, Sumit Gupta wrote:
+> >>
+> >>
+> >>>
+> >>> On 2025/2/11 18:44, Viresh Kumar wrote:
+> >>>> On 11-02-25, 16:07, Sumit Gupta wrote:
+> >>>>> This patchset supports the Autonomous Performance Level Selection m=
+ode
+> >>>>> in the cppc_cpufreq driver. The feature is part of the existing CPP=
+C
+> >>>>> specification and already present in Intel and AMD specific pstate
+> >>>>> cpufreq drivers. The patchset adds the support in generic acpi cppc
+> >>>>> cpufreq driver.
+> >>>>
+> >>>> Is there an overlap with:
+> >>>>
+> >>>> https://lore.kernel.org/all/20250206131428.3261578-1-zhenglifeng1@hu=
+awei.com/
+> >>>>
+> >>>> ?
+> >>>
+> >>> Ha, it looks like we're doing something very similar.
+> >>>
+> >>
+> >> Hi Viresh,
+> >>
+> >> Thank you for pointing to [1].
+> >>
+> >> There seems to be some common points about updating the 'energy_perf'
+> >> and 'auto_sel' registers for autonomous mode but the current patchset
+> >> has more comprehensive changes to support Autonomous mode with the
+> >> cppc_cpufreq driver.
+> >>
+> >> The patches in [1]:
+> >> 1) Make the cpc register read/write API=E2=80=99s generic and improves=
+ error
+> >>     handling for 'CPC_IN_PCC'.
+> >> 2) Expose sysfs under 'cppc_cpufreq_attr' to update 'auto_select',
+> >>     'auto_act_window' and 'epp' registers.
+> >>
+> >> The current patch series:
+> >> 1) Exposes sysfs under 'cppc_attrs' to keep CPC registers together.
+> >> 2) Updates existing API=E2=80=99s to use new registers and creates new=
+ API
+> >>     with similar semantics to get all perf_ctrls.
+> >> 3) Renames some existing API=E2=80=99s for clarity.
+> >> 4) Use these existing API=E2=80=99s from acpi_cppc sysfs to update the=
+ CPC
+> >>     registers used in Autonomous mode:
+> >>     'auto_select', 'epp', 'min_perf', 'max_perf' registers.
+> >> 5) Add separate 'cppc_cpufreq_epp' instance of the 'cppc_cpufreq'
+> >>     driver to apply different limit and policy for Autonomous mode.
+> >>     Having it separate will avoid confusion between SW and HW mode.
+> >>     Also, it will be easy to scale and add new features in future
+> >>     without interference. Similar approach is used in Intel and AMD
+> >>     pstate drivers.
+> >>
+> >> Please share inputs about the preferred approach.
+> >>
+> >> Best Regards,
+> >> Sumit Gupta
+> >>
+> >> [1] https://lore.kernel.org/all/20250206131428.3261578-1-zhenglifeng1@=
+huawei.com/
+> >>
+> >>
+> >
+> > Hi Sumit,
+> >
+> > Thanks for upstreaming this.
+> >
+> > I think the changes to cppc_acpi in this patchset is inappropriate.
+> >
+> > 1) cppc_attrs are common sysfs for any system that supports CPPC. That
+> > means, these interfaces would appear even if the cpufreq driver has alr=
+eady
+> > managing it, e.g. amd-pstate and cppc_cpufreq. This would create multip=
+le
+> > interfaces to modify the same CPPC regs, which may probably introduce
+> > concurrency and data consistency issues. Instead, exposing the interfac=
+es
+> > under cppc_cpufreq_attr decouples the write access to CPPC regs.
+> >
+>
+> Hi Lifeng,
+>
+> I think its more appropriate to keep all the CPC registers together
+> instead of splitting the read only registers to the acpi_cppc sysfs
+> and read/write registers to the cpufreq sysfs.
+>
+> Only the EPP register is written from Intel and AMD.
+>   $ grep cpufreq_freq_attr_rw drivers/cpufreq/* | grep -v scaling
+>   drivers/cpufreq/acpi-cpufreq.c:cpufreq_freq_attr_rw(cpb);
+>
+> drivers/cpufreq/amd-pstate.c:cpufreq_freq_attr_rw(energy_performance_pref=
+erence);
+>
+> drivers/cpufreq/intel_pstate.c:cpufreq_freq_attr_rw(energy_performance_pr=
+eference);
+>
+> We are currently updating four registers and there can be more in
+> future like 'auto_act_window' update attribute in [1].
+> Changed to make this conditional with 'ifdef CONFIG_ACPI_CPPC_CPUFREQ'
+> to not create attributes for Intel/AMD.
+>
+>   +++ b/drivers/acpi/cppc_acpi.c
+>   @@ static struct attribute *cppc_attrs[] =3D {
+>           &lowest_freq.attr,
+>   +#ifdef CONFIG_ACPI_CPPC_CPUFREQ
+>           &max_perf.attr,
+>           &min_perf.attr,
+>           &perf_limited.attr,
+>           &auto_activity_window.attr,
+>           &energy_perf.attr,
+>   +#endif
+>
+> > 2) It's inappropriate to call cpufreq_cpu_get() in cppc_acpi. This file
+> > currently provides interfaces for cpufreq drivers to use. It has no ABI
+> > dependency on cpufreq at the moment.
+> >
+>
+> cpufreq_cpu_get() is already used by multiple non-cpufreq drivers.
+> So, don't think its a problem.
+>   $ grep -inr "=3D cpufreq_cpu_get(.*;" drivers/*| grep -v "cpufreq/"|wc =
+-l
+>   10
+>
+> > Apart from the changes to cppc_acpi, I think the whole patchset in [1] =
+can
+> > be independent to this patchset. In other words, adding the
+> > cppc_cpufreq_epp_driver could be standalone to discuss. I think combini=
+ng
+> > the use of ->setpolicy() and setting EPP could be a use case? Could you
+> > explain more on the motivation of adding a new cppc_cpufreq_epp_driver?
+> >
+>
+> With 'cppc_cpufreq_epp_driver', we provide an easy option to boot all
+> CPU's in auto mode with right epp and policy min/max equivalent of
+> {min|max}_perf. The mode can be found clearly with scaling_driver node.
+> Separating the HW and SW mode based on driver instance also
+> makes it easy to scale later.
+> Advanced users can program sysfs to switch individual CPU's in and out
+> of the HW mode. We can update policy min/max values accordingly.
+> In this case, there can be some CPU's in SW mode with epp driver
+> instance. But a separate instance will be more convenient for the
+> users who want all CPU's either in HW mode or in SW mode than having
+> to explicitly set all the values correctly.
 
-I don't think the interrupt path is multithreaded, is it? So only 1
-reader anyhow?
+There seems to be some quite fundamental disagreement on how this
+should be done, so I'm afraid I cannot do much about it ATM.
 
-Jason
+Please agree on a common approach and come back to me when you are ready.
+
+Sending two concurrent patchsets under confusingly similar names again
+and again isn't particularly helpful.
+
+Thanks!
 
