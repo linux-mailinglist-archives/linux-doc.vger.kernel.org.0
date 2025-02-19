@@ -1,137 +1,112 @@
-Return-Path: <linux-doc+bounces-38689-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-38693-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C171A3C126
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2025 15:04:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF654A3C132
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2025 15:05:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 090503BBFC1
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2025 13:56:40 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 66DD63A8440
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2025 13:57:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 048611EA7D3;
-	Wed, 19 Feb 2025 13:55:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 37B481EB1A9;
+	Wed, 19 Feb 2025 13:58:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="uVXB7M5c"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bGqe8Yj8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-fw-80009.amazon.com (smtp-fw-80009.amazon.com [99.78.197.220])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55D43286281;
-	Wed, 19 Feb 2025 13:55:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=99.78.197.220
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 108381E8339;
+	Wed, 19 Feb 2025 13:57:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739973321; cv=none; b=sy2Bvpu09F93gTgztc5PISLjOUv2Nxuiyqc3Gqn7KqttjQkbikeP1T2j7v2xRsE9YLEzlpG2aNQEcm1u1iUe6NfWQbB5tJQwGyXBguqDwff04KOYNLdQK7Hp0KnUgM/dKKXqhvgV1o2cUVhsvSsN0GeS+dMYJmBo0wmQTi3KyTw=
+	t=1739973480; cv=none; b=usiiMjHH+nABzX93PSlE8HXToQ2m1R1qKbGnQjBX9LI3Vs7+bG5I3jk9ijHZTtZQ0oKaDcRbKDAILt6yRHoV+t9SMQpwnSMAADjdlvKLff3x5QaTBk3yQSVnX1t+sJrvQ7Yj0X4XhgrqBTTwajHMiibDZmL/B/j4GQZx5yubOXc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739973321; c=relaxed/simple;
-	bh=Rc0k2hXGgw1uh7x0JIX+uzUH8a98VI2YuRrPPA9zVIw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=DAIrsQZroAIUf6tgFTrgIaov9/G/uZDgwK9Qv/WoF+dYKEWdO0jHqjhX1ZkKZC5kdPfMOvnopsriEL47YLkyyBReK9zkAiZf7AMpt02Ih4lSevHwgxdVsmuu83n85vCHgNYtRj5ykS6Nx2DBwn8vbPcq3KLCdv37anKjan1P7Wg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.de; dkim=pass (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b=uVXB7M5c; arc=none smtp.client-ip=99.78.197.220
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1739973320; x=1771509320;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=57nPLxtLibpkK5qPp8QpRrsWkbDlQlqDET5gkkKYRG8=;
-  b=uVXB7M5cyZLysMGuSVF/79vI9AyRNj63EwEGDaEnRaCPROiolv3BpNqm
-   0xQR3AhHvXUUzDeevCgpSke4aLW1VVOLgLx7o8kkBhNcxw6kOMi/3GULy
-   DCkcnzkMyOdxO0GB8PPKWkEKl8gwp6BKnZTbf+5dY8dR31eN1dUtilv5i
-   M=;
-X-IronPort-AV: E=Sophos;i="6.13,299,1732579200"; 
-   d="scan'208";a="173851478"
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev) ([10.25.36.210])
-  by smtp-border-fw-80009.pdx80.corp.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Feb 2025 13:55:18 +0000
-Received: from EX19MTAUWA002.ant.amazon.com [10.0.38.20:64466]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.12.97:2525] with esmtp (Farcaster)
- id 109703bc-b166-4b29-a69a-d899c4750143; Wed, 19 Feb 2025 13:55:17 +0000 (UTC)
-X-Farcaster-Flow-ID: 109703bc-b166-4b29-a69a-d899c4750143
-Received: from EX19D020UWC004.ant.amazon.com (10.13.138.149) by
- EX19MTAUWA002.ant.amazon.com (10.250.64.202) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1258.39;
- Wed, 19 Feb 2025 13:55:08 +0000
-Received: from [0.0.0.0] (10.253.83.51) by EX19D020UWC004.ant.amazon.com
- (10.13.138.149) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1544.14; Wed, 19 Feb 2025
- 13:55:00 +0000
-Message-ID: <d8c43707-65a2-4176-85e2-acdb4c9d16ad@amazon.com>
-Date: Wed, 19 Feb 2025 14:54:57 +0100
+	s=arc-20240116; t=1739973480; c=relaxed/simple;
+	bh=+zvcJdWEHzoEWzuYCy22rFH0TIPtIrbJ14DEL51h8cI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HXMf8EUQQq2ERQjwx8ON0YmZUyp042qVxEVNdjoViM3aW0TIGvRmArK0TolUoDo4zE9sQNKWmRGKZ51T3BvgXlaIcUstHgClrv4ABYm8xfWW1mRM2p0mYwWWHYAzySXh8F7XET5nw6d7DmCGic+utB08gqqCO56Z6+2qHnb0CkU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bGqe8Yj8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99591C4AF09;
+	Wed, 19 Feb 2025 13:57:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1739973479;
+	bh=+zvcJdWEHzoEWzuYCy22rFH0TIPtIrbJ14DEL51h8cI=;
+	h=From:To:Cc:Subject:Date:From;
+	b=bGqe8Yj8hiBMUwJXr2i70buhC7NV7XwoEJBPuuiAwYi+1R+Zqx/ufEqSJjnfkRTR5
+	 IGdqaJ93+HXMbfwkzlMNlV+aLHciM0rtaOrCMHE7BQK9ugc7VRqMGAa+mRc7QxxzKn
+	 c2YWuriOQZHJsz8rl2Yt2reAHHSZz7v0rEui9Z6/FaZ4bscVz6vq/jH6J1tSHb6CLs
+	 Q1PGwCb5nBxs82eCebH1WVvZKdWlen+eHK2eF34Sruc99Eocv16SPTalqze7Deqm+B
+	 H+MH6/w7+p2lrL9DGD1U0WXyRqt6Fx/5WQ5kQcTeJd8f+ggQjU37rOuwgKUs2HGzoC
+	 KilevAcHac3ng==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1tkkaL-0000000H1jC-0QL8;
+	Wed, 19 Feb 2025 14:57:57 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/6] additional fixes to kernel-doc.py
+Date: Wed, 19 Feb 2025 14:57:35 +0100
+Message-ID: <cover.1739972906.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/14] kexec: introduce Kexec HandOver (KHO)
-To: Dave Young <dyoung@redhat.com>, Mike Rapoport <rppt@kernel.org>
-CC: <linux-kernel@vger.kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
-	Andy Lutomirski <luto@kernel.org>, Anthony Yznaga
-	<anthony.yznaga@oracle.com>, Arnd Bergmann <arnd@arndb.de>, Ashish Kalra
-	<ashish.kalra@amd.com>, Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Borislav Petkov <bp@alien8.de>, Catalin Marinas <catalin.marinas@arm.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>, David Woodhouse
-	<dwmw2@infradead.org>, Eric Biederman <ebiederm@xmission.com>, Ingo Molnar
-	<mingo@redhat.com>, James Gowans <jgowans@amazon.com>, Jonathan Corbet
-	<corbet@lwn.net>, Krzysztof Kozlowski <krzk@kernel.org>, Mark Rutland
-	<mark.rutland@arm.com>, Paolo Bonzini <pbonzini@redhat.com>, Pasha Tatashin
-	<pasha.tatashin@soleen.com>, "H. Peter Anvin" <hpa@zytor.com>, Peter Zijlstra
-	<peterz@infradead.org>, Pratyush Yadav <ptyadav@amazon.de>, Rob Herring
-	<robh+dt@kernel.org>, Rob Herring <robh@kernel.org>, Saravana Kannan
-	<saravanak@google.com>, Stanislav Kinsburskii
-	<skinsburskii@linux.microsoft.com>, Steven Rostedt <rostedt@goodmis.org>,
-	Thomas Gleixner <tglx@linutronix.de>, Tom Lendacky <thomas.lendacky@amd.com>,
-	Usama Arif <usama.arif@bytedance.com>, Will Deacon <will@kernel.org>,
-	<devicetree@vger.kernel.org>, <kexec@lists.infradead.org>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
-	<linux-mm@kvack.org>, <x86@kernel.org>
-References: <20250206132754.2596694-1-rppt@kernel.org>
- <CALu+AoRMQyRDFS_4L0KQkmrFT_S+yk=uZ-Mqt86JQYKKnj-5Ug@mail.gmail.com>
- <Z7WJD6eBLuIRnLwk@kernel.org>
- <CALu+AoSaEthfed1NOYPiQgm_g-dhibVMRAp0+=_+9qTT4_x=tg@mail.gmail.com>
-Content-Language: en-US
-From: Alexander Graf <graf@amazon.com>
-In-Reply-To: <CALu+AoSaEthfed1NOYPiQgm_g-dhibVMRAp0+=_+9qTT4_x=tg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: EX19D041UWA003.ant.amazon.com (10.13.139.105) To
- EX19D020UWC004.ant.amazon.com (10.13.138.149)
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
+Hi Jon,
 
-On 19.02.25 13:49, Dave Young wrote:
-> On Wed, 19 Feb 2025 at 15:32, Mike Rapoport <rppt@kernel.org> wrote:
->> On Mon, Feb 17, 2025 at 11:19:45AM +0800, RuiRui Yang wrote:
->>> On Thu, 6 Feb 2025 at 21:34, Mike Rapoport <rppt@kernel.org> wrote:
->>>> == Limitations ==
->>>>
->>>> Currently KHO is only implemented for file based kexec. The kernel
->>>> interfaces in the patch set are already in place to support user space
->>>> kexec as well, but it is still not implemented it yet inside kexec tools.
->>>>
->>> What architecture exactly does this KHO work fine?   Device Tree
->>> should be ok on arm*, x86 and power*, but how about s390?
->> KHO does not use device tree as the boot protocol, it uses FDT as a data
->> structure and adds architecture specific bits to the boot structures to
->> point to that data, very similar to how IMA_KEXEC works.
->>
->> Currently KHO is implemented on arm64 and x86, but there is no fundamental
->> reason why it wouldn't work on any architecture that supports kexec.
-> Well,  the problem is whether there is a way to  add dtb in the early
-> boot path,  for X86 it is added via setup_data,  if there is no such
-> way I'm not sure if it is doable especially for passing some info for
-> early boot use.  Then the KHO will be only for limited use cases.
+This series comes after:
 
+https://lore.kernel.org/linux-doc/cover.1739952783.git.mchehab+huawei@kernel.org/T/#t
 
-Every architecture has a platform specific way of passing data into the 
-kernel so it can find its command line and initrd. S390x for example has 
-struct parmarea. To enable s390x, you would remove some of its padding 
-and replace it with a KHO base addr + size, so that the new kernel can 
-find the KHO state tree.
+it basically contains:
 
+- a regression fix when -none/--none parameter is used;
+- some backward-compatibility fixes;
+- a fix to KBUILD_BUILD_TIMESTAMP, which also drops
+  importing dateutil (*);
+- a cleanup related to man modulename.
 
-Alex
+(*) despite almost everybody has it installed, dateutil is actually not
+    part of the official Python libraries, so using it would require an
+    extra dependency check.
+
+While our minimal Python version is 3.9, I opted to make it compatible with
+Python 3.6, as the only issue preventing 3.6 was a single string function
+(removesuffix) that can be also served by rstrip().
+
+After those changes, support for 3.6 on kernel-doc.py comes almost for 
+free: both man and ReST output works with just Python 3.6 installed without
+any additional modules.
+
+So, no need to change any dependencies at scripts/sphinx-pre-install.
+
+Mauro Carvalho Chehab (6):
+  scripts/kernel-doc.py: Set an output format for --none
+  scripts/kernel-doc.py: adjust some coding style issues
+  scripts/lib/kdoc/kdoc_parser.py: fix Python compat with < v3.13
+  scripts/kernel-doc.py: move modulename to man class
+  scripts/kernel-doc.py: properly handle KBUILD_BUILD_TIMESTAMP
+  scripts/lib/kdoc/kdoc_parser.py: remove a python 3.9 dependency
+
+ scripts/kernel-doc.py           |  8 ++-
+ scripts/lib/kdoc/kdoc_files.py  | 19 ++-----
+ scripts/lib/kdoc/kdoc_output.py | 97 ++++++++++++++++++++++++---------
+ scripts/lib/kdoc/kdoc_parser.py | 15 ++---
+ 4 files changed, 83 insertions(+), 56 deletions(-)
+
+-- 
+2.48.1
+
 
 
