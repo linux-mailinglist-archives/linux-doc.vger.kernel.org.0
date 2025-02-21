@@ -1,177 +1,251 @@
-Return-Path: <linux-doc+bounces-38959-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-38962-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF3B2A3FC37
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Feb 2025 17:54:40 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52F0AA3FCC5
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Feb 2025 18:06:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2522E703D22
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Feb 2025 16:47:37 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F3930168DCF
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Feb 2025 17:03:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD1AD1F236B;
-	Fri, 21 Feb 2025 16:47:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D82A824BD18;
+	Fri, 21 Feb 2025 17:03:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="f7m7PSE7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 407251E9905;
-	Fri, 21 Feb 2025 16:47:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4C5524634F
+	for <linux-doc@vger.kernel.org>; Fri, 21 Feb 2025 17:02:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.68
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740156463; cv=none; b=kq9zkhUa60+R9usAn9c03SDjRKtB6bxTOcgmA85WPAVbMmexnP4mcWsbmo7Q6TBdFHtsDSq171s+F4c1xClb6gL8H2WFJ+N75VJ2gE7r4Zra6dwn9pRpguiw1oIIB3Rg1FfvC3ZSeG+5uBENjJNBdykxMuMo4V3SekxanKbmnAs=
+	t=1740157380; cv=none; b=m0XFAQro9zxQaI1kfCt2eQBlwLdEO4K418qC3RnPCjPBwv4lZajppY8LI+fWnNOXkNVOaXwTsAxe+9WOH0ioI6YXFN4ki5e08qNeIS8oOdPQ3gKgw93hYIePAL9LAy6lJZk+cUyFU2Vkm6KRP2Z8cjNjXuEkyq7PBMBdzRuT+6I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740156463; c=relaxed/simple;
-	bh=hjZm/lTADPa3gditXKyT4WjZDJVx/vyCEtcp7LAsrGc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iW5BL6BkpQylRymDI788ORYZgK8lGQ1Uppja40yCzGOwULmFoshto7zUh2XoQnAE3lOWCkJUMpbHDKo8hDYxt2FFPNlXp0cjkAHZU33NBIJWeu5R3eMIWcf1/8KcBaCWVDPCsdkELXl5OtwdmhUwagKYYNmmiq8TjoL1IErkrZ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EFAD2168F;
-	Fri, 21 Feb 2025 08:47:57 -0800 (PST)
-Received: from e133380.arm.com (e133380.arm.com [10.1.197.43])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2EDB13F5A1;
-	Fri, 21 Feb 2025 08:47:36 -0800 (PST)
-Date: Fri, 21 Feb 2025 16:47:33 +0000
-From: Dave Martin <Dave.Martin@arm.com>
-To: Reinette Chatre <reinette.chatre@intel.com>
-Cc: Peter Newman <peternewman@google.com>, "Moger, Babu" <bmoger@amd.com>,
-	Babu Moger <babu.moger@amd.com>, corbet@lwn.net, tglx@linutronix.de,
-	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
-	tony.luck@intel.com, x86@kernel.org, hpa@zytor.com,
-	paulmck@kernel.org, akpm@linux-foundation.org, thuth@redhat.com,
-	rostedt@goodmis.org, xiongwei.song@windriver.com,
-	pawan.kumar.gupta@linux.intel.com, daniel.sneddon@linux.intel.com,
-	jpoimboe@kernel.org, perry.yuan@amd.com, sandipan.das@amd.com,
-	kai.huang@intel.com, xiaoyao.li@intel.com, seanjc@google.com,
-	xin3.li@intel.com, andrew.cooper3@citrix.com, ebiggers@google.com,
-	mario.limonciello@amd.com, james.morse@arm.com,
-	tan.shaopeng@fujitsu.com, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, maciej.wieczor-retman@intel.com,
-	eranian@google.com
-Subject: Re: [PATCH v11 00/23] x86/resctrl : Support AMD Assignable Bandwidth
- Monitoring Counters (ABMC)
-Message-ID: <Z7iuJdfgYNCeytJE@e133380.arm.com>
-References: <76b02daf-1b45-473e-9d75-5988a11c6887@intel.com>
- <8ef51f28-e01a-4a7d-ba86-059437edb60b@amd.com>
- <a07fca4c-c8fa-41a6-b126-59815b9a58f9@intel.com>
- <CALPaoCh7WpohzpXhSAbumjSZBv1_+1bXON7_V1pwG4bdEBr52Q@mail.gmail.com>
- <ccd9c5d7-0266-4054-879e-e084b6972ad5@intel.com>
- <CALPaoCj1TH+GN6+dFnt5xuN406u=tB-8mj+UuMRSm5KWPJW2wg@mail.gmail.com>
- <2b5a11e3-ee19-47ba-b47e-b7de2818f237@intel.com>
- <Z7dccLOTPzySYTXL@e133380.arm.com>
- <Z7dqXlOMsw7Kb8F2@e133380.arm.com>
- <eb435a64-70d4-4821-908d-686243fec7a6@intel.com>
+	s=arc-20240116; t=1740157380; c=relaxed/simple;
+	bh=p26yxnUhbdMRoiqj6XHxuH9YLkbrUj4rKzuTeUEX3o0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=HHzFRgvVAUkdSCPSlZayaEQY79HisP/CcE6qfXFmyJNSPBs40yz2yhr4P7680gSWhY2tUXyIaM++IVr0SdzzE2aS4th1/OSRhgwrnKB1Zs9OznIos2ntCMLjwNxpEClGUPnk7wvQJyDbqdimZ+MzG8S3WaEoWpPmAN+nyOjGLt4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=f7m7PSE7; arc=none smtp.client-ip=209.85.218.68
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-ej1-f68.google.com with SMTP id a640c23a62f3a-abadccdfe5aso400466066b.0
+        for <linux-doc@vger.kernel.org>; Fri, 21 Feb 2025 09:02:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1740157376; x=1740762176; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wWszliNKbmL8VUqL0WBW3MKacH8rbha5eqW1pX7oPq8=;
+        b=f7m7PSE7CbLc5EfFMwi5bGPy2nHJYOCJBaGL6ffvkTB9gNxh8RPdvhw6SoImkvRQRN
+         ppTnnJB3oEsFvS/iontAf7ZowZOBsuduoBpYirzmGlq9EuoSFS54zH0M9862jk0kZQ1M
+         gV5wLfKv4HKCQFP6bCkB5DKdcl0AHCjHnhrC81t1CSHw3q1lwzQsmlhmsvC8FWL0XBSh
+         6pfT6EMt6cuFMoWo/0GNS+oQIQ9GWL+fkN1eKOTinNeq/6olFn/Ilr8m31DoFOMhd54k
+         2z7Re/sfPj4BMsnNebyo3I5IhbPdlLoXVqYKHK9lik+dj/Ryv+huwsAKr7OvwfTobhQr
+         DlkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740157376; x=1740762176;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=wWszliNKbmL8VUqL0WBW3MKacH8rbha5eqW1pX7oPq8=;
+        b=I1bKZjCCGaMLi7NxO/6JacIw3c1Tw/7Cm14M9JWYQIRnVzD1ZeJPPQ94X3sJANt1+F
+         2sMlhgrGHgdz6tpDt14ulcsHeuKnqfjhxgSd8Vhr38J10dnX/QZbcdOTh+BVx+4tWgHv
+         F+WCDFBvlkbDIurK1xXsfoBHjjY8T+fnRtx2urt9MMyftsrD5+XkFKDgGsknJladlHtw
+         JP132i8R6qlkMNWqvDj7Tr5owZvTixfGgyQP+5FbDXaGMiy1yfu8zr/iJIcanpnxFzrR
+         Hon1AE4SGGWWvk2x0q08Abio5FwDgXofqU6syVVwTmC88zLhgCi/hhI6cfmlGakBeRzb
+         r7+g==
+X-Forwarded-Encrypted: i=1; AJvYcCUiC27ZGMe7Gvshk8M1Ziso6ocH1kzF3I6wG0h7JUyaUbZOz2L16/2RhflY27RFSpjCFuYAJXmEzrY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwIA20LkDraFR+y1kVmYr5VvPaDQcCOJ2PhztXfrgtXCvIkR4Uq
+	C7N1fM6Fk/5Nxqr/nt0xno+/biiXyT87L+Z5HmEmMsReyiZ0I/apm4s9Snls8bk=
+X-Gm-Gg: ASbGncsx856QES80vtwImJdxtSHfW1CjK3lsDlVr3LrLvyTj7krO7ljvNBZGIdmp5BG
+	wbTWErvVaUxXJSiDLqXAE5r0OJLEa/sx8pQNVc5fpbf/4wJ4ueeMfZ8tv2pOf9AwcJQZGaWiHlj
+	NPgimkHSuMUuRWqUNOcd+DKM1IXfH25RPyxi3nrq+5lP+l2zQQFFVa+abPAYUXYRa7y/gpk+iKv
+	PbtK8/e0F9FAJorAhQPtUJlSU2CUmR7ukMYavvYUOu1H7jTt/5fvOGCYVP9GOkKMbZBnokncKnT
+	3Gk+BRF+ddiOVaz/GRxpaFa+ZLg5
+X-Google-Smtp-Source: AGHT+IEwCTRlvyl71solhDgWaKxLp5oopUTcMtwHu3YJJA/SVMpLmQ33tXa83ctCiJhFUIO1Qd60bg==
+X-Received: by 2002:a17:906:314d:b0:ab7:9df1:e562 with SMTP id a640c23a62f3a-abc0de55dbcmr343145666b.48.1740157375725;
+        Fri, 21 Feb 2025 09:02:55 -0800 (PST)
+Received: from blackdock.suse.cz ([193.86.92.181])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-abb8eea4d65sm1105668766b.161.2025.02.21.09.02.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Feb 2025 09:02:55 -0800 (PST)
+From: =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>
+To: Christian Brauner <brauner@kernel.org>,
+	Alexander Mikhalitsyn <alexander@mihalicyn.com>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Kees Cook <kees@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	"Eric W . Biederman" <ebiederm@xmission.com>,
+	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
+	Oleg Nesterov <oleg@redhat.com>
+Subject: [PATCH 2/2] pid: Optional first-fit pid allocation
+Date: Fri, 21 Feb 2025 18:02:49 +0100
+Message-ID: <20250221170249.890014-3-mkoutny@suse.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250221170249.890014-1-mkoutny@suse.com>
+References: <20250221170249.890014-1-mkoutny@suse.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <eb435a64-70d4-4821-908d-686243fec7a6@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Reinette,
+Noone would need to use this allocation strategy (it's slower, pid
+numbers collide sooner). Its primary purpose are pid namespaces in
+conjunction with pids.max cgroup limit which keeps (virtual) pid numbers
+below the given limit. This is for 32-bit userspace programs that may
+not work well with pid numbers above 65536.
 
-On Thu, Feb 20, 2025 at 10:36:18AM -0800, Reinette Chatre wrote:
-> Hi Dave,
-> 
-> On 2/20/25 9:46 AM, Dave Martin wrote:
-> > Hi again,
-> > 
-> > On Thu, Feb 20, 2025 at 04:46:40PM +0000, Dave Martin wrote:
+Link: https://lore.kernel.org/r/20241122132459.135120-1-aleksandr.mikhalitsyn@canonical.com/
+Signed-off-by: Michal Koutný <mkoutny@suse.com>
+---
+ Documentation/admin-guide/sysctl/kernel.rst |  2 ++
+ include/linux/pid_namespace.h               |  3 +++
+ kernel/pid.c                                | 12 +++++++--
+ kernel/pid_namespace.c                      | 28 +++++++++++++++------
+ 4 files changed, 36 insertions(+), 9 deletions(-)
 
-[...]
+diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
+index a43b78b4b6464..f5e68d1c8849f 100644
+--- a/Documentation/admin-guide/sysctl/kernel.rst
++++ b/Documentation/admin-guide/sysctl/kernel.rst
+@@ -1043,6 +1043,8 @@ The last pid allocated in the current (the one task using this sysctl
+ lives in) pid namespace. When selecting a pid for a next task on fork
+ kernel tries to allocate a number starting from this one.
+ 
++When set to -1, first-fit pid numbering is used instead of the next-fit.
++
+ 
+ powersave-nap (PPC only)
+ ========================
+diff --git a/include/linux/pid_namespace.h b/include/linux/pid_namespace.h
+index f9f9931e02d6a..10bf66ca78590 100644
+--- a/include/linux/pid_namespace.h
++++ b/include/linux/pid_namespace.h
+@@ -41,6 +41,9 @@ struct pid_namespace {
+ #if defined(CONFIG_SYSCTL) && defined(CONFIG_MEMFD_CREATE)
+ 	int memfd_noexec_scope;
+ #endif
++#ifdef CONFIG_IA32_EMULATION
++	bool pid_noncyclic;
++#endif
+ } __randomize_layout;
+ 
+ extern struct pid_namespace init_pid_ns;
+diff --git a/kernel/pid.c b/kernel/pid.c
+index aa2a7d4da4555..e9da1662b8821 100644
+--- a/kernel/pid.c
++++ b/kernel/pid.c
+@@ -191,6 +191,10 @@ struct pid *alloc_pid(struct pid_namespace *ns, pid_t *set_tid,
+ 
+ 	for (i = ns->level; i >= 0; i--) {
+ 		int tid = 0;
++		bool pid_noncyclic = 0;
++#ifdef CONFIG_IA32_EMULATION
++		pid_noncyclic = READ_ONCE(tmp->pid_noncyclic);
++#endif
+ 
+ 		if (set_tid_size) {
+ 			tid = set_tid[ns->level - i];
+@@ -235,8 +239,12 @@ struct pid *alloc_pid(struct pid_namespace *ns, pid_t *set_tid,
+ 			 * Store a null pointer so find_pid_ns does not find
+ 			 * a partially initialized PID (see below).
+ 			 */
+-			nr = idr_alloc_cyclic(&tmp->idr, NULL, pid_min,
+-					      pid_max, GFP_ATOMIC);
++			if (likely(!pid_noncyclic))
++				nr = idr_alloc_cyclic(&tmp->idr, NULL, pid_min,
++						      pid_max, GFP_ATOMIC);
++			else
++				nr = idr_alloc(&tmp->idr, NULL, pid_min,
++						      pid_max, GFP_ATOMIC);
+ 		}
+ 		spin_unlock_irq(&pidmap_lock);
+ 		idr_preload_end();
+diff --git a/kernel/pid_namespace.c b/kernel/pid_namespace.c
+index 0f23285be4f92..ceda94a064294 100644
+--- a/kernel/pid_namespace.c
++++ b/kernel/pid_namespace.c
+@@ -113,6 +113,9 @@ static struct pid_namespace *create_pid_namespace(struct user_namespace *user_ns
+ 	ns->pid_allocated = PIDNS_ADDING;
+ #if defined(CONFIG_SYSCTL) && defined(CONFIG_MEMFD_CREATE)
+ 	ns->memfd_noexec_scope = pidns_memfd_noexec_scope(parent_pid_ns);
++#endif
++#ifdef CONFIG_IA32_EMULATION
++	ns->pid_noncyclic = READ_ONCE(parent_pid_ns->pid_noncyclic);
+ #endif
+ 	return ns;
+ 
+@@ -260,7 +263,7 @@ void zap_pid_ns_processes(struct pid_namespace *pid_ns)
+ 	return;
+ }
+ 
+-#ifdef CONFIG_CHECKPOINT_RESTORE
++#if defined(CONFIG_CHECKPOINT_RESTORE) || defined(CONFIG_IA32_EMULATION)
+ static int pid_ns_ctl_handler(const struct ctl_table *table, int write,
+ 		void *buffer, size_t *lenp, loff_t *ppos)
+ {
+@@ -271,12 +274,23 @@ static int pid_ns_ctl_handler(const struct ctl_table *table, int write,
+ 	if (write && !checkpoint_restore_ns_capable(pid_ns->user_ns))
+ 		return -EPERM;
+ 
+-	next = idr_get_cursor(&pid_ns->idr) - 1;
++	next = -1;
++#ifdef CONFIG_IA32_EMULATION
++	if (!pid_ns->pid_noncyclic)
++#endif
++		next += idr_get_cursor(&pid_ns->idr);
+ 
+ 	tmp.data = &next;
+ 	ret = proc_dointvec_minmax(&tmp, write, buffer, lenp, ppos);
+-	if (!ret && write)
+-		idr_set_cursor(&pid_ns->idr, next + 1);
++	if (!ret && write) {
++		if (next > -1)
++			idr_set_cursor(&pid_ns->idr, next + 1);
++		else if (!IS_ENABLED(CONFIG_IA32_EMULATION))
++			ret = -EINVAL;
++#ifdef CONFIG_IA32_EMULATION
++		WRITE_ONCE(pid_ns->pid_noncyclic, next == -1);
++#endif
++	}
+ 
+ 	return ret;
+ }
+@@ -288,11 +302,11 @@ static const struct ctl_table pid_ns_ctl_table[] = {
+ 		.maxlen = sizeof(int),
+ 		.mode = 0666, /* permissions are checked in the handler */
+ 		.proc_handler = pid_ns_ctl_handler,
+-		.extra1 = SYSCTL_ZERO,
++		.extra1 = SYSCTL_NEG_ONE,
+ 		.extra2 = &pid_max,
+ 	},
+ };
+-#endif	/* CONFIG_CHECKPOINT_RESTORE */
++#endif	/* CONFIG_CHECKPOINT_RESTORE || CONFIG_IA32_EMULATION */
+ 
+ int reboot_pid_ns(struct pid_namespace *pid_ns, int cmd)
+ {
+@@ -449,7 +463,7 @@ static __init int pid_namespaces_init(void)
+ {
+ 	pid_ns_cachep = KMEM_CACHE(pid_namespace, SLAB_PANIC | SLAB_ACCOUNT);
+ 
+-#ifdef CONFIG_CHECKPOINT_RESTORE
++#if defined(CONFIG_CHECKPOINT_RESTORE) || defined(CONFIG_IA32_EMULATION)
+ 	register_sysctl_init("kernel", pid_ns_ctl_table);
+ #endif
+ 
+-- 
+2.48.1
 
-> > Having taken a quick look at that now, this all seems to duplicate
-> > perf's design journey (again).
-> > 
-> > "rate" events make some sense.  The perf equivalent is to keep an
-> > accumulated count of the amount of time a counter has been assigned to
-> > an event, and another accumulated count of the events counted by the
-> > counter during assignment.  Only userspace knows what it wants to do
-> > with this information: perf exposes the raw accumulated counts.
-> > 
-> > Perf events can be also pinned so that they are prioritised for
-> > assignment to counters; that sounds a lot like the regular, non-shared
-> > resctrl counters.
-> > 
-> > 
-> > Playing devil's advocate:
-> > 
-> > It does feel like we are doomed to reinvent perf if we go too far down
-> > this road...
-> > 
-> >> If we split the file, it will be more closely aligned with the design
-> >> of the rest of the resctrlfs interface.
-> >>
-> >> OTOH, the current interface seems workable and I think the file size
-> >> issue can be addressed without major re-engineering.
-> >>
-> >> So, from my side, I would not consider the current interface design
-> >> a blocker.
-> > 
-> > ...so, drawing a hard line around the use cases that we intend to
-> > address with this interface and avoiding feature creep seems desirable.
-> 
-> This is exactly what I am trying to do ... to understand what use cases
-> the interface is expected to support.
-> 
-> You have mentioned a couple of times now that this interface is sufficient but
-> at the same time you hinted at some features from MPAM that I do not see
-> possible to accommodate with this interface.
-
-It's kind of both.
-
-I think the interface is sufficient to be useful, and therefore has
-value.
-
-The problem being addressed here (shortage of counters) is fully
-relevant to MPAM (at last on some hardware).
-
-Any architecture may define new metrics and types of event that can be
-counted, and they're not going to match up exactly between arches -- so
-I don't think we can expect everything to fit perfectly within a
-generic interface.  But having a generic interface is still useful for
-making common features convenient to use.
-
-So the interface is useful but not universal, but that doesn't feel
-like a bug.
-
-Hopefully that makes my position a bit clearer.
-
-> > resctrlfs is already in the wild, so providing reasonable baseline
-> > compatiblity with that interface for ABMC hardware is a sensible goal.
-> > The current series does that.
-> > 
-> > But I wonder how much additional functionality we should really be
-> > adding via the mbm_assign_control interface, once this series is
-> > settled.
-> 
-> Are you speculating that MPAM counters may not make use of this interface?
-> 
-> Reinette
-
-No, I think it makes sense for MPAM to follow this interface, as least
-as far as what has been proposed so far here.
-
-I think James got his updated rebase working. [1]
-
-
-perf support would be for the future if we do it, but the ABMC
-interface may be a useful starting point anyway, because it allows
-counters to be assigned explicitly -- that provides a natural way to
-hand over some counters to perf, either because that interface may be a
-more natural fit for what the user is trying to do, or perhaps to count
-weird, platform-specific event types that do not merit the effort of
-integration into resctrlfs proper.
-
-Does that make sense?
-
-Cheers
----Dave
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/morse/linux.git/log/?h=mpam/abmc/v11
 
