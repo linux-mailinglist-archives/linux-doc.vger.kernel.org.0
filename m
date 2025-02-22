@@ -1,130 +1,76 @@
-Return-Path: <linux-doc+bounces-39029-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39031-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3A73A406C2
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Feb 2025 10:19:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FC96A4070C
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Feb 2025 10:45:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 913293BC32D
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Feb 2025 09:19:32 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2360D7050C5
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Feb 2025 09:45:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D044F207A04;
-	Sat, 22 Feb 2025 09:19:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eBKbEv+l"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E506A2063F0;
+	Sat, 22 Feb 2025 09:45:16 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CC18206F3A;
-	Sat, 22 Feb 2025 09:19:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
+Received: from 1wt.eu (ded1.1wt.eu [163.172.96.212])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27F3D202C3D;
+	Sat, 22 Feb 2025 09:45:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=163.172.96.212
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740215956; cv=none; b=o/YtP/HJ6q7JNagae4a6jDCnIsB+MIay/5ZWJamJha6Jx3vyZUsMGkRKLJEKdLtAft4X8AYolEcX4KXm1c7FQuwfc/j9DQAHEE/x/Tdmrt5oaPg2QyBfZNe++9ZWmAMp8uHqOKJfVNak+jeSdl62znoDd/fWJhw0UxICjfiVyNY=
+	t=1740217516; cv=none; b=kX5BYGjwZll49dRz993c8OuOuyBfVv8UtaX6I1/gG8z8nH4LrdTf8kekTTPGtWMdnQdmz++XVz81ZmVcrmXJodGfPmVYVciZD0mdHTQzfAdbCnCHd5qrV9rADG9UetWzHJHzIlB+dNb7BllOTuN7abNpxeQduBhv6bJjCwIx7fE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740215956; c=relaxed/simple;
-	bh=GPvHd1NrZQbstxWEAi59upWEyTaGliQIzEFW49ggenc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=iDgO8xbUphnXEKM0geyuaAwb+O2KZCSPMCwdKf9irYLO0zfVolCfKxo3Cxfd5LkWHRjTB1CPeUJDYy8Wrh/al+mHXIpz9Mr/IvyCfbrXhAAbTxgOZpW5cw5r8lYclKVOSLeyqjWfjBejvcoo6CHRGo9oSWI90tie3mgPrMKyT6E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eBKbEv+l; arc=none smtp.client-ip=209.85.216.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-2fbffe0254fso5912652a91.3;
-        Sat, 22 Feb 2025 01:19:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1740215954; x=1740820754; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=R1qQy4fjapAeS/W24BsommvSixWnehGKPR93GX3XfSA=;
-        b=eBKbEv+lKABYVeOce9ICMPEsusPN4p9i+HpdJCGxTziTjy1Bzoz3CrwaXjCh+IKIgy
-         ce5hw9LOq0IFbHbntYYtWIEB+yGcYEuaZ7CQhEItqhkhjZLEFWU3NPXY6ZAwCR0it5xy
-         aR2248ZZ/vZ+1s7f5sf8GVwsXec0puyWtUJ/Y1j7SzWLS4NNab9O1XPsAucjuid8uH4t
-         Yv/Wzbx3+VVurXsEBcNMCnrDTLSp0mmWVP2VguRy/gbZ+g9hp5fGUnzTFFA7pKv/2A/G
-         pF1dWhA7UdHhxchfAEQUxjSKC9769olCTD/vBvzo+n/l2sb9FvCMP4d81xyds2TZLGmL
-         JX4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1740215954; x=1740820754;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=R1qQy4fjapAeS/W24BsommvSixWnehGKPR93GX3XfSA=;
-        b=dAFiYyCj4jfcuOIC+jAXZSKmWRuZy1zJdsqZfjtfKZC3VVTjVKppN3Wno0aQftRaU4
-         o82kV9DkchjiXI11OKmpLuKnyMXiyJes2fIsVysFBSe3WEnw2Wq0YH9TsaADhoeDr1Tg
-         F43e66tjzZtJ9L2pLk6tApJ/MSl1ry8jQJ/pYnCL4ozmbmDGKqAy5cR1xfhcB5s0ZQgs
-         VDQt9AnBjd/m88dSbWIPJHREB2XAoQ/0DKtJwIivfLRTuzO1r04ORek8xi5V3PxOmDmN
-         07TdAVB7gLrH5MJ13kz8zwv4UeVLywbf3nKf0OKIeGUWI06bzJpva4lBYefyKRuNIa3j
-         oLHw==
-X-Forwarded-Encrypted: i=1; AJvYcCWaEnmCPmC8xMgXtYXmpwkK/nGucPB71n4RZ13LwXo9vUnuPkHJ3krj6VXVzAZhksQa3TsJnuWVplcO@vger.kernel.org, AJvYcCXAKKP3VyfHLLU+zaj82mS6jZ3Ji9Buqr8KfhWS/5lF/swO+8gpz+u977gh0wvvrnEhZixSg84PwT13TcwL+A==@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy3uHGZK7VFXYGitACvUz917o/QGn7DYM3tspMULLQo6hjT73wf
-	qkhU9lUZarP+4LNWJ1TO+PiZWmvceJBcVwUfKPKqAFlGuv5kfw9U
-X-Gm-Gg: ASbGncu4tUGEtKkBJGVsreUUoFkQlV0PWOMXkiWRoOn97BPnbvMTdrq+G+48FspEDv7
-	/GY+UeBc1JFtH9bf8YfegA6jGxz8tRTGRDHJjUijkdwmHHVoJQ7L+HhVzlomOVtuZDbm2Z1V2cT
-	UDZfL2c0qiapD9tWH70JosKTjrtSvvDOxBCd9ZK0ZKEn0PWLB20CpW/RIdiCNA9JXAvcQt7MSOF
-	evmRimd0JhCuC2xCipUHW9/Jc1OlIx+VbN6hjBNbOw7NiVi2qEpr+/GlKFskbZpCV2OaPw0fJCs
-	ml2lZ0v9xPznZjauc7UfIP8ZyQ==
-X-Google-Smtp-Source: AGHT+IFnH68kZlDtrEgag2LrOJ1a7YUl1B8syuohVJAbSHgLGBm/yXw3S1AP/WiDyAPmXjE2ePxQjQ==
-X-Received: by 2002:a17:90b:2688:b0:2ee:f687:6adb with SMTP id 98e67ed59e1d1-2fce77a0195mr9486534a91.3.1740215954205;
-        Sat, 22 Feb 2025 01:19:14 -0800 (PST)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2fceb02e387sm2752753a91.9.2025.02.22.01.19.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 22 Feb 2025 01:19:11 -0800 (PST)
-Received: by archie.me (Postfix, from userid 1000)
-	id F02D742D904C; Sat, 22 Feb 2025 16:19:07 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux bcachefs <linux-bcachefs@vger.kernel.org>
-Cc: Kent Overstreet <kent.overstreet@linux.dev>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Joshua Ashton <joshua@froggi.es>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: [PATCH 4/4] Documentation: bcachefs: Add casefolding toctree entry
-Date: Sat, 22 Feb 2025 16:18:53 +0700
-Message-ID: <20250222091853.16487-5-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250222091853.16487-1-bagasdotme@gmail.com>
-References: <20250222091853.16487-1-bagasdotme@gmail.com>
+	s=arc-20240116; t=1740217516; c=relaxed/simple;
+	bh=x+IPeiDLCu0ehvKt7As1lm2Be8HxA1Uyzn0RpCxOApo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FQVKcxDV4mLPs9awyt+gXzSP8nldM1vMh8GTG5Wb87yGz+/rPOe+RNrHByABLZLE6X0otWAxyv9dazXdipikiL6tmogHeCJcJE1Ax5g5KnROaei9O8Pmf8oZJKnA360Kdtcvb5/Ut2OY652j866rI2GTdRxiIbU19+VvMZcpW0A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=1wt.eu; spf=pass smtp.mailfrom=1wt.eu; arc=none smtp.client-ip=163.172.96.212
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=1wt.eu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=1wt.eu
+Received: (from willy@localhost)
+	by pcw.home.local (8.15.2/8.15.2/Submit) id 51M9ierc013314;
+	Sat, 22 Feb 2025 10:44:40 +0100
+Date: Sat, 22 Feb 2025 10:44:40 +0100
+From: Willy Tarreau <w@1wt.eu>
+To: Thomas =?iso-8859-1?Q?Wei=DFschuh?= <thomas.weissschuh@linutronix.de>
+Cc: Masahiro Yamada <masahiroy@kernel.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nicolas Schier <nicolas@fjasle.eu>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>,
+        Brendan Higgins <brendan.higgins@linux.dev>,
+        David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>,
+        Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH 04/12] kbuild: userprogs: add nolibc support
+Message-ID: <20250222094440.GB13258@1wt.eu>
+References: <20250217-kunit-kselftests-v1-0-42b4524c3b0a@linutronix.de>
+ <20250217-kunit-kselftests-v1-4-42b4524c3b0a@linutronix.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1022; i=bagasdotme@gmail.com; h=from:subject; bh=GPvHd1NrZQbstxWEAi59upWEyTaGliQIzEFW49ggenc=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDOk7p5qtXqmesvhZboea/lR3XmaO5u2SpXo8XX35qZ7Xr 197apnfUcrCIMbFICumyDIpka/p9C4jkQvtax1h5rAygQxh4OIUgIn8XsTwh+cIo4ONut5reaGq +2f+M50235Bv2nRG6sZHLYZ3rC7XPjH8T319erGgzD6OM09WX38Uveq98KJTE7q/OvoFz/PXTV9 yjQ0A
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250217-kunit-kselftests-v1-4-42b4524c3b0a@linutronix.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-Sphinx reports htmldocs toctree warning:
+On Mon, Feb 17, 2025 at 11:59:24AM +0100, Thomas Weißschuh wrote:
+> Userprogs are built with the regular kernel compiler $CC.
+> A kernel compiler does not necessarily contain a libc which is required
+> for a normal userspace application.
+> However the kernel tree does contain a minimal libc implementation
+> "nolibc" which can be used to build userspace applications.
+> 
+> Introduce support to build userprogs against nolibc instead of the
+> default C of the compiler, which may not exist.
+          ^^^
+"C library" or maybe "libc" I guess here.
 
-Documentation/filesystems/bcachefs/casefolding.rst: WARNING: document isn't included in any toctree
-
-Fix the warning by adding casefolding documentation entry to bcachefs
-toctree.
-
-Fixes: bc5cc09246c5 ("bcachefs: bcachefs_metadata_version_casefolding")
-Reported-by: Stephen Rothwell <sfr@canb.auug.org.au>
-Closes: https://lore.kernel.org/linux-next/20250221161728.32739f85@canb.auug.org.au/
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/filesystems/bcachefs/index.rst | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/Documentation/filesystems/bcachefs/index.rst b/Documentation/filesystems/bcachefs/index.rst
-index 7db4d7ceab5826..0415b5d781920d 100644
---- a/Documentation/filesystems/bcachefs/index.rst
-+++ b/Documentation/filesystems/bcachefs/index.rst
-@@ -10,4 +10,5 @@ bcachefs Documentation
- 
-    CodingStyle
-    SubmittingPatches
-+   casefolding
-    errorcodes
--- 
-An old man doll... just what I always wanted! - Clara
-
+Willy
 
