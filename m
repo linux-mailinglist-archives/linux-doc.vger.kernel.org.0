@@ -1,361 +1,210 @@
-Return-Path: <linux-doc+bounces-39110-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39115-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDF64A417A9
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Feb 2025 09:42:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5086A4183B
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Feb 2025 10:09:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B3A96164258
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Feb 2025 08:42:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 56B3B170E57
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Feb 2025 09:09:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F378921D018;
-	Mon, 24 Feb 2025 08:41:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 775A0245032;
+	Mon, 24 Feb 2025 09:09:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="2Vg3z+uB";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="5/HWi+iG";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="2Vg3z+uB";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="5/HWi+iG"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IknIikHH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C629B21CC53
-	for <linux-doc@vger.kernel.org>; Mon, 24 Feb 2025 08:41:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E7D6245015;
+	Mon, 24 Feb 2025 09:09:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740386508; cv=none; b=ZYcb4InL5N3Qhuk9ehItqhvKu9fi/KjRxeABhN+nNpt048H6JgP4w44esh9ieyZA/KeAshJU2Ss7/mipF4cQbv4PITk8inWzD8Qk5u1ZBCZ6K+eYFnrcZhGM+7+Cqfy0Ne819JJgL8UX6R76EzVrsc6m5ewzE81OFtzkJcYpnIg=
+	t=1740388143; cv=none; b=IaddgZF1UShkUUvEih75XIxNNOvokGWFoL429PNoHDW0MNy2T2BwJEsmHRuqD+TKfAlAu5wYc4aUI+iZ54tEtx5Io9YyyDR/NZ5dHpQ/QoHJ/eqDm18xBhZCVp1DobDQByxHjPDXB/J6iYgi5YFzRv38+7gt8aSxGk6YQQYyC0k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740386508; c=relaxed/simple;
-	bh=2cs9plzoE2x7ePym9KVH7tcquElTyc2JfDsGYLSQZfs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=TzARUa9Pvk0mcQTuyuKVTihDH3En7eW4/Hg4ihQxWnyqqLg8nUsCpu+p7V1N8cBWaO1BEKn8mgJF5ItNa+ra3IuYswsJ3inXTAXVwMZd500CR5/pUzCQFw5GWp+GZXNeCRqKEZaeUA5VVgtPT0Zz27RwJ22i8B+0fOKspefVJso=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=2Vg3z+uB; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=5/HWi+iG; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=2Vg3z+uB; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=5/HWi+iG; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 03CAF21170;
-	Mon, 24 Feb 2025 08:41:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1740386505; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Q0q0OFhnReu4nyG1O8BohYY6LE6BcFtozBowaB0rVrI=;
-	b=2Vg3z+uBOa9ZlLVULS4UP8fCjNyWJybxsK37iUOSJwx/roH8dg8KWMN7TO49M+zreqiHtE
-	in9LcfQ/1065C+7LvX+Lptz8mSaLOG7dRTzJS/En7s1xdVxdVYI0cTBc0YQbltiMtCKomm
-	7oxyXDEbKVWmfxmcqs7h6XChfx34vTQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1740386505;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Q0q0OFhnReu4nyG1O8BohYY6LE6BcFtozBowaB0rVrI=;
-	b=5/HWi+iGK2xtm2UCHvyvFDbwkJlzHbTrwG05DZgDeNpYdTCtr/ETRJVsOrAxgaqEa5VEBC
-	cL39gNQcOsMpgqCw==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1740386505; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Q0q0OFhnReu4nyG1O8BohYY6LE6BcFtozBowaB0rVrI=;
-	b=2Vg3z+uBOa9ZlLVULS4UP8fCjNyWJybxsK37iUOSJwx/roH8dg8KWMN7TO49M+zreqiHtE
-	in9LcfQ/1065C+7LvX+Lptz8mSaLOG7dRTzJS/En7s1xdVxdVYI0cTBc0YQbltiMtCKomm
-	7oxyXDEbKVWmfxmcqs7h6XChfx34vTQ=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1740386505;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Q0q0OFhnReu4nyG1O8BohYY6LE6BcFtozBowaB0rVrI=;
-	b=5/HWi+iGK2xtm2UCHvyvFDbwkJlzHbTrwG05DZgDeNpYdTCtr/ETRJVsOrAxgaqEa5VEBC
-	cL39gNQcOsMpgqCw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3173C13332;
-	Mon, 24 Feb 2025 08:41:44 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id OXG/CsgwvGcoVgAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Mon, 24 Feb 2025 08:41:44 +0000
-Message-ID: <6f7b0886-5f31-4ba9-b82e-e9d3614b504f@suse.de>
-Date: Mon, 24 Feb 2025 09:41:43 +0100
+	s=arc-20240116; t=1740388143; c=relaxed/simple;
+	bh=44L74dHmGe2TU7EQRUfkK0TjEkVHS2UIUGo5a4H4lz8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=AedpQtMzoKUhPHnvunhHGBQu7tcwE1wwlvXSKECceMbW9RaQmHQa+9OXgGnzMJuHH8pEXLAU+u4K2KWtzoT3ZfcuaMfoOAs9imKQp9SNxJFlvHpPEBYdgXs3tU8Ld+DQ32Dngq4nCRHoEipUWulmwK3W+DWoETotjQJYDiTWIp0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IknIikHH; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3ADAC4CEE8;
+	Mon, 24 Feb 2025 09:09:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1740388142;
+	bh=44L74dHmGe2TU7EQRUfkK0TjEkVHS2UIUGo5a4H4lz8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=IknIikHHAiNqRFJKwiAvsVwQK1WBhsAlo6h2pWfVvsEfYX3BBFpUeoraIWLKCBd8p
+	 wC7muDfBiORTJVrDugS6wOaso2nqSVhssZMGlITsVp5wL4xuc3GLUdz3oBWnYBr+eW
+	 aj4owju7TA2G27ISW9QBWMVRebWBdo4MMLqIMNlWZvuj4TgP0C4tH5lHwFPboF1sGb
+	 moNIlihBZUJ+2wkBViyrsQS8RrGh4+Mz8z1Wc7ZhwRarLBlFOPeAqytwQB2XmN1VDe
+	 NIfBXcEKNZBVAvjxZJADACwluVtE6iygQ2fPe+iG7Hq3Tnhcl+K1YiE3S7fL/qyDvp
+	 l9hNvTRd7m91Q==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1tmUSS-00000003p3R-3GJK;
+	Mon, 24 Feb 2025 10:09:00 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	"Gustavo A. R. Silva" <mchehab+huawei@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Bingbu Cao <bingbu.cao@intel.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Kees Cook <mchehab+huawei@kernel.org>,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Takashi Sakamoto <o-takashi@sakamocchi.jp>,
+	Tianshu Qiu <tian.shu.qiu@intel.com>,
+	linux-arch@vger.kernel.org,
+	linux-hardening@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linux-staging@lists.linux.dev,
+	linux1394-devel@lists.sourceforge.net
+Subject: [PATCH v2 00/39] Implement kernel-doc in Python
+Date: Mon, 24 Feb 2025 10:08:06 +0100
+Message-ID: <cover.1740387599.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] drm/tiny: add driver for Apple Touch Bars in x86
- Macs
-To: Aditya Garg <gargaditya08@live.com>,
- "andriy.shevchenko@linux.intel.com" <andriy.shevchenko@linux.intel.com>
-Cc: "pmladek@suse.com" <pmladek@suse.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- "linux@rasmusvillemoes.dk" <linux@rasmusvillemoes.dk>,
- "senozhatsky@chromium.org" <senozhatsky@chromium.org>,
- Jonathan Corbet <corbet@lwn.net>,
- "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "airlied@gmail.com" <airlied@gmail.com>, "simona@ffwll.ch"
- <simona@ffwll.ch>, Andrew Morton <akpm@linux-foundation.org>,
- "apw@canonical.com" <apw@canonical.com>, "joe@perches.com"
- <joe@perches.com>, "dwaipayanray1@gmail.com" <dwaipayanray1@gmail.com>,
- "lukas.bulwahn@gmail.com" <lukas.bulwahn@gmail.com>,
- "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>,
- "christian.koenig@amd.com" <christian.koenig@amd.com>,
- Kerem Karabay <kekrby@gmail.com>, Aun-Ali Zaidi <admin@kodeit.net>,
- Orlando Chamberlain <orlandoch.dev@gmail.com>,
- Atharva Tiwari <evepolonium@gmail.com>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
- "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
- Hector Martin <marcan@marcan.st>,
- "linux@armlinux.org.uk" <linux@armlinux.org.uk>,
- Asahi Linux Mailing List <asahi@lists.linux.dev>,
- Sven Peter <sven@svenpeter.dev>, Janne Grunau <j@jannau.net>
-References: <DC5079B2-9D3D-4917-A50D-20D633071808@live.com>
- <8F522D41-5417-467E-B9D3-7D9FC24AE536@live.com>
- <Z7igVXqvRYTVFpXU@smile.fi.intel.com>
- <A373EDB5-528D-4ECF-8CF3-4F96DE6E3797@live.com>
- <Z7jlORk0MiMFTmp6@smile.fi.intel.com>
- <E8256A03-5D13-4B8B-932D-70E734E580FE@live.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <E8256A03-5D13-4B8B-932D-70E734E580FE@live.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Spamd-Result: default: False [-2.80 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com,live.com];
-	RCVD_TLS_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[suse.com,goodmis.org,rasmusvillemoes.dk,chromium.org,lwn.net,linux.intel.com,kernel.org,gmail.com,ffwll.ch,linux-foundation.org,canonical.com,perches.com,linaro.org,amd.com,kodeit.net,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,marcan.st,armlinux.org.uk,lists.linux.dev,svenpeter.dev,jannau.net];
-	FREEMAIL_TO(0.00)[live.com,linux.intel.com];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	R_RATELIMIT(0.00)[to_ip_from(RLk1j8fm6pferx3phn9ndszqb3)]
-X-Spam-Score: -2.80
-X-Spam-Flag: NO
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Hi
+Hi Jon,
 
-Am 22.02.25 um 10:07 schrieb Aditya Garg:
->> What padding, please? Why TCP UAPI headers do not have these attributes?
->> Think about it, and think about what actually __packed does and how it affects
->> (badly) the code generation. Otherwise it looks like a cargo cult.
->>
->>> I tried removing __packed btw and driver no longer works.
->> So, you need to find a justification why. But definitely not due to padding in
->> many of them. They can go without __packed as they are naturally aligned.
-> Alright, I did some debugging, basically printk sizeof(struct). Did it for both packed and unpacked with the following results:
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_request_header is 16
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_request_header_unpacked is 16
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_response_header is 20
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_response_header_unpacked is 20
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_simple_request is 32
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_simple_request_unpacked is 32
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_information is 65
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_msg_information_unpacked is 68
+This changeset contains the kernel-doc.py script to replace the verable
+kernel-doc originally written in Perl. It replaces the first version and the
+second series I sent on the top of it.
 
-In the unpacked version, there is a 3-byte gap after the 
-'bits_per_pixel' to align the next field. Using __packed removes those 
-gaps at the expense of runtime overhead.
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_frame is 12
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_frame_unpacked is 12
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_fb_request_footer is 80
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_fb_request_footer_unpacked is 80
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_fb_request is 48
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_fb_request_unpacked is 48
->
-> Feb 22 13:02:03 MacBook kernel: size of struct appletbdrm_fb_request_response is 40
-> Feb 22 13:02:04 MacBook kernel: size of struct appletbdrm_fb_request_response_unpacked is 40
->
-> So, the difference in sizeof in unpacked and packed is only in appletbdrm_msg_information. So, I kept this packed, and removed it from others. The Touch Bar still works.
->
-> So maybe keep just this packed?
+I tried to stay as close as possible of the original Perl implementation
+on the first patch introducing kernel-doc.py, as it helps to double check
+if each function was  properly translated to Python.  This have been 
+helpful debugging troubles that happened during the conversion.
 
-The fields in the TCP header are aligned by design. Unfortunately, this 
-hardware's protocol is not. And there's no way of fixing this now. Just 
-keep all of them packed if you want. At least it's clear then what 
-happens. And if your hardware requires this, you can't do much anyway.
+I worked hard to make it bug-compatible with the original one. Still, its
+output has a couple of differences from the original one:
 
-Best regards
-Thomas
+- The tab expansion works better with the Python script. With that, some
+  outputs that contain tabs at kernel-doc markups are now different;
 
+- The new script  works better stripping blank lines. So, there are a couple
+  of empty new lines that are now stripped with this version;
 
->>
->>
->> ...
->>
->>>>> + if (response->msg == APPLETBDRM_MSG_SIGNAL_READINESS) {
->>>>> + if (!readiness_signal_received) {
->>>>> + readiness_signal_received = true;
->>>>> + goto retry;
->>>>> + }
->>>>> +
->>>>> + drm_err(drm, "Encountered unexpected readiness signal\n");
->>>>> + return -EIO;
->>>>> + }
->>>>> +
->>>>> + if (actual_size != size) {
->>>>> + drm_err(drm, "Actual size (%d) doesn't match expected size (%lu)\n",
->>>>> + actual_size, size);
->>>>> + return -EIO;
->>>>> + }
->>>>> +
->>>>> + if (response->msg != expected_response) {
->>>>> + drm_err(drm, "Unexpected response from device (expected %p4ch found %p4ch)\n",
->>>>> + &expected_response, &response->msg);
->>>>> + return -EIO;
->>>> For three different cases the same error code, can it be adjusted more to the
->>>> situation?
->>> All these are I/O errors, you got any suggestion?
->> Your email client mangled the code so badly that it's hard to read. But I would
->> suggest to use -EINTR in the first case, and -EBADMSG. But also you may consider
->> -EPROTO.
-> Thanks
->>>>> + }
->> ...
->>
->>>>> + if (ret)
->>>>> + return ret;
->>>>> + else if (!new_plane_state->visible)
->>>> Why 'else'? It's redundant.
->>> I’ve just followed what other drm drivers are doing here:
->>>
->>> https://elixir.bootlin.com/linux/v6.13.3/source/drivers/gpu/drm/tiny/bochs.c#L436
->>> https://elixir.bootlin.com/linux/v6.13.3/source/drivers/gpu/drm/tiny/cirrus.c#L363
->>>
->>> And plenty more
->> A bad example is still a bad example. 'else' is simply redundant in this
->> case and add a noisy to the code.
->>
->>> I won’t mind removing else. You want that?
->> Sure.
->>
->> ...
->>
->>>>> + request_size = ALIGN(sizeof(struct appletbdrm_fb_request) +
->>>>> +        frames_size +
->>>>> +        sizeof(struct appletbdrm_fb_request_footer), 16);
->>>> Missing header for ALIGN().
->>>>
->>>> But have you checked overflow.h for the possibility of using some helper macros
->>>> from there? This is what should be usually done for k*alloc() in the kernel.
->>> I don’t really think we need a macro here.
->> Hmm... is frames_size known to be in a guaranteed range to make sure no
->> potential overflow happens?
-> I don’t really find any cause of potential overflow.
->
->
->>>>> + appletbdrm_state->request = kzalloc(request_size, GFP_KERNEL);
->>>>> +
->>>>> + if (!appletbdrm_state->request)
->>>>> + return -ENOMEM;
->> ...
->>
->>>>> + request->msg_id = timestamp & 0xff;
->>>> Why ' & 0xff'?
->>> https://github.com/imbushuo/DFRDisplayKm/blob/master/src/DFRDisplayKm/DfrDisplay.c#L147
->> This is not an answer.
->> Why do you need this here? Isn't the type of msg_id enough?
-> Hmm, I double checked this. msg_id is u8 in the Linux port so would anyways never exceed 0xff. I’ll remove this.
-> Its different in the Windows driver.
->> ...
->>
->>>>> + adev->mode = (struct drm_display_mode) {
->>>> Why do you need a compound literal here? Perhaps you want to have that to be
->>>> done directly in DRM_MODE_INIT()?
->>> I really don’t find this as an issue. You want me to declare another structure, basically this?:
->> Nope, I'm asking if the DRM_MODE_INIT() is done in a way that it only can be
->> used for the static data. Seems like the case. Have you tried to convert
->> DRM_MODE_INIT() to be always a compound literal? Does it break things?
-> Seems to be breaking things.
->>> struct drm_display_mode mode = {
->>> DRM_MODE_INIT(60, adev->height, adev->width,
->>> DRM_MODE_RES_MM(adev->height, 218),
->>> DRM_MODE_RES_MM(adev->width, 218))
->>> };
->>> adev->mode = mode;
->>>
->>>>> + DRM_MODE_INIT(60, adev->height, adev->width,
->>>>> +       DRM_MODE_RES_MM(adev->height, 218),
->>>>> +       DRM_MODE_RES_MM(adev->width, 218))
->>>>> + };
->> -- 
->> With Best Regards,
->> Andy Shevchenko
->>
->>
+- There is a buggy logic at kernel-doc to strip empty description and
+  return sections. I was not able to replicate the exact behavior. So, I ended
+  adding an extra logic to strip empty sections with a different algorithm.
+
+Yet, on my tests, the results are compatible with the venerable script
+output for all .. kernel-doc tags found in Documentation/. I double-checked
+this by adding support to output the kernel-doc commands when V=1, and
+then I ran a diff between kernel-doc.pl and kernel-doc.py for the same
+command lines.
+
+On version 2, kerneldoc.py Sphinx extension now uses the Python classes
+if KERNELDOC  environment var ends with kernel-doc.py. It  keeps a cache
+of previously-parsed files to avoid performance penalties when the same
+file is added on multiple places.
+
+This series contains:
+
+- 4 patches fixing some kernel-doc issues. One of them is for media, but
+   I prefer to have this merged via your tree, as it suppresses a warning
+   that happens after the changes;
+
+- 2 cleanup patches for Perl kernel-doc;
+
+- 2 patches renaming kernel-doc to kernel-doc.pl and adding a symlink.
+  I opted to have the symlink in separate to make easier to review, but
+  feel free to merge them on a single patch if you want.
+
+The remaining patches add the new script, converts it into a library and
+addresses lots of minor compatibility issues. The last patch changes
+Sphinx extension to directly use the Python classes.
+
+The only patch that doesn't belong to this series is a patch dropping
+kernel-doc.py. I opted to keep it for now, as it can help to better
+test the new tools.
+
+With such changes, if one wants to build docs with the old script,
+all it is needed is to use KERNELDOC parameter, e.g.:
+
+	$ make KERNELDOC=scripts/kernel-doc.pl htmldocs
+
+Mauro Carvalho Chehab (39):
+  include/asm-generic/io.h: fix kerneldoc markup
+  drivers: media: intel-ipu3.h: fix identation on a kernel-doc markup
+  drivers: firewire: firewire-cdev.h: fix identation on a kernel-doc
+    markup
+  docs: driver-api/infiniband.rst: fix Kerneldoc markup
+  scripts/kernel-doc: don't add not needed new lines
+  scripts/kernel-doc: drop dead code for Wcontents_before_sections
+  scripts/kernel-doc: rename it to scripts/kernel-doc.pl
+  scripts/kernel-doc: add a symlink to the Perl version of kernel-doc
+  scripts/kernel-doc.py: add a Python parser
+  scripts/kernel-doc.py: output warnings the same way as kerneldoc
+  scripts/kernel-doc.py: better handle empty sections
+  scripts/kernel-doc.py: properly handle struct_group macros
+  scripts/kernel-doc.py: move regex methods to a separate file
+  scripts/kernel-doc.py: move KernelDoc class to a separate file
+  scripts/kernel-doc.py: move KernelFiles class to a separate file
+  scripts/kernel-doc.py: move output classes to a separate file
+  scripts/kernel-doc.py: convert message output to an interactor
+  scripts/kernel-doc.py: move file lists to the parser function
+  scripts/kernel-doc.py: implement support for -no-doc-sections
+  scripts/kernel-doc.py: fix line number output
+  scripts/kernel-doc.py: fix handling of doc output check
+  scripts/kernel-doc.py: properly handle out_section for ReST
+  scripts/kernel-doc.py: postpone warnings to the output plugin
+  docs: add a .pylintrc file with sys path for docs scripts
+  docs: sphinx: kerneldoc: verbose kernel-doc command if V=1
+  docs: sphinx: kerneldoc: ignore "\" characters from options
+  docs: sphinx: kerneldoc: use kernel-doc.py script
+  scripts/kernel-doc.py: Set an output format for --none
+  scripts/kernel-doc.py: adjust some coding style issues
+  scripts/lib/kdoc/kdoc_parser.py: fix Python compat with < v3.13
+  scripts/kernel-doc.py: move modulename to man class
+  scripts/kernel-doc.py: properly handle KBUILD_BUILD_TIMESTAMP
+  scripts/lib/kdoc/kdoc_parser.py: remove a python 3.9 dependency
+  scripts/kernel-doc.py: Properly handle Werror and exit codes
+  scripts/kernel-doc.py: some coding style cleanups
+  scripts/kernel-doc: switch to use kernel-doc.py
+  scripts/lib/kdoc/kdoc_files.py: allow filtering output per fname
+  scripts/kernel_doc.py: better handle exported symbols
+  docs: sphinx: kerneldoc: Use python class if available
+
+ .pylintrc                                     |    2 +
+ Documentation/Makefile                        |    2 +-
+ Documentation/conf.py                         |    2 +-
+ Documentation/driver-api/infiniband.rst       |   16 +-
+ Documentation/sphinx/kerneldoc.py             |  183 +-
+ .../media/ipu3/include/uapi/intel-ipu3.h      |    3 +-
+ include/asm-generic/io.h                      |    6 +-
+ include/uapi/linux/firewire-cdev.h            |    3 +-
+ scripts/kernel-doc                            | 2447 +----------------
+ scripts/kernel-doc.pl                         | 2439 ++++++++++++++++
+ scripts/kernel-doc.py                         |  240 ++
+ scripts/lib/kdoc/kdoc_files.py                |  281 ++
+ scripts/lib/kdoc/kdoc_output.py               |  792 ++++++
+ scripts/lib/kdoc/kdoc_parser.py               | 1714 ++++++++++++
+ scripts/lib/kdoc/kdoc_re.py                   |  273 ++
+ 15 files changed, 5930 insertions(+), 2473 deletions(-)
+ create mode 100644 .pylintrc
+ mode change 100755 => 120000 scripts/kernel-doc
+ create mode 100755 scripts/kernel-doc.pl
+ create mode 100755 scripts/kernel-doc.py
+ create mode 100755 scripts/lib/kdoc/kdoc_files.py
+ create mode 100755 scripts/lib/kdoc/kdoc_output.py
+ create mode 100755 scripts/lib/kdoc/kdoc_parser.py
+ create mode 100755 scripts/lib/kdoc/kdoc_re.py
 
 -- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstrasse 146, 90461 Nuernberg, Germany
-GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
-HRB 36809 (AG Nuernberg)
+2.48.1
+
 
 
