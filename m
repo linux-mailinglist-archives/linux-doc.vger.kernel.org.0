@@ -1,228 +1,307 @@
-Return-Path: <linux-doc+bounces-39405-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39407-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2921A4484F
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Feb 2025 18:35:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74E75A44867
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Feb 2025 18:36:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6AAA219C1003
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Feb 2025 17:31:49 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8AEDB188BC29
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Feb 2025 17:33:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80E932139A2;
-	Tue, 25 Feb 2025 17:26:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C48C2199E8D;
+	Tue, 25 Feb 2025 17:28:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="Ulacjx3h"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="0j7GZOTS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2054.outbound.protection.outlook.com [40.107.94.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f73.google.com (mail-pj1-f73.google.com [209.85.216.73])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0A4C2139B0;
-	Tue, 25 Feb 2025 17:26:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.94.54
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740504404; cv=fail; b=TYzOd0l/HeMfF4roTu0t5OuHipus+SCLlV6Y69nThgs2fdMEVea0KVHzGO2xfqmM91v0nGwBd89G9NnDJzNCgDC4Pe88ZmHENkTjw2VLz0EytCOkYk/Tvw+0Zncde/7NUv7X+o8skSQzLEqXIijtpqWnIM9Z+jNvrdfYEWlaN4k=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740504404; c=relaxed/simple;
-	bh=/X+09Vsc4VNJQvbEU9KMf9p8UYEDL0uvP9TGQnPsgpU=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XaUq2SdxO/VqzXt5gM1lDWip+foNpwu1csV8YZo0Isv7U6yAJ854OwGwvkSBNLacRbvBcPkrSiuxSUXy/5vY2FkdUQJBEY1ec9rjxKcdFn0J7H+s1kuWh9PbOnJ9rQilwHyqVs6oBvZ21SjBWQcQtN5j7W4kyJyvU/YqBuIxeAY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Ulacjx3h; arc=fail smtp.client-ip=40.107.94.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J1YsB4tDe7hDZA9sXA7KRibo71Bz9cvsWSCbhfYiBMu49XzYH3JJ67ZdDxTKPgYE54bVpEx/05i8nyjRCIpo3NVtVXTfXao63URP4bKHZTNR/NLQOOVJLAXFXqNj7Xien1OKs0jh3QOw+E4/gRCpSxOyHXfDiLkweoxwjWgYcvRDNfObrY+26N0JwwPyHAJ3KdrT9UA31SR89DYp4gVEsVTIn+0m4XQsNtJ6bNs95KDYUOc+lpZOMamwvsyFXY7iv3ZAAbYfpoDd5q5fyL/dNmoZ/EejDb/H7sUG/47d+oBdP3nKBj+BEymqGXXXPBA09QOeZouYdqbFmCGC7d8GXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wsmRbpLmY8d02Z/q83YM8QZLbPFpQKH3bXuv1IOmY+0=;
- b=dKALfzKOOaxS4ZUmMyA1C+F0RQ+IPpCOIgNYXExk13v1qFZKOUilwojU1r173qTODPrqqzAhcNUynszb+hohfdYVjL7XkCotOO9Dw1PTxOEQspi3SRot+UxFt8/J3O2F+e1AmKyVFgg0xADr4JyP/9WPUmxmY5CrNS7mQn6k4LkAPIGybo5egrW+1lZ/Ffmlge5iHq/YEXLTM87FJCwdvmHwNBdOxClgmetVJCgkDAf++Lhxc++WXPSAsyj/wA69gvMx/RHD6dnsDWkofWOGPDCbz6KpmF0EEbqgRWODLygiR+4C/FoC8YFdFbIHthOqZaE0uOPwbEc+a17X759MjA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=intel.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wsmRbpLmY8d02Z/q83YM8QZLbPFpQKH3bXuv1IOmY+0=;
- b=Ulacjx3hdLJqx6BErkNpPlNxSHOxrt2Jj0NW6k/HBkIhtXWSsjK1hEBHhtyFgWNTeNK02gmTFsmGGeNpKn231jZ4tsHIOcBKiuUCpTOQjBK+IUwMx9T/apupOvqyTl/vbmeDFDoNHMDmSugR27zgwIx2fZ1gSzarNaWkinW+eAH6boFSgjdecFgTsfLJdOkXH1Y1SRwr1HzPdfzgkuF4qSen0AlAj/JVHUVaR5s0zQ5YSX1GpxnpLzaDnw8ix98fxBHE1avJPvbxeRa2a36abTtxCpIUOMk3YasK+t5n61zQyqAieoTK+b/8/wHYRRKg2XVKPAyxNo5hpJhwseK9rQ==
-Received: from MN0PR02CA0001.namprd02.prod.outlook.com (2603:10b6:208:530::21)
- by LV8PR12MB9407.namprd12.prod.outlook.com (2603:10b6:408:1f9::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.18; Tue, 25 Feb
- 2025 17:26:37 +0000
-Received: from BL6PEPF00020E5F.namprd04.prod.outlook.com
- (2603:10b6:208:530:cafe::82) by MN0PR02CA0001.outlook.office365.com
- (2603:10b6:208:530::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.20 via Frontend Transport; Tue,
- 25 Feb 2025 17:26:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- BL6PEPF00020E5F.mail.protection.outlook.com (10.167.249.20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8489.16 via Frontend Transport; Tue, 25 Feb 2025 17:26:37 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.4; Tue, 25 Feb
- 2025 09:26:13 -0800
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail201.nvidia.com
- (10.129.68.8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.14; Tue, 25 Feb
- 2025 09:26:13 -0800
-Received: from Asurada-Nvidia.nvidia.com (10.127.8.11) by mail.nvidia.com
- (10.129.68.7) with Microsoft SMTP Server id 15.2.1544.14 via Frontend
- Transport; Tue, 25 Feb 2025 09:26:12 -0800
-From: Nicolin Chen <nicolinc@nvidia.com>
-To: <jgg@nvidia.com>, <kevin.tian@intel.com>, <corbet@lwn.net>,
-	<will@kernel.org>
-CC: <joro@8bytes.org>, <suravee.suthikulpanit@amd.com>,
-	<robin.murphy@arm.com>, <dwmw2@infradead.org>, <baolu.lu@linux.intel.com>,
-	<linux-kernel@vger.kernel.org>, <iommu@lists.linux.dev>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-kselftest@vger.kernel.org>,
-	<linux-doc@vger.kernel.org>, <eric.auger@redhat.com>,
-	<jean-philippe@linaro.org>, <mdf@kernel.org>, <mshavit@google.com>,
-	<shameerali.kolothum.thodi@huawei.com>, <smostafa@google.com>,
-	<ddutile@redhat.com>, <yi.l.liu@intel.com>, <praan@google.com>,
-	<patches@lists.linux.dev>
-Subject: [PATCH v8 14/14] iommu/arm-smmu-v3: Set MEV bit in nested STE for DoS mitigations
-Date: Tue, 25 Feb 2025 09:25:42 -0800
-Message-ID: <f465dd9defdc0fc748c2fa2cfc829e37778a4ced.1740504232.git.nicolinc@nvidia.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1740504232.git.nicolinc@nvidia.com>
-References: <cover.1740504232.git.nicolinc@nvidia.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFCD9199E88
+	for <linux-doc@vger.kernel.org>; Tue, 25 Feb 2025 17:28:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.73
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1740504531; cv=none; b=bOawgjHcXLNYv3i+wH0KA7rvf6mjSICFyjmEkr0XHQvtLLvpI2HuPKtnI3+pNqz8N6Jz9XMbAc/8oEJlMgGX1dcjb3irbGZzpMoPECGet9PPoLbBetPROf4uu7d2HYrQns/Cg5J3Ol9GB80DVwPkpDUiCZX/4z5Z7+WjXouQHjY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1740504531; c=relaxed/simple;
+	bh=xssk7r6GD77nVJokw+O90QXNptvnUYuZqjKgbyfdpCk=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=tQSh4WSW+Z3W486ySIoFEZzf42+10B6vSxYzo6O78eYwQxy/PNq4Q7AurNiSbx3+Ailu6uetU01gdVsazllATFXIB/iA+gwEwFFLHt2+7L7aM4wzkAVLs3BQxRSnTfzTJRPFAgLxEddPvAIkVwrdh9wizjmmMFYeiJCt7ipKZVo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=0j7GZOTS; arc=none smtp.client-ip=209.85.216.73
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com
+Received: by mail-pj1-f73.google.com with SMTP id 98e67ed59e1d1-2fc43be27f8so19417818a91.1
+        for <linux-doc@vger.kernel.org>; Tue, 25 Feb 2025 09:28:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1740504529; x=1741109329; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Kp/kK8Nq6EAHPL6vafMzGhBPqvyWvzwjvBM1N34P0S0=;
+        b=0j7GZOTSjM7IjeSUDXLznQZBeCvPZZyBkFEjH9I53mT8S0swA5LZMBqlfbe8cGbcmY
+         sY7FYXh60SQHOauNyobNLAK8WEnXrOuML59Y8jYYPqrlt1Bkp/8UaGYD0RJolmVcBYSV
+         Y8EO5e2jyM7TkLZTiuBXf7Iet90L0xDIKiu4CloX9/kZsZTE2ttLr2pGc84nzXF6Pgmi
+         tqqYwaXwEqkBB6gbeXrCq7ATXzP7CB3/ePjM9EYaqd+CUp7SyzsryUrpKDf5mhMuEx1G
+         plgOKJZaqvadKc3gasJ1+Fa3RyuU1la7dQodtgrSx4RDij0NuDxFE3nx55PZPkSZoy2E
+         RKWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1740504529; x=1741109329;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Kp/kK8Nq6EAHPL6vafMzGhBPqvyWvzwjvBM1N34P0S0=;
+        b=mRy+aSg6exgAOJsO7oz5qPVnr4n062bmKsg2Z+zoYAxV+XRhMoU0tpByUJ41yWNOM1
+         gUVgEdkr+HOZX6phUZt/OH/7NC255RxItYio0Aae02D0ML0F4w4GbSfMlZPBjOci7Isn
+         O/IRYYD98OZfeB5h1SV+2WZSo7fxwiJHxffc1PBsPZP4eYYeyZApeJVhjAcAw24mw1ic
+         06AgwarJE9bYWEzMp/Dz5KsouMWQq9A92Oj/t3PFc4je2DFyJBk+7iu/osK26yySex4W
+         g54biY2JLzqqjw4+G1BDU47cEmezeFx/G/vVcwvtKX1yHkkP+ymRf7Pzl1NnrWaAdpwh
+         pmGg==
+X-Forwarded-Encrypted: i=1; AJvYcCXBS2gU9LCCKHCFvfofuuLAfs1c0GfvGVWiMjNqX4TWuGHWX8nnpfO5BYqz6WWA1DklbYDUy8AEXQ4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwYrW3Y3h0nz97bXnb42mblxiMjBQJc4GvmESSZrgmfbRivffhh
+	4Dt/or5o9+oi+oDWv8M2qnSr8ccaY0OchofOOyTLquEJGHrThDFeRjbRqlQSS/0HtQ0MgcKc4gQ
+	6vA==
+X-Google-Smtp-Source: AGHT+IGTvcRUA6OpnNrnqKRmtujbXTgGf5Jtp8a1i0NXeuvpsdxCzwhvJ/m9zCtVPFCeAGo5v7x+9YDTpxg=
+X-Received: from pjbtb12.prod.google.com ([2002:a17:90b:53cc:b0:2ea:9d23:79a0])
+ (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:350e:b0:2ee:9902:18b4
+ with SMTP id 98e67ed59e1d1-2fe7e39f1bbmr248876a91.27.1740504529279; Tue, 25
+ Feb 2025 09:28:49 -0800 (PST)
+Date: Tue, 25 Feb 2025 09:28:33 -0800
+In-Reply-To: <5582cf56-0b22-4603-b8e2-6b652c09b4fa@zytor.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-NV-OnPremToCloud: AnonymousSubmission
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00020E5F:EE_|LV8PR12MB9407:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00c1617d-7199-403d-96b8-08dd55c18f21
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|7416014|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?yUzymq6KwZ4CeU0CioFDIa4pjQ0RLEAKzqh8xyn6Co0MMOl0vQqUOeFUZ98a?=
- =?us-ascii?Q?fdrnlx8qT4v8JbD4yETGt5x/3ykL4AiQBfDEmu7yEiq4I5RvKQ17gfIGUVZ8?=
- =?us-ascii?Q?v459zat4oBnv1uLQ87IveN5ZZg9y74iLLISKcAGEUR42cgz5BrEjM5HOh8Y2?=
- =?us-ascii?Q?7+yJlytsnciLKqqE7O7g/zqX+8qghBQQ8Wxo826/XCba2CXa/WoAnlwUjvJ+?=
- =?us-ascii?Q?L70FmQOXUbrglBjaesWIEwCGdxugLiIo/WzO7UmMhdDpHlASJA7ZqUbGwyOf?=
- =?us-ascii?Q?Pgtd81dTvRqWbS/4uQk84Rdjws+MOy9Kg8aIbZdb2oNZ/9gksIC+r5CwMiox?=
- =?us-ascii?Q?8+KNnvpiQ43Dd+MkRnq4Yc0TnTIzA155MRrXkHCws06fdnh/IARj3P5o2nAN?=
- =?us-ascii?Q?iOPSXUdBFONymh8hVBgAHfjT3qzd1BI2d4XB7ZhwSJxxEfWf7cVPi2tT4Byr?=
- =?us-ascii?Q?k1CrSblu/qTY3HefIpHsm5ICPwVmnTIAZ7tQWxMOs9b+E2R2XfMWnpC0Ieva?=
- =?us-ascii?Q?INyFSaIWMRFtGxbT46bxdyh6hdK9CCsJfmx2M2JsioFmxcHTwXs+PnDvmk5Y?=
- =?us-ascii?Q?sAU+iSC41dGmn8bcRRDCR50DoYvQWQEAOn9UiUXsOZ5JBNXVpXlEgn3VjGgL?=
- =?us-ascii?Q?bF8Vgig2xeRC6sem0ijOI1NXGgqVXBzlYdTkfTZFGmQwU+MjbWbr4jf+qz7F?=
- =?us-ascii?Q?MHRcC/iDI0I4p6EOe2e3R/P0yMzr+QfcuVf37A417dbCk4I0Urza+9flqLIm?=
- =?us-ascii?Q?AavJVlERr/ktXC4yvOGuYJQHzwayiK8fhYQhDPz2nw0Ck4UmFZDWHW3uyVSY?=
- =?us-ascii?Q?r2Wu2n9PcnaodAeOEZVxEI2mbf0xNxBFy5+n2Wzz/s85b8OUfX5aeXIqHnBV?=
- =?us-ascii?Q?3s9pio0qXPRosOp92c8Ccnj/vfaa76tlmr/lHM5WMJO2ucrKzzrdaTev6hro?=
- =?us-ascii?Q?ZiSUNu7eHuSisgomyJdw+taK8zYdh5gQa/1tsHhRFN9A1u56U4Gqabg+a34o?=
- =?us-ascii?Q?TGFixmF6Ub9eTevcDGj+pTACaw4tGb95u0v9oK7pOgVCIWCZmuUbB5BgOlIh?=
- =?us-ascii?Q?eALKWUdGNB6FckXDyL63m9t3rmdM2eUe/640fm9MXsPjwB291RONocbbQDPi?=
- =?us-ascii?Q?J1UShTKMCrBGOz1CsfZfCK3eQQ88teiJBTp+cfNYmbeFwrc5hbSYIS+IS7Tm?=
- =?us-ascii?Q?t0WsiEjHPznozJjTT0k7mnKGcirEPFm7XQBpR7o3P1OLduAeevo7qoixl2ai?=
- =?us-ascii?Q?dNO+Pd7u4De+0Pvxpu8u05/nhbTPS9hIr13FhFzh3flIkZ3tWGXm5of4BwQS?=
- =?us-ascii?Q?ZLfT+yCTuHRFpnSmf+TItYX1QYGygsSDS+Q+2kovXXTXdM9WwSa407cMnWX+?=
- =?us-ascii?Q?hngBCNLcQ1eyQm6+lCJZhHFqkOhwyFrqX4GXoOzrXk37S+17HkGTajjAQHqZ?=
- =?us-ascii?Q?4peSr15XUagPglQP5PAP8ehGnN0pJDgO9Yjdxs0zfevHBPmWmHRwfadYIBql?=
- =?us-ascii?Q?iLcmpR7GrOXEsAQ=3D?=
-X-Forefront-Antispam-Report:
-	CIP:216.228.117.160;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc6edge1.nvidia.com;CAT:NONE;SFS:(13230040)(82310400026)(376014)(7416014)(1800799024)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2025 17:26:37.2839
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00c1617d-7199-403d-96b8-08dd55c18f21
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.117.160];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL6PEPF00020E5F.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9407
+Mime-Version: 1.0
+References: <20241001050110.3643764-1-xin@zytor.com> <20241001050110.3643764-4-xin@zytor.com>
+ <ZxYQvmc9Ke+PYGkQ@intel.com> <10aa42de-a448-40d4-a874-514c9deb56a3@zytor.com>
+ <ZxcSPpuBHO8Y1jfG@intel.com> <5582cf56-0b22-4603-b8e2-6b652c09b4fa@zytor.com>
+Message-ID: <Z739wdGmk4ZuWJ8v@google.com>
+Subject: Re: [PATCH v3 03/27] KVM: VMX: Add support for the secondary VM exit controls
+From: Sean Christopherson <seanjc@google.com>
+To: Xin Li <xin@zytor.com>
+Cc: Chao Gao <chao.gao@intel.com>, kvm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, pbonzini@redhat.com, corbet@lwn.net, 
+	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
+	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, luto@kernel.org, 
+	peterz@infradead.org, andrew.cooper3@citrix.com
+Content-Type: multipart/mixed; charset="UTF-8"; boundary="6p5+kLFLXaqTdVYq"
 
-There is a DoS concern on the shared hardware event queue among devices
-passed through to VMs, that too many translation failures that belong to
-VMs could overflow the shared hardware event queue if those VMs or their
-VMMs don't handle/recover the devices properly.
 
-The MEV bit in the STE allows to configure the SMMU HW to merge similar
-event records, though there is no guarantee. Set it in a nested STE for
-DoS mitigations.
+--6p5+kLFLXaqTdVYq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-In the future, we might want to enable the MEV for non-nested cases too
-such as domain->type == IOMMU_DOMAIN_UNMANAGED or even IOMMU_DOMAIN_DMA.
+On Tue, Oct 22, 2024, Xin Li wrote:
+> > > > > 		_vmentry_control &= ~n_ctrl;
+> > > > > 		_vmexit_control &= ~x_ctrl;
+> > > > 
+> > > > w/ patch 4, VM_EXIT_ACTIVATE_SECONDARY_CONTROLS is cleared if FRED fails in the
+> > > > consistent check. this means, all features in the secondary vm-exit controls
+> > > > are removed. it is overkill.
+> > > 
+> > > Good catch!
+> > > 
+> > > > 
+> > > > I prefer to maintain a separate table for the secondary VM-exit controls:
+> > > > 
+> > > >    	struct {
+> > > >    		u32 entry_control;
+> > > >    		u64 exit2_control;
+> > > > 	} const vmcs_entry_exit2_pairs[] = {
+> > > > 		{ VM_ENTRY_LOAD_IA32_FRED, SECONDARY_VM_EXIT_SAVE_IA32_FRED |
+> > > > 					   SECONDARY_VM_EXIT_LOAD_IA32_FRED},
+> > > > 	};
+> > > > 
+> > > > 	for (i = 0; i < ARRAY_SIZE(vmcs_entry_exit2_pairs); i++) {
+> > > > 	...
+> > > > 	}
+> > > 
+> > > Hmm, I prefer one table, as it's more straight forward.
 
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-Reviewed-by: Pranjal Shrivastavat <praan@google.com>
-Signed-off-by: Nicolin Chen <nicolinc@nvidia.com>
+Heh, that's debatable.  Also, calling these triplets is *very* misleading.
+
+> > One table is fine if we can fix the issue and improve readability. The three
+> > nested if() statements hurts readability.
+> 
+> You're right!  Let's try to make it clearer.
+
+I agree with Chao, two tables provides better separation, which makes it easier
+to follow what's going on, and avoids "polluting" every entry with empty fields.
+
+If it weren't for the new controls supporting 64 unique bits, and the need to
+clear bits in KVM's controls, it'd be trivial to extract processing to a helper
+function.  But, it's easy enough to solve that conundrum by using a macro instead
+of a function.  And as a bonus, a macro allows for adding compile-time assertions
+to detect typos, e.g. can detect if KVM passes in secondary controls (u64) pairs
+with the primary controls (u32) variable.
+
+I'll post the attached patch shortly.  I verified it works as expected with a
+simulated "bad" FRED CPU.
+
+diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
+index c9e5576d99d0..4717d48eabe8 100644
+--- a/arch/x86/kvm/vmx/vmx.c
++++ b/arch/x86/kvm/vmx/vmx.c
+@@ -2621,6 +2621,7 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
+        u32 _vmentry_control = 0;
+        u64 basic_msr;
+        u64 misc_msr;
++       u64 _vmexit2_control = BIT_ULL(1);
+ 
+        /*
+         * LOAD/SAVE_DEBUG_CONTROLS are absent because both are mandatory.
+@@ -2638,6 +2639,13 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
+                { VM_ENTRY_LOAD_IA32_RTIT_CTL,          VM_EXIT_CLEAR_IA32_RTIT_CTL },
+        };
+ 
++       struct {
++               u32 entry_control;
++               u64 exit_control;
++       } const vmcs_entry_exit2_pairs[] = {
++               { 0x00800000,                           BIT_ULL(0) | BIT_ULL(1) },
++       };
++
+        memset(vmcs_conf, 0, sizeof(*vmcs_conf));
+ 
+        if (adjust_vmx_controls(KVM_REQUIRED_VMX_CPU_BASED_VM_EXEC_CONTROL,
+@@ -2728,6 +2736,12 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
+                                       _vmentry_control, _vmexit_control))
+                return -EIO;
+ 
++       if (vmx_check_entry_exit_pairs(vmcs_entry_exit2_pairs,
++                                      _vmentry_control, _vmexit2_control))
++               return -EIO;
++
++       WARN_ON_ONCE(_vmexit2_control);
++
+        /*
+         * Some cpus support VM_{ENTRY,EXIT}_IA32_PERF_GLOBAL_CTRL but they
+         * can't be used due to an errata where VM Exit may incorrectly clear
+
+--6p5+kLFLXaqTdVYq
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment;
+	filename="0001-KVM-VMX-Extract-checks-on-entry-exit-control-pairs-t.patch"
+
+From b1def684c93990d1a62c169bb23706137b96b727 Mon Sep 17 00:00:00 2001
+From: Sean Christopherson <seanjc@google.com>
+Date: Tue, 25 Feb 2025 09:10:32 -0800
+Subject: [PATCH] KVM: VMX: Extract checks on entry/exit control pairs to a
+ helper macro
+
+Extract the checking of entry/exit pairs to a helper macro so that the
+code can be reused to process the upcoming "secondary" exit controls (the
+primary exit controls field is out of bits).  Use a macro instead of a
+function to support different sized variables (all secondary exit controls
+will be optional and so the MSR doesn't have the fixed-0/fixed-1 split).
+Taking the largest size as input is trivial, but handling the modification
+of KVM's to-be-used controls is much trickier, e.g. would require bitmap
+games to clear bits from a 32-bit bitmap vs. a 64-bit bitmap.
+
+Opportunistically add sanity checks to ensure the size of the controls
+match (yay, macro!), e.g. to detect bugs where KVM passes in the pairs for
+primary exit controls, but its variable for the secondary exit controls.
+
+To help users triage mismatches, print the control bits that are checked,
+not just the actual value.  For the foreseeable future, that provides
+enough information for a user to determine which fields mismatched.  E.g.
+until secondary entry controls comes along, all entry bits and thus all
+error messages are guaranteed to be unique.
+
+To avoid returning from a macro, which can get quite dangerous, simply
+process all pairs even if error_on_inconsistent_vmcs_config is set.  The
+speed at which KVM rejects module load is not at all interesting.
+
+Keep the error message a "once" printk, even though it would be nice to
+print out all mismatching pairs.  In practice, the most likely scenario is
+that a single pair will be mismatch on all CPUs.  Printing all mismatches
+generates redundant messages in that situation, and can be extremely noisy
+on systems with large numbers of CPUs.  If a CPU has multiple mismatches,
+not printing every bad pair is the least of the user's concerns.
+
+Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h         | 1 +
- drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-iommufd.c | 2 ++
- drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c         | 4 ++--
- 3 files changed, 5 insertions(+), 2 deletions(-)
+ arch/x86/kvm/vmx/vmx.c | 48 +++++++++++++++++++++++++++---------------
+ 1 file changed, 31 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h
-index f3c5c49bf131..bc4f536f72ce 100644
---- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h
-+++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.h
-@@ -266,6 +266,7 @@ static inline u32 arm_smmu_strtab_l2_idx(u32 sid)
- #define STRTAB_STE_1_S1COR		GENMASK_ULL(5, 4)
- #define STRTAB_STE_1_S1CSH		GENMASK_ULL(7, 6)
- 
-+#define STRTAB_STE_1_MEV		(1UL << 19)
- #define STRTAB_STE_1_S2FWB		(1UL << 25)
- #define STRTAB_STE_1_S1STALLD		(1UL << 27)
- 
-diff --git a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-iommufd.c b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-iommufd.c
-index 649e3aa39a48..8e8ea3702ce5 100644
---- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-iommufd.c
-+++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-iommufd.c
-@@ -43,6 +43,8 @@ static void arm_smmu_make_nested_cd_table_ste(
- 	target->data[0] |= nested_domain->ste[0] &
- 			   ~cpu_to_le64(STRTAB_STE_0_CFG);
- 	target->data[1] |= nested_domain->ste[1];
-+	/* Merge events for DoS mitigations on eventq */
-+	target->data[1] |= cpu_to_le64(STRTAB_STE_1_MEV);
+diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
+index b71392989609..c9e5576d99d0 100644
+--- a/arch/x86/kvm/vmx/vmx.c
++++ b/arch/x86/kvm/vmx/vmx.c
+@@ -2582,6 +2582,34 @@ static u64 adjust_vmx_controls64(u64 ctl_opt, u32 msr)
+ 	return  ctl_opt & allowed;
  }
  
- /*
-diff --git a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
-index 22aa5c8d1e9d..3fcb1089a7c7 100644
---- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
-+++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
-@@ -1052,7 +1052,7 @@ void arm_smmu_get_ste_used(const __le64 *ent, __le64 *used_bits)
- 			cpu_to_le64(STRTAB_STE_1_S1DSS | STRTAB_STE_1_S1CIR |
- 				    STRTAB_STE_1_S1COR | STRTAB_STE_1_S1CSH |
- 				    STRTAB_STE_1_S1STALLD | STRTAB_STE_1_STRW |
--				    STRTAB_STE_1_EATS);
-+				    STRTAB_STE_1_EATS | STRTAB_STE_1_MEV);
- 		used_bits[2] |= cpu_to_le64(STRTAB_STE_2_S2VMID);
++#define vmx_check_entry_exit_pairs(pairs, entry_controls, exit_controls)	\
++({										\
++	int i, r = 0;								\
++										\
++	BUILD_BUG_ON(sizeof(pairs[0].entry_control) != sizeof(entry_controls));	\
++	BUILD_BUG_ON(sizeof(pairs[0].exit_control)  != sizeof(exit_controls));	\
++										\
++	for (i = 0; i < ARRAY_SIZE(pairs); i++) {				\
++		typeof(entry_controls) n_ctrl = pairs[i].entry_control;		\
++		typeof(exit_controls) x_ctrl = pairs[i].exit_control;		\
++										\
++		if (!(entry_controls & n_ctrl) == !(exit_controls & x_ctrl))	\
++			continue;						\
++										\
++		pr_warn_once("Inconsistent VM-Entry/VM-Exit pair, " 		\
++			     "entry = %llx (%llx), exit = %llx (%llx)\n",	\
++			    (u64)(entry_controls & n_ctrl), (u64)n_ctrl,	\
++			    (u64)(exit_controls & x_ctrl), (u64)x_ctrl);	\
++										\
++		if (error_on_inconsistent_vmcs_config)				\
++			r = -EIO;						\
++										\
++		entry_controls &= ~n_ctrl;					\
++		exit_controls &= ~x_ctrl;					\
++	}									\
++	r;									\
++})
++
+ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
+ 			     struct vmx_capability *vmx_cap)
+ {
+@@ -2593,7 +2621,6 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
+ 	u32 _vmentry_control = 0;
+ 	u64 basic_msr;
+ 	u64 misc_msr;
+-	int i;
  
- 		/*
-@@ -1068,7 +1068,7 @@ void arm_smmu_get_ste_used(const __le64 *ent, __le64 *used_bits)
- 	if (cfg & BIT(1)) {
- 		used_bits[1] |=
- 			cpu_to_le64(STRTAB_STE_1_S2FWB | STRTAB_STE_1_EATS |
--				    STRTAB_STE_1_SHCFG);
-+				    STRTAB_STE_1_SHCFG | STRTAB_STE_1_MEV);
- 		used_bits[2] |=
- 			cpu_to_le64(STRTAB_STE_2_S2VMID | STRTAB_STE_2_VTCR |
- 				    STRTAB_STE_2_S2AA64 | STRTAB_STE_2_S2ENDI |
--- 
-2.43.0
+ 	/*
+ 	 * LOAD/SAVE_DEBUG_CONTROLS are absent because both are mandatory.
+@@ -2697,22 +2724,9 @@ static int setup_vmcs_config(struct vmcs_config *vmcs_conf,
+ 				&_vmentry_control))
+ 		return -EIO;
+ 
+-	for (i = 0; i < ARRAY_SIZE(vmcs_entry_exit_pairs); i++) {
+-		u32 n_ctrl = vmcs_entry_exit_pairs[i].entry_control;
+-		u32 x_ctrl = vmcs_entry_exit_pairs[i].exit_control;
+-
+-		if (!(_vmentry_control & n_ctrl) == !(_vmexit_control & x_ctrl))
+-			continue;
+-
+-		pr_warn_once("Inconsistent VM-Entry/VM-Exit pair, entry = %x, exit = %x\n",
+-			     _vmentry_control & n_ctrl, _vmexit_control & x_ctrl);
+-
+-		if (error_on_inconsistent_vmcs_config)
+-			return -EIO;
+-
+-		_vmentry_control &= ~n_ctrl;
+-		_vmexit_control &= ~x_ctrl;
+-	}
++	if (vmx_check_entry_exit_pairs(vmcs_entry_exit_pairs,
++				       _vmentry_control, _vmexit_control))
++		return -EIO;
+ 
+ 	/*
+ 	 * Some cpus support VM_{ENTRY,EXIT}_IA32_PERF_GLOBAL_CTRL but they
 
+base-commit: fed48e2967f402f561d80075a20c5c9e16866e53
+-- 
+2.48.1.658.g4767266eb4-goog
+
+
+--6p5+kLFLXaqTdVYq--
 
