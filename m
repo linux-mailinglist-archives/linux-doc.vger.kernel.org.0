@@ -1,128 +1,141 @@
-Return-Path: <linux-doc+bounces-39484-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39486-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9671DA457FA
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Feb 2025 09:20:49 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FF80A45895
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Feb 2025 09:40:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 898A7170B61
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Feb 2025 08:20:48 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BA1AE3A9DC1
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Feb 2025 08:40:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6235218DB01;
-	Wed, 26 Feb 2025 08:20:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 68F161E1E07;
+	Wed, 26 Feb 2025 08:40:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YiIm1eue"
+	dkim=pass (1024-bit key) header.d=amazon.co.uk header.i=@amazon.co.uk header.b="aWRf0kSG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp-fw-80006.amazon.com (smtp-fw-80006.amazon.com [99.78.197.217])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F70446426;
-	Wed, 26 Feb 2025 08:20:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D89B1E1DEC;
+	Wed, 26 Feb 2025 08:40:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=99.78.197.217
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740558044; cv=none; b=RI8JthibhhUA+JwPX1swNcXd0a4Rzq2t+p94St7pqS+v3t7u87AvVKztjLKwcVSWBk09AEDd6+slh3x+70uG/SCrX2RnJ2vEh9kdZfvsHwTkVvbnsRSZpg5QdgunD2430Y9Xqtpy5Lv8QwWS2eKLdB5wMcTZ/HAhItLsRUYycN0=
+	t=1740559224; cv=none; b=pX+Z4XQnH9TBWXoSChLI5mEtG4RbDaNxsbvG8LuJR/EgP0AC3324Yu/4TiaQsZpL9TpV9f7hrwVp3hj1VQnOTClJHiAd/svqBaYHpM5o0niGwLQsiRICfwTs0D5zyhlt2VEsruhyQQFOUyY0PsQnBFz/5zv4buuw/iOzY1TPyCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740558044; c=relaxed/simple;
-	bh=4Pe8SdHpMNion2K2A1gVO1ETNWDlPyE6kIyEGg2L6M0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IVRs7/qZXefsjpr2k9YtZyujNmZAguigpQIDTfQ/IzOP690P/V4lsligxIekh/RvHAyTH1CV+h7DttsdvWLPpInDLKe8+085XsZbeYWYI2HwHUMTvvzN+MzQIOY74lVgC0/LQSeX1dKoLSK02KBGMdJPq72mbhELfO5f1VDz6n0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YiIm1eue; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3B91C4CED6;
-	Wed, 26 Feb 2025 08:20:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1740558043;
-	bh=4Pe8SdHpMNion2K2A1gVO1ETNWDlPyE6kIyEGg2L6M0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=YiIm1eueQybrvNRsuNh8H8qRFgt8iHMrY1eUb0Gn83kdwU35X8kuTonpjSy3fIA93
-	 oVOzTsR5oNN5Kniu/v3KeNVmg1Bh4DJ64S/GhHIViumtsLjV2PIYdDV0yBNAelZkKw
-	 JnJst47qH/M7Sm7+ZtORetxKK+ptFMd1SiPLeZB1tI29tiZvjEtCYKyvVyxJrPvGbS
-	 l5AsyBJ9PLYeqnrBNXZOFc1RWntYlfS2vCFNy6YGex2DNVYBg1ovbmPqINPZ3hLqqI
-	 10RxbDM5YgxNit/zXBSQqJ3ghCbCIh6opv8NXkhfteFs5wDQDLgoymGvuuP98ISZPl
-	 PNA/bEBabI9dw==
-Date: Wed, 26 Feb 2025 09:20:40 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Cedric Encarnacion <cedricjustine.encarnacion@analog.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, 
-	Jonathan Corbet <corbet@lwn.net>, Delphine CC Chiu <Delphine_CC_Chiu@wiwynn.com>, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-i2c@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] dt-bindings: hwmon: pmbus: add lt3074
-Message-ID: <20250226-gentle-spicy-jacamar-2dd36a@krzk-bin>
-References: <20250225-upstream-lt3074-v2-0-18ad10ba542e@analog.com>
- <20250225-upstream-lt3074-v2-1-18ad10ba542e@analog.com>
+	s=arc-20240116; t=1740559224; c=relaxed/simple;
+	bh=Td9kPv+4aEqMiRvo8WQdVA0t/ydWeEaHLWoB0s8TtIQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=bos2YejeAhYRM96hRScfzRFzgK8ZTmeQEjsjgT/kN9Dqg4RcuypQPJIOh1o9pQZJmrURw0lEdRpVXvD8WCP50P018vap5kYAsadJArkr8Xlg5OkXysx/uHrriVyFwFGggH/7ao5omsQMFBKb0rRMIDZ7rFW4H7vSS/z8nM9SCmE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.co.uk; spf=pass smtp.mailfrom=amazon.co.uk; dkim=pass (1024-bit key) header.d=amazon.co.uk header.i=@amazon.co.uk header.b=aWRf0kSG; arc=none smtp.client-ip=99.78.197.217
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.co.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.co.uk
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.co.uk; i=@amazon.co.uk; q=dns/txt;
+  s=amazon201209; t=1740559223; x=1772095223;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=lh1Ns51OurirFGbJo73DhgVZ1PCIKOIciohAAfR5Ylc=;
+  b=aWRf0kSGnpEGu4t32qelUQtQNbYnCm32H+dvThMUwDBY+L1jAlVfQNSt
+   9lFxuHl220cLybMoYUEsQL7UzWIucSmw1NaFyMdG+Ul9CEStZ7jGvOuqS
+   8MRcJScF2EkIYSaMyyGBi5pdwhiBjwlrAnFpW0nxewxQCm07/aZ7W/YH3
+   o=;
+X-IronPort-AV: E=Sophos;i="6.13,316,1732579200"; 
+   d="scan'208";a="26144342"
+Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO smtpout.prod.us-east-1.prod.farcaster.email.amazon.dev) ([10.25.36.214])
+  by smtp-border-fw-80006.pdx80.corp.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Feb 2025 08:37:51 +0000
+Received: from EX19MTAEUA002.ant.amazon.com [10.0.10.100:52267]
+ by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.30.133:2525] with esmtp (Farcaster)
+ id 287ec09d-dd1c-4342-a920-a9f616a17912; Wed, 26 Feb 2025 08:37:47 +0000 (UTC)
+X-Farcaster-Flow-ID: 287ec09d-dd1c-4342-a920-a9f616a17912
+Received: from EX19D030EUC003.ant.amazon.com (10.252.61.173) by
+ EX19MTAEUA002.ant.amazon.com (10.252.50.126) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1544.14;
+ Wed, 26 Feb 2025 08:37:41 +0000
+Received: from EX19MTAUEB002.ant.amazon.com (10.252.135.47) by
+ EX19D030EUC003.ant.amazon.com (10.252.61.173) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1544.14;
+ Wed, 26 Feb 2025 08:37:41 +0000
+Received: from email-imr-corp-prod-iad-all-1b-a03c1db8.us-east-1.amazon.com
+ (10.43.8.2) by mail-relay.amazon.com (10.252.135.97) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id
+ 15.2.1544.14 via Frontend Transport; Wed, 26 Feb 2025 08:37:40 +0000
+Received: from [127.0.0.1] (dev-dsk-roypat-1c-dbe2a224.eu-west-1.amazon.com [172.19.88.180])
+	by email-imr-corp-prod-iad-all-1b-a03c1db8.us-east-1.amazon.com (Postfix) with ESMTPS id D3830805C1;
+	Wed, 26 Feb 2025 08:37:36 +0000 (UTC)
+Message-ID: <086e02c8-6408-4b15-9384-42313254f041@amazon.co.uk>
+Date: Wed, 26 Feb 2025 08:37:35 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20250225-upstream-lt3074-v2-1-18ad10ba542e@analog.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 04/12] KVM: Add capability to discover
+ KVM_GMEM_NO_DIRECT_MAP support
+To: David Hildenbrand <david@redhat.com>, <rppt@kernel.org>,
+	<seanjc@google.com>
+CC: <pbonzini@redhat.com>, <corbet@lwn.net>, <willy@infradead.org>,
+	<akpm@linux-foundation.org>, <song@kernel.org>, <jolsa@kernel.org>,
+	<ast@kernel.org>, <daniel@iogearbox.net>, <andrii@kernel.org>,
+	<martin.lau@linux.dev>, <eddyz87@gmail.com>, <yonghong.song@linux.dev>,
+	<john.fastabend@gmail.com>, <kpsingh@kernel.org>, <sdf@fomichev.me>,
+	<haoluo@google.com>, <Liam.Howlett@oracle.com>, <lorenzo.stoakes@oracle.com>,
+	<vbabka@suse.cz>, <jannh@google.com>, <shuah@kernel.org>,
+	<kvm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+	<linux-mm@kvack.org>, <bpf@vger.kernel.org>,
+	<linux-kselftest@vger.kernel.org>, <tabba@google.com>, <jgowans@amazon.com>,
+	<graf@amazon.com>, <kalyazin@amazon.com>, <xmarcalx@amazon.com>,
+	<derekmn@amazon.com>, <jthoughton@google.com>
+References: <20250221160728.1584559-1-roypat@amazon.co.uk>
+ <20250221160728.1584559-5-roypat@amazon.co.uk>
+ <ce3ce109-f38a-4053-808b-5cc75257f3f7@redhat.com>
+From: Patrick Roy <roypat@amazon.co.uk>
+Content-Language: en-US
+Autocrypt: addr=roypat@amazon.co.uk; keydata=
+ xjMEY0UgYhYJKwYBBAHaRw8BAQdA7lj+ADr5b96qBcdINFVJSOg8RGtKthL5x77F2ABMh4PN
+ NVBhdHJpY2sgUm95IChHaXRodWIga2V5IGFtYXpvbikgPHJveXBhdEBhbWF6b24uY28udWs+
+ wpMEExYKADsWIQQ5DAcjaM+IvmZPLohVg4tqeAbEAgUCY0UgYgIbAwULCQgHAgIiAgYVCgkI
+ CwIEFgIDAQIeBwIXgAAKCRBVg4tqeAbEAmQKAQC1jMl/KT9pQHEdALF7SA1iJ9tpA5ppl1J9
+ AOIP7Nr9SwD/fvIWkq0QDnq69eK7HqW14CA7AToCF6NBqZ8r7ksi+QLOOARjRSBiEgorBgEE
+ AZdVAQUBAQdAqoMhGmiXJ3DMGeXrlaDA+v/aF/ah7ARbFV4ukHyz+CkDAQgHwngEGBYKACAW
+ IQQ5DAcjaM+IvmZPLohVg4tqeAbEAgUCY0UgYgIbDAAKCRBVg4tqeAbEAtjHAQDkh5jZRIsZ
+ 7JMNkPMSCd5PuSy0/Gdx8LGgsxxPMZwePgEAn5Tnh4fVbf00esnoK588bYQgJBioXtuXhtom
+ 8hlxFQM=
+In-Reply-To: <ce3ce109-f38a-4053-808b-5cc75257f3f7@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 25, 2025 at 09:01:13PM +0800, Cedric Encarnacion wrote:
-> Add Analog Devices LT3074 Ultralow Noise, High PSRR Dropout Linear
-> Regulator.
+
+
+On Tue, 2025-02-25 at 16:55 +0000, David Hildenbrand wrote:
+> On 21.02.25 17:07, Patrick Roy wrote:
+>> Add a capability to let userspace discover whether guest_memfd supports
+>> removing its folios from the direct map. Support depends on guest_memfd
+>> itself being supported, but also on whether KVM can manipulate the
+>> direct map at page granularity at all (possible most of the time, just
+>> arm64 is a notable outlier where its impossible if the direct map has
+>> been setup using hugepages, as arm64 cannot break these apart due to
+>> break-before-make semantics).
+>>
+>> Signed-off-by: Patrick Roy <roypat@amazon.co.uk>
+>> ---
 > 
-> Signed-off-by: Cedric Encarnacion <cedricjustine.encarnacion@analog.com>
-> ---
->  .../bindings/hwmon/pmbus/adi,lt3074.yaml           | 64 ++++++++++++++++++++++
->  MAINTAINERS                                        |  7 +++
->  2 files changed, 71 insertions(+)
+> Not sure how KVM folks handle that, but I suspect we would just want to
+> squash that into the previous commit,
 > 
-> diff --git a/Documentation/devicetree/bindings/hwmon/pmbus/adi,lt3074.yaml b/Documentation/devicetree/bindings/hwmon/pmbus/adi,lt3074.yaml
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..714426fd655a8daa96e15e1f789743f36001ac7a
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/hwmon/pmbus/adi,lt3074.yaml
-> @@ -0,0 +1,64 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/hwmon/pmbus/adi,lt3074.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Analog Devices LT3074 voltage regulator
-> +
-> +maintainers:
-> +  - Cedric Encarnacion <cedricjustine.encarnacion@analog.com>
-> +
-> +description: |
-> +  The LT3074 is a low voltage, ultra-low noise and ultra-fast transient
-> +  response linear regulator. It allows telemetry for input/output voltage,
-> +  output current and temperature through the PMBus serial interface.
-> +
-> +  Datasheet:
-> +    https://www.analog.com/en/products/lt3074.html
-> +
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - adi,lt3074
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  regulators:
-> +    type: object
-> +    description: |
-> +      list of regulators provided by this controller.
+> -- 
+> Cheers,
+> 
+> David / dhildenb
+> 
 
-You have only one regulator, so drop the "regulators". vout could be
-here, but since you do not have any other resources, I doubt it stands
-on its own either. This is even visible in your DTS - you named the
-device as regulator, so logically this is the regulator. Regulator does
-not have regulators (otherwise they could also have regulators... so
-triple regulator).
+Ah, yeah, I just had a look at the commit history in this file and
+indeed these have seem to usually be squashed. Will do so too, thanks!
 
-hwmon code might need some changes, but that's not really relevant for
-proper hardware description.
-
-Best regards,
-Krzysztof
-
+Best, 
+Patrick
 
