@@ -1,123 +1,261 @@
-Return-Path: <linux-doc+bounces-39641-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39645-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA46CA48BEE
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Feb 2025 23:45:40 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05305A48BF6
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Feb 2025 23:46:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E7AED16E81C
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Feb 2025 22:45:13 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id AB566188F154
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Feb 2025 22:46:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D491E227EB0;
-	Thu, 27 Feb 2025 22:45:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 762034438B;
+	Thu, 27 Feb 2025 22:46:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AIbWNI1f"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="lGVeiR+E"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABA0E277818;
-	Thu, 27 Feb 2025 22:45:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D34732777F0;
+	Thu, 27 Feb 2025 22:46:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740696312; cv=none; b=C4NcuETXzjsBjojE15FIT+RrhfmMPiFm5tmoMSombMM/GLVAbeDTK6AwXkeJzvpgJJQz/sktmpyhb7fDMpmkiJAqg8DZ85Vl4bVF8tVruRC1MaBbFsOJTj5RW6rNbWiiwzzZIViDNhmxlgZPeBp8jAerjpb6+KfXzgL24i1jCVo=
+	t=1740696392; cv=none; b=fZRVUkxL0uVMXT+3N8673swZoQFpui0ZIYG0Td0wVlAJ66buOlYTLVLC6iVYpzWMQCyBwNsVuqV5YkpxKC+IN/RcOIpX61Mni3xUked7VKCcQ7zjJwECIXUWDRMUcnHYxI+500D0/eIogkHhI6ncixcrTymtT069WFU9Hs442WM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740696312; c=relaxed/simple;
-	bh=5VUaBxuG5jp6oEMwAW0wKmDoN3rdkjGw0TFuNrg+m+s=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IpsnInm/nlbo2PLSt8VoleaYYL1MdlB2fi9odP+6bC/WU1S+iCTys+uMzJWZibVEd7wHT85Ga3qZQj9MAecw9aU/ZojrZ9zC3Gq7BMblMhzo2KEuRWIbfBD1PHKRCpFzdUAdG/0yS7BDaDLh7DqS156GbjobWV9crDFBXUHz36o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AIbWNI1f; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 64B26C4CEE8;
-	Thu, 27 Feb 2025 22:45:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1740696312;
-	bh=5VUaBxuG5jp6oEMwAW0wKmDoN3rdkjGw0TFuNrg+m+s=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=AIbWNI1fPa7uLDSTJHqb+aMq4O2v6EjYleUo/trN0mvO5DnibejG3dT2HjLPaepFh
-	 ZnhsEQ30ZZY3pM+5p/thRs9BPloJHBRZCkBn3MrAT3SHlGPFMgHk5Dm7yzRk0LHL0A
-	 09R8dO5+S/4hunZS+zMlzRzgx4xeWNjnnLoIa9ZsiNBDr1zAaa3ySW6AFgtpFvNb2f
-	 uHRzYoTjAEDOJrv/dqXNVTK09k2kwBOFcrQLuZVeR3kl9RzFrpDzRocxIx0kM+P6Gm
-	 w0SP2VSrM8qfJkHEigWSVyOucD4I05vdGilmSj4S7exw+CdeWNlNC5Jjkgc72cSLp2
-	 M19qkLV2KER4A==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56AA5C282C7;
-	Thu, 27 Feb 2025 22:45:12 +0000 (UTC)
-From: Thomas Prescher via B4 Relay <devnull+thomas.prescher.cyberus-technology.de@kernel.org>
-Date: Thu, 27 Feb 2025 23:45:07 +0100
-Subject: [PATCH v2 3/3] mm: hugetlb: log time needed to allocate hugepages
+	s=arc-20240116; t=1740696392; c=relaxed/simple;
+	bh=Q6Pa0KhEvlHtwBQPvl7cH5V19cFDAgMxXJL/DJvUHCE=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=DYwWZGAt8YGiF6FZTra8ae69WYheXPRlNaiJ6cUn28yfRCspvZmDyCprjgi734oeeeTkoZIwUFP0YbluAgh88zBCDNSHCEjY4VWy/d3I/E5iK6CexKSUSx+JDmuOSM8nHpP2DGVRUkA8lJse9rLJqOnozaLghldODgnyXJZd8Rk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=lGVeiR+E; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: by linux.microsoft.com (Postfix, from userid 1212)
+	id 7133E210D0F2; Thu, 27 Feb 2025 14:46:30 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 7133E210D0F2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1740696390;
+	bh=aqBCcjB1GK85ZkCy3eKDq7vjs8P7hOhb3Um+ZUwqHwU=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=lGVeiR+EmAAjP23a2cMbYaJvaa52eX7lDcBNK530Z/qjh+OgbQCPGO+GBwkePJJIv
+	 sRekI3vtPozpaqqLxu0ar47xgem/MoE5SfVVkidjhVlp3IczOUsC5AA+m/cnC1wCr9
+	 oFglWIUtRtych1UOaEmbzyNy34PNtqAayX0ryTpQ=
+From: Jasjiv Singh <jasjivsingh@linux.microsoft.com>
+To: wufan@kernel.org
+Cc: audit@vger.kernel.org,
+	corbet@lwn.net,
+	eparis@redhat.com,
+	jasjivsingh@linux.microsoft.com,
+	jmorris@namei.org,
+	linux-audit@redhat.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-security-module@vger.kernel.org,
+	paul@paul-moore.com
+Subject: [PATCH v2] ipe: add errno field to IPE policy load auditing
+Date: Thu, 27 Feb 2025 14:46:17 -0800
+Message-Id: <1740696377-3986-1-git-send-email-jasjivsingh@linux.microsoft.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <CAKtyLkFg2+8ciy4DM=g+vcTVvuRPNL2SHbN+m9ObErxtYXZYPw@mail.gmail.com>
+References: <CAKtyLkFg2+8ciy4DM=g+vcTVvuRPNL2SHbN+m9ObErxtYXZYPw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250227-hugepage-parameter-v2-3-7db8c6dc0453@cyberus-technology.de>
-References: <20250227-hugepage-parameter-v2-0-7db8c6dc0453@cyberus-technology.de>
-In-Reply-To: <20250227-hugepage-parameter-v2-0-7db8c6dc0453@cyberus-technology.de>
-To: Jonathan Corbet <corbet@lwn.net>, Muchun Song <muchun.song@linux.dev>, 
- Andrew Morton <akpm@linux-foundation.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-mm@kvack.org, Thomas Prescher <thomas.prescher@cyberus-technology.de>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1740696310; l=1238;
- i=thomas.prescher@cyberus-technology.de; s=20250221;
- h=from:subject:message-id;
- bh=DnQm/ufrOp5KRhZift3qcnZk9CLmrzaedzUcrpSfRg8=;
- b=7/+8mcgFy1AHR3tc4v90RSb52SvqhIl5u321vKgF5hXYbL35rYRH5EJuWaxQKtZBEANJ4FLsE
- GApQqF2DaSKBUdDMSL2HpAgAZcgZL7SlkW9ZTzWOBBtKUR8eUEF7l+i
-X-Developer-Key: i=thomas.prescher@cyberus-technology.de; a=ed25519;
- pk=T5MVdLVCc/0UUyv5IcSqGVvGcVkgWW/KtuEo2RRJwM8=
-X-Endpoint-Received: by B4 Relay for
- thomas.prescher@cyberus-technology.de/20250221 with auth_id=345
-X-Original-From: Thomas Prescher <thomas.prescher@cyberus-technology.de>
-Reply-To: thomas.prescher@cyberus-technology.de
 
-From: Thomas Prescher <thomas.prescher@cyberus-technology.de>
+Thanks for reviewing it. Here's the example generated from real logs:
 
-Having this information allows users to easily tune
-the hugepages_node_threads parameter.
+AUDIT_IPE_POLICY_LOAD(1422):
+audit:  AUDIT1422 policy_name="Test_Policy" policy_version=0.0.1 
+policy_digest =sha256:84EFBA8FA71E62AE0A537FAB962F8A2BD1053964C4
+299DCA92BFFF4DB82E86D3 auid=1000 ses=3 lsm=ipe res=1 errno=0
 
-Signed-off-by: Thomas Prescher <thomas.prescher@cyberus-technology.de>
+The above record shows a new policy has been successfully loaded into
+the kernel with the policy name, version, and hash with the errno=0.
+
+AUDIT_IPE_POLICY_LOAD(1422) with error:
+
+audit: AUDIT1422 policy_name=? policy_version=? policy_digest=?
+auid=1000 ses=3 lsm=ipe res=0 errno=-74
+
+The above record shows a policy load failure due to an invalid policy.
+
+I have updated the failure cases in new_policy() and update_policy(),
+which covers each case as well.
+ 
+Signed-off-by: Jasjiv Singh <jasjivsingh@linux.microsoft.com>
 ---
- mm/hugetlb.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ Documentation/admin-guide/LSM/ipe.rst |  2 ++
+ security/ipe/audit.c                  | 10 ++++------
+ security/ipe/fs.c                     | 17 ++++++++++++-----
+ security/ipe/policy.c                 |  4 +---
+ security/ipe/policy_fs.c              | 24 +++++++++++++++++++-----
+ 5 files changed, 38 insertions(+), 19 deletions(-)
 
-diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index 98dbfa18bee01d01b40cc7c650cd3eca5eae2457..373b6ac4a3824555f91ad9895e66f631f6e1ba82 100644
---- a/mm/hugetlb.c
-+++ b/mm/hugetlb.c
-@@ -3430,6 +3430,9 @@ static unsigned long __init hugetlb_pages_alloc_boot(struct hstate *h)
- 		.numa_aware	= true
- 	};
+diff --git a/Documentation/admin-guide/LSM/ipe.rst b/Documentation/admin-guide/LSM/ipe.rst
+index 2143165f48c9..5dbf54471fab 100644
+--- a/Documentation/admin-guide/LSM/ipe.rst
++++ b/Documentation/admin-guide/LSM/ipe.rst
+@@ -453,6 +453,8 @@ Field descriptions:
+ | errno          | integer    | No        | The result of the policy error as follows:        |
+ |                |            |           |                                                   |
+ |                |            |           | +  0: no error                                    |
++|                |            |           | +  -EPERM: Insufficient permission                |
++|                |            |           | +  -EEXIST: Same name policy already deployed     |
+ |                |            |           | +  -EBADMSG: policy is invalid                    |
+ |                |            |           | +  -ENOMEM: out of memory (OOM)                   |
+ |                |            |           | +  -ERANGE: policy version number overflow        |
+diff --git a/security/ipe/audit.c b/security/ipe/audit.c
+index f810f7004498..8df307bb2bab 100644
+--- a/security/ipe/audit.c
++++ b/security/ipe/audit.c
+@@ -21,7 +21,7 @@
  
-+	unsigned long jiffies_start;
-+	unsigned long jiffies_end;
-+
- 	job.thread_fn	= hugetlb_pages_alloc_boot_node;
- 	job.start	= 0;
- 	job.size	= h->max_huge_pages;
-@@ -3457,7 +3460,14 @@ static unsigned long __init hugetlb_pages_alloc_boot(struct hstate *h)
+ #define AUDIT_POLICY_LOAD_FMT "policy_name=\"%s\" policy_version=%hu.%hu.%hu "\
+ 			      "policy_digest=" IPE_AUDIT_HASH_ALG ":"
+-#define AUDIT_POLICY_LOAD_NULL_FMT "policy_name=? policy_version=? "\
++#define AUDIT_POLICY_LOAD_FAIL_FMT "policy_name=? policy_version=? "\
+ 				   "policy_digest=?"
+ #define AUDIT_OLD_ACTIVE_POLICY_FMT "old_active_pol_name=\"%s\" "\
+ 				    "old_active_pol_version=%hu.%hu.%hu "\
+@@ -255,9 +255,8 @@ void ipe_audit_policy_activation(const struct ipe_policy *const op,
+  */
+ void ipe_audit_policy_load(const struct ipe_policy *const p)
+ {
+-	int res = 0;
+-	int err = 0;
+ 	struct audit_buffer *ab;
++	int err = 0;
  
- 	job.max_threads	= hugepage_allocation_threads;
- 	job.min_chunk	= h->max_huge_pages / hugepage_allocation_threads;
-+
-+	jiffies_start = jiffies;
- 	padata_do_multithreaded(&job);
-+	jiffies_end = jiffies;
-+
-+	pr_info("HugeTLB: allocation took %dms with hugepage_allocation_threads=%ld\n",
-+		jiffies_to_msecs(jiffies_end - jiffies_start),
-+		hugepage_allocation_threads);
+ 	ab = audit_log_start(audit_context(), GFP_KERNEL,
+ 			     AUDIT_IPE_POLICY_LOAD);
+@@ -266,15 +265,14 @@ void ipe_audit_policy_load(const struct ipe_policy *const p)
  
- 	return h->nr_huge_pages;
+ 	if (!IS_ERR(p)) {
+ 		audit_policy(ab, AUDIT_POLICY_LOAD_FMT, p);
+-		res = 1;
+ 	} else {
+-		audit_log_format(ab, AUDIT_POLICY_LOAD_NULL_FMT);
++		audit_log_format(ab, AUDIT_POLICY_LOAD_FAIL_FMT);
+ 		err = PTR_ERR(p);
+ 	}
+ 
+ 	audit_log_format(ab, " auid=%u ses=%u lsm=ipe res=%d errno=%d",
+ 			 from_kuid(&init_user_ns, audit_get_loginuid(current)),
+-			 audit_get_sessionid(current), res, err);
++			 audit_get_sessionid(current), !err, err);
+ 
+ 	audit_log_end(ab);
  }
-
+diff --git a/security/ipe/fs.c b/security/ipe/fs.c
+index 5b6d19fb844a..40805b13ee2c 100644
+--- a/security/ipe/fs.c
++++ b/security/ipe/fs.c
+@@ -141,12 +141,16 @@ static ssize_t new_policy(struct file *f, const char __user *data,
+ 	char *copy = NULL;
+ 	int rc = 0;
+ 
+-	if (!file_ns_capable(f, &init_user_ns, CAP_MAC_ADMIN))
+-		return -EPERM;
++	if (!file_ns_capable(f, &init_user_ns, CAP_MAC_ADMIN)) {
++		rc = -EPERM;
++		goto out;
++	}
+ 
+ 	copy = memdup_user_nul(data, len);
+-	if (IS_ERR(copy))
+-		return PTR_ERR(copy);
++	if (IS_ERR(copy)) {
++		rc = PTR_ERR(copy);
++		goto out;
++	}
+ 
+ 	p = ipe_new_policy(NULL, 0, copy, len);
+ 	if (IS_ERR(p)) {
+@@ -161,8 +165,11 @@ static ssize_t new_policy(struct file *f, const char __user *data,
+ 	ipe_audit_policy_load(p);
+ 
+ out:
+-	if (rc < 0)
++	if (rc < 0) {
+ 		ipe_free_policy(p);
++		p = ERR_PTR(rc);
++		ipe_audit_policy_load(p);
++	}
+ 	kfree(copy);
+ 	return (rc < 0) ? rc : len;
+ }
+diff --git a/security/ipe/policy.c b/security/ipe/policy.c
+index 0f616e9fbe61..b628f696e32b 100644
+--- a/security/ipe/policy.c
++++ b/security/ipe/policy.c
+@@ -202,9 +202,7 @@ struct ipe_policy *ipe_new_policy(const char *text, size_t textlen,
+ 	return new;
+ err:
+ 	ipe_free_policy(new);
+-	new = ERR_PTR(rc);
+-	ipe_audit_policy_load(new);
+-	return new;
++	return ERR_PTR(rc);
+ }
+ 
+ /**
+diff --git a/security/ipe/policy_fs.c b/security/ipe/policy_fs.c
+index 3bcd8cbd09df..74f4e7288331 100644
+--- a/security/ipe/policy_fs.c
++++ b/security/ipe/policy_fs.c
+@@ -12,6 +12,7 @@
+ #include "policy.h"
+ #include "eval.h"
+ #include "fs.h"
++#include "audit.h"
+ 
+ #define MAX_VERSION_SIZE ARRAY_SIZE("65535.65535.65535")
+ 
+@@ -288,25 +289,38 @@ static ssize_t getactive(struct file *f, char __user *data,
+ static ssize_t update_policy(struct file *f, const char __user *data,
+ 			     size_t len, loff_t *offset)
+ {
++	const struct ipe_policy *p = NULL;
+ 	struct inode *root = NULL;
+ 	char *copy = NULL;
+ 	int rc = 0;
+ 
+-	if (!file_ns_capable(f, &init_user_ns, CAP_MAC_ADMIN))
+-		return -EPERM;
++	if (!file_ns_capable(f, &init_user_ns, CAP_MAC_ADMIN)) {
++		rc = -EPERM;
++		goto out;
++	}
+ 
+ 	copy = memdup_user(data, len);
+-	if (IS_ERR(copy))
+-		return PTR_ERR(copy);
++	if (IS_ERR(copy)) {
++		rc = PTR_ERR(copy);
++		goto out;
++	}
+ 
+ 	root = d_inode(f->f_path.dentry->d_parent);
+ 	inode_lock(root);
+ 	rc = ipe_update_policy(root, NULL, 0, copy, len);
++	if (rc < 0) {
++		inode_unlock(root);
++		goto out;
++	}
+ 	inode_unlock(root);
+ 
++out:
+ 	kfree(copy);
+-	if (rc)
++	if (rc) {
++		p = ERR_PTR(rc);
++		ipe_audit_policy_load(p);
+ 		return rc;
++	}
+ 
+ 	return len;
+ }
 -- 
-2.48.1
-
+2.34.1
 
 
