@@ -1,112 +1,121 @@
-Return-Path: <linux-doc+bounces-39938-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39943-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 258AAA4E7BC
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 18:09:21 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85035A4E9E7
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 18:51:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1395C19C4FB1
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 17:03:17 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 9F62819C090E
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 17:45:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9931428FFE7;
-	Tue,  4 Mar 2025 16:41:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D3266255229;
+	Tue,  4 Mar 2025 17:21:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b="FAgTM+AD"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rnDLM9T3"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from beeline2.cc.itu.edu.tr (beeline2.cc.itu.edu.tr [160.75.25.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3F6028D0B3
-	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 16:41:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5105E24C06B
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 17:21:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=160.75.25.116
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741106467; cv=pass; b=MMU8fwFe3w6x/G7UE5hxQ3GAhRMWvONLZmeELWu1zFZ3g0me8TPd9YjkiwdIEPWi0dJLPgRNtbEWkIPS+5n3Xdw1LrnTQ5cEy6soA1qPapcHgChSHZk1gQofhKirkYQ9ZC+Lh4R9EpGQfoTrAlLUJN/uQo92X9avPeWKfD2CO5M=
+	t=1741108902; cv=pass; b=RmhPmZC4E0jBl+8czm/SWZ7uUFmQ7riqOntnfB8porMExKBgKpFcuyBQWbKTgEgdIjpqhOXZBnLcQG2H9D3qGu5WZ/aTkgwl55f8ixPAwyuvURiUS4Dy0v52K6S2QT/uZ4ifPtMZI5Yodc3hZ6AgRuJDgdg5f3HCZT3MLmQPzHU=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741106467; c=relaxed/simple;
-	bh=pynGxo4XXmEs7yOlWDF8XBGKq+XhR05TaEZa28BkT+0=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=UU6jWBzc/f69S9UybY1g3HadFBD9RiOwsOlDR8qXiSn6EvQtufSSubC/9oVdlBvhEhUpPmiptUkXpqsIW1bQK5PNix4b4FPvmeyXED5vN4Xh4mp6TtpzwlY2QyUhRxcCSNNEEN8kCml5brc7aeVgG/eDu8aklqPvMH/f8+Y8cKo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl; spf=none smtp.mailfrom=cc.itu.edu.tr; dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=FAgTM+AD; arc=none smtp.client-ip=94.124.121.26; dmarc=none (p=none dis=none) header.from=protonic.nl; spf=pass smtp.mailfrom=protonic.nl; arc=pass smtp.client-ip=160.75.25.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl
+	s=arc-20240116; t=1741108902; c=relaxed/simple;
+	bh=OJuD4nh5qDduoT1qMA986Nis1xRS6yZJndL3RjVGrBE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=i11jWWp8QecFBQZv1IZtipszb9QnrBGzOQ+35YlzB36kd/LRUjNx0KTqgxZs88tyUh4RWXYp0LDUkIo0GPijb18K77UX2M9Z+iGsbCZOmmkzth84RDfd6IgM+A2tcX7GqmpzTMkmnItRsF/udsebEZeZpPtI0JpCflvH6eCqU8g=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=none smtp.mailfrom=cc.itu.edu.tr; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=rnDLM9T3; arc=none smtp.client-ip=209.85.208.175; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; arc=pass smtp.client-ip=160.75.25.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=cc.itu.edu.tr
-Received: from lesvatest1.cc.itu.edu.tr (lesvatest1.cc.itu.edu.tr [10.146.128.1])
+Received: from lesvatest1.cc.itu.edu.tr (unknown [10.146.128.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by beeline2.cc.itu.edu.tr (Postfix) with ESMTPS id 0BF134089529
-	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 19:41:02 +0300 (+03)
+	by beeline2.cc.itu.edu.tr (Postfix) with ESMTPS id 12C334089198
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 20:21:38 +0300 (+03)
 X-Envelope-From: <root@cc.itu.edu.tr>
+Authentication-Results: lesvatest1.cc.itu.edu.tr;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.a=rsa-sha256 header.s=20230601 header.b=rnDLM9T3
 Received: from lesva1.cc.itu.edu.tr (unknown [160.75.70.79])
-	by lesvatest1.cc.itu.edu.tr (Postfix) with ESMTP id 4Z6hG0501CzG3jv
-	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 19:38:48 +0300 (+03)
+	by lesvatest1.cc.itu.edu.tr (Postfix) with ESMTP id 4Z6fls1ws7zG0bx
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 18:31:05 +0300 (+03)
 Received: by le1 (Postfix, from userid 0)
-	id EDD0B42723; Tue,  4 Mar 2025 19:38:47 +0300 (+03)
+	id 9676B4271F; Tue,  4 Mar 2025 18:30:53 +0300 (+03)
 Authentication-Results: lesva1.cc.itu.edu.tr;
-	dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=FAgTM+AD
-X-Envelope-From: <linux-kernel+bounces-541428-bozkiru=itu.edu.tr@vger.kernel.org>
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=rnDLM9T3
+X-Envelope-From: <linux-kernel+bounces-541701-bozkiru=itu.edu.tr@vger.kernel.org>
 Authentication-Results: lesva2.cc.itu.edu.tr;
-	dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=FAgTM+AD
-Received: from fgw2.itu.edu.tr (fgw2.itu.edu.tr [160.75.25.104])
-	by le2 (Postfix) with ESMTP id E4BEC42BFE
-	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 13:48:21 +0300 (+03)
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by fgw2.itu.edu.tr (Postfix) with SMTP id AB1C42DCE0
-	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 13:48:21 +0300 (+03)
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=rnDLM9T3
+Received: from fgw1.itu.edu.tr (fgw1.itu.edu.tr [160.75.25.103])
+	by le2 (Postfix) with ESMTP id 78D0541A84
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 15:29:09 +0300 (+03)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by fgw1.itu.edu.tr (Postfix) with SMTP id D9B85305F789
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 15:29:08 +0300 (+03)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7D77A18939CB
-	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 10:47:50 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 257EE3A7436
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 12:28:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA4C9A94A;
-	Mon,  3 Mar 2025 10:45:29 +0000 (UTC)
-Received: from smtp15.bhosted.nl (smtp15.bhosted.nl [94.124.121.26])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D58372101A0;
+	Mon,  3 Mar 2025 12:28:54 +0000 (UTC)
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0578F1F418E
-	for <linux-kernel@vger.kernel.org>; Mon,  3 Mar 2025 10:45:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=94.124.121.26
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D94C20E70F
+	for <linux-kernel@vger.kernel.org>; Mon,  3 Mar 2025 12:28:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740998723; cv=none; b=XZua+YmI4OUDq9kRDbTF0w31ilzpUwMyyCyDmkWnr+43xzcj2ArNGlXLZNclN189XUttd+HMkNCC6VyVDx20phOe6q3Z3Iy2/TlYYe2fXX6mpjqO9n7oW2UKenGFZv2bfYMWgofuvBkt6bMro8Ba3HbRCBnFbzrtc2aePOaZWdA=
+	t=1741004930; cv=none; b=jwTJpY2S77OXYKsKRui+IC90PO+lQPeIFEqmAtu2yIT5x9Au2ey7UxgoH2bqdRWWLB1oRRYY/RVsyzKMKoARGrPw3TvQgE0FUPf0OPaoWNx9eseicutuA3PhF0uKp1lW+xoUavpsQyr0nmUyaq9dV0Nv8SyC1MKt0CX933RtqsM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740998723; c=relaxed/simple;
-	bh=pynGxo4XXmEs7yOlWDF8XBGKq+XhR05TaEZa28BkT+0=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=t3HiWeSvqGNa/kU+OvvarYlKD7c2AL9GUp9shhZppGa1oEtm0B2LAqKJrx2w+cq14sTJZ57YZPERu96tJH3DzpZahGzLiwvzGXk7jg4Hc6WjLGDrRvGpbf1pnV2eNEmxfRmCzQ97ljPJ+yInQ4xrGY3r/aCVmhlcjXxvTTjS7dY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl; spf=pass smtp.mailfrom=protonic.nl; dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=FAgTM+AD; arc=none smtp.client-ip=94.124.121.26
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=protonic.nl
+	s=arc-20240116; t=1741004930; c=relaxed/simple;
+	bh=OJuD4nh5qDduoT1qMA986Nis1xRS6yZJndL3RjVGrBE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=eTF70t6DGnkmtxeN+taAMm3BaG/4nozIOM3WhLoCD44oocMGbSXsK8vBbl4L3EynVSBjPE5vqG8sfuKWiaBtSDxiQ75Yea+MNLMzaARodNOqiML9fZXjH3WwSehDyeTm1htQn9+1DYEN5CPsP5WNvDIOW2Cyp0tOj80YyFfpjzA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=rnDLM9T3; arc=none smtp.client-ip=209.85.208.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-30613802a04so44914401fa.2
+        for <linux-kernel@vger.kernel.org>; Mon, 03 Mar 2025 04:28:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=protonic.nl; s=202111;
-	h=content-transfer-encoding:content-type:mime-version:references:in-reply-to:
-	 message-id:subject:cc:to:from:date:from;
-	bh=Qv3LQFoyzeVaS+B1CyxR62OcrtYUFb1G+ImO7n/MAEM=;
-	b=FAgTM+AD9/uZHGNzyeo7ropgMTrjWuN6tajamIaeZY+HqtdOIyS+14xZKDu1CbAjgTJ9A4vSlZRf+
-	 4dYG6I5yt9Lc9EyKXpxRVGyHnNFMtF3WUs64UxqLwu3pOIJeRl4Me1PqvwXycuDZbv0by7iLAxXH4T
-	 NEzGyOH4mSc2LNFO0bW+P/5WGzse69Rqrf7HVKug/tzKQmMG2Sr3QXaNAp6MM5o1so3Kfl/s14mCEd
-	 7PRM+vKtUU7iWa831fLLt4vpZiCCyY6pm8kNbwM1RwhF9RUI3eqMTNjhaDGsRDkxvM6b3DRPYqZEkP
-	 v40bH4XPP2GK8tC2PZc0K92PvO9TmfA==
-X-MSG-ID: 93bddd82-f81c-11ef-a39b-00505681446f
-Date: Mon, 3 Mar 2025 11:45:08 +0100
-From: David Jander <david@protonic.nl>
-To: Pavel Pisa <ppisa@pikron.com>
-Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, Jonathan Corbet
- <corbet@lwn.net>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
- <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org, Nuno Sa
- <nuno.sa@analog.com>, Jonathan Cameron <jic23@kernel.org>, Oleksij Rempel
- <o.rempel@pengutronix.de>, Carsten Emde <c.emde@osadl.org>
-Subject: Re: [RFC PATCH 0/7] Add Linux Motion Control subsystem
-Message-ID: <20250303114508.311c28f6@erd003.prtnl>
-In-Reply-To: <202502281623.33695.ppisa@pikron.com>
-References: <20250227162823.3585810-1-david@protonic.nl>
-	<202502281035.57489.ppisa@pikron.com>
-	<20250228125727.7f892552@erd003.prtnl>
-	<202502281623.33695.ppisa@pikron.com>
-Organization: Protonic Holland
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.48; x86_64-pc-linux-gnu)
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741004927; x=1741609727; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RuV4Heg6y327cT5t8SADpvVNAjdpje5FChTnyyX6MR8=;
+        b=rnDLM9T30dqi2nFxFqxEffcwEATPUkSk6ERFeJ6YyB95qzmFsNGQ5qGBgRruUkJ9pt
+         6+XjnkrHuyR0WNi3/RNmnWDTZSZlAq/ydeYJTi78CAwSV/VqbrEtA2j4UlKEOjdOexi5
+         KRIsBL5nFk81W8SMvF7dypWNikBt8dIeGa2BLMn9cH9PV1p87OdvE9fXBs4+UT5w/T1y
+         dN8nqeGG5DAZdXGk30ndui+FE1YYZCKcVY8E/BwbLIRitQrPSvTwLQVHfiqUBdBDGSb7
+         vQJnDTQemmoYelv4AI/N+SaM6YXlk/yzZdlIWZDMJlV9rvleF4qE47SVR6rlXmvBFhAa
+         sJWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741004927; x=1741609727;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=RuV4Heg6y327cT5t8SADpvVNAjdpje5FChTnyyX6MR8=;
+        b=S7sYd0elgsKK8dacR3EdsG7GAi9sy6QaACY1NLuwP281Chrn+w5PIoQdPdEsMFNNiY
+         ByuNDFKGc/eXsp4h9BKFAjJuckB5o7r9AzTobLTV50p3rMp0piKSXLZ+1szTxhaQfrX6
+         kTW58tJusrmRzvXItPrANoB0Ue6PGgN4GXeV6pr6jKtjugqMdCDkCpz8gQxhTvlcMwmP
+         FH0izYF7a/pUbHk0uJ5WE50dByv5x1ww6xuh9ffyvV+BGG3ENLvpm4XRpKsLC+J412E5
+         aZk5jsnhn09laMlAwv8GQ03gNUjPUpn3i40+9mHrexDCe0hen5tqNjaWpbCGGqewbn5H
+         KmRA==
+X-Gm-Message-State: AOJu0YxKsNQhpFtfewrGoMTpt+Kzc1yiG/2KQMTQhLJlRazcpnF3i03l
+	t+SlOxHc1RCa1eM6o+j/nbgMMzg6b7LHA5TieXCXPKK8/IK1E/crFm/A0qCZyJO/HX+yFUzGyIg
+	/+t1aF4RJqMPuU6cn+9+/Mx3Gc3fzjXQO9OdLUw==
+X-Gm-Gg: ASbGncuKpeMa5NQHi1wtkqdgf0TKRkALYVsZeJysvc8xCt04bpT9J6l0eOuZWBiakAY
+	NWlmQv13PfaXpFz/QSOzr2RU8klxErXCmhx/0dNraQyv2z28aiopc0x8uireNVxDEuOo9uD1e7Q
+	G+V/lTu8+Th91AiVXRqqIdGb9ELA==
+X-Google-Smtp-Source: AGHT+IFQjWCVfYvVjqrhiYeoVVCii+BCnHEEwspsU3nYkgMsvxbUiPrrpwMddXZrBO2cTKjwXbjtGrEtQ/qF9ee0CR4=
+X-Received: by 2002:a05:651c:198d:b0:30b:b3a1:d390 with SMTP id
+ 38308e7fff4ca-30bb3a1eec1mr15314461fa.16.1741004926495; Mon, 03 Mar 2025
+ 04:28:46 -0800 (PST)
 Precedence: bulk
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -114,502 +123,271 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20250227162823.3585810-1-david@protonic.nl> <20250227162823.3585810-7-david@protonic.nl>
+ <7b2a8d71-9d83-4d40-903b-ba7ef1c686f3@baylibre.com> <20250303122253.26fec335@erd003.prtnl>
+In-Reply-To: <20250303122253.26fec335@erd003.prtnl>
+From: David Lechner <dlechner@baylibre.com>
+Date: Mon, 3 Mar 2025 13:28:35 +0100
+X-Gm-Features: AQ5f1Jp_SOcTl9D-8tg4bO9crBJVLRBfADMprZjGHDyBqnvNsQnEZS-pyxe1y-E
+Message-ID: <CAMknhBFoRoaXWBL-vDnDrepqw_KJ-VrYeOoGJfjz8q=wDNM6xA@mail.gmail.com>
+Subject: Re: [RFC PATCH 6/7] dt-bindings: motion: Add adi,tmc5240 bindings
+To: David Jander <david@protonic.nl>
+Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Nuno Sa <nuno.sa@analog.com>, 
+	Jonathan Cameron <jic23@kernel.org>, Oleksij Rempel <o.rempel@pengutronix.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-ITU-Libra-ESVA-Information: Please contact Istanbul Teknik Universitesi for more information
-X-ITU-Libra-ESVA-ID: 4Z6hG0501CzG3jv
+X-ITU-Libra-ESVA-ID: 4Z6fls1ws7zG0bx
 X-ITU-Libra-ESVA: No virus found
 X-ITU-Libra-ESVA-From: root@cc.itu.edu.tr
-X-ITU-Libra-ESVA-Watermark: 1741711157.92952@9YnBVvh7DwmXAcna+enhng
+X-ITU-Libra-ESVA-Watermark: 1741713583.40715@zD+nzpf043nvIIL8gXGWLA
 X-ITU-MailScanner-SpamCheck: not spam
 
+(Sorry if you get this twice. I don't have my regular computer today
+and didn't realize I was sending HTML the first time. Resending in
+plain text so the lists pick it up.)
 
-Hi Pavel,
-
-On Fri, 28 Feb 2025 16:23:33 +0100
-Pavel Pisa <ppisa@pikron.com> wrote:
-
-> Hello David,
-> 
-> On Friday 28 of February 2025 12:57:27 David Jander wrote:
-> > Dear Pavel,
-> >
-> > Thanks a lot for starting the discussion...
-> >
-> > On Fri, 28 Feb 2025 10:35:57 +0100
-> >
-> > Pavel Pisa <ppisa@pikron.com> wrote:  
-> > > Hello David and others
-> > >
-> > > On Thursday 27 of February 2025 17:28:16 David Jander wrote:  
-> > > > Request for comments on: adding the Linux Motion Control subsystem to
-> > > > the kernel.  
-> > >
-> > > I have noticed on Phoronix, that the new system is emerging.  
-> >
-> > Being featured on Phoronix on day one wasn't on my bingo card for this
-> > year, to be honest... :-)
-> >  
-> > > This is area where I have lot (more than 30 years) of experience
-> > > at my company and I have done even lot with my studnets at university.
-> > > I have big interest that this interface fits our use neeeds
-> > > and offers for future integration of our already open-source
-> > > systems/components.  
-> >
-> > This is very impressive and I am honored to have gotten your attention. I
-> > am looking forward to discussing this, although I am not sure whether all
-> > of this should happen here on LKML?  
-> 
-> We should move somewhere else and invite people from Linux
-> CNC etc...
-
-I agree.
-
-> GitHub project would work well if there is not some reluctance
-> to commercially controlled and closed environment.
-
-I am open to suggestions. I just happen to have a github account and also have
-my code there:
-
-https://github.com/yope/linux/tree/mainline-lmc-preparation
-
-> Gitlab even in Gitlab.com case has option to move to own
-> infrastructure in the future. We have Gitlab at university,
-> companies I work with has Gitlab instances. But I think that
-> we should stay on neutral ground.
-> 
-> The critical is some central hub where links to specific
-> mailinglist etc. can be placed. May it be we can ask
-> Linux foundation to provide wiki space for Linux Motion Control
-> Subsystem same as it is for RT
-> 
->   https://wiki.linuxfoundation.org/realtime/start
-> 
-> We can ask OSADL.org as likely neutral space...
-
-That sounds really great. We were bronze members of OSADL, so maybe that's a
-good idea. I see you added Carsten Emde in CC ;-)
-
-> Or wiki at kernel.org, may it the most neutral...
-> 
->  https://www.wiki.kernel.org/
-
-Yes, that may be even a better place than OSADL.
-
-> I am not in the core teams but may it be there on LKLM
-> somebody would suggest the direction. I can ask people
-> from OSADL, CIPS, RT projects etc. directly...
-> 
-> But I am not the authority and would be happy if somebody
-> steers us.
-> 
-> To not load others, if there is no response then I suggest
-> to limit followup e-mails only to linux-iio and those
-> who already communicated in this thread.
-
-Agree. This will probably be my last reply to this thread with LMKL in CC.
-
-Is there anybody here willing to help with contact information?
-
-> > > This is preliminary reply, I want to find time for more discussion
-> > > and analysis (which is quite hard during summer term where I have
-> > > lot of teaching and even ongoing project now).
-> > >
-> > > I would like to discuse even future subsystem evolution
-> > > which would allow coordinates axes groups creation, smooth
-> > > segments based on N-th order splines incremental attachment,
-> > > the path planning and re-planning if the target changes
-> > > as reaction to camera or other sensor needs etc.  
-> >
-> > Right now LMC should be able to support hardware that has multiple channels
-> > (axes) per device. Its UAPI can describe position-based movements and
-> > time-based movements along any arbitrary combination of those channels
-> > using a pre-defined speed/acceleration profile.
-> >
-> > The profiles can be specified as an arbitrary number of speed and
-> > acceleration values. The idea is to describe a segmented profile with
-> > different acceleration values for segments between two different speed
-> > values. Simple examples are trapezoidal (accelerate from (near-)zero to
-> > Vmax with A1, and decelerate from Vmax back to zero with D1), dual-slope or
-> > S-curve, but the UAPI in theory permits an arbitrary number of segments if
-> > the underlying hardware supports it.  
-> 
-> Yes, when I have read that it reminded me my API between non-RT
-> and RT control task in Linux and IRQs in sysless case of our system.
+On Mon, Mar 3, 2025 at 12:22=E2=80=AFPM David Jander <david@protonic.nl> wr=
+ote:
 >
-> > I have some ideas for future extensions to the API that make coordinated
-> > multi-channel movements a bit easier, but that will not be in the initial
-> > push of LMC: For example torque-limit profiles for controlled torque
-> > movements, usable for example in sliding door controllers with AC machines
-> > or BLDC motors; or an ioctl to send a distance vector to a selected number
-> > of channels at once and apply a motion profile to the whole coordinated
-> > movement. In the current version you have to set up the distances and
-> > profiles for the individual channels and then trigger the start of the
-> > motion, which is more cumbersome. You can already use the finish event of a
-> > preceding motion to trigger the next one though.  
-> 
-> It would worth to have some commands queue for specified
-> (prefigured/setup) xis group.
-
-I thought about this, and while queuing commands for a 3D printer seems like a
-great idea, since it is strictly feed-forward for the most part, queuing
-commands in the kernel is complicating things a lot when you also want to be
-able to react to real-time events in user-space, like end-stop switches and
-such. I think the current GPIO UAPI with support for epoll events is
-fantastic, and people should use it. :-)
-
-OTOH, I think that the speed and timing accuracy with which one would send
-individual movement commands (vectors or splines) to a motion controller is
-perfectly adequate for user-space, specially if you have the option of a
-1-deep queue like this mechanism of triggering the next movement when the
-current one finishes, which basically gives you the time the current movement
-takes as latency-slack for user-space. I think that is enough, but let me know
-if you disagree. Maybe it is possible to make the N-dimensional vector
-interface (optionally) queued?
-
-> Our system allows to add segments to the group queue but the
-> timing for segment only specifies shortest time in which it can
-> be executed.
-> 
-> Then there is three passes optimization then.
-> 
-> The first pass is performed at the insertion time. It checks and
-> finds normalized change of speeds  (divided by maximal accel/deccel
-> of given axis) at vertex and finds limiting exes, one which accelerates
-> the most and another which needs to decelerate the most. Then it
-> computes speed discontinuity at the given sample period and it limits
-> maximal final speed of the preceding segment such way, that the speed
-> change is kept under COORDDISCONT multiple of accel/decel step. This
-> way, if the straight segments are almost in line, the small change
-> of the direction is not limiting the speed. The discontinuity is
-> computed same way for the vertex between two N-order spline segments,
-> but optimally computed spline segments can be joint with such
-> discontinuity near to zero. This non RT computation as well as all
-> non-RT a RT one on the control unit side is done in the fixed
-> math (the most 32-bits, sometime 64-bits). Actual code of this
-> pass are the functions pxmc_coordmv_seg_add(), pxmc_coordmv_seg_add_line()
-> and pxmc_coordmv_seg_add_spline()
-
-Yes, this maps very well with what I had in mind when designing LMC. I haven't
-thought about supporting engines capable of real-time spline interpolation
-because I hadn't seen one before. I thought that just dividing a spline into
-(many) linear segments would be good enough, but if there are motion engines
-that can handle spline parameters, I guess we should try to support that.
-
-The motion profiles LMC supports have 2 extra parameters for limiting speed
-discontinuities which can be found in many common motion engines: tvmax and
-tvzero.
-
-https://github.com/yope/linux/blob/mainline-lmc-preparation/include/uapi/linux/motion.h#L146
-
-Tvmax is important for situations where the maximum speed of a given profile
-is not reached because the distance is too short. It will make sure there is
-at least some period of constant speed before decelerating again.
-
-Tvzero is important for motions that starts accelerating into an opposite
-direction of a preceding motion, to insert a minimum time at zero velocity.
-
-But I guess you are more than familiar with these, since they are pretty
-common concepts. ;-)
-
->   https://gitlab.com/pikron/sw-base/pxmc/-/blob/master/libs4c/pxmc_coordmv/coordmv_base.c?ref_type=heads#L394
-> 
-> The new segment final vertex limiting speed and planned speed are
-> set to zero.
-> 
-> In the second pass, the queue of segments is examined from the last
-> added one and its initial planned vertex/edge speed is updated,
-> increased up to the minimum of limit give by discontinuity and
-> the limit to decelerate over segment to the planned final speed
-> of the segment. If the start vertex limit is increased then
-> the algorithm proceeds with previous segment
-
-AFAICS, these are all motion planning tasks that should be done in user-space,
-right?
-
->  https://gitlab.com/pikron/sw-base/pxmc/-/blob/master/libs4c/pxmc_coordmv/coordmv_base.c?ref_type=heads#L682
-> 
-> There are some rules and trick to do that long free in the respect
-> to the IRQ executor etc...
-> 
-> Then the actual execution at the sampling frequency advances
-> the normalized parameter going through segment from 0 to 2^32
-> in 2^32 modulo arithmetic. The increase is limited by smallest
-> maximal speed of the axes recomputed over distance to parameter
-> change and maximal allowed accelerations recomputed to the parameter
-> change. Then the final speed is limited by to final deceleration
-> to the end of the segment the pxmc_coordmv_upda() in
-> 
->   https://gitlab.com/pikron/sw-base/pxmc/-/blob/master/libs4c/pxmc_coordmv/coordmv_base.c?ref_type=heads#L351
-
-AFAICS, this is probably better done in the controller itself, right?
-
-The most complex math I feel comfortable doing in kernel space is converting a
-distance-based motion given a trapezoidal acceleration profile (whith its
-limiting factors tvmin and tvmax, see above) into a time based motion:
-
-https://github.com/yope/linux/blob/mainline-lmc-preparation/drivers/motion/motion-helpers.c#L515
-
-This is a helper function for drivers that want to use the internal time-based
-ramp generator.
-
->[...]
-> > Another idea that has been floating in my head is to make a "virtual"
-> > motion device driver that combines individual "real" single-channel
-> > hardware drivers into one multi-channel device, but I am unsure whether it
-> > is really needed. It all depends on the latency limit differences between
-> > kernel-space and user-space whether there is something to gain.  
-> 
-> In the fact this is the similar idea programmed and in use 25 years
-> already. All computation is in 32-bit units specific for the each axis
-> and only in fixed arithmetic. Some problem was fast 64-bit root square
-> at that time.  All has been computed on 21 MHz CPU with 16-bit bus with
-> no caches with instrauctions taking from 2 to many cycles. It was capable
-> to do that for all eight axes plus some other control tasks as flashing
-> lights at specific positions for example for gems inspections by camera
-> connected to PC and then cotrolling their sorting to the right pocket by air
-> streams by MARS 8 control unit when it advanced to given location etc.
-> So some parts of the code has been rewritten to assembly. But today,
-> even on not so fast LPC4088 it can do this and D-Q PMSM motors
-> control without need of assembly optimizations.
-
-I think that if we support different kinds of profiles on N-dimensions with
-support for spline parameters if the hardware supports it, we could solve for
-any use-case without much complexity in the kernel.
-
-> > I think it is best to keep this initial version more limited in scope
-> > though, as long as the needed extensions are possible in the future without
-> > breaking existing UAPI.  
-> 
-> Yes, but I would be happy if the API is designed such way, that
-> it is not obstacle when it would be extended and I have idea
-> what would be such further goal for these applications
-> I have already solved and running for decades at industry
-> level.
-
-That's great. I am confident that with your help, we can make this API as
-universally usable as possible, while still keeping it simple and generic.
-
-> > So I propose: Let's craft a draft UAPI (in a different place, not on LKML)
-> > that can do everything we can come up with and then reduce it to the basics
-> > for the first version. Otherwise it will get too complex to review, I'm
-> > afraid.  
-> 
-> Yes, I agree.
-> 
-> To have some idea of the command set of our system, there is documentation
-> in English for our older system which was capable to control three
-> axes by 8-bit 80552
-> 
->    http://cmp.felk.cvut.cz/~pisa/mars/mars_man_en.pdf
-
-This API looks pretty straight-forward, and should be easy to implement with
-LMC. Controller specific settings in LMC are set using a sysfs attributes
-interface. An example of the settings for the TMC5240:
-
-https://github.com/yope/linux/blob/mainline-lmc-preparation/drivers/motion/tmc5240.c#L311
-
-> > > At this moment I have interrest if there is site which
-> > > would start to collect these ideas and where can be
-> > > some references added.  
-> >
-> > I may put this on github and create a wiki there if you think that's a good
-> > enough place to discuss?  
-> 
-> If there is no feedback with better place to my initial
-> list of options, I am OK with project group on GitHub
-> where the initial project will be located with Wiki
-> and issue tracker to start the communication
-> and I would be happy to participate (as my time, teaching,
-> projects allows).
-
-Sounds good. Let's see if we can get some attention from OSADL or Linux
-Foundation. If you have some contacts there, I'd be great if you could help
-get something set up. If not, we just use github or maybe even gitlab for now.
-
-> > > I think that I have quite some stuff to offer.  
-> >
-> > That would be great! Looking forward to it :-)
-> >  
-> > > To have idea about my direction of thinking and needs
-> > > of interface I would provide some references even
-> > > to our often commercially sold but mostly conceived
-> > > as hobby projects.  
-> >
-> > I'll have to take some time to look into those more closely. My own
-> > experience as far as FOSS or OSHW concerns includes the reprap Kamaq
-> > project:
-> >
-> > https://reprap.org/wiki/Kamaq  
-> 
-> OK, nice target but I would like to support 5 D CNCs with
-> precise machining, haptic human machine systems etc...
-
-Sure!
-
-> with DC, stepper and PMSM motors with vector control
-> high resolution positional feedback etc. We control for
-> example up to 30 kg spherical lenses positioning in
-> the interferometric system with precision of micro fractions.
-> The system allows inspection which thanks to multiple
-> angles reaches lens surface reconstruction at level of
-> nanometres 
-> 
->   https://toptec.eu/export/sites/toptec/.content/projects/finished/measuring-instrument.pdf
-> 
-> We use optical linear sensors combined with 10k per revolution
-> incremental sensors on the cheap stepper motor actuators and
-> precise mechanics.. and more tricks... And I can see use
-> of some cheap linux board, i.e. Zynq, Beagle-V Fire,
-> which I have on my table, there in future...
-
-Yes, this sounds really awesome. It sounds like a great challenge for getting
-LMC into a good enough shape for that sort of applications. It is exactly what
-I had in mind.
-
->[...]
-> As I referenced above, the spines are interpreted at sampling frequency
-> all parameters are represented as 32-bit signed numbers etc...
-> So no conversion to the straight segments. The precise postions
-> are recomputed with even high resolution over IKT, then some
-> intervals of these points are interpolated by spline segments
-> with controlled error and these segments are send to the unit
-> to keep command FIFO full but not overflow it. Unit reports
-> how much space is left...
-> 
-> > LMC will try to limit math operations in kernel space as much as possible,
-> > so hopefully all the calculations can be done in user-space (or on the
-> > controller if that is the case).  
-> 
-> All computation is fixed point only so no problem for the kernel
-> even for interrupt. But yes, on fully preemptive kernel where
-> user space task can be guaranteed to achieve 5 kHz sampling even
-> on cheaper ARM hardware, the interface to the kernel can be
-> only on D-Q PWM command and actual IRC and currents readback.
-> 
-> But if you have API for more intelligent controllers then there
-> s no problem to put there "SoftMAC" to represent dumb ones the
-> same way to userspace.
-
-That's exactly what I thought of. Thanks for the analogy, I am going to
-shamelessly steal it from you if you don't mind ;-)
-
-That's also why I included 2 different drivers as example for LMC: One that
-does all the fast computations in hardware, and one that uses a "SoftMAC", in
-motion-helpers.c to generate time-based speed ramps from acceleration profiles.
-
-But I think we should limit the "SoftMAC" device capabilities to basic
-trapezoidal motion profiles, since it is not the main purpose of LMC to
-convert the Linux kernel into a high-resolution, hard-RT motion-planning
-engine... even if it is a tempting technical challenge to do so ;-)
-
-> > Right now, my way of thinking was that of regular 3D printers which usually
-> > only implement G0/G1 G-codes (linear interpolation). G2/G3 (circular
-> > interpolation) doesn't sound practically very useful since it is special
-> > but not very flexible. Something like generalized spline interpolation
-> > sounds more valuable, but I hadn't seen any hardware that can do it.
-> >  
-> > > The related python application is there
+>
+> Dear David,
+>
+> On Fri, 28 Feb 2025 16:38:51 -0600
+> David Lechner <dlechner@baylibre.com> wrote:
+>
+> > On 2/27/25 10:28 AM, David Jander wrote:
+> > > Add device-tree bindings for Analog Devices TMC5240 stepper controlle=
+rs.
 > > >
-> > >   https://github.com/cvut/pyrocon
+> > > Signed-off-by: David Jander <david@protonic.nl>
+> > > ---
+> > >  .../bindings/motion/adi,tmc5240.yaml          | 60 +++++++++++++++++=
+++
+> > >  1 file changed, 60 insertions(+)
+> > >  create mode 100644 Documentation/devicetree/bindings/motion/adi,tmc5=
+240.yaml
 > > >
-> > > In the far future, I can imagine that it can connect
-> > > to proposed LMC API and achieve the same results.  
+> > > diff --git a/Documentation/devicetree/bindings/motion/adi,tmc5240.yam=
+l b/Documentation/devicetree/bindings/motion/adi,tmc5240.yaml
+> > > new file mode 100644
+> > > index 000000000000..3364f9dfccb1
+> > > --- /dev/null
+> > > +++ b/Documentation/devicetree/bindings/motion/adi,tmc5240.yaml
+> > > @@ -0,0 +1,60 @@
+> > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> > > +%YAML 1.2
+> > > +---
+> > > +$id: http://devicetree.org/schemas/motion/adi,tmc5240.yaml#
+> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > +
+> > > +title: Analog Devices TMC5240 Stepper Motor controller
+> > > +
+> > > +maintainers:
+> > > +  - David Jander <david@protonic>
+> > > +
+> > > +description: |
+> > > +   Stepper motor controller with motion engine and SPI interface.
 > >
-> > Let's make it so!
-> >  
-> > >[...]
-> > > which uses our PXMC motion control library
-> > >
-> > >   https://gitlab.com/pikron/sw-base/pxmc
-> > >
-> > > There is basic documentation for it on its site
-> > >
-> > >   https://pxmc.org/
-> > >   https://pxmc.org/files/pxmc.pdf  
+> > Please include a link to the datasheet.
+>
+> Will do.
+>
+> > > +
+> > > +properties:
+> > > +  compatible:
+> > > +    enum:
+> > > +      - adi,tmc5240
+> > > +
+> > > +  reg:
+> > > +    maxItems: 1
+> > > +
+> > > +  interrupts:
+> > > +    maxItems: 1
 > >
-> > At first glance, this looks like a piece of hardware that would fit as a
-> > LMC device. What needs to be determined is where the boundaries lie between
-> > controller firmware, kernel-space and user-space code.  
-> 
-> I propose to have that boundary fully configurable.
-> So all can be implemented by software emulation
-> in the kernel if the sampling is under 5 or 10 kHz.
-> The interface from GNU/Linux system to hardware
-> is set PWM A, B, C, read actual IRC and currents.
+> > I assume that this is the overvoltage output (OV pin). Would be nice to=
+ have
+> > a description here saying that. There are also NAO and DIAG0/1 output p=
+ins, so
+> > it's a bit ambiguous otherwise.
+>
+> This is the DIAG0 output pin which on this chip has a dual function as ei=
+ther
+> a STEP output or an interrupt output. The pin name is a bit misleading, b=
+ut it
+> is the "interrupt" function that is meant here. The datasheet documents a=
+ll
+> the different events that can trigger this interrupt.
+> I will add a description to clarify this.
+>
 
-5-10kHz in the kernel is quite demanding already, although I agree that it is
-possible with many modern SoC's. The question is whether we really want to
-go that far. It is starting to get to levels of stress where really a small
-microcontroller of FPGA would be more adequate, don't you agree?
+If it makes sense that other pins could possibly ever be connected to
+interrupts then we can add those and also add interrupt-names (but
+only if there is more than one possible interrupt).
 
-And also, for what purpose do you want to read currents in real-time in the
-kernel? Isn't that something for closed-loop control inside a uC or FPGA?
-Or do you mean just to report to user-space as a filtered average?
-IRC (encoder feedback) could be implemented with timers that support
-quadrature decoding, and I can certainly envision reading them out in the
-kernel in order to have a simple PID controller adjust duty-cycle setpoint to
-match a motion profile at a lower sample rate (1kHz or lower), but isn't that
-more something for the controller hardware to do? Especially if done at even
-higher sample-rates?
- 
-> Or some part can be moved to external controller
-> or FPGA with coprocessor (the commutation fits
-> in 2 kB of RISC-V C programmed firmware). 
-> I.e. 20  kHz or even faster Park, Clarke
-> transformations. In this case 4 to 10 kHz
-> command port would be D-Q PWM or current set points
-> and back IRC position, D-Q currents.
-> 
-> Or your proposed LMC interface can be delivered
-> allmost directly to more complex controller
-> which would realize whole segments processing.
-
-I think the latter is more suitable for Linux.
-
-Although, given the fact that many embedded Linux SoC's nowadays incorporate
-small microcontroller cores that support the linux remoteproc interface, maybe
-some drivers could make use of that for the hard-RT part. On a STM32MP15x SoC
-for example there are advanced timers and ADC's that are very well suited for
-motor-control applications. They can be used directly from Linux for
-not-so-hard-and-fast RT applications, but potentially also for microsecond
-work in the M4 core.
-Let's first focus on the UAPI, and make the interface able to deal with these
-kind of engines.
-
-> > Generally speaking, as a rough guideline, microsecond work is better done
-> > in the controller firmware if possible. millisecond work can be done in the
-> > kernel and 10's or more millisecond work can be done in user-space,
-> > notwithstanding latency limit requirements of course.  
-> 
-> OK, I agree, the RT_PREEMPT is requiremet and no broken
-> SMI on x86 HW. 1 kHz is enough for DC motors controller
-> robots to go all on Linux. 5 kHz for PMSM D-Q can be
-> done in kernel or even userspace with platform
-> suitable for PREEMPT_RT if without some issues.
-> 
-> Above 10 kHz should go to FPGA or external HW.
-
-Yes, I agree. Although I'd lower the limits a bit to not make the drivers too
-dependent on very specific hardware platforms.
-
-> > >[...]
-> > > So in general, I think that we have large portfolio
-> > > of building blocks which would allow to build motion,
-> > > robotic controllers, communications etc. and I would be happy
-> > > if they are reused and even some project conceived
-> > > together with others to join the forces.  
+> > > +
+> > > +  enable-supply:
+> > > +    description: Optional external enable supply to control SLEEPn p=
+in. Can
+> > > +      be shared between several controllers.
+> > > +
 > >
-> > This sounds very interesting. Ideally one would end up with LMC capable of
-> > interfacing all of those devices.  
-> 
-> Yes.
+> > This doesn't look like a supply, but krzk already discussed that. But t=
+here
+> > should be actual power supplies: vs-supply, vdd1v8-supply, vcc-io-suppl=
+y. And
+> > a reference voltage supply: iref-supply
+>
+> I have added vs-supply and vcc-io-supply to the binding. These are the on=
+ly
+> supply pins that can be connected to the outside world or otherwise be of
+> concern to the software.
+>
+> vdd1v8-supply is an internal power rail that must not have a connection t=
+o the
+> outside of the chip (besides an external filtering capacitor) and also do=
+esn't
+> have any bearing to the software at all. It cannot be disabled, adjusted =
+or
+> anything, so I don't think it needs to be mentioned.
+>
+> IREF isn't a supply pin. It is merely a pin for connecting an external
+> reference resistor that is used internally for current scaling and it too=
+ has
+> no interaction with the software in any way.
+>
 
-Good. Let's do it ;-)
- 
-Best regards,
+Ah, I read the datasheet too quickly.
 
--- 
-David Jander
+> The resistor connected to the IREF pin (Rref) OTOH does have an implicati=
+on to
+> the software, as it sets the full-range current of the output stage.
+>
+> How should we specify that? Is it adequate to add an optional DT property
+> "rref" or "rref-ohm" with an int32 value in Ohm? The default value if
+> unspecified is 12000 Ohm.
+
+It looks like there are a few standardized properties, like
+sense-resistor-ohms if that fits the use case. Otherwise, an
+vendor-specific ti,rref-ohms would work. FYI, you can find the
+preferred units at [1].
+
+[1]: https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas=
+/property-units.yaml
+
+>
+> > And if there are any pins would make sense to connect to a gpio, we can=
+ add
+> > those even if the driver doesn't use it currently.
+> >
+> > > +  clocks:
+> > > +    maxItems: 1
+> > > +
+> > > +required:
+> > > +  - compatible
+> > > +  - reg
+> > > +  - interrupts
+> > > +  - clocks
+> > > +
+> > > +allOf:
+> > > +  - $ref: /schemas/spi/spi-peripheral-props.yaml#
+> > > +  - $ref: /schemas/motion/common.yaml#
+> >
+> > If we need to know about what is connected to the output of a motor con=
+troller
+> > I would expect it to be done with child node for each output. That way =
+each
+> > output can be unique, if needed. Basically, similar to iio/adc.yaml is =
+used to
+> > provide common properties for channel@ child nodes on iio devices.
+>
+> This controller chip only has one single output for one stepper motor (4
+> wires). While technically you could connect something else to those 4 wir=
+es, I
+> don't think it is the scope of LMC to support that. The chip itself isn't
+> designed for that purpose and it would clearly go far beyond the intended
+> purpose of this device.
+>
+> That being said, your suggestion of supporting child nodes may actually b=
+e a
+> good idea. Right now, we specify the type of motor (basically nominal- an=
+d hold
+> current settings) in user-space and set the IRUN/IHOLD parameters from
+> user-space via the sysfs attributes interface. It might make sense to hav=
+e a DT
+> child node to specify this, although in our current application this is n=
+ot
+> very practical, since there are many motor controllers on one board, and =
+it is
+> configurable in software (runtime) which motor is connected to which outp=
+ut.
+>
+> But I can imagine a situation where it may be fixed and thus can be descr=
+ibed
+> in the DT of a board.
+>
+> Then again I don't know if it would be over-complicating things with some=
+thing
+> like this:
+>
+>         motor-controller@0 {
+>                 ...
+>                 motor@0 {
+>                         compatible =3D "nanotec,st4118s1006";
+>                         irun-ma =3D <1800>;
+>                         ihold-ma =3D <270>;
+>                 };
+>         };
+>
+> where we'd possibly have a stepper-motors.c file with a lot of structs an=
+d
+> matching tables for the different motor types.... sounds like overkill to=
+ me,
+> but maybe not?
+
+A compatible for motors seems too much. I was just thinking along the
+lines that 1) if we need to so some scaling or something that depends
+on a motor constant, then it would make sense to put those constants
+in the DT and 2) if there is a motor controller with more than one
+output that could be connected to two or more different sizes of
+motors with different constants, then we either need child nodes or an
+array to be able to enter the different constants. Either one would
+work. So maybe simpler to just use an array instead of child nodes now
+that I'm thinking about it more.
+
+>
+> > > +
+> > > +unevaluatedProperties: false
+> > > +
+> > > +examples:
+> > > +  - |
+> > > +    spi {
+> > > +        #address-cells =3D <1>;
+> > > +        #size-cells =3D <0>;
+> > > +
+> > > +        motor@0 {
+> >
+> > motor-controller@ or actuator-controller@
+> >
+> > The chip is the controller/driver, it is not a motor.
+>
+> Make sense. Will change this.
+>
+> > > +            compatible =3D "adi,tmc5240";
+> > > +            reg =3D <0>;
+> > > +            interrupts-extended =3D <&gpiok 7 0>;
+> > > +            clocks =3D <&clock_tmc5240>;
+> > > +            enable-supply =3D <&stpsleepn>;
+> > > +            spi-max-frequency =3D <1000000>;
+> > > +        };
+> > > +    };
+>
+> Best regards,
+>
+> --
+> David Jander
 
 
