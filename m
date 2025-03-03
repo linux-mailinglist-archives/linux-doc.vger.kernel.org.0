@@ -1,84 +1,84 @@
-Return-Path: <linux-doc+bounces-39832-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39838-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92F57A4C7C3
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Mar 2025 17:43:10 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CE90A4C7DC
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Mar 2025 17:45:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4BD3118899B3
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Mar 2025 16:42:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7FC881725F7
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Mar 2025 16:44:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A70B92517A4;
-	Mon,  3 Mar 2025 16:30:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8AFB6258CE5;
+	Mon,  3 Mar 2025 16:31:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Oj19pwxu"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="S7huva4+"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4C41250C16
-	for <linux-doc@vger.kernel.org>; Mon,  3 Mar 2025 16:30:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAA54254B0E
+	for <linux-doc@vger.kernel.org>; Mon,  3 Mar 2025 16:31:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741019459; cv=none; b=E78/GA8rKsGd+HT+Qsk8pDaZO1ZPtzfex+PGMp6Ccyiz/ZZxeAe9JD7i2MC4xkU1ygUvQNINP9XFx6MAabvLfddFgErPGDyq8sSJvGbzgusCHOrmMT1LGEHQicTavfac6PoxNBgmjNFQ4VfdPRdZMwapFvapHDkfG4cY1cJYL+I=
+	t=1741019468; cv=none; b=k6QdxsMZ5Hnxw3JkWnb+yv1ZlJJGI+XeuzxJR+ybMtaKP3MRCNH0fqceF44HV1XkJduhqduSx2KQ7zng6mb4xsFRiMcMok1B7rznZk8LfSyMRQgGzoOaR5oXLZvGGS3s9GchsXGLqEmUH1Tbsq5h14NMMkZ77iID8GwSs7o41Yc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741019459; c=relaxed/simple;
-	bh=Ycu3g93agHZ5+lzaLOnuhINjqTNBvJJTMooJF9ouEus=;
+	s=arc-20240116; t=1741019468; c=relaxed/simple;
+	bh=OBXpWDsR7o4dKf8NkhRON4PwL/H6iQiwplPc25GckEo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jysF5O291LATrkLHm81TxOpeDh9t1xlzlBd5ryP48X46Im9FSz/bG17lIu1gbWZvKAuykdM+sqb6djcXKY/i8+U1VLyBXb9Nngf2JTuvWL1+cB82o5TncJWqncni/viMIrwbrmPwngMMc3afl6Z00UUQIy5lstefVDTmPuyo2S8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Oj19pwxu; arc=none smtp.client-ip=170.10.133.124
+	 MIME-Version; b=usp/lN4C0UzcBp6cFGAZ5ermvUemTZUHvdA/W/BGfCTAdePt/3fTMClKb43cCbKoGVqg1vO+cR6QEDUasIaXyF6+WlIJdWvk8jPU7G41dMvN0A3HstYBkWhnkMFczhg0ZAMI1FkJ4RxVrfHAZPt6s+Zmb+eKrR0YkTkfm7og4X4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=S7huva4+; arc=none smtp.client-ip=170.10.133.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1741019455;
+	s=mimecast20190719; t=1741019464;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Cb8Ah8lJoOkHJddlEV7mqidKdKB3PYdRohUjXTfR2AA=;
-	b=Oj19pwxuhr7w7o54/t+chuRoEa4HGw/nwfFl48FM0bqewxKDMSX0zufAFP4ChLDy+Mmnny
-	0LW2IWJbBgenRcUc4UgiUJrfUfFxWGuiAwyABjKowiHiWAwAVeRFKTig6qZCSFB6UfUnU2
-	edBLyu37xvDM1cuETrJoQxSeWMbjvlc=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=VusPlBbKEOGpL4wS1BqoWY6CYb2f4HQ+/wIDh8p+vAo=;
+	b=S7huva4+8CyDW5BYNNkYfsE38obToU+cJHkm7G3mWMWNnkscHrHdImLM6XPsQG7T2kQikd
+	SGTWPl8kQB6NbytT4zOk1AA+hbLlIHTFiTVqz82hDWP4t73BRiAGKhUeOmp4C0dNxPh4uK
+	NrLdtDeKCREjfgU0go+mHW3EW1cMPR8=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-692-cPgaV-HeNxqBFEqeKf7rTA-1; Mon, 03 Mar 2025 11:30:39 -0500
-X-MC-Unique: cPgaV-HeNxqBFEqeKf7rTA-1
-X-Mimecast-MFC-AGG-ID: cPgaV-HeNxqBFEqeKf7rTA_1741019438
-Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-43bbfc1681eso6626735e9.0
-        for <linux-doc@vger.kernel.org>; Mon, 03 Mar 2025 08:30:39 -0800 (PST)
+ us-mta-456-VDBBEX6UMt-oqMvvxzx2wQ-1; Mon, 03 Mar 2025 11:30:42 -0500
+X-MC-Unique: VDBBEX6UMt-oqMvvxzx2wQ-1
+X-Mimecast-MFC-AGG-ID: VDBBEX6UMt-oqMvvxzx2wQ_1741019441
+Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-4394040fea1so22860895e9.0
+        for <linux-doc@vger.kernel.org>; Mon, 03 Mar 2025 08:30:42 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741019438; x=1741624238;
+        d=1e100.net; s=20230601; t=1741019441; x=1741624241;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Cb8Ah8lJoOkHJddlEV7mqidKdKB3PYdRohUjXTfR2AA=;
-        b=ABGshQ2yWi7lxn7kaZHygge8zGnWUnPPF4cNqPbk/ETmGHlRnZYtNhbNVRbmenBMIM
-         N+MYEkDtHUM5Q8eYOIBUq/nDq0oE1ofcKjfdCDWpLBznoZ5cGyYk+DG+8HT51a7ZDlph
-         QhID6sCaBotZspMsCZf794MnI3EKJSmloaWs9SVXFEoqgRp2t3CaQCc/6YFe/DHmYF+S
-         uZ8pdNwMIrmMPqbckn74gDGsoSJEaVhnLmuS3b5eTTwhAnrEz0XYz/lTf77CGGlZybs6
-         WzKywAL+rbwxPQO4bEE8C6rrF8b/vpDhx6jk9APBC58PNR+KiIFwJkQySBWbWhCSzAaY
-         J1HQ==
-X-Gm-Message-State: AOJu0YwMRTcc+Uz8bmkPvS3566HrcTzEICj3pcQJdh+AHBxyl44NOec7
-	1DQ3PU+n+rCu1WHqbndoS++B+TQeXzY9Lh4o4ThNAuuNh/d7mD0vb3E0+4j7+byXkGoSoecvMDp
-	YHaQYEVrrhajyh/NTQ33SbSjHZunYIge630Hel9SW1KfjJwV2OOgf7fJVVQ==
-X-Gm-Gg: ASbGncsWLzh4Revk9KBognxB7ja5XKkAKCafZNjWIPrz9rhm3Aqpb/74RuGxqObR1jq
-	qSqrtAMpFameFD+Q72AhqnY83STtoaGpfO4oNHLjocre9wstgYAS2ZWBqU1V7Io/UCwn1qrkE6p
-	VNqKWhjDwumR/AY+dp97VUove5AJSk8jsETJgGXBCRlBVfmYcKVvOGogRMGI5JEBUvodsrh95ZX
-	NzUBCWk4bOVh6UmN85k0k3AzqC6naLvFczJOBZeKlc2dVZtzrytoPW/zYlMRSe9iWRWeFr1cyvh
-	QzFG1bK9WwiTiudnUrIyjjc4BLV9JrJoM7L1OlF5hUOeEYQ3bz1n+8HN+9PjcWkJZ+bKk+r1R58
-	P
-X-Received: by 2002:a05:600c:4f0c:b0:439:91dd:cf9c with SMTP id 5b1f17b1804b1-43ba66e1f3amr118907945e9.10.1741019438195;
-        Mon, 03 Mar 2025 08:30:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFdpz0gqig8RUNxdVw3Ebkq3f5eeFacb1rX/1/2my2Nw7/Vx42fOquiEWgwrBfEGJjD+4uhoA==
-X-Received: by 2002:a05:600c:4f0c:b0:439:91dd:cf9c with SMTP id 5b1f17b1804b1-43ba66e1f3amr118907545e9.10.1741019437826;
-        Mon, 03 Mar 2025 08:30:37 -0800 (PST)
+        bh=VusPlBbKEOGpL4wS1BqoWY6CYb2f4HQ+/wIDh8p+vAo=;
+        b=kIjPRpaMHWz9LouKVJXOPycHAtQ3BrnkzN2f0S5LWbiuW1qefNSbhgpFhfEKPqswuq
+         9/mISTZeNu+iWvni9KxKDuQDYk9mFKWE3y5TR++hN2JMsKav8mYNbhCyVTv0xcsCFddY
+         2Nc6LjKwoZl4kVBGo42BBI993CCBAUMQfXx+x8V4CRMa27EkLi8+0RGJh9+gV9XOPuTZ
+         snq02uYQGSXWZYWamybeT8TU/WaaUDh3ox6b+u7CNf2KecQwauBsFajkuqLeDoQo7jps
+         FkjuFvJDnOW7tKipCoAhY6WQbBjw08Lg7xPV+XrejiMlklGu+28iEORKCXjwdtTcAJi6
+         B6+A==
+X-Gm-Message-State: AOJu0Yyc+Bqux/8TUAS+egtRiuxByAQGG2c7Ii/xbiH6+4TxpuMRDXZ5
+	QGIsAYB40J6vKK/HHr5lcMoCFPs/Ifq1X/Wg8HfnySkB8NHjQUbc74D+0E3UjHgMj1FgLQd5rwl
+	JkXJK7xJj3vxryJxf2zX8eT6/nHu2GtVtbVfo9lC9e0SJ254FIvHHdCcCVw==
+X-Gm-Gg: ASbGncsxo1BNFaG8iWF/C/SPmEH24kHE1f63XOUjvHXbOjeB564umebrlDVED3tOSaS
+	Jfm2Lxprqm8U0UAwJYVC8zoz+7X2fVtaSrwUh2uXUxOgTbeTAmDgE8Qvxc0E67HoLfi2C9TowgH
+	cDtXvl7JQmcWsAWb6OfwiAuEw2TJdOFaxJcdGNcdC+ksLlHFGP8IZcUViR4TWwJa7sj9sfKDvSn
+	x7H5QHZfD9k9uIG7YtZdE2gR8o1unpcojIB5c1nx/vfEgsPNzdQeF0s6b+wm0/pzBDqzCXMjDOB
+	Ae1yD75jd5utokxdVdnEt5pFqCZ81tTvvSzaAjZk2Mt38FL31xDhLT59/F8e2kJTBsbFwJbkj+t
+	a
+X-Received: by 2002:a05:600c:26c6:b0:43b:bb72:1dce with SMTP id 5b1f17b1804b1-43bbb721f8fmr44417395e9.5.1741019441210;
+        Mon, 03 Mar 2025 08:30:41 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF6XV9dtRCnC9UYnKtk79gh146334CB5ZefECKJp7wi6xxTybGeqstnFZTU3vfWQysm8+TPqw==
+X-Received: by 2002:a05:600c:26c6:b0:43b:bb72:1dce with SMTP id 5b1f17b1804b1-43bbb721f8fmr44417035e9.5.1741019440886;
+        Mon, 03 Mar 2025 08:30:40 -0800 (PST)
 Received: from localhost (p200300cbc7349600af274326a2162bfb.dip0.t-ipconnect.de. [2003:cb:c734:9600:af27:4326:a216:2bfb])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-43bc06eba55sm45297035e9.21.2025.03.03.08.30.35
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-43bc1b5db02sm42954325e9.19.2025.03.03.08.30.38
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 03 Mar 2025 08:30:37 -0800 (PST)
+        Mon, 03 Mar 2025 08:30:40 -0800 (PST)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: linux-doc@vger.kernel.org,
@@ -104,9 +104,9 @@ Cc: linux-doc@vger.kernel.org,
 	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
 	Vlastimil Babka <vbabka@suse.cz>,
 	Jann Horn <jannh@google.com>
-Subject: [PATCH v3 09/20] mm/rmap: abstract large mapcount operations for large folios (!hugetlb)
-Date: Mon,  3 Mar 2025 17:30:02 +0100
-Message-ID: <20250303163014.1128035-10-david@redhat.com>
+Subject: [PATCH v3 10/20] bit_spinlock: __always_inline (un)lock functions
+Date: Mon,  3 Mar 2025 17:30:03 +0100
+Message-ID: <20250303163014.1128035-11-david@redhat.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250303163014.1128035-1-david@redhat.com>
 References: <20250303163014.1128035-1-david@redhat.com>
@@ -118,139 +118,65 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Let's abstract the operations so we can extend these operations easily.
+The compiler might decide that it is a smart idea to not inline
+bit_spin_lock(), primarily when a couple of functions in the same file end
+up calling it. Especially when used in RMAP map/unmap code next, the
+compiler sometimes decides to not inline, which is then observable in
+some micro-benchmarks.
+
+Let's simply flag all lock/unlock functions as __always_inline;
+arch_test_and_set_bit_lock() and friends are already tagged like that
+(but not test_and_set_bit_lock() for some reason).
+
+If ever a problem, we could split it into a fast and a slow path, and
+only force the fast path to be inlined. But there is nothing
+particularly "big" here.
 
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- include/linux/rmap.h | 32 ++++++++++++++++++++++++++++----
- mm/rmap.c            | 14 ++++++--------
- 2 files changed, 34 insertions(+), 12 deletions(-)
+ include/linux/bit_spinlock.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/include/linux/rmap.h b/include/linux/rmap.h
-index e795610bade80..d1e888cc97a58 100644
---- a/include/linux/rmap.h
-+++ b/include/linux/rmap.h
-@@ -173,6 +173,30 @@ static inline void anon_vma_merge(struct vm_area_struct *vma,
- 
- struct anon_vma *folio_get_anon_vma(const struct folio *folio);
- 
-+static inline void folio_set_large_mapcount(struct folio *folio, int mapcount,
-+		struct vm_area_struct *vma)
-+{
-+	/* Note: mapcounts start at -1. */
-+	atomic_set(&folio->_large_mapcount, mapcount - 1);
-+}
-+
-+static inline void folio_add_large_mapcount(struct folio *folio,
-+		int diff, struct vm_area_struct *vma)
-+{
-+	atomic_add(diff, &folio->_large_mapcount);
-+}
-+
-+static inline void folio_sub_large_mapcount(struct folio *folio,
-+		int diff, struct vm_area_struct *vma)
-+{
-+	atomic_sub(diff, &folio->_large_mapcount);
-+}
-+
-+#define folio_inc_large_mapcount(folio, vma) \
-+	folio_add_large_mapcount(folio, 1, vma)
-+#define folio_dec_large_mapcount(folio, vma) \
-+	folio_sub_large_mapcount(folio, 1, vma)
-+
- /* RMAP flags, currently only relevant for some anon rmap operations. */
- typedef int __bitwise rmap_t;
- 
-@@ -352,12 +376,12 @@ static __always_inline void __folio_dup_file_rmap(struct folio *folio,
- 		do {
- 			atomic_inc(&page->_mapcount);
- 		} while (page++, --nr_pages > 0);
--		atomic_add(orig_nr_pages, &folio->_large_mapcount);
-+		folio_add_large_mapcount(folio, orig_nr_pages, dst_vma);
- 		break;
- 	case RMAP_LEVEL_PMD:
- 	case RMAP_LEVEL_PUD:
- 		atomic_inc(&folio->_entire_mapcount);
--		atomic_inc(&folio->_large_mapcount);
-+		folio_inc_large_mapcount(folio, dst_vma);
- 		break;
- 	}
- }
-@@ -451,7 +475,7 @@ static __always_inline int __folio_try_dup_anon_rmap(struct folio *folio,
- 				ClearPageAnonExclusive(page);
- 			atomic_inc(&page->_mapcount);
- 		} while (page++, --nr_pages > 0);
--		atomic_add(orig_nr_pages, &folio->_large_mapcount);
-+		folio_add_large_mapcount(folio, orig_nr_pages, dst_vma);
- 		break;
- 	case RMAP_LEVEL_PMD:
- 	case RMAP_LEVEL_PUD:
-@@ -461,7 +485,7 @@ static __always_inline int __folio_try_dup_anon_rmap(struct folio *folio,
- 			ClearPageAnonExclusive(page);
- 		}
- 		atomic_inc(&folio->_entire_mapcount);
--		atomic_inc(&folio->_large_mapcount);
-+		folio_inc_large_mapcount(folio, dst_vma);
- 		break;
- 	}
- 	return 0;
-diff --git a/mm/rmap.c b/mm/rmap.c
-index 8a7d023b02e0c..08846b7eced60 100644
---- a/mm/rmap.c
-+++ b/mm/rmap.c
-@@ -1266,7 +1266,7 @@ static __always_inline unsigned int __folio_add_rmap(struct folio *folio,
- 		    atomic_add_return_relaxed(first, mapped) < ENTIRELY_MAPPED)
- 			nr = first;
- 
--		atomic_add(orig_nr_pages, &folio->_large_mapcount);
-+		folio_add_large_mapcount(folio, orig_nr_pages, vma);
- 		break;
- 	case RMAP_LEVEL_PMD:
- 	case RMAP_LEVEL_PUD:
-@@ -1290,7 +1290,7 @@ static __always_inline unsigned int __folio_add_rmap(struct folio *folio,
- 				nr = 0;
- 			}
- 		}
--		atomic_inc(&folio->_large_mapcount);
-+		folio_inc_large_mapcount(folio, vma);
- 		break;
- 	}
- 	return nr;
-@@ -1556,14 +1556,12 @@ void folio_add_new_anon_rmap(struct folio *folio, struct vm_area_struct *vma,
- 				SetPageAnonExclusive(page);
- 		}
- 
--		/* increment count (starts at -1) */
--		atomic_set(&folio->_large_mapcount, nr - 1);
-+		folio_set_large_mapcount(folio, nr, vma);
- 		atomic_set(&folio->_nr_pages_mapped, nr);
- 	} else {
- 		/* increment count (starts at -1) */
- 		atomic_set(&folio->_entire_mapcount, 0);
--		/* increment count (starts at -1) */
--		atomic_set(&folio->_large_mapcount, 0);
-+		folio_set_large_mapcount(folio, 1, vma);
- 		atomic_set(&folio->_nr_pages_mapped, ENTIRELY_MAPPED);
- 		if (exclusive)
- 			SetPageAnonExclusive(&folio->page);
-@@ -1665,7 +1663,7 @@ static __always_inline void __folio_remove_rmap(struct folio *folio,
- 			break;
- 		}
- 
--		atomic_sub(nr_pages, &folio->_large_mapcount);
-+		folio_sub_large_mapcount(folio, nr_pages, vma);
- 		do {
- 			last += atomic_add_negative(-1, &page->_mapcount);
- 		} while (page++, --nr_pages > 0);
-@@ -1678,7 +1676,7 @@ static __always_inline void __folio_remove_rmap(struct folio *folio,
- 		break;
- 	case RMAP_LEVEL_PMD:
- 	case RMAP_LEVEL_PUD:
--		atomic_dec(&folio->_large_mapcount);
-+		folio_dec_large_mapcount(folio, vma);
- 		last = atomic_add_negative(-1, &folio->_entire_mapcount);
- 		if (last) {
- 			nr = atomic_sub_return_relaxed(ENTIRELY_MAPPED, mapped);
+diff --git a/include/linux/bit_spinlock.h b/include/linux/bit_spinlock.h
+index bbc4730a6505c..c0989b5b0407f 100644
+--- a/include/linux/bit_spinlock.h
++++ b/include/linux/bit_spinlock.h
+@@ -13,7 +13,7 @@
+  * Don't use this unless you really need to: spin_lock() and spin_unlock()
+  * are significantly faster.
+  */
+-static inline void bit_spin_lock(int bitnum, unsigned long *addr)
++static __always_inline void bit_spin_lock(int bitnum, unsigned long *addr)
+ {
+ 	/*
+ 	 * Assuming the lock is uncontended, this never enters
+@@ -38,7 +38,7 @@ static inline void bit_spin_lock(int bitnum, unsigned long *addr)
+ /*
+  * Return true if it was acquired
+  */
+-static inline int bit_spin_trylock(int bitnum, unsigned long *addr)
++static __always_inline int bit_spin_trylock(int bitnum, unsigned long *addr)
+ {
+ 	preempt_disable();
+ #if defined(CONFIG_SMP) || defined(CONFIG_DEBUG_SPINLOCK)
+@@ -54,7 +54,7 @@ static inline int bit_spin_trylock(int bitnum, unsigned long *addr)
+ /*
+  *  bit-based spin_unlock()
+  */
+-static inline void bit_spin_unlock(int bitnum, unsigned long *addr)
++static __always_inline void bit_spin_unlock(int bitnum, unsigned long *addr)
+ {
+ #ifdef CONFIG_DEBUG_SPINLOCK
+ 	BUG_ON(!test_bit(bitnum, addr));
+@@ -71,7 +71,7 @@ static inline void bit_spin_unlock(int bitnum, unsigned long *addr)
+  *  non-atomic version, which can be used eg. if the bit lock itself is
+  *  protecting the rest of the flags in the word.
+  */
+-static inline void __bit_spin_unlock(int bitnum, unsigned long *addr)
++static __always_inline void __bit_spin_unlock(int bitnum, unsigned long *addr)
+ {
+ #ifdef CONFIG_DEBUG_SPINLOCK
+ 	BUG_ON(!test_bit(bitnum, addr));
 -- 
 2.48.1
 
