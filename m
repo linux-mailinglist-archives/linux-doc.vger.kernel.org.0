@@ -1,106 +1,119 @@
-Return-Path: <linux-doc+bounces-39933-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39935-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id B46E3A4E574
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 17:19:23 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C572A4E6F4
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 17:54:26 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 61D7C7A2A59
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 16:18:22 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 58D37188C859
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 16:48:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A944D28D065;
-	Tue,  4 Mar 2025 16:00:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8902E2517B0;
+	Tue,  4 Mar 2025 16:26:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b="qphRwrCN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from beeline1.cc.itu.edu.tr (beeline1.cc.itu.edu.tr [160.75.25.115])
+Received: from beeline2.cc.itu.edu.tr (beeline2.cc.itu.edu.tr [160.75.25.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF6A728D04C
-	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 15:59:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=160.75.25.115
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0A182356DC
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 16:26:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=160.75.25.116
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741104000; cv=fail; b=kPkvAZs2pOq2Maqv+crMJGaApUU3A+gdHL9kPPyxMyYuV2LGake6cjpinng/3cwRcHag3Xsv3soTcoRunjO/7OOkjK31Hf40KE4CFnDDyFvnjH8SH6i/aOdNAACWYNtzLe8PWgbGX84WCDT03tNzPyQ9UfpuyDybagUckKCmXMk=
+	t=1741105588; cv=pass; b=iQsBP3GZZusljQIg6zTP7j643rV6qr3h1jxLGflr+6839Ty/JKsdb9wVxFU2UNoVEnpOefbDn7epuqVnpQFqeXvhwqt3SIMNZJ+EF9X2gUeh8e5bHYaYhnlZFeZI7Z0dyQvfB3GtpW4U+7WUCraAtmbyhO7LeEKw9G0xAxAcJTs=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741104000; c=relaxed/simple;
-	bh=D28MMNWE+45cppScAZmaj/qD9R8U6JIhVyN64bYc/w0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=PNzULRWotXF6arViwhmKG2PjEHpc0x4/6WQJR2dtIubez0pmL3rBd5kIk/D0dRaQ4s741zn4lSRnDnPIcPu+14Je9aQKn3KwZm8qYs++0af0H1Klwz0jiWu45z7MccMMkOApijVg0SAozBxNQhUjZlWAPVcfktk3BDD2QJELWCI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=none smtp.mailfrom=cc.itu.edu.tr; arc=none smtp.client-ip=114.242.206.163; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=fail smtp.client-ip=160.75.25.115
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+	s=arc-20240116; t=1741105588; c=relaxed/simple;
+	bh=xjKhMtLA9tK9j8SX+seT9UK5BSImtLHPUuXRUCeDyBc=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=ssWC9SudEPeM6QfyFTB034CRtKMZVL9X/VdAStfBPefgBe/maFlVTNvzwyrqM376Z8tTum+ERNl/4hkSlwPiyNLb9R8K07ediusboCA3K1l7sZuNIGq5oXsVCfG5w+LESBEdCQ9L+Daz26vlfrOqFGEXfd7efL1Ed3+e/IE+hp0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl; spf=none smtp.mailfrom=cc.itu.edu.tr; dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=qphRwrCN; arc=none smtp.client-ip=94.124.121.26; dmarc=none (p=none dis=none) header.from=protonic.nl; spf=pass smtp.mailfrom=protonic.nl; arc=pass smtp.client-ip=160.75.25.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=cc.itu.edu.tr
 Received: from lesvatest1.cc.itu.edu.tr (lesvatest1.cc.itu.edu.tr [10.146.128.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by beeline1.cc.itu.edu.tr (Postfix) with ESMTPS id 6224040D9749
-	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 18:59:56 +0300 (+03)
+	by beeline2.cc.itu.edu.tr (Postfix) with ESMTPS id 245A0408B64D
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 19:26:25 +0300 (+03)
 X-Envelope-From: <root@cc.itu.edu.tr>
+Authentication-Results: lesvatest1.cc.itu.edu.tr;
+	dkim=pass (2048-bit key, unprotected) header.d=protonic.nl header.i=@protonic.nl header.a=rsa-sha256 header.s=202111 header.b=qphRwrCN
 Received: from lesva1.cc.itu.edu.tr (unknown [160.75.70.79])
-	by lesvatest1.cc.itu.edu.tr (Postfix) with ESMTP id 4Z6gLh5tt4zG1My
-	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 18:57:48 +0300 (+03)
+	by lesvatest1.cc.itu.edu.tr (Postfix) with ESMTP id 4Z6gws5DGZzG3Dx
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 19:23:57 +0300 (+03)
 Received: by le1 (Postfix, from userid 0)
-	id 3C49C42760; Tue,  4 Mar 2025 18:57:31 +0300 (+03)
-X-Envelope-From: <linux-kernel+bounces-541347-bozkiru=itu.edu.tr@vger.kernel.org>
-Received: from fgw2.itu.edu.tr (fgw2.itu.edu.tr [160.75.25.104])
-	by le2 (Postfix) with ESMTP id A3D2643482
-	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 13:16:09 +0300 (+03)
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by fgw2.itu.edu.tr (Postfix) with SMTP id 7BB382DCEB
-	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 13:16:09 +0300 (+03)
+	id 1BEEF42750; Tue,  4 Mar 2025 19:23:51 +0300 (+03)
+Authentication-Results: lesva1.cc.itu.edu.tr;
+	dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=qphRwrCN
+X-Envelope-From: <linux-kernel+bounces-541610-bozkiru=itu.edu.tr@vger.kernel.org>
+Authentication-Results: lesva2.cc.itu.edu.tr;
+	dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=qphRwrCN
+Received: from fgw1.itu.edu.tr (fgw1.itu.edu.tr [160.75.25.103])
+	by le2 (Postfix) with ESMTP id CEB5D42470
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 14:47:06 +0300 (+03)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by fgw1.itu.edu.tr (Postfix) with SMTP id 5DC053064C0B
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 14:47:06 +0300 (+03)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 652AA18936BB
-	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 10:16:16 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3B7523A4C44
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 11:41:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEC3D1F2C3B;
-	Mon,  3 Mar 2025 10:15:45 +0000 (UTC)
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 703F81EE7DC;
-	Mon,  3 Mar 2025 10:15:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD2EB202F88;
+	Mon,  3 Mar 2025 11:40:41 +0000 (UTC)
+Received: from smtp15.bhosted.nl (smtp15.bhosted.nl [94.124.121.26])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26EF9201025
+	for <linux-kernel@vger.kernel.org>; Mon,  3 Mar 2025 11:40:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=94.124.121.26
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740996943; cv=none; b=HDTGW9+oVPTXaRwJvnPCzrB0iLgEHIZn9ilyYwi/9OKnvaDzUGpyo3z9SJW/rzwADQsHUg0mCAzPS86R6T4xmZLvwQj8wS2HIEoHXVeHa60+L88mp4m0dBEnYdwximP22sksShZjyJZcMwVCUu+iUvjdAjZFkDGNmJGT14wbRGw=
+	t=1741002039; cv=none; b=akcIzpIasZpnpd61PdZNTbo4iBwhXCrv0YD4xnaV91IJbExMW2Bd/kWSU0yO6tXJSdKxna/4YcC0/JzsHY9idt/+PhP6xECJ+NfIQc4ITmI3ArRntpMaPjr2i/Vo6IXMAT+JrJH6MMPICVwxc8ck00ctmPXyvByMjLBCP1CTJE8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740996943; c=relaxed/simple;
-	bh=eg16nEOWpbtYg7w3qAHk9L3ekwHdkL5U1EQOqfl89Q8=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qZlPF4aYxZ5NdbRkGt6IN7DHgLE1728e4cw7BI1EyvtNaso1rC3i/TWRc7SuA8CcegMOx2bx6nGJ5e8e4DiTjFBLRADJPKiweRH/r82LIBLUOpEMQmd0Llms/ewqNaanJsinU2+Ovli34Ri/QgEwca2kaYDLHJtu7GfwkGAcDP4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [10.2.10.34])
-	by gateway (Coremail) with SMTP id _____8Ax3eJMgcVnOROJAA--.64036S3;
-	Mon, 03 Mar 2025 18:15:40 +0800 (CST)
-Received: from localhost.localdomain (unknown [10.2.10.34])
-	by front1 (Coremail) with SMTP id qMiowMCxLcVIgcVn0pYzAA--.57593S3;
-	Mon, 03 Mar 2025 18:15:38 +0800 (CST)
-From: Tianyang Zhang <zhangtianyang@loongson.cn>
-To: chenhuacai@kernel.org,
-	kernel@xen0n.name,
-	corbet@lwn.net,
-	alexs@kernel.org,
-	si.yanteng@linux.dev,
-	tglx@linutronix.de,
-	jiaxun.yang@flygoat.com,
-	peterz@infradead.org,
-	wangliupu@loongson.cn,
-	lvjianmin@loongson.cn,
-	maobibo@loongson.cn,
-	siyanteng@cqsoftware.com.cn,
-	gaosong@loongson.cn,
-	yangtiezhu@loongson.cn
-Cc: loongarch@lists.linux.dev,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Tianyang Zhang <zhangtianyang@loongson.cn>
-Subject: [PATCH 1/2] Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
-Date: Mon,  3 Mar 2025 18:15:32 +0800
-Message-Id: <20250303101533.31462-2-zhangtianyang@loongson.cn>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20250303101533.31462-1-zhangtianyang@loongson.cn>
-References: <20250303101533.31462-1-zhangtianyang@loongson.cn>
+	s=arc-20240116; t=1741002039; c=relaxed/simple;
+	bh=xjKhMtLA9tK9j8SX+seT9UK5BSImtLHPUuXRUCeDyBc=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=AWULaN5Ll8LqoxdqPjmwU3t3VugyIlHTRkOCw4Gqw8CauUau8SqlRIMjRa0QNdEjhxKkERz9h01PluX9sRWybJ0HwE71gw3JrZLzN5m0q0qqeSCV1GM/ya2CB9BKWV7sQVkWlAtaN6r4FkkiXp9RkJK8rStO39FVDOj8Phn+Wr8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl; spf=pass smtp.mailfrom=protonic.nl; dkim=pass (2048-bit key) header.d=protonic.nl header.i=@protonic.nl header.b=qphRwrCN; arc=none smtp.client-ip=94.124.121.26
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=protonic.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=protonic.nl
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=protonic.nl; s=202111;
+	h=content-transfer-encoding:content-type:mime-version:references:in-reply-to:
+	 message-id:subject:cc:to:from:date:from;
+	bh=W7xQaIM8KUgQYXUjWEz/yyKUU3dOwVVtoiKveZse1LQ=;
+	b=qphRwrCNarcdXMc+8nT9gMvUDncjj28vFRItzfiNE/jdOd2yOkJll/C0YqOI+M2Lv7xxVV69I4kDC
+	 EabyatzTV4QIi2a/uhHtenSOQTvgnl5afF0HzFmvDBTlBx3REPp83KwvYQxLaqXi/7tk4a3czrMRSI
+	 xgOPVkiNuzqBXgPhGvTeLVEAHDwWVaCBb56qs9Zz5cVnGinA1MkMCkialX23Gp8qC6Mdum9rxl4KCu
+	 3VMeU0juaMaLuz2lcY4aa2AjD6nutiVQVBifdXvBV3CXO1CKO+e2ypMhFdH54HYn4n/U6bDSNx7C9U
+	 Zxl8AX8zA0VD+Ja7BOpB/LKmPsgqzqQ==
+X-MSG-ID: 51c43871-f824-11ef-a39b-00505681446f
+Date: Mon, 3 Mar 2025 12:40:34 +0100
+From: David Jander <david@protonic.nl>
+To: Uwe =?UTF-8?B?S2xlaW5lLUvDtm5pZw==?= <ukleinek@kernel.org>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-iio@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, devicetree@vger.kernel.org,
+ linux-doc@vger.kernel.org, Nuno Sa <nuno.sa@analog.com>, Jonathan Cameron
+ <jic23@kernel.org>, Oleksij Rempel <o.rempel@pengutronix.de>,
+ linux-pwm@vger.kernel.org
+Subject: Re: [RFC PATCH 7/7] dt-bindings: motion: Add motion-simple-pwm
+ bindings
+Message-ID: <20250303124034.726ba698@erd003.prtnl>
+In-Reply-To: <tm57fsmijq4t4y4dpmtss63ekzpm5oefir5tz4aioxq5dx4or6@lgoqjpxc3axh>
+References: <20250227162823.3585810-1-david@protonic.nl>
+	<20250227162823.3585810-8-david@protonic.nl>
+	<20250228-wonderful-python-of-resistance-d5b662@krzk-bin>
+	<20250228102201.590b4be6@erd003.prtnl>
+	<9a1d75a2-66c0-46b6-91a1-4922b892dfb1@kernel.org>
+	<20250228110931.7bdae7fd@erd003.prtnl>
+	<tm57fsmijq4t4y4dpmtss63ekzpm5oefir5tz4aioxq5dx4or6@lgoqjpxc3axh>
+Organization: Protonic Holland
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.48; x86_64-pc-linux-gnu)
 Precedence: bulk
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -108,167 +121,120 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=yes
-X-CM-TRANSID:qMiowMCxLcVIgcVn0pYzAA--.57593S3
-X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
-X-Coremail-Antispam: 1Uk129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7
-	ZEXasCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29K
-	BjDU0xBIdaVrnRJUUUBlb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26c
-	xKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vE
-	j48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxV
-	AFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x02
-	67AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487M2AExVAIFx02aVAFz4v204v7Mc
-	804VCY07AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY
-	67AKxVWUtVWrXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y4
-	8IcxkI7VAKI48JM4kE6I8I3I0E14AKx2xKxVC2ax8xMxAIw28IcxkI7VAKI48JMxC20s02
-	6xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI0_Jr0_Jr
-	4lx2IqxVCjr7xvwVAFwI0_Jr0_Jr4lx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxG
-	rwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJw
-	CI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2
-	z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8l38UUUUUU==
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 X-ITU-Libra-ESVA-Information: Please contact Istanbul Teknik Universitesi for more information
-X-ITU-Libra-ESVA-ID: 4Z6gLh5tt4zG1My
+X-ITU-Libra-ESVA-ID: 4Z6gws5DGZzG3Dx
 X-ITU-Libra-ESVA: No virus found
 X-ITU-Libra-ESVA-From: root@cc.itu.edu.tr
-X-ITU-Libra-ESVA-Watermark: 1741708733.10188@hXxv3eMuM5lSbzvKwyoPJA
+X-ITU-Libra-ESVA-Watermark: 1741710276.46697@12EM+bkR5g6PlFCM7z8qnQ
 X-ITU-MailScanner-SpamCheck: not spam
 
-Introduce the Redirect interrupt controllers.When the redirected interrup=
-t
-controller is enabled, the routing target of MSI interrupts is no longer =
-a
-specific CPU and vector number, but a specific redirected entry. The actu=
-al
-CPU and vector number used are described by the redirected entry.
 
-Signed-off-by: Tianyang Zhang <zhangtianyang@loongson.cn>
----
- .../arch/loongarch/irq-chip-model.rst         | 38 +++++++++++++++++++
- .../zh_CN/arch/loongarch/irq-chip-model.rst   | 37 ++++++++++++++++++
- 2 files changed, 75 insertions(+)
+Dear Uwe,
 
-diff --git a/Documentation/arch/loongarch/irq-chip-model.rst b/Documentat=
-ion/arch/loongarch/irq-chip-model.rst
-index a7ecce11e445..45cba22ff181 100644
---- a/Documentation/arch/loongarch/irq-chip-model.rst
-+++ b/Documentation/arch/loongarch/irq-chip-model.rst
-@@ -181,6 +181,44 @@ go to PCH-PIC/PCH-LPC and gathered by EIOINTC, and t=
-hen go to CPUINTC directly::
-              | Devices |
-              +---------+
-=20
-+Advanced Extended-Redirect IRQ model
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+
-+In this model, IPI (Inter-Processor Interrupt) and CPU Local Timer inter=
-rupt go
-+to CPUINTC directly, CPU UARTS interrupts go to LIOINTC, PCH-MSI interru=
-pts go
-+to REDIRECT for remapping it to AVEC, and then go to CPUINTC directly, w=
-hile all
-+other devices interrupts go to PCH-PIC/PCH-LPC and gathered by EIOINTC, =
-and then
-+go to CPUINTC directly::
-+
-+ +-----+     +-----------------------+     +-------+
-+ | IPI | --> |        CPUINTC        | <-- | Timer |
-+ +-----+     +-----------------------+     +-------+
-+              ^          ^          ^
-+              |          |          |
-+       +---------+ +----------+ +---------+     +-------+
-+       | EIOINTC | | AVECINTC | | LIOINTC | <-- | UARTs |
-+       +---------+ +----------+ +---------+     +-------+
-+            ^            ^
-+            |            |
-+            |      +----------+
-+            |      | REDIRECT |
-+            |      +----------+
-+            |            ^
-+            |            |
-+       +---------+  +---------+
-+       | PCH-PIC |  | PCH-MSI |
-+       +---------+  +---------+
-+         ^     ^           ^
-+         |     |           |
-+ +---------+ +---------+ +---------+
-+ | Devices | | PCH-LPC | | Devices |
-+ +---------+ +---------+ +---------+
-+                  ^
-+                  |
-+             +---------+
-+             | Devices |
-+             +---------+
-+
- ACPI-related definitions
- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=20
-diff --git a/Documentation/translations/zh_CN/arch/loongarch/irq-chip-mod=
-el.rst b/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.r=
-st
-index d4ff80de47b6..d935da47ce3b 100644
---- a/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst
-+++ b/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst
-@@ -174,6 +174,43 @@ CPU=E4=B8=B2=E5=8F=A3=EF=BC=88UARTs=EF=BC=89=E4=B8=AD=
-=E6=96=AD=E5=8F=91=E9=80=81=E5=88=B0LIOINTC=EF=BC=8CPCH-MSI=E4=B8=AD=E6=96=
-=AD=E5=8F=91=E9=80=81=E5=88=B0AVECINTC=EF=BC=8C
-              | Devices |
-              +---------+
-=20
-+=E9=AB=98=E7=BA=A7=E6=89=A9=E5=B1=95-=E9=87=8D=E5=AE=9A=E5=90=91IRQ=E6=A8=
-=A1=E5=9E=8B
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+
-+=E5=9C=A8=E8=BF=99=E7=A7=8D=E6=A8=A1=E5=9E=8B=E9=87=8C=E9=9D=A2=EF=BC=8C=
-IPI=EF=BC=88Inter-Processor Interrupt=EF=BC=89=E5=92=8CCPU=E6=9C=AC=E5=9C=
-=B0=E6=97=B6=E9=92=9F=E4=B8=AD=E6=96=AD=E7=9B=B4=E6=8E=A5=E5=8F=91=E9=80=81=
-=E5=88=B0CPUINTC=EF=BC=8C
-+CPU=E4=B8=B2=E5=8F=A3=EF=BC=88UARTs=EF=BC=89=E4=B8=AD=E6=96=AD=E5=8F=91=E9=
-=80=81=E5=88=B0LIOINTC=EF=BC=8CPCH-MSI=E4=B8=AD=E6=96=AD=E9=A6=96=E5=85=88=
-=E5=8F=91=E9=80=81=E5=88=B0REDIRECT=E6=A8=A1=E5=9D=97,=E5=AE=8C=E6=88=90=E9=
-=87=8D=E5=AE=9A=E5=90=91=E5=90=8E=E5=8F=91
-+=E9=80=81=E5=88=B0AVECINTC=EF=BC=8C=E8=80=8C=E5=90=8E=E9=80=9A=E8=BF=87A=
-VECINTC=E7=9B=B4=E6=8E=A5=E9=80=81=E8=BE=BECPUINTC=EF=BC=8C=E8=80=8C=E5=85=
-=B6=E4=BB=96=E6=89=80=E6=9C=89=E8=AE=BE=E5=A4=87=E7=9A=84=E4=B8=AD=E6=96=AD=
-=E5=88=99=E5=88=86=E5=88=AB=E5=8F=91=E9=80=81=E5=88=B0=E6=89=80=E8=BF=9E
-+=E6=8E=A5=E7=9A=84PCH-PIC/PCH-LPC=EF=BC=8C=E7=84=B6=E5=90=8E=E7=94=B1EIO=
-INTC=E7=BB=9F=E4=B8=80=E6=94=B6=E9=9B=86=EF=BC=8C=E5=86=8D=E7=9B=B4=E6=8E=
-=A5=E5=88=B0=E8=BE=BECPUINTC::
-+
-+ +-----+     +-----------------------+     +-------+
-+ | IPI | --> |        CPUINTC        | <-- | Timer |
-+ +-----+     +-----------------------+     +-------+
-+              ^          ^          ^
-+              |          |          |
-+       +---------+ +----------+ +---------+     +-------+
-+       | EIOINTC | | AVECINTC | | LIOINTC | <-- | UARTs |
-+       +---------+ +----------+ +---------+     +-------+
-+            ^            ^
-+            |            |
-+            |      +----------+
-+            |      | REDIRECT |
-+            |      +----------+
-+            |            ^
-+            |            |
-+       +---------+  +---------+
-+       | PCH-PIC |  | PCH-MSI |
-+       +---------+  +---------+
-+         ^     ^           ^
-+         |     |           |
-+ +---------+ +---------+ +---------+
-+ | Devices | | PCH-LPC | | Devices |
-+ +---------+ +---------+ +---------+
-+                  ^
-+                  |
-+             +---------+
-+             | Devices |
-+             +---------+
-+
- ACPI=E7=9B=B8=E5=85=B3=E7=9A=84=E5=AE=9A=E4=B9=89
- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=20
+Thanks for chiming in!
+
+On Fri, 28 Feb 2025 16:18:05 +0100
+Uwe Kleine-K=C3=B6nig <ukleinek@kernel.org> wrote:
+
+> Hey David,
+>=20
+> On Fri, Feb 28, 2025 at 11:09:31AM +0100, David Jander wrote:
+> > On Fri, 28 Feb 2025 10:37:48 +0100
+> > Krzysztof Kozlowski <krzk@kernel.org> wrote:
+> >  =20
+> > > On 28/02/2025 10:22, David Jander wrote: =20
+> > > >    =20
+> > > >>> +
+> > > >>> +  motion,pwm-inverted:
+> > > >>> +    $ref: /schemas/types.yaml#/definitions/flag     =20
+> > > >>
+> > > >> And PWM flag does not work?   =20
+> > > >=20
+> > > > I have seen PWM controllers that don't seem to support the
+> > > > PWM_POLARITY_INVERTED flag and those where it just doesn't work. Sh=
+ould all   =20
+> > >=20
+> > >=20
+> > > Shouldn't the controllers be fixed? Or let's rephrase the question: w=
+hy
+> > > only this PWM consumer needs this property and none of others need it=
+? =20
+> >=20
+> > CCing Uwe Kleine-Koenig and linux-pwm mailing list.
+> >=20
+> > I know that at least in kernel 6.11 the pwm-stm32.c PWM driver doesn't
+> > properly invert the PWM signal when specifying PWM_POLARITY_INVERTED. I=
+ agree
+> > this is a probably bug that needs fixing if still present in 6.14-rc. B=
+esides
+> > that, if linux-pwm agrees that every single PWM driver _must_ properly =
+support
+> > this flag, I will drop this consumer flag an start fixing broken PWM dr=
+ivers
+> > that I encounter. I agree that it makes more sense this way, but I want=
+ed to
+> > be sure. =20
+>=20
+> Some hardwares cannot support PWM_POLARITY_INVERTED. Affected drivers
+> include:
+>=20
+> 	pwm-adp5585
+> 	pwm-ntxec
+> 	pwm-raspberrypi-poe
+> 	pwm-rz-mtu3 (software limitation only)
+> 	pwm-sunplus
+> 	pwm-twl-led (not completely sure, that one is strange)
+>=20
+> . ISTR that there is a driver that does only support inverted polarity,
+> but I don't find it. For an overview I recommend reading through the
+> output of:
+>=20
+> 	for f in drivers/pwm/pwm-*; do
+> 		echo $f;
+> 		sed -rn '/Limitations:/,/\*\/?$/p' $f;
+> 		echo;
+> 	done | less
+>=20
+> . (Note not all drivers have commentary in the right format to unveil
+> their limitations.)
+>=20
+> For most use-cases you can just do
+>=20
+> 	.duty_cycle =3D .period - .duty_cycle
+
+Yes, that is exactly what the relevant code in motion/simple-pwm.c does when
+the "pwm-inverted" flag is present in the DT node.
+
+> instead of inverting polarity, but there is no abstraction in the PWM
+> bindings for that and also no helpers in the PWM framework. The problem
+> is more or less ignored, so if you have a device with
+>=20
+> 	pwms =3D <&pwm0 0 PWM_POLARITY_INVERTED>;
+>=20
+> and the PWM chip in question doesn't support that, the pwm API functions
+> will fail. So the system designer better makes sure that the PWM
+> hardware can cope with the needed polarity.
+
+Thanks for clarifying this!
+
+@Krzysztof, do you think that given this situation it is acceptable to incl=
+ude
+the "pwm-inverted" flag in the dt-schema of the simple PWM motor driver?
+
+The need for an inverted PWM signal is something very common in the case of
+H-bridge motor drivers, where the PWM signal represents the actual logical
+output level of each of the two halves of the bridge. Often the high-side
+switches are used as the free-wheel position, so that 100% duty-cycle on bo=
+th
+channels is actually standstill, while 0% duty-cycle on one channel is full
+speed in either direction. This isn't always the case though, hence the
+importance for this to be able to be selected.
+
+Best regards,
+
 --=20
-2.43.0
-
+David Jander
 
 
