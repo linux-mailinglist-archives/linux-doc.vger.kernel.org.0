@@ -1,111 +1,274 @@
-Return-Path: <linux-doc+bounces-39922-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39933-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81930A4E1D6
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 15:53:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B46E3A4E574
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 17:19:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C3BFB7AC75B
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 14:50:02 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 61D7C7A2A59
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 16:18:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6777261562;
-	Tue,  4 Mar 2025 14:50:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qZLWl/t3"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A944D28D065;
+	Tue,  4 Mar 2025 16:00:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from beeline1.cc.itu.edu.tr (beeline1.cc.itu.edu.tr [160.75.25.115])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B583E25F98D;
-	Tue,  4 Mar 2025 14:50:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF6A728D04C
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 15:59:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=160.75.25.115
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1741104000; cv=fail; b=kPkvAZs2pOq2Maqv+crMJGaApUU3A+gdHL9kPPyxMyYuV2LGake6cjpinng/3cwRcHag3Xsv3soTcoRunjO/7OOkjK31Hf40KE4CFnDDyFvnjH8SH6i/aOdNAACWYNtzLe8PWgbGX84WCDT03tNzPyQ9UfpuyDybagUckKCmXMk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1741104000; c=relaxed/simple;
+	bh=D28MMNWE+45cppScAZmaj/qD9R8U6JIhVyN64bYc/w0=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=PNzULRWotXF6arViwhmKG2PjEHpc0x4/6WQJR2dtIubez0pmL3rBd5kIk/D0dRaQ4s741zn4lSRnDnPIcPu+14Je9aQKn3KwZm8qYs++0af0H1Klwz0jiWu45z7MccMMkOApijVg0SAozBxNQhUjZlWAPVcfktk3BDD2QJELWCI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=none smtp.mailfrom=cc.itu.edu.tr; arc=none smtp.client-ip=114.242.206.163; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=fail smtp.client-ip=160.75.25.115
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=cc.itu.edu.tr
+Received: from lesvatest1.cc.itu.edu.tr (lesvatest1.cc.itu.edu.tr [10.146.128.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits))
+	(No client certificate requested)
+	by beeline1.cc.itu.edu.tr (Postfix) with ESMTPS id 6224040D9749
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 18:59:56 +0300 (+03)
+X-Envelope-From: <root@cc.itu.edu.tr>
+Received: from lesva1.cc.itu.edu.tr (unknown [160.75.70.79])
+	by lesvatest1.cc.itu.edu.tr (Postfix) with ESMTP id 4Z6gLh5tt4zG1My
+	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 18:57:48 +0300 (+03)
+Received: by le1 (Postfix, from userid 0)
+	id 3C49C42760; Tue,  4 Mar 2025 18:57:31 +0300 (+03)
+X-Envelope-From: <linux-kernel+bounces-541347-bozkiru=itu.edu.tr@vger.kernel.org>
+Received: from fgw2.itu.edu.tr (fgw2.itu.edu.tr [160.75.25.104])
+	by le2 (Postfix) with ESMTP id A3D2643482
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 13:16:09 +0300 (+03)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by fgw2.itu.edu.tr (Postfix) with SMTP id 7BB382DCEB
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 13:16:09 +0300 (+03)
+Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 652AA18936BB
+	for <bozkiru@itu.edu.tr>; Mon,  3 Mar 2025 10:16:16 +0000 (UTC)
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEC3D1F2C3B;
+	Mon,  3 Mar 2025 10:15:45 +0000 (UTC)
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 703F81EE7DC;
+	Mon,  3 Mar 2025 10:15:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741099800; cv=none; b=WAy4rAaCfMy1mBQTC5dFhM5cd1h1quYwIAlGqqkk8EjypyUr27mO1UNC2Y5T2gC/RFcZA7eqEpjFpcDZOUOrV9k0kphBHOKt1sbkGM71AqBt0UE83L1eaL/hnJv76+xdKF+n9lVXfM8V0XwxOhqDfc555nPCZuZlI9CG2eljwZg=
+	t=1740996943; cv=none; b=HDTGW9+oVPTXaRwJvnPCzrB0iLgEHIZn9ilyYwi/9OKnvaDzUGpyo3z9SJW/rzwADQsHUg0mCAzPS86R6T4xmZLvwQj8wS2HIEoHXVeHa60+L88mp4m0dBEnYdwximP22sksShZjyJZcMwVCUu+iUvjdAjZFkDGNmJGT14wbRGw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741099800; c=relaxed/simple;
-	bh=iHjkyEOwAJNsi2EtZYCaCGQOASUoDIn5YqQ9oOR4Y/U=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=uqVBk9caYvpJYUr393NcWDS9uOi7Di+l9nqO3bJg4y0CRemWGJdPo2q+pwhieAygVbOkF+tl1N+9zW6bczwp+ZGVu030xU1N1pEsSucwRdqL1ayS0KH/LCOl4x6WciP2qC6MF07obWpCmq62/K1Cy+ERpR+LlBMIsfD6TSAxbYk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qZLWl/t3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2095AC4CEE5;
-	Tue,  4 Mar 2025 14:50:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741099800;
-	bh=iHjkyEOwAJNsi2EtZYCaCGQOASUoDIn5YqQ9oOR4Y/U=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=qZLWl/t3sC0XsH8r7kXYJJPQzrVYn59BsW3dT+Jh8xz3AxJekxgByK1yF8AlThyNC
-	 aXZ6YZ9m8a8Xx6oJd+a64woIcZe354w1tGK0kePdOsIBwOm3CdrjSmuvg0djNZrVHs
-	 PVZTGWAOoZZznhfK121kU38QalZy99CRIZxkZIB56k3+syrgfswPpIELunW7wOD3e/
-	 imxOT/B4fDSMvK8llM76GIDF8RF8c/9wRyi2wbGS1PRP5AzGRnYOazb/dd0RtRWgZR
-	 YeVum9qo19qpbm5nBGJUoYVq+nMrWeJpHoSwv7cPZ7bXU8dc8mvdlf6bLLvVQLgj3d
-	 ShoSESDHynL4w==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 33D89380AA7F;
-	Tue,  4 Mar 2025 14:50:34 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1740996943; c=relaxed/simple;
+	bh=eg16nEOWpbtYg7w3qAHk9L3ekwHdkL5U1EQOqfl89Q8=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=qZlPF4aYxZ5NdbRkGt6IN7DHgLE1728e4cw7BI1EyvtNaso1rC3i/TWRc7SuA8CcegMOx2bx6nGJ5e8e4DiTjFBLRADJPKiweRH/r82LIBLUOpEMQmd0Llms/ewqNaanJsinU2+Ovli34Ri/QgEwca2kaYDLHJtu7GfwkGAcDP4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.2.10.34])
+	by gateway (Coremail) with SMTP id _____8Ax3eJMgcVnOROJAA--.64036S3;
+	Mon, 03 Mar 2025 18:15:40 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.2.10.34])
+	by front1 (Coremail) with SMTP id qMiowMCxLcVIgcVn0pYzAA--.57593S3;
+	Mon, 03 Mar 2025 18:15:38 +0800 (CST)
+From: Tianyang Zhang <zhangtianyang@loongson.cn>
+To: chenhuacai@kernel.org,
+	kernel@xen0n.name,
+	corbet@lwn.net,
+	alexs@kernel.org,
+	si.yanteng@linux.dev,
+	tglx@linutronix.de,
+	jiaxun.yang@flygoat.com,
+	peterz@infradead.org,
+	wangliupu@loongson.cn,
+	lvjianmin@loongson.cn,
+	maobibo@loongson.cn,
+	siyanteng@cqsoftware.com.cn,
+	gaosong@loongson.cn,
+	yangtiezhu@loongson.cn
+Cc: loongarch@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Tianyang Zhang <zhangtianyang@loongson.cn>
+Subject: [PATCH 1/2] Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+Date: Mon,  3 Mar 2025 18:15:32 +0800
+Message-Id: <20250303101533.31462-2-zhangtianyang@loongson.cn>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20250303101533.31462-1-zhangtianyang@loongson.cn>
+References: <20250303101533.31462-1-zhangtianyang@loongson.cn>
+Precedence: bulk
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next v2 0/8] netconsole: Add taskname sysdata support
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <174109983302.170664.16431215519500952572.git-patchwork-notify@kernel.org>
-Date: Tue, 04 Mar 2025 14:50:33 +0000
-References: <20250228-netcons_current-v2-0-f53ff79a0db2@debian.org>
-In-Reply-To: <20250228-netcons_current-v2-0-f53ff79a0db2@debian.org>
-To: Breno Leitao <leitao@debian.org>
-Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
- kuba@kernel.org, pabeni@redhat.com, horms@kernel.org, corbet@lwn.net,
- shuah@kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
- kernel-team@meta.com
+Content-Type: text/plain; charset=yes
+X-CM-TRANSID:qMiowMCxLcVIgcVn0pYzAA--.57593S3
+X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7
+	ZEXasCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29K
+	BjDU0xBIdaVrnRJUUUBlb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26c
+	xKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vE
+	j48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxV
+	AFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x02
+	67AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487M2AExVAIFx02aVAFz4v204v7Mc
+	804VCY07AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY
+	67AKxVWUtVWrXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y4
+	8IcxkI7VAKI48JM4kE6I8I3I0E14AKx2xKxVC2ax8xMxAIw28IcxkI7VAKI48JMxC20s02
+	6xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI0_Jr0_Jr
+	4lx2IqxVCjr7xvwVAFwI0_Jr0_Jr4lx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxG
+	rwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJw
+	CI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2
+	z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8l38UUUUUU==
+Content-Transfer-Encoding: quoted-printable
+X-ITU-Libra-ESVA-Information: Please contact Istanbul Teknik Universitesi for more information
+X-ITU-Libra-ESVA-ID: 4Z6gLh5tt4zG1My
+X-ITU-Libra-ESVA: No virus found
+X-ITU-Libra-ESVA-From: root@cc.itu.edu.tr
+X-ITU-Libra-ESVA-Watermark: 1741708733.10188@hXxv3eMuM5lSbzvKwyoPJA
+X-ITU-MailScanner-SpamCheck: not spam
 
-Hello:
+Introduce the Redirect interrupt controllers.When the redirected interrup=
+t
+controller is enabled, the routing target of MSI interrupts is no longer =
+a
+specific CPU and vector number, but a specific redirected entry. The actu=
+al
+CPU and vector number used are described by the redirected entry.
 
-This series was applied to netdev/net-next.git (main)
-by Paolo Abeni <pabeni@redhat.com>:
+Signed-off-by: Tianyang Zhang <zhangtianyang@loongson.cn>
+---
+ .../arch/loongarch/irq-chip-model.rst         | 38 +++++++++++++++++++
+ .../zh_CN/arch/loongarch/irq-chip-model.rst   | 37 ++++++++++++++++++
+ 2 files changed, 75 insertions(+)
 
-On Fri, 28 Feb 2025 04:50:16 -0800 you wrote:
-> This patchset introduces a new feature to the netconsole extradata
-> subsystem that enables the inclusion of the current task's name in the
-> sysdata output of netconsole messages.
-> 
-> This enhancement is particularly valuable for large-scale deployments,
-> such as Meta's, where netconsole collects messages from millions of
-> servers and stores them in a data warehouse for analysis. Engineers
-> often rely on these messages to investigate issues and assess kernel
-> health.
-> 
-> [...]
-
-Here is the summary with links:
-  - [net-next,v2,1/8] netconsole: prefix CPU_NR sysdata feature with SYSDATA_
-    https://git.kernel.org/netdev/net-next/c/8a683295c226
-  - [net-next,v2,2/8] netconsole: Make boolean comparison consistent
-    https://git.kernel.org/netdev/net-next/c/efb878fbe8d1
-  - [net-next,v2,3/8] netconsole: refactor CPU number formatting into separate function
-    https://git.kernel.org/netdev/net-next/c/4d989521a93b
-  - [net-next,v2,4/8] netconsole: add taskname to extradata entry count
-    https://git.kernel.org/netdev/net-next/c/33e4b29f2b3b
-  - [net-next,v2,5/8] netconsole: add configfs controls for taskname sysdata feature
-    https://git.kernel.org/netdev/net-next/c/09e877590bc2
-  - [net-next,v2,6/8] netconsole: add task name to extra data fields
-    https://git.kernel.org/netdev/net-next/c/dd30ae533242
-  - [net-next,v2,7/8] netconsole: docs: document the task name feature
-    https://git.kernel.org/netdev/net-next/c/7010b619830f
-  - [net-next,v2,8/8] netconsole: selftest: add task name append testing
-    https://git.kernel.org/netdev/net-next/c/d7a2522426e8
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+diff --git a/Documentation/arch/loongarch/irq-chip-model.rst b/Documentat=
+ion/arch/loongarch/irq-chip-model.rst
+index a7ecce11e445..45cba22ff181 100644
+--- a/Documentation/arch/loongarch/irq-chip-model.rst
++++ b/Documentation/arch/loongarch/irq-chip-model.rst
+@@ -181,6 +181,44 @@ go to PCH-PIC/PCH-LPC and gathered by EIOINTC, and t=
+hen go to CPUINTC directly::
+              | Devices |
+              +---------+
+=20
++Advanced Extended-Redirect IRQ model
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++
++In this model, IPI (Inter-Processor Interrupt) and CPU Local Timer inter=
+rupt go
++to CPUINTC directly, CPU UARTS interrupts go to LIOINTC, PCH-MSI interru=
+pts go
++to REDIRECT for remapping it to AVEC, and then go to CPUINTC directly, w=
+hile all
++other devices interrupts go to PCH-PIC/PCH-LPC and gathered by EIOINTC, =
+and then
++go to CPUINTC directly::
++
++ +-----+     +-----------------------+     +-------+
++ | IPI | --> |        CPUINTC        | <-- | Timer |
++ +-----+     +-----------------------+     +-------+
++              ^          ^          ^
++              |          |          |
++       +---------+ +----------+ +---------+     +-------+
++       | EIOINTC | | AVECINTC | | LIOINTC | <-- | UARTs |
++       +---------+ +----------+ +---------+     +-------+
++            ^            ^
++            |            |
++            |      +----------+
++            |      | REDIRECT |
++            |      +----------+
++            |            ^
++            |            |
++       +---------+  +---------+
++       | PCH-PIC |  | PCH-MSI |
++       +---------+  +---------+
++         ^     ^           ^
++         |     |           |
++ +---------+ +---------+ +---------+
++ | Devices | | PCH-LPC | | Devices |
++ +---------+ +---------+ +---------+
++                  ^
++                  |
++             +---------+
++             | Devices |
++             +---------+
++
+ ACPI-related definitions
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=20
+diff --git a/Documentation/translations/zh_CN/arch/loongarch/irq-chip-mod=
+el.rst b/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.r=
+st
+index d4ff80de47b6..d935da47ce3b 100644
+--- a/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst
++++ b/Documentation/translations/zh_CN/arch/loongarch/irq-chip-model.rst
+@@ -174,6 +174,43 @@ CPU=E4=B8=B2=E5=8F=A3=EF=BC=88UARTs=EF=BC=89=E4=B8=AD=
+=E6=96=AD=E5=8F=91=E9=80=81=E5=88=B0LIOINTC=EF=BC=8CPCH-MSI=E4=B8=AD=E6=96=
+=AD=E5=8F=91=E9=80=81=E5=88=B0AVECINTC=EF=BC=8C
+              | Devices |
+              +---------+
+=20
++=E9=AB=98=E7=BA=A7=E6=89=A9=E5=B1=95-=E9=87=8D=E5=AE=9A=E5=90=91IRQ=E6=A8=
+=A1=E5=9E=8B
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++
++=E5=9C=A8=E8=BF=99=E7=A7=8D=E6=A8=A1=E5=9E=8B=E9=87=8C=E9=9D=A2=EF=BC=8C=
+IPI=EF=BC=88Inter-Processor Interrupt=EF=BC=89=E5=92=8CCPU=E6=9C=AC=E5=9C=
+=B0=E6=97=B6=E9=92=9F=E4=B8=AD=E6=96=AD=E7=9B=B4=E6=8E=A5=E5=8F=91=E9=80=81=
+=E5=88=B0CPUINTC=EF=BC=8C
++CPU=E4=B8=B2=E5=8F=A3=EF=BC=88UARTs=EF=BC=89=E4=B8=AD=E6=96=AD=E5=8F=91=E9=
+=80=81=E5=88=B0LIOINTC=EF=BC=8CPCH-MSI=E4=B8=AD=E6=96=AD=E9=A6=96=E5=85=88=
+=E5=8F=91=E9=80=81=E5=88=B0REDIRECT=E6=A8=A1=E5=9D=97,=E5=AE=8C=E6=88=90=E9=
+=87=8D=E5=AE=9A=E5=90=91=E5=90=8E=E5=8F=91
++=E9=80=81=E5=88=B0AVECINTC=EF=BC=8C=E8=80=8C=E5=90=8E=E9=80=9A=E8=BF=87A=
+VECINTC=E7=9B=B4=E6=8E=A5=E9=80=81=E8=BE=BECPUINTC=EF=BC=8C=E8=80=8C=E5=85=
+=B6=E4=BB=96=E6=89=80=E6=9C=89=E8=AE=BE=E5=A4=87=E7=9A=84=E4=B8=AD=E6=96=AD=
+=E5=88=99=E5=88=86=E5=88=AB=E5=8F=91=E9=80=81=E5=88=B0=E6=89=80=E8=BF=9E
++=E6=8E=A5=E7=9A=84PCH-PIC/PCH-LPC=EF=BC=8C=E7=84=B6=E5=90=8E=E7=94=B1EIO=
+INTC=E7=BB=9F=E4=B8=80=E6=94=B6=E9=9B=86=EF=BC=8C=E5=86=8D=E7=9B=B4=E6=8E=
+=A5=E5=88=B0=E8=BE=BECPUINTC::
++
++ +-----+     +-----------------------+     +-------+
++ | IPI | --> |        CPUINTC        | <-- | Timer |
++ +-----+     +-----------------------+     +-------+
++              ^          ^          ^
++              |          |          |
++       +---------+ +----------+ +---------+     +-------+
++       | EIOINTC | | AVECINTC | | LIOINTC | <-- | UARTs |
++       +---------+ +----------+ +---------+     +-------+
++            ^            ^
++            |            |
++            |      +----------+
++            |      | REDIRECT |
++            |      +----------+
++            |            ^
++            |            |
++       +---------+  +---------+
++       | PCH-PIC |  | PCH-MSI |
++       +---------+  +---------+
++         ^     ^           ^
++         |     |           |
++ +---------+ +---------+ +---------+
++ | Devices | | PCH-LPC | | Devices |
++ +---------+ +---------+ +---------+
++                  ^
++                  |
++             +---------+
++             | Devices |
++             +---------+
++
+ ACPI=E7=9B=B8=E5=85=B3=E7=9A=84=E5=AE=9A=E4=B9=89
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=20
+--=20
+2.43.0
 
 
 
