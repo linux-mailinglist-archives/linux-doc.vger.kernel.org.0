@@ -1,214 +1,88 @@
-Return-Path: <linux-doc+bounces-39921-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39925-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B746A4E23F
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 16:05:27 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B01CFA4E2CF
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 16:19:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 55463883C12
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 14:46:26 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2599017CF8F
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Mar 2025 15:13:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A7EFD263C93;
-	Tue,  4 Mar 2025 14:45:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 69A91281343;
+	Tue,  4 Mar 2025 15:06:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rdj8m4rS"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KIf/B5bq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB17276057
-	for <linux-doc@vger.kernel.org>; Tue,  4 Mar 2025 14:45:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3810527C14D;
+	Tue,  4 Mar 2025 15:06:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741099527; cv=none; b=Tg2zqYWkaZVd9Fr+1XiHkOhQE8e0jJZko17wxVEWhm5mqF7B5rKkZ/BIjwaTri8QYIIXKn3B+2S6AQEeoUP4gRf44CKpyEAZpz7E7IXBXAsHVgeUmRPTKBwPNf7ZUlQk7n6TwLh5ami+3y9a85e9R/NYvQuK5XQuq4olPIIAMpU=
+	t=1741100778; cv=none; b=oaEPq3V4WiS9mS2Yf6r6x9LbnDHQwfaZY0jrZIzoliWItXtB82fzIpCNaFwOwWBz80PC9TCOZAeVkYkENdf8ShVXzyBxlPwRPfu5/0ThHyI2+zMECQumTROgADDR6G0DbFT1jlo8LEt80x3pRfPI8J7IpPcucoPPqjvDxGdhpec=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741099527; c=relaxed/simple;
-	bh=jKdpkROggTpGv8i7lEqCeoDnoMhE9yvTEkBnneKoX/o=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=PHB0YKCmNT8lejiLUuvbJ2FE36BhDBogg3+v7g7quW6iCcRzv3Kkh7qrLpAdCzhQAkj2P+xBbeiSSSlp7LjPTwKnrNbu3Dl8YCLluThnmU79YVNFu9lfrrmFJiJuGWeo46zUSnPnzrw7mMH3SOvlKwvcczQ24zLyqm0egGQJszM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=rdj8m4rS; arc=none smtp.client-ip=209.85.208.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-30795988ebeso61764331fa.3
-        for <linux-doc@vger.kernel.org>; Tue, 04 Mar 2025 06:45:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741099522; x=1741704322; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=TETrHFzeOASenqMV9S9QwkBZdWbDaJ44vy3Vca6/dVU=;
-        b=rdj8m4rSLSJKTDoGbzAdjQsZ3OS+JQmMqW3laXfGaj2lRh17o2j0JK/1P/RPvSYPj+
-         54VONGuvrWWINZs68Wh3cW4v2/kcYyiW4XxRny9pL3T+ngO/SYK1dTrWE+hRmd8TCW2a
-         Usuwt4U+GghZqCUoRxcNb2iqwq6dTMZP3cc7Tx/ymm5ctquH467NBFazrR9E74AjNTOD
-         dowkJOSNFAR9OOThiCmAmNF5Jdjht0qtuCx9VsrH9n5HpOc1LAxgB4p8IG4yXRRBIHq9
-         MnKm8oC6X1HK5HFIKWVQ9HihrVHHmYoVjN4AohwahRuqkSeaJKWLl4UZdlr/Vk+Nw20t
-         +Hgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741099522; x=1741704322;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=TETrHFzeOASenqMV9S9QwkBZdWbDaJ44vy3Vca6/dVU=;
-        b=qNt7etc7qDfEToEYCTUFZHOXGKpQu1GD4CuJseLj68JNVXHjM5+f8HdU/sB7CyKbCq
-         VZ9qLf/VmvO/5St6WnZM7peKcAu1xOLJqIRYbUciAGcHyiTe9ZxibH8DoMbWKOJ550co
-         Syn5AlJ56QH7B4H9TnyoerTLbg/mRoHDGVuKLRh2Abf+upSWQxp1Y14fv3R7VTf+g5R8
-         Fm1NbO1RRGUkSo+ECoV3/qEQcznBatFX1MruDqaFO3hpn/pxYR/I7iNa28gIMPwKJUqu
-         lKexJdndaxlEQbw4zHe7FPPOaWPtyT6wsNVceF8yB2ZEMGj2G03/H7tOJ4OM/NdAifiO
-         r8FA==
-X-Forwarded-Encrypted: i=1; AJvYcCUR8/Ulqh8d7oBL8NU1cLNnXOtisIvHA0gZRufIu6eqFaD0YJCy1824dlPJGQUqZpW7WV4YPFIsaMY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyosMxVvCwtrgDlbRtc/MUFJoJQkCSVZEr9bnQfKG4zgkPpl+NZ
-	e2R7JwBSHQbGoiCN7yII1R9FRNrDIkZkL5BRrvPLgcLoiZ+Ty6QfWEm1EdNkkLJFfpuiX4EphrE
-	ico7ZHk65MlY1+itBsJl75QaE5jIwHO2mFkBW4Rp1EnrXl8AFX3nEMEj3
-X-Gm-Gg: ASbGncsqi5/KSgDVtz/7Up5DYHmYY9B5vCcHzPT5cGlvaZrb3CyQpStQwTyEm1Z8ksw
-	cGUbJuPfDFRxFki7geg23FH3kQXUkU/79VA5I6ebj/vBPz7YDVVVDI/e2/Edm9H2ijtiRgIh0DU
-	+zAag3rUSJY2nxQqkpswe+7bAEtw==
-X-Google-Smtp-Source: AGHT+IETKuyPMVM5CdYgZm14hIMgbe8X/D5820Fs21Iu8QTNB9GUGUO3MUy3gVkpuL3W82B4uH6iGXTKzY4qdWaX2WU=
-X-Received: by 2002:a2e:91c3:0:b0:30b:9813:b00c with SMTP id
- 38308e7fff4ca-30b9813b714mr64990571fa.27.1741099521825; Tue, 04 Mar 2025
- 06:45:21 -0800 (PST)
+	s=arc-20240116; t=1741100778; c=relaxed/simple;
+	bh=YWffusgVy4JqzxHkhg7lyaWZ2TNntH893fnALgxGyJ4=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=KodUbKoPU9unfiaWiWbJ/wbsIY0W0qEOR6DulDVtr5kv31fYIJlF1wgcaOBE934vwxOMG9uxIgN5tvukxlD8L+GiAU7luqDGkCvceMDT8qFQNTZGDd/Rx9UFCyPqJQ4JPGSMK9C6F4WCeOstvtpi/iTaf/bguS18/AXXweqhnEc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KIf/B5bq; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1BD1C4CEE5;
+	Tue,  4 Mar 2025 15:06:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1741100777;
+	bh=YWffusgVy4JqzxHkhg7lyaWZ2TNntH893fnALgxGyJ4=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=KIf/B5bqXGbEHqQolNccXFTt6pJjSB/gwtS5LxrvptvqG6pmtjXol5/MPW77gC9b/
+	 E3n1Cerw6RfVugcoEk8VzAeZGG6uyxRiW7BnGJ+JYmFF9z6VQ7ACllOAO9sIZNclcv
+	 piZW4txwZ5vSk0hRFszQ0Hl8WrcVDC94gmQ2AoEF3s/N43LsN8P+A8lbR792R7SM4n
+	 /BdgBhCVchwZHgGX9yWmxXO15mnUW/3zKgDwYKw/6NJpBjhqRrWpSqQ8WVTc77KF3d
+	 MnCzWWR6gPLG2rMKE7oj4rv1xMe4KePHK5gRZ5hXWmCM8URI2jQTCd70cfxLgtl/p1
+	 NWapbl3Ad5qrw==
+Date: Tue, 4 Mar 2025 15:06:06 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, Michael Hennerich
+ <michael.hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>,
+ Lars-Peter Clausen <lars@metafoo.de>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 0/3] ad7380: add adaq4381-4 support
+Message-ID: <20250304150606.5125bbea@jic23-huawei>
+In-Reply-To: <5ad1f95b-ef0b-4e65-9e31-a8166a8e90cd@baylibre.com>
+References: <20250226-ad7380-add-adaq4381-4-support-v1-0-f350ab872d37@baylibre.com>
+	<5ad1f95b-ef0b-4e65-9e31-a8166a8e90cd@baylibre.com>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.48; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250304-wip-bl-spi-offload-ad7380-v2-0-0fef61f2650a@baylibre.com>
- <20250304-wip-bl-spi-offload-ad7380-v2-2-0fef61f2650a@baylibre.com>
-In-Reply-To: <20250304-wip-bl-spi-offload-ad7380-v2-2-0fef61f2650a@baylibre.com>
-From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 4 Mar 2025 15:45:10 +0100
-X-Gm-Features: AQ5f1JpGYBLGOoxbrmddIe3_7MKUmgER6V4l4XNFfg4pNtoeYf3XgHXjFSF6e-E
-Message-ID: <CAMknhBFfjo_bWZ7=9LD10y02WTVanCYhQpMNk834k8P3iQ_uFw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] docs: iio: ad7380: add SPI offload support
-To: Angelo Dureghello <adureghello@baylibre.com>
-Cc: Jonathan Cameron <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, 
-	Michael Hennerich <Michael.Hennerich@analog.com>, =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
-	Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 4, 2025 at 10:39=E2=80=AFAM Angelo Dureghello
-<adureghello@baylibre.com> wrote:
->
-> Document SPI offload support for the ad7380 driver.
->
-> Signed-off-by: Angelo Dureghello <adureghello@baylibre.com>
-> ---
->  Documentation/iio/ad7380.rst | 54 +++++++++++++++++++++++++++++++++++---=
-------
->  1 file changed, 43 insertions(+), 11 deletions(-)
->
-> diff --git a/Documentation/iio/ad7380.rst b/Documentation/iio/ad7380.rst
-> index cff688bcc2d9601a9faf42d5e9c217486639ca66..e593ab6037b0da4cebfad1483=
-13f21cca7f00fd4 100644
-> --- a/Documentation/iio/ad7380.rst
-> +++ b/Documentation/iio/ad7380.rst
-> @@ -142,21 +142,21 @@ Example for AD7386/7/8 (2 channels parts):
->  .. code-block::
->
->            IIO   | AD7386/7/8
-> -                |         +----------------------------
-> -                |         |     _____        ______
-> -                |         |    |     |      |      |
-> +                |         +----------------------------
-> +                |         |     _____        ______
-> +                |         |    |     |      |      |
->         voltage0 | AinA0 --|--->|     |      |      |
-> -                |         |    | mux |----->| ADCA |---
-> +                |         |    | mux |----->| ADCA |---
->         voltage2 | AinA1 --|--->|     |      |      |
-> -                |         |    |_____|      |_____ |
-> -                |         |     _____        ______
-> -                |         |    |     |      |      |
-> +                |         |    |_____|      |_____ |
-> +                |         |     _____        ______
-> +                |         |    |     |      |      |
->         voltage1 | AinB0 --|--->|     |      |      |
-> -                |         |    | mux |----->| ADCB |---
-> +                |         |    | mux |----->| ADCB |---
->         voltage3 | AinB1 --|--->|     |      |      |
-> -                |         |    |_____|      |______|
-> -                |         |
-> -                |         +----------------------------
-> +                |         |    |_____|      |______|
-> +                |         |
-> +                |         +----------------------------
->
+On Wed, 26 Feb 2025 10:14:40 -0600
+David Lechner <dlechner@baylibre.com> wrote:
 
-It looks like this is just cleaning up whitespace, so should be in a
-separate patch.
+> On 2/26/25 8:50 AM, Julien Stephan wrote:
+> > ADAQ4381-4 is the 14 bits version of the ADAQ4380-4. It is compatible
+> > with the ad7380 driver, so add its support and documentation, in driver,
+> > doc, and bindings.
+> > 
+> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> > ---  
+> Reviewed-by: David Lechner <dlechner@baylibre.com>
+> 
+> 
 
->
->  When enabling sequencer mode, the effective sampling rate is divided by =
-two.
-> @@ -169,6 +169,38 @@ gain is selectable from device tree using the ``adi,=
-gain-milli`` property.
->  Refer to the typical connection diagrams section of the datasheet for pi=
-n
->  wiring.
->
-> +
-> +SPI offload support
-> +-------------------
-> +
-> +To be able to achieve the maximum sample rate, the driver can be used wi=
-th the
-> +`AXI SPI Engine`_ to provide SPI offload support.
-> +
-> +.. _AXI SPI Engine: http://analogdevicesinc.github.io/hdl/projects/ad738=
-x_fmc/index.html
-> +
-> +When SPI offload is being used, some attributes will be different.
-> +
-> +* ``in_voltage-voltage_sampling_frequency`` attribute is added for setti=
-ng the
-> +  sample rate.
-> +* ``in_voltage-voltage_sampling_frequency_available`` attribute is added=
- for
-> +  querying the max sample rate.
-> +* ``timestamp`` channel is removed.
-> +* Buffer data format may be different compared to when offload is not us=
-ed,
-> +  e.g. the ``buffer0/in_voltage0-voltage1_type`` and the
-> +  ``buffer0/in_voltage2-voltage3_type`` attributes.
-> +
-> +.. seealso:: `SPI offload support`_
+Applied,
 
-This is referring to the same section, so doesn't make sense here.
+Thanks,
 
-> +
-> +Effective sample rate for buffered reads
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +Using SPI offload, the PWM generator drives the starting of the conversi=
-on by
-> +executing the pre-recorded SPI transfer at each PWM cycle, asserting CS =
-and
-> +reading the previous available sample values for all channels.
-> +Default sample rate is set to a quite low frequency, to allow oversampli=
-ng x32,
-> +user is then reponsible to adjust ``in_voltage-voltage_sampling_frequenc=
-y`` for
-
-s/reponsible/responsible/
-
-> +the specific case.
-
-Another important thing to mention here is that for single-ended chips
-where we have 2 banks of simultaneous inputs, if at least one channel
-from each bank is enabled in a buffered read, the effective sample
-rate will be 1/2 of what ``in_voltage-voltage_sampling_frequency``
-says because a separate conversion needs to be done for each bank.
-
-> +
->  Unimplemented features
->  ----------------------
->
->
-> --
-> 2.48.1
->
+Jonathan
 
