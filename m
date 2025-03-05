@@ -1,159 +1,139 @@
-Return-Path: <linux-doc+bounces-39993-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39995-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3304AA4F5F7
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 05:13:16 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDEF1A4F6DA
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 07:10:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6964B3A912D
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 04:13:04 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0513D188F4CA
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 06:10:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 711BF1A3179;
-	Wed,  5 Mar 2025 04:13:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 695CE170A13;
+	Wed,  5 Mar 2025 06:10:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="COvuuk+S"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="vq2+OKd3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 429921A23AF;
-	Wed,  5 Mar 2025 04:13:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 417F443AB7
+	for <linux-doc@vger.kernel.org>; Wed,  5 Mar 2025 06:10:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741147989; cv=none; b=g2kIwV+Q5pyHqJl+0bB8WdcCKF8/YqmC07oxTv7UsyTW0g1xEX3/FlvCgu/aM6fkLUHfAwnhnR+bVd5ZwcECMifFC4IxXX5ctmk1HiLlkS1pyez3V5TQGYaCTKVbUVjIUE5HJuJZGlzQesARWHTCV+/QNN/u59X2bHl3mtzpFZY=
+	t=1741155020; cv=none; b=YTDNzaqq81rYJ8mvsQ5nTkvRi3BJCEJOFjnLO6qm+ekMCLGwnTutbVDjP01fdu2TCzoeLaGxmieaO2/w4jAXGgnsdCOjmV0kaRVMRsV0EFKnGJk/eDoSATRbZk2vOYKHPvw4g9hirwugyVbx8ObPHUEyM9opP5Xc1TNe3wXc7xo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741147989; c=relaxed/simple;
-	bh=RBsh/xDj4vd4BAKgWWaorA7r/mUYNpFPasyRXkkSQEg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=WiLyGbHa49sOqM6SjM6KTglClI3u6mChQzKdbrZbbYCs90O3nDmtWGBypkN5U5IISAQbsXYFlxkV74Fo+fshvU5ELMk/8G7mf8WRPzcoEoGO/JmDew4utj2BUTe35IFQddRTAzXghhOnmXbYmBtyw4lRWWOgjBMzbgaMyKO9N8U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=COvuuk+S; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C129FC4CEEB;
-	Wed,  5 Mar 2025 04:13:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741147988;
-	bh=RBsh/xDj4vd4BAKgWWaorA7r/mUYNpFPasyRXkkSQEg=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=COvuuk+ShgIppQ6Ihy1TUO9D39jQ3ibKNx+bE9FsBoqL980OPhD1D1WTp3pmi4+OZ
-	 3FuFgn7nTTPBiboTaxvRR23TZN5tCxba+H5EGb+CtdO3SiiA5adNfoFFnFX2Xf1EyR
-	 JNaLAXP18n3FYPxNj+ozt3hXUKvvPMplWITGYT6qTsQnYu86C0uc+VL2BmReakb4RM
-	 F52IkM3dJcpyl354lM5nf/I3muacTjwaXRFJkpt8eLmcOWYAik7cbvdsz7i++6lWPg
-	 fn2uId5LhUaMmXQPZjJ1YVcCKdPj2/XufF7Gk5VVdIpFegZC0JQC24XHzdJC882hh6
-	 wDXEY0Y+RdvFA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ADC62C282DE;
-	Wed,  5 Mar 2025 04:13:08 +0000 (UTC)
-From: Shashank Balaji via B4 Relay <devnull+shashank.mahadasyam.sony.com@kernel.org>
-Date: Wed, 05 Mar 2025 13:12:44 +0900
-Subject: [PATCH 2/2] cgroup, docs: Document interaction of RT processes
- with cpu controller
+	s=arc-20240116; t=1741155020; c=relaxed/simple;
+	bh=dmZEea7/RuTawv9dIKGzWyXN7Ba/Gie6J0vZSo205Zw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HARZIhh9y4r4D2VRIX/XvIIhmu5XrLEct/5zAXzEUS++VcX/UUqCymrdBiDN+JcekN3rcBjnpny7/qnyy7XjMDQ2KNLAbxnrvNBiUFk0tepQNSt4LA9Ciceh5YINJypmIs67KymY4Q3kyeRA4SOjbY+vovvZDwWxBfrYC6kSjqQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=vq2+OKd3; arc=none smtp.client-ip=80.237.130.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:
+	Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
+	References; bh=iX9jGhzM9UjVAbac6XScz8JyCTs/Vmg8oTC0i4bcrwQ=; t=1741155018;
+	x=1741587018; b=vq2+OKd3KJYm2/0bVpa7F9SpczyHsdFCS6vzheA8lhDjcIOUtPxjX6M/GYoMi
+	ihvHEgAnpkbktxBxj/cS0pMKuqd/Zru/xQR3qns6PoJtEoP89yj1SV7X6Kq+0aqOoskbFa7ol4gML
+	BoHBorDGHuMMc7IPVrr4MJzXdW4QM9MZMq4cnfN5mfeil1jGQCf0hisA7gPGh9eoHO2LBD988cqsp
+	Envsr1tKN5y8jZ9JoL6wK2C6/R210avdxzKQoVJm8br4EOAndmr/InllKgJeqLwmI8DmAkZJ3f+CR
+	E7CqLC+CFUGwO1KQndpoGi2q4LaLht8BMEqqSTtRLq/G1PRzJQ==;
+Received: from [2a02:8108:8984:1d00:a0cf:1912:4be:477f]; authenticated
+	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128)
+	id 1tphx8-0098m0-39;
+	Wed, 05 Mar 2025 07:09:59 +0100
+Message-ID: <79fb429f-56f7-4b7d-a386-f80d3b2393ef@leemhuis.info>
+Date: Wed, 5 Mar 2025 07:09:58 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Grammar issue(s) in documentation
+To: Joshua Rose <joshuarose@gmx.com>
+Cc: linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+ Matthew Wilcox <willy@infradead.org>
+References: <Z8Y-FHZ5tYBEMy4j@spinny> <Z8ZdEioHt184CYNm@casper.infradead.org>
+ <Z8efbax_VgGBzQrl@spinny>
+From: Thorsten Leemhuis <linux@leemhuis.info>
+Content-Language: de-DE, en-US
+Autocrypt: addr=linux@leemhuis.info; keydata=
+ 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 n7RI
+In-Reply-To: <Z8efbax_VgGBzQrl@spinny>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250305-rt-and-cpu-controller-doc-v1-2-7b6a6f5ff43d@sony.com>
-References: <20250305-rt-and-cpu-controller-doc-v1-0-7b6a6f5ff43d@sony.com>
-In-Reply-To: <20250305-rt-and-cpu-controller-doc-v1-0-7b6a6f5ff43d@sony.com>
-To: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, 
- =?utf-8?q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: Waiman Long <longman@redhat.com>, cgroups@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Shinya Takumi <shinya.takumi@sony.com>, 
- Shashank Balaji <shashank.mahadasyam@sony.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3070;
- i=shashank.mahadasyam@sony.com; h=from:subject:message-id;
- bh=C7JgnbF46KXkV/sLIdJxl+OtmX2NjXxlaJ2fLtetvIs=;
- b=owGbwMvMwCV2mPH4Ij++H1mMp9WSGNKPnw9e//2RmAhj3o5Du+SOLT0Xfi9vQYeCx84HZxYwC
- vzvemXwu6OUhUGMi0FWTJHlncy6CwetLJu+Hmf4BjOHlQlkCAMXpwBMxG8VI0NzIlvCn5hrrx4x
- iPRL7MhbL7J4AZ+BcWTx1e7fikX8J2Yz/A9+WhAhdXtX9QvT+uPMHMKiUusO/G6y/eXmc2Ptv5X
- Xv7EDAA==
-X-Developer-Key: i=shashank.mahadasyam@sony.com; a=openpgp;
- fpr=EE1CAED0C13A3982F5C700F6C301C7A24E0EF86A
-X-Endpoint-Received: by B4 Relay for shashank.mahadasyam@sony.com/default
- with auth_id=354
-X-Original-From: Shashank Balaji <shashank.mahadasyam@sony.com>
-Reply-To: shashank.mahadasyam@sony.com
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1741155018;0f902d4d;
+X-HE-SMSGID: 1tphx8-0098m0-39
 
-From: Shashank Balaji <shashank.mahadasyam@sony.com>
+On 05.03.25 01:48, Joshua Rose wrote:
+> On Tue, Mar 04, 2025 at 01:53:22AM +0000, Matthew Wilcox wrote:
+>> On Tue, Mar 04, 2025 at 10:41:08AM +1100, Joshua Rose wrote:
+> 
+>>> "Do not attempt to circumvent your distribution's packaging system by
+>>> installing your kernel manually; this will likely break your machine.
+>>> Components of your kernel can be selectively removed later on.  Such
+>>> components (files) are stored in two locations, both identifiable
+>>> by the kernel's release name."
+>>
+>> I think that's the opposite of what they meant.  I understand it as:
+>>
+>> "Feel free to circumvent your distribution's package manager as it's
+>> easy to remove the kernel afterwards".
 
-If the cpu controller is enabled in a CONFIG_RT_GROUP_SCHED
-disabled setting, cpu.stat and cpu.pressure account for realtime
-processes, and cpu.uclamp.{min, max} affect realtime processes as well.
-None of the other interface files are affected by or affect realtime
-processes.
++1
 
-Signed-off-by: Shashank Balaji <shashank.mahadasyam@sony.com>
----
- Documentation/admin-guide/cgroup-v2.rst | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+> Oh I see. Okay, well can it just be re-phrased as that then? It seems
+> much simpler.
 
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index f293a13b42ed69e7c6bf5e974cb86e228411af4e..2c267f42e5fef9c4e2c3530ce73330d680b9b2dc 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -1095,7 +1095,9 @@ realtime processes irrespective of CONFIG_RT_GROUP_SCHED.
- CPU Interface Files
- ~~~~~~~~~~~~~~~~~~~
- 
--All time durations are in microseconds.
-+All time durations are in microseconds. Only cpu.stat and cpu.pressure account
-+for realtime processes, and only cpu.uclamp.min and cpu.uclamp.max
-+affect realtime processes.
- 
-   cpu.stat
- 	A read-only flat-keyed file.
-@@ -1115,6 +1117,9 @@ All time durations are in microseconds.
- 	- nr_bursts
- 	- burst_usec
- 
-+    The runtime of realtime processes is accounted for only by the usage_usec,
-+	user_usec, and system_usec fields.
-+
-   cpu.weight
- 	A read-write single value file which exists on non-root
- 	cgroups.  The default is "100".
-@@ -1158,8 +1163,9 @@ All time durations are in microseconds.
-   cpu.pressure
- 	A read-write nested-keyed file.
- 
--	Shows pressure stall information for CPU. See
--	:ref:`Documentation/accounting/psi.rst <psi>` for details.
-+	Shows pressure stall information for CPU, including the contribution of
-+	realtime processes. See :ref:`Documentation/accounting/psi.rst <psi>`
-+	for details.
- 
-   cpu.uclamp.min
-         A read-write single value file which exists on non-root cgroups.
-@@ -1170,7 +1176,8 @@ All time durations are in microseconds.
- 
-         This interface allows reading and setting minimum utilization clamp
-         values similar to the sched_setattr(2). This minimum utilization
--        value is used to clamp the task specific minimum utilization clamp.
-+        value is used to clamp the task specific minimum utilization clamp,
-+        including those of realtime processes.
- 
-         The requested minimum utilization (protection) is always capped by
-         the current value for the maximum utilization (limit), i.e.
-@@ -1185,7 +1192,8 @@ All time durations are in microseconds.
- 
-         This interface allows reading and setting maximum utilization clamp
-         values similar to the sched_setattr(2). This maximum utilization
--        value is used to clamp the task specific maximum utilization clamp.
-+        value is used to clamp the task specific maximum utilization clamp,
-+        including those of realtime processes.
- 
-   cpu.idle
- 	A read-write single value file which exists on non-root cgroups.
-
--- 
-2.43.0
-
-
+Feel free to submit a patch yourself to adjust that, as yes, that
+accidentally became a too long and confusing sentence white I wrote or
+edited that text. But also feel free to leave sending a patch to me,
+just give me a few days to handle that please. Ciao, Thorsten
 
