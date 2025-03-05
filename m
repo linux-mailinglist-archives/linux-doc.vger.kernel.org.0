@@ -1,274 +1,118 @@
-Return-Path: <linux-doc+bounces-39991-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-39992-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32482A4F54D
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 04:20:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1F6DA4F5F6
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 05:13:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 78EE53A53F0
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 03:20:46 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2CB8A3A9E7C
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Mar 2025 04:13:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22BCF13D26B;
-	Wed,  5 Mar 2025 03:20:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6EA341A304A;
+	Wed,  5 Mar 2025 04:13:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=squebb.ca header.i=@squebb.ca header.b="JUEUqnJJ";
-	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="E1iYtkh4"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="u4Sk5z5T"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fout-b6-smtp.messagingengine.com (fout-b6-smtp.messagingengine.com [202.12.124.149])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB9B62E3383;
-	Wed,  5 Mar 2025 03:20:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.149
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 428EB19CC2E;
+	Wed,  5 Mar 2025 04:13:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741144849; cv=none; b=LNkQOiVl5g8s1LqjS5KzW0ufQvHOZsagM5f5c1iOhgGPbBPQzKYtF7ATSDHx/PB6H4u4Y3pHdirjg694LhxaARVuVWllviO3s1VpXL0KJEAsjIdhpyPb4GATDJ+gxpwgLB54tzKz8JtM2giI9r5/zfBMYaHxEHDfhMsOBAF6HKw=
+	t=1741147989; cv=none; b=L9iMVIZ08XyIodZ6rQFgjff5Yt/Xq/yMmRSp1mPimGJSjIkqSEKfQ6Naot4UxK/k3K1lhjMpp6yl6Zhsw7t9Srf5CP8esCgYhp2ARo6d7BQh6kax6BEHp5Gt1DQIbi0lUpfdAQnqafU/A9NA0KB0Y6dG++exSIg1kuOvDcXe6sY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741144849; c=relaxed/simple;
-	bh=DHgoGZ0qX7cTXT6R7MS14QaeHg+jC+soL0Tkn5Z3GeE=;
-	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
-	 Subject:Content-Type; b=O389OgEEsZ5qzknf0ztsbGXP8UjQV4bTed71IHq0G/uoMGoQzc5ReQ6pKKSNVSeD9R1hX3lutbnGvjrEW7pcxVBP1mQIRRIar0IRbCADSlNQF/W0RnXetZGGOW1WSzENmT8YDaE/pksGy1XPj730Z+LQ0keni6dGrKr5cjH8Y1I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=squebb.ca; spf=pass smtp.mailfrom=squebb.ca; dkim=pass (2048-bit key) header.d=squebb.ca header.i=@squebb.ca header.b=JUEUqnJJ; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=E1iYtkh4; arc=none smtp.client-ip=202.12.124.149
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=squebb.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=squebb.ca
-Received: from phl-compute-06.internal (phl-compute-06.phl.internal [10.202.2.46])
-	by mailfout.stl.internal (Postfix) with ESMTP id 5087311401BA;
-	Tue,  4 Mar 2025 22:20:44 -0500 (EST)
-Received: from phl-imap-10 ([10.202.2.85])
-  by phl-compute-06.internal (MEProxy); Tue, 04 Mar 2025 22:20:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=squebb.ca; h=cc
-	:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1741144844;
-	 x=1741231244; bh=hs1JOBCtOs6uvUuOlg7Ww2Sx+hHGJabLYw2G13Hxk4k=; b=
-	JUEUqnJJhQdL9R5JDD0Pa+hfz+vmmIYXP/OpHNtCZTNaPEwd4ZTOZVAbZH4sRUnB
-	twvimisOSzpj8lbfkuCDbBmqzsjjM7jeaOfpEiT3GgNnrz98QRHIFwUpq6Cib27a
-	YmgD+sro4PRe9GyFsTGld2N23iJYEEt8MCp3BjAPGuE1dqhsImfNOUf9AjjBlhCg
-	XYQagBGlB+C9uwWK53SzCeHFvp5l3hWDXef2QVVCU5E/dmCM7RLrqDAQNXvD/7+K
-	wXN7CR0znP+y1DHuT1jWdhUsV9r97jC4iAfQd2edzlJRZJcXLvY9km46hYyDYrTT
-	OwtHPWTyNsITwdhj1UFxSA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1741144844; x=
-	1741231244; bh=hs1JOBCtOs6uvUuOlg7Ww2Sx+hHGJabLYw2G13Hxk4k=; b=E
-	1iYtkh4xqo2XToS9lVvzPWE6RJqCfzrN0tbP5FacDguKfzS8JmvictYhYQgAqWgB
-	JtSGD228nigHXUDmTjPdc4P6zsIrtLsuydxfY1la30NzmzS6RLcfQFuq+IrWY+B7
-	PJ0J5F3y48xln59/3ykJwbLHPmHZ65qIE9KLafTWCg/Yt7u2/GoFRyZdq0f/Eapi
-	AtINVyiMUf3vmnFsKHs2uAsCE5cFC3Imr5VkPUkcZ0O6XLf71yL75NH5CKP1xp9p
-	ceEySoif/RJM5VvVSEPnDsJy+Qq3I1GK1EbAf1z8wcIsurC1zhkbCL78vPU0GDx9
-	H15JhNlbLggoonBp8B3+A==
-X-ME-Sender: <xms:C8PHZx8UpM_Dn3zeC_QNjBYxFcEfSHWHOZ8GgwdJZvqQRNRNZ8LJNA>
-    <xme:C8PHZ1uHeonKLMGHDR5DLPXUU5CYEbCZ0DT3i6fcFdwNEbC207q4XjEAD5rzsVF0c
-    v1AzZCEEHCv7VCzcW0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddutdefjeefucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggv
-    pdfurfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpih
-    gvnhhtshculddquddttddmnecujfgurhepofggfffhvfevkfgjfhfutgfgsehtjeertder
-    tddtnecuhfhrohhmpedfofgrrhhkucfrvggrrhhsohhnfdcuoehmphgvrghrshhonhdqlh
-    gvnhhovhhosehsqhhuvggssgdrtggrqeenucggtffrrghtthgvrhhnpefhuedvheetgeeh
-    tdehtdevheduvdejjefggfeijedvgeekhfefleehkeehvdffheenucevlhhushhtvghruf
-    hiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmphgvrghrshhonhdqlhgvnhho
-    vhhosehsqhhuvggssgdrtggrpdhnsggprhgtphhtthhopeejpdhmohguvgepshhmthhpoh
-    huthdprhgtphhtthhopehnihhtjhhoshhhihesghhmrghilhdrtghomhdprhgtphhtthho
-    pehnjhhoshhhihdusehlvghnohhvohdrtghomhdprhgtphhtthhopehilhhpohdrjhgrrh
-    hvihhnvghnsehlihhnuhigrdhinhhtvghlrdgtohhmpdhrtghpthhtohepihgsmhdqrggt
-    phhiqdguvghvvghlsehlihhsthhsrdhsohhurhgtvghfohhrghgvrdhnvghtpdhrtghpth
-    htohephhguvghgohgvuggvsehrvgguhhgrthdrtghomhdprhgtphhtthhopehlihhnuhig
-    qdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtohepphhlrghtfhhorh
-    hmqdgurhhivhgvrhdqgiekieesvhhgvghrrdhkvghrnhgvlhdrohhrgh
-X-ME-Proxy: <xmx:C8PHZ_C7C0g-s3pEAXfzboTq0P5nQoUS1VH-3T2jENHzWTuebZEtdA>
-    <xmx:C8PHZ1cR_N2LLrZL1_HbypqeMqTjc5fGeoI038SdXBlAM_f4t6ml_A>
-    <xmx:C8PHZ2NQX6ZH1VAfqOr5-FCWuT6ihG_UN601jwknPQEtgrSt1xvRsw>
-    <xmx:C8PHZ3nI-O6G-cs5voRXCsf3GG3A_DH-8fJJywjaUrNC5uIE4482tw>
-    <xmx:DMPHZyC_Smqoipxp2BjZ3UvimVGq2JygKH8eGYv0jKx5JMBx8fwMWTIJ>
-Feedback-ID: ibe194615:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
-	id 558943C0066; Tue,  4 Mar 2025 22:20:43 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
+	s=arc-20240116; t=1741147989; c=relaxed/simple;
+	bh=5UXRL54BFARNyIExd957ZiQGbmJZmiFrgr7K+zCJvRQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=OtIa9iSypeod78YR6HGf70Ie83WD7FCouf7mljgBxSYsK3yHr19gUAz1p8qEKtIYXECrL/fB6lZb5Kr43Rh2AKqVU7zCQBmV+twmluNPrgGBE4BoA7QlO94WfJ2+/lfiwVKIb2rRWU0ei8dRahjz7vrZYzC9VVbKDBWrUdwJcpM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=u4Sk5z5T; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 9E1A8C4CEE2;
+	Wed,  5 Mar 2025 04:13:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1741147988;
+	bh=5UXRL54BFARNyIExd957ZiQGbmJZmiFrgr7K+zCJvRQ=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=u4Sk5z5Tvo1rTX66Bt3jX/gM1l67V+G3tTXqeLGZnxK671s2GpNj+HMQemd/vrZm0
+	 wDJHZpf2Rx8KRo1JgFqxKDASo8k9mt0iKojjcjUlxXwPswLLIYgK+h0mcJroeJAHEi
+	 ljlTgXr2ocZ3Ppjoqf+TuMKIXvGmAddUNXGPA2SReOuuGl6LlsPTUOlovkyjXVJf/O
+	 xfzzH5RflCBh7opDD+FEivawhCCvO89WLyOqgKTExCdQLEJA+MU6f8z+o9lWBE9JDX
+	 Bk99diqSeVRS6eAax8iUFGYFqS8rNrbw7hN0fwQsSENsRskVSLLVJ9Vcjcsjbm0Tdx
+	 /XCZQl5R/1PwA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F7CEC19F32;
+	Wed,  5 Mar 2025 04:13:08 +0000 (UTC)
+From: Shashank Balaji via B4 Relay <devnull+shashank.mahadasyam.sony.com@kernel.org>
+Subject: [PATCH 0/2] cgroup, docs: Clarify interaction of RT processes with
+ cgroup v2 cpu controller
+Date: Wed, 05 Mar 2025 13:12:42 +0900
+Message-Id: <20250305-rt-and-cpu-controller-doc-v1-0-7b6a6f5ff43d@sony.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Date: Tue, 04 Mar 2025 22:20:23 -0500
-From: "Mark Pearson" <mpearson-lenovo@squebb.ca>
-To: "Nitin Joshi" <nitjoshi@gmail.com>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- "Hans de Goede" <hdegoede@redhat.com>
-Cc: 
- "platform-driver-x86@vger.kernel.org" <platform-driver-x86@vger.kernel.org>,
- ibm-acpi-devel@lists.sourceforge.net, linux-doc@vger.kernel.org,
- "Nitin Joshi1" <njoshi1@lenovo.com>
-Message-Id: <0cedc065-8cb7-4ef8-8989-6b113eb43460@app.fastmail.com>
-In-Reply-To: <20250305023319.6318-1-nitjoshi@gmail.com>
-References: <20250305023319.6318-1-nitjoshi@gmail.com>
-Subject: Re: [PATCH] platform/x86: thinkpad_acpi: Add new sysfs to check user presence
- sensing status
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADrPx2cC/x3MQQqDQAxA0atI1gZsilZ6leIiZKINyIxkrBRk7
+ u7g8i3+PyGrm2Z4Nye4HpYtxYpH24B8OS6KFqqBOuo7ogF9R44BZfuhpLh7Wld1DElw5JFZ+hf
+ NT4Xab66z/e/3ZyrlAtNmlBlrAAAA
+X-Change-ID: 20250226-rt-and-cpu-controller-doc-8a8aac572f3e
+To: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, 
+ =?utf-8?q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: Waiman Long <longman@redhat.com>, cgroups@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Shinya Takumi <shinya.takumi@sony.com>, 
+ Shashank Balaji <shashank.mahadasyam@sony.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1499;
+ i=shashank.mahadasyam@sony.com; h=from:subject:message-id;
+ bh=5UXRL54BFARNyIExd957ZiQGbmJZmiFrgr7K+zCJvRQ=;
+ b=owGbwMvMwCV2mPH4Ij++H1mMp9WSGNKPnw+6+bcjp3D9rkCn1feVrZ4o9OzxMqu4f6zss+Mfs
+ 19xBz23dJSyMIhxMciKKbK8k1l34aCVZdPX4wzfYOawMoEMYeDiFICJzPnJ8IeT757aNhEu/W8p
+ zaGFfgpXFft4k6PfWN7cXqTxv/3Qt2eMDDcUKxsPXbumLzLHV/aM8Jqgpm2y28y37Tm3LGLq95W
+ 6nfwA
+X-Developer-Key: i=shashank.mahadasyam@sony.com; a=openpgp;
+ fpr=EE1CAED0C13A3982F5C700F6C301C7A24E0EF86A
+X-Endpoint-Received: by B4 Relay for shashank.mahadasyam@sony.com/default
+ with auth_id=354
+X-Original-From: Shashank Balaji <shashank.mahadasyam@sony.com>
+Reply-To: shashank.mahadasyam@sony.com
+
+Currently, CONFIG_RT_GROUP_SCHED is practically unusable. If enabled,
+the cpu controller can be enabled only when all the realtime processes are in
+the root cgroup. This has been clarified by Waiman Long in commit
+20d4628 (cgroup, docs: Clarify limitation of RT processes with cgroup v2
+cpu controller): https://lore.kernel.org/lkml/20240320142302.1790171-1-longman@redhat.com/
+
+But this limitation does not affect any of the other controllers:
+irrespective of CONFIG_RT_GROUP_SCHED, the other controllers can be used
+for the resource control of realtime processes. This is made more
+explicit in the first patch.
+
+Even when CONFIG_RT_GROUP_SCHED is disabled, the runtime of realtime
+processes is accounted for by cpu.pressure, and the usage_usec, user_usec,
+and system_usec fields of cpu.stat, and cpu.uclamp.{min, max} affect
+realtime processes as well. This is documented in the second patch.
+
+Signed-off-by: Shashank Balaji <shashank.mahadasyam@sony.com>
+---
+Shashank Balaji (2):
+      cgroup, docs: Be explicit about independence of RT_GROUP_SCHED and non-cpu controllers
+      cgroup, docs: Document interaction of RT processes with cpu controller
+
+ Documentation/admin-guide/cgroup-v2.rst | 41 ++++++++++++++++++++++-----------
+ 1 file changed, 27 insertions(+), 14 deletions(-)
+---
+base-commit: 9b381a28f44a49b92b03bb3982728f9cb67ee225
+change-id: 20250226-rt-and-cpu-controller-doc-8a8aac572f3e
+
+Best regards,
+-- 
+Shashank Balaji <shashank.mahadasyam@sony.com>
 
 
-On Tue, Mar 4, 2025, at 9:33 PM, Nitin Joshi wrote:
-> Some Thinkpad products support Human Presence Detection (HPD) features.
-> Add new sysfs entry so that userspace can determine if feature is
-> supported or not.
->
-> Reviewed-by: Mark Pearson <mpearson-lenovo@squebb.ca>
-
-Just in case we're breaking protocol - I have reviewed this off mailing list with Nitin and gave it the thumbs up. The tag is correct.
-
-Mark
-
-> Signed-off-by: Nitin Joshi <nitjoshi@gmail.com>
-> ---
->  .../admin-guide/laptops/thinkpad-acpi.rst     | 20 +++++
->  drivers/platform/x86/thinkpad_acpi.c          | 79 +++++++++++++++++++
->  2 files changed, 99 insertions(+)
->
-> diff --git a/Documentation/admin-guide/laptops/thinkpad-acpi.rst 
-> b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
-> index 4ab0fef7d440..02e6c4306f90 100644
-> --- a/Documentation/admin-guide/laptops/thinkpad-acpi.rst
-> +++ b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
-> @@ -1576,6 +1576,26 @@ percentage level, above which charging will stop.
->  The exact semantics of the attributes may be found in
->  Documentation/ABI/testing/sysfs-class-power.
-> 
-> +User Presence Sensing Detection
-> +------
-> +
-> +sysfs: hpd_bios_enabled
-> +
-> +Some Thinkpad products support Human Presence Detection (HPD) features.
-> +Added new sysfs entry so that userspace can determine if feature related to
-> +HPD should be enabled or disabled.
-> +
-> +The available commands are::
-> +
-> +        cat /sys/devices/platform/thinkpad_acpi/hpd_bios_enabled
-> +
-> +BIOS status is mentioned as below:
-> +- 0 = Disable
-> +- 1 = Enable
-> +
-> +The property is read-only. If the platform doesn't have support the sysfs
-> +class is not created.
-> +
->  Multiple Commands, Module Parameters
->  ------------------------------------
-> 
-> diff --git a/drivers/platform/x86/thinkpad_acpi.c 
-> b/drivers/platform/x86/thinkpad_acpi.c
-> index 72a10ed2017c..daf31b2a4c73 100644
-> --- a/drivers/platform/x86/thinkpad_acpi.c
-> +++ b/drivers/platform/x86/thinkpad_acpi.c
-> @@ -11039,6 +11039,80 @@ static const struct attribute_group 
-> auxmac_attr_group = {
->  	.attrs = auxmac_attributes,
->  };
-> 
-> +/*************************************************************************
-> + * CHPD subdriver, for the Lenovo Human Presence Detection feature.
-> + */
-> +#define CHPD_GET_SENSOR_STATUS           0x00200000
-> +#define CHPD_GET_BIOS_UI_STATUS          0x00100000
-> +
-> +static bool has_user_presence_sensing;
-> +static int hpd_bios_status;
-> +static int chpd_command(int command, int *output)
-> +{
-> +	acpi_handle chpd_handle;
-> +
-> +	if (ACPI_FAILURE(acpi_get_handle(hkey_handle, "CHPD", &chpd_handle))) {
-> +		/* Platform doesn't support CHPD */
-> +		return -ENODEV;
-> +	}
-> +
-> +	if (!acpi_evalf(chpd_handle, output, NULL, "dd", command))
-> +		return -EIO;
-> +
-> +	return 0;
-> +}
-> +
-> +/* sysfs hpd bios status */
-> +static ssize_t hpd_bios_enabled_show(struct device *dev,
-> +				struct device_attribute *attr,
-> +				char *buf)
-> +{
-> +	return sysfs_emit(buf, "%d\n", hpd_bios_status);
-> +}
-> +static DEVICE_ATTR_RO(hpd_bios_enabled);
-> +
-> +static struct attribute *chpd_attributes[] = {
-> +	&dev_attr_hpd_bios_enabled.attr,
-> +	NULL
-> +};
-> +
-> +static umode_t chpd_attr_is_visible(struct kobject *kobj,
-> +					struct attribute *attr, int n)
-> +{
-> +	return has_user_presence_sensing ? attr->mode : 0;
-> +}
-> +
-> +static const struct attribute_group chpd_attr_group = {
-> +	.is_visible = chpd_attr_is_visible,
-> +	.attrs = chpd_attributes,
-> +};
-> +
-> +static int tpacpi_chpd_init(struct ibm_init_struct *iibm)
-> +{
-> +	int err, output;
-> +
-> +	err = chpd_command(CHPD_GET_SENSOR_STATUS, &output);
-> +	if (err)
-> +		return err;
-> +
-> +	if (output == 1)
-> +		return -ENODEV;
-> +
-> +	has_user_presence_sensing = true;
-> +	/* Get User Presence Sensing BIOS status */
-> +	err = chpd_command(CHPD_GET_BIOS_UI_STATUS, &output);
-> +	if (err)
-> +		return err;
-> +
-> +	hpd_bios_status = (output >> 1) & BIT(0);
-> +
-> +	return err;
-> +}
-> +
-> +static struct ibm_struct chpd_driver_data = {
-> +	.name = "chpd",
-> +};
-> +
->  /* --------------------------------------------------------------------- */
-> 
->  static struct attribute *tpacpi_driver_attributes[] = {
-> @@ -11098,6 +11172,7 @@ static const struct attribute_group *tpacpi_groups[] = {
->  	&kbdlang_attr_group,
->  	&dprc_attr_group,
->  	&auxmac_attr_group,
-> +	&chpd_attr_group,
->  	NULL,
->  };
-> 
-> @@ -11694,6 +11769,10 @@ static struct ibm_init_struct ibms_init[] 
-> __initdata = {
->  		.init = auxmac_init,
->  		.data = &auxmac_data,
->  	},
-> +	{
-> +		.init = tpacpi_chpd_init,
-> +		.data = &chpd_driver_data,
-> +	},
->  };
-> 
->  static int __init set_ibm_param(const char *val, const struct kernel_param *kp)
-> -- 
-> 2.43.0
 
