@@ -1,132 +1,106 @@
-Return-Path: <linux-doc+bounces-40125-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40127-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 379C8A5570E
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Mar 2025 20:46:56 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BAABA5586F
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Mar 2025 22:12:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 70D2916A300
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Mar 2025 19:46:55 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E52A37A3CE3
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Mar 2025 21:11:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC62926FDB4;
-	Thu,  6 Mar 2025 19:46:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A28A82517A9;
+	Thu,  6 Mar 2025 21:12:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="J/4VBtQH"
+	dkim=pass (2048-bit key) header.d=iencinas.com header.i=@iencinas.com header.b="XVN4ljCe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com [95.215.58.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4930726E655;
-	Thu,  6 Mar 2025 19:46:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84732207E04
+	for <linux-doc@vger.kernel.org>; Thu,  6 Mar 2025 21:12:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741290410; cv=none; b=ct0b0EyDiaEgqG8pNU5z2dwIpQDwLNK0/7pwci/xcgETOJK2rXlQgApbLiA6dvF5PhSAaItC60QNfFCy9VNXBeU/zChCY0T3wHl4HIiu1meKNQRGbYUZTx781pHNMZgAvMud5PHIsiguKF6VQ7LguOzCaLXJPR9FtDImGZGAIeQ=
+	t=1741295537; cv=none; b=a8Q149wkMiB4Vuok+kYXlcxwfq7Hj3thBENCbeoqaMQh1QWNlPEq4+PISTT2jS2yLZ8voTlxMXMWW3SSnrVE2nCIZQFIWi9DKXxrgiwkMD1eTOfRHwRs4GlJhKKglcyRl8+oaXwse6Se+1QDOGPHTQdgEEGw5HB2WuvnaYvhll4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741290410; c=relaxed/simple;
-	bh=j4DnSyFuaWvEXVXRDUJKNQxF58NJBYPOKmVw2hSnxns=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZK2wN27T0YiycNr0gGEqftfle397qD9MSPUGyqweTVMKyufwxfk6dtay0+KBnaxSUVqt619dbUsbV9puMtuaOnb3tS1VEJMvvIXRbc6L2Z8LLoSn1bY0+8Y/vSPjvMtyFuodc8GiI4DeMvwXkRvY+S0aXQuBzp4wnKnHjXio9gw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=J/4VBtQH; arc=none smtp.client-ip=209.85.214.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-223f7b10cbbso2593885ad.3;
-        Thu, 06 Mar 2025 11:46:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741290408; x=1741895208; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0P2494NW9TEPThRJh21OpIhUo6VKxvRDCQpCIs6WAjo=;
-        b=J/4VBtQH+nIsXCGDd0PHLYovr3Gk5I2DiXuyTXxRXkgEE5Y22SwLDZrPlVYzjbRXwu
-         G1tmcdxQPEdgTLmgfi/v45qTj8z7hXhDgKUwa2CknMggCu7TG3ggzMU7ejODg+mUlz//
-         ZO1l1pLfpSMWzqoVfEx36oKOdTF0vbtbaqY1jiwyk34uY2oDlKjfxIOt1bHspTV+0HfN
-         oDWyzzPnw1UFJuv5bLljb+KhQu3hMjXuDhOTF5aunbT8BlnH3M8TQK/7S2tJQRsXlz5G
-         ltmiAfOvc4AZZVLpPO0uY+yhHOCj7hUjc/9S8UvFvGnuAGHKkeVhaWlkAOHs/Lw3EY9B
-         4LPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741290408; x=1741895208;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=0P2494NW9TEPThRJh21OpIhUo6VKxvRDCQpCIs6WAjo=;
-        b=wlea6ZeAdnQR3JkaCnSuIP9gu95ioBkXGGff1P37c9Fxj/j0lA2u2dVTUgYvotWIjP
-         Qh6ciJwlFEtdS14+JKCvp6d9qPIt0YAc3OBiexDof7IwGgW0aopz1n7ur6mDVwvsmfIj
-         Hc8qJUoZ9IR0EKMne6F2cyNJ7V+GS8GZDw4nsCFGVZ2Em4JpRddDEIALaqKX3XdjwGcf
-         Uem6sQEzD2tRxXnPRJK9zhdxS1b3OkXMZgk32Ug/MASLlXI9RQEwR3/MW5XEzO/L/Z37
-         op3do+zJVpE0J4/2vyUE3dpGy74GinIWvklr0SEb7VX5r/vvGjhryIRxfZ0jaR6xRV06
-         a7qQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVGoMmPoeg42d0pklu5289uYy7IolzuZaYeIAY90/edTdCY3//CWj1UwAOwaXcWDZbH9LsPgOG/Qidt5cQVHHg=@vger.kernel.org, AJvYcCW1OXKVdiMSjI3Boy3YmaLwiCqy9S1cJCoUZamLy8hmOMhxczAU43gSM6Qn9PUPnoU7Mb1hYjGVYfk=@vger.kernel.org, AJvYcCWnfA4oU6m25VO+97KsGrXjWUKco48VHtKK4ZpbsN5JgW+z9OvqlcrrI4ejsjvzKnoYyXO49xTkMmpTUZOX@vger.kernel.org
-X-Gm-Message-State: AOJu0YwNoLwzCES7ChDldDc8DPf5FbNMvEbbkFx4JofjPRGQlLwl379F
-	mLuLVRAaC32HDmMm5/RZoOTXv30TIY838HyGP1+7NAZdojxHOUF/75XBENLk+xzBQZaVuva34A6
-	cr/ahmt6phW8atEKER7S2PmXrI6AU5hRKoD0=
-X-Gm-Gg: ASbGncvLQN+RiXLrysGZdpaFGmTfYSVLNCgHqsyTKcW98lGIGfce744AkukzNQhDqwH
-	o1Yat/6poK2PlacdMK7ArJw0XnBH1JY3ijCCC5u5QcEn2/zmXWl9+P0dM6bTcVSrx7CsprqECOf
-	3qH+IBogAT8RES8rAL6+ocnhcX5A==
-X-Google-Smtp-Source: AGHT+IE6nptMd6ZMASHsflSP6nhs2F4x84bMg7Sjnr2LdEv/XlkhHdWj/VuC3QkwY4cpW28+4CERkq1WVK5P0Q7HWB4=
-X-Received: by 2002:a17:902:ecc6:b0:223:5577:3a40 with SMTP id
- d9443c01a7336-22428aa08aemr2978755ad.6.1741290408494; Thu, 06 Mar 2025
- 11:46:48 -0800 (PST)
+	s=arc-20240116; t=1741295537; c=relaxed/simple;
+	bh=h+VIqaX0d9abQ3DgSDf9PJxmMtWd3EZWAdJBHQKExe4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=q5y+dyv0J6bnSSnpdfaKJ1MICZjfnViQYIbysFBOjcHQbNewyHYbS7nhJm7kjFN/cM9x56z206BZGkI3XiCudmq3jrpZFDrkR3Y1lD3laXm5ZLcmFS9b9obnFDmnVWSJFANU3fIaXNinBR83YprTpG7DQ6fqWA2VaEU4HamuTOc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=iencinas.com; spf=pass smtp.mailfrom=iencinas.com; dkim=pass (2048-bit key) header.d=iencinas.com header.i=@iencinas.com header.b=XVN4ljCe; arc=none smtp.client-ip=95.215.58.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=iencinas.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iencinas.com
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iencinas.com;
+	s=key1; t=1741295521;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=y3UeIRikRnYRQC1pPCbxniJMgfci1KvvEP9uumjgL+U=;
+	b=XVN4ljCeqOBTo6h9ilroA0XqRUI4a5PIl8nHzuRYVep5tjK5EVhCd9EMldPg9Q+IpW6okJ
+	xiRBNwncleDyexs5zZrJgC9yofcmBwfjeBNo2vtLzMWtY210Upk1Fg1Kg05s+AIgyWQ3U5
+	7eVyKZ+enbEBYFUHLlL3JC/EBcinRHbQ5wmI+dqgy7RFspS56DRBgnDbROQVE1CXmyemO/
+	/TmLC6p9ZN25yuMCGXvIqe2iyLniERd/herFvWjtrVc8ApBLhyiNq9Q9U2MdnYYHtr9ENo
+	QjR/KvYNc1TgdPtaPctkstLvNAizyYqmoC8kXv1FPMr81UdKwtJuzjywwwW/wQ==
+From: Ignacio Encinas <ignacio@iencinas.com>
+Date: Thu, 06 Mar 2025 22:11:45 +0100
+Subject: [PATCH] Documentation: kcsan: fix "Plain Accesses and Data Races"
+ URL in kcsan.rst
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
-In-Reply-To: <20250206-printing_fix-v3-0-a85273b501ae@invicto.ai>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 6 Mar 2025 20:46:33 +0100
-X-Gm-Features: AQ5f1JryqBJhEWkbhgsaet-lvVPhubz1rNqs4pB8SVPDsOWuyxNmFVK7xG52DPA
-Message-ID: <CANiq72neR3Yq3g6BgfR-jEDLC=XxJAnM=-gy_z78OahUGvbdZA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] rust: treewide: add missing newlines to printing calls
-To: Alban Kurti <kurti@invicto.ai>
-Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
-	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
-	=?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
-	Benno Lossin <benno.lossin@proton.me>, Andreas Hindborg <a.hindborg@kernel.org>, 
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>, 
-	Jonathan Corbet <corbet@lwn.net>, David Gow <davidgow@google.com>, 
-	Dirk Behme <dirk.behme@de.bosch.com>, Asahi Lina <lina@asahilina.net>, 
-	Wedson Almeida Filho <wedsonaf@gmail.com>, Wedson Almeida Filho <walmeida@microsoft.com>, 
-	"Andreas Hindborg (Samsung)" <nmi@metaspace.dk>, Tejun Heo <tj@kernel.org>, Fiona Behrens <me@kloenk.dev>, 
-	Vincenzo Palazzo <vincenzopalazzodev@gmail.com>, Xiangfei Ding <dingxiangfei2009@gmail.com>, 
-	rust-for-linux@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Martin Rodriguez Reboredo <yakoyoku@gmail.com>, 
-	Fox Chen <foxhlchen@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250306-fix-plain-access-url-v1-1-9c653800f9e0@iencinas.com>
+X-B4-Tracking: v=1; b=H4sIAJAPymcC/x2MSQqAMAwAv1JyNlD36lfEQ6hRA1KlQRHEv1s8D
+ szMA8pRWKE3D0S+RGUPCfLMgF8pLIwyJYbCFrUtbYOz3HhsJAHJe1bFM27oiF2V80xV20FKj8j
+ J+7fD+L4fi0brDmYAAAA=
+X-Change-ID: 20250306-fix-plain-access-url-8ae841efa479
+To: linux-kernel-mentees@lists.linux.dev, skhan@linuxfoundation.org, 
+ Marco Elver <elver@google.com>, Dmitry Vyukov <dvyukov@google.com>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: kasan-dev@googlegroups.com, workflows@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Ignacio Encinas <ignacio@iencinas.com>
+X-Migadu-Flow: FLOW_OUT
 
-On Thu, Feb 6, 2025 at 10:08=E2=80=AFPM Alban Kurti <kurti@invicto.ai> wrot=
-e:
->
->       rust: docs: add missing newline to printing macro examples
->       rust: error: add missing newline to pr_warn! calls
->       rust: init: add missing newline to pr_info! calls
->       rust: sync: add missing newline in locked_by log example
->       rust: workqueue: add missing newline to pr_info! examples
+Make the URL point to the "Plain Accesses and Data Races" section again
+and prevent it from becoming stale by adding a commit id to it.
 
-Applied these (i.e. the first 5) to `rust-fixes` -- thanks everyone!
+Signed-off-by: Ignacio Encinas <ignacio@iencinas.com>
+---
+I noticed this while reviewing the documentation.
 
-    [ Replaced Closes with Link since it fixes part of the issue. - Miguel =
-]
+The "fix" isn't perfect as the link might become stale because it points
+to a fixed commit. Alternatively, we could lose the line number
+altogether.
+---
+ Documentation/dev-tools/kcsan.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-    [ Replaced Closes with Link since it fixes part of the issue. - Miguel =
-]
+diff --git a/Documentation/dev-tools/kcsan.rst b/Documentation/dev-tools/kcsan.rst
+index d81c42d1063eab5db0cba1786de287406ca3ebe7..8575178aa87f1402d777af516f5c0e2fc8a3379d 100644
+--- a/Documentation/dev-tools/kcsan.rst
++++ b/Documentation/dev-tools/kcsan.rst
+@@ -203,7 +203,7 @@ they happen concurrently in different threads, and at least one of them is a
+ least one is a write. For a more thorough discussion and definition, see `"Plain
+ Accesses and Data Races" in the LKMM`_.
+ 
+-.. _"Plain Accesses and Data Races" in the LKMM: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/memory-model/Documentation/explanation.txt#n1922
++.. _"Plain Accesses and Data Races" in the LKMM: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/memory-model/Documentation/explanation.txt?id=8f6629c004b193d23612641c3607e785819e97ab#n2164
+ 
+ Relationship with the Linux-Kernel Memory Consistency Model (LKMM)
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    [ Replaced Closes with Link since it fixes part of the issue. Added
-      one more Fixes tag (still same set of stable kernels). - Miguel ]
+---
+base-commit: 19b100b0116d703b9529f7bbbf797428de51816a
+change-id: 20250306-fix-plain-access-url-8ae841efa479
 
-    [ Replaced Closes with Link since it fixes part of the issue. - Miguel =
-]
+Best regards,
+-- 
+Ignacio Encinas <ignacio@iencinas.com>
 
-    [ Replaced Closes with Link since it fixes part of the issue. - Miguel =
-]
-
-Alban: please feel free to send the last one split (please see my
-other message) -- thanks!
-
-Cheers,
-Miguel
 
