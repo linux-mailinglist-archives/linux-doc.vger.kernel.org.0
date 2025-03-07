@@ -1,175 +1,115 @@
-Return-Path: <linux-doc+bounces-40179-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40177-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91248A563AC
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 10:23:23 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E930A5633F
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 10:08:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F37F83B4DFD
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 09:22:23 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 56A0B172210
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 09:08:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 574DA1A841E;
-	Fri,  7 Mar 2025 09:22:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E39D1DDA0F;
+	Fri,  7 Mar 2025 09:08:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XkZAizUm"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="kgfoQ6Zy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE17C2054F1;
-	Fri,  7 Mar 2025 09:22:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64A2E168B1;
+	Fri,  7 Mar 2025 09:08:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741339339; cv=none; b=AKT5lfWBKXr6VQlmo01aY/6WUTKb+OpHF+NuAdLCK5Tr7QYNxX7l6F6z7Apwonk4zA7x7EPx1EcwJPwO+w3a/I4ljIL1YeCXjgMUEsoqCLLjTLckH7LAxOOLyPyWAdAA8LolTfImm1tzm1M3tw965yBUFC4hnoFVhMNPFuRsDDw=
+	t=1741338501; cv=none; b=YUeBYxUHfMAxFBfq45QgkoWiYpmDYwqWA7sIG5IxaehKcBYU+rgafnsJjmerjnbbFEWShf9FoXyqrrTGkhCHo3HhmQi6/txe7jrYKYsMsGtCp4mnPNCzd150kPo8yBb40Mm5dmei4SfXmLnUWERw17ekYF6r1NxkJykSsfFFPRQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741339339; c=relaxed/simple;
-	bh=Y5QkxB4IAd5CNZoC0GpGpQotuQUzUAn75froay7+oCk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uHIOmNHOXlymlSZeNxS23gTBfiAKju41PC8JgmOTBq+/RkqLqPN2UeYBxfLRCpvNC/Bx9jUQ5xbtWJG3r1UA28UCI0vXWuhleHAn0onU21E22RmA9f46ufXahh+2bYC7tcbQtXCl461EZT3Km0e3S+F/ENQN5GJ9vLFlZ7orCfs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XkZAizUm; arc=none smtp.client-ip=209.85.214.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-223fb0f619dso31739255ad.1;
-        Fri, 07 Mar 2025 01:22:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741339337; x=1741944137; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Ikt1gbFy2U/XFaciwFV99W2Ywgj65pbYfnki12VldBA=;
-        b=XkZAizUm5HiwkSIj2YhHTsJBeNdzwz2AqUIujj1bhzS+GKFHVjkUOFBVEvYyjdiuK5
-         le95W4hAdNW8KWaCRZrYlIpL+b23ivNS6VBqZSmu3OvddnyUMDCj7W5aMuUwC5ITtm81
-         qHjXsN2+z0GsCq8CJg8Ozya9kJQROXdeMP7qtDPaH4JV4eYxO3WvEZt7r/D+GOKARqNr
-         BIvNmN/GgGaLhbyALp1tK2WccWH4XSo5VvC/zi+oEJb+aes/9XURBfffTT64Llt3Kq9C
-         0htEJg0qEH2trb3bXsWAILwonGJSqj96CU7HJ+IQemM/3cdqsPtebPMgbszkq8HgGt+0
-         fYmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741339337; x=1741944137;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ikt1gbFy2U/XFaciwFV99W2Ywgj65pbYfnki12VldBA=;
-        b=saNia5S7iLCjm72nM6TPiKljqtCG1rZdOjFIEvMU3qbyRzT6o1WPqXIoKPmn/hGiQt
-         OkN90Z5Hatj1Rs708ulxQ+/IjDnAuaqgnQB17MBTaPmarY+IIUXezQ4+bQY2bnhtjJfX
-         DdoN3pIoIXcC0Nsj0IMqSDhB9fv0BeCjjDo8vBChmZpYW36lqyYjYpaTUGhrbHJ93FjY
-         uzraYPcGI7x+jh86KJRXLfBsaA56t1JoIADBE0nyOB79R9PgxATVuwxrtSCvzrDXUvxi
-         EXI7xhPL0+qunVaDZVKPiHiZzNfJfFN3Ghy/xnp8hy1WPNGo1yt9Mz2aJFt+juuZe52Y
-         zdRg==
-X-Forwarded-Encrypted: i=1; AJvYcCUnfiOLjl5/xORV4nNebQJPePKKS6yaSgpsgSAcuHkTKqX/9DWv1yvSAZFBlHEl2lfQrR6A3jcQFB1ppWFG@vger.kernel.org, AJvYcCXM7WtSGbAWGl3HXwoVkRGUYiLtIn6i40FPoJ8Er6LKouE4RqA9vM6olTe3m7lVN42JKAHx7W/U1NI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwwCSorvlbI15+kHpZcSJ9VKNw/dZn3J5VvEuCJHKYZVbb834PH
-	P8VVn9Sapk1NwS1mK43FAzTGvkvCnQ45qBgk7Vm/Xv33bq93eviG
-X-Gm-Gg: ASbGncuNINhMZcoCUGPgvBPFo42kueSwWOboKUJUqwY6s/ShMQlqxcSyYzH/xzOIDOU
-	JcoYJkQjnRIwfqmTxBS1XYjxNdec7i3JV1XwZssxNGKKLOaEStAxReheNclrXWd5C1oeUOTQW/H
-	UUi26d9OLv1goQJ3P/phiLYR+zPsbNDJZROJD724oA1Wn/oR1hmkijXXrySE0h89pXbbUNj2NGk
-	siwPhK2myBssr3wnVSI+TRNnfcU4dVOdi17UGPyHgMZyhPieJ//0UKIVOUrABazEyKMWYbTdke8
-	mAP5F+z9MAusd93MZFzq6Ie3y0RDFgg1S/G7LNezqarxPTMM9w0wfkoS+x/xuWQosI3gqvqUy2n
-	x+ZyubqT688Fb8fQ=
-X-Google-Smtp-Source: AGHT+IEIiXoZZzxnSoXXPCIUnCwno0fB8cOp8sQafgL9UTqbrPTpwRetutsW24+5sVWmY2Y7FpymiA==
-X-Received: by 2002:a17:902:ea07:b0:224:1c41:a4cd with SMTP id d9443c01a7336-2242887ffb8mr39955125ad.3.1741339336834;
-        Fri, 07 Mar 2025 01:22:16 -0800 (PST)
-Received: from [10.0.2.15] (KD106167137155.ppp-bb.dion.ne.jp. [106.167.137.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22410a9194csm25574795ad.172.2025.03.07.01.22.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 07 Mar 2025 01:22:16 -0800 (PST)
-Message-ID: <cb168a2c-d14c-4c7d-92ea-ab70194545a9@gmail.com>
-Date: Fri, 7 Mar 2025 18:02:35 +0900
+	s=arc-20240116; t=1741338501; c=relaxed/simple;
+	bh=jOsiZoxoFzlTIhij6u4HaEvVq0vQLmO2U5xEqzBcz7s=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=HRvRu39w6kJH5R15byFgJ7FqGlvbpLYYM86gzyak4koeFfIOuxX3jnKTRQb6XPlS5MLrOBTA6ygfmOHH9o2yeBS2h9Ti14dSwaMKeYGKoWK2N2V51PrP5jcta8s50m8TUgCYtq6DlYB7eMmuNymch1k6LadcGaYF0lZL9kUWjF8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=kgfoQ6Zy; arc=none smtp.client-ip=217.70.183.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 339EE42FF4;
+	Fri,  7 Mar 2025 09:08:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1741338493;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=CxdZ0Ku1n71J8CTAjlvJAGWeCY/e13LyHsQRhYqRe0Y=;
+	b=kgfoQ6ZyI+B/x+wq5Xp0AXdaDaVcelUCNuzcnSS1tKniUx2KBPqb1T5Pj5MhIBrd1sLTDC
+	vBVTSuJgtvq4dC/PhKM8a3GxkNAuVH37CgzcP16eQDhGbyGNk8WyriXq7kJBQ5S3buyvTS
+	xpI6Y2FeuFYhop44Wk9Caf+/vGkVirrpHFOsq+4txB1CRYfoqCk1srdlj7X9zZxwAdIth7
+	ySXkzIhlXNI2v/G1GwyfwJcq9uX0MhNgk5r9AWjOrK/A6nezD9CqOib+t4ppSrmmscs93M
+	hOqPyNt08DegzFnODAAY8sMZRrSqxfTtUltJzmRDeqeNvqd4CsiMnIkfAzEQjQ==
+Date: Fri, 7 Mar 2025 10:08:09 +0100
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Andrew Lunn <andrew@lunn.ch>, Oleksij Rempel <o.rempel@pengutronix.de>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet
+ <corbet@lwn.net>, Donald Hunter <donald.hunter@gmail.com>, Rob Herring
+ <robh@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, Simon Horman
+ <horms@kernel.org>, Heiner Kallweit <hkallweit1@gmail.com>, Russell King
+ <linux@armlinux.org.uk>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor
+ Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark
+ Brown <broonie@kernel.org>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, Kyle Swenson <kyle.swenson@est.tech>, Dent
+ Project <dentproject@linuxfoundation.org>, kernel@pengutronix.de, Maxime
+ Chevallier <maxime.chevallier@bootlin.com>, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next v6 02/12] net: pse-pd: Add support for
+ reporting events
+Message-ID: <20250307100809.3de6db1e@kmaincent-XPS-13-7390>
+In-Reply-To: <20250306174345.51a1d56d@kernel.org>
+References: <20250304-feature_poe_port_prio-v6-0-3dc0c5ebaf32@bootlin.com>
+	<20250304-feature_poe_port_prio-v6-2-3dc0c5ebaf32@bootlin.com>
+	<20250306174345.51a1d56d@kernel.org>
+Organization: bootlin
+X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2 1/2] cpumask: Fix kernel-doc formatting errors in
- cpumask.h
-To: Viresh Kumar <viresh.kumar@linaro.org>
-Cc: Vincent Guittot <vincent.guittot@linaro.org>, linux-doc@vger.kernel.org,
- Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
- Akira Yokosawa <akiyks@gmail.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- Yury Norov <yury.norov@gmail.com>
-References: <cover.1741332579.git.viresh.kumar@linaro.org>
- <f4ad81150eaa00b43c161f0d1f811f8ecfe21889.1741332579.git.viresh.kumar@linaro.org>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <f4ad81150eaa00b43c161f0d1f811f8ecfe21889.1741332579.git.viresh.kumar@linaro.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduuddtvdeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhhoofggtgfgsehtqhertdertdejnecuhfhrohhmpefmohhrhicuofgrihhntggvnhhtuceokhhorhihrdhmrghinhgtvghnthessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepgfdutdefvedtudegvefgvedtgfdvhfdtueeltefffefffffhgfetkedvfeduieeinecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecukfhppedvrgdtudemtggsudelmeekheekjeemjedutddtmeektdhfheemgegulegvmeejugehsgemjeeggeefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddumegtsgduleemkeehkeejmeejuddttdemkedtfhehmeegugelvgemjeguhegsmeejgeegfedphhgvlhhopehkmhgrihhntggvnhhtqdgirffuqddufedqjeefledtpdhmrghilhhfrhhomhepkhhorhihrdhmrghinhgtvghnthessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepvdejpdhrtghpthhtohepkhhusggrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopegrnhgurhgvfieslhhunhhnrdgthhdprhgtphhtthhopehordhrvghmphgvlhesphgvn
+ hhguhhtrhhonhhigidruggvpdhrtghpthhtohepuggrvhgvmhesuggrvhgvmhhlohhfthdrnhgvthdprhgtphhtthhopegvughumhgriigvthesghhoohhglhgvrdgtohhmpdhrtghpthhtohepphgrsggvnhhisehrvgguhhgrthdrtghomhdprhgtphhtthhopegtohhrsggvtheslhifnhdrnhgvthdprhgtphhtthhopeguohhnrghlugdrhhhunhhtvghrsehgmhgrihhlrdgtohhm
+X-GND-Sasl: kory.maincent@bootlin.com
 
-Hi,
+On Thu, 6 Mar 2025 17:43:45 -0800
+Jakub Kicinski <kuba@kernel.org> wrote:
 
-Only a couple of minor nits.
+> On Tue, 04 Mar 2025 11:18:51 +0100 Kory Maincent wrote:
+> > +      -
+> > +        name: events
+> > +        type: u32 =20
+>=20
+> type: uint
+> enum: your-enum-name
+>=20
+> and you need to define the events like eg. c33-pse-ext-state
+> in the "definitions" section
 
-Viresh Kumar wrote:
-> This fixes various kernel-doc formatting errors in cpumask.h:
-> 
-> - WARNING: Inline literal start-string without end-string.
-> - ERROR: Unexpected indentation.
-> - ERROR: Unknown target name: "gfp".
-> 
-> Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
-> ---
->  include/linux/cpumask.h | 65 +++++++++++++++++++++--------------------
->  1 file changed, 34 insertions(+), 31 deletions(-)
-> 
-[...]
+Oh indeed, I forgot to use enum in the specs. Thanks for spotting it.
+=20
+> BTW I was hoping you'd CC hwmon etc. Did you forget or some
+> of the CCed individuals are representing other subsystems?
 
-> @@ -667,7 +670,7 @@ void cpumask_xor(struct cpumask *dstp, const struct cpumask *src1p,
->  }
->  
->  /**
-> - * cpumask_andnot - *dstp = *src1p & ~*src2p
-> + * cpumask_andnot - *@dstp = *@src1p & ~*@src2p
+I have Cced Regulator maintainers Mark and Liam. hwmon are not related the
+regulator events.
 
-The latter part needs to be "&~ *@src2p".
-
-Note: kernel-doc (script) recognizes the pattern of *@name, but not ~*@name
-at the moment.  (No warning from Sphinx, but the rendered doc doesn't look
-right.)
-
->   * @dstp: the cpumask result
->   * @src1p: the first input
->   * @src2p: the second input
-[...]
-
-> @@ -729,7 +732,7 @@ bool cpumask_intersects(const struct cpumask *src1p, const struct cpumask *src2p
->  }
->  
->  /**
-> - * cpumask_subset - (*src1p & ~*src2p) == 0
-> + * cpumask_subset - (*@src1p & ~*@src2p) == 0
-
-Ditto.
-
->   * @src1p: the first input
->   * @src2p: the second input
->   *
-[...]
-
-> @@ -789,11 +792,11 @@ unsigned int cpumask_weight_and(const struct cpumask *srcp1, const struct cpumas
->  }
->  
->  /**
-> - * cpumask_weight_andnot - Count of bits in (*srcp1 & ~*srcp2)
-> + * cpumask_weight_andnot - Count of bits in (*@srcp1 & ~*@srcp2)
-
-Ditto.
-
-With above patterns taken care of:
-Reviewed-by: Akira Yokosawa <akiyks@gmail.com>
-
->   * @srcp1: the cpumask to count bits (< nr_cpu_ids) in.
->   * @srcp2: the cpumask to count bits (< nr_cpu_ids) in.
->   *
-> - * Return: count of bits set in both *srcp1 and *srcp2
-> + * Return: count of bits set in both *@srcp1 and *@srcp2
->   */
->  static __always_inline
->  unsigned int cpumask_weight_andnot(const struct cpumask *srcp1,
-[...]
-
-        Thanks, Akira
-
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
 
