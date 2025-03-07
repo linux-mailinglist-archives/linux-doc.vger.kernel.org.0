@@ -1,101 +1,190 @@
-Return-Path: <linux-doc+bounces-40143-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40149-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7060A55C48
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 01:55:19 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AB8FA55C84
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 02:01:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 52C72188EF25
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 00:55:27 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7469A17762E
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Mar 2025 01:01:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 70E1076035;
-	Fri,  7 Mar 2025 00:55:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C8E1D1A01D4;
+	Fri,  7 Mar 2025 00:58:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QrpItbRe"
+	dkim=pass (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="UI9YsCAE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp-fw-6001.amazon.com (smtp-fw-6001.amazon.com [52.95.48.154])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 409DB1E868;
-	Fri,  7 Mar 2025 00:55:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98C6319EED7;
+	Fri,  7 Mar 2025 00:58:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.95.48.154
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741308915; cv=none; b=h522Np4KPooqJhkgXZq5UstIp+LGhOHwsbVO/pTBVFsljBBGUw+c+7Zuj8BMdHciO+RLjRXYKrh7mYjmKUoeXxmpkjlSgn1D1jQY7iIvCJWdKO4xAgSLNT8Daf/iTthNG7MWYep3WKQxEOIYH1F0JBSRBbe6Pn3PKOefxawaC7M=
+	t=1741309128; cv=none; b=X3ap+VY5WU72BJBzNUk+SH63s0HCXjaAmn1XSZ03wA/7aCAnvdzcnDVLf57KzHmMktJmMA3YUh47jfJV6z6EJSf5JFJ6hbYLccfFzM6NNklrHxK9QtBbK/6AQptrzbWJWCV59QE5snaq2gQWUBoJEgMtc94+8CFxZwLeO1fKMCE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741308915; c=relaxed/simple;
-	bh=xek2BHPVZ26qJOlIwvynXxMSgyWkeMn3liBIClkp3lI=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=V4/yeyKO0VJek+5gHXcoMgDrY5yItiqfROE7NagW4d4MxElJMYZ402ivbKa+hpj0gW4sgNtEgLXwtPDjU3Hq+etqF7HluTxI0Z5a29tDREduUGT5MlnQ458EPWwYfQBpJxd/dbAXQLWA0lwhZszSkFHvKOyAXIEVJisQ3D1gRB0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QrpItbRe; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0F97C4CEE0;
-	Fri,  7 Mar 2025 00:55:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741308914;
-	bh=xek2BHPVZ26qJOlIwvynXxMSgyWkeMn3liBIClkp3lI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=QrpItbReJvXV4f5NgW5mLT6raAXR9ILcWXRqNJek5KIcTTvGN4K/B/vomAxa0s7LW
-	 u4aZDEn0nSrDXhaoRTqiVXvn3VaThme6YX8s6fmORw6eDBPiM8AqInegTSJnIygUbN
-	 kmkzeTMC5o/97KmCJg36JTQAlrvaMcAxFirIDLb5xVmPAOJVe3jVwL0fCb3/QRj3A+
-	 wH5k2Okk0ScuJX1DrWC0/L8AYVJCKq8PdMiLFuNuJ8B4IhoS4LvwUN5iu2xUu8z5hV
-	 86lbzUFCHlPP2SMdOd/H4zSLjWAQwKdWKWfq348B2QMnnbe/oMlMH5KgNaN3ZRDPCA
-	 yO7SLVnzsbOzA==
-Date: Thu, 6 Mar 2025 16:55:13 -0800
-From: Jakub Kicinski <kuba@kernel.org>
-To: MD Danish Anwar <danishanwar@ti.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>, Meghana Malladi
- <m-malladi@ti.com>, Diogo Ivo <diogo.ivo@siemens.com>, Lee Trager
- <lee@trager.us>, Andrew Lunn <andrew+netdev@lunn.ch>, Roger Quadros
- <rogerq@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Simon Horman
- <horms@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Eric Dumazet
- <edumazet@google.com>, "David S. Miller" <davem@davemloft.net>,
- <linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
- <linux-doc@vger.kernel.org>, <netdev@vger.kernel.org>, <srk@ti.com>
-Subject: Re: [PATCH net-next v2] net: ti: icssg-prueth: Add ICSSG FW Stats
-Message-ID: <20250306165513.541ff46e@kernel.org>
-In-Reply-To: <20250305111608.520042-1-danishanwar@ti.com>
-References: <20250305111608.520042-1-danishanwar@ti.com>
+	s=arc-20240116; t=1741309128; c=relaxed/simple;
+	bh=HPgmTWKCFE9d4A+1uphM7bWka3x16UXXzEmul5rvJTI=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=rJBuMO1j/HRjSaVQ7eYaZ//r7ZD+YLNLS2adEzmp11mXaH5aVkxPlEJx2uTSK1RLlndtW6cGAzCrk7NCx7sw4T3LWMvkQLEtXXKscwhTuqhFiW5h+fEJE0euy6OjQxkRrxZEzEutZXt1POZI9xGTVEruZU6kWrXy6o0srbl0mNw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.de; spf=pass smtp.mailfrom=amazon.com; dkim=pass (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b=UI9YsCAE; arc=none smtp.client-ip=52.95.48.154
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+  t=1741309126; x=1772845126;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=vUnosHPz47fWK45st0LZ5YJp1oss1R9eNp+qhCVevDg=;
+  b=UI9YsCAEfu7hrGGxL06ezF5UeKGB93ZT5EWar8hU553lqC+dgjGBy+gP
+   pZ6U8KJTtAYJygom2t/4A8ZEMtLyRv/9E9yE3q5pWtyi95inMqEYVgoeU
+   XtL4LtLAS9y6N6kLKtXdBrzS6GFHYyl5rOGdxGGgzZ2nNOf8WUaSEdRKM
+   w=;
+X-IronPort-AV: E=Sophos;i="6.14,227,1736812800"; 
+   d="scan'208";a="468696731"
+Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev) ([10.43.8.2])
+  by smtp-border-fw-6001.iad6.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Mar 2025 00:58:34 +0000
+Received: from EX19MTAUWA001.ant.amazon.com [10.0.21.151:51103]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.40.40:2525] with esmtp (Farcaster)
+ id 7db8d410-3306-4a9b-a196-6db5e20f1018; Fri, 7 Mar 2025 00:58:34 +0000 (UTC)
+X-Farcaster-Flow-ID: 7db8d410-3306-4a9b-a196-6db5e20f1018
+Received: from EX19D020UWC002.ant.amazon.com (10.13.138.147) by
+ EX19MTAUWA001.ant.amazon.com (10.250.64.218) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1544.14;
+ Fri, 7 Mar 2025 00:58:34 +0000
+Received: from EX19MTAUWA002.ant.amazon.com (10.250.64.202) by
+ EX19D020UWC002.ant.amazon.com (10.13.138.147) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.1544.14;
+ Fri, 7 Mar 2025 00:58:33 +0000
+Received: from email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com
+ (10.25.36.210) by mail-relay.amazon.com (10.250.64.203) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id
+ 15.2.1544.14 via Frontend Transport; Fri, 7 Mar 2025 00:58:33 +0000
+Received: from dev-dsk-ptyadav-1c-43206220.eu-west-1.amazon.com (dev-dsk-ptyadav-1c-43206220.eu-west-1.amazon.com [172.19.91.144])
+	by email-imr-corp-prod-pdx-all-2b-5ec155c2.us-west-2.amazon.com (Postfix) with ESMTP id 68D5D4024E;
+	Fri,  7 Mar 2025 00:58:33 +0000 (UTC)
+Received: by dev-dsk-ptyadav-1c-43206220.eu-west-1.amazon.com (Postfix, from userid 23027615)
+	id F0F9B4FBC; Fri,  7 Mar 2025 00:58:32 +0000 (UTC)
+From: Pratyush Yadav <ptyadav@amazon.de>
+To: <linux-kernel@vger.kernel.org>
+CC: Pratyush Yadav <ptyadav@amazon.de>, Jonathan Corbet <corbet@lwn.net>,
+	"Eric Biederman" <ebiederm@xmission.com>, Arnd Bergmann <arnd@arndb.de>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>, Alexander Viro
+	<viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara
+	<jack@suse.cz>, Hugh Dickins <hughd@google.com>, Alexander Graf
+	<graf@amazon.com>, Benjamin Herrenschmidt <benh@kernel.crashing.org>, "David
+ Woodhouse" <dwmw2@infradead.org>, James Gowans <jgowans@amazon.com>, "Mike
+ Rapoport" <rppt@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, "Pasha
+ Tatashin" <tatashin@google.com>, Anthony Yznaga <anthony.yznaga@oracle.com>,
+	Dave Hansen <dave.hansen@intel.com>, David Hildenbrand <david@redhat.com>,
+	Jason Gunthorpe <jgg@nvidia.com>, Matthew Wilcox <willy@infradead.org>, "Wei
+ Yang" <richard.weiyang@gmail.com>, Andrew Morton <akpm@linux-foundation.org>,
+	<linux-fsdevel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-mm@kvack.org>, <kexec@lists.infradead.org>
+Subject: [RFC PATCH 0/5] Introduce FDBox, and preserve memfd with shmem over KHO
+Date: Fri, 7 Mar 2025 00:57:34 +0000
+Message-ID: <20250307005830.65293-1-ptyadav@amazon.de>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Wed, 5 Mar 2025 16:46:08 +0530 MD Danish Anwar wrote:
-> + - ``FW_RTU_PKT_DROP``: Diagnostic error counter which increments when RTU drops a locally injected packet due to port being disabled or rule violation.
-> + - ``FW_Q0_OVERFLOW``: TX overflow counter for queue0
-> + - ``FW_Q1_OVERFLOW``: TX overflow counter for queue1
-> + - ``FW_Q2_OVERFLOW``: TX overflow counter for queue2
-> + - ``FW_Q3_OVERFLOW``: TX overflow counter for queue3
-> + - ``FW_Q4_OVERFLOW``: TX overflow counter for queue4
-> + - ``FW_Q5_OVERFLOW``: TX overflow counter for queue5
-> + - ``FW_Q6_OVERFLOW``: TX overflow counter for queue6
-> + - ``FW_Q7_OVERFLOW``: TX overflow counter for queue7
-...
+This series introduces the File Descriptor Box (FDBox), along with
+support in memfd and shmem for persisting memfds over KHO using FDBox.
 
-Thanks for the docs, it looks good. Now, do all of these get included
-in the standard stats returned by icssg_ndo_get_stats64 ?
-That's the primary source of information for the user regarding packet
-loss.
+FDBox is a mechanism for userspace to name file descriptors and give
+them over to the kernel to hold. They can later be retrieved by passing
+in the same name. The primary purpose of it is to be used with Kexec
+Handover (KHO) [0]. See Documentation/kho/fdbox.rst for more details.
 
->  	if (prueth->pa_stats) {
->  		for (i = 0; i < ARRAY_SIZE(icssg_all_pa_stats); i++) {
-> -			reg = ICSSG_FW_STATS_BASE +
-> -			      icssg_all_pa_stats[i].offset *
-> -			      PRUETH_NUM_MACS + slice * sizeof(u32);
-> +			reg = icssg_all_pa_stats[i].offset +
-> +			      slice * sizeof(u32);
->  			regmap_read(prueth->pa_stats, reg, &val);
->  			emac->pa_stats[i] += val;
+The original idea for FDBox came from Alex Graf. The main problem it
+attempts to solve is to give a name to anonymous file descriptors like
+memfd, guest_memfd, iommufd, etc. so they can be retrieved after KHO.
+Alex wrote some initial code [1] which this series is based upon, though
+that code is quite hacky and proof-of-concept, and has been
+significantly refactored and polished with this series. Alex's code
+mainly played around with KVM, but since I am more familiar with memfd
+and shmem, I have picked those as the first users.
 
-This gets called by icssg_ndo_get_stats64() which is under RCU 
-protection and nothing else. I don't see any locking here, and
-I hope the regmap doesn't sleep. cat /proc/net/dev to test.
-You probably need to send some fixes to net.
+That is not to say this series is in a top notch state already. There is
+still a lot of room for improvement, both in FDBox and in memfd and
+shmem. The aim of the patches is to present the idea to get early
+feedback, and to demonstrate KHO in action, potentially having a
+consumer of KHO ready by the time those patches are ready for prime
+time.
+
+I have written a simple userspace tool to interact with FDBox and memfd.
+It can be found here [2]. It is quite simple currently. When given the
+create command, it creates a box, and a memfd, and fills the memfd with data
+from a file called "data". It then adds the memfd to the box and seals
+it. Then one can do KHO. After KHO, the restore command gets the FD out
+of the box and writes the output to a file called "out". The original
+and new file can be compared to ensure data consistency.
+
+I have tested using the tool and a 1 GiB file, and the memfd came back
+over KHO with the same contents. The performance was fast enough to not
+be noticeable to the naked eye, though I have not done much more
+performance analysis than that.
+
+The whole process can be seen in action in this Asciinema [4].
+
+Sample instructions to use the tool:
+
+       $ make
+       $ dd if=/dev/urandom of=data bs=1G count=1
+       $ ./fdbox create
+       $ echo 1 > /sys/kernel/kho/active
+       $ kexec -s -l [...]
+       $ kexec -e
+
+After the kexec is done,
+
+      $ ./fdbox restore
+      $ cmp data out
+      $ echo $?
+
+The full tree with the patches can be found at [3]. It contains a couple
+of my patches on top of Mike's KHO patches [0] to fix some small bugs.
+
+[0] https://lore.kernel.org/lkml/20250206132754.2596694-1-rppt@kernel.org/
+[1] https://github.com/agraf/linux-2.6/blob/kvm-kho-gmem-test/drivers/misc/fdbox.c
+[2] https://github.com/prati0100/fdbox-utils/blob/main/fdbox.c
+[3] https://web.git.kernel.org/pub/scm/linux/kernel/git/pratyush/linux.git/log/?h=kho
+[4] https://asciinema.org/a/mnyVpy1w67mueIkKZzqHI0oAN
+
+Pratyush Yadav (5):
+  misc: introduce FDBox
+  misc: add documentation for FDBox
+  mm: shmem: allow callers to specify operations to shmem_undo_range
+  mm: shmem: allow preserving file over FDBOX + KHO
+  mm/memfd: allow preserving FD over FDBOX + KHO
+
+ Documentation/filesystems/locking.rst |  21 +
+ Documentation/kho/fdbox.rst           | 224 ++++++++
+ Documentation/kho/index.rst           |   3 +
+ MAINTAINERS                           |   9 +
+ drivers/misc/Kconfig                  |   7 +
+ drivers/misc/Makefile                 |   1 +
+ drivers/misc/fdbox.c                  | 758 ++++++++++++++++++++++++++
+ include/linux/fdbox.h                 | 119 ++++
+ include/linux/fs.h                    |   7 +
+ include/linux/miscdevice.h            |   1 +
+ include/linux/shmem_fs.h              |   6 +
+ include/uapi/linux/fdbox.h            |  61 +++
+ mm/memfd.c                            | 128 ++++-
+ mm/shmem.c                            | 498 +++++++++++++++--
+ 14 files changed, 1800 insertions(+), 43 deletions(-)
+ create mode 100644 Documentation/kho/fdbox.rst
+ create mode 100644 drivers/misc/fdbox.c
+ create mode 100644 include/linux/fdbox.h
+ create mode 100644 include/uapi/linux/fdbox.h
+
 -- 
-pw-bot: cr
+2.47.1
+
 
