@@ -1,267 +1,129 @@
-Return-Path: <linux-doc+bounces-40270-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40272-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3902CA57BD3
-	for <lists+linux-doc@lfdr.de>; Sat,  8 Mar 2025 17:17:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B454A57C3B
+	for <lists+linux-doc@lfdr.de>; Sat,  8 Mar 2025 18:09:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6561516D17A
-	for <lists+linux-doc@lfdr.de>; Sat,  8 Mar 2025 16:17:30 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9C62E16E9B0
+	for <lists+linux-doc@lfdr.de>; Sat,  8 Mar 2025 17:09:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF68C161302;
-	Sat,  8 Mar 2025 16:17:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88D731CB9EA;
+	Sat,  8 Mar 2025 17:08:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EnX+fPQn"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ENzzTTAw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 900BA383A2;
-	Sat,  8 Mar 2025 16:17:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0410D383A2;
+	Sat,  8 Mar 2025 17:08:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741450645; cv=none; b=Xwm5lmRPo3mjQ0UOtRxZ5pVdz3AZErOFNsEBexlC6rtQxrVUOH9Z6XyNAthxcigxoIExVzIqd9cfEFLE2qOZams8O2pRtO29uIK3+xQVg1KPG+R2pn/l356E84mlcII5K14Wz5bo/rvq2veZAVvYH0+gJxN4hN/qoULTPJeyOiw=
+	t=1741453736; cv=none; b=XYj+BRwgcKP8Sv8H4jILYuxqmHT0G6go8MFenpIO3Z074mkRTBkuTGir2T5jULIHOprElQSpzrjbHC3l6wJxTe5zyJT/pe0W18iirgp43UlMGizbkZ1mX5GMzM5YQnIcY31utNWj7LDTB93ds5BU0ZjfqwF6Ik83H2xgFcxcofo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741450645; c=relaxed/simple;
-	bh=xC1dhXRJhNJXV88A2GMTUC68oKasP1pQrkTR0oGtHRM=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=G6fUJgU6mgQkuD/vS7enA7OuBuxHcVmgAMZjAZiotu6LPrtpDTun7Y9IzMSgJ0Kf6/2lt+ZZc2dp158vktRVx6+pFXDGKJiA7KGO/zee5I6EYiXDMeny/NVNqfkJDQa/RwyXpN+7CBP+upSWW7qIFG8kwuNAtoYgWfB1KDqo+sk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EnX+fPQn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A921C4CEE0;
-	Sat,  8 Mar 2025 16:17:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741450644;
-	bh=xC1dhXRJhNJXV88A2GMTUC68oKasP1pQrkTR0oGtHRM=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=EnX+fPQnSRCyreIT/+/blhaBEZEIbjj2Nqdp5unhGL2Edt9jDPyTRmWUDrU7fUjnw
-	 B5gBHkvsQGWZKFg7j5738FYpcuQTp3q+/fXxOGV5PmhFuF/AQObW5YVKAdxGzKeR78
-	 Kb8CFWkPODcVfnLUpZpjYpdmNqcw1j2pgemSrKY94fYRrgzvfQK3ObI5Xbykh2xMAk
-	 s+wlBG3fUzfwDgx4X9DS+83Pm+EELcHb/WXOYAEYsCFkwnLldIiJ9ui8j6MVnBkWsG
-	 eVXOHpbHWkKZRPlpHFXWZZLTHpjpPsWa36EacnSPGSaM+t5wcUqA5Qi2wzWjupXFGx
-	 be1ludsQWP1rQ==
-Date: Sat, 8 Mar 2025 16:17:17 +0000
-From: Jonathan Cameron <jic23@kernel.org>
-To: Angelo Dureghello <adureghello@baylibre.com>
-Cc: Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich
- <Michael.Hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>,
- David Lechner <dlechner@baylibre.com>, Jonathan Corbet <corbet@lwn.net>,
- linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, Julien Stephan <jstephan@baylibre.com>
-Subject: Re: [PATCH v3 1/2] iio: ad7380: add support for SPI offload
-Message-ID: <20250308161717.3842cbdf@jic23-huawei>
-In-Reply-To: <20250304-wip-bl-spi-offload-ad7380-v3-1-2d830f863bd1@baylibre.com>
-References: <20250304-wip-bl-spi-offload-ad7380-v3-0-2d830f863bd1@baylibre.com>
-	<20250304-wip-bl-spi-offload-ad7380-v3-1-2d830f863bd1@baylibre.com>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.48; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1741453736; c=relaxed/simple;
+	bh=YrA7wd8n7NLqEVAxegd9y+Av4QEBqHIaZpXSN7Muc+w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DEF6dcvRyq34MaveM30oR+xHvIJEwr3jLDaN4bylEjNn+xQPXl6yfXFu7AL+uRgoN1mV3xI+NtZxOaDUK7Jcb39Q26yw/ifyj+1A7oTXi26NWqvm/GTLhM+GT3kcVjEoWrmNB6H5T3BMQofSW6QjvkjoEgUyagI3H/6FKe1J9Dg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ENzzTTAw; arc=none smtp.client-ip=209.85.214.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-224341bbc1dso23699175ad.3;
+        Sat, 08 Mar 2025 09:08:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1741453734; x=1742058534; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=4IcMf84uhZ1TJoFOuLgOfVe7+B4onn10+WD0mzIT9m4=;
+        b=ENzzTTAwRBwxma4dIAk3Xuti416AORrZnEtmJD7N8fsRX+HVZV882Kw774b8UP+8iV
+         u6qhD69DmObqgC/mLyV9ZefdrWeeCGY1WaKzsMDHFe0s8mPOIdFt1tVFjbVpyvT4EuCE
+         r9R3q4YblY8lmmyEA0BQKZYntBVlpL0XkRy+C/gky4q1F9ujIYFf72UzMB8x6c51haRT
+         JmsocNEQ6jvgmke5ZmapC5OxnDYXS6p2ZfFy4kUV3QJyabJeQvo5PMi9nNrTJUN0MKWe
+         0CSKtXEqGl6GRbaEwS4akZX+IPZssoyS8hnDRnKK+zkoubqRHCWdWvyb16s+77oKDJyB
+         FtTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1741453734; x=1742058534;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=4IcMf84uhZ1TJoFOuLgOfVe7+B4onn10+WD0mzIT9m4=;
+        b=RzZf1RVpK3IUGpntmJL7I5NY/ov/3K+QjVe/GYWvkGAopE7+IPN4nodNP5xRo6/JNt
+         CGwvZ8mnJGV/0ANrSi78tnUqq3rBknHzzILXzKZUqv2MLkLjfrMZC7CeoG+AO0zJejdz
+         2XDqJYTfvytXhuXOznaMJR6XLOEY3hnUC5lpvF0WvJsUORDFvWz4KgfYisQ6h3RGcAP4
+         jboFNn3LUrnuQAFXPaNs6Z2Yd+KQP70IgKwB7qfUss7kw0ZfNY/Dr/U3i6oMgU+Enod/
+         ShTRkHjuwe5P9VscF+KCa8nrk2Oe7sYKWbQ1C4wBRZUPytaeVcBE+R8uZPZMqqj6KcxK
+         OC6w==
+X-Forwarded-Encrypted: i=1; AJvYcCUuQUWpx3GTfVp1YTaYgqX6XGwgQfarN4YVMA3azqLSBno/LZzFdB4WFrieItq9bIDP4Q32UzpDUbQ=@vger.kernel.org, AJvYcCVI5bp5UB+CivUqCYaKKvIEjVdUDfcdJzYwnc9uaNdmOLcp09rcP1h29md4ciCJ4hySycZa1SzfDGaxzWPcTZQI@vger.kernel.org, AJvYcCX9IXE+h+rT0ueZ1ghXNGRzwN5fWZSQBjyRVpTaayuKbkg2al0Kgk4mg+DRvEjx4ijhKqJOeKlI@vger.kernel.org, AJvYcCXjBMdWkxBMR/Hd8JCdwQaxvdSjitqH23OD0KbM0Zt6iFTXHD7khCWhHBQ3YC9o4fMwk9j8GlPY3fRIfj9Q@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy6mIWEKy7BuQBd1rpViUwkjm32qBvfeCEoRtPO8q8vqF5VzmKq
+	7yuXlnNcZz7x3t3sDRqZNq3pboJktkO9fs+Klm+nKw1+LmtF63w=
+X-Gm-Gg: ASbGncvaxlvOBZtA4Sno2DFHt7rsBiGXpd4/6/GTuSlOA3Es6uMNIBsQa73NgUexMRe
+	QUIihyfUrpp/Lwul/agvTeGZdrsngGkEuvUd3fTWFLXDEZDDBOfP3nlqQban9xmplB3LNAsSlrY
+	6QaJ7h4shDMiX4EkFMj9FXif0Qx6HYZcIYe5dbYpQDPuoEsDMEqVTcutfcPDrJ2T1ZFnWjNsgHl
+	bJemhruvf4SYrpGi7jP7lk6LbpxNB8puYdLkI9betjDKPlTJXyHn7Z3NZ17lVrk3ITbGvHs2lIh
+	m+sq9wRmkgps8ufJ7X/7AR8Z4uObhp9v9Gp0h7yxYaDY
+X-Google-Smtp-Source: AGHT+IFRZHlbgFDOueySaqdPee3EawbUTko5dKs36Wbsu+tzE6PWqif1pLkL8NZFxLhvNX2+zZW8Vw==
+X-Received: by 2002:a17:902:f78d:b0:223:5ada:88ff with SMTP id d9443c01a7336-2242889d1c3mr140941825ad.24.1741453734162;
+        Sat, 08 Mar 2025 09:08:54 -0800 (PST)
+Received: from localhost ([2601:646:9e00:f56e:2844:3d8f:bf3e:12cc])
+        by smtp.gmail.com with UTF8SMTPSA id d9443c01a7336-22410a7fa3csm48879285ad.110.2025.03.08.09.08.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 08 Mar 2025 09:08:53 -0800 (PST)
+Date: Sat, 8 Mar 2025 09:08:52 -0800
+From: Stanislav Fomichev <stfomichev@gmail.com>
+To: Eric Dumazet <edumazet@google.com>
+Cc: Stanislav Fomichev <sdf@fomichev.me>, netdev@vger.kernel.org,
+	davem@davemloft.net, kuba@kernel.org, pabeni@redhat.com,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	netfilter-devel@vger.kernel.org, coreteam@netfilter.org,
+	horms@kernel.org, corbet@lwn.net, andrew+netdev@lunn.ch,
+	pablo@netfilter.org, kadlec@netfilter.org
+Subject: Re: [PATCH net-next] net: revert to lockless TC_SETUP_BLOCK and
+ TC_SETUP_FT
+Message-ID: <Z8x5pI0suqOiZPId@mini-arch>
+References: <20250308044726.1193222-1-sdf@fomichev.me>
+ <CANn89iLV6mLh8mWhYket7gBWTX+3TcCrJDA4EU5YU4ebV2nPYw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CANn89iLV6mLh8mWhYket7gBWTX+3TcCrJDA4EU5YU4ebV2nPYw@mail.gmail.com>
 
-On Tue, 04 Mar 2025 16:25:44 +0100
-Angelo Dureghello <adureghello@baylibre.com> wrote:
-
-> Add support for SPI offload to the ad7380 driver. SPI offload allows
-> sampling data at the max sample rate (2MSPS with one SDO line).
+On 03/08, Eric Dumazet wrote:
+> On Sat, Mar 8, 2025 at 5:47 AM Stanislav Fomichev <sdf@fomichev.me> wrote:
+> >
+> > There is a couple of places from which we can arrive to ndo_setup_tc
+> > with TC_SETUP_BLOCK/TC_SETUP_FT:
+> > - netlink
+> > - netlink notifier
+> > - netdev notifier
+> >
+> > Locking netdev too deep in this call chain seems to be problematic
+> > (especially assuming some/all of the call_netdevice_notifiers
+> > NETDEV_UNREGISTER) might soon be running with the instance lock).
+> > Revert to lockless ndo_setup_tc for TC_SETUP_BLOCK/TC_SETUP_FT. NFT
+> > framework already takes care of most of the locking. Document
+> > the assumptions.
+> >
 > 
-> This is developed and tested against the ADI example FPGA design for
-> this family of ADCs [1].
 > 
-> [1]: http://analogdevicesinc.github.io/hdl/projects/ad738x_fmc/index.html
+> >
+> > Fixes: c4f0f30b424e ("net: hold netdev instance lock during nft ndo_setup_tc")
+> > Signed-off-by: Stanislav Fomichev <sdf@fomichev.me>
 > 
-> Signed-off-by: Angelo Dureghello <adureghello@baylibre.com>
-Hi Angelo
-
-A couple of trivial comments inline.
-
-This has crossed with Julien adding an extra device to the supported
-set. I could have guessed what the necessary changes were but probably
-better for you to do it and check for any problems.
-
-https://lore.kernel.org/all/20250226-ad7380-add-adaq4381-4-support-v1-1-f350ab872d37@baylibre.com/
-
-Jonathan
-
-> ---
->  drivers/iio/adc/Kconfig  |   2 +
->  drivers/iio/adc/ad7380.c | 509 +++++++++++++++++++++++++++++++++++++++++++----
->  2 files changed, 475 insertions(+), 36 deletions(-)
+> I think you forgot to mention syzbot.
 > 
-> diff --git a/drivers/iio/adc/Kconfig b/drivers/iio/adc/Kconfig
-> index 27413516216cb3f83cf1d995b9ffc22bf01776a4..c528f4632c0ef6782269d8afa89c17d2046d28a3 100644
-> --- a/drivers/iio/adc/Kconfig
-> +++ b/drivers/iio/adc/Kconfig
-> @@ -218,7 +218,9 @@ config AD7298
->  config AD7380
->  	tristate "Analog Devices AD7380 ADC driver"
->  	depends on SPI_MASTER
-> +	select SPI_OFFLOAD
->  	select IIO_BUFFER
-> +	select IIO_BUFFER_DMAENGINE
->  	select IIO_TRIGGER
->  	select IIO_TRIGGERED_BUFFER
->  	help
-> diff --git a/drivers/iio/adc/ad7380.c b/drivers/iio/adc/ad7380.c
-> index f232ad1a49634baeedc655916bc7a967604a1206..39a5e55fa7e8a6706e15750d07fa4b0fda7175eb 100644
-> --- a/drivers/iio/adc/ad7380.c
-> +++ b/drivers/iio/adc/ad7380.c
-> @@ -15,6 +15,9 @@
->   * ad7386/7/8-4 : https://www.analog.com/media/en/technical-documentation/data-sheets/ad7386-4-7387-4-7388-4.pdf
->   * adaq4370-4 : https://www.analog.com/media/en/technical-documentation/data-sheets/adaq4370-4.pdf
->   * adaq4380-4 : https://www.analog.com/media/en/technical-documentation/data-sheets/adaq4380-4.pdf
-> + *
-> + * HDL ad738x_fmc: https://analogdevicesinc.github.io/hdl/projects/ad738x_fmc/index.html
-> + *
+> Reported-by: syzbot+0afb4bcf91e5a1afdcad@syzkaller.appspotmail.com
+> Closes: https://lore.kernel.org/netdev/67cb88d1.050a0220.d8275.022d.GAE@google.com/T/#u
 
-Pet dislike of mine.  No lines at ends of comment blocks with nothing on them.  The */ provides
-any necessary space.
-
->   */
->  
->  #include <linux/align.h>
-> @@ -29,11 +32,13 @@
->  #include <linux/regmap.h>
->  #include <linux/regulator/consumer.h>
->  #include <linux/slab.h>
-> +#include <linux/spi/offload/consumer.h>
->  #include <linux/spi/spi.h>
->  #include <linux/units.h>
->  #include <linux/util_macros.h>
->  
->  #include <linux/iio/buffer.h>
-> +#include <linux/iio/buffer-dmaengine.h>
->  #include <linux/iio/events.h>
->  #include <linux/iio/iio.h>
->  #include <linux/iio/trigger_consumer.h>
-> @@ -92,6 +97,12 @@
->  #define AD7380_NUM_SDO_LINES		1
->  #define AD7380_DEFAULT_GAIN_MILLI	1000
->  
-> +/*
-> + * Using SPI offload, storagebits is always 32, so can't be used to compute struct
-> + * spi_transfer.len. Using realbits instead.
-> + */
-> +#define AD7380_SPI_BYTES(scan_type)	((scan_type)->realbits > 16 ? 4 : 2)
-> +
->  struct ad7380_timing_specs {
->  	const unsigned int t_csh_ns;	/* CS minimum high time */
->  };
-> @@ -99,6 +110,7 @@ struct ad7380_timing_specs {
->  struct ad7380_chip_info {
->  	const char *name;
->  	const struct iio_chan_spec *channels;
-> +	const struct iio_chan_spec *offload_channels;
->  	unsigned int num_channels;
->  	unsigned int num_simult_channels;
->  	bool has_hardware_gain;
-> @@ -111,6 +123,7 @@ struct ad7380_chip_info {
->  	unsigned int num_vcm_supplies;
->  	const unsigned long *available_scan_masks;
->  	const struct ad7380_timing_specs *timing_specs;
-> +	u32 max_conversion_rate_hz;
->  };
->  
->  static const struct iio_event_spec ad7380_events[] = {
-> @@ -216,6 +229,91 @@ static const struct iio_scan_type ad7380_scan_type_16_u[] = {
->  	},
->  };
->  
-> +/*
-> + * Defining here scan types for offload mode, since with current available HDL
-> + * only a value of 32 for storagebits is supported.
-> + */
-> +
-> +/* Extended scan types for 12-bit unsigned chips, offload support. */
-> +static const struct iio_scan_type ad7380_scan_type_12_u_offload[] = {
-> +	[AD7380_SCAN_TYPE_NORMAL] = {
-> +		.sign = 'u',
-> +		.realbits = 12,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +	[AD7380_SCAN_TYPE_RESOLUTION_BOOST] = {
-> +		.sign = 'u',
-> +		.realbits = 14,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +};
-> +
-> +/* Extended scan types for 14-bit signed chips, offload support. */
-> +static const struct iio_scan_type ad7380_scan_type_14_s_offload[] = {
-> +	[AD7380_SCAN_TYPE_NORMAL] = {
-> +		.sign = 's',
-> +		.realbits = 14,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +	[AD7380_SCAN_TYPE_RESOLUTION_BOOST] = {
-> +		.sign = 's',
-> +		.realbits = 16,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +};
-> +
-> +/* Extended scan types for 14-bit unsigned chips, offload support. */
-> +static const struct iio_scan_type ad7380_scan_type_14_u_offload[] = {
-> +	[AD7380_SCAN_TYPE_NORMAL] = {
-> +		.sign = 'u',
-> +		.realbits = 14,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +	[AD7380_SCAN_TYPE_RESOLUTION_BOOST] = {
-> +		.sign = 'u',
-> +		.realbits = 16,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +};
-> +
-> +/* Extended scan types for 16-bit signed_chips, offload support. */
-> +static const struct iio_scan_type ad7380_scan_type_16_s_offload[] = {
-> +	[AD7380_SCAN_TYPE_NORMAL] = {
-> +		.sign = 's',
-> +		.realbits = 16,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +	[AD7380_SCAN_TYPE_RESOLUTION_BOOST] = {
-> +		.sign = 's',
-> +		.realbits = 18,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +};
-> +
-> +/* Extended scan types for 16-bit unsigned chips, offload support. */
-> +static const struct iio_scan_type ad7380_scan_type_16_u_offload[] = {
-> +	[AD7380_SCAN_TYPE_NORMAL] = {
-> +		.sign = 'u',
-> +		.realbits = 16,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +	[AD7380_SCAN_TYPE_RESOLUTION_BOOST] = {
-> +		.sign = 'u',
-> +		.realbits = 18,
-> +		.storagebits = 32,
-> +		.endianness = IIO_CPU,
-> +	},
-> +};
-
-You could have perhaps used a macro for these to reduce repetition but it
-is perhaps slightly more readable without doing that.
-
-Jonathan
-
-
-
+Ah, yes, I was waiting for a repro, but should have attached the proper
+tags, thanks!
 
