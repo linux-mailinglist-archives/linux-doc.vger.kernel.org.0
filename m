@@ -1,144 +1,98 @@
-Return-Path: <linux-doc+bounces-40415-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40417-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BA10A59F94
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Mar 2025 18:41:28 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3627A5A194
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Mar 2025 19:03:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C7802170158
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Mar 2025 17:41:24 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5CBD83A7980
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Mar 2025 18:03:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B3509233D72;
-	Mon, 10 Mar 2025 17:41:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="KpmEM4VC"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86487231CB0;
+	Mon, 10 Mar 2025 18:03:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E59B23314B
-	for <linux-doc@vger.kernel.org>; Mon, 10 Mar 2025 17:41:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 038F21C4A24;
+	Mon, 10 Mar 2025 18:03:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741628475; cv=none; b=DqTq3a5UmOcNO/LHePrKTCPC7/zzek8bpyu33fYvVYPVnCO2lHh5Pg2maDPXIcldaLgmEraru1i9e45xkqCCbinAJnSxWjVZ0Vc4fNLsrglwRzi0QC9c4AuSyiCW0KoX/v7PE4XSUyQgnAR4pXKzwualrvUphnxoKgbLsA5utbM=
+	t=1741629806; cv=none; b=f9Sx6Ssy6u0PZ+FG3n16kyVWI+PlTTbn9uMbR914EFJFbfvV6PceAgRx3xR45khSOTS6KDo08dWq9seWbp1J/Eb1slToUH9vHl2x8xTzpbYzBVxsWQGiJoYQ2/v+n2bJCMQiN2m9S1TKQXOFxeZAyw/9vFgPgRCUpVvZzTeEosE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741628475; c=relaxed/simple;
-	bh=vap/8qEfDYJND2AdXVA7z71mlnRugvEHBnTI0XUnheM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=BzN1QR/4lsfgIx3hwq7qEcIm0/NQ+GvKI+QZ3c8K36+UDzFEj9hbSS2RoEPHE7dXFQAU8+h4NYfIVu48TcnZksnEm6OL5U5QT5bVNEBuicOIyP/isdw75vZ30co+52qcwOit6LWQZL+AM2aNVbi2khsVPS4f/yBxKjNsi5q2WY8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=KpmEM4VC; arc=none smtp.client-ip=209.85.128.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-43bb6b0b898so38572375e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 10 Mar 2025 10:41:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1741628472; x=1742233272; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=HgWPLY44UYfs7OSbFs+4rgP587/bNJC0XV4YHVYL62k=;
-        b=KpmEM4VCpQxR5yAEKq+3oWWvTUofGix+mTld+3nmxJU/Oh8m214gB29pN9TrR6kkVU
-         RrE3PkbvEuhY4lyeEzjEI8nvzocypDdWn2YS5Xrzy30FjrWcrQi7xTG6fP+oRi/iQWRQ
-         WmAEb34+PFXbiypd6pLQLeHVYztSIv4Ytp9EbSySwjq2XL6YeneNg2wkRrwk9QXiU30a
-         R0GtnUadDcv1oVlF5mb3fNUrxKdX5NLbfmvLZqcXQ2T6Jm/4CbYbOfNgLIc7aDjDPgD1
-         SIaC19V1CgjEBM3IaKMMtD8EadqKE5Q9jh14FsE1MtBR4Jt8GP+bKp/DGKQ88ww5BItn
-         Gbgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741628472; x=1742233272;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=HgWPLY44UYfs7OSbFs+4rgP587/bNJC0XV4YHVYL62k=;
-        b=axCxZbTwz5P/0lc0vkHyHpQcuIEL+aQtiTZbw09go9pP/jf3bWfVmeWslkCn4jbYy4
-         PNErK78xx4IMsQAeg1Ei7zg42h+Jk+kFktLucdVRhlAg7NUHoLT7Kh7jTg+nx9xLQcn/
-         xwQNTjGlpz9CwI8XK2rPPm/QW6/VHQRBDy0jiSi5mmhiOCnDv8lIw5jzPZC8AlTvl69s
-         T5VYyNJ1si0ua9MKEHUuBpgbNKJUrqcZ4IU//Rh2bh1ZwZcubfxTjsTULmgJOu8zUdZW
-         gcMOtDxSKgYXR5ipfQpIUW5SfaGLONUQgN8h+RtNvmv326aGAwt/c60f/K/gInU+Vpu0
-         uspQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWjl6W2I5mJizYb4Owq3x2wiZc9eeJVjyUReHGK61VZJihDM3s96F9JmD/Mw2W8r4zAddqy5mNjM+c=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxp2ncpYSdtJzvHoLwXNRyilQb40uVN2LGz4VamCRzB06paDukZ
-	si3t7xGxHEP8oy1f3NRXGhAPBymrwcSJH0Nrqpao9TJa1Ox3Ikcrn5jp70ntV+A1I1Lq+6+xQ8N
-	B
-X-Gm-Gg: ASbGnctr4pRRHjiYmcae8mxPH3zN6PxkBoKkCSOeyfH3e0mCHueqXVXOzLo/QQ3KtYX
-	KixMaS6vB04bBefSqP6VmcrRjZ8KDJir8Hbu46C6fhyMhfOOs//HBvCguJ127PHMaPB3iC3sCZ+
-	sOiOK3mh+h8dHIJ83CVVnoo8ias7SPvA+mARBqWQEEBQAmiQmxgkbQxrAnh29bnMh9y831hqNP0
-	rTSyhDFgBZffj+IaWgnFpjz78GjTHovhfMCv/c8uLOlBSpHRkq0XUgoS8lS/HEgvgcnhS+NkECY
-	esnJXtjWgCYZXLQ1/Mo+sFv3m2XpF3Qj15kqJJFi3H8y4Bz6aafyYvf0Mq1ZTeeSpCNXAAEw2rF
-	tWyrkm13q/AKsyRBJN1Y=
-X-Google-Smtp-Source: AGHT+IF2E0/FEPYOs2Ol5yXnd/QF0za9bgmKGmRzY5a5rBVIupAH5/HrBOSGOMwS07vxF3l2bXd4bA==
-X-Received: by 2002:a5d:5f94:0:b0:38f:4d20:4a17 with SMTP id ffacd0b85a97d-392641bcf76mr754572f8f.13.1741628471882;
-        Mon, 10 Mar 2025 10:41:11 -0700 (PDT)
-Received: from [127.0.1.1] (host-82-56-170-15.retail.telecomitalia.it. [82.56.170.15])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3912bfba8a9sm15597038f8f.9.2025.03.10.10.41.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Mar 2025 10:41:11 -0700 (PDT)
-From: Angelo Dureghello <adureghello@baylibre.com>
-X-Google-Original-From: Angelo Dureghello <adureghello@baylibre.org>
-Date: Mon, 10 Mar 2025 18:39:53 +0100
-Subject: [PATCH v4 2/2] doc: iio: ad7380: describe offload support
+	s=arc-20240116; t=1741629806; c=relaxed/simple;
+	bh=XMtm18g068N5MqIchA75+quYe9le6SbvtbqzVU9ALsc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=l3ZyPEt61z8ckm7PbtIO0KcEFOPgB+4M1Wg7FmvsyVWTnN86eQPdQLJuq7zKtufAEb8aVY7R/BiANXhTgUKo33zVS/03zK2fd+uJFAMfC5d04tw/6wSv+ibAeCDp18vuVmHXw7CFA88B/rj5aBHAqby09Rlh/cSo7ovwG1KVJQs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 68C191516;
+	Mon, 10 Mar 2025 11:03:34 -0700 (PDT)
+Received: from localhost (e132581.arm.com [10.1.196.87])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 98BA53F673;
+	Mon, 10 Mar 2025 11:03:22 -0700 (PDT)
+Date: Mon, 10 Mar 2025 18:03:18 +0000
+From: Leo Yan <leo.yan@arm.com>
+To: Suzuki K Poulose <suzuki.poulose@arm.com>
+Cc: Mike Leach <mike.leach@linaro.org>,
+	James Clark <james.clark@linaro.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Arnaldo Carvalho de Melo <acme@redhat.com>,
+	Namhyung Kim <namhyung@kernel.org>, coresight@lists.linaro.org,
+	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 5/8] coresight: etm: Add an attribute for updating
+ buffer
+Message-ID: <20250310180318.GH9682@e132581.arm.com>
+References: <20250310104919.58816-1-leo.yan@arm.com>
+ <20250310104919.58816-6-leo.yan@arm.com>
+ <d8b1cf1f-1996-4d9c-9f1a-fad556f91577@arm.com>
+ <20250310155015.GG9682@e132581.arm.com>
+ <3f4354e7-e74b-4ce9-b0c7-4be103cbc94d@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250310-wip-bl-spi-offload-ad7380-v4-2-b184b37b7c72@baylibre.com>
-References: <20250310-wip-bl-spi-offload-ad7380-v4-0-b184b37b7c72@baylibre.com>
-In-Reply-To: <20250310-wip-bl-spi-offload-ad7380-v4-0-b184b37b7c72@baylibre.com>
-To: Jonathan Cameron <jic23@kernel.org>, 
- Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
- David Lechner <dlechner@baylibre.com>, Jonathan Corbet <corbet@lwn.net>
-Cc: linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-doc@vger.kernel.org, Angelo Dureghello <adureghello@baylibre.com>
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3f4354e7-e74b-4ce9-b0c7-4be103cbc94d@arm.com>
 
-From: Angelo Dureghello <adureghello@baylibre.com>
+On Mon, Mar 10, 2025 at 04:37:44PM +0000, Suzuki Kuruppassery Poulose wrote:
 
-Add a section to the ad7380 documentation describing how to use the
-driver with SPI offloading.
+[...]
 
-Signed-off-by: Angelo Dureghello <adureghello@baylibre.com>
----
- Documentation/iio/ad7380.rst | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+> > How about we dynamically set the default flag in the Perf tool?
+> > 
+> > - If users set explictly the 'update_buf_on_pause' flag, then the
+> >    setting will be respected.
+> > - If users don't set the flag, perf tool detects it is TRBE sinks,
+> >    then it can set 'update_buf_on_pause' flag as false.
+> 
+> Not really possible. There could be systems with mixed sinks. e.g.  TRBE
+> for some CPU and ETR for others (say due to a non-functioning TRBE).
+> 
+> > - If users don't set the flag, perf tool detects it is ETF/ETB/ETR
+> >    sinks, it sets the flag as true.
+> 
+> And in the cases above, perf event cannot run on all the CPUs, because
+> some sinks don't support it.
+> 
+> Why do we need a flag, when the effect is not user (read, perf decoder)
+>  visible and at the same time improves some scenarios (read non-TRBE cases)
+> ?
 
-diff --git a/Documentation/iio/ad7380.rst b/Documentation/iio/ad7380.rst
-index 35232a0e3ad730c19b5201b74280bdb6deaa9667..24a92a1c4371db6b59ef47edf06cee860641ebbf 100644
---- a/Documentation/iio/ad7380.rst
-+++ b/Documentation/iio/ad7380.rst
-@@ -178,6 +178,24 @@ Unimplemented features
- - Power down mode
- - CRC indication
- 
-+SPI offload support
-+===================
-+
-+To be able to achieve the maximum sample rate, the driver can be used with the
-+`AXI SPI Engine`_ to provide SPI offload support.
-+
-+.. _AXI SPI Engine: http://analogdevicesinc.github.io/hdl/projects/pulsar_adc/index.html
-+
-+When SPI offload is being used, some attributes will be different.
-+
-+* ``trigger`` directory is removed.
-+* ``in_voltage0_sampling_frequency`` attribute is added for setting the sample
-+  rate.
-+* ``in_voltage0_sampling_frequency_available`` attribute is added for querying
-+  the max sample rate.
-+* ``timestamp`` channel is removed.
-+* Buffer data format may be different compared to when offload is not used,
-+  e.g. the ``in_voltage0_type`` attribute.
- 
- Device buffers
- ==============
+Indeed in this case the flag is redundant.
 
--- 
-2.48.1
+> I would say, let the driver always update on pause, depending on the
+> sink.
 
+It is fine for me.  I will move towards this direction.
+
+Thanks,
+Leo
 
