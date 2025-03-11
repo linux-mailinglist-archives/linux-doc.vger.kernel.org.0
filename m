@@ -1,92 +1,102 @@
-Return-Path: <linux-doc+bounces-40498-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40500-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6422DA5BE96
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 12:13:23 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BA11A5C0AA
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 13:21:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 059C73B0D26
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 11:13:11 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F17F9171D2D
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 12:18:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E3C7253B67;
-	Tue, 11 Mar 2025 11:13:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 521EB257448;
+	Tue, 11 Mar 2025 12:16:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tqFu/7Ip"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="IA/A2BMx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A342253B5C;
-	Tue, 11 Mar 2025 11:13:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 630D12356D7
+	for <linux-doc@vger.kernel.org>; Tue, 11 Mar 2025 12:16:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741691588; cv=none; b=a1Vf0iNpr0EvtrcNPgORkfPBGTqpmQaYua3rx4IWgpalYv7fHVfZzn7+O+d0BKIVOio04dQ+Q5NVhOu9WiSlqZmheqLV+ltAhW1J8sBH1RG4ag6fjEDjirjX9YnbAJ4QXCMmA5cVd0PukCg75l44qZstdxg8h13YDzDBR7xqIow=
+	t=1741695363; cv=none; b=QnQ35YVJA0letfYAmVaCMzvhrkdYvIg1y7pF8vsYBk+oK+h/cS+TCG63IT5q3scSpf9lsRTKQ6Ep/q+nfu2V7YDkUc+QIoQdUpIM9/BKb1ZVU0PCKg1QBhQW23oolrAqhYUMZpMqLaeHOcu8R+g/ingWph/7V1n6bhMWQZDeRKU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741691588; c=relaxed/simple;
-	bh=MCSFipezs08azWSv6XDg9ZURoBjjcv5P3dlnKmvdUpM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lLbcbFhADMua3waEo2nuG21AgnlGFrRqJHM8076JVggKdMrjQSJqwJwORsAmBAMypH9m/UZMSHnE5/UcAe1zqKjTcIW+wie1SQ8DW/9SlAKM9CH/EFpAep8zMhT4Nv9o99YVLug58K1hC6nNW/aA94mXX/7lXM/rhlnJt52KTrg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tqFu/7Ip; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3AE7C4CEE9;
-	Tue, 11 Mar 2025 11:13:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741691587;
-	bh=MCSFipezs08azWSv6XDg9ZURoBjjcv5P3dlnKmvdUpM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=tqFu/7IpDtcBQ4/PT1umuRXF95PiBTRqR2DxX54smhTGURBCEYbsgHjeyK3ofIZ4t
-	 JefS59LspRXUHhJcnRhulCNd1qrXR0VQTUCnvulwPmXOtVGM1kGGpiXG9WAcqcY2w8
-	 tqsRgt8+U9FvSzzf73QDrtxLl38LExA4FgpB3hxiW29WTYqXE9PZljIkPv1vmlJMW9
-	 Ookgy7IBhKoUHIm5dEepNUfI9BJUkpmfbkAL4OwN/QRMFXFEOLJ0BdOafrHIMiYOId
-	 Jck67SEeFPW2X9O1kk1HGJ7gxyWhGeWfLJiboDRCLDa+orLhmBLNYwWUN9QqI9Hkg8
-	 T7lhsXP1xncdg==
-Date: Tue, 11 Mar 2025 12:13:01 +0100
-From: Simon Horman <horms@kernel.org>
-To: Uday Shankar <ushankar@purestorage.com>
-Cc: Breno Leitao <leitao@debian.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Johannes Berg <johannes@sipsolutions.net>,
-	Jonathan Corbet <corbet@lwn.net>, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH net-next v5 2/2] netconsole: allow selection of egress
- interface via MAC address
-Message-ID: <20250311111301.GL4159220@kernel.org>
-References: <20250220-netconsole-v5-0-4aeafa71debf@purestorage.com>
- <20250220-netconsole-v5-2-4aeafa71debf@purestorage.com>
- <20250225144035.GY1615191@kernel.org>
- <Z8tS5t+warQdwFTs@dev-ushankar.dev.purestorage.com>
+	s=arc-20240116; t=1741695363; c=relaxed/simple;
+	bh=JmYUzDvAxPGj4zbO2i1wDLyR5cCoRXGD9vm51/Rv110=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=XAvHpit6Rj1jWCnQeJhJnUhzQIlmQRY26G0vR5m9OKP0bsYUw7UHQ6SM8JqOPCi4unsK9P9c289ro0u8uJ3J0+YEKwKHGokwCZZUn4EYAzDvv/XOhmXEmCtWKMLDWAmtvgpGyU5NDf5u6XXxGgomnnjUqePOWOoli+s4NSt+D3g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=IA/A2BMx; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1741695360;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=L66ODmBs+dCHgrMRGT2Pjz0+6wIG2q2DYOyUrGumZ1k=;
+	b=IA/A2BMxJcQX0aDo2+980d2g3y2Njn12cH9RC3JAIaMusgyJ/WpMT4hdfSEI5C2nTKDJM3
+	KCoeLtDGLXZNyBiV1FDHhaxJOr86Ln2+2jyoqpRhLemSScEnd3XvTyXF1mSlXIC8bn05Ro
+	GtKm07cSuJR4fqHfSmfb/LTqkr1c2EM=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-468-F4Pfz6OmP5CPe6M57fyX2g-1; Tue,
+ 11 Mar 2025 08:15:57 -0400
+X-MC-Unique: F4Pfz6OmP5CPe6M57fyX2g-1
+X-Mimecast-MFC-AGG-ID: F4Pfz6OmP5CPe6M57fyX2g_1741695355
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 87EDE1828A80;
+	Tue, 11 Mar 2025 12:15:55 +0000 (UTC)
+Received: from fedora.brq.redhat.com (unknown [10.43.17.52])
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id BEBD01800944;
+	Tue, 11 Mar 2025 12:15:52 +0000 (UTC)
+From: Tomas Glozar <tglozar@redhat.com>
+To: Steven Rostedt <rostedt@goodmis.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	John Kacur <jkacur@redhat.com>,
+	Luis Goncalves <lgoncalv@redhat.com>,
+	Tomas Glozar <tglozar@redhat.com>
+Subject: [PATCH 0/4] Documentation/rtla: Cover BPF sample collection
+Date: Tue, 11 Mar 2025 12:49:32 +0100
+Message-ID: <20250311114936.148012-1-tglozar@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Z8tS5t+warQdwFTs@dev-ushankar.dev.purestorage.com>
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
 
-On Fri, Mar 07, 2025 at 01:11:18PM -0700, Uday Shankar wrote:
-> On Tue, Feb 25, 2025 at 02:40:35PM +0000, Simon Horman wrote:
-> > Reviewed-by: Simon Horman <horms@kernel.org>
-> 
-> Hey, since this has gotten quiet for a while, just wanted to confirm
-> that there's no action needed from my end? Is this in the queue for
-> net-next?
+This is a follow-up to the BPF sample collection patchset [1],
+documenting both the feature's build requirements in the readme and
+the feature itself in the manpages.
 
-Hi Uday,
+A few fixes affecting the same manpages are also included in
+the patchset.
 
-It seems that this series has been marked as Changes Requested in
-patchwork, which may explain the lack of progress. But that designation
-doesn't seem correct to me. So let's see if this can move this series
-back into the queue for the maintainers.
+[1] https://lore.kernel.org/linux-trace-kernel/20250218145859.27762-1-tglozar@redhat.com/T/#u
+
+Tomas Glozar (4):
+  Documentation/rtla: Fix duplicate text about timerlat tracer
+  Documentation/rtla: Fix typo in rtla-timerlat.rst
+  Documentation/rtla: Fix typo in common_timerlat_description.rst
+  Documentation/rtla: Include BPF sample collection
+
+ .../tools/rtla/common_timerlat_description.rst         | 10 +++++++++-
+ Documentation/tools/rtla/rtla-timerlat.rst             |  9 +++------
+ tools/tracing/rtla/README.txt                          |  7 +++++++
+ 3 files changed, 19 insertions(+), 7 deletions(-)
 
 -- 
-pw-bot: under-review
+2.48.1
+
 
