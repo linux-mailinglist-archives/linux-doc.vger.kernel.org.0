@@ -1,114 +1,141 @@
-Return-Path: <linux-doc+bounces-40499-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40505-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44EBBA5C061
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 13:14:57 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DFF9A5C14F
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 13:35:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DC634189C6BA
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 12:11:24 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F2BF23AC97E
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 12:34:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D2F8625EFAB;
-	Tue, 11 Mar 2025 12:03:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E015256C7B;
+	Tue, 11 Mar 2025 12:34:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WKH2YSEo"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="B+TNxXOU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B9F82571A0;
-	Tue, 11 Mar 2025 12:03:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 933A6253B6A;
+	Tue, 11 Mar 2025 12:34:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741694633; cv=none; b=ba8lR9iAgfYyykYH+7nvNRJJuZeCZus4Ze0AtJOev/2CxvHV5gemqvezeLurnXSXVTMkqp1CPcb5l8nmjD78JKv+crg/TaVQS7T9MMTfxWC9TPwofcUBGVGlqAhuKomp5vRKETC4M58J8wMQeS2Xb2ynl1YXw22lZWuNpkGU17w=
+	t=1741696453; cv=none; b=RFucZxNul1tw010bNaP6c4bw9KIhdaZ590Vy+FAbuVLfIUgpIKar1ZPpfdLZuaVTgMD0MTvN1zKgpvGTTURPcQYtOx6+kIzhyb4F97lypBetJE1Fo/wKi5xU8ok4wBU680Eq2sj+73MLjulJ0VflbTff85RpG25UeJerROFrdUc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741694633; c=relaxed/simple;
-	bh=lNB+xluVHdB0sMAdXkr3VICv+cyzUuhxC/f3Rfb+EYI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cTpqgpN1lyynHt45TUJaacRTYJPV2WQw7+vzcjHItqnX6TGkwFJXFhkZ6ljVxL6YNPHoOrs45eW9fLts8lsxO21U+YE9q4go7x0cc+WnF9svcR5O1RRyWZWupJsx2cpW2hi5FQicYXeKkdXAcDmENWiEuf9jjsfXeQsxFo2u+jM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WKH2YSEo; arc=none smtp.client-ip=209.85.214.177
+	s=arc-20240116; t=1741696453; c=relaxed/simple;
+	bh=addBakMJtFipeP5Dm9M+uBzjJaYdDmTB6XxVM3YiFNA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=b29Poll4WUDMFTMg01mhRdDyN5eZU7ElC/fygNGs1umXJDRcXoao8jSZCVETJrXOjvQj5qkWwss6LUbTHXbhgaY11xjHuLyDmNDrRDXUlyneYlq1PbG7YGmrcA6Bd3Gf/VIiKOdUL8xRXJqoQXdyxJMxhm7c1WnQp2Y1et+aDoA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=B+TNxXOU; arc=none smtp.client-ip=209.85.222.178
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-223f4c06e9fso88725835ad.1;
-        Tue, 11 Mar 2025 05:03:52 -0700 (PDT)
+Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-7c3bf231660so558493685a.0;
+        Tue, 11 Mar 2025 05:34:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1741694631; x=1742299431; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=RZQCZpAfe5gKaMnJVFSrCHy4twk7KgmPvZpy3BHUx0w=;
-        b=WKH2YSEoFZXQE0//T6VOe8UFjJdsIQYWgpJA3QKTlUjh4aAuufedIDCnb10xvOhjOr
-         UnDDrs3eF+yapZwZ2Gppy+JxnEtE3+iiCFRQUZMPgdP3kUCL5tEFzIYeEzpjmNrOxoTi
-         So1c+QXUSm4lXU3M+K0NDAWLzJwIireKEOuUkZkMjf56YEFrRvu3oD9U7uxfRBqnE99x
-         g2hhjZAlaPr4V8YFf5QVik6s4F8mFHIKhToGUyVV8kxLrcfmYNHmC8HqxGaaCqBqk8Lm
-         J+eUo073TJ1J+qJPPnYBl6eB8Ko7dStLBrdcq8YHhPwEHsfdiLvWgJ1arHlDwtgNF62L
-         Hx9Q==
+        d=gmail.com; s=20230601; t=1741696450; x=1742301250; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=m1ZxqjyMUd+isnYc/2JZqNQs5zU7eDZecHhSMewZT7k=;
+        b=B+TNxXOUESk9yQpQv+5qmeChu5CC8kSE1wwoCtyl7amr2MuqPf0dpirEQFUXrwvqth
+         avV7uVarGsNVyKyDVhslvfhOyC6/OIdM4cFArFnn95j3GrZv0y2rPAzfmweeFafHtLBP
+         B6GItnEejDvx01k4wVa95yXyEqeqdyyHPLtxC8Q5io8Wu0Pq3I77AyyXOtKhKGYZEpZp
+         FhEEKaO8ZUdL6ObWBX0DGfbw1XK/JvExo2tbnesMLFUIMrdFr7O/LSZADZV+acAJXfaF
+         +c4YLAV6fztuSn4SlNSwZHT7rOsr2QQY+xMeR1pEg4xyIyI5f2WSvwtP6AkcXxi5Ysyk
+         XAOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741694631; x=1742299431;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20230601; t=1741696450; x=1742301250;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=RZQCZpAfe5gKaMnJVFSrCHy4twk7KgmPvZpy3BHUx0w=;
-        b=gSRDCh/ybTe0uKEL2lYNj0g+knsdTj+QgYkudmQT4SBCgNxtIkyqAhkHrMLs+yB/OK
-         dQ+HnX1DMJqHhNLkGTNBizraPnN6XgwVfnGt6uZmEgiqRYwq+kRgMdSgeQkvYpdO0X11
-         iqPg4dr/uSIPfvpirT0DLhthY+OWfgbtN/YcJ0NU/uywovWzFbdNzjJwV8qPyLJbtvwb
-         /sjHQtmM9VcWhIHnk/SlWC6M9XMOFTbSz6W5A8kkX8YVs2eJAYxE2ITtcuakpDFxxRUG
-         6T9XaQY3eZciuNxomPsktrMUyCMOX5xCOsNfT6DWt6IUR4RWQsHXUUXq99yZ76HnJk5V
-         2zsg==
-X-Forwarded-Encrypted: i=1; AJvYcCVKi7tGDCSj/l+380KElwnroYXsH+7v7OOYYx/pjpYa8UwtTrXoTg43CssE2O8YljJu1LvVpp2QN5OK+oOG3QBMACUL@vger.kernel.org, AJvYcCVkNOJ0M6QjMruM+4ILQsDVZUpZlbS1ossVpufZP5rw2yLDzDV4BjOuPkzZW9cgtISAbiBxfJ++R1Q=@vger.kernel.org, AJvYcCXRPh3Bz4DF1hVQvJGo6bKx/c5vMIu5EoETUlcD4MfPPdwOVCBp3MgWGNsuK9ZGswJFMtxOHZ6FMQPYl6C6@vger.kernel.org
-X-Gm-Message-State: AOJu0Yza4NkyWZyv2Tdoo0//jeeVUzhdDeK1KDF8jTHZ/vgpU5TprGqD
-	sV6BYZHi/tSDIXiJ39ZTEYG6fCCITiRuxCGo02UqzbAfxsnDGDcW
-X-Gm-Gg: ASbGnctrIswdIG0ynSwq7LbMofdhib26NeSjcYX3EagZkWPQV7FYlH6rQu63gCfUijc
-	RmbTZjaLK36PfCsTQ4REI1+fcUrv1JyLQVBhYnQRcgBFsOUILgB5J6NMW+cZORNLy+fxTj9w6Co
-	MhAyC78MjnR+NvlDsrXOQpZCJEq9X6t5f9Xm9YJsse1nl2uol6NsODnq3XbhCv0HLENqy4+LIIP
-	fz0SKyD5/EyqXk0xSdSzeeNtzTrhBhaH/iM9yzDM3pNa9qNsSAtsmI4dt+BjPW2uyqsIDQMAXgm
-	jRtPgqiqosxICeZV92hqkNamk1bmqHL61QaA25OI+uyIGTSwO3CnhrGNAEUywil1IZNubUOvpTU
-	OqW0oaAaW2VzvwUKfvQCPjPgk
-X-Google-Smtp-Source: AGHT+IFGTZJKgUE85hdQhCUMDZf/YDgvHbNQzVbwDVYAa4WWsCDfLx5Oc+vp9Cn6By0AnN6qgXQJZw==
-X-Received: by 2002:a17:902:cec6:b0:220:fe36:650c with SMTP id d9443c01a7336-22593dbba6emr47676715ad.23.1741694631530;
-        Tue, 11 Mar 2025 05:03:51 -0700 (PDT)
-Received: from ?IPV6:2409:4080:1188:3708:3a3b:1a57:b459:3f2b? ([2409:4080:1188:3708:3a3b:1a57:b459:3f2b])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22410aaa9e7sm96219675ad.244.2025.03.11.05.03.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Mar 2025 05:03:51 -0700 (PDT)
-Message-ID: <e36ebdb7-775c-40e2-9523-37eefee4bbaf@gmail.com>
-Date: Tue, 11 Mar 2025 17:33:44 +0530
+        bh=m1ZxqjyMUd+isnYc/2JZqNQs5zU7eDZecHhSMewZT7k=;
+        b=Pf91e8/+0zjlFzg+9IBbXFxixV3Jx+SIe1BMcwZcDmYJ35TXQ2h6Oscn0GPNKTnt7r
+         6UxcGerhu2wT1NiWLmpgsgKfxgRVsQ3iSww8h6Y5RsNReDGvrctRI71Kt8dGxv5DFXMi
+         EqOeiPqRtmR17Ebk5EufOMgxwb+ujN5DTlcuuQHCSOAROe61rI60AFttYe3G7FRnFwRD
+         P4BdXnJ7YojtYXo0Hph43xes+ynFSymPBuxblHEB9D5d502i6ka1FEpj51hNaR7g0RTO
+         Scb3OAmblvlhkAdJ0o0agD30WMyRP+N7RTP4j041D8qMwuO7vReFBxaq6c3MJ5Sc9gMA
+         OfiQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUr2YUBsclp3xLz5JmWcoXC/iWBa1qschUBiXU9lfkopMsDQy+UWl3yt2+szyn7BX0R1GOtxI9fukLazNpA@vger.kernel.org, AJvYcCX2r1YrZSjmgooPwXlE4uAiEQjhOdpLmaa+CnSs3aO1tetDjrl/7+kYc24BWD6rklt028Mvb78DhMXs@vger.kernel.org
+X-Gm-Message-State: AOJu0YxIEywC91YAEZtQMwPbvSv8TLD4VUuYd+QnljA9W9NhQTU+jpJZ
+	Wp2+zypB0p8N+uuQEtjrsdaljBBpZ2/LQAg7dhN0gaNUpGOGzCNa
+X-Gm-Gg: ASbGncusn9woB92xjaaBb62RwNvsQ/Kx/6HHRn1ZxW1o1agp6NsG8yHsrk/TPHs+s46
+	YQmYnYNBeJE7Dn7qRffeTsLz9w4ApI6B6OcUb3Uf1d3QzRIlAiCM9xqxlK82FKS/76Tn+FxWvCS
+	trxkMBFxf8r4iOpDp3DEnYnX4Bin4quB/utgNteb5bFp/zl0KSqwqqGgBzqwhqtHjEWtG+VEJ/p
+	n14hPmzvBdHaBxbq16sTbFF3xkLqNgUrmHFcMYyDp7Gkzf1HiiI3Ri5w7QTOJRphRSG9w78zsFY
+	0A/Q6OHNOzKVfIH6JSCo
+X-Google-Smtp-Source: AGHT+IFU2cAqaMeCXlZ0Hqy6Zv7mfjOYRy5JKPusGv2guBlnRHiq/LPliOv7yz6eaX2PsMQjmuIglQ==
+X-Received: by 2002:a05:620a:26a3:b0:7c5:55f9:4bc1 with SMTP id af79cd13be357-7c555f94e42mr850962085a.42.1741696450372;
+        Tue, 11 Mar 2025 05:34:10 -0700 (PDT)
+Received: from localhost ([2001:da8:7001:11::cb])
+        by smtp.gmail.com with UTF8SMTPSA id af79cd13be357-7c56630e44dsm34135885a.86.2025.03.11.05.34.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Mar 2025 05:34:09 -0700 (PDT)
+Date: Tue, 11 Mar 2025 20:34:02 +0800
+From: Inochi Amaoto <inochiama@gmail.com>
+To: Jonathan Corbet <corbet@lwn.net>, 
+	Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+	Albert Ou <aou@eecs.berkeley.edu>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	=?utf-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>, Charlie Jenkins <charlie@rivosinc.com>, 
+	Evan Green <evan@rivosinc.com>, Andrew Jones <ajones@ventanamicro.com>, 
+	Inochi Amaoto <inochiama@gmail.com>, Jesse Taube <jesse@rivosinc.com>, Andy Chiu <andybnac@gmail.com>, 
+	Alexandre Ghiti <alexghiti@rivosinc.com>, Yong-Xuan Wang <yongxuan.wang@sifive.com>, 
+	Yu Chien Peter Lin <peterlin@andestech.com>, Samuel Holland <samuel.holland@sifive.com>
+Cc: linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, Yixun Lan <dlan@gentoo.org>, 
+	Longbin Li <looong.bin@gmail.com>
+Subject: Re: [PATCH v4 0/3] riscv: Add bfloat16 instruction support
+Message-ID: <d6t25jmcf57sqpjqwykhdf3ju6v3wwpyaiumll4x6bjfhcohl5@oikmnpusjn6u>
+References: <20250213003849.147358-1-inochiama@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] docs: tracing: Reduce maxdepth in index documentation
-To: Bagas Sanjaya <bagasdotme@gmail.com>, rostedt@goodmis.org,
- mhiramat@kernel.org, mathieu.desnoyers@efficios.com, corbet@lwn.net
-Cc: skhan@linuxfoundation.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20250217112109.7734-1-purvayeshi550@gmail.com>
- <Z7aczkdNVgLy1NeP@archie.me>
-Content-Language: en-US
-From: Purva Yeshi <purvayeshi550@gmail.com>
-In-Reply-To: <Z7aczkdNVgLy1NeP@archie.me>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250213003849.147358-1-inochiama@gmail.com>
 
-On 20/02/25 08:39, Bagas Sanjaya wrote:
-> On Mon, Feb 17, 2025 at 04:51:09PM +0530, Purva Yeshi wrote:
->> Reduce :maxdepth: from 2 to 1 in index.rst to simplify the table of
->> contents, showing only top-level document titles for better readability.
->>
+On Thu, Feb 13, 2025 at 08:38:44AM +0800, Inochi Amaoto wrote:
+> Add description for the BFloat16 precision Floating-Point ISA extension,
+> (Zfbfmin, Zvfbfmin, Zvfbfwma). which was ratified in commit 4dc23d62
+> ("Added Chapter title to BF16") of the riscv-isa-manual.
 > 
-> Is this patch mean to be applied on top of/squashed into your toctree
-> refactoring ([1])?
+> Changed from v3:
+> 1. rebase for v6.14-rc1
+> 2. patch2: add validate for zfbfmin, zvfbfmin, zvfbfwma
+> 3. patch2: apply Clément's tag
 > 
-> Confused...
+> Changed from v2:
+> 1. rebase for v6.13-rc1
 > 
-> [1]: https://lore.kernel.org/linux-doc/20250217110637.6640-1-purvayeshi550@gmail.com/
+> Changed from v1:
+> 1. patch3: add missing code in sys_hwprobe.c
+> 
+> Inochi Amaoto (3):
+>   dt-bindings: riscv: add bfloat16 ISA extension description
+>   riscv: add ISA extension parsing for bfloat16 ISA extension
+>   riscv: hwprobe: export bfloat16 ISA extension
+> 
+>  Documentation/arch/riscv/hwprobe.rst          | 12 +++++
+>  .../devicetree/bindings/riscv/extensions.yaml | 45 +++++++++++++++++++
+>  arch/riscv/include/asm/hwcap.h                |  3 ++
+>  arch/riscv/include/uapi/asm/hwprobe.h         |  3 ++
+>  arch/riscv/kernel/cpufeature.c                | 35 +++++++++++++++
+>  arch/riscv/kernel/sys_hwprobe.c               |  3 ++
+>  6 files changed, 101 insertions(+)
+> 
+> --
+> 2.48.1
 > 
 
-Sorry for the confusion. I will send a series of patches, like [0/3] and 
-[1/3], to make the dependencies clear. Thanks for your patience!
+I wonder whether this patch could get merged? So I can
+submit the SG2044 board dts without this as dependency.
+
+Regards,
+Inochi
 
