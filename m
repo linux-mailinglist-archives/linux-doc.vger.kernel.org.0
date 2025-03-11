@@ -1,143 +1,155 @@
-Return-Path: <linux-doc+bounces-40507-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40510-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDC7BA5C186
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 13:41:18 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 219F6A5C192
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 13:44:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AA1501883744
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 12:39:07 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C98331883E52
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 12:41:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4076925B678;
-	Tue, 11 Mar 2025 12:37:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A666224244;
+	Tue, 11 Mar 2025 12:41:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="NsLYiDJZ"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QGQHkBh5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21FDA25A337
-	for <linux-doc@vger.kernel.org>; Tue, 11 Mar 2025 12:37:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0503179BC;
+	Tue, 11 Mar 2025 12:41:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741696629; cv=none; b=sFWrxg+LTO9UIfUjwpUZp6XMD7C6ygkMUZ0TPK4q08wi7cIORVYA/mYJDY0jYZ2VDR03AqtXK8M6J/gGbA7Cu5tvDI7r0EoKtfW0p73nggFAviE6kEGmaGuaHe3pGxKhoZnEoj3IzfBOCWulI8+4T33C5cW8pLrW2th1+si/BSE=
+	t=1741696876; cv=none; b=WReakUAkHYnwxfD3yr/pzd6cilUw1hKJnfJSu0irp4YJwzJbtIRn6YwxyD3fN2jR3GTKmINoz7O2ET/3NwuslS9cgVX0hdvVQS3P1CykuWV6S3tkcocfMQ4tA3bQrs9CANWih5kjX7Tjp2p8jS7SReG1ONIn8U8WnOgVQPEvrFs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741696629; c=relaxed/simple;
-	bh=zNk+oVMzTrxJrAV3YPS/mCKpQLRaGo/5NfuNYVLO0DA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Y2WZAdv34AN/oI7L9j69WlXqYZD2uYkPwndF8C4a4BCwbRE++BiaDCQd/WgqanLvT0lQtm9QNMCSdtKFl9NovGGW070oVNtUgg8zaWtPZk1RmrYLIR+NqRXHdOckj7HOJjv0DGk7dJAuJyQfErP6ygjYQZyn8DprFSCHdzFlhrs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=NsLYiDJZ; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-43cfe63c592so15482305e9.2
-        for <linux-doc@vger.kernel.org>; Tue, 11 Mar 2025 05:37:05 -0700 (PDT)
+	s=arc-20240116; t=1741696876; c=relaxed/simple;
+	bh=yr2NeM5xZd+21Kz+8dbrA+63YokkKPeruGiWILIFWq0=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=uYw0VGgPXA5wMumr8jOY40lP7Rv/4JMMxQ//5Z8v3hmBoapZW/bLH+1ageEJG/O0RbLLCR9YOEZr9x/JoAR9CrDJwRV3t3j7EzFNeEXh+20GgEj5eh0Xx1CrZgce70LNkFzWXPHTDnqy+pIv0f0VzpeqwVh/b7P1PZg17h1SPqE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QGQHkBh5; arc=none smtp.client-ip=209.85.214.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-22334203781so113184365ad.0;
+        Tue, 11 Mar 2025 05:41:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1741696624; x=1742301424; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YOohSrQvPqKoJS058lh6ERBfYfFVZu79WxTYWxna9iQ=;
-        b=NsLYiDJZXlp7X/saeDGXIS/Eaf+BKJNGesltZPBd8n7nt3ewjAG1USbmbfviciduEl
-         sKGNWnhT1w4L1QLII2a2/uDNltVybXrv5eki9+Y4wEEAsqX0oyOgIJZcL8A6mmydItE2
-         9UzKt3FhDdPAJUvm2sdwVV/ehIcVTRHtYe/MGvsT1qYtivvYqkXCsNnE95qUt1P1uVjW
-         IO8+aTFlGyAJdW6n/SjUE5wOzTHxZUrUfHoRsyrNzuJVaVkm3GtJ4XDh04/VhzlwgpYR
-         oA5LIMjNm0Jpat1DUiLsFg/bjQZQrPd0ddW9KQDbxc5bRDE3rfyCEf0n/2JX3yMhaZnf
-         7yQA==
+        d=gmail.com; s=20230601; t=1741696874; x=1742301674; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4M/3rcO0sPMe5Iql+QqO4QeWNUxz9DotePxQss5GMBg=;
+        b=QGQHkBh58iYg92nHf4agc75f3pNI9dfDnSue90gseIs2jJj4I/jaR65YS4oyhf+D61
+         nBHJLlOo9Ojiww0wvRS/6hw4AUcRpStxQD6OWO5Y1vD8Sd3FYVx0880PrtelGndBhFq0
+         7qFC3vNjyjpcGW25LG9fDdijGAtWaylJzuYugto5xHWuesJBiO3aMz7ECs9pHPU2hFQ6
+         H7OtdY3M41tn1oZ+KlRbiosUaZ2wk03lDWtdHz/BItjGzBsHp1sCQWo3ICQB9KHLsF2O
+         pPsjbX8/HGtQxaP8WQhHem3xuN1jnCCOjoVvlI5/UZhKkg6Gtih8rGV9MNIYuytvTgYa
+         W5Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741696624; x=1742301424;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YOohSrQvPqKoJS058lh6ERBfYfFVZu79WxTYWxna9iQ=;
-        b=gDMtkn6L9bnooX+NQ65jVIv75cIbzrEZVe2jxC9SNfjPuj0L4kA/PdvD6nfwlNngbI
-         lviUwQWcALoV01icXnDz0t5pqN3TxUo0H37jaw3QIxnF7nkO6GUdnT0waG+leMHRTQxI
-         Sg+1oMY6+99TwYAqkIZcQpLX03lWaPHDJ5i5Ugke1GmVfK12XdWpmToZaC+Sh/9HO1hW
-         qgC7oLyhB/8aNDmfso/GoLrTvi8yT1XeKZdh/jmWC/3wViayszPEvW0LPjuqyAGG5+F7
-         w7R3VUAaqFe/cjg/Ro2fbONWoCj2CYOf9NADoDJMVBnARs7WZba2kxm3JIO375L27xXO
-         nM8A==
-X-Forwarded-Encrypted: i=1; AJvYcCX+FwbofiLlrhr7skplemjTXBBBH0R/0bh32N47Hteie983zlYIkbV9V+0JtqeJgMYWOVQdAOTLYTs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxPbmst4/OMPf0YjNgmFrPAHtAitwq8j38SHBhYh0UW+DzrOo8Z
-	boTg+9kbuKeVu9xZstM0/uHeAE8bFk7GFE+9GbZdg45gEiedPnHC1N6EH0cIormB8gDP/1+8JTN
-	8BHA=
-X-Gm-Gg: ASbGncuZlDGf4Sa3og+2h3d0SIKlMBhTKM/9cqZ9HkQECwji5eY+BI6mpdkXiNzh0yC
-	5rrNGlLoUQTY+ZsIHyzr7PqlIA3TC7AUrqTbnnbgm+9I0OEMPK0ot2rpjiDdfCgn/bvBpZaUxfM
-	6LPFEv7HyHjjfiZaA/g54jv/E2vdi09a5MUN4TtGPmx28TvPw8qBoOqfmgsvmZbI0K1tIirP28O
-	EqR2G1HHOTEvrs59dEqKVqp8RmK43n611MqmmhYIySDgjDCOysJzpkekOnj3pB89fz1pjGWxFmc
-	xzp1n1vFeXfq81xj5oWX+kUgyc9GCRVfSSpCtzCFHdiyZijS0vwFUh3pBA==
-X-Google-Smtp-Source: AGHT+IHTfCuQAPhrYhY9GiB9gvVm9rN3p4h2znVxLV21KfH9P21dIalFWV0Oc3AwmyqXz7qhPMYuCg==
-X-Received: by 2002:a05:6000:144d:b0:391:139f:61af with SMTP id ffacd0b85a97d-39132d8c768mr12227318f8f.32.1741696624554;
-        Tue, 11 Mar 2025 05:37:04 -0700 (PDT)
-Received: from blackdock.suse.cz ([193.86.92.181])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d04004240sm9742265e9.3.2025.03.11.05.37.03
+        d=1e100.net; s=20230601; t=1741696874; x=1742301674;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=4M/3rcO0sPMe5Iql+QqO4QeWNUxz9DotePxQss5GMBg=;
+        b=aTD6N9S0lOAxZ4MNxC9nDf1ZohHu5ratMoWpJB9gHz28NTrWqqdrTXjOIR6O+E+sB8
+         sNAmHSxk88RpxsiQ2Mrf9QWG5FNfNC/SZbaB/EaEbzNHE07JMi5R1Ckeah/3PP2PkQI+
+         Z1VnyBXQoIhGRPJfWb0bOU8U3FHZkL6IVxzHk1oFMVZjdyovmsCHrP1a+FuC8ISDIm7m
+         U27ia12pYbO2vkjAuJJsnvHtH7PyD6qZnqyyreEEn5fz/ciUZTlw8c5Tt/zORex8ICxY
+         nRlCZ0u7tTBMkSbMXOFO4EdvPqExtOSkhcVyf2qd1AJM3DNgBb3yAhavx0bDKzNfy5D+
+         A6PA==
+X-Forwarded-Encrypted: i=1; AJvYcCWAE1kfOdqL2wbdvnQa8Q/Wh3Kfk636FASukp7nQ+DgEa086cnBp31Z220U93u/D4oNdGuovZoxC6Y=@vger.kernel.org, AJvYcCXcdyDV3EbDs3D+qHQKQmaQda8euevp9G2Qn9ts+DZ6/JboXkPhAldOoR0z3jGOSpwIDOyiYF4jjocDcL2prfZXXRat@vger.kernel.org, AJvYcCXrkKh4c6TgKmHDFM6xlSxIoszIGme7X4ZXcwAjn5xFisK3QyXH5ZtJmEEXl1Submyxeis9wg/cbQhcZ/1I@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywlo0jvhbXgcJDlKcaB49NS9YMRdp6ROPqGSW9xigSKe4kbL1lQ
+	sZjwS1YC1PWloMuuB1LhEH2s7DTXXsWRYcpMEj2vImKd4V5PkCndKN/yWpH18V4=
+X-Gm-Gg: ASbGncuHPF5Rcs2LbX6ufT3dkOJa8cWXp3Kah2A1btpr5Y83JRittOuGOQKz866L1CH
+	aYT5lTc14AlAip4EVPhIJZibz6Zj8Je5Y4hUVlr4RDjp/Ev92elvtc68v9/ew/6iwANBnPY82s5
+	2XdWuzf+SGLvym1WT+FzH4yZ+DWStxVae8KA4LsgNf/0l4VjXvS1f3AOx0UeufehgIT8S+G1qxk
+	MdhZZQcDA4RHWOTWzDLLEHA+H+Aro/HnIiCGm7ExtcfUjFx/MyJHHLvbLXP7Jsj/ROsuXZswht0
+	tl0mbFNHjadlGl2ePkWd1n6EZNtp4QOcMUtdfoDByH3Y+vsmjhx0QFV+8APVW3bkMEL0UEWKvBY
+	=
+X-Google-Smtp-Source: AGHT+IGbBt3MHqJzH5ZhEpirMtpUqWFE9g6anhi16GbPmNioXomk9deQYpDwtvN1C6fHqh6lIYRUtA==
+X-Received: by 2002:a05:6a00:928f:b0:736:b923:5323 with SMTP id d2e1a72fcca58-736ec8d9671mr4402887b3a.10.1741696874095;
+        Tue, 11 Mar 2025 05:41:14 -0700 (PDT)
+Received: from purva-IdeaPad-Gaming-3-15IHU6.. ([14.139.108.62])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-736c005e7b7sm6689856b3a.107.2025.03.11.05.41.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Mar 2025 05:37:04 -0700 (PDT)
-From: =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>
-To: cgroups@vger.kernel.org,
+        Tue, 11 Mar 2025 05:41:13 -0700 (PDT)
+From: Purva Yeshi <purvayeshi550@gmail.com>
+To: rostedt@goodmis.org,
+	mhiramat@kernel.org,
+	corbet@lwn.net
+Cc: mathieu.desnoyers@efficios.com,
+	linux-kernel@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
-	Tejun Heo <tj@kernel.org>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v2 09/11] cgroup: Add deprecation message to legacy freezer controller
-Date: Tue, 11 Mar 2025 13:36:26 +0100
-Message-ID: <20250311123640.530377-10-mkoutny@suse.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250311123640.530377-1-mkoutny@suse.com>
-References: <20250311123640.530377-1-mkoutny@suse.com>
+	Purva Yeshi <purvayeshi550@gmail.com>
+Subject: [PATCH 1/3] docs: tracing: Reduce maxdepth in index documentation
+Date: Tue, 11 Mar 2025 18:10:29 +0530
+Message-Id: <20250311124029.22866-1-purvayeshi550@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-As explained in the commit 76f969e8948d8 ("cgroup: cgroup v2 freezer"),
-the original freezer is imperfect, some users may unwittingly rely on it
-when there exists the alternative of v2. Print a message when it happens
-and explain that in the docs.
+Reduce :maxdepth: from 2 to 1 in index.rst to simplify the table of
+contents, showing only top-level document titles for better readability.
 
-Signed-off-by: Michal Koutný <mkoutny@suse.com>
+Signed-off-by: Purva Yeshi <purvayeshi550@gmail.com>
 ---
- Documentation/admin-guide/cgroup-v1/freezer-subsystem.rst | 4 ++++
- kernel/cgroup/legacy_freezer.c                            | 6 ++++--
- 2 files changed, 8 insertions(+), 2 deletions(-)
+ Documentation/trace/index.rst | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/admin-guide/cgroup-v1/freezer-subsystem.rst b/Documentation/admin-guide/cgroup-v1/freezer-subsystem.rst
-index 582d3427de3f8..a964aff373b19 100644
---- a/Documentation/admin-guide/cgroup-v1/freezer-subsystem.rst
-+++ b/Documentation/admin-guide/cgroup-v1/freezer-subsystem.rst
-@@ -125,3 +125,7 @@ to unfreeze all tasks in the container::
+diff --git a/Documentation/trace/index.rst b/Documentation/trace/index.rst
+index 6b268194f..5ddd47ee7 100644
+--- a/Documentation/trace/index.rst
++++ b/Documentation/trace/index.rst
+@@ -14,7 +14,7 @@ This section provides an overview of Linux tracing mechanisms
+ and debugging approaches.
  
- This is the basic mechanism which should do the right thing for user space task
- in a simple scenario.
-+
-+This freezer implementation is affected by shortcomings (see commit
-+76f969e8948d8 ("cgroup: cgroup v2 freezer")) and cgroup v2 freezer is
-+recommended.
-diff --git a/kernel/cgroup/legacy_freezer.c b/kernel/cgroup/legacy_freezer.c
-index 074653f964c1d..039d1eb2f215b 100644
---- a/kernel/cgroup/legacy_freezer.c
-+++ b/kernel/cgroup/legacy_freezer.c
-@@ -430,9 +430,11 @@ static ssize_t freezer_write(struct kernfs_open_file *of,
+ .. toctree::
+-   :maxdepth: 2
++   :maxdepth: 1
  
- 	if (strcmp(buf, freezer_state_strs(0)) == 0)
- 		freeze = false;
--	else if (strcmp(buf, freezer_state_strs(CGROUP_FROZEN)) == 0)
-+	else if (strcmp(buf, freezer_state_strs(CGROUP_FROZEN)) == 0) {
-+		pr_info_once("Freezing with imperfect legacy cgroup freezer. "
-+			     "See cgroup.freeze of cgroup v2\n");
- 		freeze = true;
--	else
-+	} else
- 		return -EINVAL;
+    debugging
+    tracepoints
+@@ -28,7 +28,7 @@ The following are the primary tracing frameworks integrated into
+ the Linux kernel.
  
- 	freezer_change_state(css_freezer(of_css(of)), freeze);
+ .. toctree::
+-   :maxdepth: 2
++   :maxdepth: 1
+ 
+    ftrace
+    ftrace-design
+@@ -47,7 +47,7 @@ A detailed explanation of event tracing mechanisms and their
+ applications.
+ 
+ .. toctree::
+-   :maxdepth: 2
++   :maxdepth: 1
+ 
+    events
+    events-kmem
+@@ -65,7 +65,7 @@ This section covers tracing features that monitor hardware
+ interactions and system performance.
+ 
+ .. toctree::
+-   :maxdepth: 2
++   :maxdepth: 1
+ 
+    intel_th
+    stm
+@@ -85,7 +85,7 @@ These tools allow tracing user-space applications and
+ interactions.
+ 
+ .. toctree::
+-   :maxdepth: 2
++   :maxdepth: 1
+ 
+    user_events
+ 
 -- 
-2.48.1
+2.34.1
 
 
