@@ -1,183 +1,194 @@
-Return-Path: <linux-doc+bounces-40488-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40495-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id C10EDA5BC63
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 10:35:20 +0100 (CET)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id AC89BA5BDB9
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 11:22:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 654D03A819E
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 09:35:08 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 6E2867A15F0
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Mar 2025 10:21:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A6A322B8D0;
-	Tue, 11 Mar 2025 09:35:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="aTWqcXAz"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEA9F23535A;
+	Tue, 11 Mar 2025 10:22:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com [95.215.58.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1408A226CFC
-	for <linux-doc@vger.kernel.org>; Tue, 11 Mar 2025 09:35:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.170
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B751234977;
+	Tue, 11 Mar 2025 10:22:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741685716; cv=none; b=mzJSnFNi+7wMDZXDwiBjt6Ga0BGcrnYTTOZcDz7yFwwyKN3mfMA9M0ZVcyHwBzRbWRH2kKSp/aRo6nmAiNhmyaNLEXMqkcjtt3KDsqcq7hYb7H/meieFHzk5gqQtfKv10EtHT6Xb+RVQXjTAhfPpRH28lW24GPrn0gzYTtg0S+k=
+	t=1741688527; cv=none; b=Hd4tEewGOH+SFVHk3oko5GrGyWS5DU67uTkSovx1lWAeBZkMmGHdeqtwPMF+qyZoD5/QeYoDR1WcJ5NOXVT83HmthlJN2RlPgjCie5fEK/Th4uCwcypneWi60Xa6t909LzHk36zNrwrX8/lRGb90UvOW1xcDgZA89RKSK8y7VQ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741685716; c=relaxed/simple;
-	bh=ktS716Ut5UD+HH38uMLpPTCWkHMpybJEZhiqU304vTE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=f9bvXaSQZsTdVOFRt40ythGDUhkxtwDQLCMEQnwJt78PRFTobnzYl6ne0Uoif2wM57j4hkSWbwj5SsVQULwC/QmaGnr6YTW/NQy9DjWTd8QRKk9ST6PeF4w2Pk/hTZ4OPr/7smH4ezGh7lLhNjQbEflLu4LxgI/YauumAj+S7Co=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=aTWqcXAz; arc=none smtp.client-ip=95.215.58.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Message-ID: <aa840586-cd70-417f-82c2-bb887f337720@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1741685711;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=/wVsNKg9YkEQ7KSJyQziX/Pf5MNW/2LBII724NcKRvc=;
-	b=aTWqcXAzSWTgWXO+B8RX7iWZngEyO3a1jHoDvm0k0X7XvWTj3V6GECXGR3ooUXgbororde
-	6H+mxi8YqAjgzhuqWwr4p6ti7biIiW1JvnEB5yepdDfKJZLRgaXawAOIkgWvFgZr6j//J0
-	9a1fDrz5yhnkLIvSmHodJk0bhubB2uE=
-Date: Tue, 11 Mar 2025 17:34:58 +0800
+	s=arc-20240116; t=1741688527; c=relaxed/simple;
+	bh=LSLcGBRioPeMdvm1qw8/dxTdxYG8cUK8kyu3PmmIiUQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tJc79YoHI4JbkR2kjh7YPNS1k428vTBMNQ3wi1aRhMN71Cl9zRudfHjKyFiGAl9DbjJR3I0RaTZkt9EowXQ+4zdKccKZMcA83SZb8mXVOqo+PD8rHPA2KkyZkMpO4bVZiwyCED+LSe6rybr5n5LX5XGuCFSUsVunJ9WzBPJdmFE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EA8D81762;
+	Tue, 11 Mar 2025 03:22:15 -0700 (PDT)
+Received: from localhost (e132581.arm.com [10.1.196.87])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 633833F673;
+	Tue, 11 Mar 2025 03:22:04 -0700 (PDT)
+Date: Tue, 11 Mar 2025 10:22:00 +0000
+From: Leo Yan <leo.yan@arm.com>
+To: James Clark <james.clark@linaro.org>
+Cc: coresight@lists.linaro.org, yeoreum.yun@arm.com,
+	Mike Leach <mike.leach@linaro.org>,
+	Jonathan Corbet <corbet@lwn.net>, Leo Yan <leo.yan@linux.dev>,
+	Namhyung Kim <namhyung@kernel.org>,
+	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] coresight: docs: Remove target sink from examples
+Message-ID: <20250311102200.GJ9682@e132581.arm.com>
+References: <20241210144933.295798-1-james.clark@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/2] vsprintf: remove redundant and unused %pCn format
- specifier
-To: Luca Ceresoli <luca.ceresoli@bootlin.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Daniel Lezcano <daniel.lezcano@linaro.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>,
- Florian Fainelli <florian.fainelli@broadcom.com>, Ray Jui
- <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Petr Mladek <pmladek@suse.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Rasmus Villemoes <linux@rasmusvillemoes.dk>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Jonathan Corbet <corbet@lwn.net>, Andrew Morton <akpm@linux-foundation.org>,
- Alex Shi <alexs@kernel.org>
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>,
- Liu Ying <victor.liu@nxp.com>, linux-clk@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-rpi-kernel@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20250311-vsprintf-pcn-v2-0-0af40fc7dee4@bootlin.com>
- <20250311-vsprintf-pcn-v2-2-0af40fc7dee4@bootlin.com>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Yanteng Si <si.yanteng@linux.dev>
-In-Reply-To: <20250311-vsprintf-pcn-v2-2-0af40fc7dee4@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241210144933.295798-1-james.clark@linaro.org>
 
+On Tue, Dec 10, 2024 at 02:49:28PM +0000, James Clark wrote:
+> 
+> Previously the sink had to be specified, but now it auto selects one by
+> default. Including a sink in the examples causes issues when copy
+> pasting the command because it might not work if that sink isn't
+> present. Remove the sink from all the basic examples and create a new
+> section specifically about overriding the default one.
+> 
+> Make the text a but more concise now that it's in the advanced section,
+> and similarly for removing the old kernel advice.
+> 
+> Signed-off-by: James Clark <james.clark@linaro.org>
+> ---
+>  Documentation/trace/coresight/coresight.rst   | 41 ++++++++-----------
+>  .../userspace-api/perf_ring_buffer.rst        |  4 +-
+>  2 files changed, 18 insertions(+), 27 deletions(-)
+> 
+> diff --git a/Documentation/trace/coresight/coresight.rst b/Documentation/trace/coresight/coresight.rst
+> index d4f93d6a2d63..806699871b80 100644
+> --- a/Documentation/trace/coresight/coresight.rst
+> +++ b/Documentation/trace/coresight/coresight.rst
+> @@ -462,44 +462,35 @@ queried by the perf command line tool:
+> 
+>                 cs_etm//                                    [Kernel PMU event]
+> 
+> -       linaro@linaro-nano:~$
+> -
+>  Regardless of the number of tracers available in a system (usually equal to the
+>  amount of processor cores), the "cs_etm" PMU will be listed only once.
+> 
+>  A Coresight PMU works the same way as any other PMU, i.e the name of the PMU is
+> -listed along with configuration options within forward slashes '/'.  Since a
+> -Coresight system will typically have more than one sink, the name of the sink to
+> -work with needs to be specified as an event option.
+> -On newer kernels the available sinks are listed in sysFS under
+> +provided along with configuration options within forward slashes '/' (see
+> +`Config option formats`_).
+> +
+> +Advanced Perf framework usage
+> +-----------------------------
+> +
+> +Sink selection
+> +~~~~~~~~~~~~~~
+> +
+> +An appropriate sink will be selected automatically for use with Perf, but since
+> +there will typically be more than one sink, the name of the sink to use may be
+> +specified as a special config option prefixed with '@'.
+> +
+> +The available sinks are listed in sysFS under
+>  ($SYSFS)/bus/event_source/devices/cs_etm/sinks/::
+> 
+>         root@localhost:/sys/bus/event_source/devices/cs_etm/sinks# ls
+>         tmc_etf0  tmc_etr0  tpiu0
 
-在 3/11/25 5:21 PM, Luca Ceresoli 写道:
-> %pC and %pCn print the same string, and commit 900cca294425 ("lib/vsprintf:
-> add %pC{,n,r} format specifiers for clocks") introducing them does not
-> clarify any intended difference. It can be assumed %pC is a default for
-> %pCn as some other specifiers do, but not all are consistent with this
-> policy. Moreover there is now no other suffix other than 'n', which makes a
-> default not really useful.
->
-> All users in the kernel were using %pC except for one which has been
-> converted. So now remove %pCn and all the unnecessary extra code and
-> documentation.
->
-> Acked-by: Stephen Boyd <sboyd@kernel.org>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-> Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+Just a minor comment.  To reflect the latest hardware, it is good to
+mention the TRBE case, users should not and cannot specify TRBE as the
+sink name.  The driver will give priority for TRBE by default unless
+users specify other sink types.
 
-Reviewed-by: Yanteng Si <si.yanteng@linux.dev>
-
+Otherwise, this is a good polish for me.
 
 Thanks,
+Leo
 
-Yanteng
-
->
-> ---
->
-> Changes in v2:
-> - update Chinese documentation (change acked by Yanteng Si <si.yanteng@linux.dev>)
-> ---
->   Documentation/core-api/printk-formats.rst                    |  3 +--
->   Documentation/translations/zh_CN/core-api/printk-formats.rst |  3 +--
->   lib/vsprintf.c                                               | 10 ++--------
->   3 files changed, 4 insertions(+), 12 deletions(-)
->
-> diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
-> index ecccc0473da9c10f45f2464566f690472c61401e..f3009e6ec80a864c330c8812efcd82c12f4066b3 100644
-> --- a/Documentation/core-api/printk-formats.rst
-> +++ b/Documentation/core-api/printk-formats.rst
-> @@ -571,9 +571,8 @@ struct clk
->   ::
->   
->   	%pC	pll1
-> -	%pCn	pll1
->   
-> -For printing struct clk structures. %pC and %pCn print the name of the clock
-> +For printing struct clk structures. %pC prints the name of the clock
->   (Common Clock Framework) or a unique 32-bit ID (legacy clock framework).
->   
->   Passed by reference.
-> diff --git a/Documentation/translations/zh_CN/core-api/printk-formats.rst b/Documentation/translations/zh_CN/core-api/printk-formats.rst
-> index bd36d35eba4eb124be43a66227059a30429e4135..96a917ecc93f2a4872784b6d8e3f98bcb9f5f737 100644
-> --- a/Documentation/translations/zh_CN/core-api/printk-formats.rst
-> +++ b/Documentation/translations/zh_CN/core-api/printk-formats.rst
-> @@ -523,9 +523,8 @@ clk结构体
->   ::
->   
->   	%pC	pll1
-> -	%pCn	pll1
->   
-> -用于打印clk结构。%pC 和 %pCn 打印时钟的名称（通用时钟框架）或唯一的32位
-> +用于打印clk结构。%pC 打印时钟的名称（通用时钟框架）或唯一的32位
->   ID（传统时钟框架）。
->   
->   通过引用传递。
-> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-> index 56fe96319292674c9f79559cf78dd0d99d1a1f06..143d55cb1c12acac21a6c6bafd255437e878f280 100644
-> --- a/lib/vsprintf.c
-> +++ b/lib/vsprintf.c
-> @@ -1969,15 +1969,11 @@ char *clock(char *buf, char *end, struct clk *clk, struct printf_spec spec,
->   	if (check_pointer(&buf, end, clk, spec))
->   		return buf;
->   
-> -	switch (fmt[1]) {
-> -	case 'n':
-> -	default:
->   #ifdef CONFIG_COMMON_CLK
-> -		return string(buf, end, __clk_get_name(clk), spec);
-> +	return string(buf, end, __clk_get_name(clk), spec);
->   #else
-> -		return ptr_to_id(buf, end, clk, spec);
-> +	return ptr_to_id(buf, end, clk, spec);
->   #endif
-> -	}
->   }
->   
->   static
-> @@ -2382,8 +2378,6 @@ char *rust_fmt_argument(char *buf, char *end, void *ptr);
->    *      T    time64_t
->    * - 'C' For a clock, it prints the name (Common Clock Framework) or address
->    *       (legacy clock framework) of the clock
-> - * - 'Cn' For a clock, it prints the name (Common Clock Framework) or address
-> - *        (legacy clock framework) of the clock
->    * - 'G' For flags to be printed as a collection of symbolic strings that would
->    *       construct the specific value. Supported flags given by option:
->    *       p page flags (see struct page) given as pointer to unsigned long
->
+> -On older kernels, this may need to be found from the list of coresight devices,
+> -available under ($SYSFS)/bus/coresight/devices/::
+> -
+> -       root:~# ls /sys/bus/coresight/devices/
+> -        etm0     etm1     etm2         etm3  etm4      etm5      funnel0
+> -        funnel1  funnel2  replicator0  stm0  tmc_etf0  tmc_etr0  tpiu0
+>         root@linaro-nano:~# perf record -e cs_etm/@tmc_etr0/u --per-thread program
+> 
+> -As mentioned above in section "Device Naming scheme", the names of the devices could
+> -look different from what is used in the example above. One must use the device names
+> -as it appears under the sysFS.
+> -
+> -The syntax within the forward slashes '/' is important.  The '@' character
+> -tells the parser that a sink is about to be specified and that this is the sink
+> -to use for the trace session.
+> -
+>  More information on the above and other example on how to use Coresight with
+>  the perf tools can be found in the "HOWTO.md" file of the openCSD gitHub
+>  repository [#third]_.
+> 
+> -Advanced perf framework usage
+> ------------------------------
+> -
+>  AutoFDO analysis using the perf tools
+>  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> @@ -508,7 +499,7 @@ perf can be used to record and analyze trace of programs.
+>  Execution can be recorded using 'perf record' with the cs_etm event,
+>  specifying the name of the sink to record to, e.g::
+> 
+> -    perf record -e cs_etm/@tmc_etr0/u --per-thread
+> +    perf record -e cs_etm//u --per-thread
+> 
+>  The 'perf report' and 'perf script' commands can be used to analyze execution,
+>  synthesizing instruction and branch events from the instruction trace.
+> @@ -572,7 +563,7 @@ sort example is from the AutoFDO tutorial (https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgcc.gnu.org%2Fwiki%2FAutoFDO%2FTuto&data=05%7C02%7Cleo.yan%40arm.com%7C0d4875673b894a332a5508dd192a1f35%7Cf34e597957d94aaaad4db122a662184d%7C0%7C0%7C638694390923618348%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=vX1RVi4hA2gEqrVk9lvMV8UFVDzvClvUN7yILwv0788%3D&reserved=0
+>         Bubble sorting array of 30000 elements
+>         5910 ms
+> 
+> -       $ perf record -e cs_etm/@tmc_etr0/u --per-thread taskset -c 2 ./sort
+> +       $ perf record -e cs_etm//u --per-thread taskset -c 2 ./sort
+>         Bubble sorting array of 30000 elements
+>         12543 ms
+>         [ perf record: Woken up 35 times to write data ]
+> diff --git a/Documentation/userspace-api/perf_ring_buffer.rst b/Documentation/userspace-api/perf_ring_buffer.rst
+> index bde9d8cbc106..dc71544532ce 100644
+> --- a/Documentation/userspace-api/perf_ring_buffer.rst
+> +++ b/Documentation/userspace-api/perf_ring_buffer.rst
+> @@ -627,7 +627,7 @@ regular ring buffer.
+>  AUX events and AUX trace data are two different things.  Let's see an
+>  example::
+> 
+> -        perf record -a -e cycles -e cs_etm/@tmc_etr0/ -- sleep 2
+> +        perf record -a -e cycles -e cs_etm// -- sleep 2
+> 
+>  The above command enables two events: one is the event *cycles* from PMU
+>  and another is the AUX event *cs_etm* from Arm CoreSight, both are saved
+> @@ -766,7 +766,7 @@ only record AUX trace data at a specific time point which users are
+>  interested in.  E.g. below gives an example of how to take snapshots
+>  with 1 second interval with Arm CoreSight::
+> 
+> -  perf record -e cs_etm/@tmc_etr0/u -S -a program &
+> +  perf record -e cs_etm//u -S -a program &
+>    PERFPID=$!
+>    while true; do
+>        kill -USR2 $PERFPID
+> --
+> 2.34.1
+> 
+> _______________________________________________
+> CoreSight mailing list -- coresight@lists.linaro.org
+> To unsubscribe send an email to coresight-leave@lists.linaro.org
 
