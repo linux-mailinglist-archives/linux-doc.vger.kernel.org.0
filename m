@@ -1,122 +1,103 @@
-Return-Path: <linux-doc+bounces-40752-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40756-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4B63A5FA79
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 16:54:09 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id DEE81A5FA9F
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 17:00:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 423943BF333
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 15:53:57 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id CE835189792E
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 16:00:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9DFA267F70;
-	Thu, 13 Mar 2025 15:54:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D712826983A;
+	Thu, 13 Mar 2025 15:59:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FMlhzKxn"
+	dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b="r8pu4q5Z"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from todd.t-8ch.de (todd.t-8ch.de [159.69.126.157])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C43613AA2F;
-	Thu, 13 Mar 2025 15:54:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06C0C2690D7;
+	Thu, 13 Mar 2025 15:59:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.126.157
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741881247; cv=none; b=Q3jlbCyTyW50vRTS3gs/YKvt6JZhrO3H4f1R8eJVTcowMpEl1tLT9uihoYxSOU29mgZz96u6Nh6G1vU2FkKDXByOOuGKhhlYw7F6v/Y07wIS6sValqJYQX7SE36YKleG8gqjVo6rKB4VDSh+2JaBgD8l2B38ZJQvLV1XMi8kBGs=
+	t=1741881568; cv=none; b=CWPvyFu6AfEmqhHX82IegZelK1xH9LLavy9d4G1cEjmg9gjlYhyq/Cr8PJuVw5hvwgGhT+kKLxsk+p28JGWgfUB1d/27l4djeZYC8zSDxlKvpbPqqzLKQuaD5MOb1Q/9AFYUZi4zOm4nFnqaPuC/WLP6naizlmOVqaVgQxcW8IQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741881247; c=relaxed/simple;
-	bh=CxnWivVLQ4Dd/EZfTFOz5IGyCXEdZefIUY9yz1Sn8wg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=d1hI1CRKXjru7wsgpr+DjAhS/VtQn2G7oVGqiTFuniCU7ajTqBSmEOpAC5WSzNzndVg/vphd93v/sXtyfX8r/7REe/OJSQG8OC2ByTBDJdwls3zJl3SVhvhE8HfKtjMSJBU1xNaZU95qIyhxcXMEljavFakXTZQmDTrxrzeOCNA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FMlhzKxn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB496C4CEDD;
-	Thu, 13 Mar 2025 15:54:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741881247;
-	bh=CxnWivVLQ4Dd/EZfTFOz5IGyCXEdZefIUY9yz1Sn8wg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=FMlhzKxnDDFp+p+D6fevC/6hJa7GAGc2DzpSRvIdBaRWvKoPQcrp4qXysM7ohbIjw
-	 oQFs9H4s9wve7/Y7Cdo7PTCztDorpuDUrIAxz3t8yO3mcYE3RSVETjnXAJ3HuRJXgh
-	 puNxN+IowhJV1hDMd/JPvACKfenccChxY0UaEw2EL51xZ5ECNB5waXXICx5f8itmkK
-	 mRdOlUemv3ne8HKgylK+BKMg4oE0EEfA465YC13osOd5kRESAXcNpG9FJzI665OBnm
-	 OJm9nG/e0AtlGw26Qcr5XmFtxxqezcTaHKvHShLs4jy73HwD8JCcX23bt52Hcac2ky
-	 sQ7B7pgO5u/9w==
-Date: Thu, 13 Mar 2025 16:54:01 +0100
-From: Joel Granados <joel.granados@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-fsdevel@vger.kernel.org, Ruiwu Chen <rwchen404@gmail.com>, 
-	Luis Chamberlain <mcgrof@kernel.org>
-Subject: Re: [PATCH] drop_caches: Allow re-enabling message after disabling
-Message-ID: <znixmeryizgqkb273xidczsgdh52tw3pv4ehfyoj6m2tcxycch@xal6ntp5f5mt>
-References: <20250313-jag-drop_caches_msg-v1-1-c2e4e7874b72@kernel.org>
+	s=arc-20240116; t=1741881568; c=relaxed/simple;
+	bh=sbRqhsPxaiG33AW85HcsugVEGACPfRyX8+4Fqim02yU=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=OtGWfsW2pOeoyhdKm9wMi1xyQ6PQe1XRMfc0kcbd6wcBJbzQ6z2XuEwV6aQ+T/RelD0UkHNlgBI6817cYRuW6j0BXzMV8dLDkCvIgTPCQDmYerMwkhmIVdODcWqMN6YjiLypveD7xo9OcoNYXFMg/KBdwUS1a8NTRUvPC228AqA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net; spf=pass smtp.mailfrom=weissschuh.net; dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b=r8pu4q5Z; arc=none smtp.client-ip=159.69.126.157
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=weissschuh.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=weissschuh.net;
+	s=mail; t=1741881564;
+	bh=sbRqhsPxaiG33AW85HcsugVEGACPfRyX8+4Fqim02yU=;
+	h=From:Subject:Date:To:Cc:From;
+	b=r8pu4q5Zm2Y4/bkM87JQgqofERmhLJ/NamSeicjQ5DiCPut3GQ/zuh2uwlY2oHFP4
+	 g8zxi8drEXQWOfmVhjqbVAB9kHy2kf53B0Jk9jaaZy1n/QfhRWk0biRDCFU6xsOro4
+	 EBN88bBhyFmd3ukzDhyQ/vZ3bBdMqSg8qU0lpqQ4=
+From: =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
+Subject: [PATCH 0/4] kbuild: make all file references relative to source
+ root
+Date: Thu, 13 Mar 2025 16:59:08 +0100
+Message-Id: <20250313-kbuild-prefix-map-v1-0-38cea8448c5f@weissschuh.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250313-jag-drop_caches_msg-v1-1-c2e4e7874b72@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAMwA02cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDY0Mj3eyk0sycFN2CotS0zArd3MQCXdPEVHOzZCMDy1TzRCWgPogU2Mz
+ o2NpaAH3psEVjAAAA
+X-Change-ID: 20250312-kbuild-prefix-map-5ae76c209e7a
+To: Masahiro Yamada <masahiroy@kernel.org>, 
+ Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nicolas@fjasle.eu>, 
+ Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>, 
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+ Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+ "H. Peter Anvin" <hpa@zytor.com>, Ben Hutchings <ben@decadent.org.uk>
+Cc: linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1741881563; l=1108;
+ i=linux@weissschuh.net; s=20221212; h=from:subject:message-id;
+ bh=sbRqhsPxaiG33AW85HcsugVEGACPfRyX8+4Fqim02yU=;
+ b=iYWeAFjtReijQ1rxt9I32WydmRSix+2keTGIILRqt3eIxYZqj2eCRLhIReYGPxcowtaY8ely6
+ KJHLWeYfLNdBsuctZ4nBNgiDSXkCbbOvPh0hZ2A/gLMDW7zt2MiV5E7
+X-Developer-Key: i=linux@weissschuh.net; a=ed25519;
+ pk=KcycQgFPX2wGR5azS7RhpBqedglOZVgRPfdFSPB1LNw=
 
-On Thu, Mar 13, 2025 at 04:46:36PM +0100, Joel Granados wrote:
-> After writing "4" to /proc/sys/vm/drop_caches there was no way to
-> re-enable the drop_caches kernel message. By removing the "or" logic for
-> the stfu variable in drop_cache_sysctl_handler, it is now possible to
-> toggle the message on and off by setting the 4th bit in
-> /proc/sys/vm/drop_caches.
-> 
-> Signed-off-by: Joel Granados <joel.granados@kernel.org>
-> ---
->  Documentation/admin-guide/sysctl/vm.rst | 2 +-
->  fs/drop_caches.c                        | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/Documentation/admin-guide/sysctl/vm.rst b/Documentation/admin-guide/sysctl/vm.rst
-> index f48eaa98d22d2b575f6e913f437b0d548daac3e6..75a032f8cbfb4e05f04610cca219d154bd852789 100644
-> --- a/Documentation/admin-guide/sysctl/vm.rst
-> +++ b/Documentation/admin-guide/sysctl/vm.rst
-> @@ -266,7 +266,7 @@ used::
->  	cat (1234): drop_caches: 3
->  
->  These are informational only.  They do not mean that anything is wrong
-> -with your system.  To disable them, echo 4 (bit 2) into drop_caches.
-> +with your system.  To toggle them, echo 4 (bit 2) into drop_caches.
->  
->  enable_soft_offline
->  ===================
-> diff --git a/fs/drop_caches.c b/fs/drop_caches.c
-> index d45ef541d848a73cbd19205e0111c2cab3b73617..501b9f690445e245f88cbb31a5123b2752e2e7ce 100644
-> --- a/fs/drop_caches.c
-> +++ b/fs/drop_caches.c
-> @@ -73,7 +73,7 @@ int drop_caches_sysctl_handler(const struct ctl_table *table, int write,
->  				current->comm, task_pid_nr(current),
->  				sysctl_drop_caches);
->  		}
-> -		stfu |= sysctl_drop_caches & 4;
-> +		stfu = sysctl_drop_caches & 4;
->  	}
->  	return 0;
->  }
-> 
-> ---
-> base-commit: 7eb172143d5508b4da468ed59ee857c6e5e01da6
-> change-id: 20250313-jag-drop_caches_msg-c4fbfedb51f3
-> 
-> Best regards,
-> -- 
-> Joel Granados <joel.granados@kernel.org>
-> 
-> 
-In case you are curious:
-This is a V3 of what was discussed in https://lore.kernel.org/20250216100514.3948-1-rwchen404@gmail.com
-My bad for forgetting to tag it V3 :(.
-Best
+-fmacro-prefix-map only affects __FILE__ and __BASE_FILE__.
+Other references, for example in debug information, is not affected.
+This makes handling of file references in the compiler output harder to
+use and creates problems for reproducible builds.
 
+Switch to -ffile-prefix map which affects all references.
 
+Signed-off-by: Thomas Weißschuh <linux@weissschuh.net>
+---
+Thomas Weißschuh (4):
+      kbuild: make all file references relative to source root
+      kbuild: doc: reproducible-builds: drop section "Absolute filenames"
+      x86/boot: Switch to -ffile-prefix-map
+      x86/boot/compressed: Switch to -ffile-prefix-map
+
+ Documentation/kbuild/reproducible-builds.rst | 16 ----------------
+ Makefile                                     |  2 +-
+ arch/x86/boot/Makefile                       |  2 +-
+ arch/x86/boot/compressed/Makefile            |  2 +-
+ 4 files changed, 3 insertions(+), 19 deletions(-)
+---
+base-commit: bc5431693696b3f928b0b7acf8d7a120127db7a4
+change-id: 20250312-kbuild-prefix-map-5ae76c209e7a
+
+Best regards,
 -- 
+Thomas Weißschuh <linux@weissschuh.net>
 
-Joel Granados
 
