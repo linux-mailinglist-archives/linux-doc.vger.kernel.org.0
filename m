@@ -1,245 +1,164 @@
-Return-Path: <linux-doc+bounces-40723-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40726-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A586A5F373
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 12:53:22 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F9AFA5F385
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 12:57:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CC4833BED92
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 11:51:38 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 716583A3FBD
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 11:57:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B39F26B0BF;
-	Thu, 13 Mar 2025 11:45:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95DF9266581;
+	Thu, 13 Mar 2025 11:57:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="F/2V9pXa"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="QwnyFTZY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3AC026B0A0
-	for <linux-doc@vger.kernel.org>; Thu, 13 Mar 2025 11:45:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D67391FAC4F;
+	Thu, 13 Mar 2025 11:57:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.198
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741866306; cv=none; b=VBaAuDaS7U2x9Ep7ynTtutdyTXTI2rmaywvIgwtydxzeIW4sDtpHQE9ogvM1eSeL35ik9jLdIh3YMn4XoCQknrkTYVRrlBkue1JOzEl16wfBsYarDYuidf6jAj/n+UYHIKiW7sc++U4NYlRFpNVgIs7jbYhbTrxpavz3A+dMe/Y=
+	t=1741867034; cv=none; b=gI5aP+W/izf1edfY5n+G/oR2h10B4sZ3aFbWmIVrPX3GYRK+cKVRIhZoD8dxyJOF5u4YZWXR9H2yGzFShU/rodCNEXQ10hh58lVbbfd5Ej4BtDkPja/xpe9UkzonxP5IkOTr9YoSoGzgzerqe3bzUoC/bF1eS4ZBzLUydhD+YvI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741866306; c=relaxed/simple;
-	bh=xetTM7NbHTpP54GNd2evXkwpRCX6m2HaBd9Qo2PRDeA=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-type; b=LE4kLH8tkMLDgBjlW/4tLSk4rX6LXVXl6Mu4yZbAukQVcTRn4vrstzM3Fhm/PuvkoDPi3zO6XiLzAZfffsiK1tq6VtrTEaHsF0B1sU2ZUH62N5a5cRs46R1Ydn8s+NFbe7nLJNScvCanpeNDUJoMOWnWtokHyYkRx3soacILst8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=F/2V9pXa; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1741866302;
+	s=arc-20240116; t=1741867034; c=relaxed/simple;
+	bh=53YcTyDwozZqDBiuAPqxAPd1+CWXw4l9v3J6ztvfbWA=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=azkI8ffcrf/JmU761fYTt4T8Q6HoZ1F7Yhcy+USjL5XBkYbjs/GlsqMA8EZLDxOn6mvO7HPbi1YlGV69vCYMUl8uvDPYKoDIF/qUxQVqfowG+EO3qQeDLItBdYbuqdls6uq2J4jtwI8Eoe/t509uQyvahGnzkkFHXLQMau6gwXM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=QwnyFTZY; arc=none smtp.client-ip=217.70.183.198
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EA15B43290;
+	Thu, 13 Mar 2025 11:56:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1741867023;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=BMlGspdrpbJ31u0fCjYvjyAZlqg7W4BaKawB7P7nRsE=;
-	b=F/2V9pXaQDMq8XkKa7HMN1xwIDZSBBumicXTmNitD+MuqjrqPmOGEsfndB1NcwMcWfD4Oo
-	eJZpkQTMJeA31r+5fXX+P4MGvg28VDi3Sxedmr0JB1PeT/jtj1O633oTOsgt5oVZA8GdL/
-	CZxfUGSXRH9c4ZsssSdNu+pzI+lhLXY=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-486-jYNfPV2xNMSndku-7_jU-A-1; Thu, 13 Mar 2025 07:45:01 -0400
-X-MC-Unique: jYNfPV2xNMSndku-7_jU-A-1
-X-Mimecast-MFC-AGG-ID: jYNfPV2xNMSndku-7_jU-A_1741866300
-Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-43943bd1409so6428895e9.3
-        for <linux-doc@vger.kernel.org>; Thu, 13 Mar 2025 04:45:01 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1741866300; x=1742471100;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BMlGspdrpbJ31u0fCjYvjyAZlqg7W4BaKawB7P7nRsE=;
-        b=jdfzWUobHnDieIUxFI3BcJqzLqBvew69UqbGTOfIRS88Hr+ewPFwPFFSTkxAIUUlim
-         JS7Uj44WXDi38Khbsrh+dmdMRPhVd16P+QtI9x+63MZiopyoS+liTdVIggil+9UTuym4
-         u8YqPnSH2CEUjL7XLBLvRl754DOvir+fp6LeJAvsqclxjZtp4Ou+zoAi+RSBQkBQlbgP
-         5P7u1LhWDvL/xDL5guIAASfCe1xNFM9rXeqOCEMV+hsH80xJLFGMxFfYwL/AJBNs52k2
-         BzDRI/Ce5skqWcDrlnnKA3sxJDCWBUF4dTpOtB9YNdyR4Pq4M5FIBJMBx79IsbQML1qu
-         gekw==
-X-Forwarded-Encrypted: i=1; AJvYcCW4g+JWmUgbAvJ9C4IW7CHLnAxiJHJwUYn1moZRBsLRbJ4g6liigUBSs5b8ykGEWXrPcSuErkUzJ8k=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz5H/U9WrmBj5zxoIjx5oXl7usG9oCfxUbjSDp4rM7vJu5giMgz
-	lUoA6elNhmdaHnoX5/cfMABiA5BazzzjGXJeUlRrGok/wyzVYWtHKNQgR/P3+jJxlgZBsx2gICY
-	PH04ayMC39HSLG87xmpqJ0iMgpHgpKR4b7U7/6vCJw0j/rgO48G+hblplPw==
-X-Gm-Gg: ASbGncsb9p87p/kauvs8fxtlnNVSye2u4m0Q27ksKDUWQjp+l1ewg/LL9SjFQzhcog2
-	ox+JSCU1ky1UySmeYl9Kr7R4v458JpQNIyJJMImSy3iBivsSHYbwlVSBw3k8WTRWkTRZ+hB5R1o
-	bSQzaBnCBpEB8a5elw038Pb3nLVTPDDSi7p1FPJAP37d0o5k9DTV8NxBRmp9zgD/YX7aXfqwhNU
-	5t7Dm2QyypsGpGb5zvLxD8CqQB3swu01I7wEFphtIAFPm5tFrG+4BxelX1HkTcWMwFj0bMspyD4
-	hmT3hcAaz31mKyxMVixN
-X-Received: by 2002:a05:600c:470a:b0:43c:f44c:72a6 with SMTP id 5b1f17b1804b1-43cf44c76ccmr144326955e9.2.1741866300511;
-        Thu, 13 Mar 2025 04:45:00 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IERxTxm4YW1Ezaow82Z48NXt1aSx6Vv01Gh0iy7KljuVnLSLjwCs9KSAjTKcqnBX6jh4hKEWQ==
-X-Received: by 2002:a05:600c:470a:b0:43c:f44c:72a6 with SMTP id 5b1f17b1804b1-43cf44c76ccmr144326735e9.2.1741866300120;
-        Thu, 13 Mar 2025 04:45:00 -0700 (PDT)
-Received: from lab.hqhome163.com ([81.57.75.210])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-43d188b754asm17844115e9.14.2025.03.13.04.44.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Mar 2025 04:44:59 -0700 (PDT)
-From: Alessandro Carminati <acarmina@redhat.com>
-To: linux-kselftest@vger.kernel.org
-Cc: David Airlie <airlied@gmail.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
-	Dan Carpenter <dan.carpenter@linaro.org>,
-	Kees Cook <keescook@chromium.org>,
-	Daniel Diaz <daniel.diaz@linaro.org>,
-	David Gow <davidgow@google.com>,
-	Arthur Grillo <arthurgrillo@riseup.net>,
-	Brendan Higgins <brendan.higgins@linux.dev>,
-	Naresh Kamboju <naresh.kamboju@linaro.org>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Maxime Ripard <mripard@kernel.org>,
-	=?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Alessandro Carminati <alessandro.carminati@gmail.com>,
-	Jani Nikula <jani.nikula@intel.com>,
-	dri-devel@lists.freedesktop.org,
-	kunit-dev@googlegroups.com,
-	linux-arch@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-parisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	x86@kernel.org,
-	Linux Kernel Functional Testing <lkft@linaro.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Alessandro Carminati <acarmina@redhat.com>
-Subject: [PATCH v4 14/14] powerpc: Add support for suppressing warning backtraces
-Date: Thu, 13 Mar 2025 11:43:29 +0000
-Message-Id: <20250313114329.284104-15-acarmina@redhat.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250313114329.284104-1-acarmina@redhat.com>
-References: <20250313114329.284104-1-acarmina@redhat.com>
+	bh=JhXUy51c9HOiF2dM0ShdmXt1Njr+UGlAd/NPatt3K0Q=;
+	b=QwnyFTZYHlEK0gM8ijiyd15oLuWJmqqgsBCfTj5dOwO8Ny2Zx0aUjpStJFhwkMDmaPvmo0
+	Qk5FqkGvQlzKhqGEUhWczOpYH6r86aXQxq8KCQ69Kst4cIgUREiVQdPyh3JNUoFAtUzEdL
+	oKBoPnqi4f8o+vBx3ceJ1my6wLrWoqSi7EGg9P9cvzKphYMEMGc2C79bpBU7P1aeyzGVky
+	DCXwUhNvJFJmGTnswNa1DLdZWbdRwwbhMiKnrSAkj1ypGAcr3qs+sgFGzBZMXQIYI0jMaG
+	GiT7iStHOIXg9NqorQxWoG/e1Fh95b4KKxXc4/BNXFp25JWtuZoVtP1q9dlmdQ==
+Date: Thu, 13 Mar 2025 12:56:56 +0100
+From: Luca Ceresoli <luca.ceresoli@bootlin.com>
+To: Maxime Ripard <mripard@kernel.org>
+Cc: Simona Vetter <simona@ffwll.ch>, Inki Dae <inki.dae@samsung.com>, Jagan
+ Teki <jagan@amarulasolutions.com>, Marek Szyprowski
+ <m.szyprowski@samsung.com>, Catalin Marinas <catalin.marinas@arm.com>, Will
+ Deacon <will@kernel.org>, Shawn Guo <shawnguo@kernel.org>, Sascha Hauer
+ <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Daniel Thompson <danielt@kernel.org>,
+ Andrzej Hajda <andrzej.hajda@intel.com>, Jonathan Corbet <corbet@lwn.net>,
+ Sam Ravnborg <sam@ravnborg.org>, Boris Brezillon <bbrezillon@kernel.org>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>, Alexandre Belloni
+ <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+ Jessica Zhang <quic_jesszhan@quicinc.com>, Paul Kocialkowski
+ <contact@paulk.fr>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, Maarten
+ Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann
+ <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, =?UTF-8?B?SGVy?=
+ =?UTF-8?B?dsOp?= Codina <herve.codina@bootlin.com>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, Paul Kocialkowski
+ <paul.kocialkowski@bootlin.com>
+Subject: Re: [PATCH v6 14/26] drm/bridge: add support for refcounted DRM
+ bridges
+Message-ID: <20250313125656.70448d09@booty>
+In-Reply-To: <20250207-ingenious-daffodil-dugong-51be57@houat>
+References: <20250206-hotplug-drm-bridge-v6-0-9d6f2c9c3058@bootlin.com>
+	<20250206-hotplug-drm-bridge-v6-14-9d6f2c9c3058@bootlin.com>
+	<20250207-ingenious-daffodil-dugong-51be57@houat>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-type: text/plain
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduvdejkeekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhhoofggtgfgsehtjeertdertddvnecuhfhrohhmpefnuhgtrgcuvegvrhgvshholhhiuceolhhutggrrdgtvghrvghsohhlihessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnheptdeljeejuddvudetffdtudelfedugfduledtueffuedufefgudegkeegtdeihedunecuffhomhgrihhnpehkvghrnhgvlhdrohhrghdpsghoohhtlhhinhdrtghomhenucfkphepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegrtddtvdemudgsrgejmeegkehfjeemudeltgehnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegrtddtvdemudgsrgejmeegkehfjeemudeltgehpdhhvghlohepsghoohhthidpmhgrihhlfhhrohhmpehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopeefjedprhgtphhtthhopehmrhhiphgrrhgusehkvghrnhgvlhdrohhrghdprhgtphhtthhopehsihhmohhnrgesfhhffihllhdrtghhpdhrtghpthhtohepihhnkhhirdgurggvsehsrghmshhun
+ hhgrdgtohhmpdhrtghpthhtohepjhgrghgrnhesrghmrghruhhlrghsohhluhhtihhonhhsrdgtohhmpdhrtghpthhtohepmhdrshiihihprhhofihskhhisehsrghmshhunhhgrdgtohhmpdhrtghpthhtoheptggrthgrlhhinhdrmhgrrhhinhgrshesrghrmhdrtghomhdprhgtphhtthhopeifihhllheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepshhhrgifnhhguhhosehkvghrnhgvlhdrohhrgh
+X-GND-Sasl: luca.ceresoli@bootlin.com
 
-From: Guenter Roeck <linux@roeck-us.net>
+Hello Maxime,
 
-Add name of functions triggering warning backtraces to the __bug_table
-object section to enable support for suppressing WARNING backtraces.
+On Fri, 7 Feb 2025 12:47:51 +0100
+Maxime Ripard <mripard@kernel.org> wrote:
 
-To limit image size impact, the pointer to the function name is only added
-to the __bug_table section if both CONFIG_KUNIT_SUPPRESS_BACKTRACE and
-CONFIG_DEBUG_BUGVERBOSE are enabled. Otherwise, the __func__ assembly
-parameter is replaced with a (dummy) NULL parameter to avoid an image size
-increase due to unused __func__ entries (this is necessary because __func__
-is not a define but a virtual variable).
+> Hi,
+> 
+> On Thu, Feb 06, 2025 at 07:14:29PM +0100, Luca Ceresoli wrote:
+> > DRM bridges are currently considered as a fixed element of a DRM card, and
+> > thus their lifetime is assumed to extend for as long as the card
+> > exists. New use cases, such as hot-pluggable hardware with video bridges,
+> > require DRM bridges to be added and removed to a DRM card without tearing
+> > the card down. This is possible for connectors already (used by DP MST), so
+> > add this possibility to DRM bridges as well.
+> > 
+> > Implementation is based on drm_connector_init() as far as it makes sense,
+> > and differs when it doesn't. A difference is that bridges are not exposed
+> > to userspace, hence struct drm_bridge does not embed a struct
+> > drm_mode_object which would provide the refcount. Instead we add to struct
+> > drm_bridge a refcount field (we don't need other struct drm_mode_object
+> > fields here) and instead of using the drm_mode_object_*() functions we
+> > reimplement from those functions the few lines that drm_bridge needs for
+> > refcounting.
+> > 
+> > Also add a new devm_drm_bridge_alloc() macro to allocate a new refcounted
+> > bridge.
+> > 
+> > Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>  
+> 
+> So, a couple of general comments:
+> 
+> - I've said it a couple of times already, but I really think you're
+>   making it harder than necessary for you here. This (and only this!)
+>   should be the very first series you should be pushing. The rest can
+>   only ever work if that work goes through, and it's already hard enough
+>   as it is. So, split that patch into a series of its own, get that
+>   merged, and then we will be able to deal with panels conversion and
+>   whatever. That's even more true with panels since there's ongoing work
+>   that will make it easier for you too. So the best thing here is
+>   probably to wait.
+> 
+> - This patch really needs to be split into several patches, something
+>   along the lines of:
+> 
+>   + Creating devm_drm_bridge_alloc()
+>   + Adding refcounting
+>   + Taking the references in all the needed places
+>   + Converting a bunch of drivers
 
-Tested-by: Linux Kernel Functional Testing <lkft@linaro.org>
-Acked-by: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Michael Ellerman <mpe@ellerman.id.au>
-Signed-off-by: Guenter Roeck <linux@roeck-us.net>
-Acked-by: Michael Ellerman <mpe@ellerman.id.au>
-Signed-off-by: Alessandro Carminati <acarmina@redhat.com>
----
- arch/powerpc/include/asm/bug.h | 37 +++++++++++++++++++++++++---------
- 1 file changed, 28 insertions(+), 9 deletions(-)
+After reading Anusha's "[PATCH RFC 0/2] drm/panel: Refcounted panel
+allocation" [0] I think I need a clarification about the 4 steps you had
+outlined in the above quoted text. Are you suggesting those are four
+_series_, and you'd want to see a series only creating
+devm_drm_bridge_alloc() as a first step, similarly to Anusha's work?
 
-diff --git a/arch/powerpc/include/asm/bug.h b/arch/powerpc/include/asm/bug.h
-index 1db485aacbd9..5b06745d20aa 100644
---- a/arch/powerpc/include/asm/bug.h
-+++ b/arch/powerpc/include/asm/bug.h
-@@ -14,6 +14,9 @@
- 	 .section __bug_table,"aw"
- 5001:	 .4byte \addr - .
- 	 .4byte 5002f - .
-+#ifdef CONFIG_KUNIT_SUPPRESS_BACKTRACE
-+	 .4byte 0
-+#endif
- 	 .short \line, \flags
- 	 .org 5001b+BUG_ENTRY_SIZE
- 	 .previous
-@@ -32,30 +35,46 @@
- #endif /* verbose */
- 
- #else /* !__ASSEMBLY__ */
--/* _EMIT_BUG_ENTRY expects args %0,%1,%2,%3 to be FILE, LINE, flags and
--   sizeof(struct bug_entry), respectively */
-+/* _EMIT_BUG_ENTRY expects args %0,%1,%2,%3,%4 to be FILE, __func__, LINE, flags
-+   and sizeof(struct bug_entry), respectively */
- #ifdef CONFIG_DEBUG_BUGVERBOSE
-+
-+#ifdef CONFIG_KUNIT_SUPPRESS_BACKTRACE
-+# define HAVE_BUG_FUNCTION
-+# define __BUG_FUNC_PTR	"	.4byte %1 - .\n"
-+#else
-+# define __BUG_FUNC_PTR
-+#endif /* CONFIG_KUNIT_SUPPRESS_BACKTRACE */
-+
- #define _EMIT_BUG_ENTRY				\
- 	".section __bug_table,\"aw\"\n"		\
- 	"2:	.4byte 1b - .\n"		\
- 	"	.4byte %0 - .\n"		\
--	"	.short %1, %2\n"		\
--	".org 2b+%3\n"				\
-+	__BUG_FUNC_PTR				\
-+	"	.short %2, %3\n"		\
-+	".org 2b+%4\n"				\
- 	".previous\n"
- #else
- #define _EMIT_BUG_ENTRY				\
- 	".section __bug_table,\"aw\"\n"		\
- 	"2:	.4byte 1b - .\n"		\
--	"	.short %2\n"			\
--	".org 2b+%3\n"				\
-+	"	.short %3\n"			\
-+	".org 2b+%4\n"				\
- 	".previous\n"
- #endif
- 
-+#ifdef HAVE_BUG_FUNCTION
-+# define __BUG_FUNC	__func__
-+#else
-+# define __BUG_FUNC	NULL
-+#endif
-+
- #define BUG_ENTRY(insn, flags, ...)			\
- 	__asm__ __volatile__(				\
- 		"1:	" insn "\n"			\
- 		_EMIT_BUG_ENTRY				\
--		: : "i" (__FILE__), "i" (__LINE__),	\
-+		: : "i" (__FILE__), "i" (__BUG_FUNC),	\
-+		  "i" (__LINE__),			\
- 		  "i" (flags),				\
- 		  "i" (sizeof(struct bug_entry)),	\
- 		  ##__VA_ARGS__)
-@@ -80,7 +99,7 @@
- 		if (x)						\
- 			BUG();					\
- 	} else {						\
--		BUG_ENTRY(PPC_TLNEI " %4, 0", 0, "r" ((__force long)(x)));	\
-+		BUG_ENTRY(PPC_TLNEI " %5, 0", 0, "r" ((__force long)(x)));	\
- 	}							\
- } while (0)
- 
-@@ -90,7 +109,7 @@
- 		if (__ret_warn_on)				\
- 			__WARN();				\
- 	} else {						\
--		BUG_ENTRY(PPC_TLNEI " %4, 0",			\
-+		BUG_ENTRY(PPC_TLNEI " %5, 0",			\
- 			  BUGFLAG_WARNING | BUGFLAG_TAINT(TAINT_WARN),	\
- 			  "r" (__ret_warn_on));	\
- 	}							\
+That was not my understanding so far, and so I've been working on a
+series containing all 4 items, and it's growing very long due to item 3
+needing to touch many dozen drivers which need to put a bridge (many
+are identical oneliner patches though).
+
+Luca
+
+[0] https://lore.kernel.org/all/20250312-drm-panel-v1-0-e99cd69f6136@redhat.com/
+
 -- 
-2.34.1
-
+Luca Ceresoli, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
