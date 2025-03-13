@@ -1,328 +1,306 @@
-Return-Path: <linux-doc+bounces-40741-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40744-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179C3A5F824
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 15:29:59 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 342ABA5F924
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 15:58:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4C6E81650C2
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 14:29:58 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E036919C008E
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Mar 2025 14:58:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CFAF267B11;
-	Thu, 13 Mar 2025 14:29:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4942F267F66;
+	Thu, 13 Mar 2025 14:58:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EaE0m28X"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ZydzKugJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 348437346D;
-	Thu, 13 Mar 2025 14:29:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1741876195; cv=none; b=HAQdquF4/QbhlyyRl1DmAneVWhRDcff6gz+rKo37eXzcoYID3ZyhVeGpHzpSj3hYsK7NrjsYqXgoBCA89+MAVPIQ5xDbB1WOZ+9n36i8Php++dtbPfH/vLzWX2yLfEy5fpZavPwjuo3NCe0uiyGWMURGt2IMGIRcUQlUReRm6Go=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1741876195; c=relaxed/simple;
-	bh=9U91AR0dBcU3SeJ1vVvLvI2baPAVBY+ySu4H/3uX8to=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mEaPw2BvI/sp1uHTDRggttAdACX9F12rgb6gGTUSWjvCayyyo004HXK0ADgM9jHWQTiAGopDzRTkGyxaMpc3irAj0QH5UL3L8bLXs1r3bcxkQDq8Qd6OLrlb88sXMXuKBh8X/bGmz1EumH5XvW5T6PfOIyTe4tMWCp3GLDocpXs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EaE0m28X; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 624F9C4CEDD;
-	Thu, 13 Mar 2025 14:29:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1741876194;
-	bh=9U91AR0dBcU3SeJ1vVvLvI2baPAVBY+ySu4H/3uX8to=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=EaE0m28XQuIa1uSp9kwRIDan2AYDcIfAYcgcgsQva5IjduMjgS1XOSQV3WfEZmMmA
-	 Zu3jRjqzAnvDh7WVyzRHpxCMQ946J+RaUXwKX7hZ/QqVnE2ZmLzuWlZmxT4/QOSy0d
-	 RlX5FmfBbN4EFFVNCeSSZUcqJvSIMRrlWNwoFnRIRaPOUAmq+OLdIrD2Zh7PuawpyD
-	 GFfyYbPASuPH0Cmn8p92EKE2K88qtkaCbIrB1YHAdIfyYg1SQM5J/zVieN1HBVnsss
-	 VVqY+fVuQKOVGP7wS86Nlbo2y+s2Vaj7GpikLkyVlz38FekHLOFSPhVBdeMOryEC0w
-	 HcyQkgLUVGoiQ==
-Date: Thu, 13 Mar 2025 15:29:52 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Pekka Paalanen <pekka.paalanen@haloniitty.fi>
-Cc: Louis Chauvet <louis.chauvet@bootlin.com>, 
-	Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>, Melissa Wen <melissa.srw@gmail.com>, 
-	=?utf-8?B?TWHDrXJh?= Canal <mairacanal@riseup.net>, Haneen Mohammed <hamohammed.sa@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	David Airlie <airlied@gmail.com>, rdunlap@infradead.org, arthurgrillo@riseup.net, 
-	Jonathan Corbet <corbet@lwn.net>, Simona Vetter <simona@ffwll.ch>, 
-	Simona Vetter <simona.vetter@ffwll.ch>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
-	jeremie.dautheribes@bootlin.com, miquel.raynal@bootlin.com, thomas.petazzoni@bootlin.com, 
-	seanpaul@google.com, marcheu@google.com, nicolejadeyee@google.com, 
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v16 5/7] drm/vkms: Create KUnit tests for YUV conversions
-Message-ID: <20250313-pristine-pretty-rabbit-a29030@houat>
-References: <20250121-yuv-v16-5-a61f95a99432@bootlin.com>
- <qwym5wty72f6o4dfz2iduamkpuom6jt5txskknovqxzagruusx@zuytk7awe2uw>
- <Z5dkd3npNtzPWCrP@louis-chauvet-laptop>
- <20250205-pristine-perch-of-abundance-7abac1@houat>
- <Z6OEd329pDNRrL5v@louis-chauvet-laptop>
- <20250219-inventive-micro-parrot-c24846@houat>
- <ce5fb86d-f3bc-4196-9cfd-8af41a83beb1@bootlin.com>
- <20250307-glaring-kiwi-of-teaching-d5ddd4@houat>
- <6fa7a17f-3932-4b93-a3c7-885619f8ec73@bootlin.com>
- <20250310111259.4e18d550@eldfell>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92AA6241C8B;
+	Thu, 13 Mar 2025 14:58:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.19
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1741877885; cv=fail; b=Oxg93/jA24Ty02KJRKnfXCvn4E827g5u0nLTgV1hZSdFWA+0VFAmb/Wozsgu0NLmICAJdIhKx4oHQwJ65izaa6LmX5MTqnCFp8jHXr5MsQn+Fa/boMyz+0IOZJ6aSAXVb619BFJMUI08ZItFB5X8rEAC2YQvY9ui+KBEt7vgrb0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1741877885; c=relaxed/simple;
+	bh=ScvO+uGa6Cu71R47nov5duJdr/4LuYjrHiPe4z2bhnM=;
+	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=dU98id9ED31zSEOiJK0H89v/A1ht86uyoUUnCgxjO5G5aHaMk8ndibns7Hym7OBXoD49lJ20K5MwF3L8JjvyOqdPufs7s0SNICLuTHjH42T3TS8ge5wsVVB+uIivwEsp9NBK9tSr3+joRgS1KhCHn+C+WU0Dd92F459WOhLFJus=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ZydzKugJ; arc=fail smtp.client-ip=192.198.163.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1741877883; x=1773413883;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=ScvO+uGa6Cu71R47nov5duJdr/4LuYjrHiPe4z2bhnM=;
+  b=ZydzKugJPjGd8DVxlw412k70qyJThDDpXm+u94Qa5eKvhVqGoxvnYVt2
+   ndO2iu81GhROQ4L3HvEc5PWkTutXbjA8W9AVmQUEf5YC7hYFQYBH5/iIv
+   SUxslsVQJaldAcfaV61JSvr560QiMwKeEqjulAYG/x3SyymQgLC4eUJjE
+   k0hvwVb+5kmhlx0iNLxfpkI1VK3YczeztmfZGsN2deO8X0yjNXzoamOlN
+   1BgOp7LbyxJjxmJ62JtK2JcJ+b76YAJlCiWexreHzzPNBtaje62XX3hY0
+   5sMK1CQaPesQP+vhRNUYEwGGMrJ5KT541eDtXRxt4b369+PmCw0m1Z79x
+   A==;
+X-CSE-ConnectionGUID: b/sz0OBuSva8Z5kH9J9Jcw==
+X-CSE-MsgGUID: XHDX64rQRsKySiEVjMYIlw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11372"; a="42169091"
+X-IronPort-AV: E=Sophos;i="6.14,245,1736841600"; 
+   d="scan'208";a="42169091"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Mar 2025 07:56:57 -0700
+X-CSE-ConnectionGUID: HK2TIh4dQH6P5wM8oo/SLg==
+X-CSE-MsgGUID: E9vKw5DkSIeDS9sEwW2JwA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.14,245,1736841600"; 
+   d="scan'208";a="126152959"
+Received: from orsmsx903.amr.corp.intel.com ([10.22.229.25])
+  by orviesa005.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Mar 2025 07:56:56 -0700
+Received: from ORSMSX903.amr.corp.intel.com (10.22.229.25) by
+ ORSMSX903.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.14; Thu, 13 Mar 2025 07:56:56 -0700
+Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
+ ORSMSX903.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.14 via Frontend Transport; Thu, 13 Mar 2025 07:56:56 -0700
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (104.47.70.45) by
+ edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.44; Thu, 13 Mar 2025 07:56:55 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=At/jnnBFuTRl0X0YcTm4/XOaGmzDxqKWirv7BH1GSvx+vpAZeokuetn877FYPBRZvKwm72uEX2oq4XvQPDLC1MKzgYCzy0dklkrTWxKwU2AaJvHORxlDYjlftukWRSbVLlaP0G3M2CyNPxAFXGlYeSE5WiTtTXvH5ZlEqxxOym9fruoVo4s+3stFj4T2elmnsFzkSyOptBcDE4majiqFxaLDwjkiY5ZDkodd4fl9qagbmxG4JspHMprizmPbG05Be5NhUjwmqYKks8nSUVO9bSzbnGwC7gITNdnqwkIs2iteVjpF2Fp/ydwbYbrq8fwkm8fzXGeMYDWwXZW6jN+74A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SllR83UJovzdBijlIETqhAHdZ5gyvP2G3vBnB5dgoV4=;
+ b=ansXPUOJ+WhykJAmorN43YFjEe1xO7R8e9ejp31JjwV7RIr7UB9/ngJgA/TNM1rscOb2PAfjV/tySQvoKA0jI8ze4NuBdmOp0kyVS1iE/F5zTj44LzFqEwj5kr0i48YT3oSgN4nUAuW4DMXldV1rr6BhmS21xyCfYeAwOiEO0tADObS4hpj6msz46Rr9fZOa9Ohtj283+VINmTkaG5+tCALgeBgJEKgJWjiMzgOO5uoFhS8iBPu8RIhhsuURYlPFFzrVCfRrbvzhk8hKQ+CojSrDwdpxPBlpVgFaWd3B5WZa5x6YKEMhZELB950ZgHJIvDPOlKhd4IoQwR5s9h7SFQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from MN0PR11MB6231.namprd11.prod.outlook.com (2603:10b6:208:3c4::15)
+ by IA1PR11MB7889.namprd11.prod.outlook.com (2603:10b6:208:3fe::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.27; Thu, 13 Mar
+ 2025 14:56:39 +0000
+Received: from MN0PR11MB6231.namprd11.prod.outlook.com
+ ([fe80::a137:ffd0:97a3:1db4]) by MN0PR11MB6231.namprd11.prod.outlook.com
+ ([fe80::a137:ffd0:97a3:1db4%4]) with mapi id 15.20.8511.026; Thu, 13 Mar 2025
+ 14:56:39 +0000
+Date: Thu, 13 Mar 2025 15:56:00 +0100
+From: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
+To: Andrey Konovalov <andreyknvl@gmail.com>
+CC: Vitaly Buka <vitalybuka@google.com>, <kees@kernel.org>,
+	<julian.stecklina@cyberus-technology.de>, <kevinloughlin@google.com>,
+	<peterz@infradead.org>, <tglx@linutronix.de>, <justinstitt@google.com>,
+	<catalin.marinas@arm.com>, <wangkefeng.wang@huawei.com>, <bhe@redhat.com>,
+	<ryabinin.a.a@gmail.com>, <kirill.shutemov@linux.intel.com>,
+	<will@kernel.org>, <ardb@kernel.org>, <jason.andryuk@amd.com>,
+	<dave.hansen@linux.intel.com>, <pasha.tatashin@soleen.com>,
+	<guoweikang.kernel@gmail.com>, <dwmw@amazon.co.uk>, <mark.rutland@arm.com>,
+	<broonie@kernel.org>, <apopple@nvidia.com>, <bp@alien8.de>,
+	<rppt@kernel.org>, <kaleshsingh@google.com>, <richard.weiyang@gmail.com>,
+	<luto@kernel.org>, <glider@google.com>, <pankaj.gupta@amd.com>,
+	<pawan.kumar.gupta@linux.intel.com>, <kuan-ying.lee@canonical.com>,
+	<tony.luck@intel.com>, <tj@kernel.org>, <jgross@suse.com>,
+	<dvyukov@google.com>, <baohua@kernel.org>, <samuel.holland@sifive.com>,
+	<dennis@kernel.org>, <akpm@linux-foundation.org>,
+	<thomas.weissschuh@linutronix.de>, <surenb@google.com>,
+	<kbingham@kernel.org>, <ankita@nvidia.com>, <nathan@kernel.org>,
+	<ziy@nvidia.com>, <xin@zytor.com>, <rafael.j.wysocki@intel.com>,
+	<andriy.shevchenko@linux.intel.com>, <cl@linux.com>, <jhubbard@nvidia.com>,
+	<hpa@zytor.com>, <scott@os.amperecomputing.com>, <david@redhat.com>,
+	<jan.kiszka@siemens.com>, <vincenzo.frascino@arm.com>, <corbet@lwn.net>,
+	<maz@kernel.org>, <mingo@redhat.com>, <arnd@arndb.de>, <ytcoode@gmail.com>,
+	<xur@google.com>, <morbo@google.com>, <thiago.bauermann@linaro.org>,
+	<linux-doc@vger.kernel.org>, <kasan-dev@googlegroups.com>,
+	<linux-kernel@vger.kernel.org>, <llvm@lists.linux.dev>, <linux-mm@kvack.org>,
+	<linux-arm-kernel@lists.infradead.org>, <x86@kernel.org>
+Subject: Re: [PATCH v2 01/14] kasan: sw_tags: Use arithmetic shift for shadow
+ computation
+Message-ID: <qacbgkfbfqylupmoc7umy4n5pdvpdp7hrok7hqefhamhrsnhhm@4e2qucovduw2>
+References: <gisttijkccu6pynsdhvv3lpyxx7bxpvqbni43ybsa5axujr7qj@7feqy5fy2kgt>
+ <6wdzi5lszeaycdfjjowrbsnniks35zhatavknktskslwop5fne@uv5wzotu4ri4>
+ <CA+fCnZeEm+-RzqEXp1FqYJ5Gsm+mUZh5k3nq=92ZuTiqwsaWvA@mail.gmail.com>
+ <qnxlqbc4cs7izjilisbjlrup4zyntjyucvfa4s6eegn72wfbkd@czthvwkdvo3v>
+ <CA+fCnZdUFO0+G9HHy4oaQfEx8sm3D_ZfxdkH3y2ZojjYqTN74Q@mail.gmail.com>
+ <agqtypvkcpju3gdsq7pnpabikm4mnnpy4kp5efqs2pvsz6ubsl@togxtecvtb74>
+ <mjyjkyiyhbbxyksiycywgh72laozztzwxxwi3gi252uk4b6f7j@3zwpv7l7aisk>
+ <CA+fCnZcDyS8FJwE6x66THExYU_t_n9cTA=9Qy3wL-RSssEb55g@mail.gmail.com>
+ <xzxlu4k76wllfreg3oztflyubnmaiktbnvdmszelxxcb4vlhiv@xgo2545uyggy>
+ <CA+fCnZdE+rVcoR-sMLdk8e-1Jo_tybOc7PtSp9K6HrP5BEv95g@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CA+fCnZdE+rVcoR-sMLdk8e-1Jo_tybOc7PtSp9K6HrP5BEv95g@mail.gmail.com>
+X-ClientProxiedBy: DU2P250CA0018.EURP250.PROD.OUTLOOK.COM
+ (2603:10a6:10:231::23) To MN0PR11MB6231.namprd11.prod.outlook.com
+ (2603:10b6:208:3c4::15)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="263hj7gfnktphh5g"
-Content-Disposition: inline
-In-Reply-To: <20250310111259.4e18d550@eldfell>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN0PR11MB6231:EE_|IA1PR11MB7889:EE_
+X-MS-Office365-Filtering-Correlation-Id: 091e5ac4-e2db-47d6-97dc-08dd623f4225
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?LzVtR1BjUkV6U3h0RkFNVzlsaVQ1QzFmaFRSK2ZrenJ5T2I2dEYrNkFRcDFE?=
+ =?utf-8?B?NFB2VHNQV09CZysyMzNKcFEvK0FYVENPamM5cXpIcXRLbGNnaWh2TjZUL3lH?=
+ =?utf-8?B?SU1KQzdoZnpDZndZTlZOUElZY2NiWkM2Q3JlSWQvTHRCa2lOUGJUYjNNWDU4?=
+ =?utf-8?B?eFRuZWZHNEVMS2dVK2RjYUdmVS9oUmFra3hKUUNTSmE0bXpvRU9vOTR3MDhj?=
+ =?utf-8?B?N0c2WUl6eGh1cURvZUZiWVQ1elVDOVJDSnIrNCthNVIxcnZ3NzZNbVdJUDIy?=
+ =?utf-8?B?WmdnLzA3RkYyMFdWSTgzTkg4TjBVL0d0djc1dG93eE9VdHhyNHNTOG15VTVt?=
+ =?utf-8?B?Mkx3UlpWSlhtMU5Ld2l0VHkzRlJiWnBobllDTnp0dTFlQVpMekNGWG43MXVz?=
+ =?utf-8?B?K3RsZjB5Q3JGK3dWYk94Zld3aG5iN0x2bXZJUlJoVzhpTytSYzY2THF0VXFK?=
+ =?utf-8?B?VnJqK2tPQW04RHVSUU50eFJMR2dBKzd4Z09hQzB2V0ZsSk9hczZtb3lBdEpa?=
+ =?utf-8?B?Z3ZIQmRWaXhnakJ2TXhYVk45ZUhKeityUHFyNDNTbXR0STQ1c2lzajZxR2xT?=
+ =?utf-8?B?TXFqNTlLQlIrS1Q1Z21PK3dxc0piMmdpeFJpcnAvT0dZN2tXd25wbTJBMUlX?=
+ =?utf-8?B?Q3JEMStUZk54UThIakRoN05Qd0ZKSFd5eHU2czdZeStLNi9uYVViUm5YcnhI?=
+ =?utf-8?B?dEgyaHAwZ2dzN1BxNWR3ZEZYZExQSm1yVVVlU0hNRTNacUIwV25OajFTQ1Vl?=
+ =?utf-8?B?azk4Qk9rZElBZ1gxQXRYM2l0U01PTDB6UmtaUkZjQTRVUG5veEhQL2w3Zk43?=
+ =?utf-8?B?ME9yWXBGeUhJL0hGNlpNT1hrQWNvSmNLZ25Vb29Wc3VFN0ZCdWN1LzcwWVV0?=
+ =?utf-8?B?V0p4dFlLNDcxSWR0Z0kyUTVzNkM2b29icTZPalZWV1pnM2dEN0w4U1FCQzNK?=
+ =?utf-8?B?V0hmQU10ZWVwTm5PTXBxQU45WWZnR2VLVGxZcGU2VTd0QnNuWGNLZzYvWm13?=
+ =?utf-8?B?LzFXWDlYeTFCUnlNWTBvcHpZcmpaei9mVFRIeFNZWCtrV0VNR0RDdnkvWTJi?=
+ =?utf-8?B?SXY5b2h6Zzc5VkxVSVpVNFd0enh0aG5GQ0Y3VEpFYVVialJyVktxTlZLK2dJ?=
+ =?utf-8?B?d1hlTG1EdUFMNW91TXo4MzJud1RrU0Ztd2ptZEpVNWQ1YXlSYVhkOW1rQVpz?=
+ =?utf-8?B?T0RDLzFWWUpRdUk3YytFd0VIbEg3TVNINHk1Y1JOWVBrcHcvOHhMOFFpOXIy?=
+ =?utf-8?B?ZU44SGdwdHd6SVFjK3BKL1dYbkRQei9aVC81VXFtMFVYOWkwcFFYVzNvakRz?=
+ =?utf-8?B?eDRXUlNvZGxPSTlJekxXbkRnbE4rZWVSUCt6SFlUOGhkMlNVSnBMK0hldUph?=
+ =?utf-8?B?QUNqNS9XUEdDVXJVaEdtdlUzcE5xR1FXcVM5QWl0RVVXYUVYN3kwa2pTdnBR?=
+ =?utf-8?B?azNXRG5FdDJOVzJLQVFpK2U5VmFvQlBvU2tIUTZwRkZzV3BsdmhraGR1enVh?=
+ =?utf-8?B?U00xK0NiMVg3ZTc3MUlEVzRvSm5NYXhLNXpoYndCMlRLVXZOcTQvWWoyUUJP?=
+ =?utf-8?B?SWlyTE5ROEdnNi8wS09HMzVyT1E0NHhIKzk0VlBZcEYzWkIyaWFtMFAxTUFr?=
+ =?utf-8?B?akhZSkE0OGdSZWRRY3FBM3pDQVh5SFc2dFdHQnFqdHZYSDZjT3Y3QVFDY3lB?=
+ =?utf-8?B?VWl2alRKKzJkL2lMdU1FZG12dnRxV0RHQmcraVc2d1NQZjJYSVpiWW53cWdY?=
+ =?utf-8?B?NC9VVVhYY1Y4ZnZYT3BYNS9LZEV1WVBsTG1kakRMTGZPdkx0eHRwMnozeHFT?=
+ =?utf-8?B?SmlqeCtzUWtJU2trVzdRNXJHMCt2Y2NZZUg3ZWlkQU1jQnBKSm8wOXdsZWt3?=
+ =?utf-8?Q?m45oehChbEcbn?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN0PR11MB6231.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cEdHb2E5c0FiYklzRjBaUHNBQURFd2hmRUtWd2xyYXhaT0w0cWFqelJMcGdt?=
+ =?utf-8?B?bk9sZk9Qb1JZQTlmcFFxMmdxMDdGZWxHTmZldm5SWWtiM1VEUndNdklzZm90?=
+ =?utf-8?B?NVM5Ykd5Um9weGdlc3lsU293RWNOdEl6d2wzQk45UzNXTUhRQlJIVmgzenUw?=
+ =?utf-8?B?SURpeWRpdDlsYlM5dFQrWk15a0kxSncxZ1RLOWlPMlNCdjg3eWhRcjJ6QTZE?=
+ =?utf-8?B?NFZLM0crcE1BM3FObFR5QXlQOUhrWlpBV2tQNk83NlhYcmhlaDRHTitZUTNw?=
+ =?utf-8?B?blVPWDdtZUF3N2VuR1pLWm8yUDl3TGo4MjZDRjBqMDRqVklqU0Q5ODhHaTB0?=
+ =?utf-8?B?bzVFeThEaEJhV2dNU0dFRUtTVkliVThaeExOeWlrOW0xbk1XYVhOVXZGdnFO?=
+ =?utf-8?B?RXZDUG1UUU1SY2NJVVhnTVJ2R2UwSkVZak9KM3cyL2lBR3kzdXVHNk9ENkUw?=
+ =?utf-8?B?MWt1MlN6aVFycHlKQk44b3ozK3BVRjN2aHhYVE1GVCtFejJvRXlEVERvZEk4?=
+ =?utf-8?B?SXRHZ3VIMXB1dTcyZjhURHhpWHpxOEdBTDFoMzEvUSt1alA2bjczOTRaYmpS?=
+ =?utf-8?B?NVFOZStSRVlNb0dWbXVlUC9mRkVHNmt0cTMyVHQrVjZFWXlaL2czUk1oL2Jv?=
+ =?utf-8?B?SGJMbHArTk8zZUhCQVRPVU9qQTI2aWpGaHg5dmlTWW5oR3QvYUo2ZXgrZGJX?=
+ =?utf-8?B?bUxodEFUT0QwWGkvNloyZmFFcTV0emhYWnRuQ3BkanBzWXFIYVBUK3BFdkJC?=
+ =?utf-8?B?M1FzSDZ4RUhZNzNFU2RDcmtvUDgzYTRaQ2hDbDlDK2ZoZnB1SEIzWjVnOTM5?=
+ =?utf-8?B?VjAxcWVkMXhHTTFOU3VmN2RrZXVISTVBTnV5NGRBOEdQc0xyczBycTlWUWoz?=
+ =?utf-8?B?clpzK2F6NFRBRUNGRTNmaTdNcjdKVEVqcEZuRjNnZHBVUUgzTmpXVUNmWjEx?=
+ =?utf-8?B?eENoN2thN3RlcW5XSDZpTjlkY3VLUjVTQjFuR1dpQ0tNbUE5cHZJSCtpVFV1?=
+ =?utf-8?B?R2tWUHhnTUJOUW1sWGwxcEt2UXVFRjNVNnRORVQ0VnlIaU1WbkpXWmtCYWtZ?=
+ =?utf-8?B?SFJyQm5aRko5OHNhN3ljdDlUK3E5aHQ5d3VCUkpJcWVuMk9mTks1VFFYNWFp?=
+ =?utf-8?B?VXUweWpJYUJLY3ljd1pjQXB0bENGaFBzSXJDK01ET2lUYXhsNFZYcEM1WFIr?=
+ =?utf-8?B?ZGF5RGR3Nm05VUZEcW9YZVlXa1JjKzFubWVjeFdCYmVHVHFQZEdzZzhoRmVF?=
+ =?utf-8?B?RzROYWcrcHZidVRmMWV4aDlWK3JXVlZ4WkJDK3BxcmlFSEVCQmZsWEZ4eDk4?=
+ =?utf-8?B?MUJ3ZWFxc201WkRuY0lrNVJNdU04L0R2UDI1ci96WGJGb081WWlrM2hEYlpv?=
+ =?utf-8?B?cTVMTGt2L0tpUlFrRHVGZ1ZKWTU2K1JYU2tjVjQweGpJTHExbmo5ZDFmU09E?=
+ =?utf-8?B?bTBqWG1UK3JnMGNiL0Zuc3Jna1lYcXNmeGY4eEVxU1RrblVtMGpBZTRnOHFQ?=
+ =?utf-8?B?Z1hOSS9wTGFuQ0dHSThNTWZiUldkaklsRXVoZkpvclozd2R3TG0wZ2JHbmlH?=
+ =?utf-8?B?YlVYeHJ2T0ZDc2lTdjhOZmI1LzZxYml5Qk0xYWoyYTBlNVVrRC9QWnBHNzJt?=
+ =?utf-8?B?RGdJMGlNNlRKMlRtMU1tR0JFY2ZjbjdlbXhKekFlQVlTbTZ4RFp5cGhKdndr?=
+ =?utf-8?B?VE1qZDFLK0M4TGx1QjZYcFdjcnJ1VmJMM0g4OHBzQ2hIWWtISi9jazZONi80?=
+ =?utf-8?B?QnF2bis1TjFTNGNjWmxWdldkVFJxMytLOEg0RHFxa3dCUVk0dFFRY2JQTG9Q?=
+ =?utf-8?B?L2Rhc2E2YlRNREphQTFZUHlMSUozYldxU3piTEpITkNvUnd1UnRHNUw0ZUgv?=
+ =?utf-8?B?RU9iUWZQRHAweTV0NURrdzhTbGJHbkVkR0RzRk1CN21DeDZ4dFl5ZmdkSFlC?=
+ =?utf-8?B?YlRnODVFN2RGdUdQUWNzblFidE54eEk3YTNhTmEvMGZWRDVUc0RkL2l0ZjNY?=
+ =?utf-8?B?eThWTS8ra2VjVHdSTzA2aHRrWklFdTE4eXFpMEdyOEF4RXNYU05jOS9TMWUw?=
+ =?utf-8?B?TlVTdFpua1pSQlJzeWgxVDRySTVUSUoxdjJoRnR2c2J4M2NOSXd1enp3dXlS?=
+ =?utf-8?B?Z0tlOTYxTGxsOVloTUdrdS9YU1dpRm1sNkp0dXJOUzNDdzEyaElQN2FEdUtB?=
+ =?utf-8?Q?lrNBja8CdMfvJwvS7fJhsNk=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 091e5ac4-e2db-47d6-97dc-08dd623f4225
+X-MS-Exchange-CrossTenant-AuthSource: MN0PR11MB6231.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2025 14:56:39.1191
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ezb2HHR9qIz+yZvbV/wATed0lz3eodz8Blv51kJEMCwMJvFqlKduKWVRTVBwux1MiEQ3A49MeQZLUAO60OkuV3HgHOyADUnJ304ZSyD0yrU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7889
+X-OriginatorOrg: intel.com
 
+On 2025-03-07 at 02:10:39 +0100, Andrey Konovalov wrote:
+>On Tue, Mar 4, 2025 at 3:08 PM Maciej Wieczor-Retman
+><maciej.wieczor-retman@intel.com> wrote:
+>>
+>> But looking at the patch you sent I'm wondering - are we treating the arithmetic
+>> in kasan_mem_to_shadow() as unsigned?
+>
+>The shift is signed (arithmetic). But for the addition, it doesn't
+>matter? Adding an integer to a void* pointer should result in the same
+>value, regardless of whether the integer is signed or unsigned.
 
---263hj7gfnktphh5g
-Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v16 5/7] drm/vkms: Create KUnit tests for YUV conversions
-MIME-Version: 1.0
+Yes, you're right, sorry.
 
-Hi,
+>
+>> You wrote that all the ranges will
+>> overflow but I thought we're interpreting the arithmetic as signed - so only
+>> positive addresses will overflow and negative addresses (with bit 63 set) will
+>> only be more negative thus not causing an overflow.
+>
+>Ah, yes, I see what you mean. From the C point of view, calculating
+>the shadow address for a pointer with bit 63 set can be interpreted as
+>subtracting from KASAN_SHADOW_OFFSET, and there's no overflow. But on
+>the assembly level, the compiler should generate the add instruction,
+>and the addition will overflow in both cases.
+>
+>The important thing is that both possible shadow memory ranges are
+>contiguous (either both start and end overflow or none of them).
+>
+>So this was my brain converting things to assembly. Feel free to
+>reword/clarify the comments.
 
-On Mon, Mar 10, 2025 at 11:12:59AM +0200, Pekka Paalanen wrote:
-> On Fri, 7 Mar 2025 15:50:41 +0100
-> Louis Chauvet <louis.chauvet@bootlin.com> wrote:
->=20
-> > Le 07/03/2025 =E0 11:20, Maxime Ripard a =E9crit=A0:
-> > > On Wed, Feb 19, 2025 at 02:35:14PM +0100, Louis Chauvet wrote: =20
-> > >>
-> > >>
-> > >> Le 19/02/2025 =E0 11:15, Maxime Ripard a =E9crit=A0: =20
-> > >>> On Wed, Feb 05, 2025 at 04:32:07PM +0100, Louis Chauvet wrote: =20
-> > >>>> On 05/02/25 - 09:55, Maxime Ripard wrote: =20
-> > >>>>> On Mon, Jan 27, 2025 at 11:48:23AM +0100, Louis Chauvet wrote: =
-=20
-> > >>>>>> On 26/01/25 - 18:06, Maxime Ripard wrote: =20
-> > >>>>>>> On Tue, Jan 21, 2025 at 11:48:06AM +0100, Louis Chauvet wrote: =
-=20
-> > >>>>>>>> +static struct yuv_u8_to_argb_u16_case yuv_u8_to_argb_u16_case=
-s[] =3D {
-> > >>>>>>>> +	/*
-> > >>>>>>>> +	 * colour.RGB_to_YCbCr(<rgb color in 16 bit form>,
-> > >>>>>>>> +	 *                     K=3Dcolour.WEIGHTS_YCBCR["ITU-R BT.60=
-1"],
-> > >>>>>>>> +	 *                     in_bits =3D 16,
-> > >>>>>>>> +	 *                     in_legal =3D False,
-> > >>>>>>>> +	 *                     in_int =3D True,
-> > >>>>>>>> +	 *                     out_bits =3D 8,
-> > >>>>>>>> +	 *                     out_legal =3D False,
-> > >>>>>>>> +	 *                     out_int =3D True)
-> > >>>>>>>> +	 *
-> > >>>>>>>> +	 * Test cases for conversion between YUV BT601 full range an=
-d RGB
-> > >>>>>>>> +	 * using the ITU-R BT.601 weights.
-> > >>>>>>>> +	 */ =20
-> > >>>>>>>
-> > >>>>>>> What are the input and output formats?
-> > >>>>>>>
-> > >>>>>>> Ditto for all the other tests. =20
-> > >>>>>>
-> > >>>>>> There is no really "input" and "output" format, they are referen=
-ce values
-> > >>>>>> for conversion, you should be able to use it in both direction. =
-They are
-> > >>>>>> generated by RGB_to_YCbCr (RGB input, YUV output) just because i=
-t was
-> > >>>>>> easier to create the colors from RGB values. =20
-> > >>>>>
-> > >>>>> RGB and YUV aren't formats, they are color models. XRGB8888 is a =
-format.
-> > >>>>> NV12 is a format.
-> > >>>>> =20
-> > >>>>>> If you think we should specify what is was used as input and out=
-put to
-> > >>>>>> generate those values, I can modify the comment to:
-> > >>>>>>
-> > >>>>>> 	Tests cases for color conversion generated by converting RGB
-> > >>>>>> 	values to YUV BT601 full range using the ITU-R BT.601 weights. =
-=20
-> > >>>>>
-> > >>>>> My point is that those comments should provide a way to reimpleme=
-nt the
-> > >>>>> test from scratch, and compare to the actual implementation. It's=
- useful
-> > >>>>> when you have a test failure and start to wonder if the implement=
-ation
-> > >>>>> or the test is at fault.
-> > >>>>>
-> > >>>>> By saying only RGB and YUV, you can't possibly do that. =20
-> > >>>>
-> > >>>> I understand your concern, but I believe there might be a slight
-> > >>>> misunderstanding. The table in question stores reference values for
-> > >>>> specific color models, not formats. Therefore, it doesn't specify =
-any
-> > >>>> particular format like XRGB8888 or NV12.
-> > >>>>
-> > >>>> To clarify this, I can rename the format_pair struct to value_pair=
-=2E This
-> > >>>> should make it clearer that we are dealing with color model values=
- rather
-> > >>>> than formats.
-> > >>>>
-> > >>>> If you want to test a specific format conversion, such as
-> > >>>> YUV420_to_argbu16, you would need to follow a process like this:
-> > >>>>
-> > >>>> 	// Recreate a YUV420 data
-> > >>>> 	plane_1[0] =3D test_case.yuv.y
-> > >>>> 	plane_2[0] =3D test_case.yuv.u
-> > >>>> 	plane_2[1] =3D test_case.yuv.v
-> > >>>>
-> > >>>> 	// convertion to test from YUV420 format to argb_u16
-> > >>>> 	rgb_u16 =3D convert_YUV420_to_argbu16(plane_1, plane_2)
-> > >>>>
-> > >>>> 	// ensure the conversion is valid
-> > >>>> 	assert_eq(rgb_u16, test_case.rgb)
-> > >>>>
-> > >>>> The current test is not performing this kind of format conversion.
-> > >>>> Instead, it verifies that for given (y, u, v) values, the correct =
-(r, g,
-> > >>>> b, a) values are obtained. =20
-> > >>>
-> > >>> You already stated that you check for the A, R, G, and B components=
-=2E On
-> > >>> how many bits are the values you are comparing stored? The YUV valu=
-es
-> > >>> you are comparing are stored on how many bits for each channel? With
-> > >>> subsampling?
-> > >>>
-> > >>> If you want to compare values, you need to encode a given color into
-> > >>> bits, and the way that encoding is done is what the format is about.
-> > >>>
-> > >>> You might not compare the memory layout but each component individu=
-ally,
-> > >>> but it's still a format. =20
-> > >>
-> > >> Sorry, I think I misunderstood what a format really is. =20
-> > >=20
-> > > Ultimately, a format is how a given "color value" is stored. How many
-> > > bits will you use? If you have an unaligned number of bits, how many
-> > > bits of padding you'll use, where the padding is? If there's multiple
-> > > bytes, what's the endianness?
-> > >=20
-> > > The answer to all these questions is "the format", and that's why
-> > > there's so many of them. =20
-> >=20
-> > Thanks!
-> >=20
-> > >> But even with this explanation, I don't understand well what you ask
-> > >> me to change. Is this better:
-> > >>
-> > >> The values are computed by converting RGB values, with each componen=
-t stored
-> > >> as u16, to YUV values, with each component stored as u8. The convers=
-ion is
-> > >> done from RGB full range to YUV BT601 full range using the ITU-R BT.=
-601
-> > >> weights.
-> > >>
-> > >> TBH, I do not understand what you are asking for exactly. Can you pl=
-ease
-> > >> give the sentence you expect directly? =20
-> > >=20
-> > > The fourcc[1] code for the input and output format would be nice. And=
- if
-> > > you can't, an ad-hoc definition of the format, answering the question=
-s I
-> > > mentionned earlier (and in the previous mail for YUV). =20
-> >=20
-> > I don't think any fourcc code will apply in this case, the tests use=20
-> > internal VKMS structures pixel_argb_16 and pixel_yuv_u8. How do I=20
-> > describe them better? If I add this comment for the structures, is it=
-=20
-> > enough?
-> >=20
-> > /**
-> >   * struct pixel_argb_u16 - Internal representation of a pixel color.
-> >   * @r: Red component value, stored in 16 bits, without padding, using
-> >   *     machine endianness
-> >   * @b: [...]
-> >   *
-> >   * The goal of this structure is to keep enough precision to ensure
-> >   * correct composition results in VKMS and simplifying color
-> >   * manipulation by splitting each component into its own field.
-> >   * Caution: the byte ordering of this structure is machine-dependent,
-> >   * you can't cast it directly to AR48 or xR48.
-> >   */
-> > struct pixel_argb_u16 {
-> > 	u16 a, r, g, b;
-> > };
-> >=20
-> > (ditto for pixel_yuv_u8)
-> >=20
-> > > I'm really
-> > > surprised about the RGB component values being stored on 16 bits thou=
-gh.
-> > > It's super unusual, to the point where it's almost useless for us to
-> > > test, and we should probably use 8 bits values. =20
-> >=20
-> > We need to have 16 bits because some of the writeback formats are 16 bi=
-ts.
->=20
-> Hi Maxime,
->=20
-> Louis' proposed comment is good and accurate. I can elaborate further on
-> it.
->=20
-> pixel_argb_u16 is an internal structure used only for temporary pixel
-> storage: the intermediate format. It's aim is to make computations on
-> pixel values easy: every input format is converted to it before
-> computations, and after computations it is converted to each output
-> format. This allows VKMS to implement computations, e.g. a matrix
-> operation, in simple code for only one cpu-endian "pixel format", the
-> intermediate format. (drm_fourcc.h has no cpu-endian formats at all,
-> and that is good.)
->=20
-> That VKMS never stores complete images in the intermediate format. To
-> strike a balance between temporary memory requirements and
-> computational overhead, VKMS processes images line-by-line. Only one
-> (or two) line's worth of pixels is needed to be kept in memory per
-> source or destination framebuffer at a time.
->=20
-> 16-bit precision is required not just because some writeback and
-> framebuffer formats are 16-bit. We also need extra precision due to the
-> color value encoding. Transfer functions can convert pixel data between
-> the optical and electrical domains. Framebuffers usually contain
-> electrical domain data, because it takes less bits per pixel in order
-> to achieve a specific level of visual image quality (think of color
-> gradient banding). However, some computations, like color space
-> conversion with a matrix, must be done in the optical domain, which
-> requires more bits per pixel in order to not degrade the image quality.
->=20
-> In the future I would even expect needing 32-bit or even 64-bit per
-> channel precision in the intermediate format once higher-than-16 bits
-> per channel framebuffer formats require testing.
->=20
-> YUV can work with 8 bits per pixel for now, because in practice YUV is
-> always stored in electrical domain due its definition. YUV in optical
-> domain is simply never used. However, there are framebuffer formats
-> with more than 8 bits of YUV channels, so this may need extending too.
+Right, I focused too much on the signed aspect. Treating everything as
+overflowing sounds better, more unified.
 
-Thanks for your explanations, and yes Louis, I think it's in a much
-better shape with your suggestion.
+>
+>> That was my assumption when
+>> writing the previous checks - we need to check below the overflown range, above
+>> the negative (not overflown) range, and between the two.
+>
+>It could be that your checks are equivalent to mine. What I did was to
+>check that the address lies outside of both contiguous regions, which
+>makes the checks symmetrical and IMO easier to follow.
 
-We'd still some additional info like whether you're testing limited vs
-full range, but it's most likely going to be on a per-test basis.
+I drew this out and yeah, it looks like it's the same, just grouping the logical
+expressions differently. What do you think about incorporating something like
+the following into your comment about the x86 part? :
 
-Maxime
+	Given the KASAN_SHADOW_OFFSET equal 0xffeffc0000000000
+	the following ranges are valid mem-to-shadow mappings:
 
---263hj7gfnktphh5g
-Content-Type: application/pgp-signature; name="signature.asc"
+	0xFFFFFFFFFFFFFFFF
+		INVALID
+	0xFFEFFBFFFFFFFFFF - kasan_mem_to_shadow(~0UL)
+		VALID	- kasan shadow mem
+		VALID	- non-canonical kernel virtual address
+	0xFFCFFC0000000000 - kasan_mem_to_shadow(0xFEUL << 56)
+		INVALID
+	0x07EFFBFFFFFFFFFF - kasan_mem_to_shadow(~0UL >> 1)
+		VALID	- non-canonical user virtual addresses
+		VALID	- user addresses
+	0x07CFFC0000000000 - kasan_mem_to_shadow(0x7EUL << 56)
+		INVALID
+	0x0000000000000000
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZ9Lr3wAKCRDj7w1vZxhR
-xbKPAP9h1I4+WMbgpFcDVDNbkIi1cwxtvUp5hqO3epBlkh9puwEAn2eIG2+dnROT
-NXKbY6a7Jy60/nsOrRAEigCwgN1ckQ4=
-=8h4B
------END PGP SIGNATURE-----
-
---263hj7gfnktphh5g--
+-- 
+Kind regards
+Maciej Wieczór-Retman
 
