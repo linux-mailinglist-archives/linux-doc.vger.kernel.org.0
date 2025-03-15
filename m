@@ -1,146 +1,126 @@
-Return-Path: <linux-doc+bounces-40919-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40922-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A250A624D4
-	for <lists+linux-doc@lfdr.de>; Sat, 15 Mar 2025 03:44:05 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6931A62543
+	for <lists+linux-doc@lfdr.de>; Sat, 15 Mar 2025 04:16:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 98FBC167CE1
-	for <lists+linux-doc@lfdr.de>; Sat, 15 Mar 2025 02:43:57 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 29F6F881B30
+	for <lists+linux-doc@lfdr.de>; Sat, 15 Mar 2025 03:15:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAEF1175D39;
-	Sat, 15 Mar 2025 02:43:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4D3DE18B499;
+	Sat, 15 Mar 2025 03:15:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZPqmGaGm"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="M7sYQkql"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5288111713;
-	Sat, 15 Mar 2025 02:43:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16A89846F;
+	Sat, 15 Mar 2025 03:15:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742006615; cv=none; b=oMsfZUMYHxf9p3tmwSb0nkst68Dvteytlgtd4hNLtOKsaaYhgyg+9WoT+6tXpum+1glfnenUiFXaNYIt4nkqWEmbwUT12cQ/komQfJkC4QSbkw5f8trLmSfkBd8t+hORW2tAol3QGnOZI/AbbXff4CG9mCeOCjbOBYrYBYS4x5Y=
+	t=1742008554; cv=none; b=V69Efrv37l2SO/A4Pt9lpL+H/tN46k7oQ+HxatGU40j5PR+un/+6beRm9yObQ1NdfRmG6LB0aT9U1EffryjfSTJ613Bw6otEyo1baNBDsil6z88c7taDQ7dUE0N/vUVTD/7ik7pU00tpHOjw0aYZMawTrMDeE+OKJal4Qjp/+XE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742006615; c=relaxed/simple;
-	bh=GlntjgU3Lxdii6DqpKNjs6+MaX1eRLZ0d3LBMTa28eY=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Z6h59vC1B7lCRpX3Q1sA03LdoFuftbyy4eScpVIjvlUi4xkpv3vGQvBiujrJqxKxqslrVfC7/klya9VkQAwoJZlZ/tgV6bmqNOXVFtGUcoexFa7/+m/hBUfz9aiKOtkwsno1ZjMw1uQEqagQjQmbZYrGp5OSOm5X+gh7xms4tg8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZPqmGaGm; arc=none smtp.client-ip=209.85.210.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-72a145521d6so1908736a34.3;
-        Fri, 14 Mar 2025 19:43:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742006613; x=1742611413; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=MibvrQXj2P5QnlDxX5YbYon7Ne8dH6XMjJsYnk+RzkY=;
-        b=ZPqmGaGmoYNJAtfzfsci1WDuJQd9Fh0XCGGImHJILodVGZRd3kjf1NZIrsZHGsEkG3
-         Q0W2E0vAqCmdKDBU3bg9ncLzaGO0mOkmeF9bqLOSdu46/Zl/uecnaddy2bmjzhKoD7wu
-         +3MuUWKSvAs2pc0WnqssGEaXfBwYImE/FYVy5NSjdgFpstuTSJrvaXN4GY6KaPujvrEj
-         tJrHaLudL4RagYjOCtmZ2vxhfMxA3SMzp7LSeF6k2zxZrPYpaJIaOuginSAdEmKFdrIR
-         WiLtrZeXIBHyIX5oK7zhAF9Q9sSKIrrZbOcoNf6n1zqb3on0ic5zX8AijmD8JsZgmyOq
-         9zoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742006613; x=1742611413;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=MibvrQXj2P5QnlDxX5YbYon7Ne8dH6XMjJsYnk+RzkY=;
-        b=lwcbv8TydL7O8th/jUUi7CFchzRWJEjiq/vgnvj+ewOnzl4bPOxgyyQWqyRlUtPXGm
-         j0kLnaOUpblmhcGyJ3BVYYPvHGfS1jr8z3JHXRAql2WDPJ4LLwGk5IHytbsmB5OlekrR
-         Sd2BddZ6cZ68uXNbClUNFWKSi6FsEjCl6N2GcL5ut+xWHiWT39Tnrpr08kp4Xs6NT6j6
-         2feoQjAEx1Oz4lbFtx+TjBi61kJ1660ymv7vDOP48ZkvYc7o+LF7J0p9UQWK9fDlMREs
-         aP0ejvgp9jCzTAvaJwg4QUMmfFhwntqr8HGLx1P44OnLaxs5E61UT0fDN4Q1d+cxHPXq
-         EckQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXVROctpK9/v6+2nFIqOcuokZkRd/JnnJiu052T0jm3AqNCupTl8cOeVsPUyc0gw48zx6GxAkF89ZJvoJeQFdM=@vger.kernel.org, AJvYcCXXJz4hbiEB1/qp22unM2aLXnzs3Dm9oZ13IlJ2gB8K6Jx5QCYvVri7/Q//wC9KxtQkpJNK8D1VYb0=@vger.kernel.org, AJvYcCXzfLDsHXKjwGbVwlOVHY+yRiJf8U5il6S6gOXAv/K1DL8RWd8rI9In3DpNmuaOLRDENO5DCnP10daOsmkV@vger.kernel.org
-X-Gm-Message-State: AOJu0YywOnbToJ6rj9rkrqs0G8bUl+nQhaiPu3bz6ZvZT5S/XITR9620
-	MOJg9CmgNzvlCO1s/fBA2ZHZ7/Cikjv2cGdT1fETvnOGKtcPqW47
-X-Gm-Gg: ASbGnct2GphkIdn2Gbv7gbtyJjTEEv3akBf/XCmiOOQaS1GxBUxrSkaQrFLuZkvRmaW
-	wx+XvwpnhR+TVKliQsLcz/irMmSQ/PjOy3xfaIE17nEvhMz+J2DRs3KsKnDG8Nqa5jtAJMfLcZZ
-	Lk2BKk1vfYLPw407klOTnnevROI8l2AyJJ8YJUsa+OvcUgxbrsbf8YqdGky1V9TTo2WfoX37iga
-	Xt+ZDTuopJ1EMYzPsYWSuUV6MJCXtXc622rmvx7yZB4PLY+Lx62wHbbQD6rgDk1w0Upee6+O7kv
-	OxG/0gF6efMj8cRLn2Rl13lHS3RNAnrh5Q75U91wsAl4LC4dOArBxI3zYCwW8d9b73bRmUoAvo4
-	vPeOaMUivFuJMfbxV
-X-Google-Smtp-Source: AGHT+IH81UySJfquqqsqib4YT+37awiURcsJmKDQnrwiT5WTPoR6EFhWOtsz2pC9Fb1W+uChntifMg==
-X-Received: by 2002:a05:6830:3c86:b0:72b:992b:e50 with SMTP id 46e09a7af769-72bbc4ea2a6mr3535769a34.21.1742006613460;
-        Fri, 14 Mar 2025 19:43:33 -0700 (PDT)
-Received: from my-computer.lan (c-73-76-29-249.hsd1.tx.comcast.net. [73.76.29.249])
-        by smtp.googlemail.com with ESMTPSA id 46e09a7af769-72bb26bb82dsm882990a34.32.2025.03.14.19.43.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Mar 2025 19:43:33 -0700 (PDT)
-From: Andrew Ballance <andrewjballance@gmail.com>
-To: dakr@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch,
-	maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	tzimmermann@suse.de,
-	corbet@lwn.net,
-	ojeda@kernel.org,
-	alex.gaynor@gmail.com,
-	boqun.feng@gmail.com,
-	gary@garyguo.net,
-	bjorn3_gh@protonmail.com,
-	benno.lossin@proton.me,
-	a.hindborg@kernel.org,
-	aliceryhl@google.com,
-	tmgross@umich.edu,
-	andrewjballance@gmail.com,
-	acourbot@nvidia.com,
-	nouveau@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org,
+	s=arc-20240116; t=1742008554; c=relaxed/simple;
+	bh=YOIQ3ZtSX2tS6vlyFTaYggtRceIaGQgB5shVVBaSPf8=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=bzy0+KV4zokayEV1mfZUTqzC51KjgYXFW2v2+bU7aZVH3q0zD882VlNm5K6VTo72co8nAuEblrEhM0+IOoeKSLFNF5vOu3ocqO/EB5N+NY0ud3IZ82bqpVgipaNaoOFZXESsICW9njynIUgz0u+5E4i9sXFv//JF97H1lMkJnf4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=M7sYQkql; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60676C4CEE5;
+	Sat, 15 Mar 2025 03:15:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1742008553;
+	bh=YOIQ3ZtSX2tS6vlyFTaYggtRceIaGQgB5shVVBaSPf8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=M7sYQkqlOEiRIE4SRVqqraUu5q+cPrFuPwy686AVAmzPmEl5S1BDWcKGQwZ5aM0qE
+	 RJ58h5EbH5z8dAtCpUHHvT6EZeKfgleYAYIeGMZF1BxSEsSW4v3B1gPcEJZc298UQ+
+	 JrEB2HeR/I5ozwCp6mJeOINNCzCa4NvDZ2M2Gl0XZM/h3FedIbBzChOpQp8LN8pQbF
+	 N8vsKOnlwMfE3fQJ90PL/qxFiE5i8snx43U/s2z0VF49BqTkfizA3i3Iu+N34x4mWW
+	 hGbrcRc6Bn8Wa2Gnt3O5xKzjHRS0zZHtrbfFsX4PzXjE96eLIPKYhyi+ASgv7CFcmE
+	 SZt1d9OedtKag==
+From: Kees Cook <kees@kernel.org>
+To: Vlastimil Babka <vbabka@suse.cz>
+Cc: Kees Cook <kees@kernel.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	Marco Elver <elver@google.com>,
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+	Christoph Lameter <cl@linux.com>,
+	Pekka Enberg <penberg@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	Hyeonggon Yoo <42.hyeyoo@gmail.com>,
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Jann Horn <jannh@google.com>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Sasha Levin <sashal@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Yafang Shao <laoar.shao@gmail.com>,
+	Tony Ambardar <tony.ambardar@gmail.com>,
+	Alexander Lobakin <aleksander.lobakin@intel.com>,
+	Jan Hendrik Farr <kernel@jfarr.cc>,
+	Alexander Potapenko <glider@google.com>,
 	linux-kernel@vger.kernel.org,
-	rust-for-linux@vger.kernel.org
-Subject: [PATCH 3/3] gpu: nova-core: remove completed Vec extentions from task list
-Date: Fri, 14 Mar 2025 21:42:35 -0500
-Message-ID: <20250315024235.5282-4-andrewjballance@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250315024235.5282-1-andrewjballance@gmail.com>
-References: <20250315024235.5282-1-andrewjballance@gmail.com>
+	linux-hardening@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	llvm@lists.linux.dev
+Subject: [PATCH v4 0/2] slab: Introduce kmalloc_obj() and family
+Date: Fri, 14 Mar 2025 20:15:43 -0700
+Message-Id: <20250315025852.it.568-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1089; i=kees@kernel.org; h=from:subject:message-id; bh=YOIQ3ZtSX2tS6vlyFTaYggtRceIaGQgB5shVVBaSPf8=; b=owGbwMvMwCVmps19z/KJym7G02pJDOlXPjy4avtT6MtM1rKMB+/d62etWc5j7e7Gt/OX0qR7U 5/8nqOm31HKwiDGxSArpsgSZOce5+Lxtj3cfa4izBxWJpAhDFycAjCRGFlGhpuq3Z9uagj3fdLd yZz3Ii176wr+DSbrZJXvLJx1STFpATsjw8drn452fJ0aZOG8ymL71WN3OXk83kfejro6/UVp8Qq DR5wA
+X-Developer-Key: i=kees@kernel.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
-The requested Vec methods have been implemented thus, removes
-the completed item from the nova task list
+Hi,
 
-Signed-off-by: Andrew Ballance <andrewjballance@gmail.com>
----
- Documentation/gpu/nova/core/todo.rst | 10 ----------
- 1 file changed, 10 deletions(-)
+Here's a refresh and update on the kmalloc_obj() API proposal. Please
+see patch 2 for the specific details. And note that this is obviously
+not v6.15 material! :)
 
-diff --git a/Documentation/gpu/nova/core/todo.rst b/Documentation/gpu/nova/core/todo.rst
-index ca08377d3b73..234d753d3eac 100644
---- a/Documentation/gpu/nova/core/todo.rst
-+++ b/Documentation/gpu/nova/core/todo.rst
-@@ -190,16 +190,6 @@ Rust abstraction for debugfs APIs.
- | Reference: Export GSP log buffers
- | Complexity: Intermediate
- 
--Vec extensions
----------------
--
--Implement ``Vec::truncate`` and ``Vec::resize``.
--
--Currently this is used for some experimental code to parse the vBIOS.
--
--| Reference vBIOS support
--| Complexity: Beginner
--
- GPU (general)
- =============
- 
+Thanks!
+
+-Kees
+
+ v4:
+ - split __flex_counter() out and add appropriate helpers
+ - add flex array examples to commit log
+ - add "size" details to commit log
+ - add treewide conversion details to commit log
+ - improve treewide Coccinelle scripting
+ - fix documentation typos
+ v3: https://lore.kernel.org/lkml/20240822231324.make.666-kees@kernel.org/
+ v2: https://lore.kernel.org/lkml/20240807235433.work.317-kees@kernel.org/
+ v1: https://lore.kernel.org/lkml/20240719192744.work.264-kees@kernel.org/
+
+Kees Cook (2):
+  compiler_types: Introduce __flex_counter() and family
+  slab: Introduce kmalloc_obj() and family
+
+ Documentation/process/deprecated.rst |  42 +++++++
+ include/linux/compiler_types.h       |  31 +++++
+ include/linux/overflow.h             |  36 ++++++
+ include/linux/slab.h                 | 170 +++++++++++++++++++++++++++
+ 4 files changed, 279 insertions(+)
+
 -- 
-2.48.1
+2.34.1
 
 
