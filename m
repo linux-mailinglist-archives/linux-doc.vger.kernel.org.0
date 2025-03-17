@@ -1,250 +1,341 @@
-Return-Path: <linux-doc+bounces-40989-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-40992-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E6F3A63EFB
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 06:03:50 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id C616CA640C5
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 07:08:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0BF611881B3D
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 05:03:58 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C5B011890F47
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 06:08:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB30E215065;
-	Mon, 17 Mar 2025 05:03:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CDDC219319;
+	Mon, 17 Mar 2025 06:08:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="zP72LJ55"
+	dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b="ZXnix3xq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3A66286A1;
-	Mon, 17 Mar 2025 05:03:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B79082E3373
+	for <linux-doc@vger.kernel.org>; Mon, 17 Mar 2025 06:08:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742187819; cv=none; b=u0Qsd3ZQXtvNnFjY5RP6BRlkwih/M1ex3ShIO07Ao98Me1SQ44B5WH2BOFq1HSQ/8RlEMb+4uFOjfG3zjrHJREJZj+T+QCoT141urzbJq75WDuGtvGfFLdvHOqgLCfxzwMDu+FwrtsHrUsHzzIqsFrcXWLlYAsfNrcNDCqI7UMs=
+	t=1742191713; cv=none; b=O3uTKZZ7uQPgl6dITHYPCtK1i/uP4LlYmtEQ8ODqfnUzmqSNHr0CdCKac78TduuyAMp1mmSVPGlkbjHjgvQcDt+glOq/vAZgoww7G+Gd5Lv2c3k0kYgG3b5h9WjroYy6oKsFlsw5x+6QimI0/M1tfY2ngub5iPKE+nvlFnxWLlQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742187819; c=relaxed/simple;
-	bh=2vD/39xrIeY47JBB4mgWEUPE7E+CTz3iO47JJcNKFIo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=jgbOui8Bbp6cAtasvW5gSa4wYmXoqmA2I7Iokl5iBStDeasee+rupG/NGlC/jMlkoJSu6nRxXgDMfRwKTu4vz2u1E8VVEfdDbM3YuOwD5sqZtohivLgu09fgvRM6YRNCSdIydwrznWGEkaKmnw4oFBZAq52wsiY3eSPFyZkCHZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=zP72LJ55; arc=none smtp.client-ip=148.163.135.77
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
-Received: from pps.filterd (m0167088.ppops.net [127.0.0.1])
-	by mx0a-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52H4jvUK031114;
-	Mon, 17 Mar 2025 01:03:19 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=DKIM; bh=r2bCI
-	kLhw/rZksWEHKvCBsvGqUq/8+BhI3MfmB5oaQU=; b=zP72LJ55H5+PMkBWBI8kM
-	wgrGwqGATyYvekz2Nvf5fVyumAFd5rqcVR/chcz3xSD7hxzm+FZLAMceFsN7OMo6
-	gtf4C82SFng+/lhFaa4/TwFH9exf7u4Nvi58Y44+cr0dMIts7GMaHTeoozPZsIZ5
-	iLLs/tuYUgys+wOC76Oo+Mw7IyvOsFmRwHVD7DWZxUWbye9tVe7mCXuAsA0NSUYT
-	cjzsT4s1UHFzVpjm0qD2mGDcZ9B96/EkunmlulJQ0audp10PVCkQcCtzyCy7mDvv
-	ikB7RBGJeCz7tucDaAk1SvqxbuR5Zcan5RNmGwQ0HoLtmFqqdDnJnJ7Ge7Be9dKp
-	g==
-Received: from nwd2mta3.analog.com ([137.71.173.56])
-	by mx0a-00128a01.pphosted.com (PPS) with ESMTPS id 45d3d6g0mv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 17 Mar 2025 01:03:19 -0400 (EDT)
-Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
-	by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 52H53ItO044495
-	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 17 Mar 2025 01:03:18 -0400
-Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by ASHBMBX8.ad.analog.com
- (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.14; Mon, 17 Mar
- 2025 01:03:18 -0400
-Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
- (10.64.17.5) with Microsoft SMTP Server id 15.2.986.14 via Frontend
- Transport; Mon, 17 Mar 2025 01:03:18 -0400
-Received: from analog.ad.analog.com (KPALLER2-L03.ad.analog.com [10.117.223.28])
-	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 52H52jZF026775;
-	Mon, 17 Mar 2025 01:03:07 -0400
-From: Kim Seer Paller <kimseer.paller@analog.com>
-Date: Mon, 17 Mar 2025 13:02:27 +0800
-Subject: [PATCH 3/3] hwmon: (pmbus/ltc2978) add support for lt717x
+	s=arc-20240116; t=1742191713; c=relaxed/simple;
+	bh=IvNJR1CXhaIBt4hzQw1toiWztLSbiCGrla6GsFJVXKI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=H56UXv5qUJrga6uKgaO+EKGz8v2q0aLXjfYvytthWk0uYvLjfrzPRdD5GEz4m09uqt8IN1qFZN5TMUmEhi9uZWbmwuaZElx0OqOTZKb6cQwnrMqQxMmIyz7OAnc615O/TtNlK90PtLtRwv7xHBA0rQXsnBYCiP+X16caMxf9Cig=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com; spf=pass smtp.mailfrom=daynix.com; dkim=pass (2048-bit key) header.d=daynix-com.20230601.gappssmtp.com header.i=@daynix-com.20230601.gappssmtp.com header.b=ZXnix3xq; arc=none smtp.client-ip=209.85.214.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=daynix.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=daynix.com
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2260c915749so8230685ad.3
+        for <linux-doc@vger.kernel.org>; Sun, 16 Mar 2025 23:08:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1742191710; x=1742796510; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=wBWUop9hBNztgWdtuzQCjGkKpdUlBMvpymPGtusXugE=;
+        b=ZXnix3xqLhmLeuRaXUeLmZJ1HtEXgmIiQLNhkODhnfhql5OTtS3BXKoWljn8bhl21j
+         LuMqVa6jkA/HEXBI37J5RBF1Jfz9oCMZXs/Ex5Lxjpeozu3Qet5vVCXFVcukU98abp01
+         ouDrDEEeWbex/yMSFsVfMNWDaSNsD2xhWqgfsztZkqLRauXyRci7w+rZixrvSrhGlOLt
+         FRXJp7BnMiidmf/GeAiXycCYrWv0BgIsZp8ECPKnDlqsl3DG4gem6+dKhrEVMUL0XFeA
+         zYV1NnCdNu4pZvBazpNJQ9Eqwws2HTpepQE0CLk74R7HC+M9tLe8jyNwhuZcbEoDIgUq
+         zNZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742191710; x=1742796510;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=wBWUop9hBNztgWdtuzQCjGkKpdUlBMvpymPGtusXugE=;
+        b=ADR37JKcwAu/vDjIw3zvTXFC16hiFokhWLT4weNsqxKxsXkJTxS68kbg6uXtKyfsGe
+         gBt3gbj6WKPk3fbGSoQ/7dsa6qBZrwSXjASYK8L0dP6z+yOoIK8QsyVDTc/aDr9mJRb0
+         gEEgM3z/oQ0m5PAZhpy4wYFTe6+pOKTi90G3ZqyLGcrAwAbKHgmnWSJP+ao5VOI1KXHl
+         GpUyr2G/Ujhe7HQLHdlUb4lNPcEmEPgDujSHknQcsnhexy23tvQfj1MurV1CTJsgIsd8
+         OBhuUQAE7lmxPykdrc9HvB5oaD6SwFLJX14GAwDxp0XoELwnJlhFKdmfcFK9/x9XKxPX
+         qxEQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX/n5X46MRbu+eh4cuQWzVdNV1uwUtf6u1bqe75WHvl51xlaltDSC38S0V2w0j+SYLis7NA/YsNNuI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyYQ1mUoGKnZiA8H1xwfuwumKJUBJ4r8hSB3TLq+EyVCeescXYv
+	kKyTicbQ2MpPORT/36wm72Z47WGigcEtosy0SQaSEO3EnZbr2o3srjBNTPjUgP8=
+X-Gm-Gg: ASbGncu22KeDbOYq+Af6AQY41I6gtOWLaWtH2+12pTk9/21eahHtds86vqMQHIG78kR
+	p1NWVTTthXw/kTYWwXi6zg6uIMuapAoNdIHJRSjCPHRzkkdIHtFPuyl3aYf5fmrBffLx22nF4ZH
+	8IKPcdq61p3feCXpNT4wYJmOyMdFq9L6g+iSfpBZesLkiYyeg1Wl5JPbZreJLt+jg88pt/GPMCN
+	JaK+NIwgn+Y3k+UKFNZVaDJhlV2dBSNUK7CO04qdCsB2fhNa2MSRIM5JPINkUkodcffeqUq1MaM
+	U+8J5GcgbNYQwujIM+xw5GuJYju4g3DVwO8FlxA5GVxHUIKE9QdbzLsT5g==
+X-Google-Smtp-Source: AGHT+IGoQLPthZhSthgnNJ0I5Yj2jn7eld4kAuLi8jvyiFCGmV6WYXwPCIBZuiv2agvX1E5gEnyKQg==
+X-Received: by 2002:a17:903:18e:b0:223:325c:89de with SMTP id d9443c01a7336-225e0a5282bmr127005685ad.1.1742191709771;
+        Sun, 16 Mar 2025 23:08:29 -0700 (PDT)
+Received: from [157.82.207.107] ([157.82.207.107])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-225c68a6dfesm67327865ad.71.2025.03.16.23.08.25
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 16 Mar 2025 23:08:29 -0700 (PDT)
+Message-ID: <cf4bf799-3a6e-44dc-96ca-fa8d616e6ba7@daynix.com>
+Date: Mon, 17 Mar 2025 15:08:24 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20250317-hwmon-next-v1-3-da0218c38197@analog.com>
-References: <20250317-hwmon-next-v1-0-da0218c38197@analog.com>
-In-Reply-To: <20250317-hwmon-next-v1-0-da0218c38197@analog.com>
-To: Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof
- Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Frank Li
-	<Frank.Li@nxp.com>,
-        Delphine CC Chiu <Delphine_CC_Chiu@Wiwynn.com>
-CC: <linux-hwmon@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-i2c@vger.kernel.org>,
-        Kim Seer Paller <kimseer.paller@analog.com>,
-        Cherrence Sarip <cherrence.sarip@analog.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1742187765; l=5152;
- i=kimseer.paller@analog.com; s=20250213; h=from:subject:message-id;
- bh=2vD/39xrIeY47JBB4mgWEUPE7E+CTz3iO47JJcNKFIo=;
- b=wCpAEGlpdIyjd2x8FP5UhX7oBOfoAK4VxCdSpwXz4t7htJYIhXfrdZl6EN2YQkbhIiKtz754r
- wuGTRQOUSLfBNsTEABHSlwceTOi/5vVvJxvGWnxEbOz2bGFCYnSZaM7
-X-Developer-Key: i=kimseer.paller@analog.com; a=ed25519;
- pk=SPXIwGLg4GFKUNfuAavY+YhSDsx+Q+NwGLceiKwm8Ac=
-X-ADIRuleOP-NewSCL: Rule Triggered
-X-Proofpoint-ORIG-GUID: v8vYl_4d_NoVSvChkQsceWIoyRiiywce
-X-Authority-Analysis: v=2.4 cv=MsRS63ae c=1 sm=1 tr=0 ts=67d7ad17 cx=c_pps a=PpDZqlmH/M8setHirZLBMw==:117 a=PpDZqlmH/M8setHirZLBMw==:17 a=IkcTkHD0fZMA:10 a=Vs1iUdzkB0EA:10 a=gAnH3GRIAAAA:8 a=05dnua3z-gnXFUcAZTMA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: v8vYl_4d_NoVSvChkQsceWIoyRiiywce
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-17_01,2025-03-14_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 bulkscore=0
- impostorscore=0 lowpriorityscore=0 malwarescore=0 adultscore=0
- priorityscore=1501 phishscore=0 clxscore=1011 mlxlogscore=999
- suspectscore=0 spamscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
- definitions=main-2503170034
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v9 1/6] virtio_net: Add functions for hashing
+To: Jason Wang <jasowang@redhat.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Xuan Zhuo
+ <xuanzhuo@linux.alibaba.com>, Shuah Khan <shuah@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, kvm@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org,
+ Yuri Benditovich <yuri.benditovich@daynix.com>,
+ Andrew Melnychenko <andrew@daynix.com>,
+ Stephen Hemminger <stephen@networkplumber.org>, gur.stavi@huawei.com,
+ Lei Yang <leiyang@redhat.com>, Simon Horman <horms@kernel.org>
+References: <20250307-rss-v9-0-df76624025eb@daynix.com>
+ <20250307-rss-v9-1-df76624025eb@daynix.com>
+ <CACGkMEvxkwe9OJRZPb7zz-sRfVpeuoYSz4c2kh9_jjtGbkb_qA@mail.gmail.com>
+ <2e27f18b-1fc9-433d-92e9-8b2e3b1b65dc@daynix.com>
+ <CACGkMEssbh0-BKJq7M=T1z9seMu==4OJzmDPU+HEx4OA95E3ng@mail.gmail.com>
+ <26592324-c1f0-4ff5-918b-7a9366c4cf71@daynix.com>
+ <CACGkMEtapdjiXCPd1JZUF8JP3F1Ks-AtrbFBNGtORYnXPPrBEQ@mail.gmail.com>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <CACGkMEtapdjiXCPd1JZUF8JP3F1Ks-AtrbFBNGtORYnXPPrBEQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Add support for LT7170 and LT7171. The LT7170 and LT7171 are 20 A, 16 V,
-Single- or Dual-Phase, Silent Switcher Step-Down Regulators with Digital
-Power System Management.
+On 2025/03/17 10:24, Jason Wang wrote:
+> On Tue, Mar 11, 2025 at 1:49 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
+>>
+>> On 2025/03/11 9:47, Jason Wang wrote:
+>>> On Mon, Mar 10, 2025 at 2:53 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
+>>>>
+>>>> On 2025/03/10 12:55, Jason Wang wrote:
+>>>>> On Fri, Mar 7, 2025 at 7:01 PM Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
+>>>>>>
+>>>>>> They are useful to implement VIRTIO_NET_F_RSS and
+>>>>>> VIRTIO_NET_F_HASH_REPORT.
+>>>>>>
+>>>>>> Signed-off-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+>>>>>> Tested-by: Lei Yang <leiyang@redhat.com>
+>>>>>> ---
+>>>>>>     include/linux/virtio_net.h | 188 +++++++++++++++++++++++++++++++++++++++++++++
+>>>>>>     1 file changed, 188 insertions(+)
+>>>>>>
+>>>>>> diff --git a/include/linux/virtio_net.h b/include/linux/virtio_net.h
+>>>>>> index 02a9f4dc594d02372a6c1850cd600eff9d000d8d..426f33b4b82440d61b2af9fdc4c0b0d4c571b2c5 100644
+>>>>>> --- a/include/linux/virtio_net.h
+>>>>>> +++ b/include/linux/virtio_net.h
+>>>>>> @@ -9,6 +9,194 @@
+>>>>>>     #include <uapi/linux/tcp.h>
+>>>>>>     #include <uapi/linux/virtio_net.h>
+>>>>>>
+>>>>>> +struct virtio_net_hash {
+>>>>>> +       u32 value;
+>>>>>> +       u16 report;
+>>>>>> +};
+>>>>>> +
+>>>>>> +struct virtio_net_toeplitz_state {
+>>>>>> +       u32 hash;
+>>>>>> +       const u32 *key;
+>>>>>> +};
+>>>>>> +
+>>>>>> +#define VIRTIO_NET_SUPPORTED_HASH_TYPES (VIRTIO_NET_RSS_HASH_TYPE_IPv4 | \
+>>>>>> +                                        VIRTIO_NET_RSS_HASH_TYPE_TCPv4 | \
+>>>>>> +                                        VIRTIO_NET_RSS_HASH_TYPE_UDPv4 | \
+>>>>>> +                                        VIRTIO_NET_RSS_HASH_TYPE_IPv6 | \
+>>>>>> +                                        VIRTIO_NET_RSS_HASH_TYPE_TCPv6 | \
+>>>>>> +                                        VIRTIO_NET_RSS_HASH_TYPE_UDPv6)
+>>>>>
+>>>>> Let's explain why
+>>>>>
+>>>>> #define VIRTIO_NET_HASH_REPORT_IPv6_EX         7
+>>>>> #define VIRTIO_NET_HASH_REPORT_TCPv6_EX        8
+>>>>> #define VIRTIO_NET_HASH_REPORT_UDPv6_EX        9
+>>>>>
+>>>>> are missed here.
+>>>>
+>>>> Because they require parsing IPv6 options and I'm not sure how many we
+>>>> need to parse. QEMU's eBPF program has a hard-coded limit of 30 options;
+>>>> it has some explanation for this limit, but it does not seem definitive
+>>>> either:
+>>>> https://gitlab.com/qemu-project/qemu/-/commit/f3fa412de28ae3cb31d38811d30a77e4e20456cc#6ec48fc8af2f802e92f5127425e845c4c213ff60_0_165
+>>>>
+>>>
+>>> How about the usersapce datapath RSS in Qemu? (We probably don't need
+>>> to align with eBPF RSS as it's just a reference implementation)
+>>
+>> The userspace datapath RSS has no limit.
+>>
+>> The reference implementation is the userspace datapath. The eBPF program
+>>    is intended to bring real performance benefit to Windows guests in
+>> contrary.
+>>
+>> The userspace implementation does its best to provide defined RSS
+>> capabilities but may not be performant. Parsing all IPv6 options have a
+>> performance implication, but it is fine because it is not intended to be
+>> performant in the first place.
+>>
+>> The performance problem is inherent to the userspace implementation,
+>> which adds an extra overhead to the datapath. The eBPF program on the
+>> other hand does not incur such overhead because it replaces the existing
+>> steering algorithm (automq) instead of adding another layer. Hence the
+>> eBPF program can be practical.
+>>
+>> That said, it is not that important to align with the userspace and eBPF
+>> RSS in QEMU because they are still experimental anyway; the eBPF RSS has
+>> potential to become a practical implementation but it is still in
+>> development. The libvirt integration for the eBPF RSS is still not
+>> complete, and we occasionally add fixes for RSS and hash reporting
+>> without backporting to the stable branch.
+>>
+>> I'm adding interfaces to negotiate hash types rather for the future
+>> extensibility. The specification may gain more hash types in the future
+>> and other vhost backends may have a different set of hash types
+>> supported. Figuring out how to deal with different sets of supported
+>> hash typs is essential for both the kernel and QEMU.
+>>
+>>>
+>>>> In this patch series, I add an ioctl to query capability instead; it
+>>>> allows me leaving those hash types unimplemented and is crucial to
+>>>> assure extensibility for future additions of hash types anyway. Anyone
+>>>> who find these hash types useful can implement in the future.
+>>>
+>>> Yes, but we need to make sure no userspace visible behaviour changes
+>>> after migration.
+>>
+>> Indeed, the goal is to make extensibility and migration compatible.
+> 
+> So I see this part:
+> 
+> + uint32_t supported_hash_types = n->rss_data.supported_hash_types;
+> + uint32_t peer_hash_types = n->rss_data.peer_hash_types;
+> + bool use_own_hash =
+> + (supported_hash_types & VIRTIO_NET_RSS_SUPPORTED_HASHES) ==
+> + supported_hash_types;
+> + bool use_peer_hash =
+> + n->rss_data.peer_hash_available &&
+> + (supported_hash_types & peer_hash_types) == supported_hash_types;
+> 
+> It looks like it would be a challenge to support vhost-user in the
+> future if vhost-user supports hash feature others than source?
 
-The relevant registers in the LT7170 and LT7171 are similar to those in
-the LTC3887, but with fewer channels. This adds the chip ID and
-identification of ASCII to differentiate between the LT7170 and LT7171.
-These devices support polling for status updates and clearing peak
-values. The data format for voltage, current, and temperature is set to
-IEEE754 for precision and compatibility.
+The vhost-user backend will need to retrieve the supported hash types 
+with VHOST_USER_GET_CONFIG as the vhost-vdpa backend does with 
+VHOST_VDPA_GET_CONFIG.
 
-Co-developed-by: Cherrence Sarip <cherrence.sarip@analog.com>
-Signed-off-by: Cherrence Sarip <cherrence.sarip@analog.com>
-Signed-off-by: Kim Seer Paller <kimseer.paller@analog.com>
----
- drivers/hwmon/pmbus/Kconfig   |  6 +++---
- drivers/hwmon/pmbus/ltc2978.c | 44 ++++++++++++++++++++++++++++++++++++++++---
- 2 files changed, 44 insertions(+), 6 deletions(-)
+> 
+>>
+>>>
+>>>>
+>>>>>
+>>>>> And explain how we could maintain migration compatibility
+>>>>>
+>>>>> 1) Does those three work for userspace datapath in Qemu? If yes,
+>>>>> migration will be broken.
+>>>>
+>>>> They work for userspace datapath so my RFC patch series for QEMU uses
+>>>> TUNGETVNETHASHCAP to prevent breaking migration:
+>>>> https://patchew.org/QEMU/20240915-hash-v3-0-79cb08d28647@daynix.com/
+>>>>
+>>>
+>>> Ok, let's mention this in the cover letter. Another interesting thing
+>>> is the migration from 10.0 to 9.0.
+>>
+>> The patch series is already mentioned in the cover letter. A description
+>> of the intended use case of TUNGETVNETHASHCAP will be a good addition.
+>> I'll add it to this patch so that it will be kept in tree after it gets
+>> merged.
+>>
+>> Migration between two different QEMU versions should be handled with
+>> versioned machine types.
+>>
+>> When a machine created in 9.0 is being migrated to 10.0, the machine
+>> must set the hash type properties to match with the hash types supported
+>> by the existing implementations, which means it sets the property for
+>> VIRTIO_NET_HASH_REPORT_IPv6_EX to true, for example. Because this hash
+>> type is currently not included in TUNGETVNETHASHCAP, the machine will
+>> keep using the implementation used previously. The machine can be also
+>> migrated back to 9.0 again.
+>>
+>> A machine type with version 10.0 cannot be migrated to 9.0 by design so
+>> there is no new problem.
+> 
+> I meant migrate qemu 11.0 with machine type 10.0 to qemu 10.0 with
+> machine 10.0 etc.
 
-diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
-index 675b0d4703d87c9d5654489d0d770661ff0dba11..6ce68dd333690c407311e256db3f3284bbb48861 100644
---- a/drivers/hwmon/pmbus/Kconfig
-+++ b/drivers/hwmon/pmbus/Kconfig
-@@ -233,9 +233,9 @@ config SENSORS_LTC2978_REGULATOR
- 	depends on SENSORS_LTC2978 && REGULATOR
- 	help
- 	  If you say yes here you get regulator support for Linear Technology
--	  LTC3880, LTC3883, LTC3884, LTC3886, LTC3887, LTC3889, LTC7841,
--	  LTC7880, LTM4644, LTM4673, LTM4675, LTM4676, LTM4677, LTM4678,
--	  LTM4680, LTM4686, and LTM4700.
-+	  LT7170, LT7171, LTC3880, LTC3883, LTC3884, LTC3886, LTC3887, LTC3889,
-+	  LTC7841, LTC7880, LTM4644, LTM4673, LTM4675, LTM4676, LTM4677,
-+	  LTM4678, LTM4680, LTM4686, and LTM4700.
- 
- config SENSORS_LTC3815
- 	tristate "Linear Technologies LTC3815"
-diff --git a/drivers/hwmon/pmbus/ltc2978.c b/drivers/hwmon/pmbus/ltc2978.c
-index 658cb1173291006d83033a6363ac52d24635abaf..8f5be520a15db3d61dcd6df38ece6c74b232f85b 100644
---- a/drivers/hwmon/pmbus/ltc2978.c
-+++ b/drivers/hwmon/pmbus/ltc2978.c
-@@ -23,8 +23,8 @@ enum chips {
- 	/* Managers */
- 	ltc2972, ltc2974, ltc2975, ltc2977, ltc2978, ltc2979, ltc2980,
- 	/* Controllers */
--	ltc3880, ltc3882, ltc3883, ltc3884, ltc3886, ltc3887, ltc3889, ltc7132,
--	ltc7841, ltc7880,
-+	lt7170, lt7171, ltc3880, ltc3882, ltc3883, ltc3884, ltc3886, ltc3887,
-+	ltc3889, ltc7132, ltc7841, ltc7880,
- 	/* Modules */
- 	ltm2987, ltm4664, ltm4673, ltm4675, ltm4676, ltm4677, ltm4678, ltm4680,
- 	ltm4686, ltm4700,
-@@ -62,6 +62,7 @@ enum chips {
- 
- #define LTC2978_ID_MASK			0xfff0
- 
-+#define LT7170_ID			0x1C10
- #define LTC2972_ID			0x0310
- #define LTC2974_ID			0x0210
- #define LTC2975_ID			0x0220
-@@ -537,6 +538,8 @@ static int ltc2978_write_word_data(struct i2c_client *client, int page,
- }
- 
- static const struct i2c_device_id ltc2978_id[] = {
-+	{"lt7170", lt7170},
-+	{"lt7171", lt7171},
- 	{"ltc2972", ltc2972},
- 	{"ltc2974", ltc2974},
- 	{"ltc2975", ltc2975},
-@@ -615,7 +618,7 @@ static int ltc2978_get_id(struct i2c_client *client)
- 		ret = i2c_smbus_read_block_data(client, PMBUS_MFR_ID, buf);
- 		if (ret < 0)
- 			return ret;
--		if (ret < 3 || strncmp(buf, "LTC", 3))
-+		if (ret < 3 || (strncmp(buf, "LTC", 3) && strncmp(buf, "ADI", 3)))
- 			return -ENODEV;
- 
- 		ret = i2c_smbus_read_block_data(client, PMBUS_MFR_MODEL, buf);
-@@ -630,6 +633,25 @@ static int ltc2978_get_id(struct i2c_client *client)
- 
- 	chip_id &= LTC2978_ID_MASK;
- 
-+	if (chip_id == LT7170_ID) {
-+		u8 buf[I2C_SMBUS_BLOCK_MAX];
-+		int ret;
-+
-+		ret = i2c_smbus_read_i2c_block_data(client, PMBUS_IC_DEVICE_ID,
-+						    sizeof(buf), buf);
-+		if (ret < 0)
-+			return ret;
-+
-+		if (!strncmp(buf + 1, "LT7170", 6) ||
-+		    !strncmp(buf + 1, "LT7170-1", 8))
-+			return lt7170;
-+		if (!strncmp(buf + 1, "LT7171", 6) ||
-+		    !strncmp(buf + 1, "LT7171-1", 8))
-+			return lt7171;
-+
-+		return -ENODEV;
-+	}
-+
- 	if (chip_id == LTC2972_ID)
- 		return ltc2972;
- 	else if (chip_id == LTC2974_ID)
-@@ -741,6 +763,20 @@ static int ltc2978_probe(struct i2c_client *client)
- 	data->temp2_max = 0x7c00;
- 
- 	switch (data->id) {
-+	case lt7170:
-+	case lt7171:
-+		data->features |= FEAT_CLEAR_PEAKS | FEAT_NEEDS_POLLING;
-+		info->read_word_data = ltc3883_read_word_data;
-+		info->pages = LTC3883_NUM_PAGES;
-+		info->format[PSC_VOLTAGE_IN] = ieee754;
-+		info->format[PSC_VOLTAGE_OUT] = ieee754;
-+		info->format[PSC_CURRENT_OUT] = ieee754;
-+		info->format[PSC_TEMPERATURE] = ieee754;
-+		info->func[0] = PMBUS_HAVE_VIN | PMBUS_HAVE_STATUS_INPUT
-+		  | PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
-+		  | PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT
-+		  | PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP;
-+		break;
- 	case ltc2972:
- 		info->read_word_data = ltc2975_read_word_data;
- 		info->pages = LTC2972_NUM_PAGES;
-@@ -927,6 +963,8 @@ static int ltc2978_probe(struct i2c_client *client)
- 
- #ifdef CONFIG_OF
- static const struct of_device_id ltc2978_of_match[] = {
-+	{ .compatible = "lltc,lt7170" },
-+	{ .compatible = "lltc,lt7171" },
- 	{ .compatible = "lltc,ltc2972" },
- 	{ .compatible = "lltc,ltc2974" },
- 	{ .compatible = "lltc,ltc2975" },
+Let's assume QEMU 10.0 will support this new ioctl while QEMU 9.0 doesn't.
 
--- 
-2.34.1
+The description in my previous email was wrong. Checking the patch 
+series again, I found I bumped the version number of 
+vmstate_virtio_net_rss. So migrating QEMU 10.0 with machine type 9.0 to 
+QEMU 9.0 will result in an error.
+
+We can remove this error by introducing a compatibility property, but I 
+don't think it's worth. As I noted in the previous email, the RSS 
+feature is still in development and I don't think we need to support 
+migrating to older QEMU versions. It gives an error instead of silently 
+breaking a migrated VM at least.
+
+Regards,
+Akihiko Odaki
+
+> 
+>>
+>>>
+>>>> This patch series first adds configuration options for users to choose
+>>>> hash types. QEMU then automatically picks one implementation from the
+>>>> following (the earlier one is the more preferred):
+>>>> 1) The hash capability of vhost hardware
+>>>> 2) The hash capability I'm proposing here
+>>>> 3) The eBPF program
+>>>> 4) The pure userspace implementation
+>>>>
+>>>> This decision depends on the following:
+>>>> - The required hash types; supported ones are queried for 1) and 2)
+>>>> - Whether vhost is enabled or not and what vhost backend is used
+>>>> - Whether hash reporting is enabled; 3) is incompatible with this
+>>>>
+>>>> The network device will not be realized if no implementation satisfies
+>>>> the requirements.
+>>>
+>>> This makes sense, let's add this in the cover letter.
+>>
+>> I'll add it to the QEMU patch as it's more about details of QEMU.
+>> The message of this patch will explain how TUNGETVNETHASHCAP and
+>> TUNSETVNETHASH makes extensibility and migrattion compatible in general.
+>>
+>> Regards,
+>> Akihiko Odaki
+>>
+>>>
+>>>>
+>>>>> 2) once we support those three in the future. For example, is the qemu
+>>>>> expected to probe this via TUNGETVNETHASHCAP in the destination and
+>>>>> fail the migration?
+>>>>
+>>>> QEMU is expected to use TUNGETVNETHASHCAP, but it can selectively enable
+>>>> hash types with TUNSETVNETHASH to keep migration working.
+>>>>
+>>>> In summary, this patch series provides a sufficient facility for the
+>>>> userspace to make extensibility and migration compatible;
+>>>> TUNGETVNETHASHCAP exposes all of the kernel capabilities and
+>>>> TUNSETVNETHASH allows the userspace to limit them.
+>>>>
+>>>> Regards,
+>>>> Akihiko Odaki
+>>>
+>>> Fine.
+>>>
+>>> Thanks
+>>>
+> 
+> Thanks
+> 
 
 
