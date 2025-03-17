@@ -1,93 +1,118 @@
-Return-Path: <linux-doc+bounces-41007-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41009-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4A5CA6447D
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 08:58:52 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id DE44AA64534
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 09:23:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 131D616D0E3
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 07:58:52 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1FEB518943D1
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 08:23:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D5CB62147F5;
-	Mon, 17 Mar 2025 07:58:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iuV//NN3"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1520F21D3EA;
+	Mon, 17 Mar 2025 08:23:13 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABF207E9;
-	Mon, 17 Mar 2025 07:58:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0805D21D3E8;
+	Mon, 17 Mar 2025 08:23:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742198327; cv=none; b=qNNXMuvEVIyKClwlA7yNFMBbEVyC7c8JaDX+MSpneA6h9PujLGFo0E9k1zdinry0bx6cV6XRneooSstcnHxT5ud46RwaMOj4zv4YsPJ9G2lEEx5M6NKa9zR6HaNrS329NiXO4MoAxFouoPXLVW9CzOVc1OyRb0HwEgbktPa82QY=
+	t=1742199793; cv=none; b=H9zB+UR/7N9VHqYQI+hJ6Tnxr34cJgrNjUsjxBHVce5YmaA05sRdO3jog7xJ4LqnTgoCo5oVyWZpLmGoZ9ezXmZ8ssYyorUWooIYlx7NS6yrD2YV3kYcTqwc068nycc6iSNW/z4XpfrNQis3+EyHdP9QuF8+fjLKhlQKjs5493c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742198327; c=relaxed/simple;
-	bh=2v0do6VIwqpU4cRxJMLNn3PrlCZX3QFEq4K6WtzwMiE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=C5PqwOc1FZLSu13usR5+ygP0r2FiNIuR+fbbpuCmrMd0/kMWIGfEjzrK7s/eZNuQnEjhv0U+aTYT9PLQY/7AGABPWEL1eLFcnFfH6R23cTbVL3x/TPt6mnMjD9De7kRSj7r9sljqRgCPJXLU4nj5nvs6EwhAhYaOB1LIBr/S504=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iuV//NN3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DEFAC4CEE3;
-	Mon, 17 Mar 2025 07:58:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1742198327;
-	bh=2v0do6VIwqpU4cRxJMLNn3PrlCZX3QFEq4K6WtzwMiE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=iuV//NN3pIxOqg2j932/2V9a+/OMoOoVL8BuT9p5TihirVs6x8hVQNAtKiyY6ZNfD
-	 C8FRvfBjJYIYPrpe9ihKUGaZFVwqn9cf10Qa2nHgy/2ATcUYG3+P5R5h3xWdntjkdC
-	 N022U/cHp6CrLitdcGacpX8w3yU175OsJ9iVTh+pmpSwq1snREKhyCNi54PPyLU3Wd
-	 BWEEyDpZpOMQjYxNMry05JHKVFyxgcR3xXg5SFZaqXhD1cKKkuP06igfA3crte9uUL
-	 m48Nx30znERuY305BNEUGbV849ih3V1bHplbvV9MRLzcwjr/SlBxlBJMPPfrCV49pn
-	 xeKTrxRx3ceew==
-Date: Mon, 17 Mar 2025 08:58:41 +0100
-From: Ingo Molnar <mingo@kernel.org>
-To: dmukhin@ford.com
-Cc: Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] x86/early_printk: add MMIO-based UARTs
-Message-ID: <Z9fWMaX25c8GIaQK@gmail.com>
-References: <20250314-earlyprintk-v2-1-2bcbe05290b8@ford.com>
+	s=arc-20240116; t=1742199793; c=relaxed/simple;
+	bh=YWOEX7/4qwcDUN9T0+87j7ROGJE9biOb/+GDlQertbM=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Srpd/yvWId/eZ61ddf/O2NCh7pgnj7R80ZrcD9ZxFsa4QmorGz/JRQ9tQhaj0LhxuG6dCnfAoUtxM/l6N2Vc4uTEtk0dnee747KtjczF0Z4HDNJofePfoNZ3l7E8AV3USAZsMVMuL5DOLQZS9j7GqS+uMf/Zd86VwsRI1lofLZA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.2.10.34])
+	by gateway (Coremail) with SMTP id _____8CxyuDi29dnpLCZAA--.63744S3;
+	Mon, 17 Mar 2025 16:22:58 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.2.10.34])
+	by front1 (Coremail) with SMTP id qMiowMBx3MTf29dnhFpPAA--.27886S2;
+	Mon, 17 Mar 2025 16:22:56 +0800 (CST)
+From: Tianyang Zhang <zhangtianyang@loongson.cn>
+To: chenhuacai@kernel.org,
+	kernel@xen0n.name,
+	corbet@lwn.net,
+	alexs@kernel.org,
+	si.yanteng@linux.dev,
+	tglx@linutronix.de,
+	jiaxun.yang@flygoat.com,
+	peterz@infradead.org,
+	wangliupu@loongson.cn,
+	lvjianmin@loongson.cn,
+	maobibo@loongson.cn,
+	siyanteng@cqsoftware.com.cn,
+	gaosong@loongson.cn,
+	yangtiezhu@loongson.cn
+Cc: loongarch@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Tianyang Zhang <zhangtianyang@loongson.cn>
+Subject: [PATCH v1 0/2] Loongarch irq-redirect supprot
+Date: Mon, 17 Mar 2025 16:22:51 +0800
+Message-Id: <20250317082253.20520-1-zhangtianyang@loongson.cn>
+X-Mailer: git-send-email 2.20.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250314-earlyprintk-v2-1-2bcbe05290b8@ford.com>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowMBx3MTf29dnhFpPAA--.27886S2
+X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBj93XoW7Jry8KrW5Aw1DGFW8KFykJFc_yoW8JrykpF
+	WDu3sYyrs5CFWfGFn7Ca4Uury5J3WxGrW2qay2q343uFy5ur1DZr18Ar98ZFy8Ga17t3WI
+	gF1rWa4UWF1UA3XCm3ZEXasCq-sJn29KB7ZKAUJUUUUD529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUBFb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v2
+	6F4UJVW0owAaw2AFwI0_JF0_Jw1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0c
+	Ia020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jw0_
+	WrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwI
+	xGrwCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWU
+	JVW8JwCFI7km07C267AKxVWUAVWUtwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
+	vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IY
+	x2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26c
+	xKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAF
+	wI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07jnEfOUUUUU=
 
+This series of patches introduces support for interrupt-redirect
+controllers, and this hardware feature will be supported on 3C6000
+for the first time
 
-* Denis Mukhin via B4 Relay <devnull+dmukhin.ford.com@kernel.org> wrote:
+change log:
+	v0->v1:
+	1.Rename the model names in the document.
+	2.Adjust the code format.
+	3.Remove architecture - specific prefixes.
+	4.Refactor the initialization logic, and IR driver no longer set AVEC_ENABLE.
+	5.Enhance compatibility under certain configurations.
 
-> +	if (!strncmp(s, "nocfg", 5))
-> +		baudrate = 0;
-> +	else {
-> +		baudrate = simple_strtoul(s, &e, 0);
-> +		if (baudrate == 0 || s == e)
-> +			baudrate = DEFAULT_BAUD;
-> +	}
+Tianyang Zhang (2):
+  Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+  irq/irq-loongarch-ir:Add Redirect irqchip support
 
-In standard kernel coding style we always balance curly braces and 
-don't skip them in the single-statement case. Ie. the above should be:
+ .../arch/loongarch/irq-chip-model.rst         |  38 ++
+ .../zh_CN/arch/loongarch/irq-chip-model.rst   |  37 ++
+ arch/loongarch/include/asm/cpu-features.h     |   1 +
+ arch/loongarch/include/asm/cpu.h              |   2 +
+ arch/loongarch/include/asm/loongarch.h        |   6 +
+ arch/loongarch/kernel/cpu-probe.c             |   3 +
+ drivers/irqchip/Makefile                      |   2 +-
+ drivers/irqchip/irq-loongarch-avec.c          |  21 +-
+ drivers/irqchip/irq-loongarch-ir.c            | 561 ++++++++++++++++++
+ drivers/irqchip/irq-loongson.h                |  12 +
+ include/linux/cpuhotplug.h                    |   1 +
+ 11 files changed, 670 insertions(+), 14 deletions(-)
+ create mode 100644 drivers/irqchip/irq-loongarch-ir.c
 
-	if (!strncmp(s, "nocfg", 5)) {
-		baudrate = 0;
-	} else {
+-- 
+2.43.0
 
-
-> +	if (baudrate)
-> +		early_serial_hw_init(115200 / baudrate);
-
-Hm, I think that division will go poorly if 'baudrate' ends up being 0 
-in the 'nocfg' case ... ;-)
-
-Thanks,
-
-	Ingo
 
