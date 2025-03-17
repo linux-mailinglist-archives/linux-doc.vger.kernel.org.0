@@ -1,57 +1,61 @@
-Return-Path: <linux-doc+bounces-41120-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41122-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB858A65E3C
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 20:42:05 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3416AA65E83
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 20:53:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3EBDF17CCD8
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 19:42:05 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 717BC1884645
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Mar 2025 19:53:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00E381EB5D6;
-	Mon, 17 Mar 2025 19:41:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9ACB1DEFEB;
+	Mon, 17 Mar 2025 19:53:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hAdHQFpF"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Q1mvhQT0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C71711A3029;
-	Mon, 17 Mar 2025 19:41:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48F348F5E;
+	Mon, 17 Mar 2025 19:53:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742240506; cv=none; b=rX3HOtPH6hbmzIauTiu10+ncW4o49KuBDGbKV/xTOF+mtBgef8cJZ2lFCFcmYzXE0ZS1eODGR+zNFPaQxR+SAb5N1g3k1xESXjWo5Rho+/fCcStKCWfYlELwZu7IDnDvxXX0o0/D5IWnSj6tpfvsbeYybll1BEbaeG7VUXlM42U=
+	t=1742241225; cv=none; b=knmpJm22dcYMLhU3J+5uXeprAs+bTYdz09y+Ccgsv72jxKSdlOJ50CXcBUqTArrJnleWpcBSREsaUvQIP9uQSLk6yRuCjBvwqwOPAns61ZHf/TlpnFT0ubLIdVEs7r45cScLAjFEP9lgh59Q6PDPL3PqJHmoVp96YVjXP7ssLDM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742240506; c=relaxed/simple;
-	bh=M5DC/biv/Uhbcd3IaR6CyJL8PiIRugOzZt7y1LxHHSE=;
+	s=arc-20240116; t=1742241225; c=relaxed/simple;
+	bh=lFLaG2NSSozJ87JPF2OwgFydEdTutnwNKBGiS+1aDtY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=m4404MXJlk3/gcS6HMF6S4JVS35JqIBm26NpIXVGUGNTF09j1Dyl4MHHdg42NIwtTlIPw28DelwWa+B7/P/fxgrcRyFTcTZ+jMQ+mfaQ9YcA+X31BO3e10+mMn8xGcY1kVgbAwVKTGDkqGXMKwJD9aryobR4BOgD8tcCuXwtyeE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hAdHQFpF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2ABDC4CEE3;
-	Mon, 17 Mar 2025 19:41:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1742240505;
-	bh=M5DC/biv/Uhbcd3IaR6CyJL8PiIRugOzZt7y1LxHHSE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=hAdHQFpFtcLF6f9SBZk35QKEAEbtVx01EhXSOBhpfPmK5jx9eZMbnd9B0lPkanT+k
-	 k5GGaqfeip2FSFYLvkTsMrLa587fjLpnY3kJlhiJxzIhHR99ryVVcMSUWreH9hOl7k
-	 WyheSyd4goRIx8ZYc74lZZvYdwwiI8ziweZa6oQx2RRM619qsk6H7JnrcpnmaWs7F+
-	 GIKSc1xxZ7k4MWKNhOQUlcUYJ15holzasL0+Hozso3LxWbllpDRTxx7jy8cfVbRF6X
-	 a+CX9Csx8hMJwDAG62CGZ/TlJxr+ec/wsAiHyaQ1qrXsSKexsXhHs8N9OTM5BTT1yZ
-	 kcSqAMbRcIdUw==
-Date: Mon, 17 Mar 2025 20:41:38 +0100
-From: Joel Granados <joel.granados@kernel.org>
-To: Christian Brauner <brauner@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-fsdevel@vger.kernel.org, Ruiwu Chen <rwchen404@gmail.com>, 
-	Luis Chamberlain <mcgrof@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>
-Subject: Re: [PATCH] drop_caches: Allow re-enabling message after disabling
-Message-ID: <uskuzzo47jsebv7estk3vwiidygl3vybwxynwod76dwtbtim5i@4iyavbs3qgsi>
-References: <20250313-jag-drop_caches_msg-v1-1-c2e4e7874b72@kernel.org>
- <20250314-tilgen-dissident-05705fca5e00@brauner>
+	 Content-Type:Content-Disposition:In-Reply-To; b=JMS70KR0Wcer5cY4zJow8lGqzVpRW5MnmwAg6MiGKF1DrXmHSU4rAaUdvadjiFkbfj3SLPPKTDEl6JWXv1NL/ad1hJQK0dGdU3RNFa8zAUyRNNj6HqqrGNouHGfdJNgJIPa5MkR9NEyCMImWOuOeykk50Wk6apMr228UFEUNdHA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Q1mvhQT0; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=VqqbwZLM+OKvvtT9a4ynh4iaEeSQNo77XvM/25CxXik=; b=Q1mvhQT0Mt4aaQFPwbeBlmjpf8
+	YFt0162I6qhWuCuMxoCUv7JSMEF65xYCD0JF5hUlIeO0gIUeyrQWipl5sYhwmfLP2PrBEp3b0Ej5p
+	2tPggKK08l3iKhynT4WX30AS6F37ZNbzHb9D7viiWGWyNKNNqV/2zUR+P0LSHQLRl0mIgPF4r15Zr
+	l9r6H9UHi8uGhU35VaEfv2mZq4VOjpR6gk5miJeyHlOXr2Jf8GA/2agTc6vX/JurmfyCAc6V92kqa
+	BnsghedQxSVA5l9DmmYz95YKLkbR4SkI9GJFOELVmEHlJfOI0r3b0Bbi6tXCNMrtuvtP59t43FWcI
+	XnfXZvDA==;
+Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat Linux))
+	id 1tuGWm-00000009TMQ-2MSS;
+	Mon, 17 Mar 2025 19:53:36 +0000
+Date: Mon, 17 Mar 2025 19:53:36 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Joel Granados <joel.granados@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, Ruiwu Chen <rwchen404@gmail.com>,
+	Luis Chamberlain <mcgrof@kernel.org>
+Subject: Re: [PATCH v2] drop_caches: Allow re-enabling message after disabling
+Message-ID: <Z9h9wKcAD2iiO7dS@casper.infradead.org>
+References: <20250317-jag-drop_caches_msg-v2-1-e22d9a6a3038@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -60,42 +64,75 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250314-tilgen-dissident-05705fca5e00@brauner>
+In-Reply-To: <20250317-jag-drop_caches_msg-v2-1-e22d9a6a3038@kernel.org>
 
-On Fri, Mar 14, 2025 at 11:48:43AM +0100, Christian Brauner wrote:
-> On Thu, 13 Mar 2025 16:46:36 +0100, Joel Granados wrote:
-> > After writing "4" to /proc/sys/vm/drop_caches there was no way to
-> > re-enable the drop_caches kernel message. By removing the "or" logic for
-> > the stfu variable in drop_cache_sysctl_handler, it is now possible to
-> > toggle the message on and off by setting the 4th bit in
-> > /proc/sys/vm/drop_caches.
-> > 
-> > 
-> > [...]
-> 
-> Applied to the vfs-6.15.misc branch of the vfs/vfs.git tree.
-> Patches in the vfs-6.15.misc branch should appear in linux-next soon.
-> 
-> Please report any outstanding bugs that were missed during review in a
-> new review to the original patch series allowing us to drop it.
-> 
-> It's encouraged to provide Acked-bys and Reviewed-bys even though the
-> patch has now been applied. If possible patch trailers will be updated.
-> 
-> Note that commit hashes shown below are subject to change due to rebase,
-> trailer updates or similar. If in doubt, please check the listed branch.
-> 
-> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-> branch: vfs-6.15.misc
-> 
-> [1/1] drop_caches: Allow re-enabling message after disabling
->       https://git.kernel.org/vfs/vfs/c/66c4cbae77e2
+On Mon, Mar 17, 2025 at 08:40:04PM +0100, Joel Granados wrote:
+> After writing "4" to /proc/sys/vm/drop_caches there was no way to
+> re-enable the drop_caches kernel message. By replacing the "or"
+> assignment for the stfu variable, it is now possible to toggle the
+> message on and off by setting the 4th bit in /proc/sys/vm/drop_caches.
 
-FYI, Sent out a V2 after discussion in [1]
+I don't like the toggle.  Nobody wants to toggle, which means that you
+need to keep track of what it is in order to make it be "on" or "off".
+And you can't keep track of it, because it's system-wide.  Which means
+you might turn it off when you wanted it on, or vice versa.
 
-[1]: https://lore.kernel.org/20250216100514.3948-1-rwchen404@gmail.com
+Did I miss the discussion which promopted this change?  It seems like
+terrible UI to me.
 
--- 
-
-Joel Granados
+> Signed-off-by: Joel Granados <joel.granados@kernel.org>
+> ---
+> Changes in v2:
+> - Check the 4 bit before we actualy toggle the message
+> - Link to v1: https://lore.kernel.org/r/20250313-jag-drop_caches_msg-v1-1-c2e4e7874b72@kernel.org
+> ---
+> 
+> ---
+>  Documentation/admin-guide/sysctl/vm.rst | 2 +-
+>  fs/drop_caches.c                        | 3 ++-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/sysctl/vm.rst b/Documentation/admin-guide/sysctl/vm.rst
+> index f48eaa98d22d2b575f6e913f437b0d548daac3e6..75a032f8cbfb4e05f04610cca219d154bd852789 100644
+> --- a/Documentation/admin-guide/sysctl/vm.rst
+> +++ b/Documentation/admin-guide/sysctl/vm.rst
+> @@ -266,7 +266,7 @@ used::
+>  	cat (1234): drop_caches: 3
+>  
+>  These are informational only.  They do not mean that anything is wrong
+> -with your system.  To disable them, echo 4 (bit 2) into drop_caches.
+> +with your system.  To toggle them, echo 4 (bit 2) into drop_caches.
+>  
+>  enable_soft_offline
+>  ===================
+> diff --git a/fs/drop_caches.c b/fs/drop_caches.c
+> index d45ef541d848a73cbd19205e0111c2cab3b73617..15730593ae39955ae7ae93aec17546fc96f89dce 100644
+> --- a/fs/drop_caches.c
+> +++ b/fs/drop_caches.c
+> @@ -68,12 +68,13 @@ int drop_caches_sysctl_handler(const struct ctl_table *table, int write,
+>  			drop_slab();
+>  			count_vm_event(DROP_SLAB);
+>  		}
+> +		if (sysctl_drop_caches & 4)
+> +			stfu ^= 1;
+>  		if (!stfu) {
+>  			pr_info("%s (%d): drop_caches: %d\n",
+>  				current->comm, task_pid_nr(current),
+>  				sysctl_drop_caches);
+>  		}
+> -		stfu |= sysctl_drop_caches & 4;
+>  	}
+>  	return 0;
+>  }
+> 
+> ---
+> base-commit: 7eb172143d5508b4da468ed59ee857c6e5e01da6
+> change-id: 20250313-jag-drop_caches_msg-c4fbfedb51f3
+> 
+> Best regards,
+> -- 
+> Joel Granados <joel.granados@kernel.org>
+> 
+> 
+> 
 
