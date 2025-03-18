@@ -1,98 +1,127 @@
-Return-Path: <linux-doc+bounces-41152-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41154-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE0ACA66CC1
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 08:51:21 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id EBE17A66D36
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 09:01:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9BF377AB1F0
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 07:49:05 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 598421889B1C
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 07:59:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 695181E8356;
-	Tue, 18 Mar 2025 07:47:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 494251F585C;
+	Tue, 18 Mar 2025 07:58:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="mBsga6EI"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BuXKBEqO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9985C1DF742;
-	Tue, 18 Mar 2025 07:47:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B70DE1EFFA8;
+	Tue, 18 Mar 2025 07:58:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742284034; cv=none; b=rYvABsA2Cg5+mBjNcNxaReu59QY3mTUuH+PqD34GzuHxcbLMcOVyk6S9znIQHDZdyceNqz1g60P1t6tImLsabQXx6n+V5iL0S8YrLwZFwB0h1iig6v9vu6o5Vsl++3cbJoMtIGfhd86nGRN3/C77Tkg2gge5au6W7CLgt0+oQdg=
+	t=1742284727; cv=none; b=SBSAs7RgcsdJbT93f1CtplMBEMyrwy7tAbJe8bBoCb0OmfxqLsjnv1pulNx+odLTOZUv7N2jKsySPNe6YuPYa6g4gGuLzUXm5eY8xsa0mfhiTXxC/EruJN1mRbeT0h7H/uYPAWoSCkO5l60lRMGApUYy68J0nKrLmVw+Kbq9LZY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742284034; c=relaxed/simple;
-	bh=q5gyFvbl6bkYEOehFIWAJ1zNNVQ1iTslUk/DCfO4Rq4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=SWRcT2ctHCduzXv2adIeQVEQAVIoWzIBI085qjbg9QOEtwd0v7TaLvigmjvCq46DMuGd2GrxtqUsT4MquhqfcnH1ONWEF2FMiX87ZnzLpbee3ORgP0PyjqwEsSgmvNSCFSDkmnDYnKN+00NMeClcDWS/3UGXhZDvQJywmhCPwpU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=mBsga6EI; arc=none smtp.client-ip=192.198.163.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1742284033; x=1773820033;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=q5gyFvbl6bkYEOehFIWAJ1zNNVQ1iTslUk/DCfO4Rq4=;
-  b=mBsga6EIGtOTVf/NYvzjMtIOscge6tXLBz9QOmUT1k3H1WXjY8+7VeLy
-   YzOmyhcmfIymtfOa7WEqvFqWkKIbbcqip032horJrfWCn5mN8/PoG99oh
-   AlT2eHeR/UWziEgBU8psncDioNxPq2Q8oqH0QF2K9ttSYrhwJpEoJVwJq
-   WXRKeM8r+g4h9+3cEN70K278YjodfZjnLIcFfvoEnKwx4YsSaSScrMfqR
-   PQmhkq/KD4hYUKjaXaO0YiM+yt0Yz0CQdG+39muN37L5eLF2YI3DPmxSB
-   U/boTyn/Se+lS0LIhmF3J4hRuk1k1TT8CNdyNmNdHH/OgosiDY2RZtgGG
-   Q==;
-X-CSE-ConnectionGUID: 25reoVTdSASkBNXpqglEpw==
-X-CSE-MsgGUID: 1DMXB/VlRCSZGSys0nB5uQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11376"; a="30991861"
-X-IronPort-AV: E=Sophos;i="6.14,256,1736841600"; 
-   d="scan'208";a="30991861"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Mar 2025 00:47:12 -0700
-X-CSE-ConnectionGUID: 3VtcVOfoQgyR2trRmJu9Zw==
-X-CSE-MsgGUID: 5KlqKzSiQtuXt3IwL/ft+w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,256,1736841600"; 
-   d="scan'208";a="122198631"
-Received: from black.fi.intel.com ([10.237.72.28])
-  by fmviesa007.fm.intel.com with ESMTP; 18 Mar 2025 00:47:09 -0700
-Received: by black.fi.intel.com (Postfix, from userid 1000)
-	id 9E39217B; Tue, 18 Mar 2025 09:47:07 +0200 (EET)
-Date: Tue, 18 Mar 2025 09:47:07 +0200
-From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
-To: Nico Pache <npache@redhat.com>
-Cc: linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, corbet@lwn.net, akpm@linux-foundation.org, surenb@google.com, 
-	pasha.tatashin@soleen.com, catalin.marinas@arm.com, david@redhat.com, jeffxu@chromium.org, 
-	andrii@kernel.org, xu.xin16@zte.com.cn
-Subject: Re: [PATCH] Documentation: Add "Unaccepted" meminfo entry
-Message-ID: <6lh47q4gsgrmt2bajjngwfyjxs6dn7zmkuhnfftsrazp5ivs5j@pr4q6fpb2ulx>
-References: <20250317230403.79632-1-npache@redhat.com>
+	s=arc-20240116; t=1742284727; c=relaxed/simple;
+	bh=PCzm1Uv6dvQihuvSi9Y7zt9Fyzb7GOfU0TdWTSqR4CU=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=JHCKiLXWScbyrfl07WYq6C5sQFwIv7cKoDtkB2ELJuPcYEmUWoUYWDqoKTytnY559ciTFgQRyjNH+LQdQmtjWSytqq9hk7I+4E60iNBGwv/8pLlwd3HFhseYiPs9H8COzKwYeAFGsFKsggvqzeMy70+Z4qLX7Ic+KzLnEc/B9lc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BuXKBEqO; arc=none smtp.client-ip=209.85.214.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2241053582dso464165ad.1;
+        Tue, 18 Mar 2025 00:58:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1742284725; x=1742889525; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Cmi/upa2sTtbXf6Q7CoVFmlat4h2nyC9ICZjWOCUZzw=;
+        b=BuXKBEqOhKJ5IecUSXuO1d8eZhJpPDJd51dQA1lnvBBFbGQ1mpJyPWc32bXnx8R+b5
+         B4OPH3cbj0Z0/56ee3RvDqr9Ai8kVkMYX6NwaHoHhCkD4NKaYUSF76SbzEuYxrvihQ+x
+         TxQJcoh79i7RVlM9BIJ4Apnvf7fu4wejSXfwVYekR1ZHSm7TVJwtiSFMKKLcRHbrmVRe
+         GlgdYRqKSkw7r1wsnb92hqASpbIc8GQOzWWLhKWv4561vqx9omvAgwch15zOEtLis8xB
+         +HdenjTJ/keQ5RqWWjxGWaxnQyNiMaL5HVVzGDX72OpccEzwbf1k4SBjtETCRxnqICgw
+         mtsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742284725; x=1742889525;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Cmi/upa2sTtbXf6Q7CoVFmlat4h2nyC9ICZjWOCUZzw=;
+        b=b/PgR+9FEmMTdq9R2IcC18xwiMuDs/Ha55M3JlbihD5jz+H9o71SFglVceerKuCw5N
+         Svnlt9YpMXkrPDWfAKAjN9uDZFJsWqUzP0+nQOqV8kOgHQhE0qh/ngjrfrSCIIz0m5yQ
+         EvwVlaqPOU2poMazO5DOvsIAb/6rEF7tfMgarGV9AReqvXzleJyENgwgFxEukAYmDCvN
+         CohK9rGXHTcbdUFtx0/t1ts1X9lTIXb7pjPR9+WZKn5nF0CjMcToSU2tCXW6fVRlLT3f
+         zc6shPZyPhpKiOKjIRLHt3crSIgCzKD8ikTtZx3+E4D1UsrkCx+xv25mOzEa44AcbREb
+         uFgA==
+X-Forwarded-Encrypted: i=1; AJvYcCUuGm4KLR73q/Wf5pDD+FkRj9FozVyLUVx6Jc28XP8AgKLfbmt0GjUoXcP5qrKMfA1HMlSAcRZxUlw=@vger.kernel.org, AJvYcCVoWPQ+KMA5iAvyD1EZSagelFfArhqXv42ecPYMO2hhvQ2k2Ad4KL2BQIDYA7LFnIyvZ+4jr3N1Jiy+9RYt@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywq8KYXgveEH9QW9yTNMvVQgsPHkRfohJWtAyP0hErxnvW8UMHi
+	i6YvjSittbMPyfELvPAy79UENcA+2VP8xwWu6QojgvKYJK8DhtW7
+X-Gm-Gg: ASbGnctt4ZtPg/S0xsyxMWJ833PVHMhVaISDp2HPGvdkZIXVw0PASUAtEP3RUtmwy+b
+	kQjXS0U2qqIqu5eiHQ8Jl8B10D1Y/d+qRbmNLM15RP9CkCncHJU/TBHtU+tbrjhIHwa/AGmYuH6
+	VLhNC7GD9CDcBZ1JBU9kvx4xu7mDkvPwUnp8agr3KsZQBT58ILaVbGl75BgUbiJqck3Kx45XIMs
+	kMoBDCjgkWIloCDYp/J3PHvHnfR2vexTqHXEISsaXDqGxhW20mqUPE8yZ9CL5nPpuXqCMxcGw5R
+	6IHheRT5Nb4pkm0DThA2nHD4L17LVVlHoelFtaEIDogYGGDST2QygzxV90O5RZxhqj5FsF7meg=
+	=
+X-Google-Smtp-Source: AGHT+IFUKsoujjlo/WHI6q9sp0EJXaYl5Lu3bIObvFl6VcEXwX8wPmmirb00eK1bvkP8CYfzr23N/Q==
+X-Received: by 2002:a17:903:11cf:b0:223:37ec:63d5 with SMTP id d9443c01a7336-225e0ac37d3mr222554505ad.28.1742284724947;
+        Tue, 18 Mar 2025 00:58:44 -0700 (PDT)
+Received: from localhost.localdomain ([103.165.80.178])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-225c6bbfdfesm88149865ad.203.2025.03.18.00.58.39
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Tue, 18 Mar 2025 00:58:44 -0700 (PDT)
+From: Hao Jia <jiahao.kernel@gmail.com>
+To: hannes@cmpxchg.org,
+	akpm@linux-foundation.org,
+	tj@kernel.org,
+	corbet@lwn.net,
+	mhocko@kernel.org,
+	roman.gushchin@linux.dev,
+	shakeel.butt@linux.dev,
+	muchun.song@linux.dev,
+	mkoutny@suse.com
+Cc: cgroups@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Hao Jia <jiahao1@lixiang.com>
+Subject: [PATCH 0/2] Adding Proactive Memory Reclaim Statistics
+Date: Tue, 18 Mar 2025 15:58:31 +0800
+Message-Id: <20250318075833.90615-1-jiahao.kernel@gmail.com>
+X-Mailer: git-send-email 2.39.2 (Apple Git-143)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250317230403.79632-1-npache@redhat.com>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Mar 17, 2025 at 05:04:03PM -0600, Nico Pache wrote:
-> Commit dcdfdd40fa82 ("mm: Add support for unaccepted memory") added a
-> entry to meminfo but did not document it in the proc.rst file.
-> 
-> This counter tracks the amount of "Unaccepted" guest memory for some
-> Virtual Machine platforms, such as Intel TDX or AMD SEV-SNP.
-> 
-> Add the missing entry in the documentation.
-> 
-> Signed-off-by: Nico Pache <npache@redhat.com>
+From: Hao Jia <jiahao1@lixiang.com>
 
-Acked-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
+These two patches are related to proactive memory reclaim.
+
+Patch 1 Split proactive reclaim statistics from direct reclaim counters
+and introduces new counters: pgsteal_proactive, pgdemote_proactive,
+and pgscan_proactive.
+
+Patch 2 Adds pswpin and pswpout items to the cgroup-v2 documentation.
+
+Hao Jia (2):
+  mm: vmscan: Split proactive reclaim statistics from direct reclaim
+    statistics
+  cgroup, docs: Add pswpin and pswpout items in cgroup v2 doc
+
+ Documentation/admin-guide/cgroup-v2.rst | 15 +++++++++++
+ include/linux/mmzone.h                  |  1 +
+ include/linux/vm_event_item.h           |  2 ++
+ mm/memcontrol.c                         |  7 +++++
+ mm/vmscan.c                             | 35 ++++++++++++++-----------
+ mm/vmstat.c                             |  3 +++
+ 6 files changed, 48 insertions(+), 15 deletions(-)
 
 -- 
-  Kiryl Shutsemau / Kirill A. Shutemov
+2.34.1
+
 
