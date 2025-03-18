@@ -1,52 +1,70 @@
-Return-Path: <linux-doc+bounces-41151-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41153-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9279CA66A75
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 07:30:24 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 14BF3A66CCB
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 08:53:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B644717AD23
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 06:30:19 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8238E4227F5
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Mar 2025 07:50:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64E071DE4FC;
-	Tue, 18 Mar 2025 06:30:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9B541EF38F;
+	Tue, 18 Mar 2025 07:48:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hJp7fVo5"
+	dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b="STWlnEc/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtpbgeu1.qq.com (smtpbgeu1.qq.com [52.59.177.22])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 366EB1DED4E
-	for <linux-doc@vger.kernel.org>; Tue, 18 Mar 2025 06:30:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E2D51E5B8C;
+	Tue, 18 Mar 2025 07:48:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.59.177.22
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742279407; cv=none; b=DWdldcdj/HjDwIpITtiTQeCDubuoAjYdthvaOHwK12O8/hO3g1B6mFiuRjmfWZ3v95BbcUfkaLrPsyLEq5ZHWfDZWQat1osNSAhJ094fVKRgqmj/M7mBQnE0o6dKpofriqv1ZTzXr/hLUg0Oc0U/GR6aa3ucizuUTQTFlShS6sY=
+	t=1742284109; cv=none; b=H47NTcupxdC6IgeRFzWN/GO8FSSnBjZE2+yl+QKTtKO8nBkYjm0A7YWAwVy91ZDGyDJbq8kApET0vZqPoMGeEygvnqyBX3QzY5kik4p3+fi2WHy4oplJxtIdFUT0ZHvTn0jF9nUNKBhAPh4Hza4JLeJOGSCJUiKPlouhs7XOl2w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742279407; c=relaxed/simple;
-	bh=6Te6MXGKvkGnPPHgBjTftAZZGSg5emWGwjq/V3DuYIA=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version; b=nIepuTYLFDkOUTqMf7jnAJllrn4GtSgCcEn7hpHOb9tvZacNeUcjn5u2+zag81jRy8sCawWYd170tSVpMcWxvlx4yFwSyuwcLvkVbmGUlcAFufJXp4X7ksrMmYkj0wzTWcGF/jI3ZGmXgEzTY5EuahySlEMIb/lMEWFXRiWP19k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hJp7fVo5; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2916C4CEE9;
-	Tue, 18 Mar 2025 06:30:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1742279406;
-	bh=6Te6MXGKvkGnPPHgBjTftAZZGSg5emWGwjq/V3DuYIA=;
-	h=From:To:Subject:Date:From;
-	b=hJp7fVo5HOqiboz15IvBHoGQDXhqtMAUfcZDz8v47cDPjgOOt1rmTds5ciMbSj7V+
-	 iXqjKl7WGol2UAkylGI28bywuGYLPWjSUkYcbpnokwnLvowKbG6resviHAZMu+39mB
-	 HDSI+Q6OS0752belmcN21A1PTj9aoKZRXK6HeIw23wz/9Z5NBODrtshGJ2SqVXTzkF
-	 6UHBJzhCgOCsedceSiFlnwySlFwqne6uL7RRNbWD04Rjwqjw+sA6etTNn5lN81Ubic
-	 AcueI+woqnHJ6t9t8RXstI2zfFi5/FwJvbd9ScVQ5Yf8PqmNWX/XlgzoK81E9S7AH9
-	 BVmWp3W++R8nA==
-From: alexs@kernel.org
-To: Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org
-Subject: [GIT PULL] Chinese-docs changes for v6.15-rc1
-Date: Tue, 18 Mar 2025 14:29:57 +0800
-Message-ID: <20250318062957.2120-1-alexs@kernel.org>
-X-Mailer: git-send-email 2.43.0
+	s=arc-20240116; t=1742284109; c=relaxed/simple;
+	bh=PiTmRzbTygWH1lLN0blb1/x2kmM+fyMCiD0dtvyVriU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=kB1b3xa45Ye44XLZDEB3jN5b1q36iFuUaA9BlC1kw4C6SNUAQbREa6iUUY0X9dTmudQPfNkRNk+moueqHdVCXu8ArR9d0Al8flk3rGwGFmAB329uh564O8gQ8MdaGmVPURomfF62OyPxEUK/I6s9nSik7iwQGTyGtm0G7+N4gyE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com; spf=pass smtp.mailfrom=uniontech.com; dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b=STWlnEc/; arc=none smtp.client-ip=52.59.177.22
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uniontech.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
+	s=onoh2408; t=1742284034;
+	bh=fxtfU5VJRnJzZUAvhJzy3Ea93trYsTtSrjDniPVubhU=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=STWlnEc/yEsCVBZvnYHlVn1OmJAmt1qJYwB1Q0K0ma9kfJ8296bl5Er24LdqQR6Bl
+	 VuGLCucMQUgngN9rWsafd2wLFEfJXlOOuXNTZwpJNWCB2xTlmGjwfawbbzgMuB3pRm
+	 vowztSgO70j3Mx3Tf5dsfnq4R26yp+mu3FloPNcU=
+X-QQ-mid: bizesmtpip2t1742284023tvs5xyy
+X-QQ-Originating-IP: A/rClot4DoAeHUjd/IqQnETxzddDYCW2UZntEibBBFk=
+Received: from localhost.localdomain ( [localhost])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Tue, 18 Mar 2025 15:47:00 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 1
+X-BIZMAIL-ID: 11619654860580283103
+From: WangYuli <wangyuli@uniontech.com>
+To: davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	corbet@lwn.net
+Cc: netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	tom@herbertland.com,
+	zhanjun@uniontech.com,
+	niecheng1@uniontech.com,
+	guanwentao@uniontech.com,
+	WangYuli <wangyuli@uniontech.com>,
+	Sourcery AI <hello@sourcery.ai>
+Subject: [PATCH] docs: networking: strparser: Fix a typo
+Date: Tue, 18 Mar 2025 15:46:56 +0800
+Message-ID: <A43BEA49ED5CC6E5+20250318074656.644391-1-wangyuli@uniontech.com>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -54,35 +72,57 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpip:uniontech.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: MTnTJt+VJFdIYTyxa6XNXwKJrIhAlJdsRBYSfGptcYqxgRmnw2Ov1kq4
+	5GnBg1SHgkckeTfslaCCjEGHxW/TImJ1dB3PPSf+BdZeFfW0tdhfi1vOIu+zp1IvyDaesLq
+	ux4yGtOfDDUyvSucqodJNnxCObasm3NKsa2JvL+3EPQLuaeDENlYNa+ywBY7lmizGCn0neY
+	vgOfPWEl++kEKCpl8ce2eQrzx03bfeM/KWdiQNVKQ4R09TcroiV1/yz5/BuuRmQZIFuBTCk
+	8Eod7QmsZH4IItQj9cOcQY/b/IpczSaMxhDbf3YIIEjRyhsVVGEmxbTb6Z2S8Q6RTlY6Iz4
+	0BtOWIPqTXe4BTub5ET9gPVAf9MjnjMMSKlYaqzA+j9A8GeYMbcf4wMEnZuOb4MHJHq5Zx2
+	rty+pRa7yEYgkYVvR/y3802S6M3FyA8/hMyQd6WkvkBadN9QT0069m0wWG7WT09ci4/RvOe
+	y3Iii/FTBxRZNL13fpeHANGIdK1hUOSnFEjuf25N8RwMJqixySr8pARM50W2b+bxnDTk+iG
+	+3BZ0TJeEuGUluzEoKxPUDb+3j9wBOkfVRKN5iSO4xruZb2jfuSuMHDTqa+OaQk4GE4oxnW
+	M8EOC+1p/JMvJDhm5i7e29xPeM83gMz/3WAHuDbtQ8res60WtRU6b6zPpBadjawpnfV6L5z
+	lL7jv057Q1LkFMHlYcN606yTLRBx9kKXATwRwIxnnTq6PagPsH6CHcNNvR0P/lg4YnSN5Gi
+	orYQ21c5T4p+9cHx7soICHZ8VDxDikEpV3OLZXYhpDbgWdn/7C/7dqMwU3vBCYztsYioCZr
+	TDASxYZES3tgLXeiVusp3nnFAKpXDt337CC+R2kDssdYdkvtkR2mEuiB5TEj18nTGTt0XJ0
+	bcbAzBJUWlDclJ5/IlM8OXYBob0U0oLSjfbNKVfHqMAZtWyXFOe8GZiYGAu4jRJ9xhX4vXE
+	9y88GzEdRzZ3KmzGHEa5S9x4KWRRlRD7yKEsDnMr4+BELnktlyse3nTnRHKJ3Nhv5OCV2d9
+	zw3OCm7aM+uvh6PAtf
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+X-QQ-RECHKSPAM: 0
 
-Jonathan, please merge the Chinese translation docs, thanks.
+The context indicates that 'than' is the correct word instead of 'then',
+as a comparison is being performed.
 
-The following changes since commit 5b8f85d081da449ab35e4bd009d7c00afaab2fab:
+Given that 'then' is also a valid English word, checkpatch.pl wouldn't
+have picked up on this spelling error.
 
-  docs: driver-api: firmware: clarify userspace requirements (2025-03-17 17:04:32 -0600)
+This typo was caught by AI during code review.
 
-are available in the Git repository at:
+Fixes: adcce4d5dd46 ("strparser: Documentation")
+Reported-by: Sourcery AI <hello@sourcery.ai>
+Suggested-by: Wentao Guan <guanwentao@uniontech.com>
+Signed-off-by: WangYuli <wangyuli@uniontech.com>
+---
+ Documentation/networking/strparser.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-  git@gitolite.kernel.org:pub/scm/linux/kernel/git/alexs/linux.git docs-next
+diff --git a/Documentation/networking/strparser.rst b/Documentation/networking/strparser.rst
+index 7f623d1db72a..8dc6bb04c710 100644
+--- a/Documentation/networking/strparser.rst
++++ b/Documentation/networking/strparser.rst
+@@ -180,7 +180,7 @@ There are seven callbacks:
+     struct contains two fields: offset and full_len. Offset is
+     where the message starts in the skb, and full_len is the
+     the length of the message. skb->len - offset may be greater
+-    then full_len since strparser does not trim the skb.
++    than full_len since strparser does not trim the skb.
+ 
+     ::
+ 
+-- 
+2.49.0
 
-for you to fetch changes up to c6e686b992f4da3fb9e56f42eb5a1060facf9442:
-
-  docs/zh_CN: fix spelling mistake (2025-03-18 13:36:57 +0800)
-
-----------------------------------------------------------------
-Alex Shi (1):
-      docs/Chinese: change the disclaimer words
-
-Peng Jiang (1):
-      docs/zh_CN: fix spelling mistake
-
-Yuxian Mao (1):
-      docs/zh_CN: Add snp-tdx-threat-model index Chinese translation
-
- .../translations/zh_CN/disclaimer-zh_CN.rst        |   8 +-
- Documentation/translations/zh_CN/mm/balance.rst    |   2 +-
- .../translations/zh_CN/security/index.rst          |   2 +-
- .../zh_CN/security/snp-tdx-threat-model.rst        | 209 +++++++++++++++++++++
- 4 files changed, 214 insertions(+), 7 deletions(-)
- create mode 100644 Documentation/translations/zh_CN/security/snp-tdx-threat-model.rst
 
