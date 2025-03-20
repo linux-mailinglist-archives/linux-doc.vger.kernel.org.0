@@ -1,177 +1,118 @@
-Return-Path: <linux-doc+bounces-41401-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41403-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AE00A69E62
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 03:40:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1529AA69EB4
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 04:25:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A0B63463135
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 02:40:34 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 81AF04602C1
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 03:25:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5C65E1EDA2A;
-	Thu, 20 Mar 2025 02:40:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA4B11DF733;
+	Thu, 20 Mar 2025 03:25:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen-com.20230601.gappssmtp.com header.i=@soleen-com.20230601.gappssmtp.com header.b="mQBy1bZ9"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JR5mQLw5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A209D1EBA03
-	for <linux-doc@vger.kernel.org>; Thu, 20 Mar 2025 02:40:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 071D3157A72;
+	Thu, 20 Mar 2025 03:25:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742438422; cv=none; b=gH2jgJII9HDsJUP9bdr3D4wpx8onJfAMJaFRjAVq2eRIBQ+vD8UZgZovERMVNGuKobnf4Z1UEHjFQ5oP7hxWrww9SQOt//mM+sxuH+ZOFDeFKl0PUYB5LevK8hgWB8fTtKOR7OHGbcdmt68KWO7A0ZZk8n2w8U5RQ9bAG1SGFz8=
+	t=1742441137; cv=none; b=Vf/+q1rqhoDt4HoOVc0plWT9Ytk8NShbsdWfkT8949PQML+Ao8dYMKN734MxvlsgYntN5kXfysWRrZ8W3C8LyjuGll+pedAaUdBu4XVv46EimTjqkgEj3rt1r6bc17gWONhDdW5ggfFIs25uoihs0ipYR2M87DsPMeCWLPTYMqg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742438422; c=relaxed/simple;
-	bh=ZFllnhcMh+RIDEs+ibMCOUU4FmP4DOjH+ijouJA0sXY=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ccUOQlv4KZqaH/SlLLfrlfwOt6gG5Ml7iqlT2zSbe8KpTFfh8yGj4yPSWVaFcoZpGDJ8HEKQMelDr3fLdFgCAbxIFHGOyRqnLwe0nq4AqJpJym9WcpkjQFYsdXL6AXP7SdiDxnuHspHrMLJEu4Vy/AGaY4+hPvfQznbhxJULYYA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen-com.20230601.gappssmtp.com header.i=@soleen-com.20230601.gappssmtp.com header.b=mQBy1bZ9; arc=none smtp.client-ip=209.85.222.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=soleen.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-qk1-f181.google.com with SMTP id af79cd13be357-7c547932d2eso20529385a.0
-        for <linux-doc@vger.kernel.org>; Wed, 19 Mar 2025 19:40:20 -0700 (PDT)
+	s=arc-20240116; t=1742441137; c=relaxed/simple;
+	bh=H7lnaBN5SZm6OkgoNmP24ilkdoieYSGpSoSXBz9EiNA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=rVTbMqtwgRab41Vtgwl8q4jme06DQ7BEnVNT2tg9gYiJAyZdf1QAYVwiDOdGQYmm9BOYqSeNCT/OwYFX4OJdX6E/J6SrKNtBUApaQa5RJUlsBKFTyoGVKEXA2dSuUDZP9/ui09AzN7uXzjWQIQQr6rLS28Yo9yN+OpByRi9rMgg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JR5mQLw5; arc=none smtp.client-ip=209.85.208.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-5e4d50ed90aso506503a12.0;
+        Wed, 19 Mar 2025 20:25:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen-com.20230601.gappssmtp.com; s=20230601; t=1742438419; x=1743043219; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=u+DVvQh5m1bMCi1clyLtB7PLWg78oPXTQmpuP7ESTF8=;
-        b=mQBy1bZ91YnByaXI5OE4/64FCPYgjkCulZlq4z1up4bFAj4EBpfZ+UNWWeAj4OeSyi
-         cKoCMezG7vrumWZUMHL0wMIczWya+dsEEIyAgOQJmDZIUSDAwlh3rBq2zXQqMz8Rgr0o
-         ebGpPZss9c0CCZQm3MIVQoB9WU32bMvZs5LE7OFXKOdaacQTRB96imy0gtRlOLhZLu29
-         Jltagc0aP8beuCKvt/ylQJurr/FVc91t80fPbEuyF1i0mYduFpldYudDfubhvSduH5GO
-         i6ecaM7DgGyKn3nlhII1jaLDiuOX3QeDF5YrPMQEqRv6sNFzuWZ3zRvO+LTHbiGWOP/i
-         NlEQ==
+        d=gmail.com; s=20230601; t=1742441134; x=1743045934; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=H7lnaBN5SZm6OkgoNmP24ilkdoieYSGpSoSXBz9EiNA=;
+        b=JR5mQLw5VZ4adcw+hk8StnubjbCsvrI424Kws24/XFkS3B8DRjZPRs5m744DkTeCI5
+         K3s/QrO9/Dt2gn0eTDRH3ofp2axOp0WiYODzDB6inrMnOpZ262F2QWLKlz7XLwwEAXDS
+         csNy5y6nitpp/PDxOoUaqAUQp7nyAnij3J7IELtWm/NCYAd/RQEsoQi9cisTloHO89/P
+         xoflydu5qgtmlNOSIFNWObl4RSMyoDjKv/AZtNT41XZlygI1QZLo8S3nztfNu77CJ7em
+         N+4fS2PzqpyXWiLLElL2kxzMQ7tSqtXCMa07nYq3AYvayOM5VEMG2WP7PWz5MiS5F3Gx
+         nXtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742438419; x=1743043219;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1742441134; x=1743045934;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=u+DVvQh5m1bMCi1clyLtB7PLWg78oPXTQmpuP7ESTF8=;
-        b=jAglt92gyDZGnw5iKOinKmECfpHBr/XvCulyflqmXKMldURLBqDKCt0o7ABAbymFmX
-         ZQ7VvoVQElYrFJ65ThZFaYVLZJx3pJM1YAIWFB/RWIIOVdc5oasSaNKZGg8PfyCx3kpK
-         Qx+bd8vMQpRq0zx1D5h9jWluIT6obBQHtJepAkrEnb/UFzCVSdwAbFFQf4luPzCWQZU4
-         7UPZ5q6Wn/zsCRgWrTIrfmZB4uQMQgY0cgOJsbqBNZzOj9RbTb4GVkia6gvd2o2G7qbH
-         P/Kfc8sQYmMUXEii8RjP1VdMTL775+lP8cSvmmK5S1ETwJam/WCryFz7Mi6A9AHKu/Fv
-         jcDA==
-X-Forwarded-Encrypted: i=1; AJvYcCU/+vPrpexLGqSyH1HcfIo2gkfkii7BuNLhFlUgxIQXNeCcIXjbBKFV6kGgJx5HoB2J1bNFZB8Xkqw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz1pxYU3bKzuhb0BOH51bGhuce6fCdBp3ZRqEQ2txGL3Q8nEr5i
-	LIBbXl5T8TsAycAx3Z6qUq8bQpunVDTXUQxWCUHKYn+ppZCqWxchlhl4C2NbF/A=
-X-Gm-Gg: ASbGnctD3n9RtusomOdd6lTalvDGeeDN49JwF69Oux5pDu/cE0++Abt43tIoruKaCq8
-	Za5q9u6f3v3EsSSmuxzc78Dm4IV+LcVvTHo/VV9WhLhJZ+BbHdjo2QHpjv8g3RAf6Ili8Xp3H8L
-	kPxelQBIH3Cx8GV1Q44JtlkNBeILJKD/os3W9BkTZ4lmcZQcihS2B71+rsRPg4pVRu0uc65AM/2
-	ci3fgZJWFV7K/x+YMhi7CAzhhaEsS+Cuuo+gXy+N7eka27Z2y68Tf6IrbzOrLgVPJpGfIqgV6DX
-	gQGK6j/Stm7thxzFb7qiir0zcAE/bwUJMUeXBABUjzuLfslSJj89VtcMT7lluFXPqjUUEr68EMN
-	UudHmcwTDKs0zMaXmnfngpz+sHe5uSnGU
-X-Google-Smtp-Source: AGHT+IHDuFkRUrzcuGCjVMEyO6PXLoUcE3ozt83EY0+kL0J1Oz/yABIc+QBPR+ZBZ9rhjUrcpOOeuw==
-X-Received: by 2002:a05:620a:2592:b0:7c5:55f9:4bcb with SMTP id af79cd13be357-7c5b0c94080mr226145985a.31.1742438419303;
-        Wed, 19 Mar 2025 19:40:19 -0700 (PDT)
-Received: from soleen.c.googlers.com.com (249.60.48.34.bc.googleusercontent.com. [34.48.60.249])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-7c573c4dd9fsm947815985a.4.2025.03.19.19.40.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Mar 2025 19:40:18 -0700 (PDT)
-From: Pasha Tatashin <pasha.tatashin@soleen.com>
-To: changyuanl@google.com,
-	graf@amazon.com,
-	pasha.tatashin@soleen.com,
-	rppt@kernel.org,
-	rientjes@google.com,
-	corbet@lwn.net,
-	rdunlap@infradead.org,
-	ilpo.jarvinen@linux.intel.com,
-	kanie@linux.alibaba.com,
-	ojeda@kernel.org,
-	aliceryhl@google.com,
-	masahiroy@kernel.org,
-	akpm@linux-foundation.org,
-	tj@kernel.org,
-	yoann.congal@smile.fr,
-	mmaurer@google.com,
-	roman.gushchin@linux.dev,
-	chenridong@huawei.com,
-	axboe@kernel.dk,
-	mark.rutland@arm.com,
-	jannh@google.com,
-	vincent.guittot@linaro.org,
-	hannes@cmpxchg.org,
-	dan.j.williams@intel.com,
-	david@redhat.com,
-	joel.granados@kernel.org,
-	rostedt@goodmis.org,
-	anna.schumaker@oracle.com,
-	song@kernel.org,
-	zhangguopeng@kylinos.cn,
-	linux@weissschuh.net,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-mm@kvack.org,
-	gregkh@linuxfoundation.org,
-	tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	x86@kernel.org,
-	hpa@zytor.com,
-	rafael@kernel.org,
-	dakr@kernel.org,
-	bartosz.golaszewski@linaro.org,
-	cw00.choi@samsung.com,
-	myungjoo.ham@samsung.com,
-	yesanishhere@gmail.com,
-	Jonathan.Cameron@huawei.com,
-	quic_zijuhu@quicinc.com,
-	aleksander.lobakin@intel.com,
-	ira.weiny@intel.com,
-	andriy.shevchenko@linux.intel.com,
-	leon@kernel.org,
-	lukas@wunner.de,
-	bhelgaas@google.com,
-	wagi@kernel.org,
-	djeffery@redhat.com,
-	stuart.w.hayes@gmail.com,
-	jgowans@amazon.com,
-	jgg@nvidia.com
-Subject: [RFC v1 3/3] luo: x86: Enable live update support
-Date: Thu, 20 Mar 2025 02:40:11 +0000
-Message-ID: <20250320024011.2995837-4-pasha.tatashin@soleen.com>
-X-Mailer: git-send-email 2.49.0.395.g12beb8f557-goog
-In-Reply-To: <20250320024011.2995837-1-pasha.tatashin@soleen.com>
-References: <20250320024011.2995837-1-pasha.tatashin@soleen.com>
+        bh=H7lnaBN5SZm6OkgoNmP24ilkdoieYSGpSoSXBz9EiNA=;
+        b=uoUORPk+QFAArhVz1skWQYLfo7Z7ZodeMA4540QWf/K+grB9V/mw85aYsJNdf1hil3
+         kCh2Yz/DmoC4JQiEeGkZmRUpumu2h/zJu3Wk4C885NvXVSAVhMdznrrUDyNWNFnOVu1H
+         GEM05O0tqhCAun/VlKN1RgYi+FLqVUZ4vygb9K9C+yJaDQDlFp9omrGokr3Y+O8Vnfza
+         Ts/M8++5DA+GlcSZ/58aW+rZI8ri0tGgDtHIkxMbXfbR9HY6VMWJAz0pmL+W7gBMW4E8
+         FuNb2gwqO6a+9yV8s55+sYif7JRK2M42e4hWJKfDfsjmTJ321yJun/j/RlY6sDyvduzq
+         6SLg==
+X-Forwarded-Encrypted: i=1; AJvYcCW/5h00RsJB92Q0eFfQvUKx9xpCaLI2z18nLrXMW5K9+tAMA9/B2/RNWRCT+3AhBlGne74rXcu1WO8=@vger.kernel.org, AJvYcCWmZcJbk7Suk86aDzvfpEWChrHvcAqv16Gy7yDSK1F+hW4svlBz8TPP51B2mcferPQUcQ2lx3OjHBTGF6ZM@vger.kernel.org
+X-Gm-Message-State: AOJu0YzS/bZbzaLE+mPG6GlEROqwC3HzfURk00ENpdBrrKKBsbRIVsn8
+	4hZ2L/OrZpbOWSm+6B/E5QJ4SJ0ZkiqDYCp4XyBd3Q/ntVyJMRT7zFXHkW0VmEiginCy5ufbLa+
+	3TNMajR9/nrldrjdYsokdhlZYKWw=
+X-Gm-Gg: ASbGnctPFIZy58ST0/z2p5A8/EAfG+JyMcWdvjFokzsoaH8N6mAti5ZsrpwtXJeV4zx
+	KNZbZpMTdvrrgDk3Mz0DUwcjRfZaoZdlgqi+iGeLJ2WxKEHChSQzyPj1/+co/KlnSwesBNv4kpH
+	DKyzT0uPxAJQImeR/SbfghG8weeg==
+X-Google-Smtp-Source: AGHT+IG52k4ca442AWo/QH7lQRw6KyfHF7U1QMXqi1uSwYO1EebwnJFsud5lcaJQAjQE6fqSyOUSA2tlHYQVzEDA3gg=
+X-Received: by 2002:a05:6402:3487:b0:5e5:2c0a:448e with SMTP id
+ 4fb4d7f45d1cf-5eb9f1d2a6cmr1716099a12.6.1742441134043; Wed, 19 Mar 2025
+ 20:25:34 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250319155237978a-_o_XXMLszvXPDlyRsb4@zte.com.cn>
+In-Reply-To: <20250319155237978a-_o_XXMLszvXPDlyRsb4@zte.com.cn>
+From: Alex Shi <seakeel@gmail.com>
+Date: Thu, 20 Mar 2025 11:24:57 +0800
+X-Gm-Features: AQ5f1Jpl0KnmmzSMsJlg3wjX0rLTgUXiXWmaIE2JlpCps6TgFEmcyiR_mZhBYak
+Message-ID: <CAJy-Amm4qkwffCAnOb8oz+24-jG-7NKT7zmfcNjrpyMtwmzyXg@mail.gmail.com>
+Subject: Re: [PATCH linux next 2/2 v5] Docs/zh_CN: Translate msg_zerocopy.rst
+ to Simplified Chinese
+To: jiang.kun2@zte.com.cn
+Cc: alexs@kernel.org, si.yanteng@linux.dev, corbet@lwn.net, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, xu.xin16@zte.com.cn, 
+	yang.yang29@zte.com.cn, wang.yaxin@zte.com.cn, fan.yu9@zte.com.cn, 
+	he.peilin@zte.com.cn, tu.qiang35@zte.com.cn, qiu.yutan@zte.com.cn, 
+	zhang.yunkai@zte.com.cn, ye.xingchen@zte.com.cn
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Enable the Live Update Orchestrator for the x86 architecture.
+<jiang.kun2@zte.com.cn> =E4=BA=8E2025=E5=B9=B43=E6=9C=8819=E6=97=A5=E5=91=
+=A8=E4=B8=89 15:52=E5=86=99=E9=81=93=EF=BC=9A
+>
+> From: Wang Yaxin <wang.yaxin@zte.com.cn>
+>
+> translate the "msg_zerocopy.rst" into Simplified Chinese.
+>
+> Update to commit bac2cac12c26("docs: net: description of
+> MSG_ZEROCOPY for AF_VSOCK")
+>
+> Signed-off-by: Wang Yaxin <wang.yaxin@zte.com.cn>
+> Signed-off-by: Jiang Kun <jiang.kun2@zte.com.cn>
+> Signed-off-by: xu xin <xu.xin16@zte.com.cn>
+> Signed-off-by: He Peilin <he.peilin@zte.com.cn>
+> Reviewed-by: Yanteng Si <si.yanteng@linux.dev>
+> ---
 
-It does so by selecting ARCH_SUPPORTS_LIVEUPDATE when KEXEC_HANDOVER is
-available, signaling to the LUO core that the architecture provides the
-necessary Kexec Handover functionality required for live updates.
-
-Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
----
- arch/x86/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index acd180e3002f..a7497cc84fbb 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -29,6 +29,7 @@ config X86_64
- 	select ARCH_SUPPORTS_INT128 if CC_HAS_INT128
- 	select ARCH_SUPPORTS_PER_VMA_LOCK
- 	select ARCH_SUPPORTS_HUGE_PFNMAP if TRANSPARENT_HUGEPAGE
-+	select ARCH_SUPPORTS_LIVEUPDATE if KEXEC_HANDOVER
- 	select HAVE_ARCH_SOFT_DIRTY
- 	select MODULES_USE_ELF_RELA
- 	select NEED_DMA_MAP_STATE
--- 
-2.49.0.395.g12beb8f557-goog
-
+Both are aplied. thanks
+but a better way to send your patches as a patchset in one thread,
+You could use "git format-patch -2" for your 2 patches, and then use
+'git send-email 000*" for your just generated 2 patches.
+For details, check
+https://www.kernel.org/doc/html/v6.12/translations/zh_CN/process/submitting=
+-patches.html
 
