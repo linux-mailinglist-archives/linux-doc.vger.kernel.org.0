@@ -1,227 +1,532 @@
-Return-Path: <linux-doc+bounces-41444-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41446-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D1BCA6AAD4
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 17:15:04 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FFB2A6AB2B
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 17:36:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 58CAD3AC11C
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 16:13:49 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C7AD68A5FF4
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Mar 2025 16:35:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26CAF1EB9E8;
-	Thu, 20 Mar 2025 16:13:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C25ED1EF394;
+	Thu, 20 Mar 2025 16:36:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="WirxAWXH"
+	dkim=pass (2048-bit key) header.d=soleen-com.20230601.gappssmtp.com header.i=@soleen-com.20230601.gappssmtp.com header.b="duIZYYEQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A70974BED;
-	Thu, 20 Mar 2025 16:13:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A32811EC013
+	for <linux-doc@vger.kernel.org>; Thu, 20 Mar 2025 16:35:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742487237; cv=none; b=E8QYZf5zg4GCbwuEdR0lxukFVOVozDu30DH9tJUAfHMjjFwmaKupLYQcXqcylposOa9xzCsaPscozRIqKaBcCe5XeWPnl4lglvsMp3uDVeBsrnhcfIeuV55akPYGyEVKpABoLKdiww5d9KWJyfxzTXjA2+yu9332PHaKv1shDTg=
+	t=1742488560; cv=none; b=tiK0klBDLGItKy53kg1b7on/PsXZVZMUowERIwlbh4nyfMXM/c3Z05HrqMIat+vxXlZfSKpckkM9TqAjSGpYj6tj9I46oSdVl00GD2KmGdAYtO4L3ufpGZpg+eY+zOLz66sRSMrx8+7GQ5gZyCRsJbfj7dDGEiwOoRwbUcVaH9w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742487237; c=relaxed/simple;
-	bh=A03YcV29Mgcr2rKaPyzWSsbf12vj49Zgz++G2QQuW64=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dm2dWGyUGJ4BqcHoI6nJ0lYzCY0sUj+hjgHggzymqbC+UmV9JsymVXyk0qp0Sh4liJ15DjXsfhsxmSZk5GU/tT51ul6MD73sfdyIzowuknvtirIqObvC8TmzsTkM2BRPy8x8tm0giForM+hvSf1DacW9LzxazxmvEonIuAOwAxg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=WirxAWXH; arc=none smtp.client-ip=198.175.65.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1742487235; x=1774023235;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=A03YcV29Mgcr2rKaPyzWSsbf12vj49Zgz++G2QQuW64=;
-  b=WirxAWXHmaRzm//l9h6LcpMFRzr0OBveb9CdkVYiEeWf1LXc0WvM8qtM
-   sL9OKZg3ElGB6np96k0MBYV+ZB5wyWWLxDxCUIClNe1kD0rRWb1/tvlPP
-   KGcbG2aKJ+cspnA7bASGzhFzxrJWU0dlpt9fY3H4z6ZUaurGNfYmSvaHJ
-   IcUn3K0NAxyzo/VqAA1kvI68TG4n/urZi9kWsNQJs2PW9BkFpH+6LERhi
-   ne/cy62mTdNDZloppFPbHB2nAXaRTJ/0+yq1ws2wtCa10YtIisQ9nlcCq
-   NC2Pi9cefle25C3/47m7m3fHy2wthZyFJPicyP5H0UBEePMaNYkbrfHIN
-   g==;
-X-CSE-ConnectionGUID: hV6j0USwSSSkQdnTvb9bBQ==
-X-CSE-MsgGUID: oRURXpzAT22E7ooUeuqPCw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11379"; a="43899522"
-X-IronPort-AV: E=Sophos;i="6.14,262,1736841600"; 
-   d="scan'208";a="43899522"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Mar 2025 09:13:55 -0700
-X-CSE-ConnectionGUID: 9IoHnd4OQY+7JNpuWNeaCg==
-X-CSE-MsgGUID: ToR0l3G2R/iGOBy74YyI3g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.14,262,1736841600"; 
-   d="scan'208";a="123155500"
-Received: from lkp-server02.sh.intel.com (HELO e98e3655d6d2) ([10.239.97.151])
-  by orviesa006.jf.intel.com with ESMTP; 20 Mar 2025 09:13:51 -0700
-Received: from kbuild by e98e3655d6d2 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1tvIWj-0000aV-2C;
-	Thu, 20 Mar 2025 16:13:49 +0000
-Date: Fri, 21 Mar 2025 00:12:50 +0800
-From: kernel test robot <lkp@intel.com>
-To: Alexis Czezar Torreno <alexisczezar.torreno@analog.com>,
-	Jean Delvare <jdelvare@suse.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Delphine CC Chiu <Delphine_CC_Chiu@wiwynn.com>
-Cc: oe-kbuild-all@lists.linux.dev, linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-i2c@vger.kernel.org,
-	Alexis Czezar Torreno <alexisczezar.torreno@analog.com>
-Subject: Re: [PATCH 2/2] hwmon: (pmbus/max3440): add support adpm12160
-Message-ID: <202503202311.5PZH0XKm-lkp@intel.com>
-References: <20250320-dev_adpm12160-v1-2-8f7b975eac75@analog.com>
+	s=arc-20240116; t=1742488560; c=relaxed/simple;
+	bh=uJE0LyZF6yVuQcphj9nsdtQM5hflRWAsEYJ7qpVTckA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Iqc/Rf326I7WtHOuorQZzH1oEh4zPuVBes55c+jQivTzYCeRTsWA9iMXydR7+wpkKmzbeQmGV3HGljMuX54JKj7cyLCQ/VgXUQ5PI5q6KYRtKHxWhq3b1eJ8ExHnFgeEap1mPXL+K878X4gKDMKs73EUk4hl9DlwvVl8tLucPMA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen-com.20230601.gappssmtp.com header.i=@soleen-com.20230601.gappssmtp.com header.b=duIZYYEQ; arc=none smtp.client-ip=209.85.160.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=soleen.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
+Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-4767e969b94so18719461cf.2
+        for <linux-doc@vger.kernel.org>; Thu, 20 Mar 2025 09:35:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen-com.20230601.gappssmtp.com; s=20230601; t=1742488557; x=1743093357; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FSJhl8Ya+U9yAyNP3Wu79LvGc5zWv1+4r8Tqq+zSr98=;
+        b=duIZYYEQ/DXp+E/JUVIBCqKmpYhcTxptuo09fVJ0RAv3rxd/ijpcrPp1N/MWY8Ykqy
+         ZC7KWtD+esMPdkvFoGMSxRsOdSMw0GJuLWzRVwip2cYWpI0lpLhDS8lZg4DciaxnapOR
+         OaJTEmHwNuV23nFyLYpA67JrfQXoAp5UsdrKDpgKiJNciUfCNUah04j6H6VAdEMFjbDK
+         +XLinJHcciY2Ko4OVyL2oxm5kVsVxHud+IjqxK2OIxUBiXkE8yb/xnFgD3Kr+pBeggb+
+         O+a9Tq5K617RCEge5zMABCJlq9xi+TLcdueY71IlVahFc3JxgFue5XcSkiK1c/Ddepgn
+         4hew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1742488557; x=1743093357;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=FSJhl8Ya+U9yAyNP3Wu79LvGc5zWv1+4r8Tqq+zSr98=;
+        b=E0O+ejZ/JCJ74Ja4uMi3e1rbCiL4WyI+NtafkxYSCoqe5qQXFi3jPCL1ag3TC7dWkB
+         lJgyS9yt4rZb6Xwij9YNFgdrQV5wrDqYgbu+EjZOwYPQebtknf+dpQs6RXk+12FdFcs3
+         uHo6ADi50SO0jV7I35OKfPLR9EN8bQDZ8QuE9arFNFuwFFnBb4qeZ7or7AnzclnhrSzi
+         i7rwUc77JJAlvypEHbrCG4LVnORJtBdo8V1d2tRywGKXZyZpaHZO6ahiZZrG3PS8EcZR
+         kHK0djD1/BTp7Y5Sl/XfKCznl2MmEuvPZTPNnWzreepB2SSbbe4jXPOCbE0fHBJFG0UM
+         ykwg==
+X-Forwarded-Encrypted: i=1; AJvYcCV8bnIBAkl8By77r7YOzTuUFkxCtsDqSdMgRw+z4WpY3O2jPHJrq+eHyXru/TXXZan7s6EGHq7l+sU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzgCWLSYgiIdQfR620F4G0EEMcPZBCSV1jWhXV51J3gjJDEF7yX
+	2Ubj3FkN9e4zlpIp1wBiAX8nJJ78Ov+zloTMpKEu/ZqppUyIRdaIJpIdJLoCiYHP2inShQkx3qZ
+	RD3RV6B6UDhpZlb1WnULRRJ3/dZFMb6rLEAqwRQ==
+X-Gm-Gg: ASbGnctXHq2q499LOJvUnQ6a573D3eva32Ur+0Hp9RJOyOEDUNXF5SLIZQfIR0Kmnxr
+	F7au0KDgV38tTBtPx9LAOyLbTFfhrN8S1jx9DB55t9PTBcypLaCmKY5rHSqXq3g7XjpsSieQkTn
+	GIJsJI0UvI0I+egbDU22JfIMg=
+X-Google-Smtp-Source: AGHT+IF0eXOQlc/TCcCLJjjH1RwfQ9Q7azG+hpO1bThoH01wQ+mnOSXeNm3Os2T9J32bHJKiD8UV6/78bbxc28Q/6yY=
+X-Received: by 2002:a05:622a:11c7:b0:476:b06a:716e with SMTP id
+ d75a77b69052e-4770841fd04mr103463281cf.34.1742488557448; Thu, 20 Mar 2025
+ 09:35:57 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250320-dev_adpm12160-v1-2-8f7b975eac75@analog.com>
+References: <20250320024011.2995837-1-pasha.tatashin@soleen.com>
+ <20250320024011.2995837-2-pasha.tatashin@soleen.com> <Z9wan08CpbvddHhc@smile.fi.intel.com>
+In-Reply-To: <Z9wan08CpbvddHhc@smile.fi.intel.com>
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+Date: Thu, 20 Mar 2025 12:35:20 -0400
+X-Gm-Features: AQ5f1Jo9DEAuy95jWf1ZvdTmiidPtoTdbLtKofntA_8ycDVY8wy9zZs4pKR771U
+Message-ID: <CA+CK2bDWJcrWpkk0asKUb46GYT-r9JdBMU-OUx3E4qjr6rVpGA@mail.gmail.com>
+Subject: Re: [RFC v1 1/3] luo: Live Update Orchestrator
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: changyuanl@google.com, graf@amazon.com, rppt@kernel.org, 
+	rientjes@google.com, corbet@lwn.net, rdunlap@infradead.org, 
+	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com, ojeda@kernel.org, 
+	aliceryhl@google.com, masahiroy@kernel.org, akpm@linux-foundation.org, 
+	tj@kernel.org, yoann.congal@smile.fr, mmaurer@google.com, 
+	roman.gushchin@linux.dev, chenridong@huawei.com, axboe@kernel.dk, 
+	mark.rutland@arm.com, jannh@google.com, vincent.guittot@linaro.org, 
+	hannes@cmpxchg.org, dan.j.williams@intel.com, david@redhat.com, 
+	joel.granados@kernel.org, rostedt@goodmis.org, anna.schumaker@oracle.com, 
+	song@kernel.org, zhangguopeng@kylinos.cn, linux@weissschuh.net, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-mm@kvack.org, 
+	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com, 
+	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, 
+	rafael@kernel.org, dakr@kernel.org, bartosz.golaszewski@linaro.org, 
+	cw00.choi@samsung.com, myungjoo.ham@samsung.com, yesanishhere@gmail.com, 
+	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com, 
+	aleksander.lobakin@intel.com, ira.weiny@intel.com, leon@kernel.org, 
+	lukas@wunner.de, bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com, 
+	stuart.w.hayes@gmail.com, jgowans@amazon.com, jgg@nvidia.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Alexis,
+On Thu, Mar 20, 2025 at 9:40=E2=80=AFAM Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
+>
+> On Thu, Mar 20, 2025 at 02:40:09AM +0000, Pasha Tatashin wrote:
+> > Introduces the Live Update Orchestrator (LUO), a new kernel subsystem
+> > designed to facilitate live updates. Live update is a method to reboot
+> > the kernel while attempting to keep selected devices alive across the
+> > reboot boundary, minimizing downtime.
+> >
+> > The primary use case is cloud environments, allowing hypervisor updates
+> > without fully disrupting running virtual machines. VMs can be suspended
+> > while the hypervisor kernel reboots, and devices attached to these VM
+> > are kept operational by the LUO.
+> >
+> > Features introduced:
+> >
+> > - Core orchestration logic for managing the live update process.
+> > - A state machine (NORMAL, PREPARED, UPDATED, *_FAILED) to track
+> >   the progress of live updates.
+> > - Notifier chains for subsystems (device layer, interrupts, KVM, IOMMU,
+> >   etc.) to register callbacks for different live update events:
+> >     - LIVEUPDATE_PREPARE: Prepare for reboot (before blackout).
+> >     - LIVEUPDATE_REBOOT: Final serialization before kexec (blackout).
+> >     - LIVEUPDATE_FINISH: Cleanup after update (after blackout).
+> >     - LIVEUPDATE_CANCEL: Rollback actions on failure or user request.
+> > - A sysfs interface (/sys/kernel/liveupdate/) for user-space control:
+> >     - `prepare`: Initiate preparation (write 1) or reset (write 0).
+> >     - `finish`: Finalize update in new kernel (write 1).
+> >     - `cancel`: Abort ongoing preparation or reboot (write 1).
+> >     - `reset`: Force state back to normal (write 1).
+> >     - `state`: Read-only view of the current LUO state.
+> >     - `enabled`: Read-only view of whether live update is enabled.
+> > - Integration with KHO to pass orchestrator state to the new kernel.
+> > - Version checking during startup of the new kernel to ensure
+> >   compatibility with the previous kernel's live update state.
+> >
+> > This infrastructure allows various kernel subsystems to coordinate and
+> > participate in the live update process, serializing and restoring devic=
+e
+> > state across a kernel reboot.
+>
+> ...
+>
+> > +Date:                March 2025
+> > +KernelVersion:       6.14.0
+>
+> This is way too optimistic, it even won't make v6.15.
+> And date can be chosen either v6.16-rc1 or v6.16 release
+> in accordance with prediction tool
 
-kernel test robot noticed the following build errors:
+This is an early RFC and is not intended to be applied. I meant to
+replace it with the appropriate version once it becomes a candidate to
+land.
 
-[auto build test ERROR on c812cc42f92d3d0b17c01b5db9a1dee5793a1491]
+>
+> ...
+>
+> > +#ifndef _LINUX_LIVEUPDATE_H
+> > +#define _LINUX_LIVEUPDATE_H
+>
+> > +#include <linux/compiler.h>
+> > +#include <linux/notifier.h>
+>
+> This is semi-random list of inclusions. Try to follow IWYU principle.
+> See below.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Alexis-Czezar-Torreno/hwmon-pmbus-max34440-Fix-support-for-max34451/20250320-115905
-base:   c812cc42f92d3d0b17c01b5db9a1dee5793a1491
-patch link:    https://lore.kernel.org/r/20250320-dev_adpm12160-v1-2-8f7b975eac75%40analog.com
-patch subject: [PATCH 2/2] hwmon: (pmbus/max3440): add support adpm12160
-config: i386-buildonly-randconfig-005-20250320 (https://download.01.org/0day-ci/archive/20250320/202503202311.5PZH0XKm-lkp@intel.com/config)
-compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250320/202503202311.5PZH0XKm-lkp@intel.com/reproduce)
+I will remove <linux/compiler.h>
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202503202311.5PZH0XKm-lkp@intel.com/
+>
+> ...
+>
+> > +bool liveupdate_state_updated(void);
+>
+> Where bool is defined?
 
-All errors (new ones prefixed by >>):
+in kernel/liveupdate.c
 
-   drivers/hwmon/pmbus/max34440.c: In function 'max34440_read_word_data':
->> drivers/hwmon/pmbus/max34440.c:97:71: error: expected statement before ')' token
-      97 |                     data->id != max34451_na6 && data->id != adpm12160))
-         |                                                                       ^
-   drivers/hwmon/pmbus/max34440.c: At top level:
-   drivers/hwmon/pmbus/max34440.c:483:37: error: expected expression before ',' token
-     483 |                 MAX34451_COMMON_INFO,
-         |                                     ^
-   drivers/hwmon/pmbus/max34440.c:486:37: error: expected expression before ',' token
-     486 |                 MAX34451_COMMON_INFO,
-         |                                     ^
-   In file included from include/linux/module.h:22,
-                    from drivers/hwmon/pmbus/max34440.c:11:
-   drivers/hwmon/pmbus/max34440.c:603:18: error: expected ',' or ';' before 'PMBUS'
-     603 | MODULE_IMPORT_NS(PMBUS);
-         |                  ^~~~~
-   include/linux/moduleparam.h:26:61: note: in definition of macro '__MODULE_INFO'
-      26 |                 = __MODULE_INFO_PREFIX __stringify(tag) "=" info
-         |                                                             ^~~~
-   include/linux/module.h:299:33: note: in expansion of macro 'MODULE_INFO'
-     299 | #define MODULE_IMPORT_NS(ns)    MODULE_INFO(import_ns, ns)
-         |                                 ^~~~~~~~~~~
-   drivers/hwmon/pmbus/max34440.c:603:1: note: in expansion of macro 'MODULE_IMPORT_NS'
-     603 | MODULE_IMPORT_NS(PMBUS);
-         | ^~~~~~~~~~~~~~~~
+>
+> ...
+>
+> > +/**
+> > + * LIVEUPDATE_DECLARE_NOTIFIER - Declare a live update notifier with d=
+efault
+> > + * structure.
+> > + * @_name: A base name used to generate the names of the notifier bloc=
+k
+> > + * (e.g., ``_name##_liveupdate_notifier_block``) and the callback func=
+tion
+> > + * (e.g., ``_name##_liveupdate``).
+> > + * @_priority: The priority of the notifier, specified using the
+> > + * ``enum liveupdate_cb_priority`` values
+> > + * (e.g., ``LIVEUPDATE_CB_PRIO_BEFORE_DEVICES``).
+> > + *
+> > + * This macro declares a static struct notifier_block and a correspond=
+ing
+> > + * notifier callback function for use with the live update orchestrato=
+r.
+> > + * It simplifies the process by automatically handling the dispatching=
+ of
+> > + * live update events to separate handler functions for prepare, reboo=
+t,
+> > + * finish, and cancel.
+> > + *
+> > + * This macro expects the following functions to be defined:
+> > + *
+> > + * ``_name##_liveupdate_prepare()``:  Called on LIVEUPDATE_PREPARE.
+> > + * ``_name##_liveupdate_reboot()``:   Called on LIVEUPDATE_REBOOT.
+> > + * ``_name##_liveupdate_finish()``:   Called on LIVEUPDATE_FINISH.
+> > + * ``_name##_liveupdate_cancel()``:   Called on LIVEUPDATE_CANCEL.
+> > + *
+> > + * The generated callback function handles the switch statement for th=
+e
+> > + * different live update events and calls the appropriate handler func=
+tion.
+> > + * It also includes warnings if the finish or cancel handlers return a=
+n error.
+> > + *
+> > + * For example, declartion can look like this:
+> > + *
+> > + * ``static int foo_liveupdate_prepare(void) { ... }``
+> > + *
+> > + * ``static int foo_liveupdate_reboot(void) { ... }``
+> > + *
+> > + * ``static int foo_liveupdate_finish(void) { ... }``
+> > + *
+> > + * ``static int foo_liveupdate_cancel(void) { ... }``
+> > + *
+> > + * ``LIVEUPDATE_DECLARE_NOTIFIER(foo, LIVEUPDATE_CB_PRIO_WITH_DEVICES)=
+;``
+> > + *
+>
+> Hmm... Have you run kernel-doc validator? There is missing Return section=
+ and
+> it will warn about that.
 
+I have, and there are no warnings. There is no return in this macro.
 
-vim +97 drivers/hwmon/pmbus/max34440.c
+>
+> > + */
+>
+> ...
+>
+> > +             WARN_ONCE(rv, "cancel failed[%d]\n", rv);               \
+>
+> + bug.h
 
-    62	
-    63	static int max34440_read_word_data(struct i2c_client *client, int page,
-    64					   int phase, int reg)
-    65	{
-    66		int ret;
-    67		const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
-    68		const struct max34440_data *data = to_max34440_data(info);
-    69	
-    70		switch (reg) {
-    71		case PMBUS_IOUT_OC_FAULT_LIMIT:
-    72			if (data->id == max34451_na6 || data->id == adpm12160)
-    73				ret = pmbus_read_word_data(client, page, phase,
-    74							   PMBUS_IOUT_OC_FAULT_LIMIT);
-    75			else
-    76				ret = pmbus_read_word_data(client, page, phase,
-    77							   MAX34440_IOUT_OC_FAULT_LIMIT);
-    78			break;
-    79		case PMBUS_IOUT_OC_WARN_LIMIT:
-    80			if (data->id == max34451_na6 || data->id == adpm12160)
-    81				ret = pmbus_read_word_data(client, page, phase,
-    82							   PMBUS_IOUT_OC_WARN_LIMIT);
-    83			else
-    84				ret = pmbus_read_word_data(client, page, phase,
-    85							   MAX34440_IOUT_OC_WARN_LIMIT);
-    86			break;
-    87		case PMBUS_VIRT_READ_VOUT_MIN:
-    88			ret = pmbus_read_word_data(client, page, phase,
-    89						   MAX34440_MFR_VOUT_MIN);
-    90			break;
-    91		case PMBUS_VIRT_READ_VOUT_MAX:
-    92			ret = pmbus_read_word_data(client, page, phase,
-    93						   MAX34440_MFR_VOUT_PEAK);
-    94			break;
-    95		case PMBUS_VIRT_READ_IOUT_AVG:
-    96			if (data->id != max34446 && data->id != max34451 &&
-  > 97			    data->id != max34451_na6 && data->id != adpm12160))
-    98				return -ENXIO;
-    99			ret = pmbus_read_word_data(client, page, phase,
-   100						   MAX34446_MFR_IOUT_AVG);
-   101			break;
-   102		case PMBUS_VIRT_READ_IOUT_MAX:
-   103			ret = pmbus_read_word_data(client, page, phase,
-   104						   MAX34440_MFR_IOUT_PEAK);
-   105			break;
-   106		case PMBUS_VIRT_READ_POUT_AVG:
-   107			if (data->id != max34446)
-   108				return -ENXIO;
-   109			ret = pmbus_read_word_data(client, page, phase,
-   110						   MAX34446_MFR_POUT_AVG);
-   111			break;
-   112		case PMBUS_VIRT_READ_POUT_MAX:
-   113			if (data->id != max34446)
-   114				return -ENXIO;
-   115			ret = pmbus_read_word_data(client, page, phase,
-   116						   MAX34446_MFR_POUT_PEAK);
-   117			break;
-   118		case PMBUS_VIRT_READ_TEMP_AVG:
-   119			if (data->id != max34446 && data->id != max34460 &&
-   120			    data->id != max34461)
-   121				return -ENXIO;
-   122			ret = pmbus_read_word_data(client, page, phase,
-   123						   MAX34446_MFR_TEMPERATURE_AVG);
-   124			break;
-   125		case PMBUS_VIRT_READ_TEMP_MAX:
-   126			ret = pmbus_read_word_data(client, page, phase,
-   127						   MAX34440_MFR_TEMPERATURE_PEAK);
-   128			break;
-   129		case PMBUS_VIRT_RESET_POUT_HISTORY:
-   130			if (data->id != max34446)
-   131				return -ENXIO;
-   132			ret = 0;
-   133			break;
-   134		case PMBUS_VIRT_RESET_VOUT_HISTORY:
-   135		case PMBUS_VIRT_RESET_IOUT_HISTORY:
-   136		case PMBUS_VIRT_RESET_TEMP_HISTORY:
-   137			ret = 0;
-   138			break;
-   139		default:
-   140			ret = -ENODATA;
-   141			break;
-   142		}
-   143		return ret;
-   144	}
-   145	
+I will include bug.h
 
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+>
+> ...
+>
+> > + #undef pr_fmt
+> > + #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+>
+> Leftover from the development?
+
+Ah, yes, it is duplicated.
+
+>
+> > +#undef pr_fmt
+>
+> Not needed as long as pr_fmt9) is at the top of the file.
+
+Thanks, I will remove it.
+
+>
+> > +#define pr_fmt(fmt)  KBUILD_MODNAME ": " fmt
+>
+> ...
+>
+> > +#include <linux/kernel.h>
+>
+> What for? Can you follow IWYU, please? Here again semi-random list of
+> inclusions.
+
+I will remove kernel.h and cpufreq.h and add
+#include <linux/kobject.h>
+
+> > +#include <linux/sysfs.h>
+> > +#include <linux/string.h>
+> > +#include <linux/rwsem.h>
+> > +#include <linux/err.h>
+> > +#include <linux/liveupdate.h>
+> > +#include <linux/cpufreq.h>
+> > +#include <linux/kexec_handover.h>
+>
+> Can you keep them ordered which will be easier to read and maintain?
+
+Sure, I will order them alphabetically.
+
+>
+> ...
+>
+> > +static int __init early_liveupdate_param(char *buf)
+> > +{
+> > +     return kstrtobool(buf, &luo_enabled);
+> > +}
+>
+> > +
+>
+> Redundant blank line.
+
+OK
+
+> > +early_param("liveupdate", early_liveupdate_param);
+>
+> ...
+>
+> > +/* Show the current live update state */
+> > +static ssize_t state_show(struct kobject *kobj,
+> > +                       struct kobj_attribute *attr,
+>
+> It is still enough room even for the strict 80 limit case.
+
+OK
+
+>
+> > +                       char *buf)
+> > +{
+> > +     return sysfs_emit(buf, "%s\n", LUO_STATE_STR);
+> > +}
+>
+> ...
+>
+> > +             ret =3D blocking_notifier_call_chain(&luo_notify_list,
+> > +                                                event,
+> > +                                                NULL);
+>
+> There is room on the previous lines. Ditto for the similar cases all over
+> the code.
+
+OK
+
+>
+> ...
+>
+> > +{
+> > +     int ret;
+> > +
+> > +     if (down_write_killable(&luo_state_rwsem)) {
+> > +             pr_warn(" %s, change state canceled by user\n", __func__)=
+;
+>
+> Why __func__ is so important in _this_ message? And why leading space?
+> Ditto for the similar cases.
+
+removed __func__, and rewarded messages to be more descriptive in each case=
+.
+
+>
+> > +             return -EAGAIN;
+> > +     }
+> > +
+> > +     if (!IS_STATE(LIVEUPDATE_STATE_NORMAL)) {
+> > +             pr_warn("Can't switch to [%s] from [%s] state\n",
+> > +                     luo_state_str[LIVEUPDATE_STATE_PREPARED],
+> > +                     LUO_STATE_STR);
+> > +             up_write(&luo_state_rwsem);
+> > +
+> > +             return -EINVAL;
+> > +     }
+> > +
+> > +     ret =3D luo_notify(LIVEUPDATE_PREPARE);
+> > +     if (!ret)
+> > +             luo_set_state(LIVEUPDATE_STATE_PREPARED);
+> > +
+> > +     up_write(&luo_state_rwsem);
+> > +
+> > +     return ret;
+> > +}
+>
+> ...
+>
+> > +static ssize_t prepare_store(struct kobject *kobj,
+> > +                          struct kobj_attribute *attr,
+> > +                          const char *buf,
+> > +                          size_t count)
+> > +{
+> > +     ssize_t ret;
+> > +     long val;
+>
+> > +     if (kstrtol(buf, 0, &val) < 0)
+> > +             return -EINVAL;
+>
+> Shadower error code.
+
+In this case it is appropriate, we do not case why kstrtol() could not
+be converted into an appropriate integer, all we care is that the
+input was invalid, and that what we return back to user.
+
+>
+>
+> > +     if (val !=3D 1 && val !=3D 0)
+> > +             return -EINVAL;
+>
+> What's wrong with using kstrtobool() from the beginning?
+
+It makes the input less defined, here we only allow '1' or '0',
+kstrtobool() allows almost anything.
+
+>
+> > +
+> > +     if (val)
+> > +             ret =3D luo_prepare();
+> > +     else
+> > +             ret =3D luo_cancel();
+>
+> > +     if (!ret)
+> > +             ret =3D count;
+> > +
+> > +     return ret;
+>
+> Can we go with the usual pattern "check for errors first"?
+>
+>         if (ret)
+>                 return ret;
+
+Sure.
+
+>
+>         ...
+>
+> > +}
+>
+> ...
+>
+> > +static ssize_t finish_store(struct kobject *kobj,
+> > +                         struct kobj_attribute *attr,
+> > +                         const char *buf,
+> > +                         size_t count)
+>
+> Same comments as per above.
+
+OK
+
+>
+> ...
+>
+> > +static struct attribute *luo_attrs[] =3D {
+> > +     &state_attribute.attr,
+> > +     &prepare_attribute.attr,
+> > +     &finish_attribute.attr,
+>
+> > +     NULL,
+>
+> No comma for the terminator entry.
+
+Sure.
+
+> > +};
+>
+> ...
+>
+> > +static int __init luo_init(void)
+> > +{
+> > +     int ret;
+> > +
+> > +     if (!luo_enabled || !kho_is_enabled()) {
+> > +             pr_info("disabled by user\n");
+> > +             luo_enabled =3D false;
+> > +
+> > +             return 0;
+> > +     }
+>
+> Can be written like
+>
+>         if (!kho_is_enabled())
+>                 luo_enabled =3D false;
+>         if (!luo_enabled) {
+>                 pr_info("disabled by user\n");
+>                 return 0;
+>         }
+
+Sure
+
+>
+> > +     ret =3D sysfs_create_group(kernel_kobj, &luo_attr_group);
+> > +     if (ret)
+> > +             pr_err("Failed to create group\n");
+> > +
+> > +     luo_sysfs_initialized =3D true;
+> > +     pr_info("Initialized\n");
+> > +
+> > +     return ret;
+>
+> Something is odd here between (non-)checking for errors and printed messa=
+ges.
+
+Thank you for pointing out, it is a bug, fixed.
+
+>
+> > +}
+>
+> ...
+>
+> > +EXPORT_SYMBOL_GPL(liveupdate_state_normal);
+>
+> No namespace?
+
+Namespace is 'liveupdate_', all public interfaces have this prefix,
+private functions are prefixed with luo_ where it makes sense.
+
+>
+> ...
+>
+> > --- a/kernel/reboot.c
+> > +++ b/kernel/reboot.c
+> > @@ -18,6 +18,7 @@
+> >  #include <linux/syscalls.h>
+> >  #include <linux/syscore_ops.h>
+> >  #include <linux/uaccess.h>
+> > +#include <linux/liveupdate.h>
+>
+> Can oyu preserve order (with given context at least)?
+
+Yes.
+
+>
+> --
+> With Best Regards,
+> Andy Shevchenko
+
+Thank you for your review.
+Pasha
 
