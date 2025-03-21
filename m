@@ -1,269 +1,142 @@
-Return-Path: <linux-doc+bounces-41555-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41557-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85B24A6C418
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 21:23:59 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA2CDA6C42A
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 21:30:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DAD84189FE99
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 20:24:07 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 341D13BC9FF
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 20:30:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6701B22FF5E;
-	Fri, 21 Mar 2025 20:23:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E7DC231A21;
+	Fri, 21 Mar 2025 20:30:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hxCCF+yA"
+	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="HG/7pIh+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83E4428E7;
-	Fri, 21 Mar 2025 20:23:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4740E230BF8
+	for <linux-doc@vger.kernel.org>; Fri, 21 Mar 2025 20:30:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742588634; cv=none; b=P1Rs5zaJjehufhrAcnGpRcLZglfr9bwZtmJd6SshKAnF1TOfag5u7sFmG11rbRB6hvPxK0Yr+ozm3Lr+u+uVovjVaQJNpsdfRO+BsFjdyCk1Fwejb/HOHnRfnZcXoe9eRf8FAvsTbVPURgOMyQKnrwhZDMrd6NPXq4o3nwTYQp0=
+	t=1742589009; cv=none; b=RvIey+HCV01Ply31i9Gi5nAho9Ce1Si7c8gcZvXLZtoiRL1qa+CkMchDmgwLizmFxB6HUzhdqon2MSb4jVWbS0VZNyXzJxEfl/PTnVpeV7AFpx/oGj1TJP2B+JoGztZGRJPvLAyezLQ4FFPDRJyBIYb5hgEaC4LXGRulybJ52aU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742588634; c=relaxed/simple;
-	bh=pSGCkutqlhfgmZ9pcispcde5O1dmP4dkXo+z1DTalEw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=e2+SoXbL9kK0PlVcTk+VMSQuAlH8K6MAGLuyrIIKd3u3Aq3ih1cK3HDUa9cgrRyaQny/AlwaMMjD0sPgRK81JzMjWlXPCU09vWz4/Xond3vSg1THRetKUijimDGGpRDum8WNJ8w47mYuAW7J4auhq8czxMsqjCW+7/CTkrP63kI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hxCCF+yA; arc=none smtp.client-ip=209.85.214.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2255003f4c6so49518295ad.0;
-        Fri, 21 Mar 2025 13:23:52 -0700 (PDT)
+	s=arc-20240116; t=1742589009; c=relaxed/simple;
+	bh=PlGObf3FoFSVjLZ3+lkHVytXNt5oNV1sykTKJih/nGY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=K+TUEwEK1CnU/MPhPkjKbPVzjs0y+XbpWbraMJM5RG1+6+uPu7TZf0aAidD644HuPZHRR7THHoU2cH5cuaNnWV2pfVE2VCxVB24GjsO1/31AtrNOzw8nuMod2Ho3/lEfyhqXfDJ0l1925iK3Lw4l7uS28G1AO8yT7svjZrx65co=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=HG/7pIh+; arc=none smtp.client-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-43cebe06e9eso17874635e9.3
+        for <linux-doc@vger.kernel.org>; Fri, 21 Mar 2025 13:30:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1742588632; x=1743193432; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=1djtg26CNE1DKn9YMuQNTPgebMHlacqcSzIFE/uHe2M=;
-        b=hxCCF+yAuq5PoaGLqcO8j/Td/R504DpoY3dJckzHI0HN71bG3GSQgRsiC5vG0mrtrs
-         +TSIgw97/CQVgrulgKbFYZbTeqzF+50hv3a8mKUrCRVTU5YZ+25qqwyim9jzhNUJbIAj
-         odr8RWlMCmlcMB6/YaL2KwVrRJWhNx8LB5rXTlnfRC9EpcffXHZiIR5IW0F1CLANNOYo
-         RqLuZv9wuCf9jSuO/D0SeCtFBHgGhWFh0nyysJzmSSnxYiqf7F4C0FA/mNMWEBw7clA3
-         8tkyDxv9nCbK/+Azu2b7tBb2V1g36tkXceeqSJrNsESMbOFAvDHFftXKRRkRjt1k6GFQ
-         sodA==
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1742589004; x=1743193804; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=D0lB23+k9X4O/rcO+siwkQMd1AepAsIgIgh1h0N3Brs=;
+        b=HG/7pIh+UGrJ1vPiA+bcGEd9XkwrrJc18Qro3mnBfAX8Bf6N2ewUlT7aDKV7ArcetZ
+         ccYidspGqMaBsELktOrO49nsBOlyG9Ej4gFewyJxUActmIJdWq8AVGolom652RQONhPw
+         m4LTSi9TjT4DUzd7N5uBe4b8wjuQWFGdoYXLZNhCl4K1eGIuIjF3oBFKxBMHmmRYiBQi
+         y67ecypptgTzyFfVXRs98xsI/+fbh/SOzkz6A5ghlP98why9T6+JvwueglxC6aOqOU+9
+         ie7MX2V1NIfP+4xdXuAcB7I+i86p+FRXnmDCvEIMIxC2BSAdU1UPDyzD8mgL7fk2vVBs
+         4AMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742588632; x=1743193432;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1djtg26CNE1DKn9YMuQNTPgebMHlacqcSzIFE/uHe2M=;
-        b=QX/nUIq1MTOm7lHm8yJeDQLovopTChM/01pg1gKVlanOehDCtLi5o51dRgozPz7V8Y
-         D+5IVxu+KM1MtaeDw9J38MQC3CRi23a13iM/fHlzbT4zDpbPU0AH7NvKWh6Axh4WBqvm
-         Z7ZacEPwiMjHg9lC+rsj5x7Remza5JOXuYvyS/nAHW7tqy/CgaeKPOm8MH7xR5464PHY
-         3asO+710GiSi9x1GuQwI6yYKbeJ9L+kA0QmU7bHMSXA929f+elc5QnGiywyzc8BXqQG5
-         Fw+XEs7+bphKs59ifsGpK3JwwC8gk2Kpreziiww4RAByBLkEoVHyUHvCmuLAGS0r1kOW
-         VvOQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVVeAoXML0OvD+RvRamEu5H6TaucTIOEqlI/lCBrgmxlcvYTOjHT/cJrz+V16eZdtmPtl+JMlk8gpBI3mCX@vger.kernel.org, AJvYcCVyMhMtHVV8+L3PfyG3Str0lT22BxcCK1WVCnhNk0kQzvjJTts2tBdFP9h1b7a44i6hIKGrMaOkEcdK@vger.kernel.org, AJvYcCWEHEvdNU+ULtZsb0/NA4V2vZheXulyzlcQuGZKsldenm95O605gzKV8OgHdieNNq7bXXjSyVirsK15oBA=@vger.kernel.org, AJvYcCWpFkJR2IR7GCQMF/L3HRjV17DLoOhB4SPmafTszp+hqEODtRQbjid4A+NcFa3MimQd+rCrvPhMs8in@vger.kernel.org, AJvYcCWvYMpIlMo5HvjA/cbmtyyQLLxRysgDYrJI7XX/XDvtOUY2cYEJB5LsgEGgKZCKEj0HkbuE7m17e95b@vger.kernel.org
-X-Gm-Message-State: AOJu0YxN9W2CVqMFOpftLgc5IiDCQbILEGPtfdHKeyhWRQmxrkkEPhkE
-	iAUjQ1Pga2TXJu4rQHh/z9x34cu4SlpvAYbXDaaXAunrzRulbOvKRTUaWQ==
-X-Gm-Gg: ASbGnctUFhMNyUoWjxDZ+dpLfcfl7KIKCkOfmXfNixkuy2FpGCW1bgGRJ/QYEBFFbOQ
-	WrPGdac1OtWbMSN8lk1QgzE495GsxISIuE5K4P+ueMDVornmSa+9vDPtsuGgO1Je49J3S4nbKqW
-	yboddm9OyIJJyF99s21yOXbXe2BcgyDidYnhEnLyEiXO+yiR/WmjRU4K7EdcS5+JH2Y3ActTaFd
-	TTpZIMg+d+Ej/Ng9OaQhv0FfISd0FXT6EDoT3JmRFeHMobOFIk7cEq24vJnYUl+dST/n9kKd0Gz
-	wQ8RQa4Zin2G2yrQZRSU1gfRQcdCCNrMHMEZLNQSXsC/sarVpmN8FPlbJ60V0ffrYMJNZXGGaDi
-	dA851jInow5qQfDkwGw==
-X-Google-Smtp-Source: AGHT+IGWdMAUjWh0+9yGqF7S/SRKjyn8WRH2kjJtyo1Nezds6nK2NVqewGCNg4/3iVAcnFSsWs5zUQ==
-X-Received: by 2002:a17:903:40cb:b0:221:331:1d46 with SMTP id d9443c01a7336-22780c510fcmr60907465ad.2.1742588631562;
-        Fri, 21 Mar 2025 13:23:51 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22780f461basm21912215ad.96.2025.03.21.13.23.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 21 Mar 2025 13:23:51 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <2bc5370b-949d-4b3e-b59a-d27c3f72026b@roeck-us.net>
-Date: Fri, 21 Mar 2025 13:23:49 -0700
+        d=1e100.net; s=20230601; t=1742589004; x=1743193804;
+        h=cc:to:content-transfer-encoding:mime-version:message-id:date
+         :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=D0lB23+k9X4O/rcO+siwkQMd1AepAsIgIgh1h0N3Brs=;
+        b=oGd0/bwiCZIOew8bGRYzpitEciYhLSiqEfsvGOSxgiT78SBwolXSkzurkH/x+uS46l
+         wK49TxQRMe5GtbdmYJcR9F/VYkcC2QfmcKxmXD+hGwoeKcYQU3K7DpQLWMNpon+2kAr4
+         iAAYy66vikS3hpaPbTO0Ss880fOsZc4YOEvUaoQdEcSgY4V090qboHCtLxC+blC/H/F5
+         V0XtderJYUXJkJiq0ASyMA5aD44hQJRLmD0mL28WxTGdvFmKds0Of8yaiZuSmca2aPEX
+         14B4DUtBDjvaO/lVQx0SmjW27DB/t6ms0S/YDbRFuA+zH2+5PrF59kZ+oHJrQ52Rimup
+         jhIA==
+X-Forwarded-Encrypted: i=1; AJvYcCVXjkxvgGO9T10oY3sEjRUtd6xKXJEWyD1/BBEIzE06EU+qpOrKTCrRbzlMHCfOF1UpZPo6QZFK/m8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyXswet8Szbhf0PiuJZjtFiilpfgnBNR4OBJfhMZ7XP8Du2r6L3
+	U0MjEyu+6RQpFRaZRdkUpeTeriCAYbZO1DW6ZI27kc3cc2JgLDkVZj3r+dclyts=
+X-Gm-Gg: ASbGnctx3v6OEpdxmZWlS/Vx0GE4o3vC31Hi6FjvZcg52J2hdGH2pkb/gh256nrbGky
+	44RTx0+E1bks2RyaKPa7H5Sva6ZqqmrhuIaVnhBTgk18gEfdVFS7TAyNX9AQAHKy0gYAZohBnnD
+	PxacMfMLG/F4BwoN7mBCafuUK6GQQfkLsNVE5qUi5u+ukkHqpFjGuIMLTvPOC7hK5eYHp5mbsXb
+	+TNMeKDRSBhJY43FllMsew/gHNHJDWgnRdKoMl/GuieMG6KNkv87yNmtPC5mfT/Es2tfWivtIRc
+	ca+VN61qWLzK4Rys/NL+mf5FgTrGpGhC8Z/a0CYkk7lE1uBoc43GCPj19O6fV9l8Lea2qLYDXKC
+	6T7UkvjF4wCxYBg==
+X-Google-Smtp-Source: AGHT+IGjVzjsQhl5rDbYi4VVK/fRtIMiZvFWgaXPd9JuriqnNE+STbPvOWFVdMkEYe4bCMacXf5xgg==
+X-Received: by 2002:a05:600c:35ca:b0:43c:fae1:5151 with SMTP id 5b1f17b1804b1-43d50a4adabmr38674315e9.25.1742589004317;
+        Fri, 21 Mar 2025 13:30:04 -0700 (PDT)
+Received: from [127.0.1.1] (host-87-8-62-49.retail.telecomitalia.it. [87.8.62.49])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3997f9955c0sm3258380f8f.3.2025.03.21.13.30.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 21 Mar 2025 13:30:03 -0700 (PDT)
+From: Angelo Dureghello <adureghello@baylibre.com>
+X-Google-Original-From: Angelo Dureghello <adureghello@baylibre.org>
+Subject: [PATCH 0/4] iio: ad3552r-hs: add support for internal ramp
+ generator
+Date: Fri, 21 Mar 2025 21:28:47 +0100
+Message-Id: <20250321-wip-bl-ad3552r-fixes-v1-0-3c1aa249d163@baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] dt-bindings: hwmon: pmbus: add lt3074
-To: "Encarnacion, Cedric justine" <Cedricjustine.Encarnacion@analog.com>,
- Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Jean Delvare <jdelvare@suse.com>,
- Jonathan Corbet <corbet@lwn.net>,
- Delphine CC Chiu <Delphine_CC_Chiu@wiwynn.com>,
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-hwmon@vger.kernel.org" <linux-hwmon@vger.kernel.org>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- "linux-i2c@vger.kernel.org" <linux-i2c@vger.kernel.org>
-References: <20250225-upstream-lt3074-v2-0-18ad10ba542e@analog.com>
- <20250225-upstream-lt3074-v2-1-18ad10ba542e@analog.com>
- <20250226-gentle-spicy-jacamar-2dd36a@krzk-bin>
- <20250226145931.GA2314060-robh@kernel.org>
- <3f7b031d-7b83-4a00-996d-aabb26278b67@roeck-us.net>
- <20250227-sceptical-phenomenal-wolverine-56e3cf@krzk-bin>
- <dbd9cc84-a0b6-4323-b343-6e80aaaf2d14@roeck-us.net>
- <PH0PR03MB69385BEFFD04ECF850311E988EDE2@PH0PR03MB6938.namprd03.prod.outlook.com>
- <15ce883f-444c-4b27-a48d-b17e3df5895d@roeck-us.net>
- <PH0PR03MB693831397416C4247F8BA58D8ED92@PH0PR03MB6938.namprd03.prod.outlook.com>
- <PH0PR03MB6938087B8F2EDB9899DD0F1D8EDB2@PH0PR03MB6938.namprd03.prod.outlook.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
- RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
- nyFiKxUehbNF3r9qlJgPqONwX5vJy4/GvDHdddSCxV41P/ejsZ8PykxyJs98UWhF54tGRWFl
- 7i1xvaDB9lN5WTLRKSO7wICuLiSz5WZHXMkyF4d+/O5ll7yz/o/JxK5vO/sduYDIlFTvBZDh
- gzaEtNf5tQjsjG4io8E0Yq0ViobLkS2RTNZT8ICq/Jmvl0SpbHRvYwa2DhNsK0YjHFQBB0FX
- IdhdUEzNefcNcYvqigJpdICoP2e4yJSyflHFO4dr0OrdnGLe1Zi/8Xo/2+M1dSSEt196rXaC
- kwu2KgIgmkRBb3cp2vIBBIIowU8W3qC1+w+RdMUrZxKGWJ3juwcgveJlzMpMZNyM1jobSXZ0
- VHGMNJ3MwXlrEFPXaYJgibcg6brM6wGfX/LBvc/haWw4yO24lT5eitm4UBdIy9pKkKmHHh7s
- jfZJkB5fWKVdoCv/omy6UyH6ykLOPFugl+hVL2Prf8xrXuZe1CMS7ID9Lc8FaL1ROIN/W8Vk
- BIsJMaWOhks//7d92Uf3EArDlDShwR2+D+AMon8NULuLBHiEUQARAQABzTJHdWVudGVyIFJv
- ZWNrIChMaW51eCBhY2NvdW50KSA8bGludXhAcm9lY2stdXMubmV0PsLBgQQTAQIAKwIbAwYL
- CQgHAwIGFQgCCQoLBBYCAwECHgECF4ACGQEFAlVcphcFCRmg06EACgkQyx8mb86fmYFg0RAA
- nzXJzuPkLJaOmSIzPAqqnutACchT/meCOgMEpS5oLf6xn5ySZkl23OxuhpMZTVX+49c9pvBx
- hpvl5bCWFu5qC1jC2eWRYU+aZZE4sxMaAGeWenQJsiG9lP8wkfCJP3ockNu0ZXXAXwIbY1O1
- c+l11zQkZw89zNgWgKobKzrDMBFOYtAh0pAInZ9TSn7oA4Ctejouo5wUugmk8MrDtUVXmEA9
- 7f9fgKYSwl/H7dfKKsS1bDOpyJlqhEAH94BHJdK/b1tzwJCFAXFhMlmlbYEk8kWjcxQgDWMu
- GAthQzSuAyhqyZwFcOlMCNbAcTSQawSo3B9yM9mHJne5RrAbVz4TWLnEaX8gA5xK3uCNCeyI
- sqYuzA4OzcMwnnTASvzsGZoYHTFP3DQwf2nzxD6yBGCfwNGIYfS0i8YN8XcBgEcDFMWpOQhT
- Pu3HeztMnF3HXrc0t7e5rDW9zCh3k2PA6D2NV4fews9KDFhLlTfCVzf0PS1dRVVWM+4jVl6l
- HRIAgWp+2/f8dx5vPc4Ycp4IsZN0l1h9uT7qm1KTwz+sSl1zOqKD/BpfGNZfLRRxrXthvvY8
- BltcuZ4+PGFTcRkMytUbMDFMF9Cjd2W9dXD35PEtvj8wnEyzIos8bbgtLrGTv/SYhmPpahJA
- l8hPhYvmAvpOmusUUyB30StsHIU2LLccUPPOwU0ETofVZwEQALlLbQeBDTDbwQYrj0gbx3bq
- 7kpKABxN2MqeuqGr02DpS9883d/t7ontxasXoEz2GTioevvRmllJlPQERVxM8gQoNg22twF7
- pB/zsrIjxkE9heE4wYfN1AyzT+AxgYN6f8hVQ7Nrc9XgZZe+8IkuW/Nf64KzNJXnSH4u6nJM
- J2+Dt274YoFcXR1nG76Q259mKwzbCukKbd6piL+VsT/qBrLhZe9Ivbjq5WMdkQKnP7gYKCAi
- pNVJC4enWfivZsYupMd9qn7Uv/oCZDYoBTdMSBUblaLMwlcjnPpOYK5rfHvC4opxl+P/Vzyz
- 6WC2TLkPtKvYvXmdsI6rnEI4Uucg0Au/Ulg7aqqKhzGPIbVaL+U0Wk82nz6hz+WP2ggTrY1w
- ZlPlRt8WM9w6WfLf2j+PuGklj37m+KvaOEfLsF1v464dSpy1tQVHhhp8LFTxh/6RWkRIR2uF
- I4v3Xu/k5D0LhaZHpQ4C+xKsQxpTGuYh2tnRaRL14YMW1dlI3HfeB2gj7Yc8XdHh9vkpPyuT
- nY/ZsFbnvBtiw7GchKKri2gDhRb2QNNDyBnQn5mRFw7CyuFclAksOdV/sdpQnYlYcRQWOUGY
- HhQ5eqTRZjm9z+qQe/T0HQpmiPTqQcIaG/edgKVTUjITfA7AJMKLQHgp04Vylb+G6jocnQQX
- JqvvP09whbqrABEBAAHCwWUEGAECAA8CGwwFAlVcpi8FCRmg08MACgkQyx8mb86fmYHNRQ/+
- J0OZsBYP4leJvQF8lx9zif+v4ZY/6C9tTcUv/KNAE5leyrD4IKbnV4PnbrVhjq861it/zRQW
- cFpWQszZyWRwNPWUUz7ejmm9lAwPbr8xWT4qMSA43VKQ7ZCeTQJ4TC8kjqtcbw41SjkjrcTG
- wF52zFO4bOWyovVAPncvV9eGA/vtnd3xEZXQiSt91kBSqK28yjxAqK/c3G6i7IX2rg6pzgqh
- hiH3/1qM2M/LSuqAv0Rwrt/k+pZXE+B4Ud42hwmMr0TfhNxG+X7YKvjKC+SjPjqp0CaztQ0H
- nsDLSLElVROxCd9m8CAUuHplgmR3seYCOrT4jriMFBtKNPtj2EE4DNV4s7k0Zy+6iRQ8G8ng
- QjsSqYJx8iAR8JRB7Gm2rQOMv8lSRdjva++GT0VLXtHULdlzg8VjDnFZ3lfz5PWEOeIMk7Rj
- trjv82EZtrhLuLjHRCaG50OOm0hwPSk1J64R8O3HjSLdertmw7eyAYOo4RuWJguYMg5DRnBk
- WkRwrSuCn7UG+qVWZeKEsFKFOkynOs3pVbcbq1pxbhk3TRWCGRU5JolI4ohy/7JV1TVbjiDI
- HP/aVnm6NC8of26P40Pg8EdAhajZnHHjA7FrJXsy3cyIGqvg9os4rNkUWmrCfLLsZDHD8FnU
- mDW4+i+XlNFUPUYMrIKi9joBhu18ssf5i5Q=
-In-Reply-To: <PH0PR03MB6938087B8F2EDB9899DD0F1D8EDB2@PH0PR03MB6938.namprd03.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAP/L3WcC/x3LSQqAMAxA0atI1gY6Ol1FXFQbNSAqLahQvLvF5
+ ePzE0QKTBG6IkGgiyMfe4YsC5hWty+E7LNBCWWFVhJvPnHc0HltrQo480MRjdNN1RozyVpAXs9
+ Af8hnP7zvB2PT81VmAAAA
+X-Change-ID: 20250321-wip-bl-ad3552r-fixes-4a386944c170
+To: =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ Jonathan Cameron <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ Olivier Moysan <olivier.moysan@foss.st.com>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>
+Cc: linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Angelo Dureghello <adureghello@baylibre.com>
+X-Mailer: b4 0.14.2
 
-On 3/21/25 09:53, Encarnacion, Cedric justine wrote:
->> -----Original Message-----
->> From: Encarnacion, Cedric justine
->> Sent: Wednesday, March 19, 2025 12:10 PM
->> To: Guenter Roeck <linux@roeck-us.net>; Krzysztof Kozlowski <krzk@kernel.org>
->> Cc: Rob Herring <robh@kernel.org>; Krzysztof Kozlowski <krzk+dt@kernel.org>;
->> Conor Dooley <conor+dt@kernel.org>; Jean Delvare <jdelvare@suse.com>;
->> Jonathan Corbet <corbet@lwn.net>; Delphine CC Chiu
->> <Delphine_CC_Chiu@wiwynn.com>; devicetree@vger.kernel.org; linux-
->> kernel@vger.kernel.org; linux-hwmon@vger.kernel.org; linux-
->> doc@vger.kernel.org; linux-i2c@vger.kernel.org
->> Subject: RE: [PATCH v2 1/2] dt-bindings: hwmon: pmbus: add lt3074
->>
->>> -----Original Message-----
->>> From: Guenter Roeck <groeck7@gmail.com> On Behalf Of Guenter Roeck
->>> Sent: Tuesday, March 18, 2025 11:17 PM
->>> To: Encarnacion, Cedric justine
->>> <Cedricjustine.Encarnacion@analog.com>;
->>> Krzysztof Kozlowski <krzk@kernel.org>
->>> Cc: Rob Herring <robh@kernel.org>; Krzysztof Kozlowski
->>> <krzk+dt@kernel.org>; Conor Dooley <conor+dt@kernel.org>; Jean Delvare
->>> <jdelvare@suse.com>; Jonathan Corbet <corbet@lwn.net>; Delphine CC
->>> Chiu <Delphine_CC_Chiu@wiwynn.com>; devicetree@vger.kernel.org; linux-
->>> kernel@vger.kernel.org; linux-hwmon@vger.kernel.org; linux-
->>> doc@vger.kernel.org; linux-i2c@vger.kernel.org
->>> Subject: Re: [PATCH v2 1/2] dt-bindings: hwmon: pmbus: add lt3074
->>>
->>> [External]
->>>
->>> On 3/18/25 03:03, Encarnacion, Cedric justine wrote:
->>>>> -----Original Message-----
->>>>> From: Guenter Roeck <groeck7@gmail.com> On Behalf Of Guenter Roeck
->>>>> Sent: Friday, February 28, 2025 12:33 AM
->>>>> To: Krzysztof Kozlowski <krzk@kernel.org>
->>>>> Cc: Rob Herring <robh@kernel.org>; Encarnacion, Cedric justine
->>>>> <Cedricjustine.Encarnacion@analog.com>; Krzysztof Kozlowski
->>>>> <krzk+dt@kernel.org>; Conor Dooley <conor+dt@kernel.org>; Jean
->>>>> Delvare <jdelvare@suse.com>; Jonathan Corbet <corbet@lwn.net>;
->>>>> Delphine CC Chiu <Delphine_CC_Chiu@wiwynn.com>;
->>>>> devicetree@vger.kernel.org; linux- kernel@vger.kernel.org;
->>>>> linux-hwmon@vger.kernel.org; linux- doc@vger.kernel.org;
->>>>> linux-i2c@vger.kernel.org
->>>>> Subject: Re: [PATCH v2 1/2] dt-bindings: hwmon: pmbus: add lt3074
->>>>>
->>>>> diff --git a/drivers/hwmon/pmbus/pmbus.h
->>>>> b/drivers/hwmon/pmbus/pmbus.h index ddb19c9726d6..289767e5d599
->>>>> 100644
->>>>> --- a/drivers/hwmon/pmbus/pmbus.h
->>>>> +++ b/drivers/hwmon/pmbus/pmbus.h
->>>>> @@ -512,7 +512,6 @@ int pmbus_regulator_init_cb(struct
->>>>> regulator_dev
->>> *rdev,
->>>>>    	{							\
->>>>>    		.name = (_name),				\
->>>>>    		.of_match = of_match_ptr(_name),		\
->>>>> -		.regulators_node = of_match_ptr("regulators"),	\
->>>>>    		.ops = &pmbus_regulator_ops,			\
->>>>>    		.type = REGULATOR_VOLTAGE,			\
->>>>>    		.owner = THIS_MODULE,				\
->>>>>
->>>>> Maybe someone can check if that works.
->>>>>
->>>>> Thanks,
->>>>> Guenter
->>>>
->>>> I'd like to follow up on this one. As of this writing, my
->>>> understanding is that the dt-binding should not expect regulators
->>>> subnodes for simple devices like this. There is already a similar
->>>> binding as mentioned in this thread particularly
->>>> "dt-bindings/regulator/infineon,ir38060". I think a binding without
->>>> the subnodes should still work with or without the change above.
->>>
->>> Interesting. I am not sure if it really works, though. I looked into
->>> the regulator code, and I don't immediately see the code path it would
->>> take.
->>>
->>>> With this, I'd like to know what the specific next steps are to
->>>> continue this patch series.
->>>
->>> Can you try on hardware using a devicetree file which doesn't have the
->>> regulators node ? If the current code works, just submit an updated
->>> (simplified) .yaml file and we should be good. If not, I have an
->>> untested patch series introducing another macro which doesn't set the
->>> regulators node.
->>
->> Okay. I'll test this and get back to you.
-> 
-> The "simplified" dt file (without the regulators node) does not work with
-> the current regulator_desc macro. I have also tried simply removing the
-> regulators_node setting from the regulator_desc macro, and it does not
-> work too. of_match looks for a certain regulator name in dt, and it seems
+Add support to enable the HDL IP core internal ramp generator,
+actually managed by the adi-axi-dac backend. 
 
-I just noticed the above. A NULL regulators_node should actually work. From
-drivers/regulator/of_regulator.c:regulator_of_get_init_node():
+It works this way:
 
-         if (desc->regulators_node) {
-                 search = of_get_child_by_name(dev->of_node,
-                                               desc->regulators_node);
-         } else {
-                 search = of_node_get(dev->of_node);
+/sys/bus/iio/devices/iio:device0# echo 1 > buffer0/out_voltage0_en 
+/sys/bus/iio/devices/iio:device0# echo 1 > buffer0/out_voltage1_en                                           
+/sys/bus/iio/devices/iio:device0# echo 1 > buffer0/enable 
 
-                 if (!strcmp(desc->of_match, search->name))
-                         return search;
-         }
+Activating ramp generator:
 
-So, yes, there has to be a name match, but that is on the node describing
-the chip. That is how all single-regulator chips are supposed to work.
+/sys/kernel/debug/iio/iio:device0# echo -n backend-ramp-generator > data_source
 
-Guenter
+Deactivating:
+
+/sys/kernel/debug/iio/iio:device0# echo -n iio-buffer > data_source
+
+Signed-off-by: Angelo Dureghello <adureghello@baylibre.com>
+---
+Angelo Dureghello (4):
+      docs: iio: add documentation for ad3552r driver
+      iio: backend: add support for data source get
+      iio: dac: adi-axi-dac: add data source get
+      iio: dac: ad3552r-hs: add support for internal ramp
+
+ Documentation/iio/ad3552r.rst      |  65 +++++++++++++++++++++++
+ Documentation/iio/index.rst        |   1 +
+ MAINTAINERS                        |   1 +
+ drivers/iio/dac/ad3552r-hs.c       | 106 ++++++++++++++++++++++++++++++++++---
+ drivers/iio/dac/adi-axi-dac.c      |  27 ++++++++++
+ drivers/iio/industrialio-backend.c |  28 ++++++++++
+ include/linux/iio/backend.h        |   5 ++
+ 7 files changed, 227 insertions(+), 6 deletions(-)
+---
+base-commit: eb870a5af7db1e5ca59330875125230b28e630f9
+change-id: 20250321-wip-bl-ad3552r-fixes-4a386944c170
+
+Best regards,
+-- 
+Angelo Dureghello <adureghello@baylibre.com>
 
 
