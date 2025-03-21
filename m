@@ -1,50 +1,82 @@
-Return-Path: <linux-doc+bounces-41533-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41535-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ECA3A6BFBA
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 17:22:21 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 703B9A6C070
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 17:48:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DABDE3A81BD
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 16:19:45 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B355D481013
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Mar 2025 16:46:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 70A321D86F2;
-	Fri, 21 Mar 2025 16:19:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 622AE22D4D4;
+	Fri, 21 Mar 2025 16:46:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Liw89G9J"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="GKkM3tBV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F98414601C;
-	Fri, 21 Mar 2025 16:19:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D71F813635C;
+	Fri, 21 Mar 2025 16:45:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742573996; cv=none; b=XCS1h5ADTBo870vlHoKdO3GQ/jrQTSU+eyN7nznyRynRiC4WBvH9fKmmwLuhcPgKiU2BKip5OFKba21eFrlkeSCCjK11NCbB7WPhke9LhaxfzJ3dEemMKnRjS/gizmkYar07RB9qiHXyb+VPp4Ji+J+8xPFRSLYe9idpH81RTgY=
+	t=1742575560; cv=none; b=CQiYNNYfYoGUjXfB/ifdTkxchuKu/cEvw696RXpS3YXf0O7Hr082b6FIMN2AMItCyrSpl2NqpiDtStJmmmh1hfAc38MToiDrKII1j0szVjOKhBR7CIEV1M2/Q/07oTJGeRLjjhR1vZD9E0eGHXWtoPerjKh4zHHFplYWb48vpuE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742573996; c=relaxed/simple;
-	bh=XI2f7SgbQyb+AjtyGj/tTNrFlGkFGsaPs29m6a6WOvg=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=h7iFtDZH8RlD/HZR2ICu6BU/TL6LKEoXeg+QQnG3ppQxKSwZVby7vBkHHgb/yK9Lp5PiXCczIJhbfi5WjSLRVR3taMYFDu1ygXu4dLdYaQwg0I+JcqikvHuny4qQOPvqF+1O495NfNP6/wt3+q1P7L0Q70owyatT1I0FtPWCOK4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Liw89G9J; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3447C4CEE3;
-	Fri, 21 Mar 2025 16:19:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1742573995;
-	bh=XI2f7SgbQyb+AjtyGj/tTNrFlGkFGsaPs29m6a6WOvg=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=Liw89G9JebAAheTFGPYolng/r/+euxjKQK+sJFI4TrqTrKYLQRHVbvcRQ/cBk+UVz
-	 5nhfYLQHDxA+gubhPIX/1xxcAZ7mt/hNfftQON3JbzzwBeE3g8oGNTS+bKrhNsh8QI
-	 ZHbtZoZ+aMGmkJRNMypGw1p3Gf92SK3ZSEmv4S65j6IY9IQtQTpWa4ZJ/OFUsXhmXH
-	 DFxXrfg96Zi7aDVu/DBm1R3ssg6ut6k52DxOERAQWd2qPMLTXBmAsJQr9eSykde5hY
-	 bp2Rev6o3RCi4m78rkwZAMcMxqxJDPV7/raGRMQfAYLU75KhLqFmmnYpqmfaysku+2
-	 djJW8iK6RmiWQ==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id EBF0A3806659;
-	Fri, 21 Mar 2025 16:20:32 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1742575560; c=relaxed/simple;
+	bh=KCrW6VdjTBGcG5xVhzV8cvLuTrSb7ci7ktDtNKfOARw=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=DVNUBfhdO9UfMcsgbO0OI9SSFkZkMvRKgmG5agZrI9oDh/oXeNTyPodYbL2dxGzpRUxjDjMEyRdaOXrV1bjPffw++R7U7m3nGuI6E/rIrOSaJ8BVMVU6R05PikuEQUu+dfu6s+rf2RO/Bb51j7RtbPR3w1f1PVRz5MvN/YNb/48=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=GKkM3tBV; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from narnia.corp.microsoft.com (unknown [167.220.2.28])
+	by linux.microsoft.com (Postfix) with ESMTPSA id A89482025381;
+	Fri, 21 Mar 2025 09:45:48 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A89482025381
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1742575558;
+	bh=UursI/xvhQ5hRWoBdi4h81h10JoUmiA8ppPrOg9d7nE=;
+	h=From:To:Subject:Date:From;
+	b=GKkM3tBVsycOdf6jHb5dpcy8KLpft53f4wjA2IPZJzp33BrUowjyMuBeab4vDu0ei
+	 82qdEixW+e5Amvm2gEbC6NhFou3VSE3zIY1L/Lzr7CL3FGMXOjnV+Bk1Pg4Hmm8AH6
+	 gI2yt5r0LevO0Sq1ppiQz8TgrD/HYS/E2VnbSVBc=
+From: Blaise Boscaccy <bboscaccy@linux.microsoft.com>
+To: Jonathan Corbet <corbet@lwn.net>,
+	David Howells <dhowells@redhat.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Paul Moore <paul@paul-moore.com>,
+	James Morris <jmorris@namei.org>,
+	"Serge E. Hallyn" <serge@hallyn.com>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nicolas Schier <nicolas@fjasle.eu>,
+	Shuah Khan <shuah@kernel.org>,
+	=?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
+	=?UTF-8?q?G=C3=BCnther=20Noack?= <gnoack@google.com>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Blaise Boscaccy <bboscaccy@linux.microsoft.com>,
+	Jarkko Sakkinen <jarkko@kernel.org>,
+	Jan Stancek <jstancek@redhat.com>,
+	Neal Gompa <neal@gompa.dev>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	keyrings@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	linux-security-module@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	bpf@vger.kernel.org,
+	llvm@lists.linux.dev,
+	nkapron@google.com,
+	teknoraver@meta.com,
+	roberto.sassu@huawei.com,
+	xiyou.wangcong@gmail.com
+Subject: [RFC PATCH security-next 0/4] Introducing Hornet LSM
+Date: Fri, 21 Mar 2025 09:45:02 -0700
+Message-ID: <20250321164537.16719-1-bboscaccy@linux.microsoft.com>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -52,45 +84,59 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH] net: remove sb1000 cable modem driver
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <174257403177.2538209.5678698281791174462.git-patchwork-notify@kernel.org>
-Date: Fri, 21 Mar 2025 16:20:31 +0000
-References: <20250312085236.2531870-1-arnd@kernel.org>
-In-Reply-To: <20250312085236.2531870-1-arnd@kernel.org>
-To: Arnd Bergmann <arnd@kernel.org>
-Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
- pabeni@redhat.com, andrew+netdev@lunn.ch, arnd@arndb.de, horms@kernel.org,
- corbet@lwn.net, christophe.leroy@csgroup.eu, rafael@kernel.org,
- netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-acpi@vger.kernel.org
 
-Hello:
+This patch series introduces the Hornet LSM.
 
-This patch was applied to netdev/net-next.git (main)
-by Paolo Abeni <pabeni@redhat.com>:
+Hornet takes a simple approach to light-skeleton-based eBPF signature
+verification. Signature data can be easily generated for the binary
+data that is generated via bpftool gen -L. This signature can be
+appended to a skeleton executable via scripts/sign-ebpf. Hornet checks
+the signature against a binary buffer containing the lskel
+instructions that the loader maps use. Maps are frozen to prevent
+TOCTOU bugs where a sufficiently privileged user could rewrite map
+data between the calls to BPF_PROG_LOAD and
+BPF_PROG_RUN. Additionally, both sparse-array-based and
+fd_array_cnt-based map fd arrays are supported for signature
+verification.
 
-On Wed, 12 Mar 2025 09:51:19 +0100 you wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
-> 
-> This one is hilariously outdated, it provided a faster downlink over
-> TV cable for users of analog modems in the 1990s, through an ISA card.
-> 
-> The web page for the userspace tools has been broken for 25 years, and
-> the driver has only ever seen mechanical updates.
-> 
-> [...]
 
-Here is the summary with links:
-  - net: remove sb1000 cable modem driver
-    https://git.kernel.org/netdev/net-next/c/3fed9fda150d
+Blaise Boscaccy (4):
+  security: Hornet LSM
+  hornet: Introduce sign-ebpf
+  hornet: Add an example lskel data extactor script
+  selftests/hornet: Add a selftest for the hornet LSM
 
-You are awesome, thank you!
+ Documentation/admin-guide/LSM/Hornet.rst     |  51 +++
+ crypto/asymmetric_keys/pkcs7_verify.c        |  10 +
+ include/linux/kernel_read_file.h             |   1 +
+ include/linux/verification.h                 |   1 +
+ include/uapi/linux/lsm.h                     |   1 +
+ scripts/Makefile                             |   1 +
+ scripts/hornet/Makefile                      |   5 +
+ scripts/hornet/extract-skel.sh               |  29 ++
+ scripts/hornet/sign-ebpf.c                   | 420 +++++++++++++++++++
+ security/Kconfig                             |   3 +-
+ security/Makefile                            |   1 +
+ security/hornet/Kconfig                      |  11 +
+ security/hornet/Makefile                     |   4 +
+ security/hornet/hornet_lsm.c                 | 239 +++++++++++
+ tools/testing/selftests/Makefile             |   1 +
+ tools/testing/selftests/hornet/Makefile      |  51 +++
+ tools/testing/selftests/hornet/loader.c      |  21 +
+ tools/testing/selftests/hornet/trivial.bpf.c |  33 ++
+ 18 files changed, 882 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/admin-guide/LSM/Hornet.rst
+ create mode 100644 scripts/hornet/Makefile
+ create mode 100755 scripts/hornet/extract-skel.sh
+ create mode 100644 scripts/hornet/sign-ebpf.c
+ create mode 100644 security/hornet/Kconfig
+ create mode 100644 security/hornet/Makefile
+ create mode 100644 security/hornet/hornet_lsm.c
+ create mode 100644 tools/testing/selftests/hornet/Makefile
+ create mode 100644 tools/testing/selftests/hornet/loader.c
+ create mode 100644 tools/testing/selftests/hornet/trivial.bpf.c
+
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+2.48.1
 
 
