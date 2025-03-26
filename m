@@ -1,159 +1,165 @@
-Return-Path: <linux-doc+bounces-41729-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41737-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C33EA71649
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Mar 2025 13:10:30 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C4BFA71778
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Mar 2025 14:27:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8EAFD7A3235
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Mar 2025 12:09:24 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id D5CFD188ABA0
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Mar 2025 13:25:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D13981A2632;
-	Wed, 26 Mar 2025 12:10:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 744DD1E5B6C;
+	Wed, 26 Mar 2025 13:25:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="X/zIktFD"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="lKiFVRlT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from mx0b-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EE1D1A5BA2
-	for <linux-doc@vger.kernel.org>; Wed, 26 Mar 2025 12:10:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8E5919E7E2;
+	Wed, 26 Mar 2025 13:25:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742991023; cv=none; b=tFVe0pVQcyruFn9hKS1TfANE9HZxY1CsYI2ohU3+S2h4hUinDggN5L3ZUjsILEqJZ9iHLuRIrPtWAbOf0edOF3xREoGZJeHjm3JgwbBMcxVDUaZ5EshPvFHJOnJ1xg6ovNyCyJBCyrhpGh+YiGPciC4E9KdQLancO9FkOtb2i6k=
+	t=1742995507; cv=none; b=YnEUjPwMVpRHk3uGx2CP6LXB9tRRJrWcijblQWC4RBXfKklHApnjvk6/RXkPgSNWi5ULnpglYwg+mC6BhQC39ZVhagBZQeENF9dG9OyIz7PobzggyUXZKql5Pf3iVU66bQQkSyq7kAP1zAhc6wJG9dEFqDjHVC5AZru73sC40fg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742991023; c=relaxed/simple;
-	bh=Rn7DZzluTD2+MZZoYt3D0u5sryYqeFHqvQWAx2OGmqw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Nyc+QzLnuwxyAbHbl6iWoIWG37FLpSWypC01IFy5OQ13kXSMoQgr0zzsVa+VVx9B8ey9sCnPIReoWdRPWJdSc8p9E4+BRdkQPU6zyDowCcysuMLsaU/+64oA2s8f5FZezaLNPBkuvsPl0+MU54zmTmMzBlqr/MvYYPXsDm9aAnI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=X/zIktFD; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1742991021;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nDjBICGKa43kYHEOCFvDUYcy1IhXoeMUQwDGcLiaSWE=;
-	b=X/zIktFD7ByyPXWq0QjDYagMqQE0QZQFUiTdpGhMopYdChvGxcqBR3xCfaie+HNQTFmccT
-	41VGDHPPI6MqaKaeGwOOLEH3rNHBdQmNN7qRACkUycFYsjEiaUHrymrYQCbJW9Sv+3crrS
-	+Ob9b46J77YTNLsHBGd4UzdgEUwEA84=
-Received: from mail-il1-f199.google.com (mail-il1-f199.google.com
- [209.85.166.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-369-p4UL1mNGOFeIh9nHW-pQeQ-1; Wed, 26 Mar 2025 08:09:39 -0400
-X-MC-Unique: p4UL1mNGOFeIh9nHW-pQeQ-1
-X-Mimecast-MFC-AGG-ID: p4UL1mNGOFeIh9nHW-pQeQ_1742990979
-Received: by mail-il1-f199.google.com with SMTP id e9e14a558f8ab-3d438be189bso66749515ab.3
-        for <linux-doc@vger.kernel.org>; Wed, 26 Mar 2025 05:09:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1742990979; x=1743595779;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nDjBICGKa43kYHEOCFvDUYcy1IhXoeMUQwDGcLiaSWE=;
-        b=dwp+QehxHgzpZgV+E/JJJbgBVMmotsKtLzR/M44f/bRtDqaaOC81+rCb8WuqbyIevi
-         UzKneOC+U68GydfvoZ6xOP/ztmi6VRuWiPKzg9Y33HpRXcdUTOsS745isXqDNQ1DgnTx
-         53LKlYlfrbr7mRYLsLSmPnQArXh4OeipZlze8mQ0dP3CavnVVdLDE0xAF6zqaqPQYiob
-         +0aAMNNFanWCV8PjBKdQ4FQksPPR+XeVvcLBh7lRkIHTJuYK5YfppsQK4+FLuauFgNH/
-         +H0Xe/vv/vhmsKd5Q56iHwGij+QlNWXqzO3rFXNe3yayUL+r9ywqTGDP+zEcDl2DT6k9
-         ibBw==
-X-Forwarded-Encrypted: i=1; AJvYcCWE1zE81swPOMK9xtDyeBkc3riRlB7eMDix/Wl467NqDkcJtcYoArd39lcp27nP1hsybYiF/8b8zVc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyzA3YlmZfG6VlHTA+9lVFEBeq8sKALcuapHOQByRWdSvVGeDmv
-	A6EPSAU8j5aX3yCQeiDvjzrhcEan8uhkGE5wxbwJWAHphMx5qj3hVONWJFbiPIH5/cDsTa2A0NY
-	vQvmxkFiZY480CMnP4OFZF87ddeWuEnYvacD2NHrvPPrIyIoN5k63lUKy+j9MqNgLCvBhfXRFF4
-	pOfHyOVl4UR6cRfXn7HwIGNVWToSOU4ONr
-X-Gm-Gg: ASbGncuIna9wgpF9orfFEg0ffaD8QbzMittFPZQyOaUKRmq+sZObx8CcX3AhByBpfXX
-	sz/JBW7BOdM44ga0lnCNYq3FtxPLaxG9SmptTVmK8yNyADD7InETXAnciss1DOm2ECG0grWDJ6A
-	==
-X-Received: by 2002:a05:6e02:3a0c:b0:3d4:6f37:372c with SMTP id e9e14a558f8ab-3d5960e2419mr225836375ab.7.1742990978711;
-        Wed, 26 Mar 2025 05:09:38 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFOuyfQGVOhYyFSi3hsb9kc2zJRzczpD7XPzwNdnwVuHyYQPBafKpH087OtVwDsIyzVWltmG166ADE4aJfipJU=
-X-Received: by 2002:a05:6e02:3a0c:b0:3d4:6f37:372c with SMTP id
- e9e14a558f8ab-3d5960e2419mr225831915ab.7.1742990973998; Wed, 26 Mar 2025
- 05:09:33 -0700 (PDT)
+	s=arc-20240116; t=1742995507; c=relaxed/simple;
+	bh=Nl+10FAzfsORuUu1DCuzZNgcTfzPXOUYYQaR/dcvcHw=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=qvsTO0yqhlLSua52+JZrYSAcHQPEk+5vGy7SA9damo8QujJFbMjE7qUE0g7omeiZkRBpKL5nSjc/KdOwa7Ypj/lQnYhwWG57yuoDo8Vj0f3I726fyv+nb7zZNz0AYCpnbyoHa+USHmMmye3t02nVnrtavSKfp0VdJ2klAwrCGAQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=lKiFVRlT; arc=none smtp.client-ip=148.163.135.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
+Received: from pps.filterd (m0375855.ppops.net [127.0.0.1])
+	by mx0b-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52Q9Vo3V014128;
+	Wed, 26 Mar 2025 09:24:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=DKIM; bh=gWv2MyO/NWHLdJ26ZZhkCq82dNl
+	g2t2fpQcAb3y2jdI=; b=lKiFVRlTZ7ylDmYIBQ9QQnAonywvaMpibkrNBgA7BjX
+	iIMbVHKh1UF/xj0cBlxM6Rg7bbqfn4dEkjzSetpedxtmd72Db14njMGYOZDSZ+kG
+	ajV1WfieJgU/LP0hOnrYhFsMtRlx4tbZ5N2h+IJTKN+ZoBWQ9S9wu/AsRymS2zz7
+	9G9Iyqeh+7zDsiRApURpxIqQEe8ibn9nZmdMtfqsk4HlXKxqkV7ZuPVCrm0WCFtK
+	j0LZWYmW3SGFbNaxKK97WE12Vk0xL4oa1+O4kPdpDBwF5uu0Xge1IzyOpSb20Mkg
+	8NDBZxcRinO/YRhkXbALQZioaVQYkPBns1Pby/A0idA==
+Received: from nwd2mta3.analog.com ([137.71.173.56])
+	by mx0b-00128a01.pphosted.com (PPS) with ESMTPS id 45mf1h0y35-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 26 Mar 2025 09:24:35 -0400 (EDT)
+Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
+	by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 52QDOY0n042990
+	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Wed, 26 Mar 2025 09:24:34 -0400
+Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
+ ASHBMBX8.ad.analog.com (10.64.17.5) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Wed, 26 Mar 2025 09:24:34 -0400
+Received: from ASHBMBX9.ad.analog.com (10.64.17.10) by
+ ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Wed, 26 Mar 2025 09:24:34 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx9.ad.analog.com
+ (10.64.17.10) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Wed, 26 Mar 2025 09:24:34 -0400
+Received: from work.ad.analog.com (HYB-hERzalRezfV.ad.analog.com [10.65.205.9])
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 52QDOJbU007524;
+	Wed, 26 Mar 2025 09:24:21 -0400
+From: Marcelo Schmitt <marcelo.schmitt@analog.com>
+To: <linux-iio@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+CC: <jic23@kernel.org>, <lars@metafoo.de>, <Michael.Hennerich@analog.com>,
+        <corbet@lwn.net>, <dlechner@baylibre.com>,
+        <marcelo.schmitt1@gmail.com>
+Subject: [PATCH v3 0/4] iio: adc: ad4000: Add SPI offload support
+Date: Wed, 26 Mar 2025 10:24:15 -0300
+Message-ID: <cover.1742992305.git.marcelo.schmitt@analog.com>
+X-Mailer: git-send-email 2.39.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250320015551.2157511-1-changyuanl@google.com>
- <20250320015551.2157511-12-changyuanl@google.com> <CALu+AoS01QJ-H5Vpr378rbx==iRQLG0HajtMCUzDXRO75biCag@mail.gmail.com>
- <Z+JT7kx+sfPqfWFA@MiWiFi-R3L-srv> <CALu+AoQj+mHECTvbuK8CpUTmOYgx6n2oMFm5kQXtSigL+5Ks2w@mail.gmail.com>
- <CALu+AoRdfjNcjweq_ipxCC6UGBzM-a5ma417RBr-C3EQ=Em9OQ@mail.gmail.com> <Z-Pk9Bnr0lDVopKj@kernel.org>
-In-Reply-To: <Z-Pk9Bnr0lDVopKj@kernel.org>
-From: Dave Young <dyoung@redhat.com>
-Date: Wed, 26 Mar 2025 20:09:55 +0800
-X-Gm-Features: AQ5f1JrnxWyTc7ruwIDaX1fnmt0FdUmOV-OtIvcwHa3Skex-wO_kM_31tXed_lg
-Message-ID: <CALu+AoS9=KttzqgR+xi11jur5eX7dBwUfOoueHoOss3eFn+Hkw@mail.gmail.com>
-Subject: Re: [PATCH v5 11/16] kexec: add config option for KHO
-To: Mike Rapoport <rppt@kernel.org>
-Cc: Baoquan He <bhe@redhat.com>, Changyuan Lyu <changyuanl@google.com>, linux-kernel@vger.kernel.org, 
-	graf@amazon.com, akpm@linux-foundation.org, luto@kernel.org, 
-	anthony.yznaga@oracle.com, arnd@arndb.de, ashish.kalra@amd.com, 
-	benh@kernel.crashing.org, bp@alien8.de, catalin.marinas@arm.com, 
-	dave.hansen@linux.intel.com, dwmw2@infradead.org, ebiederm@xmission.com, 
-	mingo@redhat.com, jgowans@amazon.com, corbet@lwn.net, krzk@kernel.org, 
-	mark.rutland@arm.com, pbonzini@redhat.com, pasha.tatashin@soleen.com, 
-	hpa@zytor.com, peterz@infradead.org, ptyadav@amazon.de, robh+dt@kernel.org, 
-	robh@kernel.org, saravanak@google.com, skinsburskii@linux.microsoft.com, 
-	rostedt@goodmis.org, tglx@linutronix.de, thomas.lendacky@amd.com, 
-	usama.arif@bytedance.com, will@kernel.org, devicetree@vger.kernel.org, 
-	kexec@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
-	linux-doc@vger.kernel.org, linux-mm@kvack.org, x86@kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Authority-Analysis: v=2.4 cv=B5+50PtM c=1 sm=1 tr=0 ts=67e40013 cx=c_pps a=PpDZqlmH/M8setHirZLBMw==:117 a=PpDZqlmH/M8setHirZLBMw==:17 a=Vs1iUdzkB0EA:10 a=VwQbUJbxAAAA:8 a=gAnH3GRIAAAA:8 a=yEi1-Fu5WF2DL2A3visA:9
+X-Proofpoint-ORIG-GUID: -MccmbZBhSl6WKwg86snZMKUqdphdZn_
+X-Proofpoint-GUID: -MccmbZBhSl6WKwg86snZMKUqdphdZn_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-26_06,2025-03-26_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
+ suspectscore=0 phishscore=0 mlxscore=0 impostorscore=0 spamscore=0
+ clxscore=1015 bulkscore=0 priorityscore=1501 lowpriorityscore=0
+ malwarescore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2503260082
 
-On Wed, 26 Mar 2025 at 19:34, Mike Rapoport <rppt@kernel.org> wrote:
->
-> Hi Dave,
->
-> On Wed, Mar 26, 2025 at 05:17:16PM +0800, Dave Young wrote:
-> > On Tue, 25 Mar 2025 at 16:36, Dave Young <dyoung@redhat.com> wrote:
-> > >
-> > > > >
-> > > > > Have you tested kdump?  In my mind there are two issues,  one is with
-> > > > > CMA enabled, it could cause kdump crashkernel memory reservation
-> > > > > failures more often due to the fragmented low memory.  Secondly,  in
-> > > >
-> > > > kho scracth memorys are reserved much later than crashkernel, we may not
-> > > > need to worry about it.
-> > > > ====================
-> > > > start_kernel()
-> > > >   ......
-> > > >   -->setup_arch(&command_line);
-> > > >      -->arch_reserve_crashkernel();
-> > > >   ......
-> > > >   -->mm_core_init();
-> > > >      -->kho_memory_init();
-> > > >
-> > > > > kdump kernel dump the crazy scratch memory in vmcore is not very
-> > > > > meaningful.  Otherwise I suspect this is not tested under kdump.  If
-> > > > > so please disable this option for kdump.
-> > >
-> > > Ok,  it is fine if this is the case, thanks Baoquan for clearing this worry.
-> > >
-> > > But the other concerns are still need to address, eg. KHO use cases
-> > > are not good for kdump.
-> > > There could be more to think about.
-> > > eg. the issues talked in thread:
-> > > https://lore.kernel.org/lkml/Z7dc9Cd8KX3b_brB@dwarf.suse.cz/T/
-> >
-> > Rethink about this,  other than previous concerns.  Transferring the
-> > old kernel state to kdump kernel makes no sense since the old state is
-> > not stable as the kernel has crashed.
->
-> KHO won't be active for kdump case. The KHO segments are only added to
-> kexec_image and never to kexec_crash_image.
+This patch series extends the ad4000 driver to support SPI offloading.
+In addition to that, ad4000 IIO documentation is expanded to:
+- list PulSAR parts supported by the ad4000 driver.
+- describe some characteristics of AD4000 IIO device.
+- describe changes when SPI offload is being used.
 
-Good to know, thanks!
+Change log v2 -> v3
+- Dropped patch 1 of v2 series and reverted buffer endianness and SPI transfer
+  bits_per_word configurations to the way they were in v1.
+- Removed dummy transfer in ad4000_prepare_offload_turbo_message().
+- Unified offload message preparation.
+- Removed spi->cs_hold.value to use cs_inactive to set CNV/CS high time.
+- Adjusted max sample rate for AD7983 and AD7984.
+- Dropped AD4000_TCONV_NS and made all time related constants a time_spec field.
+- Removed _offl param from _CHANNELS() macros and added a comment about that.
+- Commented IIO_BE check in ad4000_prepare_3wire_mode_message().
+- Now using predisable to balance with postenable.
+- Put spi/offload/consumer.h include right after spi/spi.h.
+- Removed unrelated brackets in info_mask_separate_available assignment
+- Added blank line after if.
 
->
-> --
-> Sincerely yours,
-> Mike.
->
+Change log v1 -> v2
+- Fixed passing inappropriate pointer instead of ret to dev_err_probe()
+- [new patch] Set transfer bits_per_word to have data in CPU endianness
+- Set iio_dev num_channels close to where channels is set.
+- Complement offload message comment about first sample being invalid
+- Document why the first buffer sample is invalid when offloading
+- Added blank line before a 'simple return'.
+
+Link to v2: https://lore.kernel.org/linux-iio/cover.1742394806.git.marcelo.schmitt@analog.com/
+Link to v1: https://lore.kernel.org/linux-iio/cover.1741970538.git.marcelo.schmitt@analog.com/
+
+v3 was tested and worked with the following setups
+- ADAQ4003 on CoraZ7 with SPI offload support;
+- AD7687 on CoraZ7 with SPI offload support;
+- AD7687 on rpi (no SPI offload support).
+The Linux image ran on cora was built from IIO testing branch.
+The Linux image ran on rpi was built from rpi tree rpi-6.14.y branch with
+some adaptations to cope with old iio_device_claim_direct_mode() and addition
+of the following patches
+iio: adc: ad4000: Stop using iio_device_claim_direct_scoped()
+spi: add basic support for SPI offloading
+spi: offload: add support for hardware triggers
+dt-bindings: trigger-source: add generic PWM trigger source
+spi: offload-trigger: add PWM trigger driver
+spi: add offload TX/RX streaming APIs
+iio: buffer-dmaengine: split requesting DMA channel from allocating buffer
+iio: buffer-dmaengine: add devm_iio_dmaengine_buffer_setup_with_handle()
+
+Marcelo Schmitt (4):
+  iio: adc: ad4000: Add support for SPI offload
+  Documentation: iio: ad4000: Add new supported parts
+  Documentation: iio: ad4000: Add IIO Device characteristics section
+  Documentation: iio: ad4000: Describe offload support
+
+ Documentation/iio/ad4000.rst |  86 +++++++-
+ drivers/iio/adc/Kconfig      |   7 +-
+ drivers/iio/adc/ad4000.c     | 405 ++++++++++++++++++++++++++++++++---
+ 3 files changed, 463 insertions(+), 35 deletions(-)
+
+
+base-commit: af94f401e26f686f7391ce79b38a6129417c22dc
+prerequisite-patch-id: 3d517eef53a799adba5922815fe684b913e36773
+-- 
+2.47.2
 
 
