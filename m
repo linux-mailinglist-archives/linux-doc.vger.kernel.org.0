@@ -1,237 +1,148 @@
-Return-Path: <linux-doc+bounces-41842-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41844-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34234A744BC
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 08:48:41 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 417BCA74509
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 09:09:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A03BC3B314A
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 07:48:14 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 50A5A1775E2
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 08:08:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AC2EF212F83;
-	Fri, 28 Mar 2025 07:48:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 49DEA212D67;
+	Fri, 28 Mar 2025 08:08:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="GhNKDRh+"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nIQ0DVVE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D18C212B11
-	for <linux-doc@vger.kernel.org>; Fri, 28 Mar 2025 07:48:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 815A5169AE6;
+	Fri, 28 Mar 2025 08:08:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1743148099; cv=none; b=PNy5HBCA0mkWJfSjUcYf8d/VfIIfI3P8uZjNEL09m4bFCxaMJmBnltP1gIUthj0wT9718ZfuafGoyB3JpMh+uaPmT+DKzxL5dpAO5d+lqDAPtpICJ0s7ifO4pGDQBFPAgXB/9+muDHrhxMj8vAMdoAHqOTA3Oc2MqpAq2EKUI9Y=
+	t=1743149334; cv=none; b=uo2vTHR04vcQNVNYO3ZAQUxwzNTSaRz/IoN4SrCtp30otcttULtfkA9RbsLhhP5f8WQ8NKzK9P8qn4CiCKrDUu719uNEVtDkzxzqUJz6wfOVTVpmP6LqzTQW2BSqr+jnkI6JWJqyMdmK6JTbQ5r9M1jIWlCT0AJDTyzrPy+SEVM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1743148099; c=relaxed/simple;
-	bh=1VRG5gptAlPsvHDNKA/iNCN3DmfzeGWVXmFnEWaIm8I=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=dvxYWUBoJGBxAi6P8nrcRDuryHBOo04eJWpHoezkDdwKdY4cu04V1jNl6kfGmDowX7/6bXYlJWUmn1ed1B9oc3L5do88aro05nru1tOeH0qz4u9qpBjHhHrjAo0QgJ9H7hS5aGKN1ip2Pfbg2cF/nGvDeaApb1vP17dUvkfnQ58=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=GhNKDRh+; arc=none smtp.client-ip=209.85.216.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3018e2d042bso2172863a91.2
-        for <linux-doc@vger.kernel.org>; Fri, 28 Mar 2025 00:48:16 -0700 (PDT)
+	s=arc-20240116; t=1743149334; c=relaxed/simple;
+	bh=InrNul7qa/lh5pXIjs1iXVFpj9hcpH6G0oj9uxoc6b0=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=D2SIgRhkR8UYOi6F2PZN5hJ/6Q7xW+Xu0CvqP70Sok82EEO6Um5KBJUEKW3k8ZUVxQWaNJoQOfpW9VIuNAM5iFQdJlCEzW+A2Ve1Mf1Im1IBrmV8NIhUiSyni0GJ5otsH01Md55bVCWVv6kFQ0bz8kv2Oygepye6w8QcXmA4hMo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nIQ0DVVE; arc=none smtp.client-ip=209.85.221.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-3914bc3e01aso1037850f8f.2;
+        Fri, 28 Mar 2025 01:08:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1743148096; x=1743752896; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wRzjJUpNQVaJwaxONUg7oIZp4mvWCO0S0U577rY3xUE=;
-        b=GhNKDRh+8za6emkYm3zB+1svPtZsuKZfHMXkjR67qgoXb+RRsqj9TIUvo0IJOIEaMN
-         9XkY9jrSXp18Lp2nJOHLyGyhYjhbS7zyFGeT/L+4wFmRXfmvUnePmFUDvory/ork7SPa
-         wEfDBbb6U3kIp7/w/3FcCIDzT9/Xd8wqDMF0z7mtnQkPDavyDrp/PPLBbC9xp7OBR+rH
-         Kyje2oJGFqOJiIJZRmjEdj0Zxtmr+ZrnWHb8/BkFhNOGYROz1BjcWupoKvsXmQSsgIgF
-         wFA7vyvnxDqZUHbwKBikk3pa8Edr7eH9kaLj1am71FoIKmPKN5NsJlCDXL8WPip259gQ
-         TNKQ==
+        d=gmail.com; s=20230601; t=1743149331; x=1743754131; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=O7ucuxPkv/euKxkasdPgWKRmfgNwA2ryVrGut1FSiZ8=;
+        b=nIQ0DVVESdOisn7k8EN+VNZZalaY6algAASe4ZJPDKnjs1nRH3o9l0ZnVHDnMQt9jf
+         DBClrTS+xgE5UpWfwsy6c9hdDwKqttNhmzvSB74w8Smxb/KPQxFmujvvd2Hdyu1g0zRj
+         qG6XdtEnYQhsEREDiznRWIq+sfrFC9m+anniepjcxiPwtQVb7clx9jXwN3ss2s/7GqEI
+         JgSSTblgyWepAPWJ5MuZYoVP3BGqUObegdvdgR+i2Aw3Y/WjvnDK/Bak17FkNJYUnVek
+         0ClcikZRd0E3k6sfRhrlOx4ao3B4axY+XjtkJgsKICNahJKxRkfSpK9oyo8QxAp41fce
+         5wlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743148096; x=1743752896;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wRzjJUpNQVaJwaxONUg7oIZp4mvWCO0S0U577rY3xUE=;
-        b=Ygi3z53Z9aJR4rJKlE9d+qfbecZ85k/9dn3daQhlJRTPQ3W1ZrFkcmJJbg9kQAK84N
-         N7vhVRdeXw0bUG6g5YIBEpiFkEO0MKKJqTuj2B0D0hYFbQ2pwlbiVFM/N8FMAU8j57ar
-         7smtPvguhGoyRZTfeB3mitojj5xynbCmrHiBmPkhTl1sNaI1i0bt+ajOWjPxFAuLolni
-         y1yEmVZu6nQrV/W5rlBjSGAnw/OwIyG/gnc2MqIe9IofW3whPvhVoxbuR5I2mgns9O5A
-         tWPXIA8V2VU1kf+2IVfMjUjocFQpo1US7mZcxBzlm9C4EyWcGyyrT7zt/auyKeayIl3y
-         J13Q==
-X-Forwarded-Encrypted: i=1; AJvYcCV/g2y+zJ1xKMEGTGX2mrGlG6YKDMAqLpJH4YWkUT3XyOOeT3r/oDu3Pihc3W/vRW9JpqTkbM1HxQ0=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy0+DGjpVaUr7hIznjztc2rs7Oh9DJmiDXw/Hg39ETengOCGhfP
-	VGZHYrA9E8fq9zvEsMBncUFNqfdZ/vk2Noac+zn8cOJr+P/dJIUSBs0Z5snRkJEcOYPZuOYrllq
-	1BVmO/RdiYHvf+YneGep45KXRZz/Dd9L5GM3N
-X-Gm-Gg: ASbGnctAN4Fj063164nU6nVQEiyY0g4GpbOIxGmle+E51qxjA1q4RFYlKHnD2PFQ6jv
-	Uu0xHPZ64FFIV7V+oe+RlxbPMjdCv6VKH6z0ZTYSiaXJKdkya3IIRLxS04nO2ACUk9FmlekxNa2
-	v6DR3P9d8zuLM8eXXFc8d+s1g8vqIK7/m34Xe8dCHc2J9+pWXGvekbdNUb
-X-Google-Smtp-Source: AGHT+IEBaxbL6HDDZL1bOaRlCywyrAoYUcEN4dxkxdnp4CwBP8mzj2N3dlVlnb1ED+EAow643ibowia8gXssCwa290c=
-X-Received: by 2002:a17:90b:2590:b0:2ee:bc7b:9237 with SMTP id
- 98e67ed59e1d1-303a85c8a48mr9336414a91.27.1743148095893; Fri, 28 Mar 2025
- 00:48:15 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1743149331; x=1743754131;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=O7ucuxPkv/euKxkasdPgWKRmfgNwA2ryVrGut1FSiZ8=;
+        b=xUlaAGN88fq+vqYIae5zdhVSeica0S0h5waeWnLHlvqvCzvlemIOM4krPp7Yw4o9ZZ
+         Z8JSwPCPPQitYFYmg4ft7wQWjzsvKluc0cCbQp5fOMLv+AH3tA7g9nW2dsfQ/sEWwNIf
+         oPthf3Q5D0jxD308qykTlpLvvhdxRP8A948Iv0pq78FtMGltGW9jNLHxch0Nj3oXM669
+         TLFZ2uLqZ5/Zz+t6cVGrECcZL0O7276TcxX6AJ48JGa5I6PY6L/D/72eCfMe/wCodIBc
+         byL285FwX07RC8mDPBHl7IJHo9SNLTuiF7Geyef4qnbXW91gVGBXv0bnSuORSk5Mr4Qc
+         8weg==
+X-Forwarded-Encrypted: i=1; AJvYcCUY+dCY6MoCt26QD77XfvjCdda+WDOtd8MoQm8iZ+jrA+q2YK77M4PQi6bdnDi1n0E/HcRxJvnBZ+EB@vger.kernel.org, AJvYcCVujHD2sl1dS4veQOmXeqinNvqkvpfDSSy6YFk4CKc/kqzORizk5kY4wMWXpLYW18Us5nf7cmUXaU4=@vger.kernel.org, AJvYcCX/MG4RbmN3H35kRhbPyN9YshgeJl5v8QCpycIiuWB5sUqQtZRE2sZlkBaKwjquJb0x6zyWc+nqvidGCKl7@vger.kernel.org
+X-Gm-Message-State: AOJu0YxCJZk9+lSq0faLPwS5p5gBiphMF+m2bxJ9wpoAKARVPQ1o5Hbv
+	L+pINogpcfzT5MxUCD5Q7tcVMo0RsdyEB150vfnb+Or2WJVwV7j8
+X-Gm-Gg: ASbGncvEkAONmEGI4a+uZckGJcQyDmXjyWJZZMPX3IEa8lfZBfDPECg918O9autp42w
+	CSamkpQ6abb30d6z21lnskFtXxKHwnutur4uvpCvikZ6aqSja4vrx0J3ft//B5LJpVPhWNuilgY
+	YiIFTpPWos79qPHogrty1leX/+xTXnXeJZgzxLhUfGbZEvYXR9T26tWkg6KH2rREXFnpQ6aRZfS
+	aSMRGbwK2FBULKzN7MQ7LHfWR6hkgoSXhSH7Lgt5RPUQvRlRywNHAmtfdX+XWvpWPPEi4S/xQ7U
+	Ko+B3C5pAyvc+y4qAIrUeRHqVa5RPaTEe74D8SufnjZq3Xc+T8dEV2W44iJ8GY3TC0IewxupvVy
+	9VDCoO02CdjVkKtAL+D0=
+X-Google-Smtp-Source: AGHT+IEDCFyb76KgO8eEZlEodD/ErrzWE3zAEADds3uv5XxGcWPz0nUzqaFd0kliQQNvMHf6xlHtTQ==
+X-Received: by 2002:a05:6000:2913:b0:391:3150:96ff with SMTP id ffacd0b85a97d-39ad17564camr5027564f8f.32.1743149330487;
+        Fri, 28 Mar 2025 01:08:50 -0700 (PDT)
+Received: from ?IPv6:2001:818:ea56:d000:56e0:ceba:7da4:6673? ([2001:818:ea56:d000:56e0:ceba:7da4:6673])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-43d8fbbfef2sm19503025e9.11.2025.03.28.01.08.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 Mar 2025 01:08:49 -0700 (PDT)
+Message-ID: <e21bebc869462071519bac95daf06c6c22953325.camel@gmail.com>
+Subject: Re: [PATCH 4/4] iio: dac: ad3552r-hs: add support for internal ramp
+From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
+To: Marcelo Schmitt <marcelo.schmitt1@gmail.com>, Angelo Dureghello
+	 <adureghello@baylibre.com>
+Cc: Nuno =?ISO-8859-1?Q?S=E1?= <nuno.sa@analog.com>, Jonathan Cameron
+ <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Jonathan Corbet
+ <corbet@lwn.net>, Olivier Moysan <olivier.moysan@foss.st.com>, Michael
+ Hennerich <Michael.Hennerich@analog.com>, linux-iio@vger.kernel.org,
+ linux-doc@vger.kernel.org,  linux-kernel@vger.kernel.org
+Date: Fri, 28 Mar 2025 08:09:06 +0000
+In-Reply-To: <Z-VADhMDmmPFhlC5@debian-BULLSEYE-live-builder-AMD64>
+References: <20250321-wip-bl-ad3552r-fixes-v1-0-3c1aa249d163@baylibre.com>
+	 <20250321-wip-bl-ad3552r-fixes-v1-4-3c1aa249d163@baylibre.com>
+	 <Z-R3E23hWiUKDc6q@debian-BULLSEYE-live-builder-AMD64>
+	 <yxhvtline3ey3ekybqfe3k4y4sm6746wpqwpydxv2brryironl@u2ezr3sryqxs>
+	 <Z-VADhMDmmPFhlC5@debian-BULLSEYE-live-builder-AMD64>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.4 (3.52.4-2.fc40) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250319005141.312805-1-quic_wcheng@quicinc.com> <20250319005141.312805-13-quic_wcheng@quicinc.com>
-In-Reply-To: <20250319005141.312805-13-quic_wcheng@quicinc.com>
-From: Puma Hsu <pumahsu@google.com>
-Date: Fri, 28 Mar 2025 15:48:00 +0800
-X-Gm-Features: AQ5f1JrlHT0yIgJWcDgTjea01A8oianDjLUwfLWklDsfjSug36IyOZb6G4iSTYk
-Message-ID: <CAGCq0LYvXsRpfhWrvWu0=hQHBVYqJ2ifnv0wEbPWtmTw7j6-CQ@mail.gmail.com>
-Subject: Re: [PATCH v36 12/31] ALSA: usb-audio: Introduce USB SND platform op callbacks
-To: Wesley Cheng <quic_wcheng@quicinc.com>
-Cc: srinivas.kandagatla@linaro.org, mathias.nyman@intel.com, perex@perex.cz, 
-	conor+dt@kernel.org, dmitry.torokhov@gmail.com, corbet@lwn.net, 
-	broonie@kernel.org, lgirdwood@gmail.com, krzk+dt@kernel.org, 
-	pierre-louis.bossart@linux.intel.com, Thinh.Nguyen@synopsys.com, 
-	tiwai@suse.com, robh@kernel.org, gregkh@linuxfoundation.org, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-sound@vger.kernel.org, linux-input@vger.kernel.org, 
-	linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 19, 2025 at 8:56=E2=80=AFAM Wesley Cheng <quic_wcheng@quicinc.c=
-om> wrote:
->
-> Allow for different platforms to be notified on USB SND connect/disconnec=
-t
-> sequences.  This allows for platform USB SND modules to properly initiali=
-ze
-> and populate internal structures with references to the USB SND chip
-> device.
->
-> Signed-off-by: Wesley Cheng <quic_wcheng@quicinc.com>
-
-Tested-by: Puma Hsu <pumahsu@google.com>
-
-> ---
->  sound/usb/card.c | 49 ++++++++++++++++++++++++++++++++++++++++++++++++
->  sound/usb/card.h | 10 ++++++++++
->  2 files changed, 59 insertions(+)
->
-> diff --git a/sound/usb/card.c b/sound/usb/card.c
-> index 6c5b0e02e57b..4ac7f2b8309a 100644
-> --- a/sound/usb/card.c
-> +++ b/sound/usb/card.c
-> @@ -118,6 +118,42 @@ MODULE_PARM_DESC(skip_validation, "Skip unit descrip=
-tor validation (default: no)
->  static DEFINE_MUTEX(register_mutex);
->  static struct snd_usb_audio *usb_chip[SNDRV_CARDS];
->  static struct usb_driver usb_audio_driver;
-> +static struct snd_usb_platform_ops *platform_ops;
-> +
-> +/*
-> + * Register platform specific operations that will be notified on events
-> + * which occur in USB SND.  The platform driver can utilize this path to
-> + * enable features, such as USB audio offloading, which allows for audio=
- data
-> + * to be queued by an audio DSP.
-> + *
-> + * Only one set of platform operations can be registered to USB SND.  Th=
-e
-> + * platform register operation is protected by the register_mutex.
-> + */
-> +int snd_usb_register_platform_ops(struct snd_usb_platform_ops *ops)
-> +{
-> +       guard(mutex)(&register_mutex);
-> +       if (platform_ops)
-> +               return -EEXIST;
-> +
-> +       platform_ops =3D ops;
-> +       return 0;
-> +}
-> +EXPORT_SYMBOL_GPL(snd_usb_register_platform_ops);
-> +
-> +/*
-> + * Unregisters the current set of platform operations.  This allows for
-> + * a new set to be registered if required.
-> + *
-> + * The platform unregister operation is protected by the register_mutex.
-> + */
-> +int snd_usb_unregister_platform_ops(void)
-> +{
-> +       guard(mutex)(&register_mutex);
-> +       platform_ops =3D NULL;
-> +
-> +       return 0;
-> +}
-> +EXPORT_SYMBOL_GPL(snd_usb_unregister_platform_ops);
->
->  /*
->   * Checks to see if requested audio profile, i.e sample rate, # of
-> @@ -954,7 +990,11 @@ static int usb_audio_probe(struct usb_interface *int=
+On Thu, 2025-03-27 at 09:09 -0300, Marcelo Schmitt wrote:
+> On 03/27, Angelo Dureghello wrote:
+> > On 26.03.2025 18:52, Marcelo Schmitt wrote:
+> > > Hello Angelo,
+> > >=20
+> > > Patch looks good to me.
+> > > One minor comment bellow.
+> > >=20
+> > > On 03/21, Angelo Dureghello wrote:
+> > > > From: Angelo Dureghello <adureghello@baylibre.com>
+> > > >=20
+> ...
+> > > > +
+> > > > +static ssize_t ad3552r_hs_write_data_source(struct file *f,
+> > > > +					=C2=A0=C2=A0=C2=A0 const char __user *userbuf,
+> > > > +					=C2=A0=C2=A0=C2=A0 size_t count, loff_t *ppos)
+> > > > +{
+> > > > +	struct ad3552r_hs_state *st =3D file_inode(f)->i_private;
+> > > > +	char buf[64];
+> > > > +	int ret;
+> > > > +
+> > > > +	ret =3D simple_write_to_buffer(buf, sizeof(buf) - 1, ppos, userbu=
 f,
->         chip->num_interfaces++;
->         usb_set_intfdata(intf, chip);
->         atomic_dec(&chip->active);
-> +
-> +       if (platform_ops && platform_ops->connect_cb)
-> +               platform_ops->connect_cb(chip);
->         mutex_unlock(&register_mutex);
-> +
->         return 0;
->
->   __error:
-> @@ -991,6 +1031,9 @@ static void usb_audio_disconnect(struct usb_interfac=
-e *intf)
->         card =3D chip->card;
->
->         mutex_lock(&register_mutex);
-> +       if (platform_ops && platform_ops->disconnect_cb)
-> +               platform_ops->disconnect_cb(chip);
-> +
->         if (atomic_inc_return(&chip->shutdown) =3D=3D 1) {
->                 struct snd_usb_stream *as;
->                 struct snd_usb_endpoint *ep;
-> @@ -1138,6 +1181,9 @@ static int usb_audio_suspend(struct usb_interface *=
-intf, pm_message_t message)
->                 chip->system_suspend =3D chip->num_suspended_intf;
->         }
->
-> +       if (platform_ops && platform_ops->suspend_cb)
-> +               platform_ops->suspend_cb(intf, message);
-> +
->         return 0;
->  }
->
-> @@ -1178,6 +1224,9 @@ static int usb_audio_resume(struct usb_interface *i=
-ntf)
->
->         snd_usb_midi_v2_resume_all(chip);
->
-> +       if (platform_ops && platform_ops->resume_cb)
-> +               platform_ops->resume_cb(intf);
-> +
->   out:
->         if (chip->num_suspended_intf =3D=3D chip->system_suspend) {
->                 snd_power_change_state(chip->card, SNDRV_CTL_POWER_D0);
-> diff --git a/sound/usb/card.h b/sound/usb/card.h
-> index cdafc9e9cecd..d8b8522e1613 100644
-> --- a/sound/usb/card.h
-> +++ b/sound/usb/card.h
-> @@ -209,7 +209,17 @@ struct snd_usb_stream {
->         struct list_head list;
->  };
->
-> +struct snd_usb_platform_ops {
-> +       void (*connect_cb)(struct snd_usb_audio *chip);
-> +       void (*disconnect_cb)(struct snd_usb_audio *chip);
-> +       void (*suspend_cb)(struct usb_interface *intf, pm_message_t messa=
-ge);
-> +       void (*resume_cb)(struct usb_interface *intf);
-> +};
-> +
->  struct snd_usb_stream *
->  snd_usb_find_suppported_substream(int card_idx, struct snd_pcm_hw_params=
- *params,
->                                   int direction);
-> +
-> +int snd_usb_register_platform_ops(struct snd_usb_platform_ops *ops);
-> +int snd_usb_unregister_platform_ops(void);
->  #endif /* __USBAUDIO_CARD_H */
->
+> > > > +				=C2=A0=C2=A0=C2=A0=C2=A0 count);
+> > > > +	if (ret < 0)
+> > > > +		return ret;
+> > > > +
+> > > > +	buf[count] =3D 0;
+> > > Shouldn't it be
+> > > 	buf[count] =3D '\0';
+> >=20
+> > Why ? I am zero-terminating the string properly.
+>=20
+> Oh, okay. I was just more used to see '\0' as buffer/string terminator.
+> I see now buf[count] =3D 0; should work too.
+>=20
+
+I agree with Marcelo that the more natural/readable way for terminating a s=
+tring is
+using the corresponding null character (ascii). Probably not a reason for a=
+ v2
+though...
+
+- Nuno S=C3=A1=20
+
 
