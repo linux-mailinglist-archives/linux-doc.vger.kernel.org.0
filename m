@@ -1,173 +1,178 @@
-Return-Path: <linux-doc+bounces-41862-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-41869-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5A7CA74EA2
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 17:40:22 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 132E7A74EE8
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 18:13:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 637DE177F44
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 16:40:22 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 568973B96CC
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Mar 2025 17:13:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4FA91D5AAD;
-	Fri, 28 Mar 2025 16:40:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 63DEF1DE4C6;
+	Fri, 28 Mar 2025 17:13:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="n+OA2Y25"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="PS/1Qu+2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f53.google.com (mail-oo1-f53.google.com [209.85.161.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5261B2AEED
-	for <linux-doc@vger.kernel.org>; Fri, 28 Mar 2025 16:40:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB2E71CFEC3;
+	Fri, 28 Mar 2025 17:13:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1743180017; cv=none; b=kqkW97IaPpOpjjcUO3xV4sYig0zuv26mCLJN+koCSQeGP6uKS7bJaFjH/Vl3KaODIollDWFm5VT+sgNf1uvDGXWSB4nCI7vw8pLN49WquXwcRUhkaEJcDXjt03waT87cYWibr0xJRpHUautWe3ldS575/GWHR4OlsdCnLnuVkZo=
+	t=1743181995; cv=none; b=XTd3ZXZQ3jYc/VrwBtHrenQPQjpB72gnGd5N92pG0WyEEm5haHHjQPb3CoOi2pD9EALwlrJcb/rnTGb7EOZnKPw0cs7qLWhsgmHXslczuml3YqX3cR+bSC/Rz9NGImR+7or9MIIeaTWWnFg28m+VxSLQsA0cbGefHPU7E9M86Tk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1743180017; c=relaxed/simple;
-	bh=UfMGIFBA2NCp8X6+/ZlKX6NWlh6n9aKB62GIyfMRUvU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DYTBwM4w5alhiaij8So7aaMH4oldo2WY0eyCbcg0tkkujc8YD4FJl3S4W83SYDKjB/Znfa3noMZMUKUldRcG9IFFpiYme7SgSljdHA9z9/MxDos9Vw0p8IyNCJzqQEnJll2c6XAg/ya9YE9zGST7ZLWrWNjR06fnqsGNTLqQRP4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=n+OA2Y25; arc=none smtp.client-ip=209.85.161.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oo1-f53.google.com with SMTP id 006d021491bc7-6025007e9a0so410898eaf.1
-        for <linux-doc@vger.kernel.org>; Fri, 28 Mar 2025 09:40:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1743180013; x=1743784813; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=dzrQJVTt8RVOtbppwh2ghVBNZYusJHBIFxOQR2w/3zs=;
-        b=n+OA2Y25AB/Td3LiYIbe01/eQQyVT5ft3mgQrfiFSPx+KdL5o+7TEKw3bgXQ2zObKA
-         NgZh4fdIr5gBaw8+hzhVj+nSuIfsBPNL+1EetNsoC0PryNXRSHZgSDE6cMCQYHK7oZGG
-         alt3Xs4eBJuUvSqcpR3gN0E5XN05RrbFzbp6J9FROv+2ccUtagUzEiZJ4XlVzajT9o8n
-         ZoiEpQOoZUA/O6chZnlt2gUwSSbMrdVAFbHNWvdH2eIn7vfkukQBZAWXygMVDjut31Zb
-         S1tokCgQjiMRk4IOa/VBFJ3XwDw2cHYo8zOwO0DphGIVVvpM+5xjS4Ykpr78e8JsmMwk
-         zylA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1743180013; x=1743784813;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=dzrQJVTt8RVOtbppwh2ghVBNZYusJHBIFxOQR2w/3zs=;
-        b=VgMtDuZQF9djCqiz6+BDZPT6m67WFckT64BXwgPYolwdeHgVdTqpkOd2apldGXUjvG
-         DqTUeppUZJtRVhhuINrciEXGB67Wo5o5s337Sr1CWzEmhBJWRu54k8tj+Mu86gI/oQIo
-         pve6R8Et8Efmghyc3Ut66OsHxcCY0JckgNnFg2FDNqRwRgc8emhkA2SF2byTpfjcIjeX
-         fP6h/K9UmTMVOBIxLZF7XIlU5E6pdA4uozaJqh+3x6uRK/Mfq8FsQxuRqQ1rQMTuaaWC
-         paDCJqviqPviNpiprPGQxzhygHwyw9vU4wxxPUrZx1pgfaYSXAuiwT7IwBx5BpWU+cPD
-         laxg==
-X-Forwarded-Encrypted: i=1; AJvYcCVTVF9Q+JtKYzrCc7eAwAZ+pQuE7s4FQu/d+ifdrNkxXiaWO5zhJazvVOAyXjCOFxVb4Me8W7jwvIg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzMT3wbh4ZjzgaquXzOSpGPAaG0IYwE3IEeXGAO4oz5LYO3wvl4
-	37TxlAqjp9zKGX0WJjt3IYNAE2yMRm9WwmveoHX2rTSoUiLG9/anBA6h/ZnI05s=
-X-Gm-Gg: ASbGncvxhsXmhhpmQ+NNm+Umwq1vI1R/a8kuadXoDBwuui5pMdSQp0xAvYTum6NtXeX
-	yHYfS9Nu/nKUyxAA8u3rSWrCE/ANqHmGOUvoXsNtGMznQwC8KuIP3hI4aXwRUFRmNoismG1kpbH
-	wjgn+DyqF/v/nJGD3K11vT6L9Lmcgp8VgbpspQT6mLpggZL0nB4km0wUEw15Bc/YnWfnxQkBdEc
-	VESwVrDq8RTLmBIZpMy6hI0blbSJ/sPCUZBG1TIbhHxjd7vsMIhdhB0cfdmj/3ofjKuxRRLOsWx
-	AuO1daZmQWNTrhxpPGn+2VuubIXMMs760M67V/byPRn04jb4w9/a2WZ8VnYtRfW9j5WuvPn3cTJ
-	s/NiANw==
-X-Google-Smtp-Source: AGHT+IFsPyxd+WXijsrvJhUw6MhgClDj2ObmqnNkt7n1gwXZWKnnQoPsZ/k6D1o8Tiv7eFjViSnK0A==
-X-Received: by 2002:a05:6808:244f:b0:3f7:4b65:582f with SMTP id 5614622812f47-3fefa56dcddmr5562104b6e.17.1743180013168;
-        Fri, 28 Mar 2025 09:40:13 -0700 (PDT)
-Received: from [192.168.0.113] (ip98-183-112-25.ok.ok.cox.net. [98.183.112.25])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-602843bc042sm389572eaf.0.2025.03.28.09.40.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 28 Mar 2025 09:40:11 -0700 (PDT)
-Message-ID: <68db2225-4519-4436-bee2-24fbe320ac4f@baylibre.com>
-Date: Fri, 28 Mar 2025 11:40:10 -0500
+	s=arc-20240116; t=1743181995; c=relaxed/simple;
+	bh=1UEe2ZUUIwJYZI/Wb2iC/iMXfyJTUBGVP1whccfDJoo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=E6yupm0ucXh+XNXk2KGmN1SZPG7WQp1neTjVEB4EeXg5FqdmgmejTuMukUdVTIMwUlEi2sQo7F6estehn9VTDgWk7pOSzpKBUdTY6IomcgLaT+7Dm7coC30YNqe7oDPHdQvesKhkn3HbQRHSTnQl3hLzePtjm12YnK7OqU5/Qkw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=PS/1Qu+2; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from terminus.zytor.com (terminus.zytor.com [IPv6:2607:7c80:54:3:0:0:0:136])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 52SHC6vW2029344
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+	Fri, 28 Mar 2025 10:12:11 -0700
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 52SHC6vW2029344
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2025032001; t=1743181934;
+	bh=wrTcXCC95mvMn2X0Ty0Tmz2cq/ZeUYBrBQm9agHaZTk=;
+	h=From:To:Cc:Subject:Date:From;
+	b=PS/1Qu+2ThvTaq9rqP4M3CwiEtiNnoqZfbXkf2A79JxJc1zVMLZPxR+4K+vFfk5Sj
+	 3zxqmgtd3Qp/+HG2uGIfOYdWHvzuAiK7KXM5/fh6i4zEu4qo2Vi7JGipvEzKPY9aap
+	 QiZ2t0ws5drIBbj8otPem5QfgVjg/H1+JfzojuJO7+w01zrQTKXtkO7Bbkq49Ib5jM
+	 ndr2Kjc+R/4GfhxFa3n6P0GmaQ2Byskxs6BtL4XCpC6cMeKrRlyceyXtNwTNJFDcM1
+	 P2o0CyGWRed6z/5Vw0QihdbpNOdEnXf5q55EmR8JzWSN2bRID3cGzllI2wi1orN5ZO
+	 d59Y0ZnfW3cHw==
+From: "Xin Li (Intel)" <xin@zytor.com>
+To: pbonzini@redhat.com, seanjc@google.com, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc: corbet@lwn.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+        andrew.cooper3@citrix.com, luto@kernel.org, peterz@infradead.org,
+        chao.gao@intel.com, xin3.li@intel.com
+Subject: [PATCH v4 00/19] Enable FRED with KVM VMX
+Date: Fri, 28 Mar 2025 10:11:46 -0700
+Message-ID: <20250328171205.2029296-1-xin@zytor.com>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] iio: dac: ad3552r-hs: add support for internal ramp
-To: =?UTF-8?Q?Nuno_S=C3=A1?= <noname.nuno@gmail.com>,
- Angelo Dureghello <adureghello@baylibre.com>, =?UTF-8?Q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>, Jonathan Cameron <jic23@kernel.org>,
- Lars-Peter Clausen <lars@metafoo.de>, Jonathan Corbet <corbet@lwn.net>,
- Olivier Moysan <olivier.moysan@foss.st.com>,
- Michael Hennerich <Michael.Hennerich@analog.com>
-Cc: linux-iio@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20250321-wip-bl-ad3552r-fixes-v1-0-3c1aa249d163@baylibre.com>
- <20250321-wip-bl-ad3552r-fixes-v1-4-3c1aa249d163@baylibre.com>
- <2d12ff156996876e5bd85c793c07bb0c6747981c.camel@gmail.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <2d12ff156996876e5bd85c793c07bb0c6747981c.camel@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 3/28/25 3:28 AM, Nuno Sá wrote:
-> On Fri, 2025-03-21 at 21:28 +0100, Angelo Dureghello wrote:
->> From: Angelo Dureghello <adureghello@baylibre.com>
->>
->> The ad3552r can be feeded from the HDL controller by an internally
->> generated 16bit ramp, useful for debug pourposes. Add debugfs a file
->> to enable or disable it.
->>
->> Signed-off-by: Angelo Dureghello <adureghello@baylibre.com>
->> ---
+This patch set enables the Intel flexible return and event delivery
+(FRED) architecture with KVM VMX to allow guests to utilize FRED.
 
-...
+The FRED architecture defines simple new transitions that change
+privilege level (ring transitions). The FRED architecture was
+designed with the following goals:
 
->> +static ssize_t ad3552r_hs_write_data_source(struct file *f,
->> +					    const char __user *userbuf,
->> +					    size_t count, loff_t *ppos)
->> +{
->> +	struct ad3552r_hs_state *st = file_inode(f)->i_private;
->> +	char buf[64];
->> +	int ret;
->> +
->> +	ret = simple_write_to_buffer(buf, sizeof(buf) - 1, ppos, userbuf,
->> +				     count);
->> +	if (ret < 0)
->> +		return ret;
->> +
->> +	buf[count] = 0;
->> +
->> +	if (count == 10 && !strncmp(buf, "iio-buffer", 10)) {
->> +		ret = ad3552r_hs_set_data_source(st, IIO_BACKEND_EXTERNAL);
->> +		if (ret)
->> +			return ret;
->> +	} else if (count == 22 && !strncmp(buf, "backend-ramp-generator", 22)) {
->> +		ret = ad3552r_hs_set_data_source(st,
->> +			IIO_BACKEND_INTERNAL_RAMP_16BIT);
->> +		if (ret)
->> +			return ret;
->> +	} else {
->> +		return -EINVAL;
->> +	}
-> 
-> Are we expected to add more data types in the future? If not, this could be simply an
-> enable/disable ramp generator thing... It would be much simpler.
+1) Improve overall performance and response time by replacing event
+   delivery through the interrupt descriptor table (IDT event
+   delivery) and event return by the IRET instruction with lower
+   latency transitions.
 
-Angelo actually had implemented it that way originally. :-)
+2) Improve software robustness by ensuring that event delivery
+   establishes the full supervisor context and that event return
+   establishes the full user context.
 
-I suggested to change it to a string because the HDL project for this family
-of DACs actually has 3 possibilities for the data source:
+The new transitions defined by the FRED architecture are FRED event
+delivery and, for returning from events, two FRED return instructions.
+FRED event delivery can effect a transition from ring 3 to ring 0, but
+it is used also to deliver events incident to ring 0. One FRED
+instruction (ERETU) effects a return from ring 0 to ring 3, while the
+other (ERETS) returns while remaining in ring 0. Collectively, FRED
+event delivery and the FRED return instructions are FRED transitions.
 
-	* Selectable input source: DMA/ADC/TEST_RAMP;
+Intel VMX architecture is extended to run FRED guests, and the major
+changes are:
 
-And there are other potential sources from the generic AXI DAC like
-0x00: internal tone (DDS) that seems somewhat likely to be seen in the future.
+1) New VMCS fields for FRED context management, which includes two new
+event data VMCS fields, eight new guest FRED context VMCS fields and
+eight new host FRED context VMCS fields.
 
-> 
-> Anyways, you could define a static array and use match_string()?
-> 
-> Lastly, for insterfaces like this, it's always helpful to have an _available kind of
-> attribute.
-> 
-> - Nuno Sá
-> 
-> 
-> 
->>  
->>  static const struct of_device_id ad3552r_hs_of_id[] = {
->>
-> 
-> 
+2) VMX nested-exception support for proper virtualization of stack
+levels introduced with FRED architecture.
+
+Search for the latest FRED spec in most search engines with this search
+pattern:
+
+  site:intel.com FRED (flexible return and event delivery) specification
+
+Following is the link to the v3 of this patch set:
+https://lore.kernel.org/lkml/20241001050110.3643764-1-xin@zytor.com/
+
+Since several preparatory patches in v3 have been merged, and Sean
+reiterated that it's NOT worth to precisely track which fields are/
+aren't supported [1], v4 patch number is reduced to 19.
+
+Although FRED and CET supervisor shadow stacks are independent CPU
+features, FRED unconditionally includes FRED shadow stack pointer
+MSRs IA32_FRED_SSP[0123], and IA32_FRED_SSP0 is just an alias of the
+CET MSR IA32_PL0_SSP.  IOW, the state management of MSR IA32_PL0_SSP
+becomes an overlap area, and Sean requested that FRED virtualization
+to land after CET virtualization [2].
+
+[1]: https://lore.kernel.org/lkml/Z73uK5IzVoBej3mi@google.com/
+[2]: https://lore.kernel.org/kvm/ZvQaNRhrsSJTYji3@google.com/
+
+
+Xin Li (17):
+  KVM: VMX: Add support for the secondary VM exit controls
+  KVM: VMX: Initialize VM entry/exit FRED controls in vmcs_config
+  KVM: VMX: Disable FRED if FRED consistency checks fail
+  KVM: VMX: Initialize VMCS FRED fields
+  KVM: VMX: Set FRED MSR interception
+  KVM: VMX: Save/restore guest FRED RSP0
+  KVM: VMX: Add support for FRED context save/restore
+  KVM: x86: Add a helper to detect if FRED is enabled for a vCPU
+  KVM: VMX: Virtualize FRED event_data
+  KVM: VMX: Virtualize FRED nested exception tracking
+  KVM: x86: Mark CR4.FRED as not reserved
+  KVM: VMX: Dump FRED context in dump_vmcs()
+  KVM: x86: Allow FRED/LKGS to be advertised to guests
+  KVM: nVMX: Add support for the secondary VM exit controls
+  KVM: nVMX: Add FRED VMCS fields to nested VMX context management
+  KVM: nVMX: Add VMCS FRED states checking
+  KVM: nVMX: Allow VMX FRED controls
+
+Xin Li (Intel) (2):
+  x86/cea: Export per CPU array 'cea_exception_stacks' for KVM to use
+  KVM: x86: Save/restore the nested flag of an exception
+
+ Documentation/virt/kvm/api.rst            |  19 ++
+ Documentation/virt/kvm/x86/nested-vmx.rst |  19 ++
+ arch/x86/include/asm/kvm_host.h           |   8 +-
+ arch/x86/include/asm/msr-index.h          |   1 +
+ arch/x86/include/asm/vmx.h                |  48 ++++-
+ arch/x86/include/uapi/asm/kvm.h           |   4 +-
+ arch/x86/kvm/cpuid.c                      |   2 +
+ arch/x86/kvm/kvm_cache_regs.h             |  15 ++
+ arch/x86/kvm/svm/svm.c                    |   2 +-
+ arch/x86/kvm/vmx/capabilities.h           |  26 ++-
+ arch/x86/kvm/vmx/nested.c                 | 188 ++++++++++++++++-
+ arch/x86/kvm/vmx/nested.h                 |  22 ++
+ arch/x86/kvm/vmx/vmcs.h                   |   1 +
+ arch/x86/kvm/vmx/vmcs12.c                 |  19 ++
+ arch/x86/kvm/vmx/vmcs12.h                 |  38 ++++
+ arch/x86/kvm/vmx/vmcs_shadow_fields.h     |   4 +
+ arch/x86/kvm/vmx/vmx.c                    | 237 ++++++++++++++++++++--
+ arch/x86/kvm/vmx/vmx.h                    |  15 +-
+ arch/x86/kvm/x86.c                        |  74 ++++++-
+ arch/x86/kvm/x86.h                        |   8 +-
+ arch/x86/mm/cpu_entry_area.c              |   7 +
+ include/uapi/linux/kvm.h                  |   1 +
+ 22 files changed, 727 insertions(+), 31 deletions(-)
+
+
+base-commit: acb4f33713b9f6cadb6143f211714c343465411c
+-- 
+2.48.1
 
 
