@@ -1,183 +1,161 @@
-Return-Path: <linux-doc+bounces-42229-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-42231-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70017A7BE27
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Apr 2025 15:43:16 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A25A4A7BE65
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Apr 2025 15:54:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 463777A0119
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Apr 2025 13:41:48 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9A5CB3B9C47
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Apr 2025 13:53:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 493021EF0BA;
-	Fri,  4 Apr 2025 13:42:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD2751F1523;
+	Fri,  4 Apr 2025 13:53:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="i4RrI9dK"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="u86qq+WW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 11F8512D1F1;
-	Fri,  4 Apr 2025 13:42:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.39.254
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AF9D1F12E8;
+	Fri,  4 Apr 2025 13:53:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1743774167; cv=none; b=XmoJR+/LGO7Qk8fXJ32rIR7voqae2EglZ77P9UVphQQeMc/a2PMBAwmy9jV9t5P1zx5/ul4f3gWZVx2u7HtP4L7XEvEEfjeC7PF/PJgo3M3pNzXx+wMYmQnCxvLt6wIbqHt16YdWngflDYt+t+OWgzmkYKjuFo/lPTZxTUDk+vU=
+	t=1743774810; cv=none; b=RjncH6tN2bNl7LG5B2D+3L6Kk9qtzGcjjxq8kLZcmRNvHSkxQyuKK5Qw3/pNqLA/h/c0KcMcbNZBrqNJmcNncLtCIx8IMVeH3x2jnVd5BGo2i32pg0gvAauKd1kqsh4BQBeeB9FydR/P8ro/z78uJwk2ahx2ZBrYg2YMZ44Vu6E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1743774167; c=relaxed/simple;
-	bh=u0SPVnMW7m9xp1q5Fto8u0ZT8lP0XSxKjLxGAkfDFcM=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=WfMw4nOkq4cG2o/iNikmGxyI/LxlZHpcw7CT93CdRGeRreSsYbgD7kV/LcSYgvswGVNV6es1GVT/tkmFIvvbucS3lNdX9Xi9hqbyAZLYc5irziAeoszufNGKbsT5TSR3ztoR5pQ8vVF/yPC3zMiBsd9qdy8r1g64s4QwGTvyr2k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com; spf=pass smtp.mailfrom=dh-electronics.com; dkim=pass (2048-bit key) header.d=dh-electronics.com header.i=@dh-electronics.com header.b=i4RrI9dK; arc=none smtp.client-ip=188.68.39.254
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
-	s=dhelectronicscom; t=1743774124;
-	bh=mEWTFQi0x5I0T2Dvamc/ses98XmOTmvVCWZ+pb/lH5c=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:From;
-	b=i4RrI9dK1RsghyjTi4uJ/ikCIThxUd2xmZNgFuyrDqOCsETVlNS2SdKEVP3QWoGK/
-	 PoKjj04RKs25xqe2xXxwoy+r2W6Uj9H5rheKaX+YdPlv45XCtgpt2Nm320jIZ1J05Q
-	 7uEbySnWIm61SVx1LqnENQLUbddf/u14dyhBSjRZg4DogquJ8UylvYUWoCcgkMrl/Z
-	 gOM1soon6JyJeV9dwVhxwS9lBFdBczAn7fRkDPQfl5hx9iz57Q6W8NC1eZvS+kuevn
-	 SXJweNY/go1Wx3Hg9aoiLUAKiznMA+hyF92AIDMaPZf6PmMSeVO4jN0qJMo0j0MVx1
-	 aoEsFUBXvKr9Q==
-From: Johann Neuhauser <jneuhauser@dh-electronics.com>
-To: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-CC: Johann Neuhauser <jneuhauser@dh-electronics.com>, Jonathan Corbet
-	<corbet@lwn.net>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
-	<broonie@kernel.org>
-Subject: [PATCH 3/3] docs: regulator: userspace-consumer: Add uevent-based regulator event reporting
-Date: Fri, 4 Apr 2025 15:40:09 +0200
-Message-ID: <20250404134009.2610460-4-jneuhauser@dh-electronics.com>
-X-klartext: yes
-In-Reply-To: <20250404134009.2610460-1-jneuhauser@dh-electronics.com>
-References: <20250404134009.2610460-1-jneuhauser@dh-electronics.com>
+	s=arc-20240116; t=1743774810; c=relaxed/simple;
+	bh=2rzMRftKBbWXyLp7FGHjPk6gHfvfTiEV+d+apCFfS6U=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=kbwCpRVtixlCmVemCVJrikfYlN3V3LwkVvFbVyX6yz+cankLcoJBF4MZv0YppntUteKE1UeH0aWFVhrTrJLhIkYHBhm0jyMYPvgmrphykLtuzMi2x6l7T4RpaPuUYA+BpJG7jl9+STKyw9hKxRuv6CKatpZ9gxMK5GIIUCWBR0E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=u86qq+WW; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67702C4CEE9;
+	Fri,  4 Apr 2025 13:53:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1743774810;
+	bh=2rzMRftKBbWXyLp7FGHjPk6gHfvfTiEV+d+apCFfS6U=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=u86qq+WWOgfr/y8T3yYEfFibNlmCislNnrANwDMm0Ddd3FrjSwk5X/9lyM2ctT40p
+	 fbIqF2t2bIDazWL1aQ+8uKlFQwozKkEDLtbquMfiQEfWaMUxIkbLXNa3+U20SS79tc
+	 zsXuF9LVeo4pVn1onYujBO70qGEQvFTfGdJyt62/ft4rTl1i7VRVZueQsD5E0NMq3R
+	 4XlixfG7j2DkiY5hGeOJg9CqNrunFEW/Vhp7IbJcQUzXFhrmZ9yj191xLraeS8y+0B
+	 A5ZL0U88jgVbAMqN4TBDpuesEaWt5Mz+qG36eitZepGX00BCXMDM83p/0iTferff24
+	 ylNRrHAYePorg==
+Date: Fri, 4 Apr 2025 16:53:13 +0300
+From: Mike Rapoport <rppt@kernel.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Pratyush Yadav <ptyadav@amazon.de>,
+	Changyuan Lyu <changyuanl@google.com>, linux-kernel@vger.kernel.org,
+	graf@amazon.com, akpm@linux-foundation.org, luto@kernel.org,
+	anthony.yznaga@oracle.com, arnd@arndb.de, ashish.kalra@amd.com,
+	benh@kernel.crashing.org, bp@alien8.de, catalin.marinas@arm.com,
+	dave.hansen@linux.intel.com, dwmw2@infradead.org,
+	ebiederm@xmission.com, mingo@redhat.com, jgowans@amazon.com,
+	corbet@lwn.net, krzk@kernel.org, mark.rutland@arm.com,
+	pbonzini@redhat.com, pasha.tatashin@soleen.com, hpa@zytor.com,
+	peterz@infradead.org, robh+dt@kernel.org, robh@kernel.org,
+	saravanak@google.com, skinsburskii@linux.microsoft.com,
+	rostedt@goodmis.org, tglx@linutronix.de, thomas.lendacky@amd.com,
+	usama.arif@bytedance.com, will@kernel.org,
+	devicetree@vger.kernel.org, kexec@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+	linux-mm@kvack.org, x86@kernel.org
+Subject: Re: [PATCH v5 09/16] kexec: enable KHO support for memory
+ preservation
+Message-ID: <Z-_kSXrHWU5Bf3sV@kernel.org>
+References: <20250320015551.2157511-1-changyuanl@google.com>
+ <20250320015551.2157511-10-changyuanl@google.com>
+ <mafs05xjmqsqc.fsf@amazon.de>
+ <20250403114209.GE342109@nvidia.com>
+ <Z-6UA3C1TPeH_kGL@kernel.org>
+ <20250403142438.GF342109@nvidia.com>
+ <Z--sUYCvP3Q8nT8e@kernel.org>
+ <20250404124729.GH342109@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250404124729.GH342109@nvidia.com>
 
-Add detailed documentation for the new uevent-based event reporting
-introduced in the regulator userspace-consumer driver.
+On Fri, Apr 04, 2025 at 09:47:29AM -0300, Jason Gunthorpe wrote:
+> On Fri, Apr 04, 2025 at 12:54:25PM +0300, Mike Rapoport wrote:
+> > > IMHO it should not call kho_preserve_phys() at all.
+> > 
+> > Do you mean that for preserving large physical ranges we need something
+> > entirely different?
+> 
+> If they don't use the buddy allocator, then yes?
+> 
+> > Then we don't need the bitmaps at this point, as we don't have any users
+> > for kho_preserve_folio() and we should not worry ourself with orders and
+> > restoration of high order folios until then ;-)
+> 
+> Arguably yes :\
+> 
+> Maybe change the reserved regions code to put the region list in a
+> folio and preserve the folio instead of using FDT as a "demo" for the
+> functionality.
 
-This documentation explains:
-- The new supported regulator events exposed via uevents.
-- Methods to monitor these events from userspace using `udevadm`.
-- Practical examples for creating udev rules and scripts.
+Folios are not available when we restore reserved regions, this just won't
+work.
 
-Signed-off-by: Johann Neuhauser <jneuhauser@dh-electronics.com>
----
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Liam Girdwood <lgirdwood@gmail.com>
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: Mark Brown <broonie@kernel.org>
----
- .../regulator/userspace-consumer.rst          | 92 +++++++++++++++++++
- 1 file changed, 92 insertions(+)
- create mode 100644 Documentation/driver-api/regulator/userspace-consumer.rst
+> > The xarrays + bitmaps do have the limitation that we cannot store any
+> > information about the folio except its order and if we are anyway need
+> > something else to preserve physical ranges, I suggest starting with
+> > preserving ranges and then adding optimizations for the folio case.
+> 
+> Why? What is the use case for physical ranges that isn't handled
+> entirely by reserved_mem_add()?
+> 
+> We know what the future use case is for the folio preservation, all
+> the drivers and the iommu are going to rely on this.
 
-diff --git a/Documentation/driver-api/regulator/userspace-consumer.rst b/Documentation/driver-api/regulator/userspace-consumer.rst
-new file mode 100644
-index 000000000000..308873fd20cb
---- /dev/null
-+++ b/Documentation/driver-api/regulator/userspace-consumer.rst
-@@ -0,0 +1,92 @@
-+============================
-+Regulator Userspace Consumer
-+============================
-+
-+This document describes the Userspace Consumer Regulator Driver
-+(`drivers/regulator/userspace-consumer.c`) and its userspace interface.
-+
-+Introduction
-+------------
-+
-+The Userspace Consumer Regulator provides userspace with direct control
-+and monitoring of regulator outputs. It now supports reporting regulator
-+events directly via uevents, enabling userspace to handle events such as
-+overcurrent, voltage changes, enabling/disabling regulators, and more.
-+
-+Supported Events
-+----------------
-+
-+The driver emits uevents corresponding to the regulator events defined in
-+``include/uapi/regulator/regulator.h``.
-+
-+Currently supported regulator event uevents are:
-+
-+- ``EVENT=ABORT_DISABLE``
-+- ``EVENT=ABORT_VOLTAGE_CHANGE``
-+- ``EVENT=DISABLE``
-+- ``EVENT=ENABLE``
-+- ``EVENT=FAIL``
-+- ``EVENT=FORCE_DISABLE``
-+- ``EVENT=OVER_CURRENT``
-+- ``EVENT=OVER_TEMP``
-+- ``EVENT=PRE_DISABLE``
-+- ``EVENT=PRE_VOLTAGE_CHANGE``
-+- ``EVENT=REGULATION_OUT``
-+- ``EVENT=UNDER_VOLTAGE``
-+- ``EVENT=VOLTAGE_CHANGE``
-+
-+Monitoring Events from Userspace
-+--------------------------------
-+
-+Userspace applications can monitor these regulator uevents using ``udevadm``:
-+
-+.. code-block:: bash
-+
-+   udevadm monitor -pku
-+
-+Example output:
-+
-+.. code-block::
-+
-+    KERNEL[152.717414] change   /devices/platform/output-usb3 (platform)
-+    ACTION=change
-+    DEVPATH=/devices/platform/output-usb3
-+    SUBSYSTEM=platform
-+    NAME=event
-+    EVENT=OVER_CURRENT
-+    DRIVER=reg-userspace-consumer
-+
-+Handling Events with Udev Rules
-+-------------------------------
-+
-+Userspace can react to these events by creating udev rules. For example,
-+to trigger a script on an OVER_CURRENT event:
-+
-+.. code-block:: udev
-+
-+    # /etc/udev/rules.d/99-regulator-events.rules
-+    ACTION=="change", SUBSYSTEM=="platform", DRIVER="reg-userspace-consumer", ENV{EVENT}=="OVER_CURRENT", RUN+="/usr/local/bin/handle-regulator-event.sh"
-+
-+A sample handler script:
-+
-+.. code-block:: bash
-+
-+    #!/bin/sh
-+    logger "Handle regulator ${EVENT} on ${DEVPATH}"
-+    # Add additional handling logic here
-+    case "${EVENT}" in
-+    OVER_CURRENT)
-+      echo disabled > /sys"${DEVPATH}"/state
-+    esac
-+
-+API Stability
-+-------------
-+
-+This interface is considered stable. New regulator events may be added
-+in the future, with corresponding documentation updates.
-+
-+References
-+----------
-+
-+- Kernel Header File: ``include/uapi/regulator/regulator.h``
-+- Driver Source: ``drivers/regulator/userspace-consumer.c``
+We don't know how much of the preservation will be based on folios.
+Most drivers do not use folios and for preserving memfd* and hugetlb we'd
+need to have some dance around that memory anyway.  So I think
+kho_preserve_folio() would be a part of the fdbox or whatever that
+functionality will be called.
+
+> > Here's something that implements preservation of ranges (compile tested
+> > only) and adding folios with their orders and maybe other information would
+> > be quite easy.
+> 
+> But folios and their orders is the *whole point*, again I don't see
+> any use case for preserving ranges, beyond it being a way to optimize
+> the memblock reserve path. But that path should be fixed up to just
+> use the bitmap directly..
+
+Are they? 
+The purpose of basic KHO is to make sure the memory we want to preserve is
+not trampled over. Preserving folios with their orders means we need to
+make sure memory range of the folio is preserved and we carry additional
+information to actually recreate the folio object, in case it is needed and
+in case it is possible. Hughetlb, for instance has its own way initializing
+folios and just keeping the order won't be enough for that.
+
+As for the optimizations of memblock reserve path, currently it what hurts
+the most in my and Pratyush experiments. They are not very representative,
+but still, preserving lots of pages/folios spread all over would have it's
+toll on the mm initialization. And I don't think invasive changes to how
+buddy and memory map initialization are the best way to move forward and
+optimize that. Quite possibly we'd want to be able to minimize amount of
+*ranges* that we preserve.
+
+So from the three alternatives we have now (xarrays + bitmaps, tables +
+bitmaps and maple tree for ranges) maple tree seems to be the simplest and
+efficient enough to start with.
+ 
+Preserving folio orders with it is really straighforward and until we see
+some real data of how the entire KHO machinery is used, I'd prefer simple
+over anything else.
+
+> Jason
+
 -- 
-2.39.5
-
+Sincerely yours,
+Mike.
 
