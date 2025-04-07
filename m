@@ -1,202 +1,141 @@
-Return-Path: <linux-doc+bounces-42364-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-42367-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D0FFA7E0DC
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 16:17:45 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 188DBA7E293
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 16:50:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 83BAF7A4662
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 14:16:19 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CC9DC42379E
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 14:35:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E1D11D7E47;
-	Mon,  7 Apr 2025 14:17:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 514B11E47DD;
+	Mon,  7 Apr 2025 14:26:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=live.com header.i=@live.com header.b="AmbIzCK/"
+	dkim=pass (2048-bit key) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="QzZ0HwG0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PNYPR01CU001.outbound.protection.outlook.com (mail-centralindiaazolkn19010003.outbound.protection.outlook.com [52.103.68.3])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 834281D14FF;
-	Mon,  7 Apr 2025 14:17:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.103.68.3
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744035433; cv=fail; b=tJ4xrSypE7R+59/3lr4YaoMleY/zYkbZCqU8g8LZea+OX4qmgZhTo6fkZJFUNQuN/O2sNoUoA418yzxhi+GbB+6O+dJRMJx14pRUglRENTJFlmaKyChOvTXULNyZvRb09ouKlKUyKy7ROpkoYxOpGLDr61GUHzNhqFX4ryyZ+rw=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744035433; c=relaxed/simple;
-	bh=JdmO5FXd/XjLipUXo2eKONhDQIvcAJeNWtPMPf4jXKs=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A12C1B040D;
+	Mon,  7 Apr 2025 14:26:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=116.203.31.6
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1744036005; cv=none; b=QfMVaXf5y23fRvM2VPK0nLI8zn4HiC9XDlIpVt3/8pRg4isyMI40eP232OBOoojBf53wKjoNXVNKxoDhRBUIsjsyNPYr9HVmPIvcnmxZ2m9Nx8qNF4YCzZHvDpBHO54MxMTe1P0U/MxlG9s2OKCEBuBGBTQADOfvGKpWoAa33OU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1744036005; c=relaxed/simple;
+	bh=i5QeRTJ4wZvcsOVrDCD4cxOIezlH5OfoOAm/7+gDxZU=;
 	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=cyT9WZ3js3tMTJUoHFiHTUE6S0EC8oejHGtdEU8xLHUG/4hYKVqQg7V0u1FtBurYeJNLUs7A7DDPK7ZkXQLxWR6zLJZF64vzsRq5ZSgpNgZjB1o5kwGno9XiLGLqAUh0MR9pH7H4bUk6geUh2fk1kZaRrQp2CcxhSDOmYmQwcSc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=live.com; spf=pass smtp.mailfrom=live.com; dkim=pass (2048-bit key) header.d=live.com header.i=@live.com header.b=AmbIzCK/; arc=fail smtp.client-ip=52.103.68.3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=live.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=live.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Hclf58rwZ5EekaaaX7G6e9BzHf7l+7OZm8VV+vg+xexyMc371LaaJyRcpzS7Ay2RCEItg9dVcu+/MpD1H1woV/7otZbnREZ2922uKvLP2Plw87CdjmsMaDBoXDNUW5FGoQI2rXWHt27TAcwRd6/EN80pLxfC//h6/ob7MD2+UUIH5F3YzacFBSorDQgWrwatPcgUGNuNT4TfEd2xUPNBS5EI+xNYYCczRTog1k/nyQhuU3+1+c/IcQt9bnGRpET2ltLe5mUivWsdxOB3u48tA8iAO+iYGAGpuqAXPvSgEUDnfMDqXplVWvsZhitRmtH48fmnAUAbWeFUwXHDSneyOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JdmO5FXd/XjLipUXo2eKONhDQIvcAJeNWtPMPf4jXKs=;
- b=RCBMjq/GCMw847mPnDEB0CW1o6sB7L6Wl97APkS9bwhJ54sz9ND4RCK3GNZwOIRfhJfZZdThAAjuDNf4eZlLZ9Zb3uH+RnyqVwZ9nt5HU5piQAjJ4HlUFgRjhDhsfGLfrnmtq4wmfmKhdBetrTuoC6ki9sjrETI6GzHtNRr0ivgO8vMbGnXqJuLVkWMOcTsr8Da2sJTIzxXCDLohy0E0Zzh+kp9GjEB2QszsXOe7BX1N3eepp7wxZ01vYbhFiOx3aPwDHjUF3AOI1HzHIyo7ke2TYNAo9XH2D1F4JOug24yHv6bpv8QHEKryxNzbI5OYf0SboaxktmSkRv9dUcsl7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=live.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JdmO5FXd/XjLipUXo2eKONhDQIvcAJeNWtPMPf4jXKs=;
- b=AmbIzCK/6njm1OA1no3TAmhvuW1If9mA/MZ+COr0fEMzktec8Tom6V6wtG82V+UWYXbxvhDz0oeqHG5HbH1YqjTrfZ3mcayTLbq/eJM/HINbvdQTM2z1wz2pdX5zt8oguUxPl9s/dkQO6PcikmJR6xNvA5RLdwAFRB06qHAcb77Tb19+snDpZ5pRVVk9efcdBGh5AbusNdtWMppznFp3QA2Og7Ngf/cMMWoCbSvUpROwyKTx+2eKPgw51vJjg7v23MOTJh7LveRgYw3PrsmnuKCUsXqLDiiZc3vdcVEYFBbd4Vywrn6VVe23/XHi80n0Ay7OVeGbvIhInzuyUAY/ag==
-Received: from PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:f7::14)
- by MAXPR01MB4454.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:1::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8606.34; Mon, 7 Apr
- 2025 14:17:00 +0000
-Received: from PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::324:c085:10c8:4e77]) by PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::324:c085:10c8:4e77%7]) with mapi id 15.20.8606.029; Mon, 7 Apr 2025
- 14:17:00 +0000
-From: Aditya Garg <gargaditya08@live.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-CC: "alyssa@rosenzweig.io" <alyssa@rosenzweig.io>, Petr Mladek
-	<pmladek@suse.com>, Sven Peter <sven@svenpeter.dev>, Thomas Zimmermann
-	<tzimmermann@suse.de>, Aun-Ali Zaidi <admin@kodeit.net>, Maxime Ripard
-	<mripard@kernel.org>, "airlied@redhat.com" <airlied@redhat.com>, Simona
- Vetter <simona@ffwll.ch>, Steven Rostedt <rostedt@goodmis.org>, Rasmus
- Villemoes <linux@rasmusvillemoes.dk>, Sergey Senozhatsky
-	<senozhatsky@chromium.org>, Jonathan Corbet <corbet@lwn.net>, Andrew Morton
-	<akpm@linux-foundation.org>, "apw@canonical.com" <apw@canonical.com>,
-	"joe@perches.com" <joe@perches.com>, "dwaipayanray1@gmail.com"
-	<dwaipayanray1@gmail.com>, "lukas.bulwahn@gmail.com"
-	<lukas.bulwahn@gmail.com>, Kees Cook <kees@kernel.org>, "tamird@gmail.com"
-	<tamird@gmail.com>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, Hector Martin
-	<marcan@marcan.st>, "asahi@lists.linux.dev" <asahi@lists.linux.dev>
-Subject: Re: [PATCH v3 0/3] Use proper printk format in appletbdrm
-Thread-Topic: [PATCH v3 0/3] Use proper printk format in appletbdrm
-Thread-Index: AQHbp8HmxJN8LS0hCEKm1MGctLhrbLOYOfoAgAAF9Uo=
-Date: Mon, 7 Apr 2025 14:17:00 +0000
-Message-ID:
- <PN3PR01MB9597E19A55EAFC3E7B191F5FB8AA2@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
-References:
- <PN3PR01MB9597596DA5DA9FC02825CF0FB8AA2@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
- <Z_PZXPAklfkMlx6O@smile.fi.intel.com>
-In-Reply-To: <Z_PZXPAklfkMlx6O@smile.fi.intel.com>
-Accept-Language: en-IN, en-US
-Content-Language: en-IN
+	 Content-Type:MIME-Version; b=EPaicFGoo7/NMWzQw+wF17QJ+D9vnpGlg5SBLLz7cUP5JMn0FcibxWsZFqvBfitPNpYHQznHhC6PerPgT0u/OdxiImCCHjKeQzgAvKkmkBYWqAzZ2TuibzC4hQWbrBMKkRlcIqWjRrIIB2bMbbuiPfLrgCkX8zFBhrzzdbQHfFs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com; spf=pass smtp.mailfrom=dh-electronics.com; dkim=pass (2048-bit key) header.d=dh-electronics.com header.i=@dh-electronics.com header.b=QzZ0HwG0; arc=none smtp.client-ip=116.203.31.6
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+	s=dhelectronicscom; t=1744035433;
+	bh=Tw+jh4xG+pO+8sA5mfFF2qIiv6zO55JdMVdaA4kMzwY=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+	b=QzZ0HwG0iOvqjM+JZS7JJtNsFvHpsFyoKr00R+5kU3/W5n/5DpEITnRnrhdCOczJn
+	 n0oKJOQ+TWjnEKjw7nIP2CKUf94apFGKMT90p1QrZ+RwxaCG0uo7yJk+d6OGCHs4L3
+	 VGaYrYw1RciiKbE8ZkXmeIwbu2xWHRRizMcjtEK217FkkmJbXcfT/BFKl0jP5yBob7
+	 kRiu+2bTob2atF9GhXPU8ixpofS4WwejMgQ+qaDoxhVM065L0uJV5BGpK7Ku6t+MPZ
+	 TIOYAUWa/bn1UJxys2ngVmzWcrPIoOXeHOujawt2I2P/IrnLYWpDeKSFucqhYFrWQD
+	 5OuiX9gFGiDbg==
+X-secureTransport-forwarded: yes
+From: Johann Neuhauser <jneuhauser@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Mark Brown <broonie@kernel.org>
+CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, Jonathan Corbet
+	<corbet@lwn.net>, Liam Girdwood <lgirdwood@gmail.com>
+Subject: RE: [PATCH 0/3] regulator: userspace-consumer: Add regulator event
+ uevents
+Thread-Topic: [PATCH 0/3] regulator: userspace-consumer: Add regulator event
+ uevents
+Thread-Index: AQHbpWdCFTa8WJXI70ea5+K9p5nNDrOTmnmAgARlZbA=
+Date: Mon, 7 Apr 2025 14:17:10 +0000
+Message-ID: <a18c4ad3b9f647c08d71b4550b5f1cf9@dh-electronics.com>
+References: <20250404134009.2610460-1-jneuhauser@dh-electronics.com>
+ <b5fa7d1a-16bf-4031-8990-f559cf589b67@sirena.org.uk>
+In-Reply-To: <b5fa7d1a-16bf-4031-8990-f559cf589b67@sirena.org.uk>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
 X-MS-Has-Attach:
 X-MS-TNEF-Correlator:
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PN3PR01MB9597:EE_|MAXPR01MB4454:EE_
-x-ms-office365-filtering-correlation-id: 1631ec31-49a3-4a60-63aa-08dd75dedd0b
-x-microsoft-antispam:
- BCL:0;ARA:14566002|461199028|19110799003|8062599003|8060799006|15080799006|6072599003|7092599003|10035399004|4302099013|3412199025|440099028|102099032|1602099012;
-x-microsoft-antispam-message-info:
- =?utf-8?B?dzRzdzV3bU5xbmM5NWYrRm5USXlnRXlycm5Wa0ZmS092R3FBb1lOc0IvWG9X?=
- =?utf-8?B?TWRFb1RXN3AyYUJSclFPL05ZMjFwOC85Zy9ZcVdsazA4cHp2VG1pUVNsa0FT?=
- =?utf-8?B?NWp4YW1CYzFwYUJNbXNNV2pYS0tMNjZJUERkendQRWVCNG1mNDRieXdFY0x4?=
- =?utf-8?B?dnpoSEtYdENzWHRzbkRXbklTd0J4bzErRUZjZmFqQU9MZU5NL3cxdVJZREdC?=
- =?utf-8?B?WWxVZDhDTkI0UElCcmFNNTk3bkt3NjE2ZGxvTTFWSW5OQm5jbEhGTnZWMWpV?=
- =?utf-8?B?Q1ZYYW9Hb0x6WnIzY1dGOFNFeEg0VEJxOGxrU1B3OXpNMHBFQ1J5WDg4NXVP?=
- =?utf-8?B?aUJjTVJnWEpuTGpHNi9SdTQ0UndOeFVUZXRMVmtDR0Vzb08rWXFvVlp4all3?=
- =?utf-8?B?NVp1anNsS0xGU1NWdG54RThLdnE4WTRJVys1ei9NSTVWekR0MzFtai9QSUVS?=
- =?utf-8?B?UmxYd0J1N2lYbTRqbmlzNHAwaXpmdnhNM2FmZXYzdVZPZXVwaVZoWGxnVEk5?=
- =?utf-8?B?eWtoaXpjV205L0lhQWRqWjlReWt4ZmU3VThNVlVpeHhUdXA4a0JWa0M4a0xQ?=
- =?utf-8?B?Ym05VFhNNk1xZGJ0dVllY3VsQlFFNHhaWUZmN3lGUW1hMnNWeExOaUM0eUF5?=
- =?utf-8?B?MEN0dmtlbjVlTDc3bW1Jd2xFR3ZjdnpXQVFrNFdlWG5KZWo4U1hvVTRUeGVX?=
- =?utf-8?B?Ylhrc05lUVJCOTI5T0xWYXpkVStZb1NncFk3a3dXRGhLTG9sRUhNREN1Z2hK?=
- =?utf-8?B?MUUzTGFlMkt0c2RkcitJNCsxc0l5TTBmYWV1Y0pLaGRjbkpEOGZoQnUxVWNQ?=
- =?utf-8?B?bjI0cDZCa3ZHSlBSTGRYNU1tOXBZQmNEeTJ6dGcweVoxa0dwcjd2MWE5elVL?=
- =?utf-8?B?cG4xZ0kyUGtaZmZoR0FONnBMdEV3YUJQdTNFMjJETjUyRDk3RzhYNEhld2xu?=
- =?utf-8?B?S0VQbFZodzZLTHdtTjhERjBqTzFmTU1KVXlwRmxFQXNveXFGSElFZEFLTkZm?=
- =?utf-8?B?Sk95WTBzNG5BNmtNaVJXeUFMdkFmSzQzUWcydzN0TmlFTmd4Q3ozaW9KdmZ0?=
- =?utf-8?B?SW1ZeWpHck9EZzY2QUFjajVHbXBCWXUzNDZLaUVhOEMwWEtzQ3dXVktIZzdR?=
- =?utf-8?B?OVZPcm1peUJxaVR1WitJUWx4NnZPOHd1RUlUVHJISGR5Zkl0aTBTTThmYTQ4?=
- =?utf-8?B?Wm9yUkwvV0w2VnM5ZXg0dmJQc05FOFVnS2hQUlU2SmxnbkIrM3NHSnRwaUNy?=
- =?utf-8?B?Ti91ZU1oWFJzRjdSbDN6MGxCZFVxMjBWUG9wYTZnMmlmSEI3MGxuRHZ5L0dl?=
- =?utf-8?B?Sko0WE54VmZ1ZmhYVkRkZ21qS2swOW9vTTNJOHBVdFh4R0RLRit6c0pobFJN?=
- =?utf-8?B?RXpUdS9kQ2hmbEpaa2VXeFBXQ3BHbWQxM01lM0ZObjJWMTZCQ1g2aFRhcUE1?=
- =?utf-8?B?VEo4Y0gzb25jVnBzNU5BYi9GN1hUNTNqNEtPQTZKVkZKUEkvRDg4a21aN3Fr?=
- =?utf-8?B?YVMxRDlsVlhGR2ZncE85bU85b0tOWWFUd2ZtSTRoS3hvU3lYaFBLK3U5dVcz?=
- =?utf-8?B?M3F4ZjJSaWxWcloxcUhzZFpObG1yK25SUDJPbll6Mm5wOW81c1EzRjJJdkxY?=
- =?utf-8?B?L1ZXSzhvRkFHRmRHRUk5ZlU0MU82UHNGUURiSWpPNStDeTZyelhGODZjb2tt?=
- =?utf-8?B?U1RMOW52b1NDb1lYaXRYbFVUK2FjVU1qMGlDeUFLL3dTWkVZYkJ2UDduQStB?=
- =?utf-8?Q?5DCBFDrRuFKgCPOv8g=3D?=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?dGZZdk01TlE1QWJqSVdYWVVNcUMwbFdhK1ZNUGJ4UzEvMUprcTVaYS9ncThC?=
- =?utf-8?B?aHI3QnQxdGhEZ1hqV2k1RHdCWGxJNnJFN3N5VGlTeFJtc3pBYjYvLzNkaDh5?=
- =?utf-8?B?ZmVrV1VPdnM4YjBYamVDUXYrOG5JT095dytaWmROTjU2SUZLUnpYQ3ZUck5x?=
- =?utf-8?B?emJ1R1dCMFJkTlI5YXVuOWFwQUJqT0tPcnU5Rjg2Vyt2bEhRWWNrQXZUckxR?=
- =?utf-8?B?WUE3RExRbUxSYW1FN0JkelZkTC9wQmRIWEFMWE9malpBSmJDWEErZ1ZjSThO?=
- =?utf-8?B?TXhJdXlrWW90b1o4QWhVV0puZ3Nsdmt3WFlpMi9KaDNJUlU2Z1BMS3RBdllC?=
- =?utf-8?B?TzdOTzlTNXdURmVCdlpnZmhJWGJyYmNtM1ROZmM2QmhsMHVEYnpiSzRqWXU0?=
- =?utf-8?B?c0cyQlJDbmZXK0xKa2ZZazNyQVcwVmpmZEJpTExHY0twSm4rRlB2V3F6Kytq?=
- =?utf-8?B?L2ZXTW5xQzBWT1piTFgyK0UxM1h5L2R6SUFabmhKU0dPbklZSkJ5aGh4T002?=
- =?utf-8?B?RlZOeTBtUkRaTkVodzd6eDJhb0VSbDhEVGVMVVJvTnRrUGRzNTF2aGJ1aEo0?=
- =?utf-8?B?RWFTcFNuUnRUZC8vcmJxKzUrOU9GOW9Pa3B4VWlvTHhMcEdacG81cTc4M0p2?=
- =?utf-8?B?c1UwMGlTTjl4aXFzM2RpaWdJdDNsUzdCdnpaYTFNRTJGc1A3ZU5uUUx2TGtS?=
- =?utf-8?B?WDNiMklBSHo2R1N3eCt5clNMOTVnZ3BHdmNJVTJJOGMrODhRK1BibGgvTXFU?=
- =?utf-8?B?Y0lkRWpnc0x6WEZWUlpqcXhCbE9ud3pSZ0FjQ0tmRVRUT2NzeHZheEdHOEd1?=
- =?utf-8?B?YmN4Q2tJemtOeU5MbFJQaW84UnZ4WVZEV2JUTHVIeEY3dThEd2pzVnRQR2xy?=
- =?utf-8?B?cVQ0NmdwclZJMVdidkJrSFU1VEV2Z1BUT1BQK2pKMjJLN1ladjNjZjNJQzly?=
- =?utf-8?B?R3g5dXBuc2g2Ky9QbmJsd3d5YUxTTWZOSnc1a3UvVWRNd1NUQkd3RVNGME1k?=
- =?utf-8?B?R1p5blp1YWxOY3RzYXlMbS9GUWx2ZEZmRGRFMzNIMyt5aVVYb2g3V0hqYmJv?=
- =?utf-8?B?RVhwMnNwdVk2WWhsclJDN0U0bElyRWV1bTc2bFMycStNTjFKaStNZittZlVP?=
- =?utf-8?B?M1oveExZejViV215cHErbHM0OGwwclpDNE1oTE9oQmpjL3Q4bU9nN3lrVFpv?=
- =?utf-8?B?SW8wWUd0VHM1SnlMODdlQXFzL2k2VVlNNXU1aFRCVm83Qk02L0kxWjFuYUlu?=
- =?utf-8?B?OVIxQkl1VVpJdFJyUWtUR1ZvUlJ5RUpSeEFib0lybzFzZUdreTgrVHA0MlpY?=
- =?utf-8?B?aGlrQStyY2luYk53MGxEK3gwUWFDU2plQUFCNkgzcUdOSm0zcHMyeEtmVlRK?=
- =?utf-8?B?SjhITS9nWnV0UkZNaGRFNEZoUEZjaDdxQm9UVXNsWEZQVkJtQlhEMXphMTFv?=
- =?utf-8?B?eUFIY01ubUQvcnB0M3JteGh1ZllSWGsyK0czTkthMHhXN1F4Z3BERU8xVERM?=
- =?utf-8?B?MFlEelZTamhCVTkvYnNtb2lFVlZONC9Bck14bFhicythVU1mWmJMNmRvSHUz?=
- =?utf-8?B?UlFiVmo5Q1ZCYU1FVU84anpZUlh5VFgxYThoNXN2M0dwclpoY290YUx5VVdO?=
- =?utf-8?Q?SlnOo4T/GxMKy3V3duiUtoXnkA1Uw1FjtPaGOxCeXoTg=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: sct-15-20-7719-20-msonline-outlook-ae5c4.templateTenant
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1631ec31-49a3-4a60-63aa-08dd75dedd0b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Apr 2025 14:17:00.8010
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MAXPR01MB4454
 
-DQoNCj4gT24gNyBBcHIgMjAyNSwgYXQgNzoyNuKAr1BNLCBBbmR5IFNoZXZjaGVua28gPGFuZHJp
-eS5zaGV2Y2hlbmtvQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6DQo+IA0KPiDvu79PbiBNb24sIEFw
-ciAwNywgMjAyNSBhdCAwNzowNToxM1BNICswNTMwLCBBZGl0eWEgR2FyZyB3cm90ZToNCj4+IFRo
-ZSB2c3ByaW50IHBhdGNoIHdhcyBvcmlnaW5hbGx5IGJlaW5nIHNlbnQgYXMgYSBzZXBlcmF0ZSBw
-YXRjaCBbMV0sIGFuZA0KPj4gSSB3YXMgd2FpdGluZyBpdCB0byBiZSB0YWtlbiB1cC4gQnV0IGFz
-IHN1Z2dlc3RlZCBieSBQZXRyLCBJJ20gc2VuZGluZw0KPj4gdGhlbSB2aWEgRFJNLg0KPiANCj4g
-DQo+IFlvdXIgbWVzc2FnZSBpcyBkZXRhY2hlZCBmcm9tIHRoZSB0aHJlYWQsIG1ha2Ugc3VyZSB5
-b3UgdXNlIHByb3BlciB0b29scywgZS5nLg0KDQpJdCdzIG5vdCBhIHByb2JsZW0gd2l0aCB0b29s
-cywgaXQncyBhIHByb2JsZW0gd2l0aCBteSBlbWFpbCBwcm92aWRlci4NCg0KTWljcm9zb2Z0IG5v
-dyBzdXBwb3J0cyBvbmx5IG9hdXRoMiBmb3IgU01UUCwgd2hpY2ggZ2l0IHNlbmQtZW1haWwgZG9l
-c24ndCBzdXBwb3J0LiBJIGhhZCBkb25lIGEgZmV3IHRlc3RzIHVzaW5nIG1zbXRwIHdpdGggZ2l0
-IHNlbmQtZW1haWwsIGJ1dCBtc210cCBhbHNvIGhhZCB0aGlzIGRldGFjaGVkIGZyb20gdGhyZWFk
-IGJ1Zywgc2luY2UgaXQgZG9lc24ndCByZWFkIHRoZSBtZXNzYWdlIGlkIHNwZWNpZmllZCBieSBn
-aXQgc2VuZC1lbWFpbC4gSSd2ZSBiZWVuIHVzaW5nIG1hY09TIG1haWwgZm9yIGEgbG9uZyB0aW1l
-IGZvciBrZXJuZWwgcGF0Y2hlcywgYnV0IHNpbmNlIGl0IHdhcyBhIHBhaW4gdG8gcmVib290IHRv
-IG1hY09TIGV2ZXJ5IHRpbWUgZm9yIHRoaXMuIFNvIEkganVzdCB0cmllZCB1c2luZyB0aHVuZGVy
-YmlyZCBpbiBMaW51eCB0aGlzIHRpbWUuIE5vdyB0aGlzIHRpbWUsIGl0IHdhcyBhIGNvbmZpZ3Vy
-YXRpb24gaXNzdWUgaW4gdGh1bmRlcmJpcmQsIGluIHdoaWNoIGl0IHdhcyBtYWtpbmcgYSBjb3B5
-IG9mIHRoZSBzZW50IGVtYWlsIGluIG15IHNlbnQgZm9sZGVyLCByZXN1bHRpbmcgaW4gMiBjb3Bp
-ZXMgdGhlcmUuIEkgcmVwbGllZCB0byB0aGUgY29waWVkIG9uZSBieSBtaXN0YWtlLiBJJ3ZlIGZp
-bmFsbHkgZml4ZWQgdGhpcyBpc3N1ZSBhcyB3ZWxsLCBzbyBzaG91bGQgYmUgZ29vZCBpbiBmdXR1
-cmUuDQoNCj4gDQo+IGBnaXQgZm9ybWF0LXBhdGNoIC0tdGhyZWFkIC0tY292ZXItbGV0dGVyIC12
-MyAuLi5gIGdpdmVzIHRoZSBjb3JyZWN0IHJlc3VsdC4NCj4gDQo+IC4uLg0KPiANCj4+IFsxXTog
-aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGttbC8xQTAzQTVCNC05M0FDLTQzMDctQUU2QS00QTRD
-NEI3RTk0NzJAbGl2ZS5jb20vDQo+IA0KPiBFdmVuIGhlcmUgeW91IGNhbiB1c2UgTGluazogdGFn
-DQoNCkFscmlnaHQuDQo+IA0KPiBMaW5rOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9sa21sLzFB
-MDNBNUI0LTkzQUMtNDMwNy1BRTZBLTRBNEM0QjdFOTQ3MkBsaXZlLmNvbS8gWzFdDQo+IA0KPiAt
-LQ0KPiBXaXRoIEJlc3QgUmVnYXJkcywNCj4gQW5keSBTaGV2Y2hlbmtvDQo+IA0KPiANCg==
+From: Mark Brown <broonie@kernel.org>
+Sent: Friday, April 4, 2025 7:03 PM
+>
+>On Fri, Apr 04, 2025 at 03:40:06PM +0200, Johann Neuhauser wrote:
+>> This series adds support for regulator event reporting via uevents to th=
+e
+>> userspace-consumer regulator driver. The goal is to provide userspace wi=
+th
+>> a straightforward mechanism to monitor and respond to important regulato=
+r
+>> events such as overcurrent conditions, voltage changes, and enable/disab=
+le
+>> transitions.
+>
+>This sounds like you're trying to use userspace-consumer in production
+>rather than as a test bodge...   what's the actual use case here?
+
+Hi Mark,
+
+Thank you for your feedback and question.
+
+We have a hardware setup where the USB-A port is directly connected (D+/D-
+lines) to the SoC, while its VBUS line is driven by an external I=B2C-based=
+ PMIC.
+If a connected USB device attempts to draw more than approximately 800mA,
+the PMIC detects an overcurrent condition, automatically disables the outpu=
+t,
+and communicates an overcurrent event via the regulator framework.
+
+Currently, the generic USB HCD drivers lack a built-in mechanism for handli=
+ng
+or recovering from such regulator-related events, particularly for reportin=
+g or
+re-enabling regulator outputs after an OC condition occurs. The DA8xx OHCI
+driver is one exception, as it indeed provides such functionality, but
+integrating similar support into the generic USB HCD drivers seemed unlikel=
+y to
+be accepted upstream.
+
+I came across the userspace-consumer driver and believed it could help mana=
+ge
+this specific scenario. With this driver, I was able to manually toggle the
+regulator off and back on, successfully clearing the error state. However, =
+the
+driver lacked proper event reporting, making it difficult to identify when =
+the
+regulator had entered an error state. Therefore, I proposed adding regulato=
+r
+event reporting to enable userspace to detect these regulator events via ud=
+ev
+rules and subsequently restore regular USB power operation.
+
+While I was aware that using the userspace-consumer driver might be seen as
+somewhat of a workaround for special cases, I did not fully consider that i=
+t
+was intended primarily as a temporary testing solution and perhaps not suit=
+able
+for this kind of production usage. I'd be grateful for any suggestions or a=
+dvice you
+might have on the appropriate approach or alternative solutions you could
+recommend for upstream integration.
+
+Thanks for again your input and guidance!
+
+Best regards,
+Johann
+
 
