@@ -1,141 +1,140 @@
-Return-Path: <linux-doc+bounces-42367-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-42365-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 188DBA7E293
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 16:50:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82141A7E192
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 16:31:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CC9DC42379E
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 14:35:33 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1A9C43AB5C5
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 14:22:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 514B11E47DD;
-	Mon,  7 Apr 2025 14:26:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 80A1F1DA2E5;
+	Mon,  7 Apr 2025 14:23:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="QzZ0HwG0"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="T9R6bIAt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A12C1B040D;
-	Mon,  7 Apr 2025 14:26:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=116.203.31.6
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCC411D8E10;
+	Mon,  7 Apr 2025 14:23:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744036005; cv=none; b=QfMVaXf5y23fRvM2VPK0nLI8zn4HiC9XDlIpVt3/8pRg4isyMI40eP232OBOoojBf53wKjoNXVNKxoDhRBUIsjsyNPYr9HVmPIvcnmxZ2m9Nx8qNF4YCzZHvDpBHO54MxMTe1P0U/MxlG9s2OKCEBuBGBTQADOfvGKpWoAa33OU=
+	t=1744035790; cv=none; b=ETmeQm9/R1Xi6DyB/aoVg0KBKgMaLPGFewaKX+asvhYxoiyis3xZjCcqyuDOJ24BbGMLsTp3RbenJABftqPMfpNQlkNj/88Zv2/T8cR1DIoTYqRlbgKVP+dYKAKB4UUOYDhuN+0Htl4dmH2i+sJ6HkxCm2zP2HIE5TdLyPG0Wzg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744036005; c=relaxed/simple;
-	bh=i5QeRTJ4wZvcsOVrDCD4cxOIezlH5OfoOAm/7+gDxZU=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=EPaicFGoo7/NMWzQw+wF17QJ+D9vnpGlg5SBLLz7cUP5JMn0FcibxWsZFqvBfitPNpYHQznHhC6PerPgT0u/OdxiImCCHjKeQzgAvKkmkBYWqAzZ2TuibzC4hQWbrBMKkRlcIqWjRrIIB2bMbbuiPfLrgCkX8zFBhrzzdbQHfFs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com; spf=pass smtp.mailfrom=dh-electronics.com; dkim=pass (2048-bit key) header.d=dh-electronics.com header.i=@dh-electronics.com header.b=QzZ0HwG0; arc=none smtp.client-ip=116.203.31.6
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
-	s=dhelectronicscom; t=1744035433;
-	bh=Tw+jh4xG+pO+8sA5mfFF2qIiv6zO55JdMVdaA4kMzwY=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To:From;
-	b=QzZ0HwG0iOvqjM+JZS7JJtNsFvHpsFyoKr00R+5kU3/W5n/5DpEITnRnrhdCOczJn
-	 n0oKJOQ+TWjnEKjw7nIP2CKUf94apFGKMT90p1QrZ+RwxaCG0uo7yJk+d6OGCHs4L3
-	 VGaYrYw1RciiKbE8ZkXmeIwbu2xWHRRizMcjtEK217FkkmJbXcfT/BFKl0jP5yBob7
-	 kRiu+2bTob2atF9GhXPU8ixpofS4WwejMgQ+qaDoxhVM065L0uJV5BGpK7Ku6t+MPZ
-	 TIOYAUWa/bn1UJxys2ngVmzWcrPIoOXeHOujawt2I2P/IrnLYWpDeKSFucqhYFrWQD
-	 5OuiX9gFGiDbg==
-X-secureTransport-forwarded: yes
-From: Johann Neuhauser <jneuhauser@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Mark Brown <broonie@kernel.org>
-CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, Jonathan Corbet
-	<corbet@lwn.net>, Liam Girdwood <lgirdwood@gmail.com>
-Subject: RE: [PATCH 0/3] regulator: userspace-consumer: Add regulator event
- uevents
-Thread-Topic: [PATCH 0/3] regulator: userspace-consumer: Add regulator event
- uevents
-Thread-Index: AQHbpWdCFTa8WJXI70ea5+K9p5nNDrOTmnmAgARlZbA=
-Date: Mon, 7 Apr 2025 14:17:10 +0000
-Message-ID: <a18c4ad3b9f647c08d71b4550b5f1cf9@dh-electronics.com>
-References: <20250404134009.2610460-1-jneuhauser@dh-electronics.com>
- <b5fa7d1a-16bf-4031-8990-f559cf589b67@sirena.org.uk>
-In-Reply-To: <b5fa7d1a-16bf-4031-8990-f559cf589b67@sirena.org.uk>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	s=arc-20240116; t=1744035790; c=relaxed/simple;
+	bh=zTmn5P4FyENhR3+TvfDsp/1/HX1sb8RCnnjZ9N23NDA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=XjSJruMvk59iHiOVmduNfQPp/aGnu+TYmNGKMlbdpY6XEcBPKzeF8fNq+a9jfNfC68zR2VFKWYJgj94VtcEoY0SVpjN7kNhR4MuxC4q2pKqZVhh4F3xtWPF4k7vG5oINm5TAlW00Amdj7k629Iv5xaLKKOIfP4xzIMGQoapzNDQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=T9R6bIAt; arc=none smtp.client-ip=198.175.65.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1744035789; x=1775571789;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=zTmn5P4FyENhR3+TvfDsp/1/HX1sb8RCnnjZ9N23NDA=;
+  b=T9R6bIAtWBYGdBttlOAOUkwBxVDoXkzJZv3pTiQAimC7ykImNYjECLa0
+   ewBiWWFcWd/JvXQYFH1Z9DOWnVG5gkPu7S1Knt83Il3WhmPemPlx7DFYF
+   e4cvpesnjhCQsUm7FH8FfXNCYkmy/MGZsOUSSP0TEi3750rDP82FVmfNW
+   ZaMfcgwGN/t3n4iKB0nLGdRRA6KcTPzzby9WjDfPcY1/HlBWh22FS07dc
+   wNMeuXm9imJnwK/SZFvZI+iOEK0Bb4FKLujAfi4kIp5ZTTmQP73E0qoFu
+   NyGteuvpGEHtBR2FxhaRjzVHKwxy5IfDDbeebitwMyXIQGF86z8752oIj
+   Q==;
+X-CSE-ConnectionGUID: qACBmBWURaWFC8hCO21g9w==
+X-CSE-MsgGUID: N7y2tFq3QT+qbO408cSAmA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11397"; a="56404753"
+X-IronPort-AV: E=Sophos;i="6.15,194,1739865600"; 
+   d="scan'208";a="56404753"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Apr 2025 07:23:08 -0700
+X-CSE-ConnectionGUID: 0/Np+nHdQzWhFwn8StpAXA==
+X-CSE-MsgGUID: vkdJP5xQRfG8NCeg5d7hXA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,194,1739865600"; 
+   d="scan'208";a="127952584"
+Received: from smile.fi.intel.com ([10.237.72.58])
+  by orviesa006.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Apr 2025 07:23:02 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.98.2)
+	(envelope-from <andriy.shevchenko@linux.intel.com>)
+	id 1u1nNJ-0000000A5r6-2o0a;
+	Mon, 07 Apr 2025 17:22:57 +0300
+Date: Mon, 7 Apr 2025 17:22:57 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Aditya Garg <gargaditya08@live.com>
+Cc: "alyssa@rosenzweig.io" <alyssa@rosenzweig.io>,
+	Petr Mladek <pmladek@suse.com>, Sven Peter <sven@svenpeter.dev>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Aun-Ali Zaidi <admin@kodeit.net>,
+	Maxime Ripard <mripard@kernel.org>,
+	"airlied@redhat.com" <airlied@redhat.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Sergey Senozhatsky <senozhatsky@chromium.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	"apw@canonical.com" <apw@canonical.com>,
+	"joe@perches.com" <joe@perches.com>,
+	"dwaipayanray1@gmail.com" <dwaipayanray1@gmail.com>,
+	"lukas.bulwahn@gmail.com" <lukas.bulwahn@gmail.com>,
+	Kees Cook <kees@kernel.org>, "tamird@gmail.com" <tamird@gmail.com>,
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	Hector Martin <marcan@marcan.st>,
+	"asahi@lists.linux.dev" <asahi@lists.linux.dev>
+Subject: Re: [PATCH v3 0/3] Use proper printk format in appletbdrm
+Message-ID: <Z_PfwShQX95IyHWR@smile.fi.intel.com>
+References: <PN3PR01MB9597596DA5DA9FC02825CF0FB8AA2@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
+ <Z_PZXPAklfkMlx6O@smile.fi.intel.com>
+ <PN3PR01MB9597E19A55EAFC3E7B191F5FB8AA2@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <PN3PR01MB9597E19A55EAFC3E7B191F5FB8AA2@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 
-From: Mark Brown <broonie@kernel.org>
-Sent: Friday, April 4, 2025 7:03 PM
->
->On Fri, Apr 04, 2025 at 03:40:06PM +0200, Johann Neuhauser wrote:
->> This series adds support for regulator event reporting via uevents to th=
-e
->> userspace-consumer regulator driver. The goal is to provide userspace wi=
-th
->> a straightforward mechanism to monitor and respond to important regulato=
-r
->> events such as overcurrent conditions, voltage changes, and enable/disab=
-le
->> transitions.
->
->This sounds like you're trying to use userspace-consumer in production
->rather than as a test bodge...   what's the actual use case here?
+On Mon, Apr 07, 2025 at 02:17:00PM +0000, Aditya Garg wrote:
+> > On 7 Apr 2025, at 7:26 PM, Andy Shevchenko <andriy.shevchenko@linux.intel.com> wrote:
+> > On Mon, Apr 07, 2025 at 07:05:13PM +0530, Aditya Garg wrote:
+> >> The vsprint patch was originally being sent as a seperate patch [1], and
+> >> I was waiting it to be taken up. But as suggested by Petr, I'm sending
+> >> them via DRM.
+> > 
+> > Your message is detached from the thread, make sure you use proper tools, e.g.
+> 
+> It's not a problem with tools, it's a problem with my email provider.
+> 
+> Microsoft now supports only oauth2 for SMTP, which git send-email doesn't
+> support. I had done a few tests using msmtp with git send-email, but msmtp
+> also had this detached from thread bug, since it doesn't read the message id
+> specified by git send-email. I've been using macOS mail for a long time for
+> kernel patches, but since it was a pain to reboot to macOS every time for
+> this. So I just tried using thunderbird in Linux this time. Now this time, it
+> was a configuration issue in thunderbird, in which it was making a copy of
+> the sent email in my sent folder, resulting in 2 copies there. I replied to
+> the copied one by mistake. I've finally fixed this issue as well, so should
+> be good in future.
 
-Hi Mark,
+There is a project called email-oauth2-proxy, which makes it transparent, so
+just take your time and configure your box or find another email provider.
+The above is not an excuse to break the process.
 
-Thank you for your feedback and question.
+> > `git format-patch --thread --cover-letter -v3 ...` gives the correct result.
 
-We have a hardware setup where the USB-A port is directly connected (D+/D-
-lines) to the SoC, while its VBUS line is driven by an external I=B2C-based=
- PMIC.
-If a connected USB device attempts to draw more than approximately 800mA,
-the PMIC detects an overcurrent condition, automatically disables the outpu=
-t,
-and communicates an overcurrent event via the regulator framework.
+-- 
+With Best Regards,
+Andy Shevchenko
 
-Currently, the generic USB HCD drivers lack a built-in mechanism for handli=
-ng
-or recovering from such regulator-related events, particularly for reportin=
-g or
-re-enabling regulator outputs after an OC condition occurs. The DA8xx OHCI
-driver is one exception, as it indeed provides such functionality, but
-integrating similar support into the generic USB HCD drivers seemed unlikel=
-y to
-be accepted upstream.
-
-I came across the userspace-consumer driver and believed it could help mana=
-ge
-this specific scenario. With this driver, I was able to manually toggle the
-regulator off and back on, successfully clearing the error state. However, =
-the
-driver lacked proper event reporting, making it difficult to identify when =
-the
-regulator had entered an error state. Therefore, I proposed adding regulato=
-r
-event reporting to enable userspace to detect these regulator events via ud=
-ev
-rules and subsequently restore regular USB power operation.
-
-While I was aware that using the userspace-consumer driver might be seen as
-somewhat of a workaround for special cases, I did not fully consider that i=
-t
-was intended primarily as a temporary testing solution and perhaps not suit=
-able
-for this kind of production usage. I'd be grateful for any suggestions or a=
-dvice you
-might have on the appropriate approach or alternative solutions you could
-recommend for upstream integration.
-
-Thanks for again your input and guidance!
-
-Best regards,
-Johann
 
 
