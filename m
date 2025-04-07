@@ -1,115 +1,167 @@
-Return-Path: <linux-doc+bounces-42302-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-42308-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C876A7D26C
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 05:19:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D257A7D2AD
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 05:52:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D4B74188AC15
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 03:19:29 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 22E3A188D9AB
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Apr 2025 03:53:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 857201B3952;
-	Mon,  7 Apr 2025 03:19:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b="H1fL2PNW"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5025C212B10;
+	Mon,  7 Apr 2025 03:52:53 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpbgsg1.qq.com (smtpbgsg1.qq.com [54.254.200.92])
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24772290F;
-	Mon,  7 Apr 2025 03:19:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.254.200.92
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E86D1A3A8A;
+	Mon,  7 Apr 2025 03:52:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.188
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1743995954; cv=none; b=MuUR/H0yffCTEdJlS+uFgbt/InsezUIz2zVfLAwPYno6GFa0FncD1fBAOTUaq1g71ItWmaeGzxiS8amnAfFriL3SXeOQlcSmjKBNbSxTvv6wQxLhpY4p/eACm1GfxJoniO2tzOoXmVbRE7MFrSR+xfawQ5MWO5dvXBI3G60HxS0=
+	t=1743997973; cv=none; b=JKzQtPOM9YA/JZZapbfE1a5q3ezFRz4r+EdKQZy2THFH2ERoPnigjXV7bulvJ3O8ilhi6YeO++skt47SQ0pNlXpVNWPBfabdKXB34iCyHNlTnUajt83eurWLJ5sHCkEnQEUpz75iPZwzVEdJv366ochyOHPuRcohmaJr6XXrQHg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1743995954; c=relaxed/simple;
-	bh=6qOaICOf+luhocr5ziH6trTEHZu5/9SRvXds/cLTn9Q=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=BzWIugE2Ai1oYq34/DkPGwrc3guV3VcNOSGeOt1uZ0YlHkZAIM5xyx4SiI9xNwL9VPcj2OnqanoQzJHVcG6J8VDlAxqgQMlEFWBkH9oAVJXGd9axZcXKAWO6ZblZMLcSVUaoBoP7oWi9LDioU58Y1gZep7MJCqKRRp6HI7BW994=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com; spf=pass smtp.mailfrom=uniontech.com; dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b=H1fL2PNW; arc=none smtp.client-ip=54.254.200.92
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uniontech.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1743995882;
-	bh=aqkR8dc4JLTMm5HpUhR2fOx35XLhNyasEt6VNslqwTQ=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version;
-	b=H1fL2PNWawtCm/cCBhzZNhLdbVQf3xBDeatJjSW9ApJCSRdmJRwO3tvcYcf1cLVOI
-	 7E1NAC/kT0jJooF4VpfbTayXG6mZ3fI10vSIVMNaSrrzn3t+k0gEAhEPh6twpi9I0w
-	 pNO5gjTmZ2xGViuAkcN7wtw4pjlRFlNmEH7vz5Tw=
-X-QQ-mid: bizesmtpsz6t1743995877tfb6a6s
-X-QQ-Originating-IP: nxWDDVkGiKqAzUO/GFz+mQJEu/FlJbh2FzYmVaJbEWk=
-Received: from localhost.localdomain ( [113.57.152.160])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Mon, 07 Apr 2025 11:17:55 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 4845501015925666581
-EX-QQ-RecipientCnt: 10
-From: Chen Linxuan <chenlinxuan@uniontech.com>
-To: "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Chen Linxuan <chenlinxuan@uniontech.com>,
-	netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] docs: tproxy: fix formatting for nft code block
-Date: Mon,  7 Apr 2025 11:17:27 +0800
-Message-ID: <CFD0AAF9D7040B1E+20250407031727.1615941-1-chenlinxuan@uniontech.com>
-X-Mailer: git-send-email 2.48.1
+	s=arc-20240116; t=1743997973; c=relaxed/simple;
+	bh=besosqhCnDtMDXXu6ePqJx19IMx9qbxfH+7ZlqA9E1o=;
+	h=CC:Subject:To:References:From:Message-ID:Date:MIME-Version:
+	 In-Reply-To:Content-Type; b=FT9w3vaY7ZqmYQBLdmVdidTQmp4tYkXgCGs471GxxMOxGUpJQKHnLL9O9exL69BwIP2D9QaqkLp2VyIoojpfwXoIIW4O1XqhLDMfpUaYXT7k1KOEF/8k9nrmuxSm5/HgmThQQO3QfFXOWyqK+RmgWgX7GaVmHhoKYFLJsBtutB4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.188
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.19.163.174])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4ZWF7M0xCmzCsMj;
+	Mon,  7 Apr 2025 11:29:19 +0800 (CST)
+Received: from kwepemd200014.china.huawei.com (unknown [7.221.188.8])
+	by mail.maildlp.com (Postfix) with ESMTPS id 3B81D140135;
+	Mon,  7 Apr 2025 11:33:03 +0800 (CST)
+Received: from [10.67.121.177] (10.67.121.177) by
+ kwepemd200014.china.huawei.com (7.221.188.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.10; Mon, 7 Apr 2025 11:33:02 +0800
+CC: <yangyicong@hisilicon.com>, <catalin.marinas@arm.com>, <will@kernel.org>,
+	<maz@kernel.org>, <corbet@lwn.net>, <linux-arm-kernel@lists.infradead.org>,
+	<kvmarm@lists.linux.dev>, <linux-kselftest@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>, <joey.gouly@arm.com>, <suzuki.poulose@arm.com>,
+	<yuzenghui@huawei.com>, <shuah@kernel.org>, <jonathan.cameron@huawei.com>,
+	<shameerali.kolothum.thodi@huawei.com>, <linuxarm@huawei.com>,
+	<prime.zeng@hisilicon.com>, <xuwei5@huawei.com>, <tangchengchang@huawei.com>
+Subject: Re: [PATCH v2 6/6] KVM: arm64: Handle DABT caused by LS64*
+ instructions on unsupported memory
+To: Oliver Upton <oliver.upton@linux.dev>
+References: <20250331094320.35226-1-yangyicong@huawei.com>
+ <20250331094320.35226-7-yangyicong@huawei.com> <Z-wQuJAefT3xNipl@linux.dev>
+From: Yicong Yang <yangyicong@huawei.com>
+Message-ID: <e9674079-9a22-c3cd-3b00-5989f6926303@huawei.com>
+Date: Mon, 7 Apr 2025 11:33:01 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpsz:uniontech.com:qybglogicsvrgz:qybglogicsvrgz5a-1
-X-QQ-XMAILINFO: NrDiNNADEAQwXmONuYVNzuUAYSXYqeKKGUcN3eEk+lALh55ZeJtLoWQY
-	poVATVZYdpoVSbtpeb4ktfLK5dJqkyOtzjSqtEN1+jQEg3wkDYbNGkJcMe6VmKQv0OP3AW3
-	XYt7F5slqgx11XYHixe6YGOoz7URR/58LzyRjPmNbn+M8gLqM/t9sLdLru3P6Et2fsrX/5T
-	vjAW477CWvfL93qqqCGJAtt8jNuHxGY4hREEplGDeZIbKoQaxZqSd4Z0XWWrvDwrB53IA+p
-	IMeivmi2ODTRMpWkQfLPmCkCwh8kmq3X1r6yPaUmvIVy5NlT/gSub/NUlukTPZIe9AU0YHF
-	+DrPTmZnAm4p9Ix6q7vbyVdRU6AuNRFWy8fm6w0I4CvA+wu8CYeAaqCqB99vToX6zER1CoU
-	4DPWtK0vy7mGoeBnReHzxTKFLkMYLkDYHzcGJPJ196xDOVAt13zTkUQ807Ou2wtuGWjZF+J
-	z2nBfvAqO04zkoBO9oGcqScr5wyaYwLJijlC3GfBHnZEKkb0Bj3QqTZQ38+eQJEUgue3AwX
-	JzpYR8BdpB86aNVbIGQ1L2YVvoJkNHzQ6ZKcgVPk11/MlJ4vwagrxMmetN0hAF2f0yOgkp4
-	eKMMkuLatMX5Temh7bcRYTUjZ+vsOzNPVdyLbVDvs5J4EmFdeO2qs/Cl78Ye3MteFDeD5kp
-	jj1wvNmyo5FAXzoe2Wk/26ZtNYWQ+56Q/U38e3x5/ZGUmlNZ2Tzmquml5SXHLfSaSsJzYAQ
-	58SOYhBSehp4Hi3Hh1x7tF/QSvv8k24MGjLne9EmFS6SSF+yVWBv21DCRp2GAXEtr7NLrgs
-	Q4GGFjiJh5liQnzazAEHC4bTFH+2eMrkEDZi3SciWolhDLhCqBBHrzRU9M1WNTHH6wmiDtd
-	mgVHYbIKpjBjS4pAAPH6IOMjFT62Q1beqh7aShtzTXhPkkEtTsHeVHFpsWLNNuqNO2DqRSp
-	NJFW227+ZgqMrfjw2Myj9YpXALUVvk7NyEBw=
-X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
-X-QQ-RECHKSPAM: 0
+In-Reply-To: <Z-wQuJAefT3xNipl@linux.dev>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ kwepemd200014.china.huawei.com (7.221.188.8)
 
-Signed-off-by: Chen Linxuan <chenlinxuan@uniontech.com>
----
- Documentation/networking/tproxy.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On 2025/4/2 0:13, Oliver Upton wrote:
+> Hi Yicong,
+> 
+> On Mon, Mar 31, 2025 at 05:43:20PM +0800, Yicong Yang wrote:
+>> From: Yicong Yang <yangyicong@hisilicon.com>
+>>
+>> If FEAT_LS64WB not supported, FEAT_LS64* instructions only support
+>> to access Device/Uncacheable memory, otherwise a data abort for
+>> unsupported Exclusive or atomic access (0x35) is generated per spec.
+>> It's implementation defined whether the target exception level is
+>> routed and is possible to implemented as route to EL2 on a VHE VM.
+>> Per DDI0487K.a Section C3.2.12.2 Single-copy atomic 64-byte load/store:
+>>
+>>   The check is performed against the resulting memory type after all
+>>   enabled stages of translation. In this case the fault is reported
+>>   at the final enabled stage of translation.
+> 
+> Just use section citations, this quote isn't very useful since it
+> doesn't adequately describe the different IMPLEMENTATION DEFINED
+> behavior.
+> 
 
-diff --git a/Documentation/networking/tproxy.rst b/Documentation/networking/tproxy.rst
-index 7f7c1ff6f159..75e4990cc3db 100644
---- a/Documentation/networking/tproxy.rst
-+++ b/Documentation/networking/tproxy.rst
-@@ -69,9 +69,9 @@ add rules like this to the iptables ruleset above::
-     # iptables -t mangle -A PREROUTING -p tcp --dport 80 -j TPROXY \
-       --tproxy-mark 0x1/0x1 --on-port 50080
- 
--Or the following rule to nft:
-+Or the following rule to nft::
- 
--# nft add rule filter divert tcp dport 80 tproxy to :50080 meta mark set 1 accept
-+    # nft add rule filter divert tcp dport 80 tproxy to :50080 meta mark set 1 accept
- 
- Note that for this to work you'll have to modify the proxy to enable (SOL_IP,
- IP_TRANSPARENT) for the listening socket.
--- 
-2.48.1
+will drop the quote here.
+
+>> If it's implemented as generate the DABT to the final enabled stage
+>> (stage-2), inject a DABT to the guest to handle it.
+> 
+> This should be ordered _before_ the patch that exposes FEAT_LS64* to the
+> VM.
+
+will make this patch ahead.
+
+> 
+>> @@ -1658,6 +1658,25 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
+>>  	if (exec_fault && device)
+>>  		return -ENOEXEC;
+>>  
+>> +	if (esr_fsc_is_excl_atomic_fault(kvm_vcpu_get_esr(vcpu))) {
+>> +		/*
+>> +		 * Target address is normal memory on the Host. We come here
+>> +		 * because:
+>> +		 * 1) Guest map it as device memory and perform LS64 operations
+>> +		 * 2) VMM report it as device memory mistakenly
+>> +		 * Warn the VMM and inject the DABT back to the guest.
+>> +		 */
+>> +		if (!device)
+>> +			kvm_err("memory attributes maybe incorrect for hva 0x%lx\n", hva);
+> 
+> No, kvm_err() doesn't warn the VMM at all. KVM should never log anything
+> for a situation that can be caused by the guest, e.g. option #1 in your
+> comment.
+> 
+
+ok will drop the log here and only inject a DABT back.
+
+> Keep in mind that data aborts with DFSC == 0x35 can happen for a lot
+> more than LS64 instructions, e.g. an atomic on a Device-* mapping.
+> 
+
+got it. 0x35 should be caused by LS64* or IMPLEMENTATION DEFINED fault, but no
+further hint to distinguish between these two faults. hope it's also the right
+behaviour to inject a DABT back for the latter case.
+
+>> @@ -1919,6 +1939,21 @@ int kvm_handle_guest_abort(struct kvm_vcpu *vcpu)
+>>  			goto out_unlock;
+>>  		}
+>>  
+>> +		/*
+>> +		 * If instructions of FEAT_{LS64, LS64_V} operated on
+>> +		 * unsupported memory regions, a DABT for unsupported
+>> +		 * Exclusive or atomic access is generated. It's
+>> +		 * implementation defined whether the exception will
+>> +		 * be taken to, a stage-1 DABT or the final enabled
+>> +		 * stage of translation (stage-2 in this case as we
+>> +		 * hit here). Inject a DABT to the guest to handle it
+>> +		 * if it's implemented as a stage-2 DABT.
+>> +		 */
+>> +		if (esr_fsc_is_excl_atomic_fault(esr)) {
+>> +			kvm_inject_dabt_excl_atomic(vcpu, kvm_vcpu_get_hfar(vcpu));
+>> +			return 1;
+>> +		}
+>> +
+> 
+> A precondition of taking such a data abort is having a valid mapping at
+> stage-2. If KVM can't resolve the HVA of the fault then there couldn't
+> have been a stage-2 mapping.
+> 
+
+Here's handling the case for emulated mmio, I thought there's no valid stage-2 mapping
+for the emulated MMIO? so this check is put just before entering io_mem_abort(). should
+it be put into io_mem_abort() or we just don't handle the emulated case?
+
+For the case where's a valid stage-2 mapping, the LS64 DABT is handled in user_mem_abort().
+
+Thanks.
 
 
