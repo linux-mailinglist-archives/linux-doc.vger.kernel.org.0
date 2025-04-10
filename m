@@ -1,256 +1,290 @@
-Return-Path: <linux-doc+bounces-42869-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-42871-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 241EDA84ECC
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Apr 2025 22:54:34 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id A74C7A84FA9
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Apr 2025 00:29:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F0EC59C5702
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Apr 2025 20:52:05 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4A9B04C0F22
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Apr 2025 22:29:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 375D7296171;
-	Thu, 10 Apr 2025 20:50:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62F5120E6E1;
+	Thu, 10 Apr 2025 22:29:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="gqQJ15A8"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="vQ+ksFBs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1nam02on2058.outbound.protection.outlook.com [40.107.96.58])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59586290BA6;
-	Thu, 10 Apr 2025 20:50:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.177.32
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744318247; cv=none; b=lZu8SS1GvHcmR1y9AOCKX0NuPdNGECZuC3MK8bp48/WZdH8HE6rUqpbzsphORUem2grxiLRqumhuBRAR37rTXELvEP1taKAVF2J1IUpkLALGChWnI79aBoeTzAig6Klss2PEVRRkrT3rz7vVXipJwAsWkJk1mVcwL/5y6t7seo8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744318247; c=relaxed/simple;
-	bh=5eXlCyiq13HYOiYzdeVgHiRTlSoYl9OkVh25ka6uWAc=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=CVHRdA/yKeVW2kSAftWrvwKS+VxI7+/UHkJUMDwHR9IYrr1sOXMBRMVOlinsaXuEn0EgfIGK64GMeFnjsldIPMa4ApTJcYpJP4M1HAN1GXBm0fOCjN4qZTq1jVp+EIbq5DU/tE7b+5NhPrGhwzKrl0jvEjKIFjEKOafao+v4ivk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=gqQJ15A8; arc=none smtp.client-ip=205.220.177.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53AKg7gD018842;
-	Thu, 10 Apr 2025 20:50:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=corp-2023-11-20; bh=XUcRS
-	X98+duxyC5W2iguN6GzCB+f9wrmH01mTH4HzRI=; b=gqQJ15A8pwSCCSbDqQyw7
-	1gbYTbXtU9g+cO4M9rGThiUijaH5q86ARwzy5wJMjYxOEmTb+RNijoIzLXYPi7LG
-	26r2BrLpz1Xh1d/pRpqGbaSVEfwxdmDhwrYmgodrrH/JT2ejr8RLoa+BOBo8QAk6
-	4Sc2l6iELH8edzaHkYaASHvDfC7aC6xewbtzpnXgKQ7ymMIq9zg5HKEJaPrZDO6z
-	aP27+Xv5QX0nBEHpjt73jIOgqKmmOQyAlfOBQh4/YauEIocDP4Q7BQGaPLD9OVZZ
-	+d99TwoDwahGGIBe0bGktigc4nxCyBYS3X5nlFnxoCaQyz1ALeFXx6+HBPZ3uv0d
-	g==
-Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45xn8fg0tq-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 10 Apr 2025 20:50:19 +0000 (GMT)
-Received: from pps.filterd (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 53AJ3p1h013753;
-	Thu, 10 Apr 2025 20:50:18 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 45ttyk4s64-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Thu, 10 Apr 2025 20:50:18 +0000
-Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 53AKoHrb038949;
-	Thu, 10 Apr 2025 20:50:17 GMT
-Received: from bur-virt-x6-2-100.us.oracle.com (bur-virt-x6-2-100.us.oracle.com [10.153.92.40])
-	by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 45ttyk4s4w-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Thu, 10 Apr 2025 20:50:17 +0000
-From: Ross Philipson <ross.philipson@oracle.com>
-To: linux-kernel@vger.kernel.org, x86@kernel.org,
-        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-crypto@vger.kernel.org, kexec@lists.infradead.org,
-        linux-efi@vger.kernel.org, iommu@lists.linux.dev
-Cc: ross.philipson@oracle.com, dpsmith@apertussolutions.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        dave.hansen@linux.intel.com, ardb@kernel.org, mjg59@srcf.ucam.org,
-        James.Bottomley@hansenpartnership.com, peterhuewe@gmx.de,
-        jarkko@kernel.org, jgg@ziepe.ca, luto@amacapital.net,
-        nivedita@alum.mit.edu, herbert@gondor.apana.org.au,
-        davem@davemloft.net, corbet@lwn.net, ebiederm@xmission.com,
-        dwmw2@infradead.org, baolu.lu@linux.intel.com,
-        kanth.ghatraju@oracle.com, andrew.cooper3@citrix.com,
-        trenchboot-devel@googlegroups.com
-Subject: [PATCH v13 19/19] x86/efi: EFI stub DRTM launch support for Secure Launch
-Date: Thu, 10 Apr 2025 13:41:49 -0700
-Message-Id: <20250410204149.2576104-20-ross.philipson@oracle.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20250410204149.2576104-1-ross.philipson@oracle.com>
-References: <20250410204149.2576104-1-ross.philipson@oracle.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A00420E037;
+	Thu, 10 Apr 2025 22:29:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.96.58
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1744324185; cv=fail; b=aLl0Cx43JopQVLblxZcFKz6Lc03FhIWC/oAcvAR8wuURgDGUUXsXOB9EKpibva7VyBooHkC3+WpqNWWQ02TjIHnnKAca7vyFbcTGrC4GYyTW6uNvQLjamwqnLyJV0ntqP8u0FsVKdC9c+Wz+oycS1C+sHDBVn71e+6JlKX6hLfY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1744324185; c=relaxed/simple;
+	bh=fYttwuVaOPIZ4RRdfCfO2MqvhUKUFqnKcexUwNB3lKA=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=DesK5vFZ+BtsIbHugPKzAxlIWRPabPtgQ3CGqTUhHRpgd9CkjFB3KKjW6u9oC55Gzvc34XKsnxOm+6+s4t9IikFhpCjeaZOmzYA4cMjQfQ2LccHrtA0hXOT1dfJgEWP1GdHJijqE/O7Yu7j3EQbN0AxNqPNXgJjgkJeVWoGG238=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=vQ+ksFBs; arc=fail smtp.client-ip=40.107.96.58
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PxbMfSG0lLGw7ZpvrTnamW1d7kgMGtY8yoXqfVsxS4E/E9vxxTkBDwD/kgwh2Nv+s6CiWLioRx+WS6pUOitM1MZYc1MoWfOSPQuYR44V15Ks1gracUJNOf81liWgxmEQD76gQCQb1MzduayG75wWzuF/Esh4yvM0cPMMGgjToXUUuefJ+vP8RDDS1hkhO7ziDcOcKdkcEh25MIIy7ifs/sBpfzlSxZen3KRD24GbhqIAyKXEEHb3MMnU60DLb7O9KcXe14F+oXVVbWOzoMAOG3f1aK1guZQXPs1OgpvGFws46n+izJfE5UyuUjUZD63D61Q3+csh3+gHGsCsSYbTyQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7GdxbxgCecDSkLOFfxwprJFCjDGG6e1p0pThXTsSrgk=;
+ b=y55JHp6LU30ziaujzNgZJVKbYkdGzj7PknPTue1SLAtfXxoO+iLFQ4Vf+BcDbxhn7+NlpGMGxLTkL5V7ft8jbuHX1fgNuVCQFASZgFJtAhB43FQzCfEpTsKBWxRBq6fR5lwTAWJEGe9IrLn4w3Wr3U2jkJf0OZVA5+LrxCl0hbauUpbtHOkqlbUl5lE9Pj9jFyjgf7kGFPsmglYd782zvnXSGt0AIVDZmfVy4hje+n28uid2EqCSErlaDB+uZoEr40iTCTML7oTJ7+zXOKu1hX4OTVGPxe+K+UoboGuVli0/6TWxdL0iDEBCIifxWU3yMO26KARj/WZ1oBF6/xolNg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7GdxbxgCecDSkLOFfxwprJFCjDGG6e1p0pThXTsSrgk=;
+ b=vQ+ksFBsMsk61Eahq+1IN64wZgGeoL/U0XxdR29GfDuI8F1lW2A+khFN4tyCqklcIv0p4DG3xQr0/Tpq4B7/EZLDk1TRdWAMEq15CkOvz9TIY9ZGgAGuqaCP1UJebq8I9y402O/+jbI6E5NZOtPzllyPLxHUsRMecz5GrwCDlM8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com (2603:10b6:303:2c::19)
+ by BL1PR12MB5948.namprd12.prod.outlook.com (2603:10b6:208:39b::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8632.23; Thu, 10 Apr
+ 2025 22:29:37 +0000
+Received: from MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87]) by MW3PR12MB4553.namprd12.prod.outlook.com
+ ([fe80::b0ef:2936:fec1:3a87%4]) with mapi id 15.20.8606.033; Thu, 10 Apr 2025
+ 22:29:36 +0000
+Message-ID: <15a2cb8d-e9ee-4512-8142-2f9307fdbdf6@amd.com>
+Date: Thu, 10 Apr 2025 17:29:31 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/7] Support L3 Smart Data Cache Injection Allocation
+ Enforcement (SDCIAE)
+To: Reinette Chatre <reinette.chatre@intel.com>, babu.moger@amd.com,
+ tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com
+Cc: x86@kernel.org, hpa@zytor.com, akpm@linux-foundation.org,
+ paulmck@kernel.org, thuth@redhat.com, rostedt@goodmis.org,
+ xiongwei.song@windriver.com, pawan.kumar.gupta@linux.intel.com,
+ jpoimboe@kernel.org, daniel.sneddon@linux.intel.com,
+ thomas.lendacky@amd.com, perry.yuan@amd.com, sandipan.das@amd.com,
+ kai.huang@intel.com, seanjc@google.com, xin3.li@intel.com,
+ ebiggers@google.com, andrew.cooper3@citrix.com, mario.limonciello@amd.com,
+ tan.shaopeng@fujitsu.com, james.morse@arm.com, tony.luck@intel.com,
+ peternewman@google.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, eranian@google.com, corbet@lwn.net
+References: <cover.1738272037.git.babu.moger@amd.com>
+ <7c135464-d859-459b-b86d-e8c18f106fc4@intel.com>
+ <251c8fe1-603f-4993-a822-afb35b49cdfa@amd.com>
+ <4a98eccf-4d31-40ac-8112-c89cde7a1c6e@intel.com>
+ <46e40771-c73c-4ceb-acc3-812693f98f19@amd.com>
+ <5ece1b6b-a225-4fab-be74-b48037986686@intel.com>
+ <f16697d8-be6b-4dd2-b0dc-3c628fc4eec6@amd.com>
+ <a546a42f-206e-4a0a-9e3b-0d4ac472729f@intel.com>
+Content-Language: en-US
+From: "Moger, Babu" <bmoger@amd.com>
+In-Reply-To: <a546a42f-206e-4a0a-9e3b-0d4ac472729f@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SN7PR04CA0118.namprd04.prod.outlook.com
+ (2603:10b6:806:122::33) To MW3PR12MB4553.namprd12.prod.outlook.com
+ (2603:10b6:303:2c::19)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-10_06,2025-04-10_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 adultscore=0
- mlxlogscore=999 bulkscore=0 suspectscore=0 mlxscore=0 spamscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2502280000 definitions=main-2504100151
-X-Proofpoint-GUID: tSfU080Hs0aDWxqvHZ-egianh0p4Ok6W
-X-Proofpoint-ORIG-GUID: tSfU080Hs0aDWxqvHZ-egianh0p4Ok6W
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW3PR12MB4553:EE_|BL1PR12MB5948:EE_
+X-MS-Office365-Filtering-Correlation-Id: 438bedf2-6944-41b4-fd8e-08dd787f2c96
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?WGlJVkpOVlA3SHZKY29oUUN0emx6U3ZMeVE0ZjBOMmZHMFJIWDVVbDkrbjZ1?=
+ =?utf-8?B?K2JzbW1RT2lNQ3M0RzU2ckpZY0IwSml6SHlGL1pvaWRqb1VhQkkrNjZ0c2Rs?=
+ =?utf-8?B?OTZXbE5yblZzTGRha2tidnBxdS8wU0ZtaDQ3Rk1ySFJub3BVWWk0U2tHb0xY?=
+ =?utf-8?B?NDN1ZlZpZVVYY29pR0NQb1dSZmZSRjVORE1zdnY3NUwxSUNrcVJlSEZsTVZI?=
+ =?utf-8?B?ekhlRU5sZ2tVcmhqM3pSYmk0ZytDczV5RGkyeldVNlNwMDd3ZzVDYjQwdXFX?=
+ =?utf-8?B?TURHRHpCdklzVEYra25rQjRoQjNuNjZESmR5ZktWc2R1eFBvWC9KZlpZRXRv?=
+ =?utf-8?B?ZzFUbC80RWQwTFlWSmhTOXhDSERCMnpwckRaWDFaTmQ1S2Exa2M0cVNJQ0h1?=
+ =?utf-8?B?a0xKU2h1QytIY1hLcDlYZWNPRHRmdngwbTUxSkptdUZ6VTAveGFsWXVCUS9K?=
+ =?utf-8?B?b0h3bGg5RmFzb0tjNXhzeTZvMzdqd01oUElzMmhHc0VyUG5jcnNxTExlWHRD?=
+ =?utf-8?B?THVrejVORFFzcHVmWU51K2U1L3hpcTVpQkFneFVDNDJ2WHJwUllEUGxxZGxZ?=
+ =?utf-8?B?MmcwTG43NkErVlA4M0o0SjYyZmdXZjd6YVJCeTZGekVVMDIzVkNsZXBmOE9i?=
+ =?utf-8?B?amJNQUpNaTBKUzErWjBQTjB3KzVvT29aaXhVU3lnNlNZenJtbFA4ajI1UFB4?=
+ =?utf-8?B?OUxNQ0g5OHZnODBDOFZXT2QwZkxGaVhmcVFVZjZBcHFsQWcwd2Fnd3JnczNa?=
+ =?utf-8?B?RXUxWERzOVF4OWhXeHVGSkRhcyt0b1h0NkNNMThvcEdJR2ZvN1krMktvR1dm?=
+ =?utf-8?B?VFl4QVRaSzFVdXZkUVR2azJsUU8zcHRqRmhLQXBiblBOSUMza0ZYdmRyd1A2?=
+ =?utf-8?B?NEJzTDBQTUxNMXhjSGJRV3FBQXRSa2lNVG1PWlRSTWhnL2VyWmgrTlI2cndh?=
+ =?utf-8?B?eTZoa2hUSzZMaGE4ck1vdGMySXFEbzBBMjljZjJMWVNOM0R0OWVsRXlKYkkr?=
+ =?utf-8?B?WFBITmR6VUNBOEtDK2dpY3NkcEFOU1cvdlgwa0E5VnFydjdGVml0WFdSN3cz?=
+ =?utf-8?B?bEszV0s1Sk9IVDdNakZuMEF3MHlKa3d3bkNiY0dJbGJVeHI5WVlxRUoxc09p?=
+ =?utf-8?B?ME0wdjN4cEFOcERTUWlIand6dTBnR2hIeXQrbmRJUDd1OUdLQkhWQkxPZytR?=
+ =?utf-8?B?NDVsKzRzUWNoQVFyc1VzYnROSHdNbmgwZWN3bGVFNldlbDNZOGRNSWw0WE1t?=
+ =?utf-8?B?dFRPSUM5ZVdvMnFUTndqeEVYdDB4aGVTa0pFd2RYWWkwU205YlFEZ2tkSXpi?=
+ =?utf-8?B?TmtNeXZtVG82Z3RUOHlSWCt2Q0hOUnJTT0V5Z09hTmw4bjB0eG1YQ3d5QjFw?=
+ =?utf-8?B?b2l5Tm0vckhIbzNPK0IzT1RnaUdLRFVTeHJ2WmhlakNjUWZiUVhIUGhzY1Ji?=
+ =?utf-8?B?Z3V0R3RkZjZsU2dlT1hmWDVRWHVsSDI0K3VzS0hFR0hOem14bzhzSlNBTWNx?=
+ =?utf-8?B?MmRQTDA5cHptcER5dUpTTk1GR2lGVmdsMGwwb1VNdUtSY3cxU0pTTHdVUDN5?=
+ =?utf-8?B?L2t5MUZjNkRvMkVPOVBzcVhuYlBGWmVTdnpRakgxZ3RteExhZG9JQ01uTndN?=
+ =?utf-8?B?cDhYZUs1WUFGcnZxdk9heTQ5dUJFeUZoU1BNcXoyVlpEaWsyTmtlUkxCSHov?=
+ =?utf-8?B?QTNYSE5CalBKaGhJR3lBZlk5L2xDRy9DQlczT2oxUUFNWE9BUGY2SHNzSHpp?=
+ =?utf-8?B?MHI3cjFUV3BmQnhJak9ESHFGQjVpZ1g0MHQ3R0cySVZtem02dGQxZHExR20w?=
+ =?utf-8?B?Mzk4V0hKVmFUbjc3cEErZHZEWDdYUG1MeU1iRC9CSzZvQS9rNlV4NzAyN1VI?=
+ =?utf-8?Q?1t85hhIZ79eqZ?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW3PR12MB4553.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?TzRQbFhVR0ZPZkxONE1zSXYyQmhjcGI4bUU4cVpOUm85SWxnUU5tZ2lQcytM?=
+ =?utf-8?B?Z2RCeHBmeTQrbjRFUW9tR2NybU9YTk1tVDdwL0NjWlZXREM2YWZxU0tEcHpk?=
+ =?utf-8?B?ZnlZeEJBQ1o3QnJjMEJ5TXFORkxTZ1ByMFV2NE12WTVheENvMEVqd1lDcjhP?=
+ =?utf-8?B?OWt1TCs0TUUwOFF5TFZ0ME9yMytvck5vOE50OGpkcXpIbVZzRUdyMGxhOEtR?=
+ =?utf-8?B?U1MwM0xuUmpMU1NvNW1PZmJuWkpEZDZUN1JMeVQ1VEJzbUc1LzFoUldMVGs0?=
+ =?utf-8?B?aGNDL2syUTJuZEc2TThYR1JPdUFJQUVWc0FZWkQxd25UNHRRYTFCWEN4c3F2?=
+ =?utf-8?B?TW95NE53Y0NKeGZkMUpXQUVPOXZSQ3ZqSkJ0U2VmUWJNNDdFVjV3ZlNYZ0wv?=
+ =?utf-8?B?dWFtV2ZIMkd1dnQwVHZqeU0yVFlmeGNmank4L2toVmJzL1gzU0U0SGUvMVhI?=
+ =?utf-8?B?ckpWWjRNeStBcDNnZ1RUQk9HVmNDeVZMZEM1NnlNbVdHSm9rU2tRWUNhcHhU?=
+ =?utf-8?B?dU94U0RlRmdFaFhZdkRxUlk0QlNua3pnclFTeVh2cHYvSmttMnUxRStYcnhz?=
+ =?utf-8?B?YVhsVDlIaTBRaGY2SWgwbWxCb2xvVm16RFpkaEh2d1BzSkMwN2FHTDZZSENT?=
+ =?utf-8?B?KzNwWUNHN0s0MTVrUnZCeVM0NGtoVEJXUFF1SjFwQlVVV1lHMUpvblNqWmtr?=
+ =?utf-8?B?Q1NFSVpVZTFaaWl0d0F4Qkthd2tBTFBIOTkvRVZEOFNQTHFiMzVSU0tVeVhD?=
+ =?utf-8?B?cnBhVllyVlRqd1EyT21UcGNjSmplVkd1RnMrdFQ4bGtxQWZmMnkvNlljSGxx?=
+ =?utf-8?B?NEt4VjgrQ0htaWVwRjJiMUFRU21KQS8wVGVPUVRKR2dTODdjNUdTblhJMVdG?=
+ =?utf-8?B?TDNNTEoyZ2tFUDJVQU5ZZjlVWG9BMHp0UTdRbGZxelFiOVhKRk9pcmsvZXB6?=
+ =?utf-8?B?U0JmODA5Rit5SkZkVk1ISkhzcGsrR01vd0lYV3NQdDVTVHlFVHNRYjdXcVVF?=
+ =?utf-8?B?M1NnRVEyOVBIUHFha3A3d1B1dmlXd04xamM2NkVSN2tkSTR3ejM4R1pESVBn?=
+ =?utf-8?B?MUQxRzd0dFhJMUg5Rkx4Q3VzTnJnS1hodUxrYlVQVXlwWTVBTnp3ZWk3S2xr?=
+ =?utf-8?B?bVZ6K2czOGttcm9aR3dRdWpZVDF6TndEejlqMTdYV0liTkR5bTlvRzhUc0s1?=
+ =?utf-8?B?bjRKVG5CWHZteFJQMjhvVThWQkJhMTlJdUJzSjNiMnVEd1laRFkzWHJ5akxr?=
+ =?utf-8?B?bzdJREtIZ3d6em5kc2lQRTRFa1NxMHZLMEo2L1ZpKzZ4R0ltUHp6Qk0yakRL?=
+ =?utf-8?B?alVBT05lU3BnbndoWmRXb3NRR2UrS1JpL0Ixc3p1M1czWXVic21IMzR2Umtr?=
+ =?utf-8?B?TmpJRVB2V2ZQTkhzZXZ3TG5TNzZtVWlQNmNkUUxOaGZuQU55V0IzRGtOcWkr?=
+ =?utf-8?B?YXJ0Y2RNRllma0ZaeXZzQTI2bnd1V2lTcmVWQ3NTQWN2MkJjZENYQXFKZVNh?=
+ =?utf-8?B?VnlqeDdoVkdxS0lOQk9VV052eW96RGZXRVBycmNPSDRpZ3dUZXRkWEh2STh5?=
+ =?utf-8?B?UmJ6d1VFcy9ORmt2ZHRUU2lNWGV6dDk2ekxxdVU1Q2NOdnpCN2dRMmVnaXd4?=
+ =?utf-8?B?blJzaGszU2s0ZzliTkJjSXpGVkMybGV2SnVmR2xmV1l3N3dkL1ZWdENsbDI1?=
+ =?utf-8?B?bVVKQTFYMG90ZmhURU45Mk9DdUtla1hwS282Z0Z1RzdqRS9CRUFkZUhReDQz?=
+ =?utf-8?B?eVZ3eEt6QWVWSWxObnM3M1NHbXVCcGhreHhuRVluN3JFOEhMU08vUUs1R1J4?=
+ =?utf-8?B?WHFPcDlEOHYyazdPVVlXbDVPNjkyb3Q0MjYrZWk1ckh1eEs4aUR5RitWMVJO?=
+ =?utf-8?B?bUV6SEZwQVk3Q04wZkc3YXlYSTZCcmcrbWtWUlBmKzNSSmxiWVZzd0xmRXBX?=
+ =?utf-8?B?cVJoM3dtZklBRTZCbEFudk11UXZJeGtOWnB0aXZOakdQd2VzTGJIMHVUUEdJ?=
+ =?utf-8?B?N2MxR1JXN2VpMnpEUWpYUnlXTDhkR2hlQ2ZBSFFHK0dTZDh2VjNudXVqN2RZ?=
+ =?utf-8?B?ajNlVWdXQVozejBqTFdyYVQ4c0JLVnlrY09hd3hVQ2ZTdG1uQ09tblhpWlB2?=
+ =?utf-8?Q?o6ZXZQPlTz5Pl13qqxDlNn12D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 438bedf2-6944-41b4-fd8e-08dd787f2c96
+X-MS-Exchange-CrossTenant-AuthSource: MW3PR12MB4553.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2025 22:29:36.3950
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YHx7m7++QwuRy0O9g/zVIBc0O+4pWConSvOo1xzOAIAqwLhHrwHptW/CCWt7CmDD
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5948
 
-This support allows the DRTM launch to be initiated after an EFI stub
-launch of the Linux kernel is done. This is accomplished by providing
-a handler to jump to when a Secure Launch is in progress. This has to be
-called after the EFI stub does Exit Boot Services.
+Hi Reinette,
 
-Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
-Reviewed-by: Ard Biesheuvel <ardb@kernel.org>
----
- drivers/firmware/efi/libstub/efistub.h  |  8 +++
- drivers/firmware/efi/libstub/x86-stub.c | 94 +++++++++++++++++++++++++
- 2 files changed, 102 insertions(+)
+On 4/9/2025 10:59 PM, Reinette Chatre wrote:
+> Hi Babu,
+> 
+> On 4/9/25 5:58 PM, Moger, Babu wrote:
+>> Hi Reinette,
+>>
+>> On 4/8/2025 8:41 PM, Reinette Chatre wrote:
+>>> Hi Babu,
+>>>
+>>> On 4/8/25 5:41 PM, Moger, Babu wrote:
+>>>> Hi Reinette,
+>>>>
+>>>> On 4/8/2025 4:44 PM, Reinette Chatre wrote:
+>>>>> Hi Babu,
+>>>>>
+>>>>> On 4/7/25 1:12 PM, Moger, Babu wrote:
+>>>>>> On 3/21/25 17:50, Reinette Chatre wrote:
+>>>>>>> On 1/30/25 1:20 PM, Babu Moger wrote:
+>>>>>
+>>>>>
+>>>>>>>>
+>>>>>>>
+>>>>>>> AMD also supports what is exposed to user space as "shareable_bits". According
+>>>>>>> to APM:
+>>>>>>>       Depending on the implementation, some portions of the L3 Cache may be
+>>>>>>>       shared by other system functions or used for some other purpose not
+>>>>>>>       under the control of the PQOS feature set. The L3 Cache Allocation
+>>>>>>>       Sharing Mask returned by CPUID Fn0000_0010_EBX_x1[L3ShareAllocMask] is a
+>>>>>>>       bitmask that represents portions of the L3 that may be shared by those
+>>>>>>>       functions.
+>>>>>>
+>>>>>> Here is the complete text.
+>>>>>>
+>>>>>> The L3 Cache allocation sharing mask (L3ShareAllocMask) returned in EBX by
+>>>>>> CPUID Fn0000_0010 with ECX=1 is a bit vector which represents portions of
+>>>>>> the cache which may be shared with other system entities or used for some
+>>>>>> other purpose not under the control of the QOS feature set. When software
+>>>>>> sets a bit in one of the L3_MASK_n registers at the same bit positions a
+>>>>>> bit in the L3ShareAllocMask, processors executing with the corresponding
+>>>>>> COS will competitively share that portion of the cache with the other
+>>>>>> function. If this mask is all 0’s, then there is no other entity in the
+>>>>>> system competing with the processors for use of the L3 cache.
+>>>>>>
+>>>>>> The "L3ShareAllocMask" is always reported as 0 on AMD systems.
+>>>>>>
+>>>>>>> Could you please include what (if any) the relationship is between the CBM
+>>>>>>> discoverable via Fn0000_0010_EBX_x1[L3ShareAllocMask] and the CBM of
+>>>>>>> "highest-supported L3_MASK_n register" when SDCIAE is enabled?
+>>>>>>
+>>>>>> No. There is no relationship in here.
+>>>>>>
+>>>>>>>
+>>>>>>> On the resctrl interface side the documentation currently states:
+>>>>>>>
+>>>>>>>       "shareable_bits":
+>>>>>>>           Bitmask of shareable resource with other executing
+>>>>>>>           entities (e.g. I/O). User can use this when
+>>>>>>>           setting up exclusive cache partitions. Note that
+>>>>>>>           some platforms support devices that have their
+>>>>>>>           own settings for cache use which can over-ride
+>>>>>>>           these bits.
+>>>>>>>
+>>>>>>> Even though this was originally used to expose the content of
+>>>>>>> Fn0000_0010_EBX_x1[L3ShareAllocMask] the intent of the content does
+>>>>>>> seem to also apply to the "io_alloc" CBM also.
+>>>>>>
+>>>>>> It says "shared by other system functions or used for some other purpose
+>>>>>> not under the control of the PQOS feature set".
+>>>>>
+>>>>> This is a quote from the AMD spec, not the resctrl user interface documentation.
+>>>>>
+>>>>> Please consider this from resctrl user interface perspective.
+>>>>>
+>>>>>>
+>>>>>> "io_alloc" is PQOS feature set. I feel it should not affect "shareable_bits".
+>>>>>
+>>>>> When I read the resctrl user interface documentation for "shareable_bits" it
+>>>>> sounds relevant to io_alloc. The "shareable_bits" contains a bitmask "of
+>>>>> shareable resource with other executing entities (e.g. I/O)" ... is this
+>>>>> not exactly io_alloc?
+>>>>
+>>>> I agree the text is pretty generic. Actually, the whole bit mask (0xfffF) is shareable with io_alloc.
+>>>
+>>> I think the value of "shareable_bits" presented to user space could be the
+>>> actual io_alloc_cbm value. Thus, not the "possible IO bitmask" but the actual
+>>
+>> Confused little bit here. The shareable_bits is resource property.
+>> io_alloc_cbm is domain specific value. Not sure how to display it.
+> 
+> ah, right. We should still aim to not let the new "io_alloc" interfaces cause
+> confusion with the existing "shareable_bits" that is already part of interface and
+> used to communicate IO allocation to user space. Perhaps we are just left with
+> needing a modification to the existing documentation surrounding "shareable_bits"?
 
-diff --git a/drivers/firmware/efi/libstub/efistub.h b/drivers/firmware/efi/libstub/efistub.h
-index d96d4494070d..bbbc4b327ce1 100644
---- a/drivers/firmware/efi/libstub/efistub.h
-+++ b/drivers/firmware/efi/libstub/efistub.h
-@@ -135,6 +135,14 @@ void efi_set_u64_split(u64 data, u32 *lo, u32 *hi)
- 	*hi = upper_32_bits(data);
- }
- 
-+static inline
-+void efi_set_u64_form(u32 lo, u32 hi, u64 *data)
-+{
-+	u64 upper = hi;
-+
-+	*data = lo | upper << 32;
-+}
-+
- /*
-  * Allocation types for calls to boottime->allocate_pages.
-  */
-diff --git a/drivers/firmware/efi/libstub/x86-stub.c b/drivers/firmware/efi/libstub/x86-stub.c
-index 863910e9eefc..033133e7d953 100644
---- a/drivers/firmware/efi/libstub/x86-stub.c
-+++ b/drivers/firmware/efi/libstub/x86-stub.c
-@@ -9,6 +9,8 @@
- #include <linux/efi.h>
- #include <linux/pci.h>
- #include <linux/stddef.h>
-+#include <linux/slr_table.h>
-+#include <linux/slaunch.h>
- 
- #include <asm/efi.h>
- #include <asm/e820/types.h>
-@@ -798,6 +800,93 @@ static efi_status_t efi_decompress_kernel(unsigned long *kernel_entry)
- 	return efi_adjust_memory_range_protection(addr, kernel_text_size);
- }
- 
-+#if (IS_ENABLED(CONFIG_SECURE_LAUNCH))
-+static bool efi_secure_launch_update_boot_params(struct slr_table *slrt,
-+						 struct boot_params *boot_params)
-+{
-+	struct slr_entry_intel_info *txt_info;
-+	struct slr_entry_policy *policy;
-+	bool updated = false;
-+	int i;
-+
-+	txt_info = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_INTEL_INFO);
-+	if (!txt_info)
-+		return false;
-+
-+	txt_info->boot_params_addr = (u64)boot_params;
-+
-+	policy = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_ENTRY_POLICY);
-+	if (!policy)
-+		return false;
-+
-+	for (i = 0; i < policy->nr_entries; i++) {
-+		if (policy->policy_entries[i].entity_type == SLR_ET_BOOT_PARAMS) {
-+			policy->policy_entries[i].entity = (u64)boot_params;
-+			updated = true;
-+			break;
-+		}
-+	}
-+
-+	/*
-+	 * If this is a PE entry into EFI stub the mocked up boot params will
-+	 * be missing some of the setup header data needed for the second stage
-+	 * of the Secure Launch boot.
-+	 */
-+	if (image) {
-+		struct setup_header *hdr = (struct setup_header *)((u8 *)image->image_base +
-+					    offsetof(struct boot_params, hdr));
-+		u64 cmdline_ptr;
-+
-+		boot_params->hdr.setup_sects = hdr->setup_sects;
-+		boot_params->hdr.syssize = hdr->syssize;
-+		boot_params->hdr.version = hdr->version;
-+		boot_params->hdr.loadflags = hdr->loadflags;
-+		boot_params->hdr.kernel_alignment = hdr->kernel_alignment;
-+		boot_params->hdr.min_alignment = hdr->min_alignment;
-+		boot_params->hdr.xloadflags = hdr->xloadflags;
-+		boot_params->hdr.init_size = hdr->init_size;
-+		boot_params->hdr.kernel_info_offset = hdr->kernel_info_offset;
-+		efi_set_u64_form(boot_params->hdr.cmd_line_ptr, boot_params->ext_cmd_line_ptr,
-+				 &cmdline_ptr);
-+		boot_params->hdr.cmdline_size = strlen((const char *)cmdline_ptr);
-+	}
-+
-+	return updated;
-+}
-+
-+static void efi_secure_launch(struct boot_params *boot_params)
-+{
-+	struct slr_entry_dl_info *dlinfo;
-+	efi_guid_t guid = SLR_TABLE_GUID;
-+	dl_handler_func handler_callback;
-+	struct slr_table *slrt;
-+
-+	/*
-+	 * The presence of this table indicated a Secure Launch
-+	 * is being requested.
-+	 */
-+	slrt = (struct slr_table *)get_efi_config_table(guid);
-+	if (!slrt || slrt->magic != SLR_TABLE_MAGIC)
-+		return;
-+
-+	/*
-+	 * Since the EFI stub library creates its own boot_params on entry, the
-+	 * SLRT and TXT heap have to be updated with this version.
-+	 */
-+	if (!efi_secure_launch_update_boot_params(slrt, boot_params))
-+		return;
-+
-+	/* Jump through DL stub to initiate Secure Launch */
-+	dlinfo = slr_next_entry_by_tag(slrt, NULL, SLR_ENTRY_DL_INFO);
-+
-+	handler_callback = (dl_handler_func)dlinfo->dl_handler;
-+
-+	handler_callback(&dlinfo->bl_context);
-+
-+	unreachable();
-+}
-+#endif
-+
- static void __noreturn enter_kernel(unsigned long kernel_addr,
- 				    struct boot_params *boot_params)
- {
-@@ -925,6 +1014,11 @@ void __noreturn efi_stub_entry(efi_handle_t handle,
- 		goto fail;
- 	}
- 
-+#if (IS_ENABLED(CONFIG_SECURE_LAUNCH))
-+	/* If a Secure Launch is in progress, this never returns */
-+	efi_secure_launch(boot_params);
-+#endif
-+
- 	/*
- 	 * Call the SEV init code while still running with the firmware's
- 	 * GDT/IDT, so #VC exceptions will be handled by EFI.
--- 
-2.39.3
+Yes. Agree. Will add the details. Lets go from there.
+Thanks
+Babu
 
 
