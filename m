@@ -1,107 +1,129 @@
-Return-Path: <linux-doc+bounces-42927-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-42931-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D187A85BD3
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Apr 2025 13:35:45 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id BF767A85C31
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Apr 2025 13:49:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CD0BB4A2EF1
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Apr 2025 11:35:04 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7B0FD7A7DCB
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Apr 2025 11:48:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E301329B238;
-	Fri, 11 Apr 2025 11:34:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D416721146C;
+	Fri, 11 Apr 2025 11:49:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rbox.co header.i=@rbox.co header.b="N04LsJAY"
+	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="Z07myyco"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailtransmit04.runbox.com (mailtransmit04.runbox.com [185.226.149.37])
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE2E7298CC3;
-	Fri, 11 Apr 2025 11:33:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.226.149.37
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCB3826AD9;
+	Fri, 11 Apr 2025 11:49:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744371241; cv=none; b=R/xtXvt8SV99vE3CvkMFCs3sSDZh4hqQr5mTYQ9+ypqDLP7WQE2GJWiDGMUQQ7MMAH+doJhQD+22FYJ5Ut/29l3viJiyoqp2jt9CAQY84d9VCB0CSbvnVOw/R5/v3qBzk1pnppEaocgAWXUhsC9DNmkemxY7hoLkOXdBl2RwlFs=
+	t=1744372183; cv=none; b=D6D41TzJXRJ+DucTmtCvOgfyugnjMRmAWxLp3s9YSXPl/3TiOTXZhOPZnPnTT7Xz0qMNkXhztVdCpkCNLSsU66nI4MsjKkPmnaxV5hxF7F74SZT8MXy6e581IDgyyPKZWs/xKF3NsqURvWLwGze1Mq+Tfxb0B56l+td3kSjFZis=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744371241; c=relaxed/simple;
-	bh=g+wVQ6QK1MDXvmQ64BoN7dPxYfC6Qal1FuFidbTXn/Q=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=uTvw0DpOLV+7Pcq3qKcogU5OkMvzTZ6syEhDPXgYr5Z31iDhdBD4/OTbTqC1EmjJnxLNxEYVWNRk8/LT/uiX7ViYjbrB+gadxSa0HX7+mI/U30oSnhgp0ltO9mSTtYGRlk8DFTMlnC1uIRYn2uh3OE1HteqXCOGoy5OBPy+zkX8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rbox.co; spf=pass smtp.mailfrom=rbox.co; dkim=pass (2048-bit key) header.d=rbox.co header.i=@rbox.co header.b=N04LsJAY; arc=none smtp.client-ip=185.226.149.37
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rbox.co
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rbox.co
-Received: from mailtransmit02.runbox ([10.9.9.162] helo=aibo.runbox.com)
-	by mailtransmit04.runbox.com with esmtps  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-	(Exim 4.93)
-	(envelope-from <mhal@rbox.co>)
-	id 1u3Cdx-005wz7-4R; Fri, 11 Apr 2025 13:33:57 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rbox.co;
-	s=selector1; h=Cc:To:In-Reply-To:References:Message-Id:
-	Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From;
-	bh=WMhYf5YUMM3A2S2PCNIRkWp2Q1Juv+CrKBca/XjHFjA=; b=N04LsJAYhRyJIu+KbeniZT6QYV
-	vJiEIKekZYycVG4G1xFIC5KqoIq4JBc7xNU/w9ahwq72DippKcgHnR9d8qPx/Ul7IG3l4A4ePFTYz
-	SHd2yr6ypUakKxzDxiNmstReNKM9FddoKt1blND860fWsORk+2r27DJ56bZQedxkeeKZJOYfbQRrA
-	RzsbpaQWo3TTGdu2Cm+CACgDHVTeRVIGj6i1PJtLHhu1ZbGbupjo5fTXrE9Td9UfQvZAi7qRn5+PM
-	8elcAu1OkVLgPEAq1Ht0OvjCQY7FctLEEyIJqXHLSyTifgDLja/FCQ4YoASJ44AyDpUKndKa6n+CE
-	g8QfGC4Q==;
-Received: from [10.9.9.73] (helo=submission02.runbox)
-	by mailtransmit02.runbox with esmtp (Exim 4.86_2)
-	(envelope-from <mhal@rbox.co>)
-	id 1u3Cdr-0005tY-E3; Fri, 11 Apr 2025 13:33:51 +0200
-Received: by submission02.runbox with esmtpsa  [Authenticated ID (604044)]  (TLS1.2:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.93)
-	id 1u3Cdb-00D5Ut-CT; Fri, 11 Apr 2025 13:33:35 +0200
-From: Michal Luczaj <mhal@rbox.co>
-Date: Fri, 11 Apr 2025 13:32:45 +0200
-Subject: [PATCH bpf-next v2 9/9] docs/bpf: sockmap: Add a missing comma
+	s=arc-20240116; t=1744372183; c=relaxed/simple;
+	bh=xvx1leXhtHak3YBGIU8O8wL2kITwgF7bo8fYUAZqL2k=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=a3WmT/KFQjRd58ZkkVb5yIwZP1SJgKqH/6MtbMYa4BJF5p5UkJLBuSDdTt8mTiDbk2OMfshk9WdCtEdZgU8aFekIs5loEC9viSpJr/4hnOgAymBOJSh1DPkHgQPUCrCmFZRBmMvCp7Q+/XwtxFDfLKSVG3OFTFkexQmy9zh3IdM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=Z07myyco; arc=none smtp.client-ip=65.109.113.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 8CF5F40E023A;
+	Fri, 11 Apr 2025 11:49:38 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id mYVYs2BvZQ25; Fri, 11 Apr 2025 11:49:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1744372174; bh=OzxBMBEX/VnBC645dhU3grM5gZ/yXkYnP3kDp5QzLkY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Z07myycor6nzKf/ukbPYq2WYuLFMGgAv4WGMSHEHQB0XwbLMQEAo4aHSOeWkjQdEQ
+	 T0JzqwqNi2SzX0x4t3yt3vDnyzExDYSubnOodHi4Q7ET0tP7+7wzV838Qm/H97/mWd
+	 EP34zxL8oxiNhCtThfuRdotiMBPjC1K7wNtKW78+5kE+HH/vXMiBNdAPLz4SdQFQ+r
+	 WDQ9DZNtjGDEurj3qyjMVzYiDwgYtv+mHOflxpub9nsDvTH6f1PAqEwOoXqXTZWy2w
+	 0T6kSaEKh4UL2NkFB6lUvOrtFmL3aR5msQXGZRqGmmCjq34sAzbJ3Nl8iOOOLjzEfS
+	 n1aHCxeheQEf3NkRjQYuP6if8QJhGO3VDXnqihfelNAciszo+OhDMjg+oZJqNIZVwS
+	 vYpd1Qk3cfYnttD5B/bD9RHv4CIJOiGczqT0rYh5erJLlYIZcAkHer8WPMH10mf84S
+	 tKfG7CyBc8OWWd0Uz8baMi7ltqpvRCgvT/nFv3mimktcyJHUViaidrdg2X6qYU/0BZ
+	 uVSSPtNJGOqWD6fX2czmK3Hm3zYvCiunOtDgoeNrrm9Y74ymev6YIMtCN3ZFNBOTFn
+	 qJ7GZTfWjU37mxHDetOVZV1PhLYzdATym3+9OsfpXeLYD69KsLdkpkBVagU3uRsNob
+	 G8QO9Bh5K+7xt7Pz4pBmz6kc=
+Received: from zn.tnic (p579690ee.dip0.t-ipconnect.de [87.150.144.238])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	(No client certificate requested)
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id C10C340E0242;
+	Fri, 11 Apr 2025 11:49:15 +0000 (UTC)
+Date: Fri, 11 Apr 2025 13:49:08 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Mario Limonciello <superm1@kernel.org>
+Cc: Jean Delvare <jdelvare@suse.com>, Andi Shyti <andi.shyti@kernel.org>,
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Yazen Ghannam <yazen.ghannam@amd.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+	"H . Peter Anvin" <hpa@zytor.com>,
+	Shyam Sundar S K <Shyam-sundar.S-k@amd.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>,
+	"open list:I2C/SMBUS CONTROLLER DRIVERS FOR PC" <linux-i2c@vger.kernel.org>,
+	"open list:AMD PMC DRIVER" <platform-driver-x86@vger.kernel.org>
+Subject: Re: [PATCH v3 2/4] i2c: piix4: Move SB800_PIIX4_FCH_PM_ADDR
+ definition to amd_node.h
+Message-ID: <20250411114908.GLZ_kBtN94h79EEN6j@fat_crate.local>
+References: <20250410200202.2974062-1-superm1@kernel.org>
+ <20250410200202.2974062-3-superm1@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250411-selftests-sockmap-redir-v2-9-5f9b018d6704@rbox.co>
-References: <20250411-selftests-sockmap-redir-v2-0-5f9b018d6704@rbox.co>
-In-Reply-To: <20250411-selftests-sockmap-redir-v2-0-5f9b018d6704@rbox.co>
-To: Andrii Nakryiko <andrii@kernel.org>, 
- Eduard Zingerman <eddyz87@gmail.com>, Mykola Lysenko <mykolal@fb.com>, 
- Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, 
- Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>, 
- Yonghong Song <yonghong.song@linux.dev>, 
- John Fastabend <john.fastabend@gmail.com>, KP Singh <kpsingh@kernel.org>, 
- Stanislav Fomichev <sdf@fomichev.me>, Hao Luo <haoluo@google.com>, 
- Jiri Olsa <jolsa@kernel.org>, Shuah Khan <shuah@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: bpf@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- Jakub Sitnicki <jakub@cloudflare.com>, Michal Luczaj <mhal@rbox.co>
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20250410200202.2974062-3-superm1@kernel.org>
 
-Fix bpf_sk_redirect_map() prototype.
+On Thu, Apr 10, 2025 at 03:02:00PM -0500, Mario Limonciello wrote:
+> From: Mario Limonciello <mario.limonciello@amd.com>
+> 
+> SB800_PIIX4_FCH_PM_ADDR is used to indicate the base address for the
+> FCH PM registers.  Multiple drivers may need this base address, so
+> move it to a common header location and rename accordingly.
+> 
+> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+> ---
+>  arch/x86/include/asm/amd_node.h |  2 ++
+>  drivers/i2c/busses/i2c-piix4.c  | 12 ++++++------
+>  2 files changed, 8 insertions(+), 6 deletions(-)
+> 
+> diff --git a/arch/x86/include/asm/amd_node.h b/arch/x86/include/asm/amd_node.h
+> index 23fe617898a8f..f4993201834ea 100644
+> --- a/arch/x86/include/asm/amd_node.h
+> +++ b/arch/x86/include/asm/amd_node.h
+> @@ -19,6 +19,8 @@
+>  
+>  #include <linux/pci.h>
+>  
+> +#define FCH_PM_BASE		0xFED80300
 
-Signed-off-by: Michal Luczaj <mhal@rbox.co>
----
- Documentation/bpf/map_sockmap.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Is that even related to amd_node?
 
-diff --git a/Documentation/bpf/map_sockmap.rst b/Documentation/bpf/map_sockmap.rst
-index 2d630686a00baa141bb7557098117f0eb236455b..deda98e55fbcc3ad2972889406967942b4b40e66 100644
---- a/Documentation/bpf/map_sockmap.rst
-+++ b/Documentation/bpf/map_sockmap.rst
-@@ -100,7 +100,7 @@ bpf_sk_redirect_map()
- ^^^^^^^^^^^^^^^^^^^^^
- .. code-block:: c
- 
--    long bpf_sk_redirect_map(struct sk_buff *skb, struct bpf_map *map, u32 key u64 flags)
-+    long bpf_sk_redirect_map(struct sk_buff *skb, struct bpf_map *map, u32 key, u64 flags)
- 
- Redirect the packet to the socket referenced by ``map`` (of type
- ``BPF_MAP_TYPE_SOCKMAP``) at index ``key``. Both ingress and egress interfaces
+Or should it be in some x86...platform.h header?
 
 -- 
-2.49.0
+Regards/Gruss,
+    Boris.
 
+https://people.kernel.org/tglx/notes-about-netiquette
 
