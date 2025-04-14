@@ -1,94 +1,107 @@
-Return-Path: <linux-doc+bounces-43041-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43044-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC432A88201
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 15:29:14 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5658AA884A0
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 16:23:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CBE983A53B3
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 13:27:34 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A360F190208D
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 14:17:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E407026B0A0;
-	Mon, 14 Apr 2025 13:24:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0CA2F2918DF;
+	Mon, 14 Apr 2025 13:55:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b="TAWOW2ID"
+	dkim=pass (2048-bit key) header.d=helmholz.de header.i=@helmholz.de header.b="OSjUkqt9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mr85p00im-ztdg06011201.me.com (mr85p00im-ztdg06011201.me.com [17.58.23.181])
+Received: from www253.your-server.de (www253.your-server.de [188.40.28.33])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F42627991A
-	for <linux-doc@vger.kernel.org>; Mon, 14 Apr 2025 13:24:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=17.58.23.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15DA22741D5;
+	Mon, 14 Apr 2025 13:55:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.40.28.33
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744637098; cv=none; b=KMWBUXb8EAwjh4WUTsACl13Fc7SPEuvbgmhJoEFosqEdYaiMH0EaceRdHXUIaOxU0GwxKwggE2AyJ/mvTQFDQajliCtgrV2KHfyFa14ti3SSu4CUjpbVPMeoh0C1Ry2smYpaCQsAAPgK2K7xmfmWwbN6aZ3ZsR+Dm4MAqhUvttc=
+	t=1744638917; cv=none; b=n6WV/qC1JuTIgEfQpCbLcpx0trTSwDxrQfNtgFIQuBOhCs9yJ72A2zk0ePfnmtoYyi8iIHbL2vCAN7CWGLXh3HHBF7hPFLsc+ljVJIqAXbJdokk5xe9YFOXTf4XBmYu6o4sYxjEWa9jve545rWzYsPZh0pru7Yc6SL2ZVxCXBUs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744637098; c=relaxed/simple;
-	bh=uSczamGJoJKbGvV0A8rmuxq4WURqfp+pw4w7uxYDPZs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=IuZNkB3DjqYULurQyC8xzFk0ZvO+Y39GEt8Wmvm0UbwFeWmmZ+GlnqW4GfwtVTE94Y8EI4oKSG0p4fFbkQVimtfce+JTTY+qyaLFLJJieqLHy7Jy3kmym9V5lGfITeJeG70psRG5rwYYPGD5Xes+6K8ZQ2MQipAIj9sEIkU513c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com; spf=pass smtp.mailfrom=icloud.com; dkim=pass (2048-bit key) header.d=icloud.com header.i=@icloud.com header.b=TAWOW2ID; arc=none smtp.client-ip=17.58.23.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=icloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icloud.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=icloud.com;
-	s=1a1hai; bh=uSczamGJoJKbGvV0A8rmuxq4WURqfp+pw4w7uxYDPZs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:x-icloud-hme;
-	b=TAWOW2ID6aTTvU+2MgRsbja7BK3I6WCve1CEcTJdzcuVylzCmnxH51hkvXlnJUDQW
-	 NN5lKvFdU5YC64bkyNn7WvK8siqEibla7THc0XjaD7zu1HFDaSTdrJSSZA7aolMKaU
-	 dMsR223FEqx8/giBGj4YiCi5AFdphjWH02Q67639CeDHtMweGU+1kxlrE5IwHCsk1U
-	 YtplErG4FcFBUnp+mjdKzotOjXFVMbjtb0YdrK3ZZU4awXHuLkC+unzgpXK8fw+bOe
-	 O7j6pAvdpxg6y8amQtYDOhjyvW5LNE3ML7swuaMoD4JSjCWhiAQG2xE0asiW9IOUDn
-	 56eEyGr1LFBXg==
-Received: from mr85p00im-ztdg06011201.me.com (mr85p00im-ztdg06011201.me.com [17.58.23.181])
-	by mr85p00im-ztdg06011201.me.com (Postfix) with ESMTPS id A9AD19600F8;
-	Mon, 14 Apr 2025 13:24:54 +0000 (UTC)
-Received: from [192.168.1.26] (mr38p00im-dlb-asmtp-mailmevip.me.com [17.57.152.18])
-	by mr85p00im-ztdg06011201.me.com (Postfix) with ESMTPSA id 5F754960248;
-	Mon, 14 Apr 2025 13:24:52 +0000 (UTC)
-Message-ID: <c6c5ab5d-8895-4c16-9f74-ad311cd8ac14@icloud.com>
-Date: Mon, 14 Apr 2025 21:24:49 +0800
+	s=arc-20240116; t=1744638917; c=relaxed/simple;
+	bh=pgNx2sdENX2tGay1fmIECFu/j3ax4mCzVXRE8j5WKxU=;
+	h=From:To:Cc:Subject:Date:Message-Id; b=fr3QBINVVvVz353bWwujoifTIJ6bUbXHC5noCx96RCmsk+6lATz7ZhiqldgAuQEDi6IHjAnuadfgGoVyvhl3gJV7R7vjVbaEr5+a18vWYAHNNPSpVUBEjzUtLg9tmTQsipIMvLRNnjcsdZ5g6aSnnxRGkDMHyX9vg3gpj1QBxDM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=helmholz.de; spf=fail smtp.mailfrom=helmholz.de; dkim=pass (2048-bit key) header.d=helmholz.de header.i=@helmholz.de header.b=OSjUkqt9; arc=none smtp.client-ip=188.40.28.33
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=helmholz.de
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=helmholz.de
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=helmholz.de
+	; s=default2501; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+	MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References;
+	bh=ECoGTVyrfDzehLrz8EMEF8qTYvNgxk0rK5zEaP9773M=; b=OSjUkqt9YejcixAqdz7AIYXVv3
+	yHG/gFtVEV5W1gB+VKs77qsrFhoXOf0df0G5cll7oTa093/8etkoEPXk7ZVZUSCv8C+VF42diTng3
+	EXyE/ukFo87GDSvtVnKo0wlKCYByE3yY9Nvjfdjk44LnKPSEcHPL2ITDOIhgCkqmXAD61B/8wnp9q
+	NrKuEjUIDsNBH8RTw+A+r0gVCXYzybL3BBCMrTj56u3nt/iLd4xCS9qFRtaPTNXncCNO9fSYdh210
+	6CCq7DJ7pY2sjr7ISJ/LE0XYORy8CltwcMItRg43egrkBtTWlXnfB5rKmqvCbFVrkrzUqMeD34dyr
+	msOIB4qw==;
+Received: from sslproxy08.your-server.de ([78.47.166.52])
+	by www253.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.96.2)
+	(envelope-from <ante.knezic@helmholz.de>)
+	id 1u4JsP-0008n7-04;
+	Mon, 14 Apr 2025 15:29:29 +0200
+Received: from [217.6.86.34] (helo=linuxdev.helmholz.local)
+	by sslproxy08.your-server.de with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+	(Exim 4.96)
+	(envelope-from <ante.knezic@helmholz.de>)
+	id 1u4JsO-000Eer-1v;
+	Mon, 14 Apr 2025 15:29:28 +0200
+From: Ante Knezic <ante.knezic@helmholz.de>
+To: linux-leds@vger.kernel.org
+Cc: lee@kernel.org,
+	pavel@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	corbet@lwn.net,
+	knezic@helmholz.com,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: [PATCH 0/3] Add support for WL-ICLEDs from Wurth Elektronik
+Date: Mon, 14 Apr 2025 15:28:48 +0200
+Message-Id: <cover.1744636666.git.knezic@helmholz.com>
+X-Mailer: git-send-email 2.11.0
+X-Authenticated-Sender: knezic@helmholz.com
+X-Virus-Scanned: Clear (ClamAV 1.0.7/27608/Mon Apr 14 10:34:28 2025)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] fs/fs_parse: Fix 3 issues for
- validate_constant_table()
-To: Jan Kara <jack@suse.cz>
-Cc: Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, David Howells <dhowells@redhat.com>,
- Jonathan Corbet <corbet@lwn.net>, linux-fsdevel@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- Zijun Hu <quic_zijuhu@quicinc.com>
-References: <20250411-fix_fs-v2-0-5d3395c102e4@quicinc.com>
- <20250411-fix_fs-v2-2-5d3395c102e4@quicinc.com>
- <pgxiizhnhcuaol2vhwikrtqfcp6b3g4cxs26rwxzdxuyjnadtv@smpxafscsxod>
-Content-Language: en-US
-From: Zijun Hu <zijun_hu@icloud.com>
-In-Reply-To: <pgxiizhnhcuaol2vhwikrtqfcp6b3g4cxs26rwxzdxuyjnadtv@smpxafscsxod>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: Oe2BybD7vv3eR5YIj3SuH323SYG7yc6E
-X-Proofpoint-GUID: Oe2BybD7vv3eR5YIj3SuH323SYG7yc6E
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-14_04,2025-04-10_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 malwarescore=0
- suspectscore=0 spamscore=0 mlxscore=0 phishscore=0 adultscore=0
- clxscore=1015 mlxlogscore=937 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2411120000 definitions=main-2504140097
 
-On 2025/4/14 21:17, Jan Kara wrote:
->> Fortunately, the function has no caller currently.
->> Fix these issues mentioned above.
->>
->> Signed-off-by: Zijun Hu <quic_zijuhu@quicinc.com>
-> As discussed, I'd rather drop this function since it is unused as well.
+From: Ante Knezic <knezic@helmholz.com>
 
-thank you Jan for comments.
-will drop it in next revision (^^).
+This patch adds support for WL-ICLED series of RGB Leds. These LEDs
+are equipped with integrated controller and can be daisy chained to
+arbitrary number of units. The MCU communicates with the first LED
+in series via SPI. Interface can be regular SPI protocol or single
+line only (MOSI connection only) depending on the model.
+
+Ante Knezic (3):
+  Documentation: leds: Add docs for Wurth Elektronik WL-ICLED
+  dt-bindings: leds: add binding for WL-ICLED
+  leds: add WL-ICLED SPI driver
+
+ .../bindings/leds/leds-wl-icled.yaml          |  88 ++++
+ Documentation/leds/index.rst                  |   1 +
+ Documentation/leds/leds-wl-icled.rst          |  69 +++
+ drivers/leds/Kconfig                          |  10 +
+ drivers/leds/Makefile                         |   1 +
+ drivers/leds/leds-wl-icled.c                  | 406 ++++++++++++++++++
+ 6 files changed, 575 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/leds/leds-wl-icled.yaml
+ create mode 100644 Documentation/leds/leds-wl-icled.rst
+ create mode 100644 drivers/leds/leds-wl-icled.c
+
+-- 
+2.48.1
 
 
