@@ -1,99 +1,102 @@
-Return-Path: <linux-doc+bounces-43042-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43047-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC71AA88436
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 16:15:27 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDC01A8873B
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 17:33:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 59FC417ED43
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 14:09:13 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4CE7F188703C
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Apr 2025 15:18:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C736B2798EE;
-	Mon, 14 Apr 2025 13:36:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8524F142E86;
+	Mon, 14 Apr 2025 15:18:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ModmNHGZ"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="nAXG+lJU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 966F04438B;
-	Mon, 14 Apr 2025 13:36:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A609F252287;
+	Mon, 14 Apr 2025 15:17:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744637767; cv=none; b=L4yCmWk2DF8X/IJtvoXQS1Au652ICdNucwkpsya6FobV+q9xr7AsUmEO5+KzTn6C/CFDJQ6ulAxPiAmzHOBjI5SQfq4HQ4gLtAkLX6nfCbnhzIUr3leqNt9/4KNqCvFhdq9bPTmwYlEc56ovrTlfj3TXSPG5IGqbyXeuOhN5WTA=
+	t=1744643880; cv=none; b=uu8UTj0ZS6eM3egTjQm6sl6TzIuaUxI24zRxWZPUbxX1pkq1SgRfLnegAvSzpgGUxkks/h1rLgLoNLSKqG1YPlDMWpGIoWPiVUDisNmaZKdariPvEjLs5Y+irVof5n1Uu+Q8wA2pCSS5Ty/eA87F/J57lyap8eteX2e6uxLU738=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744637767; c=relaxed/simple;
-	bh=WJ+JyBh1nHLEgrQ+hkI6yYMG1Nzzmf5jxQP5xAVPess=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RxBu0A25CIepnYjya7yfaHlCoSypYE0LqrKBwQK90gf65TJvEMuYGMFbzFslXGijoMAyulJanDfloTaXCdhkjN9SKGvcFH5eeC/pN+6UGtj7VORoRAG0nYJoSA/3W1LPdoRKJFPMQeIqAlVcUV5knlCAXVfu/B3kZG9yrbnK5Dw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ModmNHGZ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B47B5C4CEE2;
-	Mon, 14 Apr 2025 13:36:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1744637767;
-	bh=WJ+JyBh1nHLEgrQ+hkI6yYMG1Nzzmf5jxQP5xAVPess=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ModmNHGZWVYZSvRJmLj4DYSNL946kAvpy4PvTvWEhTupDlrlWzAXry5I6l7Dx82Ht
-	 Y8EsFJugOinR0dZ/0AYs7iNd5CxdB0r/LgJNued2qfFH952bl4pMnBaJVlC36ceek1
-	 sv4Lx2V/Pwn7uQlAlnm7pl4+9SrCOU9a7JWSxRiW8ZF8up4a2qeubRxHidUKVMLudJ
-	 0lufpOQeh6ZFFR8qoxGgPYDMYnN7YSZaotmEB67n9fqaMOOorUPlfqB2F8P26m3hY3
-	 SVELAFEWzvRh0F4kkJWly0/BrwsnUiD6Y2P9FUol7Zfm84HQ47LE1gPPMOVkBbP9wY
-	 2/+6V/1fDQ5ig==
-From: Christian Brauner <brauner@kernel.org>
-To: Zijun Hu <zijun_hu@icloud.com>
-Cc: Christian Brauner <brauner@kernel.org>,
-	linux-fsdevel@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Zijun Hu <quic_zijuhu@quicinc.com>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Jan Kara <jack@suse.cz>,
-	David Howells <dhowells@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: Re: (subset) [PATCH v2 1/2] fs/fs_parse: Delete macro fsparam_u32hex()
-Date: Mon, 14 Apr 2025 15:35:54 +0200
-Message-ID: <20250414-klemmen-tiefen-026d7343aceb@brauner>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250411-fix_fs-v2-1-5d3395c102e4@quicinc.com>
-References: <20250411-fix_fs-v2-0-5d3395c102e4@quicinc.com> <20250411-fix_fs-v2-1-5d3395c102e4@quicinc.com>
+	s=arc-20240116; t=1744643880; c=relaxed/simple;
+	bh=rDkXLDwYmt/2joQ7m8tnzWcJ/cvpR3dyNsQbz6Tegy8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=pcxwLBPbPI10+993qVwxgcX69HuSwVMgSEFELxsPSqUrr7iIHl+yUyZSSGT3VNgJR/TNqgpzIyFcE3ljQ11oveNLGWpDhqWjOSR8QCb4SLl3H4HBS5ITBFHisv2VpQVcR0WpirKzMF+L4zKcJvMPiI3XOl+D1w+y6F73Dr9/Sdk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=nAXG+lJU; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1B5F041062
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1744643872; bh=u8pfzpkwPnivH/uUd7ymXPRbzzsoj+QwmHnBMg5MiJk=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=nAXG+lJU4P9TqdrFiH7oUxrIem1hLJOWx6rPuqQ9lfQTXmucrr+2it9+Nrx6Y8zn1
+	 0xIMtlEG9po6SopSoSnVou103P0UWSib3HtPH6Tr75nh+Kvh3KCk47fmswCOYOEKRV
+	 IPf2jtEDogyFTbVm7Q17+FbFzsAkXmXnehj4OTYID6EQS4ResxUdwlR3HHhdHdy26h
+	 q38j29NYd6EOD1SNk5dx9ziKdawizm3CFxvbeAqZ0sxnd8HXE6laKtubt1kDN1oq4D
+	 WYwiZw2kQ/RMlA25df5NDU6vEA7qV4bmaGcd7YqVTbkaN+9eX9XwbpT7PvsfnJAX4D
+	 GZmk+vFOmyRNg==
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 1B5F041062;
+	Mon, 14 Apr 2025 15:17:52 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Linux Doc Mailing
+ List <linux-doc@vger.kernel.org>, linux-kernel@vger.kernel.org, "Gustavo
+ A. R. Silva" <gustavoars@kernel.org>, Kees Cook <kees@kernel.org>, Russell
+ King <linux@armlinux.org.uk>, linux-hardening@vger.kernel.org,
+ netdev@vger.kernel.org
+Subject: Re: [PATCH v3 00/33] Implement kernel-doc in Python
+In-Reply-To: <Z_zYXAJcTD-c3xTe@black.fi.intel.com>
+References: <cover.1744106241.git.mchehab+huawei@kernel.org>
+ <871pu1193r.fsf@trenco.lwn.net> <Z_zYXAJcTD-c3xTe@black.fi.intel.com>
+Date: Mon, 14 Apr 2025 09:17:51 -0600
+Message-ID: <87mscibwm8.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1026; i=brauner@kernel.org; h=from:subject:message-id; bh=WJ+JyBh1nHLEgrQ+hkI6yYMG1Nzzmf5jxQP5xAVPess=; b=owGbwMvMwCU28Zj0gdSKO4sYT6slMaT/5XfMPq0zZevHlztfHM5c/qXT6qqZJjtH29GfwZOF5 tyTEGYR7ShlYRDjYpAVU2RxaDcJl1vOU7HZKFMDZg4rE8gQBi5OAZhIphrD//K8NGaZ5+t0zO10 InlZTS6U/fnB7pHOsNjkWaX+jH/LFzL8TxE6xND6iPv/k0+PxR3M7Fds1eecM5np7Gn3hO55X0t OcwMA
-X-Developer-Key: i=brauner@kernel.org; a=openpgp; fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Fri, 11 Apr 2025 23:31:40 +0800, Zijun Hu wrote:
-> Delete macro fsparam_u32hex() since:
-> 
-> - it has no caller.
-> 
-> - it uses as type @fs_param_is_u32_hex which is never defined, so will
->   cause compile error when caller uses it.
-> 
-> [...]
+Andy Shevchenko <andriy.shevchenko@intel.com> writes:
 
-Applied to the vfs-6.16.misc branch of the vfs/vfs.git tree.
-Patches in the vfs-6.16.misc branch should appear in linux-next soon.
+> On Wed, Apr 09, 2025 at 12:30:00PM -0600, Jonathan Corbet wrote:
+>> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+>> 
+>> > This changeset contains the kernel-doc.py script to replace the verable
+>> > kernel-doc originally written in Perl. It replaces the first version and the
+>> > second series I sent on the top of it.
+>> 
+>> OK, I've applied it, looked at the (minimal) changes in output, and
+>> concluded that it's good - all this stuff is now in docs-next.  Many
+>> thanks for doing this!
+>> 
+>> I'm going to hold off on other documentation patches for a day or two
+>> just in case anything turns up.  But it looks awfully good.
+>
+> This started well, until it becomes a scripts/lib/kdoc.
+> So, it makes the `make O=...` builds dirty *). Please make sure this doesn't leave
+> "disgusting turd" )as said by Linus) in the clean tree.
+>
+> *) it creates that __pycache__ disaster. And no, .gitignore IS NOT a solution.
 
-Please report any outstanding bugs that were missed during review in a
-new review to the original patch series allowing us to drop it.
+If nothing else, "make cleandocs" should clean it up, certainly.
 
-It's encouraged to provide Acked-bys and Reviewed-bys even though the
-patch has now been applied. If possible patch trailers will be updated.
+We can also tell CPython to not create that directory at all.  I'll run
+some tests to see what the effect is on the documentation build times;
+I'm guessing it will not be huge...
 
-Note that commit hashes shown below are subject to change due to rebase,
-trailer updates or similar. If in doubt, please check the listed branch.
+Thanks,
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
-branch: vfs-6.16.misc
-
-[1/2] fs/fs_parse: Delete macro fsparam_u32hex()
-      https://git.kernel.org/vfs/vfs/c/8cc42084abd9
+jon
 
