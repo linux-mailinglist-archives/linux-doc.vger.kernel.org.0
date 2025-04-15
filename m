@@ -1,281 +1,157 @@
-Return-Path: <linux-doc+bounces-43162-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43164-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3520AA8996F
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 12:06:57 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id F01E5A899B8
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 12:19:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B4DB4189656B
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 10:07:03 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 66B873B0A6B
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 10:19:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4954C284662;
-	Tue, 15 Apr 2025 10:06:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE05B28DF12;
+	Tue, 15 Apr 2025 10:19:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="KCq2l9VB"
+	dkim=pass (2048-bit key) header.d=tq-group.com header.i=@tq-group.com header.b="RGnqFyEt";
+	dkim=fail reason="key not found in DNS" (0-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="FxbIXQ3H"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net [217.70.183.199])
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAB701C6FF6;
-	Tue, 15 Apr 2025 10:06:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94DF828B514;
+	Tue, 15 Apr 2025 10:18:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=93.104.207.81
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744711603; cv=none; b=a/ZFeXG3yzr1K0faoIm0HrKFxozMbq5yVh2NeWzkVEpMCsbXRWOxaauimiRiYweRakMSTSk/WWferBjC+dsOJZACK8c1OFG6+0gCqQyehw4s9shPMnwzaQLokQ49jdcPmNCvSFtUpL1XDfnRqd9tEDMgCTfSh10jf13G950wN3c=
+	t=1744712344; cv=none; b=K2d4MQWq8resyhCwaevXRWmFxnTuso6dDO+8Q33v+LkU98B7iRmHDkHG7JWjrzi51S29n5E0psVbhd2UDRiZ7/eMwbRg0q5+EpqY3DlK6mnM7DQ0YV64jeswr+4Su26WSFJxExa6/mnySEIFBjcQwMhLHqJuCMOE/eWBYdEaN5w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744711603; c=relaxed/simple;
-	bh=CEmzCZqN10SSexLluQc91LaskaInMbu9/eAOHXGc3uo=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=tMDCqsIqP5LIwNNCtlIrAqhp7YUMBRkImGYzflfzWQJJh1VScOyQzpBRhTt1dj7h3b3ZRK7Dabp2l410CX/JbHK+RlOwJf73WsGLIb5d52wgB7935ZFO5gFrFf+vivruY1/jBwonus6WTUlSvyuUFrPazW8f9ZwmN6cr+GtjAZs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=KCq2l9VB; arc=none smtp.client-ip=217.70.183.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id EA21F43981;
-	Tue, 15 Apr 2025 10:06:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1744711598;
+	s=arc-20240116; t=1744712344; c=relaxed/simple;
+	bh=hycr9RrMa/7Y9VWU/Z/GmIOCv9QKk4RftFGy1qVEEyk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=VBjiehzsJo8YKPvYSuH6nvbhwRHIG9xCygZWa2iYqZTZvc9xajwFwhSj8ILayVbpvgnIkuMULlRF9yl8jaJ3nR+JrGvMSBwvBYxLORT5/YnZkUEQ86zXNHIwuqT1y5uPtxeNVtf+N8q16eifXz9Hunz3/UFw+5/fQU8J/PWKR5Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ew.tq-group.com; spf=pass smtp.mailfrom=ew.tq-group.com; dkim=pass (2048-bit key) header.d=tq-group.com header.i=@tq-group.com header.b=RGnqFyEt; dkim=fail (0-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b=FxbIXQ3H reason="key not found in DNS"; arc=none smtp.client-ip=93.104.207.81
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ew.tq-group.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+  t=1744712339; x=1776248339;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Nb1CaeSyZdwCqAexjrlTSruwnwqmG4LLxlXJojt81rk=;
+  b=RGnqFyEtnaz9tRKmro35jkfV3ilPA5+75dOFN5xRBZBfLHCxevOghUlh
+   Xqgq4OiqksOXfGRXYvXJsrBndlQNKzfZn9pGpblZpcQUUXMje3OYcg+e8
+   lsnYT3jVwLGcXKKwvkm0OLXjuf1b4IZ+I/lmk4Ire3DfoXo7qgTZYhrqu
+   AS1LyikkSTJTulNbk5tn7WaSalf5UEP1YJ5g7t7Ttn42IhSi5YLfY8cBD
+   eLcyp2wRKw6FiPgeYpZfOtswxy9u7lav378GqcSCeNzgm5YTqji6ALOBh
+   yOh/vSUvHK5WARNMMSwLLPZguNvxOaeyViIIRyy2RxX8qH5bFUC2wTIxv
+   g==;
+X-CSE-ConnectionGUID: qHslwqOKQDS3n+C1PL8nQQ==
+X-CSE-MsgGUID: z5CBpqFHQfidSCZ9bnHD7g==
+X-IronPort-AV: E=Sophos;i="6.15,213,1739833200"; 
+   d="scan'208";a="43537779"
+Received: from vmailcow01.tq-net.de ([10.150.86.48])
+  by mx1.tq-group.com with ESMTP; 15 Apr 2025 12:18:55 +0200
+X-CheckPoint: {67FE3290-2D-903EAEAC-E04C76C8}
+X-MAIL-CPID: 776D1808CE1E037E8E14824437E2A7F7_5
+X-Control-Analysis: str=0001.0A006378.67FE328F.0080,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E105F161113;
+	Tue, 15 Apr 2025 12:18:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
+	s=dkim; t=1744712331;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=gyefS2qsicS2WeYEx2KUc4cRIS7+s7AsX0vNGF7mzds=;
-	b=KCq2l9VBizQUOddDZPnf73tnZwzkwcNtQ4r1V5Z4SAlCrpGqEgU6k0a7K6ZqXSwJL48W+7
-	JBQHbhUVSNjzWmw0U2tGOUDBBbdv9hsI8+hW0C1S71wi+7nB087zWAFJiEYx2hYM3naTd0
-	Ob8HAk5eAK7wm/x1pLLtgEQMrPQ566Izl5DXqBjwqSHq6uSxAT4gTYKuqCIrCz8SsB6Vc4
-	ue1O9e0QVZFl22Qo+CO2McXtHa0mG1h6vVN0y5SFGT3WYTZ8uSnA4eyJ6mNz3UqxuIQe4q
-	zvAZgpm9TnLT4PrOyxbGqpKbzfk2E9SctAmlUfdX1tGuRXBXSYR6mbm9erWYxQ==
-Message-ID: <b21778f9-dd78-495a-80ad-979c6718072f@bootlin.com>
-Date: Tue, 15 Apr 2025 12:06:37 +0200
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=Nb1CaeSyZdwCqAexjrlTSruwnwqmG4LLxlXJojt81rk=;
+	b=FxbIXQ3HA+sGY8beUPvzMhSf8rVMxH9ihaDwISw58nDj4onHiPYDmzZR3r5FmvyQ0+ryhE
+	SPTAUFh5jUFCYhlaUWM0uUeM2ttx8wXnwRF7SAZI50AGPebD5uP+rZ44+XCcghjbAg+3ba
+	v/VucSP2xJw4k/hFi8G33/22jbmMOP0XsrRWeID36OjgICE1rfJHeyT6bnivXqmE6aAnmj
+	3UggLZoPYk5wHtd9qwIhlbjpv462wNqOLuiXrDRUmMQ2RVE0imOhqc5FRo0BX7se8qW2f8
+	IpNo1YCmCWf3g6pjX3ie/lkmJrK59/Ogx8BbITKc/rNhU/FXHqimWAH8vt5Riw==
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+To: Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Andy Whitcroft <apw@canonical.com>
+Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+	Joe Perches <joe@perches.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Nishanth Menon <nm@ti.com>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Siddharth Vadapalli <s-vadapalli@ti.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Tero Kristo <kristo@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux@ew.tq-group.com,
+	Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Subject: [PATCH net-next 0/4] RGMII mode clarification + am65-cpsw fix
+Date: Tue, 15 Apr 2025 12:18:00 +0200
+Message-ID: <cover.1744710099.git.matthias.schiffer@ew.tq-group.com>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Louis Chauvet <louis.chauvet@bootlin.com>
-Subject: Re: [PATCH v3 29/54] docs/dyndbg: add classmap info to howto
-To: Jim Cromie <jim.cromie@gmail.com>, jbaron@akamai.com,
- gregkh@linuxfoundation.org, ukaszb@chromium.org, linux-kernel@vger.kernel.org
-Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
- intel-gvt-dev@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- daniel.vetter@ffwll.ch, tvrtko.ursulin@linux.intel.com,
- jani.nikula@intel.com, ville.syrjala@linux.intel.com,
- linux-doc@vger.kernel.org
-References: <20250402174156.1246171-1-jim.cromie@gmail.com>
- <20250402174156.1246171-30-jim.cromie@gmail.com>
-Content-Language: en-US
-Autocrypt: addr=louis.chauvet@bootlin.com; keydata=
- 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
-In-Reply-To: <20250402174156.1246171-30-jim.cromie@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvvdefudelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfhuffvvehfjggtgfesthekredttddvjeenucfhrhhomhepnfhouhhishcuvehhrghuvhgvthcuoehlohhuihhsrdgthhgruhhvvghtsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeetfffhtdeigfehffduuedvkeefgfdvuddugfffteetffdvteffgfejvedugffgffenucffohhmrghinhepsghoohhtlhhinhdrtghomhenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghloheplgduledvrdduieekrddtrddvtdgnpdhmrghilhhfrhhomheplhhouhhishdrtghhrghuvhgvthessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepudegpdhrtghpthhtohepjhhimhdrtghrohhmihgvsehgmhgrihhlrdgtohhmpdhrtghpthhtohepjhgsrghrohhnsegrkhgrmhgrihdrtghomhdprhgtphhtthhopehgrhgvghhkhheslhhinhhugihfohhunhgurghtihhonhdrohhrghdprhgtphhtthhopehukhgrshiisgestghhrhhomhhiuhhmrdhorhhgpdhrtghpthhtoheplhhin
- hhugidqkhgvrhhnvghlsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtohepughrihdquggvvhgvlheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrghdprhgtphhtthhopegrmhguqdhgfhigsehlihhsthhsrdhfrhgvvgguvghskhhtohhprdhorhhgpdhrtghpthhtohepihhnthgvlhdqghhvthdquggvvheslhhishhtshdrfhhrvggvuggvshhkthhophdrohhrgh
-X-GND-Sasl: louis.chauvet@bootlin.com
+X-Last-TLS-Session-Version: TLSv1.3
 
+As discussed [1], the comments for the different rgmii(-*id) modes do not
+accurately describe what these values mean. Update the binding
+documentation and fix up the mode to account for the fixed TX delay on
+the AM65 CPSW Ethernet controllers, similar to the way the icssg-prueth
+does it. For backwards compatibility, the "impossible" modes that claim
+to have a delay on the PCB are still accepted, but trigger a warning
+message.
 
+As Andrew suggested, I have also added a checkpatch check that requires
+a comment for any RGMII mode that is not "rgmii-id".
 
-Le 02/04/2025 à 19:41, Jim Cromie a écrit :
-> Describe the 3 API macros providing dynamic_debug's classmaps
-> 
-> DYNDBG_CLASSMAP_DEFINE - create & export a classmap
-> DYNDBG_CLASSMAP_USE    - refer to exported map
-> DYNDBG_CLASSMAP_PARAM  - bind control param to the classmap
-> DYNDBG_CLASSMAP_PARAM_REF + use module's storage - __drm_debug
-> 
-> TBD: some of this might be over-specification, or just over-talked.
-> 
-> NB: The _DEFINE & _USE model makes the user dependent on the definer,
-> just like EXPORT_SYMBOL(__drm_debug) already does.
-> 
-> cc: linux-doc@vger.kernel.org
-> Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
-> ---
-> v3- rework protection around PARAM
-> 
-> v0.5 adjustments per Randy Dunlap
-> v0.7 checkpatch fixes
-> v0.8 more
-> v0.9 rewords
-> 
-> fixup-howto
-> ---
->   .../admin-guide/dynamic-debug-howto.rst       | 93 +++++++++++++++++++
->   1 file changed, 93 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-> index 1ceadf4f28f9..5eb4ae3b2f27 100644
-> --- a/Documentation/admin-guide/dynamic-debug-howto.rst
-> +++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-> @@ -394,3 +394,96 @@ just a shortcut for ``print_hex_dump(KERN_DEBUG)``.
->   For ``print_hex_dump_debug()``/``print_hex_dump_bytes()``, format string is
->   its ``prefix_str`` argument, if it is constant string; or ``hexdump``
->   in case ``prefix_str`` is built dynamically.
-> +
-> +Dynamic Debug classmaps
-> +=======================
-> +
-> +The "class" keyword selects prdbgs based on author supplied,
-> +domain-oriented names.  This complements the nested-scope keywords:
-> +module, file, function, line.
-> +
-> +The main difference from the others: classes must be named to be
-> +changed.  This protects them from generic overwrite:
-> +
-> +  # IOW this cannot undo any DRM.debug settings
-> +  :#> ddcmd -p
+No Device Trees are updated to avoid the warning for now, to give other
+projects syncing the Linux Device Trees some time to fix their drivers
+as well. I intend to submit an equivalent change for U-Boot's
+am65-cpsw-nuss driver as soon as the changes are accepted for Linux.
 
-Can you also clarify this in the Controlling dynamic debug Behaviour? At 
-least something like "Some printk may not be affected by >control 
-because of classmaps, see Dynamic Debug classmaps for more information".
+[1] https://lore.kernel.org/lkml/d25b1447-c28b-4998-b238-92672434dc28@lunn.ch/
 
-Or maybe integrate this section just after/inside Controlling dynamic 
-debug Behaviour. So a user is not surprised if his command does not have 
-the expected effect.
+Submitting for net-next for now - I don't know it would make sense to
+backport some of these changes to stable.
 
-> +
-> +This protection is needed in order to honor the ABI, settings done
-> +there must be respected:
-> +
-> +  :#> echo 0x1ff > /sys/module/drm/parameters/debug
-> +
-> +So each class must be enabled individually (no wildcards):
-> +
-> +  :#> ddcmd class DRM_UT_CORE +p
-> +  :#> ddcmd class DRM_UT_KMS +p
-> +  # or more selectively
-> +  :#> ddcmd class DRM_UT_CORE module drm +p
-> +
-> +That makes direct >control wordy and annoying, but it is a secondary
-> +interface; it is not intended to replace the ABI, just slide in
-> +underneath and reimplement it.
-> +
-> +However, since the param is the ABI, if a classmap DEFINEr doesn't
-> +also add a _CLASSMAP_PARAM, there is no ABI, and no protection is
-> +needed.  In that case, class'd prdbgs would be enabled/disabled by
-> +legacy (class-less) queries.
+Note: I have also added the maintainers for the TI K3 SoC families to cc
+in addition to the get_maintainers.pl output, to loop in some more of
+the relevant people at TI. Should MAINTAINERS be extended to include
+some of you for the am65-cpsw* files? At the moment, only the netdev
+maintainers are reported for drivers/net/ethernet/ti/am65-cpsw-nuss.c
+(except for "authored" lines etc.)
 
-Very clear, thanks!
+Matthias Schiffer (4):
+  dt-bindings: net: ethernet-controller: update descriptions of RGMII
+    modes
+  dt-bindings: net: ti: k3-am654-cpsw-nuss: update phy-mode in example
+  net: ethernet: ti: am65-cpsw: fixup PHY mode for fixed RGMII TX delay
+  checkpatch: check for comment explaining rgmii(|-rxid|-txid) PHY modes
 
-> +
-> +Dynamic Debug Classmap API
-> +==========================
-> +
-> +DRM.debug is built upon:
-> +  ABI in /sys/module/drm/parameters/debug
-> +      the bits set all DRM_UT_* together
-> +  ~23 categorized api macros: drm_dbg_<T>()
-> +      all calling drm_{,dev}dbg(DRM_UT_*, ....)
-> +  ~5000 calls to the api macros across drivers/gpu/drm/*
-> +
-> +The const short ints are good for optimizing compilers; a primary
-> +classmaps design goal was to preserve those opporunities for
-> +optimization.  So basically .classid === category.
-> +
-> +Then we use the drm_categories DRM_UT_* enum for both the classnames
-> +(stringified enum symbols) and their numeric values.
-> +
-> +Its expected that future users will also use an enum-defined
-> +categorization scheme like DRM's, and dyndbg can be adapted under them
-> +similarly.
-> +
-> +DYNAMIC_DEBUG_CLASSMAP_DEFINE(var,type,_base,classnames) - this maps
-> +classnames (a list of strings) onto class-ids consecutively, starting
-> +at _base, it also maps the names onto CLASSMAP_PARAM bits 0..N.
-> +
-> +DYNAMIC_DEBUG_CLASSMAP_USE(var) - modules call this to refer to the
-> +var _DEFINEd elsewhere (and exported).
-> +
-> +Classmaps are opt-in: modules invoke _DEFINE or _USE to authorize
-> +dyndbg to update those classes.  "class FOO" queries are validated
-> +against the classes, this finds the classid to alter; classes are not
-> +directly selectable by their classid.
-> +
-> +There are 2 types of classmaps:
-> +
-> + DD_CLASS_TYPE_DISJOINT_BITS: classes are independent, like DRM.debug
-> + DD_CLASS_TYPE_LEVEL_NUM: classes are relative, ordered (V3 > V2)
-> +
-> +DYNAMIC_DEBUG_CLASSMAP_PARAM - modelled after module_param_cb, it
-> +refers to a DEFINEd classmap, and associates it to the param's
-> +data-store.  This state is then applied to DEFINEr and USEr modules
-> +when they're modprobed.
-> +
-> +The PARAM interface also enforces the DD_CLASS_TYPE_LEVEL_NUM relation
-> +amongst the contained classnames; all classes are independent in the
-> +control parser itself; there is no implied meaning in names like "V4".
-> +
-> +Modules or module-groups (drm & drivers) can define multiple
-> +classmaps, as long as they (all the classmaps) share the limited 0..62
-> +per-module-group _class_id range, without overlap.  If a module
-> +encounters a conflict between 2 classmaps its USEing, we can extend
-> +the _USE macro with an offset to allow avoiding the conflicting range.
-> +
-> +``#define DEBUG`` will enable all pr_debugs in scope, including any
-> +class'd ones.  This won't be reflected in the PARAM readback value,
-> +but the class'd pr_debug callsites can be forced off by toggling the
-> +classmap-kparam all-on then all-off.
+ Documentation/dev-tools/checkpatch.rst        |  9 +++++++
+ .../bindings/net/ethernet-controller.yaml     | 16 ++++++-----
+ .../bindings/net/ti,k3-am654-cpsw-nuss.yaml   |  2 +-
+ drivers/net/ethernet/ti/am65-cpsw-nuss.c      | 27 +++++++++++++++++--
+ scripts/checkpatch.pl                         | 11 ++++++++
+ 5 files changed, 55 insertions(+), 10 deletions(-)
 
 -- 
-Louis Chauvet, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
-
+TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
+Amtsgericht München, HRB 105018
+Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
+https://www.tq-group.com/
 
 
