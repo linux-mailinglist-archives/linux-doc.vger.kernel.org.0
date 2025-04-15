@@ -1,256 +1,178 @@
-Return-Path: <linux-doc+bounces-43131-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43133-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E877A892A2
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 05:46:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C617EA8945E
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 09:01:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7FC117A6B47
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 03:45:23 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 152DC7A96EF
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 07:00:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 469C9218EB7;
-	Tue, 15 Apr 2025 03:46:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E10CF205AA3;
+	Tue, 15 Apr 2025 07:01:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Nd2eWiZ4"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KM18OPyt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B470D20F08E;
-	Tue, 15 Apr 2025 03:46:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A66CD2DFA34;
+	Tue, 15 Apr 2025 07:01:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744688785; cv=none; b=qMY6OEJbCDbWstIBZ27ffeD8tUGR8t7U8moUUMGm13GhYGJYbr7CJubkh/r6Z0IeGeq44hwy50vuQD6R/OZpnB3NQHdhKqkrtqapWUea2mS8btS4FXxCO3lC9cU7XVWoYz3TvHdppJU3p5fruGXqisCN1eFIoCIZXOkVjqzx/fM=
+	t=1744700473; cv=none; b=byB5AGN24aa+PO1VFDc9pWKfepFzr9xj743ZNcomygD0hGv/CPM1Kl2UE41+V0LWE/nf8EpRUMbGMffsdmwj8UDo/+rB9rjK1dROWuP32dFMSeWO0xXTsP5IKtgDGKEyvNxOLE8paOoahh15ZpDzFh6XZKtDHGajdZc0F+jQhco=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744688785; c=relaxed/simple;
-	bh=B+5NV7MLzPQD79AJGUxwB62Ga81xkJ+lY6i3X7fLvz0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ZC//UVEDGywPE1AduRt+NEJKHV/J5aPSNlIrSk0BxX8S1bls+Uc5Wl+133dHQ5nlyVwbyW+4G+EOevGVGfCMNfnr7IAbxyfZN4QkY0qRA6gFm23ftD0vZrILLyVURZ5q4DdApqKccneu1ifPRxLpUbR9scKtjkLQFKVmska9luU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Nd2eWiZ4; arc=none smtp.client-ip=209.85.214.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2240b4de12bso68578335ad.2;
-        Mon, 14 Apr 2025 20:46:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1744688783; x=1745293583; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=P7Rj0eg/IgiCUmBzVG1wlUC8QfjOMeak+7Og18vfRA0=;
-        b=Nd2eWiZ4wb6QVTOXOX71+gic0XOULy4LkALDRTVSie4+fNUsXpvOqxwKfybocX57rC
-         XedUKtDZyvVP/6Ej/6viWyKFWeN1HS8D7iVTVyeXd5ZbGiGM0NvsqGIalk27duGfB3hR
-         OSV0/eVpyu0B0wmNr8rqK+j0RtGe6LueaeqQVaYpX8c5yjmy+OqEPdnX3AJ/H7DSodkI
-         d3f3/+kgqkgHbubD1V4NpK3cP/zf05chY29ZzYGQhNqP8eAIrxZDyh0LO+WKyVeci0OX
-         M+TXkU8lv7j1yt8attLqP52/3MIOA9IWIs3nHdVUVp2jMM10k8I55t+rARmz9KtYxQpG
-         AhXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744688783; x=1745293583;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=P7Rj0eg/IgiCUmBzVG1wlUC8QfjOMeak+7Og18vfRA0=;
-        b=H85U0V41J3KazU/zlN2B3nMdt0yzK0GSAs8W1L3klrGXBp3uoRoPVSQ6en2093IHHJ
-         p8fOTKM9/QsVQ3f/7Y8UAobyZuedJ70qvpW8yKa8R5XOn/ERZXTWTDxU8Rw+sOpfOujb
-         9cqdyBAZxiFLeK6siOeE8VmejRZFlSUCBTdSKjZ/J2RKVuErXq/7n7A21lw30gRLxUwh
-         49jFHKvw11W1xZHZ0aFZsjcrXFYbrklOVwPBh1ImjZhH2zz8By/xKbdQgJYDsK8KoimI
-         eoVIhlFZME8YihvPyX/EuOev/m1xDRXv1rRwpp2LklTQZkaRpxCTi0myTXniodPdeiR1
-         VMTw==
-X-Forwarded-Encrypted: i=1; AJvYcCUcbyam9JSE9CxoxsezfTSlr60BX1yprM7MqVTxB3qZLZL/t603IiXBA/6G1wTyacnlkMsmLo8/twg8jCIH0poo93O8@vger.kernel.org, AJvYcCUvPp5aFOOEDtvaFdYcD0hOc/RLkFCojGKxJGLdQO+hkD1vh1G4RLNV0jqHptaoR3/FcmG/7GjixuI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxykX1J80Z+xNFhII2aScg9TbqpWzlKxydUXDqNnGrORGYgloXW
-	CWuc+AUgXGpt7ZEzDjO5qWCae0umcdVDnsk9lajKJd1asGvwCrED
-X-Gm-Gg: ASbGnctas+KSef+kplrMfMVCJ8g2g/U+zc+esiCJtyVD9wX9tPlUF0Auycdm7sXc7PT
-	3+uifewy/Aym2OcnTLlgfwqgMysMVKZHGy8xjvbN9n4YYnGWlq9uPnP4Z6vflUbM5m9QAV0TAsH
-	Ahjc5SIfDheQ+BXip7pRBtKhW9Mh8yWRUhaEBHIrqJRyF+jsUhD5cHF5tqArTj72JmA5gGR+jdT
-	gj3Qzd9+Zg1TrpwdaglmGBi9SWZSdkh3ttR9q0JMruMFznnp0tvgJ0wVLcStDugIxvQsWxU9UFe
-	a04IMPKgySyT2MpA54N21vXlnIymr5LHp6KhJAQn
-X-Google-Smtp-Source: AGHT+IGRzKH8R1ktNZ7aJ4RIT/GnrqFfl05RBO/gEqNLT/JrgTdwbkIvf3bLtdfdepI9Q2Drtd04lw==
-X-Received: by 2002:a17:902:c947:b0:223:517a:d2e2 with SMTP id d9443c01a7336-22bea50e2edmr230723345ad.53.1744688782676;
-        Mon, 14 Apr 2025 20:46:22 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22ac7b8c7d9sm107517435ad.96.2025.04.14.20.46.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Apr 2025 20:46:21 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id D45F14209E49; Tue, 15 Apr 2025 10:46:19 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Kernel Tracing <linux-trace-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>
-Cc: Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Purva Yeshi <purvayeshi550@gmail.com>
-Subject: [PATCH 2/2] Documentation: trace: Refactor toctree
-Date: Tue, 15 Apr 2025 10:46:13 +0700
-Message-ID: <20250415034613.21305-3-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250415034613.21305-1-bagasdotme@gmail.com>
-References: <20250415034613.21305-1-bagasdotme@gmail.com>
+	s=arc-20240116; t=1744700473; c=relaxed/simple;
+	bh=tP1nLNEOryZ2Rfki3LWUs8Eu0CqMBbLY8xZy7cXBm1M=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Qkf/lOSOyTBFmzjXZmz+U7xBq44JTFS37ib3JvAewk26CyZSDlUOfR3iAoM9WLvecfJCVNUOGjWWQulgzdVpOvi93tzJ/ZzyTklKRqHC7gVj9qq6Afx4gan7C6PfBWZSozwcxrcoKiqn+s2u2rfOhhkV/vup9OanmHlgE7QTE6I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KM18OPyt; arc=none smtp.client-ip=198.175.65.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1744700471; x=1776236471;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=tP1nLNEOryZ2Rfki3LWUs8Eu0CqMBbLY8xZy7cXBm1M=;
+  b=KM18OPytoj12OMm8L7QAJ8kgYc8yLznReoS8MSs+G5sRmABv8xGrNTSk
+   KJnColaZQvQ5VUj4SuWFzyuNmu/8OX2FE/FD5JBrbJ7ILU/lGexHninDr
+   +AVoLVy/tbCmYA3Kgx6jdLNAccOZBZwtEgGwn3wmX0+c5KjPLDq2XCJ6I
+   o3A4zlRPK5+SVzEPxCCKIPkAZgGD7Jc+zxadfPWqBe0fV3o6auRJE+TQH
+   WS41PuXsSL9b/6/81StljZxqy+it8t/o+ZPnRdpa/1y+1GPB+jwWu5bFs
+   096jdz7qkGwpjLuXzpG/uaibaWHwPTxQOPxOApHFhJ2lQZQXxnCKwLKMm
+   A==;
+X-CSE-ConnectionGUID: L8W0ygYzRlGp1Gf/wHN25A==
+X-CSE-MsgGUID: JIRDwf/oRBunTN4nGlb4lA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11403"; a="49845957"
+X-IronPort-AV: E=Sophos;i="6.15,213,1739865600"; 
+   d="scan'208";a="49845957"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Apr 2025 00:01:10 -0700
+X-CSE-ConnectionGUID: pMPcLX8ESJ22RSF9di3EvQ==
+X-CSE-MsgGUID: MoBCwUo+Tl+cMeqTJnpNSw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,213,1739865600"; 
+   d="scan'208";a="129999895"
+Received: from smile.fi.intel.com ([10.237.72.58])
+  by orviesa010.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Apr 2025 00:01:07 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.98.2)
+	(envelope-from <andriy.shevchenko@intel.com>)
+	id 1u4aI4-0000000CT86-0em2;
+	Tue, 15 Apr 2025 10:01:04 +0300
+Date: Tue, 15 Apr 2025 10:01:03 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	linux-kernel@vger.kernel.org,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Kees Cook <kees@kernel.org>, Russell King <linux@armlinux.org.uk>,
+	linux-hardening@vger.kernel.org, netdev@vger.kernel.org
+Subject: Re: [PATCH v3 00/33] Implement kernel-doc in Python
+Message-ID: <Z_4EL2bLm5Jva8Mq@smile.fi.intel.com>
+References: <cover.1744106241.git.mchehab+huawei@kernel.org>
+ <871pu1193r.fsf@trenco.lwn.net>
+ <Z_zYXAJcTD-c3xTe@black.fi.intel.com>
+ <87mscibwm8.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3467; i=bagasdotme@gmail.com; h=from:subject; bh=y8R0W3TqNDOBpqsuxx1xK6yOe3uKwGDrA0WnFxOhRXc=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDOl/r7FtXjnJNfGkbOTUvyLMCqLB531vd5t4aArYeYiIX jxy5J5pRykLgxgXg6yYIsukRL6m07uMRC60r3WEmcPKBDKEgYtTACZiVsnwv0rCdOHxxStSRS7o bFu8rJR1vXhniOi7I6xLQrZPjuq14WBkuCces3IN+wt/tm/6u+9uEtu2bJkSo8oDu7Pz+6bvn5f gygAA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87mscibwm8.fsf@trenco.lwn.net>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 
-From: Purva Yeshi <purvayeshi550@gmail.com>
+On Mon, Apr 14, 2025 at 09:17:51AM -0600, Jonathan Corbet wrote:
+> Andy Shevchenko <andriy.shevchenko@intel.com> writes:
+> > On Wed, Apr 09, 2025 at 12:30:00PM -0600, Jonathan Corbet wrote:
+> >> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+> >> 
+> >> > This changeset contains the kernel-doc.py script to replace the verable
+> >> > kernel-doc originally written in Perl. It replaces the first version and the
+> >> > second series I sent on the top of it.
+> >> 
+> >> OK, I've applied it, looked at the (minimal) changes in output, and
+> >> concluded that it's good - all this stuff is now in docs-next.  Many
+> >> thanks for doing this!
+> >> 
+> >> I'm going to hold off on other documentation patches for a day or two
+> >> just in case anything turns up.  But it looks awfully good.
+> >
+> > This started well, until it becomes a scripts/lib/kdoc.
+> > So, it makes the `make O=...` builds dirty *). Please make sure this doesn't leave
+> > "disgusting turd" )as said by Linus) in the clean tree.
+> >
+> > *) it creates that __pycache__ disaster. And no, .gitignore IS NOT a solution.
+> 
+> If nothing else, "make cleandocs" should clean it up, certainly.
+> 
+> We can also tell CPython to not create that directory at all.  I'll run
+> some tests to see what the effect is on the documentation build times;
+> I'm guessing it will not be huge...
 
-Refactor table of contents of kernel tracing subsystem docs to improve
-clarity, structure, and organization:
+I do not build documentation at all, it's just a regular code build that leaves
+tree dirty.
 
-- Reformat sections and add appropriate headings
-- Improve section grouping and refine descriptions for each group
-- Add docs intro paragraph
+$ python3 --version
+Python 3.13.2
 
-Signed-off-by: Purva Yeshi <purvayeshi550@gmail.com>
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-Link: https://lore.kernel.org/r/20250318113230.24950-2-purvayeshi550@gmail.com
-[Bagas: massage commit message]
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
+It's standard Debian testing distribution, no customisation in the code.
 
-Hi Steven,
+To reproduce.
+1) I have just done a new build to reduce the churn, so, running make again does nothing;
+2) The following snippet in shell shows the issue
 
-I remove your Acked-by: since I massage the patch description. Would you mind
-to re-add yours?
+$ git clean -xdf
+$ git status --ignored
+On branch ...
+nothing to commit, working tree clean
 
-Thanks.
+$ make LLVM=-19 O=.../out W=1 C=1 CF=-D__CHECK_ENDIAN__ -j64
+make[1]: Entering directory '...'
+  GEN     Makefile
+  DESCEND objtool
+  CALL    .../scripts/checksyscalls.sh
+  INSTALL libsubcmd_headers
+.pylintrc: warning: ignored by one of the .gitignore files
+Kernel: arch/x86/boot/bzImage is ready  (#23)
+make[1]: Leaving directory '...'
 
- Documentation/trace/index.rst | 94 +++++++++++++++++++++++++++++------
- 1 file changed, 79 insertions(+), 15 deletions(-)
+$ touch drivers/gpio/gpiolib-acpi.c
 
-diff --git a/Documentation/trace/index.rst b/Documentation/trace/index.rst
-index fecc4adf70a830..5ddd47ee781211 100644
---- a/Documentation/trace/index.rst
-+++ b/Documentation/trace/index.rst
-@@ -1,39 +1,103 @@
--==========================
--Linux Tracing Technologies
--==========================
-+================================
-+Linux Tracing Technologies Guide
-+================================
-+
-+Tracing in the Linux kernel is a powerful mechanism that allows
-+developers and system administrators to analyze and debug system
-+behavior. This guide provides documentation on various tracing
-+frameworks and tools available in the Linux kernel.
-+
-+Introduction to Tracing
-+-----------------------
-+
-+This section provides an overview of Linux tracing mechanisms
-+and debugging approaches.
- 
- .. toctree::
-    :maxdepth: 1
- 
--   ftrace-design
-+   debugging
-+   tracepoints
-    tracepoint-analysis
-+   ring-buffer-map
-+
-+Core Tracing Frameworks
-+-----------------------
-+
-+The following are the primary tracing frameworks integrated into
-+the Linux kernel.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-    ftrace
-+   ftrace-design
-    ftrace-uses
--   fprobe
-    kprobes
-    kprobetrace
-    uprobetracer
-    fprobetrace
--   tracepoints
-+   fprobe
-+   ring-buffer-design
-+
-+Event Tracing and Analysis
-+--------------------------
-+
-+A detailed explanation of event tracing mechanisms and their
-+applications.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-    events
-    events-kmem
-    events-power
-    events-nmi
-    events-msr
--   mmiotrace
-+   boottime-trace
-    histogram
-    histogram-design
--   boottime-trace
--   debugging
--   hwlat_detector
--   osnoise-tracer
--   timerlat-tracer
-+
-+Hardware and Performance Tracing
-+--------------------------------
-+
-+This section covers tracing features that monitor hardware
-+interactions and system performance.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-    intel_th
--   ring-buffer-design
--   ring-buffer-map
-    stm
-    sys-t
-    coresight/index
--   user_events
-    rv/index
-    hisi-ptt
-+   mmiotrace
-+   hwlat_detector
-+   osnoise-tracer
-+   timerlat-tracer
-+
-+User-Space Tracing
-+------------------
-+
-+These tools allow tracing user-space applications and
-+interactions.
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   user_events
-+
-+Additional Resources
-+--------------------
-+
-+For more details, refer to the respective documentation of each
-+tracing tool and framework.
-+
-+.. only:: subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
-\ No newline at end of file
+$ make LLVM=-19 O=.../out W=1 C=1 CF=-D__CHECK_ENDIAN__ -j64
+make[1]: Entering directory '...'
+  GEN     Makefile
+  DESCEND objtool
+  CALL    .../scripts/checksyscalls.sh
+  INSTALL libsubcmd_headers
+...
+  OBJCOPY arch/x86/boot/setup.bin
+  BUILD   arch/x86/boot/bzImage
+Kernel: arch/x86/boot/bzImage is ready  (#24)
+make[1]: Leaving directory '...'
+
+$ git status --ignored
+On branch ...
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	scripts/lib/kdoc/__pycache__/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+It's 100% reproducible on my side. I am happy to test any patches to fix this.
+It's really annoying "feature" for `make O=...` builds. Also note that
+theoretically the Git worktree may be located on read-only storage / media
+and this can induce subtle issues.
+
 -- 
-An old man doll... just what I always wanted! - Clara
+With Best Regards,
+Andy Shevchenko
+
 
 
