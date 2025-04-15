@@ -1,1210 +1,1180 @@
-Return-Path: <linux-doc+bounces-43233-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43235-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F5D1A8A815
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 21:34:28 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 192FAA8A835
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 21:38:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 143AE3B9AB1
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 19:34:06 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0F52D171988
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Apr 2025 19:38:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 465682500AA;
-	Tue, 15 Apr 2025 19:33:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 454EB23C8DE;
+	Tue, 15 Apr 2025 19:38:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="OL89W8eb"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cRAUpkF6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-185.mta0.migadu.com (out-185.mta0.migadu.com [91.218.175.185])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3641825178C
-	for <linux-doc@vger.kernel.org>; Tue, 15 Apr 2025 19:33:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.185
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4283224167A;
+	Tue, 15 Apr 2025 19:38:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744745629; cv=none; b=A/UVCBXXmonmMxb8y7jEOXYHL7KC/aCbRE/frIyeL5wQ0GHUhBJF+Fi+xX4pmHfD14B1hNA3XhtFksUFi6+Xvu/dQLy+G2eyAdY55C95bqHsShij3/U1j1DoBhM4/BmPykNWG/l7qpSA7A0C9LYYdmQq1nSwChQVHUcDbVHi7bs=
+	t=1744745931; cv=none; b=oxo45lke16crdVGycE6ThNf7WiS0EpKcmVREtGQFZ3A7Ig7LKKfqq9vC18qi/m7wyi7JgHfqJmHGI6jyk/CSDZ0Pl6wwn0LfFKpnlxf0Z+bnKTEBiNDl1NkPvEzFvAHiEYeMEbMuN9N2Tdlu3DnUfP6I+GRsOl8PEDhUxOOgW9c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744745629; c=relaxed/simple;
-	bh=PNbgNbxW0wohPKpJDsEkV2G+fBI74SPaDbR5XHmRcpY=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=dXjnB26VP6/K2zPzAD6S69yLFx/uKdd/H5iAGcrwpHGUE5soqtyvqmeEJkcAsuWPmzC0B310+sh2TVn8C6KQTdFQoeh4HoT1S/unqFZuktFrdUmhH8KO23hwLMdPgKCJAPRvMA8GXlLtti1P7Nb7UH4wBxSCwYV8SobKh9juDOE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=OL89W8eb; arc=none smtp.client-ip=91.218.175.185
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1744745624;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3oxV5esHbW9c8XOfBkmw3vZ4WivHZs2BgTLBuc/j0rs=;
-	b=OL89W8ebKgwhWyAC1wb2CVfxt9C2eONPr+pgNTBt7KyVIfsSKk/bX3bDv/qGWmrH6ETjcH
-	dYEsxqHXp2vvaJ1dh3vXuVWjQoorweWNzc0bF+x5RUqlGz+Qy4A/VXth8o3eK1wLwm/Rbk
-	JPisyYHrHX/q66c7Opv2MJIj27G43b4=
-From: Sean Anderson <sean.anderson@linux.dev>
-To: netdev@vger.kernel.org,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S . Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Russell King <linux@armlinux.org.uk>
-Cc: upstream@airoha.com,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	linux-kernel@vger.kernel.org,
-	Kory Maincent <kory.maincent@bootlin.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Sean Anderson <sean.anderson@linux.dev>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org
-Subject: [net-next PATCH v3 03/11] net: pcs: Add subsystem
-Date: Tue, 15 Apr 2025 15:33:15 -0400
-Message-Id: <20250415193323.2794214-4-sean.anderson@linux.dev>
-In-Reply-To: <20250415193323.2794214-1-sean.anderson@linux.dev>
-References: <20250415193323.2794214-1-sean.anderson@linux.dev>
+	s=arc-20240116; t=1744745931; c=relaxed/simple;
+	bh=uycil7KkODSGlph7cByg0G9Y5vPJsA173HOmtGI90oA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=H/bpfbTnqKklbVtEILRAoz+C1jj/f9GRGfCSCRgFk1TNO/jK6TWsGpu55+km5gRJQxhWxD9y7VClDr9mI6FaqAPRRsW1u+ft3kbslsn6yEULkYzK87vPKZz9NBbN04KtlgkEJzgy7+BCDckuKFVqcxL8p2uX6PVoztH0wAR+Yuc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cRAUpkF6; arc=none smtp.client-ip=209.85.128.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-703cd93820fso58884307b3.2;
+        Tue, 15 Apr 2025 12:38:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1744745927; x=1745350727; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=svrYZeuyn4631PIffIKvMIv1gqvUWFIvn4NzvjSdWKI=;
+        b=cRAUpkF6RGJUpprxYLHaFKn1jque5+svp4mndHOrYLtGeZBa+5qzyxlXwlT41RV6sS
+         Y2UjsqbFfC8oX4TejkyqYp1OlQx1a0VeQHzUVB0rczdO1jGoG0+61XWmV8zSh9AmHdl3
+         oPmTiXnSMVO69r0Uu3KhHViAhOwHNSzCNkn55DLjMPXOdTnc3INzSDNXvqNMK8XrQikv
+         ydhNvqY60iXyuktyK5y1XVu2K+NE9ouO0Sjwl4T3Z5EcTmzfbQCnAPWZsqGUVmCY/fk3
+         1eKl30jF9VQrNxoWTTTY/opfQtv9QEMumSBDUVEIrjbze9L79MDYOZ5FCqTaDkecUZZF
+         +TpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1744745927; x=1745350727;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=svrYZeuyn4631PIffIKvMIv1gqvUWFIvn4NzvjSdWKI=;
+        b=RKlAHjcpHA3ciI/PfhyXFn82J0+nbwx6Btc6d/xJh2Z02FUjmKrYOxASPtUIgfcE8q
+         cfmLUIusA64f8iITaMyFuoJ40Sl9TZB+vB6HD29BCizmu50sEdIsysnO/vCF1Y45IqDp
+         eQ8rTdpvnFTmU4BfDbdIPTQF4qdvH88BDh7z+SaNeRnZixxeu8x+TL6KInM/H2rbuNDp
+         wABikVME74BG3WnbpTQ8+GvBrfXcwV0G+6DVTTKE9mcSPjws8jqFXtd07eJj2txrLZOQ
+         xtpIWA+yU8vQeBkHN1FkoKBK1jOAy8qsy/POAiojprb2OgqF0uAng6T5BWm8yEYPums5
+         YkrQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWZgteJFkbn671t/x0EMS1Qyf6YkejJ6w7Xv8/pl5+Lj0KOl7Aj/qOZPzW9ttZk/O3hTegYPPnNvqI6q4mm@vger.kernel.org, AJvYcCXPO5bSEfSraHpGx9AiKUVUOkB9bBlhaECizd8pczVXMyaWlrOQGYhgXmx41tMOLYNx95LLbzDTixI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy2H++RbwfvmzkENnq9Pfb751vKGwAdRkB11vLuPTx9YQmXNJxq
+	8R/cd017/cjasm20rFei9F/27XAEnaJIlMsye1R3dAujVd4LqYWfOyK5+tHNASkAFHgmOmKbupY
+	yfamRVsjsmj7DkGz+MaTCqq03lx8=
+X-Gm-Gg: ASbGncskjDdQDpR97LNgpQi5WAKXzvKStG86uUP2aDnaQtVOaTylMjWo1gacupNbwA4
+	w0tmGCYgYnJ66W/+Gqt8AqMq0MSufq1q5A0nwjYQjc0UNFu8yZNN8dS7F78nIQYK7l47O7cHijI
+	QhwqE7PdNCg7eg4r1QlU8QSzaKpu8bXu8=
+X-Google-Smtp-Source: AGHT+IHl/fXoXLga4bHdZiJsm8GrG0iU9pgAsb6hJsBgh3CYdTnehgVgJBtEdsYpCgkykzwkyoqQSNOw47qO2efxO0M=
+X-Received: by 2002:a05:690c:6f08:b0:6ff:1d6f:38af with SMTP id
+ 00721157ae682-706acd9b415mr10336237b3.4.1744745926732; Tue, 15 Apr 2025
+ 12:38:46 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+References: <20250402174156.1246171-1-jim.cromie@gmail.com>
+ <20250402174156.1246171-18-jim.cromie@gmail.com> <753c3f7d-fca7-4a10-b73c-70d12fe3ed96@bootlin.com>
+In-Reply-To: <753c3f7d-fca7-4a10-b73c-70d12fe3ed96@bootlin.com>
+From: jim.cromie@gmail.com
+Date: Tue, 15 Apr 2025 13:38:20 -0600
+X-Gm-Features: ATxdqUGzLAOBE_F9JRLnH_BhfiQcxCldl-5a28PrCWrdk3sT2WX_lEI8f8ESZek
+Message-ID: <CAJfuBxzkDvABq=gBxwKOYO7Y=k-wwyTLH274pKLkpL1KZr3Bew@mail.gmail.com>
+Subject: Re: [PATCH v3 17/54] dyndbg-API: replace DECLARE_DYNDBG_CLASSMAP
+To: Louis Chauvet <louis.chauvet@bootlin.com>
+Cc: jbaron@akamai.com, gregkh@linuxfoundation.org, ukaszb@chromium.org, 
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	amd-gfx@lists.freedesktop.org, intel-gvt-dev@lists.freedesktop.org, 
+	intel-gfx@lists.freedesktop.org, daniel.vetter@ffwll.ch, 
+	tvrtko.ursulin@linux.intel.com, jani.nikula@intel.com, 
+	ville.syrjala@linux.intel.com, linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This adds support for getting PCS devices from the device tree. PCS
-drivers must first register with phylink_register_pcs. After that, MAC
-drivers may look up their PCS using phylink_get_pcs.
+On Tue, Apr 15, 2025 at 4:01=E2=80=AFAM Louis Chauvet <louis.chauvet@bootli=
+n.com> wrote:
+>
+>
+>
+> Le 02/04/2025 =C3=A0 19:41, Jim Cromie a =C3=A9crit :
+> > DECLARE_DYNDBG_CLASSMAP() has a design error; its usage fails a basic
+> > K&R rule: "define once, refer many times".
+> >
+> > When DRM_USE_DYNAMIC_DEBUG=3Dy, it is used across DRM core & drivers;
+> > each invocation allocates/inits the classmap understood by that
+> > module.  All must match for the modules to respond together when
+> > DRM.debug categories are enabled.  This is brittle; a maintenance
+> > foot-gun.
+> >
+> > Further, its culpable in the CONFIG_DRM_USE_DYNAMIC_DEBUG=3DY
+> > regression; its use in both core & drivers obfuscates the 2 roles, that
+> > caused incomplete initialization when modprobing drivers:
+> >
+> > 1st drm.ko loads, and dyndbg initializes its DRM.debug callsites, then
+> > a drm-driver loads, but too late for the DRM.debug enablement.
+> >
+> > So retire it, replace with 2 macros:
+> >    DYNAMIC_DEBUG_CLASSMAP_DEFINE - invoked once from core - drm.ko
+> >    DYNAMIC_DEBUG_CLASSMAP_USE    - from all drm drivers and helpers.
+> >
+> > DYNAMIC_DEBUG_CLASSMAP_DEFINE: this reworks DECLARE_DYNDBG_CLASSMAP,
+> > by dropping the static qualifier on the classmap, and exporting it
+> > instead.
+> >
+> > DYNAMIC_DEBUG_CLASSMAP_USE: then refers to the exported var by name:
+> >    used from drivers, helper-mods
+> >    lets us drop the repetitive "classname" declarations
+> >    fixes 2nd-defn problem
+> >    creates a ddebug_class_user record in new __dyndbg_class_users secti=
+on
+> >    new section is scanned "differently"
+> >
+> > DECLARE_DYNDBG_CLASSMAP is preserved temporarily, to decouple DRM
+> > adaptation work and avoid compile-errs before its done.  IOW, DRM gets
+> > these fixes when they commit the adopt-new-api patches.
+> >
+> > The DEFINE,USE distinction, and the separate classmap-use record,
+> > allows dyndbg to initialize the driver's & helper's DRM.debug
+> > callsites separately after each is modprobed.
+> >
+> > Basically, the classmap init-scan is repeated for classmap-users.
+> >
+> > To review, dyndbg's existing __dyndbg_classes[] section does:
+> >
+> > . catalogs the module's classmaps
+> > . tells dyndbg about them, allowing >control
+> > . DYNAMIC_DEBUG_CLASSMAP_DEFINE creates section records.
+> > . we rename it to: __dyndbg_class_maps[]
+> >
+> > Then this patch adds __dyndbg_class_users[] section:
+> >
+> > . catalogs users of classmap definitions elsewhere
+> > . authorizes dyndbg to >control user's class'd prdbgs
+> > . DYNAMIC_DEBUG_CLASSMAP_USE() creates section records.
+> >
+> > Now ddebug_add_module(etal) can handle classmap-uses similar to (and
+> > after) classmaps; when a dependent module is loaded, if it has
+> > classmap-uses (to a classmap-def in another module), that module's
+> > kernel params are scanned to find if it has a kparam that is wired to
+> > dyndbg's param-ops, and whose classmap is the one being ref'd.
+> >
+> > To support this, theres a few data/header changes:
+> >
+> > new struct ddebug_class_user
+> >    contains: user-module-name, &classmap-defn
+> >    it records drm-driver's use of a classmap in the section, allowing l=
+ookup
+> >
+> > struct ddebug_info gets 2 new fields for the new sections:
+> >    class_users, num_class_users.
+> >    set by dynamic_debug_init() for builtins.
+> >    or by kernel/module/main:load_info() for loadable modules.
+> >
+> > vmlinux.lds.h: new BOUNDED_SECTION for __dyndbg_class_users
+> >
+> > dynamic_debug.c has 2 changes in ddebug_add_module(), ddebug_change():
+> >
+> > ddebug_add_module()
+> >      called   ddebug_attach_module_classes()
+> >      now calls        ddebug_apply_class_maps() & ddebug_apply_class_us=
+ers()
+> >               these both call ddebug_apply_params().
+> >
+> > ddebug_apply_params(new fn):
+> >
+> > It scans module's/builtin kernel-params, calls ddebug_match_apply_kpara=
+m
+> > for each to find any params/sysfs-nodes which may be wired to a classma=
+p.
+> >
+> > ddebug_match_apply_kparam(new fn):
+> >
+> > 1st, it tests the kernel-param.ops is dyndbg's; this guarantees that
+> > the attached arg is a struct ddebug_class_param, which has a ref to
+> > the param's state, and to the classmap defining the param's handling.
+> >
+> > 2nd, it requires that the classmap ref'd by the kparam is the one
+> > we're called for; modules can use many separate classmaps (as
+> > test_dynamic_debug does).
+> >
+> > Then apply the "parent" kparam's setting to the dependent module,
+> > using ddebug_apply_class_bitmap().
+> >
+> > ddebug_change(and callees) also gets adjustments:
+> >
+> > ddebug_find_valid_class(): This does a search over the module's
+> > classmaps, looking for the class FOO echo'd to >control.  So now it
+> > searches over __dyndbg_class_users[] after __dyndbg_classes[].
+> >
+> > ddebug_class_name(): return class-names for defined AND used classes.
+> >
+> > test_dynamic_debug.c, test_dynamic_debug_submod.c:
+> >
+> > This demonstrates the 2 types of classmaps & sysfs-params, following
+> > the 4-part recipe:
+> >
+> > 1. define an enum for the classmap: DRM.debug has DRM_UT_{CORE,KMS,...}
+> >     multiple classes must share 0-62 classid space.
+> > 2. DYNAMIC_DEBUG_CLASSMAP_DEFINE(.. DRM_UT_{CORE,KMS,...})
+> > 3. DYNAMIC_DEBUG_CLASSMAP_PARAM* (classmap)
+> > 4. DYNAMIC_DEBUG_CLASSMAP_USE()
+> >     by _submod only, skipping 2,3
+> >
+> > Move all the enum declarations together, to better explain how they
+> > share the 0..62 class-id space available to a module (non-overlapping
+> > subranges).
+> >
+> > reorg macros 2,3 by name.  This gives a tabular format, making it easy
+> > to see the pattern of repetition, and the points of change.
+> >
+> > And extend the test to replicate the 2-module (parent & dependent)
+> > scenario which caused the CONFIG_DRM_USE_DYNAMIC_DEBUG=3Dy regression
+> > seen in drm & drivers.
+> >
+> > The _submod.c is a 2-line file: #define _SUBMOD, #include parent.
+> >
+> > This gives identical complements of prdbgs in parent & _submod, and
+> > thus identical print behavior when all of: >control, >params, and
+> > parent->_submod propagation are working correctly.
+> >
+> > It also puts all the parent/_submod declarations together in the same
+> > source, with the new ifdef _SUBMOD block invoking DYNAMIC_DEBUG_CLASSMA=
+P_USE
+> > for the 2 test-interfaces.  I think this is clearer.
+> >
+> > These 2 modules are both tristate, allowing 3 super/sub combos: Y/Y,
+> > Y/M, M/M (not N/Y, since this is disallowed by dependence).
+> >
+> > Y/Y testing exposed a missing __align(8) in the _METADATA macro, which
+> > M/M didn't see because the module-loader memory placement constrains
+> > it instead.
+> >
+> > Fixes: aad0214f3026 ("dyndbg: add DECLARE_DYNDBG_CLASSMAP macro")
+> > cc: linux-doc@vger.kernel.org
+> > Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
+> > ---
+> > v3-
+> >     undo 1.9 simplification of ddebug_find_valid_class()
+> >     ddebug_change needs map to see its controlling param
+> >     change internal callchains to pass di, not dt
+> >
+> > v2 a. building 2 .ko's from 1 source file is weird; add a clear
+> >        comment at the top to justify it (basically cloning)
+> >        ln 138+ in commit-msg is insufficient.
+> >
+> >     b. retire "DYNDBG_" name shortening b4 adding _CLASSMAP_* macros.
+> >     c. s/dd_class/_ddebug_class/
+> >     d. s/\bddebug\b/_$1/g in header: chgs 1 struct and UNIQUE_ID bases
+> >
+> > v1.9 - commit-msg tweaks
+> >       DRM:CHECK warnings on macros: add parens
+> >       extern DEFINEd _var, static classnames
+> >       change ddebug_class_user.user_mod_name to .mod_name
+> >       simplify ddebug_find_valid_class return val
+> >       improve vpr_cm_info msg format
+> >       wrap (base) in macro body
+> >       move __DYNDBG_CLASSMAP_CHECK above kdoc for DYNDBG_CLASSMAP_DEFIN=
+E
+> >
+> > v1.8 - split drm parts to separate commits.
+> >       preserve DECLARE_DYNDBG_CLASSMAP to decouple DRM, no flag day.
+> >       fixup block comment
+> >
+> > v1.7 - previous submission-blocking bug:
+> >
+> > missing __align(8) in DYNAMIC_DEBUG_DECLARE_METADATA on
+> > ddebug_class_user caused corrupt records, but only for builtin
+> > modules; module loader code probably pinned allocations to the right
+> > alignment naturally, hiding the bug for typical builds.
+> >
+> > v6- get rid of WARN_ON_ONCE
+> > v?- fix _var expanded 2x in macro
+> >
+> > dyndbg:
+> >
+> > This fn formerly returned the map which contained the class (thus
+> > validating it), and as a side-effect set the class-id in an outvar.
+> >
+> > But the caller didn't use the map (after checking its not null), only
+> > the valid class-id.  So simplify the fn to return the class-id of the
+> > validated classname, or -ENOENT when the queried classname is not
+> > found.
+> >
+> > Convey more useful info in the debug-msg: print class-names[0,last],
+> > and [base,+len] instead of the class-type printout, which is almost
+> > always "type:DISJOINT_BITS".  And drop ddebug_classmap_typenames,
+> > which is now unused.
+> >
+> > [root@v6 b0-dd]# modprobe test_dynamic_debug_submod
+> > [   18.864962] dyndbg: loaded classmap: test_dynamic_debug [16..24] V0.=
+.V7
+> > [   18.865046] dyndbg:  found kp:p_level_num =3D0x0
+> > [   18.865048] dyndbg:   mapped to: test_dynamic_debug [16..24] V0..V7
+> > [   18.865164] dyndbg:   p_level_num: lvl:0 bits:0x0
+> > [   18.865217] dyndbg: loaded classmap: test_dynamic_debug [0..10] D2_C=
+ORE..D2_DRMRES
+> > [   18.865297] dyndbg:  found kp:p_disjoint_bits =3D0x0
+> > [   18.865298] dyndbg:   mapped to: test_dynamic_debug [0..10] D2_CORE.=
+.D2_DRMRES
+> > [   18.865424] dyndbg:   p_disjoint_bits: classbits: 0x0
+> > [   18.865472] dyndbg: module:test_dynamic_debug attached 2 classmaps
+> > [   18.865533] dyndbg:  23 debug prints in module test_dynamic_debug
+> > [   18.866558] dyndbg: loaded classmap: test_dynamic_debug_submod [16..=
+24] V0..V7
+> > [   18.866698] dyndbg:  found kp:p_level_num =3D0x0
+> > [   18.866699] dyndbg:   mapped to: test_dynamic_debug_submod [16..24] =
+V0..V7
+> > [   18.866865] dyndbg:   p_level_num: lvl:0 bits:0x0
+> > [   18.866926] dyndbg: loaded classmap: test_dynamic_debug_submod [0..1=
+0] D2_CORE..D2_DRMRES
+> > [   18.867026] dyndbg:  found kp:p_disjoint_bits =3D0x0
+> > [   18.867027] dyndbg:   mapped to: test_dynamic_debug_submod [0..10] D=
+2_CORE..D2_DRMRES
+> > [   18.867193] dyndbg:   p_disjoint_bits: classbits: 0x0
+> > [   18.867255] dyndbg: module:test_dynamic_debug_submod attached 2 clas=
+smap uses
+> > [   18.867351] dyndbg:  23 debug prints in module test_dynamic_debug_su=
+bmod
+> >
+> > fixup-test-submod
+> >
+> > fixup-test
+> >
+> > Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
+> > ---
+> >   MAINTAINERS                       |   2 +-
+> >   include/asm-generic/vmlinux.lds.h |   1 +
+> >   include/linux/dynamic_debug.h     |  93 +++++++++++++++++---
+> >   kernel/module/main.c              |   3 +
+> >   lib/Kconfig.debug                 |  24 ++++--
+> >   lib/Makefile                      |   3 +
+> >   lib/dynamic_debug.c               | 137 +++++++++++++++++++++++++++--=
+-
+> >   lib/test_dynamic_debug.c          | 132 ++++++++++++++++++++--------
+> >   lib/test_dynamic_debug_submod.c   |  14 +++
+> >   9 files changed, 343 insertions(+), 66 deletions(-)
+> >   create mode 100644 lib/test_dynamic_debug_submod.c
+> >
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 00e94bec401e..1c5fcbd9e408 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -8139,7 +8139,7 @@ M:      Jim Cromie <jim.cromie@gmail.com>
+> >   S:  Maintained
+> >   F:  include/linux/dynamic_debug.h
+> >   F:  lib/dynamic_debug.c
+> > -F:   lib/test_dynamic_debug.c
+> > +F:   lib/test_dynamic_debug*.c
+> >
+> >   DYNAMIC INTERRUPT MODERATION
+> >   M:  Tal Gilboa <talgi@nvidia.com>
+> > diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vm=
+linux.lds.h
+> > index f834ad1fb8c4..fa382caf2ae2 100644
+> > --- a/include/asm-generic/vmlinux.lds.h
+> > +++ b/include/asm-generic/vmlinux.lds.h
+> > @@ -367,6 +367,7 @@ defined(CONFIG_AUTOFDO_CLANG) || defined(CONFIG_PRO=
+PELLER_CLANG)
+> >       /* implement dynamic printk debug */                            \
+> >       . =3D ALIGN(8);                                                  =
+ \
+> >       BOUNDED_SECTION_BY(__dyndbg_class_maps, ___dyndbg_class_maps)   \
+> > +     BOUNDED_SECTION_BY(__dyndbg_class_users, ___dyndbg_class_users) \
+> >       BOUNDED_SECTION_BY(__dyndbg_descriptors, ___dyndbg_descs)       \
+> >       CODETAG_SECTIONS()                                              \
+> >       LIKELY_PROFILE()                                                \
+> > diff --git a/include/linux/dynamic_debug.h b/include/linux/dynamic_debu=
+g.h
+> > index 769f02456c8e..9af825c84e70 100644
+> > --- a/include/linux/dynamic_debug.h
+> > +++ b/include/linux/dynamic_debug.h
+> > @@ -71,9 +71,28 @@ enum ddebug_class_map_type {
+> >        */
+> >   };
+> >
+> > +/*
+> > + * dyndbg-classmaps are devised to support DRM.debug directly:
+> > + *    10 enum-vals: DRM_UT_* define the categories
+> > + *   ~23 categorized *_dbg() macros, each passing a DRM_UT_* val as 1s=
+t arg
+> > + *     2 macros below them: drm_dev_dbg, __drm_dbg
+> > + * ~5000 calls to the categorized macros, across all of drivers/gpu/dr=
+m/
+> > + *
+> > + * When CONFIG_DRM_USE_DYNAMIC_DEBUG=3Dy, the 2 low macros are redefin=
+ed
+> > + * to invoke _dynamic_func_call_cls().  This compiles the category
+> > + * into each callsite's class_id field, where dyndbg can select on it
+> > + * and alter a callsite's patch-state, avoiding repeated __drm_debug
+> > + * checks.
+> > + *
+> > + * To make the callsites manageable from the >control file, authors
+> > + * provide a "classmap" of names to class_ids in use by the module(s),
+> > + * usually by stringifying the enum-vals.  Modules with multiple
+> > + * classmaps must arrange to share the 0..62 class_id space.
+> > + */
+> > +
+> >   struct _ddebug_class_map {
+> > -     struct module *mod;
+> > -     const char *mod_name;   /* needed for builtins */
+> > +     const struct module *mod;               /* NULL for builtins */
+> > +     const char *mod_name;
+> >       const char **class_names;
+> >       const int length;
+> >       const int base;         /* index of 1st .class_id, allows split/s=
+hared space */
+> > @@ -81,11 +100,34 @@ struct _ddebug_class_map {
+> >   };
+> >
+> >   /**
+> > - * DECLARE_DYNDBG_CLASSMAP - declare classnames known by a module
+> > - * @_var:   a struct _ddebug_class_map, passed to module_param_cb
+> > - * @_type:  enum class_map_type, chooses bits/verbose, numeric/symboli=
+c
+> > - * @_base:  offset of 1st class-name. splits .class_id space
+> > - * @classes: class-names used to control class'd prdbgs
+> > + * DYNAMIC_DEBUG_CLASSMAP_DEFINE - define debug classes used by a modu=
+le.
+> > + * @_var:   name of the classmap, exported for other modules coordinat=
+ed use.
+> > + * @_mapty: enum ddebug_class_map_type: 0:DISJOINT - independent, 1:LE=
+VEL - v2>v1
+> > + * @_base:  reserve N classids starting at _base, to split 0..62 class=
+id space
+> > + * @classes: names of the N classes.
+> > + *
+> > + * This tells dyndbg what class_ids the module is using: _base..+N, by
+> > + * mapping names onto them.  This qualifies "class NAME" >controls on
+> > + * the defining module, ignoring unknown names.
+> > + */
+> > +#define DYNAMIC_DEBUG_CLASSMAP_DEFINE(_var, _mapty, _base, ...)       =
+       \
+> > +     static const char *_var##_classnames[] =3D { __VA_ARGS__ };      =
+ \
+> > +     extern struct _ddebug_class_map _var;                           \
+> > +     struct _ddebug_class_map __aligned(8) __used                    \
+> > +             __section("__dyndbg_class_maps") _var =3D {              =
+ \
+> > +             .mod =3D THIS_MODULE,                                    =
+ \
+> > +             .mod_name =3D KBUILD_MODNAME,                            =
+ \
+> > +             .base =3D (_base),                                       =
+ \
+> > +             .map_type =3D (_mapty),                                  =
+ \
+> > +             .length =3D ARRAY_SIZE(_var##_classnames),               =
+ \
+> > +             .class_names =3D _var##_classnames,                      =
+ \
+> > +     };                                                              \
+> > +     EXPORT_SYMBOL(_var)
+> > +
+> > +/*
+> > + * XXX: keep this until DRM adapts to use the DEFINE/USE api, it
+> > + * differs from DYNAMIC_DEBUG_CLASSMAP_DEFINE by the lack of the
+> > + * extern/EXPORT on the struct init, and cascading thinkos.
+> >    */
+> >   #define DECLARE_DYNDBG_CLASSMAP(_var, _maptype, _base, ...)         \
+> >       static const char *_var##_classnames[] =3D { __VA_ARGS__ };      =
+ \
+> > @@ -99,10 +141,35 @@ struct _ddebug_class_map {
+> >               .class_names =3D _var##_classnames,                      =
+ \
+> >       }
+> >
+> > +struct _ddebug_class_user {
+> > +     char *mod_name;
+> > +     struct _ddebug_class_map *map;
+> > +};
+> > +
+> > +/**
+> > + * DYNAMIC_DEBUG_CLASSMAP_USE - refer to a classmap, DEFINEd elsewhere=
+.
+> > + * @_var: name of the exported classmap var
+> > + *
+> > + * This tells dyndbg that the module has prdbgs with classids defined
+> > + * in the named classmap.  This qualifies "class NAME" >controls on
+> > + * the user module, ignoring unknown names.
+> > + */
+> > +#define DYNAMIC_DEBUG_CLASSMAP_USE(_var)                             \
+> > +     DYNAMIC_DEBUG_CLASSMAP_USE_(_var, __UNIQUE_ID(_ddebug_class_user)=
+)
+> > +#define DYNAMIC_DEBUG_CLASSMAP_USE_(_var, _uname)                    \
+> > +     extern struct _ddebug_class_map _var;                           \
+> > +     static struct _ddebug_class_user __aligned(8) __used            \
+> > +     __section("__dyndbg_class_users") _uname =3D {                   =
+ \
+> > +             .mod_name =3D KBUILD_MODNAME,                            =
+ \
+> > +             .map =3D &(_var),                                        =
+ \
+> > +     }
+> > +
+> >   /*
+> > - * @_ddebug_info: gathers module/builtin dyndbg_* __sections together.
+> > + * @_ddebug_info: gathers module/builtin __dyndbg_<T> __sections
+> > + * together, each is a vector: a struct { <T> *addr, int len }.
+> > + *
+> >    * For builtins, it is used as a cursor, with the inner structs
+> > - * marking sub-vectors of the builtin __sections in DATA.
+> > + * marking sub-vectors of the builtin __sections in DATA_DATA
+>
+> DATA_DATA? Is it a typo?
+>
 
-We wrap registered PCSs in another PCS. This wrapper PCS is refcounted
-and can outlive the wrapped PCS (such as if the wrapped PCS's driver is
-unbound). The wrapper forwards all PCS callbacks to the wrapped PCS,
-first checking to make sure the wrapped PCS still exists. This design
-was inspired by Bartosz Golaszewski's talk at LPC [1].
+No, its the actual name of the macro in vmlinux.lds.h
 
-pcs_get_by_fwnode_compat is a bit hairy, but it's necessary for
-compatibility with existing drivers, which often attach to (devicetree)
-nodes directly. We use the devicetree changeset system instead of
-adding a (secondary) software node because mdio_bus_match calls
-of_driver_match_device to match devices, and that function only works on
-devicetree nodes.
+include/asm-generic/vmlinux.lds.h
+355:#define DATA_DATA \
+1155: DATA_DATA \
 
-[1] https://lpc.events/event/17/contributions/1627/
 
-Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
----
+I chose it thinking it was much more specific than just DATA
+but it is also used repeatedly elsewhere (as part of symbol-names)
 
-Changes in v3:
-- Remove support for #pcs-cells. Upon further investigation, the
-  requested functionality can be accomplished by specifying the PCS's
-  fwnode manually.
+drivers/accel/habanalabs/include/gaudi2/asic_reg/dcore0_sync_mngr_objs_mask=
+s.h
+42:#define DCORE0_SYNC_MNGR_OBJS_MON_PAY_DATA_DATA_SHIFT 0
+43:#define DCORE0_SYNC_MNGR_OBJS_MON_PAY_DATA_DATA_MASK 0xFFFFFFFF
 
-Changes in v2:
-- Add fallbacks for pcs_get* and pcs_put
-- Add support for #pcs-cells
-- Remove outdated comment
-- Remove unused variable
+drivers/accel/habanalabs/include/goya/asic_reg/tpc0_eml_cfg_masks.h
+245:#define TPC0_EML_CFG_DBG_SPDATA_DATA_SHIFT                           0
+246:#define TPC0_EML_CFG_DBG_SPDATA_DATA_MASK
+  0xFFFFFFFF
+267:#define TPC0_EML_CFG_DBG_AXIHBWDATA_DATA_SHIFT                       0
+268:#define TPC0_EML_CFG_DBG_AXIHBWDATA_DATA_MASK
+  0xFFFFFFFF
+285:#define TPC0_EML_CFG_DBG_AXILBWDATA_DATA_SHIFT                       0
+286:#define TPC0_EML_CFG_DBG_AXILBWDATA_DATA_MASK
+  0xFFFFFFFF
 
- Documentation/networking/index.rst |   1 +
- Documentation/networking/kapi.rst  |   4 +
- Documentation/networking/pcs.rst   | 102 +++++
- MAINTAINERS                        |   2 +
- drivers/net/pcs/Kconfig            |  12 +
- drivers/net/pcs/Makefile           |   2 +
- drivers/net/pcs/core.c             | 690 +++++++++++++++++++++++++++++
- include/linux/pcs.h                | 193 ++++++++
- 8 files changed, 1006 insertions(+)
- create mode 100644 Documentation/networking/pcs.rst
- create mode 100644 drivers/net/pcs/core.c
- create mode 100644 include/linux/pcs.h
 
-diff --git a/Documentation/networking/index.rst b/Documentation/networking/index.rst
-index ac90b82f3ce9..ff0e5968850b 100644
---- a/Documentation/networking/index.rst
-+++ b/Documentation/networking/index.rst
-@@ -30,6 +30,7 @@ Contents:
-    page_pool
-    phy
-    sfp-phylink
-+   pcs
-    alias
-    bridge
-    snmp_counter
-diff --git a/Documentation/networking/kapi.rst b/Documentation/networking/kapi.rst
-index 98682b9a13ee..7a48178649de 100644
---- a/Documentation/networking/kapi.rst
-+++ b/Documentation/networking/kapi.rst
-@@ -146,6 +146,10 @@ PHYLINK
- 
- .. kernel-doc:: include/linux/phylink.h
-    :internal:
-+   :no-identifiers: phylink_pcs phylink_pcs_ops pcs_validate pcs_inband_caps
-+      pcs_enable pcs_disable pcs_pre_config pcs_post_config pcs_get_state
-+      pcs_config pcs_an_restart pcs_link_up pcs_disable_eee pcs_enable_eee
-+      pcs_pre_init
- 
- .. kernel-doc:: drivers/net/phy/phylink.c
- 
-diff --git a/Documentation/networking/pcs.rst b/Documentation/networking/pcs.rst
-new file mode 100644
-index 000000000000..4b41ba884160
---- /dev/null
-+++ b/Documentation/networking/pcs.rst
-@@ -0,0 +1,102 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============
-+PCS Subsystem
-+=============
-+
-+The PCS (Physical Coding Sublayer) subsystem handles the registration and lookup
-+of PCS devices. These devices contain the upper sublayers of the Ethernet
-+physical layer, generally handling framing, scrambling, and encoding tasks. PCS
-+devices may also include PMA (Physical Medium Attachment) components. PCS
-+devices transfer data between the Link-layer MAC device, and the rest of the
-+physical layer, typically via a serdes. The output of the serdes may be
-+connected more-or-less directly to the medium when using fiber-optic or
-+backplane connections (1000BASE-SX, 1000BASE-KX, etc). It may also communicate
-+with a separate PHY (such as over SGMII) which handles the connection to the
-+medium (such as 1000BASE-T).
-+
-+Looking up PCS Devices
-+----------------------
-+
-+There are generally two ways to look up a PCS device. If the PCS device is
-+internal to a larger device (such as a MAC or switch), and it does not share an
-+implementation with an existing PCS, then it does not need to be registered with
-+the PCS subsystem. Instead, you can populate a :c:type:`phylink_pcs`
-+in your probe function. Otherwise, you must look up the PCS.
-+
-+If your device has a :c:type:`fwnode_handle`, you can add a PCS using the
-+``pcs-handle`` property::
-+
-+    ethernet-controller {
-+        // ...
-+        pcs-handle = <&pcs>;
-+        pcs-handle-names = "internal";
-+    };
-+
-+Then, during your probe function, you can get the PCS using :c:func:`pcs_get`::
-+
-+    mac->pcs = pcs_get(dev, "internal");
-+    if (IS_ERR(mac->pcs)) {
-+        err = PTR_ERR(mac->pcs);
-+        return dev_err_probe(dev, "Could not get PCS\n");
-+    }
-+
-+If your device doesn't have a :c:type:`fwnode_handle`, you can get the PCS
-+based on the providing device using :c:func:`pcs_get_by_dev`. Typically, you
-+will create the device and bind your PCS driver to it before calling this
-+function. This allows reuse of an existing PCS driver.
-+
-+Once you are done using the PCS, you must call :c:func:`pcs_put`.
-+
-+Using PCS Devices
-+-----------------
-+
-+To select the PCS from a MAC driver, implement the ``mac_select_pcs`` callback
-+of :c:type:`phylink_mac_ops`. In this example, the PCS is selected for SGMII
-+and 1000BASE-X, and deselected for other interfaces::
-+
-+    static struct phylink_pcs *mac_select_pcs(struct phylink_config *config,
-+                                              phy_interface_t iface)
-+    {
-+        struct mac *mac = config_to_mac(config);
-+
-+        switch (iface) {
-+        case PHY_INTERFACE_MODE_SGMII:
-+        case PHY_INTERFACE_MODE_1000BASEX:
-+            return mac->pcs;
-+        default:
-+            return NULL;
-+        }
-+    }
-+
-+To do the same from a DSA driver, implement the ``phylink_mac_select_pcs``
-+callback of :c:type:`dsa_switch_ops`.
-+
-+Writing PCS Drivers
-+-------------------
-+
-+To write a PCS driver, first implement :c:type:`phylink_pcs_ops`. Then,
-+register your PCS in your probe function using :c:func:`pcs_register`. If you
-+need to provide multiple PCSs for the same device, then you can pass specific
-+firmware nodes using :c:macro:`pcs_register_full`.
-+
-+You must call :c:func:`pcs_unregister` from your remove function. You can avoid
-+this step by registering with :c:func:`devm_pcs_unregister`.
-+
-+API Reference
-+-------------
-+
-+.. kernel-doc:: include/linux/phylink.h
-+   :identifiers: phylink_pcs phylink_pcs_ops pcs_validate pcs_inband_caps
-+      pcs_enable pcs_disable pcs_pre_config pcs_post_config pcs_get_state
-+      pcs_config pcs_an_restart pcs_link_up pcs_disable_eee pcs_enable_eee
-+      pcs_pre_init
-+
-+.. kernel-doc:: include/linux/pcs.h
-+   :internal:
-+
-+.. kernel-doc:: drivers/net/pcs/core.c
-+   :export:
-+
-+.. kernel-doc:: drivers/net/pcs/core.c
-+   :internal:
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1248443035f4..65f936521d65 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -8771,6 +8771,7 @@ F:	Documentation/ABI/testing/sysfs-class-net-phydev
- F:	Documentation/devicetree/bindings/net/ethernet-phy.yaml
- F:	Documentation/devicetree/bindings/net/mdio*
- F:	Documentation/devicetree/bindings/net/qca,ar803x.yaml
-+F:	Documentation/networking/pcs.rst
- F:	Documentation/networking/phy.rst
- F:	drivers/net/mdio/
- F:	drivers/net/mdio/acpi_mdio.c
-@@ -8784,6 +8785,7 @@ F:	include/linux/linkmode.h
- F:	include/linux/mdio/*.h
- F:	include/linux/mii.h
- F:	include/linux/of_net.h
-+F:	include/linux/pcs.h
- F:	include/linux/phy.h
- F:	include/linux/phy_fixed.h
- F:	include/linux/phy_link_topology.h
-diff --git a/drivers/net/pcs/Kconfig b/drivers/net/pcs/Kconfig
-index f6aa437473de..b764770063cc 100644
---- a/drivers/net/pcs/Kconfig
-+++ b/drivers/net/pcs/Kconfig
-@@ -5,6 +5,18 @@
- 
- menu "PCS device drivers"
- 
-+config PCS
-+	bool "PCS subsystem"
-+	help
-+	  This provides common helper functions for registering and looking up
-+	  Physical Coding Sublayer (PCS) devices. PCS devices translate between
-+	  different interface types. In some use cases, they may either
-+	  translate between different types of Medium-Independent Interfaces
-+	  (MIIs), such as translating GMII to SGMII. This allows using a fast
-+	  serial interface to talk to the phy which translates the MII to the
-+	  Medium-Dependent Interface. Alternatively, they may translate a MII
-+	  directly to an MDI, such as translating GMII to 1000Base-X.
-+
- config PCS_XPCS
- 	tristate "Synopsys DesignWare Ethernet XPCS"
- 	select PHYLINK
-diff --git a/drivers/net/pcs/Makefile b/drivers/net/pcs/Makefile
-index 4f7920618b90..35e3324fc26e 100644
---- a/drivers/net/pcs/Makefile
-+++ b/drivers/net/pcs/Makefile
-@@ -1,6 +1,8 @@
- # SPDX-License-Identifier: GPL-2.0
- # Makefile for Linux PCS drivers
- 
-+obj-$(CONFIG_PCS)		+= core.o
-+
- pcs_xpcs-$(CONFIG_PCS_XPCS)	:= pcs-xpcs.o pcs-xpcs-plat.o \
- 				   pcs-xpcs-nxp.o pcs-xpcs-wx.o
- 
-diff --git a/drivers/net/pcs/core.c b/drivers/net/pcs/core.c
-new file mode 100644
-index 000000000000..95ee4e002fa5
---- /dev/null
-+++ b/drivers/net/pcs/core.c
-@@ -0,0 +1,690 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2022, 2025 Sean Anderson <sean.anderson@seco.com>
-+ */
-+
-+#define pr_fmt(fmt) "pcs-core: " fmt
-+
-+#include <linux/fwnode.h>
-+#include <linux/list.h>
-+#include <linux/mutex.h>
-+#include <linux/of.h>
-+#include <linux/pcs.h>
-+#include <linux/phylink.h>
-+#include <linux/property.h>
-+#include <linux/rcupdate.h>
-+
-+static LIST_HEAD(pcs_wrappers);
-+/* Protects PCS (un)registration i.e. pcs_wrappers */
-+static DEFINE_MUTEX(pcs_mutex);
-+/* Protects pcs_wrapper.pcs from being unregistered while we are operating on
-+ * it. One SRCU is shared by all PCSs, so drivers may wait on other drivers'
-+ * PCSs. If this becomes a problem the SRCU can be made per-PCS.
-+ */
-+DEFINE_STATIC_SRCU(pcs_srcu);
-+
-+/**
-+ * struct pcs_wrapper - Wrapper for a registered PCS
-+ * @pcs: the wrapping PCS
-+ * @refcnt: refcount for the wrapper
-+ * @list: list head for pcs_wrappers
-+ * @dev: the device associated with this PCS
-+ * @fwnode: this PCS's firmware node; typically @dev.fwnode
-+ * @wrapped: the backing PCS
-+ */
-+struct pcs_wrapper {
-+	struct phylink_pcs pcs;
-+	refcount_t refcnt;
-+	struct list_head list;
-+	struct device *dev;
-+	struct fwnode_handle *fwnode;
-+	struct phylink_pcs *wrapped;
-+};
-+
-+static const struct phylink_pcs_ops pcs_ops;
-+
-+static struct pcs_wrapper *pcs_to_wrapper(struct phylink_pcs *pcs)
-+{
-+	WARN_ON(pcs->ops != &pcs_ops);
-+	return container_of(pcs, struct pcs_wrapper, pcs);
-+}
-+
-+static int pcs_validate(struct phylink_pcs *pcs, unsigned long *supported,
-+			const struct phylink_link_state *state)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int ret, idx;
-+
-+	if (!wrapper)
-+		return 0;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped) {
-+		if (wrapped->ops->pcs_validate)
-+			ret = wrapped->ops->pcs_validate(wrapped, supported,
-+							 state);
-+		else
-+			ret = 0;
-+	} else {
-+		ret = -ENODEV;
-+	}
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+	return ret;
-+}
-+
-+static unsigned int pcs_inband_caps(struct phylink_pcs *pcs,
-+				    phy_interface_t interface)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int ret, idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped && wrapped->ops->pcs_inband_caps)
-+		ret = wrapped->ops->pcs_inband_caps(wrapped, interface);
-+	else
-+		ret = 0;
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+	return ret;
-+}
-+
-+static int pcs_enable(struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int ret, idx;
-+
-+	if (!wrapper)
-+		return 0;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped) {
-+		if (wrapped->ops->pcs_enable)
-+			ret = wrapped->ops->pcs_enable(wrapped);
-+		else
-+			ret = 0;
-+	} else {
-+		ret = -ENODEV;
-+	}
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+	return ret;
-+}
-+
-+static void pcs_disable(struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped && wrapped->ops->pcs_disable)
-+		wrapped->ops->pcs_disable(wrapped);
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+}
-+
-+static void pcs_get_state(struct phylink_pcs *pcs, unsigned int neg_mode,
-+			  struct phylink_link_state *state)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped)
-+		wrapped->ops->pcs_get_state(wrapped, neg_mode, state);
-+	else
-+		state->link = 0;
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+}
-+
-+static void pcs_pre_config(struct phylink_pcs *pcs,
-+			   phy_interface_t interface)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped && wrapped->ops->pcs_pre_config)
-+		wrapped->ops->pcs_pre_config(wrapped, interface);
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+}
-+
-+static int pcs_post_config(struct phylink_pcs *pcs,
-+			   phy_interface_t interface)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int ret, idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (pcs && wrapped->ops->pcs_post_config)
-+		ret = wrapped->ops->pcs_post_config(wrapped, interface);
-+	else
-+		ret = 0;
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+	return ret;
-+}
-+
-+static int pcs_config(struct phylink_pcs *pcs, unsigned int neg_mode,
-+		      phy_interface_t interface,
-+		      const unsigned long *advertising,
-+		      bool permit_pause_to_mac)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int ret, idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped)
-+		ret = wrapped->ops->pcs_config(wrapped, neg_mode, interface,
-+					   advertising, permit_pause_to_mac);
-+	else
-+		ret = -ENODEV;
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+	return ret;
-+}
-+
-+static void pcs_an_restart(struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped)
-+		wrapped->ops->pcs_an_restart(wrapped);
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+}
-+
-+static void pcs_link_up(struct phylink_pcs *pcs, unsigned int neg_mode,
-+			phy_interface_t interface, int speed, int duplex)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped && wrapped->ops->pcs_link_up)
-+		wrapped->ops->pcs_link_up(wrapped, neg_mode, interface, speed,
-+					  duplex);
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+}
-+
-+static void pcs_disable_eee(struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped && wrapped->ops->pcs_disable_eee)
-+		wrapped->ops->pcs_disable_eee(wrapped);
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+}
-+
-+static void pcs_enable_eee(struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped && wrapped->ops->pcs_enable_eee)
-+		wrapped->ops->pcs_enable_eee(wrapped);
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+}
-+
-+static int pcs_pre_init(struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper = pcs_to_wrapper(pcs);
-+	struct phylink_pcs *wrapped;
-+	int ret, idx;
-+
-+	idx = srcu_read_lock(&pcs_srcu);
-+
-+	wrapped = srcu_dereference(wrapper->wrapped, &pcs_srcu);
-+	if (wrapped) {
-+		wrapped->rxc_always_on = pcs->rxc_always_on;
-+		if (wrapped->ops->pcs_pre_init)
-+			ret = wrapped->ops->pcs_pre_init(wrapped);
-+		else
-+			ret = 0;
-+	} else {
-+		ret = -ENODEV;
-+	}
-+
-+	srcu_read_unlock(&pcs_srcu, idx);
-+	return ret;
-+}
-+
-+static const struct phylink_pcs_ops pcs_ops = {
-+	.pcs_validate = pcs_validate,
-+	.pcs_inband_caps = pcs_inband_caps,
-+	.pcs_enable = pcs_enable,
-+	.pcs_disable = pcs_disable,
-+	.pcs_pre_config = pcs_pre_config,
-+	.pcs_post_config = pcs_post_config,
-+	.pcs_get_state = pcs_get_state,
-+	.pcs_config = pcs_config,
-+	.pcs_an_restart = pcs_an_restart,
-+	.pcs_link_up = pcs_link_up,
-+	.pcs_disable_eee = pcs_disable_eee,
-+	.pcs_enable_eee = pcs_enable_eee,
-+	.pcs_pre_init = pcs_pre_init,
-+};
-+
-+static void pcs_change_callback(void *priv, bool up)
-+{
-+	struct pcs_wrapper *wrapper = priv;
-+
-+	phylink_pcs_change(&wrapper->pcs, up);
-+}
-+
-+/**
-+ * pcs_register_full() - register a new PCS
-+ * @dev: The device requesting the PCS
-+ * @fwnode: The PCS's firmware node; typically @dev.fwnode
-+ * @pcs: The PCS to register
-+ *
-+ * Registers a new PCS which can be attached to a phylink.
-+ *
-+ * Return: 0 on success, or -errno on error
-+ */
-+int pcs_register_full(struct device *dev, struct fwnode_handle *fwnode,
-+		      struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper;
-+
-+	if (!dev || !pcs->ops)
-+		return -EINVAL;
-+
-+	if (!pcs->ops->pcs_an_restart || !pcs->ops->pcs_config ||
-+	    !pcs->ops->pcs_get_state)
-+		return -EINVAL;
-+
-+	wrapper = kzalloc(sizeof(*wrapper), GFP_KERNEL);
-+	if (!wrapper)
-+		return -ENOMEM;
-+
-+	refcount_set(&wrapper->refcnt, 1);
-+	INIT_LIST_HEAD(&wrapper->list);
-+	wrapper->dev = get_device(dev);
-+	wrapper->fwnode = fwnode_handle_get(fwnode);
-+	RCU_INIT_POINTER(wrapper->wrapped, pcs);
-+
-+	wrapper->pcs.ops = &pcs_ops;
-+	wrapper->pcs.poll = pcs->poll;
-+	bitmap_copy(wrapper->pcs.supported_interfaces, pcs->supported_interfaces,
-+		    PHY_INTERFACE_MODE_MAX);
-+
-+	pcs->link_change = pcs_change_callback;
-+	pcs->link_change_priv = wrapper;
-+
-+	mutex_lock(&pcs_mutex);
-+	list_add(&wrapper->list, &pcs_wrappers);
-+	mutex_unlock(&pcs_mutex);
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(pcs_register_full);
-+
-+/**
-+ * pcs_unregister() - unregister a PCS
-+ * @pcs: a PCS previously registered with pcs_register()
-+ */
-+void pcs_unregister(struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper;
-+
-+	mutex_lock(&pcs_mutex);
-+	list_for_each_entry(wrapper, &pcs_wrappers, list) {
-+		if (wrapper->wrapped == pcs)
-+			goto found;
-+	}
-+
-+	mutex_unlock(&pcs_mutex);
-+	WARN(1, "trying to unregister an already-unregistered PCS\n");
-+	return;
-+
-+found:
-+	list_del(&wrapper->list);
-+	mutex_unlock(&pcs_mutex);
-+
-+	put_device(wrapper->dev);
-+	fwnode_handle_put(wrapper->fwnode);
-+	rcu_replace_pointer(wrapper->wrapped, NULL, true);
-+	synchronize_srcu(&pcs_srcu);
-+
-+	if (!wrapper->pcs.poll)
-+		phylink_pcs_change(&wrapper->pcs, false);
-+	if (refcount_dec_and_test(&wrapper->refcnt))
-+		kfree(wrapper);
-+}
-+EXPORT_SYMBOL_GPL(pcs_unregister);
-+
-+static void devm_pcs_unregister(void *pcs)
-+{
-+	pcs_unregister(pcs);
-+}
-+
-+/**
-+ * devm_pcs_register - resource managed pcs_register()
-+ * @dev: device that is registering this PCS
-+ * @fwnode: The PCS's firmware node; typically @dev.fwnode
-+ * @pcs: the PCS to register
-+ *
-+ * Managed pcs_register(). For PCSs registered by this function,
-+ * pcs_unregister() is automatically called on driver detach. See
-+ * pcs_register() for more information.
-+ *
-+ * Return: 0 on success, or -errno on failure
-+ */
-+int devm_pcs_register_full(struct device *dev, struct fwnode_handle *fwnode,
-+			   struct phylink_pcs *pcs)
-+{
-+	int ret;
-+
-+	ret = pcs_register_full(dev, fwnode, pcs);
-+	if (ret)
-+		return ret;
-+
-+	return devm_add_action_or_reset(dev, devm_pcs_unregister, pcs);
-+}
-+EXPORT_SYMBOL_GPL(devm_pcs_register_full);
-+
-+/**
-+ * _pcs_get_tail() - Look up and request a PCS
-+ * @dev: The device requesting the PCS
-+ * @fwnode: The PCS's fwnode
-+ * @pcs_dev: The PCS's device
-+ *
-+ * Search PCSs registered with pcs_register() for one with a matching
-+ * fwnode or device. Either @fwnode or @pcs_dev may be %NULL if matching
-+ * against a fwnode or device is not desired (respectively).
-+ *
-+ * Once a PCS is found, perform common operations necessary when getting a PCS
-+ * (increment reference counts, etc).
-+ *
-+ * You should probably call one of the pcs_get* functions instead of this one.
-+ *
-+ * Return: A PCS, or an error pointer on failure. If both @fwnode and @pcs_dev are
-+ * *       %NULL, returns %NULL to allow easier chaining.
-+ */
-+struct phylink_pcs *_pcs_get_tail(struct device *dev,
-+				  const struct fwnode_handle *fwnode,
-+				  const struct device *pcs_dev)
-+{
-+	struct pcs_wrapper *wrapper;
-+
-+	if (!fwnode && !pcs_dev)
-+		return NULL;
-+
-+	pr_debug("looking for %pfwf or %s %s...\n", fwnode,
-+		 pcs_dev ? dev_driver_string(pcs_dev) : "(null)",
-+		 pcs_dev ? dev_name(pcs_dev) : "(null)");
-+
-+	mutex_lock(&pcs_mutex);
-+	list_for_each_entry(wrapper, &pcs_wrappers, list) {
-+		if (pcs_dev && wrapper->dev == pcs_dev)
-+			goto found;
-+		if (fwnode && wrapper->fwnode == fwnode)
-+			goto found;
-+	}
-+	mutex_unlock(&pcs_mutex);
-+	pr_debug("...not found\n");
-+	return ERR_PTR(-EPROBE_DEFER);
-+
-+found:
-+	pr_debug("...found\n");
-+
-+	refcount_inc(&wrapper->refcnt);
-+	mutex_unlock(&pcs_mutex);
-+	return &wrapper->pcs;
-+}
-+EXPORT_SYMBOL_GPL(_pcs_get_tail);
-+
-+/**
-+ * pcs_find_fwnode() - Find a PCS's fwnode
-+ * @mac_node: The fwnode referencing the PCS
-+ * @id: The name of the PCS to get. May be %NULL to get the first PCS.
-+ * @fallback: An optional fallback property to use if pcs-handle is absent
-+ * @optional: Whether the PCS is optional
-+ *
-+ * Find a PCS's fwnode, as referenced by @mac_node. This fwnode can later be
-+ * used with _pcs_get_tail() to get the actual PCS. ``pcs-handle-names`` is
-+ * used to match @id, then the fwnode is found using ``pcs-handle``.
-+ *
-+ * This function is internal to the PCS subsystem from a consumer
-+ * point-of-view. However, it may be used to implement fallbacks for legacy
-+ * behavior in PCS providers.
-+ *
-+ * Return: %NULL if @optional is set and the PCS cannot be found. Otherwise,
-+ * *       returns a PCS if found or an error pointer on failure.
-+ */
-+struct fwnode_handle *pcs_find_fwnode(const struct fwnode_handle *mac_node,
-+				      const char *id, const char *fallback,
-+				      bool optional)
-+{
-+	int index;
-+	struct fwnode_handle *pcs_fwnode;
-+
-+	if (!mac_node)
-+		return optional ? NULL : ERR_PTR(-ENODEV);
-+
-+	if (id)
-+		index = fwnode_property_match_string(mac_node,
-+						     "pcs-handle-names", id);
-+	else
-+		index = 0;
-+
-+	if (index < 0) {
-+		if (optional && (index == -EINVAL || index == -ENODATA))
-+			return NULL;
-+		return ERR_PTR(index);
-+	}
-+
-+	/* First try pcs-handle, and if that doesn't work try the fallback */
-+	pcs_fwnode = fwnode_find_reference(mac_node, "pcs-handle", index);
-+	if (PTR_ERR(pcs_fwnode) == -ENOENT && fallback)
-+		pcs_fwnode = fwnode_find_reference(mac_node, fallback, index);
-+	if (optional && !id && PTR_ERR(pcs_fwnode) == -ENOENT)
-+		return NULL;
-+	return pcs_fwnode;
-+}
-+EXPORT_SYMBOL_GPL(pcs_find_fwnode);
-+
-+/**
-+ * _pcs_get() - Get a PCS from a fwnode property
-+ * @dev: The device to get a PCS for
-+ * @fwnode: The fwnode to find the PCS with
-+ * @id: The name of the PCS to get. May be %NULL to get the first PCS.
-+ * @fallback: An optional fallback property to use if pcs-handle is absent
-+ * @optional: Whether the PCS is optional
-+ *
-+ * Find a PCS referenced by @mac_node and return a reference to it. Every call
-+ * to _pcs_get_by_fwnode() must be balanced with one to pcs_put().
-+ *
-+ * Return: a PCS if found, %NULL if not, or an error pointer on failure
-+ */
-+struct phylink_pcs *_pcs_get(struct device *dev, struct fwnode_handle *fwnode,
-+			     const char *id, const char *fallback,
-+			     bool optional)
-+{
-+	struct fwnode_handle *pcs_fwnode;
-+	struct phylink_pcs *pcs;
-+
-+	pcs_fwnode = pcs_find_fwnode(fwnode, id, fallback, optional);
-+	if (IS_ERR(pcs_fwnode))
-+		return ERR_CAST(pcs_fwnode);
-+
-+	pcs = _pcs_get_tail(dev, pcs_fwnode, NULL);
-+	fwnode_handle_put(pcs_fwnode);
-+	return pcs;
-+}
-+EXPORT_SYMBOL_GPL(_pcs_get);
-+
-+static __maybe_unused void of_changeset_cleanup(void *data)
-+{
-+	struct of_changeset *ocs = data;
-+
-+	if (WARN(of_changeset_revert(ocs),
-+		 "could not revert changeset; leaking memory\n"))
-+		return;
-+
-+	of_changeset_destroy(ocs);
-+	kfree(ocs);
-+}
-+
-+/**
-+ * pcs_get_by_fwnode_compat() - Get a PCS with a compatibility fallback
-+ * @dev: The device requesting the PCS
-+ * @fwnode: The &struct fwnode_handle of the PCS itself
-+ * @fixup: Callback to fix up @fwnode for compatibility
-+ * @data: Passed to @fixup
-+ *
-+ * This function looks up a PCS and retries on failure after fixing up @fwnode.
-+ * It is intended to assist in backwards-compatible behavior for drivers that
-+ * used to create a PCS directly from a &struct device_node. This function
-+ * should NOT be used in new drivers.
-+ *
-+ * @fixup modifies a devicetree changeset to create any properties necessary to
-+ * bind the PCS's &struct device_node. At the very least, it should use
-+ * of_changeset_add_prop_string() to add a compatible property.
-+ *
-+ * Note that unlike pcs_get_by_fwnode, @fwnode is the &struct fwnode_handle of
-+ * the PCS itself, and not that of the requesting device. @fwnode could be
-+ * looked up with pcs_find_fwnode() or determined by some other means for
-+ * compatibility.
-+ *
-+ * Return: A PCS on success or an error pointer on failure
-+ */
-+struct phylink_pcs *
-+pcs_get_by_fwnode_compat(struct device *dev, struct fwnode_handle *fwnode,
-+			 int (*fixup)(struct of_changeset *ocs,
-+				      struct device_node *np, void *data),
-+			 void *data)
-+{
-+#ifdef CONFIG_OF_DYNAMIC
-+	struct mdio_device *mdiodev;
-+	struct of_changeset *ocs;
-+	struct phylink_pcs *pcs;
-+	struct device_node *np;
-+	struct device *pcsdev;
-+	int err;
-+
-+	/* First attempt */
-+	pcs = _pcs_get_tail(dev, fwnode, NULL);
-+	if (PTR_ERR(pcs) != -EPROBE_DEFER)
-+		return pcs;
-+
-+	/* No luck? Maybe there's no compatible... */
-+	np = to_of_node(fwnode);
-+	if (!np || of_property_present(np, "compatible"))
-+		return pcs;
-+
-+	/* OK, let's try fixing things up */
-+	pr_warn("%pOF is missing a compatible\n", np);
-+	ocs = kmalloc(sizeof(*ocs), GFP_KERNEL);
-+	if (!ocs)
-+		return ERR_PTR(-ENOMEM);
-+
-+	of_changeset_init(ocs);
-+	err = fixup(ocs, np, data);
-+	if (err)
-+		goto err_ocs;
-+
-+	err = of_changeset_apply(ocs);
-+	if (err)
-+		goto err_ocs;
-+
-+	err = devm_add_action_or_reset(dev, of_changeset_cleanup, ocs);
-+	if (err)
-+		return ERR_PTR(err);
-+
-+	mdiodev = fwnode_mdio_find_device(fwnode);
-+	if (mdiodev) {
-+		/* Clear that pesky PHY flag so we can match PCS drivers */
-+		device_lock(&mdiodev->dev);
-+		mdiodev->flags &= ~MDIO_DEVICE_FLAG_PHY;
-+		device_unlock(&mdiodev->dev);
-+		pcsdev = &mdiodev->dev;
-+	} else {
-+		pcsdev = get_device(fwnode->dev);
-+		if (!pcsdev)
-+			return ERR_PTR(-EPROBE_DEFER);
-+	}
-+
-+	err = device_reprobe(pcsdev);
-+	put_device(pcsdev);
-+	if (err)
-+		return ERR_PTR(err);
-+
-+	return _pcs_get_tail(dev, fwnode, NULL);
-+
-+err_ocs:
-+	of_changeset_destroy(ocs);
-+	kfree(ocs);
-+	return ERR_PTR(err);
-+#else
-+	return _pcs_get_tail(dev, fwnode, NULL);
-+#endif
-+}
-+EXPORT_SYMBOL_GPL(pcs_get_by_fwnode_compat);
-+
-+/**
-+ * pcs_put() - Release a previously-acquired PCS
-+ * @dev: The device used to acquire the PCS
-+ * @pcs: The PCS to put
-+ *
-+ * This frees resources associated with the PCS which were acquired when it was
-+ * gotten.
-+ */
-+void pcs_put(struct device *dev, struct phylink_pcs *pcs)
-+{
-+	struct pcs_wrapper *wrapper;
-+
-+	if (!pcs)
-+		return;
-+
-+	wrapper = pcs_to_wrapper(pcs);
-+	if (refcount_dec_and_test(&wrapper->refcnt))
-+		kfree(wrapper);
-+}
-+EXPORT_SYMBOL_GPL(pcs_put);
-diff --git a/include/linux/pcs.h b/include/linux/pcs.h
-new file mode 100644
-index 000000000000..29377553ad9d
---- /dev/null
-+++ b/include/linux/pcs.h
-@@ -0,0 +1,193 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2022 Sean Anderson <sean.anderson@seco.com>
-+ */
-+
-+#ifndef _PCS_H
-+#define _PCS_H
-+
-+#include <linux/property.h>
-+
-+struct device_node;
-+struct of_changeset;
-+struct phylink_pcs;
-+
-+int pcs_register_full(struct device *dev, struct fwnode_handle *fwnode,
-+		      struct phylink_pcs *pcs);
-+void pcs_unregister(struct phylink_pcs *pcs);
-+int devm_pcs_register_full(struct device *dev, struct fwnode_handle *fwnode,
-+			   struct phylink_pcs *pcs);
-+
-+/**
-+ * pcs_register() - register a new PCS
-+ * @dev: The device requesting the PCS
-+ * @pcs: The PCS to register
-+ *
-+ * Registers a new PCS which can be attached to a phylink.
-+ *
-+ * Return: 0 on success, or -errno on error
-+ */
-+static inline int pcs_register(struct device *dev, struct phylink_pcs *pcs)
-+{
-+	return pcs_register_full(dev, dev_fwnode(dev), pcs);
-+}
-+
-+/**
-+ * devm_pcs_register - resource managed pcs_register()
-+ * @dev: device that is registering this PCS
-+ * @pcs: the PCS to register
-+ *
-+ * Managed pcs_register(). For PCSs registered by this function,
-+ * pcs_unregister() is automatically called on driver detach. See
-+ * pcs_register() for more information.
-+ *
-+ * Return: 0 on success, or -errno on failure
-+ */
-+static inline int devm_pcs_register(struct device *dev, struct phylink_pcs *pcs)
-+{
-+	return devm_pcs_register_full(dev, dev_fwnode(dev), pcs);
-+}
-+
-+struct fwnode_handle *pcs_find_fwnode(const struct fwnode_handle *mac_node,
-+				      const char *id, const char *fallback,
-+				      bool optional);
-+struct phylink_pcs *
-+pcs_get_by_fwnode_compat(struct device *dev, struct fwnode_handle *fwnode,
-+			 int (*fixup)(struct of_changeset *ocs, struct device_node *np,
-+				      void *data),
-+			 void *data);
-+
-+#ifdef CONFIG_PCS
-+struct phylink_pcs *_pcs_get_tail(struct device *dev,
-+				  const struct fwnode_handle *fwnode,
-+				  const struct device *pcs_dev);
-+struct phylink_pcs *_pcs_get(struct device *dev, struct fwnode_handle *fwnode,
-+			     const char *id, const char *fallback,
-+			     bool optional);
-+void pcs_put(struct device *dev, struct phylink_pcs *handle);
-+
-+/**
-+ * pcs_get() - Get a PCS based on a fwnode
-+ * @dev: The device requesting the PCS
-+ * @id: The name of the PCS
-+ *
-+ * Find and get a PCS, as referenced by @dev's &struct fwnode_handle. See
-+ * pcs_find_fwnode() for details. Each call to this function must be balanced
-+ * with one to pcs_put().
-+ *
-+ * Return: A PCS on success or an error pointer on failure
-+ */
-+static inline struct phylink_pcs *pcs_get(struct device *dev, const char *id)
-+{
-+	return _pcs_get(dev, dev_fwnode(dev), id, NULL, false);
-+}
-+
-+/**
-+ * pcs_get_optional() - Optionally get a PCS based on a fwnode
-+ * @dev: The device requesting the PCS
-+ * @id: The name of the PCS
-+ *
-+ * Optionally find and get a PCS, as referenced by @dev's &struct
-+ * fwnode_handle. See pcs_find_fwnode() for details. Each call to this function
-+ * must be balanced with one to pcs_put().
-+ *
-+ * Return: A PCS on success, %NULL if none was found, or an error pointer on
-+ * *       failure
-+ */
-+static inline struct phylink_pcs *pcs_get_optional(struct device *dev,
-+						   const char *id)
-+{
-+	return _pcs_get(dev, dev_fwnode(dev), id, NULL, true);
-+}
-+
-+/**
-+ * pcs_get_by_fwnode() - Get a PCS based on a fwnode
-+ * @dev: The device requesting the PCS
-+ * @fwnode: The &struct fwnode_handle referencing the PCS
-+ * @id: The name of the PCS
-+ *
-+ * Find and get a PCS, as referenced by @fwnode. See pcs_find_fwnode() for
-+ * details. Each call to this function must be balanced with one to pcs_put().
-+ *
-+ * Return: A PCS on success or an error pointer on failure
-+ */
-+static inline struct phylink_pcs
-+*pcs_get_by_fwnode(struct device *dev, struct fwnode_handle *fwnode,
-+		   const char *id)
-+{
-+	return _pcs_get(dev, fwnode, id, NULL, false);
-+}
-+
-+/**
-+ * pcs_get_by_fwnode_optional() - Optionally get a PCS based on a fwnode
-+ * @dev: The device requesting the PCS
-+ * @fwnode: The &struct fwnode_handle referencing the PCS
-+ * @id: The name of the PCS
-+ *
-+ * Optionally find and get a PCS, as referenced by @fwnode. See
-+ * pcs_find_fwnode() for details. Each call to this function must be balanced
-+ * with one to pcs_put().
-+ *
-+ * Return: A PCS on success, %NULL if none was found, or an error pointer on
-+ * *       failure
-+ */
-+static inline struct phylink_pcs
-+*pcs_get_by_fwnode_optional(struct device *dev, struct fwnode_handle *fwnode,
-+			    const char *id)
-+{
-+	return _pcs_get(dev, fwnode, id, NULL, true);
-+}
-+
-+/**
-+ * pcs_get_by_dev() - Get a PCS from its providing device
-+ * @dev: The device requesting the PCS
-+ * @pcs_dev: The device providing the PCS
-+ *
-+ * Get the first PCS registered by @pcs_dev. Each call to this function must be
-+ * balanced with one to pcs_put().
-+ *
-+ * Return: A PCS on success or an error pointer on failure
-+ */
-+static inline struct phylink_pcs *pcs_get_by_dev(struct device *dev,
-+						 const struct device *pcs_dev)
-+{
-+	return _pcs_get_tail(dev, NULL, pcs_dev);
-+}
-+#else /* CONFIG_PCS */
-+static inline void pcs_put(struct device *dev, struct phylink_pcs *handle)
-+{
-+}
-+
-+static inline struct phylink_pcs *pcs_get(struct device *dev, const char *id)
-+{
-+	return -EOPNOTSUPP;
-+}
-+
-+static inline struct phylink_pcs *pcs_get_optional(struct device *dev,
-+						   const char *id)
-+{
-+	return NULL;
-+}
-+
-+static inline struct phylink_pcs
-+*pcs_get_by_fwnode(struct device *dev, struct fwnode_handle *fwnode,
-+		   const char *id)
-+{
-+	return -EOPNOTSUPP;
-+}
-+
-+static inline struct phylink_pcs
-+*pcs_get_by_fwnode_optional(struct device *dev, struct fwnode_handle *fwnode,
-+			    const char *id)
-+{
-+	return NULL;
-+}
-+
-+static inline struct phylink_pcs *pcs_get_by_dev(struct device *dev,
-+						 const struct device *pcs_dev)
-+{
-+	return -EOPNOTSUPP;
-+}
-+#endif
-+
-+#endif /* PCS_H */
--- 
-2.35.1.1320.gc452695387.dirty
-
+> With this confirmed:
+> Reviewed-by: Louis Chauvet <louis.chauvet@bootlin.com>
+>
+> >    */
+> >   struct _ddebug_descs {
+> >       struct _ddebug *start;
+> > @@ -114,10 +181,16 @@ struct _ddebug_class_maps {
+> >       int len;
+> >   } __packed;
+> >
+> > +struct _ddebug_class_users {
+> > +     struct _ddebug_class_user *start;
+> > +     int len;
+> > +} __packed;
+> > +
+> >   struct _ddebug_info {
+> >       const char *mod_name;
+> >       struct _ddebug_descs descs;
+> >       struct _ddebug_class_maps maps;
+> > +     struct _ddebug_class_users users;
+> >   } __packed;
+> >
+> >   struct _ddebug_class_param {
+> > @@ -218,7 +291,7 @@ void __dynamic_ibdev_dbg(struct _ddebug *descriptor=
+,
+> >    * (|_no_desc):     former gets callsite descriptor as 1st arg (for p=
+rdbgs)
+> >    */
+> >   #define __dynamic_func_call_cls(id, cls, fmt, func, ...) do {       \
+> > -     DEFINE_DYNAMIC_DEBUG_METADATA_CLS(id, cls, fmt);        \
+> > +     DEFINE_DYNAMIC_DEBUG_METADATA_CLS((id), cls, fmt);      \
+> >       if (DYNAMIC_DEBUG_BRANCH(id))                           \
+> >               func(&id, ##__VA_ARGS__);                       \
+> >   } while (0)
+> > diff --git a/kernel/module/main.c b/kernel/module/main.c
+> > index b60f728e36ac..c203b0694f7e 100644
+> > --- a/kernel/module/main.c
+> > +++ b/kernel/module/main.c
+> > @@ -2627,6 +2627,9 @@ static int find_module_sections(struct module *mo=
+d, struct load_info *info)
+> >       mod->dyndbg_info.maps.start =3D section_objs(info, "__dyndbg_clas=
+s_maps",
+> >                                                  sizeof(*mod->dyndbg_in=
+fo.maps.start),
+> >                                                  &mod->dyndbg_info.maps=
+.len);
+> > +     mod->dyndbg_info.users.start =3D section_objs(info, "__dyndbg_cla=
+ss_users",
+> > +                                                sizeof(*mod->dyndbg_in=
+fo.users.start),
+> > +                                                &mod->dyndbg_info.user=
+s.len);
+> >   #endif
+> >
+> >       return 0;
+> > diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
+> > index 35796c290ca3..91a75f724c1a 100644
+> > --- a/lib/Kconfig.debug
+> > +++ b/lib/Kconfig.debug
+> > @@ -2905,12 +2905,26 @@ config TEST_STATIC_KEYS
+> >         If unsure, say N.
+> >
+> >   config TEST_DYNAMIC_DEBUG
+> > -     tristate "Test DYNAMIC_DEBUG"
+> > -     depends on DYNAMIC_DEBUG
+> > +     tristate "Build test-dynamic-debug module"
+> > +     depends on DYNAMIC_DEBUG || DYNAMIC_DEBUG_CORE
+> >       help
+> > -       This module registers a tracer callback to count enabled
+> > -       pr_debugs in a 'do_debugging' function, then alters their
+> > -       enablements, calls the function, and compares counts.
+> > +       This module exercises/demonstrates dyndbg's classmap API, by
+> > +       creating 2 classes: a DISJOINT classmap (supporting DRM.debug)
+> > +       and a LEVELS/VERBOSE classmap (like verbose2 > verbose1).
+> > +
+> > +       If unsure, say N.
+> > +
+> > +config TEST_DYNAMIC_DEBUG_SUBMOD
+> > +     tristate "Build test-dynamic-debug submodule"
+> > +     default m
+> > +     depends on DYNAMIC_DEBUG || DYNAMIC_DEBUG_CORE
+> > +     depends on TEST_DYNAMIC_DEBUG
+> > +     help
+> > +       This sub-module uses a classmap defined and exported by the
+> > +       parent module, recapitulating drm & driver's shared use of
+> > +       drm.debug to control enabled debug-categories.
+> > +       It is tristate, independent of parent, to allow testing all
+> > +       proper combinations of parent=3Dy/m submod=3Dy/m.
+> >
+> >         If unsure, say N.
+> >
+> > diff --git a/lib/Makefile b/lib/Makefile
+> > index d5cfc7afbbb8..2c344138d990 100644
+> > --- a/lib/Makefile
+> > +++ b/lib/Makefile
+> > @@ -84,6 +84,7 @@ obj-$(CONFIG_TEST_SORT) +=3D test_sort.o
+> >   obj-$(CONFIG_TEST_STATIC_KEYS) +=3D test_static_keys.o
+> >   obj-$(CONFIG_TEST_STATIC_KEYS) +=3D test_static_key_base.o
+> >   obj-$(CONFIG_TEST_DYNAMIC_DEBUG) +=3D test_dynamic_debug.o
+> > +obj-$(CONFIG_TEST_DYNAMIC_DEBUG_SUBMOD) +=3D test_dynamic_debug_submod=
+.o
+> >   obj-$(CONFIG_TEST_PRINTF) +=3D test_printf.o
+> >   obj-$(CONFIG_TEST_SCANF) +=3D test_scanf.o
+> >
+> > @@ -226,6 +227,8 @@ obj-$(CONFIG_ARCH_NEED_CMPXCHG_1_EMU) +=3D cmpxchg-=
+emu.o
+> >   obj-$(CONFIG_DYNAMIC_DEBUG_CORE) +=3D dynamic_debug.o
+> >   #ensure exported functions have prototypes
+> >   CFLAGS_dynamic_debug.o :=3D -DDYNAMIC_DEBUG_MODULE
+> > +CFLAGS_test_dynamic_debug.o :=3D -DDYNAMIC_DEBUG_MODULE
+> > +CFLAGS_test_dynamic_debug_submod.o :=3D -DDYNAMIC_DEBUG_MODULE
+> >
+> >   obj-$(CONFIG_SYMBOLIC_ERRNAME) +=3D errname.o
+> >
+> > diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
+> > index a7e1dbb6ead0..53e261dbf81e 100644
+> > --- a/lib/dynamic_debug.c
+> > +++ b/lib/dynamic_debug.c
+> > @@ -29,6 +29,7 @@
+> >   #include <linux/string_helpers.h>
+> >   #include <linux/uaccess.h>
+> >   #include <linux/dynamic_debug.h>
+> > +
+> >   #include <linux/debugfs.h>
+> >   #include <linux/slab.h>
+> >   #include <linux/jump_label.h>
+> > @@ -43,6 +44,8 @@ extern struct _ddebug __start___dyndbg_descs[];
+> >   extern struct _ddebug __stop___dyndbg_descs[];
+> >   extern struct _ddebug_class_map __start___dyndbg_class_maps[];
+> >   extern struct _ddebug_class_map __stop___dyndbg_class_maps[];
+> > +extern struct _ddebug_class_user __start___dyndbg_class_users[];
+> > +extern struct _ddebug_class_user __stop___dyndbg_class_users[];
+> >
+> >   struct ddebug_table {
+> >       struct list_head link;
+> > @@ -159,20 +162,37 @@ static void vpr_info_dq(const struct ddebug_query=
+ *query, const char *msg)
+> >                 query->first_lineno, query->last_lineno, query->class_s=
+tring);
+> >   }
+> >
+> > -static struct _ddebug_class_map *ddebug_find_valid_class(struct ddebug=
+_table const *dt,
+> > -                                                      const char *clas=
+s_string,
+> > -                                                      int *class_id)
+> > +#define vpr_di_info(di_p, msg_p, ...) ({                             \
+> > +     struct _ddebug_info const *_di =3D di_p;                         =
+ \
+> > +     v2pr_info(msg_p " module:%s nd:%d nc:%d nu:%d\n", ##__VA_ARGS__, =
+\
+> > +               _di->mod_name, _di->descs.len, _di->maps.len,         \
+> > +               _di->users.len);                                      \
+> > +     })
+> > +
+> > +static struct _ddebug_class_map *
+> > +ddebug_find_valid_class(struct _ddebug_info const *di, const char *que=
+ry_class, int *class_id)
+> >   {
+> >       struct _ddebug_class_map *map;
+> > +     struct _ddebug_class_user *cli;
+> >       int i, idx;
+> >
+> > -     for_subvec(i, map, &dt->info, maps) {
+> > -             idx =3D match_string(map->class_names, map->length, class=
+_string);
+> > +     for_subvec(i, map, di, maps) {
+> > +             idx =3D match_string(map->class_names, map->length, query=
+_class);
+> >               if (idx >=3D 0) {
+> > +                     vpr_di_info(di, "good-class: %s.%s ", map->mod_na=
+me, query_class);
+> >                       *class_id =3D idx + map->base;
+> >                       return map;
+> >               }
+> >       }
+> > +     for_subvec(i, cli, di, users) {
+> > +             idx =3D match_string(cli->map->class_names, cli->map->len=
+gth, query_class);
+> > +             if (idx >=3D 0) {
+> > +                     vpr_di_info(di, "class-ref: %s -> %s.%s ",
+> > +                                 cli->mod_name, cli->map->mod_name, qu=
+ery_class);
+> > +                     *class_id =3D idx + cli->map->base;
+> > +                     return cli->map;
+> > +             }
+> > +     }
+> >       *class_id =3D -ENOENT;
+> >       return NULL;
+> >   }
+> > @@ -183,8 +203,7 @@ static struct _ddebug_class_map *ddebug_find_valid_=
+class(struct ddebug_table con
+> >    * callsites, normally the same as number of changes.  If verbose,
+> >    * logs the changes.  Takes ddebug_lock.
+> >    */
+> > -static int ddebug_change(const struct ddebug_query *query,
+> > -                      struct flag_settings *modifiers)
+> > +static int ddebug_change(const struct ddebug_query *query, struct flag=
+_settings *modifiers)
+> >   {
+> >       int i;
+> >       struct ddebug_table *dt;
+> > @@ -204,7 +223,8 @@ static int ddebug_change(const struct ddebug_query =
+*query,
+> >                       continue;
+> >
+> >               if (query->class_string) {
+> > -                     map =3D ddebug_find_valid_class(dt, query->class_=
+string, &valid_class);
+> > +                     map =3D ddebug_find_valid_class(&dt->info, query-=
+>class_string,
+> > +                                                   &valid_class);
+> >                       if (!map)
+> >                               continue;
+> >               } else {
+> > @@ -569,7 +589,7 @@ static int ddebug_exec_query(char *query_string, co=
+nst char *modname)
+> >
+> >   /* handle multiple queries in query string, continue on error, return
+> >      last error or number of matching callsites.  Module name is either
+> > -   in param (for boot arg) or perhaps in query string.
+> > +   in the modname arg (for boot args) or perhaps in query string.
+> >   */
+> >   static int ddebug_exec_queries(char *query, const char *modname)
+> >   {
+> > @@ -700,7 +720,7 @@ static int param_set_dyndbg_module_classes(const ch=
+ar *instr,
+> >   /**
+> >    * param_set_dyndbg_classes - classmap kparam setter
+> >    * @instr: string echo>d to sysfs, input depends on map_type
+> > - * @kp:    kp->arg has state: bits/lvl, map, map_type
+> > + * @kp:    kp->arg has state: bits/lvl, classmap, map_type
+> >    *
+> >    * enable/disable all class'd pr_debugs in the classmap. For LEVEL
+> >    * map-types, enforce * relative levels by bitpos.
+> > @@ -737,6 +757,7 @@ int param_get_dyndbg_classes(char *buffer, const st=
+ruct kernel_param *kp)
+> >       default:
+> >               return -1;
+> >       }
+> > +     return 0;
+> >   }
+> >   EXPORT_SYMBOL(param_get_dyndbg_classes);
+> >
+> > @@ -1049,12 +1070,17 @@ static void *ddebug_proc_next(struct seq_file *=
+m, void *p, loff_t *pos)
+> >   static const char *ddebug_class_name(struct _ddebug_info *di, struct =
+_ddebug *dp)
+> >   {
+> >       struct _ddebug_class_map *map;
+> > +     struct _ddebug_class_user *cli;
+> >       int i;
+> >
+> >       for_subvec(i, map, di, maps)
+> >               if (class_in_range(dp->class_id, map))
+> >                       return map->class_names[dp->class_id - map->base]=
+;
+> >
+> > +     for_subvec(i, cli, di, users)
+> > +             if (class_in_range(dp->class_id, cli->map))
+> > +                     return cli->map->class_names[dp->class_id - cli->=
+map->base];
+> > +
+> >       return NULL;
+> >   }
+> >
+> > @@ -1135,9 +1161,85 @@ static const struct proc_ops proc_fops =3D {
+> >       .proc_write =3D ddebug_proc_write
+> >   };
+> >
+> > -static void ddebug_attach_module_classes(struct ddebug_table *dt, stru=
+ct _ddebug_info *di)
+> > +#define vpr_cm_info(cm_p, msg_fmt, ...) ({                           \
+> > +     struct _ddebug_class_map const *_cm =3D cm_p;                    =
+ \
+> > +     v2pr_info(msg_fmt " %s [%d..%d] %s..%s\n", ##__VA_ARGS__,       \
+> > +               _cm->mod_name, _cm->base, _cm->base + _cm->length,    \
+> > +               _cm->class_names[0], _cm->class_names[_cm->length - 1])=
+; \
+> > +     })
+> > +
+> > +static void ddebug_sync_classbits(const struct kernel_param *kp, const=
+ char *modname)
+> > +{
+> > +     const struct _ddebug_class_param *dcp =3D kp->arg;
+> > +
+> > +     /* clamp initial bitvec, mask off hi-bits */
+> > +     if (*dcp->bits & ~CLASSMAP_BITMASK(dcp->map->length)) {
+> > +             *dcp->bits &=3D CLASSMAP_BITMASK(dcp->map->length);
+> > +             v2pr_info("preset classbits: %lx\n", *dcp->bits);
+> > +     }
+> > +     /* force class'd prdbgs (in USEr module) to match (DEFINEr module=
+) class-param */
+> > +     ddebug_apply_class_bitmap(dcp, dcp->bits, ~0, modname);
+> > +     ddebug_apply_class_bitmap(dcp, dcp->bits, 0, modname);
+> > +}
+> > +
+> > +static void ddebug_match_apply_kparam(const struct kernel_param *kp,
+> > +                                   const struct _ddebug_class_map *map=
+,
+> > +                                   const char *mod_name)
+> > +{
+> > +     struct _ddebug_class_param *dcp;
+> > +
+> > +     if (kp->ops !=3D &param_ops_dyndbg_classes)
+> > +             return;
+> > +
+> > +     dcp =3D (struct _ddebug_class_param *)kp->arg;
+> > +
+> > +     if (map =3D=3D dcp->map) {
+> > +             v2pr_info(" kp:%s.%s =3D0x%lx", mod_name, kp->name, *dcp-=
+>bits);
+> > +             vpr_cm_info(map, " %s mapped to: ", mod_name);
+> > +             ddebug_sync_classbits(kp, mod_name);
+> > +     }
+> > +}
+> > +
+> > +static void ddebug_apply_params(const struct _ddebug_class_map *cm, co=
+nst char *mod_name)
+> > +{
+> > +     const struct kernel_param *kp;
+> > +#if IS_ENABLED(CONFIG_MODULES)
+> > +     int i;
+> > +
+> > +     if (cm->mod) {
+> > +             vpr_cm_info(cm, "loaded classmap: %s", mod_name);
+> > +             /* ifdef protects the cm->mod->kp deref */
+> > +             for (i =3D 0, kp =3D cm->mod->kp; i < cm->mod->num_kp; i+=
++, kp++)
+> > +                     ddebug_match_apply_kparam(kp, cm, mod_name);
+> > +     }
+> > +#endif
+> > +     if (!cm->mod) {
+> > +             vpr_cm_info(cm, "builtin classmap: %s", mod_name);
+> > +             for (kp =3D __start___param; kp < __stop___param; kp++)
+> > +                     ddebug_match_apply_kparam(kp, cm, mod_name);
+> > +     }
+> > +}
+> > +
+> > +static void ddebug_apply_class_maps(const struct _ddebug_info *di)
+> > +{
+> > +     struct _ddebug_class_map *cm;
+> > +     int i;
+> > +
+> > +     for_subvec(i, cm, di, maps)
+> > +             ddebug_apply_params(cm, cm->mod_name);
+> > +
+> > +     vpr_di_info(di, "attached %d classmaps to module: %s ", i, cm->mo=
+d_name);
+> > +}
+> > +
+> > +static void ddebug_apply_class_users(const struct _ddebug_info *di)
+> >   {
+> > -     vpr_info("module:%s attached %d classes\n", dt->info.mod_name, dt=
+->info.maps.len);
+> > +     struct _ddebug_class_user *cli;
+> > +     int i;
+> > +
+> > +     for_subvec(i, cli, di, users)
+> > +             ddebug_apply_params(cli->map, cli->mod_name);
+> > +
+> > +     vpr_di_info(di, "attached %d class-users to module: %s ", i, cli-=
+>mod_name);
+> >   }
+> >
+> >   /*
+> > @@ -1173,6 +1275,7 @@ static int ddebug_add_module(struct _ddebug_info =
+*di)
+> >   {
+> >       struct ddebug_table *dt;
+> >       struct _ddebug_class_map *cm;
+> > +     struct _ddebug_class_user *cli;
+> >       int i;
+> >
+> >       if (!di->descs.len)
+> > @@ -1196,14 +1299,18 @@ static int ddebug_add_module(struct _ddebug_inf=
+o *di)
+> >       INIT_LIST_HEAD(&dt->link);
+> >
+> >       dd_mark_vector_subrange(i, dt, cm, di, maps);
+> > +     dd_mark_vector_subrange(i, dt, cli, di, users);
+> >
+> > -     if (di->maps.len)
+> > -             ddebug_attach_module_classes(dt, di);
+> > +     if (dt->info.maps.len)
+> > +             ddebug_apply_class_maps(&dt->info);
+> >
+> >       mutex_lock(&ddebug_lock);
+> >       list_add_tail(&dt->link, &ddebug_tables);
+> >       mutex_unlock(&ddebug_lock);
+> >
+> > +     if (dt->info.users.len)
+> > +             ddebug_apply_class_users(&dt->info);
+> > +
+> >       vpr_info("%3u debug prints in module %s\n", di->descs.len, di->mo=
+d_name);
+> >       return 0;
+> >   }
+> > @@ -1354,8 +1461,10 @@ static int __init dynamic_debug_init(void)
+> >       struct _ddebug_info di =3D {
+> >               .descs.start =3D __start___dyndbg_descs,
+> >               .maps.start  =3D __start___dyndbg_class_maps,
+> > +             .users.start =3D __start___dyndbg_class_users,
+> >               .descs.len =3D __stop___dyndbg_descs - __start___dyndbg_d=
+escs,
+> >               .maps.len  =3D __stop___dyndbg_class_maps - __start___dyn=
+dbg_class_maps,
+> > +             .users.len =3D __stop___dyndbg_class_users - __start___dy=
+ndbg_class_users,
+> >       };
+> >
+> >   #ifdef CONFIG_MODULES
+> > diff --git a/lib/test_dynamic_debug.c b/lib/test_dynamic_debug.c
+> > index 9c3e53cd26bd..1070107f74f1 100644
+> > --- a/lib/test_dynamic_debug.c
+> > +++ b/lib/test_dynamic_debug.c
+> > @@ -6,11 +6,30 @@
+> >    *      Jim Cromie  <jim.cromie@gmail.com>
+> >    */
+> >
+> > -#define pr_fmt(fmt) "test_dd: " fmt
+> > +/*
+> > + * This file is built 2x, also making test_dynamic_debug_submod.ko,
+> > + * whose 2-line src file #includes this file.  This gives us a _submod
+> > + * clone with identical pr_debugs, without further maintenance.
+> > + *
+> > + * If things are working properly, they should operate identically
+> > + * when printed or adjusted by >control.  This eases visual perusal of
+> > + * the logs, and simplifies testing, by easing the proper accounting
+> > + * of expectations.
+> > + *
+> > + * It also puts both halves of the subsystem _DEFINE & _USE use case
+> > + * together, and integrates the common ENUM providing both class_ids
+> > + * and class-names to both _DEFINErs and _USERs.  I think this makes
+> > + * the usage clearer.
+> > + */
+> > +#if defined(TEST_DYNAMIC_DEBUG_SUBMOD)
+> > +  #define pr_fmt(fmt) "test_dd_submod: " fmt
+> > +#else
+> > +  #define pr_fmt(fmt) "test_dd: " fmt
+> > +#endif
+> >
+> >   #include <linux/module.h>
+> >
+> > -/* run tests by reading or writing sysfs node: do_prints */
+> > +/* re-gen output by reading or writing sysfs node: do_prints */
+> >
+> >   static void do_prints(void); /* device under test */
+> >   static int param_set_do_prints(const char *instr, const struct kernel=
+_param *kp)
+> > @@ -29,24 +48,39 @@ static const struct kernel_param_ops param_ops_do_p=
+rints =3D {
+> >   };
+> >   module_param_cb(do_prints, &param_ops_do_prints, NULL, 0600);
+> >
+> > -/*
+> > - * Using the CLASSMAP api:
+> > - * - classmaps must have corresponding enum
+> > - * - enum symbols must match/correlate with class-name strings in the =
+map.
+> > - * - base must equal enum's 1st value
+> > - * - multiple maps must set their base to share the 0-30 class_id spac=
+e !!
+> > - *   (build-bug-on tips welcome)
+> > - * Additionally, here:
+> > - * - tie together sysname, mapname, bitsname, flagsname
+> > - */
+> > -#define DD_SYS_WRAP(_model, _flags)                                  \
+> > -     static unsigned long bits_##_model;                             \
+> > -     static struct _ddebug_class_param _flags##_model =3D {           =
+ \
+> > +#define CLASSMAP_BITMASK(width, base) (((1UL << (width)) - 1) << (base=
+))
+> > +
+> > +/* sysfs param wrapper, proto-API */
+> > +#define DYNAMIC_DEBUG_CLASSMAP_PARAM_(_model, _flags, _init)         \
+> > +     static unsigned long bits_##_model =3D _init;                    =
+ \
+> > +     static struct _ddebug_class_param _flags##_##_model =3D {        =
+ \
+> >               .bits =3D &bits_##_model,                                =
+ \
+> >               .flags =3D #_flags,                                      =
+ \
+> >               .map =3D &map_##_model,                                  =
+ \
+> >       };                                                              \
+> > -     module_param_cb(_flags##_##_model, &param_ops_dyndbg_classes, &_f=
+lags##_model, 0600)
+> > +     module_param_cb(_flags##_##_model, &param_ops_dyndbg_classes,   \
+> > +                     &_flags##_##_model, 0600)
+> > +#ifdef DEBUG
+> > +#define DYNAMIC_DEBUG_CLASSMAP_PARAM(_model, _flags)         \
+> > +     DYNAMIC_DEBUG_CLASSMAP_PARAM_(_model, _flags, ~0)
+> > +#else
+> > +#define DYNAMIC_DEBUG_CLASSMAP_PARAM(_model, _flags)         \
+> > +     DYNAMIC_DEBUG_CLASSMAP_PARAM_(_model, _flags, 0)
+> > +#endif
+> > +
+> > +/*
+> > + * Demonstrate/test DISJOINT & LEVEL typed classmaps with a sys-param.
+> > + *
+> > + * To comport with DRM debug-category (an int), classmaps map names to
+> > + * ids (also an int).  So a classmap starts with an enum; DRM has enum
+> > + * debug_category: with DRM_UT_<CORE,DRIVER,KMS,etc>.  We use the enum
+> > + * values as class-ids, and stringified enum-symbols as classnames.
+> > + *
+> > + * Modules with multiple CLASSMAPS must have enums with distinct
+> > + * value-ranges, as arranged below with explicit enum_sym =3D X inits.
+> > + * To clarify this sharing, declare the 2 enums now, for the 2
+> > + * different classmap types
+> > + */
+> >
+> >   /* numeric input, independent bits */
+> >   enum cat_disjoint_bits {
+> > @@ -60,26 +94,51 @@ enum cat_disjoint_bits {
+> >       D2_LEASE,
+> >       D2_DP,
+> >       D2_DRMRES };
+> > -DECLARE_DYNDBG_CLASSMAP(map_disjoint_bits, DD_CLASS_TYPE_DISJOINT_BITS=
+, 0,
+> > -                     "D2_CORE",
+> > -                     "D2_DRIVER",
+> > -                     "D2_KMS",
+> > -                     "D2_PRIME",
+> > -                     "D2_ATOMIC",
+> > -                     "D2_VBL",
+> > -                     "D2_STATE",
+> > -                     "D2_LEASE",
+> > -                     "D2_DP",
+> > -                     "D2_DRMRES");
+> > -DD_SYS_WRAP(disjoint_bits, p);
+> > -DD_SYS_WRAP(disjoint_bits, T);
+> > -
+> > -/* numeric verbosity, V2 > V1 related */
+> > -enum cat_level_num { V0 =3D 14, V1, V2, V3, V4, V5, V6, V7 };
+> > -DECLARE_DYNDBG_CLASSMAP(map_level_num, DD_CLASS_TYPE_LEVEL_NUM, 14,
+> > -                    "V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7");
+> > -DD_SYS_WRAP(level_num, p);
+> > -DD_SYS_WRAP(level_num, T);
+> > +
+> > +/* numeric verbosity, V2 > V1 related.  V0 is > D2_DRM_RES */
+> > +enum cat_level_num { V0 =3D 16, V1, V2, V3, V4, V5, V6, V7 };
+> > +
+> > +/* recapitulate DRM's multi-classmap setup */
+> > +#if !defined(TEST_DYNAMIC_DEBUG_SUBMOD)
+> > +/*
+> > + * In single user, or parent / coordinator (drm.ko) modules, define
+> > + * classmaps on the client enums above, and then declares the PARAMS
+> > + * ref'g the classmaps.  Each is exported.
+> > + */
+> > +DYNAMIC_DEBUG_CLASSMAP_DEFINE(map_disjoint_bits, DD_CLASS_TYPE_DISJOIN=
+T_BITS,
+> > +                           D2_CORE,
+> > +                           "D2_CORE",
+> > +                           "D2_DRIVER",
+> > +                           "D2_KMS",
+> > +                           "D2_PRIME",
+> > +                           "D2_ATOMIC",
+> > +                           "D2_VBL",
+> > +                           "D2_STATE",
+> > +                           "D2_LEASE",
+> > +                           "D2_DP",
+> > +                           "D2_DRMRES");
+> > +
+> > +DYNAMIC_DEBUG_CLASSMAP_DEFINE(map_level_num, DD_CLASS_TYPE_LEVEL_NUM,
+> > +                           V0, "V0", "V1", "V2", "V3", "V4", "V5", "V6=
+", "V7");
+> > +
+> > +/*
+> > + * now add the sysfs-params
+> > + */
+> > +
+> > +DYNAMIC_DEBUG_CLASSMAP_PARAM(disjoint_bits, p);
+> > +DYNAMIC_DEBUG_CLASSMAP_PARAM(level_num, p);
+> > +
+> > +#else /* TEST_DYNAMIC_DEBUG_SUBMOD */
+> > +
+> > +/*
+> > + * in submod/drm-drivers, use the classmaps defined in top/parent
+> > + * module above.
+> > + */
+> > +
+> > +DYNAMIC_DEBUG_CLASSMAP_USE(map_disjoint_bits);
+> > +DYNAMIC_DEBUG_CLASSMAP_USE(map_level_num);
+> > +
+> > +#endif
+> >
+> >   /* stand-in for all pr_debug etc */
+> >   #define prdbg(SYM) __pr_debug_cls(SYM, #SYM " msg\n")
+> > @@ -115,6 +174,7 @@ static void do_levels(void)
+> >
+> >   static void do_prints(void)
+> >   {
+> > +     pr_debug("do_prints:\n");
+> >       do_cats();
+> >       do_levels();
+> >   }
+> > diff --git a/lib/test_dynamic_debug_submod.c b/lib/test_dynamic_debug_s=
+ubmod.c
+> > new file mode 100644
+> > index 000000000000..672aabf40160
+> > --- /dev/null
+> > +++ b/lib/test_dynamic_debug_submod.c
+> > @@ -0,0 +1,14 @@
+> > +// SPDX-License-Identifier: GPL-2.0
+> > +/*
+> > + * Kernel module for testing dynamic_debug
+> > + *
+> > + * Authors:
+> > + *      Jim Cromie   <jim.cromie@gmail.com>
+> > + */
+> > +
+> > +/*
+> > + * clone the parent, inherit all the properties, for consistency and
+> > + * simpler accounting in test expectations.
+> > + */
+> > +#define TEST_DYNAMIC_DEBUG_SUBMOD
+> > +#include "test_dynamic_debug.c"
+>
+> --
+> Louis Chauvet, Bootlin
+> Embedded Linux and Kernel engineering
+> https://bootlin.com
+>
+>
 
