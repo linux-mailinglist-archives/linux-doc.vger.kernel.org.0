@@ -1,84 +1,51 @@
-Return-Path: <linux-doc+bounces-43287-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43289-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B4C8A8AF04
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Apr 2025 06:28:57 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 870DFA8B03F
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Apr 2025 08:27:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2B0533A860B
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Apr 2025 04:28:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1918B3BF746
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Apr 2025 06:27:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CF4A229B02;
-	Wed, 16 Apr 2025 04:28:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="LuKIu+eE"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8821721E0AF;
+	Wed, 16 Apr 2025 06:27:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDA9B1AB6C8
-	for <linux-doc@vger.kernel.org>; Wed, 16 Apr 2025 04:28:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D5FA21E08B;
+	Wed, 16 Apr 2025 06:27:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744777731; cv=none; b=Be/QgnNt8iv/c0O2cmVFlsvmAY7TOM9tTPlxNBKI5nccw/8zbXsX3ZX+ZnAVBoYa/yhNrlupWGct+aNdbzV86djym5fw+5qIOvXQE3iNxO9nnf4z5Rro6cPyxmkmcsZztnMr+FHRpvFrB7JhkORYwERwkhd/zeNchcyjPwhetZ8=
+	t=1744784837; cv=none; b=jqobvq+oAOgckU5r18rE4fRGYtqGueoig9BO+JBKR0+jFqLov8Lidn307T2kyRekEVXanF4oO+1Xm0EutMAKO04YpgPa12q2V9wbNaA0bslqHvSYWtN9d1hVaeMXl8ufjXmis7yWDBRI4oZ0dlcwJa+Sj7l9Yo++5kgOLrsVU/I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744777731; c=relaxed/simple;
-	bh=4AJ2IRDS3sRCUOnrqIohAaHmEqjAS+xtpAHzbK07RFo=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=S8qsbobOGrQBlJeKBNd2af7uRCqgHomfnRUB6U8Ceh29bXvBC8oGE28eAg45mxQ6BwiJ0Ebf4euUiOqNQxLj8l5lq0xaljGdilyZw1WPeLdqRy8D9SEq/9/cQXIp/BeqkoWNRtLD16mdThIOkQ9OF7dkPHotOSVAg3QO/ckja3s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=LuKIu+eE; arc=none smtp.client-ip=209.85.214.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-22928d629faso61741355ad.3
-        for <linux-doc@vger.kernel.org>; Tue, 15 Apr 2025 21:28:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1744777728; x=1745382528; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=28eKhoko0uR2M75teuQ1e8pqzKdF+6yNeZfykeX93Ik=;
-        b=LuKIu+eECOeJhIiIWyf6nkDDGeMxddwG4NIAPmehpUAHMhrtm8g6YCyUyg44N3ImpN
-         JVKvRb+frku6K+vN2iJuU5PCHciYVByr5DYfjv5L7qxy4KOmRLpai7deza2xHv6fADw4
-         kkq8q2gK+IO08KJzagKg8dfUHNdnyU6b18f9Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1744777728; x=1745382528;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=28eKhoko0uR2M75teuQ1e8pqzKdF+6yNeZfykeX93Ik=;
-        b=anibIgTxaqYEPc7V/w3lY9s8IQNVxdiQp3S9d/EajSVzN1yUb7FimbIiV/tEsw1d04
-         kLK9Ern1H0etkY+326RE3TauCDfkw1Ybz6aQL6gJDmQftiTh7nwX/zudnQnfC8SB1qsp
-         8MqzSciYf2q0zU4h9vFb5BZaHOttyaG1d1Jz11A52Hf6qxOncvBmQ6Y3xFd9+YlAFG5q
-         jzQAEi33corlyHUe6xlssJeuHHVrgz0lMch46lQjqujsof4wY6CVo+qD17bcHOPToXHH
-         fSbzebaJSTqVTmd+JV1G3ZTqo1fgykz28le6mhlEnZpbRuJqeA8D+SbBp6ylXUbBP3T3
-         q9mQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXo2ZmYDJc/i0xUBnarMfq0I7YaVn2Di2zga0oKVHaleKgd/97O8FOXC/AN549JK4qgljdcMWKufKc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw8wai9OOIp3OJu9RHN0eOukdCmlFtVs7yrCSBM2oBDTNeuXDr6
-	xZ05pcKB+9PHhHW/648k3hJuPm9ycLHt7WNGl8bjxf1vNF3vfj1Gi1LsyJERFw==
-X-Gm-Gg: ASbGncsKB6OBlSpnKe4/+nQT8U4wRG5s1KX2u7kYnTPPepY8yen4mQniw4PYqJg/M6M
-	zPWsKUIAZfgii9LwLwuz+M/Oxfy0Y2tP8GCgBMARiqjknK49Xo8QR9eaeMOJHpXN0DTLzOA3k+e
-	X59vE5fMKoPi0rzGz18sKRr5oscawtHo+MkTd/SrhN0eOdneJ0S/CJKfWNnmKwXfCR7UQCFgxmt
-	ybDCv86EQdWiyu2q6gbLrcm+p1iWn4W06jso3VXsOwueTvpTZ741SOPq75CU00H6X0UktnfSErp
-	hrcVBd0i5txvM7qXrerGOwXo2LrLpC31l8I8w4MQojY7AdQ8Xl9QEJGCrWTP+YQDC5M=
-X-Google-Smtp-Source: AGHT+IFNkpm7oHWOoQ09eBUsjMI/rG4FOnzXtR/BKkkzvjs1ACVlrxBF35cBtCNsTLJD3pbzQs790w==
-X-Received: by 2002:a17:903:228a:b0:223:2361:e855 with SMTP id d9443c01a7336-22c3595bc8fmr6134445ad.39.1744777728088;
-        Tue, 15 Apr 2025 21:28:48 -0700 (PDT)
-Received: from tigerii.tok.corp.google.com ([2401:fa00:8f:203:26d4:1f69:95c5:8f04])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22c33e63062sm4267265ad.0.2025.04.15.21.28.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Apr 2025 21:28:47 -0700 (PDT)
-From: Sergey Senozhatsky <senozhatsky@chromium.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Andrew Morton <akpm@linux-foundation.org>
-Cc: Minchan Kim <minchan@kernel.org>,
+	s=arc-20240116; t=1744784837; c=relaxed/simple;
+	bh=mrvOxsBtv8mVk1WXIRTpfq/489t4CJkuWe57iKSweXM=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=jK1uoGCqpiacndcGal3d44xySjpPtGEN7yRFOa1lh51apSXdmvTPo/Zuk2wTdm+Kc01qFQq2lM+T08Df5maSXVFAqNdWHDcjZYrT92OfBmZ0d4iqf4+pPrOm7BbDCOSOQgjYAxH5dheDIk4bFLTVRcDUdlTR4l14dgolSovkDsY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BCD48152B;
+	Tue, 15 Apr 2025 23:27:11 -0700 (PDT)
+Received: from a077893.blr.arm.com (a077893.blr.arm.com [10.162.16.49])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 35AEB3F694;
+	Tue, 15 Apr 2025 23:27:10 -0700 (PDT)
+From: Anshuman Khandual <anshuman.khandual@arm.com>
+To: linux-doc@vger.kernel.org
+Cc: Anshuman Khandual <anshuman.khandual@arm.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
 	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Shin Kawamura <kawasin@google.com>
-Subject: [PATCH] Documentation: zram: update IDLE pages tracking documentation
-Date: Wed, 16 Apr 2025 13:27:59 +0900
-Message-ID: <20250416042833.3858827-1-senozhatsky@chromium.org>
-X-Mailer: git-send-email 2.49.0.604.gff1f9ca942-goog
+	linux-arm-kernel@lists.infradead.org
+Subject: [PATCH] documentation: Add nodebugmon for arm64 platforms
+Date: Wed, 16 Apr 2025 11:57:06 +0530
+Message-Id: <20250416062706.2735563-1-anshuman.khandual@arm.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -87,87 +54,42 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Move IDLE pages tracking into a separate chapter because there
-are multiple features that use (or depend on) it either in
-built-in variant ("mark all") or in extended variant (ac-time
-tracking).
+Add an entry for nodebugmon which has been used on arm64 platforms.
 
-In addition, recompression doesn't require memory tracking
-to be enabled in order to be able to perform idle recompression.
-
-Reported-by: Shin Kawamura <kawasin@google.com>
-Signed-off-by: Sergey Senozhatsky <senozhatsky@chromium.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Will Deacon <will@kernel.org>
+Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-arm-kernel@lists.infradead.org
+Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
 ---
- Documentation/admin-guide/blockdev/zram.rst | 41 +++++++++++----------
- 1 file changed, 21 insertions(+), 20 deletions(-)
+This patch applies on v6.15-rc2
 
-diff --git a/Documentation/admin-guide/blockdev/zram.rst b/Documentation/admin-guide/blockdev/zram.rst
-index b8d36134a151..3e273c1bb749 100644
---- a/Documentation/admin-guide/blockdev/zram.rst
-+++ b/Documentation/admin-guide/blockdev/zram.rst
-@@ -317,6 +317,26 @@ a single line of text and contains the following stats separated by whitespace:
- Optional Feature
- ================
+ Documentation/admin-guide/kernel-parameters.txt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index d9fd26b95b34..f4a313d6c0ab 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -4085,6 +4085,13 @@
+ 			/sys/module/printk/parameters/console_suspend) to
+ 			turn on/off it dynamically.
  
-+IDLE pages tracking
-+-------------------
++	nodebugmon
++			[HW,ARM64] Disable debug monitor
++			Disables the debug monitor exception handling on the platform
++			regardless whether breakpoints and watchpoints are programmed
++			or not. This prevents debug exceptions from being enabled via
++			MDSCR_EL1 register.
 +
-+zram has built-in support for idle pages tracking (that is, allocated but
-+not used pages). This feature is useful for e.g. zram writeback and
-+recompression. In order to mark pages as idle, execute the following command::
-+
-+	echo all > /sys/block/zramX/idle
-+
-+This will mark all allocated zram pages as idle. The idle mark will be
-+removed only when the page (block) is accessed (e.g. overwritten or freed).
-+Additionally, when CONFIG_ZRAM_TRACK_ENTRY_ACTIME is enabled, pages can be
-+marked as idle based on how many seconds have passed since the last access to
-+a particular zram page::
-+
-+	echo 86400 > /sys/block/zramX/idle
-+
-+In this example, all pages which haven't been accessed in more than 86400
-+seconds (one day) will be marked idle.
-+
- writeback
- ---------
+ 	no_debug_objects
+ 			[KNL,EARLY] Disable object debugging
  
-@@ -331,24 +351,7 @@ If admin wants to use incompressible page writeback, they could do it via::
- 
- 	echo huge > /sys/block/zramX/writeback
- 
--To use idle page writeback, first, user need to declare zram pages
--as idle::
--
--	echo all > /sys/block/zramX/idle
--
--From now on, any pages on zram are idle pages. The idle mark
--will be removed until someone requests access of the block.
--IOW, unless there is access request, those pages are still idle pages.
--Additionally, when CONFIG_ZRAM_TRACK_ENTRY_ACTIME is enabled pages can be
--marked as idle based on how long (in seconds) it's been since they were
--last accessed::
--
--        echo 86400 > /sys/block/zramX/idle
--
--In this example all pages which haven't been accessed in more than 86400
--seconds (one day) will be marked idle.
--
--Admin can request writeback of those idle pages at right timing via::
-+Admin can request writeback of idle pages at right timing via::
- 
- 	echo idle > /sys/block/zramX/writeback
- 
-@@ -499,8 +502,6 @@ attempt to recompress:::
- 
- 	echo "type=huge_idle max_pages=42" > /sys/block/zramX/recompress
- 
--Recompression of idle pages requires memory tracking.
--
- During re-compression for every page, that matches re-compression criteria,
- ZRAM iterates the list of registered alternative compression algorithms in
- order of their priorities. ZRAM stops either when re-compression was
 -- 
-2.49.0.604.gff1f9ca942-goog
+2.25.1
 
 
