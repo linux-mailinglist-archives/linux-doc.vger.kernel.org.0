@@ -1,152 +1,175 @@
-Return-Path: <linux-doc+bounces-43477-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43479-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7531DA91CF3
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Apr 2025 14:52:14 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0818A91DEB
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Apr 2025 15:27:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8555B446D84
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Apr 2025 12:52:13 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8BA161892C7A
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Apr 2025 13:27:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3918278F5E;
-	Thu, 17 Apr 2025 12:52:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 109EF223320;
+	Thu, 17 Apr 2025 13:26:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="NltSaAaH"
+	dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b="Z5w3AX3q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net [217.70.183.198])
+Received: from smtpbg150.qq.com (smtpbg150.qq.com [18.132.163.193])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A62D28E37;
-	Thu, 17 Apr 2025 12:52:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.198
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7DB2250F8;
+	Thu, 17 Apr 2025 13:26:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=18.132.163.193
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744894326; cv=none; b=d+WWnD73MPgH+7/W8oCMsp/eo7GmNL7DK9H2Mp3YdmzQ5vCu5eEvcEGCa+lUTM4OUSMMN2LjG/sZ5CnrUWhb1jbDdX+5nvuqjwO79VmAqHaS9o2OPf129A+6pM2FTKB35c8QqLYlBz3W86o25t/06s9kg4HqbbTjdmdwy4SkY8g=
+	t=1744896376; cv=none; b=ftrGBcD5sJx1C5SsMwGnXKQTv58ka28F7hVFfFxPdkA+7HcK0rvOJrY42hf2d9vcoAZfN0/ntHWeIHWEXjWDcQcKoHuYOPltzMJfk2lbvAHvaYu+WS7OXx0nRER/6XzZY+wWPfng0osxK+coviVEjKLn2h0g8tDTfIXGfBNtYMg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744894326; c=relaxed/simple;
-	bh=vwg+JpeNDtpdq8I/n2KI09Z8P3wJ2LAphm0xoV+Veak=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tfOJyVHfbMaj3OOKPFT9A7JZuTRN/nmClD2b6iPoeTprLhnjKr9fXIBlKMwDM/UxY9vRIiyLMEeq6NILBhRGCm/rTX2VTpjZk7gLMklk4dMQMS1t73uuEVorwZ+Sry/GVIdHMFxMiYmdbcDcBiZrY5OcmdNpKm3DBDzXhGefNIQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=NltSaAaH; arc=none smtp.client-ip=217.70.183.198
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 8B84C4398B;
-	Thu, 17 Apr 2025 12:51:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1744894315;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zEQX9dTK5OyX90/v7y2AQbh6bo08Y0ofbCQ+5EMbGpU=;
-	b=NltSaAaHRmq9kixVw4vlEq72DFEmVEvEOjzZxfDRfluWkh1O39Z4pHjQGRSHy7KxtHN+JJ
-	UuJqSFElgpkny4XrnUoELw1mRxcjR+9gPSPZyeLB2WqH6UG1XQ4uBY28UtjNFKthVD3Yf/
-	YYpHzPO4xoGmfAGTf8OeoSm9PP34h75TgCVbJfENfwNp0LT9Er9ZPG8ZvXbAF6a61s50RG
-	TgVxzo3D6sWd4tFKEm3ZQmgm95LTbL8FT/noe0GtBl0DmCj5RMSMJo/o08flh3A+1fGh+3
-	ssXcJOwXcuRZlXQ/f5ftXFCnKXZxaGITCbAr3Mxhgvkm+YfyLu+zJZoLJJY31g==
-Date: Thu, 17 Apr 2025 14:51:52 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Maxime Chevallier <maxime.chevallier@bootlin.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, Oleksij Rempel <o.rempel@pengutronix.de>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet
- <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
- <pabeni@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Donald Hunter
- <donald.hunter@gmail.com>, Rob Herring <robh@kernel.org>, Andrew Lunn
- <andrew+netdev@lunn.ch>, Simon Horman <horms@kernel.org>, Heiner Kallweit
- <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Liam
- Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Thomas
- Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
- linux-doc@vger.kernel.org, Kyle Swenson <kyle.swenson@est.tech>, Dent
- Project <dentproject@linuxfoundation.org>, kernel@pengutronix.de,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v8 02/13] net: pse-pd: Add support for
- reporting events
-Message-ID: <20250417145152.5e6718b1@kmaincent-XPS-13-7390>
-In-Reply-To: <20250417144349.5b30afec@fedora.home>
-References: <20250416-feature_poe_port_prio-v8-0-446c39dc3738@bootlin.com>
-	<20250416-feature_poe_port_prio-v8-2-446c39dc3738@bootlin.com>
-	<20250417144349.5b30afec@fedora.home>
-Organization: bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1744896376; c=relaxed/simple;
+	bh=Fq7IdhdrnNct8iqWEVHnFE0MFeEMqOyDb8u/JYxncXo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ma39oz2YrOUd4qzVMdiR5HB3U43PB/60AQN2FqPK3Qe/ovJGaMb0a5vjlH68oB72UzqbfpD9qABU2Iyy1amuxKe928MHmxVYTPtU9FFTTub2hwLRDHcg0eSPMauHUd2xUuPhZE3KDYdmtzo6ZDvKo8po8s+9/7sOFEQs35MxjpE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com; spf=pass smtp.mailfrom=uniontech.com; dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b=Z5w3AX3q; arc=none smtp.client-ip=18.132.163.193
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uniontech.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
+	s=onoh2408; t=1744896350;
+	bh=XxR2ZHiLVR1ar1sC2oj9zb4tbB77P/btLN2y/3RrHb0=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=Z5w3AX3qNbWE9BHreocOXmzJj3A7K3JI4mwq6LyftTa+T+HZXoxNRGjNrqd/J45Iv
+	 61B4q5tvy7ycXFQgUgyvpwarl2k2qiDRU/G1FyxCeYMQLdT4W5J3BdAWjGXa+8b01j
+	 YpFjrB4eexSvbztrfL+WICpHSLBUW0xSKG7kzgAI=
+X-QQ-mid: zesmtpip2t1744896298t85e739b0
+X-QQ-Originating-IP: LtLexsaQxwKAHGWspoZ7PEzBQe1WlPqyohCnjpVi16s=
+Received: from localhost.localdomain ( [localhost])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Thu, 17 Apr 2025 21:24:55 +0800 (CST)
+X-QQ-SSF: 0002000000000000000000000000000
+X-QQ-GoodBg: 1
+X-BIZMAIL-ID: 16509579133343517929
+EX-QQ-RecipientCnt: 20
+From: WangYuli <wangyuli@uniontech.com>
+To: corbet@lwn.net,
+	tsbogend@alpha.franken.de
+Cc: akpm@linux-foundation.org,
+	jeffxu@chromium.org,
+	lorenzo.stoakes@oracle.com,
+	kees@kernel.org,
+	Liam.Howlett@oracle.com,
+	wangyuli@uniontech.com,
+	hca@linux.ibm.com,
+	takumaw1990@gmail.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mips@vger.kernel.org,
+	thomas.weissschuh@linutronix.de,
+	tglx@linutronix.de,
+	namcao@linutronix.de,
+	zhanjun@uniontech.com,
+	niecheng1@uniontech.com,
+	guanwentao@uniontech.com,
+	Erpeng Xu <xuerpeng@uniontech.com>
+Subject: [PATCH] mseal sysmap: enable mips with LOONGSON64
+Date: Thu, 17 Apr 2025 21:24:10 +0800
+Message-ID: <7EB087B72C4FBDD3+20250417132410.404043-1-wangyuli@uniontech.com>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvvdelfeduucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhhoofggtgfgsehtqhertdertdejnecuhfhrohhmpefmohhrhicuofgrihhntggvnhhtuceokhhorhihrdhmrghinhgtvghnthessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepgfdutdefvedtudegvefgvedtgfdvhfdtueeltefffefffffhgfetkedvfeduieeinecuffhomhgrihhnpegsohhothhlihhnrdgtohhmnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehkmhgrihhntggvnhhtqdgirffuqddufedqjeefledtpdhmrghilhhfrhhomhepkhhorhihrdhmrghinhgtvghnthessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepvdejpdhrtghpthhtohepmhgrgihimhgvrdgthhgvvhgrlhhlihgvrhessghoohhtlhhinhdrtghomhdprhgtphhtthhopegrnhgurhgvfieslhhunhhnrdgthhdprhgtphhtthhopehordhrvghmphgvlhesphgvnhhguhhtrhhonhhigidruggvpdhrtghpthhtohepuggrvhgvmhesuggrvhgvmhhlohhfthdrnhgvt
- hdprhgtphhtthhopegvughumhgriigvthesghhoohhglhgvrdgtohhmpdhrtghpthhtohepkhhusggrsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehprggsvghnihesrhgvughhrghtrdgtohhmpdhrtghpthhtoheptghorhgsvghtsehlfihnrdhnvght
-X-GND-Sasl: kory.maincent@bootlin.com
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:uniontech.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: MZqCzNCKZzA8shl6Scu7inVgMrHsqaT5zreO+30jgecaDaySn7iNzCTl
+	s6tHaTudRJU2DgB55bZaB79xuD5LVY0D9b4InOpMuKDwCGJIWkCKx48/9G5sCw4bM3Cp/zi
+	2CGjq0+tSj2dfek2Vbq/s2nkhOIBXN7LTZQK+dkneFAQwtHTr0RkGwAtvfJj4zDbT61XMF7
+	uUG2ly54lXpFd5aedYipi58xRylJdrTIxv7GNNGW76FFplKQx8jhzwSc1Oc1lHuwzsJ5UJE
+	DK2o2CZAcBKw+RWGjlvczWFiTX4XlA1ZoJZJ01nrJGnE5Q0Ra4yhA/eYBeyAfIcZeXwPmcg
+	07o3tnA8ffsLEvIybQAVzSf+T05cFpkZCN4iaPrZ5AwN1kalH3JHjsm/ZjUd+CbH6yIQeds
+	03eQnApVvtQH6XkF9sRpBfgZyDS8oaHJzpaF23w2YfcJNC2g+TlEsiaT62RpgQ1dBZO/F1c
+	PAQpDn48DeZZVWOc+ll++Uy26QetjTi1u5YeMyVQBX5fJLGeV32BEaD7k6x/Y8wHYNmSiHI
+	SrX5KzLZZpTjiIULPh2Ru7k65SEQTTmZmp4SlCzvFuH/06YBQRWxGx+MbyOx5V4WAAE9TGn
+	bXBLrYHQjrTz2kGxjMXF2pyJBJQwo0yMBy5JXRyufF0pLjoY6jkl72xDRi+Kv1O51QGJTx4
+	ylIoO4kvCGsTv65TSAbwblAVUpNTw34pWWOeTfaQz7nw9SvvfazADa1uO4bPScVM3KZy1wn
+	Erd2Ku8TwjcOxeAUXzpuN+ZFIogunOuC/9ruF65fdUbuS2UJc3xTVbaf2cd3PKAvFTyEH+A
+	rTt4n8Z5Bt+u0Y4FX4FJxBQBaxorChOep7YKcpAHVM0p8D3cwSVwzZ9Twnk/KLbrZBUUX2Z
+	vQ0BlaQ0jXXAv7cL+jkQ9WAKfScYRTc1yyW6cMJHNYY3w798E9PQ/Gt+RFV1/YUldZVhy2a
+	DC2isu3IakcsBQaVahlMuZHXIinn/9Tx0acd1tTJvcKtQPMEiORg7Tiff7d9oj+nCeecsLL
+	9wjk+DBzX/jMWApXUxtd4r0V8kFIt2eQ9BkxFSvMq1e0xYqv1sTdiAAzoMuP3Xn3S45d8Fz
+	YQUEwBKtk/L
+X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+X-QQ-RECHKSPAM: 0
 
-On Thu, 17 Apr 2025 14:43:49 +0200
-Maxime Chevallier <maxime.chevallier@bootlin.com> wrote:
+Provide support for CONFIG_MSEAL_SYSTEM_MAPPINGS on mips with
+CPU_LOONGSON64, covering the vdso.
 
-> Hi K=C3=B6ry,
->=20
-> On Wed, 16 Apr 2025 15:44:17 +0200
-> Kory Maincent <kory.maincent@bootlin.com> wrote:
->=20
-> > From: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
-> >=20
-> > Add support for devm_pse_irq_helper() to register PSE interrupts and re=
-port
-> > events such as over-current or over-temperature conditions. This follow=
-s a
-> > similar approach to the regulator API but also sends notifications usin=
-g a
-> > dedicated PSE ethtool netlink socket.
-> >=20
-> > Introduce an attached_phydev field in the pse_control structure to store
-> > the phydev attached to the PSE PI, ensuring that PSE ethtool notificati=
-ons
-> > are sent to the correct network interface.
-> >=20
-> > The attached_phydev pointer is directly tied to the PHY lifecycle. It
-> > is set when the PHY is registered and cleared when the PHY is removed.
-> > There is no need to use a refcount, as doing so could interfere with
-> > the PHY removal process.
-> >=20
-> > Signed-off-by: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
-> > Reviewed-by: Oleksij Rempel <o.rempel@pengutronix.de>
-> > --- =20
->=20
-> [...]
->=20
-> > +void ethnl_pse_send_ntf(struct phy_device *phydev, unsigned long notif=
-s,
-> > +			struct netlink_ext_ack *extack)
-> > +{
-> > +	struct net_device *netdev =3D phydev->attached_dev;
-> > +	struct genl_info info;
-> > +	void *reply_payload;
-> > +	struct sk_buff *skb;
-> > +	int reply_len;
-> > +	int ret;
-> > +
-> > +	if (!netdev || !notifs)
-> > +		return;
-> > +
-> > +	ethnl_info_init_ntf(&info, ETHTOOL_MSG_PSE_NTF);
-> > +	info.extack =3D extack;
-> > +
-> > +	reply_len =3D ethnl_reply_header_size() +
-> > +		    nla_total_size(sizeof(u32)); /* _PSE_NTF_EVENTS */
-> > +
-> > +	skb =3D genlmsg_new(reply_len, GFP_KERNEL); =20
->=20
-> I think you need to check skb here before using it.
+NOTE:
+  There is significant diversity among devices within the MIPS
+architecture, which extends to their kernel code implementations.
+  My testing capabilities are limited to Loongson 3A4000/3B4000
+CPUs.
+  Consequently, I have not enabled mseal sysmap support for the
+entirety of mips64, as I lack the necessary devices for testing.
 
-Oh, thanks for spotting that!
+Tested-by: Erpeng Xu <xuerpeng@uniontech.com>
+Tested-by: WangYuli <wangyuli@uniontech.com>
+Signed-off-by: WangYuli <wangyuli@uniontech.com>
+---
+NOTE:
+  1. As I am unaware whether other 64-bit MIPS devices function
+properly, I have not yet modified the MIPS status in
+mseal_sys_mappings/arch-support.txt.
+  2. From my perspective, it appears that this architecture also
+does not rely on remapping the VDSO, VVAR, or any other special
+mapping. Nevertheless, I believe it would be best to get further
+confirmation from more expert individuals such as Lorenzo Stoakes
+and Thomas Bogendoerfer.
+---
+ Documentation/userspace-api/mseal.rst | 2 +-
+ arch/mips/Kconfig                     | 1 +
+ arch/mips/kernel/vdso.c               | 3 ++-
+ 3 files changed, 4 insertions(+), 2 deletions(-)
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+diff --git a/Documentation/userspace-api/mseal.rst b/Documentation/userspace-api/mseal.rst
+index ea9b11a0bd89..968a6db8afb7 100644
+--- a/Documentation/userspace-api/mseal.rst
++++ b/Documentation/userspace-api/mseal.rst
+@@ -144,7 +144,7 @@ Use cases
+   architecture.
+ 
+   The following architectures currently support this feature: x86-64, arm64,
+-  loongarch and s390.
++  loongarch, mips64el (loongson3) and s390.
+ 
+   WARNING: This feature breaks programs which rely on relocating
+   or unmapping system mappings. Known broken software at the time
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index fc0772c1bad4..055a185deb07 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -25,6 +25,7 @@ config MIPS
+ 	select ARCH_USE_QUEUED_RWLOCKS
+ 	select ARCH_USE_QUEUED_SPINLOCKS
+ 	select ARCH_SUPPORTS_HUGETLBFS if CPU_SUPPORTS_HUGEPAGES
++	select ARCH_SUPPORTS_MSEAL_SYSTEM_MAPPINGS if CPU_LOONGSON64
+ 	select ARCH_WANT_DEFAULT_TOPDOWN_MMAP_LAYOUT if MMU
+ 	select ARCH_WANT_IPC_PARSE_VERSION
+ 	select ARCH_WANT_LD_ORPHAN_WARN
+diff --git a/arch/mips/kernel/vdso.c b/arch/mips/kernel/vdso.c
+index de096777172f..6221f2dcedb1 100644
+--- a/arch/mips/kernel/vdso.c
++++ b/arch/mips/kernel/vdso.c
+@@ -167,7 +167,8 @@ int arch_setup_additional_pages(struct linux_binprm *bprm, int uses_interp)
+ 	/* Map VDSO image. */
+ 	vma = _install_special_mapping(mm, vdso_addr, image->size,
+ 				       VM_READ | VM_EXEC |
+-				       VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC,
++				       VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC |
++				       VM_SEALED_SYSMAP,
+ 				       &image->mapping);
+ 	if (IS_ERR(vma)) {
+ 		ret = PTR_ERR(vma);
+-- 
+2.49.0
+
 
