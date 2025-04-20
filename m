@@ -1,173 +1,133 @@
-Return-Path: <linux-doc+bounces-43632-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43635-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4294CA94545
-	for <lists+linux-doc@lfdr.de>; Sat, 19 Apr 2025 21:46:33 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3495A9467B
+	for <lists+linux-doc@lfdr.de>; Sun, 20 Apr 2025 04:34:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DBFB63B5E5C
-	for <lists+linux-doc@lfdr.de>; Sat, 19 Apr 2025 19:46:15 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B6B7F173706
+	for <lists+linux-doc@lfdr.de>; Sun, 20 Apr 2025 02:34:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 744191DEFF5;
-	Sat, 19 Apr 2025 19:46:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9CB2219EB;
+	Sun, 20 Apr 2025 02:34:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SwX29j3h"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aYs2DN2H"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AD254A3C;
-	Sat, 19 Apr 2025 19:46:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56C78D515;
+	Sun, 20 Apr 2025 02:34:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745091988; cv=none; b=Tsh3Dndx8dbWvgj0SZB2jvpw6o9LYb62slVJKdrO5fJMgYWusY84/8boAInE6FA3d2oOhN5zG731U+ivphX64GdbdIPen/7Qj21mCX2wbEdOLyOGxdiEqAnN4v+eZ3L7hKtNcoBB8fm0D1okB6TjJwt2ymE8UGDFha0w6BSr6To=
+	t=1745116459; cv=none; b=gsyho8UdIik3W43YVk+SlOV4qVsngoRQgzi8SqjNYCeEkHrOdF9tLoJ6oLmSStw3a6dZ0ZxJXpK+Q057E9F0941NTpoMHdPxKGJ1ExWkv8hud+PPYmj9xRclk3RyCPUFEzf2td5UaX8ZrgSGtrL4nOkMJQQu1vBJwUwYuBYeJyE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745091988; c=relaxed/simple;
-	bh=oJfRg4zIMZ3tXriZj/afkIrse+w7HayBW5i6gEbnvu0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=tOfnfB7XpOBh0pT+vvnhwsZ4Sd0C+STGIF/NrtLOOx4Sg9NJY3nHp5tej75DfOcpEi2f+oNtLUG1V9w6L47cWyndNkgjskmkCVsqnTrikUi4dWwjP5KoFk+2fKAukC9I9ejB5o6mWw8ElqzdUqWtnYMVeGfnm6yRvde2iypiSz0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SwX29j3h; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D1D78C4CEED;
-	Sat, 19 Apr 2025 19:46:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745091987;
-	bh=oJfRg4zIMZ3tXriZj/afkIrse+w7HayBW5i6gEbnvu0=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=SwX29j3hTiqKf4CGUwjD6f9FhEQoJyzKfmS2evYs4QIxoenmYCHkz5UgvL6boIzqI
-	 mC1ZczduyJEapXUJFt6qZEilotmAoUIwrw8Qb6Tdf4Wt1odDuqOg0Jjt/elcVyW0aI
-	 aX8EGi3AC7ora8WnE838of+XsknPvmsdgMjYS/MgyMY6Cjt3in/zyVsxkXrxAUqmqM
-	 dZDJjgSvTzODWiHJw7arxMO+YQ7cY4JE2eNmCiIi5OIVimvUrV80FrLfyg/b7LjUgi
-	 UUHzWL0hm+uYQjB1zeNpPHLuu4VNh/rCgjzk2isBNBSmY0GTklVE3iII/vwYmYSY/3
-	 JCGmiT53BK4OA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBD0CC369D3;
-	Sat, 19 Apr 2025 19:46:27 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Sat, 19 Apr 2025 21:46:25 +0200
-Subject: [PATCH v5 2/2] arm64: dts: qcom: sdm845-oneplus: Add alert-slider
+	s=arc-20240116; t=1745116459; c=relaxed/simple;
+	bh=zpRG+4ESqx8weMv/lLvyN70WbZRncAlm97xmEM8W+zo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mQ3B8vT/nH3X8ETdSkhRTgfmZt7I/P8oiO/gjOCXMgerQUempUY4/e2LsYkOx6j0sLuU4H7538R1KlShcvKNurZ5J4jVnEebw3x+7dAY0yrkh/ZiTBdVX6TOKOoLaEKpBdtVfz9+SFgusvGVb8kO0Gry81SUWbElkFWQQlBoXrg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aYs2DN2H; arc=none smtp.client-ip=209.85.215.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-af51596da56so2363593a12.0;
+        Sat, 19 Apr 2025 19:34:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745116457; x=1745721257; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Cer7pacIvzGQHZLSRkFuB7iMRA/qUESA+zB+RrPnUOs=;
+        b=aYs2DN2HDv7zd4jqBfl/QQZJZJONrVY6DNuvOwY7G+tU3CsAWcLenY/BebTaERZMDm
+         7W/1JzNbYSLnRJu2oAMmuEi/eMsnIjneRnGrSXLRoAzKPyCAa8vcBxhTAMLjnLA/YWY6
+         cYyCwzSMvOIbQo71VUCkZBa7Qiezjijn4A78DnVHOXjPMyGYOQ+6mTYq0Bu+XsfG07uZ
+         oLEieoEZm836Aa5SJUQxdWqmkP5RGR/lsvTrbEOKV+IjiLGbLxWRDryN2JVerrwI0wti
+         NCUhby/rtrX/g5czDS/9wH6oj7qyiOHA6bqoF3yMbluUI1iLWFkE1bZ2aZ6rsd+JR92+
+         Jz9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745116457; x=1745721257;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Cer7pacIvzGQHZLSRkFuB7iMRA/qUESA+zB+RrPnUOs=;
+        b=C7Cbe9UJ8XFxZBeHjtAFgIi+xWdNJ8eJuxkVqEZWQfdUOVAfJqe1DKhpZu6MaqVcVH
+         YWJLNOiWDDq8frW6OnJrtrtgU09e8r4rXKyYIfEGCMs+0cg8JmQ3sAbKeYXGxkZs8eJL
+         IrV7HcWGA8w/sw4O+HsvUFqaggobjDjHcRNaoLZt4MMZxUrG444QC7XhkoKr7vsMpfAL
+         YhCPVweoXCwJYJ4M5TqwCBT/m03g0tbZJHNSjOK0H+O2KK0fMoBVBNxFqtb1rYr0pD4F
+         C+nVL/YQSTICygKjihGnCTthUAOoJ6BAXDF4PyT8J6XdjXpqa9B94k0mScCovWEgzJo4
+         9Nig==
+X-Forwarded-Encrypted: i=1; AJvYcCUgYOpVZA8G9RAdkev5S7X0tX63G/zWpoKsnTkrkZ6yk7jFkWwcEAzYcuvMjeYPXYcjatqzP5HRFCU=@vger.kernel.org, AJvYcCWjtWT/INhDZU7wjM0nVRcN7eIjyBEouQ9aqqgI0rw8BQ5mGJ0pigobJgUYAeDstY8zIWxbWZjx4X+5P9Hf@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx8kqjp7vzJCmWZMTXmFJAdMoSdX52fLtpUGAt/1Ff0Grr1Yz35
+	qJRXN4A+FChBGomRD1741j1cZP8Ac/7bOltW6pI1IUykG2VLU/DU
+X-Gm-Gg: ASbGnct02TO0Zmfa2GnOp1oWETxuSp1RBoMveRThUB1WEM07i7wt/otab/snQuQZX8f
+	1YJHSxl01+28vr8hxfLo7Uuie5AoB7RL9UIdBP0zEQZDZc7WO3ihYtZtjHsFH0PH5lS9+kvQI2J
+	ghP+22qiYbqKoMNA0HY+zOAnBNHIQ3kPA3LSeZu2yWqjWj7miLdgwbIpVUg0EbcFTQ00E48EmXA
+	u+pVA6Zbk8VmHfq40KE6Gc7CDOVN4KhgWGH7BtGRN7tH7ZEc45kUR66ih/nE8QhMQgx5qkYh1E7
+	DJwicQ88ltlu95Y1v6pROUbf+3hUV39rmBNwBuGd
+X-Google-Smtp-Source: AGHT+IEDZ1t1jMw2FiN3A0cP9gyJ3a09UAw7Kj90kwun9fTwMj5UtoOryCIOPgp/BHuqqhth5Rto+A==
+X-Received: by 2002:a17:902:ce8c:b0:224:160d:3f54 with SMTP id d9443c01a7336-22c535ad0f8mr114306245ad.31.1745116457247;
+        Sat, 19 Apr 2025 19:34:17 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-73dbf8c05dcsm3962485b3a.27.2025.04.19.19.34.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 19 Apr 2025 19:34:16 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 7EE8F43F1C0F; Sun, 20 Apr 2025 09:34:10 +0700 (WIB)
+Date: Sun, 20 Apr 2025 09:34:10 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Joel Savitz <jsavitz@redhat.com>, linux-kernel@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2] docs: namespace: Tweak and reword resource control doc
+Message-ID: <aARdIqU6Y7baKrSk@archie.me>
+References: <20250419150428.1129352-1-jsavitz@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250419-op6-tri-state-v5-2-443127078517@ixit.cz>
-References: <20250419-op6-tri-state-v5-0-443127078517@ixit.cz>
-In-Reply-To: <20250419-op6-tri-state-v5-0-443127078517@ixit.cz>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
- Jonathan Corbet <corbet@lwn.net>, Jiri Kosina <jikos@kernel.org>, 
- Benjamin Tissoires <bentiss@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-input@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, Gergo Koteles <soyer@irl.hu>, 
- Casey Connolly <casey@connolly.tech>, David Heidelberg <david@ixit.cz>, 
- Konrad Dybcio <konradybcio@kernel.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2333; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=QhCUbDmUHcz4RzxVc6XbeZUejFzQoncYw+4pfYDvJbY=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBoA/2SXNUW9FmCVx/sofCVR1893e6A0Pgi0fk2t
- /vlzsdqOCOJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaAP9kgAKCRBgAj/E00kg
- clf8D/9u8uPCDLrbj2Z6HGbMlLcVBRPLnOb//zm6tNBBYYlkWtuSbIA4+ziaEy7T7v9mYMzPyVy
- L0lRRx62HtcjCdCaOvfebpZUh8tJ0xOJ/5wzORGEsHbsBVseMdjZi7cddRm0FXw//3e3tPdlqfX
- J+MmSRz2RDYsavYWjVdcnmSXmIni9aLGBWTg+hAY2WK+8Cn003wZ5E5wi02KMhprT36HNVVQsWK
- 994To8W4xb/LMsUmYf0LD3ImbBYVyEAixDeIW2Ondy7TtuQN80KH9Dzzw2KDBj0j35mWjJWUuzs
- 96htMIWpmGPuUsQoaR05EmetYyynt6eHdnEs0LeWLxtpGbacZwJSIZRXqnsGDEDpqCIv3M3atqH
- +Fbsa2vgJSeH4AJgGsUM62WIdXWCs9bgez5JuwsZsV3f5nYiNgTrR6Wa+6btvPNTKaVG0zJK3Qc
- nGMILNV0iaeCpbjby8Z+6rQOagCNa31ELCp4UUun7wPmFX6N6fIWrKlvos+mccgOluIcl1n3/+A
- +6BqBxepc/MC6tYCiGGg+wqvokSUY9i5YLHsCk3NVLtUH8qmIbbPXs1raRaS0K+LGTdggQu4Kc4
- XFUsiABTxGtUw0vWH8NLYUJajZIqiBv2Hbf/4LU0MITDguUfmwjiBTFEXDnVld1N/oooKnZqIEz
- TO1xwGF/KlLHmTA==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
-
-From: Gergo Koteles <soyer@irl.hu>
-
-The alert-slider is a tri-state sound profile switch found on the
-OnePlus 6, Android maps the states to "silent", "vibrate" and "ring".
-Expose them as ABS_SND_PROFILE events.
-The previous GPIO numbers were wrong. Update them to the correct ones.
-
-Co-developed-by: Casey Connolly <casey@connolly.tech>
-Signed-off-by: Casey Connolly <casey@connolly.tech>
-Signed-off-by: Gergo Koteles <soyer@irl.hu>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@linaro.org>
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- .../arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi | 39 ++++++++++++++++++++--
- 1 file changed, 37 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-index 8a0f154bffc3d55ae2134ef28cb7653dde702552..9a508b3149bef50c0ed897dec3c01a3f08712e85 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-@@ -21,6 +21,41 @@
- /delete-node/ &rmtfs_mem;
- 
- / {
-+	alert-slider {
-+		compatible = "gpio-keys";
-+		label = "Alert slider";
-+
-+		pinctrl-0 = <&alert_slider_default>;
-+		pinctrl-names = "default";
-+
-+		switch-top {
-+			label = "Silent";
-+			linux,input-type = <EV_ABS>;
-+			linux,code = <ABS_SND_PROFILE>;
-+			linux,input-value = <SND_PROFILE_SILENT>;
-+			gpios = <&tlmm 126 GPIO_ACTIVE_LOW>;
-+			linux,can-disable;
-+		};
-+
-+		switch-middle {
-+			label = "Vibrate";
-+			linux,input-type = <EV_ABS>;
-+			linux,code = <ABS_SND_PROFILE>;
-+			linux,input-value = <SND_PROFILE_VIBRATE>;
-+			gpios = <&tlmm 52 GPIO_ACTIVE_LOW>;
-+			linux,can-disable;
-+		};
-+
-+		switch-bottom {
-+			label = "Ring";
-+			linux,input-type = <EV_ABS>;
-+			linux,code = <ABS_SND_PROFILE>;
-+			linux,input-value = <SND_PROFILE_RING>;
-+			gpios = <&tlmm 24 GPIO_ACTIVE_LOW>;
-+			linux,can-disable;
-+		};
-+	};
-+
- 	aliases {
- 		serial0 = &uart9;
- 		serial1 = &uart6;
-@@ -799,8 +834,8 @@ hall_sensor_default: hall-sensor-default-state {
- 		bias-disable;
- 	};
- 
--	tri_state_key_default: tri-state-key-default-state {
--		pins = "gpio40", "gpio42", "gpio26";
-+	alert_slider_default: alert-slider-default-state {
-+		pins = "gpio126", "gpio52", "gpio24";
- 		function = "gpio";
- 		drive-strength = <2>;
- 		bias-disable;
-
--- 
-2.49.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="26tnTgdynCWnioaZ"
+Content-Disposition: inline
+In-Reply-To: <20250419150428.1129352-1-jsavitz@redhat.com>
 
 
+--26tnTgdynCWnioaZ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Apr 19, 2025 at 11:04:28AM -0400, Joel Savitz wrote:
+> -There are a lot of kinds of objects in the kernel that don't have
+> -individual limits or that have limits that are ineffective when a set
+> -of processes is allowed to switch user ids.  With user namespaces
+> -enabled in a kernel for people who don't trust their users or their
+> -users programs to play nice this problems becomes more acute.
+> +The kernel contains many kinds of objects that either don't have
+> +individual limits or that have limits which are ineffective when
+> +a set of processes is allowed to switch their UID. On a system
+> +where there admins don't trust their users or their users' programs,
+> +user namespaces expose the system to potential misuse of resources.
+
+Do you mean "when there are admins who don't trust ..." or "where admins do=
+n't
+trust ..."?
+
+Confused...
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--26tnTgdynCWnioaZ
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaARdHAAKCRD2uYlJVVFO
+ozKKAP4y74GboL6dwb9pcAYpiirdpARFK999Ta1CwtOXo0RM0QEA9jSOmOeXnBP4
+DOBtXmaFFeijLoNfkB//yZnQQGGxAAg=
+=OvWN
+-----END PGP SIGNATURE-----
+
+--26tnTgdynCWnioaZ--
 
