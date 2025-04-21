@@ -1,88 +1,161 @@
-Return-Path: <linux-doc+bounces-43694-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-43695-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6FF5A9508A
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Apr 2025 14:05:41 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 726AFA950B9
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Apr 2025 14:19:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B1D6C3B1E96
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Apr 2025 12:05:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A85B016A4B4
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Apr 2025 12:19:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14B962620F5;
-	Mon, 21 Apr 2025 12:05:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AB22A264A8E;
+	Mon, 21 Apr 2025 12:19:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=rosenzweig.io header.i=@rosenzweig.io header.b="yY26akcF"
+	dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b="TlgD93VJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-182.mta0.migadu.com (out-182.mta0.migadu.com [91.218.175.182])
+Received: from mx0b-00128a01.pphosted.com (mx0a-00128a01.pphosted.com [148.163.135.77])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A380613C918
-	for <linux-doc@vger.kernel.org>; Mon, 21 Apr 2025 12:05:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 060BB264A7A;
+	Mon, 21 Apr 2025 12:19:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.135.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745237138; cv=none; b=ZEkCPYOLoUGocovciM3aDgjWwmhNAdIT6xbgP645vHih96f1QmXaykXkr7CQ9Kc7xA5l3JVUSY0VYSmKB2SgUEU9XxJb+BqrnKMEvOFOuBgAHiP1lrkJAWfi0Zv6tEfk92NHWqYXI6fOWf7e53dfCY70m1p1fDFSNt2Jx53a9cQ=
+	t=1745237942; cv=none; b=YoQHBw2t/4Y2T/LEg9XtJlCQXzAAzgzCztpUrBD8qhXdVPSncsoaZYTjtJMDlkmnFpKRtht51Tf2U2tbyFCYbgKF1YgAeavWXRt9OqVkbwhHOKOQNNaDffeIIyC9BIy9p6GlbD+lK5ippaCIdT5PS0+XW/LXJ6hhlehaQMCPdU0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745237138; c=relaxed/simple;
-	bh=2PHBdSKyaQPqlbSM8yTXUcYGGEk2cPFa1bPGHgLQCq4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Qw0C7GfkspgT1WAYaW33+NlJ4Rd+PwrLi0pzX7tcnSoOfgwtBXt5wuQERW7ZHBIpk9DvZY7Di0ZGblJ/atM8foh7l850bAAViLrUzwefnHfJjLKlvRPpateXk7orvQ43o4V2HCW5/7yj6LrwltspExDiFANCBSpiV4jdbogGx98=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=rosenzweig.io; spf=pass smtp.mailfrom=rosenzweig.io; dkim=pass (2048-bit key) header.d=rosenzweig.io header.i=@rosenzweig.io header.b=yY26akcF; arc=none smtp.client-ip=91.218.175.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=rosenzweig.io
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rosenzweig.io
-Date: Mon, 21 Apr 2025 08:05:25 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosenzweig.io;
-	s=key1; t=1745237132;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=2PHBdSKyaQPqlbSM8yTXUcYGGEk2cPFa1bPGHgLQCq4=;
-	b=yY26akcF3YSEbswfNsM1neBZz9PdHg6FanKmv3WRpHj5kqVxQU/52gQm+0XFOpgHPlWl3j
-	55keSs8zD4EcgGpUIwE7T8pI3cumhjd6NDlEKluh3T6w72pxICvZHPuKMyF1kbORFC+lC6
-	aXGa8V1pJVPF2NXWhXbJAs5WMeGlKpbbR3kYvgO6p5u1ls9PFWTLxTfPNE/wo/gMVOkBuI
-	EgHrQNaY+ZZ+S8N0adh6tEikecCYBQo7webOJ9l+jqft2lxi1YzB27OUKb1ta/fpx4PiQX
-	QS6W+ZimsdM3EBpXZ/g5a53FXN1kB006Jb5Doz8tKY33vGppRjcEW6wjb8uHlw==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Alyssa Rosenzweig <alyssa@rosenzweig.io>
-To: Aditya Garg <gargaditya08@live.com>
-Cc: Petr Mladek <pmladek@suse.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Sven Peter <sven@svenpeter.dev>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Aun-Ali Zaidi <admin@kodeit.net>,
-	Maxime Ripard <mripard@kernel.org>, airlied@redhat.com,
-	Simona Vetter <simona@ffwll.ch>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Andrew Morton <akpm@linux-foundation.org>, apw@canonical.com,
-	joe@perches.com, dwaipayanray1@gmail.com, lukas.bulwahn@gmail.com,
-	Kees Cook <kees@kernel.org>, tamird@gmail.com,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-	Hector Martin <marcan@marcan.st>,
-	Asahi Linux Mailing List <asahi@lists.linux.dev>
-Subject: Re: [PATCH v4 0/3] Use proper printk format in appletbdrm
-Message-ID: <aAY0hRvNCi0y6rlt@blossom>
-References: <PN3PR01MB9597382EFDE3452410A866AEB8B52@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
- <PN3PR01MB9597D506487C3133B0358CE5B8BC2@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
+	s=arc-20240116; t=1745237942; c=relaxed/simple;
+	bh=lNXJZ31mKKdrH3rm5j2vahEHI71PEeUKRoEiRzkJTPA=;
+	h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:CC; b=WTg9oVmTG0UgJKHlEzvUOhxooT1O40o6YD6L+2/S8pYNv8bLoC73iyrp21yrmxclRJCwOx2avOAOToLVCf51Qg68U5c9t2zd2mXCXctkjuEz6XuDKr9MxIDoMp2eQJTy35RU2dhGJiMAlE1bCaZl3AkNJfvVnNcWRTm1p03R4nE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com; spf=pass smtp.mailfrom=analog.com; dkim=pass (2048-bit key) header.d=analog.com header.i=@analog.com header.b=TlgD93VJ; arc=none smtp.client-ip=148.163.135.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=analog.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=analog.com
+Received: from pps.filterd (m0375855.ppops.net [127.0.0.1])
+	by mx0b-00128a01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53L8Imuc028756;
+	Mon, 21 Apr 2025 08:18:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=DKIM; bh=owl87XtYV1NrpUYxAc9w7Tbs9Dh
+	e54+iGFHKXKalFRw=; b=TlgD93VJcT37sOqWCQVz/sSlhBQRMdnyRdgcb8UpkhU
+	lTXMC9m7RSOyQ7BCoPIBdI+Uq8Up/wNOlzezez5whj8hP/1jkfsjRIoP/WwonFeg
+	613+fgq8mf+fjrZUEv1e0JZeXXzljsLRSZnclE1LKB+eb4VUkZWURy38oRxkmX+K
+	xZJ30BmPk/mA0bT7C49nY/tEgvjxxhF1fvfHV6MnqQvoP1Jx0m7QOI+ZvxlLFnT/
+	q43T3tO4rwyjZywXQeax/86Td2xJe6Cjn6wD3Iidwf1uDwuQz4NyJNQfEzIEqIlS
+	TfHGVEcxGWjr8y9glbEM+cpADA+JQ9pjLyMUs097lBA==
+Received: from nwd2mta4.analog.com ([137.71.173.58])
+	by mx0b-00128a01.pphosted.com (PPS) with ESMTPS id 464t5gd6td-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 21 Apr 2025 08:18:42 -0400 (EDT)
+Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
+	by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 53LCIfBi045296
+	(version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 21 Apr 2025 08:18:41 -0400
+Received: from ASHBCASHYB4.ad.analog.com (10.64.17.132) by
+ ASHBMBX8.ad.analog.com (10.64.17.5) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Mon, 21 Apr 2025 08:18:41 -0400
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by
+ ASHBCASHYB4.ad.analog.com (10.64.17.132) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.14; Mon, 21 Apr 2025 08:18:41 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server id 15.2.986.14 via Frontend
+ Transport; Mon, 21 Apr 2025 08:18:41 -0400
+Received: from CENCARNA-L02.ad.analog.com (CENCARNA-L02.ad.analog.com [10.117.222.60])
+	by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 53LCIO2P013389;
+	Mon, 21 Apr 2025 08:18:27 -0400
+From: Cedric Encarnacion <cedricjustine.encarnacion@analog.com>
+Subject: [PATCH v3 0/2] Add support for LT3074 low voltage linear regulator
+Date: Mon, 21 Apr 2025 20:18:17 +0800
+Message-ID: <20250421-upstream-lt3074-v3-0-71636322f9fe@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <PN3PR01MB9597D506487C3133B0358CE5B8BC2@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIk3BmgC/3XNTQqDMBCG4atI1k1JZuIPXfUepYuoowbUSJKGF
+ vHujW5KKV2+H8wzK/PkDHl2yVbmKBpv7JwCTxlrBj33xE2bmoGAXEhQ/LH44EhPfAwoSsUlIFY
+ KVEGiZulqcdSZ5yHe7qkH44N1r+NBlPv634qSC14WAjtUhUKkq571aPtzYye2YxE+AED+C0ACZ
+ KVbKWqdK/gGtm17A9BHJGvwAAAA
+X-Change-ID: 20250124-upstream-lt3074-123384246e0b
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jean Delvare <jdelvare@suse.com>,
+        "Guenter Roeck" <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>,
+        "Delphine CC Chiu" <Delphine_CC_Chiu@Wiwynn.com>
+CC: <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-hwmon@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-i2c@vger.kernel.org>,
+        Cedric Encarnacion
+	<cedricjustine.encarnacion@analog.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1745237904; l=1845;
+ i=cedricjustine.encarnacion@analog.com; s=20250124;
+ h=from:subject:message-id; bh=lNXJZ31mKKdrH3rm5j2vahEHI71PEeUKRoEiRzkJTPA=;
+ b=19nmfMCWVgOFErGDCjRj0mFhubfocQbq9ME6dzcmA9WxZ9mJIcYVH5BGIqKN2W2SGHctcmH/g
+ wVxpkLCwLDiD4W/JRG2BFw2WcKyS76yVwFwWiVB1OQxXpZ/UeCGUHBg
+X-Developer-Key: i=cedricjustine.encarnacion@analog.com; a=ed25519;
+ pk=ZsngY3B4sfltPVR5j8+IO2Sr8Db8Ck+fVCs+Qta+Wlc=
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Authority-Analysis: v=2.4 cv=RaiQC0tv c=1 sm=1 tr=0 ts=680637a2 cx=c_pps a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17 a=IkcTkHD0fZMA:10 a=XR8D0OoHHMoA:10 a=VwQbUJbxAAAA:8 a=gAnH3GRIAAAA:8 a=AJfnRGXR9aJ9-Gz2uG0A:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: Yv_yTgn6-Ywz2Kcd7ulpSelN1wzd2eO7
+X-Proofpoint-ORIG-GUID: Yv_yTgn6-Ywz2Kcd7ulpSelN1wzd2eO7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-21_06,2025-04-21_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 bulkscore=0
+ spamscore=0 lowpriorityscore=0 mlxlogscore=999 impostorscore=0
+ malwarescore=0 priorityscore=1501 suspectscore=0 clxscore=1011
+ phishscore=0 mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2502280000
+ definitions=main-2504210095
 
-> Can I have a feedback from some DRM maintainer on this? AFAIK merge window is over for some time now. It's been more than a week and last time when I submitted, it just stayed in the mailing list without any feedback.
+Introduce hardware monitoring and regulator support for LT3074. The
+component is an ultrafast, ultralow noise 3A, 5.5V dropout linear
+regulator with a PMBus serial interface that allows telemetry for
+input/output voltage, output current, and die temperature. It has a
+single channel and requires a bias voltage which can be monitored via
+manufacturer-specific registers.
 
-DRM hides the merge window from committers so that's not super relevant.
+Signed-off-by: Cedric Encarnacion <cedricjustine.encarnacion@analog.com>
+---
+Changes in v3:
+- 
+ * Non-nested dt-binding regulator support.
+ * PMBUS_REGULATOR_ONE("vout") -> PMBUS_REGULATOR_ONE("regulator").
+   New macro needs node-name to be matched.
 
-I am a DRM committer and can pick this up if necessary but it's not
-clear to me what's going thru with DRM vs elsewhere.
+- Link to v2: https://lore.kernel.org/r/20250225-upstream-lt3074-v2-0-18ad10ba542e@analog.com
+
+Changes in v2:
+ * Separated dt-binding for LT3074.
+ * Added __maybe_unused attribute to of_device_id. This addresses kernel
+   test robot warning.
+ * Added entry to MAINTAINERS.
+
+- Link to v1: https://lore.kernel.org/r/20250124-upstream-lt3074-v1-0-7603f346433e@analog.com
+
+---
+Cedric Encarnacion (2):
+      dt-bindings: hwmon: pmbus: add lt3074
+      hwmon: (pmbus/lt3074): add support for lt3074
+
+ .../bindings/hwmon/pmbus/adi,lt3074.yaml           |  50 +++++++++
+ Documentation/hwmon/index.rst                      |   1 +
+ Documentation/hwmon/lt3074.rst                     |  72 ++++++++++++
+ MAINTAINERS                                        |   9 ++
+ drivers/hwmon/pmbus/Kconfig                        |  18 +++
+ drivers/hwmon/pmbus/Makefile                       |   1 +
+ drivers/hwmon/pmbus/lt3074.c                       | 122 +++++++++++++++++++++
+ 7 files changed, 273 insertions(+)
+---
+base-commit: 86d264b68309d9f9804db4079642b98104ca15df
+change-id: 20250124-upstream-lt3074-123384246e0b
+
+Best regards,
+-- 
+Cedric Encarnacion <cedricjustine.encarnacion@analog.com>
+
 
