@@ -1,453 +1,335 @@
-Return-Path: <linux-doc+bounces-44050-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44052-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07474A991DA
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 17:36:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F541A993B8
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 18:02:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EEE3017E39C
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 15:29:59 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EA60D4A5C41
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 15:50:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B51AC2FB;
-	Wed, 23 Apr 2025 15:20:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A8DD27CCC7;
+	Wed, 23 Apr 2025 15:37:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Iy1WbPEK"
+	dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b="gtPaxzVx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39BA7283687;
-	Wed, 23 Apr 2025 15:20:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E781B27F725
+	for <linux-doc@vger.kernel.org>; Wed, 23 Apr 2025 15:37:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745421627; cv=none; b=e/Qq0r6WUZNT1UBNEWVDmbV79TtZ9QTfLc2Qvv1h/yf2hrS0fkyzY6mmvAlKYKJGy7pkrdLXgV3Nm/ShgKjK/5yvsYUFQ3qjzbhkSo4z8SjU4//c5URApL50KxyM94NmhL9FLOKX2LuJShenvn6Bb3H/NyVr7akmuTaJ5qAj5i8=
+	t=1745422627; cv=none; b=FtXiWZ2BU1Es/a3WCZUws82pOV2SNUZvsEy0UZTzTKbplHNValnbljCPJaInZoH10O7JhUeesm3/qCtrd8bz77RFM8fy/5huRVLfXw1C9jub/KJvoGJ5IZsWlyFmSKbvCPl5TK//V3lh8cJCQQhAphbxJFU0WNwtVhwK7/OEAMs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745421627; c=relaxed/simple;
-	bh=OpNwcBsn5GWUrEwgmZUEWuFm3smC+jDr1D0Xyaa91xs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=C6ur8BG362t2eXy+ygOYhMCMoXM6aIvjNHNSvN02BzUHKl4v+O5Ve9XNgtWr+tAY+G2xUG7PuIrIAoFDfl5OaAc8fCA/w8x/F84w1KzenDiS5ZtyXWqhpsAKggHz/Y3k6f/hdX+HmDg53uQepSxyQrplJeh+lecdqKAYdQROgDk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Iy1WbPEK; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 4B58941A92
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1745421624; bh=NkSbcwqUaiTpX26ksQ4x5WS4TrDmKK21EmlBzp9sgAU=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=Iy1WbPEK7WwfgT6bpRXEQ/hpr3KTWU/lfTJ8J5/o9pZ7AaCPzW7zZFZnnA0wtb7q7
-	 Wb/4AU5IGUGcqNNp/Bz1a5nw1Y56l89jCBBKXkfz/OUZ64ZIvXtHeZ9g4aUdd85ekO
-	 FUHzsgsgJLOJ1CnSbXYSPY1ryBLrFWekCdAFGCO7vKXyCn5pN37OkFJSglfKqbTsWl
-	 30iTDxUchzu0uJtehii4GRtYV+fy9ssCYRn2ThlhV+KJCrpS7Cr1FMRlUTV3NYa8s+
-	 RwQ7CH6R5GZk97FmsEZeo/HYiKuQJohaEdU6xP+ppFv4Yqy1fjsv9KQu8i4KUgyFx0
-	 ryZWk9VOu4YIQ==
-Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 4B58941A92;
-	Wed, 23 Apr 2025 15:20:24 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: saivishnu725@gmail.com, mchehab@kernel.org
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Sai Vishnu M
- <saivishnu725@gmail.com>
-Subject: Re: [PATCH] add --interactive feature
-In-Reply-To: <20250422153555.85219-1-saivishnu725@gmail.com>
-References: <20250422153555.85219-1-saivishnu725@gmail.com>
-Date: Wed, 23 Apr 2025 09:20:23 -0600
-Message-ID: <87bjsmsy4o.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1745422627; c=relaxed/simple;
+	bh=QUTd+FJHR0cgUjYxfoPAWpHLV/2/0bGyBnXUB5nz7lE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=nNwOZmYWAu0RxgY/L+o/6vafFFThx6i8XSyxI3dJy3cru27NX8aR69wDkbG39MPdRhCh7noOWk/iiIVva6MsVIOA/NCW1SHq6Cs8iES9SzX81T8keG9+8+RLjFKr73dfwNprSUzLhz3B0/5mdDDTKDo+h/pWxIzUxdS1A9mtE1I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com; spf=fail smtp.mailfrom=broadcom.com; dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b=gtPaxzVx; arc=none smtp.client-ip=209.85.219.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=broadcom.com
+Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-e72cc45d99cso2996483276.3
+        for <linux-doc@vger.kernel.org>; Wed, 23 Apr 2025 08:37:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=broadcom.com; s=google; t=1745422623; x=1746027423; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=C/ZRU3U99/NqLLR4/bGg3o1bMQ0ly4gqqbs43s8AFb4=;
+        b=gtPaxzVxKbod4leP2JlSKGyPSiG1bAD7fAZfhQY6AMuldaSMeRh0kfcjEWg53fqE/S
+         TrTZP2juLILRMcYH8KyueiqhONBTAZEw7bpf+e1qoCK/AY2U4gpAzRj3bj7ptouR4+HD
+         HNRnmvqJHeFG19txaNtWzmMvlVHZDwXZHm0Vk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745422623; x=1746027423;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=C/ZRU3U99/NqLLR4/bGg3o1bMQ0ly4gqqbs43s8AFb4=;
+        b=fjPq0ISq3gxEC58ZnDQ9q0SLeGhGoKGAjXvZNM/XVUEg3msBqperNGRBeh15sAQa85
+         iTNirrbLZlBo9iMtTpLS1w/DYw7cckwmlOiE/e2XV/Dmw2dPMFhDll8rkqNRYDyAG8ub
+         M0+blzKDgZzE6oK9gHfep3B4auo6ucS+Rr72U4+gpU6S9rNR+rd8vdaosGRt4PulUILg
+         kolTfeR1VKwnxeYYrpxZ1235UK5bejeQqlmVrXcKz8REY0Z4LQW3KSIBm/5MPjMSchlC
+         99o/vo/dNuvyFuGU5wZNhfbdEc8S9axSs19CqG9i8tVu5gSswtQmKV+GGL9ERT3SYuAV
+         P8JA==
+X-Forwarded-Encrypted: i=1; AJvYcCVdRH7Y1Ucj44p38u0Q4tYe5QFcVHXtMhK4t9lw6S2asChEtVyQMBXIoT00Z8LnZKtX0S3EMITvxhE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxqG0a8QJR8w94rFdGpb6/O+vc6PxWpxRIuoBkBuEWulkDcRIhg
+	YGGhMjKTUAwnYvniBgEU3xNCikem/42TULGgmqX5h9UZMBLTHi80WAs0sgnKqJ/54nPc6k59kD3
+	bEioQXRwDq2ffgHoSO5njtwqTn2mBuLhLm5VE
+X-Gm-Gg: ASbGncugQw0T3JTGUK7PekboGqOEm8pnBU1qBXdAUZpjRADQ0fedowxEGYPNWWJ3rKB
+	Tg/iMSv7RAJInDuV7bLWXPv/wRyEt0BNMM7299AnrDOyQZtQaS+jUrkxALuJTC1KRZZT+BbNang
+	njtyXhJRJUfkmvnx1FxFeuiok=
+X-Google-Smtp-Source: AGHT+IEV+HN17f59I2f5hBIqYl91lZVgctaUiirq9fPyVNZDNrIDArnpML/YFxpdbA3RrixDKH4riq3NZ7smC+yGHtA=
+X-Received: by 2002:a05:6902:4804:b0:e6e:710:3427 with SMTP id
+ 3f1490d57ef6-e7297d9cfe6mr26174139276.8.1745422622769; Wed, 23 Apr 2025
+ 08:37:02 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20250422161304.579394-1-zack.rusin@broadcom.com>
+ <20250422161304.579394-5-zack.rusin@broadcom.com> <a803c925-b682-490f-8cd9-ca8d4cc599aa@zytor.com>
+ <CABQX2QMznYZiVm40Ligq+pFKmEkVpScW+zcKYbPpGgm0=S2Xkg@mail.gmail.com> <aAjrOgsooR4RYIJr@google.com>
+In-Reply-To: <aAjrOgsooR4RYIJr@google.com>
+From: Zack Rusin <zack.rusin@broadcom.com>
+Date: Wed, 23 Apr 2025 11:36:51 -0400
+X-Gm-Features: ATxdqUFcLy0a7EiUcBCsXjdA0ggMYiiKyGOA84kPdE1qaS7HRB6HS5eEDbrdMCs
+Message-ID: <CABQX2QNDmXizUDP_sckvfaM9OBTxHSr0ESgJ_=Z_5RiODfOGsg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/5] KVM: x86: Add support for legacy VMware backdoors
+ in nested setups
+To: Sean Christopherson <seanjc@google.com>
+Cc: Xin Li <xin@zytor.com>, linux-kernel@vger.kernel.org, 
+	Doug Covelli <doug.covelli@broadcom.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	"H. Peter Anvin" <hpa@zytor.com>, kvm@vger.kernel.org, linux-doc@vger.kernel.org
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
+	boundary="0000000000006f06f1063373df2e"
 
-OK, we are getting somewhere, but there are various things to point
-out/fix here. 
+--0000000000006f06f1063373df2e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-saivishnu725@gmail.com writes:
-
-> From: Sai Vishnu M <saivishnu725@gmail.com>
+On Wed, Apr 23, 2025 at 9:31=E2=80=AFAM Sean Christopherson <seanjc@google.=
+com> wrote:
 >
-> This patch introduces an interactive mode to the sphinx-pre-install script
-> that guides users through missing dependency installation for convenience.
-
-Some maintainers will react strongly to "this patch", insisting that
-changelogs be written in the imperative mode.  I am less fussy about
-such things, but that's a good practice to follow in general.
-
-> - Adds `--interactive` flag to trigger prompt-based guidance
-> - Handles cases where stdin is not available
-> - Implements default behavior for invalid or no input
-> - Improves messages for unknown distros and errors
-
-A list like this is a clear sign that a patch needs to be broken up into
-a series.  Remember, each patch should do one clearly verifiable thing.
-When you mix changes like this, you make things much harder to review.
-
-> RFC: https://lore.kernel.org/linux-doc/20250410155414.47114-1-saivishnu725@gmail.com/T/#u
-
-This is not a normal patch tag.  Putting in a link to the RFC is fine,
-but it should go below the "---" line.  It also *really* helps to add a
-summary of what has changed since the previous revision.
-
-> Signed-off-by: Sai Vishnu M <saivishnu725@gmail.com>
-> ---
->  scripts/sphinx-pre-install | 185 ++++++++++++++++++++++++++++++++-----
->  1 file changed, 160 insertions(+), 25 deletions(-)
+> On Wed, Apr 23, 2025, Zack Rusin wrote:
+> > On Wed, Apr 23, 2025 at 3:56=E2=80=AFAM Xin Li <xin@zytor.com> wrote:
+> > > > diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+> > > > index 300cef9a37e2..5dc57bc57851 100644
+> > > > --- a/arch/x86/kvm/x86.c
+> > > > +++ b/arch/x86/kvm/x86.c
+> > > > @@ -4653,6 +4653,7 @@ int kvm_vm_ioctl_check_extension(struct kvm *=
+kvm, long ext)
+> > > >   #ifdef CONFIG_KVM_VMWARE
+> > > >       case KVM_CAP_X86_VMWARE_BACKDOOR:
+> > > >       case KVM_CAP_X86_VMWARE_HYPERCALL:
+> > > > +     case KVM_CAP_X86_VMWARE_NESTED_BACKDOOR_L0:
 >
-> diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
-> index ad9945ccb0cf..a3fbe920bb44 100755
-> --- a/scripts/sphinx-pre-install
-> +++ b/scripts/sphinx-pre-install
-> @@ -42,6 +42,7 @@ my $latest_avail_ver;
->  my $pdf = 1;
->  my $virtualenv = 1;
->  my $version_check = 0;
-> +my $interactive = 0;
->  
->  #
->  # List of required texlive packages on Fedora and OpenSuse
-> @@ -338,12 +339,96 @@ sub which($)
->  	return undef;
->  }
->  
-> +sub run_if_interactive($)
-> +{
-> +	my $command = shift;
-> +	printf("\n\t$command\n");
-> +
-> +	if($interactive) {
+> I would probably omit the L0, because KVM could be running as L1.
 
-Please try to stick with something close to the kernel coding style
-(space after "if")
+Yea, that sounds good to me.
 
-> +		printf("Run the command now? [Y/n, default:Y]: ");
-> +		my $user_input = <STDIN>;
-> +		chomp $user_input;
-> +		# Default = Y
+> > > >   #endif
+> > > >               r =3D 1;
+> > > >               break;
+> > > > @@ -6754,6 +6755,13 @@ int kvm_vm_ioctl_enable_cap(struct kvm *kvm,
+> > > >               kvm->arch.vmware.hypercall_enabled =3D cap->args[0];
+> > > >               r =3D 0;
+> > > >               break;
+> > > > +     case KVM_CAP_X86_VMWARE_NESTED_BACKDOOR_L0:
+> > > > +             r =3D -EINVAL;
+> > > > +             if (cap->args[0] & ~1)
+> > >
+> > > Replace ~1 with a macro for better readability please.
+> >
+> > Are you sure about that? This code is already used elsewhere in the
+> > file  (for KVM_CAP_EXIT_ON_EMULATION_FAILURE) so, ignoring the fact
+> > that it's arguable whether IS_ZERO_OR_ONE is more readable than & ~1,
+> > if we use a macro for the vmware caps and not for
+> > KVM_CAP_EXIT_ON_EMULATION_FAILURE then the code would be inconsistent
+> > and that decreases the readability.
+>
+> Heh, KVM_CAP_EXIT_ON_EMULATION_FAILURE is the odd one out.  Even if that =
+weren't
+> the case, this is one of the situations where diverging from the existing=
+ code is
+> desirable, because the existing code is garbage.
+>
+> arch/x86/kvm/x86.c:             if (cap->args[0] & ~kvm_caps.supported_qu=
+irks)
+> arch/x86/kvm/x86.c:             if (cap->args[0] & ~KVM_X2APIC_API_VALID_=
+FLAGS)
+> arch/x86/kvm/x86.c:             if (cap->args[0] & ~kvm_get_allowed_disab=
+le_exits())
+> arch/x86/kvm/x86.c:                 (cap->args[0] & ~KVM_X86_DISABLE_EXIT=
+S_PAUSE))
+> arch/x86/kvm/x86.c:             if (cap->args[0] & ~KVM_MSR_EXIT_REASON_V=
+ALID_MASK)
+> arch/x86/kvm/x86.c:             if (cap->args[0] & ~KVM_BUS_LOCK_DETECTIO=
+N_VALID_MODE)
+> arch/x86/kvm/x86.c:             if (cap->args[0] & ~KVM_EXIT_HYPERCALL_VA=
+LID_MASK) {
+> arch/x86/kvm/x86.c:             if (cap->args[0] & ~1)
+> arch/x86/kvm/x86.c:             if (!enable_pmu || (cap->args[0] & ~KVM_C=
+AP_PMU_VALID_MASK))
+> arch/x86/kvm/x86.c:             if ((u32)cap->args[0] & ~KVM_X86_NOTIFY_V=
+MEXIT_VALID_BITS)
+> virt/kvm/kvm_main.c:            if (cap->flags || (cap->args[0] & ~allowe=
+d_options))
 
-Given that the code just above makes the default explicit, this comment
-is not too helpful.
+That's because none of those other options are boolean, right? I
+assumed that the options that have valid masks use defines but
+booleans use ~1 because (val & ~1) makes it obvious to the reader that
+the option is in fact a boolean in a way that (val &
+~KVM_SOME_VALID_BITS) can not.
 
-> +		if ($user_input eq '' or $user_input =~ /^y(es)?$/i) {
-> +			system($command) == 0 or warn "Failed to run the command";
-> +		}
+I don't want to be defending the code in there, especially to its
+maintainers :) I'm very happy to change it in any way you feel is more
+readable to you, but I don't think it's crap :)
 
-It seems that, if a command fails, everything should come to a stop
-immediately? 
+> > Or are you saying that since I'm already there you'd like to see a
+> > completely separate patch that defines some kind of IS_ZERO_OR_ONE
+> > macro for KVM, use it for KVM_CAP_EXIT_ON_EMULATION_FAILURE and, once
+> > that lands then I can make use of it in this series?
+>
+> Xin is suggesting that you add a macro in arch/x86/include/uapi/asm/kvm.h=
+ to
+> #define which bits are valid and which bits are reserved.
+>
+> At a glance, you can kill multiple birds with one stone.  Rather than add=
+ three
+> separate capabilities, add one capability and then a variety of flags.  E=
+.g.
+>
+> #define KVM_X86_VMWARE_HYPERCALL        _BITUL(0)
+> #define KVM_X86_VMWARE_BACKDOOR         _BITUL(1)
+> #define KVM_X86_VMWARE_NESTED_BACKDOOR  _BITUL(2)
+> #define KVM_X86_VMWARE_VALID_FLAGS      (KVM_X86_VMWARE_HYPERCALL |
+>                                          KVM_X86_VMWARE_BACKDOOR |
+>                                          KVM_X86_VMWARE_NESTED_BACKDOOR)
+>
+>         case KVM_CAP_X86_VMWARE_EMULATION:
+>                 r =3D -EINVAL;
+>                 if (cap->args[0] & ~KVM_X86_VMWARE_VALID_FLAGS)
+>                         break;
+>
+>                 mutex_lock(&kvm->lock);
+>                 if (!kvm->created_vcpus) {
+>                         if (cap->args[0] & KVM_X86_VMWARE_HYPERCALL)
+>                                 kvm->arch.vmware.hypercall_enabled =3D tr=
+ue;
+>                         if (cap->args[0] & KVM_X86_VMWARE_BACKDOOR)
+>                                 kvm->arch.vmware.backdoor_enabled;
+>                         if (cap->args[0] & KVM_X86_VMWARE_NESTED_BACKDOOR=
+)
+>                                 kvm->arch.vmware.nested_backdoor_enabled =
+=3D true;
+>                         r =3D 0;
+>                 }
+>                 mutex_unlock(&kvm->lock);
+>                 break;
+>
+> That approach wouldn't let userspace disable previously enabled VMware ca=
+pabilities,
+> but unless there's a use case for doing so, that should be a non-issue.
 
-> +	}
-> +}
-> +
-> +sub fallback_unknown_distro()
-> +{
-> +	# Fall-back to generic hint code for other distros
-> +	# That's far from ideal, specially for LaTeX dependencies.
-> +	my %map = (
-> +		"sphinx-build" => "sphinx"
-> +	);
-> +	check_missing_tex(2) if ($pdf);
-> +	check_missing(\%map);
-> +	print "I don't know distro $system_release.\n";
-> +	print "So, I can't provide you a hint with the install procedure.\n";
-> +	print "There are likely missing dependencies.\n";
-> +}
-> +
-> +# checks if a package exists in path
-> +sub is_in_path($)
-> +{
-> +    my $cmd = shift;
-> +    for my $dir (split /:/, $ENV{PATH}) {
-> +        return 1 if -x "$dir/$cmd";
-> +    }
-> +    return 0;
-> +}
-> +
-> +# adding a check in --interactive
-> +# Reason: Selecting an incorrect distribution in cases where the user's distribution is unrecognized may lead to unexpected behavior.
+I'd say that if we desperately want to use a single cap for all of
+these then I'd probably prefer a different approach because this would
+make vmware_backdoor_enabled behavior really wacky. It's the one that
+currently can only be set via kernel boot flags, so having systems
+where the boot flag is on and disabling it on a per-vm basis makes
+sense and breaks with this. I'd probably still write the code to be
+able to disable/enable all of them because it makes sense for
+vmware_backdoor_enabled. Of course, we want it on all the time, so I
+also don't necessarily want to be arguing about being able to disable
+those options ;)
 
-Please keep lines within 80 columns
+z
 
-> +sub check_user_choice($)
-> +{
-> +	my $package_manager = shift;
-> +	if ($interactive) {
-> +		# checks if the package manager exists. hence, confirming the distribution
-> +		if (!is_in_path($package_manager)) {
-> +			print "$package_manager not found\n";
-> +			fallback_unknown_distro();
-> +			return 0;
-> +		}
-> +		return 1; # package_manager found
-> +	}
-> +	return 1; # non-interactive
-> +}
+--0000000000006f06f1063373df2e
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
-...and the case where the tool isn't in the user's path, but running
-under sudo will find it...?
-
-> +# checks if either of the package manager exists
-> +sub check_user_choice_two($$)
-> +{
-> +	my ($pm1, $pm2) = @_;
-> +	if ($interactive) {
-> +		my $found = 0;
-> +		# checks if either of the package managers exists. hence, confirming the distribution
-> +		if(is_in_path($pm1)) {
-
-Again, watch coding style
-
-> +			$found = 1;
-> +		}
-> +		if(is_in_path($pm2)) {
-> +			$found = 1;
-> +		}
-
-this whole series could be something like:
-
-  $found = is_in_path($pm1) or is_in_path($pm2)
-
-right?
-
-> +		if(!$found) {
-> +			print "both $pm1 and $pm2 not found\n";
-> +			fallback_unknown_distro();
-> +			return 0; # package_manager not found
-> +		}
-> +		return 1; # package_manager found
-> +	}
-> +	return 1; # non-interactive
-> +}
-> +
->  #
->  # Subroutines that check distro-specific hints
->  #
->  
->  sub give_debian_hints()
->  {
-> +	if (!check_user_choice("apt-get")) {
-> +		return;
-> +	}
-
-I guess I don't understand why we have to do these checks.  We know it's
-Debian, right?
-
->  	my %map = (
->  		"python-sphinx"		=> "python3-sphinx",
->  		"yaml"			=> "python3-yaml",
-> @@ -374,11 +459,16 @@ sub give_debian_hints()
->  
->  	return if (!$need && !$optional);
->  	printf("You should run:\n") if ($verbose_warn_install);
-> -	printf("\n\tsudo apt-get install $install\n");
-> +	my $command = "sudo apt-get install $install";
-> +	run_if_interactive($command);
->  }
->  
->  sub give_redhat_hints()
->  {
-> +	if (!check_user_choice_two("dnf", "yum")) {
-> +		return;
-> +	}
-
-Do we support any RH versions that still have yum at this point?
-
->  	my %map = (
->  		"python-sphinx"		=> "python3-sphinx",
->  		"yaml"			=> "python3-pyyaml",
-> @@ -452,16 +542,21 @@ sub give_redhat_hints()
->  	if (!$old) {
->  		# dnf, for Fedora 18+
->  		printf("You should run:\n") if ($verbose_warn_install);
-> -		printf("\n\tsudo dnf install -y $install\n");
-> +		my $command = "sudo dnf install -y $install";
-> +		run_if_interactive($command);
->  	} else {
->  		# yum, for RHEL (and clones) or Fedora version < 18
->  		printf("You should run:\n") if ($verbose_warn_install);
-> -		printf("\n\tsudo yum install -y $install\n");
-> +		my $command = "sudo yum install -y $install";
-> +		run_if_interactive($command);
->  	}
->  }
->  
->  sub give_opensuse_hints()
->  {
-> +	if (!check_user_choice("zypper")) {
-> +		return;
-> +	}
->  	my %map = (
->  		"python-sphinx"		=> "python3-sphinx",
->  		"yaml"			=> "python3-pyyaml",
-> @@ -505,11 +600,16 @@ sub give_opensuse_hints()
->  
->  	return if (!$need && !$optional);
->  	printf("You should run:\n") if ($verbose_warn_install);
-> -	printf("\n\tsudo zypper install --no-recommends $install\n");
-> +	my $command = "sudo zypper install --no-recommends $install";
-> +	run_if_interactive($command);
-> +
->  }
->  
->  sub give_mageia_hints()
->  {
-> +	if (!check_user_choice_two("dnf", "urpmi")) {
-> +		return;
-> +	}
->  	my %map = (
->  		"python-sphinx"		=> "python3-sphinx",
->  		"yaml"			=> "python3-yaml",
-> @@ -538,7 +638,6 @@ sub give_mageia_hints()
->  		$noto_sans = "google-noto-sans-cjk-ttc-fonts";
->  	}
->  
-> -
->  	if ($pdf) {
->  		check_missing_file(["/usr/share/fonts/google-noto-cjk/NotoSansCJK-Regular.ttc",
->  				    "/usr/share/fonts/TTF/NotoSans-Regular.ttf"],
-> @@ -550,11 +649,17 @@ sub give_mageia_hints()
->  
->  	return if (!$need && !$optional);
->  	printf("You should run:\n") if ($verbose_warn_install);
-> -	printf("\n\tsudo $packager_cmd $install\n");
-> +	my $command = "sudo $packager_cmd $install";
-> +	run_if_interactive($command);
-> +
->  }
->  
->  sub give_arch_linux_hints()
->  {
-> +	if (!check_user_choice("pacman")) {
-> +		return;
-> +	}
-> +
->  	my %map = (
->  		"yaml"			=> "python-yaml",
->  		"virtualenv"		=> "python-virtualenv",
-> @@ -581,11 +686,16 @@ sub give_arch_linux_hints()
->  
->  	return if (!$need && !$optional);
->  	printf("You should run:\n") if ($verbose_warn_install);
-> -	printf("\n\tsudo pacman -S $install\n");
-> +	my $command = "sudo pacman -S $install";
-> +	run_if_interactive($command);
->  }
->  
->  sub give_gentoo_hints()
->  {
-> +	if (!check_user_choice("emerge")) {
-> +		return;
-> +	}
-> +
->  	my %map = (
->  		"yaml"			=> "dev-python/pyyaml",
->  		"virtualenv"		=> "dev-python/virtualenv",
-> @@ -617,14 +727,15 @@ sub give_gentoo_hints()
->  	my $portage_cairo = "/etc/portage/package.use/graphviz";
->  
->  	if (qx(grep imagemagick $portage_imagemagick 2>/dev/null) eq "") {
-> -		printf("\tsudo su -c 'echo \"$imagemagick\" > $portage_imagemagick'\n")
-> +		my $imagemagick_command = "sudo su -c 'echo \"$imagemagick\" > $portage_imagemagick'";
-> +		run_if_interactive($imagemagick_command);
->  	}
->  	if (qx(grep graphviz $portage_cairo 2>/dev/null) eq  "") {
-> -		printf("\tsudo su -c 'echo \"$cairo\" > $portage_cairo'\n");
-> +		my $portage_command = "sudo su -c 'echo \"$cairo\" > $portage_cairo'";
-> +		run_if_interactive($portage_command);
->  	}
-> -
-> -	printf("\tsudo emerge --ask $install\n");
-> -
-> +	my $command = "sudo emerge --ask $install";
-> +	run_if_interactive($command);
->  }
->  
->  sub check_distros()
-> @@ -678,19 +789,35 @@ sub check_distros()
->  		give_gentoo_hints;
->  		return;
->  	}
-> +	# if the distro is not recognised
-> +	# but it is derived from the available options
-> +	if ($interactive) {
-> +		my @distros = (
-> +			{ name => "Debian/Ubuntu", func => \&give_debian_hints },
-> +			{ name => "RedHat/CentOS/Fedora", func => \&give_redhat_hints },
-> +			{ name => "OpenSUSE", func => \&give_opensuse_hints },
-> +			{ name => "Mageia", func => \&give_mageia_hints },
-> +			{ name => "Arch Linux", func => \&give_arch_linux_hints },
-> +			{ name => "Gentoo", func => \&give_gentoo_hints },
-> +		);
-> +		print "Which distro is your OS based on?\n";
-> +		for my $i (0 .. $#distros) {
-> +			printf("[%d] %s\n", $i + 1, $distros[$i]->{name});
-> +		}
-> +		print "[0] Others\n";
-
-Are there really any cases where we will not detect the distribution,
-but where our canned commands will work anyway?  Which distributions
-have you tested this on?
-
-> -	#
-> -	# Fall-back to generic hint code for other distros
-> -	# That's far from ideal, specially for LaTeX dependencies.
-> -	#
-> -	my %map = (
-> -		"sphinx-build" => "sphinx"
-> -	);
-> -	check_missing_tex(2) if ($pdf);
-> -	check_missing(\%map);
-> -	print "I don't know distro $system_release.\n";
-> -	print "So, I can't provide you a hint with the install procedure.\n";
-> -	print "There are likely missing dependencies.\n";
-> +		print "Select a number: ";
-> +		my $choice = <STDIN>;
-> +		chomp $choice;
-> +
-> +		if ($choice =~ /^\d+$/ && $choice >= 1 && $choice <= scalar(@distros)) {
-> +			$distros[$choice - 1]->{func}->();
-> +		} else {
-> +			fallback_unknown_distro();
-> +		}
-> +	} else {
-> +		fallback_unknown_distro();
-> +	}
->  }
->  
->  #
-> @@ -1002,12 +1129,20 @@ while (@ARGV) {
->  		$pdf = 0;
->  	} elsif ($arg eq "--version-check"){
->  		$version_check = 1;
-> +	} elsif ($arg eq "--interactive") {
-> +		# check if the user can interact with the script
-> +		if (-t STDIN) {
-> +			$interactive = 1;
-> +		} else {
-> +    		print "Non-interactive environment\n";
-> +		}
->  	} else {
->  		print "Usage:\n\t$0 <--no-virtualenv> <--no-pdf> <--version-check>\n\n";
->  		print "Where:\n";
->  		print "\t--no-virtualenv\t- Recommend installing Sphinx instead of using a virtualenv\n";
-
-Installing sphinx is happening either way, so this is not quite right.
-
->  		print "\t--version-check\t- if version is compatible, don't check for missing dependencies\n";
-> -		print "\t--no-pdf\t- don't check for dependencies required to build PDF docs\n\n";
-> +		print "\t--no-pdf\t- don't check for dependencies required to build PDF docs\n";
-> +		print "\t--interactuve\t- Ask to intsall missing dependencies\n\n";
-
-I don't think that's how you spell "interactive"
-
->  		exit -1;
->  	}
->  }
-
-Thanks,
-
-jon
+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
+6U6qgI8F5eiKsQyE0HgYrQJx/sDs9LLVZlaNiA3U8M8CgEnb8VhuH3BN/yXphhEQdJXb1TyaJA60
+SmHcZdEQZbl4EjwUcs3UIowmI/Mhi7ADQB7VNsO/BaOVBEQk53xH+4djY/cg7jvqTTeliY05j2Yx
+uwwXcDC4mWjGzxAT5DVqC8fKQvon1uc2heorHb555+sLdwYxAgMBAAGjggHYMIIB1DAOBgNVHQ8B
+Af8EBAMCBaAwgZMGCCsGAQUFBwEBBIGGMIGDMEYGCCsGAQUFBzAChjpodHRwOi8vc2VjdXJlLmds
+b2JhbHNpZ24uY29tL2NhY2VydC9nc2djY3I2c21pbWVjYTIwMjMuY3J0MDkGCCsGAQUFBzABhi1o
+dHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9nc2djY3I2c21pbWVjYTIwMjMwZQYDVR0gBF4wXDAJ
+BgdngQwBBQMBMAsGCSsGAQQBoDIBKDBCBgorBgEEAaAyCgMCMDQwMgYIKwYBBQUHAgEWJmh0dHBz
+Oi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAkGA1UdEwQCMAAwQQYDVR0fBDowODA2
+oDSgMoYwaHR0cDovL2NybC5nbG9iYWxzaWduLmNvbS9nc2djY3I2c21pbWVjYTIwMjMuY3JsMCIG
+A1UdEQQbMBmBF3phY2sucnVzaW5AYnJvYWRjb20uY29tMBMGA1UdJQQMMAoGCCsGAQUFBwMEMB8G
+A1UdIwQYMBaAFAApNp5ceroPry1QLdugI4UYsKCSMB0GA1UdDgQWBBQNDn2m/OLuDx9YjEqPLCDB
+s/VKNTANBgkqhkiG9w0BAQsFAAOCAgEAF463syOLTQkWZmEyyR60W1sM3J1cbnMRrBFUBt3S2NTY
+SJ2NAvkTAxbPoOhK6IQdaTyrWi8xdg2tftr5FC1bOSUdxudY6dipq2txe7mEoUE6VlpJid/56Mo4
+QJRb6YiykQeIfoJiYMKsyuXWsTB1rhQxlxfnaFxi8Xy3+xKAeX68DcsHG3ZU0h1beBURA44tXcz6
+fFDNPQ2k6rWDFz+XNN2YOPqfse2wEm3DXpqNT79ycU7Uva7e51b8XdbmJ6XVzUFmWzhjXy5hvV8z
+iF+DvP+KT1/bjO6aNL2/3PWiy1u6xjnWvobHuAYVrXxQ5wzk8aPOnED9Q8pt2nqk/UIzw2f67Cn9
+3CxrVqXUKm93J+rupyKVTGgKO9T1ODVPo665aIbM72RxSI9Wsofatm2fo8DWOkrfs29pYfy6eECl
+91qfFMl+IzIVfDgIrEX6gSngJ2ZLaG6L+/iNrUxHxxsaUmyDwBbTfjYwr10H6NKES3JaxVRslnpF
+06HTTciJNx2wowbYF1c+BFY4r/19LHygijIVa+hZEgNuMrVLyAamaAKZ1AWxTdv8Q/eeNN3Myq61
+b1ykTSPCXjBq/03CMF/wT1wly16jYjLDXZ6II/HYyJt34QeqnBENU9zXTc9RopqcuHD2g+ROT7lI
+VLi5ffzC8rVliltTltbYPc7F0lAvGKAxggJXMIICUwIBATBiMFIxCzAJBgNVBAYTAkJFMRkwFwYD
+VQQKExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBD
+QSAyMDIzAgxhPxw+eieHWB40hPkwDQYJYIZIAWUDBAIBBQCggccwLwYJKoZIhvcNAQkEMSIEIJjT
+MftN+gGJ/9KhN0MtUWSWnJRpOJtxiwoXYvwmRdbkMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEw
+HAYJKoZIhvcNAQkFMQ8XDTI1MDQyMzE1MzcwM1owXAYJKoZIhvcNAQkPMU8wTTALBglghkgBZQME
+ASowCwYJYIZIAWUDBAEWMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQcwCwYJ
+YIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAG9zOGZs1eXhHM+sGo7jRWOUv0XMmYpoF0JNhcko
+RjrKI9UAGPMxx5LVkMnJYpJoTxDxThRXUbG4wxIekv7HIXWPn59WBGD7tcughxle/XpQYvaqFQTP
+Xaj7C/wdyFLjWN0dst/+XVFDVKZgZjLsUEYBXNQcI+Lf+p+SQCLLf6SHGLXimzSwPTsNbqBkJYFZ
+Sv4xBZn7u/k5s8XNuhk/Zb1kBLqOf6z8NmtloJ1LjO0SVSCSk2q3YWcTTLNSQ58HNM3zDESdpd1Y
+JlOnbCYiRp/Z3W5lIFgnrKXzf1CdtE3n1tt9xJHMr+tHdreG7wBFAoZcJkwUh0df/YzQW0es+Y8=
+--0000000000006f06f1063373df2e--
 
