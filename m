@@ -1,147 +1,453 @@
-Return-Path: <linux-doc+bounces-44048-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44050-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21085A99080
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 17:20:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07474A991DA
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 17:36:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 93B7C445407
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 15:16:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EEE3017E39C
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 15:29:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7AB1E28CF73;
-	Wed, 23 Apr 2025 15:10:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B51AC2FB;
+	Wed, 23 Apr 2025 15:20:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b="BV467kOY"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="Iy1WbPEK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF73928CF5A
-	for <linux-doc@vger.kernel.org>; Wed, 23 Apr 2025 15:10:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39BA7283687;
+	Wed, 23 Apr 2025 15:20:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745421044; cv=none; b=J6hCF4ndbwbjjWVAurmukTqLB5Fqg7O26sLmJgORTT3LDrI2ofKv9k0gGosjeGEgdBabKdJqI9XgonKHmgDKB7CQmjlE3CSoG+w37pqt75oyCLVFbS5eJrHKpx/x+2vx9bLS2J8fyOBjkvWWY53vf0+igSHgKYAi5s66Vxf6WSs=
+	t=1745421627; cv=none; b=e/Qq0r6WUZNT1UBNEWVDmbV79TtZ9QTfLc2Qvv1h/yf2hrS0fkyzY6mmvAlKYKJGy7pkrdLXgV3Nm/ShgKjK/5yvsYUFQ3qjzbhkSo4z8SjU4//c5URApL50KxyM94NmhL9FLOKX2LuJShenvn6Bb3H/NyVr7akmuTaJ5qAj5i8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745421044; c=relaxed/simple;
-	bh=uFV3fDxHeTVor0I1L/M53Jf1QkJJii9mgN/m4+mnqe0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=YuA61bkbo3M5IiWQCccVoeHOlLl3OH7pd56Q2+AlYYCp1ug4Bg5qBy7CYySU5hYw5j2lgcEeXwl6oCMdxeouufIGDcOsphBahMhsEQHXEKKiGiAl52MUwcqtKWMKdjauGurFfAHTIlsXLB1JMiCdRA2mXScqotsx8ApvYO60uFI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=BV467kOY; arc=none smtp.client-ip=209.85.128.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=paul-moore.com
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-6ff37565232so55227727b3.3
-        for <linux-doc@vger.kernel.org>; Wed, 23 Apr 2025 08:10:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=paul-moore.com; s=google; t=1745421041; x=1746025841; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ppDTLRNI5D/DHlJ104+9klrOmugo96Z4EzkqmTSr+tw=;
-        b=BV467kOYvg9v1zan0/6j+x47F8k96sTz/PYM0TdS2w+WeWy7o3I1OK3YpPMw2RYbPn
-         YBo32qVaE2CpT/F0kqYkX6ESu30MQ5Zs4SVO6Ngktc83G8A9DZ52LypKy6vxTaZRnDXv
-         nCvVf9KcnMy3bFIrmJSvtCa5JU5K5bavjj3/uG/IgXj26dO++/pnJtPQzyTlTur5U5E4
-         M27BjyuJxCnK+1YTgD8oA2zvnQoEkgi2Yr8lPHPA/hYOeURaQ2HMRRPT45VNgrE6JOba
-         JVDZYlvx1cuiQ5EbAJTRGFyV9ytozEWODCcZLDQ6CJLlgX0C1fzENfaWaSI3Jc1TGnDg
-         AhnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745421041; x=1746025841;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ppDTLRNI5D/DHlJ104+9klrOmugo96Z4EzkqmTSr+tw=;
-        b=km3G/oMyhWVfCYjkIBCAIaIwWLhPIj6v0WnuTfe0qYY8l1QOV9GF7qoohgfaPwbUI4
-         opsHkM+j+2ISw7y6oi9REiH/MgI1fQM9RGJZ+2pRRoSKIhPc0dVZVKKrWDpFe1Rc9hy5
-         3pDHDb8JFA8ah0OTHCM+2XoGQQJdc1uTVgcnOCux0YFxQJlyyfSWf0qWNNPE27U6BAmH
-         nhpM4czlaEd5OJpBzUTKkrfDdkKSnokKQNszCsu5rNDDkaOL0Mrh/TAEYKvhyehDmnib
-         oW6HGDXwf6kJaPHkoF4wkkcQ9XeHm32yOYTtexbe14KTFDlcpWD3f313+kFcOb3L2LYy
-         Oo4g==
-X-Forwarded-Encrypted: i=1; AJvYcCXv9eJQsND7zecevumPrC3UQ5OUfixnxTE/O5QPU9x7HGelBHf9Z5xoDwZjjPZZdPmDDhZXnvYfDS4=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx4oE6klTK/d0XkIUvVVry2iEfY+Jo2J4mtEqXnivOR5TIIusdy
-	+l9dtkF/rU2eLo3EfnYr9n2Ta6bk8RmMKhNvAqG/iA8D/D1MIdf8H6nfQ5jYOhQ3stC35qaXbmx
-	6VcF0ERdFU/y7117clI6yrbcWUWzloFY8lfi1
-X-Gm-Gg: ASbGncuCeNsqOc2YqMoXJUtqMIX/bJKpUAko+tpv8HnEyCrVoL6ru6UdsPovhh4Wdu8
-	W1OQrIZ1NlKbFSqpziYDejcZWFHdMRKkMfzrq7tGbbAM8A+HghnzMX2QnLnRnNLFNug4vnfMjnh
-	zk245FmpsAJVwfj9XXSDlLs1hTPBYtGmOh
-X-Google-Smtp-Source: AGHT+IHNlf00p8r3DHcmCpgY+IFBhYtAhRgyVsFb6FFk96MPIernB0HKWY5qgWQbLL58D4kTom9itSs/0uIOQcHE5fg=
-X-Received: by 2002:a05:690c:6801:b0:6fd:33a5:59a with SMTP id
- 00721157ae682-706ccd1a5ccmr309843197b3.18.1745421040868; Wed, 23 Apr 2025
- 08:10:40 -0700 (PDT)
+	s=arc-20240116; t=1745421627; c=relaxed/simple;
+	bh=OpNwcBsn5GWUrEwgmZUEWuFm3smC+jDr1D0Xyaa91xs=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=C6ur8BG362t2eXy+ygOYhMCMoXM6aIvjNHNSvN02BzUHKl4v+O5Ve9XNgtWr+tAY+G2xUG7PuIrIAoFDfl5OaAc8fCA/w8x/F84w1KzenDiS5ZtyXWqhpsAKggHz/Y3k6f/hdX+HmDg53uQepSxyQrplJeh+lecdqKAYdQROgDk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=Iy1WbPEK; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 4B58941A92
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1745421624; bh=NkSbcwqUaiTpX26ksQ4x5WS4TrDmKK21EmlBzp9sgAU=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=Iy1WbPEK7WwfgT6bpRXEQ/hpr3KTWU/lfTJ8J5/o9pZ7AaCPzW7zZFZnnA0wtb7q7
+	 Wb/4AU5IGUGcqNNp/Bz1a5nw1Y56l89jCBBKXkfz/OUZ64ZIvXtHeZ9g4aUdd85ekO
+	 FUHzsgsgJLOJ1CnSbXYSPY1ryBLrFWekCdAFGCO7vKXyCn5pN37OkFJSglfKqbTsWl
+	 30iTDxUchzu0uJtehii4GRtYV+fy9ssCYRn2ThlhV+KJCrpS7Cr1FMRlUTV3NYa8s+
+	 RwQ7CH6R5GZk97FmsEZeo/HYiKuQJohaEdU6xP+ppFv4Yqy1fjsv9KQu8i4KUgyFx0
+	 ryZWk9VOu4YIQ==
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 4B58941A92;
+	Wed, 23 Apr 2025 15:20:24 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: saivishnu725@gmail.com, mchehab@kernel.org
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Sai Vishnu M
+ <saivishnu725@gmail.com>
+Subject: Re: [PATCH] add --interactive feature
+In-Reply-To: <20250422153555.85219-1-saivishnu725@gmail.com>
+References: <20250422153555.85219-1-saivishnu725@gmail.com>
+Date: Wed, 23 Apr 2025 09:20:23 -0600
+Message-ID: <87bjsmsy4o.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250404215527.1563146-1-bboscaccy@linux.microsoft.com>
- <20250404215527.1563146-2-bboscaccy@linux.microsoft.com> <CAADnVQJyNRZVLPj_nzegCyo+BzM1-whbnajotCXu+GW+5-=P6w@mail.gmail.com>
- <87semdjxcp.fsf@microsoft.com> <CAADnVQ+JGfwRgsoe2=EHkXdTyQ8ycn0D9nh1k49am++4oXUPHg@mail.gmail.com>
- <87friajmd5.fsf@microsoft.com> <CAADnVQKb3gPBFz+n+GoudxaTrugVegwMb8=kUfxOea5r2NNfUA@mail.gmail.com>
- <87a58hjune.fsf@microsoft.com> <CAADnVQ+LMAnyT4yV5iuJ=vswgtUu97cHKnvysipc6o7HZfEbUA@mail.gmail.com>
- <87y0w0hv2x.fsf@microsoft.com> <CAADnVQKF+B_YYwOCFsPBbrTBGKe4b22WVJFb8C0PHGmRAjbusQ@mail.gmail.com>
- <2bd95ca78e836db0775da8237792e8448b8eec62.camel@HansenPartnership.com>
-In-Reply-To: <2bd95ca78e836db0775da8237792e8448b8eec62.camel@HansenPartnership.com>
-From: Paul Moore <paul@paul-moore.com>
-Date: Wed, 23 Apr 2025 11:10:29 -0400
-X-Gm-Features: ATxdqUEil0O912atUTQeKlUUv4Sfsc4c76L7yegeINodkXYOkWCpNQ86Ynaeoaw
-Message-ID: <CAHC9VhTi6+CHD9OtWj5=pPDrtwF+S9yfBOKqghe=9wXmd7jrxA@mail.gmail.com>
-Subject: Re: [PATCH v2 security-next 1/4] security: Hornet LSM
-To: James Bottomley <James.Bottomley@hansenpartnership.com>
-Cc: Alexei Starovoitov <alexei.starovoitov@gmail.com>, 
-	Blaise Boscaccy <bboscaccy@linux.microsoft.com>, Jonathan Corbet <corbet@lwn.net>, 
-	David Howells <dhowells@redhat.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, James Morris <jmorris@namei.org>, 
-	"Serge E. Hallyn" <serge@hallyn.com>, Masahiro Yamada <masahiroy@kernel.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nicolas@fjasle.eu>, Shuah Khan <shuah@kernel.org>, 
-	=?UTF-8?B?TWlja2HDq2wgU2FsYcO8bg==?= <mic@digikod.net>, 
-	=?UTF-8?Q?G=C3=BCnther_Noack?= <gnoack@google.com>, 
-	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, Bill Wendling <morbo@google.com>, 
-	Justin Stitt <justinstitt@google.com>, Jarkko Sakkinen <jarkko@kernel.org>, 
-	Jan Stancek <jstancek@redhat.com>, Neal Gompa <neal@gompa.dev>, 
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
-	keyrings@vger.kernel.org, 
-	Linux Crypto Mailing List <linux-crypto@vger.kernel.org>, 
-	LSM List <linux-security-module@vger.kernel.org>, 
-	Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>, 
-	"open list:KERNEL SELFTEST FRAMEWORK" <linux-kselftest@vger.kernel.org>, bpf <bpf@vger.kernel.org>, 
-	clang-built-linux <llvm@lists.linux.dev>, nkapron@google.com, 
-	Matteo Croce <teknoraver@meta.com>, Roberto Sassu <roberto.sassu@huawei.com>, 
-	Cong Wang <xiyou.wangcong@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-On Wed, Apr 23, 2025 at 10:12=E2=80=AFAM James Bottomley
-<James.Bottomley@hansenpartnership.com> wrote:
-> On Mon, 2025-04-21 at 13:12 -0700, Alexei Starovoitov wrote:
-> [...]
-> > Calling bpf_map_get() and
-> > map->ops->map_lookup_elem() from a module is not ok either.
+OK, we are getting somewhere, but there are various things to point
+out/fix here. 
+
+saivishnu725@gmail.com writes:
+
+> From: Sai Vishnu M <saivishnu725@gmail.com>
 >
-> I don't understand this objection.  The program just got passed in to
-> bpf_prog_load() as a set of attributes which, for a light skeleton,
-> directly contain the code as a blob and have the various BTF
-> relocations as a blob in a single element array map.  I think everyone
-> agrees that the integrity of the program would be compromised by
-> modifications to the relocations, so the security_bpf_prog_load() hook
-> can't make an integrity determination without examining both.  If the
-> hook can't use the bpf_maps.. APIs directly is there some other API it
-> should be using to get the relocations, or are you saying that the
-> security_bpf_prog_load() hook isn't fit for purpose and it should be
-> called after the bpf core has loaded the relocations so they can be
-> provided to the hook as an argument?
+> This patch introduces an interactive mode to the sphinx-pre-install script
+> that guides users through missing dependency installation for convenience.
+
+Some maintainers will react strongly to "this patch", insisting that
+changelogs be written in the imperative mode.  I am less fussy about
+such things, but that's a good practice to follow in general.
+
+> - Adds `--interactive` flag to trigger prompt-based guidance
+> - Handles cases where stdin is not available
+> - Implements default behavior for invalid or no input
+> - Improves messages for unknown distros and errors
+
+A list like this is a clear sign that a patch needs to be broken up into
+a series.  Remember, each patch should do one clearly verifiable thing.
+When you mix changes like this, you make things much harder to review.
+
+> RFC: https://lore.kernel.org/linux-doc/20250410155414.47114-1-saivishnu725@gmail.com/T/#u
+
+This is not a normal patch tag.  Putting in a link to the RFC is fine,
+but it should go below the "---" line.  It also *really* helps to add a
+summary of what has changed since the previous revision.
+
+> Signed-off-by: Sai Vishnu M <saivishnu725@gmail.com>
+> ---
+>  scripts/sphinx-pre-install | 185 ++++++++++++++++++++++++++++++++-----
+>  1 file changed, 160 insertions(+), 25 deletions(-)
 >
-> The above, by the way, is independent of signing, because it applies to
-> any determination that might be made in the security_bpf_prog_load()
-> hook regardless of purpose.
+> diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
+> index ad9945ccb0cf..a3fbe920bb44 100755
+> --- a/scripts/sphinx-pre-install
+> +++ b/scripts/sphinx-pre-install
+> @@ -42,6 +42,7 @@ my $latest_avail_ver;
+>  my $pdf = 1;
+>  my $virtualenv = 1;
+>  my $version_check = 0;
+> +my $interactive = 0;
+>  
+>  #
+>  # List of required texlive packages on Fedora and OpenSuse
+> @@ -338,12 +339,96 @@ sub which($)
+>  	return undef;
+>  }
+>  
+> +sub run_if_interactive($)
+> +{
+> +	my $command = shift;
+> +	printf("\n\t$command\n");
+> +
+> +	if($interactive) {
 
-I've also been worrying that some of the unspoken motivation behind
-the objection is simply that Hornet is not BPF.  If/when we get to a
-point where Hornet is sent up to Linus and Alexei's objection to the
-Hornet LSM inspecting BPF maps stands, it seems as though *any* LSM,
-including BPF LSMs, would need to be prevented from accessing BPF
-maps.  I'm fairly certain no one wants to see it come to that.
+Please try to stick with something close to the kernel coding style
+(space after "if")
 
---=20
-paul-moore.com
+> +		printf("Run the command now? [Y/n, default:Y]: ");
+> +		my $user_input = <STDIN>;
+> +		chomp $user_input;
+> +		# Default = Y
+
+Given that the code just above makes the default explicit, this comment
+is not too helpful.
+
+> +		if ($user_input eq '' or $user_input =~ /^y(es)?$/i) {
+> +			system($command) == 0 or warn "Failed to run the command";
+> +		}
+
+It seems that, if a command fails, everything should come to a stop
+immediately? 
+
+> +	}
+> +}
+> +
+> +sub fallback_unknown_distro()
+> +{
+> +	# Fall-back to generic hint code for other distros
+> +	# That's far from ideal, specially for LaTeX dependencies.
+> +	my %map = (
+> +		"sphinx-build" => "sphinx"
+> +	);
+> +	check_missing_tex(2) if ($pdf);
+> +	check_missing(\%map);
+> +	print "I don't know distro $system_release.\n";
+> +	print "So, I can't provide you a hint with the install procedure.\n";
+> +	print "There are likely missing dependencies.\n";
+> +}
+> +
+> +# checks if a package exists in path
+> +sub is_in_path($)
+> +{
+> +    my $cmd = shift;
+> +    for my $dir (split /:/, $ENV{PATH}) {
+> +        return 1 if -x "$dir/$cmd";
+> +    }
+> +    return 0;
+> +}
+> +
+> +# adding a check in --interactive
+> +# Reason: Selecting an incorrect distribution in cases where the user's distribution is unrecognized may lead to unexpected behavior.
+
+Please keep lines within 80 columns
+
+> +sub check_user_choice($)
+> +{
+> +	my $package_manager = shift;
+> +	if ($interactive) {
+> +		# checks if the package manager exists. hence, confirming the distribution
+> +		if (!is_in_path($package_manager)) {
+> +			print "$package_manager not found\n";
+> +			fallback_unknown_distro();
+> +			return 0;
+> +		}
+> +		return 1; # package_manager found
+> +	}
+> +	return 1; # non-interactive
+> +}
+
+...and the case where the tool isn't in the user's path, but running
+under sudo will find it...?
+
+> +# checks if either of the package manager exists
+> +sub check_user_choice_two($$)
+> +{
+> +	my ($pm1, $pm2) = @_;
+> +	if ($interactive) {
+> +		my $found = 0;
+> +		# checks if either of the package managers exists. hence, confirming the distribution
+> +		if(is_in_path($pm1)) {
+
+Again, watch coding style
+
+> +			$found = 1;
+> +		}
+> +		if(is_in_path($pm2)) {
+> +			$found = 1;
+> +		}
+
+this whole series could be something like:
+
+  $found = is_in_path($pm1) or is_in_path($pm2)
+
+right?
+
+> +		if(!$found) {
+> +			print "both $pm1 and $pm2 not found\n";
+> +			fallback_unknown_distro();
+> +			return 0; # package_manager not found
+> +		}
+> +		return 1; # package_manager found
+> +	}
+> +	return 1; # non-interactive
+> +}
+> +
+>  #
+>  # Subroutines that check distro-specific hints
+>  #
+>  
+>  sub give_debian_hints()
+>  {
+> +	if (!check_user_choice("apt-get")) {
+> +		return;
+> +	}
+
+I guess I don't understand why we have to do these checks.  We know it's
+Debian, right?
+
+>  	my %map = (
+>  		"python-sphinx"		=> "python3-sphinx",
+>  		"yaml"			=> "python3-yaml",
+> @@ -374,11 +459,16 @@ sub give_debian_hints()
+>  
+>  	return if (!$need && !$optional);
+>  	printf("You should run:\n") if ($verbose_warn_install);
+> -	printf("\n\tsudo apt-get install $install\n");
+> +	my $command = "sudo apt-get install $install";
+> +	run_if_interactive($command);
+>  }
+>  
+>  sub give_redhat_hints()
+>  {
+> +	if (!check_user_choice_two("dnf", "yum")) {
+> +		return;
+> +	}
+
+Do we support any RH versions that still have yum at this point?
+
+>  	my %map = (
+>  		"python-sphinx"		=> "python3-sphinx",
+>  		"yaml"			=> "python3-pyyaml",
+> @@ -452,16 +542,21 @@ sub give_redhat_hints()
+>  	if (!$old) {
+>  		# dnf, for Fedora 18+
+>  		printf("You should run:\n") if ($verbose_warn_install);
+> -		printf("\n\tsudo dnf install -y $install\n");
+> +		my $command = "sudo dnf install -y $install";
+> +		run_if_interactive($command);
+>  	} else {
+>  		# yum, for RHEL (and clones) or Fedora version < 18
+>  		printf("You should run:\n") if ($verbose_warn_install);
+> -		printf("\n\tsudo yum install -y $install\n");
+> +		my $command = "sudo yum install -y $install";
+> +		run_if_interactive($command);
+>  	}
+>  }
+>  
+>  sub give_opensuse_hints()
+>  {
+> +	if (!check_user_choice("zypper")) {
+> +		return;
+> +	}
+>  	my %map = (
+>  		"python-sphinx"		=> "python3-sphinx",
+>  		"yaml"			=> "python3-pyyaml",
+> @@ -505,11 +600,16 @@ sub give_opensuse_hints()
+>  
+>  	return if (!$need && !$optional);
+>  	printf("You should run:\n") if ($verbose_warn_install);
+> -	printf("\n\tsudo zypper install --no-recommends $install\n");
+> +	my $command = "sudo zypper install --no-recommends $install";
+> +	run_if_interactive($command);
+> +
+>  }
+>  
+>  sub give_mageia_hints()
+>  {
+> +	if (!check_user_choice_two("dnf", "urpmi")) {
+> +		return;
+> +	}
+>  	my %map = (
+>  		"python-sphinx"		=> "python3-sphinx",
+>  		"yaml"			=> "python3-yaml",
+> @@ -538,7 +638,6 @@ sub give_mageia_hints()
+>  		$noto_sans = "google-noto-sans-cjk-ttc-fonts";
+>  	}
+>  
+> -
+>  	if ($pdf) {
+>  		check_missing_file(["/usr/share/fonts/google-noto-cjk/NotoSansCJK-Regular.ttc",
+>  				    "/usr/share/fonts/TTF/NotoSans-Regular.ttf"],
+> @@ -550,11 +649,17 @@ sub give_mageia_hints()
+>  
+>  	return if (!$need && !$optional);
+>  	printf("You should run:\n") if ($verbose_warn_install);
+> -	printf("\n\tsudo $packager_cmd $install\n");
+> +	my $command = "sudo $packager_cmd $install";
+> +	run_if_interactive($command);
+> +
+>  }
+>  
+>  sub give_arch_linux_hints()
+>  {
+> +	if (!check_user_choice("pacman")) {
+> +		return;
+> +	}
+> +
+>  	my %map = (
+>  		"yaml"			=> "python-yaml",
+>  		"virtualenv"		=> "python-virtualenv",
+> @@ -581,11 +686,16 @@ sub give_arch_linux_hints()
+>  
+>  	return if (!$need && !$optional);
+>  	printf("You should run:\n") if ($verbose_warn_install);
+> -	printf("\n\tsudo pacman -S $install\n");
+> +	my $command = "sudo pacman -S $install";
+> +	run_if_interactive($command);
+>  }
+>  
+>  sub give_gentoo_hints()
+>  {
+> +	if (!check_user_choice("emerge")) {
+> +		return;
+> +	}
+> +
+>  	my %map = (
+>  		"yaml"			=> "dev-python/pyyaml",
+>  		"virtualenv"		=> "dev-python/virtualenv",
+> @@ -617,14 +727,15 @@ sub give_gentoo_hints()
+>  	my $portage_cairo = "/etc/portage/package.use/graphviz";
+>  
+>  	if (qx(grep imagemagick $portage_imagemagick 2>/dev/null) eq "") {
+> -		printf("\tsudo su -c 'echo \"$imagemagick\" > $portage_imagemagick'\n")
+> +		my $imagemagick_command = "sudo su -c 'echo \"$imagemagick\" > $portage_imagemagick'";
+> +		run_if_interactive($imagemagick_command);
+>  	}
+>  	if (qx(grep graphviz $portage_cairo 2>/dev/null) eq  "") {
+> -		printf("\tsudo su -c 'echo \"$cairo\" > $portage_cairo'\n");
+> +		my $portage_command = "sudo su -c 'echo \"$cairo\" > $portage_cairo'";
+> +		run_if_interactive($portage_command);
+>  	}
+> -
+> -	printf("\tsudo emerge --ask $install\n");
+> -
+> +	my $command = "sudo emerge --ask $install";
+> +	run_if_interactive($command);
+>  }
+>  
+>  sub check_distros()
+> @@ -678,19 +789,35 @@ sub check_distros()
+>  		give_gentoo_hints;
+>  		return;
+>  	}
+> +	# if the distro is not recognised
+> +	# but it is derived from the available options
+> +	if ($interactive) {
+> +		my @distros = (
+> +			{ name => "Debian/Ubuntu", func => \&give_debian_hints },
+> +			{ name => "RedHat/CentOS/Fedora", func => \&give_redhat_hints },
+> +			{ name => "OpenSUSE", func => \&give_opensuse_hints },
+> +			{ name => "Mageia", func => \&give_mageia_hints },
+> +			{ name => "Arch Linux", func => \&give_arch_linux_hints },
+> +			{ name => "Gentoo", func => \&give_gentoo_hints },
+> +		);
+> +		print "Which distro is your OS based on?\n";
+> +		for my $i (0 .. $#distros) {
+> +			printf("[%d] %s\n", $i + 1, $distros[$i]->{name});
+> +		}
+> +		print "[0] Others\n";
+
+Are there really any cases where we will not detect the distribution,
+but where our canned commands will work anyway?  Which distributions
+have you tested this on?
+
+> -	#
+> -	# Fall-back to generic hint code for other distros
+> -	# That's far from ideal, specially for LaTeX dependencies.
+> -	#
+> -	my %map = (
+> -		"sphinx-build" => "sphinx"
+> -	);
+> -	check_missing_tex(2) if ($pdf);
+> -	check_missing(\%map);
+> -	print "I don't know distro $system_release.\n";
+> -	print "So, I can't provide you a hint with the install procedure.\n";
+> -	print "There are likely missing dependencies.\n";
+> +		print "Select a number: ";
+> +		my $choice = <STDIN>;
+> +		chomp $choice;
+> +
+> +		if ($choice =~ /^\d+$/ && $choice >= 1 && $choice <= scalar(@distros)) {
+> +			$distros[$choice - 1]->{func}->();
+> +		} else {
+> +			fallback_unknown_distro();
+> +		}
+> +	} else {
+> +		fallback_unknown_distro();
+> +	}
+>  }
+>  
+>  #
+> @@ -1002,12 +1129,20 @@ while (@ARGV) {
+>  		$pdf = 0;
+>  	} elsif ($arg eq "--version-check"){
+>  		$version_check = 1;
+> +	} elsif ($arg eq "--interactive") {
+> +		# check if the user can interact with the script
+> +		if (-t STDIN) {
+> +			$interactive = 1;
+> +		} else {
+> +    		print "Non-interactive environment\n";
+> +		}
+>  	} else {
+>  		print "Usage:\n\t$0 <--no-virtualenv> <--no-pdf> <--version-check>\n\n";
+>  		print "Where:\n";
+>  		print "\t--no-virtualenv\t- Recommend installing Sphinx instead of using a virtualenv\n";
+
+Installing sphinx is happening either way, so this is not quite right.
+
+>  		print "\t--version-check\t- if version is compatible, don't check for missing dependencies\n";
+> -		print "\t--no-pdf\t- don't check for dependencies required to build PDF docs\n\n";
+> +		print "\t--no-pdf\t- don't check for dependencies required to build PDF docs\n";
+> +		print "\t--interactuve\t- Ask to intsall missing dependencies\n\n";
+
+I don't think that's how you spell "interactive"
+
+>  		exit -1;
+>  	}
+>  }
+
+Thanks,
+
+jon
 
