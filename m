@@ -1,43 +1,43 @@
-Return-Path: <linux-doc+bounces-44049-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44051-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04A9CA990FB
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 17:25:21 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 20226A9923F
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 17:41:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A5E581B81F67
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 15:18:31 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1F96C464FAC
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Apr 2025 15:33:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E0A3A28DF1D;
-	Wed, 23 Apr 2025 15:11:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 11CEA28F92F;
+	Wed, 23 Apr 2025 15:22:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="0hvFVCAT"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="K6s5U3y5"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEE7C27F4D1;
-	Wed, 23 Apr 2025 15:11:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D581128A402;
+	Wed, 23 Apr 2025 15:22:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745421107; cv=none; b=idLeB2rdmi13x62tsJ5eDMs32GNMJ2rHKIqwlv2rYZo0Zc+M5N5FHM7Nw8AUxJJ0kprF1TPri7QWfR2q22EeNyJCK9QcAsJuk1CQCtIBBYayKKWKWfKX4Ko77Iq5v4aaB5uuAdUvgxs93Xbu6EToOayl69ZNo93ApbUX2hJD2lA=
+	t=1745421736; cv=none; b=S2ENhUbVSligeE3yDyNWb3n828xXU1RNYF+qVkK2Z/d8Wx+Rl1n4lQKZ1D0Yg+75f3Z0OB+9rqMiRjzFIgXNTLEm6wja8snMvmePQ7AfikUemZQVR9eRxsN2OnH3PCwSEb6L4sXRoFlcQAm6pH8QDoSdk83H3s0t3Iwk0H7yMU8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745421107; c=relaxed/simple;
-	bh=7DTSy5c0LEFq6TqHnzfnsQmzUsM4pf25hH2RxLEG93Q=;
+	s=arc-20240116; t=1745421736; c=relaxed/simple;
+	bh=mD+dv+PEt1ufPDp6ohHJqlNFRkaPmJBo0UfyAitqRvo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VsEcSOy+JeYra2YSoGa0J8cei+Xx2igNPCWQen0onmweNHG/JudpLqLmG5kQMkpsMXsAZL3DBTdO7yRr1fDTSQtoxSl7F5I8DeLjWJp4ezbdIio05LswDYY4HqKOXV7a6HKbLyxDc53QiPokQfYI1c0jIbtR8KrKrcWLSQRGOUI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=0hvFVCAT; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A40FC4CEE2;
-	Wed, 23 Apr 2025 15:11:47 +0000 (UTC)
+	 MIME-Version; b=s+QXnmY4FftmYEdaMZdOUM3kGItCNku/LwmZ2erim81Nf3nm+DKjFOGq4VFyPNbRPjLIt2uLW/IILb0OIfDC2Zv7EzXoNePMz92W01jY/zixvxaauB4guTVmgct89yYuwAQ4ZLHzULiQTEZBTuOYUeC/08jqt05eUj7fF5BgzDg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=K6s5U3y5; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCE26C4CEE3;
+	Wed, 23 Apr 2025 15:22:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1745421107;
-	bh=7DTSy5c0LEFq6TqHnzfnsQmzUsM4pf25hH2RxLEG93Q=;
+	s=korg; t=1745421734;
+	bh=mD+dv+PEt1ufPDp6ohHJqlNFRkaPmJBo0UfyAitqRvo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=0hvFVCAT5jtCig0nLcR7J+2P1wXVGhGv9rr1fqWPCDQqC+r/7lY6jONUP0bL1ytgl
-	 5mFUJqmXQQe+4u9tGT5X8/QqouQIk1PlkkqIa90I1ICOq8vw+QED7eZHLF8F1SngTk
-	 3vQDZQF1wXYC9QPBtFNzmVYq8r7P2N/Ly4RFZTd0=
+	b=K6s5U3y5qsvaQXh+puonBw4SkgAMFdRecRT4gtZxSJT27ydoqGKIZZCBdNKyU5pGT
+	 u6BwMiqkST9NDhqiGy5lpOGx0RNeSAZfqHOd0+uagQCcJnNuLJGO+7mPRxAtCaedSo
+	 EBtwppACKOId9FpSxvd8dOgeZtMQbFvy3SeA/Ef4=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -54,12 +54,12 @@ Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	kvmarm@lists.linux.dev,
 	Anshuman Khandual <anshuman.khandual@arm.com>,
 	Catalin Marinas <catalin.marinas@arm.com>
-Subject: [PATCH 6.12 192/223] arm64/boot: Enable EL2 requirements for FEAT_PMUv3p9
-Date: Wed, 23 Apr 2025 16:44:24 +0200
-Message-ID: <20250423142624.996855042@linuxfoundation.org>
+Subject: [PATCH 6.14 227/241] arm64/boot: Enable EL2 requirements for FEAT_PMUv3p9
+Date: Wed, 23 Apr 2025 16:44:51 +0200
+Message-ID: <20250423142629.838396660@linuxfoundation.org>
 X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250423142617.120834124@linuxfoundation.org>
-References: <20250423142617.120834124@linuxfoundation.org>
+In-Reply-To: <20250423142620.525425242@linuxfoundation.org>
+References: <20250423142620.525425242@linuxfoundation.org>
 User-Agent: quilt/0.68
 X-stable: review
 X-Patchwork-Hint: ignore
@@ -71,7 +71,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-6.12-stable review patch.  If anyone has any objections, please let me know.
+6.14-stable review patch.  If anyone has any objections, please let me know.
 
 ------------------
 
@@ -114,12 +114,11 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 ---
  Documentation/arch/arm64/booting.rst |   22 ++++++++++++++++++++++
  arch/arm64/include/asm/el2_setup.h   |   25 +++++++++++++++++++++++++
- arch/arm64/tools/sysreg              |    1 +
- 3 files changed, 48 insertions(+)
+ 2 files changed, 47 insertions(+)
 
 --- a/Documentation/arch/arm64/booting.rst
 +++ b/Documentation/arch/arm64/booting.rst
-@@ -285,6 +285,12 @@ Before jumping into the kernel, the foll
+@@ -288,6 +288,12 @@ Before jumping into the kernel, the foll
  
      - SCR_EL3.FGTEn (bit 27) must be initialised to 0b1.
  
@@ -132,7 +131,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
    For CPUs with support for HCRX_EL2 (FEAT_HCX) present:
  
    - If EL3 is present and the kernel is entered at EL2:
-@@ -379,6 +385,22 @@ Before jumping into the kernel, the foll
+@@ -382,6 +388,22 @@ Before jumping into the kernel, the foll
  
      - SMCR_EL2.EZT0 (bit 30) must be initialised to 0b1.
  
@@ -157,7 +156,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
    - If the kernel is entered at EL1 and EL2 is present:
 --- a/arch/arm64/include/asm/el2_setup.h
 +++ b/arch/arm64/include/asm/el2_setup.h
-@@ -215,6 +215,30 @@
+@@ -259,6 +259,30 @@
  .Lskip_fgt_\@:
  .endm
  
@@ -185,27 +184,17 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 +.Lskip_fgt2_\@:
 +.endm
 +
- .macro __init_el2_nvhe_prepare_eret
- 	mov	x0, #INIT_PSTATE_EL1
- 	msr	spsr_el2, x0
-@@ -240,6 +264,7 @@
+ .macro __init_el2_gcs
+ 	mrs_s	x1, SYS_ID_AA64PFR1_EL1
+ 	ubfx	x1, x1, #ID_AA64PFR1_EL1_GCS_SHIFT, #4
+@@ -304,6 +328,7 @@
  	__init_el2_nvhe_idregs
  	__init_el2_cptr
  	__init_el2_fgt
 +	__init_el2_fgt2
+         __init_el2_gcs
  .endm
  
- #ifndef __KVM_NVHE_HYPERVISOR__
---- a/arch/arm64/tools/sysreg
-+++ b/arch/arm64/tools/sysreg
-@@ -1238,6 +1238,7 @@ UnsignedEnum	11:8	PMUVer
- 	0b0110	V3P5
- 	0b0111	V3P7
- 	0b1000	V3P8
-+	0b1001	V3P9
- 	0b1111	IMP_DEF
- EndEnum
- UnsignedEnum	7:4	TraceVer
 
 
 
