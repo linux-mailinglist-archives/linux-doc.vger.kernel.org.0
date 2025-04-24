@@ -1,103 +1,250 @@
-Return-Path: <linux-doc+bounces-44123-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44126-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9750A99CA8
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Apr 2025 02:17:37 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D2F67A99CE3
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Apr 2025 02:24:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D4EB45A55BA
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Apr 2025 00:17:18 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 479C54637BE
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Apr 2025 00:24:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D572C1CA81;
-	Thu, 24 Apr 2025 00:17:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9176FC13D;
+	Thu, 24 Apr 2025 00:24:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sqlfk8lx"
+	dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b="GZA3w2dg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADDB91BC3C;
-	Thu, 24 Apr 2025 00:17:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0FED8C0B
+	for <linux-doc@vger.kernel.org>; Thu, 24 Apr 2025 00:24:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745453838; cv=none; b=gcw4I1G187rIZBfgAFSsZnba9BxZ8raBQzajwfnZnLyDqCCN2Ll35p6s3iuPtqVnzMA0IT8eyDKwUN73wOWLgfxM11hH92s7exZXOdvbPbiMFxC1/pCZTbcSHgvc/iv20DB0fnZx0cQGFn4yp6/ouqtDU56WXmgrO10BmoPeNHE=
+	t=1745454243; cv=none; b=tpq1WnR8QYwRhStlMZQPGAFTdCGRm69KzemDpB6IBoRKzZxLsi5wl8BgaV7zpBjlObSc9Pl08Kuq8GbrdLZFioFL//+q8FoFvuaGtmfM5/kSxAoY27J/4AWjuy+HvyzbyOKV7LBVvcB9LbUvuizPGzkUzGmQAtW0uqlau4E5NYE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745453838; c=relaxed/simple;
-	bh=1eKuPB985sA7XP0k/Jaz595uT7gavw91h7GkNlCQrZw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=oxhlPBFozyBGU4GX0+AOx4Wsxt3mkEvu3ySHeQOOt1tIwf3yKG3RKZjU17i7kmY7UK/92r0B9o5SqNuu68VXpxSBuGR5kPWrQBKUXlAsIX6Anp4Hfb+Z/2Ar2oQSXW88NGIYFi03X7ZR5NoyuLVHPmmAwWgWEX02RQgwHQDMTY8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sqlfk8lx; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23BBBC4CEEA;
-	Thu, 24 Apr 2025 00:17:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745453838;
-	bh=1eKuPB985sA7XP0k/Jaz595uT7gavw91h7GkNlCQrZw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=sqlfk8lxSpKOB3EAfi8c3iHzcjySZ81rIuKKP4FNJZ1nzQwaJMeSiTk16raQakhuP
-	 AMgR+9DGpXI9RpY5aF5TmXZfp2/xlNDK1vGXH+evOngAmuToZb3C0Uct6t1dFkzqrB
-	 yN5qUyzyXKrHQAoyG3R947PwdUhsiTWT3aMi1lie4yDVw4d5zOffEj2ZaBnT38aDJB
-	 ThmUNx4xaX/mySbSU1fLUCpfDBVvbS4+GM2n5qckNbfwkDtYvaFYsh05cqefWiks6T
-	 VljDz/l6zN6liFFOzlQ9QEtbfbuk+2ICjbeB8bNlMlFInBpKRZc9xqqY9+529CBYWV
-	 8xC/kcfQluhWQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab@kernel.org>)
-	id 1u7kH5-0000000049c-2FLv;
-	Thu, 24 Apr 2025 08:17:07 +0800
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Steven Rostedt (Google)" <rostedt@goodmis.org>,
-	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <linux@weissschuh.net>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Kris Van Hees <kris.van.hees@oracle.com>,
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-	Masahiro Yamada <masahiroy@kernel.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v4 4/4] .gitignore: ignore Python compiled bytecode
-Date: Thu, 24 Apr 2025 08:16:24 +0800
-Message-ID: <ae1c54ddacf6ded1f7154897b10798d4b3fdaf96.1745453655.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1745453655.git.mchehab+huawei@kernel.org>
-References: <cover.1745453655.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1745454243; c=relaxed/simple;
+	bh=crPxcnf9+OekJ0yxWQkSZVs8fIhnC61OsBU4Yac1+T0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=knctQRua1MODyGx8rXJAQEYfQErENZV6k9mmMQsL3i72z3izGqKiI5B0OiGx4WmQbdNorn3vNahF+f1+zH271KYfDEjUdRqLMM1oNIHOREDYl31xwiLYhcgUVAHpzUwpDEmo6Q/JxBVoOr/O48RPNNd/qVUVVe0SrIIDBhQxwJc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com; spf=pass smtp.mailfrom=rivosinc.com; dkim=pass (2048-bit key) header.d=rivosinc-com.20230601.gappssmtp.com header.i=@rivosinc-com.20230601.gappssmtp.com header.b=GZA3w2dg; arc=none smtp.client-ip=209.85.214.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=rivosinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rivosinc.com
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-22423adf751so4504845ad.2
+        for <linux-doc@vger.kernel.org>; Wed, 23 Apr 2025 17:24:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1745454241; x=1746059041; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=lGbM0o/TGPFqR3aQeqhm8zgtQt8YivoCdhsm3mycjoo=;
+        b=GZA3w2dgGW8YMq0XVdH2+lQC+vKKLrrn7g6YoibqT5TiQDXC7ubvAqIzI+hVn9b796
+         p+mtsu5ZtljLsBu24+nupMyIdZPqT+6R761m/fNAXtrFXOw9B3F0yRJ9AQJUiiGKvCZq
+         wJ9ldSyDoYsHootW3/3GC9LXfqxE1wfQ0NFdhjLtZwRMW+VCr6kwjG6ofmkeUpCw60kR
+         D6HKqAVZiBrdwJSbOg5B9jaM3D68GkVFaBhu3PWfEcjU5Nz9Quj5xcqXLA1CP53w17eg
+         6DFHFfxMr0AkR9RFPPpm2+tlxxv7tPUGP8HcpPmSceHOatP/yfboxcHRf2guwmxHNQ14
+         pzrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745454241; x=1746059041;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=lGbM0o/TGPFqR3aQeqhm8zgtQt8YivoCdhsm3mycjoo=;
+        b=LKCablSwODZGvgR8u/AC2/Gvjxd1C1Vg9lD/o/fkFkTO5kSZwt62ZkfzRjvRtrA7zZ
+         8g4uJp/vJpU51Fm8UL/J+vfiy1U7hNt2GJ+UH04nTgTXp4jrxgxNs3CP8oqIg+Xmv3Rw
+         QjLhrJmwTZUS4FopfWrrqIi+P3Ngx6pP+tEldObd0mWT40eVa4MYao7PoYQ9xcfWWh4B
+         p25hSL1hCsubAAVYyZ6Y4PtjRnDnTnWhatYM7jojXNCWkg8A/xVWBB0cuHQfi97ROqih
+         gtGFR2mRZdCt7/cUJaIqBBS/CyndNQpYCyWIi0mMjezM58joKtIJ1EBahLimjljhzxqc
+         Ri8A==
+X-Forwarded-Encrypted: i=1; AJvYcCXNTfKWpqUvnI5Nl3JZRSmmqKnP4zrGFNOcat9SoLrlAbFIcM0/U96n+SCm+ITKwRsK3aqUmCvWqZ0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwvpCEWr2i08aRqYZDLJnHtRdRqO6GLho0x7xMLD1IBTx2kg1jY
+	FvHoOBIF4rAxtRjtc0VTOtYf4eH6i0kpVXIKnVVEPYGQEocxEKt4TazzAVwuCMM=
+X-Gm-Gg: ASbGncuuHK+zRtB9B4zRhyoRxYj92OBjnAkZtXn3ozRHi0o0DMLI4HBvsEbD3hr7dWJ
+	5mmFE4pF+Wh92MHHrSRxcmAk1h+wwlgtrBKneu4DzU+0WT2T7JbaoWmjqm4DX5o1t1pQmTrmUql
+	X00ehDTm7TvfVvY5ulLtfftZsOQ6UyigA2YlCmRpPsNKB4xF2F+mJ9dQMOBtfhr2dxkpXxhEND2
+	bvIBKEx3j+g0c0PPqcvDey16Hq64G6yHZ9nIEV4QNd4E7S2DsvA/peBkEYMowgB6x6TfeYTk35n
+	VsSau8QBH+xZnW/jTdv4+YEGZ2Vqo0Ga/BejMSVg0K8P6ecl5fU=
+X-Google-Smtp-Source: AGHT+IGyYV/yzfLVnA9w34LRw7jQyIRxTFaioHQFl6p52L2kjU27J0WT2xyCuQTG4x/GFtq73xmJJA==
+X-Received: by 2002:a17:903:1103:b0:22c:3609:97ed with SMTP id d9443c01a7336-22db3c3a039mr6299555ad.30.1745454240827;
+        Wed, 23 Apr 2025 17:24:00 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22db5103259sm672675ad.185.2025.04.23.17.23.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Apr 2025 17:24:00 -0700 (PDT)
+Date: Wed, 23 Apr 2025 17:23:56 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Conor Dooley <conor@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Christian Brauner <brauner@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Oleg Nesterov <oleg@redhat.com>,
+	Eric Biederman <ebiederm@xmission.com>, Kees Cook <kees@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+	Jann Horn <jannh@google.com>, Conor Dooley <conor+dt@kernel.org>,
+	linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org, linux-riscv@lists.infradead.org,
+	devicetree@vger.kernel.org, linux-arch@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+	alistair.francis@wdc.com, richard.henderson@linaro.org,
+	jim.shu@sifive.com, andybnac@gmail.com, kito.cheng@sifive.com,
+	charlie@rivosinc.com, atishp@rivosinc.com, evan@rivosinc.com,
+	cleger@rivosinc.com, alexghiti@rivosinc.com,
+	samitolvanen@google.com, broonie@kernel.org,
+	rick.p.edgecombe@intel.com, Zong Li <zong.li@sifive.com>,
+	linux-riscv <linux-riscv-bounces@lists.infradead.org>
+Subject: Re: [PATCH v12 05/28] riscv: usercfi state for task and save/restore
+ of CSR_SSP on trap entry/exit
+Message-ID: <aAmEnK0vSgZZOORL@debug.ba.rivosinc.com>
+References: <20250314-v5_user_cfi_series-v12-0-e51202b53138@rivosinc.com>
+ <20250314-v5_user_cfi_series-v12-5-e51202b53138@rivosinc.com>
+ <D92WQWAUQYY4.2ED8JAFBDHGRN@ventanamicro.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+In-Reply-To: <D92WQWAUQYY4.2ED8JAFBDHGRN@ventanamicro.com>
 
-While the building system doesn't create any Python JIT bytecode,
-if one manually runs kernel-doc.py or get_abi.py, Python will,
-by default, create a bytecode and store it under scripts/lib/*.
+Sorry forgot to respond to rest of your comments on this thread.
 
-This is normal, and not controlled by the Kernel itself. So,
-add *.pyc as an extension to be ignored.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- .gitignore | 1 +
- 1 file changed, 1 insertion(+)
+On Thu, Apr 10, 2025 at 01:04:39PM +0200, Radim Krčmář wrote:
+>2025-03-14T14:39:24-07:00, Deepak Gupta <debug@rivosinc.com>:
+>> diff --git a/arch/riscv/include/asm/thread_info.h b/arch/riscv/include/asm/thread_info.h
+>> @@ -62,6 +62,9 @@ struct thread_info {
+>>  	long			user_sp;	/* User stack pointer */
+>>  	int			cpu;
+>>  	unsigned long		syscall_work;	/* SYSCALL_WORK_ flags */
+>> +#ifdef CONFIG_RISCV_USER_CFI
+>> +	struct cfi_status	user_cfi_state;
+>> +#endif
 
-diff --git a/.gitignore b/.gitignore
-index f2f63e47fb88..bf5ee6e01cd4 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -40,6 +40,7 @@
- *.o
- *.o.*
- *.patch
-+*.pyc
- *.rmeta
- *.rpm
- *.rsi
--- 
-2.49.0
+<... snipped ...>
 
+>
+>
+>> diff --git a/arch/riscv/kernel/entry.S b/arch/riscv/kernel/entry.S
+>> @@ -147,6 +147,20 @@ SYM_CODE_START(handle_exception)
+>>
+>>  	REG_L s0, TASK_TI_USER_SP(tp)
+>>  	csrrc s1, CSR_STATUS, t0
+>> +	/*
+>> +	 * If previous mode was U, capture shadow stack pointer and save it away
+>> +	 * Zero CSR_SSP at the same time for sanitization.
+>> +	 */
+>> +	ALTERNATIVE("nop; nop; nop; nop",
+>> +				__stringify(			\
+>> +				andi s2, s1, SR_SPP;	\
+>> +				bnez s2, skip_ssp_save;	\
+>> +				csrrw s2, CSR_SSP, x0;	\
+>> +				REG_S s2, TASK_TI_USER_SSP(tp); \
+>> +				skip_ssp_save:),
+>> +				0,
+>> +				RISCV_ISA_EXT_ZICFISS,
+>> +				CONFIG_RISCV_USER_CFI)
+>
+>(I'd prefer this closer to the user_sp and kernel_sp swap, it's breaking
+> the flow here.  We also already know if we've returned from userspace
+> or not even without SR_SPP, but reusing the information might tangle
+> the logic.)
+
+If CSR_SCRATCH was 0, then we would be coming from kernel else flow goes
+to `.Lsave_context`. If we were coming from kernel mode, then eventually
+flow merges to `.Lsave_context`.
+
+So we will be saving CSR_SSP on all kernel -- > kernel trap handling. That
+would be unnecessary. IIRC, this was one of the first review comments in
+early RFC series of these patch series (to not touch CSR_SSP un-necessarily)
+
+We can avoid that by ensuring when we branch by determining if we are coming
+from user to something like `.Lsave_ssp` which eventually merges into
+".Lsave_context". And if we were coming from kernel then we would branch to
+`.Lsave_context` and thus skipping ssp save logic. But # of branches it
+introduces in early exception handling is equivalent to what current patches
+do. So I don't see any value in doing that.
+
+Let me know if I am missing something.
+
+>
+>>  	csrr s2, CSR_EPC
+>>  	csrr s3, CSR_TVAL
+>>  	csrr s4, CSR_CAUSE
+>> @@ -236,6 +250,18 @@ SYM_CODE_START_NOALIGN(ret_from_exception)
+>>  	csrw CSR_SCRATCH, tp
+>> +
+>> +	/*
+>> +	 * Going back to U mode, restore shadow stack pointer
+>> +	 */
+I can remove my comment because it's obvious.
+
+>
+>Are we?  I think we can be just as well returning back to kernel-space.
+>Similar to how we can enter the exception handler from kernel-space.
+
+Yes we are. See excerpt from `ret_from_exception` in `entry.S`
+
+"""
+SYM_CODE_START_NOALIGN(ret_from_exception)
+	REG_L s0, PT_STATUS(sp)
+#ifdef CONFIG_RISCV_M_MODE
+	/* the MPP value is too large to be used as an immediate arg for addi */
+	li t0, SR_MPP
+	and s0, s0, t0
+#else
+	andi s0, s0, SR_SPP
+#endif
+	bnez s0, 1f
+
+<... snipped ...>
+
+	/*
+	 * Going back to U mode, restore shadow stack pointer
+	 */
+	ALTERNATIVE("nops(2)",
+				__stringify(			\
+				REG_L s3, TASK_TI_USER_SSP(tp); \
+				csrw CSR_SSP, s3),
+				0,
+				RISCV_ISA_EXT_ZICFISS,
+				CONFIG_RISCV_USER_CFI)
+
+1:
+#ifdef CONFIG_RISCV_ISA_V_PREEMPTIVE
+	move a0, sp
+	call riscv_v_context_nesting_end
+
+<... snipped ...>
+
+"""
+
+
+>
+>> +	ALTERNATIVE("nop; nop",
+>> +				__stringify(					\
+>> +				REG_L s3, TASK_TI_USER_SSP(tp); \
+>> +				csrw CSR_SSP, s3),
+>> +				0,
+>> +				RISCV_ISA_EXT_ZICFISS,
+>> +				CONFIG_RISCV_USER_CFI)
+>> +
+>
+>Thanks.
 
