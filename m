@@ -1,86 +1,315 @@
-Return-Path: <linux-doc+bounces-44330-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44336-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DCD8A9C74C
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 13:22:20 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D6FB9A9C795
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 13:29:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CBE083A7AB5
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 11:21:20 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C68A97B17AA
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 11:27:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 431832571DC;
-	Fri, 25 Apr 2025 11:18:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59D1E242D64;
+	Fri, 25 Apr 2025 11:27:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U70uki6V"
+	dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="BeKf1Jbv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBC372571B0;
-	Fri, 25 Apr 2025 11:18:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AE3323DEB6
+	for <linux-doc@vger.kernel.org>; Fri, 25 Apr 2025 11:27:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745579927; cv=none; b=HwX9dCZzDveItjd9xtxuoKHNhA2DTKGpCVNxtRzaNYNzQSuMcmhBLGYDmDOvJV+uJBb/l8NDzBbpmJvTWcv3HE2HBXqxrXwMrettf0r8RyQ55NlfkJVOmggo3QKzQ4/zRlBL/QjN9MMgm8zgbqwI2Ra+DEnwpIZvI6A3wr3jI+0=
+	t=1745580460; cv=none; b=miqX+fztd0M7evsmSwfrbF94El1EF19fyKNTRDpMXVHEkiRunbkAZqrAfmqx/Z09g9AeI2xRIE61vJ/5ge3mkesZPGOjotLNj/MooFHaFCuOASvXIl4lYMcYP419vLDfg1w7bR/+5fkPe+2bCNKBDO1pIcBJdnrXcMlQmVH9W2c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745579927; c=relaxed/simple;
-	bh=NqgGdkd8g5cQ3OKGc4RKIxtEOuoRmO3gUTre8U3aPfg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AGeC12N3u972t7Q9qvmL5QVuVIVqyNWox1cWLZ0ACUqwqCGv5lDw72dGjzC9wZ6BMJSBL9mduPYkR/YRcmAsFDTuM32O7DOn59AJhdMEMXuoI/J39Bvky4oW/VEPo4PB5+Uq4y5V9wO2gll5Jfcnl4ND+GHUXNyc4Wr5ZWOTq4o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U70uki6V; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04964C4CEE9;
-	Fri, 25 Apr 2025 11:18:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745579925;
-	bh=NqgGdkd8g5cQ3OKGc4RKIxtEOuoRmO3gUTre8U3aPfg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=U70uki6V7H3WduGjz/GRRmi5rOak9aAX2Q6yKONn7YHn3T1PVH3Gitavn4j97BhEg
-	 sRAcrTy3Zot/eYQao2xeNQVA8zvzWzP6tjAxlbZaSPz8G7vfSFIwzCBBJI206avGgT
-	 U5v1qHodWaPdRiLfndj0KJYmmVF/GXuOk/0XhKLQbnQYuA1LzUeKynbUbqXW7t4pnk
-	 HdECg/sk8b0FMS1ecwnh3s6pVaEHor9ewIu8gxStZ/sBsyaFiPeqwBpXjeGRNCOwD7
-	 Zh9uL2CVzBUG+A4o4xEkVnF1cZqZhu2W4xh2BRzDN+na1zqpAT69q/3FRD/DjP40ps
-	 eqGV8N/FOVTmg==
-Date: Fri, 25 Apr 2025 13:18:40 +0200
-From: Andi Shyti <andi.shyti@kernel.org>
-To: Mario Limonciello <superm1@kernel.org>
-Cc: Borislav Petkov <bp@alien8.de>, Jean Delvare <jdelvare@suse.com>, 
-	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Mario Limonciello <mario.limonciello@amd.com>, Yazen Ghannam <yazen.ghannam@amd.com>, 
-	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, 
-	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>, "H . Peter Anvin" <hpa@zytor.com>, 
-	Shyam Sundar S K <Shyam-sundar.S-k@amd.com>, Hans de Goede <hdegoede@redhat.com>, 
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>, 
-	"open list:I2C/SMBUS CONTROLLER DRIVERS FOR PC" <linux-i2c@vger.kernel.org>, "open list:AMD PMC DRIVER" <platform-driver-x86@vger.kernel.org>
-Subject: Re: [PATCH v5 3/5] i2c: piix4: Move SB800_PIIX4_FCH_PM_ADDR
- definition to amd/fch.h
-Message-ID: <iuq72okvc4nhy2ddgkkyb43mhm55ujxru3duqi3whnmgt4zrp3@i5nxnsl2nyc5>
-References: <20250422234830.2840784-1-superm1@kernel.org>
- <20250422234830.2840784-4-superm1@kernel.org>
+	s=arc-20240116; t=1745580460; c=relaxed/simple;
+	bh=L9I7eiN2f73J5dPVzszuLYpZejlZqjoUq0SaVPSprwE=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
+	 References:In-Reply-To; b=B0b0GkUVxHPUyQxme/BKnJUCHnDM1zaqKlUVMjfDYufUlPJnyGAbd+wxdza8CjpjOGPj+oplVS5dLWkTcnbk4vsAC2QwpIO5oKpCGNt+ieUbzTvf7Kubtrt/35/ijiQLiHu8ZDxUgKUxW0BxV0GmLb4A84tQKooZvkQZ04NIE24=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com; spf=pass smtp.mailfrom=ventanamicro.com; dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b=BeKf1Jbv; arc=none smtp.client-ip=209.85.221.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ventanamicro.com
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-39ee6260fc7so131508f8f.1
+        for <linux-doc@vger.kernel.org>; Fri, 25 Apr 2025 04:27:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ventanamicro.com; s=google; t=1745580456; x=1746185256; darn=vger.kernel.org;
+        h=in-reply-to:references:from:to:cc:subject:message-id:date
+         :content-transfer-encoding:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9tdcxdU/uqiM5JHIE0ih8RzkRpPBvVsrQ+sQtZ+utPU=;
+        b=BeKf1JbvEe86laQNNzzsu38dwjJfOp2oJziFAnmoWqsMbkQX7rgfKSMJBcS5wn9lX/
+         le6OTfnKYIUDlr9y9es740hx/A9QyE25H/Yy+CuZFImgWB9RUme4Zk7a2clmaukJFFFF
+         //djvxQCG2JB89Vw4/pGrhGGowVfM6p8qj5ic2tcEPQ5D13mdFo3TQoIpozBKfyOlZNm
+         sprNbfWJ6nQNdxp2NXBN4IYtQk6d5oczduvV1ZJLHEB0gAgCUSl9EZmROHTItBH2ShDh
+         2+rVqlSze0iTzP8C2PHzqtFySPVO2sfoSKtGvY4RRXwUizBClW/EBnWfPWEMPnI8AZkM
+         ddhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745580456; x=1746185256;
+        h=in-reply-to:references:from:to:cc:subject:message-id:date
+         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=9tdcxdU/uqiM5JHIE0ih8RzkRpPBvVsrQ+sQtZ+utPU=;
+        b=u4J1/WgHzfsKw4MUuVQeg7lQvWSZgP168UASiut5YtlyknKxtyq8EetojnjCeseKMh
+         8t9FPRvU5o+bf016tHQ64JfoByaUPg1oc/8Mwbg0rbrSdVmPAMOpa2k/fv6r4IYvdR62
+         +qgNiI5+NT+HBuM5A7NzeO7HGkzcyXsVsWO7lVxYyL6Y+fHfpr/u5fvbLOxonJOr6FWe
+         jpNP/ZzatEV3ie9NipuoTOy9Y7YSv6q+g6D7Ds/rfYGtIBKnYrQLsB1ti7GSy9L1m6OP
+         CmbIvBdgKjhHsbdOoit1By7l94xC1ZFca7mgYNzSWbKOU5QRIeSHh6tRwcpPaU1bER8y
+         NdOA==
+X-Forwarded-Encrypted: i=1; AJvYcCVTbIM9nCCuTE7Qt7T3t3IHIR1qf88kw0LSISz/FCAZ/Rx3jc5OLzHeu1zfulSARE7KPDDtsRDdHQU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxQl1X2WAtoMdTtBxG63uFviDD38d+fOAMz1PyHK6eAbZeh7AuR
+	sBHyg8eXCt1wjSylG3wPBzkcEw1DrHk0XORxl038+2IKgdhge2EZj/iDk0lp6Hg=
+X-Gm-Gg: ASbGncukNIwY6tENyv7/O7FyABy/gLSzgxb6USTr4P5EwRTGorvmvFpjJOxMgvxfYed
+	4ufr0O8szeiaqBWPZdiJiSnLEjMxR6Fi7Br+pSCSrBJBygA6wz9heqmcxMVDn1OGn7Vix7vDS3E
+	a/SewTFTsYub2vVNX0fg5wMWBpNS8qIVV8AeH4FcuedBwi/CP4nEaAZplSjKtt2D3WjBuGCOgkT
+	3gKaUZKJRH/KCuwvVQF9l5XhX9iCHmC8NsftpTnBQggx164kP/zTyY2a5pJ0PZ+0ZYySBJ9fRpu
+	C15bv8jgghcKw98flXsejJVK2SKJQ8bWTyaNmOpT3H/0ga+E
+X-Google-Smtp-Source: AGHT+IEQ9pK+JKMDBMS71i2ytNl3g5Iz5jsYozyFh9v4Ot2oPm70zEuu2n9VUWJTfr8L27VdCIYOXQ==
+X-Received: by 2002:a05:6000:420e:b0:39c:1efc:44ed with SMTP id ffacd0b85a97d-3a074e42259mr527990f8f.7.1745580456083;
+        Fri, 25 Apr 2025 04:27:36 -0700 (PDT)
+Received: from localhost ([2a02:8308:a00c:e200:84a3:2b0a:bdb8:ce08])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-440a536a02csm22002045e9.27.2025.04.25.04.27.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Apr 2025 04:27:35 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250422234830.2840784-4-superm1@kernel.org>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 25 Apr 2025 13:27:34 +0200
+Message-Id: <D9FOMMGOGOZS.FN9LKYJAB9PD@ventanamicro.com>
+Subject: Re: [PATCH v12 05/28] riscv: usercfi state for task and
+ save/restore of CSR_SSP on trap entry/exit
+Cc: "Thomas Gleixner" <tglx@linutronix.de>, "Ingo Molnar"
+ <mingo@redhat.com>, "Borislav Petkov" <bp@alien8.de>, "Dave Hansen"
+ <dave.hansen@linux.intel.com>, <x86@kernel.org>, "H. Peter Anvin"
+ <hpa@zytor.com>, "Andrew Morton" <akpm@linux-foundation.org>, "Liam R.
+ Howlett" <Liam.Howlett@oracle.com>, "Vlastimil Babka" <vbabka@suse.cz>,
+ "Lorenzo Stoakes" <lorenzo.stoakes@oracle.com>, "Paul Walmsley"
+ <paul.walmsley@sifive.com>, "Palmer Dabbelt" <palmer@dabbelt.com>, "Albert
+ Ou" <aou@eecs.berkeley.edu>, "Conor Dooley" <conor@kernel.org>, "Rob
+ Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+ "Arnd Bergmann" <arnd@arndb.de>, "Christian Brauner" <brauner@kernel.org>,
+ "Peter Zijlstra" <peterz@infradead.org>, "Oleg Nesterov" <oleg@redhat.com>,
+ "Eric Biederman" <ebiederm@xmission.com>, "Kees Cook" <kees@kernel.org>,
+ "Jonathan Corbet" <corbet@lwn.net>, "Shuah Khan" <shuah@kernel.org>, "Jann
+ Horn" <jannh@google.com>, "Conor Dooley" <conor+dt@kernel.org>,
+ <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+ <linux-mm@kvack.org>, <linux-riscv@lists.infradead.org>,
+ <devicetree@vger.kernel.org>, <linux-arch@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
+ <alistair.francis@wdc.com>, <richard.henderson@linaro.org>,
+ <jim.shu@sifive.com>, <andybnac@gmail.com>, <kito.cheng@sifive.com>,
+ <charlie@rivosinc.com>, <atishp@rivosinc.com>, <evan@rivosinc.com>,
+ <cleger@rivosinc.com>, <broonie@kernel.org>, <rick.p.edgecombe@intel.com>,
+ "Zong Li" <zong.li@sifive.com>, "linux-riscv"
+ <linux-riscv-bounces@lists.infradead.org>
+To: "Deepak Gupta" <debug@rivosinc.com>
+From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
+References: <20250314-v5_user_cfi_series-v12-0-e51202b53138@rivosinc.com>
+ <20250314-v5_user_cfi_series-v12-5-e51202b53138@rivosinc.com>
+ <D92WQWAUQYY4.2ED8JAFBDHGRN@ventanamicro.com>
+ <aAl_HRk49lnseiio@debug.ba.rivosinc.com>
+ <D9EUJBQ5OHN0.2KUJHGXK262TR@ventanamicro.com>
+ <aAp7Un415hNqtshd@debug.ba.rivosinc.com>
+In-Reply-To: <aAp7Un415hNqtshd@debug.ba.rivosinc.com>
 
-Hi,
+2025-04-24T10:56:34-07:00, Deepak Gupta <debug@rivosinc.com>:
+> On Thu, Apr 24, 2025 at 01:52:43PM +0200, Radim Kr=C4=8Dm=C3=A1=C5=99 wro=
+te:
+>>2025-04-23T17:00:29-07:00, Deepak Gupta <debug@rivosinc.com>:
+>>> On Thu, Apr 10, 2025 at 01:04:39PM +0200, Radim Kr=C4=8Dm=C3=A1=C5=99 w=
+rote:
+>>>>2025-03-14T14:39:24-07:00, Deepak Gupta <debug@rivosinc.com>:
+>>>>> diff --git a/arch/riscv/include/asm/thread_info.h b/arch/riscv/includ=
+e/asm/thread_info.h
+>>>>> @@ -62,6 +62,9 @@ struct thread_info {
+>>>>>  	long			user_sp;	/* User stack pointer */
+>>>>>  	int			cpu;
+>>>>>  	unsigned long		syscall_work;	/* SYSCALL_WORK_ flags */
+>>>>> +#ifdef CONFIG_RISCV_USER_CFI
+>>>>> +	struct cfi_status	user_cfi_state;
+>>>>> +#endif
+>>>>
+>>>>I don't think it makes sense to put all the data in thread_info.
+>>>>kernel_ssp and user_ssp is more than enough and the rest can comfortabl=
+y
+>>>>live elsewhere in task_struct.
+>>>>
+>>>>thread_info is supposed to be as small as possible -- just spanning
+>>>>multiple cache-lines could be noticeable.
+>>>
+>>> I can change it to only include only `user_ssp`, base and size.
+>>
+>>No need for base and size either -- we don't touch that in the common
+>>exception code.
+>
+> got it.
+>
+>>
+>>> But before we go there, see below:
+>>>
+>>> $ pahole -C thread_info kbuild/vmlinux
+>>> struct thread_info {
+>>>          long unsigned int          flags;                /*     0     =
+8 */
+>>>          int                        preempt_count;        /*     8     =
+4 */
+>>>
+>>>          /* XXX 4 bytes hole, try to pack */
+>>>
+>>>          long int                   kernel_sp;            /*    16     =
+8 */
+>>>          long int                   user_sp;              /*    24     =
+8 */
+>>>          int                        cpu;                  /*    32     =
+4 */
+>>>
+>>>          /* XXX 4 bytes hole, try to pack */
+>>>
+>>>          long unsigned int          syscall_work;         /*    40     =
+8 */
+>>>          struct cfi_status          user_cfi_state;       /*    48    3=
+2 */
+>>>          /* --- cacheline 1 boundary (64 bytes) was 16 bytes ago --- */
+>>>          long unsigned int          a0;                   /*    80     =
+8 */
+>>>          long unsigned int          a1;                   /*    88     =
+8 */
+>>>          long unsigned int          a2;                   /*    96     =
+8 */
+>>>
+>>>          /* size: 104, cachelines: 2, members: 10 */
+>>>          /* sum members: 96, holes: 2, sum holes: 8 */
+>>>          /* last cacheline: 40 bytes */
+>>> };
+>>>
+>>> If we were to remove entire `cfi_status`, it would still be 72 bytes (8=
+8 bytes
+>>> if shadow call stack were enabled) and already spans across two cacheli=
+nes.
+>>
+>>It has only 64 bytes of data without shadow call stack, but it wasted 8
+>>bytes on the holes.
+>>a2 is somewhat an outlier that is not used most exception paths and
+>>excluding it makes everything fit nicely even now.
+>
+> But we can't exclude shadow call stack. It'll lead to increased size if t=
+hat
+> config is selected. A solution has to work for all the cases and not half
+> hearted effort.
 
-On Tue, Apr 22, 2025 at 06:48:28PM -0500, Mario Limonciello wrote:
-> From: Mario Limonciello <mario.limonciello@amd.com>
-> 
-> SB800_PIIX4_FCH_PM_ADDR is used to indicate the base address for the
-> FCH PM registers.  Multiple drivers may need this base address, so
-> move it to a common header location and rename accordingly.
-> 
-> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+We could drop a0 or user_sp and place the two ints next to each other,
+saving at least 16 bytes.
 
-Acked-by: Andi Shyti <andi.shyti@kernel.org>
+(user_sp, a0, a1, and a2 are just temporary storage.  I think would be
+ fine with just two temporaries + kernel_sp, to provide three registers
+ for new_vmalloc_check and we never need more.)
 
-Thanks,
-Andi
+>>> if shadow call stack were enabled) and already spans across two cacheli=
+nes. I
+>>> did see the comment above that it should fit inside a cacheline. Althou=
+gh I
+>>> assumed its stale comment given that it already spans across cacheline =
+and I
+>>> didn't see any special mention in commit messages of changes which grew=
+ this
+>>> structure above one cacheline. So I assumed this was a stale comment.
+>>>
+>>> On the other hand, whenever enable/lock bits are checked, there is a hi=
+gh
+>>> likelyhood that user_ssp and other fields are going to be accessed and
+>>> thus it actually might be helpful to have it all in one cacheline durin=
+g
+>>> runtime.
+>>
+>>Yes, although accessing enable/lock bits will be relatively rare.
+>>It seems better to have the overhead during thread setup, rather than on
+>>every trap.
+>>
+>>> So I am not sure if its helpful sticking to the comment which already i=
+s stale.
+>>
+>>We could fix the holes and also use sp instead of a0 in the
+>>new_vmalloc_check, so everything would fit better.
+>>
+>>We are really close to fitting into a single cache-line, so I'd prefer
+>>if shadow stack only filled thread_info with data that is used very
+>>often in the exception handling code.
+>
+> I don't get what's the big deal if it results in two cachelines. We can
+> (re)organize data structure in a way the most frequently accessed members=
+ are
+> together in a single cacheline. We just need to find those members.
+
+Yes, and because this patch is reorganizing the structure, I thought it
+would be better to do the analysis now, rather than to incur additional
+debt.
+
+thread_info members are accessed during the first instructions after a
+trap.  We want to maximize the chance that the execution doesn't stall
+until uarch has time to engage its crystal ball.
+
+> In the hot path of exception handling, I see accesses to pt_regs on stack=
+ as
+> well. These are definitley different cacheline than thread_info.
+
+Right, and we also access cache-lines for the code.
+
+I don't know how well each uarch keeps the early trap data/code in
+caches, but it doesn't seem like a bad idea to minimize the amount of
+cache-lines that are accessed early after trap.
+
+> I understand the argument of one member field crossing into two cacheline=
+s can
+> have undesired perf effects. I do not understand reasoning that thread_in=
+fo
+> exactly has to fit inside one cacheline.
+
+I agree that we could probably lift the constraint for some values --
+it's a lot of performance modeling and convincing, though...
+
+In this series, I think it would be good to avoid splitting kernel_sp
+and a0/a1 into two cache-lines.  kernel_sp and a0/a1 are accessed within
+the first few instructions.
+
+> If this was always supposed to fit in a single cacheline, clearly this
+> invariant isn't/wasn't maintained as changes trickled in. I would like to=
+ see
+> what maintainers have to say or someone who did data analysis on this.
+
+I don't think it is necessary to fix the rest, just not making things
+worse is already great.
+
+>>I think we could do without user_sp in thread_info as well, so there are
+>>other packing options.
+>
+> Sure, probably somewhere in task_struct. But fact of the matter is that i=
+t has
+> to be saved/restore during exception entry/exit. But then load/store to
+> task_struct is essentially a different cachline. Not sure what we will ac=
+hieve
+> here?
+
+user_sp is only temporarily storage space in thread_info.
+The sp register is restored from pt_regs, so we could refactor the code
+to drop user_sp from thread_info.
+
+e.g. use a0, a1, or a2 for the temporary storage: user_sp is not even
+the userspace sp, it is sp of the previous sp "user", which might have
+been the kernel.
+
+>>Btw. could ssp be added to pt_regs?
+>
+> I had that earlier. It breaks user abi. And it was a no go.
+
+Thanks, I was afraid of that. :)
+
+We might want to eventually push ssp to the stack to follow the same
+design for trap nesting as sp has, but that can happen when implementing
+ssp for the kernel.  Squeezing into thread_info should work for now.
 
