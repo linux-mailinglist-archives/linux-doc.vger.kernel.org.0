@@ -1,208 +1,147 @@
-Return-Path: <linux-doc+bounces-44338-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44347-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49331A9C7F9
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 13:43:48 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56481A9CAD8
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 15:51:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 805759E1646
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 11:43:29 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8AE451BA5C68
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 13:51:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4375C2472A4;
-	Fri, 25 Apr 2025 11:42:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF45E132122;
+	Fri, 25 Apr 2025 13:51:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="nH89DDly"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ZAVPoJQL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA1712459C6
-	for <linux-doc@vger.kernel.org>; Fri, 25 Apr 2025 11:42:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58B4471747;
+	Fri, 25 Apr 2025 13:51:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745581370; cv=none; b=rOD46j44cbVaoCZIPqORo9WSqB+08xf1oIyhzzZHW+pz/Mb4rMvpR0DJ77OwG78wPWMpX8BLrqc/3viP6D1eYTiXxunMbS0aBrIEhJyEeSRtFqHJMYLT3STgIDOv1+RNlaA6IqzgkUSKq5p3J/QQX/SheyJEmmCkgx6dzHJ2DWc=
+	t=1745589072; cv=none; b=QZf7ZHWSrjWcNcYSevLMWVqYrUR5VrhKvh6K4uHnNbJsWhTF9iFZjQTvcuWVyf1btXGwMH5Anc2HoovfTIrr9iD9gLcfT/33NCTItSEKdY8vWc4NA0vfjpyB5fT+00GYRraifdc0+aYPWttIR3i7Iz16Gg4ZrMZHPRBiGoLMZLg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745581370; c=relaxed/simple;
-	bh=3Ji49cbT2gfSvIq8CYcUaaNLPtr+CzcaLLKg5QrQiT8=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
-	 References:In-Reply-To; b=Bw15Ga/fGkJbqTI01naFUxA7mAypCWbOcFMCtyGURgRTHKVdncpo3Ur1yOKDk3OGgdLUy0ucNaEo2qhxIzbjVyag09yH4fgFyw7+YUgm6W/WG+sRPh3kU032DT1uFz3bh+zznlKNWccEZCTlG1JKCLApgQlS0+bLpuxgsqZNfBs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com; spf=pass smtp.mailfrom=ventanamicro.com; dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b=nH89DDly; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ventanamicro.com
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-43f106a3591so2062625e9.3
-        for <linux-doc@vger.kernel.org>; Fri, 25 Apr 2025 04:42:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google; t=1745581366; x=1746186166; darn=vger.kernel.org;
-        h=in-reply-to:references:from:to:cc:subject:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RyVQraiD8choursJseiRmBXZoIZWNTeRkqd4Ai9q43w=;
-        b=nH89DDlyI9q4NUmPG6uPGSIMY5PE3mHWQaGnwuDjzhIpFtGqZltNEeVSOMeVa3SRM2
-         g7xOdBFxjtVrckTTvBVgyYJXhwJ7XkUHp0bliIaSFY0SEbKl33L40+Gx5gZyqll0Uj1k
-         W8reo0a4FE8SuyO746giZhk3U2tI6Ay2Pxo4hiF9gI0DFyu0jpwx8keDmtDboBcsNqxr
-         lGAbfEV/ym6CSFmy1ogXzThNGMSAbhCnMVcFU9918rAMWsxa5xB6pSR52vYxT7BrmXAv
-         yiguZdBGYAB3ll3wElZKKLKXP+sx59peEi1bnf1Nu0WTq43Q0tJl0R+s2n9MAM4rhMBZ
-         +UwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745581366; x=1746186166;
-        h=in-reply-to:references:from:to:cc:subject:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=RyVQraiD8choursJseiRmBXZoIZWNTeRkqd4Ai9q43w=;
-        b=W3IoG6pUYd8JZtc8HemSrMN8j8i1vN8oIbw7jKNxKSA0Lw66I9QVbUp9oQpHbaEd7M
-         J1ALpox5n5I0qc3LdZTs2DAu9wPFo9wS74VsUsNGgMjCt4VcCJ3FfoVH8WldMfxaJs4Z
-         0PO+X1Z0Nw7ShuOuXITq+P9pdfzp/BfOeESCAeo83kUVTEJlca8+2qZ7HgvbTBrqmhJM
-         XByrK2oGpnOrPEi/nVRpA02IzG0Rs5AP9B6Zb41b54x3FQuS6X2LTZqQpq1sq4Kou1KT
-         gcFuqW84KVDx0CWTh0rfRGI4ApUSTQpBLQU5SdFjgiFsFhJGSqklBASkJHQ71cumJwGs
-         XueA==
-X-Forwarded-Encrypted: i=1; AJvYcCWAk+GbvSEbekDMlkZpubajzoO73Z28DR69qHm4Yri70vtZnWaO+PVxs9Kb5NNzXvC1Pc618oozRVg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzO5t1krGDaYKw8IsXV8UuFw0ybbnf6U9XCiuCByIK8tGClF9lA
-	i1616069iBxwnq2np0p3mISk2aDGSCpFOWNlT/EqOf9zDdL6KK/EKs1GmZWRPVg=
-X-Gm-Gg: ASbGnctfS7obIcWtOd6xygva0Rcn8zZtkisJJRi8YZK6wgX0wpuGaV9wqSmKhEHmGEz
-	TsirucSkb0mIN1fM5Q5E4fbXEZ3z7p/UWfZGcRFuUh0H4wqEC2E9G5P2l9JrYkf+VeoG2QcJWOw
-	8cxqlKwt9z7gq9irUgw8V0uTPrxmTzLfZbGeC6JXr+ZUGwQmDUu7xTA1hlJhFRkofYnJBz/Zw+v
-	4N12hhvSD+/W7xeyCr1xoCcZiF3uCLie5mRZ6CT/AfxJ6aJov3ogfYzg4pMiXLrfa2s2WyD2S61
-	kSzgoPRt4KrmMwUFBPemZE3xZFHkFH4+3w5w6zFyfDCdApPM
-X-Google-Smtp-Source: AGHT+IHSwXKm2b0KR1kACN9BXrADFLHJi8d2f8OL0xZ1T0iAnfUkAWtBlFVbUnZ2xOUkCinbSJhTAg==
-X-Received: by 2002:a05:600c:1d01:b0:43d:fa5e:50e6 with SMTP id 5b1f17b1804b1-440a66c250dmr6293955e9.9.1745581365815;
-        Fri, 25 Apr 2025 04:42:45 -0700 (PDT)
-Received: from localhost ([2a02:8308:a00c:e200:84a3:2b0a:bdb8:ce08])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a073e4698csm2104230f8f.62.2025.04.25.04.42.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Apr 2025 04:42:45 -0700 (PDT)
+	s=arc-20240116; t=1745589072; c=relaxed/simple;
+	bh=OhZMVslTMFHk1PYXUziNNqXZhgpB08GxxfE5qfU9SMk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=Y3uBEwUTz1y/AdR/MWlV+Z2dbkK/10ijvrcSykTek4CawjFz1m1L2ctc99MM2TdlIuQrtTYKJcz96JOf3/Az5Gx1iJHdSI8BB+6GdhcD0BvOo/TpVuKSB9dLWh/nOfFKYYkhAfocgk/esZxa+bBmEa2dHLCt6D2/yDXPthqCsm0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ZAVPoJQL; arc=none smtp.client-ip=198.175.65.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1745589071; x=1777125071;
+  h=from:to:cc:in-reply-to:references:subject:message-id:
+   date:mime-version:content-transfer-encoding;
+  bh=OhZMVslTMFHk1PYXUziNNqXZhgpB08GxxfE5qfU9SMk=;
+  b=ZAVPoJQLRHhmJ2advrNRsFva3K7C9aGDvJBcxDwNlg+1oy7u8BxdV3iV
+   ybh5VxV0CLWl9/xtMTZtIqzd0ZSiFwtWOoVgDCyq5xceJaIg3YBY5gGBR
+   lQMvOWAL7iBjXty/8NYXaERN4JP/YuHePGMj9TNoV2U0KKJDa2saMP6FW
+   do4WbVV1WKdF3okTErJndahHzNSeUV0Zrze7hH/huN2MUsYLm+BxzDqyJ
+   xAXsFjMcsWfqW7Fg3MqjoD01ehx+7Y+W3czuE8Pivq2J0dcaygtF+LB5t
+   OnCBELDIre0ITrFmVAK197LB1DJudSVWlmiUKi+pPJOlU17YdL0kcs1Xc
+   w==;
+X-CSE-ConnectionGUID: 77xyvPGySFi2WBKZPmBQ9w==
+X-CSE-MsgGUID: aj6lyNgmT9ubvaAOL7uahA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11414"; a="50917497"
+X-IronPort-AV: E=Sophos;i="6.15,238,1739865600"; 
+   d="scan'208";a="50917497"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Apr 2025 06:51:10 -0700
+X-CSE-ConnectionGUID: bD/JDR3LQ9yWdeM3F6uVBA==
+X-CSE-MsgGUID: VK6mzkL+SLKFFR+xFJka7g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,238,1739865600"; 
+   d="scan'208";a="137722441"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.154])
+  by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Apr 2025 06:51:04 -0700
+From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+To: platform-driver-x86@vger.kernel.org, 
+ Antheas Kapenekakis <lkml@antheas.dev>
+Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-pm@vger.kernel.org, Guenter Roeck <linux@roeck-us.net>, 
+ Jean Delvare <jdelvare@suse.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Joaquin Ignacio Aramendia <samsagax@gmail.com>, 
+ Derek J Clark <derekjohn.clark@gmail.com>, 
+ Kevin Greenberg <kdgreenberg234@protonmail.com>, 
+ Joshua Tam <csinaction@pm.me>, Parth Menon <parthasarathymenon@gmail.com>, 
+ Eileen <eileen@one-netbook.com>, linux-kernel@vger.kernel.org, 
+ sre@kernel.org, linux@weissschuh.net, hdegoede@redhat.com, 
+ mario.limonciello@amd.com
+In-Reply-To: <20250425111821.88746-1-lkml@antheas.dev>
+References: <20250425111821.88746-1-lkml@antheas.dev>
+Subject: Re: [PATCH v10 00/16] hwmon: (oxpsensors) Add devices, features,
+ fix ABI and move to platform/x86
+Message-Id: <174558905993.2965.3080490340204327476.b4-ty@linux.intel.com>
+Date: Fri, 25 Apr 2025 16:50:59 +0300
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 25 Apr 2025 13:42:44 +0200
-Message-Id: <D9FOY8JACYTH.1FU7ZTEHFC5NI@ventanamicro.com>
-Subject: Re: [PATCH v12 12/28] riscv: Implements arch agnostic shadow stack
- prctls
-Cc: "Thomas Gleixner" <tglx@linutronix.de>, "Ingo Molnar"
- <mingo@redhat.com>, "Borislav Petkov" <bp@alien8.de>, "Dave Hansen"
- <dave.hansen@linux.intel.com>, <x86@kernel.org>, "H. Peter Anvin"
- <hpa@zytor.com>, "Andrew Morton" <akpm@linux-foundation.org>, "Liam R.
- Howlett" <Liam.Howlett@oracle.com>, "Vlastimil Babka" <vbabka@suse.cz>,
- "Lorenzo Stoakes" <lorenzo.stoakes@oracle.com>, "Paul Walmsley"
- <paul.walmsley@sifive.com>, "Palmer Dabbelt" <palmer@dabbelt.com>, "Albert
- Ou" <aou@eecs.berkeley.edu>, "Conor Dooley" <conor@kernel.org>, "Rob
- Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
- "Arnd Bergmann" <arnd@arndb.de>, "Christian Brauner" <brauner@kernel.org>,
- "Peter Zijlstra" <peterz@infradead.org>, "Oleg Nesterov" <oleg@redhat.com>,
- "Eric Biederman" <ebiederm@xmission.com>, "Kees Cook" <kees@kernel.org>,
- "Jonathan Corbet" <corbet@lwn.net>, "Shuah Khan" <shuah@kernel.org>, "Jann
- Horn" <jannh@google.com>, "Conor Dooley" <conor+dt@kernel.org>,
- <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
- <linux-mm@kvack.org>, <linux-riscv@lists.infradead.org>,
- <devicetree@vger.kernel.org>, <linux-arch@vger.kernel.org>,
- <linux-doc@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
- <alistair.francis@wdc.com>, <richard.henderson@linaro.org>,
- <jim.shu@sifive.com>, <andybnac@gmail.com>, <kito.cheng@sifive.com>,
- <charlie@rivosinc.com>, <atishp@rivosinc.com>, <evan@rivosinc.com>,
- <cleger@rivosinc.com>, <alexghiti@rivosinc.com>, <samitolvanen@google.com>,
- <broonie@kernel.org>, <rick.p.edgecombe@intel.com>, "linux-riscv"
- <linux-riscv-bounces@lists.infradead.org>
-To: "Deepak Gupta" <debug@rivosinc.com>
-From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
-References: <20250314-v5_user_cfi_series-v12-0-e51202b53138@rivosinc.com>
- <20250314-v5_user_cfi_series-v12-12-e51202b53138@rivosinc.com>
- <D92V2NPNZYV0.136MJ2HOK48HE@ventanamicro.com>
- <aAnBmexbL4XmVxQk@debug.ba.rivosinc.com>
- <D9EWR3RQK0FD.3GF55KNS53YSR@ventanamicro.com>
- <aAp_87-Xr6gn_hD7@debug.ba.rivosinc.com>
-In-Reply-To: <aAp_87-Xr6gn_hD7@debug.ba.rivosinc.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 
-2025-04-24T11:16:19-07:00, Deepak Gupta <debug@rivosinc.com>:
-> On Thu, Apr 24, 2025 at 03:36:54PM +0200, Radim Kr=C4=8Dm=C3=A1=C5=99 wro=
-te:
->>2025-04-23T21:44:09-07:00, Deepak Gupta <debug@rivosinc.com>:
->>> On Thu, Apr 10, 2025 at 11:45:58AM +0200, Radim Kr=C4=8Dm=C3=A1=C5=99 w=
-rote:
->>>>2025-03-14T14:39:31-07:00, Deepak Gupta <debug@rivosinc.com>:
->>>>> diff --git a/arch/riscv/include/asm/usercfi.h b/arch/riscv/include/as=
-m/usercfi.h
->>>>> @@ -14,7 +15,8 @@ struct kernel_clone_args;
->>>>>  struct cfi_status {
->>>>>  	unsigned long ubcfi_en : 1; /* Enable for backward cfi. */
->>>>> -	unsigned long rsvd : ((sizeof(unsigned long) * 8) - 1);
->>>>> +	unsigned long ubcfi_locked : 1;
->>>>> +	unsigned long rsvd : ((sizeof(unsigned long) * 8) - 2);
->>>>
->>>>The rsvd field shouldn't be necessary as the container for the bitfield
->>>>is 'unsigned long' sized.
->>>>
->>>>Why don't we use bools here, though?
->>>>It might produce a better binary and we're not hurting for struct size.
->>>
->>> If you remember one of the previous patch discussion, this goes into
->>> `thread_info` Don't want to bloat it. Even if we end shoving into task_=
-struct,
->>> don't want to bloat that either. I can just convert it into bitmask if
->>> bitfields are an eyesore here.
->>
->>  "unsigned long rsvd : ((sizeof(unsigned long) * 8) - 2);"
->>
->>is an eyesore that defines exactly the same as the two lines alone
->>
->>  unsigned long ubcfi_en : 1;
->>  unsigned long ubcfi_locked : 1;
->>
->>That one should be removed.
->>
->>If we have only 4 bits in 4/8 bytes, then bitfields do generate worse
->>code than 4 bools and a 0/4 byte hole.  The struct size stays the same.
->>
->>I don't care much about the switch to bools, though, because this code
->>is not called often.
->
-> I'll remove the bitfields, have single `unsigned long cfi_control_state`
-> And do `#define RISCV_UBCFI_EN 1` and so on.
+On Fri, 25 Apr 2025 13:18:05 +0200, Antheas Kapenekakis wrote:
 
-I might have seemed too much against the bitfieds, sorry.  I am against
-the rsvd fields, because it is a pointless cognitive overhead and even
-this series already had a bug in them.
+> This four part series updates the oxpsensors module to bring it in line
+> with its Windows OneXPlayer counterpart. First, it adds support for all
+> 2024, 2025 OneXPlayer handhelds and their special variants. Then, it moves
+> the module to platform/x86 to allow for including more EC features.
+> 
+> Then, it adds the new charge limiting and bypass features that were first
+> introduced in the X1 and retrofit to older OneXFly variants and for
+> controlling the turbo led found in the X1 models. For Bypass, it adds a new
+> charge_behaviour variant called inhibit-charge-s0.
+> 
+> [...]
 
-#defines should generate the same code as bitfields (worse than bools),
-so the source code is really a matter of personal preference.
-(I do prefer bitfields.)
 
->>>>> @@ -262,3 +292,83 @@ void shstk_release(struct task_struct *tsk)
->>>>> +int arch_lock_shadow_stack_status(struct task_struct *task,
->>>>> +				  unsigned long arg)
->>>>> +{
->>>>> +	/* If shtstk not supported or not enabled on task, nothing to lock =
-here */
->>>>> +	if (!cpu_supports_shadow_stack() ||
->>>>> +	    !is_shstk_enabled(task) || arg !=3D 0)
->>>>> +		return -EINVAL;
->>>>
->>>>The task might want to prevent shadow stack from being enabled?
->>>
->>> But Why would it want to do that? Task can simply not issue the prctl. =
-There
->>> are glibc tunables as well using which it can be disabled.
->>
->>The task might do it as some last resort to prevent a buggy code from
->>enabling shadow stacks that would just crash.  Or whatever complicated
->>reason userspace can think of.
->>
->>It's more the other way around.  I wonder why we're removing this option
->>when we don't really care what userspace does to itself.
->>I think it's complicating the kernel without an obvious gain.
->
-> It just feels wierd. There isn't anything like this for other features li=
-t-up
-> via envcfg. Does hwprobe allow this on per-task basis? I'll look into it.
+Thank you for your contribution, it has been applied to my local
+review-ilpo-next branch. Note it will show up in the public
+platform-drivers-x86/review-ilpo-next branch only once I've pushed my
+local branch there, which might take a while.
 
-I think PMM doesn't allow to lock and the rest don't seem configurable
-from userspace.
+The list of commits applied:
+[01/16] hwmon: (oxp-sensors) Distinguish the X1 variants
+        commit: 217d55ca13d22ba6af7e96ac2d28c2ef6927fc54
+[02/16] hwmon: (oxp-sensors) Add all OneXFly variants
+        commit: 9f4c9ec158fa8fa4afcdbcbff9c9a9a900dc9c2f
+[03/16] platform/x86: oxpec: Move hwmon/oxp-sensors to platform/x86
+        commit: fe812896e55d0d8e2a45bcf994cadc80fe912fb5
+[04/16] ABI: testing: sysfs-class-oxp: add missing documentation
+        commit: 05f8e5928bfd37416380e8e0994c5f4fd1b615c8
+[05/16] ABI: testing: sysfs-class-oxp: add tt_led attribute documentation
+        commit: 7ba14e4eec62985ae2021ef7e06d537b8e4c8712
+[06/16] platform/x86: oxpec: Rename ec group to tt_toggle
+        commit: 8e1963b9d84a3db10cdd2a807dc3fe401837d228
+[07/16] platform/x86: oxpec: Add turbo led support to X1 devices
+        commit: 5485a80150ff03b6784bfbb194858244ae5f991d
+[08/16] platform/x86: oxpec: Move pwm_enable read to its own function
+        commit: aa682cff3097dfa2370298ecebd33ff1fb64bab8
+[09/16] platform/x86: oxpec: Move pwm value read/write to separate functions
+        commit: 0ba0d67b0608c15b407491712af1c2a3d5140492
+[10/16] platform/x86: oxpec: Move fan speed read to separate function
+        commit: 653feeccdd2eb1dfe44923f4c0bbf50a948c7a07
+[11/16] platform/x86: oxpec: Adhere to sysfs-class-hwmon and enable pwm on 2
+        commit: 7dea472a8b2814013213f4fed290f5f86c6cc7cb
+[12/16] platform/x86: oxpec: Follow reverse xmas convention for tt_toggle
+        commit: bb9854e9819ae5c29602d4985313cde2d07f6847
+[13/16] power: supply: add inhibit-charge-awake to charge_behaviour
+        commit: 468182a839f88fecab915792cbb98ad7328be266
+[14/16] platform/x86: oxpec: Add charge threshold and behaviour to OneXPlayer
+        commit: 202593d1e86bf3ccb1c1091713760b6f44641718
+[15/16] platform/x86: oxpec: Rename rval to ret in tt_toggle
+        commit: 57c775a990a742f7cc2650a5cbfc103d6b4a015d
+[16/16] platform/x86: oxpec: Convert defines to using tabs
+        commit: f5612600314bcce86934318601501e2d8301176d
 
-It's not that important and we hopefully won't be breaking any userspace
-if we decided to allow it later, so I'm fine with this version.
+--
+ i.
+
 
