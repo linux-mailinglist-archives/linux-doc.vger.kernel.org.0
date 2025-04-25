@@ -1,88 +1,129 @@
-Return-Path: <linux-doc+bounces-44317-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44334-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CB3DA9C701
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 13:18:32 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02DFDA9C751
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 13:22:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A4C757A57C2
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 11:17:20 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9C4B14E0E96
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 11:22:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67BB623F295;
-	Fri, 25 Apr 2025 11:18:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E2D33259C85;
+	Fri, 25 Apr 2025 11:18:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rh1xpy8p"
+	dkim=pass (1024-bit key) header.d=antheas.dev header.i=@antheas.dev header.b="YIE2x61x"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from linux1587.grserver.gr (linux1587.grserver.gr [185.138.42.100])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3500523644D;
-	Fri, 25 Apr 2025 11:18:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F6F0258CE7;
+	Fri, 25 Apr 2025 11:18:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.138.42.100
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745579905; cv=none; b=R71J4M3K+p/XpPvdMsJVzZbe7ad5kqToNbFQpPWwaUtgwWinCuwJ6flpDVj91lC/B5vMhXWiBm5qmOS1JeItT6ea1tcKrQg+x/LcoSuVVIxxUJ8G8wJaEb6p2Se8YNEcyzYVEuNcnp79D58lqcKYxCuZfHSB1U5n2+RtBRpn4DM=
+	t=1745579931; cv=none; b=fFwkGZ94hPjnvMUqCCO0Lx967bOAwe5kw0OKfZPKKDcNGgM7S+7jVMG/xpdWr7vm4ZvINDQVGMZ2HCNsMRHF1YASFhZrSY9snV/cycH3m/d4Rs5RJE2tZVqA+UkAlTNTxFS8uY8XeG0u5GR4llZ5tZvRNjcWNK2hg+DCxFvqtJw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745579905; c=relaxed/simple;
-	bh=Skktz0pyFpb+cPGjSKmPDKvIXMPRNAL8a111YD665lo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=M24SNQk+rssXVg/jrwUX/bTOGziiK6ws8OTrqkQbthZrHTFOcTn3dEcN2ns+tQscY9EmHn1HtN28zITfybFEsI5WUTjqYekbE07EoibQUq02KV8/ZUmzanDlS8NlR7VXinru7JljSHprJ31K7dAFzznBcRpqR94Fy8oDIVHjSao=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rh1xpy8p; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1DAFC4CEE4;
-	Fri, 25 Apr 2025 11:18:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745579904;
-	bh=Skktz0pyFpb+cPGjSKmPDKvIXMPRNAL8a111YD665lo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=rh1xpy8pu8DOTA8VkiHV5d0k05cWh7NwBgA5Fvkf6Scg6pEhy7boAMZwTjPioFXm2
-	 W+CLAPli9G9KK4XOV6MlQlqFk0YW9+FR/8p6QQG6S1vXSiF4kcpW3XtcdkczD1+Xbn
-	 mvz8w45CYX8hudbcwA+f+TSTgsGw5Ia09299ZfA2uIJBBHL2pl3M10ngd72azwepkt
-	 C4CVpuMCawnpMF7ooUC8Gg7EVqOpPkc4EWnquGRCEhw1tkKLMbRk/TCB5/DaAbG8NB
-	 gmywWi1IOylKin3S6MveDLGIbnITHDa7MVAX3cL3MMVdrCA3L99GzQ2OFoZqFxmnDJ
-	 OS1gI3GFVqmQQ==
-Date: Fri, 25 Apr 2025 13:18:19 +0200
-From: Andi Shyti <andi.shyti@kernel.org>
-To: Mario Limonciello <superm1@kernel.org>
-Cc: Borislav Petkov <bp@alien8.de>, Jean Delvare <jdelvare@suse.com>, 
-	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Mario Limonciello <mario.limonciello@amd.com>, Yazen Ghannam <yazen.ghannam@amd.com>, 
-	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, 
-	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>, "H . Peter Anvin" <hpa@zytor.com>, 
-	Shyam Sundar S K <Shyam-sundar.S-k@amd.com>, Hans de Goede <hdegoede@redhat.com>, 
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>, 
-	"open list:I2C/SMBUS CONTROLLER DRIVERS FOR PC" <linux-i2c@vger.kernel.org>, "open list:AMD PMC DRIVER" <platform-driver-x86@vger.kernel.org>, 
-	Ingo Molnar <mingo@kernel.org>
-Subject: Re: [PATCH v5 2/5] i2c: piix4: Depends on X86
-Message-ID: <qqrff4zx6eyoyppx3bmsujl4vzhmlwi2dldhoxxikkspmlbiiz@sabqjmjekv7w>
-References: <20250422234830.2840784-1-superm1@kernel.org>
- <20250422234830.2840784-3-superm1@kernel.org>
+	s=arc-20240116; t=1745579931; c=relaxed/simple;
+	bh=pkeS98euH30dOGfG1+dOVA0/1dKYBGZgUZN07dZ0H+4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=HTqPz2ODNOYuB0KJOpLyYCb61OF/ZWaaoGaJY29gH1av50Q8PyqdlX1Ot+ulXAPlIkkeGfPdMj/MS/aFmGm4qS5Au+tdd/XILXx6MoyP15R2w7Dl7C24U9auWfE7eKiwygDD126cgUaXOSfKWVE3kbnEWptYomkJe+eR8SdB1P0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev; spf=pass smtp.mailfrom=antheas.dev; dkim=pass (1024-bit key) header.d=antheas.dev header.i=@antheas.dev header.b=YIE2x61x; arc=none smtp.client-ip=185.138.42.100
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=antheas.dev
+Received: from localhost.localdomain (unknown [IPv6:2a02:2149:8a3b:5a00:3490:6581:3910:8337])
+	by linux1587.grserver.gr (Postfix) with ESMTPSA id E95A12E08E62;
+	Fri, 25 Apr 2025 14:18:46 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=antheas.dev;
+	s=default; t=1745579928;
+	bh=DWjWW+uNRKRGl5pgiRex0CDUsiqQn/RmxukuWZy+SwA=; h=From:To:Subject;
+	b=YIE2x61x0iYPVxSciPYml29JTIC4f8nxoD2Gd4HI+2UY9FNK+TZY83nXjFWxU1/5w
+	 8ONx1PP/grLkNNfrKZH+e06L44CJkL62g8x9SuroUV/RW5pV8cjwXpuu9uDyRb4jZf
+	 d3bxiR/HZuRaAZ4E2YJjrmXTqYB1Gw6aGDKTaAeU=
+Authentication-Results: linux1587.grserver.gr;
+	spf=pass (sender IP is 2a02:2149:8a3b:5a00:3490:6581:3910:8337) smtp.mailfrom=lkml@antheas.dev smtp.helo=localhost.localdomain
+Received-SPF: pass (linux1587.grserver.gr: connection is authenticated)
+From: Antheas Kapenekakis <lkml@antheas.dev>
+To: platform-driver-x86@vger.kernel.org
+Cc: linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	Guenter Roeck <linux@roeck-us.net>,
+	Jean Delvare <jdelvare@suse.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Joaquin Ignacio Aramendia <samsagax@gmail.com>,
+	Derek J Clark <derekjohn.clark@gmail.com>,
+	Kevin Greenberg <kdgreenberg234@protonmail.com>,
+	Joshua Tam <csinaction@pm.me>,
+	Parth Menon <parthasarathymenon@gmail.com>,
+	Eileen <eileen@one-netbook.com>,
+	linux-kernel@vger.kernel.org,
+	sre@kernel.org,
+	linux@weissschuh.net,
+	ilpo.jarvinen@linux.intel.com,
+	hdegoede@redhat.com,
+	mario.limonciello@amd.com,
+	Antheas Kapenekakis <lkml@antheas.dev>
+Subject: [PATCH v10 15/16] platform/x86: oxpec: Rename rval to ret in
+ tt_toggle
+Date: Fri, 25 Apr 2025 13:18:20 +0200
+Message-ID: <20250425111821.88746-16-lkml@antheas.dev>
+X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250425111821.88746-1-lkml@antheas.dev>
+References: <20250425111821.88746-1-lkml@antheas.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250422234830.2840784-3-superm1@kernel.org>
+Content-Transfer-Encoding: 8bit
+X-PPP-Message-ID: 
+ <174557992781.23293.12127681747810270918@linux1587.grserver.gr>
+X-PPP-Vhost: antheas.dev
+X-Virus-Scanned: clamav-milter 0.103.11 at linux1587.grserver.gr
+X-Virus-Status: Clean
 
-Hi,
+Rename the variable `rval` to `ret` in the function for consistency.
 
-On Tue, Apr 22, 2025 at 06:48:27PM -0500, Mario Limonciello wrote:
-> From: Mario Limonciello <mario.limonciello@amd.com>
-> 
-> PIIX4 and compatible controllers are only for X86. As some headers are
-> being moved into x86 specific headers PIIX4 won't compile on non-x86.
-> 
-> Suggested-by: Ingo Molnar <mingo@kernel.org>
-> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
+Signed-off-by: Antheas Kapenekakis <lkml@antheas.dev>
+---
+ drivers/platform/x86/oxpec.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-OK, so these are going through x86, at the end.
+diff --git a/drivers/platform/x86/oxpec.c b/drivers/platform/x86/oxpec.c
+index d71ff189bafef..692a6d6d08316 100644
+--- a/drivers/platform/x86/oxpec.c
++++ b/drivers/platform/x86/oxpec.c
+@@ -406,19 +406,19 @@ static ssize_t tt_toggle_store(struct device *dev,
+ 			       size_t count)
+ {
+ 	bool value;
+-	int rval;
++	int ret;
+ 
+-	rval = kstrtobool(buf, &value);
+-	if (rval)
+-		return rval;
++	ret = kstrtobool(buf, &value);
++	if (ret)
++		return ret;
+ 
+ 	if (value) {
+-		rval = tt_toggle_enable();
++		ret = tt_toggle_enable();
+ 	} else {
+-		rval = tt_toggle_disable();
++		ret = tt_toggle_disable();
+ 	}
+-	if (rval)
+-		return rval;
++	if (ret)
++		return ret;
+ 
+ 	return count;
+ }
+-- 
+2.49.0
 
-Acked-by: Andi Shyti <andi.shyti@kernel.org>
-
-Thanks,
-Andi
 
