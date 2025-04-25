@@ -1,163 +1,220 @@
-Return-Path: <linux-doc+bounces-44374-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44376-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A0DDA9D407
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 23:16:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44B3EA9D468
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 23:45:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AD7201BC135B
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 21:16:41 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5C2911BC787F
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Apr 2025 21:45:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE2C3190497;
-	Fri, 25 Apr 2025 21:16:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F46B225A23;
+	Fri, 25 Apr 2025 21:44:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="AwwVQTCP"
+	dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="VVfli0Z9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C698F221DA3
-	for <linux-doc@vger.kernel.org>; Fri, 25 Apr 2025 21:16:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.47
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C68EA21CC49;
+	Fri, 25 Apr 2025 21:44:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.77.154.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745615785; cv=none; b=TqIZ+UiEAWLvM1mbwwAGAcPjXfNNKelhabeQxyahVflycOo71Xb0ySkksfr6P/lY0obVV/QRdNIIrVzQ7k+D/xRgQrhKrD+PYHH+aR76AX+uXPDMW3EgCIVTTlTwu5P/kCwbb6ffGAffI2zd6BGAXNokkn22vAoYhsAMbhM0PvA=
+	t=1745617494; cv=none; b=k2ztJtthrrQ3Yi64HfONB9zPZI93wrf6STc5TQeFMsmLVFGVc3oaeMnD49dx+anpzYyJ9+BRrOsCfG3NYJOL7P7YyokhjhKOXomdbEuQpc6RGTVMyQMEC1G6tzGcw0KEO8j0+au+azMErLBleISUnP+SDuje9dQrMuNXb+O0MU0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745615785; c=relaxed/simple;
-	bh=gfFhdTGxHbl/LD37YDzvdKH+lTSppcTv0j9nC41MXw8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=TYIXE+bRoR+RAJ/izgh/ClpzTes4PgTUrs3VmMlR4iSZZ4qSWx6m3kmfc3bQY6b/sLzHQypLZ3RgRTo+PY/a3adLTD7UzRFWRr72gv6xilZRuTByU0baed9Xnh1D/a1U206tb4FLgASamvPkzCvwl5qciDRtNL05YEzcU8LhcD4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b=AwwVQTCP; arc=none smtp.client-ip=209.85.160.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
-Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-2cc89c59cc0so2514194fac.0
-        for <linux-doc@vger.kernel.org>; Fri, 25 Apr 2025 14:16:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1745615782; x=1746220582; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=dTz9I5enTaJxLVBqLDZUEqU3il7OBimu59UQoHiVNMA=;
-        b=AwwVQTCP2K9CKA4fyIHrFrdBnoSQuw+MGhcGYT6karBo24u81I/NgHboYE4KWjBdQZ
-         2jQ355Uf85ipswqalfYQOcnB16PMRY6/0n7RE6yggkwGwkWUYKylHYzst8PqwPW7gYLa
-         LuCp1pVUCBENWqDqqZli/UnyZCr9rgILrG8I70DDHpcgV6uawgL5yOTmD9eOvdN6+LUC
-         x6v7v/W1/OTZ5h5Op2bhbChw+s938Q4jp6xsXc4xotwC0QZ0FETfq/4faR2AkUYg8GrO
-         iIraHhbsryGCdQU9NCNKo635EYhf7DzZ4ruUihysiBC2+a/89G2X+9D7yPNc2E3UkAFo
-         e/Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1745615782; x=1746220582;
-        h=content-transfer-encoding:in-reply-to:content-language:from
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=dTz9I5enTaJxLVBqLDZUEqU3il7OBimu59UQoHiVNMA=;
-        b=BcvC9SUDKCCeM7fZ2sRqparmqueL8TYVu0o+DoOM9dtKNY3X3C+Rzc/mBoaUpFAjAW
-         99vZxY9tpSxZqrWZl5xCzW5DlbSgBUiQkloirD2OBkptOZdVGQAwzpPCviljr1da3nUY
-         qdfvBZd0z9GceuwCQrF+aZYvr/Rv6xKMkqsx4tYT4RvQ7W4rsgFE1bm6cQrmpEKO0S6M
-         27NGqVTi1bJVJM88IzVpC5whePVJBP4eHsmAfVs7cCYaM6DJobaD5yC9VCnovpKNp8bz
-         pqhfKeD8ccAxKAnMQL5qvqYPgEXpIkzpAKYLV7Ea3YJDhxGKd8yFQeukTw17oqygP5Et
-         uJqg==
-X-Forwarded-Encrypted: i=1; AJvYcCWp0yb1UOtzEINdqNRaHflUuUOx0QC4ArONq2Z7zKUosPV+gdyIbUqCBGKd7fSqAUEtb5RM86DM7QM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzfeBMiBMCqyH2igLy8KhFfCwc8tOJ39l1DOlrPlXwSItgCMkvo
-	5sDkU7nz9sq+JwfaWj79WiqcEo2HYerFY3c0c+P6BVXhuSnQMnRDBAMJlxpSTFk=
-X-Gm-Gg: ASbGncuLrjTWemOozfZ3flkJscfMdzmfQ0jN4xaUD1jNR69KyZafHxAelMkSfcQeQJn
-	gqluBbG+cEXpPSE/N1Jo9+O/HAoZBnHCb1KhLnEPhQ9V6EDNqq86FOpbC8p6u0F4P2m01D5Ym0d
-	A18DDhN/s1NseVXGg/yOcujh2e/36yatQsOY4I1SGh7bWhOFdB43BBB+61Dq/T1m9mffXz1UZ/K
-	ApcP9tb1UzB06flqRuxqQQA+PS2k0t8kUIrLzFwnc5Lr656on1oCWVw9UrmBRmsqQUE0nKJwndC
-	NtrvYtNx7xAZr8GSkf/z4h7Tx5CpHBlaB0EFja5NY2EJObt/BNLWFTMGvlyDJ8B1AxpF7nOQ8QQ
-	UtbZv2uSbhqdt
-X-Google-Smtp-Source: AGHT+IFP6Q8OseGcSbnqWqVTrZCG0R7+HN99jIze+0SssGMO+saUY5k74kZJ24hu1RttCmiKMZvjBQ==
-X-Received: by 2002:a05:6870:611e:b0:2d4:e8ce:7bcc with SMTP id 586e51a60fabf-2d97317915cmr4604390fac.8.1745615781776;
-        Fri, 25 Apr 2025 14:16:21 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:1d00:96a3:e28:3f6:dbac? ([2600:8803:e7e4:1d00:96a3:e28:3f6:dbac])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7304f37b12fsm848940a34.43.2025.04.25.14.16.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 25 Apr 2025 14:16:21 -0700 (PDT)
-Message-ID: <143ffe9b-b32e-41ea-b5c7-855c680b48d4@baylibre.com>
-Date: Fri, 25 Apr 2025 16:16:20 -0500
+	s=arc-20240116; t=1745617494; c=relaxed/simple;
+	bh=1vYY0G6paJDxqTAFql3Fe/ZoYlYAWMsKFG17ZpHlpB4=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=usXlNaPpU+GGl3BJAqPCxJek93fQharcQEjuc5B6y8OY6sujyw4qgEffhQiS0vXtI4FqWJ0V9pQWMvmDK1R3A0eAWBtgRQ9pB5mYhQtSn8Ewp4izbXJ54NygdB0nayp1QJIapjLrccSyMIIF8wI4plnRx3jrrhx6aqEVsWqIt4s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com; spf=pass smtp.mailfrom=linux.microsoft.com; dkim=pass (1024-bit key) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b=VVfli0Z9; arc=none smtp.client-ip=13.77.154.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
+Received: from narnia (unknown [172.172.34.12])
+	by linux.microsoft.com (Postfix) with ESMTPSA id 0FD7420BCAD1;
+	Fri, 25 Apr 2025 14:44:43 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 0FD7420BCAD1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1745617492;
+	bh=RLcGrvY/Ji6RfwBGa0SDop5ZSdaFF8Vony2mUDrwhz8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=VVfli0Z9/uOSWmD2zYfgd/ELGgJQhQObtxaSQgX4AL7uZlqTSEwxa/QkcFRUrFG4L
+	 KJe067jmKGvAEhgwx3y2k+RRnXnuiRFkSXZNrkzp+VuQoskURv0DCiZeNXTaiElj12
+	 7XOVymm5fhm6nTTtITxxB973eE6OhvwrFoFeXnVA=
+From: Blaise Boscaccy <bboscaccy@linux.microsoft.com>
+To: James Bottomley <James.Bottomley@HansenPartnership.com>, Alexei
+ Starovoitov <alexei.starovoitov@gmail.com>, KP Singh <kpsingh@google.com>,
+ Paul Moore <paul@paul-moore.com>, Daniel Borkmann <daniel@iogearbox.net>
+Cc: Jonathan Corbet <corbet@lwn.net>, David Howells <dhowells@redhat.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller"
+ <davem@davemloft.net>, Paul Moore <paul@paul-moore.com>, James Morris
+ <jmorris@namei.org>, "Serge
+ E. Hallyn" <serge@hallyn.com>, Masahiro Yamada <masahiroy@kernel.org>,
+ Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nicolas@fjasle.eu>,
+ Shuah Khan <shuah@kernel.org>, =?utf-8?Q?Micka=C3=ABl_Sala=C3=BCn?=
+ <mic@digikod.net>, =?utf-8?Q?G=C3=BCnther?=
+ Noack <gnoack@google.com>, Nick Desaulniers
+ <nick.desaulniers+lkml@gmail.com>, Bill Wendling <morbo@google.com>,
+ Justin Stitt <justinstitt@google.com>, Jarkko Sakkinen
+ <jarkko@kernel.org>, Jan Stancek <jstancek@redhat.com>, Neal Gompa
+ <neal@gompa.dev>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+ LKML <linux-kernel@vger.kernel.org>, keyrings@vger.kernel.org, Linux
+ Crypto Mailing List <linux-crypto@vger.kernel.org>, LSM List
+ <linux-security-module@vger.kernel.org>, Linux Kbuild mailing list
+ <linux-kbuild@vger.kernel.org>, "open list:KERNEL SELFTEST FRAMEWORK"
+ <linux-kselftest@vger.kernel.org>, bpf <bpf@vger.kernel.org>,
+ clang-built-linux <llvm@lists.linux.dev>, nkapron@google.com, Matteo Croce
+ <teknoraver@meta.com>, Roberto Sassu <roberto.sassu@huawei.com>, Cong Wang
+ <xiyou.wangcong@gmail.com>
+Subject: Re: [PATCH v2 security-next 1/4] security: Hornet LSM
+In-Reply-To: <6e086e29d258839e42ef7a83b38571d1882eb77d.camel@HansenPartnership.com>
+References: <20250404215527.1563146-1-bboscaccy@linux.microsoft.com>
+ <20250404215527.1563146-2-bboscaccy@linux.microsoft.com>
+ <CAADnVQJyNRZVLPj_nzegCyo+BzM1-whbnajotCXu+GW+5-=P6w@mail.gmail.com>
+ <87semdjxcp.fsf@microsoft.com>
+ <CAADnVQ+JGfwRgsoe2=EHkXdTyQ8ycn0D9nh1k49am++4oXUPHg@mail.gmail.com>
+ <87friajmd5.fsf@microsoft.com>
+ <CAADnVQKb3gPBFz+n+GoudxaTrugVegwMb8=kUfxOea5r2NNfUA@mail.gmail.com>
+ <87a58hjune.fsf@microsoft.com>
+ <CAADnVQ+LMAnyT4yV5iuJ=vswgtUu97cHKnvysipc6o7HZfEbUA@mail.gmail.com>
+ <87y0w0hv2x.fsf@microsoft.com>
+ <CAADnVQKF+B_YYwOCFsPBbrTBGKe4b22WVJFb8C0PHGmRAjbusQ@mail.gmail.com>
+ <2bd95ca78e836db0775da8237792e8448b8eec62.camel@HansenPartnership.com>
+ <CAADnVQJ6SRePz7yc5x3BAz7q-e8DVYq=vRdahxCZ4XzpWtnYpQ@mail.gmail.com>
+ <6e086e29d258839e42ef7a83b38571d1882eb77d.camel@HansenPartnership.com>
+Date: Fri, 25 Apr 2025 14:44:10 -0700
+Message-ID: <87bjsjlxw5.fsf@microsoft.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/5] Documentation: ABI: add oversampling frequency in
- sysfs-bus-iio
-To: Jorge Marques <jorge.marques@analog.com>,
- Jonathan Cameron <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
- Andy Shevchenko <andy@kernel.org>, =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?=
- <ukleinek@kernel.org>
-Cc: linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-pwm@vger.kernel.org
-References: <20250422-iio-driver-ad4052-v2-0-638af47e9eb3@analog.com>
- <20250422-iio-driver-ad4052-v2-1-638af47e9eb3@analog.com>
-From: David Lechner <dlechner@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <20250422-iio-driver-ad4052-v2-1-638af47e9eb3@analog.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 4/22/25 6:34 AM, Jorge Marques wrote:
+James Bottomley <James.Bottomley@HansenPartnership.com> writes:
 
-...
+> On Thu, 2025-04-24 at 16:41 -0700, Alexei Starovoitov wrote:
+>> On Wed, Apr 23, 2025 at 7:12=E2=80=AFAM James Bottomley
+>> <James.Bottomley@hansenpartnership.com> wrote:
+>> > On Mon, 2025-04-21 at 13:12 -0700, Alexei Starovoitov wrote:
+>> > [...]
+>> > > Calling bpf_map_get() and
+>> > > map->ops->map_lookup_elem() from a module is not ok either.
+>> >=20
+>> > I don't understand this objection.
+>>=20
+>> Consider an LSM that hooks into security_bprm_*(bprm),
+>> parses something in linux_binprm, then
+>> struct file *file =3D
+>> fd_file(fdget(some_random_file_descriptor_in_current));
+>> file->f_op->read(..);
+>>=20
+>> Would VFS maintainers approve such usage ?
+>
+> This is a bit off topic from the request for clarification but:
+>
+> It's somewhat standard operating procedure for LSMs.  Some do make
+> decisions entirely within the data provided by the hook, but some need
+> to take external readings, like selinux or IMA consulting the policy in
+> the xattr or apparmor the one in the tree etc.
+>
+> Incidentally, none of them directly does a file->f_op->read(); they all
+> use the kernel_read_file() API which is exported from the vfs for that
+> purpose.
+>
+>> More so, your LSM does
+>> file =3D get_task_exe_file(current);
+>> kernel_read_file(file, ...);
+>>=20
+>> This is even worse.
+>> You've corrupted the ELF binary with extra garbage at the end.
+>> objdump/elfutils will choke on it and you're lucky that binfmt_elf
+>> still loads it.
+>> The whole approach is a non-starter.
+>
+> It's the same approach we use to create kernel modules: ELF with an
+> appended signature.  If you recall the kernel summit discussions about
+> it, the reason that was chosen for modules is because it's easy and the
+> ELF processor simply ignores any data in the file that's not described
+> by the header (which means the ELF tools you refer to above are fine
+> with this if you actually try them).
+>
+> But it you really want the signature to be part of the ELF,  then the
+> patch set can do what David Howells first suggested for modules: it can
+> simply put the appended signature into an unloaded ELF section.
+>
+>> > The program just got passed in to bpf_prog_load() as a set of
+>> > attributes which, for a light skeleton, directly contain the code
+>> > as a blob and have the various BTF relocations as a blob in a
+>> > single element array map.=C2=A0 I think everyone agrees that the
+>> > integrity of the program would be compromised by modifications to
+>> > the relocations, so the security_bpf_prog_load() hook can't make an
+>> > integrity determination without examining both.=C2=A0 If the hook can't
+>> > use the bpf_maps.. APIs directly is there some other API it should
+>> > be using to get the relocations, or are you saying that the
+>> > security_bpf_prog_load() hook isn't fit for purpose and it should
+>> > be called after the bpf core has loaded the relocations so they can
+>> > be provided to the hook as an argument?
+>>=20
+>> No. As I said twice already the only place to verify program
+>> signature is a bpf subsystem itself.
+>
+> The above argument is actually independent of signing.  However,
+> although we have plenty of subsystems that verify their own signatures,
+> it's perfectly valid for a LSM to do it as well: IMA is one of the
+> oldest LSMs and it's been verifying signatures over binaries and text
+> files since it was first created.
+>
+>> Hacking into bpf internals from LSM, BPF-LSM program,
+>> or any other kernel subsystem is a no go.
+>
+> All LSMs depend to some extent on the internals of the subsystem where
+> the hook is ... the very structures passed into them are often internal
+> to that subsystem.  The problem you didn't address was that some of the
+> information necessary to determine the integrity properties in the bpf
+> hook is in a map file descriptor.  Since the map merely wraps a single
+> blob of data, that could easily be passed in to the hook instead of
+> having the LSM extract it from the map.  How the hook gets the data is
+> an internal implementation detail of the kernel that can be updated
+> later.
+>
+>> > The above, by the way, is independent of signing, because it
+>> > applies to any determination that might be made in the
+>> > security_bpf_prog_load() hook regardless of purpose.
+>>=20
+>> security_bpf_prog_load() should not access bpf internals.
+>> That LSM hook sees the following:
+>> security_bpf_prog_load(struct bpf_prog *prog, union bpf_attr *attr,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct bpf_tok=
+en *token, bool kernel);
+>>=20
+>> LSM can look into uapi things there.
+>
+> Is that the misunderstanding? That's not how LSMs work: they are not
+> bound by only the UAPI, they are in kernel and have full access to the
+> kernel API so they can introspect stuff and make proper determinations.
+>
+>> Like prog->sleepable, prog->tag, prog->aux->name,
+>> but things like prog->aux->jit_data or prog->aux->used_maps
+>> are not ok to access.
+>> If in doubt, ask on the mailing list.
+>
+> I am aren't I? At least the bpf is one of the lists cc'd on this.
+>
+> Regards,
+>
+> James
 
-> Devices with this feature are max1363, ad7606, ad799x, and ad4052.
-> The max1363 driver included the events/sampling_frequency in
-> commit 168c9d95a940 ("iio:adc:max1363 move from staging.")
-> and ad799x in
-> commit ba1d79613df3 ("staging:iio:ad799x: Use event spec for threshold
-> hysteresis")
-> but went undocumented so far.
+I think we may be in the weeds here a bit and starting to get a little
+off-topic. Let's try to back up some and take a different tack. We are
+going to rework this effort into a set of patches that target the bpf
+subsystem and it's tooling directly, performing optional signature
+verification of the inputs to bpf_prog_load, using signature data
+passed in via bpf_attr, which should enough provide metadata so that it
+can be consumed by interested parties to enforce policy decisions around
+code signing and data integrity.
 
-It looks like this part was copied from a different commit and isn't related
-to this one.
-
-> 
-> Signed-off-by: Jorge Marques <jorge.marques@analog.com>
-> ---
->  Documentation/ABI/testing/sysfs-bus-iio | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-bus-iio b/Documentation/ABI/testing/sysfs-bus-iio
-> index 33c09c4ac60a4feec82308461643134f5ba84b66..129061befb21b82a51142a01a94d96fcf1b60072 100644
-> --- a/Documentation/ABI/testing/sysfs-bus-iio
-> +++ b/Documentation/ABI/testing/sysfs-bus-iio
-> @@ -139,6 +139,23 @@ Contact:	linux-iio@vger.kernel.org
->  Description:
->  		Hardware dependent values supported by the oversampling filter.
->  
-> +What:		/sys/bus/iio/devices/iio:deviceX/oversampling_frequency
-> +KernelVersion:	6.15
-> +Contact:	linux-iio@vger.kernel.org
-> +Description:
-> +		Some devices have internal clocks for oversampling.
-> +		Sets the resulting frequency in Hz to trigger a conversion used by
-> +		the oversampling filter.
-> +		If the device has a fixed internal clock or is computed based on
-> +		the sampling frequency parameter, the parameter is read only.
-
-Don't need a newline after every period.
-
-> +
-> +What:		/sys/bus/iio/devices/iio:deviceX/oversampling_frequency_available
-> +KernelVersion:	6.15
-> +Contact:	linux-iio@vger.kernel.org
-> +Description:
-> +		Hardware dependent values supported by the oversampling
-> +		frequency.
-
-		oversampling_frequency attribute.
-
-> +
->  What:		/sys/bus/iio/devices/iio:deviceX/in_voltageY_raw
->  What:		/sys/bus/iio/devices/iio:deviceX/in_voltageY_supply_raw
->  What:		/sys/bus/iio/devices/iio:deviceX/in_voltageY_i_raw
-> 
-
+-blaise
 
