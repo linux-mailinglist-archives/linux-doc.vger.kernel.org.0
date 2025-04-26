@@ -1,71 +1,75 @@
-Return-Path: <linux-doc+bounces-44413-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44415-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id C29A4A9D9B9
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 11:42:32 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 28145A9DA54
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 13:08:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 86E981BC691B
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 09:42:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3C3D6926670
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 11:07:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 531DC224B04;
-	Sat, 26 Apr 2025 09:42:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DF8D229B38;
+	Sat, 26 Apr 2025 11:08:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rVGFN06B"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="kD0mTgdD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AB02221FC1;
-	Sat, 26 Apr 2025 09:42:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2215852F88;
+	Sat, 26 Apr 2025 11:07:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745660548; cv=none; b=GKUzfJvxjAjLuWHPb+297696R1UQcah1PZRVfYpaMXqtnCEjgrh5FmVzEEx1JC+y9osn6qEesTX4kHaFFzh4rrUvJLMyvEBMB33xn15hLc8nhR0KcmuifSE9bMKbPzFKgR2496seWnfcaW+oT2Nw3vGVmIayPmjkhx734sdGSVY=
+	t=1745665681; cv=none; b=WHMNZ+z71RTFfgSSyauyghuoD4euiGY82vJYWlK+6c8Tmx5SsU/ACdaOXwclkKO76kKYDO22W43svyGl1m8r3COvPZa1MOhZ2GYr40J+qf3SIWzR4KL1ZmbqfzPFwAXtGvdxfmbyklp0Yvy4K8/E25mt2afVQntjaPTPOY7/yAQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745660548; c=relaxed/simple;
-	bh=GKYZDfmT8vrfb5LgauTuj6xSdhIuzi1Ln9+BvIpR6bo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XxAiduClbKrAB9HXBukOtzecW8QKb/D2k9u+9rmBQDDKZyMpVFzQ2Ish6l4S3gXIl7iC1sHu1DCMK7HA43thL6+5AnlDs4Xr2uWe5NmfcbM216qHuKs08E2n+lUkdHjn2xngKKHu2CY1KLEySp80emX3Tb6clu842Ry7T+qNs/8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rVGFN06B; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A36B7C4CEE2;
-	Sat, 26 Apr 2025 09:42:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745660547;
-	bh=GKYZDfmT8vrfb5LgauTuj6xSdhIuzi1Ln9+BvIpR6bo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=rVGFN06BVpXQADF0McOYueFwHEJhzWz636+kIlsGWOMDkbla7J9iRT6MOM5btu29t
-	 7hrzRp906EFlYVTlOPXUuC1W62smXtLsaIzA8HaccyZjb/y5kRttqFLrTM/DtGyroV
-	 +vsQ0YDjmUTeSZOXRfRA9nNUoSfUCuBj8NtLlv6Fi79bKQmIQ/fUTbOEQohxgwWqDd
-	 Tb6IGOpyh63YdXZWl0MaGfBiu1PyWpxd0x+I3NNXULnzYTUmCrJIWsf9vb9fucFp8f
-	 JS4ufPR9XO2Ub+4CWmtXMWYjzLHwDnViIosaVAQ2wDJ9mj96tB9cuWRrlOnuJfN7H7
-	 RIaV/e4EOKamA==
-Date: Sat, 26 Apr 2025 11:42:21 +0200
-From: Ingo Molnar <mingo@kernel.org>
-To: Andi Shyti <andi.shyti@kernel.org>
-Cc: Mario Limonciello <superm1@kernel.org>, Borislav Petkov <bp@alien8.de>,
-	Jean Delvare <jdelvare@suse.com>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Mario Limonciello <mario.limonciello@amd.com>,
-	Yazen Ghannam <yazen.ghannam@amd.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-	"H . Peter Anvin" <hpa@zytor.com>,
-	Shyam Sundar S K <Shyam-sundar.S-k@amd.com>,
-	Hans de Goede <hdegoede@redhat.com>,
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-	open list <linux-kernel@vger.kernel.org>,
-	"open list:I2C/SMBUS CONTROLLER DRIVERS FOR PC" <linux-i2c@vger.kernel.org>,
-	"open list:AMD PMC DRIVER" <platform-driver-x86@vger.kernel.org>
-Subject: Re: [PATCH v5 2/5] i2c: piix4: Depends on X86
-Message-ID: <aAyqfaz4-_9qOG-x@gmail.com>
-References: <20250422234830.2840784-1-superm1@kernel.org>
- <20250422234830.2840784-3-superm1@kernel.org>
- <qqrff4zx6eyoyppx3bmsujl4vzhmlwi2dldhoxxikkspmlbiiz@sabqjmjekv7w>
+	s=arc-20240116; t=1745665681; c=relaxed/simple;
+	bh=GyW16Txf4WFU4MSIoY4oJy27x/Bf7MkTk/oUJden00Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=hirOlvP5QtpoN5Vzby4W+m/P80d+yXNe6DseY+932+0Pcp4GZhvGGQT75R7AanlE1qseMeqTclTIgWGtoA+lEcEQZdbSFe4VrV3pTpdL+k1eoJZ2sMoruWzMPGaRJcd2PX0YXWzTWmpqUODyDAPa4BFlzfsKyMeaPCMNCkSGG9I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=kD0mTgdD; arc=none smtp.client-ip=198.175.65.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1745665679; x=1777201679;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=GyW16Txf4WFU4MSIoY4oJy27x/Bf7MkTk/oUJden00Q=;
+  b=kD0mTgdDm7neH7YWN8l39yCSfcxF9Vld0pCQwhyZYbnrlbIg+RP3zFAz
+   qYNrWzrFEnQZnUFEiBbj6Kd/EE34mt0AD0B2KBtZLnaGcIJt2+Vfs+/SD
+   PcL8U4jn4jDJXVLR+5hSe6vyXJXIYzJMAS0GHTfVpl9XboAXb6stcajdt
+   qfqoUpe8imTBm37sOh3nayREMBjyqvTuWvXaOomXGF+pZCLz1dQnQMLOj
+   tuhORgqem07BPnuzvq5euwEEJRbCAuwtv6QAgQT8k2bSM8DEY09hJLovl
+   SV6ePwcJa4ppgCmQHSon36AcBs9PuLUdGxfwSIgbXF80JP9FPpHv1GMpQ
+   Q==;
+X-CSE-ConnectionGUID: dcZTP+N2SOeMbukOpQDBIw==
+X-CSE-MsgGUID: jH4dUVvxQq6ooNLhueZdMQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11414"; a="50986548"
+X-IronPort-AV: E=Sophos;i="6.15,241,1739865600"; 
+   d="scan'208";a="50986548"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Apr 2025 04:07:58 -0700
+X-CSE-ConnectionGUID: qdAgFR39Q7aT5Mw6hPTtXg==
+X-CSE-MsgGUID: Vo/VSuUrRLy/QEgbsNTuWA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,241,1739865600"; 
+   d="scan'208";a="132995474"
+Received: from lkp-server01.sh.intel.com (HELO 050dd05385d1) ([10.239.97.150])
+  by fmviesa006.fm.intel.com with ESMTP; 26 Apr 2025 04:07:56 -0700
+Received: from kbuild by 050dd05385d1 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1u8dNx-0005oB-28;
+	Sat, 26 Apr 2025 11:07:53 +0000
+Date: Sat, 26 Apr 2025 19:07:16 +0800
+From: kernel test robot <lkp@intel.com>
+To: Max Kellermann <max.kellermann@ionos.com>
+Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
+	linux-kernel@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
+	linux-doc@vger.kernel.org
+Subject: io_uring/io-wq.c:80: warning: This comment starts with '/**', but
+ isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+Message-ID: <202504261846.jvwwfMUN-lkp@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -74,30 +78,62 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <qqrff4zx6eyoyppx3bmsujl4vzhmlwi2dldhoxxikkspmlbiiz@sabqjmjekv7w>
+
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
+head:   02ddfb981de88a2c15621115dd7be2431252c568
+commit: 751eedc4b4b79332ecf1a78c0dbeb47d573a8f59 io_uring/io-wq: move worker lists to struct io_wq_acct
+date:   10 weeks ago
+config: s390-randconfig-002-20250426 (https://download.01.org/0day-ci/archive/20250426/202504261846.jvwwfMUN-lkp@intel.com/config)
+compiler: clang version 21.0.0git (https://github.com/llvm/llvm-project f819f46284f2a79790038e1f6649172789734ae8)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250426/202504261846.jvwwfMUN-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202504261846.jvwwfMUN-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> io_uring/io-wq.c:80: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+            * Protects access to the worker lists.
+   io_uring/io-wq.c:89: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+            * The list of free workers.  Protected by #workers_lock
+   io_uring/io-wq.c:95: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
+            * The list of all workers.  Protected by #workers_lock
 
 
-* Andi Shyti <andi.shyti@kernel.org> wrote:
+vim +80 io_uring/io-wq.c
 
-> Hi,
-> 
-> On Tue, Apr 22, 2025 at 06:48:27PM -0500, Mario Limonciello wrote:
-> > From: Mario Limonciello <mario.limonciello@amd.com>
-> > 
-> > PIIX4 and compatible controllers are only for X86. As some headers are
-> > being moved into x86 specific headers PIIX4 won't compile on non-x86.
-> > 
-> > Suggested-by: Ingo Molnar <mingo@kernel.org>
-> > Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
-> 
-> OK, so these are going through x86, at the end.
+    77	
+    78	struct io_wq_acct {
+    79		/**
+  > 80		 * Protects access to the worker lists.
+    81		 */
+    82		raw_spinlock_t workers_lock;
+    83	
+    84		unsigned nr_workers;
+    85		unsigned max_workers;
+    86		atomic_t nr_running;
+    87	
+    88		/**
+    89		 * The list of free workers.  Protected by #workers_lock
+    90		 * (write) and RCU (read).
+    91		 */
+    92		struct hlist_nulls_head free_list;
+    93	
+    94		/**
+    95		 * The list of all workers.  Protected by #workers_lock
+    96		 * (write) and RCU (read).
+    97		 */
+    98		struct list_head all_list;
+    99	
+   100		raw_spinlock_t lock;
+   101		struct io_wq_work_list work_list;
+   102		unsigned long flags;
+   103	};
+   104	
 
-Yeah, if you don't mind. There's a later x86 patch (5/5) that depends 
-on the new header.
-
-> Acked-by: Andi Shyti <andi.shyti@kernel.org>
-
-Thanks! I've added your acks to the commits.
-
-	Ingo
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
