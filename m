@@ -1,184 +1,124 @@
-Return-Path: <linux-doc+bounces-44414-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44416-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D24B2A9DA53
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 13:08:07 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id A96A2A9DA8B
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 14:23:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7EE987ABF7B
-	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 11:06:55 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F23D14A2C3E
+	for <lists+linux-doc@lfdr.de>; Sat, 26 Apr 2025 12:23:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 21445226865;
-	Sat, 26 Apr 2025 11:08:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B4E6226CE0;
+	Sat, 26 Apr 2025 12:23:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="m+kzRR2C"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fEA8gJWc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com [209.85.208.68])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2271F2192FB;
-	Sat, 26 Apr 2025 11:07:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74B87221719;
+	Sat, 26 Apr 2025 12:23:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.68
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745665680; cv=none; b=SnNVxEFAs6iqw6iMXnawBBeeoUxvJxbZ7irhU6GpzGPrSlVF2p7ply1COF4eRcTRW/ZiwsxaUeYe4FjVuXGSNdtE42MOWgZlwXWxeNfBRAHakQebf0qJi75K8h0V/0fPZQ8askS2AGvRxSvlHYHZPmq8zp+VWOpjevzNKDui9fw=
+	t=1745670204; cv=none; b=d2Kx15YobPILnfxN+76E7Zj6EvVxMY4RwBvdYR7+QFXnSJlzw2iUKwAkXLztP5L/Nj3GZkfSTsy2Fxnrcf4H+5jpy7Z4drHx6GAiI+dkpV5rSb7ByYB7goABomiPCu+J3rF74LVK0kU4YY7nynZ9be4IcyizyAgNRmtU1H4dEbI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745665680; c=relaxed/simple;
-	bh=lgM9lKDA8rXLN2ProkHBJJW87XSvYYwrYohgNWkw4uE=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=ezWyxTGNRe3FSQIZ27FK7QXS5OAvk8+XbBdXuzhYbW982ThfA6vGV2+j5yr5nRZwSjNfgt2jo1WHZ0EpuWyeQwLSL+diPnFDCBClJhz+87dPQ0TwpCldnxJ2NKVRbab2zJHvM5Acul5PkgVLQYO0461T82l05tyBiL/iqQ7+Adw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=m+kzRR2C; arc=none smtp.client-ip=192.198.163.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1745665678; x=1777201678;
-  h=date:from:to:cc:subject:message-id:mime-version;
-  bh=lgM9lKDA8rXLN2ProkHBJJW87XSvYYwrYohgNWkw4uE=;
-  b=m+kzRR2CybsShQOCMEQE0G2qvYtE/Um8RDffLdZ9waCXgGunyTM9snu8
-   icDAbgvxfUj5M+nKVOu6PZDmIGso86QnNLLjvatGci5pmTjGQXRj8S7TT
-   3bOmv0zp9y+mJ4J4ollvA6Gs+LVtaLCbpcqX8iuZ41kzexjNrlhquZvsR
-   Q8j2Fmb+CkmNZndtVo7L4q3ZFIM/PDfVd5wrF0Z69iXecYVAq3bPt+tRH
-   Rff1kXakxttPp6HTXL/LbODsWgp8+1UaZzDeFqmcMkHwWga3zWYnVnrOK
-   I0KjOgCiDCRvYX9T15h54nPiH9b7CR+SXknIXV+t02HySYqmRYmDdjdiF
-   A==;
-X-CSE-ConnectionGUID: Ha4mb05gS4GlhiuFXNDang==
-X-CSE-MsgGUID: 9jW+a1+7RcK8axDM5XXEqw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11414"; a="57959550"
-X-IronPort-AV: E=Sophos;i="6.15,241,1739865600"; 
-   d="scan'208";a="57959550"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Apr 2025 04:07:58 -0700
-X-CSE-ConnectionGUID: 0+p5mDh/RwW0OsJZnsDSSA==
-X-CSE-MsgGUID: ++9O1RJFTXuK2JKVTnOT0A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,241,1739865600"; 
-   d="scan'208";a="156336886"
-Received: from lkp-server01.sh.intel.com (HELO 050dd05385d1) ([10.239.97.150])
-  by fmviesa002.fm.intel.com with ESMTP; 26 Apr 2025 04:07:56 -0700
-Received: from kbuild by 050dd05385d1 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1u8dNx-0005oE-2C;
-	Sat, 26 Apr 2025 11:07:53 +0000
-Date: Sat, 26 Apr 2025 19:07:17 +0800
-From: kernel test robot <lkp@intel.com>
-To: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
-Cc: oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
-	Mark Brown <broonie@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+	s=arc-20240116; t=1745670204; c=relaxed/simple;
+	bh=N9abW1lOZDc+B91BOCRly9ah+nCCCdochLw4pC52qyM=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=urOSSRrhxYSmpqsVjP56LkCS1fpDQE1JlvikO/utjaeu6+x7ODxf5lpXmP+2VD5zHdBOBXX+romru9mEwuVwt2aujU2DTW3ydgyyTOaB3j376xMeqXlaX0KOd7hDJPh2jFLuu7ukqNZBKf3EQG9IBG+a1M8TALU7gX6AOGfA5NQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fEA8gJWc; arc=none smtp.client-ip=209.85.208.68
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f68.google.com with SMTP id 4fb4d7f45d1cf-5f6222c6c4cso5058058a12.1;
+        Sat, 26 Apr 2025 05:23:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1745670201; x=1746275001; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xlEHe5Mf7pIzMqaAH5RZWW7mKF5X71NbDyCS4gm98zw=;
+        b=fEA8gJWcUCRgavrp9lsj5+iXj5Ph+utF645bf4c8Ju6xtXcCVo7GRd2Wn6pEkFf9rS
+         NUMrk0kozXOF+onPv7TdB/2BkDE7T8hLHJEeo1zZD9kxBFDiqv63ovh+sjVNZxcSFiwi
+         P+TQCzK3FSyHTRQps8oAC9Qc13oPQXtd6aK9EM6zYhMg0yCtvLRhfhjynbSZnuh399Tr
+         H11R/j8xpQKu2eK8D1T0ng7T5zG5yrEVipNcWO9wEExDhMAi775Wfcz4yq/pmgYPFD8D
+         X1ab7maAaATFs2HvM0Ys8Gu75bMTjK8/sN2JbDCS/YvITLxEWbzqkgCVk/uYnLZ+ni0O
+         ru7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1745670201; x=1746275001;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=xlEHe5Mf7pIzMqaAH5RZWW7mKF5X71NbDyCS4gm98zw=;
+        b=rUpbm3W4plUFt1QWHDAQMRu349BWXIenvT30vAxPjAl9uhRgxps5Ub8MBeW5Rfi1HA
+         KpbUmR0IZceOYl8g/aBN2dtykAq+Arw7Hpn5EYrcP3SIrW9ej28kKmB6vhdZLGBUISgh
+         92wzlZ+67T9pwUcRo5z3WIgyfQACsviuK5+ybwhKd5/CoNnJsa+NllFtOppN++EtaAoy
+         4OOX4ENRnOIXMlChsynZco6e1nML88KOA2x6bc7ClpVp9C85JcZPSL9k+R/iR3R2FZCO
+         JjC20BrcXRERk8jG1+119PeNzOeBkzCbwo1yvqsmt0Zcs0SI4ZXbpMOqYhKadaTOt5Or
+         PRew==
+X-Forwarded-Encrypted: i=1; AJvYcCUyMbBfWM1l9nkGMoBeIomL00bofkRc+zyw0QF0ZzqP6jpG4Dxdg0SyCzNaADimeExoOwD7XtdAHdVkF5Sn@vger.kernel.org, AJvYcCX+28uUhexyx0oXsrQxmyATyyQ1DmBqObAQCLVa9wN6o+B5msWS9vIbpRUFL3UwH5wcx6t+b7Y/1Cg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzfO3UodSZFoZMlEXoULtFNOFSdCoMYdUv7E/02wFB4IaSBwlLE
+	R/m4/osapSrJ8daW5iktN032sxE2a85no91eyMR3ZpzdyEwhea+h
+X-Gm-Gg: ASbGncvubpEZLyMgTWrxQF2licEVGH0YgyMMLWz25PH30aHHumpLBmDnpAYppCFsxIL
+	MZMxjDYg5Jm0Qv1CiwDTKhmt/O/urPMXP1+IHbejR5c+evZOD/ERjQuYzPDRYfaqPfuLQvmEJJx
+	vD0ph1INYJ4m1yH1LstZT9rFtocUJ5MNP+sUmk5NEDct7tCKRw6S1VHyZEdEXsmpE00087qxR/I
+	ysm6xuqlBgxreRxA+zgw+Zb5ccBf8ChMBDkEwDxKBjbki5//F/YyQed7ORJDtxNSy7wymU+sHTy
+	Vb58PLscD2OipNAJIAGoxj8o18JVIhW2RhNFqErFA77o8W5rQg==
+X-Google-Smtp-Source: AGHT+IHwgMkPsZH/36tTOE1Z1B+hEOgMAfZLu1qKxmPXwC0LWc+7uO4GJlB51CYIN7M/tlaXfMJ3Ng==
+X-Received: by 2002:a17:907:3da5:b0:aca:e2d9:41f with SMTP id a640c23a62f3a-ace71425c63mr500343666b.60.1745670200387;
+        Sat, 26 Apr 2025 05:23:20 -0700 (PDT)
+Received: from be-Latitude-E6510.home.local ([2a01:8b82:54fd:b800::4bb])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ace6ed72826sm278745566b.154.2025.04.26.05.23.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 26 Apr 2025 05:23:20 -0700 (PDT)
+From: =?UTF-8?q?Adrian=20B=C3=BCtler?= <buetlera123@gmail.com>
+To: Jonathan Corbet <corbet@lwn.net>,
 	linux-doc@vger.kernel.org
-Subject: sound/soc/codecs/wsa883x.c:1402: warning: This comment starts with
- '/**', but isn't a kernel-doc comment. Refer
- Documentation/doc-guide/kernel-doc.rst
-Message-ID: <202504261851.TJGZIvtl-lkp@intel.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>,
+	"H . Peter Anvin" <hpa@zytor.com>,
+	x86@kernel.org,
+	linux-kernel@vger.kernel.org,
+	=?UTF-8?q?Adrian=20B=C3=BCtler?= <buetlera123@gmail.com>
+Subject: [PATCH v2] Documentation: x86: Fix a typo in fsgs.rst
+Date: Sat, 26 Apr 2025 14:23:03 +0200
+Message-Id: <20250426122303.15905-1-buetlera123@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250425135836.19081-1-buetlera123@gmail.com>
+References: <20250425135836.19081-1-buetlera123@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-tree:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master
-head:   02ddfb981de88a2c15621115dd7be2431252c568
-commit: 1cf3295bd108abbd7f128071ae9775fd18394ca9 ASoC: codecs: wsa883x: parse port-mapping information
-date:   10 months ago
-config: sh-randconfig-002-20250426 (https://download.01.org/0day-ci/archive/20250426/202504261851.TJGZIvtl-lkp@intel.com/config)
-compiler: sh4-linux-gcc (GCC) 12.4.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250426/202504261851.TJGZIvtl-lkp@intel.com/reproduce)
+Fix a spelling typo in fsgs.rst.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202504261851.TJGZIvtl-lkp@intel.com/
+Signed-off-by: Adrian Bütler <buetlera123@gmail.com>
+---
+v1->v2: added Signed-off-by
+v1: https://lore.kernel.org/linux-doc/20250425135836.19081-1-buetlera123@gmail.com/T/#u
 
-All warnings (new ones prefixed by >>):
+ Documentation/arch/x86/x86_64/fsgs.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->> sound/soc/codecs/wsa883x.c:1402: warning: This comment starts with '/**', but isn't a kernel-doc comment. Refer Documentation/doc-guide/kernel-doc.rst
-            * Port map index starts with 0, however the data port for this codec
-
-
-vim +1402 sound/soc/codecs/wsa883x.c
-
-  1364	
-  1365	static int wsa883x_probe(struct sdw_slave *pdev,
-  1366				 const struct sdw_device_id *id)
-  1367	{
-  1368		struct wsa883x_priv *wsa883x;
-  1369		struct device *dev = &pdev->dev;
-  1370		int ret;
-  1371	
-  1372		wsa883x = devm_kzalloc(dev, sizeof(*wsa883x), GFP_KERNEL);
-  1373		if (!wsa883x)
-  1374			return -ENOMEM;
-  1375	
-  1376		wsa883x->vdd = devm_regulator_get(dev, "vdd");
-  1377		if (IS_ERR(wsa883x->vdd))
-  1378			return dev_err_probe(dev, PTR_ERR(wsa883x->vdd),
-  1379					     "No vdd regulator found\n");
-  1380	
-  1381		ret = regulator_enable(wsa883x->vdd);
-  1382		if (ret)
-  1383			return dev_err_probe(dev, ret, "Failed to enable vdd regulator\n");
-  1384	
-  1385		wsa883x->sd_n = devm_gpiod_get_optional(dev, "powerdown",
-  1386							GPIOD_FLAGS_BIT_NONEXCLUSIVE | GPIOD_OUT_HIGH);
-  1387		if (IS_ERR(wsa883x->sd_n)) {
-  1388			ret = dev_err_probe(dev, PTR_ERR(wsa883x->sd_n),
-  1389					    "Shutdown Control GPIO not found\n");
-  1390			goto err;
-  1391		}
-  1392	
-  1393		dev_set_drvdata(dev, wsa883x);
-  1394		wsa883x->slave = pdev;
-  1395		wsa883x->dev = dev;
-  1396		wsa883x->sconfig.ch_count = 1;
-  1397		wsa883x->sconfig.bps = 1;
-  1398		wsa883x->sconfig.direction = SDW_DATA_DIR_RX;
-  1399		wsa883x->sconfig.type = SDW_STREAM_PDM;
-  1400	
-  1401		/**
-> 1402		 * Port map index starts with 0, however the data port for this codec
-  1403		 * are from index 1
-  1404		 */
-  1405		if (of_property_read_u32_array(dev->of_node, "qcom,port-mapping", &pdev->m_port_map[1],
-  1406						WSA883X_MAX_SWR_PORTS))
-  1407			dev_dbg(dev, "Static Port mapping not specified\n");
-  1408	
-  1409		pdev->prop.sink_ports = GENMASK(WSA883X_MAX_SWR_PORTS, 0);
-  1410		pdev->prop.simple_clk_stop_capable = true;
-  1411		pdev->prop.sink_dpn_prop = wsa_sink_dpn_prop;
-  1412		pdev->prop.scp_int1_mask = SDW_SCP_INT1_BUS_CLASH | SDW_SCP_INT1_PARITY;
-  1413		gpiod_direction_output(wsa883x->sd_n, 0);
-  1414	
-  1415		wsa883x->regmap = devm_regmap_init_sdw(pdev, &wsa883x_regmap_config);
-  1416		if (IS_ERR(wsa883x->regmap)) {
-  1417			gpiod_direction_output(wsa883x->sd_n, 1);
-  1418			ret = dev_err_probe(dev, PTR_ERR(wsa883x->regmap),
-  1419					    "regmap_init failed\n");
-  1420			goto err;
-  1421		}
-  1422		pm_runtime_set_autosuspend_delay(dev, 3000);
-  1423		pm_runtime_use_autosuspend(dev);
-  1424		pm_runtime_mark_last_busy(dev);
-  1425		pm_runtime_set_active(dev);
-  1426		pm_runtime_enable(dev);
-  1427	
-  1428		ret = devm_snd_soc_register_component(dev,
-  1429						      &wsa883x_component_drv,
-  1430						       wsa883x_dais,
-  1431						       ARRAY_SIZE(wsa883x_dais));
-  1432	err:
-  1433		if (ret)
-  1434			regulator_disable(wsa883x->vdd);
-  1435	
-  1436		return ret;
-  1437	
-
+diff --git a/Documentation/arch/x86/x86_64/fsgs.rst b/Documentation/arch/x86/x86_64/fsgs.rst
+index d07e445dac5c..6bda4d16d3f7 100644
+--- a/Documentation/arch/x86/x86_64/fsgs.rst
++++ b/Documentation/arch/x86/x86_64/fsgs.rst
+@@ -130,7 +130,7 @@ instructions. Clang 5 supports them as well.
+ 
+   =================== ===========================
+   _readfsbase_u64()   Read the FS base register
+-  _readfsbase_u64()   Read the GS base register
++  _readgsbase_u64()   Read the GS base register
+   _writefsbase_u64()  Write the FS base register
+   _writegsbase_u64()  Write the GS base register
+   =================== ===========================
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.34.1
+
 
