@@ -1,62 +1,65 @@
-Return-Path: <linux-doc+bounces-44648-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44650-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EB8DA9FDC8
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 01:34:28 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB5BDA9FDF9
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 01:57:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C6E221A8755C
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 23:34:39 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C9BE65A2680
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 23:57:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C18251E04AD;
-	Mon, 28 Apr 2025 23:34:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 79DFA2144DD;
+	Mon, 28 Apr 2025 23:57:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="rKaRmt6z"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="YXkXZfUm"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7081513AC1;
-	Mon, 28 Apr 2025 23:34:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C547193077;
+	Mon, 28 Apr 2025 23:57:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745883263; cv=none; b=SKtPOmI8JD/BZ18e89bFF8UMvBBflT2/ni3+rUT8mqED2eZ/awaAnu9k/BSsPwsJgCk9Aej/XvonI0hDqFjakCm4Xbv7TgdbT/bKmvO7KgUp6GKulJwOapNoZYUnCkO46kvNn25IKqzFnsFj6PmHTLHHI14gCCm31O1rfvNO8QU=
+	t=1745884647; cv=none; b=Se9zTUsvhkRIL2ShS673PdS4moEWwJMWBPcYs1BTy9T3pdDQurDK4JBaGh1L4+namcbguThK6eeagj9XylOzLvBTfcPJJLgcSUyao4XcVOAWisq/xJ4REcnBJZh1+zVKByQjAG+7V8PJ64pkBTx5wnIvtkiE0gxfstlSPWIc2O8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745883263; c=relaxed/simple;
-	bh=AiPcKT9WlAILKA7dkRyOxfiCa+OaYqnNj+CDTi9uSOc=;
+	s=arc-20240116; t=1745884647; c=relaxed/simple;
+	bh=wuQ96xWIHnlfvh/BlXNd5KQDLS5DsUL2xmbm2c0BqgQ=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=IpUlmW/k0JobRkEdS69XQWishR1xmi9V6purlhwU9TwEbROngl/BDvaO3JaHttGgbg0+zRwyChpt+C4eJmlSPXryyO5fESpwBokW0sVMWjZtAseQk3Y+zrv4Iwt450Nrlgfv1XgGjL2oEQDF6gdTTXXNB/cyFUoxZ/8Z2zp3pDU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=rKaRmt6z; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=WcEihFFyoXA5Vbm9gfwLZ8LkA5fvMTyaGAhxAffzikzoCKu8psW0aN4POSFwJyU4baiNCVxLT/4TmWNglkCd60z/J+OqSpsum0a6f0X556VnLGzH6dOioiBhWbT4KScXN7tFGyZTcjnQYaSEtF5lJ7D7zJfl4kIeJgP5oURUixU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=YXkXZfUm; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9EAFF41060
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 18AB441060
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1745883261; bh=AiPcKT9WlAILKA7dkRyOxfiCa+OaYqnNj+CDTi9uSOc=;
+	t=1745884645; bh=wuQ96xWIHnlfvh/BlXNd5KQDLS5DsUL2xmbm2c0BqgQ=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=rKaRmt6zh8+P4juhNAtJq9cQrfxJ9mofzgD0lWE6cl0tl8npDzQFF9ZjNUaBf07Qw
-	 kGsD3kbVkj7hc1lHF93goXr/cOayYLFHowSl31uQgCDzecv9CgsHhx+1mbR29ZOo1P
-	 K/LSIMDJ7RAGplL9CINkdts7ru/zIaiXROZaZK0N4LC962Ym6yQMhph0rWbkxVXK2V
-	 46h7ngoc0ix1Qetf9hD3BDHhHoFdWXAvHCMpM4hDf3reQvVfU3DYruBkg5Xql6Zfm7
-	 c+rVGCLhDitxS3r4MDPH2GgF/kdjqgg6ZSKrwj7kD5MvjyS2VslZSOXuS5TL95lPn9
-	 hyB3LS1O1MOEw==
+	b=YXkXZfUmPf/IM/oeirBHdFBTzRkbqTRW7m3qQ5CU1sGoZVfWQ/uk5OKqSFMmpHpY4
+	 uxHhQLr2k3WvzS+c80jyz8T1/hiyYZcWheEBeJVNbluGoCEOeFhFBTADqncBPZzFun
+	 ut7LRIMLDMiEUY87bUrpaakhuEg27o1RL+igQ++Aazwd5q/lWvQr+Fzzjy9C/41d/1
+	 jjomigfunmRon8gBKwYSzfm+9sGuz3m3wCgCNHrVsFpsmoVNXbS2r/dOtyDln/88pm
+	 37qs03GINNEFhn9J0USak1k8paClFiFZhrwOrNfd0ao9ormPIg5CUZ+6jHfsI13bjv
+	 cVFXTmEKD2WnA==
 Received: from localhost (mdns.lwn.net [45.79.72.68])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 9EAFF41060;
-	Mon, 28 Apr 2025 23:34:21 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 18AB441060;
+	Mon, 28 Apr 2025 23:57:25 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Linux Doc Mailing
- List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/3] Some small improvements for kernel-doc generation
-In-Reply-To: <cover.1745564565.git.mchehab+huawei@kernel.org>
-References: <cover.1745564565.git.mchehab+huawei@kernel.org>
-Date: Mon, 28 Apr 2025 17:34:20 -0600
-Message-ID: <87o6wfrhc3.fsf@trenco.lwn.net>
+To: Andy Shevchenko <andriy.shevchenko@intel.com>, Mauro Carvalho Chehab
+ <mchehab+huawei@kernel.org>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>, Akira Yokosawa
+ <akiyks@gmail.com>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/1] docs: Makefile: store __pycache__ at the output
+ directory
+In-Reply-To: <aAvQFen6D5ukjj-x@smile.fi.intel.com>
+References: <cover.1745539360.git.mchehab+huawei@kernel.org>
+ <1b9e7f34c1d99a27a8abb308da3221b4663b5693.1745539360.git.mchehab+huawei@kernel.org>
+ <aAvQFen6D5ukjj-x@smile.fi.intel.com>
+Date: Mon, 28 Apr 2025 17:57:24 -0600
+Message-ID: <87jz73rg9n.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,19 +68,19 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+Andy Shevchenko <andriy.shevchenko@intel.com> writes:
 
-> Hi Jon,
+> On Fri, Apr 25, 2025 at 08:08:53AM +0800, Mauro Carvalho Chehab wrote:
+>> Instead of blocking creation of *.pyc cache, store python
+>> cache under Documentation/output/__pycache__
 >
-> This series contain 3 patches for kernel-doc:
->
-> Patch 1 creates a kernel doc class at the beginning of kerneldoc Sphinx
-> module and preserves it. With that, some caching is enabled;
-> Patch 2 fixes some permissions;
-> Patch 3 is mostly a cleanup patch to simplify a little bit the complex
-> parser
+> Do we need the below in the commit message?
+> I think having statistics is enough and this can be moved to the cover letter.
 
-Applied, thanks,
+I agree, that was a lot of stuff to get to a one-line fix; I took the
+liberty of trimming the tree listing out.
+
+Applied, thanks.
 
 jon
 
