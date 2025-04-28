@@ -1,155 +1,124 @@
-Return-Path: <linux-doc+bounces-44529-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44531-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A860A9EC74
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 11:36:01 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FCDCA9EE17
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 12:37:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 6F0347AD753
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 09:34:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id AF9A33BAE45
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 10:36:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90A3C27A925;
-	Mon, 28 Apr 2025 09:24:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A206C25E81D;
+	Mon, 28 Apr 2025 10:37:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DyqXQ6VB"
+	dkim=pass (1024-bit key) header.d=ucw.cz header.i=@ucw.cz header.b="NovZaOQr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from jabberwock.ucw.cz (jabberwock.ucw.cz [46.255.230.98])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E460263F5B;
-	Mon, 28 Apr 2025 09:24:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E37F759B71;
+	Mon, 28 Apr 2025 10:37:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.255.230.98
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745832261; cv=none; b=SbuMfK4cuBLLMFvJXVUEdxf/SS3ZR3KTIVaKlyIiWwSkxavAomECMr0nhKQZN1LrymyX1wsfhjq4OFyj3Z/dV4l5VvQH7OrxH/uAogznHZdI2kv3KTLPZEj1PWgmNdbm+6CoKYDPwWkJSytj1yFrHsuYjG/L7LGIB7IAW3nRb7E=
+	t=1745836628; cv=none; b=A3ku3Wt3MRHLPghPdMncDxzUtJMSZkMeSQJmxdHz3HwPWHk21i2MA5UDaTNldNC0Y9UfoxmgcFMLohTWW7CC9la9uCIX06MNqywyFnsVI8mf2uZg0BZlG+bsV35ziG8+E/MoowTga0yw2d8TgMmVuMP1R1ux69GelJ+4Kp3r/jo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745832261; c=relaxed/simple;
-	bh=JltzEs94lpehyHx6nl6wHRaPQKIRgU/HyWicrIFjUro=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=i8mbF1sFmXl/wShn023sj+q8DSPUPUqTZFh2MVY76MzhYChzQFbhXXuHHbW9mOI4krua6MxY2p5sHGOxjRm+c1RIloccEAHExXMxgEz/i9D3zJVuBq0bgRkzXoECHhj99A5NrFlH1nWiRtX5OJjhmh6gwdls6GqekVyivY6I2KI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DyqXQ6VB; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C09AC4CEE4;
-	Mon, 28 Apr 2025 09:24:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745832260;
-	bh=JltzEs94lpehyHx6nl6wHRaPQKIRgU/HyWicrIFjUro=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=DyqXQ6VBPGUV60WqF+uTbZzXAsUAIJ9C1BCb2KV9m8F42ozYCzXInlnKQFxIS2b36
-	 s+SctZer4F7Q5NkzQQld7WJZo9qsmkj9svarVHnHcf2ojzaBTAeBo4/HXSAAYmAED9
-	 0xAI51RXFcaNAViqGFTvgw71I5NRyjdQoBDcESxnGQBEZOfbe7wMnLan2Z1+J+qRj+
-	 8OEN5Dl/+rgO5hpebjkaj1SMCY1/3eRJ/TzmFUnFCx9NWXXoE71dQT6bHrYlzaqCDj
-	 cQfDk5LtjtwfeRrBMl5iLWmlcl+SqiMKCEXYnYeUEY8YsO01MnQzVcNjFdveNAbkls
-	 vBmDT0QLSZCQA==
-From: Leon Romanovsky <leon@kernel.org>
-To: Marek Szyprowski <m.szyprowski@samsung.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Christoph Hellwig <hch@lst.de>,
-	Keith Busch <kbusch@kernel.org>
-Cc: Leon Romanovsky <leonro@nvidia.com>,
-	Jake Edge <jake@lwn.net>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Zhu Yanjun <zyjzyj2000@gmail.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Sagi Grimberg <sagi@grimberg.me>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	=?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	linux-rdma@vger.kernel.org,
-	iommu@lists.linux.dev,
-	linux-nvme@lists.infradead.org,
-	linux-pci@vger.kernel.org,
-	kvm@vger.kernel.org,
-	linux-mm@kvack.org,
-	Niklas Schnelle <schnelle@linux.ibm.com>,
-	Chuck Lever <chuck.lever@oracle.com>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Matthew Wilcox <willy@infradead.org>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Kanchan Joshi <joshi.k@samsung.com>,
-	Chaitanya Kulkarni <kch@nvidia.com>
-Subject: [PATCH v10 24/24] nvme-pci: store aborted state in flags variable
-Date: Mon, 28 Apr 2025 12:22:30 +0300
-Message-ID: <ef01afea04a2aca3217ce1b52ec99bcd80e99f00.1745831017.git.leon@kernel.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1745831017.git.leon@kernel.org>
-References: <cover.1745831017.git.leon@kernel.org>
+	s=arc-20240116; t=1745836628; c=relaxed/simple;
+	bh=B1dGRmjcRNXpAFe31TZaoEINK1Ne+EtdvjeT/ksZONI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ok7ybup9DdSIZIV9IbiF+/UikwDbdmFhCFvMftdT7NK2VdO3LEMDmKZXq9WJ43iaSc/WoyMxZmwYhJ7raOJXtnDWoPScn1k3f2E6hhDuwrF+yBBcXGA74HQ6tY1LdUZ0BQKzwp9uTDmrlYktwP0sxwU7rxHfD3EhkKmlUfW94mY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ucw.cz; spf=pass smtp.mailfrom=ucw.cz; dkim=pass (1024-bit key) header.d=ucw.cz header.i=@ucw.cz header.b=NovZaOQr; arc=none smtp.client-ip=46.255.230.98
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ucw.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ucw.cz
+Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
+	id 803651C00B2; Mon, 28 Apr 2025 12:37:02 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ucw.cz; s=gen1;
+	t=1745836622;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=sK1vyzZ1/+Jz3BVDrNB5HsQaiId/G9OE1+QZi7+pUo4=;
+	b=NovZaOQrOnYyuz4h8MTpMapCl+bGF0gUM27+yMWiDTxs4K56P/UTaF4wfkDUFWS+kjPZil
+	7fPVRr+WvxX++Xxt/1j0WMsCDMdJcvb6Za5AiE6qz4VPlng+0vsZFR2nWCw8ljivMhaGKO
+	1RYtOP22T4/eItT4cLkXKQJw1grdt+0=
+Date: Mon, 28 Apr 2025 12:37:02 +0200
+From: Pavel Machek <pavel@ucw.cz>
+To: Andy Shevchenko <andy.shevchenko@gmail.com>
+Cc: Nam Tran <trannamatk@gmail.com>, andy@kernel.org, geert@linux-m68k.org,
+	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+	christophe.jaillet@wanadoo.fr, corbet@lwn.net,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, florian.fainelli@broadcom.com,
+	bcm-kernel-feedback-list@broadcom.com,
+	linux-rpi-kernel@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH v8 0/5] auxdisplay: add support for TI LP5812 4x3 Matrix
+ LED driver
+Message-ID: <aA9aTjhXHb3gddd9@duo.ucw.cz>
+References: <20250427082447.138359-1-trannamatk@gmail.com>
+ <CAHp75Vch8i50stVO6nH0Tnn=g4xSMji_iPj6q-CE1tLnvesqcQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Ag0ctD1RJcTfntuY"
+Content-Disposition: inline
+In-Reply-To: <CAHp75Vch8i50stVO6nH0Tnn=g4xSMji_iPj6q-CE1tLnvesqcQ@mail.gmail.com>
 
-From: Leon Romanovsky <leonro@nvidia.com>
 
-Instead of keeping dedicated "bool aborted" variable, let's reuse
-newly introduced flags variable and save space.
+--Ag0ctD1RJcTfntuY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/nvme/host/pci.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+Hi!
 
-diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
-index eb835425b496..9f3e2d8cbd04 100644
---- a/drivers/nvme/host/pci.c
-+++ b/drivers/nvme/host/pci.c
-@@ -219,6 +219,7 @@ struct nvme_queue {
- enum {
- 	IOD_LARGE_DESCRIPTORS = 1 << 0, /* uses the full page sized descriptor pool */
- 	IOD_SINGLE_SEGMENT = 1 << 1, /* single segment dma mapping */
-+	IOD_ABORTED = 1 << 2, /* abort timed out commands */
- };
- 
- /*
-@@ -227,7 +228,6 @@ enum {
- struct nvme_iod {
- 	struct nvme_request req;
- 	struct nvme_command cmd;
--	bool aborted;
- 	u8 nr_descriptors;	/* # of PRP/SGL descriptors */
- 	u8 flags;
- 	unsigned int total_len; /* length of the entire transfer */
-@@ -1027,7 +1027,6 @@ static blk_status_t nvme_prep_rq(struct nvme_dev *dev, struct request *req)
- 	struct nvme_iod *iod = blk_mq_rq_to_pdu(req);
- 	blk_status_t ret;
- 
--	iod->aborted = false;
- 	iod->nr_descriptors = 0;
- 	iod->flags = 0;
- 	iod->total_len = 0;
-@@ -1576,7 +1575,7 @@ static enum blk_eh_timer_return nvme_timeout(struct request *req)
- 	 * returned to the driver, or if this is the admin queue.
- 	 */
- 	opcode = nvme_req(req)->cmd->common.opcode;
--	if (!nvmeq->qid || iod->aborted) {
-+	if (!nvmeq->qid || (iod->flags & IOD_ABORTED)) {
- 		dev_warn(dev->ctrl.device,
- 			 "I/O tag %d (%04x) opcode %#x (%s) QID %d timeout, reset controller\n",
- 			 req->tag, nvme_cid(req), opcode,
-@@ -1589,7 +1588,7 @@ static enum blk_eh_timer_return nvme_timeout(struct request *req)
- 		atomic_inc(&dev->ctrl.abort_limit);
- 		return BLK_EH_RESET_TIMER;
- 	}
--	iod->aborted = true;
-+	iod->flags |= IOD_ABORTED;
- 
- 	cmd.abort.opcode = nvme_admin_abort_cmd;
- 	cmd.abort.cid = nvme_cid(req);
--- 
-2.49.0
+> > This patch series adds support for the TI/National Semiconductor LP5812
+> > 4x3 matrix RGB LED driver. The driver supports features such as autonom=
+ous
+> > animation and time-cross-multiplexing (TCM) for dynamic LED effects.
+> >
+> > Signed-off-by: Nam Tran <trannamatk@gmail.com>
+> > ---
+> > Changes in v8:
+> > - Move driver to drivers/auxdisplay/ instead of drivers/leds/.
+> > - Rename files from leds-lp5812.c/.h to lp5812.c/.h.
+> > - Move ti,lp5812.yaml binding to auxdisplay/ directory,
+> >   and update the title and $id to match new path.
+> > - No functional changes to the binding itself (keep Reviewed-by).
+> > - Update commit messages and patch titles to reflect the move.
+> > - Link to v7: https://lore.kernel.org/linux-leds/20250422190121.46839-1=
+-trannamatk@gmail.com/
+>=20
+> Out of sudden without discussing with auxdisplay maintainers/reviewers?
+> Thanks, no.
+> Please, put into the cover letter the meaningful summary of what's
+> going on and why this becomes an auxdisplay issue. Brief review of the
+> bindings sounds more likely like LEDS or PWM subsystems.
 
+It is 4x3 matrix. That means it is not suitable for LEDs. I don't
+believe it is suitable for PWM, either -- yes, it is 36 PWM outputs,
+but...
+
+Best regards,
+								Pavel
+--=20
+I don't work for Nazis and criminals, and neither should you.
+Boycott Putin, Trump, and Musk!
+
+--Ag0ctD1RJcTfntuY
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQRPfPO7r0eAhk010v0w5/Bqldv68gUCaA9aTgAKCRAw5/Bqldv6
+8u5oAKCw7eoZkIX/nBIa7XNYs4+P55FOvwCfaRsaqwJ7S1BjMxnZd5ElzqJ4liY=
+=6Zmi
+-----END PGP SIGNATURE-----
+
+--Ag0ctD1RJcTfntuY--
 
