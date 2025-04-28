@@ -1,575 +1,482 @@
-Return-Path: <linux-doc+bounces-44625-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44628-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACA8DA9FACC
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 22:53:49 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CB26A9FBAB
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 23:08:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B8D485A49A3
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 20:53:31 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 59C98188EF25
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Apr 2025 21:08:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 222861EE7B7;
-	Mon, 28 Apr 2025 20:53:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E36B11FCFEF;
+	Mon, 28 Apr 2025 21:07:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="YkHHIHDJ"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="EYLdwrEN";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="CKVSmEDX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA09314D428;
-	Mon, 28 Apr 2025 20:53:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745873626; cv=none; b=b/LYFsLXWwJ7mOR7T3lAqmUyObCOobeWR4aGl/V8fN3zvxXUotcBXfpzswWTsgQtRh6Gz2Fs5FYRYMsG52d9sPKN1DR/5x7xAz+TRci5M9oMPRLO/Z2OiYQQpa/YHkYEKfe706J2h3uJv3IpcMRcqYtTSW5s8lOVTmNe5PoWp9g=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745873626; c=relaxed/simple;
-	bh=dIXdjyGN5GZXIFp0+Zc/gdhIuiBg16Kdh9JRO35h/fU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=tTkcguxkWqEkka0/KKKq4nXogipUqZhuDMnIH3dB6oGnM/Huc7Jpr1JGuiPBSNNkI/1zEdUsc9ZKIk48E5sZcaO/GIvczUE0MYr0K4JSxnBMdtb4s3oM1yTh1nuiKUSkS3m0RwKAz2bI2Panr9dD7d/PRLgaXHed8nJVd5NqSpw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=YkHHIHDJ; arc=none smtp.client-ip=192.198.163.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1745873624; x=1777409624;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=dIXdjyGN5GZXIFp0+Zc/gdhIuiBg16Kdh9JRO35h/fU=;
-  b=YkHHIHDJsLP0kdZ1TIRYFocokzIMMHbSEIAfkSUrQbszC8I/AWn06I3j
-   J9uspn7u/vIbHMBrrynEIkgBozrAvnlwXSGulTKG4B4HQsUTetO1cEjdL
-   esj62DOWFwC8aIP0LfMBzObLM/SrNCcs6wzCxEG5keSy8kB4V3NCWyaaQ
-   Ci2LjTt9JbHZGQVu++MRwla30JfeBaR3yAlbsXX5lPTCa3/EcHs/FDFeA
-   YV1kECN3MESD5Is0hAQ5x9tta5CpsliAhrpt78m5Zl35PIgqQ2U4vzQSV
-   YQbBScph4elwUE1c+oIK/2O+bJ61nOkkA/d0xlHKyzzn1WuQ13Kw6OTfp
-   w==;
-X-CSE-ConnectionGUID: b28U1ljrSBuHBATbYqiUJg==
-X-CSE-MsgGUID: qh7rdQPfR82S+3plD+X6Kg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11417"; a="51296745"
-X-IronPort-AV: E=Sophos;i="6.15,247,1739865600"; 
-   d="scan'208";a="51296745"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Apr 2025 13:53:43 -0700
-X-CSE-ConnectionGUID: IVIsTEVgRtmHrAx6nL+c+g==
-X-CSE-MsgGUID: bC3xG4giReaMJgH/nskNLg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,247,1739865600"; 
-   d="scan'208";a="138433190"
-Received: from cmdeoliv-mobl4.amr.corp.intel.com (HELO [10.125.109.95]) ([10.125.109.95])
-  by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Apr 2025 13:53:41 -0700
-Message-ID: <72fd82fa-a604-467e-906f-04d050e5ce8e@intel.com>
-Date: Mon, 28 Apr 2025 13:53:40 -0700
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0C111F4C8E;
+	Mon, 28 Apr 2025 21:07:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.165.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1745874454; cv=fail; b=Bif3TqBfZP5DGQabXO6dOnt2iyxt4+SCzaOVmFg0bSspDWGlOsFnzutwAQymPgoZsh0XwGIU8TdIKTkkCVWvZkLovvvDhlLrAHMUGd+lVrG20q3qcEfMdXY8vVyyu8xhJtTT9EnYH3kP3VGeKSEvCigoVGuGt4CDenJv9n3qMFM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1745874454; c=relaxed/simple;
+	bh=a4pEyfVA7ETmpqb79t4L2r0cXOl/zs33dlGdsh6tkjw=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=IvEVNz1F031TJbseRdys7/s3BeMw6Niak4CtVzerLBEeMItAmZVNRniom3qgM9MRr5j4Rnwzw2B6mWxR26ZVL//MoW1rN8X7B9D6xGeDSste9Smwhyzg2uSzAhTBQAOPjUP7KZIleFOJtLGbZp33HWrbkop4Xu0tak9Dkcz4pxc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=EYLdwrEN; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=CKVSmEDX; arc=fail smtp.client-ip=205.220.165.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53SKVuaZ029894;
+	Mon, 28 Apr 2025 21:07:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	corp-2023-11-20; bh=Cht49A5gIspLiRO2i1pHbjrPytEkDiT+4OfKrIsQ3wI=; b=
+	EYLdwrENKTA8gkn5shj7JbyPu34Fb2nW3CQ7i9fxaqCyB3Ie6062+5WdVZgeXqoz
+	LFO6nPA+8baA8bHUF32ftDLN9WZqJeUoUPUfMQTvSG8GFa4NI4092ioILFEGx2Kt
+	2DdHEeIv54mOLtC1cmfj7wav89LDI97/IvQcqrGgeLF0dvFH7UCgmjn8188GMxqx
+	fo783OCqb8WEhDqurxfZp8Scr8QvGvfy9gh7PQfSJPR61lpb9eV1Z0JqWNHWsfMF
+	HtAM6jcuEr734j7MvinBMaKvTYdXU8KaWrAnvwpipESylzTNfC77n0Y8LsPSZWCA
+	7kpDlxCVSzrj3blh81fHiw==
+Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 46agsug1u1-8
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 28 Apr 2025 21:07:12 +0000 (GMT)
+Received: from pps.filterd (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 53SK85DQ013809;
+	Mon, 28 Apr 2025 20:57:43 GMT
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2172.outbound.protection.outlook.com [104.47.58.172])
+	by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 468nx8yhad-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 28 Apr 2025 20:57:43 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WTBdYBOEFFQHC+OUVhstUr/xylRGSgRdECVdIYuncBwXZ3Ioid8qClPxmHcSx0ngQfax+Mih84ZN6pJn7g5fivT/iB7MYpUCdljn9EAfkTtBJMgA6ZrLR4fqQYZuxKBpLcLI/OFt6ZfdeU1OFYRIKP+8Sc/20t3SALtib8cyoiTMHK0SV1q5NzF4gXBDvLZp3djINJl/4CESwLU5Nk4dnE5hLZzRC1fnyhcCj5wXfQYH5MShZAAt31XkLjywLdryTuvdLQiW1pEL0Z4SWn/fz//MmcVRPm2SjSFFbrkAAVp+rCoLEGmud/1VaddP2UnsmZ/smhbXcZhhza8/+P4IGQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Cht49A5gIspLiRO2i1pHbjrPytEkDiT+4OfKrIsQ3wI=;
+ b=I5MxXgWsB0m2c5QsX+7RAe1McCaCLhtPZTgu3qws9R6LFG2vkP9zU83ZLAKJ/T8HFU9Q2y1JO3ongaXKTcp9FMS0NHB+RTve0+RoH/PThywCRWyhvxoCMOCtPOmcq+voprtjfbZ8rcCoekdCx7m1AaklSWSbqExgbLDhnPyHhcEw0BmEWMs4HhoeYk0RJXVDMsCHbYb4ix4AVS4bz/y3Yf8bojs//9TL6ztyj1N32XvJ0dIzESiW2CMKLG/j6DtGMQ1sF6BvVi/BjwB7Qwr6+A1rGkTpzthLJTYLpevASFtIZI+RC1i+9BxuJ2qyzCm8rhmMKYZDYMkiODcditnBqg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Cht49A5gIspLiRO2i1pHbjrPytEkDiT+4OfKrIsQ3wI=;
+ b=CKVSmEDXo6cMXPqwWGU6JeQPqvdwFCQTPgt0qMEsaWcTaUr9r+gwuri7ZQkb3U6dPUjQwv0FGUNVhX+mps/yNctZ/zEis8Q/yBfoIuwW4VSHe6mbrRtLkwyWLwNMipo2d11K+tasQJVdwduuR3Ll3zJ4Q+ypbfZhQ5gyD8dNuGY=
+Received: from DS7PR10MB5328.namprd10.prod.outlook.com (2603:10b6:5:3a6::12)
+ by IA4PR10MB8544.namprd10.prod.outlook.com (2603:10b6:208:56d::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.27; Mon, 28 Apr
+ 2025 20:57:39 +0000
+Received: from DS7PR10MB5328.namprd10.prod.outlook.com
+ ([fe80::ea13:c6c1:9956:b29c]) by DS7PR10MB5328.namprd10.prod.outlook.com
+ ([fe80::ea13:c6c1:9956:b29c%2]) with mapi id 15.20.8678.028; Mon, 28 Apr 2025
+ 20:57:39 +0000
+Message-ID: <b7d3a60a-7298-41ef-8f4e-7dc56c1ccc8a@oracle.com>
+Date: Tue, 29 Apr 2025 02:27:30 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [External] : [PATCH v6 3/6] platform/x86: Add Lenovo WMI Events
+ Driver
+To: "Derek J. Clark" <derekjohn.clark@gmail.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: Armin Wolf <W_Armin@gmx.de>, Jonathan Corbet <corbet@lwn.net>,
+        Mario Limonciello <superm1@kernel.org>, Luke Jones <luke@ljones.dev>,
+        Xino Ni <nijs1@lenovo.com>, Zhixin Zhang <zhangzx36@lenovo.com>,
+        Mia Shao <shaohz1@lenovo.com>,
+        Mark Pearson <mpearson-lenovo@squebb.ca>,
+        "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
+        "Cody T . -H . Chiu" <codyit@gmail.com>,
+        John Martens <johnfanv2@gmail.com>,
+        platform-driver-x86@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Mario Limonciello <mario.limonciello@amd.com>
+References: <20250428012029.970017-1-derekjohn.clark@gmail.com>
+ <20250428012029.970017-4-derekjohn.clark@gmail.com>
+Content-Language: en-US
+From: ALOK TIWARI <alok.a.tiwari@oracle.com>
+In-Reply-To: <20250428012029.970017-4-derekjohn.clark@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: TYCP286CA0306.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:38b::13) To DS7PR10MB5328.namprd10.prod.outlook.com
+ (2603:10b6:5:3a6::12)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 6/8] cxl/edac: Support for finding memory operation
- attributes from the current boot
-To: shiju.jose@huawei.com, linux-cxl@vger.kernel.org,
- dan.j.williams@intel.com, jonathan.cameron@huawei.com, dave@stgolabs.net,
- alison.schofield@intel.com, vishal.l.verma@intel.com, ira.weiny@intel.com
-Cc: linux-edac@vger.kernel.org, linux-doc@vger.kernel.org, bp@alien8.de,
- tony.luck@intel.com, lenb@kernel.org, leo.duran@amd.com,
- Yazen.Ghannam@amd.com, mchehab@kernel.org, nifan.cxl@gmail.com,
- linuxarm@huawei.com, tanxiaofei@huawei.com, prime.zeng@hisilicon.com,
- roberto.sassu@huawei.com, kangkang.shen@futurewei.com,
- wanghuiqiang@huawei.com
-References: <20250407174920.625-1-shiju.jose@huawei.com>
- <20250407174920.625-7-shiju.jose@huawei.com>
-Content-Language: en-US
-From: Dave Jiang <dave.jiang@intel.com>
-In-Reply-To: <20250407174920.625-7-shiju.jose@huawei.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR10MB5328:EE_|IA4PR10MB8544:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3bdeb463-988d-4b32-aad2-08dd86974fca
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|7416014|376014|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?NzNGaTZtdFhEV1ZSK2pid05icUZ3TE5OYk5EZ0E2a0RQSlJyVXV6b3FTcHQz?=
+ =?utf-8?B?UjhKb3JiSG5SMlNFYnYweVluaW9MYUZRZ0F4OFBjc0N2UVdVUisrdWhGRm0y?=
+ =?utf-8?B?dkh1cGE4cUNzV2dWcjNDZk9DL21ncjRMWkpvcmdxYjlBeWVCRW5QbFBmV2lh?=
+ =?utf-8?B?emxwRnZrVnZjSnY3bE9OVmo3M1FDbFo5VGY0NFN5VUhmUWc4QnhEYnRKcE8x?=
+ =?utf-8?B?WDRzSm9ZNDRCTVBSWTQ4SzF3WlRCRFhaKytnSUJhZFQxN2UrTlZCcGVaMFla?=
+ =?utf-8?B?TVlmTk5qYW9YM2tVQURRNUhrK295dmZPam00andRN0dkazBEQ1ZibVRkb2Rq?=
+ =?utf-8?B?ZjdlaEZ1a2pXTmF4dnk2ZWpaOVB5NFRkL1NVYzBJcE9pcjRiNFZsQmhHczlh?=
+ =?utf-8?B?V3VqN0ZMVzB0RDlJMXVJZDc2bEhBcVRmMEJudjBkMjdrbTMwK0Y2dWRLekFR?=
+ =?utf-8?B?ZGhEL2Z1eGtyanlOck5BMG1GeDJQakJieEtxZXFDTzdKcC95V1ZlOVRsanBw?=
+ =?utf-8?B?cWJ1K1VkdXMzZG5PNS9MVFdsdEZ5dGtUK2lUQ0xtNzQ5UytGYy84UWd6bVBQ?=
+ =?utf-8?B?TmpwTkRBN3Z3MGZqSVkwM1loSTBuZ3Yyd0ZoS0pTZGhybjNxT0w5SUxKWm5r?=
+ =?utf-8?B?bTZaRjlZeUtaYkxudEJLVHAzSklZRzdFSGZOSjNwa0dXczFTYjVPbFBFSndP?=
+ =?utf-8?B?V21IRWtybkF1c1pWNkJINUhEVzhKNTg4MnIxYnl3K3k0citRbGcyZmZiNHYw?=
+ =?utf-8?B?ek1XdUlBam5EbHBDbEN0eEZpcnB4ZFdzNXZQUURSL1lmTnBNYjdZVlJSQVJn?=
+ =?utf-8?B?VG1HUmc5NGlPTklKdDU5eEhxWUh6TlRqUHFObzBwelhjeENRaHJwNVF5bWlv?=
+ =?utf-8?B?U3Ntc0NDaTVNeSsrd1VyOVpTbnk1RWRIZ1J5ZjFYK2RDRCtidXBCOGxIU2lT?=
+ =?utf-8?B?NWU3a1hYS3l6TGpLbG1lU2NOdFdEcjE0VkovU1haY3BKTUdTdzg3OElPOFZl?=
+ =?utf-8?B?U2E4MkdNMFBTaHJFRmFmSEdRRzJlNGxBcWNxd1Rmd1pVMWdsSktIdmd0dEt4?=
+ =?utf-8?B?eFljMjNaTjBQbnliQytFK2liMEp0MVg4T2p6NzB3RGpDbjRtNm96M1BpSER2?=
+ =?utf-8?B?MXlaV3UyMG5JL1lRT2NwSGVKbDFKMzM5eXRqQTdOcXlFMzd4a0VBV042d1c3?=
+ =?utf-8?B?Y2JsVncrdW1ESVdUUnBHdGZoM3MxeEtkVUNOOVZIZ3g3SHhNTm9PUnA0YjJB?=
+ =?utf-8?B?d3ZBbW5DWm5mNkxicHdNRmlIRXlsc1gwdG53Q0hpTVhQVW56cHpCR1JRcmZx?=
+ =?utf-8?B?QVBxS1VYaWtsLzVoOTVoTk0zVzdiY0dQcDhtZkRTMGF6TGlKQnNWRjRVUVM4?=
+ =?utf-8?B?M1VNNjdtUGdhK2hIekg1cDFMc0tiRzk2cEk5b0ZlQnRIbzZBMElkSjJKVTJu?=
+ =?utf-8?B?UTJoTnRLcDBBUWRCdGZmVlJEQXlFV1ovUlVuYW5ZVDlHSStTaks0bkNTeWcy?=
+ =?utf-8?B?TWt1b3VUMzdvQTVGU2lLNEVyaXVBQ2xUUVllQ3BML2tMc01KcFhLTWZSUEFM?=
+ =?utf-8?B?WHd0WlZBMCtYTlY0cFAwNklCQTVVMFR3QitmMmh5Ly92UTM4bVpOT3FrZ0tu?=
+ =?utf-8?B?SnkvNFUvZFlSTUxhOWRDdE5DeHVLMFJrbkdNdmlKYjJaZ05GbHpTU3RDWXk4?=
+ =?utf-8?B?ZlVLSDJIUjZnTlNBS2g3VDM3bjM5VHZXRmd1Q2Z2SVBQd3lyU0ZPemZEVmFj?=
+ =?utf-8?B?bTZCWHhIemZZNjFKeHIxaURVcFd1RFZkbEtpUlZvUmVGUWdvWkJUaUNPOHMw?=
+ =?utf-8?B?dUx4SFltZ2dPZkZpd3lvNC9jS3pvcDNNYXduS3c3QXRBN242SkFGVzJCamtB?=
+ =?utf-8?B?andyU0hWd0cycWFoY1dUaktBdXRkZXVWeFJDNG9OcGJvWnowV0l4QVRoSmp3?=
+ =?utf-8?Q?YBO3KMvMN+Y=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR10MB5328.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(7416014)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?eGlGZnNMcU0ydFpRNmpWZHM5T3FNY2I2S2k3QUNnNU9tNmhxbys3YkhTSmlT?=
+ =?utf-8?B?R1JjUnJ4NllmMzRod0NvL3pqeWtjazM3a2RRVExsMVhoU1Q2M1pFY0xSeHVC?=
+ =?utf-8?B?eWJSTW5YYWdWeGR4UUFWamhtMzh5STNOMnM3Y0h5Y2RtVXE1MS9NRTUxMXpD?=
+ =?utf-8?B?WEJtdEErMis0ODFTVEdSbkRMV3RZZ09DRzBuWjIrVW44RzZCc3N1bnVteWl1?=
+ =?utf-8?B?V3JQSm11QnJLTW9UNWFUb2NnamtyZE9zMDlXbFhKMXAzL3FGMjJPUE5qSEdr?=
+ =?utf-8?B?cEp4amlkVUdKQlMyYkF5ZmhyK2FpWkNXUmYxN2JSb0MzcmNzUkJyVUx5NXdO?=
+ =?utf-8?B?dTFPUUo0cklIK0JkaGZ0TXRMa1FveVZBNjVucHZ2c0tFTnA4Zk1hb2tkMXpn?=
+ =?utf-8?B?UUg5Tk1GMkFZc1UxeE0yMXZONEZ4VmkxM21lcWFwc2w4MUh4bHFjc051bUdJ?=
+ =?utf-8?B?dDc2Z0ozTTZyejY1RDVvTjFxRmZpOEpCbmVNTlN0clBtd2l4VDd3OWdYdVR0?=
+ =?utf-8?B?bE82Z0hKNU1uUUtSSGtidytqa0ZxMVpCMHV0cUc4a0xDNWppaXFHUVBXVERh?=
+ =?utf-8?B?SHp4SHAxdlJCMk84aWR6K2J5RDB6eEU4ZTNVcU90ZTRkQkl4ZXVLeEI4MkND?=
+ =?utf-8?B?TW4yaHN5UVpXSnVScTZHRHFFTnM1eWttOEduOUNTdjRGMlltd1FMQUxtdkpy?=
+ =?utf-8?B?YWFzQm56T1BMWVJYY0k5N2V3aUNjMHJSSEVvdWZiNnJ6eUpOTm9YZFFZQVBU?=
+ =?utf-8?B?ZHZyOUNDblBrUVlXMFdUV0ZoQ1RCaWQwQlZhSE1xWHB2eGFuRTJPbk5VTEwx?=
+ =?utf-8?B?UGJ3Z0V4THlqYnF3ejc4aEhSeERuZ21FclRsZWMybXRUdTVHRld5a05GbU9K?=
+ =?utf-8?B?b1htd3JMdnYyNFBUSXJYWFR0NGVuZ2xhdVZZa0VlcEFPMW9vaXBGYzBVMDVq?=
+ =?utf-8?B?YmlKelRFb3Vid2JpQ1RTMTlYRS9oTzhzMG9SM2JvQU5CYTBWS0pYUnlNa0Vs?=
+ =?utf-8?B?QzZMSkQ2SjBFRDIweFpidmJadmlqTWZCWnFISTFhcXZCdHVLd2w1RGVBaSt0?=
+ =?utf-8?B?VnF5dUgxWWJjYzFtRDZrSCszVFJwbE1MbDZVK0xiNUpUY00zdzFuZXUxQ3Js?=
+ =?utf-8?B?THFjSUQ0NWJnU2ZNd0dkZHlNbElZY3kwUkpxemw0QVhMb3E2NklkNkNKVGJm?=
+ =?utf-8?B?MTJ5NkNwS29CQnVkL0VGWFNZR0hoTENUc0VCMFdLbWlJWFhRZDExMjRRTlQ5?=
+ =?utf-8?B?N25TWmVkUk95dnFQdTk2bE9XRUo3ano3SUZ1ZmhkeVFQMW1yUGJlRndDckc1?=
+ =?utf-8?B?TnVTSTdTYjV6VTNTWHBvKzl4WkZTVUl3MXZQMm5rZ0FURFZ2T09RWktYWWJI?=
+ =?utf-8?B?ZndwWUhsWGVMMFVPMDk1WjdkV2taYVNrbGJPMjdxZVEyWDR0SnFqaGp5MUxG?=
+ =?utf-8?B?NFJUbEpWTk1waHUxQzVzUHFmK2IxL0k0OG9rbHhpazBrRm5aM3RIQXNhc3pQ?=
+ =?utf-8?B?YlZVUjVYd0pCLzgzVjFPbDdiVmxUemZKOGZEWlY0d2FkWnJBcnlMUWFZQXhy?=
+ =?utf-8?B?bFhaSjIvWHNseGd5ZTdDc3RxeWpRYUZkN0N6MUlCeDV1ZlpGQmQ3ZGFBbjRP?=
+ =?utf-8?B?QVBITmJGTy9EVVFPN1krZWd5Y3BHRGRoc1FXRXZiTnd1b3FQdUdURDZaVTVk?=
+ =?utf-8?B?a2p5cklYNXAvYmdLVzVpZmovNnlQSnRqeThuaEFnSXJjRVZpNkR2bmp0Y2c3?=
+ =?utf-8?B?L3U2VEhNM2xjaERUWkF1QUVpZjJJVEZ6SFcxN3JFZUx4L1E5eWkxdmVtSEtY?=
+ =?utf-8?B?ZjB3ZnI0UG5CbzdSU1hrZzNjVjZvbng0S0FOY0crRkdFcE11OGVaVzJVUFR0?=
+ =?utf-8?B?YkVVb3A2ZmlRSlJCd1didlZPTUwzTzQzTnpXcGJKQldHaDJENEpSR2JXQm9j?=
+ =?utf-8?B?ZkJmeDl0YTZ5SUlJN3hhZ0hlOXFvc0hLV2xPcmRWTW5PZzVYNWNWd250b3hD?=
+ =?utf-8?B?QTJkeTNDelJlcDR0MUQwRXl2ekF0cVBnaExKK1drYzVrSDlXc2ZJTm9PS2Ja?=
+ =?utf-8?B?KzF2VUVlQkk3cW44OU5NWUx3SGlMRTdCUittM2RYbEQrQ3k2MEhUTjVEbDJZ?=
+ =?utf-8?B?SlgvNXNOQXpuaGNXQXhlaDBNZ3d2V04ySTNaUnVHWng4UitVRXZnYTdjSE5I?=
+ =?utf-8?B?eHc9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	YqztrEgLcvr7Zfyhm3XIRPSsc6rXYthG02jU5AB5h815r4tLXbHLed64uSEBjycxbr8J4GhTGDwWt+KhrfeQ4+9D9Urq585gcqq0tIh9G5RWG/RQkZ7KGHLex3j8PLACP0cALCU8NuUnq+MiMCLnk0FfiT//p4GG0v9g+l0Q/+pRix1j+domGgrYmotONjFmcBSfrzJl+obBGnlKAoMha9D3VjjhRh5MlTqwIwAZNGW8eoYPcePWmoFg+lEpoA5OtO17dwHunsSmlfuUUAlbe+5VAeqRIxdf7/sRwn8vUJcv/MgH1pMHazI24jCCVJtN3XqdvWeI/MEO6Gytk2RyHdA3NVLFEqIsqoyx/z3NX2DGOOcSmQPmXQDcBwtZsZX2Tc3063mRoSClIumBdEm5N+9wH+iI3gFZ+5Yz5WSN5PeONGdd657yxBRMl7ZVOVVn0HB8NkVHQf4KRWDi7/KuHiU8C1+iEdnoxZWtqz3y7rUrsH5Ooyy6DC9mIGNmB4ecePTlcKiRoCbp1lL8s5PnuYWd6j288xpdDEvJabnmviEiMHr1QPXoSqvDBWXytlQM5Zz8JSD8tSQKcyAEV77Q1b9W4lo+eCYcHkw8tXx1pc4=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3bdeb463-988d-4b32-aad2-08dd86974fca
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB5328.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2025 20:57:39.7312
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: goAWeLfOTTf7bO9b9514hHvJLD76hAQrbdFJg59tg0m8cWRE9uL1p37ZUaJmdzPjSJPKlKpYym+kFPVNIEO2lCjtoxuOn2o36aEZgCb+FSs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR10MB8544
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-28_08,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 adultscore=0 phishscore=0
+ bulkscore=0 mlxlogscore=999 suspectscore=0 mlxscore=0 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2504070000
+ definitions=main-2504280168
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI4MDE3MCBTYWx0ZWRfX9m/hqk6gaTyK CKu3GaXnHxmneyjW6/+Updh+4ovf545FMa0z+dwsmfIGQO6Sa3LAAlKEjjHR1DCm9npv46w0d29 u0BZlrHSoXEnonsENcIwApS21sGITP9CY0GOUD12Jpw8M+iJeaiMAz4ctvgzG18uYqXo2PTlAR4
+ 3vDIVDTPODEAYBxn2C8x8/qvhER2S3aNXs89VEpOA0z8mgSb14Uclk0uNCqXiIkRgiIJ7ZHflCo 2eKD55oJNEAd4wlaC9tNofekGMfXRCPVC/KSyI8x61LVJjdPbhMYl5V/XE9Mas3l2yqAAQ+AWbF MQBOF8+y0UOG0aUgMZ9A3Fusu13qjX1gaIDaAm4Z43BJVhkZtM8PxVbES43sSHKL0SMlHmiFxVO QbqV26z2
+X-Proofpoint-GUID: 47AaNMvK8O9QBGjSG3rIdts2QuiqUbTw
+X-Proofpoint-ORIG-GUID: 47AaNMvK8O9QBGjSG3rIdts2QuiqUbTw
 
 
 
-On 4/7/25 10:49 AM, shiju.jose@huawei.com wrote:
-> From: Shiju Jose <shiju.jose@huawei.com>
-> 
-> Certain operations on memory, such as memory repair, are permitted
-> only when the address and other attributes for the operation are
-> from the current boot. This is determined by checking whether the
-> memory attributes for the operation match those in the CXL gen_media
-> or CXL DRAM memory event records reported during the current boot.
-> 
-> The CXL event records must be backed up because they are cleared
-> in the hardware after being processed by the kernel.
-> 
-> Support is added for storing CXL gen_media or CXL DRAM memory event
-> records in xarrays. Old records are deleted when they expire or when
-> there is an overflow and which depends on platform correctly report
-> Event Record Timestamp field of CXL spec Table 8-55 Common Event
-> Record Format.
-> 
-> Additionally, helper functions are implemented to find a matching
-> record in the xarray storage based on the memory attributes and
-> repair type.
-> 
-> Add validity check, when matching attributes for sparing, using
-> the validity flag in the DRAM event record, to ensure that all
-> required attributes for a requested repair operation are valid and
-> set.
-> 
-> Co-developed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-> Signed-off-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-> Signed-off-by: Shiju Jose <shiju.jose@huawei.com>
-
-Reviewed-by: Dave Jiang <dave.jiang@intel.com>
-
-> ---
->  drivers/cxl/Kconfig       |   4 +
->  drivers/cxl/core/edac.c   | 307 ++++++++++++++++++++++++++++++++++++++
->  drivers/cxl/core/mbox.c   |  11 +-
->  drivers/cxl/core/memdev.c |   1 +
->  drivers/cxl/cxlmem.h      |  19 +++
->  5 files changed, 340 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/cxl/Kconfig b/drivers/cxl/Kconfig
-> index 2333f7c0b6db..48b7314afdb8 100644
-> --- a/drivers/cxl/Kconfig
-> +++ b/drivers/cxl/Kconfig
-> @@ -173,6 +173,10 @@ config CXL_EDAC_MEM_REPAIR
->  	  to control the memory repair features (e.g. sparing, PPR)
->  	  configurations of CXL memory expander devices.
->  
-> +	  When enabled, the memory repair feature requires an additional
-> +	  memory of approximately 43KB to store CXL DRAM and CXL general
-> +	  media event records.
-> +
->  	  When enabled 'cxl_mem' EDAC devices are published with memory
->  	  repair control attributes as described by
->  	  Documentation/ABI/testing/sysfs-edac-memory-repair.
-> diff --git a/drivers/cxl/core/edac.c b/drivers/cxl/core/edac.c
-> index 246a02785f1d..02bd4c675871 100644
-> --- a/drivers/cxl/core/edac.c
-> +++ b/drivers/cxl/core/edac.c
-> @@ -14,10 +14,12 @@
->  #include <linux/cleanup.h>
->  #include <linux/edac.h>
->  #include <linux/limits.h>
-> +#include <linux/xarray.h>
->  #include <cxl/features.h>
->  #include <cxl.h>
->  #include <cxlmem.h>
->  #include "core.h"
-> +#include "trace.h"
->  
->  #define CXL_NR_EDAC_DEV_FEATURES 2
->  
-> @@ -840,6 +842,280 @@ static int cxl_perform_maintenance(struct cxl_mailbox *cxl_mbox, u8 class,
->  
->  	return cxl_internal_send_cmd(cxl_mbox, &mbox_cmd);
->  }
-> +
+On 28-04-2025 06:48, Derek J. Clark wrote:
+> --- /dev/null
+> +++ b/drivers/platform/x86/lenovo-wmi-events.c
+> @@ -0,0 +1,196 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
 > +/*
-> + * Support for finding a memory operation attributes
-> + * are from the current boot or not.
+> + * Lenovo WMI Events driver. Lenovo WMI interfaces provide various
+> + * hardware triggered events that many drivers need to have propagated.
+> + * This driver provides a uniform entrypoint for these events so that
+> + * any driver that needs to respond to these events can subscribe to a
+> + * notifier chain.
+> + *
+> + * Copyright(C) 2025 Derek J. Clark <derekjohn.clark@gmail.com>
 > + */
 > +
-> +struct cxl_mem_err_rec {
-> +	struct xarray rec_gen_media;
-> +	struct xarray rec_dram;
-> +};
+> +#include <linux/acpi.h>
+> +#include <linux/export.h>
+> +#include <linux/module.h>
+> +#include <linux/notifier.h>
+> +#include <linux/types.h>
+> +#include <linux/wmi.h>
 > +
-> +enum cxl_mem_repair_type {
-> +	CXL_PPR,
-> +	CXL_CACHELINE_SPARING,
-> +	CXL_ROW_SPARING,
-> +	CXL_BANK_SPARING,
-> +	CXL_RANK_SPARING,
-> +	CXL_REPAIR_MAX,
+> +#include "lenovo-wmi-events.h"
+> +#include "lenovo-wmi-gamezone.h"
+> +
+> +#define THERMAL_MODE_EVENT_GUID "D320289E-8FEA-41E0-86F9-911D83151B5F"
+> +
+> +#define LWMI_EVENT_DEVICE(guid, type)                        \
+> +	.guid_string = (guid), .context = &(enum lwmi_events_type) \
+> +	{                                                          \
+> +		type                                               \
+> +	}
+> +
+> +static BLOCKING_NOTIFIER_HEAD(events_chain_head);
+> +
+> +struct lwmi_events_priv {
+> +	struct wmi_device *wdev;
+> +	enum lwmi_events_type type;
 > +};
 > +
 > +/**
-> + * struct cxl_mem_repair_attrbs - CXL memory repair attributes
-> + * @dpa: DPA of memory to repair
-> + * @nibble_mask: nibble mask, identifies one or more nibbles on the memory bus
-> + * @row: row of memory to repair
-> + * @column: column of memory to repair
-> + * @channel: channel of memory to repair
-> + * @sub_channel: sub channel of memory to repair
-> + * @rank: rank of memory to repair
-> + * @bank_group: bank group of memory to repair
-> + * @bank: bank of memory to repair
-> + * @repair_type: repair type. For eg. PPR, memory sparing etc.
+> + * lwmi_events_register_notifier() - Add a notifier to the notifier chain.
+> + * @nb: The notifier_block struct to register
+> + *
+> + * Call blocking_notifier_chain_register to register the notifier block to the
+> + * lenovo-wmi-events driver blocking notifer chain.
+
+typo notifer -> notifier in all register/unregister
+
+> + *
+> + * Return: 0 on success, %-EEXIST on error.
 > + */
-> +struct cxl_mem_repair_attrbs {
-> +	u64 dpa;
-> +	u32 nibble_mask;
-> +	u32 row;
-> +	u16 column;
-> +	u8 channel;
-> +	u8 sub_channel;
-> +	u8 rank;
-> +	u8 bank_group;
-> +	u8 bank;
-> +	enum cxl_mem_repair_type repair_type;
-> +};
-> +
-> +static struct cxl_event_gen_media *
-> +cxl_find_rec_gen_media(struct cxl_memdev *cxlmd,
-> +		       struct cxl_mem_repair_attrbs *attrbs)
+> +int lwmi_events_register_notifier(struct notifier_block *nb)
 > +{
-> +	struct cxl_mem_err_rec *array_rec = cxlmd->array_err_rec;
-> +	struct cxl_event_gen_media *rec;
+> +	return blocking_notifier_chain_register(&events_chain_head, nb);
+> +}
+> +EXPORT_SYMBOL_NS_GPL(lwmi_events_register_notifier, "LENOVO_WMI_EVENTS");
 > +
-> +	if (!array_rec)
-> +		return NULL;
+> +/**
+> + * lwmi_events_unregister_notifier() - Remove a notifier from the notifier
+> + * chain.
+> + * @nb: The notifier_block struct to register
+
+the @nb parameter is described inconsistently:
+@nb: The notifier_block struct to unregister
+
+> + *
+> + * Call blocking_notifier_chain_unregister to unregister the notifier block
+> + * from the lenovo-wmi-events driver blocking notifer chain.
+> + *
+> + * Return: 0 on success, %-ENOENT on error.
+> + */
+> +int lwmi_events_unregister_notifier(struct notifier_block *nb)
+> +{
+> +	return blocking_notifier_chain_unregister(&events_chain_head, nb);
+> +}
+> +EXPORT_SYMBOL_NS_GPL(lwmi_events_unregister_notifier, "LENOVO_WMI_EVENTS");
+
+can be consider lwmi_events_un/register_notifier as static
+if they are wrapper func?
+
 > +
-> +	rec = xa_load(&array_rec->rec_gen_media, attrbs->dpa);
-> +	if (!rec)
-> +		return NULL;
+> +/**
+> + * devm_lwmi_events_unregister_notifier() - Remove a notifier from the notifier
+> + * chain.
+> + * @data: Void pointer to the notifier_block struct to register.
+
+* @data: Void pointer to the notifier_block struct to unregister.
+
+> + *
+> + * Call lwmi_events_unregister_notifier to unregister the notifier block from
+> + * the lenovo-wmi-events driver blocking notifer chain.
+> + *
+> + * Return: 0 on success, %-ENOENT on error.
+> + */
+> +static void devm_lwmi_events_unregister_notifier(void *data)
+> +{
+> +	struct notifier_block *nb = data;
 > +
-> +	if (attrbs->repair_type == CXL_PPR)
-> +		return rec;
-> +
-> +	return NULL;
+
+if (nb) Consider checking NULL pointer
+
+> +	lwmi_events_unregister_notifier(nb);
 > +}
 > +
-> +static struct cxl_event_dram *
-> +cxl_find_rec_dram(struct cxl_memdev *cxlmd,
-> +		  struct cxl_mem_repair_attrbs *attrbs)
+> +/**
+> + * devm_lwmi_events_register_notifier() - Add a notifier to the notifier chain.
+> + * @dev: The parent device of the notifier_block struct.
+> + * @nb: The notifier_block struct to register
+> + *
+> + * Call lwmi_events_register_notifier to register the notifier block to the
+> + * lenovo-wmi-events driver blocking notifer chain. Then add, as a device
+> + * managed action, unregister_notifier to automatically unregister the
+> + * notifier block upon its parent device removal.
+> + *
+> + * Return: 0 on success, or an error code.
+> + */
+> +int devm_lwmi_events_register_notifier(struct device *dev,
+> +				       struct notifier_block *nb)
 > +{
-> +	struct cxl_mem_err_rec *array_rec = cxlmd->array_err_rec;
-> +	struct cxl_event_dram *rec;
-> +	u16 validity_flags;
+> +	int ret;
 > +
-> +	if (!array_rec)
-> +		return NULL;
+> +	ret = lwmi_events_register_notifier(nb);
+> +	if (ret < 0)
+> +		return ret;
 > +
-> +	rec = xa_load(&array_rec->rec_dram, attrbs->dpa);
-> +	if (!rec)
-> +		return NULL;
+> +	return devm_add_action_or_reset(dev, devm_lwmi_events_unregister_notifier, nb);
+> +}
+> +EXPORT_SYMBOL_NS_GPL(devm_lwmi_events_register_notifier, "LENOVO_WMI_EVENTS");
 > +
-> +	validity_flags = get_unaligned_le16(rec->media_hdr.validity_flags);
-> +	if (!(validity_flags & CXL_DER_VALID_CHANNEL) ||
-> +	    !(validity_flags & CXL_DER_VALID_RANK))
-> +		return NULL;
+> +/**
+> + * lwmi_events_notify() - Call functions for the notifier call chain.
+> + * @wdev: The parent WMI device of the driver.
+> + * @obj: ACPI object passed by the registered WMI Event.
+> + *
+> + * Validate WMI event data and notify all registered drivers of the event and
+> + * its output.
+> + *
+> + * Return: 0 on success, or an error code.
+> + */
+> +static void lwmi_events_notify(struct wmi_device *wdev, union acpi_object *obj)
+> +{
+> +	struct lwmi_events_priv *priv = dev_get_drvdata(&wdev->dev);
+> +	int sel_prof;
+> +	int ret;
 > +
-> +	switch (attrbs->repair_type) {
-> +	case CXL_PPR:
-> +		if (!(validity_flags & CXL_DER_VALID_NIBBLE) ||
-> +		    get_unaligned_le24(rec->nibble_mask) == attrbs->nibble_mask)
-> +			return rec;
-> +		break;
-> +	case CXL_CACHELINE_SPARING:
-> +		if (!(validity_flags & CXL_DER_VALID_BANK_GROUP) ||
-> +		    !(validity_flags & CXL_DER_VALID_BANK) ||
-> +		    !(validity_flags & CXL_DER_VALID_ROW) ||
-> +		    !(validity_flags & CXL_DER_VALID_COLUMN))
-> +			return NULL;
+> +	switch (priv->type) {
+> +	case LWMI_EVENT_THERMAL_MODE:
+> +		if (obj->type != ACPI_TYPE_INTEGER)
+> +			return;
 > +
-> +		if (rec->media_hdr.channel == attrbs->channel &&
-> +		    rec->media_hdr.rank == attrbs->rank &&
-> +		    rec->bank_group == attrbs->bank_group &&
-> +		    rec->bank == attrbs->bank &&
-> +		    get_unaligned_le24(rec->row) == attrbs->row &&
-> +		    get_unaligned_le16(rec->column) == attrbs->column &&
-> +		    (!(validity_flags & CXL_DER_VALID_NIBBLE) ||
-> +		     get_unaligned_le24(rec->nibble_mask) ==
-> +			     attrbs->nibble_mask) &&
-> +		    (!(validity_flags & CXL_DER_VALID_SUB_CHANNEL) ||
-> +		     rec->sub_channel == attrbs->sub_channel))
-> +			return rec;
-> +		break;
-> +	case CXL_ROW_SPARING:
-> +		if (!(validity_flags & CXL_DER_VALID_BANK_GROUP) ||
-> +		    !(validity_flags & CXL_DER_VALID_BANK) ||
-> +		    !(validity_flags & CXL_DER_VALID_ROW))
-> +			return NULL;
+> +		sel_prof = obj->integer.value;
 > +
-> +		if (rec->media_hdr.channel == attrbs->channel &&
-> +		    rec->media_hdr.rank == attrbs->rank &&
-> +		    rec->bank_group == attrbs->bank_group &&
-> +		    rec->bank == attrbs->bank &&
-> +		    get_unaligned_le24(rec->row) == attrbs->row &&
-> +		    (!(validity_flags & CXL_DER_VALID_NIBBLE) ||
-> +		     get_unaligned_le24(rec->nibble_mask) ==
-> +			     attrbs->nibble_mask))
-> +			return rec;
-> +		break;
-> +	case CXL_BANK_SPARING:
-> +		if (!(validity_flags & CXL_DER_VALID_BANK_GROUP) ||
-> +		    !(validity_flags & CXL_DER_VALID_BANK))
-> +			return NULL;
-> +
-> +		if (rec->media_hdr.channel == attrbs->channel &&
-> +		    rec->media_hdr.rank == attrbs->rank &&
-> +		    rec->bank_group == attrbs->bank_group &&
-> +		    rec->bank == attrbs->bank &&
-> +		    (!(validity_flags & CXL_DER_VALID_NIBBLE) ||
-> +		     get_unaligned_le24(rec->nibble_mask) ==
-> +			     attrbs->nibble_mask))
-> +			return rec;
-> +		break;
-> +	case CXL_RANK_SPARING:
-> +		if (rec->media_hdr.channel == attrbs->channel &&
-> +		    rec->media_hdr.rank == attrbs->rank &&
-> +		    (!(validity_flags & CXL_DER_VALID_NIBBLE) ||
-> +		     get_unaligned_le24(rec->nibble_mask) ==
-> +			     attrbs->nibble_mask))
-> +			return rec;
+> +		switch (sel_prof) {
+> +		case LWMI_GZ_THERMAL_MODE_QUIET:
+> +		case LWMI_GZ_THERMAL_MODE_BALANCED:
+> +		case LWMI_GZ_THERMAL_MODE_PERFORMANCE:
+> +		case LWMI_GZ_THERMAL_MODE_EXTREME:
+> +		case LWMI_GZ_THERMAL_MODE_CUSTOM:
+> +			ret = blocking_notifier_call_chain(&events_chain_head,
+> +							   LWMI_EVENT_THERMAL_MODE,
+> +							   &sel_prof);
+> +			if (ret == NOTIFY_BAD)
+> +				dev_err(&wdev->dev,
+> +					"Failed to send notification to call chain for WMI Events\n");
+> +			return;
+> +		default:
+> +			dev_err(&wdev->dev, "Got invalid thermal mode: %x",
+> +				sel_prof);
+> +			return;
+> +		}
 > +		break;
 > +	default:
-> +		return NULL;
-> +	}
-> +
-> +	return NULL;
-> +}
-> +
-> +#define CXL_MAX_STORAGE_DAYS 10
-> +#define CXL_MAX_STORAGE_TIME_SECS (CXL_MAX_STORAGE_DAYS * 24 * 60 * 60)
-> +
-> +static void cxl_del_expired_gmedia_recs(struct xarray *rec_xarray,
-> +					struct cxl_event_gen_media *cur_rec)
-> +{
-> +	u64 cur_ts = le64_to_cpu(cur_rec->media_hdr.hdr.timestamp);
-> +	struct cxl_event_gen_media *rec;
-> +	unsigned long index;
-> +	u64 delta_ts_secs;
-> +
-> +	xa_for_each(rec_xarray, index, rec) {
-> +		delta_ts_secs = (cur_ts -
-> +			le64_to_cpu(rec->media_hdr.hdr.timestamp)) / 1000000000ULL;
-> +		if (delta_ts_secs >= CXL_MAX_STORAGE_TIME_SECS) {
-> +			xa_erase(rec_xarray, index);
-> +			kfree(rec);
-> +		}
-> +	}
-> +}
-> +
-> +static void cxl_del_expired_dram_recs(struct xarray *rec_xarray,
-> +				      struct cxl_event_dram *cur_rec)
-> +{
-> +	u64 cur_ts = le64_to_cpu(cur_rec->media_hdr.hdr.timestamp);
-> +	struct cxl_event_dram *rec;
-> +	unsigned long index;
-> +	u64 delta_secs;
-> +
-> +	xa_for_each(rec_xarray, index, rec) {
-> +		delta_secs = (cur_ts -
-> +			le64_to_cpu(rec->media_hdr.hdr.timestamp)) / 1000000000ULL;
-> +		if (delta_secs >= CXL_MAX_STORAGE_TIME_SECS) {
-> +			xa_erase(rec_xarray, index);
-> +			kfree(rec);
-> +		}
-> +	}
-> +}
-> +
-> +#define CXL_MAX_REC_STORAGE_COUNT 200
-> +
-> +static void cxl_del_overflow_old_recs(struct xarray *rec_xarray)
-> +{
-> +	void *err_rec;
-> +	unsigned long index, count = 0;
-> +
-> +	xa_for_each(rec_xarray, index, err_rec)
-> +		count++;
-> +
-> +	if (count <= CXL_MAX_REC_STORAGE_COUNT)
 > +		return;
-> +
-> +	count -= CXL_MAX_REC_STORAGE_COUNT;
-> +	xa_for_each(rec_xarray, index, err_rec) {
-> +		xa_erase(rec_xarray, index);
-> +		kfree(err_rec);
-> +		count--;
-> +		if (!count)
-> +			break;
 > +	}
 > +}
 > +
-> +int cxl_store_rec_gen_media(struct cxl_memdev *cxlmd, union cxl_event *evt)
+> +static int lwmi_events_probe(struct wmi_device *wdev, const void *context)
 > +{
-> +	struct cxl_mem_err_rec *array_rec = cxlmd->array_err_rec;
-> +	struct cxl_event_gen_media *rec;
-> +	void *old_rec;
+> +	struct lwmi_events_priv *priv;
 > +
-> +	if (!array_rec)
-> +		return 0;
-> +
-> +	rec = kmemdup(&evt->gen_media, sizeof(*rec), GFP_KERNEL);
-> +	if (!rec)
+> +	priv = devm_kzalloc(&wdev->dev, sizeof(*priv), GFP_KERNEL);
+> +	if (!priv)
 > +		return -ENOMEM;
 > +
-> +	old_rec = xa_store(&array_rec->rec_gen_media,
-> +			   le64_to_cpu(rec->media_hdr.phys_addr), rec,
-> +			   GFP_KERNEL);
-> +	if (xa_is_err(old_rec))
-> +		return xa_err(old_rec);
+> +	if (!context)
+> +		return -EINVAL;
 > +
-> +	kfree(old_rec);
-> +
-> +	cxl_del_expired_gmedia_recs(&array_rec->rec_gen_media, rec);
-> +	cxl_del_overflow_old_recs(&array_rec->rec_gen_media);
-> +
-> +	return 0;
-> +}
-> +EXPORT_SYMBOL_NS_GPL(cxl_store_rec_gen_media, "CXL");
-> +
-> +int cxl_store_rec_dram(struct cxl_memdev *cxlmd, union cxl_event *evt)
-> +{
-> +	struct cxl_mem_err_rec *array_rec = cxlmd->array_err_rec;
-> +	struct cxl_event_dram *rec;
-> +	void *old_rec;
-> +
-> +	if (!array_rec)
-> +		return 0;
-> +
-> +	rec = kmemdup(&evt->dram, sizeof(*rec), GFP_KERNEL);
-> +	if (!rec)
-> +		return -ENOMEM;
-> +
-> +	old_rec = xa_store(&array_rec->rec_dram,
-> +			   le64_to_cpu(rec->media_hdr.phys_addr), rec,
-> +			   GFP_KERNEL);
-> +	if (xa_is_err(old_rec))
-> +		return xa_err(old_rec);
-> +
-> +	kfree(old_rec);
-> +
-> +	cxl_del_expired_dram_recs(&array_rec->rec_dram, rec);
-> +	cxl_del_overflow_old_recs(&array_rec->rec_dram);
-> +
-> +	return 0;
-> +}
-> +EXPORT_SYMBOL_NS_GPL(cxl_store_rec_dram, "CXL");
->  #endif /* CONFIG_CXL_EDAC_MEM_REPAIR */
->  
->  int devm_cxl_memdev_edac_register(struct cxl_memdev *cxlmd)
-> @@ -868,6 +1144,16 @@ int devm_cxl_memdev_edac_register(struct cxl_memdev *cxlmd)
->  		num_ras_features++;
->  #endif
->  
-> +#ifdef CONFIG_CXL_EDAC_MEM_REPAIR
-> +	struct cxl_mem_err_rec *array_rec =
-> +		devm_kzalloc(&cxlmd->dev, sizeof(*array_rec), GFP_KERNEL);
-> +	if (!array_rec)
-> +		return -ENOMEM;
-> +
-> +	cxlmd->array_err_rec = array_rec;
-> +	xa_init(&array_rec->rec_gen_media);
-> +	xa_init(&array_rec->rec_dram);
-> +#endif
->  	char *cxl_dev_name __free(kfree) =
->  		kasprintf(GFP_KERNEL, "cxl_%s", dev_name(&cxlmd->dev));
->  	if (!cxl_dev_name)
-> @@ -903,3 +1189,24 @@ int devm_cxl_region_edac_register(struct cxl_region *cxlr)
->  #endif
->  }
->  EXPORT_SYMBOL_NS_GPL(devm_cxl_region_edac_register, "CXL");
-> +
-> +void devm_cxl_memdev_edac_release(struct cxl_memdev *cxlmd)
-> +{
-> +#ifdef CONFIG_CXL_EDAC_MEM_REPAIR
-> +	struct cxl_mem_err_rec *array_rec = cxlmd->array_err_rec;
-> +	struct cxl_event_gen_media *rec_gen_media;
-> +	struct cxl_event_dram *rec_dram;
-> +	unsigned long index;
-> +
-> +	if (!array_rec)
-> +		return;
-> +
-> +	xa_for_each(&array_rec->rec_dram, index, rec_dram)
-> +		kfree(rec_dram);
-> +	xa_destroy(&array_rec->rec_dram);
-> +	xa_for_each(&array_rec->rec_gen_media, index, rec_gen_media)
-> +		kfree(rec_gen_media);
-> +	xa_destroy(&array_rec->rec_gen_media);
-> +#endif
-> +}
-> +EXPORT_SYMBOL_NS_GPL(devm_cxl_memdev_edac_release, "CXL");
-> diff --git a/drivers/cxl/core/mbox.c b/drivers/cxl/core/mbox.c
-> index d72764056ce6..2689e6453c5a 100644
-> --- a/drivers/cxl/core/mbox.c
-> +++ b/drivers/cxl/core/mbox.c
-> @@ -922,12 +922,19 @@ void cxl_event_trace_record(const struct cxl_memdev *cxlmd,
->  				hpa_alias = hpa - cache_size;
->  		}
->  
-> -		if (event_type == CXL_CPER_EVENT_GEN_MEDIA)
-> +		if (event_type == CXL_CPER_EVENT_GEN_MEDIA) {
-> +			if (cxl_store_rec_gen_media((struct cxl_memdev *)cxlmd, evt))
-> +				dev_dbg(&cxlmd->dev, "CXL store rec_gen_media failed\n");
-> +
->  			trace_cxl_general_media(cxlmd, type, cxlr, hpa,
->  						hpa_alias, &evt->gen_media);
-> -		else if (event_type == CXL_CPER_EVENT_DRAM)
-> +		} else if (event_type == CXL_CPER_EVENT_DRAM) {
-> +			if (cxl_store_rec_dram((struct cxl_memdev *)cxlmd, evt))
-> +				dev_dbg(&cxlmd->dev, "CXL store rec_dram failed\n");
-> +
->  			trace_cxl_dram(cxlmd, type, cxlr, hpa, hpa_alias,
->  				       &evt->dram);
-> +		}
->  	}
->  }
->  EXPORT_SYMBOL_NS_GPL(cxl_event_trace_record, "CXL");
-> diff --git a/drivers/cxl/core/memdev.c b/drivers/cxl/core/memdev.c
-> index a16a5886d40a..953d8407d0dd 100644
-> --- a/drivers/cxl/core/memdev.c
-> +++ b/drivers/cxl/core/memdev.c
-> @@ -27,6 +27,7 @@ static void cxl_memdev_release(struct device *dev)
->  	struct cxl_memdev *cxlmd = to_cxl_memdev(dev);
->  
->  	ida_free(&cxl_memdev_ida, cxlmd->id);
-> +	devm_cxl_memdev_edac_release(cxlmd);
->  	kfree(cxlmd);
->  }
->  
-> diff --git a/drivers/cxl/cxlmem.h b/drivers/cxl/cxlmem.h
-> index 1b9bf6b42521..6f808809f7c0 100644
-> --- a/drivers/cxl/cxlmem.h
-> +++ b/drivers/cxl/cxlmem.h
-> @@ -47,6 +47,9 @@
->   * @depth: endpoint port depth
->   * @cur_scrub_cycle: current scrub cycle set for this device
->   * @cur_region_id: id number of a backed region (if any) for which current scrub cycle set
-> + * @array_err_rec: List of xarrarys to store the memdev error records to
-> + *		   check attributes for a memory repair operation are from
-> + *		   current boot.
->   */
->  struct cxl_memdev {
->  	struct device dev;
-> @@ -62,6 +65,7 @@ struct cxl_memdev {
->  	u8 cur_scrub_cycle;
->  	int cur_region_id;
->  #endif
-> +	void *array_err_rec;
->  };
->  
->  static inline struct cxl_memdev *to_cxl_memdev(struct device *dev)
-> @@ -863,11 +867,26 @@ int cxl_clear_poison(struct cxl_memdev *cxlmd, u64 dpa);
->  #if IS_ENABLED(CONFIG_CXL_EDAC_MEM_FEATURES)
->  int devm_cxl_memdev_edac_register(struct cxl_memdev *cxlmd);
->  int devm_cxl_region_edac_register(struct cxl_region *cxlr);
-> +void devm_cxl_memdev_edac_release(struct cxl_memdev *cxlmd);
->  #else
->  static inline int devm_cxl_memdev_edac_register(struct cxl_memdev *cxlmd)
->  { return 0; }
->  static inline int devm_cxl_region_edac_register(struct cxl_region *cxlr)
->  { return 0; }
-> +static inline void devm_cxl_memdev_edac_release(struct cxl_memdev *cxlmd)
-> +{ return; }
-> +#endif
-> +
-> +#ifdef CONFIG_CXL_EDAC_MEM_REPAIR
-> +int cxl_store_rec_gen_media(struct cxl_memdev *cxlmd, union cxl_event *evt);
-> +int cxl_store_rec_dram(struct cxl_memdev *cxlmd, union cxl_event *evt);
-> +#else
-> +static inline int cxl_store_rec_gen_media(struct cxl_memdev *cxlmd,
-> +					  union cxl_event *evt)
-> +{ return 0; }
-> +static inline int cxl_store_rec_dram(struct cxl_memdev *cxlmd,
-> +				     union cxl_event *evt)
-> +{ return 0; }
->  #endif
->  
->  #ifdef CONFIG_CXL_SUSPEND
 
+might want to check context before using devm_kzalloc()
+to avoid unnecessary memory allocation
+
+> +	priv->wdev = wdev;
+> +	priv->type = *(enum lwmi_events_type *)context;
+> +
+> +	dev_set_drvdata(&wdev->dev, priv);
+> +	return 0;
+> +}
+> +
+> +static const struct wmi_device_id lwmi_events_id_table[] = {
+> +	{ LWMI_EVENT_DEVICE(THERMAL_MODE_EVENT_GUID, LWMI_EVENT_THERMAL_MODE) },
+> +	{}
+> +};
+> +
+> +static struct wmi_driver lwmi_events_driver = {
+> +	.driver = {
+> +		.name = "lenovo_wmi_events",
+> +		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
+> +	},
+> +	.id_table = lwmi_events_id_table,
+> +	.probe = lwmi_events_probe,
+> +	.notify = lwmi_events_notify,
+> +	.no_singleton = true,
+> +};
+> +
+> +module_wmi_driver(lwmi_events_driver);
+> +
+> +MODULE_DEVICE_TABLE(wmi, lwmi_events_id_table);
+> +MODULE_AUTHOR("Derek J. Clark <derekjohn.clark@gmail.com>");
+> +MODULE_DESCRIPTION("Lenovo WMI Events Driver");
+> +MODULE_LICENSE("GPL");
+> diff --git a/drivers/platform/x86/lenovo-wmi-events.h b/drivers/platform/x86/lenovo-wmi-events.h
+> new file mode 100644
+> index 000000000000..e4c5459c2f24
+> --- /dev/null
+> +++ b/drivers/platform/x86/lenovo-wmi-events.h
+> @@ -0,0 +1,20 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +
+> +/* Copyright(C) 2025 Derek J. Clark <derekjohn.clark@gmail.com> */
+> +
+> +#ifndef _LENOVO_WMI_EVENTS_H_
+> +#define _LENOVO_WMI_EVENTS_H_
+> +
+> +struct device;
+> +struct notifier_block;
+> +
+> +enum lwmi_events_type {
+> +	LWMI_EVENT_THERMAL_MODE = 1,
+> +};
+> +
+> +int lwmi_events_register_notifier(struct notifier_block *nb);
+> +int lwmi_events_unregister_notifier(struct notifier_block *nb);
+> +int devm_lwmi_events_register_notifier(struct device *dev,
+> +				       struct notifier_block *nb);
+
+why devm_lwmi_events_unregister_notifier not here ?
+
+> +
+> +#endif /* !_LENOVO_WMI_EVENTS_H_ */
+
+
+Thanks,
+Alok
 
