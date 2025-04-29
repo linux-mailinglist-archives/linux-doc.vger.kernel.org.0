@@ -1,221 +1,352 @@
-Return-Path: <linux-doc+bounces-44788-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44790-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86792AA1B90
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 21:51:50 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id AFBCBAA1BDC
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 22:14:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5DB983AA03C
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 19:51:18 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 89774172F52
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 20:14:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 25B6E2620CE;
-	Tue, 29 Apr 2025 19:51:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D5BD225F7AD;
+	Tue, 29 Apr 2025 20:14:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="GcD7tVsY"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="oXIPjgbl";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="b1suL1PG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E5C8259CAF;
-	Tue, 29 Apr 2025 19:51:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745956287; cv=none; b=Ey3jDw61hIBsjOXc7sZ81iqIfLz5HCLegGEW1WCaIxovBslcz0xBQcICSmaSb7DuDc1zTdchb2oofLK8DUUPkYdV1Rrz2N5BHGaqRr6LoeRo0VvdF+FHpbY28DTndSvklM2wJBr1sGJj/gBWvakHKfayhKeTS+0Azx8AAHPol9k=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745956287; c=relaxed/simple;
-	bh=VJTYJ+DRSOZ7GY8qrph88f8OFS52yzkIz78IYtEQHco=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cYGKlP9OOx0yKvfqrXN356HfYmX316Tq+YGnvhNmb27563Un2PTKjBhc1yr+FkYEx3unixM0no2skXYVSvJe8be7bz+zG0RWEDdL/fsAOkJSvfLM9cNQvDpeUOQklCFWEV3UIZ8a2bXQIqKhPPJVWhM0FpVV7GH1Gp4kyQcGcL4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=GcD7tVsY; arc=none smtp.client-ip=198.175.65.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1745956286; x=1777492286;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=VJTYJ+DRSOZ7GY8qrph88f8OFS52yzkIz78IYtEQHco=;
-  b=GcD7tVsY1TN0SPLyuWhmiOJWcXe3tcjo+K5CYODSiGv8Pk7ZJzf2oA5g
-   06+gf6yD//TKHHAGksO4qnia4UnPF+8ZuUZorPX0Sn4FJ2tBKG69TtnXM
-   xxwsRTxrDEMEA8WhWgmD+9PFh6/H+MnPjpubsnbxr7xNMFjRNT+yd5HNZ
-   SJg5iSO9kB3lxFsVphFuKhyAyDQZeT+BWg9HufjEm+AVDAoGDpDr/QBJE
-   WybIhg8TiORrQ4Ib6KPdRl6UMtECMoE5bJuK1azQx55ykjq/KqsA3zgzP
-   fb7UZVExc14dvrEtdLsRCe3T4fg+OPd9okKxBsEz+jw4jxO8r6jKWOlN6
-   g==;
-X-CSE-ConnectionGUID: XcXhtjlMTZmC8LjrDX/wCA==
-X-CSE-MsgGUID: 995BFKt2Sxqis8TxeEVYJw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11418"; a="65009684"
-X-IronPort-AV: E=Sophos;i="6.15,250,1739865600"; 
-   d="scan'208";a="65009684"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Apr 2025 12:51:25 -0700
-X-CSE-ConnectionGUID: Nyl775vaQ86rWQdZs/rvnA==
-X-CSE-MsgGUID: gOyjbdY+Qn24s/zSN/8koQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,250,1739865600"; 
-   d="scan'208";a="139102749"
-Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.74])
-  by orviesa005.jf.intel.com with SMTP; 29 Apr 2025 12:51:19 -0700
-Received: by stinkbox (sSMTP sendmail emulation); Tue, 29 Apr 2025 22:51:17 +0300
-Date: Tue, 29 Apr 2025 22:51:17 +0300
-From: Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>
-To: Thomas =?iso-8859-1?Q?Wei=DFschuh?= <linux@weissschuh.net>
-Cc: Masahiro Yamada <masahiroy@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nicolas Schier <nicolas@fjasle.eu>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Ben Hutchings <ben@decadent.org.uk>, linux-kbuild@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2] kbuild: make all file references relative to source
- root
-Message-ID: <aBEttQH4kimHFScx@intel.com>
-References: <20250315-kbuild-prefix-map-v2-1-00e1983b2a23@weissschuh.net>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E04FF26ACD;
+	Tue, 29 Apr 2025 20:14:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1745957642; cv=fail; b=bb5stX3ByajXAfNFotpMlQN2EpIsmJFGg3qeq9PQtxJWzzjCkpQl8/ea7GFMcf0oQovMxMtoS3qvYxEXJN0RkTd5AqrXOwJT3jNgdBIX+w+aeFcQSubqcMMcEXHlsormQqDDvUVOJynhmKcLJjU6I8y+KF/a1P4dbnByX2+A1KI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1745957642; c=relaxed/simple;
+	bh=pAPt4ijRWyMYK+8+7PQGW7iR74MMRzVj2SFzIBZGFtE=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=H2CCBkfsU+ifmAKb9EB8YA731i3EOMFNG14amvnhLy2qFnhLkuM45qrIckeB23RATejizM801NbZ+0ZnD2OILV9ZT5/kOz29NIDECzJncNSSqJNXSLMMm5zuAXNAFNiHbLGgbLwBQh2ZLb7tXOclwbHcr0gFWa5DMp9HL1rknGs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=oXIPjgbl; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=b1suL1PG; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53TJq5DM032052;
+	Tue, 29 Apr 2025 20:13:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	corp-2023-11-20; bh=G3NU3IrMvtBl7kR00DBfEMj2vKPyWV51G+ACZt3OLMg=; b=
+	oXIPjgbl/Tv69cp1+VIyCNwyUriP48xAhkMsb5oJ+zbsqfQsHl5rtz81RAgCIIvF
+	uPdMAWrmA3JoE9ZQ/HHqKjgsUd1lILjuKboivTvflRumSDzc/4HS8oOz0rQzA5A5
+	hAqpWWzovV0HcewbBAsw1uPljbcS0yKRG1cZOPQuUkPkQF5UNuSGH2iestWpU+ls
+	4CEoQaFEt/fOjKfguKF7LdXcoYy/3LAoG4X15rgasUz62ilAZi0sRFaoGlu1Xa9x
+	h/0/H96Itu9fMa9StlRoLV0El9ZpfqRWmbZGN9Yu5q9dU3UAYF/HJz+7eMoW86Cv
+	NfPM8WVG3k+kpOclr56wRQ==
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 46b5a3r17h-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 29 Apr 2025 20:13:44 +0000 (GMT)
+Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 53TIUMIG035447;
+	Tue, 29 Apr 2025 20:13:43 GMT
+Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazlp17011030.outbound.protection.outlook.com [40.93.14.30])
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 468nxa5fhd-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 29 Apr 2025 20:13:43 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nlXmu4ZRPiAZ+uAXOyQrtnRPVxy7bFZ1VyqYdRwvptmeGSmY1kkRYWW1cTS+DE9ZymBYZBxuNFnJX+Cmya/YbGctXAIPSc+/Vf7xpinGH6cV17+yMaPAvkDV/Dlef5euMp4c3SR76oUJ1gTA4SUS8hwZVc/w+MAj4eYiTbn6KBwW9s8bjKGuetBFbwLOVVQVNALs93wirhd5Ph+5XyI+NvQqLDKYn9hD7p6GNibiS6M9Oo1gHrth2gFCj/Nt8rRP87xVIzhNjk/vzdDJ7WsGn01Uh0itS7nJ0OPbKuyMnQbTpOvh6PXXGW+cFNU2XMWmWMBGefifVMFAXD5LI39AHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=G3NU3IrMvtBl7kR00DBfEMj2vKPyWV51G+ACZt3OLMg=;
+ b=GMhuGLC01yAQ1VbWS5AuUHY3joX4sUErRoVX/RvQdj2hqtaqqGe0sT9cEe7Z1EVJxFSw+YIgjbZuyASDgSHEvJrRlDmpz1xVl9RxokoTF4/oJ3B8OqoL+dL+4RUeAKcIuXkb7u0nlZ7VK6apoDHBlLryo3jbgF9IQcaaLe3QDQ0wcyUsiTzRu5ytacd2fGpMYF2rrV7mTvWZaoFMap8g4xtnMP4eo2ko1Whc6YAHzbvOt/on2IyUXahOp1w5pnAIk9p4B3GHvkvagRGm8dpCegSA2AdYMS8KGkiLVdARmJFkCMQNEqjhjWDBsazQDNEDAawYSYMB+MtHAcx34tNuNg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=G3NU3IrMvtBl7kR00DBfEMj2vKPyWV51G+ACZt3OLMg=;
+ b=b1suL1PG5LbNhvq36XC3xx+Btr5TcDRkeEE7vaAydG3bqq8QTUAMbWdRfE1ghwVzA7RMUvszgI9wG302wZqhPsL+1HqsuSm5x5j00/+44Gaxhmok9pVswMZQ2iF3fEZGABZ8W2TXKZzj01bsLcmW2yRugrYz8yfIFXbsq61otyY=
+Received: from DS7PR10MB5328.namprd10.prod.outlook.com (2603:10b6:5:3a6::12)
+ by CO1PR10MB4595.namprd10.prod.outlook.com (2603:10b6:303:98::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8678.34; Tue, 29 Apr
+ 2025 20:13:20 +0000
+Received: from DS7PR10MB5328.namprd10.prod.outlook.com
+ ([fe80::ea13:c6c1:9956:b29c]) by DS7PR10MB5328.namprd10.prod.outlook.com
+ ([fe80::ea13:c6c1:9956:b29c%2]) with mapi id 15.20.8678.028; Tue, 29 Apr 2025
+ 20:13:20 +0000
+Message-ID: <625dd9b6-0015-4ced-8659-66755695ecd6@oracle.com>
+Date: Wed, 30 Apr 2025 01:43:10 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 6/6] platform/x86: Add Lenovo WMI Other Mode Driver
+To: "Derek J. Clark" <derekjohn.clark@gmail.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: Armin Wolf <W_Armin@gmx.de>, Jonathan Corbet <corbet@lwn.net>,
+        Mario Limonciello <superm1@kernel.org>, Luke Jones <luke@ljones.dev>,
+        Xino Ni <nijs1@lenovo.com>, Zhixin Zhang <zhangzx36@lenovo.com>,
+        Mia Shao <shaohz1@lenovo.com>,
+        Mark Pearson <mpearson-lenovo@squebb.ca>,
+        "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>,
+        "Cody T . -H . Chiu" <codyit@gmail.com>,
+        John Martens <johnfanv2@gmail.com>,
+        platform-driver-x86@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20250428012029.970017-1-derekjohn.clark@gmail.com>
+ <20250428012029.970017-7-derekjohn.clark@gmail.com>
+Content-Language: en-US
+From: ALOK TIWARI <alok.a.tiwari@oracle.com>
+In-Reply-To: <20250428012029.970017-7-derekjohn.clark@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SG2PR02CA0108.apcprd02.prod.outlook.com
+ (2603:1096:4:92::24) To DS7PR10MB5328.namprd10.prod.outlook.com
+ (2603:10b6:5:3a6::12)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250315-kbuild-prefix-map-v2-1-00e1983b2a23@weissschuh.net>
-X-Patchwork-Hint: comment
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR10MB5328:EE_|CO1PR10MB4595:EE_
+X-MS-Office365-Filtering-Correlation-Id: df9be8fc-0c89-4864-f06a-08dd875a48db
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?RWl0RWxOdnA2dDUxWWpoQ1crTWFEUHdCbXFQazlSYk1IU1M0UWZ2Z2lMNkgw?=
+ =?utf-8?B?VDd1bnZsU3Mzalh3Z0k2K0oyRVozK3RTRE1KWFNYcFQ4M1hNT01Nd050TFhx?=
+ =?utf-8?B?VVRGNnoyTVZ0QmNnMGJEVVU2SkJhdURSRTVXcFlOdUE2QUROOUZaN3FNNWFh?=
+ =?utf-8?B?VC83SFdnc2VVVmdSQUFWZXUrMEIrMC9iOUFYY2tRNGZMeGpvaS9yVzZYQ0Jy?=
+ =?utf-8?B?Z2x6d013cG9TWlBCM0xWMzlubGpIWVdxSUI5NGpnQ1h3b2hYYmtMRlRrVU01?=
+ =?utf-8?B?M0VVQVdDSWNPcDBOSXRFejFrdkxOc1RiQnczMFJqRExKRnMwWnJsWUVzQ2ZF?=
+ =?utf-8?B?N2NDMGdFTDlwNEN1dmlYeTZROG1BbW14SUFzeisrMlFxVkNPT0xuV09HOGNs?=
+ =?utf-8?B?WElzalR6Sk1kQzJnSno4c0t2VjJWTDAvK0RHRTUxRlpZRGx5MUF5b0VySHNl?=
+ =?utf-8?B?VVlmQzFPMC9POHp1UFFpMC9aTmFjbjhEbjJodFgxbEw5a0ZWOFI3N2EzdGpm?=
+ =?utf-8?B?ZVBKUG0wU09jOUlHbDZkYVpGUlgrbzJzamR4VnJVM3JjdjdZMnRTK1lOdklF?=
+ =?utf-8?B?emlZNWlGVlVxZG1Ha0lWMWxNSTFWM3RlMlNPVFFvSUsrWXFoRW51OWxVd2ZF?=
+ =?utf-8?B?bEpiRmtxKzVuRTVYNis1eU9RSDRFTDJPL2FSaE9vNllGalVONldIUlVSMlNE?=
+ =?utf-8?B?UUtJRWY0dE1BbXB5Qk55SEdteWpsOFUzNFR6aXlUWndhZkRVNjhZY2VpZStX?=
+ =?utf-8?B?ZXNHbUZKZktBcVd2QjF6NVJEK2Jqb2ZhZjRIZTBxdjJZdVpNaDcxZTNmanZB?=
+ =?utf-8?B?ZjJ0emZXZ0gzajE2a0lZSmhBNTBpNVFlR1BSaERNTlhHbFNaQzc4c25MRVRi?=
+ =?utf-8?B?M0FGNTRzWXlMb3JPWTFjTDNZeFBnZjRnUGhtYVJCQ1B6eDlqRjIrUWVzMTJS?=
+ =?utf-8?B?VUx0WUNpU2dBUlNnK3JPNE9SczNYWHhDWFdZWFI5ZGd5a1NZTFV2NjhEaG1w?=
+ =?utf-8?B?Qm9qR3IrOHVXUFV2YjFERGhJTU85WUVkSnpabTdHU1A4VlhIOHVOSWozZGdm?=
+ =?utf-8?B?THlRalNjZmlkdXAybU8rdW9EYU9mNFcrWnZXSXdnbU9xakEwcG5CS1BuR1Av?=
+ =?utf-8?B?c1UrZ1ZFRy9yYnRHQUo1R1VDaExJc1ZLeCswTGora1JkV0RDMFlOWWRvcmxC?=
+ =?utf-8?B?UnFjQS9Fa1FwTHRNTWJRT2taWUJiaFlBWjE3T2FYN2thVDc0UFpsUlZkZ3Q1?=
+ =?utf-8?B?UjViMXEvTFpzTTFIQW8vbkZkMzVFS2tnaEhDczQxQjlYQTU2U2pGT3M3Yms0?=
+ =?utf-8?B?QTRwT2lvQ0p3ZUNNZGJVSTNTQTNFMU0rdFNRVFd3Z2s3L2pBWDcybDIwTnQ1?=
+ =?utf-8?B?ZnVESmhVSjlMd0FmbUFscU1oL2NCdDNCQWpuRnJKUHdCRGpXUDZLQXFPc0c1?=
+ =?utf-8?B?MzFoQ2xSV3pHRURSTUwvRGZQbUUyWjhYbWwrUWhEcUxvUjY5N2lTcmZTbFI3?=
+ =?utf-8?B?QXBHNkV4T1pITFpQT2lwZmVmelE1VUtaTWJNS2pIRi9aTnRQQmE1eEtDSDR0?=
+ =?utf-8?B?b0lLTGFqUU5SMXc0bEp0T3JmRTBQM3lweDJyMGdDb3l6eW0zTjhLRWJzdjRM?=
+ =?utf-8?B?cUNRcjk5Qll6M3J1VmpIdFpLcVFLcndhSmlJUmpGWnNZOGJEeGJza1NmamMz?=
+ =?utf-8?B?Y3NqMmdTSk91VXZ3ZWdPd0I0RzR6aXJTNTUwYnE0OEdITUNLeWZzOHZHYytN?=
+ =?utf-8?B?cXVlaHJoVjdSWU90dlcwUi85Vlk5bVAycVB6L2xvSVQ1anlLUGFzQi9hanhB?=
+ =?utf-8?B?OEQ0aXJpeW5uMHFNcFBsams5dDZodUlBeHlOR0NYMExWTVNLdkJTbHlnSXV6?=
+ =?utf-8?B?NkdoRWp5d3BTQzlTWGtSVlNkRWxqTmlaZ21HeHpGNlFxY1R2ZURIVEo5R2R5?=
+ =?utf-8?Q?VqQ9ZB/lM/8=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR10MB5328.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?aklWMW1ESnpHWTlKYmFUcGFMV01lRzVDa1ByVWp2WCs3V3AraVFJd2ZXaWd4?=
+ =?utf-8?B?dVpTbGh5a3U3QnpnZStGTXh6MERsVUZab0NlMjVLWWhpSFFEVDhSZGhwTkZq?=
+ =?utf-8?B?VmROcTY3L3ljRE9NT0lGdFE5dS9YTEE5MkVrYzZMMmNxMTRHc0VVdExzWmgw?=
+ =?utf-8?B?dWU3TnNkZUJTeGNDOURibTk0YnowTkF3ZlJYZWhPOVVpMkZRVmhtYjUvSTJY?=
+ =?utf-8?B?ZWRybHJQUFRaaU1ZRWsxYy8wdlBTQWZ2dno0R3UvYVFxKzBjZXYyZE5KcFBD?=
+ =?utf-8?B?OGJwSzQ1Y2JoSzZuRHhwaXRpeFJVOXVzK3RxQjhpVWdzcE91SDNrY3hHUnlI?=
+ =?utf-8?B?RGhqUDMrU3dHbXNXWjBOcHJLS2wwQXVPNDl2NmRJd3lDakhIU2V0WGhMZThF?=
+ =?utf-8?B?R21heHRrTFV3Y1lhSW9TcFcxb3BNMHdvK3pWbUxtSkFaUlJNcnFOMnFBWjFX?=
+ =?utf-8?B?VUNGVkZPUFRCejdEM0JyWkhYWktLbU1CQ1p5U0ZEVndDMTF5RFkvWkM2YU5j?=
+ =?utf-8?B?b041ZW53VUQxdXVSOXYzVHRjUXhsSlNBUkN2Q1Ztd0U5THcwVHRidzRXSEQ1?=
+ =?utf-8?B?ZEcrMmtpS3h0Z3N6VDJjVGRyaFcyODY2OGlpL2tMdUJXQWxidHVITDZiaDVB?=
+ =?utf-8?B?OGNKeW9LOGRhaW5QZ0hQUFNWRXVnOHMrVlhrZk13Kzk1MEt0dDhpdGZKWWlE?=
+ =?utf-8?B?TFc1SDJEWWt5YW4yS1lub2hPTXJhbG1EOE9wbFZjTVF3d29USUJUeE9kaVdy?=
+ =?utf-8?B?cmNJdWhiamxOd21lSTNKWmtnSkxtZHhQVkZ4SFQ5Z0NPbWNNTlprWHBNdWl5?=
+ =?utf-8?B?NEVUOXFENDVVbFd5dnFWUVloOVhCTTVkelZmQ2hQM2hRS295WElBTnJyVjFx?=
+ =?utf-8?B?dmJFNnhrRXpUUXVJSmxDOVd5dlJsbVlqYVFKb0U0Z3M1MnNzUnZUUmxqSUdl?=
+ =?utf-8?B?T1VYcHZqRTlwVmRYS0dPNmc0dGNxMVg3QUxvbFAvdC8zZkFPUWhIL2dhZXg3?=
+ =?utf-8?B?a25UT0lPVzd1cjNjUHJrUDFWTHpPS0pkSERUelRsYm5jMUhYcE9aU0wrek1w?=
+ =?utf-8?B?bkhGU05qYmQ1ODhBMC92TGo1bU4rZlJkYVZPNE1wZHc3RFVqWE1hbG4rYW0x?=
+ =?utf-8?B?Tm53UlBGdlFwSTlsSm90dU81UGlBdSt4RFlBNjd1Z0dEWmV3NEJ4Ylc0QTJj?=
+ =?utf-8?B?SjlMY3dhV3JITGhLZU00RHFXUTBkdGl4bzNXRmtiRVBRaHIyVVZmYWc3TjNP?=
+ =?utf-8?B?KzRLRW9OcCtpWWF5akxPSlVabXZmT0FRKzlJS2RreXpKQklLZTEvZm1MYjhJ?=
+ =?utf-8?B?SGc0dzVaaGhxSmVpcWVHQkRnOGxveld4Q3VQTkVVQVE4djFobnkxQkFveG5P?=
+ =?utf-8?B?S3o4NlhXekZ6Y0Y0K3U4dHhGbkxyMkJwbWxkN25Mait1TnhwLzJDR2FJNGRa?=
+ =?utf-8?B?eUI3RkZ6UlN4NHBleUxnM0k4enN2SlF4Q1dsVzRxOGVlRXFZRHVCR3huUjZK?=
+ =?utf-8?B?ZnlkT1Z3VGZXK2hGdHRyWjIwcXl3TmJtT3dKM0c1MWNQU1FDdGs2b1hhcDJt?=
+ =?utf-8?B?bDNKR2dRc0VlRkQvcVk3N1psY0luWGFMK0RmUFN4OGJtYU9HWXYvT3FIdS90?=
+ =?utf-8?B?cHVMM0pjY2pmOXJ2T0VQYXIxeitvT0RUczJYRkR1bmFFc05mS09TK1U4WkRl?=
+ =?utf-8?B?UEl4VjIxNmwrM2NrUXJqTTdONXNsL1BzWDRCR0NJcDFYOGd0NWNvSHJsd2RY?=
+ =?utf-8?B?clJTOWVHRll3UUlPMkFTZHpHcjdWcmN3ZTdkaUtMdTBvLzFhVFV5WDdvaXQ2?=
+ =?utf-8?B?cFNJSTRQMFBKMkx4SHV1UTkwZi9tUHEzbTA2Ui80T2dabnFKWklVcHdVeEE2?=
+ =?utf-8?B?VmNhS2hkMTlBbzZEUTNSc1E2dmMxcjBsMk8zN3Q1UkplK2VUNVBuVmgzTGFm?=
+ =?utf-8?B?SXdqR3NRcGJESW1LeHF2ZCs1dDc3elBkY0NCK3lITzJUc2dwTlVJRWZmTmlv?=
+ =?utf-8?B?b0V2M09UclZhbCs0WUUxbWt4TTRUM1hOSURJM3JNZnpNT0todmNXVDhTUElE?=
+ =?utf-8?B?OUp0TkNYK29EN1FWcE8zeFVGN2szZTlTclRNREdjK2Y3WHIzZU8wQTJ2Q0pF?=
+ =?utf-8?B?cFNaYkN1MHgvNmxSZ1Q3dGxBL3liNEIvZlBJRStLYWNsNVErZ05nbGVZQ0NO?=
+ =?utf-8?B?M2c9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	y9bmY4i+NX5CyPlOKZk9HTwmuAONley4alnxNGK1AAWcjUkTqiEJE94uFJHqW71oY5VtDZ/4EEo3MDJ/IvwtZtEw3sB63O3hFWFTi2TNQm9szmN+phEh0M6qoZoXJ67rmYpc7QKPnpWum//wXsNdExzl6Oqwp6zfVtTSfSXeWofRn0kpp92jGZCy/lFP+QfZ9Jn+AVvDCNPLPuAqirnvN9JLxhZ5YZ5hfc1C2wK3aekviGGFO3oEQUe8xW4b77oj9yleaoZMFX+HE+ztLakh12fN2czpguwbC7ITOYUflYZtN23AS9juoeAW5OWJRzyxWFmHoCuxc91TUWGQLDR1mpX/XHZFKLoQcESljhc7TZrj7UZXkGShgd/OzXIRggpVJtXJ2Ua08Rvs9bEhqbDHXc7gUEUgvWZYy2665i6vDGD4W7ZHnAm1SGyrel0MrOFI+VrHJqUL7iUfmfHNqPdTGK4ARdCkq+qdOifwPoWF4V+lVOBLagk/qlgpOaSGwQ3tJhoowDbVeHPEdOxJEpOqe9sS34Xj0vzkklUt0wGRGt3znv45ZNO6x5/bKNkMtZgGonqHAqlhk11zBNJRhFgeRFaOzY9B79QvjckU7pTsmxs=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: df9be8fc-0c89-4864-f06a-08dd875a48db
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB5328.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Apr 2025 20:13:19.9150
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: B2LDtE6z86lko51/L5aoZeDaqFSuD1c4U5DbHW5UIhYlIRPdpIrvcg9ckwxwnMxz+188HngUrPgZJj30ztXBg5Te1ABf1Vo2TUk+sITqUls=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4595
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-04-29_07,2025-04-24_02,2025-02-21_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 phishscore=0
+ suspectscore=0 mlxscore=0 malwarescore=0 adultscore=0 spamscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2504070000 definitions=main-2504290149
+X-Proofpoint-GUID: oLuD8fIcadhS-h0O2DqHxCXMF_OJoi5z
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI5MDE0OSBTYWx0ZWRfX3HBmoxSWqOM+ dueFORayMqwuvgWNspGSJqfE1ecx8//vW+Su5E+3TeZ5/WZwHou5OnitLoT8xrnUuVDQ9e6JaWp X2CvYjfWtbUyET+sD2nnr++OtIvRuhdNTrwuRWCen431C9cyqi7edar9CjZMYGvCeIbqgfdz6/E
+ iJxfUakor2mCzk2dUtPYYyqc9hl9BbVJ8h4Yu7x1E3ENda2gz7PmdkAPJ21sLZb3OGA652erEF9 XhtghoPWvUlIC5wujr9ARsErB96iyKJK4HJsr8vqaUBYzVdRf5ML7gqhe+2K1SEk7DToQ4P+Ghz qYGBF4WBJzO/Rqnd/d9apuVT2LoRjipPnltCOOYrGhFxdRmxxZK9F9gSmLiORIvzxSKKs1yE34z hQlu2w0q
+X-Proofpoint-ORIG-GUID: oLuD8fIcadhS-h0O2DqHxCXMF_OJoi5z
+X-Authority-Analysis: v=2.4 cv=fO853Yae c=1 sm=1 tr=0 ts=681132f8 b=1 cx=c_pps a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=XR8D0OoHHMoA:10 a=GoEa3M9JfhUA:10 a=pGLkceISAAAA:8 a=mAfOFuHhF6l8wEcQ58cA:9 a=QEXdDO2ut3YA:10 cc=ntf awl=host:14638
 
-On Sat, Mar 15, 2025 at 02:20:14PM +0100, Thomas Weiﬂschuh wrote:
-> -fmacro-prefix-map only affects __FILE__ and __BASE_FILE__.
-> Other references, for example in debug information, are not affected.
-> This makes handling of file references in the compiler outputs harder to
-> use and creates problems for reproducible builds.
+
+
+On 28-04-2025 06:48, Derek J. Clark wrote:
+> Adds lenovo-wmi-other driver which provides the Lenovo "Other Mode" WMI
+> interface that comes on some Lenovo "Gaming Series" hardware. Provides a
+> firmware-attributes class which enables the use of tunable knobs for SPL,
+> SPPT, and FPPT.
 > 
-> Switch to -ffile-prefix map which affects all references.
-> 
-> Also drop the documentation section advising manual specification of
-> -fdebug-prefix-map for reproducible builds, as it is not necessary
-> anymore.
-
-Hi,
-
-This broke 'objdump -S' completely for me.
-
-I see the following difference in the debug info:
--    <12>   DW_AT_name        : (indirect line string, offset: 0): drivers/gpu/drm/i915/i915_config.c
--    <16>   DW_AT_comp_dir    : (indirect line string, offset: 0x23): /home/.../src/linux-2.6/build
-+    <12>   DW_AT_name        : (indirect line string, offset: 0): ../drivers/gpu/drm/i915/i915_config.c
-+    <16>   DW_AT_comp_dir    : (indirect line string, offset: 0x26): /home/.../src/linux-2.6/build
-
-Looks like I can work around it with some combination of --prefix and
---prefix-strip, but that seems far too tedious to have to do every
-time I need to decode an oops.
-
-> 
-> Suggested-by: Ben Hutchings <ben@decadent.org.uk>
-> Link: https://lore.kernel.org/lkml/c49cc967294f9a3a4a34f69b6a8727a6d3959ed8.camel@decadent.org.uk/
-> Acked-by: Borislav Petkov (AMD) <bp@alien8.de> # arch/x86/
-> Signed-off-by: Thomas Weiﬂschuh <linux@weissschuh.net>
+> Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
 > ---
-> Changes in v2:
-> - Pick up Ack from Borislav
-> - Merge all changes into single patch
-> - Also drop link to KCFLAGS from docs
-> - Link to v1: https://lore.kernel.org/r/20250313-kbuild-prefix-map-v1-0-38cea8448c5f@weissschuh.net
-> ---
->  Documentation/kbuild/reproducible-builds.rst | 17 -----------------
->  Makefile                                     |  2 +-
->  arch/x86/boot/Makefile                       |  2 +-
->  arch/x86/boot/compressed/Makefile            |  2 +-
->  4 files changed, 3 insertions(+), 20 deletions(-)
-> 
-> diff --git a/Documentation/kbuild/reproducible-builds.rst b/Documentation/kbuild/reproducible-builds.rst
-> index f2dcc39044e66ddd165646e0b51ccb0209aca7dd..a7762486c93fcd3eba08b836bed622a41e829e41 100644
-> --- a/Documentation/kbuild/reproducible-builds.rst
-> +++ b/Documentation/kbuild/reproducible-builds.rst
-> @@ -46,21 +46,6 @@ The kernel embeds the building user and host names in
->  `KBUILD_BUILD_USER and KBUILD_BUILD_HOST`_ variables.  If you are
->  building from a git commit, you could use its committer address.
->  
-> -Absolute filenames
-> -------------------
-> -
-> -When the kernel is built out-of-tree, debug information may include
-> -absolute filenames for the source files.  This must be overridden by
-> -including the ``-fdebug-prefix-map`` option in the `KCFLAGS`_ variable.
-> -
-> -Depending on the compiler used, the ``__FILE__`` macro may also expand
-> -to an absolute filename in an out-of-tree build.  Kbuild automatically
-> -uses the ``-fmacro-prefix-map`` option to prevent this, if it is
-> -supported.
-> -
-> -The Reproducible Builds web site has more information about these
-> -`prefix-map options`_.
-> -
->  Generated files in source packages
->  ----------------------------------
->  
-> @@ -131,7 +116,5 @@ See ``scripts/setlocalversion`` for details.
->  
->  .. _KBUILD_BUILD_TIMESTAMP: kbuild.html#kbuild-build-timestamp
->  .. _KBUILD_BUILD_USER and KBUILD_BUILD_HOST: kbuild.html#kbuild-build-user-kbuild-build-host
-> -.. _KCFLAGS: kbuild.html#kcflags
-> -.. _prefix-map options: https://reproducible-builds.org/docs/build-path/
->  .. _Reproducible Builds project: https://reproducible-builds.org/
->  .. _SOURCE_DATE_EPOCH: https://reproducible-builds.org/docs/source-date-epoch/
-> diff --git a/Makefile b/Makefile
-> index 5c333682dc9142b1aacfe454a5c77f5923554b7d..4f920187cee658ae4d1b807fca365f6994274828 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1067,7 +1067,7 @@ endif
->  
->  # change __FILE__ to the relative path to the source directory
->  ifdef building_out_of_srctree
-> -KBUILD_CPPFLAGS += $(call cc-option,-fmacro-prefix-map=$(srcroot)/=)
-> +KBUILD_CPPFLAGS += $(call cc-option,-ffile-prefix-map=$(srcroot)/=)
->  KBUILD_RUSTFLAGS += --remap-path-prefix=$(srcroot)/=
->  endif
->  
-> diff --git a/arch/x86/boot/Makefile b/arch/x86/boot/Makefile
-> index 9cc0ff6e9067d574488a35573eff4d0f8449e398..f500f82864aae80deb74faa3df9a8b6333d6c4ca 100644
-> --- a/arch/x86/boot/Makefile
-> +++ b/arch/x86/boot/Makefile
-> @@ -54,7 +54,7 @@ targets += cpustr.h
->  
->  KBUILD_CFLAGS	:= $(REALMODE_CFLAGS) -D_SETUP
->  KBUILD_AFLAGS	:= $(KBUILD_CFLAGS) -D__ASSEMBLY__
-> -KBUILD_CFLAGS	+= $(call cc-option,-fmacro-prefix-map=$(srctree)/=)
-> +KBUILD_CFLAGS	+= $(call cc-option,-ffile-prefix-map=$(srctree)/=)
->  KBUILD_CFLAGS	+= -fno-asynchronous-unwind-tables
->  KBUILD_CFLAGS	+= $(CONFIG_CC_IMPLICIT_FALLTHROUGH)
->  
-> diff --git a/arch/x86/boot/compressed/Makefile b/arch/x86/boot/compressed/Makefile
-> index 5edee7a9786c67e13c295473751b82387bcbd67e..ad324978b2e5b1b6f8be82647769c99db8257ac7 100644
-> --- a/arch/x86/boot/compressed/Makefile
-> +++ b/arch/x86/boot/compressed/Makefile
-> @@ -38,7 +38,7 @@ KBUILD_CFLAGS += -fno-stack-protector
->  KBUILD_CFLAGS += $(call cc-disable-warning, address-of-packed-member)
->  KBUILD_CFLAGS += $(call cc-disable-warning, gnu)
->  KBUILD_CFLAGS += -Wno-pointer-sign
-> -KBUILD_CFLAGS += $(call cc-option,-fmacro-prefix-map=$(srctree)/=)
-> +KBUILD_CFLAGS += $(call cc-option,-ffile-prefix-map=$(srctree)/=)
->  KBUILD_CFLAGS += -fno-asynchronous-unwind-tables
->  KBUILD_CFLAGS += -D__DISABLE_EXPORTS
->  # Disable relocation relaxation in case the link is not PIE.
-> 
-> ---
-> base-commit: a57512d6cd88eba04cdc1fb83832c00d248bd0d1
-> change-id: 20250312-kbuild-prefix-map-5ae76c209e7a
-> 
-> Best regards,
-> -- 
-> Thomas Weiﬂschuh <linux@weissschuh.net>
-> 
+> +++ b/drivers/platform/x86/lenovo-wmi-other.c
+> @@ -0,0 +1,655 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Lenovo Other Mode WMI interface driver.
+> + *
+> + * This driver uses the fw_attributes class to expose the various WMI functions
+> + * provided by the "Other Mode" WMI interface. This enables CPU and GPU power
+> + * limit as well as various other attributes for devices that fall under the
+> + * "Gaming Series" of Lenovo laptop devices. Each attribute exposed by the
+> + * "Other Mode"" interface has a corresponding Capability Data struct that
 
--- 
-Ville Syrj‰l‰
-Intel
+typo "Other Mode"" -> "Other Mode"
+
+> + * allows the driver to probe details about the attribute such as if it is
+> + * supported by the hardware, the default_value, max_value, min_value, and step
+> + * increment.
+> + *
+> + * These attributes typically don't fit anywhere else in the sysfs and are set
+> + * in Windows using one of Lenovo's multiple user applications.
+> + *
+> + * Copyright(C) 2025 Derek J. Clark <derekjohn.clark@gmail.com>
+> + */
+> +
+[clip]
+> +
+> +/**
+> + * lwmi_om_register_notifier() - Add a notifier to the blocking notifier chain
+> + * @nb: The notifier_block struct to register
+> + *
+> + * Call blocking_notifier_chain_register to register the notifier block to the
+> + * lenovo-wmi-other driver notifer chain.
+
+typo notifer -> notifier
+
+> + *
+> + * Return: 0 on success, %-EEXIST on error.
+> + */
+> +int lwmi_om_register_notifier(struct notifier_block *nb)
+> +{
+> +	return blocking_notifier_chain_register(&om_chain_head, nb);
+> +}
+> +EXPORT_SYMBOL_NS_GPL(lwmi_om_register_notifier, "LENOVO_WMI_OTHER");
+> +
+> +/**
+> + * lwmi_om_unregister_notifier() - Remove a notifier from the blocking notifier
+> + * chain.
+> + * @nb: The notifier_block struct to register
+> + *
+> + * Call blocking_notifier_chain_unregister to unregister the notifier block from the
+> + * lenovo-wmi-other driver notifer chain.
+> + *
+> + * Return: 0 on success, %-ENOENT on error.
+> + */
+> +int lwmi_om_unregister_notifier(struct notifier_block *nb)
+> +{
+> +	return blocking_notifier_chain_unregister(&om_chain_head, nb);
+> +}
+> +EXPORT_SYMBOL_NS_GPL(lwmi_om_unregister_notifier, "LENOVO_WMI_OTHER");
+> +
+> +/**
+> + * devm_lwmi_om_unregister_notifier() - Remove a notifier from the blocking
+> + * notifier chain.
+> + * @data: Void pointer to the notifier_block struct to register.
+> + *
+> + * Call lwmi_om_unregister_notifier to unregister the notifier block from the
+> + * lenovo-wmi-other driver notifer chain.
+
+typo notifer -> notifier
+
+> + *
+> + * Return: 0 on success, %-ENOENT on error.
+> + */
+> +static void devm_lwmi_om_unregister_notifier(void *data)
+> +{
+> +	struct notifier_block *nb = data;
+> +
+> +	lwmi_om_unregister_notifier(nb);
+> +}
+> +
+> +/**
+> + * devm_lwmi_om_register_notifier() - Add a notifier to the blocking notifier
+> + * chain.
+> + * @dev: The parent device of the notifier_block struct.
+> + * @nb: The notifier_block struct to register
+> + *
+> + * Call lwmi_om_register_notifier to register the notifier block to the
+> + * lenovo-wmi-other driver notifer chain. Then add devm_lwmi_om_unregister_notifier
+
+typo notifer -> notifier
+
+> + * as a device managed ation to automatically unregister the notifier block
+
+typo ation
+
+> + * upon parent device removal.
+> + *
+> + * Return: 0 on success, or on error.
+> + */
+> +int devm_lwmi_om_register_notifier(struct device *dev,
+> +				   struct notifier_block *nb)
+> +{
+> +	int ret;
+> +
+> +	ret = lwmi_om_register_notifier(nb);
+> +	if (ret < 0)
+> +		return ret;
+> +
+
+
+Thanks,
+Alok
+
+
+
+
 
