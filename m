@@ -1,101 +1,79 @@
-Return-Path: <linux-doc+bounces-44789-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44780-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6C01AA1BC7
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 22:05:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 778D3AA1A76
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 20:23:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5225A1B64783
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 20:05:33 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 662111884E2C
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 18:21:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B886D2472B0;
-	Tue, 29 Apr 2025 20:05:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 053A82528EC;
+	Tue, 29 Apr 2025 18:20:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="yxjE8Npj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0011.hostedemail.com [216.40.44.11])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06E3048CFC;
-	Tue, 29 Apr 2025 20:05:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4CB32517A8
+	for <linux-doc@vger.kernel.org>; Tue, 29 Apr 2025 18:20:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745957116; cv=none; b=jw+7mjUGjDMYElDXvZ2qi9p3oSHX2ryVl7+FIdBtLrdDdTgTTE20n0FqeIzOwpl1vxUoHvV7xnpj2NilHoQlNGNbq2fk46j5LRnkXOz41FFew4xzkk4ID745ZpKP+A9ehJBdnZBbsoxLH69pdBFkdeUiy5noDygxrxHpUOqN/xU=
+	t=1745950816; cv=none; b=QWXX/9YT+MFJN7+L/wlAFt7JrbPiwkignZpWNOu62lKzNV5gaWTetBmPZP0EVnBad2s13TBVqgey+P+KfkRd/k74nOblDQky+w63/ZLeBF8d7TaqstnJaKsM3nbd2RW3ZCSbcw1WKJImG0htwEPRmjeJNaVrfHKDaOVQsWy3xXw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745957116; c=relaxed/simple;
-	bh=CH8sSlpxog/OcbKyxWb4I/Q8dJEc4mRErAiIp6l4Ju8=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=MDPxB+EdzJK4iGmOczDGL5E0lFT857a2Ib2oiVoKTdxwUNZSHe7AxnPdLoNDKpjeoD0VAZ4xaIvXQu0LvZPQP9BUTe5Kv3lOB7oS+wC6G/CsVOSKGl2FeMO84PjLtnYoxDOpqe0E46j2/Wht2lvhshFAEpARv2svFKeB5vr7M6M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com; spf=pass smtp.mailfrom=perches.com; arc=none smtp.client-ip=216.40.44.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=perches.com
-Received: from omf05.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay01.hostedemail.com (Postfix) with ESMTP id 3286D1CF6EA;
-	Tue, 29 Apr 2025 17:36:00 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf05.hostedemail.com (Postfix) with ESMTPA id 934AA20011;
-	Tue, 29 Apr 2025 17:35:50 +0000 (UTC)
-Message-ID: <1490923bf0b7d5e32ded1393c1f7a3e4e640de5b.camel@perches.com>
-Subject: Re: [PATCH] checkpatch: remove %p4cn
-From: Joe Perches <joe@perches.com>
-To: Aditya Garg <gargaditya08@live.com>, pmladek@suse.com
-Cc: admin@kodeit.net, airlied@redhat.com, akpm@linux-foundation.org, 
-	alyssa@rosenzweig.io, andriy.shevchenko@linux.intel.com, apw@canonical.com,
- 	asahi@lists.linux.dev, corbet@lwn.net, dri-devel@lists.freedesktop.org, 
-	dwaipayanray1@gmail.com, geert@linux-m68k.org, kees@kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux@rasmusvillemoes.dk, lukas.bulwahn@gmail.com, marcan@marcan.st, 
-	mripard@kernel.org, rostedt@goodmis.org, senozhatsky@chromium.org,
- simona@ffwll.ch, 	sven@svenpeter.dev, tamird@gmail.com, tzimmermann@suse.de
-Date: Tue, 29 Apr 2025 10:35:48 -0700
-In-Reply-To: <PN3PR01MB95971954FC5E026C59B6F8EDB8802@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
-References: <20250428123132.578771-1-pmladek@suse.com>
-	 <PN3PR01MB95971954FC5E026C59B6F8EDB8802@PN3PR01MB9597.INDPRD01.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.3 (3.54.3-1.fc41) 
+	s=arc-20240116; t=1745950816; c=relaxed/simple;
+	bh=/pU9ywNW6XmDQbd6J0DJ04nL3DIaDK3lyKNWIPkv4sA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fwpEInnC7wdkSS2CxMepAjNydP3hheFDLcE+S8iWTD/wSWm5IJxiMG77w6o8+BAxWJ9IwK680V8769OhRgz0ZQzV85m3EulepWV88VNi4p6fC/h7AMcKb0StKZvFHR1C4QZ6KGfN1XKE/hjXVk46Vq1tgGV4rYitb9YKvfEJgCg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=yxjE8Npj; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38E75C4CEE3;
+	Tue, 29 Apr 2025 18:20:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1745950816;
+	bh=/pU9ywNW6XmDQbd6J0DJ04nL3DIaDK3lyKNWIPkv4sA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=yxjE8NpjcdKxbfeHVvvC+ii7X96bw/6qem+mKj2+gU+xRwHCb2dbQJRJIuFHd0fmP
+	 gX2WH6hwS47LMaT+Ny1AZHavkayvqIf81lr2XjhMSX8hT6Ada8ATP/tyhscCWVbERf
+	 wmwbbrNt/ll/rTbFadsp5O0gWBh8WuaEqX303Nio=
+Date: Tue, 29 Apr 2025 19:47:36 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Timur Tabi <ttabi@nvidia.com>
+Cc: Al Viro <viro@zeniv.linux.org.uk>, linux-doc@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH] docs: debugfs: do not recommend debugfs_remove_recursive
+Message-ID: <2025042900-emblaze-enlarged-47e8@gregkh>
+References: <20250429173958.3973958-1-ttabi@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 934AA20011
-X-Stat-Signature: ty3t4amg1am4wfranj4it66hgc5ywusk
-X-Rspamd-Server: rspamout01
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Session-ID: U2FsdGVkX1/Pi+sZD950+7lYGkQr89DieUnwzGYH3J8=
-X-HE-Tag: 1745948150-531653
-X-HE-Meta: U2FsdGVkX1/F/WflSpAiJ6Heq+tSmgatCv6cN3WW0dk6b5ZPd+jMUMgkgjrAVyTPWC1efrCNTJDnLnXh91eX/OoUJU0btcvbXg4J60vd7JqFt34/NaVW+QRRNzNuF0kha7z0aCOJ2COg6+11wgZuD5Wkuetnuh2tOR3bfaEG14K5bxuu589aJQuZvYWDkIT1pqWusGBVw0brO2eEyTKfCxszgF1+zDiCMvANHDIbyQj+boU7QSiHxFVCMNzUeqeWvHpGJMOekc7SvDDFtH+DJ+mkKclqXy6GXWFeuEh0L8GGQi07oZHfPs5cMjaFnGUG8NJdfCJSN3/s513PP4ctRcSx11Qd6FNK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250429173958.3973958-1-ttabi@nvidia.com>
 
-On Tue, 2025-04-29 at 16:07 +0000, Aditya Garg wrote:
-> %p4cn was recently removed and replaced by %p4chR in vsprintf. So,
-> remove the check for %p4cn from checkpatch.pl.
->=20
-> Fixes: 37eed892cc5f ("vsprintf: Use %p4chR instead of %p4cn for reading d=
-ata in reversed host ordering")
->=20
-> Signed-off-by: Aditya Garg <gargaditya08@live.com>
-> ---
->  scripts/checkpatch.pl | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-> index 44e233b6f..f79f0a085 100755
-> --- a/scripts/checkpatch.pl
-> +++ b/scripts/checkpatch.pl
-> @@ -6891,7 +6891,7 @@ sub process {
->  					    ($extension eq "f" &&
->  					     defined $qualifier && $qualifier !~ /^w/) ||
->  					    ($extension eq "4" &&
-> -					     defined $qualifier && $qualifier !~ /^c[hnlbc]/)) {
-> +					     defined $qualifier && $qualifier !~ /^c[hlbc]/)) {
+On Tue, Apr 29, 2025 at 12:39:58PM -0500, Timur Tabi wrote:
+> Update the debugfs documentation to indicate that debugfs_remove()
+> should be used to clean up debugfs entries.
+> 
+> In commit a3d1e7eb5abe ("simple_recursive_removal(): kernel-side rm -rf
+> for ramfs-style filesystems"), function debugfs_remove_recursive()
+> was made into an alias for debugfs_remove():
+> 
+>     #define debugfs_remove_recursive debugfs_remove
+> 
+> Therefore, drivers should just use debugfs_remove() going forward.
 
-Probably needs to be something like:
+No, the other way around, we should be telling people to use
+debugfs_remove_recursive() instead please, and getting rid of
+debugfs_remove() entirely.
 
-					$qualifier !~ /^c(?:[hlbc]|cR)$/
+thanks,
 
->  						$bad_specifier =3D $specifier;
->  						last;
->  					}
-
+greg k-h
 
