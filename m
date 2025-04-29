@@ -1,141 +1,91 @@
-Return-Path: <linux-doc+bounces-44765-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44773-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C947EAA11A8
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 18:35:14 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EE8FAA180A
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 19:55:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E65527B3450
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 16:34:01 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 247629A71BB
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Apr 2025 17:50:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F1E4244686;
-	Tue, 29 Apr 2025 16:35:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BCDFE24EAB2;
+	Tue, 29 Apr 2025 17:51:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hv4+V9oE"
+	dkim=pass (1024-bit key) header.d=gentwo.org header.i=@gentwo.org header.b="VOtLQ77d"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from gentwo.org (gentwo.org [62.72.0.81])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 213581EB5CE;
-	Tue, 29 Apr 2025 16:35:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06F79239072;
+	Tue, 29 Apr 2025 17:51:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=62.72.0.81
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745944507; cv=none; b=VYbNNP5HLSqrRNCt8KPOvrdA/nlGEoM/9qqqH66YvjNXoFXItjsvQh4J85iKYmsZu7z/VXjN9RNi1uWT4ptIfqo2nKX/Rp86V4lklLoSdNzgrmifg9c5Ceb/+A/1l9rh348Cfn43lOCEBOcAEjkaI/vbcJ9LJDUERg+PkB+YZKo=
+	t=1745949062; cv=none; b=VhAdsCpJkkU1eyWdOPObPXnQW4yS7sJESS80FfkFHkBCoCeOdeO1+0e0c9ta4V4y3OkYcms32eCn5cbP08a2S1MxQCa4zWVKej2XkgtPU0gOsopIR2h1gEyydY3B1H034MGbnQgLW5tth1bNfzSg8MlXzYybcaCOMgmg7TBjQ48=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745944507; c=relaxed/simple;
-	bh=+UGyRtEyWANVYEtyHHifh4EloDW/BOB+dVBrXx8R5aE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZXfK2uyondqImB4nCu7pjFWPzXgJ7Np6dHk/1It3UtNyF2KGCtyMO3cwwWtKjtEQWGzAZ8OBekrwAut85HoUGE7AOHE93HaoqYbMVqbAj+dUgrGiS4N6xCTwZ8dGYD3OAu7ZswTdCXuRNYzZmKD9Icj4QQmbSZjqoPMtMPIH6S4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hv4+V9oE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C094CC4CEE3;
-	Tue, 29 Apr 2025 16:34:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1745944506;
-	bh=+UGyRtEyWANVYEtyHHifh4EloDW/BOB+dVBrXx8R5aE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Hv4+V9oEHFFoqPKi4JJC4Rggve0BsZAvaDzvh4SEQuECW785vJ5yPZ4AatV4KqWu6
-	 wuF2qFRqPfjjSeYHDw7enNzhmN+iUgUUbapSZvr+Dz1qVv8qFyUfXoil/gPujvw11w
-	 qoFYOIY78wNSefF32YipQjxSwHAcW3XOmHqgg1S2VM0PWb8PBDGDdDJRkMRAooSKa4
-	 dtKpsbh7N+d9YIvzbEGIi3+RyayqE2xFI+WA5HeWOtGFHWzSkmRs90NjfbDCTTecMx
-	 dcRb1imHHNN+d2crW1PnDFXSnrtBlXapjqWlicbZjIMRypxWwu/J1ycGlUtEr3CMqd
-	 0B2+9D5ZaXxeQ==
-Date: Tue, 29 Apr 2025 19:34:52 +0300
-From: Mike Rapoport <rppt@kernel.org>
-To: Dave Hansen <dave.hansen@intel.com>
-Cc: Changyuan Lyu <changyuanl@google.com>, linux-kernel@vger.kernel.org,
-	akpm@linux-foundation.org, anthony.yznaga@oracle.com, arnd@arndb.de,
-	ashish.kalra@amd.com, benh@kernel.crashing.org, bp@alien8.de,
-	catalin.marinas@arm.com, corbet@lwn.net,
-	dave.hansen@linux.intel.com, devicetree@vger.kernel.org,
-	dwmw2@infradead.org, ebiederm@xmission.com, graf@amazon.com,
-	hpa@zytor.com, jgowans@amazon.com, kexec@lists.infradead.org,
-	krzk@kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org, luto@kernel.org,
-	mark.rutland@arm.com, mingo@redhat.com, pasha.tatashin@soleen.com,
-	pbonzini@redhat.com, peterz@infradead.org, ptyadav@amazon.de,
-	robh@kernel.org, rostedt@goodmis.org, saravanak@google.com,
-	skinsburskii@linux.microsoft.com, tglx@linutronix.de,
-	thomas.lendacky@amd.com, will@kernel.org, x86@kernel.org
-Subject: Re: [PATCH v6 11/14] x86: add KHO support
-Message-ID: <aBD_rOvMPk5_iT9J@kernel.org>
-References: <20250411053745.1817356-1-changyuanl@google.com>
- <20250411053745.1817356-12-changyuanl@google.com>
- <35c58191-f774-40cf-8d66-d1e2aaf11a62@intel.com>
- <aBD165pVhOIl3_by@kernel.org>
- <e90b81a4-a912-4174-b6e9-46a6ddd92ee3@intel.com>
+	s=arc-20240116; t=1745949062; c=relaxed/simple;
+	bh=Iw8Wa9ZRgOojjhRhHP4GvLG9MuFK2w+E50QoyC4hl9o=;
+	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
+	 MIME-Version:Content-Type; b=ZlcGLcwZaZFoVDRI0892CMIHBhxJ8+E3kjwAobKqcOCaOcQ9DPyHw/0iSjrYsgttHOXR1BGbtYiEFR/jkQKqGj0J/ySNQwvkGtXIuQ9NYS+hR6DhAvZVufGAvhMOO7nSe4iEP2Nkszx7seCevvaat932iQFr14VcKfzCokGQAf0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=gentwo.org; spf=pass smtp.mailfrom=gentwo.org; dkim=pass (1024-bit key) header.d=gentwo.org header.i=@gentwo.org header.b=VOtLQ77d; arc=none smtp.client-ip=62.72.0.81
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=gentwo.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gentwo.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gentwo.org;
+	s=default; t=1745944729;
+	bh=Iw8Wa9ZRgOojjhRhHP4GvLG9MuFK2w+E50QoyC4hl9o=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=VOtLQ77d9bEAh6Py00ThK7o9ARTip/gI+OiwbQ5xwG4pls1/BJvFgPuz9YlxB8MdU
+	 vx9YzPtsNJTA2qqHHAsFBiH5nlzRqVspHwUeziWJ86SejooDmGtPURI46gsy2l6Z1m
+	 GVnlmFoRBPV/qc9zHkOpq04XVhhrI9wTE4Zy9Z04=
+Received: by gentwo.org (Postfix, from userid 1003)
+	id 1EE09401FC; Tue, 29 Apr 2025 09:38:49 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by gentwo.org (Postfix) with ESMTP id 1C3E2400C6;
+	Tue, 29 Apr 2025 09:38:49 -0700 (PDT)
+Date: Tue, 29 Apr 2025 09:38:49 -0700 (PDT)
+From: "Christoph Lameter (Ampere)" <cl@gentwo.org>
+To: Nico Pache <npache@redhat.com>
+cc: linux-mm@kvack.org, linux-doc@vger.kernel.org, 
+    linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+    akpm@linux-foundation.org, corbet@lwn.net, rostedt@goodmis.org, 
+    mhiramat@kernel.org, mathieu.desnoyers@efficios.com, david@redhat.com, 
+    baohua@kernel.org, baolin.wang@linux.alibaba.com, ryan.roberts@arm.com, 
+    willy@infradead.org, peterx@redhat.com, ziy@nvidia.com, 
+    wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com, 
+    vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com, 
+    yang@os.amperecomputing.com, kirill.shutemov@linux.intel.com, 
+    aarcange@redhat.com, raquini@redhat.com, dev.jain@arm.com, 
+    anshuman.khandual@arm.com, catalin.marinas@arm.com, tiwai@suse.de, 
+    will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz, 
+    jglisse@google.com, surenb@google.com, zokeefe@google.com, 
+    hannes@cmpxchg.org, rientjes@google.com, mhocko@suse.com, 
+    rdunlap@infradead.org, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com
+Subject: Re: [PATCH v5 12/12] Documentation: mm: update the admin guide for
+ mTHP collapse
+In-Reply-To: <20250428181218.85925-13-npache@redhat.com>
+Message-ID: <6fd003dc-2a2d-ca15-e7b6-9af988fdbc3f@gentwo.org>
+References: <20250428181218.85925-1-npache@redhat.com> <20250428181218.85925-13-npache@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e90b81a4-a912-4174-b6e9-46a6ddd92ee3@intel.com>
+Content-Type: text/plain; charset=US-ASCII
 
-On Tue, Apr 29, 2025 at 09:05:02AM -0700, Dave Hansen wrote:
-> On 4/29/25 08:53, Mike Rapoport wrote:
-> > On Mon, Apr 28, 2025 at 03:05:55PM -0700, Dave Hansen wrote:
-> >> On 4/10/25 22:37, Changyuan Lyu wrote:
-> >>> From: Alexander Graf <graf@amazon.com>
-> >>>
-> >>> +#ifdef CONFIG_KEXEC_HANDOVER
-> >>> +static bool process_kho_entries(unsigned long minimum, unsigned long image_size)
-> >>> +{
-> >>> +	struct kho_scratch *kho_scratch;
-> >>> +	struct setup_data *ptr;
-> >>> +	int i, nr_areas = 0;
-> >>
-> >> Do these really need actual #ifdefs or will a nice IS_ENABLED() check
-> >> work instead?
-> >>
-> >>> +	ptr = (struct setup_data *)(unsigned long)boot_params_ptr->hdr.setup_data;
-> >>
-> >> What's with the double cast?
-> > 
-> > The double cast is required for this to be compiled on 32 bits (just like
-> > in mem_avoid_overlap). The setup_data is all u64 and to cast it to a
-> > pointer on 32 bit it has to go via unsigned long.
-> 
-> Let's just make KHO depend on 64BIT, at least on x86.
- 
-Ok, so we are keeping #ifdef and dropping double cast here.
+On Mon, 28 Apr 2025, Nico Pache wrote:
 
-> >>> diff --git a/arch/x86/kernel/kexec-bzimage64.c b/arch/x86/kernel/kexec-bzimage64.c
-> >>> index 68530fad05f74..518635cc0876c 100644
-> >>> --- a/arch/x86/kernel/kexec-bzimage64.c
-> >>> +++ b/arch/x86/kernel/kexec-bzimage64.c
-> >>> @@ -233,6 +233,31 @@ setup_ima_state(const struct kimage *image, struct boot_params *params,
-> >>>  #endif /* CONFIG_IMA_KEXEC */
-> >>>  }
-> >>>  
-> >>> +static void setup_kho(const struct kimage *image, struct boot_params *params,
-> >>> +		      unsigned long params_load_addr,
-> >>> +		      unsigned int setup_data_offset)
-> >>> +{
-> >>> +#ifdef CONFIG_KEXEC_HANDOVER
-> >>
-> >> Can this #ifdef be replaced with IS_ENABLED()?
-> > 
-> > The KHO structures in kexec image are under #ifdef, so it won't compile
-> > with IS_ENABLED().
-> 
-> They shouldn't be. Define them unconditionally, please.
-> 
-> ...
-> >> Please axe the #ifdef in the .c file if at all possible, just like the
-> >> others.
-> > 
-> > This one follows IMA, but it's easy to make it IS_ENABLED(). It's really up
-> > to x86 folks preference.
-> 
-> Last I checked, I'm listed under the big M: for "X86 ARCHITECTURE". ;)
+>  THP can be enabled system wide or restricted to certain tasks or even
+>  memory ranges inside task's address space. Unless THP is completely
+>  disabled, there is ``khugepaged`` daemon that scans memory and
+> -collapses sequences of basic pages into PMD-sized huge pages.
+> +collapses sequences of basic pages into huge pages.
 
-I remember :)
+huge pages usually have a fixed size like 2M and are tied to the page
+table levels.
 
--- 
-Sincerely yours,
-Mike.
+Would it not be advisable to use a different term here like "large folio"
+or "mTHP sized folio" or something like that?
+
 
