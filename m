@@ -1,138 +1,150 @@
-Return-Path: <linux-doc+bounces-44924-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-44926-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A26DAA4E1F
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Apr 2025 16:11:14 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD7CDAA4E65
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Apr 2025 16:23:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 060271C07C60
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Apr 2025 14:11:26 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A46E13A885D
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Apr 2025 14:22:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 47AC725DB15;
-	Wed, 30 Apr 2025 14:11:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 133C725B684;
+	Wed, 30 Apr 2025 14:23:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q91X8Er2"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i1Q7eU9v"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C92EF254848;
-	Wed, 30 Apr 2025 14:11:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D619D2AE8B;
+	Wed, 30 Apr 2025 14:23:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746022268; cv=none; b=lQlQiDeGhs1hknU3GBAJenH+L2hAEsDfHgC7pJiee+mgEzYSZCC3mRpHVW9iiHFHFC5Epl12ZHN3aG5dnN7qmt/Bhfv52BYTwcu70jAa0q40g54SS5CrEysGMMIvv5vOo2jPrk7T4x2TtYHhVSwr0KdBKWCZ2Gpy3XYeu12Bpdc=
+	t=1746022984; cv=none; b=R9k120v+g/EaeNb8S6Hy93eZFhqpskx02ehezG2+wGNUDlI2HyUeHUUtOgjmVEMwxClo8iQ2n27ypJ8J+4/aR8ZZoBOIxM7/Dlv2rWLXEUQtpPxdfKXr1QXDyWJ+wAW79o3JPHxQ/ccdgGLo2VSEou25nMbkBny2naRMNh6sifQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746022268; c=relaxed/simple;
-	bh=dsud/2U/NzgyuLT4SAm3RqXxWU7GCVGgm+BpDHgFKOM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ES22lZTRkfoRAb5pNwOvAVA2D3PNMlHtAno+urtWvEKP0WKMC1UAi7cjgV8EXL/5y/OZxbqblHiBFWtnBFGFF8sTxDdaKUu/auS9CF+5dUsztdO11kUxDxCXuVW54f2jl3NHoGZALovFIoPx72ZK+MR6rm30nJf7RZu00eiJSX8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Q91X8Er2; arc=none smtp.client-ip=209.85.214.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-22423adf751so74399965ad.2;
-        Wed, 30 Apr 2025 07:11:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746022266; x=1746627066; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=dsud/2U/NzgyuLT4SAm3RqXxWU7GCVGgm+BpDHgFKOM=;
-        b=Q91X8Er2FWy5XuziDzEhyuXEpbFeztavwyS5Lz9NtiAw/9M0PKhS17wn6/11Fw7D01
-         pR0hHxSdaAdxpoeqp3McTIB18TKn2Lxea/vZGr0HLfCOvTiPUB0gMz4lOhs/lH09jC0H
-         hcEoZBWhMK7J9Tzj49Dx3uHdZtMK0/SXjYpIFjN9kRQALWgtWDBYW4k48fQ1CbedKbbE
-         TNqiWbS/LWvnjh3nA0CxXEOTsi+fJ646/NUx472kSSMW56l4wB/4DI1Yd909kaMWauyM
-         cjX5K/QlilZv+yXD5t4hVxW0my+RJmrrbwUYG5yifdpmWvhzivLhH4SbuIFmbYe7F3p7
-         s3+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746022266; x=1746627066;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dsud/2U/NzgyuLT4SAm3RqXxWU7GCVGgm+BpDHgFKOM=;
-        b=cZfcxkImocnJydPtjxqReFU22RIrkuUl2eD7b4KzbOzUrjTSMY/xWUCjOdIgWdf/Oc
-         BYDb0tRIUYolMulSUyO9MaSUbl7ISJADOvaW+v7rRhKuXRgU0ruvjg9UG6mLWDFWHNOh
-         dihDkRJY6m2NIUnTkrXb5JvHcIH2oImPbLZUlV6Jbd8jHFP2Izri73kKjoVBT2P36uOg
-         ZLTvbVHxe6QQHNQs3ShOgrYjxgLdBWr5wnPBSqm9PFdYafEQlXx/z3k0yoVaCMC+crTa
-         w/czzJtOQbR2bNtUOJ10b1zxXDFwbTRFFQjBw+9EzQeRGF5QZVamlRSSYk0jRz3BIpV7
-         I8Ww==
-X-Forwarded-Encrypted: i=1; AJvYcCUCF3SBgOLhuk6yc9WrFAU056NM9n9XZl/YtNL0i+LnYsYDYLRDVEQVmvYnC3Ukr8Pek7YbqcDB/rIUMfof@vger.kernel.org, AJvYcCUh+dXPaUgcdngbG9Ni/IELDwv4H1tXKRkj1aMP6WxWO23YARDBys0tkp8ohymOMTwpYB7kKPvD@vger.kernel.org, AJvYcCX34bLABcwFq7lZpyTvgBt84ahJc+A8EK+I1hHDN3PwgMd3FqHRR9H057ml0aZ/hxwP6Js43x0rj9w=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyWwet+bh2G38ptf6a2iYDNpyPzu7gKNMmJV+dBv/cwLifCv6Oi
-	w1CZxTV2DRYWDIESMaTVG1UKDDfxp47VQRFTOpmkej+n0G7z9Qq8
-X-Gm-Gg: ASbGncuRBfVOgo3A7bzfTx+UvfFwVcOtC35n8M6vs8GiKFRVJ8zu/axNyMfFpUWK1uv
-	9yatsqrWJpTwzv/Mm5YxMwKL3rrUEZUVXpdpHlhfj0f4YgxMQQCOdg0lQIKCn/eCb/iX632epOK
-	JJfknY9c6V4WQd62y+9LgCP4QWBzlZxNcaLXzAR18uUkTWqjjCax30LymGijm19Ij1+SPd5o8Ct
-	QfBUTdSLW5swbU21GhVnXk9+oOXXR8LZ5q3LRJkCTIsJKA8G0VAQSUCPlX+msaH5aqwiLJKDfYj
-	oQq7WqFE4OCWInN32VQxNKMxy5KF9HU0YyGQkxuW
-X-Google-Smtp-Source: AGHT+IF0trVfcRYBBwO9lBLK8KETXWSFQfqRdeh2DW8hkHBJS+ZTFbNfty9mP4zPhIeEhtDyItzp+A==
-X-Received: by 2002:a17:903:4405:b0:21a:8300:b9ce with SMTP id d9443c01a7336-22df35cad23mr55838435ad.49.1746022265792;
-        Wed, 30 Apr 2025 07:11:05 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22db50e7a9fsm121976415ad.111.2025.04.30.07.11.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Apr 2025 07:11:04 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id 8AADD4208F70; Wed, 30 Apr 2025 21:11:02 +0700 (WIB)
-Date: Wed, 30 Apr 2025 21:11:02 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Venkat Rao Bagalkote <venkat88@linux.ibm.com>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux PowerPC <linuxppc-dev@lists.ozlabs.org>,
-	Linux Networking <netdev@vger.kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Haren Myneni <haren@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Andrew Donnellan <ajd@linux.ibm.com>,
-	Vamsi Attunuru <vattunuru@marvell.com>,
-	Lukas Bulwahn <lukas.bulwahn@redhat.com>,
-	Alyssa Ross <hi@alyssa.is>, Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: Re: [PATCH] Documentation: ioctl-number: Extend "Include File"
- column width
-Message-ID: <aBIvdqKy9cCQPLox@archie.me>
-References: <20250429130524.33587-2-bagasdotme@gmail.com>
- <66e4a803-05bd-4fbe-96bf-84415eefe412@linux.ibm.com>
+	s=arc-20240116; t=1746022984; c=relaxed/simple;
+	bh=EHmJoyT1t1HTWr93T5cTrjOvhbK6j7Z+nBdrivtN+KM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=d4BOsLeFQabFOuuDUMEDTRijEed8hf4jgJtW5kTJbgvOPD+hXzJyaNp4tqK1TcSMGiRp9YKoxCFAXsQD7QnotWVgqALmoWk8DXtx6YlkYV3zqTM88UFViy0Bt7/bKyhRDe0PDnPjV3xNVSl7IYrxBVEYJM3T9V8YQ480Sb+WcDY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i1Q7eU9v; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EFBEAC4CEE7;
+	Wed, 30 Apr 2025 14:22:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1746022983;
+	bh=EHmJoyT1t1HTWr93T5cTrjOvhbK6j7Z+nBdrivtN+KM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=i1Q7eU9v9c9LhftrfG98JhwjvdtIX79CBeve9Lm9W0p/zaxBB/CR370V7cwfPUGci
+	 25KfK/1vS7TQX5ECZxwu+KE077rM4bgeBY+Q/Vtv8oUdIKqvqUPWg+zIQoDpln+Tlb
+	 /TmX2lawn/mb7tU5xdarnbQtwswtW2SXMG7yWVd7b11VeE5I/sEmxz3OBrWqOvf1hF
+	 pPAbH8QqUv3ecrfsUEyv/l2zqHdiapP/8qWa2Scgq1L/bPXKK460WXhOCZTtnrkGG9
+	 K0OYKkZNdYznUBJ/H2RS9SuWz723aSULxpMKAJ2v7Tqkm9OG9KQUJiCsJwpLHNFFI/
+	 dK5uXZw+L4CHQ==
+Message-ID: <06268dcb-4a49-468e-8ebd-d9366a2cf0c2@kernel.org>
+Date: Wed, 30 Apr 2025 17:22:54 +0300
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="JY5zQzvXTsAY1P1v"
-Content-Disposition: inline
-In-Reply-To: <66e4a803-05bd-4fbe-96bf-84415eefe412@linux.ibm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next 2/4] dt-bindings: net: ti: k3-am654-cpsw-nuss:
+ update phy-mode in example
+To: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Andy Whitcroft <apw@canonical.com>,
+ "mike .." <wingman205@gmx.com>
+Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>,
+ Lukas Bulwahn <lukas.bulwahn@gmail.com>, Joe Perches <joe@perches.com>,
+ Jonathan Corbet <corbet@lwn.net>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Tero Kristo <kristo@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux@ew.tq-group.com
+References: <cover.1744710099.git.matthias.schiffer@ew.tq-group.com>
+ <4216050f7b33ce4e5ce54f32023ec6ce093bd83c.1744710099.git.matthias.schiffer@ew.tq-group.com>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <4216050f7b33ce4e5ce54f32023ec6ce093bd83c.1744710099.git.matthias.schiffer@ew.tq-group.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+Hi Matthias,
 
---JY5zQzvXTsAY1P1v
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 15/04/2025 13:18, Matthias Schiffer wrote:
+> k3-am65-cpsw-nuss controllers have a fixed internal TX delay, so RXID
+> mode is not actually possible and will result in a warning from the
+> driver going forward.
+> 
+> Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+> ---
+>  .../devicetree/bindings/net/ti,k3-am654-cpsw-nuss.yaml          | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/net/ti,k3-am654-cpsw-nuss.yaml b/Documentation/devicetree/bindings/net/ti,k3-am654-cpsw-nuss.yaml
+> index b11894fbaec47..c8128b8ca74fb 100644
+> --- a/Documentation/devicetree/bindings/net/ti,k3-am654-cpsw-nuss.yaml
+> +++ b/Documentation/devicetree/bindings/net/ti,k3-am654-cpsw-nuss.yaml
+> @@ -282,7 +282,7 @@ examples:
+>                      ti,syscon-efuse = <&mcu_conf 0x200>;
+>                      phys = <&phy_gmii_sel 1>;
+>  
+> -                    phy-mode = "rgmii-rxid";
+> +                    phy-mode = "rgmii-id";
+>                      phy-handle = <&phy0>;
+>                  };
+>              };
 
-On Wed, Apr 30, 2025 at 06:38:27PM +0530, Venkat Rao Bagalkote wrote:
->=20
-> Note: There is other patch [1] <https://lore.kernel.org/linuxppc-dev/aBHo=
-dTu4IjqzZeXb@archie.me/T/#m013297a6731d3ca3dc1e0f23d161774850d6b41c>
-> which has a different approach to fix the reported issue.
+FYI the following TI boards using this driver are using "rgmii-rxid".
+Will you be sending fixes to the device trees files?
 
-Then let the maintainers decide...
+arch/arm64/boot/dts/ti
+k3-am625-beagleplay.dts:	phy-mode = "rgmii-rxid";
+k3-am625-sk.dts:	phy-mode = "rgmii-rxid";
+k3-am625-sk.dts.orig:	phy-mode = "rgmii-rxid";
+k3-am62a7-sk.dts:	phy-mode = "rgmii-rxid";
+k3-am62a-phycore-som.dtsi:	phy-mode = "rgmii-rxid";
+k3-am62p5-sk.dts:	phy-mode = "rgmii-rxid";
+k3-am62p5-sk.dts:	phy-mode = "rgmii-rxid";
+k3-am62-phycore-som.dtsi:	phy-mode = "rgmii-rxid";
+k3-am62-verdin-dev.dtsi:	phy-mode = "rgmii-rxid";
+k3-am62-verdin.dtsi:	phy-mode = "rgmii-rxid";
+k3-am62-verdin-ivy.dtsi:	phy-mode = "rgmii-rxid";
+k3-am62x-phyboard-lyra.dtsi:	phy-mode = "rgmii-rxid";
+k3-am62x-sk-common.dtsi:	phy-mode = "rgmii-rxid";
+k3-am642-evm.dts:	phy-mode = "rgmii-rxid";
+k3-am642-evm.dts:	phy-mode = "rgmii-rxid";
+k3-am642-sk.dts:	phy-mode = "rgmii-rxid";
+k3-am642-sk.dts:	phy-mode = "rgmii-rxid";
+k3-am642-tqma64xxl-mbax4xxl.dts:	phy-mode = "rgmii-rxid";
+k3-am642-tqma64xxl-mbax4xxl.dts:	/* phy-mode is fixed up to rgmii-rxid by prueth driver to account for
+k3-am64-phycore-som.dtsi:	phy-mode = "rgmii-rxid";
+k3-am654-base-board.dts:	phy-mode = "rgmii-rxid";
+k3-am67a-beagley-ai.dts:	phy-mode = "rgmii-rxid";
+k3-am68-sk-base-board.dts:	phy-mode = "rgmii-rxid";
+k3-am69-sk.dts:	phy-mode = "rgmii-rxid";
+k3-j7200-common-proc-board.dts:	phy-mode = "rgmii-rxid";
+k3-j721e-beagleboneai64.dts:	phy-mode = "rgmii-rxid";
+k3-j721e-common-proc-board.dts:	phy-mode = "rgmii-rxid";
+k3-j721e-evm-gesi-exp-board.dtso:	phy-mode = "rgmii-rxid";
+k3-j721e-evm-gesi-exp-board.dtso:	phy-mode = "rgmii-rxid";
+k3-j721e-evm-gesi-exp-board.dtso:	phy-mode = "rgmii-rxid";
+k3-j721e-evm-gesi-exp-board.dtso:	phy-mode = "rgmii-rxid";
+k3-j721e-sk.dts:	phy-mode = "rgmii-rxid";
+k3-j721s2-common-proc-board.dts:	phy-mode = "rgmii-rxid";
+k3-j721s2-evm-gesi-exp-board.dtso:	phy-mode = "rgmii-rxid";
+k3-j722s-evm.dts:	phy-mode = "rgmii-rxid";
+k3-j784s4-j742s2-evm-common.dtsi:	phy-mode = "rgmii-rxid";
+k3-j784s4-j742s2-evm-common.dtsi:	phy-mode = "rgmii-rxid";
 
---=20
-An old man doll... just what I always wanted! - Clara
+-- 
+cheers,
+-roger
 
---JY5zQzvXTsAY1P1v
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaBIvcAAKCRD2uYlJVVFO
-o/EaAPwKtcQ1wbetpC3zLm+DuLSa5qEQtOm51qI4RngKFscKnQEAmrD6Y/Ovyazo
-mBa6qHv4bKKYjW2KLekEMQyFs4iPHg0=
-=NWAu
------END PGP SIGNATURE-----
-
---JY5zQzvXTsAY1P1v--
 
