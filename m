@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-45346-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45348-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29DE7AAAF21
-	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 05:11:29 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74EF5AAB654
+	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 07:47:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B06491BC4005
-	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 03:07:27 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9CBC0500EF1
+	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 05:43:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F2742F5F92;
-	Mon,  5 May 2025 23:17:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2AFE827F745;
+	Tue,  6 May 2025 00:26:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QYef9bAm"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IryBRScn"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82AB1391A7D;
-	Mon,  5 May 2025 23:02:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F5302D026D;
+	Mon,  5 May 2025 22:50:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746486172; cv=none; b=Oqw2NQ9OjpXm6qwBHREa2kjYhCUWQv1RPgNQKDQOwHqgq8Bx9+XiH+XmxeJjGL91C43Y3pPvtyvOFnlgVtuqMkv8yAYoNrqI2mvWtfUyyaUctIBuwO6UMgd9idc/T1/T0+/nMttTAgtAf+qq+SEdQnWTV4cMxywTLzQBoYNJ6sQ=
+	t=1746485427; cv=none; b=JzY2vWHcE3eIrWQIKhXSNK4g7jlazUP+blT/20mJifLn9GnsNQqARUG5LgovBEZxzqiXki41aljv8l0QPV57LQnJLniEEXXSn/VnWd8M9QX6STQeZv7KI+QCDgZUgKx/If92nqVIGjnOMK8BF3QhnV4KqN/yK4HxHBOobqjZI30=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746486172; c=relaxed/simple;
-	bh=kHidY8XyaKPgujESjHx+QB172kiQKmkkr3z6d135WBE=;
+	s=arc-20240116; t=1746485427; c=relaxed/simple;
+	bh=NpDBFexPX1tuTzC6iZI8/MRik7F8bcHGbQyKLCQ0Zzk=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=cgUDzL7jQEAjHEGy/VAO7hf/+x5tbLtIlnHTZwueWYQFi8XWHMYpspV+D5k4d7CJP8F0OnyJciByHQSNldrQVKF3VBoEt9BAOXwpvyRos++IMxeMjqOVVHPaI3+qSX0A21nDczaMERly0X73WFUI8fJybDjrsEh+w4C1aR6FzxU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QYef9bAm; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71D39C4CEE4;
-	Mon,  5 May 2025 23:02:48 +0000 (UTC)
+	 MIME-Version:Content-Type; b=nQrfiFZAaoyQtwA8imPI78GSfeZjOgEzsldrRgjFMNh1moiTII3KK6G5pexYTMsSXvgUd6XrG5VaGibuwrT1wmKRpMtNtzaqdeuONjKtnfotm3YXllsT98WSBJHljnrnhCA2umAT6N6aQxWy9EzfyNrMvvggOeDFlGyP4CBw7Kk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IryBRScn; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0792C4CEE4;
+	Mon,  5 May 2025 22:50:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1746486172;
-	bh=kHidY8XyaKPgujESjHx+QB172kiQKmkkr3z6d135WBE=;
+	s=k20201202; t=1746485426;
+	bh=NpDBFexPX1tuTzC6iZI8/MRik7F8bcHGbQyKLCQ0Zzk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QYef9bAmEUz2XqFnWDdYj0PthOhNb/oZUWQ7UPclRJBNt1TYFVnkwzIH8mfXY7CGA
-	 KZzrIUaa6KQA5uO4kJk89JMalKyEuUZG5e7SmNNWyeHa0EBn6457IpIk+kodbZZPuK
-	 IcdeLgpeN5BIPU5NNBUndoYjDpwzO3L77+xqqHfSFhJKvdFlwvemzy4x+YDwaYF/qW
-	 55ecJwqrNuxJsC2Mh/rmoBvwAThFOJ4CoCoAr3rSzHlFCt5OngJXfTfEvkYT5pkl+N
-	 LUGoq8cT1u4mUHipKDfykcSfMN8eO/JF0pK91+/Ea0gOQgBTWtt4ktuURR1dzM4FDT
-	 iZDzDc7GJDWEg==
+	b=IryBRScnpqDktttqKChG+jkMr4MbAqBv31Msaet991/wgJhmS8T0wcWvdVVnxIZh1
+	 WltvSEdvdItfOxMk+kU9EIhq6rQ0XoqpeA09oy2VQjlFIypbq1UsugK8x+EVxXi1aT
+	 eKJq/QjJEjQUtqzyr6PIhPiMQuJlbfH2PlhrlxxWUPGG+zwahdGFIih+Mged+KcEtY
+	 /kdtKHusUQICZC7yjf8tQuKkePN2G/0KRauOqWNfGktmpT+BfO1BvCVhDi7reDruHO
+	 4t2JybCfUMLIo7onUsbyRgI4UvMuqHXobb5zT3rglivP5eWJ/JeDQu8Ikd1kx8XS11
+	 KMtypc4Y21k6g==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -59,35 +59,34 @@ Cc: =?UTF-8?q?Alexis=20Lothor=C3=A9?= <alexis.lothore@bootlin.com>,
 	john.ogness@linutronix.de,
 	pmladek@suse.com,
 	arnd@arndb.de,
+	andriy.shevchenko@linux.intel.com,
 	namcao@linutronix.de,
 	benjamin.larsson@genexis.eu,
 	schnelle@linux.ibm.com,
 	esben@geanix.com,
-	zack.rusin@broadcom.com,
-	festevam@gmail.com,
-	marex@denx.de,
 	stefan.eichenberger@toradex.com,
-	linux@rasmusvillemoes.dk,
 	tglx@linutronix.de,
+	linux@rasmusvillemoes.dk,
+	marex@denx.de,
 	jeff.johnson@oss.qualcomm.com,
 	linux@treblig.org,
 	geert+renesas@glider.be,
 	wsa+renesas@sang-engineering.com,
 	prabhakar.mahadev-lad.rj@bp.renesas.com,
-	ben.wolsieffer@hefring.com,
 	cheick.traore@foss.st.com,
+	ben.wolsieffer@hefring.com,
 	u.kleine-koenig@baylibre.com,
 	linux-serial@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	imx@lists.linux.dev,
 	linux-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH AUTOSEL 6.6 186/294] serial: mctrl_gpio: split disable_ms into sync and no_sync APIs
-Date: Mon,  5 May 2025 18:54:46 -0400
-Message-Id: <20250505225634.2688578-186-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 6.12 306/486] serial: mctrl_gpio: split disable_ms into sync and no_sync APIs
+Date: Mon,  5 May 2025 18:36:22 -0400
+Message-Id: <20250505223922.2682012-306-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250505225634.2688578-1-sashal@kernel.org>
-References: <20250505225634.2688578-1-sashal@kernel.org>
+In-Reply-To: <20250505223922.2682012-1-sashal@kernel.org>
+References: <20250505223922.2682012-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -97,7 +96,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 6.6.89
+X-stable-base: Linux 6.12.26
 Content-Transfer-Encoding: 8bit
 
 From: Alexis Lothoré <alexis.lothore@bootlin.com>
@@ -182,10 +181,10 @@ index 84b43061c11be..60434f2b02863 100644
 -           mctrl_gpio_disable_ms
 +           mctrl_gpio_disable_ms_sync mctrl_gpio_disable_ms_no_sync
 diff --git a/drivers/tty/serial/8250/8250_port.c b/drivers/tty/serial/8250/8250_port.c
-index c2778300e1510..d5ad6cae6b652 100644
+index c1376727642a7..0519679929652 100644
 --- a/drivers/tty/serial/8250/8250_port.c
 +++ b/drivers/tty/serial/8250/8250_port.c
-@@ -1676,7 +1676,7 @@ static void serial8250_disable_ms(struct uart_port *port)
+@@ -1657,7 +1657,7 @@ static void serial8250_disable_ms(struct uart_port *port)
  	if (up->bugs & UART_BUG_NOMSR)
  		return;
  
@@ -195,10 +194,10 @@ index c2778300e1510..d5ad6cae6b652 100644
  	up->ier &= ~UART_IER_MSI;
  	serial_port_out(port, UART_IER, up->ier);
 diff --git a/drivers/tty/serial/atmel_serial.c b/drivers/tty/serial/atmel_serial.c
-index bcca5627afaca..85559d9b35d83 100644
+index 09b246c9e389e..8bd39586a49f7 100644
 --- a/drivers/tty/serial/atmel_serial.c
 +++ b/drivers/tty/serial/atmel_serial.c
-@@ -698,7 +698,7 @@ static void atmel_disable_ms(struct uart_port *port)
+@@ -700,7 +700,7 @@ static void atmel_disable_ms(struct uart_port *port)
  
  	atmel_port->ms_irq_enabled = false;
  
@@ -208,20 +207,20 @@ index bcca5627afaca..85559d9b35d83 100644
  	if (!mctrl_gpio_to_gpiod(atmel_port->gpios, UART_GPIO_CTS))
  		idr |= ATMEL_US_CTSIC;
 diff --git a/drivers/tty/serial/imx.c b/drivers/tty/serial/imx.c
-index 349d4849ba5e3..04809b781f45b 100644
+index 90974d338f3c0..8e3b15534bc72 100644
 --- a/drivers/tty/serial/imx.c
 +++ b/drivers/tty/serial/imx.c
-@@ -1597,7 +1597,7 @@ static void imx_uart_shutdown(struct uart_port *port)
+@@ -1596,7 +1596,7 @@ static void imx_uart_shutdown(struct uart_port *port)
  		imx_uart_dma_exit(sport);
  	}
  
 -	mctrl_gpio_disable_ms(sport->gpios);
 +	mctrl_gpio_disable_ms_sync(sport->gpios);
  
- 	spin_lock_irqsave(&sport->port.lock, flags);
+ 	uart_port_lock_irqsave(&sport->port, &flags);
  	ucr2 = imx_uart_readl(sport, UCR2);
 diff --git a/drivers/tty/serial/serial_mctrl_gpio.c b/drivers/tty/serial/serial_mctrl_gpio.c
-index 7d5aaa8d422b1..d5fb293dd5a93 100644
+index 8855688a5b6c0..ca55bcc0b6111 100644
 --- a/drivers/tty/serial/serial_mctrl_gpio.c
 +++ b/drivers/tty/serial/serial_mctrl_gpio.c
 @@ -322,11 +322,7 @@ void mctrl_gpio_enable_ms(struct mctrl_gpios *gpios)
@@ -311,23 +310,23 @@ index fc76910fb105a..79e97838ebe56 100644
  }
  
 diff --git a/drivers/tty/serial/sh-sci.c b/drivers/tty/serial/sh-sci.c
-index 4350a69d97d7a..2434eb6e6847d 100644
+index f43059e1b5c28..80efe3b0ed0c3 100644
 --- a/drivers/tty/serial/sh-sci.c
 +++ b/drivers/tty/serial/sh-sci.c
-@@ -2237,7 +2237,7 @@ static void sci_shutdown(struct uart_port *port)
+@@ -2297,7 +2297,7 @@ static void sci_shutdown(struct uart_port *port)
  	dev_dbg(port->dev, "%s(%d)\n", __func__, port->line);
  
  	s->autorts = false;
 -	mctrl_gpio_disable_ms(to_sci_port(port)->gpios);
 +	mctrl_gpio_disable_ms_sync(to_sci_port(port)->gpios);
  
- 	spin_lock_irqsave(&port->lock, flags);
+ 	uart_port_lock_irqsave(port, &flags);
  	sci_stop_rx(port);
 diff --git a/drivers/tty/serial/stm32-usart.c b/drivers/tty/serial/stm32-usart.c
-index 9ef90bb30a47e..b58422ae156c9 100644
+index 9b9981352b1e1..e685cace5c854 100644
 --- a/drivers/tty/serial/stm32-usart.c
 +++ b/drivers/tty/serial/stm32-usart.c
-@@ -952,7 +952,7 @@ static void stm32_usart_enable_ms(struct uart_port *port)
+@@ -944,7 +944,7 @@ static void stm32_usart_enable_ms(struct uart_port *port)
  
  static void stm32_usart_disable_ms(struct uart_port *port)
  {
