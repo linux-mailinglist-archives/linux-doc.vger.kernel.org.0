@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-45355-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45353-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB958AAB5BC
-	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 07:35:09 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48FDCAAB79C
+	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 08:14:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 38EF5466DE8
-	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 05:30:46 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id B6A1D1C260EF
+	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 06:09:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 855553AEDFF;
-	Tue,  6 May 2025 00:48:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A5AE3A26F4;
+	Tue,  6 May 2025 00:44:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qaPSPlZQ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mlHnt2cB"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A39DD3AE5DA;
-	Mon,  5 May 2025 23:20:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 550122F478A;
+	Mon,  5 May 2025 23:15:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746487201; cv=none; b=ZlKBjxNRsTn2s9+h4TBg3FTvyTgIxy66B8bTIeJCzoZqhnpanFGJ3avwKvAvscYngCKdTF2yKq/TwxF1usulrxGj8Aj60z63zhusnaA/6SieEqofj1uBpGwtAlefyoit/gbBGplEbujhxqfw0U52amBmgcWKvO6hsZXDVqMXk2Q=
+	t=1746486951; cv=none; b=iz3eqxYiidhTJ1Ycw5rNC46l7nInUC4rnVFPG3rLi9f3mwv9dpyCpmLhI/SJE9NINSmH71/g68HifuFBXEi9+sMn8R+JzTEijKZ6h+nJ2zdHtU9qd7EVtuVjZz0CbjTkMo1jytvLieKVGIoNZz/CjsYpKkelXPt0q5jGoijxncg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746487201; c=relaxed/simple;
-	bh=m5oFdYjah0zImpFPmJoRoTirj9V9MipWEIBX4AF1Ht0=;
+	s=arc-20240116; t=1746486951; c=relaxed/simple;
+	bh=pHKueES8/Xf6oiD7xIjwXZCnandN1qb9OpE6s5N8vrA=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=QmCZ8FK2b5RdKEE6I3F3jtW+G7JK7NkXHsSvjoOUPEiYAEx6QMPZnW41IAXXg40mdGqi6rWTmcZaWM7+ww4TKq/hNGZ2XjZLA10am9JvGpHyFx1Fo8mILaOTya1fGgrXXbqIMENduhHkCJeHlNXEb6BEsJj3+sFJ7g22D5AK+iw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qaPSPlZQ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48CB6C4CEE4;
-	Mon,  5 May 2025 23:19:58 +0000 (UTC)
+	 MIME-Version; b=C8CkLdheLBJRgkdeLMCrNC375/5+i2DKDWybKlRu9ieAmuwR20aCZ0RaAXNLaowP2HAy2LSatVr1NqVn/fQrYo9obcWUE01WB0Ooj+fARD6IYmeK/BQUBigR8TZi2sE/+vFx9yOjRxUxgf/Be9OJNtZqduYjW/PYhGhXymN0iIk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mlHnt2cB; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02CF0C4CEED;
+	Mon,  5 May 2025 23:15:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1746487200;
-	bh=m5oFdYjah0zImpFPmJoRoTirj9V9MipWEIBX4AF1Ht0=;
+	s=k20201202; t=1746486950;
+	bh=pHKueES8/Xf6oiD7xIjwXZCnandN1qb9OpE6s5N8vrA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=qaPSPlZQejUTW7GqD9FJpG1q1xZbfLP15qQF/0TrRTtmXWGh+z0wWX1eGcXgk73iI
-	 3VevHVzskorIF0fvEG2tqMJQJJ+GlnKowJV/Z6ciq7Ci7LWwEz62mLsZ8k3wGyCO5e
-	 lIggvdrqpmA3uUy0o+mK72pcVu1uIruHKKJ0zMcoPIP0TYjA4wfvhB8ppfCbmya3Ny
-	 loZnh2ObAjDB2qSwx6KDi7wGntw6uR5qcM6lNBfg3wpdnurMj/N9frMQJwcuTbXS7w
-	 P5MAwOXhXnyu/GtfbNjeh0lIit1KVZrOZTnxPXx9SPxOrKO5vG6uvOdfvsXYL7LzvD
-	 n3T6F8jEWVMhg==
+	b=mlHnt2cBKBrFHYwjqKgwKbXBDKFGRcY0fi9lrDn7mij4ZNwQ/qR0hrh6j4526rAcu
+	 bNtMb6esmZ4R0cdod4bpohqWRy6YA+dWmoSQkck4IAe9jni2XJ3w+3Koa7L2lanXvQ
+	 q/TrnN1nYyxMMq7mVQDXooVz9zBgL1N7QwZHa9PmoK3ZD8Lp1+KTdqx+23X+Zqjws4
+	 CYeZ1moSKX23DyHaVtLXm9nGlcT63CI52mkg2gjyc3m0mcVz45QCS0pydVGzSBjHqY
+	 Elcnvq+jBsrtFi2IIaF80HC4fgHIG1oCxpbptfjDPggzGjJMWA/mke2mHlkCwo3tqw
+	 wgBAVqRPzzuuQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -64,12 +64,12 @@ Cc: Breno Leitao <leitao@debian.org>,
 	ardb@kernel.org,
 	gregkh@linuxfoundation.org,
 	linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.10 053/114] x86/bugs: Make spectre user default depend on MITIGATION_SPECTRE_V2
-Date: Mon,  5 May 2025 19:17:16 -0400
-Message-Id: <20250505231817.2697367-53-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.15 074/153] x86/bugs: Make spectre user default depend on MITIGATION_SPECTRE_V2
+Date: Mon,  5 May 2025 19:12:01 -0400
+Message-Id: <20250505231320.2695319-74-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250505231817.2697367-1-sashal@kernel.org>
-References: <20250505231817.2697367-1-sashal@kernel.org>
+In-Reply-To: <20250505231320.2695319-1-sashal@kernel.org>
+References: <20250505231320.2695319-1-sashal@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,7 +78,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-X-stable-base: Linux 5.10.237
+X-stable-base: Linux 5.15.181
 Content-Transfer-Encoding: 8bit
 
 From: Breno Leitao <leitao@debian.org>
@@ -119,10 +119,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 88110e74b3f7a..12af5b0ecc8e3 100644
+index ede522c60ac4f..0bbe79287596d 100644
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -5122,6 +5122,8 @@
+@@ -5430,6 +5430,8 @@
  
  			Selecting 'on' will also enable the mitigation
  			against user space to user space task attacks.
@@ -132,10 +132,10 @@ index 88110e74b3f7a..12af5b0ecc8e3 100644
  			Selecting 'off' will disable both the kernel and
  			the user space protections.
 diff --git a/arch/x86/kernel/cpu/bugs.c b/arch/x86/kernel/cpu/bugs.c
-index 045ab6d0a98bb..9b3611e4cb80c 100644
+index 75cd45f2338dc..f47590a9f6896 100644
 --- a/arch/x86/kernel/cpu/bugs.c
 +++ b/arch/x86/kernel/cpu/bugs.c
-@@ -1231,9 +1231,13 @@ static __ro_after_init enum spectre_v2_mitigation_cmd spectre_v2_cmd;
+@@ -1262,9 +1262,13 @@ static __ro_after_init enum spectre_v2_mitigation_cmd spectre_v2_cmd;
  static enum spectre_v2_user_cmd __init
  spectre_v2_parse_user_cmdline(void)
  {
@@ -149,7 +149,7 @@ index 045ab6d0a98bb..9b3611e4cb80c 100644
  	switch (spectre_v2_cmd) {
  	case SPECTRE_V2_CMD_NONE:
  		return SPECTRE_V2_USER_CMD_NONE;
-@@ -1246,7 +1250,7 @@ spectre_v2_parse_user_cmdline(void)
+@@ -1277,7 +1281,7 @@ spectre_v2_parse_user_cmdline(void)
  	ret = cmdline_find_option(boot_command_line, "spectre_v2_user",
  				  arg, sizeof(arg));
  	if (ret < 0)
@@ -158,7 +158,7 @@ index 045ab6d0a98bb..9b3611e4cb80c 100644
  
  	for (i = 0; i < ARRAY_SIZE(v2_user_options); i++) {
  		if (match_option(arg, ret, v2_user_options[i].option)) {
-@@ -1256,8 +1260,8 @@ spectre_v2_parse_user_cmdline(void)
+@@ -1287,8 +1291,8 @@ spectre_v2_parse_user_cmdline(void)
  		}
  	}
  
