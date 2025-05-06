@@ -1,153 +1,156 @@
-Return-Path: <linux-doc+bounces-45390-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45392-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 462C2AAC00F
-	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 11:43:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8BC5AAC0F5
+	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 12:10:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 664671C242FA
-	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 09:42:43 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id ADE3F1C24FE8
+	for <lists+linux-doc@lfdr.de>; Tue,  6 May 2025 10:11:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8290B27C14A;
-	Tue,  6 May 2025 09:39:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E329727780E;
+	Tue,  6 May 2025 10:10:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="WPtYV4Jo"
+	dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="k3yezd4p"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F20B727AC51;
-	Tue,  6 May 2025 09:39:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D24626560B
+	for <linux-doc@vger.kernel.org>; Tue,  6 May 2025 10:10:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746524363; cv=none; b=uw2ZSLWdovw2U8Ax5PIPPPWiB64pB7O4z5YWnDOu6BKGc0twvoOwl8rIMjFp+0BUX3QV+kQq+aanCqDOiKfltq7vDqyo7S+vGpCed++bu/HjdE4RoBaE+mp2TpVJ27iLv0wbyKNyL4XQzZKKKhrQd+uV+FBYqwcdjeBbThelWU0=
+	t=1746526239; cv=none; b=CwQK62JS9Qe9uutyjL+HfoyJTpQ5JqjY3y6w70YBmPKiNangG7OrmS/FiPIHor9VLwJ0ZlrDK7NDcUN8ltfuYkpDHk8wZZCOZvVx+24dPudJHwTLjHWEmU+8P0NEl74ZtogHKynNMlCcb6oQcxcXwBRWy16zDXDhdKP5FvhiKcI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746524363; c=relaxed/simple;
-	bh=Jn41cw8nKB5Et/jTyOLpaMmZXmY/SDIsbul00xmf0hA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=JeTYzg6dGz+EVSlMmN9M+krmgxi1v3BBpiP8okXfsw2J9kLJynPAK9rDxOThocwP0SzTLYTUkYofzShbCJh7HIkZL1i90EYMdYMM153+PE99wKhvqDG6ibltdxeaC0j67dbp7NSq6qZDqfrgbdi5ftG/3cgRettNoMpgRx+ODRo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=WPtYV4Jo; arc=none smtp.client-ip=217.70.183.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 6295443310;
-	Tue,  6 May 2025 09:39:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1746524359;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=pMaIRlhquyjfKzC9Nfmvr79PGKRBrxgo0Q9ST42MxmE=;
-	b=WPtYV4JoONIO2zxYdg9jYDVTB5SqtmWZk9wU9D5XyAcIbNTinEE+pMCuQ9m99XylERdo98
-	vC6UozVgIOF77J5Dp8zhifEevsLz1M3yFhqz80C2yHrivc27Z08n/UmzvGqyZqZGbsfYRi
-	7R3DhONQNsinFVD2RCFxeNCOVvR6b3ouz/4ZfW5we3WsRn7jZ8ExjwaxoIB8oNjSj5YQcy
-	62c0F/JUisQUWywfNoegzWVfhvL6D6Hz+KdYTdCIWxMH6JqkG2nMlMklaJLTicJMOBXn4W
-	PN/bGxGbHkVoGfl7Mm+PX3uX26GiCHhWiK5WIoF+O0tFN8m1XZzMNCj3T6d0sw==
-From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Tue, 06 May 2025 11:38:45 +0200
-Subject: [PATCH net-next v10 13/13] dt-bindings: net: pse-pd: ti,tps23881:
- Add interrupt description
+	s=arc-20240116; t=1746526239; c=relaxed/simple;
+	bh=/HBE0X80tekKwVpe/I6rSG6afei1xLRG1IopLTv4b90=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
+	 References:In-Reply-To; b=ZSXmBJiRqLw6Hc2HMNX58oNn5pLFQj17Ets/ndKwKRuYyGyVZfuKx0EX5uQdfJWBsDozqdt+i+Zx1oOr4AY6I1GV91dOZHJx3GhuaBLQdjprTftuyX4HFjjt9fTPi/7s098oZKj8chQhC6eKN9y2ectZg1xLTBKYXcQj6hO/Fjg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com; spf=pass smtp.mailfrom=ventanamicro.com; dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b=k3yezd4p; arc=none smtp.client-ip=209.85.221.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ventanamicro.com
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-3a0b28d9251so19833f8f.0
+        for <linux-doc@vger.kernel.org>; Tue, 06 May 2025 03:10:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ventanamicro.com; s=google; t=1746526235; x=1747131035; darn=vger.kernel.org;
+        h=in-reply-to:references:from:to:cc:subject:message-id:date
+         :content-transfer-encoding:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MDlCPukG676ZkXDqA7+irYPpUi8ypltoa/WLU7iYTZw=;
+        b=k3yezd4pHOP993DCvnJYvnnrLQ1mQCRimlX6KF3OwLBGIjRxOc3HI5AcNZB8pZhuWj
+         pzuW1eppoxocBCntG/gAypFjNT0c2K33klUSjcfO5TClCnm76dz3JLIX/z5ESFhaprPT
+         nRwfLtrtLlpz8HVBl5tXVu+qSANl+Vudwd5La9yJ9av/tFmsKPxcvsVmai85Yg9S0G2j
+         gBYB/Q3FrSGMB3QfoQs0HpjGJymi73TUlgOsy1VraKjWGcyD6teiRQxVunD8dpEx3FX4
+         iAKFmr0MeOH735cMF502s277NyhW/SvQIBLSEPUkrR6JYMN+955NaiHnc5d/DcCc8Z9d
+         C91w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1746526235; x=1747131035;
+        h=in-reply-to:references:from:to:cc:subject:message-id:date
+         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=MDlCPukG676ZkXDqA7+irYPpUi8ypltoa/WLU7iYTZw=;
+        b=KXPRTwGtgGdilCc0X9uSocLaE1gVoGqrqgou4/tA0otveP7JMzazSsNtVQPe2197G6
+         tsQfL0RnAi6HgODNqT31XQlPUGDoL0rq819j4goRN5Bds1BllTAw0gHMafULLHXwRBmI
+         pntEWnjs47Hn1c9UQ2nka8DW5cTENLbIDOlE+/rIdT8ZBYT8jgWL44Go52aIBayxAKUo
+         XpaUjTAM60Zii7N0iOeCLU2RFsVclstoqkrKJcCfPihq5eG0TH2ukp4TRzxpKm0ZgVKH
+         tuGlauWR/VB2qSu3HHilO+VUHgvJ0oEWycLqAGtm9WHPL/M/mY6Psh5uqvJN/EVYHIgE
+         VJxA==
+X-Forwarded-Encrypted: i=1; AJvYcCVS0Wlhy3W2Ijx/5EZNEDl83i2fhtsZAzqOvo2L1jM8Fmwe520Ln1Knuo+XwbYzvCwfOHQHt/Q4dxs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxtVCsOSpFkLlQkeBZDic7LBZ+P9fVRpod8EzB1wpBV1xLeetYk
+	Ko1ngRNYfv7/qWAy4vnEEF+KFZDqoGvrCFkBbtYk3DDPDqaP5dKZUeOIlYf96Bk=
+X-Gm-Gg: ASbGncvV0dyLS4kcaH16XCdc6izcPqj3xMfyxSltmY7lx+yLQAD1KEi6tHlaPUZJfmw
+	LEi0YlrJ9bSgs5K8XT3nxQ1JaJTKOcaBQRipm63VmaOHy3fBQWvSYF3cpuXGe/R/LbaYBINQ3V6
+	gQpEONaluKRtgS4QNfCvq9LF4xvu5r0ABYqZpJAwsduXKStmMWnXi10sij6hh9iedE4kR0X7ai8
+	pF/TAf0BchQsf4epqPoirGjyRRdqZpv3K+tHe5IguIsEBXN12II+8W0yptcNZ9Js+h/Rp2B8PTd
+	q0vkBaeoBPA37W2TuUc2jv9dP1AbUlC01+YW+MpHXlh0QQnA
+X-Google-Smtp-Source: AGHT+IEUjKjGwlmMCjrKZvF7YuhMUsrs5D+dPoN1CPSaPd4oD3QBATAQzTQqUOqU1bgynoQlRYwsyA==
+X-Received: by 2002:a05:6000:144a:b0:3a0:9f28:2e53 with SMTP id ffacd0b85a97d-3a09f282ec4mr3244079f8f.0.1746526235363;
+        Tue, 06 May 2025 03:10:35 -0700 (PDT)
+Received: from localhost ([2a02:8308:a00c:e200:d5f0:7802:c94b:10f6])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-441b89cc441sm166448565e9.3.2025.05.06.03.10.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 May 2025 03:10:35 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250506-feature_poe_port_prio-v10-13-55679a4895f9@bootlin.com>
-References: <20250506-feature_poe_port_prio-v10-0-55679a4895f9@bootlin.com>
-In-Reply-To: <20250506-feature_poe_port_prio-v10-0-55679a4895f9@bootlin.com>
-To: Andrew Lunn <andrew@lunn.ch>, Oleksij Rempel <o.rempel@pengutronix.de>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Jonathan Corbet <corbet@lwn.net>, Donald Hunter <donald.hunter@gmail.com>, 
- Rob Herring <robh@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
- Simon Horman <horms@kernel.org>, Heiner Kallweit <hkallweit1@gmail.com>, 
- Russell King <linux@armlinux.org.uk>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org, 
- linux-doc@vger.kernel.org, Kyle Swenson <kyle.swenson@est.tech>, 
- Dent Project <dentproject@linuxfoundation.org>, kernel@pengutronix.de, 
- Maxime Chevallier <maxime.chevallier@bootlin.com>, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- "Kory Maincent (Dent Project)" <kory.maincent@bootlin.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-X-Mailer: b4 0.15-dev-8cb71
-X-GND-State: clean
-X-GND-Score: -100
-X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvkeefieegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhfffugggtgffkfhgjvfevofesthejredtredtjeenucfhrhhomhepmfhorhihucforghinhgtvghnthcuoehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeevgfdvgfektefgfefggeekudfggffhtdfffedtueetheejtddvledvvdelhedtveenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedutdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopegluddvjedrtddruddrudgnpdhmrghilhhfrhhomhepkhhorhihrdhmrghinhgtvghnthessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepvdekpdhrtghpthhtoheplhhgihhrugifohhougesghhmrghilhdrtghomhdprhgtphhtthhopehrohgshheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheptghonhhorhdoughtsehkvghrnhgvlhdrohhrghdprhgtphhtthhopeguvghnthhprhhojhgvtghtsehlihhnuhigfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohepughonhgrlhgurdhhuhhnthgvrhesghhmrghilhdrtghom
- hdprhgtphhtthhopegurghvvghmsegurghvvghmlhhofhhtrdhnvghtpdhrtghpthhtohephhhorhhmsheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqkhgvrhhnvghlsehvghgvrhdrkhgvrhhnvghlrdhorhhg
-X-GND-Sasl: kory.maincent@bootlin.com
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 06 May 2025 12:10:34 +0200
+Message-Id: <D9OZVNOGLU4T.2XOUPX27HN0W8@ventanamicro.com>
+Subject: Re: [PATCH v15 05/27] riscv: usercfi state for task and
+ save/restore of CSR_SSP on trap entry/exit
+Cc: <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+ <linux-mm@kvack.org>, <linux-riscv@lists.infradead.org>,
+ <devicetree@vger.kernel.org>, <linux-arch@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
+ <alistair.francis@wdc.com>, <richard.henderson@linaro.org>,
+ <jim.shu@sifive.com>, <andybnac@gmail.com>, <kito.cheng@sifive.com>,
+ <charlie@rivosinc.com>, <atishp@rivosinc.com>, <evan@rivosinc.com>,
+ <cleger@rivosinc.com>, <alexghiti@rivosinc.com>, <samitolvanen@google.com>,
+ <broonie@kernel.org>, <rick.p.edgecombe@intel.com>,
+ <rust-for-linux@vger.kernel.org>, "Zong Li" <zong.li@sifive.com>,
+ "linux-riscv" <linux-riscv-bounces@lists.infradead.org>
+To: "Deepak Gupta" <debug@rivosinc.com>, "Thomas Gleixner"
+ <tglx@linutronix.de>, "Ingo Molnar" <mingo@redhat.com>, "Borislav Petkov"
+ <bp@alien8.de>, "Dave Hansen" <dave.hansen@linux.intel.com>,
+ <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, "Andrew Morton"
+ <akpm@linux-foundation.org>, "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+ "Vlastimil Babka" <vbabka@suse.cz>, "Lorenzo Stoakes"
+ <lorenzo.stoakes@oracle.com>, "Paul Walmsley" <paul.walmsley@sifive.com>,
+ "Palmer Dabbelt" <palmer@dabbelt.com>, "Albert Ou" <aou@eecs.berkeley.edu>,
+ "Conor Dooley" <conor@kernel.org>, "Rob Herring" <robh@kernel.org>,
+ "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Arnd Bergmann"
+ <arnd@arndb.de>, "Christian Brauner" <brauner@kernel.org>, "Peter Zijlstra"
+ <peterz@infradead.org>, "Oleg Nesterov" <oleg@redhat.com>, "Eric Biederman"
+ <ebiederm@xmission.com>, "Kees Cook" <kees@kernel.org>, "Jonathan Corbet"
+ <corbet@lwn.net>, "Shuah Khan" <shuah@kernel.org>, "Jann Horn"
+ <jannh@google.com>, "Conor Dooley" <conor+dt@kernel.org>, "Miguel Ojeda"
+ <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun Feng"
+ <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
+ =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
+ <benno.lossin@proton.me>, "Andreas Hindborg" <a.hindborg@kernel.org>,
+ "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>
+From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
+References: <20250502-v5_user_cfi_series-v15-0-914966471885@rivosinc.com>
+ <20250502-v5_user_cfi_series-v15-5-914966471885@rivosinc.com>
+In-Reply-To: <20250502-v5_user_cfi_series-v15-5-914966471885@rivosinc.com>
 
-From: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
+[Ah, I missed v13 and v14, feel free to Cc me on next versions.]
 
-Add an interrupt property to the device tree bindings for the TI TPS23881
-PSE controller. The interrupt is primarily used to detect classification
-and disconnection events, which are essential for managing the PSE
-controller in compliance with the PoE standard.
+2025-05-02T16:30:36-07:00, Deepak Gupta <debug@rivosinc.com>:
+> diff --git a/arch/riscv/kernel/entry.S b/arch/riscv/kernel/entry.S
+> @@ -91,6 +91,32 @@
+> +.macro save_userssp tmp, status
+> +	ALTERNATIVE("nops(4)",
+> +		__stringify(				\
+> +		andi \tmp, \status, SR_SPP;		\
+> +		bnez \tmp, skip_ssp_save;		\
+> +		csrrw \tmp, CSR_SSP, x0;		\
+> +		REG_S \tmp, TASK_TI_USER_SSP(tp);	\
+> +		skip_ssp_save:),
+> +		0,
+> +		RISCV_ISA_EXT_ZICFISS,
+> +		CONFIG_RISCV_USER_CFI)
+> +.endm
+> +
+> +.macro restore_userssp tmp
+> +	ALTERNATIVE("nops(2)",
+> +		__stringify(				\
+> +		REG_L \tmp, TASK_TI_USER_SSP(tp);	\
+> +		csrw CSR_SSP, \tmp),
+> +		0,
+> +		RISCV_ISA_EXT_ZICFISS,
+> +		CONFIG_RISCV_USER_CFI)
+> +.endm
 
-Interrupt support is essential for the proper functioning of the TPS23881
-controller. Without it, after a power-on (PWON), the controller will
-no longer perform detection and classification. This could lead to
-potential hazards, such as connecting a non-PoE device after a PoE device,
-which might result in magic smoke.
+Do we need to emit the nops when CONFIG_RISCV_USER_CFI isn't selected?
 
-Signed-off-by: Kory Maincent (Dent Project) <kory.maincent@bootlin.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
----
+(Why not put #ifdef CONFIG_RISCV_USER_CFI around the ALTERNATIVES?)
 
-Change in v5:
-- Use standard interrupt flag in the example.
-
-Change in v3:
-- New patch
----
- Documentation/devicetree/bindings/net/pse-pd/ti,tps23881.yaml | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/Documentation/devicetree/bindings/net/pse-pd/ti,tps23881.yaml b/Documentation/devicetree/bindings/net/pse-pd/ti,tps23881.yaml
-index d08abcb01211..3a5f960d8489 100644
---- a/Documentation/devicetree/bindings/net/pse-pd/ti,tps23881.yaml
-+++ b/Documentation/devicetree/bindings/net/pse-pd/ti,tps23881.yaml
-@@ -20,6 +20,9 @@ properties:
-   reg:
-     maxItems: 1
- 
-+  interrupts:
-+    maxItems: 1
-+
-   '#pse-cells':
-     const: 1
- 
-@@ -62,9 +65,12 @@ unevaluatedProperties: false
- required:
-   - compatible
-   - reg
-+  - interrupts
- 
- examples:
-   - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-     i2c {
-       #address-cells = <1>;
-       #size-cells = <0>;
-@@ -72,6 +78,8 @@ examples:
-       ethernet-pse@20 {
-         compatible = "ti,tps23881";
-         reg = <0x20>;
-+        interrupts = <8 IRQ_TYPE_LEVEL_HIGH>;
-+        interrupt-parent = <&gpiog>;
- 
-         channels {
-           #address-cells = <1>;
-
--- 
-2.34.1
-
+Thanks.
 
