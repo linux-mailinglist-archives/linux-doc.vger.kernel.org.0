@@ -1,137 +1,155 @@
-Return-Path: <linux-doc+bounces-45476-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45480-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DEAAAAD5BF
-	for <lists+linux-doc@lfdr.de>; Wed,  7 May 2025 08:14:04 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 614E5AAD62D
+	for <lists+linux-doc@lfdr.de>; Wed,  7 May 2025 08:35:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C035E1C205E9
-	for <lists+linux-doc@lfdr.de>; Wed,  7 May 2025 06:14:13 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C64394C545D
+	for <lists+linux-doc@lfdr.de>; Wed,  7 May 2025 06:35:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECD5F1FDA8E;
-	Wed,  7 May 2025 06:13:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 700A220E003;
+	Wed,  7 May 2025 06:35:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="K29WEJ88"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="IeBSdTim"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FDC1182D2;
-	Wed,  7 May 2025 06:13:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0BD9211478
+	for <linux-doc@vger.kernel.org>; Wed,  7 May 2025 06:35:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746598436; cv=none; b=e9xzx0rE85otothRx3xoPLN9mgNBMDc1d4khwI6C1B6Dj+heC0REMkfB1jCfuWUPLsBkt/S7ZPn/X0JQAhaaHD5+qrdX+8rLFFKBetgiimOgSobGeb2hZIbZTRNJK+PgHb11gLc9e2P6QYyRG3/lZoBgo5z3NuyTqo+HAXBP9GI=
+	t=1746599717; cv=none; b=F+ejvrHoogp4Uy39665lmOVcB68q8SIA5YZABe03t3oazBo9UBppRV9vx+F5Q33pVNIFMyv8QjygLNVJBpe1VoYrI4DVmUCo8u5VzYoS/mOsmyFoOC9qBNVeqqZq14eSff8KxHRaM0yudgJVWYtGpdva8Fx4bTXIirmmiA0zFhE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746598436; c=relaxed/simple;
-	bh=xfAfj1klcleSKHXLxNAOO+8ONspPBsJHamkZ5reirUg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=M2GWjla+0HZqm4BL0HbRJkdL0grFsP1bT80A5Eb9Q8LbbcJEl+ULKLovmHNAO1WImyk4H6y8GrsbdI+olix+T9Nh67PT1hm/cnCE5yco0C+eih9D+IZ2IXGXyrw6m5ZUc787cTlhSXYZTEYFNzx1hBm+32VQnrk23kjW5VJq+1o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=K29WEJ88; arc=none smtp.client-ip=209.85.214.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-22c3407a87aso96699195ad.3;
-        Tue, 06 May 2025 23:13:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1746598435; x=1747203235; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Rozxfw15XCGd2H6xaiwn51c9kWvMu98WF+4nRevjr28=;
-        b=K29WEJ88fMTBk20UdItvrGMigXbDafwjX8jGVTU9sQQiAck0FcE4O7Muofn84BS71i
-         3ce6JvkBqIzSdYU8xKiCY3JMYteSm4aHWKZTiNP6v1V2V/l0CMyFgrce4i1jQXPsM7lr
-         Q8OxDD+hTHzmTV4hXtlI+i6JTdw+b2tn1yCyA3O79ut5A2ZFvSjTd00oGj9BQoGToy/h
-         8rc3jcfVVhR33og6Zowaw9QEs/idnt/2p6HylLt2Z0mU0AdXePXYFN8rcGkbWDS57O+u
-         hhHbJ3/MRbWCS5UNtMMoBWbpu1H1hf7CSfRSOAf5g59hh86BLNsV3X22XJwj4kEfQ0mN
-         211A==
+	s=arc-20240116; t=1746599717; c=relaxed/simple;
+	bh=yUZQ2hjPMFywZsjZQl47eCrBPONdW38f3aMv0Ef9BOc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=KrTckES2hL7JRsOIsrgHzyzdCeOmZ7E7BbFxhDbyLmveUAtVaIibrkQ8TB7Kijfeu6Xi8xUSs1blvz6ARyFwhVxmyUyDQ/0j9rnz35CQrX0Xuj10T3R7/mIXqggjBqjnXg2QJ5lDJf6G3Xzkuwa1dEN+caAGgd0C3e/A9yImysY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=IeBSdTim; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1746599713;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=olGmiL/bpb3HhYKj9w+O3Ue1rN7I+9eYOjkkyJupzJ4=;
+	b=IeBSdTimet5kkPyjZrlm96DPMrZeTneybW4zb8UwoX8H00HTgcL0oZ5U3xcxhiJegRCSQA
+	59DJnXEl43Uv8zoILJFEP5Q7qpnrFygfRQ0pPp2rqxZAjwWAat4wyuiFH9JJTxd9x+DXwK
+	vZCe2x4GmeJcCaRRi2Iq8jGNM3wh/c8=
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-202-M-CABZhrOBeO_UZB8Rctlg-1; Wed, 07 May 2025 02:35:11 -0400
+X-MC-Unique: M-CABZhrOBeO_UZB8Rctlg-1
+X-Mimecast-MFC-AGG-ID: M-CABZhrOBeO_UZB8Rctlg_1746599711
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-309e8dc1e21so658836a91.0
+        for <linux-doc@vger.kernel.org>; Tue, 06 May 2025 23:35:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1746598435; x=1747203235;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1746599711; x=1747204511;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Rozxfw15XCGd2H6xaiwn51c9kWvMu98WF+4nRevjr28=;
-        b=BV8c5M1Mzmi3R+ZVbV882mVu5pwQHIZnqjqaay8FiqaJWg277tsFMKUOs5Bescip9q
-         LElHNAQpB4o5E1imoUeYlnEmO1oZQmWsi3DmuS7C/4zMgyzuMJS4PhWFB/8fuSUzKYF0
-         zBFXPXrBaMT2ofbthzcTzNrpS+91QN4iCuoMa9M1VfUbRJ8Hcv3LF5Ch5GT0t7XH0wS8
-         cxvHW9Lw2Bu3ILrEmvI/yBsPOOFqIRcYICmkpx8uE9Krr/h6fpN8HeKzpp/2/XYPTy4z
-         0rnHvr279NDFQt2zE5ALV8nlBKOn448EgiKXzE6zhtyUN/NlEaV7Z3FivtVzdvLbe0hU
-         4qiA==
-X-Forwarded-Encrypted: i=1; AJvYcCW4B4+De7qbQiPBm3o0xbiSDoIO6py1qYULN1AFc4MOEProXkr1UOXTBnbJ9WvnznRmsABpD6dZFSs=@vger.kernel.org, AJvYcCX6U1urxLvC1DDDdaFHShnyNp4vtn3ESqaww8A/uBh7rHiEB0mTDcRdk1RHFVKIAk55RQGhms/I@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz3SIjvsBqLx5dk3XgDRoaqyFXurfl0ho9paq5Qnj6TApczPuEq
-	1TXX7tCO+EqB8IzeKceQ3uH7bRXuCCgNZNW3WvodVAzWR+8vqFBJ
-X-Gm-Gg: ASbGncvTG9bgqEel+GTdmk96Xiyt7qn7ARreNnUQGGtce60ZXZADGZzAJeppxB9bQ4m
-	Gvo5clfFeNavsIvfsEdl6xvwN7FdtuxMW2YXDhdjVrHOFUdC8oWMeoOdYQTXh08F5rknB78816H
-	tfVKHUZwZiud4hKnWfqmDBqrPUE+Mw9dxo8y+dt8ecDWY/ghDs2cakXA5jCyrujVk/gSyWsa3mQ
-	7Jr9DWr5ekwsaZvCNmo40bTijSbuYnd4AODwANcz/2So9mabZyi9rDcprwzeat2lTvAMfHReNtt
-	tSvJEZLE1JZ5AVUqMjzWR6USWRHG6ht7i2rCpmin
-X-Google-Smtp-Source: AGHT+IHn1JoIwnOddTfG6PRyqZCpjAnehF1wYY+TV7xyiH9zs9UIjbHMUdyCMMVyIeRgK6aA0NFoqA==
-X-Received: by 2002:a17:903:478d:b0:223:f7ec:f834 with SMTP id d9443c01a7336-22e5ecc2c09mr32036665ad.31.1746598434443;
-        Tue, 06 May 2025 23:13:54 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-22e1522ef9bsm86224765ad.217.2025.05.06.23.13.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 May 2025 23:13:53 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id 289E642A3183; Wed, 07 May 2025 13:13:52 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux PowerPC <linuxppc-dev@lists.ozlabs.org>,
-	Linux Networking <netdev@vger.kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Haren Myneni <haren@linux.ibm.com>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Andrew Donnellan <ajd@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Christophe Leroy <christophe.leroy@csgroup.eu>,
-	Naveen N Rao <naveen@kernel.org>
-Subject: [PATCH 3/3] Documentation: ioctl-number: Correct full path to papr-physical-attestation.h
-Date: Wed,  7 May 2025 13:13:03 +0700
-Message-ID: <20250507061302.25219-5-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250507061302.25219-2-bagasdotme@gmail.com>
-References: <20250507061302.25219-2-bagasdotme@gmail.com>
+        bh=olGmiL/bpb3HhYKj9w+O3Ue1rN7I+9eYOjkkyJupzJ4=;
+        b=Zc8ivJZ3SO4OP/8AKqQtvPcF40kKhCdEI6MundQzvJE1PsuGllxBUmV7RG0fU+p9VV
+         KH3p41Ksq4sqktQb0EIqLTySqtcbYpTSZjBXSIBPqzEjCpi637WWZPOW/iTVZBAz1uCm
+         0ap+eqovhoZ+Rr3yJZxYFwyDiuu9LaSZxFVSBxeYcLvWgam0W+nVRgT25Fea8hutkYN0
+         9axWWu2mhuRk0BiEWV8YfKoW/YZlRaxn3n0ziWIHNN0sQbJhi4Az1IE7TU7nsceZyHYi
+         iUV039a4CtL7zY+WA9jbMmZ3IUCqql3pNVyjUWiQDD+RIwSwyC5PPFVTuHHPdHom1Got
+         i5dg==
+X-Forwarded-Encrypted: i=1; AJvYcCUcYFX4M4bOdhZrCzj22Hd1rykAqhDMD3/oL65rDg/aIPER0emTX0CkTMGqJyIWtlYreYXn7PKn7U0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw+/GDqi9gD+o7+4qRpq1+Kl/rW/LTQTy1QNJGxzQefGVym1o0S
+	69RIxb3NScgNeoLRq/SQuV1fcQdGezSPH7NCUndem9TFusd2RTqckzh4jVUkhTo2uaNSwzfgMIf
+	dCHtNDXjPZ36L0e1OL+sz1yrh4joqz754C4Jk7cduJKV/BatG22/TbYde2dZY9XCGBgRg1JFzSe
+	I96VP+UWAJrOf3DWLb7yRL7oV7l/WBUGux
+X-Gm-Gg: ASbGnct+xNU0RfxjQC54D7nofzFiVL5Z6rvYbRiQr6vzJJDoh3APMiDQnPhZoNpe31c
+	qNM6zE5MXE9Wq757eQf4XnjTaIvW3OTBkEX1Ky8p8a5cDrUOTqmasQIAJwNoJcAkeeq5r/M39OT
+	LbadfOdYKMr3B/FAXrnd09z5jLoQ==
+X-Received: by 2002:a17:90b:1d50:b0:30a:9cd5:5932 with SMTP id 98e67ed59e1d1-30aaed58c2fmr2983047a91.13.1746599710703;
+        Tue, 06 May 2025 23:35:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE2st4MZM6rukOnt1RBPeqd6Hl7BB8Yf+anKJAPFoSTcLQDQqvLtdrl6A0wgkeKKL9+74j+ob0jxS9j0urxu0A=
+X-Received: by 2002:a17:90b:1d50:b0:30a:9cd5:5932 with SMTP id
+ 98e67ed59e1d1-30aaed58c2fmr2983026a91.13.1746599710360; Tue, 06 May 2025
+ 23:35:10 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1833; i=bagasdotme@gmail.com; h=from:subject; bh=xfAfj1klcleSKHXLxNAOO+8ONspPBsJHamkZ5reirUg=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBlSP9hFHpo7Bmol7VRe578uf3OIuf12U978h+pvVje05 O9TWni8o5SFQYyLQVZMkWVSIl/T6V1GIhfa1zrCzGFlAhnCwMUpABMxvcnI8Jb1kPtfpaOCbBst Vhsy8YS0H08O6Y7c6iDOHM+tm9zBzchwboEoa+Qny9+5K9u92ANb0vkrs3s21r3Sa9jFcy6hdgs bAA==
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+References: <20250507055145.23345-2-bagasdotme@gmail.com>
+In-Reply-To: <20250507055145.23345-2-bagasdotme@gmail.com>
+From: Lukas Bulwahn <lbulwahn@redhat.com>
+Date: Wed, 7 May 2025 08:34:59 +0200
+X-Gm-Features: ATxdqUG7iKNbcYXJ9aSWebiBhm30eHOJoPvUZiWIkVp0rxHX5NRxKRt42VftXuU
+Message-ID: <CAOc5a3OKA-zQQU1pF3T4HT7awEg3JMgD-BYOXbviqMDyZr-__Q@mail.gmail.com>
+Subject: Re: [PATCH] Documentation: ioctl-number: Update table intro
+To: Bagas Sanjaya <bagasdotme@gmail.com>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, 
+	Linux Documentation <linux-doc@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Frederic Barrat <fbarrat@linux.ibm.com>, 
+	Michael Ellerman <mpe@ellerman.id.au>, Andrew Donnellan <ajd@linux.ibm.com>, 
+	"Steven Rostedt (Google)" <rostedt@goodmis.org>, Eric Biggers <ebiggers@google.com>, 
+	Nuno Das Neves <nunodasneves@linux.microsoft.com>, 
+	Beau Belgrave <beaub@linux.microsoft.com>, Jan Kara <jack@suse.cz>, 
+	Lukas Bulwahn <lukas.bulwahn@redhat.com>, 
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Commit 03c9d1a5a30d93 ("Documentation: Fix description format for
-powerpc RTAS ioctls") fixes Sphinx warning by chopping arch/ path
-component of papr-physical-attestation.h to fit existing "Include File"
-column. Now that the column has been widened just enough for that
-header file, add back its arch/ path component.
+On Wed, May 7, 2025 at 7:52=E2=80=AFAM Bagas Sanjaya <bagasdotme@gmail.com>=
+ wrote:
+>
+> Introduction paragraph to the ioctl numbers table states that only
+> ioctls in ancient Linux kernel version (v2.6.31) for x86 arch are
+> listed. This is inaccurate as the table also lists ioctls from non-x86
+> archs and the kernel is continously developed (currently in v6.x).
+>
+> Update the paragraph accordingly.
+>
+> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> ---
+>  Documentation/userspace-api/ioctl/ioctl-number.rst | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documen=
+tation/userspace-api/ioctl/ioctl-number.rst
+> index 83e5d2abdad694..51269ff250882f 100644
+> --- a/Documentation/userspace-api/ioctl/ioctl-number.rst
+> +++ b/Documentation/userspace-api/ioctl/ioctl-number.rst
+> @@ -62,9 +62,8 @@ Following this convention is good because:
+>  (5) When following the convention, the driver code can use generic
+>      code to copy the parameters between user and kernel space.
+>
+> -This table lists ioctls visible from user land for Linux/x86.  It contai=
+ns
+> -most drivers up to 2.6.31, but I know I am missing some.  There has been
+> -no attempt to list non-X86 architectures or ioctls from drivers/staging/=
+.
+> +This table lists ioctls visible from userland for Linux version 6.x+,
+> +excluding ones from drivers/staging/.
 
-Fixes: 03c9d1a5a30d ("Documentation: Fix description format for powerpc RTAS ioctls")
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/userspace-api/ioctl/ioctl-number.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It is probably best to avoid mentioning any version information at all.
 
-diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
-index 3864c8416627e0..855139f3bc0e48 100644
---- a/Documentation/userspace-api/ioctl/ioctl-number.rst
-+++ b/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -370,7 +370,7 @@ Code  Seq#    Include File                                             Comments
-                                                                        <mailto:linuxppc-dev@lists.ozlabs.org>
- 0xB2  06-07  arch/powerpc/include/uapi/asm/papr-platform-dump.h        powerpc/pseries Platform Dump API
-                                                                        <mailto:linuxppc-dev@lists.ozlabs.org>
--0xB2  08     powerpc/include/uapi/asm/papr-physical-attestation.h      powerpc/pseries Physical Attestation API
-+0xB2  08     arch/powerpc/include/uapi/asm/papr-physical-attestation.h powerpc/pseries Physical Attestation API
-                                                                        <mailto:linuxppc-dev@lists.ozlabs.org>
- 0xB3  00     linux/mmc/ioctl.h
- 0xB4  00-0F  linux/gpio.h                                              <mailto:linux-gpio@vger.kernel.org>
--- 
-An old man doll... just what I always wanted! - Clara
+Lukas
+
+>
+>  =3D=3D=3D=3D  =3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+>  Code  Seq#    Include File                                           Com=
+ments
+>
+> base-commit: b91a0cbb6f27ee499e376091e8c8c0ddfd69103c
+> --
+> An old man doll... just what I always wanted! - Clara
+>
 
 
