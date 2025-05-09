@@ -1,452 +1,243 @@
-Return-Path: <linux-doc+bounces-45770-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45772-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7847AB15A9
-	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 15:48:05 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id B4DC7AB15D4
+	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 15:52:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B93EC174104
-	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 13:47:49 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 82E433B51D7
+	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 13:50:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 66DBC295D95;
-	Fri,  9 May 2025 13:44:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B592F292096;
+	Fri,  9 May 2025 13:49:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="VkZ68fvZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pQ+uoXUp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.11])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BF082957CD;
-	Fri,  9 May 2025 13:44:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 899DD2918CF;
+	Fri,  9 May 2025 13:49:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746798245; cv=none; b=qkrpTJbMVFNl8hirzMvdBq2aZxk2TXwK3SYHLnfx5f/0V6QjSYSmvzRUrJCHRdofbDaUprNT7LAXO/2eyrGjmepVHLvEMlQJEGtT4gYPd4jqrA9dEqjVUdSQBr7s37S4EzrgtCdO+zfhU9//A9Ak8yA2FeQqJgg5c6f709YmHYA=
+	t=1746798556; cv=none; b=qT7P+jReVIUO1vQXd1nzNmEAXfLhBc5mdTEJWa8fTA2EfhG7zx0Pgt8BgDUgMERqUlc1c/6eoukwBLQdcauEsTdAkCcrd2IIdhLgqxxGk4hlOeehhYdlLQ1gB4dxWJrvqqKURxxpxVaVa8cAr8czEuZowka0g45pVv5Q5ODNnCs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746798245; c=relaxed/simple;
-	bh=57pFULhsbulHXnWbMB8Z+24WO/qyN9Gxay/WlWTNaq4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=B8KkGFZ17UyYsb17CPjqJ2SIKItd/MgHtoPiY2/ZiPCmjke8bDWmzjLdbWO8W4NNTs6VxlD8KsfyKD+zKk2TRivaYWHZWMPvGECedY0isNmrL6tnO/j4Yw32ux+YO8cki+ejV4/GFyXXkWwpjTovE0bTd/NRozveovNhkJuBRaU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=VkZ68fvZ; arc=none smtp.client-ip=192.198.163.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1746798243; x=1778334243;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=57pFULhsbulHXnWbMB8Z+24WO/qyN9Gxay/WlWTNaq4=;
-  b=VkZ68fvZTqDK4ByiYnLOEW19iVvS7S+eSzn7LcqEKUmz6L8A67YBK2tM
-   nqeMSlz/tbrJdzlZRIIRHSBq3I5hsFWPBn5IKNNGIrj1r3xGduMpoXfeo
-   kTD8+Gzs5L80QxK0lsWTN0yyrjBIemmTmPV2hWLpWGU11PSUbYBTNxRU6
-   ZZxT3bS2I6Y7A/hJJ4aY1GSpTu2gtM9NYU3x1wpDXo1SwHsBLd6zIxYZJ
-   0dPP7ym9E71xE5QDPFswZOE/ewExfqqEbnVPrGE+Tz0d5k4V2r1XQtrzI
-   EbHWEeeNconZoWQwZWWiSX5+qH4z9QqPThJb+pzxz6MopwfLpx5x9Lmol
-   A==;
-X-CSE-ConnectionGUID: XuTgGOb5RsCeQj1/SOdGNw==
-X-CSE-MsgGUID: 7NDWxnhgSuSanmOr7uqaIA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="59257415"
-X-IronPort-AV: E=Sophos;i="6.15,275,1739865600"; 
-   d="scan'208";a="59257415"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 May 2025 06:44:02 -0700
-X-CSE-ConnectionGUID: 490qHHj1T+OFbppMXOmOUg==
-X-CSE-MsgGUID: E4Vl5xqmQPmUL3AE8HhWjQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,275,1739865600"; 
-   d="scan'208";a="137133597"
-Received: from irvmail002.ir.intel.com ([10.43.11.120])
-  by orviesa007.jf.intel.com with ESMTP; 09 May 2025 06:43:55 -0700
-Received: from mglak.igk.intel.com (mglak.igk.intel.com [10.237.112.146])
-	by irvmail002.ir.intel.com (Postfix) with ESMTP id 74B2B3430D;
-	Fri,  9 May 2025 14:43:52 +0100 (IST)
-From: Larysa Zaremba <larysa.zaremba@intel.com>
-To: intel-wired-lan@lists.osuosl.org,
-	Tony Nguyen <anthony.l.nguyen@intel.com>
-Cc: "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
-	Jiri Pirko <jiri@resnulli.us>,
-	Tatyana Nikolova <tatyana.e.nikolova@intel.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Alexander Lobakin <aleksander.lobakin@intel.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
-	Lee Trager <lee@trager.us>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Larysa Zaremba <larysa.zaremba@intel.com>,
-	Sridhar Samudrala <sridhar.samudrala@intel.com>,
-	Jacob Keller <jacob.e.keller@intel.com>,
-	Michal Swiatkowski <michal.swiatkowski@linux.intel.com>,
-	Mateusz Polchlopek <mateusz.polchlopek@intel.com>,
-	Ahmed Zaki <ahmed.zaki@intel.com>,
-	netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	"Karlsson, Magnus" <magnus.karlsson@intel.com>,
-	Emil Tantilov <emil.s.tantilov@intel.com>,
-	Madhu Chittim <madhu.chittim@intel.com>,
-	Josh Hay <joshua.a.hay@intel.com>,
-	Milena Olech <milena.olech@intel.com>,
-	pavan.kumar.linga@intel.com,
-	"Singhai, Anjali" <anjali.singhai@intel.com>
-Subject: [PATCH iwl-next v3 15/15] ixd: add devlink support
-Date: Fri,  9 May 2025 15:43:12 +0200
-Message-ID: <20250509134319.66631-16-larysa.zaremba@intel.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20250509134319.66631-1-larysa.zaremba@intel.com>
-References: <20250509134319.66631-1-larysa.zaremba@intel.com>
+	s=arc-20240116; t=1746798556; c=relaxed/simple;
+	bh=ddxFekODOqJy1oQlp1NZDYc/Pj9lvlATNoTbz761B5o=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=VtCWacSf4WlHBRYgY4YJaeZeC19kEz+VzGjDeQovep4jafz/9aJDJT2yudrFwsfZt8OyqFct1Nx+uM/Y+v+UtUZa8HNRh/vss6EU6MTNJFM3W+p+jh59c8wVxUyHY5Q57FOXjixhpLPrVRVvWFKu4YvtnDfCA4aYxYgGPv+Q1Pc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pQ+uoXUp; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDF75C4CEE4;
+	Fri,  9 May 2025 13:49:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1746798553;
+	bh=ddxFekODOqJy1oQlp1NZDYc/Pj9lvlATNoTbz761B5o=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pQ+uoXUpmF/3twCcIi3Lai3o3xk3GzjXh4Vtzef2xl+XK5lS7fyBbQ0UFZzYOkYpV
+	 dUtfTp8YyM+m1uCBcNG1HQvDk6Nf7/h0n9vLEZ88nS1jLaw3kZC+MJWQAs8/6JfmCW
+	 GLX/BJFBUp0BoBJxFAMpMHQQxyx062Ra3vAXfp7i5GUtnfWbItEAT9nUXEUdmY+WZG
+	 QaS5XlRufjGUUzac2Gdf4KQVW4gTJmD7URMBqCpPwQgEQkWKKaXQtwRRvrcbUiQUCW
+	 JAx1/diS1biH2qZn4t9dRTFqD8Klqp6AjFPQ8OnLTIf9OgIEOCwF0ak/GgLb9J7aoh
+	 g4HQFuPfD/y3w==
+Date: Fri, 9 May 2025 14:49:05 +0100
+From: Will Deacon <will@kernel.org>
+To: Ryan Roberts <ryan.roberts@arm.com>
+Cc: =?utf-8?Q?Miko=C5=82aj?= Lenczewski <miko.lenczewski@arm.com>,
+	suzuki.poulose@arm.com, yang@os.amperecomputing.com, corbet@lwn.net,
+	catalin.marinas@arm.com, jean-philippe@linaro.org,
+	robin.murphy@arm.com, joro@8bytes.org, akpm@linux-foundation.org,
+	paulmck@kernel.org, mark.rutland@arm.com, joey.gouly@arm.com,
+	maz@kernel.org, james.morse@arm.com, broonie@kernel.org,
+	oliver.upton@linux.dev, baohua@kernel.org, david@redhat.com,
+	ioworker0@gmail.com, jgg@ziepe.ca, nicolinc@nvidia.com,
+	mshavit@google.com, jsnitsel@redhat.com, smostafa@google.com,
+	kevin.tian@intel.com, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux.dev
+Subject: Re: [RESEND PATCH v6 1/3] arm64: Add BBM Level 2 cpu feature
+Message-ID: <20250509134904.GA5707@willie-the-truck>
+References: <20250428153514.55772-2-miko.lenczewski@arm.com>
+ <20250428153514.55772-4-miko.lenczewski@arm.com>
+ <20250506142508.GB1197@willie-the-truck>
+ <78fec33d-fe66-4352-be11-900f456c9af3@arm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <78fec33d-fe66-4352-be11-900f456c9af3@arm.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-From: Amritha Nambiar <amritha.nambiar@intel.com>
+On Tue, May 06, 2025 at 03:52:59PM +0100, Ryan Roberts wrote:
+> On 06/05/2025 15:25, Will Deacon wrote:
+> > On Mon, Apr 28, 2025 at 03:35:14PM +0000, Mikołaj Lenczewski wrote:
+> >> The Break-Before-Make cpu feature supports multiple levels (levels 0-2),
+> >> and this commit adds a dedicated BBML2 cpufeature to test against
+> >> support for, as well as a kernel commandline parameter to optionally
+> >> disable BBML2 altogether.
+> >>
+> >> This is a system feature as we might have a big.LITTLE architecture
+> >> where some cores support BBML2 and some don't, but we want all cores to
+> >> be available and BBM to default to level 0 (as opposed to having cores
+> >> without BBML2 not coming online).
+> >>
+> >> To support BBML2 in as wide a range of contexts as we can, we want not
+> >> only the architectural guarantees that BBML2 makes, but additionally
+> >> want BBML2 to not create TLB conflict aborts. Not causing aborts avoids
+> >> us having to prove that no recursive faults can be induced in any path
+> >> that uses BBML2, allowing its use for arbitrary kernel mappings.
+> >> Support detection of such CPUs.
+> >>
+> >> Signed-off-by: Mikołaj Lenczewski <miko.lenczewski@arm.com>
+> >> Reviewed-by: Suzuki K Poulose <suzuki.poulose@arm.com>
+> >> Reviewed-by: Ryan Roberts <ryan.roberts@arm.com>
+> >> ---
+> >>  .../admin-guide/kernel-parameters.txt         |  3 +
+> >>  arch/arm64/Kconfig                            | 19 +++++
+> >>  arch/arm64/include/asm/cpucaps.h              |  2 +
+> >>  arch/arm64/include/asm/cpufeature.h           |  5 ++
+> >>  arch/arm64/kernel/cpufeature.c                | 71 +++++++++++++++++++
+> >>  arch/arm64/kernel/pi/idreg-override.c         |  2 +
+> >>  arch/arm64/tools/cpucaps                      |  1 +
+> >>  7 files changed, 103 insertions(+)
+> >>
+> >> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> >> index d9fd26b95b34..2749c67a4f07 100644
+> >> --- a/Documentation/admin-guide/kernel-parameters.txt
+> >> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> >> @@ -449,6 +449,9 @@
+> >>  	arm64.no32bit_el0 [ARM64] Unconditionally disable the execution of
+> >>  			32 bit applications.
+> >>  
+> >> +	arm64.nobbml2	[ARM64] Unconditionally disable Break-Before-Make Level
+> >> +			2 support
+> > 
+> > Hmm, I'm not sure we really want this. It opens up the door for folks to
+> > pass 'id_aa64mmfr2.bbm=2' without updating the allow-list which feels
+> > like it's going to make crashes harder to reason about.
+> > 
+> > Is there a compelling reason to add this right now?
+> 
+> I don't think there is a *compelling* reason. This came about from Suzuki's
+> feedback at [1]. He was keen to have a mechanism to disable BBML2 in case issues
+> were found.
+> 
+> But simpler is usually better; I'd be ok with removing.
 
-Enable initial support for the devlink interface with the ixd driver. The
-ixd hardware is a single function PCIe device. So, the PCIe adapter gets
-its own devlink instance to manage device-wide resources or configuration.
+We can always add it back if we really need it, but adding an allowlist
+*and* a mechanism to override the allowlist at the same time seems overly
+pessimistic to me :)
 
-$ devlink dev show
-pci/0000:83:00.6
+> >> diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
+> >> index 9c4d6d552b25..7a85a1bdc6e9 100644
+> >> --- a/arch/arm64/kernel/cpufeature.c
+> >> +++ b/arch/arm64/kernel/cpufeature.c
+> >> @@ -2200,6 +2200,70 @@ static bool hvhe_possible(const struct arm64_cpu_capabilities *entry,
+> >>  	return arm64_test_sw_feature_override(ARM64_SW_FEATURE_OVERRIDE_HVHE);
+> >>  }
+> >>  
+> >> +static bool cpu_has_bbml2_noabort(unsigned int cpu_midr)
+> >> +{
+> >> +	/*
+> >> +	 * We want to allow usage of bbml2 in as wide a range of kernel contexts
+> >> +	 * as possible. This list is therefore an allow-list of known-good
+> >> +	 * implementations that both support bbml2 and additionally, fulfill the
+> >> +	 * extra constraint of never generating TLB conflict aborts when using
+> >> +	 * the relaxed bbml2 semantics (such aborts make use of bbml2 in certain
+> >> +	 * kernel contexts difficult to prove safe against recursive aborts).
+> >> +	 *
+> >> +	 * Note that implementations can only be considered "known-good" if their
+> >> +	 * implementors attest to the fact that the implementation never raises
+> >> +	 * TLBI conflict aborts for bbml2 mapping granularity changes.
+> >> +	 */
+> >> +	static const struct midr_range supports_bbml2_noabort_list[] = {
+> >> +		MIDR_REV_RANGE(MIDR_CORTEX_X4, 0, 3, 0xf),
+> >> +		MIDR_REV_RANGE(MIDR_NEOVERSE_V3, 0, 2, 0xf),
+> >> +		{}
+> >> +	};
+> >> +
+> >> +	return is_midr_in_range_list(cpu_midr, supports_bbml2_noabort_list);
+> > 
+> > This doesn't compile against latest mainline as is_midr_in_range_list()
+> > no longer takes the midr.
+> 
+> Will ask Miko to fix.
 
-$ devlink dev info pci/0000:83:00.6
-pci/0000:83:00.6:
-  driver ixd
-  serial_number 00-a0-c9-ff-ff-23-45-67
-  versions:
-      fixed:
-        device.type MEV
-      running:
-        cp 0.0
-        virtchnl 2.0
+Cheers. v6.15-rc1 is probably the right base to use as that's what I've
+based for-next/mm on.
 
-Signed-off-by: Amritha Nambiar <amritha.nambiar@intel.com>
-Reviewed-by: Michal Swiatkowski <michal.swiatkowski@linux.intel.com>
-Reviewed-by: Maciej Fijalkowski <maciej.fijalkowski@intel.com>
-Reviewed-by: Przemek Kitszel <przemyslaw.kitszel@intel.com>
-Signed-off-by: Larysa Zaremba <larysa.zaremba@intel.com>
----
- Documentation/networking/devlink/index.rst   |   1 +
- Documentation/networking/devlink/ixd.rst     |  35 +++++++
- drivers/net/ethernet/intel/ixd/Kconfig       |   1 +
- drivers/net/ethernet/intel/ixd/Makefile      |   1 +
- drivers/net/ethernet/intel/ixd/ixd_devlink.c | 105 +++++++++++++++++++
- drivers/net/ethernet/intel/ixd/ixd_devlink.h |  44 ++++++++
- drivers/net/ethernet/intel/ixd/ixd_main.c    |  13 ++-
- 7 files changed, 197 insertions(+), 3 deletions(-)
- create mode 100644 Documentation/networking/devlink/ixd.rst
- create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.c
- create mode 100644 drivers/net/ethernet/intel/ixd/ixd_devlink.h
+> >> +static bool has_bbml2_noabort(const struct arm64_cpu_capabilities *caps, int scope)
+> >> +{
+> >> +	if (!IS_ENABLED(CONFIG_ARM64_BBML2_NOABORT))
+> >> +		return false;
+> >> +
+> >> +	if (scope & SCOPE_SYSTEM) {
+> >> +		int cpu;
+> >> +
+> >> +		/*
+> >> +		 * We are a boot CPU, and must verify that all enumerated boot
+> >> +		 * CPUs have MIDR values within our allowlist. Otherwise, we do
+> >> +		 * not allow the BBML2 feature to avoid potential faults when
+> >> +		 * the insufficient CPUs access memory regions using BBML2
+> >> +		 * semantics.
+> >> +		 */
+> >> +		for_each_online_cpu(cpu) {
+> >> +			if (!cpu_has_bbml2_noabort(cpu_read_midr(cpu)))
+> >> +				return false;
+> >> +		}
+> > 
+> > This penalises large homogeneous systems and it feels unnecessary given
+> > that we have the ability to check this per-CPU. Can you use
+> > ARM64_CPUCAP_BOOT_CPU_FEATURE instead of ARM64_CPUCAP_SYSTEM_FEATURE
+> > to solve this?
+> 
+> We are trying to solve for the case where the boot CPU has BBML2 but a secondary
+> CPU doesn't. (e.g. hetrogeneous system where boot CPU is big and secondary is
+> little and does not advertise the feature. I can't remember if we proved there
+> are real systems with this config - I have vague recollection that we did but my
+> memory is poor...).
+> 
+> My understanding is that for ARM64_CPUCAP_BOOT_CPU_FEATURE, "If the boot CPU
+> has enabled this feature already, then every late CPU must have it". So that
+> would exclude any secondary CPUs without BBML2 from coming online?
 
-diff --git a/Documentation/networking/devlink/index.rst b/Documentation/networking/devlink/index.rst
-index 8319f43b5933..ee9d89429fa2 100644
---- a/Documentation/networking/devlink/index.rst
-+++ b/Documentation/networking/devlink/index.rst
-@@ -85,6 +85,7 @@ parameters, info versions, and other features it supports.
-    ionic
-    ice
-    ixgbe
-+   ixd
-    mlx4
-    mlx5
-    mlxsw
-diff --git a/Documentation/networking/devlink/ixd.rst b/Documentation/networking/devlink/ixd.rst
-new file mode 100644
-index 000000000000..81b28ffb00f6
---- /dev/null
-+++ b/Documentation/networking/devlink/ixd.rst
-@@ -0,0 +1,35 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===================
-+ixd devlink support
-+===================
-+
-+This document describes the devlink features implemented by the ``ixd``
-+device driver.
-+
-+Info versions
-+=============
-+
-+The ``ixd`` driver reports the following versions
-+
-+.. list-table:: devlink info versions implemented
-+    :widths: 5 5 5 90
-+
-+    * - Name
-+      - Type
-+      - Example
-+      - Description
-+    * - ``device.type``
-+      - fixed
-+      - MEV
-+      - The hardware type for this device
-+    * - ``cp``
-+      - running
-+      - 0.0
-+      - Version number (major.minor) of the Control Plane software
-+        running on the device.
-+    * - ``virtchnl``
-+      - running
-+      - 2.0
-+      - 2-digit version number (major.minor) of the communication channel
-+        (virtchnl) used by the device.
-diff --git a/drivers/net/ethernet/intel/ixd/Kconfig b/drivers/net/ethernet/intel/ixd/Kconfig
-index 24510c50070e..34181c59dcdc 100644
---- a/drivers/net/ethernet/intel/ixd/Kconfig
-+++ b/drivers/net/ethernet/intel/ixd/Kconfig
-@@ -7,6 +7,7 @@ config IXD
- 	select LIBETH
- 	select LIBIE_CP
- 	select LIBIE_PCI
-+	select NET_DEVLINK
- 	help
- 	  This driver supports Intel(R) Control Plane PCI Function
- 	  of Intel E2100 and later IPUs and FNICs.
-diff --git a/drivers/net/ethernet/intel/ixd/Makefile b/drivers/net/ethernet/intel/ixd/Makefile
-index 90abf231fb16..03760a2580b9 100644
---- a/drivers/net/ethernet/intel/ixd/Makefile
-+++ b/drivers/net/ethernet/intel/ixd/Makefile
-@@ -8,5 +8,6 @@ obj-$(CONFIG_IXD) += ixd.o
- ixd-y := ixd_main.o
- ixd-y += ixd_ctlq.o
- ixd-y += ixd_dev.o
-+ixd-y += ixd_devlink.o
- ixd-y += ixd_lib.o
- ixd-y += ixd_virtchnl.o
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_devlink.c b/drivers/net/ethernet/intel/ixd/ixd_devlink.c
-new file mode 100644
-index 000000000000..6f60cfe4fab2
---- /dev/null
-+++ b/drivers/net/ethernet/intel/ixd/ixd_devlink.c
-@@ -0,0 +1,105 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/* Copyright (c) 2025, Intel Corporation. */
-+
-+#include "ixd.h"
-+#include "ixd_devlink.h"
-+
-+#define IXD_DEVLINK_INFO_LEN	128
-+
-+/**
-+ * ixd_fill_dsn - Get the serial number for the ixd device
-+ * @adapter: adapter to query
-+ * @buf: storage buffer for the info request
-+ */
-+static void ixd_fill_dsn(struct ixd_adapter *adapter, char *buf)
-+{
-+	u8 dsn[8];
-+
-+	/* Copy the DSN into an array in Big Endian format */
-+	put_unaligned_be64(pci_get_dsn(adapter->cp_ctx.mmio_info.pdev), dsn);
-+
-+	snprintf(buf, IXD_DEVLINK_INFO_LEN, "%8phD", dsn);
-+}
-+
-+/**
-+ * ixd_fill_device_name - Get the name of the underlying hardware
-+ * @adapter: adapter to query
-+ * @buf: storage buffer for the info request
-+ * @buf_size: size of the storage buffer
-+ */
-+static void ixd_fill_device_name(struct ixd_adapter *adapter, char *buf,
-+				 size_t buf_size)
-+{
-+	if (adapter->caps.device_type == VIRTCHNL2_MEV_DEVICE)
-+		snprintf(buf, buf_size, "%s", "MEV");
-+	else
-+		snprintf(buf, buf_size, "%s", "UNKNOWN");
-+}
-+
-+/**
-+ * ixd_devlink_info_get - .info_get devlink handler
-+ * @devlink: devlink instance structure
-+ * @req: the devlink info request
-+ * @extack: extended netdev ack structure
-+ *
-+ * Callback for the devlink .info_get operation. Reports information about the
-+ * device.
-+ *
-+ * Return: zero on success or an error code on failure.
-+ */
-+static int ixd_devlink_info_get(struct devlink *devlink,
-+				struct devlink_info_req *req,
-+				struct netlink_ext_ack *extack)
-+{
-+	struct ixd_adapter *adapter = devlink_priv(devlink);
-+	char buf[IXD_DEVLINK_INFO_LEN];
-+	int err;
-+
-+	ixd_fill_dsn(adapter, buf);
-+	err = devlink_info_serial_number_put(req, buf);
-+	if (err)
-+		return err;
-+
-+	ixd_fill_device_name(adapter, buf, IXD_DEVLINK_INFO_LEN);
-+	err = devlink_info_version_fixed_put(req, "device.type", buf);
-+	if (err)
-+		return err;
-+
-+	snprintf(buf, sizeof(buf), "%u.%u",
-+		 le16_to_cpu(adapter->caps.cp_ver_major),
-+		 le16_to_cpu(adapter->caps.cp_ver_minor));
-+
-+	err = devlink_info_version_running_put(req, "cp", buf);
-+	if (err)
-+		return err;
-+
-+	snprintf(buf, sizeof(buf), "%u.%u",
-+		 adapter->vc_ver.major, adapter->vc_ver.minor);
-+
-+	return devlink_info_version_running_put(req, "virtchnl", buf);
-+}
-+
-+static const struct devlink_ops ixd_devlink_ops = {
-+	.info_get = ixd_devlink_info_get,
-+};
-+
-+/**
-+ * ixd_adapter_alloc - Allocate devlink and return adapter pointer
-+ * @dev: the device to allocate for
-+ *
-+ * Allocate a devlink instance for this device and return the private area as
-+ * the adapter structure.
-+ *
-+ * Return: adapter structure on success, NULL on failure
-+ */
-+struct ixd_adapter *ixd_adapter_alloc(struct device *dev)
-+{
-+	struct devlink *devlink;
-+
-+	devlink = devlink_alloc(&ixd_devlink_ops, sizeof(struct ixd_adapter),
-+				dev);
-+	if (!devlink)
-+		return NULL;
-+
-+	return devlink_priv(devlink);
-+}
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_devlink.h b/drivers/net/ethernet/intel/ixd/ixd_devlink.h
-new file mode 100644
-index 000000000000..c43ce0655de2
---- /dev/null
-+++ b/drivers/net/ethernet/intel/ixd/ixd_devlink.h
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Copyright (c) 2025, Intel Corporation. */
-+
-+#ifndef _IXD_DEVLINK_H_
-+#define _IXD_DEVLINK_H_
-+#include <net/devlink.h>
-+
-+struct ixd_adapter *ixd_adapter_alloc(struct device *dev);
-+
-+/**
-+ * ixd_devlink_free - teardown the devlink
-+ * @adapter: the adapter structure to free
-+ *
-+ */
-+static inline void ixd_devlink_free(struct ixd_adapter *adapter)
-+{
-+	struct devlink *devlink = priv_to_devlink(adapter);
-+
-+	devlink_free(devlink);
-+}
-+
-+/**
-+ * ixd_devlink_unregister - Unregister devlink resources for this adapter.
-+ * @adapter: the adapter structure to cleanup
-+ *
-+ * Releases resources used by devlink and cleans up associated memory.
-+ */
-+static inline void ixd_devlink_unregister(struct ixd_adapter *adapter)
-+{
-+	devlink_unregister(priv_to_devlink(adapter));
-+}
-+
-+/**
-+ * ixd_devlink_register - Register devlink interface for this adapter
-+ * @adapter: pointer to ixd adapter structure to be associated with devlink
-+ *
-+ * Register the devlink instance associated with this adapter
-+ */
-+static inline void ixd_devlink_register(struct ixd_adapter *adapter)
-+{
-+	devlink_register(priv_to_devlink(adapter));
-+}
-+
-+#endif /* _IXD_DEVLINK_H_ */
-diff --git a/drivers/net/ethernet/intel/ixd/ixd_main.c b/drivers/net/ethernet/intel/ixd/ixd_main.c
-index c6dd6b3f14bb..d58b49bb3953 100644
---- a/drivers/net/ethernet/intel/ixd/ixd_main.c
-+++ b/drivers/net/ethernet/intel/ixd/ixd_main.c
-@@ -4,6 +4,7 @@
- #include "ixd.h"
- #include "ixd_ctlq.h"
- #include "ixd_lan_regs.h"
-+#include "ixd_devlink.h"
- 
- MODULE_DESCRIPTION("Intel(R) Control Plane Function Device Driver");
- MODULE_IMPORT_NS("LIBIE_CP");
-@@ -21,12 +22,15 @@ static void ixd_remove(struct pci_dev *pdev)
- 	/* Do not mix removal with (re)initialization */
- 	cancel_delayed_work_sync(&adapter->init_task.init_work);
- 
-+	ixd_devlink_unregister(adapter);
-+
- 	/* Leave the device clean on exit */
- 	ixd_trigger_reset(adapter);
- 	ixd_deinit_dflt_mbx(adapter);
- 
- 	libie_pci_unmap_all_mmio_regions(&adapter->cp_ctx.mmio_info);
- 	libie_pci_deinit_dev(pdev);
-+	ixd_devlink_free(adapter);
- }
- 
- /**
-@@ -94,7 +98,7 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	if (WARN_ON(ent->device != IXD_DEV_ID_CPF))
- 		return -EINVAL;
- 
--	adapter = devm_kzalloc(&pdev->dev, sizeof(*adapter), GFP_KERNEL);
-+	adapter = ixd_adapter_alloc(&pdev->dev);
- 	if (!adapter)
- 		return -ENOMEM;
- 
-@@ -103,7 +107,7 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 
- 	err = libie_pci_init_dev(pdev);
- 	if (err)
--		return err;
-+		goto free_adapter;
- 
- 	pci_set_drvdata(pdev, adapter);
- 
-@@ -119,11 +123,14 @@ static int ixd_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	queue_delayed_work(system_unbound_wq, &adapter->init_task.init_work,
- 			   msecs_to_jiffies(500));
- 
-+	ixd_devlink_register(adapter);
-+
- 	return 0;
- 
- deinit_dev:
- 	libie_pci_deinit_dev(pdev);
--
-+free_adapter:
-+	ixd_devlink_free(adapter);
- 	return err;
- }
- 
--- 
-2.47.0
+Damn, yes, you're right. However, it still feels horribly hacky to iterate
+over the online CPUs in has_bbml2_noabort() -- the cpufeature framework
+has the ability to query features locally and we should be able to use
+that. We're going to want that should the architecture eventually decide
+on something like BBML3 for this.
 
+What we have with BBML2_NOABORT seems similar to an hwcap in that we only
+support the capability if all CPUs have it (rejecting late CPUs without it
+in that case) but we can live without it if not all of the early CPUs
+have it. Unlikely hwcaps, though, we shouldn't be advertising this to
+userspace and we can't derive the capability solely from the sanitised
+system registers.
+
+I wonder if we could treat it like an erratum in some way instead? That
+is, invert things so that CPUs which _don't_ have BBML2_NOABORT are
+considered to have a "BBM_CONFLICT_ABORT" erratum (which we obviously
+wouldn't shout about). Then we should be able to say:
+
+  - If any of the early CPUs don't have BBML2_NOABORT, then the erratum
+    would be enabled and we wouln't elide BBM.
+
+  - If a late CPU doesn't have BBML2_NOABORT then it can't come online
+    if the erratum isn't already enabled.
+
+Does that work? If not, then perhaps the cpufeature/cpuerrata code needs
+some surgery for this.
+
+> How do you see this working with ARM64_CPUCAP_BOOT_CPU_FEATURE? Or do you just
+> think that all systems will always be homogeneous with respect to FEAT_BBM?
+
+That's probably wishful thinking, sadly :(
+
+Will
 
