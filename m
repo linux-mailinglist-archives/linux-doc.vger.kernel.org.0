@@ -1,243 +1,302 @@
-Return-Path: <linux-doc+bounces-45772-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45774-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4DC7AB15D4
-	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 15:52:44 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95178AB164F
+	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 15:58:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 82E433B51D7
-	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 13:50:00 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C9B143A3C60
+	for <lists+linux-doc@lfdr.de>; Fri,  9 May 2025 13:56:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B592F292096;
-	Fri,  9 May 2025 13:49:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9ADD22918F4;
+	Fri,  9 May 2025 13:56:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pQ+uoXUp"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="lw+EQEO2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 899DD2918CF;
-	Fri,  9 May 2025 13:49:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5991F26FDB9;
+	Fri,  9 May 2025 13:56:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.196
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1746798556; cv=none; b=qT7P+jReVIUO1vQXd1nzNmEAXfLhBc5mdTEJWa8fTA2EfhG7zx0Pgt8BgDUgMERqUlc1c/6eoukwBLQdcauEsTdAkCcrd2IIdhLgqxxGk4hlOeehhYdlLQ1gB4dxWJrvqqKURxxpxVaVa8cAr8czEuZowka0g45pVv5Q5ODNnCs=
+	t=1746798979; cv=none; b=YatZnCxOhxsuEi1+WXm9Qezg2/FIhcWO/NdR0tdhG4PiG2MW2Y51fkzEycuVw3Igx6RYhLhw7+X3XoyXgz5F39z7GtwuQBDCbR75HpYQaVzuVTAKA0q3jv35vWbsCWP1XRzZSZ5oVl1nyYG/b+dVC/EZBVvdtWQaGBwui5Lvptg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1746798556; c=relaxed/simple;
-	bh=ddxFekODOqJy1oQlp1NZDYc/Pj9lvlATNoTbz761B5o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VtCWacSf4WlHBRYgY4YJaeZeC19kEz+VzGjDeQovep4jafz/9aJDJT2yudrFwsfZt8OyqFct1Nx+uM/Y+v+UtUZa8HNRh/vss6EU6MTNJFM3W+p+jh59c8wVxUyHY5Q57FOXjixhpLPrVRVvWFKu4YvtnDfCA4aYxYgGPv+Q1Pc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pQ+uoXUp; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDF75C4CEE4;
-	Fri,  9 May 2025 13:49:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1746798553;
-	bh=ddxFekODOqJy1oQlp1NZDYc/Pj9lvlATNoTbz761B5o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=pQ+uoXUpmF/3twCcIi3Lai3o3xk3GzjXh4Vtzef2xl+XK5lS7fyBbQ0UFZzYOkYpV
-	 dUtfTp8YyM+m1uCBcNG1HQvDk6Nf7/h0n9vLEZ88nS1jLaw3kZC+MJWQAs8/6JfmCW
-	 GLX/BJFBUp0BoBJxFAMpMHQQxyx062Ra3vAXfp7i5GUtnfWbItEAT9nUXEUdmY+WZG
-	 QaS5XlRufjGUUzac2Gdf4KQVW4gTJmD7URMBqCpPwQgEQkWKKaXQtwRRvrcbUiQUCW
-	 JAx1/diS1biH2qZn4t9dRTFqD8Klqp6AjFPQ8OnLTIf9OgIEOCwF0ak/GgLb9J7aoh
-	 g4HQFuPfD/y3w==
-Date: Fri, 9 May 2025 14:49:05 +0100
-From: Will Deacon <will@kernel.org>
-To: Ryan Roberts <ryan.roberts@arm.com>
-Cc: =?utf-8?Q?Miko=C5=82aj?= Lenczewski <miko.lenczewski@arm.com>,
-	suzuki.poulose@arm.com, yang@os.amperecomputing.com, corbet@lwn.net,
-	catalin.marinas@arm.com, jean-philippe@linaro.org,
-	robin.murphy@arm.com, joro@8bytes.org, akpm@linux-foundation.org,
-	paulmck@kernel.org, mark.rutland@arm.com, joey.gouly@arm.com,
-	maz@kernel.org, james.morse@arm.com, broonie@kernel.org,
-	oliver.upton@linux.dev, baohua@kernel.org, david@redhat.com,
-	ioworker0@gmail.com, jgg@ziepe.ca, nicolinc@nvidia.com,
-	mshavit@google.com, jsnitsel@redhat.com, smostafa@google.com,
-	kevin.tian@intel.com, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	iommu@lists.linux.dev
-Subject: Re: [RESEND PATCH v6 1/3] arm64: Add BBM Level 2 cpu feature
-Message-ID: <20250509134904.GA5707@willie-the-truck>
-References: <20250428153514.55772-2-miko.lenczewski@arm.com>
- <20250428153514.55772-4-miko.lenczewski@arm.com>
- <20250506142508.GB1197@willie-the-truck>
- <78fec33d-fe66-4352-be11-900f456c9af3@arm.com>
+	s=arc-20240116; t=1746798979; c=relaxed/simple;
+	bh=Jnqsjr3slJMpqG1xFTg3lBzYjoJxbPXe/oORDRv1WTU=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Ae5sfz/YUbO3Ci/6AE8i/Ibxdd8HKExiywuAzm8tySenv9TWal0HgvXE1kdr9HullzCi409hcRV/prSwdlQhHmir+Wmko8PUFkR8fOWjCul3HFnIuKgs3+W2D1QID5SECMISgd+MveVt3h88M0nURmesln4BN1j1q2Mm5bt5kWY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=lw+EQEO2; arc=none smtp.client-ip=217.70.183.196
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 06B7443B6D;
+	Fri,  9 May 2025 13:56:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1746798971;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=3gLOa47Xk0ok2K33C8I47xYA9XRAOM9sF3Fq2wGIFQc=;
+	b=lw+EQEO287PssCQbUR5pbpq8hWm7h9CR05KLQtMfotqjCDKWEphI2S4R2sxAXowdZTfKdC
+	OmHerQw6VCqG7SnTf10aZAkCjuyQsOYw/0RSu2PejQEA8yGzg9SSlEIJKW/s+3Ij5kBk22
+	phDq54pI0DXGqnQrGhQkDkRMf4gSkETNGTZDTB1vhe0zaoyIZWcwRAOBomuFVhKR4YkZt0
+	YfhwQ5/k1oOGjFpg9+X4l6h2xj6L0vvc7/dNrbEF2U+7SPCCCdjVku3BCyXKN3m9jMg9kV
+	pJrsJt+IjI7h7HGimPq/bRngS2ihBVdyl4Yi8fbn8ccERhKObBh9G0PjFbOcKQ==
+From: Luca Ceresoli <luca.ceresoli@bootlin.com>
+Subject: [PATCH v3 00/22] drm: convert all bridges to
+ devm_drm_bridge_alloc()
+Date: Fri, 09 May 2025 15:53:26 +0200
+Message-Id: <20250509-drm-bridge-convert-to-alloc-api-v3-0-b8bc1f16d7aa@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <78fec33d-fe66-4352-be11-900f456c9af3@arm.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+X-B4-Tracking: v=1; b=H4sIANYIHmgC/4WNyw6CMBBFf4V07Zi2VBRW/odhAX3IJNAhbdNoC
+ P9uJXHt8tybnLOxaAPayLpqY8FmjEi+QH2qmJ4G/7SApjCTXF644gpMWGAMaMqjyWcbEiSCYZ5
+ Jw7AiNEKNVrtGylaxYlmDdfg6Co++8IQxUXgfwSy+6899/evOAjgoKUTt3M20mt9HojSjP2taW
+ L/v+wdg6Tv10AAAAA==
+X-Change-ID: 20250404-drm-bridge-convert-to-alloc-api-614becf62294
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Andrzej Hajda <andrzej.hajda@intel.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>, 
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Shawn Guo <shawnguo@kernel.org>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>, 
+ Douglas Anderson <dianders@chromium.org>, 
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>, 
+ Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Anusha Srivatsa <asrivats@redhat.com>, 
+ Paul Kocialkowski <paulk@sys-base.io>, Dmitry Baryshkov <lumag@kernel.org>, 
+ Hui Pu <Hui.Pu@gehealthcare.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ dri-devel@lists.freedesktop.org, asahi@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev, 
+ imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+ linux-mediatek@lists.infradead.org, linux-amlogic@lists.infradead.org, 
+ linux-renesas-soc@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
+ linux-samsung-soc@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ freedreno@lists.freedesktop.org, linux-stm32@st-md-mailman.stormreply.com, 
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, 
+ Louis Chauvet <louis.chauvet@bootlin.com>, 
+ Alim Akhtar <alim.akhtar@samsung.com>, Inki Dae <inki.dae@samsung.com>, 
+ Kyungmin Park <kyungmin.park@samsung.com>, 
+ Seung-Woo Kim <sw0312.kim@samsung.com>, 
+ Manikandan Muralidharan <manikandan.m@microchip.com>, 
+ Adam Ford <aford173@gmail.com>, Adrien Grassein <adrien.grassein@gmail.com>, 
+ Aleksandr Mishin <amishin@t-argos.ru>, Andy Yan <andy.yan@rock-chips.com>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Benson Leung <bleung@chromium.org>, Biju Das <biju.das.jz@bp.renesas.com>, 
+ Christoph Fritz <chf.fritz@googlemail.com>, 
+ Cristian Ciocaltea <cristian.ciocaltea@collabora.com>, 
+ Detlev Casanova <detlev.casanova@collabora.com>, 
+ Dharma Balasubiramani <dharma.b@microchip.com>, 
+ Guenter Roeck <groeck@chromium.org>, Heiko Stuebner <heiko@sntech.de>, 
+ Jani Nikula <jani.nikula@intel.com>, Janne Grunau <j@jannau.net>, 
+ Jerome Brunet <jbrunet@baylibre.com>, Jesse Van Gavere <jesseevg@gmail.com>, 
+ Kevin Hilman <khilman@baylibre.com>, 
+ Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>, 
+ Liu Ying <victor.liu@nxp.com>, 
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
+ Matthias Brugger <matthias.bgg@gmail.com>, 
+ Philipp Zabel <p.zabel@pengutronix.de>, Phong LE <ple@baylibre.com>, 
+ Sasha Finkelstein <fnkl.kernel@gmail.com>, 
+ Sugar Zhang <sugar.zhang@rock-chips.com>, 
+ Sui Jingfeng <sui.jingfeng@linux.dev>, 
+ Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>, 
+ Vitalii Mordan <mordan@ispras.ru>, "Rob Herring (Arm)" <robh@kernel.org>, 
+ Hsin-Te Yuan <yuanhsinte@chromium.org>, 
+ Pin-yen Lin <treapking@chromium.org>, Xin Ji <xji@analogixsemi.com>, 
+ Aradhya Bhatia <a-bhatia1@ti.com>, 
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
+ Ian Ray <ian.ray@gehealthcare.com>, 
+ Martyn Welch <martyn.welch@collabora.co.uk>, 
+ Peter Senna Tschudin <peter.senna@gmail.com>, Helge Deller <deller@gmx.de>, 
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>, 
+ Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>, 
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Philippe Cornu <philippe.cornu@foss.st.com>, 
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Yannick Fertre <yannick.fertre@foss.st.com>, 
+ Alain Volmat <alain.volmat@foss.st.com>, 
+ Raphael Gallais-Pou <rgallaispou@gmail.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Michal Simek <michal.simek@amd.com>, Jonathan Corbet <corbet@lwn.net>, 
+ linux-doc@vger.kernel.org
+X-Mailer: b4 0.14.2
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddvledvjeelucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhufffkfggtgfgvfevofesthekredtredtjeenucfhrhhomhepnfhutggrucevvghrvghsohhlihcuoehluhgtrgdrtggvrhgvshholhhisegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeejjefhgfffleevhefhfeduhedtfedttedtkefgkeeuieehtdeifeduveejffevgeenucffohhmrghinhepfhhrvggvuggvshhkthhophdrohhrghdpkhgvrhhnvghlrdhorhhgnecukfhppedvrgdtvdemieejtdemvddtvddtmegvrgdtudemsggvgedumeelhegvjeemfeegfeemledufegvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepvdgrtddvmeeijedtmedvtddvtdemvggrtddumegsvgegudemleehvgejmeefgeefmeeludefvgdphhgvlhhopegludelvddrudeikedrudejkedruddukegnpdhmrghilhhfrhhomheplhhutggrrdgtvghrvghsohhlihessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepleejpdhrtghpthhtoheprhhosghhsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehrrghphhgrvghlrdhgrghllhgrihhsqdhpohhusehfohhsshdrshhtrdgto
+ hhmpdhrtghpthhtohepthhrvggrphhkihhnghestghhrhhomhhiuhhmrdhorhhgpdhrtghpthhtohepihgrnhdrrhgrhiesghgvhhgvrghlthhhtggrrhgvrdgtohhmpdhrtghpthhtoheplhhutggrrdgtvghrvghsohhlihessghoohhtlhhinhdrtghomhdprhgtphhtthhopegrshhrihhvrghtshesrhgvughhrghtrdgtohhmpdhrtghpthhtohepjhesjhgrnhhnrghurdhnvghtpdhrtghpthhtohepnhgvihhlrdgrrhhmshhtrhhonhhgsehlihhnrghrohdrohhrgh
+X-GND-Sasl: luca.ceresoli@bootlin.com
 
-On Tue, May 06, 2025 at 03:52:59PM +0100, Ryan Roberts wrote:
-> On 06/05/2025 15:25, Will Deacon wrote:
-> > On Mon, Apr 28, 2025 at 03:35:14PM +0000, Mikołaj Lenczewski wrote:
-> >> The Break-Before-Make cpu feature supports multiple levels (levels 0-2),
-> >> and this commit adds a dedicated BBML2 cpufeature to test against
-> >> support for, as well as a kernel commandline parameter to optionally
-> >> disable BBML2 altogether.
-> >>
-> >> This is a system feature as we might have a big.LITTLE architecture
-> >> where some cores support BBML2 and some don't, but we want all cores to
-> >> be available and BBM to default to level 0 (as opposed to having cores
-> >> without BBML2 not coming online).
-> >>
-> >> To support BBML2 in as wide a range of contexts as we can, we want not
-> >> only the architectural guarantees that BBML2 makes, but additionally
-> >> want BBML2 to not create TLB conflict aborts. Not causing aborts avoids
-> >> us having to prove that no recursive faults can be induced in any path
-> >> that uses BBML2, allowing its use for arbitrary kernel mappings.
-> >> Support detection of such CPUs.
-> >>
-> >> Signed-off-by: Mikołaj Lenczewski <miko.lenczewski@arm.com>
-> >> Reviewed-by: Suzuki K Poulose <suzuki.poulose@arm.com>
-> >> Reviewed-by: Ryan Roberts <ryan.roberts@arm.com>
-> >> ---
-> >>  .../admin-guide/kernel-parameters.txt         |  3 +
-> >>  arch/arm64/Kconfig                            | 19 +++++
-> >>  arch/arm64/include/asm/cpucaps.h              |  2 +
-> >>  arch/arm64/include/asm/cpufeature.h           |  5 ++
-> >>  arch/arm64/kernel/cpufeature.c                | 71 +++++++++++++++++++
-> >>  arch/arm64/kernel/pi/idreg-override.c         |  2 +
-> >>  arch/arm64/tools/cpucaps                      |  1 +
-> >>  7 files changed, 103 insertions(+)
-> >>
-> >> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> >> index d9fd26b95b34..2749c67a4f07 100644
-> >> --- a/Documentation/admin-guide/kernel-parameters.txt
-> >> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> >> @@ -449,6 +449,9 @@
-> >>  	arm64.no32bit_el0 [ARM64] Unconditionally disable the execution of
-> >>  			32 bit applications.
-> >>  
-> >> +	arm64.nobbml2	[ARM64] Unconditionally disable Break-Before-Make Level
-> >> +			2 support
-> > 
-> > Hmm, I'm not sure we really want this. It opens up the door for folks to
-> > pass 'id_aa64mmfr2.bbm=2' without updating the allow-list which feels
-> > like it's going to make crashes harder to reason about.
-> > 
-> > Is there a compelling reason to add this right now?
-> 
-> I don't think there is a *compelling* reason. This came about from Suzuki's
-> feedback at [1]. He was keen to have a mechanism to disable BBML2 in case issues
-> were found.
-> 
-> But simpler is usually better; I'd be ok with removing.
+devm_drm_bridge_alloc() [0] is the new API to allocate and initialize a DRM
+bridge, and the only one supported from now on. It is the first milestone
+towards removal of bridges from a still existing DRM pipeline without
+use-after-free.
 
-We can always add it back if we really need it, but adding an allowlist
-*and* a mechanism to override the allowlist at the same time seems overly
-pessimistic to me :)
+The steps in the grand plan [1] are:
 
-> >> diff --git a/arch/arm64/kernel/cpufeature.c b/arch/arm64/kernel/cpufeature.c
-> >> index 9c4d6d552b25..7a85a1bdc6e9 100644
-> >> --- a/arch/arm64/kernel/cpufeature.c
-> >> +++ b/arch/arm64/kernel/cpufeature.c
-> >> @@ -2200,6 +2200,70 @@ static bool hvhe_possible(const struct arm64_cpu_capabilities *entry,
-> >>  	return arm64_test_sw_feature_override(ARM64_SW_FEATURE_OVERRIDE_HVHE);
-> >>  }
-> >>  
-> >> +static bool cpu_has_bbml2_noabort(unsigned int cpu_midr)
-> >> +{
-> >> +	/*
-> >> +	 * We want to allow usage of bbml2 in as wide a range of kernel contexts
-> >> +	 * as possible. This list is therefore an allow-list of known-good
-> >> +	 * implementations that both support bbml2 and additionally, fulfill the
-> >> +	 * extra constraint of never generating TLB conflict aborts when using
-> >> +	 * the relaxed bbml2 semantics (such aborts make use of bbml2 in certain
-> >> +	 * kernel contexts difficult to prove safe against recursive aborts).
-> >> +	 *
-> >> +	 * Note that implementations can only be considered "known-good" if their
-> >> +	 * implementors attest to the fact that the implementation never raises
-> >> +	 * TLBI conflict aborts for bbml2 mapping granularity changes.
-> >> +	 */
-> >> +	static const struct midr_range supports_bbml2_noabort_list[] = {
-> >> +		MIDR_REV_RANGE(MIDR_CORTEX_X4, 0, 3, 0xf),
-> >> +		MIDR_REV_RANGE(MIDR_NEOVERSE_V3, 0, 2, 0xf),
-> >> +		{}
-> >> +	};
-> >> +
-> >> +	return is_midr_in_range_list(cpu_midr, supports_bbml2_noabort_list);
-> > 
-> > This doesn't compile against latest mainline as is_midr_in_range_list()
-> > no longer takes the midr.
-> 
-> Will ask Miko to fix.
+ 1. ➜ add refcounting to DRM bridges (struct drm_bridge)
+ 2. handle gracefully atomic updates during bridge removal
+ 3. avoid DSI host drivers to have dangling pointers to DSI devices
+ 4. finish the hotplug bridge work, removing the "always-disconnected"
+    connector, moving code to the core and potentially removing the
+    hotplug-bridge itself (this needs to be clarified as points 1-3 are
+    developed)
 
-Cheers. v6.15-rc1 is probably the right base to use as that's what I've
-based for-next/mm on.
+This series is part of step 1 of the grand plan.
 
-> >> +static bool has_bbml2_noabort(const struct arm64_cpu_capabilities *caps, int scope)
-> >> +{
-> >> +	if (!IS_ENABLED(CONFIG_ARM64_BBML2_NOABORT))
-> >> +		return false;
-> >> +
-> >> +	if (scope & SCOPE_SYSTEM) {
-> >> +		int cpu;
-> >> +
-> >> +		/*
-> >> +		 * We are a boot CPU, and must verify that all enumerated boot
-> >> +		 * CPUs have MIDR values within our allowlist. Otherwise, we do
-> >> +		 * not allow the BBML2 feature to avoid potential faults when
-> >> +		 * the insufficient CPUs access memory regions using BBML2
-> >> +		 * semantics.
-> >> +		 */
-> >> +		for_each_online_cpu(cpu) {
-> >> +			if (!cpu_has_bbml2_noabort(cpu_read_midr(cpu)))
-> >> +				return false;
-> >> +		}
-> > 
-> > This penalises large homogeneous systems and it feels unnecessary given
-> > that we have the ability to check this per-CPU. Can you use
-> > ARM64_CPUCAP_BOOT_CPU_FEATURE instead of ARM64_CPUCAP_SYSTEM_FEATURE
-> > to solve this?
-> 
-> We are trying to solve for the case where the boot CPU has BBML2 but a secondary
-> CPU doesn't. (e.g. hetrogeneous system where boot CPU is big and secondary is
-> little and does not advertise the feature. I can't remember if we proved there
-> are real systems with this config - I have vague recollection that we did but my
-> memory is poor...).
-> 
-> My understanding is that for ARM64_CPUCAP_BOOT_CPU_FEATURE, "If the boot CPU
-> has enabled this feature already, then every late CPU must have it". So that
-> would exclude any secondary CPUs without BBML2 from coming online?
+Current tasks in step 1 of the grand plan:
 
-Damn, yes, you're right. However, it still feels horribly hacky to iterate
-over the online CPUs in has_bbml2_noabort() -- the cpufeature framework
-has the ability to query features locally and we should be able to use
-that. We're going to want that should the architecture eventually decide
-on something like BBML3 for this.
+ A. ✔ add new alloc API and refcounting -> (now in drm-misc-next)
+ B. ➜ convert all bridge drivers to new API (this series)
+ C. … documentation, kunit tests (v1 under discussion)
+ D. after (B), add get/put to drm_bridge_add/remove() + attach/detech()
+ E. after (B), convert accessors; this is a large work and can be done
+    in chunks
+ F. debugfs improvements
 
-What we have with BBML2_NOABORT seems similar to an hwcap in that we only
-support the capability if all CPUs have it (rejecting late CPUs without it
-in that case) but we can live without it if not all of the early CPUs
-have it. Unlikely hwcaps, though, we shouldn't be advertising this to
-userspace and we can't derive the capability solely from the sanitised
-system registers.
+More info about this series in the v2 cover [2].
 
-I wonder if we could treat it like an erratum in some way instead? That
-is, invert things so that CPUs which _don't_ have BBML2_NOABORT are
-considered to have a "BBM_CONFLICT_ABORT" erratum (which we obviously
-wouldn't shout about). Then we should be able to say:
+Luca
 
-  - If any of the early CPUs don't have BBML2_NOABORT, then the erratum
-    would be enabled and we wouln't elide BBM.
+[0] https://gitlab.freedesktop.org/drm/misc/kernel/-/commit/0cc6aadd7fc1e629b715ea3d1ba537ef2da95eec
+[1] https://lore.kernel.org/lkml/20250206-hotplug-drm-bridge-v6-0-9d6f2c9c3058@bootlin.com/t/#u
+[2] https://lore.kernel.org/lkml/20250424-drm-bridge-convert-to-alloc-api-v2-0-8f91a404d86b@bootlin.com/
 
-  - If a late CPU doesn't have BBML2_NOABORT then it can't come online
-    if the erratum isn't already enabled.
+Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
+---
+Changes in v3:
+- Fixed issues reported for some patches
+- Added review tags
+- Removed patches that have been applied
+- Added revert for the exynos patch, applied by mistake
+- Update cover with grand plan info and trim some of it
+- Updated bouncing e-mail address in Cc list
+- Link to v2: https://lore.kernel.org/lkml/20250424-drm-bridge-convert-to-alloc-api-v2-0-8f91a404d86b@bootlin.com/
 
-Does that work? If not, then perhaps the cpufeature/cpuerrata code needs
-some surgery for this.
+Changes in v2:
+- Improved cover letter with link to commit adding devm_drm_bridge_alloc()
+- add review tags
+- fix bugs in zynqmp, vc4 patches
+- fix patch 1 error code checking
+- Link to v1: https://lore.kernel.org/r/20250407-drm-bridge-convert-to-alloc-api-v1-0-42113ff8d9c0@bootlin.com
 
-> How do you see this working with ARM64_CPUCAP_BOOT_CPU_FEATURE? Or do you just
-> think that all systems will always be homogeneous with respect to FEAT_BBM?
+---
+Luca Ceresoli (22):
+      Revert "drm/exynos: mic: convert to devm_drm_bridge_alloc() API"
+      drm: convert many bridge drivers from devm_kzalloc() to devm_drm_bridge_alloc() API
+      drm/bridge: anx7625: convert to devm_drm_bridge_alloc() API
+      drm/bridge: cdns-dsi: convert to devm_drm_bridge_alloc() API
+      drm/bridge: megachips-stdpxxxx-ge-b850v3-fw: convert to devm_drm_bridge_alloc() API
+      drm/bridge: nxp-ptn3460: convert to devm_drm_bridge_alloc() API
+      drm/bridge: sii902x: convert to devm_drm_bridge_alloc() API
+      drm/omap: dss: dpi: convert to devm_drm_bridge_alloc() API
+      drm/omap: dss: dsi: convert to devm_drm_bridge_alloc() API
+      drm/omap: dss: hdmi4: convert to devm_drm_bridge_alloc() API
+      drm/omap: dss: hdmi5: convert to devm_drm_bridge_alloc() API
+      drm/omap: dss: sdi: convert to devm_drm_bridge_alloc() API
+      drm/omap: dss: venc: convert to devm_drm_bridge_alloc() API
+      drm/rcar-du: dsi: convert to devm_drm_bridge_alloc() API
+      drm/bridge: stm_lvds: convert to devm_drm_bridge_alloc() API
+      drm/sti: dvo: convert to devm_drm_bridge_alloc() API
+      drm: zynqmp_dp: convert to devm_drm_bridge_alloc() API
+      drm/bridge: imx8qxp-pixel-combiner: convert to devm_drm_bridge_alloc() API
+      drm/bridge: tc358767: convert to devm_drm_bridge_alloc() API
+      drm/bridge: add devm_drm_put_bridge()
+      drm/bridge: panel: convert to devm_drm_bridge_alloc() API
+      drm/todo: add entry to remove devm_drm_put_bridge()
 
-That's probably wishful thinking, sadly :(
+ Documentation/gpu/todo.rst                         | 15 ++++++
+ drivers/gpu/drm/adp/adp-mipi.c                     |  8 ++--
+ drivers/gpu/drm/bridge/adv7511/adv7511_drv.c       |  8 ++--
+ drivers/gpu/drm/bridge/analogix/analogix-anx78xx.c |  9 ++--
+ drivers/gpu/drm/bridge/analogix/anx7625.c          |  7 ++-
+ drivers/gpu/drm/bridge/aux-bridge.c                |  8 ++--
+ drivers/gpu/drm/bridge/aux-hpd-bridge.c            |  9 ++--
+ drivers/gpu/drm/bridge/cadence/cdns-dsi-core.c     |  8 ++--
+ .../gpu/drm/bridge/cadence/cdns-mhdp8546-core.c    |  8 ++--
+ drivers/gpu/drm/bridge/chipone-icn6211.c           |  8 ++--
+ drivers/gpu/drm/bridge/chrontel-ch7033.c           |  8 ++--
+ drivers/gpu/drm/bridge/cros-ec-anx7688.c           |  8 ++--
+ drivers/gpu/drm/bridge/fsl-ldb.c                   |  7 ++-
+ drivers/gpu/drm/bridge/imx/imx-legacy-bridge.c     |  8 ++--
+ drivers/gpu/drm/bridge/imx/imx8mp-hdmi-pvi.c       |  8 ++--
+ .../gpu/drm/bridge/imx/imx8qxp-pixel-combiner.c    | 27 ++++++-----
+ drivers/gpu/drm/bridge/imx/imx8qxp-pixel-link.c    |  8 ++--
+ drivers/gpu/drm/bridge/imx/imx8qxp-pxl2dpi.c       |  8 ++--
+ drivers/gpu/drm/bridge/ite-it6263.c                |  8 ++--
+ drivers/gpu/drm/bridge/ite-it6505.c                |  8 ++--
+ drivers/gpu/drm/bridge/ite-it66121.c               |  8 ++--
+ drivers/gpu/drm/bridge/lontium-lt8912b.c           |  8 ++--
+ drivers/gpu/drm/bridge/lontium-lt9211.c            |  7 ++-
+ drivers/gpu/drm/bridge/lontium-lt9611.c            |  8 ++--
+ drivers/gpu/drm/bridge/lvds-codec.c                |  9 ++--
+ .../drm/bridge/megachips-stdpxxxx-ge-b850v3-fw.c   | 11 ++---
+ drivers/gpu/drm/bridge/microchip-lvds.c            |  8 ++--
+ drivers/gpu/drm/bridge/nwl-dsi.c                   |  8 ++--
+ drivers/gpu/drm/bridge/nxp-ptn3460.c               |  9 ++--
+ drivers/gpu/drm/bridge/panel.c                     | 12 ++---
+ drivers/gpu/drm/bridge/parade-ps8622.c             |  8 ++--
+ drivers/gpu/drm/bridge/parade-ps8640.c             |  8 ++--
+ drivers/gpu/drm/bridge/sii902x.c                   |  7 ++-
+ drivers/gpu/drm/bridge/sii9234.c                   |  8 ++--
+ drivers/gpu/drm/bridge/sil-sii8620.c               |  8 ++--
+ drivers/gpu/drm/bridge/simple-bridge.c             |  8 ++--
+ drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.c       |  8 ++--
+ drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.c      |  8 ++--
+ drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi2.c     |  8 ++--
+ drivers/gpu/drm/bridge/tc358762.c                  |  8 ++--
+ drivers/gpu/drm/bridge/tc358764.c                  |  8 ++--
+ drivers/gpu/drm/bridge/tc358767.c                  | 56 +++++++++++++++-------
+ drivers/gpu/drm/bridge/tc358768.c                  |  8 ++--
+ drivers/gpu/drm/bridge/tc358775.c                  |  8 ++--
+ drivers/gpu/drm/bridge/thc63lvd1024.c              |  8 ++--
+ drivers/gpu/drm/bridge/ti-dlpc3433.c               |  8 ++--
+ drivers/gpu/drm/bridge/ti-tdp158.c                 |  8 ++--
+ drivers/gpu/drm/bridge/ti-tfp410.c                 |  8 ++--
+ drivers/gpu/drm/bridge/ti-tpd12s015.c              |  8 ++--
+ drivers/gpu/drm/drm_bridge.c                       | 17 +++++++
+ drivers/gpu/drm/exynos/exynos_drm_mic.c            |  7 +--
+ drivers/gpu/drm/mediatek/mtk_dp.c                  |  8 ++--
+ drivers/gpu/drm/mediatek/mtk_dpi.c                 |  8 ++--
+ drivers/gpu/drm/mediatek/mtk_dsi.c                 |  8 ++--
+ drivers/gpu/drm/mediatek/mtk_hdmi.c                |  8 ++--
+ drivers/gpu/drm/meson/meson_encoder_cvbs.c         | 10 ++--
+ drivers/gpu/drm/meson/meson_encoder_dsi.c          | 10 ++--
+ drivers/gpu/drm/meson/meson_encoder_hdmi.c         | 10 ++--
+ drivers/gpu/drm/omapdrm/dss/dpi.c                  |  7 ++-
+ drivers/gpu/drm/omapdrm/dss/dsi.c                  |  7 ++-
+ drivers/gpu/drm/omapdrm/dss/hdmi4.c                | 26 ++++------
+ drivers/gpu/drm/omapdrm/dss/hdmi5.c                | 26 ++++------
+ drivers/gpu/drm/omapdrm/dss/sdi.c                  | 25 ++++------
+ drivers/gpu/drm/omapdrm/dss/venc.c                 | 23 ++++-----
+ drivers/gpu/drm/renesas/rcar-du/rcar_lvds.c        |  8 ++--
+ drivers/gpu/drm/renesas/rcar-du/rcar_mipi_dsi.c    |  8 ++--
+ drivers/gpu/drm/renesas/rz-du/rzg2l_mipi_dsi.c     |  8 ++--
+ drivers/gpu/drm/sti/sti_dvo.c                      | 29 +++++------
+ drivers/gpu/drm/stm/lvds.c                         |  7 ++-
+ drivers/gpu/drm/xlnx/zynqmp_dp.c                   | 31 +++++-------
+ drivers/gpu/drm/xlnx/zynqmp_dpsub.c                |  1 -
+ include/drm/drm_bridge.h                           |  4 ++
+ 72 files changed, 390 insertions(+), 379 deletions(-)
+---
+base-commit: 94c60d3c1079fc044e356a78ffc68ca7b0603039
+change-id: 20250404-drm-bridge-convert-to-alloc-api-614becf62294
 
-Will
+Best regards,
+-- 
+Luca Ceresoli <luca.ceresoli@bootlin.com>
+
 
