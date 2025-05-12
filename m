@@ -1,151 +1,162 @@
-Return-Path: <linux-doc+bounces-45883-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45886-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB44DAB3024
-	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 08:56:28 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id D4AADAB304B
+	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 09:12:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 40EDE3A7582
-	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 06:56:09 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 115AE1891CE4
+	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 07:12:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E30F71B0409;
-	Mon, 12 May 2025 06:56:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C47D82566F9;
+	Mon, 12 May 2025 07:12:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MNYLdDfK"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cNx3CHpM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f176.google.com (mail-il1-f176.google.com [209.85.166.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50CDB185E4A;
-	Mon, 12 May 2025 06:56:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8879D2561BF;
+	Mon, 12 May 2025 07:12:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747032983; cv=none; b=gPnCt4TYftXfcSS4mP6MHdaQTWP/cNYwtxTEWQcQMlzShljg+GF8hT07ya5HlwPe7vBhn0xc/JCsn42ic8RsJyLg7EEwYJAtUqZL4Zrqc9kKo1GoyFGr9oksYlMcsUO+R6sbI35MN5cK76C9gwVBpD3j4ia6YnwlglWYwoyXCkA=
+	t=1747033921; cv=none; b=YE9MnJyQTZM0+NTMZNNuRGHySYesjO3JNq9buCVDVWlQXLelhhnQaY9yGBkctRt9WWyJ2bmwuh0TE2qDAtW2bqmo5GbFPcApd4ggePFF0zfqNKHAnUWNFtwVwo16HIjOGr9MPWcIssqHM9lH0P/YUuoHn4b9AtxeIvnlmcctryM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747032983; c=relaxed/simple;
-	bh=JScEE0sqpFGbRHc2CWcKwMrOfDcxQMU0VBJzQxhA6GY=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=PH8+HYuotha6r3Blkn6dN1a5nTaAMSLO6yzBsKptOazO4486osA0t8gjviJ0K1NxvlRrBybRsKq5XuR65+8GF8byJp0iD9HUoyfjF57kCbtM4Tpc+Bi21xI0Lrn2koDP/rgvav3OkC6MRPcMTaJiMxukwfGLvo9ioS8F+F2bpkE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MNYLdDfK; arc=none smtp.client-ip=209.85.166.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-il1-f176.google.com with SMTP id e9e14a558f8ab-3d817bc6eb0so21038705ab.1;
-        Sun, 11 May 2025 23:56:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747032981; x=1747637781; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JScEE0sqpFGbRHc2CWcKwMrOfDcxQMU0VBJzQxhA6GY=;
-        b=MNYLdDfK5SRGFwq2bPbmbbGdLoKh8P78YDtfsKhE/w4FLqsw9AiN/jfuPaod983QKL
-         IGmALDDbR9jnLf+9KOQ4Bz+urgWUApgxeG1p5iSQEIeqFYzs7KXZLREpvA/6cbT3vcEx
-         IXHYU9lYyi9kbJstB0LbXEV15AL9V7/F2lKPJOeJfqhtFpgBlXEpHeWDIXuEr4W8N93t
-         tCWiAkeNZnNINK+jPThIwqqk0VfMG5ADH5KfFuSNWpNbeftM4pFXaVriAA1CnKw6wc/b
-         Hk5pFHoXtZeLYicM/mb5VnarP/6snrA3ZYU8+5Rfv82RWCVnY+PDpEAChVrCuJQ74C3p
-         nctQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747032981; x=1747637781;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JScEE0sqpFGbRHc2CWcKwMrOfDcxQMU0VBJzQxhA6GY=;
-        b=IUW2Li35i3qXhCL6MTc/qEOn1yOp0RXp7CBp0C9aJFLZq5Kv3kDArR0D4lHquTd9to
-         LSoSL1+F2JLalzTfagWWa+EEGGWLYaNaSDgXig6Zq1CAYEOTsxlnUPeGLvgxJV3cjjYM
-         UEw/ixLTcwUcEHcjUU2KRH4YpQQl2UPEAA0fcl9fND+N7UwGJE4P5zBAK5DrAxyTCD1M
-         NwJSvUuipohrdz4xt+n9ie7XntRKe298ZuXbffh/u3PkYDwSHXOMzr1uwXrh0ZXXDbdU
-         cFsWUAmpjgIDPX9+sifw0ufwbuVjFHJLHgyGDGv5CQZKbOr7Y+FB0WwyR3naoGHgn51p
-         rghg==
-X-Forwarded-Encrypted: i=1; AJvYcCX/4Hf7Q1ebqKhsyAe1igDkLpekaCCyn1lfI1/vG+7vFYtKeskUzl8TDRhGpYo9dEMEZob0vhXcPm7g/Xcs@vger.kernel.org, AJvYcCXBKxBBkHdzakGkfE+349ZZB1ppSzsADOSfBcZ61ih8uVGaTi4ItCowKVbnPC4WN0TAKKwyJDvsqGs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzNNdBfQTTAS47/cq1/uCrz5BgxSCymkOtZWgkOPcANDWM8TRXi
-	Ig9EcNxbadcB9ymE2S7UiaJEPwRBSFkt55SbjdXn4U2ESeNhIERAsvEtIidPLsmjrcIaA7eYG08
-	O2sKsNPjN+UYLFYr2FetW/If/69s=
-X-Gm-Gg: ASbGncvCnKgFUo0YqvPLiFDajmWVHajtrfvdYsrD2Nm5NSP3Amn/x7gY8K3PfHyxVZN
-	m4rlokOW33EtdpdcTTUmfBCU4K2h0Q0CJ+VfoSekb5RmnXASnoIot+yhzPFROwIoKrGK/B6sChz
-	004asYcvsPonjuDtCfLhhapN0MvH7F8uU=
-X-Google-Smtp-Source: AGHT+IFCVmt2yhLHz1OOXNXp2NZPofmH5H8CUnhJUNACcNhm+UnZiugUjwFuMX4sSfnJDaj2aINqqLH67Ds7+SY+UaY=
-X-Received: by 2002:a05:6e02:1a8d:b0:3d8:20fb:f060 with SMTP id
- e9e14a558f8ab-3da7e1e2b95mr133494045ab.4.1747032981279; Sun, 11 May 2025
- 23:56:21 -0700 (PDT)
+	s=arc-20240116; t=1747033921; c=relaxed/simple;
+	bh=UWaHpy3tnuk3FHkK9ajulVDIc6cTkMBqJq892XSpDJ8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=A8GlUzE86GXbOOcVdPSqRqfnQPP9VhwgJ5/ebZCQbKwKTrWu0kwsZrCfZ0u8snMCGAc6W5+r4NM+prDJevJO7siRpYCy0HLTwyBYjn8ZO63f5MaW7ZvxqNqWnY1S5lQpVfp0gBBeBpqlQP8ZqBOgOyPCVVW0LfWk7YY2qb4vNbg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cNx3CHpM; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 063E5C4CEE7;
+	Mon, 12 May 2025 07:12:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1747033921;
+	bh=UWaHpy3tnuk3FHkK9ajulVDIc6cTkMBqJq892XSpDJ8=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=cNx3CHpMxuoX6aa0usZ5ar0ypKnec4Jlm2rV27TTE5anvmg4ItL2sRdW/1MGAb53J
+	 eHzZrvqRW/J2PDtcgaQjxnP1uC0ZQ9f1NsH7w2seaNmsve0ZdZEdH8luHLFopV0vax
+	 b1l128KRpmFvxquOfPRdN2E8u8zrJTFsj7+Pl0QPyzHGB4JoA8oHQmZp1m3CjAl4Fr
+	 JGpEndGq2LwPulC2O/xNBatG5jR7HvZWs7qM1foaGK7we5X1NrdJ8IEIfTj7IYbOQ9
+	 hHiUERZ8NzefcAAIBjj9FOQB0jiRBE2kYoOVHFrj8AaUjGvqOgQGNs4U+JGTaVsqud
+	 FSKgkq+CuE96w==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8A01C3ABC3;
+	Mon, 12 May 2025 07:12:00 +0000 (UTC)
+From: Sung-Chi Li via B4 Relay <devnull+lschyi.chromium.org@kernel.org>
+Subject: [PATCH v3 0/3] Export fan control and register fans as cooling
+ devices
+Date: Mon, 12 May 2025 15:11:54 +0800
+Message-Id: <20250512-cros_ec_fan-v3-0-a9f2b255f0cd@chromium.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <CAL+tcoCVjihJc=exL4hJDaLFr=CrMx=2JgYO_F_m12-LP9Lc-A@mail.gmail.com>
- <aCGR4EOcWRK6Rgfv@smile.fi.intel.com> <aCGSYSDwDZiJmOtD@smile.fi.intel.com>
-In-Reply-To: <aCGSYSDwDZiJmOtD@smile.fi.intel.com>
-From: Jason Xing <kerneljasonxing@gmail.com>
-Date: Mon, 12 May 2025 14:55:45 +0800
-X-Gm-Features: AX0GCFtmwz4Q1yV8vCtioEK7fWYLfBkoJ4OHC48jCzLzwO_T-QWXkpHMvzLfEvk
-Message-ID: <CAL+tcoAkrtH3NYX+X+6WcvBgGWDW8POnENjbtxStMLRyPORf-A@mail.gmail.com>
-Subject: Re: [PATCH] relay: Remove unused relay_late_setup_files
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, corbet@lwn.net, linux-doc@vger.kernel.org, 
-	LKML <linux-kernel@vger.kernel.org>, linux@treblig.org, viro@zeniv.linux.org.uk, 
-	Jens Axboe <axboe@kernel.dk>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADqfIWgC/23MQQ6CMBCF4auYrq1pCxhw5T2MIUM7hVlAzVQbD
+ eHuFjZG4/K95P9mEZEJozjtZsGYKFKY8ij2O2EHmHqU5PIWRplKlaaRlkNs0bYeJumg6I4l2MZ
+ qJXJxY/T03LTLNe+B4j3wa8OTXt//TtJSSahdgwX6rtNwtgOHkR7jIXAvViqZT14p852bnJeuq
+ utMg9L+J1+W5Q0Luz3p6AAAAA==
+X-Change-ID: 20250429-cros_ec_fan-da3b64ac9c10
+To: Benson Leung <bleung@chromium.org>, Guenter Roeck <groeck@chromium.org>, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>, 
+ Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: chrome-platform@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Sung-Chi Li <lschyi@google.com>, Sung-Chi Li <lschyi@chromium.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1747033920; l=3417;
+ i=lschyi@chromium.org; s=20250429; h=from:subject:message-id;
+ bh=UWaHpy3tnuk3FHkK9ajulVDIc6cTkMBqJq892XSpDJ8=;
+ b=EQQGXva2ZZS8B7c6+//f34iGTwDkWEWiJYknBjz7FXnCpBoYGtn0gOLAtaIXoHIvnx5LRG97E
+ Y4wuF7ijplXBlacBRO/kZ3ALLzh/sTiap7mvYUCqRWkDgnu+hgDoJ2k
+X-Developer-Key: i=lschyi@chromium.org; a=ed25519;
+ pk=9gCZPRJmYyHDt6VN9FV2UreFcUr73JFrwYvmsltW9Y8=
+X-Endpoint-Received: by B4 Relay for lschyi@chromium.org/20250429 with
+ auth_id=392
+X-Original-From: Sung-Chi Li <lschyi@chromium.org>
+Reply-To: lschyi@chromium.org
 
-On Mon, May 12, 2025 at 2:17=E2=80=AFPM Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> On Mon, May 12, 2025 at 09:14:56AM +0300, Andy Shevchenko wrote:
-> > On Mon, May 12, 2025 at 09:12:56AM +0800, Jason Xing wrote:
-> > > Hi All,
-> > >
-> > > I noticed this patch "relay: Remove unused relay_late_setup_files"
-> > > appears in the mm branch already[1], which I totally missed. Sorry fo=
-r
-> > > joining the party late.
-> > >
-> > > I have a different opinion on this. For me, I'm very cautious about
-> > > what those so-called legacy interfaces are and how they can work in
-> > > different cases and what the use case might be... There are still a
-> > > small number of out-of-tree users like me heavily relying on relayfs
-> > > mechanism. So my humble opinion is that if you want to remove
-> > > so-called dead code, probably clearly state why it cannot be used
-> > > anymore in the future.
-> > >
-> > > Dr. David, I appreciate your patch, but please do not simply do the
-> > > random cleanup work __here__. If you take a deep look at the relayfs,
-> > > you may find there are other interfaces/functions no one uses in the
-> > > kernel tree.
-> > >
-> > > I'm now checking this kind of patch in relayfs one by one to avoid
-> > > such a thing happening. I'm trying to maintain it as much as possible
-> > > since we internally use it in the networking area to output useful
-> > > information in the hot paths, a little bit like blktrace. BTW, relayf=
-s
-> > > is really a wonderful one that helps kernel modules communicate with
-> > > userspace very efficiently. I'm trying to revive it if I can.
-> >
-> > Jason, with all of the respect, if you are interested in keeping things=
- going
-> > on, please add yourself to the MAINTAINERS. It will makes the users of =
-the
-> > legacy code, Andrew and others, who are doing maintainer's/reviewer's j=
-ob,
-> > and you happy.
-> >
-> > Also note, we usually do not care about the out-of-tree users. The main=
- Q here
-> > why are they out-of-tree for so long time?
-> >
-> > > [1]: https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git/comm=
-it/?h=3Dmm-everything&id=3D46aa76118ee365c25911806e34d28fc2aa5ef997
->
-> With the above being said, I am +1 for the patch to stay. Feel free to se=
-nd
-> a revert with a good justification of why it should stay. Note, out-of-tr=
-ee
-> is not enough argument.
+This is a continuation of the previous series "Export the target RPM fan
+control by ChromeOS EC under hwmon"
+(https://lore.kernel.org/lkml/20250313-extend_ec_hwmon_fan-v1-0-5c566776f2c4@chromium.org/T/#t).
+There is a change from controlling the target fan RPM value to control
+the PWM value.
 
-Thanks for the vote. Let me seriously think of the possible use case
-here. If I find one, I think I would revert it as soon as possible.
+We anticipate to involve fans connected to EC as thermal cooling
+devices, so we can utilize the thermal framework to have further thermal
+control strategies.
 
-Thanks,
-Jason
+This series updates the required EC controls definitions, implements the
+mechanism for controlling fan PWM values, and registers these fans under
+thermal framework as cooling devices.
+
+Adapting comments from the previous series, the driver probes the host
+command capability at beginning to see whether a fan is controllable:
+  - if command `EC_CMD_PWM_GET_FAN_DUTY` is supported (v0, this is a
+    new command).
+  - if command `EC_CMD_THERMAL_AUTO_FAN_CTRL` v2 is supported.
+  - if command `EC_CMD_PWM_SET_FAN_DUTY` v1 is supported.
+
+This combination is selected as this is the minimum requirement for a
+fan to be fully controllable under hwmon framework.
+
+The driver supports changing the fan control mode, and allows to change
+the fan PWM value only if the fan is in manual control mode. The power
+management hook is implemented as well for keeping the fan control
+settings, as EC will automatically restore the control method to auto
+when device is suspended.
+
+Change-Id: I4e2fdc8c4bc50778c0d04cfbefeaab7088d3181e
+Signed-off-by: Sung-Chi Li <lschyi@google.com>
+---
+Changes in v3:
+- Make required EC command versions macros.
+- Add `CONFIG_THERMAL` guarding for registering as thermal fan cooling
+  devices.
+- Add error handling during registering thermal cooling devices, and
+  immediately abort the registration if any error occurred to align with
+  the thermal sensor registration in hwmon core.
+- Add error handling for EC fan communication during suspend and resume.
+- Add `CONFIG_PM` guarding for checking whether the EC supports a
+  complete fan control in hwmon driver.
+- Sort variables order in declaration.
+- Separate declaration and logic to different sections.
+- Move `cros_ec_thermal_cooling_ops` next right after the operation
+  functions declaration.
+- Improve describing the resume behavior in documentation.
+
+Changes in v2:
+- Change column from 80 to 100 and fix styles.
+- Directly store driver data into platform dev with
+  platform_set_drvdata.
+- Unify the PWM unit (from 0 ~ 255) between hwmon and thermal cooling
+  devices.
+- Only fetch the fan control mode and PWM value when suspending rather
+  than caching values when writing. The suspend hook is thus added.
+- Link to v1: https://lore.kernel.org/r/20250429-cros_ec_fan-v1-0-a8d9e3efbb1a@chromium.org
+
+---
+Sung-Chi Li (3):
+      platform/chrome: update pwm fan control host commands
+      hwmon: (cros_ec) add PWM control over fans
+      hwmon: (cros_ec) register fans into thermal framework cooling devices
+
+ Documentation/hwmon/cros_ec_hwmon.rst          |   7 +-
+ drivers/hwmon/cros_ec_hwmon.c                  | 306 +++++++++++++++++++++++++
+ include/linux/platform_data/cros_ec_commands.h |  29 ++-
+ 3 files changed, 340 insertions(+), 2 deletions(-)
+---
+base-commit: 33035b665157558254b3c21c3f049fd728e72368
+change-id: 20250429-cros_ec_fan-da3b64ac9c10
+
+Best regards,
+-- 
+Sung-Chi Li <lschyi@chromium.org>
+
+
 
