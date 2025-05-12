@@ -1,77 +1,78 @@
-Return-Path: <linux-doc+bounces-45933-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-45940-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A963AB3D6E
-	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 18:26:11 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99252AB3D68
+	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 18:25:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F16C43B237F
-	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 16:21:34 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C4719188E352
+	for <lists+linux-doc@lfdr.de>; Mon, 12 May 2025 16:23:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3EC0124A073;
-	Mon, 12 May 2025 16:21:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C485D253321;
+	Mon, 12 May 2025 16:21:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="PDDmKXyj"
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="T11VnCbF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5424246790
-	for <linux-doc@vger.kernel.org>; Mon, 12 May 2025 16:21:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 710592522A7
+	for <linux-doc@vger.kernel.org>; Mon, 12 May 2025 16:21:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747066908; cv=none; b=gw16dcF6LLHeyHUHr371gkomvmgs6zVbBCfbayLA+jz5PARKGB2UVUxS4wa7O+9RKS7vp4ZbEXIaa6sqThGONxDGUuaSQ18OvDw9CIvWG95k2PDtXRLzgVwLIXDP6A8O/40PPU2fHqXXX/J3v61VuCioMJZTlCfskfI1HlGH0sA=
+	t=1747066919; cv=none; b=KC4SmM/4kPFmVbgQbgIsVhtrWbO7WuOyhrQqKe/R6sNh0p82J25KRKztWW3wEWtRb9BFGo7Bl7E9+X+/knOsXG5Gv7USK/d+L1mgxt2+u3Eht1tcrivSQBdN45ENlXHS7y2FSmPNFzlyH4UV17tsWzDZWdfxfordtdNOye2LAVM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747066908; c=relaxed/simple;
-	bh=bc+l52lzMgg34Vw41X2Wy/FxQj+yccNEeALSbRGK27Y=;
+	s=arc-20240116; t=1747066919; c=relaxed/simple;
+	bh=DoI5kxJikAM/qpIRAtn9fjxrQS8+dT5cbJX/H3hs68w=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Uu0e5mG2F5NhLYHRoNp4hGe6LJFD06ugOF4tupm57glE02YEUxWxku9JgV0XoDlmV/HLIJB0HvFogrP1sTk3PHu/tX2FwiwPJD0dm10V/xBz9F+pkzuVP4kMwUerslGcFQ7+q0xb0xMb0dUpwFD5Gps9TnuRAfZyJ481DsTo3Co=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=PDDmKXyj; arc=none smtp.client-ip=209.85.160.170
+	 MIME-Version; b=qORIC+bo3c8D1jQ2EoYCLEL3gPdlLsG5uTjna0S71rjOPStYX4/3tcKCajLHFwxzWbUQ/fLAcUlSec/vN3wzZLEl6SxlP3tKLoSfxy+znSo3odzKEnQgpqmaVWWhHM2Bf/x8jVztg2bPEumpjZzCXeWKuxmlnripcj6cG71R4Kk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=T11VnCbF; arc=none smtp.client-ip=209.85.222.171
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
-Received: by mail-qt1-f170.google.com with SMTP id d75a77b69052e-47662449055so26188251cf.1
-        for <linux-doc@vger.kernel.org>; Mon, 12 May 2025 09:21:44 -0700 (PDT)
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-7cad6a4fae4so817296885a.2
+        for <linux-doc@vger.kernel.org>; Mon, 12 May 2025 09:21:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1747066903; x=1747671703; darn=vger.kernel.org;
+        d=gourry.net; s=google; t=1747066916; x=1747671716; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=U3rVHINvuxD50BlXL+fWePXRUBl5vPBCCVNAK+caSv0=;
-        b=PDDmKXyjwC0Hi98kXwfZpOo9d1PQrNrP6UxGJAh5Yu4ndqilfWNNpL0rDAz0R9g1gb
-         8qtgdNlydJ3GaloDRqkRX4pXQTzFfjf7kiNGka/rW2VXWKi5n94pphP2KcJPXrEvsNs7
-         P2mEXZyVPyXouiH6cYRE1RQnocnbmIB865nr6S6zDQbCA+dCU7gtqutpdi2WkKwhXLl6
-         FlgFgZJf34QNTU419hu922O41Gyw1l5ETplsWLyE6v/H5mM6F8bvk7MrGT8uojKtUNwA
-         4e6Hx7KzouoqbHDAG6x9mdW5y3pHPzCILbRH4cDQsS+Sl8YIz0XQN0wjT0/NcmoaP+T5
-         UVUA==
+        bh=sNILEeZYlBJQYm8rxVf5XnkRfrtj2f63uIZxnPhs6Qs=;
+        b=T11VnCbFRPyHD4HaXeoavsqFfREJZpXTL/5dnngo7KylDBShtZ6689/TFf2dvDz1fD
+         yih49sm2N9ze/p5IT++yOpphrutlzwkydXKBZp4bA3aAdvHDcnkyJb7RayJsS+Iwuqn7
+         ivpk7lWohsG7Sa2GLFXeDD9QX7vxmPVbwCO7XcoM44PJZQK5rX0i1e/A6GyApss9TXCv
+         j7HKiCCev5mtJA5Azaav1zSLKUJt4DwtKG+JnyQE2zThGsRFs7MmC+eA7fX8SwlBkgrG
+         jKt23Dbpz0E49qcBvPj7bN2g5u1SCAdRbW7aaoCZNrfNiGzNEbGhdEitg3pIHCu+Qu3X
+         hKtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747066903; x=1747671703;
+        d=1e100.net; s=20230601; t=1747066916; x=1747671716;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=U3rVHINvuxD50BlXL+fWePXRUBl5vPBCCVNAK+caSv0=;
-        b=uo3O5e37ytcIm9DxTdW/EAH1jlzq0ffU/eBsNPJBNkyW5aNj2qA+09JJ9+8M404UPj
-         3WQjJ3vXmc23V+c6T4+KEVqoM1yNUwK8FdnSh9U6IsveMySTIUvdL0kH1BfbEYmj3R/Y
-         S6UGUvaFQF9hG+IWIAvA1Mory8IddZqDORmwM4mYSPRzXtveQdd7Q5RVsHk+9/Wbo7zs
-         knU0RtSoV32gaCLSpX6V4H71d6GX4R+ISqpfaD7jA/hW4jCcrxgfHIYAAhEuMyTkKTnO
-         fckhqcB+8RO9STgEvDVuYjLqpUD69+nBADc9HFvGcvSM0x8X8qphZ6n++n+FKHyrtnFV
-         HY9Q==
-X-Gm-Message-State: AOJu0YxYH7kjUm6TrGLhTTLTPjoLNx0R6I5UMcIAu5jANNU8VLnaghSw
-	Myq/bEpQhNg7snhDyFJgnDDnQhudd95tR+xCjiNbgibtu5J7SNqE7YzyZUcNYA0=
-X-Gm-Gg: ASbGncv46ftF0WUPKTT6L2GyfEyvblT4dF4wq5sT7dgP9JRUT7q5cq72yJFl8F7dhY3
-	AVPK9mWNsHPxVN51AbhpK8+qzBbwv1ID75A9E7XygWMtppCWqzAWNqKZzzQXPXL2fu5HIaK0g+X
-	T9r1HUKly4HH55tAu2Ox0Pvyah/J5vpf6UW+xm+Vsjf4Jlx1+EerdsPleZVPyLz/OliVoTzRHam
-	z7389fK0Y3mxP5VFbSD57m0nTNspL6PHcYq/qNPJ830umVXkV587EA4stNeo03ZkvadamzWVY7l
-	9tJzDWm94lAeijGnFna+124R5n41X/unnMULO2b1+YDdHg4JNFsAYHiJ9gDvbRogXDyBW3duxYw
-	DWooD62wTrYBYZNHrm9N4B4eOCfavyEYOTcbwftsl+vHYIw4=
-X-Google-Smtp-Source: AGHT+IHXhc25rBNfw4eftHDjphXiDL9wvYrUeit49NMjedMVQ+FbLTR0r4T1UKzJc3WYccg/k21O/A==
-X-Received: by 2002:a05:622a:553:b0:48a:2122:5047 with SMTP id d75a77b69052e-494527136f4mr201727911cf.8.1747066903326;
-        Mon, 12 May 2025 09:21:43 -0700 (PDT)
+        bh=sNILEeZYlBJQYm8rxVf5XnkRfrtj2f63uIZxnPhs6Qs=;
+        b=TK6SVwyYzmvrtumPvx7NeQLyt+v+pDOUjPFcJwm/B4lKqO/CjHFvSC1VeARE2e4kb2
+         vwcc0qCpDWqBNueLdN1YEJfWp3pvUaJJ2Qyu1R4SOK6tZdZrKDqT1kZND3o8iZ6oX9hZ
+         wczE1VVvImBFmIx4RECtS7VY3E9L3BZSHVAkShawh8v4pCfLRtSF/rVW5dY2KFpdl+1B
+         oMGrPyscGo4J1PrIrS20WPrTa/ri7SBmlqmCWTHW7LqiOJYGIHa4JCVTcUVHP2BgJsDe
+         4zSndFGLw7wRxwzIYPRX18Bu63RrC5fG7LszckLsYc069lZvr9bpF8JfrVUZ/ppZDHEO
+         Ygig==
+X-Gm-Message-State: AOJu0YyLzm+rx/Mq8MOAG6cvg9lYQhg1vCKg2gZYhHdE5RipwLwE38Ho
+	LeQZ7u1dq85X89uJL5ydSJI0l5M6IGejTjd9Dqt6VrNfZpIEDPj+jJyEI2/50RaxhNvBt0wcEGA
+	N
+X-Gm-Gg: ASbGnctfkt9fz7rx6omIwRIUJUMNvci9gc/ehJPdeem/HcVZffLYpf4yLq5J8Fpfk6t
+	wRmakmlOF9IKYFK8tAm94JSIhTFbSrEDHts/Oef6tuctCy/rzxwzrnn/9It0c1ZJ10fwloDOnyr
+	Bkkf6OfgUP3EVCcbs909sLmE8yD9kWNbh+/jItPqmBCtGh37zgBag5BP1iFcXsUJzEgMJ2mOBb/
+	ZjSdaJKrrX5eCI6ih37OTHp6vR7Kgxd/2j4PAcaMktqUVeJgt9gQmlAS22x8jZj5oXgWkZZWJEF
+	gkjZrl9A6sjtNc0A4TqHF9oAjjrhhN0m/cyJzRlVe86ay+YyZ7Z0gn4Vw3YjUkFqrH+/z/qdtZw
+	phE1Q+qoKIEGT0cGsHZG/R7vt/1lxnRWaf9YJ
+X-Google-Smtp-Source: AGHT+IFwl36mLDo7FZkCUHoGJHyTy2zewdmXD6A4NvIgp/fn+qZTsyQP+IQVYzuIHMVoFWLDW+xitg==
+X-Received: by 2002:a05:622a:1aa0:b0:476:8cad:72e0 with SMTP id d75a77b69052e-49452734c55mr177946951cf.15.1747066905232;
+        Mon, 12 May 2025 09:21:45 -0700 (PDT)
 Received: from gourry-fedora-PF4VCD3F.lan (pool-96-255-20-42.washdc.ftas.verizon.net. [96.255.20.42])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-49452583961sm52461791cf.58.2025.05.12.09.21.42
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-49452583961sm52461791cf.58.2025.05.12.09.21.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 May 2025 09:21:43 -0700 (PDT)
+        Mon, 12 May 2025 09:21:44 -0700 (PDT)
 From: Gregory Price <gourry@gourry.net>
 To: linux-cxl@vger.kernel.org
 Cc: linux-doc@vger.kernel.org,
@@ -84,10 +85,12 @@ Cc: linux-doc@vger.kernel.org,
 	vishal.l.verma@intel.com,
 	ira.weiny@intel.com,
 	dan.j.williams@intel.com,
-	corbet@lwn.net
-Subject: [PATCH v3 01/17] cxl: update documentation structure in prep for new docs
-Date: Mon, 12 May 2025 12:21:18 -0400
-Message-ID: <20250512162134.3596150-2-gourry@gourry.net>
+	corbet@lwn.net,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH v3 02/17] cxl: docs - access-coordinates doc fixups
+Date: Mon, 12 May 2025 12:21:19 -0400
+Message-ID: <20250512162134.3596150-3-gourry@gourry.net>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250512162134.3596150-1-gourry@gourry.net>
 References: <20250512162134.3596150-1-gourry@gourry.net>
@@ -99,82 +102,66 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Restructure the cxl folder to make adding docs per-page cleaner.
+Place the hierarchy diagram in access-coordinates.rst in a code block.
 
+Fix a few grammar issues.
+
+Suggested-by: Randy Dunlap <rdunlap@infradead.org>
+Suggested-by: Bagas Sanjaya <bagasdotme@gmail.com>
 Signed-off-by: Gregory Price <gourry@gourry.net>
 ---
- Documentation/driver-api/cxl/index.rst           | 16 +++++++++++++---
- .../cxl/{ => linux}/access-coordinates.rst       |  0
- ...emory-devices.rst => theory-of-operation.rst} | 10 +++++-----
- 3 files changed, 18 insertions(+), 8 deletions(-)
- rename Documentation/driver-api/cxl/{ => linux}/access-coordinates.rst (100%)
- rename Documentation/driver-api/cxl/{memory-devices.rst => theory-of-operation.rst} (98%)
+ .../cxl/linux/access-coordinates.rst          | 30 +++++++++----------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/Documentation/driver-api/cxl/index.rst b/Documentation/driver-api/cxl/index.rst
-index 965ba90e8fb7..fe1594dc6778 100644
---- a/Documentation/driver-api/cxl/index.rst
-+++ b/Documentation/driver-api/cxl/index.rst
-@@ -4,12 +4,22 @@
- Compute Express Link
- ====================
+diff --git a/Documentation/driver-api/cxl/linux/access-coordinates.rst b/Documentation/driver-api/cxl/linux/access-coordinates.rst
+index b07950ea30c9..e408ecbc4038 100644
+--- a/Documentation/driver-api/cxl/linux/access-coordinates.rst
++++ b/Documentation/driver-api/cxl/linux/access-coordinates.rst
+@@ -26,20 +26,20 @@ There can be multiple switches under an RP. There can be multiple RPs under
+ a CXL Host Bridge (HB). There can be multiple HBs under a CXL Fixed Memory
+ Window Structure (CFMWS).
  
-+CXL device configuration has a complex handoff between platform (Hardware,
-+BIOS, EFI), OS (early boot, core kernel, driver), and user policy decisions
-+that have impacts on each other.  The docs here break up configurations steps.
-+
-+.. toctree::
-+   :maxdepth: 2
-+   :caption: Overview
-+
-+   theory-of-operation
-+   maturity-map
-+
- .. toctree::
-    :maxdepth: 1
-+   :caption: Linux Kernel Configuration
+-An example hierarchy:
++An example hierarchy::
  
--   memory-devices
--   access-coordinates
-+   linux/access-coordinates
+->                CFMWS 0
+->                  |
+->         _________|_________
+->        |                   |
+->    ACPI0017-0          ACPI0017-1
+-> GP0/HB0/ACPI0016-0   GP1/HB1/ACPI0016-1
+->    |          |        |           |
+->   RP0        RP1      RP2         RP3
+->    |          |        |           |
+->  SW 0       SW 1     SW 2        SW 3
+->  |   |      |   |    |   |       |   |
+-> EP0 EP1    EP2 EP3  EP4  EP5    EP6 EP7
++                CFMWS 0
++                  |
++         _________|_________
++        |                   |
++    ACPI0017-0          ACPI0017-1
++ GP0/HB0/ACPI0016-0   GP1/HB1/ACPI0016-1
++    |          |        |           |
++   RP0        RP1      RP2         RP3
++    |          |        |           |
++  SW 0       SW 1     SW 2        SW 3
++  |   |      |   |    |   |       |   |
++ EP0 EP1    EP2 EP3  EP4  EP5    EP6 EP7
  
--   maturity-map
+ Computation for the example hierarchy:
  
- .. only::  subproject and html
-diff --git a/Documentation/driver-api/cxl/access-coordinates.rst b/Documentation/driver-api/cxl/linux/access-coordinates.rst
-similarity index 100%
-rename from Documentation/driver-api/cxl/access-coordinates.rst
-rename to Documentation/driver-api/cxl/linux/access-coordinates.rst
-diff --git a/Documentation/driver-api/cxl/memory-devices.rst b/Documentation/driver-api/cxl/theory-of-operation.rst
-similarity index 98%
-rename from Documentation/driver-api/cxl/memory-devices.rst
-rename to Documentation/driver-api/cxl/theory-of-operation.rst
-index d732c42526df..32739e253453 100644
---- a/Documentation/driver-api/cxl/memory-devices.rst
-+++ b/Documentation/driver-api/cxl/theory-of-operation.rst
-@@ -1,9 +1,9 @@
- .. SPDX-License-Identifier: GPL-2.0
- .. include:: <isonum.txt>
+@@ -82,8 +82,8 @@ this point all the bandwidths are aggregated per each host bridge, which is
+ also the index for the resulting xarray.
  
--===================================
--Compute Express Link Memory Devices
--===================================
-+===============================================
-+Compute Express Link Driver Theory of Operation
-+===============================================
+ The next step is to take the min() of the per host bridge bandwidth and the
+-bandwidth from the Generic Port (GP). The bandwidths for the GP is retrieved
+-via ACPI tables SRAT/HMAT. The min bandwidth are aggregated under the same
++bandwidth from the Generic Port (GP). The bandwidths for the GP are retrieved
++via ACPI tables SRAT/HMAT. The minimum bandwidth are aggregated under the same
+ ACPI0017 device to form a new xarray.
  
- A Compute Express Link Memory Device is a CXL component that implements the
- CXL.mem protocol. It contains some amount of volatile memory, persistent memory,
-@@ -14,8 +14,8 @@ that optionally define a device's contribution to an interleaved address
- range across multiple devices underneath a host-bridge or interleaved
- across host-bridges.
- 
--CXL Bus: Theory of Operation
--============================
-+The CXL Bus
-+===========
- Similar to how a RAID driver takes disk objects and assembles them into a new
- logical device, the CXL subsystem is tasked to take PCIe and ACPI objects and
- assemble them into a CXL.mem decode topology. The need for runtime configuration
+ Finally, the cxl_region_update_bandwidth() is called and the aggregated
 -- 
 2.49.0
 
