@@ -1,221 +1,204 @@
-Return-Path: <linux-doc+bounces-46077-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46079-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C44BAB62F3
-	for <lists+linux-doc@lfdr.de>; Wed, 14 May 2025 08:22:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CA44AB64A2
+	for <lists+linux-doc@lfdr.de>; Wed, 14 May 2025 09:39:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8856F189FBF8
-	for <lists+linux-doc@lfdr.de>; Wed, 14 May 2025 06:22:19 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 937021B62A83
+	for <lists+linux-doc@lfdr.de>; Wed, 14 May 2025 07:39:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B575320B7EE;
-	Wed, 14 May 2025 06:20:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0941420A5E1;
+	Wed, 14 May 2025 07:39:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="J+H/rt/E"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="HJWOeX8z"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2049.outbound.protection.outlook.com [40.107.244.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC204205E26;
-	Wed, 14 May 2025 06:20:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.19
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747203655; cv=none; b=i1GdTs5e34FEbUpxnKkcPcY33EjLArpRa9NfIa6leWl/VpWVYivukLPcV9mhYjf0l8k+u9ZLI8IUNf9ry4/uvFUTAA6/DemMqtiH8QhzTfR48/i8kaCmmTwPRGM3uZk6tQrMcJPaTFr9suIJ+JaKV2KMZbbSdYxm6g18OgW9Xmg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747203655; c=relaxed/simple;
-	bh=1tgzxSLFx2JfvRSdwXN0XFOEZ02uDz+Zo/XR6mX329Y=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=md4QP40cR6nAgz+i6mW+npdNEfZmnVPbABLInr5FMEznvBWgK/qKqYRAjNnYYIvc7trfhlyyZUiaqG5+TEAvpniCI2TevnuQt850bQSWorgdppUmZ1N/1q/HmVJnMj+JstESPjweC++LqaWoNsVTY4mXOCZve5S6pAuivSsXUa8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=J+H/rt/E; arc=none smtp.client-ip=192.198.163.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1747203654; x=1778739654;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=1tgzxSLFx2JfvRSdwXN0XFOEZ02uDz+Zo/XR6mX329Y=;
-  b=J+H/rt/EkyzYxuleYOBnqYRJrqxE4XQCsBZoaOTirpVwatoiZRjQ/+i4
-   /7iZEaush8cta+wfSmekinz+1N86Tjmb1zVi1l/Rt35ysT9iFLD22hSs3
-   JZx36+FGOVjCtAgiP1NopDb1lSoBdR3Sd8tKKBFKUltCcG8GivYYCUX8b
-   rfkA8o8A7StpHmfwrZVkl1CU2iIONoXMHlimU2koKD5zHo+e/65X7Dsv2
-   4P1AV8+LoMRwighm//5Kmyuq7zldgUpK5dGkHFmCwoFyGKPaXRkfyqfhb
-   ejA/bUiNkqfhN2Cs747UQb0OoecqoyXpiCsRqhzauBTui+gb0EhSjd88M
-   A==;
-X-CSE-ConnectionGUID: p93DycxcQqGcFPmwW+ogjw==
-X-CSE-MsgGUID: 7tTzALOvToSIaI1etcGggw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11432"; a="48192377"
-X-IronPort-AV: E=Sophos;i="6.15,287,1739865600"; 
-   d="scan'208";a="48192377"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2025 23:20:53 -0700
-X-CSE-ConnectionGUID: NYg76PM8RbuHQqssV3qHhw==
-X-CSE-MsgGUID: vMEEcurzR0iSBWsYcyq/vw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,287,1739865600"; 
-   d="scan'208";a="138867032"
-Received: from shsensorbuild.sh.intel.com ([10.239.133.18])
-  by orviesa008.jf.intel.com with ESMTP; 13 May 2025 23:20:52 -0700
-From: Even Xu <even.xu@intel.com>
-To: jikos@kernel.org,
-	bentiss@kernel.org
-Cc: srinivas.pandruvada@linux.intel.com,
-	linux-input@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Even Xu <even.xu@intel.com>,
-	Chong Han <chong.han@intel.com>
-Subject: [PATCH v1 7/7] HID: Intel-thc-hid: Intel-quicki2c: Add two new features to PTL
-Date: Wed, 14 May 2025 14:19:44 +0800
-Message-Id: <20250514061944.125857-8-even.xu@intel.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20250514061944.125857-1-even.xu@intel.com>
-References: <20250514061944.125857-1-even.xu@intel.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67E28201000;
+	Wed, 14 May 2025 07:39:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.244.49
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1747208345; cv=fail; b=EN79nZx9yLZxUZUXu/CavsYM/uVtb+GhMIHyaOkauD93MipDtuXEXINwVpcKyRpGBvyRjhgg7k13LIZ5cuhdbzzveeaeD/ygDyl/VCI+Q/b3pigvCZB1krsjybPcUm4fjqKBhoQu+rItn4c8RKwXfvy8s33/GNfVHYgEXbbcAUo=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1747208345; c=relaxed/simple;
+	bh=oU5lg2Dejsy8T1D/rLoxxYCGFlvGX+/C4v4//Z7ZsZg=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=BqP6WDlwrbTyBytnfLhFekfklJ4Z1U8ap7gZIwkq910Sy+b9Fa6CtjvjMXSTtrbglg9fC5mJsj40UIcX13y5Z/HPfaYfjQKceRT54jsbaLBqIVSN8u0deXhRjUjMpprXc71iomlwWbkdT7r9vPDjYp5SLA45CvqcE77UJVYyDCw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=HJWOeX8z; arc=fail smtp.client-ip=40.107.244.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PgdWfjdcWZXFVK3GuUJ4lAykaTTxW4Bfi3YfmugE9PUVjALPa+AgbtDoQyEjU3ks1o/XkxLuXQHB2uVu4KwELrfmIINBhgbInfd7ExZO9RzjgSynOd6G+DMaHgvWAdt9IWPWPIjFH6X+nOokBlhT3Eu3jc1c3fZI+tk+top1XqMYbeYZ06Nm9ZIZ26lJzHUE70FimBaAB1wZJEPmgCg1vcDkdNHLW1hbxtm+vrKBR9b//1DAmSZg1rhtZuqJlUSJ/rFKdc78T2vIuXVoFs1Wgj+eaolpyKkucU0/XrbO2NuVuj8Rx9LYG0gfOK/9DxBMFV5PgRPjC+GMO6fyGFiGpA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=r6P9W5QTH1yIi5Tju3Dt+Z2BlhH1XLD2rDiRAjm9XuU=;
+ b=rp3tPnO1Vz8xXQ/X/VPByjPE5/D56TgTUrMUaK4/IHHvf+kahWkGix3FbvnI20n2U11dyQBcpBloDKvv7tFh2TQ7NDSZyIj1Ag9hqI6/8aasYc75YnyCpQZ2eYRbzR+dqaCIAiGzuRI3BrJdUdCgesLabHNrwBCNo6YndWYym2seZLDUJ7f3vZNE8db66ddGFZp/GRGRyrXXSRJUSoeZjPU+q9guyx5yyXXS7H4GKTAY1L8bwY71QAqmuSm0fZh8E1Ugclt3KgWhNTgsA0dVt+jgG6aa7noHpqwJsLllHC2fQ5fFAE4nghghTgqkY9LZIuHa7ZBDnm0Ou+YFRp+3yQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=r6P9W5QTH1yIi5Tju3Dt+Z2BlhH1XLD2rDiRAjm9XuU=;
+ b=HJWOeX8zi9HXiS6SL7qtMvGKEErVf7AS/KCccdI7+xezFCxZkp+lZ4YPgNFgk9tXO1n5R7Sn21Z/2p9W1Z9LOQLs4W8AJfaeEWPPfTIb1+97BauqvdYSGLvA7igJ+Ll9OBJo/l8HYKjEm0lGD25DCDxtgiLQHphhInHKfc2NcVwlT+pioQbm/AbsIe0XQHwOvXmzy78+nbjiZdR+GFZ0pyJWSEE6/0kBOst/MipalsGhgP+gBqictB7YEkrYAXRJLkcUlKO9wk9SILXVfIN97fBu0+AK6SfdbxF5mBGHO4n5hBQFad9sCNsfmyKjbiJ73HzBogwg8qtSdqoMDo8Cbg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from CH3PR12MB7500.namprd12.prod.outlook.com (2603:10b6:610:148::17)
+ by MW4PR12MB6756.namprd12.prod.outlook.com (2603:10b6:303:1e9::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.29; Wed, 14 May
+ 2025 07:39:01 +0000
+Received: from CH3PR12MB7500.namprd12.prod.outlook.com
+ ([fe80::7470:5626:d269:2bf2]) by CH3PR12MB7500.namprd12.prod.outlook.com
+ ([fe80::7470:5626:d269:2bf2%5]) with mapi id 15.20.8722.027; Wed, 14 May 2025
+ 07:39:00 +0000
+Message-ID: <f4d5d337-6a08-4ca6-8fab-4b640e732c9f@nvidia.com>
+Date: Wed, 14 May 2025 10:38:51 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next V9 1/5] devlink: Extend devlink rate API with
+ traffic classes bandwidth management
+To: Tariq Toukan <ttoukan.linux@gmail.com>, Jakub Kicinski <kuba@kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>, Paolo Abeni <pabeni@redhat.com>,
+ Eric Dumazet <edumazet@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ Jiri Pirko <jiri@nvidia.com>, Leon Romanovsky <leonro@nvidia.com>,
+ Donald Hunter <donald.hunter@gmail.com>, Jiri Pirko <jiri@resnulli.us>,
+ Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed <saeedm@nvidia.com>,
+ Leon Romanovsky <leon@kernel.org>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-rdma@vger.kernel.org, Moshe Shemesh <moshe@nvidia.com>,
+ Mark Bloch <mbloch@nvidia.com>, Carolina Jubran <cjubran@nvidia.com>,
+ Cosmin Ratiu <cratiu@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Dragos Tatulea <dtatulea@nvidia.com>
+References: <1746769389-463484-1-git-send-email-tariqt@nvidia.com>
+ <1746769389-463484-2-git-send-email-tariqt@nvidia.com>
+ <20250509081625.5d4589a5@kernel.org>
+ <98386cab-11c0-4f74-9925-8230af2e65c8@gmail.com>
+Content-Language: en-US
+From: Gal Pressman <gal@nvidia.com>
+In-Reply-To: <98386cab-11c0-4f74-9925-8230af2e65c8@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: TL0P290CA0008.ISRP290.PROD.OUTLOOK.COM
+ (2603:1096:950:5::19) To CH3PR12MB7500.namprd12.prod.outlook.com
+ (2603:10b6:610:148::17)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR12MB7500:EE_|MW4PR12MB6756:EE_
+X-MS-Office365-Filtering-Correlation-Id: 60830659-091c-49e1-ea44-08dd92ba6484
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?N1o3KzFIWWZ4WjRxZDRaSE9mWDkwNjFVNzF1U0tOcmEvU2ZZc2pva3lFeEpr?=
+ =?utf-8?B?VDBIa0lVYklCcnpGSU10U3pKVGw0dFo1cGZHWVQ2VkRnMWtTUlIxYUxTT1lZ?=
+ =?utf-8?B?RzMxVkxBa3MrMTBoTDNUYkF0c0hZUE1XdTdrQk5aYng4L1dwVDJ5OGw1S3VV?=
+ =?utf-8?B?Mm9GSllSSm5tN1VEcWpLbFdscGJDLzBoK29YR05ZdHUyUHdiMUFoODROdDZm?=
+ =?utf-8?B?cWh2RUtlbXZDNHQxemlTeGZiTjNMZFpYK1BZWXBUalB1QkN6ME11VkszZ1ZW?=
+ =?utf-8?B?RGFNVzF5VElzcFBaRlJNOWpxK3dhTkpUbnhHOVZyOWJOWC8zdFpOVzA1SUx4?=
+ =?utf-8?B?WEc1a0JFdUdwb2JVTlZxUHlsQVoyZ1gySU1oczdxeks3ZU5hUy9IclZXRCtM?=
+ =?utf-8?B?T0huaUNibFlqNnhjeGVHMy84Vk9CYk5KSnhUNDBiV1EzVUhRTDRtUHVTWGpa?=
+ =?utf-8?B?R3VTM2xvSElNbkpkK3YwT3Q1NFh4ckdscng3akZTcEE1aWdmUzhMWDRXa1Jl?=
+ =?utf-8?B?WU9UUXI1NzVmZ1lpVUtiQ3JkZmFkWUNTWWcrWE9OZ09nays5dVpQZ1UzdFRZ?=
+ =?utf-8?B?bkdiN01hNlJMWTBDMkNWVDBkcjNVVmZpZFZ4Y3h1YkFOQ1hBZkZuTjlUT2R2?=
+ =?utf-8?B?UG96WFoySldoMnZtdjMxV3Q2b1JuQzNUYnhKckpBKzhQVVpLR1JHMW5jcDFE?=
+ =?utf-8?B?dlFRemFPekJtaEsveG5mUjNNMlJ1cmRyL3d3RitNNnIxeWs1OTloVXdrbXJj?=
+ =?utf-8?B?a01vVzFhVkllZVdIU0dndUp6Z2dIV0VDV0p0TXpnZHBOVjBkUEh5MHFyeGJz?=
+ =?utf-8?B?aGJ2cmV4VTZyOUNoTklMVkVlOFM3VjZQSGdDbC9FOGkzbHhWb3JjZkxoUGRT?=
+ =?utf-8?B?OGU1RWJYSjgrUXJReE91Q3VBaUU1bFlxN1o2RzgxSVlIRnp0YWFRcHFVWk1Q?=
+ =?utf-8?B?Z0hJSXlUQTY2ZTc0RDUzV1hQTGpmcE05Nm5GTnc5VlNaVTFsNmtoMER6Qlkr?=
+ =?utf-8?B?czVTK0o3QTdaVy9FVm5oYThrY2dmRFRPdzFyUldPcThhN1U5RnA0TXRBbTll?=
+ =?utf-8?B?TE91YXB2ZDVUNnhZZktKVWFkMmpIUFBKTlJOaWhNSWtkcjY4QlVkckI5Ymgv?=
+ =?utf-8?B?TzNKRTdiUFFqSU1OTEs0bjlBYkNEdmViMnFzSXg0SDZjNG5BU0syOFdJNDRK?=
+ =?utf-8?B?a0ZscXBZZDVzV2RiQ09Va2pOaE9qMmR3MTlvWFlEK1Z4cVQwbVU5emtXT2Nj?=
+ =?utf-8?B?em9TWEkwdmdqQnBkU0ZUMWR6S2F3NDNRZE11SEZDOStsMlpMQ2lDS1Q3ZkFR?=
+ =?utf-8?B?NzMwOC82V3FkV2NWYU5jVGNDbWtCNHJsZERJSEo4SWI5N1ZkUUMveWhndFUw?=
+ =?utf-8?B?YlN0K2xvT0duWEdkWGdEd3l1U0FxVVlmaGg2SFdxeVBIa0lUNU4rcEwwQWpm?=
+ =?utf-8?B?N0NxSWRJUy9QZ0xCWnRIMDhUWHk2ZDVOb2Z6VGpsMVlkKysrTGticmFMV21Z?=
+ =?utf-8?B?VjUvbm00UXA5MWJ6RjBBaU9CR1hBTTNDUUdEN3VuNUVxZXpFL1RJUGZHWklu?=
+ =?utf-8?B?cGJ5YkhzN28xbjZuRmVGQmdRZld4dDBTWHROTHRPQTl5aVU5ZG5BK2c5aW56?=
+ =?utf-8?B?WGVkbzhRUTNIUTJHZlY1TmJRZTZDMDcwM2xTSkRSMzNSSFdCcDRDVjdBMEF0?=
+ =?utf-8?B?RG0wd0EraWJZNHlhZmlVQ3ZYZytSb2NWczNCVHNTZUkyTlV4U1ZBdHAzTXlR?=
+ =?utf-8?B?NlJlblI4blMxaUlNRUNHaE9vd1ZYd1VQQWl0b3BCK0o0V09Dem8wRzVZdDVR?=
+ =?utf-8?B?QVVhTklIeVdtdUxjOXgxSjBEVzlYRXdaMUd1eGorakZSd1VWRGQxbmxiQmor?=
+ =?utf-8?B?OElzNHZoajBBbFo1Z205bmFaZVV6U1lTdExzajdnbEtlR21LR0lpejNIcUtJ?=
+ =?utf-8?Q?fO2+YePOmSc=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB7500.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?MGtIcThLSytkdVdtTnlHZ1NmMVVoVzU5cDhlQTE4V3NuMVovR1JRZ2xmOGZW?=
+ =?utf-8?B?RHZRbTlhWHpJNThJcXVhMlZuaWtlMjRhak1VZmJGdTlNMVNKdmtKN1RYWXpp?=
+ =?utf-8?B?U1lpUHQxOElneG9CSkZWOFo2dnlhbXZjZVA1alpFNUpGZm9HRXk1TWRCN1FY?=
+ =?utf-8?B?V25kYVF5QXhHaTh2SWJIczVMZVA5emRIc2M5S3poYnNON0ZkWmZNdXZjblEr?=
+ =?utf-8?B?RTE0K1pKNW9OdjM2YVBMWTFKRkRvZlR6elRtSUtmUjFyQncrZURIcDkwTXRa?=
+ =?utf-8?B?RExnTHJXWE83SkJjRWVlclh1cUU4NlJqQmhEd3RldnlScnU5NHF6bDlydHoy?=
+ =?utf-8?B?Y0NxcFBjWU1kcFNhVUcwNE4xUXRaY3o2dUVoSjV2SzAzYXo2dzUrNHpkSVR2?=
+ =?utf-8?B?UkFnOGxIeHdMV2N1QVFDZ21YdFRMTC9BemVOdW41OWp5RUQ2NXBMQ0t3U3dZ?=
+ =?utf-8?B?SXhpWXA5dk1lT3JNVDVJTXl4Q0tWZkg5T3lKQ0xKcUM2V0t4Z201ZmpTMnp2?=
+ =?utf-8?B?Rk9ySjdYSFN4M1F5NGJJZ084NTdldWZBTG16RitXVHR5Q203ZmFHWjdydjlL?=
+ =?utf-8?B?MDlKbmNTZ1krQklnai9meTR2Z0Q3SlFoaHpYaExnZjVsQzhNbk5XUnBYQ2N0?=
+ =?utf-8?B?d1VCZkt4MnY4NkoraDRhK0dWLzZkLzV1cHRwOC9ia1FDV3ZEbE8rK2FlY0E5?=
+ =?utf-8?B?ZVJtRkFvWkFXN0RrR0M2YnV2VTZSZ2pSdDhSZm9tdGxVR3RzVjVCMUVCeGR4?=
+ =?utf-8?B?blVtRDdmRXR4aWlmcjMwNE5SeHhIbHZCbG56Vjl2MGxPa1dDTUNPUWIvek92?=
+ =?utf-8?B?bGJwNHdlc0VjQUozdDk2dGQ3dGE3WTl0RVkvMjVrcmNBbDVzTEg5MXJpUHpY?=
+ =?utf-8?B?aWFHWk1UYmFDY1grY0FLc0NNcER6NmNJelpESlYxaGRTNXhvRUR0ajVmNzg5?=
+ =?utf-8?B?VEZkM21LSlVad0lBaFdBeG5zM1QwNkpCYTl0cmliejArajI1bG9UKzZXZExn?=
+ =?utf-8?B?N3ZUWXlRUDE1Vmx2di9LTXUrSDJMd0svb1k2UXNMb3JaTG5tZWFpTXVXTWJ0?=
+ =?utf-8?B?M0RoVU1wNCtGQlFWQjhnK0QwY2Vib0J3UEZiL3I4Lzh0UEVVeEdYS0FtN3VX?=
+ =?utf-8?B?SFlDMW45NjM4YVhOSUtpNTY1eXZMSFh2ZDRha3k3SDRRUXZPN3lIWFBNSVhR?=
+ =?utf-8?B?SXZndTdOdDZoWGRaSHFBR3FieG50bEovU294MGRxaVBpL0MzaUR0MytOTDVI?=
+ =?utf-8?B?Tzg4ak80d2M5VlVGcW9EYnRZalFSQWduMXlCTDBoaDA0U2R1OTRxRlpEczJ2?=
+ =?utf-8?B?S1lKckllNWVRNWpuZUhwVGNRd21rMTN1bWt6bmVTTndFcEVXMzhyTWV3Szlp?=
+ =?utf-8?B?UlIwWDNLeFlDaUc4S2xYTVFqaWw4RTJsTi9yZUo5OGtVMzZCTkRnSUl5OUJ5?=
+ =?utf-8?B?bVJCeUtLWk1DRlp6bXJyMHY2U3JtL2JISkNxQW95TkpVMG1rYjlwZ1IzRkk2?=
+ =?utf-8?B?ZkhnaldITDRZdDBEbXJvdTM5WkQ4Y09SQXR2a20zdCttaE5heE9KS1M3OTIx?=
+ =?utf-8?B?SVhZakN6dFU0dzYyYjdTOFJKRXVoVk5vdFQxV2ljVHg5RmVRdnlhdTVJS3lS?=
+ =?utf-8?B?dGg4cEh6QVdBQ2lHQnFHRXUzVy9pQ1RLdmtxdFlOODVpWUxBNWJXVkMzOU4y?=
+ =?utf-8?B?Ylk4Y1FHblBQc05lWVEyaXVVUnEwdURta3lEWDJLK3VMRFpNY3BPS3Vhdzc4?=
+ =?utf-8?B?YStxYlJ4emhrYmRVTXpJWmdlclNDL2hFZnU2dEU1bDNsVWpBaGhlVnVQY2o3?=
+ =?utf-8?B?TmY4OENsejJIZUw2dkx6NUdYc0tGWmtEcXNMY3BCclZMb0UrejZhRVFBbG9P?=
+ =?utf-8?B?eHdRNzBPS0RPU1dDcHFXUDNSRkptM1NLZmxQZFY1VERlUW44WlNkMkhTV2hx?=
+ =?utf-8?B?RHgzSlBCdklnWFlINEJLTStWeVI0RmUwemZUQmZRYXRiZzBUVVFHUGI4VnNy?=
+ =?utf-8?B?ekN5a29TTVdoeUN6N3YrUENZOEJqREVOdXM1N0R3eVV4MHZOcStMNkM2eElT?=
+ =?utf-8?B?c2JBNEJVK3VVVFkzRUxPYUpYQ0ZkZzN6QWhrcWN5TENrQzFCQUpKdTZVOE0w?=
+ =?utf-8?Q?Vw/ErFg6rXjBdq7sfI2iDZ7hh?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 60830659-091c-49e1-ea44-08dd92ba6484
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB7500.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 May 2025 07:39:00.8158
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Jx7V6dIAs7490le8eVYy0J8HGTWAdieaZuUc/vfaNbIOD6KvLUcZb9Tawc5QQTQu
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6756
 
-On Panther Lake platform (PTL), THC hardware introduces two new features
-for I2C subsystem:
-- Input max input size control
-- Input interrupt delay
+On 12/05/2025 17:27, Tariq Toukan wrote:
+>> I'm going to also give you a hint that my next complaint will be that
+>> there are no selftests in this series, and it extends uAPI.
+> 
+> I have some questions, looking for answers in an official source.
+> 
+> Most importantly, it is unclear to me when a selftest is required. What
+> is the guideline?
+> 
+> Please point me to any guidance for this selftest requirement. Is it
+> generic, or networking subsystem specific?
+> 
+> Let's make sure these things are well-defined, so we plan the extra
+> effort accordingly in future features, and improve predictability.
 
-This patch adds above new advanced features into QuickI2C driver, and
-enables max input size control feature on PTL to improve QuickI2C
-driver compatibility.
-
-Signed-off-by: Even Xu <even.xu@intel.com>
-Tested-by: Chong Han <chong.han@intel.com>
----
- .../intel-quicki2c/pci-quicki2c.c             | 62 +++++++++++++++++--
- .../intel-quicki2c/quicki2c-dev.h             |  6 ++
- 2 files changed, 64 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c b/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c
-index 918cb9eb6b50..40faba5bd81d 100644
---- a/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c
-+++ b/drivers/hid/intel-thc-hid/intel-quicki2c/pci-quicki2c.c
-@@ -18,6 +18,10 @@
- #include "quicki2c-hid.h"
- #include "quicki2c-protocol.h"
- 
-+struct quicki2c_ddata ptl_ddata = {
-+	.max_detect_size = MAX_RX_DETECT_SIZE_PTL,
-+};
-+
- /* THC QuickI2C ACPI method to get device properties */
- /* HIDI2C device method */
- static guid_t i2c_hid_guid =
-@@ -413,6 +417,50 @@ static void quicki2c_dev_deinit(struct quicki2c_device *qcdev)
- 	qcdev->state = QUICKI2C_DISABLED;
- }
- 
-+/**
-+ * quicki2c_dma_adv_enable - Configure and enable DMA advanced features
-+ * @qcdev: Pointer to the quicki2c_device structure
-+ *
-+ * If platform supports THC DMA advanced features, such as max input size
-+ * control or interrupt delay, configures and enables them.
-+ */
-+static void quicki2c_dma_adv_enable(struct quicki2c_device *qcdev)
-+{
-+	/*
-+	 * If platform supports max input size control feature and touch device
-+	 * max input length <= THC detect capability, enable the feature with device
-+	 * max input length.
-+	 */
-+	if (qcdev->ddata->max_detect_size >=
-+	    le16_to_cpu(qcdev->dev_desc.max_input_len)) {
-+		thc_i2c_set_rx_max_size(qcdev->thc_hw,
-+					le16_to_cpu(qcdev->dev_desc.max_input_len));
-+		thc_i2c_rx_max_size_enable(qcdev->thc_hw, true);
-+	}
-+
-+	/* If platform supports interrupt delay feature, enable it with given delay */
-+	if (qcdev->ddata->interrupt_delay) {
-+		thc_i2c_set_rx_int_delay(qcdev->thc_hw,
-+					 qcdev->ddata->interrupt_delay);
-+		thc_i2c_rx_int_delay_enable(qcdev->thc_hw, true);
-+	}
-+}
-+
-+/**
-+ * quicki2c_dma_adv_disable - Disable DMA advanced features
-+ * @qcdev: Pointer to the quicki2c device structure
-+ *
-+ * Disable all DMA advanced features if platform supports.
-+ */
-+static void quicki2c_dma_adv_disable(struct quicki2c_device *qcdev)
-+{
-+	if (qcdev->ddata->max_detect_size)
-+		thc_i2c_rx_max_size_enable(qcdev->thc_hw, false);
-+
-+	if (qcdev->ddata->interrupt_delay)
-+		thc_i2c_rx_int_delay_enable(qcdev->thc_hw, false);
-+}
-+
- /**
-  * quicki2c_dma_init - Configure THC DMA for QuickI2C device
-  * @qcdev: Pointer to the quicki2c_device structure
-@@ -452,6 +500,9 @@ static int quicki2c_dma_init(struct quicki2c_device *qcdev)
- 		return ret;
- 	}
- 
-+	if (qcdev->ddata)
-+		quicki2c_dma_adv_enable(qcdev);
-+
- 	return 0;
- }
- 
-@@ -466,6 +517,9 @@ static void quicki2c_dma_deinit(struct quicki2c_device *qcdev)
- {
- 	thc_dma_unconfigure(qcdev->thc_hw);
- 	thc_dma_release(qcdev->thc_hw);
-+
-+	if (qcdev->ddata)
-+		quicki2c_dma_adv_disable(qcdev);
- }
- 
- /**
-@@ -929,10 +983,10 @@ static const struct dev_pm_ops quicki2c_pm_ops = {
- static const struct pci_device_id quicki2c_pci_tbl[] = {
- 	{ PCI_DEVICE_DATA(INTEL, THC_LNL_DEVICE_ID_I2C_PORT1, NULL) },
- 	{ PCI_DEVICE_DATA(INTEL, THC_LNL_DEVICE_ID_I2C_PORT2, NULL) },
--	{ PCI_DEVICE_DATA(INTEL, THC_PTL_H_DEVICE_ID_I2C_PORT1, NULL) },
--	{ PCI_DEVICE_DATA(INTEL, THC_PTL_H_DEVICE_ID_I2C_PORT2, NULL) },
--	{ PCI_DEVICE_DATA(INTEL, THC_PTL_U_DEVICE_ID_I2C_PORT1, NULL) },
--	{ PCI_DEVICE_DATA(INTEL, THC_PTL_U_DEVICE_ID_I2C_PORT2, NULL) },
-+	{ PCI_DEVICE_DATA(INTEL, THC_PTL_H_DEVICE_ID_I2C_PORT1, &ptl_ddata) },
-+	{ PCI_DEVICE_DATA(INTEL, THC_PTL_H_DEVICE_ID_I2C_PORT2, &ptl_ddata) },
-+	{ PCI_DEVICE_DATA(INTEL, THC_PTL_U_DEVICE_ID_I2C_PORT1, &ptl_ddata) },
-+	{ PCI_DEVICE_DATA(INTEL, THC_PTL_U_DEVICE_ID_I2C_PORT2, &ptl_ddata) },
- 	{ }
- };
- MODULE_DEVICE_TABLE(pci, quicki2c_pci_tbl);
-diff --git a/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h b/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h
-index e130598d13c1..93d6fa982d60 100644
---- a/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h
-+++ b/drivers/hid/intel-thc-hid/intel-quicki2c/quicki2c-dev.h
-@@ -36,6 +36,12 @@
- #define QUICKI2C_DEFAULT_LP_LTR_VALUE		500
- #define QUICKI2C_RPM_TIMEOUT_MS			500
- 
-+/* PTL Max packet size detection capability is 255 Bytes */
-+#define MAX_RX_DETECT_SIZE_PTL			255
-+
-+/* Default interrupt delay is 1ms, suitable for most devices */
-+#define DEFAULT_INTERRUPT_DELAY_US		(1 * USEC_PER_MSEC)
-+
- /*
-  * THC uses runtime auto suspend to dynamically switch between THC active LTR
-  * and low power LTR to save CPU power.
--- 
-2.40.1
-
+I have also asked this question in the past, but was ignored:
+https://lore.kernel.org/netdev/68e2a8cc-2371-433b-86a3-ac9dea48fb43@nvidia.com/
 
