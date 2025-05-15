@@ -1,265 +1,281 @@
-Return-Path: <linux-doc+bounces-46202-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46204-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E44E0AB7FE3
-	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 10:11:46 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 016D7AB804A
+	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 10:23:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id EE3DF1BA5345
-	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 08:11:56 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 76A9B7B7DA2
+	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 08:21:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7ACA2284677;
-	Thu, 15 May 2025 08:11:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7A65B286D5C;
+	Thu, 15 May 2025 08:22:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ERYcFq8v"
+	dkim=pass (2048-bit key) header.d=inventec.com header.i=@inventec.com header.b="BprQF6cf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51F3E2248AE;
-	Thu, 15 May 2025 08:11:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82F672882C4
+	for <linux-doc@vger.kernel.org>; Thu, 15 May 2025 08:22:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747296698; cv=none; b=cgVWRlBfho1BzIUvi8rhQNcn7Bh2aN++McESiRvGxN0lQc5lQ6VXOC8Q4cnbH2QtQ8Lt4RR5n+0WdERMSDdiJ/ZGOoUXfxpBzOt0SdsEJzSR/+H6ITOa6X4rC/RrO2UZ1JsuJQeIbRQcIkGSBcAA+UIZZ3cIYNo5mXOEUmfztxU=
+	t=1747297366; cv=none; b=FYwTW+R9d+LUgcPB/hxa45QE638PgcvaxQiSOn2aC1rfBMVrH0J7j1jqyZrct0oW0nRHoohjrvvFXzX68XDDilCy/rW6uiIL01m9SV/yePbvEDqn2wnA4ty1xkT0vN6VzZmLnUcVzSKNGiuWoGPcRh01DBlDSoumypgJ+XRoM+8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747296698; c=relaxed/simple;
-	bh=rbVrD9MiC3jK5EeZ9PE0xRdvA68qJ3Hw81sCpkWBrPE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tQLF5s0Gf0o+x0nsh+J1DVsCDfgMfpU9KahNF60l6JoYhw0nL7Han75RnznTa6VNWpVYvO6NkB8So/L9FkR4N4L+n1plgUiw65guiJJCGga/gU84MkR6VxyhLm1qjhV2OdZZut05tUiW4nnqnOSQOW0Ox2ZnEVO3N6AN6ruZg80=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ERYcFq8v; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14837C4CEE7;
-	Thu, 15 May 2025 08:11:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747296697;
-	bh=rbVrD9MiC3jK5EeZ9PE0xRdvA68qJ3Hw81sCpkWBrPE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=ERYcFq8viWWHeLzIq3zF3TXSURmbyOBjFGwFrxgsfBKl/Vl1cM37pvAxOajCil7f0
-	 j2P9euHQBTiqNh9uSCMBrpeSTLkv0XdnEz+4gocdIzdeHzOm530N52Q1X35dMIhNvL
-	 IR0ufUzR5vuqbjr87pM7vEV0BnCtiiZGmDz3nQ9VXcuaWifoN9vfuWhp7Zg2BRbTUB
-	 Fsp5AYee8t1CRiUcL0WwWIIupiMLEMMKNCHE05gR9q/BDOShObu9TGOvtYIshj8Te6
-	 1tf/j/3IDH4CW7woXYH53Yomw5CqD0dv+nGZvGIjGGPSmbmjdNl0VMJvhEvABKm6UP
-	 VZe48MnF/jggg==
-Date: Thu, 15 May 2025 10:11:33 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: Luca Ceresoli <luca.ceresoli@bootlin.com>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, 
-	Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
-	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Anusha Srivatsa <asrivats@redhat.com>, Paul Kocialkowski <paulk@sys-base.io>, 
-	Dmitry Baryshkov <lumag@kernel.org>, =?utf-8?B?SGVydsOp?= Codina <herve.codina@bootlin.com>, 
-	Hui Pu <Hui.Pu@gehealthcare.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
-	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v7 2/2] drm/tests: bridge: add a KUnit test for
- devm_drm_bridge_alloc()
-Message-ID: <gqe4ov7w54qe7mmfn2ud63g2ema2wh3qvyfvcaycvnh5mts3it@ef7qxryo2ccy>
-References: <20250409-drm-bridge-alloc-doc-test-v7-0-a3ca4b97597f@bootlin.com>
- <20250409-drm-bridge-alloc-doc-test-v7-2-a3ca4b97597f@bootlin.com>
- <20250414-misty-hungry-woodlouse-dbbd64@houat>
- <20250415132214.19b1a4ff@booty>
+	s=arc-20240116; t=1747297366; c=relaxed/simple;
+	bh=92odk2sd4sfHthMDJynyDSvgpIspg2D4IeMy8RWB//k=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=MdUslYhT6iijo2CAmzOfTjyOsjRU2pNKPmoemIYTxC4l8ap5bSIYRsD/THDogGJs2eSzJNerpM/R9byhz0Q0CZsVw0EWN3GD82Ln3XdPhP9BUu5tNMYnxp94RLmw/4KDZj1EbcZqzbP3yTzog9FXJk3uvB00uhcY/WwHOhpgp48=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=inventec.com; spf=pass smtp.mailfrom=inventec.com; dkim=pass (2048-bit key) header.d=inventec.com header.i=@inventec.com header.b=BprQF6cf; arc=none smtp.client-ip=209.85.216.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=inventec.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=inventec.com
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-30c47918d84so628243a91.3
+        for <linux-doc@vger.kernel.org>; Thu, 15 May 2025 01:22:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=inventec.com; s=google; t=1747297362; x=1747902162; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kwF2mpLnEXgp6MS24DBfTJGU9J3NTQxVKIISS1QkMRY=;
+        b=BprQF6cf1DYwGex5AP/dD5Mwqo9uYIXNN04hG2y2+onqfdzzL48z3MiLi9n+fJg+UE
+         WvDj6icQu3/o+m5pULXWX99o286OPsRIOXQfo5YHm5JS/fwN261MXgFuENHZON1YV9LD
+         aqy/cQqUe9PSvbvDdnuS/8WDfU/o5Aaw4Su5OOTTUVd9tS1p01FaUworE+UVnBumxdKw
+         42EAQMe//ZLPggVyxYAq7V+lZLSmsEFY+LG6fW1w4KpR7G2Une1eKU/65sXMp7IKGG62
+         s6DzguPmyYchw779JJ1n6tBEfV4tySWH5pOAD/XfwE3A/VCOwqDlBT4bx9Qsx0R1wZqd
+         II4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747297362; x=1747902162;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kwF2mpLnEXgp6MS24DBfTJGU9J3NTQxVKIISS1QkMRY=;
+        b=cFjcjBAolpp6NljfM2YTPF8q9m6C0th0eGnfAYZXShgH+VQH3NBjnAyBZV8owL6hG7
+         aLTXe3WxFndiI6Vo7GgmP/q2VnTTgZGL64Kcfsi/wKJ5Olage0CwmKGPFlHTB3GvxY0V
+         THj9wnDBzxFHGIp6pR2J1rOJbRy77HwJwUbS45VEUEI+imd0r10VIpIF7Uw+Dzzpw8B/
+         sUFCmRFdYMMKA8Zi+cpDgjoDPCd6lj8xfleO3jZo8tjlsgnKcAxvn2iYjY8a7aOVoIxk
+         rJLzjsnVW3/Q7X3cbeCpXIMXjM0TjL9xcQ/po534PhKYqsYihEq5oiyER3FAq7rMLnLq
+         AQog==
+X-Forwarded-Encrypted: i=1; AJvYcCWvO9TnB6Hc02Ga4rOepT/+0JLMbIzrebcaPUABm6N6F5F436pVPVfYS5f6KsDQjRG8U+J9awlUPio=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyJirLycYzXthFoFX0b2nK6uAMcVJxpwdOn0KKRyMOvNv8op+Ot
+	Yd5IZl2H+VR/tK076Sjf1Azx4EB3glQM45wIBd/ziY33I3lqaHRoeAjfa/GsO5eg8OrXF8EKuC+
+	o
+X-Gm-Gg: ASbGncv/P/CCbyLpHZacbsk4fTUFR5igYXo/xrONJEwv1TvPbvy5h5wH/jFwUwrEovI
+	eIeCuQFZpz+AayOhkMYsSiOYM/Ecq7Yx4mBNcol1ly4cF0+SHi3EQD7ETCgeN+ZWY1flpEhYF35
+	xrBhM5PtMRjuWLTYPS4y3GV6DAsN0OpNQBz6lTNTD2JNRhxJN1Fqd50V3EY9hQQ/v72s9DyznKe
+	RfSb388fqQ/xkjSxs6tC3PJvClqdrf4qXJTEj8bG+l8/aaNNpo4cPosvm3R5r92NAGq+B1tH+uG
+	8fDDusb8VRW+ohOAFwswT0hbHKKeUtPI8qOmbv1dNSVE80dbe8aZ0SEDP61EiBpezO0Kpy3nOHI
+	ZVmTEcFu5WtBXGGa+4Z4EPxraw9Enaevf8fpn19SXalI=
+X-Google-Smtp-Source: AGHT+IFoAqDUpGzwC9J9Vfxc7d04H0Ld+rHi4ImfRVH+QnmmS1i9bVST/jFIeL7kigUyfhHbFokLQQ==
+X-Received: by 2002:a17:90b:55d0:b0:309:fac6:44f9 with SMTP id 98e67ed59e1d1-30e51947471mr2175743a91.31.1747297361651;
+        Thu, 15 May 2025 01:22:41 -0700 (PDT)
+Received: from localhost.localdomain (59-120-179-172.hinet-ip.hinet.net. [59.120.179.172])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-30e33451e97sm2909715a91.25.2025.05.15.01.22.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 May 2025 01:22:41 -0700 (PDT)
+From: Chiang Brian <chiang.brian@inventec.com>
+To: Jean Delvare <jdelvare@suse.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Alexandre Ghiti <alex@ghiti.fr>
+Cc: Chiang Brian <chiang.brian@inventec.com>,
+	linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-riscv@lists.infradead.org
+Subject: [PATCH v7 2/2] hwmon: (pmbus/tps53679) Add support for TPS53685
+Date: Thu, 15 May 2025 16:14:39 +0800
+Message-Id: <20250515081449.1433772-3-chiang.brian@inventec.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250515081449.1433772-1-chiang.brian@inventec.com>
+References: <20250515081449.1433772-1-chiang.brian@inventec.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="rle4hqmce2dkwfou"
-Content-Disposition: inline
-In-Reply-To: <20250415132214.19b1a4ff@booty>
+Content-Transfer-Encoding: 8bit
 
+The TPS53685 is a fully AMD SVI3 compliant step down
+controller with trans-inductor voltage regulator
+(TLVR) topology support, dual channels, built-in
+non-volatile memory (NVM), PMBus interface, and
+full compatible with TI NexFET smart power
+stages.
+Add support for it to the tps53679 driver.
 
---rle4hqmce2dkwfou
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v7 2/2] drm/tests: bridge: add a KUnit test for
- devm_drm_bridge_alloc()
-MIME-Version: 1.0
+Signed-off-by: Chiang Brian <chiang.brian@inventec.com>
+---
+v6 -> v7:
+	1. Modify the type of device_id from u16 to char *
+	2. Run make.cross with ARCH nios2, powerpc, and riscv
+	- Link to v6: https://lore.kernel.org/all/20250424132538.2004510-2-chiang.brian@inventec.corp-partner.google.com/
 
-On Tue, Apr 15, 2025 at 01:22:14PM +0200, Luca Ceresoli wrote:
-> > > +/*
-> > > + * Mimick the typical struct defined by a bridge driver, which embed=
-s a
-> > > + * bridge plus other fields.
-> > > + */
-> > > +struct dummy_drm_bridge {
-> > > +	int dummy; // ensure we test non-zero @bridge offset
-> > > +	struct drm_bridge bridge;
-> > > +}; =20
-> >=20
-> > drm_bridge_init_priv gives you that already.
->=20
-> On one hand, that's true. On the other hand, looking at
-> drm_bridge_init_priv I noticed it is allocating a bridge without using
-> devm_drm_bridge_alloc(). This should be converted, like all bridge
-> alloctions.
->
-> So I think the we first need to update drm_bridge_test.c to allocate
-> the bridge using devm_drm_bridge_alloc(), along with the needed changes
-> to the kunit helpers.
+v5 -> v6:
+	1. Add information about tps53685 into tps53679.rst
+	2. Add additional flags when identifing the chip as tps53685
+	3. Adjust length once returned device id is terminated by null character
+	- Link to v5: https://lore.kernel.org/all/20250314033040.3190642-1-chiang.brian@inventec.com/
 
-Oh, yeah, absolutely.
+v4 -> v5: 
+	1. document the compatible of tps53685 into dt-bindings
+	2. add the buffer length as argument for %*ph
+	3. Add Changelog
+	- Link to v4: https://lore.kernel.org/all/CAJCfHmW61d2jd_tYpNEqBG_Z58bEnVKAmsvhrEP1zXQoXqrUVw@mail.gmail.com/
 
-> One way would be allocating the entire drm_bridge_init_priv using
-> devm_drm_bridge_alloc(), but that does not look like a correct design
-> and after reading the helpers code I'm not even sure it would be doable.
->=20
-> Instead I think we need to change struct drm_bridge_init_priv
-> to embed a pointer to (a modified version of) struct dummy_drm_bridge:
->=20
->  struct drm_bridge_init_priv {
->          struct drm_device drm;
->          struct drm_plane *plane;
->          struct drm_crtc *crtc;
->          struct drm_encoder encoder;
-> -        struct drm_bridge bridge;
-> +        struct dummy_drm_bridge *test_bridge;
->          struct drm_connector *connector;
->          unsigned int enable_count;
->          unsigned int disable_count;
->  };
->=20
-> So that devm_drm_bridge_alloc() can allocate the new test_bridge
-> dynamically:
->=20
->  priv->test_bridge =3D
->    devm_drm_bridge_alloc(..., struct dummy_drm_bridge, bridge, ...);
->=20
-> Do you think this would be the correct approach?
+v3 -> v4: 
+	1. Add length comparison into the comparison of "id",or it may be true when 
+	   the substring of "id" matches device id. 
+	2. Restore `return 0;` in `tps53679_identify_chip()`
+	- Link to v3: https://lore.kernel.org/all/CAJCfHmVyaDPh0_ThPjhBP0zMO1oE1AR=4=Zsa0cMPXU3J4v6dw@mail.gmail.com/
 
-It's kind of correct, but you're also correct that it's probably too
-much for those simple tests, so it might not be worth it in the end.
+v2 -> v3:
+	1. Remove the length comparsion in the comparison of "id".
+	- Link to v2: https://lore.kernel.org/all/CAJCfHmUteFM+nUZWBWvmwFjALg1QUL5r+=syU1HmYTL1ewQWqA@mail.gmail.com/
 
-> > > +static const struct drm_bridge_funcs drm_bridge_dummy_funcs =3D {
-> > > +};
-> > > +
-> > > +static int drm_test_bridge_alloc_init(struct kunit *test)
-> > > +{
-> > > +	struct drm_bridge_alloc_test_ctx *ctx;
-> > > +
-> > > +	ctx =3D kunit_kzalloc(test, sizeof(*ctx), GFP_KERNEL);
-> > > +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ctx);
-> > > +
-> > > +	ctx->dev =3D kunit_device_register(test, "drm-bridge-dev");
-> > > +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ctx->dev);
-> > > +
-> > > +	test->priv =3D ctx;
-> > > +
-> > > +	return 0;
-> > > +}
-> > > +
-> > > +/*
-> > > + * Test that the allocation and initialization of a bridge works as
-> > > + * expected and doesn't report any error.
-> > > + */
-> > > +static void drm_test_drm_bridge_alloc(struct kunit *test)
-> > > +{
-> > > +	struct drm_bridge_alloc_test_ctx *ctx =3D test->priv;
-> > > +	struct dummy_drm_bridge *dummy;
-> > > +
-> > > +	dummy =3D devm_drm_bridge_alloc(ctx->dev, struct dummy_drm_bridge, =
-bridge,
-> > > +				      &drm_bridge_dummy_funcs);
-> > > +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, dummy); =20
-> >=20
-> > Why did you need the dummy value in dummy_drm_bridge if you're not using
-> > it?
->=20
-> To ensure we test non-zero @bridge offset. Say there is a bug in the
-> pointer math, e.g. 'bridge =3D container - offset' instead of 'bridge =3D
-> container + offset'. That would not be caught if @bridge is the first
-> field in the struct.
->=20
-> Does this look like a good reason to keep it?
+v1 -> v2: 
+	1. Modify subject and description to meet requirements
+	2. Add "tps53685" into enum chips with numeric order
+	3. Modify the content of marco "TPS53681_DEVICE_ID" from 0x81 to "\x81"
+	   Add marco "TPS53685_DEVICE_ID" with content "TIShP"
+	4. Modify the type of "id" from u16 to char* in `tps53679_identify_chip()`
+	5. Modify the comparison of "id". It will be true if the string "id" matches 
+	   device ID and compare with type char*,
+	6. Add the length comparsion into the comparison of "id".
+	7. Modify "len" as return code in `tps53679_identify_chip()`
+	8. Output device error log with %*ph, instead of 0x%x\n" 
+	9. Use existing tps53679_identify_multiphase() with argument 
+	   "TPS53685_DEVICE_ID" in tps53685_identify() rather than creating one
+	   tps53685_identify_multiphase()
+	- Link to v1: https://lore.kernel.org/all/CAJCfHmVy3O4-nz2_PKF7TcXYr+HqTte1-bdUWLBmV7JOS7He1g@mail.gmail.com/
 
-Ack, but please document it with a comment
+ Documentation/hwmon/tps53679.rst |  8 +++++++
+ drivers/hwmon/pmbus/tps53679.c   | 36 +++++++++++++++++++++++++++-----
+ 2 files changed, 39 insertions(+), 5 deletions(-)
 
-> > We'd need a couple more tests, in particular some to make sure the
-> > bridge pointer is properly cleaned up when the device goes away, but not
-> > when we have called drm_bridge_get pointer on it, etc.
->=20
-> It would surely be useful, and there was one in the initial patch I
-> sent ([0], search for "destroyed"). Then I removed it because the code
-> changed, there is no callback anymore, so no place where this can be
-> tested.
+diff --git a/Documentation/hwmon/tps53679.rst b/Documentation/hwmon/tps53679.rst
+index 3b9561648c24..dd5e4a37375d 100644
+--- a/Documentation/hwmon/tps53679.rst
++++ b/Documentation/hwmon/tps53679.rst
+@@ -43,6 +43,14 @@ Supported chips:
+ 
+     Datasheet: https://www.ti.com/lit/gpn/TPS53681
+ 
++  * Texas Instruments TPS53685
++
++    Prefix: 'tps53685'
++
++    Addresses scanned: -
++
++    Datasheet: https://www.ti.com/lit/gpn/TPS53685
++
+   * Texas Instruments TPS53688
+ 
+     Prefix: 'tps53688'
+diff --git a/drivers/hwmon/pmbus/tps53679.c b/drivers/hwmon/pmbus/tps53679.c
+index 63524dff5e75..01fefaef1688 100644
+--- a/drivers/hwmon/pmbus/tps53679.c
++++ b/drivers/hwmon/pmbus/tps53679.c
+@@ -16,7 +16,7 @@
+ #include "pmbus.h"
+ 
+ enum chips {
+-	tps53647, tps53667, tps53676, tps53679, tps53681, tps53688
++	tps53647, tps53667, tps53676, tps53679, tps53681, tps53685, tps53688
+ };
+ 
+ #define TPS53647_PAGE_NUM		1
+@@ -31,7 +31,8 @@ enum chips {
+ #define TPS53679_PROT_VR13_5MV		0x07 /* VR13.0 mode, 5-mV DAC */
+ #define TPS53679_PAGE_NUM		2
+ 
+-#define TPS53681_DEVICE_ID		0x81
++#define TPS53681_DEVICE_ID     "\x81"
++#define TPS53685_DEVICE_ID     "TIShP"
+ 
+ #define TPS53681_PMBUS_REVISION		0x33
+ 
+@@ -86,10 +87,12 @@ static int tps53679_identify_phases(struct i2c_client *client,
+ }
+ 
+ static int tps53679_identify_chip(struct i2c_client *client,
+-				  u8 revision, u16 id)
++				  u8 revision, char *id)
+ {
+ 	u8 buf[I2C_SMBUS_BLOCK_MAX];
+ 	int ret;
++	int buf_len;
++	int id_len;
+ 
+ 	ret = pmbus_read_byte_data(client, 0, PMBUS_REVISION);
+ 	if (ret < 0)
+@@ -102,8 +105,14 @@ static int tps53679_identify_chip(struct i2c_client *client,
+ 	ret = i2c_smbus_read_block_data(client, PMBUS_IC_DEVICE_ID, buf);
+ 	if (ret < 0)
+ 		return ret;
+-	if (ret != 1 || buf[0] != id) {
+-		dev_err(&client->dev, "Unexpected device ID 0x%x\n", buf[0]);
++
++	/* Adjust length if null terminator if present */
++	buf_len = (buf[ret - 1] != '\x00' ? ret : ret - 1);
++
++	id_len = strlen(id);
++
++	if (buf_len != id_len || strncmp(id, buf, id_len)) {
++		dev_err(&client->dev, "Unexpected device ID: %*ph\n", ret, buf);
+ 		return -ENODEV;
+ 	}
+ 	return 0;
+@@ -138,6 +147,16 @@ static int tps53679_identify(struct i2c_client *client,
+ 	return tps53679_identify_mode(client, info);
+ }
+ 
++static int tps53685_identify(struct i2c_client *client,
++				 struct pmbus_driver_info *info)
++{
++	info->func[1] |= PMBUS_HAVE_VIN | PMBUS_HAVE_IIN | PMBUS_HAVE_PIN |
++			 PMBUS_HAVE_STATUS_INPUT;
++	info->format[PSC_VOLTAGE_OUT] = linear;
++	return tps53679_identify_chip(client, TPS53681_PMBUS_REVISION,
++					   TPS53685_DEVICE_ID);
++}
++
+ static int tps53681_identify(struct i2c_client *client,
+ 			     struct pmbus_driver_info *info)
+ {
+@@ -263,6 +282,10 @@ static int tps53679_probe(struct i2c_client *client)
+ 		info->identify = tps53681_identify;
+ 		info->read_word_data = tps53681_read_word_data;
+ 		break;
++	case tps53685:
++	    info->pages = TPS53679_PAGE_NUM;
++	    info->identify = tps53685_identify;
++		break;
+ 	default:
+ 		return -ENODEV;
+ 	}
+@@ -277,6 +300,7 @@ static const struct i2c_device_id tps53679_id[] = {
+ 	{"tps53676", tps53676},
+ 	{"tps53679", tps53679},
+ 	{"tps53681", tps53681},
++	{"tps53685", tps53685},
+ 	{"tps53688", tps53688},
+ 	{}
+ };
+@@ -289,6 +313,7 @@ static const struct of_device_id __maybe_unused tps53679_of_match[] = {
+ 	{.compatible = "ti,tps53676", .data = (void *)tps53676},
+ 	{.compatible = "ti,tps53679", .data = (void *)tps53679},
+ 	{.compatible = "ti,tps53681", .data = (void *)tps53681},
++	{.compatible = "ti,tps53685", .data = (void *)tps53685},
+ 	{.compatible = "ti,tps53688", .data = (void *)tps53688},
+ 	{}
+ };
+-- 
+2.43.0
 
-Why did we end up removing the destroy hook? It looks useful to me.
-
-> I'd be glad to re-add such a check but I don't see how it could be
-> implemented in a clean, non-invasive way.
->=20
-> The only way that comes to mind is be that the kunit test does not call
-> drm_bridge_put() but rather a kunit-specific reimplementation that
-> passes a reimplementation of __drm_bridge_free() which does the
-> accounting. Quick draft (note the added "_test" infix):
->=20
-> struct dummy_drm_bridge {
->         struct drm_bridge_init_priv *test_priv;
->         struct drm_bridge bridge;
-> };
->=20
-> // reimplemented version of __drm_bridge_free
-> static void __drm_test_bridge_free(struct kref *kref)
-> {
->         struct drm_bridge *bridge =3D container_of(kref, struct drm_bridg=
-e, refcount);
-> 	struct dummy_drm_bridge *dummy =3D bridge->container;
-> =09
-> 	dummy->text_priv->destroyed =3D true;
->         kfree(bridge->container);
-> }
->=20
-> // reimplemented version of drm_bridge_put
-> void drm_test_bridge_put(struct drm_bridge *bridge)
-> {
->         if (bridge)
->                 kref_put(&bridge->refcount, __drm_test_bridge_free);
-> }
->=20
-> My concern with this idea is that it is not testing the actual
-> drm_bridge.c code, but a different implementation. Even more, if the
-> functions in drm_bridge.c will change, the ones in drm_bridge_test.c
-> might be forgotten, thus we'd end up in testing code that is different
-> from the code actually used.
-
-Yeah, I agree, it's not really useful if it's not testing the code we
-would typically run.
-
-> Another way would be adding an optional .destroy a callback in struct
-> drm_bridge_funcs that is called in __drm_bridge_free(), and only the
-> kunit test code implements it. Maybe looks cleaner, but it would be
-> invasive on code that all bridges use. We had discussed a different
-> idea of .destroy callback in the past, for different reasons, and it
-> was not solving the problem we had in that case. So kunit would be the
-> only user for the foreseeable future.
-
-Sorry, we've had many conversations about all that work so I can't
-recall (or find) what your objections or concerns (or mine, maybe?) were
-about thing topic. It looks totally reasonable to me, and consistent
-with all the other DRM entities.
-
-I'm also not entirely sure how invasive it would be? Add that callback,
-check if it's set and if it is, call it from __drm_bridge_free(), and
-you're pretty much done, right?
-
-Maxime
-
---rle4hqmce2dkwfou
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaCWhrwAKCRAnX84Zoj2+
-dp8wAYDZZz4HohGInsWZy07HZIxX0HMbp0PSquVavPaf008d3H0IZzlRRPj6NV1t
-29nDYdoBgJ0iHLfCi6462W/6SPnuZwjhuK3xo8qH8E5zn1FgM6OBpNfEQGxgbxU6
-xsT9rNLviQ==
-=OO2v
------END PGP SIGNATURE-----
-
---rle4hqmce2dkwfou--
 
