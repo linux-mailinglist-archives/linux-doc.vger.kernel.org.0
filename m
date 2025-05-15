@@ -1,171 +1,239 @@
-Return-Path: <linux-doc+bounces-46223-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46225-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F94DAB8163
-	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 10:50:51 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B9B2AB81FF
+	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 11:06:22 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BF3F83A1FF6
-	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 08:48:25 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 014DA1882CD4
+	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 09:06:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5590228B3F9;
-	Thu, 15 May 2025 08:48:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE69429615C;
+	Thu, 15 May 2025 09:06:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="I+o+mqOr"
+	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="Qp5/WAig"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CC342882CE
-	for <linux-doc@vger.kernel.org>; Thu, 15 May 2025 08:48:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65942221F2A;
+	Thu, 15 May 2025 09:06:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747298920; cv=none; b=od421m3rWdm+fWVI3yAsQYBLY8igAYoFRTBDKkC7ivV1JGcYMwpNKZsWtlqqqitool08oURhiVcDyW8BaNH5B0jZsljUZPMk8+i8qzUJcwPArIM5/n1rLCG8xl2ctwR54ArtUXJHatMykCkCd077l99zsYIWw0z/tcN5SgZWwUA=
+	t=1747299969; cv=none; b=pAghBkzPp/O+LIIlHMaH0UfdAGADWe2hDdlASeDg+mn6CzERiIV8+ExR+9gkNgTvuF1Awd1Kz1b6Jx3Y7hHKLqxrTKZnHjKDD6wRGx6Gzv+RUAmAXNSK0QKZT37g0q3dOKnYjKusi02SHYn3JQyXtaJBAIxQa0Pg4EMB32bIpx0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747298920; c=relaxed/simple;
-	bh=uafTKsLt5Y6vI+2YJVWbCoVLU1+w6d1TN41/6GcJe8w=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
-	 References:In-Reply-To; b=PuqnDwql+kJs77QHgkm/I+tsLUSclujk9gGX+Q3Y5i4Xdt5c51TX0KISpjslwQb42VQVLOTLGXBiAZrnVhV58W2iuywhyfUCY05nJNsxwZXIaRtFfVahm/zkaB1aswUbsemRIG/OQ3iSFngDmzJD2j0cVW9ihZywo3dIj4vRIPo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com; spf=pass smtp.mailfrom=ventanamicro.com; dkim=pass (2048-bit key) header.d=ventanamicro.com header.i=@ventanamicro.com header.b=I+o+mqOr; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ventanamicro.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ventanamicro.com
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-442ea0b3a9fso283615e9.3
-        for <linux-doc@vger.kernel.org>; Thu, 15 May 2025 01:48:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ventanamicro.com; s=google; t=1747298916; x=1747903716; darn=vger.kernel.org;
-        h=in-reply-to:references:from:to:cc:subject:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bdVLI+IKJQCwIaBP/4ipGt86DAIuj3sOKMK9lc4aqFc=;
-        b=I+o+mqOrLwb6wAy3fZ6S3zjKPSqaM3CwDCRIeUdIay3/UdKVnn2nqClHp2i280eIJo
-         tZyO0jy8xMq7nzDk/AqEDzGLQA6Av8h5IUIrV+E9571R5E2Zid8XpZXo6RayFQu3J9Et
-         F/GBqCB1+3SvxUlFk0JZ8KNMo3Pt8iiTg8MJGPAZ2Y7gQJZL9F5OGqKptUTpV1kwK24L
-         EOlzSCCEVIi2oevOVj9yLa8GrSIWcCDBU4NLrVldY0U3XkdWSWI2ytaUJ8Sq3ZQqb4cs
-         u1f0G8OtL1VTWuMsykX7Bwk74nyGnyworNNU6w3awX+4DK4SlJeRIYuANTsjnT//Pq4q
-         lnrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747298916; x=1747903716;
-        h=in-reply-to:references:from:to:cc:subject:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=bdVLI+IKJQCwIaBP/4ipGt86DAIuj3sOKMK9lc4aqFc=;
-        b=slxFLnFnT8w1GrXsA8vhO4rYD7MXda+J53eF/+/aVHG5Bhm3z/Yk24IDPrZPwjkaT8
-         3QQPQ/C4Bcbft6/1Rmf5dsItDoZId9TYykX/c39drqOST3UT8wPRywYMV22vSxQksxkX
-         RPJY+dWi99/X7/sxJ3cqtij8fb8riNPU7EJvMYr9CjDd72tePfNzWu8hYIVf6KDDrDCj
-         v2kJpT6t/2Ozt87GFh6+e7PT1vCNEv5frfnUu/NLkUQR1adkcidWYA/GoSdw9VymndSt
-         +aV0NWqTaWXXkpzkUcufr5oDLPAHTb16Nmwk5AR3rq8+/reb3+CsEXZwxFSKwwcNicrE
-         KXvQ==
-X-Forwarded-Encrypted: i=1; AJvYcCViwlKz6gqCikuh4qMHxKboh5pdcI/RSBtnGv7NYQov/hm/k+YKPSBqk2TGcGJI9uvQqsIYJRada3M=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx1r2hKiCzAHVZbMKGaLtKmdRCYYlVahM4PxNgTeR2hqtousjO/
-	wTySH9bPuQyQd2IvtHn7qc4wUGik7ythv+7U93LZZ7DsjSANtG5woN2oI53a9Hg=
-X-Gm-Gg: ASbGncvurTu+GtpWXVaVfD7lcawGK40FPTa+V+jq5iSyq9G77NhsisLOHIaEPSFNV8f
-	qr1AxhTsWTzJjKWrrZWlbpd2rSGZtb8Zyi3Z/Bf/rcefVrsPFcp/y1HLw6AQoGf2gSDMTFRUrpg
-	dTX0fTj14L3mhYNuPkYfHCtIIWlBFWOzo9Z2QPBbbiqlDqTEDtIw5dlZGMscHgHjr09bMUT5paL
-	Wi+R0gNyaub/z+JDdPwQ8AXSeg8PD1sXHn5KU7r8JUz6tETuxWjOjFS2pS9dztiyC73prz1G4hA
-	KBTEAqn8So7fAC9z/tRoeZOzaokxt/iIh7HM+wreuuOPI8n+7QwjNL1g87U/ypopSHmaR36Ejax
-	FPDGBcce2Epw=
-X-Google-Smtp-Source: AGHT+IFl5ofT8H2ymocVMBID7uffI6yQBoHWwntFgE3AOdsNMnKtMdzBwHwHlEbKzThnIcYnf09dKg==
-X-Received: by 2002:a5d:4311:0:b0:3a3:55b4:1abb with SMTP id ffacd0b85a97d-3a355b41b8emr294033f8f.12.1747298916300;
-        Thu, 15 May 2025 01:48:36 -0700 (PDT)
-Received: from localhost (ip-89-103-73-235.bb.vodafone.cz. [89.103.73.235])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a1f5a2cf2bsm21822557f8f.80.2025.05.15.01.48.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 May 2025 01:48:35 -0700 (PDT)
+	s=arc-20240116; t=1747299969; c=relaxed/simple;
+	bh=IU/roORDYzgbEqlRhZdc0PCV3WR+hlwzv0gD5uIaSYw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=bcEOk7OZi6lW3Nb8H5u4bLD44UOTN3rTLeywhgK9brP7gkdQpUgdcLO129nnMUQDAw/l5+uaAfTEz2KMoEXnPp+HZ4OA0MYQMh9CyB2BxRrl+gLYgiG0F4RZ9AKa/3LieJY+cVsKVssxEpeNBoJqPmpRh2z1PD0btr564GHYKkQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=Qp5/WAig; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54EKnbAa015271;
+	Thu, 15 May 2025 09:05:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	0+JUJwBGk6EfyJ0jZn76d0sgqFvhNWii6j18SwECpBM=; b=Qp5/WAigV4GzHeOQ
+	qEQANw7cJg8OYtw2/5cZbmhfZGIbJY+CwDYRokXerwbGrj2KOpQr1sqgZ4IGrxq1
+	WHVp1IsQlUJc5GM8xtWHDKjmZTroAS4nXVUUTe9c6OVaJiSOUvvLUHhUnukSpmP5
+	xAmlF9aXvu6/d62aniRrD7Loib02w7vKQQU6ejkSGzRQuyzw6p56Mqsq9xnjp6KZ
+	2HsPGYNdy/L4nLKRt/8rziBtooGnUoWzi9pgDg9Pz7H4zbsgo5XYg7VMmbJu1vP+
+	Aouv++1wKWTlwtOKkxBdDrndy3yFuTZgU72eh0kbgFOvgeeyWv0eZinmokWm3tMk
+	PVRyHA==
+Received: from nalasppmta05.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 46mbcr5f5a-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 15 May 2025 09:05:56 +0000 (GMT)
+Received: from nalasex01b.na.qualcomm.com (nalasex01b.na.qualcomm.com [10.47.209.197])
+	by NALASPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 54F95t6g016854
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 15 May 2025 09:05:55 GMT
+Received: from [10.218.44.178] (10.80.80.8) by nalasex01b.na.qualcomm.com
+ (10.47.209.197) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.9; Thu, 15 May
+ 2025 02:05:50 -0700
+Message-ID: <dc3c6aab-42d8-4741-826f-d22f140184e2@quicinc.com>
+Date: Thu, 15 May 2025 14:35:34 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 15 May 2025 10:48:35 +0200
-Message-Id: <D9WLRSAB63M5.3DZD4ND3WVZ6F@ventanamicro.com>
-Subject: Re: [PATCH v15 05/27] riscv: usercfi state for task and
- save/restore of CSR_SSP on trap entry/exit
-Cc: <linux-kernel@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
- <linux-mm@kvack.org>, <linux-riscv@lists.infradead.org>,
- <devicetree@vger.kernel.org>, <linux-arch@vger.kernel.org>,
- <linux-doc@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
- <alistair.francis@wdc.com>, <richard.henderson@linaro.org>,
- <jim.shu@sifive.com>, <andybnac@gmail.com>, <kito.cheng@sifive.com>,
- <charlie@rivosinc.com>, <atishp@rivosinc.com>, <evan@rivosinc.com>,
- <cleger@rivosinc.com>, <alexghiti@rivosinc.com>, <samitolvanen@google.com>,
- <broonie@kernel.org>, <rick.p.edgecombe@intel.com>,
- <rust-for-linux@vger.kernel.org>, "Zong Li" <zong.li@sifive.com>,
- "linux-riscv" <linux-riscv-bounces@lists.infradead.org>
-To: "Alexandre Ghiti" <alex@ghiti.fr>, "Deepak Gupta" <debug@rivosinc.com>,
- "Thomas Gleixner" <tglx@linutronix.de>, "Ingo Molnar" <mingo@redhat.com>,
- "Borislav Petkov" <bp@alien8.de>, "Dave Hansen"
- <dave.hansen@linux.intel.com>, <x86@kernel.org>, "H. Peter Anvin"
- <hpa@zytor.com>, "Andrew Morton" <akpm@linux-foundation.org>, "Liam R.
- Howlett" <Liam.Howlett@oracle.com>, "Vlastimil Babka" <vbabka@suse.cz>,
- "Lorenzo Stoakes" <lorenzo.stoakes@oracle.com>, "Paul Walmsley"
- <paul.walmsley@sifive.com>, "Palmer Dabbelt" <palmer@dabbelt.com>, "Albert
- Ou" <aou@eecs.berkeley.edu>, "Conor Dooley" <conor@kernel.org>, "Rob
- Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
- "Arnd Bergmann" <arnd@arndb.de>, "Christian Brauner" <brauner@kernel.org>,
- "Peter Zijlstra" <peterz@infradead.org>, "Oleg Nesterov" <oleg@redhat.com>,
- "Eric Biederman" <ebiederm@xmission.com>, "Kees Cook" <kees@kernel.org>,
- "Jonathan Corbet" <corbet@lwn.net>, "Shuah Khan" <shuah@kernel.org>, "Jann
- Horn" <jannh@google.com>, "Conor Dooley" <conor+dt@kernel.org>, "Miguel
- Ojeda" <ojeda@kernel.org>, "Alex Gaynor" <alex.gaynor@gmail.com>, "Boqun
- Feng" <boqun.feng@gmail.com>, "Gary Guo" <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, "Benno Lossin"
- <benno.lossin@proton.me>, "Andreas Hindborg" <a.hindborg@kernel.org>,
- "Alice Ryhl" <aliceryhl@google.com>, "Trevor Gross" <tmgross@umich.edu>
-From: =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@ventanamicro.com>
-References: <20250502-v5_user_cfi_series-v15-0-914966471885@rivosinc.com>
- <20250502-v5_user_cfi_series-v15-5-914966471885@rivosinc.com>
- <D9OZVNOGLU4T.2XOUPX27HN0W8@ventanamicro.com>
- <122fc6cd-2e21-4fca-979d-bcf558107b81@ghiti.fr>
-In-Reply-To: <122fc6cd-2e21-4fca-979d-bcf558107b81@ghiti.fr>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 08/11] tee: add Qualcomm TEE driver
+To: Sumit Garg <sumit.garg@kernel.org>,
+        Amirreza Zarrabi
+	<amirreza.zarrabi@oss.qualcomm.com>
+CC: Jens Wiklander <jens.wiklander@linaro.org>,
+        Bjorn Andersson
+	<andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        "Bartosz
+ Golaszewski" <bartosz.golaszewski@linaro.org>,
+        Apurupa Pattapu
+	<quic_apurupa@quicinc.com>,
+        Kees Cook <kees@kernel.org>,
+        "Gustavo A. R.
+ Silva" <gustavoars@kernel.org>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        <linux-arm-msm@vger.kernel.org>, <op-tee@lists.trustedfirmware.org>,
+        <linux-kernel@vger.kernel.org>, <linux-hardening@vger.kernel.org>,
+        <dri-devel@lists.freedesktop.org>, <linaro-mm-sig@lists.linaro.org>,
+        <linux-doc@vger.kernel.org>
+References: <20250428-qcom-tee-using-tee-ss-without-mem-obj-v4-0-6a143640a6cb@oss.qualcomm.com>
+ <20250428-qcom-tee-using-tee-ss-without-mem-obj-v4-8-6a143640a6cb@oss.qualcomm.com>
+ <aCSZ4n5UMP_Jom2h@sumit-X1>
+Content-Language: en-US
+From: Kuldeep Singh <quic_kuldsing@quicinc.com>
+In-Reply-To: <aCSZ4n5UMP_Jom2h@sumit-X1>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01b.na.qualcomm.com (10.47.209.197)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: jE82sMeDPdTRDYWFaLaUE7soCqIgHBhw
+X-Authority-Analysis: v=2.4 cv=Auju3P9P c=1 sm=1 tr=0 ts=6825ae74 cx=c_pps
+ a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=GEpy-HfZoHoA:10 a=IkcTkHD0fZMA:10 a=dt9VzEwgFbYA:10 a=EUspDBNiAAAA:8
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=bKlOgf2cc0x0kgLSBpIA:9 a=QEXdDO2ut3YA:10
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: jE82sMeDPdTRDYWFaLaUE7soCqIgHBhw
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTE1MDA4NyBTYWx0ZWRfXxG92tc1sTpxz
+ 9oQPNmNmmAGEmQ+vg3WoDy6ULWiZ0TNJLm1zjT/KgGXxVxDhGi8D/OzR9qGtD6X/2OZv1gxwDwT
+ SmFaU1gJQYcPYyzKUfnQjGonVEwThlFRSLLwxdyIK+JocDHWcqDkmMlprCYCLp9yFhu22CeDyMA
+ 5UTsHuraCdImHx2STHw8OvuuuOiWmkvfC6YUlZZoXdYXlIbEWoYIn/eDR69LhqW1ugqCQewvvOS
+ BAiosviKgKpyR5Q0rQav7itDLoZf7Abh/+4MW7DQoakyUVg1QV83x6FI3eCzg+Mm+IrVJDievNC
+ ERq6Hmd8LxaodtcFOGLSIi6dDrwhBWweSR3bAbCvrhqc8peE1mGmJHAZ8eN6Ahu1AsHzGiOW53q
+ h5CfRwUsVqx6k37fdQerz5r+R/nCtEBR5mB+tqgi7FNTelcCIN161fGOYCtAr8FWiyKTyT7i
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-15_04,2025-05-14_03,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 clxscore=1015 spamscore=0 impostorscore=0 lowpriorityscore=0
+ malwarescore=0 mlxscore=0 adultscore=0 priorityscore=1501 mlxlogscore=999
+ phishscore=0 suspectscore=0 classifier=spam authscore=0 authtc=n/a authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505070000
+ definitions=main-2505150087
 
-2025-05-15T09:28:25+02:00, Alexandre Ghiti <alex@ghiti.fr>:
-> On 06/05/2025 12:10, Radim Kr=C4=8Dm=C3=A1=C5=99 wrote:
->> 2025-05-02T16:30:36-07:00, Deepak Gupta <debug@rivosinc.com>:
->>> diff --git a/arch/riscv/kernel/entry.S b/arch/riscv/kernel/entry.S
->>> @@ -91,6 +91,32 @@
->>> +.macro restore_userssp tmp
->>> +	ALTERNATIVE("nops(2)",
->>> +		__stringify(				\
->>> +		REG_L \tmp, TASK_TI_USER_SSP(tp);	\
->>> +		csrw CSR_SSP, \tmp),
->>> +		0,
->>> +		RISCV_ISA_EXT_ZICFISS,
->>> +		CONFIG_RISCV_USER_CFI)
->>> +.endm
->> Do we need to emit the nops when CONFIG_RISCV_USER_CFI isn't selected?
+
+
+On 5/14/2025 6:55 PM, Sumit Garg wrote:
+> Hi Amir,
+> 
+> Apologies for getting to this patch review a bit late, mostly due to
+> it's enormous size.
+> 
+> On Mon, Apr 28, 2025 at 11:06:29PM -0700, Amirreza Zarrabi wrote:
+>> Introduce qcomtee_object, which represents an object in both QTEE and
+>> the kernel. QTEE clients can invoke an instance of qcomtee_object to
+>> access QTEE services. If this invocation produces a new object in QTEE,
+>> an instance of qcomtee_object will be returned.
 >>
->> (Why not put #ifdef CONFIG_RISCV_USER_CFI around the ALTERNATIVES?)
->
-> The alternatives are used to create a generic kernel that contains the=20
-> code for a large number of extensions and only enable it at runtime=20
-> depending on the platform capabilities. This way distros can ship a=20
-> single kernel that works on all platforms.
+>> Similarly, QTEE can request services from the kernel by issuing a callback
+>> request, which invokes an instance of qcomtee_object in the kernel.
+>> Any subsystem that exposes a service to QTEE should allocate and initialize
+>> an instance of qcomtee_object with a dispatcher callback that is called
+>> when the object is invoked.
+> 
+> I can't see any kernel subsystem exposing a service to QTEE as of now. I
+> suppose RPMB is surely going to be the one. So I would suggest you to
+> drop exposing kernel APIs for that and instead they should be pushed
+> alongside a patch-set adding a real kernel service for QTEE. This will
+> help in the review as well.
+> 
+>>
+>> Implement initial support for exporting qcomtee_object to userspace
+>> and QTEE, enabling the invocation of objects hosted in QTEE and userspace
+>> through the TEE subsystem.
+> 
+> I think this is the main goal of this patch-set, so we should limit it
+> to that.
+> 
+>>
+>> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+>> ---
+>>  MAINTAINERS                            |   7 +
+>>  drivers/tee/Kconfig                    |   1 +
+>>  drivers/tee/Makefile                   |   1 +
+>>  drivers/tee/qcomtee/Kconfig            |  10 +
+>>  drivers/tee/qcomtee/Makefile           |   9 +
+>>  drivers/tee/qcomtee/async.c            | 160 +++++++
+>>  drivers/tee/qcomtee/call.c             | 764 +++++++++++++++++++++++++++++++
+>>  drivers/tee/qcomtee/core.c             | 806 +++++++++++++++++++++++++++++++++
+>>  drivers/tee/qcomtee/qcom_scm.c         |  38 ++
+>>  drivers/tee/qcomtee/qcomtee_msg.h      | 239 ++++++++++
+>>  drivers/tee/qcomtee/qcomtee_private.h  | 222 +++++++++
+>>  drivers/tee/qcomtee/release.c          |  48 ++
+>>  drivers/tee/qcomtee/shm.c              | 149 ++++++
+>>  drivers/tee/qcomtee/user_obj.c         | 713 +++++++++++++++++++++++++++++
+>>  include/linux/firmware/qcom/qcom_tee.h | 302 ++++++++++++
+>>  include/uapi/linux/tee.h               |   1 +
+>>  16 files changed, 3470 insertions(+)
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 906881b6c5cb..88a9ad34bcf6 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -20257,6 +20257,13 @@ F:	Documentation/networking/device_drivers/cellular/qualcomm/rmnet.rst
+>>  F:	drivers/net/ethernet/qualcomm/rmnet/
+>>  F:	include/linux/if_rmnet.h
+>>  
+>> +QUALCOMM TEE (QCOMTEE) DRIVER
+>> +M:	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+>> +L:	linux-arm-msm@vger.kernel.org
+>> +S:	Maintained
+>> +F:	drivers/tee/qcomtee/
+>> +F:	include/linux/firmware/qcom/qcom_tee.h
+>> +
+>>  QUALCOMM TRUST ZONE MEMORY ALLOCATOR
+>>  M:	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+>>  L:	linux-arm-msm@vger.kernel.org
+>> diff --git a/drivers/tee/Kconfig b/drivers/tee/Kconfig
+>> index 61b507c18780..3a995d7f0d74 100644
+>> --- a/drivers/tee/Kconfig
+>> +++ b/drivers/tee/Kconfig
+>> @@ -16,5 +16,6 @@ if TEE
+>>  source "drivers/tee/optee/Kconfig"
+>>  source "drivers/tee/amdtee/Kconfig"
+>>  source "drivers/tee/tstee/Kconfig"
+>> +source "drivers/tee/qcomtee/Kconfig"
+>>  
+>>  endif
+>> diff --git a/drivers/tee/Makefile b/drivers/tee/Makefile
+>> index 5488cba30bd2..74e987f8f7ea 100644
+>> --- a/drivers/tee/Makefile
+>> +++ b/drivers/tee/Makefile
+>> @@ -6,3 +6,4 @@ tee-objs += tee_shm_pool.o
+>>  obj-$(CONFIG_OPTEE) += optee/
+>>  obj-$(CONFIG_AMDTEE) += amdtee/
+>>  obj-$(CONFIG_ARM_TSTEE) += tstee/
+>> +obj-$(CONFIG_QCOMTEE) += qcomtee/
+>> diff --git a/drivers/tee/qcomtee/Kconfig b/drivers/tee/qcomtee/Kconfig
+>> new file mode 100644
+>> index 000000000000..d180a6d07d33
+>> --- /dev/null
+>> +++ b/drivers/tee/qcomtee/Kconfig
+>> @@ -0,0 +1,10 @@
+>> +# SPDX-License-Identifier: GPL-2.0-only
+>> +# Qualcomm Trusted Execution Environment Configuration
+>> +config QCOMTEE
+>> +	tristate "Qualcomm TEE Support"
+>> +	select QCOM_SCM
+> 
+> You should add a dependency on QCOM_TZMEM_MODE_SHMBRIDGE too here.
 
-Yup, and if a kernel is compiled without CONFIG_RISCV_USER_CFI, the nops
-will only enlarge the binary and potentially slow down execution.
-In other words, why we don't do something like this
+I think you meant QCOM_TZMEM because MODE_SHMBRIDGE is one aspect just
+like MODE_GENERIC.
 
- (!CONFIG_RISCV_USER_CFI ? "" :
-   (RISCV_ISA_EXT_ZICFISS ? __stringify(...) : "nops(x)"))
+-- 
+Regards
+Kuldeep
 
-instead of the current
-
- (CONFIG_RISCV_USER_CFI &&
-    RISCV_ISA_EXT_ZICFISS ? __stringify(...) : "nops(x)")
-
-It could be a new preprocessor macro in case we wanted to make it nice,
-but it's probably not a common case, so an ifdef could work as well.
-
-Do we just generally not care about such minor optimizations?
-
-(If we wanted to go an extra mile, we could also keep the nops when both
- CONFIG_RISCV_USER_CFI and RISCV_ISA_EXT_ZICFISS are present, but
- command line riscv_nousercfi disabled backward cfi.)
-
-Thanks.
 
