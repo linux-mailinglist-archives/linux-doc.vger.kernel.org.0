@@ -1,169 +1,100 @@
-Return-Path: <linux-doc+bounces-46257-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46259-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8543AB8825
-	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 15:36:33 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id DC68EAB8830
+	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 15:38:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D0AE317889D
-	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 13:36:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4AFEB4C0C02
+	for <lists+linux-doc@lfdr.de>; Thu, 15 May 2025 13:37:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D7411DE3AC;
-	Thu, 15 May 2025 13:35:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6538172630;
+	Thu, 15 May 2025 13:37:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QXq+qeeW"
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="p+83h6oP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBF7F1B4242;
-	Thu, 15 May 2025 13:35:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 889B364A98;
+	Thu, 15 May 2025 13:37:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.241.56.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747316132; cv=none; b=AVS5vVegMkSLhS0La+44yRgdeH8UuGKaqUsJdgSHGGY9Drh6L02ceuDYPT3tam2KbshABwk+QTa3S5XphLmlXepFmi2CNLH7xCSWHuhvDFehSeW+QJgMDGRQms0l7LnPZa/bnYVFjfEuiUaKXeVeC3rIy+mpldW2Caq3sA4MQmQ=
+	t=1747316242; cv=none; b=h9+dwYnobRgFpTpJ+/aOmU1T7LCyh74bRPhw0xswrjd+kizhPv2sGZssdlP4QESY4WwMXIerh3S4mxbUjYsezPaxh2saKF5k7TEIjFxZg4CHD5D8sEojxOMkbP9mRejNmrvgO5U8efG3yI7ieReFEAXTJHLwA1nlX9QhDIZRnFg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747316132; c=relaxed/simple;
-	bh=hwVlnGZQYkECbvfB4rywfx6b8pemiTmtlgySiUS51ak=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=UDqSpNlurfwfPdAfLWNZTr9jrz/axuBNJYyDO3nMHq9nRcQullbwZaU57l5MLn92xADIfvbRvklNArH1LD0KFJeF25+wzZULDnRNj7wkBy07subzKvBaoo6hnUwrmu5iOjI9dGGNgfirGMGmJWrZ6oBySqgeKJ2/DsqAtgFLH0c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QXq+qeeW; arc=none smtp.client-ip=209.85.219.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f45.google.com with SMTP id 6a1803df08f44-6f0cfbe2042so11500156d6.1;
-        Thu, 15 May 2025 06:35:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747316130; x=1747920930; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gfI/h6yR5T+QGKNn50rKBkNsg03eRR3EOmEc3H6+img=;
-        b=QXq+qeeWKEzFIl+RoO+7yrj84lNFsbctZTFn/NxkDP4HjUBsdSQjFHqwmQn7+ZozF5
-         560/HkqxSYfO9QGkwI6oFD9JXkVxoOZQd4fA7NIEBsbDPSPsX8kV7D335ndObIGN+8Xk
-         JlmePpx86Hdx5un35sH4I4ZjBk9TOMUOrrTve0FwCVq7ktVNfDJaFPZkbHVwul5EOZxZ
-         fciCjc8/7SEr+heg8xRu0HIbVUfFQyrEvbigFXesBh8Vmr0FT1nvwlRXlZhr1/q/nZiY
-         ls1mAOGcVr62s8H+1zdD2kWD9ifThPovXvFV170IqyanKOMg5ECeIoL0BqsaT1UMpS+x
-         2GXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747316130; x=1747920930;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gfI/h6yR5T+QGKNn50rKBkNsg03eRR3EOmEc3H6+img=;
-        b=CVwoipJEq0B5mMZqcM11HJ67ZJCB5wPzg7HtMSoxZCMT7pHvrrb3uiStU1fSb7wkWi
-         INB+aS/445+FiV6KrOKyu9hM38iLG3P7EfzHjmK9eMqvwzywoZ1KYTPE39KJ1YwSjXM+
-         HU5mtqe1JfPC57O3ZPObF+qk0/01kSKqMCArFDJcVe1ij4AFLUcTpiH7zqb7D7qKhkvk
-         yiJ+QJhQn2NxxP+qldP0++ayL7ZclGL8ioMwQGA3rU9t2bK1HIl6wbaHm86jD8njFkQM
-         KkwbA2u1NF3XFsS2jb6E7iA4nvt0F7IonrQl0Dlpa94im0vfcmNwrOb8y5dt+U0lEaYp
-         UtdQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUR3no5uyd0fFT5wPMgcfZ+i7ClwOtBewau2r0bLPL0Z74xfXlWXMzl/GpzHwZPf++ygPuQrLR92+o=@vger.kernel.org, AJvYcCVvs05QF2Ru31yTX8ifuxwxYUQPknwpUpOdpG8GXTkwYjQbA5wK97dtYh+LCuE3cab8wzqzgQIaS9zQWAKm@vger.kernel.org
-X-Gm-Message-State: AOJu0YyoTKT7+z9ftKV1RK3AwX47nS1QB04JRKX6yQTBq6USgu0nPvcz
-	WArJKEmEKJvuHt6UeIWH8QJGlJ90fOJsl3BPaGWVer+BC4CY1W9M
-X-Gm-Gg: ASbGncsFuoCVs8S6Y1kLcg4iexntUNdkMBqKp3ycVoQbw+ThHIVk7iAhTeLUDNJtHUT
-	hKzv6bc8G9+6ttM3lC8lp0ysqce5GULxnZMuqQEiWo06JoydlGmVYhuRdUEhd2w5LMNKCT4BywV
-	zUHjY7RwBqTi7zAaBUDzV6A1ZXExhM8tzkJQuRL+fW+ppIzQzJVHNnK5F4U9yVreDhkHT3n3uyI
-	j9qi4/jpD9uZPDIDqZ6LyuISwPA5GA1ydJ7Mr9Mtu5twP3AJONR7aEzny4TgZKgNWau/AHrAkm6
-	2+1202JfN44tiuEMd+oVqVdIunOoJ35cPi99laQ/txgR5V0cUA==
-X-Google-Smtp-Source: AGHT+IFhtYFW+nSu82qMrHlJwUBAof/mWqJdiShQs0Id8daZt5/yurPzdh8is1ilm1548tQsdICvuw==
-X-Received: by 2002:ad4:5c68:0:b0:6f5:372f:1c5b with SMTP id 6a1803df08f44-6f8a31cba87mr49659226d6.11.1747316129425;
-        Thu, 15 May 2025 06:35:29 -0700 (PDT)
-Received: from localhost ([2a03:2880:20ff:41::])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-6f6eb98e5f8sm75823886d6.45.2025.05.15.06.35.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 May 2025 06:35:29 -0700 (PDT)
-From: Usama Arif <usamaarif642@gmail.com>
-To: Andrew Morton <akpm@linux-foundation.org>,
-	david@redhat.com,
-	linux-mm@kvack.org
-Cc: hannes@cmpxchg.org,
-	shakeel.butt@linux.dev,
-	riel@surriel.com,
-	ziy@nvidia.com,
-	laoar.shao@gmail.com,
-	baolin.wang@linux.alibaba.com,
-	lorenzo.stoakes@oracle.com,
-	Liam.Howlett@oracle.com,
-	npache@redhat.com,
-	ryan.roberts@arm.com,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	kernel-team@meta.com,
-	Usama Arif <usamaarif642@gmail.com>
-Subject: [PATCH 6/6] docs: transhuge: document process level THP controls
-Date: Thu, 15 May 2025 14:33:35 +0100
-Message-ID: <20250515133519.2779639-7-usamaarif642@gmail.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250515133519.2779639-1-usamaarif642@gmail.com>
-References: <20250515133519.2779639-1-usamaarif642@gmail.com>
+	s=arc-20240116; t=1747316242; c=relaxed/simple;
+	bh=tRYLw6tBTvAhc6J6URyjrQDPh6UpNCTh6BvndupisvQ=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=eiNRzT/rS9ov4iuCfiBZsplWfExpnv3BJXYGMD/nkfSqxxvmO6iZvAzqUx2uDY6tcCe2TJGZLs9Y52SY1xtlOOzCCqwtI+XzonWnCm8dAloB4ENKKXYuyBA1BHI+4inq/ko/QJr4wsEygd3FJ99KouCTSLQh14QrPv+OtT3bnaI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org; spf=pass smtp.mailfrom=mailbox.org; dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b=p+83h6oP; arc=none smtp.client-ip=80.241.56.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [IPv6:2001:67c:2050:b231:465::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4ZyrqB2szvz9st4;
+	Thu, 15 May 2025 15:37:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org; s=mail20150812;
+	t=1747316230; h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=tRYLw6tBTvAhc6J6URyjrQDPh6UpNCTh6BvndupisvQ=;
+	b=p+83h6oP8n05gWvIrxLrvf/Vx7c7IO0T6BpuOE6OveQXll7sNsHd6uGiBmT9RNm29JeMz/
+	0G2Ozr5ZVmvT/Ad7/GjjtL5PiJwXQUrvYAH7yTr8ZKw4qiX6TpH+vWaJ6h1IhHlkZJybEZ
+	UHgmorSamGSBpRIaTX6ap6rJN/MM27pizkMryER1QiF+VW7ytKP0inDoXEyk7ID2Ga5emr
+	MmJyzwBvghYadWic137i59KnkWHbrvQswNDXHmesVkT/V8s+Y+eA1BLVgy3NlgFyNjHwqJ
+	qlkpn0ut3DtDWovLqVq5cmidkS4q1qTpvbcPm+d6ibbq+T3D1ERuYquiTQcQ8w==
+Message-ID: <3f1140397e628cfdf4156f02f5454f844003dc6d.camel@mailbox.org>
+Subject: Re: [PATCH 6/7] PCI: Remove unnecessary prototype from pci.h
+From: Philipp Stanner <phasta@mailbox.org>
+Reply-To: phasta@kernel.org
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Philipp Stanner
+	 <phasta@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Bjorn Helgaas <bhelgaas@google.com>, 
+ Mark Brown <broonie@kernel.org>, David Lechner <dlechner@baylibre.com>,
+ Zijun Hu <quic_zijuhu@quicinc.com>,  Yang Yingliang
+ <yangyingliang@huawei.com>, Greg Kroah-Hartman
+ <gregkh@linuxfoundation.org>,  linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org,  linux-pci@vger.kernel.org
+Date: Thu, 15 May 2025 15:37:06 +0200
+In-Reply-To: <aCXl-U5Dsv3hdCWa@smile.fi.intel.com>
+References: <20250515124604.184313-2-phasta@kernel.org>
+	 <20250515124604.184313-8-phasta@kernel.org>
+	 <aCXl-U5Dsv3hdCWa@smile.fi.intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 5f02b5a74fc86c15c8d
+X-MBO-RS-META: 69d664s196o43ritmth8fyiyacshbjyn
 
-This includes the already existing PR_GET/SET_THP_DISABLE policy,
-as well as the newly introduced PR_GET/SET_THP_POLICY.
+On Thu, 2025-05-15 at 16:02 +0300, Andy Shevchenko wrote:
+> On Thu, May 15, 2025 at 02:46:04PM +0200, Philipp Stanner wrote:
+> > pcim_intx() once was an internal PCI function, but since then has
+> > been
+> > published and is used by drivers, and, therefore, available in
+> > include/linux/pci.h. The function is not used within PCI anymore.
+> >=20
+> > Remove pcim_intx()'s prototype from drivers/pci/pci.h
+>=20
+> Can this be moved up in the series? Or is there other dependencies?
+> I.o.w. this
+> looks like a leftover from something of the previous work.
+>=20
 
-Signed-off-by: Usama Arif <usamaarif642@gmail.com>
----
- Documentation/admin-guide/mm/transhuge.rst | 40 ++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
+That can be moved to anywhere, including a separate patch. It's an
+independent patch, a leftover from last year. But it's related to
+devres, because it was also added because of the problem with
+pcim_enable_device().
 
-diff --git a/Documentation/admin-guide/mm/transhuge.rst b/Documentation/admin-guide/mm/transhuge.rst
-index dff8d5985f0f..cf3092eb239a 100644
---- a/Documentation/admin-guide/mm/transhuge.rst
-+++ b/Documentation/admin-guide/mm/transhuge.rst
-@@ -218,6 +218,46 @@ to "always" or "madvise"), and it'll be automatically shutdown when
- PMD-sized THP is disabled (when both the per-size anon control and the
- top-level control are "never")
- 
-+process THP controls
-+--------------------
-+
-+Transparent Hugepage behaviour of a process can be modified/obtained by
-+using the prctl system call. The following operations are supported:
-+
-+PR_SET_THP_DISABLE
-+	This will set the MMF_DISABLE_THP process flag which will result
-+	in no hugepages being faulted in or collapsed by khugepaged,
-+	irrespective of global THP controls.
-+
-+PR_GET_THP_DISABLE
-+	This will return the MMF_DISABLE_THP process flag, which will be
-+	set if the process has previously been set with PR_SET_THP_DISABLE.
-+
-+PR_SET_THP_POLICY
-+	This is used to change the behaviour of existing and future VMAs.
-+	It has support for the following policies:
-+
-+	PR_THP_POLICY_DEFAULT_HUGE
-+		This will set the MMF2_THP_VMA_DEFAULT_HUGE process flag which
-+		changes the default of new VMAs to be VM_HUGEPAGE. The call
-+		also modifies all existing VMAs that are not VM_NOHUGEPAGE
-+		to be VM_HUGEPAGE. The policy is inherited during fork+exec.
-+
-+	PR_THP_POLICY_DEFAULT_NOHUGE
-+		This will set the MMF2_THP_VMA_DEFAULT_NOHUGE process flag which
-+		changes the default of new VMAs to be VM_NOHUGEPAGE. The call
-+		also modifies all existing VMAs that are not VM_HUGEPAGE
-+		to be VM_NOHUGEPAGE. The policy is inherited during fork+exec.
-+
-+	PR_THP_POLICY_DEFAULT_SYSTEM
-+		This will clear both MMF2_THP_VMA_DEFAULT_HUGE and
-+		MMF2_THP_VMA_DEFAULT_NOHUGE process flags.
-+
-+PR_SET_THP_POLICY
-+	This will return the current THP policy of the process, i.e.
-+	PR_THP_POLICY_DEFAULT_HUGE, PR_THP_POLICY_DEFAULT_NOHUGE or
-+	PR_THP_POLICY_DEFAULT_SYSTEM.
-+
- Khugepaged controls
- -------------------
- 
--- 
-2.47.1
-
+P.
 
