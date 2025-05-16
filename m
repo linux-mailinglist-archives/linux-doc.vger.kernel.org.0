@@ -1,400 +1,437 @@
-Return-Path: <linux-doc+bounces-46542-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46553-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2F9FABA1D2
-	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 19:19:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 173C3ABA225
+	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 19:44:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 682851BC62DA
-	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 17:19:55 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 52912188C7A2
+	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 17:44:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1C4C424679B;
-	Fri, 16 May 2025 17:19:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 463D527464E;
+	Fri, 16 May 2025 17:44:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ecgyck1S"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="EPuMpLFv";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="BdKudmPZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2D921D5174;
-	Fri, 16 May 2025 17:19:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.46
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747415978; cv=none; b=BzwhJa7fZAnxzoK3Pem/vpu37VZZHRz3P9IAMnLB0VKq276/9vSj762dRuE45N/mUoExU4xUfWh2Wj8wAQo7BZwcvOu4N6heLASV890v3Tlti1jQMAPqY9NwpdENnuMUzpb40yn+cwbl59cEFxtub1geaMqiDXKcN2B7wJgvQUg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747415978; c=relaxed/simple;
-	bh=oU/upza6fHD2xQ5TLfC2wgPPp/ppsw0/de/y+5bcXOw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HhVCkwMEksB/CXXHIfxFv7tsi0Tfg5w9+TlrDWyAB//Kz2BwmF691352eFLMP0QEmy+L14Hl05M3VwgvA9tbsTwoMSvil3iDyLZjW3l1qHBnthxpTvUH6vIKyli8wRU764okayhTlV0fhcv48esEGVJo3Fie8FBP5L43AxmRqDY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ecgyck1S; arc=none smtp.client-ip=209.85.221.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-3a1d8c0966fso1665637f8f.1;
-        Fri, 16 May 2025 10:19:35 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 307561B6D06;
+	Fri, 16 May 2025 17:44:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1747417460; cv=fail; b=paQqF61r93CbU4GYRvu+vbUN/D06UGcI+fPuo+BCBFVZuCHx+FEwyCEf95dFa0I169wcKAuGSmDAE3NSJBIWdnQJ+KuYdjVOeIk5sorl/gcn6ydXuEaFzs798EEP33Wbs4syrOJe9x2EpsHoa9ELekGPlThrC8QafGLLxh89yno=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1747417460; c=relaxed/simple;
+	bh=jil/s9HxckpSjj+PCtjiqrPyX/nihB01/YhedOc7AnE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=EDaKfwrscb2tshXP6Sfg3MzROl+FW897fz87BmkyfxYx5hDyyZYuRTmOGSxi6IlDWlluM58Rc/6HaV2QwQCmheKNQsneTgMXTnJ+UakOwoUlIv2aTDlNFi9HV0H1pknj66tWzb+CiLkM1vfaoSsKI35YSABpZG0OTYlKEo5NTbc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=EPuMpLFv; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=BdKudmPZ; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54GGfpjp022507;
+	Fri, 16 May 2025 17:30:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=prxmMZlpafAT+/wNdY
+	UF/UpSvHvwBZgKhHHNmCA9Mjc=; b=EPuMpLFvtW+niseXV++bSmW80Lt1odLNKx
+	Mxu0z/cSl5j2hjkw72wzco11BT/PrV3YpP54zT4C/LN3FTRsHGlavZYv4jE+OUml
+	LbA9xQMk/pea2qSQ7ntkVl3v6uoZE5xCAKNJfCapJ4I1kjppU5Rv3cXEeY6+JXvX
+	EUfsZNotYPXoFLJFVnEFXfRG2JymB/bZBAw6M5i/o7jI1UED5m0ErpmwY61DWtUq
+	nSGzqi+HjLGzYSSMjhSZDnH7mDa5YULprr3z3PdRbiySkRulYD+WYbfNQOzeU5/f
+	lBCoaXHffWO4pqzLxEI5wrNBDZpiu+f4Oki7BqVdWDlOA/cWj1Xw==
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 46nrbf1ud2-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 16 May 2025 17:30:21 +0000 (GMT)
+Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 54GFkRPd004269;
+	Fri, 16 May 2025 17:30:20 GMT
+Received: from nam11-dm6-obe.outbound.protection.outlook.com (mail-dm6nam11lp2172.outbound.protection.outlook.com [104.47.57.172])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 46mrmfm68p-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 16 May 2025 17:30:19 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=X0iq7rjzT3bC+XQcSI642H8lI0+HJVtmRDkpNMgN+BgFwqSDuXtxoWMnf/WRmda1jchNVTpjgNiCNaFBxphkAT0BFv747gSwTY8kM4G71gt6JiqhW0YTn+E5ZaLUchIhSLMzwXHCQr79ATRZIG3qaR5+nWIjmZoPTDrqbPZeSV4QkKc2lnvAoqZLZuCNHeQHEjb/X2TI2qksSlDJe1d4JdTHb7U7Tk1QmAFP2Z4ydCWIXAsO0ncjpAjD28Xb/wBP/bNrXHTcgSKtO/5TGWuFXz9jz7Vpf/M51uE56SbL4QOpRCKQNHUmfXanK/Wzp8NRcnZHEuKvd3SDBdAxjDeE9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=prxmMZlpafAT+/wNdYUF/UpSvHvwBZgKhHHNmCA9Mjc=;
+ b=NgfRxp87bBtXasv10or7HU+c60igOv0p/Qa+0r9RZ5MB2t/siXSvRm3heHj93nRdpC0bdjUKQedv9plxYW+BPUqvm8Tn/rMIbyJ/yJJ070mV046MZlNc6UALagalSi5FIk35dz+gdev0CsoG+8MQsEkJoXwhGOw3DmYE2bRn2tsFYoJDbCp1gibILk6ea83cw5YU4Cjul4VFCsH+GgaqINXPQwwS4qZdzw/N5fK1IT76/io8GKqWfyWHYlEtQRCEW8qMdcslxMw9nbIcU5pJGD9W0wSieT5VwNi6cywde47Y8V1mNMMBk5duTg7HbuNeDoE6748Sk+smD22xArdFnw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1747415974; x=1748020774; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=scp30wX9S3En5NLP8zYpz0v3AMQnTSxhNtpujWPSkWo=;
-        b=ecgyck1SO2082mMSag/sGrjRldUqirRjem5OdOTuqsvQYJp8bvQazGjGsnmoRBOs1g
-         WoUiCrgKARlWfQQjATuH0ylL3cozZOo3Rnd/tzfM6HgDqJPVeeDhpx5sMMPde7BKs5yf
-         dUvEhavAi2PREDFD6NprojRukfY8RUnguPeO0djjQ8oRoAEz1Ih/y73Di9Z7GYLCmLrO
-         qm92rYQuCBeCA4G7YUXk44YJuWLun9KpoOwtIqhmlSIhctDOGYpZFIVBpYKvMkjByh3I
-         gYjYrqX45J6kYAGT32rdpMbYPUKFpZO5BqHH3bAuwHQ+lPjbWMCi/kgH4h+tyuy66c06
-         fGjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747415974; x=1748020774;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=scp30wX9S3En5NLP8zYpz0v3AMQnTSxhNtpujWPSkWo=;
-        b=nIkBJ3i5r8K2syLl+ZMK1oX4vu03NbumY1KinV6qz07CPo8o8USVAMNUD2qDR89IQl
-         rfITfrGRRB8yX/DeRiysg7kjSpUfHqY17mcs1YTmBXiN38xltidPrzrPG9cwBxV0yphw
-         aRUPM1FtIzFN4eVtJ+GMDP7NsZwWXLU0pGp/yBDy1Ebm3PG1q4i2fPMLcktNSHvCUAfI
-         wL5zj3g1uEXmU5IUbAHk1MOplzSzRbP6UZUgPLQQYigaWLV+ESfdH1oyomz5EDEMayjo
-         U0wju2PnegtMUDMEjzX2uAa5Pq2RQPGMXmVNxLwjFE0GAVdyr3Jc3zXbRl/r6RDJS3Qo
-         u3KQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUJuY0Mm29VMcomHBg1Fb2xjl/S9xW3hc/WSms/0nRnalj37bOLCYs2wVeAhqpavZgJk87ZJNGRpT8=@vger.kernel.org, AJvYcCXzFyms4pxWprPW9BSl/wZZ7R62FOdeuJctyQmob7GP4HidQOSKExkMssEEuDZ6De8paWJ+GmI0nVim2HV6@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyn2NfDrZa26Te+mwwve+WXrUsdnroku5PHcZeDQEv6ae1ZMNVz
-	dyaWO0WYxMuxIjIOxOAzMKmB6WcH1u/EWa1wkX+kRuekm+PLq/24xbT1
-X-Gm-Gg: ASbGncvvLmS9TJUuCXUrEAYjjAdx9eu9+alEh7Tl1rctqG87pamzppSvsapqOTB2/aX
-	Vrl3BsVzhnjOycXA5K0BCc2MhohNqvtZFhlETgRVSgYJrEdTjlKiS3mJKVOmaWFOP3hpYtyVaxU
-	uU/o8BfnsfFBJ2R661yneIwEXhOdtSJj4wz7d4OjCo5vfvmXwXozt5djZZz83rvd76LEgI5dT+l
-	sQR3LeBwsg9RCEpFwCUcIkeF0ePBzNE4ISow0i9jOd+aG2E0mYDjo0aL2vgPCHifYqRvxe+N1pR
-	h0Ty6UVxEQ7iXR7202ZYqtLTp+99G49iMDMYc0Fjc2Yvx+GG1W3nqSlYVIrmJUpBLwJtUOHJoqY
-	0QrNEx5dIHRIhSmDWhVxvY5dW6k8BREx0D8YMkf45ZLYTwOCOMKIXoEr/RQ==
-X-Google-Smtp-Source: AGHT+IEzy01Mr4eOjhKk/daIdILUsRnMi+mICtkNBZwJf2oVbEFvg6chOyHRDPdQXEo31nfb/2V3og==
-X-Received: by 2002:a05:6000:2a5:b0:3a0:b817:2d7a with SMTP id ffacd0b85a97d-3a351222edemr7573219f8f.29.1747415973931;
-        Fri, 16 May 2025 10:19:33 -0700 (PDT)
-Received: from ?IPV6:2a01:4b00:b211:ad00:1096:2c00:b223:9747? ([2a01:4b00:b211:ad00:1096:2c00:b223:9747])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-442fd50ee03sm40122895e9.14.2025.05.16.10.19.33
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 16 May 2025 10:19:33 -0700 (PDT)
-Message-ID: <3284ec20-2c3f-46d0-a599-2f322b2883c8@gmail.com>
-Date: Fri, 16 May 2025 18:19:32 +0100
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=prxmMZlpafAT+/wNdYUF/UpSvHvwBZgKhHHNmCA9Mjc=;
+ b=BdKudmPZXXhnQ4XCS1cMYtEImiHkM1U5mov/hyh0qYnOVwUl0wumSTXFKsomnCtgBBl4ng6q2+ixnmATqRSoPpBatzH1BCBhut6s0GN9CCJfoQQVzw7bf/0k4SD79eg7N0SEYii1vCnN/jgHxh5/RDJdkyPVPm6BEeG6HLBwX4o=
+Received: from PH0PR10MB5777.namprd10.prod.outlook.com (2603:10b6:510:128::16)
+ by SJ5PPF07759F8B1.namprd10.prod.outlook.com (2603:10b6:a0f:fc02::787) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8722.31; Fri, 16 May
+ 2025 17:30:16 +0000
+Received: from PH0PR10MB5777.namprd10.prod.outlook.com
+ ([fe80::75a8:21cc:f343:f68c]) by PH0PR10MB5777.namprd10.prod.outlook.com
+ ([fe80::75a8:21cc:f343:f68c%6]) with mapi id 15.20.8722.027; Fri, 16 May 2025
+ 17:30:16 +0000
+Date: Fri, 16 May 2025 13:30:10 -0400
+From: "Liam R. Howlett" <Liam.Howlett@oracle.com>
+To: Nico Pache <npache@redhat.com>
+Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+        david@redhat.com, ziy@nvidia.com, baolin.wang@linux.alibaba.com,
+        lorenzo.stoakes@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com,
+        corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org,
+        mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
+        baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
+        wangkefeng.wang@huawei.com, usamaarif642@gmail.com,
+        sunnanyong@huawei.com, vishal.moola@gmail.com,
+        thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com,
+        kirill.shutemov@linux.intel.com, aarcange@redhat.com,
+        raquini@redhat.com, anshuman.khandual@arm.com, catalin.marinas@arm.com,
+        tiwai@suse.de, will@kernel.org, dave.hansen@linux.intel.com,
+        jack@suse.cz, cl@gentwo.org, jglisse@google.com, surenb@google.com,
+        zokeefe@google.com, hannes@cmpxchg.org, rientjes@google.com,
+        mhocko@suse.com, rdunlap@infradead.org
+Subject: Re: [PATCH v7 01/12] khugepaged: rename hpage_collapse_* to
+ khugepaged_*
+Message-ID: <gsk47hv4pkqjstkb6mfiv2muon6yj3vp5rsho6rufq5qjfweow@scdzrvph5ah6>
+Mail-Followup-To: "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
+	Nico Pache <npache@redhat.com>, linux-mm@kvack.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, david@redhat.com, 
+	ziy@nvidia.com, baolin.wang@linux.alibaba.com, lorenzo.stoakes@oracle.com, 
+	ryan.roberts@arm.com, dev.jain@arm.com, corbet@lwn.net, rostedt@goodmis.org, 
+	mhiramat@kernel.org, mathieu.desnoyers@efficios.com, akpm@linux-foundation.org, 
+	baohua@kernel.org, willy@infradead.org, peterx@redhat.com, 
+	wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com, 
+	vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com, 
+	kirill.shutemov@linux.intel.com, aarcange@redhat.com, raquini@redhat.com, 
+	anshuman.khandual@arm.com, catalin.marinas@arm.com, tiwai@suse.de, will@kernel.org, 
+	dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org, jglisse@google.com, 
+	surenb@google.com, zokeefe@google.com, hannes@cmpxchg.org, rientjes@google.com, 
+	mhocko@suse.com, rdunlap@infradead.org
+References: <20250515032226.128900-1-npache@redhat.com>
+ <20250515032226.128900-2-npache@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250515032226.128900-2-npache@redhat.com>
+User-Agent: NeoMutt/20240425
+X-ClientProxiedBy: YT4PR01CA0330.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:10a::17) To PH0PR10MB5777.namprd10.prod.outlook.com
+ (2603:10b6:510:128::16)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] prctl: introduce PR_THP_POLICY_DEFAULT_HUGE for the
- process
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- David Hildenbrand <david@redhat.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org,
- hannes@cmpxchg.org, shakeel.butt@linux.dev, riel@surriel.com,
- ziy@nvidia.com, laoar.shao@gmail.com, baolin.wang@linux.alibaba.com,
- Liam.Howlett@oracle.com, npache@redhat.com, ryan.roberts@arm.com,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, kernel-team@meta.com
-References: <c0af0eb2-d10f-4ee3-87dd-c23cca6cfd1a@lucifer.local>
- <ddc0dd46-8541-4d4a-ac59-287e11e1d3ff@gmail.com>
- <02ead03b-339b-45c8-b252-d31a66501c39@lucifer.local>
- <3a2a329d-2592-4e31-a763-d87dcd925966@redhat.com>
- <8ea288f2-5196-41f9-bd65-e29f22bb29e8@lucifer.local>
- <5f77366d-e100-46bb-ac85-aa4b216eb2cf@redhat.com>
- <cbc95f9b-1c13-45ec-8d34-38544d3f2dd3@lucifer.local>
- <8f0a22c2-3176-4942-994d-58d940901ecf@redhat.com>
- <1a175a2c-8afa-4995-9dec-e3e7cf1efc72@lucifer.local>
- <d8a7644b-6ec5-48bd-9789-cb5017075690@redhat.com>
- <c390dd7e-0770-4d29-bb0e-f410ff6678e3@lucifer.local>
-Content-Language: en-US
-From: Usama Arif <usamaarif642@gmail.com>
-In-Reply-To: <c390dd7e-0770-4d29-bb0e-f410ff6678e3@lucifer.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR10MB5777:EE_|SJ5PPF07759F8B1:EE_
+X-MS-Office365-Filtering-Correlation-Id: e20014cb-7ffe-4d8a-3619-08dd949f5277
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?5a1lCjRKrOgAquHpgnm8itoWZUOZ8hHZNADa2BJ2h/u5KlDFC49zI7anEp4l?=
+ =?us-ascii?Q?76gT9z1jRpRQDwLwkmfKf49trzcxi7yqiP4Q+NMoa4HkjMEZjSLQp/KH8EQ4?=
+ =?us-ascii?Q?FGCQAzAWRGz2u0K+AOMsNoJPS5txUU4qyni6NuBPqg0oyMzUeu7fbW++jEbC?=
+ =?us-ascii?Q?4SlVv5r6+JfGGFK9IymsPkZDk7yNt8EKQ+znvfXn3CEV9y2n+VUAPxBDLIjK?=
+ =?us-ascii?Q?WrecBXu2tcvwxVeY6ptakbJIKxKaKe2LaN6U5eerc4cNhXaUig+/rl9qqBBy?=
+ =?us-ascii?Q?OjOcaha+bwXf6PmEL9hU8BLhJ2Naps0MvYJwcSHrAGF9UmCks2XebSM+JznS?=
+ =?us-ascii?Q?h4wEEZaK/9kXOZHNfW22gvLGE15LYFXe7qBfHJScLIoq3hHo1KvXmxS1i9tV?=
+ =?us-ascii?Q?GNy/zBbDmp1nVPQFnEV+SW0HqNKc61+d0Ss8TUU7q+0earxzrvTkc+91NLqV?=
+ =?us-ascii?Q?2+PI77mKLSQx2udBpQWCai0ta3FfxwwPVnbGwNOZ/TZim6NLh7CICNUJS9DQ?=
+ =?us-ascii?Q?kMDUdXWRXndbDbArYXZevLFEDtrNEONKterTbCIukLSC6e2Vg2U258Q1VZGi?=
+ =?us-ascii?Q?RMhdGXS+JOtNNSrImAN9B5clnHskF+gWPPc8zcylY2MQrhpfOf6VHKmDGVTu?=
+ =?us-ascii?Q?NbFK894fnD6T49qC1av2C2x9lTYZpS6MQCFuNvcOSjk8XwsWXRy3sPwlOEKC?=
+ =?us-ascii?Q?E5iMLzAFdzXeox74ktYnCbd9GOPl/v2eilFZPI+EQDIz+jf2K1gpGb5PGDyj?=
+ =?us-ascii?Q?/T82/9DBW+hfZIdQpjaQ1BOqCBu2cmkOGhp659m3XCAXW95ZGnWcjr8hj97p?=
+ =?us-ascii?Q?Kg27MbOyC0i754wrq5Vv9Dog9/US6gBpD+9Mso3CIy2dMmUA0J1ek0SHbnq1?=
+ =?us-ascii?Q?g6quqdAuV0bGLNu83WDp2lm97MOU/BYZJV5MnvvaU70/VQ1pujV8FUY3myhT?=
+ =?us-ascii?Q?T22CwZcKtlH/fZxGZDL64E0vvc8So2QP5m3b2Olbktaja0E0UXj26KlJNyql?=
+ =?us-ascii?Q?F8MOHTR6qTxl64X3TzRRpemSMOqFI8qlcZ9pRb7mHGftzgWlrSgkGckSYEgZ?=
+ =?us-ascii?Q?30CDJmEJqctdPGBjRXTrXTuRSCDF5j52N5X2VZbSgarm9VKnDq/r0sZOh3wY?=
+ =?us-ascii?Q?VACsgHO3iXrHAkW8G0cX961W/UgIMHXeOrFjcqbaitGnNvv5tR/E4Fq/uKVj?=
+ =?us-ascii?Q?hrtp/JZnbr1jBRVhFYWGmnNQFU+CzgnSbcG3gTHSOktthQHLgJ+WJnKo0qEk?=
+ =?us-ascii?Q?rS9moIhIwDJcyNcZ0awLrQDzuKuu1RXhcRxBHov1Jl+yn7UQ+JKoKekPaOWo?=
+ =?us-ascii?Q?TDJ/WF+CIFTSLRQzRk4xZgwCfH4ZG/ZMCo7SowK5pZnQkhSe9vagGmRCkVn1?=
+ =?us-ascii?Q?rSGjXnR6Ie/pFcL4H560ElohdwwhTJhSc9lQH3fFjz0q2BsTZL9fL04xoawr?=
+ =?us-ascii?Q?dIsKtB7RV10=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR10MB5777.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?Zdz0dDz/voGm0Nw9JOULIQfUxV4R9cmbnubm7gEqdNpaCvd0Wn89nj389t3d?=
+ =?us-ascii?Q?uzZ2+oR6QWe9KAeNLtYVcpsst8tMGdkNUT3nicV0IMN62gP7kmfU1rbLtOKQ?=
+ =?us-ascii?Q?oBOX/nHm8rpSUOIGXKyf9FJ4KNtvz9+TqNtWoll4MrI87Zg+IYuocGmFJiYa?=
+ =?us-ascii?Q?MmM8+944z71tsORvKg5JJRMBRrxQ+HUo4Ja0+642gsYBWWXD9jb+F47H77os?=
+ =?us-ascii?Q?FKMktcY5+91s0hokR7cmjOIMhz6waZaZlMhx8mgEvF5lPHXIr40VMrrINu6E?=
+ =?us-ascii?Q?pzd4yQqKVjB+HwcZm6Mx3it9eep0hIjDClwrGJRoepO0bs4OypX6pNBbo5eB?=
+ =?us-ascii?Q?KfNmI12kMIOfd5jrsrwcDzbFPE+ZTLvHnsbcXLrmy2MwQftDiDQlXWKF/68E?=
+ =?us-ascii?Q?/IzAm1eQdU8wxhHaOy6hvSvqmjzLGjMilLnjRonOyZNIe1+LXNeOsNDnsN1c?=
+ =?us-ascii?Q?a5lAUenkLpkkAqu5XcBW1/9e3D/6Y2I5PryGTtMPsQK7r/Q2JsJm4WBdA/fq?=
+ =?us-ascii?Q?6/YhgG6muragS727NkiClJLctAgULLeb5k/9T1EsIWFDMALLaKwJflXp5O0v?=
+ =?us-ascii?Q?I2xuZxZZjkbLvEVC8LsZW9oNltlNvyFUjq0YeBrULR7h2gZ1cK3ULFuphWyE?=
+ =?us-ascii?Q?Y2eBQRuNInX1WxRyWJlXEvB2V+NepmM6GYr9XgbLIg+Xj5ltSdndsjHHWbPl?=
+ =?us-ascii?Q?z+OZKlIp4HcXDHrfjAYYxN+fDmEOaPxaKhPcHIpsiNX6vCTgaX30ikgpPo2g?=
+ =?us-ascii?Q?NC0mdaQ02bHPmRpTskLlh4fsqBBeDy3PUpXVhLQji1BQgzJdnhawJJ7/0CDc?=
+ =?us-ascii?Q?qpBCTMIoYm6GPc+u/gzop277RsbGCwO4U2cp4P+E8fUBQLbDa2GQwzqx/zcN?=
+ =?us-ascii?Q?Ccu2VDC/xAbMDwE5AcN9ITek1I6+8mZ+46JwbiCZBExwp6+lxoHKv79AES6q?=
+ =?us-ascii?Q?0+V1W80tmoBKIIndMSuvxzIfBPd3EbIgutr8mxNgWmPJWk6mmsqSjHKXOWbp?=
+ =?us-ascii?Q?3VKigwyNdk1jp5YQJQT8DD1ZX70dWCwQo90IHHONLt0i3mx4q2Lg7bQoo1Yt?=
+ =?us-ascii?Q?hYvTmAWoNloTtWOmNMWiktsjjqNgXPYPjCzFX5HpXAhx4S6Yj+shEAYXvDUF?=
+ =?us-ascii?Q?XYvoJaMP6jtkD0oVMKsRvL63e1bf+PDyyc7h2B16qRk5hizEDNzPIhD4ADdB?=
+ =?us-ascii?Q?3EsSHYHgGv2Dfl750ZGaXgWAAIFZhXvzpBt3pogTShddkcLUMq05LuIQPisX?=
+ =?us-ascii?Q?JgZp4Ls5LXmaqxrq7YVGWQky2HYL2coNUfqFUjYCpxzZxiis4x0CKFmpb2wU?=
+ =?us-ascii?Q?XX9jCeGqU3jxld9SxIb7MDyhKIXppfDcqxdgqAT/mjZqIiTG4WklhFsik3XH?=
+ =?us-ascii?Q?abjfFXQCth2OVHVvgJqzNKYUIwk9l9iU81lNGeONovl2NowKQrEc1wnvDASI?=
+ =?us-ascii?Q?WYpf3II1CuA3Q1VsBncDZn9C6Gk26vXv5C/hD7Wtrtt6pOcm/5gOSPXkFBfj?=
+ =?us-ascii?Q?Ga9zfShjubz76I0cWU5+Hx97bV2nRghmbjQZNbApDaqwoGJb59Pz6BQbgRhb?=
+ =?us-ascii?Q?Gh/Q3dR6BvYncI8IDKwsK91XRO/EoMFe4Me+wfsW?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	DOJNpeYbfHqHz2ELCEf2LjYTRS9NHYMV2TSP2iQE8DJaFV7haTiZLjFI8UoR8Ug8UZ0sxa8rJ0iagqyWfLaKO5sjkaYbzNajd7+dUZ8Y0l70UI0IcZgwRbwC2vo/ODkNoIovSjbb3/+YUzSqlAbbcyhY1zd7ubV3/tvP0l8aB2QNFfpsfeHe+LkC2SoofV9IU2+sG+QzRf5f0Ns9R/g10jtiXOU8SV5dA8DCafzvbE9iJWXoJM36W49m/ayTiF4McOJckgEoO1FwsKBFGTfqek0DuL2y6oKw/n5nPRf5B8iX7pfn0oS3w8s0D9fjgOyIwpF6Z3mRPaEjg9qLgYl9gc+blvhbwiZbuo79oJKb5KZC+EYWL2cFcFhEXyA8KMAQUC6WZDEC9P5LQkhle/9gcec5zvDfqmq6rLNU8AFs5lc2/9bi5j0zQ9YhlWpNvXoECf7/t3+kIkgGLw0bUvAi24qgZhCSSrq2/ak87yIXrd6xVmtI9aZktIq2FX5BBDdSww1YxAF8eDRkB641q/n7FGD6i3CZAZ4WuJBZwVexbm/6FECSu7UQO/w7j3wGsq7/CKPvXJj1mMVTKQ93CmrBGtj0BX9MfBrrWPMrAW9uq7U=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e20014cb-7ffe-4d8a-3619-08dd949f5277
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR10MB5777.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 May 2025 17:30:16.2787
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Q46KWQMt8grpNnsL4zsDgqiOP/t5AFniySg2NsYAHmGqDE0l2nrm2vLSxlM0KQ2y2yTpbIQ28j6/a+XyHcG4iw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF07759F8B1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-16_05,2025-05-16_03,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 spamscore=0
+ suspectscore=0 mlxscore=0 phishscore=0 mlxlogscore=968 adultscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2505070000 definitions=main-2505160171
+X-Authority-Analysis: v=2.4 cv=Xc2JzJ55 c=1 sm=1 tr=0 ts=6827762d cx=c_pps a=OOZaFjgC48PWsiFpTAqLcw==:117 a=OOZaFjgC48PWsiFpTAqLcw==:17 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19 a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10
+ a=kj9zAlcOel0A:10 a=dt9VzEwgFbYA:10 a=GoEa3M9JfhUA:10 a=20KFwNOVAAAA:8 a=Ikd4Dj_1AAAA:8 a=SRrdq9N9AAAA:8 a=Co7ZSBH1HTZebSw_pVQA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTE2MDE3MSBTYWx0ZWRfXxSGkP5YI7Tgv lPKXSSPgRh7xkIfz0KA+L038mchrrzehsQfG4/WGTjlwcs0pzIdpw40iY7oHxYg0IvM62mKWiZI iPi4rnoYVcEiv3EV+i4VNYmH5blH5xt+gCEtCmMoSSQE1zJkGrncd7x5RA81gPz/gBBumyPCKw7
+ oibqPaxgW0BvndXzNGjZN4dyVlz+YNZB9cyPAVvgcZ+Q7Ktksa/22qBJboavqh0PCHGGN7Ay1Cz ScTs7579PxKPMHhz8B4lDU5CTSBjwDcqReGVJITxHPUbxl/dvuCSwof/+4KZ4OP0JmnUc/0uDae dp9dzUlojnV8uTLZY8g0NUwHUu2Zs/SS5J9zXfymtGipdhcwQHwTbs0AbfwqLlPbTti6K+0g7Bd
+ 9daBtHmNxFei7R3Gr+blR+SGE40NCOxrvf94sZpLMGPmYPUT265qI6V085/zKCREqnf6S1FE
+X-Proofpoint-GUID: egWSohJfGpvOMVMIhyFTsUqst-G4iQ8b
+X-Proofpoint-ORIG-GUID: egWSohJfGpvOMVMIhyFTsUqst-G4iQ8b
+
+* Nico Pache <npache@redhat.com> [250514 23:23]:
+> functions in khugepaged.c use a mix of hpage_collapse and khugepaged
+> as the function prefix.
+> 
+> rename all of them to khugepaged to keep things consistent and slightly
+> shorten the function names.
+
+I don't like what was done here, we've lost the context of what these
+functions are used for (collapse). Are they used for other things
+besides collapse?
+
+I'd rather drop the prefix entirely than drop collapse from them all.
+They are all static, so do we really need khugepaged_ at the start of
+every static function in khugepaged.c?
 
 
-
-On 16/05/2025 13:57, Lorenzo Stoakes wrote:
-> On Fri, May 16, 2025 at 01:24:18PM +0200, David Hildenbrand wrote:
->> Looking forward to hearing what your magic thinking cap can do! :)
 > 
-> OK so just to say at the outset, this is purely playing around with a
-> theoretical idea here, so if it's crazy just let me know :))
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
+> Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
+> Signed-off-by: Nico Pache <npache@redhat.com>
+> ---
+>  mm/khugepaged.c | 42 +++++++++++++++++++++---------------------
+>  1 file changed, 21 insertions(+), 21 deletions(-)
 > 
-> Right now madvise() has limited utility because:
+> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
+> index cdf5a581368b..806bcd8c5185 100644
+> --- a/mm/khugepaged.c
+> +++ b/mm/khugepaged.c
+> @@ -402,14 +402,14 @@ void __init khugepaged_destroy(void)
+>  	kmem_cache_destroy(mm_slot_cache);
+>  }
+>  
+> -static inline int hpage_collapse_test_exit(struct mm_struct *mm)
+> +static inline int khugepaged_test_exit(struct mm_struct *mm)
+>  {
+>  	return atomic_read(&mm->mm_users) == 0;
+>  }
+>  
+> -static inline int hpage_collapse_test_exit_or_disable(struct mm_struct *mm)
+> +static inline int khugepaged_test_exit_or_disable(struct mm_struct *mm)
+>  {
+> -	return hpage_collapse_test_exit(mm) ||
+> +	return khugepaged_test_exit(mm) ||
+>  	       test_bit(MMF_DISABLE_THP, &mm->flags);
+>  }
+>  
+> @@ -444,7 +444,7 @@ void __khugepaged_enter(struct mm_struct *mm)
+>  	int wakeup;
+>  
+>  	/* __khugepaged_exit() must not run from under us */
+> -	VM_BUG_ON_MM(hpage_collapse_test_exit(mm), mm);
+> +	VM_BUG_ON_MM(khugepaged_test_exit(mm), mm);
+>  	if (unlikely(test_and_set_bit(MMF_VM_HUGEPAGE, &mm->flags)))
+>  		return;
+>  
+> @@ -503,7 +503,7 @@ void __khugepaged_exit(struct mm_struct *mm)
+>  	} else if (mm_slot) {
+>  		/*
+>  		 * This is required to serialize against
+> -		 * hpage_collapse_test_exit() (which is guaranteed to run
+> +		 * khugepaged_test_exit() (which is guaranteed to run
+>  		 * under mmap sem read mode). Stop here (after we return all
+>  		 * pagetables will be destroyed) until khugepaged has finished
+>  		 * working on the pagetables under the mmap_lock.
+> @@ -851,7 +851,7 @@ struct collapse_control khugepaged_collapse_control = {
+>  	.is_khugepaged = true,
+>  };
+>  
+> -static bool hpage_collapse_scan_abort(int nid, struct collapse_control *cc)
+> +static bool khugepaged_scan_abort(int nid, struct collapse_control *cc)
+>  {
+>  	int i;
+>  
+> @@ -886,7 +886,7 @@ static inline gfp_t alloc_hugepage_khugepaged_gfpmask(void)
+>  }
+>  
+>  #ifdef CONFIG_NUMA
+> -static int hpage_collapse_find_target_node(struct collapse_control *cc)
+> +static int khugepaged_find_target_node(struct collapse_control *cc)
+>  {
+>  	int nid, target_node = 0, max_value = 0;
+>  
+> @@ -905,7 +905,7 @@ static int hpage_collapse_find_target_node(struct collapse_control *cc)
+>  	return target_node;
+>  }
+>  #else
+> -static int hpage_collapse_find_target_node(struct collapse_control *cc)
+> +static int khugepaged_find_target_node(struct collapse_control *cc)
+>  {
+>  	return 0;
+>  }
+> @@ -925,7 +925,7 @@ static int hugepage_vma_revalidate(struct mm_struct *mm, unsigned long address,
+>  	struct vm_area_struct *vma;
+>  	unsigned long tva_flags = cc->is_khugepaged ? TVA_ENFORCE_SYSFS : 0;
+>  
+> -	if (unlikely(hpage_collapse_test_exit_or_disable(mm)))
+> +	if (unlikely(khugepaged_test_exit_or_disable(mm)))
+>  		return SCAN_ANY_PROCESS;
+>  
+>  	*vmap = vma = find_vma(mm, address);
+> @@ -992,7 +992,7 @@ static int check_pmd_still_valid(struct mm_struct *mm,
+>  
+>  /*
+>   * Bring missing pages in from swap, to complete THP collapse.
+> - * Only done if hpage_collapse_scan_pmd believes it is worthwhile.
+> + * Only done if khugepaged_scan_pmd believes it is worthwhile.
+>   *
+>   * Called and returns without pte mapped or spinlocks held.
+>   * Returns result: if not SCAN_SUCCEED, mmap_lock has been released.
+> @@ -1078,7 +1078,7 @@ static int alloc_charge_folio(struct folio **foliop, struct mm_struct *mm,
+>  {
+>  	gfp_t gfp = (cc->is_khugepaged ? alloc_hugepage_khugepaged_gfpmask() :
+>  		     GFP_TRANSHUGE);
+> -	int node = hpage_collapse_find_target_node(cc);
+> +	int node = khugepaged_find_target_node(cc);
+>  	struct folio *folio;
+>  
+>  	folio = __folio_alloc(gfp, HPAGE_PMD_ORDER, node, &cc->alloc_nmask);
+> @@ -1264,7 +1264,7 @@ static int collapse_huge_page(struct mm_struct *mm, unsigned long address,
+>  	return result;
+>  }
+>  
+> -static int hpage_collapse_scan_pmd(struct mm_struct *mm,
+> +static int khugepaged_scan_pmd(struct mm_struct *mm,
+>  				   struct vm_area_struct *vma,
+>  				   unsigned long address, bool *mmap_locked,
+>  				   struct collapse_control *cc)
+> @@ -1378,7 +1378,7 @@ static int hpage_collapse_scan_pmd(struct mm_struct *mm,
+>  		 * hit record.
+>  		 */
+>  		node = folio_nid(folio);
+> -		if (hpage_collapse_scan_abort(node, cc)) {
+> +		if (khugepaged_scan_abort(node, cc)) {
+>  			result = SCAN_SCAN_ABORT;
+>  			goto out_unmap;
+>  		}
+> @@ -1447,7 +1447,7 @@ static void collect_mm_slot(struct khugepaged_mm_slot *mm_slot)
+>  
+>  	lockdep_assert_held(&khugepaged_mm_lock);
+>  
+> -	if (hpage_collapse_test_exit(mm)) {
+> +	if (khugepaged_test_exit(mm)) {
+>  		/* free mm_slot */
+>  		hash_del(&slot->hash);
+>  		list_del(&slot->mm_node);
+> @@ -1740,7 +1740,7 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
+>  		if (find_pmd_or_thp_or_none(mm, addr, &pmd) != SCAN_SUCCEED)
+>  			continue;
+>  
+> -		if (hpage_collapse_test_exit(mm))
+> +		if (khugepaged_test_exit(mm))
+>  			continue;
+>  		/*
+>  		 * When a vma is registered with uffd-wp, we cannot recycle
+> @@ -2262,7 +2262,7 @@ static int collapse_file(struct mm_struct *mm, unsigned long addr,
+>  	return result;
+>  }
+>  
+> -static int hpage_collapse_scan_file(struct mm_struct *mm, unsigned long addr,
+> +static int khugepaged_scan_file(struct mm_struct *mm, unsigned long addr,
+>  				    struct file *file, pgoff_t start,
+>  				    struct collapse_control *cc)
+>  {
+> @@ -2307,7 +2307,7 @@ static int hpage_collapse_scan_file(struct mm_struct *mm, unsigned long addr,
+>  		}
+>  
+>  		node = folio_nid(folio);
+> -		if (hpage_collapse_scan_abort(node, cc)) {
+> +		if (khugepaged_scan_abort(node, cc)) {
+>  			result = SCAN_SCAN_ABORT;
+>  			break;
+>  		}
+> @@ -2391,7 +2391,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
+>  		goto breakouterloop_mmap_lock;
+>  
+>  	progress++;
+> -	if (unlikely(hpage_collapse_test_exit_or_disable(mm)))
+> +	if (unlikely(khugepaged_test_exit_or_disable(mm)))
+>  		goto breakouterloop;
+>  
+>  	vma_iter_init(&vmi, mm, khugepaged_scan.address);
+> @@ -2399,7 +2399,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
+>  		unsigned long hstart, hend;
+>  
+>  		cond_resched();
+> -		if (unlikely(hpage_collapse_test_exit_or_disable(mm))) {
+> +		if (unlikely(khugepaged_test_exit_or_disable(mm))) {
+>  			progress++;
+>  			break;
+>  		}
+> @@ -2421,7 +2421,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
+>  			bool mmap_locked = true;
+>  
+>  			cond_resched();
+> -			if (unlikely(hpage_collapse_test_exit_or_disable(mm)))
+> +			if (unlikely(khugepaged_test_exit_or_disable(mm)))
+>  				goto breakouterloop;
+>  
+>  			VM_BUG_ON(khugepaged_scan.address < hstart ||
+> @@ -2481,7 +2481,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
+>  	 * Release the current mm_slot if this mm is about to die, or
+>  	 * if we scanned all vmas of this mm.
+>  	 */
+> -	if (hpage_collapse_test_exit(mm) || !vma) {
+> +	if (khugepaged_test_exit(mm) || !vma) {
+>  		/*
+>  		 * Make sure that if mm_users is reaching zero while
+>  		 * khugepaged runs here, khugepaged_exit will find
+> -- 
+> 2.49.0
 > 
-> - You have little control over how the operation is done
-> - You get little feedback about what's actually succeeded or not
-> - While you can perform multiple operations at once via process_madvise(),
->   even to the current process (after my changes to extend it), it's limited
->   to a single advice over 8 ranges.
-> - You can't say 'ignore errors just try'
-> - You get the weird gap behaviour.
-> 
-> So the concept is - make everything explicit and add a new syscall that
-> wraps the existing madvise() stuff and addresses all the above issues.
-> 
-> Specifically pertinent to the case at hand - also add a 'set_default'
-> boolean (you'll see shortly exactly where) to also tell madvise() to make
-> all future VMAs default to the specified advice. We'll whitelist what we're
-> allowed to use here and should be able to use mm->def_flags.
-> 
-> So the idea is we'll use a helper struct-configured function (hey, it's me,
-> I <3 helper structs so of course) like:
-> 
-> int madvise_ranges(struct madvise_range_control *ctl);
-> 
-> With the data structures as follows (untested, etc. etc.):
-> 
-> enum madvise_range_type {
-> 	MADVISE_RANGE_SINGLE,
-> 	MADVISE_RANGE_MULTI,
-> 	MADVISE_RANGE_ALL,
-> };
-> 
-> struct madvise_range {
-> 	const void *addr;
-> 	size_t size;
-> 	int advice;
-> };
-> 
-> struct madvise_ranges {
-> 	const struct madvise_range *arr;
-> 	size_t count;
-> };
-> 
-> struct madvise_range_stats {
-> 	struct madvise_range range;
-> 	bool success;
-> 	bool partial;
-> };
-> 
-> struct madvise_ranges_stats {
-> 	unsigned long nr_mappings_advised;
-> 	unsigned long nr_mappings_skipped;
-> 	unsigned long nr_pages_advised;
-> 	unsigned long nr_pages_skipped;
-> 	unsigned long nr_gaps;
-> 
-> 	/*
-> 	 * Useful for madvise_range_control->ignore_errors:
-> 	 *
-> 	 * If non-NULL, points to an array of size equal to the number of ranges
-> 	 * specified. Indiciates the specified range, whether it succeeded, and
-> 	 * whether that success was partial (that is, the range specified
-> 	 * multiple mappings, only some of which had advice applied
-> 	 * successfully).
-> 	 *
-> 	 * Not valid for MADVISE_RANGE_ALL.
-> 	 */
->  	struct madvise_range_stats *per_range_stats;
-> 
-> 	/* Error details. */
-> 	int err;
-> 	unsigned long failed_address;
-> 	size_t offset; /* If multi, at which offset did this occur? */
-> };
-> 
-> struct madvise_ranges_control {
-> 	int version; /* Allow future updates to API. */
-> 
-> 	enum madvise_range_type type;
-> 
-> 	union {
-> 		struct madvise_range range; /* MADVISE_RANGE_SINGLE */
-> 		struct madvise_ranges ranges; /* MADVISE_RANGE_MULTI */
-> 		struct all { /* MADVISE_RANGE_ALL */
-> 			int advice;
-> 			/*
-> 			 * If set, also have all future mappings have this applied by default.
-> 			 *
-> 			 * Only whitelisted advice may set this, otherwise -EINVAL will be returned.
-> 			 */
-> 			bool set_default;
-> 		};
-> 	};
-> 	struct madvise_ranges_stats *stats; /* If non-NULL, report information about operation. */
-> 
-> 	int pidfd; /* If is_remote set, the remote process. */
-> 
-> 	/* Options. */
-> 	bool is_remote :1; /* Target remote process as specified by pidfd. */
-> 	bool ignore_errors :1; /* If error occurs applying advice, carry on to next VMA. */
-> 	bool single_mapping_only :1; /* Error out if any range is not a single VMA. */
-> 	bool stop_on_gap :1; /* Stop operation if input range includes unmapped memory. */
-> };
-> 
-> So the user can specify whether to apply advice to a single range,
-> multiple, or the whole address space, with real control over how the operation proceeds.
-> 
-
-For single range, we have madvise, for multiple ranges we have process_madvise,
-we can have a very very simple solution for whole address space with prctl.
-
-IMHO, above is really not be needed (but I might be wrong :)), this will introduce a
-lot of code to solve something that can be done in a very very simple way and it will introduce
-another syscall when prctl is designed for this, I understand that you don't like prctl,
-but it is there.
-
-I have added below what patch 1 of 6 would look like after incorporating all your feedback.
-(Thanks for all the feedback, really appreciate it!!)
-Main difference from the current revisions:
-- no more flags2.
-- no more MMF2_...
-- renamed policy to PR_DEFAULT_MADV_HUGEPAGE
-- mmap_write_lock_killable acquired in PR_GET_THP_POLICY
-- mmap_write lock fixed in PR_SET_THP_POLICY
-- check if hugepage_global_enabled is enabled in the call and account for s390
-- set mm->def_flags VM_HUGEPAGE and VM_NOHUGEPAGE according to the policy in the way
-  done by madvise(). I believe VM merge will not be broken in this way, please let me know
-  otherwise.
-- process_default_madv_hugepage function that does for_each_vma and calls hugepage_madvise.
-  (I can move it to vma.c or any other file you prefer).
-
-Please let me know if this looks acceptable and I can send this as RFC v3 for all the
-6 patches (the rest are done in a similar way to below)
-
-
-
-
-diff --git a/include/linux/huge_mm.h b/include/linux/huge_mm.h
-index 2f190c90192d..a8c3ce15a504 100644
---- a/include/linux/huge_mm.h
-+++ b/include/linux/huge_mm.h
-@@ -260,6 +260,8 @@ static inline unsigned long thp_vma_suitable_orders(struct vm_area_struct *vma,
-        return orders;
- }
- 
-+void process_default_madv_hugepage(struct mm_struct *mm, int advice);
-+
- unsigned long __thp_vma_allowable_orders(struct vm_area_struct *vma,
-                                         unsigned long vm_flags,
-                                         unsigned long tva_flags,
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 43748c8f3454..436f4588bce8 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -466,7 +466,7 @@ extern unsigned int kobjsize(const void *objp);
- #define VM_NO_KHUGEPAGED (VM_SPECIAL | VM_HUGETLB)
- 
- /* This mask defines which mm->def_flags a process can inherit its parent */
--#define VM_INIT_DEF_MASK       VM_NOHUGEPAGE
-+#define VM_INIT_DEF_MASK       (VM_HUGEPAGE | VM_NOHUGEPAGE)
- 
- /* This mask represents all the VMA flag bits used by mlock */
- #define VM_LOCKED_MASK (VM_LOCKED | VM_LOCKONFAULT)
-diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
-index e76bade9ebb1..f1836b7c5704 100644
---- a/include/linux/mm_types.h
-+++ b/include/linux/mm_types.h
-@@ -1703,6 +1703,7 @@ enum {
-                                        /* leave room for more dump flags */
- #define MMF_VM_MERGEABLE       16      /* KSM may merge identical pages */
- #define MMF_VM_HUGEPAGE                17      /* set when mm is available for khugepaged */
-+#define MMF_VM_HUGEPAGE_MASK   (1 << MMF_VM_HUGEPAGE)
- 
- /*
-  * This one-shot flag is dropped due to necessity of changing exe once again
-@@ -1742,7 +1743,8 @@ enum {
- 
- #define MMF_INIT_MASK          (MMF_DUMPABLE_MASK | MMF_DUMP_FILTER_MASK |\
-                                 MMF_DISABLE_THP_MASK | MMF_HAS_MDWE_MASK |\
--                                MMF_VM_MERGE_ANY_MASK | MMF_TOPDOWN_MASK)
-+                                MMF_VM_MERGE_ANY_MASK | MMF_TOPDOWN_MASK |\
-+                                MMF_VM_HUGEPAGE_MASK)
- 
- static inline unsigned long mmf_init_flags(unsigned long flags)
- {
-diff --git a/include/uapi/linux/prctl.h b/include/uapi/linux/prctl.h
-index 15c18ef4eb11..15aaa4db5ff8 100644
---- a/include/uapi/linux/prctl.h
-+++ b/include/uapi/linux/prctl.h
-@@ -364,4 +364,8 @@ struct prctl_mm_map {
- # define PR_TIMER_CREATE_RESTORE_IDS_ON                1
- # define PR_TIMER_CREATE_RESTORE_IDS_GET       2
- 
-+#define PR_SET_THP_POLICY              78
-+#define PR_GET_THP_POLICY              79
-+#define PR_DEFAULT_MADV_HUGEPAGE       0
-+
- #endif /* _LINUX_PRCTL_H */
-diff --git a/kernel/sys.c b/kernel/sys.c
-index c434968e9f5d..4fe860b0ff25 100644
---- a/kernel/sys.c
-+++ b/kernel/sys.c
-@@ -2658,6 +2658,44 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
-                        clear_bit(MMF_DISABLE_THP, &me->mm->flags);
-                mmap_write_unlock(me->mm);
-                break;
-+       case PR_GET_THP_POLICY:
-+               if (arg2 || arg3 || arg4 || arg5)
-+                       return -EINVAL;
-+               if (mmap_write_lock_killable(me->mm))
-+                       return -EINTR;
-+               if (me->mm->def_flags & VM_HUGEPAGE)
-+                       error = PR_DEFAULT_MADV_HUGEPAGE;
-+               mmap_write_unlock(me->mm);
-+               break;
-+       case PR_SET_THP_POLICY:
-+               if (arg3 || arg4 || arg5)
-+                       return -EINVAL;
-+               if (mmap_write_lock_killable(me->mm))
-+                       return -EINTR;
-+               switch (arg2) {
-+               case PR_DEFAULT_MADV_HUGEPAGE:
-+                       if (!hugepage_global_enabled())
-+                               error = -EPERM;
-+#ifdef CONFIG_S390
-+                       /*
-+                       * qemu blindly sets MADV_HUGEPAGE on all allocations, but s390
-+                       * can't handle this properly after s390_enable_sie, so we simply
-+                       * ignore the madvise to prevent qemu from causing a SIGSEGV.
-+                       */
-+                       else if (mm_has_pgste(vma->vm_mm))
-+                               error = -EPERM;
-+#endif
-+                       else {
-+                               me->mm->def_flags &= ~VM_NOHUGEPAGE;
-+                               me->mm->def_flags |= VM_HUGEPAGE;
-+                               process_default_madv_hugepage(me->mm, MADV_HUGEPAGE);
-+                       }
-+                       break;
-+               default:
-+                       error = -EINVAL;
-+               }
-+               mmap_write_unlock(me->mm);
-+               break;
-        case PR_MPX_ENABLE_MANAGEMENT:
-        case PR_MPX_DISABLE_MANAGEMENT:
-                /* No longer implemented: */
-diff --git a/mm/huge_memory.c b/mm/huge_memory.c
-index 2780a12b25f0..2b9a3e280ae4 100644
---- a/mm/huge_memory.c
-+++ b/mm/huge_memory.c
-@@ -98,6 +98,18 @@ static inline bool file_thp_enabled(struct vm_area_struct *vma)
-        return !inode_is_open_for_write(inode) && S_ISREG(inode->i_mode);
- }
- 
-+void process_default_madv_hugepage(struct mm_struct *mm, int advice)
-+{
-+       struct vm_area_struct *vma;
-+       unsigned long vm_flags;
-+
-+       VMA_ITERATOR(vmi, mm, 0);
-+       for_each_vma(vmi, vma) {
-+               vm_flags = vma->vm_flags;
-+               hugepage_madvise(vma, &vm_flags, advice);
-+       }
-+}
-+
- unsigned long __thp_vma_allowable_orders(struct vm_area_struct *vma,
-                                         unsigned long vm_flags,
-                                         unsigned long tva_flags,
-
-
-
-
-> This basically solves the problem this series tries to address while also
-> providing an improved madvise() API at the same time.
-> 
-> Thoughts? Have I finally completely lost my mind?
-
-
 
