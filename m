@@ -1,110 +1,86 @@
-Return-Path: <linux-doc+bounces-46396-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46398-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E25B8AB930F
-	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 02:13:43 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A535AB9338
+	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 02:36:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B616C1B64F9C
-	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 00:13:56 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E19F34E58F8
+	for <lists+linux-doc@lfdr.de>; Fri, 16 May 2025 00:36:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64B9710E9;
-	Fri, 16 May 2025 00:13:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF3322C9D;
+	Fri, 16 May 2025 00:36:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=minyard-net.20230601.gappssmtp.com header.i=@minyard-net.20230601.gappssmtp.com header.b="KLt8igYK"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="SVglxsZe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88E6B635
-	for <linux-doc@vger.kernel.org>; Fri, 16 May 2025 00:13:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5C1B2114;
+	Fri, 16 May 2025 00:36:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747354418; cv=none; b=goadgJohCg9fNCYiqY/EbuOZatwLuiAF6HW5vSNPZgU5+pWmtx5ngFAZ2SpReQdZ+EqXRlIxlNwjLQAXe/7LmZUCD1r38PzZfqpAF0xJ/pAbunxd8+ZUwanv/mnkAjGeKGhe2pGuY2P4iRk9/ND8tj5xsp/suh10FTzvXq+b5j8=
+	t=1747355773; cv=none; b=j9VopZsb/2pcIsedJVFn+9XXabLaungJ9wtXyYZTLmZf/GhSERPLJEkhvc9ZqR5u+t7BzRKYJxqzrv1go3UAMT5tSzCXq0tC/YyWAzzKD2VgJUUP1meCoDcD4xwPM8UVy/rOYlYfFe/NVIDUWo98oRzoZFlESxT4mDEEiCjJDaA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747354418; c=relaxed/simple;
-	bh=CGG6jGXMIinSQ0YSIHvn85mnGlEINaaQlo/+CW6AhP8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TCfkTkSU1NTU+RDpwvccfIQRAsbvPmiJ+mIKDsPq82UmU+vVPxj97OV1gqmDNvGJ1oAQj8QsqLKmCGzCvXLr2ny9g+les0VI06csGWGfwT2gKbTv88n14B8j4mGIafAXqvO4gtQ6PU/wzVLVyhwEgv91uVaHM1UXvgPamg6lX7I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=minyard.net; spf=none smtp.mailfrom=minyard.net; dkim=pass (2048-bit key) header.d=minyard-net.20230601.gappssmtp.com header.i=@minyard-net.20230601.gappssmtp.com header.b=KLt8igYK; arc=none smtp.client-ip=209.85.167.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=minyard.net
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=minyard.net
-Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-3f6aa4b3a7fso874430b6e.3
-        for <linux-doc@vger.kernel.org>; Thu, 15 May 2025 17:13:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minyard-net.20230601.gappssmtp.com; s=20230601; t=1747354414; x=1747959214; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:reply-to
-         :message-id:subject:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fIQzh+d2Cl2iQMRyzQRgpL9ZV/FSzUS9sLNvNDM8pQA=;
-        b=KLt8igYKlyM4HV0pKbdTyuu8GU2D7C05GSikv+1kCHjhbRjIfnBrH6eiXow0kVQE+2
-         iqmKyjBINNqHUm106f8ban0PT4YGVbFYw8dQdHmoiQO/e/Z6mF0jsXDrvxwp8zlT1u9k
-         Nq34Adlk1yagXoXST9lgb9u6Ml7ltvzA5Wg0h1s1LsP07LsmVUDV/pPIshP5wk2WnjLR
-         IOZOzva+6u4q/VQ75UP+a0PnEZdg61bwX4w4Y5DEi9TOi4Pos/nGo8HxNAu24ASrf0lv
-         azheBEezhjzj+BJjvjcjRBHXxmIG1lhdStS6JLVbMIInMPSFCPx/IT443V8nVA4Hpw96
-         wg0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1747354414; x=1747959214;
-        h=in-reply-to:content-disposition:mime-version:references:reply-to
-         :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fIQzh+d2Cl2iQMRyzQRgpL9ZV/FSzUS9sLNvNDM8pQA=;
-        b=ASj4Y9Wguux1nNlze0OJP5zUETgfOcI7VVuMMMwZsTKYdxK8Kt1y60WJb9a1U35Q3C
-         1xr4vnqp0zMFVPkEytrVC6Mh7hhALvXVokBEQNpLBg1/eSKuknrtdLzN0Gt78e4XFgie
-         RRPK6Y1W0ClDR/cHn2hTyCg9RqariqEtaIw7AyRTOzBOdQAmElYzw3Gmdur+Bi7VOSNR
-         zD5W4B5I3dxSo6WlSnWW9L2Lr7XJY9qgSEtgCsjz9fJ5h9xFpqjYJuCknXG0qqdS0R9e
-         gLuSs0ZF+u31Bbtpomjv2h5FwE9Iy93mXRgrH/zBNbT+UYcdpqGxY9ji/+odQPgm3mcO
-         KyIQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWP4yPdqGC5trXPXyt6PC0YiT4AbuC+NTnPpiCldloH6gZ1uHFJH5Bo5cwTQfAYqUAw1U2HFpFBR3M=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxRRWCWNxATsIbrHWW8mU0/sPlcDwPT88PJ5/Dh6T6uF2aScFKb
-	WIfzcsKPDtPpB82X46z8kUZ6RHdSto4JOCoyluSMAshsF2aU51cy8bjMPZRKHcWmW3IkBrigi7/
-	3LL0GG/s=
-X-Gm-Gg: ASbGncsjr0DaO1zk/Ab3gqy4ViJGZTjuwFXp8mYq6LYjk+wyWqwG2V67GBKG9CQZylN
-	zFsajg+V8kjSx99kyOzhrEwLVDjrCXVkX6MjEwrcAa9BdivGYHOaXWCGXs93mnqsStMTXEU7Ar4
-	oLTRSLqBEqmVRbahaS//Yz0tqDvRT5+ivqXZgYu2J9VKaYI88cl/Aghk+6O3p2ivbkwDZ7nCVpQ
-	/fEBXymXr0SX3tjO1sRajFoqUaUULmb6dZNst9U0A/tqhpYtwpayiXzWaPCaPMt7rxll+8ZTwLW
-	+N0Fycgx8uvABkZ2IFecn6tNBHzKPE/bKZBx2+K388lWrpT7QeymZ7U=
-X-Google-Smtp-Source: AGHT+IHw+xOETWTyOT89ZTuJ4/7y2Jcun/+WyMsgKHv9WFHVKeTtE/CECud8o+oMJFlD/SDqIiuTug==
-X-Received: by 2002:a05:6808:338c:b0:3f9:2fdc:ee93 with SMTP id 5614622812f47-404d87b897dmr1274677b6e.30.1747354414372;
-        Thu, 15 May 2025 17:13:34 -0700 (PDT)
-Received: from mail.minyard.net ([2001:470:b8f6:1b:d0c5:1ce0:9035:258c])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-609f2f43884sm188602eaf.15.2025.05.15.17.13.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 May 2025 17:13:32 -0700 (PDT)
-Date: Thu, 15 May 2025 19:13:27 -0500
-From: Corey Minyard <corey@minyard.net>
-To: Praveen Balakrishnan <praveen.balakrishnan@magd.ox.ac.uk>
-Cc: corbet@lwn.net, openipmi-developer@lists.sourceforge.net,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	skhan@linuxfoundation.org, linux-kernel-mentees@lists.linux.dev
-Subject: Re: [PATCH] docs: ipmi: fix spelling and grammar mistakes
-Message-ID: <aCaDJyq18soCNMqa@mail.minyard.net>
-Reply-To: corey@minyard.net
-References: <20250515234757.19710-1-praveen.balakrishnan@magd.ox.ac.uk>
+	s=arc-20240116; t=1747355773; c=relaxed/simple;
+	bh=rGRI7pv9FOnDN5ARj/451B9SqwqBg+xlKaVmt3lL+Uk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=dUAPceRx2uY8AcdyQStHIJCtF9XKFdw5naIQMCN2fNHdstl/5qU8140+mJHv1WNxziCiWmvFJZ5bS2Hhv57fKgNsC3SgzDRkZXsryiPXHjfLUvT6tD2D7bhFhuJW4Mp2gewTnTxzXCE+/gXD/PUOl8Z+ZIIJG1sWek1/F7ixO54=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=SVglxsZe; arc=none smtp.client-ip=90.155.92.199
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
+	:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
+	Sender:Reply-To:Content-ID:Content-Description;
+	bh=p3TP/VPMxxlEonz02VIawXMvSXarvt5nx0vp3mbv6Z4=; b=SVglxsZee/njbichUMAoYWcZUJ
+	WrDx1MfXZ1iX19DCOZPzCu2YsVGZZpMkXyDVdoJ7L6Qgk+38RrS5PNzr2JDwat2ZhyBA4UOP+/LG5
+	t9OfOft7yKTBzPXbHe8ZLJQmTqDsiJkOAebombxkUaFBqlb84FquCOB6evC8mgkIiD9ojt6eBMn8m
+	F0gCPWkdsKnMRwR2Wh+FeX2cRZtS+l/hVgMN2rkAOHy68HGqryiFrkv/kR0/QFs/LpT+bYopZ9KqE
+	YV8mCQmx8hgtth6W+XPgVnVXZ+/2M3EVVns3vwbsYuK4CLL6868A52dsB51AVCWVf1yIIPVnwHaIg
+	M/cui+tg==;
+Received: from [50.53.25.54] (helo=[192.168.254.17])
+	by desiato.infradead.org with esmtpsa (Exim 4.98.1 #2 (Red Hat Linux))
+	id 1uFj3O-000000000s6-3vup;
+	Fri, 16 May 2025 00:36:01 +0000
+Message-ID: <5baa0fc5-bdb4-45bc-a986-171fa440e2e5@infradead.org>
+Date: Thu, 15 May 2025 17:35:55 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] docs: ipmi: fix spelling and grammar mistakes
+To: Praveen Balakrishnan <praveen.balakrishnan@magd.ox.ac.uk>,
+ corey@minyard.net, corbet@lwn.net
+Cc: openipmi-developer@lists.sourceforge.net, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, skhan@linuxfoundation.org,
+ linux-kernel-mentees@lists.linux.dev
+References: <20250515234757.19710-1-praveen.balakrishnan@magd.ox.ac.uk>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
 In-Reply-To: <20250515234757.19710-1-praveen.balakrishnan@magd.ox.ac.uk>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 16, 2025 at 12:47:57AM +0100, Praveen Balakrishnan wrote:
+
+
+On 5/15/25 4:47 PM, Praveen Balakrishnan wrote:
 > Corrected various spelling and grammatical mistakes in
 > Documentation/driver-api/ipmi.rst to improve readability.
 > 
 > No changes to the technical content has been made.
-
-Thank you, I have added this to my tree.
-
--corey
-
 > 
 > Signed-off-by: Praveen Balakrishnan <praveen.balakrishnan@magd.ox.ac.uk>
+
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+
+Thanks.
+
 > ---
 >  Documentation/driver-api/ipmi.rst | 20 ++++++++++----------
 >  1 file changed, 10 insertions(+), 10 deletions(-)
@@ -194,7 +170,7 @@ Thank you, I have added this to my tree.
 >  starting unless there is device tree information setting it up.  If
 >  you want to instantiate one of these by hand, do::
 >  
-> -- 
-> 2.39.5
-> 
+
+-- 
+~Randy
 
