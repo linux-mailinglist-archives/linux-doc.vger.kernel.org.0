@@ -1,215 +1,204 @@
-Return-Path: <linux-doc+bounces-46775-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46782-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0B61ABCAC2
-	for <lists+linux-doc@lfdr.de>; Tue, 20 May 2025 00:20:29 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7218ABCAF8
+	for <lists+linux-doc@lfdr.de>; Tue, 20 May 2025 00:34:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id CDF781B60F9C
-	for <lists+linux-doc@lfdr.de>; Mon, 19 May 2025 22:20:42 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EFF563BFA59
+	for <lists+linux-doc@lfdr.de>; Mon, 19 May 2025 22:34:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 447861EB1BC;
-	Mon, 19 May 2025 22:20:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4AD3220F28;
+	Mon, 19 May 2025 22:33:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eszoFnIP"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hmEvyCsO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com [209.85.219.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EDC7144304
-	for <linux-doc@vger.kernel.org>; Mon, 19 May 2025 22:20:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1747A220680;
+	Mon, 19 May 2025 22:33:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747693225; cv=none; b=QbB0PQgduqffVpesa3Tbzwwa6RO8LIhw496GyrKiZLfbs0q15A2cdi8B4HONa6Kn2HF+0NIv2ylILN3WuUhlvZH8EoKXqhh6BRNL5Q8/ONUnrGj4WjRWIrqXkA3Om6+HLMZx5MsO0euTHpqaMNEA+DULtmcsruq6bzqlQrQaCNA=
+	t=1747694036; cv=none; b=LB2B84CMOxWVqy+TVx2x/bWFAzyBs/XYJT9AEgDSUJPmMzXR294mBzioGDe6Z1GaqmcJkVSTvCNruQtOUHLe3L2bOBs/b1O0LtKuDvw+rxxm/sW66txkwJpfu/hiwL724Xx9ircqFyz7XJZFCyXu7b6O6m56xFHFZFza4IraiVE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747693225; c=relaxed/simple;
-	bh=uZ8XlymW+4rF1CnsOePthFc1cGC0345sXJLUZ4Dhuzo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=b4XCLJYjQkm1I1JmQsdD6JZSTVi4r75Kx9EOWWeIalHvNPaelpEuOkJuBmySaAXJSjQC+vDI00p7v0tW1yEK0BPNCFOhAYtb8684r3vpT4dn8awKjceCuQ4bb6hiscDmVBLQsOXqWxfmIeV1ik48WZy0iTxNksLzFNm49f+f2go=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eszoFnIP; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFC16C4CEE4
-	for <linux-doc@vger.kernel.org>; Mon, 19 May 2025 22:20:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747693224;
-	bh=uZ8XlymW+4rF1CnsOePthFc1cGC0345sXJLUZ4Dhuzo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=eszoFnIPKkpgkkcnKomJsKn4S5EB6a0pPOT2n5RcqdpHCJevupHKUMAXcSgA0CUsV
-	 vtZEOwUfaJi0TVnmxkUwURdQAD+GBNBKCM15oeC21i3Pdxmx1Or2Rb34oHVPA6InE4
-	 JQPTpmpaxMl6j2fDTQcI8PzGizIaFSvjoVFYdfrEA7LWP/Tx/aXKYZj6sP6gyS/f8Y
-	 SsUK6rcT/Ro+SoYafFUKheYNtb8gl/36+SBFTx3Wa3na1uG4mIIceMzxePqijWB8c/
-	 fpeEQ0vmMpWT5DtcNU0vh9hTTvl9GRCRFvFDPaY79weniZMe214b4a9q5W27dFN47c
-	 PRUNfIapgUWdw==
-Received: by mail-qv1-f54.google.com with SMTP id 6a1803df08f44-6f8ae08e3b3so47061266d6.3
-        for <linux-doc@vger.kernel.org>; Mon, 19 May 2025 15:20:24 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCU0r8DoL6+DtMaWuflizJa8hnPGk5RxvjbUTlS0HWcaFQj3Hqp+LlbsMwOUX6sbU/Z0RG0Z/w7k4bU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyOjaejcKRffFWoiKtLs/Ve7615FegVPRxW/MA9mZiyaXxuUOaV
-	/pDKhDBnnfM/Zhh3jo5qvEoQ8AIvA0mZ8iI9UwBOxivM+25FT5zycW+r7GHLFkoJgBpCefbQnOF
-	pw8YA8H2edcUxEcE5HcGyXA8tf/QEGA4h92hkuEPG
-X-Google-Smtp-Source: AGHT+IHFHdg5xMZ80kod/4sph2VycUtK9qNlkm2FnJGRZxVkUq3RbTcJ3jP0aO1H2L1OVI6jAzpln5vFVLpAvKyKmlI=
-X-Received: by 2002:a05:6214:d4a:b0:6e8:9086:261 with SMTP id
- 6a1803df08f44-6f8b084b144mr244282176d6.3.1747693224025; Mon, 19 May 2025
- 15:20:24 -0700 (PDT)
+	s=arc-20240116; t=1747694036; c=relaxed/simple;
+	bh=VNV6UduRFqWLkLaJ9InTUQk8ok9iiWNF+codDWJu3KE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=TBHRr2helN2t4cUjkqM5XVWmKRcMQBMRHgTMfpF91QvGrrd2hFDgY0+jysbf4pGAxIq0VRobfiU2NsEj7mczZEf3omrVwgnL4tiesRPsW4I5Lx9zsggaGIJX1AoB+nY0V11BhF4LibbMyUrhszZUP9akU7XDjNBtHFi4+/ekrmg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hmEvyCsO; arc=none smtp.client-ip=209.85.219.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qv1-f42.google.com with SMTP id 6a1803df08f44-6f8d663fa22so23100076d6.0;
+        Mon, 19 May 2025 15:33:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1747694034; x=1748298834; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LpRy7jJXH2X94qR+7Z08vVSeFahgcmDit4WvxDXTDr8=;
+        b=hmEvyCsO0CqG3/KJSXrxiWl8zUE6KaEUB3kQ6qXNlZI3Hnmu2uGy++P4R3M80in2K/
+         p7C3GHLmpW0giJiQexMVJNyrEX1MmjjSM95Cq5uPUeBadQBvgWBUYhygSpl82OyrVVkn
+         7VUaUH4Uia8zpj21dfaXNbnYeOXg7LHHxy0gkbJlw9CBtZRVV9wvnA+Ih6ONok+n+X/h
+         ekDcAuP6Oongc90VeX2UYm9R/QxH++sCNkD1eshOxx1mMgy65Q2Zt2ADiqbIvAH/tm9q
+         MeFYUegUjbtbc2ThAyKYHiYsR8KYmTW0Qi5AF149rHx5Q09z/7fXgHFyypYXcdi731QG
+         Gwfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747694034; x=1748298834;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LpRy7jJXH2X94qR+7Z08vVSeFahgcmDit4WvxDXTDr8=;
+        b=A64BBgEV+zz8alP7FMk1d8KOs/kyQPGUlIXHK5NAph3pW7ohtcthvug5yE753VDykd
+         w1gvWHSY8QPt60KeJcpJgNH1GKZemAtDWW+5xmjRYYcSSm0HcN4kYlOrma07SEgA2YJu
+         B6XsNUqy2buSz5aPpLj3nOHOF3oyzC4++upYq/j00vkMG4XqRnszdZE0EyNFjR3cOE1Z
+         ZKM7GPwDaa6u7SyhYi8TXMftcgC3qfjVddtKCjyDQHmbZxuSLSU6mXtvBCy2z5vKziOr
+         kT+sKCdy9JCvYHwdEtQSIIgNMqHSP9oW88XN9kEIr46uS8DJAnm7+Vh4Q3FxYD9qNPua
+         cJnA==
+X-Forwarded-Encrypted: i=1; AJvYcCUnqBy/Op6T8NL2wOUJJeX9cDJS7qcI/k7/Q4qDGcfZEoyrv1ks3bRS3SFvuImPbNQatye6tprl2CylvK5Q@vger.kernel.org, AJvYcCXi40UUWUmHm8Bgh2Zx4+DX8Pq9l9Aa5Yk5oPFKj3PnLNpZUgB5OADZzTp4wb6jF7MPvKOWsZmholk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxJO4Eyffb8x55OSIfRRMo9BeQkvKHbTgtvgRmnzzHh4YqlC9VV
+	ke6F+TRk4q/gPgjh3/toQc3tgKLwJb1yGn1QsqHcG9BypIE1KAS9htZEtLctkBc1
+X-Gm-Gg: ASbGnctIGwyJ+qbkeDyuJv9aYY8+e/E0YTzyXqGHaCN3axRRWujj10wkrbg6vqOxoXc
+	ITaeK9Y2penjAWb3XkSwREwMJNbVbrdvzMiERvln/1dLjpukASuxP/Wq3/kldJNAt83PjlUP98J
+	Q4wDuJXP0u+dFZMrlycZF7CJ6R8N+GLW945/5PwHLKOXWPkHeUK+1lyQbLl7zMiOH86yMB3hCOb
+	UOuvb0nI4AMNu1JDdMNjfVEI3ZMSRPbkBbDaBMOUmhugE3k/j3JxZ19Wb86CKINXu1Tghnbnh+A
+	nNooDSh3zIc2m9IYyF/7LGxNgYymBukpyDgVZCeoJHCUucKx
+X-Google-Smtp-Source: AGHT+IG9Rf1Ms6o1Iff8MOEn683LCyyVRYFlfukNUf26S1dHPnjB4DocWIpWObG8j4FUWQJEzi8IUA==
+X-Received: by 2002:a05:622a:5805:b0:476:8db0:8cae with SMTP id d75a77b69052e-494b074cbf8mr167938981cf.10.1747694023468;
+        Mon, 19 May 2025 15:33:43 -0700 (PDT)
+Received: from localhost ([2a03:2880:20ff:9::])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-494afbabee4sm59006981cf.55.2025.05.19.15.33.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 May 2025 15:33:41 -0700 (PDT)
+From: Usama Arif <usamaarif642@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	david@redhat.com,
+	linux-mm@kvack.org
+Cc: hannes@cmpxchg.org,
+	shakeel.butt@linux.dev,
+	riel@surriel.com,
+	ziy@nvidia.com,
+	laoar.shao@gmail.com,
+	baolin.wang@linux.alibaba.com,
+	lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com,
+	npache@redhat.com,
+	ryan.roberts@arm.com,
+	vbabka@suse.cz,
+	jannh@google.com,
+	Arnd Bergmann <arnd@arndb.de>,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	kernel-team@meta.com,
+	Usama Arif <usamaarif642@gmail.com>
+Subject: [PATCH v3 0/7] prctl: introduce PR_SET/GET_THP_POLICY
+Date: Mon, 19 May 2025 23:29:52 +0100
+Message-ID: <20250519223307.3601786-1-usamaarif642@gmail.com>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250502184421.1424368-1-bboscaccy@linux.microsoft.com>
- <20250502210034.284051-1-kpsingh@kernel.org> <CAHC9VhS5Vevcq90OxTmAp2=XtR1qOiDDe5sSXReX5oXzf+siVQ@mail.gmail.com>
- <CACYkzJ5jsWFiXMRDwoGib5t+Xje6STTuJGRZM9Vg2dFz7uPa-g@mail.gmail.com>
- <CACYkzJ6VQUExfyt0=-FmXz46GHJh3d=FXh5j4KfexcEFbHV-vg@mail.gmail.com>
- <CAHC9VhQL_FkUH8F1fvFZmC-8UwZh3zkwjomCo1PiWNW0EGYUPw@mail.gmail.com>
- <CACYkzJ4+=3owK+ELD9Nw7Rrm-UajxXEw8kVtOTJJ+SNAXpsOpw@mail.gmail.com>
- <CAHC9VhTeFBhdagvw4cT3EvA72EYCfAn6ToptpE9PWipG9YLrFw@mail.gmail.com>
- <CAADnVQJ4GDKvLSWuAMdwajA0V2DEw5m-O228QknW8Eo9jxhyig@mail.gmail.com>
- <CAHC9VhTJcV1mqBpxVUtpLhrN4Y9W_BGgB_La5QCqObGheK28Ug@mail.gmail.com>
- <CAADnVQ+wE5cGhy6tgmWgUwkNutueEsrhh6UR8N2fzrZjt-vb4g@mail.gmail.com>
- <196e1f03128.28a7.85c95baa4474aabc7814e68940a78392@paul-moore.com>
- <CAADnVQ+=2PnYHui2L0g0brNc+NqV8MtaRaU-XXpoXfJoghXpww@mail.gmail.com> <CAHC9VhRKZdEia0XUMs2+hRVC7oDzkBfkk5FPMD+Fq5V7mAk=Vg@mail.gmail.com>
-In-Reply-To: <CAHC9VhRKZdEia0XUMs2+hRVC7oDzkBfkk5FPMD+Fq5V7mAk=Vg@mail.gmail.com>
-From: KP Singh <kpsingh@kernel.org>
-Date: Tue, 20 May 2025 00:20:12 +0200
-X-Gmail-Original-Message-ID: <CACYkzJ7oxFA3u9eKDpKgCsZsYsBojVJPHVeHZnVaYQ5e9DavmQ@mail.gmail.com>
-X-Gm-Features: AX0GCFtuAbaLmBw9yy0173D8s7LpAOVbxR9TeXNkvABXPMZF511wGOkzeZtojxE
-Message-ID: <CACYkzJ7oxFA3u9eKDpKgCsZsYsBojVJPHVeHZnVaYQ5e9DavmQ@mail.gmail.com>
-Subject: Re: [PATCH v3 0/4] Introducing Hornet LSM
-To: Paul Moore <paul@paul-moore.com>
-Cc: Alexei Starovoitov <alexei.starovoitov@gmail.com>, 
-	Blaise Boscaccy <bboscaccy@linux.microsoft.com>, 
-	James Bottomley <James.Bottomley@hansenpartnership.com>, bpf <bpf@vger.kernel.org>, 
-	code@tyhicks.com, Jonathan Corbet <corbet@lwn.net>, "David S. Miller" <davem@davemloft.net>, 
-	David Howells <dhowells@redhat.com>, =?UTF-8?Q?G=C3=BCnther_Noack?= <gnoack@google.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, Jarkko Sakkinen <jarkko@kernel.org>, 
-	James Morris <jmorris@namei.org>, Jan Stancek <jstancek@redhat.com>, 
-	Justin Stitt <justinstitt@google.com>, keyrings@vger.kernel.org, 
-	Linux Crypto Mailing List <linux-crypto@vger.kernel.org>, 
-	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, 
-	Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
-	"open list:KERNEL SELFTEST FRAMEWORK" <linux-kselftest@vger.kernel.org>, 
-	LSM List <linux-security-module@vger.kernel.org>, 
-	clang-built-linux <llvm@lists.linux.dev>, Masahiro Yamada <masahiroy@kernel.org>, 
-	=?UTF-8?B?TWlja2HDq2wgU2FsYcO8bg==?= <mic@digikod.net>, 
-	Bill Wendling <morbo@google.com>, Nathan Chancellor <nathan@kernel.org>, Neal Gompa <neal@gompa.dev>, 
-	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, Nicolas Schier <nicolas@fjasle.eu>, nkapron@google.com, 
-	Roberto Sassu <roberto.sassu@huawei.com>, "Serge E . Hallyn" <serge@hallyn.com>, 
-	Shuah Khan <shuah@kernel.org>, Matteo Croce <teknoraver@meta.com>, 
-	Cong Wang <xiyou.wangcong@gmail.com>, kysrinivasan@gmail.com, 
-	Linus Torvalds <torvalds@linux-foundation.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Sun, May 18, 2025 at 11:34=E2=80=AFPM Paul Moore <paul@paul-moore.com> w=
-rote:
->
-> On Sun, May 18, 2025 at 11:52=E2=80=AFAM Alexei Starovoitov
-> <alexei.starovoitov@gmail.com> wrote:
-> > On Sat, May 17, 2025 at 10:49=E2=80=AFPM Paul Moore <paul@paul-moore.co=
-m> wrote:
-> > > On May 17, 2025 12:13:50 PM Alexei Starovoitov
-> > > <alexei.starovoitov@gmail.com> wrote:
-> > > > On Sat, May 17, 2025 at 8:03=E2=80=AFAM Paul Moore <paul@paul-moore=
-.com> wrote:
-> > > >> On Fri, May 16, 2025 at 7:49=E2=80=AFPM Alexei Starovoitov
-> > > >> <alexei.starovoitov@gmail.com> wrote:
-> > > >>> On Fri, May 16, 2025 at 12:49=E2=80=AFPM Paul Moore <paul@paul-mo=
-ore.com> wrote:
-> > > >>>>
-> > > >>>> I think we need some clarification on a few of these details, it=
- would
-> > > >>>> be good if you could answer the questions below about the
-> > > >>>> authorization aspects of your design?
-> > > >>>>
-> > > >>>> * Is the signature validation code in the BPF verifier *always* =
-going
-> > > >>>> to be enforced when a signature is passed in from userspace?  In=
- other
-> > > >>>> words, in your design is there going to be either a kernel build=
- time
-> > > >>>> or runtime configuration knob that could selectively enable (or
-> > > >>>> disable) signature verification in the BPF verifier?
-> > > >>>
-> > > >>> If there is a signature in union bpf_attr and it's incorrect
-> > > >>> the prog_load command will be rejected.
-> > > >>> No point in adding a knob to control that.
-> > > >>
-> > > >> I agree that when a signature is provided and that signature check
-> > > >> fails, the BPF load should be rejected.  I'm simply trying to
-> > > >> understand how you envision your design handling all of the cases,=
- not
-> > > >> just this one, as well as what build and runtime options you expec=
-t
-> > > >> for controlling various aspects of this behavior.
-> > > >>
-> > > >>>> * In the case where the signature validation code in the BPF ver=
-ifier
-> > > >>>> is active, what happens when a signature is *not* passed in from
-> > > >>>> userspace?  Will the BPF verifier allow the program load to take
-> > > >>>> place?  Will the load operation be blocked?  Will the load opera=
-tion
-> > > >>>> be subject to a more granular policy, and if so, how do you plan=
- to
-> > > >>>> incorporate that policy decision into the BPF program load path?
-> > > >>>
-> > > >>> If there is no signature the existing loading semantics will rema=
-in intact.
-> > > >>> We can discuss whether to add a sysctl or cgroup knob to disallow
-> > > >>> loading when signature is not present ...
-> > > >>
-> > > >> As mentioned earlier this week, if the BPF verifier is performing =
-the
-> > > >> signature verification as KP described, we will need a LSM hook af=
-ter
-> > > >> the verifier to serve as an access control point.  Of course that
-> > > >> doesn't preclude the addition of some type of sysctl/cgroup/whatev=
-er
-> > > >> based access control, but the LSM hook would be needed regardless.
-> > > >
-> > > > No. New hook is not needed.
-> > >
-> > > It would be good for you to explain how the existing LSM hook is suff=
-icient
-> > > to authorize the loading of a BPF program using the signature validat=
-ion
-> > > state determined in the BPF verifier.
-> >
-> > I already explained:
-> > .. a job of trivial LSM:
-> > if (prog_attr doesn't have signature &&
-> >    (task =3D=3D .. || task is under certain cgroup || whatever))
-> >   disallow.
->
-> I read that earlier reply as an example that covers a sample use case,
-> I didn't realize you were asserting that was the only approach you
-> were considering.  Perhaps that was the source of confusion earlier,
-> we may disagree, but I don't intentionally "twist" words; not only is
-> that rude, it's just stupid in public, archived discussions.
->
-> As I mentioned previously, we really need to see an explicit yes/no
-> flag from the BPF verifier to indicate that the signature on the BPF
-> program has been validated.  It really should be as simple as adding a
-> bool to bpf_prog_aux which the BPF verifier sets to true upon
-> successful signature validation, and then an LSM can use this flag as
-> input to an access control decision in a hook placed after the
-> verifier.  Are you objecting to the addition of a flag in the
-> bpf_prog_aux struct (or some other struct tightly coupled to the BPF
-> program), the LSM hook after the verifier, or both?  It would also be
-> helpful if you can elaborate on the technical reasons behind these
-> objections.
+This series allows to change the THP policy of a process, according to the
+value set in arg2, all of which will be inherited during fork+exec:
+- PR_DEFAULT_MADV_HUGEPAGE: This will set VM_HUGEPAGE and clear VM_NOHUGEPAGE
+  for the default VMA flags. It will also iterate through every VMA in the
+  process and call hugepage_madvise on it, with MADV_HUGEPAGE policy.
+  This effectively allows setting MADV_HUGEPAGE on the entire process.
+  In an environment where different types of workloads are run on the
+  same machine, this will allow workloads that benefit from always having
+  hugepages to do so, without regressing those that don't.
+- PR_DEFAULT_MADV_NOHUGEPAGE: This will set VM_NOHUGEPAGE and clear VM_HUGEPAGE
+  for the default VMA flags. It will also iterate through every VMA in the
+  process and call hugepage_madvise on it, with MADV_NOHUGEPAGE policy.
+  This effectively allows setting MADV_NOHUGEPAGE on the entire process.
+  In an environment where different types of workloads are run on the
+  same machine,this will allow workloads that benefit from having
+  hugepages on an madvise basis only to do so, without regressing those
+  that benefit from having hugepages always.
+- PR_THP_POLICY_SYSTEM: This will reset (clear) both VM_HUGEPAGE and
+  VM_NOHUGEPAGE process for the default flags.
 
-Neither the aux field, nor the hook are required because:
+In hyperscalers, we have a single THP policy for the entire fleet.
+We have different types of workloads (e.g. AI/compute/databases/etc)
+running on a single server.
+Some of these workloads will benefit from always getting THP at fault
+(or collapsed by khugepaged), some of them will benefit by only getting
+them at madvise.
 
-* If the signature is passed, it will be enforced, there are no
-"runtime aspects" that need to be configurable here.
-* What the LSM can specify a policy for is when a signature is not
-passed, for this, it does not need an aux field or a signature or the
-new hook, existing hooks are sufficient.
+This series is useful for 2 usecases:
+1) global system policy = madvise, while we want some workloads to get THPs
+at fault and by khugepaged :- some processes (e.g. AI workloads) benefits
+from getting THPs at fault (and collapsed by khugepaged). Other workloads
+like databases will incur regression (either a performance regression or
+they are completely memory bound and even a very slight increase in memory
+will cause them to OOM). So what these patches will do is allow setting
+prctl(PR_DEFAULT_MADV_HUGEPAGE) on the AI workloads, (This is how
+workloads are deployed in our (Meta's/Facebook) fleet at this moment).
 
-- KP
+2) global system policy = always, while we want some workloads to get THPs
+only on madvise basis :- Same reason as 1). What these patches
+will do is allow setting prctl(PR_DEFAULT_MADV_NOHUGEPAGE) on the database
+workloads. (We hope this is us (Meta) in the near future, if a majority of
+workloads show that they benefit from always, we flip the default host
+setting to "always" across the fleet and workloads that regress can opt-out
+and be "madvise". New services developed will then be tested with always by
+default. "always" is also the default defconfig option upstream, so I would
+imagine this is faced by others as well.)
 
->
-> --
-> paul-moore.com
+v2->v3: (Thanks Lorenzo for all the below feedback!)
+v2: https://lore.kernel.org/all/20250515133519.2779639-1-usamaarif642@gmail.com/
+- no more flags2.
+- no more MMF2_...
+- renamed policy to PR_DEFAULT_MADV_(NO)HUGEPAGE
+- mmap_write_lock_killable acquired in PR_GET_THP_POLICY
+- mmap_write lock fixed in PR_SET_THP_POLICY
+- mmap assert check in process_default_madv_hugepage
+- check if hugepage_global_enabled is enabled in the call and account for s390
+- set mm->def_flags VM_HUGEPAGE and VM_NOHUGEPAGE according to the policy in
+  the way done by madvise(). I believe VM merge will not be broken in
+  this way.
+- process_default_madv_hugepage function that does for_each_vma and calls
+  hugepage_madvise.
+
+v1->v2:
+- change from modifying the THP decision making for the process, to modifying
+  VMA flags only. This prevents further complicating the logic used to
+  determine THP order (Thanks David!)
+- change from using a prctl per policy change to just using PR_SET_THP_POLICY
+  and arg2 to set the policy. (Zi Yan)
+- Introduce PR_THP_POLICY_DEFAULT_NOHUGE and PR_THP_POLICY_DEFAULT_SYSTEM
+- Add selftests and documentation.
+ 
+Usama Arif (7):
+  mm: khugepaged: extract vm flag setting outside of hugepage_madvise
+  prctl: introduce PR_DEFAULT_MADV_HUGEPAGE for the process
+  prctl: introduce PR_DEFAULT_MADV_NOHUGEPAGE for the process
+  prctl: introduce PR_THP_POLICY_SYSTEM for the process
+  selftests: prctl: introduce tests for PR_DEFAULT_MADV_NOHUGEPAGE
+  selftests: prctl: introduce tests for PR_THP_POLICY_DEFAULT_HUGE
+  docs: transhuge: document process level THP controls
+
+ Documentation/admin-guide/mm/transhuge.rst    |  42 +++
+ include/linux/huge_mm.h                       |   2 +
+ include/linux/mm.h                            |   2 +-
+ include/linux/mm_types.h                      |   4 +-
+ include/uapi/linux/prctl.h                    |   6 +
+ kernel/sys.c                                  |  53 ++++
+ mm/huge_memory.c                              |  13 +
+ mm/khugepaged.c                               |  26 +-
+ tools/include/uapi/linux/prctl.h              |   6 +
+ .../trace/beauty/include/uapi/linux/prctl.h   |   6 +
+ tools/testing/selftests/prctl/Makefile        |   2 +-
+ tools/testing/selftests/prctl/thp_policy.c    | 286 ++++++++++++++++++
+ 12 files changed, 436 insertions(+), 12 deletions(-)
+ create mode 100644 tools/testing/selftests/prctl/thp_policy.c
+
+-- 
+2.47.1
+
 
