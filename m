@@ -1,181 +1,186 @@
-Return-Path: <linux-doc+bounces-46690-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-46693-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CE94ABB7DB
-	for <lists+linux-doc@lfdr.de>; Mon, 19 May 2025 10:51:11 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C0355ABB82A
+	for <lists+linux-doc@lfdr.de>; Mon, 19 May 2025 11:05:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 67BC6188721E
-	for <lists+linux-doc@lfdr.de>; Mon, 19 May 2025 08:48:25 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 87F013B39BD
+	for <lists+linux-doc@lfdr.de>; Mon, 19 May 2025 09:05:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6229E1F5402;
-	Mon, 19 May 2025 08:48:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C810426C38D;
+	Mon, 19 May 2025 09:05:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="vJ0jq/7V"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="VkrcYEj9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2ED56210FB;
-	Mon, 19 May 2025 08:48:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF6A226B96B
+	for <linux-doc@vger.kernel.org>; Mon, 19 May 2025 09:05:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747644487; cv=none; b=skQtlqKdkRs5nVARFNQvTdJqKGOEDgDFzNpBkM2A0LoLIdTuUTsm+9+4y48Lo82KPPCXyaDhSGeZj3CYw/waquv5VbxLJOgBZGYbDmH2nAeWg30nxHLtgkeFPZaWU4nmCaa2PTixV5xtcGJmzv1y9h/bqvryZbScxjymSebD/SM=
+	t=1747645505; cv=none; b=aqsGGKmvaKzZ4SdeegFWDNsK0eaQt4NNe0Av1tLAGP7m8ga924k6FNiz+udNAYTX6IQGSk7fNwekhlDP8JOOuV7/Lwo5pHuiknOgY6zNV4ukRLlWfHCl/mpD7hLw2d5tAiFNOTpp4+3tQLMLp4NGMvWxIwf7zUn99M4cDvBvTUI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747644487; c=relaxed/simple;
-	bh=e2P5kIf12pmhzIP6nIe0ke4cFpoL7ha0XqwOXr3qDxQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RRWL+nFfSJkz1Q2FQ6JBJm3rnUKWPleDpXumjI48dbqwnqwJm35Nrvf7D/3qioQSBjJVZ9u4fvkUn0MW+801mVKnoMxwqMAQepK+nDLdL2slvZgUjdskqcaW6Uq7KF/zwYTTX6crVjSuNGeFF3arBaurBB6zKS3vGjzh3m7n8ps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=vJ0jq/7V; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25C08C4CEE4;
-	Mon, 19 May 2025 08:47:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1747644485;
-	bh=e2P5kIf12pmhzIP6nIe0ke4cFpoL7ha0XqwOXr3qDxQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=vJ0jq/7VyJqgSVlYbHkY5RMeRQrUJfL5za0MN+a/59F4KhWyWMMQ6dl/a3ckFH8Uc
-	 MNrm9ChLSNlVW4O6+z9boGrKsTkOgr15pBcs+uSILRksNIjMBms7HbKKZTPMmPBX3x
-	 tWj6/UBUq0hQurFJ3nA8cWXrs1Pdxz3sL8rZ2QELa8k8msyHR1U58i518qoWNG68bk
-	 wOdflOyC3mVuyOpm33gLCbhCqiCICYX09t2Z8POZTv+x9iImZd6AhnTtjAeWgi1NSI
-	 sVjzkX0GuisIjD98xnvir5VDUrBCWTUzpjZ2WWODwSZW9xUbd5PvXxtKTU6ozPUOdK
-	 5LOc0kJBgm3hg==
-Message-ID: <f8cf2c4e-0ae2-4799-bda8-654b4f515846@kernel.org>
-Date: Mon, 19 May 2025 10:47:57 +0200
+	s=arc-20240116; t=1747645505; c=relaxed/simple;
+	bh=YjbtpUGlNEv5zF08hpRyZW7vUzTqaWMFJYNJKvujq+U=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=pz7s1bwuUvKZ2EDhdrpPhnOluntBAy9PtUod15Fnwu0quNKBBOi/OqrlD/r7+Q/yxbkOCyc6rRiW9qO4Bl+gKXfRkUROPU9++0Jxzz12vpDpwhzDoTMX+0mF0d+jgDs8XtAVQlArqq7Cy3rf5hXBX1hXbgirS511W0v9+GqY9Pc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=VkrcYEj9; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1747645502;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=YjbtpUGlNEv5zF08hpRyZW7vUzTqaWMFJYNJKvujq+U=;
+	b=VkrcYEj9njhMtOBltjcm3e9oDxNhI+debwyvslBl81gZ2KEDnY16FvM4pBfre+t4/IshO7
+	QlGi2FikO4F8io1FCcG5MMZJ5pmem59DtK+ZGln0gc9Uddyizl56CGaVEZn2lsCas9f3Hu
+	F9sWQ30UWZGh/4lTOG7cEQj68ujPYCM=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-31-BqwurDwZPvWuDRJ7Gwir3Q-1; Mon, 19 May 2025 05:05:01 -0400
+X-MC-Unique: BqwurDwZPvWuDRJ7Gwir3Q-1
+X-Mimecast-MFC-AGG-ID: BqwurDwZPvWuDRJ7Gwir3Q_1747645500
+Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-43eed325461so23899065e9.3
+        for <linux-doc@vger.kernel.org>; Mon, 19 May 2025 02:05:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1747645500; x=1748250300;
+        h=mime-version:user-agent:content-transfer-encoding:autocrypt
+         :references:in-reply-to:date:cc:to:from:subject:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=YjbtpUGlNEv5zF08hpRyZW7vUzTqaWMFJYNJKvujq+U=;
+        b=EuIMAdTSa6NKrT4Q4H4xIPqmbpkUu3tYUQMDJcGTK9Ke9DIskUYItrlebXnB4K+YGK
+         xhuuu6/VGSbJCKnr15/1gcfri/BWnIj/w+9fAcP5wG6Uj55BFKHSpdhTBbv6UAYIyeD4
+         8PBEgOC3wyavhgig9ZrI7lCB0jGo5lCQfpLWtEHZ+39t/b/B2mr+mwANDsWcyBgPowvC
+         D7B9Z5CLkBW5wcHs1CfaXu0LHLdP7MVLoCUSqs8WtR9+F5jo9WHln61Dy/7Tq2wd9en8
+         xvwOYW5fEhqlW88sVKGvKoR1rBO4dkwTaNq1tEQspBltLU1grOjDFdPOjJMx7eRFJDDi
+         WAog==
+X-Forwarded-Encrypted: i=1; AJvYcCWTq+0yVUQTdRo2+/HOSythvRT8BEpzQRbAnT9iIt6/HZS5XLQaWInbrCvOD0cYOpc3DRIcZ0drnCE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzomIwyQneeKKuDRntD2QYoDkO9LATNnTdCwc8PTYrPrEFLOrv3
+	GZvnQcmT6CCLlBkRGtciReNp8kBSSns77vcvvSijCTjfcy05pGC8t8rPdvyPlrPnG/ie/04qhoL
+	l2WL4fML8N1o4DwdAUehujCbnz0tR7pFX1I4lWvfv2DVyTsGPkc6TCVNIAqrBhw==
+X-Gm-Gg: ASbGncvBN3/ykTHNdBFhRuBdH4XNa678QTFsmPmzYajPzJAVHlGhaEDf2yKrDQfVezD
+	gezSptbwaZGeg5IPNuu3cdPjeS1+//H0B/JjsOJi+uHYSGIgwxTKtrFFxWr/YOge1cjGwqe0jf8
+	JR//K3KybTp7KWmOvNjnDgTpyFv6laGEswNxf/TJchFc7uPXJr7QyqRmb2B4O7liaEXFSuFLFtB
+	HMHUGwM8X/vQ+aV/RmzkkvdHX5qVj7R6n/B+bzRv7cVsg48bKLbp0jP88HNs7Bdi9KFU8OHDNJ0
+	g92PxwEoN8RAjQJdAn1F88yb5J26SavTwcpkkQ==
+X-Received: by 2002:a05:600c:1f87:b0:440:6a79:6df0 with SMTP id 5b1f17b1804b1-442ff03281dmr62660915e9.22.1747645500183;
+        Mon, 19 May 2025 02:05:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEtHmBiJiIZSAh1CkB/DnMloy3lXPe4XZ0UFDPkqDYHYqqpW0CHXsKxcray4myhNO5vOONyUw==
+X-Received: by 2002:a05:600c:1f87:b0:440:6a79:6df0 with SMTP id 5b1f17b1804b1-442ff03281dmr62660665e9.22.1747645499817;
+        Mon, 19 May 2025 02:04:59 -0700 (PDT)
+Received: from gmonaco-thinkpadt14gen3.rmtit.csb ([185.107.56.42])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-442fd583fb7sm131633895e9.32.2025.05.19.02.04.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 May 2025 02:04:59 -0700 (PDT)
+Message-ID: <2b501844f1a238ef7eb12b98f14db02a64d06226.camel@redhat.com>
+Subject: Re: [RFC PATCH v2 07/12] rv: Adapt the sco monitor to the new
+ set_state
+From: Gabriele Monaco <gmonaco@redhat.com>
+To: Nam Cao <namcao@linutronix.de>
+Cc: linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>, 
+ Jonathan Corbet
+	 <corbet@lwn.net>, Masami Hiramatsu <mhiramat@kernel.org>, 
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org, Ingo Molnar
+	 <mingo@redhat.com>, Peter Zijlstra <peterz@infradead.org>, Tomas Glozar
+	 <tglozar@redhat.com>, Juri Lelli <jlelli@redhat.com>
+Date: Mon, 19 May 2025 11:04:56 +0200
+In-Reply-To: <20250519084220.iProU-cg@linutronix.de>
+References: <20250514084314.57976-1-gmonaco@redhat.com>
+	 <20250514084314.57976-8-gmonaco@redhat.com>
+	 <20250519084220.iProU-cg@linutronix.de>
+Autocrypt: addr=gmonaco@redhat.com; prefer-encrypt=mutual;
+ keydata=mDMEZuK5YxYJKwYBBAHaRw8BAQdAmJ3dM9Sz6/Hodu33Qrf8QH2bNeNbOikqYtxWFLVm0
+ 1a0JEdhYnJpZWxlIE1vbmFjbyA8Z21vbmFjb0ByZWRoYXQuY29tPoiZBBMWCgBBFiEEysoR+AuB3R
+ Zwp6j270psSVh4TfIFAmbiuWMCGwMFCQWjmoAFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgk
+ Q70psSVh4TfJzZgD/TXjnqCyqaZH/Y2w+YVbvm93WX2eqBqiVZ6VEjTuGNs8A/iPrKbzdWC7AicnK
+ xyhmqeUWOzFx5P43S1E1dhsrLWgP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+User-Agent: Evolution 3.56.1 (3.56.1-1.fc42) 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/10] arm64: dts: rockchip: Add nodes for NPU and its
- MMU to rk3588s
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
- Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
- Jeff Hugo <jeff.hugo@oss.qualcomm.com>, devicetree@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org
-References: <20250516-6-10-rocket-v3-0-7051ac9225db@tomeuvizoso.net>
- <20250516-6-10-rocket-v3-2-7051ac9225db@tomeuvizoso.net>
- <4bd79c88-7da5-4bf0-9300-cfdb296c8919@kernel.org>
- <CAAObsKDsO=5uK3BEn6BOgatb+y73jc-Se6mmSbhwG9P_1nVtwg@mail.gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <CAAObsKDsO=5uK3BEn6BOgatb+y73jc-Se6mmSbhwG9P_1nVtwg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-On 19/05/2025 10:27, Tomeu Vizoso wrote:
-> On Mon, May 19, 2025 at 8:08 AM Krzysztof Kozlowski <krzk@kernel.org> wrote:
->>
->> On 16/05/2025 18:53, Tomeu Vizoso wrote:
->>> See Chapter 36 "RKNN" from the RK3588 TRM (Part 1).
->>>
->>> This is a derivative of NVIDIA's NVDLA, but with its own front-end
->>> processor.
->>>
->>> The IP is divided in three cores, programmed independently. The first
->>> core though is special, requiring to be powered on before any of the
->>> others can be used.
->>>
->>> The IOMMU of the first core is also special in that it has two subunits
->>> (read/write?) that need to be programmed in sync.
->>>
->>> v2:
->>> - Have one device for each NPU core (Sebastian Reichel)
->>> - Have one device for each IOMMU (Sebastian Reichel)
->>> - Correctly sort nodes (Diederik de Haas)
->>> - Add rockchip,iommu compatible to IOMMU nodes (Sebastian Reichel)
->>>
->>> v3:
->>> - Adapt to a split of the register block in the DT bindings (Nicolas
->>>   Frattaroli)
->>>
->>> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
->>> ---
->>>  arch/arm64/boot/dts/rockchip/rk3588-base.dtsi | 85 +++++++++++++++++++++++++++
->>>  1 file changed, 85 insertions(+)
->>>
->>> diff --git a/arch/arm64/boot/dts/rockchip/rk3588-base.dtsi b/arch/arm64/boot/dts/rockchip/rk3588-base.dtsi
->>> index 1e18ad93ba0ebdad31642b88ff0f90ef4e8dc76f..7b961ab838212fad8e4a70390fdc917a828433a9 100644
->>> --- a/arch/arm64/boot/dts/rockchip/rk3588-base.dtsi
->>> +++ b/arch/arm64/boot/dts/rockchip/rk3588-base.dtsi
->>> @@ -1136,6 +1136,91 @@ power-domain@RK3588_PD_SDMMC {
->>>               };
->>>       };
->>>
->>> +     rknn_core_top: npu-core@fdab0000 {
->>
->> npu@
->>
->>> +             compatible = "rockchip,rk3588-rknn-core-top", "rockchip,rknn-core-top";
->>
->> You never tested this. Test before sending instead of relying on us or
->> after merging.
-> 
-> Can you please extend on this? I have tested this series before
-> sending and I don't understand what you mean here.
+CgpPbiBNb24sIDIwMjUtMDUtMTkgYXQgMTA6NDIgKzAyMDAsIE5hbSBDYW8gd3JvdGU6Cj4gT24g
+V2VkLCBNYXkgMTQsIDIwMjUgYXQgMTA6NDM6MDlBTSArMDIwMCwgR2FicmllbGUgTW9uYWNvIHdy
+b3RlOgo+ID4gwqAJLmZ1bmN0aW9uID0gewo+ID4gLQkJe8KgwqDCoMKgIHRocmVhZF9jb250ZXh0
+X3NjbywKPiA+IHNjaGVkdWxpbmdfY29udGV4dF9zY28swqDCoMKgwqDCoMKgwqDCoMKgIElOVkFM
+SURfU1RBVEUgfSwKPiA+IC0JCXvCoMKgwqDCoMKgwqDCoMKgwqAgSU5WQUxJRF9TVEFURSzCoMKg
+wqDCoMKgwqDCoMKgwqAKPiA+IElOVkFMSURfU1RBVEUswqDCoMKgwqAgdGhyZWFkX2NvbnRleHRf
+c2NvIH0sCj4gPiArCQl7wqDCoMKgwqAgdGhyZWFkX2NvbnRleHRfc2NvLMKgwqDCoMKgwqDCoMKg
+wqDCoCBJTlZBTElEX1NUQVRFLAo+ID4gc2NoZWR1bGluZ19jb250ZXh0X3NjbyzCoMKgwqDCoMKg
+wqDCoMKgwqAgSU5WQUxJRF9TVEFURSB9LAo+ID4gKwkJe8KgwqDCoMKgwqDCoMKgwqDCoCBJTlZB
+TElEX1NUQVRFLAo+ID4gc2NoZWR1bGluZ19jb250ZXh0X3NjbyzCoMKgwqDCoMKgwqDCoMKgwqAg
+SU5WQUxJRF9TVEFURSzCoMKgwqDCoAo+ID4gdGhyZWFkX2NvbnRleHRfc2NvIH0sCj4gCj4gVGhp
+cyBpcyBvdmVyIHRoZSAxMDAgY29sdW1uIGxpbWl0Lgo+IAo+IEkga25vdyBpdCBpcyBub3QgeW91
+ciBmYXVsdCwgdGhpcyBpcyBnZW5lcmF0ZWQuIEJhY2sgd2hlbiBJIHdhcwo+IHBsYXlpbmcKPiB3
+aXRoIERBIG1vbml0b3IsIEkgbWFkZSBhIHBhdGNoIHRvIGZpeCB0aGlzLiBNYXliZSB5b3UgY291
+bGQgaW5jbHVkZQo+IGl0IGluCj4geW91ciBzZXJpZXM/Cj4gCj4gRnJvbSBiNGZiNjQ4Mzk4YTI5
+YTljMGQ4ZTA4YmQxMjM5NDk3OGQzOTQ4YTVlIE1vbiBTZXAgMTcgMDA6MDA6MDAKPiAyMDAxCj4g
+RnJvbTogTmFtIENhbyA8bmFtY2FvQGxpbnV0cm9uaXguZGU+Cj4gRGF0ZTogRnJpLCAxNSBOb3Yg
+MjAyNCAxNDo1NjozMyArMDEwMAo+IFN1YmplY3Q6IFtQQVRDSF0gdG9vbHMvcnYvZG90MmM6IEZp
+eCBnZW5lcmF0ZWQgZmlsZXMgZ29pbmcgb3ZlciAxMDAKPiBjb2x1bW4KPiDCoGxpbWl0Cj4gCj4g
+VGhlIGRvdDJjLnB5IHNjcmlwdCBnZW5lcmF0ZXMgYWxsIHN0YXRlcyBpbiBhIHNpbmdsZSBsaW5l
+LiBUaGlzCj4gYnJlYWtzIHRoZQo+IDEwMCBjb2x1bW4gbGltaXQgd2hlbiB0aGUgc3RhdGUgbWFj
+aGluZXMgYXJlIG5vbi10cml2aWFsLgo+IAo+IENoYW5nZSBkb3QyYy5weSB0byBnZW5lcmF0ZSB0
+aGUgc3RhdGVzIGluIHNlcGFyYXRlIGxpbmVzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE5hbSBDYW8g
+PG5hbWNhb0BsaW51dHJvbml4LmRlPgo+IC0tLQo+IMKgdG9vbHMvdmVyaWZpY2F0aW9uL3J2Z2Vu
+L3J2Z2VuL2RvdDJjLnB5IHwgMTMgKysrLS0tLS0tLS0tLQo+IMKgMSBmaWxlIGNoYW5nZWQsIDMg
+aW5zZXJ0aW9ucygrKSwgMTAgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL3Zl
+cmlmaWNhdGlvbi9ydmdlbi9ydmdlbi9kb3QyYy5weQo+IGIvdG9vbHMvdmVyaWZpY2F0aW9uL3J2
+Z2VuL3J2Z2VuL2RvdDJjLnB5Cj4gaW5kZXggNjAwOWNhZjU2OGQ5Li5hYmMwZWU1NjliMzQgMTAw
+NjQ0Cj4gLS0tIGEvdG9vbHMvdmVyaWZpY2F0aW9uL3J2Z2VuL3J2Z2VuL2RvdDJjLnB5Cj4gKysr
+IGIvdG9vbHMvdmVyaWZpY2F0aW9uL3J2Z2VuL3J2Z2VuL2RvdDJjLnB5Cj4gQEAgLTE1MiwyOSAr
+MTUyLDIyIEBAIGNsYXNzIERvdDJjKEF1dG9tYXRhKToKPiDCoMKgwqDCoMKgwqDCoMKgIG1heF9z
+dGF0ZV9uYW1lID0gbWF4KHNlbGYuc3RhdGVzLCBrZXkgPSBsZW4pLl9fbGVuX18oKQo+IMKgwqDC
+oMKgwqDCoMKgwqAgcmV0dXJuIG1heChtYXhfc3RhdGVfbmFtZSwgc2VsZi5pbnZhbGlkX3N0YXRl
+X3N0ci5fX2xlbl9fKCkpCj4gwqAKPiAtwqDCoMKgIGRlZiBfX2dldF9zdGF0ZV9zdHJpbmdfbGVu
+Z3RoKHNlbGYpOgo+IC3CoMKgwqDCoMKgwqDCoCBtYXhsZW4gPSBzZWxmLl9fZ2V0X21heF9zdHJs
+ZW5fb2Zfc3RhdGVzKCkgKwo+IHNlbGYuZW51bV9zdWZmaXguX19sZW5fXygpCj4gLcKgwqDCoMKg
+wqDCoMKgIHJldHVybiAiJSIgKyBzdHIobWF4bGVuKSArICJzIgo+IC0KPiDCoMKgwqDCoCBkZWYg
+Z2V0X2F1dF9pbml0X2Z1bmN0aW9uKHNlbGYpOgo+IMKgwqDCoMKgwqDCoMKgwqAgbnJfc3RhdGVz
+ID0gc2VsZi5zdGF0ZXMuX19sZW5fXygpCj4gwqDCoMKgwqDCoMKgwqDCoCBucl9ldmVudHMgPSBz
+ZWxmLmV2ZW50cy5fX2xlbl9fKCkKPiDCoMKgwqDCoMKgwqDCoMKgIGJ1ZmYgPSBbXQo+IMKgCj4g
+LcKgwqDCoMKgwqDCoMKgIHN0cmZvcm1hdCA9IHNlbGYuX19nZXRfc3RhdGVfc3RyaW5nX2xlbmd0
+aCgpCj4gLQo+IMKgwqDCoMKgwqDCoMKgwqAgZm9yIHggaW4gcmFuZ2UobnJfc3RhdGVzKToKPiAt
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsaW5lID0gIlx0XHR7ICIKPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBidWZmLmFwcGVuZCgiXHRcdHsiKQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBm
+b3IgeSBpbiByYW5nZShucl9ldmVudHMpOgo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIG5leHRfc3RhdGUgPSBzZWxmLmZ1bmN0aW9uW3hdW3ldCj4gwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgaWYgbmV4dF9zdGF0ZSAhPSBzZWxmLmludmFsaWRfc3RhdGVfc3RyOgo+
+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbmV4dF9zdGF0ZSA9IHNl
+bGYuZnVuY3Rpb25beF1beV0gKwo+IHNlbGYuZW51bV9zdWZmaXgKPiDCoAo+IMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIHkgIT0gbnJfZXZlbnRzLTE6Cj4gLcKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxpbmUgPSBsaW5lICsgc3RyZm9ybWF0ICUgbmV4
+dF9zdGF0ZSArICIsICIKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+YnVmZi5hcHBlbmQoJycuam9pbigoIlx0XHRcdCIsIG5leHRfc3RhdGUsCj4gIiwiKSkpCj4gwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWxzZToKPiAtwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgbGluZSA9IGxpbmUgKyBzdHJmb3JtYXQgJSBuZXh0X3N0YXRl
+ICsgIiB9LCIKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBidWZmLmFwcGVuZChsaW5lKQo+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBidWZmLmFwcGVuZCgnJy5qb2lu
+KCgiXHRcdFx0IiwgbmV4dF9zdGF0ZSwKPiAiXG5cdFx0fSwiKSkpCj4gwqAKPiDCoMKgwqDCoMKg
+wqDCoMKgIHJldHVybiBzZWxmLl9fYnVmZl90b19zdHJpbmcoYnVmZikKPiDCoAoKVGhhbmtzIGZv
+ciBicmluZ2luZyB0aGlzIHVwLCBJJ20gYSBiaXQgdW5kZWNpZGVkIG9uIHRoaXMgb25lLi4KClRo
+ZSBuaWNlIHRoaW5nIG9mIHRoZSBjdXJyZW50IHJlcHJlc2VudGF0aW9uIGlzIHRoYXQgaXQgc2hv
+d3MgYSBtYXRyaXgKYW5kIGl0J3MgcmVsYXRpdmVseSBlYXN5IHRvIHNlZSB3aGF0IGVhY2ggZXZl
+bnQgZG9lcy4KT24gdGhlIG90aGVyIGhhbmQgaXQncyB0cnVlIGxhcmdlciBtb2RlbHMgZG8gZXhj
+ZWVkIHF1aXRlIGEgYml0IHRoZQpzaXplIGxpbWl0cyBhbmQgY29uc2lkZXJpbmcgeW91IGFyZW4n
+dCByZWFsbHkgc3VwcG9zZWQgdG8gdG91Y2ggdGhpcwpmaWxlIGRpcmVjdGx5IChhcyB0aGUgc2Ny
+aXB0IGRvZXMgaXQgZm9yIHlvdSksIHBlcmhhcHMgY2xlYW5lciBDIGNvZGUKc2hvdWxkIGJlIHRo
+ZSBwcmlvcml0eS4KCkknbGwgcGxheSB3aXRoIHlvdXIgcGF0Y2ggYW5kIHNlZSBpZiBpdCBuZWdh
+dGl2ZWx5IGFmZmVjdHMgdGhlIHdvcmtmbG93CmluIGFueSB3YXkuIElmIG5vdCwgSSdkIGluY2x1
+ZGUgaXQgYW5kIGFkYXB0IHRoZSBtb25pdG9ycyAocGVyaGFwcyBvbmx5CnRob3NlIHdpdGggbG9u
+ZyBsaW5lcywgbm90IHJlYWxseSBuZWVkIHRvIGNoYW5nZSBhbGwpLgoKVGhhbmtzLApHYWJyaWVs
+ZQo=
 
-I mean exactly that: it was not tested, because warnings are clearly
-visible/expected. I also found now Rob's report which even shows you the
-warnings, so how come you still claim this was tested?
-
-Best regards,
-Krzysztof
 
