@@ -1,494 +1,122 @@
-Return-Path: <linux-doc+bounces-47053-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47055-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA9A2ABF720
-	for <lists+linux-doc@lfdr.de>; Wed, 21 May 2025 16:06:23 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DB11ABF764
+	for <lists+linux-doc@lfdr.de>; Wed, 21 May 2025 16:12:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DDC643BBED6
-	for <lists+linux-doc@lfdr.de>; Wed, 21 May 2025 14:05:59 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E5F4F3ABDEB
+	for <lists+linux-doc@lfdr.de>; Wed, 21 May 2025 14:11:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EE2B191F6A;
-	Wed, 21 May 2025 14:06:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1AF5B253938;
+	Wed, 21 May 2025 14:10:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nightmared.fr header.i=@nightmared.fr header.b="gghCdj5Y"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LmMkkQJy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.nightmared.fr (mail.nightmared.fr [51.158.148.24])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 636CE14F117;
-	Wed, 21 May 2025 14:06:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=51.158.148.24
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6ADE194137;
+	Wed, 21 May 2025 14:10:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747836367; cv=none; b=szS59nme9GCCKl3fdN5zaUf2F8WjBCxmxZAxWdLhtcQQvUnKH6Ztwwv8LvVsfiiJs63uoTJdLcduDwu6ytgX6Cuc0thOpVs/C/7hsHgCNBAZ+HFQyPGpk7GIyHfJ1UvANzJJeLHBFXrBE7K5FZSv0GJvDFwIaEfOX1hw5oqhVDA=
+	t=1747836611; cv=none; b=VRIqMc0EbfmCi+ipYzoQeHztE9ffxb+z6qmxBJ/YkEjvhSK7hhceVUJRwy44NSBfR0Nb49jnA7xgHp2woShdybwhcAwV8Q5ShuNbb1xavV+O+D+Lh1rfK/npRgVaDzDAt0FLMBB5yj4/H9NqW08tBjkUfctdzL0hxGPyYz6r6K0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747836367; c=relaxed/simple;
-	bh=MyeVzj/GXEmxs16atOqVeRYXaDAw/zJot/OanJatabA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=GPUJOua+dEYYJLZPpr3VEiVtLhpwPH5c6dhTR7iqw7wuF22d32tOvkGFyQsvLWcf7TxrnDPBzLEiAoKoP7lOCrKHPmaZN4k6B2w6JjDodj9cpMvPyQoyeTiLLnH67HP0JCksb4VsHY2nCp0VquYI41bb5iRa8p775AQ0bRU4ga8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nightmared.fr; spf=pass smtp.mailfrom=nightmared.fr; dkim=pass (2048-bit key) header.d=nightmared.fr header.i=@nightmared.fr header.b=gghCdj5Y; arc=none smtp.client-ip=51.158.148.24
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=nightmared.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nightmared.fr
-Received: from localhost.localdomain (atoulon-651-1-170-218.w83-113.abo.wanadoo.fr [83.113.65.218])
-	by mail.nightmared.fr (Postfix) with ESMTPSA id C5A231087A44;
-	Wed, 21 May 2025 14:01:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nightmared.fr;
-	s=docker; t=1747836107;
-	bh=MyeVzj/GXEmxs16atOqVeRYXaDAw/zJot/OanJatabA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=gghCdj5YCw++wEKfYgO5Uql9/Oj++b8dWdwcCkK01NftNhuFm8YkO+TfLTXfNzIp6
-	 zF913WYxLh6Wp83RJuwJ9COETuxfjky77/s+T+QxYM4vePcY0zROszPOjAg6fMkJPJ
-	 0Bn5QerluhD6u54HFdfnq+6WC+SCk1qne4sQRZbOnUwvbVGm+3vTx4ZblXLNudK1ij
-	 0800YvdIcOfeQH7lf3zJ0MiYL9nPK2LY2BJ37It+lU11z3FO4I4oSRlidHQ2rzUzLo
-	 pWLODfH6VxBsF6FlZvDyrVhDRxUNHgY+7nCS7JqAnwFRavbiyoIGlqZX6i1SIXUyii
-	 tA33LcqlGwt1w==
-From: Simon THOBY <git@nightmared.fr>
-To: linux-security-module@vger.kernel.org
-Cc: Simon THOBY <git@nightmared.fr>,
-	linux-integrity@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: [RFC PATCH 4/9] Loadpol LSM: add a file in securityfs to read/modify the policy
-Date: Wed, 21 May 2025 16:01:08 +0200
-Message-ID: <20250521140121.591482-5-git@nightmared.fr>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250521140121.591482-1-git@nightmared.fr>
-References: <20250521140121.591482-1-git@nightmared.fr>
+	s=arc-20240116; t=1747836611; c=relaxed/simple;
+	bh=DZEgFzM4nzHH/r9PZ/9x1SizshuzRtVrhWfn2VQ2doU=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=TOrMuxzzBQQqnDY+vEC0nX1/w614xThTkif/sYaOWiOBJb5kuGi8DO/YMmJtCF1QIiJdfccnPXhDQ6Iu9mPXHv0EpMPPM9SpjJ7+aF+Sepax+f7uTaqzulsgsi+x/h0+G4rUMz1bznfud5+P2dVfFkehN2hdNhg6TAu6/dhTrMo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LmMkkQJy; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88FE2C4CEE4;
+	Wed, 21 May 2025 14:10:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1747836609;
+	bh=DZEgFzM4nzHH/r9PZ/9x1SizshuzRtVrhWfn2VQ2doU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=LmMkkQJyNw/VJjwBRHSX4EySj8hOlqgazOjmHYKGiPMEaXn8ah3/Tb2sJUt1zHkY7
+	 e4uGKGfZmvJnt6m7xBkPuEdk6A7JHQe7+iHfKB6azSYbRy2coHdgm8xjwAiToeTiIa
+	 AcyuLvWX+EbwkmH9EreeBYC6jjtT9Z8e1NLu5YHz0aQHsEq/SKo8YkWNtvWrgVstJW
+	 Ik21uYYr9k6KO35Ma7+6zyJ+XrpDJKezW+dqqILGnwPw7F8VIjwWUlBDvY8uDH45tP
+	 BNbDPhuXHAmIdp+65UdUcCn/P7rIWt31JyU5T6FWJycJfUhNYNp/72AESV69hrhEwI
+	 NWjGotVjDuyxA==
+Date: Wed, 21 May 2025 07:10:07 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Tariq Toukan <ttoukan.linux@gmail.com>
+Cc: Carolina Jubran <cjubran@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>,
+ "David S. Miller" <davem@davemloft.net>, Paolo Abeni <pabeni@redhat.com>,
+ Eric Dumazet <edumazet@google.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ Jiri Pirko <jiri@nvidia.com>, Gal Pressman <gal@nvidia.com>, Leon
+ Romanovsky <leonro@nvidia.com>, Donald Hunter <donald.hunter@gmail.com>,
+ Jiri Pirko <jiri@resnulli.us>, Jonathan Corbet <corbet@lwn.net>, Saeed
+ Mahameed <saeedm@nvidia.com>, Leon Romanovsky <leon@kernel.org>, Shuah Khan
+ <shuah@kernel.org>, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, Moshe Shemesh <moshe@nvidia.com>, Mark
+ Bloch <mbloch@nvidia.com>, Cosmin Ratiu <cratiu@nvidia.com>
+Subject: Re: [PATCH net-next V10 2/6] selftest: netdevsim: Add devlink rate
+ tc-bw test
+Message-ID: <20250521071007.0cb6f546@kernel.org>
+In-Reply-To: <80b40828-8fa3-4313-8c98-823ac7c055c1@gmail.com>
+References: <1747766287-950144-1-git-send-email-tariqt@nvidia.com>
+	<1747766287-950144-3-git-send-email-tariqt@nvidia.com>
+	<20250520155957.04b27217@kernel.org>
+	<80b40828-8fa3-4313-8c98-823ac7c055c1@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Privileged users (CAP_SYS_ADMIN in the root namespace) can read and
-update the module policy.
+On Wed, 21 May 2025 10:05:13 +0300 Tariq Toukan wrote:
+> On 21/05/2025 1:59, Jakub Kicinski wrote:
+> > On Tue, 20 May 2025 21:38:03 +0300 Tariq Toukan wrote:  
+> >> Test verifies that netdevsim correctly implements devlink ops callbacks
+> >> that set tc-bw on leaf or node rate object.  
+> > 
+> > Please add a test that can actually validate a NIC HW.
+> > The test probably needs to be in Python to use a remote endpoint,
+> > and should live under tools/testing/../drivers/net/hw
+> > 
+> > We had a long conversation about what we expect from the API
+> > vs how your HW works. One of the test cases should confirm
+> > the expected behavior, IOW fail on mlx5. Which is fine,
+> > unlikely that any NIC will have 100% compliance. But at
+> > least we will be documenting the expectations.
+> 
+> No problem with that, we'll add.
+> 
+> We could've saved this extra cycle if my questions [1] exactly about 
+> this topic weren't ignored.
+> Area is vague and not well defined. We can continue with the iterative 
+> guess and fix cycles, or alternatively get it clearly and formally defined.
 
-Signed-off-by: Simon THOBY <git@nightmared.fr>
----
- security/loadpol/Makefile         |   2 +-
- security/loadpol/loadpol.h        |   8 +
- security/loadpol/loadpol_fs.c     | 108 +++++++++++++
- security/loadpol/loadpol_policy.c | 244 +++++++++++++++++++++++++++++-
- 4 files changed, 360 insertions(+), 2 deletions(-)
- create mode 100644 security/loadpol/loadpol_fs.c
+I started a couple of times on answering but my hands go a little limb
+when I have to explain things so obvious like "testing is a crucial part
+of software development" :S  I mean.. nvidia certainly tests their code,
+so I'm not sure where the disconnect is. I had a short conversation with
+Gal at some conference where he, AFAIU, was doubting that device testing
+can be part of an open source project.
 
-diff --git a/security/loadpol/Makefile b/security/loadpol/Makefile
-index 062215e1f831..3351a4e90c1d 100644
---- a/security/loadpol/Makefile
-+++ b/security/loadpol/Makefile
-@@ -1 +1 @@
--obj-$(CONFIG_SECURITY_LOADPOL) := loadpol.o loadpol_policy.o
-+obj-$(CONFIG_SECURITY_LOADPOL) := loadpol.o loadpol_policy.o loadpol_fs.o
-diff --git a/security/loadpol/loadpol.h b/security/loadpol/loadpol.h
-index a81d52f6d4da..e81aa322e178 100644
---- a/security/loadpol/loadpol.h
-+++ b/security/loadpol/loadpol.h
-@@ -4,6 +4,7 @@
- #define _SECURITY_LOADPOL_LOADPOL_H
- 
- #include "linux/list.h"
-+#include <linux/seq_file.h>
- 
- #define LOADPOL_NAME "loadpol"
- 
-@@ -29,6 +30,13 @@ struct loadpol_policy_entry {
- 
- extern struct list_head __rcu *loadpol_policy;
- 
-+void *loadpol_policy_start(struct seq_file *m, loff_t *pos);
-+void *loadpol_policy_next(struct seq_file *m, void *v, loff_t *pos);
-+void loadpol_policy_stop(struct seq_file *m, void *v);
-+int loadpol_policy_show(struct seq_file *m, void *v);
-+
-+ssize_t loadpol_parse_ruleset(char *data);
-+
- // evaluate if a kernel module called 'kmod' is allowed to be loaded in the kernel
- int loadpol_kernel_module_load(const char *kmod);
- 
-diff --git a/security/loadpol/loadpol_fs.c b/security/loadpol/loadpol_fs.c
-new file mode 100644
-index 000000000000..9134d11718a0
---- /dev/null
-+++ b/security/loadpol/loadpol_fs.c
-@@ -0,0 +1,108 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include "linux/array_size.h"
-+#include <linux/security.h>
-+
-+#include "loadpol.h"
-+
-+static struct dentry *securityfs_dir;
-+static struct dentry *securityfs_policy;
-+
-+static DEFINE_MUTEX(policy_write_mutex);
-+
-+static const struct seq_operations loadpol_policy_seqops = {
-+	.start = loadpol_policy_start,
-+	.next = loadpol_policy_next,
-+	.stop = loadpol_policy_stop,
-+	.show = loadpol_policy_show,
-+};
-+
-+static int loadpol_open_policy(struct inode *inode, struct file *filp)
-+{
-+	// Check permissions when accessing with writable flags
-+	if ((filp->f_flags & O_ACCMODE) != O_RDONLY) {
-+		if (!capable(CAP_SYS_ADMIN))
-+			return -EPERM;
-+	}
-+	return seq_open(filp, &loadpol_policy_seqops);
-+}
-+
-+static ssize_t loadpol_write_policy(struct file *file, const char __user *buf,
-+				    size_t count, loff_t *ppos)
-+{
-+	char *data;
-+	ssize_t ret;
-+
-+	/*
-+	 * arbitrary size limit (to prevent a DoS but still allow loading a policy with a few
-+	 * thousands of entries)
-+	 */
-+	if (count >= 64 * PAGE_SIZE) {
-+		ret = -ENOSPC;
-+		goto out;
-+	}
-+
-+	/* Partial writes are not permitted */
-+	if (*ppos != 0) {
-+		ret = -ESPIPE;
-+		goto out;
-+	}
-+
-+	data = memdup_user_nul(buf, count);
-+	if (IS_ERR(data)) {
-+		ret = PTR_ERR(data);
-+		goto out;
-+	}
-+
-+	ret = mutex_lock_interruptible(&policy_write_mutex);
-+	if (ret < 0) {
-+		ret = -EBUSY;
-+		goto out_free;
-+	}
-+
-+	ret = loadpol_parse_ruleset(data);
-+	/* the policy was injested, return the write as having been completed */
-+	if (!ret)
-+		ret = count;
-+
-+	mutex_unlock(&policy_write_mutex);
-+out_free:
-+	kfree(data);
-+out:
-+	return ret;
-+}
-+
-+static const struct file_operations loadpol_policy_ops = {
-+	.open = loadpol_open_policy,
-+	.write = loadpol_write_policy,
-+	.read = seq_read,
-+	.llseek = seq_lseek,
-+};
-+
-+static int __init loadpol_init_fs(void)
-+{
-+	int ret;
-+
-+	securityfs_dir = securityfs_create_dir(LOADPOL_NAME, NULL);
-+	if (IS_ERR(securityfs_dir)) {
-+		ret = PTR_ERR(securityfs_dir);
-+		goto err;
-+	}
-+
-+	securityfs_policy = securityfs_create_file(
-+		"policy", 0600, securityfs_dir, NULL, &loadpol_policy_ops
-+	);
-+	if (IS_ERR(securityfs_policy)) {
-+		ret = PTR_ERR(securityfs_policy);
-+		goto err;
-+	}
-+
-+	return 0;
-+err:
-+	securityfs_remove(securityfs_policy);
-+	securityfs_remove(securityfs_dir);
-+	return ret;
-+}
-+
-+/* only create debugfs entries once the filesystem is available */
-+fs_initcall(loadpol_init_fs);
-diff --git a/security/loadpol/loadpol_policy.c b/security/loadpol/loadpol_policy.c
-index 6ba5ab600e3e..366046f00959 100644
---- a/security/loadpol/loadpol_policy.c
-+++ b/security/loadpol/loadpol_policy.c
-@@ -1,5 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0-only
- 
-+#define pr_fmt(fmt) "loadpol: " fmt
-+
- #include "linux/rculist.h"
- #include <linux/sched.h>
- #include <linux/sysctl.h>
-@@ -12,6 +14,244 @@ static LIST_HEAD(loadpol_policy_a);
- static LIST_HEAD(loadpol_policy_b);
- struct list_head __rcu *loadpol_policy = (struct list_head __rcu *)(&loadpol_policy_a);
- 
-+enum loadpol_options {
-+	Opt_action,
-+	Opt_allowed,
-+	Opt_denied,
-+	Opt_kernel,
-+	Opt_module,
-+	Opt_origin,
-+	Opt_userspace,
-+	Opt_err,
-+};
-+
-+static const match_table_t policy_options = {
-+	{Opt_action, "action=%s"},
-+	{Opt_allowed, "allow"},
-+	{Opt_denied, "deny"},
-+	{Opt_kernel, "kernel"},
-+	{Opt_module, "module==%s"},
-+	{Opt_origin, "origin==%s"},
-+	{Opt_userspace, "user"},
-+	{Opt_err, NULL},
-+};
-+
-+#define opt(o) policy_options[o].pattern
-+
-+static void loadpol_free_entry(struct loadpol_policy_entry *entry)
-+{
-+	kfree(entry->module_name);
-+	kfree(entry);
-+}
-+
-+static void loadpol_free_ruleset(struct list_head *policy)
-+{
-+	struct loadpol_policy_entry *entry, *next_entry;
-+
-+	list_for_each_entry_safe(entry, next_entry, policy, list) {
-+		list_del(&entry->list);
-+		loadpol_free_entry(entry);
-+	}
-+}
-+
-+void *loadpol_policy_start(struct seq_file *m, loff_t *pos)
-+{
-+	struct list_head *entry_list;
-+
-+	rcu_read_lock();
-+	entry_list = seq_list_start_rcu(rcu_dereference(loadpol_policy), *pos);
-+	rcu_read_unlock();
-+
-+	if (!entry_list)
-+		return NULL;
-+
-+	return container_of(entry_list, struct loadpol_policy_entry, list);
-+}
-+
-+void *loadpol_policy_next(struct seq_file *m, void *v, loff_t *pos)
-+{
-+	struct list_head *entry_list;
-+
-+	rcu_read_lock();
-+	entry_list = seq_list_next_rcu(v, rcu_dereference(loadpol_policy), pos);
-+	rcu_read_unlock();
-+
-+	if (!entry_list)
-+		return NULL;
-+
-+	return container_of(entry_list, struct loadpol_policy_entry, list);
-+}
-+
-+void loadpol_policy_stop(struct seq_file *m, void *v)
-+{
-+}
-+
-+int loadpol_policy_show(struct seq_file *m, void *v)
-+{
-+	struct loadpol_policy_entry *entry = v;
-+
-+	seq_printf(m, opt(Opt_origin), "");
-+	if (entry->origin & ORIGIN_KERNEL)
-+		seq_puts(m, opt(Opt_kernel));
-+	if (entry->origin & ORIGIN_KERNEL && entry->origin & ORIGIN_USERSPACE)
-+		seq_puts(m, ",");
-+	if (entry->origin & ORIGIN_USERSPACE)
-+		seq_puts(m, opt(Opt_userspace));
-+
-+	seq_puts(m, " ");
-+
-+	if (entry->module_name) {
-+		seq_printf(m, opt(Opt_module), entry->module_name);
-+		seq_puts(m, " ");
-+	}
-+
-+	seq_printf(m, opt(Opt_action),
-+		   (entry->action == ACTION_ALLOW) ? opt(Opt_allowed) : opt(Opt_denied));
-+
-+	seq_puts(m, "\n");
-+	return 0;
-+}
-+
-+static struct loadpol_policy_entry *process_policy_rule(char *line)
-+{
-+	char *token, *subtoken;
-+	struct loadpol_policy_entry *entry;
-+	int ret = -EINVAL;
-+
-+	entry = kzalloc(sizeof(*entry), GFP_KERNEL);
-+	if (!entry)
-+		return ERR_PTR(-ENOMEM);
-+
-+	// not strictly necessary since we zero-initialize entry, but explicitness is good
-+	entry->module_name = NULL;
-+	entry->origin = ORIGIN_KERNEL | ORIGIN_USERSPACE;
-+	entry->action = ACTION_UNDEFINED;
-+
-+	while ((token = strsep(&line, " \t"))) {
-+		int token_id;
-+		substring_t args[MAX_OPT_ARGS];
-+
-+		if (!strlen(token))
-+			continue;
-+
-+		token_id = match_token(token, policy_options, args);
-+		switch (token_id) {
-+		case Opt_module:
-+			if (entry->module_name) {
-+				pr_warn("cannot define two names in the same entry: '%s'", line);
-+				goto err;
-+			}
-+
-+			if (!strlen(args[0].from)) {
-+				pr_warn("empty module names are not supported: '%s'", line);
-+				goto err;
-+			}
-+
-+			entry->module_name = kstrdup(args[0].from, GFP_KERNEL);
-+			if (!entry->module_name) {
-+				ret = -ENOMEM;
-+				goto err;
-+			}
-+
-+			break;
-+		case Opt_origin:
-+			entry->origin = 0;
-+
-+			while ((subtoken = strsep(&args[0].from, ","))) {
-+				if (!strcmp(subtoken, opt(Opt_kernel))) {
-+					entry->origin |= ORIGIN_KERNEL;
-+					continue;
-+				}
-+
-+				if (!strcmp(subtoken, opt(Opt_userspace))) {
-+					entry->origin |= ORIGIN_USERSPACE;
-+					continue;
-+				}
-+
-+				pr_warn("Unsupported origin '%s'", subtoken);
-+				goto err;
-+			}
-+			break;
-+		case Opt_action:
-+			if (entry->action != ACTION_UNDEFINED) {
-+				pr_warn("cannot define two action in the same entry: '%s'", line);
-+				goto err;
-+			}
-+
-+			if (!strcmp(args[0].from, opt(Opt_denied))) {
-+				entry->action = ACTION_DENY;
-+				continue;
-+			}
-+
-+			if (!strcmp(args[0].from, opt(Opt_allowed))) {
-+				entry->action = ACTION_ALLOW;
-+				continue;
-+			}
-+
-+			pr_warn("Loadpol: Unsupported action '%s'", args[0].from);
-+			goto err;
-+		case Opt_err:
-+			pr_warn("Unsupported token %d: %s\n", token_id, token);
-+			return ERR_PTR(-EINVAL);
-+		}
-+	}
-+
-+	return entry;
-+err:
-+	loadpol_free_entry(entry);
-+
-+	return ERR_PTR(ret);
-+}
-+
-+ssize_t loadpol_parse_ruleset(char *data)
-+{
-+	struct list_head *new_policy_list;
-+	struct loadpol_policy_entry *entry;
-+	char *sep_ptr, *line;
-+
-+	rcu_read_lock();
-+	new_policy_list = (rcu_dereference(loadpol_policy) == &loadpol_policy_a) ?
-+			   &loadpol_policy_b : &loadpol_policy_a;
-+	rcu_read_unlock();
-+
-+	/* wait for the RCU previous critical section to be over */
-+	synchronize_rcu();
-+
-+	/*
-+	 * At this point, we know that nobody else is iterating over new_policy_list: we are
-+	 * inside a lock so we have no concurrent writer, and we called synchronize_rcu which ensure
-+	 * that current readers are reading the other policy list
-+	 * (policy_a if we operate on policy_b, or vice-versa).
-+	 */
-+
-+	/* free the old policy entries */
-+	loadpol_free_ruleset(new_policy_list);
-+
-+	sep_ptr = data;
-+	while ((line = strsep(&sep_ptr, "\n"))) {
-+		// ignore empty lines
-+		if (!strlen(line))
-+			continue;
-+
-+		entry = process_policy_rule(line);
-+		if (IS_ERR(entry))
-+			goto err;
-+
-+		list_add_tail(&entry->list, new_policy_list);
-+	}
-+
-+	/* switch to policy */
-+	rcu_assign_pointer(loadpol_policy, new_policy_list);
-+
-+	return 0;
-+
-+err:
-+	/* free the newly created entries */
-+	loadpol_free_ruleset(new_policy_list);
-+
-+	return -EINVAL;
-+}
-+
- int loadpol_kernel_module_load(const char *kmod)
- {
- 	struct task_struct *parent_task;
-@@ -53,7 +293,9 @@ int loadpol_kernel_module_load(const char *kmod)
- unlock_and_exit:
- 	rcu_read_unlock();
- 
--	pr_debug("Loadpol: load of module '%s' %s", kmod, allowed ? "allowed" : "blocked");
-+	pr_debug("Loadpol: load of module '%s' %s",
-+		 kmod,
-+		 allowed ? "allowed" : "blocked");
- 
- 	return allowed ? 0 : -EPERM;
- }
--- 
-2.49.0
+It certainly is not advantageous to companies to have to share their
+test code. So when you ask me for details on the rules what I hear is
+"how can we make sure we do as little as possible".
 
+Broadly, any new uAPI should come with tests which exercise the
+functionality. We started a decade or so ago with netdevsim tests
+which just validate the API layer itself. That did not provide
+sufficient validation of the real implementations, crucially it did 
+not check whether shallow APIs (devlink) actually behave the same
+when implemented by multiple vendors. So two years ago we built 
+the Python harness to be able to write tests for NIC functionality.
+That is the level of testing we expect now. Obviously there will always
+be exceptions. For instance I was pushing for common tests for the time
+sync code (DPLL etc.) but I was convinced by the experts that it's hard
+and that they generally test with $x0,000 measurement equipment.
+So fair, I guess that's too hard. But for BW shaping tests? 
+IIRC mlxsw has qdisc offload tests for BW shaping upstream.
 
