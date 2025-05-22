@@ -1,299 +1,353 @@
-Return-Path: <linux-doc+bounces-47180-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47170-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E883AAC1529
-	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 22:00:32 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D9E8AC14FF
+	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 21:52:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9CBF57AE124
-	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 19:59:14 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 200617A9157
+	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 19:51:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1A54188713;
-	Thu, 22 May 2025 20:00:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B974829B8C0;
+	Thu, 22 May 2025 19:52:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="QiLRspDW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.aperture-lab.de (mail.aperture-lab.de [116.203.183.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2085.outbound.protection.outlook.com [40.107.94.85])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEE64148827;
-	Thu, 22 May 2025 20:00:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=116.203.183.178
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747944023; cv=none; b=boQ7ysrKwvbWLveaI/t7lzYQMOv48yxO4WSY9/e8/1+3hREYzk46+jmMB2Uf09VEprGAjOUbkF02TdAS+7MD6/K2yzX0BE1isdOb6DbTK/3YqHIu2u83IDEOe5OfFJd9XmK2x9e4e3XK/RknJE0lFgeMKbU9N3mt0t5Vbl4z90w=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747944023; c=relaxed/simple;
-	bh=yLDbXO/gSmkNEDZIFZ98m8PJwn3LOwfLyLA3H+5I8X8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kIVUbEMVU0puFP2RBgE2/6c5kxn6TY+fOPwC880QaBiV/Jli6ReDqgtn7eIQZxLXRNNofomrupUwbFONyfLMCRtJ0FviioLsxRfA7/jjsbsNBBpsktZY0hu6gXfMePsRcamrcO6MB9RxckDz7Z3JJuRvHx22yhvYGWbr5Uzoo5E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=c0d3.blue; spf=pass smtp.mailfrom=c0d3.blue; arc=none smtp.client-ip=116.203.183.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=c0d3.blue
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=c0d3.blue
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 31D5E54E733;
-	Thu, 22 May 2025 22:00:16 +0200 (CEST)
-From: =?UTF-8?q?Linus=20L=C3=BCssing?= <linus.luessing@c0d3.blue>
-To: bridge@lists.linux.dev
-Cc: netdev@vger.kernel.org,
-	openwrt-devel@lists.openwrt.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Nikolay Aleksandrov <razor@blackwall.org>,
-	Ido Schimmel <idosch@nvidia.com>,
-	Ivan Vecera <ivecera@redhat.com>,
-	Jiri Pirko <jiri@resnulli.us>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Andrew Lunn <andrew@lunn.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Simon Horman <horms@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Eric Dumazet <edumazet@google.com>,
-	"David S . Miller" <davem@davemloft.net>,
-	Kuniyuki Iwashima <kuniyu@amazon.com>,
-	Stanislav Fomichev <sdf@fomichev.me>,
-	Xiao Liang <shaw.leon@gmail.com>,
-	Markus Stockhausen <markus.stockhausen@gmx.de>,
-	Jan Hoffmann <jan.christian.hoffmann@gmail.com>,
-	Birger Koblitz <git@birger-koblitz.de>,
-	=?UTF-8?q?Bj=C3=B8rn=20Mork?= <bjorn@mork.no>,
-	=?UTF-8?q?Linus=20L=C3=BCssing?= <linus.luessing@c0d3.blue>
-Subject: [PATCH net-next 5/5] net: dsa: forward bridge/switchdev mcast active notification
-Date: Thu, 22 May 2025 21:17:07 +0200
-Message-ID: <20250522195952.29265-6-linus.luessing@c0d3.blue>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250522195952.29265-1-linus.luessing@c0d3.blue>
-References: <20250522195952.29265-1-linus.luessing@c0d3.blue>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE6BF1F5846;
+	Thu, 22 May 2025 19:52:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.94.85
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1747943531; cv=fail; b=bgjxi7NOXpTNfQ+gvxIDUao3GIdJMeWRurvQht/yqFG/x9SisypBSFuEW+vTNaa47RfjmUWIcPMFOrV3HNwAc8ZrXalT+3XDntDkQPCwI6K7Z3tI81z1pM3VLLXtVH23iBYcG2zVCLH6fj+ahLmG3ArQIIAWaYQHlNx1FNVHH3Q=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1747943531; c=relaxed/simple;
+	bh=4IICiWUAI1h9MlZ0j5byA5pvnqt3eijbB1L3Imyeicg=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Kt3LI/8jz59T+rLpQ2dPpAhs9wiQiL1TgwUpg/lBCdTv/4FI3KUlo5tCZMn1SyHFZuWq6eaOPHoWbXKkBAISxdYWeMKqk4ahA64WGQU8cwiGJ9idpYqAE/X8FHUVj/3x7F23XXH0fHVZJyvvM2+vWkGdCYvgwDBASRGaXAPVWtc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=QiLRspDW; arc=fail smtp.client-ip=40.107.94.85
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Rf+jzRxMXK0d51oBQzm7tjjmYBXSh0RDP+UuDKVwC18bKbFFZOmHm41iPNlHdN7ItpZZ2YqPDp7U7mf1+roLcscTj5oXKKGTlTM7LH05Ve59l6f0pBKfqObapGID76Ub81sp3NOkdhOVtalc05gktzy0zRLOXQtgZYy3USqNghF7Nd1teZQPPHtYK+tx0YXG++OTFvLhAVxgbHmovkMo4OHKqStRVaehCJ2IUBqR1anI0WET6+9bvEhPEDE+5ZZ/T8l1RXcY+XD/Js32FMhjcZPj1KKUAXSxI1619HIdL3mJfjkeJtQjf0QJuj0HxY8ETuQUr8MBUfczWkHppi1hcQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=U0WXRmxGZ96Ny2yWyzClmy5ELOn1P9V6MI7EwS4N4tU=;
+ b=HMqpevf1E7RMBS0OlfBplS9QkhkFiIOZpZLC/ttq9Uo1ZM8snr5bBuP8E8ROhBVwBWCrIS5saeRK9fPxQfGLPa+OtKta7udfNaGQwReH9VNDaB3vcdFSD3ikm3LNOzfpCKNhkUB1QJ1KSDn+GnKe9ohNPqHiAG48WEbw2OXiuQ0iU9lFs2stMPR0QIwdltzacm1yE87UkGTRfBrzrI88PG073Fhhl4nrHRsOftqOrQ4RN0+hDd25tAllKnc26VEfP6a81/Qd1zEh7GIih9bi2zHDfnZMtHSNDZiSYIpbgjkA+UAIM1whzeioJ2bwXxU8hTLDJQuumaZaSxY3JEMMNg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=U0WXRmxGZ96Ny2yWyzClmy5ELOn1P9V6MI7EwS4N4tU=;
+ b=QiLRspDWn9oJ+NOP+E8CQrEhByNe+wR2zJooG77S4qlRt0KqkVI7//ldjnrGreV1Pgwk4vphxlUs+ETiWnEyB4eokiL1OVqKNeiYk5LIg8yf0OvYdE3ClcqdYrSj+ZcIvwjzhWgt7o/4K6+sDFqJrpM3S/3K+j/krzwQm8F7z7c=
+Received: from PH8PR22CA0008.namprd22.prod.outlook.com (2603:10b6:510:2d1::20)
+ by CH3PR12MB8511.namprd12.prod.outlook.com (2603:10b6:610:15c::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8746.31; Thu, 22 May
+ 2025 19:52:04 +0000
+Received: from BY1PEPF0001AE17.namprd04.prod.outlook.com
+ (2603:10b6:510:2d1:cafe::ba) by PH8PR22CA0008.outlook.office365.com
+ (2603:10b6:510:2d1::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8746.34 via Frontend Transport; Thu,
+ 22 May 2025 19:52:03 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BY1PEPF0001AE17.mail.protection.outlook.com (10.167.242.107) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8769.18 via Frontend Transport; Thu, 22 May 2025 19:52:03 +0000
+Received: from bmoger-ubuntu.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 22 May
+ 2025 14:52:00 -0500
+From: Babu Moger <babu.moger@amd.com>
+To: <corbet@lwn.net>, <tony.luck@intel.com>, <reinette.chatre@intel.com>,
+	<Dave.Martin@arm.com>, <james.morse@arm.com>, <tglx@linutronix.de>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>
+CC: <x86@kernel.org>, <hpa@zytor.com>, <akpm@linux-foundation.org>,
+	<rostedt@goodmis.org>, <paulmck@kernel.org>, <thuth@redhat.com>,
+	<ardb@kernel.org>, <gregkh@linuxfoundation.org>, <thomas.lendacky@amd.com>,
+	<seanjc@google.com>, <mario.limonciello@amd.com>, <perry.yuan@amd.com>,
+	<kai.huang@intel.com>, <xiaoyao.li@intel.com>, <nikunj@amd.com>,
+	<kan.liang@linux.intel.com>, <xin3.li@intel.com>, <babu.moger@amd.com>,
+	<andrew.cooper3@citrix.com>, <ebiggers@google.com>, <xin@zytor.com>,
+	<sohil.mehta@intel.com>, <Xiaojian.Du@amd.com>, <gautham.shenoy@amd.com>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v5 0/8] x86/resctrl: Support L3 Smart Data Cache Injection Allocation Enforcement (SDCIAE)
+Date: Thu, 22 May 2025 14:51:31 -0500
+Message-ID: <cover.1747943499.git.babu.moger@amd.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE17:EE_|CH3PR12MB8511:EE_
+X-MS-Office365-Filtering-Correlation-Id: d089a802-0984-4175-9a86-08dd996a1fed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|7416014|82310400026|36860700013|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?JSZuXBh1yHVyA4rGmMWzeqiItloxecV+gbKCMjTAl+GsJVW1L4Lc/+X6pnuu?=
+ =?us-ascii?Q?piW0q5VV+VZN5KwWZVS8HRkphPz1XG/866HqFOtDtQHbGBHqGqA30gS+M5Hz?=
+ =?us-ascii?Q?TiwhBMpzWS1MCGczDrN1xdgph8nxsNpIUmjf5iYjsKpRznYQfnkZunOAe0yT?=
+ =?us-ascii?Q?X994lwSLkgDuYVx4LZGkFnupkh1vcYS6orItTUh/XZfUmytxkXlU2UEv9L20?=
+ =?us-ascii?Q?ACBlLQhnHuTdr3VFCQIaCIt3ZNKjWuRopTqkzw6iX3Q/OuQ0ndIlDoKwrTuE?=
+ =?us-ascii?Q?3y5RmLHbPEnlDprrsMLBKyzTCHwUhG+xNo+HGhfl0TeNKP9tMFMCo03IzuR9?=
+ =?us-ascii?Q?liRzJ0ROKqKgR4Y7xdLmvVGW0Zf6XoWDFG4zV3rDMLHLMEBx6cRIPErnYXlg?=
+ =?us-ascii?Q?c4CsvBJXybYkb1E1/825OXruH/FzMQ4cMAUlIIdeQVCr0Xfus5ryhHHnyUFe?=
+ =?us-ascii?Q?AWS/LlRAgZzw+K4lStncHAgbZZkGZHWmlEfksgzxj1CIBAnAbYkVFReR8MUm?=
+ =?us-ascii?Q?nsL8cF1dF/dek2ZZD/ZWssdgCa0aK11QSp7Rb7OcEDA8lbODS9nLAXklS7ZQ?=
+ =?us-ascii?Q?Lq/PgSx+CP64Wrh7be9DLKrmL6I8XFL9l4PYlIZNEVWC97MPF5be+qSlHcYe?=
+ =?us-ascii?Q?qd5oUA3FYEEdPEr2GNTkd61L/pFetTe+30QUgx/1VE8KDtzIkRATtA/8a2pf?=
+ =?us-ascii?Q?LavFkUeg9kbXaNJkVk7cuqSG7j8PyH6c6H1QHO74HVUQiIiDG8RbAxE+SvTH?=
+ =?us-ascii?Q?PU1or48C+NGIQeEbyBNJe/1eT695FvQkC9akQER/4qaVFBp0KDkNVw5eSD/1?=
+ =?us-ascii?Q?cVxTZI5X33MLuFJtHQnIxLRWl+gUI1i2a51p8ViW4dgozEaFr6lzjYQUwvyD?=
+ =?us-ascii?Q?CEeUW+5JfiHkvGM8TGzRtRaWyyyKTn9aMxDYbYuQjI8zqkJyPP+Ty2rJpmGq?=
+ =?us-ascii?Q?CgZiThZld6nmy8VUDb92St39EOZTCXs2ha8aIsW7vYUjUjGjde9qabFjwIqA?=
+ =?us-ascii?Q?Bw0G7jwIzK9Eir3xBswY52skwAAYZjrDWk+2ohWEfKoEAkmnly1aeUhmbwlf?=
+ =?us-ascii?Q?ne1T641EDtQ5qRbnIvp3aOi9m9nDmZsWhSjwGAo7UZr9vpVjws1xlqMnrflP?=
+ =?us-ascii?Q?XIoK8rYcSokF3f1x/VTeKSFvTTQbebdXUI4cxo3yBwaEEv5IXdfhmjkIWDkl?=
+ =?us-ascii?Q?nlxvv4o6MqCpvitTrMK+f9aSIG/KMSlsFJiANdBKKAxpPqmUyh1jh8pIVy02?=
+ =?us-ascii?Q?693XgCtYNWPUhpolcD9QASGjsNMFqeh40PpUHG8t7mGQ0HIKvSoZqfeGrN3I?=
+ =?us-ascii?Q?whBREVUE9cIkOXLabfqE8IcgQMLoDkH6RGY49/0X/2F5d4tIUzJ2XgQ+bwBX?=
+ =?us-ascii?Q?oAmATNeRqWayRjbfCN6C9StzHqbQVAiEygYNvi2rFY86VMaH82dMmVuj+NXc?=
+ =?us-ascii?Q?/Phf1Bi0kUKuC15ttoF1sZnY5GFEtKY8Xlx8l9XnS/TWLZD+o5zsfg=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(82310400026)(36860700013)(13003099007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2025 19:52:03.6477
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d089a802-0984-4175-9a86-08dd996a1fed
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BY1PEPF0001AE17.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8511
 
-Add a new "port_mdb_active()" handler to the DSA API. This allows DSA
-drivers to receive the multicast active notification from the
-bridge. So that switch drivers can act on it accordingly, especially
-to avoid packetloss.
 
-The switchdev notifier "handled" attribute is propagated, too, so that a
-DSA based switch driver can decide whether it wants to act on the event
-for each port individually or only on the first one, on behalf of all
-others.
+This series adds the support for L3 Smart Data Cache Injection Allocation
+Enforcement (SDCIAE) to resctrl infrastructure. It is refered to as "io_alloc"
+in resctrl subsystem.
 
-Signed-off-by: Linus Lüssing <linus.luessing@c0d3.blue>
+Upcoming AMD hardware implements Smart Data Cache Injection (SDCI).
+Smart Data Cache Injection (SDCI) is a mechanism that enables direct
+insertion of data from I/O devices into the L3 cache. By directly caching
+data from I/O devices rather than first storing the I/O data in DRAM, SDCI
+reduces demands on DRAM bandwidth and reduces latency to the processor
+consuming the I/O data.
+
+The SDCIAE (SDCI Allocation Enforcement) PQE feature allows system software
+to control the portion of the L3 cache used for SDCI devices.
+
+When enabled, SDCIAE forces all SDCI lines to be placed into the L3 cache
+partitions identified by the highest-supported L3_MASK_n register, where n
+is the maximum supported CLOSID.
+
+The feature details are documented in the APM listed below [1].
+[1] AMD64 Architecture Programmer's Manual Volume 2: System Programming
+Publication # 24593 Revision 3.41 section 19.4.7 L3 Smart Data Cache
+Injection Allocation Enforcement (SDCIAE)
+Link: https://bugzilla.kernel.org/show_bug.cgi?id=206537
+
+The feature requires linux support of TPH (TLP Processing Hints).
+The support is available in linux kernel after the commit
+48d0fd2b903e3 ("PCI/TPH: Add TPH documentation")
+
+The patches are based on top of commit
+54d14f25664bbb (tip/x86/cache) ("MAINTAINERS: Add reviewers for fs/resctrl")
+
+# Linux Implementation
+
+Feature adds following interface files when the resctrl "io_alloc" feature is
+supported on L3 resource:
+
+/sys/fs/resctrl/info/L3/io_alloc: Report the feature status. Enable/disable the
+				  feature by writing to the interface.
+
+/sys/fs/resctrl/info/L3/io_alloc_cbm:  List the Capacity Bit Masks (CBMs) available
+				       for I/O devices when io_alloc feature is enabled.
+				       Configure the CBM by writing to the interface.
+
+When CDP is enabled, these files will be created both in L3CODE and L3DATA.
+
+# Examples:
+
+a. Check if io_alloc feature is available
+	#mount -t resctrl resctrl /sys/fs/resctrl/
+
+	# cat /sys/fs/resctrl/info/L3/io_alloc
+	disabled
+
+b. Enable the io_alloc feature. 
+
+	# echo 1 > /sys/fs/resctrl/info/L3/io_alloc 
+	# cat /sys/fs/resctrl/info/L3/io_alloc
+	enabled
+
+c. Check the CBM values for the io_alloc feature.
+
+	# cat /sys/fs/resctrl/info/L3/io_alloc_cbm 
+	L3:0=ffff;1=ffff
+
+d. Change the CBM value for the domain 1:
+	# echo L3:1=FF > /sys/fs/resctrl/info/L3/io_alloc_cbm
+
+	# cat /sys/fs/resctrl/info/L3/io_alloc_cbm 
+	L3:0=ffff;1=00ff
+
+d. Disable io_alloc feature and exit.
+
+	# echo 0 > /sys/fs/resctrl/info/L3/io_alloc 
+	# cat /sys/fs/resctrl/info/L3/io_alloc
+	disabled
+
+	#umount /sys/fs/resctrl/
+
 ---
- Documentation/networking/dsa/dsa.rst |  9 +++++++++
- include/net/dsa.h                    |  5 +++++
- net/dsa/port.c                       | 19 +++++++++++++++++++
- net/dsa/port.h                       |  3 +++
- net/dsa/switch.c                     | 13 +++++++++++++
- net/dsa/switch.h                     | 11 ++++++++++-
- net/dsa/user.c                       | 21 ++++++++++++++++++++-
- 7 files changed, 79 insertions(+), 2 deletions(-)
+v5: 
+    Patches are created on top of recent resctrl FS/ARCH code restructure.
+    The files monitor.c/rdtgroup.c have been split between FS and ARCH directories.
+    Resolved the conflict due to the merge.
 
-diff --git a/Documentation/networking/dsa/dsa.rst b/Documentation/networking/dsa/dsa.rst
-index 7b2e69cd7ef0..0b0be619be04 100644
---- a/Documentation/networking/dsa/dsa.rst
-+++ b/Documentation/networking/dsa/dsa.rst
-@@ -1025,6 +1025,15 @@ Bridge VLAN filtering
-   the specified MAC address from the specified VLAN ID if it was mapped into
-   this port forwarding database.
+    Updated bit_usage to reflect the io_alloc CBM as discussed in the thread:
+    https://lore.kernel.org/lkml/3ca0a5dc-ad9c-4767-9011-b79d986e1e8d@intel.com/
+    Modified rdt_bit_usage_show() to read io_alloc_cbm in hw_shareable, ensuring
+    that bit_usage accurately represents the CBMs.
+
+    Moved prototypes of resctrl_arch_io_alloc_enable() and
+    resctrl_arch_get_io_alloc_enabled() to include/linux/resctrl.h.
+
+    Used rdt_kn_name to get the rdtgroup name instead of accesssing it directly
+    while printing group name used by the io_alloc_closid.
+
+    Updated show_doms() to print the resource if only it is valid. Pass NULL while
+    printing io_alloc CBM.
+
+    Changed the code to access io_alloc CBMs via either L3CODE or L3DATA resources.
+
+v4: The "io_alloc" interface will report "enabled/disabled/not supported"
+    instead of 0 or 1..
+
+    Updated resctrl_io_alloc_closid_get() to verify the max closid availability
+    using closids_supported().
+
+    Updated the documentation for "shareable_bits" and "bit_usage".
+
+    NOTE: io_alloc is about specific CLOS. rdt_bit_usage_show() is not designed
+    handle bit_usage for specific CLOS. Its about overall system. So, we cannot
+    really tell the user which CLOS is shared across both hardware and software.
+    This is something we need to discuss.
+
+    Introduced io_alloc_init() to initialize fflags.
+
+    Printed the group name when io_alloc enablement fails to help user.
+    
+    Added rdtgroup_mutex before rdt_last_cmd_puts() in resctrl_io_alloc_cbm_show().
+    Returned -ENODEV when resource type is CDP_DATA.
+
+    Kept the resource name while printing the CBM (L3:0=ffff) that way we dont have
+    to change show_doms() just for this feature and it is consistant across all the
+    schemata display.
+
+    Added new patch to call parse_cbm() directly to avoid code duplication.
+
+    Checked all the series(v1-v3) again to verify if I missed any comment.
+
+v3: Rewrote commit log for the last 3 patches. Changed the text to bit
+    more generic than the AMD specific feature. Added AMD feature
+    specifics in the end.
+
+    Renamed the rdt_get_sdciae_alloc_cfg() to rdt_set_io_alloc_capable().
+    Renamed the _resctrl_io_alloc_enable() to _resctrl_sdciae_enable()
+    as it is arch specific.
+
+    Changed the return to void in _resctrl_sdciae_enable() instead of int.
  
-+- ``port_mdb_active``: bridge layer function invoked when the bridge starts (or
-+  stops) to actively apply multicast snooping to multicast payload, i.e. when
-+  multicast snooping is enabled and a multicast querier is present on the link
-+  for a particular protocol family (or not). A switch should (by default) ensure:
-+  To flood multicast packets for the given protocol family if multicast snooping
-+  is inactive - to avoid multicast (and consequently also IPv6 unicast, which
-+  depends on multicast for NDP) packet loss. And should (by default) avoid
-+  forwarding to an active port if there is no listener or multicast router on it.
-+
- Link aggregation
- ----------------
- 
-diff --git a/include/net/dsa.h b/include/net/dsa.h
-index a0a9481c52c2..edc0e6821ba2 100644
---- a/include/net/dsa.h
-+++ b/include/net/dsa.h
-@@ -1080,6 +1080,11 @@ struct dsa_switch_ops {
- 	int	(*port_mdb_del)(struct dsa_switch *ds, int port,
- 				const struct switchdev_obj_port_mdb *mdb,
- 				struct dsa_db db);
-+	int	(*port_mdb_active)(struct dsa_switch *ds, int port,
-+				   const struct switchdev_mc_active mc_active,
-+				   struct netlink_ext_ack *extack,
-+				   bool handled);
-+
- 	/*
- 	 * RXNFC
- 	 */
-diff --git a/net/dsa/port.c b/net/dsa/port.c
-index 5c9d1798e830..a1e692d9122e 100644
---- a/net/dsa/port.c
-+++ b/net/dsa/port.c
-@@ -1290,6 +1290,25 @@ int dsa_port_bridge_host_mdb_del(const struct dsa_port *dp,
- 	return dsa_port_host_mdb_del(dp, mdb, db);
- }
- 
-+int dsa_port_bridge_mdb_active(const struct dsa_port *dp,
-+			       const struct switchdev_mc_active mc_active,
-+			       struct netlink_ext_ack *extack,
-+			       bool handled)
-+{
-+	struct dsa_switch *ds = dp->ds;
-+	struct dsa_notifier_mdb_active_info info = {
-+		.dp = dp,
-+		.mc_active = mc_active,
-+		.extack = extack,
-+		.handled = handled,
-+	};
-+
-+	if (!ds->ops->port_mdb_active)
-+		return -EOPNOTSUPP;
-+
-+	return dsa_port_notify(dp, DSA_NOTIFIER_MDB_ACTIVE, &info);
-+}
-+
- int dsa_port_vlan_add(struct dsa_port *dp,
- 		      const struct switchdev_obj_port_vlan *vlan,
- 		      struct netlink_ext_ack *extack)
-diff --git a/net/dsa/port.h b/net/dsa/port.h
-index 6bc3291573c0..0e92815e7de2 100644
---- a/net/dsa/port.h
-+++ b/net/dsa/port.h
-@@ -75,6 +75,9 @@ int dsa_port_bridge_host_mdb_add(const struct dsa_port *dp,
- 				 const struct switchdev_obj_port_mdb *mdb);
- int dsa_port_bridge_host_mdb_del(const struct dsa_port *dp,
- 				 const struct switchdev_obj_port_mdb *mdb);
-+int dsa_port_bridge_mdb_active(const struct dsa_port *dp,
-+			       const struct switchdev_mc_active mc_active,
-+			       struct netlink_ext_ack *extack, bool handled);
- int dsa_port_pre_bridge_flags(const struct dsa_port *dp,
- 			      struct switchdev_brport_flags flags,
- 			      struct netlink_ext_ack *extack);
-diff --git a/net/dsa/switch.c b/net/dsa/switch.c
-index 3d2feeea897b..5b30dfe4bebd 100644
---- a/net/dsa/switch.c
-+++ b/net/dsa/switch.c
-@@ -652,6 +652,16 @@ static int dsa_switch_host_mdb_del(struct dsa_switch *ds,
- 	return err;
- }
- 
-+static int dsa_switch_mdb_active(struct dsa_switch *ds,
-+				 struct dsa_notifier_mdb_active_info *info)
-+{
-+	if (!ds->ops->port_mdb_active)
-+		return -EOPNOTSUPP;
-+
-+	return ds->ops->port_mdb_active(ds, info->dp->index, info->mc_active,
-+					info->extack, info->handled);
-+}
-+
- /* Port VLANs match on the targeted port and on all DSA ports */
- static bool dsa_port_vlan_match(struct dsa_port *dp,
- 				struct dsa_notifier_vlan_info *info)
-@@ -1026,6 +1036,9 @@ static int dsa_switch_event(struct notifier_block *nb,
- 	case DSA_NOTIFIER_HOST_MDB_DEL:
- 		err = dsa_switch_host_mdb_del(ds, info);
- 		break;
-+	case DSA_NOTIFIER_MDB_ACTIVE:
-+		err = dsa_switch_mdb_active(ds, info);
-+		break;
- 	case DSA_NOTIFIER_VLAN_ADD:
- 		err = dsa_switch_vlan_add(ds, info);
- 		break;
-diff --git a/net/dsa/switch.h b/net/dsa/switch.h
-index be0a2749cd97..69a5004e48c8 100644
---- a/net/dsa/switch.h
-+++ b/net/dsa/switch.h
-@@ -24,6 +24,7 @@ enum {
- 	DSA_NOTIFIER_MDB_DEL,
- 	DSA_NOTIFIER_HOST_MDB_ADD,
- 	DSA_NOTIFIER_HOST_MDB_DEL,
-+	DSA_NOTIFIER_MDB_ACTIVE,
- 	DSA_NOTIFIER_VLAN_ADD,
- 	DSA_NOTIFIER_VLAN_DEL,
- 	DSA_NOTIFIER_HOST_VLAN_ADD,
-@@ -66,13 +67,21 @@ struct dsa_notifier_lag_fdb_info {
- 	struct dsa_db db;
- };
- 
--/* DSA_NOTIFIER_MDB_* */
-+/* DSA_NOTIFIER_MDB_{ADD,DEL} */
- struct dsa_notifier_mdb_info {
- 	const struct dsa_port *dp;
- 	const struct switchdev_obj_port_mdb *mdb;
- 	struct dsa_db db;
- };
- 
-+/* DSA_NOTIFIER_MDB_ACTIVE */
-+struct dsa_notifier_mdb_active_info {
-+	const struct dsa_port *dp;
-+	const struct switchdev_mc_active mc_active;
-+	struct netlink_ext_ack *extack;
-+	int handled;
-+};
-+
- /* DSA_NOTIFIER_LAG_* */
- struct dsa_notifier_lag_info {
- 	const struct dsa_port *dp;
-diff --git a/net/dsa/user.c b/net/dsa/user.c
-index 804dc7dac4f2..231b92d6e7b9 100644
---- a/net/dsa/user.c
-+++ b/net/dsa/user.c
-@@ -603,7 +603,7 @@ static int dsa_user_port_attr_set(struct net_device *dev, const void *ctx,
- 	struct dsa_port *dp = dsa_user_to_port(dev);
- 	int ret;
- 
--	if (ctx && ctx != dp)
-+	if (ctx && ctx != dp && attr->id != SWITCHDEV_ATTR_ID_BRIDGE_MC_ACTIVE)
- 		return 0;
- 
- 	switch (attr->id) {
-@@ -657,6 +657,15 @@ static int dsa_user_port_attr_set(struct net_device *dev, const void *ctx,
- 
- 		ret = dsa_port_vlan_msti(dp, &attr->u.vlan_msti);
- 		break;
-+	case SWITCHDEV_ATTR_ID_BRIDGE_MC_ACTIVE:
-+		const bool *handled = ctx;
-+
-+		if (!dsa_port_offloads_bridge_dev(dp, attr->orig_dev))
-+			return -EOPNOTSUPP;
-+
-+		ret = dsa_port_bridge_mdb_active(dp, attr->u.mc_active, extack,
-+						 *handled);
-+		break;
- 	default:
- 		ret = -EOPNOTSUPP;
- 		break;
-@@ -3758,6 +3767,11 @@ static int dsa_user_switchdev_event(struct notifier_block *unused,
- 
- 	switch (event) {
- 	case SWITCHDEV_PORT_ATTR_SET:
-+		struct switchdev_notifier_port_attr_info *item = ptr;
-+
-+		if (item && item->attr->id == SWITCHDEV_ATTR_ID_BRIDGE_MC_ACTIVE)
-+			item->info.ctx = &item->handled;
-+
- 		err = switchdev_handle_port_attr_set(dev, ptr,
- 						     dsa_user_dev_check,
- 						     dsa_user_port_attr_set);
-@@ -3796,6 +3810,11 @@ static int dsa_user_switchdev_blocking_event(struct notifier_block *unused,
- 							    dsa_user_port_obj_del);
- 		return notifier_from_errno(err);
- 	case SWITCHDEV_PORT_ATTR_SET:
-+		struct switchdev_notifier_port_attr_info *item = ptr;
-+
-+		if (item && item->attr->id == SWITCHDEV_ATTR_ID_BRIDGE_MC_ACTIVE)
-+			item->info.ctx = &item->handled;
-+
- 		err = switchdev_handle_port_attr_set(dev, ptr,
- 						     dsa_user_dev_check,
- 						     dsa_user_port_attr_set);
+    The number of CLOSIDs is determined based on the minimum supported
+    across all resources (in closid_init). It needs to match the max
+    supported on the resource. Added the check to verify if MAX CLOSID
+    availability on the system.
+
+    Added CDP check to make sure io_alloc is configured in CDP_CODE.
+    Highest CLOSID corresponds to CDP_CODE. 
+
+    Added resctrl_io_alloc_closid_free() to free the io_alloc CLOSID.
+
+    Added errors in few cases when CLOSID allocation fails.
+    Fixes splat reported when info/L3/bit_usage is accesed when io_alloc is enabled.
+    https://lore.kernel.org/lkml/SJ1PR11MB60837B532254E7B23BC27E84FC052@SJ1PR11MB6083.namprd11.prod.outlook.com/
+
+v2: Added dependancy on X86_FEATURE_CAT_L3
+    Removed the "" in CPU feature definition.
+
+    Changed sdciae_capable to io_alloc_capable to make it as generic feature.
+    Moved io_alloc_capable field in struct resctrl_cache.
+
+    Changed the name of few arch functions similar to ABMC series.
+    resctrl_arch_get_io_alloc_enabled()
+    resctrl_arch_io_alloc_enable()
+
+    Renamed the feature to "io_alloc".
+    Added generic texts for the feature in commit log and resctrl.rst doc.
+    Added resctrl_io_alloc_init_cat() to initialize io_alloc to default values
+    when enabled.
+    Fixed io_alloc interface to show only on L3 resource.
+    Added the locks while processing io_alloc CBMs.
+
+Previous versions:
+v4: https://lore.kernel.org/lkml/cover.1745275431.git.babu.moger@amd.com/
+v3: https://lore.kernel.org/lkml/cover.1738272037.git.babu.moger@amd.com/
+v2: https://lore.kernel.org/lkml/cover.1734556832.git.babu.moger@amd.com/
+v1: https://lore.kernel.org/lkml/cover.1723824984.git.babu.moger@amd.com/
+
+
+Babu Moger (8):
+  x86/cpufeatures: Add support for L3 Smart Data Cache Injection
+    Allocation Enforcement
+  x86/resctrl: Add SDCIAE feature in the command line options
+  x86/resctrl: Detect io_alloc feature
+  x86/resctrl: Implement "io_alloc" enable/disable handlers
+  x86/resctrl: Add user interface to enable/disable io_alloc feature
+  x86/resctrl: Introduce interface to display io_alloc CBMs
+  x86/resctrl: Modify rdt_parse_data to pass mode and CLOSID
+  x86/resctrl: Introduce interface to modify io_alloc Capacity Bit Masks
+
+ .../admin-guide/kernel-parameters.txt         |   2 +-
+ Documentation/filesystems/resctrl.rst         |  57 +++
+ arch/x86/include/asm/cpufeatures.h            |   1 +
+ arch/x86/include/asm/msr-index.h              |   1 +
+ arch/x86/kernel/cpu/cpuid-deps.c              |   1 +
+ arch/x86/kernel/cpu/resctrl/core.c            |   9 +
+ arch/x86/kernel/cpu/resctrl/internal.h        |   5 +
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c        |  37 ++
+ arch/x86/kernel/cpu/scattered.c               |   1 +
+ fs/resctrl/ctrlmondata.c                      |  41 +-
+ fs/resctrl/internal.h                         |  10 +
+ fs/resctrl/rdtgroup.c                         | 350 +++++++++++++++++-
+ include/linux/resctrl.h                       |  18 +
+ 13 files changed, 510 insertions(+), 23 deletions(-)
+
 -- 
-2.49.0
+2.34.1
 
 
