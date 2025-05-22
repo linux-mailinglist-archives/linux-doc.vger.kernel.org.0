@@ -1,204 +1,129 @@
-Return-Path: <linux-doc+bounces-47183-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47186-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 152CCAC154B
-	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 22:07:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7D02AC157E
+	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 22:29:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 735BA1C001E8
-	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 20:07:46 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 47DF91BC66C5
+	for <lists+linux-doc@lfdr.de>; Thu, 22 May 2025 20:29:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 019AC2BF3E7;
-	Thu, 22 May 2025 20:07:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEA35225A47;
+	Thu, 22 May 2025 20:28:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="P1itoifv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.aperture-lab.de (mail.aperture-lab.de [116.203.183.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0194E205ABA;
-	Thu, 22 May 2025 20:07:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=116.203.183.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22FAC225A39;
+	Thu, 22 May 2025 20:28:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1747944432; cv=none; b=TlHqrTWWKcpACAJaBu53SIjDVbJkOiEEz8ieUNZZSI+j09S9ffaDQFIwWlVlwE0rkegcWujtzwftaum7fNXRjY+DpKhOLTmPQpk67wUfLV/ILS0Js/cd+Q2PLjliA3vZrSeT0QkauVsq8UnwJ2VTzRQksLcdIrPiWF8a1g6FYJ8=
+	t=1747945739; cv=none; b=EHaDDGmLXF3BraIIpTYQTb0lde4eHCkFG1DoCr2wO1G1WxCbr8HeYgLilaiocuSa+Q08RhDTYZhpbF/3G8ZngVXYReJwtztaZw44eQjDX7/tDlGzIHK+wd4Pmmk9Abb1/sQIAT9wGxQ0QC85wMUDfcrGrp9601BMwVHlH6Ve+xw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1747944432; c=relaxed/simple;
-	bh=MfyhvWwk+ZdZvfOBo/EVjnY5vkPIZsIGtuQ8bygKPT4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=jQxxOcY5hL2aNe3Xy6etvslHXtPp1+zzTxpC6eTNswkgC4cIFJ2rX01FTa9Z0aXAUeY96I1PnfdcNRUomwEJHY6YL1kz3y7rOPrDJdfsv3bc9Lwfd4MvkUAPGU2FMYfxWqL0cyCHQBjLw/EHPHDahvRfZY6SuvrZo3t+nggKGHo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=c0d3.blue; spf=pass smtp.mailfrom=c0d3.blue; arc=none smtp.client-ip=116.203.183.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=c0d3.blue
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=c0d3.blue
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id EC8D054E731;
-	Thu, 22 May 2025 22:00:14 +0200 (CEST)
-From: =?UTF-8?q?Linus=20L=C3=BCssing?= <linus.luessing@c0d3.blue>
-To: bridge@lists.linux.dev
-Cc: netdev@vger.kernel.org,
-	openwrt-devel@lists.openwrt.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Nikolay Aleksandrov <razor@blackwall.org>,
-	Ido Schimmel <idosch@nvidia.com>,
-	Ivan Vecera <ivecera@redhat.com>,
-	Jiri Pirko <jiri@resnulli.us>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Andrew Lunn <andrew@lunn.ch>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Simon Horman <horms@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Eric Dumazet <edumazet@google.com>,
-	"David S . Miller" <davem@davemloft.net>,
-	Kuniyuki Iwashima <kuniyu@amazon.com>,
-	Stanislav Fomichev <sdf@fomichev.me>,
-	Xiao Liang <shaw.leon@gmail.com>,
-	Markus Stockhausen <markus.stockhausen@gmx.de>,
-	Jan Hoffmann <jan.christian.hoffmann@gmail.com>,
-	Birger Koblitz <git@birger-koblitz.de>,
-	=?UTF-8?q?Bj=C3=B8rn=20Mork?= <bjorn@mork.no>,
-	=?UTF-8?q?Linus=20L=C3=BCssing?= <linus.luessing@c0d3.blue>
-Subject: [PATCH net-next 4/5] net: bridge: switchdev: notify on mcast active changes
-Date: Thu, 22 May 2025 21:17:06 +0200
-Message-ID: <20250522195952.29265-5-linus.luessing@c0d3.blue>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250522195952.29265-1-linus.luessing@c0d3.blue>
-References: <20250522195952.29265-1-linus.luessing@c0d3.blue>
+	s=arc-20240116; t=1747945739; c=relaxed/simple;
+	bh=VLwqccF3GacXPqmCa4fi/o1S7fT0MPgvB9rZGQt0fq8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BP7MH6wTt1hEwE69ISPVm6eLidxQo/XVLMzqWIuCe2SeQsI6pdNiB67ogk+2vMtGIk0PrHkn9saQ5NUWoLadGQr7Bwz4JfIE+pcEsjzsZ9WjLkzazYddlkvZyCtZQ0HdjSxwlqc/EyJ0L22gMjpPrW40WJEc+stcVuX+3RU2HgI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=P1itoifv; arc=none smtp.client-ip=198.175.65.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1747945738; x=1779481738;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=VLwqccF3GacXPqmCa4fi/o1S7fT0MPgvB9rZGQt0fq8=;
+  b=P1itoifvFpBxzVNJNsHJyN9pjcuJ4R1oE977lm3hJ39ZDYf1dQzoLeuN
+   LILJaHIVVl5G4YBS78B9P9TGLIKqOIweyysxdmZW7wHHckfsil7/j2egD
+   F/Sarm5W0mkXIZGSPzP5rsr73k2tBe/a05P4/kO/BXwqCD+0GTGWq+JRY
+   K7lJosoHOeEvvHM+xN7z7ZE/ReFs6HwSqKSAG93sU1mNISw3w+qpYH0Jq
+   7HDxMw2WWSGu+pUxDUPgUp5z7KIbiLSOpLFRI6Ccn7u+1yje31e1yBnWH
+   YKvOuzrJQu+u7mg6mr5hygDZAQkYzCi22QbJw2SEGDoLPu6cs+fT9QgTY
+   w==;
+X-CSE-ConnectionGUID: 29mWE1RxSKiK/8cIyZlpWQ==
+X-CSE-MsgGUID: cCerQWQVSyOM1reA1AgGSw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11441"; a="49889507"
+X-IronPort-AV: E=Sophos;i="6.15,306,1739865600"; 
+   d="scan'208";a="49889507"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 May 2025 13:28:52 -0700
+X-CSE-ConnectionGUID: ZnFhAPCxRcmvr3grGpZ5tg==
+X-CSE-MsgGUID: z5P9K3n2QLiWzdpTn/W2kg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,306,1739865600"; 
+   d="scan'208";a="177903237"
+Received: from agluck-desk3.sc.intel.com (HELO agluck-desk3) ([172.25.103.51])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 May 2025 13:28:51 -0700
+Date: Thu, 22 May 2025 13:28:49 -0700
+From: "Luck, Tony" <tony.luck@intel.com>
+To: Babu Moger <babu.moger@amd.com>
+Cc: corbet@lwn.net, reinette.chatre@intel.com, Dave.Martin@arm.com,
+	james.morse@arm.com, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
+	hpa@zytor.com, akpm@linux-foundation.org, rostedt@goodmis.org,
+	paulmck@kernel.org, thuth@redhat.com, ardb@kernel.org,
+	gregkh@linuxfoundation.org, thomas.lendacky@amd.com,
+	seanjc@google.com, mario.limonciello@amd.com, perry.yuan@amd.com,
+	kai.huang@intel.com, xiaoyao.li@intel.com, nikunj@amd.com,
+	kan.liang@linux.intel.com, xin3.li@intel.com,
+	andrew.cooper3@citrix.com, ebiggers@google.com, xin@zytor.com,
+	sohil.mehta@intel.com, Xiaojian.Du@amd.com, gautham.shenoy@amd.com,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 5/8] x86/resctrl: Add user interface to enable/disable
+ io_alloc feature
+Message-ID: <aC-JAdEYyhshVIQA@agluck-desk3>
+References: <cover.1747943499.git.babu.moger@amd.com>
+ <3946e8cfd3ce77028cdcf79a1ff5d5f70a714698.1747943499.git.babu.moger@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3946e8cfd3ce77028cdcf79a1ff5d5f70a714698.1747943499.git.babu.moger@amd.com>
 
-Let the bridge notify switchdev if the multicast
-active state toggles. So that switch drivers can act on it
-accordingly, especially to avoid packetloss.
+On Thu, May 22, 2025 at 02:51:36PM -0500, Babu Moger wrote:
+>  
+> +/*
+> + * resctrl_io_alloc_closid_get - io_alloc feature uses max CLOSID to route
+> + * the IO traffic. Get the max CLOSID and verify if the CLOSID is available.
+> + *
+> + * The total number of CLOSIDs is determined in closid_init(),  based on the
+> + * minimum supported across all resources. If CDP (Code Data Prioritization)
+> + * is enabled, the number of CLOSIDs is halved. The final value is returned
+> + * by closids_supported(). Make sure this value aligns with the maximum
+> + * CLOSID supported by the respective resource.
+> + */
+> +static int resctrl_io_alloc_closid_get(struct rdt_resource *r)
+> +{
+> +	int num_closids = closids_supported();
+> +
+> +	if (resctrl_arch_get_cdp_enabled(r->rid))
+> +		num_closids *= 2;
+> +
+> +	if (num_closids != resctrl_arch_get_num_closid(r))
+> +		return -ENOSPC;
+> +
+> +	return closids_supported() - 1;
+> +}
 
-Signed-off-by: Linus Lüssing <linus.luessing@c0d3.blue>
----
- Documentation/networking/switchdev.rst |  8 +++----
- include/net/switchdev.h                | 10 ++++++++
- net/bridge/br_multicast.c              | 33 ++++++++++++++++++++++++++
- 3 files changed, 47 insertions(+), 4 deletions(-)
+Is using closids_supported() the right thing here? That's
+the minimum value across all resources. So suppose you had
+16 CLOS for the L3 resource, but only 8 CLOS in one of L2/MB/SMBA.
 
-diff --git a/Documentation/networking/switchdev.rst b/Documentation/networking/switchdev.rst
-index 2966b7122f05..130f7a36fc73 100644
---- a/Documentation/networking/switchdev.rst
-+++ b/Documentation/networking/switchdev.rst
-@@ -558,7 +558,7 @@ Because IGMP snooping can be turned on/off at runtime, the switchdev driver
- must be able to reconfigure the underlying hardware on the fly to honor the
- toggling of that option and behave appropriately.
- 
--A switchdev driver can also refuse to support dynamic toggling of the multicast
--snooping knob at runtime and require the destruction of the bridge device(s)
--and creation of a new bridge device(s) with a different multicast snooping
--value.
-+A switchdev driver must also be able to react to vanishing or appearing
-+IGMP/MLD queriers. If no querier is present then, even if IGMP/MLD snooping
-+is enabled, the switch must treat this as if IGMP/MLD snooping were disabled.
-+The SWITCHDEV_ATTR_ID_BRIDGE_MC_ACTIVE notification allows to track this.
-diff --git a/include/net/switchdev.h b/include/net/switchdev.h
-index 8346b0d29542..abcc34a81e00 100644
---- a/include/net/switchdev.h
-+++ b/include/net/switchdev.h
-@@ -27,6 +27,7 @@ enum switchdev_attr_id {
- 	SWITCHDEV_ATTR_ID_BRIDGE_VLAN_FILTERING,
- 	SWITCHDEV_ATTR_ID_BRIDGE_VLAN_PROTOCOL,
- 	SWITCHDEV_ATTR_ID_BRIDGE_MC_DISABLED,
-+	SWITCHDEV_ATTR_ID_BRIDGE_MC_ACTIVE,
- 	SWITCHDEV_ATTR_ID_BRIDGE_MROUTER,
- 	SWITCHDEV_ATTR_ID_BRIDGE_MST,
- 	SWITCHDEV_ATTR_ID_MRP_PORT_ROLE,
-@@ -43,6 +44,14 @@ struct switchdev_brport_flags {
- 	unsigned long mask;
- };
- 
-+struct switchdev_mc_active {
-+	short vid;
-+	u8 ip4:1,
-+	   ip6:1,
-+	   ip4_changed:1,
-+	   ip6_changed:1;
-+};
-+
- struct switchdev_vlan_msti {
- 	u16 vid;
- 	u16 msti;
-@@ -64,6 +73,7 @@ struct switchdev_attr {
- 		u16 vlan_protocol;			/* BRIDGE_VLAN_PROTOCOL */
- 		bool mst;				/* BRIDGE_MST */
- 		bool mc_disabled;			/* MC_DISABLED */
-+		struct switchdev_mc_active mc_active;	/* MC_ACTIVE */
- 		u8 mrp_port_role;			/* MRP_PORT_ROLE */
- 		struct switchdev_vlan_msti vlan_msti;	/* VLAN_MSTI */
- 	} u;
-diff --git a/net/bridge/br_multicast.c b/net/bridge/br_multicast.c
-index 0bbaa21c1479..aec106f9c17d 100644
---- a/net/bridge/br_multicast.c
-+++ b/net/bridge/br_multicast.c
-@@ -1138,6 +1138,27 @@ static int br_ip6_multicast_check_active(struct net_bridge_mcast *brmctx,
- #endif
- }
- 
-+static int br_multicast_notify_active(struct net_bridge_mcast *brmctx,
-+				      bool ip4_active, bool ip6_active,
-+				      bool ip4_changed, bool ip6_changed,
-+				      struct netlink_ext_ack *extack)
-+{
-+	struct switchdev_attr attr = {
-+		.orig_dev = brmctx->br->dev,
-+		.id = SWITCHDEV_ATTR_ID_BRIDGE_MC_ACTIVE,
-+		.flags = SWITCHDEV_F_DEFER,
-+		.u.mc_active = {
-+			.vid = brmctx->vlan ? brmctx->vlan->vid : -1,
-+			.ip4 = ip4_active,
-+			.ip6 = ip6_active,
-+			.ip4_changed = ip4_changed,
-+			.ip6_changed = ip6_changed,
-+		},
-+	};
-+
-+	return switchdev_port_attr_set(brmctx->br->dev, &attr, extack);
-+}
-+
- /**
-  * __br_multicast_update_active() - update mcast active state
-  * @brmctx: the bridge multicast context to check
-@@ -1159,6 +1180,8 @@ static int br_ip6_multicast_check_active(struct net_bridge_mcast *brmctx,
-  * This function should be called by anything that changes one of the
-  * above prerequisites.
-  *
-+ * Any multicast active state toggling is further notified to switchdev.
-+ *
-  * Return: 0 on success, a negative value otherwise.
-  */
- static int __br_multicast_update_active(struct net_bridge_mcast *brmctx,
-@@ -1182,11 +1205,21 @@ static int __br_multicast_update_active(struct net_bridge_mcast *brmctx,
- 	ip4_changed = br_ip4_multicast_check_active(brmctx, &ip4_active);
- 	ip6_changed = br_ip6_multicast_check_active(brmctx, &ip6_active);
- 
-+	if (!ip4_changed && !ip6_changed)
-+		goto out;
-+
-+	ret = br_multicast_notify_active(brmctx, ip4_active, ip6_active,
-+					 ip4_changed, ip6_changed,
-+					 extack);
-+	if (ret && ret != -EOPNOTSUPP)
-+		goto out;
-+
- 	if (ip4_changed)
- 		brmctx->ip4_active = ip4_active;
- 	if (ip6_changed)
- 		brmctx->ip6_active = ip6_active;
- 
-+out:
- 	return ret;
- }
- 
--- 
-2.49.0
+I'd assume the your h/w doesn't care that Linux chose to
+ignore half of the available L3 CLOSIDs, and is still going
+to use CLOSID==15 for SDCIA.
 
+I think you'll take the -ENOSPC error return. But do you
+really need to do that? Maybe you can still have SDCIA
+enabled and using CLOSID 15?
+
+-Tony
 
