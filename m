@@ -1,171 +1,204 @@
-Return-Path: <linux-doc+bounces-47595-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47590-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2979FAC4B0E
-	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 11:06:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6885AC4ABE
+	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 10:54:12 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 882367A528E
-	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 09:04:50 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A49797A2B47
+	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 08:52:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 352F024C07D;
-	Tue, 27 May 2025 09:06:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F13923FC42;
+	Tue, 27 May 2025 08:54:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="DiReI8th"
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="kUS6EvQK";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="77nFOA09";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="kUS6EvQK";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="77nFOA09"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 908C5225D7;
-	Tue, 27 May 2025 09:06:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52ED82494C2
+	for <linux-doc@vger.kernel.org>; Tue, 27 May 2025 08:54:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748336762; cv=none; b=mS/IO8CRzDdRCrzMfoVxt4IB1CSOb5Jkzz+1NJR0fCStJZmTz3CEkTXYgmI1TylF8jATwqkqOIrqHMMEQkLHMyuSIaEqxFCeedmpdvHK1P3J+8AldmfAr0ivLEieGpiVwC0vTTzjdxaT1LlQ03j2TddwJxoKXOoa0vc7R+m5TIg=
+	t=1748336045; cv=none; b=lHWwI8xFFBTpkve9ZSJYLr293nFPvBP26UyghVlR/h+Mk4Q1bTKJonWyI6ZfJpS6fPv6cigpKXQi4nG+bvkLfw9tWyt22PC9EuxS6LAVZVrZSxCAxBvAh/3wFY36afR2bwSXpFu2DpzAbf1P5WSFo3ISjMEtJO1ZmBt73YXSPG8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748336762; c=relaxed/simple;
-	bh=FAJqpmb+BoZ0AVDf80FVLHbg+9NVumyxtrdo2DmNzdE=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=afal+2+7j85o+8lw1JgKPWPEM52+e2b1CDibL8byMabrWdl/ziKXc2sAy7cxjcOPgmJ/RKJWET91zy0KUY+Gh0VO/WW9pZjClbcHusiotTyE7ZWcCFLx0LG/dJXfPXSA+2p2WufOVEGNPKDvHH5PSPxKSkTXdzROIkIzNXgMZIs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=DiReI8th; arc=none smtp.client-ip=148.163.156.1
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54QNbpQa007658;
-	Tue, 27 May 2025 09:05:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=pp1; bh=kKsxNrrRq+ObuNzyEdrrMJwLMVpQZb+We6ceTAbpB
-	RE=; b=DiReI8thcZFJ8udBC/aooI/f6lbe+NnXRIj4YEXe2IXbOnINbWclU3jHr
-	Yvood8t4HjVD84IJf5PulW19NDW5uMCESziz5M184yKgY+od9hoU951MDFtnxI4/
-	baSThkMZPDdtdflNhH3OA9xKQHh6GttkicpQmYWJfSfMQmgrkAmBbI8yqJVhkEVn
-	RvSDVVvK73mSf/qozxpHM17Ha89Khga7eWCLFheob/5acW50eARwahZqZP5AIMHs
-	ws+//BwP8VpYpV304R64C7Yxf3lWzlG8v68aCKoLLgzUYudIg6FawHdPDK2nzKa5
-	BHaG0fp8Fc8Bw9xu1ZTewa1YVYZoA==
-Received: from ppma12.dal12v.mail.ibm.com (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 46u5ucn9w7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 27 May 2025 09:05:55 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
-	by ppma12.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 54R7DHYr016700;
-	Tue, 27 May 2025 09:05:54 GMT
-Received: from smtprelay04.fra02v.mail.ibm.com ([9.218.2.228])
-	by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 46ureua4tt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 27 May 2025 09:05:54 +0000
-Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com [10.20.54.104])
-	by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 54R95rci28508770
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 27 May 2025 09:05:53 GMT
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E139420043;
-	Tue, 27 May 2025 09:05:52 +0000 (GMT)
-Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3FEAF20040;
-	Tue, 27 May 2025 09:05:51 +0000 (GMT)
-Received: from vishalc-ibm.in.ibm.com (unknown [9.109.245.223])
-	by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Tue, 27 May 2025 09:05:51 +0000 (GMT)
-From: Vishal Chourasia <vishalc@linux.ibm.com>
-To: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
-        =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>, cgroups@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: Vishal Chourasia <vishalc@linux.ibm.com>
-Subject: [PATCH] Documentation: cgroup: clarify controller enabling semantics
-Date: Tue, 27 May 2025 14:23:36 +0530
-Message-ID: <20250527085335.256045-2-vishalc@linux.ibm.com>
-X-Mailer: git-send-email 2.49.0
+	s=arc-20240116; t=1748336045; c=relaxed/simple;
+	bh=XF5VzNvpeKGlQPwfHqmEm5o0Bq1rCBURjliIbksP/e8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=OFQeNQXYn7jzCO7W/v7x9tSAqBDkwD9f/ISYDwSLgwxiqZV+bTaWUiENMznpy9Jvc+mb6wcCPpxyXqy+O4QuBfhfsMxOEzABKL8OYgZ5gIucN429VaGJJuTRCx/rG7iLl2DjWejpl2rC9Hp0RUpHT4ZG9lLsyhVPFago6MkSf74=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=kUS6EvQK; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=77nFOA09; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=kUS6EvQK; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=77nFOA09; arc=none smtp.client-ip=195.135.223.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 49B8421A21;
+	Tue, 27 May 2025 08:54:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1748336041; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1uFQ6WQesoTLzcyfD02l0QPHNSPhDb59xUd8IZZfyQM=;
+	b=kUS6EvQK08gjvUAwJMu9nzib34qgXcyY+Ek6VIZ10FYCSgapJPAcrUhQQQ9jVX4A5LEK/M
+	XctTJxELBEHjkXAXuuKKMtZC1vkFMeNHNxaxcyC79falwqjUwnjukXcisaHJichpiiWCjr
+	Fz7xQHbR8iex+h0YH59ap4/IsoOmoeg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1748336041;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1uFQ6WQesoTLzcyfD02l0QPHNSPhDb59xUd8IZZfyQM=;
+	b=77nFOA09xZOr8vwKXTWIgx4RlVM9tLjb2RMwNQq4zXUps3bfJIQn8Y3AmMCtO0yIoedoon
+	oGC1Hw8Af3Fk6aCw==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=kUS6EvQK;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=77nFOA09
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1748336041; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1uFQ6WQesoTLzcyfD02l0QPHNSPhDb59xUd8IZZfyQM=;
+	b=kUS6EvQK08gjvUAwJMu9nzib34qgXcyY+Ek6VIZ10FYCSgapJPAcrUhQQQ9jVX4A5LEK/M
+	XctTJxELBEHjkXAXuuKKMtZC1vkFMeNHNxaxcyC79falwqjUwnjukXcisaHJichpiiWCjr
+	Fz7xQHbR8iex+h0YH59ap4/IsoOmoeg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1748336041;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1uFQ6WQesoTLzcyfD02l0QPHNSPhDb59xUd8IZZfyQM=;
+	b=77nFOA09xZOr8vwKXTWIgx4RlVM9tLjb2RMwNQq4zXUps3bfJIQn8Y3AmMCtO0yIoedoon
+	oGC1Hw8Af3Fk6aCw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C177B1388B;
+	Tue, 27 May 2025 08:54:00 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id Q1XCLqh9NWiPTAAAD6G6ig
+	(envelope-from <hare@suse.de>); Tue, 27 May 2025 08:54:00 +0000
+Message-ID: <25c23f9d-4fa0-4cad-9c96-43c25e018113@suse.de>
+Date: Tue, 27 May 2025 10:54:00 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 07/23] md/md-bitmap: delay registration of bitmap_ops
+ until creating bitmap
+To: Yu Kuai <yukuai1@huaweicloud.com>, hch@lst.de, xni@redhat.com,
+ colyli@kernel.org, song@kernel.org
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-raid@vger.kernel.org, yi.zhang@huawei.com, yangerkun@huawei.com,
+ johnny.chenyi@huawei.com, "yukuai (C)" <yukuai3@huawei.com>
+References: <20250524061320.370630-1-yukuai1@huaweicloud.com>
+ <20250524061320.370630-8-yukuai1@huaweicloud.com>
+ <d2fabdfd-229d-4043-ad27-61bac1e1f6d2@suse.de>
+ <d95b41a0-c1aa-8b8b-d959-05e41eee3a7f@huaweicloud.com>
+Content-Language: en-US
+From: Hannes Reinecke <hare@suse.de>
+In-Reply-To: <d95b41a0-c1aa-8b8b-d959-05e41eee3a7f@huaweicloud.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: XAUiHN1XPtjLl4fF0KJuMAJtifm6UvN7
-X-Proofpoint-GUID: XAUiHN1XPtjLl4fF0KJuMAJtifm6UvN7
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTI3MDA3MyBTYWx0ZWRfX8Ss8AJaVoXnE wAssbYWwVmyXrn9j0/D9t5hquiuwJlDqlJkA65m2DxfH6S92hh809trgSjlIFbcfhCmgTQZu9gU 3rZ/+icwA3/Nd++GcUtGCSOisnuUYXxmoXw0JV8Uy5FNdrlIerj5GcIHPZr984brDbxaZmZ4/ZN
- 2yqWas1jzMfXvPdtrBiCOmindH2DZzDb/74/UZFU3Nh9XcaB2ELb5JmCoJx3nWom+6qpkYVPp9x QZ3Z6nmKOXy/nrNhOPnlq8HMdCh3B/xH04lFipioVNTOu91vrn81z5i25/q92A7/9u7rPtFCxf3 5e+DkWsTPq/fSd57ByBzq3NwQZMZ8jyvCgdvCht8pirIwq9pKz84MpYEaBHtTbZYbhIP2aYidwQ
- 0CICP9T2UquAXETtcIm284Pzwy34RFusA4xcnhUEXK1ccL/6yf2YuE2yyk31gjJcQ00eXje4
-X-Authority-Analysis: v=2.4 cv=fJM53Yae c=1 sm=1 tr=0 ts=68358073 cx=c_pps a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17 a=dt9VzEwgFbYA:10 a=VnNF1IyMAAAA:8 a=a_b_lNqkOoIFiPTXujYA:9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-27_04,2025-05-26_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 spamscore=0
- priorityscore=1501 bulkscore=0 adultscore=0 mlxlogscore=847 suspectscore=0
- phishscore=0 clxscore=1015 lowpriorityscore=0 malwarescore=0
- impostorscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505160000
- definitions=main-2505270073
+X-Spamd-Result: default: False [-4.51 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	FUZZY_BLOCKED(0.00)[rspamd.com];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:dkim,suse.de:mid,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
+	DKIM_TRACE(0.00)[suse.de:+]
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 49B8421A21
+X-Spam-Flag: NO
+X-Spam-Level: 
+X-Spam-Score: -4.51
 
-The documentation for cgroup controller management has been updated to
-be more consistent regarding following concepts:
+On 5/27/25 09:53, Yu Kuai wrote:
+> Hi,
+> 
+> 在 2025/05/27 14:13, Hannes Reinecke 写道:
+>> On 5/24/25 08:13, Yu Kuai wrote:
+>>> From: Yu Kuai <yukuai3@huawei.com>
+>>>
+>>> Currently bitmap_ops is registered while allocating mddev, this is fine
+>>> when there is only one bitmap_ops, however, after introduing a new
+>>> bitmap_ops, user space need a time window to choose which bitmap_ops to
+>>> use while creating new array.
+>>>
+[ .. ]
+>>> @@ -6093,11 +6104,6 @@ struct mddev *md_alloc(dev_t dev, char *name)
+>>>           return ERR_PTR(error);
+>>>       }
+>>> -    if (md_bitmap_registered(mddev) && mddev->bitmap_ops->group)
+>>> -        if (sysfs_create_group(&mddev->kobj, mddev->bitmap_ops->group))
+>>> -            pr_warn("md: cannot register extra bitmap attributes for 
+>>> %s\n",
+>>> -                mdname(mddev));
+>>> -
+>>>       kobject_uevent(&mddev->kobj, KOBJ_ADD);
+>>>       mddev->sysfs_state = sysfs_get_dirent_safe(mddev->kobj.sd, 
+>>> "array_state");
+>>>       mddev->sysfs_level = sysfs_get_dirent_safe(mddev->kobj.sd, 
+>>> "level");
+>>
+>> But now you've killed udev event processing.
+>> Once the 'add' event is sent _all_ sysfs attributes must be present,
+>> otherwise you'll have a race condition where udev is checking for
+>> attributes which are present only later.
+>>
+>> So when moving things around ensure to move the kobject_uevent() call, 
+>> too.
+> 
+> I do not expect the bitmap entries are checked by udev, otherwise this
+> set can introduce regressions since the bitmap entries are no longer
+> existed after using the new biltmap.
+> 
+> And the above KOBJ_ADD uevent is used for mddev->kobj, right? In this
+> case, we're creating new entries under mddev->kobj, should this be
+> KOBJ_CHANGE?
+> 
+Yes, please.
 
-What does it mean to have controllers
-1) available in a cgroup, vs.
-2) enabled in a cgroup
+Cheers,
 
-Which has been clearly defined below in the documentation.
-
-"Enabling a controller in a cgroup indicates that the distribution of
-the target resource across its immediate children will be controlled.
-Consider the following sub-hierarchy"
-
-As an example, consider
-
-/sys/fs/cgroup # cat cgroup.controllers
-cpuset cpu io memory hugetlb pids misc
-/sys/fs/cgroup # cat cgroup.subtree_control # No controllers by default
-/sys/fs/cgroup # echo +cpu +memory > cgroup.subtree_control
-/sys/fs/cgroup # cat cgroup.subtree_control
-cpu memory                   # cpu and memory enabled in /sys/fs/cgroup
-/sys/fs/cgroup # mkdir foo_cgrp
-/sys/fs/cgroup # cd foo_cgrp/
-/sys/fs/cgroup/foo_cgrp # cat cgroup.controllers
-cpu memory                   # cpu and memory available in 'foo_cgrp'
-/sys/fs/cgroup/foo_cgrp # cat cgroup.subtree_control  # empty by default
-/sys/fs/cgroup/foo_cgrp # ls
-cgroup.controllers      cpu.max.burst           memory.numa_stat
-cgroup.events           cpu.pressure            memory.oom.group
-cgroup.freeze           cpu.stat                memory.peak
-cgroup.kill             cpu.stat.local          memory.pressure
-cgroup.max.depth        cpu.weight              memory.reclaim
-cgroup.max.descendants  cpu.weight.nice         memory.stat
-cgroup.pressure         io.pressure             memory.swap.current
-cgroup.procs            memory.current          memory.swap.events
-cgroup.stat             memory.events           memory.swap.high
-cgroup.subtree_control  memory.events.local     memory.swap.max
-cgroup.threads          memory.high             memory.swap.peak
-cgroup.type             memory.low              memory.zswap.current
-cpu.idle                memory.max              memory.zswap.max
-cpu.max                 memory.min              memory.zswap.writeback
-
-Once a controller is available in a cgroup it can be used to resource
-control processes of the cgroup.
-
-Signed-off-by: Vishal Chourasia <vishalc@linux.ibm.com>
----
- Documentation/admin-guide/cgroup-v2.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 1a16ce68a4d7..0e1686511c45 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -438,8 +438,8 @@ Controlling Controllers
- Enabling and Disabling
- ~~~~~~~~~~~~~~~~~~~~~~
- 
--Each cgroup has a "cgroup.controllers" file which lists all
--controllers available for the cgroup to enable::
-+Each cgroup has a cgroup.controllers file, which lists all the controllers
-+available for that cgroup and which can be enabled for its children.
- 
-   # cat cgroup.controllers
-   cpu io memory
+Hannes
 -- 
-2.49.0
-
+Dr. Hannes Reinecke                  Kernel Storage Architect
+hare@suse.de                                +49 911 74053 688
+SUSE Software Solutions GmbH, Frankenstr. 146, 90461 Nürnberg
+HRB 36809 (AG Nürnberg), GF: I. Totev, A. McDonald, W. Knoblich
 
