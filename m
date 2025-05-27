@@ -1,156 +1,123 @@
-Return-Path: <linux-doc+bounces-47549-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47553-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DB34AC47E3
-	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 07:55:48 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08816AC47F3
+	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 07:57:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C1BDC3B9D1D
-	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 05:55:26 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3F686169BBD
+	for <lists+linux-doc@lfdr.de>; Tue, 27 May 2025 05:57:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 133AB1E8332;
-	Tue, 27 May 2025 05:55:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4A6711FBCBE;
+	Tue, 27 May 2025 05:56:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="Yk4UUYT4";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="AFZCcsZL";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="Yk4UUYT4";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="AFZCcsZL"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Nyz1H7T/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20A271E0B91
-	for <linux-doc@vger.kernel.org>; Tue, 27 May 2025 05:55:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AC1A1F8728;
+	Tue, 27 May 2025 05:56:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748325337; cv=none; b=L3MDZ/zNzxwRCwRBbZgltlSJ2viCyJeJUo0HlNJzwm7fzq1aOaq650YGmob3CD0Z7oKy08aeyLD94HPQ7FgwW/Sf/B8c3OZy0cUBGVjxtOABuxJwHjzruBH2apBFidJKH0p3lxq9nYAiziuc1ah0qVCloJMvtA1QcinMKVHqifU=
+	t=1748325419; cv=none; b=N1pq55qtxjsw/Lq8nZ4AzTW0+cOE5nhh2qjgU9GU18bPkoiyITp4Mo6eRP89cHH85zirCoS943I81jGRaIWoIDuMKV71YM8gDTknF7L2jCuhoXji9h9GjLrRXQyHb0u0Dg4JVvbNDgi9ZjeDeqDnvJRAiZYx1QNvwMo2fJHfzvY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748325337; c=relaxed/simple;
-	bh=baQmD9RPmEy7qG95jtjCIbZVdKDKg/8cNAGxlhvT6ho=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=vB8eYwMDPQ/qIXN8vl08wgRZisVIy8StuXFUGTU9ZgVwiYcRLSDeQnHMZ1g8RAnFyaNSLQxFRZHCGpNaj+LwDcFaWDxT8ECQCTSyjQ44dVNsP2XZgk4feX4nEkjsYUZC7Afpknv/5Ir8cjmzOkPdTiFBkylvqUR0Xyd0gbW488E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=Yk4UUYT4; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=AFZCcsZL; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=Yk4UUYT4; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=AFZCcsZL; arc=none smtp.client-ip=195.135.223.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 3A2E91FDB6;
-	Tue, 27 May 2025 05:55:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1748325332; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QDHetXb/eGzoUDRsMu2WUKUJfrLulGzaS7m+camrstc=;
-	b=Yk4UUYT4IZ/68F3GJhfk9rbgh6vdlbVxBiAG4UZ6QGhP/PXMVWbqooJCI4Zp/6E0WjTF8t
-	EF5PsqFohsxLUNUWCbzAB3oh3h0GbsspFcc+S3Iohcv0UokluQEG1JI/Lr52/kdTe23jtx
-	yd6MSCfkxl4/gMCGrJE0TUK+0maItUc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1748325332;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QDHetXb/eGzoUDRsMu2WUKUJfrLulGzaS7m+camrstc=;
-	b=AFZCcsZLBuCW3vfsSWY5LYBegJ3tKsLVVzAfsYyIK1hnkgUKHXv0EyioAwDwIeXARuVTz+
-	/LKu3Gx5svJeR3Ag==
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1748325332; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QDHetXb/eGzoUDRsMu2WUKUJfrLulGzaS7m+camrstc=;
-	b=Yk4UUYT4IZ/68F3GJhfk9rbgh6vdlbVxBiAG4UZ6QGhP/PXMVWbqooJCI4Zp/6E0WjTF8t
-	EF5PsqFohsxLUNUWCbzAB3oh3h0GbsspFcc+S3Iohcv0UokluQEG1JI/Lr52/kdTe23jtx
-	yd6MSCfkxl4/gMCGrJE0TUK+0maItUc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1748325332;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QDHetXb/eGzoUDRsMu2WUKUJfrLulGzaS7m+camrstc=;
-	b=AFZCcsZLBuCW3vfsSWY5LYBegJ3tKsLVVzAfsYyIK1hnkgUKHXv0EyioAwDwIeXARuVTz+
-	/LKu3Gx5svJeR3Ag==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C8CB1136E0;
-	Tue, 27 May 2025 05:55:31 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 03gDL9NTNWhhEwAAD6G6ig
-	(envelope-from <hare@suse.de>); Tue, 27 May 2025 05:55:31 +0000
-Message-ID: <88d3c914-0510-42bb-b9ba-4745fa470e7c@suse.de>
-Date: Tue, 27 May 2025 07:55:31 +0200
+	s=arc-20240116; t=1748325419; c=relaxed/simple;
+	bh=+RtpvvQG0Z4gu30qZOPGTB+igEKhZe/d02FiLwh3jXE=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=kFXUqE8s9vP/V3iOaVxiL9rIYgEw3n91XjZdQ6IvpwyIHj1W4oXW8u6BWuwiowmyRPn8t4BkNsgiPdWHqFsbZWlyBJncEN9I2w0mJF3MFN4xhZpJjtRxHnvhK3SWHt6nOC8w66hJvAyLizDfXL/KrTYd5iUG+q0KkK4lhzWAX0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Nyz1H7T/; arc=none smtp.client-ip=198.175.65.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1748325418; x=1779861418;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=+RtpvvQG0Z4gu30qZOPGTB+igEKhZe/d02FiLwh3jXE=;
+  b=Nyz1H7T/5rFW2kiIoQ/OJW1UPTaGoaBRhp21tE36nA9sKqan++gH8qi2
+   mAsSmynb4comrDL6sJizM7fNuM8Aut1qb+xylQ+1pgPZhnyjY7ga+dXwh
+   Q0y2wxu6OCXwn1O/0yYXv+ybltYhM2YggEom29+F+AVEwirbLPxxMM6v0
+   oR6nN+C2MXZkpPX9ujf2GW/+wgycALOt45mHtNQmRkAVYfC7J2+HqZNaL
+   SHJzxkBrhi6VlquAOa2YmCuPqBQmtaTtuBv9e7zMWaSHTx11UbQLSIZsW
+   A25FjfWGwHU+VL0DB6NsRvmDVMLIwGo8NsVYR4FwX3779Q9DWrzWALHh9
+   A==;
+X-CSE-ConnectionGUID: NFZh2/zoQVKpUeprbAvGgw==
+X-CSE-MsgGUID: RxbZNT1xQyWstVjkMYo33Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11445"; a="67710404"
+X-IronPort-AV: E=Sophos;i="6.15,317,1739865600"; 
+   d="scan'208";a="67710404"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 May 2025 22:56:55 -0700
+X-CSE-ConnectionGUID: +N8qHD+CQ0yJjz2EEMcQ7g==
+X-CSE-MsgGUID: zoGlzFi2TAuRW45V3nEVnQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,317,1739865600"; 
+   d="scan'208";a="147919445"
+Received: from fdefranc-mobl3.ger.corp.intel.com (HELO kekkonen.fi.intel.com) ([10.245.244.73])
+  by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 May 2025 22:56:51 -0700
+Received: from punajuuri.localdomain (unknown [192.168.240.130])
+	by kekkonen.fi.intel.com (Postfix) with ESMTP id 578521202B1;
+	Tue, 27 May 2025 08:56:47 +0300 (EEST)
+Received: from sailus by punajuuri.localdomain with local (Exim 4.96)
+	(envelope-from <sakari.ailus@linux.intel.com>)
+	id 1uJnIu-00275S-31;
+	Tue, 27 May 2025 08:56:48 +0300
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+From: Sakari Ailus <sakari.ailus@linux.intel.com>
+To: linux-doc@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Haren Myneni <haren@linux.ibm.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Andrew Donnellan <ajd@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Akshay Gupta <akshay.gupta@amd.com>,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	hans@jjverkuil.nl,
+	laurent.pinchart@ideasonboard.com,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Lee Jones <lee@kernel.org>
+Subject: [PATCH v2 0/3] Document Media Controller IOCTL number assignments
+Date: Tue, 27 May 2025 08:56:45 +0300
+Message-Id: <20250527055648.503884-1-sakari.ailus@linux.intel.com>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/23] md: factor out a helper raid_is_456()
-To: Yu Kuai <yukuai1@huaweicloud.com>, hch@lst.de, xni@redhat.com,
- colyli@kernel.org, song@kernel.org, yukuai3@huawei.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-raid@vger.kernel.org, yi.zhang@huawei.com, yangerkun@huawei.com,
- johnny.chenyi@huawei.com
-References: <20250524061320.370630-1-yukuai1@huaweicloud.com>
- <20250524061320.370630-3-yukuai1@huaweicloud.com>
-Content-Language: en-US
-From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <20250524061320.370630-3-yukuai1@huaweicloud.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Score: -3.10
-X-Spam-Flag: NO
-X-Spamd-Result: default: False [-3.10 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.de:email,suse.de:mid]
-X-Spam-Level: 
 
-On 5/24/25 08:12, Yu Kuai wrote:
-> From: Yu Kuai <yukuai3@huawei.com>
-> 
-> There are no functional changes, the helper will be used by llbitmap in
-> following patches.
-> 
-> Signed-off-by: Yu Kuai <yukuai3@huawei.com>
-> ---
->   drivers/md/md.c | 9 +--------
->   drivers/md/md.h | 6 ++++++
->   2 files changed, 7 insertions(+), 8 deletions(-)
-> 
-Reviewed-by: Hannes Reinecke <hare@suse.de>
+Hello all,
 
-Cheers,
+The Media Controller uses IOCTL numbers with '|' type up to 0x81 but the
+range from 0x80 upwards is documented to belong to samples. The samples,
+however, are currently using these values. Solve the problem by bumping
+the top of the MC range and the samples allocation by 0x10 as the samples
+don't require a stable IOCTL interface.
 
-Hannes
+since v1:
+
+- Improved the commit message in the first patch.
+
+- Added a patch to change the IOCTLs also in the Rust sample.
+
+Sakari Ailus (3):
+  Documentation: Bump media IOCTL reserved numbers
+  media: uapi: Document IOCTL number assignment
+  samples: rust_misc_device: Bump IOCTL numbers
+
+ Documentation/userspace-api/ioctl/ioctl-number.rst |  4 ++--
+ include/uapi/linux/media.h                         |  4 ++++
+ samples/rust/rust_misc_device.rs                   | 14 +++++++-------
+ 3 files changed, 13 insertions(+), 9 deletions(-)
+
 -- 
-Dr. Hannes Reinecke                  Kernel Storage Architect
-hare@suse.de                                +49 911 74053 688
-SUSE Software Solutions GmbH, Frankenstr. 146, 90461 Nürnberg
-HRB 36809 (AG Nürnberg), GF: I. Totev, A. McDonald, W. Knoblich
+2.39.5
+
 
