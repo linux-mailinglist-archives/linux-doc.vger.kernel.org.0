@@ -1,201 +1,181 @@
-Return-Path: <linux-doc+bounces-47798-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47800-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B2E8AC8571
-	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 01:50:08 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D9DAAC857E
+	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 01:51:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9DA61A25EA1
-	for <lists+linux-doc@lfdr.de>; Thu, 29 May 2025 23:48:27 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CC922A44BA3
+	for <lists+linux-doc@lfdr.de>; Thu, 29 May 2025 23:50:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5825525CC7A;
-	Thu, 29 May 2025 23:47:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 497FE1922C0;
+	Thu, 29 May 2025 23:49:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="DrOiVl4F"
+	dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b="Ma1HFYxb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f226.google.com (mail-il1-f226.google.com [209.85.166.226])
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5451259CA9
-	for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 23:47:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.226
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CD3A2550D0
+	for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 23:49:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748562464; cv=none; b=nObXXB+qUhf8qIJn16a1ZfKo3Ne55vHVGcmtkdZRnDILFELFh4eSk018Q2TFY/nz/c+Gjc0qsg0irk2ATp3CKE8zur/+6Edqf6zIBvJ8FUYdLZuys9fWfT3FLBZa5lRmeJjk73xCkich+iG8oCagxZFHExG/ipnDyCEGml9Wmvk=
+	t=1748562574; cv=none; b=XTpuupVmf6zwFaSrFc3rrCqNFWvr/UTnfV5nx1SBXauTKHN8qi/EbYBtFq2UYjvHdXaGIEwvCaJc4kGEm57gmnLbwdq/pPQji+Wiz2RLpAT2HEaWN17zvBAfspfFPi02QDCoJ6COWQ7Zc8qWy9H7qaZf30stDZFz5RPvYqp2cws=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748562464; c=relaxed/simple;
-	bh=UlVvBoGqKoKJcf+0ZFrctzlh1+h1AUFzmSOJWeWCcGQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=tRHu+x/qJHVcQ3rNYM+RVtJF6st5RLvQK0tO9mqRaKqDFuDLAmjiV6+nSJj8AfJ0MeBBE9cL6u8ZqVrfWfqghUqrLYvItq+pE5k2HjUH8Vlza7oPnRv/v0CFjCcH50WrR+gekRWca5YfCDC9CXGRluhsgfypNjs9tkdElsg3MoU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=DrOiVl4F; arc=none smtp.client-ip=209.85.166.226
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=purestorage.com
-Received: by mail-il1-f226.google.com with SMTP id e9e14a558f8ab-3dd781c24adso5363135ab.2
-        for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 16:47:38 -0700 (PDT)
+	s=arc-20240116; t=1748562574; c=relaxed/simple;
+	bh=njDQ8Lhj+rbQY91bCgJ2J/LI6phcjK0rry9e5UVMEYo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=G/tTTO5nXYRDh7rqvXT72rN4jrPIixOEziQMcuB6bW4N7vTUclFW3aJd2TqJBpoWfqP1DWCG8bowc4SDphYXP+Ocyk8gbqKcoyztAEvhPHmf6Yx5Ja0uYOyB4S4DePfJfadvLXDfhugA7Lf17903rIDRkSUwFaMWyaXQlauWHO8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com; spf=pass smtp.mailfrom=paul-moore.com; dkim=pass (2048-bit key) header.d=paul-moore.com header.i=@paul-moore.com header.b=Ma1HFYxb; arc=none smtp.client-ip=209.85.219.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=paul-moore.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=paul-moore.com
+Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-e7569ccf04cso1271982276.0
+        for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 16:49:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=purestorage.com; s=google2022; t=1748562457; x=1749167257; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EZFCCSYb7OQcdQGIOyhLYDx1YKKptgh0Rjc24K7ab4g=;
-        b=DrOiVl4F3p/SU3cW1h8G7I9QsSGv6q+U2rT1UzpWyLIdXfILQiFXqXiv8AZyzB0qxY
-         XpjJNvtHJpPYeega7SDHXH1dCkfMLKV1jhxif4C84ds8CrxRFVuMXPKGb0GnwlKWdQif
-         uW0Y9xLKwwYVG31cOWZJ54gts4WJRztXOdVdwbUqnKJ8I6yxcS+BnDnXDh6ek//ovOgD
-         wnkGUNTYfQY8bZ4kE7SfTsygHtezRYRMQSBnKgb9fUtFXLf4h4hkiATVp8yXtsajGE04
-         qTKoV1/8g9qe8FtuuEElNag/8veQAlWmCuNAj8Q4SqVVFUeqsU4felCMf24Hc0Chx/pJ
-         e1jg==
+        d=paul-moore.com; s=google; t=1748562570; x=1749167370; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IzrpMWMfPR3T2gCVNz/ykn1poKsGqIWx4fYMabbDEoU=;
+        b=Ma1HFYxbpQWiO5QgZg/176AE28nFmcx4LGBbFEj2ed6gW7KquDE8lkkFg5lYuS5nrp
+         ZnVR9EMCcTIn8swlEw8SwbYF+P5CIMZKly1ju8Ciuxn3F/YPKAeyrOKzYF3VzU8XbFts
+         xzFAGS5MLLhuTxE41HqMT34c+xEYvWg+D3Vo4Kl7kQRR5jQLjYCpDtTekHmJl6Sq9jH1
+         2eNjbNxi6fFmbourM8UwjWyiLUR5V1md3o6lM/AkUKkTxv8DiFoRnC0IAcAW48YBYtCh
+         gf9f84AH8h1OHq3Ao5j5Kedgi+GurI7XFxavKxOymPXg1zJA2bMm8RF625x2tb9mwA3e
+         DghA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748562457; x=1749167257;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1748562570; x=1749167370;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EZFCCSYb7OQcdQGIOyhLYDx1YKKptgh0Rjc24K7ab4g=;
-        b=TaL4HMNoOizJnqqcFyrhDjVC0CtdUVeiSKAPS7IbyJRvoA+frhiGtOvCivyEr1mgv4
-         kTRg1OrBfzFBS/8pHjsjas//tH/9ayuH+q762FI9Ht+uv5acORPcO8Pk8wTpmn3Fr1FH
-         SHWj7Spnbg1IcdFLdL29Laa+7bLRj2KUFkhUoGHxuJqLG1nCMQSagpA3DJyLahGxgRPK
-         myoVfhAyVgnZ47qVog9Yik8ujNuAPNW+VsD9qlLC9QGxTSMrw0stmnvPdDXyQ2BwPoOQ
-         zu3MvH8kf60kcCyUZmuiIhl6WBBZFLTppgPDtNKUZurji3Pj2mfDrXzUJ5izyhlxwayW
-         SuNQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXucRXWTA220JtHfA9+nRlm1J/Q6oEn1scBucMVACj3xVS6iVXJC/SGfhKMQ8enY1YzQI5y/XJqhQo=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw+G7i1y6ffzsK99XYaN36CO/LgUpCctIFJs2YWY/Ww4MTi5swk
-	vYSGRvHn6y19HAwXCNk76+Ahex3nd3F1AYufS4r0TLEbUYk5cR/Fbux1NqLkc2FVQIc/nEFjCe9
-	8aEfknPLPRRVK1G/cPRC8qYzgjs8lz5eX0qwy
-X-Gm-Gg: ASbGncserZA/SvXnL+IBH4Jwqw/P0OdNhAenez8oplcHtpW+/Fmd2ykYpDH/ub71nlo
-	PZ2dbqPsBHBG7xEC931z5b66/rGB7zlr2ec90YLRqSNTAPcsO80oV0mgsZtzmBuAElaT6fDFyxp
-	YU5YQATO3hinltUH6Bb+3DEo0Lae+5Y0BCFI9Fz95OWZoRRK2HQa+Xu8Z3QPJiYsfp/6bwTFBYV
-	0RP3rJjzkoASIlf39R7l53s5JhbGNF6RZvtBsASfmTHXgeekphruVd0ehWbCMt42IetMTbDtmZJ
-	/UwFLAj++n0mNp1nEahUBb4afPMxcvWCBEfDny6zeZNmkw==
-X-Google-Smtp-Source: AGHT+IEmapYeqtmTfFncijI4MwHEFzRRnr1f1vhtV+NAcgKtHsK/Gh4LJUu8859z517RtmYPXqkV7MLrHRxh
-X-Received: by 2002:a05:6e02:3c84:b0:3dc:8bb8:28b3 with SMTP id e9e14a558f8ab-3dd99bd00fbmr19760835ab.5.1748562457107;
-        Thu, 29 May 2025 16:47:37 -0700 (PDT)
-Received: from c7-smtp-2023.dev.purestorage.com ([208.88.159.129])
-        by smtp-relay.gmail.com with ESMTPS id e9e14a558f8ab-3dd9353520dsm1277765ab.7.2025.05.29.16.47.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 May 2025 16:47:37 -0700 (PDT)
-X-Relaying-Domain: purestorage.com
-Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [IPv6:2620:125:9007:640:7:70:36:0])
-	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 2382234057A;
-	Thu, 29 May 2025 17:47:35 -0600 (MDT)
-Received: by dev-ushankar.dev.purestorage.com (Postfix, from userid 1557716368)
-	id DD5A2E4133C; Thu, 29 May 2025 17:47:34 -0600 (MDT)
-From: Uday Shankar <ushankar@purestorage.com>
-Date: Thu, 29 May 2025 17:47:18 -0600
-Subject: [PATCH v8 9/9] Documentation: ublk: document UBLK_F_PER_IO_DAEMON
+        bh=IzrpMWMfPR3T2gCVNz/ykn1poKsGqIWx4fYMabbDEoU=;
+        b=gv99c4gA64cfK2MX8sf6+8iyksEjgjutEDoo1lj/sTGWDFJmObegR4tQgi+Yrons/+
+         J/C5UzFsRIRereN0m+J1TPOmBlRDFHab2nZ7PySx1Y9yMePXbad0+GheLgXwk3X0XNp6
+         sBxjWKE6LYDZljVUw+zCW+GNo5Ohx6uRZ0S5PzBr5tfOujSob0VjZ6APTIOwM5YALLj7
+         4Z2RgxJ56vpuF3+rPB4IurhQXT8jaELaGi4Ph2ZUVcFzfbduhkYRBHKejcNuDdLCCe/3
+         rO3l4XnZnTslOBEelJPINKf7a7ctl4RQaBKRi1VIbPWmK5sbbJk+xPE0DZVOM3ff/NFv
+         vwtA==
+X-Forwarded-Encrypted: i=1; AJvYcCUy289RsbtpCaFdhtE1K8MfSHMQN22DlBaUac8TsUQAHbd6kbSjSxCo4EEa/PHmlJOQeD1IY/7JDe4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxpzJLopAenVEggNI7M6VPrk35OQx4295nSVi7T9S55iL4DPuxm
+	tzjK2kIUOoudKF+DWz5Bj4vU3WQnzaBSEF7HgYDeI8BkzkC2QgPW7CGo45tOIXOM7TBYiP7Ilss
+	KRq2sEzIl2EHJ2MvNqYNq3dIFHts6k7QI3rK7r0P/
+X-Gm-Gg: ASbGncv1q21hcYOosQVZ8CKp6H3e0KyGotVahLEB6BJNLx8pTsEdn6uucDkp3GzMjtx
+	gsoR9MjlfuENtNehpRI9JEajoxSJL8G9K/1Tm4NsOWHb7ABXlZ0xCbAwe9GxvfwAlgL4Z2ZeZ9J
+	GxsU9aXMcU9PIbbMSdv/RzMPXkLGLwtByi
+X-Google-Smtp-Source: AGHT+IGhztxCAK3YTRu6P4h6gxYqvuSLD7WfoNzyStJqIFYGaHOmc7yQwpS7nzoIzkVnhQPYk9/qIXwf6pJLAlBDxC0=
+X-Received: by 2002:a05:6902:330b:b0:e7d:6a68:f572 with SMTP id
+ 3f1490d57ef6-e7f81bb773dmr2259538276.10.1748562570009; Thu, 29 May 2025
+ 16:49:30 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250529-ublk_task_per_io-v8-9-e9d3b119336a@purestorage.com>
-References: <20250529-ublk_task_per_io-v8-0-e9d3b119336a@purestorage.com>
-In-Reply-To: <20250529-ublk_task_per_io-v8-0-e9d3b119336a@purestorage.com>
-To: Ming Lei <ming.lei@redhat.com>, Jens Axboe <axboe@kernel.dk>, 
- Caleb Sander Mateos <csander@purestorage.com>, 
- Andrew Morton <akpm@linux-foundation.org>, Shuah Khan <shuah@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org, 
- Uday Shankar <ushankar@purestorage.com>
-X-Mailer: b4 0.14.2
+References: <20250521140121.591482-1-git@nightmared.fr> <20250521140121.591482-10-git@nightmared.fr>
+ <CAHC9VhR-80zxgo+q07Aw8HqK+qiPdnuXC0axONGac0e9JxXvmw@mail.gmail.com> <4939d8ab-3911-4759-b8d6-cb57ff9f9cda@nightmared.fr>
+In-Reply-To: <4939d8ab-3911-4759-b8d6-cb57ff9f9cda@nightmared.fr>
+From: Paul Moore <paul@paul-moore.com>
+Date: Thu, 29 May 2025 19:49:19 -0400
+X-Gm-Features: AX0GCFt-dubQ8zjyvLFIAb7yxjUrHx2vekSE7cPMRUm7dhYCysWfX-kgOpwdxLI
+Message-ID: <CAHC9VhT5JrhzGhRnJ4VNo6e941o-xdAG-FC-Q6wDbSZhgSUWOQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 9/9] Loadpol LSM: add a minimal documentation
+To: Simon Thoby <git@nightmared.fr>
+Cc: linux-security-module@vger.kernel.org, linux-integrity@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Kees Cook <kees@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Explain the restrictions imposed on ublk servers in two cases:
-1. When UBLK_F_PER_IO_DAEMON is set (current ublk_drv)
-2. When UBLK_F_PER_IO_DAEMON is not set (legacy)
-
-Remove most references to per-queue daemons, as the new
-UBLK_F_PER_IO_DAEMON feature renders that concept obsolete.
-
-Signed-off-by: Uday Shankar <ushankar@purestorage.com>
-Reviewed-by: Caleb Sander Mateos <csander@purestorage.com>
-Reviewed-by: Ming Lei <ming.lei@redhat.com>
----
- Documentation/block/ublk.rst | 35 ++++++++++++++++++++++++-----------
- 1 file changed, 24 insertions(+), 11 deletions(-)
-
-diff --git a/Documentation/block/ublk.rst b/Documentation/block/ublk.rst
-index 854f823b46c2add01d0b65ba36aecd26c45bb65d..c368e1081b4111c581567058f87ecb52db08758b 100644
---- a/Documentation/block/ublk.rst
-+++ b/Documentation/block/ublk.rst
-@@ -115,15 +115,15 @@ managing and controlling ublk devices with help of several control commands:
- 
- - ``UBLK_CMD_START_DEV``
- 
--  After the server prepares userspace resources (such as creating per-queue
--  pthread & io_uring for handling ublk IO), this command is sent to the
-+  After the server prepares userspace resources (such as creating I/O handler
-+  threads & io_uring for handling ublk IO), this command is sent to the
-   driver for allocating & exposing ``/dev/ublkb*``. Parameters set via
-   ``UBLK_CMD_SET_PARAMS`` are applied for creating the device.
- 
- - ``UBLK_CMD_STOP_DEV``
- 
-   Halt IO on ``/dev/ublkb*`` and remove the device. When this command returns,
--  ublk server will release resources (such as destroying per-queue pthread &
-+  ublk server will release resources (such as destroying I/O handler threads &
-   io_uring).
- 
- - ``UBLK_CMD_DEL_DEV``
-@@ -208,15 +208,15 @@ managing and controlling ublk devices with help of several control commands:
-   modify how I/O is handled while the ublk server is dying/dead (this is called
-   the ``nosrv`` case in the driver code).
- 
--  With just ``UBLK_F_USER_RECOVERY`` set, after one ubq_daemon(ublk server's io
--  handler) is dying, ublk does not delete ``/dev/ublkb*`` during the whole
-+  With just ``UBLK_F_USER_RECOVERY`` set, after the ublk server exits,
-+  ublk does not delete ``/dev/ublkb*`` during the whole
-   recovery stage and ublk device ID is kept. It is ublk server's
-   responsibility to recover the device context by its own knowledge.
-   Requests which have not been issued to userspace are requeued. Requests
-   which have been issued to userspace are aborted.
- 
--  With ``UBLK_F_USER_RECOVERY_REISSUE`` additionally set, after one ubq_daemon
--  (ublk server's io handler) is dying, contrary to ``UBLK_F_USER_RECOVERY``,
-+  With ``UBLK_F_USER_RECOVERY_REISSUE`` additionally set, after the ublk server
-+  exits, contrary to ``UBLK_F_USER_RECOVERY``,
-   requests which have been issued to userspace are requeued and will be
-   re-issued to the new process after handling ``UBLK_CMD_END_USER_RECOVERY``.
-   ``UBLK_F_USER_RECOVERY_REISSUE`` is designed for backends who tolerate
-@@ -241,10 +241,11 @@ can be controlled/accessed just inside this container.
- Data plane
- ----------
- 
--ublk server needs to create per-queue IO pthread & io_uring for handling IO
--commands via io_uring passthrough. The per-queue IO pthread
--focuses on IO handling and shouldn't handle any control & management
--tasks.
-+The ublk server should create dedicated threads for handling I/O. Each
-+thread should have its own io_uring through which it is notified of new
-+I/O, and through which it can complete I/O. These dedicated threads
-+should focus on IO handling and shouldn't handle any control &
-+management tasks.
- 
- The's IO is assigned by a unique tag, which is 1:1 mapping with IO
- request of ``/dev/ublkb*``.
-@@ -265,6 +266,18 @@ with specified IO tag in the command data:
-   destined to ``/dev/ublkb*``. This command is sent only once from the server
-   IO pthread for ublk driver to setup IO forward environment.
- 
-+  Once a thread issues this command against a given (qid,tag) pair, the thread
-+  registers itself as that I/O's daemon. In the future, only that I/O's daemon
-+  is allowed to issue commands against the I/O. If any other thread attempts
-+  to issue a command against a (qid,tag) pair for which the thread is not the
-+  daemon, the command will fail. Daemons can be reset only be going through
-+  recovery.
+On Thu, May 22, 2025 at 5:23=E2=80=AFAM Simon Thoby <git@nightmared.fr> wro=
+te:
+> On 5/21/25 23:31, Paul Moore wrote:
+> > On Wed, May 21, 2025 at 10:03=E2=80=AFAM Simon THOBY <git@nightmared.fr=
+> wrote:
+> >>
+> >> Introduce a minimal documentation for Loadpol, presenting the policy
+> >> format and the two user interfaces: the securityfs policy file and the
+> >> sysctl.
+> >>
+> >> Signed-off-by: Simon THOBY <git@nightmared.fr>
+> >> ---
+> >>  Documentation/admin-guide/LSM/Loadpol.rst | 81 ++++++++++++++++++++++=
 +
-+  The ability for every (qid,tag) pair to have its own independent daemon task
-+  is indicated by the ``UBLK_F_PER_IO_DAEMON`` feature. If this feature is not
-+  supported by the driver, daemons must be per-queue instead - i.e. all I/Os
-+  associated to a single qid must be handled by the same task.
-+
- - ``UBLK_IO_COMMIT_AND_FETCH_REQ``
- 
-   When an IO request is destined to ``/dev/ublkb*``, the driver stores
+> >>  Documentation/admin-guide/LSM/index.rst   |  1 +
+> >>  2 files changed, 82 insertions(+)
+> >>  create mode 100644 Documentation/admin-guide/LSM/Loadpol.rst
+> >>
+> >> diff --git a/Documentation/admin-guide/LSM/Loadpol.rst b/Documentation=
+/admin-guide/LSM/Loadpol.rst
+> >> new file mode 100644
+> >> index 000000000000..0aa24a8d393c
+> >> --- /dev/null
+> >> +++ b/Documentation/admin-guide/LSM/Loadpol.rst
+> >> @@ -0,0 +1,81 @@
+> >> +.. SPDX-License-Identifier: GPL-2.0
+> >> +
+> >> +=3D=3D=3D=3D=3D=3D=3D
+> >> +Loadpol
+> >> +=3D=3D=3D=3D=3D=3D=3D
+> >> +
+> >> +Loadpol is a Linux Security Module that enforces a user-provided poli=
+cy
+> >> +when decided whether a dynamic module can be loaded or not.
+> >
+> > Considering the relatively small scope of Loadpol, I have to ask if
+> > you've considered augmenting other LSMs to meet your needs?  While
+> > LoadPin is different from what you are proposing here, it does
+> > similarly limit its scope to kernel module load operations, and given
+> > the current simplicity of LoadPin I imagine one could find a creative
+> > way to extend it to support what you are trying to do.
+>
+> I indeed felt a bit ridiculous introducing a new LSM for a limited featur=
+e
+> like that!
 
--- 
-2.34.1
+Please don't feel bad about it, often simply doing "something" is what
+makes things happen, even if that original "something" turns out not
+to be the final "thing" :)
 
+> What's more, I don't see it being extended much in the future - we could
+> always imagine things like signed policy updates, but other than that it'=
+s
+> probably "feature-complete", as the feature itself is fairly small.
+> The difficulty with LoadPin is that it rely relies on the notion of
+> filesystem (which is coupled with the origin of the kernel modules) to en=
+sure
+> that modules are valid. On a general-purpose distributions, the modules
+> would be stored on the same (non-integrity-verified) filesystem, so
+> segregating the modules by filesystem is not really possible there.
+> Extending LoadPin to provide the same features is probably possible, but =
+I
+> fear this would add complexity to loading by trying to make it do two
+> slightly different jobs at once.
+
+My thinking around possible augmentation of LoadPin is that both
+LoadPin and Loadpol share a similar, limited focus of controlling
+access to kernel module loading and Loadpol has support for a basic
+loadable policy, a policy that could likely be extended to support a
+LoadPin-esque construct that limit module loading based on filesystem
+pinning.  It probably makes more sense to think of adding LoadPin
+support to Loadpol, rather than augmenting LoadPin to support the
+Loadpol concepts, but for consistency with upstream we probably need
+to speak in terms of the latter.
+
+> CC-ing Kees Cook as he is the maintainer of the LoadPin module, he may ha=
+ve
+> opinions on what features may or may not fit inside LoadPin.
+
+Of course, the combination, or not, of LoadPin and Loadpol is really
+up to the two of you.
+
+> As for other LSMs, I don't really see one that tries to provide similar
+> features, but I someone is open to extending an existing LSM for that, I
+> would be happy to help.
+
+I think LoadPin is the obvious choice.
+
+--=20
+paul-moore.com
 
