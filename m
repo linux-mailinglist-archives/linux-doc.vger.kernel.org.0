@@ -1,87 +1,87 @@
-Return-Path: <linux-doc+bounces-47791-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47798-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4554AC854E
-	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 01:48:23 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B2E8AC8571
+	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 01:50:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3E949179ACC
-	for <lists+linux-doc@lfdr.de>; Thu, 29 May 2025 23:48:07 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9DA61A25EA1
+	for <lists+linux-doc@lfdr.de>; Thu, 29 May 2025 23:48:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ADE0C259C9A;
-	Thu, 29 May 2025 23:47:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5825525CC7A;
+	Thu, 29 May 2025 23:47:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="HVM4EM5o"
+	dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b="DrOiVl4F"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f228.google.com (mail-pl1-f228.google.com [209.85.214.228])
+Received: from mail-il1-f226.google.com (mail-il1-f226.google.com [209.85.166.226])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF2D621E0B7
-	for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 23:47:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.228
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5451259CA9
+	for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 23:47:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.226
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748562458; cv=none; b=XnHO4CIOD5p56/Bf7i2hwW3jjhSrFBo0JKJAPV+H0XyRTL9IMndzCUTBtIgtgL1drQzBdz2HQp+dgC/9sMmdVFJuKqJNFFDDhpXKmcW7lUCuswCDPs1URfsZpJhKTLy3xgOvE0fUGcbVfE2+yFUSq6GXksEYdxMYA8DcUMr3ylo=
+	t=1748562464; cv=none; b=nObXXB+qUhf8qIJn16a1ZfKo3Ne55vHVGcmtkdZRnDILFELFh4eSk018Q2TFY/nz/c+Gjc0qsg0irk2ATp3CKE8zur/+6Edqf6zIBvJ8FUYdLZuys9fWfT3FLBZa5lRmeJjk73xCkich+iG8oCagxZFHExG/ipnDyCEGml9Wmvk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748562458; c=relaxed/simple;
-	bh=KFzR2R0oE+f8Zx4hoiyK9LWJS5zkAw4p1aYmlL54wbY=;
+	s=arc-20240116; t=1748562464; c=relaxed/simple;
+	bh=UlVvBoGqKoKJcf+0ZFrctzlh1+h1AUFzmSOJWeWCcGQ=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=dAhUICVnSoF870TToKdrTdraiRYui2cz5YLB7pLBxFwmMV9cdGk/nO3Uchs2AruxaXhfUEr7ydLallFStu9eE8Fl/kjAVzqZWqdoOiZooQORaDXwt/ryOs+PMfp95D/pKUm/2GBI/kBqMrgjF376Fa244SaVUdh2FgAKNbF720c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=HVM4EM5o; arc=none smtp.client-ip=209.85.214.228
+	 In-Reply-To:To:Cc; b=tRHu+x/qJHVcQ3rNYM+RVtJF6st5RLvQK0tO9mqRaKqDFuDLAmjiV6+nSJj8AfJ0MeBBE9cL6u8ZqVrfWfqghUqrLYvItq+pE5k2HjUH8Vlza7oPnRv/v0CFjCcH50WrR+gekRWca5YfCDC9CXGRluhsgfypNjs9tkdElsg3MoU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com; spf=fail smtp.mailfrom=purestorage.com; dkim=pass (2048-bit key) header.d=purestorage.com header.i=@purestorage.com header.b=DrOiVl4F; arc=none smtp.client-ip=209.85.166.226
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=purestorage.com
 Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=purestorage.com
-Received: by mail-pl1-f228.google.com with SMTP id d9443c01a7336-234488c2ea6so15999045ad.3
-        for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 16:47:36 -0700 (PDT)
+Received: by mail-il1-f226.google.com with SMTP id e9e14a558f8ab-3dd781c24adso5363135ab.2
+        for <linux-doc@vger.kernel.org>; Thu, 29 May 2025 16:47:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=purestorage.com; s=google2022; t=1748562456; x=1749167256; darn=vger.kernel.org;
+        d=purestorage.com; s=google2022; t=1748562457; x=1749167257; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZpDwixmcLhBwd2X2YXKWEWGwjdFqClV/mbfesZkbLZ4=;
-        b=HVM4EM5o3m5NnyEnDtFVv851YsRsOYFOfvZ5S1meTMdIU7rIo79NCE6BVgQbbJqLw3
-         PIVBnT2YWC8n/NNFeclz3BHE/1/apz4YPqNxoAsg59bmNnoWMAnJdiuMwsretwYUcKHU
-         fffqBc4ghupzcLgrSnVVUAhzC3XvvZ7fJkZuD8R/OHn5unKdzJvMy6X5QZhhzcUFyPrY
-         2dy6o8JtHfaA5SrkN4fSMkpGbhwb7HfotO9us3pei2LYmngGYe4hRGvc3EttEkLEBIeH
-         +t+m0wCV4CrvC62wKOnlhZiXOPWYXG/VW579qtgzAgNuF0QbBDJUELhIvhwZ+YkPaTcU
-         nCbA==
+        bh=EZFCCSYb7OQcdQGIOyhLYDx1YKKptgh0Rjc24K7ab4g=;
+        b=DrOiVl4F3p/SU3cW1h8G7I9QsSGv6q+U2rT1UzpWyLIdXfILQiFXqXiv8AZyzB0qxY
+         XpjJNvtHJpPYeega7SDHXH1dCkfMLKV1jhxif4C84ds8CrxRFVuMXPKGb0GnwlKWdQif
+         uW0Y9xLKwwYVG31cOWZJ54gts4WJRztXOdVdwbUqnKJ8I6yxcS+BnDnXDh6ek//ovOgD
+         wnkGUNTYfQY8bZ4kE7SfTsygHtezRYRMQSBnKgb9fUtFXLf4h4hkiATVp8yXtsajGE04
+         qTKoV1/8g9qe8FtuuEElNag/8veQAlWmCuNAj8Q4SqVVFUeqsU4felCMf24Hc0Chx/pJ
+         e1jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1748562456; x=1749167256;
+        d=1e100.net; s=20230601; t=1748562457; x=1749167257;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ZpDwixmcLhBwd2X2YXKWEWGwjdFqClV/mbfesZkbLZ4=;
-        b=NrRQoZLEGpZtcNbC7qSKxkGPzSVQUh1wUhR3EJ7VkQt/tUky/zgqywM/cGjwUGjf+9
-         PrSbXSUgWOq1wesu7OCvEDCBry3IKG4lJtHKyvdZwCDeL59qQ26fSvTsWJhz45KBfpZK
-         PLwj0gwT83RjgiCX/I/BJm2JxOh5vBdxhSuxax84m4pammwMxPqdzVnee/1OhsiH4JPs
-         bdOAPIr9ApkkC+VZqI7eUA0VufAhusRLjrtkI/qNgbTVpBQbNTj3uy22NilsrkRdGpPM
-         tWF+SzxYGJhqwEs6z8qbM9feYqSa83LIvPFMLYj1WCOtkOdf0H+48Yi09BK1umB2IV7a
-         hzhQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUASvonErUX+tg7H/mMFzqcDkrpwDeeeiZeFA/Qvl+IvDUA14RmYKDhrFFxXEbaDSsY4ZCuVuqVlAo=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz+A7MFwSUvBsdwOAuWc65nAs0z4QzYoiNLy70CdymyZWOGR+lY
-	BC6khdp4/Rfnpl7Mpft9tPgj58ywqEaKmT5exUGSoxmT2Nv1rxkYt41XuVuTTyGqAtITd1Ersgd
-	wLvrCjtrQd1cBh2ttfhyB57G8J9hN/iMiOtlT+EERjDXrZ+6Br4mF
-X-Gm-Gg: ASbGncsQpQB17cvwOxyNbnQMuDF7qn+9subfH6Wpz0B7UrGA6XVNamZZEtSIysFwCqu
-	zT7tcU40IskhvDCBISc379XC+5ylKbu6QK3zeXx68uElrYWy/EmYBofVjN9eqN0pB3BcJpI6JIW
-	EZqYnnoeZZ2M94MhMDFN+xPA2i32beo29ObGWIbPLLREYWB/QnC8TlEGK3qcfCim0iic+ABaxNX
-	XUYtUYlHF9HzKOEYdQUvYXhf2mGimMMJ0jJqOu58mSVXG5nNI7R2r9oFO9OKn3VIiuD8v/Vt/4y
-	elzEEvDb0ye+VOjag2mK1bhamx1tQwGEXg8awUd95g==
-X-Google-Smtp-Source: AGHT+IF+JXhCtFUI7qIQoWLQaSp7IslKBmx1r2vGs1hjp44ssVnCEbbybY4kaM+WQWqB2rfGGO71/R3O8mVk
-X-Received: by 2002:a17:902:f652:b0:234:f580:9ed with SMTP id d9443c01a7336-235390e41b7mr1149165ad.21.1748562455933;
-        Thu, 29 May 2025 16:47:35 -0700 (PDT)
-Received: from c7-smtp-2023.dev.purestorage.com ([2620:125:9017:12:36:3:5:0])
-        by smtp-relay.gmail.com with ESMTPS id d9443c01a7336-23506d37f6csm1336845ad.83.2025.05.29.16.47.35
+        bh=EZFCCSYb7OQcdQGIOyhLYDx1YKKptgh0Rjc24K7ab4g=;
+        b=TaL4HMNoOizJnqqcFyrhDjVC0CtdUVeiSKAPS7IbyJRvoA+frhiGtOvCivyEr1mgv4
+         kTRg1OrBfzFBS/8pHjsjas//tH/9ayuH+q762FI9Ht+uv5acORPcO8Pk8wTpmn3Fr1FH
+         SHWj7Spnbg1IcdFLdL29Laa+7bLRj2KUFkhUoGHxuJqLG1nCMQSagpA3DJyLahGxgRPK
+         myoVfhAyVgnZ47qVog9Yik8ujNuAPNW+VsD9qlLC9QGxTSMrw0stmnvPdDXyQ2BwPoOQ
+         zu3MvH8kf60kcCyUZmuiIhl6WBBZFLTppgPDtNKUZurji3Pj2mfDrXzUJ5izyhlxwayW
+         SuNQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXucRXWTA220JtHfA9+nRlm1J/Q6oEn1scBucMVACj3xVS6iVXJC/SGfhKMQ8enY1YzQI5y/XJqhQo=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw+G7i1y6ffzsK99XYaN36CO/LgUpCctIFJs2YWY/Ww4MTi5swk
+	vYSGRvHn6y19HAwXCNk76+Ahex3nd3F1AYufS4r0TLEbUYk5cR/Fbux1NqLkc2FVQIc/nEFjCe9
+	8aEfknPLPRRVK1G/cPRC8qYzgjs8lz5eX0qwy
+X-Gm-Gg: ASbGncserZA/SvXnL+IBH4Jwqw/P0OdNhAenez8oplcHtpW+/Fmd2ykYpDH/ub71nlo
+	PZ2dbqPsBHBG7xEC931z5b66/rGB7zlr2ec90YLRqSNTAPcsO80oV0mgsZtzmBuAElaT6fDFyxp
+	YU5YQATO3hinltUH6Bb+3DEo0Lae+5Y0BCFI9Fz95OWZoRRK2HQa+Xu8Z3QPJiYsfp/6bwTFBYV
+	0RP3rJjzkoASIlf39R7l53s5JhbGNF6RZvtBsASfmTHXgeekphruVd0ehWbCMt42IetMTbDtmZJ
+	/UwFLAj++n0mNp1nEahUBb4afPMxcvWCBEfDny6zeZNmkw==
+X-Google-Smtp-Source: AGHT+IEmapYeqtmTfFncijI4MwHEFzRRnr1f1vhtV+NAcgKtHsK/Gh4LJUu8859z517RtmYPXqkV7MLrHRxh
+X-Received: by 2002:a05:6e02:3c84:b0:3dc:8bb8:28b3 with SMTP id e9e14a558f8ab-3dd99bd00fbmr19760835ab.5.1748562457107;
+        Thu, 29 May 2025 16:47:37 -0700 (PDT)
+Received: from c7-smtp-2023.dev.purestorage.com ([208.88.159.129])
+        by smtp-relay.gmail.com with ESMTPS id e9e14a558f8ab-3dd9353520dsm1277765ab.7.2025.05.29.16.47.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 May 2025 16:47:35 -0700 (PDT)
+        Thu, 29 May 2025 16:47:37 -0700 (PDT)
 X-Relaying-Domain: purestorage.com
 Received: from dev-ushankar.dev.purestorage.com (dev-ushankar.dev.purestorage.com [IPv6:2620:125:9007:640:7:70:36:0])
-	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 223603404BD;
+	by c7-smtp-2023.dev.purestorage.com (Postfix) with ESMTP id 2382234057A;
 	Thu, 29 May 2025 17:47:35 -0600 (MDT)
 Received: by dev-ushankar.dev.purestorage.com (Postfix, from userid 1557716368)
-	id D603DE4133B; Thu, 29 May 2025 17:47:34 -0600 (MDT)
+	id DD5A2E4133C; Thu, 29 May 2025 17:47:34 -0600 (MDT)
 From: Uday Shankar <ushankar@purestorage.com>
-Date: Thu, 29 May 2025 17:47:17 -0600
-Subject: [PATCH v8 8/9] selftests: ublk: add stress test for per io daemons
+Date: Thu, 29 May 2025 17:47:18 -0600
+Subject: [PATCH v8 9/9] Documentation: ublk: document UBLK_F_PER_IO_DAEMON
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250529-ublk_task_per_io-v8-8-e9d3b119336a@purestorage.com>
+Message-Id: <20250529-ublk_task_per_io-v8-9-e9d3b119336a@purestorage.com>
 References: <20250529-ublk_task_per_io-v8-0-e9d3b119336a@purestorage.com>
 In-Reply-To: <20250529-ublk_task_per_io-v8-0-e9d3b119336a@purestorage.com>
 To: Ming Lei <ming.lei@redhat.com>, Jens Axboe <axboe@kernel.dk>, 
@@ -102,96 +102,98 @@ Cc: linux-block@vger.kernel.org, linux-kernel@vger.kernel.org,
  Uday Shankar <ushankar@purestorage.com>
 X-Mailer: b4 0.14.2
 
-Add a new test_stress_06 for the per io daemons feature. This is just a
-copy of test_stress_01 with the per_io_tasks flag added, with varying
-amounts of nthreads. This test is able to reproduce a panic which was
-caught manually during development [1]; in the current version of this
-patch set, it passes.
+Explain the restrictions imposed on ublk servers in two cases:
+1. When UBLK_F_PER_IO_DAEMON is set (current ublk_drv)
+2. When UBLK_F_PER_IO_DAEMON is not set (legacy)
 
-Note that this commit also makes all stress tests using the
-run_io_and_remove helper more stressful by additionally exercising the
-batch submit (queue_rqs) path.
+Remove most references to per-queue daemons, as the new
+UBLK_F_PER_IO_DAEMON feature renders that concept obsolete.
 
-[1] https://lore.kernel.org/linux-block/aDgwGoGCEpwd1mFY@fedora/
-
-Suggested-by: Ming Lei <ming.lei@redhat.com>
 Signed-off-by: Uday Shankar <ushankar@purestorage.com>
+Reviewed-by: Caleb Sander Mateos <csander@purestorage.com>
+Reviewed-by: Ming Lei <ming.lei@redhat.com>
 ---
- tools/testing/selftests/ublk/Makefile          |  1 +
- tools/testing/selftests/ublk/test_common.sh    |  5 ++++
- tools/testing/selftests/ublk/test_stress_06.sh | 36 ++++++++++++++++++++++++++
- 3 files changed, 42 insertions(+)
+ Documentation/block/ublk.rst | 35 ++++++++++++++++++++++++-----------
+ 1 file changed, 24 insertions(+), 11 deletions(-)
 
-diff --git a/tools/testing/selftests/ublk/Makefile b/tools/testing/selftests/ublk/Makefile
-index 5d7f4ecfb81612f919a89eb442f948d6bfafe225..1fb1a95d452c2e9a7ed78cb8b12be2b759074e11 100644
---- a/tools/testing/selftests/ublk/Makefile
-+++ b/tools/testing/selftests/ublk/Makefile
-@@ -38,6 +38,7 @@ TEST_PROGS += test_stress_02.sh
- TEST_PROGS += test_stress_03.sh
- TEST_PROGS += test_stress_04.sh
- TEST_PROGS += test_stress_05.sh
-+TEST_PROGS += test_stress_06.sh
+diff --git a/Documentation/block/ublk.rst b/Documentation/block/ublk.rst
+index 854f823b46c2add01d0b65ba36aecd26c45bb65d..c368e1081b4111c581567058f87ecb52db08758b 100644
+--- a/Documentation/block/ublk.rst
++++ b/Documentation/block/ublk.rst
+@@ -115,15 +115,15 @@ managing and controlling ublk devices with help of several control commands:
  
- TEST_GEN_PROGS_EXTENDED = kublk
+ - ``UBLK_CMD_START_DEV``
  
-diff --git a/tools/testing/selftests/ublk/test_common.sh b/tools/testing/selftests/ublk/test_common.sh
-index 0145569ee7e9a45b41898c2c789842b4c8380f18..8a4dbd09feb0a885ec7539f1a285ed6f437fe3ab 100755
---- a/tools/testing/selftests/ublk/test_common.sh
-+++ b/tools/testing/selftests/ublk/test_common.sh
-@@ -278,6 +278,11 @@ __run_io_and_remove()
- 	fio --name=job1 --filename=/dev/ublkb"${dev_id}" --ioengine=libaio \
- 		--rw=randrw --norandommap --iodepth=256 --size="${size}" --numjobs="$(nproc)" \
- 		--runtime=20 --time_based > /dev/null 2>&1 &
-+	fio --name=batchjob --filename=/dev/ublkb"${dev_id}" --ioengine=io_uring \
-+		--rw=randrw --norandommap --iodepth=256 --size="${size}" \
-+		--numjobs="$(nproc)" --runtime=20 --time_based \
-+		--iodepth_batch_submit=32 --iodepth_batch_complete_min=32 \
-+		--force_async=7 > /dev/null 2>&1 &
- 	sleep 2
- 	if [ "${kill_server}" = "yes" ]; then
- 		local state
-diff --git a/tools/testing/selftests/ublk/test_stress_06.sh b/tools/testing/selftests/ublk/test_stress_06.sh
-new file mode 100755
-index 0000000000000000000000000000000000000000..3aee8521032e3962b8b070cda8eb295b01e7b124
---- /dev/null
-+++ b/tools/testing/selftests/ublk/test_stress_06.sh
-@@ -0,0 +1,36 @@
-+#!/bin/bash
-+# SPDX-License-Identifier: GPL-2.0
+-  After the server prepares userspace resources (such as creating per-queue
+-  pthread & io_uring for handling ublk IO), this command is sent to the
++  After the server prepares userspace resources (such as creating I/O handler
++  threads & io_uring for handling ublk IO), this command is sent to the
+   driver for allocating & exposing ``/dev/ublkb*``. Parameters set via
+   ``UBLK_CMD_SET_PARAMS`` are applied for creating the device.
+ 
+ - ``UBLK_CMD_STOP_DEV``
+ 
+   Halt IO on ``/dev/ublkb*`` and remove the device. When this command returns,
+-  ublk server will release resources (such as destroying per-queue pthread &
++  ublk server will release resources (such as destroying I/O handler threads &
+   io_uring).
+ 
+ - ``UBLK_CMD_DEL_DEV``
+@@ -208,15 +208,15 @@ managing and controlling ublk devices with help of several control commands:
+   modify how I/O is handled while the ublk server is dying/dead (this is called
+   the ``nosrv`` case in the driver code).
+ 
+-  With just ``UBLK_F_USER_RECOVERY`` set, after one ubq_daemon(ublk server's io
+-  handler) is dying, ublk does not delete ``/dev/ublkb*`` during the whole
++  With just ``UBLK_F_USER_RECOVERY`` set, after the ublk server exits,
++  ublk does not delete ``/dev/ublkb*`` during the whole
+   recovery stage and ublk device ID is kept. It is ublk server's
+   responsibility to recover the device context by its own knowledge.
+   Requests which have not been issued to userspace are requeued. Requests
+   which have been issued to userspace are aborted.
+ 
+-  With ``UBLK_F_USER_RECOVERY_REISSUE`` additionally set, after one ubq_daemon
+-  (ublk server's io handler) is dying, contrary to ``UBLK_F_USER_RECOVERY``,
++  With ``UBLK_F_USER_RECOVERY_REISSUE`` additionally set, after the ublk server
++  exits, contrary to ``UBLK_F_USER_RECOVERY``,
+   requests which have been issued to userspace are requeued and will be
+   re-issued to the new process after handling ``UBLK_CMD_END_USER_RECOVERY``.
+   ``UBLK_F_USER_RECOVERY_REISSUE`` is designed for backends who tolerate
+@@ -241,10 +241,11 @@ can be controlled/accessed just inside this container.
+ Data plane
+ ----------
+ 
+-ublk server needs to create per-queue IO pthread & io_uring for handling IO
+-commands via io_uring passthrough. The per-queue IO pthread
+-focuses on IO handling and shouldn't handle any control & management
+-tasks.
++The ublk server should create dedicated threads for handling I/O. Each
++thread should have its own io_uring through which it is notified of new
++I/O, and through which it can complete I/O. These dedicated threads
++should focus on IO handling and shouldn't handle any control &
++management tasks.
+ 
+ The's IO is assigned by a unique tag, which is 1:1 mapping with IO
+ request of ``/dev/ublkb*``.
+@@ -265,6 +266,18 @@ with specified IO tag in the command data:
+   destined to ``/dev/ublkb*``. This command is sent only once from the server
+   IO pthread for ublk driver to setup IO forward environment.
+ 
++  Once a thread issues this command against a given (qid,tag) pair, the thread
++  registers itself as that I/O's daemon. In the future, only that I/O's daemon
++  is allowed to issue commands against the I/O. If any other thread attempts
++  to issue a command against a (qid,tag) pair for which the thread is not the
++  daemon, the command will fail. Daemons can be reset only be going through
++  recovery.
 +
-+. "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
-+TID="stress_06"
-+ERR_CODE=0
++  The ability for every (qid,tag) pair to have its own independent daemon task
++  is indicated by the ``UBLK_F_PER_IO_DAEMON`` feature. If this feature is not
++  supported by the driver, daemons must be per-queue instead - i.e. all I/Os
++  associated to a single qid must be handled by the same task.
 +
-+ublk_io_and_remove()
-+{
-+	run_io_and_remove "$@"
-+	ERR_CODE=$?
-+	if [ ${ERR_CODE} -ne 0 ]; then
-+		echo "$TID failure: $*"
-+		_show_result $TID $ERR_CODE
-+	fi
-+}
-+
-+if ! _have_program fio; then
-+	exit "$UBLK_SKIP_CODE"
-+fi
-+
-+_prep_test "stress" "run IO and remove device with per_io_tasks"
-+
-+_create_backfile 0 256M
-+_create_backfile 1 128M
-+_create_backfile 2 128M
-+
-+ublk_io_and_remove 8G -t null -q 4 --nthreads 5 --per_io_tasks &
-+ublk_io_and_remove 256M -t loop -q 4 --nthreads 3 --per_io_tasks \
-+        "${UBLK_BACKFILES[0]}" &
-+ublk_io_and_remove 256M -t stripe -q 4 --nthreads 4 --per_io_tasks \
-+        "${UBLK_BACKFILES[1]}" "${UBLK_BACKFILES[2]}" &
-+wait
-+
-+_cleanup_test "stress"
-+_show_result $TID $ERR_CODE
+ - ``UBLK_IO_COMMIT_AND_FETCH_REQ``
+ 
+   When an IO request is destined to ``/dev/ublkb*``, the driver stores
 
 -- 
 2.34.1
