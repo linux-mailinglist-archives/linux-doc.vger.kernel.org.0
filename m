@@ -1,365 +1,217 @@
-Return-Path: <linux-doc+bounces-47856-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-47858-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7C91AC96CB
-	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 22:55:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E4A6AC96F2
+	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 23:16:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7BBDD16EDD4
-	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 20:55:09 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3CB341710D0
+	for <lists+linux-doc@lfdr.de>; Fri, 30 May 2025 21:16:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 30181218E81;
-	Fri, 30 May 2025 20:55:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC41E221277;
+	Fri, 30 May 2025 21:15:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Wd3EzJoR"
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="uSHXjp1w"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 615C52185A6;
-	Fri, 30 May 2025 20:55:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.19
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748638505; cv=fail; b=GR5Nxnv6RT6Auq8NlCjk+xdcTN+UaF3UrytoosLFs9pqWu8e7048fRMzfbSl5pMGDIOJqJl3cde2bQnb4ZICJDq/rA6muC1p6W8ATrLQTdSiPDJF+F2WL3Suov5sMbH1/YfGZ9gSF6raHVXECLhGgqei2Hc5uoswhUoJfNM1DpE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748638505; c=relaxed/simple;
-	bh=7zqF8LpMOtf6Byab5Lee6cLS1cQ3itpeXaOXfy1iCOI=;
-	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=BnmC+pkvvjDtFXCh50FrodM/02Orpq0B7Ck4cfwCFyGhqViDKGmY0Oi9oQ+GrkCyg0kkIrKrpSUH60HtouxLtqYup0OOg61shS6r09jjmMgHExgICKbZ/EISoqsEhVvRRDU2QHF785RZwOQOg/4NPHZSOW+Vl7lhhqCPlnhJCpY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Wd3EzJoR; arc=fail smtp.client-ip=192.198.163.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1748638503; x=1780174503;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=7zqF8LpMOtf6Byab5Lee6cLS1cQ3itpeXaOXfy1iCOI=;
-  b=Wd3EzJoRF4SURy8pybmeJwtIzUSUEOMRolcmcXMmyXEcyMOsDRhKpiPY
-   GO1knAnYzX0duJQ9TVoAodjduSytUsIge0eETaiVltbEyzY/wBGznhqX3
-   NAF5by3rUtvuuDp9b+aD3t237RL3AIRoB8sAAyQHD+rBJvHglGVpW1Qtj
-   POkYB5jrmM52oBPCG4uUnkD4MvEYXa2d+GF+xwYPv+ODVGI9jg6cvkpu3
-   QMuL22c3RaBrQsxqETZb0/AODW3/mmdw6RfM6n2at97MSMA7rKpytXKa6
-   2xZ2b01YIoCFxgLj3KURm+k0eLtSC4QQHra63A2552xBKtkvh6wue/AyC
-   w==;
-X-CSE-ConnectionGUID: CVgN7+FeRpiWj6LMLX7c/g==
-X-CSE-MsgGUID: 1iek4fXzT2ao2Kbb9I8xEw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11449"; a="49861245"
-X-IronPort-AV: E=Sophos;i="6.16,196,1744095600"; 
-   d="scan'208";a="49861245"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 May 2025 13:55:01 -0700
-X-CSE-ConnectionGUID: 9g3Jf2GRSi+ovUg+5pABUg==
-X-CSE-MsgGUID: 8RV4H521SDyL8jQUIXKphg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,196,1744095600"; 
-   d="scan'208";a="144616181"
-Received: from orsmsx902.amr.corp.intel.com ([10.22.229.24])
-  by orviesa007.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 May 2025 13:55:01 -0700
-Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
- ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Fri, 30 May 2025 13:55:00 -0700
-Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
- ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25 via Frontend Transport; Fri, 30 May 2025 13:55:00 -0700
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (40.107.244.56)
- by edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.55; Fri, 30 May 2025 13:54:59 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RhveBU0BBAA9zccuvINNoI6mnGo96UPBLbPPuT+LtHRgipS/JEs6eGPjSvY23yNpzBfycrRgKnExngPHlvRzj0Zul99ujT6m3qxFrdU9jT3qkk0QwtK6sjdydurapU5T+rmNBbKLhMXZPaNtdSqbi+j2NWwJ5AH/F+Cm957r3nHvJcwaMCAM2TAjgj4maNUfsGzpyLgqro8UfsQ8qaHd3SFo9GXFnvplA5AFQjWLLYHtQxRNFNvPelua42g26ToDrOD+Xu3K+N3cHGTEPUOnYKaE+mTO/h1fYrvM4Vmr0dopselDBCJbZvKYEk2e/N//9r55j7z91F9dBiTdiQM2XQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8M+Spod8OL7G4timuhlyq51I7h4uq00Hf15HBooWCtQ=;
- b=jVVYW3OyVWKOHdkj1C1pEz/SEhw/2uFIaQzILgX4piTE7rd8IcOiy/Mz3Q6eQZk4O5dk0Y5SB7NUyf1si88f8/wt/AiNOyGurxRPk5PUjOaQTDDCw8rWVIXb2jqG2XuPkOX5wcoW77C/3FQgDt2dPDyPguppFBHBPgsO34XdXg0l5JlOu+DCW8bUSb8fB9CNDR/BI1u0QvInxJyk0FbZywyTxbbRdBU29ZNHbXLlOWz7fL6MLlX0gesZsZq7Jj5gvrfzPe/Y/LySei/an49p/TIxGc2pi2TJ1I/UpsT9aHfcJaJgowvhrYfnj0L7ZIc5xR3JhtEfEVJYhW5FMEbPSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from SJ2PR11MB7573.namprd11.prod.outlook.com (2603:10b6:a03:4d2::10)
- by SN7PR11MB6601.namprd11.prod.outlook.com (2603:10b6:806:273::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.32; Fri, 30 May
- 2025 20:54:30 +0000
-Received: from SJ2PR11MB7573.namprd11.prod.outlook.com
- ([fe80::61a:aa57:1d81:a9cf]) by SJ2PR11MB7573.namprd11.prod.outlook.com
- ([fe80::61a:aa57:1d81:a9cf%3]) with mapi id 15.20.8769.021; Fri, 30 May 2025
- 20:54:30 +0000
-Message-ID: <48b40ebe-a1d5-4160-8902-729cf4ac85c5@intel.com>
-Date: Fri, 30 May 2025 13:54:27 -0700
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 21/27] x86/resctrl: Introduce mbm_assign_on_mkdir to
- configure assignments
-To: "Moger, Babu" <bmoger@amd.com>, Babu Moger <babu.moger@amd.com>,
-	<corbet@lwn.net>, <tony.luck@intel.com>, <tglx@linutronix.de>,
-	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>
-CC: <james.morse@arm.com>, <dave.martin@arm.com>, <fenghuay@nvidia.com>,
-	<x86@kernel.org>, <hpa@zytor.com>, <paulmck@kernel.org>,
-	<akpm@linux-foundation.org>, <thuth@redhat.com>, <rostedt@goodmis.org>,
-	<ardb@kernel.org>, <gregkh@linuxfoundation.org>,
-	<daniel.sneddon@linux.intel.com>, <jpoimboe@kernel.org>,
-	<alexandre.chartre@oracle.com>, <pawan.kumar.gupta@linux.intel.com>,
-	<thomas.lendacky@amd.com>, <perry.yuan@amd.com>, <seanjc@google.com>,
-	<kai.huang@intel.com>, <xiaoyao.li@intel.com>, <kan.liang@linux.intel.com>,
-	<xin3.li@intel.com>, <ebiggers@google.com>, <xin@zytor.com>,
-	<sohil.mehta@intel.com>, <andrew.cooper3@citrix.com>,
-	<mario.limonciello@amd.com>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <peternewman@google.com>,
-	<maciej.wieczor-retman@intel.com>, <eranian@google.com>,
-	<Xiaojian.Du@amd.com>, <gautham.shenoy@amd.com>
-References: <cover.1747349530.git.babu.moger@amd.com>
- <ec8d3053a63980fb7fd2b4fc8bba0a1cfa8a69e6.1747349530.git.babu.moger@amd.com>
- <1395b692-cc65-4d84-a68e-f9b20c37f74a@intel.com>
- <54f7b1df-7635-4c3a-8395-172806fde99f@amd.com>
-From: Reinette Chatre <reinette.chatre@intel.com>
-Content-Language: en-US
-In-Reply-To: <54f7b1df-7635-4c3a-8395-172806fde99f@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SJ0PR03CA0275.namprd03.prod.outlook.com
- (2603:10b6:a03:39e::10) To SJ2PR11MB7573.namprd11.prod.outlook.com
- (2603:10b6:a03:4d2::10)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12A291D7E42;
+	Fri, 30 May 2025 21:15:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.15
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1748639756; cv=none; b=OmYCGsABrE+/o+oZacaxjqVhfzk2uKkc6cyWvA/mcRz7lITs8wqJg7Bq5lduLHKiRx3IgpydByxrVg1opDH2+ecPhRdXvW6W+3YzwB6ZuVVxaSt0B3iTzv5nsFi/lWjwD7m4J3lKOupZH3znYTQfKN0FkjTCU2FRufhnFbEgIZ0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1748639756; c=relaxed/simple;
+	bh=KPnYBb8Fmm4eLWoYE0YgXPFfsxoL5JKszq7coiELEk4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=I2AdiLgSS/gRswG801kTuJmkMvV19psF1VStZ5E36yePKmaoEch6geJ0wEvFTDvEDTigRTIMTnR+4X8wC9QsYG8+AuLOKcD6VlHtO1TIJ7uihC40FZoZTHtBQoL1B5FGWSZkhJwN7xIP7oOi+KOx2AGr74gf3G3+6+fapeixChw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=uSHXjp1w; arc=none smtp.client-ip=212.227.15.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1748639745; x=1749244545; i=w_armin@gmx.de;
+	bh=yY2L7dMNG6mlBkA3MxfEJWPj/I4ef3TZeQe2Q+97bG4=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+	 References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:cc:content-transfer-encoding:
+	 content-type:date:from:message-id:mime-version:reply-to:subject:
+	 to;
+	b=uSHXjp1wU8JvnM2zo0E0Sm9Hd3RDc28y2hMgiNNRHpDI3wCR1FE9+yDyvzpPSb+f
+	 Cjl79LxerDp9ak9zHL8LFowCw6acc5ciuJrb3uFEXIC4d5iQJECvvPYA3ccBsSImo
+	 iR/OTTW85Rk6ewht8Y4f22Dl3S/ModWw74coGEVWACRDNjmzpTZ33A7+MIt+BVima
+	 jW/pF9XnfbmMYUp0Ij0ZpljK5gKuxT/U+pcpG6yVF0Q93J5oDmWbwisV9Oh1N/sDE
+	 7NGx2Fu4FiE4kknKNtLvOaZLRh0AfkwH4CDToRn1pYKYyDeSZexaMSbcDOeDUBmU2
+	 sRYyUgpo6y47wcBVAA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.0.69] ([87.177.78.219]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MhD2O-1upWDb1P0s-00dmST; Fri, 30
+ May 2025 23:15:45 +0200
+Message-ID: <2ea3d887-b9e3-444c-ac79-6f882557bc78@gmx.de>
+Date: Fri, 30 May 2025 23:15:42 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR11MB7573:EE_|SN7PR11MB6601:EE_
-X-MS-Office365-Filtering-Correlation-Id: b0db3afc-74a7-4bac-8407-08dd9fbc2c03
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|7416014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?K0dhU0tVNEgvekFFaUFkRTFjMlNhdEFSTE5jL3c0dlJRZ3BVSy9wNHB2L0VI?=
- =?utf-8?B?VWF0UWYwMDdlWkJLQU1WaDc0ZTcrWk90WENaaXh5OGxxOVVhOHc1Q1l3WGlB?=
- =?utf-8?B?bVVjSmhWZEVxQjM2YUZ4Q0FRRThRSWNZZW5xVjV3SnF2a2hZQVMxODFIMmUx?=
- =?utf-8?B?RElOcTJ2TTlwVWFLeCt4Qi9YVk9xQS8wNXhmQlErd1JKOThLc0ZtMldMVENO?=
- =?utf-8?B?MTU0ZE01dlhwUFZzOGs0SUY0SUY1aU0rRSsyOVR4emo1UE5keXNucnRVblFt?=
- =?utf-8?B?S1Mrdk9kbXU2cDE4Qms5Uk52T0d1TjZGRm1KYnpzdWdZTlg0Q1I2WFYwaEEz?=
- =?utf-8?B?SnlLTWdZSGUxZVMxSHRrMGVGWFpPTEpyZFdFMzBXNjR3RHFUYzIrZFVleDJz?=
- =?utf-8?B?STZCR25DNDVGYzdNZWNSVTUyakoxaW1LajE1VHpORG5Ka3FPK0U3aDdWTlJk?=
- =?utf-8?B?UDkzcWFTc3BNeEdiMFRiNnAvN0oyRDFEaVgxZUI2TXlMMUNVYzhnU1BRaWxF?=
- =?utf-8?B?RWMvcWFGU0xJZjFJZjVzcWxwRUVkRGZGNEd4MFdxelFnZ2xqRFlrY0wvOFp6?=
- =?utf-8?B?ZFFHT2txN2xrWldPM1ZWdlhNL0w0SEZObG8rbWY2VHdCVUE1b3JUZUtMUVFB?=
- =?utf-8?B?NDNEd085UjVxVjYrRmZuSUVlTi94TFVYOEVJTzNYQXJRakRjQUVTY3BKMTQy?=
- =?utf-8?B?VnB4bWtybktiRWl6clB3Z1NzNndudjhpZ2JHczF2NWljUEoyb0liNGZWdXUz?=
- =?utf-8?B?ZUoxOElEaHRyeW11MG95NDBXaEFOcnptVWc2UGRyaVdqZk12SVFlaThROEt0?=
- =?utf-8?B?VnRTcDdkTk5CdEdiZTM5dUhjU2ZMVzZtcVppdHRzdDZDaXB1OFhWV0dqRnp1?=
- =?utf-8?B?Zzlha0tRVHNKeUR1bmYwemNNNzYxNlRkNGk0MXRWNmcrZTh5cjhQdkJNaW9Y?=
- =?utf-8?B?VGJnVnl1Rkp4WmZ1NWd5MjNzTEhuL1loYnZ0N0hoaHNnZ0R0SjdqbEJ5dTJu?=
- =?utf-8?B?R05tMHcyZDExYjNDblpPalQ0VUdSNmlkMFY2eTBVM2ozSklUV0RxQjdab0Ix?=
- =?utf-8?B?MGNqMFhjY1VWUkpaYmswQ0xqQWZyZUE5MTZTUFNlRGVldWZOdEVHRWc0QlM2?=
- =?utf-8?B?VjBRR3Bjckw4U0MzQnJiYUEzZlg2VURKUEZ2UGwwdk01cUJZRFZ6c1htakxn?=
- =?utf-8?B?eUNibFdNa3ZFUWlkcWFFSmg3N2ZyMHRyaHJGTndqVmFPdEdaT1JGQWlOdzE1?=
- =?utf-8?B?dExWUE5QaFVTeVdaVnJNZXJTUXlsTzF0WC83RlpwNDdMQ05yN3Q0em05Vmlp?=
- =?utf-8?B?ejdPdk1Gd3IyRFZwYVFlaUk1V2t6c2VMb09MWXo1RzVCWlNaNUFaZWZEK2t6?=
- =?utf-8?B?S2E4TGl0NG1McTdJUG90Vm1yeWtwM3ZHSlhqaEhONDR5MUVWeFJ5Ry82WnVF?=
- =?utf-8?B?SGxsTlIvOFp0RVZFWlhMYjloUGpHNlNONE1tdjIvZTBkOHhMOGVIQTNxYVNG?=
- =?utf-8?B?Q0swdGZ4YXM0REhDMDI4eUo5MXhXektLbjJQUXpYRVVpaVQxcmRkT1V6KzN3?=
- =?utf-8?B?dVk5aWV1dkMyRVMrbXBaQVVScmU3R2JhZUFSZVlOUXFaU01DVVNGall5OHVq?=
- =?utf-8?B?OTlTZ1BIREdESjltcXBMcCtkVnJNblZYR09pV3ZHaHFENGpMQWtjR3JjMWlK?=
- =?utf-8?B?VVlsODFaMkZaanBnOVAzZU1KVDhOVldIaVBlekh6ZVBhSFRFeGhuRlNKcWs1?=
- =?utf-8?B?WGRLZ0MxNEUxUUJQMVJYRGJqNEpQQlVkbzk3OUE4QW82TXlac3J2c2xhWVRT?=
- =?utf-8?B?di9DYUdGamdnN2lORWE1Z0w5VWJybWJaWGttbmxTbFN0aVZmdGticWNBUHhx?=
- =?utf-8?B?aWR0V0JmVVZEMlcrdUdZbnNHeFlCTjdBd2pMYXRWeDVJeTVaQXpiUlhGMTRu?=
- =?utf-8?Q?4TFNE532tFA=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR11MB7573.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?THBrOXhPTzNlNnlKNEVCa2pVaFRlUi9GZEEzYXRkNHI0dnQvRld1RjdZajZl?=
- =?utf-8?B?ZlhIZVhYV1RGVFhFclRtWVh5QmdnemJ4ekJUT2pyQzJtUDB6VXNWU0F6MS9i?=
- =?utf-8?B?MEZ1RklxREErMVpnZkZFaGtYRTNxU1p2SnhOMGNjbG12NWtrQ0FjOGhraVlU?=
- =?utf-8?B?UDRFK01BaU8waU5BMi96bHBPanBONUMyZkk2MGRTU2Y1ZzRFRmZUbjl2ZVNJ?=
- =?utf-8?B?cDZla2ZZREIvVjBod0tFVXgwVnZFcDdyK0x1WUZ4RmtrL0ZrODVOVzNUR3p5?=
- =?utf-8?B?Zi8zTzREdjByT21zT3RNcCtyS0J6Vys0b1J3UjNlM3BqYkZsUzhYQy9HWjJG?=
- =?utf-8?B?OFZMSmY2QVUxZEtOWWRFWXVkdUc2alR3cXAwR0hCOWl0U3drdFB1aW5rSlF5?=
- =?utf-8?B?Ym1SY240Tjd2WWZDb1FjNkxFcFNkZTB2NGNNaHozMzFSNWUwU1g4UzVUN1dZ?=
- =?utf-8?B?SGZCWHV2Sk9Wb3JaUmtlU0VXc2IzWCtkaWw5Z1QvcjRvSGNBQml3ZHJHV2Jy?=
- =?utf-8?B?TnR2clhXb09Xc09LN0dRWWJTS3RGeEtWUk51ZWx0QW0rWnl1M085eUhGbXhE?=
- =?utf-8?B?cGZ6QWJ3YzE1bnZYU2NzVzRTV3lzV2tIbUVqWXh4RE5DSWNJWmxLYVYzS2cw?=
- =?utf-8?B?NXRyUXRJSlNzWkE5QWZOVW9QMWQrS0RBSWF0eDRYeVA0cUZ0RUs4YnFLOWRM?=
- =?utf-8?B?NDFqaytxQ05YYmt4Z2xzZTlnUjVXcy9WNzRDWEZPYko4ZXFkY0t6YjdVT2xP?=
- =?utf-8?B?MGhCRjlBSjlIMmF6dEJyYnhldWV0a3dXSjVidFBKcm15UE5uREdxWDliRFZR?=
- =?utf-8?B?ejBtNU9Ca1NiNUNBTDRtOWtha1VJVlVTV3YxdTZmV3hISHJHZklaSXlobmly?=
- =?utf-8?B?WGNMdHFiaFB5VFliWi8rb2drVjUzRFRnTUNJcHZWS0hvSG4xN2ptb2ZqaU5T?=
- =?utf-8?B?NGtRUE4vSVBoVkpKYnVHdFZ3bzd5NFBCbXh6aXNkUElxeUxwNU8yejJZMkZ0?=
- =?utf-8?B?OENicy9zUGp4WFVQbHloYWdhdTEwazk5YS9nbnUxT2E4L0JXYTN0aENta2R3?=
- =?utf-8?B?TFh3TWtwWVk0Tm5mY3IyMGI1bWI3UlZ4ZmplUDd4L2lJT1poTG1DblFGc1g2?=
- =?utf-8?B?dFVEUXUvYVlERnMvdE1LLys5MCtHNmJKQTdpc3pXSUJZOUtvMlE0cXl2VUI0?=
- =?utf-8?B?S1o3NS83aWdkaVVEaXZzcldCdTJYcDE1ZGI1ekNUN1hSYTcxSFdER1ZiRmpp?=
- =?utf-8?B?NDVVWDE0b0JhSDJYaVYvUUhsNyt0TWhjTzRuQmIvS0FFTGQ0cC8wOFAxR3Z4?=
- =?utf-8?B?RmdqVmJVYmVzNTNGM0VaYlhyWkNvMnQ2c3QvalpUS25mckZWeHpHNzR2a1NK?=
- =?utf-8?B?bEhseW1DcW1TTXdwcWsxanQrSGRnYW9FeEhFSkorZGIxb29vdFhwSnU3RDNP?=
- =?utf-8?B?RTcvbnJZc1BGN0x3U0doaktKK3lhUGhUdGR3YXljc1FpZDcvSHdOanNJeWx6?=
- =?utf-8?B?czh2Qy9JN3lvVUZobC94aGRWOWlDeVJ4STlnVUplb1FXcGhneE9HNGJ1NlRy?=
- =?utf-8?B?SmpnMjY3bVlodFBqNThiNFc1UGpIdHRhRWhvdGdlWEQvZHdLMk93bEdSTkdv?=
- =?utf-8?B?WExYMnZ4YjVDRXdna3NrN3MrdUJPQ3hXZFM1Q1BxUGllbnVxYXpDRXFlTUln?=
- =?utf-8?B?RTI2NWdyUExwMG1kV0k4cDdKL3hTbUlmM0tUc0hIZWtBTW0vbkh6L2dmUlBT?=
- =?utf-8?B?ck1aMUR2a215MklOUkt1cGdmTnJvRXEvcFZIRWFjR2NCenNCUk9xT0hJTmZB?=
- =?utf-8?B?QmJlRnBPN1l3cUZXZjlUNFArS0VVTXl1ZGhvM0xxMjhwNzdBVU5KN1ZKS2pP?=
- =?utf-8?B?dStTczBUU3JaVTQzZGxWSWtHSWFzeDhOSnhnS1VNWlZyUXV0aUNVUEtoUldN?=
- =?utf-8?B?MFhjeTNFQXRDaVhPMGgxNkR0WFhrbnhsWEpYamtuL1dzTjcrQXhIVkVRbWVY?=
- =?utf-8?B?dkxsNW92VTlNdUtsZGNSQzJEMGgxdzZPb2U4am0zbW4vQWZQS2JGRDVXbzJY?=
- =?utf-8?B?ZkVSN2M4NUdMZ2lTZXVNQm55bFljZ2tESU9scXoxbkZnVXNrTGdnakJ2SW1P?=
- =?utf-8?B?aHF1elE5MTlHSUtzck02dDZ4eHIvamd0SHE1OE90ZGRpdlNVVGFjSEgyczly?=
- =?utf-8?B?aGc9PQ==?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: b0db3afc-74a7-4bac-8407-08dd9fbc2c03
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB7573.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 May 2025 20:54:29.9297
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Eryb+wkv3CD8A+xBETvEXPglBxFriia8vJiSCPwTvN7YhIwvKe9xdGCZRFGSMvpvLhPECLPlgRLE0Zrr+VmdJWkXLPk0nPkXCNUkzEJ8nG0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB6601
-X-OriginatorOrg: intel.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 00/10] platform/x86: msi-wmi-platform: Add fan
+ curves/platform profile/tdp/battery limiting
+To: Antheas Kapenekakis <lkml@antheas.dev>
+Cc: platform-driver-x86@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>,
+ Kurt Borja <kuurtb@gmail.com>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org
+References: <20250511204427.327558-1-lkml@antheas.dev>
+ <3a64d00e-3ca8-4a9f-9d72-e62712dc20b9@gmx.de>
+ <CAGwozwE1DECoLnR2Za0UR11abgomBfvTVXV601Ok9hh6CeHjVA@mail.gmail.com>
+Content-Language: en-US
+From: Armin Wolf <W_Armin@gmx.de>
+In-Reply-To: <CAGwozwE1DECoLnR2Za0UR11abgomBfvTVXV601Ok9hh6CeHjVA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:T6wZE7LWG9jz4eN2xmzyj+Auw2H/MpMrw0mH6QU96OxFJvsoNOl
+ 6fj5V0X0f5rFN5sfQCXkqAGBgo04MLcp4/1Ov0sl/kcbv0p0X18uwCdK2DgGJL57xDqs/nP
+ ip1nRgq8xoXFYmCwqmzaw6RV/GFXsVwcUz/14xYeUCvoJWiIglZP8n4G8yySO0ugwpyMLcf
+ h6WDhGlPby0a1w88wMSRg==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:DwkhuLTJhvE=;v8KfzpDVpC5jIypG/ATYxF//tfP
+ 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
+ 0uUd6kD
 
-Hi Babu,
+Am 30.05.25 um 22:50 schrieb Antheas Kapenekakis:
 
-On 5/29/25 4:03 PM, Moger, Babu wrote:
-> Hi Reinette,
-> 
-> On 5/22/2025 11:48 PM, Reinette Chatre wrote:
->> Hi Babu,
+> On Mon, 19 May 2025 at 04:38, Armin Wolf <W_Armin@gmx.de> wrote:
+>> Am 11.05.25 um 22:44 schrieb Antheas Kapenekakis:
 >>
->> On 5/15/25 3:52 PM, Babu Moger wrote:
->>> The mbm_cntr_assign mode provides an option to the user to assign a
->>> counter to an RMID, event pair and monitor the bandwidth as long as
->>> the counter is assigned.
+>>> This draft patch series brings into parity the msi-wmi-platform driver with
+>>> the MSI Center M Windows application for the MSI Claw (all models).
+>>> Unfortunately, MSI Center M and this interface do not have a discovery API,
+>>> necessitating the introduction of a quirk system.
 >>>
->>> Introduce a configuration option to automatically assign counter IDs
->>
->> "assign counter IDs" -> "assign counter IDs to <what?>"
-> 
-> "Introduce a configuration option to automatically assign counter IDs to to an RMID, event pair when a resctrl group is created, provided the counter IDs are available."
-
-Stating that "counter IDs" (plural) are assigned to "an RMID, event pair" (singular)
-can be confusing.
-
-How about something like (please feel free to improve):
-"Introduce a user-configurable option that determines if a counter will automatically
-be assigned to an RMID, event pair when its associated monitor group is created via mkdir."
-
-
-> 
->>
->>> when a resctrl group is created, provided the counters are available.
->>> By default, this option is enabled at boot.
+>>> While this patch series is fully functional and tested, there are still
+>>> some issues that need to be addressed:
+>>>     - Armin notes we need to disable fan curve support by default and quirk
+>>>       it as well, as it is not supported on all models. However, the way
+>>>       PWM enable ops work, this makes it a bit difficult, so I would like
+>>>       some suggestions on how to rework this.
+>>>     - It turns out that to fully disable the fan curve, we have to restore
+>>>       the default fan values. This is also what is done on the OEM software.
+>>>       For this, the last patch in the series is used, which is a bit dirty.
 >>>
->>> Suggested-by: Peter Newman <peternewman@google.com>
->>> Signed-off-by: Babu Moger <babu.moger@amd.com>
->>> ---
->>> v13: Added Suggested-by tag.
->>>       Resolved conflicts caused by the recent FS/ARCH code restructure.
->>>       The rdtgroup.c/monitor.c file has now been split between the FS and ARCH directories.
+>>> Sleep was tested with all values being preserved during S0iX (platform
+>>> profile, fan curve, PL1/PL2), so we do not need suspend/resume hooks, at
+>>> least for the Claw devices.
 >>>
->>> v12: New patch. Added after the discussion on the list.
->>>       https://lore.kernel.org/lkml/CALPaoCh8siZKjL_3yvOYGL4cF_n_38KpUFgHVGbQ86nD+Q2_SA@mail.gmail.com/
->>> ---
->>>   Documentation/filesystems/resctrl.rst | 10 ++++++
->>>   fs/resctrl/monitor.c                  |  2 ++
->>>   fs/resctrl/rdtgroup.c                 | 44 +++++++++++++++++++++++++--
->>>   include/linux/resctrl.h               |  2 ++
->>>   4 files changed, 56 insertions(+), 2 deletions(-)
+>>> For PL1/PL2, we use firmware-attributes. So for that I +cc Kurt since if
+>>> his new high level interface is merged beforehand, we can use that instead.
+>> Overall the patch series looks promising, however the suspend/resume handling
+>> and the quirk system still needs some work.
+>>
+>> If you wish i can provide you with a patch for the EC-based quirk system. You
+>> can then structure your exiting patches around that.
+> Hi,
+> Sorry I have been busy with personal life. I will try to get back to
+> this in 1-2 weeks.
+>
+> I have three minor concerns that mirror each other with using an EC based check.
+>
+> 1) First is that we use boardname on the userspace side to check for
+> the Claw. Therefore, using the EC ID kernel side introduces a failure
+> point I am not very fond of. 2) Second is that collecting the IDs from
+> users might prove more difficult 3) userspace software from MSI uses
+> boardname as well.
+
+Actually the EC ID contains the board name (among other data). I envisioned that we
+rely on the board name reported by the EC instead of the board name reported over SMBIOS.
+This would allow us to better support model variations that share a common board name.
+
+Maybe we can still expose some data (EC ID, debugfs interface) even if a given board is
+not whitelisted. This way users can easily retrieve the EC ID with the board name even
+on unknown boards.
+
+Thanks,
+Armin Wolf
+
+> Could we use a hybrid approach perhaps? What do you think?
+>
+> Antheas
+>
+>> Thanks,
+>> Armin Wolf
+>>
+>>> Antheas Kapenekakis (8):
+>>>     platform/x86: msi-wmi-platform: Add unlocked msi_wmi_platform_query
+>>>     platform/x86: msi-wmi-platform: Add quirk system
+>>>     platform/x86: msi-wmi-platform: Add platform profile through shift
+>>>       mode
+>>>     platform/x86: msi-wmi-platform: Add PL1/PL2 support via firmware
+>>>       attributes
+>>>     platform/x86: msi-wmi-platform: Add charge_threshold support
+>>>     platform/x86: msi-wmi-platform: Drop excess fans in dual fan devices
+>>>     platform/x86: msi-wmi-platform: Update header text
+>>>     platform/x86: msi-wmi-platform: Restore fan curves on PWM disable and
+>>>       unload
 >>>
->>> diff --git a/Documentation/filesystems/resctrl.rst b/Documentation/filesystems/resctrl.rst
->>> index 9923276826db..356f1f918a86 100644
->>> --- a/Documentation/filesystems/resctrl.rst
->>> +++ b/Documentation/filesystems/resctrl.rst
->>> @@ -348,6 +348,16 @@ with the following files:
->>>         # cat /sys/fs/resctrl/info/L3_MON/counter_configs/mbm_total_bytes/event_filter
->>>          local_reads, local_non_temporal_writes
->>>   +"mbm_assign_on_mkdir":
->>> +    Automatically assign the monitoring counters on resctrl group creation
->>
->> assign the monitoring counters to what?
-> 
-> "Automatically assign counter IDs to an RMID, event pair on resctrl group creation if the counter IDs are available. It is enabled by default on boot and users can disable by writing to the interface."
-
-Same here, please take care with the plural/singular usage.
-
-> 
->>> +    if the counters are available. It is enabled by default on boot and users
->>> +    can disable by writing to the interface.
->>> +    ::
->>> +
->>> +      # echo 0 > /sys/fs/resctrl/info/L3_MON/mbm_assign_on_mkdir
->>> +      # cat /sys/fs/resctrl/info/L3_MON/mbm_assign_on_mkdir
->>> +      0
->>
->> Please be explicit in docs what possible values are and what they mean.
-> 
-> Sure. I can print "enabled" or "disabled".
-
-I am not requesting a change in user interface self but instead clear documentation about
-what the input/output values mean. Even if the interface changes to "enabled"/"disabled"
-I assume the interface will still accept boolean values? Compare to the "sparse_masks"
-documentation on how the possible values are explicitly documented.
-
-...
-
->>> +static ssize_t resctrl_mbm_assign_on_mkdir_write(struct kernfs_open_file *of,
->>> +                         char *buf, size_t nbytes, loff_t off)
->>> +{
->>> +    struct rdt_resource *r = rdt_kn_parent_priv(of->kn);
->>> +    bool value;
->>> +    int ret;
->>> +
->>> +    ret = kstrtobool(buf, &value);
->>> +    if (ret)
->>> +        return ret;
->>> +
->>> +    cpus_read_lock();
->>
->> not traversing the domain list so hotplug lock not needed.
-> 
-> ok. Sure.
-> 
->>
->>> +    mutex_lock(&rdtgroup_mutex);
->>
->> rdtgroup_mutex seems only needed because the message buffer is cleared below, and this is why it
->> is not required in the show()?
-> 
-> Hmm. I didnt think about that. Do you think it is required?
-
-It is certainly required to be able to call rdt_last_cmd_clear() and since it then
-covers mbm_assign_on_mkdir I would prefer symmetry in consistently acquiring
-rdtgroup_mutex on both read and write while resctrl is mounted. Note that
-there is also other read usage on resctrl mount that is done with
-mutex held. Having the mutex acquired consistently will help to keep things
-simple.
-
-...
-
->>> diff --git a/include/linux/resctrl.h b/include/linux/resctrl.h
->>> index cd24d1577e0a..d6435abdde7b 100644
->>> --- a/include/linux/resctrl.h
->>> +++ b/include/linux/resctrl.h
->>> @@ -278,6 +278,7 @@ enum resctrl_schema_fmt {
->>>    *            monitoring events can be configured.
->>>    * @num_mbm_cntrs:    Number of assignable monitoring counters
->>>    * @mbm_cntr_assignable:Is system capable of supporting monitor assignment?
->>> + * @mbm_assign_on_mkdir:Auto enable monitor assignment on mkdir?
->>
->> How is "monitor assignment" different from "counter assignment"?
-> 
-> I should be:
-> 
-> "Auto enable counter ID assignment on mkdir"
-
-hmmm ... I do not think this is about "Auto enable".
-How about something like "Automatic counter assignment during monitor group create via mkdir?"
-or "True if counters should automatically be assigned to MBM events of monitor groups
-created via mkdir."
-
-Reinette
+>>> Armin Wolf (2):
+>>>     platform/x86: msi-wmi-platform: Use input buffer for returning result
+>>>     platform/x86: msi-wmi-platform: Add support for fan control
+>>>
+>>>    .../wmi/devices/msi-wmi-platform.rst          |   26 +
+>>>    drivers/platform/x86/Kconfig                  |    3 +
+>>>    drivers/platform/x86/msi-wmi-platform.c       | 1181 ++++++++++++++++-
+>>>    3 files changed, 1156 insertions(+), 54 deletions(-)
+>>>
+>>>
+>>> base-commit: 62b1dcf2e7af3dc2879d1a39bf6823c99486a8c2
 
