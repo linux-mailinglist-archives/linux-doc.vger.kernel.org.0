@@ -1,192 +1,244 @@
-Return-Path: <linux-doc+bounces-48063-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-48065-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 620EEACD787
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Jun 2025 07:45:30 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02B3EACD855
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Jun 2025 09:18:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8FCE71894A28
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Jun 2025 05:45:44 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id EC7A77A6F70
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Jun 2025 07:16:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C16F3199FAB;
-	Wed,  4 Jun 2025 05:45:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A91481D5CC4;
+	Wed,  4 Jun 2025 07:18:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="O1CXBuoa"
+	dkim=pass (2048-bit key) header.d=tomeuvizoso-net.20230601.gappssmtp.com header.i=@tomeuvizoso-net.20230601.gappssmtp.com header.b="0UX6J2xw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1794F2581;
-	Wed,  4 Jun 2025 05:45:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91C7AA937
+	for <linux-doc@vger.kernel.org>; Wed,  4 Jun 2025 07:17:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1749015924; cv=none; b=WGoyNlYKao3VkYESw48EmPYOMdXKdR2NKVJiBNJ0yhbx3ca7nyFjXYn5v68zxTz0C+lsa7dxoW73nT8P51Jr1Ep5MJZVWQ6WrDyovkVIza+tctab6rqC2IrBZFLYE4KIVKmIoTCkj5PH7zdsHPNNEAL05JYYGqt4HjoW9GUGU+k=
+	t=1749021480; cv=none; b=aYdP1eT6GumDH/J4j7+fGMe+9+G2rJrc0hyA6U530Tmh/y1FbWENq5azyZXs8smcN0t5ShO7IYNe8a4gHI5BJijmeFFjnuKSxAvLm6MeCBeic2To2LsRRIrb2/OZSQ27HSYLvGlPzNGIq2khSgwVgNxlq6/mW7kOa/QjCEv56m4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1749015924; c=relaxed/simple;
-	bh=CfLtqzHHaY4doOrdi8xjRk+IFtdUdKN3wsI17JcTQDo=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=SwU+2ACDk76tvNFaudEShFbklp2zWe4uzwhXRD/qF6MuxFA+4nBXGfV62QrnF71uVDs/idg2L8ovhNISG357kSkLd20pYfTyHZuqa0g6RwCCKT7jBSXFsCN+HOLEUSSxE+HZdSY0naHym+Ifpf07BLqJDNlwQqciWyYt/6kD4jQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=O1CXBuoa; arc=none smtp.client-ip=148.163.156.1
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5543sB3g027925;
-	Wed, 4 Jun 2025 05:45:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=pp1; bh=MGwMCcbZnV/E5roc53l8Op6u4fYi
-	fdCCWTjLFLVW9rQ=; b=O1CXBuoac4NeV/Tmn3ouXkdo9TRSWPiowI9DhZuAcqAg
-	f00dait1ZdF1N0f0xLdV1M3dezehBes2Ac8IDhJdI50zIPJ3Z5fTW5CqCwRDbkPR
-	V39djxRMyNzG7gm8ODm9p3yg+cXCtdoEFpmINOVvxXo2oV/pxhW+leCNpVWGPaF2
-	1BUkrUIIfVgKp5W5HUeT4+8rVqq4XyGfCvTaTxi2PwcTQrp8iof8KHyr9/83K3WT
-	HH6H8iog+ThmQZm+6tJrqff9I/0lD8jfN3pU//xBTVph2IXiIRwHJs1FEUxdiqRc
-	kTda9p/TQtve1ZyUmFI7h8evV7DTtZHCYU2hMG7SqA==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 471gey8m20-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 04 Jun 2025 05:45:13 +0000 (GMT)
-Received: from m0353729.ppops.net (m0353729.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 5545jDNX013249;
-	Wed, 4 Jun 2025 05:45:13 GMT
-Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 471gey8m1v-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 04 Jun 2025 05:45:13 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 5542i6L1019883;
-	Wed, 4 Jun 2025 05:45:12 GMT
-Received: from smtprelay04.fra02v.mail.ibm.com ([9.218.2.228])
-	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 470d3nx8v1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 04 Jun 2025 05:45:11 +0000
-Received: from smtpav07.fra02v.mail.ibm.com (smtpav07.fra02v.mail.ibm.com [10.20.54.106])
-	by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 5545jAgq10092986
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 4 Jun 2025 05:45:10 GMT
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 0C55E20043;
-	Wed,  4 Jun 2025 05:45:10 +0000 (GMT)
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 76D2520040;
-	Wed,  4 Jun 2025 05:45:07 +0000 (GMT)
-Received: from vishalc-ibm.ibm.com (unknown [9.39.20.96])
-	by smtpav07.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Wed,  4 Jun 2025 05:45:07 +0000 (GMT)
-From: Vishal Chourasia <vishalc@linux.ibm.com>
-To: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
-        =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>, cgroups@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        bagasdotme@gmail.com, llong@redhat.com
-Cc: Vishal Chourasia <vishalc@linux.ibm.com>
-Subject: [PATCH] Documentation: cgroup: add section explaining controller availability
-Date: Wed,  4 Jun 2025 11:13:53 +0530
-Message-ID: <20250604054352.76641-2-vishalc@linux.ibm.com>
-X-Mailer: git-send-email 2.49.0
+	s=arc-20240116; t=1749021480; c=relaxed/simple;
+	bh=AvVQ937BtNde2oB5oSor9GXyudXqQ+VX/ToLMLYiIKc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=O8su2YkjesE7OM6JoUqN4wGAy/25cMx/oBHM6eGwi0NCqV5midavYwmI7wFCpkoOldIyuS5l0t80844W8kJjZbIOuz4cG1iLM2DXom6smZyAvQak41QIarrywlbFmRLDKI9gJlYSEjJWw9VowMvc6F28aLVMedChio6MmMiJaqY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tomeuvizoso.net; spf=pass smtp.mailfrom=tomeuvizoso.net; dkim=pass (2048-bit key) header.d=tomeuvizoso-net.20230601.gappssmtp.com header.i=@tomeuvizoso-net.20230601.gappssmtp.com header.b=0UX6J2xw; arc=none smtp.client-ip=209.85.160.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tomeuvizoso.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tomeuvizoso.net
+Received: by mail-qt1-f176.google.com with SMTP id d75a77b69052e-4a44e3928a9so49670191cf.2
+        for <linux-doc@vger.kernel.org>; Wed, 04 Jun 2025 00:17:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=tomeuvizoso-net.20230601.gappssmtp.com; s=20230601; t=1749021477; x=1749626277; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=p+nHXGLB1NoYThzl7RUIYtz2LHj026ykSFmZ3xBykhI=;
+        b=0UX6J2xwDNmVRLPaSchWR02JOPotgCxHvoWnb32wvJnp4AmXjARmEQBxSWKIAP4/8w
+         u7LDd00RrDeE1HWf5WkdoFNlHQ5/Ksk7lDmszRWeUh/mswwWJbqErpyNXosrk0kd6esI
+         RbwV6cTGbWYseRa1QQT4K3pf6KBmbq4TJa5tZcqEqYEYVpgckkuIQbuZIg6FGOXPiUMP
+         mPhNLgxRcZVgBuLo40+J+aD/enQoHbIA0M1mVUNnhSWE3FiKoEXWiCMZ/XGz5/p8R1Eh
+         y3mImKZYKtQ4UbKPtNwOvUvjBQ2yQvJVOysaNNyOIQSkzaNCAfN5bEql1W6TAdXpSRmF
+         B8aQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1749021477; x=1749626277;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=p+nHXGLB1NoYThzl7RUIYtz2LHj026ykSFmZ3xBykhI=;
+        b=MbEHwdDpPEfQv4FMV1612a1ORAPWNbr+CSCHlzVkVNXVcRRXVSEDRXMQOH+Yt2P88o
+         +0JpvVZBjzp6OyOMCkjvWBtVJXCsKH1d58hqTJgXgf60W2sddujwi8YF9U5YjrKOBkC1
+         T+MmI11p1xjQBla2OrCYJ+L14LzjGWo03XJ8QSIyPKlgvktDoDaZMMYXqCrmIB1VIsxq
+         tdEi22qhCGMeyK+NUcUhGQmWc5SHH0yIkvGAelh9gM4Sc2DUTzHknoMCsoxo3tTVyUxW
+         EHHnLa5P/fGH2qfMFyIEVumwSNcmW1NjTcFCd6erUzq34ZMuT7ajmhHqBB5rh498TKb5
+         tFCw==
+X-Forwarded-Encrypted: i=1; AJvYcCWGEK0dI8oTi8QRAHvWg9r4CQBaB1+jE2FGVtP+j5KdiU02GYTgS040ICvUbpiyp0zhKJldVLdRZhI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwNggGCMTVx0cp8ObvU0PYxdGtNmofhsY51WPUYZdWds3iWEH1p
+	AYOBVhktvhKZTtvjOkGsu1GD8JRPxznJr3zS0V+ypwLhNJPyUGO1T0rahsZGbttt6XSe25cg6Bp
+	RUvpopC7YVg==
+X-Gm-Gg: ASbGncshatG1G0QM/i7etmWp2dWndUgRF7QxvsyTjgqm74ehf4GV+rV6UPsEoucbHAk
+	UjUnyBjbHxKr2PERNRqFGZ9A5lW/ew8dhLioL5X1Z5BKlrNogQGVShrDWGmLQPI6qoc708Pffs3
+	GHSeqPtWn1LGO9CTXEuQ1zgLSPcdCGXIDIQQFH6YvLP4FYY/nk8P2kHvDIgnXh9EtzzAVYDU8PI
+	U6Kz29XI4tWVaENNReuhYwEBFs7jT/KVpqyEQ6DiYuWUb2E3+od8lWzKJ0cwIiEFUcFld6kgT7G
+	FNY0suagW4jbPhjsSiSXqJ7zTN2nhq3rHgAHkQ+xvhez3lhAsPa6Ed2O3okV0cfEbkdTvioYIcc
+	AnPHpst78Ym7ijpbL2kSBJSChE5O24Q==
+X-Google-Smtp-Source: AGHT+IG3rICK20WcXmsMqHVXE/1Td3o6kvLBF/u8PF67+sgY/baVQynskCPrTZv+AkTCMa8xnjYnBg==
+X-Received: by 2002:a05:622a:5806:b0:4a4:2fad:7cdd with SMTP id d75a77b69052e-4a5a585f07cmr25588721cf.24.1749021477399;
+        Wed, 04 Jun 2025 00:17:57 -0700 (PDT)
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com. [209.85.160.171])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4a4358d37cdsm90082971cf.40.2025.06.04.00.17.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 04 Jun 2025 00:17:57 -0700 (PDT)
+Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-4a43cbc1ab0so75531791cf.0;
+        Wed, 04 Jun 2025 00:17:57 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCUGFEGvWT0X1eZyREBXAHHGk+1RkHPThNGKT2/dbUCeDSJluQC1fp5Exn0N3G8n2mKaZQBLXQi3dgv3@vger.kernel.org, AJvYcCWCkos9rCM/PMUTqs9s95gVLLjJ7fltJNRfdOZvHfyS0pUrU5nQYoazA9yIsKb0qp6bqBxqHu9lziVc@vger.kernel.org, AJvYcCWIPy8rQR7m0WLm3otQ2EjGkSqYXPuQW0WCmUML89Tk9RWHbCU06brEgqcHZBRSIiA/oDiEgLhorPzch/fr@vger.kernel.org, AJvYcCWrOGyzNEZd2JdUev6mUxwGsTnsVeeyhjNVEKdWW+7lUqANkOO4ZmPRSmoIn621/IGp1zcvP9gJdnIVAtM=@vger.kernel.org
+X-Received: by 2002:a05:6902:6c12:b0:e81:4200:e227 with SMTP id
+ 3f1490d57ef6-e8179ef4b9amr1895455276.40.1749021096375; Wed, 04 Jun 2025
+ 00:11:36 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Authority-Analysis: v=2.4 cv=ea09f6EH c=1 sm=1 tr=0 ts=683fdd69 cx=c_pps a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17 a=IkcTkHD0fZMA:10 a=6IFa9wvqVegA:10 a=VnNF1IyMAAAA:8 a=HQQEU_knwVeOKeFEU2cA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-GUID: C81rhpJsaUpP4mt53DogBzq6cg6qhRV_
-X-Proofpoint-ORIG-GUID: 5O1nNfm1u2pw_IpNjj3ZO2JwPUFHqsGb
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjA0MDA0NSBTYWx0ZWRfX0D3w9cCZFXjF Gpt+l/EdTl85b5F/7EcRhOPrPRByNaxTuwcgn3TJcuI+ZhtbJu98scv2Bw3Ux10+LlLkxafPCD6 //TWGygtHGAlppnm8pBnrNy1Y4/5n/2DzIyE+Fv1vjFlen9a0978yOo7aJDNwzhHwXAY1Y/rAAU
- mW4ahCocSdfzeAzGeUuyV5PF5QTNyBeaeMYYW5k00B4C6Cex5g7nOviR8KoV01iTi5qDwobc15P HIDe56bpM0f8DeMhCWBMxDcYONFWBbtW1pA4GKzN7tu5amcxHR98jgxfiM9WkjbKscWTxiqYCtw 6eGhV8oJqNt9nwOE3y04jF9k8SVSDXztYEJmehsPVNfUb9WESl1yqxXc5IvmsgTmFMB3Gk8LKPi
- 4Ai3V3eRkWTOjV1SpshJIQ5tsaw2liJskDQhxiNyziU4RkfuxD5Fr7HcvTBAIFbpJdZlo9xS
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-04_01,2025-06-03_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=842 bulkscore=0
- spamscore=0 suspectscore=0 lowpriorityscore=0 malwarescore=0
- impostorscore=0 phishscore=0 mlxscore=0 adultscore=14 clxscore=1015
- priorityscore=1501 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2506040045
+References: <20250520-6-10-rocket-v5-0-18c9ca0fcb3c@tomeuvizoso.net>
+ <20250520-6-10-rocket-v5-1-18c9ca0fcb3c@tomeuvizoso.net> <CAL_Jsq+2mvUDWWvtPSryAiCNJP_=1vNRxARxWTS=-O-LTQO3Dg@mail.gmail.com>
+ <CAAObsKDE33kZ27XbgeWBqQzrZXDHwHzp2Q6A7y_osC50UG-n7g@mail.gmail.com>
+In-Reply-To: <CAAObsKDE33kZ27XbgeWBqQzrZXDHwHzp2Q6A7y_osC50UG-n7g@mail.gmail.com>
+From: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+Date: Wed, 4 Jun 2025 09:11:25 +0200
+X-Gmail-Original-Message-ID: <CAAObsKCZiBmy2kBm76V0cWfsLBbHnKzG4CS-bRUBc25k22K20A@mail.gmail.com>
+X-Gm-Features: AX0GCFuzVw9QOJbPU8rAaiE__0pakSdSWD2x8uriT207nU1DMDYnxHzJRzNlcz4
+Message-ID: <CAAObsKCZiBmy2kBm76V0cWfsLBbHnKzG4CS-bRUBc25k22K20A@mail.gmail.com>
+Subject: Re: [PATCH v5 01/10] dt-bindings: npu: rockchip,rknn: Add bindings
+To: Rob Herring <robh@kernel.org>
+Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Heiko Stuebner <heiko@sntech.de>, Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	Sebastian Reichel <sebastian.reichel@collabora.com>, 
+	Nicolas Frattaroli <nicolas.frattaroli@collabora.com>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, 
+	Kever Yang <kever.yang@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-A new documentation section titled "Availability" has been added to
-describe the meaning of a controller being available in a cgroup,
-complementing the existing "Enabling and Disabling" section.
+On Wed, May 28, 2025 at 5:34=E2=80=AFPM Tomeu Vizoso <tomeu@tomeuvizoso.net=
+> wrote:
+>
+> On Wed, May 28, 2025 at 3:41=E2=80=AFPM Rob Herring <robh@kernel.org> wro=
+te:
+> >
+> > On Tue, May 20, 2025 at 5:27=E2=80=AFAM Tomeu Vizoso <tomeu@tomeuvizoso=
+.net> wrote:
+> > >
+> > > Add the bindings for the Neural Processing Unit IP from Rockchip.
+> > >
+> > > v2:
+> > > - Adapt to new node structure (one node per core, each with its own
+> > >   IOMMU)
+> > > - Several misc. fixes from Sebastian Reichel
+> > >
+> > > v3:
+> > > - Split register block in its constituent subblocks, and only require
+> > >   the ones that the kernel would ever use (Nicolas Frattaroli)
+> > > - Group supplies (Rob Herring)
+> > > - Explain the way in which the top core is special (Rob Herring)
+> > >
+> > > v4:
+> > > - Change required node name to npu@ (Rob Herring and Krzysztof Kozlow=
+ski)
+> > > - Remove unneeded items: (Krzysztof Kozlowski)
+> > > - Fix use of minItems/maxItems (Krzysztof Kozlowski)
+> > > - Add reg-names to list of required properties (Krzysztof Kozlowski)
+> > > - Fix example (Krzysztof Kozlowski)
+> > >
+> > > v5:
+> > > - Rename file to rockchip,rk3588-rknn-core.yaml (Krzysztof Kozlowski)
+> > > - Streamline compatible property (Krzysztof Kozlowski)
+> > >
+> > > Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> > > Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> > > ---
+> > >  .../bindings/npu/rockchip,rk3588-rknn-core.yaml    | 147 +++++++++++=
+++++++++++
+> > >  1 file changed, 147 insertions(+)
+> > >
+> > > diff --git a/Documentation/devicetree/bindings/npu/rockchip,rk3588-rk=
+nn-core.yaml b/Documentation/devicetree/bindings/npu/rockchip,rk3588-rknn-c=
+ore.yaml
+> > > new file mode 100644
+> > > index 0000000000000000000000000000000000000000..9eb426367afcbc03c387d=
+43c4b8250cdd1b9ee86
+> > > --- /dev/null
+> > > +++ b/Documentation/devicetree/bindings/npu/rockchip,rk3588-rknn-core=
+.yaml
+> > > @@ -0,0 +1,147 @@
+> > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> > > +%YAML 1.2
+> > > +---
+> > > +$id: http://devicetree.org/schemas/npu/rockchip,rk3588-rknn-core.yam=
+l#
+> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > +
+> > > +title: Neural Processing Unit IP from Rockchip
+> > > +
+> > > +maintainers:
+> > > +  - Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> > > +
+> > > +description:
+> > > +  Rockchip IP for accelerating inference of neural networks, based o=
+n NVIDIA's
+> > > +  open source NVDLA IP.
+> > > +
+> > > +  There is to be a node per each core in the NPU. In Rockchip's desi=
+gn there
+> > > +  will be one core that is special and needs to be powered on before=
+ any of the
+> > > +  other cores can be used. This special core is called the top core =
+and should
+> > > +  have the compatible string that corresponds to top cores.
+> >
+> > Is this really a distinction in the h/w? If you change which core is
+> > the top one in the DT, does it still work?
+>
+> No, I really need to power on that one before the others can work (the
+> first core is also marked as special in a diagram in the TRM).
+>
+> > > +
+> > > +properties:
+> > > +  $nodename:
+> > > +    pattern: '^npu@[a-f0-9]+$'
+> > > +
+> > > +  compatible:
+> > > +    enum:
+> > > +      - rockchip,rk3588-rknn-core-top
+> > > +      - rockchip,rk3588-rknn-core
+> > > +
+> > > +  reg:
+> > > +    maxItems: 3
+> > > +
+> > > +  reg-names:
+> > > +    items:
+> > > +      - const: pc
+> > > +      - const: cna
+> > > +      - const: core
+> > > +
+> > > +  clocks:
+> > > +    minItems: 2
+> > > +    maxItems: 4
+> > > +
+> > > +  clock-names:
+> > > +    items:
+> > > +      - const: aclk
+> > > +      - const: hclk
+> > > +      - const: npu
+> > > +      - const: pclk
+> > > +    minItems: 2
+> >
+> > It is odd that the non-top cores only have bus clocks and no module
+> > clock. But based on the clock names, I'm guessing the aclk/hclk are
+> > not shared, but the npu and pclk are shared. Since you make the top
+> > core probe first, then it will enable the shared clocks and the
+> > non-top cores don't have to worry about them. If so, that is wrong as
+> > it is letting the software design define the bindings.
+>
+> Yes, I think it's probably as you say, but I don't know how I could
+> check. Maybe Kever, Heiko or Sebastian would have any ideas?
 
-This update improves the clarity of cgroup controller management by
-explicitly distinguishing between:
+So I talked with Kever and Heiko about this, and the npu and pclk
+clocks are indeed shared among cores.
 
-1. Availability – when a controller is supported by the kernel and
-   listed in "cgroup.controllers", making its interface files accessible
-   in the cgroup's directory.
-2. Enabling – when a controller is enabled via explicitly writing the
-   name of the controller to "cgroup.subtree_control" to control
-   distribution of resource across the cgroup's immediate children.
+Regards,
 
-As an example, consider
-
-/sys/fs/cgroup # cat cgroup.controllers
-cpuset cpu io memory hugetlb pids misc
-/sys/fs/cgroup # cat cgroup.subtree_control # No controllers enabled by default
-/sys/fs/cgroup # echo +cpu +memory > cgroup.subtree_control # enabling "cpu" and "memory"
-/sys/fs/cgroup # cat cgroup.subtree_control
-cpu memory                   # cpu and memory enabled in /sys/fs/cgroup
-/sys/fs/cgroup # mkdir foo_cgrp
-/sys/fs/cgroup # cd foo_cgrp/
-/sys/fs/cgroup/foo_cgrp # cat cgroup.controllers
-cpu memory                   # cpu and memory available in 'foo_cgrp'
-/sys/fs/cgroup/foo_cgrp # cat cgroup.subtree_control  # empty by default
-/sys/fs/cgroup/foo_cgrp # ls
-cgroup.controllers      cpu.max.burst           memory.numa_stat
-cgroup.events           cpu.pressure            memory.oom.group
-cgroup.freeze           cpu.stat                memory.peak
-cgroup.kill             cpu.stat.local          memory.pressure
-cgroup.max.depth        cpu.weight              memory.reclaim
-cgroup.max.descendants  cpu.weight.nice         memory.stat
-cgroup.pressure         io.pressure             memory.swap.current
-cgroup.procs            memory.current          memory.swap.events
-cgroup.stat             memory.events           memory.swap.high
-cgroup.subtree_control  memory.events.local     memory.swap.max
-cgroup.threads          memory.high             memory.swap.peak
-cgroup.type             memory.low              memory.zswap.current
-cpu.idle                memory.max              memory.zswap.max
-cpu.max                 memory.min              memory.zswap.writeback
-
-In this example, "cpu" and "memory" are enabled in the root cgroup,
-making them available in "foo_cgrp". This exposes the corresponding
-interface files in "foo_cgrp/", allowing resource control of processes
-in that cgroup. However, these controllers are not yet enabled in
-"foo_cgrp" itself.
-
-Once a controller is available in a cgroup it can be used to resource
-control processes of the cgroup.
-
-Signed-off-by: Vishal Chourasia <vishalc@linux.ibm.com>
----
- Documentation/admin-guide/cgroup-v2.rst | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 0cc35a14afbe..202bf39867ea 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -435,6 +435,15 @@ both cgroups.
- Controlling Controllers
- -----------------------
- 
-+Availablity
-+~~~~~~~~~~~
-+
-+A controller is available in a cgroup when it is supported by the kernel and
-+listed in the "cgroup.controllers" file. Availability means the controller's
-+interface files are exposed in the cgroup’s directory, allowing the
-+distribution of the target resource to be observed or controlled within
-+that cgroup.
-+
- Enabling and Disabling
- ~~~~~~~~~~~~~~~~~~~~~~
- 
--- 
-2.49.0
-
+Tomeu
 
