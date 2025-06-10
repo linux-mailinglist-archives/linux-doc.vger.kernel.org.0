@@ -1,153 +1,100 @@
-Return-Path: <linux-doc+bounces-48578-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-48581-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3877AD3AD9
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 16:14:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAF88AD3B1C
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 16:29:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 90F55179797
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 14:13:38 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A2F5C17AEDE
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 14:29:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E9122BD036;
-	Tue, 10 Jun 2025 14:12:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C097B28C020;
+	Tue, 10 Jun 2025 14:28:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iDvadfL4"
+	dkim=pass (2048-bit key) header.d=killermarmot.com header.i=@killermarmot.com header.b="oTthYiWM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from g4coop.com (lmx.g4coop.com [45.56.102.139])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1A1529B8F5;
-	Tue, 10 Jun 2025 14:12:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E58B5299A94
+	for <linux-doc@vger.kernel.org>; Tue, 10 Jun 2025 14:28:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.56.102.139
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1749564754; cv=none; b=nqEu1+15qGZ96gdK+1Bx2YQm3hGMSBHIkK5XXEbsqrFBRA8LPTUNUR3YeY9XaZMDaVNpRbZJzk9Sos39yJgnrvjb5u+F3NsmQT4YvDYwXHPnl9ACxLSRlBjhwANbRBSxhqw3HpZP7rcHMtY1+89yIusoLDjYftcL+0jzUswD/P8=
+	t=1749565736; cv=none; b=bzmwbnwT6ws96rZKu7ughTWKv55a88kqntSpNPFbzeJw1TJEfa8QOvLrsrz3bHa0KGs7gTrU9xu2tCJOIfj5iU9w1CHX9KLBbRYkMl8hg+AE72nglb4YN8BTk143sq0DpaZLzk5joXcM3nRdAdJIaorGmZmShXH80T6dDc2KQcQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1749564754; c=relaxed/simple;
-	bh=eMKse3olgDDTdTVEulDHGZT76bFnjfTCsl3tj8Z5nvY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=iIFUMSQ7mGeYiZkKdqhHrmuJlOtiVDOyvAnZ6HwGU1avlEkjcsGxhTp7hGdzgPUrtzjk1Ju6YxYRldLrkcFvl7+/77Wx6wSyoQavCNvYUQc5Mf2nDAI9Q+gPAe08OVIwxMyX7ZgAWPYp/UD/yKlzATdCqhuPYxUqviyLJuDeQOw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iDvadfL4; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5397BC4CEED;
-	Tue, 10 Jun 2025 14:12:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1749564753;
-	bh=eMKse3olgDDTdTVEulDHGZT76bFnjfTCsl3tj8Z5nvY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=iDvadfL44uEdOn0RtAKvFUzmjA3P8wkt05S4itlgj9uHWgynwMccowZQoFOu++QFD
-	 mcO3mvOL0NAsin3bQOp1h/ZCUlyHQ7oF95a6pd4BXFE848ngnZ/kbV4NzdmmP1wPDf
-	 +yJYT56/8HzKLHsFkoz4bVY/bh1bycU0oA9nM3IQe9O73TQETn9ejg5v9TbCXY7XlL
-	 j/uk/x99ebbbgoC8rj/LqcgfuDB2K4uUCu7+rBgVsN0GTiJWd1HAkRtT8HqrFPZXKN
-	 eyHu8r5vNhJXkO1hgX/cidteEiZ+OJRZGChy0yn/mmeNtajyWF7kIDt6PVFpJ3d8SS
-	 TgTABlY1obp+g==
-Message-ID: <24febda9-6360-459f-82d3-6fba9ed9be83@kernel.org>
-Date: Tue, 10 Jun 2025 07:12:31 -0700
+	s=arc-20240116; t=1749565736; c=relaxed/simple;
+	bh=LpoHPWce1f/+7svGEcT0jPynC3ldIq6Vr1Mag/IpO5k=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=JyiupQn4kdLT6X0UArqp9eTZBsyR4vFN6L+zk6NuqQIOyfAeinocS+iXoJekZ6/c17RjFRYCl6Tpjzx06ROv1TGuzjwJzgH/vQUmTUFvPeosln24iQ4EIjJLxDML11wO85PD+sXCg3M3okQ70rtA7lpvuvoaO+y9oBfmeV10mVI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=killermarmot.com; spf=pass smtp.mailfrom=killermarmot.com; dkim=pass (2048-bit key) header.d=killermarmot.com header.i=@killermarmot.com header.b=oTthYiWM; arc=none smtp.client-ip=45.56.102.139
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=killermarmot.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=killermarmot.com
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by g4coop.com (Postfix) with ESMTPSA id 8F0114130C;
+	Tue, 10 Jun 2025 08:19:42 -0600 (MDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 g4coop.com 8F0114130C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=killermarmot.com;
+	s=20211216; t=1749565182;
+	bh=4GbfA7ySqWEyQH/T3naoRwHCv4KGHF0SbRaTQsN/aqQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=oTthYiWM0nZJRC403mixfVo5WxkHejz8HlqfQw0juPO2yLdynYz4AZYU1c/a9xANq
+	 3zfZtmkdHmsp8G4FGJ4+qTsrKPaRUew9snXCDrlmsAL58tL7pA7OnYfLwlXc3dPY0m
+	 X66UiC8ywZPM5FQcgjLAqL/fLO2NmHOItC5hIT9X+hSFHaoWvLM/RadZYqwwtU157I
+	 BOJ9O2g+yJiSFsLlPuysASeQ190Av71Ya7U1ZqyBwER77E+LjHj+FtwOqz8GAs/oAk
+	 bnQCxTnzheACtiqar/QFlZhxfp8ispnyrDxjlF50v+vqtqILe0jVJl3o5LzPYYGEwq
+	 JmlDFBT//oi7g==
+From: Jonathan Corbet <corbet@killermarmot.com>
+To: linux-doc@vger.kernel.org
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH] docs: kdoc: Make body_with_blank_line parsing more flexible
+Date: Tue, 10 Jun 2025 08:19:41 -0600
+Message-ID: <87wm9j65mq.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/5] i2c: piix4: Depends on X86
-To: Huacai Chen <chenhuacai@kernel.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Borislav Petkov <bp@alien8.de>, Jean Delvare <jdelvare@suse.com>,
- Andi Shyti <andi.shyti@kernel.org>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Jonathan Corbet <corbet@lwn.net>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Yazen Ghannam <yazen.ghannam@amd.com>, Thomas Gleixner <tglx@linutronix.de>,
- Ingo Molnar <mingo@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>,
- "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
- "H . Peter Anvin" <hpa@zytor.com>,
- Shyam Sundar S K <Shyam-sundar.S-k@amd.com>,
- Hans de Goede <hdegoede@redhat.com>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:I2C/SMBUS CONTROLLER DRIVERS FOR PC" <linux-i2c@vger.kernel.org>,
- "open list:AMD PMC DRIVER" <platform-driver-x86@vger.kernel.org>,
- Ingo Molnar <mingo@kernel.org>, linux-mips@vger.kernel.org,
- loongarch@lists.linux.dev
-References: <20250422234830.2840784-1-superm1@kernel.org>
- <20250422234830.2840784-3-superm1@kernel.org>
- <CAMuHMdVPQLjOox5sMp34Z5MTwKv2WOpHa=MpZr8hWG22fQKcjw@mail.gmail.com>
- <CAAhV-H70LXsDYMA7wz4x828rEFoJsNX0=m8F73Ge9=yfpzBpZQ@mail.gmail.com>
-Content-Language: en-US
-From: Mario Limonciello <superm1@kernel.org>
-In-Reply-To: <CAAhV-H70LXsDYMA7wz4x828rEFoJsNX0=m8F73Ge9=yfpzBpZQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On 6/10/2025 2:24 AM, Huacai Chen wrote:
-> On Tue, Jun 10, 2025 at 5:16 PM Geert Uytterhoeven <geert@linux-m68k.org> wrote:
->>
->> Hi Mario,
->>
->> CC mips, loongarch
->>
->> On Wed, 23 Apr 2025 at 01:49, Mario Limonciello <superm1@kernel.org> wrote:
->>> From: Mario Limonciello <mario.limonciello@amd.com>
->>>
->>> PIIX4 and compatible controllers are only for X86. As some headers are
->>> being moved into x86 specific headers PIIX4 won't compile on non-x86.
->>>
->>> Suggested-by: Ingo Molnar <mingo@kernel.org>
->>> Signed-off-by: Mario Limonciello <mario.limonciello@amd.com>
->>
->> Thanks for your patch, which is now commit 7e173eb82ae97175
->> ("i2c: piix4: Make CONFIG_I2C_PIIX4 dependent on CONFIG_X86")
->> in v6.16-rc1.
->>
->>> --- a/drivers/i2c/busses/Kconfig
->>> +++ b/drivers/i2c/busses/Kconfig
->>> @@ -200,7 +200,7 @@ config I2C_ISMT
->>>
->>>   config I2C_PIIX4
->>>          tristate "Intel PIIX4 and compatible (ATI/AMD/Serverworks/Broadcom/SMSC)"
->>> -       depends on PCI && HAS_IOPORT
->>> +       depends on PCI && HAS_IOPORT && X86
->>
->> Are you sure this south-bridge is not used on non-x86 platforms?
->> It is enabled in several non-x86 defconfigs:
->>
->>      arch/loongarch/configs/loongson3_defconfig:CONFIG_I2C_PIIX4=y
->>      arch/mips/configs/ip27_defconfig:CONFIG_I2C_PIIX4=m
->>      arch/mips/configs/loongson2k_defconfig:CONFIG_I2C_PIIX4=y
->>      arch/mips/configs/loongson3_defconfig:CONFIG_I2C_PIIX4=y
->>
->> The loongarch and loongson entries are probably bogus, but I wouldn't
->> be surprised if the SGI Onyx and Origin do use Intel south-bridges.
-> Loongson can use AMD SB700/SB800 south bridges, which have I2C_PIIX4.
+The regex in the BODY_WITH_BLANK_LINE case was looking for lines starting
+with " * ", where exactly one space was allowed before the following text.
+There are many kerneldoc comments where the authors have put multiple
+spaces instead, leading to mis-formatting of the documentation.
+Specifically, in this case, the description portion is associated with the
+last of the parameters.
 
-Well we could revert this patch, but it's going to be a compile failure 
-because of 624b0d5696a89b138408d385899dd35372db324b and other patches 
-that go on top of that.
+Allow multiple spaces in this context.
 
-My current leaning is we make a dummy fch.h header for these archs with 
-#defines for 0.
+See, for example, synchronize_hardirq() and how its documentation is
+formatted before and after the change.
 
-Any thoughts?
+Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+---
+Unlike my other kernel-doc changes, this one does result in changed
+output, but the result is clearly (IMO) more correct.
 
-> 
-> Huacai
-> 
->>
->>>          select I2C_SMBUS
->>>          help
->>>            If you say yes to this option, support will be included for the Intel
->>
->> Gr{oetje,eeting}s,
->>
->>                          Geert
->>
->> --
->> Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
->>
->> In personal conversations with technical people, I call myself a hacker. But
->> when I'm talking to journalists I just say "programmer" or something like that.
->>                                  -- Linus Torvalds
->>
+ scripts/lib/kdoc/kdoc_parser.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/lib/kdoc/kdoc_parser.py b/scripts/lib/kdoc/kdoc_parser.py
+index 9a1ce6ed8605..294f5d032b3d 100644
+--- a/scripts/lib/kdoc/kdoc_parser.py
++++ b/scripts/lib/kdoc/kdoc_parser.py
+@@ -1301,7 +1301,7 @@ class KernelDoc:
+         """
+ 
+         if self.state == state.BODY_WITH_BLANK_LINE:
+-            r = KernRe(r"\s*\*\s?\S")
++            r = KernRe(r"\s*\*\s*\S")
+             if r.match(line):
+                 self.dump_section()
+                 self.entry.section = SECTION_DEFAULT
+-- 
+2.49.0
 
 
