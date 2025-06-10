@@ -1,128 +1,146 @@
-Return-Path: <linux-doc+bounces-48513-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-48528-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE173AD2FA1
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 10:13:24 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1D79AD308D
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 10:36:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E0E773B45D0
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 08:12:12 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7AFDD16D4C1
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Jun 2025 08:36:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4C122820B8;
-	Tue, 10 Jun 2025 08:12:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87D3427F161;
+	Tue, 10 Jun 2025 08:36:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="B2L/6sPv"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="OsXU/5uQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8FB7280317
-	for <linux-doc@vger.kernel.org>; Tue, 10 Jun 2025 08:12:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8286922157B
+	for <linux-doc@vger.kernel.org>; Tue, 10 Jun 2025 08:36:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1749543129; cv=none; b=FZm7bWqzblr0BU8woWHOLTP5S8fe6Dp2iNwmreshdevOPvjcVAZhH4cCBiglDvn4bLqLJuKRRno9sSnbQulKDE+rsVc/Ipmcm4yZF8dZnuV82BxG1K83b25mfp68QS/8c292NLA9aI8BcTlAn4gk7A3yU/VJ1zoKXBEqvXbyAOE=
+	t=1749544570; cv=none; b=JaNVoZj45GmjnxLUu18JxBcijMj1uPGdxFqpR6UzyY8iHStbjPj7jQaTF8GO64dBefS/S5TdPCUKNFGLsRQx9kaB8KHO+kWzu9q06noLfGgiywUPM5NVlfvBbf1bjgSfBR51914nQhr7qnelszk+/AyXTcCQiJghIjHKLTPjolE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1749543129; c=relaxed/simple;
-	bh=yvgWF5tnQNZRDjc0fGYDrUE1mlV0Lq+VUCZV1FeRugA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=GhA9Cb2K4OW9BDebvOcqAX41Yjon++/yh1iQX4FUbW82ZXZVwWSXB9DLSKlr/C1T2W7jwE/1flkoYDZqZAYQ1c6oS3i24yQP3CYkqM6+4Dpr+cWAhlpMIHAiuJ51q8Ft3KqR2TbyzlxKcmkeseC+VWDb1JGj6Ry70eB7tnz/yLM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=B2L/6sPv; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-450cf214200so47571065e9.1
-        for <linux-doc@vger.kernel.org>; Tue, 10 Jun 2025 01:12:05 -0700 (PDT)
+	s=arc-20240116; t=1749544570; c=relaxed/simple;
+	bh=ZQz1tLG7kcWUwenzY9ZEbwsbyY9z1eYvjc4bgBPpWjU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Cm2F/6VfddY3HQu0C2oN9YSmXgOtgNt19TZEngM0eINTkgGJOF50ED6uNx4KsFmtYMKU77hUKJN96/UNK8r7F/V0MuFm1s3PxixkRYA8M5q4PYs2icZYyjgu2U8QeKvo9hwWqfhtYk4NAitDWuMVrwIpDnvN7SaiTW00HhQinLU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=OsXU/5uQ; arc=none smtp.client-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-3a53359dea5so2108737f8f.0
+        for <linux-doc@vger.kernel.org>; Tue, 10 Jun 2025 01:36:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1749543124; x=1750147924; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jjgQIJ76dKbmwwjeGXopIMo/gsZHO8kBrQYsSavUt0k=;
-        b=B2L/6sPv4hjzgzss/Y2f2WHnLWyp9sYdo19Olow9g9PDb/yXFShZzQ9piKhvc3trpC
-         yhpDpBgGwdy4UBxUB4IIMIT1BvF3EH9qXOXUtw9GC0O3cksdqHKlfUdBfYam2iflpPy2
-         Nojx5YbuXh99Ge7RUW1Ji8+RVNtM2M6QAzk+k6/TVIhCBKiUtUaItqAhEnaS0bYBpA4A
-         h0cDAYljIHXTGUlYwoEcq3slWgVXIJ0639p0/ock22bLDGPqWtsBVep71qxQq6dxNkAn
-         F06T/r3zmozbUbLo+39aYxRjckIWk7/Z1qYrRbifIYTtwjj2D9iRnsXa4NlTn2pBHIHa
-         Irrw==
+        d=suse.com; s=google; t=1749544567; x=1750149367; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=nDL1VH2zgeGps6X0Zhyb1MxJka1vOhvb2PWMkFIaGrM=;
+        b=OsXU/5uQyuKxZY9UMxQHOEtKqlcj4a/ExbFJyl/xr9uRf6FADU/UN5z4IRG67FfyGL
+         JhrpGRUzYeV8C1fnoJp08DkKIyjuotao3ZkS5IRStxZXw8YuNRBocCqpa01mxgDktg5o
+         Qpo28Qmap/V+UqLOFZGh0G3/pSS/8dJgfmkEt9w5cTqyPZxF7j6N49AuJ2RCn5Dws08r
+         6BvV+EWDF4T3S6oED2WmlXAoNWk4a9UlnND9mBLwDWbzMx1lLKN7jWADvCKxtc+vaECW
+         ci/jzg1r0fnTIDjHRoC59/OubN6rAv2FEzt4Tj2Vz8hmP9gFeks6r64WG8/0PMGOMHHv
+         ksTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749543124; x=1750147924;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jjgQIJ76dKbmwwjeGXopIMo/gsZHO8kBrQYsSavUt0k=;
-        b=U6nAnbzT++g3etLsAbO2Kin5u28ilDECrbAHdiM7Dmk+4zTpTb8fQcf5nx2eT7EYEp
-         +nNXMvaQCPD+2Cy6SvIVIbx/71VokJ7vlkZL7S6QMQzUR2K/YornDS9lxVa+vvG5vvw/
-         s3oMTh6gkM4xDQc1zru/e9ldLNeCQMp1nquz5Zz0QZdBrKkmJkYqtzovlk2PxnELvdyv
-         bk6EedHXxXE3PtY7zbvenfZGk7tJ7Eo55JU5oJJHo8mZ44V/pQu7Z9wgpAzprJI68MIX
-         3dQlB51kQZnMc7ukOvuxWtQq7wBMt/+LKrvnJ0E2nX9pmgZbtfF9iulDVTYIUIhrWHs0
-         16sQ==
-X-Gm-Message-State: AOJu0Yzes6GNpkZnRRBHsLh9s3nFrXA4x6yhFZ3XDNZOyINZfK7OzeHl
-	ToiFlv5wvk9qEkUtOd2PR91KY0dxi+xV8zZmkBj+M2fQolrSF7kqjFfj/yjSDQr9H2nfgVhhHMm
-	oDpW2
-X-Gm-Gg: ASbGncv4KiQY65dCTiNUfWdYtzK1hnoZuUHVyi5yN4R/J4XkAYQx7RT3WIg7Qt0xvud
-	AYtHV3zO1IJE3oClB7RZyzNDlde2onMUghF7stexlKy2tHQs+w9sNYfDW8PKi4/uZZLTN0hCK9q
-	pMI+45ckvOPXyWtg6X9/Ry4xSUxqCooR4RJfCKjoVUDBGh+Fm5Z1E3E7TpN3KwXG8eSGBByK2nI
-	Ee6enTeH5DKrubwSxQultzp9Riy17zn0i2bd/htgehAi1aVkVUFz2wO18z0gfdEqcQgJjEZ6oeg
-	Ap6AGbuZPF6FMBNj1c7YJO8O++D3QDj6a/FY5uhTk3J4URbaLZ7pMkBo38Pw
-X-Google-Smtp-Source: AGHT+IHw7/V7r+W55JJPgOoMHWnb03kXm/kQE97NwVLeZNevpDtk4rbU8g1Mkp4wQwowMYR4Dz0aYg==
-X-Received: by 2002:a05:600c:528a:b0:453:dbe:7574 with SMTP id 5b1f17b1804b1-4530efe68f4mr70110725e9.12.1749543123640;
-        Tue, 10 Jun 2025 01:12:03 -0700 (PDT)
-Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:4d:e52b:812d:eb7c])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-452730b9b3esm130838565e9.25.2025.06.10.01.12.02
+        d=1e100.net; s=20230601; t=1749544567; x=1750149367;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nDL1VH2zgeGps6X0Zhyb1MxJka1vOhvb2PWMkFIaGrM=;
+        b=rBQ+xAMHa/eRu8AXef/eUIID8KPsXigxcgamA43ac25eQO3wYo+1glyXHUR7V1iBME
+         vbQlL1BvvnLawjwW1WaJo5gIU9eM+XVhp7MZ4tGfFlcIOiKjP8Njc6NDhjzYSkH6MKHW
+         NQGRuOr026K20eRq13YMqNRR4Kpu/xMEIZLl6J3OWBaAaenUihfTDNJS/uIaRbJ5nBMG
+         UQgH/KrDIxwl17gxSxvgduvfbInPkCff4jJj3V6vbFDtuvpiergl68W7asiAroC1Gmdc
+         JeISJ3spNf9Go9PQZkWPRXa5BxkYFf1LQ9uZpGK6lTH+UQGkAYSD/T9tBb2k7KviFMRr
+         F8Ww==
+X-Forwarded-Encrypted: i=1; AJvYcCVeqnZw71jR3PAgayX2DF+JrfB/PWJb34YBPTchp4cQqucSRsqraBKWOgLSbOFGFIG6fte84K2D5dk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwhYVosCTHVMyHTy3exS3D7h+J3ciLFMKg3msW13M37E+Ptkm2s
+	J4GZxMTJeBL3VLv8hPJpLYqlMJOYNcz0ba/7kA+jxCv0vdPy2zULvLGkse1/Z8qebiQ=
+X-Gm-Gg: ASbGncv5K6aLDRKGMON5Qq/5Xqj9Mgq5xRKo8dRuGOyWwE5OWCIBWk5fUkDLryIE0l/
+	nV9AMuvqUIN0pWHjE56V1sWcSSKqA5CUGjhzQ9wgXIvKedORQlwiPfxRUeuQZvrakOdm//36CFi
+	QOz+uY2CBCbDp1HVHLUtoLmhJI0hOAVyFTz/r6OSUxx30N8XLy2EmoawpV1yWkacG1bRDLpV9jo
+	KpgTA+x3n+NwIqxsNBFiEt2TUjO9Wvfh/Fd5+gRkme3lors1ZFmLLffYMdO3tOlWzTRu5Oen6Rf
+	7igrRv/lN9P/2e+4jOAyvX35RtQJanPOExjUg3P0q8uZtOTiMXVXEvyAHyUeuFjU
+X-Google-Smtp-Source: AGHT+IE/nI85vSWlttVj+F3DLQC1penmgc3tIfP/1EOoFPr6y0TcG5WWvzoq1ne1V9qLxIrFBkrV9A==
+X-Received: by 2002:a05:6000:40c9:b0:3a4:f6ba:51da with SMTP id ffacd0b85a97d-3a531786845mr13169150f8f.15.1749544566711;
+        Tue, 10 Jun 2025 01:36:06 -0700 (PDT)
+Received: from pathway.suse.cz ([176.114.240.130])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7482af38386sm7001718b3a.6.2025.06.10.01.35.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Jun 2025 01:12:03 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-gpio@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-usb@vger.kernel.org,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+        Tue, 10 Jun 2025 01:36:05 -0700 (PDT)
+Date: Tue, 10 Jun 2025 10:35:34 +0200
+From: Petr Mladek <pmladek@suse.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Kees Cook <kees@kernel.org>,
+	Sergio Perez Gonzalez <sperezglz@gmail.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	David Rientjes <rientjes@google.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Bartosz Golaszewski <brgl@bgdev.pl>,
-	Daniel Mack <daniel@zonque.org>,
-	Haojian Zhuang <haojian.zhuang@gmail.com>,
-	Robert Jarzmik <robert.jarzmik@free.fr>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: Re: [PATCH v1 0/2] gpiolib: get rid of devm_gpio_request()
-Date: Tue, 10 Jun 2025 10:11:51 +0200
-Message-ID: <174954311123.28634.1499230964159731709.b4-ty@linaro.org>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250531212331.3635269-1-andriy.shevchenko@linux.intel.com>
-References: <20250531212331.3635269-1-andriy.shevchenko@linux.intel.com>
+	Steven Rostedt <rostedt@goodmis.org>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Sergey Senozhatsky <senozhatsky@chromium.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>,
+	Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	Harry Yoo <harry.yoo@oracle.com>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Tamir Duberstein <tamird@gmail.com>,
+	Miguel Ojeda <ojeda@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
+	linux-doc@vger.kernel.org, linux-mm@kvack.org,
+	Thomas Huth <thuth@redhat.com>,
+	"Borislav Petkov (AMD)" <bp@alien8.de>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Stephen Boyd <swboyd@chromium.org>, linux-kernel@vger.kernel.org,
+	linux-hardening@vger.kernel.org
+Subject: Re: [PATCH v2] slab: Decouple slab_debug and no_hash_pointers
+Message-ID: <aEfuVgR78G1YgRau@pathway.suse.cz>
+References: <20250415170232.it.467-kees@kernel.org>
+ <Z_-dPcdiGW0fo8Ji@pathway.suse.cz>
+ <202506051314.D6EDFA91D@keescook>
+ <aEbyHeG8qh8GChTh@pathway.suse.cz>
+ <202506090823.33ED63C@keescook>
+ <aEdANsGsQHqVQ9Wy@smile.fi.intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aEdANsGsQHqVQ9Wy@smile.fi.intel.com>
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-
-
-On Sun, 01 Jun 2025 00:21:37 +0300, Andy Shevchenko wrote:
-> devm_gpio_request() is used by a single driver. Replace it there and
-> kill the legacy API. Assumed to be routed via GPIO tree.
+On Mon 2025-06-09 23:12:38, Andy Shevchenko wrote:
+> On Mon, Jun 09, 2025 at 08:24:47AM -0700, Kees Cook wrote:
+> > On Mon, Jun 09, 2025 at 04:39:25PM +0200, Petr Mladek wrote:
 > 
-> Andy Shevchenko (2):
->   usb: gadget: pxa25x_udc: Switch to use devm_gpio_request_one()
->   gpiolib: Remove unused devm_gpio_request()
+> ...
 > 
-> [...]
+> > As long as it's in -next and scheduled to land, I'm happy. I'd always
+> > like it earlier, but the less workflow disruption the better! :)
+> 
+> Hmm... The __diag patch series were in Linux Next for a few weeks and did not
+> land in v6.16-rc1. Just saying that there is always chance to go into cracks.
 
-Applied, thanks!
+Urgh, I am terribly sorry for this. I forgot to do it the other
+week. And I missed it in the merge window because it was in for-6.15*
+branch. I had a feeling that I have forgot something but I did
+not find it.
 
-[1/2] usb: gadget: pxa25x_udc: Switch to use devm_gpio_request_one()
-      https://git.kernel.org/brgl/linux/c/32f6d31dc0401e6af7c48e5e2381997b6d957d85
-[2/2] gpiolib: Remove unused devm_gpio_request()
-      https://git.kernel.org/brgl/linux/c/a5589313383074c48a1b3751d592a6e084ae0573
+OK, I guess that I am getting older or going through some more
+distracting times. And have to update my process.
 
-Best regards,
--- 
-Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+I have just created a list of branches which I have to merge
+for 6.17. I hope that it will do the trick.
+
+Best Regards,
+Petr
 
