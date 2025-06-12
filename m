@@ -1,126 +1,115 @@
-Return-Path: <linux-doc+bounces-48867-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-48869-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41F40AD7252
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Jun 2025 15:42:20 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 093B1AD73B3
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Jun 2025 16:24:31 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C80047AFAAC
-	for <lists+linux-doc@lfdr.de>; Thu, 12 Jun 2025 13:40:58 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 91EAB3A2C9E
+	for <lists+linux-doc@lfdr.de>; Thu, 12 Jun 2025 14:24:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD65624A07C;
-	Thu, 12 Jun 2025 13:41:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF22642048;
+	Thu, 12 Jun 2025 14:24:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LzbTTgxU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sO6sgXw3"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7223424A041;
-	Thu, 12 Jun 2025 13:41:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC2FF1F16B;
+	Thu, 12 Jun 2025 14:24:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1749735701; cv=none; b=duvHiUO13uwhrn6k71zltFsx4qg/LPtdhjGQkzR8/NfKzG2CxW2Vw6GSlavzF4YdKGOueXrJDjGKeGCd62YP+LwPs3UfyfhIcj5YOcOsCIfPPGgdUFHOCFHENizHOF1pM9Qe/R5KLBK0bzyXVkXE6tbIZ0Z5CiGZTFK0OUoepzg=
+	t=1749738264; cv=none; b=l8vTfBTF2z0ZqsLG3IkYMB6LkGIeWhNAXNJJ9Py0JxVNA2Q9cl82qkr6Xa0lNVJDEo7JxaxzJB6EBN4yTocXMquTD37uGXXZ/hA5Uq5B0VwHwmVCN968+xFtEwc4hVEp6HSD6FNpgt8XW/bigO1bzfhL1YB9PgMwcbDea50wiek=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1749735701; c=relaxed/simple;
-	bh=00F9KG3FuikbC/77I/aVEWzxRtC/68GGYQsrs3gqu00=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=OMca1FWN9mu4wNWJkdeyIwvUHYPRdfyubtt/5zRkb8EA7q7/du8XTXxaKwITOKTp2xNr0PIt3fCWNSjFi0wIlE/M9KyflIUqT++zX7F06kClLVxCLS5Vrnl833g6d/D8LWw4r15DpHAh+ykfRxFKPPPF7WhqrGsVQvs5PWhyAx0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LzbTTgxU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05222C4CEEB;
-	Thu, 12 Jun 2025 13:41:41 +0000 (UTC)
+	s=arc-20240116; t=1749738264; c=relaxed/simple;
+	bh=nEsTlMah9gnHESH6LtPtgD7WWncfqtpDL9THG9p2xXQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=VcKAQjCgXEd62rLdP6kUohkaNe9SvJUGy7T6QsLNPOm6s6BEuFRAXZMLzUiFlG8hasx1gwqIVfXyJQQnnzIsEBXQBlEK+vWtHZvT6i5pt9RcFUOeqc7Vly7aduTGwKySnjFINrUskq1n0lUVQKGqLIXQFiOswOl5hDKtZ+qixx8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sO6sgXw3; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84867C4CEEA;
+	Thu, 12 Jun 2025 14:24:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1749735701;
-	bh=00F9KG3FuikbC/77I/aVEWzxRtC/68GGYQsrs3gqu00=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=LzbTTgxUuP3N9AVCRYohTi5X5zxnC4JJWwzo5hbc9qI+2nLTu2JdJ3eVnGYNKN6vd
-	 1aPFPIHqp1mhVOX+tyi5+7rY3ADXg/Ra08EFgPpUsrZGc/QT5j1u4LjkydkaHzGFvB
-	 ZMGNWa3mYIMRkkHfg79O3Z6ohlP1VsDDAf36Qps+30Znr2me2B/y2YLJtQllxua3Uz
-	 kCHN44HlfS0+Tr7+1nskhL67R1w2xctfbBLCtuGoACQbAl634WA37rFpr5fuvOSJxi
-	 LVbqpCUmf2sBeDnz8y305ERbm0NzbP9aah3JIoSHNCxneNZTsZVlesgowt8f1AXWI9
-	 jtYG9kkD/xyHA==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1uPiBX-000000053q5-0n9j;
-	Thu, 12 Jun 2025 15:41:39 +0200
+	s=k20201202; t=1749738264;
+	bh=nEsTlMah9gnHESH6LtPtgD7WWncfqtpDL9THG9p2xXQ=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=sO6sgXw3fo/7aQQ2yyZVu1pNbu3CzmCpSKk4o9R9YUwGlzNMt4Grgr4pBj2bzwe0Z
+	 M/ZOpNw7C3yDcTW2qvXHaQtCTHQTQ7gam9dEsRITXK1LS1p9P/sCd5UQCC3QE35r5h
+	 QGLhf/GOcCZ6jYBaWz1xi2bVoR+53sSXD9YFP5jJ5h+yDHZMXML3kscumnXQ48aRyt
+	 8N3bXnDzvV8VkMDMCDHdMZoOugHZDhNfRzKE6A3qsKKQ4gluICBFoLgYdskdZ4+5yZ
+	 X43al6UXGDdNn++SvXQALgpqhykVaYeyAm5+qy45TV+76zszH9QnR2ADUvpy9xstd4
+	 uI+FcJ1FtXWeQ==
+Date: Thu, 12 Jun 2025 16:24:16 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Akira Yokosawa" <akiyks@gmail.com>,
-	"Breno Leitao" <leitao@debian.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	"Donald Hunter" <donald.hunter@gmail.com>,
-	"Eric Dumazet" <edumazet@google.com>,
-	"Ignacio Encinas Rubio" <ignacio@iencinas.com>,
-	"Jan Stancek" <jstancek@redhat.com>,
-	"Marco Elver" <elver@google.com>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	"Paolo Abeni" <pabeni@redhat.com>,
-	"Ruben Wauters" <rubenru09@aol.com>,
-	"Shuah Khan" <skhan@linuxfoundation.org>,
-	Jakub Kicinski <mchehab+huawei@kernel.org>,
-	Simon Horman <mchehab+huawei@kernel.org>,
-	joel@joelfernandes.org,
-	linux-kernel-mentees@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	lkmm@lists.linux.dev,
-	netdev@vger.kernel.org,
-	peterz@infradead.org,
-	stern@rowland.harvard.edu
-Subject: [PATCH v2 2/2] docs: uapi: netlink: update netlink specs link
-Date: Thu, 12 Jun 2025 15:41:31 +0200
-Message-ID: <a770ff8faac7982fb65cd3be047dc7e9424676cd.1749735022.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.49.0
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>, Jonathan Corbet
+ <corbet@lwn.net>
+Cc: linux-kernel@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>, "David
+ S. Miller" <davem@davemloft.net>, Ignacio Encinas Rubio
+ <ignacio@iencinas.com>, Marco Elver <elver@google.com>, Shuah Khan
+ <skhan@linuxfoundation.org>, Donald Hunter <donald.hunter@gmail.com>, Eric
+ Dumazet <edumazet@google.com>, Jan Stancek <jstancek@redhat.com>, Paolo
+ Abeni <pabeni@redhat.com>, Ruben Wauters <rubenru09@aol.com>,
+ joel@joelfernandes.org, linux-kernel-mentees@lists.linux.dev,
+ lkmm@lists.linux.dev, netdev@vger.kernel.org, peterz@infradead.org,
+ stern@rowland.harvard.edu, Breno Leitao <leitao@debian.org>
+Subject: Re: [PATCH v2 0/2] Some extra patches for netlink doc generation
+Message-ID: <20250612162416.507c8a12@sal.lan>
 In-Reply-To: <cover.1749735022.git.mchehab+huawei@kernel.org>
 References: <cover.1749735022.git.mchehab+huawei@kernel.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-With the recent parser_yaml extension, and the removal of the
-auto-generated ReST source files, the location of netlink
-specs changed.
+Em Thu, 12 Jun 2025 15:41:29 +0200
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
 
-Update uAPI accordingly.
+> This patch series comes after:
+> 	https://lore.kernel.org/linux-doc/cover.1749723671.git.mchehab+huawei@kernel.org/T/#t	
+> The first patch is meant to speedup glob time by not adding all yaml to the parser.
+> 
+> The second one adjusts the location of netlink/specs/index.rst.
+> 
+> With that, on my AMD Ryzen 9 7900 machine, the time to do a full build after a
+> cleanup is:
+> 
+> real    7m29,196s
+> user    14m21,893s
+> sys     2m28,510s
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/userspace-api/netlink/index.rst | 2 +-
- Documentation/userspace-api/netlink/specs.rst | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Heh, funny enough, my laptop with i5-10210U CPU @ 1.60GHz builds it faster:
 
-diff --git a/Documentation/userspace-api/netlink/index.rst b/Documentation/userspace-api/netlink/index.rst
-index c1b6765cc963..83ae25066591 100644
---- a/Documentation/userspace-api/netlink/index.rst
-+++ b/Documentation/userspace-api/netlink/index.rst
-@@ -18,4 +18,4 @@ Netlink documentation for users.
- 
- See also:
-  - :ref:`Documentation/core-api/netlink.rst <kernel_netlink>`
-- - :ref:`Documentation/networking/netlink_spec/index.rst <specs>`
-+ - :ref:`Documentation/netlink/specs/index.rst <specs>`
-diff --git a/Documentation/userspace-api/netlink/specs.rst b/Documentation/userspace-api/netlink/specs.rst
-index 1b50d97d8d7c..debb4bfca5c4 100644
---- a/Documentation/userspace-api/netlink/specs.rst
-+++ b/Documentation/userspace-api/netlink/specs.rst
-@@ -15,7 +15,7 @@ kernel headers directly.
- Internally kernel uses the YAML specs to generate:
- 
-  - the C uAPI header
-- - documentation of the protocol as a ReST file - see :ref:`Documentation/networking/netlink_spec/index.rst <specs>`
-+ - documentation of the protocol as a ReST file - see :ref:`Documentation/netlink/specs/index.rst <specs>`
-  - policy tables for input attribute validation
-  - operation tables
- 
--- 
-2.49.0
+real	6m2,075s
+user	18m47,334s
+sys	1m24,931s
 
+Both are running Sphinx version 8.1.3 with standard Fedora package. At my
+laptop, this is a bit slower than no using the extension:
+
+real	5m13,334s
+user	15m56,441s
+sys	1m4,072s
+
+but it is a lot cleaner, as, with the original way, there are several
+warnings after make cleandocs:
+
+	Documentation/userspace-api/netlink/netlink-raw.rst: :doc:`rt-link<../../networking/netlink_spec/rt-link>`
+	Documentation/userspace-api/netlink/netlink-raw.rst: :doc:`tc<../../networking/netlink_spec/tc>`
+	Documentation/userspace-api/netlink/netlink-raw.rst: :doc:`tc<../../networking/netlink_spec/tc>`
+	Warning: Documentation/userspace-api/netlink/index.rst references a file that doesn't exist: Documentation/networking/netlink_spec/index.rst
+	Warning: Documentation/userspace-api/netlink/specs.rst references a file that doesn't exist: Documentation/networking/netlink_spec/index.rst
+	Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/firmware/intel,stratix10-svc.txt
+
+Because they refer to the temp .rst source files generated inside
+the source directory by the yaml conversion script.
+
+Regards,
+Mauro
 
