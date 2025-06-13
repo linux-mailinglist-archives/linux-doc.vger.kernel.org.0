@@ -1,190 +1,203 @@
-Return-Path: <linux-doc+bounces-48939-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-48941-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47059AD873C
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 11:08:05 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id CFC49AD888D
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 11:55:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id E417C189C9BB
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 09:07:42 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C82C9189882F
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 09:55:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27945279DAD;
-	Fri, 13 Jun 2025 09:07:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="CoxbCyoD"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C0022C158F;
+	Fri, 13 Jun 2025 09:55:40 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F85D258CEC;
-	Fri, 13 Jun 2025 09:07:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+Received: from invmail4.hynix.com (exvmail4.skhynix.com [166.125.252.92])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9D79291C3F;
+	Fri, 13 Jun 2025 09:55:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=166.125.252.92
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1749805646; cv=none; b=ti9+bmmD/eY03hgLeziM2JIR1q1mFhFuWOi1WaXBI7z1Xgr23TC7Z9qYzLWz87ul+pTPg8SyI6k7O12cD/QKEGV1n/JtGm+HLntjzRmQmA1C3WizK2br+VcE35Jn39Ekoze5wwWZUPzlUEsroAjy9yt8QRfPU+IxIvlDnSdzHH4=
+	t=1749808540; cv=none; b=u2dH6kMltQgJhzy87247ZmOHtrSYNRovp3XoULSoOOe0wYzONaiXlCy6ttvuVFVoiAXJxwXS017ZBDYp+vpQk4GASxHfsyRoDZfXY9yE//EWByrPeskcXdSgmaaYw+bVE/s5INPx4H7J+a+Q/emYiodYrApC2tyviEiOq4H6gwM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1749805646; c=relaxed/simple;
-	bh=SSoLBs1Dj9VaOQGgLvM3js2Zg2+so1xSH1u+6KrD7sE=;
-	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=sRN/Pjdr2cIm6/M80R0Fn30LZszIAczt9A3xrDZ0SPitATB3lJsAM/ct26Mkg9+Pj8IabQW5ThKvhXBS3+q5U2FsQq5Vfs91w3/P/5YUcNFXaBNM6y1q/yzOV7xNzQSxDrabD/Sov00Tlm9kRIwtrUkJ9E5cAhhrPBNdllVpExs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=CoxbCyoD; arc=none smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1749805644; x=1781341644;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=SSoLBs1Dj9VaOQGgLvM3js2Zg2+so1xSH1u+6KrD7sE=;
-  b=CoxbCyoDxK5NWXSI93BEDQkNZlOnP65edoWFyOfUajRP9z/lBQKsn3kk
-   kdcHjijrHUMAxWTNmhRQEZkrbnosVibpctAfypzwcpql12Fwa4Yo/uBt3
-   SJvMyBx/8n6J6VVvBv/QSWH86kbi0eX0oJSmXb6bFO4XF6di2bonFsG3A
-   k2L+Ao9yTbmGJJ6p5PBeT0dxYMRMy2AmPX5pBfzsNUFXdwvCWDXm1EAQi
-   is845YOwvb2RplL0xt+Q39+iT9w87MK4Yir2U6ALkcjvM2AeA6+TfJrpI
-   QejTtKsZgvEyIwxc+SB4B7SxEEW+AIz0bqhKeVd5qbIkGtmDbqvp01cYn
-   w==;
-X-CSE-ConnectionGUID: LiwomMADSBmLs/nLwpFJfQ==
-X-CSE-MsgGUID: o2T5Fj4UTKepwPDevYmYLA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11462"; a="51994958"
-X-IronPort-AV: E=Sophos;i="6.16,233,1744095600"; 
-   d="scan'208";a="51994958"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2025 02:07:23 -0700
-X-CSE-ConnectionGUID: +Sn6F1J4S7S/IR6NZecJ1w==
-X-CSE-MsgGUID: bpdT6QYLQEitc82RVDRyZA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,233,1744095600"; 
-   d="scan'208";a="148665506"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.102])
-  by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2025 02:07:17 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Fri, 13 Jun 2025 12:07:14 +0300 (EEST)
-To: "Derek J. Clark" <derekjohn.clark@gmail.com>
-cc: Hans de Goede <hdegoede@redhat.com>, Armin Wolf <W_Armin@gmx.de>, 
-    Jonathan Corbet <corbet@lwn.net>, Mario Limonciello <superm1@kernel.org>, 
-    Luke Jones <luke@ljones.dev>, Xino Ni <nijs1@lenovo.com>, 
-    Zhixin Zhang <zhangzx36@lenovo.com>, Mia Shao <shaohz1@lenovo.com>, 
-    Mark Pearson <mpearson-lenovo@squebb.ca>, 
-    "Pierre-Loup A . Griffais" <pgriffais@valvesoftware.com>, 
-    "Cody T . H . Chiu" <codyit@gmail.com>, John Martens <johnfanv2@gmail.com>, 
-    Kurt Borja <kuurtb@gmail.com>, platform-driver-x86@vger.kernel.org, 
-    linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v12 0/6] platform/x86: Add Lenovo WMI Gaming Series
- Drivers
-In-Reply-To: <20250609185027.7378-1-derekjohn.clark@gmail.com>
-Message-ID: <facbb66b-ea34-bc57-d673-adb84f79fb8d@linux.intel.com>
-References: <20250609185027.7378-1-derekjohn.clark@gmail.com>
+	s=arc-20240116; t=1749808540; c=relaxed/simple;
+	bh=q5gk6sV246NIfmcZtoNnX05im1nF33xmkiCPYWeZivk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ITHIeW59bUn/db3qzWdC15y0us2zFrYkkXJUViB/NTVyYDLvFxi8+JX6zVHMtVgUfEv6tPCFvpdEELW67B1tT+33To+8U4SxZygyGOIaQc6sTCGM7PxvdSGumDHJokPGN6KtBqUv91M4fAZ1yygltI8KH/QZwLgh33cuurOr0Kc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sk.com; spf=pass smtp.mailfrom=sk.com; arc=none smtp.client-ip=166.125.252.92
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sk.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sk.com
+X-AuditID: a67dfc5b-669ff7000002311f-b3-684bf593d06c
+From: Rakie Kim <rakie.kim@sk.com>
+To: Bijan Tabatabai <bijan311@gmail.com>
+Cc: sj@kernel.org,
+	akpm@linux-foundation.org,
+	corbet@lwn.net,
+	david@redhat.com,
+	ziy@nvidia.com,
+	matthew.brost@intel.com,
+	joshua.hahnjy@gmail.com,
+	rakie.kim@sk.com,
+	byungchul@sk.com,
+	gourry@gourry.net,
+	ying.huang@linux.alibaba.com,
+	apopple@nvidia.com,
+	bijantabatab@micron.com,
+	venkataravis@micron.com,
+	emirakhur@micron.com,
+	ajayjoshi@micron.com,
+	vtavarespetr@micron.com,
+	damon@lists.linux.com,
+	linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	kernel_team@skhynix.com
+Subject: Re: [RFC PATCH 0/4] mm/damon: Add DAMOS action to interleave data across nodes
+Date: Fri, 13 Jun 2025 18:55:17 +0900
+Message-ID: <20250613095525.1845-1-rakie.kim@sk.com>
+X-Mailer: git-send-email 2.48.1.windows.1
+In-Reply-To: <20250612181330.31236-1-bijan311@gmail.com>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRmVeSWpSXmKPExsXC9ZZnoe7kr94ZBsc2mVus2NvKbjFn/Ro2
+	i103Qiwafnxms1hw7zyjxZMD7YwWCy9uYbT4uv4Xs8WMD5fYLX7ePc5ucXzrPHaLhW1LWCwu
+	75rDZnFvzX9Wi2990haHv75hstjZfIfJ4vi9SewWq9dkWMw+eo/dQcRj56y77B7dbZfZPRbv
+	ecnksWlVJ5vHpk+T2D1OzPjN4rHzoaXH9I7nQMm+yawe39d3sHn0Nr9j83i/7yqbx+dNcgG8
+	UVw2Kak5mWWpRfp2CVwZt9+/Zypo1ayY9WcHawPjW4UuRk4OCQETicvXelhg7Av3DgLZHBxs
+	AkoSx/bGgIRFBDQkdny/w97FyMXBLDCdRWLZvVPsIAlhgXCJxmm/wWwWAVWJ6xt+MYHYvEBz
+	VhzuYYOYqSnRcOkeWJxTwEJiXf9OsLiQAI/Eqw37GSHqBSVOznwCdgOzgLxE89bZzCDLJAQO
+	sUus3n2GFWKQpMTBFTdYJjDyz0LSMwtJzwJGplWMQpl5ZbmJmTkmehmVeZkVesn5uZsYgZG3
+	rPZP9A7GTxeCDzEKcDAq8fBa7PLKEGJNLCuuzD3EKMHBrCTCy3gFKMSbklhZlVqUH19UmpNa
+	fIhRmoNFSZzX6Ft5ipBAemJJanZqakFqEUyWiYNTqoFx4rG890wvk89d69w7lYfptVGj8e+i
+	y9tXtjTb91qqnKr5b3TQOOP4i+31/W7iqWufT/U5svBX/ooAT/b+fYZX9Ble9H/gSH3G9u96
+	VdOZh7GCSi8uVXxrnC8RWC0zT2HZ9vbzomVn9/i+F4vblmm85Nvts24VhsdsBb4rXH7ld+6w
+	8aKlJzZHK7EUZyQaajEXFScCABdFEka4AgAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprFIsWRmVeSWpSXmKPExsXCNUNNS3fyV+8MgwXv1CxW7G1lt5izfg2b
+	xa4bIRYNPz6zWSy4d57R4tyU2WwWTw60M1osvLiF0eLr+l/MFjM+XGK3+Hn3OLvF8a3z2C0O
+	zz3JarGwbQmLxeVdc9gs7q35z2rxrU/a4tC156wWh7++YbLY2XyHyeL4vUnsFqvXZFjMPnqP
+	3UHcY+esu+we3W2X2T0W73nJ5LFpVSebx6ZPk9g9Tsz4zeKx86Glx/SO50DJvsmsHt/Xd7B5
+	9Da/Y/N4v+8qm8e32x4ei198YPL4vEkugD+KyyYlNSezLLVI3y6BK+P2+/dMBa2aFbP+7GBt
+	YHyr0MXIySEhYCJx4d5Bli5GDg42ASWJY3tjQMIiAhoSO77fYe9i5OJgFpjOIrHs3il2kISw
+	QLhE47TfYDaLgKrE9Q2/mEBsXqA5Kw73sEHM1JRouHQPLM4pYCGxrn8nWFxIgEfi1Yb9jBD1
+	ghInZz5hAbGZBeQlmrfOZp7AyDMLSWoWktQCRqZVjCKZeWW5iZk5pnrF2RmVeZkVesn5uZsY
+	gTG2rPbPxB2MXy67H2IU4GBU4uG12OWVIcSaWFZcmXuIUYKDWUmEl/EKUIg3JbGyKrUoP76o
+	NCe1+BCjNAeLkjivV3hqgpBAemJJanZqakFqEUyWiYNTqoGx/9vVaYZet1Z/dewrOPWyOObw
+	4z3B7PpuO6xOZSnvSN9260Sb+YNZW71esd+ri5yy8LjvnuzuV5//9Tzs4ZZmalD6cFvhu8ax
+	oLWhvy4znDSy7MmX/dIbuaCDO9t1muBEpTflAYwFTOwPlfsUixfrb8nsynz0U2ajcNTtpLk5
+	VUU/6o0umz5WYinOSDTUYi4qTgQATQbrLq0CAAA=
+X-CFilter-Loop: Reflected
 
-On Mon, 9 Jun 2025, Derek J. Clark wrote:
-
-> Adds support for the Lenovo "Gaming Series" of laptop hardware that use
-> WMI interfaces that control various power settings. There are multiple WMI
-> interfaces that work in concert to provide getting and setting values as
-> well as validation of input. Currently only the "Gamezone", "Other
-> Mode", and "LENOVO_CAPABILITY_DATA_01" interfaces are implemented, but
-> I attempted to structure the driver so that adding the "Custom Mode",
-> "Lighting", and other data block interfaces would be trivial in later
-> patches.
+On Thu, 12 Jun 2025 13:13:26 -0500 Bijan Tabatabai <bijan311@gmail.com> wrote:
+> From: Bijan Tabatabai <bijantabatab@micron.com>
 > 
-> This driver attempts to standardize the exposed sysfs by mirroring the
-> asus-armoury driver currently under review. As such, a lot of
-> inspiration has been drawn from that driver.
-> https://lore.kernel.org/platform-driver-x86/20250319065827.53478-1-luke@ljones.dev/#t
+> A recent patch set automatically set the interleave weight for each node
+> according to the node's maximum bandwidth [1]. In another thread, the patch
+> set's author, Joshua Hahn, wondered if/how these weights should be changed
+> if the bandwidth utilization of the system changes [2].
 > 
-> The drivers have been tested by me on the Lenovo Legion Go and Legion Go
-> S.
+> This patch set adds the mechanism for dynamically changing how application
+> data is interleaved across nodes while leaving the policy of what the
+> interleave weights should be to userspace. It does this by adding a new
+> DAMOS action: DAMOS_INTERLEAVE. We implement DAMOS_INTERLEAVE with both
+> paddr and vaddr operations sets. Using the paddr version is useful for
+> managing page placement globally. Using the vaddr version limits tracking
+> to one process per kdamond instance, but the va based tracking better
+> captures spacial locality.
+
+Hi Bijan,
+
+Thank you for explaining the motivation and need behind this patch.
+I believe it's important to consider the case where a new memory node
+is added and the interleave weight values are recalculated.
+
+If a new memory node (say, node2) is added, there are two possible
+approaches to consider.
+
+1. Migrating pages to the newly added node2.
+   In this case, there is a potential issue where pages may be migrated
+   to node2, even though it is not part of the nodemask set by the user.
+
+2. Ignoring the newly added node2 and continuing to use only the existing
+   nodemask for migrations.
+   However, if the weight values have been updated considering node2
+   performance, avoiding node2 might reduce the effectiveness of using
+   Weighted Interleave.
+
+It would be helpful to consider these two options or explore other
+possible solutions to ensure correctness.
+
+Rakie
+
 > 
-> Suggested-by: Mario Limonciello <superm1@kernel.org>
-> Reviewed-by: Armin Wolf <W_Armin@gmx.de>
-> Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
-> ---
-> v12:
->  - Fix warnings from make W=1
-> v11:
-> v10:
-> https://lore.kernel.org/platform-driver-x86/20250515182224.8277-1-derekjohn.clark@gmail.com/
-> v9:
-> https://lore.kernel.org/platform-driver-x86/20250508235217.12256-1-derekjohn.clark@gmail.com/
-> v8:
-> https://lore.kernel.org/platform-driver-x86/20250505010659.1450984-1-derekjohn.clark@gmail.com/
-> v7:
-> https://lore.kernel.org/platform-driver-x86/20250503000142.1190354-1-derekjohn.clark@gmail.com/
-> v6:
-> https://lore.kernel.org/platform-driver-x86/20250428012029.970017-1-derekjohn.clark@gmail.com/
-> v5:
-> https://lore.kernel.org/platform-driver-x86/20250408012815.1032357-1-derekjohn.clark@gmail.com/
-> v4:
-> https://lore.kernel.org/platform-driver-x86/20250317144326.5850-1-derekjohn.clark@gmail.com/
-> v3:
-> https://lore.kernel.org/platform-driver-x86/20250225220037.16073-1-derekjohn.clark@gmail.com/
-> v2:
-> https://lore.kernel.org/platform-driver-x86/20250102004854.14874-1-derekjohn.clark@gmail.com/
-> v1:
-> https://lore.kernel.org/platform-driver-x86/20241217230645.15027-1-derekjohn.clark@gmail.com/
+> DAMOS_INTERLEAVE interleaves pages within a region across nodes using the
+> interleave weights at /sys/kernel/mm/mempolicy/weighted_interleave/node<N>
+> and the page placement algorithm in weighted_interleave_nid via
+> policy_nodemask. We chose to reuse the mempolicy weighted interleave
+> infrastructure to avoid reimplementing code. However, this has the awkward
+> side effect that only pages that are mapped to processes using
+> MPOL_WEIGHTED_INTERLEAVE will be migrated according to new interleave
+> weights. This might be fine because workloads that want their data to be
+> dynamically interleaved will want their newly allocated data to be
+> interleaved at the same ratio.
 > 
-> Derek J. Clark (6):
->   platform/x86: Add lenovo-wmi-* driver Documentation
->   platform/x86: Add lenovo-wmi-helpers
->   platform/x86: Add Lenovo WMI Events Driver
->   platform/x86: Add Lenovo Capability Data 01 WMI Driver
->   platform/x86: Add Lenovo Gamezone WMI Driver
->   platform/x86: Add Lenovo Other Mode WMI Driver
+> If exposing policy_nodemask is undesirable, we have two alternative methods
+> for having DAMON access the interleave weights it should use. We would
+> appreciate feedback on which method is preferred.
+> 1. Use mpol_misplaced instead
+>   pros: mpol_misplaced is already exposed publically
+>   cons: Would require refactoring mpol_misplaced to take a struct vm_area
+>   instead of a struct vm_fault, and require refactoring mpol_misplaced and
+>   get_vma_policy to take in a struct task_struct rather than just using
+>   current. Also requires processes to use MPOL_WEIGHTED_INTERLEAVE.
+> 2. Add a new field to struct damos, similar to target_nid for the
+> MIGRATE_HOT/COLD schemes.
+>   pros: Keeps changes contained inside DAMON. Would not require processes
+>   to use MPOL_WEIGHTED_INTERLEAVE.
+>   cons: Duplicates page placement code. Requires discussion on the sysfs
+>   interface to use for users to pass in the interleave weights.
 > 
->  .../wmi/devices/lenovo-wmi-gamezone.rst       | 203 ++++++
->  .../wmi/devices/lenovo-wmi-other.rst          | 108 +++
->  MAINTAINERS                                   |  12 +
->  drivers/platform/x86/Kconfig                  |  41 ++
->  drivers/platform/x86/Makefile                 |   5 +
->  drivers/platform/x86/lenovo-wmi-capdata01.c   | 302 ++++++++
->  drivers/platform/x86/lenovo-wmi-capdata01.h   |  25 +
->  drivers/platform/x86/lenovo-wmi-events.c      | 196 ++++++
->  drivers/platform/x86/lenovo-wmi-events.h      |  20 +
->  drivers/platform/x86/lenovo-wmi-gamezone.c    | 409 +++++++++++
->  drivers/platform/x86/lenovo-wmi-gamezone.h    |  20 +
->  drivers/platform/x86/lenovo-wmi-helpers.c     |  74 ++
->  drivers/platform/x86/lenovo-wmi-helpers.h     |  20 +
->  drivers/platform/x86/lenovo-wmi-other.c       | 665 ++++++++++++++++++
->  drivers/platform/x86/lenovo-wmi-other.h       |  16 +
->  15 files changed, 2116 insertions(+)
->  create mode 100644 Documentation/wmi/devices/lenovo-wmi-gamezone.rst
->  create mode 100644 Documentation/wmi/devices/lenovo-wmi-other.rst
->  create mode 100644 drivers/platform/x86/lenovo-wmi-capdata01.c
->  create mode 100644 drivers/platform/x86/lenovo-wmi-capdata01.h
->  create mode 100644 drivers/platform/x86/lenovo-wmi-events.c
->  create mode 100644 drivers/platform/x86/lenovo-wmi-events.h
->  create mode 100644 drivers/platform/x86/lenovo-wmi-gamezone.c
->  create mode 100644 drivers/platform/x86/lenovo-wmi-gamezone.h
->  create mode 100644 drivers/platform/x86/lenovo-wmi-helpers.c
->  create mode 100644 drivers/platform/x86/lenovo-wmi-helpers.h
->  create mode 100644 drivers/platform/x86/lenovo-wmi-other.c
->  create mode 100644 drivers/platform/x86/lenovo-wmi-other.h
-
-Hi Derek,
-
-Could you please rebase this on top of for-next placing the files under 
-lenovo/ folder which we just created. I could have easily changed the 
-placement of the files themselves, but making the Kconfig & Makefile 
-changes into the new files while applying would have been more 
-complicated. It is better you do it so I won't end up messing up anything.
-
-There's the lenovo-target in lenovo/Makefile which will auto add the 
-'lenovo-' prefix to the files so you can basically rename the files like 
-this:
-
-drivers/platform/x86/lenovo-wmi-other.c ->
-drivers/platform/x86/lenovo/wmi-other.c
-
-...and add them using that lenovo-target.
-
--- 
- i.
-
+> This patchset was tested on an AMD machine with a NUMA node with CPUs
+> attached to DDR memory and a cpu-less NUMA node attached to CXL memory.
+> However, this patch set should generalize to other architectures and number
+> of NUMA nodes.
+> 
+> Patches Sequence
+> ________________
+> The first patch exposes policy_nodemask() in include/linux/mempolicy.h to
+> let DAMON determine where a page should be placed for interleaving.
+> The second patch implements DAMOS_INTERLEAVE as a paddr action.
+> The third patch moves the DAMON page migration code to ops-common, allowing
+> vaddr actions to use it.
+> Finally, the fourth patch implements a vaddr version of DAMOS_INTERLEAVE.
+> 
+> [1] https://lore.kernel.org/linux-mm/20250520141236.2987309-1-joshua.hahnjy@gmail.com/
+> [2] https://lore.kernel.org/linux-mm/20250313155705.1943522-1-joshua.hahnjy@gmail.com/
+> 
+> Bijan Tabatabai (4):
+>   mm/mempolicy: Expose policy_nodemask() in include/linux/mempolicy.h
+>   mm/damon/paddr: Add DAMOS_INTERLEAVE action
+>   mm/damon: Move damon_pa_migrate_pages to ops-common
+>   mm/damon/vaddr: Add vaddr version of DAMOS_INTERLEAVE
+> 
+>  Documentation/mm/damon/design.rst |   2 +
+>  include/linux/damon.h             |   2 +
+>  include/linux/mempolicy.h         |   2 +
+>  mm/damon/ops-common.c             | 136 ++++++++++++++++++++
+>  mm/damon/ops-common.h             |   4 +
+>  mm/damon/paddr.c                  | 198 +++++++++++++-----------------
+>  mm/damon/sysfs-schemes.c          |   1 +
+>  mm/damon/vaddr.c                  | 124 +++++++++++++++++++
+>  mm/mempolicy.c                    |   4 +-
+>  9 files changed, 360 insertions(+), 113 deletions(-)
+> 
+> -- 
+> 2.43.5
+> 
+> 
 
