@@ -1,251 +1,107 @@
-Return-Path: <linux-doc+bounces-48938-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-48940-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66388AD8321
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 08:18:25 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76A69AD87BD
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 11:27:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D89177A3017
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 06:17:03 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 270207A7BB8
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Jun 2025 09:25:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8D7C25A626;
-	Fri, 13 Jun 2025 06:18:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D2C50279DDE;
+	Fri, 13 Jun 2025 09:26:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hp/ACLjC"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="b8I/jcG7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32A8825A351;
-	Fri, 13 Jun 2025 06:18:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 225A1256C73;
+	Fri, 13 Jun 2025 09:26:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1749795484; cv=none; b=Liq4PdJoVq/OxNN4ssWXpcwqcoS46qM1LXmA1sNJWih9utuorOrYNrbmZV4+4iGPcxpGW3UhkQkcHuDd7Rf5tADRbVIRamawbxFPyeOsxdz2zvxRVzYqnnFaJ2ZOc5a6cVGaZa+nEL3GcNHpjAC66Ronv0pfXuAoPxdLlinrHgg=
+	t=1749806817; cv=none; b=sdV7vfde+Qv0RipDZ4WgD0Q+0HYH8XOsd/WbOD2PNZ+Gj6m9/p6JRPhoUFEprCtLu3WZHFDatVoC0bqgymA+VvWxprYvPc5GQN6e5jbkqRkiMrcdo9Uk+71aGr2xmaIqP6SlmtBI4Rsum1FH6F+SMr6YuHpDXD8ExpuJIkXu31o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1749795484; c=relaxed/simple;
-	bh=0niJSDKSOXEOs7ASseKgdsRjkom/g5n+i1aWk+pBLA0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=j+X0Q2z19ilHdv+ciQ+pZWOzjewjXuTP1g7fE9PlEa04kFoe0ESh12pPzFnxhdJcYIb7bz57j+sxCZksvKyikF2kyg2UJlue6UrJtV8Lak6OsP1gdOlqZPQ0Zber3mqouiTpfifLfyoiE1xmaxyeH+CwNKC36uqDGk/tBa/3RJ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hp/ACLjC; arc=none smtp.client-ip=209.85.210.182
+	s=arc-20240116; t=1749806817; c=relaxed/simple;
+	bh=Q5BhcgYpE35Y8AxcdDXKZviSULn7xDLW+iYnDJ09n7Y=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
+	 MIME-Version:Content-Type; b=Cvu2xcf1OwctF/68W21TmGNW5snNkc6q5GKLhZUbPyucXU13pfjqvkd9JrdH+YdYPMhGcAQM4VI54VLb/01UDyKLDaV0Av2A1BfZNM9RxwWEUi8IGmxAhLnU9Oj1l+eP3jtMb3jwbMaGKDaLRGpgcTlLNQ8Zlr2MjuF6s632oS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=b8I/jcG7; arc=none smtp.client-ip=209.85.128.41
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-7390d21bb1cso1442513b3a.2;
-        Thu, 12 Jun 2025 23:18:02 -0700 (PDT)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-451d3f72391so25058495e9.3;
+        Fri, 13 Jun 2025 02:26:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1749795482; x=1750400282; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=NEQ+oF0djJWq9SDDZsOf15v0QosPMJkF2diyCZV/7No=;
-        b=hp/ACLjCT2STBCYw1rAUn9a03AKtBfU59d0JUmAoyv6ZA/5B+y9aWzyqbEEEq5EIBl
-         1Bd8nu1FzwAp5wuzzG/5g96ntCVSaABeizb7edEQw1RRDPtOoPDXiOveJO1X8dnOeY78
-         jLwlz1xWIQ9wSBVwjE6rJHdzVqcOzbx0l36nYqBkW/jacxAMsjPE0h+x8GqIfMqE3ouv
-         mPxuUbvY5iInb25tY1SXZC5pCvV4jKRSfmv8AWjB9/A2mvSx065TSLNNVGot0fqai3QU
-         9vRtuhKinQeEEX7fzYj3J2KTcd+5RZOYGpsmz8BPjoDSgZLYvPYxhpcv92YjH4HZCG0h
-         Ma6A==
+        d=gmail.com; s=20230601; t=1749806814; x=1750411614; darn=vger.kernel.org;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Itja5tG6Qc2KiSi1iAZTXe7H2ni0UGVq2sw+wpmt+pc=;
+        b=b8I/jcG7pVixJfDnTkSOJZQMIHjZ0y0rIeieVDjWnYBTBsq98bxy3a6NEdTHzW6BNT
+         9onF45FJmkCKtFS2hI+lkQpo+ALf6ooEVhmQ/DY4CNMfdjqORr1HxZKO3rTc9XrCDkbr
+         6BIAungUXFlJQqYq2RXsHfU75xSndEUBbZn3aVBSNEVXpLGI9ULNS1qGih8Sg1kkj28e
+         kNTm9rZeXOUA4Wwy3BAm7sUxQ7hDGX1t+Dde1CSPQZCZ7HXrlVzfFQhEJ1fLi9HRsCNt
+         uXqKjuupN71gCQqjs9+A6mxQsuKPyiscOWbkVTkrxVKDkVdNOzNh62pDVRDINQn+strY
+         Uf4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1749795482; x=1750400282;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=NEQ+oF0djJWq9SDDZsOf15v0QosPMJkF2diyCZV/7No=;
-        b=UuPy/0Tt2miECqjjahAIToNhiMd4XQE4GwUgTKdhbIliMt2m0gqyXd5lXhxdftsoU4
-         AvE/Pm++uCng9u6voG+/ZG4w+7Bhggnk/3XSbNu9c8G8alw+9ixvaxoNGKZ2h0n+bA6o
-         zZqp2SaJRxNvSJFhP3tr2tK23F8gxWoLkHEJxFTBGOOr+xkBfWGae34EnDkDKwHGlb6K
-         HRL4MqnRBd5HPI1k6I84DdhmlI4VR8pu0CI8LwduO7uAKxCWjoHaxIAwOhef/hFzi90I
-         P3V1b1vVNCbZnZEAUnSDqe/wfXDxnsuz26QB3c1yMMLmqpbTU+e8z23z/TYtxDkcLOW4
-         DxCA==
-X-Forwarded-Encrypted: i=1; AJvYcCUCGsInBS21/PtLjGRE+KvogNd8VlNRXTJFIpuJdM+soitCwEhPhH/28K5Ozgc77c8hIz8AXM12T1M9Z0cg@vger.kernel.org, AJvYcCVg1bvlgi7i+6A4nZ7skPcRBd7CFPKoy8Un9XOIiD6K30CXThOCR5i44MH7kOApwzvFQ7gJ4NaO1UfF@vger.kernel.org, AJvYcCXHZm0GIn4YEGk4rgJGVCMccyZh1L8C2WwjpYtlUb+8MNJUTAKtw1bubsaiGn6xsIL0naKryccWwrua17s=@vger.kernel.org, AJvYcCXy7FnOIhUN1hkZMOC5+doNcTUg/Dxm5Tzq53XovFqStAN2D8nuCRaDnEECYbKruwZG+OTJv/Ok@vger.kernel.org
-X-Gm-Message-State: AOJu0YyowCBhFK1lGwdZS0gJkDFgC383/MvH1NeL2JhpvQpbM89m4OS/
-	573BrM4O18KIreT3Sj97skPJI34NCvGGeCSTU1yBLpl+Rcoo/EgXyECN
-X-Gm-Gg: ASbGncuW48ZRbiNS6CV51NKS8Y2FtuBWrKQtLfG2W9Rnf2SktVzLAqwbNEGkjWptdkZ
-	6JgShxXdpUDH2jM8oV0WrbZghSKGoILk2UsUDVyAnjpsK/mywrK/DywYIdhntnrXHYQgTwa26VO
-	lkHyaB0nYBv75mXbyB/BDGXZoYLwZbHAS8hxi7Eh+vItKSXwa0fSRbX3pvVOLPDAlXJ64mL5Bdd
-	9f1HtlOL1ejFoL88GwIDCziDeYOHcMa8mSMij/IOQmNmzvYtQouP0ipSWA4RoulLZlYkjxNT0ND
-	r3frbPdBRaHM/bX+gzVmrJySA5oaxcx9H2rUHZ2l9tN8KkVcr7awaFtJIudMUpuxLBfeaKkoMlE
-	5oR/+S4LVfZZ7LQ==
-X-Google-Smtp-Source: AGHT+IH1HPtc0JXAOofq/MfGoBAYE2uisZmm5JgOcucJHvZbbB84Lgn8PnCj5aG8zasbQuNo0uRr9Q==
-X-Received: by 2002:a05:6a00:21d1:b0:746:2c7f:b271 with SMTP id d2e1a72fcca58-7488f641129mr2407868b3a.9.1749795482279;
-        Thu, 12 Jun 2025 23:18:02 -0700 (PDT)
-Received: from visitorckw-System-Product-Name ([140.113.216.168])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7489000531esm804843b3a.41.2025.06.12.23.18.00
+        d=1e100.net; s=20230601; t=1749806814; x=1750411614;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Itja5tG6Qc2KiSi1iAZTXe7H2ni0UGVq2sw+wpmt+pc=;
+        b=IPR5W9ZA0alpdRQJclgU0HluDiBJtxKqLUo/6RKWY52+3O3w311ydy99fVbZKc3qAj
+         SuwKUXMF+DYAA+YE4x8FKyhxIJ9fLWyHZq/71B+QgacQMrQj+gfr7S4avceHrZ9sHwiJ
+         XyEePYSLWYUkjUE2gVwzBZRU6xPRAt4NrK1MXvVjjEYnIZeJlpaRayu0R+yMdPitgIx4
+         7hssZFK0qQpz/c+rry/CWDqkwY9ZIj5lUSgTTN0mIp64lff1Lo0lcHHYqHnCca7s5rRR
+         g/bipGvpidXAzNfi3DkWMZeJwnntBR1K+6Aq328lYD3I4q8SExIwU52E637jkjHfmnXW
+         L8zA==
+X-Forwarded-Encrypted: i=1; AJvYcCWhYAiQaU0W5sGUbpDZfWOWCcbVLz3/WjyhraScX4Q7T+pftr45m11cwebO9AWJ/yvucww3OCp3@vger.kernel.org, AJvYcCXIMke6S966bMhv/jyPPrnP2lMU4Sg2K3KQmofz+0ZMFL+a9vn54WltiFicbyrRjmm9l68NUZa7vVBhSUM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwOiFDbP49YcpE5MENnVmKmwJbif78i71XLpJrHcHgwcaK66dlv
+	8wTikIevzqJddWM2+sym8jnrPizdwPtadVhchu+S7Yv4GEAPOU7lSv1C
+X-Gm-Gg: ASbGncsptgGactUSyDibv4fT9rjOQEuAfXIE1NXPMldbf+WKepqPrgbpPCIL59EkqSd
+	M6G2Bhtfsgxj8QyW+H4bqzTcudW+BumON/F1LexXRixgPnZ95zTceqNZgySeC7uD1z5a5Ot7FM8
+	oymloKQt48eEtBVU/kun/v5QWr2Pb90RXmiCLqp/o9lk/wGsn5VGkBLR8ddtSp7kYj/QpfDqikr
+	Xbq13OnfOsU9ZYE9A2ncVGo01vZRA/1MTgLhZHpzEdwkLrlMsug6wZAe/xVHpz1QWXm4mLPRa8p
+	7rIJYk/RPPQ0Phtyw2Mc0Qv8porV/xX16D/vvX3+8YFqxtnuxp+4lju++fbR9c5DsBj3wLCqy34
+	=
+X-Google-Smtp-Source: AGHT+IEBTo7kIZ4DJ8graOHN/KQaV05qSrUjoSPXsongpILB30NWUheQhDMVK1PCPCF5Qi8PHQzzXQ==
+X-Received: by 2002:a05:600c:4f16:b0:44d:a244:4983 with SMTP id 5b1f17b1804b1-45335582b9dmr20908865e9.3.1749806814082;
+        Fri, 13 Jun 2025 02:26:54 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:75e0:f7f7:dffa:561e])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a568b2c957sm1747795f8f.76.2025.06.13.02.26.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Jun 2025 23:18:01 -0700 (PDT)
-Date: Fri, 13 Jun 2025 14:17:58 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Robert Pang <robertpang@google.com>
-Cc: corbet@lwn.net, colyli@kernel.org, kent.overstreet@linux.dev,
-	akpm@linux-foundation.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-bcache@vger.kernel.org,
-	jserv@ccns.ncku.edu.tw, stable@vger.kernel.org
-Subject: Re: [PATCH 1/8] lib min_heap: Add equal-elements-aware sift_down
- variant
-Message-ID: <aEvCljo6GPRRvWuO@visitorckw-System-Product-Name>
-References: <20250610215516.1513296-1-visitorckw@gmail.com>
- <20250610215516.1513296-2-visitorckw@gmail.com>
- <CAJhEC05pmnTd9mROTazKMFzSO+CcpY8au57oypCiXGaqhpA_2Q@mail.gmail.com>
+        Fri, 13 Jun 2025 02:26:53 -0700 (PDT)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,  Jonathan Corbet
+ <corbet@lwn.net>,  linux-kernel@vger.kernel.org,  Akira Yokosawa
+ <akiyks@gmail.com>,  "David S. Miller" <davem@davemloft.net>,  Ignacio
+ Encinas Rubio <ignacio@iencinas.com>,  Marco Elver <elver@google.com>,
+  Shuah Khan <skhan@linuxfoundation.org>,  Eric Dumazet
+ <edumazet@google.com>,  Jan Stancek <jstancek@redhat.com>,  Paolo Abeni
+ <pabeni@redhat.com>,  Ruben Wauters <rubenru09@aol.com>,
+  joel@joelfernandes.org,  linux-kernel-mentees@lists.linux.dev,
+  lkmm@lists.linux.dev,  netdev@vger.kernel.org,  peterz@infradead.org,
+  stern@rowland.harvard.edu,  Breno Leitao <leitao@debian.org>
+Subject: Re: [PATCH v2 0/2] Some extra patches for netlink doc generation
+In-Reply-To: <cover.1749735022.git.mchehab+huawei@kernel.org>
+Date: Fri, 13 Jun 2025 09:24:43 +0100
+Message-ID: <m2ldpwnj5g.fsf@gmail.com>
+References: <cover.1749735022.git.mchehab+huawei@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAJhEC05pmnTd9mROTazKMFzSO+CcpY8au57oypCiXGaqhpA_2Q@mail.gmail.com>
+Content-Type: text/plain
 
-On Thu, Jun 12, 2025 at 10:00:14PM +0900, Robert Pang wrote:
-> Hi Kuan-Wei
-> 
-> Thanks for this patch series to address the bcache latency regression.
-> I tested it but results show regression still remains. Upon review of
-> the patch changes, I notice that the min_heap_sift_down_eqaware_inline
-> #define macro in this patch may have been mapped incorrectly:
-> 
-> +#define min_heap_sift_down_eqaware_inline(_heap, _pos, _func, _args)   \
-> +       __min_heap_sift_down_inline(container_of(&(_heap)->nr,
-> min_heap_char, nr), _pos,        \
-> +                                   __minheap_obj_size(_heap), _func, _args)
-> 
-> I changed it to map to its "eqaware" counterpart like this and the
-> regression does not happen again.
-> 
-> +#define min_heap_sift_down_eqaware_inline(_heap, _pos, _func, _args)   \
-> +       __min_heap_sift_down_eqaware_inline(container_of(&(_heap)->nr,
-> min_heap_char, nr), _pos,        \
-> +                                   __minheap_obj_size(_heap), _func, _args)
-> 
-> Do you think this correction is appropriate?
-> 
-That's definitely my mistake.
-Thanks for testing and pointing it out.
-I'll fix the typo in the next version.
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-Regards,
-Kuan-Wei
+> This patch series comes after:
+> 	https://lore.kernel.org/linux-doc/cover.1749723671.git.mchehab+huawei@kernel.org/T/#t
 
-> Best regards
-> Robert Pang
-> 
-> On Wed, Jun 11, 2025 at 6:55 AM Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
-> >
-> > The existing min_heap_sift_down() uses the bottom-up heapify variant,
-> > which reduces the number of comparisons from ~2 * log2(n) to
-> > ~1 * log2(n) when all elements are distinct. However, in workloads
-> > where the heap contains many equal elements, this bottom-up variant
-> > can degenerate and perform up to 2 * log2(n) comparisons, while the
-> > traditional top-down variant needs only O(1) comparisons in such cases.
-> >
-> > To address this, introduce min_heap_sift_down_eqaware(), a top-down
-> > heapify variant optimized for scenarios with many equal elements. This
-> > variant avoids unnecessary comparisons and swaps when elements are
-> > already equal or in the correct position.
-> >
-> > Cc: stable@vger.kernel.org # 6.11+
-> > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> > ---
-> >  include/linux/min_heap.h | 51 ++++++++++++++++++++++++++++++++++++++++
-> >  lib/min_heap.c           |  7 ++++++
-> >  2 files changed, 58 insertions(+)
-> >
-> > diff --git a/include/linux/min_heap.h b/include/linux/min_heap.h
-> > index 79ddc0adbf2b..b0d603fe5379 100644
-> > --- a/include/linux/min_heap.h
-> > +++ b/include/linux/min_heap.h
-> > @@ -292,6 +292,52 @@ void __min_heap_sift_down_inline(min_heap_char *heap, size_t pos, size_t elem_si
-> >         __min_heap_sift_down_inline(container_of(&(_heap)->nr, min_heap_char, nr), _pos,        \
-> >                                     __minheap_obj_size(_heap), _func, _args)
-> >
-> > +/*
-> > + * Sift the element at pos down the heap.
-> > + *
-> > + * Variants of heap functions using an equal-elements-aware sift_down.
-> > + * These may perform better when the heap contains many equal elements.
-> > + */
-> > +static __always_inline
-> > +void __min_heap_sift_down_eqaware_inline(min_heap_char * heap, size_t pos, size_t elem_size,
-> > +                                        const struct min_heap_callbacks *func, void *args)
-> > +{
-> > +       void *data = heap->data;
-> > +       void (*swp)(void *lhs, void *rhs, void *args) = func->swp;
-> > +       /* pre-scale counters for performance */
-> > +       size_t a = pos * elem_size;
-> > +       size_t b, c, smallest;
-> > +       size_t n = heap->nr * elem_size;
-> > +
-> > +       if (!swp)
-> > +               swp = select_swap_func(data, elem_size);
-> > +
-> > +       for (;;) {
-> > +               b = 2 * a + elem_size;
-> > +               c = b + elem_size;
-> > +               smallest = a;
-> > +
-> > +               if (b >= n)
-> > +                       break;
-> > +
-> > +               if (func->less(data + b, data + smallest, args))
-> > +                       smallest = b;
-> > +
-> > +               if (c < n && func->less(data + c, data + smallest, args))
-> > +                       smallest = c;
-> > +
-> > +               if (smallest == a)
-> > +                       break;
-> > +
-> > +               do_swap(data + a, data + smallest, elem_size, swp, args);
-> > +               a = smallest;
-> > +       }
-> > +}
-> > +
-> > +#define min_heap_sift_down_eqaware_inline(_heap, _pos, _func, _args)   \
-> > +       __min_heap_sift_down_inline(container_of(&(_heap)->nr, min_heap_char, nr), _pos,        \
-> > +                                   __minheap_obj_size(_heap), _func, _args)
-> > +
-> >  /* Sift up ith element from the heap, O(log2(nr)). */
-> >  static __always_inline
-> >  void __min_heap_sift_up_inline(min_heap_char *heap, size_t elem_size, size_t idx,
-> > @@ -433,6 +479,8 @@ void *__min_heap_peek(struct min_heap_char *heap);
-> >  bool __min_heap_full(min_heap_char *heap);
-> >  void __min_heap_sift_down(min_heap_char *heap, size_t pos, size_t elem_size,
-> >                           const struct min_heap_callbacks *func, void *args);
-> > +void __min_heap_sift_down_eqaware(min_heap_char *heap, size_t pos, size_t elem_size,
-> > +                                 const struct min_heap_callbacks *func, void *args);
-> >  void __min_heap_sift_up(min_heap_char *heap, size_t elem_size, size_t idx,
-> >                         const struct min_heap_callbacks *func, void *args);
-> >  void __min_heapify_all(min_heap_char *heap, size_t elem_size,
-> > @@ -455,6 +503,9 @@ bool __min_heap_del(min_heap_char *heap, size_t elem_size, size_t idx,
-> >  #define min_heap_sift_down(_heap, _pos, _func, _args)  \
-> >         __min_heap_sift_down(container_of(&(_heap)->nr, min_heap_char, nr), _pos,       \
-> >                              __minheap_obj_size(_heap), _func, _args)
-> > +#define min_heap_sift_down_eqaware(_heap, _pos, _func, _args)  \
-> > +       __min_heap_sift_down_eqaware(container_of(&(_heap)->nr, min_heap_char, nr), _pos,       \
-> > +                            __minheap_obj_size(_heap), _func, _args)
-> >  #define min_heap_sift_up(_heap, _idx, _func, _args)    \
-> >         __min_heap_sift_up(container_of(&(_heap)->nr, min_heap_char, nr),       \
-> >                            __minheap_obj_size(_heap), _idx, _func, _args)
-> > diff --git a/lib/min_heap.c b/lib/min_heap.c
-> > index 96f01a4c5fb6..2225f40d0d7a 100644
-> > --- a/lib/min_heap.c
-> > +++ b/lib/min_heap.c
-> > @@ -27,6 +27,13 @@ void __min_heap_sift_down(min_heap_char *heap, size_t pos, size_t elem_size,
-> >  }
-> >  EXPORT_SYMBOL(__min_heap_sift_down);
-> >
-> > +void __min_heap_sift_down_eqaware(min_heap_char *heap, size_t pos, size_t elem_size,
-> > +                                 const struct min_heap_callbacks *func, void *args)
-> > +{
-> > +       __min_heap_sift_down_eqaware_inline(heap, pos, elem_size, func, args);
-> > +}
-> > +EXPORT_SYMBOL(__min_heap_sift_down_eqaware);
-> > +
-> >  void __min_heap_sift_up(min_heap_char *heap, size_t elem_size, size_t idx,
-> >                         const struct min_heap_callbacks *func, void *args)
-> >  {
-> > --
-> > 2.34.1
-> >
+Can you please incorporate this series into a v3 of the other patch set.
 
