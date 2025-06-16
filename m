@@ -1,103 +1,96 @@
-Return-Path: <linux-doc+bounces-49235-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49237-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D8B6ADB085
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 14:46:55 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19228ADB0D6
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 15:00:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2445E3A25D8
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 12:46:28 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 401A618894C6
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 13:00:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9CDBE285C96;
-	Mon, 16 Jun 2025 12:46:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 269082DBF55;
+	Mon, 16 Jun 2025 13:00:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b="EjK7foj5"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="ZwATEYTA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.tuxedocomputers.com (mail.tuxedocomputers.com [157.90.84.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 483B074420;
-	Mon, 16 Jun 2025 12:46:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=157.90.84.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A23FA29B78F;
+	Mon, 16 Jun 2025 13:00:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750078006; cv=none; b=GdzCxhxxPJVo2Ujmzu0IDKL/vE5clKf5j07eqBNpVlPy+RG7s7+DYgUXjFc9Z1yGGz+jjbtnhKuCYMhKUUwO98xMinGLWBII1EoAEia4yMhFJcuBCsN5cQWVGOwPCc2uXfZV/Vq4FM8KxCeirTKm3+IlDN364sCzDnFItZjiHJU=
+	t=1750078806; cv=none; b=gL2lIhK/bUVIJ5FEvMdc04giHDNUN0203PmDjcZcRpNqs5sRdWg7yFcy3WnL5OITrE0dnXMMGhMOfgbE9viK81rNRXl7q9MQmhMkq3f/YzhIX4QH4NfuHdxvbB0UPy0opDg2ZxOyI7mnmq81vki7sFPAiD6EnaYBvdw3kY9vRXg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750078006; c=relaxed/simple;
-	bh=V3bdCqRPnnsuaSC/9tsKOoYEPCllsd2mlydlvz+Lhio=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qFnJWYKoTXCa+QsDnlVyUn8TSfPk6poGH7rQ55OeJNChxneWwxpPSDMPqNa2E1f1UKo+e4kVQA8bkwAl1A1jMhy26GBrQOC7XLeb3qxtwpGVZTgIJowetF1x9JxwPCyTFY/umgKpQ6gIldSgE6GKJl0MWkIy2w8su8CbebdTTLY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com; spf=pass smtp.mailfrom=tuxedocomputers.com; dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b=EjK7foj5; arc=none smtp.client-ip=157.90.84.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tuxedocomputers.com
-Received: from [192.168.42.116] (pd9e59880.dip0.t-ipconnect.de [217.229.152.128])
-	(Authenticated sender: wse@tuxedocomputers.com)
-	by mail.tuxedocomputers.com (Postfix) with ESMTPSA id 6FC5B2FC0059;
-	Mon, 16 Jun 2025 14:46:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tuxedocomputers.com;
-	s=default; t=1750077998;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IYp63lnKIaa597PgW5Ia82OIQTnjt4Qa68nqLr/SBjY=;
-	b=EjK7foj5u2gCuabSBiWQZu5676qyN97375w5SdgnuXZenHbQ419RSOEHlAYPPRdWxcwTcw
-	0Y8BLlrvv8zLouJBFrtBDlWDRSmdSTJtHrXEtpV3KsWorfD5E6ZIPqE4TD26qydfl6LJZ6
-	3ElhDoeDeV3cYkcZzCGTXmW6pfnmD5U=
-Authentication-Results: mail.tuxedocomputers.com;
-	auth=pass smtp.auth=wse@tuxedocomputers.com smtp.mailfrom=wse@tuxedocomputers.com
-Message-ID: <41de4cd4-2a27-4b14-a1c0-e336a3cec317@tuxedocomputers.com>
-Date: Mon, 16 Jun 2025 14:46:35 +0200
+	s=arc-20240116; t=1750078806; c=relaxed/simple;
+	bh=e1uSwlLdErjqDZyWzU/hj0Na9sgtKk4iemqYCXEZKoU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mce1mi7sVGwHzzBtj2G73al6epFrlBwJDD5O6UjbPkwL/36nrGN3jASxlPEhzrMo0u7/CAc8m+m7XGe2aapT6bcU57Jk5hJ7UR0M7j5AVjHn2wLfqMFKiGlaiBgsQb7K/Ch2KWcFsG83wzNdqQSgjD8LWSd3wj8vQ/As19jI4kE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=lst.de; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=ZwATEYTA; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=lst.de
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=8tVwLUserej16NPd2Va9129cuYtZXyZKK5GU8UvfgUs=; b=ZwATEYTAkiIHRmeyPXkG3m7K3e
+	JcRVg7Hee5fczHT/wV51TOtCvQWBj2I2z5DQzIFi9rFl2buCMhMgtzU8pgEQk4/9J3hpjzh7ihDSo
+	PY4i+Jgc89RrwzyQWIZhfmmKUxDMuRQOJX2Fuvv2Id24SwFWIA04C7JHI/zTFPXd61AxVmEHMyxUw
+	GCJcepmM/DZ1yveEgqqbzfPV8xZmVIYOlh4LntwMRD3yeMn9fqjw2XOJK3m2yUFN7auGXMwCCOf8g
+	i4Vwl8gYnLyIx9kNH0msLgWjLEkvvevAsS8Q11l5P47C69kKZE17rUDDcsBbwC33m1CrrKJ/HxZl9
+	5XjaM8xA==;
+Received: from 2a02-8389-2341-5b80-d601-7564-c2e0-491c.cable.dynamic.v6.surfer.at ([2a02:8389:2341:5b80:d601:7564:c2e0:491c] helo=localhost)
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1uR9RT-00000004Sae-1Hm9;
+	Mon, 16 Jun 2025 13:00:04 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Christian Brauner <brauner@kernel.org>
+Cc: "Darrick J. Wong" <djwong@kernel.org>,
+	Joanne Koong <joannelkoong@gmail.com>,
+	linux-xfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-block@vger.kernel.org,
+	gfs2@lists.linux.dev
+Subject: refactor the iomap writeback code
+Date: Mon, 16 Jun 2025 14:59:01 +0200
+Message-ID: <20250616125957.3139793-1-hch@lst.de>
+X-Mailer: git-send-email 2.47.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 2/3] platform/x86: Add Uniwill laptop driver
-To: Armin Wolf <W_Armin@gmx.de>, ilpo.jarvinen@linux.intel.com,
- hdegoede@redhat.com, chumuzero@gmail.com, corbet@lwn.net, cs@tuxedo.de,
- ggo@tuxedocomputers.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- platform-driver-x86@vger.kernel.org
-References: <20250615175957.9781-1-W_Armin@gmx.de>
- <20250615175957.9781-3-W_Armin@gmx.de>
-Content-Language: en-US
-From: Werner Sembach <wse@tuxedocomputers.com>
-In-Reply-To: <20250615175957.9781-3-W_Armin@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Hi, small additon
+Hi all,
 
-Am 15.06.25 um 19:59 schrieb Armin Wolf:
-> +		functionality.
-> +
-> +What:		/sys/bus/wmi/devices/ABBC0F6F-8EA1-11D1-00A0-C90629100000[-X]/rainbow_animation
-> +Date:		Juni 2025
-> +KernelVersion:	6.17
-> +Contact:	Armin Wolf <W_Armin@gmx.de>
-> +Description:
-> +		Forces the integrated lightbar to display a rainbow animation when the machine
-> +		is not suspended. Writing "enable"/"disable" into this file enables/disables
-> +		this functionality.
-> +
-> +		Reading this file returns the current status of the rainbow animation functionality.
-> +
-> +What:		/sys/bus/wmi/devices/ABBC0F6F-8EA1-11D1-00A0-C90629100000[-X]/breathing_in_suspend
-> +Date:		Juni 2025
-> +KernelVersion:	6.17
-> +Contact:	Armin Wolf <W_Armin@gmx.de>
-> +Description:
-> +		Causes the integrated lightbar to display a breathing animation when the machine
-> +		has been suspended and is running on AC power. Writing "enable"/"disable" into
-> +		this file enables/disables this functionality.
-> +
-> +		Reading this file returns the current status of the breathing animation
-> +		functionality.
+this is an alternative approach to the writeback part of the
+"fuse: use iomap for buffered writes + writeback" series from Joanne.
+It only handles the writeback side, not the write into page cache or
+read sides, and also doesn't allow building the writeback code without
+CONFIG_BLOCK yet, despite making some progress to that.
 
-maybe this would be better under the /sys/class/leds/*/ tree if possible
+The big difference compared to Joanne's version is that I hope the
+split between the generic and ioend/bio based writeback code is a bit
+cleaner here.  We have two methods that define the split between the
+generic writeback code, and the implemementation of it, and all knowledge
+of ioends and bios now sits below that layer.
 
+Diffstat:
+ Documentation/filesystems/iomap/operations.rst |   37 --
+ block/fops.c                                   |   25 +
+ fs/gfs2/aops.c                                 |    8 
+ fs/gfs2/bmap.c                                 |   15 -
+ fs/iomap/buffered-io.c                         |  323 +++----------------------
+ fs/iomap/internal.h                            |    1 
+ fs/iomap/ioend.c                               |  220 ++++++++++++++++-
+ fs/iomap/trace.h                               |    2 
+ fs/xfs/xfs_aops.c                              |  238 ++++++++++--------
+ fs/zonefs/file.c                               |   29 +-
+ include/linux/iomap.h                          |   48 +--
+ 11 files changed, 487 insertions(+), 459 deletions(-)
 
