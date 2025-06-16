@@ -1,123 +1,110 @@
-Return-Path: <linux-doc+bounces-49186-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49188-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E23AADA641
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 04:17:54 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74206ADA684
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 04:56:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C2E3C165EB1
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 02:17:54 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id AF47818902B9
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 02:56:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51ADDBE65;
-	Mon, 16 Jun 2025 02:17:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aNytxkVe"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7E3417AE11;
+	Mon, 16 Jun 2025 02:56:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D63AC27468;
-	Mon, 16 Jun 2025 02:17:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCFA323AD;
+	Mon, 16 Jun 2025 02:56:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=124.126.103.232
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750040269; cv=none; b=Rla9aKwAoCo8IjXSIfuGuV2R9dkHkqonPsCc++WGs+ExhSTr70WOhUh6Y+XKcbZxK5SzDOcIvKrVZIYCHT56weCG4I6k2tXeZ7PmKmLQxp7pozuNG/N2xkNUDPn7zBhvSFbI2X4Hcl4mBtYluUfNTxKa7KF6bR6bIJiRcLGetws=
+	t=1750042581; cv=none; b=GLOG8gd6DxJk6SRvW74UgCSqLJjy1gIDYUzi6SGKgFnIfYVB58zSkhyoozmope9OH/1TS2DcUEL4+4wqwZ2wGbADa6aldv1AgEhQYnOxc6MjW1YbwLphv2oRiQ3zs3ReszX3VvsxS12WVBWEJLICNlQBYiXPgK83jChFkv+N9iQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750040269; c=relaxed/simple;
-	bh=SWPLtRw++Kkvx35Sx1XLcecpx0VtVmVooRZvcC3nzy8=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=sd5Aqou7/JTWz0MBBAarmCecZx+cPak3BeHgVfObKnIxM6wF6wXgMjsGpPvZbHjQhtCkUlKEv5NbS14BWkWwU9Ts+kG+PWBcshgEIWZMIlBAAg+f6cJZFEyFS3cLgpHB+0EgvGTU4KoCs4i5Q7l09iJRBfqtfjp8VsfV6ae4wWc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aNytxkVe; arc=none smtp.client-ip=209.85.215.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b2fa3957661so3283451a12.2;
-        Sun, 15 Jun 2025 19:17:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750040267; x=1750645067; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=KZMQS+IaNs/xpTUGHSm25tygrtlj4jikbdPrhHwUj8Q=;
-        b=aNytxkVe0v93TLsaV9kBpWWv61XVUNo9IK/bmTif2WQgCTZrzfhoPaL6oz+rY3Gv6C
-         ulqkIqB1/sVmi+asre4ldwCZNvcc7XXEoJ2r51waw/hFXjWjI5x+zV808+9cV5LQlq+N
-         349pN0GqeWOzBRR+AE6ymOHyzVyjNCtzskkAjvMPYzyNR7pm2nxQdg8wx9fL6UPX9wA1
-         MIEeDprDz8sUqERHfvW2/Qt8RxcQaUO3KSUNPQJSNoV6Fna84SGce+KBLxRFduJ36Q5q
-         RDlVd0ptE6PM49bbIWhSBeGYqa8H7ooz5AvE2ywA4MM2eL+pCGQz4xA07xpe2XCuYC1E
-         DMmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750040267; x=1750645067;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=KZMQS+IaNs/xpTUGHSm25tygrtlj4jikbdPrhHwUj8Q=;
-        b=mZeqj2P9a/7Lw836h+FSyS3rGyLNjQyCs1qWhitjTMwGIvHio9Yag1EKKvtGCNl6Cy
-         yfAtyhCiv0DWP0vPu158pRthj0oOBOMnnqfMFIUT/TGHmq9ICHV86gzZrNQHSqePM/lm
-         y8SVj0xDPsov2dKf/am/363+dKlOn7Zla/CN7Smf6UZz2s6Buu+iYnwpg7xZxan+uPtH
-         QPEvKVplwdKGVBwEzjFeqzw4XOPhYikjwm0GfDxFWAEt2q3ALbAgQVHFPv5SpCKEjWhw
-         mBUXnCytkNeYIAJoOCtKk3ITI0NjNRYsfGrsdk8kPEszxinymcHA7GOt95znAuKeF+k8
-         uaQw==
-X-Forwarded-Encrypted: i=1; AJvYcCVMAupEzO8MbCU6b89knKE0dZ/fuAmJizF6SV54uV15m9K/0aolbQbitvxiM7Uy/JDR/xhp7vUZwF5K4cVZ@vger.kernel.org, AJvYcCXVOVNq1E3JDsOOLnKw1vtd+RWrEv6a7tI1rpbQTBvNgDRw//VTBT4Fit3iO6z44R3lYLwwTxMYOGA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxujbIGMsiumdXGONLvXLCKGIBrpkczqP9EOIIkYKuMaDxue97X
-	BXYYZSqJqEe65FfyxVk48jjQrprrK73GONjeg/3urkhaiRHQtC27LAMe
-X-Gm-Gg: ASbGnct6c1rjAN+XmON1xynNqkoReMv69QzWumPur9r9N3DkEsYFTVo3QrXiCZg5g9o
-	x+dsP8wOFYSzum/MQACQI2/gDCIb6rkRHUQwN61QaSKXtupGeGtjK2U6v8wA9F/y3Iy2JjTO+i8
-	VXyNOBOS+iLu8Udl0PwIrXMFa6BxuvqCF4NKXdeWzfUmawcjFLiTtQ+g2MGCW5vQyGOACsMAi5M
-	p56CvclnNvItHkopbBBd6CLCPBZPOKBzYiA4FIjNKnOurLwdNy2E3r2SiyHelu9s+kGPZIxvlvT
-	BuTvaboqbMnaBaZWKZhozOYbsbhnyN2xpQaNzxRm/UAmNj8d472dEhOuZI9QXkp0IqgYJDSYc4W
-	vy+Qkv/Ln2FL5S4MvUgz027mWTIhvrhaQH2Vmi7vDUzDGpG1unnZSsiks8oklGkA=
-X-Google-Smtp-Source: AGHT+IHDsJZGj+lDxZG5TgbN438rJtv/FU3URTV5UDwqjTi3dIwneqJsEiiTD8dmycjHVTZ+/dQLfw==
-X-Received: by 2002:a05:6a21:648b:b0:21f:53e4:1925 with SMTP id adf61e73a8af0-21fbd523a1dmr9778681637.10.1750040266910;
-        Sun, 15 Jun 2025 19:17:46 -0700 (PDT)
-Received: from hyeon-Virtual-Machine.mshome.net (syn-172-089-148-138.res.spectrum.com. [172.89.148.138])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b2fe1689814sm4718037a12.51.2025.06.15.19.17.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Jun 2025 19:17:46 -0700 (PDT)
-From: HyeonSu Jeon <dev.hyeonsu.jeon@gmail.com>
-To: maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	airlied@gmail.com,
-	simona@ffwll.ch,
-	corbet@lwn.net
-Cc: HyeonSu Jeon <dev.hyeonsu.jeon@gmail.com>,
-	dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] docs: nouveau: remove invalid kernel-doc reference to r535.c
-Date: Sun, 15 Jun 2025 19:17:42 -0700
-Message-Id: <20250616021742.8304-1-dev.hyeonsu.jeon@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1750042581; c=relaxed/simple;
+	bh=1k8I6Mvaw6SEoyTt9FNwQEocLlvWVGRMrN/jfNzC55E=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=OL824Xwcj4hxmEyjoPyXReLcGtMMZYq9r/XmMqKbi3ElpbSZtapr7tMjNxwLFETpQ9b/nYc7o6dN1SrP5TFoyC0MM5Ps2jCASS9s4uPkkypqcM3r/dXt2c4YwasPCApcwgqsRDS847k4INP2N/+liFl2kqO9wk6BSUN7jGEuhmw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn; spf=pass smtp.mailfrom=kylinos.cn; arc=none smtp.client-ip=124.126.103.232
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kylinos.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kylinos.cn
+X-UUID: 704ac37e4a5d11f0b29709d653e92f7d-20250616
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.45,REQID:47b3ed34-d5cf-4305-a2bc-5974acafac27,IP:0,U
+	RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+	:release,TS:-5
+X-CID-META: VersionHash:6493067,CLOUDID:fa38bf22159f6ff5d46939ea87b52e5c,BulkI
+	D:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:nil,UR
+	L:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,S
+	PR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: 704ac37e4a5d11f0b29709d653e92f7d-20250616
+Received: from mail.kylinos.cn [(10.44.16.175)] by mailgw.kylinos.cn
+	(envelope-from <jiangyunshui@kylinos.cn>)
+	(Generic MTA)
+	with ESMTP id 495715793; Mon, 16 Jun 2025 10:56:02 +0800
+Received: from mail.kylinos.cn (localhost [127.0.0.1])
+	by mail.kylinos.cn (NSMail) with SMTP id 49C06E00891C;
+	Mon, 16 Jun 2025 10:56:02 +0800 (CST)
+X-ns-mid: postfix-684F87C2-25620450
+Received: from kylin-pc.. (unknown [172.25.130.133])
+	by mail.kylinos.cn (NSMail) with ESMTPA id 9CBEFE008900;
+	Mon, 16 Jun 2025 10:56:01 +0800 (CST)
+From: Yunshui Jiang <jiangyunshui@kylinos.cn>
+To: alexander.deucher@amd.com,
+	chriistian.koenig@amd.com
+Cc: linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Yunshui Jiang <jiangyunshui@kylinos.cn>
+Subject: [PATCH] drm/amdgpu: use kmalloc_array() instead of kmalloc()
+Date: Mon, 16 Jun 2025 10:55:59 +0800
+Message-ID: <20250616025559.2766331-1-jiangyunshui@kylinos.cn>
+X-Mailer: git-send-email 2.47.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-The file drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c does not exist
-in the tree, but is referenced in gsp.rst via a kernel-doc directive.
-This causes an error during the documentation build
+Use kmalloc_array() instead of kmalloc() with multiplication.
+kmalloc_array() is a safer way because of its multiply overflow check.
 
-Removing this refernce resolves the error
-
-Signed-off-by: HyeonSu Jeon <dev.hyeonsu.jeon@gmail.com>
+Signed-off-by: Yunshui Jiang <jiangyunshui@kylinos.cn>
 ---
- Documentation/gpu/nouveau.rst | 3 ---
- 1 file changed, 3 deletions(-)
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/gpu/nouveau.rst b/Documentation/gpu/nouveau.rst
-index b8c801e0068c..cab4a8eda850 100644
---- a/Documentation/gpu/nouveau.rst
-+++ b/Documentation/gpu/nouveau.rst
-@@ -25,8 +25,5 @@ providing a consistent API to upper layers of the driver stack.
- GSP Support
- ------------------------
- 
--.. kernel-doc:: drivers/gpu/drm/nouveau/nvkm/subdev/gsp/r535.c
--   :doc: GSP message queue element
--
- .. kernel-doc:: drivers/gpu/drm/nouveau/include/nvkm/subdev/gsp.h
-    :doc: GSP message handling policy
--- 
-2.34.1
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c b/drivers/gpu/drm/am=
+d/amdgpu/amdgpu_ras.c
+index de0944947eaf..ab02011842e4 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ras.c
+@@ -2563,7 +2563,7 @@ static int amdgpu_ras_badpages_read(struct amdgpu_d=
+evice *adev,
+ 		goto out;
+ 	}
+=20
+-	*bps =3D kmalloc(sizeof(struct ras_badpage) * data->count, GFP_KERNEL);
++	*bps =3D kmalloc_array(data->count, sizeof(struct ras_badpage), GFP_KER=
+NEL);
+ 	if (!*bps) {
+ 		ret =3D -ENOMEM;
+ 		goto out;
+@@ -2719,7 +2719,7 @@ static int amdgpu_ras_realloc_eh_data_space(struct =
+amdgpu_device *adev,
+ 	unsigned int old_space =3D data->count + data->space_left;
+ 	unsigned int new_space =3D old_space + pages;
+ 	unsigned int align_space =3D ALIGN(new_space, 512);
+-	void *bps =3D kmalloc(align_space * sizeof(*data->bps), GFP_KERNEL);
++	void *bps =3D kmalloc(align_space, sizeof(*data->bps), GFP_KERNEL);
+=20
+ 	if (!bps) {
+ 		return -ENOMEM;
+--=20
+2.47.1
 
 
