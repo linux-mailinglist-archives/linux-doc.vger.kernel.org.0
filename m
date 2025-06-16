@@ -1,170 +1,133 @@
-Return-Path: <linux-doc+bounces-49236-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49244-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4CF8ADB0CE
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 15:00:08 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A7EAADB17D
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 15:17:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D26717A8DCA
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 12:58:46 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4E0B0188C460
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Jun 2025 13:17:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29F50292B47;
-	Mon, 16 Jun 2025 12:59:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B0DCE295DAA;
+	Mon, 16 Jun 2025 13:14:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b="Z0DmCtsq"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="i+w6G83w"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.tuxedocomputers.com (mail.tuxedocomputers.com [157.90.84.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 505B6292B3D;
-	Mon, 16 Jun 2025 12:59:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=157.90.84.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 796EC285C8A;
+	Mon, 16 Jun 2025 13:14:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.70.183.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750078799; cv=none; b=fiHzan1WZOG91o6Rm4Pllq2wQHxrCfmqGbORjasdE8HDPGWKLZ5MePUYwC2SZ9KCy6s73gPvqSRIShMS9QfoYgneo95+S/Qcv3lS0iG6bmr6/9xB6wot1nJrr2QXPA4/hR+eXtoQWNbmPKtqskoUk8Y6kGaNTyCPgF4H84Cm0J0=
+	t=1750079685; cv=none; b=rJNQ+jo1Dt5GLw8EN8x3rnBuNQmk4yC4J0/rw6Ds7uqIl/P45uV7uOEpgoCajHUN/vr7hPiekfr33eC1J6+VQ0gjHV3LH2ePTEoyYDaZUJ3vJq0sLMS6Yf0b/2BsgqLD19xRYOq3gR+4dZT3k9b5X+SvUMLM+ICFdcPHTDSAN+Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750078799; c=relaxed/simple;
-	bh=6l+7fWDupKPx1PUKtngix+Asbt9XDd+GPScH8eDOZbI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oPMIMHOBU6sYuLBWX/4QbKHXMbSXskrmWeJ1x2GFFJ/hmI0UsdfCazW5m/1xk0LKodcz5vCIuj3BPSYIbzojSz8vpu/vQEnOgAiy9pJ2J7l2ELpKFY0t9sFZxTGXs7ymArunkkWwU1NZTveM+9/Bq/fhuQiV84Tg7D7889LK/48=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com; spf=pass smtp.mailfrom=tuxedocomputers.com; dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b=Z0DmCtsq; arc=none smtp.client-ip=157.90.84.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tuxedocomputers.com
-Received: from [192.168.42.116] (pd9e59880.dip0.t-ipconnect.de [217.229.152.128])
-	(Authenticated sender: wse@tuxedocomputers.com)
-	by mail.tuxedocomputers.com (Postfix) with ESMTPSA id AF5022FC0059;
-	Mon, 16 Jun 2025 14:59:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tuxedocomputers.com;
-	s=default; t=1750078792;
+	s=arc-20240116; t=1750079685; c=relaxed/simple;
+	bh=kb1b6C4yM57+Gn9/9WAtBxL1EdUT2+sgNeDSaVoGKM8=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=r3ONv2Id+Hy0iXVY2YRdPbpMP8TLJPc0znpYXRDoolhV8JbKmzfl1KLXGyaqA8a7EQR2CrMcBSpTAX/dLFKVMkcoLGcwtx4Ax9KZPfcp9MjQ1mvRn66xBpgw1wvxAXgSdRvN4X5MBqGdY/bwyvdVkrVwnUe8ig9aGadW49hFJaY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=i+w6G83w; arc=none smtp.client-ip=217.70.183.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id C74F644305;
+	Mon, 16 Jun 2025 13:14:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+	t=1750079680;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=bOS4yfJw7ZHsR6k3jAVfS8tq+SMQ7zP/6jth4m1s9qg=;
-	b=Z0DmCtsqd/SfZwstPDE7axeeYVE03ZwMDIFPDbChTXAxhqH0Qt+cyKmIY+uxOFvTdjoxkh
-	loaFFTORxGNcYUvHjhDiHQ45cG+E1gDF4oQ61eqK49NxUWGendg/5rv+nE4VTajHGjDiO1
-	BcalKN8iB7ddZdSGnQRzThccjnnZASc=
-Authentication-Results: mail.tuxedocomputers.com;
-	auth=pass smtp.auth=wse@tuxedocomputers.com smtp.mailfrom=wse@tuxedocomputers.com
-Message-ID: <50c4d166-0254-4f5e-b006-85aef8d9dd02@tuxedocomputers.com>
-Date: Mon, 16 Jun 2025 14:59:52 +0200
+	bh=l6tGU+j/DGX7Z6zWCQu/tHD8h7NUEb8TaXsJyR3P26k=;
+	b=i+w6G83wep4FVd7GHRgZDcLQ4cJPLMYnKlP0oENTWL2kzvp51yNaUPYuTyTTrD6EF+P0KH
+	GVNQfz8TAiDhLMVV3skdZqb5DVOK2c1hyjenlZwi0HfmqfRD+gt8aShXYJjjZ2qOpAGvC7
+	lB0V/EG34ckQ+sr3I6azKcwJsRDzorxSeQ4ALO5gRR7ZiwnNTFAoVJcrIBLxdbxQmfcE8c
+	B8fGmbPfXPiaUUZkGP1C1QTP24FznknLwVBPJTbMAvPvhYdV3XYOih5iECKup+T19XgZdj
+	FrbbraKu705iKPnDFeNnW58E42qN8PKgXBgR59SBra/ov6mYm3I1XUDK8tQ4Rg==
+Date: Mon, 16 Jun 2025 15:14:37 +0200
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Andrew Lunn <andrew@lunn.ch>, Oleksij Rempel <o.rempel@pengutronix.de>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jonathan Corbet
+ <corbet@lwn.net>, Donald Hunter <donald.hunter@gmail.com>, Rob Herring
+ <robh@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, Simon Horman
+ <horms@kernel.org>, Heiner Kallweit <hkallweit1@gmail.com>, Russell King
+ <linux@armlinux.org.uk>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor
+ Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark
+ Brown <broonie@kernel.org>, Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, Kyle Swenson <kyle.swenson@est.tech>, Dent
+ Project <dentproject@linuxfoundation.org>, kernel@pengutronix.de, Maxime
+ Chevallier <maxime.chevallier@bootlin.com>, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next v13 07/13] net: pse-pd: Add support for budget
+ evaluation strategies
+Message-ID: <20250616151437.221a4aef@kmaincent-XPS-13-7390>
+In-Reply-To: <20250614123311.49c6bcbf@kernel.org>
+References: <20250610-feature_poe_port_prio-v13-0-c5edc16b9ee2@bootlin.com>
+	<20250610-feature_poe_port_prio-v13-7-c5edc16b9ee2@bootlin.com>
+	<20250614123311.49c6bcbf@kernel.org>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/3] platform/x86: Add support for Uniwill laptop
- features
-To: Armin Wolf <W_Armin@gmx.de>, ilpo.jarvinen@linux.intel.com,
- hdegoede@redhat.com, chumuzero@gmail.com, corbet@lwn.net, cs@tuxedo.de,
- ggo@tuxedocomputers.com
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- platform-driver-x86@vger.kernel.org
-References: <20250615175957.9781-1-W_Armin@gmx.de>
-Content-Language: en-US
-From: Werner Sembach <wse@tuxedocomputers.com>
-In-Reply-To: <20250615175957.9781-1-W_Armin@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtddugddvieeijecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvfevuffkjghfohfogggtgfesthhqredtredtjeenucfhrhhomhepmfhorhihucforghinhgtvghnthcuoehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpefguddtfeevtddugeevgfevtdfgvdfhtdeuleetffefffffhffgteekvdefudeiieenucffohhmrghinhepsghoohhtlhhinhdrtghomhenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghlohepkhhmrghinhgtvghnthdqigfrufdqudefqdejfeeltddpmhgrihhlfhhrohhmpehkohhrhidrmhgrihhntggvnhhtsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedvjedprhgtphhtthhopehkuhgsrgeskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprghnughrvgifsehluhhnnhdrtghhpdhrtghpthhtohepohdrrhgvmhhpvghlsehpvghnghhuthhrohhnihigrdguvgdprhgtphhtthhopegurghvvghmsegurghvvghmlhhofhhtrdhnvghtpdhrtghpthhtohepvgguuhhmrgiiv
+ ghtsehgohhoghhlvgdrtghomhdprhgtphhtthhopehprggsvghnihesrhgvughhrghtrdgtohhmpdhrtghpthhtoheptghorhgsvghtsehlfihnrdhnvghtpdhrtghpthhtohepughonhgrlhgurdhhuhhnthgvrhesghhmrghilhdrtghomh
+X-GND-Sasl: kory.maincent@bootlin.com
 
-Hi Armin,
+Le Sat, 14 Jun 2025 12:33:11 -0700,
+Jakub Kicinski <kuba@kernel.org> a =C3=A9crit :
 
-Am 15.06.25 um 19:59 schrieb Armin Wolf:
-> This patch series adds support for the various features found on
-> laptops manufactured by Uniwill. Those features are:
->
->   - battery charge limiting
->   - RGB lightbar control
->   - hwmon support
->   - improved hotkey support
->   - keyboard-related settings
->
-> This patch series is based on the following out-of-tree drivers:
->
->   - https://github.com/pobrn/qc71_laptop
->   - https://github.com/tuxedocomputers/tuxedo-drivers
-Better use https://gitlab.com/tuxedocomputers/development/packages/tuxedo-drivers
->
-> Additionally the OEM software of the Intel Nuc x15 was
-> reverse-engineered to have a better understanding about the underlying
-> hardware interface.
->
-> The first patch introduces the uniwill-wmi driver used for handling
-> WMI events on Uniwill devices. Due to a grave design error inside the
-> underlying WMI firmware interface (the WMI GUID was copied from the
-> Windows driver samples and is thus not unique) the driver cannot be
-> autoloaded. Instead drivers using this module will load it as an
-> module dependency.
->
-> The second patch introduces the uniwill-laptop driver that does the
-> majority of the work. This driver talks to the embedded controller
-> yet another WMI interface to control the various features. Sadly this
-> WMI firmware interfaces suffers from the exact same issue (the WMI
-> GUID is not unique) and thus a DMI whitelist has to be used for
-> loading the driver.
->
-> The last patch finally adds some documentation for configuring and
-> using both drivers.
->
-> Special thanks go to:
->
->   - github user cyear for bring up this topic on the lm-sensors issue
->     tracker and being the tester for various prototype versions
->   - github user dumingqiao for testing the battery, lightbar and
->     keyboard-related features
->   - Tuxedo computers for giving advice on how to design the userspace
->     interface
->
-> I send this series as an RFC to gather feedback and to request any
-> involved developers if they want to have their Co-developed-by tags
-> on the final patch series.
+> On Tue, 10 Jun 2025 10:11:41 +0200 Kory Maincent wrote:
+> > +static bool
+> > +pse_pi_is_admin_enable_not_applied(struct pse_controller_dev *pcdev,
+> > +				   int id) =20
+>=20
+> the only caller of this function seems to negate the return value:
+>=20
+> drivers/net/pse-pd/pse_core.c:369:              if
+> (!pse_pi_is_admin_enable_not_applied(pcdev, i))
+>=20
+> let's avoid the double negation ?
 
-Afaik most of the initial uniwill module in tuxedo-drivers was written by 
-Christoffer, he is currently on holiday, but I will ask him when he is back. I 
-also did later added to it later.
+I thought it was better for comprehension.
+If we inverse the behavior we would have a function name like that:
+pse_pi_is_admin_disable_not_detected_or_applied()
 
-Since this driver is a complete rewrite I'm not sure if a Co-developed by for 
-Christoffer and me is appropriate, but we would ofc be happy about it. Maybe for 
-finding out the EC register meanings that you probably at least partially copied 
-over from tuxedo-drivers?
+Do you have a better proposition?
 
-Or do you see another label more fitting?
+> > +static int pse_disable_pi_pol(struct pse_controller_dev *pcdev, int id)
+> > +{
+> > +	unsigned long notifs =3D ETHTOOL_PSE_EVENT_OVER_BUDGET;
+> > +	struct pse_ntf ntf =3D {};
+> > +	int ret;
+> > +
+> > +	dev_dbg(pcdev->dev, "Disabling PI %d to free power budget\n", id);
+> > +
+> > +	NL_SET_ERR_MSG_FMT(&ntf.extack,
+> > +			   "Disabling PI %d to free power budget", id); =20
+>=20
+> You so dutifully fill in this extack but it doesn't go anywhere.
+> Extacks can only be attached to NLMSG_ERROR and NLMSG_DONE
+> control messages. You can use the extack infra for the formatting,
+> but you need to add a string attribute to the notification message
+> to actually expose it to the user.
 
-Best regards,
+Indeed it seems there are useless extacks.
 
-Werner
-
->
-> Armin Wolf (3):
->    platform/x86: Add Uniwill WMI driver
->    platform/x86: Add Uniwill laptop driver
->    Documentation: laptops: Add documentation for uniwill laptops
->
->   .../ABI/testing/sysfs-driver-uniwill-laptop   |   53 +
->   Documentation/admin-guide/laptops/index.rst   |    1 +
->   .../admin-guide/laptops/uniwill-laptop.rst    |   68 +
->   Documentation/wmi/devices/uniwill-laptop.rst  |  109 ++
->   Documentation/wmi/devices/uniwill-wmi.rst     |   52 +
->   MAINTAINERS                                   |   17 +
->   drivers/platform/x86/Kconfig                  |    2 +
->   drivers/platform/x86/Makefile                 |    3 +
->   drivers/platform/x86/uniwill/Kconfig          |   49 +
->   drivers/platform/x86/uniwill/Makefile         |    8 +
->   drivers/platform/x86/uniwill/uniwill-laptop.c | 1477 +++++++++++++++++
->   drivers/platform/x86/uniwill/uniwill-wmi.c    |  178 ++
->   drivers/platform/x86/uniwill/uniwill-wmi.h    |  122 ++
->   13 files changed, 2139 insertions(+)
->   create mode 100644 Documentation/ABI/testing/sysfs-driver-uniwill-laptop
->   create mode 100644 Documentation/admin-guide/laptops/uniwill-laptop.rst
->   create mode 100644 Documentation/wmi/devices/uniwill-laptop.rst
->   create mode 100644 Documentation/wmi/devices/uniwill-wmi.rst
->   create mode 100644 drivers/platform/x86/uniwill/Kconfig
->   create mode 100644 drivers/platform/x86/uniwill/Makefile
->   create mode 100644 drivers/platform/x86/uniwill/uniwill-laptop.c
->   create mode 100644 drivers/platform/x86/uniwill/uniwill-wmi.c
->   create mode 100644 drivers/platform/x86/uniwill/uniwill-wmi.h
->
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
 
