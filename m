@@ -1,154 +1,173 @@
-Return-Path: <linux-doc+bounces-49353-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49357-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1A67ADC3D7
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Jun 2025 09:59:24 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 64561ADC3F4
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Jun 2025 10:02:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C228C7A2F4A
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Jun 2025 07:57:59 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4772017541C
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Jun 2025 08:02:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C59228F524;
-	Tue, 17 Jun 2025 07:59:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 91F1328F92E;
+	Tue, 17 Jun 2025 08:02:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="riuj8blw";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="3dlU8pnc"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CRS/iG9r"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55AC028ECCD;
-	Tue, 17 Jun 2025 07:59:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D1371D88AC;
+	Tue, 17 Jun 2025 08:02:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750147151; cv=none; b=nzpRFkFMYZeWjba0C+U4Z6ghAmg6I3+O5CV9E/IwckRdRoQBIA8Sit6QF8uYgfbty+FUoGhVMM/8cCxQFP3Nqc96Ja/V4QaRJgCWtheMuqTp+FttPXept50jd4G35EjqNpzkFw5mKvqeyPFkYhGicPkXT3ZJrmAlv/fJkgAqL6Y=
+	t=1750147352; cv=none; b=p+FXU2HKllALMMR3Ysf04uQTFNo/vWQsKFo47+uhsQkhJQhoRWL/9oS74otJ3+/TZf2g/aBsYAdaziH4inHkHlZnTYlxd/LU/f6mJ6Kff0Sm37S5PmCbcs87CZBfynMmVtCZltSJCKvwWKT7DFMRwSOEk/wEOAyFW5HfiGvelN8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750147151; c=relaxed/simple;
-	bh=NIgJ6S2IMm67sNgLluaxm/t93R9SpN5EK5tTKzscYko=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rg8UqNTLUtGw/5zPkUs1SpKD2yxfxptljTPMIbHfOgIUbBzA1fj9ASL6FfJCkH6m9EtZ5o71AeT1Bbn8b9ecoV5Qa9keC+5QdC19TTKDdqC+hKVgZj0sMFhnmGwwdkl6ryuyUx56+8NpSfL1EfAF1yylnBVCSwqAvnu02gPaQVY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=riuj8blw; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=3dlU8pnc; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-Date: Tue, 17 Jun 2025 09:59:08 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1750147148;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hj2LJB5Pz+vjWi8da/Iv2JkklxNhs1V6axP5pIrqxJM=;
-	b=riuj8blwvDOsP6wUDdP3Ci9HXHbVoAlg32Weak2qNVuiCsD1ol6m/pAdmc6Wz+nOKmmqKg
-	3IeYSlbgY2321vJgf0z88CN2TJeN2qF5hfUcRL4jBlVM2dUs3HE7qD16NAvAmHP/2Q0Tiu
-	Bv4zf2GgxWNfyv3tMCpI3wG2QM2gYLo0w2MiidaFYgj1M6iVe1g6wxrJ1VTkOJvr9Jf1rH
-	cXvYeuXURM43LbebVBKLsOIftA5ESr5OIcgKGY3NSdHi38sICPCCjfkEXkqUUNYg//cVI+
-	+91Qelw5eKrsAUCwxPXvtbH9iLIk+rBeQm+lUtOKp6N02yrLbZppHMyNUJ3vEQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1750147148;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hj2LJB5Pz+vjWi8da/Iv2JkklxNhs1V6axP5pIrqxJM=;
-	b=3dlU8pncy0paXbKmJi5ztkGhzw3FggNzV5ZHCn4tYoW6SfRQ/nfHyS2G+ZITRQ05Cj+PIu
-	F15f2+z9rzshWKDQ==
-From: Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
-To: Masahiro Yamada <masahiroy@kernel.org>
-Cc: Nathan Chancellor <nathan@kernel.org>, 
-	Andrew Morton <akpm@linux-foundation.org>, Willy Tarreau <w@1wt.eu>, 
-	Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <linux@weissschuh.net>, Brendan Higgins <brendan.higgins@linux.dev>, 
-	David Gow <davidgow@google.com>, Rae Moar <rmoar@google.com>, Shuah Khan <shuah@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Nicolas Schier <nicolas.schier@linux.dev>, 
-	Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
-	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, 
-	Christophe Leroy <christophe.leroy@csgroup.eu>, linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, linux-doc@vger.kernel.org, 
-	linux-riscv@lists.infradead.org, workflows@vger.kernel.org
-Subject: Re: [PATCH v3 04/16] kbuild: userprogs: add nolibc support
-Message-ID: <20250617095102-d3df1c46-3d51-4f77-af0a-8299f5e71ad9@linutronix.de>
-References: <20250611-kunit-kselftests-v3-0-55e3d148cbc6@linutronix.de>
- <20250611-kunit-kselftests-v3-4-55e3d148cbc6@linutronix.de>
- <CAK7LNAQUN3hWYh_1=LMzVp1Ddbq3W=yGHZ5__LbcfBajfuhscg@mail.gmail.com>
+	s=arc-20240116; t=1750147352; c=relaxed/simple;
+	bh=Bmc1dcL/vKMpcG3gmR7p+QTIxzrCe6x9Ewb/iBXx3i4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=jr6p/BxzIx37AAwbUlP0A6gYT6cFqqvSFdk2UnuRF8jcjFoQR7+TrXOrZixzdJ/1squBqlS+cuxpZ517Hx/CkKxLhjnbZ+Bb4Cyg212owAxjT7y1v1HOEUAexoq04SKuAyJFxyokiCfjbkACBBymFkkNZD/XtyJbx1aFRUJdxro=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CRS/iG9r; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6C0CC4AF09;
+	Tue, 17 Jun 2025 08:02:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1750147351;
+	bh=Bmc1dcL/vKMpcG3gmR7p+QTIxzrCe6x9Ewb/iBXx3i4=;
+	h=From:To:Cc:Subject:Date:From;
+	b=CRS/iG9rRgPnce4tyJMHGV9BjQMNm8HrVXKixDQywp13eFOqk2fvEcvfiRUsUWgJP
+	 p9lPf4LghIe1yslQXDNg+PV/WIEY+gP8G/iEM5CNZmbiJ+xqkwFxiErJ49cbkYIFYh
+	 v0Lyod+7IollBzGERTKzGoLS2vV8L+i272d37FBX1TQKq5iPf4E9Pgk5QHputHl1fV
+	 qRzTSGDBibtMgBDs8W20NsTq/arXPxRGgsewZqVntd9d84Y7wndAYZJvMT2vtEbf2v
+	 hOOVMJ5McR5etd2Ilk+u7ipJerJInE+4Lpz1JZtQjLDW3e1Kqmzk2bkKdgIzTlTT2x
+	 ri/DEJ9nQFqAQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1uRRH3-00000001vcm-3bGt;
+	Tue, 17 Jun 2025 10:02:29 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Akira Yokosawa <akiyks@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Ignacio Encinas Rubio <ignacio@iencinas.com>,
+	Marco Elver <elver@google.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Jan Stancek <jstancek@redhat.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Ruben Wauters <rubenru09@aol.com>,
+	joel@joelfernandes.org,
+	linux-kernel-mentees@lists.linux.dev,
+	lkmm@lists.linux.dev,
+	netdev@vger.kernel.org,
+	peterz@infradead.org,
+	stern@rowland.harvard.edu,
+	Breno Leitao <leitao@debian.org>,
+	Jakub Kicinski <mchehab+huawei@kernel.org>,
+	Simon Horman <mchehab+huawei@kernel.org>
+Subject: [PATCH v5 00/15] Don't generate netlink .rst files inside $(srctree)
+Date: Tue, 17 Jun 2025 10:01:57 +0200
+Message-ID: <cover.1750146719.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAK7LNAQUN3hWYh_1=LMzVp1Ddbq3W=yGHZ5__LbcfBajfuhscg@mail.gmail.com>
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-On Tue, Jun 17, 2025 at 12:35:07AM +0900, Masahiro Yamada wrote:
-> On Wed, Jun 11, 2025 at 4:38 PM Thomas Weißschuh
-> <thomas.weissschuh@linutronix.de> wrote:
-> >
-> > Userprogs are built with the regular kernel compiler $CC.
-> > A kernel compiler does not necessarily contain a libc which is required
-> > for a normal userspace application.
-> > However the kernel tree does contain a minimal libc implementation
-> > "nolibc" which can be used to build userspace applications.
-> >
-> > Introduce support to build userprogs against nolibc instead of the
-> > default libc of the compiler, which may not exist.
-> >
-> > Signed-off-by: Thomas Weißschuh <thomas.weissschuh@linutronix.de>
-> >
-> > ---
-> > This could probably be moved out of the generic kbuild makefiles.
-> > I think the ergonimics would suffer and this functionality could be
-> > used by other users of userprogs.
-> >
-> > Also this does currently not support out-of-tree builds.
-> > For that tools/include/nolibc/*.h and usr/include/*.h would need to be
-> > installed into the build directory.
+As discussed at:
+   https://lore.kernel.org/all/20250610101331.62ba466f@foz.lan/
 
-<snip>
+changeset f061c9f7d058 ("Documentation: Document each netlink family")
+added a logic which generates *.rst files inside $(srctree). This is bad
+when O=<BUILDDIR> is used.
 
-> > --- a/scripts/Makefile.userprogs
-> > +++ b/scripts/Makefile.userprogs
-> > @@ -16,10 +16,17 @@ user-csingle        := $(addprefix $(obj)/, $(user-csingle))
-> >  user-cmulti    := $(addprefix $(obj)/, $(user-cmulti))
-> >  user-cobjs     := $(addprefix $(obj)/, $(user-cobjs))
-> >
-> > +user_nolibc_ccflags := -nostdlib -nostdinc -static -fno-ident -fno-asynchronous-unwind-tables \
-> > +                     -ffreestanding -fno-stack-protector \
-> > +                     -isystem $(objtree)/usr/include -include $(srctree)/tools/include/nolibc/nolibc.h -isystem $(srctree)/tools/include/nolibc/
-> 
-> The tools/ directory is a different world, and Kbuild scripts do not know
-> anything about it.
+A recent change renamed the yaml files used by Netlink, revealing a bad
+side effect: as "make cleandocs" don't clean the produced files and symbols
+appear duplicated for people that don't build the kernel from scratch.
 
-Ack.
+This series adds an yaml parser extension and uses an index file with glob for
+*. We opted to write such extension in a way that no actual yaml conversion
+code is inside it. This makes it flexible enough to handle other types of yaml
+files in the future. The actual yaml conversion logic were placed at 
+netlink_yml_parser.py. 
 
-How does this statement affect the next patch which creates
-tools/include/nolibc/Kconfig.nolibc ?
-Is it fine to create the Kconfig file in tools/ or should I move it?
-I do want to maintain this file as part of nolibc and not KUnit.
-The possibilities I see are init/Kconfig.nolibc or lib/Kconfig.nolibc.
+As requested by YNL maintainers, this version has netlink_yml_parser.py
+inside tools/net/ynl/pyynl/ directory. I don't like mixing libraries with
+binaries, nor to have Python libraries spread all over the Kernel. IMO,
+the best is to put all of them on a common place (scripts/lib, python/lib,
+lib/python, ...) but, as this can be solved later, for now let's keep it this
+way.
 
-> And, you do not need to implement this in scripts/Makefile.userprogs
-> because you can move this to lib/kunit/Makefile.kunit-uapi or somewhere.
+---
 
-Understood. This is not unexpected, as hinted in the commit message.
+v5:
+- some patch reorg;
+- netlink_yml_parser.py is now together with ynl tools;
+- minor fixes.
 
-> > +user_nolibc_ldflags := -nostdlib -nostdinc -static
-> > +
-> >  user_ccflags   = -Wp,-MMD,$(depfile) $(KBUILD_USERCFLAGS) $(userccflags) \
-> > -                       $($(target-stem)-userccflags)
-> > -user_ldflags   = $(KBUILD_USERLDFLAGS) $(userldflags) $($(target-stem)-userldflags)
-> > -user_ldlibs    = $(userldlibs) $($(target-stem)-userldlibs)
-> > +                       $($(target-stem)-userccflags) $(if $($(target-stem)-nolibc),$(user_nolibc_ccflags))
-> > +user_ldflags   = $(KBUILD_USERLDFLAGS) $(userldflags) $($(target-stem)-userldflags) \
-> > +                       $(if $($(target-stem)-nolibc),$(user_nolibc_ldflags))
-> > +user_ldlibs    = $(userldlibs) $($(target-stem)-userldlibs) \
-> > +                       $(if $($(target-stem)-nolibc),$(user_nolibc_ldlibs))
-> >
-> >  # Create an executable from a single .c file
-> >  quiet_cmd_user_cc_c = CC [U]  $@
+v4:
+- Renamed the YNL parser class;
+- some minor patch cleanups and merges;
+- added an extra patch to fix a insert_pattern/exclude_pattern logic when
+   SPHINXDIRS is used.
+
+v3:
+- Two series got merged altogether:
+  - https://lore.kernel.org/linux-doc/cover.1749723671.git.mchehab+huawei@kernel.org/T/#t
+  - https://lore.kernel.org/linux-doc/cover.1749735022.git.mchehab+huawei@kernel.org
+
+- Added an extra patch to update MAINTAINERS to point to YNL library
+- Added a (somewhat unrelated) patch that remove warnings check when
+  running "make cleandocs".
 
 
-Thomas
+Mauro Carvalho Chehab (15):
+  docs: conf.py: properly handle include and exclude patterns
+  docs: Makefile: disable check rules on make cleandocs
+  tools: ynl_gen_rst.py: create a top-level reference
+  docs: netlink: netlink-raw.rst: use :ref: instead of :doc:
+  tools: ynl_gen_rst.py: make the index parser more generic
+  tools: ynl_gen_rst.py: Split library from command line tool
+  scripts: lib: netlink_yml_parser.py: use classes
+  docs: netlink: index.rst: add a netlink index file
+  tools: ynl_gen_rst.py: clanup coding style
+  docs: sphinx: add a parser for yaml files for Netlink specs
+  docs: use parser_yaml extension to handle Netlink specs
+  docs: uapi: netlink: update netlink specs link
+  tools: ynl_gen_rst.py: drop support for generating index files
+  docs: netlink: remove obsolete .gitignore from unused directory
+  MAINTAINERS: add netlink_yml_parser.py to linux-doc
+
+ Documentation/Makefile                        |  19 +-
+ Documentation/conf.py                         |  63 ++-
+ Documentation/netlink/specs/index.rst         |  13 +
+ Documentation/networking/index.rst            |   2 +-
+ .../networking/netlink_spec/.gitignore        |   1 -
+ .../networking/netlink_spec/readme.txt        |   4 -
+ Documentation/sphinx/parser_yaml.py           |  76 ++++
+ Documentation/userspace-api/netlink/index.rst |   2 +-
+ .../userspace-api/netlink/netlink-raw.rst     |   6 +-
+ Documentation/userspace-api/netlink/specs.rst |   2 +-
+ MAINTAINERS                                   |   1 +
+ tools/net/ynl/pyynl/netlink_yml_parser.py     | 360 ++++++++++++++++
+ tools/net/ynl/pyynl/ynl_gen_rst.py            | 385 +-----------------
+ 13 files changed, 523 insertions(+), 411 deletions(-)
+ create mode 100644 Documentation/netlink/specs/index.rst
+ delete mode 100644 Documentation/networking/netlink_spec/.gitignore
+ delete mode 100644 Documentation/networking/netlink_spec/readme.txt
+ create mode 100755 Documentation/sphinx/parser_yaml.py
+ create mode 100755 tools/net/ynl/pyynl/netlink_yml_parser.py
+
+-- 
+2.49.0
+
+
 
