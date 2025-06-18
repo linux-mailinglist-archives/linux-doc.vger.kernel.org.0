@@ -1,129 +1,171 @@
-Return-Path: <linux-doc+bounces-49544-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49549-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D01D6ADE9B2
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Jun 2025 13:16:09 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8D2EADEA94
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Jun 2025 13:45:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 861207A6EA4
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Jun 2025 11:14:47 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 27B87189E190
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Jun 2025 11:45:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC826296150;
-	Wed, 18 Jun 2025 11:16:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBAB52BEC3F;
+	Wed, 18 Jun 2025 11:45:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HoYViUjU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="S1by10cV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46A9E295DA5;
-	Wed, 18 Jun 2025 11:16:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A32B92BDC28;
+	Wed, 18 Jun 2025 11:45:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750245365; cv=none; b=rvSoEQWJyupaPn7l5RWvA9eeqdmzl+9YehuU5e3xk+dRDN59LKP2h18JZVkKZEueYVSHkUUQ77DnjwOeE7OIyh3WusAKT8sdAEjJz5BkyBFtV0A1qbufZebe3RM2jo4HLzS4V/zv2w15nPZ57duOm3k+GX/EJxCZ2DisITQiQH0=
+	t=1750247106; cv=none; b=H2/ZT3ZfCvkPk3ltVEhjIn1e1lCkCGAlfJlO65NVxMKJa+7LAp0DKNTZO2SWZBum92Rfde3YSo6toLBAKlM/S7XS94CmMxFhmz3n/+gAc5/rjSz6yT2bI5XTO5MFrG1Wlpgx0wd3qGo9uF7kQaCfGglk1GtoSa0hFuknRYIOlrE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750245365; c=relaxed/simple;
-	bh=WM+fr1mKglNeWX++E+JHAdUnDqdYDjuycRYTRJ7Ja+0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CzDpRFOyPTN/jBro70WsK+8j5d39QO9JFLI2adoAU0cDl9sdsQJvl5EhiQQj1Ushxm24eVQ+qr9JQxkJBOeRX3W2RVn42hSnO+nfinhlko91yT0dPvOn3uUJDs6YLIyzJETwIpNS4H4/4T0hOEmpjlKBdA7AboKSvpkPr4E72Xs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HoYViUjU; arc=none smtp.client-ip=209.85.214.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-235f9e87f78so71196775ad.2;
-        Wed, 18 Jun 2025 04:16:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750245363; x=1750850163; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vMcoFd2PaoUji5rvbYhQVmlHYP9geUwUg20LItQ+Jiw=;
-        b=HoYViUjUD5POiHqvin/mh0/qP2uJlZxDWtUXGfZ5nuaUVXG+pIir9sAdCP+XImpROE
-         pFMRuZeKZH7gJUOGo0HT310TOZlm1wJ/1owwI6yP77JbfZW35wCepDWzbXQvyrOXk5+T
-         pr8NGnHmvdZ50t4QweoZRRoauDxCoH1DLWr7XhZh31guvrMfM/skGPnUgHynK8Acautt
-         bQ9R4ZWfjbeYzfTYrR8hkMEqa1ARSn03KsysqBeqcX3oNQWSBCVYnjzJdP+jyxe7mjFs
-         cu3oORlDJMC7tGx9QoUakKJv1e6xnBEk0woChUmgRkNZ79LY2ARtxYkBzadVgm6RoL3o
-         NLNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750245363; x=1750850163;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=vMcoFd2PaoUji5rvbYhQVmlHYP9geUwUg20LItQ+Jiw=;
-        b=WYPzt8cZZZvmziKHZxxRhkxzl3NLUKE/CCOKQ+5sLbp3KuTuGA+7NqiNbI1Ltt4k9d
-         3EKTy9DDwTivvemuRziGkmLWgH9G56obxlTW309q7f/0rG0lb4WMPSiUNE524S9J0ref
-         DB2varAmWCorNjhoXC5TuOsYf+fScvAnPcw/dZ0JRBrH0WRclrRkBYN/MtD7Hx1W/GoQ
-         0FDn9SEY4Sg8Qb10XWNk6eL4rpkVo51Lfk4X2Ili7Rq7gA0TAQxzEuW1iHUOyH7Hotsr
-         YIMUC96wyXLjj8yqSee615qKqZw/C/3hrCHXPmr5vpzlmMIQU8lqjQ8RRxj9qXamRkJB
-         521Q==
-X-Forwarded-Encrypted: i=1; AJvYcCVlE3eJPNFsGaRG+JghCqSFELoso2g1PW2xAbRbr5zXk6p50+kbL+oGpKZaplwqmXBc+Nc8Id6IJWPc+g==@vger.kernel.org, AJvYcCXrAownO61IFhSrOgWOjjr4GDCgO1o5ocunlmeDiySAvQCUA6euw982CF+Lwoxr2CfPrGFf6T5lWaQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxyjspvANQX4vsr+P/BSAQJchnlJt1gM1kxu9iir3907jF8lYEI
-	Z1SDU3Z6tCKXtrb9Q545m+dyLJYhJeKffBX1zoSYj+bZLOHxAT/JUGTb
-X-Gm-Gg: ASbGnctJBoX84yjUZlHuL2hqCTOsjs6m+NHzD5mHMkM7384f5bYO8cM+BgS8niU11Om
-	B6364ug6eLnbeX9BIlcNwyCYCOiA8w5qUjBaD+s9ty4OcXEsWUZ6Bk70cQZb6dzgeyBdeJLGip/
-	t9uWXFH073lFaKBWbuiBwzLJipYhO5cXcBgOmNo7z6vMYG8P8Hm8BUbSZGMDhdLB8ISnpl75dEU
-	kVZhvaVQUn3ncE7nn/VQTk/PsyuClmwAcBksB/afXV4Bhft7kwZMTRAnIO/xy2x70d0G08L3q0F
-	aywaomFkDSrSugVzf7SoB+32e3TpfNguTABjPWUEmNd3Kg6FddWciZp+BSZVoA==
-X-Google-Smtp-Source: AGHT+IEcbWHZGa9kWaS0mqzRZhwsAbPkTcAOZCgJa8ddYgoukpVgeiwalevyyYvBr7XLWYgdCQEuRQ==
-X-Received: by 2002:a17:902:ccc2:b0:235:f70:fd39 with SMTP id d9443c01a7336-2366afd37d4mr308513475ad.10.1750245363391;
-        Wed, 18 Jun 2025 04:16:03 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2365d88c077sm97551075ad.17.2025.06.18.04.16.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Jun 2025 04:16:02 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id F07384629FB0; Wed, 18 Jun 2025 18:15:59 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux ext4 <linux-ext4@vger.kernel.org>
-Cc: "Theodore Ts'o" <tytso@mit.edu>,
-	Andreas Dilger <adilger.kernel@dilger.ca>,
-	Jonathan Corbet <corbet@lwn.net>,
-	"Darrick J. Wong" <djwong@kernel.org>,
-	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
-	Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH 4/4] Documentation: ext4: Reduce toctree depth
-Date: Wed, 18 Jun 2025 18:15:37 +0700
-Message-ID: <20250618111544.22602-5-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250618111544.22602-1-bagasdotme@gmail.com>
-References: <20250618111544.22602-1-bagasdotme@gmail.com>
+	s=arc-20240116; t=1750247106; c=relaxed/simple;
+	bh=4DxwVQzbl8QL94anK1H5LVZzfWgTCdM52+1S4HzI3ts=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=BLBYNZdrUP9u7E2AwEil64Fts374GF2i+wSVlBh7QulQY7ReJw00bD564L7wTIogLRRC6QOiuudoOnor/NCDWehuctIJ3q9qjqh7YYKPlu+G1brXmUCSW15GNrmAN3kOLLu8yynssx2STiOhYBe9apaJIQVme+TqzXhw0l7Jj4U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=S1by10cV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 173A1C4CEE7;
+	Wed, 18 Jun 2025 11:45:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1750247105;
+	bh=4DxwVQzbl8QL94anK1H5LVZzfWgTCdM52+1S4HzI3ts=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=S1by10cVaTcMICpnEDqlgbOe8aUivg0S0v1Kvhsq0/j8p/YYIShdcKZZP0ShuNsVG
+	 zlylBS9qv53ZCFlKU6W+QmUtC3IOXSThr7eFL5aNvavpWfimK4ADaNcj/ocPXON5LK
+	 cIC5RLpTVbtuRI7JJSerbbGNJJKOphW2jP6WiZVIdi/aLc4+32X6/nBvBseod1AfYd
+	 HcYrKZwe5V2PIxC304RaFkV1sUiww7wmiawn0EAhwcPwJoUoJXzaA69Mt9KwndogXV
+	 ONnbuXkivC2xfUOBS+zg4kf+mPxLGfmdzTR6JecL/Ss3XtCZGs9T8seF+UFOqwVt4V
+	 NhRJ4p3DcJBYA==
+Date: Wed, 18 Jun 2025 13:44:58 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Akira Yokosawa <akiyks@gmail.com>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>, Jonathan Corbet
+ <corbet@lwn.net>, Breno Leitao <leitao@debian.org>, "David S. Miller"
+ <davem@davemloft.net>, Donald Hunter <donald.hunter@gmail.com>, Eric
+ Dumazet <edumazet@google.com>, Ignacio Encinas Rubio
+ <ignacio@iencinas.com>, Jan Stancek <jstancek@redhat.com>, Marco Elver
+ <elver@google.com>, Paolo Abeni <pabeni@redhat.com>, Ruben Wauters
+ <rubenru09@aol.com>, Shuah Khan <skhan@linuxfoundation.org>,
+ joel@joelfernandes.org, linux-kernel-mentees@lists.linux.dev,
+ linux-kernel@vger.kernel.org, lkmm@lists.linux.dev, netdev@vger.kernel.org,
+ peterz@infradead.org, stern@rowland.harvard.edu
+Subject: Re: [PATCH v5 01/15] docs: conf.py: properly handle include and
+ exclude patterns
+Message-ID: <20250618134458.10ee8412@foz.lan>
+In-Reply-To: <1adba2c6-e4c3-4da2-874e-a304a1fdfd25@gmail.com>
+References: <cover.1750146719.git.mchehab+huawei@kernel.org>
+	<cca10f879998c8f0ea78658bf9eabf94beb0af2b.1750146719.git.mchehab+huawei@kernel.org>
+	<1adba2c6-e4c3-4da2-874e-a304a1fdfd25@gmail.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=888; i=bagasdotme@gmail.com; h=from:subject; bh=WM+fr1mKglNeWX++E+JHAdUnDqdYDjuycRYTRJ7Ja+0=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBlB89W3TVX2ceLmfNWwxjmj9/E3LuE1sxOOiolx1zg3P /oaKjilo5SFQYyLQVZMkWVSIl/T6V1GIhfa1zrCzGFlAhnCwMUpABPpjGJkmM7E9q7RUfCWoJdM zVR9zwv/3v49EPwk0crlQ2v9Pet59xn+O7de7QryuHCe/+6VFKH/a5a+c5aXmHtq5epK8yv+bzb uYwQA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-ext4 docs toctree has an arbitrary :maxdepth: of 6 (which is presumably
-intended to cover all possible heading levels), whereas the docs has at
-most 4-level section heading depth. Reduce the option instead to 2 (only
-showing the title and sections).
+Hi Akira,
 
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/filesystems/ext4/index.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Em Wed, 18 Jun 2025 11:42:14 +0900
+Akira Yokosawa <akiyks@gmail.com> escreveu:
 
-diff --git a/Documentation/filesystems/ext4/index.rst b/Documentation/filesystems/ext4/index.rst
-index 705d813d558f0e..1ff8150c50e927 100644
---- a/Documentation/filesystems/ext4/index.rst
-+++ b/Documentation/filesystems/ext4/index.rst
-@@ -5,7 +5,7 @@ ext4 Data Structures and Algorithms
- ===================================
- 
- .. toctree::
--   :maxdepth: 6
-+   :maxdepth: 2
-    :numbered:
- 
-    about
--- 
-An old man doll... just what I always wanted! - Clara
+> Hi Mauro,
+> 
+> A comment on compatibility with earlier Sphinx.
+> 
+> On Tue, 17 Jun 2025 10:01:58 +0200, Mauro Carvalho Chehab wrote:
+> > When one does:
+> > 	make SPHINXDIRS="foo" htmldocs
+> > 
+> > All patterns would be relative to Documentation/foo, which
+> > causes the include/exclude patterns like:
+> > 
+> > 	include_patterns = [
+> > 		...
+> > 		f'foo/*.{ext}',
+> > 	]
+> > 
+> > to break. This is not what it is expected. Address it by
+> > adding a logic to dynamically adjust the pattern when
+> > SPHINXDIRS is used.
+> > 
+> > That allows adding parsers for other file types.
+> > 
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > ---
+> >  Documentation/conf.py | 52 +++++++++++++++++++++++++++++++++++++++----
+> >  1 file changed, 48 insertions(+), 4 deletions(-)
+> > 
+> > diff --git a/Documentation/conf.py b/Documentation/conf.py
+> > index 12de52a2b17e..e887c1b786a4 100644
+> > --- a/Documentation/conf.py
+> > +++ b/Documentation/conf.py
+> > @@ -17,6 +17,54 @@ import os
+> >  import sphinx
+> >  import shutil
+> >  
+> > +# Location of Documentation/ directory
+> > +doctree = os.path.abspath('.')
+> > +
+> > +# List of patterns that don't contain directory names, in glob format.
+> > +include_patterns = ['**.rst']
+> > +exclude_patterns = []
+> > +  
+> 
+> Where "exclude_patterns" has been with us ever since Sphinx 1.0,
+> "include_patterns" was added fairly recently in Sphinx 5.1 [1].
+> 
+> [1]: https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-include_patterns
+> 
+> So, this breaks earlier Sphinx versions.
 
+Heh, testing against old versions is harder with python 3.13 (Fedora
+42 default), as one library used by older Sphinx versions were dropped.
+
+I found a way to make it backward compatible up to 3.4.3, with a
+backward-compatible logic at conf.py. I'll send the new version in a few.
+
+> Also, after applying all of v5 on top of docs-next, I see these new
+> warnings with Sphinx 7.2.6 (of Ubuntu 24.04):
+> 
+> /<srcdir>/Documentation/output/ca.h.rst: WARNING: document isn't included in any toctree
+> /<srcdir>/Documentation/output/cec.h.rst: WARNING: document isn't included in any toctree
+> /<srcdir>/Documentation/output/dmx.h.rst: WARNING: document isn't included in any toctree
+> /<srcdir>/Documentation/output/frontend.h.rst: WARNING: document isn't included in any toctree
+> /<srcdir>/Documentation/output/lirc.h.rst: WARNING: document isn't included in any toctree
+> /<srcdir>/Documentation/output/media.h.rst: WARNING: document isn't included in any toctree
+> /<srcdir>/Documentation/output/net.h.rst: WARNING: document isn't included in any toctree
+> /<srcdir>/Documentation/output/videodev2.h.rst: WARNING: document isn't included in any toctree
+
+We should likely use a Sphinx extension for those as well. Building those
+are also made via some Makefile tricks that predates the time we start
+adding our own extensions at the tree.
+
+> Sphinx 7.3.7 and later are free of them.  I have no idea which change in
+> Sphinx 7.3 got rid of them.
+> 
+> Now that the parallel build performance regression has be resolved in
+> Sphinx 7.4, I don't think there is much demand for keeping Sphinx versions
+> compatible.
+> These build errors and extra warnings would encourage people to upgrade
+> there Sphinx.  So I'm not going to nack this.
+> 
+> Of course, getting rid of above warnings with < Sphinx 7.3 would be ideal.
+
+I'm all for using newer versions, but we need to check what LTS distros
+are using those days.
+
+On my machine, with -jauto, 3.4.3 is taking 11 minutes to build, which
+is twice the time of 8.2.3. IMO, this is a very good reason for people
+stop using legacy versions when possible :-)
+
+Regards,
+Mauro
 
