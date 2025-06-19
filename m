@@ -1,266 +1,175 @@
-Return-Path: <linux-doc+bounces-49710-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49713-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 438C0ADFEDB
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Jun 2025 09:40:18 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8695DADFEEB
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Jun 2025 09:43:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8F4B47A3A07
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Jun 2025 07:38:55 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id D3DB9189B39B
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Jun 2025 07:43:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A60C3246789;
-	Thu, 19 Jun 2025 07:40:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CB57F25A631;
+	Thu, 19 Jun 2025 07:42:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="QBMj7Hej";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="QBMj7Hej"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H1KiiZX1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011056.outbound.protection.outlook.com [52.101.70.56])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DAEC1624FE;
-	Thu, 19 Jun 2025 07:40:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.70.56
-ARC-Seal:i=3; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750318811; cv=fail; b=sDWHdMJBWvYvwhzwW8PWFv19z+gJlOsrIMd3oG7ayup8N2WE83S4dCFY7TpbpwysgJvDznZKsXNAgMRrLbGAxl/BhUY0C1oPVDTs20vOrwK+ZbCifDWCgGbiLjHc2ejMpSUbMklXIZPlFOjRWVuWXD3L7mkdou1IQIxeUcoM+Eo=
-ARC-Message-Signature:i=3; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750318811; c=relaxed/simple;
-	bh=6HGqcYYxcBeZ5gLPxAnlSxIxzs5J/WdtT3f0DvfuiaI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=hUSrpO1BInRLigxe1vZuEjagjSK/WFrFP7SEzIHTtBHlv4jW1BfurxCBQPNsSECyxu6bzOkYUVIlzhmAb156KjG+DJeoIo5+3HM+YhLzUxYMhFqpGu5BklyGrHfNKxGXFETCluuKoXygFBemyrU7N5YhL3vY59cTFw8S2aQwhkU=
-ARC-Authentication-Results:i=3; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=QBMj7Hej; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=QBMj7Hej; arc=fail smtp.client-ip=52.101.70.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=X49AYLgBsJ8/nxilWczzm3BZjg4Gme+ULCQUCD4Qy22Sl2Lvsm3XLr213jI2Zss4zETxnvHG6GnzKsT5SQ88HE+4mMI7ZHDBnPDLPSXlNVRtVqcQIMF6pjxWQDQ5jgpW+reLv8NDkGUxnubkLmdXf7a6t/daWBA0ljIivey5Xj3J9RbUuYxGlL49NEDE79p4IQuhxw1Lwny+stAfkmovVHsvr38HI/uW8Cl6c4dksQiMKMwZlACaQBzRdFK6rxjl95iCwzTXY2g67WCpyXJHpEZWuOlYzvCw5U9nJusUlgyMF01hvCOtKR57XWruceKGoidSuV7F+5jcF9wTkNEIJw==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e4L+JIDJo4ogdaiBIwnreIDrKD864ym0vhnjEyldfag=;
- b=qyIoEfSAcyxcVmfywP+5kG9BJ/ZV3EC1XyrvxIkrxJ00hVKLbJN4DPrz7rIdCEKBnbMkuccChnj4UfM+Zf/f0VPVx0RUoNzs4Qmw0baaMmFdYgeXLVpg2rwPGx1XcJU+SW4EE662FNHFHLc+gTdTgJtyS7cf1R2KLbuNlSrelPvHkubX8DzdTngTAgtJASiLJAy2vEDoKBcjNhT8GKyjPPfBRlySRsSWfY+W63/QRlQWB/yaM8Wi7C6wQnwTyOJqCR+PIhK07CYuiylAC6W3uL1Mhn2g9VvHicm/o3p+7UHGROvHdvea9aHhmtU5rwsrjA/m8ngUraoeM1yULd1/4A==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=kernel.org smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e4L+JIDJo4ogdaiBIwnreIDrKD864ym0vhnjEyldfag=;
- b=QBMj7HejNTPjidhUF8iDOcKMLdBwVl99HoAaDBLtSvGgrSmlz4N+qtAMC4lPUWwVXXlxd0fi/lTFoIZlgQQv1b23gtvGWn2EeJ3ADjA9N8RkffYnY1xzhHRR0U1RpVqfGYRnMHMK/tDOqMsPULG460zYRqfEkMJaRQe8jlHKnsE=
-Received: from DUZP191CA0028.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4f8::24)
- by AS2PR08MB8717.eurprd08.prod.outlook.com (2603:10a6:20b:55d::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.29; Thu, 19 Jun
- 2025 07:40:05 +0000
-Received: from DU2PEPF00028D0E.eurprd03.prod.outlook.com
- (2603:10a6:10:4f8:cafe::c1) by DUZP191CA0028.outlook.office365.com
- (2603:10a6:10:4f8::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8835.35 via Frontend Transport; Thu,
- 19 Jun 2025 07:40:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DU2PEPF00028D0E.mail.protection.outlook.com (10.167.242.22) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8857.21
- via Frontend Transport; Thu, 19 Jun 2025 07:40:04 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jPQbHAAsK6TviESFpEKeyItsRI/oZZoLFTB3r6lpy5TdJOR6+i1P1CENNbJSGcKlUNs8odc6WCdcgj0FeoEdm2D4wU2fV6R/LK1/WeIm6AGh+wS1Hh4B1gcJz+WO0YbHPHVWRdKXqrS44QuFDHON+BfcNaVDX6vut6hUI3Xb07tm32rkiBRS+8f22CswUCGZ4C4rnr+q0TG5KpdbPgzO/rS25tKseNEmC5K/pQdzN2hQA3ZKlZADKTYauwSmGD3fnxwVw17Zf7BM6dg5n+kzOa2mkYS57mEuhVV+mrB1F3O/NWpeuyqip65OYzOTpR8172P4JZdClrFOIoCXyjapuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e4L+JIDJo4ogdaiBIwnreIDrKD864ym0vhnjEyldfag=;
- b=MjSlwkXvUkRGRAOfYEg9V6fJZGOYVuQxzfhmTj/E7ymD00IuLLgBecvhSmwP3ocooYEfY2TKVjhrWZNshjIxHFDMJ96MNrb6t/VCfuGXt75iEgXB/VnrqOUvqm204qkLc4e77gceQu1LO4I0XcSQObcuQZAdOC/H2zrZpcugZnz4JudkkAdE4xbpH+s4V0f2Yt8JO/mp1Bj6gHU78DqLGgyoZe+woZd/+BUtN9b/AcejFWVIaM2AqX1uJuVGllJo6q94KikhCk2BEtZhVfVS9Y7lUH3WEZdlYdX904+VNvwlz7SUdnI3soZjtuZA4TO/9GsrDajyv0HLsYoBgWMYwQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e4L+JIDJo4ogdaiBIwnreIDrKD864ym0vhnjEyldfag=;
- b=QBMj7HejNTPjidhUF8iDOcKMLdBwVl99HoAaDBLtSvGgrSmlz4N+qtAMC4lPUWwVXXlxd0fi/lTFoIZlgQQv1b23gtvGWn2EeJ3ADjA9N8RkffYnY1xzhHRR0U1RpVqfGYRnMHMK/tDOqMsPULG460zYRqfEkMJaRQe8jlHKnsE=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from GV1PR08MB10521.eurprd08.prod.outlook.com
- (2603:10a6:150:163::20) by AS4PR08MB8144.eurprd08.prod.outlook.com
- (2603:10a6:20b:58f::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8835.28; Thu, 19 Jun
- 2025 07:39:32 +0000
-Received: from GV1PR08MB10521.eurprd08.prod.outlook.com
- ([fe80::d430:4ef9:b30b:c739]) by GV1PR08MB10521.eurprd08.prod.outlook.com
- ([fe80::d430:4ef9:b30b:c739%7]) with mapi id 15.20.8835.027; Thu, 19 Jun 2025
- 07:39:31 +0000
-Date: Thu, 19 Jun 2025 08:39:29 +0100
-From: Yeoreum Yun <yeoreum.yun@arm.com>
-To: Marc Zyngier <maz@kernel.org>
-Cc: catalin.marinas@arm.com, pcc@google.com, will@kernel.org,
-	broonie@kernel.org, anshuman.khandual@arm.com, joey.gouly@arm.com,
-	yury.khrustalev@arm.com, oliver.upton@linux.dev,
-	frederic@kernel.org, akpm@linux-foundation.org, surenb@google.com,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v9 03/10] arm64/kvm: expose FEAT_MTE_TAGGED_FAR feature
- to guest
-Message-ID: <aFO+sfuxQlpXtGvH@e129823.arm.com>
-References: <20250618084513.1761345-1-yeoreum.yun@arm.com>
- <20250618084513.1761345-4-yeoreum.yun@arm.com>
- <86ldppc86c.wl-maz@kernel.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <86ldppc86c.wl-maz@kernel.org>
-X-ClientProxiedBy: LO2P265CA0179.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:a::23) To GV1PR08MB10521.eurprd08.prod.outlook.com
- (2603:10a6:150:163::20)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9125424467A;
+	Thu, 19 Jun 2025 07:42:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1750318977; cv=none; b=hZQU9FxGHeXBZr1qJaHyJj3fJ3f3hlrncZSGHlt3vekRumTjM4VMfiC9nnYzBfW0/Sv5dgzsdMhijUd1OHl9YRFcB2CZBGXXpc2F7GJOz6t1ngV4fY8GoE+Yqd6FAZa5+2wE+ippdD2sCa5J6alTfkvX8P8+//4LHWwCXkNr5R0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1750318977; c=relaxed/simple;
+	bh=9qb8RJoUhgul5Go2hZXCbdox/mF+r49Ysd7ZI3Y+oLA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=suzWvpkgspt6cmgm+cn2R6dhGNMto1MAPv85UbUxc5w6Fb2Wkce115NngaGbcOdcyCvoJiaHltdvx1iEGde6vKrcdO0SBtGMk7nJ9S3n0h0h18bXCjICHPvSy40+C3ccK2pHr9nb1rixvz3fZ7F+sGZhuhfsJkwS5AvCDP+lyTA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H1KiiZX1; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2B21FC4CEED;
+	Thu, 19 Jun 2025 07:42:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1750318977;
+	bh=9qb8RJoUhgul5Go2hZXCbdox/mF+r49Ysd7ZI3Y+oLA=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=H1KiiZX1oIxAtKoqlMHXHIVHed86uVZpD+tu/Ca+saVyibAfAwbUoU340nvHFgIgW
+	 EPXrWSKpceY1M0bnK5eJOsgx1w6brENlL1H/yCldFOv+Zf1XEe6QmVijkV5QjFy3F1
+	 I2KqetbX8BNgl6mqNAYsKROMSqwxTFlQty8gbCb4f/OOAlhqVTAtglKAEfkAs0cnO5
+	 U8YIbd6X5A8MtTi0OXTRXUJdIOxRPChAv3kPmUw96+rUxLCy/VyqRjOIiEhBubzM5C
+	 9Qlxe2e9nCNwBd4lUEvZAMNiUiYcLQ48M5LxQh+6w+egwm/ZVcVvbFfUdpftZsuIEN
+	 tmBa2b4GDOB6A==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B4B9C7115A;
+	Thu, 19 Jun 2025 07:42:57 +0000 (UTC)
+From: Sung-Chi Li via B4 Relay <devnull+lschyi.chromium.org@kernel.org>
+Subject: [PATCH v4 0/3] Export fan control and register fans as cooling
+ devices
+Date: Thu, 19 Jun 2025 15:42:53 +0800
+Message-Id: <20250619-cros_ec_fan-v4-0-ca11548ce449@chromium.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic:
-	GV1PR08MB10521:EE_|AS4PR08MB8144:EE_|DU2PEPF00028D0E:EE_|AS2PR08MB8717:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1e655c3c-e031-4344-1b9a-08ddaf0481b5
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|1800799024|376014|366016|7416014;
-X-Microsoft-Antispam-Message-Info-Original:
- =?us-ascii?Q?uLcwWHAaJiNKG3p+FJQoBZf9pDF5jbP10z7lUg7Lg3+B0BftsR8KedG2ZpfZ?=
- =?us-ascii?Q?DdXttuccTvduDJ+JlqkgQwb8cEUkvUZj2UgOTR9FCHjl699B0q9S1FkFzQ22?=
- =?us-ascii?Q?fI4cCNXtp1EAbU04fTcyLwym8D+Xngbw/dsLZFkTnElUI6jc1kjDDvCVmZSb?=
- =?us-ascii?Q?PXCCJ7nzorrOqIp0XuwOr3ywxKiiQKKpGBj/BNvujMFfK23oHy2PeVAKjWRd?=
- =?us-ascii?Q?fsYjW8+xX6ISitTbtUBq050ZKiRErFdWc8KdHwnorLIMwI5/aX/CpGX+Sb6t?=
- =?us-ascii?Q?qR+wga6mFPEkl8vJQRzUAYRrXqsD5R2zxn3KcvR8cQXNj2ih0uV0vXF6rMGq?=
- =?us-ascii?Q?w6zIGn+zAtVwx5DHuezgDzKW2VfFUSbMGAPk5EOZr34jY9jz3YCbo3fQN1Zg?=
- =?us-ascii?Q?ZCqoev9NMwACxLLMNUS5ARpRys57aG4q7yLHWOd9yw/ompz9+4BhchYILCBd?=
- =?us-ascii?Q?8CEIDTozdd//x5W/sf9+ighuceHh4NGDEkQcPFFpnHeV/AC6e0YDPXHq4c1C?=
- =?us-ascii?Q?O64ts0dFApjjM9Ny4RyeChKyjcxR/66wYGmKMYpo4moYHwxaYUJa7Lw680ex?=
- =?us-ascii?Q?pBRV+ZuRTqkcfqheDMOwnQ81PlpANbr/WL1G/+20L34lr/u7BmJyBr6auq3y?=
- =?us-ascii?Q?WQ1HBk3rwCjBvEpDy3rsJ8RCMESFFS5i4KnTvFlzwbKjMn86rwgege90iuxt?=
- =?us-ascii?Q?4BecfvqG2mGxb0Rsut9PdeHNaOJZ9TnQBIkEg13DnZd7eJpj9yhN4LRj2jiM?=
- =?us-ascii?Q?9Q//OrasKg6bXgGlliSs3wdsO8ZTJfTUsOW4hUycX5aGjkKvcSrT2C1sNCbn?=
- =?us-ascii?Q?DuRbxgMIXxu8IX9TQttpByW5aHISN6SfZXbUkY6tojsk16BozzeMaGcT6DXs?=
- =?us-ascii?Q?Q/JqxyxdkI1eVxCjh+Ub1gKvLGRmY6+AD/Gk7IxxnXRMVOo5OO2VdXtCwW1A?=
- =?us-ascii?Q?60+7sWyPMFnuQ5ZX3JWX6PrJL2RQtJlsuDW9hBZAvMjcIS7GsV/M4UG8C0ag?=
- =?us-ascii?Q?PCutcOPXG/gGm4hzQxea6uQpNpxTY/h00CrfP7RQndTMwTVuRi+2rQxMKN/K?=
- =?us-ascii?Q?BSysKrNg9BzZed6KOwo0xcq98xQJP9Um5MM2pXJom1yPcFALA9apMN8YmjoQ?=
- =?us-ascii?Q?P6KwbYdtDo9stIBwXa0lwwMUM63eMLs8sQzLqoPRgZI2ycB3vqxsyBzA475K?=
- =?us-ascii?Q?/x5zC7WThKAkaWX3y/k3vOytGqD39BIA7IjSeU2S/H/8P+iPABt67oto5JMD?=
- =?us-ascii?Q?plQFqZead7hj0jUay8XTCApCmdOWeo+fAEMZ6gM2/80R7wIrqSgYrmaSYOmM?=
- =?us-ascii?Q?PziAzJ66lp08fTpLeO+whU/JRwgTCr7oer+dflpoMAn1fCMremDw/hN1uRI4?=
- =?us-ascii?Q?q5un5K9EbFwlIlFU4zt1UOLmi71hQcAKqUmR0Fz3Ofq67nqAK6WCqx+7O4dv?=
- =?us-ascii?Q?ZaF12sOUfhw=3D?=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV1PR08MB10521.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB8144
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DU2PEPF00028D0E.eurprd03.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	7931ebc5-302e-4492-f5d9-08ddaf046dfc
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|14060799003|35042699022|36860700013|82310400026|376014|7416014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?Gut5AHBUMJmm2NSURv+4KnLWbEpdjUUPl9Rn8b8ND4FpgsSaKPviBox4ug52?=
- =?us-ascii?Q?VpvpetntyBkqU0CL0J9LKZQPgVHXNHOU02CUULR1CYyAooLUp5QntGcznK4O?=
- =?us-ascii?Q?Z5C4k2DUu3LrzY2an+PTRo3PRaIWt4kRDigTC14mP9NE1PWUDkk67is+AD0c?=
- =?us-ascii?Q?lhCVQWn4i0BgGTUEWRF9H71GevIXArg7DbnOLmjUhwOdaXlWc/OLIgua13kO?=
- =?us-ascii?Q?oqGY0Zkedhm1wOeyDisv7szp60pHPrFDO6jXCmWbLT1X2hKYJa6ALa9qp1l0?=
- =?us-ascii?Q?rJ6ABHOuNhdMxSz85a61Cy+cYSQWkKhcErnTlepsBQOnqrYG1d+SJJhvmB+E?=
- =?us-ascii?Q?TtKxfnbuQKwIOxDUwfURjba7BOvIfk7Sc76v1FiD+LkP9oQ2go5QvPF7tFv0?=
- =?us-ascii?Q?jCxWoiG6HZLxGLInBvFbgGMeEuJ/+ehMghGcy65xapzAFZQkxB1UTELEo9hO?=
- =?us-ascii?Q?//gQWjcsvnHX4Q9dZi+KGE16LG9MHkgXUd3dWqfvdP6mmJCkZStBExnnzWXv?=
- =?us-ascii?Q?lh9u9QwdC7GIg9hn6SdDM2aHpRGS+qhqORpgk4We6I1nXGSMa8U4gyXwAfob?=
- =?us-ascii?Q?Cbu+XyLa5C5hzIR57QZWm5LTDsrSaHGrucGes9/fDGVX8amvxrpaRbGJP3jT?=
- =?us-ascii?Q?j2SeEPln1IssQisgoOD2EDB80d5ohYKJPmlrgJ/MshO7tMfhT2OLaWZ8uNKa?=
- =?us-ascii?Q?rY5gLx02GUW2p7CXZVS/UZ/zVLJejRqieG/FCJu7XyVpZd8Vib5OUOLPIFw5?=
- =?us-ascii?Q?rRdx0cnTuS1wI46TvkcW1SpCQ3JJyBrgcZArv71AE4Qz1xY4oNpMA4b5ASYH?=
- =?us-ascii?Q?vghObcFM7l41vTi1JUrOD86rlcIwo/QelVF9aBAV1U2SyXlQNZNfNFqwdzmc?=
- =?us-ascii?Q?6zXu64ym2bRq3KATqDnBTR3t0JDceaFtj2Hr6YE6GJr2wTkxMyNKAPhWm5Fu?=
- =?us-ascii?Q?D4+J67w3mPTGaKN+9MsAUJSDkpneO+jWz+3j3M0HFZQg5BhYbHTjVExu5ZqM?=
- =?us-ascii?Q?2+NZ9Uo8jrnGDxkYQYeWsAsd6ZXuZ1a9i/XtvVmGD7neZOLaGkkGsGctXt7O?=
- =?us-ascii?Q?pzzeP2gc9F5hTIFwxvu2U9BGPMy4RTaTpcgb3xMnzhY2mamljA37E3cOL0+X?=
- =?us-ascii?Q?cUfkHnmIZmbVjZJB4NOjljDgnLjqp/MqyMGe0cxyp4ip7lqeZeIrwOGSdcAJ?=
- =?us-ascii?Q?osadD4+DWn7KZW53xHYeAYJ9SoqFv2zO6BY8xjiRXGJHh7tt4Rqb1z3dExpD?=
- =?us-ascii?Q?8jwm+wUVIBPjq29f+YMSLCz2qKMpSD087xfaxvP1hGWFNcGT5jgpHoFdemp1?=
- =?us-ascii?Q?TuxH8GZgsJzoBA6VFti321EoNygsY/K2zpYTphJTQBwXwiO4blXYKSW84bgc?=
- =?us-ascii?Q?DVgAYx4/cgIzEwPgHZh2xs07TgO/eR+2NJzvKHIzoIocwfKkv78c/kf6+yEl?=
- =?us-ascii?Q?BgnEM72IQcWM+ukLs+H7swpGN6G06bIdkc8EU4iPMLi2XV2WZ1bICki02gdm?=
- =?us-ascii?Q?Q8HKX4B6gYxBs05TLGZCzYH4xhXNqfNjhIkn?=
-X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(14060799003)(35042699022)(36860700013)(82310400026)(376014)(7416014);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2025 07:40:04.6373
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e655c3c-e031-4344-1b9a-08ddaf0481b5
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DU2PEPF00028D0E.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB8717
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAH2/U2gC/23NSw6CMBSF4a2Qjq3p04Aj92EM6eMWOoCaVhsNY
+ e8WJipheG7y/XdCCaKHhM7VhCJkn3wYyxCHCplejR1gb8tGjDBJBGuwiSG1YFqnRmwV1yehTGM
+ oQUXcIzj/WmvXW9m9T48Q32s80+W638kUE6xq2wAHpzVVF9PHMPjncAyxQ0sqsy+XhP1zVriws
+ q5LWhHqdjj/4XTD+fK9cUwzKR0xdsPnef4A6WbDmycBAAA=
+X-Change-ID: 20250429-cros_ec_fan-da3b64ac9c10
+To: Benson Leung <bleung@chromium.org>, Guenter Roeck <groeck@chromium.org>, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>, 
+ Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, 
+ Jonathan Corbet <corbet@lwn.net>, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas@weissschuh.net>
+Cc: chrome-platform@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Sung-Chi Li <lschyi@google.com>, Sung-Chi Li <lschyi@chromium.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1750318976; l=4074;
+ i=lschyi@chromium.org; s=20250429; h=from:subject:message-id;
+ bh=9qb8RJoUhgul5Go2hZXCbdox/mF+r49Ysd7ZI3Y+oLA=;
+ b=sqGQ1pEaKFju1CzI4hdoX/iGbWtY98SgZNiHqg/2pz1p/P73Psi/JEw9upYOyghubiqbRhpQR
+ ghFxt3zETz/BP6dbbGOIqWH38LxvFL5LZTRtcdvQi7+Inoog03iHM05
+X-Developer-Key: i=lschyi@chromium.org; a=ed25519;
+ pk=9gCZPRJmYyHDt6VN9FV2UreFcUr73JFrwYvmsltW9Y8=
+X-Endpoint-Received: by B4 Relay for lschyi@chromium.org/20250429 with
+ auth_id=392
+X-Original-From: Sung-Chi Li <lschyi@chromium.org>
+Reply-To: lschyi@chromium.org
 
-Hi Marc,
+This is a continuation of the previous series "Export the target RPM fan
+control by ChromeOS EC under hwmon"
+(https://lore.kernel.org/lkml/20250313-extend_ec_hwmon_fan-v1-0-5c566776f2c4@chromium.org/T/#t).
+There is a change from controlling the target fan RPM value to control
+the PWM value.
 
-> In general, please use a patch title format that matches the one used
-> for the subsystem. For KVM, that'd be "KVM: arm64: Expose ..."/
->
-> On Wed, 18 Jun 2025 09:45:06 +0100,
-> Yeoreum Yun <yeoreum.yun@arm.com> wrote:
-> >
-> > expose FEAT_MTE_TAGGED_FAR feature to guest.
-> >
-> > Signed-off-by: Yeoreum Yun <yeoreum.yun@arm.com>
-> > ---
-> >  arch/arm64/kvm/sys_regs.c | 14 ++++++++++----
-> >  1 file changed, 10 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/arch/arm64/kvm/sys_regs.c b/arch/arm64/kvm/sys_regs.c
-> > index 76c2f0da821f..c8c92cb9da01 100644
-> > --- a/arch/arm64/kvm/sys_regs.c
-> > +++ b/arch/arm64/kvm/sys_regs.c
-> > @@ -1586,7 +1586,7 @@ static u64 __kvm_read_sanitised_id_reg(const struct kvm_vcpu *vcpu,
-> >  				       const struct sys_reg_desc *r)
-> >  {
-> >  	u32 id = reg_to_encoding(r);
-> > -	u64 val;
-> > +	u64 val, mask;
-> >
-> >  	if (sysreg_visible_as_raz(vcpu, r))
-> >  		return 0;
-> > @@ -1617,8 +1617,12 @@ static u64 __kvm_read_sanitised_id_reg(const struct kvm_vcpu *vcpu,
-> >  		val &= ~ARM64_FEATURE_MASK(ID_AA64PFR1_EL1_MPAM_frac);
-> >  		break;
-> >  	case SYS_ID_AA64PFR2_EL1:
-> > -		/* We only expose FPMR */
-> > -		val &= ID_AA64PFR2_EL1_FPMR;
-> > +		mask = ID_AA64PFR2_EL1_FPMR;
-> > +
-> > +		if (kvm_has_mte(vcpu->kvm))
-> > +			mask |= ID_AA64PFR2_EL1_MTEFAR;
-> > +
-> > +		val &= mask;
->
-> I don't think there is a need for an extra variable, and you could
-> follow the pattern established in this file by writing this as:
->
-> 	val &= (ID_AA64PFR2_EL1_FPMR |
-> 		(kvm_has_mte(vcpu->kvm) ? ID_AA64PFR2_EL1_MTEFAR : 0));
->
-> Not a big deal though.
+We anticipate to involve fans connected to EC as thermal cooling
+devices, so we can utilize the thermal framework to have further thermal
+control strategies.
 
-Thanks for your suggestion. I'll apply this with STORE_ONLY patch too
-in end of this day.
+This series updates the required EC controls definitions, implements the
+mechanism for controlling fan PWM values, and registers these fans under
+thermal framework as cooling devices.
 
---
-Sincerely,
-Yeoreum Yun
+Adapting comments from the previous series, the driver probes the host
+command capability at beginning to see whether a fan is controllable:
+  - if command `EC_CMD_PWM_GET_FAN_DUTY` is supported (v0, this is a
+    new command).
+  - if command `EC_CMD_THERMAL_AUTO_FAN_CTRL` v2 is supported.
+  - if command `EC_CMD_PWM_SET_FAN_DUTY` v1 is supported.
+
+This combination is selected as this is the minimum requirement for a
+fan to be fully controllable under hwmon framework.
+
+The driver supports changing the fan control mode, and allows to change
+the fan PWM value only if the fan is in manual control mode. The power
+management hook is implemented as well for keeping the fan control
+settings, as EC will automatically restore the control method to auto
+when device is suspended.
+
+Change-Id: I4e2fdc8c4bc50778c0d04cfbefeaab7088d3181e
+Signed-off-by: Sung-Chi Li <lschyi@google.com>
+---
+Changes in v4:
+- Treat fan control is supported without `CONFIG_PM` is enabled.
+- Change logic of registering cooling devices for fan from abandom
+  immediately to log warning logs, then continue with the next fan.
+- Fix error checking logic to use IS_ERR for
+  devm_thermal_of_cooling_device_register.
+- Revise variable declaration ordering with reverse christmas tree.
+- Rename member variable `manual_fan_pwm_values` to `manual_fan_pwm`.
+- Use %pe for printing error pointers, and add newline for logs.
+- Revise comments in suspend and resume hook.
+- Link to v3: https://lore.kernel.org/r/20250512-cros_ec_fan-v3-0-a9f2b255f0cd@chromium.org
+
+Changes in v3:
+- Make required EC command versions macros.
+- Add `CONFIG_THERMAL` guarding for registering as thermal fan cooling
+  devices.
+- Add error handling during registering thermal cooling devices, and
+  immediately abort the registration if any error occurred to align with
+  the thermal sensor registration in hwmon core.
+- Add error handling for EC fan communication during suspend and resume.
+- Add `CONFIG_PM` guarding for checking whether the EC supports a
+  complete fan control in hwmon driver.
+- Sort variables order in declaration.
+- Separate declaration and logic to different sections.
+- Move `cros_ec_thermal_cooling_ops` next right after the operation
+  functions declaration.
+- Improve describing the resume behavior in documentation.
+
+Changes in v2:
+- Change column from 80 to 100 and fix styles.
+- Directly store driver data into platform dev with
+  platform_set_drvdata.
+- Unify the PWM unit (from 0 ~ 255) between hwmon and thermal cooling
+  devices.
+- Only fetch the fan control mode and PWM value when suspending rather
+  than caching values when writing. The suspend hook is thus added.
+- Link to v1: https://lore.kernel.org/r/20250429-cros_ec_fan-v1-0-a8d9e3efbb1a@chromium.org
+
+---
+Sung-Chi Li (3):
+      platform/chrome: update pwm fan control host commands
+      hwmon: (cros_ec) add PWM control over fans
+      hwmon: (cros_ec) register fans into thermal framework cooling devices
+
+ Documentation/hwmon/cros_ec_hwmon.rst          |   7 +-
+ drivers/hwmon/cros_ec_hwmon.c                  | 310 +++++++++++++++++++++++++
+ include/linux/platform_data/cros_ec_commands.h |  29 ++-
+ 3 files changed, 344 insertions(+), 2 deletions(-)
+---
+base-commit: 85086c90284303c1fd60fdd6ac5e6751443e44d6
+change-id: 20250429-cros_ec_fan-da3b64ac9c10
+
+Best regards,
+-- 
+Sung-Chi Li <lschyi@chromium.org>
+
+
 
