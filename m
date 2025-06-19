@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-49796-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49798-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E9D0AE0F4C
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jun 2025 00:02:08 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 78D19AE0F53
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jun 2025 00:02:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 89FB21BC6397
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Jun 2025 22:02:23 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 360227AF75C
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Jun 2025 22:01:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F4102951CD;
-	Thu, 19 Jun 2025 22:00:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22D7F29A9D3;
+	Thu, 19 Jun 2025 22:00:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LBBRVztj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mmJIg977"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1311A28EA5A;
-	Thu, 19 Jun 2025 22:00:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDC2929A326;
+	Thu, 19 Jun 2025 22:00:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750370437; cv=none; b=r0s1Fw7yj2s2j3qYvQhEZZBYK52s/Bm8o1kIqNOfPzgUMO+OAH1UA/f4K5uIKhS31Os85Q0M54nEQktDli6xCqEuC1dja5zyKH1lGlt56VH0Abk1e0joEV+5KokFjNy2Gc0+fPwbL0oDJ76kk8uU+JlQpxsYoctxJL09mBD9ADQ=
+	t=1750370441; cv=none; b=ctYRe+w3gC8pZ5nhmD/FRv8B3X3Odxkxqe4kownjhHrjsPYkTSFf8oIuQ3Qq3ciq3zfVBoreCHsfZnIeVbg3NaLT6fQEqNVLyHIAa+oy8I4S4C/NLm3JdekJj26XvT1aZOg68LztJg6Igmewd+LskNQ710sA0g0Jnkcu3l7Q/kU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750370437; c=relaxed/simple;
-	bh=wqH48E+LGip6Lq2rL7wSlJRXxht7rFrTFl8NcghwPtI=;
+	s=arc-20240116; t=1750370441; c=relaxed/simple;
+	bh=t+FYzdxss4O8PIT6azsMosL7ZC/90ZpCpkaRaenf1iQ=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ap/WHoj5wI5h1wXziYr/V+G3JXaq4pOTMoAKD5ZTer+P58ruf/8RQ2pp9v8GtzAJZGpXD9PgyD9skID8924MG4/4t2FSBrQEQHG8pZsvIjMRK+cFs6sXqw/kOdLkXiXaEPzZqQcTKz57fQSrLAyKpyuG0hLOih3UDo/5dj5A2uY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LBBRVztj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71A4EC4CEEE;
-	Thu, 19 Jun 2025 22:00:36 +0000 (UTC)
+	 MIME-Version; b=QESoRdkM9HE1BFqd7YyIDGPeQwxj4AeJ5aJdYaE34WNS4U5hA33rsX43jdBkdve2J7PmwbgVKuVUYxaFjOz3ftoHqedgWCVlOS/qK50qHXrknzT0EgNfe7/b919ogJokSSKUpIAT6smj7WiZi6n9lRQu+wRiro4wTSH6G6QvKS0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mmJIg977; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93623C4CEEA;
+	Thu, 19 Jun 2025 22:00:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1750370436;
-	bh=wqH48E+LGip6Lq2rL7wSlJRXxht7rFrTFl8NcghwPtI=;
+	s=k20201202; t=1750370440;
+	bh=t+FYzdxss4O8PIT6azsMosL7ZC/90ZpCpkaRaenf1iQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=LBBRVztjNgZs3K22XZVoEGcLZ2UzS917Lt8kDKWDbhb3qm5W9h2U7YcckfF5stkoV
-	 3SqNvdfqWGIStxzvMslk5141R/d6pPDMplZxHVHcwkmw0eUJi9jCaJAYeTssMSbOxI
-	 lM06ohGtS2ojM9ANfmoftpSI/REBWavjEH0dSH2mznX8XKMyWx1NRPu8PAzD1TWBKn
-	 5b4MwFIfnS1mPZpnTiji+2xkQNYamkx4Uubw9sHvXtJ6r8q25zGuW1qxQroYc6FKy+
-	 qsuXp6OaopSqpgEyBdWapHRkrnf1hkVRJV3D9FpZ9lqI1Nh1REau9K3UikMO4akpQY
-	 b2OVMP+TIBL8g==
+	b=mmJIg977cWmX1e009jjzG7TfAtvLm92a6f3IH03B27nsJjTQzym3L95Wa+J8Dtzcg
+	 ukOa8Nw8tPivP/YCknfL5bK3kkcAbvRm/B+qLYtM0FRMBsp1bp2bzwOvShPcl9g9Lz
+	 xhgfVcWfTpTLgeQyhAnSK7lmTw/gygK5vqWBewyKRfQoGho0atHo+o0NgiNOKiqPi/
+	 M3eQCCmxlgfDmVb8kXMKezKg0kFCeSPM8pb6UWFbp7m5Sk/adZ7PDpkguFZsaDyd2h
+	 02jtx00LHCJYdJqljYakY46PZHOrfM/YPJ4hNp/k7Prq4VF3ZxSRHzur1SLXAub1jG
+	 jPe3OJFnFNz+g==
 From: SeongJae Park <sj@kernel.org>
 To: 
 Cc: SeongJae Park <sj@kernel.org>,
@@ -51,9 +51,9 @@ Cc: SeongJae Park <sj@kernel.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [RFC PATCH 07/11] Docs/admin-guide/mm/damon/usage: document DAMOS quota goal path file
-Date: Thu, 19 Jun 2025 15:00:19 -0700
-Message-Id: <20250619220023.24023-8-sj@kernel.org>
+Subject: [RFC PATCH 11/11] Docs/mm/damon/design: document DAMOS_QUOTA_NODE_MEMCG_FREE_BP
+Date: Thu, 19 Jun 2025 15:00:23 -0700
+Message-Id: <20250619220023.24023-12-sj@kernel.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250619220023.24023-1-sj@kernel.org>
 References: <20250619220023.24023-1-sj@kernel.org>
@@ -63,40 +63,39 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: SeongJae Park <sj@kernel.org>
 ---
- Documentation/admin-guide/mm/damon/usage.rst | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ Documentation/mm/damon/design.rst | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/admin-guide/mm/damon/usage.rst b/Documentation/admin-guide/mm/damon/usage.rst
-index d960aba72b82..2f603977fa88 100644
---- a/Documentation/admin-guide/mm/damon/usage.rst
-+++ b/Documentation/admin-guide/mm/damon/usage.rst
-@@ -81,7 +81,7 @@ comma (",").
-     │ │ │ │ │ │ │ :ref:`quotas <sysfs_quotas>`/ms,bytes,reset_interval_ms,effective_bytes
-     │ │ │ │ │ │ │ │ weights/sz_permil,nr_accesses_permil,age_permil
-     │ │ │ │ │ │ │ │ :ref:`goals <sysfs_schemes_quota_goals>`/nr_goals
--    │ │ │ │ │ │ │ │ │ 0/target_metric,target_value,current_value,nid
-+    │ │ │ │ │ │ │ │ │ 0/target_metric,target_value,current_value,nid,path
-     │ │ │ │ │ │ │ :ref:`watermarks <sysfs_watermarks>`/metric,interval_us,high,mid,low
-     │ │ │ │ │ │ │ :ref:`{core_,ops_,}filters <sysfs_filters>`/nr_filters
-     │ │ │ │ │ │ │ │ 0/type,matching,allow,memcg_path,addr_start,addr_end,target_idx,min,max
-@@ -390,9 +390,9 @@ number (``N``) to the file creates the number of child directories named ``0``
- to ``N-1``.  Each directory represents each goal and current achievement.
- Among the multiple feedback, the best one is used.
+diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+index eb6d3b7d0643..6e1f772006d9 100644
+--- a/Documentation/mm/damon/design.rst
++++ b/Documentation/mm/damon/design.rst
+@@ -571,15 +571,16 @@ mechanism tries to make ``current_value`` of ``target_metric`` be same to
+ - ``node_mem_used_bp``: Specific NUMA node's used memory ratio in bp (1/10,000).
+ - ``node_mem_free_bp``: Specific NUMA node's free memory ratio in bp (1/10,000).
+ - ``node_memcg_used_bp``: Specific cgroup's node used memory ratio for a
++- ``node_memcg_free_bp``: Specific cgroup's node unused memory ratio for a
+   specific NUMA node, in bp (1/10,000).
  
--Each goal directory contains four files, namely ``target_metric``,
--``target_value``, ``current_value`` and ``nid``.  Users can set and get the
--four parameters for the quota auto-tuning goals that specified on the
-+Each goal directory contains five files, namely ``target_metric``,
-+``target_value``, ``current_value`` ``nid`` and ``path``.  Users can set and
-+get the five parameters for the quota auto-tuning goals that specified on the
- :ref:`design doc <damon_design_damos_quotas_auto_tuning>` by writing to and
- reading from each of the files.  Note that users should further write
- ``commit_schemes_quota_goals`` to the ``state`` file of the :ref:`kdamond
+ ``nid`` is optionally required for only ``node_mem_used_bp``,
+-``node_mem_free_bp`` and ``node_memcg_used_bp`` to point the specific NUMA
+-node.
++``node_mem_free_bp``, ``node_memcg_used_bp`` and ``node_memcg_free_bp`` to
++point the specific NUMA node.
+ 
+-``path`` is optionally required for only ``node_memcg_used_bp`` to point the
+-path to the cgroup.  The value should be the path of the memory cgroup from the
+-cgroups mount point.
++``path`` is optionally required for only ``node_memcg_used_bp`` and
++``node_memcg_free_bp`` to point the path to the cgroup.  The value should be
++the path of the memory cgroup from the cgroups mount point.
+ 
+ To know how user-space can set the tuning goal metric, the target value, and/or
+ the current value via :ref:`DAMON sysfs interface <sysfs_interface>`, refer to
 -- 
 2.39.5
 
