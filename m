@@ -1,139 +1,89 @@
-Return-Path: <linux-doc+bounces-49819-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-49825-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5EE6AE1581
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jun 2025 10:11:56 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B9A8AE159B
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jun 2025 10:14:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8B74316B32B
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Jun 2025 08:11:57 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 447FB7A72BB
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Jun 2025 08:12:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5592D233722;
-	Fri, 20 Jun 2025 08:11:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GhtEtjUs"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D2782356BA;
+	Fri, 20 Jun 2025 08:13:03 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C05E233128;
-	Fri, 20 Jun 2025 08:11:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86F8D2356B4;
+	Fri, 20 Jun 2025 08:13:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750407114; cv=none; b=amrOhu5Q3hgp+L++bEqWWnu0+jp6PrlzYyjHo9JxWOj3+NCAUvQHVVro5ozGdrqJiZH7SYOm49as/m7Rtl/LDdP5CkC7ztiTs8H1b5Fqfd6L8JD/wH2wxnEu4idANtK+GQCVWeL7DJOfX3/j7KkNfLl6Q3NmS3dw11OoeWNKstE=
+	t=1750407183; cv=none; b=iLFmklkuO5D/1/CDWr8zYf3OqqQBGupd+wWG1gfXwJTJmnCJaPTjmLq941SyCZvK0+uei60YlNqJeP7WX22dr7hWsqZ6BAgWtgrha4w5BGZ1MkC4K156kUzcicuE9PE/Om7soG7Z93nC5SSpoYGCyjJRxUyKbBehSPCAJr2aluE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750407114; c=relaxed/simple;
-	bh=3yI0hd++pTAVk6UlNj1uaAE4va43OAIfWkR3JnQPolk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bs31cMlVAdCwVnQzI9tSRMJumH+pdG6VicXYBB19j11laoKGWXG1E1NBVtMHTYbhrlqoUGwIJYb1qlG6Ul3U1i/ZlCQT0kY++QIeERL2mAmRQfE8zZv4Ff8hQFRBSKm5lMrCLbAG2XYDEIZgi7uk0+Ia3ic5QbH6SH0YJHlUBc4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GhtEtjUs; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C51A1C4CEF6;
-	Fri, 20 Jun 2025 08:11:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1750407113;
-	bh=3yI0hd++pTAVk6UlNj1uaAE4va43OAIfWkR3JnQPolk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=GhtEtjUssPMeJCzgvWaJTcFljk/sjLv3sGESjb9Aol0m3SWcPlxcthRoivaXHSHp8
-	 oWrFWbVyl/Ji57YmHHEv0aAUsz91X559+PH+7OUS5mfXnmqNM8N5A4DQNrZ7jTYAaU
-	 im3oRk2caUP7Ryru+PXUVGQUKMuwF5hUVQ1+XePmMexg68nLIk61jbg3MfJSK4ruuE
-	 s/pGR7tSyssqLxdTRP4EamOSwRVylOWpJUP82PY+MY87TWfgM9f1ICM2w3DNE6CJij
-	 5iAWxucqcUSdBdz10I5wbs1v1Qd7JrBrmuJ+PZ2YBE+44//0EERjiDveP5vuNtA0QM
-	 Q4wst4q63xbUQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1uSWql-00000004TX7-3tjQ;
-	Fri, 20 Jun 2025 10:11:51 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Akira Yokosawa" <akiyks@gmail.com>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 6/6] docs: sphinx: add a file with the requirements for lowest version
-Date: Fri, 20 Jun 2025 10:11:46 +0200
-Message-ID: <d8f4d6979756e8ec07908a38d2d776cc4682ac27.1750406900.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1750406900.git.mchehab+huawei@kernel.org>
-References: <cover.1750406900.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1750407183; c=relaxed/simple;
+	bh=z8UDxO/OcLukhXKZ6GZRQPrtUnvInsX/2UomE+yR66s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=d1y2ootx5OHA7J2s2l4+y3X/iYDCtMb7ksq14bVrDKXp+HcG81/CEAD6aWLH0xxV1oPSLGjuJWQyjiw+8hsfrWqpBajSl9AcxRqMmGdR06x8S3ZFPAafXVI6bTk0RgTgWFrEqnwv2GJzeC+dUbwws5fm5oX+IDMY5NCB0l9yLp4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1BE77176A;
+	Fri, 20 Jun 2025 01:12:40 -0700 (PDT)
+Received: from [10.164.146.15] (J09HK2D2RT.blr.arm.com [10.164.146.15])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1382A3F66E;
+	Fri, 20 Jun 2025 01:12:55 -0700 (PDT)
+Message-ID: <d5a86ef8-a58c-4abc-8312-08406c847edc@arm.com>
+Date: Fri, 20 Jun 2025 13:42:53 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 1/2] lib/vsprintf: Add support for pte_t
+To: Matthew Wilcox <willy@infradead.org>
+Cc: linux-mm@kvack.org, Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, Petr Mladek
+ <pmladek@suse.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Jonathan Corbet <corbet@lwn.net>, Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@redhat.com>, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+References: <20250618041235.1716143-1-anshuman.khandual@arm.com>
+ <20250618041235.1716143-2-anshuman.khandual@arm.com>
+ <aFQP8LzVMctf6XH5@casper.infradead.org>
+Content-Language: en-US
+From: Anshuman Khandual <anshuman.khandual@arm.com>
+In-Reply-To: <aFQP8LzVMctf6XH5@casper.infradead.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Those days, it is hard to install a virtual env that would
-build docs with Sphinx 3.4.3, as even python 3.13 is not
-compatible anymore with it.
+On 19/06/25 6:56 PM, Matthew Wilcox wrote:
+> On Wed, Jun 18, 2025 at 09:42:34AM +0530, Anshuman Khandual wrote:
+>> +++ b/mm/memory.c
+>> @@ -522,9 +522,8 @@ static void print_bad_pte(struct vm_area_struct *vma, unsigned long addr,
+>>  	mapping = vma->vm_file ? vma->vm_file->f_mapping : NULL;
+>>  	index = linear_page_index(vma, addr);
+>>  
+>> -	pr_alert("BUG: Bad page map in process %s  pte:%08llx pmd:%08llx\n",
+>> -		 current->comm,
+>> -		 (long long)pte_val(pte), (long long)pmd_val(*pmd));
+>> +	pr_alert("BUG: Bad page map in process %s  pte:%ppte pmd:%ppte\n",
+>> +		 current->comm, &pte, pmd);
+> 
+> Unfortunately, the one example you've converted shows why this is a bad
+> idea.  You're passing a pmd_t pointer to a function which is assuming a
+> pte_t pointer.  And a pmd_t and a pte_t are sometimes different sizes!
+> (eg sometimes one is 64 bit and the other 32 bit).
 
-	/usr/bin/python3.9 -m venv sphinx_3.4.3
-	. sphinx_3.4.3/bin/activate
-	pip install -r Documentation/sphinx/min_requirements.txt
+As discussed on a separate thread, this might be addressed via separate
+printf formats for each page table level e.g %ppte, %ppmd, and %ppud etc. 
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/doc-guide/sphinx.rst        | 23 +++++++++++++++++++++++
- Documentation/sphinx/min_requirements.txt | 10 ++++++++++
- 2 files changed, 33 insertions(+)
- create mode 100644 Documentation/sphinx/min_requirements.txt
+> 
+> So no, NACK.
+> 
 
-diff --git a/Documentation/doc-guide/sphinx.rst b/Documentation/doc-guide/sphinx.rst
-index 5a91df105141..607589592bfb 100644
---- a/Documentation/doc-guide/sphinx.rst
-+++ b/Documentation/doc-guide/sphinx.rst
-@@ -131,6 +131,29 @@ It supports two optional parameters:
- ``--no-virtualenv``
- 	Use OS packaging for Sphinx instead of Python virtual environment.
- 
-+Installing Sphinx Minimal Version
-+---------------------------------
-+
-+When changing Sphinx build system, it is important to ensure that
-+the minimal version will still be supported. Nowadays, it is
-+becoming harder to do that on modern distributions, as it is not
-+possible to install with Python 3.13 and above.
-+
-+Testing with the lowest supported Python version as defined at
-+Documentation/process/changes.rst can be done by creating
-+a venv with it with, and install minimal requirements with::
-+
-+	/usr/bin/python3.9 -m venv sphinx_min
-+	. sphinx_min/bin/activate
-+	pip install -r Documentation/sphinx/min_requirements.txt
-+
-+A more comprehensive test can be done by using:
-+
-+	scripts/test_doc_build.py
-+
-+Such script create one Python venv per supported version,
-+optionally building documentation for a range of Sphinx versions.
-+
- 
- Sphinx Build
- ============
-diff --git a/Documentation/sphinx/min_requirements.txt b/Documentation/sphinx/min_requirements.txt
-new file mode 100644
-index 000000000000..52d9f27010e8
---- /dev/null
-+++ b/Documentation/sphinx/min_requirements.txt
-@@ -0,0 +1,10 @@
-+alabaster >=0.7,<0.8
-+docutils>=0.15,<0.18
-+jinja2>=2.3,<3.1
-+PyYAML>=5.1,<6.1
-+Sphinx==3.4.3
-+sphinxcontrib-applehelp==1.0.2
-+sphinxcontrib-devhelp==1.0.1
-+sphinxcontrib-htmlhelp==1.0.3
-+sphinxcontrib-qthelp==1.0.2
-+sphinxcontrib-serializinghtml==1.1.4
--- 
-2.49.0
 
 
