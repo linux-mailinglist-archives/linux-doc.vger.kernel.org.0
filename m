@@ -1,134 +1,147 @@
-Return-Path: <linux-doc+bounces-50157-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50163-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C0D6AE3A75
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Jun 2025 11:32:58 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 23DE9AE3AAB
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Jun 2025 11:37:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9D48F3A414F
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Jun 2025 09:31:40 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 850317AB70F
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Jun 2025 09:35:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A27B32405EB;
-	Mon, 23 Jun 2025 09:30:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b="Z+2q4qKV"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7B0D61A314F;
+	Mon, 23 Jun 2025 09:34:05 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4A9923E324;
-	Mon, 23 Jun 2025 09:30:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.132.182.106
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 948EA30E84D;
+	Mon, 23 Jun 2025 09:34:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750671012; cv=none; b=pWR98jYrsXFaWSDIYIydkLONaCkg9uA6z+pgu5l+KU96svIL9BeBhjd6nQzBuOOjObZ3Qn37Dho3ls+vec8Xebsk5x5/kOmhHPNoUujgQsh0APAz87HgDum13mFgxvoLkpX0o60aMWVtRopgrcW2pGfj8fNz+TF+cKsnKfN8sQw=
+	t=1750671245; cv=none; b=VPl7tDugEIjXiCOiyHn3dhI2lJynkgYg8HTu0/xedV2T5SfwGT+lgcXPqO3aZrK5I496kl8h2BxG9HEEMNTDwA7kTP40REUNCjssXI7WKCpd50ZQmziodgCo6Du3ovSUkB3fmssIDl9yluzEsE3a68zsr4L0qZzO2ehft/0JspE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750671012; c=relaxed/simple;
-	bh=C7EnqfKQQ5fQB9pf3iXHh9xmgRkHyNyUGfDlPdr64AQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=JXTzVchCktEcPVc67rtchVjTnZ19bMpf4nn/bZqfJtJsKbTY9zIhwfWErlhEYJtO2CgNHl67YYtJ7OzvXERbTlzRzjnL+i6Iepdg7pBANj4ptPObwqetEBaof9vUetXo+RxUTpPC+kqNQW3BAVpjOQz7hV6ebq/CFQe4aNQASBg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com; spf=pass smtp.mailfrom=foss.st.com; dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b=Z+2q4qKV; arc=none smtp.client-ip=185.132.182.106
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55N9ACnK010876;
-	Mon, 23 Jun 2025 11:29:52 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=selector1; bh=
-	qLs/ihWxyBQGt91t9+rNI5uJsOv140RQYF6cNc+ahBI=; b=Z+2q4qKV4f0Z8LEW
-	m4tCtpd19msC3UE1sCaRH7+UOcDnCAJE5ykaAVF1M8mC8hToHLPqcp4VCPtVhGqz
-	lnBET+Scj9UquCsRusQn2PLbkzvB2a5MulzLsUMyY0QvSOGpQ/fKuJMStQAgb9Zw
-	W+Yvk4xgWyWbVYyGbqbhnLZKCeglJqRDHBiQcHgLSg+xiBSbdvAPCOsirlCKL4uK
-	0/hISR+Y6bJJ/qUiiF4BTmTZON7bshzt7i5rOxbCkKQfFQoEcE0v9fzw83w8oPGO
-	EVQO1hZxBg44ggyVbzhRmPhcAf3ybjAaroSPf4BgV+JzADBgSfNFba57mcefpez2
-	OJb4qA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
-	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 47e6a6cjq9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 23 Jun 2025 11:29:52 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C789240058;
-	Mon, 23 Jun 2025 11:28:41 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0C6135C3DEC;
-	Mon, 23 Jun 2025 11:27:33 +0200 (CEST)
-Received: from localhost (10.252.18.29) by SHFDAG1NODE2.st.com (10.75.129.70)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 23 Jun
- 2025 11:27:32 +0200
-From: =?utf-8?q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
-Date: Mon, 23 Jun 2025 11:27:18 +0200
-Subject: [PATCH 13/13] arm64: dts: st: support ddrperfm on stm32mp257f-ev1
+	s=arc-20240116; t=1750671245; c=relaxed/simple;
+	bh=KQQkkGa+FOJrfi+7O0ocknbs6Q+TgN71Lv+m1UTik/g=;
+	h=Subject:To:Cc:References:From:Message-ID:Date:MIME-Version:
+	 In-Reply-To:Content-Type; b=m/qFGJoBimFN8zDIim3da1E6qJLoETXxw8ukVsJh+uMU6YWf1YNberPxLrgG4aro2fVDur9XMuazrloHlC4PzVAQ/ovCyMxu4aiDgxdUBa7MG4QY+KGGr1e44IPnZijVz4OcF+8crPKxFx+/4Zlw5FSRpa1OyYPpFS1XV/rESIQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.20.42.24])
+	by gateway (Coremail) with SMTP id _____8BxPOKBH1louIobAQ--.20857S3;
+	Mon, 23 Jun 2025 17:33:53 +0800 (CST)
+Received: from [10.20.42.24] (unknown [10.20.42.24])
+	by front1 (Coremail) with SMTP id qMiowMBx3MR+H1lo9iwnAQ--.51623S3;
+	Mon, 23 Jun 2025 17:33:52 +0800 (CST)
+Subject: Re: [PATCH v4 2/2] irq/irq-loongarch-ir:Add Redirect irqchip support
+To: Thomas Gleixner <tglx@linutronix.de>, chenhuacai@kernel.org,
+ kernel@xen0n.name, corbet@lwn.net, alexs@kernel.org, si.yanteng@linux.dev,
+ jiaxun.yang@flygoat.com, peterz@infradead.org, wangliupu@loongson.cn,
+ lvjianmin@loongson.cn, maobibo@loongson.cn, siyanteng@cqsoftware.com.cn,
+ gaosong@loongson.cn, yangtiezhu@loongson.cn
+Cc: loongarch@lists.linux.dev, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20250610114252.21077-1-zhangtianyang@loongson.cn>
+ <20250610114252.21077-3-zhangtianyang@loongson.cn> <87o6uris6p.ffs@tglx>
+ <9c60326b-f7bd-0b36-3bc5-0ad7d19690f1@loongson.cn> <87v7omooag.ffs@tglx>
+From: Tianyang Zhang <zhangtianyang@loongson.cn>
+Message-ID: <fceb603c-6072-2941-15d5-56c8a4b4c32c@loongson.cn>
+Date: Mon, 23 Jun 2025 17:33:08 +0800
+User-Agent: Mozilla/5.0 (X11; Linux mips64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <87v7omooag.ffs@tglx>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Message-ID: <20250623-ddrperfm-upstream-v1-13-7dffff168090@foss.st.com>
-References: <20250623-ddrperfm-upstream-v1-0-7dffff168090@foss.st.com>
-In-Reply-To: <20250623-ddrperfm-upstream-v1-0-7dffff168090@foss.st.com>
-To: Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
-        Rob
- Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor
- Dooley <conor+dt@kernel.org>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Philipp Zabel
-	<p.zabel@pengutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Gatien Chevallier
-	<gatien.chevallier@foss.st.com>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Gabriel Fernandez
-	<gabriel.fernandez@foss.st.com>
-CC: <linux-arm-kernel@lists.infradead.org>, <linux-perf-users@vger.kernel.org>,
-        <devicetree@vger.kernel.org>,
-        <linux-stm32@st-md-mailman.stormreply.com>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-clk@vger.kernel.org>,
-        =?utf-8?q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
-X-Mailer: b4 0.15-dev-c25d1
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE2.st.com
- (10.75.129.70)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-23_03,2025-06-23_02,2025-03-28_01
+Content-Language: en-US
+X-CM-TRANSID:qMiowMBx3MR+H1lo9iwnAQ--.51623S3
+X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBj93XoW7tF1rur1fGFWDJr45Xw13Awc_yoW8CF47p3
+	93K3Wxta1vqr4I9r12vanFvF97KF4kJay3C34kGryjv34qqF1agFs7XrWFkF18urs7Xryj
+	vrWY9rWq9wn8XabCm3ZEXasCq-sJn29KB7ZKAUJUUUUf529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUP2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v2
+	6F4UJVW0owAaw2AFwI0_JF0_Jw1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0c
+	Ia020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_
+	Jw1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrw
+	CYjI0SjxkI62AI1cAE67vIY487MxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48J
+	MxC20s026xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI
+	0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y
+	0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+	WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1l
+	IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8uc_3UUUU
+	U==
 
-Configure DDRPERFM node on stm32mp257f-ev1 board.
-Disable the node as DDRPERFM will produce an error message if it's clock
-(shared with the DDRCTRL on STM32MP25x) is secured by common bootloaders.
+Hi, Thomas
 
-Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
----
- arch/arm64/boot/dts/st/stm32mp257f-ev1.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+在 2025/6/23 下午4:27, Thomas Gleixner 写道:
+> On Mon, Jun 23 2025 at 10:45, Tianyang Zhang wrote:
+>> 在 2025/6/13 下午11:20, Thomas Gleixner 写道:
+>>> On Tue, Jun 10 2025 at 19:42, Tianyang Zhang wrote:
+>>>
+>>>> +	tail = (tail + 1) % INVALID_QUEUE_SIZE;
+>>> Why is this before the barrier? The barrier does not do anything about
+>>> this and you can simplify this. See below.
+>>>
+>>> And as there is no rmb() counterpart you want to explain that this is
+>>> serializing against the hardware.
+>>>> +	 */
+>>>> +	wmb();
+>>>> +
+>>>> +	write_queue_tail(rqueue->node, tail);
+>>> 	write_queue_tail(rqueue->node, (tail + 1) & INVALID_QUEUE_MASK);
+>>>
+>>> No?
+>> The reason fo coding here is that during testing, it was found that a
+>> barrier is needed between the update of temporary variable 'tail' and
+>> the operation of register with 'write_queue_tail' , otherwise
+>> write_queue_tail will probabilistically fail to obtain the correct
+>> value.
+> How so?
+>
+> tail is the software managed part of the ringbuffer which is shared with
+> the hardware, right?
+>
+> So even if the compiler would be allowed to reevalutate tail after the
+> barrier (it is NOT), then tail would still contain the same value as
+> before, no?
+>
+> The wmb() is required to ensure that the hardware can observe the full
+> write of the command _before_ it can observe the update to the tail
+> index.
+>
+> Anything else is voodoo.
+>
+> Thanks,
+>
+>          tglx
 
-diff --git a/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts b/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-index 2f561ad40665..a48fb7b33198 100644
---- a/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-+++ b/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-@@ -123,6 +123,11 @@ csi_source: endpoint {
- 	};
- };
- 
-+&ddrperfm {
-+	st,dram-type = <2>;
-+	status = "disabled";
-+};
-+
- &dcmipp {
- 	status = "okay";
- 	port {
+In my previous understanding, tail'value is actually a part of 'full 
+write of the command '.
 
--- 
-2.43.0
+We must ensure that tail is updated to the correct value first, and then 
+write this value
+
+into the register (perhaps by adding wmb in write_queue_tail ).
+
+In other words, this is originally to prevent the write register 
+instruction from being executed
+
+out of order before updating tail.
+
+The above is just my personal understanding
+
+Thanks
+
+Tianyang
+
 
 
