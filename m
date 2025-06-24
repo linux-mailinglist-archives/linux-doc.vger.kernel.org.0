@@ -1,170 +1,98 @@
-Return-Path: <linux-doc+bounces-50293-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50295-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD805AE5F08
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Jun 2025 10:24:03 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC049AE5F3A
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Jun 2025 10:29:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 203727A44D3
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Jun 2025 08:22:40 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id CCC591920B54
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Jun 2025 08:29:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 270EA257422;
-	Tue, 24 Jun 2025 08:23:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77D6A258CEF;
+	Tue, 24 Jun 2025 08:28:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q1a64fpg"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aacI6M5U"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EDEE86347;
-	Tue, 24 Jun 2025 08:23:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 032CE2586CA;
+	Tue, 24 Jun 2025 08:28:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750753436; cv=none; b=kuv7NYz3LvwUX1HcXLEMt8QnJ9vRxuZyHiYVl1oMhP+WwBh2UMQ1dnqmWIOEAqNUFo15OHbUMi7tXcNGDhCy6wkLUyXgQ0m1auYJZb2H1CyoNM/lGXJXBeF754Cu8iAcWmx1CiDwg8WhpQS7yYZEh/ZW39nnJwHqAUuVoQZTLNY=
+	t=1750753703; cv=none; b=mrScoK6EyrKaPcG7dZb1OekGz5AeVpgIodiGz3udA4kYxBiBBv+c9kSMNY9nb0nYHHVRj7LzU890h/fDVP6kYgX9v9vCMmnHl2bvRS+aNtSpaLVkOzWcqAIKEpkDulx3PrCojciQRK7g2ufcVvvQr1/sNRl3gOFGrFvbn40J84g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750753436; c=relaxed/simple;
-	bh=0DRoBk7a+ONA+bOlmOa0vOv2EeXtSy0ZwgcOZn/WSpk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=AtABd4X42IgFTnfJrQvMlPaxpyNn9bHMV2NEMZ5kP/Iv19oLD8CrhfUUjkCSiH4wQHisXSTeDYM1O0VDFMRyCu3Rpvv8h6xy75KX9JYhj/t8uOdVrZt14Yb9C29H7NQNi16hC9fzCIKRc5UpB8f82+Hs+xDRK3GMMnQORDVbIco=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Q1a64fpg; arc=none smtp.client-ip=209.85.208.47
+	s=arc-20240116; t=1750753703; c=relaxed/simple;
+	bh=BrJ38doQTNTOqQctJA4w4QZzc3In3XQx97vnQ/UdjR8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ATtNZFmb1n7QfPR6jDi7JkSqVDYJSHVy2h1w6VHAsBWBSPffCzLJt/18sd7/94CFQXOTygiLI8XpPdQhAHZXnWCu9BNHspPR7/c4a+MM7Bw82tpo8G4lwKj38hp7TaFPJFTM2ls3xKVjE2Jajkv5S5krNqnuiGv3WWip6iUJ5SA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aacI6M5U; arc=none smtp.client-ip=209.85.219.180
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-6077dea37easo9602970a12.3;
-        Tue, 24 Jun 2025 01:23:54 -0700 (PDT)
+Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-e8187df27f8so612505276.3;
+        Tue, 24 Jun 2025 01:28:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1750753433; x=1751358233; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2H7FVeT03BXWcr+Xp7XmzKQpCwCD96qmn55NwEfYCg4=;
-        b=Q1a64fpgVglQwckG0B0D31EwaQG/F5hrRItQ6rKNSLUIKLtJZl2s4L+w/9vQI2c4qc
-         cGVmv2aMfv3ktx4nddCGSH0O7JpZ9DOxr5epv75jIqiRsRD4KBLOeAAJNrzLlRfLU5S5
-         ymz2vSGkuvCR0UEca32U1LC02BvmAeOszLoSjpc2RLVQ4HRB38b2oNZSkyiH9sy8XC8E
-         KsTdZC/KxlLZ+tFL2/5rn4HCuP5eltw4Fg00qMciCStbc3TOhZci2UXwycXjz1ZWuK5r
-         nMh7IfYl8mHpYbzY+qUPckQbbxfuuqvzwfJm8ybvZHdDG5GCHnk3JrpHy3w3fqGgTlnd
-         NGgQ==
+        d=gmail.com; s=20230601; t=1750753701; x=1751358501; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=BrJ38doQTNTOqQctJA4w4QZzc3In3XQx97vnQ/UdjR8=;
+        b=aacI6M5UjORXb2/schId/9QnQcXgOZxaCND6248AoEkXaL17Lg4C1n1p8kvn0qWu+m
+         j7iZmMwO/O0VUFt7OhvC5WGDAApxw0F5kf3EpC0CYbQ8fWj2Ka/uQ+l4nDSMCkwEccCw
+         QD3GEzZoaHX7mq1V+YK8c4ET+Gzo6d2FjFJRIPdrv2f12SQMU3MeDMana6BpJMWENfCr
+         a2eTQBke/QDIVFAnifGfwJUOOoBxFNyewTa8TaMedwFxhUD6X+VMsOoMh5MuVIs2oond
+         K7xK+Wsqih2MDlTbYT1G023d6aficBzysNLrmiFv1TJbQH34kPMmGWRg50RvGDUjYciL
+         HGXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1750753433; x=1751358233;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2H7FVeT03BXWcr+Xp7XmzKQpCwCD96qmn55NwEfYCg4=;
-        b=lbNKEiK5azPfZNkABwm+LMj9PBV5QgZcXnsblE6MVYmXGgNSZfYZ2bbLUp72ZuQ9s2
-         S1W+slVf2zmCn7tqXf7bq8X1yZbmVgcpZRbSyCw1afAhPTKiQvKEcHM4UL/YEhXW5H4L
-         l84Da5P9QO4Qwmjb1JbjG5kKGyTm+4e/+W6KbFUdTAbi4VOs3kwz4VS5WINZby9pdGE7
-         FdN2T4In0hSj2YIcGIyP9JiK0fqZyzsdtCFfhWYV4j38/1lee4UJfJhIYWQRHxCp2iTx
-         9fPiyh4lhZGolOL5IQrOMpoyEyQva6gcrfU0oDHQ38CloqeaTbq4rthlw80Pmw/CGqq3
-         jjpQ==
-X-Forwarded-Encrypted: i=1; AJvYcCV6TS4SZOBFmTKDoPIn5FkhrDQKmi4jFzRbdkKhmz5P1K14cbRGcK8nzse07R2MlEm3jq1h3t7mUvs=@vger.kernel.org, AJvYcCVrM4NQK9XEH6ZGRubmCongv856PUSQY91BzF5v7st0al4p5JnCUpU/D+x3BZ3jMU86LaKpW9Az8ENS@vger.kernel.org, AJvYcCX8Fs/IcWD8IuYBG4iH5V4mXfxaKSspFD/iYgu/EdKikyA3AtHcAzYjWsNc+AtixHnw4AZGg8T7iRLrSGT+@vger.kernel.org
-X-Gm-Message-State: AOJu0YwcJwebTMdMrbhl6+f0gqvGsNFahbLcejHG7z8fOENUm1jMz+S6
-	fJ5IF8Cl9sLWeq0FuEFRxqiao1UJwuZalg7J2NMC/02mVvOlND3hK5q2
-X-Gm-Gg: ASbGnctGUYoxtfXi3Lm9Tetm5ZqAfRlXtFhqZDU8cKqvYE89p2BThTcuHDEZTdwCmae
-	Fk894vEzhOhAfhsLj3bUvqgzdE2VOodPZU5LtGDNGkC9LgAc/8vg8QJ8abMee2c3Ysf4yrEXqAL
-	dR4iZhfJZIhPOYjBZ4KmrgQruaBQgOHIu8szBIybH+v3g9/d0XgO9pFFnyn4YSpS2Id9JtFkbBH
-	sKsOvAroKyh7EmQ3oxlYKFvhLnqvvmpAy9t0o6aXJEZa4V0VOrOw2yJTLoRqcwCg/XjMghpx0Rj
-	hA5yJnQHaKDXcTuq8fMgqJ9gd6W9kBRLdhPrUfZi3P9QcC/N+e92f9ERqDvYvpzYknF4dKDywLZ
-	s
-X-Google-Smtp-Source: AGHT+IE6uFBShvRtJlJrHnQfSTfKaDchryVCXm3Xlc5jSRa7ZBWQ78xrOHfYewZsoH8M4NZdRafhDg==
-X-Received: by 2002:a17:907:9816:b0:ad8:9b24:9d16 with SMTP id a640c23a62f3a-ae0579cd970mr1424596366b.6.1750753432204;
-        Tue, 24 Jun 2025 01:23:52 -0700 (PDT)
-Received: from localhost.localdomain ([41.79.198.24])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae053e7c6fdsm829165466b.3.2025.06.24.01.23.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Jun 2025 01:23:52 -0700 (PDT)
-From: Khalid Ali <khaliidcaliy@gmail.com>
-X-Google-Original-From: Khalid Ali <khaliidcaliy@gmail.com
-To: tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	hpa@zytor.com,
-	corbet@lwn.net
-Cc: luto@kernel.org,
-	peterz@infradead.org,
-	ardb@kernel.org,
-	jan.kiszka@siemens.com,
-	kbingham@kernel.org,
-	kirill.shutemov@linux.intel.com,
-	michael.roth@amd.com,
-	rick.p.edgecombe@intel.com,
-	brijesh.singh@amd.com,
-	sandipan.das@amd.com,
-	jgross@suse.com,
-	thomas.lendacky@amd.com,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-efi@vger.kernel.org,
-	linux-mm@kvack.org
-Subject: Re: [PATCHv2 0/3] x86: Make 5-level paging support unconditional for x86-64
-Date: Tue, 24 Jun 2025 08:23:03 +0000
-Message-ID: <20250624082305.2351-1-khaliidcaliy@gmail.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250516123306.3812286-1-kirill.shutemov@linux.intel.com>
-References: <20250516123306.3812286-1-kirill.shutemov@linux.intel.com>
+        d=1e100.net; s=20230601; t=1750753701; x=1751358501;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BrJ38doQTNTOqQctJA4w4QZzc3In3XQx97vnQ/UdjR8=;
+        b=uUCIeB7EbXIMM3qRrcGVZgm4+Axr4nKBWyWwAqTNgBdvaaiye23WEPbD6e1c/MRnVl
+         17YruFlZoZWSGARf0prD9jCcOT5W0QhbkC+/r9fOx7Ys15Cc4pp27NIw0OPGKQ8dzcHn
+         JR9nDBSb0VdQmIYFuuZfd1o9VVz8UWLpqyIN9XIgYotA/dWvOtfxRW1oF0d99yXlUM38
+         j0CWq9EXooJVgqYDdV3A+N/VLn10h9G5zCYsWKnH2z4J+EYTEkKEIhUP0V3WQJbe4rX6
+         +jaiNubqZU+T3xYtoYk/HfP2GR3RB3yVCAeMJVUu49m+ka4pdNAjCB4tqRfozmpjoSGT
+         b9nQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU7dCNw3x0lqBDOOz5kVFWMH3TntZ4GHVL3znP71o4dYx6xEWH3dTdVj+c3MU7cLjUE5DIXrcchvsPj@vger.kernel.org, AJvYcCUWrCNiqunHSd4lsqkxo5ZNVT9cqCgPoF2vQLKW2qTtESulfl3qU6vqCb4ggHhmPhuqyrPm2+wsvpU=@vger.kernel.org, AJvYcCVa+93HEtfpR62vsP5M8wqd0z1g9KzEAJlCoPUcMFbgHT5K4RMJ9hhlH2hhKgYmXm/u070GEZV12nUbTst9@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywzm3mQhpfeLUCFITNHeqdNWl7egr24ksKkiHulI57bjvUpY5dY
+	xmpKF6wIgQfiZRaiToy89cOErtxADrP56vE4FnXQH3O5OXraJjAwbyw+6QArL5WYDMMDCy7WWl+
+	lnl+qBO8g4Tjxa2beFV7Iia48yJ/RgpE=
+X-Gm-Gg: ASbGncvOsBNntPPIG9OSvwOeCmBH+eGp6YG6MFVqr0rxgvlDFhkOGjeqdv+tdxi5FsT
+	VRTYar5NIlUesGkKm3JC2BsV+Y+VvQcsd+BZqypCEIxGCD62KK0mWJzbjV2KItPNQY6eWclqYgR
+	Ki1Cta7SQQjQBZmCqCR4zrGb/PahRdG1QT5i7b+AEYIxc=
+X-Google-Smtp-Source: AGHT+IGCDUZ76ytppyTdkWKZ/FRSn70DwObZjMPGtzLGEpQ2Hl3CidDxu8Sju2B/RVJWDI0TMNAQnLBWPBcHBBZCQDM=
+X-Received: by 2002:a05:690c:a0a8:10b0:712:c5f7:1ef9 with SMTP id
+ 00721157ae682-712c6767523mr74074337b3.8.1750753700800; Tue, 24 Jun 2025
+ 01:28:20 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250622155010.164451-1-l.rubusch@gmail.com> <20250622155010.164451-5-l.rubusch@gmail.com>
+ <aFkh-E1dG__p_G4m@smile.fi.intel.com> <CAFXKEHan_7+BVshb12JZLH8CJtSPuwv=H_vC2kUWkS411wsqaA@mail.gmail.com>
+ <aFpUsv5fWYJk4vxW@smile.fi.intel.com>
+In-Reply-To: <aFpUsv5fWYJk4vxW@smile.fi.intel.com>
+From: Lothar Rubusch <l.rubusch@gmail.com>
+Date: Tue, 24 Jun 2025 10:27:44 +0200
+X-Gm-Features: AX0GCFt8Nj4tRsRK-Hx65ERcldQO7Qyp1Spa26kzOarIL6G_igIWXIZWmJkTt9c
+Message-ID: <CAFXKEHav5-Mo8uGd2WncrzvekH8_7005uu=6Z-TmqBBFjPzqHw@mail.gmail.com>
+Subject: Re: [PATCH v10 4/7] iio: accel: adxl345: add inactivity feature
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: lars@metafoo.de, Michael.Hennerich@analog.com, jic23@kernel.org, 
+	dlechner@baylibre.com, nuno.sa@analog.com, andy@kernel.org, corbet@lwn.net, 
+	linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, eraretuya@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 
->Both Intel and AMD CPUs support 5-level paging, which is expected to
->become more widely adopted in the future.
+...
+> P.S.
+> Also you seems ignored my ask to remove the context you are not replying to.
 >
->Remove CONFIG_X86_5LEVEL.
->
->In preparation to that remove CONFIG_DYNAMIC_MEMORY_LAYOUT and make
->SPARSEMEM_VMEMMAP the only memory model.
->
->v3:
-> - Drop few "#if CONFIG_PGTABLE_LEVELS >= 5";
-> - Make PARAVIRT_XXL 64-bit explicitly and drop ifdefs
->   to support PGTABLE_LEVELS < 5;
-> - Add Reviewed-by tags from Ard;
->v2:
-> - Fix 32-bit build by wrapping p4d_set_huge() and p4d_clear_huge() in
->   #if CONFIG_PGTABLE_LEVELS > 4;
-> - Rebased onto current tip/master;
->
->Kirill A. Shutemov (4):
->  x86/64/mm: Always use dynamic memory layout
->  x86/64/mm: Make SPARSEMEM_VMEMMAP the only memory model
->  x86/64/mm: Make 5-level paging support unconditional
->  x86/paravirt: Restrict PARAVIRT_XXL to 64-bit only
->
-> Documentation/arch/x86/cpuinfo.rst            |  8 ++---
-> .../arch/x86/x86_64/5level-paging.rst         |  9 -----
-> arch/x86/Kconfig                              | 33 ++-----------------
-> arch/x86/Kconfig.cpufeatures                  |  4 ---
-> arch/x86/boot/compressed/pgtable_64.c         | 11 ++-----
-> arch/x86/boot/header.S                        |  4 ---
-> arch/x86/boot/startup/map_kernel.c            |  5 +--
-> arch/x86/entry/vsyscall/vsyscall_64.c         |  2 --
-> arch/x86/include/asm/page_64.h                |  2 --
-> arch/x86/include/asm/page_64_types.h          | 11 -------
-> arch/x86/include/asm/paravirt.h               |  4 ---
-> arch/x86/include/asm/paravirt_types.h         |  2 --
-> arch/x86/include/asm/pgtable_64.h             |  2 --
-> arch/x86/include/asm/pgtable_64_types.h       | 24 --------------
-> arch/x86/kernel/alternative.c                 |  2 +-
-> arch/x86/kernel/head64.c                      |  4 ---
-> arch/x86/kernel/head_64.S                     |  2 --
-> arch/x86/kernel/paravirt.c                    |  2 --
-> arch/x86/mm/init.c                            |  4 ---
-> arch/x86/mm/init_64.c                         |  9 +----
-> arch/x86/mm/pgtable.c                         |  2 +-
-> arch/x86/xen/mmu_pv.c                         |  4 ---
-> drivers/firmware/efi/libstub/x86-5lvl.c       |  2 +-
-> scripts/gdb/linux/pgtable.py                  |  4 +--
-> 24 files changed, 14 insertions(+), 142 deletions(-)
-
-I think i am too late, however this is completely wrong. There are still processors that doesn't support
-5-level paging which is mordern. We may call those processors old, however they are still common and used.
-
-So this patch seem too early for that. Some intel core-i5 and core-i7 doesn't support 5-level paging at all.
-
-This will break x86_64 cpus that doesn't support 5-level paging.
+Sorry, I did not understand right away. Now I got you. I'll take care
+of it. Thanks for the advice.
 
