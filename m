@@ -1,181 +1,109 @@
-Return-Path: <linux-doc+bounces-50541-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50544-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31673AE835D
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 14:56:03 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id C13D4AE8372
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 14:58:25 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 317156A25C5
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 12:54:22 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 381471C25AC6
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 12:57:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E6C827147A;
-	Wed, 25 Jun 2025 12:51:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9FA02627F9;
+	Wed, 25 Jun 2025 12:55:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Z4ZYli/o"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EiYFioox"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8680A26A0F2;
-	Wed, 25 Jun 2025 12:51:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27FBF26158D;
+	Wed, 25 Jun 2025 12:55:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750855898; cv=none; b=krnxnNdMli3vL/+c9ywz3UVg0a95ZRiMPeVcpoeSBlje2yu06z8OFHb54tXsjPPuVpmhjtINBV7527UjzSG6xFOnCKAmL/y0QZreFP71kViyWd7v/htu2+zFqXP3jkbWXB5IEoLEXEEdPVxySVzhFEAZpxNzxZoKfmyOQjZ5Md8=
+	t=1750856148; cv=none; b=fpPxRb1rkw8LEMkDlMYwXfkeGdInon+x/e2t3bGaLL2HaPa2o+AOcnQf8guWTX+qW8HmsOK9BNJWN49SIY4Cro+ZiTKAjCb0EkLtirGxVsB5fNBgy0pn+mAVY0WwD1wRwXYeC/5veos0MfHpQZdG7pHx3sySh8ew1+e5aCOgpaE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750855898; c=relaxed/simple;
-	bh=gDZAIaId/LE+Cg3g34PHSl3JoHL8xvSE+GTgwe6XlKg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gACQ1j288OR1y8FC2Dc+jUbzthJEm+Ujma2fvcNM2963spynHnKOshbLvQ4IV8cbVU4VHgw7+n2ldJTrOLeQ7VqqzC1vnIMwWXXgBnjIwU29Xza2NP1z1jl8yCCCG4b/EZM2CZHnLozUz9N6YQJivBPiLHnTKSn8GDGKdXs7Eyc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.helo=mgamail.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Z4ZYli/o; arc=none smtp.client-ip=198.175.65.14
+	s=arc-20240116; t=1750856148; c=relaxed/simple;
+	bh=JXLoTAc7ALhyjeGRQiJU1KcXwfT2CND0hfmI1qetiYE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=N/xDDPaXKUCpZHtoFWOOTC69Q9yykM9qVMJJ9ZS2MxqZemt+WmmJihaHYh6hofr0DCciNQmdkFWTbN0Hz3v5x/11uq8UjzvkQLaw9fvwqEC2CCyktIrhYLSon9FXMCaWpP8xW4E1BLRFDGBFp788QG1VLR7BN1ElsoXQ141x98A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EiYFioox; arc=none smtp.client-ip=192.198.163.13
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.helo=mgamail.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1750855896; x=1782391896;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=gDZAIaId/LE+Cg3g34PHSl3JoHL8xvSE+GTgwe6XlKg=;
-  b=Z4ZYli/oIFvsVqCOdrR6LaG3tkrApxKCdKBvpImOfokXnGhDwmm7wDV8
-   RGiyrCdKqY0MLilR7FY+uchVsVBMcLfWJWgW+HEg+S2voZ1NXq8t89vxT
-   rHT3d3vY9YAXcvp24WWuGwD5jcGui91GP3g4SKeJByXglJqfWAohvP6xd
-   hWvz4KWEhfQtQSS7VWy6B5NiO7NlbggBpSTEkiay2gtS54RFZcfU2ODDn
-   xMkIwCSSrf/M3WBf0GKAoCNE2VSsmdwzgvJmbNGNjxYP0qSIvsVWGFGfa
-   EOjaONH+MAeu+GGC8jQYXv2DkavKBmVrlohBECl4Ut5RKnpysyWsiGgja
-   w==;
-X-CSE-ConnectionGUID: WbdQy+/VRI6Wnosw+WwtHQ==
-X-CSE-MsgGUID: 4Xp0zkwLQBuCPLcVfk9zLQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11474"; a="56908374"
+  t=1750856147; x=1782392147;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=JXLoTAc7ALhyjeGRQiJU1KcXwfT2CND0hfmI1qetiYE=;
+  b=EiYFiooxWZGeIy55qCQV5QVqdjnK7pYIECFV75kU3asp1ZVbLchsXjdC
+   dnHIRimyDQN3O/bRqqJiCsE+8/NNxjJUMABsDHwyVJ83+dqVjcJHZUEZ/
+   0pTVAG61o/dhjcZpMQvk1tUP/ME2Jofs7jjiYn0y00wN5KVO9+j9c6fdd
+   xVSaoXKGfQjyXZ9XndEiBN5Z8DIVP9UvMQKwt1dJrKUSOjrbCl2Ovrvm9
+   8xldtyD0yA5abEAGQ6hkv+32c5cM14ySZ7dyknIEGjsYRdlyhSaW85pH5
+   RkE0bq+2qdMnoACnMG4NxTC8L4fJyiT87Bnxmw1aB0RJjNKTN6iLwFUDV
+   Q==;
+X-CSE-ConnectionGUID: ZFurLcwGQoiTa8B4AArYkQ==
+X-CSE-MsgGUID: sLo93ohzT4y8U4r1vaDpuQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11474"; a="55752963"
 X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; 
-   d="scan'208";a="56908374"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2025 05:51:36 -0700
-X-CSE-ConnectionGUID: PuC99ST/SMezEVXWAKvk2g==
-X-CSE-MsgGUID: vtZJnGSOR+mfXpIQU3xILw==
+   d="scan'208";a="55752963"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2025 05:55:46 -0700
+X-CSE-ConnectionGUID: 18evZZsoR4Kd5vv5zfMgmw==
+X-CSE-MsgGUID: i2Sdz5NYT8qFlryDPXfl1g==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; 
-   d="scan'208";a="152919817"
+   d="scan'208";a="157708959"
 Received: from black.fi.intel.com ([10.237.72.28])
-  by fmviesa010.fm.intel.com with ESMTP; 25 Jun 2025 05:51:25 -0700
+  by fmviesa004.fm.intel.com with ESMTP; 25 Jun 2025 05:55:35 -0700
 Received: by black.fi.intel.com (Postfix, from userid 1000)
-	id 518C6862; Wed, 25 Jun 2025 15:51:13 +0300 (EEST)
+	id B7C9A207; Wed, 25 Jun 2025 15:55:33 +0300 (EEST)
+Date: Wed, 25 Jun 2025 15:55:33 +0300
 From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
-To: Andy Lutomirski <luto@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Xiongwei Song <xiongwei.song@windriver.com>,
-	Xin Li <xin3.li@intel.com>,
-	"Mike Rapoport (IBM)" <rppt@kernel.org>,
-	Brijesh Singh <brijesh.singh@amd.com>,
-	Michael Roth <michael.roth@amd.com>,
-	Tony Luck <tony.luck@intel.com>,
-	Alexey Kardashevskiy <aik@amd.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Sohil Mehta <sohil.mehta@intel.com>,
-	Ingo Molnar <mingo@kernel.org>,
-	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-	Daniel Sneddon <daniel.sneddon@linux.intel.com>,
-	Kai Huang <kai.huang@intel.com>,
-	Sandipan Das <sandipan.das@amd.com>,
-	Breno Leitao <leitao@debian.org>,
-	Rick Edgecombe <rick.p.edgecombe@intel.com>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Hou Tao <houtao1@huawei.com>,
-	Juergen Gross <jgross@suse.com>,
-	Vegard Nossum <vegard.nossum@oracle.com>,
-	Kees Cook <kees@kernel.org>,
-	Eric Biggers <ebiggers@google.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Yuntao Wang <ytcoode@gmail.com>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Christophe Leroy <christophe.leroy@csgroup.eu>,
-	Tejun Heo <tj@kernel.org>,
-	Changbin Du <changbin.du@huawei.com>,
-	Huang Shijie <shijie@os.amperecomputing.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Namhyung Kim <namhyung@kernel.org>,
-	Arnaldo Carvalho de Melo <acme@redhat.com>,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-efi@vger.kernel.org,
-	linux-mm@kvack.org,
-	"Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
-Subject: [PATCHv7 16/16] x86: Re-enable Linear Address Masking
-Date: Wed, 25 Jun 2025 15:51:09 +0300
-Message-ID: <20250625125112.3943745-18-kirill.shutemov@linux.intel.com>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250625125112.3943745-1-kirill.shutemov@linux.intel.com>
+To: Andy Lutomirski <luto@kernel.org>, 
+	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+	Peter Zijlstra <peterz@infradead.org>, Ard Biesheuvel <ardb@kernel.org>, 
+	"Paul E. McKenney" <paulmck@kernel.org>, Josh Poimboeuf <jpoimboe@kernel.org>, 
+	Xiongwei Song <xiongwei.song@windriver.com>, Xin Li <xin3.li@intel.com>, 
+	"Mike Rapoport (IBM)" <rppt@kernel.org>, Brijesh Singh <brijesh.singh@amd.com>, 
+	Michael Roth <michael.roth@amd.com>, Tony Luck <tony.luck@intel.com>, 
+	Alexey Kardashevskiy <aik@amd.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Sohil Mehta <sohil.mehta@intel.com>, 
+	Ingo Molnar <mingo@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, 
+	Daniel Sneddon <daniel.sneddon@linux.intel.com>, Kai Huang <kai.huang@intel.com>, 
+	Sandipan Das <sandipan.das@amd.com>, Breno Leitao <leitao@debian.org>, 
+	Rick Edgecombe <rick.p.edgecombe@intel.com>, Alexei Starovoitov <ast@kernel.org>, 
+	Hou Tao <houtao1@huawei.com>, Juergen Gross <jgross@suse.com>, 
+	Vegard Nossum <vegard.nossum@oracle.com>, Kees Cook <kees@kernel.org>, Eric Biggers <ebiggers@google.com>, 
+	Jason Gunthorpe <jgg@ziepe.ca>, "Masami Hiramatsu (Google)" <mhiramat@kernel.org>, 
+	Andrew Morton <akpm@linux-foundation.org>, Luis Chamberlain <mcgrof@kernel.org>, 
+	Yuntao Wang <ytcoode@gmail.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+	Christophe Leroy <christophe.leroy@csgroup.eu>, Tejun Heo <tj@kernel.org>, Changbin Du <changbin.du@huawei.com>, 
+	Huang Shijie <shijie@os.amperecomputing.com>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Namhyung Kim <namhyung@kernel.org>, Arnaldo Carvalho de Melo <acme@redhat.com>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-efi@vger.kernel.org, 
+	linux-mm@kvack.org
+Subject: Re: [PATCH] x86/vsyscall: Do not require X86_PF_INSTR to emulate
+ vsyscall
+Message-ID: <tlls63g3pslsdnegrahl7ayha6um6skpve5k2gotcqrnw4mub4@fkas3h7nd4gc>
 References: <20250625125112.3943745-1-kirill.shutemov@linux.intel.com>
+ <20250625125112.3943745-3-kirill.shutemov@linux.intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250625125112.3943745-3-kirill.shutemov@linux.intel.com>
 
-This reverts commit 3267cb6d3a174ff83d6287dcd5b0047bbd912452.
+Please ignore this patch. It was sent by mistake. The same patch included
+in the patchset in the right spot.
 
-LASS mitigates the Spectre based on LAM (SLAM) [1] and the previous
-commit made LAM depend on LASS, so we no longer need to disable LAM at
-compile time, so revert the commit that disables LAM.
-
-Adjust USER_PTR_MAX if LAM enabled, allowing tag bits to be set for
-userspace pointers. The value for the constant is defined in a way to
-avoid overflow compiler warning on 32-bit config.
-
-[1] https://download.vusec.net/papers/slam_sp24.pdf
-
-Signed-off-by: Kirill A. Shutemov <kirill.shutemov@linux.intel.com>
-Cc: Pawan Gupta <pawan.kumar.gupta@linux.intel.com>
----
- arch/x86/Kconfig             | 1 -
- arch/x86/kernel/cpu/common.c | 5 +----
- 2 files changed, 1 insertion(+), 5 deletions(-)
-
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 71019b3b54ea..2b48e916b754 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -2181,7 +2181,6 @@ config RANDOMIZE_MEMORY_PHYSICAL_PADDING
- config ADDRESS_MASKING
- 	bool "Linear Address Masking support"
- 	depends on X86_64
--	depends on COMPILE_TEST || !CPU_MITIGATIONS # wait for LASS
- 	help
- 	  Linear Address Masking (LAM) modifies the checking that is applied
- 	  to 64-bit linear addresses, allowing software to use of the
-diff --git a/arch/x86/kernel/cpu/common.c b/arch/x86/kernel/cpu/common.c
-index 97a228f917a9..6f2ae9e702bc 100644
---- a/arch/x86/kernel/cpu/common.c
-+++ b/arch/x86/kernel/cpu/common.c
-@@ -2558,11 +2558,8 @@ void __init arch_cpu_finalize_init(void)
- 	if (IS_ENABLED(CONFIG_X86_64)) {
- 		unsigned long USER_PTR_MAX = TASK_SIZE_MAX;
- 
--		/*
--		 * Enable this when LAM is gated on LASS support
- 		if (cpu_feature_enabled(X86_FEATURE_LAM))
--			USER_PTR_MAX = (1ul << 63) - PAGE_SIZE;
--		 */
-+			USER_PTR_MAX = (-1UL >> 1) & PAGE_MASK;
- 		runtime_const_init(ptr, USER_PTR_MAX);
- 
- 		/*
 -- 
-2.47.2
-
+  Kiryl Shutsemau / Kirill A. Shutemov
 
