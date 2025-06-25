@@ -1,200 +1,186 @@
-Return-Path: <linux-doc+bounces-50438-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50440-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41DF3AE7415
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 03:09:44 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32BC6AE74EC
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 04:44:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9E3F17A9639
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 01:08:06 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 22B423B822E
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 02:44:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 582597FBAC;
-	Wed, 25 Jun 2025 01:09:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 515191C700D;
+	Wed, 25 Jun 2025 02:44:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="si3Mv9bY"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="V3AWpWLV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2472AD58;
-	Wed, 25 Jun 2025 01:09:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9E7A1C5D59;
+	Wed, 25 Jun 2025 02:44:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750813757; cv=none; b=YfbjfnCbhUHL5kQrj8xgS5x0DIyWhhVbGI2r48aDF1QWXvRfaBJLE0qhdJIHzpY1Ica2isWjyiCNOUxbTdtAAdFoXfyg8LqaCiQdSc/pwwiJQ2W/L19BiKYTUQYfqH3hOo0TL2nci6Wwv+KMH2xdNSelMezmrMaAo7jMYJNd1Gc=
+	t=1750819492; cv=none; b=HRV24GOPt3fuppkVIn3ROcQNwDE0bXH7OP3+ftsNUWjqNpoWC/a+/O3D8g3r1YRQf4dqDUdk+xnF9T+a0wo7a6SUvzq2SnsaJybEwdCpnQP9S0eCqYjNb2B1D7VSC2cOuIlL4EJtdBYnDhxjIkb/FmjXtRztnnlwPAXt0v8vU8I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750813757; c=relaxed/simple;
-	bh=ar+M7uOS6NGMBXnGsSfhmdY2/NIrFzzFwB2vQ2UdzzU=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type; b=Lqkw544z7nEnHYzbIOoMDtLajewAAV6RVrA7tDGQIOxWtcHK+kuLIn2j5w49sDUwlY2fCCaAkXRrufDWM5+1fUlgrmkCoJAkav6C/qgM142QAEVwLSQ9P9He8RAMJBXXqkUtLot5U/m+ZfFjCq/TFqEb325RvAZrTecsNXhdw7g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=si3Mv9bY; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F5E3C4CEE3;
-	Wed, 25 Jun 2025 01:09:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1750813756;
-	bh=ar+M7uOS6NGMBXnGsSfhmdY2/NIrFzzFwB2vQ2UdzzU=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-	b=si3Mv9bYY/8kBwTkVAcQqZoJK6oPCfQbERzoeHQNnnjouaaju9cDPj5M/XH+LGCGf
-	 sutZ2TLPTDRMtEiUcTLAfcucjlB1tBOK027s1ZYe+qpQm8YtBXVVCggwf2H8yIixe+
-	 IDVtaRLnE7OYk8omFmO1wVvMArdpG+qU6ghcCXqwDH3eSeR/zt8PJr47crwpodU4K/
-	 +SdYth5GpIqN7Rkz05vHh/vtCMrcnD2wmTD+63kR8qXgeUEYggdfeNmyLdKPgxxZY0
-	 Z7hF7LuReE6Xw0PlrdhJ4M022p1QhH6fci9WuRh8Uql2D6xK1hPUmyC7uoJ+Q8UvXd
-	 gbu4rtou3gcJw==
-Date: Tue, 24 Jun 2025 18:09:18 -0700
-From: Kees Cook <kees@kernel.org>
-To: Huacai Chen <chenhuacai@kernel.org>
-CC: Arnd Bergmann <arnd@arndb.de>, WANG Xuerui <kernel@xen0n.name>,
- Thomas Gleixner <tglx@linutronix.de>,
- Tianyang Zhang <zhangtianyang@loongson.cn>, Bibo Mao <maobibo@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, loongarch@lists.linux.dev,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- Christoph Hellwig <hch@lst.de>, Marco Elver <elver@google.com>,
- Andrey Konovalov <andreyknvl@gmail.com>,
- Andrey Ryabinin <ryabinin.a.a@gmail.com>, Ard Biesheuvel <ardb@kernel.org>,
- Masahiro Yamada <masahiroy@kernel.org>,
- Nathan Chancellor <nathan@kernel.org>,
- Nicolas Schier <nicolas.schier@linux.dev>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
- Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
- linux-kernel@vger.kernel.org, x86@kernel.org, kasan-dev@googlegroups.com,
- linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- kvmarm@lists.linux.dev, linux-riscv@lists.infradead.org,
- linux-s390@vger.kernel.org, linux-efi@vger.kernel.org,
- linux-hardening@vger.kernel.org, linux-kbuild@vger.kernel.org,
- linux-security-module@vger.kernel.org, linux-kselftest@vger.kernel.org,
- sparclinux@vger.kernel.org, llvm@lists.linux.dev
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_10/14=5D_loongarch=3A_Han?=
- =?US-ASCII?Q?dle_KCOV_=5F=5Finit_vs_inline_mismatches?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAAhV-H5oHPG+etNawAmVwyDtg80iKUrAM_m3Vj57bBO0scHqvQ@mail.gmail.com>
-References: <20250523043251.it.550-kees@kernel.org> <20250523043935.2009972-10-kees@kernel.org> <CAAhV-H4WxAwXTYVFOnphgHN80-_6jt77YZ_rw-sOBoBjjiN-yQ@mail.gmail.com> <CAAhV-H5oHPG+etNawAmVwyDtg80iKUrAM_m3Vj57bBO0scHqvQ@mail.gmail.com>
-Message-ID: <B5A11282-CB0E-46E0-A5D7-EF4D8BFC23B4@kernel.org>
+	s=arc-20240116; t=1750819492; c=relaxed/simple;
+	bh=KMalwzn3BoF9rtZrZXblBqSJlr49R7PWwYfW/jcTElw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=AtkorZbg+k4twXeeK09Uf1+8akdkUUMoag1f/C003F7C74j772jml20PQkinMGazviB+ZyTc7423Xfh/abFUjcRL2AEHhEFaQ0A8VPB/VcFwPXRkz4FwKOE/3Wmc0+5q5aEYymdeGuFdN/fl7J/r4KIs8hMQbf65bsGV1GoBxS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=V3AWpWLV; arc=none smtp.client-ip=90.155.50.34
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+	:Reply-To:Content-ID:Content-Description;
+	bh=QhOKuwEXUK6jChw5nZdyTrOBXqUWrLJ8kphrotwMKFI=; b=V3AWpWLVWaDzC98R8eWDkEMmoz
+	AivrGnORKy304ztblnzcBMPzXPxEKXGbdH99j4qF7S78JSwFp/LBJTkOJUcUr0az22YhbpTQ0EnFj
+	M4v5NR7/fHmsLvQ8Efnak0zRQJWT2hIkvbsmV81xmvoZKIBBlYevYE09dT/LDqdcPM5d0HIKogOTU
+	Oi+Dhq3ob5GW4Sb9eK7nGqnUXfDESXfJn28csgxoEOAPUebMAiw3Otb3c54ZV9BrnvS53zNflGn7k
+	FFtoKWYgye7s2OhG3/9GybXhfOH1gljjpQmjG9p/cmUnOGPxbynQBMuW1/JItCzc4HEu4SrFFXgjw
+	FFJDi9IQ==;
+Received: from [50.53.25.54] (helo=[192.168.254.17])
+	by casper.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1uUG40-00000008GCY-2IGy;
+	Wed, 25 Jun 2025 02:40:40 +0000
+Message-ID: <5ea93880-72fa-46c7-b69b-82e2021aa567@infradead.org>
+Date: Tue, 24 Jun 2025 19:40:37 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/8] docs: dma-api: remove duplicate description of the
+ DMA pool API
+To: Petr Tesarik <ptesarik@suse.com>, Jonathan Corbet <corbet@lwn.net>,
+ Morton <akpm@linux-foundation.org>
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
+ Leon Romanovsky <leon@kernel.org>, Keith Busch <kbusch@kernel.org>,
+ Caleb Sander Mateos <csander@purestorage.com>,
+ Sagi Grimberg <sagi@grimberg.me>, Jens Axboe <axboe@kernel.dk>,
+ John Garry <john.g.garry@oracle.com>,
+ "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:MEMORY MANAGEMENT" <linux-mm@kvack.org>
+References: <20250624133923.1140421-1-ptesarik@suse.com>
+ <20250624133923.1140421-6-ptesarik@suse.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20250624133923.1140421-6-ptesarik@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+Hi,
 
+On 6/24/25 6:39 AM, Petr Tesarik wrote:
+> The DMA pool API is documented in Memory Management APIs. Do not duplicate
+> it in DMA API documentation.
+> 
 
-On June 24, 2025 5:31:12 AM PDT, Huacai Chen <chenhuacai@kernel=2Eorg> wro=
-te:
->Hi, Kees,
->
->On Thu, Jun 19, 2025 at 4:55=E2=80=AFPM Huacai Chen <chenhuacai@kernel=2E=
-org> wrote:
->>
->> Hi, Kees,
->>
->> On Fri, May 23, 2025 at 12:39=E2=80=AFPM Kees Cook <kees@kernel=2Eorg> =
-wrote:
->> >
->> > When KCOV is enabled all functions get instrumented, unless
->> > the __no_sanitize_coverage attribute is used=2E To prepare for
->> > __no_sanitize_coverage being applied to __init functions, we have to
->> > handle differences in how GCC's inline optimizations get resolved=2E =
-For
->> > loongarch this exposed several places where __init annotations were
->> > missing but ended up being "accidentally correct"=2E Fix these cases =
-and
->> > force one function to be inline with __always_inline=2E
->> >
->> > Signed-off-by: Kees Cook <kees@kernel=2Eorg>
->> > ---
->> > Cc: Huacai Chen <chenhuacai@kernel=2Eorg>
->> > Cc: WANG Xuerui <kernel@xen0n=2Ename>
->> > Cc: Thomas Gleixner <tglx@linutronix=2Ede>
->> > Cc: Tianyang Zhang <zhangtianyang@loongson=2Ecn>
->> > Cc: Bibo Mao <maobibo@loongson=2Ecn>
->> > Cc: Jiaxun Yang <jiaxun=2Eyang@flygoat=2Ecom>
->> > Cc: <loongarch@lists=2Elinux=2Edev>
->> > ---
->> >  arch/loongarch/include/asm/smp=2Eh | 2 +-
->> >  arch/loongarch/kernel/time=2Ec     | 2 +-
->> >  arch/loongarch/mm/ioremap=2Ec      | 4 ++--
->> >  3 files changed, 4 insertions(+), 4 deletions(-)
->> >
->> > diff --git a/arch/loongarch/include/asm/smp=2Eh b/arch/loongarch/incl=
-ude/asm/smp=2Eh
->> > index ad0bd234a0f1=2E=2E88e19d8a11f4 100644
->> > --- a/arch/loongarch/include/asm/smp=2Eh
->> > +++ b/arch/loongarch/include/asm/smp=2Eh
->> > @@ -39,7 +39,7 @@ int loongson_cpu_disable(void);
->> >  void loongson_cpu_die(unsigned int cpu);
->> >  #endif
->> >
->> > -static inline void plat_smp_setup(void)
->> > +static __always_inline void plat_smp_setup(void)
->> Similar to x86 and arm, I prefer to mark it as __init rather than
->> __always_inline=2E
->If you have no objections, I will apply this patch with the above modific=
-ation=2E
+This looks like it works (from just visual inspection), but I'm wondering
+why not just move all DMA API interfaces to dma-api.rst and don't have any
+in mm-api.rst... ?
 
-That's fine by me; thank you! I didn't have a chance yet to verify that it=
- actually fixes the mismatches I saw, but if it looks good to you, yes plea=
-se=2E :)
+Thanks.
 
--Kees
+> Signed-off-by: Petr Tesarik <ptesarik@suse.com>
+> ---
+>  Documentation/core-api/dma-api.rst | 62 +-----------------------------
+>  Documentation/core-api/mm-api.rst  |  2 +
+>  2 files changed, 4 insertions(+), 60 deletions(-)
+> 
+> diff --git a/Documentation/core-api/dma-api.rst b/Documentation/core-api/dma-api.rst
+> index 3e89e3b0ecfd..f7fddaf7510c 100644
+> --- a/Documentation/core-api/dma-api.rst
+> +++ b/Documentation/core-api/dma-api.rst
+> @@ -83,66 +83,8 @@ much like a struct kmem_cache, except that they use the DMA-coherent allocator,
+>  not __get_free_pages().  Also, they understand common hardware constraints
+>  for alignment, like queue heads needing to be aligned on N-byte boundaries.
+>  
+> -
+> -::
+> -
+> -	struct dma_pool *
+> -	dma_pool_create(const char *name, struct device *dev,
+> -			size_t size, size_t align, size_t alloc);
+> -
+> -dma_pool_create() initializes a pool of DMA-coherent buffers
+> -for use with a given device.  It must be called in a context which
+> -can sleep.
+> -
+> -The "name" is for diagnostics (like a struct kmem_cache name); dev and size
+> -are like what you'd pass to dma_alloc_coherent().  The device's hardware
+> -alignment requirement for this type of data is "align" (which is expressed
+> -in bytes, and must be a power of two).  If your device has no boundary
+> -crossing restrictions, pass 0 for alloc; passing 4096 says memory allocated
+> -from this pool must not cross 4KByte boundaries.
+> -
+> -::
+> -
+> -	void *
+> -	dma_pool_zalloc(struct dma_pool *pool, gfp_t mem_flags,
+> -		        dma_addr_t *handle)
+> -
+> -Wraps dma_pool_alloc() and also zeroes the returned memory if the
+> -allocation attempt succeeded.
+> -
+> -
+> -::
+> -
+> -	void *
+> -	dma_pool_alloc(struct dma_pool *pool, gfp_t gfp_flags,
+> -		       dma_addr_t *dma_handle);
+> -
+> -This allocates memory from the pool; the returned memory will meet the
+> -size and alignment requirements specified at creation time.  Pass
+> -GFP_ATOMIC to prevent blocking, or if it's permitted (not
+> -in_interrupt, not holding SMP locks), pass GFP_KERNEL to allow
+> -blocking.  Like dma_alloc_coherent(), this returns two values:  an
+> -address usable by the CPU, and the DMA address usable by the pool's
+> -device.
+> -
+> -::
+> -
+> -	void
+> -	dma_pool_free(struct dma_pool *pool, void *vaddr,
+> -		      dma_addr_t addr);
+> -
+> -This puts memory back into the pool.  The pool is what was passed to
+> -dma_pool_alloc(); the CPU (vaddr) and DMA addresses are what
+> -were returned when that routine allocated the memory being freed.
+> -
+> -::
+> -
+> -	void
+> -	dma_pool_destroy(struct dma_pool *pool);
+> -
+> -dma_pool_destroy() frees the resources of the pool.  It must be
+> -called in a context which can sleep.  Make sure you've freed all allocated
+> -memory back to the pool before you destroy it.
+> +See :ref:`Documentation/core-api/mm-api.rst <dma_pools>` for a detailed
+> +description of the DMA pools API.
+>  
+>  
+>  Part Ic - DMA addressing limitations
+> diff --git a/Documentation/core-api/mm-api.rst b/Documentation/core-api/mm-api.rst
+> index a61766328ac0..de0bab6e3fdd 100644
+> --- a/Documentation/core-api/mm-api.rst
+> +++ b/Documentation/core-api/mm-api.rst
+> @@ -91,6 +91,8 @@ Memory pools
+>  .. kernel-doc:: mm/mempool.c
+>     :export:
+>  
+> +.. _dma_pools:
+> +
+>  DMA pools
+>  =========
+>  
 
->
->
->Huacai
->
->>
->> Huacai
->>
->> >  {
->> >         loongson_smp_setup();
->> >  }
->> > diff --git a/arch/loongarch/kernel/time=2Ec b/arch/loongarch/kernel/t=
-ime=2Ec
->> > index bc75a3a69fc8=2E=2E367906b10f81 100644
->> > --- a/arch/loongarch/kernel/time=2Ec
->> > +++ b/arch/loongarch/kernel/time=2Ec
->> > @@ -102,7 +102,7 @@ static int constant_timer_next_event(unsigned lon=
-g delta, struct clock_event_dev
->> >         return 0;
->> >  }
->> >
->> > -static unsigned long __init get_loops_per_jiffy(void)
->> > +static unsigned long get_loops_per_jiffy(void)
->> >  {
->> >         unsigned long lpj =3D (unsigned long)const_clock_freq;
->> >
->> > diff --git a/arch/loongarch/mm/ioremap=2Ec b/arch/loongarch/mm/iorema=
-p=2Ec
->> > index 70ca73019811=2E=2Edf949a3d0f34 100644
->> > --- a/arch/loongarch/mm/ioremap=2Ec
->> > +++ b/arch/loongarch/mm/ioremap=2Ec
->> > @@ -16,12 +16,12 @@ void __init early_iounmap(void __iomem *addr, uns=
-igned long size)
->> >
->> >  }
->> >
->> > -void *early_memremap_ro(resource_size_t phys_addr, unsigned long siz=
-e)
->> > +void * __init early_memremap_ro(resource_size_t phys_addr, unsigned =
-long size)
->> >  {
->> >         return early_memremap(phys_addr, size);
->> >  }
->> >
->> > -void *early_memremap_prot(resource_size_t phys_addr, unsigned long s=
-ize,
->> > +void * __init early_memremap_prot(resource_size_t phys_addr, unsigne=
-d long size,
->> >                     unsigned long prot_val)
->> >  {
->> >         return early_memremap(phys_addr, size);
->> > --
->> > 2=2E34=2E1
->> >
+-- 
+~Randy
 
---=20
-Kees Cook
 
