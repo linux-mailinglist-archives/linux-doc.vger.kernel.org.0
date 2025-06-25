@@ -1,78 +1,61 @@
-Return-Path: <linux-doc+bounces-50494-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50524-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AD70AE80A5
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 13:11:38 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 578B1AE818A
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 13:39:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 258AA16A452
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 11:11:38 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DDC2A1899885
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Jun 2025 11:38:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9C4E29E100;
-	Wed, 25 Jun 2025 11:11:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD7CD25C704;
+	Wed, 25 Jun 2025 11:38:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="fBWXkvij"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iPzpbQqo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7238929ACF9;
-	Wed, 25 Jun 2025 11:11:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACC29255E23;
+	Wed, 25 Jun 2025 11:38:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750849893; cv=none; b=hsygjHZunpiZ96mZEWIEPBJUQstb/Wdkd5teZMlteuD07rrM4i8hIrM8oI2hUylYFYAWvLXzh1AteFbcrYanI1ncwhBvNN64LC/km5svoNgM4OJSeFVU4rF0uUMatWDlbToFvZxOC6zsZALTAEwmtxo1pDm80K8WyHo9I7N8+Bc=
+	t=1750851483; cv=none; b=qN1fJld6q3I1OF9TIyqIn7oMwIxLVfDEIoZum8U36EuEwEDCUCBlv+TZElY61t//wGxli4x3c/nw25TuIs3j9gb9dLUsbeO/dvjiItYuZGOWtsVrbGlJ8Y0+vGkgUeeEnu68EYeQm6WWD1ISD7wV2SmW27tpUbF09nLaWRyxj/M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750849893; c=relaxed/simple;
-	bh=P4G3trloAWpcB1GNXQBtfIed3GuOFg6SZBVv40Mj4BI=;
+	s=arc-20240116; t=1750851483; c=relaxed/simple;
+	bh=BtRKAJIlcJxb927rW2Z7+ZRhdms+50Dftb4cK00J1ck=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AlQnTznTSvrQZY+WbNfDEOiBbUBXeRVbvatcuvAHHkjRK7JEd0DupLnbPEUrPZLsTPjB2oUb7KH6n4GBP+rMY1lA2vfALtIPQIb8vxmneSeH9MVjju2w2zLN+BdjWvXqSD9l0PCDXhwp4EyhCjvmggylU8ad8/ihAOmiRsKDV58=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=fBWXkvij; arc=none smtp.client-ip=192.198.163.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1750849892; x=1782385892;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=P4G3trloAWpcB1GNXQBtfIed3GuOFg6SZBVv40Mj4BI=;
-  b=fBWXkvij12kXhZu9oxoK/CP/wuxRca84yA3qj8BRbF80bfcyuRGj5Puu
-   vKJr8hzZPR2jI7YrZwSKT9eIuktoEy9CC1VtW8ttv78D3SOnJyVlht+jW
-   Da6GVx1lIislx1nW5cNTF8sgtmN2wBCNBB444ahjASVpy5LwwTB0I63CF
-   UGvvnV2Rawm14I2F/9ZMOEv12jWl52AZqVWBh2ftPEOu7gwnfEbPBc0af
-   kAFg9qmwcnt8HZwEn2lCLtQAhE4dQjkFgFItyuxQaLutiKA9whvhyXQrJ
-   t34Q6AzFGEqROucHKKD5CKtsjNuKGWJjDOsgLLMsJM1l4MoH1T1Szovcv
-   g==;
-X-CSE-ConnectionGUID: Z8+0V3uCRbOb0a1hZrTmuw==
-X-CSE-MsgGUID: FMWgKP3MSd2cTeBdC1LVmQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11474"; a="53180219"
-X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; 
-   d="scan'208";a="53180219"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jun 2025 04:11:31 -0700
-X-CSE-ConnectionGUID: 3E/jnHXVQRmZNSmNFnk2kQ==
-X-CSE-MsgGUID: zFE+wDJOSUGEa8J01jfj2g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,264,1744095600"; 
-   d="scan'208";a="152318891"
-Received: from lkp-server01.sh.intel.com (HELO e8142ee1dce2) ([10.239.97.150])
-  by fmviesa006.fm.intel.com with ESMTP; 25 Jun 2025 04:11:28 -0700
-Received: from kbuild by e8142ee1dce2 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1uUO2I-000T2o-0E;
-	Wed, 25 Jun 2025 11:11:26 +0000
-Date: Wed, 25 Jun 2025 19:10:31 +0800
-From: kernel test robot <lkp@intel.com>
-To: Joanne Koong <joannelkoong@gmail.com>, linux-fsdevel@vger.kernel.org
-Cc: oe-kbuild-all@lists.linux.dev, hch@lst.de, miklos@szeredi.hu,
-	brauner@kernel.org, djwong@kernel.org, anuj20.g@samsung.com,
-	linux-xfs@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-block@vger.kernel.org, gfs2@lists.linux.dev,
-	kernel-team@meta.com
-Subject: Re: [PATCH v3 12/16] fuse: use iomap for buffered writes
-Message-ID: <202506251857.gt3y42uZ-lkp@intel.com>
-References: <20250624022135.832899-13-joannelkoong@gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=g95ixHwCumh0/GdUWCKxeOabjLg8UXz9bAt3LbYJhEN/EDRO2ptrhNSzuc/9oAEQ+6BysV2Tp0dkSwE6MzXQSvu3DkfECwI71kw20jnbuwNxxmAtXg8mOQCbG1T2AJ0BHtGFMKPMLYEFR1rQgn5QymKxXb/8R1NbYaCelywnBJI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iPzpbQqo; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AA68C4CEEA;
+	Wed, 25 Jun 2025 11:38:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1750851483;
+	bh=BtRKAJIlcJxb927rW2Z7+ZRhdms+50Dftb4cK00J1ck=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=iPzpbQqojFsV3ivsfPREuSXlhf1PNbg7WIj2wuf4PxwPYTNeYAoEs8GxP6TrZz6Fv
+	 bQsVwdojSeei2yXiZz+V710lPeUwS5KoNRvooJfke0SYx9zZUQSVp5GXqh3P5+i+1r
+	 DCc1+gkyFMvE6WfgA9AwQmCTRoTYdk4D3ITLC3BIUaYj2tbHh+7st+jZeyd/aPKYQn
+	 TQF9xDOR8TKBagGbXNsqAdKTiodL35WPtGnkuc3kbMZOBJNUu2CiCkXKcL1vwn3v2M
+	 b6pcnt4XHQUc2Mqa7ZJuySk+2v71zk6z0SNIDAXvJypnCagOpd5CZRw30u2jlu0DLG
+	 lv+PW/2ECL6Ng==
+Date: Wed, 25 Jun 2025 14:37:56 +0300
+From: Leon Romanovsky <leon@kernel.org>
+To: Mark Bloch <mbloch@nvidia.com>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	Simon Horman <horms@kernel.org>, saeedm@nvidia.com, gal@nvidia.com,
+	tariqt@nvidia.com, Jonathan Corbet <corbet@lwn.net>,
+	netdev@vger.kernel.org, linux-rdma@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next 0/5] net/mlx5e: Add support for PCIe congestion
+ events
+Message-ID: <20250625113756.GA727865@unreal>
+References: <20250619113721.60201-1-mbloch@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -81,40 +64,23 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250624022135.832899-13-joannelkoong@gmail.com>
+In-Reply-To: <20250619113721.60201-1-mbloch@nvidia.com>
 
-Hi Joanne,
+On Thu, Jun 19, 2025 at 02:37:16PM +0300, Mark Bloch wrote:
+> PCIe congestion events are events generated by the firmware when the
+> device side has sustained PCIe inbound or outbound traffic above
+> certain thresholds. The high and low threshold are hysteresis thresholds
+> to prevent flapping: once the high threshold has been reached, a low
+> threshold event will be triggered only after the bandwidth usage went
+> below the low threshold.
 
-kernel test robot noticed the following build errors:
+<...>
 
-[auto build test ERROR on brauner-vfs/vfs.all]
-[also build test ERROR on xfs-linux/for-next linus/master v6.16-rc3 next-20250625]
-[cannot apply to gfs2/for-next mszeredi-fuse/for-next]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+> Dragos Tatulea (5):
+>   net/mlx5: Small refactor for general object capabilities
+>   net/mlx5: Add IFC bits for PCIe Congestion Event object
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Joanne-Koong/iomap-pass-more-arguments-using-struct-iomap_writepage_ctx/20250624-102709
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git vfs.all
-patch link:    https://lore.kernel.org/r/20250624022135.832899-13-joannelkoong%40gmail.com
-patch subject: [PATCH v3 12/16] fuse: use iomap for buffered writes
-config: arm64-randconfig-003-20250625 (https://download.01.org/0day-ci/archive/20250625/202506251857.gt3y42uZ-lkp@intel.com/config)
-compiler: aarch64-linux-gcc (GCC) 12.3.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250625/202506251857.gt3y42uZ-lkp@intel.com/reproduce)
+Applied these patches to mlx5-next.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202506251857.gt3y42uZ-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   aarch64-linux-ld: fs/fuse/file.o: in function `fuse_cache_write_iter':
->> file.c:(.text+0x880c): undefined reference to `iomap_file_buffered_write'
->> file.c:(.text+0x880c): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `iomap_file_buffered_write'
->> aarch64-linux-ld: fs/fuse/file.o:(.rodata+0x360): undefined reference to `iomap_release_folio'
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Thanks
 
