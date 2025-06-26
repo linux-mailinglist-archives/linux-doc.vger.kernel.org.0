@@ -1,115 +1,133 @@
-Return-Path: <linux-doc+bounces-50731-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50745-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E8A7AE97C4
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Jun 2025 10:13:34 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id D9AECAE9829
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Jun 2025 10:23:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1B5571C25986
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Jun 2025 08:13:50 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C053A1C419D6
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Jun 2025 08:20:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 208F825C70D;
-	Thu, 26 Jun 2025 08:13:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3985B25F78D;
+	Thu, 26 Jun 2025 08:20:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R2hlSv+9"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GMkCf+DE"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF2DA25A34F;
-	Thu, 26 Jun 2025 08:13:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F52025BF1F;
+	Thu, 26 Jun 2025 08:20:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750925608; cv=none; b=Eg4Qntkac0wdvJiStsRc62/3+x9yvnJ5LfkgVXexkC7bJyudktz2YXq89cMQQkfoNcQggAabXhPsW1WSdjkJ9npk3Ml2KJjxKz/OKkjEITZtfFhu9w8Uy1JZh+Su4yWoDuv+3lzehXjhh35XYLBKxDVZt4qx2INDqde00eaS+zg=
+	t=1750926028; cv=none; b=ilRLLQTyqGfnWIC9V0bro5UgPBEgWQcWE7xMGWAwFEyJz8u1fBwjetWDQwjiobq+29xsQdSvVoUMOxr6DNMW54JtdpKTcvIA11tEKLhhyi0tH7dkgZlh2krmwzLtE6Crj0eR80yZ9j+2iAmbdTkFtSdAV4CA/VPopJZ0Df70EA8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750925608; c=relaxed/simple;
-	bh=v9oPQ++3T/oLHadwElBOCj5ha5V/O+Y96e7j6LLicng=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hrVy35HglUZHIZaku9fcThUyJSpHppKzVhbvd9wSwxa4nbgp6i9rsUlu8D39aLXHFvzS76Gfh+xBYjSmJYIeSyKGPXxx/7zKwwUddIfZJ8mBdMVj3VqKLSP+VqBCVj0w6PlelQ2nAOX8F0jBazx057HKLv7+eCoNef1ZvEKK8HE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R2hlSv+9; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5827C4CEEB;
-	Thu, 26 Jun 2025 08:13:27 +0000 (UTC)
+	s=arc-20240116; t=1750926028; c=relaxed/simple;
+	bh=ALIZ1pJr5k/RzBFhUWBQWpSyvKsVrE4l4KazGh9wArI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GEiKSHhxZo/Vr0hYmAPw+IsJOwrA6INMsVN7fQ1TuYPDw3sEx94U1/YQUv9NhbO4E/Lph70FZnM7xjwGqvdl1hVAkokAMbSHSMbkotdwkAE1pBjL4EMkv41EMoapWTCwmI3oNRPvXOUQzaoW5gtu7BfdrBOhMG+AKiU8HmqQM1c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GMkCf+DE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C508CC4CEEB;
+	Thu, 26 Jun 2025 08:20:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1750925607;
-	bh=v9oPQ++3T/oLHadwElBOCj5ha5V/O+Y96e7j6LLicng=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=R2hlSv+9dfCQPGwlVxYCIGjwbTFcgQ4z6XmcsZ2JPk1WWS5vfPluEOXC6sdTLIh99
-	 4frwL4/xpy0tnsMg8E1IwIpCS+rbSEU8NZgf/2b+6P0EXNgSTwf8fPAN9PzqGdFrjn
-	 CpxaRE1S/CeCrmtJaARNn/cTscPEv1NHuPIyEyIqNlDdzzTdw7BWIwg0sX0ws1473K
-	 jCmR7agEV2tQ8dbd09laT4eOZJmWamYODwqSV7sOlVeXF89H3xpS3RUlVK82Tm0nzR
-	 C1/0t54wyMRUIEuIa/1K5r+m4JDCrDjT03l0hUtZMF5Dx+6F0eFk9O1+xuPsJ1Pnrz
-	 rOlWWQfBXoeOg==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1uUhjT-00000004swE-2Qwb;
-	Thu, 26 Jun 2025 10:13:19 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Akira Yokosawa" <akiyks@gmail.com>,
-	"Breno Leitao" <leitao@debian.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	"Donald Hunter" <donald.hunter@gmail.com>,
-	"Eric Dumazet" <edumazet@google.com>,
-	"Ignacio Encinas Rubio" <ignacio@iencinas.com>,
-	"Jan Stancek" <jstancek@redhat.com>,
-	"Marco Elver" <elver@google.com>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	"Paolo Abeni" <pabeni@redhat.com>,
-	"Randy Dunlap" <rdunlap@infradead.org>,
-	"Ruben Wauters" <rubenru09@aol.com>,
-	"Shuah Khan" <skhan@linuxfoundation.org>,
-	joel@joelfernandes.org,
-	linux-kernel-mentees@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	lkmm@lists.linux.dev,
-	netdev@vger.kernel.org,
-	peterz@infradead.org,
-	stern@rowland.harvard.edu
-Subject: [PATCH v8 13/13] docs: parser_yaml.py: fix backward compatibility with old docutils
-Date: Thu, 26 Jun 2025 10:13:09 +0200
-Message-ID: <d00a73776167e486a1804cf87746fa342294c943.1750925410.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1750925410.git.mchehab+huawei@kernel.org>
-References: <cover.1750925410.git.mchehab+huawei@kernel.org>
+	s=k20201202; t=1750926027;
+	bh=ALIZ1pJr5k/RzBFhUWBQWpSyvKsVrE4l4KazGh9wArI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=GMkCf+DE09SfeoFseP/++MSgoDjHAMDKK8294mJN5gBkMc7yGuBlkU0Le+E8NyAFP
+	 i7JpadX729QXtkPS7klBphIorXF38qjX2RDQD6wq6k3uV+dsiQoATQgk7NmWm5M6Ks
+	 aQpHIOXx5ggqME5vJFZv8P3jAzBw/aLs/rJcyTgmUk2i1SD/cssA3BqWraxniNzqsx
+	 Yd65FZ5AkH+ea3kngqDuluC5H6aLfLCtGLMwqopj3dZ2fPs4hEUI5K22sFJ9REAmX/
+	 eKjZpJXOf46uRMzH4Q4Enl3ftzCe28PrTKZia3abFUvvqVEZRMVjcVw5dYLJbOSmCg
+	 MNnMMgwXmpILQ==
+Date: Thu, 26 Jun 2025 09:20:24 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Xose Vazquez Perez <xose.vazquez@gmail.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	DOC ML <linux-doc@vger.kernel.org>,
+	KERNEL ML <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] MAINTAINERS: standardize git.kernel.org URLs
+Message-ID: <20250626-badland-carefully-f0b5f285c93f@spud>
+References: <20250625142017.237949-1-xose.vazquez@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="vekMi3Ef6bOeFUHu"
+Content-Disposition: inline
+In-Reply-To: <20250625142017.237949-1-xose.vazquez@gmail.com>
 
-As reported by Akira, older docutils versions are not compatible
-with the way some Sphinx versions send tab_width. Add a code to
-address it.
 
-Closes: https://lore.kernel.org/linux-doc/598b2cb7-2fd7-4388-96ba-2ddf0ab55d2a@gmail.com/
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/sphinx/parser_yaml.py | 4 ++++
- 1 file changed, 4 insertions(+)
+--vekMi3Ef6bOeFUHu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/Documentation/sphinx/parser_yaml.py b/Documentation/sphinx/parser_yaml.py
-index 8288e2ff7c7c..1602b31f448e 100755
---- a/Documentation/sphinx/parser_yaml.py
-+++ b/Documentation/sphinx/parser_yaml.py
-@@ -77,6 +77,10 @@ class YamlParser(Parser):
- 
-                 result.append(line, document.current_source, lineoffset)
- 
-+            # Fix backward compatibility with docutils < 0.17.1
-+            if "tab_width" not in vars(document.settings):
-+                document.settings.tab_width = 8
-+
-             rst_parser = RSTParser()
-             rst_parser.parse('\n'.join(result), document)
- 
--- 
-2.49.0
+On Wed, Jun 25, 2025 at 04:20:16PM +0200, Xose Vazquez Perez wrote:
+> replace https: with git:, delete trailing /, and identify repos as "git"
+>=20
+> Cc: Jonathan Corbet <corbet@lwn.net> (maintainer:DOCUMENTATION)
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: DOC ML <linux-doc@vger.kernel.org> (open list:DOCUMENTATION)
+> Cc: KERNEL ML <linux-kernel@vger.kernel.org> (open list)
+> Signed-off-by: Xose Vazquez Perez <xose.vazquez@gmail.com>
 
+>  MICROCHIP SOC DRIVERS
+>  M:	Conor Dooley <conor@kernel.org>
+>  S:	Supported
+> -T:	git https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git/
+> +T:	git git://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git
+>  F:	Documentation/devicetree/bindings/soc/microchip/
+>  F:	drivers/soc/microchip/
+
+> @@ -21360,7 +21360,7 @@ M:	Conor Dooley <conor@kernel.org>
+>  L:	linux-riscv@lists.infradead.org
+>  S:	Maintained
+>  Q:	https://patchwork.kernel.org/project/linux-riscv/list/
+> -T:	git https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git/
+> +T:	git git://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git
+>  F:	arch/riscv/boot/dts/canaan/
+>  F:	arch/riscv/boot/dts/microchip/
+>  F:	arch/riscv/boot/dts/sifive/
+
+>  STANDALONE CACHE CONTROLLER DRIVERS
+>  M:	Conor Dooley <conor@kernel.org>
+>  S:	Maintained
+> -T:	git https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git/
+> +T:	git git://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git
+>  F:	Documentation/devicetree/bindings/cache/
+>  F:	drivers/cache
+> =20
+>  STARFIVE SOC DRIVERS
+>  M:	Conor Dooley <conor@kernel.org>
+>  S:	Maintained
+> -T:	git https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git/
+> +T:	git git://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git
+>  F:	Documentation/devicetree/bindings/soc/starfive/
+
+No rationale provided, NAK.
+On the other hand, https links are clickable on docs.kernel.org's copy
+of the maintainers file.
+I'd appreciate being CCed if/when you touch my entries here again.
+
+Cheers,
+Conor.
+
+--vekMi3Ef6bOeFUHu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaF0CqwAKCRB4tDGHoIJi
+0jlsAQCHlSlyfw6RZS0OuHi/PIEJAPewe1LMKCoYjRuiBHa13QEAn//Yqcqm1jUz
+aCcQlQTSwTkcCdUD9WLIJnuw6fYRkA4=
+=Id93
+-----END PGP SIGNATURE-----
+
+--vekMi3Ef6bOeFUHu--
 
