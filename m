@@ -1,117 +1,163 @@
-Return-Path: <linux-doc+bounces-50973-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50963-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8BDDAEB5ED
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 13:08:35 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4A22AEB5CC
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 13:05:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DA167188937E
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 11:08:44 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 2BB2C7AF7B6
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 11:02:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F64A2DD5F4;
-	Fri, 27 Jun 2025 11:05:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A609429ACF7;
+	Fri, 27 Jun 2025 11:03:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TEI97BOK"
+	dkim=pass (1024-bit key) header.d=didiglobal.com header.i=@didiglobal.com header.b="KApNmOW0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D7B42DBF65;
-	Fri, 27 Jun 2025 11:05:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
+Received: from mx10.didiglobal.com (mx10.didiglobal.com [111.202.70.125])
+	by smtp.subspace.kernel.org (Postfix) with SMTP id B1C922980B4;
+	Fri, 27 Jun 2025 11:03:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=111.202.70.125
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751022306; cv=none; b=ApuS4t0GWhzWnjJTcd3VakdHxXDe8NxzXyCn1wXxSRDB8piqfuOvohRyE5xQorypEG4HSeChcqVfFETklE+nZn6t0TQ59TIYX9fFyyci2TNzEoMRpdGXU0WfZoVu7j1tYpW1+16otC4xjsj8fHQLp+YHELaO81j9bWttKPGqjgQ=
+	t=1751022214; cv=none; b=PkcBiXR8QjMgt/ROrZoVBS9g8FD1eYiCz4sZaMspNgUsUpcGFXNzNVILJ9kIwUW8ipCR6PwqWpdwghUMi4uE9KLAidQzJOKQOSKBYb1DCio7Jtfbivo3oe4ich0fM2bBpF4WwMz7d2YrfvBTrjsq4pvYHOBC/PoEqf5lsSwEAv0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751022306; c=relaxed/simple;
-	bh=B06vqLsvetg1jFxGBYXyf+6nQe601dcV30vu83BMpw4=;
-	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
-	 MIME-Version:Content-Type; b=qlCekw3K81aslsH+3mY5IZXgFLnZ2HLPjvQFW9VQaPQ+uAa79KHe915gsVCcIKz+nf3AJd6a+6iFWBs0/CHBR70vIRfBDiLbrejyj/nMXN0dBEjGIYOlp5hJnuu3G6gwzuBIbNb3HZo6ZM+QgtVaP+IRc1HzO008cuRxWrJmHjw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TEI97BOK; arc=none smtp.client-ip=209.85.128.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4537deebb01so10696165e9.0;
-        Fri, 27 Jun 2025 04:05:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751022303; x=1751627103; darn=vger.kernel.org;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=B06vqLsvetg1jFxGBYXyf+6nQe601dcV30vu83BMpw4=;
-        b=TEI97BOKbaCHNyc8Q68TFIgi0Yh0TDvgdHvtyVszvVDZysangSrhIif0icgg8FrHSz
-         ozPDkSJopuhwZjSVaOVeW8os3v0xW6m+wfCMss9uq0xjV2lAEqu59qsSac6KRdUm11yV
-         Vo+TpdjebXz7/Pd7EmXlp3lJklcZTiPs5yqMECYuJaBb12Gu4WedxXsqddVt+VLhcsAO
-         L8jcF12Pr4M79Dh9ZOgrCD6BuMZVyO5XJhiknVew3Pqb1MmPIbtCmpsUpUk0gd/dBi1r
-         i8nCrfDld16wtHd87v0IaFv0WUSChZWjzc5X1VwUmpcMiV2X30G7FZORK2Jf8ydbDt+z
-         Wr2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751022303; x=1751627103;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=B06vqLsvetg1jFxGBYXyf+6nQe601dcV30vu83BMpw4=;
-        b=H8cB03UGprc5nmEXvO6th11U5twIwGUEsedTgx+whOptMYUSRla4IsTbQKWAHfmXtB
-         nTrPYFU0WEkk+EEWblAM6OpitCveYJuEUrUOFrT9hCoFEt/Oc9QyLxPZnggFGZSKNSsf
-         7S6waGcBkgNT8xBmUZO7/uz0cEv6j0tWqvj2X4S6csW4lF4j+B60bkeW77AgYFz1YWyb
-         3mrtCA5+gAlcB9ckI0QNHcoW0yvJsHOK6+BSmEq7EBKia47K8aYXFOmN+ihg0NN6HUpN
-         +V4AQR9sOrN3WUcIk/9OkvypYgwQihAAdWlM08XM2syWD8e71PXT0/kPBICCuj8+R9ZX
-         x/OQ==
-X-Forwarded-Encrypted: i=1; AJvYcCX8Y59V1Z6PT183VamKk9V5Cqxqg2C3CzgVm0UFceSyLMOzsg9nE9hpkPezbMsej9nMfSaFM6dulK1ixK0=@vger.kernel.org, AJvYcCXGJNAF0De8bUXRMtKbFsyoqsrRJ+qSbLgo/Hc6hFR/AmGluM543q7f5sydSFCrYUsSKgpKd2xm@vger.kernel.org
-X-Gm-Message-State: AOJu0YzP+gxpx9P/N8ifU4JysFUGsPfMaEIq8V9TGoJa4WVDoh520eLs
-	jVa1KM7lgJ5CjJs2cp05RcaiUq3j4NWwfmiJql9BYboY+S9A382g6gn4
-X-Gm-Gg: ASbGncul3YmQKG81Ane71cLCJ+TyufmCzXWZJrcVqrEXDHDDkFk7qTEcKZQ21I3dS2E
-	ufYIyZXp96Uxxn7omu7dhY0QBGo6iLA7SONb+J0zLjROj5akWovWREukxYkJaWXWKaMVztA3Une
-	BszhOG/goF4PPmSQwBr2+Zm/Appa6sm1uFe6GtVH0mCleTbgwVZpK3xhDDg4TUz0sTQqeRgih4e
-	OlQJgkMnU8dWoFikPn4bFmuWV4g/pVbMhZ+QzYYOcqeyEiWi0eul76mLK22OxgY8xNUaNDZheK2
-	uuMF0a923CiSR/IfQCX2E3N0BUKNI27FXDnN/+wsBLnO1cAO/pQixY5V8SVxTH880zDtylBwFQ=
-	=
-X-Google-Smtp-Source: AGHT+IFFLTapbpq9yfN5NyUmLLfh7yHtwG+Kidt1zCbPWpTZBl7MH09mVCDDdVXETaSXAjZye1DAKQ==
-X-Received: by 2002:a05:600c:c172:b0:453:6183:c443 with SMTP id 5b1f17b1804b1-4538ee33209mr27999405e9.5.1751022302697;
-        Fri, 27 Jun 2025 04:05:02 -0700 (PDT)
-Received: from imac ([2a02:8010:60a0:0:40b8:18e0:8ac6:da0])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4538a3fe587sm48410295e9.19.2025.06.27.04.05.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Jun 2025 04:05:02 -0700 (PDT)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,  Jonathan Corbet
- <corbet@lwn.net>,  "Akira Yokosawa" <akiyks@gmail.com>,  "Breno Leitao"
- <leitao@debian.org>,  "David S. Miller" <davem@davemloft.net>,  "Eric
- Dumazet" <edumazet@google.com>,  "Ignacio Encinas Rubio"
- <ignacio@iencinas.com>,  "Jan Stancek" <jstancek@redhat.com>,  "Marco
- Elver" <elver@google.com>,  "Paolo Abeni" <pabeni@redhat.com>,  "Randy
- Dunlap" <rdunlap@infradead.org>,  "Ruben Wauters" <rubenru09@aol.com>,
-  "Shuah Khan" <skhan@linuxfoundation.org>,  joel@joelfernandes.org,
-  linux-kernel-mentees@lists.linux.dev,  linux-kernel@vger.kernel.org,
-  lkmm@lists.linux.dev,  netdev@vger.kernel.org,  peterz@infradead.org,
-  stern@rowland.harvard.edu
-Subject: Re: [PATCH v8 10/13] MAINTAINERS: add netlink_yml_parser.py to
- linux-doc
-In-Reply-To: <a8688cae5edb21b9ebbc508d628c62989a786fb7.1750925410.git.mchehab+huawei@kernel.org>
-Date: Fri, 27 Jun 2025 11:50:39 +0100
-Message-ID: <m2frfl8nls.fsf@gmail.com>
-References: <cover.1750925410.git.mchehab+huawei@kernel.org>
-	<a8688cae5edb21b9ebbc508d628c62989a786fb7.1750925410.git.mchehab+huawei@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1751022214; c=relaxed/simple;
+	bh=3eEkTzd48aJijwJie0PYgb5WApqXlFvlW7CzY8x/BWg=;
+	h=From:To:CC:Subject:Date:Message-ID:Content-Type:MIME-Version; b=oxH7WIPPKQ9Td15bOiV+bfspxRmFpM47eVvbj3m+3oXjfj4WyLhYFu/pltqoxSjDhT3NmG2p2zLtGKPhQJFgkzzriJkyj9vC5O3ggbFAiq/3n6s6XY9hihessMM/2gr0dC8SNTv2QoR5UfgOGkG+Fga5Ie0XnG9hbDI1i6YZX6A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=didiglobal.com; spf=pass smtp.mailfrom=didiglobal.com; dkim=pass (1024-bit key) header.d=didiglobal.com header.i=@didiglobal.com header.b=KApNmOW0; arc=none smtp.client-ip=111.202.70.125
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=didiglobal.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=didiglobal.com
+Received: from mail.didiglobal.com (unknown [10.79.71.38])
+	by mx10.didiglobal.com (MailData Gateway V2.8.8) with ESMTPS id C7EB5180FFD583;
+	Fri, 27 Jun 2025 19:02:17 +0800 (CST)
+Received: from BJ01-ACTMBX-09.didichuxing.com (10.79.64.19) by
+ BJ03-ACTMBX-02.didichuxing.com (10.79.71.38) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.10; Fri, 27 Jun 2025 19:03:00 +0800
+Received: from BJ03-ACTMBX-07.didichuxing.com (10.79.71.34) by
+ BJ01-ACTMBX-09.didichuxing.com (10.79.64.19) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.10; Fri, 27 Jun 2025 19:02:59 +0800
+Received: from BJ03-ACTMBX-07.didichuxing.com ([fe80::2e1a:dd47:6d25:287e]) by
+ BJ03-ACTMBX-07.didichuxing.com ([fe80::2e1a:dd47:6d25:287e%7]) with mapi id
+ 15.02.1748.010; Fri, 27 Jun 2025 19:02:59 +0800
+X-MD-Sfrom: chentaotao@didiglobal.com
+X-MD-SrcIP: 10.79.71.38
+From: =?gb2312?B?s8LMzszOIFRhb3RhbyBDaGVu?= <chentaotao@didiglobal.com>
+To: "tytso@mit.edu" <tytso@mit.edu>, "hch@infradead.org" <hch@infradead.org>,
+	"adilger.kernel@dilger.ca" <adilger.kernel@dilger.ca>, "willy@infradead.org"
+	<willy@infradead.org>, "brauner@kernel.org" <brauner@kernel.org>,
+	"jani.nikula@linux.intel.com" <jani.nikula@linux.intel.com>,
+	"rodrigo.vivi@intel.com" <rodrigo.vivi@intel.com>, "tursulin@ursulin.net"
+	<tursulin@ursulin.net>, "airlied@gmail.com" <airlied@gmail.com>
+CC: "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+	"linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
+	"linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+	"intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	"linux-mm@kvack.org" <linux-mm@kvack.org>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "chentao325@qq.com" <chentao325@qq.com>,
+	"frank.li@vivo.com" <frank.li@vivo.com>,
+	=?gb2312?B?s8LMzszOIFRhb3RhbyBDaGVu?= <chentaotao@didiglobal.com>
+Subject: [PATCH v3 0/4] fs: refactor write_begin/write_end and add ext4
+ IOCB_DONTCACHE support
+Thread-Topic: [PATCH v3 0/4] fs: refactor write_begin/write_end and add ext4
+ IOCB_DONTCACHE support
+Thread-Index: AQHb51MLW2LGYmXE/k20eq/l5Jv3Yw==
+Date: Fri, 27 Jun 2025 11:02:59 +0000
+Message-ID: <20250627110257.1870826-1-chentaotao@didiglobal.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=didiglobal.com;
+	s=2025; t=1751022159;
+	bh=3eEkTzd48aJijwJie0PYgb5WApqXlFvlW7CzY8x/BWg=;
+	h=From:To:CC:Subject:Date:Message-ID:Content-Type;
+	b=KApNmOW02CTDBt28PJqDWHYfl7sdBXb/8lUclD2mNMCrpsIKV4nLmUO35t6pdRNpr
+	 fHTI/liJvGeoRIHIWhVG48ygm49UNeXjpF4/KLb8hkowd6dGVcIWOIDxcsU0dg3fYw
+	 F+JorA/cq5QG40DYy9NfKAWXD/O5aZUoe6XuWCyY=
 
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
-
-> The documentation build depends on the parsing code
-> at ynl_gen_rst.py. Ensure that changes to it will be c/c
-> to linux-doc ML and maintainers by adding an entry for
-> it. This way, if a change there would affect the build,
-> or the minimal version required for Python, doc developers
-> may know in advance.
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> Reviewed-by: Breno Leitao <leitao@debian.org>
-
-Reviewed-by: Donald Hunter <donald.hunter@gmail.com>
+RnJvbTogVGFvdGFvIENoZW4gPGNoZW50YW90YW9AZGlkaWdsb2JhbC5jb20+DQoNClRoaXMgcGF0
+Y2ggc2VyaWVzIHJlZmFjdG9ycyB0aGUgYWRkcmVzc19zcGFjZV9vcGVyYXRpb25zIHdyaXRlX2Jl
+Z2luKCkNCmFuZCB3cml0ZV9lbmQoKSBjYWxsYmFja3MgdG8gdGFrZSBjb25zdCBzdHJ1Y3Qga2lv
+Y2IgKiBhcyB0aGVpciBmaXJzdA0KYXJndW1lbnQsIGFsbG93aW5nIElPQ0IgZmxhZ3Mgc3VjaCBh
+cyBJT0NCX0RPTlRDQUNIRSB0byBwcm9wYWdhdGUgdG8gdGhlDQpmaWxlc3lzdGVtJ3MgYnVmZmVy
+ZWQgSS9PIHBhdGguDQoNCkV4dDQgaXMgdXBkYXRlZCB0byBpbXBsZW1lbnQgaGFuZGxpbmcgb2Yg
+dGhlIElPQ0JfRE9OVENBQ0hFIGZsYWcgYW5kDQphZHZlcnRpc2VzIHN1cHBvcnQgdmlhIHRoZSBG
+T1BfRE9OVENBQ0hFIGZpbGUgb3BlcmF0aW9uIGZsYWcuDQoNCkFkZGl0aW9uYWxseSwgdGhlIGk5
+MTUgZHJpdmVyJ3Mgc2htZW0gd3JpdGUgcGF0aHMgYXJlIHVwZGF0ZWQgdG8gYnlwYXNzDQp0aGUg
+bGVnYWN5IHdyaXRlX2JlZ2luL3dyaXRlX2VuZCBpbnRlcmZhY2UgaW4gZmF2b3Igb2YgZGlyZWN0
+bHkNCmNhbGxpbmcgd3JpdGVfaXRlcigpIHdpdGggYSBjb25zdHJ1Y3RlZCBzeW5jaHJvbm91cyBr
+aW9jYi4gQW5vdGhlciBpOTE1DQpjaGFuZ2UgcmVwbGFjZXMgYSBtYW51YWwgd3JpdGUgbG9vcCB3
+aXRoIGtlcm5lbF93cml0ZSgpIGR1cmluZyBHRU0gc2htZW0NCm9iamVjdCBjcmVhdGlvbi4NCg0K
+VGVzdGVkIHdpdGggZXh0NCBhbmQgaTkxNSBHRU0gd29ya2xvYWRzLg0KDQpUaGlzIHBhdGNoIHNl
+cmllcyBpcyBiYXNlZCBvbiB0aGUgdmZzLTYuMTcubWlzYyBicmFuY2guDQoNCkNoYW5nZXMgc2lu
+Y2UgdjI6DQotIENoYW5nZWQgYWxsIHdyaXRlX2JlZ2luL3dyaXRlX2VuZCBmdW5jdGlvbiBzaWdu
+YXR1cmVzIHRvIHRha2UNCiAgY29uc3Qgc3RydWN0IGtpb2NiICogaW5zdGVhZCBvZiBzdHJ1Y3Qg
+a2lvY2IgKi4NCi0gTWVyZ2VkIHRoZSB0d28gZXh0NCBwYXRjaGVzIGludG8gb25lIGZvciBjbGFy
+aXR5Lg0KLSBVcGRhdGVkIHJldHVybiB0eXBlIGZyb20gaW50IHRvIHNzaXplX3QgZm9yIGtlcm5l
+bF93cml0ZS4NCi0gTWlub3IgZm9ybWF0dGluZyBhbmQgY29tbWVudCBpbXByb3ZlbWVudHMuDQoN
+Cg0KVGhhbmtzIHRvIE1hdHRoZXcgV2lsY294IGZvciBlYXJseSBmZWVkYmFjaywgYW5kIHRvIGFs
+bCByZXZpZXdlcnMgZm9yDQpkZXRhaWxlZCBjb21tZW50cy4NCg0KVGFvdGFvIENoZW4gKDQpOg0K
+ICBkcm0vaTkxNTogVXNlIGtlcm5lbF93cml0ZSgpIGluIHNobWVtIG9iamVjdCBjcmVhdGUNCiAg
+ZHJtL2k5MTU6IFJlZmFjdG9yIHNobWVtX3B3cml0ZSgpIHRvIHVzZSBraW9jYiBhbmQgd3JpdGVf
+aXRlcg0KICBmczogY2hhbmdlIHdyaXRlX2JlZ2luL3dyaXRlX2VuZCBpbnRlcmZhY2UgdG8gdGFr
+ZSBzdHJ1Y3Qga2lvY2IgKg0KICBleHQ0OiBzdXBwb3J0IHVuY2FjaGVkIGJ1ZmZlcmVkIEkvTw0K
+DQogRG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy9sb2NraW5nLnJzdCAgICAgfCAgIDQgKy0NCiBE
+b2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1zL3Zmcy5yc3QgICAgICAgICB8ICAgNiArLQ0KIGJsb2Nr
+L2ZvcHMuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDEzICsrLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9pOTE1L2dlbS9pOTE1X2dlbV9zaG1lbS5jIHwgMTE0ICsrKysrKy0tLS0tLS0tLS0t
+LS0tLS0NCiBmcy9hZGZzL2lub2RlLmMgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgOSAr
+LQ0KIGZzL2FmZnMvZmlsZS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDI2ICsrLS0t
+DQogZnMvYmNhY2hlZnMvZnMtaW8tYnVmZmVyZWQuYyAgICAgICAgICAgICAgfCAgIDQgKy0NCiBm
+cy9iY2FjaGVmcy9mcy1pby1idWZmZXJlZC5oICAgICAgICAgICAgICB8ICAgNCArLQ0KIGZzL2Jm
+cy9maWxlLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA3ICstDQogZnMvYnVmZmVy
+LmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjYgKystLS0NCiBmcy9jZXBoL2Fk
+ZHIuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxMCArLQ0KIGZzL2VjcnlwdGZzL21t
+YXAuYyAgICAgICAgICAgICAgICAgICAgICAgIHwgIDEwICstDQogZnMvZXhmYXQvZmlsZS5jICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTUgKystDQogZnMvZXhmYXQvaW5vZGUuYyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgfCAgMTYgKy0tDQogZnMvZXh0Mi9pbm9kZS5jICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgfCAgMTEgKystDQogZnMvZXh0NC9maWxlLmMgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgfCAgIDMgKy0NCiBmcy9leHQ0L2lub2RlLmMgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB8ICAyNSArKystLQ0KIGZzL2YyZnMvZGF0YS5jICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHwgICA4ICstDQogZnMvZmF0L2lub2RlLmMgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgfCAgMTggKystLQ0KIGZzL2Z1c2UvZmlsZS5jICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHwgIDE0ICsrLQ0KIGZzL2hmcy9oZnNfZnMuaCAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHwgICAyICstDQogZnMvaGZzL2lub2RlLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAg
+IDQgKy0NCiBmcy9oZnNwbHVzL2hmc3BsdXNfZnMuaCAgICAgICAgICAgICAgICAgICB8ICAgNiAr
+LQ0KIGZzL2hmc3BsdXMvaW5vZGUuYyAgICAgICAgICAgICAgICAgICAgICAgIHwgICA4ICstDQog
+ZnMvaG9zdGZzL2hvc3Rmc19rZXJuLmMgICAgICAgICAgICAgICAgICAgfCAgIDggKy0NCiBmcy9o
+cGZzL2ZpbGUuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxOCArKy0tDQogZnMvaHVn
+ZXRsYmZzL2lub2RlLmMgICAgICAgICAgICAgICAgICAgICAgfCAgIDkgKy0NCiBmcy9qZmZzMi9m
+aWxlLmMgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyOCArKystLS0NCiBmcy9qZnMvaW5v
+ZGUuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxNiArLS0NCiBmcy9saWJmcy5jICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxMSArKy0NCiBmcy9taW5peC9pbm9kZS5j
+ICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgNyArLQ0KIGZzL25mcy9maWxlLmMgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHwgICA4ICstDQogZnMvbmlsZnMyL2lub2RlLmMgICAgICAg
+ICAgICAgICAgICAgICAgICAgfCAgIDggKy0NCiBmcy9udGZzMy9maWxlLmMgICAgICAgICAgICAg
+ICAgICAgICAgICAgICB8ICAgNyArLQ0KIGZzL250ZnMzL2lub2RlLmMgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHwgICA3ICstDQogZnMvbnRmczMvbnRmc19mcy5oICAgICAgICAgICAgICAgICAg
+ICAgICAgfCAgMTAgKy0NCiBmcy9vY2ZzMi9hb3BzLmMgICAgICAgICAgICAgICAgICAgICAgICAg
+ICB8ICAgNiArLQ0KIGZzL29tZnMvZmlsZS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwg
+ICA3ICstDQogZnMvb3JhbmdlZnMvaW5vZGUuYyAgICAgICAgICAgICAgICAgICAgICAgfCAgMTYg
+Ky0tDQogZnMvdWJpZnMvZmlsZS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDUgKy0N
+CiBmcy91ZGYvaW5vZGUuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxMSArKy0NCiBm
+cy91ZnMvaW5vZGUuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxNiArLS0NCiBmcy92
+Ym94c2YvZmlsZS5jICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgNSArLQ0KIGluY2x1ZGUv
+bGludXgvYnVmZmVyX2hlYWQuaCAgICAgICAgICAgICAgIHwgICA0ICstDQogaW5jbHVkZS9saW51
+eC9mcy5oICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTEgKystDQogbW0vZmlsZW1hcC5jICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDQgKy0NCiBtbS9zaG1lbS5jICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICB8ICAxMiArLS0NCiA0NyBmaWxlcyBjaGFuZ2VkLCAzMTAg
+aW5zZXJ0aW9ucygrKSwgMjg3IGRlbGV0aW9ucygtKQ0KDQotLSANCjIuMzQuMQ0K
 
