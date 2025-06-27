@@ -1,144 +1,112 @@
-Return-Path: <linux-doc+bounces-50961-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50972-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8B77AEB53C
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 12:45:04 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 609AEAEB5E9
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 13:08:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D87381898040
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 10:45:19 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A36251C41D39
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 11:08:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34DF42989A7;
-	Fri, 27 Jun 2025 10:44:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BABAD2DBF7A;
+	Fri, 27 Jun 2025 11:05:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="clLb8u2D"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="V4qRKEYA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16F8125F78A;
-	Fri, 27 Jun 2025 10:44:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F15842BEC4A;
+	Fri, 27 Jun 2025 11:05:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751021096; cv=none; b=Oew3Npo0LU4gkrIwViTr2vTBONeeMrqXer4B6oIi7GR1KoHuuyBWjSI/CVbItgkt3UyCrsalrT6+pBVuSjbZnO7ZyR29v9BoLbNzG4leR0WCwawaHw74PwIzYPLC+0Uqc0hLZtdsXp2fJ0vmwDtrmyICkbByLmrrpZN+wwLS2GU=
+	t=1751022304; cv=none; b=G1WFl3uu6/4PfBbj2MT0EUPbE9QHGIzymbCygrXmCvTPWSgfojzOSOoO552GSBkNUi7TJ1i91HvpssnL7SmiH9UW1DcPHVkOyb/hKncUUC82ZzFOW3n7hKazo/JTIZ+chZ6RD4UoxMZkxXmx7DwevLTi2T4ANPwLR+6zYIQwyhc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751021096; c=relaxed/simple;
-	bh=UW1XxyK/q8J4LcUzX/QxvqaTgCo+063etzUhicM0QS8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HrfgWqFJbIxl6Rh+MnY6cdiy/gCzqzYSrviheQEaDL0mLllX6XTbx32yUgPNU5a4E/qYv33F1KLo8jMmcIJshmavsuup1u54oba1UCFVJ8qa6uWhhfElRvqRBETdSBTjVlT/58uluQRDALOPn0ZVUw9+3MRn5Adc6xVOuh92O7E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=clLb8u2D; arc=none smtp.client-ip=65.109.113.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 0E2E040E0198;
-	Fri, 27 Jun 2025 10:44:50 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id Hnpk4H810n2U; Fri, 27 Jun 2025 10:44:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1751021085; bh=eb2jDeAuL90LH9hBVHxfGvA66rkLmOa5hvria1KI0bs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=clLb8u2D+lKil0n6vyucenwYrHfBoBI8cNhonsgkLy41S03+HQKKD93BPKx4uyk6G
-	 YBI619+U2rO6f6MCGaNpkMrlt5MXVyOg3z7RKJzA2agjbw0nxsCr9ecUo/mS3XRkNK
-	 ROkZWhTpoJP8wMvTN8fx1+Bnl6vGVpP1dDjvdD38y9YG9z77Y5RelfSiHRse3Zk4ON
-	 qq6+eQ8yJqp1k8weWdEhloRYPfOGSYi8XgIyMeE/srmqCPMze/aNtQL9da7d80ewWy
-	 go3u6y93Adu0IrMteA8d+W0AI5InaAvM5/DMyNA1JoMZB9iZsy4fvjGsSMnL4gWHFO
-	 Eo94Eq9FnuiwSgNWVOy/Vn+STVQWO1jURl6WTMQWrLkCvr5+RJAKc5WVk2co9UhWl2
-	 u0xIKQxjQd3Q9MsUQNMc1Ncn8ZN0hgfY21xLHYyr63YE07r0TkQtYNfudKwJmDpM2K
-	 ho7C07sRx8y5tmj2ZePR0ymi5NdimaUU2Iz3tP2AZF8LNmGUaCI4pEGwNYIlS6HBvE
-	 1vvzEzXAwBt9Qj1b4qAH7gOcwuS3FQzvsQOecLMU54c7iPJ5uNXOYDgJjL7lOishCx
-	 lGgdkqJIe1qOsX4hXL47tvQYcKHhLPMoAwyeyRWGkNTTFeFHet4VgFiO/TDA2bPkgI
-	 CsLOhZawAa6TvUhFi785L3mY=
-Received: from zn.tnic (p57969c58.dip0.t-ipconnect.de [87.150.156.88])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
-	(No client certificate requested)
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id DA51040E00DC;
-	Fri, 27 Jun 2025 10:43:51 +0000 (UTC)
-Date: Fri, 27 Jun 2025 12:43:45 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
-Cc: Dave Hansen <dave.hansen@intel.com>, Andy Lutomirski <luto@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Xiongwei Song <xiongwei.song@windriver.com>,
-	Xin Li <xin3.li@intel.com>, "Mike Rapoport (IBM)" <rppt@kernel.org>,
-	Brijesh Singh <brijesh.singh@amd.com>,
-	Michael Roth <michael.roth@amd.com>,
-	Tony Luck <tony.luck@intel.com>, Alexey Kardashevskiy <aik@amd.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Sohil Mehta <sohil.mehta@intel.com>, Ingo Molnar <mingo@kernel.org>,
-	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-	Daniel Sneddon <daniel.sneddon@linux.intel.com>,
-	Kai Huang <kai.huang@intel.com>,
-	Sandipan Das <sandipan.das@amd.com>,
-	Breno Leitao <leitao@debian.org>,
-	Rick Edgecombe <rick.p.edgecombe@intel.com>,
-	Alexei Starovoitov <ast@kernel.org>, Hou Tao <houtao1@huawei.com>,
-	Juergen Gross <jgross@suse.com>,
-	Vegard Nossum <vegard.nossum@oracle.com>,
-	Kees Cook <kees@kernel.org>, Eric Biggers <ebiggers@google.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Yuntao Wang <ytcoode@gmail.com>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-	Christophe Leroy <christophe.leroy@csgroup.eu>,
-	Tejun Heo <tj@kernel.org>, Changbin Du <changbin.du@huawei.com>,
-	Huang Shijie <shijie@os.amperecomputing.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Namhyung Kim <namhyung@kernel.org>,
-	Arnaldo Carvalho de Melo <acme@redhat.com>,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-efi@vger.kernel.org, linux-mm@kvack.org,
-	Yian Chen <yian.chen@intel.com>
-Subject: Re: [PATCHv6 01/16] x86/cpu: Enumerate the LASS feature bits
-Message-ID: <20250627104345.GAaF514fH1qDKP9FA6@fat_crate.local>
-References: <20250620163504.GCaFWNuI-8QFqAM0yI@fat_crate.local>
- <6y2iqv6c2idn7yebaec7tyhzl5zcsrwqq4lcsokumlqeophzaf@ljnmxorblgcj>
- <20250620182943.GDaFWolxhwogB2tTxb@fat_crate.local>
- <tmd5llufitosphzhiik2tlemjuwyi7xkcjlhbqhibrgjjhsqcj@b3xtgub42p45>
- <20250623102105.GCaFkqkatFSbyl1YeN@fat_crate.local>
- <ztkgdk72p2z3q6z4hslfg4gj6pejirh7cnssxhd7u72mo4enn4@viqrwrycderf>
- <20250626151837.GFaF1kzfLtesXLqaAQ@fat_crate.local>
- <20250626160707.GGaF1wK5tW37P6xt0O@fat_crate.local>
- <2768baad-1b1f-40c2-9cd9-9f4489e14f4d@intel.com>
- <h47uwzno7oqer72sjwyc4spxaduggqi4meccjvai6v42iwnqnh@uhloooww25mo>
+	s=arc-20240116; t=1751022304; c=relaxed/simple;
+	bh=4hfOjU+Xu/htgbnrO/6j06ZqG2i0jYGSE9EvifTKQ48=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
+	 MIME-Version:Content-Type; b=n/Dg1zWkkVA5Xd6j5LDOlCTZ3kypYGoYV+93xESzpXfRzvzPw5A75cswQzzPFBESKM0QACIYSC1jtrCUMj1htQ8uVqDBDFSuvlnuy/+G+0opCxfS1hEu7tKLkz1v1RBigyvSDiPV1TWLFFeoaKaOmdPHS5KaCPRKfXud24VrWkg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=V4qRKEYA; arc=none smtp.client-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-453643020bdso17887795e9.1;
+        Fri, 27 Jun 2025 04:05:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1751022301; x=1751627101; darn=vger.kernel.org;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4hfOjU+Xu/htgbnrO/6j06ZqG2i0jYGSE9EvifTKQ48=;
+        b=V4qRKEYAJxsRWPq77zyZiGtMMORDXxOqgzneCOHEoBrTgwqh8nquoH2GMlSamoX+Nb
+         jQIIi0iyYLBkHzU9M3dQEk6lKs00CVq5JSikmApKzWrsqPOBTyalXAzcTyfodEdkreoi
+         6tdQWXNUpvRnj6B/3RXCYXe4SLQyapBN5BtKDsRls66XHPdrW5KKmdUv4vjYpExVQtf/
+         z0lTarhtpzT5ifMpk9dp9YxIxMlwYxWMLnczpLtp/xmf4oUtefulA0AMdW2A1QlRoqeD
+         I5aiidpYweXqgGapA18j14zE1hHki8dvdfzu55wVmPFajXXSa7giI1jiAr/ZcS0Z7mxb
+         13hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751022301; x=1751627101;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4hfOjU+Xu/htgbnrO/6j06ZqG2i0jYGSE9EvifTKQ48=;
+        b=wk+T4I7KGSJcGlAKZwJECnv54dyCZzESfCDEkzbNf2YmhtO9EPA+Ya61l0pPUtZCsM
+         GpM6nXp4MFOBjTKhfitP1WEbIbIwLLUTtY5VogZBp4u4HMK/D4P0i7EmsARf6dQOpbG9
+         DFuVqpVotrX3LuPc3WuOv5fEEZ0DaR7eNEJsU4eU/HA8Z4yratmfHPj5WhLRmNXqQMzl
+         eLE8U02I/8yTjFvqDQs9KY6lcueIt6Bm6vLsZ2TaoKMYOsH7k1v9FeRnwzU1HI/1rtTT
+         y8yN6nV2UxBJcFMdK0WkfrETz4JuMRwO9Z9OqLDMsJyymkY1ScvdactTWN/izcptxPYv
+         mDMw==
+X-Forwarded-Encrypted: i=1; AJvYcCVncc904w2Eqv4vMDfKMnD3dv+rLXQuGZ0G9Gn5WRuK9CX17pKatnhub1UV0csZSz9F2MIaoWZIWMRJHYo=@vger.kernel.org, AJvYcCWcM9tRxuLhew3ST5iLf8G4KsL8wwu2UYFVFjierWXvCeeg6cicMOT9gMD4L69EJHnGRPNAqgaB@vger.kernel.org
+X-Gm-Message-State: AOJu0YyyOwZ5TrNE50vY6qlNVNQ3bDC/JxI6p8rVAjnReXiFo3o6ntLH
+	yQwm6c41HIkl7tz/XZyl0GGuDx0ixS4T9+8h70Gar9CONo6PvSdVU7dZ
+X-Gm-Gg: ASbGncvY5HZbo+f/sZzHJ95w26KXHz2L58CBkS6q+m1XF8rEjbMMiQ+cjSBHNRSwoVe
+	C1gm2ATY5qb4kmGyemKsNuhGtnSUveFe48M3mpDvZvUkXvRvULk8jxOvGqSzsQS670v+LytFtuZ
+	Q+x+joAc0ONk4v1ONMAz6aQG6O7YptS+/DmYrJIPWVupLwGOYs7dgda36r4pbSVepywRVHQzQ3v
+	aMMP75df+jzM+movCpBq8sTkE7gdksDWBT/hUVZ7VouEbTW9mXpxbFt42reDB+h4xQa3+wzc7JD
+	iFyC/QZKlJY89HpDi5Z4kY7S0cMnQLrfgMaNP59shI7wOgmrC7IZP7Mq3ubSGmz/vuCbBeokEg=
+	=
+X-Google-Smtp-Source: AGHT+IE73758IwYSE3gwQCVr5ocOcoostGM/uXpiZKDoUYwwlxSUMV3h6l1nDvdN1/+koG3pVg3tqA==
+X-Received: by 2002:a05:600c:8712:b0:451:e394:8920 with SMTP id 5b1f17b1804b1-4539341e446mr4257555e9.27.1751022300978;
+        Fri, 27 Jun 2025 04:05:00 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:40b8:18e0:8ac6:da0])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4538233c4acsm75833275e9.1.2025.06.27.04.04.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Jun 2025 04:05:00 -0700 (PDT)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,  Jonathan Corbet
+ <corbet@lwn.net>,  "Akira Yokosawa" <akiyks@gmail.com>,  "Breno Leitao"
+ <leitao@debian.org>,  "David S. Miller" <davem@davemloft.net>,  "Eric
+ Dumazet" <edumazet@google.com>,  "Ignacio Encinas Rubio"
+ <ignacio@iencinas.com>,  "Jan Stancek" <jstancek@redhat.com>,  "Marco
+ Elver" <elver@google.com>,  "Paolo Abeni" <pabeni@redhat.com>,  "Randy
+ Dunlap" <rdunlap@infradead.org>,  "Ruben Wauters" <rubenru09@aol.com>,
+  "Shuah Khan" <skhan@linuxfoundation.org>,  joel@joelfernandes.org,
+  linux-kernel-mentees@lists.linux.dev,  linux-kernel@vger.kernel.org,
+  lkmm@lists.linux.dev,  netdev@vger.kernel.org,  peterz@infradead.org,
+  stern@rowland.harvard.edu
+Subject: Re: [PATCH v8 08/13] tools: ynl_gen_rst.py: drop support for
+ generating index files
+In-Reply-To: <95d1ed00026acbe425f036f860f7bcd1a18ce98b.1750925410.git.mchehab+huawei@kernel.org>
+Date: Fri, 27 Jun 2025 11:49:28 +0100
+Message-ID: <m2jz4x8nnr.fsf@gmail.com>
+References: <cover.1750925410.git.mchehab+huawei@kernel.org>
+	<95d1ed00026acbe425f036f860f7bcd1a18ce98b.1750925410.git.mchehab+huawei@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <h47uwzno7oqer72sjwyc4spxaduggqi4meccjvai6v42iwnqnh@uhloooww25mo>
+Content-Type: text/plain
 
-On Fri, Jun 27, 2025 at 01:25:12PM +0300, Kirill A. Shutemov wrote:
-> So, we want an entry for SLAM?
-> 
-> I don't think it is very useful as we don't allow LAM if LASS is missing.
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-Nah, it is all clear now.
+> As we're now using an index file with a glob, there's no need
+> to generate index files anymore.
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Thx.
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+Reviewed-by: Donald Hunter <donald.hunter@gmail.com>
 
