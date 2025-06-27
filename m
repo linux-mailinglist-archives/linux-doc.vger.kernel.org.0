@@ -1,127 +1,144 @@
-Return-Path: <linux-doc+bounces-50971-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50961-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35291AEB5E5
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 13:07:43 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id A8B77AEB53C
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 12:45:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 92BB53B2A1B
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 11:07:17 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id D87381898040
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 10:45:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F2B372DA74F;
-	Fri, 27 Jun 2025 11:05:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34DF42989A7;
+	Fri, 27 Jun 2025 10:44:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="m9igoHln"
+	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="clLb8u2D"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13AC92D9799;
-	Fri, 27 Jun 2025 11:05:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16F8125F78A;
+	Fri, 27 Jun 2025 10:44:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751022302; cv=none; b=Ho9pIOLpo59d+UPErxy7MWTXu8beSchpVcmThPkErnS7VYb3PmGBQG4dQQbMvwKp+BwCW6lF9IHQlsUDD0tfSMusX/9oiG3iUHJi44e6yT0JBTAhs2aUqoIjbaGAP1kBaP9FACogWoH1jrKu7ZFkMFhiIv98TSK5swmv9k0cYeI=
+	t=1751021096; cv=none; b=Oew3Npo0LU4gkrIwViTr2vTBONeeMrqXer4B6oIi7GR1KoHuuyBWjSI/CVbItgkt3UyCrsalrT6+pBVuSjbZnO7ZyR29v9BoLbNzG4leR0WCwawaHw74PwIzYPLC+0Uqc0hLZtdsXp2fJ0vmwDtrmyICkbByLmrrpZN+wwLS2GU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751022302; c=relaxed/simple;
-	bh=IzhzSlg+a6MNT6mp9a166nnlPRXDawCSwrvw2zas3ys=;
-	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
-	 MIME-Version:Content-Type; b=T9bzJ3NrUYwhXNEuqu1Dt+xlbJQnnDHTjvRpueiRjtu7FNTDyf1ozlzOje4vc1HpTF/LtysmoDi4FEcVHdU3H2mgjHqSYd/B3ZiALCKdZCFschrYjl5sPDt/bnXopoqyderEhkd2GAvwlH14o+n4RWonL9eb4V/DMWT484GKk4o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=m9igoHln; arc=none smtp.client-ip=209.85.128.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-450cfb79177so11140925e9.0;
-        Fri, 27 Jun 2025 04:05:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751022299; x=1751627099; darn=vger.kernel.org;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ArfsTLmwxi9yd3k6+gxg662TPkYeEIsTSNfN2sfzizY=;
-        b=m9igoHlnC3DeQm0fJcgStJMw6WFV/TdDzfaBKetGLUqefEFDJUfGm9juQjIu8a0hFY
-         01QO/HlwqamQT5OGJq3ualPFxzkj1rg/QNhnHCZRofwD8h9z2T7xbJNTqveI6p3AISoi
-         MQQWK0Ed175+x6BNWPmreuz9Ljadn8PXHN+hu7baIOZg31QFqalvZVf8OsO2FKFKUxky
-         z3T1tYIOe3sHo70gsF0w9EnTcMNqC5Jio1gUF1x+0DrjOSGFsYZVHmsBgwDyzf4mb+vV
-         yrj4zXVTI3DpI3zeJxys7hLK4AcrhRHihXpN9gjSD0GNk3/wLnxiQdiZwWfW7Qj2kFB8
-         iQ3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751022299; x=1751627099;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ArfsTLmwxi9yd3k6+gxg662TPkYeEIsTSNfN2sfzizY=;
-        b=Y30vZxKYOwbrOubIxFiVb72JxItcwefENBM3ZHBuSlxwb4C/4EI0rr3+EhV84XCYpx
-         zgbXCTg5ssRNZq+x2EZ4DG6+K1VOZlPFvXIiJmST7IrnGK3ktnIsqa7CaLDV7gljCp45
-         PfVtR7QBR73Wt8699RDtY8XckZORyodEPhKbwN8vLiMfmzoP6ySU8s7FdqimeHj1rCbw
-         Fb34VhKqxU6SslBC3oyKTyMs82N9ICLzl10rIrxEBRX4ORM6YdAfpW2S69nybYrE+8PK
-         0Qm7FKqLQJlK0Y0DZfO/9Yed4/N8BSx4hHd+Bh6jzpuNPenqdNQ7mRNXlFUroddataLl
-         AQzw==
-X-Forwarded-Encrypted: i=1; AJvYcCU7slV42fkt2hjEws0kdN0uLSg1c04FTLTJzpkAbHNaPq7d7INwof5iT96GRw5Cm5JJgr6eZwfpqc3B7sw=@vger.kernel.org, AJvYcCWGqqpJZ32wXuiIayxYvkzS5DB1/xx/dXH2AKljbaNRvCd442K/GyXMPxSgSQrxaL8F4YXVAAM5@vger.kernel.org
-X-Gm-Message-State: AOJu0YwM49QAD3533nVYrhBn9fweiZOMvegj7pYWw9V5zhYQshfrLPUo
-	1NJYQwujQxA22TJ1i62iSzjmQTWntha/TUqffmNahOSUe2LknXMvZlIQ
-X-Gm-Gg: ASbGncs/FfB6y+sBPHGwZAQlF8p3Rh644dv3MKu6phipjeJIFg8kDlFUBPMVoFK7fRl
-	nVEUFopdTUTiUU9PlSNukx1sp6OlZos8KQB3m1iLppoTsraVUSFOb/Y/ak++T5fjPX9UW2TskA7
-	7+7m3Au50LT6edLrm21b7n+o5LZT5cjgG3rpUGIaCL3bPZ8Jxc/y9dV9z6aFzVrjik+fcpyY4s1
-	h5b4/bfaK4fx2TxHoGjQMz5O8tsO3xdoU8GMqWtBTHepyKSq0GVCy/wd3I2nsv4gbsb2IMIdv0b
-	lsgWlDEspFjliIKjQo9GDDyUig/g2KeqoHG2VqI8ayPh1W9QAobvqhRPv3ktTtGAosseEuoRwg=
-	=
-X-Google-Smtp-Source: AGHT+IEpM1ETIrENyCAnUIBLSlkPLHo3rmCFmpZ0/Rq7Eqh8Z5kuTci5QCowTov1lw+939ExHok2Bw==
-X-Received: by 2002:a05:600c:8118:b0:450:cd50:3c66 with SMTP id 5b1f17b1804b1-4538ee62b0dmr27939015e9.29.1751022299269;
-        Fri, 27 Jun 2025 04:04:59 -0700 (PDT)
-Received: from imac ([2a02:8010:60a0:0:40b8:18e0:8ac6:da0])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-453823c57d7sm81053325e9.40.2025.06.27.04.04.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Jun 2025 04:04:58 -0700 (PDT)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,  Jonathan Corbet
- <corbet@lwn.net>,  "Akira Yokosawa" <akiyks@gmail.com>,  "Breno Leitao"
- <leitao@debian.org>,  "David S. Miller" <davem@davemloft.net>,  "Eric
- Dumazet" <edumazet@google.com>,  "Ignacio Encinas Rubio"
- <ignacio@iencinas.com>,  "Jan Stancek" <jstancek@redhat.com>,  "Marco
- Elver" <elver@google.com>,  "Paolo Abeni" <pabeni@redhat.com>,  "Randy
- Dunlap" <rdunlap@infradead.org>,  "Ruben Wauters" <rubenru09@aol.com>,
-  "Shuah Khan" <skhan@linuxfoundation.org>,  joel@joelfernandes.org,
-  linux-kernel-mentees@lists.linux.dev,  linux-kernel@vger.kernel.org,
-  lkmm@lists.linux.dev,  netdev@vger.kernel.org,  peterz@infradead.org,
-  stern@rowland.harvard.edu
-Subject: Re: [PATCH v8 04/13] tools: ynl_gen_rst.py: cleanup coding style
-In-Reply-To: <398c4d179f07bc0558c8f6ce196e3620bf2efdaf.1750925410.git.mchehab+huawei@kernel.org>
-Date: Fri, 27 Jun 2025 11:41:38 +0100
-Message-ID: <m2o6u98o0t.fsf@gmail.com>
-References: <cover.1750925410.git.mchehab+huawei@kernel.org>
-	<398c4d179f07bc0558c8f6ce196e3620bf2efdaf.1750925410.git.mchehab+huawei@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1751021096; c=relaxed/simple;
+	bh=UW1XxyK/q8J4LcUzX/QxvqaTgCo+063etzUhicM0QS8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=HrfgWqFJbIxl6Rh+MnY6cdiy/gCzqzYSrviheQEaDL0mLllX6XTbx32yUgPNU5a4E/qYv33F1KLo8jMmcIJshmavsuup1u54oba1UCFVJ8qa6uWhhfElRvqRBETdSBTjVlT/58uluQRDALOPn0ZVUw9+3MRn5Adc6xVOuh92O7E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=clLb8u2D; arc=none smtp.client-ip=65.109.113.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 0E2E040E0198;
+	Fri, 27 Jun 2025 10:44:50 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id Hnpk4H810n2U; Fri, 27 Jun 2025 10:44:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1751021085; bh=eb2jDeAuL90LH9hBVHxfGvA66rkLmOa5hvria1KI0bs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=clLb8u2D+lKil0n6vyucenwYrHfBoBI8cNhonsgkLy41S03+HQKKD93BPKx4uyk6G
+	 YBI619+U2rO6f6MCGaNpkMrlt5MXVyOg3z7RKJzA2agjbw0nxsCr9ecUo/mS3XRkNK
+	 ROkZWhTpoJP8wMvTN8fx1+Bnl6vGVpP1dDjvdD38y9YG9z77Y5RelfSiHRse3Zk4ON
+	 qq6+eQ8yJqp1k8weWdEhloRYPfOGSYi8XgIyMeE/srmqCPMze/aNtQL9da7d80ewWy
+	 go3u6y93Adu0IrMteA8d+W0AI5InaAvM5/DMyNA1JoMZB9iZsy4fvjGsSMnL4gWHFO
+	 Eo94Eq9FnuiwSgNWVOy/Vn+STVQWO1jURl6WTMQWrLkCvr5+RJAKc5WVk2co9UhWl2
+	 u0xIKQxjQd3Q9MsUQNMc1Ncn8ZN0hgfY21xLHYyr63YE07r0TkQtYNfudKwJmDpM2K
+	 ho7C07sRx8y5tmj2ZePR0ymi5NdimaUU2Iz3tP2AZF8LNmGUaCI4pEGwNYIlS6HBvE
+	 1vvzEzXAwBt9Qj1b4qAH7gOcwuS3FQzvsQOecLMU54c7iPJ5uNXOYDgJjL7lOishCx
+	 lGgdkqJIe1qOsX4hXL47tvQYcKHhLPMoAwyeyRWGkNTTFeFHet4VgFiO/TDA2bPkgI
+	 CsLOhZawAa6TvUhFi785L3mY=
+Received: from zn.tnic (p57969c58.dip0.t-ipconnect.de [87.150.156.88])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	(No client certificate requested)
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id DA51040E00DC;
+	Fri, 27 Jun 2025 10:43:51 +0000 (UTC)
+Date: Fri, 27 Jun 2025 12:43:45 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+Cc: Dave Hansen <dave.hansen@intel.com>, Andy Lutomirski <luto@kernel.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Xiongwei Song <xiongwei.song@windriver.com>,
+	Xin Li <xin3.li@intel.com>, "Mike Rapoport (IBM)" <rppt@kernel.org>,
+	Brijesh Singh <brijesh.singh@amd.com>,
+	Michael Roth <michael.roth@amd.com>,
+	Tony Luck <tony.luck@intel.com>, Alexey Kardashevskiy <aik@amd.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sohil Mehta <sohil.mehta@intel.com>, Ingo Molnar <mingo@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Daniel Sneddon <daniel.sneddon@linux.intel.com>,
+	Kai Huang <kai.huang@intel.com>,
+	Sandipan Das <sandipan.das@amd.com>,
+	Breno Leitao <leitao@debian.org>,
+	Rick Edgecombe <rick.p.edgecombe@intel.com>,
+	Alexei Starovoitov <ast@kernel.org>, Hou Tao <houtao1@huawei.com>,
+	Juergen Gross <jgross@suse.com>,
+	Vegard Nossum <vegard.nossum@oracle.com>,
+	Kees Cook <kees@kernel.org>, Eric Biggers <ebiggers@google.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Yuntao Wang <ytcoode@gmail.com>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Tejun Heo <tj@kernel.org>, Changbin Du <changbin.du@huawei.com>,
+	Huang Shijie <shijie@os.amperecomputing.com>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Arnaldo Carvalho de Melo <acme@redhat.com>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-efi@vger.kernel.org, linux-mm@kvack.org,
+	Yian Chen <yian.chen@intel.com>
+Subject: Re: [PATCHv6 01/16] x86/cpu: Enumerate the LASS feature bits
+Message-ID: <20250627104345.GAaF514fH1qDKP9FA6@fat_crate.local>
+References: <20250620163504.GCaFWNuI-8QFqAM0yI@fat_crate.local>
+ <6y2iqv6c2idn7yebaec7tyhzl5zcsrwqq4lcsokumlqeophzaf@ljnmxorblgcj>
+ <20250620182943.GDaFWolxhwogB2tTxb@fat_crate.local>
+ <tmd5llufitosphzhiik2tlemjuwyi7xkcjlhbqhibrgjjhsqcj@b3xtgub42p45>
+ <20250623102105.GCaFkqkatFSbyl1YeN@fat_crate.local>
+ <ztkgdk72p2z3q6z4hslfg4gj6pejirh7cnssxhd7u72mo4enn4@viqrwrycderf>
+ <20250626151837.GFaF1kzfLtesXLqaAQ@fat_crate.local>
+ <20250626160707.GGaF1wK5tW37P6xt0O@fat_crate.local>
+ <2768baad-1b1f-40c2-9cd9-9f4489e14f4d@intel.com>
+ <h47uwzno7oqer72sjwyc4spxaduggqi4meccjvai6v42iwnqnh@uhloooww25mo>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <h47uwzno7oqer72sjwyc4spxaduggqi4meccjvai6v42iwnqnh@uhloooww25mo>
 
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+On Fri, Jun 27, 2025 at 01:25:12PM +0300, Kirill A. Shutemov wrote:
+> So, we want an entry for SLAM?
+> 
+> I don't think it is very useful as we don't allow LAM if LASS is missing.
 
->      @staticmethod
->      def rst_ref(namespace: str, prefix: str, name: str) -> str:
->          """Add a hyperlink to the document"""
-> @@ -119,10 +100,9 @@ class RstFormatters:
->                      'nested-attributes': 'attribute-set',
->                      'struct': 'definition'}
->          if prefix in mappings:
-> -            prefix = mappings[prefix]
-> +            prefix = mappings.get(prefix, "")
+Nah, it is all clear now.
 
-This gives me a sad face because fixing the erroneous pylint warning
-makes the code look worse. I'd prefer to either suppress the warning
-or to change this:
+Thx.
 
-        if prefix in mappings:
-            prefix = mappings[prefix]
+-- 
+Regards/Gruss,
+    Boris.
 
-to this:
-
-        prefix = mappings.get(prefix, prefix)
-
-But IMHO the intent of the original is clearer.
+https://people.kernel.org/tglx/notes-about-netiquette
 
