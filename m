@@ -1,112 +1,133 @@
-Return-Path: <linux-doc+bounces-50972-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50962-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 609AEAEB5E9
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 13:08:10 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 04621AEB563
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 12:51:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A36251C41D39
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 11:08:23 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 519A0567697
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 10:50:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BABAD2DBF7A;
-	Fri, 27 Jun 2025 11:05:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B55822980A5;
+	Fri, 27 Jun 2025 10:51:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="V4qRKEYA"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="pksJWTHU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F15842BEC4A;
-	Fri, 27 Jun 2025 11:05:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E4BB29615D;
+	Fri, 27 Jun 2025 10:50:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.177.32
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751022304; cv=none; b=G1WFl3uu6/4PfBbj2MT0EUPbE9QHGIzymbCygrXmCvTPWSgfojzOSOoO552GSBkNUi7TJ1i91HvpssnL7SmiH9UW1DcPHVkOyb/hKncUUC82ZzFOW3n7hKazo/JTIZ+chZ6RD4UoxMZkxXmx7DwevLTi2T4ANPwLR+6zYIQwyhc=
+	t=1751021460; cv=none; b=mcLJdd/J5iSe8OKNe2qu/4DAt3ERpD4Hukx1H+qZjY6JDqLYugw2g2OGMsTfzPIERMNlxtnBYq8qZCXa50Yp5HHZj+D7VVbkHHQYDyfrowM6oij+FbGb/HBu+4yXr5wr556dTaBIzX5nTrRDjU8entjouuJRpa1QSk6DKPJFtnY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751022304; c=relaxed/simple;
-	bh=4hfOjU+Xu/htgbnrO/6j06ZqG2i0jYGSE9EvifTKQ48=;
-	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
-	 MIME-Version:Content-Type; b=n/Dg1zWkkVA5Xd6j5LDOlCTZ3kypYGoYV+93xESzpXfRzvzPw5A75cswQzzPFBESKM0QACIYSC1jtrCUMj1htQ8uVqDBDFSuvlnuy/+G+0opCxfS1hEu7tKLkz1v1RBigyvSDiPV1TWLFFeoaKaOmdPHS5KaCPRKfXud24VrWkg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=V4qRKEYA; arc=none smtp.client-ip=209.85.128.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-453643020bdso17887795e9.1;
-        Fri, 27 Jun 2025 04:05:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751022301; x=1751627101; darn=vger.kernel.org;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4hfOjU+Xu/htgbnrO/6j06ZqG2i0jYGSE9EvifTKQ48=;
-        b=V4qRKEYAJxsRWPq77zyZiGtMMORDXxOqgzneCOHEoBrTgwqh8nquoH2GMlSamoX+Nb
-         jQIIi0iyYLBkHzU9M3dQEk6lKs00CVq5JSikmApKzWrsqPOBTyalXAzcTyfodEdkreoi
-         6tdQWXNUpvRnj6B/3RXCYXe4SLQyapBN5BtKDsRls66XHPdrW5KKmdUv4vjYpExVQtf/
-         z0lTarhtpzT5ifMpk9dp9YxIxMlwYxWMLnczpLtp/xmf4oUtefulA0AMdW2A1QlRoqeD
-         I5aiidpYweXqgGapA18j14zE1hHki8dvdfzu55wVmPFajXXSa7giI1jiAr/ZcS0Z7mxb
-         13hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751022301; x=1751627101;
-        h=mime-version:user-agent:references:message-id:date:in-reply-to
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4hfOjU+Xu/htgbnrO/6j06ZqG2i0jYGSE9EvifTKQ48=;
-        b=wk+T4I7KGSJcGlAKZwJECnv54dyCZzESfCDEkzbNf2YmhtO9EPA+Ya61l0pPUtZCsM
-         GpM6nXp4MFOBjTKhfitP1WEbIbIwLLUTtY5VogZBp4u4HMK/D4P0i7EmsARf6dQOpbG9
-         DFuVqpVotrX3LuPc3WuOv5fEEZ0DaR7eNEJsU4eU/HA8Z4yratmfHPj5WhLRmNXqQMzl
-         eLE8U02I/8yTjFvqDQs9KY6lcueIt6Bm6vLsZ2TaoKMYOsH7k1v9FeRnwzU1HI/1rtTT
-         y8yN6nV2UxBJcFMdK0WkfrETz4JuMRwO9Z9OqLDMsJyymkY1ScvdactTWN/izcptxPYv
-         mDMw==
-X-Forwarded-Encrypted: i=1; AJvYcCVncc904w2Eqv4vMDfKMnD3dv+rLXQuGZ0G9Gn5WRuK9CX17pKatnhub1UV0csZSz9F2MIaoWZIWMRJHYo=@vger.kernel.org, AJvYcCWcM9tRxuLhew3ST5iLf8G4KsL8wwu2UYFVFjierWXvCeeg6cicMOT9gMD4L69EJHnGRPNAqgaB@vger.kernel.org
-X-Gm-Message-State: AOJu0YyyOwZ5TrNE50vY6qlNVNQ3bDC/JxI6p8rVAjnReXiFo3o6ntLH
-	yQwm6c41HIkl7tz/XZyl0GGuDx0ixS4T9+8h70Gar9CONo6PvSdVU7dZ
-X-Gm-Gg: ASbGncvY5HZbo+f/sZzHJ95w26KXHz2L58CBkS6q+m1XF8rEjbMMiQ+cjSBHNRSwoVe
-	C1gm2ATY5qb4kmGyemKsNuhGtnSUveFe48M3mpDvZvUkXvRvULk8jxOvGqSzsQS670v+LytFtuZ
-	Q+x+joAc0ONk4v1ONMAz6aQG6O7YptS+/DmYrJIPWVupLwGOYs7dgda36r4pbSVepywRVHQzQ3v
-	aMMP75df+jzM+movCpBq8sTkE7gdksDWBT/hUVZ7VouEbTW9mXpxbFt42reDB+h4xQa3+wzc7JD
-	iFyC/QZKlJY89HpDi5Z4kY7S0cMnQLrfgMaNP59shI7wOgmrC7IZP7Mq3ubSGmz/vuCbBeokEg=
-	=
-X-Google-Smtp-Source: AGHT+IE73758IwYSE3gwQCVr5ocOcoostGM/uXpiZKDoUYwwlxSUMV3h6l1nDvdN1/+koG3pVg3tqA==
-X-Received: by 2002:a05:600c:8712:b0:451:e394:8920 with SMTP id 5b1f17b1804b1-4539341e446mr4257555e9.27.1751022300978;
-        Fri, 27 Jun 2025 04:05:00 -0700 (PDT)
-Received: from imac ([2a02:8010:60a0:0:40b8:18e0:8ac6:da0])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4538233c4acsm75833275e9.1.2025.06.27.04.04.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Jun 2025 04:05:00 -0700 (PDT)
-From: Donald Hunter <donald.hunter@gmail.com>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,  Jonathan Corbet
- <corbet@lwn.net>,  "Akira Yokosawa" <akiyks@gmail.com>,  "Breno Leitao"
- <leitao@debian.org>,  "David S. Miller" <davem@davemloft.net>,  "Eric
- Dumazet" <edumazet@google.com>,  "Ignacio Encinas Rubio"
- <ignacio@iencinas.com>,  "Jan Stancek" <jstancek@redhat.com>,  "Marco
- Elver" <elver@google.com>,  "Paolo Abeni" <pabeni@redhat.com>,  "Randy
- Dunlap" <rdunlap@infradead.org>,  "Ruben Wauters" <rubenru09@aol.com>,
-  "Shuah Khan" <skhan@linuxfoundation.org>,  joel@joelfernandes.org,
-  linux-kernel-mentees@lists.linux.dev,  linux-kernel@vger.kernel.org,
-  lkmm@lists.linux.dev,  netdev@vger.kernel.org,  peterz@infradead.org,
-  stern@rowland.harvard.edu
-Subject: Re: [PATCH v8 08/13] tools: ynl_gen_rst.py: drop support for
- generating index files
-In-Reply-To: <95d1ed00026acbe425f036f860f7bcd1a18ce98b.1750925410.git.mchehab+huawei@kernel.org>
-Date: Fri, 27 Jun 2025 11:49:28 +0100
-Message-ID: <m2jz4x8nnr.fsf@gmail.com>
-References: <cover.1750925410.git.mchehab+huawei@kernel.org>
-	<95d1ed00026acbe425f036f860f7bcd1a18ce98b.1750925410.git.mchehab+huawei@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1751021460; c=relaxed/simple;
+	bh=iyRgdZz62kfHtWgProqZ9GBCRWbW6BTlAC0PWj8nzus=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=JVMfqqYRygVy3RZ33xS/3fJNUuNMTPl2QoNC2WcfCS7mdDq4+kZ5QWZ+jTukg6/K4SaRdKFx6LTn4bTBeonqQRYK5tuzF2SCILRypEqAhA40byr0tTu0RDYYrehVqOSqK+DBOJ/JIm620dG7zjEmoUogt4TFpoDp5pDcf2fWG58=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=pksJWTHU; arc=none smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55RAbJZv012822;
+	Fri, 27 Jun 2025 10:50:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=corp-2025-04-25; bh=Xo6dHGRpyyJ5stGO
+	yGIAPRrHVhhNbeVBOkIc5fi1KhM=; b=pksJWTHUSjb1dR7FEIdM6KMxYRIOI+WW
+	OWJshPa5FOP3b+zC6FyF5w76syHRip+H0+RZFl4lvo80+5g+mHz4bwPjyHq2haRC
+	YEJhRlS9J6knjrrngizAyI8rn/wtCcMvpBBnbEQ4W9X1H59E3WnygtfYreB+5X91
+	MGCHo95FGbdrdi9Lg6kUu4ISk7KTgrQ+UFP0C8p/S0wqF7Fe4/SLL2nCluK7UPUE
+	RF99i5HZd6vAmcI2kDZpj6tV/4A1pCwgLduMjuflS6XKEu3xNpbm+D2Bpmw3axuu
+	b5SflnJd6B/0zWZxcOMGbtbGzgn44pkvLMLAwV9D/frI+N8nRPghjg==
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 47egt5tmqc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 27 Jun 2025 10:50:39 +0000 (GMT)
+Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 55RAWS7B018085;
+	Fri, 27 Jun 2025 10:50:39 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 47ehw16w1e-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Fri, 27 Jun 2025 10:50:39 +0000
+Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 55RAocV9011478;
+	Fri, 27 Jun 2025 10:50:38 GMT
+Received: from lab61.no.oracle.com (lab61.no.oracle.com [10.172.144.82])
+	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 47ehw16vyg-1;
+	Fri, 27 Jun 2025 10:50:38 +0000
+From: =?UTF-8?q?H=C3=A5kon=20Bugge?= <haakon.bugge@oracle.com>
+To: Alan Stern <stern@rowland.harvard.edu>,
+        Andrea Parri <parri.andrea@gmail.com>, Will Deacon <will@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Boqun Feng <boqun.feng@gmail.com>, Nicholas Piggin <npiggin@gmail.com>,
+        David Howells <dhowells@redhat.com>,
+        Jade Alglave <j.alglave@ucl.ac.uk>,
+        Luc Maranget <luc.maranget@inria.fr>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Akira Yokosawa <akiyks@gmail.com>, Daniel Lustig <dlustig@nvidia.com>,
+        Joel Fernandes <joelagnelf@nvidia.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc: =?UTF-8?q?H=C3=A5kon=20Bugge?= <haakon.bugge@oracle.com>,
+        linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+        lkmm@lists.linux.dev, linux-doc@vger.kernel.org
+Subject: [PATCH v2 1/1] docs/memory-barriers.txt: Add wait_event_cmd() and wait_event_exclusive_cmd()
+Date: Fri, 27 Jun 2025 12:50:33 +0200
+Message-ID: <20250627105034.1612947-1-haakon.bugge@oracle.com>
+X-Mailer: git-send-email 2.43.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-06-27_04,2025-06-26_05,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0 bulkscore=0 spamscore=0
+ phishscore=0 adultscore=0 malwarescore=0 suspectscore=0 mlxlogscore=999
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2505160000
+ definitions=main-2506270088
+X-Proofpoint-GUID: 8FpXteLgEXlpSTDqPX7G2_fm-vPer4yz
+X-Authority-Analysis: v=2.4 cv=PMYP+eqC c=1 sm=1 tr=0 ts=685e777f b=1 cx=c_pps a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17 a=IkcTkHD0fZMA:10 a=6IFa9wvqVegA:10 a=M51BFTxLslgA:10 a=yPCof4ZbAAAA:8 a=lPgn3NRR9fYW2pfQ3SIA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 cc=ntf awl=host:14723
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjI3MDA4OCBTYWx0ZWRfX7ohwrFESJfrD aINzfDGzLbT2VX4HNPF8gP01tA+7rr/zKLEyGoQi08RLkZGhQW44I3CymIPuKuxiDrUYX8frqve PAxlV6Sso+UsiWg1xZX0CyeL+yixnYz8UWDscdHIGA6TyfTVDbod3dUFlQpqe45gyXTPTjTE2Vt
+ wi16bsrfgVbyZ2MjzEshAXY4QkbQ7vAqr2FKOSU1ieKj2B83FCEPBMSwH8c2IARROMxan8HC959 JmfKFo4dSn7YHBtTPpCSEiFbgZszJlUhVzMa17JOEFtlt6ip/blReRtz8Q9WV/PM44cjVHDP0kY pkYMqCaP5j4Y4PUvBuH55WRKgGiLh+9/5+MvOzcWcHoOz7j03zsnxa0H7tQyLljRFqMtfn5KxNS
+ ujvnYemC+DXFE8nmUgGWz7PQ/bS/Abf2PY6438eP+Ot31NXSkg5bmQyyV2jCViZ8TybLxWkL
+X-Proofpoint-ORIG-GUID: 8FpXteLgEXlpSTDqPX7G2_fm-vPer4yz
 
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+Add said functions to Documentation/memory-barriers.txt.
 
-> As we're now using an index file with a glob, there's no need
-> to generate index files anymore.
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Signed-off-by: Håkon Bugge <haakon.bugge@oracle.com>
 
-Reviewed-by: Donald Hunter <donald.hunter@gmail.com>
+--
+
+v1 -> v2:
+      * Changed the prosaic part to kernel-doc style and moved it to
+        include/linux/wait.h in another commit
+---
+ Documentation/memory-barriers.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Documentation/memory-barriers.txt b/Documentation/memory-barriers.txt
+index 93d58d9a428b8..1d164e0057769 100644
+--- a/Documentation/memory-barriers.txt
++++ b/Documentation/memory-barriers.txt
+@@ -2192,6 +2192,8 @@ interpolate the memory barrier in the right place:
+ 	wait_event_timeout();
+ 	wait_on_bit();
+ 	wait_on_bit_lock();
++	wait_event_cmd();
++	wait_event_exclusive_cmd();
+ 
+ 
+ Secondly, code that performs a wake up normally follows something like this:
+-- 
+2.43.5
+
 
