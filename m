@@ -1,74 +1,76 @@
-Return-Path: <linux-doc+bounces-51022-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51024-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id E00ADAEBD94
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 18:35:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E433AEBDFB
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 19:02:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D504716897B
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 16:35:27 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B6C84563887
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 17:02:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73769EEDE;
-	Fri, 27 Jun 2025 16:35:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC4562EA162;
+	Fri, 27 Jun 2025 17:02:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="EdWqLhQG"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tvSgedwL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D212229E115
-	for <linux-doc@vger.kernel.org>; Fri, 27 Jun 2025 16:35:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76FD417A306;
+	Fri, 27 Jun 2025 17:02:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751042124; cv=none; b=FSspOabzcnZiz3rLqni0lwcUpzLoB5+z3A/PvMVKWs1y52HmxU8in4rMJPoqE/OW28DkPj/5UkVYC6JEniXNv45u2bbUSRL+OV+28PD/l1aVu/IBHgzGUyPpMHdZha9mfppHdWRBkv7Io4lJJuyXl03qOcK4BBkMZhU0nGqrm1I=
+	t=1751043738; cv=none; b=tpSf4EI36esC1BvzaA6VfNvyjgXbY3c6bdLwUYb2wMzhRNnFrJGvM0U/gWtfBjXYesvvN5/nRb45jxKl7c3jt/AAjVU+0QTPUadRi6MS0JMpUOAvKPNAgePE5TOI6pO0QYN0WwEdJfeaKXXada1O1PgHdZkIJTM1zfzk4LWIagU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751042124; c=relaxed/simple;
-	bh=vvSdh6Pu/vbKF1fhGZAQmkhDpdQhyfqNHF4KpTD9x/c=;
+	s=arc-20240116; t=1751043738; c=relaxed/simple;
+	bh=tYzCzCM3VZZF7WSTA7gi5cm/krCk6YzEM9VmpLpknjY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=an2jC8KSqQjlhB3wK2gsXsZkwADpGIOAFWsHQnoF3b514jvP1T8lim2wRqcTIZnzHOkM4nfwZZ69VQsdooN3WwUh53TR7yZ+nOB7CE9uDnXYXR1zHPnUYB24OoaFqjUHQke9wAUKb66pyyXWb+Uzx/ZhuOtYZwycWT8T75uwBQQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=EdWqLhQG; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1751042121;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Y/NvqSFSTyD4E2t2FSiuoiOcmymYTYmDyujSBCRIZBE=;
-	b=EdWqLhQGMC8s/LbKqX/34UVuzCNL5zr49G2DVcP5ufvYgFaR43CKjn8Jx8bQxPcgohwiOr
-	g/coe0rVuA4Cx3XX3YlU+6Im5tIW7ZkWrKP+yx3s7hS4Hnw2UUWn1C2Dw1zUf0CL1NGMSy
-	93xbrGT8K0/u9ksySnsqN1WtPvfVblw=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-267-K2Zj34qTMCql6hSQpCf5WA-1; Fri,
- 27 Jun 2025 12:35:17 -0400
-X-MC-Unique: K2Zj34qTMCql6hSQpCf5WA-1
-X-Mimecast-MFC-AGG-ID: K2Zj34qTMCql6hSQpCf5WA_1751042116
-Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 4F9661955EC1;
-	Fri, 27 Jun 2025 16:35:16 +0000 (UTC)
-Received: from bfoster (unknown [10.22.64.142])
-	by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 816C9195609D;
-	Fri, 27 Jun 2025 16:35:14 +0000 (UTC)
-Date: Fri, 27 Jun 2025 12:38:52 -0400
-From: Brian Foster <bfoster@redhat.com>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Christian Brauner <brauner@kernel.org>,
-	"Darrick J. Wong" <djwong@kernel.org>,
-	Joanne Koong <joannelkoong@gmail.com>, linux-xfs@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-block@vger.kernel.org, gfs2@lists.linux.dev
-Subject: Re: [PATCH 08/12] iomap: move folio_unlock out of
- iomap_writeback_folio
-Message-ID: <aF7JHFdLCi89sFpn@bfoster>
-References: <20250627070328.975394-1-hch@lst.de>
- <20250627070328.975394-9-hch@lst.de>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Np1DbNcBKornihZGTPKcpXcU2WRWOcUisLnnQMHgL7Ro45H2ndseGKNTTusR5L3i5hR3YCIv5/FKfH6StYlDdV7rCQn923C+nWILTBdJwA3Bfp0ptpImHKDLV6OS4WlXYwjJIpLWbuKdLzPQPqBuM+58XpvSBRuGOMaGEoiiih8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tvSgedwL; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55EE2C4CEE3;
+	Fri, 27 Jun 2025 17:02:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1751043738;
+	bh=tYzCzCM3VZZF7WSTA7gi5cm/krCk6YzEM9VmpLpknjY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=tvSgedwLkGNl0rMmzrS3+y77Cdl6mvdnS/K1+GmEohvH0tjCCcyHtHpGONE48PbuE
+	 klXY+q4z8M1Sr6BMdy5xKLE+7d0yKqmUTsHjPtcmxh4vJJtZd+k3yW/hyDz3WRQrN7
+	 9wzjcEy3jjvepJtDybVtHKrX2dD+yzLWynuamatcAKtm3zUP2H46mTYvoCARqj66Pz
+	 6UkaSbTPpQWjV9eejBMr9V3CGDdGIUzKXNzrhwjf9KcP57JXzI9oiJZKCpv4d77ArY
+	 EG95TYcKm5S2WkFdvbxGcvfwd6s5pEsCWXf4aKpX4Whf3v+9N/L6udSPyAT+368SB1
+	 8wWh+cVapuQEw==
+Date: Fri, 27 Jun 2025 20:02:13 +0300
+From: Leon Romanovsky <leon@kernel.org>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Christoph Hellwig <hch@lst.de>, Jonathan Corbet <corbet@lwn.net>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
+	Alexander Potapenko <glider@google.com>,
+	Marco Elver <elver@google.com>, Dmitry Vyukov <dvyukov@google.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	=?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org, iommu@lists.linux.dev,
+	virtualization@lists.linux.dev, kasan-dev@googlegroups.com,
+	linux-trace-kernel@vger.kernel.org, linux-mm@kvack.org,
+	Jason Gunthorpe <jgg@ziepe.ca>
+Subject: Re: [PATCH 0/8] dma-mapping: migrate to physical address-based API
+Message-ID: <20250627170213.GL17401@unreal>
+References: <CGME20250625131920eucas1p271b196cde042bd39ac08fb12beff5baf@eucas1p2.samsung.com>
+ <cover.1750854543.git.leon@kernel.org>
+ <35df6f2a-0010-41fe-b490-f52693fe4778@samsung.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -77,72 +79,63 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250627070328.975394-9-hch@lst.de>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
+In-Reply-To: <35df6f2a-0010-41fe-b490-f52693fe4778@samsung.com>
 
-On Fri, Jun 27, 2025 at 09:02:41AM +0200, Christoph Hellwig wrote:
-> From: Joanne Koong <joannelkoong@gmail.com>
+On Fri, Jun 27, 2025 at 03:44:10PM +0200, Marek Szyprowski wrote:
+> On 25.06.2025 15:18, Leon Romanovsky wrote:
+> > This series refactors the DMA mapping to use physical addresses
+> > as the primary interface instead of page+offset parameters. This
+> > change aligns the DMA API with the underlying hardware reality where
+> > DMA operations work with physical addresses, not page structures.
+> >
+> > The series consists of 8 patches that progressively convert the DMA
+> > mapping infrastructure from page-based to physical address-based APIs:
+> >
+> > The series maintains backward compatibility by keeping the old
+> > page-based API as wrapper functions around the new physical
+> > address-based implementations.
 > 
-> Move unlocking the folio out of iomap_writeback_folio into the caller.
-> This means the end writeback machinery is now run with the folio locked
-> when no writeback happend, or writeback completed extremely fast.
-> 
+> Thanks for this rework! I assume that the next step is to add map_phys 
+> callback also to the dma_map_ops and teach various dma-mapping providers 
+> to use it to avoid more phys-to-page-to-phys conversions.
 
-I notice that folio_end_dropbehind_write() (via folio_end_writeback())
-wants to trylock the folio in order to do its thing. Is this going to
-cause issues with that (i.e. prevent invalidations)?
+Probably Christoph will say yes, however I personally don't see any
+benefit in this. Maybe I wrong here, but all existing .map_page()
+implementation platforms don't support p2p anyway. They won't benefit
+from this such conversion.
 
-Brian
+> 
+> I only wonder if this newly introduced dma_map_phys()/dma_unmap_phys() 
+> API is also suitable for the recently discussed PCI P2P DMA? While 
+> adding a new API maybe we should take this into account?
 
-> This prepares for exporting iomap_writeback_folio for use in folio
-> laundering.
+First, immediate user (not related to p2p) is blk layer:
+https://lore.kernel.org/linux-nvme/bcdcb5eb-17ed-412f-bf5c-303079798fe2@nvidia.com/T/#m7e715697d4b2e3997622a3400243477c75cab406
+
++static bool blk_dma_map_direct(struct request *req, struct device *dma_dev,
++		struct blk_dma_iter *iter, struct phys_vec *vec)
++{
++	iter->addr = dma_map_page(dma_dev, phys_to_page(vec->paddr),
++			offset_in_page(vec->paddr), vec->len, rq_dma_dir(req));
++	if (dma_mapping_error(dma_dev, iter->addr)) {
++		iter->status = BLK_STS_RESOURCE;
++		return false;
++	}
++	iter->len = vec->len;
++	return true;
++}
+
+Block layer started to store phys addresses instead of struct pages and
+this phys_to_page() conversion in data-path will be avoided.
+
+> My main concern is the lack of the source phys addr passed to the dma_unmap_phys() 
+> function and I'm aware that this might complicate a bit code conversion 
+> from old dma_map/unmap_page() API.
 > 
-> Signed-off-by: Joanne Koong <joannelkoong@gmail.com>
-> [hch: split from a larger patch]
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  fs/iomap/buffered-io.c | 9 ++++-----
->  1 file changed, 4 insertions(+), 5 deletions(-)
-> 
-> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-> index c28eb6a6eee4..a1dccf4e7063 100644
-> --- a/fs/iomap/buffered-io.c
-> +++ b/fs/iomap/buffered-io.c
-> @@ -1656,10 +1656,8 @@ static int iomap_writeback_folio(struct iomap_writeback_ctx *wpc,
->  
->  	trace_iomap_writeback_folio(inode, pos, folio_size(folio));
->  
-> -	if (!iomap_writeback_handle_eof(folio, inode, &end_pos)) {
-> -		folio_unlock(folio);
-> +	if (!iomap_writeback_handle_eof(folio, inode, &end_pos))
->  		return 0;
-> -	}
->  	WARN_ON_ONCE(end_pos <= pos);
->  
->  	if (i_blocks_per_folio(inode, folio) > 1) {
-> @@ -1713,7 +1711,6 @@ static int iomap_writeback_folio(struct iomap_writeback_ctx *wpc,
->  	 * already at this point.  In that case we need to clear the writeback
->  	 * bit ourselves right after unlocking the page.
->  	 */
-> -	folio_unlock(folio);
->  	if (ifs) {
->  		if (atomic_dec_and_test(&ifs->write_bytes_pending))
->  			folio_end_writeback(folio);
-> @@ -1740,8 +1737,10 @@ iomap_writepages(struct iomap_writeback_ctx *wpc)
->  			PF_MEMALLOC))
->  		return -EIO;
->  
-> -	while ((folio = writeback_iter(mapping, wpc->wbc, folio, &error)))
-> +	while ((folio = writeback_iter(mapping, wpc->wbc, folio, &error))) {
->  		error = iomap_writeback_folio(wpc, folio);
-> +		folio_unlock(folio);
-> +	}
->  
->  	/*
->  	 * If @error is non-zero, it means that we have a situation where some
+> Best regards
 > -- 
-> 2.47.2
+> Marek Szyprowski, PhD
+> Samsung R&D Institute Poland
 > 
 > 
-
 
