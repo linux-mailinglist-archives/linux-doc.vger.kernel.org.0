@@ -1,337 +1,544 @@
-Return-Path: <linux-doc+bounces-51003-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-50999-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A0FEAEBB5A
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 17:14:14 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 68D83AEBB3F
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 17:12:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F032164270F
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 15:12:36 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4B1927AEC62
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Jun 2025 15:10:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ADC4D2E88B1;
-	Fri, 27 Jun 2025 15:12:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 658A42C325C;
+	Fri, 27 Jun 2025 15:10:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GIsZy1SU"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="WOkANq00"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85C802C325C;
-	Fri, 27 Jun 2025 15:12:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2582A2E9EBF
+	for <linux-doc@vger.kernel.org>; Fri, 27 Jun 2025 15:10:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751037160; cv=none; b=RDHBZ4Y7UkLsOg7naZqXSniCGbViJLfWWhZEu8p9cSp/a4zHLFUuKnSEigEERifX4grRA6kL7lpdC7UbcZXnQf2MI2/jVuN356g2UlP77Icew847RgFbbcmbaTbcEJGxMYR3wkXtEEy6ZOI+wEkVtIDmtHSEtLerVawmeO87C5M=
+	t=1751037040; cv=none; b=lgYV9rzASll1GKprf1zn9qYhoJKMKZc06gHp0kNE9Ae0H77Y2v2QL9DGgvq6gmGcHViqMGwbhBycpe7BW5BEBxFNBi7lhMyUcQLtyduRL6GxYo9LsX7ykxUZn4Zdbk9TMBRwtNVFPoUfJmnt+Qfxzvv+jFNNOE4l2W6/oErb2O0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751037160; c=relaxed/simple;
-	bh=aw8tzCQQc+krKH99gpFkFexJS04v8WHD7GAdJzrOt4M=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Sq5i/2EHSqMtmOWga0waghdsjLMLMt1VTfchu8pinZyHb8rGrD+1rqcLyhRZkdvdefWLr6vy6tj5xqvGbSsjpb3cFoFC6jINDGcZk+gsCyfBGzZsy9m62IC8xvx+Ir7tFeIdf6sb8engJkPs2BX+Z3lQsP2caeVra9DADHpweWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GIsZy1SU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75AD4C4CEE3;
-	Fri, 27 Jun 2025 15:12:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1751037160;
-	bh=aw8tzCQQc+krKH99gpFkFexJS04v8WHD7GAdJzrOt4M=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=GIsZy1SUSqn3OB8D1XsNDwwhL0n1X/xx4nSjI1/JLjINqJjqvcA9N2/p7XbSDZC06
-	 6L9Qysv45Tp/NxPYxkfSTOfKn3VdkVVlnLhKHM517GmuUYW4YvBP/oCRTyDw1yT+2A
-	 k/f2zntvZeak1jrBmvbwBkrii1xrVx+55S+xLmhQUy1W8l/tM1Bp3Rk+ksBu7M0wbD
-	 bhBLbIraEmnZcWee0pAJWvWnubbbS3s3Evo95BY4K8J+6DFCtR0ceka3fqLYs+KOQH
-	 J5IatS9wMMCyCla0CNPBwvNaebzG0L9qcf6TdkmN2sp2yJ+VnpA7fkpscZeuDvTy4S
-	 ZDrnO6/3cHOYA==
-Date: Fri, 27 Jun 2025 17:12:33 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>, Jonathan Corbet
- <corbet@lwn.net>
-Cc: linux-kernel@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>, Sai
- Vishnu M <saivishnu725@gmail.com>
-Subject: Re: [PATCH 0/3] Translate sphinx-pre-install to Python
-Message-ID: <20250627171233.66c825ca@sal.lan>
-In-Reply-To: <cover.1750924501.git.mchehab+huawei@kernel.org>
-References: <cover.1750924501.git.mchehab+huawei@kernel.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1751037040; c=relaxed/simple;
+	bh=CS6JGYEZyu63cneXlrE0N6uApdvgM6+ruuUsoPwhzns=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=o5Oi616U0Bpublw55AFGCzvm/q2S15fg9r5DG9r+HhwsyNxnYcpnD4i/yXTFdPCFsfCCSUMpwIHnVxWalfN5zt1hASPFDmqSIG6YSqPh7r362uCXfzEId1iiaptG9ssqJw5O03oATl4MrKtJjg7udK331G20ewj7xJiiZFNhBJg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=WOkANq00; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1751037037;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=cw+o2cykoBoeqb8Lc9NZW3TPVPhuIv17rPABGT6nJ9c=;
+	b=WOkANq00HeicCPXk7ogHqtQvLYbo/mhFv4jyxovQc+8jJIY0duzQggxe7FugU7s9gDVcZR
+	Q6fYfuOSC8uKewq1rmKSGZ3Hq47/d8GwrAlGexUAKDim4aerPCo3cUPLaPZYbrTI4L6MyK
+	Q05CUtjhfAO+L3kOUIttBz4hQDkPwWs=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-442-WnwzXdEGOxeC6iE4Ae1vDw-1; Fri,
+ 27 Jun 2025 11:10:31 -0400
+X-MC-Unique: WnwzXdEGOxeC6iE4Ae1vDw-1
+X-Mimecast-MFC-AGG-ID: WnwzXdEGOxeC6iE4Ae1vDw_1751037030
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 190CB1801208;
+	Fri, 27 Jun 2025 15:10:30 +0000 (UTC)
+Received: from bfoster (unknown [10.22.64.142])
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 4D7AA18046C5;
+	Fri, 27 Jun 2025 15:10:27 +0000 (UTC)
+Date: Fri, 27 Jun 2025 11:14:05 -0400
+From: Brian Foster <bfoster@redhat.com>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Christian Brauner <brauner@kernel.org>,
+	"Darrick J. Wong" <djwong@kernel.org>,
+	Joanne Koong <joannelkoong@gmail.com>, linux-xfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-block@vger.kernel.org, gfs2@lists.linux.dev
+Subject: Re: [PATCH 03/12] iomap: refactor the writeback interface
+Message-ID: <aF61PZEb5ndROI6z@bfoster>
+References: <20250627070328.975394-1-hch@lst.de>
+ <20250627070328.975394-4-hch@lst.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250627070328.975394-4-hch@lst.de>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
 
-Em Thu, 26 Jun 2025 10:06:28 +0200
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
+On Fri, Jun 27, 2025 at 09:02:36AM +0200, Christoph Hellwig wrote:
+> Replace ->map_blocks with a new ->writeback_range, which differs in the
+> following ways:
+> 
+>  - it must also queue up the I/O for writeback, that is called into the
+>    slightly refactored and extended in scope iomap_add_to_ioend for
+>    each region
+>  - can handle only a part of the requested region, that is the retry
+>    loop for partial mappings moves to the caller
+>  - handles cleanup on failures as well, and thus also replaces the
+>    discard_folio method only implemented by XFS.
+> 
+> This will allow to use the iomap writeback code also for file systems
+> that are not block based like fuse.
+> 
+> Co-developed-by: Joanne Koong <joannelkoong@gmail.com>
+> Signed-off-by: Joanne Koong <joannelkoong@gmail.com>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  .../filesystems/iomap/operations.rst          |  23 +---
+>  block/fops.c                                  |  25 ++--
+>  fs/gfs2/bmap.c                                |  26 ++--
+>  fs/iomap/buffered-io.c                        |  93 ++++++-------
+>  fs/iomap/trace.h                              |   2 +-
+>  fs/xfs/xfs_aops.c                             | 128 +++++++++++-------
+>  fs/zonefs/file.c                              |  28 ++--
+>  include/linux/iomap.h                         |  20 ++-
+>  8 files changed, 183 insertions(+), 162 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/iomap/operations.rst b/Documentation/filesystems/iomap/operations.rst
+> index 52c2e23e0e76..3c7989ee84ff 100644
+> --- a/Documentation/filesystems/iomap/operations.rst
+> +++ b/Documentation/filesystems/iomap/operations.rst
+...
+> @@ -283,15 +283,14 @@ The ``ops`` structure must be specified and is as follows:
+>  .. code-block:: c
+>  
+>   struct iomap_writeback_ops {
+> -     int (*map_blocks)(struct iomap_writeback_ctx *wpc, struct inode *inode,
+> -                       loff_t offset, unsigned len);
+> -     int (*submit_ioend)(struct iomap_writeback_ctx *wpc, int status);
+> -     void (*discard_folio)(struct folio *folio, loff_t pos);
+> +    int (*writeback_range)(struct iomap_writeback_ctx *wpc,
+> +    		struct folio *folio, u64 pos, unsigned int len, u64 end_pos);
 
-> As part of my efforts to make the doc build system more modern, it
-> follows a patch series converting sphinx-pre-install to python.
-> 
-> The first patch contains a small fix to the Perl version. It is
-> interesting to have, as otherwise regression tests fail.
-> 
-> The conversion itself was not hard. Most of the time I spent writing
-> scripts to test it.
+Whitespace damage on the above line.
 
-Hi Jon,
+> +    int (*submit_ioend)(struct iomap_writeback_ctx *wpc, int status);
+>   };
+>  
+>  The fields are as follows:
+>  
+> -  - ``map_blocks``: Sets ``wpc->iomap`` to the space mapping of the file
+> +  - ``writeback_range``: Sets ``wpc->iomap`` to the space mapping of the file
+>      range (in bytes) given by ``offset`` and ``len``.
+>      iomap calls this function for each dirty fs block in each dirty folio,
+>      though it will `reuse mappings
+...
+> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+> index ec2f70c6ec33..a54b14817cd0 100644
+> --- a/fs/iomap/buffered-io.c
+> +++ b/fs/iomap/buffered-io.c
+...
+> @@ -1748,63 +1764,34 @@ static int iomap_add_to_ioend(struct iomap_writeback_ctx *wpc,
+...
+>  
+> -static int iomap_writepage_map_blocks(struct iomap_writeback_ctx *wpc,
+> -		struct folio *folio, u64 pos, u64 end_pos, unsigned dirty_len,
+> +static int iomap_writeback_range(struct iomap_writeback_ctx *wpc,
+> +		struct folio *folio, u64 pos, u32 rlen, u64 end_pos,
+>  		bool *wb_pending)
+>  {
+> -	int error;
+> -
+>  	do {
+> -		unsigned map_len;
+> -
+> -		error = wpc->ops->map_blocks(wpc, wpc->inode, pos, dirty_len);
+> -		if (error)
+> -			break;
+> -		trace_iomap_writepage_map(wpc->inode, pos, dirty_len,
+> -				&wpc->iomap);
+> -
+> -		map_len = min_t(u64, dirty_len,
+> -			wpc->iomap.offset + wpc->iomap.length - pos);
+> -		WARN_ON_ONCE(!folio->private && map_len < dirty_len);
+> +		ssize_t ret;
+>  
+> -		switch (wpc->iomap.type) {
+> -		case IOMAP_INLINE:
+> -			WARN_ON_ONCE(1);
+> -			error = -EIO;
+> -			break;
+> -		case IOMAP_HOLE:
+> -			break;
+> -		default:
+> -			error = iomap_add_to_ioend(wpc, folio, pos, end_pos,
+> -					map_len);
+> -			if (!error)
+> -				*wb_pending = true;
+> -			break;
+> -		}
+> -		dirty_len -= map_len;
+> -		pos += map_len;
+> -	} while (dirty_len && !error);
+> +		ret = wpc->ops->writeback_range(wpc, folio, pos, rlen, end_pos);
+> +		if (WARN_ON_ONCE(ret == 0 || ret > rlen))
+> +			return -EIO;
+> +		if (ret < 0)
+> +			return ret;
+> +		rlen -= ret;
+> +		pos += ret;
+> +		if (wpc->iomap.type != IOMAP_HOLE)
+> +			*wb_pending = true;
 
-Please see this as a RFC. There is a trivial bug here when sphinx-build
-is found (m1 and m2 variables were renamed to match). Easy to fix,
-but I'm doing other cleanups, and I'm planning to improve the regression
-test coverage.
+I don't really love the implied logic here, but nothing better comes to
+mind atm. I suppose a one-liner comment to connect this to the
+add_to_ioend() call wouldn't hurt. Otherwise the rest looks reasonable
+to me:
 
-I'll be sending you a new version next week.
+Reviewed-by: Brian Foster <bfoster@redhat.com>
 
-> 
-> The new version is meant to be bug-compatible with the previous
-> version, with some exceptions:
-> 
-> - I dropped support for too old Fedora distros. They're OOL;
-> - as it runs on Python, the tests for python could be bogus. I 
->   added some FIXME entries to remember about that.;
-> - The package lists are now alphabetically sorted, whith alters
->    the warning/eror order.
-> - It supports additional variants that I could install via lxc download
->    template.
-> - I didn't test a couple of distro variants (OpenMandriva, RHEL,
->   and Scientific Linux.
-> 
-> I did regression tests. Those are the test results summary:
-> 
-> +-----------------+---------+-------+-------------+----------------------------------------+
-> | distro          | status  | stage | return code | log file                               |
-> +-----------------+---------+-------+-------------+----------------------------------------+
-> | almalinux       | N/A     | Tests | 0           | ./test_logs/almalinux_report.log       |
-> | amazonlinux     | N/A     | Tests | 0           | ./test_logs/amazonlinux_report.log     |
-> | archlinux       | SUCCESS | Tests | 0           | ./test_logs/archlinux_report.log       |
-> | centos          | SUCCESS | Tests | 0           | ./test_logs/centos_report.log          |
-> | debian          | SUCCESS | Tests | 0           | ./test_logs/debian_report.log          |
-> | devuan          | N/A     | Tests | 0           | ./test_logs/devuan_report.log          |
-> | fedora          | SUCCESS | Tests | 0           | ./test_logs/fedora_report.log          |
-> | gentoo          | FAILED  | Tests | 3           | ./test_logs/gentoo_report.log          |
-> | kali            | N/A     | Tests | 0           | ./test_logs/kali_report.log            |
-> | mageia          | SUCCESS | Tests | 0           | ./test_logs/mageia_report.log          |
-> | mint            | N/A     | Tests | 0           | ./test_logs/mint_report.log            |
-> | openeuler       | N/A     | Tests | 0           | ./test_logs/openeuler_report.log       |
-> | opensuse        | SUCCESS | Tests | 0           | ./test_logs/opensuse_report.log        |
-> | oracle          | SUCCESS | Tests | 0           | ./test_logs/oracle_report.log          |
-> | rockylinux      | N/A     | Tests | 0           | ./test_logs/rockylinux_report.log      |
-> | springdalelinux | N/A     | Tests | 0           | ./test_logs/springdalelinux_report.log |
-> | ubuntu          | SUCCESS | Tests | 0           | ./test_logs/ubuntu_report.log          |
-> | ubuntu-lts      | SUCCESS | Tests | 0           | ./test_logs/ubuntu-lts_report.log      |
-> +-----------------+---------+-------+-------------+----------------------------------------+
-> 
-> N/A means that the version were not supported originally, so it can't be
-> properly compared.
-> 
-> The only one marked as failed is gentoo. This is actually a false positive.
-> That's the test output:
-> 
-> TEST REPORT: GENTOO
-> 
-> Generated: 2025-06-26 10:02:57
-> Stage: Tests
-> 
-> ERROR DETAILS:
-> 
-> CustomError: 6 of 9 validate commands succeeded
->   File "/home/mchehab/bin/container_tests.py", line 1779, in <module>
->     asyncio.run(main())
->   File "/usr/lib64/python3.13/asyncio/runners.py", line 195, in run
->     return runner.run(main)
->   File "/usr/lib64/python3.13/asyncio/runners.py", line 118, in run
->     return self._loop.run_until_complete(task)
->   File "/usr/lib64/python3.13/asyncio/base_events.py", line 706, in run_until_complete
->     self.run_forever()
->   File "/usr/lib64/python3.13/asyncio/base_events.py", line 677, in run_forever
->     self._run_once()
->   File "/usr/lib64/python3.13/asyncio/base_events.py", line 2034, in _run_once
->     handle._run()
->   File "/usr/lib64/python3.13/asyncio/events.py", line 89, in _run
->     self._context.run(self._callback, *self._args)
->   File "/home/mchehab/bin/container_tests.py", line 1773, in main
->     await manager.run()
->   File "/home/mchehab/bin/container_tests.py", line 1625, in run
->     await self.run_distro(distro)
->   File "/home/mchehab/bin/container_tests.py", line 1605, in run_distro
->     await self.run_test(distro)
->   File "/home/mchehab/bin/container_tests.py", line 1434, in run_test
->     self.record_status(
-> 
-> 
-> TEST RESULTS:
-> 
-> Status: FAILED
-> Return Code: 3
-> 
-> STANDARD OUTPUT:
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install.py
-> -------------------------------------------------------
-> 
-> Detected OS: Gentoo Base System release 2.17.
-> Warning: better to also install "convert".
-> Warning: better to also install "dot".
-> Warning: better to also install "latexmk".
-> Warning: better to also install "media-fonts/dejavu".
-> Warning: better to also install "media-fonts/noto-cjk".
-> Warning: better to also install "rsvg-convert".
-> Warning: better to also install "xelatex".
-> ERROR: please install "yaml", otherwise, build won't work.
-> You should run:
-> 
-> 
-> 	sudo su -c 'echo "media-gfx/imagemagick svg png" > /etc/portage/package.use/imagemagick'
-> 	sudo su -c 'echo "media-gfx/graphviz cairo pdf" > /etc/portage/package.use/graphviz'
-> 	sudo emerge --ask media-gfx/imagemagick media-gfx/graphviz latexmk media-fonts/dejavu media-fonts/noto-cjk gnome-base/librsvg dev-texlive/texlive-xetex media-fonts/dejavu dev-python/pyyaml
-> 
-> Sphinx needs to be installed either:
-> 1) via pip/pypi with:
-> 
-> 	/usr/sbin/python3 -m venv sphinx_latest
-> 	. sphinx_latest/bin/activate
-> 	pip install -r ./Documentation/sphinx/requirements.txt
-> 
->     If you want to exit the virtualenv, you can use:
-> 	deactivate
-> 
-> 2) As a package with:
-> 
-> 
-> 	sudo su -c 'echo "media-gfx/imagemagick svg png" > /etc/portage/package.use/imagemagick'
-> 	sudo su -c 'echo "media-gfx/graphviz cairo pdf" > /etc/portage/package.use/graphviz'
-> 	sudo emerge --ask python-sphinx
-> 
->     Please note that Sphinx >= 3.0 will currently produce false-positive
->    warning when the same name is used for more than one type (functions,
->    structs, enums,...). This is known Sphinx bug. For more details, see:
-> 	https://github.com/sphinx-doc/sphinx/pull/8313
-> Can't build as 2 mandatory dependencies are missing
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install
-> ----------------------------------------------------
-> 
-> Detected OS: Gentoo Base System release 2.17.
-> Warning: better to also install "convert".
-> Warning: better to also install "dot".
-> Warning: better to also install "latexmk".
-> Warning: better to also install "media-fonts/dejavu".
-> Warning: better to also install "media-fonts/noto-cjk".
-> Warning: better to also install "rsvg-convert".
-> Warning: better to also install "xelatex".
-> ERROR: please install "yaml", otherwise, build won't work.
-> You should run:
-> 
-> 	sudo su -c 'echo "media-gfx/imagemagick svg png" > /etc/portage/package.use/imagemagick'
-> 	sudo su -c 'echo "media-gfx/graphviz cairo pdf" > /etc/portage/package.use/graphviz'
-> 	sudo emerge --ask media-gfx/imagemagick media-gfx/graphviz latexmk media-fonts/dejavu media-fonts/noto-cjk gnome-base/librsvg dev-texlive/texlive-xetex media-fonts/dejavu dev-python/pyyaml
-> 
-> Sphinx needs to be installed either:
-> 1) via pip/pypi with:
-> 
-> 	/usr/sbin/python3 -m venv sphinx_latest
-> 	. sphinx_latest/bin/activate
-> 	pip install -r ./Documentation/sphinx/requirements.txt
-> 
->     If you want to exit the virtualenv, you can use:
-> 	deactivate
-> 
-> 2) As a package with:
-> 
-> 	sudo su -c 'echo "media-gfx/imagemagick svg png" > /etc/portage/package.use/imagemagick'
-> 	sudo su -c 'echo "media-gfx/graphviz cairo pdf" > /etc/portage/package.use/graphviz'
-> 	sudo emerge --ask python-sphinx
-> 
->     Please note that Sphinx >= 3.0 will currently produce false-positive
->    warning when the same name is used for more than one type (functions,
->    structs, enums,...). This is known Sphinx bug. For more details, see:
-> 	https://github.com/sphinx-doc/sphinx/pull/8313
-> Can't build as 2 mandatory dependencies are missing at ./scripts/sphinx-pre-install line 990.
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install >/tmp/perl_venv
-> --------------------------------------------------------------------
-> 
-> Can't build as 2 mandatory dependencies are missing at ./scripts/sphinx-pre-install line 990.
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install.py >/tmp/python_venv
-> -------------------------------------------------------------------------
-> 
-> Can't build as 2 mandatory dependencies are missing
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install --no-virtualenv >/tmp/perl_no_venv
-> ---------------------------------------------------------------------------------------
-> 
-> Can't build as 2 mandatory dependencies are missing at ./scripts/sphinx-pre-install line 990.
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install.py --no-virtualenv >/tmp/python_no_venv
-> --------------------------------------------------------------------------------------------
-> 
-> Can't build as 2 mandatory dependencies are missing
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install --no-pdf >/tmp/perl_no_pdf
-> -------------------------------------------------------------------------------
-> 
-> Can't build as 2 mandatory dependencies are missing at ./scripts/sphinx-pre-install line 990.
-> 
-> $ cd /root && LC_ALL=C ./scripts/sphinx-pre-install.py --no-pdf >/tmp/python_no_pdf
-> ------------------------------------------------------------------------------------
-> 
-> Can't build as 2 mandatory dependencies are missing
-> 
-> $ sort /tmp/perl_venv -o /tmp/perl_venv.sorted
-> -----------------------------------------------
-> 
-> 
-> $ sort /tmp/python_venv -o /tmp/python_venv.sorted
-> ---------------------------------------------------
-> 
-> 
-> $ sort /tmp/perl_no_venv -o /tmp/perl_no_venv.sorted
-> -----------------------------------------------------
-> 
-> 
-> $ sort /tmp/python_no_venv -o /tmp/python_no_venv.sorted
-> ---------------------------------------------------------
-> 
-> 
-> $ sort /tmp/perl_no_pdf -o /tmp/perl_no_pdf.sorted
-> ---------------------------------------------------
-> 
-> 
-> $ sort /tmp/python_no_pdf -o /tmp/python_no_pdf.sorted
-> -------------------------------------------------------
-> 
-> 
-> $ diff -q /tmp/perl_venv.sorted /tmp/python_venv.sorted
-> --------------------------------------------------------
-> 
-> Files /tmp/perl_venv.sorted and /tmp/python_venv.sorted differ
-> 
-> $ diff -q /tmp/perl_no_venv.sorted /tmp/python_no_venv.sorted
-> --------------------------------------------------------------
-> 
-> Files /tmp/perl_no_venv.sorted and /tmp/python_no_venv.sorted differ
-> 
-> $ diff -q /tmp/perl_no_pdf.sorted /tmp/python_no_pdf.sorted
-> ------------------------------------------------------------
-> 
-> Files /tmp/perl_no_pdf.sorted and /tmp/python_no_pdf.sorted differ
-> 
-> 
-> 
-> ERROR OUTPUT:
-> 6 of 9 validate commands succeeded
-> 
-> 
-> 
-> 
-> 
-> Mauro Carvalho Chehab (3):
->   scripts: : fix version check for Fedora
->   scripts: : Convert script to Python
->   scripts: sphinx-pre-install: replace it by a Python version
-> 
->  scripts/sphinx-pre-install | 2144 ++++++++++++++++++------------------
->  1 file changed, 1095 insertions(+), 1049 deletions(-)
-> 
+> +	} while (rlen);
+>  
+> -	/*
+> -	 * We cannot cancel the ioend directly here on error.  We may have
+> -	 * already set other pages under writeback and hence we have to run I/O
+> -	 * completion to mark the error state of the pages under writeback
+> -	 * appropriately.
+> -	 *
+> -	 * Just let the file system know what portion of the folio failed to
+> -	 * map.
+> -	 */
+> -	if (error && wpc->ops->discard_folio)
+> -		wpc->ops->discard_folio(folio, pos);
+> -	return error;
+> +	return 0;
+>  }
+>  
+>  /*
+> @@ -1916,8 +1903,8 @@ static int iomap_writepage_map(struct iomap_writeback_ctx *wpc,
+>  	 */
+>  	end_aligned = round_up(end_pos, i_blocksize(inode));
+>  	while ((rlen = iomap_find_dirty_range(folio, &pos, end_aligned))) {
+> -		error = iomap_writepage_map_blocks(wpc, folio, pos, end_pos,
+> -				rlen, &wb_pending);
+> +		error = iomap_writeback_range(wpc, folio, pos, rlen, end_pos,
+> +				&wb_pending);
+>  		if (error)
+>  			break;
+>  		pos += rlen;
+> diff --git a/fs/iomap/trace.h b/fs/iomap/trace.h
+> index 455cc6f90be0..aaea02c9560a 100644
+> --- a/fs/iomap/trace.h
+> +++ b/fs/iomap/trace.h
+> @@ -169,7 +169,7 @@ DEFINE_EVENT(iomap_class, name,	\
+>  DEFINE_IOMAP_EVENT(iomap_iter_dstmap);
+>  DEFINE_IOMAP_EVENT(iomap_iter_srcmap);
+>  
+> -TRACE_EVENT(iomap_writepage_map,
+> +TRACE_EVENT(iomap_add_to_ioend,
+>  	TP_PROTO(struct inode *inode, u64 pos, unsigned int dirty_len,
+>  		 struct iomap *iomap),
+>  	TP_ARGS(inode, pos, dirty_len, iomap),
+> diff --git a/fs/xfs/xfs_aops.c b/fs/xfs/xfs_aops.c
+> index 81040b57a844..ce4ed03db21d 100644
+> --- a/fs/xfs/xfs_aops.c
+> +++ b/fs/xfs/xfs_aops.c
+> @@ -233,6 +233,47 @@ xfs_end_bio(
+>  	spin_unlock_irqrestore(&ip->i_ioend_lock, flags);
+>  }
+>  
+> +/*
+> + * We cannot cancel the ioend directly on error.  We may have already set other
+> + * pages under writeback and hence we have to run I/O completion to mark the
+> + * error state of the pages under writeback appropriately.
+> + *
+> + * If the folio has delalloc blocks on it, the caller is asking us to punch them
+> + * out. If we don't, we can leave a stale delalloc mapping covered by a clean
+> + * page that needs to be dirtied again before the delalloc mapping can be
+> + * converted. This stale delalloc mapping can trip up a later direct I/O read
+> + * operation on the same region.
+> + *
+> + * We prevent this by truncating away the delalloc regions on the folio. Because
+> + * they are delalloc, we can do this without needing a transaction. Indeed - if
+> + * we get ENOSPC errors, we have to be able to do this truncation without a
+> + * transaction as there is no space left for block reservation (typically why
+> + * we see a ENOSPC in writeback).
+> + */
+> +static void
+> +xfs_discard_folio(
+> +	struct folio		*folio,
+> +	loff_t			pos)
+> +{
+> +	struct xfs_inode	*ip = XFS_I(folio->mapping->host);
+> +	struct xfs_mount	*mp = ip->i_mount;
+> +
+> +	if (xfs_is_shutdown(mp))
+> +		return;
+> +
+> +	xfs_alert_ratelimited(mp,
+> +		"page discard on page "PTR_FMT", inode 0x%llx, pos %llu.",
+> +			folio, ip->i_ino, pos);
+> +
+> +	/*
+> +	 * The end of the punch range is always the offset of the first
+> +	 * byte of the next folio. Hence the end offset is only dependent on the
+> +	 * folio itself and not the start offset that is passed in.
+> +	 */
+> +	xfs_bmap_punch_delalloc_range(ip, XFS_DATA_FORK, pos,
+> +				folio_pos(folio) + folio_size(folio), NULL);
+> +}
+> +
+>  /*
+>   * Fast revalidation of the cached writeback mapping. Return true if the current
+>   * mapping is valid, false otherwise.
+> @@ -278,13 +319,12 @@ xfs_imap_valid(
+>  static int
+>  xfs_map_blocks(
+>  	struct iomap_writeback_ctx *wpc,
+> -	struct inode		*inode,
+>  	loff_t			offset,
+>  	unsigned int		len)
+>  {
+> -	struct xfs_inode	*ip = XFS_I(inode);
+> +	struct xfs_inode	*ip = XFS_I(wpc->inode);
+>  	struct xfs_mount	*mp = ip->i_mount;
+> -	ssize_t			count = i_blocksize(inode);
+> +	ssize_t			count = i_blocksize(wpc->inode);
+>  	xfs_fileoff_t		offset_fsb = XFS_B_TO_FSBT(mp, offset);
+>  	xfs_fileoff_t		end_fsb = XFS_B_TO_FSB(mp, offset + count);
+>  	xfs_fileoff_t		cow_fsb;
+> @@ -436,6 +476,24 @@ xfs_map_blocks(
+>  	return 0;
+>  }
+>  
+> +static ssize_t
+> +xfs_writeback_range(
+> +	struct iomap_writeback_ctx *wpc,
+> +	struct folio		*folio,
+> +	u64			offset,
+> +	unsigned int		len,
+> +	u64			end_pos)
+> +{
+> +	ssize_t			ret;
+> +
+> +	ret = xfs_map_blocks(wpc, offset, len);
+> +	if (!ret)
+> +		ret = iomap_add_to_ioend(wpc, folio, offset, end_pos, len);
+> +	if (ret < 0)
+> +		xfs_discard_folio(folio, offset);
+> +	return ret;
+> +}
+> +
+>  static bool
+>  xfs_ioend_needs_wq_completion(
+>  	struct iomap_ioend	*ioend)
+> @@ -488,47 +546,9 @@ xfs_submit_ioend(
+>  	return 0;
+>  }
+>  
+> -/*
+> - * If the folio has delalloc blocks on it, the caller is asking us to punch them
+> - * out. If we don't, we can leave a stale delalloc mapping covered by a clean
+> - * page that needs to be dirtied again before the delalloc mapping can be
+> - * converted. This stale delalloc mapping can trip up a later direct I/O read
+> - * operation on the same region.
+> - *
+> - * We prevent this by truncating away the delalloc regions on the folio. Because
+> - * they are delalloc, we can do this without needing a transaction. Indeed - if
+> - * we get ENOSPC errors, we have to be able to do this truncation without a
+> - * transaction as there is no space left for block reservation (typically why
+> - * we see a ENOSPC in writeback).
+> - */
+> -static void
+> -xfs_discard_folio(
+> -	struct folio		*folio,
+> -	loff_t			pos)
+> -{
+> -	struct xfs_inode	*ip = XFS_I(folio->mapping->host);
+> -	struct xfs_mount	*mp = ip->i_mount;
+> -
+> -	if (xfs_is_shutdown(mp))
+> -		return;
+> -
+> -	xfs_alert_ratelimited(mp,
+> -		"page discard on page "PTR_FMT", inode 0x%llx, pos %llu.",
+> -			folio, ip->i_ino, pos);
+> -
+> -	/*
+> -	 * The end of the punch range is always the offset of the first
+> -	 * byte of the next folio. Hence the end offset is only dependent on the
+> -	 * folio itself and not the start offset that is passed in.
+> -	 */
+> -	xfs_bmap_punch_delalloc_range(ip, XFS_DATA_FORK, pos,
+> -				folio_pos(folio) + folio_size(folio), NULL);
+> -}
+> -
+>  static const struct iomap_writeback_ops xfs_writeback_ops = {
+> -	.map_blocks		= xfs_map_blocks,
+> +	.writeback_range	= xfs_writeback_range,
+>  	.submit_ioend		= xfs_submit_ioend,
+> -	.discard_folio		= xfs_discard_folio,
+>  };
+>  
+>  struct xfs_zoned_writepage_ctx {
+> @@ -545,11 +565,10 @@ XFS_ZWPC(struct iomap_writeback_ctx *ctx)
+>  static int
+>  xfs_zoned_map_blocks(
+>  	struct iomap_writeback_ctx *wpc,
+> -	struct inode		*inode,
+>  	loff_t			offset,
+>  	unsigned int		len)
+>  {
+> -	struct xfs_inode	*ip = XFS_I(inode);
+> +	struct xfs_inode	*ip = XFS_I(wpc->inode);
+>  	struct xfs_mount	*mp = ip->i_mount;
+>  	xfs_fileoff_t		offset_fsb = XFS_B_TO_FSBT(mp, offset);
+>  	xfs_fileoff_t		end_fsb = XFS_B_TO_FSB(mp, offset + len);
+> @@ -608,6 +627,24 @@ xfs_zoned_map_blocks(
+>  	return 0;
+>  }
+>  
+> +static ssize_t
+> +xfs_zoned_writeback_range(
+> +	struct iomap_writeback_ctx *wpc,
+> +	struct folio		*folio,
+> +	u64			offset,
+> +	unsigned int		len,
+> +	u64			end_pos)
+> +{
+> +	ssize_t			ret;
+> +
+> +	ret = xfs_zoned_map_blocks(wpc, offset, len);
+> +	if (!ret)
+> +		ret = iomap_add_to_ioend(wpc, folio, offset, end_pos, len);
+> +	if (ret < 0)
+> +		xfs_discard_folio(folio, offset);
+> +	return ret;
+> +}
+> +
+>  static int
+>  xfs_zoned_submit_ioend(
+>  	struct iomap_writeback_ctx *wpc,
+> @@ -621,9 +658,8 @@ xfs_zoned_submit_ioend(
+>  }
+>  
+>  static const struct iomap_writeback_ops xfs_zoned_writeback_ops = {
+> -	.map_blocks		= xfs_zoned_map_blocks,
+> +	.writeback_range	= xfs_zoned_writeback_range,
+>  	.submit_ioend		= xfs_zoned_submit_ioend,
+> -	.discard_folio		= xfs_discard_folio,
+>  };
+>  
+>  STATIC int
+> diff --git a/fs/zonefs/file.c b/fs/zonefs/file.c
+> index 5a4b9f2711a9..cb3d380c4651 100644
+> --- a/fs/zonefs/file.c
+> +++ b/fs/zonefs/file.c
+> @@ -124,29 +124,33 @@ static void zonefs_readahead(struct readahead_control *rac)
+>   * Map blocks for page writeback. This is used only on conventional zone files,
+>   * which implies that the page range can only be within the fixed inode size.
+>   */
+> -static int zonefs_write_map_blocks(struct iomap_writeback_ctx *wpc,
+> -				   struct inode *inode, loff_t offset,
+> -				   unsigned int len)
+> +static ssize_t zonefs_writeback_range(struct iomap_writeback_ctx *wpc,
+> +		struct folio *folio, u64 offset, unsigned len, u64 end_pos)
+>  {
+> -	struct zonefs_zone *z = zonefs_inode_zone(inode);
+> +	struct zonefs_zone *z = zonefs_inode_zone(wpc->inode);
+>  
+>  	if (WARN_ON_ONCE(zonefs_zone_is_seq(z)))
+>  		return -EIO;
+> -	if (WARN_ON_ONCE(offset >= i_size_read(inode)))
+> +	if (WARN_ON_ONCE(offset >= i_size_read(wpc->inode)))
+>  		return -EIO;
+>  
+>  	/* If the mapping is already OK, nothing needs to be done */
+> -	if (offset >= wpc->iomap.offset &&
+> -	    offset < wpc->iomap.offset + wpc->iomap.length)
+> -		return 0;
+> +	if (offset < wpc->iomap.offset ||
+> +	    offset >= wpc->iomap.offset + wpc->iomap.length) {
+> +		int error;
+> +
+> +		error = zonefs_write_iomap_begin(wpc->inode, offset,
+> +				z->z_capacity - offset, IOMAP_WRITE,
+> +				&wpc->iomap, NULL);
+> +		if (error)
+> +			return error;
+> +	}
+>  
+> -	return zonefs_write_iomap_begin(inode, offset,
+> -					z->z_capacity - offset,
+> -					IOMAP_WRITE, &wpc->iomap, NULL);
+> +	return iomap_add_to_ioend(wpc, folio, offset, end_pos, len);
+>  }
+>  
+>  static const struct iomap_writeback_ops zonefs_writeback_ops = {
+> -	.map_blocks		= zonefs_write_map_blocks,
+> +	.writeback_range	= zonefs_writeback_range,
+>  };
+>  
+>  static int zonefs_writepages(struct address_space *mapping,
+> diff --git a/include/linux/iomap.h b/include/linux/iomap.h
+> index 778d99f45ef1..e346475a023d 100644
+> --- a/include/linux/iomap.h
+> +++ b/include/linux/iomap.h
+> @@ -416,18 +416,20 @@ static inline struct iomap_ioend *iomap_ioend_from_bio(struct bio *bio)
+>  
+>  struct iomap_writeback_ops {
+>  	/*
+> -	 * Required, maps the blocks so that writeback can be performed on
+> -	 * the range starting at offset.
+> +	 * Required, performs writeback on the passed in range
+>  	 *
+> -	 * Can return arbitrarily large regions, but we need to call into it at
+> +	 * Can map arbitrarily large regions, but we need to call into it at
+>  	 * least once per folio to allow the file systems to synchronize with
+>  	 * the write path that could be invalidating mappings.
+>  	 *
+>  	 * An existing mapping from a previous call to this method can be reused
+>  	 * by the file system if it is still valid.
+> +	 *
+> +	 * Returns the number of bytes processed or a negative errno.
+>  	 */
+> -	int (*map_blocks)(struct iomap_writeback_ctx *wpc, struct inode *inode,
+> -			  loff_t offset, unsigned len);
+> +	ssize_t (*writeback_range)(struct iomap_writeback_ctx *wpc,
+> +			struct folio *folio, u64 pos, unsigned int len,
+> +			u64 end_pos);
+>  
+>  	/*
+>  	 * Optional, allows the file systems to hook into bio submission,
+> @@ -438,12 +440,6 @@ struct iomap_writeback_ops {
+>  	 * the bio could not be submitted.
+>  	 */
+>  	int (*submit_ioend)(struct iomap_writeback_ctx *wpc, int status);
+> -
+> -	/*
+> -	 * Optional, allows the file system to discard state on a page where
+> -	 * we failed to submit any I/O.
+> -	 */
+> -	void (*discard_folio)(struct folio *folio, loff_t pos);
+>  };
+>  
+>  struct iomap_writeback_ctx {
+> @@ -463,6 +459,8 @@ void iomap_finish_ioends(struct iomap_ioend *ioend, int error);
+>  void iomap_ioend_try_merge(struct iomap_ioend *ioend,
+>  		struct list_head *more_ioends);
+>  void iomap_sort_ioends(struct list_head *ioend_list);
+> +ssize_t iomap_add_to_ioend(struct iomap_writeback_ctx *wpc, struct folio *folio,
+> +		loff_t pos, loff_t end_pos, unsigned int dirty_len);
+>  int iomap_writepages(struct iomap_writeback_ctx *wpc);
+>  
+>  /*
+> -- 
+> 2.47.2
+> 
+> 
+
 
