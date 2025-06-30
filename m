@@ -1,110 +1,216 @@
-Return-Path: <linux-doc+bounces-51188-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51190-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2837AEDD2B
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 14:41:12 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F73CAEDD9C
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 14:55:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EEEB3179B0A
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 12:41:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 86D2D3A7AA8
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 12:55:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 536A8289E32;
-	Mon, 30 Jun 2025 12:37:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4BAD227E07E;
+	Mon, 30 Jun 2025 12:55:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="E8fEs2A0"
+	dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b="WF5QiUtZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail.tuxedocomputers.com (mail.tuxedocomputers.com [157.90.84.7])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F36D289E36
-	for <linux-doc@vger.kernel.org>; Mon, 30 Jun 2025 12:37:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38FD823ABB4;
+	Mon, 30 Jun 2025 12:55:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=157.90.84.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751287068; cv=none; b=QoFcpdXzHLRjk6PE3QkRmyAHTdpw3+Eei97g94D6w4fcdIvq9mx26SRujHng8Tzdc4mPP0bBxE5zknU6kFI9liUCk9PgsM6Wv1RCNHOfi33+lSNDIeTSW4RmU541MwD36syXrfY3UZKHc3o7AR8l20awjkqV/yL+nmQKhKsHiCI=
+	t=1751288120; cv=none; b=ok9q1PVAzcOnPwV/fnuwrIel0Sq4kAHGgotCu79IqmG74Zv0Vy5FaKx5GFJMOc7LvYcTq+B6xrvj9YI8YXpr4glOW4HUNvfogpeDtD9a2Q1SP19Y/gTYF5noZTpE6mUpf0DHH/aIOta4fggG9qFDm23jk2NvkKprY48R2YzAPB8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751287068; c=relaxed/simple;
-	bh=y7K25BVp8J7PZgB9DNoW9Axq4HVd5q5SbvdBpqqvwns=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=CXr0wTQkw5wIFAYsuHdfkARxcKfMduYUclT51lKdnEGQFuUQtsvVlogBVWmNloA+2uz/FAtfZlwn5Y+wOCTzpcP2sdxBq7ptnK5d7b3/6uijRqd90tfiIV1+4rAWZXdgFiV03iZ1XQxaDUcGRS3SIzBTWwWK6VMNWh24104sOHo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=E8fEs2A0; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1751287065;
+	s=arc-20240116; t=1751288120; c=relaxed/simple;
+	bh=E9j17VFj1xs2U0yxrbs57TdXUZaC0qMUp0dCf1Imlis=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=kglCuIxV/dM2eB/FPJJa/Da+z2moGoo0vMg2UQokokqTnGavuCdX/75URdiHxZkYW5jtDVa3pIXE180IQbxxh8LAXHW0oZr4XgUlWqyK2Ef3b0GHg3CxRxeQAdEmyNOLqbb7omWw6Fx8LbSB7BJR5rZvUHLx+rglqWniU7BUUEc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com; spf=pass smtp.mailfrom=tuxedocomputers.com; dkim=pass (1024-bit key) header.d=tuxedocomputers.com header.i=@tuxedocomputers.com header.b=WF5QiUtZ; arc=none smtp.client-ip=157.90.84.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=tuxedocomputers.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tuxedocomputers.com
+Received: from [192.168.42.116] (pd9e59880.dip0.t-ipconnect.de [217.229.152.128])
+	(Authenticated sender: wse@tuxedocomputers.com)
+	by mail.tuxedocomputers.com (Postfix) with ESMTPSA id 581BA2FC0064;
+	Mon, 30 Jun 2025 14:55:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tuxedocomputers.com;
+	s=default; t=1751288113;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Lif262s6lJxXAyUAPG/wOgmzfNhGrKy2Fgpgmtk9rAU=;
-	b=E8fEs2A0gmB3XPTlJUYHyrT4v7NzPcbyJl1zw5E4FxmIT5niJdzP1wCgyK+kBKPOpOl/VT
-	ZFgUF5R9qWAxdRqzW5TArYbXaAkhSmT2xp5zbQo4QyMT9sqjSNL0hH72y9Om/Sqdx6eQ/H
-	lIk+F4gULX9wHuN0eZYb3+Gu1jlNVWU=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-558-2IT8sbofOgOldCdVq896fg-1; Mon,
- 30 Jun 2025 08:37:41 -0400
-X-MC-Unique: 2IT8sbofOgOldCdVq896fg-1
-X-Mimecast-MFC-AGG-ID: 2IT8sbofOgOldCdVq896fg_1751287058
-Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 3A8571800287;
-	Mon, 30 Jun 2025 12:37:38 +0000 (UTC)
-Received: from bfoster (unknown [10.22.64.142])
-	by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 668A219560AB;
-	Mon, 30 Jun 2025 12:37:35 +0000 (UTC)
-Date: Mon, 30 Jun 2025 08:41:13 -0400
-From: Brian Foster <bfoster@redhat.com>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Christian Brauner <brauner@kernel.org>,
-	"Darrick J. Wong" <djwong@kernel.org>,
-	Joanne Koong <joannelkoong@gmail.com>, linux-xfs@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-block@vger.kernel.org, gfs2@lists.linux.dev,
-	Johannes Thumshirn <johannes.thumshirn@wdc.com>
-Subject: Re: [PATCH 01/12] iomap: pass more arguments using the iomap
- writeback context
-Message-ID: <aGKF6Tfg4M94U3iA@bfoster>
-References: <20250627070328.975394-1-hch@lst.de>
- <20250627070328.975394-2-hch@lst.de>
- <aF601H1HVkw-g_Gk@bfoster>
- <20250630054407.GC28532@lst.de>
+	bh=Go3Ch64gcEiLFwM4fS4cZghHzD+7ZCcLijDp/oxzqbM=;
+	b=WF5QiUtZHQsg4zBTSSssFFVqMdJFbEox1bFjfcU2jF/gR+3gCr2qDJUbIiNibrhzFnDmWj
+	LnLEp16ydy+0Tj3s5p7F/FiluyyxUx88y4/ezajQ3Qq/5DlPb8ZTHZPECCrhc2z17ihTTt
+	hZWBagAtpBaDtyctfO2QAIcA/qRHdhU=
+Authentication-Results: mail.tuxedocomputers.com;
+	auth=pass smtp.auth=wse@tuxedocomputers.com smtp.mailfrom=wse@tuxedocomputers.com
+Message-ID: <13ae680f-7384-4261-8555-d77ba94ecd3c@tuxedocomputers.com>
+Date: Mon, 30 Jun 2025 14:55:13 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250630054407.GC28532@lst.de>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 2/3] platform/x86: Add Uniwill laptop driver
+To: Armin Wolf <W_Armin@gmx.de>, =?UTF-8?Q?P=C5=91cze_Barnab=C3=A1s?=
+ <pobrn@protonmail.com>, ilpo.jarvinen@linux.intel.com, hdegoede@redhat.com,
+ chumuzero@gmail.com, corbet@lwn.net, cs@tuxedo.de, ggo@tuxedocomputers.com
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ platform-driver-x86@vger.kernel.org
+References: <20250615175957.9781-1-W_Armin@gmx.de>
+ <20250615175957.9781-3-W_Armin@gmx.de>
+ <1b79a3c3-c493-471b-aa37-92458b356e8d@protonmail.com>
+ <7b0243fd-15c6-42da-8570-9ad9cd5163af@gmx.de>
+ <7a58972f-5256-4598-b729-224f20f3ecd2@protonmail.com>
+ <7b29df39-8146-4913-83ff-d71db26983c8@gmx.de>
+ <c689db31-60cc-4494-b700-88744376f589@tuxedocomputers.com>
+ <e167ed33-010d-4cdb-ae53-4afeb3efdea7@gmx.de>
+Content-Language: en-US
+From: Werner Sembach <wse@tuxedocomputers.com>
+In-Reply-To: <e167ed33-010d-4cdb-ae53-4afeb3efdea7@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jun 30, 2025 at 07:44:07AM +0200, Christoph Hellwig wrote:
-> On Fri, Jun 27, 2025 at 11:12:20AM -0400, Brian Foster wrote:
-> > I find it slightly annoying that the struct name now implies 'wbc,'
-> > which is obviously used by the writeback_control inside it. It would be
-> > nice to eventually rename wpc to something more useful, but that's for
-> > another patch:
-> 
-> True, but wbc is already taken by the writeback_control structure.
-> Maybe I should just drop the renaming for now?
-> 
 
-Yeah, that's what makes it confusing IMO. writeback_ctx looks like it
-would be wbc, but it's actually wpc and wbc is something internal. But I
-dunno.. it's not like the original struct name is great either.
+Am 30.06.25 um 14:40 schrieb Armin Wolf:
+> Am 30.06.25 um 14:32 schrieb Werner Sembach:
+>
+>> Hi,
+>>
+>> Am 28.06.25 um 01:09 schrieb Armin Wolf:
+>>> Am 25.06.25 um 17:59 schrieb Pőcze Barnabás:
+>>>
+>>>> Hi
+>>>>
+>>>> 2025. 06. 23. 0:36 keltezéssel, Armin Wolf írta:
+>>>>> Am 22.06.25 um 23:37 schrieb Pőcze Barnabás:
+>>>>>
+>>>>>> Hi
+>>>>>>
+>>>>>>
+>>>>>> 2025. 06. 15. 19:59 keltezéssel, Armin Wolf írta:
+>>>>>>> Add a new driver for Uniwill laptops. The driver uses a ACPI WMI
+>>>>>>> interface to talk with the embedded controller, but relies on a
+>>>>>>> DMI whitelist for autoloading since Uniwill just copied the WMI
+>>>>>>> GUID from the Windows driver example.
+>>>>>>>
+>>>>>>> The driver is reverse-engineered based on the following information:
+>>>>>>> - OEM software from intel
+>>>>>>> - https://github.com/pobrn/qc71_laptop
+>>>>>> Oh... I suppose an end of an era for me...
+>>>>> I now remember that we interacted on the mailing lists before, sorry for 
+>>>>> not CCing
+>>>>> you on this patch series.
+>>>>>
+>>>>> Do you want a Co-developed-by tag on those patches?
+>>>> I'll leave it up to you.
+>>>>
+>>>>
+>>>>>>> - https://github.com/tuxedocomputers/tuxedo-drivers
+>>>>>>> - https://github.com/tuxedocomputers/tuxedo-control-center
+>>>>>>>
+>>>>>>> The underlying EC supports various features, including hwmon sensors,
+>>>>>>> battery charge limiting, a RGB lightbar and keyboard-related controls.
+>>>>>>>
+>>>>>>> Reported-by: cyear <chumuzero@gmail.com>
+>>>>>>> Closes: https://github.com/lm-sensors/lm-sensors/issues/508
+>>>>>>> Closes: https://github.com/Wer-Wolf/uniwill-laptop/issues/3
+>>>>>>> Signed-off-by: Armin Wolf <W_Armin@gmx.de>
+>>>>>>> ---
+>>>>>>>      .../ABI/testing/sysfs-driver-uniwill-laptop   | 53 +
+>>>>>>>      Documentation/wmi/devices/uniwill-laptop.rst  | 109 ++
+>>>>>>>      MAINTAINERS                                   | 8 +
+>>>>>>>      drivers/platform/x86/uniwill/Kconfig          | 17 +
+>>>>>>>      drivers/platform/x86/uniwill/Makefile         | 1 +
+>>>>>>>      drivers/platform/x86/uniwill/uniwill-laptop.c | 1477 +++++++++++++++++
+>>>>>>>      drivers/platform/x86/uniwill/uniwill-wmi.c    | 3 +-
+>>>>>>>      7 files changed, 1667 insertions(+), 1 deletion(-)
+>>>>>>>      create mode 100644 
+>>>>>>> Documentation/ABI/testing/sysfs-driver-uniwill-laptop
+>>>>>>>      create mode 100644 Documentation/wmi/devices/uniwill-laptop.rst
+>>>>>>>      create mode 100644 drivers/platform/x86/uniwill/uniwill-laptop.c
+>>>>>>>
+>>>>> [...]
+>>>>>>> +
+>>>>>>> +static const unsigned int uniwill_led_channel_to_bat_reg[LED_CHANNELS] = {
+>>>>>>> +    EC_ADDR_LIGHTBAR_BAT_RED,
+>>>>>>> +    EC_ADDR_LIGHTBAR_BAT_GREEN,
+>>>>>>> +    EC_ADDR_LIGHTBAR_BAT_BLUE,
+>>>>>>> +};
+>>>>>>> +
+>>>>>>> +static const unsigned int uniwill_led_channel_to_ac_reg[LED_CHANNELS] = {
+>>>>>>> +    EC_ADDR_LIGHTBAR_AC_RED,
+>>>>>>> +    EC_ADDR_LIGHTBAR_AC_GREEN,
+>>>>>>> +    EC_ADDR_LIGHTBAR_AC_BLUE,
+>>>>>>> +};
+>>>>>>> +
+>>>>>>> +static int uniwill_led_brightness_set(struct led_classdev *led_cdev, 
+>>>>>>> enum led_brightness brightness)
+>>>>>>> +{
+>>>>>>> +    struct led_classdev_mc *led_mc_cdev = lcdev_to_mccdev(led_cdev);
+>>>>>>> +    struct uniwill_data *data = container_of(led_mc_cdev, struct 
+>>>>>>> uniwill_data, led_mc_cdev);
+>>>>>>> +    unsigned int value;
+>>>>>>> +    int ret;
+>>>>>>> +
+>>>>>>> +    ret = led_mc_calc_color_components(led_mc_cdev, brightness);
+>>>>>>> +    if (ret < 0)
+>>>>>>> +        return ret;
+>>>>>>> +
+>>>>>>> +    for (int i = 0; i < LED_CHANNELS; i++) {
+>>>>>>> +        /* Prevent the brightness values from overflowing */
+>>>>>>> +        value = min(LED_MAX_BRIGHTNESS, 
+>>>>>>> data->led_mc_subled_info[i].brightness);
+>>>>>>> +        ret = regmap_write(data->regmap, 
+>>>>>>> uniwill_led_channel_to_ac_reg[i], value);
+>>>>>> This is interesting. I am not sure which "control center" application you 
+>>>>>> have looked at,
+>>>>>> but I found many lookup tables based on the exact model, etc. For 
+>>>>>> example, on my laptop
+>>>>>> any value larger than 36 will simply turn that color component off. Have 
+>>>>>> you seen
+>>>>>> anything like that?
+>>>>> I was using the Intel NUC studio software application during 
+>>>>> reverse-engineering and had a user
+>>>>> test the resulting code on a Intel NUC notebook. AFAIK the OEM software 
+>>>>> did not use a lookup table.
+>>>>>
+>>>>> If we extend this driver in the future then we might indeed use the quirk 
+>>>>> system to change the max.
+>>>>> LED brightness depending on the model.
+>>>> I see. So everything up to 200 works. And after that do you know if it 
+>>>> turns off or what happens?
+>>>
+>>> The user who tested the driver reported that "the brightest lightbar setting 
+>>> is 200", so i assume
+>>> that the lightbar simply clamps the values. However i would not trust the EC 
+>>> firmware in the slightest,
+>>> i can definitely imagine that other models react differently.
+>>
+>> Iirc at least for keyboard backlight on tf devices there was a value that 
+>> could be overwritten to make the values 0-255 instead of 0-200, maybe this is 
+>> also true for the lightbar, but i don't know if this affects the livespan of 
+>> the leds.
+>>
+>> Best regards,
+>>
+>> Werner
+>>
+> Interesting, do you know the register offset of this value?
 
-I was thinking maybe rename the wpc variable name to something like
-wbctx (or maybe wbctx and wbctl? *shrug*). Not to say that is elegant by
-any stretch, but just to better differentiate from wbc/wpc and make the
-code a little easier to read going forward. I don't really have a strong
-opinion wrt this series so I don't want to bikeshed too much. Whatever
-you want to go with is fine by me.
+Not out of my head, would have to dig for it again or even re reverse engineer 
+it again as I'm not sure if I wrote it down ...
 
-Brian
+So if it is not required I would like to leave it at that and only do the work 
+if it turns out to be needed.
 
+>
+> Thanks,
+> Armin Wolf
+>
 
