@@ -1,146 +1,87 @@
-Return-Path: <linux-doc+bounces-51219-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51221-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1513EAEDE6C
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 15:11:33 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id AAD0AAEDE79
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 15:12:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E5F7B3BAF74
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 13:08:35 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B33D516404D
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Jun 2025 13:10:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3ECAC2C031B;
-	Mon, 30 Jun 2025 13:01:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B9EA286D7C;
+	Mon, 30 Jun 2025 13:04:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="eO5Ns51a"
+	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="OvP4la4T"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65FBF2BD5B9
-	for <linux-doc@vger.kernel.org>; Mon, 30 Jun 2025 13:01:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 751D82857C4
+	for <linux-doc@vger.kernel.org>; Mon, 30 Jun 2025 13:04:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751288508; cv=none; b=JZ1ZdJbHlWUvyxBxUN0k+2Tchtte8KutYbUcMD/yqnj8D8gJjvgQAjQ9o/J0TdNFToH05xM+inHN5gLzgJc2IKF8YBeDK32dmUMIR+LyLo3ORNfe64NdInhq9jlacNphyk6Flr+s27CIQgZzOyge3dg+iPwtWkNq8OBkzfVFCYs=
+	t=1751288665; cv=none; b=BTb8UJXKGL00r08EOYo97RbyNA0VUyG3OlndFygFng1KDhGTRaw96A3tYata/ItsAOYDvUx1f5lJDQo6QqYh1VopTXz44BXFQWa5/1gmzRzlsYD37rI7n/ebSwI3hhyanfKV2VUbQAUTfjrf1jKOxpcITFHN5HuelonN0PNIDEU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751288508; c=relaxed/simple;
-	bh=VLtr/75+OgLg5UKJqAhr4SPpTHq3QNsAl+8ocPk3Nhw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ebF5OxhP2VD8vZQICYstfEMsFkmBz2yYgsGcQBT92wHTj8hu1KWEoLphJilcpdG9PCIoq19AskWiMewEwdR77znhP34nMoJjQEl5d+PgEePkgZO3bYhJarnjciQnObzhPCHNJyJ5OLIvvdcJBKTC+ZF5Z7nzYiPbUIoTkElDg0g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=eO5Ns51a; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1751288505;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cBlqU3v31THD5gXpB9nn15wD9nofG3PBMtxlPOPDIeI=;
-	b=eO5Ns51aDvdeyZqjjDiN/dQAyzOiQnjXJWZPC5YqXZt1TkIiSwWWjQULOz1zKJbRf2L/sN
-	zqpqxmx7j7Zjsp+WbTHh1FW8PkupdWmAv6MHN+N6P7L0KFBe9dWO7LvsiyqwC+l08hQnYg
-	IcsuVokwET5BDQTToM2Ty+OxUWmaerY=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-519-QgcjWzsiMvOPPK0mzBp6wg-1; Mon, 30 Jun 2025 09:01:44 -0400
-X-MC-Unique: QgcjWzsiMvOPPK0mzBp6wg-1
-X-Mimecast-MFC-AGG-ID: QgcjWzsiMvOPPK0mzBp6wg_1751288502
-Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-3a5281ba3a4so1975982f8f.0
-        for <linux-doc@vger.kernel.org>; Mon, 30 Jun 2025 06:01:43 -0700 (PDT)
+	s=arc-20240116; t=1751288665; c=relaxed/simple;
+	bh=8ma29XIVyrlocB2TwxvieiVhXjMJz8cDSr2I0wEXjA0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=W0Ht0r7rwS2fBW7Cz4xl5OwpECPoy19UH02s9fWWxolRLpDliIU6YQ9fZbv3XibV2p8dvbZFOIf8oBQE2HYOwJeHi0tLIrsQuovQzQD8HPuiyy9Ma4gSaike8oidxgmpWcZtoKam5Vedbq/RIJ/zrmWQ/FwqGWYgTA8XfcVmu6A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=OvP4la4T; arc=none smtp.client-ip=209.85.221.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-3a6e2d85705so2460664f8f.0
+        for <linux-doc@vger.kernel.org>; Mon, 30 Jun 2025 06:04:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1751288662; x=1751893462; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=jtRCoaZRuy3SHZyDIOBlh8AQRBZoYHsrOyl5I3M3Usg=;
+        b=OvP4la4Ts2imD7kHl11x6TSySGOLVGHb5zDHKhB69o7ZV22ItVIVbriWPX0MKk8L8F
+         lwcfw2hItq9Ju0XCvwx4rxVh2EjMybs4C0L3WeIN6fcgpMAsr9qrvVIF7mX6tgg1p6FR
+         /mDNMM7k81px30WZPQoA9ds986DYq4ON6hRoJK9EoN6ZqrkXRngBpiQ64MKmdzRFVul2
+         F/smPVSrHgWQwroWqHWv8sfOZ9lzNQB87EL8w8OMH00oCuf7vcANK0mMKUhDAR+L9hte
+         wUqzaYGOc34hOBfOd67ZJA+vPodAG1eAGSz4OwIrR+rhOhS5TuHBn/7TaCoknExSl523
+         zuNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751288502; x=1751893302;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cBlqU3v31THD5gXpB9nn15wD9nofG3PBMtxlPOPDIeI=;
-        b=ipxIzvbdzPJ858tlt5wpT7gW+bsrSAU6MNQ2v0uQA99ceQWK2RA/YQRwi5PjAeP+tU
-         f2vEk6ob/xonLMi1HPv73tB2BYBViDXCmpCz0D6I3Et/UJnyxYRkoTk49kzT4J8Pr+up
-         JUb0o3AApgRxFAly8F+LhevRBPH1kfmTichB//iVQHSmcVw8290glBR5eih+OsfBKPPY
-         6tALkAZeXsi3sqC/e826nce3TNa1ViXZi/wjnpPOaxPtpcewIvWh/DNZoU56+Z1TFCFR
-         43NT898CJgfwCBMd6A2T3ddqOP6UiGtp9QXU+2Bx2G3N2rLVngYG1f0RH9nk1Y72/8Up
-         Oi+w==
-X-Forwarded-Encrypted: i=1; AJvYcCVfaWdhk2BtTzOZaUvGjJbF2JoAV5eRlarljlLM/njEM6wPPx61WXKfm07vIgtgUnNeqVnhWvM9X1E=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyzhWOxzGZxzc73jHdCWAQeBqYvft4SbQjAsInwCvRYklMt+zZT
-	3cdp7v99QczwoztG125+syj6mRNQGbYljGdRo7EfEEUUGVySck00kppLxCga5FnvRLmgEE5rnfJ
-	TSdRf1EUzZEazbdGwiLAjOptZdKity6vo25fr1bPksXs2dKoJXxxWztwKP87wlw==
-X-Gm-Gg: ASbGncuOqit/jjkSDZvbIcByU64nXpaUSv7LvbJ28Noy3i8ke3NEBv+9BtlaE8ehKmC
-	yOMJC71U5445R5ZO4DAWSfU50qmVpm8Aq43fVsswPcrd/xdCEeRbqY+UITessAwEk0KKuH+T5JX
-	GGUIY4wR6oYzcV2llyP7grwAnFxKI/VQmsGwtmFm0qEqQ04e6dczd9gwPmJ/QzJaEq94MxHDsBy
-	UWJ/d99msoIKYJAIFdjNIGt/VtuKhrsTaY27p87nvFiy2O6Nsu9GbxtzH2iE+88XZhFp7Xl56ol
-	xHiyt8WRAgV1mMuSQFXiBqQYKdCufd7Np/byktC6Gia7USFUoGwmQk0o3IVOgCM7+/MDPBzNd/n
-	fXvBzKmg=
-X-Received: by 2002:adf:9c85:0:b0:3a4:f90c:31e3 with SMTP id ffacd0b85a97d-3a8ffcca245mr9545874f8f.31.1751288501847;
-        Mon, 30 Jun 2025 06:01:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEmBHmttdmK2eq+WBU1B9I2DDaPMLfI/76nbXYnXDHgExr/7iQPmKv6fPJxJBiz140zN+RyvQ==
-X-Received: by 2002:adf:9c85:0:b0:3a4:f90c:31e3 with SMTP id ffacd0b85a97d-3a8ffcca245mr9545827f8f.31.1751288501169;
-        Mon, 30 Jun 2025 06:01:41 -0700 (PDT)
-Received: from localhost (p200300d82f40b30053f7d260aff47256.dip0.t-ipconnect.de. [2003:d8:2f40:b300:53f7:d260:aff4:7256])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-3a892e5f943sm10337130f8f.101.2025.06.30.06.01.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 30 Jun 2025 06:01:40 -0700 (PDT)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: linux-mm@kvack.org,
+        d=1e100.net; s=20230601; t=1751288662; x=1751893462;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=jtRCoaZRuy3SHZyDIOBlh8AQRBZoYHsrOyl5I3M3Usg=;
+        b=fCy0ICg88dXDpPCaJnhApWzW5Mas553XUh+f7s2HALRRfQ3UxjrNPK/LwVbGglne9I
+         oiZB2hCipfUfUDk3BPa2ae7AEHYILl27JA/JEpt40JzPFj+AO5QkZQ5Lw3s2atFu+VqO
+         GhEg1UPU27DntzTpU+JYmbhbxmbgAOE0mypRs+CAYCcSz1veRaQ5oaa2ZiVz3Xz8ke1f
+         Z1eE6wyPWAlmVqXMq79zNzFDY9b0OOgCmeKCOllTRxZ9Db5EESBmNZRjj4MCkSa6WUlx
+         4pjaLorD6o1PqPlOnoEKIP/7HIZF1esvxsGh7biY/iVWdavfa58a8JkzRUx6g7FdOl/a
+         MNmg==
+X-Forwarded-Encrypted: i=1; AJvYcCV2W8VBR5tpYLKmdKKJmaWWghUIIAQqFZ5rzleD4vrHzXegsI1H/uC33oVmOTH35eKrIT6qi2+ngq8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxAasZxV5QvTyPlJUYbQiVzqayxrsV0JTBqY6WoudGjYcTge3cE
+	DLzsPpZX2oL6JKlwYnb0N4BAssMI5vun3bZxIISsRnxjg37nRQTGPQwgaZEnof62584=
+X-Gm-Gg: ASbGncs5zhiGSjr+ubZFiCxDeGCIDcXFaEC/3pHQ0GAm91dn6Y4UbP53KXkFh+XpDM7
+	fwIQASHCggzSEBqHhwn5dVACnV0Z3vFDLEMI71fmDH/WNM7yR6Q/UbHj2cfSf0pS658mJRY79Td
+	5fJFOjJnjt0ITrZ8ocFZyvpRFcVtpr+WN6fxSdSDvwT4MXd/reKgP/SYXRfk7Kx9dU+dO1ktCmH
+	/ST3uRNbmikKNw5xbyLTRMgkh0UoPP2PqQPTXwWnh2pOD6PMuWlwojhkO2Jzzep/sCd2bOlEa2p
+	xMEa0gXb3kl/76jlYam/jz1ASqGjOM1zO/KekVUkEy7yMRD8+cVq0pMNjKGLX4w=
+X-Google-Smtp-Source: AGHT+IG+KISEPRT59mnSmUbFYKshwUKdJDSOtcgpmTFgZsp3fC/pg+et65cMv5g4qUkmZujHStqtzA==
+X-Received: by 2002:adf:b649:0:b0:3a0:7d27:f076 with SMTP id ffacd0b85a97d-3a8fdb29f1emr11225299f8f.2.1751288660266;
+        Mon, 30 Jun 2025 06:04:20 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:19e3:6e9c:f7cd:ff6a])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a88c7facb3sm10447413f8f.30.2025.06.30.06.04.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 30 Jun 2025 06:04:17 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Kent Gibson <warthog618@gmail.com>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: linux-gpio@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	virtualization@lists.linux.dev,
-	linux-fsdevel@vger.kernel.org,
-	David Hildenbrand <david@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Christophe Leroy <christophe.leroy@csgroup.eu>,
-	Jerrin Shaji George <jerrin.shaji-george@broadcom.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	=?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
-	Alexander Viro <viro@zeniv.linux.org.uk>,
-	Christian Brauner <brauner@kernel.org>,
-	Jan Kara <jack@suse.cz>,
-	Zi Yan <ziy@nvidia.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Joshua Hahn <joshua.hahnjy@gmail.com>,
-	Rakie Kim <rakie.kim@sk.com>,
-	Byungchul Park <byungchul@sk.com>,
-	Gregory Price <gourry@gourry.net>,
-	Ying Huang <ying.huang@linux.alibaba.com>,
-	Alistair Popple <apopple@nvidia.com>,
-	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
-	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
-	Vlastimil Babka <vbabka@suse.cz>,
-	Mike Rapoport <rppt@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Michal Hocko <mhocko@suse.com>,
-	"Matthew Wilcox (Oracle)" <willy@infradead.org>,
-	Minchan Kim <minchan@kernel.org>,
-	Sergey Senozhatsky <senozhatsky@chromium.org>,
-	Brendan Jackman <jackmanb@google.com>,
-	Johannes Weiner <hannes@cmpxchg.org>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	John Hubbard <jhubbard@nvidia.com>,
-	Peter Xu <peterx@redhat.com>,
-	Xu Xin <xu.xin16@zte.com.cn>,
-	Chengming Zhou <chengming.zhou@linux.dev>,
-	Miaohe Lin <linmiaohe@huawei.com>,
-	Naoya Horiguchi <nao.horiguchi@gmail.com>,
-	Oscar Salvador <osalvador@suse.de>,
-	Rik van Riel <riel@surriel.com>,
-	Harry Yoo <harry.yoo@oracle.com>,
-	Qi Zheng <zhengqi.arch@bytedance.com>,
-	Shakeel Butt <shakeel.butt@linux.dev>
-Subject: [PATCH v1 29/29] mm/balloon_compaction: provide single balloon_page_insert() and balloon_mapping_gfp_mask()
-Date: Mon, 30 Jun 2025 15:00:10 +0200
-Message-ID: <20250630130011.330477-30-david@redhat.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250630130011.330477-1-david@redhat.com>
-References: <20250630130011.330477-1-david@redhat.com>
+	linux-kernel@vger.kernel.org,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [PATCH] gpio: sim: allow to mark simulated lines as invalid
+Date: Mon, 30 Jun 2025 15:03:57 +0200
+Message-ID: <20250630130358.40352-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -149,83 +90,179 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Let's just special-case based on IS_ENABLED(CONFIG_BALLOON_COMPACTION
-like we did for balloon_page_finalize().
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Signed-off-by: David Hildenbrand <david@redhat.com>
+Add a new line-level, boolean property to the gpio-sim configfs
+interface called 'valid'. It's set by default and the user can unset it
+to make the line be included in the standard `gpio-reserved-ranges`
+property when the chip is registered with GPIO core. This allows users
+to specify which lines should not be available for requesting as GPIOs.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- include/linux/balloon_compaction.h | 42 +++++++++++-------------------
- 1 file changed, 15 insertions(+), 27 deletions(-)
+ Documentation/admin-guide/gpio/gpio-sim.rst |  7 +-
+ drivers/gpio/gpio-sim.c                     | 83 ++++++++++++++++++++-
+ 2 files changed, 86 insertions(+), 4 deletions(-)
 
-diff --git a/include/linux/balloon_compaction.h b/include/linux/balloon_compaction.h
-index 2fecfead91d26..7cfe48769239e 100644
---- a/include/linux/balloon_compaction.h
-+++ b/include/linux/balloon_compaction.h
-@@ -77,6 +77,15 @@ static inline void balloon_devinfo_init(struct balloon_dev_info *balloon)
+diff --git a/Documentation/admin-guide/gpio/gpio-sim.rst b/Documentation/admin-guide/gpio/gpio-sim.rst
+index 35d49ccd49e0..f5135a14ef2e 100644
+--- a/Documentation/admin-guide/gpio/gpio-sim.rst
++++ b/Documentation/admin-guide/gpio/gpio-sim.rst
+@@ -50,8 +50,11 @@ the number of lines exposed by this bank.
  
- #ifdef CONFIG_BALLOON_COMPACTION
- extern const struct movable_operations balloon_mops;
-+/*
-+ * balloon_page_device - get the b_dev_info descriptor for the balloon device
-+ *			 that enqueues the given page.
-+ */
-+static inline struct balloon_dev_info *balloon_page_device(struct page *page)
+ **Attribute:** ``/config/gpio-sim/gpio-device/gpio-bankX/lineY/name``
+ 
+-This group represents a single line at the offset Y. The 'name' attribute
+-allows to set the line name as represented by the 'gpio-line-names' property.
++**Attribute:** ``/config/gpio-sim/gpio-device/gpio-bankX/lineY/valid``
++
++This group represents a single line at the offset Y. The ``valid`` attribute
++indicates whether the line can be used as GPIO. The ``name`` attribute allows
++to set the line name as represented by the 'gpio-line-names' property.
+ 
+ **Item:** ``/config/gpio-sim/gpio-device/gpio-bankX/lineY/hog``
+ 
+diff --git a/drivers/gpio/gpio-sim.c b/drivers/gpio/gpio-sim.c
+index f638219a7c4f..9503296422fd 100644
+--- a/drivers/gpio/gpio-sim.c
++++ b/drivers/gpio/gpio-sim.c
+@@ -39,7 +39,7 @@
+ #include "dev-sync-probe.h"
+ 
+ #define GPIO_SIM_NGPIO_MAX	1024
+-#define GPIO_SIM_PROP_MAX	4 /* Max 3 properties + sentinel. */
++#define GPIO_SIM_PROP_MAX	5 /* Max 4 properties + sentinel. */
+ #define GPIO_SIM_NUM_ATTRS	3 /* value, pull and sentinel */
+ 
+ static DEFINE_IDA(gpio_sim_ida);
+@@ -629,6 +629,7 @@ struct gpio_sim_line {
+ 
+ 	unsigned int offset;
+ 	char *name;
++	bool valid;
+ 
+ 	/* There can only be one hog per line. */
+ 	struct gpio_sim_hog *hog;
+@@ -744,6 +745,36 @@ gpio_sim_set_line_names(struct gpio_sim_bank *bank, char **line_names)
+ 	}
+ }
+ 
++static unsigned int gpio_sim_get_reserved_ranges_size(struct gpio_sim_bank *bank)
 +{
-+	return (struct balloon_dev_info *)page_private(page);
-+}
-+#endif /* CONFIG_BALLOON_COMPACTION */
- 
- /*
-  * balloon_page_insert - insert a page into the balloon's page list and make
-@@ -91,41 +100,20 @@ static inline void balloon_page_insert(struct balloon_dev_info *balloon,
- 				       struct page *page)
- {
- 	__SetPageOffline(page);
--	SetPageMovableOps(page);
--	set_page_private(page, (unsigned long)balloon);
--	list_add(&page->lru, &balloon->pages);
--}
--
--/*
-- * balloon_page_device - get the b_dev_info descriptor for the balloon device
-- *			 that enqueues the given page.
-- */
--static inline struct balloon_dev_info *balloon_page_device(struct page *page)
--{
--	return (struct balloon_dev_info *)page_private(page);
--}
--
--static inline gfp_t balloon_mapping_gfp_mask(void)
--{
--	return GFP_HIGHUSER_MOVABLE;
--}
--
--#else /* !CONFIG_BALLOON_COMPACTION */
--
--static inline void balloon_page_insert(struct balloon_dev_info *balloon,
--				       struct page *page)
--{
--	__SetPageOffline(page);
-+	if (IS_ENABLED(CONFIG_BALLOON_COMPACTION)) {
-+		SetPageMovableOps(page);
-+		set_page_private(page, (unsigned long)balloon);
++	struct gpio_sim_line *line;
++	unsigned int size = 0;
++
++	list_for_each_entry(line, &bank->line_list, siblings) {
++		if (line->valid)
++			continue;
++
++		size += 2;
 +	}
- 	list_add(&page->lru, &balloon->pages);
- }
- 
- static inline gfp_t balloon_mapping_gfp_mask(void)
++
++	return size;
++}
++
++static void gpio_sim_set_reserved_ranges(struct gpio_sim_bank *bank,
++					 u32 *ranges)
++{
++	struct gpio_sim_line *line;
++	int i = 0;
++
++	list_for_each_entry(line, &bank->line_list, siblings) {
++		if (line->valid)
++			continue;
++
++		ranges[i++] = line->offset;
++		ranges[i++] = 1;
++	}
++}
++
+ static void gpio_sim_remove_hogs(struct gpio_sim_device *dev)
  {
-+	if (IS_ENABLED(CONFIG_BALLOON_COMPACTION))
-+		return GFP_HIGHUSER_MOVABLE;
- 	return GFP_HIGHUSER;
+ 	struct gpiod_hog *hog;
+@@ -844,9 +875,10 @@ static struct fwnode_handle *
+ gpio_sim_make_bank_swnode(struct gpio_sim_bank *bank,
+ 			  struct fwnode_handle *parent)
+ {
++	unsigned int prop_idx = 0, line_names_size, ranges_size;
+ 	struct property_entry properties[GPIO_SIM_PROP_MAX];
+-	unsigned int prop_idx = 0, line_names_size;
+ 	char **line_names __free(kfree) = NULL;
++	u32 *ranges __free(kfree) = NULL;
+ 
+ 	memset(properties, 0, sizeof(properties));
+ 
+@@ -870,6 +902,19 @@ gpio_sim_make_bank_swnode(struct gpio_sim_bank *bank,
+ 						line_names, line_names_size);
+ 	}
+ 
++	ranges_size = gpio_sim_get_reserved_ranges_size(bank);
++	if (ranges_size) {
++		ranges = kcalloc(ranges_size, sizeof(u32), GFP_KERNEL);
++		if (!ranges)
++			return ERR_PTR(-ENOMEM);
++
++		gpio_sim_set_reserved_ranges(bank, ranges);
++
++		properties[prop_idx++] = PROPERTY_ENTRY_U32_ARRAY_LEN(
++						"gpio-reserved-ranges",
++						ranges, ranges_size);
++	}
++
+ 	return fwnode_create_software_node(properties, parent);
  }
  
--#endif /* CONFIG_BALLOON_COMPACTION */
--
- /*
-  * balloon_page_finalize - prepare a balloon page that was removed from the
-  *			   balloon list for release to the page allocator
+@@ -1189,8 +1234,41 @@ static ssize_t gpio_sim_line_config_name_store(struct config_item *item,
+ 
+ CONFIGFS_ATTR(gpio_sim_line_config_, name);
+ 
++static ssize_t
++gpio_sim_line_config_valid_show(struct config_item *item, char *page)
++{
++	struct gpio_sim_line *line = to_gpio_sim_line(item);
++	struct gpio_sim_device *dev = gpio_sim_line_get_device(line);
++
++	guard(mutex)(&dev->lock);
++
++	return sprintf(page, "%c\n", line->valid ? '1' : '0');
++}
++
++static ssize_t gpio_sim_line_config_valid_store(struct config_item *item,
++						const char *page, size_t count)
++{
++	struct gpio_sim_line *line = to_gpio_sim_line(item);
++	struct gpio_sim_device *dev = gpio_sim_line_get_device(line);
++	bool valid;
++	int ret;
++
++	ret = kstrtobool(page, &valid);
++	if (ret)
++		return ret;
++
++	guard(mutex)(&dev->lock);
++
++	line->valid = valid;
++
++	return count;
++}
++
++CONFIGFS_ATTR(gpio_sim_line_config_, valid);
++
+ static struct configfs_attribute *gpio_sim_line_config_attrs[] = {
+ 	&gpio_sim_line_config_attr_name,
++	&gpio_sim_line_config_attr_valid,
+ 	NULL
+ };
+ 
+@@ -1399,6 +1477,7 @@ gpio_sim_bank_config_make_line_group(struct config_group *group,
+ 
+ 	line->parent = bank;
+ 	line->offset = offset;
++	line->valid = true;
+ 	list_add_tail(&line->siblings, &bank->line_list);
+ 
+ 	return &line->group;
 -- 
-2.49.0
+2.48.1
 
 
