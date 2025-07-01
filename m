@@ -1,210 +1,299 @@
-Return-Path: <linux-doc+bounces-51404-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51406-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1EE1AEF975
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 14:58:57 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id D74A9AEF9EA
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 15:12:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3F1F8188544F
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 12:59:11 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 32F121893DCF
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 13:10:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89E49274668;
-	Tue,  1 Jul 2025 12:58:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D85A2475CB;
+	Tue,  1 Jul 2025 13:09:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="i4gu9nhB"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="aDK9jbEt";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="DHKgoeTj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96EC2273817
-	for <linux-doc@vger.kernel.org>; Tue,  1 Jul 2025 12:58:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751374729; cv=none; b=FUd/mNedsvtlbThJk6yAZY/cWc9/G0sqZi2dq39tydNA8JA2O3TamW4vREa233voVGS1sIEXGI4+zdnkZhjFGBkqx2Q5BH3dc2K7uUsJD2jR+oniCxbumSSndaViA3g7vD+VFFse8w5rq0AKFqZV91X9OxhcFPc/DGrJmcBA9aA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751374729; c=relaxed/simple;
-	bh=QVjsIYXh5KgkJGxwJvk1fAvS8lppUJ46HEMqAQrLa48=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=G2yW6SquAG9mKTYHhw6oo2oPNFgHJ/s6MvdYvR2Q7naUc6JAeVIjcDujxKnqDBY8ElOIo/aihM93URjPOtwikcC7mOyO+T7yP9r0el5uD6nVKnW3bxC7Y8ilN6mjf1B1q/p0As8e5ajwR1V0PT5fQSRO8JY51ut2l/Mf6BeGpII=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=i4gu9nhB; arc=none smtp.client-ip=209.85.214.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-235e389599fso212145ad.0
-        for <linux-doc@vger.kernel.org>; Tue, 01 Jul 2025 05:58:47 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2A5B72618;
+	Tue,  1 Jul 2025 13:09:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1751375380; cv=fail; b=ddPoqA4nDCLD/sBMN5ueB/7GLG0Omfg0Q2aWKcHjPGOsUQUdEvQ4j9vN9v3W20FoofUN+r3NLGQF9iPp1Yf/ApT8CymF9gLbQeGACxIwrASwmXqjsQG7aEHhdB0JKm0EMI+VIUtc46qEuF5qDXl+q5QqdMAhD4fZK0Z8HopzjmM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1751375380; c=relaxed/simple;
+	bh=x+GpfHL8OizGSjd0jyVF/gPfFV23Yqn7UWej3PL+zGU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=l5LO+ef4Dr5LATc47pv/aNe90fB2wFYWhmZpZGCyfiO38uDAcbIH3RYKjVC+W2tBknxYiRMmE7OXJldOxjRvRN5gBKIX1XcknDGP0jg/CQLjzBqDRN8jYCYebJOB8wI+ocmvogC3PrOZXwkxU6grLKm2BZvSVyV/g1Mp6hxnAew=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=aDK9jbEt; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=DHKgoeTj; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 561CSVtN012595;
+	Tue, 1 Jul 2025 13:02:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=/jvvYX0yfBWR2FmDZw
+	nd9I8HucP+isADjV69LDr8N9Y=; b=aDK9jbEtFlIqGdg1Bdg9PFBrKosP7+/RUA
+	rX7Hb4LcrzYacPQJQZWSQMwNPfg5GvdOg8OB7ks4FyN011mu2elhjTkm3nZBzjBp
+	/aV9SnUl0HspMvFGpT3iaJ70bdUaprbV2opKDH3r4bjo7VS7X+4roAM/pO2nkgnF
+	AU7k+NBtPrE7ojwAlL9kz1lS8OZqvoqyZWqvnHRmPC4Vz+cMfzZ79mAzvgpuTle7
+	GoM6uY8lRpDxsPqp3+2ncd9P2/VrAXMh+uimReRWQuhYk7GOuG7BUa3LChEmXNTS
+	tl/+Q8lXy8Dhq459xBy3XscEIRB0R7uurZvN31cto8CzR+MllJuA==
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 47j6tfcpe8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 01 Jul 2025 13:02:50 +0000 (GMT)
+Received: from pps.filterd (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 561D0qvf029851;
+	Tue, 1 Jul 2025 13:02:49 GMT
+Received: from nam02-bn1-obe.outbound.protection.outlook.com (mail-bn1nam02on2047.outbound.protection.outlook.com [40.107.212.47])
+	by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 47j6u9qpmd-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 01 Jul 2025 13:02:49 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=meCQQQrPCM9oMEhkn4br7Xly8iu9Z3Y1CSvs/2kDEZ4BzXQ2U/2k3Wtq8oJlKYabjgmmkyFlnFn3LATQ3BMhfsTRFAooanJ/hOIyKB+UQgymun7HweQ87XeAd5JIM4qTunNRG13ySc10DFqrsOX7ynH2Zyq+tgq6T1LVuNxaM4Wo5v4J8i/nVIm92rf3PN5PTTUDZ1xggIy9/2rLMv86naXPWAgRvfNbEMfAqTYoQCrcTZnVr2isb1XF5zumR3+QJXerSBuORrtCJTJYKdEXpOZNkzQznIfBOCZ5brHaGpEJQ2zcM8SVaum8OEr8v1Uir8RCaZxlW3EmZ1KgZGq7Gw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/jvvYX0yfBWR2FmDZwnd9I8HucP+isADjV69LDr8N9Y=;
+ b=jc256KBOkbIjG6vpDgJkfmAbiuYxh1L0U6fRdJZdUTa60o1Jt6Ql4ysXcLLSbyZWGwowCRkk2RxaEbU/XKo6lWCMkG3KBZpuhOMCve3gXd0ynU1mNHmxyjasIL0tBmvWxu1E1sr1Su/t8a23TYAzSVVnfyyWQMveSj3ykqk57iVPADyU409LlN+Z+iQn4Uno7vFSwhd/iwwMjBHFvtVjc80lDwiMf+awT/+5fwU7bDXtyir9RZXLWxHwUZLEMRqEDB5Ukl0AQkUQB7C45lYbskNxZ7+t+kjjb5pM0m+xH0jiqPzng/uLZ7oyQGwdoGZZQUghkjZuw0gaWJh94MGLrA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1751374727; x=1751979527; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=uzw4uNd5li2mXa+WfFMUaVuwZFHwRlbcR3UhOImbWD4=;
-        b=i4gu9nhBzr9Bv2fhK58DYR9nxXSJBlsM/dx4IVDNn8oHQsRe2Pj5wgjqAPyORlznQJ
-         s+Uad4DKvNYNA5ee/0whonugBBVxTIHyb7ujZwUXTnkhGXBPWwuvKBrWaIZqW1U8ldlW
-         869DkG+c6BJUT2N/DYVYqJbq9gZlbBvPBdhebVIS+CvIPIi/QnYpWUOqQyI84jKCLigX
-         1Zbn3B8kdO6bjwWCICWic0SRwyPRGCF9/qo8Y/07DgkSb6O8oyJ08oHbA9roBWhYd18r
-         Fj7nMR/otldZEk/BpXryRIX2IVCBPVH4dlpXxdmCCWFwljPbWO23+wxrZ5Jwo79bn/vK
-         fNVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751374727; x=1751979527;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uzw4uNd5li2mXa+WfFMUaVuwZFHwRlbcR3UhOImbWD4=;
-        b=Y3Bke4FKyJ8LyFfjjt98tn7zlzwKahSCBw2g59//5WK/hewAkC4YBZA/j3gAlpWSqD
-         GX8p5YC8cPExcEASnBpmPtP22m8X3K7zR/BKsO4pCke3bKHc5jsbqDM9bg9WEfAz7TEC
-         lKrlBIA1cXA1owllEBFhPl9f08cNd5Er+aNA2h7xe+KZb0iUk4ctFylmelSPCfuZqBjt
-         S2hc7yXGDBd8sDj9Bu4jN49xPaa/aVr/Ldbbw9TdR/RWxt+xUHEhaF7BnaX96lh+Ayt9
-         +7Y/l3NAGUf8zLois10rKziDi12Of5Ivx6x4HFF4SXsoBi7pMYb8YhppML3CrRprxQAv
-         8yKw==
-X-Forwarded-Encrypted: i=1; AJvYcCUygzHUu93o22U4PnhU9sOUd319Rc0/vbDC6R4k9AbN1cNj46VeaqHCbblef9+PaMsT+H1CryhGFFU=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywp2qqFL7S+t9tFzkpTINAyBPcmxBOFxh8OeisuYVpqSNVrTZ7U
-	wcNaUujm+yPj+aVzgTIwjl17jSoY2W4vJ63AhrFxhpUaG/BC0bSsCQcrSTtcl299gw==
-X-Gm-Gg: ASbGncuv2XEjWjTwSPFwXO9U9ev9NkrhoKvf20wTR9+iLUaqGQ8b1ziJaiV6LNes3hg
-	t4EBX6+g7PmriAEX1WvupztdoRGzhHNMUK6N37Uv8EcNyU9Hw7+dBJww8voWD4cAkTuC2QL9pdT
-	hw5uFTyrAuNJ4yEDnqDAx1wfR6qzSvOJI5qkXd09EHMgz38rI5ZguLZilc05Y65ON9wFnJDss2M
-	SMJcCUd93YaKAoKTuAU01uKlPpayJxkZP+p7+XeHECGiC3uorkURjOmYbZKQ3otGYAoExCYNbRp
-	3B/l83UZvypJtrvpwJQgde8mKeMc+4OFMKCFQ+p1MwVRgFmfNvfAU+B27mpDDV4fNOKuF/PwXzr
-	54D5B0oqtbyJF9EcwJD3n1ISLKHYKemg=
-X-Google-Smtp-Source: AGHT+IGmj2MAzmEBH+PWX1NsLuSUKrLgxpjLMp3KA3CIsShNt/Sqit3dWlHjLZzB1pekp9REtBE7WA==
-X-Received: by 2002:a17:902:f70b:b0:234:bca7:2934 with SMTP id d9443c01a7336-23c5fef098cmr2059855ad.6.1751374726581;
-        Tue, 01 Jul 2025 05:58:46 -0700 (PDT)
-Received: from google.com (232.98.126.34.bc.googleusercontent.com. [34.126.98.232])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23acb39bcbcsm104502905ad.134.2025.07.01.05.58.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Jul 2025 05:58:45 -0700 (PDT)
-Date: Tue, 1 Jul 2025 12:58:36 +0000
-From: Pranjal Shrivastava <praan@google.com>
-To: Nicolin Chen <nicolinc@nvidia.com>
-Cc: jgg@nvidia.com, kevin.tian@intel.com, corbet@lwn.net, will@kernel.org,
-	bagasdotme@gmail.com, robin.murphy@arm.com, joro@8bytes.org,
-	thierry.reding@gmail.com, vdumpa@nvidia.com, jonathanh@nvidia.com,
-	shuah@kernel.org, jsnitsel@redhat.com, nathan@kernel.org,
-	peterz@infradead.org, yi.l.liu@intel.com, mshavit@google.com,
-	zhangzekun11@huawei.com, iommu@lists.linux.dev,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-tegra@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, patches@lists.linux.dev,
-	mochs@nvidia.com, alok.a.tiwari@oracle.com, vasant.hegde@amd.com,
-	dwmw2@infradead.org, baolu.lu@linux.intel.com
-Subject: Re: [PATCH v7 20/28] iommufd: Allow an input data_type via
- iommu_hw_info
-Message-ID: <aGPbfM2iZP7ww1fC@google.com>
-References: <cover.1750966133.git.nicolinc@nvidia.com>
- <ebbcdf1437bd1f96aa76e9132eba3c68472403c3.1750966133.git.nicolinc@nvidia.com>
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/jvvYX0yfBWR2FmDZwnd9I8HucP+isADjV69LDr8N9Y=;
+ b=DHKgoeTjKQSeLL7PbO8+m15QxFe2gJKbrk+3LeJw5NfrGNVZmwSL6FIKdtEG8JUy64MO0+X0ZY0RMajul4ltqvOP/hy1Jh8GYNvtC8NrvKHPARwHywk3NtE5HDAUVY5e7B3eApDtXZSGNUONRDsutxH92GbgBA+CPcDe1uQSwXw=
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
+ by SN7PR10MB6524.namprd10.prod.outlook.com (2603:10b6:806:2a7::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.24; Tue, 1 Jul
+ 2025 13:02:45 +0000
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2]) by DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2%6]) with mapi id 15.20.8880.027; Tue, 1 Jul 2025
+ 13:02:45 +0000
+Date: Tue, 1 Jul 2025 14:02:43 +0100
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-doc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+        virtualization@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Jerrin Shaji George <jerrin.shaji-george@broadcom.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+        Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+        Zi Yan <ziy@nvidia.com>, Matthew Brost <matthew.brost@intel.com>,
+        Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+        Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
+        Ying Huang <ying.huang@linux.alibaba.com>,
+        Alistair Popple <apopple@nvidia.com>,
+        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+        Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Minchan Kim <minchan@kernel.org>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        Brendan Jackman <jackmanb@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+        John Hubbard <jhubbard@nvidia.com>, Peter Xu <peterx@redhat.com>,
+        Xu Xin <xu.xin16@zte.com.cn>,
+        Chengming Zhou <chengming.zhou@linux.dev>,
+        Miaohe Lin <linmiaohe@huawei.com>,
+        Naoya Horiguchi <nao.horiguchi@gmail.com>,
+        Oscar Salvador <osalvador@suse.de>, Rik van Riel <riel@surriel.com>,
+        Harry Yoo <harry.yoo@oracle.com>,
+        Qi Zheng <zhengqi.arch@bytedance.com>,
+        Shakeel Butt <shakeel.butt@linux.dev>
+Subject: Re: [PATCH v1 23/29] mm/page-alloc: remove PageMappingFlags()
+Message-ID: <8ff24777-988a-4d1d-be97-e7184abfa998@lucifer.local>
+References: <20250630130011.330477-1-david@redhat.com>
+ <20250630130011.330477-24-david@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250630130011.330477-24-david@redhat.com>
+X-ClientProxiedBy: LO4P265CA0068.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2af::22) To DM4PR10MB8218.namprd10.prod.outlook.com
+ (2603:10b6:8:1cc::16)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ebbcdf1437bd1f96aa76e9132eba3c68472403c3.1750966133.git.nicolinc@nvidia.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|SN7PR10MB6524:EE_
+X-MS-Office365-Filtering-Correlation-Id: ce13e27c-1841-46a6-371c-08ddb89f929a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|7416014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?JOf0srUSuvgqXaf2rw4r48Ea64RMEEpLkAsK+uOQ71++NkWbluHc3oQYwR4R?=
+ =?us-ascii?Q?fJEZb1KQ1cQRkHkMR1Vb16k8AFLnTHBN6/yG6ZrYLA0ruMqszH2YmvxMMaV0?=
+ =?us-ascii?Q?lFlWwbRFmuwtNXwziglm8nD4t1B99A2S7D6eIneYg/ahBrlabkqh197ypJuB?=
+ =?us-ascii?Q?eHVZi/YPZfRva6FMTAuBOvqXWR9ZWyV3r5VfKVo+fc1FDVlORtqAeVZp8O6F?=
+ =?us-ascii?Q?ZULGASIZ4VzbV8nQp/bFlxXTTlG/VfQHce0sFPYUU3E7zOeIkiGP4167WCYr?=
+ =?us-ascii?Q?xjONQMWJ883oU9+W+f6aoWAr6WytFobw5sn7o6kQMQTSjJzY5IBcXJ7+Bcc1?=
+ =?us-ascii?Q?lqNQB0SEKtAO5qgtLxbRQx+MVnWeQEC9aGIy8TgwUMKxO1t0wavcHSNDnplR?=
+ =?us-ascii?Q?N9gPfBlqvteGJVxzhzGt6DdGadEyFv+5lPHSFfWHt4DvtKxMjKBFgJaX1RRc?=
+ =?us-ascii?Q?6ZxdzJXsPKQR7uRE43D6EOqkJVamDBgRCT5NLqlyVJ+aRfTdVXmP4gdVRlzM?=
+ =?us-ascii?Q?yAprV5jo7RCiefq8HSxm5fuEFikGFFy5/zSEyZDMY5JDZDL/m+zOxtuqoFcG?=
+ =?us-ascii?Q?GLBh4VJYMvEMUAuY9AFtehCnkcmxs07fBXsXCngbptxWSwUIxvK/PvWsnqEI?=
+ =?us-ascii?Q?ZWV8GARq9hlqbJN+bBqMPqZP1GFhkVxFspN4q9/k0RZ4OYsnpCRw7gWTZapo?=
+ =?us-ascii?Q?PsJhiDLTgcVVad+lpvDFL38WBCPbOQeuyiN5RqyeqWRp8bWwj2ynulHox+wD?=
+ =?us-ascii?Q?tmr5bm87FSMKY96tZNbEU/0OPAQqIFw860L55H7KyTXNyVi0MxNb6JsjuD52?=
+ =?us-ascii?Q?sajgcrrlNzbd3H0DRSQAsynW5LKzKogsB/FQozSz6CQGZdA7vtE7hrKgR6Lf?=
+ =?us-ascii?Q?R40+wlB15ZiJo0Dbw9SnEDX+ZFsSKzGfl0JveidPb7LGo9P+nE/RFOtFFq0z?=
+ =?us-ascii?Q?5C9HypYEb7CW9v/Nwc5JGxGLGMH3MNs8CAuRXfe9XXAtkvKmyK3zfVj7PwX+?=
+ =?us-ascii?Q?C9QorwsNqh0q8SBg4zQ62HWh/Hxy8cAqFThSzSsdCiXbXtQ5rv43GDFqEnVG?=
+ =?us-ascii?Q?IrkYIwbV5XDIO7GATWVG5emriR/xPUG0BySEw5zbgjjOPI8rk7oVz1/I66Qp?=
+ =?us-ascii?Q?L+ggBvWzOvG1jgiGd0swdEYCu2cSjeBKHqT9Cbk7Pvh0O5yfZD2GiFyGIXWl?=
+ =?us-ascii?Q?vOtVSghBCWe4UzF+Gxh7JUY2wPi9dm06lEOx0o6B85KKy7bifeDEsM/kqp4/?=
+ =?us-ascii?Q?oErrgUFxzXDQGGQnWNA3ZrEFfgJbmN7QnJ5zqrqkq9ti/61ehtQ0odq3GvGN?=
+ =?us-ascii?Q?KjVrjD2NopGqE7o0AOLhOKt93XjICi79hJ4WWpJWtTcUhwMufO/WEJ+SFWNb?=
+ =?us-ascii?Q?Vx929dQzOfuxsR8Jj5XRXz0kLrvu2npjIS2f25IAm9+IUfsuwsAl5OnvgVuH?=
+ =?us-ascii?Q?feQBU08TkOI=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB8218.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?37laApCkE3zB2B73OxIagWZvYlHGzD3sNSdPUFDbFDGhpx5wlu/pa8lwTaF1?=
+ =?us-ascii?Q?K6C8BbcbyGklWQnISsYbB32Yaydn52I2W898EbZWlC3At/uWTy4c4JSpi47Y?=
+ =?us-ascii?Q?uY3ed7IG9pzy2w6Crr0NZp4xpTdilI2duEPY6CU/CO6nvYUVwzaohZzijh9P?=
+ =?us-ascii?Q?BUpgwqJaiUIoSSZEX6WgF8aH7u5gQIMVfbaEJ9O6b1ZAsoXyn1eltzl4UW8X?=
+ =?us-ascii?Q?XW0tbo/2lrGweDA5PEw/Clwl9fuJoYUdKpM6NQEcnrFHnuKQotraf2/V9liZ?=
+ =?us-ascii?Q?76PL4NAO/Wi/UZmU4sY6HMrjbQGHWCsfsdhCyi0mawwRtKd70AdCu4ekbgRT?=
+ =?us-ascii?Q?s0Wb1gSL8HFykQGn9OJbenVvyVMRxptdqBqw6TXMRCdsZB90c1enZif8Rdaw?=
+ =?us-ascii?Q?FQMC3IXmbFlbMi6vS/Qe09+a3y9JcxFErAS0ZbpzdLnAbl/ofw36yaFEBo+g?=
+ =?us-ascii?Q?fvF66DZlNqmKDLd6ICS6bZAmyJsNV0gWcdOUHy7URP6jD3iS5KKTYmgIVCqV?=
+ =?us-ascii?Q?L8FCqeC/t+BXeQAwUEflPToAxy2c6Stdcw11sKoouGosD5XFDKKEdegDQksc?=
+ =?us-ascii?Q?tmqfTONm168oRqpuA6r4/1tXhoHrEgVbs6zALZDbMqSVRElVvRBZIKyu5cNk?=
+ =?us-ascii?Q?xrX4nnGb4cb7yJf3BejDhXu/vbKLgO7KhcWuTDJf+rLD8WerDW8AQokhbjvJ?=
+ =?us-ascii?Q?0SG8HT0OyMA2cxXQU3l+05MYUWP3s32vuX5ZVSaPaNB9bTFVC0U6e+F3xIZK?=
+ =?us-ascii?Q?ZquGNP8DRcQeWLAk1nkhoQpgkNu4zbbrKxlMgriBt/5U8gF/tag6fmhpRhAe?=
+ =?us-ascii?Q?BlOlq0laxxeNV5RPurG7ugi/79c9hUpOXeH3GBX6PyLmvRwSjYMaTvN4XKE+?=
+ =?us-ascii?Q?Splk3/0U/XVtTdyxXoW2X2EneS0Cw6aCirLZypFBUnM+0qHkoVDcuB153/0D?=
+ =?us-ascii?Q?fZkb9ICn8bkhUiJSOM1LsKa7LF0elkuQCzUveOBLiWWk1N7d7ty6dzh+KGBO?=
+ =?us-ascii?Q?Xsd50N3DEjsARBi6mVhWuQNwNLj0lSY54N0Sb/oNGPijpoK8y57P/GsVOH6k?=
+ =?us-ascii?Q?Kg3ozXj5LKQnJ4Z+BZV/AGQGKBtzljie074aaCdGMRUqSk/Ofof8Sk/Jk6GK?=
+ =?us-ascii?Q?dTtQQGtXFx7fJQ/ht4NWJ+9ys7EBjKP3+swhsJBexWQXtpyLsvYVk5LEqYXj?=
+ =?us-ascii?Q?5DoUvQxd5E+UEjBjkO3mwljaaFIqszDc/nWaTzgBI1VWMcifKr6dyb74VN7o?=
+ =?us-ascii?Q?l+2I6rVkMjQ/bGVqT2Q1FL6vhnLyQ50B/1qUjNrflKmOTO4FDv9k7b//m3M1?=
+ =?us-ascii?Q?CNIcu2swheShXcBmTokLuG3LIIDUj2kiAFZU9/sB3UdE4peWUB0R2faHSTO0?=
+ =?us-ascii?Q?LxuTNfm3bHlYjQkmlLZ+K82zGno1vZIOmNVOK+j1Lv55bLyKhveeR/4SolP/?=
+ =?us-ascii?Q?oIFdiEO4gJ0Bu8BHtZJOQD2bSlywteGrUr5U6ExFAj8d47CXHO67MSass5uU?=
+ =?us-ascii?Q?NwQ+QGY66vtl2v+6EGzMRGyxzPYW6Ci2aoFJZo2p9b4208eVmWD6SC9z6c+4?=
+ =?us-ascii?Q?/vN1hAl7HTDVMQLbQ2dhbcjPsRWGNgpPSpY0YsgfaTUsJcJ5b1hglFo58m7x?=
+ =?us-ascii?Q?gg=3D=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	wlXLJf71p6Cb9pNJuh4G0vgvgDk7/RJ4Nqx04CkCcrin5uZwcDPdHBY9WJB8IINP4SL4LwEXlLudIAVLsvX+zWTu1F9Xzx1Vwjd4TvanBLezLIhs+Rl9anmd59L4molPDq2wI5Xi4VDJNptZtZHj4CybXh9mlxVlQs4YnTooyPevKQi5EYmm2RvxbXInjF95O2nBQ4MFunSjgT0RqLDVPkhd8bhiBXa6Nq12xBPgRf4Foerv5aTKa/6rmgGEo/xDJQg+xrrZTyNFxTE58TIiG/ZJrqe4eiqPLp/5kQwmClQg7gwL8yBL6EyEz3KyU7tE8E6S88PikeacmmroME2DSMApIq9umyD49AxOvk88X9y4RKcRKsRIMDoxR8v3+Zaoo05xYySEMmoRxrUf2rfqnMEQjqY1RQxIWd0oPtM1RFSyBSRTCEX6zczqEEaP9kFC0W8DEinAani44Rmu5VnIQhTM1nWuqtsijp1Gu191YqbUDI/hUwQNFjVB3x7tuxL/pLbeLk7RwRREWMu0DGn5C4aj8mUl8dV2YfOgeX7tIlnIe8DMtlFF2U6+IcFBddQZKlysAX/IQ4Zb/QKV3uUCV1p9XNiHYlFOVymT8p/anrs=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ce13e27c-1841-46a6-371c-08ddb89f929a
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2025 13:02:45.6138
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dknKvvON3tBxqr0//abNTqMSPQnFiOD7yCsnq1GlVnNDODR/kF7Q+MoRMK4c+hTT6Hjw8cLB5kZWS+GZSM8g8sCTRFeNYFXtLbDijnu0FUs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB6524
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-07-01_02,2025-06-27_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 spamscore=0
+ mlxlogscore=999 malwarescore=0 mlxscore=0 adultscore=0 bulkscore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2505160000 definitions=main-2507010082
+X-Authority-Analysis: v=2.4 cv=CMMqXQrD c=1 sm=1 tr=0 ts=6863dc7a cx=c_pps a=XiAAW1AwiKB2Y8Wsi+sD2Q==:117 a=XiAAW1AwiKB2Y8Wsi+sD2Q==:17 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10 a=Wb1JkmetP80A:10 a=GoEa3M9JfhUA:10 a=Ikd4Dj_1AAAA:8 a=20KFwNOVAAAA:8 a=yPCof4ZbAAAA:8 a=2uYtEvTHmWmR_0hr5ygA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-GUID: 3CWKfytkXTal-6XDCRbbiVvNUONlbTY0
+X-Proofpoint-ORIG-GUID: 3CWKfytkXTal-6XDCRbbiVvNUONlbTY0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAxMDA4MyBTYWx0ZWRfXzlVjSr6WIwsI 18KoQN8Ruh2JFfZaUJUPjaQJLY61Hrqh6/+EbEkQ7cp1LQH+jHPeIHIoxDcpUIgwjjm377UaOFh hQ5juga4J7Up3EAfLGfsWAcuOsY4mHss/qo9wEljJ6W1DY4UhQCTS1Is9B89/9PLcb/S69G8wVN
+ zmHIHnm08uiNtYI1fyzSirrW+1r2ZdbQtlagi0u7dQhid+QT8u5Fs2H9IWQaoDZN+scDIZ7iZar JsFq4/JDyLHKBBTrDh47CG/7PS3sCcfg90Mb3soeat5cBbxCfNOn4jIM8uJIjD5VAsVQLVEXVAt i27qLbE2ymN90FIIdtqXWsSOyK8LBhIORperblAcmBeGeSrgUUMulR5XalefHkcV0iNG+ZPtmP5
+ sVmip3F3ZRztLuaqodlzjimLNEoaNRrGJq2XQiwwwj+mxQOzL4hIOoljYs75cmrF+3XknMbN
 
-On Thu, Jun 26, 2025 at 12:34:51PM -0700, Nicolin Chen wrote:
-> The iommu_hw_info can output via the out_data_type field the vendor data
-> type from a driver, but this only allows driver to report one data type.
-> 
-> Now, with SMMUv3 having a Tegra241 CMDQV implementation, it has two sets
-> of types and data structs to report.
-> 
-> One way to support that is to use the same type field bidirectionally.
-> 
-> Reuse the same field by adding an "in_data_type", allowing user space to
-> request for a specific type and to get the corresponding data.
-> 
-> For backward compatibility, since the ioctl handler has never checked an
-> input value, add an IOMMU_HW_INFO_FLAG_INPUT_TYPE to switch between the
-> old output-only field and the new bidirectional field.
-> 
-> Reviewed-by: Kevin Tian <kevin.tian@intel.com>
-> Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-> Reviewed-by: Lu Baolu <baolu.lu@linux.intel.com>
-> Signed-off-by: Nicolin Chen <nicolinc@nvidia.com>
+On Mon, Jun 30, 2025 at 03:00:04PM +0200, David Hildenbrand wrote:
+> We can now simply check for PageAnon() and remove PageMappingFlags().
+>
+> ... and while at it, use the folio instead and operate on
+> folio->mapping.
+
+Probably worth mentioning to be super crystal clear that this is because
+now it's either an anon folio or a KSM folio, both of which set the
+FOLIO_MAPPING_ANON flag.
+
+I wonder if there's other places that could be fixed up similarly that do
+folio_test_anon() || folio_test_ksm() or equivalent?
+
+>
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
+
+LGTM, so:
+
+Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+
+
 > ---
->  include/uapi/linux/iommufd.h   | 20 +++++++++++++++++++-
->  drivers/iommu/iommufd/device.c |  9 ++++++---
->  2 files changed, 25 insertions(+), 4 deletions(-)
-> 
-> diff --git a/include/uapi/linux/iommufd.h b/include/uapi/linux/iommufd.h
-> index 6ad361ff9b06..6ae9d2102154 100644
-> --- a/include/uapi/linux/iommufd.h
-> +++ b/include/uapi/linux/iommufd.h
-> @@ -628,6 +628,15 @@ enum iommufd_hw_capabilities {
->  	IOMMU_HW_CAP_PCI_PASID_PRIV = 1 << 2,
->  };
->  
-> +/**
-> + * enum iommufd_hw_info_flags - Flags for iommu_hw_info
-> + * @IOMMU_HW_INFO_FLAG_INPUT_TYPE: If set, @in_data_type carries an input type
-> + *                                 for user space to request for a specific info
-> + */
-> +enum iommufd_hw_info_flags {
-> +	IOMMU_HW_INFO_FLAG_INPUT_TYPE = 1 << 0,
-> +};
-> +
->  /**
->   * struct iommu_hw_info - ioctl(IOMMU_GET_HW_INFO)
->   * @size: sizeof(struct iommu_hw_info)
-> @@ -637,6 +646,12 @@ enum iommufd_hw_capabilities {
->   *            data that kernel supports
->   * @data_uptr: User pointer to a user-space buffer used by the kernel to fill
->   *             the iommu type specific hardware information data
-> + * @in_data_type: This shares the same field with @out_data_type, making it be
-> + *                a bidirectional field. When IOMMU_HW_INFO_FLAG_INPUT_TYPE is
-> + *                set, an input type carried via this @in_data_type field will
-> + *                be valid, requesting for the info data to the given type. If
-> + *                IOMMU_HW_INFO_FLAG_INPUT_TYPE is unset, any input value will
-> + *                be seen as IOMMU_HW_INFO_TYPE_DEFAULT
->   * @out_data_type: Output the iommu hardware info type as defined in the enum
->   *                 iommu_hw_info_type.
->   * @out_capabilities: Output the generic iommu capability info type as defined
-> @@ -666,7 +681,10 @@ struct iommu_hw_info {
->  	__u32 dev_id;
->  	__u32 data_len;
->  	__aligned_u64 data_uptr;
-> -	__u32 out_data_type;
-> +	union {
-> +		__u32 in_data_type;
-> +		__u32 out_data_type;
-> +	};
->  	__u8 out_max_pasid_log2;
->  	__u8 __reserved[3];
->  	__aligned_u64 out_capabilities;
-> diff --git a/drivers/iommu/iommufd/device.c b/drivers/iommu/iommufd/device.c
-> index 64a51993e6a1..cbd86aabdd1c 100644
-> --- a/drivers/iommu/iommufd/device.c
-> +++ b/drivers/iommu/iommufd/device.c
-> @@ -1506,6 +1506,7 @@ EXPORT_SYMBOL_NS_GPL(iommufd_access_rw, "IOMMUFD");
->  
->  int iommufd_get_hw_info(struct iommufd_ucmd *ucmd)
+>  include/linux/page-flags.h | 5 -----
+>  mm/page_alloc.c            | 7 +++----
+>  2 files changed, 3 insertions(+), 9 deletions(-)
+>
+> diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
+> index abed972e902e1..f539bd5e14200 100644
+> --- a/include/linux/page-flags.h
+> +++ b/include/linux/page-flags.h
+> @@ -723,11 +723,6 @@ static __always_inline bool folio_mapping_flags(const struct folio *folio)
+>  	return ((unsigned long)folio->mapping & PAGE_MAPPING_FLAGS) != 0;
+>  }
+>
+> -static __always_inline bool PageMappingFlags(const struct page *page)
+> -{
+> -	return ((unsigned long)page->mapping & PAGE_MAPPING_FLAGS) != 0;
+> -}
+> -
+>  static __always_inline bool folio_test_anon(const struct folio *folio)
 >  {
-> +	const u32 SUPPORTED_FLAGS = IOMMU_HW_INFO_FLAG_INPUT_TYPE;
->  	struct iommu_hw_info *cmd = ucmd->cmd;
->  	void __user *user_ptr = u64_to_user_ptr(cmd->data_uptr);
->  	const struct iommu_ops *ops;
-> @@ -1515,12 +1516,14 @@ int iommufd_get_hw_info(struct iommufd_ucmd *ucmd)
->  	void *data;
->  	int rc;
->  
-> -	if (cmd->flags || cmd->__reserved[0] || cmd->__reserved[1] ||
-> -	    cmd->__reserved[2])
-> +	if (cmd->flags & ~SUPPORTED_FLAGS)
-> +		return -EOPNOTSUPP;
-> +	if (cmd->__reserved[0] || cmd->__reserved[1] || cmd->__reserved[2])
->  		return -EOPNOTSUPP;
->  
->  	/* Clear the type field since drivers don't support a random input */
-> -	cmd->out_data_type = IOMMU_HW_INFO_TYPE_DEFAULT;
-> +	if (!(cmd->flags & IOMMU_HW_INFO_FLAG_INPUT_TYPE))
-> +		cmd->in_data_type = IOMMU_HW_INFO_TYPE_DEFAULT;
->  
->  	idev = iommufd_get_device(ucmd, cmd->dev_id);
->  	if (IS_ERR(idev))
-
-Reviewed-by: Pranjal Shrivastava <praan@google.com>
-
-> -- 
-> 2.43.0
-> 
+>  	return ((unsigned long)folio->mapping & PAGE_MAPPING_ANON) != 0;
+> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
+> index a134b9fa9520e..a0ebcc5f54bb2 100644
+> --- a/mm/page_alloc.c
+> +++ b/mm/page_alloc.c
+> @@ -1375,10 +1375,9 @@ __always_inline bool free_pages_prepare(struct page *page,
+>  			(page + i)->flags &= ~PAGE_FLAGS_CHECK_AT_PREP;
+>  		}
+>  	}
+> -	if (PageMappingFlags(page)) {
+> -		if (PageAnon(page))
+> -			mod_mthp_stat(order, MTHP_STAT_NR_ANON, -1);
+> -		page->mapping = NULL;
+> +	if (folio_test_anon(folio)) {
+> +		mod_mthp_stat(order, MTHP_STAT_NR_ANON, -1);
+> +		folio->mapping = NULL;
+>  	}
+>  	if (unlikely(page_has_type(page)))
+>  		page->page_type = UINT_MAX;
+> --
+> 2.49.0
+>
 
