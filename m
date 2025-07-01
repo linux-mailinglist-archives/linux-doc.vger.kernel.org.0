@@ -1,95 +1,137 @@
-Return-Path: <linux-doc+bounces-51372-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51374-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1E8DAEF56B
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 12:45:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F863AEF595
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 12:52:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id E115B1BC4F9C
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 10:45:22 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 34724189B053
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 10:52:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9262126FDA4;
-	Tue,  1 Jul 2025 10:45:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F3CD242D8C;
+	Tue,  1 Jul 2025 10:52:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="Yf9Iyz0T"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="pWu+baHy";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="aHiKc+xr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from AS8PR03CU001.outbound.protection.outlook.com (mail-westeuropeazon11022129.outbound.protection.outlook.com [52.101.71.129])
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BE8326A0FC;
-	Tue,  1 Jul 2025 10:44:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.71.129
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77F331D5CDE;
+	Tue,  1 Jul 2025 10:51:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.165.32
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751366700; cv=fail; b=Z89WdNShP3nt1p3qP1mNkWloNiki59cpIkBku1KlHg4TzimaS5TflolbxOVF30mCXOmU3uTl4m/1Yn0+1qK1SVO8BsECByjyNQkXH0Qa4IXf2SXG6e+7OoMFOcQm4vnFPUVFjhJQrVTRIbgYQuSRa+C2X4CFB0ndJFPhBRPtyRQ=
+	t=1751367121; cv=fail; b=ewIC1FRHz7XXA+Jz7EFAlkRnzJUMUfZFZO+/Ie9HHrNMffTa8aFf/A8NRyXOwuPOT8sQe5KgwrJepM19obsTOqDk9FCTlgHm5lLCqLsvLL+Hd4fDOQBZGK7M9VICvlOGQIsikbB+5CCFm4AoWFAXOnKw7P/KuaZ9n9ncfVbqbk0=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751366700; c=relaxed/simple;
-	bh=0oCafaiZRC9zEDrZwGRt5g46P+ujTKt9r5vAmFu+9s0=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=MjF4Fd9tRjZnTEDdfU/MmkqulxCK1WiuirYFXio3JqruhcyRmueJnwgBFdcjbYsAQGERDRJLRK65RcoozoR8Yw2ng3xnAfBcIJnmSQVXvw+jbJ5BKievLZe4LdFRC7w8/YoDlysJnw9DHjz7ujouMHqi7XJON/FZjgXRk4VlW/U=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kontron.de; spf=pass smtp.mailfrom=kontron.de; dkim=pass (1024-bit key) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b=Yf9Iyz0T; arc=fail smtp.client-ip=52.101.71.129
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=kontron.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kontron.de
+	s=arc-20240116; t=1751367121; c=relaxed/simple;
+	bh=gThMcasDy2Ffef2gqRCgBK2v96npAC6HL+EMQDnKcBE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=aRXh9tsm6fVvO2twX2xiD5mJJhPBLecvIf9l/xOdRUcE6W4SkY6LLYEi4Rco/QSkW5CHoikN1DpIIZFPbCuqwTf+pp2UlY68kHNPquYH2vHKDGorF2aj6mZxJToCMz1Bwv/92Nn+ll7Hra4HT1ZrGf4oP8yQDAaDmr081V5HEug=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=pWu+baHy; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=aHiKc+xr; arc=fail smtp.client-ip=205.220.165.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5611MrkF005833;
+	Tue, 1 Jul 2025 10:50:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=AvufiYCOSINoEHV10u
+	Tkw7uta8e91k0LfesGk+8YmXs=; b=pWu+baHyq7TzH/U6HDU8ug5BU3PahbCOWA
+	r3uuvP/osM2e80UWBT6722bmtGmJYUhmyTBCnGCDpvmFYoMif/R7xp01l/vm9UZa
+	8JQqpdSwjkj6yhnLqeB5AMufHsdJS8/99BhN9JWuyVbDmYu4baJs3qqrBjHrvym8
+	wtXXONFtuYNYC7NiJI6V2dH2kIGguRAGQx+nw7DfsI9zytKYUTn1cafqj/dNU9aN
+	OhUA9gB1vYbU7NkBUu1qfV49sCCgH0nGbQlXXUBjstCMoHBk5AYfdUUOaUSCyKuW
+	pCGoUqJMPCEzPnuiyousi0cglEScw9X39UhNoBY3hevKrBHf3GxQ==
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 47jum7ut82-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 01 Jul 2025 10:50:28 +0000 (GMT)
+Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 5619aJJG025831;
+	Tue, 1 Jul 2025 10:50:27 GMT
+Received: from cy4pr02cu008.outbound.protection.outlook.com (mail-westcentralusazon11011026.outbound.protection.outlook.com [40.93.199.26])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 47j6u9k8sd-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 01 Jul 2025 10:50:27 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lElLxL6CB0LE1DILjWjm7BzalPjUuyPTVAPF6/y2DVAaP46AC1v5h9ylxbZJW5zTFJNSaop1yGSyAlcv7IGi9IebEmksJmzm9hHOB2Wq43OSlnVARxrZAcYTrYKb2/7Oy5vfPIpjsDsKl/0FwP8rNtL4K9yIK8Oqu42nipprknqE2xppj6gNOpAsCsBitByQIPCTYHjQLX6NaXs9Q4TqRfxasVmHkbOPw5emTBIH+YARTlST7S+get5dQZmfW9V+vnROAWAuI67r4wWaxmfQP4ngx/HcJiT/RXanPJnilXvDaluzS7EadDdQhn+lfj1j+5wAFN0k3MyPHDzZCDEsgA==
+ b=EtkW8Q72zGkONFY8KHlnN9s7PukXglxGEUSGy+g/6jDGL4gJejQgUNrICc1BJ6yOy6vHDcOxU8XQSJeiojabqPnXFMKlmwZdir5d/qunJQAuHDP2fQvHYQW5nleO4QSN3AtIU3cXfo8oSw5flY/ytcuDigaVSg4e/KM6hF5/fTj1RJatqPb29VNvbHpBWDOoTjd+/mKbabUPbmHtdBn16qAEXqgjDSo/ppPQEawH4PdD8IfcEW3rc3hbg780TN74SnKmIVEDMD3e6mJyPH0EVAMJibnkFp9wk0lCnq6yjJVELwBraZ1zFGdCNhklYWVQawmQgbzCjW8AuraTtS5F1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zULYfYbB+bq+u74ZxxzSDcQyy8ZPQ037DVLvjCflkVY=;
- b=LtHez5LlA8s0udgA2DN713dIhz7r+y1oqzgHig467WefMn06RLFR7MyPq6PBCMSeKtoxfB9xZQKGiTHt+cJ/rJ3Rl1YtibfuRt/c5omSdS899bemX6GU8fASAvAKZ/lnQJkhVYcQqP2Zj8HdHxnInX4bmEMW2jY13Te44vXWFaAv1fini46YmPHqwsZ78SKKsUx6O1tE8jq2wz68akRAXDdI6ceiFWTZE9ai8JgIS9oFLZTZr0gN4n3PUCF6P59eq0HEwe2PCF0XGv47e2pFYzlJkI+fXNwWXolGMCyf7NPIGsDti27l8MIkYF7BXj9VGMcmFXXmgXH4vKc2d5pPjQ==
+ bh=AvufiYCOSINoEHV10uTkw7uta8e91k0LfesGk+8YmXs=;
+ b=cjbo3VDrzZkmFrE22cHtOvsvSAQEwMeFabn/u/+V4ysq7aZQnqIaDDL+54oZuLwq0YLxLhPlay8MsTTWR9puMFcHb83VFXTy2QnKGK6PFFemFeZHEptfsRqYDuShobMnl859q4t29C5fwj6XENpl+LezseEPiFw16tyi+z60gz6W0+DTUU5mwlnI0gJfyVKlu+44R5dGP0bBWoxyHUIpJ74PI0pCd0P/eW8n1EUQVnJQQbPjODNj0zVN60s+ZSWaEhaXolk7CCngQ3DNYxKhN2pTGHOZwv/w9yQYHaEF5VIxxiIkEdgYfCIvHUcpPV+rrc57/go2W1ejQO/PL3T+wA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com;
- s=selector2-mysnt-onmicrosoft-com;
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zULYfYbB+bq+u74ZxxzSDcQyy8ZPQ037DVLvjCflkVY=;
- b=Yf9Iyz0TJre7D1cXGG3kmCti4/HzIpRrTZNTrinc9C1AKgtHiKM0d1+TsARito5NRJZ3fLARk6KAxt6OuBKMyIYLxjBxBRG0zEoQT43HUrfzqFWQFW9Tn33s7tHAQPP3VHmXBce8Z9qp7Z1mHD13nRT0b16EDiKGEq0iQ+dVp+Y=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
- by AS8PR10MB6433.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:56c::20) with
+ bh=AvufiYCOSINoEHV10uTkw7uta8e91k0LfesGk+8YmXs=;
+ b=aHiKc+xrSUd7aIcg9rTpUHdjwDbP6OPN7L/IMcyLvvXKbpMxXY43kkdU5brdHTJYLi/t2A34OP2GP+23vAi6BMHQFdKsjz08db6Jmb3qpNXQyq3qoUZOhoyT1X8t7ntg/wmTXvjaxgwS16G7jqMdb/uQPpLABJrRMDtERgNG7Fw=
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
+ by PH0PR10MB4550.namprd10.prod.outlook.com (2603:10b6:510:34::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.23; Tue, 1 Jul
- 2025 10:44:53 +0000
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::b854:7611:1533:2a19%7]) with mapi id 15.20.8880.027; Tue, 1 Jul 2025
- 10:44:53 +0000
-Message-ID: <087b8689-7443-4720-a94c-160edd31a5da@kontron.de>
-Date: Tue, 1 Jul 2025 12:44:52 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [EXT] Re: [PATCH v18 3/7] firmware: imx: add driver for NXP
- EdgeLock Enclave
-To: Marco Felsch <m.felsch@pengutronix.de>
-Cc: Pankaj Gupta <pankaj.gupta@nxp.com>, Jonathan Corbet <corbet@lwn.net>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>,
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- "imx@lists.linux.dev" <imx@lists.linux.dev>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- Frank Li <frank.li@nxp.com>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
-References: <20250619-imx-se-if-v18-0-c98391ba446d@nxp.com>
- <20250619-imx-se-if-v18-3-c98391ba446d@nxp.com>
- <20250625105546.pxuatcnfpe7mssgs@pengutronix.de>
- <AM9PR04MB8604611B8D91B5526C9704E69545A@AM9PR04MB8604.eurprd04.prod.outlook.com>
- <20250627084653.6vgwnm3llf3zknlp@pengutronix.de>
- <b02055bb-0995-4fd8-99f3-4ca5146eedd4@kontron.de>
- <20250630121722.wviidlggt7hguyt7@pengutronix.de>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <20250630121722.wviidlggt7hguyt7@pengutronix.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0159.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:99::8) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:263::10)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8880.32; Tue, 1 Jul
+ 2025 10:50:24 +0000
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2]) by DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2%6]) with mapi id 15.20.8880.027; Tue, 1 Jul 2025
+ 10:50:24 +0000
+Date: Tue, 1 Jul 2025 11:50:20 +0100
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: David Hildenbrand <david@redhat.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-doc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+        virtualization@lists.linux.dev, linux-fsdevel@vger.kernel.org,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Jerrin Shaji George <jerrin.shaji-george@broadcom.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+        Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+        Zi Yan <ziy@nvidia.com>, Matthew Brost <matthew.brost@intel.com>,
+        Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+        Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
+        Ying Huang <ying.huang@linux.alibaba.com>,
+        Alistair Popple <apopple@nvidia.com>,
+        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+        Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Minchan Kim <minchan@kernel.org>,
+        Sergey Senozhatsky <senozhatsky@chromium.org>,
+        Brendan Jackman <jackmanb@google.com>,
+        Johannes Weiner <hannes@cmpxchg.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+        John Hubbard <jhubbard@nvidia.com>, Peter Xu <peterx@redhat.com>,
+        Xu Xin <xu.xin16@zte.com.cn>,
+        Chengming Zhou <chengming.zhou@linux.dev>,
+        Miaohe Lin <linmiaohe@huawei.com>,
+        Naoya Horiguchi <nao.horiguchi@gmail.com>,
+        Oscar Salvador <osalvador@suse.de>, Rik van Riel <riel@surriel.com>,
+        Harry Yoo <harry.yoo@oracle.com>,
+        Qi Zheng <zhengqi.arch@bytedance.com>,
+        Shakeel Butt <shakeel.butt@linux.dev>
+Subject: Re: [PATCH v1 15/29] mm/migration: remove PageMovable()
+Message-ID: <38e19e3a-e46b-4a50-8a34-dc04fc4a3c3c@lucifer.local>
+References: <20250630130011.330477-1-david@redhat.com>
+ <20250630130011.330477-16-david@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250630130011.330477-16-david@redhat.com>
+X-ClientProxiedBy: LO4P123CA0521.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:272::22) To DM4PR10MB8218.namprd10.prod.outlook.com
+ (2603:10b6:8:1cc::16)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -97,242 +139,230 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|AS8PR10MB6433:EE_
-X-MS-Office365-Filtering-Correlation-Id: 86f3da64-080a-4ee3-4bfc-08ddb88c4fd1
+X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|PH0PR10MB4550:EE_
+X-MS-Office365-Filtering-Correlation-Id: 03830eea-3802-4d68-7300-08ddb88d1523
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|7053199007;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?Q0NtYkIweXdULzBGL1BMZllZYkVpS3ZmbE5MNS93QXhkZCtKM01zY2tVVjZp?=
- =?utf-8?B?ejEvNEFjdHlrYVhqREVoN1liaGRWdDBoNUM5RjR6NTE5c3l1ZHVFT050bFZ6?=
- =?utf-8?B?TlR4b0w0T3BLOEE3T0FFYVdFYVB2a1crd0txd3UzK0tZcVl4ZU5JRE5jZlZt?=
- =?utf-8?B?d1ZGTVNNdnJBRzc0cFV1RDlZVndPWVlhYW13ekF3ZWRVYWlSelFOMVFJS2Fn?=
- =?utf-8?B?cUZCcVlGUkFoTnBNRzU5S0tWUi82Y0FNVnU5c1hmOTNickRBVk1pUnpScEpK?=
- =?utf-8?B?ckI5MkJEcFZ4akZhTkFFa1ZaRlhIbWUrUlBQdHg0dXlIQWZkK0dhOUR2WWcy?=
- =?utf-8?B?eFBVeGtWWDBTby9TeDNlKy8wZkRGUHdsUE4vWG1qTjlreFEvOUMxZExwcjVS?=
- =?utf-8?B?eTJ3QlhMcXFXNzlwWVF2TlVJSk1pWDhFYmU1TjZKbmwvTHZhbksrdjJoelI2?=
- =?utf-8?B?RUV6bWd4VUdiNDN6WkNEbVptcFN3dkVHeUsySG53VlQ3SUwyRlhnemc3eGQ2?=
- =?utf-8?B?TGRYSkhKSEJoQzJuczlOcHlDTFQxNCtCTHRINW5JR1RuYlZtak9WY2J3ekpH?=
- =?utf-8?B?TS9BNU5CalJPVVVneFFJQmk5dDVucHhITnI2eDVQdzhxYjNLcVpScS8vMHJx?=
- =?utf-8?B?ZjczOU1BRG5hcktQN1pIMlkvVm1heER6cnVjN2toSXBVdlV4ZjZqbFlROEdK?=
- =?utf-8?B?Q0h2dDBCNWpLdzBBdTB0dUJhckJhLzFNd1ZuTG4vUDd4OVMvV1dRdHhjTURS?=
- =?utf-8?B?Q1BHaXZWNFp6cUtLQ1luNkpVQ3k4MHpnTkZ3aGpQUWhFOGUzam5DYUxtQk1B?=
- =?utf-8?B?aFhKUkdYcmwwcXZ5L2JzTFZxOGNsNUYwaEwwdHM5V0MrZU9ISEtKTWN2QnBs?=
- =?utf-8?B?YS9LNkFtRmZ1UnhpcnMxYTVRYmF1Y0lDTzFSeDRFdFdOQ1ArYk5aUXpBNEpm?=
- =?utf-8?B?Uk0wSlRTZTZVZVR3eE1QWE5jNHlBSCtraXpETEs5RlRtVFFGWFJOTGdibXhE?=
- =?utf-8?B?T1JSRkxOOWdDY00rbm8wYXg1UVJKbDM0L0Y5enAzVTdGdS9PeFIzL0s0Nmlx?=
- =?utf-8?B?b2RLemdaNDAzOHk4VGhOZHZLOWtZSlo1VFYya2JOZ0tMTHJCc3hxSmF6VHVX?=
- =?utf-8?B?UVpjVmMyVk9tTHNuWnZSYnI3TkwweXF4TTdQMWpnTDNtNVlweDJJdEVTZXZr?=
- =?utf-8?B?VmthaFVlS0RVeTFxRWpEVlZkanRYL0c2SzJvTFZSK2VwbjFBdDBEdjdPS1NX?=
- =?utf-8?B?UlE0N3pVUm1HeHA2SjAzWEZvbEkveVBDTHowUWZiaCtTOUJ2NFp0Y0tPc21u?=
- =?utf-8?B?enRLMHZQS2dLcXBaOFZtdTN6MlZxZ0lxQ0diM3gxM040TlJqS1MwWkcrUVl4?=
- =?utf-8?B?MDhTQnNvVlhCVmQ4Nis4R3ppZnZPamVORnVpVWwraE8yTVVkUHV3QmpJck80?=
- =?utf-8?B?dy8vSWNuWWJqZlMyNyt3MkgraDU1VW00ektLMlpIS05aLzZ1TEpPU0VUcUVY?=
- =?utf-8?B?R21yR0tYUjYxdllOaWhiaTNqeGIxQzRhOHF6QUJ6Nm10aFhrem4wWDlka2hZ?=
- =?utf-8?B?L2ZLZU85LzBUSHJmSSt4bzdaSDMweGNHTmpnSjJ2MUNEMzFHOTNmQzEzOVlP?=
- =?utf-8?B?ZHlTWEdMQ3U4OTJEbCttaXpaZzVjdWpIREY1bFBzRjQ1b0M5K1M4TmowS2J0?=
- =?utf-8?B?UzBJcmxsY20wbmNDUlFWeWhGZkE1b3RHNTJWVFdoa1ROL0s4VE5lZ1RMMTQz?=
- =?utf-8?B?ZTQ5cmpidThYdDBLRTBSOXNSdlI3VHNadDlVVUFBVWVsblFyaFhMVFBKbldQ?=
- =?utf-8?B?bHNGdXFTeXRyK2VTM1ZrbnNRZ2Rqc0YzZmc1ZlV5cWNmcHZXdG00dkxLc1Fr?=
- =?utf-8?B?ZFhNOTVpc2xZU3MxQlFkUHFDeklRRE5sVlVEdzFDcTNTSWRMRlVEc0dMdExm?=
- =?utf-8?Q?oilG3AHun0M=3D?=
+	=?us-ascii?Q?gWc6VA//ty0LqtPf1uV1mUx8VtK9DfEjWD/EGi0ddDa6miZPOydwP3IgI4Yx?=
+ =?us-ascii?Q?RXgo+nm2XFFaOTtBIMFbtPZgfhcpm5ebOzIBd+Qt8MjTp53VU/YiHdOWeSey?=
+ =?us-ascii?Q?60uwbXTbywRehYgrNfe470WggfhZb3Igh0Wc8zyXJcs8cXXKoqmtLCliOoCv?=
+ =?us-ascii?Q?tToQCnFbUn29OYuPPUwKZimOTcOa2NEY9vKIMcNK9fkPD7mocaU13FJjwi5N?=
+ =?us-ascii?Q?fPh9tQtNMXudVToY40Yru7msn3B6+Q3vswmBxHqUzXG2/fbPOyKCwmsBXVRM?=
+ =?us-ascii?Q?3fmZadHkSkQDS1MjbyDgyyWXVfOie557Qia8taftNnckcXNAsIX8LY80Gct3?=
+ =?us-ascii?Q?BkFkHaIYlaVbLUAAc7VZM+84tOUQuuBTh18G7Ygx/5uwz5LpFn1vO6PKg8DU?=
+ =?us-ascii?Q?DpfBQDjMADcpC1MLPRSE95XpoLL1/ePiUY5hsmDlX5naYocfoONrj4Ir+n+k?=
+ =?us-ascii?Q?WVntZQ7xPEUi87Qp6lgOMRnmQCe1dvsxNR3fMlYtpCTpi9dSE/duH0yOYlU6?=
+ =?us-ascii?Q?mdaVUDy3Z8ITZ81iHE3kKd7fVLwfremopjGYHDl2gpCydJeQNGmYdo63dowU?=
+ =?us-ascii?Q?GVQuwCmELYCL3aXX9xY9slnAg5PFdm/SzypOAex6btQhwsNIKv1bbB5OkhwY?=
+ =?us-ascii?Q?brkM9RfiNERHO742r+xOdTaqvD4xnwHjJ1fDJFSn6TORGCEKe+NCr50Ulbst?=
+ =?us-ascii?Q?HnaEeLHo1Zs8o/sHMjQrYP/AiophJ5ApzLp+4eYwtLkAgskr5DQlfZscg8cA?=
+ =?us-ascii?Q?QFkZJHm74WWw9eGMoGbBfyfiCjEtB8WliuCMWUt+xrBnL0+s34JNBsZiqMhc?=
+ =?us-ascii?Q?z0sSFPM81eCXWn1BC/EWv4FK8VTgEDJo5uFwpb3tMhOFcVSTPb0+PaW6vmMW?=
+ =?us-ascii?Q?n8KwYdUZnsBgv5r0Q8sbmm+jrsRJ9/+LHMlPD4e2oj9aG/wzgqSqWKRZ+hZm?=
+ =?us-ascii?Q?BwTJMHw/ddFsUIu41cwj47p92Rdr81emUBjks5RY+Ev1NiGJsswVgItC+mmb?=
+ =?us-ascii?Q?GPL1sQlQQeJtvAzdW5wbBX1SGvzb2pdhJlBpTPVJmjS/Pyrs4Gz8w5VG5FtB?=
+ =?us-ascii?Q?//phJoFXwL2e0On5r7Q6/ix0n2QDLtSkjvlexBbuqLRhjqChmYGbKyOSzgBZ?=
+ =?us-ascii?Q?8DUg9uz/fETnMWQNiDI/sPpILRFFTjm6jPcQt6IAm5RVvm7PAimHMvCz6+F3?=
+ =?us-ascii?Q?vIT0wzPa6H1hlrxM8cgPaaCP7wN95+oao9YbsPNSI23D1ffBj57rIoUgwCIk?=
+ =?us-ascii?Q?m0Unknwwhcopy13xbmuz1y82izg88YKoPksbgYpKTm7MIphHK/88Xqgcnsnv?=
+ =?us-ascii?Q?DUKh8++PYo7aXmzOroIxQLssKnLY19TqVV+FyMpG0x7eQuMuIeFK/4wBTrKn?=
+ =?us-ascii?Q?lq64ywBcZzzgGEiK6MGox+T2tvNpQkbhMYnZHjczsENnTKrmxEqtCVbWTtHw?=
+ =?us-ascii?Q?t0UxrjOIhwY=3D?=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB8218.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?RllVRjAxd3FmUWxSUkhFeUlXRDRDNXN3ank1azZLRmJ6cGJYWVFKSVlUdm9N?=
- =?utf-8?B?bmhBQzBHbEM2WmZHUDNtN1RRTHRoN2NGSmFOdWZMbE9HMkFROFMzSEdOT1Zq?=
- =?utf-8?B?ZGI3T0hSNm4vQldPdmRQcFRheEttcVMreHUrL3c1TXNRUytoRmxkVFZrOVNQ?=
- =?utf-8?B?MTBQcmd3WjV0UmF1TDdYazZ4ZXZnSy8rNUUwZVUrajVlQWI0MENHRlJ3eW5r?=
- =?utf-8?B?UXlwV1llOUdyYUNPMnEvTnpxK2Zaa1BFM0wwb2djRGtvYTIvS2tyRjFLQXlV?=
- =?utf-8?B?bkF4MjgvVDcrQzRkRG1nZVd2VDcySU9rWlB2S3gwNFdaRjAxWjFYREZ3MTJJ?=
- =?utf-8?B?ZDlJRTI4OWQ3RWp5dWxEb1ZmenlZczY2OWNDeHVMR2JPQldEYURQUnZnK3lK?=
- =?utf-8?B?bjF2ZUZid2tWeWt0WTFtZldaeXRkZk8vaUlIWExIKzEycCtvWUw5ZXVDRzBn?=
- =?utf-8?B?L0VTcDlDcjd0SHpZb3BmQkZHZlZkbUtYS3FyQlNRNkRDcEhzL1ZFelIraHIy?=
- =?utf-8?B?SXptTlNoQVZuNDl3ZmdIb0ppbFduazhKM3ROcWFuMHFmd1dYaElrS0ZMaERm?=
- =?utf-8?B?TU5FRkdENkNzcjNHUVBsZmg3amkwbVhwQWlMWVlzZlR4dkJRWEk5UXZhOU9K?=
- =?utf-8?B?QWVWWStEWXNrbnRrUHhkU09qSXhWbXdydlEra2hNdzdZQ3gwQnVFQ1lVek41?=
- =?utf-8?B?bzNCNXFBUXdCZDVoOHY4cXM4aHBrcm5JYi9uTkpLdnc0VnpJMVRnV2tZTGVR?=
- =?utf-8?B?MmFKclE5bk9MSkxCdXRjN2N0d2szYTJaSE5iQmhWSnAwSThwYkJ3ZzcrSE5r?=
- =?utf-8?B?RXNXd09zdnA0OStscnRpSitsUkJ5ekZpOWlVbnBaaW00RitqandKQjBLb29s?=
- =?utf-8?B?VGJWY2VjSUs3QWlHZ2x2L1FleCtNa055aGRNYWZpMmwrbnc2M05yVTlsS0VS?=
- =?utf-8?B?Q254TEE1dTVWRllFVlpHOE5XTkYvcWFHb3FqV28ySEpoWGg0bk9rSS9LRHRI?=
- =?utf-8?B?QWUxZWRRSUc3aG5SWWJDNUg1K09hck5QK1FUcWNFcWpzdDFGdVJ0WWNMSUhm?=
- =?utf-8?B?cUwvb2kyNlZHV3QwYlZMTVgrVkhXOEtFWjZPeSs3cDJINFVCM1AwZkdIYXRu?=
- =?utf-8?B?WHZUckMyaDd1SENrUFAzSnhmaUNjNS9lY2V3QmoxcnJLRUJReGpyNXhYejhp?=
- =?utf-8?B?NEZ1anIxY09maDBKdlg5bFI5NEl1ay9Gc0JJNzNvc0dvdUl4c2JVdGNnNUxY?=
- =?utf-8?B?bjhWa1pWaXV2RENFK2NIdUc1VVdJVmpyb0VQN21zNkM0WnhERTd5blp3SWRu?=
- =?utf-8?B?T0s1dWNvQU92Vk91bVVPVXFiWWNyWEpyVG80RzVDOHZoZE5WejdOcnd6cWpi?=
- =?utf-8?B?QzJvaEdrZjVSZ0xQeUo3NWswT0krd1VDekZsQlh4L3laWTdKVjBBMUlpL1cy?=
- =?utf-8?B?R1l6QStPdWFUT0ZKdkR1UDBzeksvU0MrS2RWdUR4dFdIVGxITUZ6cEZRcHEz?=
- =?utf-8?B?a3lTTlZJMVNLOUlZbDdnVlBZUlYrZUprMWdJSENjVVdyaU5UM2FLTEgrMFVs?=
- =?utf-8?B?R0x6WmFQYk5Fb091aEJMdHpVWmZrcHNVMUZYZzRRNlA3TG00dThIZ2xQWkM5?=
- =?utf-8?B?clFYWExWVStjM3Vzd3NINElKR2p2cGVzZFlaTHNVWE44aUZZaXo3cDByV3VG?=
- =?utf-8?B?bEtYY1FjN0YrbmsxMVF5RnhETEhxWEVTd2wvUEJtYXNzbk52cHRDVDZIQmtI?=
- =?utf-8?B?Y2ZZKzdXN2RwQnB4NnhGNVhKMGZINzB1SlVUY0FLSkVIeHVMdG5DUVl0U2p5?=
- =?utf-8?B?OVZnaUlDRUU3SS9mQmdsZldhUmN1aTlVeU5icTE4dXZ4VmFvcER6NFhCOWo5?=
- =?utf-8?B?ZVE5TVhLcDMycEJmdVpid2k2M0xQSUZ0ekJ2NEVveXI4V3U3NU5ZWlJXblgw?=
- =?utf-8?B?OHVsYyt6dkFueDlxT0pZSmsrcHp0blU0R3lrVk1QOFh2cGw1NGxpOVNQb1BU?=
- =?utf-8?B?bFhJYW00V2VSRHNFN1ZZMlhWdjVIcUc4MGRLY3pOd0pxN29sa0dpVFBKZnZ6?=
- =?utf-8?B?UmF3dzdqWGpHdy9iOVlkOFo3Z0lqT0c5NWhHNTN0SnZ3cDFOckVNcEpRNEkx?=
- =?utf-8?B?YnNIZDgrM2NyRmdmRFRmQldHbkNjWXZwWUZGUmU0aVliUlNkdlcveXZhbE1q?=
- =?utf-8?B?WEE9PQ==?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 86f3da64-080a-4ee3-4bfc-08ddb88c4fd1
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+	=?us-ascii?Q?+uhP14XvezG8jiZpfmWvIG3mmpNXgNgoXHn36w1LSOLag+lb9Ba9fQdQQKua?=
+ =?us-ascii?Q?AP3WNfkkPnd8YOauWPc91HjVmOCKaAhRU0K18G9NeMJMAEEQbjATLXJAHFC/?=
+ =?us-ascii?Q?GlN8rd13saiMIloDlLL1XA6M04WSxZmluW5qIhy4UpplwrJEWxG3P461TitZ?=
+ =?us-ascii?Q?ept8a388AZ7LeTzzkvEQbUVq2z2g869m9zjmV7gj7a0dUH+07wx5NhBUo4oJ?=
+ =?us-ascii?Q?LSv+FxjeeRYAFr0MyRtfdhKRZGcRogD07gh5HWtvQ2myGHyBg2E+b/PlTq5X?=
+ =?us-ascii?Q?PQPT8eyFzSikNfmqzfnQuHG0koDAxwb/1N4M7J2Whu54UDAkeq3czMHw53pI?=
+ =?us-ascii?Q?aS/5f7OgfdSO9Q9wT+bgMuZX1NCmSscrsUhBNRUY3mg5H9mAMOYyfB8CGRrq?=
+ =?us-ascii?Q?h4XdlfMTw9jXPjJY81ADIHIedhhnmTo5kwhA4iQegtmDQnXcppGsU2QSfLeE?=
+ =?us-ascii?Q?KdnxECM595gxRcaPFUtwDxF5QI8lOMJaMlMRCAQYPo7bCRuSPQFLMwXAsWui?=
+ =?us-ascii?Q?DnSO/XN2Mfp7GGA6Z9Exv9rKWr5Q8HeSra4aXZMvEg1FKP3bY4vHmchJD2Mv?=
+ =?us-ascii?Q?kmQ8S7zl8Mj4ce4iRlnfXxRacmTkWIkuSxp5eM+smDeBO2seRVPN68QHVo5G?=
+ =?us-ascii?Q?zm0hHCnJyjSaclZ8E2GZR6dgWIY9Bvyz2rnnYPR20QEDI1/MDZUOR82WkBzl?=
+ =?us-ascii?Q?cgrJ2VQv0EKzEsBu7DXcvzbuh2cgITDgHYg/Vp0/1KwOjonEGlqYDzyB2Zmn?=
+ =?us-ascii?Q?5p15QqtmNUS9aZwXPvj1Y8vjsgc3fpJbbdOHIEa8sZU5vpc0i+5gbZZtq+OE?=
+ =?us-ascii?Q?M3KhdbSbu3nHXS5535WrauHLGLXU1l+N/WMbsVhc81KMhQPTPTDggMdimtDN?=
+ =?us-ascii?Q?qGj48gQE0FPlfkQpRvTutYqif1tDVT1Yi/z4B5a8+bMDiJi7Ir2PzHT8B/tT?=
+ =?us-ascii?Q?W3irKuUup4lDmG1LaryrJZfscYpmSifw1TCaFf9KnIra4PelqnyKMdxszCak?=
+ =?us-ascii?Q?pzOGoUViK79HjgzahH7q7qefmM+2HjlYcv2zUdKhCuzuOPTFKqWQ2U+upCMe?=
+ =?us-ascii?Q?7XMFuhpkNrcAeKQqDOBtnkj9VcgKh0c8X/fba9gz8UCWGmXVtwW6AkFENI5z?=
+ =?us-ascii?Q?33cTspvEeShetpgwjckMgEPQ1phXS+ZS1OKkmimHWdqDQzKBKP0298HtV2ds?=
+ =?us-ascii?Q?F9xNYiWcPOTNCvcEt7+icA+4OYCz+OXkdwloAlfNq3QnA6G15uel+3gPor0q?=
+ =?us-ascii?Q?r+ly1CAWAGaa1TXLzmjFbHEj3MQC11VdUmE4HAMqrl6pXuR1F2c3yRS6ogPj?=
+ =?us-ascii?Q?DbwvnBQ4j2QhcM6Is/jKETsHT781fZ12yGpAREwKJUv+mMrG6g1dOfSkBWLQ?=
+ =?us-ascii?Q?RjHir8y0d99ECy1/ETyEk7VipscPtVLkz1U2GVliAcrkCCFNdWrk3EmuRamT?=
+ =?us-ascii?Q?1sk4Ff3amnFXvlrap6NGotuC4fsADhmThWLVgutWNKPLteOeUM2/EftR+C/R?=
+ =?us-ascii?Q?1bptkAKOZd4PoBDVGI1RzCxEjS41jgQEQRMjVX2KttPWWZvjmjlpSShC/pax?=
+ =?us-ascii?Q?qxvZ+L7h6LF01uaJ+kAsjnU2MIqgoErP86jkb2nFpM190lkM7pwGxDlmMmYL?=
+ =?us-ascii?Q?Eg=3D=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	7QwzFyzE2xNDVegNMRbJo69JABkvU5hrg5zyMnl4Drcfoq1FCr5l6dKgrG6Prj6kBUlL7YMKOxA4oOWrPpPGAtuBgOpT4JCw1UB999R7r/7vh59Q9bJQ7JZn+jHPpmOmqpZN6e5AL7aX5Zaemw7FICRdNPer9XWGuztNfTItsuz3murKlo/JI1oXMzjDDtR2JQe/ryVzB4H8S9jIBGBA/BTbcG8B88QWJ0A2l5+iczsul+hnytP1IZHkVALh8ElUIfIuutkHmI1JTyW3l1zB1Tgp3kgbolgzhKmKiQ1yPAJyZsdUN06NYGSHy8gyrkbRRU+eDaZdkXfA2BohJJYq0LfTz7D9TXVJOloxMoenYRGKGMw4nGUqb+odWkYpSMpJFFrGXxEBlUrdKQvGvx04kaUfVy/w8BvhLIhRgONqDpQGakudK8VNgc19s+iTR8TKUqQ4X9N3WnK4c1GbuJ0KqoiwEqcDjGmuqfqSdEA3oqirSNfB4sJoV4lbNFnbVRGrXz3bFVY7yHGZptxyMI8SP6XweOsnhMTTODdsyaomaDh5EB+52qPW1f/NaBMMGp51GkKcOhZQ3bnsItuLQVgJYs0TiKbfBbBJOMh0YYIf5gg=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 03830eea-3802-4d68-7300-08ddb88d1523
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2025 10:44:53.2308
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2025 10:50:24.1702
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: STzLnt7ZtFnnMR16/2pw0JLe6DhOofSUoq0T+oOhQUFBK93L8vodBNqIp0RF4K9rfLQQngFaj6irB8ISami4Ljdka5e7c6v4Cc5+oxtnfGA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6433
+X-MS-Exchange-CrossTenant-UserPrincipalName: bSrdbMztLsjmJHMhvP3lFyku1pg6ggQ8mH0N3HNEypVjsmpPJTWjj/y5O5AX4w+J0e71aNfNybFFMsgdkhHIhCKi2xcRbR3sJSpV0oqNZbw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB4550
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
+ definitions=2025-07-01_02,2025-06-27_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 spamscore=0 adultscore=0
+ mlxlogscore=999 phishscore=0 suspectscore=0 mlxscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2505160000
+ definitions=main-2507010065
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzAxMDA2NSBTYWx0ZWRfXxHTQpLEUSjVK XHgl8D9krLJigD9PIm53HM0Kf1wJrwJaXBIStVsq0Bosj0z5a6pyk+D8rJhSPXnRw+xc0ovowtK f35CdvutT5lpPnF6BntxwKRgZQizuvvMo9C7tj/5dYe6YGi2vhj2bxFX/AxD983KO44YfZclQ3D
+ q8b9S4kDWJ8edQrs46cryOi5g787NDXn8BmxVk5/gGrWnDPoKf4mvQL3F3Ud86hpYVbzcRuHOrs +XrfJbrU846x3hSDHX/NqjsRsYDHfNJx6PZHknpiYGaq17ssYY2UI+PvEehCsTZDNvrqxTQtuqe plEL6mLMTX4wILWQE/POGgpUcUzlGUFON/9ZgFozYGFp1L8a0YHlLxoX2eLvguX60vr4vHA6HeW
+ QN4mpgLPBUkRGgTSzLAPCDZRsJ1K088egZh76e2sslO7S/yOOWBzHkblOVIdHWhvn3fPJxUb
+X-Authority-Analysis: v=2.4 cv=MvBS63ae c=1 sm=1 tr=0 ts=6863bd74 cx=c_pps a=OOZaFjgC48PWsiFpTAqLcw==:117 a=OOZaFjgC48PWsiFpTAqLcw==:17 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10 a=Wb1JkmetP80A:10 a=GoEa3M9JfhUA:10 a=Ikd4Dj_1AAAA:8 a=20KFwNOVAAAA:8 a=yPCof4ZbAAAA:8 a=NmMTF4fJywJNwu3Ep9UA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-ORIG-GUID: N5XiG8v2JlSWNMZWmNyMezC3kUiacKIS
+X-Proofpoint-GUID: N5XiG8v2JlSWNMZWmNyMezC3kUiacKIS
 
-Am 30.06.25 um 14:17 schrieb Marco Felsch:
-> Hi Frieder,
-> 
-> On 25-06-30, Frieder Schrempf wrote:
->> Hi Marco,
->>
->> Am 27.06.25 um 10:46 schrieb Marco Felsch:
->>> Hi,
->>>
->>> your e-mail configuration mixed my e-mail with your answer, which makes
->>> it hard to read. Can you please check the quoting next time :)
->>>
->>> On 25-06-27, Pankaj Gupta wrote:
->>>>>> Add driver for enabling MU based communication interface to
->>>> secure-enclave.
->>>>>>
->>>>>> NXP hardware IP(s) for secure-enclaves like Edgelock Enclave(ELE), are 
->>>>>> embedded in the SoC to support the features like HSM, SHE & V2X, using 
->>>>>> message based communication interface.
->>>>>>
->>>>>> The secure enclave FW communicates with Linux over single or multiple 
->>>>>> dedicated messaging unit(MU) based interface(s).
->>>>>> Exists on i.MX SoC(s) like i.MX8ULP, i.MX93, i.MX95 etc.
->>>>
->>>>> You write single or multiple MUs are possible. I'm aware that the i.MX93
->>>>> has two MUs one for the secure and one for the non-secure world. But I'm
->>>>> really concerned about the fact that both MUs can't be used at the same time
->>>>> from both world:
->>>>
->>>> Yes, you are correct.
->>>>
->>>> Fix is still work in progress.
->>>
->>> So after ~6 months no fix is available :(
->>>
->>>>> Also how is the secure and non-secure world talking to the ELE if there is
->>>>> only one MU as you have written?
->>>>
->>>> Till the fix is WIP, either Linux or OPTEE can use the ELE, at one point in
->>>> time.
->>>
->>> That has nothing to do with the fix. The fix is for platforms/SoCs which
->>> do have 2-MUs, but you also have written that there are platforms with
->>> only 1-MU.
->>>
->>> This MU can't be shared between secure and non-secure world.
->>>
->>>>> IMHO it makes much more sense to put the complete ELE communication into
->>>>> (OP-)TEE and let the secure OS taking care of it. All non-secure world
->>>>> requests are passed via (OP-)TEE to the ELE. This involves:
->>>>> - eFuse access (done via OP-TEE i.MX specific PTA)
->>>>> - ELE 23h59m ping (kernel SMC WDG driver, requires OP-TEE watchdog driver)
->>>>> - HW-RNG (kernel OP-TEE HWRNG driver + OP-TEE HWRNG PTA)
->>>>
->>>> There is a dedicated MU "trusted-MU" for OPTEE-OS. The idea to converge to a
->>>
->>> Yes for systems with 2-MUs there is a "trusted-MU" and a
->>> "non-trusted-MU". As of now, there is no fix available for using both
->>> MUs at the same time. Furhtermore there are platforms/SoCs with only
->>> 1-MU, as you have written in your commit message. This 1-MU system can
->>> have the MU either trusted or non-trusted.
->>>
->>>> single path via OPTEE-OS, is good. But it will impact the performance of the
->>>> features at Linux side.
->>>
->>> Performance? We are talking about a ping every 23h59m (I still don't
->>> know if this is a feature or bug), eFuse write/read, and the HW-RNG
->>> which can seed the Linux PRNG.
->>>
->>>> Since the fix is still WIP. Let's wait till then.
->>>
->>> The fix is for the 2-MUs SoCs but not the 1-MU case.
->>>
->>> I would like to have a system design which doesn't differ too much
->>> between SoCs which are equipped with the ELE engine.
->>
->> Do we really want to depend on OP-TEE to be available for having things
->> like OTP fuse access and HWRNG? Personally I'd like to be able to build
->> systems with OTP access and HWRNG but without OP-TEE. Requiring OP-TEE
->> only to make the ELE available to the kernel in cases where the secure
->> world isn't used for anything else seems to be unnecessarily complex.
-> 
-> I understand your point. I don't like pulling in more FW neither but we
-> need to the face the following facts:
-> 
->  - OTP eFuse R/W access after doing the LOCK_DOWN fuse is no longer
->    possible without OP-TEE. This involves general purpose (GP) eFuses
->    too. We faced this limitation in a current project.
+On Mon, Jun 30, 2025 at 02:59:56PM +0200, David Hildenbrand wrote:
+> As __ClearPageMovable() is gone that would have only made
+> PageMovable()==false but still __PageMovable()==true, now
+> PageMovable() == __PageMovable().
 
-Ok, interesting. Where do find information about the LOCK_DOWN fuse? I
-don't see it mentioned in the (Security) Reference Manual of the i.MX93.
+I think this could be rephrased to be clearer, something like:
 
-> 
->  - With new regulations like the EU CRA I think we need some sort of
->    secure-enclave anyway.
+	Previously, if __ClearPageMovable() were invoked on a page, this would
+	cause __PageMovable() to return false, but due to the continued
+	existance of page movable ops, PageMovable() would have returned true.
 
-Probably some sort of, yes. But not necessarily in the form of TEE or
-TrustZone, I guess.
+	With __ClearPageMovable() gone, the two are exactly equivalent.
 
-> 
->  - Making it optional cause more paths of potential errors e.g. by not
->    including the correct "secure.dtsi". Multiple paths also require more
->    maintain- and testing effort. IMHO I do think that one of the paths
->    get unmaintened at some point but we would need to keep it for
->    backward compatibility.
-> 
->    Having one implementation eliminates this since.
-> 
->  - All above points assume that the ELE-FW and -HW is capable of talking
->    to both world, which is not the case. As we learned NXP doesn't have
->    a fix for the 2-MUs ELE yet and even more important there are 1-MU
->    ELE-IPs.
-> 
-> I do see the (minimal) drawback of having +1 FW but I think this is more
-> an integration problem.
-> Speaking of FW files, for the new i.MX9* you already have plenty fo
-> them: bootloader, TF-A, ele-fw, scu-fw (i.MX95). So your integation
-> needs to handle multiple firmware files already.
+>
+> So we can replace PageMovable() checks by __PageMovable(). In fact,
+> __PageMovable() cannot change until a page is freed, so we can turn
+> some PageMovable() into sanity checks for __PageMovable().
 
-Sure, but I really like to keep the complexity and therefore the number
-of FW files as low as possible. I'm not sure what has more weight in
-terms of security: shipping an additional firmware and therefore
-increasing the attack surface or maintaining an additional code-path.
+Deferring the clear does seem to simplify things!
 
-> 
->> Anyway, I see your point of having a single implementation for the ELE
->> API in the "right" place. But as far as I know other platforms like
->> STM32MP1 also implement both ways for the HWRNG, secure access via OPTEE
->> and non-secure access via kernel directly.
-> 
-> I'm not a STM32MP1 expert but here you have this setup with the
-> *-scmi.dtsi. So you have two code paths which needs to be maintained and
-> tested. Also if one customer of yours want to use OP-TEE you need the
-> integration anyway, so you (Kontron) needs to maintain multiple
-> configuration as well. I don't see the added value.
-> 
-> I think for STM32MP1 the *-scmi.dtsi support was added later because it
-> required a lot effort to support it. This is not the case for the i.MX9*
-> series.
+>
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
+> Signed-off-by: David Hildenbrand <david@redhat.com>
 
-Anyway, thanks for elaborating. Your points are all valid and basically
-I agree. I'm fine with either way. But I'm afraid that implementing the
-ELE API in OP-TEE only will cause another tremendous delay for having
-ELE access in the kernel, especially seeing how slow NXP seems to be
-working on these topics right now.
+LGTM, so:
 
+Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+
+> ---
+>  include/linux/migrate.h |  2 --
+>  mm/compaction.c         | 15 ---------------
+>  mm/migrate.c            | 18 ++++++++++--------
+>  3 files changed, 10 insertions(+), 25 deletions(-)
+>
+> diff --git a/include/linux/migrate.h b/include/linux/migrate.h
+> index 6eeda8eb1e0d8..25659a685e2aa 100644
+> --- a/include/linux/migrate.h
+> +++ b/include/linux/migrate.h
+> @@ -104,10 +104,8 @@ static inline int migrate_huge_page_move_mapping(struct address_space *mapping,
+>  #endif /* CONFIG_MIGRATION */
+>
+>  #ifdef CONFIG_COMPACTION
+> -bool PageMovable(struct page *page);
+>  void __SetPageMovable(struct page *page, const struct movable_operations *ops);
+>  #else
+> -static inline bool PageMovable(struct page *page) { return false; }
+>  static inline void __SetPageMovable(struct page *page,
+>  		const struct movable_operations *ops)
+>  {
+> diff --git a/mm/compaction.c b/mm/compaction.c
+> index 889ec696ba96a..5c37373017014 100644
+> --- a/mm/compaction.c
+> +++ b/mm/compaction.c
+> @@ -114,21 +114,6 @@ static unsigned long release_free_list(struct list_head *freepages)
+>  }
+>
+>  #ifdef CONFIG_COMPACTION
+> -bool PageMovable(struct page *page)
+> -{
+> -	const struct movable_operations *mops;
+> -
+> -	VM_BUG_ON_PAGE(!PageLocked(page), page);
+> -	if (!__PageMovable(page))
+> -		return false;
+> -
+> -	mops = page_movable_ops(page);
+> -	if (mops)
+> -		return true;
+> -
+> -	return false;
+> -}
+> -
+>  void __SetPageMovable(struct page *page, const struct movable_operations *mops)
+>  {
+>  	VM_BUG_ON_PAGE(!PageLocked(page), page);
+> diff --git a/mm/migrate.c b/mm/migrate.c
+> index 22c115710d0e2..040484230aebc 100644
+> --- a/mm/migrate.c
+> +++ b/mm/migrate.c
+> @@ -87,9 +87,12 @@ bool isolate_movable_ops_page(struct page *page, isolate_mode_t mode)
+>  		goto out;
+>
+>  	/*
+> -	 * Check movable flag before taking the page lock because
+> +	 * Check for movable_ops pages before taking the page lock because
+>  	 * we use non-atomic bitops on newly allocated page flags so
+>  	 * unconditionally grabbing the lock ruins page's owner side.
+> +	 *
+> +	 * Note that once a page has movable_ops, it will stay that way
+> +	 * until the page was freed.
+>  	 */
+>  	if (unlikely(!__PageMovable(page)))
+>  		goto out_putfolio;
+> @@ -108,7 +111,8 @@ bool isolate_movable_ops_page(struct page *page, isolate_mode_t mode)
+>  	if (unlikely(!folio_trylock(folio)))
+>  		goto out_putfolio;
+>
+> -	if (!PageMovable(page) || PageIsolated(page))
+> +	VM_WARN_ON_ONCE_PAGE(!__PageMovable(page), page);
+> +	if (PageIsolated(page))
+>  		goto out_no_isolated;
+>
+>  	mops = page_movable_ops(page);
+> @@ -149,11 +153,10 @@ static void putback_movable_ops_page(struct page *page)
+>  	 */
+>  	struct folio *folio = page_folio(page);
+>
+> +	VM_WARN_ON_ONCE_PAGE(!__PageMovable(page), page);
+>  	VM_WARN_ON_ONCE_PAGE(!PageIsolated(page), page);
+>  	folio_lock(folio);
+> -	/* If the page was released by it's owner, there is nothing to do. */
+> -	if (PageMovable(page))
+> -		page_movable_ops(page)->putback_page(page);
+> +	page_movable_ops(page)->putback_page(page);
+>  	ClearPageIsolated(page);
+>  	folio_unlock(folio);
+>  	folio_put(folio);
+> @@ -189,10 +192,9 @@ static int migrate_movable_ops_page(struct page *dst, struct page *src,
+>  {
+>  	int rc = MIGRATEPAGE_SUCCESS;
+>
+> +	VM_WARN_ON_ONCE_PAGE(!__PageMovable(src), src);
+>  	VM_WARN_ON_ONCE_PAGE(!PageIsolated(src), src);
+> -	/* If the page was released by it's owner, there is nothing to do. */
+> -	if (PageMovable(src))
+> -		rc = page_movable_ops(src)->migrate_page(dst, src, mode);
+> +	rc = page_movable_ops(src)->migrate_page(dst, src, mode);
+>  	if (rc == MIGRATEPAGE_SUCCESS)
+>  		ClearPageIsolated(src);
+>  	return rc;
+> --
+> 2.49.0
+>
 
