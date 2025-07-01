@@ -1,206 +1,210 @@
-Return-Path: <linux-doc+bounces-51402-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51404-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id C76B3AEF95F
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 14:56:12 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id F1EE1AEF975
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 14:58:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8BA9A1672B0
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 12:56:12 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3F1F8188544F
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Jul 2025 12:59:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2BA1B2741CF;
-	Tue,  1 Jul 2025 12:56:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89E49274668;
+	Tue,  1 Jul 2025 12:58:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="UpTKZY0l"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="i4gu9nhB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F8AA27381F
-	for <linux-doc@vger.kernel.org>; Tue,  1 Jul 2025 12:56:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96EC2273817
+	for <linux-doc@vger.kernel.org>; Tue,  1 Jul 2025 12:58:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751374569; cv=none; b=NCRF/AsiC+7JIr534wK2JqDjrDeG92gTsqiq5CRSoTp3fc74LI0b/za22bgR6+TzIQYRydMnHIYyziJlL9wv5K2LqhFu9GS9ckK1Qs5qg25hrxcas+u36jjqbzHf7ONgq3AO+K3PKdRG8Rm/K63oAufj5JALZBXF/7dIDop237o=
+	t=1751374729; cv=none; b=FUd/mNedsvtlbThJk6yAZY/cWc9/G0sqZi2dq39tydNA8JA2O3TamW4vREa233voVGS1sIEXGI4+zdnkZhjFGBkqx2Q5BH3dc2K7uUsJD2jR+oniCxbumSSndaViA3g7vD+VFFse8w5rq0AKFqZV91X9OxhcFPc/DGrJmcBA9aA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751374569; c=relaxed/simple;
-	bh=TKG5IymVnkXJex1Gwu3CospUcoxQz3nNTflPsWghNUs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=TDDOuwUtT7a4cal8o9e61e12anZztGMnTru64DHFhOwrrqB9mz1T/gdiwg7IqRyNj1DSnmkPQZ8Aa/qo+HiyBpmnoMXT53/0TWOTqJhXXzf6jSzDmsHpNpHB2TxTJPyWINleV0Kw1J6xmGt3aCH5QVwLjlY2MCz653HQ1q9ZUeg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UpTKZY0l; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1751374566;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ZBTTVjLLJBrVGUELHkLxjKRb9WdjU8gNsqCCuiEsmE4=;
-	b=UpTKZY0lWq/di5n9flfildEPiDACfJxCz7AXgfORlUIra4Ni41EXN/jqltnP6aUWkXmOEl
-	V+Skv/ulqxWiacWD06IZOWlfIYH7sgwM0qV/pNxaCeB+oznzxi9AMu9FD+5ixfcpJ7JjD9
-	f3nud99PN3PNJeUWB5vhCeA2xGij0Lw=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-592-OTcyj3JDNs2gTSuZU_SN7A-1; Tue, 01 Jul 2025 08:56:05 -0400
-X-MC-Unique: OTcyj3JDNs2gTSuZU_SN7A-1
-X-Mimecast-MFC-AGG-ID: OTcyj3JDNs2gTSuZU_SN7A_1751374564
-Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-4532514dee8so35868245e9.0
-        for <linux-doc@vger.kernel.org>; Tue, 01 Jul 2025 05:56:04 -0700 (PDT)
+	s=arc-20240116; t=1751374729; c=relaxed/simple;
+	bh=QVjsIYXh5KgkJGxwJvk1fAvS8lppUJ46HEMqAQrLa48=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=G2yW6SquAG9mKTYHhw6oo2oPNFgHJ/s6MvdYvR2Q7naUc6JAeVIjcDujxKnqDBY8ElOIo/aihM93URjPOtwikcC7mOyO+T7yP9r0el5uD6nVKnW3bxC7Y8ilN6mjf1B1q/p0As8e5ajwR1V0PT5fQSRO8JY51ut2l/Mf6BeGpII=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=i4gu9nhB; arc=none smtp.client-ip=209.85.214.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-235e389599fso212145ad.0
+        for <linux-doc@vger.kernel.org>; Tue, 01 Jul 2025 05:58:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1751374727; x=1751979527; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=uzw4uNd5li2mXa+WfFMUaVuwZFHwRlbcR3UhOImbWD4=;
+        b=i4gu9nhBzr9Bv2fhK58DYR9nxXSJBlsM/dx4IVDNn8oHQsRe2Pj5wgjqAPyORlznQJ
+         s+Uad4DKvNYNA5ee/0whonugBBVxTIHyb7ujZwUXTnkhGXBPWwuvKBrWaIZqW1U8ldlW
+         869DkG+c6BJUT2N/DYVYqJbq9gZlbBvPBdhebVIS+CvIPIi/QnYpWUOqQyI84jKCLigX
+         1Zbn3B8kdO6bjwWCICWic0SRwyPRGCF9/qo8Y/07DgkSb6O8oyJ08oHbA9roBWhYd18r
+         Fj7nMR/otldZEk/BpXryRIX2IVCBPVH4dlpXxdmCCWFwljPbWO23+wxrZ5Jwo79bn/vK
+         fNVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751374564; x=1751979364;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZBTTVjLLJBrVGUELHkLxjKRb9WdjU8gNsqCCuiEsmE4=;
-        b=DNeGBigAYWQOMWzFsMs/UupWiNoYKKt5sbFioP20HY9I8OP2zu68vVNc4FnQLVTVHe
-         DHSwS0EZbbM/0ssxCApL398bK6qrnzwbKZc/XtMEtRP/uxyJ05g24sA/h85V6FKbTIIn
-         y1gosnq5u3NKUaTW2f+GTAJIV06rjnnrrOFVMBkQGtwaLVe9AUhKoOhcUnnV2/AOmJFD
-         HYlER3ei0gdxVJXy1A1Heu/QajuN3oJaqqvVbKOxsdAIWOK6FsLv5odMxWFUwGebUfL0
-         yLtDWaZRnraVaZvbXFO10HxGV1Ub4UY+1viz92/TaOePGSiPyfH7zpJTZVaVxVMoq+ZM
-         SG9w==
-X-Forwarded-Encrypted: i=1; AJvYcCUh7wm2Rkl8PqRVxpx1ThV+Hojle0AsQ5/6Fej0kU6fls6Ao4IZgtu7SbJU3iMHvh/sb1CNy5Wz6Zw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwIhOWjkj4iVbsydHCz0Gr1iOHcmeaWYeJlJGOjuwPftObxCWsB
-	QQy4QW2h407y1Kb8kBqV0eZDWXKbfh1w+RnC4uXLlzewyU5Lf4btnBBSsQ5a9V4vrzTe3DKRMyT
-	Mv3XHxew5gbCz3GUJLmdW5P7LjpQlmgP5vqDsycQjXDUtGZFYLV/hXFOdnuJiRQ==
-X-Gm-Gg: ASbGncsi2+c+8dpzlijzH6SPrGyyhkpMLHeI8esyCCSm4G6GuIhY/a1sb1AJjyDDsEM
-	bDt4TrFHZm2GycxbgNhhNmM5Ze8ZEW01IVRNpKY+D+o6EL5GsHXBv8AUANZBHar8H824GbsGIWq
-	jFvPlKO9Csw8+lasAJZ4p4SAvRFuLm11Pg1TvU/IUqVm6fgNflxMM+NzZGUvH6ZH2SlnIRDls6I
-	Np3/KYXGD2zstWet+EEqPSc3NjWGN62RnQ4/mV7fdsXzcX1wJnGW+LKACv914sBgSNnVJ2Kd6mD
-	dn7V4F1I/OrqhoWqGvU+O367ryjTkKrPDe3lMwKx6TXxsDsFgOd2hNI6ketmPPSMfkLsVw==
-X-Received: by 2002:a05:600c:4752:b0:453:a95:f07d with SMTP id 5b1f17b1804b1-4538ee27811mr225406325e9.10.1751374563675;
-        Tue, 01 Jul 2025 05:56:03 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFaw4kk4Kktx3Hecxbs6t1i/0jp4a/LW9tAythw2vOj1c39nlQ1UxxFJwKx+MpgP7+zm22KQw==
-X-Received: by 2002:a05:600c:4752:b0:453:a95:f07d with SMTP id 5b1f17b1804b1-4538ee27811mr225405765e9.10.1751374563208;
-        Tue, 01 Jul 2025 05:56:03 -0700 (PDT)
-Received: from ?IPV6:2a0d:3344:247b:5810:4909:7796:7ec9:5af2? ([2a0d:3344:247b:5810:4909:7796:7ec9:5af2])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3a892e595c6sm13522571f8f.66.2025.07.01.05.56.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 01 Jul 2025 05:56:02 -0700 (PDT)
-Message-ID: <f875faa2-718d-4244-bb86-2178fed55922@redhat.com>
-Date: Tue, 1 Jul 2025 14:56:00 +0200
+        d=1e100.net; s=20230601; t=1751374727; x=1751979527;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uzw4uNd5li2mXa+WfFMUaVuwZFHwRlbcR3UhOImbWD4=;
+        b=Y3Bke4FKyJ8LyFfjjt98tn7zlzwKahSCBw2g59//5WK/hewAkC4YBZA/j3gAlpWSqD
+         GX8p5YC8cPExcEASnBpmPtP22m8X3K7zR/BKsO4pCke3bKHc5jsbqDM9bg9WEfAz7TEC
+         lKrlBIA1cXA1owllEBFhPl9f08cNd5Er+aNA2h7xe+KZb0iUk4ctFylmelSPCfuZqBjt
+         S2hc7yXGDBd8sDj9Bu4jN49xPaa/aVr/Ldbbw9TdR/RWxt+xUHEhaF7BnaX96lh+Ayt9
+         +7Y/l3NAGUf8zLois10rKziDi12Of5Ivx6x4HFF4SXsoBi7pMYb8YhppML3CrRprxQAv
+         8yKw==
+X-Forwarded-Encrypted: i=1; AJvYcCUygzHUu93o22U4PnhU9sOUd319Rc0/vbDC6R4k9AbN1cNj46VeaqHCbblef9+PaMsT+H1CryhGFFU=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywp2qqFL7S+t9tFzkpTINAyBPcmxBOFxh8OeisuYVpqSNVrTZ7U
+	wcNaUujm+yPj+aVzgTIwjl17jSoY2W4vJ63AhrFxhpUaG/BC0bSsCQcrSTtcl299gw==
+X-Gm-Gg: ASbGncuv2XEjWjTwSPFwXO9U9ev9NkrhoKvf20wTR9+iLUaqGQ8b1ziJaiV6LNes3hg
+	t4EBX6+g7PmriAEX1WvupztdoRGzhHNMUK6N37Uv8EcNyU9Hw7+dBJww8voWD4cAkTuC2QL9pdT
+	hw5uFTyrAuNJ4yEDnqDAx1wfR6qzSvOJI5qkXd09EHMgz38rI5ZguLZilc05Y65ON9wFnJDss2M
+	SMJcCUd93YaKAoKTuAU01uKlPpayJxkZP+p7+XeHECGiC3uorkURjOmYbZKQ3otGYAoExCYNbRp
+	3B/l83UZvypJtrvpwJQgde8mKeMc+4OFMKCFQ+p1MwVRgFmfNvfAU+B27mpDDV4fNOKuF/PwXzr
+	54D5B0oqtbyJF9EcwJD3n1ISLKHYKemg=
+X-Google-Smtp-Source: AGHT+IGmj2MAzmEBH+PWX1NsLuSUKrLgxpjLMp3KA3CIsShNt/Sqit3dWlHjLZzB1pekp9REtBE7WA==
+X-Received: by 2002:a17:902:f70b:b0:234:bca7:2934 with SMTP id d9443c01a7336-23c5fef098cmr2059855ad.6.1751374726581;
+        Tue, 01 Jul 2025 05:58:46 -0700 (PDT)
+Received: from google.com (232.98.126.34.bc.googleusercontent.com. [34.126.98.232])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23acb39bcbcsm104502905ad.134.2025.07.01.05.58.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 01 Jul 2025 05:58:45 -0700 (PDT)
+Date: Tue, 1 Jul 2025 12:58:36 +0000
+From: Pranjal Shrivastava <praan@google.com>
+To: Nicolin Chen <nicolinc@nvidia.com>
+Cc: jgg@nvidia.com, kevin.tian@intel.com, corbet@lwn.net, will@kernel.org,
+	bagasdotme@gmail.com, robin.murphy@arm.com, joro@8bytes.org,
+	thierry.reding@gmail.com, vdumpa@nvidia.com, jonathanh@nvidia.com,
+	shuah@kernel.org, jsnitsel@redhat.com, nathan@kernel.org,
+	peterz@infradead.org, yi.l.liu@intel.com, mshavit@google.com,
+	zhangzekun11@huawei.com, iommu@lists.linux.dev,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-tegra@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, patches@lists.linux.dev,
+	mochs@nvidia.com, alok.a.tiwari@oracle.com, vasant.hegde@amd.com,
+	dwmw2@infradead.org, baolu.lu@linux.intel.com
+Subject: Re: [PATCH v7 20/28] iommufd: Allow an input data_type via
+ iommu_hw_info
+Message-ID: <aGPbfM2iZP7ww1fC@google.com>
+References: <cover.1750966133.git.nicolinc@nvidia.com>
+ <ebbcdf1437bd1f96aa76e9132eba3c68472403c3.1750966133.git.nicolinc@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v06 4/8] hinic3: Command Queue interfaces
-To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>,
- Andrew Lunn <andrew+netdev@lunn.ch>, linux-doc@vger.kernel.org,
- Jonathan Corbet <corbet@lwn.net>, Bjorn Helgaas <helgaas@kernel.org>,
- luosifu <luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>,
- Shen Chenyang <shenchenyang1@hisilicon.com>,
- Zhou Shuai <zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>,
- Shi Jing <shijing34@huawei.com>, Meny Yossefi <meny.yossefi@huawei.com>,
- Gur Stavi <gur.stavi@huawei.com>, Lee Trager <lee@trager.us>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Vadim Fedorenko <vadim.fedorenko@linux.dev>, Suman Ghosh
- <sumang@marvell.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>,
- Joe Damato <jdamato@fastly.com>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-References: <cover.1750937080.git.zhuyikai1@h-partners.com>
- <6c5406f1e4981a5c4eb3345199f480e37a5e7223.1750937080.git.zhuyikai1@h-partners.com>
-Content-Language: en-US
-From: Paolo Abeni <pabeni@redhat.com>
-In-Reply-To: <6c5406f1e4981a5c4eb3345199f480e37a5e7223.1750937080.git.zhuyikai1@h-partners.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ebbcdf1437bd1f96aa76e9132eba3c68472403c3.1750966133.git.nicolinc@nvidia.com>
 
-On 6/27/25 8:12 AM, Fan Gong wrote:
-> +static void cmdq_sync_cmd_handler(struct hinic3_cmdq *cmdq,
-> +				  struct cmdq_wqe *wqe, u16 ci)
-> +{
-> +	spin_lock(&cmdq->cmdq_lock);
-> +	cmdq_update_cmd_status(cmdq, ci, wqe);
-> +	if (cmdq->cmd_infos[ci].cmpt_code) {
-> +		*cmdq->cmd_infos[ci].cmpt_code = CMDQ_DIRECT_SYNC_CMPT_CODE;
-> +		cmdq->cmd_infos[ci].cmpt_code = NULL;
-> +	}
+On Thu, Jun 26, 2025 at 12:34:51PM -0700, Nicolin Chen wrote:
+> The iommu_hw_info can output via the out_data_type field the vendor data
+> type from a driver, but this only allows driver to report one data type.
+> 
+> Now, with SMMUv3 having a Tegra241 CMDQV implementation, it has two sets
+> of types and data structs to report.
+> 
+> One way to support that is to use the same type field bidirectionally.
+> 
+> Reuse the same field by adding an "in_data_type", allowing user space to
+> request for a specific type and to get the corresponding data.
+> 
+> For backward compatibility, since the ioctl handler has never checked an
+> input value, add an IOMMU_HW_INFO_FLAG_INPUT_TYPE to switch between the
+> old output-only field and the new bidirectional field.
+> 
+> Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+> Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+> Reviewed-by: Lu Baolu <baolu.lu@linux.intel.com>
+> Signed-off-by: Nicolin Chen <nicolinc@nvidia.com>
+> ---
+>  include/uapi/linux/iommufd.h   | 20 +++++++++++++++++++-
+>  drivers/iommu/iommufd/device.c |  9 ++++++---
+>  2 files changed, 25 insertions(+), 4 deletions(-)
+> 
+> diff --git a/include/uapi/linux/iommufd.h b/include/uapi/linux/iommufd.h
+> index 6ad361ff9b06..6ae9d2102154 100644
+> --- a/include/uapi/linux/iommufd.h
+> +++ b/include/uapi/linux/iommufd.h
+> @@ -628,6 +628,15 @@ enum iommufd_hw_capabilities {
+>  	IOMMU_HW_CAP_PCI_PASID_PRIV = 1 << 2,
+>  };
+>  
+> +/**
+> + * enum iommufd_hw_info_flags - Flags for iommu_hw_info
+> + * @IOMMU_HW_INFO_FLAG_INPUT_TYPE: If set, @in_data_type carries an input type
+> + *                                 for user space to request for a specific info
+> + */
+> +enum iommufd_hw_info_flags {
+> +	IOMMU_HW_INFO_FLAG_INPUT_TYPE = 1 << 0,
+> +};
 > +
-> +	/* Ensure that completion code has been updated before updating done */
-> +	smp_rmb();
+>  /**
+>   * struct iommu_hw_info - ioctl(IOMMU_GET_HW_INFO)
+>   * @size: sizeof(struct iommu_hw_info)
+> @@ -637,6 +646,12 @@ enum iommufd_hw_capabilities {
+>   *            data that kernel supports
+>   * @data_uptr: User pointer to a user-space buffer used by the kernel to fill
+>   *             the iommu type specific hardware information data
+> + * @in_data_type: This shares the same field with @out_data_type, making it be
+> + *                a bidirectional field. When IOMMU_HW_INFO_FLAG_INPUT_TYPE is
+> + *                set, an input type carried via this @in_data_type field will
+> + *                be valid, requesting for the info data to the given type. If
+> + *                IOMMU_HW_INFO_FLAG_INPUT_TYPE is unset, any input value will
+> + *                be seen as IOMMU_HW_INFO_TYPE_DEFAULT
+>   * @out_data_type: Output the iommu hardware info type as defined in the enum
+>   *                 iommu_hw_info_type.
+>   * @out_capabilities: Output the generic iommu capability info type as defined
+> @@ -666,7 +681,10 @@ struct iommu_hw_info {
+>  	__u32 dev_id;
+>  	__u32 data_len;
+>  	__aligned_u64 data_uptr;
+> -	__u32 out_data_type;
+> +	union {
+> +		__u32 in_data_type;
+> +		__u32 out_data_type;
+> +	};
+>  	__u8 out_max_pasid_log2;
+>  	__u8 __reserved[3];
+>  	__aligned_u64 out_capabilities;
+> diff --git a/drivers/iommu/iommufd/device.c b/drivers/iommu/iommufd/device.c
+> index 64a51993e6a1..cbd86aabdd1c 100644
+> --- a/drivers/iommu/iommufd/device.c
+> +++ b/drivers/iommu/iommufd/device.c
+> @@ -1506,6 +1506,7 @@ EXPORT_SYMBOL_NS_GPL(iommufd_access_rw, "IOMMUFD");
+>  
+>  int iommufd_get_hw_info(struct iommufd_ucmd *ucmd)
+>  {
+> +	const u32 SUPPORTED_FLAGS = IOMMU_HW_INFO_FLAG_INPUT_TYPE;
+>  	struct iommu_hw_info *cmd = ucmd->cmd;
+>  	void __user *user_ptr = u64_to_user_ptr(cmd->data_uptr);
+>  	const struct iommu_ops *ops;
+> @@ -1515,12 +1516,14 @@ int iommufd_get_hw_info(struct iommufd_ucmd *ucmd)
+>  	void *data;
+>  	int rc;
+>  
+> -	if (cmd->flags || cmd->__reserved[0] || cmd->__reserved[1] ||
+> -	    cmd->__reserved[2])
+> +	if (cmd->flags & ~SUPPORTED_FLAGS)
+> +		return -EOPNOTSUPP;
+> +	if (cmd->__reserved[0] || cmd->__reserved[1] || cmd->__reserved[2])
+>  		return -EOPNOTSUPP;
+>  
+>  	/* Clear the type field since drivers don't support a random input */
+> -	cmd->out_data_type = IOMMU_HW_INFO_TYPE_DEFAULT;
+> +	if (!(cmd->flags & IOMMU_HW_INFO_FLAG_INPUT_TYPE))
+> +		cmd->in_data_type = IOMMU_HW_INFO_TYPE_DEFAULT;
+>  
+>  	idev = iommufd_get_device(ucmd, cmd->dev_id);
+>  	if (IS_ERR(idev))
 
-There is something off with the above barrier. It's not clear where is
-the paired wmb() and the comment looks misleading as this barrier order
-reads operation and not writes (as implied by 'updating').
+Reviewed-by: Pranjal Shrivastava <praan@google.com>
 
-+static int cmdq_sync_cmd_direct_resp(struct hinic3_cmdq *cmdq, u8 mod,
-u8 cmd,
-> +				     struct hinic3_cmd_buf *buf_in,
-> +				     u64 *out_param)
-> +{
-> +	struct hinic3_cmdq_cmd_info *cmd_info, saved_cmd_info;
-> +	int cmpt_code = CMDQ_SEND_CMPT_CODE;
-> +	struct cmdq_wqe *curr_wqe, wqe = {};
-> +	struct hinic3_wq *wq = &cmdq->wq;
-> +	u16 curr_prod_idx, next_prod_idx;
-> +	struct completion done;
-> +	u64 curr_msg_id;
-> +	int errcode;
-> +	u8 wrapped;
-> +	int err;
-> +
-> +	spin_lock_bh(&cmdq->cmdq_lock);
-> +	curr_wqe = cmdq_get_wqe(wq, &curr_prod_idx);
-> +	if (!curr_wqe) {
-> +		spin_unlock_bh(&cmdq->cmdq_lock);
-> +		return -EBUSY;
-> +	}
-> +
-> +	wrapped = cmdq->wrapped;
-> +	next_prod_idx = curr_prod_idx + CMDQ_WQE_NUM_WQEBBS;
-> +	if (next_prod_idx >= wq->q_depth) {
-> +		cmdq->wrapped ^= 1;
-> +		next_prod_idx -= wq->q_depth;
-> +	}
-> +
-> +	cmd_info = &cmdq->cmd_infos[curr_prod_idx];
-> +	init_completion(&done);
-> +	refcount_inc(&buf_in->ref_cnt);
-> +	cmd_info->cmd_type = HINIC3_CMD_TYPE_DIRECT_RESP;
-> +	cmd_info->done = &done;
-> +	cmd_info->errcode = &errcode;
-> +	cmd_info->direct_resp = out_param;
-> +	cmd_info->cmpt_code = &cmpt_code;
-> +	cmd_info->buf_in = buf_in;
-> +	saved_cmd_info = *cmd_info;
-> +	cmdq_set_lcmd_wqe(&wqe, CMDQ_CMD_DIRECT_RESP, buf_in, NULL,
-> +			  wrapped, mod, cmd, curr_prod_idx);
-> +
-> +	cmdq_wqe_fill(curr_wqe, &wqe);
-> +	(cmd_info->cmdq_msg_id)++;
-> +	curr_msg_id = cmd_info->cmdq_msg_id;
-> +	cmdq_set_db(cmdq, HINIC3_CMDQ_SYNC, next_prod_idx);
-> +	spin_unlock_bh(&cmdq->cmdq_lock);
-> +
-> +	err = wait_cmdq_sync_cmd_completion(cmdq, cmd_info, &saved_cmd_info,
-> +					    curr_msg_id, curr_prod_idx,
-> +					    curr_wqe, CMDQ_CMD_TIMEOUT);
-> +	if (err) {
-> +		dev_err(cmdq->hwdev->dev,
-> +			"Cmdq sync command timeout, mod: %u, cmd: %u, prod idx: 0x%x\n",
-> +			mod, cmd, curr_prod_idx);
-> +		err = -ETIMEDOUT;
-> +	}
-> +
-> +	if (cmpt_code == CMDQ_FORCE_STOP_CMPT_CODE) {
-> +		dev_dbg(cmdq->hwdev->dev,
-> +			"Force stop cmdq cmd, mod: %u, cmd: %u\n", mod, cmd);
-> +		err = -EAGAIN;
-> +	}
-> +
-> +	smp_rmb(); /* read error code after completion */
-
-Isn't the errcode updated under the spinlock protection? Why is this
-barrier neeed?
-
-/P
-
+> -- 
+> 2.43.0
+> 
 
