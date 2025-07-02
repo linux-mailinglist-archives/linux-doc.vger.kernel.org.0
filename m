@@ -1,135 +1,109 @@
-Return-Path: <linux-doc+bounces-51720-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51731-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0154CAF6525
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 00:26:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4470AF6592
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 00:46:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id CF7647B179B
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 22:25:33 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 697947B38CB
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 22:44:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E7985247293;
-	Wed,  2 Jul 2025 22:26:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3D51824337C;
+	Wed,  2 Jul 2025 22:46:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="lhZVTHxm"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="gX9HIzpV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from desiato.infradead.org (desiato.infradead.org [90.155.92.199])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E28E51EC014;
-	Wed,  2 Jul 2025 22:26:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.92.199
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C981A1F4261;
+	Wed,  2 Jul 2025 22:45:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751495198; cv=none; b=NXmeSBjqlCg/bBSM6wn26Erxd/unKRFbE6yg84GPUmLYERBmZNxbDKZYq+OoODVDpYjXIAOXzdyDyH5zzIuwt/FHzx/h2KgSX1GqFxuzgrAtGCkZkJvlcgUa5luoac3b/eOx87znwufpw5GJFKtDUNmvxsOy9he7awaMeZleyf0=
+	t=1751496361; cv=none; b=skdY7rTU+SOIm7nRLjtsq4+b8QFWd9gik+6RVhAxaQgUo1WPgB6wcdmrQqqVyO2d7ZMZPDvOWBlx4PS2xwKEgHu9+eQSP+sAMf84UEiahOt8tgd98DRlFY6SL45YduByAB1FFMB3A+jG0jgrBHGdrEPYqfQJw6/QDfNwvYvdyyA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751495198; c=relaxed/simple;
-	bh=iEvqm8LEvOCppfJrHBWs4+zrkKzc5Z3mo3B9Tg6QiUc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rvPXPzXJcTubQ9lb/pmvzkmyelcV0gXNMzIHvqA/axGu5jSjedBIWOVA1NVRNQhnqa9a9AngsGkbPZNp9uDh7JYprkNDFzCA2saqURhcdd3W/1AfauPO2hAbqs4yCqIaCw/MFSVInmODZeD2YmpsZaQTfNA14UqhlYGQtXUbnpA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=lhZVTHxm; arc=none smtp.client-ip=90.155.92.199
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Content-Transfer-Encoding:Content-Type
-	:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
-	Sender:Reply-To:Content-ID:Content-Description;
-	bh=pZYnQS6oVZM60NmqDWbhfi/8XUrw9dxSRfxYkTiS2dM=; b=lhZVTHxmoM5qQqnKr6jA8q6pR9
-	lD9/f9R1LPlFjyCwVqFaswdrJAIYPoGOqQmoiBm0cCOjGijNE6r5f6gb6PoaNdAqkAIP8S6hSfcoW
-	031uORY+ncpR13FdyCKdV6RKqYEWFQNhVPB1wQ8vElXFQ0Kag2bvyW554JcBG5tc/L+5uH7xOm70P
-	ErHv31QuybfbBvlszA+wwbNWhdPrBP173b/bvXxtqMLairsgAzFTspM1vowTETrWp/uCEZLIJjpcf
-	mhWHZkgocCZnVi3wtMaUnrbYVFkaC5GNqnkqJhAVeHA+Nx5Vw0Id3cCk4pXdkGcXUdsjLnkMQVzTX
-	HjRPxtMQ==;
-Received: from [50.53.25.54] (helo=[192.168.254.17])
-	by desiato.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1uX5uI-00000007a1D-2iyp;
-	Wed, 02 Jul 2025 22:26:23 +0000
-Message-ID: <53d8eaa7-6684-4596-ae98-69688068b84c@infradead.org>
-Date: Wed, 2 Jul 2025 15:26:14 -0700
+	s=arc-20240116; t=1751496361; c=relaxed/simple;
+	bh=bAxT7zPif7gDfwukFbvsyJyuLCrL/XhzO4gRr8ODT/0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ksGkray5DIkVCXjePNup0apxdmERkRIneSXXh2NrvZm87JmU6F5vEgiMq+ckec2in75cu4aD6HZpZr+eVRIoZUzqjIWKFbTeNMZNVSw7Asq+2UNEkY2v1rq0GmbRQ/MBJQNfJTs/d0KW/Zom+ie3Nb6oglBy2Qqlg1dUqNp22Hk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=gX9HIzpV; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net A26FF406FC
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1751495759; bh=D+KAohx9yyDKsSmhMQmJNnI4DAmY9EzLf2HuMkXOofQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=gX9HIzpVXXiOD9JS6W68kJerSvxYvKEDcn4DAJSwDbQ1o9NCy2Xz85ZUGqaM23Fb9
+	 GdgQd5y8kjmUaq+dwgrNHCY5QO+2KxVy1j6LIkE3/x0wBykK2jmWKZZKYr9VoYcE77
+	 mVFDsjdxB1X2LWt0aMtzwSoYQmVosUeqqVSmu6Pg/iUJTukeTGbU0YBrIsgdioG3M+
+	 aS7AU0wWUSeeOE/nrRvxYLwxT1lwJ6bIeopDiJt29iCOa7LZ70+ZtR+Rv/41bs9fMs
+	 DnfdKHr2wqRnL0YOHii/xRx1CGxIxFtmyI/rs6AW19DYt0zZCcK0CX4o/hxNY8Yd/T
+	 /HjtRYRxQ0QBQ==
+Received: from trenco.lwn.net (unknown [IPv6:2601:280:4600:2da9::1fe])
+	by ms.lwn.net (Postfix) with ESMTPA id A26FF406FC;
+	Wed,  2 Jul 2025 22:35:58 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Akira Yokosawa <akiyks@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 00/12] [PATCH 00/11] Thrash up the parser/output interface
+Date: Wed,  2 Jul 2025 16:35:12 -0600
+Message-ID: <20250702223524.231794-1-corbet@lwn.net>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] ipv6: add `force_forwarding` sysctl to enable
- per-interface forwarding
-To: nicolas.dichtel@6wind.com, Gabriel Goller <g.goller@proxmox.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- David Ahern <dsahern@kernel.org>
-Cc: netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20250702074619.139031-1-g.goller@proxmox.com>
- <c39c99a7-73c2-4fc6-a1f2-bc18c0b6301f@6wind.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <c39c99a7-73c2-4fc6-a1f2-bc18c0b6301f@6wind.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+[I'll slow down soon, honest - real work is piling up...]
 
+The kerneldoc parsing phase gathers all of the information about the
+declarations of interest, then passes it through to the output phase as a
+dict that is an unstructured blob of information; this organization has its
+origins in the Perl version of the program.  It results in an interface
+that is difficult to reason about, dozen-parameter function calls, and
+other ills.
 
-On 7/2/25 3:05 AM, Nicolas Dichtel wrote:
-> Le 02/07/2025 à 09:46, Gabriel Goller a écrit :
->> It is currently impossible to enable ipv6 forwarding on a per-interface
->> basis like in ipv4. To enable forwarding on an ipv6 interface we need to
->> enable it on all interfaces and disable it on the other interfaces using
->> a netfilter rule. This is especially cumbersome if you have lots of
->> interface and only want to enable forwarding on a few. According to the
->> sysctl docs [0] the `net.ipv6.conf.all.forwarding` enables forwarding
->> for all interfaces, while the interface-specific
->> `net.ipv6.conf.<interface>.forwarding` configures the interface
->> Host/Router configuration.
->>
->> Introduce a new sysctl flag `force_forwarding`, which can be set on every
->> interface. The ip6_forwarding function will then check if the global
->> forwarding flag OR the force_forwarding flag is active and forward the
->> packet.
->>
->> To preserver backwards-compatibility reset the flag (on all interfaces)
->> to 0 if the net.ipv6.conf.all.forwarding flag is set to 0.
->>
->> [0]: https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt
->>
->> Signed-off-by: Gabriel Goller <g.goller@proxmox.com>
->> ---
+Introduce a new class (KdocItem) to carry this information between the
+parser and the output modules, and, step by step, modify the system to use
+this class in a more structured way.  This could be taken further by
+creating a subclass of KdocItem for each declaration type (function,
+struct, ...), but that is probably more structure than we need.
 
+As a final step, add some structure for the accumulation of the output
+text.
 
-[snip]
+The result is (I hope) clearer code, the removal of a bunch of boilerplate,
+and no changes to the generated output.
 
->> +static int addrconf_sysctl_force_forwarding(const struct ctl_table *ctl, int write,
->> +					    void *buffer, size_t *lenp, loff_t *ppos)
->> +{
->> +	int *valp = ctl->data;
->> +	int ret;
->> +	int old, new;
->> +
->> +	// get extra params from table
-> /* */ for comment
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/coding-style.rst#n598
+Jonathan Corbet (12):
+  docs: kdoc; Add a rudimentary class to represent output items
+  docs: kdoc: simplify the output-item passing
+  docs: kdoc: drop "sectionlist"
+  docs: kdoc: Centralize handling of the item section list
+  docs: kdoc: remove the "struct_actual" machinery
+  docs: kdoc: use self.entry.parameterlist directly in check_sections()
+  docs: kdoc: Coalesce parameter-list handling
+  docs: kdoc: Regularize the use of the declaration name
+  docs: kdoc: straighten up dump_declaration()
+  docs: kdoc: directly access the always-there KdocItem fields
+  docs: kdoc: clean up check_sections()
+  docs: kdoc: Improve the output text accumulation
 
-Hm, lots there from the BK to git transfer in 2005, with a few updates by Mauro, Jakub, and myself.
-
-
-More recently (2016!), Linus said this:
-  https://lore.kernel.org/lkml/CA+55aFyQYJerovMsSoSKS7PessZBr4vNp-3QUUwhqk4A4_jcbg@mail.gmail.com/
-
-which seems to allow for "//" style commenting. But yeah, it hasn't been added to
-coding-style.rst.
-
->> +	struct inet6_dev *idev = ctl->extra1;
->> +	struct net *net = ctl->extra2;
-> Reverse x-mas tree for the variables declaration
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/maintainer-netdev.rst#n368
-
-Shouldn't maintainer-netdev.rst contain something about netdev-style comment blocks?
-(not that I'm offering since I think it's ugly)
+ scripts/lib/kdoc/kdoc_files.py  |   4 +-
+ scripts/lib/kdoc/kdoc_item.py   |  39 ++++
+ scripts/lib/kdoc/kdoc_output.py | 331 ++++++++++++++------------------
+ scripts/lib/kdoc/kdoc_parser.py | 162 +++-------------
+ 4 files changed, 218 insertions(+), 318 deletions(-)
+ create mode 100644 scripts/lib/kdoc/kdoc_item.py
 
 -- 
-~Randy
+2.49.0
 
 
