@@ -1,215 +1,189 @@
-Return-Path: <linux-doc+bounces-51627-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51629-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F9FDAF5AB1
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 16:12:45 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF13FAF5ABE
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 16:13:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6887C188C17F
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 14:13:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B896517738D
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 14:13:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BBE682882B2;
-	Wed,  2 Jul 2025 14:12:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAD9F2BE7D0;
+	Wed,  2 Jul 2025 14:13:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UHgxogd/"
+	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="0g8/CW6n"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19BBF2BD59E;
-	Wed,  2 Jul 2025 14:12:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C87862BDC0F
+	for <linux-doc@vger.kernel.org>; Wed,  2 Jul 2025 14:13:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751465560; cv=none; b=KQDlzjtPvFMdIItTxaiG3XDJNv6mNa2wLumQGeO8j1Ul2mkY4E0OgoFtytL5OA9xUKBQvTN0d0ZfHmcnQ70WZt2GSYtxtzFLa67I3k+P8LA56hp2DtHj9LZ9aGfkH3bpJKr/miKC2z386Pc3/q4CsKgZFsXdW7QMFFAYfD9glUA=
+	t=1751465586; cv=none; b=dhqPsEX0PqUsTbLmXc8u2BYsLshiHLe3UPf6+Mu3EsvDqfCs/rOQhO0jQI5vhzy7DlUAPdKwD3Yg3wzgZozd4ZfviE1vdDaXFKD+F0yFq4KkP5ciF/gzlE40lxwHtLp4a/r5GRaZx4WuaRc4WwANm3HgaK7lzrT5O6bKHe+e/Yg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751465560; c=relaxed/simple;
-	bh=Dm6xqHk0RBgx7vLihZyB1iyak1emMrW4rq8J0I4i8o4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ZlyUfpzqTPhTiqo7K6c9SfXm/lgyt9Y/yFlueWAWByBfz0DmN36TQ5hT/tjjRGp2/FmWLBmeSsjb09icPDAdTlIULPo0SYb0+YAuYIudcxQonlLp9c3dGTTqbg+ubXULL2tZnZn/FaizrffZ2wHEJHOeGMF7O2NONjeRGZb73dc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UHgxogd/; arc=none smtp.client-ip=209.85.215.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-b321bd36a41so3965924a12.2;
-        Wed, 02 Jul 2025 07:12:35 -0700 (PDT)
+	s=arc-20240116; t=1751465586; c=relaxed/simple;
+	bh=xIX6GxkYy+RMVioZ/VaEmi8TDF7cbtgtQXVNUQIlmus=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=rnB1fYiydxuhSuSQEVhuzZE1SZBBQCs/tZFjIXSWL7srxnGJzftXvkLA9A9tA/y2Lxp5TdVxOIoFpDsiMrzQlcuI4c655V8YQzKdvlUgBNfqKL7UeQx5ZkVyDnGCOLLSWlUpKSS7bQQUuVqCjK/poaEYOn8W4qRULTEcOfFIyis=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=0g8/CW6n; arc=none smtp.client-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=resnulli.us
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4530921461aso45937885e9.0
+        for <linux-doc@vger.kernel.org>; Wed, 02 Jul 2025 07:13:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1751465555; x=1752070355; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3hi0b4Q2TMU9s9ow4O1FxnYpGW2LdSH037wzbnfcLAI=;
-        b=UHgxogd/e2vGa8mbXR0Ryy0YrcG83M1VqWf+KuzZqVLCBaobO/1gDIRxF6h5ZHpclf
-         1hDAxIbT26J+e46c0hYZ1WLHcUp/WBp8K6fsU0pHP7/ZGQQA/mzWkNJS15SwT5q3GmJp
-         35zIbo38vxOluo0YLt864gYpQh0HCNUH2LKz9nBJJ2PC4wR4n3ex1Sq8m6Dn7k5HOo7p
-         F5tprdjz9MtM1bEj/uRufs7poW/H7h7l6t2FKOtInqNNLpD4JmGFvFn/9RQCRpxbUd+o
-         jXdhODCa8KjT81recq+ixZiAGMunRlmTbUQzNBufWFAvHw2uj7f856KaDXg2BkuG0/Hc
-         OmSA==
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1751465583; x=1752070383; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=KCX8EDCd8/i/wYRS9YBmGDW0iWUiXiEN/46xP+vv74E=;
+        b=0g8/CW6n4xengA9/rppoYsTHQxislg1Z2I5aP0twp4c8xYsmszHOV/Mpf+zRNJV7cw
+         Q5NpzqCvER6Hwbt+TGuNv95T0LPr2gZtIN775W3NCc4Oy6BZN9tReQxeGchZZ9TGl+G7
+         IVVsH5CErKsV0gwC8iSYFI3qUaoH1oMvVIpTvGJEoeWHBZ3T78rvkfO5BE3a15uv3eeV
+         2iuN0R7Ef47Z8WLCkj3PX8X5G0UauUE6c5zWyFEKKKMcVZ+psObLob816QgkeW7zIfGI
+         aKVKBjrsSwhrF7xrGDig/xh5ruQCa4dSyRgtOik80DqnLuVSVAwACKdYmABsd1dVdZ6x
+         ZQXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751465555; x=1752070355;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=3hi0b4Q2TMU9s9ow4O1FxnYpGW2LdSH037wzbnfcLAI=;
-        b=Tax2hcW/14/rshrtzjm3E1q7/B/C0qMrTRMcuFpMO3vS76Uxe+GTU+ibTokwlcWvsc
-         SSritfsSmGL46i0k9gT0tmzeDOglUayZ2nCw8oOquulUi2ity5oH+pA5z4Ff7QWFggfo
-         LDYctO6ZWEy2CBwei61OFp2yJz2Xs4X8US2g3YwJ/wAkc6FdOmckDOc69XkfIpiQozI4
-         6DjmtS+vi6uWeh9TLbHfhYER5G4WzdnbBcw4/YMZ4PILNyWe891YiQSaEC7i3tzxm819
-         CtXRkUhpp04irKIvTY3aYrivsxZvMEc404ox9ZRZXCTrKNtsZSmHf19cm6VcKRQ4Upca
-         NKXw==
-X-Forwarded-Encrypted: i=1; AJvYcCUOniCKDhgDCCVgUIEBZ0HW0kGhLKtRRoQ1s/cVn8ALYiX2f1U2t0TXGOP1/KyXgt+xzd1Jnaa1hKWE8yuNsQ==@vger.kernel.org, AJvYcCV8MMG+VWc1+LRY/8Nd3GawytSrzz1zUk6T+t7d78haBJLdlt3OuIoYKXI2BZXGY2Yaovt9g3QkUh5iqQ==@vger.kernel.org, AJvYcCVeX1sopL+Q0IW/sBsrJJ8vBA7KmMrqqAf9QZIVpQPycWH+QILO2jiefx40cP31FWBBT3lSCvRMSVbzK76J@vger.kernel.org, AJvYcCWoivTaPMihWtJnHa4F7FsegHAuvTtW39Uz6Q48cjVYpWfB0ivgvoz317ydDPG3B/VlqNKS+JERfRtjsw==@vger.kernel.org, AJvYcCXSlbXAUHmBnv0jqw4JBGILStDgs+jG7qdsGbwN69Zh2/6rw3A9uw/jDiIj9DmEzDLMy36BQAmzyeFr@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpFaBB3/GB06zPjVGqI3a8E9KuaIzxmA+q1WNauyUt0sXG0689
-	i11Bb6/tgv7KCm8O6UqvpU96kuucTPWDgimJv82OQhCZIbJ06coPtd25
-X-Gm-Gg: ASbGncse17autRLbKo7wvsMqi7sv4xUAFj4TV3w5OSPayzbUFHp03nwqsFY938bQPx2
-	3GzF/8zGTGrjW+18JhBfRLb1/+ndY2EFuFp7sxJoMH8ttJ041wITc9gH8bxpEK4NBZq7lw3o+FF
-	JKF7dFLcSR3LItJy9qtqwtjv7IWzeStXbeIScNdJxzMdbmMRyuMxHuP1LwyOMGJxsqfmMYk0T+b
-	wNxSAfMjGoUSpbe/ljnqd8t213EYXMo+sE1cNo6y+HPK2SJL7+jEpSIHRDVCNBB5SrFXA4NVTQS
-	mC3d982wBqRnByvOb159jFtBt7P1ASks7pmBe+gE+omGFGOtjwzXsDtNBzXe32UxXBFRmKIgzN5
-	THjntgwD4/1F7YcSsDY1oW014ct5/iIwtqZteqVI=
-X-Google-Smtp-Source: AGHT+IFKRDLioih13g48ycaXA5K8ysUyKk1vSQvjV96+wwiKTloc/oO2WVx/lFSAoNhOajXgeeSAFQ==
-X-Received: by 2002:a05:6a20:a126:b0:21d:fd1:9be with SMTP id adf61e73a8af0-222d7de1c90mr4563817637.12.1751465555071;
-        Wed, 02 Jul 2025 07:12:35 -0700 (PDT)
-Received: from ?IPV6:240e:305:798e:6800:ad23:906d:e07c:8a1e? ([240e:305:798e:6800:ad23:906d:e07c:8a1e])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74af56ce9f3sm14100034b3a.122.2025.07.02.07.12.25
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Jul 2025 07:12:34 -0700 (PDT)
-Message-ID: <54a85ec6-992d-4685-9031-114ba634e0a3@gmail.com>
-Date: Wed, 2 Jul 2025 22:12:20 +0800
+        d=1e100.net; s=20230601; t=1751465583; x=1752070383;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KCX8EDCd8/i/wYRS9YBmGDW0iWUiXiEN/46xP+vv74E=;
+        b=K9suoGp2uNUaba07bTEA8UzcwCi2CT7sP6AQw5hEydEkICdVHZw2tMVfVM84Cqe8Nc
+         zIBMUZCnY5p/ziiR8liop15sNZ+9oXbFJW/f/UZ8IJTEkkK33B0QSTcUsTawfm4W/4PQ
+         G8oQJPPQToMS/91fCW5SiXUDhvet4uWjo/AQnrI6XjyX0LEIOCKpOJ0DMgIY3yFA9DFC
+         DqtV68vBB5NAyqreHzPYBvr7ZRpaQjdNBhsaE8v6B4mtZH7kx1wsOBsOnC3kKPusD8qG
+         SOZg5k/Vt12qRHPB43iLMndCqDSKJyP9un8IFqSBXVv/R15EaSO0xmmLwmAYBQhXy7hy
+         imyA==
+X-Forwarded-Encrypted: i=1; AJvYcCVrp7+4hWytIVwrdgFBxI13+6BRa4BjqA4yScVs0AIpuLvxi6GV4NuagN/xX79q5WtV05rKlgoQIVc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzkl3kBeh1y9/vdtD6lHp4Bvk4qKkYSptEo8YiQXuA4hNGruGGQ
+	C23bMt4lZK5ufHAfPV9IAUlsMFpwKP0xfJiiDg9jGQKmCjqPl9+EDylksowB+H2cS3E=
+X-Gm-Gg: ASbGncvpI/tmA8HabJavh/sbY7G6RwdsmsFWM7HzJyHh5W8uYYlPszNAJwe9Qdx5FjQ
+	FbAoqGGqj971jbQ6uph51J+tZEigZ5ptLqliKO3bKEGFMw+2gbEED9DcLXLr93uviJuBHlIAVqs
+	XuDNKvY1aHSYvB3Pu/5Flugd/ee8f4jNylKcVPjrzCzT9HetUqhqj8GkymWEQstP/XZbhrp+DV7
+	5fMcLmre1X+5uINCtfUp8q5Xx2ei4zKDKE+3O6OQDfkTm0u5bRhYkuwiNOAJfjjP5pP1QjCEelf
+	gbJBvMNr+ztGoIOnLlghtQ3B040xg2NeH5j9ytR97/hn1OoZe1hVMCG3yRmqAC2lcfIUZQ==
+X-Google-Smtp-Source: AGHT+IEk1Iz9F6Hzi17G8siVxy1kneMMVA9o7oJxCvLiimTGG5VAQ9oHTXa5JjHBEPPb8pmO2Hxa8w==
+X-Received: by 2002:a05:600c:638e:b0:453:b44:eb71 with SMTP id 5b1f17b1804b1-454a370c313mr35319005e9.19.1751465582882;
+        Wed, 02 Jul 2025 07:13:02 -0700 (PDT)
+Received: from jiri-mlt ([193.47.165.251])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-453823b6d50sm233164175e9.30.2025.07.02.07.12.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Jul 2025 07:13:02 -0700 (PDT)
+Date: Wed, 2 Jul 2025 16:12:54 +0200
+From: Jiri Pirko <jiri@resnulli.us>
+To: Ivan Vecera <ivecera@redhat.com>
+Cc: netdev@vger.kernel.org, 
+	Prathosh Satish <Prathosh.Satish@microchip.com>, Vadim Fedorenko <vadim.fedorenko@linux.dev>, 
+	Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Shannon Nelson <shannon.nelson@amd.com>, Dave Jiang <dave.jiang@intel.com>, 
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Michal Schmidt <mschmidt@redhat.com>, 
+	Petr Oros <poros@redhat.com>
+Subject: Re: [PATCH net-next v12 09/14] dpll: zl3073x: Register DPLL devices
+ and pins
+Message-ID: <3sgsj5vxtkzfpfpn5igave2qppy27mq7erpcmhqtfswaayaynv@zcsldf44o7b3>
+References: <20250629191049.64398-1-ivecera@redhat.com>
+ <20250629191049.64398-10-ivecera@redhat.com>
+ <ne36b7ky5cg2g3juejcah7bnvsajihncmpzag3vpjnb3gabz2m@xtxhpfhvfmwl>
+ <1848e2f6-a0bb-48e6-9bfc-5ea6cbea2e5c@redhat.com>
+ <k2osi2mzfmudh7q3av5raxj33smbdjgnrmaqjx2evjaaloddb3@vublvfldqlnm>
+ <e55caefa-2ea9-4d31-be76-48cdfd481b5c@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] fs: change write_begin/write_end interface to take
- struct kiocb *
-To: Matthew Wilcox <willy@infradead.org>
-Cc: "tytso@mit.edu" <tytso@mit.edu>, "hch@infradead.org" <hch@infradead.org>,
- "adilger.kernel@dilger.ca" <adilger.kernel@dilger.ca>,
- "brauner@kernel.org" <brauner@kernel.org>,
- "jani.nikula@linux.intel.com" <jani.nikula@linux.intel.com>,
- "rodrigo.vivi@intel.com" <rodrigo.vivi@intel.com>,
- "tursulin@ursulin.net" <tursulin@ursulin.net>,
- "airlied@gmail.com" <airlied@gmail.com>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
- "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "chentao325@qq.com" <chentao325@qq.com>,
- "frank.li@vivo.com" <frank.li@vivo.com>
-References: <20250627110257.1870826-1-chentaotao@didiglobal.com>
- <20250627110257.1870826-4-chentaotao@didiglobal.com>
- <aF68sKzx24P1q54h@casper.infradead.org>
-From: Taotao Chen <chentt325@gmail.com>
-In-Reply-To: <aF68sKzx24P1q54h@casper.infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e55caefa-2ea9-4d31-be76-48cdfd481b5c@redhat.com>
 
-
-在 2025/6/27 23:45, Matthew Wilcox 写道:
-> On Fri, Jun 27, 2025 at 11:03:11AM +0000, 陈涛涛 Taotao Chen wrote:
->> diff --git a/fs/exfat/file.c b/fs/exfat/file.c
->> index 841a5b18e3df..fdc2fa1e5c41 100644
->> --- a/fs/exfat/file.c
->> +++ b/fs/exfat/file.c
->> @@ -532,10 +532,12 @@ int exfat_file_fsync(struct file *filp, loff_t start, loff_t end, int datasync)
->>   	return blkdev_issue_flush(inode->i_sb->s_bdev);
->>   }
->>   
->> -static int exfat_extend_valid_size(struct file *file, loff_t new_valid_size)
->> +static int exfat_extend_valid_size(const struct kiocb *iocb,
->> +				   loff_t new_valid_size)
->>   {
->>   	int err;
->>   	loff_t pos;
->> +	struct file *file = iocb->ki_filp;
->>   	struct inode *inode = file_inode(file);
->>   	struct exfat_inode_info *ei = EXFAT_I(inode);
->>   	struct address_space *mapping = inode->i_mapping;
->> @@ -551,14 +553,14 @@ static int exfat_extend_valid_size(struct file *file, loff_t new_valid_size)
->>   		if (pos + len > new_valid_size)
->>   			len = new_valid_size - pos;
->>   
->> -		err = ops->write_begin(file, mapping, pos, len, &folio, NULL);
->> +		err = ops->write_begin(iocb, mapping, pos, len, &folio, NULL);
->>   		if (err)
->>   			goto out;
->>   
->>   		off = offset_in_folio(folio, pos);
->>   		folio_zero_new_buffers(folio, off, off + len);
->>   
->> -		err = ops->write_end(file, mapping, pos, len, len, folio, NULL);
->> +		err = ops->write_end(iocb, mapping, pos, len, len, folio, NULL);
->>   		if (err < 0)
->>   			goto out;
->>   		pos += len;
->> @@ -604,7 +606,7 @@ static ssize_t exfat_file_write_iter(struct kiocb *iocb, struct iov_iter *iter)
->>   	}
->>   
->>   	if (pos > valid_size) {
->> -		ret = exfat_extend_valid_size(file, pos);
->> +		ret = exfat_extend_valid_size(iocb, pos);
->>   		if (ret < 0 && ret != -ENOSPC) {
->>   			exfat_err(inode->i_sb,
->>   				"write: fail to zero from %llu to %llu(%zd)",
->> @@ -655,8 +657,11 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
->>   	struct file *file = vma->vm_file;
->>   	struct inode *inode = file_inode(file);
->>   	struct exfat_inode_info *ei = EXFAT_I(inode);
->> +	struct kiocb iocb;
->>   	loff_t start, end;
->>   
->> +	init_sync_kiocb(&iocb, file);
->> +
->>   	if (!inode_trylock(inode))
->>   		return VM_FAULT_RETRY;
->>   
->> @@ -665,7 +670,7 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
->>   			start + vma->vm_end - vma->vm_start);
->>   
->>   	if (ei->valid_size < end) {
->> -		err = exfat_extend_valid_size(file, end);
->> +		err = exfat_extend_valid_size(&iocb, end);
->>   		if (err < 0) {
->>   			inode_unlock(inode);
->>   			return vmf_fs_error(err);
-> This is unnecessary work.  The only ->write_begin/write_end that we'll
-> see here is exfat_write_begin() / exfat_write_end() which don't actually
-> need iocb (or file).  Traditionally we pass NULL in these situations,
-> but the exfat people probably weren't aware of this convention.
+Wed, Jul 02, 2025 at 02:16:53PM +0200, ivecera@redhat.com wrote:
 >
-> exfat_extend_valid_size() only uses the file it's passed to get the
-> inode, and both callers already have the inode.  So I'd change
-> exfat_extend_valid_size() to take an inode instead of a file as its
-> first argument, then you can skip the creation of an iocb in
-> exfat_page_mkwrite().
+>
+>On 02. 07. 25 2:02 odp., Jiri Pirko wrote:
+>> Wed, Jul 02, 2025 at 01:49:22PM +0200, ivecera@redhat.com wrote:
+>> > 
+>> > 
+>> > On 02. 07. 25 12:57 odp., Jiri Pirko wrote:
+>> > > Sun, Jun 29, 2025 at 09:10:44PM +0200, ivecera@redhat.com wrote:
+>> > > 
+>> > > [...]
+>> > > 
+>> > > > +/**
+>> > > > + * zl3073x_dpll_device_register - register DPLL device
+>> > > > + * @zldpll: pointer to zl3073x_dpll structure
+>> > > > + *
+>> > > > + * Registers given DPLL device into DPLL sub-system.
+>> > > > + *
+>> > > > + * Return: 0 on success, <0 on error
+>> > > > + */
+>> > > > +static int
+>> > > > +zl3073x_dpll_device_register(struct zl3073x_dpll *zldpll)
+>> > > > +{
+>> > > > +	struct zl3073x_dev *zldev = zldpll->dev;
+>> > > > +	u8 dpll_mode_refsel;
+>> > > > +	int rc;
+>> > > > +
+>> > > > +	/* Read DPLL mode and forcibly selected reference */
+>> > > > +	rc = zl3073x_read_u8(zldev, ZL_REG_DPLL_MODE_REFSEL(zldpll->id),
+>> > > > +			     &dpll_mode_refsel);
+>> > > > +	if (rc)
+>> > > > +		return rc;
+>> > > > +
+>> > > > +	/* Extract mode and selected input reference */
+>> > > > +	zldpll->refsel_mode = FIELD_GET(ZL_DPLL_MODE_REFSEL_MODE,
+>> > > > +					dpll_mode_refsel);
+>> > > 
+>> > > Who sets this?
+>> > 
+>> > WDYM? refsel_mode register? If so this register is populated from
+>> > configuration stored in flash inside the chip. And the configuration
+>> > is prepared by vendor/OEM.
+>> 
+>> Okay. Any plan to implement on-fly change of this?
+>
+>Do you mean switching between automatic and manual mode?
+>If so? Yes, later, need to extend DPLL API to allow this.
 
+That is why I ask. Looking forward to it.
 
-My initial goal was to maintain consistency with the updated ->write_begin/
-
-->write_end interfaces. That meant passing the iocb to avoid special cases
-
-and keep the changes minimal and safe.
-
-But you're right, since exfat_write_begin() and exfat_write_end() don't 
-use the
-
-iocb or file pointer, passing NULL is fine, and having 
-exfat_extend_valid_size()
-
-directly take an inode makes the code simpler and clearer.
-
-
-In addition, inside the ntfs_extend_initialized_size() function, I also 
-set the iocb
-
-parameter to NULL when calling ntfs_write_begin() and ntfs_write_end().
-
-
-
+>
+>Ivan
+>
+>> > 
+>> > > > +	zldpll->forced_ref = FIELD_GET(ZL_DPLL_MODE_REFSEL_REF,
+>> > > > +				       dpll_mode_refsel);
+>> > > > +
+>> > > > +	zldpll->dpll_dev = dpll_device_get(zldev->clock_id, zldpll->id,
+>> > > > +					   THIS_MODULE);
+>> > > > +	if (IS_ERR(zldpll->dpll_dev)) {
+>> > > > +		rc = PTR_ERR(zldpll->dpll_dev);
+>> > > > +		zldpll->dpll_dev = NULL;
+>> > > > +
+>> > > > +		return rc;
+>> > > > +	}
+>> > > > +
+>> > > > +	rc = dpll_device_register(zldpll->dpll_dev,
+>> > > > +				  zl3073x_prop_dpll_type_get(zldev, zldpll->id),
+>> > > > +				  &zl3073x_dpll_device_ops, zldpll);
+>> > > > +	if (rc) {
+>> > > > +		dpll_device_put(zldpll->dpll_dev);
+>> > > > +		zldpll->dpll_dev = NULL;
+>> > > > +	}
+>> > > > +
+>> > > > +	return rc;
+>> > > > +}
+>> > > 
+>> > > [...]
+>> > > 
+>> > 
+>> 
+>
 
