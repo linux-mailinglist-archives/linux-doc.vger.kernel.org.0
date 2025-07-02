@@ -1,227 +1,165 @@
-Return-Path: <linux-doc+bounces-51578-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51580-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96D84AF111D
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 12:05:49 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C69DAF114F
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 12:10:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3221B17DF27
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 10:05:49 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 777497AD71E
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Jul 2025 10:09:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F2BED2472A8;
-	Wed,  2 Jul 2025 10:05:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0CB80DF42;
+	Wed,  2 Jul 2025 10:10:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=6wind.com header.i=@6wind.com header.b="BGxsK39q"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ZncBnMp/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F29AE23D2B8
-	for <linux-doc@vger.kernel.org>; Wed,  2 Jul 2025 10:05:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FC8923817F;
+	Wed,  2 Jul 2025 10:10:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751450735; cv=none; b=P1SB6tZHeEmeXgkOvbD8D9HYxxShVtV7hAm7iO8TdygnL4fuonLUkODkzPFvNNTc5t8q4EEjyMhFgTE53C2Z9fHXUdgvLkAV6XxiM9sedKXu+hfY4TW27nJKyGuNEuGFQWwBIxHw+5N1nqvy/V7P26mkHC7MseikLzIRqMTUxBY=
+	t=1751451034; cv=none; b=LJ2OAv7GKN1YRNfi7kVjVJ3bp0cmkc9Vde01k9iOZq+3pgL3d3ka3FWhzvsXvnZ7Y7CE5+zfH49f1txlipYBwm8GUFOuGg51rDuYG9MMwjvYFAbUvYYVBhEGZXMwwosjSC83IZnKHUCh82cgLMyWKEoKDZNDhYNI0XQj41HJz00=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751450735; c=relaxed/simple;
-	bh=/odDKUbMEXHb8YPMgH2eLGCrRUFAWoeTkGz9mBkC5Z8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=W8gpfrrKKGcv+PSSTu31lFVmPmuunw68mofKKEbPSTpLTZsfsfIu4tC5Ic2ceUzXshJ7DebbHEqW4Y8g1+KV1tkg31N3K3+Mk8d1p0WrdGeqW99mGlxA5sde5xIR+cQnn/UiBCsoMsMCw8mtAfQavN5gejLimxurAAd/0Nv17RQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=6wind.com; spf=pass smtp.mailfrom=6wind.com; dkim=pass (2048-bit key) header.d=6wind.com header.i=@6wind.com header.b=BGxsK39q; arc=none smtp.client-ip=209.85.128.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=6wind.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=6wind.com
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4535fc0485dso8569475e9.0
-        for <linux-doc@vger.kernel.org>; Wed, 02 Jul 2025 03:05:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=6wind.com; s=google; t=1751450732; x=1752055532; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:organization:content-language
-         :from:references:cc:to:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=Jge/315nZmEr34QaqRg13k9ENVxZ/tBr+eglZFNGido=;
-        b=BGxsK39q6HlSq5lD/xVCPlwrLgbplvcfaNL9uBz6yF8r8zbqGQhlfUA5DXLXtL0Snx
-         046iUZncJRrVFYyBZYucf5Fx4cFJh1m2ZhMqYVpZQCHX2PImREFO312YUFMy8pMnkg5u
-         +qw02de1oQGX/Od2FJOuTb9148j2awPyxgSsB9encjnwLpqRydIRUvP6wBcgZ9ZQex3Z
-         zGDoa4tvj1NRdBWCtae9+I4JDlPRriN56OimNMgXAwrgLGwPLHs8DDQ0MHXr+tNqT/sd
-         wE5Wd4MeoWNJaXtQy85ltwnQfFbiK70ynox3wh4MjvzJs7MZ6hMzMnqQ6aa3T5Dcp8nV
-         UlVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751450732; x=1752055532;
-        h=content-transfer-encoding:in-reply-to:organization:content-language
-         :from:references:cc:to:subject:reply-to:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Jge/315nZmEr34QaqRg13k9ENVxZ/tBr+eglZFNGido=;
-        b=cJaBMVOzUzZw0vyPubhwxPYE4JTJLm2791gehki+NiJVMbx88jmX+xhJ4rKEVdISDQ
-         Qc0J67hMo+ue0+OfmUWd1hA/qVxbRkbJttgnufMgI8o9EmscnxGiiBVbcg/yBEZ5Q7rB
-         yT9i42/hHLRxmaJl7N19jkBeRgZHyJ1RWimw1YxmD5x1NrJaTDb9I+fwuKvm/NzfB8Nq
-         2IOXI57g7WSMSSZS9u38FBdHGrpqDdhxzO6u60RBeI0z8chheMu2BVGjlVShvqXAiJOy
-         NKYojiL2jnc0tG8qXhw6aLKpMATVo48sqUumN0CHlugu0qzwqqcYvDLxR4lOwGNRWmrY
-         hF2Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUlZpNnvA67PhGVpKCIwnZ8FVWjqYAYn5zKwZPHvwBSap7MRuaSy6fMnrXkRkGUWhkXGOVd1H5F8Iw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw+AzUuHBMt/o46gr5i64Per1YgiOMgRcYzYIAg+zxqtcUpwVSj
-	5xiANna+V5OG+lYBhzbIS4ERHJj4y892UNmstJATbfndtXiNczcvoL+5/EpznGm4j28=
-X-Gm-Gg: ASbGnctqX1PL1L4CyAC5glJw0W81OSFHOcolgyJluVUfGS12y6nxXRUzDOVOeAVd+uN
-	V1cAhK38lXvsfpBMpkkr+/fD9LlJS06ecWQ5l6DwLVFk+d3l3vBzrNQDXb4Sm0oONi1NcVNKHWL
-	3MQnPlvmnH4nQYkE1FIJGP3sA3rYn/J3h5cvozjWDttbtO3KDjruPwTeFY6WhcsNJ4OeA5vNnHL
-	FJj0NkkfM6aMBm3mpY6WupxZyfHH+r/vsxeggxqm3v6zkWgWmMm7XS7k7LlwLGbJ9S8XVN5q2+z
-	o4G0oZXxsEqA+sGhpKrsU6cgFdKHtl/jiIHoAEAYPciM/Q2ZHMC5NwQYKFaPoRkx1FDg8gXjNd0
-	ojvHo/xF8gZprxhGEeDNzXo6TQbhb3ijQ/ny9vuQ=
-X-Google-Smtp-Source: AGHT+IHl6GEGttPh0i4rVP4SmhL82lbxdawS1oN4zDLT3XLS5VSAgR8qS48eCoKhOKWSCmnAPDEk0g==
-X-Received: by 2002:a05:600c:46d1:b0:439:88bb:d00b with SMTP id 5b1f17b1804b1-454a3706e3amr8521565e9.5.1751450732227;
-        Wed, 02 Jul 2025 03:05:32 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:b41:c160:5568:c43d:79bc:c2ec? ([2a01:e0a:b41:c160:5568:c43d:79bc:c2ec])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4538a3a72dasm192919735e9.16.2025.07.02.03.05.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Jul 2025 03:05:31 -0700 (PDT)
-Message-ID: <c39c99a7-73c2-4fc6-a1f2-bc18c0b6301f@6wind.com>
-Date: Wed, 2 Jul 2025 12:05:31 +0200
+	s=arc-20240116; t=1751451034; c=relaxed/simple;
+	bh=wrSfWUeY1vWA1wmBzqUEGdZJDwhOB8JDwHQ2AQuAgYI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=NLhSFCUsALu17dgm9e7TzhX5suvE/fiGDwYW9bpxwAsHZKenxWG9jzedWY779KL/YyeYOaxezwk0hzsxxywK7IJnxL4VrYwfnrOuM3n9Y4CCXmBskedWa1J4CVkIOG+de/Ab6VwDKcK5uYmAVJiTUkbTa3NyEvbGCZTNv6bVahc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ZncBnMp/; arc=none smtp.client-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1751451033; x=1782987033;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=wrSfWUeY1vWA1wmBzqUEGdZJDwhOB8JDwHQ2AQuAgYI=;
+  b=ZncBnMp/I8fmaaC92EXovYInfoF8DW5YFSSoHX7tzezflQu73+u6Oyrg
+   jDGJ+15QYTu4tHXUCHAKpRHlKEEkG/MPIPAnfUIDuKl1hsrH/4JxP7prm
+   +DHr6bf6Nsour/v+Z8mTl90EzhDnE1OduSjo0bCwPFikcAau89gYeOwxM
+   IfHATKjeifnYf07qAigh0BApmf/ACJZxV8KE/GX9MINTYpwkPZBVUJIXX
+   yPqT+REn9+D+catR4qaO6GhAQnhRcIpV49oJCtZn4i4bEt6S2CSIDMt8Y
+   FAOnAxvJzBxo5hKHbtPVKpN9XVm0JSDpTgKKd0k/BeBSbVFZifAhfbVkw
+   A==;
+X-CSE-ConnectionGUID: QH6eobyyTnqa/eWvltTzhw==
+X-CSE-MsgGUID: 33LQLR+/Tv6M2KYqh+5UGg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11481"; a="41368725"
+X-IronPort-AV: E=Sophos;i="6.16,281,1744095600"; 
+   d="scan'208";a="41368725"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jul 2025 03:10:32 -0700
+X-CSE-ConnectionGUID: EoGc5nQdTs+SBUaD4Dt9UQ==
+X-CSE-MsgGUID: Jt303iQRT22d+XS99ocr+g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,281,1744095600"; 
+   d="scan'208";a="153490384"
+Received: from black.fi.intel.com ([10.237.72.28])
+  by orviesa006.jf.intel.com with ESMTP; 02 Jul 2025 03:10:20 -0700
+Received: by black.fi.intel.com (Postfix, from userid 1000)
+	id BEA181E0; Wed, 02 Jul 2025 13:10:18 +0300 (EEST)
+Date: Wed, 2 Jul 2025 13:10:18 +0300
+From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+To: Sohil Mehta <sohil.mehta@intel.com>
+Cc: Andy Lutomirski <luto@kernel.org>, 
+	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+	Peter Zijlstra <peterz@infradead.org>, Ard Biesheuvel <ardb@kernel.org>, 
+	"Paul E. McKenney" <paulmck@kernel.org>, Josh Poimboeuf <jpoimboe@kernel.org>, 
+	Xiongwei Song <xiongwei.song@windriver.com>, Xin Li <xin3.li@intel.com>, 
+	"Mike Rapoport (IBM)" <rppt@kernel.org>, Brijesh Singh <brijesh.singh@amd.com>, 
+	Michael Roth <michael.roth@amd.com>, Tony Luck <tony.luck@intel.com>, 
+	Alexey Kardashevskiy <aik@amd.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Ingo Molnar <mingo@kernel.org>, 
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, Daniel Sneddon <daniel.sneddon@linux.intel.com>, 
+	Kai Huang <kai.huang@intel.com>, Sandipan Das <sandipan.das@amd.com>, 
+	Breno Leitao <leitao@debian.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>, 
+	Alexei Starovoitov <ast@kernel.org>, Hou Tao <houtao1@huawei.com>, Juergen Gross <jgross@suse.com>, 
+	Vegard Nossum <vegard.nossum@oracle.com>, Kees Cook <kees@kernel.org>, Eric Biggers <ebiggers@google.com>, 
+	Jason Gunthorpe <jgg@ziepe.ca>, "Masami Hiramatsu (Google)" <mhiramat@kernel.org>, 
+	Andrew Morton <akpm@linux-foundation.org>, Luis Chamberlain <mcgrof@kernel.org>, 
+	Yuntao Wang <ytcoode@gmail.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+	Christophe Leroy <christophe.leroy@csgroup.eu>, Tejun Heo <tj@kernel.org>, Changbin Du <changbin.du@huawei.com>, 
+	Huang Shijie <shijie@os.amperecomputing.com>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Namhyung Kim <namhyung@kernel.org>, Arnaldo Carvalho de Melo <acme@redhat.com>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-efi@vger.kernel.org, 
+	linux-mm@kvack.org
+Subject: Re: [PATCHv8 12/17] x86/traps: Communicate a LASS violation in #GP
+ message
+Message-ID: <wuo2m6qyhdub2bw4lovdzyxygu4rsbsvsoronmmm4vmn4vvyba@bletrxfbct4c>
+References: <20250701095849.2360685-1-kirill.shutemov@linux.intel.com>
+ <20250701095849.2360685-13-kirill.shutemov@linux.intel.com>
+ <63a44def-fd5d-4f21-8d09-bb608cfab524@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: nicolas.dichtel@6wind.com
-Subject: Re: [PATCH v3] ipv6: add `force_forwarding` sysctl to enable
- per-interface forwarding
-To: Gabriel Goller <g.goller@proxmox.com>,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- David Ahern <dsahern@kernel.org>
-Cc: netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20250702074619.139031-1-g.goller@proxmox.com>
-From: Nicolas Dichtel <nicolas.dichtel@6wind.com>
-Content-Language: en-US
-Organization: 6WIND
-In-Reply-To: <20250702074619.139031-1-g.goller@proxmox.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <63a44def-fd5d-4f21-8d09-bb608cfab524@intel.com>
 
-Le 02/07/2025 à 09:46, Gabriel Goller a écrit :
-> It is currently impossible to enable ipv6 forwarding on a per-interface
-> basis like in ipv4. To enable forwarding on an ipv6 interface we need to
-> enable it on all interfaces and disable it on the other interfaces using
-> a netfilter rule. This is especially cumbersome if you have lots of
-> interface and only want to enable forwarding on a few. According to the
-> sysctl docs [0] the `net.ipv6.conf.all.forwarding` enables forwarding
-> for all interfaces, while the interface-specific
-> `net.ipv6.conf.<interface>.forwarding` configures the interface
-> Host/Router configuration.
+On Tue, Jul 01, 2025 at 05:36:06PM -0700, Sohil Mehta wrote:
+> On 7/1/2025 2:58 AM, Kirill A. Shutemov wrote:
+> >  /*
+> > @@ -672,6 +681,12 @@ static enum kernel_gp_hint get_kernel_gp_address(struct pt_regs *regs,
+> >  	if (*addr < ~__VIRTUAL_MASK &&
+> >  	    *addr + insn.opnd_bytes - 1 > __VIRTUAL_MASK)
+> >  		return GP_NON_CANONICAL;
+> > +	else if (*addr < ~__VIRTUAL_MASK &&
+> > +		 cpu_feature_enabled(X86_FEATURE_LASS)) {
+> > +		if (*addr < PAGE_SIZE)
+> > +			return GP_NULL_POINTER;
+> > +		return GP_LASS_VIOLATION;
+> > +	}
 > 
-> Introduce a new sysctl flag `force_forwarding`, which can be set on every
-> interface. The ip6_forwarding function will then check if the global
-> forwarding flag OR the force_forwarding flag is active and forward the
-> packet.
+> The comments above this section of code say:
 > 
-> To preserver backwards-compatibility reset the flag (on all interfaces)
-> to 0 if the net.ipv6.conf.all.forwarding flag is set to 0.
+> /*
+>  * Check that:
+>  *  - the operand is not in the kernel half
+>  *  - the last byte of the operand is not in the user canonical half
+>  */
 > 
-> [0]: https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt
+> They should be updated since we are updating the logic.
+
+Okay.
+
+> Also, below is easier to read than above:
 > 
-> Signed-off-by: Gabriel Goller <g.goller@proxmox.com>
-> ---
+> 	if (*addr < ~__VIRTUAL_MASK) {
 > 
-Please, wait 24 hours before reposting.
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/maintainer-netdev.rst#n419
+> 		if (*addr + insn.opnd_bytes - 1 > __VIRTUAL_MASK)
+> 			return EXC_NON_CANONICAL;
+> 
+> 		if (cpu_feature_enabled(X86_FEATURE_LASS)) {
+> 			if (*addr < PAGE_SIZE)
+> 				return EXC_NULL_POINTER;
+> 			return EXC_LASS_VIOLATION;
+> 		}
+> 	}
+> 
+> I am wondering if the NULL pointer exception should be made
+> unconditional, even if it is unlikely to reach here without LASS. So
+> maybe something like this:
+> 
+> 	if (*addr < ~__VIRTUAL_MASK) {
+> 
+> 		if (*addr + insn.opnd_bytes - 1 > __VIRTUAL_MASK)
+> 			return EXC_NON_CANONICAL;
+> 
+> 		if (*addr < PAGE_SIZE)
+> 			return EXC_NULL_POINTER;
+> 
+> 		if (cpu_feature_enabled(X86_FEATURE_LASS))
+> 			return EXC_LASS_VIOLATION;
+> 	}
 
+That's cleaner.
 
-[snip]
-
-> @@ -6747,6 +6759,77 @@ static int addrconf_sysctl_disable_policy(const struct ctl_table *ctl, int write
->  	return ret;
->  }
->  
-> +/* called with RTNL locked */
-Instead of a comment ...
-
-> +static void addrconf_force_forward_change(struct net *net, __s32 newf)
-> +{
-> +	struct net_device *dev;
-> +	struct inet6_dev *idev;
-> +
-... put
-
-	ASSERT_RTNL();
-
-> +	for_each_netdev(net, dev) {
-> +		idev = __in6_dev_get_rtnl_net(dev);
-> +		if (idev) {
-> +			int changed = (!idev->cnf.force_forwarding) ^ (!newf);
-> +
-> +			WRITE_ONCE(idev->cnf.force_forwarding, newf);
-> +			if (changed) {
-> +				inet6_netconf_notify_devconf(dev_net(dev), RTM_NEWNETCONF,
-> +							     NETCONFA_FORCE_FORWARDING,
-> +							     dev->ifindex, &idev->cnf);
-> +			}
-> +		}
-> +	}
-> +}
-> +
-> +static int addrconf_sysctl_force_forwarding(const struct ctl_table *ctl, int write,
-> +					    void *buffer, size_t *lenp, loff_t *ppos)
-> +{
-> +	int *valp = ctl->data;
-> +	int ret;
-> +	int old, new;
-> +
-> +	// get extra params from table
-/* */ for comment
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/coding-style.rst#n598
-
-> +	struct inet6_dev *idev = ctl->extra1;
-> +	struct net *net = ctl->extra2;
-Reverse x-mas tree for the variables declaration
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/maintainer-netdev.rst#n368
-
-> +
-> +	// copy table and change extra params to min/max so we can use proc_douintvec_minmax
-> +	struct ctl_table lctl;
-> +
-> +	lctl = *ctl;
-> +	lctl.extra1 = SYSCTL_ZERO;
-> +	lctl.extra2 = SYSCTL_ONE;
-> +
-> +	old = *valp;
-> +	ret = proc_douintvec_minmax(&lctl, write, buffer, lenp, ppos);
-> +	new = *valp;
-I probably missed something. The new value is written in lctl. When is it
-written in ctl?
-
-> +
-> +	if (write && old != new) {
-> +		if (!rtnl_net_trylock(net))
-> +			return restart_syscall();
-> +
-> +		if (valp == &net->ipv6.devconf_dflt->force_forwarding) {
-> +			inet6_netconf_notify_devconf(net, RTM_NEWNETCONF,
-> +						     NETCONFA_FORCE_FORWARDING,
-> +						     NETCONFA_IFINDEX_DEFAULT,
-> +						     net->ipv6.devconf_dflt);
-> +		} else if (valp == &net->ipv6.devconf_all->force_forwarding) {
-> +			inet6_netconf_notify_devconf(net, RTM_NEWNETCONF,
-> +						     NETCONFA_FORCE_FORWARDING,
-> +						     NETCONFA_IFINDEX_ALL,
-> +						     net->ipv6.devconf_all);
-> +
-> +			addrconf_force_forward_change(net, new);
-> +		} else {
-> +			inet6_netconf_notify_devconf(net, RTM_NEWNETCONF,
-> +						     NETCONFA_FORCE_FORWARDING,
-> +						     idev->dev->ifindex,
-> +						     &idev->cnf);
-> +		}
-> +		rtnl_net_unlock(net);
-> +	}
-> +
-> +	return ret;
-> +}
-> +
->  static int minus_one = -1;
->  static const int two_five_five = 255;
->  static u32 ioam6_if_id_max = U16_MAX;
+-- 
+  Kiryl Shutsemau / Kirill A. Shutemov
 
