@@ -1,253 +1,111 @@
-Return-Path: <linux-doc+bounces-51794-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51798-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE244AF6787
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 03:56:41 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2141AF67BD
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 04:08:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A3BBA7AD195
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 01:55:02 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0D579165B81
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 02:08:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C40A8226533;
-	Thu,  3 Jul 2025 01:52:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04A41145323;
+	Thu,  3 Jul 2025 02:07:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="BuSJAtPF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
+Received: from out-177.mta1.migadu.com (out-177.mta1.migadu.com [95.215.58.177])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49AAA246BC1;
-	Thu,  3 Jul 2025 01:52:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.254.200.128
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0B3B78F3B
+	for <linux-doc@vger.kernel.org>; Thu,  3 Jul 2025 02:07:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751507526; cv=none; b=iMLe5oademVraVGEcXaREDPiZGZWzkYnQSXknRk+UD9MY3P9KC96ro7EQlfsnCunGqY8n9rxhx2/VFSg5qTJNbOkgBg4uUe2rJDyjeRdAYgxUH99enEnBCWpQ3wkWtGvYMIaisTyuGhvJx37VP142VuK8qHUBjmH3AiV+6VpGrE=
+	t=1751508468; cv=none; b=cuTxgSkmnpr77LSRiLCDcyq+OyzQ2VsHMEJ2wUCzQfl88uEzskDjniEwcyE57WHp/7dwAoH2CODmsp0WqN4AwABCjLr9Trc3xHxDGcFkAbUFI+w81k65sbAdwz2GRYL582mia95ECFiNJ4H2VreomCVtMv8iAcBXw/1f3ckd73o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751507526; c=relaxed/simple;
-	bh=Mm7IZiFNMnbxKSXQgtSuhJG0N/BFhn7Go1NY+dUy9fM=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=AJ81yJQCvijFf50uK7OLyLjZe0Smv0713PcGdbdhEzd+6tliyWKbcLUiato0aQYBMBgrhNUUOjnUwu9s63b/WgdSe0vQXMUcX1+5diFuXrxZTSbWXwNSD6M6NnPPFpmWb6UCCURZnvc60j3TmJZ0YArSN4R7Xv8QsmxfesIVbdQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.254.200.128
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
-X-QQ-mid: zesmtpsz8t1751507413tdf0abb81
-X-QQ-Originating-IP: +QrC9xChzcH6HQz/g7luc9deusWmGb+bP+AHfYQz9fI=
-Received: from localhost.localdomain ( [203.174.112.180])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Thu, 03 Jul 2025 09:50:11 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 11652823405052598181
-EX-QQ-RecipientCnt: 22
-From: Dong Yibo <dong100@mucse.com>
-To: davem@davemloft.net,
-	edumazet@google.com,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	horms@kernel.org,
-	corbet@lwn.net,
-	andrew+netdev@lunn.ch,
-	gur.stavi@huawei.com,
-	maddy@linux.ibm.com,
-	mpe@ellerman.id.au,
-	danishanwar@ti.com,
-	lee@trager.us,
-	gongfan1@huawei.com,
-	lorenzo@kernel.org,
-	geert+renesas@glider.be,
-	Parthiban.Veerasooran@microchip.com,
-	lukas.bulwahn@redhat.com,
-	alexanderduyck@fb.com
-Cc: netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	dong100@mucse.com
-Subject: [PATCH 15/15] net: rnpgbe: Add ITR for rx
-Date: Thu,  3 Jul 2025 09:48:59 +0800
-Message-Id: <20250703014859.210110-16-dong100@mucse.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250703014859.210110-1-dong100@mucse.com>
-References: <20250703014859.210110-1-dong100@mucse.com>
+	s=arc-20240116; t=1751508468; c=relaxed/simple;
+	bh=c2CmoXDvE21WTyGgTl5E1T4oamryaJdlgHA/gaSA2m8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=OPdTIgoCYWDwlK+yDIO7ZXNMgsLxCVa950WXgsGjNPLlqu74ulVkwPzzlWs9NMZK6VIsAzq+b9DV+BV5xtikDDHazviSuTNrz35S+0vJaLUVnQVglq+SrSyQVq53tnnS6bSx2CeQBvopE2QDSZfN9O5qK986j1d/0uVPZ+h9cbU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=BuSJAtPF; arc=none smtp.client-ip=95.215.58.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <5fe7c587-bd82-4f87-aa2c-0bf7a4cdf9e8@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1751508455;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=GJsm75n2qt6vXStmPb4i4o2aGA8okooHB2sY2UXHM04=;
+	b=BuSJAtPFJUJCix8FoXv6Yzufz8svEf1omaHYwM+twmBjmtp+/iT47bQYfviuLF4wULC2sK
+	UGOo0dTo7h77gBD/xXJN8+xzkWdXnr/rO9ZT1uwHns1gdY/fE7oRiacZuguBjkr+WiQXGb
+	3V7qUTjgHIHnBpxj++AatItFlVlMz4o=
+Date: Thu, 3 Jul 2025 10:07:29 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Subject: Re: [PATCH 00/12] [PATCH 00/11] Thrash up the parser/output interface
+To: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org,
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+ Akira Yokosawa <akiyks@gmail.com>
+References: <20250702223524.231794-1-corbet@lwn.net>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Yanteng Si <si.yanteng@linux.dev>
+In-Reply-To: <20250702223524.231794-1-corbet@lwn.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: Mwdq8jAc4iJQ29n369uInzBmbrxH3n79YHKv6bFVykyD3qhJv2ffwALa
-	yxI57zkMoujfqd6hP99eH2JremvaELM8TAKEj93PqCUHF7SFtG4IChGsLzeFj+3Aa8b8Asl
-	1rhSBawUhEDE+HINYT9vaE6Nm2UbZZKNj+NsQmguMDsq+/qJRIs/PHOhMFbEG1SsqujZ9Ao
-	XxDbfnL0Ba0h5Y7IE1QqxdfW2jrsYcwjwJZ9uHj6gnPDpE2oigbl0NQTi6kU30BXyrjlW6u
-	chyt9nfVZ9d44rSYW9KCCRRBXxckUSIhPq+cAWupd/6uTrVaPxp0WQpDLpUd9M3c+rVG0sM
-	PVkFh80bH9ByPr+9Y4kVOehxNkdZJVMTPWVIiaZQeQmJM113fRuKUZst3qTxyYYR4lkhSCp
-	BumBSW2kQwIfyTfy064bZrzNqD2XEuZW8b2qEQU1eGX2dejHah5tsodIvIT4erNEEctuwWF
-	13xs6Jm0REhTLooTu1M4JpwUcyNdtuTbMPQ9UEMdMJTx1KcSdcVdDfpgtCRCBAI+J/65AJj
-	X4LJKm9JN59TKZMv9rcl+8OpIAd/hLdJUxEb9ImbKiW18k+qNVCLeo8MYqBf5D1rO4P3IR1
-	JTx01o6KvLODyUiIHZ00QLMUv4vLUwh50KCeyjLihMv2ogbk29Tjjfz4Rnty1lWrwoW2pzW
-	dQtNy10SpDiqpmTPl9zvq40fJ3crOgASfASERvSVbAjTtx5kUg8xi4pAv5wXGs41PmZQULO
-	AWdYpNH8QwncM3QUTvPA0YgHy+8cQbrX5+68COkEOyV67w5sutxSnxKTzPGfL3eJU1hTAQc
-	nbIlsfKX3gMvwWgTa1GLL0zNc4PYCBlekz02ryzbYHCrVD5cH4soQL07hHxvP5mpBskblbY
-	VhIPEFKw9JXVpTCHde1O/fkMtjvcMQk8XrDiD4mBGec+vCc/7xhBykoTDLNzJFN61+yt1pt
-	TbLFhKJlSmuDGn29UEBmpNe4P13CKsni7hzea8ZxZynTjhdp26nIrDs93zl6enshDsxwUxA
-	Zd5Xwzff0uUh309dZBOAkr5abfIsC/1HxgfFwvbyqnn9kdIG9z
-X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
-X-QQ-RECHKSPAM: 0
+X-Migadu-Flow: FLOW_OUT
 
-Initialize itr function according to rx packets/bytes
 
-Signed-off-by: Dong Yibo <dong100@mucse.com>
----
- drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    |  5 +
- .../net/ethernet/mucse/rnpgbe/rnpgbe_lib.c    | 91 ++++++++++++++++++-
- 2 files changed, 95 insertions(+), 1 deletion(-)
+在 7/3/25 6:35 AM, Jonathan Corbet 写道:
+> [I'll slow down soon, honest - real work is piling up...]
+>
+> The kerneldoc parsing phase gathers all of the information about the
+> declarations of interest, then passes it through to the output phase as a
+> dict that is an unstructured blob of information; this organization has its
+> origins in the Perl version of the program.  It results in an interface
+> that is difficult to reason about, dozen-parameter function calls, and
+> other ills.
+>
+> Introduce a new class (KdocItem) to carry this information between the
+> parser and the output modules, and, step by step, modify the system to use
+> this class in a more structured way.  This could be taken further by
+> creating a subclass of KdocItem for each declaration type (function,
+> struct, ...), but that is probably more structure than we need.
+>
+> As a final step, add some structure for the accumulation of the output
+> text.
+>
+> The result is (I hope) clearer code, the removal of a bunch of boilerplate,
+> and no changes to the generated output.
+>
+> Jonathan Corbet (12):
+>    docs: kdoc; Add a rudimentary class to represent output items
+>    docs: kdoc: simplify the output-item passing
+>    docs: kdoc: drop "sectionlist"
+>    docs: kdoc: Centralize handling of the item section list
+>    docs: kdoc: remove the "struct_actual" machinery
+>    docs: kdoc: use self.entry.parameterlist directly in check_sections()
+>    docs: kdoc: Coalesce parameter-list handling
+>    docs: kdoc: Regularize the use of the declaration name
+>    docs: kdoc: straighten up dump_declaration()
+>    docs: kdoc: directly access the always-there KdocItem fields
+>    docs: kdoc: clean up check_sections()
+>    docs: kdoc: Improve the output text accumulation
 
-diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-index 0b6ba4c3a6cb..8e692da05eb7 100644
---- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-+++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-@@ -551,6 +551,8 @@ struct mucse_ring_container {
- 	unsigned int total_packets;
- 	u16 work_limit;
- 	u16 count;
-+	u16 itr;
-+	int update_count;
- };
- 
- struct mucse_q_vector {
-@@ -705,6 +707,9 @@ static inline __le16 rnpgbe_test_staterr(union rnpgbe_rx_desc *rx_desc,
- 
- #define M_TRY_LINK_TIMEOUT (4 * HZ)
- 
-+#define M_LOWEREST_ITR (5)
-+#define M_4K_ITR (980)
-+
- #define M_RX_BUFFER_WRITE (16)
- #define m_rd_reg(reg) readl((void *)(reg))
- #define m_wr_reg(reg, val) writel((val), (void *)(reg))
-diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_lib.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_lib.c
-index 05073663ad0e..5d82f063eade 100644
---- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_lib.c
-+++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_lib.c
-@@ -681,6 +681,62 @@ static int rnpgbe_clean_rx_irq(struct mucse_q_vector *q_vector,
- 	return fail_alloc ? budget : total_rx_packets;
- }
- 
-+static void rnpgbe_update_ring_itr_rx(struct mucse_q_vector *q_vector)
-+{
-+	int new_val = q_vector->itr_rx;
-+	int avg_wire_size = 0;
-+	struct mucse *mucse = q_vector->mucse;
-+	unsigned int packets;
-+
-+	switch (mucse->link_speed) {
-+	case M_LINK_SPEED_10_FULL:
-+	case M_LINK_SPEED_100_FULL:
-+		new_val = M_4K_ITR;
-+		goto set_itr_val;
-+	default:
-+		break;
-+	}
-+
-+	packets = q_vector->rx.total_packets;
-+	if (packets)
-+		avg_wire_size = max_t(u32, avg_wire_size,
-+				      q_vector->rx.total_bytes / packets);
-+
-+	/* if avg_wire_size isn't set no work was done */
-+	if (!avg_wire_size)
-+		goto clear_counts;
-+
-+	/* Add 24 bytes to size to account for CRC, preamble, and gap */
-+	avg_wire_size += 24;
-+
-+	/* Don't starve jumbo frames */
-+	avg_wire_size = min(avg_wire_size, 3000);
-+
-+	/* Give a little boost to mid-size frames */
-+	if (avg_wire_size > 300 && avg_wire_size < 1200)
-+		new_val = avg_wire_size / 3;
-+	else
-+		new_val = avg_wire_size / 2;
-+
-+	if (new_val < M_LOWEREST_ITR)
-+		new_val = M_LOWEREST_ITR;
-+
-+set_itr_val:
-+	if (q_vector->rx.itr != new_val) {
-+		q_vector->rx.update_count++;
-+		if (q_vector->rx.update_count >= 2) {
-+			q_vector->rx.itr = new_val;
-+			q_vector->rx.update_count = 0;
-+		}
-+	} else {
-+		q_vector->rx.update_count = 0;
-+	}
-+
-+clear_counts:
-+	q_vector->rx.total_bytes = 0;
-+	q_vector->rx.total_packets = 0;
-+}
-+
- /**
-  * rnpgbe_poll - NAPI Rx polling callback
-  * @napi: structure for representing this polling device
-@@ -725,6 +781,7 @@ static int rnpgbe_poll(struct napi_struct *napi, int budget)
- 		return budget;
- 	/* all work done, exit the polling mode */
- 	if (likely(napi_complete_done(napi, work_done))) {
-+		rnpgbe_update_ring_itr_rx(q_vector);
- 		if (!test_bit(__MUCSE_DOWN, &mucse->state))
- 			rnpgbe_irq_enable_queues(mucse, q_vector);
- 	}
-@@ -1677,12 +1734,44 @@ void rnpgbe_clean_all_tx_rings(struct mucse *mucse)
- 		rnpgbe_clean_tx_ring(mucse->tx_ring[i]);
- }
- 
-+static void rnpgbe_write_eitr_rx(struct mucse_q_vector *q_vector)
-+{
-+	struct mucse *mucse = q_vector->mucse;
-+	struct mucse_hw *hw = &mucse->hw;
-+	u32 new_itr_rx = q_vector->rx.itr;
-+	u32 old_itr_rx = q_vector->rx.itr;
-+	struct mucse_ring *ring;
-+
-+	new_itr_rx = new_itr_rx * hw->usecstocount;
-+	/* if we are in auto mode write to hw */
-+	mucse_for_each_ring(ring, q_vector->rx) {
-+		ring_wr32(ring, DMA_REG_RX_INT_DELAY_TIMER, new_itr_rx);
-+		if (ring->ring_flags & M_RING_LOWER_ITR) {
-+			/* if we are already in this mode skip */
-+			if (q_vector->itr_rx == M_LOWEREST_ITR)
-+				continue;
-+			ring_wr32(ring, DMA_REG_RX_INT_DELAY_PKTCNT, 1);
-+			ring_wr32(ring, DMA_REG_RX_INT_DELAY_TIMER,
-+				  M_LOWEREST_ITR);
-+			q_vector->itr_rx = M_LOWEREST_ITR;
-+		} else {
-+			if (new_itr_rx == q_vector->itr_rx)
-+				continue;
-+			ring_wr32(ring, DMA_REG_RX_INT_DELAY_TIMER,
-+				  new_itr_rx);
-+			ring_wr32(ring, DMA_REG_RX_INT_DELAY_PKTCNT,
-+				  mucse->rx_frames);
-+			q_vector->itr_rx = old_itr_rx;
-+		}
-+	}
-+}
-+
- static irqreturn_t rnpgbe_msix_clean_rings(int irq, void *data)
- {
- 	struct mucse_q_vector *q_vector = (struct mucse_q_vector *)data;
- 
- 	rnpgbe_irq_disable_queues(q_vector);
--
-+	rnpgbe_write_eitr_rx(q_vector);
- 	if (q_vector->rx.ring || q_vector->tx.ring)
- 		napi_schedule_irqoff(&q_vector->napi);
- 
--- 
-2.25.1
+Reviewed-by: Yanteng Si <siyanteng@cqsoftware.com.cn>
+
+
+Thanks,
+
+Yanteng
+
 
 
