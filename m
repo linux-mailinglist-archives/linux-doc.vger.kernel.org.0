@@ -1,136 +1,165 @@
-Return-Path: <linux-doc+bounces-51897-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51893-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EE6FAF7DD4
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 18:28:40 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 92394AF7DCF
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 18:28:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A9CB64E2069
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 16:27:39 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3E3AE1898F13
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 16:26:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89CB6257423;
-	Thu,  3 Jul 2025 16:26:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ABA8224C07A;
+	Thu,  3 Jul 2025 16:26:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F9xYnMul"
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="qfuQz9I9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DBB02550BA;
-	Thu,  3 Jul 2025 16:26:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADFE424C09E;
+	Thu,  3 Jul 2025 16:26:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751560017; cv=none; b=nnlsyNGcjzqmPlowdHZDGfiGMwjmJDH1cJvBbp6PCNTB7uaB1biXYhHIZajfFbMc0TDnXO9c9w1w9ovPGHdsbxLnyI3wNlqMoqb77fqZQQj6rqKhaUbWtrF2abhUQ/vOqwKg+sXVR12mQJ6jkJACB4qHPSGLk3XvuSL1LIqIk7o=
+	t=1751559962; cv=none; b=B8g7G7muRyCbAP4sOT0wgHwbq519678DTBipd82EBoDYADBoxkasM1xNzjJ+SPhyyMmiQZ8mIaiS8XPBhFZxPB1kcukC2JI5yzzUe2vFKSlPivemOcEFwFyvGSrrkV1hhLKslMp2fcZEepZgakPzE1+C/wS3XDMiwhDNXafSEow=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751560017; c=relaxed/simple;
-	bh=0se/eq+gWDDz/zPGLfe64NetxynymgwpyPlKXYP8XIU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=TRcCSWFJybUQIbCzOy3ZrmrDXtqxlSbUs/QRebW9ATKsjNU5UVoLXsaEamHlRhaQE52jJ+F/UaxUl/SEhUZNZJhk0jB2iuM+7PjVSuBgP8L9HcoCzZppBykxQvJ/ZalbbOsqtimh46AtfyFDLurVZUBb/AMHCOb4KAeGY0TID+w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F9xYnMul; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57858C4CEE3;
-	Thu,  3 Jul 2025 16:26:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1751560015;
-	bh=0se/eq+gWDDz/zPGLfe64NetxynymgwpyPlKXYP8XIU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=F9xYnMulVuNGNvAGTBMpLlkUdOXV29MzVXEe033VuqVu/tGe+RWsJngzdz4IffUZF
-	 TlFfr0OzdjCXXzY5GuscScdCqMN4WdRq00y7yQ79g33zU0CeoS7fDu5zmWPpovhul5
-	 ZpqA/v/ijUwmYLGzJmt8RMJ2UuKToISDuzKDPkyqtBjsZ0ev9agFlQ4yyBi80TBfV+
-	 c9pcjON/ohz7/AITWDxJYIcAcipay9tALB0V3775LUsr27Z0zso2ElZBpm547GWVvL
-	 /Seqd/LMJsI+P9t4/SG/wnc32xVf9Rwn8YlZIaCiUv6D0bP+sqI5ZeiRE+LEbZPRwp
-	 cUgjf2kBSiWFA==
-From: Mark Brown <broonie@kernel.org>
-Date: Thu, 03 Jul 2025 17:23:24 +0100
-Subject: [PATCH v2 3/3] kselftest/arm64: Add lsfe to the hwcaps test
+	s=arc-20240116; t=1751559962; c=relaxed/simple;
+	bh=QebVaURP5uWhfVmJTa2ANVbxyzaQ3bbX6YuMh/FiStU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=uryOEcSqdNpwBZSyYJa49sY+7QFcLNkoNVj/vsbk0jLy716vra6XUvr4Mf5YObFyLh1YP53rPhY/euj+h4W5jZKn/z7bENgiRs5i/qqJOSBMW0LBLiJEiF1tcIKStwqo13U5Zwk5ZkT+dqyFzapWGU/e+6ZThqZPTm/ItLR4XCY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=qfuQz9I9; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=qnHNMB9Wfamba1Y4mNkWqdOlZbzxSMLmhoIZOCtejcY=; b=qfuQz9I9tdu+smZ2gd5rOAhiwq
+	wFjbdh+nAEOUd4BEdVsi5KxZYYbKz0yxUDGD2JX9Wm2o5M/RmZaeZGJ379YwoEJldFY7Z6u9HF8Nc
+	J7Ie0cUhJYCUEX7qbRI5CLtmWuq2S4eQG15GFb9cZlnlEPhrbfkL/ydo9iA5URW8ttgA=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1uXMkT-0007PZ-4b; Thu, 03 Jul 2025 18:25:21 +0200
+Date: Thu, 3 Jul 2025 18:25:21 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Dong Yibo <dong100@mucse.com>
+Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+	pabeni@redhat.com, horms@kernel.org, corbet@lwn.net,
+	andrew+netdev@lunn.ch, gur.stavi@huawei.com, maddy@linux.ibm.com,
+	mpe@ellerman.id.au, danishanwar@ti.com, lee@trager.us,
+	gongfan1@huawei.com, lorenzo@kernel.org, geert+renesas@glider.be,
+	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
+	alexanderduyck@fb.com, netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 01/15] net: rnpgbe: Add build support for rnpgbe
+Message-ID: <0bf45c1a-96ec-4a9d-9c41-fcb3d366d6a3@lunn.ch>
+References: <20250703014859.210110-1-dong100@mucse.com>
+ <20250703014859.210110-2-dong100@mucse.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250703-arm64-lsfe-v2-3-eced80999cb4@kernel.org>
-References: <20250703-arm64-lsfe-v2-0-eced80999cb4@kernel.org>
-In-Reply-To: <20250703-arm64-lsfe-v2-0-eced80999cb4@kernel.org>
-To: Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>, 
- Joey Gouly <joey.gouly@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
- Shuah Khan <shuah@kernel.org>
-Cc: linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, kvmarm@lists.linux.dev, 
- linux-kselftest@vger.kernel.org, Mark Brown <broonie@kernel.org>
-X-Mailer: b4 0.15-dev-cff91
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1403; i=broonie@kernel.org;
- h=from:subject:message-id; bh=0se/eq+gWDDz/zPGLfe64NetxynymgwpyPlKXYP8XIU=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBoZq9DrX1z69CleuGaYuiPYfm4x17/sToCyk2zP
- Nm99VorSU2JATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCaGavQwAKCRAk1otyXVSH
- 0LtRB/45/MTmfubRL3pBtMgXgWZMq82PR/jkn5ACdHwS7IGViT7FD2ZmgEzsylFTLDfTmP4bjqb
- pbVkdOsCSZJylYyOKBy6J9aDXd7tjwVYbfLr1jFUylvwqe2j5aZ27QCwhe1PC+DOzTvNkqEzvEB
- UIUPledQkbmnZJXMySkE4RVNqUaTB8ws5T8BGrQjz+ncH0gVf+yZfXpkdxiXetLZ4QTqNj1FjDR
- ip9vM1mAiEyMlpLqJeNt0L/XcFLEWNFVgOO78k+oVlAMlESket+6r99C6oAxaBjOv9nmGxTRVCw
- 0i3NukLDRtFDCW/v6+sTv43stjBooDOAlxzXewZLYPF/ko5z
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250703014859.210110-2-dong100@mucse.com>
 
-This feature has no traps associated with it so the SIGILL is not reliable.
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -16001,11 +16001,7 @@ F:	tools/testing/vma/
+>  
+>  MEMORY MAPPING - LOCKING
+>  M:	Andrew Morton <akpm@linux-foundation.org>
+> -M:	Suren Baghdasaryan <surenb@google.com>
+> -M:	Liam R. Howlett <Liam.Howlett@oracle.com>
+> -M:	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+> -R:	Vlastimil Babka <vbabka@suse.cz>
+> -R:	Shakeel Butt <shakeel.butt@linux.dev>
+> +M:	Suren Baghdasaryan <surenb@google.com> M:	Liam R. Howlett <Liam.Howlett@oracle.com> M:	Lorenzo Stoakes <lorenzo.stoakes@oracle.com> R:	Vlastimil Babka <vbabka@suse.cz> R:	Shakeel Butt <shakeel.butt@linux.dev>
 
-Signed-off-by: Mark Brown <broonie@kernel.org>
----
- tools/testing/selftests/arm64/abi/hwcap.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+You clearly have not reviewed your own patch, or you would not be
+changing this section of the MAINTAINERs file.
 
-diff --git a/tools/testing/selftests/arm64/abi/hwcap.c b/tools/testing/selftests/arm64/abi/hwcap.c
-index 35f521e5f41c..faa0f82f27e0 100644
---- a/tools/testing/selftests/arm64/abi/hwcap.c
-+++ b/tools/testing/selftests/arm64/abi/hwcap.c
-@@ -17,6 +17,8 @@
- #include <asm/sigcontext.h>
- #include <asm/unistd.h>
- 
-+#include <linux/auxvec.h>
-+
- #include "../../kselftest.h"
- 
- #define TESTS_PER_HWCAP 3
-@@ -165,6 +167,18 @@ static void lse128_sigill(void)
- 		     : "cc", "memory");
- }
- 
-+static void lsfe_sigill(void)
-+{
-+	float __attribute__ ((aligned (16))) mem = 0;
-+	register float *memp asm ("x0") = &mem;
-+
-+	/* LDFADD H0, H0, [X0] */
-+	asm volatile(".inst 0x7c200000"
-+		     : "+r" (memp)
-+		     :
-+		     : "cc", "memory");
-+}
-+
- static void lut_sigill(void)
- {
- 	/* LUTI2 V0.16B, { V0.16B }, V[0] */
-@@ -758,6 +772,13 @@ static const struct hwcap_data {
- 		.cpuinfo = "lse128",
- 		.sigill_fn = lse128_sigill,
- 	},
-+	{
-+		.name = "LSFE",
-+		.at_hwcap = AT_HWCAP3,
-+		.hwcap_bit = HWCAP3_LSFE,
-+		.cpuinfo = "lsfe",
-+		.sigill_fn = lsfe_sigill,
-+	},
- 	{
- 		.name = "LUT",
- 		.at_hwcap = AT_HWCAP2,
+> +if NET_VENDOR_MUCSE
+> +
+> +config MGBE
+> +	tristate "Mucse(R) 1GbE PCI Express adapters support"
+> +        depends on PCI
+> +	select PAGE_POOL
+> +        help
+> +          This driver supports Mucse(R) 1GbE PCI Express family of
+> +          adapters.
+> +
+> +	  More specific information on configuring the driver is in
+> +	  <file:Documentation/networking/device_drivers/ethernet/mucse/rnpgbe.rst>.
+> +
+> +          To compile this driver as a module, choose M here. The module
+> +          will be called rnpgbe.
 
--- 
-2.39.5
+There is some odd indentation here.
 
+> +#include <linux/string.h>
+> +#include <linux/etherdevice.h>
+> +
+> +#include "rnpgbe.h"
+> +
+> +char rnpgbe_driver_name[] = "rnpgbe";
+> +static const char rnpgbe_driver_string[] =
+> +	"mucse 1 Gigabit PCI Express Network Driver";
+> +#define DRV_VERSION "1.0.0"
+> +const char rnpgbe_driver_version[] = DRV_VERSION;
+
+Driver versions are pointless, since they never change, yet the kernel
+around the driver changes all the time. Please drop.
+
+> +static const char rnpgbe_copyright[] =
+> +	"Copyright (c) 2020-2025 mucse Corporation.";
+
+Why do you need this as a string?
+
+> +static int rnpgbe_add_adpater(struct pci_dev *pdev)
+> +{
+> +	struct mucse *mucse = NULL;
+> +	struct net_device *netdev;
+> +	static int bd_number;
+> +
+> +	pr_info("====  add rnpgbe queues:%d ====", RNPGBE_MAX_QUEUES);
+
+If you are still debugging this driver, please wait until it is mostly
+bug free before submitting. I would not expect a production quality
+driver to have prints like this.
+
+> +	netdev = alloc_etherdev_mq(sizeof(struct mucse), RNPGBE_MAX_QUEUES);
+> +	if (!netdev)
+> +		return -ENOMEM;
+> +
+> +	mucse = netdev_priv(netdev);
+> +	memset((char *)mucse, 0x00, sizeof(struct mucse));
+
+priv is guaranteed to be zero'ed.
+
+> +static void rnpgbe_shutdown(struct pci_dev *pdev)
+> +{
+> +	bool wake = false;
+> +
+> +	__rnpgbe_shutdown(pdev, &wake);
+
+Please avoid using __ function names. Those are supposed to be
+reserved for the compiler. Sometimes you will see single _ for
+functions which have an unlocked version and a locked version.
+
+> +static int __init rnpgbe_init_module(void)
+> +{
+> +	int ret;
+> +
+> +	pr_info("%s - version %s\n", rnpgbe_driver_string,
+> +		rnpgbe_driver_version);
+> +	pr_info("%s\n", rnpgbe_copyright);
+
+Please don't spam the log. Only print something on error.
+
+	Andrew
 
