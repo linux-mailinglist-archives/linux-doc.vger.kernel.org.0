@@ -1,62 +1,60 @@
-Return-Path: <linux-doc+bounces-51893-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51898-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92394AF7DCF
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 18:28:04 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A158AF7E2D
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 18:51:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3E3AE1898F13
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 16:26:24 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C1A877A3308
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 16:50:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ABA8224C07A;
-	Thu,  3 Jul 2025 16:26:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3FEA20102C;
+	Thu,  3 Jul 2025 16:51:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="qfuQz9I9"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QCyLAN9U"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADFE424C09E;
-	Thu,  3 Jul 2025 16:26:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B9E233DF;
+	Thu,  3 Jul 2025 16:51:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751559962; cv=none; b=B8g7G7muRyCbAP4sOT0wgHwbq519678DTBipd82EBoDYADBoxkasM1xNzjJ+SPhyyMmiQZ8mIaiS8XPBhFZxPB1kcukC2JI5yzzUe2vFKSlPivemOcEFwFyvGSrrkV1hhLKslMp2fcZEepZgakPzE1+C/wS3XDMiwhDNXafSEow=
+	t=1751561479; cv=none; b=n0B68CATdkms+cWeKiq1NIwUg7a8lmsjxfRTWN8qwEGvaClhaZDmMyDYoqf4t6oP0NONnHuiP6ilu3ry8SUtR4kU0nyZLaKTDHCvg3cBZkCxzslfArpabUTZfEijT3wJiPzm3UTluffBw06aJazbZEmgpkEDsHpeIwXAqhjLmsw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751559962; c=relaxed/simple;
-	bh=QebVaURP5uWhfVmJTa2ANVbxyzaQ3bbX6YuMh/FiStU=;
+	s=arc-20240116; t=1751561479; c=relaxed/simple;
+	bh=KgNWAEPsvGLZYpBhpkLVwDOSCjtLzdipdUOgdEkAzQc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uryOEcSqdNpwBZSyYJa49sY+7QFcLNkoNVj/vsbk0jLy716vra6XUvr4Mf5YObFyLh1YP53rPhY/euj+h4W5jZKn/z7bENgiRs5i/qqJOSBMW0LBLiJEiF1tcIKStwqo13U5Zwk5ZkT+dqyFzapWGU/e+6ZThqZPTm/ItLR4XCY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=qfuQz9I9; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=qnHNMB9Wfamba1Y4mNkWqdOlZbzxSMLmhoIZOCtejcY=; b=qfuQz9I9tdu+smZ2gd5rOAhiwq
-	wFjbdh+nAEOUd4BEdVsi5KxZYYbKz0yxUDGD2JX9Wm2o5M/RmZaeZGJ379YwoEJldFY7Z6u9HF8Nc
-	J7Ie0cUhJYCUEX7qbRI5CLtmWuq2S4eQG15GFb9cZlnlEPhrbfkL/ydo9iA5URW8ttgA=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1uXMkT-0007PZ-4b; Thu, 03 Jul 2025 18:25:21 +0200
-Date: Thu, 3 Jul 2025 18:25:21 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Dong Yibo <dong100@mucse.com>
-Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
-	pabeni@redhat.com, horms@kernel.org, corbet@lwn.net,
-	andrew+netdev@lunn.ch, gur.stavi@huawei.com, maddy@linux.ibm.com,
-	mpe@ellerman.id.au, danishanwar@ti.com, lee@trager.us,
-	gongfan1@huawei.com, lorenzo@kernel.org, geert+renesas@glider.be,
-	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
-	alexanderduyck@fb.com, netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 01/15] net: rnpgbe: Add build support for rnpgbe
-Message-ID: <0bf45c1a-96ec-4a9d-9c41-fcb3d366d6a3@lunn.ch>
-References: <20250703014859.210110-1-dong100@mucse.com>
- <20250703014859.210110-2-dong100@mucse.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=gl8Jcl9ugglozNN0k53kEkGf7GivQfVVdeI54ibBaSyt5Q0ZT8JjHYg7sPOudPKdNS64OoST4IW/DdsYuXUa0XWuuYB+A9WCwQQWQm3htsSGq/EljDO+OR6PTu1qXKblG3ppzjowVVnfE+C1DA+dt9mwbLiBWqU15/I4AkelXUo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QCyLAN9U; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12CFCC4CEE3;
+	Thu,  3 Jul 2025 16:51:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1751561478;
+	bh=KgNWAEPsvGLZYpBhpkLVwDOSCjtLzdipdUOgdEkAzQc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=QCyLAN9UKompBN/Txlb0N5sKTjycQuUVbNWq4uLmWMH+EOFlkomwkRhux+XdKcStW
+	 C74wJfVSHPKYVez5me2dCemHJjc2S9KvtOszihXM/VZ/cw+mW3PrFJP3gmDL69LCvZ
+	 PjqOKJRdOFzlptOQn54UQPBwAB8Uvx9SF2aSgnH8/+meQiHY0sXkJ+tdWEZ2QHNKrl
+	 3VH6OjTGPBVP6ZVeCL9ImVd3UWXM2igfFdg6OmWh35wXgCuE2LEzYVguBxZ+0vmxn/
+	 WnpiGFITbqBAASKYir2sRwlPWv9ZxmxqZKMXEHM+PxBAj8PUUNpXQ14xAGY5ggACOb
+	 cJbuiF4zwJ3nA==
+Date: Thu, 3 Jul 2025 09:51:17 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Cc: Joanne Koong <joannelkoong@gmail.com>, linux-fsdevel@vger.kernel.org,
+	miklos@szeredi.hu, brauner@kernel.org, anuj20.g@samsung.com,
+	linux-xfs@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-block@vger.kernel.org, gfs2@lists.linux.dev,
+	kernel-team@meta.com
+Subject: Re: [PATCH v3 03/16] iomap: refactor the writeback interface
+Message-ID: <20250703165117.GA2672049@frogsfrogsfrogs>
+References: <20250624022135.832899-1-joannelkoong@gmail.com>
+ <20250624022135.832899-4-joannelkoong@gmail.com>
+ <20250702171353.GW10009@frogsfrogsfrogs>
+ <20250703121654.GA19114@lst.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,101 +63,66 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250703014859.210110-2-dong100@mucse.com>
+In-Reply-To: <20250703121654.GA19114@lst.de>
 
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -16001,11 +16001,7 @@ F:	tools/testing/vma/
->  
->  MEMORY MAPPING - LOCKING
->  M:	Andrew Morton <akpm@linux-foundation.org>
-> -M:	Suren Baghdasaryan <surenb@google.com>
-> -M:	Liam R. Howlett <Liam.Howlett@oracle.com>
-> -M:	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-> -R:	Vlastimil Babka <vbabka@suse.cz>
-> -R:	Shakeel Butt <shakeel.butt@linux.dev>
-> +M:	Suren Baghdasaryan <surenb@google.com> M:	Liam R. Howlett <Liam.Howlett@oracle.com> M:	Lorenzo Stoakes <lorenzo.stoakes@oracle.com> R:	Vlastimil Babka <vbabka@suse.cz> R:	Shakeel Butt <shakeel.butt@linux.dev>
+On Thu, Jul 03, 2025 at 02:16:54PM +0200, Christoph Hellwig wrote:
+> On Wed, Jul 02, 2025 at 10:13:53AM -0700, Darrick J. Wong wrote:
+> > > +    int (*writeback_range)(struct iomap_writepage_ctx *wpc,
+> > > +    		struct folio *folio, u64 pos, unsigned int len, u64 end_pos);
+> > 
+> > Why does @pos change from loff_t to u64 here?  Are we expecting
+> > filesystems that set FOP_UNSIGNED_OFFSET?
+> 
+> It doesn't really change, it matches what iomap_writepage_map_blocks
+> was doing.  I guess it simply doesn't fix the existing inconsistency.
+> 
+> > > +    int (*submit_ioend)(struct iomap_writepage_ctx *wpc, int status);
+> > 
+> > Nit:   ^^ indenting change here.
+> 
+> Yeah, RST formatting is a mess unfortunately.   I think the problem is
+> that the exiting code uses 4 space indents.  I wonder if that's required
+> by %##% RST?
 
-You clearly have not reviewed your own patch, or you would not be
-changing this section of the MAINTAINERs file.
+It's a code block, so it's not going to make the rst parser choke.
+However it will result in an weirdly indented output:
 
-> +if NET_VENDOR_MUCSE
-> +
-> +config MGBE
-> +	tristate "Mucse(R) 1GbE PCI Express adapters support"
-> +        depends on PCI
-> +	select PAGE_POOL
-> +        help
-> +          This driver supports Mucse(R) 1GbE PCI Express family of
-> +          adapters.
-> +
-> +	  More specific information on configuring the driver is in
-> +	  <file:Documentation/networking/device_drivers/ethernet/mucse/rnpgbe.rst>.
-> +
-> +          To compile this driver as a module, choose M here. The module
-> +          will be called rnpgbe.
+ struct iomap_writeback_ops {
+     int (*map_blocks)(struct iomap_writepage_ctx *wpc, struct inode *inode,
+                       loff_t offset, unsigned len);
+     int (*submit_ioend)(struct iomap_writepage_ctx *wpc, int status);
+    void (*discard_folio)(struct folio *folio, loff_t pos);
+ };
 
-There is some odd indentation here.
+is what I got when I removed an indentation space from discard_folio.
+Hilariously it actually makes the "(" line up which appeals to my column
+aligning brain and actually looks better. :P
 
-> +#include <linux/string.h>
-> +#include <linux/etherdevice.h>
-> +
-> +#include "rnpgbe.h"
-> +
-> +char rnpgbe_driver_name[] = "rnpgbe";
-> +static const char rnpgbe_driver_string[] =
-> +	"mucse 1 Gigabit PCI Express Network Driver";
-> +#define DRV_VERSION "1.0.0"
-> +const char rnpgbe_driver_version[] = DRV_VERSION;
+So having now seriously undercut my own point, I'll relax to "meh do
+whatever".
 
-Driver versions are pointless, since they never change, yet the kernel
-around the driver changes all the time. Please drop.
+> > > +		if (wpc->iomap.type != IOMAP_HOLE)
+> > > +			*wb_pending = true;
+> > 
+> > /me wonders if this should be an outparam of ->writeback_range to signal
+> > that it actually added the folio to the writeback ioend chain?  Or maybe
+> > just a boolean in iomap_writepage_ctx that we clear before calling
+> > ->writeback_range and iomap_add_to_ioend can set it as appropriate?
+> 
+> What's the benefit of that?  A hole pretty clearly signal there is
+> no writeback here.
 
-> +static const char rnpgbe_copyright[] =
-> +	"Copyright (c) 2020-2025 mucse Corporation.";
+Fair enough.  In my head it was "the code that actually sets up the
+ioend should set this flag" but I guess we can detect it from the
+mapping after the fact instead of passing things around.
 
-Why do you need this as a string?
+> > Should this jump label should be named add_to_ioend or something?  We
+> > already mapped the blocks.  The same applies to the zoned version of
+> > this function.
+> 
+> The newer version already uses a map_blocks helper for both again.
 
-> +static int rnpgbe_add_adpater(struct pci_dev *pdev)
-> +{
-> +	struct mucse *mucse = NULL;
-> +	struct net_device *netdev;
-> +	static int bd_number;
-> +
-> +	pr_info("====  add rnpgbe queues:%d ====", RNPGBE_MAX_QUEUES);
+Ah, so it does.
 
-If you are still debugging this driver, please wait until it is mostly
-bug free before submitting. I would not expect a production quality
-driver to have prints like this.
-
-> +	netdev = alloc_etherdev_mq(sizeof(struct mucse), RNPGBE_MAX_QUEUES);
-> +	if (!netdev)
-> +		return -ENOMEM;
-> +
-> +	mucse = netdev_priv(netdev);
-> +	memset((char *)mucse, 0x00, sizeof(struct mucse));
-
-priv is guaranteed to be zero'ed.
-
-> +static void rnpgbe_shutdown(struct pci_dev *pdev)
-> +{
-> +	bool wake = false;
-> +
-> +	__rnpgbe_shutdown(pdev, &wake);
-
-Please avoid using __ function names. Those are supposed to be
-reserved for the compiler. Sometimes you will see single _ for
-functions which have an unlocked version and a locked version.
-
-> +static int __init rnpgbe_init_module(void)
-> +{
-> +	int ret;
-> +
-> +	pr_info("%s - version %s\n", rnpgbe_driver_string,
-> +		rnpgbe_driver_version);
-> +	pr_info("%s\n", rnpgbe_copyright);
-
-Please don't spam the log. Only print something on error.
-
-	Andrew
+--D
 
