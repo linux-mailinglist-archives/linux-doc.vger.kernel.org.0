@@ -1,124 +1,279 @@
-Return-Path: <linux-doc+bounces-51864-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51867-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57E32AF76A2
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 16:06:42 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6162AF76C2
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 16:10:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7CE50544EFD
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 14:04:12 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E92077ABB65
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Jul 2025 14:09:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A96641F16B;
-	Thu,  3 Jul 2025 14:04:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 215381F3B9E;
+	Thu,  3 Jul 2025 14:10:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=6wind.com header.i=@6wind.com header.b="TtSV7JHA"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="WXnTn2Rp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEF6619CC02
-	for <linux-doc@vger.kernel.org>; Thu,  3 Jul 2025 14:04:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DEB91A83F5;
+	Thu,  3 Jul 2025 14:10:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751551460; cv=none; b=tsMABi5GUyqWMKLVa8sfj4D/tNcHRFl1Ky8XUhuShwrvvw5XOHQWFY5jgw6VR2DbkqiWZpphM4cE7pyVVDkjObkDbNY/SRMlqfyYKAd0d1u+SLDg0lJThxgA20bUJbhI52/RmJXZ7syfOaXu2Xx7JHFY+xAvfQTOIMcFKs8Ro+g=
+	t=1751551851; cv=none; b=uB3q16pg8xyxwPHKtboXfvT1l3eXC1jK8nWyGOhkNnBWiL6opBRaQogZaZVW+kJVgQTNrgZHZL7rjcWbrLTMTVZ6hGTYc/NuCNNpUAIFL63e3tmNPE8LEU/o8+VWMRpcjwc8shDQ0RUPY1hAa0ClAAW3bTXqGNzHnor6jHkLOsQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751551460; c=relaxed/simple;
-	bh=2Ja0DRql3lathYbsnh14IuivZQ4FJiihEMyCBFg1y6E=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=I9jtjY6W23lSnw1d3T1JykCq8K2trNFiNXLgsaGd1WS41yE010m2Q+KvhoUeXdeNddD6FtITvxGKBMuGzvxfqeHjCtk7/uqaL25ps96Lw3w1r/LmzJK7SQksa3gN1qqSI0BVp+uqRl9Q0Nxb6nNXaOJ7in1evR2pcuqbdcMU+DE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=6wind.com; spf=pass smtp.mailfrom=6wind.com; dkim=pass (2048-bit key) header.d=6wind.com header.i=@6wind.com header.b=TtSV7JHA; arc=none smtp.client-ip=209.85.221.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=6wind.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=6wind.com
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-3a4e57d018cso1050021f8f.1
-        for <linux-doc@vger.kernel.org>; Thu, 03 Jul 2025 07:04:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=6wind.com; s=google; t=1751551457; x=1752156257; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:organization:content-language
-         :from:references:to:subject:reply-to:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=dDrJgI2UVALwAFMMfVSy2p69AmBm6S+zzAfjuuFd4NM=;
-        b=TtSV7JHA98z6F4GHH35zpp4gDOAvs7W87NmDHqfSW96LSgYzE2ROJfELFFr+YWQLwZ
-         t+ApmACziJ8WHArk3KjRI7peWUyiXamCAm0KTW0Rxngxz02dBm8L+euTcdeugX8tIyMC
-         2dxFv3s9SJ+czqY1sFB42Ciyw2JENoadUcJlZZkAJTjk5w0cFesvYGin7PQVZWIvlDU6
-         swCyJ27phZ0eGOUZt7nVNq3bXV4Bw1gyD872B886oIkPmtnK7xVi8gIU7D8GwicNJ7/U
-         +/SANI61epMP3IuIEFIS3QISo4DwPMZxImRtfN6NiVFSNkC80xHGjDuiCc08mHxVaOBw
-         H7LA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1751551457; x=1752156257;
-        h=content-transfer-encoding:in-reply-to:organization:content-language
-         :from:references:to:subject:reply-to:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dDrJgI2UVALwAFMMfVSy2p69AmBm6S+zzAfjuuFd4NM=;
-        b=kU3tHfOe4jJBYEATdwLviXWRU5ILLJY7q4wLwkBLwIBma6VkR+R7/e69TQeVHd/3Wo
-         Be2C+Z7KLD4nKLOlTQ7dfHEI7I3pVLFZmK6cGb0u9nH/Qh0wuz4mhbx3cRy263EkWfZU
-         Nt2GQtoYpwiD6lQhZbutE5m/IsjERvXUG7d7GgycHOzE9wJ5Tk+F7CX8hcMSwfuuZP94
-         M9cvrDHETBkOcr8i38BMck4A5k1OibS4vUzQNDdAsgoD+sxOSV/arP2NO/e2LygOKX75
-         s5rH3/BWRvLbeRwRKq+TSkR+0r3Z7UCPHNwAYBK3tfKTXcrGmtjYYEWR+VidTyG77mtc
-         uftQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVJSWbMz76++rt1JdXHVi5CHblJkKHdQ718vohMp2lC7+RoSCDKLixTYJIvD1+OyUGJl7h/qSD2224=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxsbxGlFCZeRniXpo4cv8/VhlAOvYfLL60EC6spSDD1WWPWKvlq
-	t4uFUs+Yzc8QHyEsGKtD+RZVdyEuHFB35yFb2/rg3Qmv5HDx2yoSN7W3ppTZMLil9ps=
-X-Gm-Gg: ASbGncuPq2zrn5yITSyTnO5QHWSIm1XdageW0KCzAdO+T6RhCQz+1W8WpKANNiAcxq0
-	0dStaI+ariI90D1tkbvpBwcnhR/5b2cGWyRIhPdSBaPCHBN4g8+NITZWubMSumHZzcDhC/YahNa
-	Id3TaBF3+wHKtjEN9KiGGfg8cyAGYcDuoBtY4V9D8bf/OTB44N8wLReksGJ9yTs/LFKiwwIPn+M
-	9TXaSY6oRBydkepDEmutlYH4MtOoOwwSNjob9J5HS8VPAWgm82j4VExhlkt9YbwNnYq0RmDqVL+
-	sLGXzAkLLApbObGz2l7RsooHW9YJtCX0qAwpMkktMPVTjpRPOvml/eZz5BD6qN3mxJlB6R1L86u
-	nmsWK+tPqRlSfRuFjHbmbzCMy4soRVvJe/dpueKo=
-X-Google-Smtp-Source: AGHT+IF5rCFDzUmRIqGfxH4DlbOtx7wQkmAk4Z9+J1BmQz88TZ603h5r95CnF2l2Jg+U+vKV4H4iEg==
-X-Received: by 2002:a5d:64c8:0:b0:3a4:e740:cd6e with SMTP id ffacd0b85a97d-3b37b7687c6mr698382f8f.8.1751551457041;
-        Thu, 03 Jul 2025 07:04:17 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:b41:c160:61e4:bb55:bb2c:ae50? ([2a01:e0a:b41:c160:61e4:bb55:bb2c:ae50])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-454a99c07fcsm27185885e9.35.2025.07.03.07.04.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 03 Jul 2025 07:04:14 -0700 (PDT)
-Message-ID: <1e896215-5f3a-40f9-9ab5-121109c48b3c@6wind.com>
-Date: Thu, 3 Jul 2025 16:04:14 +0200
+	s=arc-20240116; t=1751551851; c=relaxed/simple;
+	bh=UKZDj7Dr6U+nDPNDBDqz64P+s+8aLK1xb7gK+2NOHNc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=hyma+jkbwlBgfgnFMmJQ2Jf9F+oOWb+dDvsyFYJYNu2VGFR4Mlcs8TSPBWqYotxaoJlb3xfDYFzt18GZKJ3k0jn3YJXpZBTd13xwCGwZer4CzVFm3PwHEhuG+6H5dmDxGpvzQJ8s5wRYIOj9g1KMrKKH6PS+1MN8n3w0Ysi2d9s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=none smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=WXnTn2Rp; arc=none smtp.client-ip=198.175.65.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1751551850; x=1783087850;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=UKZDj7Dr6U+nDPNDBDqz64P+s+8aLK1xb7gK+2NOHNc=;
+  b=WXnTn2Rp1odHVNR1+bHMBR2HDYk36F5VDu8Lz8da1C8F72G2W0uUS1SI
+   5WJYLEjDQ7UGWBSukX9ZjJXTsKFGhSowtj1RahNqI3A+epWnUMHWD8g6L
+   08UsCAUXNxODJycr99c+IGfQr6kNGajqmmYbPH5/ZaywhaRts6qhM4l9L
+   6qmmLunoqVsyfWLISgPlFo0seSZYmC+KDbxyvCH0wkY1Jbm6PVq2NQ+68
+   hhjlbyHl1YyUb5dkwy+s+ts1PBDWlUbZWaaapJCqXSaMD/OuUg5d0mcZh
+   dLx5fo+YemLctLWrJ8s/Q/Nj8BuJFaL3AvGMy7jgCR5n/9So3sda1EwfE
+   A==;
+X-CSE-ConnectionGUID: vQCElQioQTGBjshUdzuMvA==
+X-CSE-MsgGUID: +8GcKvKaQnqz0VvcM4UmcQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11483"; a="65333999"
+X-IronPort-AV: E=Sophos;i="6.16,284,1744095600"; 
+   d="scan'208";a="65333999"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Jul 2025 07:10:49 -0700
+X-CSE-ConnectionGUID: n/f2VhrpRXW5ix8BRRZ06g==
+X-CSE-MsgGUID: tjOT0cYYRgu2z73konZ4hg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,284,1744095600"; 
+   d="scan'208";a="153792238"
+Received: from black.fi.intel.com ([10.237.72.28])
+  by orviesa010.jf.intel.com with ESMTP; 03 Jul 2025 07:10:36 -0700
+Received: by black.fi.intel.com (Postfix, from userid 1000)
+	id E997D1E0; Thu, 03 Jul 2025 17:10:34 +0300 (EEST)
+Date: Thu, 3 Jul 2025 17:10:34 +0300
+From: "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+To: David Laight <david.laight.linux@gmail.com>
+Cc: Andy Lutomirski <luto@kernel.org>, 
+	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+	Peter Zijlstra <peterz@infradead.org>, Ard Biesheuvel <ardb@kernel.org>, 
+	"Paul E. McKenney" <paulmck@kernel.org>, Josh Poimboeuf <jpoimboe@kernel.org>, 
+	Xiongwei Song <xiongwei.song@windriver.com>, Xin Li <xin3.li@intel.com>, 
+	"Mike Rapoport (IBM)" <rppt@kernel.org>, Brijesh Singh <brijesh.singh@amd.com>, 
+	Michael Roth <michael.roth@amd.com>, Tony Luck <tony.luck@intel.com>, 
+	Alexey Kardashevskiy <aik@amd.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Sohil Mehta <sohil.mehta@intel.com>, 
+	Ingo Molnar <mingo@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, 
+	Daniel Sneddon <daniel.sneddon@linux.intel.com>, Kai Huang <kai.huang@intel.com>, 
+	Sandipan Das <sandipan.das@amd.com>, Breno Leitao <leitao@debian.org>, 
+	Rick Edgecombe <rick.p.edgecombe@intel.com>, Alexei Starovoitov <ast@kernel.org>, 
+	Hou Tao <houtao1@huawei.com>, Juergen Gross <jgross@suse.com>, 
+	Vegard Nossum <vegard.nossum@oracle.com>, Kees Cook <kees@kernel.org>, Eric Biggers <ebiggers@google.com>, 
+	Jason Gunthorpe <jgg@ziepe.ca>, "Masami Hiramatsu (Google)" <mhiramat@kernel.org>, 
+	Andrew Morton <akpm@linux-foundation.org>, Luis Chamberlain <mcgrof@kernel.org>, 
+	Yuntao Wang <ytcoode@gmail.com>, Rasmus Villemoes <linux@rasmusvillemoes.dk>, 
+	Christophe Leroy <christophe.leroy@csgroup.eu>, Tejun Heo <tj@kernel.org>, Changbin Du <changbin.du@huawei.com>, 
+	Huang Shijie <shijie@os.amperecomputing.com>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Namhyung Kim <namhyung@kernel.org>, Arnaldo Carvalho de Melo <acme@redhat.com>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-efi@vger.kernel.org, 
+	linux-mm@kvack.org
+Subject: Re: [PATCHv8 02/17] x86/asm: Introduce inline memcpy and memset
+Message-ID: <uoysignw2pmdls5v57z4cty76hhz7fv7ikcih2qgeltbgnem4f@jt2r24bqvzau>
+References: <20250701095849.2360685-1-kirill.shutemov@linux.intel.com>
+ <20250701095849.2360685-3-kirill.shutemov@linux.intel.com>
+ <20250703094417.165e5893@pumpkin>
+ <uvvh6qfpan6f56fdvuch67nss2h5nqxbmocztf6v2lfbvnihbg@vtzbr6anzqnl>
+ <20250703131552.32adf6b8@pumpkin>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: nicolas.dichtel@6wind.com
-Subject: Re: [PATCH v3] ipv6: add `force_forwarding` sysctl to enable
- per-interface forwarding
-To: "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>, David Ahern <dsahern@kernel.org>,
- netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20250702074619.139031-1-g.goller@proxmox.com>
- <c39c99a7-73c2-4fc6-a1f2-bc18c0b6301f@6wind.com>
- <jsfa7qvqpspyau47xrqz5gxpzdxfyeyszbhcyuwx7ermzjahaf@jrznbsy3f722>
-From: Nicolas Dichtel <nicolas.dichtel@6wind.com>
-Content-Language: en-US
-Organization: 6WIND
-In-Reply-To: <jsfa7qvqpspyau47xrqz5gxpzdxfyeyszbhcyuwx7ermzjahaf@jrznbsy3f722>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250703131552.32adf6b8@pumpkin>
 
-Le 03/07/2025 à 13:04, Gabriel Goller a écrit :
-[snip]
->>> +    // get extra params from table
->> /* */ for comment
->> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/
->> Documentation/process/coding-style.rst#n598
+On Thu, Jul 03, 2025 at 01:15:52PM +0100, David Laight wrote:
+> On Thu, 3 Jul 2025 13:39:57 +0300
+> "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com> wrote:
 > 
-> NAK
-> (https://lore.kernel.org/lkml/
-> CA+55aFyQYJerovMsSoSKS7PessZBr4vNp-3QUUwhqk4A4_jcbg@mail.gmail.com/#r)
+> > On Thu, Jul 03, 2025 at 09:44:17AM +0100, David Laight wrote:
+> > > On Tue,  1 Jul 2025 12:58:31 +0300
+> > > "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com> wrote:
+> > >   
+> > > > Extract memcpy and memset functions from copy_user_generic() and
+> > > > __clear_user().
+> > > > 
+> > > > They can be used as inline memcpy and memset instead of the GCC builtins
+> > > > whenever necessary. LASS requires them to handle text_poke.  
+> > > 
+> > > Except they contain the fault handlers so aren't generic calls.  
+> > 
+> > That's true. I will add a comment to clarify it.
+> 
+> They need renaming.
 
-I will follow the netdev maintainers' guidelines.
+__inline_memcpy/memset_safe()?
 
-If the doc I pointed to is wrong, please update it. It will be easier to find
-than a 9-year-old email.
+> ...
+> > > > diff --git a/arch/x86/lib/clear_page_64.S b/arch/x86/lib/clear_page_64.S
+> > > > index a508e4a8c66a..47b613690f84 100644
+> > > > --- a/arch/x86/lib/clear_page_64.S
+> > > > +++ b/arch/x86/lib/clear_page_64.S
+> > > > @@ -55,17 +55,26 @@ SYM_FUNC_END(clear_page_erms)
+> > > >  EXPORT_SYMBOL_GPL(clear_page_erms)
+> > > >  
+> > > >  /*
+> > > > - * Default clear user-space.
+> > > > + * Default memset.
+> > > >   * Input:
+> > > >   * rdi destination
+> > > > + * rsi scratch
+> > > >   * rcx count
+> > > > - * rax is zero
+> > > > + * al is value
+> > > >   *
+> > > >   * Output:
+> > > >   * rcx: uncleared bytes or 0 if successful.
+> > > > + * rdx: clobbered
+> > > >   */
+> > > >  SYM_FUNC_START(rep_stos_alternative)
+> > > >  	ANNOTATE_NOENDBR
+> > > > +
+> > > > +	movzbq %al, %rsi
+> > > > +	movabs $0x0101010101010101, %rax
+> > > > +
+> > > > +	/* RDX:RAX = RAX * RSI */
+> > > > +	mulq %rsi  
+> > > 
+> > > NAK - you can't do that here.
+> > > Neither %rsi nor %rdx can be trashed.
+> > > The function has a very explicit calling convention.  
+> > 
+> > What calling convention? We change the only caller to confirm to this.
+> 
+> The one that is implicit in:
+> 
+> > > > +	asm volatile("1:\n\t"
+> > > > +		     ALT_64("rep stosb",
+> > > > +			    "call rep_stos_alternative", ALT_NOT(X86_FEATURE_FSRM))
+> > > > +		     "2:\n\t"
+> > > > +		     _ASM_EXTABLE_UA(1b, 2b)
+> > > > +		     : "+c" (len), "+D" (addr), ASM_CALL_CONSTRAINT
+> > > > +		     : "a" ((uint8_t)v)
+> 
+> The called function is only allowed to change the registers that
+> 'rep stosb' uses - except it can access (but not change)
+> all of %rax - not just %al.
+> 
+> See: https://godbolt.org/z/3fnrT3x9r
+> In particular note that 'do_mset' must not change %rax.
+> 
+> This is very specific and is done so that the compiler can use
+> all the registers.
 
+Okay, I see what you are saying.
 
-Regards,
-Nicolas
+> > > It is also almost certainly a waste of time.
+> > > Pretty much all the calls will be for a constant 0x00.
+> > > Rename it all memzero() ...  
+> > 
+> > text_poke_memset() is not limited to zeroing.
+> 
+> But you don't want the overhead of extending the constant
+> on all the calls - never mind reserving %rdx to do it.
+> Maybe define a function that requires the caller to have
+> done the 'dirty work' - so any code that wants memzero()
+> just passes zero.
+> Or do the multiply in the C code where it will get optimised
+> away for constant zero.
+> You do get the multiply for the 'rep stosb' case - but that
+> is always going to be true unless you complicate things further.  
+
+The patch below seems to do the trick: compiler optimizes out the
+multiplication for v == 0.
+
+It would be nice to avoid it for X86_FEATURE_FSRM, but we cannot use
+cpu_feature_enabled() here as <asm/cpufeature.h> depends on
+<asm/string.h>.
+
+I cannot say I like the result.
+
+Any suggestions?
+
+diff --git a/arch/x86/include/asm/string.h b/arch/x86/include/asm/string.h
+index becb9ee3bc8a..c7644a6f426b 100644
+--- a/arch/x86/include/asm/string.h
++++ b/arch/x86/include/asm/string.h
+@@ -35,16 +35,27 @@ static __always_inline void *__inline_memcpy(void *to, const void *from, size_t
+ 
+ static __always_inline void *__inline_memset(void *addr, int v, size_t len)
+ {
++	unsigned long val = v;
+ 	void *ret = addr;
+ 
++	if (IS_ENABLED(CONFIG_X86_64)) {
++		/*
++		 * Fill all bytes by value in byte 0.
++		 *
++		 * To be used in rep_stos_alternative()i
++		 */
++		val &= 0xff;
++		val *= 0x0101010101010101;
++	}
++
+ 	asm volatile("1:\n\t"
+ 		     ALT_64("rep stosb",
+ 			    "call rep_stos_alternative", ALT_NOT(X86_FEATURE_FSRM))
+ 		     "2:\n\t"
+ 		     _ASM_EXTABLE_UA(1b, 2b)
+ 		     : "+c" (len), "+D" (addr), ASM_CALL_CONSTRAINT
+-		     : "a" (v)
+-		     : "memory", _ASM_SI, _ASM_DX);
++		     : "a" (val)
++		     : "memory");
+ 
+ 	return ret + len;
+ }
+diff --git a/arch/x86/lib/clear_page_64.S b/arch/x86/lib/clear_page_64.S
+index 47b613690f84..3ef7d796deb3 100644
+--- a/arch/x86/lib/clear_page_64.S
++++ b/arch/x86/lib/clear_page_64.S
+@@ -58,23 +58,15 @@ EXPORT_SYMBOL_GPL(clear_page_erms)
+  * Default memset.
+  * Input:
+  * rdi destination
+- * rsi scratch
+  * rcx count
+  * al is value
+  *
+  * Output:
+  * rcx: uncleared bytes or 0 if successful.
+- * rdx: clobbered
+  */
+ SYM_FUNC_START(rep_stos_alternative)
+ 	ANNOTATE_NOENDBR
+ 
+-	movzbq %al, %rsi
+-	movabs $0x0101010101010101, %rax
+-
+-	/* RDX:RAX = RAX * RSI */
+-	mulq %rsi
+-
+ 	cmpq $64,%rcx
+ 	jae .Lunrolled
+ 
+-- 
+  Kiryl Shutsemau / Kirill A. Shutemov
 
