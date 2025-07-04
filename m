@@ -1,222 +1,262 @@
-Return-Path: <linux-doc+bounces-51985-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-51987-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAF35AF8C33
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 10:42:05 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C5FFAF8C9E
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 10:50:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4A2E24A55BC
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 08:42:06 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 54DD11BC20FE
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 08:49:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 752E02EF66A;
-	Fri,  4 Jul 2025 08:35:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 106DD1F4631;
+	Fri,  4 Jul 2025 08:44:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=axis.com header.i=@axis.com header.b="UVAqYLA0"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iPMQykqK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013003.outbound.protection.outlook.com [40.107.162.3])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47E2F28B41D;
-	Fri,  4 Jul 2025 08:35:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.162.3
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751618142; cv=fail; b=lcFECVnTNqsjaeg9eB1arCzCZnNicG8hyWqe8UgWuzu4u+xNMki6XbW19aw6AWpVJLLsW42+s4UE/+qpifRKWqfi7R3hivX7CHM/ryWTcFp3RBxcT9QPiQi1QYdhojU6ySv3QYcuOF5/W11HyOw+BVKRLiYqtIJnzjbuPPQMMMc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751618142; c=relaxed/simple;
-	bh=ZIqrQX3B5auXXf7dh6XPzPgSAICs/5GwnGv787GA8xw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=BYS2LPB/98LLN0kYKqoTmoLUnWkbetJJgrf5MdVZ8558AwgMVBzWAGENzHmXLACGOoNJOP87l7GwEGiOebW76frbThjDqKCS43hMkoSTmdcCY8f+b1qr/M0W75t88zgjyVXV3EcaPZP5/OhlbHlRYmuXMYdoxRK9VJG5JFONTng=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=axis.com; spf=pass smtp.mailfrom=2n.com; dkim=pass (1024-bit key) header.d=axis.com header.i=@axis.com header.b=UVAqYLA0; arc=fail smtp.client-ip=40.107.162.3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=axis.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=2n.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RkNTDpAZTerIPjTvVR2SnItOqVD0yN2I2IqjjcHnFeW6sxBdrIsiwon99CrsJd4uBM4JAirmczYG5YWRXnK1MIbuFhTmAt+1GzW0Q8deBcICE6tw+lmpIYiNsAuqZumuLhaRb6axhl0ues+zxO3FF1a5dnPgZs9IL4lJPNhPbI6Q01/Udneb1Orcn4XHqplCAWmJ6UL9Xnx4v3bkLoU9kc5aFJRI08kQHd97ETswadBUW5swjYFZH4ynsLmXmgV0DSWPsiMEXx2BIua6h9qvEMmrLtWgMPditvY1PcI+FOx7cMO4tzSM22prcmPNLyOXNaIf4s3DUo5oRJHO1d0F0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3nncrQjzvQr2sLVmhKgPZphMPq7RADJzbXx84i4q1ds=;
- b=WPLrklXAX2d6+s4nW1MFZo+er2IBTh9oF6LhyjjZ9/d6LltJLq060zWnsshrV+RGjqIMUT2KMs2NLFx0e3exjAqoCOsraLCee4sYZszUYAIsjb8vnQa+RinLK/r/2wSmInd4im70KrXof5dRkFRFEYkRGNHXLzxnSsqMPSRkui2qH/6Jw7bThcplTFaLW+2Uox1758OKzvj2MK/Q6DeHSE362oFqSd6h7wc8S+E4dmSJTY4dY07EBAALcNm1zxNgV87cs7ULSsCDbHKwoMk9XnwVvOZnrMNZH1jwLrubpIq9DatRUflqfnarSmZ74cQDDw1xz1adDj0muarLaO80qA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 195.60.68.100) smtp.rcpttodomain=broadcom.com smtp.mailfrom=2n.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=axis.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3nncrQjzvQr2sLVmhKgPZphMPq7RADJzbXx84i4q1ds=;
- b=UVAqYLA0XoTFOsTuHP/KGHMwyG/qaFkx3Ep8fKMPX1rd1oq7mIjHrwi0Tmoz2rswlCyZ4T4raC9UuAjMqm+ocykRl7QFRYsC7HPcZqprV/rP3eYMVW7asshlRmUJdsVBq/NA4n6GjJC/UQC2JaXpMyIQTyAlSfBn/zokGSR2UE0=
-Received: from DU2PR04CA0266.eurprd04.prod.outlook.com (2603:10a6:10:28e::31)
- by DB9PR02MB9706.eurprd02.prod.outlook.com (2603:10a6:10:458::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8901.19; Fri, 4 Jul
- 2025 08:35:35 +0000
-Received: from DU2PEPF00028D03.eurprd03.prod.outlook.com
- (2603:10a6:10:28e:cafe::4f) by DU2PR04CA0266.outlook.office365.com
- (2603:10a6:10:28e::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8901.22 via Frontend Transport; Fri,
- 4 Jul 2025 08:35:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
- smtp.mailfrom=2n.com; dkim=none (message not signed) header.d=none;dmarc=fail
- action=none header.from=axis.com;
-Received-SPF: Pass (protection.outlook.com: domain of 2n.com designates
- 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com; pr=C
-Received: from mail.axis.com (195.60.68.100) by
- DU2PEPF00028D03.mail.protection.outlook.com (10.167.242.187) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8901.15 via Frontend Transport; Fri, 4 Jul 2025 08:35:35 +0000
-Received: from pcczc3457tyd.2n.cz.axis.com (10.4.0.13) by se-mail01w.axis.com
- (10.20.40.7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Fri, 4 Jul
- 2025 10:35:34 +0200
-From: =?UTF-8?q?Kamil=20Hor=C3=A1k=20-=202N?= <kamilh@axis.com>
-To: <florian.fainelli@broadcom.com>, <bcm-kernel-feedback-list@broadcom.com>,
-	<andrew@lunn.ch>, <hkallweit1@gmail.com>, <linux@armlinux.org.uk>,
-	<davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
-	<pabeni@redhat.com>, <krzk+dt@kernel.org>, <conor+dt@kernel.org>
-CC: <kamilh@axis.com>, <netdev@vger.kernel.org>, <devicetree@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <f.fainelli@gmail.com>, <robh@kernel.org>,
-	<andrew+netdev@lunn.ch>, <horms@kernel.org>, <corbet@lwn.net>,
-	<linux-doc@vger.kernel.org>
-Subject: [PATCH net v6 4/4] net: phy: bcm54811: Fix the PHY initialization
-Date: Fri, 4 Jul 2025 10:35:12 +0200
-Message-ID: <20250704083512.853748-5-kamilh@axis.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250704083512.853748-1-kamilh@axis.com>
-References: <20250704083512.853748-1-kamilh@axis.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17BBE328B1E;
+	Fri,  4 Jul 2025 08:44:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.50
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1751618679; cv=none; b=N7gkmVq50yWpEx1B3V8aRU5l1CWk/ZbC5SuYcJ1R5g1hNDlb7jwDxAd2i3zg42wnDg1pZHgg1L8RBSA8drnWBkLPGuFispugY1CB9KQXb5IGd9mOBpXfa+z6kH3/RyzSSA7e0YWSQL6XwCetiGfUkwQjERPFgS5gI/O5P+M/Wh8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1751618679; c=relaxed/simple;
+	bh=ubkxPX2FW+GZUe3/04Eh7dd0rWb/KcE745/jPL04D+A=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Lpdm+y+N5nSPlh0DZcvByOhBMwRGfpobiteHJss14hPwXXxGxQhWw+dftq7C7aH/f6qILma2+LA0sorKXwbCenXvLkO6uTAvhVQQZWNpd8TGAqr9qETDAhsIBAnfklcOStK31yMNYJoUCWgAhK/azgI78yRpACgE3htOMy6/pLA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iPMQykqK; arc=none smtp.client-ip=209.85.208.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-604bff84741so1196644a12.2;
+        Fri, 04 Jul 2025 01:44:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1751618675; x=1752223475; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pLxVD++bObx7XIGt1aHIikLchHPfaB8ug5wDwTwQnEE=;
+        b=iPMQykqKQDzJ/qyqwf8UXnEM+QAeQ/FMxrsswA+vRKzBE8LDpCvdyLO5n41ee9nsXI
+         EcN1jLK69K30zD01Hymxd88y+3th6KBcZaBaGAAs2Nu5OihJCKQuxq8qR6T6VYDcp7ma
+         SvXNp/cbZNe2XR0fTV6SlfNYgiLM0eLeQBI7SiMqQtH8WZC4soJLvqiNt4r4SEDJMWE5
+         xhGpWYHMOky90jBejawKzd+VJTkP1XD6D2/5690GX4/zDVQU1Dc6ovzKgdsCwBubqkB0
+         QxlQbhzPmOMFE9r8UFcIci1dKEduETdglQ/aIXDxjH+/hBww1AtZS+pgLLp6QlAKBAeH
+         eTHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751618675; x=1752223475;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=pLxVD++bObx7XIGt1aHIikLchHPfaB8ug5wDwTwQnEE=;
+        b=m1j99wHQCJZ9R2cswD6C6lpXV27uYeidgBgqnS7AtXp5POnuFMyetGy2vbhC+DsfkH
+         vHF+pFz93d/f9ZzEFUbSe35ZvLBa172Ia0YGqJ1b1B0f9skjgXU3vQxIRcNv8BZffXAX
+         pzG1MvUWbWRph0+fCXzI9uzTjfvwVas5/f0qlhnLUAkl+0iHwau5Nk+fiQIMle0CV20e
+         2saAjFqLz1Hzh5wG3JT1VeW4NdKJV0c5UmPMfumUQ6DJPKKsJ/kTujKWJHM7hBruzhdj
+         G82O2vMWvnwJ5LM3tEUTyDaEY39Ilg9iucoEMGB0uaCDesnsKJ1kQP2ZfBP06dU2hZ4s
+         qC9w==
+X-Forwarded-Encrypted: i=1; AJvYcCUJc2MI22hgReNm4MAS8eZ7YRazNsna6aV68eSvcUzQ3O1GrH4DQTyGQJAxPYO9SGDu1MCIWzJIfis=@vger.kernel.org, AJvYcCVz99qTlXDClG5P9+8XFVtEP4HvfvqS1CryeEpobOhTeuvSug3nRxv/ruDP5VEXtlBSyOQ/1iw38voFMNLdPQ==@vger.kernel.org, AJvYcCWdzH0VOmHblQDyvz+N+KripNDLuED22kjZQTNrJB41X7I5IIsohMBT6alrD57S5cHjCzIlZWTnwTJZLlsO@vger.kernel.org, AJvYcCXW4EfoZbkYkc8Kz+ZJOM6wreIEwJ3p0NUUYfhvT15l+/6fv0h4qtf0GnX8aA7pr9Oas2ifYDNs0tgK@vger.kernel.org
+X-Gm-Message-State: AOJu0YwOJTJflQl3gdga1WBxskRDxtM/7BT+MVfgv6uF2ghy9quM6EhJ
+	yt78mjV1jS5QtcRHVOtaNZPPRNhitEyk3pvGE+/9NVJf0brmUnCL2QGTlbiXs9IsXubioWIcrYx
+	8RKJsn36j5HtBKE6kDb/DmBqp7+wboQc=
+X-Gm-Gg: ASbGncu9u47uoOhlybqaw+P67KaOlN/7u3jY++7dI92NiimhXUvSmFKpSK0o549QgVu
+	5Xo9/rPw7sK0aq3S3RclLzVO4EEiqe6a/tlu9OPNx9B81RFELs+XF3E+f75W52hZ58yaHlqkd3W
+	CVfC3piEKFFm5Qn8yNCGqsfyOb/XeiB6NpfoNXRpapPfw=
+X-Google-Smtp-Source: AGHT+IFBDaP8zQxWcQljULEFa6GosLHM1Fr9HgBZPyfuh3qYvt0YaniWVIKCyvoHhchZrszWhCvhEz6VfcNnf1wh2wI=
+X-Received: by 2002:a17:907:7290:b0:ae3:64ec:5eb0 with SMTP id
+ a640c23a62f3a-ae3fbc2896bmr136387066b.11.1751618674841; Fri, 04 Jul 2025
+ 01:44:34 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+References: <20250703185032.46568-1-john@groves.net> <20250703185032.46568-10-john@groves.net>
+In-Reply-To: <20250703185032.46568-10-john@groves.net>
+From: Amir Goldstein <amir73il@gmail.com>
+Date: Fri, 4 Jul 2025 10:44:23 +0200
+X-Gm-Features: Ac12FXxwSwxI5T6ujv-byO1091sUsmVe0O4bcF4RyE_aZllEPVlxUcLQOg0w034
+Message-ID: <CAOQ4uxgqMOL4aRnpm02Q7V8_T1vtgHHxe+QnoLANhS_Vr2-VRw@mail.gmail.com>
+Subject: Re: [RFC V2 09/18] famfs_fuse: Update macro s/FUSE_IS_DAX/FUSE_IS_VIRTIO_DAX/
+To: John Groves <John@groves.net>
+Cc: Dan Williams <dan.j.williams@intel.com>, Bernd Schubert <bschubert@ddn.com>, 
+	John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Vishal Verma <vishal.l.verma@intel.com>, Dave Jiang <dave.jiang@intel.com>, 
+	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, 
+	"Darrick J . Wong" <djwong@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, 
+	Jeff Layton <jlayton@kernel.org>, Kent Overstreet <kent.overstreet@linux.dev>, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, Jonathan Cameron <Jonathan.Cameron@huawei.com>, 
+	Stefan Hajnoczi <shajnocz@redhat.com>, Joanne Koong <joannelkoong@gmail.com>, 
+	Josef Bacik <josef@toxicpanda.com>, Aravind Ramesh <arramesh@micron.com>, 
+	Ajay Joshi <ajayjoshi@micron.com>, Miklos Szeredi <miklos@szeredi.hu>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: se-mail02w.axis.com (10.20.40.8) To se-mail01w.axis.com
- (10.20.40.7)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D03:EE_|DB9PR02MB9706:EE_
-X-MS-Office365-Filtering-Correlation-Id: e942d31c-7353-449c-b76e-08ddbad5bf34
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|19092799006|82310400026|36860700013|1800799024|7053199007|921020;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?QnRpZnZUR3krREthdFg5TTlKSDM3TFFvME1udVRoWHVlQkdjLzFaMjdCQjlR?=
- =?utf-8?B?dWpnNHZISzBRd1l3d2JRaGNmbHRRNTdoQnl6V1lTMGpyRktkdHlSd0ZQV0VU?=
- =?utf-8?B?M3VtN0hvdG5YeUdYRmUwMXFRRFA1ZFdLNFBHL2hwbG1DTU5yNGtqWHd0bVM5?=
- =?utf-8?B?bkdmNisvVUR5MjBlZFl4NW85WS90UEpMZUV1RlFIZlh0cFY1M0QvcWVNRnFo?=
- =?utf-8?B?RnhHWkpFT2hIeS9LbzNIM21vZTUzaVdaeFVxeHVLdk02TzJocTQvU1dQZHFp?=
- =?utf-8?B?aVJKQXAzT2F0TFYzVzJGSjlFbzJnYjh1aXZLbVEyeVNZOHNrbFlRTklEK0pF?=
- =?utf-8?B?NkQwdFgxMnBzWTMxTktHck9uOEdVL2VlRHBEci8yZlhLY2RqWWhhS1NxM3Jl?=
- =?utf-8?B?bUgzc0ZzNUhKN3hTeXVYUk9ITEVhQnJaYW9VakRhbGxHNjRKS3A3UGw2ZHhk?=
- =?utf-8?B?ZHhhMmdZNDEwSE1nMW84bmxiTUV3YmtQWEdNT3ppRlFWLzNtUzFEK1Z3R2JY?=
- =?utf-8?B?WkRoNW9MNC9UcmdDYm9qVHVVTzN0bXBGbW5MZ1dET1NiVG45QzY4aEY1MzZP?=
- =?utf-8?B?cllUYUFVY1lXN0syZ1NjN2UrQndBTFhrU2NzczczNmRwUWV4cXRjL0RON1c4?=
- =?utf-8?B?QWYxSTFVU3J5bjlTUURvMVB2eDVORDZVL2FzZW0yV0czbmVXSlhJTnBscmpr?=
- =?utf-8?B?Y3R0VEtMbUNKUW5ZdW94SndyTzhsLzh4am5ISmU1bm5Zb1FjOCszMDZGZjZ3?=
- =?utf-8?B?S3MxNzNzT2QwVHBhbDFQVnNSaVZsNWVGRS95dE1qQzlBZjJrRnNlMVd2bE9r?=
- =?utf-8?B?NW5VU0p0RTg4Z3ZkRVdTZllsbkl3NmN0TzBGRlV1TVFQaWtsSXBReG54a1d1?=
- =?utf-8?B?L3ZqSzB4RUhERWhqMndBY3R1R09WRlFyeE5PSWZ3R2ZvbDFZQmJPM2VIRmd6?=
- =?utf-8?B?WHFsTnBiVC9FOE1sclQ1SitwSHZPWHFpSEdncDl1MnFSOFo2cjMvUWh6RHVU?=
- =?utf-8?B?cFdrb2NFWUpFU254SE9STDFPVS9OM20zODY1Y1ZXYUtuOWVWV3Nxd09ncEJG?=
- =?utf-8?B?amNwMTBFZVh5UWhkT2ViSU1KYWZMMGlwd1lEV3BDSVFBTDh3Rm1JTHNIRXhP?=
- =?utf-8?B?STdmVmgxSHBWNjN2bEJtY2U1MmFaQVJ1UCsvRnVqemt0bXB3R29WRnFxTnNw?=
- =?utf-8?B?YVNXUWxhWmJhUFMwM2xVcllJZE10ZFJqK0V3L05iTE5jaXU1UnEyVjZGMFVO?=
- =?utf-8?B?M1ZOOFhEdGd0dXcvdHNmeWJkc0tveml4cTN2Ykl4SUZwWFpSbHBYUHE2aFZM?=
- =?utf-8?B?SFd3Yi8xTzd3eVBtb0lEdlV4YkZna0pUSkovMytxd1VZWFFTbGc5aWtDWTY5?=
- =?utf-8?B?RStpR1ZMaFJQUnJVRWJTaWd4eWhTL3g1Q01rejZmbFE2THV2ajIvUHNMczNr?=
- =?utf-8?B?Y0p1dzJkdUlIa2tDTDZRdlJKU2JzYmFFdk9abTZwaUlxaForeExHMVAxeEdK?=
- =?utf-8?B?OGYwK202alZ4aGpsQ3NBVytMRlZCUlZFMUlIY1dtZ0t1dkNxTmNsMDN5eUtm?=
- =?utf-8?B?WTZTb0RZcWNjRjJUb05MemdXZkkzeWRkdkY2VzRRYkp0YUVlS3VWcW1xRWRq?=
- =?utf-8?B?Lytsb1BsNzNwUFdyZTFlbmJYa0tJTTBDZUJkNTNQZVNYMW1XeHJ2UDhON0o2?=
- =?utf-8?B?QWhsRWdxNUovS3N4QWc2ZmhDMDc2YU1vYVJmMFFJNUhVYWg0cU1rZzRaVC9G?=
- =?utf-8?B?SXRaYWFhcVRtc1VIbUIxQ0pqTVJjci9lRTF6eFhZSC96dHNmUUkrY1dVdEg2?=
- =?utf-8?B?RWE2Uks1Umt6dWgxejNNdWV5UlJMNWpRenFIRkpxNVEyUEJTcEh4ZksyVGtD?=
- =?utf-8?B?UU5LMEdmZ0V2TWExbWUxYjFPYlJ1RUFJSEtuZjJySzRZNk9aS1UyeHhuUXlk?=
- =?utf-8?B?VnFpTStOd2FaLzU1RHNHRGZSLzFoSmRFUXEyYmZKMDZOUVRzRnE5RG41M1Nx?=
- =?utf-8?B?aG5ndkdxd3NaMUJFKzVpaEFPTFdLMWNibWZ6dEhWUzlhZEliaDc3WTU2WnV2?=
- =?utf-8?B?TE1zampKVk5zNWRZSFhQbnkxMngyRHBLUi9Mdz09?=
-X-Forefront-Antispam-Report:
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(19092799006)(82310400026)(36860700013)(1800799024)(7053199007)(921020);DIR:OUT;SFP:1101;
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jul 2025 08:35:35.4649
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e942d31c-7353-449c-b76e-08ddbad5bf34
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DU2PEPF00028D03.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR02MB9706
+Content-Transfer-Encoding: quoted-printable
 
-Reset the bit 12 in PHY's LRE Control register upon initialization.
-According to the datasheet, this bit must be written to zero after
-every device reset.
+On Thu, Jul 3, 2025 at 8:51=E2=80=AFPM John Groves <John@groves.net> wrote:
+>
+> Virtio_fs now needs to determine if an inode is DAX && not famfs.
+>
+> Signed-off-by: John Groves <john@groves.net>
+> ---
+>  fs/fuse/dir.c    |  2 +-
+>  fs/fuse/file.c   | 13 ++++++++-----
+>  fs/fuse/fuse_i.h |  6 +++++-
+>  fs/fuse/inode.c  |  2 +-
+>  fs/fuse/iomode.c |  2 +-
+>  5 files changed, 16 insertions(+), 9 deletions(-)
+>
+> diff --git a/fs/fuse/dir.c b/fs/fuse/dir.c
+> index 8f699c67561f..ad8cdf7b864a 100644
+> --- a/fs/fuse/dir.c
+> +++ b/fs/fuse/dir.c
+> @@ -1939,7 +1939,7 @@ int fuse_do_setattr(struct mnt_idmap *idmap, struct=
+ dentry *dentry,
+>                 is_truncate =3D true;
+>         }
+>
+> -       if (FUSE_IS_DAX(inode) && is_truncate) {
+> +       if (FUSE_IS_VIRTIO_DAX(fi) && is_truncate) {
+>                 filemap_invalidate_lock(mapping);
+>                 fault_blocked =3D true;
+>                 err =3D fuse_dax_break_layouts(inode, 0, -1);
+> diff --git a/fs/fuse/file.c b/fs/fuse/file.c
+> index 754378dd9f71..93b82660f0c8 100644
+> --- a/fs/fuse/file.c
+> +++ b/fs/fuse/file.c
+> @@ -239,7 +239,7 @@ static int fuse_open(struct inode *inode, struct file=
+ *file)
+>         int err;
+>         bool is_truncate =3D (file->f_flags & O_TRUNC) && fc->atomic_o_tr=
+unc;
+>         bool is_wb_truncate =3D is_truncate && fc->writeback_cache;
+> -       bool dax_truncate =3D is_truncate && FUSE_IS_DAX(inode);
+> +       bool dax_truncate =3D is_truncate && FUSE_IS_VIRTIO_DAX(fi);
+>
+>         if (fuse_is_bad(inode))
+>                 return -EIO;
+> @@ -1770,11 +1770,12 @@ static ssize_t fuse_file_read_iter(struct kiocb *=
+iocb, struct iov_iter *to)
+>         struct file *file =3D iocb->ki_filp;
+>         struct fuse_file *ff =3D file->private_data;
+>         struct inode *inode =3D file_inode(file);
+> +       struct fuse_inode *fi =3D get_fuse_inode(inode);
+>
+>         if (fuse_is_bad(inode))
+>                 return -EIO;
+>
+> -       if (FUSE_IS_DAX(inode))
+> +       if (FUSE_IS_VIRTIO_DAX(fi))
+>                 return fuse_dax_read_iter(iocb, to);
+>
+>         /* FOPEN_DIRECT_IO overrides FOPEN_PASSTHROUGH */
+> @@ -1791,11 +1792,12 @@ static ssize_t fuse_file_write_iter(struct kiocb =
+*iocb, struct iov_iter *from)
+>         struct file *file =3D iocb->ki_filp;
+>         struct fuse_file *ff =3D file->private_data;
+>         struct inode *inode =3D file_inode(file);
+> +       struct fuse_inode *fi =3D get_fuse_inode(inode);
+>
+>         if (fuse_is_bad(inode))
+>                 return -EIO;
+>
+> -       if (FUSE_IS_DAX(inode))
+> +       if (FUSE_IS_VIRTIO_DAX(fi))
+>                 return fuse_dax_write_iter(iocb, from);
+>
+>         /* FOPEN_DIRECT_IO overrides FOPEN_PASSTHROUGH */
+> @@ -2627,10 +2629,11 @@ static int fuse_file_mmap(struct file *file, stru=
+ct vm_area_struct *vma)
+>         struct fuse_file *ff =3D file->private_data;
+>         struct fuse_conn *fc =3D ff->fm->fc;
+>         struct inode *inode =3D file_inode(file);
+> +       struct fuse_inode *fi =3D get_fuse_inode(inode);
+>         int rc;
+>
+>         /* DAX mmap is superior to direct_io mmap */
+> -       if (FUSE_IS_DAX(inode))
+> +       if (FUSE_IS_VIRTIO_DAX(fi))
+>                 return fuse_dax_mmap(file, vma);
+>
+>         /*
+> @@ -3191,7 +3194,7 @@ static long fuse_file_fallocate(struct file *file, =
+int mode, loff_t offset,
+>                 .mode =3D mode
+>         };
+>         int err;
+> -       bool block_faults =3D FUSE_IS_DAX(inode) &&
+> +       bool block_faults =3D FUSE_IS_VIRTIO_DAX(fi) &&
+>                 (!(mode & FALLOC_FL_KEEP_SIZE) ||
+>                  (mode & (FALLOC_FL_PUNCH_HOLE | FALLOC_FL_ZERO_RANGE)));
+>
+> diff --git a/fs/fuse/fuse_i.h b/fs/fuse/fuse_i.h
+> index 2086dac7243b..9d87ac48d724 100644
+> --- a/fs/fuse/fuse_i.h
+> +++ b/fs/fuse/fuse_i.h
+> @@ -1426,7 +1426,11 @@ void fuse_free_conn(struct fuse_conn *fc);
+>
+>  /* dax.c */
+>
+> -#define FUSE_IS_DAX(inode) (IS_ENABLED(CONFIG_FUSE_DAX) && IS_DAX(inode)=
+)
+> +/* This macro is used by virtio_fs, but now it also needs to filter for
+> + * "not famfs"
+> + */
+> +#define FUSE_IS_VIRTIO_DAX(fuse_inode) (IS_ENABLED(CONFIG_FUSE_DAX)    \
+> +                                       && IS_DAX(&fuse_inode->inode))
 
-Fixes: 03ab6c244bb0 ("net: phy: bcm-phy-lib: Implement BroadR-Reach link modes")
-Signed-off-by: Kamil Horák - 2N <kamilh@axis.com>
-Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
----
- drivers/net/phy/broadcom.c | 25 +++++++++++++++++++++----
- 1 file changed, 21 insertions(+), 4 deletions(-)
+I think we should take this opportunity to make it
+static inline fuse_is_virtio_dax()
 
-diff --git a/drivers/net/phy/broadcom.c b/drivers/net/phy/broadcom.c
-index 8547983bd72f..a60e58ef90c4 100644
---- a/drivers/net/phy/broadcom.c
-+++ b/drivers/net/phy/broadcom.c
-@@ -667,7 +667,7 @@ static int bcm5481x_read_abilities(struct phy_device *phydev)
- {
- 	struct device_node *np = phydev->mdio.dev.of_node;
- 	struct bcm54xx_phy_priv *priv = phydev->priv;
--	int i, val, err;
-+	int i, val, err, aneg;
- 
- 	for (i = 0; i < ARRAY_SIZE(bcm54811_linkmodes); i++)
- 		linkmode_clear_bit(bcm54811_linkmodes[i], phydev->supported);
-@@ -688,9 +688,19 @@ static int bcm5481x_read_abilities(struct phy_device *phydev)
- 		if (val < 0)
- 			return val;
- 
-+		/* BCM54811 is not capable of LDS but the corresponding bit
-+		 * in LRESR is set to 1 and marked "Ignore" in the datasheet.
-+		 * So we must read the bcm54811 as unable to auto-negotiate
-+		 * in BroadR-Reach mode.
-+		 */
-+		if (BRCM_PHY_MODEL(phydev) == PHY_ID_BCM54811)
-+			aneg = 0;
-+		else
-+			aneg = val & LRESR_LDSABILITY;
-+
- 		linkmode_mod_bit(ETHTOOL_LINK_MODE_Autoneg_BIT,
- 				 phydev->supported,
--				 val & LRESR_LDSABILITY);
-+				 aneg);
- 		linkmode_mod_bit(ETHTOOL_LINK_MODE_100baseT1_Full_BIT,
- 				 phydev->supported,
- 				 val & LRESR_100_1PAIR);
-@@ -747,8 +757,15 @@ static int bcm54811_config_aneg(struct phy_device *phydev)
- 
- 	/* Aneg firstly. */
- 	if (priv->brr_mode) {
--		/* BCM54811 is only capable of autonegotiation in IEEE mode */
--		phydev->autoneg = 0;
-+		/* BCM54811 is only capable of autonegotiation in IEEE mode.
-+		 * In BroadR-Reach mode, disable the Long Distance Signaling,
-+		 * the BRR mode autoneg as supported in other Broadcom PHYs.
-+		 * This bit is marked as "Reserved" and "Default 1, must be
-+		 *  written to 0 after every device reset" in the datasheet.
-+		 */
-+		ret = phy_modify(phydev, MII_BCM54XX_LRECR, LRECR_LDSEN, 0);
-+		if (ret < 0)
-+			return ret;
- 		ret = bcm_config_lre_aneg(phydev, false);
- 	} else {
- 		ret = genphy_config_aneg(phydev);
--- 
-2.39.5
+and because some of the call site really do want to know if this is dax
+should also leave a helper
 
+static inline fuse_is_dax()
+
+...
+
+>
+>  ssize_t fuse_dax_read_iter(struct kiocb *iocb, struct iov_iter *to);
+>  ssize_t fuse_dax_write_iter(struct kiocb *iocb, struct iov_iter *from);
+> diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
+> index e9db2cb8c150..29147657a99f 100644
+> --- a/fs/fuse/inode.c
+> +++ b/fs/fuse/inode.c
+> @@ -164,7 +164,7 @@ static void fuse_evict_inode(struct inode *inode)
+>         if (inode->i_sb->s_flags & SB_ACTIVE) {
+>                 struct fuse_conn *fc =3D get_fuse_conn(inode);
+>
+> -               if (FUSE_IS_DAX(inode))
+> +               if (FUSE_IS_VIRTIO_DAX(fi))
+>                         fuse_dax_inode_cleanup(inode);
+>                 if (fi->nlookup) {
+>                         fuse_queue_forget(fc, fi->forget, fi->nodeid,
+> diff --git a/fs/fuse/iomode.c b/fs/fuse/iomode.c
+> index c99e285f3183..aec4aecb5d79 100644
+> --- a/fs/fuse/iomode.c
+> +++ b/fs/fuse/iomode.c
+> @@ -204,7 +204,7 @@ int fuse_file_io_open(struct file *file, struct inode=
+ *inode)
+>          * io modes are not relevant with DAX and with server that does n=
+ot
+>          * implement open.
+>          */
+> -       if (FUSE_IS_DAX(inode) || !ff->args)
+> +       if (FUSE_IS_VIRTIO_DAX(fi) || !ff->args)
+>                 return 0;
+>
+
+... Like here, later in your patch set you add explicit check for
+!fuse_famfs_file()
+
+If you make this into if (fuse_is_dax(fi)
+it will be easier and nicer in the end.
+
+Thanks,
+Amir.
 
