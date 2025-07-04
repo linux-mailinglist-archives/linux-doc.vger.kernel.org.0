@@ -1,131 +1,214 @@
-Return-Path: <linux-doc+bounces-52049-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52051-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72DD8AF915A
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 13:20:28 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 25002AF91AA
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 13:38:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0CDB41BC635B
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 11:20:45 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8C8EA1BC7354
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Jul 2025 11:38:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B55B2C1592;
-	Fri,  4 Jul 2025 11:20:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EC8A2D0C6F;
+	Fri,  4 Jul 2025 11:38:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="Pg+ub1sc"
+	dkim=pass (2048-bit key) header.d=iogearbox.net header.i=@iogearbox.net header.b="E/JO7/9f"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+Received: from www62.your-server.de (www62.your-server.de [213.133.104.62])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30FA3258CC0;
-	Fri,  4 Jul 2025 11:20:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D7DA34CF5;
+	Fri,  4 Jul 2025 11:38:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.133.104.62
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751628024; cv=none; b=LoyKSliXiR8vrHk3SH+RQAu9Zz9PXva4NbAUgN+kwfndz+vTJlmb4wZfs2NvjrvskxoQ3kneS/DvPJTcHJN4MbeEDzLyzEjBBXY2l23ySlRsPuOKquDk6OmrsK+90Qo8cwp2bML5NKTEnB1rcwvXOm4mlaGaZj5IOny701FSmN0=
+	t=1751629095; cv=none; b=m08f0o31tPWz4i6Zetlnd3KDKM1fXT+ZXj1ELZU4QWfqOauouhuFbMTO89jEn+UssLRJ2KkefNsz3O4bVCS4RBmWUZs1lTkeOhhnugAtZ8ww5SJzHT/A6WwfIIJAUUF+jUUbyNPk53e2fVwupFD5mwPYwLWGbdVXSH4ko5Cj1yw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751628024; c=relaxed/simple;
-	bh=an+9EeNhe+f7NnClXdzy3GT6wr5ZBU9/N4Xn0aJS5Mg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HugWJH2wU4qW+imBpLuMhLAsnLoQWVbp4Y9NLpQRG/CB336dfQJ5V1ZTkQ/rL3IFG7/m7ceNfP+3DWxMnu2u1jSxFchoHbcipopMcYpkoThiwn2bULmKndlZbmj0QpnlEaMx3bd+7CVFonmR7Li6ppe1TN3n4vOlFo7rCzmHHa8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=Pg+ub1sc; arc=none smtp.client-ip=65.109.113.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id E6CA940E021F;
-	Fri,  4 Jul 2025 11:20:19 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id ImRrZ82OTgD8; Fri,  4 Jul 2025 11:20:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1751628016; bh=PbxPRHfo8N4/KU51gmHKmbPHvzNy62/CXTuO33u0tnA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Pg+ub1scvKldoKC9Ddw71bhRdkqL0oPyDEOyxXt/tLUSxq0lLyLLq4kuuENHD2X44
-	 tmxZW9IeFIRwHFUHvv1IVUePmve4vx9evHRDQkSOr0N0LC0l5VSwgKQtUfhZbbDnN9
-	 WioZ5lVAouTwMkBi8u1LkoxmtGVGGYwlTTeamzsT1LUux57EaKd9ln7HM3P90gYMWa
-	 WhxVOYHVSDFp5FBsbWClz7LjPSQy2B/xQ0iA0jQbTtDmduCnSr4MDuuK6rrYO61KiH
-	 99b0nZpXqWmsCMpfkBBU/4PuLz3KrjpxP6uUp34w0Lw6N1b4pCtSZ1tK9LeG9qdoUl
-	 RdVmNfVfp/jWXAlfILdT24bluuiFejdLSFDBE6Vh2eQhkVIadmmtoukGGTgNZpaElX
-	 2vUYNb79OXqmVFcPtFrbV7lf5je6N/abM4wf3Ka/NQwExEi0B2fKv8tyhQHe8TK+jW
-	 iKfLfjh1rtc8TOADC+64EGNYMgrY63fWzQ8Uhea8Ds92V2OcoX5lO5dBdgMaLZ/aH1
-	 j0evWwTP+yr/fuQv5h523cVSL612AyNBQ/NaA6jBE62avucrRo+4/wJMlmcXvNNtzG
-	 dfKyyun2NRGQACwd7lp8x30EG6ho2IiUrK9aGkc8cStkxmG3yvQqiOCfvmZqexU/kO
-	 ufm/8IhY1dxTkUA8dezDqfww=
-Received: from zn.tnic (p57969c58.dip0.t-ipconnect.de [87.150.156.88])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
-	(No client certificate requested)
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 7914C40E021E;
-	Fri,  4 Jul 2025 11:20:00 +0000 (UTC)
-Date: Fri, 4 Jul 2025 13:19:54 +0200
-From: Borislav Petkov <bp@alien8.de>
-To: Breno Leitao <leitao@debian.org>
-Cc: Len Brown <lenb@kernel.org>, James Morse <james.morse@arm.com>,
-	Jonathan Corbet <corbet@lwn.net>, tony.luck@intel.com,
-	rafael@kernel.org, Alexei Starovoitov <ast@kernel.org>,
-	kbusch@kernel.org, rmikey@meta.com, kuba@kernel.org,
-	linux-edac@vger.kernel.org, mchehab@kernel.org,
-	linux-acpi@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, kernel-team@meta.com
-Subject: Re: [PATCH 0/2] panic: taint flag for recoverable hardware errors
-Message-ID: <20250704111954.GBaGe42gY5_xADb17Z@fat_crate.local>
-References: <20250704-taint_recovered-v1-0-7a817f2d228e@debian.org>
+	s=arc-20240116; t=1751629095; c=relaxed/simple;
+	bh=YJP28q7Ucuh5+7BaGONOkzuEJ3W9tO+RZPWtLfGChOQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=MyoYvv4sbwv9ho/gXOyZ2IvLHIkt0oQUQ7l7uzfZFk5KS37lqRqxeW9ALB1NABOsqyEgJkhW6ASXCRW0oW53aSk7gDlnJ2MT/z9gFNZNyOhqrVhDJzqWbJWAYIOl/CbmhpVwBRabBF8Ee3HnsPZEh+kbTOm5O/8JCM68a7CZA24=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=iogearbox.net; spf=pass smtp.mailfrom=iogearbox.net; dkim=pass (2048-bit key) header.d=iogearbox.net header.i=@iogearbox.net header.b=E/JO7/9f; arc=none smtp.client-ip=213.133.104.62
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=iogearbox.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iogearbox.net
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=iogearbox.net; s=default2302; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+	bh=ynC92e4rjsZv78cTw8oxuNAOqH35c/SFBFFQS7G9ITc=; b=E/JO7/9fAmFdO1eN4H2Q43FGZn
+	4ShIr/TC33BfEuNNGiQnlyf4jEJTaJ9+pf9h3MnkoB7eSetIN8ZhjFYmWq6Iv8A65Woc7u6bIay7k
+	NqKDUe0niYCFjXpSt87C2aYckfzzQ/jq2iSGipNs56IVU4bA8XmzH9JvE7clqVIV+ONIG6Z6Y/cQs
+	S8qPcygYw0TOAJZZdWMFNl02/zNb0pwqYs23nUGAZv+v0DMGNrvDvacS6a3lGjNUJ8e6driZHEPBj
+	eQmW+TY9fG8evl5IneDSEI/7+YQKtKJTvostwB41z1Siysa3NgW1T5WNbzSp5w+IXMDJl8F3k8P04
+	C2QDdK9w==;
+Received: from sslproxy08.your-server.de ([78.47.166.52])
+	by www62.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.96.2)
+	(envelope-from <daniel@iogearbox.net>)
+	id 1uXek2-0004GS-1e;
+	Fri, 04 Jul 2025 13:38:06 +0200
+Received: from localhost ([127.0.0.1])
+	by sslproxy08.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <daniel@iogearbox.net>)
+	id 1uXek1-0006BS-2J;
+	Fri, 04 Jul 2025 13:38:05 +0200
+Message-ID: <f5d724ab-0eb6-41a1-b694-8aea566e99ab@iogearbox.net>
+Date: Fri, 4 Jul 2025 13:38:04 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20250704-taint_recovered-v1-0-7a817f2d228e@debian.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH bpf-next,v3 2/2] selftests/bpf: Enhance XDP Rx metadata
+ handling
+To: Jesper Dangaard Brouer <hawk@kernel.org>,
+ "Song, Yoong Siang" <yoong.siang.song@intel.com>,
+ "David S . Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Alexei Starovoitov <ast@kernel.org>,
+ John Fastabend <john.fastabend@gmail.com>,
+ Stanislav Fomichev <sdf@fomichev.me>, Andrii Nakryiko <andrii@kernel.org>,
+ Martin KaFai Lau <martin.lau@linux.dev>, Eduard Zingerman
+ <eddyz87@gmail.com>, Song Liu <song@kernel.org>,
+ Yonghong Song <yonghong.song@linux.dev>, KP Singh <kpsingh@kernel.org>,
+ Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>,
+ Mykola Lysenko <mykolal@fb.com>, Shuah Khan <shuah@kernel.org>,
+ Magnus Karlsson <magnus.karlsson@gmail.com>, =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?=
+ <bjorn@kernel.org>, Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+ Jonathan Lemon <jonathan.lemon@gmail.com>
+Cc: "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+ "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>
+References: <20250702165757.3278625-1-yoong.siang.song@intel.com>
+ <20250702165757.3278625-3-yoong.siang.song@intel.com>
+ <77463344-1b1a-443a-97be-a7ef8a88b8af@kernel.org>
+ <IA3PR11MB92546301B67FB3A9FDCD716DD842A@IA3PR11MB9254.namprd11.prod.outlook.com>
+ <88a64a65-bd8c-4b73-af19-6764054d4572@kernel.org>
+Content-Language: en-US
+From: Daniel Borkmann <daniel@iogearbox.net>
+Autocrypt: addr=daniel@iogearbox.net; keydata=
+ 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
+In-Reply-To: <88a64a65-bd8c-4b73-af19-6764054d4572@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: Clear (ClamAV 1.0.7/27689/Fri Jul  4 10:42:55 2025)
 
-On Fri, Jul 04, 2025 at 03:55:18AM -0700, Breno Leitao wrote:
-> Add a new taint flag to the kernel (HW_ERROR_RECOVERED - for the lack of
-> a better name) that gets set whenever the kernel detects and recovers
-> from hardware errors.
+On 7/4/25 11:58 AM, Jesper Dangaard Brouer wrote:
+> On 04/07/2025 03.17, Song, Yoong Siang wrote:
+>> On Friday, July 4, 2025 1:05 AM, Jesper Dangaard Brouer <hawk@kernel.org> wrote:
+>>> On 02/07/2025 18.57, Song Yoong Siang wrote:
+>>>> Introduce the XDP_METADATA_SIZE macro as a conservative measure to
+>>>> accommodate any metadata areas reserved by Ethernet devices.
+>>>
+>>> This seems like a sloppy workaround :-(
+>>>
+>>> To me, the problem arise because AF_XDP is lacking the ability to
+>>> communicate the size of the data_meta area.  If we had this capability,
+>>> then we could allow the IGC driver to take some of the space, have the
+>>> BPF-prog expand it futher (bpf_xdp_adjust_meta) and then userspace
+>>> AF_XDP would simply be able to see the size of the data_meta area, and
+>>> apply the struct xdp_meta at right offset.
+>>>
+>> Thanks for your input.
+>>
+>> I agree with you that the implementation will be simple if user application
+>> able to get the size of data_meta area. The intention of this patch set is to let
+>> developer aware of such limitations before we have a perfect solution.
+>>
+>> Btw, do you got any suggestion on how to expose the metadata length?
+>> I not sure whether xdp_desc.options is a simple and good idea or not?
 > 
-> The taint provides additional context during crash investigation *without*
-> implying that crashes are necessarily caused by hardware failures
-> (similar to how PROPRIETARY_MODULE taint works). It is just an extra
-> information that will provide more context about that machine.
+> That is a question to the AF_XDP maintainers... added them to this email.
+> 
+> /* Rx/Tx descriptor */
+> struct xdp_desc {
+>      __u64 addr;
+>      __u32 len;
+>      __u32 options;
+> };
+> 
+> As far as I know, the xdp_desc.options field isn't used, right?
 
-Dunno, looks like a hack to me to serve your purpose only.
+The options holds flags, see also XDP_PKT_CONTD and XDP_TX_METADATA.
 
-Because when this goes up, then people will start wanting to taint the kernel
-for *every* *single* correctable error.
+> (Please AF_XDP experts, please verify below statements:)
+> Something else we likely want to document: The available headroom in the
+> AF_XDP frame.  When accessing the metadata in userspace AF_XDP we do a
+> negative offset from the UMEM packet pointer.  IIRC on RX the available
+> headroom will be either 255 or 192 bytes (depending on NIC drivers).
+> 
+> Slightly confusing when AF_XDP transmitting from userspace the UMEM
+> headroom is default zero (XSK_UMEM__DEFAULT_FRAME_HEADROOM is zero).
+> This is configurable via xsk_umem_config.frame_headroom, like I did in
+> this example[1].
+> 
+> Maybe I did something wrong in[1], because I see that the new method is
+> setting xsk_umem_config.tx_metadata_len + flag XDP_UMEM_TX_METADATA_LEN.
+> This is nicely documented in [2]. How does this interact with setting
+> xsk_umem_config.frame_headroom ?
 
-So even if an error got corrected, the kernel will be tainted.
+If you request XDP_UMEM_TX_METADATA_LEN then on TX side you can fill
+struct xsk_tx_metadata before the start of packet data, that is,
+meta = data - sizeof(struct xsk_tx_metadata). The validity of the
+latter is indicated via desc->options |= XDP_TX_METADATA and then
+you fill meta->flags with things like XDP_TXMD_FLAGS_CHECKSUM to
+tell that the related fields are valid (ex. request.csum_start,
+request.csum_offset) and that you expect the driver to do the
+offload with this info. This is also what I mentioned in the other
+thread some time ago that imho it would make sense to have this also
+on RX side somewhat similar to virtio_net_hdr..
 
-Then users will say, oh oh, my kernel is tainted, I need to replace my hw
-because broken. Even if it isn't broken in the very least.
+> [1] https://github.com/xdp-project/bpf-examples/blob/3f365af4be1fe6a0ef77e751ff9b12c912810453/AF_XDP-interaction/af_xdp_user.c#L423-L424
+> [2] https://www.kernel.org/doc/html/v6.12/networking/xsk-tx-metadata.html
+> 
+> --Jesper
 
-Basically what we're doing with drivers/ras/cec.c will be undone.
-
-All because you want to put a bit of information somewhere that the machine
-had a recoverable error.
-
-Well, that bit of information is in your own RAS logs, no? I presume you log
-hw errors in a big fleet and then you analyze those logs when the machine
-bombs. So a mere look at those logs will tell you that you had hw errors.
-
-And mind you, that proposed solution does not help people who want to know
-what the errors were: "Oh look, my kernel got tainted because of hw errors. Now
-where are those errors?"
-
-So I think this is just adding redundant information which we already have
-somewhere else and also actively can mislead users.
-
-IOW, no need to taint - you want to simply put a bit of info in the kdump blob
-which gets dumped by the second kernel that the first kernel experienced hw
-errors. That is, if you don't log hw errors. But you should...!
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
 
