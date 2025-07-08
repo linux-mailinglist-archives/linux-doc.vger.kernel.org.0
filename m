@@ -1,131 +1,92 @@
-Return-Path: <linux-doc+bounces-52290-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52293-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE0C4AFC0F2
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 04:41:18 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2FDCAFC0F9
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 04:42:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DF22A3AE895
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 02:40:51 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 15C824A5147
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 02:42:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3515921CC60;
-	Tue,  8 Jul 2025 02:41:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 45188224AFE;
+	Tue,  8 Jul 2025 02:42:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b="RoJkTC6Z"
+	dkim=pass (2048-bit key) header.d=leap-io-com.20200927.dkim.feishu.cn header.i=@leap-io-com.20200927.dkim.feishu.cn header.b="Dsp4oSTq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out203-205-221-153.mail.qq.com (out203-205-221-153.mail.qq.com [203.205.221.153])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from va-2-31.ptr.blmpb.com (va-2-31.ptr.blmpb.com [209.127.231.31])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFB2B625;
-	Tue,  8 Jul 2025 02:41:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=203.205.221.153
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49AD421CC60
+	for <linux-doc@vger.kernel.org>; Tue,  8 Jul 2025 02:42:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.127.231.31
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751942474; cv=none; b=GzF3YknlGy+eNrKsTVPAClBZhU1NqsJj+5pT4BRmM0dROYVoppnhBaOGxPuMc0eIHs6b7EPjwILVnjUTT89Kx0SujTfRf6xULXW/y3gsI7x0idS1dY+FfpqvL08hyTpmb2oHC6qnLNKVilzaCYyT7z6bn3fOaUy0/ajo+a8mePY=
+	t=1751942554; cv=none; b=rdmDNUOvoUEbXAxehR6zCTQ+nV4gARTioahSaRZE4j3UqjcYFiExQgZ8Lrlxry1AuzLWkK/qGY3ajCrE6SpXwMbaFh4yiGRiGEoFB2Ngc14aNI5NKwMJynZVqEVsVVDLVPtYIqY0qvzynOjeJNluT+Fg5STMXmoaRBvkqPZGz+s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751942474; c=relaxed/simple;
-	bh=g/EPdX5krHKVrrNbX5NhYWOelptRAZuijXhxQDRNGho=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=du15M+mJudi+zMt8Cax3nBZr5Ox02c/J2+SyDo1b1U7xwSX7m9rwu5g/CZt/N0WJF0UgsfqFIPkSUnKLutgsWVm3IJVAVumjacf2pYcJKHn2wSqbfd5M7tX4kPw/Mj7BRRbJOCE1C2Hp3YEKU6Zg6pyJ2CC4eQQVI2fuoJP0/Zg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com; spf=pass smtp.mailfrom=qq.com; dkim=pass (1024-bit key) header.d=qq.com header.i=@qq.com header.b=RoJkTC6Z; arc=none smtp.client-ip=203.205.221.153
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1751942456; bh=kvzF1+p5zL61FS2tiZH6CM11U4IQ8gp2XDypmzE3OA4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=RoJkTC6Zt/jiPjT7kGDo1mdPrG0IiVqc+b/ptrrbvnPUJ/WqoXBMKVjl728GvVsUg
-	 qh9M2PqwAWiVB8VTLiWnFash9zw9SAInfjytQlETwrOu8VFPLDDyqDRdHPiIZylX3j
-	 WITJHeV9SAzlHumuy2CIG3RL4QBaJ1D79YruDeUM=
-Received: from [172.25.28.139] ([210.12.148.147])
-	by newxmesmtplogicsvrszc16-0.qq.com (NewEsmtp) with SMTP
-	id A34B4E63; Tue, 08 Jul 2025 10:40:52 +0800
-X-QQ-mid: xmsmtpt1751942452tqb7p6kqb
-Message-ID: <tencent_28C38B580EFE8219F5D7E850944CC55A2106@qq.com>
-X-QQ-XMAILINFO: OdIVOfqOaVcrB8J1/3pY4XbUjodfVtvPJYY8MEIntC/Qk0T7VCsqouThYi3dUz
-	 nBB+HWRWUrC/DjWaMIe3fDKXL+/1yL0ONPwSf6VzAi9s+e53grwuKj0NrQxQfDB/tvErjLQT6kN+
-	 ku8eDgRQ2ZJks+cyE6nUh2pt+o3LhMMpdTbK4oHplFtkSFGZrcvGgOsZ8iRSuF3JWM+VTBJ6/zs8
-	 ELuPCcaem7SCKvoIQ+LGmhscZdTrg+SX+8O+82yQWsfR3GzYefu6z/uqvB+9+MfattdYmOk319DS
-	 i3L+xjwYpRyws77ucRGqvnAiZTclJvNdvW5Do35M3N/EIDqb55mbXU/mZyehhaKEjZOJ/CJCXtBV
-	 I1yVo9hxMcnZji1oHD2QmHiurcR21qkFJ48nUrE5bgKQHEs0NtHEUk2OgOI8e3UHB98GapKPZEvq
-	 J2H/qWdMeLiDnQOOikfFUpYXv0d5J5xBMhOh2S06+Wy1vvATxmpH7knEDr9Pk1rIhFOclUXQ4z2S
-	 6Tm0+J3brxOwAa6HklGaUpXatvdWB77/jDpyae1VhaJFS144yMZXQi4xwZvd5MmOTSqDkf+Z6Byf
-	 U67miPCw/wdH+aeKBdmaFlAFZ8TvAKPgrP9yB0GOMn+Sbq+fYXl5kyBMA/tuI0jGAYtqf9B7EUbl
-	 5noJVRcbZQtSROy6bdSLFIW4bKRDmmpIcC1Ako6Wei97QHe5E16b5+Z16k3QUZ4FLEC45fwNHB8o
-	 ACB8jBz9fsfYwsIHRrBtBPctVuDEoXwr8hkqUUd+9Pe+h6S0P8WDHc2zKDUEj1hrzy7yhqT2WOBM
-	 0Gbj+Ajmjfj+YVEpDCWs5akjrfVRsOiXTi6mr9zJ2szYtAyWOjshuTybaVqNyzlqOoW+I8UVBng3
-	 mQJyqxNfJsPJ0PQXKAgN09aGyzNEOOmpvp0Q5ZrgBz/bbuBIvnOpYZa15Fe0HNTZbF36qh61wzN2
-	 JrQJ6uYekSONwhYqbUGREsMuMnQ6/KpP+y7u/MmU0FGWNV07kXgKgmjJ9G9dO3VXhNeqZGyag=
-X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
-X-OQ-MSGID: <321af03f-1f7d-4ea5-81f4-28938410a7fe@qq.com>
-Date: Tue, 8 Jul 2025 10:40:52 +0800
+	s=arc-20240116; t=1751942554; c=relaxed/simple;
+	bh=Gq1YqCT2qL1Yi952Nh7ZsJjUccYqZyrHmT76Ak6Ws84=;
+	h=Cc:Subject:Message-Id:Content-Type:To:From:Date:Mime-Version; b=ZZyY0H6hrODCHkRlfJoLZ5p7EL5x2QMG5fRnsrO/sFw/jZgywrMess5dAoD2oXtqBHLFzNQRtZsbxb7bw9OU2mMKBUjB5Iobn0ArAolFXdW3hhczCCqJcgQi9bkVgDx1HXOVhCe3HKhqPfYkd6Eo6tzrCtNPGhLaN2RCo2s+t9E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leap-io.com; spf=pass smtp.mailfrom=leap-io.com; dkim=pass (2048-bit key) header.d=leap-io-com.20200927.dkim.feishu.cn header.i=@leap-io-com.20200927.dkim.feishu.cn header.b=Dsp4oSTq; arc=none smtp.client-ip=209.127.231.31
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leap-io.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=leap-io-com.20200927.dkim.feishu.cn; t=1751942502;
+  h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=ooO20KNRshO/CWIHUNJnzfkec3pTS8RpjcC32Z8x18E=;
+ b=Dsp4oSTqvNEzuZGlQ2cuxKmEHoM2gd7Bisb1ZXd7IlDYgZzNaw/XSAIggHe3Cs0q2RIBc0
+ DVhKMmzqE7ub3M5YE3A2zVvz8SwEr8RoY+7dPvyBt6wyGLNPUOrqMsfMaeyy0rgiozAHHi
+ 18oEmBBjKBRdl6fRcx6/5VCF5BexgPLX4UziyiYdrXhayfNyOWCtTriBH6/PmKU884yvtK
+ WHpsXKV5W1AztuJN8D78XhQTGA2AyZK8r0a2qb7WqdvlOKTwokSR9JlCmkXLIn6zxvP3Pv
+ rg4NjRAd19zo+lCzwakJjUFhWLqQuAwrGYT8NM1Wwvh1lDVdVr205LXNibYsyg==
+Cc: <dzm91@hust.edu.cn>, <corbet@lwn.net>, <linux-doc@vger.kernel.org>
+Subject: [PATCH 0/7] docs/zh_CN: add chinese translation for scsi
+X-Mailer: git-send-email 2.25.1
+Received: from localhost.localdomain ([210.12.5.226]) by smtp.feishu.cn with ESMTPS; Tue, 08 Jul 2025 10:41:40 +0800
+Message-Id: <20250708024139.848025-1-doubled@leap-io.com>
+X-Lms-Return-Path: <lba+2686c8564+3a9e71+vger.kernel.org+doubled@leap-io.com>
+Content-Type: text/plain; charset=UTF-8
+To: <alexs@kernel.org>, <si.yanteng@linux.dev>
+From: "haodongdong" <doubled@leap-io.com>
+Date: Tue,  8 Jul 2025 10:41:32 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/5] mm/filemap: add write_begin_get_folio() helper
- function
-To: Matthew Wilcox <willy@infradead.org>,
- =?UTF-8?B?6ZmI5rab5rabIFRhb3RhbyBDaGVu?= <chentaotao@didiglobal.com>
-Cc: "tytso@mit.edu" <tytso@mit.edu>, "hch@infradead.org" <hch@infradead.org>,
- "adilger.kernel@dilger.ca" <adilger.kernel@dilger.ca>,
- "brauner@kernel.org" <brauner@kernel.org>,
- "jani.nikula@linux.intel.com" <jani.nikula@linux.intel.com>,
- "rodrigo.vivi@intel.com" <rodrigo.vivi@intel.com>,
- "tursulin@ursulin.net" <tursulin@ursulin.net>,
- "airlied@gmail.com" <airlied@gmail.com>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
- "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
- "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "frank.li@vivo.com" <frank.li@vivo.com>
-References: <20250707070023.206725-1-chentaotao@didiglobal.com>
- <20250707070023.206725-5-chentaotao@didiglobal.com>
- <aGvfr_rLUAHaUQkY@casper.infradead.org>
-From: Taotao Chen <chentao325@qq.com>
-In-Reply-To: <aGvfr_rLUAHaUQkY@casper.infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Original-From: haodongdong <doubled@leap-io.com>
 
+This patch set adds Chinese translations for the SCSI documentation.
 
-在 2025/7/7 22:54, Matthew Wilcox 写道:
-> On Mon, Jul 07, 2025 at 07:00:33AM +0000, 陈涛涛 Taotao Chen wrote:
->> +++ b/mm/filemap.c
-> I think this should be a static inline function.  I don't think it's
-> worth moving out of line.  Of course if you have measurements that show
-> differently, you can change my mind.
->
->> +/**
->> + * write_begin_get_folio - Get folio for write_begin with flags
->> + * @iocb: kiocb passed from write_begin (may be NULL)
->> + * @mapping: the address space to search in
->> + * @index: page cache index
->> + * @len: length of data being written
->> + *
->> + * This is a helper for filesystem write_begin() implementations.
->> + * It wraps __filemap_get_folio(), setting appropriate flags in
->> + * the write begin context.
->> + *
->> + * Returns a folio or an ERR_PTR.
-> We prefer:
->
->   * Return: A folio or an ERR_PTR
->
-> as this gets its own section in the kernel-doc output.
+haodongdong (7):
+  docs/zh_CN: update subsystem-apis.rst translation
+  docs/zh_CN: add scsi.rst translation
+  docs/zh_CN: add link_power_management_policy.rst translation
+  docs/zh_CN: add scsi-parameters.rst translation
+  docs/zh_CN: add scsi_mid_low_api.rst translation
+  docs/zh_CN: add scsi_eh.rst translation
+  docs/zh_CN: add sd-parameters.rst translation
 
-Hi,
+ .../translations/zh_CN/scsi/index.rst         |   92 ++
+ .../scsi/link_power_management_policy.rst     |   32 +
+ .../zh_CN/scsi/scsi-parameters.rst            |  118 ++
+ .../translations/zh_CN/scsi/scsi.rst          |   48 +
+ .../translations/zh_CN/scsi/scsi_eh.rst       |  482 +++++++
+ .../zh_CN/scsi/scsi_mid_low_api.rst           | 1174 +++++++++++++++++
+ .../translations/zh_CN/scsi/sd-parameters.rst |   38 +
+ .../translations/zh_CN/subsystem-apis.rst     |    2 +-
+ 8 files changed, 1985 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/scsi/index.rst
+ create mode 100644 Documentation/translations/zh_CN/scsi/link_power_management_policy.rst
+ create mode 100644 Documentation/translations/zh_CN/scsi/scsi-parameters.rst
+ create mode 100644 Documentation/translations/zh_CN/scsi/scsi.rst
+ create mode 100644 Documentation/translations/zh_CN/scsi/scsi_eh.rst
+ create mode 100644 Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst
+ create mode 100644 Documentation/translations/zh_CN/scsi/sd-parameters.rst
 
-I’ll update both in the next version. Thanks for your review!
-
---Taotao
-
-
-
+-- 
+2.25.1
 
