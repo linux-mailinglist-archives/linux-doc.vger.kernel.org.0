@@ -1,229 +1,131 @@
-Return-Path: <linux-doc+bounces-52333-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52335-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C7E2AFC404
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 09:29:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A2F4AFC44B
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 09:39:25 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 666F7424E77
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 07:29:13 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4A785426CA6
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Jul 2025 07:38:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50C42299943;
-	Tue,  8 Jul 2025 07:29:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5330529AB02;
+	Tue,  8 Jul 2025 07:39:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="bx1qnh5C";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="iVUaXGVB";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="bx1qnh5C";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="iVUaXGVB"
+	dkim=pass (2048-bit key) header.d=brighamcampbell.com header.i=@brighamcampbell.com header.b="CL55tIaj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9F3D298991
-	for <linux-doc@vger.kernel.org>; Tue,  8 Jul 2025 07:29:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7B8729993D
+	for <linux-doc@vger.kernel.org>; Tue,  8 Jul 2025 07:39:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1751959766; cv=none; b=urT+N6v4xHDzNHRM7s8jRS70P+a4mSgeZbwmQ4kcA04LAsLWztzSmafTN16X5aPjjy6kEzsekOMWZixvIdzaxOm/cxsafTHhpThILmMgzGPqDoaGUutpSoTU69raTQ4fZTr8eOWQiPWJcz5jeCjanKTENNCE/tU5DNyN2EuCUDI=
+	t=1751960350; cv=none; b=Uii5BRCXEniTcQCnhRBcJdnYSZ1DmWa/5tlAWAqNZHChMlCjb9QoK2VcPzsrG08PquoJ0XjU0mQ1D6wiUd4Fm6BnCQLjXRj9L7tCPD4yt8vwae1yeHZCyy4zfh2lPBJLw0C+JWhTc+Pv0Whp+vZGf6RehKNkPNTgKNoxcOH4XmA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1751959766; c=relaxed/simple;
-	bh=Yy5s3tOFMC/rTCLld/EgSCsz8DvydWujL2hwXFKTktU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=fYCe+ptaz2hPJbCZhYZ0kYjiUDdugfHh+Vd80EcbAE9VdSnbFErK54s3/BGjr1U30mRKENR4QBggR89Vn1J4+V9VugZn20ViwxFrhscgCCsipynUB9gL611Ywbl1+qJUQGLa8haAHKELsCtwxb3tQAXq7sYcU00vNyNjvYQ94xM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=bx1qnh5C; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=iVUaXGVB; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=bx1qnh5C; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=iVUaXGVB; arc=none smtp.client-ip=195.135.223.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 0C98F1F395;
-	Tue,  8 Jul 2025 07:29:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1751959761; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=oEPibuz/UmeneAYugM2MEEKg37oU+6TRLDHisiab2fw=;
-	b=bx1qnh5CUl5nUrjwr7MFOuFpXrUR1UFemEt6r/AnHAnBqHT8ZNjbRfaTW+4E4oPh1wFT5g
-	LGFIr1GkXeMU4xG0tiq8HGQt/BnNbH7g9EZogaJVAq/oW5DRXmwFnlOP8uhigZA0UaWUGV
-	Sy5LO/8NTGosx0yQl3acENkhpkqn62E=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1751959761;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=oEPibuz/UmeneAYugM2MEEKg37oU+6TRLDHisiab2fw=;
-	b=iVUaXGVBWmLqcyHQlS7AnDQTecIiydAxk6aig3YXtqA42SGZxZRIWWBdsUnpXo+PdiNb2S
-	LQyiepNmcZF8rvDw==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=bx1qnh5C;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=iVUaXGVB
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1751959761; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=oEPibuz/UmeneAYugM2MEEKg37oU+6TRLDHisiab2fw=;
-	b=bx1qnh5CUl5nUrjwr7MFOuFpXrUR1UFemEt6r/AnHAnBqHT8ZNjbRfaTW+4E4oPh1wFT5g
-	LGFIr1GkXeMU4xG0tiq8HGQt/BnNbH7g9EZogaJVAq/oW5DRXmwFnlOP8uhigZA0UaWUGV
-	Sy5LO/8NTGosx0yQl3acENkhpkqn62E=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1751959761;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=oEPibuz/UmeneAYugM2MEEKg37oU+6TRLDHisiab2fw=;
-	b=iVUaXGVBWmLqcyHQlS7AnDQTecIiydAxk6aig3YXtqA42SGZxZRIWWBdsUnpXo+PdiNb2S
-	LQyiepNmcZF8rvDw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A976A13A8E;
-	Tue,  8 Jul 2025 07:29:20 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 6AgYKdDIbGhMRAAAD6G6ig
-	(envelope-from <vbabka@suse.cz>); Tue, 08 Jul 2025 07:29:20 +0000
-From: Vlastimil Babka <vbabka@suse.cz>
-Date: Tue, 08 Jul 2025 09:28:58 +0200
-Subject: [PATCH 2/2] module: Rename EXPORT_SYMBOL_GPL_FOR_MODULES to
- EXPORT_SYMBOL_FOR_MODULES
+	s=arc-20240116; t=1751960350; c=relaxed/simple;
+	bh=wypA2EBmpHp+y/b2ODxhiTcNbDIFZEPcjrmQqxW5FIA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=UinEs0AtKB7ujJ+3BYFcjwzgna2yprg1SSmjNQV7xvZbtO0sUdFD84/tJkQyDjBt39zmz1/r2fkfCBiPot+3y7QXrLCGH0Ey+/diZQSqG8+fX2Gix+RXSUls9OP/gT/vTQjQ30oGdMKfqLSSYhLSQ5HR6T19d71NmTogl55or/Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=brighamcampbell.com; spf=pass smtp.mailfrom=brighamcampbell.com; dkim=pass (2048-bit key) header.d=brighamcampbell.com header.i=@brighamcampbell.com header.b=CL55tIaj; arc=none smtp.client-ip=209.85.210.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=brighamcampbell.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=brighamcampbell.com
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-73c17c770a7so4988670b3a.2
+        for <linux-doc@vger.kernel.org>; Tue, 08 Jul 2025 00:39:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=brighamcampbell.com; s=google; t=1751960347; x=1752565147; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZN7aSjUU2m/lgLen2skU4S+C9lHA5hU+Z1BWGyIcRGk=;
+        b=CL55tIajcxGi82FtpZGUu1hsD2cqwt6I9lYcPqxmJx5qm9tHAijELkYnA/8yhEpLjy
+         G5mAovIu7QkKzXh/HaLLr6Zh2cL0ytnExTVtm7ng2NLC4nCJ8ZdYn05sFEFMwURKmLz0
+         FXu2wUK1DW2oktKXdh3pxSTmbrqzoONkEk+xXEAXQaG/F0lJOyssz/LX326Q1OfXX+WD
+         T0Fuc4LVk0rnR6+wIBHOxC7tub+14bawjVF6N6KeXkOFWpYKVgILj/cEGp+Cl24ic0uU
+         Oy+4SNQHDkdkvq9GeE3cWcvLfGYHCTdmUBbQNIPofwL5EGOBuDP/jhi+yw51m77vqQPW
+         HIQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1751960347; x=1752565147;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZN7aSjUU2m/lgLen2skU4S+C9lHA5hU+Z1BWGyIcRGk=;
+        b=J5dRF2c49LRWaMkIbg2JTx1zcTczkLSwIrqR5beV5qI77HYxPytiFLzeIORWdTtymy
+         KnwBFMl5geCBpW1azQ7h8sV1f0rGFarqSZeBDtUdK+Np3vDc9bZdp6IgzGVipxZ3uTUe
+         brN2sdcAd9IL+4h+q8nNbk5c9cXdLOhxiUuLC7SgnmpCf66tWX3xQQPAxwP75egmirnE
+         +dclZkkyYNlN3NPm9hJpn+9YdiW9g7bej2EfD9ez+lPulfN9O9msHsyIsyNxhHkF3a+a
+         Vig/OhXHw77sIMOEl141wTmYkJ79LJGgol9H2BA20FvH2dwiHpNABKFn6lRdFZUZSPCX
+         zrXg==
+X-Forwarded-Encrypted: i=1; AJvYcCVR7Hx2VFBk3PBaqk0g8HfTVUtj/dNySkgn1YGVR32zwjVB01sMjZ/BzYkpNPs1dZwqWx2UMyLxp/s=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxCarEEagPna1sd88u06Eoc8KwZtAepNa1fQK/O0p0Lqq4Dp8Y5
+	zgr6hvIk4kjKWOPd02hgKtfAeicU85Ul3riBNF69RFqH+zPMnNwT+SFiqJkhyuYKt98=
+X-Gm-Gg: ASbGnctLf7rzM0T6C9diBJeNaCct3GI4MpXQ1m/iBQaKQ7CBUrq1aLxkQpKzlw/Sk/H
+	lcXb7vCZSa1aIysbtFRj9Cttlg5twTor7f+mkqlrkhrHKeeF4MDGIILAwTxJVFODmTngYNFmiYj
+	qtZD4NG4nc8/qeUzK4GcniRNwMgWwvfaC9H1dhI5Jwi+mipShilSPJQ1usdxTKL4BYjL4ymFeCj
+	JVsCEkLUCQq9JzQ/L2ln3wZtH5gviad67aEn00hiHjM47ouV1fey1KttYBXyk2ayl1WyEBxLMI3
+	fvlCiAwOmz2zi3Soeay7IlaRWzHZ4JIkXM3om7XaaKa0frJm+zHPdbqeVERs6NcYNmLWjYt1WzI
+	So3/wBXKtB2NiDlXaZQ==
+X-Google-Smtp-Source: AGHT+IGcYNPUjs2kwjkvmFdGShMU4syGWz/FE+DbOGjtHhPQiV8ZsbgVj6QjspJrmZqOo3MkvanzoA==
+X-Received: by 2002:a05:6a20:e687:b0:21f:cdfa:120e with SMTP id adf61e73a8af0-2260c839353mr26223435637.30.1751960347004;
+        Tue, 08 Jul 2025 00:39:07 -0700 (PDT)
+Received: from mystery-machine.brighamcampbell.com ([64.71.154.6])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74ce42a540bsm11633523b3a.140.2025.07.08.00.39.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 08 Jul 2025 00:39:06 -0700 (PDT)
+From: Brigham Campbell <me@brighamcampbell.com>
+To: dianders@chromium.org,
+	tejasvipin76@gmail.com,
+	skhan@linuxfoundation.org,
+	linux-kernel-mentees@lists.linux.dev,
+	dri-devel@lists.freedesktop.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Brigham Campbell <me@brighamcampbell.com>
+Subject: [PATCH v2 0/3] drm: docs: Remove deprecated MIPI DSI macro
+Date: Tue,  8 Jul 2025 01:38:57 -0600
+Message-ID: <20250708073901.90027-1-me@brighamcampbell.com>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250708-export_modules-v1-2-fbf7a282d23f@suse.cz>
-References: <20250708-export_modules-v1-0-fbf7a282d23f@suse.cz>
-In-Reply-To: <20250708-export_modules-v1-0-fbf7a282d23f@suse.cz>
-To: Matthias Maennich <maennich@google.com>, 
- Jonathan Corbet <corbet@lwn.net>, Luis Chamberlain <mcgrof@kernel.org>, 
- Petr Pavlu <petr.pavlu@suse.com>, Sami Tolvanen <samitolvanen@google.com>, 
- Daniel Gomez <da.gomez@samsung.com>, Masahiro Yamada <masahiroy@kernel.org>, 
- Nathan Chancellor <nathan@kernel.org>, 
- Nicolas Schier <nicolas.schier@linux.dev>, 
- Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
-Cc: Christoph Hellwig <hch@infradead.org>, 
- Peter Zijlstra <peterz@infradead.org>, David Hildenbrand <david@redhat.com>, 
- Shivank Garg <shivankg@amd.com>, "Jiri Slaby (SUSE)" <jirislaby@kernel.org>, 
- Stephen Rothwell <sfr@canb.auug.org.au>, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-modules@vger.kernel.org, 
- linux-kbuild@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
- Vlastimil Babka <vbabka@suse.cz>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2759; i=vbabka@suse.cz;
- h=from:subject:message-id; bh=Yy5s3tOFMC/rTCLld/EgSCsz8DvydWujL2hwXFKTktU=;
- b=owEBbQGS/pANAwAIAbvgsHXSRYiaAcsmYgBobMjGRVhqSav0/nkuPb3JRt274Je0nu6HWMSZJ
- zHxfngk2jWJATMEAAEIAB0WIQR7u8hBFZkjSJZITfG74LB10kWImgUCaGzIxgAKCRC74LB10kWI
- mopRB/9sjmWSAjMZpnsWt1S+YnTErm/WorHGKp6h7blRs2pSRHzEQDfNodA44cnIgPuQWu0bOIp
- ydNSlgcMYURSrQa6CnqtIHMNybz55YaZLLXMXRm+2VqKCB1nrfdkf/AFv8Pxp9M6kPA5OhzPKgC
- EEsJ/BAhH0ZFPqpqIP+QGjDO/vZ9KA+H/rg1bMYfSqIDOI6jrokkAkkiF0oWfAY3YGAWa871CqT
- RtL4651dKlMxxAoT/kCPP++3ad9LD/2w55BkFguNxbSekaCvIOy/QH+Tn08h0A5GEo8o2WaZDqN
- MWdErQDrTIeK/Q5FJRr9wrah0kCGkFygmy0nsfGO5a9fFT4d
-X-Developer-Key: i=vbabka@suse.cz; a=openpgp;
- fpr=A940D434992C2E8E99103D50224FA7E7CC82A664
-X-Spamd-Result: default: False [-4.51 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	ARC_NA(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	R_RATELIMIT(0.00)[to_ip_from(RLizo86y7np4cjncz9mwtfc8qs)];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.cz:mid,suse.cz:dkim,suse.cz:email];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	DKIM_TRACE(0.00)[suse.cz:+]
-X-Spam-Flag: NO
-X-Spam-Level: 
-X-Rspamd-Queue-Id: 0C98F1F395
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Score: -4.51
+Content-Transfer-Encoding: 8bit
 
-With module namespace access restricted to in-tree modules, the GPL
-requirement becomes implied. Drop it from the name of the export helper.
+This series removes the unintuitive mipi_dsi_generic_write_seq() macro
+and related mipi_dsi_generic_write_chatty() method from the drm
+subsystem. This is in accordance with a TODO item from Douglas Anderson
+in the drm subsystem documentation. Tejas Vipin (among others) has
+largely spearheaded this effort up until now, converting MIPI panel
+drivers one at a time.
 
-Signed-off-by: Vlastimil Babka <vbabka@suse.cz>
----
- Documentation/core-api/symbol-namespaces.rst | 6 +++---
- fs/anon_inodes.c                             | 2 +-
- include/linux/export.h                       | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
+The first patch of the series removes the last remaining references to
+mipi_dsi_generic_write_seq() in the jdi-lpm102a188a driver and updates
+the driver to use the undeprecated _multi variants of MIPI functions.
+Any behavioral modification to the jdi lpm102a188a panel driver by this
+series is unintentional.
 
-diff --git a/Documentation/core-api/symbol-namespaces.rst b/Documentation/core-api/symbol-namespaces.rst
-index dc228ac738a5cdc49cc736c29170ca96df6a28dc..aafbc0469cd6a4b76225e0e96a86025de512008e 100644
---- a/Documentation/core-api/symbol-namespaces.rst
-+++ b/Documentation/core-api/symbol-namespaces.rst
-@@ -76,8 +76,8 @@ A second option to define the default namespace is directly in the compilation
- within the corresponding compilation unit before the #include for
- <linux/export.h>. Typically it's placed before the first #include statement.
- 
--Using the EXPORT_SYMBOL_GPL_FOR_MODULES() macro
-------------------------------------------------
-+Using the EXPORT_SYMBOL_FOR_MODULES() macro
-+-------------------------------------------
- 
- Symbols exported using this macro are put into a module namespace. This
- namespace cannot be imported.
-@@ -88,7 +88,7 @@ Simple tail-globs are supported.
- 
- For example::
- 
--  EXPORT_SYMBOL_GPL_FOR_MODULES(preempt_notifier_inc, "kvm,kvm-*")
-+  EXPORT_SYMBOL_FOR_MODULES(preempt_notifier_inc, "kvm,kvm-*")
- 
- will limit usage of this symbol to in-tree modules whoes name matches the given
- patterns.
-diff --git a/fs/anon_inodes.c b/fs/anon_inodes.c
-index 1d847a939f29a41356af3f12e5f61372ec2fb550..180a458fc4f74249d674ec3c6e01277df1d9e743 100644
---- a/fs/anon_inodes.c
-+++ b/fs/anon_inodes.c
-@@ -129,7 +129,7 @@ struct inode *anon_inode_make_secure_inode(struct super_block *sb, const char *n
- 	}
- 	return inode;
- }
--EXPORT_SYMBOL_GPL_FOR_MODULES(anon_inode_make_secure_inode, "kvm");
-+EXPORT_SYMBOL_FOR_MODULES(anon_inode_make_secure_inode, "kvm");
- 
- static struct file *__anon_inode_getfile(const char *name,
- 					 const struct file_operations *fops,
-diff --git a/include/linux/export.h b/include/linux/export.h
-index f35d03b4113b19798036d2993d67eb932ad8ce6f..a686fd0ba406509da5f397e3a415d05c5a051c0d 100644
---- a/include/linux/export.h
-+++ b/include/linux/export.h
-@@ -91,6 +91,6 @@
- #define EXPORT_SYMBOL_NS(sym, ns)	__EXPORT_SYMBOL(sym, "", ns)
- #define EXPORT_SYMBOL_NS_GPL(sym, ns)	__EXPORT_SYMBOL(sym, "GPL", ns)
- 
--#define EXPORT_SYMBOL_GPL_FOR_MODULES(sym, mods) __EXPORT_SYMBOL(sym, "GPL", "module:" mods)
-+#define EXPORT_SYMBOL_FOR_MODULES(sym, mods) __EXPORT_SYMBOL(sym, "GPL", "module:" mods)
- 
- #endif /* _LINUX_EXPORT_H */
+changes to v2:
+ - Remove all usages of deprecated MIPI functions from jdi-lpm102a188a
+   driver instead of just mipi_dsi_generic_write_seq().
+ - Update TODO item in drm documentation instead of removing it
+   entirely.
 
+Brigham Campbell (3):
+  drm/panel: jdi-lpm102a188a: Update deprecated MIPI function calls
+  Remove unused MIPI write seq and chatty functions
+  drm: docs: Update task from drm TODO list
+
+ Documentation/gpu/todo.rst                    |  26 +--
+ drivers/gpu/drm/drm_mipi_dsi.c                |  34 +---
+ drivers/gpu/drm/panel/panel-jdi-lpm102a188a.c | 150 +++++++-----------
+ include/drm/drm_mipi_dsi.h                    |  23 ---
+ 4 files changed, 71 insertions(+), 162 deletions(-)
+
+
+Link: https://lore.kernel.org/lkml/20250707075659.75810-1-me@brighamcampbell.com/
+base-commit: e33f256dbc293a1a3a31f18d56f659e7a27a491a
 -- 
-2.50.0
+2.49.0
 
 
