@@ -1,143 +1,121 @@
-Return-Path: <linux-doc+bounces-52576-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52578-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEAF9AFEB9B
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 16:18:43 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2845CAFEC8D
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 16:50:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 75A6B189242B
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 14:11:48 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8975A1C215D7
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 14:50:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA8AF2E92A0;
-	Wed,  9 Jul 2025 14:07:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EE49149C4D;
+	Wed,  9 Jul 2025 14:49:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YkbtTGg3"
+	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="oODtWeLm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6CEC2E8DFE;
-	Wed,  9 Jul 2025 14:07:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8D361C32FF
+	for <linux-doc@vger.kernel.org>; Wed,  9 Jul 2025 14:49:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752070051; cv=none; b=RYBrtlQD21WoK3ID2qX0V2CG2swexpn1npqEJWy7pHCZhxUglT2cSVZLan6eQ5H+cdvk1pRtrALhkenZ80SoTAtqPav9upKLyD2h30+Gr/bBbk2UMmqtkgn9Ijee7M3CcD5Y64yzC0W/s0DP8NGRD6umABw5EEraGe/cSXNKoFY=
+	t=1752072584; cv=none; b=cuf4MIX3cpHhDlgDHs2sNSv88G7Cel2POf1q16CzxXTnRA1TDzY0uJuXX7aOSJeglb5CHf7a2HcsggW6tRFPPa4DeN6cBxjCZ59uHqn/AUKChF4A5m/TRxr0EEdjxe//v0YThU1F0VkgSYQLADCfjViJrsubqUIB/ZIEoPK/ZT4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752070051; c=relaxed/simple;
-	bh=0vIhpx+0YQQm1MaG38coKriz3Hl7RX4m9tfVDq7x9mw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Zt9WtKiyDtkq6CGBC5DDkwIr05n9xRuYvuszp+4PTc3/FkfRH0+oXTCKvUpWh/h7TDWAtSeqqdJw/KTwz8JT9rbli9lodunOvZn2qJA8vMYWYskwUPd0pbiSiKna9RW5gsVrmHSVHWFsj+HtPWApCPLYrzRfSQNGErzDyvOeUbc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YkbtTGg3; arc=none smtp.client-ip=209.85.218.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-ade5a0442dfso957047066b.1;
-        Wed, 09 Jul 2025 07:07:29 -0700 (PDT)
+	s=arc-20240116; t=1752072584; c=relaxed/simple;
+	bh=i/3T3rgCm3LbTB5t6VdO73xMaOdq9fqlxsmlO44cOGw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=D+deElhCh4HdkhEZdG6aqPBtTFOmc6z8U3bGYu+WWmqQMIgfYOJql7w8inA3yAUeq/b2vLgJhjRTze3ZNo8cTc9cWPeYMn74vi+5QIcl3XQs1oodP2g+/ZWYwfitXT6yIEN6p4TV3Pyn+PmxR+aBwo0hb8KRHdCljHUqvGsf+JI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=oODtWeLm; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4530921461aso41265395e9.0
+        for <linux-doc@vger.kernel.org>; Wed, 09 Jul 2025 07:49:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752070048; x=1752674848; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1752072581; x=1752677381; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VkAhtJII7qepeyVa2+QSjE/0dSe9MXuvFykrrDGX/LE=;
-        b=YkbtTGg33RaiBrt/8n+OJGcKn1547+fj2+josnpQeEOpnGAWz/T1owlBe6fu1QO7i/
-         /UP96eQrqqpwH070YXXw0BpGTI1C89DUsV9DSI2OIjsTFIxvCQC78Ugj0EAI3sobQLOx
-         svyKmYIexhbM10DqFjiSGmSD3YgVzJ6gjmqZvZWrX60jouioiBRCNm4jAyVfSXBB/4El
-         3gBzoXQyYgkYjGYYRRh1Uxwhe6rSiLTLZj3Nl+Vj3doFqe4QkqBFimkk2vx0DM2kJeLi
-         2O8Vn+ddLlcBEosB6qvHFxj3WHGhsR/oteDIsnBFNTYBMKU0xrSzwBgfSTjHWv4XHhNO
-         QiZg==
+        bh=+clCZcAmNaEhJNDxw2K6HurtRqBRlDqkioZalS/QiBw=;
+        b=oODtWeLmpFA8KAWPi4S1KvNXKqBJpQdCe/FfHceNATbJoJRGtUTMrLJch28HSAvepd
+         OWFnBrn2Uwri5FNNpQ8lGnvBHQ+F3ZtH+ytnp+eCB4rvTEzkR9521a8LrnjR/QoZhTRY
+         SbeI6qsjBBGoYRVznqLdyZCCmN0T7/aDMtp2nxBqTe8Ga2cskdkn3lJFozeg4CGRaQjt
+         IRUwY76ZbdhqmlESPZFScwt8FXbLIeLIZBLp34EYZ88udWJaR1e+pG/AL3vEqr7Hysoy
+         C1RAt3BanlSROB+83he7Jk1urRMWY4O+w/c7gJFpMX8HJt/0fOzVxsZ4VMd6Zo+RntBO
+         /oJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752070048; x=1752674848;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1752072581; x=1752677381;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=VkAhtJII7qepeyVa2+QSjE/0dSe9MXuvFykrrDGX/LE=;
-        b=hXgkH6F9YAtmOB/LOYr4OKrgzu4izNMdlwL2DOCzQvAac4WuyGZ52ApgbkubhqjiPa
-         7tRYb2O+mnwZ+ZOG4+fs40zB/c2yUHwHL7OKZCY+ZlQlCrwTW2ID0Bg09letLIN+yf9S
-         MiS2jH8hLJ5hp4gS4K+fC9LDGQ1dWIiTu4d+jkA4t5mT/4B1oKXuWUS/4nVh+JeVkjNm
-         lclHvF23ZEkawj+wtqJZ9aKjvTGmQ6sEA6fi5MUYQ88wJi0NTEOcdBgALpK9N8YXOFH6
-         +uZ0Eqs4hTjt41Nt+sf5rXu2e3H6nK6nshYbFVMRgL4Sg3CRoLjyuNe3y8MtDQK5B7UC
-         YJug==
-X-Forwarded-Encrypted: i=1; AJvYcCU/y2VNNWm2s4O4l012Z+3nbbVkAMbNlspU1XycQW3YpfcL7tm/+5V23fN2LLE2TKT40pLhVVhpcdA=@vger.kernel.org, AJvYcCXML9L+gbPTWlBGQh48bdXuuJEKokrsiKwnDt+1eHXhI5d7KdUanjTl7JoV4DP3azGmPj3EmIVwOZOEZrHa@vger.kernel.org
-X-Gm-Message-State: AOJu0YzGfUKQIzhRiQ4IDO4VIEUT7uHpH7OFnn3xX5l5YpZ2/x1UJMbc
-	AoJdNan6RnI3xchXQBiwfKNdIMoNqS52zgcNzDw1j/SM/MNu1k4bCLVTIgHh4skFTCi/K3Ya6fL
-	RnbeWKL9n0pGLQiKU8MeWuLIIrGsu/NY=
-X-Gm-Gg: ASbGnctxDwyAU1UFoLvFRsYRrJ4Lgu0wygHESIkgsgXdATF1LqcdGrwCkktOcrSnvOK
-	zV5HVpWr0cHiHgtlguU1rnfs7Om4uf5WelUCJpzDOdG0dToO24oOfOnNPD1+hGm3NOhscZ4cooH
-	bIu2rGfLnWSV0oEfDl6MFSzz2Lp6RhUAowUWZyyPI326OWKhH8+yc4R1becg73JtNGkm4NZ4Ulk
-	4cNp3HgVKvmO+dL
-X-Google-Smtp-Source: AGHT+IGIfSNs28NtfUwdB7/Q+GAf+1HaldJgehEtx6rpKFjG5kyBclCrpaomz4JmoRY5EzJIVVBaqimr1SPayzymfUk=
-X-Received: by 2002:a17:907:7f8f:b0:ae1:5db8:b78f with SMTP id
- a640c23a62f3a-ae6cf7354a1mr263493666b.34.1752070047664; Wed, 09 Jul 2025
- 07:07:27 -0700 (PDT)
+        bh=+clCZcAmNaEhJNDxw2K6HurtRqBRlDqkioZalS/QiBw=;
+        b=blukgKcwObRzGEUOB5HUvMP42TpW5fwzHAtpC6LaZOTS+Wk26pzfUFTKo5yqhk83CQ
+         Q9Ec8QdSfmFkVWXF8vRALycPDWAf3HDXc4pqqVTjnt9LnWXjwF4AULR2YCe66ctaEjS1
+         VDvUDlt0uF5DJvqdDYl6Zl4KQjkwgEqEKVRoEXsYb8/gRk1NgY4PM7wMg/7LXo2K/xfj
+         tgO9KH2EBupna+8WJ7IcnXANGnlXUisAz6dQov1VNGUCKhvoWcmxHUoraiDX8bq3KzF2
+         FbysQ6X+5KabDIQQV65mNrhbDS1t1oXmVg0tw9fYvcyPzSCIfQ7z008/VUxCL7+hZ2Yf
+         xjwA==
+X-Forwarded-Encrypted: i=1; AJvYcCUL2NL7VMwHJHSZne5FrISkuOgrnrt13jbBZjn1dnrpxkzxNYFDFjqNl/4wIU8ai14gbe5oBSutw9c=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzorUugvCVFwOS3Skz8IFvM5nPfhQZ/+xgZ/rPw+fvLQfPG7jql
+	SaceORc5gXCXEq4A4PfO4e+ERcdeimtJQ5UFPjxcCN7Peiyrz3n/16AtsgJDF/17Luo=
+X-Gm-Gg: ASbGncsm6RzsjqJZsC54eSenN272B6VsoFFagwIcDCdYhfZLiD1OeQ+QWykKW92PXVE
+	tQTXSjdfmGZjiVcQvh3dN5MeUy6QerYcC3+eAVCsr9lnDsK+NeP8AY3HVbeYNE4Q63Le3X7Iasq
+	R46hb9RKPIlZfhvSKIv9rIAMoXDSdpvJ4r+ZtYUZwYTIbbjv+oMBRwwTH6FfelQheq6ikSLXpBi
+	pA+6i7q+xf+URchmAFC+0HOnN2/fJF+XvEyWp3Olh2lUoiEfMkYqvc5PdXx7gFTP5bl342x6r0a
+	g+Z4Yc8AJYeWUsxTntiNGE+eq1u9iILSLiDd5NHWN5bpd8cLf2plLWTPRXuHMUp0TOyOj5gVNQ=
+	=
+X-Google-Smtp-Source: AGHT+IEvnogMibb4vYHlJHRH2PNaGzoX5smkfBnnJv6Rl4n+ke+bVilxmX5/5ST1QwlJ7GZnt/JGzA==
+X-Received: by 2002:a05:6000:24c6:b0:3a5:26eb:b4af with SMTP id ffacd0b85a97d-3b5e44e9e13mr2351579f8f.18.1752072580842;
+        Wed, 09 Jul 2025 07:49:40 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:dc:7e00:b04e:cfc4:3bd9:6180])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-454d5062119sm26543685e9.18.2025.07.09.07.49.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Jul 2025 07:49:40 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Kent Gibson <warthog618@gmail.com>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+	linux-gpio@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] gpio: sim: allow to mark simulated lines as invalid
+Date: Wed,  9 Jul 2025 16:49:39 +0200
+Message-ID: <175207257347.43561.5299868235496742290.b4-ty@linaro.org>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250630130358.40352-1-brgl@bgdev.pl>
+References: <20250630130358.40352-1-brgl@bgdev.pl>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250709005952.17776-1-bijan311@gmail.com> <20250709110648.52688-1-sj@kernel.org>
-In-Reply-To: <20250709110648.52688-1-sj@kernel.org>
-From: Bijan Tabatabai <bijan311@gmail.com>
-Date: Wed, 9 Jul 2025 09:07:14 -0500
-X-Gm-Features: Ac12FXyKir0QkPAHnX3REi635GLE0DBv9wAGdZTw6dhXQX_ellDr1zjsx8QPpQI
-Message-ID: <CAMvvPS7avR+xEk7e+n5X-rwDFnFCf3e7ubJPHAQfRQVmyZJMjg@mail.gmail.com>
-Subject: Re: [PATCH v4 00/13] mm/damon/vaddr: Allow interleaving in
- migrate_{hot,cold} actions
-To: SeongJae Park <sj@kernel.org>
-Cc: damon@lists.linux.dev, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, akpm@linux-foundation.org, corbet@lwn.net, 
-	bijantabatab@micron.com, venkataravis@micron.com, emirakhur@micron.com, 
-	vtavarespetr@micron.com, ajayjoshi@micron.com, 
-	bijan <bijan@node0.bijan-262664.superpages-pg0.wisc.cloudlab.us>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jul 9, 2025 at 6:06=E2=80=AFAM SeongJae Park <sj@kernel.org> wrote:
->
-> On Tue,  8 Jul 2025 19:59:30 -0500 Bijan Tabatabai <bijan311@gmail.com> w=
-rote:
->
-> > From: bijan <bijan@node0.bijan-262664.superpages-pg0.wisc.cloudlab.us>
->
-> Maybe this is not an intended part but something from misconfiguration?  =
-I show
-> Andrew merged this series into mm-new after removing this, but headsup fo=
-r a
-> case that we might do rebase.
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Sorry about that. I had to switch the machine I was generating patches
-on and forgot to setup the git config. I'll make sure it doesn't
-happen if I need to resend.
 
-[...]
-> > Revision History
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > Changes from v3 [10]:
-> > - Fix bug where huge pages would be split
->
-> Maybe "walk->action =3D ACTION_CONTINUE;" of ninth patch?  Nice finding!
+On Mon, 30 Jun 2025 15:03:57 +0200, Bartosz Golaszewski wrote:
+> Add a new line-level, boolean property to the gpio-sim configfs
+> interface called 'valid'. It's set by default and the user can unset it
+> to make the line be included in the standard `gpio-reserved-ranges`
+> property when the chip is registered with GPIO core. This allows users
+> to specify which lines should not be available for requesting as GPIOs.
+> 
+> 
+> [...]
 
-Yes, that was the change.
+Applied, thanks!
 
-> Nontheless, since this was found by you and didn't discussed in public be=
-fore,
-> it would be nice to add a short additional clarifications like above, if =
-we
-> (unlikely) do rebase.
+[1/1] gpio: sim: allow to mark simulated lines as invalid
+      https://git.kernel.org/brgl/linux/c/0cf6d425d39cfc1b676fbf9dea36ecd68eeb27ee
 
-I will do this if a rebase if necessary.
-
-[...]
->
-> For the entire series,
->
-> Reviewed-by: SeongJae Park <sj@kernel.org>
->
->
-> Thanks,
-> SJ
-
-Thank you for all of your feedback and time spent on reviews!
-
-Bijan
+Best regards,
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
