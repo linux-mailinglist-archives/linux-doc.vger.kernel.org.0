@@ -1,116 +1,98 @@
-Return-Path: <linux-doc+bounces-52589-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52598-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 277C9AFEE6C
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 18:01:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1895AFEECE
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 18:21:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A271A5862F9
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 15:59:32 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5621E5A6F5A
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Jul 2025 16:21:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 755222EA161;
-	Wed,  9 Jul 2025 15:59:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8A09920ADF8;
+	Wed,  9 Jul 2025 16:21:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CmOxka+b"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kvsmipTg"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38AF12E9EC5;
-	Wed,  9 Jul 2025 15:59:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6033F1F8EFF;
+	Wed,  9 Jul 2025 16:21:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752076749; cv=none; b=R/+dYrbU8NLXDDaodTS2JqZWirncHGMSm7K7E1LPm9eZpRjJvrK4SbZlH1sTLnbhwMfV2jvxJc1AmM1rO5aoOBjU7xgWPce8tZe58eG6HQIfCacalz2GgFy8ydZLj6DmFQx/dVtK3lqHz132ktb2AsN3tsyeM8j0n7B7pwWxxWQ=
+	t=1752078105; cv=none; b=QDU3z4JHa5r7/oavaJ28S17u0GBZZj/ELJ9qp9vK69QRvHhPJvxRrqkhGfcnx78fS2+de2lN2L7AXZGTq8g1ViYEOtXs9+DgDR0NSEpu4xUpm55nVHRhmiCLSLJZ/7YLvtYzRPjthaSr2LIxcXJqc577Ol+Nv8p4R9aj2LAtN0k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752076749; c=relaxed/simple;
-	bh=/8GKUg/hE6EZzmvBGeqtvN5XqiYkoQRfu9Nd+64B7DM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=uv9Lwx81oLsMDG6dCJXVjf+V5syJHZ7N14D47tQjMf0t1DixBwoPEBYHsJqlF/GSFgF8d4WrY0iX7BlQC6tNnzgSOn6baQwOKUZPnaf/aPzSPOF562N7G2fKRyZt37BqXlBR4FubEmI9KwqVJMmRUsyCBdefxLdaxCZm8ztln68=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CmOxka+b; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7F08C4CEF8;
-	Wed,  9 Jul 2025 15:59:08 +0000 (UTC)
+	s=arc-20240116; t=1752078105; c=relaxed/simple;
+	bh=mn8Di1LqckWD1U8ihxspuXcRxANQNqwmyXe7kFO30HI=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=eprSdUUMcFI97mSJbvAFuaNY/JEwlEZ2dndltxNirJWGtJ6FamT9oc1y25KY0mLGSKw5YZjotyT1kBndHvcOe7xyEnuLt6Hf2wFf4BLOTWozmYD9n4NNKM41lWKlYzrrCfTZsG9H5606uiy9imEsZ5us1pFwiuPFVV0J/APPNPk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kvsmipTg; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCF2AC4CEEF;
+	Wed,  9 Jul 2025 16:21:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752076748;
-	bh=/8GKUg/hE6EZzmvBGeqtvN5XqiYkoQRfu9Nd+64B7DM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=CmOxka+bI7KroNYOGk0WD8PzyPh94QQKEqSL3TAvGOzHeGC77Eg2d5DZWWJAgLqbr
-	 ObAVEbYcppNLLAIZW/DkFZfg0gbgLj9XMD3nrKypI1g+cttp5LX85mRblSR0ivGUX8
-	 udlQEZUff7Rn1UZjTVNBLEUCKCgpkoy1qenyZ0Tf0JrNXWuGWN6d3xqbefTyTLSEhk
-	 5cRti9DzBBeB1obNdshUECXV8tePkayEJ7JTnjm53rT7T47pRrDkPyQvHTwIh15EAO
-	 9YcfuLqMWueh69M64cDBBLD4fCgdP8eXUjSFjZHe1HaK8X+amROClrurSsuHKDdiry
-	 rKcTpNuYFfVxQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab@kernel.org>)
-	id 1uZXCJ-00000000IhQ-290f;
-	Wed, 09 Jul 2025 17:59:03 +0200
+	s=k20201202; t=1752078104;
+	bh=mn8Di1LqckWD1U8ihxspuXcRxANQNqwmyXe7kFO30HI=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=kvsmipTgsZjwnKNnzQ/7pWyDzraXldK3A852muhqu7e4CXPgwskGF1gI9mpkrUVaU
+	 7F8VHVCbheJ2GuzI/FSI7lLHMlJVYF/pf6kh0aIKBOUh3sPZOJnzMds6FpeLnFqMYj
+	 fdUXUOXxJsshkkXRwC1xlGKTpVwxwofRgdMUi/V8z7Yk/JvOdqgwd9KQBUrZ2+5qBp
+	 jXBfRdrHAzJ7ILi1ws+EuMOf0y80cYc26sIyzBwQyZig1iwNFz2sjU5126vmikG3L0
+	 K/ntSmWVxMAyUF+XHZsMmTEurnIFnzmhBv+sHwM3gpPgjoEB0tZAXoJb6tiXgoTcQH
+	 o9ILRYB4ZGiDg==
+Date: Wed, 9 Jul 2025 18:21:40 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Akira Yokosawa" <akiyks@gmail.com>,
-	"Breno Leitao" <leitao@debian.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	"Donald Hunter" <donald.hunter@gmail.com>,
-	"Eric Dumazet" <edumazet@google.com>,
-	"Ignacio Encinas Rubio" <ignacio@iencinas.com>,
-	"Jan Stancek" <jstancek@redhat.com>,
-	"Marco Elver" <elver@google.com>,
-	"Paolo Abeni" <pabeni@redhat.com>,
-	"Randy Dunlap" <rdunlap@infradead.org>,
-	"Ruben Wauters" <rubenru09@aol.com>,
-	"Shuah Khan" <skhan@linuxfoundation.org>,
-	joel@joelfernandes.org,
-	linux-kernel-mentees@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	lkmm@lists.linux.dev,
-	netdev@vger.kernel.org,
-	peterz@infradead.org,
-	stern@rowland.harvard.edu
-Subject: [PATCH v9 13/13] docs: parser_yaml.py: fix backward compatibility with old docutils
-Date: Wed,  9 Jul 2025 17:58:57 +0200
-Message-ID: <27a53891fe151c97abd349ee7923892373c6d3a7.1752076293.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1752076293.git.mchehab+huawei@kernel.org>
-References: <cover.1752076293.git.mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Akira Yokosawa
+ <akiyks@gmail.com>
+Subject: Re: [PATCH 00/12] [PATCH 00/11] Thrash up the parser/output
+ interface
+Message-ID: <20250709182140.2aab448e@foz.lan>
+In-Reply-To: <87cya92xif.fsf@trenco.lwn.net>
+References: <20250702223524.231794-1-corbet@lwn.net>
+	<87cya92xif.fsf@trenco.lwn.net>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-As reported by Akira, older docutils versions are not compatible
-with the way some Sphinx versions send tab_width. Add a code to
-address it.
+Em Wed, 09 Jul 2025 09:29:28 -0600
+Jonathan Corbet <corbet@lwn.net> escreveu:
 
-Reported-by: Akira Yokosawa <akiyks@gmail.com>
-Closes: https://lore.kernel.org/linux-doc/598b2cb7-2fd7-4388-96ba-2ddf0ab55d2a@gmail.com/
-Tested-by: Akira Yokosawa <akiyks@gmail.com>
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/sphinx/parser_yaml.py | 4 ++++
- 1 file changed, 4 insertions(+)
+> Jonathan Corbet <corbet@lwn.net> writes:
+> 
+> > [I'll slow down soon, honest - real work is piling up...]
+> >
+> > The kerneldoc parsing phase gathers all of the information about the
+> > declarations of interest, then passes it through to the output phase as a
+> > dict that is an unstructured blob of information; this organization has its
+> > origins in the Perl version of the program.  It results in an interface
+> > that is difficult to reason about, dozen-parameter function calls, and
+> > other ills.
+> >
+> > Introduce a new class (KdocItem) to carry this information between the
+> > parser and the output modules, and, step by step, modify the system to use
+> > this class in a more structured way.  This could be taken further by
+> > creating a subclass of KdocItem for each declaration type (function,
+> > struct, ...), but that is probably more structure than we need.
+> >
+> > As a final step, add some structure for the accumulation of the output
+> > text.
+> >
+> > The result is (I hope) clearer code, the removal of a bunch of boilerplate,
+> > and no changes to the generated output.  
+> 
+> Has anybody else had a chance to look at this?  Or should I assume it's
+> perfect? :)
 
-diff --git a/Documentation/sphinx/parser_yaml.py b/Documentation/sphinx/parser_yaml.py
-index 8288e2ff7c7c..1602b31f448e 100755
---- a/Documentation/sphinx/parser_yaml.py
-+++ b/Documentation/sphinx/parser_yaml.py
-@@ -77,6 +77,10 @@ class YamlParser(Parser):
- 
-                 result.append(line, document.current_source, lineoffset)
- 
-+            # Fix backward compatibility with docutils < 0.17.1
-+            if "tab_width" not in vars(document.settings):
-+                document.settings.tab_width = 8
-+
-             rst_parser = RSTParser()
-             rst_parser.parse('\n'.join(result), document)
- 
--- 
-2.49.0
+I didn't look on it yet. I'll try to look it along the week.
 
+Regards,
+Mauro
 
