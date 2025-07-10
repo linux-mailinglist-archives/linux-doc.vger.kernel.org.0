@@ -1,263 +1,241 @@
-Return-Path: <linux-doc+bounces-52702-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52704-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15004B0004B
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Jul 2025 13:14:44 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E19D2B00088
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Jul 2025 13:28:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E720E3A5447
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Jul 2025 11:14:16 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CAC4B3BD9D8
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Jul 2025 11:27:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D9462E11B6;
-	Thu, 10 Jul 2025 11:14:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 988E92E7181;
+	Thu, 10 Jul 2025 11:27:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="y7Mla/ii"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VSmWfrnF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E7C02DAFD6
-	for <linux-doc@vger.kernel.org>; Thu, 10 Jul 2025 11:14:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC9C02D97A6;
+	Thu, 10 Jul 2025 11:27:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752146078; cv=none; b=bGHjnRgMXZNdc7nbcwcRYZdvwwO+dQWbUbrM8YEUBZZBw3wc5+YlXRnMOCpv8eEI2rFMUrcpfKr7ttBR/YRbVDNMNnQ8Hk8FKsQXY+MNgsyXlnaxPQ7CMe4DfQdbqxntJ70pCIxIFFXfZ61sT28l3M7Fk5c5kCimHcgz8OLeuLk=
+	t=1752146863; cv=none; b=bH1cSwn1w3RJs9Z6FXr9DmgM8Pc1utjIa6YnYTRv2FMCrFMaKpXKMImGCi1YymTJbm/rhAYdoX2zv23TlDUIoQpKGO0l7MU8Yn/q1TTnF6n8WcgSLRktPGNUN+alfcJyg1Dky8V8FXnPeqkVnVW8B9oAx7C4rMWw85ckiSamGqg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752146078; c=relaxed/simple;
-	bh=ZVMrkGCRz0vGzBuWsVUOSvsef7nfEi4IoGFuJQ8NY0Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OWLk5koVMrbUBkqnfayREpIwOdqnYxjAqUpJzSBeiNuHhEP2rdsKo+Gay/LTcwGqpT4L4FQUwyg9d+edq4Rm5fa7h/yj5RAN07E9f8vFwXFdb+QGAMzu/+7W+L+c9S2xEYAWAV9vEoOj4WVWE27eEnGl+HIceqFMqUn19rdQZao=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=y7Mla/ii; arc=none smtp.client-ip=209.85.214.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-235e389599fso188525ad.0
-        for <linux-doc@vger.kernel.org>; Thu, 10 Jul 2025 04:14:35 -0700 (PDT)
+	s=arc-20240116; t=1752146863; c=relaxed/simple;
+	bh=KjSzvJUpxXfbbJMn+GnW97GcF7y9pkc6qt0xEvGgaAI=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
+	 MIME-Version:Content-Type; b=PSriA/5/w6yx5IGmbvX2fBwN04ezcaw+8IWoMV8N+dyXmqFA0ddnV4Ptdux2HdiKfmO0jzs+8Y0rOW8ZtNxN/rj0X6JQXxBE5lFbKm4zRerD4ZzgxkyuV/4TS+GpaD4lv7dvR/O1GaKOSaTwL5ZFq7eTquXvrzQBF/fBnuCY6jw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VSmWfrnF; arc=none smtp.client-ip=209.85.221.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-3a507e88b0aso714582f8f.1;
+        Thu, 10 Jul 2025 04:27:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1752146075; x=1752750875; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=TgBpvBKNceadcIlK+jQ2H7nSb6VN21Y6ASF39ITBcCM=;
-        b=y7Mla/iiZ9RpJ85SOqUc+fXDrcOK+lANDtMy1AAAOIuUewmrS9YiiWl+sQYAIhTHd/
-         MpNZWUWnxzrktK34jQnCQfMHWbDcg9R1y9dPUhf7zfGZYv9cnTcvu8p92LOZJCFnZg/K
-         DnBumFlbNZFLpXgDBgEOe2+T6xIGMOqDl+mYnTxRrlu5wtsDszYPdDB0SM9U6xJy5kzJ
-         ENvLjM8jsjwalUKkKTpDW/XdahiC/7B2us/E+OxBW843krp/uOv+rfqs4eMFf5kohf7b
-         PQAzE7uPaWbVej4fICw4rtdgkCye5j5YoJ9FbASJyWKqkgXVDkjknkRGD3Ki46qn/ZEw
-         jrWw==
+        d=gmail.com; s=20230601; t=1752146860; x=1752751660; darn=vger.kernel.org;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=IR5AJVT4G5WLtAAqgPLSimQyStJGWsVwlw9CufaXOaE=;
+        b=VSmWfrnFYWAbmFVf+0lei1w04K/mJr/U5SK9QC99vbxrgsXO8kACipVIm3sG7izQKl
+         Q7SN4bQQFTB7cbT7MOeb8BhyDWlo4zptzmdLmo3HyeKhXH1Pok3pYaFH0VQhXhLN8Q/d
+         2mGFa2Ebzlbmbvrsq3wMzqteAoWV5TLHXiO12HwyUCs335xhHGa0KkT42MDF0x16Yr6n
+         vDBjYCiw3+jTG6yNCTYfuujFeK94WSC/fMv3ZjPOr1XPrxi2OEkQVXGK4QAw2LAx5oEX
+         eqyrLQqJY/fSJRWnkAhjwae9gY9u628WLtGDnH/G5uxCX3kBzUuWVI7fwA6K8Wxp/Rvr
+         G1Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752146075; x=1752750875;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1752146860; x=1752751660;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TgBpvBKNceadcIlK+jQ2H7nSb6VN21Y6ASF39ITBcCM=;
-        b=PXIH1iaZrds58O3oFpgMHoUW9DLmFvzTYA6zSpeaFHMM4fu7V9MQvr6OoKaT3ny//K
-         Fr72KRVqX0x8vu8gwB56DrwDobXgJ/UL7hpOViZs3DjbXVk4iA8JTA86rRESjKvQ7cMy
-         haA6vrR85GjjzE45hm23pxnlv7eS+7TIUS47WWCnbJO8wfrH3tNdMLTUzpM0lYF/453S
-         Fg+Snd1Hk+vr81OzsA4HJRAnYw/vx49p4x+MuDu7KiFcPZjQFXwESdWUb5DtCzMibxzk
-         2tktS1QdgL4mTNxoYCs5hfKMSzNskCGCv6pxykNxxzl3kxD/KoKh2luZomKTgosQbrYg
-         L9hQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUWio+5erBJYAoDsOZzKAIjYOdJQVrOf4/yVqQtBawuPPyMUzQKPcmVNPqijh5/mhhHUCbC1JSJd3o=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzrQAJU1AwAKgcgizWe9FSfYaCJbvqTIGgk42Ni6R/mTE3w40Qf
-	iSxcZrpGYt2oU+t2CidrDCPNiBlh2C3IUEat5UXj5Jh1AuAxFCzArl2WxnC9xK9KxQ==
-X-Gm-Gg: ASbGncstoeciEy23QfkiZ4Hor7bOiVJHQF3qsoghdV5onNNNwIk+TDTt8XBCe7tbd4q
-	fIXsODzzV7NRTqx+qis0Iy9Ch9PvNcP1PGLnktWdRCmmN7wYSstu0e4YdQTRvVMloIB8p4syjxg
-	ANWhmZwFr3GXtHK4sg1PWwzaM5nFkDf1imnDIigy7Ltff6NydWzD9dRAvKy9Gr9MZx5drg8fveG
-	6+zBmIBKpJsDFrGl9fgaRIDkHxXM6qxi4rA30NrrnNRrpil1RmUTroURHpQ/fNoJFBZaGBePwb6
-	kAnjB4smCyDLxIE7f6Gti9b+/zY3sKgAy2a6wCZObWElni+a4e7W0ZllnoWBhfAn6uVX2MYfkcW
-	OH9wkuUbpVonHgyczvfJt
-X-Google-Smtp-Source: AGHT+IFecBQHKG/ADcdq4eQ6HjOLMsTP4bdCQ53xMQ7WEkYQDG2G5iyvFIgwZFKNsIRqwMRxh8GaYQ==
-X-Received: by 2002:a17:903:3b8e:b0:234:c37:85a with SMTP id d9443c01a7336-23de38106e0mr3159625ad.24.1752146074745;
-        Thu, 10 Jul 2025 04:14:34 -0700 (PDT)
-Received: from google.com (232.98.126.34.bc.googleusercontent.com. [34.126.98.232])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-23de4366698sm18961295ad.246.2025.07.10.04.14.28
+        bh=IR5AJVT4G5WLtAAqgPLSimQyStJGWsVwlw9CufaXOaE=;
+        b=m6levqJx884kofs/dYTbVUYerkR7+EhQMpnkEyazfDrOpz1pQ8uNVPDZKMriD2wM7L
+         LdABE1YebZxfuy0JqI1YiLTmgSwoPP4ChJKN2nszttbYki0kHbT2lHlo3eGMd9KkxHdn
+         33Jl+glJrVO8zeiq31vopayuegmR3ti9tv9qXY522QKsQmHL3tuUNXNvOQNV+B4cfzoX
+         XrVboceqRHaXx/Wnm2a39E1XAi5Zrocc3FzdB8BC61/HYUAd+bLfmbDVp70Dzd2QX3HJ
+         8HhuRHh6/WY06TN+VUDrZssMPUJijmn6g03tSYdfWXC9KSteZvGdycmK3lXnfs73/AsL
+         wKHQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVK22uG2QpxSfdFMytGTlV65KV/+l/3EsaalNBnap/BR8oyQIe+7cXS1Yt1VanTnBQSiNiSIt2i@vger.kernel.org, AJvYcCWruDomNowC0qVneIGRuuuYHDcJ3dq9uws3pKZcsJWxC9A0NRyfoSZZT+gu4QDG3QLRqkElaJcv4bTb0TM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxzGeIuTRG0YX4/65JPOPDs1ka2mhq18+qoMtgXKpSUp1iZk9MC
+	dYKQHVOppQ2eOhYM87y8STDt4+PtTaRwmtTtHi+YHnZZSsrfdK3H/f+G
+X-Gm-Gg: ASbGncvxm/XOqPbApJXZ5UTsU8vSjK4jFm1SPIK4IfkAyFjOvGtlJh9YW4SOcq2+L+5
+	jG/B/K3AjxWZlAoJVmWUQmtTTlnFMAeHHXBDpFCB98XGmc76a9E2CUu40y5X8BHnQys7e7y4aur
+	Bl2uO3dUWB/J+0QLwRxfweN0g0SkjCspb7a/7GyP3kYQbGsONRiSbRQcAYu9VVHppf4d/SO5PYM
+	cjWxtKVtXH0zToyZ/0o8NDzSNyYw1JrFsuBC5ZOX5bKDGYtN1+J9RY4MQxvyyuJZQBTdebLmpUH
+	fW34r/OWXHxFUTrSx+4igMgUdpNBOr+1eO/7Gkkrh4LbcgU66gxv1q3qyzj1A+xIWb3+jm0Vtvk
+	=
+X-Google-Smtp-Source: AGHT+IGJxYQYyVxwJGUcleyu2QUatvGZlx5j2drpe8o9TCCtxQrleJg0cqNcOTkJRlgizlSSl5qgwQ==
+X-Received: by 2002:a05:6000:43d5:b0:3b5:e2ca:1c2 with SMTP id ffacd0b85a97d-3b5e788d43cmr2498398f8f.2.1752146859857;
+        Thu, 10 Jul 2025 04:27:39 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:a8bc:3071:67a5:abea])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-454dd474a9csm17122225e9.16.2025.07.10.04.27.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Jul 2025 04:14:34 -0700 (PDT)
-Date: Thu, 10 Jul 2025 11:14:25 +0000
-From: Pranjal Shrivastava <praan@google.com>
-To: Nicolin Chen <nicolinc@nvidia.com>
-Cc: jgg@nvidia.com, kevin.tian@intel.com, corbet@lwn.net,
-	bagasdotme@gmail.com, will@kernel.org, robin.murphy@arm.com,
-	joro@8bytes.org, thierry.reding@gmail.com, vdumpa@nvidia.com,
-	jonathanh@nvidia.com, shuah@kernel.org, jsnitsel@redhat.com,
-	nathan@kernel.org, peterz@infradead.org, yi.l.liu@intel.com,
-	mshavit@google.com, zhangzekun11@huawei.com, iommu@lists.linux.dev,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-tegra@vger.kernel.org,
-	linux-kselftest@vger.kernel.org, patches@lists.linux.dev,
-	mochs@nvidia.com, alok.a.tiwari@oracle.com, vasant.hegde@amd.com,
-	dwmw2@infradead.org, baolu.lu@linux.intel.com
-Subject: Re: [PATCH v9 18/29] iommufd/selftest: Add coverage for the new mmap
- interface
-Message-ID: <aG-gkXOZExtzUGxe@google.com>
-References: <cover.1752126748.git.nicolinc@nvidia.com>
- <b02b1220c955c3cf9ea5dd9fe9349ab1b4f8e20b.1752126748.git.nicolinc@nvidia.com>
+        Thu, 10 Jul 2025 04:27:39 -0700 (PDT)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,  Jonathan Corbet
+ <corbet@lwn.net>,  "Akira Yokosawa" <akiyks@gmail.com>,  "Breno Leitao"
+ <leitao@debian.org>,  "David S. Miller" <davem@davemloft.net>,  "Eric
+ Dumazet" <edumazet@google.com>,  "Ignacio Encinas Rubio"
+ <ignacio@iencinas.com>,  "Jan Stancek" <jstancek@redhat.com>,  "Marco
+ Elver" <elver@google.com>,  "Paolo Abeni" <pabeni@redhat.com>,  "Randy
+ Dunlap" <rdunlap@infradead.org>,  "Ruben Wauters" <rubenru09@aol.com>,
+  "Shuah Khan" <skhan@linuxfoundation.org>,  Jakub Kicinski
+ <kuba@kernel.org>,  Simon Horman <horms@kernel.org>,
+  joel@joelfernandes.org,  linux-kernel-mentees@lists.linux.dev,
+  linux-kernel@vger.kernel.org,  lkmm@lists.linux.dev,
+  netdev@vger.kernel.org,  peterz@infradead.org,  stern@rowland.harvard.edu
+Subject: Re: [PATCH v9 12/13] docs: parser_yaml.py: add support for line
+ numbers from the parser
+In-Reply-To: <3b18b30b1b50b01a014fd4b5a38423e529cde2fb.1752076293.git.mchehab+huawei@kernel.org>
+Date: Thu, 10 Jul 2025 12:25:56 +0100
+Message-ID: <m2zfdc5ltn.fsf@gmail.com>
+References: <cover.1752076293.git.mchehab+huawei@kernel.org>
+	<3b18b30b1b50b01a014fd4b5a38423e529cde2fb.1752076293.git.mchehab+huawei@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b02b1220c955c3cf9ea5dd9fe9349ab1b4f8e20b.1752126748.git.nicolinc@nvidia.com>
+Content-Type: text/plain
 
-On Wed, Jul 09, 2025 at 10:59:10PM -0700, Nicolin Chen wrote:
-> Extend the loopback test to a new mmap page.
-> 
-> Signed-off-by: Nicolin Chen <nicolinc@nvidia.com>
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-Reviewed-by: Pranjal Shrivastava <praan@google.com>
+> Instead of printing line numbers from the temp converted ReST
+> file, get them from the original source.
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+
+This doesn't seem to work. This is what I get when I change line 14 of
+rt-neigh.yaml
+
+diff --git a/Documentation/netlink/specs/rt-neigh.yaml b/Documentation/netlink/specs/rt-neigh.yaml
+index e9cba164e3d1..937d2563f151 100644
+--- a/Documentation/netlink/specs/rt-neigh.yaml
++++ b/Documentation/netlink/specs/rt-neigh.yaml
+@@ -11,6 +11,7 @@ doc:
+ definitions:
+   -
+     name: ndmsg
++    doc: ".. bogus::"
+     type: struct
+     members:
+       -
+
+/home/donaldh/docs-next/Documentation/netlink/specs/rt-neigh.yaml:165: ERROR: Unknown directive type "bogus".
+
+.. bogus:: [docutils]
+
 
 > ---
->  drivers/iommu/iommufd/iommufd_test.h          |  4 +++
->  tools/testing/selftests/iommu/iommufd_utils.h |  4 +++
->  drivers/iommu/iommufd/selftest.c              | 33 ++++++++++++++++++-
->  tools/testing/selftests/iommu/iommufd.c       | 19 +++++++++++
->  4 files changed, 59 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/iommu/iommufd/iommufd_test.h b/drivers/iommu/iommufd/iommufd_test.h
-> index 51cd744a354f..8fc618b2bcf9 100644
-> --- a/drivers/iommu/iommufd/iommufd_test.h
-> +++ b/drivers/iommu/iommufd/iommufd_test.h
-> @@ -232,12 +232,16 @@ struct iommu_hwpt_invalidate_selftest {
->   *                                (IOMMU_VIOMMU_TYPE_SELFTEST)
->   * @in_data: Input random data from user space
->   * @out_data: Output data (matching @in_data) to user space
-> + * @out_mmap_offset: The offset argument for mmap syscall
-> + * @out_mmap_length: The length argument for mmap syscall
->   *
->   * Simply set @out_data=@in_data for a loopback test
->   */
->  struct iommu_viommu_selftest {
->  	__u32 in_data;
->  	__u32 out_data;
-> +	__aligned_u64 out_mmap_offset;
-> +	__aligned_u64 out_mmap_length;
->  };
+>  Documentation/sphinx/parser_yaml.py      | 12 ++++++++++--
+>  tools/net/ynl/pyynl/lib/doc_generator.py | 16 ++++++++++++----
+>  2 files changed, 22 insertions(+), 6 deletions(-)
+>
+> diff --git a/Documentation/sphinx/parser_yaml.py b/Documentation/sphinx/parser_yaml.py
+> index fa2e6da17617..8288e2ff7c7c 100755
+> --- a/Documentation/sphinx/parser_yaml.py
+> +++ b/Documentation/sphinx/parser_yaml.py
+> @@ -54,6 +54,8 @@ class YamlParser(Parser):
 >  
->  /* Should not be equal to any defined value in enum iommu_viommu_invalidate_data_type */
-> diff --git a/tools/testing/selftests/iommu/iommufd_utils.h b/tools/testing/selftests/iommu/iommufd_utils.h
-> index 9a556f99d992..4a1b2bade018 100644
-> --- a/tools/testing/selftests/iommu/iommufd_utils.h
-> +++ b/tools/testing/selftests/iommu/iommufd_utils.h
-> @@ -56,6 +56,10 @@ static unsigned long PAGE_SIZE;
->  #define offsetofend(TYPE, MEMBER) \
->  	(offsetof(TYPE, MEMBER) + sizeof_field(TYPE, MEMBER))
+>      netlink_parser = YnlDocGenerator()
 >  
-> +#define test_err_mmap(_errno, length, offset)                                 \
-> +	EXPECT_ERRNO(_errno, (long)mmap(NULL, length, PROT_READ | PROT_WRITE, \
-> +					MAP_SHARED, self->fd, offset))
+> +    re_lineno = re.compile(r"\.\. LINENO ([0-9]+)$")
 > +
->  static inline void *memfd_mmap(size_t length, int prot, int flags, int *mfd_p)
->  {
->  	int mfd_flags = (flags & MAP_HUGETLB) ? MFD_HUGETLB : 0;
-> diff --git a/drivers/iommu/iommufd/selftest.c b/drivers/iommu/iommufd/selftest.c
-> index 2189e9b119ee..8b2c44b32530 100644
-> --- a/drivers/iommu/iommufd/selftest.c
-> +++ b/drivers/iommu/iommufd/selftest.c
-> @@ -152,6 +152,9 @@ struct mock_viommu {
->  	struct mock_iommu_domain *s2_parent;
->  	struct mock_hw_queue *hw_queue[IOMMU_TEST_HW_QUEUE_MAX];
->  	struct mutex queue_mutex;
+>      def rst_parse(self, inputstring, document, msg):
+>          """
+>          Receives a ReST content that was previously converted by the
+> @@ -66,8 +68,14 @@ class YamlParser(Parser):
+>  
+>          try:
+>              # Parse message with RSTParser
+> -            for i, line in enumerate(msg.split('\n')):
+> -                result.append(line, document.current_source, i)
+> +            lineoffset = 0;
+> +            for line in msg.split('\n'):
+> +                match = self.re_lineno.match(line)
+> +                if match:
+> +                    lineoffset = int(match.group(1))
+> +                    continue
 > +
-> +	unsigned long mmap_offset;
-> +	u32 *page; /* Mmap page to test u32 type of in_data */
->  };
+> +                result.append(line, document.current_source, lineoffset)
+
+I expect this would need to be source=document.current_source, offset=lineoffset
+
 >  
->  static inline struct mock_viommu *to_mock_viommu(struct iommufd_viommu *viommu)
-> @@ -689,6 +692,10 @@ static void mock_viommu_destroy(struct iommufd_viommu *viommu)
->  
->  	if (refcount_dec_and_test(&mock_iommu->users))
->  		complete(&mock_iommu->complete);
-> +	if (mock_viommu->mmap_offset)
-> +		iommufd_viommu_destroy_mmap(&mock_viommu->core,
-> +					    mock_viommu->mmap_offset);
-> +	free_page((unsigned long)mock_viommu->page);
->  	mutex_destroy(&mock_viommu->queue_mutex);
->  
->  	/* iommufd core frees mock_viommu and viommu */
-> @@ -887,11 +894,28 @@ static int mock_viommu_init(struct iommufd_viommu *viommu,
->  		if (rc)
->  			return rc;
->  
-> +		/* Allocate two pages */
-> +		mock_viommu->page =
-> +			(u32 *)__get_free_pages(GFP_KERNEL | __GFP_ZERO, 1);
-> +		if (!mock_viommu->page)
-> +			return -ENOMEM;
+>              rst_parser = RSTParser()
+>              rst_parser.parse('\n'.join(result), document)
+
+But anyway this discards any line information by just concatenating the
+lines together again.
+
+> diff --git a/tools/net/ynl/pyynl/lib/doc_generator.py b/tools/net/ynl/pyynl/lib/doc_generator.py
+> index 658759a527a6..403abf1a2eda 100644
+> --- a/tools/net/ynl/pyynl/lib/doc_generator.py
+> +++ b/tools/net/ynl/pyynl/lib/doc_generator.py
+> @@ -158,9 +158,11 @@ class YnlDocGenerator:
+>      def parse_do(self, do_dict: Dict[str, Any], level: int = 0) -> str:
+>          """Parse 'do' section and return a formatted string"""
+>          lines = []
+> +        if LINE_STR in do_dict:
+> +            lines.append(self.fmt.rst_lineno(do_dict[LINE_STR]))
 > +
-> +		rc = iommufd_viommu_alloc_mmap(&mock_viommu->core,
-> +					       __pa(mock_viommu->page),
-> +					       PAGE_SIZE * 2,
-> +					       &mock_viommu->mmap_offset);
-> +		if (rc)
-> +			goto err_free_page;
-> +
-> +		/* For loopback tests on both the page and out_data */
-> +		*mock_viommu->page = data.in_data;
->  		data.out_data = data.in_data;
-> +		data.out_mmap_length = PAGE_SIZE * 2;
-> +		data.out_mmap_offset = mock_viommu->mmap_offset;
->  		rc = iommu_copy_struct_to_user(
->  			user_data, &data, IOMMU_VIOMMU_TYPE_SELFTEST, out_data);
->  		if (rc)
-> -			return rc;
-> +			goto err_destroy_mmap;
->  	}
+>          for key in do_dict.keys():
+>              if key == LINE_STR:
+> -                lines.append(self.fmt.rst_lineno(do_dict[key]))
+>                  continue
+>              lines.append(self.fmt.rst_paragraph(self.fmt.bold(key), level + 1))
+>              if key in ['request', 'reply']:
+> @@ -187,13 +189,15 @@ class YnlDocGenerator:
+>          lines = []
 >  
->  	refcount_inc(&mock_iommu->users);
-> @@ -900,6 +924,13 @@ static int mock_viommu_init(struct iommufd_viommu *viommu,
->  
->  	viommu->ops = &mock_viommu_ops;
->  	return 0;
+>          for operation in operations:
+> +            if LINE_STR in operation:
+> +                lines.append(self.fmt.rst_lineno(operation[LINE_STR]))
 > +
-> +err_destroy_mmap:
-> +	iommufd_viommu_destroy_mmap(&mock_viommu->core,
-> +				    mock_viommu->mmap_offset);
-> +err_free_page:
-> +	free_page((unsigned long)mock_viommu->page);
-> +	return rc;
->  }
+>              lines.append(self.fmt.rst_section(namespace, 'operation',
+>                                                operation["name"]))
+>              lines.append(self.fmt.rst_paragraph(operation["doc"]) + "\n")
 >  
->  static const struct iommu_ops mock_ops = {
-> diff --git a/tools/testing/selftests/iommu/iommufd.c b/tools/testing/selftests/iommu/iommufd.c
-> index 73426de77675..0b21c095ca5e 100644
-> --- a/tools/testing/selftests/iommu/iommufd.c
-> +++ b/tools/testing/selftests/iommu/iommufd.c
-> @@ -2799,6 +2799,7 @@ TEST_F(iommufd_viommu, viommu_alloc_with_data)
->  	struct iommu_viommu_selftest data = {
->  		.in_data = 0xbeef,
->  	};
-> +	uint32_t *test;
+>              for key in operation.keys():
+>                  if key == LINE_STR:
+> -                    lines.append(self.fmt.rst_lineno(operation[key]))
+>                      continue
 >  
->  	if (!self->device_id)
->  		SKIP(return, "Skipping test for variant no_viommu");
-> @@ -2807,6 +2808,24 @@ TEST_F(iommufd_viommu, viommu_alloc_with_data)
->  			      IOMMU_VIOMMU_TYPE_SELFTEST, &data, sizeof(data),
->  			      &self->viommu_id);
->  	ASSERT_EQ(data.out_data, data.in_data);
-> +
-> +	/* Negative mmap tests -- offset and length cannot be changed */
-> +	test_err_mmap(ENXIO, data.out_mmap_length,
-> +		      data.out_mmap_offset + PAGE_SIZE);
-> +	test_err_mmap(ENXIO, data.out_mmap_length,
-> +		      data.out_mmap_offset + PAGE_SIZE * 2);
-> +	test_err_mmap(ENXIO, data.out_mmap_length / 2, data.out_mmap_offset);
-> +	test_err_mmap(ENXIO, data.out_mmap_length * 2, data.out_mmap_offset);
-> +
-> +	/* Now do a correct mmap for a loopback test */
-> +	test = mmap(NULL, data.out_mmap_length, PROT_READ | PROT_WRITE,
-> +		    MAP_SHARED, self->fd, data.out_mmap_offset);
-> +	ASSERT_NE(MAP_FAILED, test);
-> +	ASSERT_EQ(data.in_data, *test);
-> +
-> +	/* The owner of the mmap region should be blocked */
-> +	EXPECT_ERRNO(EBUSY, _test_ioctl_destroy(self->fd, self->viommu_id));
-> +	munmap(test, data.out_mmap_length);
->  }
+>                  if key in preprocessed:
+> @@ -253,10 +257,12 @@ class YnlDocGenerator:
+>          lines = []
 >  
->  TEST_F(iommufd_viommu, vdevice_alloc)
-> -- 
-> 2.43.0
-> 
+>          for definition in defs:
+> +            if LINE_STR in definition:
+> +                lines.append(self.fmt.rst_lineno(definition[LINE_STR]))
+> +
+>              lines.append(self.fmt.rst_section(namespace, 'definition', definition["name"]))
+>              for k in definition.keys():
+>                  if k == LINE_STR:
+> -                    lines.append(self.fmt.rst_lineno(definition[k]))
+>                      continue
+>                  if k in preprocessed + ignored:
+>                      continue
+> @@ -284,6 +290,9 @@ class YnlDocGenerator:
+>              lines.append(self.fmt.rst_section(namespace, 'attribute-set',
+>                                                entry["name"]))
+>              for attr in entry["attributes"]:
+> +                if LINE_STR in attr:
+> +                    lines.append(self.fmt.rst_lineno(attr[LINE_STR]))
+> +
+>                  type_ = attr.get("type")
+>                  attr_line = attr["name"]
+>                  if type_:
+> @@ -294,7 +303,6 @@ class YnlDocGenerator:
+>  
+>                  for k in attr.keys():
+>                      if k == LINE_STR:
+> -                        lines.append(self.fmt.rst_lineno(attr[k]))
+>                          continue
+>                      if k in preprocessed + ignored:
+>                          continue
 
