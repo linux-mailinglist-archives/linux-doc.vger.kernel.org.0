@@ -1,126 +1,69 @@
-Return-Path: <linux-doc+bounces-52801-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52803-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6BCBB01A48
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 13:05:20 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48037B01A6D
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 13:20:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D91EF7B946E
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 11:03:38 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 904BE4A5709
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 11:20:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2475928A719;
-	Fri, 11 Jul 2025 11:04:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dJaYsozx"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDF1F288CB5;
+	Fri, 11 Jul 2025 11:20:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF70228A411;
-	Fri, 11 Jul 2025 11:04:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7699288C3D;
+	Fri, 11 Jul 2025 11:20:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.95.11.211
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752231891; cv=none; b=V8DdDRSLWCyami/wB6LT9UHAYXmE5tGt/8SBXlWxeKG++YayUfSReMIiD9RwHuV99UrXjgKauAwGFfjbG4Y30b+rJbP9cMJSRLN8+LOUJKkfM0ApanU/Z+6vjk3Msj5yxpTU4mk/S+ge4lktsg6GPULCaB8wkSS0e2QlSF32JuA=
+	t=1752232828; cv=none; b=RBTSYgIh1qMTWApMroO0fBGLy2HPz+E9QRF+I/Il8gKkPDl/EccGEwTbo9lMK51EYsSWSb9nifvkb0/g2PuV1N/AaH2vaTNh0UZh2qV3jQQwlOeG+7ZeKoHFaE1FpOoMd3IyUGld4Pg1RfTrfN0l8CD4ddVfSZawuagRmszPcl0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752231891; c=relaxed/simple;
-	bh=za2rJxcZ2osXt3pn6Xn/ijEkRJ36GHTvknYmkuXDjCk=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Bo1OGaUvCmqOWSrd930XCrhaHl48Iv7M2sdvFYAwlJPOvmgBaIC6lOlHzb3Ym56UvMfXCXo1CqQgeePcC45ME3/RG+zs/bHLLagLcfbdaZzxCBE/7z5Cozp3diimZ198AfeGcJKtBZ4pipAck+upuHgnz6w2GoEFdFd0+nKuPEM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dJaYsozx; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A540C4CEF6;
-	Fri, 11 Jul 2025 11:04:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752231890;
-	bh=za2rJxcZ2osXt3pn6Xn/ijEkRJ36GHTvknYmkuXDjCk=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=dJaYsozxQ4sNUXd2oIBQ7wfxA8b7SDeY7f0BHvdFonmAetYvdp8L/I+Lw2jav5OW/
-	 kQ/oVXivQk2mu2xaPm8cw481X9XM917aGy+RuiZsRHDxamMzM5T/zwM9EnNaGlKd2a
-	 0RQCJ77UI3iOVT0IJKzcYWDRCASjvs5m+GmmTUgHCiqMeqUIYfZMbMR47WYEUPCbq5
-	 HXynrnEU+wScyGv1zAfH9zfWNapUBBq5+a5ALiLX6QFMsllU8U+uo2cLPB9RLheHEZ
-	 S8D/OYmn2Zs/lrVg5PjQnW8ZSr/F8Gq2j3fxvm3tUFqoBoQjiwsu/0s2wLgUNm5Yl5
-	 n48WTx9vDQnJA==
-Date: Fri, 11 Jul 2025 13:04:46 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Akira Yokosawa <akiyks@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org, Mauro
- Carvalho Chehab <mchehab@kernel.org>, Linux Doc Mailing List
- <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH v2 00/39] Translate sphinx-pre-install to Python
-Message-ID: <20250711130446.1b761538@foz.lan>
-In-Reply-To: <d12fb63e-b346-4094-b9d6-aa6823aea541@gmail.com>
-References: <cover.1752067814.git.mchehab+huawei@kernel.org>
-	<d12fb63e-b346-4094-b9d6-aa6823aea541@gmail.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1752232828; c=relaxed/simple;
+	bh=wlP3/M2M4/F3Ll9L0tiVoF9qkFIfVU+4huPD1wTAU1Y=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iOhI5sQPkyJoG0q/dAzdVkCygCZ+qzo1leXXFqpeua1HJMvOtTPTf7qxgBIyT36M+ArPbKBXBj06zsb2AhhpddR+d/SFx3RDOmz2k/DKw4IB8v5ERph1dsXM2lVIYM2QmaMOiQ+TLla1caqNqtRhbdEPecViv8Wy1p4YoOUpluw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lst.de; spf=pass smtp.mailfrom=lst.de; arc=none smtp.client-ip=213.95.11.211
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lst.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lst.de
+Received: by verein.lst.de (Postfix, from userid 2407)
+	id 4EE0668C4E; Fri, 11 Jul 2025 13:20:22 +0200 (CEST)
+Date: Fri, 11 Jul 2025 13:20:22 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Christian Brauner <brauner@kernel.org>
+Cc: Christoph Hellwig <hch@lst.de>, "Darrick J. Wong" <djwong@kernel.org>,
+	Joanne Koong <joannelkoong@gmail.com>, linux-xfs@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-block@vger.kernel.org, gfs2@lists.linux.dev
+Subject: Re: refactor the iomap writeback code v5
+Message-ID: <20250711112022.GA16329@lst.de>
+References: <20250710133343.399917-1-hch@lst.de> <20250711-arten-randlage-1a867323e2ce@brauner>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250711-arten-randlage-1a867323e2ce@brauner>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-Em Fri, 11 Jul 2025 19:49:41 +0900
-Akira Yokosawa <akiyks@gmail.com> escreveu:
+On Fri, Jul 11, 2025 at 11:50:22AM +0200, Christian Brauner wrote:
+> On Thu, Jul 10, 2025 at 03:33:24PM +0200, Christoph Hellwig wrote:
+> > Hi all,
+> > 
+> > this is an alternative approach to the writeback part of the
+> > "fuse: use iomap for buffered writes + writeback" series from Joanne.
+> > It doesn't try to make the code build without CONFIG_BLOCK yet.
+> 
+> I'm confused, the last commit in the series makes the code built with
+> !CONFIG_BLOCK? So this is ready to go?
 
-> [most CCs dropped]
-> 
-> On Wed,  9 Jul 2025 15:51:32 +0200, Mauro Carvalho Chehab wrote:
-> [...]
-> 
-> > Please notice that my goal here is to test just this tool.
-> > I didn't try to actually build the docs on every distro.  
-> 
-> I tested the docs build against opensuse/leap:15.6 for you, and
-> the install completed. One step forward.
-> 
-> However, running "make latexdocs" ended up with the following error:
-> 
-> -----------------------------------------------------------------------------
-> Exception occurred:
->   File "/usr/lib/python3.11/site-packages/sphinx/builders/latex/__init__.py", line 405, in copy_support_files
->     for filename in os.listdir(staticdirname):
->                     ^^^^^^^^^^^^^^^^^^^^^^^^^
-> FileNotFoundError: [Errno 2] No such file or directory: '/usr/lib/python3.11/site-packages/sphinx/texinputs'
-> -----------------------------------------------------------------------------
-> 
-> That "texinputs" directory is supposed to hold files to be copied along
-> with latex sources Sphinx will generate.
-> 
-> openSUSE is unique in that those files don't belong to its base Sphinx
-> package.  They are provided in "python3-Sphinx-latex" (or
-> "python311-Sphinx-latex", or any appropriate one for your base Sphinx
-> package).
-> 
-> Is this news to you?
+It's ready.  That last sentence should have been dropped a few iterations
+ago.
 
-Yes, but it should be easy to add it at the tool. I'll address it, test
-on Leap and submit it.
-
-> By the way, 33/39 contains diff of test_script.py and can't be applied.
-> I needed to remove the hunk manually and apply the remaining patches.
-
-Sorry for that. I'll drop the hunk. I may eventually submit in separate
-a patch series with the scripts I used for testing, but before that,
-I guess we need first to move doc-related stuff to tools/docs, as
-Jon suggested.
-
-> Anyway, your translation of sphinx-pre-install into python is now at
-> the bottom of my to-test/review list.  So no need to respin this.
-> 
-> As a matter of fact, I'm seeing weird performance regression of empty
-> documentation builds when the O=<somedir> option is used.
-> 
-> It appeared in v6.15, which has your conversion of get_abi.pl into
-> get_abi.py.  Will send a report once the time-consuming bisection
-> completes.
-
-Did you try with docs-next instead? I remember Jon caught one
-issue causing the doctree cache to expire. Can't remember if this
-was on 6.15 or at docs-next, but the fixes should be applied there.
-
-Regards,
-Mauro
 
