@@ -1,138 +1,156 @@
-Return-Path: <linux-doc+bounces-52831-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52838-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BCC4B01FBE
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 16:55:04 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 90553B02066
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 17:28:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A775E583BCF
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 14:54:49 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6FCF41CA693F
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 15:28:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D4662EB5C6;
-	Fri, 11 Jul 2025 14:52:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97AB62E92AD;
+	Fri, 11 Jul 2025 15:28:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b="GLwIa/U4"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kTFYiGsH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 378EF2EACF8;
-	Fri, 11 Jul 2025 14:52:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.132.182.106
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0E42274658;
+	Fri, 11 Jul 2025 15:28:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752245564; cv=none; b=jmlr8sVIi4MUPmlN5Da/QBJOQl8TxQ+XoWBgvitccIShNC7uamuKTHXrsCt8xadt2yRCrpVuuJ9HaMEkvxsnWtNadoVShTjbGouF6CSpOYNhCWHkIvUC/e1tv6yFNFFsY2mlnnvSELZ8q8IWtUDxGeIIL1euq5yhUg76V+Domy4=
+	t=1752247706; cv=none; b=kjhZXjX/CSBAFa8WR1ecZsD9Q/AvRF41qEowajVXori6v5RBu9HV+Hqdbixf1XfMW1o9+YG7CotEGKSwSOKc3Km++AuMFR93J1aMT9uDw0e3F/jkLbTo+35ttHO/t5adBQPK3YD1Whs8N/I3pmoWwtidq7fjOcCzrCF1A9RJn9U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752245564; c=relaxed/simple;
-	bh=q/FVeQueIyKVrnp1NcfhHAttXLTMCRvWb2aBdG6Nx4o=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=uT8z//fcLfjR8aAyMtoioqmkFhQ7c43JNvIV4PpV5FTV3n5b1q3UCv1wtTRIkS/uucsqhKwebeg+dsPQL6ZuaE3WV7EdmhEnZFlc36iInv+3ohbOtAUFI/1zkmiiG2epdkbHEl6b4su2QFDTEjoPwBxVVTuZpwaRbVjlTATU+Vs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com; spf=pass smtp.mailfrom=foss.st.com; dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b=GLwIa/U4; arc=none smtp.client-ip=185.132.182.106
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56BEHQjM027785;
-	Fri, 11 Jul 2025 16:52:28 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=selector1; bh=
-	F0RaanQr/Y01Kr3e9l6yvosGEYhnzl8fsIwEj1CuG6c=; b=GLwIa/U4Pms3zJYJ
-	Vf6J02Gisg1Ta4puNDbzsRHGlPFLIH6DIxCks5O8Xa1cKnjO0hXVB7a4cISVoN1n
-	q8zYShB0re5FueScRBFZN1aQ5rdOfisRaiYktnzX+qK0abR4UCG1yuGbZJOtEV9I
-	X5W6esz3NDy1OWP4hO6pJLsQfdKxn9BMlNqA/DvYXUBaXY2zfZ+zVPtaL9SuiKU7
-	vgVx68hnzZUh5nbPyAhp5JPDt/IqI60gLjHi771kfkVnqRYSMjndzDKt1UYCrx0G
-	6XYxO8IrkeXgCrx0NygjkS++agXq9iYTFatMUGSRUdVHpvE/JGMMdIikmZN92LaN
-	t8o0ag==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
-	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 47pud3qfjm-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 11 Jul 2025 16:52:28 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B7B5C4004D;
-	Fri, 11 Jul 2025 16:51:21 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E9575B56893;
-	Fri, 11 Jul 2025 16:49:26 +0200 (CEST)
-Received: from localhost (10.252.16.187) by SHFDAG1NODE2.st.com (10.75.129.70)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Jul
- 2025 16:49:26 +0200
-From: =?utf-8?q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
-Date: Fri, 11 Jul 2025 16:49:08 +0200
-Subject: [PATCH v2 16/16] arm64: dts: st: support ddrperfm on
- stm32mp257f-ev1
+	s=arc-20240116; t=1752247706; c=relaxed/simple;
+	bh=jJsQMAM8FiXHMdKty5y/XyaVhDgU86KQ3YEd2qZWf5g=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=NmzmP1xVEN+jH+cXYdjybrNJMLWQXxduGHC35Em9le3+S95TKSk8r7ge4FPwuNls8UfUH+F2BrvULaxy5i6mt11YnJHSkBEa8Cmf8ELk1qKiGJ8cax3f1I+HNeIMY9uj4gZzHLsYKL2v9Jzqgf4GKfoBKJIIGLufIS3lwvoubRA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kTFYiGsH; arc=none smtp.client-ip=209.85.160.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=groves.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-2ef461b9daeso1440786fac.2;
+        Fri, 11 Jul 2025 08:28:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1752247703; x=1752852503; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=RCT28qnij7KcqmnQf/Iz1goywJwPmt6gNk4a8gqOzGQ=;
+        b=kTFYiGsHLvnJeVjc79Pke84Q8yHizUDJeO/XjGFccOpz3HxyKyhs1dMvty3KNe1j21
+         qMwq5UQLkeo8sbwhrzvgzTw+ZXOs+D7pL/eEKRHRDEE/o1RkanG4H1+2n63CZK3KwGsz
+         AJtuQuJVUaPNxgGqpPJjQJm71GoTtq4BYgilY6vlPXgjRVzPs4qCBQWVly6rhoFvGo+1
+         sRQc4eNn0xnSvHB8npRt/q/FSGUmwwOv4WOIILrHSYJL6hPEre8BcpX+NQFeqDg2UEvu
+         UHNFE+IEZLDEI9dR4IOqqEVEZ2QhLFdoy16f6zAdk56Nt9n+5urLxk9yroVxxmg5wirN
+         JF9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752247703; x=1752852503;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=RCT28qnij7KcqmnQf/Iz1goywJwPmt6gNk4a8gqOzGQ=;
+        b=kht+7pqBOO7Z0fVZZvbKgdHFDOfj1MmP9D5ECg0DO8vzsTYHuaFHnpCq9/0RGZPOmX
+         0NbkTBqLR8ebKroy1VA4mP4yO3sYwZBlJk58kRKoL7xJ5ZOTinl3stCzYUm/jmyMsohK
+         p6xhTS6Wym1CTWO1j34C//l+YYUZA+459qtPorgiPxV6IaPG/g1KxbM6s/i/5B8TcUrx
+         rNjcLel94kCFutACXfswMGyPqkV0vfIHef7b+8DYBaAIsrecjz10cLpdb/Ua0AyovSLI
+         kaK83W7qjiKnAfDHGRfeHPVy0/4crOSIiZKIJZ2rtaH+0f2u3eMGWKUJKgB5GDUtgUF8
+         ki1Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUP+B7TyO433zQ/LVrb9cRItbQUsFEctWbFKDn8lnKRg8oYNMz9Gu1ZW4oJb+4NHXWIwjAs+dpGIqxSqOR/@vger.kernel.org, AJvYcCUkGfNyZaacuSQ8eBdVxijASVuQbefmLfL14sLnctq7na3NeuObPj5JmvutmEYpV3M0ZRx7wa8FkUP+@vger.kernel.org, AJvYcCUpZBivixWXTUHxY2E4W0C/YptvjFfPDIwfGHwuOKcwrk+wwsLuda/QZMSbshM0UB/Pq3ezH/lJh0Q=@vger.kernel.org, AJvYcCVaND/CMv9y1L5yG84+LdR/Z+z1oO3JSoDWAKY5iRegl09MReb2zuWFoC0er3SCB5LVPjTh1Jbnorcmo2mbhA==@vger.kernel.org
+X-Gm-Message-State: AOJu0YwahcPFeOr0CIBRNmwJW/V6/rfKg95q5+wsR5BmVL5tuD9iCxBO
+	gfjvalZMsg+DHobNfGZBLaNuWrevHzVK/gHKXLSOYS0Yy5CN8siqWMPT
+X-Gm-Gg: ASbGncuSk0fE6q4hG8gw9w/5JWgUmB2sa9dC67qRwrOmPqIytAndPBOCnsMO8kZycRL
+	oZpUacBbBMuGiFRuggDcRi+uKLoU2bI+uQT3EJbO4ztg0TbUq7+MBV5CHHJidO8gsFJAS6u9AN8
+	BpXyJcCdavOGC3/v1mkcHuVaTeAnP/1tlBny0WYcYGEyAKtroXhiuHYEWwsfHWp7FAiUXgHvfsl
+	M17oAx9iLmdqHdAfHqy6o6W3L4SPthSq+e+0dMfoEuJtxXD6TBH/QpBh+HTZ36DdZF2rR4z+nTd
+	ycMVilv9sGx62SYZzM3zE6xcmel0WH2RCvbk+uIovK7HOeQJWMRzkkbALsGhaFHCktAyk3t22p+
+	Z0DNggIXd9Ox2XYKwTuVvk523MJnc2vje5KjEAkP6HhoCSUE=
+X-Google-Smtp-Source: AGHT+IGzBgxg7rIzuTtcrrEUrQvsX4CkyLDr3x3XrSAFIZzmksXTQyVmWxDZllhKHdsEcj10mjoRIg==
+X-Received: by 2002:a05:6870:6c14:b0:2d5:2955:aa6b with SMTP id 586e51a60fabf-2ff2b4d9b3fmr1955440fac.5.1752247703301;
+        Fri, 11 Jul 2025 08:28:23 -0700 (PDT)
+Received: from groves.net ([2603:8080:1500:3d89:25b0:db8a:a7d3:ffe1])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-2ff1172e579sm762537fac.45.2025.07.11.08.28.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Jul 2025 08:28:22 -0700 (PDT)
+Sender: John Groves <grovesaustin@gmail.com>
+Date: Fri, 11 Jul 2025 10:28:20 -0500
+From: John Groves <John@groves.net>
+To: "Darrick J. Wong" <djwong@kernel.org>
+Cc: Dan Williams <dan.j.williams@intel.com>, 
+	Miklos Szeredi <miklos@szeredi.hu>, Bernd Schubert <bschubert@ddn.com>, 
+	John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Vishal Verma <vishal.l.verma@intel.com>, Dave Jiang <dave.jiang@intel.com>, 
+	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, 
+	Randy Dunlap <rdunlap@infradead.org>, Jeff Layton <jlayton@kernel.org>, 
+	Kent Overstreet <kent.overstreet@linux.dev>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	Amir Goldstein <amir73il@gmail.com>, Jonathan Cameron <Jonathan.Cameron@huawei.com>, 
+	Stefan Hajnoczi <shajnocz@redhat.com>, Joanne Koong <joannelkoong@gmail.com>, 
+	Josef Bacik <josef@toxicpanda.com>, Aravind Ramesh <arramesh@micron.com>, 
+	Ajay Joshi <ajayjoshi@micron.com>
+Subject: Re: [RFC V2 11/18] famfs_fuse: Basic famfs mount opts
+Message-ID: <ttjh3gqk3fmykwrb7dg6xaqhkpxk7g773fkvuzvbdlefimpseg@l5ermgxixeen>
+References: <20250703185032.46568-1-john@groves.net>
+ <20250703185032.46568-12-john@groves.net>
+ <20250709035911.GE2672029@frogsfrogsfrogs>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-ID: <20250711-ddrperfm-upstream-v2-16-cdece720348f@foss.st.com>
-References: <20250711-ddrperfm-upstream-v2-0-cdece720348f@foss.st.com>
-In-Reply-To: <20250711-ddrperfm-upstream-v2-0-cdece720348f@foss.st.com>
-To: Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
-        Rob
- Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor
- Dooley <conor+dt@kernel.org>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Philipp Zabel
-	<p.zabel@pengutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Gatien Chevallier
-	<gatien.chevallier@foss.st.com>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Gabriel Fernandez
-	<gabriel.fernandez@foss.st.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Le
- Goffic <legoffic.clement@gmail.com>
-CC: <linux-arm-kernel@lists.infradead.org>, <linux-perf-users@vger.kernel.org>,
-        <devicetree@vger.kernel.org>,
-        <linux-stm32@st-md-mailman.stormreply.com>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-clk@vger.kernel.org>,
-        =?utf-8?q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
-X-Mailer: b4 0.15-dev-7616d
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE2.st.com
- (10.75.129.70)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-11_03,2025-07-09_01,2025-03-28_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250709035911.GE2672029@frogsfrogsfrogs>
 
-Configure DDRPERFM node on stm32mp257f-ev1 board.
-Disable the node as DDRPERFM will produce an error message if it's clock
-(shared with the DDRCTRL on STM32MP25x) is secured by common bootloaders.
+On 25/07/08 08:59PM, Darrick J. Wong wrote:
+> On Thu, Jul 03, 2025 at 01:50:25PM -0500, John Groves wrote:
+> > * -o shadow=<shadowpath>
+> 
+> What is a shadow?
+> 
+> > * -o daxdev=<daxdev>
 
-Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
----
- arch/arm64/boot/dts/st/stm32mp257f-ev1.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+Derp - OK, that's a stale commit message. Here is the one for the -next
+version of this patch:
 
-diff --git a/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts b/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-index f987d86d350f..7533b500135c 100644
---- a/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-+++ b/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-@@ -128,6 +128,11 @@ csi_source: endpoint {
- 	};
- };
- 
-+&ddrperfm {
-+	memory-channel = <&ddr_channel>;
-+	status = "disabled";
-+};
-+
- &dcmipp {
- 	status = "okay";
- 	port {
+    famfs_fuse: Basic famfs mount opt: -o shadow=<shadowpath>
 
--- 
-2.43.0
+    The shadow path is a (usually tmpfs) file system area used by the famfs 
+    user space to commuicate with the famfs fuse server. There is a minor 
+    dilemma that the user space tools must be able to resolve from a mount 
+    point path to a shadow path. The shadow path is exposed via /proc/mounts, 
+    but otherwise not used by the kernel. User space gets the shadow path 
+    from /proc/mounts...
+
+
+> 
+> And, uh, if there's a FUSE_GET_DAXDEV command, then what does this mount
+> option do?  Pre-populate the first element of that set?
+> 
+> --D
+> 
+
+I took out -o daxdev, but had failed to update the commit msg.
+
+The logic is this: The general model requires the FUSE_GET_DAXDEV message /
+response, so passing in the primary daxdev as a -o arg creates two ways to
+do the same thing.
+
+The only initial heartburn about this was one could imagine a case where a
+mount happens, but no I/O happens for a while so the mount could "succeed",
+only to fail later if the primary daxdev could not be accessed.
+
+But this can't happen with famfs, because the mount procedure includes 
+creating "meta files" - .meta/.superblock and .meta/.log and accessing them
+immediately. So it is guaranteed that FUSE_GET_DAXDEV will be sent right away,
+and if it fails, the mount will be unwound.
+
+Thanks Darrick!
+John
+
+<snip>
 
 
