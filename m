@@ -1,365 +1,265 @@
-Return-Path: <linux-doc+bounces-52799-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52802-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2FBEB018F8
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 11:58:59 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5BE5B01A60
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 13:15:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DA82C1CA7BF3
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 09:59:16 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6D09E8E14DB
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Jul 2025 11:14:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35E6F27E7F2;
-	Fri, 11 Jul 2025 09:58:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E6C9E28C02A;
+	Fri, 11 Jul 2025 11:15:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="bjqBIQaD"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="g0xg6L34"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28A5918C933
-	for <linux-doc@vger.kernel.org>; Fri, 11 Jul 2025 09:58:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E623028B7E6;
+	Fri, 11 Jul 2025 11:15:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752227934; cv=none; b=cStKcZ1Ym+rqFucxwnTAOsK0xgflCb92fwFz4FZzD4k1etmcJATYMXHc0Jj5XRHy0ZEWFuZVRv1FQT9CRj88CyNMu2WeyTm7TSEdovHTaKNlkdL180gy81h692U097bXUy4O8v2Evx4F82expD0UwOyL+4WvBGh6jsR6VtQg6iY=
+	t=1752232511; cv=none; b=tE9HWK94MhPRVo6a3PNkj9vFYiJ3dE+fs8gM9vwG3rQYlyREqeQEDnVJz/1d90shiMCxeNfaljMiPIFkWLX7BVDPSbZ5L10q7Zl8aWzodI2aYy+xFjpKZEY7ttdmrSpn1kMZr+edhBP1GnuhjnCct1glUXRSvM8wEI83niC2IDU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752227934; c=relaxed/simple;
-	bh=jcwl1hcgxkhkVpibJEUIfNE7pqlQzKHmndBpD3OyFLw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=YZ/lCRQlJjRQ1aPVpA2LKlvzNWQiN8UdQxTF8wYs3oBATBQ83i/H7ADXdLiHfVyC7yJJvlMJV1AiXKvMmWc1mUQoZqk3P65p4HPD19gxbAlKERYI2JW8vpNU7jww8kPp1JKhpamnVezg/vsntTvMRAiklc93eMcs/cCA5ZtjTSc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=bjqBIQaD; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1752227931;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=+UKKl1tl/4X4RmJ4nRhAivPInQxndntWwMlFBpiS/So=;
-	b=bjqBIQaDEiqeWDDOkn0cyOFav6JoUVhC3EmYIj+D73UDUg55uv0oBNHuxuMk2VVzBDs0Sg
-	k2I0IwjLaUbUiPAMNOEv3rLnkcip6nU/2hhmP6l3gYPCHdHnMRrb1v+nMxXR27WGgIl7Xe
-	VH2IyuFN9jY+iaPDw1up7nEHu28gZ6A=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-361-GeBZnyorN62JnInnNMmiFA-1; Fri, 11 Jul 2025 05:58:48 -0400
-X-MC-Unique: GeBZnyorN62JnInnNMmiFA-1
-X-Mimecast-MFC-AGG-ID: GeBZnyorN62JnInnNMmiFA_1752227927
-Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-455eda09c57so1537455e9.2
-        for <linux-doc@vger.kernel.org>; Fri, 11 Jul 2025 02:58:48 -0700 (PDT)
+	s=arc-20240116; t=1752232511; c=relaxed/simple;
+	bh=uRVELgRW5ZYzlSpEJR0P6N1J9NFxpV2TWeTwAHBtgDk=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
+	 MIME-Version:Content-Type; b=iYWO79iwM51mCwjepGZtivW/wLH0tQxUsy5674PIaI/jmFlINA/RPxY7XYsvDxD7enVcQb1hUgLbMUSTknqvppMxE+PIG1RV0JLdV2zZi0z7KBOoLfQuxpgA4W9rxDLGdsCvr0nd8WY0ntEp2wAU46wXlYpCF1/Tq+1P3W1C/F8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=g0xg6L34; arc=none smtp.client-ip=209.85.128.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-455ecacfc32so1692815e9.3;
+        Fri, 11 Jul 2025 04:15:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1752232508; x=1752837308; darn=vger.kernel.org;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zQ6vVLhKfs0npq6T/CCDFR1z9xriix4gqXPfUihkmJ4=;
+        b=g0xg6L3417l/LU2xYSjHi+HCi2wpKM69VOqIarDseBFjTW828YvjU/odpVELE+oS0f
+         EoPn9BbxOjj/hg2H/zB3g66LgY2+onZfFlqKyemKhUWZs2MR1Yt1Xj+V3Wwwhh//uLw/
+         O5HDxq4BdRjWnLfUOhlxeEh3wKIFjk5BM/q5MmlZGnn8OpzaCu6qhmxqFouPpCHsat9H
+         kQoMde6dsWp7HRYsIeS4HAptQ4XqCs+S/DlzNI58Ql5/CfrH4af1M7h+y+sl4bj47mG0
+         xY0jlKTN9aa3bwi4KUES8e1ljEvl09a/xWf7PW4OnSA408a/YEHmJMu7aP9h2E5/Yc32
+         MgZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752227927; x=1752832727;
-        h=content-transfer-encoding:in-reply-to:organization:autocrypt
-         :content-language:from:references:cc:to:subject:user-agent
-         :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=+UKKl1tl/4X4RmJ4nRhAivPInQxndntWwMlFBpiS/So=;
-        b=twjl8K9w9EDWBkBZJScON2ky7vzJtAAE5FyRK1VKIpt02jIwVyZFPplhCzmpTFU+Pk
-         njX5Xftc7twnskrvYzfncNAbMVz4PqWLJ5RHFL0Edez5yeylOCXTT5UpZjWBP2hJhhIh
-         EIclg14p45H66Uz+N35C+wO9FX/+9mKM9D9GPAsCXC3T8X2BLpANMJ1+S6heqfKalblg
-         IBR8208wXiC3+UVLwn/DmJOxIsdVCn6r1UDZ+0XBQlLsRe/ZwyuA4qLXjzCm1LwxeVnS
-         pFzAZRiaRawOm5QDP3ePs65pFavQanSTCb7OXd13UKPI8Ec9CTFEY9l3z0kYoJ78Ms5a
-         7grA==
-X-Forwarded-Encrypted: i=1; AJvYcCWeFYjBZc2Xc0X1B9zRLEJXh68fenOfHye8ZeGy1rEdaIoGE497mq8O7cDFOPs4rNRQriMmrkEwzwc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy4kz22+P6uDZNVotqtMgEaXwH6riPrO3W6zT9lONuF8EcOb9Iz
-	dHKMHypJlrn3v1BYqHxeJ9i9ughwDCPEYKfHTY4rO9xcVxLSqO5kxk5xfXkRMdXJVdKozwhSXDe
-	weXAXPrRPUpG9uW04ZYWQ0vcbeR1GkDBhFEOXS0az+8Pv5yzPH8VR9DVm1R8ZYQ==
-X-Gm-Gg: ASbGnctKBb8ZcgnJGBBVBHzikpD44Ir44TgVXhYORKDUh6qyGRFvcSp457inp96ZsAu
-	5znAQjDLmhsD46ZdHDVlHcp/uHKqJ+amLOZgrxXzBF6nDIDkWwOfFAameC2F07NeUIhHcoXj874
-	XjpWyRJr+QW9Q/LGzv6mDzYXWi/D1JgtqEYY3mIjpnDiRd/NRGoGTCHTb8FoCnJgifEKDqWOfNU
-	GEK+AsK5cD6pWT60NK7OiVnSlBoOBAo5uKsa86wRDNde1vL91BuHZcoTcskkcE52hp1FeFE1S1G
-	f9os4Fb/svQ7HQRBu4MnbXvhTFJ7xuxPG3OW/cG0F0FzKg3mQYbcEI4Jm0fanHjPaStedtBoWAC
-	r61hZfjoU4aT5LPYSahu2JPlHy22ZjYHAJlGPdPAW6Yq4xkBKpUCZccJJJxS8BG7cqgo=
-X-Received: by 2002:a5d:648d:0:b0:3a6:d255:7eda with SMTP id ffacd0b85a97d-3b5f2dfd1b8mr1404518f8f.28.1752227927119;
-        Fri, 11 Jul 2025 02:58:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFBZmauJhH+3iF5EU/3X92DU30FEe2aNm1uPMNqVM2/Rpwxm5AE5/oI+EKrP1imiuyTuELdjg==
-X-Received: by 2002:a5d:648d:0:b0:3a6:d255:7eda with SMTP id ffacd0b85a97d-3b5f2dfd1b8mr1404495f8f.28.1752227926612;
-        Fri, 11 Jul 2025 02:58:46 -0700 (PDT)
-Received: from ?IPV6:2003:d8:2f3c:3a00:5662:26b3:3e5d:438e? (p200300d82f3c3a00566226b33e5d438e.dip0.t-ipconnect.de. [2003:d8:2f3c:3a00:5662:26b3:3e5d:438e])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b5e8e0d727sm4072600f8f.51.2025.07.11.02.58.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 11 Jul 2025 02:58:46 -0700 (PDT)
-Message-ID: <65601756-e9ae-4a26-acd4-2dcfe58a7f7f@redhat.com>
-Date: Fri, 11 Jul 2025 11:58:43 +0200
+        d=1e100.net; s=20230601; t=1752232508; x=1752837308;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zQ6vVLhKfs0npq6T/CCDFR1z9xriix4gqXPfUihkmJ4=;
+        b=V4eGwGiM/MJphg3IbJKSNck/zcZx5sppIsvngfAfkmIr5iC0EMzYNt71FU7nYyDRee
+         3CjbSE7INwiip1lZlIlQS+MpouT9/P2gcTfTCHiL7ogHVXQRO1DhbU3foEEChRYUJchb
+         U1kUZo8RveyAd5HW9y3BguyCdUrs4eINHecI1IfmA8/gqe00Ii+Go21ufuLAixgutSf8
+         rbPJDr77wvF2iCOif7bFfe/lwvwiSH/je56SuKmd6N3Gogs0UCfA5F3mKdq+PadaPzI3
+         ijpRynxZdZGfg3HwnQOO0ithC2BFoXltHHHO2vP2IL6apAS781qdKuaXdxxWNshvUJTf
+         rOPQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUzvY8SZnNoqpapbr9Q1xskLmvR0SKbieKsIIOJBc85eknSraPZU/g85wl78gi1olOOPLNmCd8c@vger.kernel.org, AJvYcCWAsEb1yBxWRrxJy2744btHdXOPbg1P752uZERg89E81rznlfhazpnTjN0kje+IPG09LkbajwNEOfMw9Yo=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yys6645GHT+xRkh+RZiqiB23nJWf9oGeqMzcesN2Er9VuKzazOR
+	cPw8RPwMpEwGUoPU3SMCpqiQwxc0YYOZOPrTUrxMKCa+a/f2ak5Kw/uA
+X-Gm-Gg: ASbGncu6kC/Y9UVW/owACFy0Dsa1xhk5A4oYCHxMs6KJ0Ce8Ttnd3KIH1J2jaU81aQk
+	ID0vtuczg23+dqMT+rqvWEgi8qaYvoWSe/Qa7J2kXokcXcWznGGbI4IZ0dPqltIcJxCPZjqA5KL
+	/oM4IidtGWeo+nzpp0Pz1IflXz/kxXFXO1fDB7SI/KCBfptEPpAhmwKLRgCFbCqAk2PKirEgDf3
+	XwcFO7Jy+RzdvMjEfr5ekebIH+Jtwir9dxs6AhRGS+8vK03r6cXwLt8aNijij154geShLR/wROf
+	9e3NKuR6FGcNZ0+6tmrfvbpB9Pfz0q+YzCJeG9bjHMI0gtH0iIEzHp0vcKv3KkFYNBWU16MbLiU
+	D/hHPgwjKF6hnDdMsqkFBxe+MTXtP3Wolv4I=
+X-Google-Smtp-Source: AGHT+IHfWOXs/DQWPgcsYx/QQ97AdyzdjpEj41AjPGIMDl3KDPOv7Lr5iAfD6MZXLS+UtNQxmkt6GA==
+X-Received: by 2002:a05:600c:a00e:b0:43c:fe90:1279 with SMTP id 5b1f17b1804b1-45565ed62e0mr15833755e9.21.1752232507853;
+        Fri, 11 Jul 2025 04:15:07 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:4586:9b2f:cef2:6790])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b5e8dc23cfsm4263566f8f.37.2025.07.11.04.15.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Jul 2025 04:15:07 -0700 (PDT)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,  Jonathan Corbet
+ <corbet@lwn.net>,  "Akira Yokosawa" <akiyks@gmail.com>,  "Breno Leitao"
+ <leitao@debian.org>,  "David S. Miller" <davem@davemloft.net>,  "Eric
+ Dumazet" <edumazet@google.com>,  "Ignacio Encinas Rubio"
+ <ignacio@iencinas.com>,  "Jan Stancek" <jstancek@redhat.com>,  "Marco
+ Elver" <elver@google.com>,  "Paolo Abeni" <pabeni@redhat.com>,  "Randy
+ Dunlap" <rdunlap@infradead.org>,  "Ruben Wauters" <rubenru09@aol.com>,
+  "Shuah Khan" <skhan@linuxfoundation.org>,  Jakub Kicinski
+ <kuba@kernel.org>,  Simon Horman <horms@kernel.org>,
+  joel@joelfernandes.org,  linux-kernel-mentees@lists.linux.dev,
+  linux-kernel@vger.kernel.org,  lkmm@lists.linux.dev,
+  netdev@vger.kernel.org,  peterz@infradead.org,  stern@rowland.harvard.edu
+Subject: Re: [PATCH v9 12/13] docs: parser_yaml.py: add support for line
+ numbers from the parser
+In-Reply-To: <20250710195757.02e8844a@sal.lan>
+Date: Fri, 11 Jul 2025 10:51:37 +0100
+Message-ID: <m2ecun5a3a.fsf@gmail.com>
+References: <cover.1752076293.git.mchehab+huawei@kernel.org>
+	<3b18b30b1b50b01a014fd4b5a38423e529cde2fb.1752076293.git.mchehab+huawei@kernel.org>
+	<m2zfdc5ltn.fsf@gmail.com> <m2ms9c5din.fsf@gmail.com>
+	<20250710195757.02e8844a@sal.lan>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 20/29] mm: convert "movable" flag in page->mapping to a
- page flag
-To: linux-kernel@vger.kernel.org
-Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, virtualization@lists.linux.dev,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Jonathan Corbet <corbet@lwn.net>, Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Jerrin Shaji George <jerrin.shaji-george@broadcom.com>,
- Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
- <eperezma@redhat.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Zi Yan <ziy@nvidia.com>, Matthew Brost <matthew.brost@intel.com>,
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
- Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
- Ying Huang <ying.huang@linux.alibaba.com>,
- Alistair Popple <apopple@nvidia.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
- <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>,
- Minchan Kim <minchan@kernel.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Brendan Jackman <jackmanb@google.com>, Johannes Weiner <hannes@cmpxchg.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>,
- Peter Xu <peterx@redhat.com>, Xu Xin <xu.xin16@zte.com.cn>,
- Chengming Zhou <chengming.zhou@linux.dev>, Miaohe Lin
- <linmiaohe@huawei.com>, Naoya Horiguchi <nao.horiguchi@gmail.com>,
- Oscar Salvador <osalvador@suse.de>, Rik van Riel <riel@surriel.com>,
- Harry Yoo <harry.yoo@oracle.com>, Qi Zheng <zhengqi.arch@bytedance.com>,
- Shakeel Butt <shakeel.butt@linux.dev>
-References: <20250704102524.326966-1-david@redhat.com>
- <20250704102524.326966-21-david@redhat.com>
-From: David Hildenbrand <david@redhat.com>
-Content-Language: en-US
-Autocrypt: addr=david@redhat.com; keydata=
- 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
- WNyWQQ==
-Organization: Red Hat
-In-Reply-To: <20250704102524.326966-21-david@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 
-On 04.07.25 12:25, David Hildenbrand wrote:
-> Instead, let's use a page flag. As the page flag can result in
-> false-positives, glue it to the page types for which we
-> support/implement movable_ops page migration.
-> 
-> We are reusing PG_uptodate, that is for example used to track file
-> system state and does not apply to movable_ops pages. So
-> warning in case it is set in page_has_movable_ops() on other page types
-> could result in false-positive warnings.
-> 
-> Likely we could set the bit using a non-atomic update: in contrast to
-> page->mapping, we could have others trying to update the flags
-> concurrently when trying to lock the folio. In
-> isolate_movable_ops_page(), we already take care of that by checking if
-> the page has movable_ops before locking it. Let's start with the atomic
-> variant, we could later switch to the non-atomic variant once we are
-> sure other cases are similarly fine. Once we perform the switch, we'll
-> have to introduce __SETPAGEFLAG_NOOP().
-> 
-> Reviewed-by: Zi Yan <ziy@nvidia.com>
-> Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-> Signed-off-by: David Hildenbrand <david@redhat.com>
-> ---
->   include/linux/balloon_compaction.h |  2 +-
->   include/linux/migrate.h            |  8 -----
->   include/linux/page-flags.h         | 54 ++++++++++++++++++++++++------
->   mm/compaction.c                    |  6 ----
->   mm/zpdesc.h                        |  2 +-
->   5 files changed, 46 insertions(+), 26 deletions(-)
-> 
-> diff --git a/include/linux/balloon_compaction.h b/include/linux/balloon_compaction.h
-> index a8a1706cc56f3..b222b0737c466 100644
-> --- a/include/linux/balloon_compaction.h
-> +++ b/include/linux/balloon_compaction.h
-> @@ -92,7 +92,7 @@ static inline void balloon_page_insert(struct balloon_dev_info *balloon,
->   				       struct page *page)
->   {
->   	__SetPageOffline(page);
-> -	__SetPageMovable(page);
-> +	SetPageMovableOps(page);
->   	set_page_private(page, (unsigned long)balloon);
->   	list_add(&page->lru, &balloon->pages);
->   }
-> diff --git a/include/linux/migrate.h b/include/linux/migrate.h
-> index 6aece3f3c8be8..acadd41e0b5cf 100644
-> --- a/include/linux/migrate.h
-> +++ b/include/linux/migrate.h
-> @@ -103,14 +103,6 @@ static inline int migrate_huge_page_move_mapping(struct address_space *mapping,
->   
->   #endif /* CONFIG_MIGRATION */
->   
-> -#ifdef CONFIG_COMPACTION
-> -void __SetPageMovable(struct page *page);
-> -#else
-> -static inline void __SetPageMovable(struct page *page)
-> -{
-> -}
-> -#endif
-> -
->   #ifdef CONFIG_NUMA_BALANCING
->   int migrate_misplaced_folio_prepare(struct folio *folio,
->   		struct vm_area_struct *vma, int node);
-> diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
-> index 4c27ebb689e3c..5f2b570735852 100644
-> --- a/include/linux/page-flags.h
-> +++ b/include/linux/page-flags.h
-> @@ -170,6 +170,11 @@ enum pageflags {
->   	/* non-lru isolated movable page */
->   	PG_isolated = PG_reclaim,
->   
-> +#ifdef CONFIG_MIGRATION
-> +	/* this is a movable_ops page (for selected typed pages only) */
-> +	PG_movable_ops = PG_uptodate,
-> +#endif
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+
+> Em Thu, 10 Jul 2025 15:25:20 +0100
+> Donald Hunter <donald.hunter@gmail.com> escreveu:
+>
+>> Donald Hunter <donald.hunter@gmail.com> writes:
+>> 
+>> >>              # Parse message with RSTParser
+>> >> -            for i, line in enumerate(msg.split('\n')):
+>> >> -                result.append(line, document.current_source, i)
+>> >> +            lineoffset = 0;
+>> >> +            for line in msg.split('\n'):
+>> >> +                match = self.re_lineno.match(line)
+>> >> +                if match:
+>> >> +                    lineoffset = int(match.group(1))
+>> >> +                    continue
+>> >> +
+>> >> +                result.append(line, document.current_source, lineoffset)  
+>> >
+>> > I expect this would need to be source=document.current_source, offset=lineoffset  
+>> 
+>> Ignore that. I see it's not kwargs. It's just the issue below.
+>> 
+>> >>              rst_parser = RSTParser()
+>> >>              rst_parser.parse('\n'.join(result), document)  
+>> >
+>> > But anyway this discards any line information by just concatenating the
+>> > lines together again.  
+>> 
+>> Looks to me like there's no Parser() API that works with ViewList() so
+>> it would be necessary to directly use the docutils RSTStateMachine() for
+>> this approach to work.
+>
+> It sounds so.
+>
+> The enclosed patch seems to address it:
+>
+> 	$ make cleandocs; make SPHINXDIRS="netlink/specs" htmldocs
+> 	...
+> 	Using alabaster theme
+> 	source directory: netlink/specs
+> 	Using Python kernel-doc
+> 	/new_devel/v4l/docs/Documentation/netlink/specs/rt-neigh.yaml:13: ERROR: Unknown directive type "bogus".
+>
+> 	.. bogus:: [docutils]
+>
+> Please notice that I added a hunk there to generate the error, just
+> to make easier to test - I'll drop it at the final version, and add
+> the proper reported-by/closes/... tags once you test it.
+>
+> Regards,
+> Mauro
+
+Awesome!
+
+Tested-by: Donald Hunter <donald.hunter@gmail.com>
+
+Patch comments below.
+
+> [PATCH RFC] sphinx: parser_yaml.py: preserve line numbers
+>
+> Instead of converting viewlist to text, use it directly, if
+> docutils supports it.
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+>
+> diff --git a/Documentation/netlink/specs/rt-neigh.yaml b/Documentation/netlink/specs/rt-neigh.yaml
+> index e9cba164e3d1..937d2563f151 100644
+> --- a/Documentation/netlink/specs/rt-neigh.yaml
+> +++ b/Documentation/netlink/specs/rt-neigh.yaml
+> @@ -11,6 +11,7 @@ doc:
+>  definitions:
+>    -
+>      name: ndmsg
+> +    doc: ".. bogus::"
+>      type: struct
+>      members:
+>        -
+> diff --git a/Documentation/sphinx/parser_yaml.py b/Documentation/sphinx/parser_yaml.py
+> index 1602b31f448e..2a2faaf759ef 100755
+> --- a/Documentation/sphinx/parser_yaml.py
+> +++ b/Documentation/sphinx/parser_yaml.py
+> @@ -11,7 +11,9 @@ import sys
+>  
+>  from pprint import pformat
+>  
+> +from docutils import nodes, statemachine
+
+nodes is not used
+
+>  from docutils.parsers.rst import Parser as RSTParser
+
+This import is no longer needed
+
+> +from docutils.parsers.rst import states
+>  from docutils.statemachine import ViewList
+>  
+>  from sphinx.util import logging
+> @@ -66,10 +68,24 @@ class YamlParser(Parser):
+
+I'm wondering if it makes much sense for this to inherit from Parser any
+more?
+
+>  
+>          result = ViewList()
+>  
+> +        tab_width = 8
 > +
->   	/* Only valid for buddy pages. Used to track pages that are reported */
->   	PG_reported = PG_uptodate,
->   
-> @@ -698,9 +703,6 @@ PAGEFLAG_FALSE(VmemmapSelfHosted, vmemmap_self_hosted)
->    * bit; and then folio->mapping points, not to an anon_vma, but to a private
->    * structure which KSM associates with that merged page.  See ksm.h.
->    *
-> - * PAGE_MAPPING_KSM without PAGE_MAPPING_ANON is used for non-lru movable
-> - * page and then folio->mapping points to a struct movable_operations.
-> - *
->    * Please note that, confusingly, "folio_mapping" refers to the inode
->    * address_space which maps the folio from disk; whereas "folio_mapped"
->    * refers to user virtual address space into which the folio is mapped.
-> @@ -743,13 +745,6 @@ static __always_inline bool PageAnon(const struct page *page)
->   {
->   	return folio_test_anon(page_folio(page));
->   }
-> -
-> -static __always_inline bool page_has_movable_ops(const struct page *page)
-> -{
-> -	return ((unsigned long)page->mapping & PAGE_MAPPING_FLAGS) ==
-> -				PAGE_MAPPING_MOVABLE;
-> -}
-> -
->   #ifdef CONFIG_KSM
->   /*
->    * A KSM page is one of those write-protected "shared pages" or "merged pages"
-> @@ -1133,6 +1128,45 @@ bool is_free_buddy_page(const struct page *page);
->   
->   PAGEFLAG(Isolated, isolated, PF_ANY);
->   
-> +#ifdef CONFIG_MIGRATION
-> +/*
-> + * This page is migratable through movable_ops (for selected typed pages
-> + * only).
-> + *
-> + * Page migration of such pages might fail, for example, if the page is
-> + * already isolated by somebody else, or if the page is about to get freed.
-> + *
-> + * While a subsystem might set selected typed pages that support page migration
-> + * as being movable through movable_ops, it must never clear this flag.
-> + *
-> + * This flag is only cleared when the page is freed back to the buddy.
-> + *
-> + * Only selected page types support this flag (see page_movable_ops()) and
-> + * the flag might be used in other context for other pages. Always use
-> + * page_has_movable_ops() instead.
-> + */
-> +TESTPAGEFLAG(MovableOps, movable_ops, PF_NO_TAIL);
-> +SETPAGEFLAG(MovableOps, movable_ops, PF_NO_TAIL);
-> +#else /* !CONFIG_MIGRATION */
-> +TESTPAGEFLAG_FALSE(MovableOps, movable_ops);
-> +SETPAGEFLAG_NOOP(MovableOps, movable_ops);
-> +#endif /* CONFIG_MIGRATION */
+> +        self.state_classes = states.state_classes
+> +        self.initial_state = 'Body'
 > +
-> +/**
-> + * page_has_movable_ops - test for a movable_ops page
-> + * @page The page to test.
-> + *
-> + * Test whether this is a movable_ops page. Such pages will stay that
-> + * way until freed.
-> + *
-> + * Returns true if this is a movable_ops page, otherwise false.
-> + */
-> +static inline bool page_has_movable_ops(const struct page *page)
-> +{
-> +	return PageMovableOps(page) &&
-> +	       (PageOffline(page) || PageZsmalloc(page));
-> +}
+> +        self.statemachine = states.RSTStateMachine(
+> +              state_classes=self.state_classes,
+> +              initial_state=self.initial_state,
+> +              debug=document.reporter.debug_flag)
+
+I don't think 'self.' is needed for any of these. They can be local to
+the method. You could just inline states.state_classes and 'Body' into
+the parameter list.
+
 > +
+>          try:
+>              # Parse message with RSTParser
 
-The following fixup on top:
+Comment is out of date.
 
- From 3a52911a299d3328d9fa2aeba00170240795702d Mon Sep 17 00:00:00 2001
-From: David Hildenbrand <david@redhat.com>
-Date: Fri, 11 Jul 2025 11:57:43 +0200
-Subject: [PATCH] fixup: "mm: convert "movable" flag in page->mapping to a page
-  flag"
+>              lineoffset = 0;
 
-We're missing a ":".
+Rogue semicolon
 
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
-  include/linux/page-flags.h | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+> -            for line in msg.split('\n'):
+> +
+> +            lines = statemachine.string2lines(msg, tab_width,
+> +                                            convert_whitespace=True)
+> +
+> +            for line in lines:
+>                  match = self.re_lineno.match(line)
+>                  if match:
+>                      lineoffset = int(match.group(1))
+> @@ -77,12 +93,7 @@ class YamlParser(Parser):
+>  
+>                  result.append(line, document.current_source, lineoffset)
+>  
+> -            # Fix backward compatibility with docutils < 0.17.1
+> -            if "tab_width" not in vars(document.settings):
+> -                document.settings.tab_width = 8
+> -
+> -            rst_parser = RSTParser()
+> -            rst_parser.parse('\n'.join(result), document)
+> +            self.statemachine.run(result, document, inliner=None)
+>  
+>          except Exception as e:
 
-diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
-index 970600d79daca..8e4d6eda8a8d6 100644
---- a/include/linux/page-flags.h
-+++ b/include/linux/page-flags.h
-@@ -1150,7 +1150,7 @@ PAGEFLAG_FALSE(MovableOpsIsolated, movable_ops_isolated);
-  
-  /**
-   * page_has_movable_ops - test for a movable_ops page
-- * @page The page to test.
-+ * @page: The page to test.
-   *
-   * Test whether this is a movable_ops page. Such pages will stay that
-   * way until freed.
--- 
-2.50.1
+I think you could catch StateMachineError here.
 
+>              document.reporter.error("YAML parsing error: %s" % pformat(e))
 
--- 
-Cheers,
-
-David / dhildenb
-
+Can you change this to an f"" string.
 
