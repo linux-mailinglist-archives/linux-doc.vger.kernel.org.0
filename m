@@ -1,152 +1,119 @@
-Return-Path: <linux-doc+bounces-53002-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53004-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id C13F7B041CF
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 16:35:33 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 49446B041EC
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 16:38:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0505F1A641F6
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 14:35:30 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8935B1A6452C
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 14:38:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 117CD25A320;
-	Mon, 14 Jul 2025 14:34:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 412AB25C804;
+	Mon, 14 Jul 2025 14:37:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="AmWuMjaD"
+	dkim=pass (1024-bit key) header.d=cdn77.com header.i=@cdn77.com header.b="IX13G8BJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-internal.sh.cz (mail-internal.sh.cz [95.168.196.40])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6240D259CB0
-	for <linux-doc@vger.kernel.org>; Mon, 14 Jul 2025 14:34:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E55625A2D1;
+	Mon, 14 Jul 2025 14:37:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.168.196.40
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752503689; cv=none; b=V+CAVJ8izmCYhUDq2axRTgv+yf62t05h9vXf7ghcBRmxJNRNwP3koJCeA0pGQVNL32ESLVS1fE7ZTLVl1yWGzg+3pqLOU5iFMvQA8ypC67dpGzT7NNZlk+wM48ACoWvIYv7xYBQw+Tt/iN1T9cdTT0TZx5jrTNGsKZRLYm2hL9w=
+	t=1752503839; cv=none; b=aQAOfIpz+KtP1uQS7WEsIQLUQ3DAD6Wi1joeyDghBJyEj5tqznPMIQKAI3FJruYUG/eMRGO1oHpAZTI4FUtapfgBbQk6zsXuR/zxHsKvrhnfzg21OKcPwRjlT7pt7whhNIevRMVyYJh2OX4P1HN4lhvNAA/eYycq99JXDs1hpvc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752503689; c=relaxed/simple;
-	bh=x4VH7WP8We2sREpSucr6S63/HIKE6v5vuALeoeU1eKo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AqVY7FhT7OyDC+Sj+wAug9Prl1BOoWb3CtN+mq7D26OGZKW3wB0YhhKUZpH5nKZmvdpqFqa9nh1ZcKKeVhehhbfRHDu6hO5YHa8nN5xeHMMg07dmSn6FIQYQUq2MilBv8dzZGDhVKybfOdRo9MNkCVGNe5FRj92wUaI8DDNPNtM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=AmWuMjaD; arc=none smtp.client-ip=209.85.222.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
-Received: by mail-qk1-f181.google.com with SMTP id af79cd13be357-7d3dd14a7edso620180985a.2
-        for <linux-doc@vger.kernel.org>; Mon, 14 Jul 2025 07:34:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1752503686; x=1753108486; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=sZ/uMtd7PeY7ArKUEfzEaQhJJ3owfAv8oDZUoZLeu20=;
-        b=AmWuMjaDAhTE8Qz8oOABGBiGJh/Lzrn3OUIF+otBL7hL1G931+0x56xiHyr/QkE7GL
-         NNhJprZZ00o3CHkvQv8vZqsc+Uph0v3iBNKgPrMYVRHhtoar/twrOQbIXENuJMutm/lZ
-         rXi72Ydx72JOyES+gojbLVxlAfboGgvUmMpsh4lY25kg19Z7NYmM4xcE1LQK9Cj8/sp5
-         zzKuFO74Jo5QchP7ob8f41D6LKfdquDY583Jt2ntmwH5D+QfTsuyYyJFY1yVfhyVA2Zs
-         m2REWJpv0uuponGmvwUX2AXH3qa3kPRLZsap7dyTQ096V7GSlDzkAsHBwz6N3BA+wPIE
-         nk2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752503686; x=1753108486;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sZ/uMtd7PeY7ArKUEfzEaQhJJ3owfAv8oDZUoZLeu20=;
-        b=BwKxhLweNgTAMONP+xs8VqA73bKh0dVmdMY7kgkADFHVfdUqMKoP85BmceuGHsfvQI
-         P3LDhrkFPyB/7DDWa+5DREYtwKOT58TH2CadT6v2snfFq53zvYEPb3/UwTHjLJzE/OUi
-         CjdCWhJM8PaouKzzrAjiUiE/ub0Ao3k98nJu0o74pguFANUCZYy/yP+pAHM9Iw7Od3/V
-         GxaUx2KIDO30DPRIxT+8XJjvSWyqMqDF6MS5AZcJ5GkW6x3A/E0hLjRKHaisDK/ob7rG
-         xVluCD3g87w3qNVBVJReps5UvHXOSpbpUyiTw0nSjAQfldAPOw0+SlJd9dAlq3B5jBpP
-         nIvQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXrm5bsoTLZ1s3t/2DGbB1N8cW6Aq9YfZkcHLCuCwc2r2apV2V7L1a5qogGFqg81VRVVP3xtJ7qS7o=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxUh/1EfeTzlhiFfsz6VCCSEDxkwVBafwwjnY0tbbmfxBsKbPsX
-	TDtnq6J+qyqXDXNwihR05t4Err91wT7+B+wGZ7SLCS2we3SVQ12DR57InmchoZaiD24=
-X-Gm-Gg: ASbGncuS+5MtjLMjRoNFZ32bdQGG9VE1YDp0yZcGUsEAjoSIGjSUOycFnc9W8jKFwiL
-	ZEE9K3+4gUPpMG776CDDzB7o9u5j9ACcIPTW8q+sLWvicYQk5RA/+lVg9/nJ1AxnXjEt4J2FPXu
-	bpij+CJVYWl8V2vTMjyNwEz90SWgnNIAqJdPz39nWr3m3bmr/df43Nj2ZB/b7gu7y+24QLrqvlj
-	HuzixszK4xJ94ZcYwRat3CN4aznHA01z3Iy6PO0yERPw7o0PFnVSU6yaKrUOOjceuUUpXy+DaNb
-	1sGd8ckoKUayBO2tMnSgCwMlaMCxwYOfMndjEatV5pJa7qW+08QvROhJmYUxRgx6y1cnYvb7/Tl
-	0r5+FVSvxI4eW9LYNYF0SnX5+/16Fe+mddiDM7mNh+UDNj+lAVF9yFgA5lbx5VfMfFnGc8xzW1A
-	==
-X-Google-Smtp-Source: AGHT+IHDPqyfa5MILfbuRhIA4DZi+evKn5JL2EKdUIYjPKjjIxXzRswcxsKcTqlW4cqrt/sU14Hkyw==
-X-Received: by 2002:a05:620a:4613:b0:7e3:2ec5:69e2 with SMTP id af79cd13be357-7e32ec570ffmr287943285a.28.1752503686149;
-        Mon, 14 Jul 2025 07:34:46 -0700 (PDT)
-Received: from ziepe.ca (hlfxns017vw-142-167-56-70.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.167.56.70])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-7dcdc0f5d42sm515494885a.28.2025.07.14.07.34.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Jul 2025 07:34:44 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1ubKGR-00000008ft9-1MVt;
-	Mon, 14 Jul 2025 11:34:43 -0300
-Date: Mon, 14 Jul 2025 11:34:43 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Mike Rapoport <rppt@kernel.org>
-Cc: Pratyush Yadav <pratyush@kernel.org>,
-	Christian Brauner <brauner@kernel.org>,
-	Pasha Tatashin <pasha.tatashin@soleen.com>, jasonmiu@google.com,
-	graf@amazon.com, changyuanl@google.com, dmatlack@google.com,
-	rientjes@google.com, corbet@lwn.net, rdunlap@infradead.org,
-	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com,
-	ojeda@kernel.org, aliceryhl@google.com, masahiroy@kernel.org,
-	akpm@linux-foundation.org, tj@kernel.org, yoann.congal@smile.fr,
-	mmaurer@google.com, roman.gushchin@linux.dev, chenridong@huawei.com,
-	axboe@kernel.dk, mark.rutland@arm.com, jannh@google.com,
-	vincent.guittot@linaro.org, hannes@cmpxchg.org,
-	dan.j.williams@intel.com, david@redhat.com,
-	joel.granados@kernel.org, rostedt@goodmis.org,
-	anna.schumaker@oracle.com, song@kernel.org, zhangguopeng@kylinos.cn,
-	linux@weissschuh.net, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org,
-	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com,
-	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
-	hpa@zytor.com, rafael@kernel.org, dakr@kernel.org,
-	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com,
-	myungjoo.ham@samsung.com, yesanishhere@gmail.com,
-	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com,
-	aleksander.lobakin@intel.com, ira.weiny@intel.com,
-	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de,
-	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com,
-	stuart.w.hayes@gmail.com
-Subject: Re: [RFC v2 10/16] luo: luo_ioctl: add ioctl interface
-Message-ID: <20250714143443.GF1870174@ziepe.ca>
-References: <20250515182322.117840-1-pasha.tatashin@soleen.com>
- <20250515182322.117840-11-pasha.tatashin@soleen.com>
- <20250624-akzeptabel-angreifbar-9095f4717ca4@brauner>
- <aGqHFkPWOrD6whv6@kernel.org>
- <mafs0qzypys0j.fsf@kernel.org>
- <aG9rNQ277weSR_dl@kernel.org>
+	s=arc-20240116; t=1752503839; c=relaxed/simple;
+	bh=ON5W1OOwsqtjKlSAI23AxoIarfROCOeFz96KIcbGA8A=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=JpwdIADHZEJu2ohQAtHwaUiPB/+IDgId/wFonNJZ1iNHCFGR8O9tMh1NBzvduCXRGtd8QGw9g4HntnD4YT9foSbMCDiHh4TgttYn732vr7/LT1MKWv9IQI3X6Le3fyH9wGBE0LGmrXkV1TQ6AZnUQWC0IceP8Nyywj9IzyEdGq4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cdn77.com; spf=pass smtp.mailfrom=cdn77.com; dkim=pass (1024-bit key) header.d=cdn77.com header.i=@cdn77.com header.b=IX13G8BJ; arc=none smtp.client-ip=95.168.196.40
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cdn77.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cdn77.com
+DKIM-Signature: a=rsa-sha256; t=1752503828; x=1753108628; s=dkim2019; d=cdn77.com; c=relaxed/relaxed; v=1; bh=NTis1DRQ6YWvIefOVgBik3VycLjAWOLQXvC3R0BRRP4=; h=From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding;
+   b=IX13G8BJ/CadbLQZSJoUtz8zeSdaXtwa67CZ0BspEDyNiJgMfnCmEqpRh4BA+Oo21JQRRdWHq0ENp8Sj+/si3wOktTM/+4pnrcIDnbeEG7Z5LiGJBKlG6wfBmLcUJRHHwAGEYDyt+yUclb7GU1RhxYTQDTuD4hIMB1Mm7CJPEwk=
+Received: from osgiliath.superhosting.cz ([95.168.203.222])
+        by mail.sh.cz (14.1.0 build 16 ) with ASMTP (SSL) id 202507141637061503;
+        Mon, 14 Jul 2025 16:37:06 +0200
+From: Daniel Sedlak <daniel.sedlak@cdn77.com>
+To: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Neal Cardwell <ncardwell@google.com>,
+	Kuniyuki Iwashima <kuniyu@google.com>,
+	David Ahern <dsahern@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Shakeel Butt <shakeel.butt@linux.dev>,
+	Yosry Ahmed <yosry.ahmed@linux.dev>,
+	linux-mm@kvack.org,
+	netdev@vger.kernel.org
+Cc: Daniel Sedlak <daniel.sedlak@cdn77.com>,
+	linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+Subject: [PATCH v2 net-next 0/2] account for TCP memory pressure signaled by cgroup
+Date: Mon, 14 Jul 2025 16:36:11 +0200
+Message-ID: <20250714143613.42184-1-daniel.sedlak@cdn77.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aG9rNQ277weSR_dl@kernel.org>
+Content-Transfer-Encoding: 8bit
+X-CTCH: RefID="str=0001.0A006396.68751624.0053,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0"; Spam="Unknown"; VOD="Unknown"
 
-On Thu, Jul 10, 2025 at 10:26:45AM +0300, Mike Rapoport wrote:
-> IIUC Christian's point was mostly not about using VFS APIs (i.e.
-> read/write) but about using a special pseudo fs rather than devtmpfs to
-> drive ioctls.
->  
-> So instead of 
-> 
-> 	fd = open("/dev/liveupdate", ...);
-> 	ioctl(fd, ...);
-> 
-> we'd use
-> 
-> 	fd = open("/sys/fs/kexec/control", ...);
-> 	ioctl(fd, ...);
+Greetings kernel wizards,
 
-Please no, /sys/ is much worse.
+To summarize from the commit messages, the attached patches are the
+result of our recent debugging sessions, where we were hunting sudden
+TCP network throughput drops, where the throughput dropped from tens of
+Gbps to a few Mbps for an undeterministic amount of time.
 
-/dev/ has lots of infrastructure to control permissions/etc that /sys/
-does not.
+The first patch adds a new counter for netstat, so users can notice that
+the sockets are marked as under pressure. The second patch adds a new
+tracepoint so it is easier to pinpoint which exact cgroup is having
+difficulties.
 
-If you want to do ioctls to something that you open() is a character
-dev and you accept the limitations with namespaces, coarse permissions
-and so on.
+Individual commit messages should contain more detailed reasoning.
 
-Jason
+Thanks!
+Daniel
+
+Changes:
+
+v1 -> v2:
+Add tracepoint
+Link: https://lore.kernel.org/netdev/20250707105205.222558-1-daniel.sedlak@cdn77.com/
+
+Daniel Sedlak (1):
+  tcp: account for memory pressure signaled by cgroup
+
+Matyas Hurtik (1):
+  mm/vmpressure: add tracepoint for socket pressure detection
+
+ .../networking/net_cachelines/snmp.rst        |  1 +
+ include/net/tcp.h                             | 14 ++++++-----
+ include/trace/events/memcg.h                  | 25 +++++++++++++++++++
+ include/uapi/linux/snmp.h                     |  1 +
+ mm/vmpressure.c                               |  3 +++
+ net/ipv4/proc.c                               |  1 +
+ 6 files changed, 39 insertions(+), 6 deletions(-)
+
+cc: linux-trace-kernel@vger.kernel.org
+cc: linux-doc@vger.kernel.org
+cc: Steven Rostedt <rostedt@goodmis.org>
+cc: Masami Hiramatsu <mhiramat@kernel.org>
+cc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+
+base-commit: e96ee511c906c59b7c4e6efd9d9b33917730e000
+-- 
+2.39.5
+
 
