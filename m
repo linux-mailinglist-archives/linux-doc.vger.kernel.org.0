@@ -1,202 +1,185 @@
-Return-Path: <linux-doc+bounces-53003-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53005-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4FE7B041E6
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 16:37:57 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7B22B04243
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 16:55:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9B4B34A20FF
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 14:37:57 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 6DFA97A6ECA
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 14:53:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C5AD8246BB6;
-	Mon, 14 Jul 2025 14:37:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 24F8B2580F1;
+	Mon, 14 Jul 2025 14:55:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="YFAjWZJb"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="AvV3ek8Q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 187B1259CB3
-	for <linux-doc@vger.kernel.org>; Mon, 14 Jul 2025 14:37:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 894CA253F11
+	for <linux-doc@vger.kernel.org>; Mon, 14 Jul 2025 14:55:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752503837; cv=none; b=Kgmhq4PNuyAeVwdvN3c3iEVWw4+FyheLApbBxKkYD70BuKM2hLXsvDz+KY5QhUz9cQl7T6wFQwhVDbB43RzTEwOspyMrM9JO7mSkanWJudDcbigp8OPSW6UBHOXLTsdAn/oKEWGodJB84w3PDt91JbrIW7kziq4lXj249GnSgQw=
+	t=1752504908; cv=none; b=hLQoVzfQXAgUbpFiwC9ltzQB8Q+F0iaMoR+0TcWgVf8/E0/huY48FyhtbEmIXfbtkrwCBtUUkw6lFjVjUedNzvvN4F56DmDB2+kt+yE8RGRg2dnNxzkq7vtth7Jmc4ULExRtYtLOQcECLFSgjaW6Mj3J4056Zirsc5vTe60/WyQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752503837; c=relaxed/simple;
-	bh=TRcpibRTLH9cseWylS1uM49SbJnEmrei1lux8cE11sE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=NPyysjFwl3dQ4DMEXvIN/EnsPoiS6PLFU1TwBKBdYydHYs/JWunyR87y84UFkuP3FZhlh/xrf0MG9n4BZzLVuT02buCirsy3RNLP6k7D1bo4zTZedrwiYg0F7BiqRRyyG+fUD+XQPGWiT7TP6KN24D8NxvpmMIo86o5CDwx/fV4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=YFAjWZJb; arc=none smtp.client-ip=209.85.216.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-3139027b825so3451934a91.0
-        for <linux-doc@vger.kernel.org>; Mon, 14 Jul 2025 07:37:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1752503835; x=1753108635; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=lRw/NX+KklOoltNcYQ1FFnx+QWAS9ZeWaLliEu+hd3U=;
-        b=YFAjWZJbri7WyStVubAZWla8N4Qz/VXHOrXjyK0c8J0cea6UfqQ8y6wpuWvtZBYnTC
-         xVgEiM2vWxUaKWRZPvSGPUu+E201rEd/iyEBqAjvq7fH6nwLU3s028J0exf2/mG3L8f+
-         8wS6QxGHV+rxRHDTO4ehhopMaHGEUumEEgIyfnYSz8JBLmzF6ikeVPp6jgpw2I9xWZ5N
-         UP5dRTzCKjYQ4QosLPc2cjAHlptuaOQatTtbr4EmN9qSipOheaNOkXTHAdJKD9M/7zL9
-         mpaEqnj25guZVZjp2QFzplYmU4EOGXBY8z9lFyW2Oi0t1CxlIiLYwOUOP1YLWL+I5rLa
-         jtWQ==
+	s=arc-20240116; t=1752504908; c=relaxed/simple;
+	bh=JyG/AJppLSffr5nyP8a8dgSsegV2gn4CUhImXqjMdRI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=dfzq8jRIaGAaRQ/5MqXuIM6FwhKcwskSXOxEksLU+vPyXeTFk6klWmbJ2gNLs/qNs73CeqbjlmKUvWCWN4ssZO30jgHmqHAE1ti/k/YEyys5GKC9u1Iv3KNjO7nHs69aYQ5RDhih2xITgDAVXZxyWAwnJqkiFzHnRWm/wbiIX1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=AvV3ek8Q; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1752504905;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=d4czQZKucpykxaQ1IUiKG7YZbA5p+JpK4GLzUGwBBME=;
+	b=AvV3ek8QwGS4/XpjWNO+Zjng2s/DBPNr6HHy9E6nsWTia7WpSJJH02t21EbYZHUF2eXJna
+	MjpmPkq8HMnRcIXUaiw1HX16A3Bsrd+SnUM+WC4v8bv7VvWb6eBp/cI7EzHy7//QG6Vf/3
+	s88XSMuy2gqt8zx82Me3oldNnRTF3Jk=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-367-KkqKqxiJNkKI4J6E2CcJlQ-1; Mon, 14 Jul 2025 10:55:03 -0400
+X-MC-Unique: KkqKqxiJNkKI4J6E2CcJlQ-1
+X-Mimecast-MFC-AGG-ID: KkqKqxiJNkKI4J6E2CcJlQ_1752504903
+Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-3a4f7f1b932so2621361f8f.2
+        for <linux-doc@vger.kernel.org>; Mon, 14 Jul 2025 07:55:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752503835; x=1753108635;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=lRw/NX+KklOoltNcYQ1FFnx+QWAS9ZeWaLliEu+hd3U=;
-        b=c7WvW7wjIrYu9hDG9UaGX0ZcVsqd2ctFqFRIXftBKi3oA9j/C+Pp2skItM0S+huCY/
-         YtOg8oWUwyI2N/ipVuCJctHn3Gl8s/ozcfskYqHh5fvU3OKhPKGZMR3dhXVfS6yolghB
-         C9TVIASqLV4ZhupLyZLx2PDmHJ4KmG+YAb9SzTeskCpgWUjnxvdFFk6KzPzX7R6Zwyq6
-         t0QltQw9e//IBYBKa5c/vUCXxRU6q7MbHcgRIpOCov7vF54DKg/2u40n3ayYJc2f3bBT
-         nJDbO70teOIyiVqrHbgMel/u2Y7pXRYn6aygdE8dnAaYsfGyhVP8hYsuT3hW3Y6GiYXX
-         bdww==
-X-Gm-Message-State: AOJu0Yxf0waX6AnbFoKevahmOXg4aoqYSUjJpgbe7Dhmi4kwpnP8BQhO
-	iGdszE14NtKHKk1lW9zGuhjAW4B4D9xLQhjpGmuxIdXQpBI8Ln5up2fxz5d6pTwGpxAFFXU6Uyg
-	OKfVHkr/aDsrVX4Ut1pXbULnoYYC8w9eucttJd6VGPA==
-X-Gm-Gg: ASbGnctLRR+AXJrOU8OtA20XJ02K7Y7lYDtAOvgZ8z7Fhal33LvZHxmc3lWE8ZnXghy
-	ZMDMl9uCC++bMNyLSDkZQWkJjZU4EntYXzx+LF5PXyhqglyM6y8k5wo2TzdZDrm7MOLp1oTvx9Z
-	9lakKlSn9ZB+17iW0HYJv7lzXSndqiZHUnKpd0jypFW9DnHGwfU6t4VZ/apU9dbvWxgmxnhZZe7
-	eiqnVqOgzMQLfhWi0Y=
-X-Google-Smtp-Source: AGHT+IE9vli31u992ZT8kPqLb073rl0Qa9Fp1wDpRWfD+6c5waYC0lIxt4DAIY775EghGpjiJXOpIWCdhZUB6c4WwNM=
-X-Received: by 2002:a17:90b:1643:b0:311:9c9a:58d7 with SMTP id
- 98e67ed59e1d1-31c4ccdcce7mr20175039a91.19.1752503835123; Mon, 14 Jul 2025
- 07:37:15 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1752504903; x=1753109703;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=d4czQZKucpykxaQ1IUiKG7YZbA5p+JpK4GLzUGwBBME=;
+        b=LY73DbRZJ24DP+AhNSfo0EDbFeS9IJgxMrECsGmCgBi2rzpZu+5fE+deEWzSQ0Rike
+         U7Ng0OOj/9pxy7602Q/VEt0snd11b9fKf8FR14fC8kfIByzGEogJUMWIAKWBxnjRTJjo
+         Uu2ufhB+tiwYyKyKkQGuobfScdC6cRKZpMWZjG+nChiPgFHtH2jmlC0AZaB+RWmi2Gns
+         /AskvUziVthh/K+agsam6ByTEH14snH4qycP1epDY9V4ull2ACOy4qhSFeQDo7Qvccw7
+         +D6OFMy/eMaT7vSrMUoL9xYkFHhaBSxSQ5nlrHXHgTU39n3zMkVXeZEr+R4CdmE0CT+L
+         +S6Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUWPOAJLhATrMhHZ4SV76Q3rcUfT8Yng6Mzj7RYBomV/BNhUPtXD5bz47k6JJ8w+1hAoAtXxPEpR4A=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyMcDZqF5g4vAQaMJ1xHQUBpVYlSdEkGeHGy4EbI5K0zeec1a4z
+	KguPaKEMrfLtQxHTmO7ZnddqMqnlxPKWuX5X+AFxv0SYxyq+9LsY4kf3VOxxtl+HC5ufkrLeM4g
+	TBC0XHAGOhLSODoRqn80VsVMhG3thkAq4L/14IoQ1z38K5FUBQmmE09oPG+26IQ==
+X-Gm-Gg: ASbGncvgTqVg35wzem1zoc8CF1B5D67x8kPNEF9/gPZKFHia3aVMU8Ov1OOdF1Xe4Ze
+	1Wwd/YcsROwM/JSyESXuoSxyC+YqQcSjYKigvhWYshqQyQyzMXiQdvXNzrgbKR/YBcnscLTz9yx
+	Fv6GvrTv7sAWEZVUaHaRc4+fUzyj4R4CXH1/C2Gif3cRLDZ+cr716eBGa5i8mCtmw+81MW+Rm0m
+	YKL0WsfWbWZpVGw41CWRcl0tr1emz+So3XL0cUFfc09jMIRRWFwqQfcLM1/Zp2lfJu8yZ7AntYH
+	PfI1vIT0UPlQukVjze0KAVxBWvu2cOqPQdcXUWyjYDQ=
+X-Received: by 2002:a05:6000:18a5:b0:3a6:d5fd:4687 with SMTP id ffacd0b85a97d-3b5f2dc2906mr7617432f8f.18.1752504902641;
+        Mon, 14 Jul 2025 07:55:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IERlxdXbSclUMLbYuj4ecUcsIzdJdVAuc2ie1F4jKPNjqTeVSRJVRcaIsaZVJV8X9Sn1hIeGQ==
+X-Received: by 2002:a05:6000:18a5:b0:3a6:d5fd:4687 with SMTP id ffacd0b85a97d-3b5f2dc2906mr7617398f8f.18.1752504902111;
+        Mon, 14 Jul 2025 07:55:02 -0700 (PDT)
+Received: from [192.168.0.115] ([212.105.155.228])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b5e8bd1776sm12844954f8f.12.2025.07.14.07.54.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Jul 2025 07:55:01 -0700 (PDT)
+Message-ID: <b2c0653e-077f-4609-922e-777f1d868dd0@redhat.com>
+Date: Mon, 14 Jul 2025 16:54:59 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250624181320.2810521-1-raymond.mao@linaro.org> <20250710005821.GA94507-robh@kernel.org>
-In-Reply-To: <20250710005821.GA94507-robh@kernel.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 14 Jul 2025 10:37:03 -0400
-X-Gm-Features: Ac12FXwMK2ygdSLWZAPAf0rvYVKKrh58aGskfqls54bumEBc4Dr9Mohtz6UOLQI
-Message-ID: <CAEfUkUKXskNxdsFG0htpmcgNnVeau7n4wtH2FOweEW7BxC3scA@mail.gmail.com>
-Subject: Re: [PATCH] docs: devicetree: overlay-notes: recommend top-level
- compatible in DTSO
-To: Rob Herring <robh@kernel.org>
-Cc: linux-doc@vger.kernel.org, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, devicetree-spec@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v12 net-next 12/15] tcp: accecn: AccECN option send
+ control
+To: chia-yu.chang@nokia-bell-labs.com, edumazet@google.com,
+ linux-doc@vger.kernel.org, corbet@lwn.net, horms@kernel.org,
+ dsahern@kernel.org, kuniyu@amazon.com, bpf@vger.kernel.org,
+ netdev@vger.kernel.org, dave.taht@gmail.com, jhs@mojatatu.com,
+ kuba@kernel.org, stephen@networkplumber.org, xiyou.wangcong@gmail.com,
+ jiri@resnulli.us, davem@davemloft.net, andrew+netdev@lunn.ch,
+ donald.hunter@gmail.com, ast@fiberby.net, liuhangbin@gmail.com,
+ shuah@kernel.org, linux-kselftest@vger.kernel.org, ij@kernel.org,
+ ncardwell@google.com, koen.de_schepper@nokia-bell-labs.com,
+ g.white@cablelabs.com, ingemar.s.johansson@ericsson.com,
+ mirja.kuehlewind@ericsson.com, cheshire@apple.com, rs.ietf@gmx.at,
+ Jason_Livingood@comcast.com, vidhi_goel@apple.com
+References: <20250704085345.46530-1-chia-yu.chang@nokia-bell-labs.com>
+ <20250704085345.46530-13-chia-yu.chang@nokia-bell-labs.com>
+Content-Language: en-US
+From: Paolo Abeni <pabeni@redhat.com>
+In-Reply-To: <20250704085345.46530-13-chia-yu.chang@nokia-bell-labs.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Rob,
+On 7/4/25 10:53 AM, chia-yu.chang@nokia-bell-labs.com wrote:
+> @@ -285,9 +297,33 @@ static inline void tcp_ecn_received_counters(struct sock *sk,
+>  
+>  		if (len > 0) {
+>  			u8 minlen = tcp_ecnfield_to_accecn_optfield(ecnfield);
+> +			u32 oldbytes = tp->received_ecn_bytes[ecnfield - 1];
+> +
+>  			tp->received_ecn_bytes[ecnfield - 1] += len;
+>  			tp->accecn_minlen = max_t(u8, tp->accecn_minlen,
+>  						  minlen);
+> +
+> +			/* Demand AccECN option at least every 2^22 bytes to
+> +			 * avoid overflowing the ECN byte counters.
+> +			 */
+> +			if ((tp->received_ecn_bytes[ecnfield - 1] ^ oldbytes) &
+> +			    ~((1 << 22) - 1)) {
 
-On Wed, 9 Jul 2025 at 20:58, Rob Herring <robh@kernel.org> wrote:
->
-> +devicetree-spec (because linux-doc doesn't really care)
->
-> On Tue, Jun 24, 2025 at 11:13:20AM -0700, Raymond Mao wrote:
-> > When managing multiple base device trees and overlays in a structured
-> > way (e.g. bundled in firmware or tools), it is helpful to identify the
-> > intended target base DT for each overlay, which can be done via a
-> > top-level compatible string in the overlay.
->
-> I think this should be more general and more specific at the same time.
->
-> You might not want to match on a top-level board/soc compatible, but
-> rather the compatible for a specific node. For example, you may have an
-> overlay for a cape, hat, etc. that applies to a connector node and that
-> connector node could be on any number of boards or even multiple
-> connectors on 1 board. That's all under development, but so far in those
-> cases we expect some sort of connector driver to apply the overlays. But
-> I think you could have the same issue of identifying which overlay files
-> are relevant. I don't think folks working on add-on boards have thought
-> that far ahead.
->
+I don't understand the above statement, I don't think it yield the
+result expected according to the above comment.
 
-The use case from the angle of a specific driver might be a completely
-different scenario.
-The motivation of this patch is to support handing over DTOs as
-transfer entries across different boot stages via transfer list.
-Unlike for a specific driver, a DTO within a transfer entry is usually
-board-leveled and contains nodes for more than one driver.
-The transfer list library in each boot stage does not have knowledge
-on a single specific driver and which target base should be applied is
-the only interest.
-That is the common DTO use case in Firmware Handoff and why we need
-the top-level compatible to be introduced.
-For details, please see my PR for the Firmware Handoff spec update to
-support DTO as transfer entries at:
-https://github.com/FirmwareHandoff/firmware_handoff/pull/74
+> @@ -365,6 +401,7 @@ static inline void tcp_accecn_init_counters(struct tcp_sock *tp)
+>  	__tcp_accecn_init_bytes_counters(tp->received_ecn_bytes);
+>  	__tcp_accecn_init_bytes_counters(tp->delivered_ecn_bytes);
+>  	tp->accecn_minlen = 0;
+> +	tp->accecn_opt_demand = 0;
+>  	tp->est_ecnfield = 0;
+>  }
+>  
+> @@ -447,6 +484,7 @@ static inline void tcp_ecn_rcv_synack(struct sock *sk, const struct tcphdr *th,
+>  	default:
+>  		tcp_ecn_mode_set(tp, TCP_ECN_MODE_ACCECN);
+>  		tp->syn_ect_rcv = ip_dsfield & INET_ECN_MASK;
+> +		tp->accecn_opt_demand = 2;
+>  		if (INET_ECN_is_ce(ip_dsfield) &&
+>  		    tcp_accecn_validate_syn_feedback(sk, ace,
+>  						     tp->syn_ect_snt)) {
+> @@ -467,6 +505,7 @@ static inline void tcp_ecn_rcv_syn(struct tcp_sock *tp, const struct tcphdr *th,
+>  		} else {
+>  			tp->syn_ect_rcv = TCP_SKB_CB(skb)->ip_dsfield &
+>  					  INET_ECN_MASK;
+> +			tp->prev_ecnfield = tp->syn_ect_rcv;
+>  			tcp_ecn_mode_set(tp, TCP_ECN_MODE_ACCECN);
+>  		}
+>  	}
+> @@ -565,4 +604,16 @@ tcp_ecn_make_synack(const struct request_sock *req, struct tcphdr *th)
+>  		th->ece = 1;
+>  }
+>  
+> +static inline bool tcp_accecn_option_beacon_check(const struct sock *sk)
+> +{
+> +	const struct tcp_sock *tp = tcp_sk(sk);
+> +
+> +	if (!READ_ONCE(sock_net(sk)->ipv4.sysctl_tcp_ecn_option_beacon))
+> +		return false;
+> +
+> +	return tcp_stamp_us_delta(tp->tcp_mstamp, tp->accecn_opt_tstamp) *
+> +	       READ_ONCE(sock_net(sk)->ipv4.sysctl_tcp_ecn_option_beacon) >=
+> +	       (tp->srtt_us >> 3);
 
-> And since we don't know the target-path up front, it is just left blank
-> so far. It would be better if we expressed *something*. Perhaps
-> 'target-compatible'? Something like that would work in your case I
-> think.
->
-> You'd have to be somewhat crazy, but you can bundle a bunch of
-> mutually-exclusive or unrelated overlays within a single overlay file. I
-> don't know that we want to prevent doing that. Someone might come up
-> with some not crazy reason to do that...
->
-> >
-> > This patch updates the document with a note and example for this
-> > practice.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> >  Documentation/devicetree/overlay-notes.rst | 28 ++++++++++++++++++++++
-> >  1 file changed, 28 insertions(+)
-> >
-> > diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
-> > index 35e79242af9a..30b142d1b2ee 100644
-> > --- a/Documentation/devicetree/overlay-notes.rst
-> > +++ b/Documentation/devicetree/overlay-notes.rst
-> > @@ -103,6 +103,34 @@ The above bar.dtso example modified to use target path syntax is::
-> >      ---- bar.dtso --------------------------------------------------------------
-> >
-> >
-> > +Overlay identification
-> > +----------------------
-> > +
-> > +When managing overlays dynamically or bundling multiple base device trees
-> > +and overlays in a single system (e.g., in firmware, initramfs, or user-space
-> > +tools), it becomes important to associate each overlay with its intended
-> > +target base DT.
-> > +
-> > +To support this, overlays should include the top-level compatible string
-> > +from its base DT.
->
-> The base has multiple compatible strings, so which one? Has to match on
-> any one or all of them?
+To be consistent:
 
-Match only with base's top-level compatible, see above for the
-explanation of the use case.
+	u32 ecn_beacon =
+READ_ONCE(sock_net(sk)->ipv4.sysctl_tcp_ecn_option_beacon);
 
-Regards,
-Raymond
+	if (!ecn_beacon)
+		return false;
 
->
-> > +This enables higher-level software or firmware to identify which base DT
-> > +an overlay is compatible with and apply it accordingly.
-> > +
-> > +Example usage::
-> > +
-> > +    ---- bar.dtso - overlay with top-level compatible string -------------------
-> > +     /dts-v1/;
-> > +     /plugin/;
-> > +     compatible = "corp,foo";
-> > +
-> > +     ...
-> > +    ---- bar.dtso --------------------------------------------------------------
-> > +
-> > +This top-level compatible string is not required by the kernel overlay
-> > +mechanism itself, but it is strongly recommended for managing overlays in
-> > +scalable systems.
-> > +
-> > +
-> >  Overlay in-kernel API
-> >  --------------------------------
-> >
-> > --
-> > 2.25.1
-> >
+	return tcp_stamp_us_delta(tp->tcp_mstamp, tp->accecn_opt_tstamp) *
+ecn_beacon // ...
+
+/P
+
 
