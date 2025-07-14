@@ -1,137 +1,105 @@
-Return-Path: <linux-doc+bounces-52965-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-52969-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B546EB0343F
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 03:57:39 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71471B0346F
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 04:22:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id F3FE9176F7D
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 01:57:39 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C84133B9E85
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Jul 2025 02:22:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B5DC1A073F;
-	Mon, 14 Jul 2025 01:57:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C7CC161302;
+	Mon, 14 Jul 2025 02:22:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MgfbiZps"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ad3CmMEJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D952663CB;
-	Mon, 14 Jul 2025 01:57:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F739184;
+	Mon, 14 Jul 2025 02:22:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752458255; cv=none; b=EjOlKb3/CdVcBcAuHJYacV5cdMCP+isEEiaag/Er25hg8SOvtSJJRMzWJbGrciQsuB6J1TOtCSaqdTxssmwDZtmMN750pzZRxh3K5Tc7PImU08QcB2D0K64mDs5qbRt5arGozys6xMU7Nvvma0AWZFB4OSoWzJj3bvID3rnO2W0=
+	t=1752459761; cv=none; b=KyCrIj4oLU4PfoP2bMRh1v5mlV95V9HcCmnLKwZ+QJQlm1dQ6czrf/1MAguG/KjTh4MdTx3dNdr9JmNEvWSi1w6j+An9mmbq4yNSf3XrfPHooQC28Yz7ov3O6fD1Gxn/XZjMWl911bpogax7o3/MheeW2Kgwzvwx47ktCuvROEg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752458255; c=relaxed/simple;
-	bh=tXjeutRppXmvBhfxh8YB3OK5XDbxuYC5z68U92vFtas=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=X2IzPXKn1lWt1D9pbkVHx9fSdX5MXG8jgsBL8V6f1ftujQ6ERWsPm4vrvYnsxmEDRrVvoKKMncGCNaa68cCLHUW3XgSzlyUNmRj80iXcow6ugS5nCRrtaQWbBuszp8QCAuK2X8ylXlq8CYUG4C3VTy1Yn396VFe5b7nNDrC6rqI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MgfbiZps; arc=none smtp.client-ip=209.85.208.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-60c3aafae23so10158632a12.1;
-        Sun, 13 Jul 2025 18:57:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1752458252; x=1753063052; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iSUx2XgUMsGQsj10m/9SoX9P5P+4nF9nfb9/i8DE2zc=;
-        b=MgfbiZpsf3yb57MaohNVp0DMTgFNWrcbagmDF8ccuppah+tPU5tKnm6GEOv6FCxIpE
-         mI97zcAIQujZ/iHMUnzp1y0r7vS4w7Vt52YP/bE2PhuFKrYWjtpFHKFJHA03fpkQv4mf
-         gpK/xvp8khYl8EL4Tqdgk1g8wRUm4EkyczD6gga8/pYt+9WKEMkhODK6TyVIl5sZMIgL
-         rOYwWVdnov6uOO1qyBnhPIBgFTZG9Cuw/a2gv4oY8VQD8bHY9kRrbScL+g56RgmJ5pqj
-         h4cuNiCKn2RmfwrtgGT+2p9WOXo7ov6jTBvVJhNSDk64fgpEzvmLkSVEJy2vBo68+p/J
-         Z1QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752458252; x=1753063052;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=iSUx2XgUMsGQsj10m/9SoX9P5P+4nF9nfb9/i8DE2zc=;
-        b=ZVqUvppzWwQyTQ/h4eM694smLB3dYx0swbOUzWodk2unK/FcWR2U5nn3ObuKvYmY3D
-         MKfGlNWrDVkQ0W5A5lUL7fAKf6SL+luOtkYvqOU+b5mv26f0Yp+F1QR7XUyeSxY8EeJf
-         jhyuZK07GrQsjuQocknaXi7frDpNaEGcs8A72hBszVTu+TeMQsYHzTP7/2kRa6y+GmR1
-         keu8ClIqtXxpFywZa/Gfbplk/ir3B+G59dXuInCqiMkqgRHfF9chjNwcDbX/yLB1JZCc
-         7hUeaMdcIaksmzkuI5+vaRNoP4B0WCdVN2aDU36mp/DHEd3JHjYS+j8mKp2v37Cxz882
-         re0Q==
-X-Forwarded-Encrypted: i=1; AJvYcCW1toqHwFZA8s+lEk4egTme/NXeIr284qGpeFPifI6JKEM9haHdXedXX+dMreGauPsWDfsq3+7sVJ8=@vger.kernel.org, AJvYcCWAzRgELnAHyR50GVZQvq2lzJw9ZRjDmHKgohnqFLLCT32XU7AfmBzVE5oNKk2SbocuY90Ny8Nc@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywkm0Xr4OU1C6xSdFHW5xiY9JqB47nAEu9U4RsAs1NaufcuzQUp
-	qqlRUTrwKipwCwSNytsuo3Wz+UssOLbojakXlaxDh+JzxepnO2zznis/LugqUw==
-X-Gm-Gg: ASbGncvTVg2H0+IDpTE5GL8Zuhw6awo/92hA+n3PKZxT2+2rCjcjJ8zoZGeQwp6hULw
-	MXZPfPybb3l7saF+FayrVK2MJMaZRL8IAtY4VyRdmQ31QoP+i4RhjTbhrAe7viXGGv0fT3Rdw+l
-	99VTiQ3e7coZns0fGkKXqJaRuFJ1wsyktA/Ilwx2LJ8lcb6U0mPhA5yVeeYg9KPlmjax8CEiGSW
-	nVUQrNKnrmIaRi6iU8kZYdSwjq4VjC1QnPoU9MllGoHyZW5HkzqKrdFjtQx39ajqawKFxCp5ASx
-	0n9FBNd8/nGygBpJFHCyphI520kRh3Tz9KJr7hxHKf/FMDENmgESngtAfpXplbs/B8nf7PHtAKn
-	DIy4Uwfw4WqPVUo/TCBSN1w==
-X-Google-Smtp-Source: AGHT+IFa6svVjL9+AuRkaH2jgR8aBmJ4UX+oCB50F4KPWSBsF/RKWL0tGAWDm4/rqm8K87yCWsE0Qw==
-X-Received: by 2002:a17:907:6d1f:b0:ae6:f7b5:70b4 with SMTP id a640c23a62f3a-ae6f7b570dfmr1450290666b.16.1752458251864;
-        Sun, 13 Jul 2025 18:57:31 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-ae6e82dedd3sm734161566b.150.2025.07.13.18.57.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 13 Jul 2025 18:57:31 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id B2806420A81A; Mon, 14 Jul 2025 08:57:26 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux PowerPC <linuxppc-dev@lists.ozlabs.org>,
-	Linux Networking <netdev@vger.kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Haren Myneni <haren@linux.ibm.com>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Andrew Donnellan <ajd@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nathan Lynch <nathanl@linux.ibm.com>
-Subject: [PATCH v2 3/3] Documentation: ioctl-number: Correct full path to papr-physical-attestation.h
-Date: Mon, 14 Jul 2025 08:57:10 +0700
-Message-ID: <20250714015711.14525-4-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250714015711.14525-1-bagasdotme@gmail.com>
-References: <20250714015711.14525-1-bagasdotme@gmail.com>
+	s=arc-20240116; t=1752459761; c=relaxed/simple;
+	bh=zix9ri6vfTswvmpA/jCkVghWpzfujrWr8l27YzRLFZA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Sb8LRx6c1dnPhJaRaIWRAqP39kXJTc1Wyx/xmfA5MCL1kWF8VXFifqCbq+saMe+ReO9G1tGOdppF+j64RP1DjRQuP4kJ3C98cykPsXoaZjOYYpdn2BuGIRQ9vQKRSzpS26MxxiDjjD6m2jLy035k1/Y8LcOuIZLIZIrENolNGsk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ad3CmMEJ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8780BC4CEF7;
+	Mon, 14 Jul 2025 02:22:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1752459760;
+	bh=zix9ri6vfTswvmpA/jCkVghWpzfujrWr8l27YzRLFZA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=ad3CmMEJUjZx6ln8A23SIatIJIl1k/kQBv2jle24TqsxgCeBdgRySqXj8Wh5v0nTJ
+	 LV5OCH4ZEVJwDTZbo9+zIWB/vZ91jZc7rlvZWAS/UMkRwKOw+WFvquVRZ1nU+wBqfw
+	 cYef3l4rPlQUbXWR7D85fLJKl81oRbpl/zExX3VI3wPXJJ29L1UxBFhY5muNwlNuBr
+	 tKQpQcKhp/I2KFKymubbSAr4RJ545hPeAxokSDhkF3NueRh6DL3cQHKEI3328R0bva
+	 YJ8s7Mtp552Zr9jDLaU+gKmhxjX0OaAPEtRUc6vde0aiHbYufjpSViBBldKrQxVSKW
+	 NsEe6LaD0npzQ==
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-32b561a861fso32970151fa.0;
+        Sun, 13 Jul 2025 19:22:40 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCWbJ1nhJHfeQz0Lha1HeXgo0Ak4Rd8NrU1T+D9kZsvHncU8lKgo+jGiXryBEbj4FjoPLqk6Q76o8Q3Ie8rS@vger.kernel.org, AJvYcCXhTzYgYOnyxDe6g796IQhM3vFbCTEY55BP7jMh1KknQMg+slRnyQocZ+HyOasfpepSd54UbVcBXpw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwazjZHn61hpEAxNXkCh8iBwNc6D0eQmv42U627zBAZrW7Q9L8g
+	3D1MZ7tw4YBiHyoV+vaJQ9P4Sf3PPTiSoboB1WoTn/x/RdZd4joLq67XC8ITFpReuKHzOgqiFbv
+	CO5cCbDuLLtOXpWwWTgFUHJvBIxqRpAI=
+X-Google-Smtp-Source: AGHT+IEn91j/73d1i/bAP+/uNV+DKkD1Gnv2YyhYH9rtQ+TBzQd5HefPzO//qx9sbRsJzcxnV0AbP0KnOImK77KCkdg=
+X-Received: by 2002:a2e:b88e:0:b0:32b:2fba:8b90 with SMTP id
+ 38308e7fff4ca-3306ce94ad2mr7854221fa.14.1752459758912; Sun, 13 Jul 2025
+ 19:22:38 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1882; i=bagasdotme@gmail.com; h=from:subject; bh=tXjeutRppXmvBhfxh8YB3OK5XDbxuYC5z68U92vFtas=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBklSTl6Dp0rCm97Xc+uSnTQllRb980lXb5uonTy+zO3D P8uU93bUcrCIMbFICumyDIpka/p9C4jkQvtax1h5rAygQxh4OIUgIn0PWb4X8t4eUWfhOdLpiXa 1rFbbz01nnHVffehXxVzg9iEYlOY7jH8lbff8Ye5363l3zzvNRcyOdOsX4S1Tt/zbPbGB4mzepa wsQEA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+References: <20250711054446.1537700-1-kraxel@redhat.com>
+In-Reply-To: <20250711054446.1537700-1-kraxel@redhat.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Mon, 14 Jul 2025 12:22:26 +1000
+X-Gmail-Original-Message-ID: <CAMj1kXEsERVQgm2PF4npmeKg_tM2-ivFXwFObQzddxMaU5HMyg@mail.gmail.com>
+X-Gm-Features: Ac12FXyY6r9URRzQ90qQCOY-4pySoh-E8L_P9Pr_ZLgTl0X5ko6UYOxRdt7PlVg
+Message-ID: <CAMj1kXEsERVQgm2PF4npmeKg_tM2-ivFXwFObQzddxMaU5HMyg@mail.gmail.com>
+Subject: Re: [PATCH] efi: add API doc entry for ovmf_debug_log
+To: Gerd Hoffmann <kraxel@redhat.com>, Linux Doc Mailing List <linux-doc@vger.kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>
+Cc: linux-efi@vger.kernel.org, Krzysztof Kozlowski <krzk@kernel.org>, 
+	open list <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Commit 03c9d1a5a30d93 ("Documentation: Fix description format for
-powerpc RTAS ioctls") fixes Sphinx warning by chopping arch/ path
-component of papr-physical-attestation.h to fit existing "Include File"
-column. Now that the column has been widened just enough for that
-header file, add back its arch/ path component.
+(cc Jon and linux-doc)
 
-Fixes: 03c9d1a5a30d ("Documentation: Fix description format for powerpc RTAS ioctls")
-Reviewed-by: Haren Myneni <haren@linux.ibm.com>
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/userspace-api/ioctl/ioctl-number.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, 11 Jul 2025 at 17:04, Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 
-diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
-index a7f729eb0c3694..24c7f480e31057 100644
---- a/Documentation/userspace-api/ioctl/ioctl-number.rst
-+++ b/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -369,7 +369,7 @@ Code  Seq#    Include File                                             Comments
-                                                                        <mailto:linuxppc-dev@lists.ozlabs.org>
- 0xB2  06-07  arch/powerpc/include/uapi/asm/papr-platform-dump.h        powerpc/pseries Platform Dump API
-                                                                        <mailto:linuxppc-dev@lists.ozlabs.org>
--0xB2  08     powerpc/include/uapi/asm/papr-physical-attestation.h      powerpc/pseries Physical Attestation API
-+0xB2  08     arch/powerpc/include/uapi/asm/papr-physical-attestation.h powerpc/pseries Physical Attestation API
-                                                                        <mailto:linuxppc-dev@lists.ozlabs.org>
- 0xB3  00     linux/mmc/ioctl.h
- 0xB4  00-0F  linux/gpio.h                                              <mailto:linux-gpio@vger.kernel.org>
--- 
-An old man doll... just what I always wanted! - Clara
+Thanks. I'll queue this up in the EFI tree unless Jon prefers to take it.
 
+
+> ---
+>  Documentation/ABI/testing/sysfs-firmware-efi | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/Documentation/ABI/testing/sysfs-firmware-efi b/Documentation/ABI/testing/sysfs-firmware-efi
+> index 5e4d0b27cdfe..927e362d4974 100644
+> --- a/Documentation/ABI/testing/sysfs-firmware-efi
+> +++ b/Documentation/ABI/testing/sysfs-firmware-efi
+> @@ -36,3 +36,10 @@ Description: Displays the content of the Runtime Configuration Interface
+>                 Table version 2 on Dell EMC PowerEdge systems in binary format
+>  Users:         It is used by Dell EMC OpenManage Server Administrator tool to
+>                 populate BIOS setup page.
+> +
+> +What:          /sys/firmware/efi/ovmf_debug_log
+> +Date:          July 2025
+> +Contact:       Gerd Hoffmann <kraxel@redhat.com>, linux-efi@vger.kernel.org
+> +Description:   Displays the content of the OVMF debug log buffer.  The file is
+> +               only present in case the firmware supports logging to a memory
+> +               buffer.
+> --
+> 2.50.1
+>
 
