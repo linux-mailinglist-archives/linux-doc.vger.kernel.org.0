@@ -1,166 +1,166 @@
-Return-Path: <linux-doc+bounces-53117-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53122-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40B81B053F8
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 10:01:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DE06B05454
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 10:14:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 6877C7A5AA5
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 08:00:20 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id F2FE37AF9F3
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 08:13:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B215223DEC;
-	Tue, 15 Jul 2025 08:01:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-com.20200927.dkim.feishu.cn header.i=@leap-io-com.20200927.dkim.feishu.cn header.b="2quzSHn0"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 892242550CF;
+	Tue, 15 Jul 2025 08:14:29 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sg-3-17.ptr.tlmpb.com (sg-3-17.ptr.tlmpb.com [101.45.255.17])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D05884A00
-	for <linux-doc@vger.kernel.org>; Tue, 15 Jul 2025 08:01:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.45.255.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 760A72749D6;
+	Tue, 15 Jul 2025 08:14:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.188
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752566499; cv=none; b=JWRHWwzX2idvvcWjO/6On7WSnLJ+RAs8+hng2lIk/vHdwGId1dsZkx2pg3HCyivQpZhNs/6vzkvjAt93V3KKdQ6QQEc2fcIy8XSUvasTS9L53a1vzcpE1zr7pO2fcUlyDQYe2878Yb7b0XwwWr/fJzOGqGg+bj8Ov642ETRgqfs=
+	t=1752567269; cv=none; b=nY9TOK5hy2+WA1w0QUUgXCJK7OoLYKSnAlcXQyjwoWhFD05oGcT04v5dnTUm4CXa6y0YQCYJ0yfOM6fbEq70MtqdgUVd+YEQW0QQkS/ni+EHEtxS2bJbvTPZKzyCBOPUIfnprVeYcI8px+TGTPK1K4h7JiRKDU3SAXoaghnNbHI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752566499; c=relaxed/simple;
-	bh=mN5Jnq/FJq1zSfL3W2EGrmi4J/3q9ePIt/GOIvHv4+Y=;
-	h=Cc:Subject:Mime-Version:Content-Type:Date:To:In-Reply-To:
-	 References:Message-Id:From; b=pTb1iVHN8jM0AjlKsADGNwReHKf6Clz7rFx1dNyLYEwmTicH6lkD3Ql/PE1Fuy/C5T3uwVuaQgNef0TW/xxdd2yAROcq48xA4ESdEUMTBuPRqWuN0fngfKDTih0xvGiPaQ2tyobtIfRIj7ZVAB/kJmgsiZmmmTkv7ljobRs6e1A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leap-io.com; spf=pass smtp.mailfrom=leap-io.com; dkim=pass (2048-bit key) header.d=leap-io-com.20200927.dkim.feishu.cn header.i=@leap-io-com.20200927.dkim.feishu.cn header.b=2quzSHn0; arc=none smtp.client-ip=101.45.255.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leap-io.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=leap-io-com.20200927.dkim.feishu.cn; t=1752566483;
-  h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=mN5Jnq/FJq1zSfL3W2EGrmi4J/3q9ePIt/GOIvHv4+Y=;
- b=2quzSHn0wm3RV9wDUnCX96AbIDBNvjvd0QdAQtSQw6rdr1irimFlaoU72UUGz9IvsFdyFO
- GaRT5nwYQeg/O6F32L1/3ODSrjQIfYQLXnWg42OEXuEaHqaywl2j1HrlyheX09jsQKME14
- 0UnV8/1dCAZorNrAInU38uyXZ9O+KJfJ2HxQQtFjyj5ltRHbVCmPa5WuJyTUo/uXmkx3V5
- zYnFGrftuZc4I97FLyEcgsS9bEotMenTx8hSYbt5pt3KpD1ae/oPGcq1wm5gQWsuCLLFRJ
- LRsZZl+BddRSfgFPbPygQ0AREM7Z35EzukP49h7814Ox0XnUmBI3BqKZSBAqjw==
-Cc: <alexs@kernel.org>, <dzm91@hust.edu.cn>, <corbet@lwn.net>, 
-	<linux-doc@vger.kernel.org>
-Subject: Re: [PATCH 2/7] docs/zh_CN: add scsi.rst translation
+	s=arc-20240116; t=1752567269; c=relaxed/simple;
+	bh=FPpy2Ey3IUB8/3bIz+zDFClr9nSH9TSeqIZGE8GHyIo=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=DaTUPw8PZMIdoKncgSm9MXHUpx5AA3s8gOj7gY6sgP6xDV6Ai79RUEmrR7UjaMpwj7BTjf4schPGRLPdetl2faYqUN0F6ZXP3kgNmlR81o+toKwF/sgD2lhd1DGneoX6dsLQOVBP4Vq72o0ZQrI5/id4FWeCcSUSZDf6Qiupy6A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.188
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.19.88.105])
+	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4bhBgT12yRzXfDr;
+	Tue, 15 Jul 2025 16:09:57 +0800 (CST)
+Received: from dggemv705-chm.china.huawei.com (unknown [10.3.19.32])
+	by mail.maildlp.com (Postfix) with ESMTPS id 96600140202;
+	Tue, 15 Jul 2025 16:14:25 +0800 (CST)
+Received: from kwepemq200018.china.huawei.com (7.202.195.108) by
+ dggemv705-chm.china.huawei.com (10.3.19.32) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Tue, 15 Jul 2025 16:14:20 +0800
+Received: from localhost.localdomain (10.50.165.33) by
+ kwepemq200018.china.huawei.com (7.202.195.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Tue, 15 Jul 2025 16:14:19 +0800
+From: Yicong Yang <yangyicong@huawei.com>
+To: <catalin.marinas@arm.com>, <will@kernel.org>, <maz@kernel.org>,
+	<oliver.upton@linux.dev>, <corbet@lwn.net>,
+	<linux-arm-kernel@lists.infradead.org>, <kvmarm@lists.linux.dev>,
+	<linux-kselftest@vger.kernel.org>, <linux-doc@vger.kernel.org>
+CC: <joey.gouly@arm.com>, <suzuki.poulose@arm.com>, <yuzenghui@huawei.com>,
+	<shuah@kernel.org>, <jonathan.cameron@huawei.com>,
+	<shameerali.kolothum.thodi@huawei.com>, <linuxarm@huawei.com>,
+	<prime.zeng@hisilicon.com>, <xuwei5@huawei.com>, <yangyicong@hisilicon.com>,
+	<tangchengchang@huawei.com>, <wangzhou1@hisilicon.com>
+Subject: [PATCH v4 0/7] Add support for FEAT_{LS64, LS64_V} and related tests
+Date: Tue, 15 Jul 2025 16:13:49 +0800
+Message-ID: <20250715081356.12442-1-yangyicong@huawei.com>
+X-Mailer: git-send-email 2.31.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-X-Lms-Return-Path: <lba+168760ad0+6de457+vger.kernel.org+doubled@leap-io.com>
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 15 Jul 2025 16:01:19 +0800
-To: "Yanteng Si" <si.yanteng@linux.dev>
-In-Reply-To: <67a798a3-6ee0-4c08-8c17-943fd02e458b@linux.dev>
-References: <20250708024139.848025-3-doubled@leap-io.com>
-	<67a798a3-6ee0-4c08-8c17-943fd02e458b@linux.dev>
-Content-Transfer-Encoding: base64
-Message-Id: <220d7401030e8c57cb19a90642e0e0ae27071c38.c6773d8e.b2b8.41e4.bdec.a20934933195@feishu.cn>
-From: =?utf-8?q?=E9=83=9D=E6=A0=8B=E6=A0=8B?= <doubled@leap-io.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: dggems701-chm.china.huawei.com (10.3.19.178) To
+ kwepemq200018.china.huawei.com (7.202.195.108)
 
-Cj4gRnJvbTogIllhbnRlbmcgU2kiPHNpLnlhbnRlbmdAbGludXguZGV2Pgo+IERhdGU6wqAgV2Vk
-LCBKdWwgOSwgMjAyNSwgMDk6MzkKPiBTdWJqZWN0OsKgIFJlOiBbUEFUQ0ggMi83XSBkb2NzL3po
-X0NOOiBhZGQgc2NzaS5yc3QgdHJhbnNsYXRpb24KPiBUbzogImhhb2Rvbmdkb25nIjxkb3VibGVk
-QGxlYXAtaW8uY29tPiwgPGFsZXhzQGtlcm5lbC5vcmc+Cj4gQ2M6IDxkem05MUBodXN0LmVkdS5j
-bj4sIDxjb3JiZXRAbHduLm5ldD4sIDxsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnPgo+IOWcqCA3
-LzgvMjUgMTA6NDEgQU0sIGhhb2Rvbmdkb25nIOWGmemBkzoKCj4gPiBUcmFuc2xhdGUgLi4uL3Nj
-c2kvc2NzaS5yc3QgaW50byBDaGluZXNlLgoKPiA+IEFkZCBzY3NpIGludG8gLi4uL3Njc2kvaW5k
-ZXgucnN0LgoKPiA+Cgo+ID4gU2lnbmVkLW9mZi1ieTogaGFvZG9uZ2RvbmcgPGRvdWJsZWRAbGVh
-cC1pby5jb20+Cgo+ID4gLS0tCgo+ID4gwqAgLi4uL3RyYW5zbGF0aW9ucy96aF9DTi9zY3NpL2lu
-ZGV4LnJzdCDCoCDCoCDCoCDCoCB8IDk1ICsrKysrKysrKysrKysrKysrKysKCj4gPiDCoCAuLi4v
-dHJhbnNsYXRpb25zL3poX0NOL3Njc2kvc2NzaS5yc3QgwqAgwqAgwqAgwqAgwqB8IDQ4ICsrKysr
-KysrKysKCj4gPiDCoCAyIGZpbGVzIGNoYW5nZWQsIDE0MyBpbnNlcnRpb25zKCspCgo+ID4gwqAg
-Y3JlYXRlIG1vZGUgMTAwNjQ0IERvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL3Njc2kv
-aW5kZXgucnN0Cgo+ID4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IERvY3VtZW50YXRpb24vdHJhbnNs
-YXRpb25zL3poX0NOL3Njc2kvc2NzaS5yc3QKCj4gPgoKPiA+IGRpZmYgLS1naXQgYS9Eb2N1bWVu
-dGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9zY3NpL2luZGV4LnJzdCBiL0RvY3VtZW50YXRpb24v
-dHJhbnNsYXRpb25zL3poX0NOL3Njc2kvaW5kZXgucnN0Cgo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2
-NDQKCj4gPiBpbmRleCAwMDAwMDAwMDAwMDAuLjRlOTU3N2YyYzljNgoKPiA+IC0tLSAvZGV2L251
-bGwKCj4gPiArKysgYi9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9zY3NpL2luZGV4
-LnJzdAoKPiA+IEBAIC0wLDAgKzEsOTUgQEAKCj4gPiArLi4gU1BEWC1MaWNlbnNlLUlkZW50aWZp
-ZXI6IEdQTC0yLjAKCj4gPiArLi4gaW5jbHVkZTo6IC4uL2Rpc2NsYWltZXItemhfQ04ucnN0Cgo+
-ID4gKwoKPiA+ICs6T3JpZ2luYWw6IERvY3VtZW50YXRpb24vc2NzaS9pbmRleC5yc3QKCj4gPiAr
-Cgo+ID4gKzrnv7vor5E6Cgo+ID4gKwoKPiA+ICsg6YOd5qCL5qCLIERvbmdkb25nIEhhbyA8ZG91
-YmxlZEBsZWFwLWlvLmNvbT4KCj4gPiArCgo+ID4gKzrmoKHor5E6Cgo+ID4gKwoKPiA+ICsKCj4g
-PiArCgo+ID4gKz09PT09PT09PT0KCj4gPiArU0NTSeWtkOezu+e7nwoKPiA+ICs9PT09PT09PT09
-Cgo+ID4gKwoKPiA+ICsuLiB0b2N0cmVlOjoKCj4gPiArIMKgIDptYXhkZXB0aDogMQoKPiA+ICsK
-Cj4gPiAr566A5LuLCgo+ID4gKz09PT0KCj4gPiArCgo+ID4gKy4uIHRvY3RyZWU6OgoKPiA+ICsg
-wqAgOm1heGRlcHRoOiAxCgo+ID4gKwoKPiA+ICsgwqAgc2NzaQoKPiA+ICsKCj4gPiArU0NTSemp
-seWKqOaOpeWPowoKPiA+ICs9PT09PT09PT09PT0KCj4gPiArCgo+ID4gKy4uIHRvY3RyZWU6OgoK
-PiA+ICsgwqAgOm1heGRlcHRoOiAxCgo+ID4gKwoKPiA+ICtUb2RvbGlzdDoKCj4gPiArCgo+ID4g
-Kyogc2NzaV9taWRfbG93X2FwaQoKPiA+ICsqIHNjc2lfZWgKCj4gPiArCgo+ID4gK1NDU0npqbHl
-iqjlj4LmlbAKCj4gPiArPT09PT09PT09PT09Cgo+ID4gKwoKPiA+ICsuLiB0b2N0cmVlOjoKCj4g
-PiArIMKgIDptYXhkZXB0aDogMQoKPiA+ICsKCj4gPiArVG9kb2xpc3Q6Cgo+ID4gKwoKPiA+ICsq
-IHNjc2ktcGFyYW1ldGVycwoKPiA+ICsqIGxpbmtfcG93ZXJfbWFuYWdlbWVudF9wb2xpY3kKCj4g
-PiArCgo+ID4gK1NDU0nkuLvmnLrpgILphY3lmajpqbHliqgKCj4gPiArPT09PT09PT09PT09PT09
-PT09Cgo+ID4gKwoKPiA+ICsuLiB0b2N0cmVlOjoKCj4gPiArIMKgIDptYXhkZXB0aDogMQoKPiA+
-ICsKCj4gPiArVG9kb2xpc3Q6Cgo+ID4gKwoKPiA+ICsqIHNkLXBhcmFtZXRlcnMKCj4gPiArKiA1
-M2M3MDAKCj4gPiArKiBhYWNyYWlkCgo+ID4gKyogYWR2YW5zeXMKCj4gPiArKiBhaGExNTJ4Cgo+
-ID4gKyogYWljNzl4eAoKPiA+ICsqIGFpYzd4eHgKCj4gPiArKiBhcmNtc3Jfc3BlYwoKPiA+ICsq
-IGJmYQoKPiA+ICsqIGJueDJmYwoKPiA+ICsqIEJ1c0xvZ2ljCgo+ID4gKyogY3hnYjNpCgo+ID4g
-KyogZGMzOTV4Cgo+ID4gKyogZHB0aQoKPiA+ICsqIEZsYXNoUG9pbnQKCj4gPiArKiBnX05DUjUz
-ODAKCj4gPiArKiBocHNhCgo+ID4gKyogaHB0aW9wCgo+ID4gKyogbGlic2FzCgo+ID4gKyogbHBm
-YwoKPiA+ICsqIG1lZ2FyYWlkCgo+ID4gKyogbmNyNTNjOHh4Cgo+ID4gKyogTmluamFTQ1NJCgo+
-ID4gKyogcHBhCgo+ID4gKyogcWxvZ2ljZmFzCgo+ID4gKyogc2NzaS1jaGFuZ2VyCgo+ID4gKyog
-c2NzaV9mY190cmFuc3BvcnQKCj4gPiArKiBzY3NpLWdlbmVyaWMKCj4gPiArKiBzbWFydHBxaQoK
-PiA+ICsqIHN0Cgo+ID4gKyogc3ltNTNjNTAwX2NzCgo+ID4gKyogc3ltNTNjOHh4XzIKCj4gPiAr
-KiB0Y21fcWxhMnh4eAoKPiA+ICsqIHVmcwoKPiA+ICsqIHdkNzE5eAoKPiA+ICsKCj4gPiArKiBz
-Y3NpX3RyYW5zcG9ydF9zcnAvZmlndXJlcwoKPiBJIHRoaW5rIHlvdSBjYW4gbWVyZ2UgdGhpcyBw
-YXJ0IHdpdGggdGhlIGZpcnN0IHBhdGNoIHRvIHNlcnZlIGFzIHRoZSBmaXJzdCBwYXRjaC4gT2Yg
-Y291cnNlLCB5b3UgbmVlZCB0byBtb3ZlICJzY3NpIiB0byB0aGUgdG9kb2xpc3QuCgo+ID4gZGlm
-ZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL3Njc2kvc2NzaS5yc3Qg
-Yi9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9zY3NpL3Njc2kucnN0Cgo+ID4gbmV3
-IGZpbGUgbW9kZSAxMDA2NDQKCj4gPiBpbmRleCAwMDAwMDAwMDAwMDAuLjg3NGFkMzRhZThhYQoK
-PiA+IC0tLSAvZGV2L251bGwKCj4gPiArKysgYi9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96
-aF9DTi9zY3NpL3Njc2kucnN0Cgo+ID4gQEAgLTAsMCArMSw0OCBAQAoKPiA+ICsuLiBTUERYLUxp
-Y2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMAoKPiA+ICsuLiBpbmNsdWRlOjogLi4vZGlzY2xhaW1l
-ci16aF9DTi5yc3QKCj4gPiArCgo+ID4gKzpPcmlnaW5hbDogRG9jdW1lbnRhdGlvbi9zY3NpL3Nj
-c2kucnN0Cgo+ID4gKwoKPiA+ICs657+76K+ROgoKPiA+ICsKCj4gPiArIOmDneagi+agiyBEb25n
-ZG9uZyBIYW8gPGRvdWJsZWRAbGVhcC1pby5jb20+Cgo+ID4gKwoKPiA+ICs65qCh6K+ROgoKPiA+
-ICsKCj4gPiArCgo+ID4gKwoKPiA+ICs9PT09PT09PT09PT09PQoKPiA+ICtTQ1NJ5a2Q57O757uf
-5paH5qGjCgo+ID4gKz09PT09PT09PT09PT09Cgo+ID4gKwoKPiA+ICtMaW51eOaWh+aho+mhueeb
-ru+8iExEUO+8iee7tOaKpOS6huS4gOS7veaPj+i/sExpbnV45YaF5qC477yIbGvvvIkgMi405Lit
-U0NTSQoKPiA+ICvlrZDns7vnu5/nmoTmlofmoaPjgILor7flj4LogIPvvJoKCj4gPiAraHR0cHM6
-Ly93d3cudGxkcC5vcmcvSE9XVE8vU0NTSS0yLjQtSE9XVE8g44CCTERQ5o+Q5L6b5Y2V6aG15ZKM
-Cgo+ID4gK+WkmumhteeahEhUTUzniYjmnKzvvIzku6Xlj4pQb3N0U2NyaXB05LiOUERG5qC85byP
-55qE5paH5qGj44CCCgo+ID4gKwoKPiA+ICvlnKhTQ1NJ5a2Q57O757uf5Lit5L2/55So5qih5Z2X
-55qE5rOo5oSP5LqL6aG5Cgo+ID4gKz09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Cgo+
-ID4gK0xpbnV45YaF5qC45Lit55qEU0NTSeaUr+aMgeWPr+S7peagueaNrue7iOerr+eUqOaIt+ea
-hOmcgOaxguS7peS4jeWQjOeahOaWueW8j+aooeWdlwoKPiA+ICvljJbjgILkuLrkuobnkIbop6Pk
-vaDnmoTpgInmi6nvvIzmiJHku6zpppblhYjpnIDopoHlrprkuYnkuIDkupvmnK/or63jgIIKCj4g
-PiArCgo+ID4gK3Njc2ktY29yZe+8iOS5n+iiq+ensOS4uuKAnOS4remXtOWxguKAne+8ieWMheWQ
-q1NDU0nmlK/mjIHnmoTmoLjlv4PjgILmsqHmnInku5bkvaDlsIYKCj4gPiAr5peg5rOV5L2/55So
-5Lu75L2V5YW25LuWU0NTSempseWKqOeoi+W6j+OAglNDU0nmoLjlv4PmlK/mjIHlj6/ku6XmmK/k
-uIDkuKrmqKHlnZfvvIgKCj4gPiArc2NzaV9tb2Qub++8ie+8jOS5n+WPr+S7pee8luivkei/m+WG
-heaguOOAguWmguaenFNDU0nmoLjlv4PmmK/kuIDkuKrmqKHlnZfvvIzpgqPkuYgKCj4gPiAr5LuW
-5b+F6aG75piv56ys5LiA5Liq6KKr5Yqg6L2955qEU0NTSeaooeWdl++8jOWmguaenOS9oOWwhuWN
-uOi9veivpeaooeWdl++8jOmCo+S5iOS7luW/hQoKPiA+ICvpobvmmK/mnIDlkI7kuIDkuKrooqvl
-jbjovb3nmoTmqKHlnZfjgILlrp7pmYXkuIrvvIxtb2Rwcm9iZeWSjHJtbW9k5ZG95Luk5bCG56Gu
-5L+dCgo+ID4gK1NDU0nlrZDns7vnu5/kuK3mqKHlnZfliqDovb3kuI7ljbjovb3nmoTmraPnoa7p
-obrluo/jgIIKCj4gPiArCgo+ID4gK+S4gOaXplNDU0nmoLjlv4PlrZjlnKjkuo7lhoXmoLjkuK3v
-vIjml6DorrrmmK/nvJbor5Hov5vlhoXmoLjov5jmmK/kvZzkuLrmqKHlnZfliqDovb3vvInvvIwK
-Cj4gPiAr54us56uL55qE5LiK5bGC6amx5Yqo5ZKM5bqV5bGC6amx5Yqo5Y+v5Lul5oyJ54Wn5Lu7
-5oSP6aG65bqP5Yqg6L2944CC56OB55uY6amx5Yqo56iL5bqPCgo+ID4gK++8iHNkX21vZC5v77yJ
-44CB5YWJ55uY6amx5Yqo56iL5bqP77yIc3JfbW9kLm/vvInjgIHno4HluKbpqbHliqjnqIvluo8g
-WzFdXwoKPiA+ICvvvIhzdC5v77yJ5Lul5Y+KU0NTSemAmueUqOmpseWKqOeoi+W6j++8iHNnLm/v
-vInku6PooajkuobkuIrlsYLpqbHliqjvvIznlKjkuo7mjqfliLYKCj4gPiAr55u45bqU55qE5ZCE
-56eN6K6+5aSH44CC5L6L5aaC77yM5L2g5Y+v5Lul5Yqg6L2956OB5bim6amx5Yqo56iL5bqP5p2l
-5L2/55So56OB5bim6amx5Yqo5Zmo77yMCgo+ID4gK+eEtuWQjuWcqOS4jemcgOimgeivpempseWK
-qOeoi+W6j+aXtuWNuOi9veS7lu+8iOW5tumHiuaUvuebuOWFs+WGheWtmO+8ieOAggoKPiA+ICsK
-Cj4gPiAr5bqV5bGC6amx5Yqo56iL5bqP55So5LqO5pSv5oyB5oKo5omA6L+Q6KGM56Gs5Lu25bmz
-5Y+w5pSv5oyB55qE5LiN5ZCM5Li75py65Y2h44CC6L+Z5Lqb5LiN5ZCMCgo+ID4gK+eahOS4u+ac
-uuWNoemAmuW4uOiiq+ensOS4uuS4u+acuuaAu+e6v+mAgumFjeWZqO+8iEhCQXPvvInjgILkvovl
-poLvvIxhaWM3eHh4Lm/pqbHliqgKCj4gPiAr56iL5bqP6KKr55So5LqO5o6n5Yi2QWRhcHRlY+aJ
-gOWxnueahOaJgOacieacgOaWsOeahFNDU0nmjqfliLblmajjgILlh6DkuY7miYDmnInnmoTlupUK
-Cj4gPiAr5bGC6amx5Yqo6YO95Y+v5Lul6KKr57yW6K+R5Li65qih5Z2X5oiW55u05o6l57yW6K+R
-6L+b5YaF5qC444CCCgo+ID4gKwoKPiA+ICsuLiBbMV0g56OB5bim6amx5Yqo56iL5bqP5pyJ5LiA
-5Liq5Y+Y56eN55So5LqO5o6n5Yi2T25TdHJlYW3no4HluKborr7lpIfjgILlhbbmqKHlnZcKCj4g
-PiArIMKgIMKgIMKgIMKgIMKgIOWQjeensOS4um9zc3QubyDjgIIKCj4gPiBcIE5vIG5ld2xpbmUg
-YXQgZW5kIG9mIGZpbGUKCj7CoAo+IG5lZWQgYSBibGFja2xpbmUuCgpUaGFuayB5b3UgZm9yIHBv
-aW50aW5nIHRoaXMgb3V0LiBJ4oCZdmUgYWRkZWQgdGhlIG1pc3NpbmcgbmV3bGluZSBhdCBFT0Yg
-aW4gdjMuCgo+wqAKPsKgCj4gVGhhbmtzLAoKPsKgCj4gWWFudGVuZwo+wqAKCkJlc3QgcmVnYXJk
-cyzCoApEb25nZG9uZyBIYW8K
+From: Yicong Yang <yangyicong@hisilicon.com>
+
+Armv8.7 introduces single-copy atomic 64-byte loads and stores
+instructions and its variants named under FEAT_{LS64, LS64_V}.
+Add support for Armv8.7 FEAT_{LS64, LS64_V}:
+- Add identifying and enabling in the cpufeature list
+- Expose the support of these features to userspace through HWCAP3
+  and cpuinfo
+- Add related hwcap test
+- Handle the trap of unsupported memory (normal/uncacheable) access in a VM
+
+A real scenario for this feature is that the userspace driver can make use of
+this to implement direct WQE (workqueue entry) - a mechanism to fill WQE
+directly into the hardware.
+
+Picked Marc's 2 patches form [1] for handling the LS64 trap in a VM on emulated
+MMIO and the introduce of KVM_EXIT_ARM_LDST64B.
+
+[1] https://lore.kernel.org/linux-arm-kernel/20240815125959.2097734-1-maz@kernel.org/
+
+Tested with updated hwcap test:
+[root@localhost tmp]# dmesg | grep "All CPU(s) started"
+[   14.789859] CPU: All CPU(s) started at EL2
+[root@localhost tmp]# ./hwcap
+# LS64 present
+ok 217 cpuinfo_match_LS64
+ok 218 sigill_LS64
+ok 219 # SKIP sigbus_LS64_V
+# LS64_V present
+ok 220 cpuinfo_match_LS64_V
+ok 221 sigill_LS64_V
+ok 222 # SKIP sigbus_LS64_V
+# 115 skipped test(s) detected. Consider enabling relevant config options to improve coverage.
+# Totals: pass:107 fail:0 xfail:0 xpass:0 skip:115 error:0
+
+root@localhost:/mnt# dmesg | grep "All CPU(s) started"
+[    0.281152] CPU: All CPU(s) started at EL1
+root@localhost:/mnt# ./hwcap
+# LS64 present
+ok 217 cpuinfo_match_LS64
+ok 218 sigill_LS64
+ok 219 # SKIP sigbus_LS64
+# LS64_V present
+ok 220 cpuinfo_match_LS64_V
+ok 221 sigill_LS64_V
+ok 222 # SKIP sigbus_LS64_V
+# 115 skipped test(s) detected. Consider enabling relevant config options to improve coverage.
+# Totals: pass:107 fail:0 xfail:0 xpass:0 skip:115 error:0
+
+Change since v3:
+- Inject DABT fault for LS64 fault on unsupported memory but with valid memslot
+Link: https://lore.kernel.org/linux-arm-kernel/20250626080906.64230-1-yangyicong@huawei.com/
+
+Change since v2:
+- Handle the LS64 fault to userspace and allow userspace to inject LS64 fault
+- Reorder the patches to make KVM handling prior to feature support
+Link: https://lore.kernel.org/linux-arm-kernel/20250331094320.35226-1-yangyicong@huawei.com/
+
+Change since v1:
+- Drop the support for LS64_ACCDATA
+- handle the DABT of unsupported memory type after checking the memory attributes
+Link: https://lore.kernel.org/linux-arm-kernel/20241202135504.14252-1-yangyicong@huawei.com/
+
+Marc Zyngier (2):
+  KVM: arm64: Add exit to userspace on {LD,ST}64B* outside of memslots
+  KVM: arm64: Add documentation for KVM_EXIT_ARM_LDST64B
+
+Yicong Yang (5):
+  KVM: arm64: Handle DABT caused by LS64* instructions on unsupported
+    memory
+  arm64: Provide basic EL2 setup for FEAT_{LS64, LS64_V} usage at EL0/1
+  arm64: Add support for FEAT_{LS64, LS64_V}
+  KVM: arm64: Enable FEAT_{LS64, LS64_V} in the supported guest
+  kselftest/arm64: Add HWCAP test for FEAT_{LS64, LS64_V}
+
+ Documentation/arch/arm64/booting.rst      | 12 +++
+ Documentation/arch/arm64/elf_hwcaps.rst   |  6 ++
+ Documentation/virt/kvm/api.rst            | 43 +++++++++--
+ arch/arm64/include/asm/el2_setup.h        | 12 ++-
+ arch/arm64/include/asm/esr.h              |  8 ++
+ arch/arm64/include/asm/hwcap.h            |  2 +
+ arch/arm64/include/asm/kvm_emulate.h      |  7 ++
+ arch/arm64/include/uapi/asm/hwcap.h       |  2 +
+ arch/arm64/kernel/cpufeature.c            | 51 +++++++++++++
+ arch/arm64/kernel/cpuinfo.c               |  2 +
+ arch/arm64/kvm/inject_fault.c             | 29 ++++++++
+ arch/arm64/kvm/mmio.c                     | 27 ++++++-
+ arch/arm64/kvm/mmu.c                      | 14 +++-
+ arch/arm64/tools/cpucaps                  |  2 +
+ include/uapi/linux/kvm.h                  |  3 +-
+ tools/testing/selftests/arm64/abi/hwcap.c | 90 +++++++++++++++++++++++
+ 16 files changed, 299 insertions(+), 11 deletions(-)
+
+-- 
+2.24.0
+
 
