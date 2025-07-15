@@ -1,80 +1,87 @@
-Return-Path: <linux-doc+bounces-53144-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53146-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12D4EB05C95
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 15:33:49 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A650B05DDF
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 15:48:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 19F50173EE2
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 13:33:01 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id ACF441893608
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 13:42:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CAA242EA171;
-	Tue, 15 Jul 2025 13:28:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C44E92ECD0E;
+	Tue, 15 Jul 2025 13:35:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="s4BvB3MG"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Eg2xqcb4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B0202E7BD9
-	for <linux-doc@vger.kernel.org>; Tue, 15 Jul 2025 13:28:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF4062E6122
+	for <linux-doc@vger.kernel.org>; Tue, 15 Jul 2025 13:35:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752586105; cv=none; b=XQbj4SVV8HTrndMD/k7dnKkxXpPsHdEEBbZJ3IxchT33RJaBFNfycd0y+QUqJqGXKordXZCUQI4A/6kOEBPoA1tDEoS8HkD+Q3bcxGGM4Fz62twhPH4X6vID21JCQ4u55WVvlspv+4kQMU6Aw9+GGab7l8/w12DHA09MObOWqiU=
+	t=1752586505; cv=none; b=p1Tyn04zhc4F8FW8hbyLuCn4Lw1qLdaLlDFvB3qQgj3QGV31PkDGmnuJZOm+vMsnNlpH62Z/ROsCF+bK+vTzWM5cDd+HKOwfm8wPWEb3UGhHXHUHcwNKG5kPoI1a9K4WqJ3gQb9S/fNBmzRinnsbcZSyaH0iobIRwoUHteWowHQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752586105; c=relaxed/simple;
-	bh=YvW4jirI2u/zHSYKM94R24WsGr7Kz4QvYaY5H8NCEfc=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=LzQJZ3Uss6TArAm3CSpyfLvDTsdkHplfd+p5LSiR7i/A1rPxBz3p9tTIDmXBzJ4Ne0xT0UnP/B4YUUviO8TchNbyBDHSsgc1LQuoS4daIZSkcp58XdCygo4+V/shikj6xt1ajLE1IvBaEXxdFLBjogPmtpiBkgQazHeI73nvVp4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=s4BvB3MG; arc=none smtp.client-ip=209.85.128.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4538bc52a8dso40073305e9.2
-        for <linux-doc@vger.kernel.org>; Tue, 15 Jul 2025 06:28:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1752586101; x=1753190901; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=zw74VlTE+k1LGKzfAzB+538GU13x3ojR1l0lw7GXER0=;
-        b=s4BvB3MGfQf0Jv6yGqNrE2o8Q7SUcpcQUoMob/JRgtBD6OuWS7ouoL1Bod9ehBzgNZ
-         iGKDK+Qi+OkIHdAeQEZDO2eNc3HApps2qfIjhG6U2rR/dvoUAeB3q1OFo4w0IoNB3IlH
-         PFD70VRX4fZ9AGBYztakAug7IRFl8fImBS/R4vZRkuV53rZM5PtTKpt7G5CJNTHoFMDa
-         ckL3WPSJBX0YElPQZXgtzqNON9MYGWIpB1R05dd6jI9XsKamox1wiuAueL/GUGA6aW6r
-         nuwh7eOoWqk7KDUeJERoGSwxt04rN991CAbeH21ATKZT61MWhq2ykk48F9AIEBQYkKY/
-         RLIw==
+	s=arc-20240116; t=1752586505; c=relaxed/simple;
+	bh=FNkrpVUP8aBvhfjNdBg9m90d8eea1ssCdQUMoWqFo0g=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=maB0dGqKnG1e7GVBlsU38gBnmO2pnVgKHhGutO5AlHAb6MKfp1RIibMrbPSszxH3pQW/f2oWHPUT1jcJsR/Tu8YPm6algZNYd/K3/5ktsLaGF3sA6bfeBwlPbP2YnfsSmDKZd9XMNaQtLAGYmiWSDicd8mpCS2Qsi2cVUVeBsQg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Eg2xqcb4; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1752586502;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Hna3RjrfnrkuE/vpT4GxFQWfy5w2zHOHWkjX7cFXw9A=;
+	b=Eg2xqcb4oNtXckM5xZlZdI+mEgxwRMtGUSQvQKxuQ0UxdnVADeBkK3m0vM+btNu1z5kyVO
+	e8JkYWIWlSoTrGfoxhkcfp49fzgpfMzPGnsIS0xIZdMOuwguGoDTs+uF8QBk5IL5GOLJO8
+	UNpfSHLpYTgopsPTgu/6q7HrMA/vTzQ=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-330-gVgSy7DCNyCRSF4rov5J6A-1; Tue, 15 Jul 2025 09:35:00 -0400
+X-MC-Unique: gVgSy7DCNyCRSF4rov5J6A-1
+X-Mimecast-MFC-AGG-ID: gVgSy7DCNyCRSF4rov5J6A_1752586499
+Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-455f79a2a16so32198675e9.2
+        for <linux-doc@vger.kernel.org>; Tue, 15 Jul 2025 06:35:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752586101; x=1753190901;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :cc:to:from:subject:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20230601; t=1752586499; x=1753191299;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=zw74VlTE+k1LGKzfAzB+538GU13x3ojR1l0lw7GXER0=;
-        b=iB8SOfYNbZtT7PU8aj5BgD8b4S2C6MLsEGvurkeO9TgmGZ1k+G5fgjfuzf5bBtwiKo
-         k3PxmtRHacmDOsLk9F9yqO5mM/H5qtcf77KkK2rCzeptsV1ZEfxpZ16I1BlamfBwln+Y
-         hUPD3HmSMaR36L+uqy4L/LyITQu2Cc53LdFybOOUDdKn1lc1b+ML2EgUDoaYtVwT+FAK
-         xMC6Bzbt7jld19+t6rH2jhtk0OpbbsEm6GytAn/FlePz69uAs53/BAZV8nsLd6rzfuuJ
-         Vx+HDaNPrC4aAq65Qzck4Ns8qkX6gcXMc2yTXC5izutTLNop/yaEfXgI1DhSGGrTtc7E
-         TrSQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWngE8m4Tw4O6DQ6grWu6uxdthrSNseZHpCdtwwA4Gr6jjCtsZzecALIGt9h5am5N9fqD5tnoYocg0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxGk3pob4aLsMhjPQRcDz6qBeeZefZvWaUjpYroIqU6irZtRQOV
-	NFBKbvMPoOnp6OMl7JfX8R2V6UPYeOIoTXExJBUuk6CqgmKA/kFrO2mtVZisMasMRUQ=
-X-Gm-Gg: ASbGncuXpFTp1Ha1iP3zqW2hRgJUoIHKXPpbZexTwPssKTuSmWN5kfGVaUozea3Be0Y
-	r7fywv+cEDUbsZeSuhCPtDzfAZQGpGzlreB/HrqNRv3asbB9u4Z9MFT/KdMVQ6/GKeiRaJUmxP/
-	UWMuVKa9TSGnnnVwmUxDjLr4Bb/nFB8Oh0QfnJXq08zMx0F6d3yxhnfSV63jmJG3TE5F/4RLL0C
-	iS8BnX4ZCi1+IlddsD3mbBJo8GzXtzdtku8qMFGhIk6fSd3k2+M3Ng+/wUy6BKMsvMDwfSwe7py
-	Al+QbL7lQxVHY9V7klCaCLM9eN9sqzwowLGSGsUG9XsQT7GG+ABHOzcReotXSNAZt3M8LeSkKyG
-	e1SgVzQBpSpxPQl3WLxNR5Cehdr4=
-X-Google-Smtp-Source: AGHT+IEwYlVhkOTzgfZvBe2oJ6/DRqksM/2DDeWWAHWtXNUNAJyWtZXeDWpFZAMAarhRitTCjZMLeA==
-X-Received: by 2002:a05:600c:4695:b0:450:d4a6:799e with SMTP id 5b1f17b1804b1-454f4259c7cmr140093315e9.20.1752586100864;
-        Tue, 15 Jul 2025 06:28:20 -0700 (PDT)
-Received: from [192.168.1.3] ([185.48.76.109])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-454dd540b52sm161683955e9.28.2025.07.15.06.28.19
+        bh=Hna3RjrfnrkuE/vpT4GxFQWfy5w2zHOHWkjX7cFXw9A=;
+        b=vSPeU5rh0W9DAsIYDFB8r3jYB+GcZ9wq/18eXg50AhGD8hFfLEdLJIqFHpxzs+3b6P
+         eZy0vBJrIC5w18cmKwbd7Zq2NCctiUlD049Jckg5661bo1Ef962z4ZRtGzKu36i2Lxd0
+         zfJ2pSRew/XV6W2PiuFLxS6w+H76sufzBPOzTrasJqL8mVpABvJek2prk9E2VXV2WrTu
+         LtHXZ82hgkc/aRzImd1LziMsalTjisz1StUOukv7yWnOLUhvi8eeAYtZ3zFHo43DAeJ8
+         qp4VNcsCzVRQ5cvDX2jE9nCDLEYpPDO+WFUl9wEmv54jpuSQf0nejLqWfUyymMYl5Ypd
+         gLsg==
+X-Forwarded-Encrypted: i=1; AJvYcCXGNJcSLHK5sMuHjhKQC1T8CuG71l0duMLflDJu6oSsKoXjCE/wu3aSnag3lxwG1mApd47m7cLa/9U=@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywf7tL81QkN/y901ip6h+jO8YfkWfiNTuckxR3Wi0Qll7FrPhRy
+	I5xtmxoXblYBQyu7vhkbEjX84zDt+vpFwaaY0e1BXBYphdiTKPK5HoKtf4eYNJ/wW0myXm9XL8Y
+	MnQHJ4mb2t5FdlH/wpIKv1Rxm+lKeWHqFfBNXv3p68Ml+rLQ5uj5KYrS2T9Xt5w==
+X-Gm-Gg: ASbGncsKsfrqu91FvHK9s4O9pgnGghwzDbZY8EKur93pnvqttsIaIwp6dByfwbBIjpl
+	SJU60FJdwQA3F/Rss/s7Niv9S1UA6zTNPcV9GQqRnimkwiJ/Q1Pi7hB+lc4PY4brcqjPaU6FtHf
+	/O2NCog9dOWNiPH2kL7mE9gjzs1M7dLqugpy/jlhQHaLtGwyUMTQ9KvlZNvFY1gvM8rtff2Jsl5
+	FCow8LCTERWLxTpG2uNorUPjHyz+gJ5xzq3cxwAhy4L+D/7gksvJMRs5VwonglO5KeQKLrx9hgb
+	+vWEN3aauxtBZQCgnzM98C+SmuG0ekASm/kUclHXfLgq6ZvsG1nAfRG6nwqKlbLHKlmGT/DWArr
+	fYbCArfvG2OM=
+X-Received: by 2002:a05:600c:6295:b0:456:58e:318e with SMTP id 5b1f17b1804b1-4562771c329mr32530625e9.30.1752586499380;
+        Tue, 15 Jul 2025 06:34:59 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFFLt0H3ouwQHrfzti4Gau5tDX0PXneRZR47ct1MkwMEfPNZ/zhgGSAD+eLXD1StfdRkCurLQ==
+X-Received: by 2002:a05:600c:6295:b0:456:58e:318e with SMTP id 5b1f17b1804b1-4562771c329mr32530235e9.30.1752586498941;
+        Tue, 15 Jul 2025 06:34:58 -0700 (PDT)
+Received: from ?IPV6:2a0d:3344:2712:7e10:4d59:d956:544f:d65c? ([2a0d:3344:2712:7e10:4d59:d956:544f:d65c])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-456278a4460sm13752225e9.1.2025.07.15.06.34.57
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 15 Jul 2025 06:28:20 -0700 (PDT)
-Message-ID: <80b7c29e-83b9-46a4-826e-d252ad425d4d@linaro.org>
-Date: Tue, 15 Jul 2025 14:28:19 +0100
+        Tue, 15 Jul 2025 06:34:58 -0700 (PDT)
+Message-ID: <cb12d567-6654-48b0-8443-522aaddcc406@redhat.com>
+Date: Tue, 15 Jul 2025 15:34:56 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -82,141 +89,59 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 04/10] arm64/boot: Enable EL2 requirements for
- SPE_FEAT_FDS
-From: James Clark <james.clark@linaro.org>
-To: Will Deacon <will@kernel.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,
- Mark Rutland <mark.rutland@arm.com>, Jonathan Corbet <corbet@lwn.net>,
- Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>,
- Joey Gouly <joey.gouly@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>,
- Zenghui Yu <yuzenghui@huawei.com>, Peter Zijlstra <peterz@infradead.org>,
- Ingo Molnar <mingo@redhat.com>, Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>, leo.yan@arm.com,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-perf-users@vger.kernel.org, linux-doc@vger.kernel.org,
- kvmarm@lists.linux.dev
-References: <20250605-james-perf-feat_spe_eft-v3-0-71b0c9f98093@linaro.org>
- <20250605-james-perf-feat_spe_eft-v3-4-71b0c9f98093@linaro.org>
- <aHUMMk9JUdK6luLN@willie-the-truck>
- <04d52182-6043-4eaf-a898-9f8ccc893e5f@linaro.org>
- <aHZQH7QGhi5pbXU8@willie-the-truck>
- <e1210c84-69d1-4fb2-88c2-a6a1bcb179c5@linaro.org>
+Subject: Re: [PATCH net-next v6] ipv6: add `force_forwarding` sysctl to enable
+ per-interface forwarding
+To: Gabriel Goller <g.goller@proxmox.com>,
+ Nicolas Dichtel <nicolas.dichtel@6wind.com>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, David Ahern <dsahern@kernel.org>,
+ Shuah Khan <shuah@kernel.org>
+Cc: netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
+References: <20250711124243.526735-1-g.goller@proxmox.com>
 Content-Language: en-US
-In-Reply-To: <e1210c84-69d1-4fb2-88c2-a6a1bcb179c5@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Paolo Abeni <pabeni@redhat.com>
+In-Reply-To: <20250711124243.526735-1-g.goller@proxmox.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+On 7/11/25 2:42 PM, Gabriel Goller wrote:
+> It is currently impossible to enable ipv6 forwarding on a per-interface
+> basis like in ipv4. To enable forwarding on an ipv6 interface we need to
+> enable it on all interfaces and disable it on the other interfaces using
+> a netfilter rule. This is especially cumbersome if you have lots of
+> interface and only want to enable forwarding on a few. According to the
+> sysctl docs [0] the `net.ipv6.conf.all.forwarding` enables forwarding
+> for all interfaces, while the interface-specific
+> `net.ipv6.conf.<interface>.forwarding` configures the interface
+> Host/Router configuration.
+> 
+> Introduce a new sysctl flag `force_forwarding`, which can be set on every
+> interface. The ip6_forwarding function will then check if the global
+> forwarding flag OR the force_forwarding flag is active and forward the
+> packet.
+> 
+> To preserver backwards-compatibility reset the flag (on all interfaces)
+> to 0 if the net.ipv6.conf.all.forwarding flag is set to 0.
+> 
+> Add a short selftest that checks if a packet gets forwarded with and
+> without `force_forwarding`.
+> 
+> [0]: https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt
+> 
+> Signed-off-by: Gabriel Goller <g.goller@proxmox.com>
+> Acked-by: Nicolas Dichtel <nicolas.dichtel@6wind.com>
+> ---
+> v6: 
+>     * rebase
+>     * remove brackts around single line
+>     * add 'nodad' to addresses in selftest to avoid sporadic failures
 
+I'm sorry, but it still does not apply. Please rebase again and re-submit.
 
-On 15/07/2025 2:10 pm, James Clark wrote:
-> 
-> 
-> On 15/07/2025 1:57 pm, Will Deacon wrote:
->> On Tue, Jul 15, 2025 at 01:48:03PM +0100, James Clark wrote:
->>>
->>>
->>> On 14/07/2025 2:54 pm, Will Deacon wrote:
->>>> On Thu, Jun 05, 2025 at 11:49:02AM +0100, James Clark wrote:
->>>>> SPE data source filtering (optional from Armv8.8) requires that 
->>>>> traps to
->>>>> the filter register PMSDSFR be disabled. Document the requirements and
->>>>> disable the traps if the feature is present.
->>>>>
->>>>> Tested-by: Leo Yan <leo.yan@arm.com>
->>>>> Signed-off-by: James Clark <james.clark@linaro.org>
->>>>> ---
->>>>>    Documentation/arch/arm64/booting.rst | 11 +++++++++++
->>>>>    arch/arm64/include/asm/el2_setup.h   | 14 ++++++++++++++
->>>>>    2 files changed, 25 insertions(+)
->>>>>
->>>>> diff --git a/Documentation/arch/arm64/booting.rst b/Documentation/ 
->>>>> arch/arm64/booting.rst
->>>>> index dee7b6de864f..abd75085a239 100644
->>>>> --- a/Documentation/arch/arm64/booting.rst
->>>>> +++ b/Documentation/arch/arm64/booting.rst
->>>>> @@ -404,6 +404,17 @@ Before jumping into the kernel, the following 
->>>>> conditions must be met:
->>>>>        - HDFGWTR2_EL2.nPMICFILTR_EL0 (bit 3) must be initialised to 
->>>>> 0b1.
->>>>>        - HDFGWTR2_EL2.nPMUACR_EL1 (bit 4) must be initialised to 0b1.
->>>>> +  For CPUs with SPE data source filtering (FEAT_SPE_FDS):
->>>>> +
->>>>> +  - If EL3 is present:
->>>>> +
->>>>> +    - MDCR_EL3.EnPMS3 (bit 42) must be initialised to 0b1.
->>>>> +
->>>>> +  - If the kernel is entered at EL1 and EL2 is present:
->>>>> +
->>>>> +    - HDFGRTR2_EL2.nPMSDSFR_EL1 (bit 19) must be initialised to 0b1.
->>>>> +    - HDFGWTR2_EL2.nPMSDSFR_EL1 (bit 19) must be initialised to 0b1.
->>>>> +
->>>>>      For CPUs with Memory Copy and Memory Set instructions 
->>>>> (FEAT_MOPS):
->>>>>      - If the kernel is entered at EL1 and EL2 is present:
->>>>> diff --git a/arch/arm64/include/asm/el2_setup.h b/arch/arm64/ 
->>>>> include/asm/el2_setup.h
->>>>> index 1e7c7475e43f..02b4a7fc016e 100644
->>>>> --- a/arch/arm64/include/asm/el2_setup.h
->>>>> +++ b/arch/arm64/include/asm/el2_setup.h
->>>>> @@ -279,6 +279,20 @@
->>>>>        orr    x0, x0, #HDFGRTR2_EL2_nPMICFILTR_EL0
->>>>>        orr    x0, x0, #HDFGRTR2_EL2_nPMUACR_EL1
->>>>>    .Lskip_pmuv3p9_\@:
->>>>> +    mrs    x1, id_aa64dfr0_el1
->>>>> +    ubfx    x1, x1, #ID_AA64DFR0_EL1_PMSVer_SHIFT, #4
->>>>> +    /* If SPE is implemented, */
->>>>> +    cmp    x1, #ID_AA64DFR0_EL1_PMSVer_IMP
->>>>> +    b.lt    .Lskip_spefds_\@
->>>>> +    /* we can read PMSIDR and */
->>>>> +    mrs_s    x1, SYS_PMSIDR_EL1
->>>>> +    and    x1, x1,  #PMSIDR_EL1_FDS
->>>>> +    /* if FEAT_SPE_FDS is implemented, */
->>>>> +    cbz    x1, .Lskip_spefds_\@
->>>>> +    /* disable traps to PMSDSFR. */
->>>>> +    orr    x0, x0, #HDFGRTR2_EL2_nPMSDSFR_EL1
->>>>
->>>> Why is this being done here rather than alongside the existing SPE
->>>> configuration of HDFGRTR_EL2 and HDFGWTR_EL2 near the start of
->>>> __init_el2_fgt?
->>>>
->>> I thought everything was separated by which trap configs it writes to,
->>> rather than the feature. This SPE feature is in HDFGRTR2 so I put it in
->>> __init_el2_fgt2 rather than __init_el2_fgt.
->>
->> That's fair; __init_el2_fgt isn't the right place. But the redundancy of
->> re-reading PMSVer from DFR0 is a little jarring.
->>
->>> I suppose we could have a single __init_el2_spe that writes to both 
->>> HDFGRTR
->>> and HDFGRTR2 but we'd have to be careful to not overwrite what was 
->>> already
->>> done in the other sections.
->>
->> Right, perhaps it would be clearer to have trap-preserving macros for
->> features in a specific ID register rather than per-trap configuration
->> register macros.
->>
->> In other words, we have something like __init_fgt_aa64dfr0 which would
->> configure the FGT and FGT2 registers based on features in aa64dfr0. I
->> think you'd need to have a play to see how it ends up looking but the
->> main thing to avoid is having duplicate ID register parsing code for
->> setting up FGT and FGT2 traps.
->>
->> Will
-> 
-> I'll give it a go but that could end up being fragile to something that 
-> is dependent on two different ID registers in the future. Then we'd end 
-> up in the same situation for a different reason.
-> 
+Thanks,
 
-I think I've run into it already. Wouldn't checking for FGT and FGT2 
-have to be repeated when doing each ID register? Now we only do that 
-once at the start of __init_el2_fgt and __init_el2_fgt2, even if we 
-might sometimes check a different ID register twice. But if we flipped 
-it we'd always have to repeat those.
+Paolo
 
 
