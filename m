@@ -1,80 +1,82 @@
-Return-Path: <linux-doc+bounces-53104-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53107-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78865B05195
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 08:15:59 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id AACCEB0529F
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 09:19:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 57F894A7467
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 06:15:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0D1A6188182F
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Jul 2025 07:19:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EB03819D07E;
-	Tue, 15 Jul 2025 06:15:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F4F72D130B;
+	Tue, 15 Jul 2025 07:16:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="qZtohutC"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="V6EEERe2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54EF92CA8;
-	Tue, 15 Jul 2025 06:15:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F6C9271473
+	for <linux-doc@vger.kernel.org>; Tue, 15 Jul 2025 07:16:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752560153; cv=none; b=oEZpL0EfEMLRvtNzrlTfFKFt5E67e0Gdiioqn7bmQour2mduucJGMBoCBimeO2X+1NH1uEiFjZUA07IH+ZhIGy4sfracYmaJH5ThDnj+qqe9EBNSSIvjfRYemfacqabapgxcHombrdP/jWJgH3HD9B3d48mUGmBRukvHzI1KYVM=
+	t=1752563783; cv=none; b=pdNcL8dCPcwhbZ/B+i7WjWyJcbD1DpqLEhpknS0OnAueMqLUNiw8hbk8gFyM54AI2C1Zzhv0DokbNTdr5WAjQ5DDQ8huWq7QTRjhS9dn6DYn8QX+rxVmA0Bp/q1QLs3YRfm1eKosmFng5rf+6/t8UxiddVakd87+OzateUCeMLM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752560153; c=relaxed/simple;
-	bh=WTy1aa3OenxvoxmBAf6IceGklWn8Jzstk7awYeZjqMY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ml/IaJf5V9374XDbK1PJ0CJRRgJY9uuCfv53UStp1uaKzZxxHTks2kJN54e+la/A0BPO1Ag7w9IxqUnSQWwKEv8ehaqChBmToxaQts4Prot6Ygel5wJCbQ+wvewSjO3C/+xcUdUqMHE2fAYmvg04LDcbnfXQsqyw1yagS4J40Lw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=qZtohutC; arc=none smtp.client-ip=148.163.158.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56EKfD9M020124;
-	Tue, 15 Jul 2025 06:15:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=pp1; bh=nP/E9UZXRWlJZvX/E4yNRLrOxasX9t+ppX7bweOD7
-	Ik=; b=qZtohutCDSZMQmRfDcQifCPO+VbJXfMkQebEijQMys6/GG6iBkZAFEh9s
-	71WAmvrLseuHMFad6YQSVzDAIi2CV4YE9pg18dmua2B+++rCW149FAw4ADDq7rtw
-	cXF7BshSlpO1xP0Wxo+tAxB/tW8aSn2zeFjwKotdsfYEAvgJAlmdgq/VCaW7Y68r
-	0wj2u9obqgJe4aOxyKKec8Rm7v/15bmzLDePudaOsBeeVSvNQ1gRa5NpJtIhwoKM
-	7gI2ihx2tnrWh5BkbhOzPpNsEBOole9hFBZTxprWVvYP2vWZM8cTZ2esaZF5MhQA
-	EUZsBh5nnjrs8daYq6VzEMPJ+NtGQ==
-Received: from ppma12.dal12v.mail.ibm.com (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 47ufc6w72e-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 15 Jul 2025 06:15:46 +0000 (GMT)
-Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
-	by ppma12.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 56F3NDfe031903;
-	Tue, 15 Jul 2025 06:15:45 GMT
-Received: from smtprelay06.wdc07v.mail.ibm.com ([172.16.1.73])
-	by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 47v21u1bt0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 15 Jul 2025 06:15:45 +0000
-Received: from smtpav03.dal12v.mail.ibm.com (smtpav03.dal12v.mail.ibm.com [10.241.53.102])
-	by smtprelay06.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 56F6FiUg26083870
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 15 Jul 2025 06:15:44 GMT
-Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5AA095805A;
-	Tue, 15 Jul 2025 06:15:44 +0000 (GMT)
-Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id B97C258056;
-	Tue, 15 Jul 2025 06:15:41 +0000 (GMT)
-Received: from jarvis.ozlabs.ibm.com.com (unknown [9.36.27.213])
-	by smtpav03.dal12v.mail.ibm.com (Postfix) with ESMTP;
-	Tue, 15 Jul 2025 06:15:41 +0000 (GMT)
-From: Andrew Donnellan <ajd@linux.ibm.com>
-To: Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc: Thomas Gleixner <tglx@linutronix.de>,
-        Nicolas Saenz Julienne <nsaenzju@redhat.com>
-Subject: [PATCH] Documentation: core-api: entry: Fix typo "systcalls" -> "syscalls"
-Date: Tue, 15 Jul 2025 16:15:29 +1000
-Message-ID: <20250715061529.56268-1-ajd@linux.ibm.com>
-X-Mailer: git-send-email 2.50.1
+	s=arc-20240116; t=1752563783; c=relaxed/simple;
+	bh=oKCxdtiHaXrLusltoZ/no3IOGFVOIaODLMIw1eJKc5k=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=fQJPEnGcYjt/lbszSQCrXwgXQyhpKX1nAHShoqImm7O82C3e8G4/iVkwLgLw74wuVeIhbw37yVHOfOh3faggzoqMjLQFyCPOFeePfgcgdHrZsCck/VaG3PPgPunj7KBVuzomZGMl4KHbRdoXiO3pRIBRal7bzlAmRhPyTTYmKVk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=V6EEERe2; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1752563780;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=voQS/lp53ISUhbNDO53K37fCMrXCmD3XHPGgWIewhl0=;
+	b=V6EEERe21YbKvlXLJUmYrHoovBFZ+1COmEnZtFPmYDejXJ9Tqkiz98JbREcV5jBA6r3bn1
+	z94awhBrDGlLM2DA9h66JKDcqpbN4Sjcf4ZHQVGFhffZyiDJiXhzSKk44H89YA+a4PGSLk
+	UCHJH7F4yp8c5e82SpnNM7jS+vpKlJ8=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-343-BLjZ0EkBMAWKpN_3HYsVig-1; Tue,
+ 15 Jul 2025 03:16:16 -0400
+X-MC-Unique: BLjZ0EkBMAWKpN_3HYsVig-1
+X-Mimecast-MFC-AGG-ID: BLjZ0EkBMAWKpN_3HYsVig_1752563773
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 97C231800289;
+	Tue, 15 Jul 2025 07:16:13 +0000 (UTC)
+Received: from gmonaco-thinkpadt14gen3.rmtit.com (unknown [10.45.224.115])
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 43CA8180035E;
+	Tue, 15 Jul 2025 07:16:07 +0000 (UTC)
+From: Gabriele Monaco <gmonaco@redhat.com>
+To: linux-kernel@vger.kernel.org,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: Gabriele Monaco <gmonaco@redhat.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Nam Cao <namcao@linutronix.de>,
+	Tomas Glozar <tglozar@redhat.com>,
+	Juri Lelli <jlelli@redhat.com>,
+	Clark Williams <williams@redhat.com>,
+	John Kacur <jkacur@redhat.com>
+Subject: [PATCH v3 13/17] rv: Adapt the sco monitor to the new set_state
+Date: Tue, 15 Jul 2025 09:14:30 +0200
+Message-ID: <20250715071434.22508-14-gmonaco@redhat.com>
+In-Reply-To: <20250715071434.22508-1-gmonaco@redhat.com>
+References: <20250715071434.22508-1-gmonaco@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -82,45 +84,133 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Authority-Analysis: v=2.4 cv=Je68rVKV c=1 sm=1 tr=0 ts=6875f212 cx=c_pps a=bLidbwmWQ0KltjZqbj+ezA==:117 a=bLidbwmWQ0KltjZqbj+ezA==:17 a=Wb1JkmetP80A:10 a=20KFwNOVAAAA:8 a=VnNF1IyMAAAA:8 a=2Dt5MM4rC1aRafM5efAA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzE1MDA1MSBTYWx0ZWRfXy/gXzbivEjsk z7ODChMYSWiudx0+Xe6sTFR3VyqhRKLIoPx6KTckBq7daYE26Gc8dpbGQDoMZRw3fn6hnD2nZG+ nOKq3SUi6SXzeu0OSpdFClmhttizPEcN9/vvvQ54MFc3JQmb17dHoIzTkYmWTYpm71m2LaVMROd
- 3Jj6FaOh/BYyndD2s5IPEZ1aF4va2lynBy8Z9vBlFXOTQWwi4VSkg7Em1KTL5sxABIpNyY8Fk1H AB+xZl8ZYM7FLxAhN2EIvkrqC4i5JVFtbLHSaQvAZ+qBgPLPqEe0St5MYouStuc6+IW2p+Yq8wm 2aSb55RfuLGBtP89UHVtc1JK22Hs6MPtL3eZemUhHovOX95T7VnpET0Y/8c3dbzrRNrnBO54oxo
- gcMXJaZbhYAH8azjpFuVXCRXMQP49vsSPX4PvwLk3RwjF0s4JJq1BqYGNcvj4Krr8SCtlRLQ
-X-Proofpoint-GUID: jTu7R-wLPJZrCJTIBqshr3G1TLB0mTJR
-X-Proofpoint-ORIG-GUID: jTu7R-wLPJZrCJTIBqshr3G1TLB0mTJR
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.7,FMLib:17.12.80.40
- definitions=2025-07-14_03,2025-07-14_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- malwarescore=0 lowpriorityscore=0 suspectscore=0 adultscore=0
- priorityscore=1501 clxscore=1011 bulkscore=0 phishscore=0 spamscore=0
- mlxlogscore=999 mlxscore=0 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507150051
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
 
-Fix a typo: "systcalls" should be "syscalls".
+The sched_set_state tracepoint changed prototype adding a new argument,
+this argument can differentiate between an explicit set_state called by
+a task and a set state to runnable by the scheduler due to a pending
+signal.
 
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Nicolas Saenz Julienne <nsaenzju@redhat.com>
-Signed-off-by: Andrew Donnellan <ajd@linux.ibm.com>
+Expand the model to handle the new set_state flavour, the monitor was
+making sure set state happens only outside of the scheduler, if the
+event occurs with the new argument (from_signal) set to true, we instead
+expect it to be inside the scheduler.
+
+Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
 ---
- Documentation/core-api/entry.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/trace/rv/monitor_sched.rst | 35 +++++++++++++-----------
+ kernel/trace/rv/monitors/sco/sco.c       |  5 +++-
+ kernel/trace/rv/monitors/sco/sco.h       |  4 +++
+ tools/verification/models/sched/sco.dot  |  1 +
+ 4 files changed, 28 insertions(+), 17 deletions(-)
 
-diff --git a/Documentation/core-api/entry.rst b/Documentation/core-api/entry.rst
-index a15f9b1767a2..e406a325341d 100644
---- a/Documentation/core-api/entry.rst
-+++ b/Documentation/core-api/entry.rst
-@@ -105,7 +105,7 @@ has to do extra work between the various steps. In such cases it has to
- ensure that enter_from_user_mode() is called first on entry and
- exit_to_user_mode() is called last on exit.
+diff --git a/Documentation/trace/rv/monitor_sched.rst b/Documentation/trace/rv/monitor_sched.rst
+index 24b2c62a3bc26..6f76bba94d9fb 100644
+--- a/Documentation/trace/rv/monitor_sched.rst
++++ b/Documentation/trace/rv/monitor_sched.rst
+@@ -64,22 +64,25 @@ Monitor sco
+ ~~~~~~~~~~~
  
--Do not nest syscalls. Nested systcalls will cause RCU and/or context tracking
-+Do not nest syscalls. Nested syscalls will cause RCU and/or context tracking
- to print a warning.
+ The scheduling context operations (sco) monitor ensures changes in a task state
+-happen only in thread context::
+-
+-
+-                        |
+-                        |
+-                        v
+-    sched_set_state   +------------------+
+-  +------------------ |                  |
+-  |                   |  thread_context  |
+-  +-----------------> |                  | <+
+-                      +------------------+  |
+-                        |                   |
+-                        | schedule_entry    | schedule_exit
+-                        v                   |
+-                                            |
+-                       scheduling_context  -+
++happen only in thread context, the only exception is a special kind of set
++state that occurs if a task about to sleep has a pending signal. This set state
++is not called by the thread but by the scheduler itself::
++
++                                        |
++                                        |
++                                        v
++    sched_set_state                   +------------------+
++  +---------------------------------- |                  |
++  |                                   |  thread_context  |
++  +---------------------------------> |                  | <+
++                                      +------------------+  |
++                                        |                   |
++                                        | schedule_entry    | schedule_exit
++                                        v                   |
++    sched_set_state_runnable_signal                         |
++  +----------------------------------                       |
++  |                                    scheduling_context   |
++  +--------------------------------->                      -+
  
- KVM
+ Monitor snroc
+ ~~~~~~~~~~~~~
+diff --git a/kernel/trace/rv/monitors/sco/sco.c b/kernel/trace/rv/monitors/sco/sco.c
+index c9206aa12c319..6457ff2469d08 100644
+--- a/kernel/trace/rv/monitors/sco/sco.c
++++ b/kernel/trace/rv/monitors/sco/sco.c
+@@ -22,7 +22,10 @@ DECLARE_DA_MON_PER_CPU(sco, unsigned char);
+ static void handle_sched_set_state(void *data, struct task_struct *tsk,
+ 				   int state, bool from_signal)
+ {
+-	da_handle_start_event_sco(sched_set_state_sco);
++	if (from_signal)
++		da_handle_event_sco(sched_set_state_runnable_signal_sco);
++	else
++		da_handle_start_event_sco(sched_set_state_sco);
+ }
+ 
+ static void handle_schedule_entry(void *data, bool preempt, unsigned long ip)
+diff --git a/kernel/trace/rv/monitors/sco/sco.h b/kernel/trace/rv/monitors/sco/sco.h
+index 83ca9a03331af..2d05ab882b2a6 100644
+--- a/kernel/trace/rv/monitors/sco/sco.h
++++ b/kernel/trace/rv/monitors/sco/sco.h
+@@ -15,6 +15,7 @@ enum states_sco {
+ 
+ enum events_sco {
+ 	sched_set_state_sco = 0,
++	sched_set_state_runnable_signal_sco,
+ 	schedule_entry_sco,
+ 	schedule_exit_sco,
+ 	event_max_sco
+@@ -35,17 +36,20 @@ static const struct automaton_sco automaton_sco = {
+ 	},
+ 	.event_names = {
+ 		"sched_set_state",
++		"sched_set_state_runnable_signal",
+ 		"schedule_entry",
+ 		"schedule_exit"
+ 	},
+ 	.function = {
+ 		{
+ 			thread_context_sco,
++			INVALID_STATE,
+ 			scheduling_context_sco,
+ 			INVALID_STATE
+ 		},
+ 		{
+ 			INVALID_STATE,
++			scheduling_context_sco,
+ 			INVALID_STATE,
+ 			thread_context_sco
+ 		},
+diff --git a/tools/verification/models/sched/sco.dot b/tools/verification/models/sched/sco.dot
+index 20b0e3b449a6b..4e44ed58c62a3 100644
+--- a/tools/verification/models/sched/sco.dot
++++ b/tools/verification/models/sched/sco.dot
+@@ -7,6 +7,7 @@ digraph state_automaton {
+ 	{node [shape = plaintext] "thread_context"};
+ 	"__init_thread_context" -> "thread_context";
+ 	"scheduling_context" [label = "scheduling_context"];
++	"scheduling_context" -> "scheduling_context" [ label = "sched_set_state_runnable_signal" ];
+ 	"scheduling_context" -> "thread_context" [ label = "schedule_exit" ];
+ 	"thread_context" [label = "thread_context", color = green3];
+ 	"thread_context" -> "scheduling_context" [ label = "schedule_entry" ];
 -- 
 2.50.1
 
