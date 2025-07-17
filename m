@@ -1,119 +1,136 @@
-Return-Path: <linux-doc+bounces-53403-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53407-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E93B0B097A1
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Jul 2025 01:26:58 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DAA03B09848
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Jul 2025 01:40:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 91A611C47908
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Jul 2025 23:26:56 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8E8297BCA6E
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Jul 2025 23:39:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 076BE26E143;
-	Thu, 17 Jul 2025 23:25:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7273D244E8C;
+	Thu, 17 Jul 2025 23:40:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TDQPJoue"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UdLl34r+"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D4FF262FFF;
-	Thu, 17 Jul 2025 23:25:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46CBE244663;
+	Thu, 17 Jul 2025 23:40:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752794721; cv=none; b=UM1oaHxt+lyXIxtkUqw2rLm+2YrrjkeGSPyWU4+JHxKSSn+NTuX+qbWDkygzTidXgKih7YrmEzqXqeH0t26tvnMCvIzJJxwbMPVbtFU781MGptJJV+dSGNs26xWtoVlTfyQ7oIOkZpSUy5HoxTrefjYDv6SZr8Dgj+Ar5k/n+90=
+	t=1752795644; cv=none; b=j0Ke+msGihRSGrsYPmskkq3cxSAG1ac6TvskDVboRx79vK9wE81Hl2fKq2jYL4gp4jLyRdE0lLhYL9PLd6WulLhPcyVwjErTZGPhoXBPAiwldUUoHMFU3Gflv1BIQ/8I6b0O8O9p5yBi/eSt5TUGK7d0AbfP0gX69+RpojDtqlE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752794721; c=relaxed/simple;
-	bh=qfrc6vYarbMRQKv1a7xZvSfoxfkNIKlLJL8wJGuWS5I=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=DC7zM2wkAME8tBtzUxE4DKbcl5Wt/itdtLMY0Hz6lg2GVQ5ao6jQlrRAKGGXvdeT3iyuPFBKgWPixL9z57mxDPFmId4QrOudHc0a43xy5fJq3yJrb/kB7Okj/6W+GQ9gryOmHfi54EWliGLOCgsb1lBB8Ul/yqRaS09EziZ2+9I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TDQPJoue; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B75F1C2BCC6;
-	Thu, 17 Jul 2025 23:25:20 +0000 (UTC)
+	s=arc-20240116; t=1752795644; c=relaxed/simple;
+	bh=ghBY1u06RQVl7caGRzm3Kqd91PsHNCfEneyju2vTcIA=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=jUCKmSAU0W555P1S/aHn42BRBaO62gWEGW9iZjh4nJNvDKuoBGscjkPXqYBxAx9/l03QgaXCbaFlQdt8mVRJW7DN4bEAUmyniBfwmbDKepALBWFYmmMeJafe69CfhLNitHAWaDRcBSDuMqQyJxLD+vyeRR0gIfoMYx6+NyDsizU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UdLl34r+; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3429C4CEE3;
+	Thu, 17 Jul 2025 23:40:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1752794720;
-	bh=qfrc6vYarbMRQKv1a7xZvSfoxfkNIKlLJL8wJGuWS5I=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=TDQPJoue8FZRuS/LJrGq2GchrAASLibnSmGeRRoSUGpvH3awBC+7kUb1yyaVYH89y
-	 ULfO45CeKqJRVGvpXRA0BcyHOvq/18F0odTwMODSsaKPhyZ6a5RObjGBHyzV8F/o67
-	 bRdab3eThDwtbXMkLCf7OvDiOrTOIwe/+HGDzhnD0XxLPtqyR6jgFUfqETsGM1mdv+
-	 bnFaNOMq8O4teU/HwNwUrtNBKmLU5MLmrmRF+Dfv34p8l9jQ3mz2PYnKIToPImVNxa
-	 KM1ucd9mD0unIDTP+r5FbWZidX3EtXT5OQTFbfBDNgNkXEVraPMIWLffBOUAzwljDl
-	 L3ZGqkwchCdPg==
-From: Kees Cook <kees@kernel.org>
-To: Arnd Bergmann <arnd@arndb.de>
-Cc: Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	linux-hardening@vger.kernel.org,
-	Ingo Molnar <mingo@kernel.org>,
-	Christoph Hellwig <hch@lst.de>,
-	Andrey Konovalov <andreyknvl@gmail.com>,
-	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
-	Ard Biesheuvel <ardb@kernel.org>,
-	Masahiro Yamada <masahiroy@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nicolas Schier <nicolas.schier@linux.dev>,
-	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
-	Bill Wendling <morbo@google.com>,
-	Justin Stitt <justinstitt@google.com>,
-	linux-kernel@vger.kernel.org,
-	x86@kernel.org,
-	kasan-dev@googlegroups.com,
-	linux-doc@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	kvmarm@lists.linux.dev,
-	linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org,
-	linux-efi@vger.kernel.org,
-	linux-kbuild@vger.kernel.org,
-	linux-security-module@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	llvm@lists.linux.dev
-Subject: [PATCH v3 13/13] configs/hardening: Enable CONFIG_INIT_ON_FREE_DEFAULT_ON
-Date: Thu, 17 Jul 2025 16:25:18 -0700
-Message-Id: <20250717232519.2984886-13-kees@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250717231756.make.423-kees@kernel.org>
-References: <20250717231756.make.423-kees@kernel.org>
+	s=k20201202; t=1752795644;
+	bh=ghBY1u06RQVl7caGRzm3Kqd91PsHNCfEneyju2vTcIA=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=UdLl34r+HqmNKqWBlkKD1rEBbNQo8dTKaB2cDs3pjy7GoC7tvjxuNI08s91vqC3jy
+	 3muBFKYDArqYVpTO7NwuFpoeSLiZMhYKZ6m0tYtvNmAknUQprv7fGSQmulYKbdVJDj
+	 SyyD9uKEwXibjrJOszDDiNOmKuGDf3vaqNmOe9Mvb+L3FrLgcLC/QK9Hnpb/0HzfS4
+	 ar0PRWxwtVKFgwFdNcEILDKlgapYnkd9nZOVYdJihPJZkutFOSpXWDh0OW8y683kkL
+	 OxTtJ7pagF0Hj4t4H30Tosq3G9mG8FXZnFyG0ImUfxCDlaitqDhrFA31bSeCrQZ4ME
+	 SWU0lipl3oi3g==
+Date: Thu, 17 Jul 2025 16:40:42 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Gur Stavi <gur.stavi@huawei.com>
+Cc: <andrew+netdev@lunn.ch>, <christophe.jaillet@wanadoo.fr>,
+ <corbet@lwn.net>, <davem@davemloft.net>, <edumazet@google.com>,
+ <fuguiming@h-partners.com>, <gongfan1@huawei.com>, <guoxin09@huawei.com>,
+ <helgaas@kernel.org>, <horms@kernel.org>, <jdamato@fastly.com>,
+ <lee@trager.us>, <linux-doc@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <luosifu@huawei.com>,
+ <meny.yossefi@huawei.com>, <mpe@ellerman.id.au>, <netdev@vger.kernel.org>,
+ <pabeni@redhat.com>, <przemyslaw.kitszel@intel.com>,
+ <shenchenyang1@hisilicon.com>, <shijing34@huawei.com>,
+ <sumang@marvell.com>, <vadim.fedorenko@linux.dev>, <wulike1@huawei.com>,
+ <zhoushuai28@huawei.com>, <zhuyikai1@h-partners.com>
+Subject: Re: [PATCH net-next v09 1/8] hinic3: Async Event Queue interfaces
+Message-ID: <20250717164042.6802a18b@kernel.org>
+In-Reply-To: <20250717080229.1054761-1-gur.stavi@huawei.com>
+References: <20250716183208.26b87aa8@kernel.org>
+	<20250717080229.1054761-1-gur.stavi@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=961; i=kees@kernel.org; h=from:subject; bh=qfrc6vYarbMRQKv1a7xZvSfoxfkNIKlLJL8wJGuWS5I=; b=owGbwMvMwCVmps19z/KJym7G02pJDBmVbbGrLRYky9XJyFyITXiqam157PKKj7mdDyYc/Xw7s uRv7WSGjlIWBjEuBlkxRZYgO/c4F4+37eHucxVh5rAygQxh4OIUgIkc62Vk+Hwt/L3Rbm1tn84l unrT0jgulm5lD+LgcnL+WfbLeJOREcN/7/17erb+Zmw+2dikfKTxS9XuurzmRR6/80+FfF6/xlG FFQA=
-X-Developer-Key: i=kees@kernel.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-To reduce stale data lifetimes, enable CONFIG_INIT_ON_FREE_DEFAULT_ON as
-well. This matches the addition of CONFIG_STACKLEAK=y, which is doing
-similar for stack memory.
+On Thu, 17 Jul 2025 11:02:29 +0300 Gur Stavi wrote:
+> On Tue, 15 Jul 2025 08:28:36 +0800 Fan Gong wrote:
+> > +/* Data provided to/by cmdq is arranged in structs with little endian fields but
+> > + * every dword (32bits) should be swapped since HW swaps it again when it
+> > + * copies it from/to host memory. This is a mandatory swap regardless of the
+> > + * CPU endianness.  
+> 
+> > This comment makes no sense, FWIW. The device writes a byte steam
+> > to host memory. For what you're saying to make sense the device would
+> > have to intentionally switch the endian based on the host CPU.
+> > And if it could do that why wouldn't it do it in the opposite
+> > direction, avoiding the swap ? :/
+> >
+> > I suppose the device is always writing in be32 words, and you should
+> > be converting from be32.
+> >  
+> 
+> Lets assume the following is a simplified PACKED cmdq struct:
+> 
+> struct some_cmdq {
+> 	__le16 a;
+> 	__le32 b;
+> 	__le16 c;
+> };
+> 
+> Lets denote x0 as lsb of field x. x3 as msb of 32 bits field.
+> 
+> Byte stream in CPU memory is:
+> a0, a1, b0, b1, b2, b3, c0, c1
+> 
+> The HW expects the following byte stream:
+> b1, b0, a1, a0, c1, c0, b3 ,b2
+> 
+> A native struct would be:
+> 
+> struct some_cmdq {
+> 	__be16 b_lo;
+> 	__be16 a;
+> 	__be16 c;
+> 	__be16 b_hi;
+> }
+> 
+> It does not make sense from code readability perspective.
+> While this is a simplified example, there are similar problems in real cmdq
+> structs.
+> Also group of fields that makes sense (based on their names) for being
+> logically near each other become separated in "native" big endian arrangements.
+> 
+> This is a case where driver need to compensate for bad HW decisions.
 
-Signed-off-by: Kees Cook <kees@kernel.org>
----
-Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
-Cc: <linux-hardening@vger.kernel.org>
----
- kernel/configs/hardening.config | 3 +++
- 1 file changed, 3 insertions(+)
+My point was just that the calculation does not survive change of
+endian on the host. You given an example of the host struct being
+in LE and then the swap working out. But IIRC the driver does not
+use LE for its view of the fields. So the host view of the struct
+is:
 
-diff --git a/kernel/configs/hardening.config b/kernel/configs/hardening.config
-index d24c2772d04d..64caaf997fc0 100644
---- a/kernel/configs/hardening.config
-+++ b/kernel/configs/hardening.config
-@@ -60,6 +60,9 @@ CONFIG_LIST_HARDENED=y
- # Initialize all heap variables to zero on allocation.
- CONFIG_INIT_ON_ALLOC_DEFAULT_ON=y
- 
-+# Initialize all heap variables to zero on free to reduce stale data lifetime.
-+CONFIG_INIT_ON_FREE_DEFAULT_ON=y
-+
- # Initialize all stack variables to zero on function entry.
- CONFIG_INIT_STACK_ALL_ZERO=y
- 
--- 
-2.34.1
+struct some_cmdq {
+ 	u16 a;
+ 	u32 b;
+ 	u16 c;
+};
 
+The comment saying that the swap is "regardless of host endianness"
+is just confusion on the part of the author :/
 
