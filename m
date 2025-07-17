@@ -1,120 +1,171 @@
-Return-Path: <linux-doc+bounces-53299-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53303-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1D00B08740
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Jul 2025 09:45:08 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 57023B08792
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Jul 2025 10:07:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E9AF916A469
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Jul 2025 07:45:08 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 438473B54F5
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Jul 2025 08:06:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19E4E26529A;
-	Thu, 17 Jul 2025 07:44:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9FC84279347;
+	Thu, 17 Jul 2025 08:07:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CxseUcsg"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03EEB2652A4;
-	Thu, 17 Jul 2025 07:44:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 049192797AF;
+	Thu, 17 Jul 2025 08:07:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752738275; cv=none; b=QnciFdzLPC/CfTJmNb9P45RT/fa8oIe+NMTQkboBwGRVA9W6NpzMMBiahT7tKGvuMP3G15kPCRQ0aVGvX/NpURBOuwXOuTGl5V+60YoVUpJsK1retUYOJRy7P49KrfG7aOGPzL4OMKgGXEM5TXOeyRInKTUuE118r97Sc/DFO8w=
+	t=1752739624; cv=none; b=lBSiwRDhu2p3nVelYZqWrzqHzdMFZcMOuJtD6Ui2xMWeqmTBiB19gfbW5nUN83ZuvORHJTq32H6aSh6TjWdwSiqG0X4H/VOCeC2KhG9w9LgJE56E91ElMfFgPnGd9av/1vmQEQeicoMwOfw5Zd9nCQ4G/hxua4JVubq2FbaTH/E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752738275; c=relaxed/simple;
-	bh=FJLPW+xkiOM0Q/3rwnBQCTizQkRpW2AF55c+O40YFD0=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=hTaE9bvijFaBBMdr1OAkoqr4Zvsg63PGS9/8hLrnKKEsYHeuDNHcQQZ3ODtZDHengBRTs85D3NZqAjImXTXAXW9AHBZOgX6oG1s3/lekZIb/x/321ejwSEy1y5A/hOLQXQpBS9Ta381VoQ8otG50dm0nBvp54ieq6QOnmvmMk/k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.186.31])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4bjPzm6693z6L5H4;
-	Thu, 17 Jul 2025 15:43:16 +0800 (CST)
-Received: from frapeml500005.china.huawei.com (unknown [7.182.85.13])
-	by mail.maildlp.com (Postfix) with ESMTPS id 41D99140257;
-	Thu, 17 Jul 2025 15:44:30 +0800 (CST)
-Received: from china (10.220.118.114) by frapeml500005.china.huawei.com
- (7.182.85.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 17 Jul
- 2025 09:44:16 +0200
-From: Gur Stavi <gur.stavi@huawei.com>
-To: <kuba@kernel.org>
-CC: <andrew+netdev@lunn.ch>, <christophe.jaillet@wanadoo.fr>,
-	<corbet@lwn.net>, <davem@davemloft.net>, <edumazet@google.com>,
-	<fuguiming@h-partners.com>, <gongfan1@huawei.com>, <guoxin09@huawei.com>,
-	<gur.stavi@huawei.com>, <helgaas@kernel.org>, <horms@kernel.org>,
-	<jdamato@fastly.com>, <lee@trager.us>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <luosifu@huawei.com>,
-	<meny.yossefi@huawei.com>, <mpe@ellerman.id.au>, <netdev@vger.kernel.org>,
-	<pabeni@redhat.com>, <przemyslaw.kitszel@intel.com>,
-	<shenchenyang1@hisilicon.com>, <shijing34@huawei.com>, <sumang@marvell.com>,
-	<vadim.fedorenko@linux.dev>, <wulike1@huawei.com>, <zhoushuai28@huawei.com>,
-	<zhuyikai1@h-partners.com>
-Subject: Re: [PATCH net-next v09 1/8] hinic3: Async Event Queue interfaces
-Date: Thu, 17 Jul 2025 11:02:29 +0300
-Message-ID: <20250717080229.1054761-1-gur.stavi@huawei.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250716183208.26b87aa8@kernel.org>
-References: <20250716183208.26b87aa8@kernel.org>
+	s=arc-20240116; t=1752739624; c=relaxed/simple;
+	bh=pX2EcTfO2rVRCOehEfwLbnYVPG97ExZcriLomj9cUw0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mLOOktc2dcvaqKMt/yzO4ObuZzn+zlRuLY5maltdmitRDkJoU1Q+BXz7qKTW5ESIKgYkobHj1BajR6Iqdzv/f+UztYLdMc+90FqfhBFpoLN5z8mZ/AcuHmHgRfUa0IvIM2YSIK3dnq2y15afzZeybCPtWKGCycFvzcfFy0WBCEg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CxseUcsg; arc=none smtp.client-ip=209.85.210.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-74af4af04fdso1270545b3a.1;
+        Thu, 17 Jul 2025 01:07:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1752739622; x=1753344422; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=im5kVo3zSpTE/DJNANRWfM6LSaXoUCrNcMb0usGbVWE=;
+        b=CxseUcsg4gZrxQuH3HLJq4N43goY2Xrp6WM8OtXJFbGbNovX/+tevvVjixsb70tZq6
+         q6T8vlAXex0eYuMcyUaa2PBreH2FpcNloCsgbMyuRDoShTJn/nCxkXC2qeGNWANsw8XX
+         XqTVt8/KIuAy0AYs2T36VcbrzYjkZo4GPrR5AtYGBQ31NZQNv7miuwqYT/rwMG282wti
+         ZeM8Y58RlB43P6JjEdI/kAFvBN90PDY5y1j7A3pCTrxD5I6OCGDpnb0AFxsPTyJTk5aA
+         hBqnQ7va2I/HNv3SYIM9PJd/OjhiLInYsSm+drXOor/VMDgEnXGXSVRJv+eZhmO3D/Lb
+         Mwsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1752739622; x=1753344422;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=im5kVo3zSpTE/DJNANRWfM6LSaXoUCrNcMb0usGbVWE=;
+        b=K+905acQeTEz/p4ABgP7wjouD3M1My8GyjlmJfz3zgRheFN+tfWtMd/Sw8rUD2uzgX
+         W/Ko4i9DoC3nmP8oX8XGQjOATPffl6PGQ/heCPmi00N6BUPlbrAaMVVUnQ0iLiIsMmUV
+         M0pz7BmMtMQQg/MP98BOzdEFN0dE+KuNyXoJ2CLzhgSj8bax9sfpbCUFl8F4OLoZ6GyI
+         lsMJ2AW4A7G74Zz07/xFuTYmdSH77bCNPLJRvX12Dpfc3DwAR1SeccupYsyvZ4GYlAGH
+         sV/1CL14TJzGYL3xV0HehkAQTK1dsUHxdbCDfYLtRwHFfJSF36u47GoHUwohE4JPG4zS
+         HjsQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU0VvhLEe9/BwA/BAqVQDLKcrUB0D07tHXTWKbHE8j9k9BIpGixROGvXtCS9wwms9uvbRAGcMiDggRJ@vger.kernel.org, AJvYcCVMj+b9aPOiQvOyYKfWwiivwq+OC8u5wv4+9oQzE2MDJUCKqNFSGElroJEKHrCZ/nPTO9O0AXQ0oc7+DQ==@vger.kernel.org, AJvYcCVzwdVgUww0dlQ50TFkbBOMtG4njTq27UI5KrBL40KPHexfPhyhHCEp37hJTL2+IaF5t76J@vger.kernel.org, AJvYcCWRtqUFbQIwBdB90T5Y2eHBMcnX5qZiSonbmLIdgXx5bxfkpfgQj1NZ0bCa9f2Fz/Ib6vI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzH+oxW6aMq5WY/2LZxi2WPorMGZAGlG7AFVOR+hsU7Xj5QFu2X
+	72/5i8FixaW8MCuSxM4dfQWGuHgAb9n+/5ZZVUOt57nV+prVUyDHZ56u
+X-Gm-Gg: ASbGncvOLlu0CMwNi13IMJTRz0ZApWWh5iEC/LP43uNMKAHnhGM+UVF4Yh2hUuJrN73
+	40qPEM96SA3cjiIM5QlC9ZkgBNi5PGPRKN0y7HIDf6AwcVDWoFheR+NHAf5U92boOIa0pffWxrg
+	53TxulEeAED8VIc/84pzwIMozqDy8l3UxQ0ZNykNXYlH93/G9T1lgQmERHWHHMGUZYIdhY4rrtt
+	dehq/DouSX02Sd7iHE9JOcOsZvdFgX74exmW9Wrqpiu6yJVn274baamfSyCTr3L6aroT0COiyR5
+	Yvyh6RjWizj1+evSvMxsIq63KPHWw7SjGqvZOFXoeYwXWsx4GbXIsPCtLv8nxGy00s2IT/UYxMZ
+	v3xA1j9p/7nQd/bbRj/EJ4g==
+X-Google-Smtp-Source: AGHT+IE08tSUk8BSkHFbd4EGRS/BqZYs0+NRXRJzu2DZCsZqn5s44suw+fSLDKaq/HOZ137Bw55IqA==
+X-Received: by 2002:a05:6a21:329d:b0:234:21aa:b538 with SMTP id adf61e73a8af0-2390c744e99mr3819001637.1.1752739622119;
+        Thu, 17 Jul 2025 01:07:02 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-74eb9f4c9c4sm15629003b3a.126.2025.07.17.01.06.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Jul 2025 01:06:59 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 856104225A33; Thu, 17 Jul 2025 15:06:53 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux RCU <rcu@vger.kernel.org>,
+	Linux CPU Architectures Development <linux-arch@vger.kernel.org>,
+	Linux LKMM <lkmm@lists.linux.dev>,
+	Linux KVM <kvm@vger.kernel.org>
+Cc: "Paul E. McKenney" <paulmck@kernel.org>,
+	Frederic Weisbecker <frederic@kernel.org>,
+	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
+	Joel Fernandes <joelagnelf@nvidia.com>,
+	Josh Triplett <josh@joshtriplett.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Uladzislau Rezki <urezki@gmail.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Zqiang <qiang.zhang@linux.dev>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alan Stern <stern@rowland.harvard.edu>,
+	Andrea Parri <parri.andrea@gmail.com>,
+	Will Deacon <will@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	David Howells <dhowells@redhat.com>,
+	Jade Alglave <j.alglave@ucl.ac.uk>,
+	Luc Maranget <luc.maranget@inria.fr>,
+	Akira Yokosawa <akiyks@gmail.com>,
+	Daniel Lustig <dlustig@nvidia.com>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Waiman Long <longman@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Tejun Heo <tj@kernel.org>,
+	"Mike Rapoport (Microsoft)" <rppt@kernel.org>,
+	Changyuan Lyu <changyuanl@google.com>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Xavier <xavier_qy@163.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Maarten Lankhorst <dev@lankhorst.se>,
+	Christian Brauner <brauner@kernel.org>
+Subject: [PATCH 0/4] Convert atomic_*.txt and memory-barriers.txt to reST
+Date: Thu, 17 Jul 2025 15:06:13 +0700
+Message-ID: <20250717080617.35577-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1963; i=bagasdotme@gmail.com; h=from:subject; bh=pX2EcTfO2rVRCOehEfwLbnYVPG97ExZcriLomj9cUw0=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBkVa2M/tu4s3Xpl4sbdZkmuW5Qqp9kEnCyP9S1w2WXJs U2L9V5sRykLgxgXg6yYIsukRL6m07uMRC60r3WEmcPKBDKEgYtTACYyNYDhf62nQ93kRfOvPbKN OMnziueC1RTZmFdnGl9cyH//c3r+hK+MDI8L1Bt0UudIP/yqzsbAcrghOLhiuUrjAw4zvpX9K59 MZgMA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
- frapeml500005.china.huawei.com (7.182.85.13)
 
-On Tue, 15 Jul 2025 08:28:36 +0800 Fan Gong wrote:
-> +/* Data provided to/by cmdq is arranged in structs with little endian fields but
-> + * every dword (32bits) should be swapped since HW swaps it again when it
-> + * copies it from/to host memory. This is a mandatory swap regardless of the
-> + * CPU endianness.
+Atomic types, atomic bitops, and memory barriers docs are included in kernel
+docs build since commit e40573a43d163a ("docs: put atomic*.txt and
+memory-barriers.txt into the core-api book") as a wrapper stub for
+corresponding uncoverted txt docs. Let's turn them into full-fledged reST docs. 
 
-> This comment makes no sense, FWIW. The device writes a byte steam
-> to host memory. For what you're saying to make sense the device would
-> have to intentionally switch the endian based on the host CPU.
-> And if it could do that why wouldn't it do it in the opposite
-> direction, avoiding the swap ? :/
->
-> I suppose the device is always writing in be32 words, and you should
-> be converting from be32.
->
+Bagas Sanjaya (4):
+  Documentation: memory-barriers: Convert to reST format
+  Documentation: atomic_bitops: Convert to reST format
+  Documentation: atomic_t: Convert to reST format
+  Documentation: atomic_bitops, atomic_t, memory-barriers: Link to
+    newly-converted docs
 
-Lets assume the following is a simplified PACKED cmdq struct:
+ Documentation/RCU/rcu_dereference.rst         |    2 +-
+ .../atomic_bitops.rst}                        |   43 +-
+ .../{atomic_t.txt => core-api/atomic_t.rst}   |  211 ++-
+ Documentation/core-api/circular-buffers.rst   |    4 +-
+ Documentation/core-api/index.rst              |    6 +-
+ .../memory-barriers.rst}                      | 1594 +++++++++--------
+ Documentation/core-api/refcount-vs-atomic.rst |    5 +-
+ .../core-api/wrappers/atomic_bitops.rst       |   18 -
+ Documentation/core-api/wrappers/atomic_t.rst  |   19 -
+ .../core-api/wrappers/memory-barriers.rst     |   18 -
+ Documentation/driver-api/device-io.rst        |    4 +-
+ Documentation/locking/spinlocks.rst           |    5 +-
+ Documentation/virt/kvm/vcpu-requests.rst      |    4 +-
+ 13 files changed, 1000 insertions(+), 933 deletions(-)
+ rename Documentation/{atomic_bitops.txt => core-api/atomic_bitops.rst} (54%)
+ rename Documentation/{atomic_t.txt => core-api/atomic_t.rst} (67%)
+ rename Documentation/{memory-barriers.txt => core-api/memory-barriers.rst} (67%)
+ delete mode 100644 Documentation/core-api/wrappers/atomic_bitops.rst
+ delete mode 100644 Documentation/core-api/wrappers/atomic_t.rst
+ delete mode 100644 Documentation/core-api/wrappers/memory-barriers.rst
 
-struct some_cmdq {
-	__le16 a;
-	__le32 b;
-	__le16 c;
-};
 
-Lets denote x0 as lsb of field x. x3 as msb of 32 bits field.
+base-commit: cae58415830f326822593ec01deebe5fdaeb33a2
+-- 
+An old man doll... just what I always wanted! - Clara
 
-Byte stream in CPU memory is:
-a0, a1, b0, b1, b2, b3, c0, c1
-
-The HW expects the following byte stream:
-b1, b0, a1, a0, c1, c0, b3 ,b2
-
-A native struct would be:
-
-struct some_cmdq {
-	__be16 b_lo;
-	__be16 a;
-	__be16 c;
-	__be16 b_hi;
-}
-
-It does not make sense from code readability perspective.
-While this is a simplified example, there are similar problems in real cmdq
-structs.
-Also group of fields that makes sense (based on their names) for being
-logically near each other become separated in "native" big endian arrangements.
-
-This is a case where driver need to compensate for bad HW decisions.
 
