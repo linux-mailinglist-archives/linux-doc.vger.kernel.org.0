@@ -1,124 +1,178 @@
-Return-Path: <linux-doc+bounces-53483-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53486-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AB05B0A82C
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Jul 2025 18:11:58 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02ABFB0A8E3
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Jul 2025 18:49:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D936B3A488B
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Jul 2025 16:11:15 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 91A4CAA0886
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Jul 2025 16:47:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6313D2E612D;
-	Fri, 18 Jul 2025 16:11:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 320012E6D28;
+	Fri, 18 Jul 2025 16:46:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="QJccNh4p"
+	dkim=temperror (0-bit key) header.d=antheas.dev header.i=@antheas.dev header.b="hCq2gHor"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay12.grserver.gr (relay12.grserver.gr [88.99.38.195])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E09D42E612B
-	for <linux-doc@vger.kernel.org>; Fri, 18 Jul 2025 16:11:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 084D826ADD;
+	Fri, 18 Jul 2025 16:46:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=88.99.38.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1752855098; cv=none; b=OST1jfe1k+GVJJnt9v1aCuqJDw4+1dpQ/9SAHC7z4YMBMXusMqrUyd62TbvJwzauGFhXKeEPyBy4AhkPji5ZqsDAamW9JVS8xix9yPgkTn5YfrrymwY63OaJkPmbEPIry5HkWUEnG0bd1fPUckzggbbdzNUs3DEM0A+i++r9X/g=
+	t=1752857194; cv=none; b=kac2KAUMgp7MNdyfJUDOGZqL5v+4A/9S+nqDabiWCE+yuQdSgPht1SGhvyC5B9CW/y0tbh2CxjGddbgG0JDa8aY4T0ToTvm8jhO7WsK6ataYNyxdJkHQAUuzgwcrR1+/Red+oCDhERCTAYC7ymWyPzgO0alN3uffqfyckaPpuf8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1752855098; c=relaxed/simple;
-	bh=FyRfBnxU/OGyyizvx31WzrOI+l2j9rU6IuwyuQVHu2M=;
+	s=arc-20240116; t=1752857194; c=relaxed/simple;
+	bh=Y9/HzNLHHfWUMA2navFffKgWJsVgRHpXB4KSXUWZNro=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=LYysnW+1CrFkDJczeUupMAxSoLsSNRCCiklB1YzUzepDGz3KIDwUhZV4Hwixe34twy/0GzWLcPmtO45Yad8JOVrhSzlFgnsOijYGQ39p/hr0iiUJJwbJBC5kSQ6NcDDKAryJD9hKKnXOqw5owMZYdLpJsS2lEgHLVDTxiJGs+I8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=QJccNh4p; arc=none smtp.client-ip=209.85.215.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-b2c4331c50eso1850057a12.3
-        for <linux-doc@vger.kernel.org>; Fri, 18 Jul 2025 09:11:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1752855094; x=1753459894; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=w4sbOB8EUknRai1AuJ9cdNWA6bF4sUdUbr8Aph2l+CY=;
-        b=QJccNh4pGGJkLWW/uqk6o1CFbPzG2Cpwd8Ju0x/H6KvvAMwVtDhubkwqHPkiIDTQpt
-         GiUdEL2+4sDqSMYho0tQJQmonKSJLSlNY4S1IBhvMemziEAPmfrNkBgBV4FMYpfkfB5H
-         ML1SdQESgAFVoj7SS8gFqbKJPNruz/9Bq5LiY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1752855094; x=1753459894;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=w4sbOB8EUknRai1AuJ9cdNWA6bF4sUdUbr8Aph2l+CY=;
-        b=pvdJIRQ+ofMD4oI5pt4/HK2d2VLzca0yb9UkVDyrvelg6Js3hMrhwAUc84jTmm3Nkm
-         zSpP69hpZYxEkCUkG1+ILpL7tJ+NmPqthRzbR62pP3eQsEtilEHt3RkkAL0g3XS7xezz
-         QA+PAGNqosLyenKuSIJrHkEhpkZtWFBnPWXkIO/TUZ3ZKdVlTwe+vCtpq3mW207vOF98
-         ONJqThfLVEbE4Pz/XBbEDStpl2i5m/+lNepF6ewpwtNUoGw39vK6/beKaCVzqLT215iB
-         FEkwMf4BWK8Hsdry1tBiePxoNZUK/kig0828JU2+acbFD4kEK6WnDQYVGmKCLbqbirhb
-         E+cQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUavnoD/A3IoXUtPuVQB1bOAoXef2UAzaXQi5K1Mtn/Fm4++Twy0s7wvIkOEmzb00W08b8z7dINNsg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzrRKxYtZ6mVXth4XimBdZJwhped951v0SngWqOBCR37i8RZos1
-	YkrdNUxvFVoziPCo7ewAImKowfXaplyQZHFKBAHwqMlHc/aZ93eJHT57DRj7mpaCDZvjZp7oeUa
-	bRUE=
-X-Gm-Gg: ASbGncv9xadGHL1jND7oORhaVDsPGz3AxEBsuwbWpGqgYeMfxBHMzbrcjoRTLn5qQ5c
-	TlT/tEEa6XsgGV4EBj6iOT8qtdUbWFFe3WRROvx3ct+chwO/vTvvVeXHZQz5NSPOh8u/Q3oAh+V
-	H8B5+xyvB2nuwx8Rl3f5kMPwtJMLV439sl1C8Co6S68Nzh5LhadCAdEz4IKIpn3K2IdLx9/bwYh
-	5ddrQEeEBovxtS63yXzvnYT3EU6GM1w8we3sahMRQDgWzZ4ewuP4/A0aQ39fvcCRgs9cpQhAmJu
-	mLNeeKYchv4X7GVsIlPE8My8q2iDZgGJ0sL+x/eB6NxE+ZNt3WdXEhrMlnFLuxuuNYblV/F92xC
-	CgcfNMnzyz5XhwNa5G1E+151qzVx0/EPZ/0jh3vKauu2+mJmat96x2VpsxTx4MeUz1A==
-X-Google-Smtp-Source: AGHT+IH3GJvuapZwa+5m8zkfg83QdlRhvrnJgBdHx/l0mor864INtMqNuwvKlyLhVWqQh6l43SeBpA==
-X-Received: by 2002:a17:90a:c887:b0:311:d3a5:572a with SMTP id 98e67ed59e1d1-31c9e6f6ed9mr17663423a91.8.1752855093820;
-        Fri, 18 Jul 2025 09:11:33 -0700 (PDT)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com. [209.85.214.171])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-31cb6ad7257sm3035038a91.42.2025.07.18.09.11.32
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 18 Jul 2025 09:11:32 -0700 (PDT)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-235a3dd4f0dso14505095ad.0
-        for <linux-doc@vger.kernel.org>; Fri, 18 Jul 2025 09:11:32 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCWDK0QvM7TmPXSRryFDOsZAvu9Wx792Cb9LBiNr1HdfSgu2lFQqdcCLnn/FPLN0gFkcs11XJOhi0XA=@vger.kernel.org
-X-Received: by 2002:a17:903:2d1:b0:234:d2fb:2d28 with SMTP id
- d9443c01a7336-23e24ec73b2mr186837285ad.2.1752855091825; Fri, 18 Jul 2025
- 09:11:31 -0700 (PDT)
+	 To:Cc:Content-Type; b=EvYOj7GU2NUUVqVSTMOdyeb9Ojg7D81+RkbfWMX/syBjzX11Y14vHNmSBMnXoqL4lYU7yAlB4MczrcfnA31rixmhiWNYSAe1aoJ6GNGHtfpeAn4x/LRGMJRB20ze/X7tIRS1nnpHhrP0fKrb8JpaWqjJjN0AiMfdqZ4+BdrViCc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev; spf=pass smtp.mailfrom=antheas.dev; dkim=temperror (0-bit key) header.d=antheas.dev header.i=@antheas.dev header.b=hCq2gHor; arc=none smtp.client-ip=88.99.38.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=antheas.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=antheas.dev
+Received: from relay12 (localhost [127.0.0.1])
+	by relay12.grserver.gr (Proxmox) with ESMTP id 98F9ABE42E;
+	Fri, 18 Jul 2025 19:38:22 +0300 (EEST)
+Received: from linux3247.grserver.gr (linux3247.grserver.gr [213.158.90.240])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by relay12.grserver.gr (Proxmox) with ESMTPS id 35830BE408;
+	Fri, 18 Jul 2025 19:38:22 +0300 (EEST)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+	by linux3247.grserver.gr (Postfix) with ESMTPSA id 5D13E1FDAD2;
+	Fri, 18 Jul 2025 19:38:21 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=antheas.dev;
+	s=default; t=1752856701;
+	bh=T/KHd8xSTyD2a62npLK0GCGhjwX/ZOXYPvlAwzv4DnI=;
+	h=Received:From:Subject:To;
+	b=hCq2gHorp3QxPG8wzB7MCr6R7F0+9EjtImF1nVTQXMrdTXFdL7/bbi6wt7bmNCFDy
+	 iabIXZCU4XkPIwKiTbuG8hdwz4pCK+LGXXsr3i2/Ls7qHAGN7IXUbjYLs2t4akGPS/
+	 y3hrQJmSzrKwHInaVUra0294+hqYC1UbHuIerkdLP1CCZBn/1cwfjJTV5HZ9ON4sRD
+	 YPYuHB5H0vEmAE3sjoc0V08Ppo6axjk5OBSLZcwF/NIMCCphQpf/xZoifxA53fwtRJ
+	 g/9hG+JSlIubFlmtc/u0O176D3nXeoz+Y1JjFfu9gBZG/BPv3unggq2XVrpSNDmHVq
+	 t5Nd+nZ8OxJNg==
+Authentication-Results: linux3247.grserver.gr;
+        spf=pass (sender IP is 209.85.208.177) smtp.mailfrom=lkml@antheas.dev smtp.helo=mail-lj1-f177.google.com
+Received-SPF: pass (linux3247.grserver.gr: connection is authenticated)
+Received: by mail-lj1-f177.google.com with SMTP id
+ 38308e7fff4ca-32b595891d2so17893381fa.2;
+        Fri, 18 Jul 2025 09:38:21 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW3079P2V2AwKBo3MOg0WYRdCnB/UYR1dxqV79dSHbRvsfEgYU2sD4msgaRhm7/+IC90AIIgomi1vI=@vger.kernel.org,
+ AJvYcCWqJMPaETLOd09cFp8b+4YJdrTNajiSEzs4BywsrBTo73+/GwXAMAEJPVRRXke0bNKmGiuENKzCy0FS3z0=@vger.kernel.org,
+ AJvYcCXfeae9z3Ts3JXqlMtMCVr/dO9LnvzbEOA/ZNWvs+iR+Ltq5nyqvsZy+q5UFohvhxibRclU6+1S7XYIG4+v@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy82tVz2UyZN3w2aUdxvUDY0kKBLvLhWmjMsfVL5Itnd0V+D0Hg
+	QCmAfBIM0Kgf//EwzOBDuCHZ0fuveT2Xr7BxAP9N7UhFGm2xfvxE5NZiG/t8Qo68ma6L7DLW4T7
+	lLSZpMXABsC4WLAf+S1me278vxdd3dYo=
+X-Google-Smtp-Source: 
+ AGHT+IH2EOYwVpYNC/dzFgzHOVWnAxLuBk2IBVmgSEVg2YWME1umiaot9LuowLPm+vix6mRC2tvBW2r1o/qDyjmuZqg=
+X-Received: by 2002:a05:651c:419c:b0:32b:755e:6cd4 with SMTP id
+ 38308e7fff4ca-330a7c5726fmr8906081fa.38.1752856700745; Fri, 18 Jul 2025
+ 09:38:20 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250717164053.284969-1-me@brighamcampbell.com> <20250717164053.284969-3-me@brighamcampbell.com>
-In-Reply-To: <20250717164053.284969-3-me@brighamcampbell.com>
-From: Doug Anderson <dianders@chromium.org>
-Date: Fri, 18 Jul 2025 09:11:20 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=Vrp9MM_5de10sV-TC_mp-D7en9gjU8DBoD6mBrRvF2eg@mail.gmail.com>
-X-Gm-Features: Ac12FXz3KKf6EYjEda0vjUCQyFQVXEd84VY4Ny25pnbUOfssxeUq4v1dFeHX4UU
-Message-ID: <CAD=FV=Vrp9MM_5de10sV-TC_mp-D7en9gjU8DBoD6mBrRvF2eg@mail.gmail.com>
-Subject: Re: [PATCH v4 2/4] drm/panel: jdi-lpm102a188a: Fix bug and clean up driver
-To: Brigham Campbell <me@brighamcampbell.com>
-Cc: tejasvipin76@gmail.com, diogo.ivo@tecnico.ulisboa.pt, 
-	skhan@linuxfoundation.org, linux-kernel-mentees@lists.linux.dev, 
-	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Jessica Zhang <jessica.zhang@oss.qualcomm.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+References: <20250314-gpd_fan-v6-0-1dc992050e42@gmail.com>
+ <20250314-gpd_fan-v6-1-1dc992050e42@gmail.com>
+ <CAGwozwENLOOS5q1Bs5SEh3FFJAY-=kcVimf5U+tWzy6HaiGd=g@mail.gmail.com>
+ <bb57fe1d-fde9-45f8-9f5c-0836a6e557ff@roeck-us.net>
+In-Reply-To: <bb57fe1d-fde9-45f8-9f5c-0836a6e557ff@roeck-us.net>
+From: Antheas Kapenekakis <lkml@antheas.dev>
+Date: Fri, 18 Jul 2025 18:38:09 +0200
+X-Gmail-Original-Message-ID: 
+ <CAGwozwGdZ5tzHg7_TF5d_AWVDmypP987XS-x_GWqrSF81PiG2Q@mail.gmail.com>
+X-Gm-Features: Ac12FXy0Tx-o6uIT1821wM3-KJwlgmKE7INI2kkaYx6M9jkGi9kwYvBZc7x-lOg
+Message-ID: 
+ <CAGwozwGdZ5tzHg7_TF5d_AWVDmypP987XS-x_GWqrSF81PiG2Q@mail.gmail.com>
+Subject: Re: [PATCH v6 1/2] hwmon: add GPD devices sensor driver
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: Cryolitia@gmail.com, Jean Delvare <jdelvare@suse.com>,
+	Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+ linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org, Celeste Liu <CoelacanthusHex@gmail.com>,
+	Yao Zi <ziyao@disroot.org>, Derek John Clark <derekjohn.clark@gmail.com>,
+	=?UTF-8?Q?Marcin_Str=C4=85gowski?= <marcin@stragowski.com>,
+	someone5678 <someone5678.dev@gmail.com>,
+ Justin Weiss <justin@justinweiss.com>,
+	command_block <mtf@ik.me>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-PPP-Message-ID: 
+ <175285670187.3291495.16286230662434257056@linux3247.grserver.gr>
+X-PPP-Vhost: antheas.dev
+X-Virus-Scanned: clamav-milter 1.0.9 at linux3247.grserver.gr
+X-Virus-Status: Clean
 
-Hi,
-
-On Thu, Jul 17, 2025 at 9:41=E2=80=AFAM Brigham Campbell <me@brighamcampbel=
-l.com> wrote:
+On Thu, 17 Jul 2025 at 04:32, Guenter Roeck <linux@roeck-us.net> wrote:
 >
->  static int jdi_panel_prepare(struct drm_panel *panel)
->  {
->         struct jdi_panel *jdi =3D to_panel_jdi(panel);
-> +       struct mipi_dsi_multi_context dsi_ctx =3D { .accum_err =3D 0 };
+> On 3/13/25 13:58, Antheas Kapenekakis wrote:
+> > On Thu, 13 Mar 2025 at 21:10, Cryolitia PukNgae via B4 Relay
+> > <devnull+Cryolitia.gmail.com@kernel.org> wrote:
+> >>
+> >> From: Cryolitia PukNgae <Cryolitia@gmail.com>
+> >>
+> >> Sensors driver for GPD Handhelds that expose fan reading and control via
+> >> hwmon sysfs.
+> >>
+> >> Shenzhen GPD Technology Co., Ltd. manufactures a series of handheld
+> >> devices. This driver implements these functions through x86 port-mapped IO.
+> >>
+> >> Signed-off-by: Cryolitia PukNgae <Cryolitia@gmail.com>
+> >> ---
+> >>   MAINTAINERS             |   6 +
+> >>   drivers/hwmon/Kconfig   |  10 +
+> >>   drivers/hwmon/Makefile  |   1 +
+> >>   drivers/hwmon/gpd-fan.c | 681 ++++++++++++++++++++++++++++++++++++++++++++++++
+> >>   4 files changed, 698 insertions(+)
+> >>
+> >> diff --git a/MAINTAINERS b/MAINTAINERS
+> >> index 0fa7c5728f1e64d031f4a47b6fce1db484ce0fc2..777ba74ccb07ccc0840c3cd34e7b4d98d726f964 100644
+> >> --- a/MAINTAINERS
+> >> +++ b/MAINTAINERS
+> >> @@ -9762,6 +9762,12 @@ F:       drivers/phy/samsung/phy-gs101-ufs.c
+> >>   F:     include/dt-bindings/clock/google,gs101.h
+> >>   K:     [gG]oogle.?[tT]ensor
+> >>
+> >> +GPD FAN DRIVER
+> >> +M:     Cryolitia PukNgae <Cryolitia@gmail.com>
+> >> +L:     linux-hwmon@vger.kernel.org
+> >> +S:     Maintained
+> >> +F:     drivers/hwmon/gpd-fan.c
+> >
+> > A problem we had with oxp sensors is that once OneXPlayer expanded
+> > their EC to include e.g., battery capacity limits, it was no longer
+> > appropriate for it to reside in hwmon. I expect GPD to do the same
+> > sometime in the near future. If that is the case, should we
+> > futureproof the driver by moving it to platform-x86 right away?
+> >
+>
+> My problem with platform drivers, especially with x86 platform drivers,
+> including the OneXPlayer driver, is that the developers responsible for
+> those drivers refrain from implementing the client drivers as auxiliary
+> drivers but instead like to bundle everything into a non-subsystem
+> directory. I have always wondered why that is the case. My best guess
+> is that it is to limit and/or avoid subsystem maintainer oversight.
+> Does that work out for you ?
 
-nit: can just be this:
+Particularly for simple ECs such as OneXPlayer and GPD boards I think
+keeping all the addresses in the same file makes sense. E.g., I just
+sent a Fixes for the OneXPlayer G1 AMD variant and it was one commit
+instead of 2 or 3. At least for me it was practical, I did not
+consider having a lesser oversight as a benefit when making that
+choice.
 
-struct mipi_dsi_multi_context dsi_ctx =3D {};
+But I do understand the concern.
 
-This looks so nice and clean now! :-) I'd bet that the compiled size
-of the code is also quite a bit smaller as well...
+Antheas
 
-Reviewed-by: Douglas Anderson <dianders@chromium.org>
+> Not objecting, I am just curious.
+>
+> Guenter
+>
+>
+
 
