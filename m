@@ -1,267 +1,1097 @@
-Return-Path: <linux-doc+bounces-53558-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53560-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5C65B0BD8D
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Jul 2025 09:20:45 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 443A1B0BED0
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Jul 2025 10:27:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3B2D2189CD6F
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Jul 2025 07:21:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 22ECC17D239
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Jul 2025 08:26:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7BE7A28152D;
-	Mon, 21 Jul 2025 07:20:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 82C0D2877C4;
+	Mon, 21 Jul 2025 08:25:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="jZ3HBTX0";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="d2wkt+pw";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="Mu+Urtox";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="buNlm4c1"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="MHWr4vmv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B24E4221FDC
-	for <linux-doc@vger.kernel.org>; Mon, 21 Jul 2025 07:20:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA794286D50
+	for <linux-doc@vger.kernel.org>; Mon, 21 Jul 2025 08:25:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753082440; cv=none; b=HYjZ8E6Mn4X3qLJG7BT3VH8tw5QjD7mkZuNNYYCaTMjxEre5tIkZxouj3V9o7/iuJrZdOEoe31ivG/b42bhrBpe+AmScvJddZ0NykyBlCk0JvMSSuoT1khfZ0ZYpMev2BazQuHP2BAG1HCa++1FxkuE9uEWjkuYib1u6yJZjyOo=
+	t=1753086303; cv=none; b=gCLGJhyH0muCAwU3jHGJnoJVcvka5j5/dI2nKA2/sA13eW2eEPVxiQ+T2ZLN5h6N4gCbosyU32gb+0EBTvP3HNDk/oxjS9qLKzAmTPurZnAfW+7ikp7XIvbzHyxmOEs6KezPG8LPDGhZ3sP/AlbWv8tVUOmpUQUNGBt/sR9WZA4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753082440; c=relaxed/simple;
-	bh=vhyVaF+VwSE5Nv0XurRTY1XyiQX0w0q56TQFEO1m5HY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Dmu41y4iGefiA+8ILv5cYB/mQWRbmonuLlt3lRz+9d/diDMN4utnvECmokEs6o88cG24h24/u5OMETLZz8JhZiJ9JaAD0HHDum1WFAh9pDo2QPqbGIhTNutWYxoCvPusVWSymuSkjDNOj/WVOjFHnkt162xPEAO9YPG+31oau9s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=jZ3HBTX0; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=d2wkt+pw; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=Mu+Urtox; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=buNlm4c1; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	s=arc-20240116; t=1753086303; c=relaxed/simple;
+	bh=YF3Zs+lTFKQuTNQ8XT13bw9XUnyalmK79oYC57L6+Yw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=DWU9JDROUlm8Z/gv3FvIekz3ryKb5pw6fGQQ4JE2Gk1CHSEqy1NUAB5Hgv3qbrJWEezbEeofPUULv0jSMviNMjPczYIh819l66GWrvrvpGm0K8LC4uNh1j0cxcSAfTTpPrPSmyXUXwXbTQ7T9hFtOc9HGq5q0tKoQVN12ReZvlY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=MHWr4vmv; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1753086300;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6k/FmSevEF5yFErWOF/sff5A8U3b2lGj0tKTgrYZvJo=;
+	b=MHWr4vmv0jW2aidPq7Ykf4gJP06kuRf4hh+diWjeeD18ecugnimGUU7RuLfkmg1RwSPGHZ
+	XpHJSkwL/nHDSKXgN8Oq28SIq/nmhbC+AVdfBWxAvhEBOaM3X3a59NBqHuf5ilIbQSvYp8
+	AofByHy7jJUFPRxNchiMEMZsRtQIQB0=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-632-qK0cpccEOkesV5OtM1BvIg-1; Mon,
+ 21 Jul 2025 04:24:56 -0400
+X-MC-Unique: qK0cpccEOkesV5OtM1BvIg-1
+X-Mimecast-MFC-AGG-ID: qK0cpccEOkesV5OtM1BvIg_1753086295
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id CC2B8219A0;
-	Mon, 21 Jul 2025 07:20:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1753082437; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=atEYXapJNnnWn8WFmFtauKP7GSe+7FXB/M3FFuUsqa4=;
-	b=jZ3HBTX0CQ7c/Ptl9GfsB1uL2ExxFxKAzgBtWDbRlE6TbYU82Ro1wt+ycMdCJST3OtHAlU
-	VX5RcSfMRwWMTfUlcQjWoujCAER+BQjZxs1lcpvdHXkJs342qJubD0MGIlDUK25t5vFj1L
-	m5KeAwuKWmekKeZUt30hZ1cC6auIwyo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1753082437;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=atEYXapJNnnWn8WFmFtauKP7GSe+7FXB/M3FFuUsqa4=;
-	b=d2wkt+pwCPZ1vaaQec6JULv21XTfvKFIVhDzgLz4yPwNiGdY3aiv+qFbU4g+SzbjrQcnFK
-	2+nm0joAnjh1ZnCw==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Mu+Urtox;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=buNlm4c1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1753082436; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=atEYXapJNnnWn8WFmFtauKP7GSe+7FXB/M3FFuUsqa4=;
-	b=Mu+UrtoxzK+ewffTpYQLB4IBi3g0ZV7SHg7W0Faio/DK3vr7WfgO7cJ6xs3qOiMcQ9NHP1
-	oInBngiTWi+Aq/qXXdb1Rh5Jc/jOg/FXGH3JZ6O0Y6arYZJJqzH/KhAuAInouYrxYOAER2
-	65bGKJI05IqQCBRrNfEhGL90YNpcspI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1753082436;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=atEYXapJNnnWn8WFmFtauKP7GSe+7FXB/M3FFuUsqa4=;
-	b=buNlm4c1erxrBD/sojvPYEK1IC6uwqKYy4SwP3GHMz9tN1QhhB2iyorSCdFRhrdtRUuwNA
-	KJabPUZErTuu6pDw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3EA23136A8;
-	Mon, 21 Jul 2025 07:20:36 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id +TmsDUTqfWhcXAAAD6G6ig
-	(envelope-from <hare@suse.de>); Mon, 21 Jul 2025 07:20:36 +0000
-Message-ID: <ef2bd059-e32d-41a2-bb33-da0621d7ff02@suse.de>
-Date: Mon, 21 Jul 2025 09:20:35 +0200
+	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id C794219560B5;
+	Mon, 21 Jul 2025 08:24:54 +0000 (UTC)
+Received: from gmonaco-thinkpadt14gen3.rmtit.com (unknown [10.44.32.136])
+	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 714A2195608D;
+	Mon, 21 Jul 2025 08:24:49 +0000 (UTC)
+From: Gabriele Monaco <gmonaco@redhat.com>
+To: linux-kernel@vger.kernel.org,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: Gabriele Monaco <gmonaco@redhat.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Nam Cao <namcao@linutronix.de>,
+	Tomas Glozar <tglozar@redhat.com>,
+	Juri Lelli <jlelli@redhat.com>,
+	Clark Williams <williams@redhat.com>,
+	John Kacur <jkacur@redhat.com>
+Subject: [PATCH v4 12/14] rv: Replace tss and sncid monitors with more complete sts
+Date: Mon, 21 Jul 2025 10:23:22 +0200
+Message-ID: <20250721082325.71554-13-gmonaco@redhat.com>
+In-Reply-To: <20250721082325.71554-1-gmonaco@redhat.com>
+References: <20250721082325.71554-1-gmonaco@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/11] md/md-llbitmap: introduce new lockless bitmap
-To: Yu Kuai <yukuai1@huaweicloud.com>, corbet@lwn.net, agk@redhat.com,
- snitzer@kernel.org, mpatocka@redhat.com, song@kernel.org
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- dm-devel@lists.linux.dev, linux-raid@vger.kernel.org, yi.zhang@huawei.com,
- yangerkun@huawei.com, johnny.chenyi@huawei.com,
- "yukuai (C)" <yukuai3@huawei.com>
-References: <20250718092336.3346644-1-yukuai1@huaweicloud.com>
- <20250718092336.3346644-12-yukuai1@huaweicloud.com>
- <04ba77bb-464d-4b98-91e6-4225204ae679@suse.de>
- <bc215f88-a652-090f-ae99-8aaba6c591c4@huaweicloud.com>
-Content-Language: en-US
-From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <bc215f88-a652-090f-ae99-8aaba6c591c4@huaweicloud.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-Rspamd-Queue-Id: CC2B8219A0
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-4.51 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:mid,suse.de:email];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	DKIM_TRACE(0.00)[suse.de:+]
-X-Spam-Score: -4.51
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
 
-On 7/21/25 09:12, Yu Kuai wrote:
-> Hi,
-> 
-> 在 2025/07/21 14:20, Hannes Reinecke 写道:
->> On 7/18/25 11:23, Yu Kuai wrote:
->>> From: Yu Kuai <yukuai3@huawei.com>
->>>
-> 
->>> +
->>> +#define BITMAP_DATA_OFFSET 1024
->>> +
->>> +/* 64k is the max IO size of sync IO for raid1/raid10 */
->>> +#define MIN_CHUNK_SIZE (64 * 2)
->>> +
->>
->> Hmm? Which one is it?
->> Comment says 'max IO size', but it's called 'MIN_CHUNK_SIZE'...
-> 
-> max IO size here means the internal recovery IO size for raid1/10,
-> and we're handling at most one llbimtap bit(chunksie) at a time, so
-> chunksize should be at least 64k, otherwise recovery IO size will be
-> less.
-> 
-Okay.
+The tss monitor currently guarantees task switches can happen only while
+scheduling, whereas the sncid monitor enforces scheduling occurs with
+interrupt disabled.
 
->>> +/*
->>> + * Dirtied bits that have not been accessed for more than 5s will be 
->>> cleared
->>> + * by daemon.
->>> + */
->>> +#define BARRIER_IDLE 5
->>> +
->>
->> Should this be changeable, too?
-> 
-> Yes, idealy this should. Perhaps a new sysfs api?
-> 
-Yes, similarly to the daemon_delay one.
+Replace the monitors with a more comprehensive specification which
+implies both but also ensures that:
+* each scheduler call disable interrupts to switch
+* each task switch happens with interrupts disabled
 
->>
-> 
->>> +    if (!test_bit(LLPageDirty, &pctl->flags))
->>> +        set_bit(LLPageDirty, &pctl->flags);
->>> +
->>> +    /*
->>> +     * The subpage usually contains a total of 512 bits. If any 
->>> single bit
->>> +     * within the subpage is marked as dirty, the entire sector will be
->>> +     * written. To avoid impacting write performance, when multiple 
->>> bits
->>> +     * within the same sector are modified within a short time 
->>> frame, all
->>> +     * bits in the sector will be collectively marked as dirty at once.
->>> +     */
->>
->> How short is the 'short timeframe'?
->> Is this the BARRIER_IDLE setting?
->> Please clarify.
-> 
-> Yes, if the page is not accessed for BARRIER_IDLE seconds.
-> 
-Please update the comment to refer to that.
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Peter Zijlstra <peterz@infradead.org>
 
->>> +static struct page *llbitmap_read_page(struct llbitmap *llbitmap, 
->>> int idx)
->>> +{
->>> +    struct mddev *mddev = llbitmap->mddev;
->>> +    struct page *page = NULL;
->>> +    struct md_rdev *rdev;
->>> +
->>> +    if (llbitmap->pctl && llbitmap->pctl[idx])
->>> +        page = llbitmap->pctl[idx]->page;
->>> +    if (page)
->>> +        return page;
->>> +
->>> +    page = alloc_page(GFP_KERNEL | __GFP_ZERO);
->>> +    if (!page)
->>> +        return ERR_PTR(-ENOMEM);
->>> +
->>> +    rdev_for_each(rdev, mddev) {
->>> +        sector_t sector;
->>> +
->>> +        if (rdev->raid_disk < 0 || test_bit(Faulty, &rdev->flags))
->>> +            continue;
->>> +
->>> +        sector = mddev->bitmap_info.offset +
->>> +             (idx << PAGE_SECTORS_SHIFT);
->>> +
->>> +        if (sync_page_io(rdev, sector, PAGE_SIZE, page, REQ_OP_READ,
->>> +                 true))
->>> +            return page;
->>> +
->>> +        md_error(mddev, rdev);
->>> +    }
->>> +
->>> +    __free_page(page);
->>> +    return ERR_PTR(-EIO);
->>> +}
->>> +
->>
->> Have you considered moving to folios here?
->>
-> 
-> Of course, however, because the md high level helpers is still using
-> page, I'm thinking about using page for now, which is simpler, and
-> moving to folios for all md code later.
-> 
-> 
-Fair enough.
+fixup sts remove sncid
 
-Cheers,
+Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
+---
+ Documentation/trace/rv/monitor_sched.rst      |  87 +++++-----
+ kernel/trace/rv/Kconfig                       |   3 +-
+ kernel/trace/rv/Makefile                      |   3 +-
+ kernel/trace/rv/monitors/sncid/Kconfig        |  15 --
+ kernel/trace/rv/monitors/sncid/sncid.c        |  95 -----------
+ kernel/trace/rv/monitors/sncid/sncid.h        |  49 ------
+ kernel/trace/rv/monitors/sncid/sncid_trace.h  |  15 --
+ kernel/trace/rv/monitors/sts/Kconfig          |  19 +++
+ kernel/trace/rv/monitors/sts/sts.c            | 156 ++++++++++++++++++
+ kernel/trace/rv/monitors/sts/sts.h            | 117 +++++++++++++
+ .../{tss/tss_trace.h => sts/sts_trace.h}      |   8 +-
+ kernel/trace/rv/monitors/tss/Kconfig          |  14 --
+ kernel/trace/rv/monitors/tss/tss.c            |  90 ----------
+ kernel/trace/rv/monitors/tss/tss.h            |  47 ------
+ kernel/trace/rv/rv_trace.h                    |   3 +-
+ tools/verification/models/sched/sncid.dot     |  18 --
+ tools/verification/models/sched/sts.dot       |  38 +++++
+ tools/verification/models/sched/tss.dot       |  18 --
+ 18 files changed, 385 insertions(+), 410 deletions(-)
+ delete mode 100644 kernel/trace/rv/monitors/sncid/Kconfig
+ delete mode 100644 kernel/trace/rv/monitors/sncid/sncid.c
+ delete mode 100644 kernel/trace/rv/monitors/sncid/sncid.h
+ delete mode 100644 kernel/trace/rv/monitors/sncid/sncid_trace.h
+ create mode 100644 kernel/trace/rv/monitors/sts/Kconfig
+ create mode 100644 kernel/trace/rv/monitors/sts/sts.c
+ create mode 100644 kernel/trace/rv/monitors/sts/sts.h
+ rename kernel/trace/rv/monitors/{tss/tss_trace.h => sts/sts_trace.h} (67%)
+ delete mode 100644 kernel/trace/rv/monitors/tss/Kconfig
+ delete mode 100644 kernel/trace/rv/monitors/tss/tss.c
+ delete mode 100644 kernel/trace/rv/monitors/tss/tss.h
+ delete mode 100644 tools/verification/models/sched/sncid.dot
+ create mode 100644 tools/verification/models/sched/sts.dot
+ delete mode 100644 tools/verification/models/sched/tss.dot
 
-Hannes
+diff --git a/Documentation/trace/rv/monitor_sched.rst b/Documentation/trace/rv/monitor_sched.rst
+index 24b2c62a3bc26..6c4c00216c07a 100644
+--- a/Documentation/trace/rv/monitor_sched.rst
++++ b/Documentation/trace/rv/monitor_sched.rst
+@@ -40,26 +40,6 @@ defined in by Daniel Bristot in [1].
+ 
+ Currently we included the following:
+ 
+-Monitor tss
+-~~~~~~~~~~~
+-
+-The task switch while scheduling (tss) monitor ensures a task switch happens
+-only in scheduling context, that is inside a call to `__schedule`::
+-
+-                     |
+-                     |
+-                     v
+-                   +-----------------+
+-                   |     thread      | <+
+-                   +-----------------+  |
+-                     |                  |
+-                     | schedule_entry   | schedule_exit
+-                     v                  |
+-    sched_switch                        |
+-  +---------------                      |
+-  |                       sched         |
+-  +-------------->                     -+
+-
+ Monitor sco
+ ~~~~~~~~~~~
+ 
+@@ -144,26 +124,55 @@ does not enable preemption::
+                                                   |
+                           scheduling_contex      -+
+ 
+-Monitor sncid
+-~~~~~~~~~~~~~
+-
+-The schedule not called with interrupt disabled (sncid) monitor ensures
+-schedule is not called with interrupt disabled::
++Monitor sts
++~~~~~~~~~~~
+ 
+-                       |
+-                       |
+-                       v
+-    schedule_entry   +--------------+
+-    schedule_exit    |              |
+-  +----------------- |  can_sched   |
+-  |                  |              |
+-  +----------------> |              | <+
+-                     +--------------+  |
+-                       |               |
+-                       | irq_disable   | irq_enable
+-                       v               |
+-                                       |
+-                        cant_sched    -+
++The schedule implies task switch (sts) monitor ensures a task switch happens
++only in scheduling context and up to once, as well as scheduling occurs with
++interrupts enabled but no task switch can happen before interrupts are
++disabled. When the next task picked for execution is the same as the previously
++running one, no real task switch occurs but interrupts are disabled nonetheless::
++
++    irq_entry                      |
++     +----+                        |
++     v    |                        v
++ +------------+ irq_enable    #===================#   irq_disable
++ |            | ------------> H                   H   irq_entry
++ | cant_sched | <------------ H                   H   irq_enable
++ |            | irq_disable   H     can_sched     H --------------+
++ +------------+               H                   H               |
++                              H                   H               |
++            +---------------> H                   H <-------------+
++            |                 #===================#
++            |                   |
++      schedule_exit             | schedule_entry
++            |                   v
++            |   +-------------------+     irq_enable
++            |   |    scheduling     | <---------------+
++            |   +-------------------+                 |
++            |     |                                   |
++            |     | irq_disable                    +--------+  irq_entry
++            |     v                                |        | --------+
++            |   +-------------------+  irq_entry   | in_irq |         |
++            |   |                   | -----------> |        | <-------+
++            |   | disable_to_switch |              +--------+
++            |   |                   | --+
++            |   +-------------------+   |
++            |     |                     |
++            |     | sched_switch        |
++            |     v                     |
++            |   +-------------------+   |
++            |   |     switching     |   | irq_enable
++            |   +-------------------+   |
++            |     |                     |
++            |     | irq_enable          |
++            |     v                     |
++            |   +-------------------+   |
++            +-- |  enable_to_exit   | <-+
++                +-------------------+
++                  ^               | irq_disable
++                  |               | irq_entry
++                  +---------------+ irq_enable
+ 
+ References
+ ----------
+diff --git a/kernel/trace/rv/Kconfig b/kernel/trace/rv/Kconfig
+index 34164eb4ec913..b688b24081c8e 100644
+--- a/kernel/trace/rv/Kconfig
++++ b/kernel/trace/rv/Kconfig
+@@ -50,12 +50,11 @@ source "kernel/trace/rv/monitors/wip/Kconfig"
+ source "kernel/trace/rv/monitors/wwnr/Kconfig"
+ 
+ source "kernel/trace/rv/monitors/sched/Kconfig"
+-source "kernel/trace/rv/monitors/tss/Kconfig"
+ source "kernel/trace/rv/monitors/sco/Kconfig"
+ source "kernel/trace/rv/monitors/snroc/Kconfig"
+ source "kernel/trace/rv/monitors/scpd/Kconfig"
+ source "kernel/trace/rv/monitors/snep/Kconfig"
+-source "kernel/trace/rv/monitors/sncid/Kconfig"
++source "kernel/trace/rv/monitors/sts/Kconfig"
+ # Add new sched monitors here
+ 
+ source "kernel/trace/rv/monitors/rtapp/Kconfig"
+diff --git a/kernel/trace/rv/Makefile b/kernel/trace/rv/Makefile
+index 13ec2944c6650..1939d3d7621c6 100644
+--- a/kernel/trace/rv/Makefile
++++ b/kernel/trace/rv/Makefile
+@@ -6,15 +6,14 @@ obj-$(CONFIG_RV) += rv.o
+ obj-$(CONFIG_RV_MON_WIP) += monitors/wip/wip.o
+ obj-$(CONFIG_RV_MON_WWNR) += monitors/wwnr/wwnr.o
+ obj-$(CONFIG_RV_MON_SCHED) += monitors/sched/sched.o
+-obj-$(CONFIG_RV_MON_TSS) += monitors/tss/tss.o
+ obj-$(CONFIG_RV_MON_SCO) += monitors/sco/sco.o
+ obj-$(CONFIG_RV_MON_SNROC) += monitors/snroc/snroc.o
+ obj-$(CONFIG_RV_MON_SCPD) += monitors/scpd/scpd.o
+ obj-$(CONFIG_RV_MON_SNEP) += monitors/snep/snep.o
+-obj-$(CONFIG_RV_MON_SNCID) += monitors/sncid/sncid.o
+ obj-$(CONFIG_RV_MON_RTAPP) += monitors/rtapp/rtapp.o
+ obj-$(CONFIG_RV_MON_PAGEFAULT) += monitors/pagefault/pagefault.o
+ obj-$(CONFIG_RV_MON_SLEEP) += monitors/sleep/sleep.o
++obj-$(CONFIG_RV_MON_STS) += monitors/sts/sts.o
+ # Add new monitors here
+ obj-$(CONFIG_RV_REACTORS) += rv_reactors.o
+ obj-$(CONFIG_RV_REACT_PRINTK) += reactor_printk.o
+diff --git a/kernel/trace/rv/monitors/sncid/Kconfig b/kernel/trace/rv/monitors/sncid/Kconfig
+deleted file mode 100644
+index 3a5639feaaaf6..0000000000000
+--- a/kernel/trace/rv/monitors/sncid/Kconfig
++++ /dev/null
+@@ -1,15 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0-only
+-#
+-config RV_MON_SNCID
+-	depends on RV
+-	depends on TRACE_IRQFLAGS
+-	depends on RV_MON_SCHED
+-	default y
+-	select DA_MON_EVENTS_IMPLICIT
+-	bool "sncid monitor"
+-	help
+-	  Monitor to ensure schedule is not called with interrupt disabled.
+-	  This monitor is part of the sched monitors collection.
+-
+-	  For further information, see:
+-	    Documentation/trace/rv/monitor_sched.rst
+diff --git a/kernel/trace/rv/monitors/sncid/sncid.c b/kernel/trace/rv/monitors/sncid/sncid.c
+deleted file mode 100644
+index c8491f4263650..0000000000000
+--- a/kernel/trace/rv/monitors/sncid/sncid.c
++++ /dev/null
+@@ -1,95 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-#include <linux/ftrace.h>
+-#include <linux/tracepoint.h>
+-#include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/init.h>
+-#include <linux/rv.h>
+-#include <rv/instrumentation.h>
+-#include <rv/da_monitor.h>
+-
+-#define MODULE_NAME "sncid"
+-
+-#include <trace/events/sched.h>
+-#include <trace/events/preemptirq.h>
+-#include <rv_trace.h>
+-#include <monitors/sched/sched.h>
+-
+-#include "sncid.h"
+-
+-static struct rv_monitor rv_sncid;
+-DECLARE_DA_MON_PER_CPU(sncid, unsigned char);
+-
+-static void handle_irq_disable(void *data, unsigned long ip, unsigned long parent_ip)
+-{
+-	da_handle_event_sncid(irq_disable_sncid);
+-}
+-
+-static void handle_irq_enable(void *data, unsigned long ip, unsigned long parent_ip)
+-{
+-	da_handle_start_event_sncid(irq_enable_sncid);
+-}
+-
+-static void handle_schedule_entry(void *data, bool preempt)
+-{
+-	da_handle_start_event_sncid(schedule_entry_sncid);
+-}
+-
+-static void handle_schedule_exit(void *data, bool is_switch)
+-{
+-	da_handle_start_event_sncid(schedule_exit_sncid);
+-}
+-
+-static int enable_sncid(void)
+-{
+-	int retval;
+-
+-	retval = da_monitor_init_sncid();
+-	if (retval)
+-		return retval;
+-
+-	rv_attach_trace_probe("sncid", irq_disable, handle_irq_disable);
+-	rv_attach_trace_probe("sncid", irq_enable, handle_irq_enable);
+-	rv_attach_trace_probe("sncid", sched_entry_tp, handle_schedule_entry);
+-	rv_attach_trace_probe("sncid", sched_exit_tp, handle_schedule_exit);
+-
+-	return 0;
+-}
+-
+-static void disable_sncid(void)
+-{
+-	rv_sncid.enabled = 0;
+-
+-	rv_detach_trace_probe("sncid", irq_disable, handle_irq_disable);
+-	rv_detach_trace_probe("sncid", irq_enable, handle_irq_enable);
+-	rv_detach_trace_probe("sncid", sched_entry_tp, handle_schedule_entry);
+-	rv_detach_trace_probe("sncid", sched_exit_tp, handle_schedule_exit);
+-
+-	da_monitor_destroy_sncid();
+-}
+-
+-static struct rv_monitor rv_sncid = {
+-	.name = "sncid",
+-	.description = "schedule not called with interrupt disabled.",
+-	.enable = enable_sncid,
+-	.disable = disable_sncid,
+-	.reset = da_monitor_reset_all_sncid,
+-	.enabled = 0,
+-};
+-
+-static int __init register_sncid(void)
+-{
+-	return rv_register_monitor(&rv_sncid, &rv_sched);
+-}
+-
+-static void __exit unregister_sncid(void)
+-{
+-	rv_unregister_monitor(&rv_sncid);
+-}
+-
+-module_init(register_sncid);
+-module_exit(unregister_sncid);
+-
+-MODULE_LICENSE("GPL");
+-MODULE_AUTHOR("Gabriele Monaco <gmonaco@redhat.com>");
+-MODULE_DESCRIPTION("sncid: schedule not called with interrupt disabled.");
+diff --git a/kernel/trace/rv/monitors/sncid/sncid.h b/kernel/trace/rv/monitors/sncid/sncid.h
+deleted file mode 100644
+index 21304725142bc..0000000000000
+--- a/kernel/trace/rv/monitors/sncid/sncid.h
++++ /dev/null
+@@ -1,49 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Automatically generated C representation of sncid automaton
+- * For further information about this format, see kernel documentation:
+- *   Documentation/trace/rv/deterministic_automata.rst
+- */
+-
+-enum states_sncid {
+-	can_sched_sncid = 0,
+-	cant_sched_sncid,
+-	state_max_sncid
+-};
+-
+-#define INVALID_STATE state_max_sncid
+-
+-enum events_sncid {
+-	irq_disable_sncid = 0,
+-	irq_enable_sncid,
+-	schedule_entry_sncid,
+-	schedule_exit_sncid,
+-	event_max_sncid
+-};
+-
+-struct automaton_sncid {
+-	char *state_names[state_max_sncid];
+-	char *event_names[event_max_sncid];
+-	unsigned char function[state_max_sncid][event_max_sncid];
+-	unsigned char initial_state;
+-	bool final_states[state_max_sncid];
+-};
+-
+-static const struct automaton_sncid automaton_sncid = {
+-	.state_names = {
+-		"can_sched",
+-		"cant_sched"
+-	},
+-	.event_names = {
+-		"irq_disable",
+-		"irq_enable",
+-		"schedule_entry",
+-		"schedule_exit"
+-	},
+-	.function = {
+-		{ cant_sched_sncid,   INVALID_STATE, can_sched_sncid, can_sched_sncid },
+-		{    INVALID_STATE, can_sched_sncid,   INVALID_STATE,   INVALID_STATE },
+-	},
+-	.initial_state = can_sched_sncid,
+-	.final_states = { 1, 0 },
+-};
+diff --git a/kernel/trace/rv/monitors/sncid/sncid_trace.h b/kernel/trace/rv/monitors/sncid/sncid_trace.h
+deleted file mode 100644
+index 3ce42a57671d4..0000000000000
+--- a/kernel/trace/rv/monitors/sncid/sncid_trace.h
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-
+-/*
+- * Snippet to be included in rv_trace.h
+- */
+-
+-#ifdef CONFIG_RV_MON_SNCID
+-DEFINE_EVENT(event_da_monitor, event_sncid,
+-	     TP_PROTO(char *state, char *event, char *next_state, bool final_state),
+-	     TP_ARGS(state, event, next_state, final_state));
+-
+-DEFINE_EVENT(error_da_monitor, error_sncid,
+-	     TP_PROTO(char *state, char *event),
+-	     TP_ARGS(state, event));
+-#endif /* CONFIG_RV_MON_SNCID */
+diff --git a/kernel/trace/rv/monitors/sts/Kconfig b/kernel/trace/rv/monitors/sts/Kconfig
+new file mode 100644
+index 0000000000000..7d1ff0f6fc91e
+--- /dev/null
++++ b/kernel/trace/rv/monitors/sts/Kconfig
+@@ -0,0 +1,19 @@
++# SPDX-License-Identifier: GPL-2.0-only
++#
++config RV_MON_STS
++	depends on RV
++	depends on TRACE_IRQFLAGS
++	depends on RV_MON_SCHED
++	default y
++	select DA_MON_EVENTS_IMPLICIT
++	bool "sts monitor"
++	help
++	  Monitor to ensure relationships between scheduler and task switches
++	   * the scheduler is called and returns with interrupts disabled
++	   * each call to the scheduler has up to one switch
++	   * switches only happen inside the scheduler
++	   * each call to the scheduler disables interrupts to switch
++	  This monitor is part of the sched monitors collection.
++
++	  For further information, see:
++	    Documentation/trace/rv/monitor_sched.rst
+diff --git a/kernel/trace/rv/monitors/sts/sts.c b/kernel/trace/rv/monitors/sts/sts.c
+new file mode 100644
+index 0000000000000..c4a9cd67c1d21
+--- /dev/null
++++ b/kernel/trace/rv/monitors/sts/sts.c
+@@ -0,0 +1,156 @@
++// SPDX-License-Identifier: GPL-2.0
++#include <linux/ftrace.h>
++#include <linux/tracepoint.h>
++#include <linux/kernel.h>
++#include <linux/module.h>
++#include <linux/init.h>
++#include <linux/rv.h>
++#include <rv/instrumentation.h>
++#include <rv/da_monitor.h>
++
++#define MODULE_NAME "sts"
++
++#include <trace/events/sched.h>
++#include <trace/events/irq.h>
++#include <trace/events/preemptirq.h>
++#include <rv_trace.h>
++#include <monitors/sched/sched.h>
++
++#include "sts.h"
++
++static struct rv_monitor rv_sts;
++DECLARE_DA_MON_PER_CPU(sts, unsigned char);
++
++#ifdef CONFIG_X86_LOCAL_APIC
++#include <asm/trace/irq_vectors.h>
++
++static void handle_vector_irq_entry(void *data, int vector)
++{
++	da_handle_event_sts(irq_entry_sts);
++}
++
++static void attach_vector_irq(void)
++{
++	rv_attach_trace_probe("sts", local_timer_entry, handle_vector_irq_entry);
++	if (IS_ENABLED(CONFIG_IRQ_WORK))
++		rv_attach_trace_probe("sts", irq_work_entry, handle_vector_irq_entry);
++	if (IS_ENABLED(CONFIG_SMP)) {
++		rv_attach_trace_probe("sts", reschedule_entry, handle_vector_irq_entry);
++		rv_attach_trace_probe("sts", call_function_entry, handle_vector_irq_entry);
++		rv_attach_trace_probe("sts", call_function_single_entry, handle_vector_irq_entry);
++	}
++}
++
++static void detach_vector_irq(void)
++{
++	rv_detach_trace_probe("sts", local_timer_entry, handle_vector_irq_entry);
++	if (IS_ENABLED(CONFIG_IRQ_WORK))
++		rv_detach_trace_probe("sts", irq_work_entry, handle_vector_irq_entry);
++	if (IS_ENABLED(CONFIG_SMP)) {
++		rv_detach_trace_probe("sts", reschedule_entry, handle_vector_irq_entry);
++		rv_detach_trace_probe("sts", call_function_entry, handle_vector_irq_entry);
++		rv_detach_trace_probe("sts", call_function_single_entry, handle_vector_irq_entry);
++	}
++}
++
++#else
++/* We assume irq_entry tracepoints are sufficient on other architectures */
++static void attach_vector_irq(void) { }
++static void detach_vector_irq(void) { }
++#endif
++
++static void handle_irq_disable(void *data, unsigned long ip, unsigned long parent_ip)
++{
++	da_handle_event_sts(irq_disable_sts);
++}
++
++static void handle_irq_enable(void *data, unsigned long ip, unsigned long parent_ip)
++{
++	da_handle_event_sts(irq_enable_sts);
++}
++
++static void handle_irq_entry(void *data, int irq, struct irqaction *action)
++{
++	da_handle_event_sts(irq_entry_sts);
++}
++
++static void handle_sched_switch(void *data, bool preempt,
++				struct task_struct *prev,
++				struct task_struct *next,
++				unsigned int prev_state)
++{
++	da_handle_event_sts(sched_switch_sts);
++}
++
++static void handle_schedule_entry(void *data, bool preempt)
++{
++	da_handle_event_sts(schedule_entry_sts);
++}
++
++static void handle_schedule_exit(void *data, bool is_switch)
++{
++	da_handle_start_event_sts(schedule_exit_sts);
++}
++
++static int enable_sts(void)
++{
++	int retval;
++
++	retval = da_monitor_init_sts();
++	if (retval)
++		return retval;
++
++	rv_attach_trace_probe("sts", irq_disable, handle_irq_disable);
++	rv_attach_trace_probe("sts", irq_enable, handle_irq_enable);
++	rv_attach_trace_probe("sts", irq_handler_entry, handle_irq_entry);
++	rv_attach_trace_probe("sts", sched_switch, handle_sched_switch);
++	rv_attach_trace_probe("sts", sched_entry_tp, handle_schedule_entry);
++	rv_attach_trace_probe("sts", sched_exit_tp, handle_schedule_exit);
++	attach_vector_irq();
++
++	return 0;
++}
++
++static void disable_sts(void)
++{
++	rv_sts.enabled = 0;
++
++	rv_detach_trace_probe("sts", irq_disable, handle_irq_disable);
++	rv_detach_trace_probe("sts", irq_enable, handle_irq_enable);
++	rv_detach_trace_probe("sts", irq_handler_entry, handle_irq_entry);
++	rv_detach_trace_probe("sts", sched_switch, handle_sched_switch);
++	rv_detach_trace_probe("sts", sched_entry_tp, handle_schedule_entry);
++	rv_detach_trace_probe("sts", sched_exit_tp, handle_schedule_exit);
++	detach_vector_irq();
++
++	da_monitor_destroy_sts();
++}
++
++/*
++ * This is the monitor register section.
++ */
++static struct rv_monitor rv_sts = {
++	.name = "sts",
++	.description = "schedule implies task switch.",
++	.enable = enable_sts,
++	.disable = disable_sts,
++	.reset = da_monitor_reset_all_sts,
++	.enabled = 0,
++};
++
++static int __init register_sts(void)
++{
++	return rv_register_monitor(&rv_sts, &rv_sched);
++}
++
++static void __exit unregister_sts(void)
++{
++	rv_unregister_monitor(&rv_sts);
++}
++
++module_init(register_sts);
++module_exit(unregister_sts);
++
++MODULE_LICENSE("GPL");
++MODULE_AUTHOR("Gabriele Monaco <gmonaco@redhat.com>");
++MODULE_DESCRIPTION("sts: schedule implies task switch.");
+diff --git a/kernel/trace/rv/monitors/sts/sts.h b/kernel/trace/rv/monitors/sts/sts.h
+new file mode 100644
+index 0000000000000..3368b6599a005
+--- /dev/null
++++ b/kernel/trace/rv/monitors/sts/sts.h
+@@ -0,0 +1,117 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Automatically generated C representation of sts automaton
++ * For further information about this format, see kernel documentation:
++ *   Documentation/trace/rv/deterministic_automata.rst
++ */
++
++enum states_sts {
++	can_sched_sts = 0,
++	cant_sched_sts,
++	disable_to_switch_sts,
++	enable_to_exit_sts,
++	in_irq_sts,
++	scheduling_sts,
++	switching_sts,
++	state_max_sts
++};
++
++#define INVALID_STATE state_max_sts
++
++enum events_sts {
++	irq_disable_sts = 0,
++	irq_enable_sts,
++	irq_entry_sts,
++	sched_switch_sts,
++	schedule_entry_sts,
++	schedule_exit_sts,
++	event_max_sts
++};
++
++struct automaton_sts {
++	char *state_names[state_max_sts];
++	char *event_names[event_max_sts];
++	unsigned char function[state_max_sts][event_max_sts];
++	unsigned char initial_state;
++	bool final_states[state_max_sts];
++};
++
++static const struct automaton_sts automaton_sts = {
++	.state_names = {
++		"can_sched",
++		"cant_sched",
++		"disable_to_switch",
++		"enable_to_exit",
++		"in_irq",
++		"scheduling",
++		"switching"
++	},
++	.event_names = {
++		"irq_disable",
++		"irq_enable",
++		"irq_entry",
++		"sched_switch",
++		"schedule_entry",
++		"schedule_exit"
++	},
++	.function = {
++		{
++			cant_sched_sts,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE,
++			scheduling_sts,
++			INVALID_STATE
++		},
++		{
++			INVALID_STATE,
++			can_sched_sts,
++			cant_sched_sts,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE
++		},
++		{
++			INVALID_STATE,
++			enable_to_exit_sts,
++			in_irq_sts,
++			switching_sts,
++			INVALID_STATE,
++			INVALID_STATE
++		},
++		{
++			enable_to_exit_sts,
++			enable_to_exit_sts,
++			enable_to_exit_sts,
++			INVALID_STATE,
++			INVALID_STATE,
++			can_sched_sts
++		},
++		{
++			INVALID_STATE,
++			scheduling_sts,
++			in_irq_sts,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE
++		},
++		{
++			disable_to_switch_sts,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE
++		},
++		{
++			INVALID_STATE,
++			enable_to_exit_sts,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE,
++			INVALID_STATE
++		},
++	},
++	.initial_state = can_sched_sts,
++	.final_states = { 1, 0, 0, 0, 0, 0, 0 },
++};
+diff --git a/kernel/trace/rv/monitors/tss/tss_trace.h b/kernel/trace/rv/monitors/sts/sts_trace.h
+similarity index 67%
+rename from kernel/trace/rv/monitors/tss/tss_trace.h
+rename to kernel/trace/rv/monitors/sts/sts_trace.h
+index 4619dbb50cc06..d78beb58d5b3d 100644
+--- a/kernel/trace/rv/monitors/tss/tss_trace.h
++++ b/kernel/trace/rv/monitors/sts/sts_trace.h
+@@ -4,12 +4,12 @@
+  * Snippet to be included in rv_trace.h
+  */
+ 
+-#ifdef CONFIG_RV_MON_TSS
+-DEFINE_EVENT(event_da_monitor, event_tss,
++#ifdef CONFIG_RV_MON_STS
++DEFINE_EVENT(event_da_monitor, event_sts,
+ 	     TP_PROTO(char *state, char *event, char *next_state, bool final_state),
+ 	     TP_ARGS(state, event, next_state, final_state));
+ 
+-DEFINE_EVENT(error_da_monitor, error_tss,
++DEFINE_EVENT(error_da_monitor, error_sts,
+ 	     TP_PROTO(char *state, char *event),
+ 	     TP_ARGS(state, event));
+-#endif /* CONFIG_RV_MON_TSS */
++#endif /* CONFIG_RV_MON_STS */
+diff --git a/kernel/trace/rv/monitors/tss/Kconfig b/kernel/trace/rv/monitors/tss/Kconfig
+deleted file mode 100644
+index 479f86f52e60d..0000000000000
+--- a/kernel/trace/rv/monitors/tss/Kconfig
++++ /dev/null
+@@ -1,14 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0-only
+-#
+-config RV_MON_TSS
+-	depends on RV
+-	depends on RV_MON_SCHED
+-	default y
+-	select DA_MON_EVENTS_IMPLICIT
+-	bool "tss monitor"
+-	help
+-	  Monitor to ensure sched_switch happens only in scheduling context.
+-	  This monitor is part of the sched monitors collection.
+-
+-	  For further information, see:
+-	    Documentation/trace/rv/monitor_sched.rst
+diff --git a/kernel/trace/rv/monitors/tss/tss.c b/kernel/trace/rv/monitors/tss/tss.c
+deleted file mode 100644
+index 95ebd15131f52..0000000000000
+--- a/kernel/trace/rv/monitors/tss/tss.c
++++ /dev/null
+@@ -1,90 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-#include <linux/ftrace.h>
+-#include <linux/tracepoint.h>
+-#include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/init.h>
+-#include <linux/rv.h>
+-#include <rv/instrumentation.h>
+-#include <rv/da_monitor.h>
+-
+-#define MODULE_NAME "tss"
+-
+-#include <trace/events/sched.h>
+-#include <rv_trace.h>
+-#include <monitors/sched/sched.h>
+-
+-#include "tss.h"
+-
+-static struct rv_monitor rv_tss;
+-DECLARE_DA_MON_PER_CPU(tss, unsigned char);
+-
+-static void handle_sched_switch(void *data, bool preempt,
+-				struct task_struct *prev,
+-				struct task_struct *next,
+-				unsigned int prev_state)
+-{
+-	da_handle_event_tss(sched_switch_tss);
+-}
+-
+-static void handle_schedule_entry(void *data, bool preempt)
+-{
+-	da_handle_event_tss(schedule_entry_tss);
+-}
+-
+-static void handle_schedule_exit(void *data, bool is_switch)
+-{
+-	da_handle_start_event_tss(schedule_exit_tss);
+-}
+-
+-static int enable_tss(void)
+-{
+-	int retval;
+-
+-	retval = da_monitor_init_tss();
+-	if (retval)
+-		return retval;
+-
+-	rv_attach_trace_probe("tss", sched_switch, handle_sched_switch);
+-	rv_attach_trace_probe("tss", sched_entry_tp, handle_schedule_entry);
+-	rv_attach_trace_probe("tss", sched_exit_tp, handle_schedule_exit);
+-
+-	return 0;
+-}
+-
+-static void disable_tss(void)
+-{
+-	rv_tss.enabled = 0;
+-
+-	rv_detach_trace_probe("tss", sched_switch, handle_sched_switch);
+-	rv_detach_trace_probe("tss", sched_entry_tp, handle_schedule_entry);
+-	rv_detach_trace_probe("tss", sched_exit_tp, handle_schedule_exit);
+-
+-	da_monitor_destroy_tss();
+-}
+-
+-static struct rv_monitor rv_tss = {
+-	.name = "tss",
+-	.description = "task switch while scheduling.",
+-	.enable = enable_tss,
+-	.disable = disable_tss,
+-	.reset = da_monitor_reset_all_tss,
+-	.enabled = 0,
+-};
+-
+-static int __init register_tss(void)
+-{
+-	return rv_register_monitor(&rv_tss, &rv_sched);
+-}
+-
+-static void __exit unregister_tss(void)
+-{
+-	rv_unregister_monitor(&rv_tss);
+-}
+-
+-module_init(register_tss);
+-module_exit(unregister_tss);
+-
+-MODULE_LICENSE("GPL");
+-MODULE_AUTHOR("Gabriele Monaco <gmonaco@redhat.com>");
+-MODULE_DESCRIPTION("tss: task switch while scheduling.");
+diff --git a/kernel/trace/rv/monitors/tss/tss.h b/kernel/trace/rv/monitors/tss/tss.h
+deleted file mode 100644
+index f0a36fda1b873..0000000000000
+--- a/kernel/trace/rv/monitors/tss/tss.h
++++ /dev/null
+@@ -1,47 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Automatically generated C representation of tss automaton
+- * For further information about this format, see kernel documentation:
+- *   Documentation/trace/rv/deterministic_automata.rst
+- */
+-
+-enum states_tss {
+-	thread_tss = 0,
+-	sched_tss,
+-	state_max_tss
+-};
+-
+-#define INVALID_STATE state_max_tss
+-
+-enum events_tss {
+-	sched_switch_tss = 0,
+-	schedule_entry_tss,
+-	schedule_exit_tss,
+-	event_max_tss
+-};
+-
+-struct automaton_tss {
+-	char *state_names[state_max_tss];
+-	char *event_names[event_max_tss];
+-	unsigned char function[state_max_tss][event_max_tss];
+-	unsigned char initial_state;
+-	bool final_states[state_max_tss];
+-};
+-
+-static const struct automaton_tss automaton_tss = {
+-	.state_names = {
+-		"thread",
+-		"sched"
+-	},
+-	.event_names = {
+-		"sched_switch",
+-		"schedule_entry",
+-		"schedule_exit"
+-	},
+-	.function = {
+-		{     INVALID_STATE,         sched_tss,     INVALID_STATE },
+-		{         sched_tss,     INVALID_STATE,        thread_tss },
+-	},
+-	.initial_state = thread_tss,
+-	.final_states = { 1, 0 },
+-};
+diff --git a/kernel/trace/rv/rv_trace.h b/kernel/trace/rv/rv_trace.h
+index 044772515256a..fa9613cb94699 100644
+--- a/kernel/trace/rv/rv_trace.h
++++ b/kernel/trace/rv/rv_trace.h
+@@ -58,11 +58,10 @@ DECLARE_EVENT_CLASS(error_da_monitor,
+ );
+ 
+ #include <monitors/wip/wip_trace.h>
+-#include <monitors/tss/tss_trace.h>
+ #include <monitors/sco/sco_trace.h>
+ #include <monitors/scpd/scpd_trace.h>
+ #include <monitors/snep/snep_trace.h>
+-#include <monitors/sncid/sncid_trace.h>
++#include <monitors/sts/sts_trace.h>
+ // Add new monitors based on CONFIG_DA_MON_EVENTS_IMPLICIT here
+ 
+ #endif /* CONFIG_DA_MON_EVENTS_IMPLICIT */
+diff --git a/tools/verification/models/sched/sncid.dot b/tools/verification/models/sched/sncid.dot
+deleted file mode 100644
+index 072851721b50a..0000000000000
+--- a/tools/verification/models/sched/sncid.dot
++++ /dev/null
+@@ -1,18 +0,0 @@
+-digraph state_automaton {
+-	center = true;
+-	size = "7,11";
+-	{node [shape = plaintext, style=invis, label=""] "__init_can_sched"};
+-	{node [shape = ellipse] "can_sched"};
+-	{node [shape = plaintext] "can_sched"};
+-	{node [shape = plaintext] "cant_sched"};
+-	"__init_can_sched" -> "can_sched";
+-	"can_sched" [label = "can_sched", color = green3];
+-	"can_sched" -> "can_sched" [ label = "schedule_entry\nschedule_exit" ];
+-	"can_sched" -> "cant_sched" [ label = "irq_disable" ];
+-	"cant_sched" [label = "cant_sched"];
+-	"cant_sched" -> "can_sched" [ label = "irq_enable" ];
+-	{ rank = min ;
+-		"__init_can_sched";
+-		"can_sched";
+-	}
+-}
+diff --git a/tools/verification/models/sched/sts.dot b/tools/verification/models/sched/sts.dot
+new file mode 100644
+index 0000000000000..8f5f38be04d54
+--- /dev/null
++++ b/tools/verification/models/sched/sts.dot
+@@ -0,0 +1,38 @@
++digraph state_automaton {
++	center = true;
++	size = "7,11";
++	{node [shape = plaintext, style=invis, label=""] "__init_can_sched"};
++	{node [shape = doublecircle] "can_sched"};
++	{node [shape = circle] "can_sched"};
++	{node [shape = circle] "cant_sched"};
++	{node [shape = circle] "disable_to_switch"};
++	{node [shape = circle] "enable_to_exit"};
++	{node [shape = circle] "in_irq"};
++	{node [shape = circle] "scheduling"};
++	{node [shape = circle] "switching"};
++	"__init_can_sched" -> "can_sched";
++	"can_sched" [label = "can_sched", color = green3];
++	"can_sched" -> "cant_sched" [ label = "irq_disable" ];
++	"can_sched" -> "scheduling" [ label = "schedule_entry" ];
++	"cant_sched" [label = "cant_sched"];
++	"cant_sched" -> "can_sched" [ label = "irq_enable" ];
++	"cant_sched" -> "cant_sched" [ label = "irq_entry" ];
++	"disable_to_switch" [label = "disable_to_switch"];
++	"disable_to_switch" -> "enable_to_exit" [ label = "irq_enable" ];
++	"disable_to_switch" -> "in_irq" [ label = "irq_entry" ];
++	"disable_to_switch" -> "switching" [ label = "sched_switch" ];
++	"enable_to_exit" [label = "enable_to_exit"];
++	"enable_to_exit" -> "can_sched" [ label = "schedule_exit" ];
++	"enable_to_exit" -> "enable_to_exit" [ label = "irq_disable\nirq_entry\nirq_enable" ];
++	"in_irq" [label = "in_irq"];
++	"in_irq" -> "in_irq" [ label = "irq_entry" ];
++	"in_irq" -> "scheduling" [ label = "irq_enable" ];
++	"scheduling" [label = "scheduling"];
++	"scheduling" -> "disable_to_switch" [ label = "irq_disable" ];
++	"switching" [label = "switching"];
++	"switching" -> "enable_to_exit" [ label = "irq_enable" ];
++	{ rank = min ;
++		"__init_can_sched";
++		"can_sched";
++	}
++}
+diff --git a/tools/verification/models/sched/tss.dot b/tools/verification/models/sched/tss.dot
+deleted file mode 100644
+index 7dfa1d9121bbd..0000000000000
+--- a/tools/verification/models/sched/tss.dot
++++ /dev/null
+@@ -1,18 +0,0 @@
+-digraph state_automaton {
+-	center = true;
+-	size = "7,11";
+-	{node [shape = plaintext] "sched"};
+-	{node [shape = plaintext, style=invis, label=""] "__init_thread"};
+-	{node [shape = ellipse] "thread"};
+-	{node [shape = plaintext] "thread"};
+-	"__init_thread" -> "thread";
+-	"sched" [label = "sched"];
+-	"sched" -> "sched" [ label = "sched_switch" ];
+-	"sched" -> "thread" [ label = "schedule_exit" ];
+-	"thread" [label = "thread", color = green3];
+-	"thread" -> "sched" [ label = "schedule_entry" ];
+-	{ rank = min ;
+-		"__init_thread";
+-		"thread";
+-	}
+-}
 -- 
-Dr. Hannes Reinecke                  Kernel Storage Architect
-hare@suse.de                                +49 911 74053 688
-SUSE Software Solutions GmbH, Frankenstr. 146, 90461 Nürnberg
-HRB 36809 (AG Nürnberg), GF: I. Totev, A. McDonald, W. Knoblich
+2.50.1
+
 
