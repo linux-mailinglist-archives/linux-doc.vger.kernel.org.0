@@ -1,78 +1,78 @@
-Return-Path: <linux-doc+bounces-53714-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53716-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAC91B0CF68
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 03:53:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6C38B0CF6C
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 03:54:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 66A6817B07D
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 01:53:38 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0F13E54669C
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 01:53:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87D011DEFE6;
-	Tue, 22 Jul 2025 01:53:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0DAA1E1E00;
+	Tue, 22 Jul 2025 01:53:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=brighamcampbell.com header.i=@brighamcampbell.com header.b="UaKropK8"
+	dkim=pass (2048-bit key) header.d=brighamcampbell.com header.i=@brighamcampbell.com header.b="YHDfZls4"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 722F11D86FB
-	for <linux-doc@vger.kernel.org>; Tue, 22 Jul 2025 01:53:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A5381DDA32
+	for <linux-doc@vger.kernel.org>; Tue, 22 Jul 2025 01:53:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753149206; cv=none; b=MZk12qnqMZIssSqhCM8xwEzWSeviKTLeSWq3K8el5HqYTWIhL10aXxMs9SGxuWy5oqxdC/WwEkMfOFnI+1Pfs+eH8jxqFKaLHNbdgwOqzt7jCQZkyJ8rlncH1U9fyLEb4qdQhGPB8+91LdlJkgpUHC8e1oFZaw7yY7ZUQoB/odU=
+	t=1753149208; cv=none; b=ItZ6FEcbrMv+lzIUjENggjeJgtHYOrjsh038xmn33S8WpVILVtCMsQWZEA8PH112x88tgKs0PhYjjqxclD1g/rJDz79c+WDvcaFxDKpz90P2ovxwwd8tr2YgyX4W8fnAZL3TIy3dZn2VeXhLfMRQ29zm3kXBYeri3gbSUlFqR7A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753149206; c=relaxed/simple;
-	bh=HJd/uxeFhKLnwgHoJB/OuGOikkLBkMQyDKkPMYdhplI=;
+	s=arc-20240116; t=1753149208; c=relaxed/simple;
+	bh=UGjriME1ipcli1o9i6srAJ2jQYa/wzdVFweQP30jMJk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XJQ5NZxKaB978P2CEX8i1wKMHkjSTZD/JBc7BeL31es9TEX5vtaihz2VdMWnQcF4T0Fe4510ORyjZ2iCPw1nvsSMxt5RzHpBfvX/sdSdbULotxADHzrTyMBJ1g/cZVoeGzT5cSuokYdwsMNbhNiUq92CYMnPHd+YJi1AGSKJTgU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=brighamcampbell.com; spf=pass smtp.mailfrom=brighamcampbell.com; dkim=pass (2048-bit key) header.d=brighamcampbell.com header.i=@brighamcampbell.com header.b=UaKropK8; arc=none smtp.client-ip=209.85.210.179
+	 MIME-Version; b=Oowb1RMeaUQTluSMXkTZGlltoY8kUNhvaEo1cikB2GJ0PGS36v494bjHY0oA74qlxC3rnrHIusckQfZs3w4EHdj44ySME6ybhRLxbQ6BU2128Rx8x9RUzoBDN/1mX7nn7h4undGdeKXj7wr8XD2CUasBzN86bU572eXc1GOMWds=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=brighamcampbell.com; spf=pass smtp.mailfrom=brighamcampbell.com; dkim=pass (2048-bit key) header.d=brighamcampbell.com header.i=@brighamcampbell.com header.b=YHDfZls4; arc=none smtp.client-ip=209.85.210.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=brighamcampbell.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=brighamcampbell.com
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-74b54af901bso3236115b3a.2
-        for <linux-doc@vger.kernel.org>; Mon, 21 Jul 2025 18:53:24 -0700 (PDT)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-75ce780af03so1334529b3a.2
+        for <linux-doc@vger.kernel.org>; Mon, 21 Jul 2025 18:53:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=brighamcampbell.com; s=google; t=1753149204; x=1753754004; darn=vger.kernel.org;
+        d=brighamcampbell.com; s=google; t=1753149206; x=1753754006; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oIE4v7JeEKOf0+NcHojgY9bNkRsPUmFKUDfYCasnV9Q=;
-        b=UaKropK8E1gjavHvXSPwYHH6F4vVZc+vmqAMxmADd7qITZ3+KkgMe4/fzVs5Lc6A+v
-         tmCHEv+KRQme/5nTUNLKG7wAY7LcL4DiPFwg6mvqg4D/3cOH9YxSjaV/Ddphlh9zXemt
-         b+fXrYKSaO18Aowj6IRzYPXJNntNaDaSZGy5PjuT/YdQ8fHy4idSCsMNkMROWY7+4bW1
-         MaVkNh/pNfcWOyQBL7Ikb0aQ1Z+fYKyW7jPW+3q1ABAbgOCHKMAharkSiO42iosJjQNo
-         r+kSTFBlhlxyZia7UT3Mp5elmwtdpTxij7D09FOXLoaJZ6yP+cTav0Ud3q0v+aqk5I9/
-         eTLw==
+        bh=sdRj+I88N+R+RVdcFm7ubWhFSooeArA2NulQ8/PI04M=;
+        b=YHDfZls4GDtf0mn6lHnkGZ+FzQbFUGrF2AML+cK7f6Lxe6Pf3jNcA8Gdf+Gi/jBkR7
+         2AJEqoBcYX2oGdcaal4cFhAykVy/qqSQSQjQrunmNfEv2W5gODvrw06OkjMKvK7OaiW9
+         dFIm3jdk7YP+vNpp9uECVHS15P6guWcLDPuaVjnhxLZKQiLasF9/Kaz4Q67Vb1/YO/PS
+         ElmrdO/2Ku6ZSdbXn1540rEy+MfIQWwXCyRoOd1CQ0/bXEswl6fPD1OgYQqY0EnlXeGw
+         k/28TWJ9xT2FPq3L+rPsP8gxUDqIi4V3qP5V1aQh3ull9kamikXGm/lj//jxq5twvGZq
+         IpUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753149204; x=1753754004;
+        d=1e100.net; s=20230601; t=1753149206; x=1753754006;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=oIE4v7JeEKOf0+NcHojgY9bNkRsPUmFKUDfYCasnV9Q=;
-        b=aWCIph41+1KEAXw/8tE1EtiQx8N3QEUWRdHDw0tr1l+VNIiRuCV0iJZtWwKKK3MEG8
-         uX3gx7Jzet8OgMz+ZwOwuB2B1TqkAuhvGZAzXdQDDj20DoObZk1B2PQaN4a7RTPGiLS8
-         4V6eQ98sqjsvfJMknl5BILacLg9earjvL/GtFUsb8Eaj32Ua/DLMsFuUFQ4HnHk7rcZX
-         81C14xV2EflAiVRz5yfuWJfddEcGH3JyL6Hucv2Txq5glVWgiiUmQwZviYb9PdlDhtrf
-         7M17A5AZuo72Tjfqxoh3QjLDdw1fXBfLhAbwyEDEly8o60OZwhiQX+KNbMiMQz0BPTdm
-         dv5w==
-X-Forwarded-Encrypted: i=1; AJvYcCX0KIMHFvLOgw1R8XIKJd5ewkb+NN5AF6/U8cDS2MzhS5hyULIVk20HGp8CIR7btqnW8H++/wffkBY=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx5c2m97prZaKFG0V9Ky6uS+/w99+QD+J+jCa9hMImj4gx9FWTC
-	7ZFY3MSljBG41+ho0VKFLwf2FlUpPDUtRBi+N/xthCJEerL+TQfpU5ehwAklChaJAEk=
-X-Gm-Gg: ASbGncu+OkVo9ZmqHKcfxgDiftY0iD8X0hfgkWDDq2g2i77b7XklWj+HVm2o5Ey3rsR
-	hKLk02LZ8n7mS2CVDUYJbqYVo9ec/vzZIl2XP9tYVlOUkf/in9yreQ/4dyE2YFP6X28dXKmykr4
-	3Io57uwq0JHpSSexO4vYHUQnVW5vmqgEhJkEvaBM4XQSZ7Q38XTYoNDRhHqNeyOK6d56JRqS5ey
-	ytqXLoRt+LxVOXQqQq4rZdYPk4V3Hj03kDBxv8OcnizUULiHz48WcK8x7QqbgT7OdmO6e1RIMYw
-	xygMNGoZ4fazplN+vs8DvxeSgA0C4yXYBoHQ/5tipDviMy464Cy+ALvRmW7WihTZg+VCR101hpY
-	eesqoC5RbSTGKsJKnHqC1kyAD78445MAMsORKkvH8YJ2s6vskAVdcqKG/quAv
-X-Google-Smtp-Source: AGHT+IH50wKdP58q2GIjp8iwkio5MwzNoXZJkZOhU0XFG9sQuu8h6dwlQ1hq17mYtUFsOoMH6DGedg==
-X-Received: by 2002:a05:6a00:4644:b0:746:298e:4ed0 with SMTP id d2e1a72fcca58-756ea1de0c1mr30341135b3a.13.1753149203634;
-        Mon, 21 Jul 2025 18:53:23 -0700 (PDT)
+        bh=sdRj+I88N+R+RVdcFm7ubWhFSooeArA2NulQ8/PI04M=;
+        b=e7DGmBqLso0S350oPRW8+U0uyCWeXuEGZqDOWApko/qqxVJN3XZe5e+kKyBiJ0qz7e
+         2X9HJq+EUd5rM7MaQmQmp48yDm68PROMFL8Lvw+GKGkNNLaxc+O83dyQE55YIEpvFJ2m
+         60A6ysjtkTA7ZCt2Kowz2d+HUxS1Cx2GH4SSvKumhDS0iwLAUblD/0vGqc0GqSOk2ti2
+         y14j2199mc3W1zvsvMp+23/PsaCfN+7HAk5VixRmkety2Gk6Jf9FBVg/G/h+Z9AJnSwv
+         9uEYGtxaU9ldRrDIFEOUbWHZr4ZBiXitnDu3b4W4wmZ2s2v+DGOXmAOMEjYPc3wF10vs
+         1MkQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWAJIe/PsV0QUxiXnqOTAnaJpXP54mnXRQtiAp/MuSuTVZ6Hh0tv+BZpJu424gO+Ew5/6HtersyWBk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxG9wSKd7Y8Zkt1SEjBek4VDClAkhO7B+LS+TuSZlKcjM5p/C1F
+	TyHwS7e3PBA1elVuEAo197xjg3ErpAI8jR8viwqtXylyGklBDRZ++8BY1g8VTDnWAv0=
+X-Gm-Gg: ASbGncvsbjlyldscmDXpmE7XUDliTM69i2HhBWCzT+3ywAfFR/oWYsquD7c03BSn1yp
+	YKuKWqr8b4o7MptMzErKYLON7iE4SgDdV75TcxNwFOMcIV+2SxEqfayFFTNjTAzgCziG7I4Ap+s
+	HWzvKy+IusVJjUmIjjx9ar3PjrATq2oAKAP8RsWgwY13UyLu6pX9fdaeDQfCmylDuyfgT7CaogT
+	nUWM+WMZGWx/Qgq7MOvuxDjOt65picfFD5n7+gZ7XEPRYq+nO10665hwDFY1ru0sp2imDFMz/M1
+	fzj4D6ZPSanPEQe+7BlyoEDG6ReuI3BAcEi/fngkuGIaJU7ft7PxPT0abJe7kz4PgsyQ/ecBDc0
+	Xx7AwTbPMM9waZJ/kTvktOdp0x4yiebIOqehEXDJAHGRwCZALOw==
+X-Google-Smtp-Source: AGHT+IG6tNXplzhOlO9KMayA+8YKZtftV5rzHK8TvneHGceF0dD/1zLLjMy0L2fZ+upC9WT9XqLSug==
+X-Received: by 2002:a05:6a00:1945:b0:747:bd28:1ca1 with SMTP id d2e1a72fcca58-75722771f31mr32750586b3a.3.1753149205584;
+        Mon, 21 Jul 2025 18:53:25 -0700 (PDT)
 Received: from mystery-machine.tail542cf.ts.net ([64.71.154.6])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b3f2fe62d9fsm6017441a12.1.2025.07.21.18.53.22
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b3f2fe62d9fsm6017441a12.1.2025.07.21.18.53.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 21 Jul 2025 18:53:23 -0700 (PDT)
+        Mon, 21 Jul 2025 18:53:25 -0700 (PDT)
 From: Brigham Campbell <me@brighamcampbell.com>
 To: dianders@chromium.org,
 	tejasvipin76@gmail.com,
@@ -82,17 +82,15 @@ To: dianders@chromium.org,
 	dri-devel@lists.freedesktop.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Jessica Zhang <jessica.zhang@oss.qualcomm.com>,
 	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
 	Maxime Ripard <mripard@kernel.org>,
 	Thomas Zimmermann <tzimmermann@suse.de>,
 	David Airlie <airlied@gmail.com>,
 	Simona Vetter <simona@ffwll.ch>
 Cc: Brigham Campbell <me@brighamcampbell.com>
-Subject: [PATCH v6 2/4] drm/panel: jdi-lpm102a188a: Fix bug and clean up driver
-Date: Mon, 21 Jul 2025 19:53:09 -0600
-Message-ID: <20250722015313.561966-3-me@brighamcampbell.com>
+Subject: [PATCH v6 3/4] drm: Remove unused MIPI write seq and chatty functions
+Date: Mon, 21 Jul 2025 19:53:10 -0600
+Message-ID: <20250722015313.561966-4-me@brighamcampbell.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250722015313.561966-1-me@brighamcampbell.com>
 References: <20250722015313.561966-1-me@brighamcampbell.com>
@@ -104,274 +102,107 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fix bug in unprepare() which causes the function's return value to be
-that of the last mipi "enter sleep mode" command.
-
-Update driver to use the "multi" variant of MIPI functions in order to
-facilitate improved error handling and remove the panel's dependency on
-deprecated MIPI functions.
-
-Use the new mipi_dsi_dual macro to reduce code duplication.
+Remove the deprecated mipi_dsi_generic_write_seq() and
+mipi_dsi_generic_write_chatty() functions now that they are no longer
+used.
 
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
-Reviewed-by: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
-Tested-by: Diogo Ivo <diogo.ivo@tecnico.ulisboa.pt>
 Signed-off-by: Brigham Campbell <me@brighamcampbell.com>
 ---
- drivers/gpu/drm/panel/panel-jdi-lpm102a188a.c | 196 ++++++------------
- 1 file changed, 59 insertions(+), 137 deletions(-)
+ drivers/gpu/drm/drm_mipi_dsi.c | 34 +++-------------------------------
+ include/drm/drm_mipi_dsi.h     | 23 -----------------------
+ 2 files changed, 3 insertions(+), 54 deletions(-)
 
-diff --git a/drivers/gpu/drm/panel/panel-jdi-lpm102a188a.c b/drivers/gpu/drm/panel/panel-jdi-lpm102a188a.c
-index 5f897e143758..83656bb4b0b2 100644
---- a/drivers/gpu/drm/panel/panel-jdi-lpm102a188a.c
-+++ b/drivers/gpu/drm/panel/panel-jdi-lpm102a188a.c
-@@ -81,25 +81,25 @@ static int jdi_panel_disable(struct drm_panel *panel)
- static int jdi_panel_unprepare(struct drm_panel *panel)
- {
- 	struct jdi_panel *jdi = to_panel_jdi(panel);
--	int ret;
+diff --git a/drivers/gpu/drm/drm_mipi_dsi.c b/drivers/gpu/drm/drm_mipi_dsi.c
+index 5b387543de28..ca77f152404a 100644
+--- a/drivers/gpu/drm/drm_mipi_dsi.c
++++ b/drivers/gpu/drm/drm_mipi_dsi.c
+@@ -772,41 +772,13 @@ ssize_t mipi_dsi_generic_write(struct mipi_dsi_device *dsi, const void *payload,
+ EXPORT_SYMBOL(mipi_dsi_generic_write);
  
--	ret = mipi_dsi_dcs_set_display_off(jdi->link1);
--	if (ret < 0)
--		dev_err(panel->dev, "failed to set display off: %d\n", ret);
-+	/*
-+	 * One context per panel since we'll continue trying to shut down the
-+	 * other panel even if one isn't responding.
-+	 */
-+	struct mipi_dsi_multi_context dsi_ctx1 = { .dsi = jdi->link1 };
-+	struct mipi_dsi_multi_context dsi_ctx2 = { .dsi = jdi->link2 };
- 
--	ret = mipi_dsi_dcs_set_display_off(jdi->link2);
--	if (ret < 0)
--		dev_err(panel->dev, "failed to set display off: %d\n", ret);
-+	mipi_dsi_dcs_set_display_off_multi(&dsi_ctx1);
-+	mipi_dsi_dcs_set_display_off_multi(&dsi_ctx2);
- 
- 	/* Specified by JDI @ 50ms, subject to change */
- 	msleep(50);
- 
--	ret = mipi_dsi_dcs_enter_sleep_mode(jdi->link1);
--	if (ret < 0)
--		dev_err(panel->dev, "failed to enter sleep mode: %d\n", ret);
--	ret = mipi_dsi_dcs_enter_sleep_mode(jdi->link2);
--	if (ret < 0)
--		dev_err(panel->dev, "failed to enter sleep mode: %d\n", ret);
-+	/* Doesn't hurt to try sleep mode even if display off fails */
-+	dsi_ctx1.accum_err = 0;
-+	dsi_ctx2.accum_err = 0;
-+	mipi_dsi_dcs_enter_sleep_mode_multi(&dsi_ctx1);
-+	mipi_dsi_dcs_enter_sleep_mode_multi(&dsi_ctx2);
- 
- 	/* Specified by JDI @ 150ms, subject to change */
- 	msleep(150);
-@@ -123,72 +123,46 @@ static int jdi_panel_unprepare(struct drm_panel *panel)
- 	/* Specified by JDI @ 20ms, subject to change */
- 	msleep(20);
- 
--	return ret;
--}
--
--static int jdi_setup_symmetrical_split(struct mipi_dsi_device *left,
--				       struct mipi_dsi_device *right,
--				       const struct drm_display_mode *mode)
+ /**
+- * mipi_dsi_generic_write_chatty() - mipi_dsi_generic_write() w/ an error log
+- * @dsi: DSI peripheral device
+- * @payload: buffer containing the payload
+- * @size: size of payload buffer
+- *
+- * Like mipi_dsi_generic_write() but includes a dev_err()
+- * call for you and returns 0 upon success, not the number of bytes sent.
+- *
+- * Return: 0 on success or a negative error code on failure.
+- */
+-int mipi_dsi_generic_write_chatty(struct mipi_dsi_device *dsi,
+-				  const void *payload, size_t size)
 -{
--	int err;
+-	struct device *dev = &dsi->dev;
+-	ssize_t ret;
 -
--	err = mipi_dsi_dcs_set_column_address(left, 0, mode->hdisplay / 2 - 1);
--	if (err < 0) {
--		dev_err(&left->dev, "failed to set column address: %d\n", err);
--		return err;
+-	ret = mipi_dsi_generic_write(dsi, payload, size);
+-	if (ret < 0) {
+-		dev_err(dev, "sending generic data %*ph failed: %zd\n",
+-			(int)size, payload, ret);
+-		return ret;
 -	}
--
--	err = mipi_dsi_dcs_set_column_address(right, 0, mode->hdisplay / 2 - 1);
--	if (err < 0) {
--		dev_err(&right->dev, "failed to set column address: %d\n", err);
--		return err;
--	}
--
--	err = mipi_dsi_dcs_set_page_address(left, 0, mode->vdisplay - 1);
--	if (err < 0) {
--		dev_err(&left->dev, "failed to set page address: %d\n", err);
--		return err;
--	}
--
--	err = mipi_dsi_dcs_set_page_address(right, 0, mode->vdisplay - 1);
--	if (err < 0) {
--		dev_err(&right->dev, "failed to set page address: %d\n", err);
--		return err;
--	}
--
- 	return 0;
- }
- 
--static int jdi_write_dcdc_registers(struct jdi_panel *jdi)
-+static void jdi_setup_symmetrical_split(struct mipi_dsi_multi_context *dsi_ctx,
-+					struct mipi_dsi_device *left,
-+					struct mipi_dsi_device *right,
-+					const struct drm_display_mode *mode)
-+{
-+	mipi_dsi_dual(mipi_dsi_dcs_set_column_address_multi,
-+		      dsi_ctx, left, right,
-+		      0, mode->hdisplay / 2 - 1);
-+	mipi_dsi_dual(mipi_dsi_dcs_set_page_address_multi,
-+		      dsi_ctx, left, right,
-+		      0, mode->vdisplay - 1);
-+}
-+
-+static void jdi_write_dcdc_registers(struct mipi_dsi_multi_context *dsi_ctx,
-+				     struct jdi_panel *jdi)
- {
- 	/* Clear the manufacturer command access protection */
--	mipi_dsi_generic_write_seq(jdi->link1, MCS_CMD_ACS_PROT,
--				   MCS_CMD_ACS_PROT_OFF);
--	mipi_dsi_generic_write_seq(jdi->link2, MCS_CMD_ACS_PROT,
--				   MCS_CMD_ACS_PROT_OFF);
-+	mipi_dsi_dual_generic_write_seq_multi(dsi_ctx, jdi->link1, jdi->link2,
-+					      MCS_CMD_ACS_PROT,
-+					      MCS_CMD_ACS_PROT_OFF);
- 	/*
--	 * Change the VGH/VGL divide rations to move the noise generated by the
-+	 * Change the VGH/VGL divide ratios to move the noise generated by the
- 	 * TCONN. This should hopefully avoid interaction with the backlight
- 	 * controller.
- 	 */
--	mipi_dsi_generic_write_seq(jdi->link1, MCS_PWR_CTRL_FUNC,
--				   MCS_PWR_CTRL_PARAM1_VGH_330_DIV |
--				   MCS_PWR_CTRL_PARAM1_DEFAULT,
--				   MCS_PWR_CTRL_PARAM2_VGL_410_DIV |
--				   MCS_PWR_CTRL_PARAM2_DEFAULT);
--
--	mipi_dsi_generic_write_seq(jdi->link2, MCS_PWR_CTRL_FUNC,
--				   MCS_PWR_CTRL_PARAM1_VGH_330_DIV |
--				   MCS_PWR_CTRL_PARAM1_DEFAULT,
--				   MCS_PWR_CTRL_PARAM2_VGL_410_DIV |
--				   MCS_PWR_CTRL_PARAM2_DEFAULT);
 -
 -	return 0;
-+	mipi_dsi_dual_generic_write_seq_multi(dsi_ctx, jdi->link1, jdi->link2,
-+					      MCS_PWR_CTRL_FUNC,
-+					      MCS_PWR_CTRL_PARAM1_VGH_330_DIV |
-+					      MCS_PWR_CTRL_PARAM1_DEFAULT,
-+					      MCS_PWR_CTRL_PARAM2_VGL_410_DIV |
-+					      MCS_PWR_CTRL_PARAM2_DEFAULT);
- }
- 
- static int jdi_panel_prepare(struct drm_panel *panel)
- {
- 	struct jdi_panel *jdi = to_panel_jdi(panel);
-+	struct mipi_dsi_multi_context dsi_ctx = {};
- 	int err;
- 
- 	/* Disable backlight to avoid showing random pixels
-@@ -231,88 +205,36 @@ static int jdi_panel_prepare(struct drm_panel *panel)
- 	 * put in place to communicate the configuration back to the DSI host
- 	 * controller.
- 	 */
--	err = jdi_setup_symmetrical_split(jdi->link1, jdi->link2,
--					  jdi->mode);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set up symmetrical split: %d\n",
--			err);
--		goto poweroff;
--	}
-+	jdi_setup_symmetrical_split(&dsi_ctx, jdi->link1, jdi->link2,
-+				    jdi->mode);
- 
--	err = mipi_dsi_dcs_set_tear_scanline(jdi->link1,
--					     jdi->mode->vdisplay - 16);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set tear scanline: %d\n", err);
--		goto poweroff;
--	}
-+	mipi_dsi_dual(mipi_dsi_dcs_set_tear_scanline_multi,
-+		      &dsi_ctx, jdi->link1, jdi->link2,
-+		      jdi->mode->vdisplay - 16);
- 
--	err = mipi_dsi_dcs_set_tear_scanline(jdi->link2,
--					     jdi->mode->vdisplay - 16);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set tear scanline: %d\n", err);
--		goto poweroff;
--	}
-+	mipi_dsi_dual(mipi_dsi_dcs_set_tear_on_multi,
-+		      &dsi_ctx, jdi->link1, jdi->link2,
-+		      MIPI_DSI_DCS_TEAR_MODE_VBLANK);
- 
--	err = mipi_dsi_dcs_set_tear_on(jdi->link1,
--				       MIPI_DSI_DCS_TEAR_MODE_VBLANK);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set tear on: %d\n", err);
--		goto poweroff;
--	}
-+	mipi_dsi_dual(mipi_dsi_dcs_set_pixel_format_multi,
-+		      &dsi_ctx, jdi->link1, jdi->link2,
-+		      MIPI_DCS_PIXEL_FMT_24BIT);
- 
--	err = mipi_dsi_dcs_set_tear_on(jdi->link2,
--				       MIPI_DSI_DCS_TEAR_MODE_VBLANK);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set tear on: %d\n", err);
--		goto poweroff;
--	}
-+	mipi_dsi_dual(mipi_dsi_dcs_exit_sleep_mode_multi,
-+		      &dsi_ctx, jdi->link1, jdi->link2);
- 
--	err = mipi_dsi_dcs_set_pixel_format(jdi->link1, MIPI_DCS_PIXEL_FMT_24BIT);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set pixel format: %d\n", err);
--		goto poweroff;
--	}
+-}
+-EXPORT_SYMBOL(mipi_dsi_generic_write_chatty);
 -
--	err = mipi_dsi_dcs_set_pixel_format(jdi->link2, MIPI_DCS_PIXEL_FMT_24BIT);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set pixel format: %d\n", err);
--		goto poweroff;
--	}
--
--	err = mipi_dsi_dcs_exit_sleep_mode(jdi->link1);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to exit sleep mode: %d\n", err);
--		goto poweroff;
--	}
--
--	err = mipi_dsi_dcs_exit_sleep_mode(jdi->link2);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to exit sleep mode: %d\n", err);
--		goto poweroff;
--	}
--
--	err = jdi_write_dcdc_registers(jdi);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to write dcdc registers: %d\n", err);
--		goto poweroff;
--	}
-+	jdi_write_dcdc_registers(&dsi_ctx, jdi);
- 	/*
--	 * We need to wait 150ms between mipi_dsi_dcs_exit_sleep_mode() and
--	 * mipi_dsi_dcs_set_display_on().
-+	 * We need to wait 150ms between mipi_dsi_dcs_exit_sleep_mode_multi()
-+	 * and mipi_dsi_dcs_set_display_on_multi().
- 	 */
--	msleep(150);
-+	mipi_dsi_msleep(&dsi_ctx, 150);
+-/**
+- * mipi_dsi_generic_write_multi() - mipi_dsi_generic_write_chatty() w/ accum_err
++ * mipi_dsi_generic_write_multi() - mipi_dsi_generic_write() w/ accum_err
+  * @ctx: Context for multiple DSI transactions
+  * @payload: buffer containing the payload
+  * @size: size of payload buffer
+  *
+- * Like mipi_dsi_generic_write_chatty() but deals with errors in a way that
+- * makes it convenient to make several calls in a row.
++ * A wrapper around mipi_dsi_generic_write() that deals with errors in a way
++ * that makes it convenient to make several calls in a row.
+  */
+ void mipi_dsi_generic_write_multi(struct mipi_dsi_multi_context *ctx,
+ 				  const void *payload, size_t size)
+diff --git a/include/drm/drm_mipi_dsi.h b/include/drm/drm_mipi_dsi.h
+index f1dc822f69d6..ea523eb35b08 100644
+--- a/include/drm/drm_mipi_dsi.h
++++ b/include/drm/drm_mipi_dsi.h
+@@ -285,8 +285,6 @@ void mipi_dsi_picture_parameter_set_multi(struct mipi_dsi_multi_context *ctx,
  
--	err = mipi_dsi_dcs_set_display_on(jdi->link1);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set display on: %d\n", err);
--		goto poweroff;
--	}
-+	mipi_dsi_dual(mipi_dsi_dcs_set_display_on_multi,
-+		      &dsi_ctx, jdi->link1, jdi->link2);
+ ssize_t mipi_dsi_generic_write(struct mipi_dsi_device *dsi, const void *payload,
+ 			       size_t size);
+-int mipi_dsi_generic_write_chatty(struct mipi_dsi_device *dsi,
+-				  const void *payload, size_t size);
+ void mipi_dsi_generic_write_multi(struct mipi_dsi_multi_context *ctx,
+ 				  const void *payload, size_t size);
+ void mipi_dsi_dual_generic_write_multi(struct mipi_dsi_multi_context *ctx,
+@@ -387,27 +385,6 @@ void mipi_dsi_dcs_set_tear_scanline_multi(struct mipi_dsi_multi_context *ctx,
+ 					  u16 scanline);
+ void mipi_dsi_dcs_set_tear_off_multi(struct mipi_dsi_multi_context *ctx);
  
--	err = mipi_dsi_dcs_set_display_on(jdi->link2);
--	if (err < 0) {
--		dev_err(panel->dev, "failed to set display on: %d\n", err);
-+	if (dsi_ctx.accum_err < 0)
- 		goto poweroff;
--	}
- 
- 	jdi->link1->mode_flags &= ~MIPI_DSI_MODE_LPM;
- 	jdi->link2->mode_flags &= ~MIPI_DSI_MODE_LPM;
+-/**
+- * mipi_dsi_generic_write_seq - transmit data using a generic write packet
+- *
+- * This macro will print errors for you and will RETURN FROM THE CALLING
+- * FUNCTION (yes this is non-intuitive) upon error.
+- *
+- * Because of the non-intuitive return behavior, THIS MACRO IS DEPRECATED.
+- * Please replace calls of it with mipi_dsi_generic_write_seq_multi().
+- *
+- * @dsi: DSI peripheral device
+- * @seq: buffer containing the payload
+- */
+-#define mipi_dsi_generic_write_seq(dsi, seq...)                                \
+-	do {                                                                   \
+-		static const u8 d[] = { seq };                                 \
+-		int ret;                                                       \
+-		ret = mipi_dsi_generic_write_chatty(dsi, d, ARRAY_SIZE(d));    \
+-		if (ret < 0)                                                   \
+-			return ret;                                            \
+-	} while (0)
+-
+ /**
+  * mipi_dsi_generic_write_seq_multi - transmit data using a generic write packet
+  *
 -- 
 2.50.1
 
