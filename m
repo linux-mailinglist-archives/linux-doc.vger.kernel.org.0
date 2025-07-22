@@ -1,139 +1,132 @@
-Return-Path: <linux-doc+bounces-53806-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53822-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 275A6B0DD4E
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 16:12:11 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 135DAB0DE6A
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 16:26:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A25E65807D6
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 14:08:08 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 73672AC7A0A
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Jul 2025 14:18:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DE1222EB5CB;
-	Tue, 22 Jul 2025 14:07:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 525752EBDCF;
+	Tue, 22 Jul 2025 14:14:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b="KXKUDD0r"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wfih1Qj5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28C132EB5B2;
-	Tue, 22 Jul 2025 14:06:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.132.182.106
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25D712EBDCB;
+	Tue, 22 Jul 2025 14:14:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753193221; cv=none; b=j6QbkL+foOtHaiEgzx4BJmwxzAZVjQDaV6UoTs16NlbydmuSb3Y7+QYF3PN73ObejTNJE62+Ipxq+r2HItTRGWEO9GucZJlEt0iVuB0Opgm+8ujcNl16maRPeqRcxmvAZqTV4jtYv7j+5+dxxrbIPhfyEeI8Hu39nwt90MMRTbA=
+	t=1753193673; cv=none; b=UwNKS/bv0+DXZHJA+Dl4D/t0jEgiFLHrbwoEUUBZGm4q7bNqG2vcSI9HJ7hxIP1gaouGAINs2jEqBt6vLrLgA3QJ/RM5ZmR1/7yy8OazJHsb3DozVrGz6KDprOGRNgZnEqJAvCPXCaFrOE72RP8B6vdnMWl3N8zxbJh4l6NEjM0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753193221; c=relaxed/simple;
-	bh=W3UMhCS3hCblnOkhZ/YDoU1buw33naSyVF6nce1CbIk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=hBxVZhBZBjW2P8U+rOZDYSpQRL2esf3Yum22872LijCBvWSHN2ZDaNWdIHVQQjTjcdMSI+0DsQMYh9PhbJevrZ7dBjGmlEmuCCCRnWWpNnFUe6iu4FdKWrho0+iftFRTvQwDGkLMdxupkcfkq4jVZldGHld/T/B2GXOt+zbSTLc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com; spf=pass smtp.mailfrom=foss.st.com; dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b=KXKUDD0r; arc=none smtp.client-ip=185.132.182.106
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56MDVGqK000551;
-	Tue, 22 Jul 2025 16:06:42 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=selector1; bh=
-	1sWE4a9RDCZRHidlqZGVgwjn5l3RVL8o3/1XaAAFwv0=; b=KXKUDD0r/usQ6+HO
-	sgxByXGVisXkqvbZTZS9nlLiWI66eMcYOQIkyIePXjIdMu69TAvDp4rFnPd9CW/X
-	7rDJsivMiAPo4Msq1DOIAVNI/IEUwQNSfC7rIS/72YbfGPAee1VvoNO5E7FXEOol
-	AwUsHLi144oeuJmPo0g++1c3m5yQVZBYBWUq7kV8T3GpBbtxeuapWRv3T574iV5b
-	+z80WXIIB+BfGsHhlaExV5wzj2LlzXBsre/gEi1RIQJApxoTl2k4HOGL8vWsGimK
-	jr5anGg1FCQzhE+lZ4V/B1i+Y1/8SPyNnWOUlilw8jbXM9Ra+bgvyFmimxvt4qtm
-	TYb0zA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
-	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 480mx4kjba-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 22 Jul 2025 16:06:42 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0CF7640048;
-	Tue, 22 Jul 2025 16:05:28 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A2D70768F78;
-	Tue, 22 Jul 2025 16:04:03 +0200 (CEST)
-Received: from localhost (10.48.86.185) by SHFDAG1NODE2.st.com (10.75.129.70)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Jul
- 2025 16:04:03 +0200
-From: =?utf-8?q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
-Date: Tue, 22 Jul 2025 16:03:36 +0200
-Subject: [PATCH v3 19/19] arm64: dts: st: support ddrperfm on
- stm32mp257f-ev1
+	s=arc-20240116; t=1753193673; c=relaxed/simple;
+	bh=hzuiwjAJr375VSC/o2t+RI8D3combwUEbaFo9X2LmfY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=j2U6tsFPTreKmwNF7sjoxRj41vlIa9Esf7jqXBf1/67FkR3Ypt/pJnYTBZ763cUBqZgS3LcSp73tMzMx3AToqO+41NGCJrL8dEMkCHaWcjxxG7NNoCxFx/wAd3894JI+JQzCCEF8/NfjIs4OHhzTK2Z/BT1AZEcOY7OVbNf0Q98=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wfih1Qj5; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09C99C4CEEB;
+	Tue, 22 Jul 2025 14:14:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1753193672;
+	bh=hzuiwjAJr375VSC/o2t+RI8D3combwUEbaFo9X2LmfY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Wfih1Qj5v4wHeXDEOnOj3fHFeMho/5AsJN2GRWOO+wPf18r68eL71w0NRb3IuM5NG
+	 1HijnDHoiQ3ajejJUNirOs2XSLTbxHjxY+pQGaoLvfjM85PVf1KaSCaqT6YYq1VMuN
+	 2Yp7cnTxtJFSPcDiJc0HRltN+W+6cBxyuGsHH0h4zG95XjbYTiD0dblzaC4ffVIh3I
+	 +cV5k8DAbe+od+qhDyRurdXIE9zNvVDtnlNMkecvi6Jj66PxXmz6LYm+Vn4EEyxfNG
+	 vwZCLKLelzv2QUT10vsGLhNsN7JGnWlWAkqWNumP3y3vXxsCoN066yluUoRqPsxUc0
+	 IoWGQTZGe+niQ==
+Date: Tue, 22 Jul 2025 15:14:26 +0100
+From: Simon Horman <horms@kernel.org>
+To: Dong Yibo <dong100@mucse.com>
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+	kuba@kernel.org, pabeni@redhat.com, corbet@lwn.net,
+	gur.stavi@huawei.com, maddy@linux.ibm.com, mpe@ellerman.id.au,
+	danishanwar@ti.com, lee@trager.us, gongfan1@huawei.com,
+	lorenzo@kernel.org, geert+renesas@glider.be,
+	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
+	alexanderduyck@fb.com, richardcochran@gmail.com,
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 14/15] net: rnpgbe: Add base rx function
+Message-ID: <20250722141426.GK2459@horms.kernel.org>
+References: <20250721113238.18615-1-dong100@mucse.com>
+ <20250721113238.18615-15-dong100@mucse.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-ID: <20250722-ddrperfm-upstream-v3-19-7b7a4f3dc8a0@foss.st.com>
-References: <20250722-ddrperfm-upstream-v3-0-7b7a4f3dc8a0@foss.st.com>
-In-Reply-To: <20250722-ddrperfm-upstream-v3-0-7b7a4f3dc8a0@foss.st.com>
-To: Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
-        Rob
- Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor
- Dooley <conor+dt@kernel.org>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Philipp Zabel
-	<p.zabel@pengutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Gatien Chevallier
-	<gatien.chevallier@foss.st.com>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Gabriel Fernandez
-	<gabriel.fernandez@foss.st.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Le
- Goffic <legoffic.clement@gmail.com>,
-        Julius Werner <jwerner@chromium.org>
-CC: <linux-arm-kernel@lists.infradead.org>, <linux-perf-users@vger.kernel.org>,
-        <devicetree@vger.kernel.org>,
-        <linux-stm32@st-md-mailman.stormreply.com>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-clk@vger.kernel.org>,
-        =?utf-8?q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
-X-Mailer: b4 0.15-dev-8018a
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE2.st.com
- (10.75.129.70)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-22_02,2025-07-21_02,2025-03-28_01
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250721113238.18615-15-dong100@mucse.com>
 
-Configure DDRPERFM node on stm32mp257f-ev1 board.
-Disable the node as DDRPERFM will produce an error message if it's clock
-(shared with the DDRCTRL on STM32MP25x) is secured by common bootloaders.
+On Mon, Jul 21, 2025 at 07:32:37PM +0800, Dong Yibo wrote:
+> Initialize rx clean function.
+> 
+> Signed-off-by: Dong Yibo <dong100@mucse.com>
 
-Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
----
- arch/arm64/boot/dts/st/stm32mp257f-ev1.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+...
 
-diff --git a/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts b/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-index cd2fe81bf934..f81ea794771d 100644
---- a/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-+++ b/arch/arm64/boot/dts/st/stm32mp257f-ev1.dts
-@@ -130,6 +130,11 @@ csi_source: endpoint {
- 	};
- };
- 
-+&ddrperfm {
-+	memory-channel = <&ddr_channel>;
-+	status = "disabled";
-+};
-+
- &dcmipp {
- 	status = "okay";
- 	port {
+> diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_lib.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_lib.c
 
--- 
-2.43.0
+...
 
+> @@ -299,12 +707,27 @@ static int rnpgbe_poll(struct napi_struct *napi, int budget)
+>  	struct mucse_q_vector *q_vector =
+>  		container_of(napi, struct mucse_q_vector, napi);
+>  	struct mucse *mucse = q_vector->mucse;
+> +	int per_ring_budget, work_done = 0;
+>  	bool clean_complete = true;
+>  	struct mucse_ring *ring;
+> -	int work_done = 0;
+> +	int cleaned_total = 0;
+
+cleaned_total is set but otherwise unused in this function.
+
+Flagged by Clang 20.1.8 builds with KCFLAGS=-Wunused-but-set-variable.
+
+>  
+>  	mucse_for_each_ring(ring, q_vector->tx)
+>  		clean_complete = rnpgbe_clean_tx_irq(q_vector, ring, budget);
+> +	if (q_vector->rx.count > 1)
+> +		per_ring_budget = max(budget / q_vector->rx.count, 1);
+> +	else
+> +		per_ring_budget = budget;
+> +
+> +	mucse_for_each_ring(ring, q_vector->rx) {
+> +		int cleaned = 0;
+> +
+> +		cleaned = rnpgbe_clean_rx_irq(q_vector, ring, per_ring_budget);
+> +		work_done += cleaned;
+> +		cleaned_total += cleaned;
+> +		if (cleaned >= per_ring_budget)
+> +			clean_complete = false;
+> +	}
+>  
+>  	if (!netif_running(mucse->netdev))
+>  		clean_complete = true;
+
+...
+
+> @@ -871,6 +1323,8 @@ static int rnpgbe_setup_rx_resources(struct mucse_ring *rx_ring,
+>  	memset(rx_ring->desc, 0, rx_ring->size);
+>  	rx_ring->next_to_clean = 0;
+>  	rx_ring->next_to_use = 0;
+> +	if (mucse_alloc_page_pool(rx_ring)
+
+There is a trailing ')' missing from the line above.
+
+> +		goto err;
+>  
+>  	return 0;
+>  err:
+
+...
 
