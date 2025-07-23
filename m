@@ -1,101 +1,132 @@
-Return-Path: <linux-doc+bounces-53918-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53920-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C4DDB0F167
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 13:38:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D4A1B0F269
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 14:38:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9573F567A51
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 11:38:55 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8CE10581037
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 12:38:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2C022E426C;
-	Wed, 23 Jul 2025 11:38:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F54D2E5B36;
+	Wed, 23 Jul 2025 12:38:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="aW3f+BSi"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RDhmv4d0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-188.mta1.migadu.com (out-188.mta1.migadu.com [95.215.58.188])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7449128A706;
-	Wed, 23 Jul 2025 11:38:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.188
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54A6726C3BD;
+	Wed, 23 Jul 2025 12:38:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753270733; cv=none; b=jmbTHFPNIJycecclGuz7FlkqdAlwNiIqMRCAvKrCTSHo3aKCDGIXlwxzydLOt8quI6JUw9LgTC8R5aTj6fp9t58Lrn3elpRWrAVsRuhJGWQAZD5pkvkIA8hSUrmCuMhdFLLwMQvirB86rCe9RdbycZCDMS8jQrG3nZT7ug+BNHc=
+	t=1753274324; cv=none; b=Obnm97g/iohfRe3FxRJPb1L/07l5hKGV1Zwa80ejxshfgF/+wdbcwxLF2a2VCmBdl7Fo6BEIiiPoHkuSZQAmBlsWjsswqkMQfU1xCpwz4TdGpbZppg/pOBY1GmlvvIkBucikl2u6orUWjuJOkgqAB+pqBAMQPJf/RaeLFcLQL/c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753270733; c=relaxed/simple;
-	bh=zSboYXKx0N+K51GLU5TT/9hPklFmlORrWjoKaBQgZzQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=crvp0u+Rijrbx4bN1ew0caKWX9bZ4LobpUErhtDUxkvENYfPY2lN2yJgmtZ+smNE3yflxQwBkVtKgS/OQxnXrWVATlsTEjjFaogVme+vprHZ8b1eSYMxcgBSQ5L95UBCi4YwF3A/WxVp8R29eaIv9ZrUX/qG3Of12fCNUh5MSVo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=aW3f+BSi; arc=none smtp.client-ip=95.215.58.188
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Date: Wed, 23 Jul 2025 07:38:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1753270729;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=pTVDq7tqt4jNdxmpuXh4QXyl10dLJquaJYZ+1Q9DQZQ=;
-	b=aW3f+BSiEqV6nwQRpRu5sDRX6g8o8us3mskDaHE/zN2IYxn0eNYZiiLEMOQ6b9vDC1ift4
-	kIwb0sLOxyeqViTn1vkf6nqt9IZNeRdrzvBM8y+0KFCnHF64AoPX5rgSq6xOY1fsoy154j
-	m6/5Xp+O+rcYdvrBpLoriv9icFznMtE=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Kent Overstreet <kent.overstreet@linux.dev>
-To: Harry Yoo <harry.yoo@oracle.com>
-Cc: Zhenhua Huang <quic_zhenhuah@quicinc.com>, rientjes@google.com, 
-	vbabka@suse.cz, cl@gentwo.org, roman.gushchin@linux.dev, surenb@google.com, 
-	pasha.tatashin@soleen.com, akpm@linux-foundation.org, corbet@lwn.net, linux-mm@kvack.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, quic_tingweiz@quicinc.com
-Subject: Re: [PATCH 1/1] mm: slub: Introduce one knob to control the track of
- slub object
-Message-ID: <aqscos5ivap537qljhqa2pntrxfimfkfuflji62rl2picpvaiv@sams7xovbtn6>
-References: <20250723080328.4012263-1-quic_zhenhuah@quicinc.com>
- <aICpMWKNvhveAzth@hyeyoo>
+	s=arc-20240116; t=1753274324; c=relaxed/simple;
+	bh=OrTb+KcHqT4ajdsH1ypK8FaKVkgJa8ksvVRgB8HRm9Q=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=fQ91SoOF2r1pSRvvvAtLAL/P62/WNObPc9h0ZAqAJiYLo59ioqaf3EOl6Fm4gWP6iIq9rIJcmX75yZ1DCCz2c81fC/P7GDgDOubJA/9M8BvzXpSTSnuOLZrc79xm393s3QLQbEBSMy16cZSwih6kDUl4pIpz2K8TcXgS/Ar9qlw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RDhmv4d0; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D940C4CEE7;
+	Wed, 23 Jul 2025 12:38:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1753274322;
+	bh=OrTb+KcHqT4ajdsH1ypK8FaKVkgJa8ksvVRgB8HRm9Q=;
+	h=From:Date:Subject:To:Cc:From;
+	b=RDhmv4d0mUWTFu/k6l+UgHLvejZEHBBcCvuOIo8nKodYeCvy+R8vxIiOVsm1q5JOQ
+	 UsrRTEdNNtnDr9n1eqkSUf95LHjki0r7NChsEJc37EiZPy3FZaXpOp1USxa78ZVWv0
+	 tuyMocSaFBl7WcHl3c/07K9XCpnUq66Esftj/19hyYg68nLgz5Xp9QwZMsSCjS1E0N
+	 5x0RUI3Igu7319Us20lfGHASKXT91o9pSK2yUANHXbKAU3KGRHreHXiuXbYKbbU2WU
+	 ErW0ksZ+wacNF9oO4SiESQeC7UcafWUVHrfIo/8BWzh4d9dAcYVlXHWEwqxu05EHoB
+	 QBF5TpoFQ+Wog==
+From: Mark Brown <broonie@kernel.org>
+Date: Wed, 23 Jul 2025 13:27:45 +0100
+Subject: [PATCH] arm64/sme: Drop inaccurate documentation of streaming mode
+ switches
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aICpMWKNvhveAzth@hyeyoo>
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250723-arm64-sme-mode-switch-doc-v1-1-702bb484b4f4@kernel.org>
+X-B4-Tracking: v=1; b=H4sIAEDVgGgC/x3MQQ6CMBBG4auQWTMJTIsar0JcYPsjsyg1HaMmh
+ LvTsPwW721kKAqje7NRwVdN81rRtw2FZVpfYI3VJJ0M3VWEp5Iuni2BU45g++knLBxz4Bt6J97
+ 5p0ek2r8LZv2f7/Gx7wfH5ah4awAAAA==
+X-Change-ID: 20250722-arm64-sme-mode-switch-doc-8e132434b4ed
+To: Catalin Marinas <catalin.marinas@arm.com>, 
+ Will Deacon <will@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc: Mark Rutland <mark.rutland@arm.com>, 
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Mark Brown <broonie@kernel.org>
+X-Mailer: b4 0.15-dev-cff91
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1936; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=OrTb+KcHqT4ajdsH1ypK8FaKVkgJa8ksvVRgB8HRm9Q=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBogNfQPuSRx5nolzVnWzO3f5C+iSWPt1ou4zVoV
+ QuR7n/k3ZGJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCaIDX0AAKCRAk1otyXVSH
+ 0MvbB/oDMKFjJJgkmKz5aDIP9D9olw3VGOkisOZtq2L19yAa9LIBaPWqfS+u9NiffrlmpSi2adO
+ Ome5zhPsryc5XH/0b+eDJIcu/BaqhePrwNg2u0IlIwjm4Wn3YrtR3cN+HjuobeHawVeLM48T5jS
+ J2GPCXLn2yG81L7/hWfPqXfIqyEqUTYq6EmojjpfL9OKelTZi9MDwI2Bil9NC1I/WwQ+3vOXXho
+ wajoW9rC37ZFRdXv0bzPkeZ01YcPaqUH1gaJAt9yMwhHkeHnil5+omwXdskK809wqSe2SypOlzh
+ YyUqU4VVrdPAXYbic0RXO4NhuMJ7tIPmfvqvq3NNQtAhZnT7
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Wed, Jul 23, 2025 at 06:19:45PM +0900, Harry Yoo wrote:
-> The subject is a bit misleading. I think it should be something like
-> "alloc_tag: add an option to disable slab object accounting".
-> 
-> On Wed, Jul 23, 2025 at 04:03:28PM +0800, Zhenhua Huang wrote:
-> > Mem profiling feature tracks both "alloc_slab_page"(page level) and slub
-> > object level allocations. To track object level allocations,
-> > slabobj_ext consumes 16 bytes per object for profiling slub object if
-> > CONFIG_MEMCG is set.
-> > Based on the data I've collected, this overhead accounts for approximately
-> > 5.7% of slub memory usage — a considerable cost.
-> > w/ noslub  slub_debug=-
-> > Slab:              87520 kB
-> > w/o noslub slub_debug=-
-> > Slab:              92812 kB
-> 
-> Yes, the cost is not small and I hate that we have to pay 16 bytes of
-> memory overhead for each slab object when both memcg and memory profiling
-> are enabled.
+The SME ABI documentation contains an inaccurate description of the
+architectural streaming mode entry/exit behaviour, just remove it since
+this is better documented by the architecture or with the rest of the
+documentation for the specific software interfaces concerned.
 
-I believe we did something about this for page_obj_ext; the exact
-pointer compression scheme we went with escapes me at the moment.
+Signed-off-by: Mark Brown <broonie@kernel.org>
+---
+The rest of the documentation needs more thorough review, but it seems
+wise to remove the incorrect statement to avoid confusion.
+---
+ Documentation/arch/arm64/sme.rst | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
 
-We did it for page and not slab because page_obj_ext is a large fixed
-size overhead and the page allocator is slower anyways, but it's
-conceivable we could do the same for slub if the memory overhead vs. cpu
-overhead tradeoff is worth it.
+diff --git a/Documentation/arch/arm64/sme.rst b/Documentation/arch/arm64/sme.rst
+index 4cb38330e704..583f2ee9cb97 100644
+--- a/Documentation/arch/arm64/sme.rst
++++ b/Documentation/arch/arm64/sme.rst
+@@ -81,17 +81,7 @@ The ZA matrix is square with each side having as many bytes as a streaming
+ mode SVE vector.
+ 
+ 
+-3.  Sharing of streaming and non-streaming mode SVE state
+----------------------------------------------------------
+-
+-It is implementation defined which if any parts of the SVE state are shared
+-between streaming and non-streaming modes.  When switching between modes
+-via software interfaces such as ptrace if no register content is provided as
+-part of switching no state will be assumed to be shared and everything will
+-be zeroed.
+-
+-
+-4.  System call behaviour
++3.  System call behaviour
+ -------------------------
+ 
+ * On syscall PSTATE.ZA is preserved, if PSTATE.ZA==1 then the contents of the
+@@ -112,7 +102,7 @@ be zeroed.
+   exceptions for execve() described in section 6.
+ 
+ 
+-5.  Signal handling
++4.  Signal handling
+ -------------------
+ 
+ * Signal handlers are invoked with PSTATE.SM=0, PSTATE.ZA=0, and TPIDR2_EL0=0.
 
-And - pointer compression is a valuable technique in general; coming up
-with some fast general purpose code (perhaps involving virtual mappings,
-we're not so limited on virtual address space as we used to be) might be
-worth someone's time exploring.
+---
+base-commit: 86731a2a651e58953fc949573895f2fa6d456841
+change-id: 20250722-arm64-sme-mode-switch-doc-8e132434b4ed
+
+Best regards,
+--  
+Mark Brown <broonie@kernel.org>
+
 
