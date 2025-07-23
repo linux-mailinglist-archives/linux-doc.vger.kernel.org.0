@@ -1,95 +1,146 @@
-Return-Path: <linux-doc+bounces-53911-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53913-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C905AB0EFD4
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 12:29:05 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2223BB0EFEF
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 12:36:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 15F437A8538
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 10:27:36 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A7C347A4370
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 10:34:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 798A22900AA;
-	Wed, 23 Jul 2025 10:28:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83A0A283FFB;
+	Wed, 23 Jul 2025 10:35:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="F2syURHU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FY6pKQq8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 333F3290D81;
-	Wed, 23 Jul 2025 10:28:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 545F027FB16;
+	Wed, 23 Jul 2025 10:35:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753266538; cv=none; b=ArvAoLAD8kb4ECbWugef8ig4XSpwvudDfL2KOnrEimHdhXXxDYNK+ZBi0N+sjYzCgm4s6/QISmCM3JiSPTq74u8sx8/fx2V0zhA664auHRn9VluEYsVAEK/RUuUqURiZvQtm59H//5VczOyHJ1FrLQ0TtoTfNlwwsdyM+7mKfzs=
+	t=1753266957; cv=none; b=QAm3yowDBL78q8Ps3xCf+4UcpLo6Y23wJ4QYgO5a6rnaKrtnYnNHM4aoPgg0O4jRmNNAMcgh2rXoM1TuKTQFkLc+xqoC7HgwCOJunlKRXPnH8JWPyGrXlaePnU76IZu5plWvslk3ob4CVQm4VZbzoYjToIBfKqOlz3w6joL0pRU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753266538; c=relaxed/simple;
-	bh=bFxpcfU5uznN6hBkGOvTdOd9t5GcXUXbQ0Fq8JKd3rw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=RZexs9S4ENpUtfjEeoTM127Vivdz+erXdqZ8PxwhvOR8Z7KMFtnDm3BMiJhxcumvQ0OmC+kjSiEM+gzXmmxncXc/OfWGwsl3+lKvQ/QXoB0K/ri0o31R6MZPPC+e54B8BCAySau+Ixji3HkHMZEAjUgLGL9pGVRs+tpWXs5ncQs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=F2syURHU; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1753266534;
-	bh=bFxpcfU5uznN6hBkGOvTdOd9t5GcXUXbQ0Fq8JKd3rw=;
-	h=From:To:Cc:Subject:Date:From;
-	b=F2syURHUji8VIMGZ4fUb0zflEGa0I+pH88nIJmlmqdApawKY1+e/e09Nwl91oJM4B
-	 SYDAWVsLFEWOm7MdDIi2zMelcVnOTFXhwJLxIXmYvbb37ZCd3sc9EtZi5wjGfGtxHt
-	 HP0Ext5nb6X/gkAcvVxqjc0d0e/vfyVcORy6l6gQZxsuuZgWBHBlXyLxOq+E0vBS92
-	 1oXFXR3O1Cb4hpT2MDva4+TIYAOZyGtImOy7Sf1UsELQlaLjVGw3ceiCQOUa12YYgl
-	 s2UmW8ay6n9JrID1VeLAyujB7LXABnnoWFWxaJG1bdDQswJg6Bpigpcz5appDDJOLt
-	 /gko7pHX8H0Nw==
-Received: from debian.. (unknown [171.76.86.144])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: vignesh)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 9C6B917E0C96;
-	Wed, 23 Jul 2025 12:28:52 +0200 (CEST)
-From: Vignesh Raman <vignesh.raman@collabora.com>
-To: linux-doc@vger.kernel.org
-Cc: akinobu.mita@gmail.com,
-	corbet@lwn.net,
-	laura.nao@collabora.com,
-	arnaud.ferraris@collabora.com,
-	vignesh.raman@collabora.com,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v1] docs: fault-injection: drop reference to md-faulty
-Date: Wed, 23 Jul 2025 15:58:32 +0530
-Message-ID: <20250723102835.232740-1-vignesh.raman@collabora.com>
-X-Mailer: git-send-email 2.47.2
+	s=arc-20240116; t=1753266957; c=relaxed/simple;
+	bh=cJeftLriWrLbVNEaXDZWfCkVPaVSCfDT05EzFNVqUKc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=dwtLits7vhdLeL14YekiHyxsG8udqwBYky1oBPDb+nwil3qs3+jp8YLDl3Vd9ZfwYG0P5Aw41McgEVBEakcH2te5CqjxtA7pYeerj11n+DmrbPnFcgbO4cwodSvVjGcFdzn7H4VgIW2EA6wajIxyqIHdh7+ilGkdLlAg78/r/1U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FY6pKQq8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FEC9C4CEE7;
+	Wed, 23 Jul 2025 10:35:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1753266956;
+	bh=cJeftLriWrLbVNEaXDZWfCkVPaVSCfDT05EzFNVqUKc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=FY6pKQq8oN0l6sVsEmuTeRmNQqpswc2aywTudkIVIcFBcHQsaqjbvfDVAQ33Ubw/F
+	 gMS0SmR81MtFn+ZCiA7XhMVUpXrY+fAVytHk4k9qj0f8EPkZ3kdeoa6we3p/vQz4G6
+	 7RaaYqStg+1PL2lS9SJJ6touGJUAWuZNSWbJNnxQc0LnaRGIkjEiti0yRo7V21uxjJ
+	 F/qm6OahJ6xeIjZqp4tz7jjuUKAo2H6vOjlIB/OmNKBnKjEBYVeOxE+kxxIuw7u0Du
+	 L3/uuquHeN0BsL3YIaSun2Iq22dedSMvg3yyg8ntgYadL29gsNFJ0jrkPjcWKgsTXu
+	 SlgcpfPtfiPYg==
+Date: Wed, 23 Jul 2025 11:35:49 +0100
+From: Simon Horman <horms@kernel.org>
+To: Fan Gong <gongfan1@huawei.com>
+Cc: Zhu Yikai <zhuyikai1@h-partners.com>, netdev@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>, linux-doc@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	Bjorn Helgaas <helgaas@kernel.org>, luosifu <luosifu@huawei.com>,
+	Xin Guo <guoxin09@huawei.com>,
+	Shen Chenyang <shenchenyang1@hisilicon.com>,
+	Zhou Shuai <zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>,
+	Shi Jing <shijing34@huawei.com>,
+	Fu Guiming <fuguiming@h-partners.com>,
+	Meny Yossefi <meny.yossefi@huawei.com>,
+	Gur Stavi <gur.stavi@huawei.com>, Lee Trager <lee@trager.us>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Vadim Fedorenko <vadim.fedorenko@linux.dev>,
+	Suman Ghosh <sumang@marvell.com>,
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+	Joe Damato <jdamato@fastly.com>,
+	Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+Subject: Re: [PATCH net-next v10 6/8] hinic3: Mailbox framework
+Message-ID: <20250723103549.GY2459@horms.kernel.org>
+References: <cover.1753152592.git.zhuyikai1@h-partners.com>
+ <6233841053851b93390df642f65b2bc4c4646abe.1753152592.git.zhuyikai1@h-partners.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <6233841053851b93390df642f65b2bc4c4646abe.1753152592.git.zhuyikai1@h-partners.com>
 
-Commit 415c7451872b ("md: Remove deprecated CONFIG_MD_FAULTY") removed
-the md-faulty driver, so drop the outdated reference from the
-fault-injection documentation.
+On Tue, Jul 22, 2025 at 03:18:45PM +0800, Fan Gong wrote:
 
-Signed-off-by: Vignesh Raman <vignesh.raman@collabora.com>
----
- Documentation/fault-injection/fault-injection.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+...
 
-diff --git a/Documentation/fault-injection/fault-injection.rst b/Documentation/fault-injection/fault-injection.rst
-index 1c14ba08fbfc..c2d3996b5b40 100644
---- a/Documentation/fault-injection/fault-injection.rst
-+++ b/Documentation/fault-injection/fault-injection.rst
-@@ -2,7 +2,7 @@
- Fault injection capabilities infrastructure
- ===========================================
- 
--See also drivers/md/md-faulty.c and "every_nth" module option for scsi_debug.
-+See also "every_nth" module option for scsi_debug.
- 
- 
- Available fault injection capabilities
--- 
-2.47.2
+> +static void recv_mbox_handler(struct hinic3_mbox *mbox,
+> +			      u64 *header, struct hinic3_msg_desc *msg_desc)
+> +{
+> +	void *mbox_body = MBOX_BODY_FROM_HDR(((void *)header));
+> +	u64 mbox_header = *header;
+> +	u8 seq_id, seg_len;
+> +	int pos;
+> +
+> +	if (!mbox_segment_valid(mbox, msg_desc, mbox_header)) {
+> +		msg_desc->seq_id = MBOX_SEQ_ID_MAX_VAL;
+> +		return;
+> +	}
+> +
+> +	seq_id = MBOX_MSG_HEADER_GET(mbox_header, SEQID);
+> +	seg_len = MBOX_MSG_HEADER_GET(mbox_header, SEG_LEN);
+> +
+> +	pos = seq_id * MBOX_SEG_LEN;
+> +	memcpy((u8 *)msg_desc->msg + pos, mbox_body, seg_len);
 
+It would be nice if msg_desc->msg and mbox_body had more meaningful types
+than void *. If they are being treated as an array of bytes, then
+maybe u8 *?
+
+> +
+> +	if (!MBOX_MSG_HEADER_GET(mbox_header, LAST))
+> +		return;
+> +
+> +	msg_desc->msg_len = MBOX_MSG_HEADER_GET(mbox_header, MSG_LEN);
+> +	msg_desc->msg_info.status = MBOX_MSG_HEADER_GET(mbox_header, STATUS);
+> +
+> +	if (MBOX_MSG_HEADER_GET(mbox_header, DIRECTION) == MBOX_MSG_RESP)
+> +		resp_mbox_handler(mbox, msg_desc);
+> +}
+> +
+> +void hinic3_mbox_func_aeqe_handler(struct hinic3_hwdev *hwdev, u8 *header,
+> +				   u8 size)
+> +{
+> +	u64 mbox_header = *((u64 *)header);
+> +	enum mbox_msg_direction_type dir;
+> +	struct hinic3_msg_desc *msg_desc;
+> +	struct hinic3_mbox *mbox;
+> +	u16 src_func_id;
+> +
+> +	mbox = hwdev->mbox;
+> +	dir = MBOX_MSG_HEADER_GET(mbox_header, DIRECTION);
+> +	src_func_id = MBOX_MSG_HEADER_GET(mbox_header, SRC_GLB_FUNC_IDX);
+> +	msg_desc = get_mbox_msg_desc(mbox, dir, src_func_id);
+> +	recv_mbox_handler(mbox, (u64 *)header, msg_desc);
+
+I would suggest dropping the cast and changing recv_mbox_handler()
+to expect header to be a u8 *. I think you can then drop the cast above,
+the one at of the argument passed to MBOX_BODY_FROM_HDR()
+and the one inside MBOX_BODY_FROM_HDR().
+
+I'd also suggest that MBOX_BODY_FROM_HDR be changed to a
+static function so there is some type checking of the argument.
+
+> +}
+
+...
 
