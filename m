@@ -1,291 +1,477 @@
-Return-Path: <linux-doc+bounces-53895-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53901-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9F83B0ECA3
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 10:04:44 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1819B0ECB6
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 10:06:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 66CDD7A71BE
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 08:03:14 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CDCC8580DF1
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 08:06:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DADFB27A107;
-	Wed, 23 Jul 2025 08:04:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 52C002836AF;
+	Wed, 23 Jul 2025 08:04:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="Bken3hVr"
+	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="H2rIgjCu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A15E6279DAB;
-	Wed, 23 Jul 2025 08:04:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11DE5281369;
+	Wed, 23 Jul 2025 08:04:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.23.235
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753257853; cv=none; b=EWkogdYyOzftzrEkwY5U3cUl2dpRD5ixeJNLIUxyelO2btUx6gcczE2KJb5s5Imaghun7HlPplWk87eaRob1B/MVjr3jkQhKCqGAtgSgTSgW5l/4fNON/JaVJ3eunjA3WXVU2GKIGO+WHfyjJ6ZcdF4B5Z2k4pf1Wiuu1NWALrg=
+	t=1753257862; cv=none; b=QVJm9vZgSb0wrdDBjvLTnF09CWKuozGcPxl92MX0KkhTU9IB0KwPeyW9jWgZrQciHiXINlNrG9Itg0Ehfbx+miicZAFlvMjYIj8os9fMmoRq1MSHeFabgyAhqPFSGZ6QWP444E3x9AlAueb2pQP/XilG3qCjrghZ13L0Jr1VKvo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753257853; c=relaxed/simple;
-	bh=e/LvhuS9hD7xMP91yxVMcristHsv+3naX5tSjfFrrEs=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=KgNRjzkTJMLJSNVw1IhlXaKvzdXPfooUT7CBd6UIHS2FYhSbh1xTeSZqBfunzR0Ojf/pPKP0jBVVFD6EJodE7doo4cQrCbH6G2HHDZNo3G1bK8FSwOAAVrDgLDRL7Hj3CFeO6oAwrXHQAXaxJOs9jAZC+NZXPg+4lNgzMTgapVM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=quicinc.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=Bken3hVr; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quicinc.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56MMcTHT013546;
-	Wed, 23 Jul 2025 08:03:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=P+/vDhWzzZpXY5cDW7/Gh1
-	z1gwgrP2mpHSIozXcvJEc=; b=Bken3hVr/gH3J6e8o9YKyB/WI9J9n7Zc0AnBbe
-	S5cl4hgYM/aWpU9elI9m6gfphT0IkhRm57QtruAFWH5IGxYBtwmjhAFB2TzDknmo
-	pMVQtr+9tlLv4UCGORLHtwG7huy+rEMlYDPcirbCBfShXIggNBO1PMrB/ixU2IO7
-	airvL3P+hqsMpCdMgzsCfWomHwHzqT0ujfWiqjG9San2GyDdiWGTYQv0JtEBC8/c
-	rm83Rbgzo8m2YU2VHO8Skvje31KgZrIGHmHLIPHFWF787srQnbuDhTsqsQUYS2YT
-	Mjol6EBIo5Lb7u1il692OnHd+sOjfLLRUksyz8YEmkGokWIg==
-Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 481qh6phu4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 23 Jul 2025 08:03:50 +0000 (GMT)
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 56N83n6Z013821
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 23 Jul 2025 08:03:49 GMT
-Received: from ap-kernel-sh01-lnx.qualcomm.com (10.80.80.8) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.10; Wed, 23 Jul 2025 01:03:45 -0700
-From: Zhenhua Huang <quic_zhenhuah@quicinc.com>
-To: <kent.overstreet@linux.dev>, <rientjes@google.com>, <vbabka@suse.cz>,
-        <cl@gentwo.org>, <roman.gushchin@linux.dev>, <harry.yoo@oracle.com>,
-        <surenb@google.com>, <pasha.tatashin@soleen.com>,
-        <akpm@linux-foundation.org>, <corbet@lwn.net>
-CC: <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <quic_tingweiz@quicinc.com>,
-        Zhenhua Huang
-	<quic_zhenhuah@quicinc.com>
-Subject: [PATCH 1/1] mm: slub: Introduce one knob to control the track of slub object
-Date: Wed, 23 Jul 2025 16:03:28 +0800
-Message-ID: <20250723080328.4012263-1-quic_zhenhuah@quicinc.com>
+	s=arc-20240116; t=1753257862; c=relaxed/simple;
+	bh=AqpMlJ1BSP9Swinfd7sXPYHR1l9IrdpRfu4SEx/a8zA=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=ntaEgjJjwgkdne7JrNUK2GiZEGPoDl+osKLLKtn89qKFplBWwMqRSqLo/7aZ8qnM0rG1IZ6yDBB68qwz3oWY7VivvinfHNcnfQAOLzW0pmRStCymZidRQy82WBFhp0jUm0Vv3zJjwOKrRZKA8WWw+qQkJdbJTdnp9UxV8Y+JGOA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=H2rIgjCu; arc=none smtp.client-ip=198.47.23.235
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56N83UVw1695117;
+	Wed, 23 Jul 2025 03:03:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1753257810;
+	bh=mvDX6DOV8YuWwDnj84Y8gAsL48e8sIoeavomIPEepuU=;
+	h=From:To:CC:Subject:Date:In-Reply-To:References;
+	b=H2rIgjCuKKEd2RvAaxowWfB93X8BVVvA8DPvfobv9K5UrrMFS/xHmdQyPWeRH/KRx
+	 cotXgRavjssU8daP6yi1fTmgiOWgVXN0lUbHAQOwdfvQmJ2wyyQDFhzhMKL/ltO2nC
+	 jJllTdaGUpPoyOYZmEWe8MrD+SooqiRMdv7J/AwM=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+	by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56N83Uxn1619069
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Wed, 23 Jul 2025 03:03:30 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 23
+ Jul 2025 03:03:29 -0500
+Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Wed, 23 Jul 2025 03:03:29 -0500
+Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
+	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56N83TDU160345;
+	Wed, 23 Jul 2025 03:03:29 -0500
+Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
+	by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 56N83S7V015945;
+	Wed, 23 Jul 2025 03:03:29 -0500
+From: MD Danish Anwar <danishanwar@ti.com>
+To: "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet
+	<edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+        Jonathan Corbet
+	<corbet@lwn.net>, Andrew Lunn <andrew+netdev@lunn.ch>,
+        Mengyuan Lou
+	<mengyuanlou@net-swift.com>,
+        MD Danish Anwar <danishanwar@ti.com>,
+        Michael
+ Ellerman <mpe@ellerman.id.au>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Fan
+ Gong <gongfan1@huawei.com>, Lee Trager <lee@trager.us>,
+        Lorenzo Bianconi
+	<lorenzo@kernel.org>,
+        Geert Uytterhoeven <geert+renesas@glider.be>,
+        Lukas
+ Bulwahn <lukas.bulwahn@redhat.com>,
+        Parthiban Veerasooran
+	<Parthiban.Veerasooran@microchip.com>
+CC: <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: [PATCH net-next 1/5] net: rpmsg-eth: Add Documentation for RPMSG-ETH Driver
+Date: Wed, 23 Jul 2025 13:33:18 +0530
+Message-ID: <20250723080322.3047826-2-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250723080322.3047826-1-danishanwar@ti.com>
+References: <20250723080322.3047826-1-danishanwar@ti.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Authority-Analysis: v=2.4 cv=CZ4I5Krl c=1 sm=1 tr=0 ts=68809766 cx=c_pps
- a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=GEpy-HfZoHoA:10 a=IkcTkHD0fZMA:10 a=Wb1JkmetP80A:10 a=COk6AnOGAAAA:8
- a=g59Dnr5a0EmcSpW2U7wA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: NyNZH3-0WF9O0-zrUAXttvL4E4TNg1kH
-X-Proofpoint-GUID: NyNZH3-0WF9O0-zrUAXttvL4E4TNg1kH
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzIzMDA2NyBTYWx0ZWRfX1PYBy0xpN3De
- QGDXadJqH1Wz9AEg6o9WCavkgIfsJ1akkEBLEeNqdIOFgwiqvUgLNuIvvbH/Yghjey3tnkuZb8g
- U9f1XQVkJwe5lFcr86w3QakLHyYwe0WJQJKf73joC9sUCm4Lz9DQI7YU8glWL1opwxeDQTMNwxo
- PZb9A/plXD88q6rBsv9RlXGsWXsqRLP5Dsa3s8ixwdkcEXqWFulkmC0ci9Rf9eQM8XDpf93ODog
- PqKf5i9YieExZPcdr0/UlWBhURbctF9+9H4I59bVDm1XV6fffpxrrfY8JdNU9wW6pVu2NBNqY1a
- 2vM3Qhn4A/aIdsX3+CxbLsUYZYOFuOlZiPD/VRQpG9dybw8wZX+1wUVBhr09T/kqtdYmdH/UNnX
- KZ6GNL+kHnCAYJ0dJS9BjCW+ElboWsH+8qoNTsxy6SYapC8BXplDmiSbK/LKavUND0tJC+Ix
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-23_01,2025-07-22_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 mlxlogscore=999 impostorscore=0
- clxscore=1011 mlxscore=0 lowpriorityscore=0 phishscore=0 adultscore=0
- bulkscore=0 spamscore=0 malwarescore=0 classifier=spam authscore=0 authtc=n/a
- authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2505280000 definitions=main-2507230067
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 
-Mem profiling feature tracks both "alloc_slab_page"(page level) and slub
-object level allocations. To track object level allocations,
-slabobj_ext consumes 16 bytes per object for profiling slub object if
-CONFIG_MEMCG is set.
-Based on the data I've collected, this overhead accounts for approximately
-5.7% of slub memory usage — a considerable cost.
-w/ noslub  slub_debug=-
-Slab:              87520 kB
-w/o noslub slub_debug=-
-Slab:              92812 kB
+Add documentation for the RPMSG Based Virtual Ethernet Driver (rpmsg-eth).
+The documentation describes the driver's architecture, shared memory
+layout, RPMSG communication protocol, and requirements for vendor firmware
+to interoperate with the driver. It details the use of a magic number for
+shared memory validation, outlines the information exchanged between the
+host and remote processor, and provides a how-to guide for vendors to
+implement compatible firmware.
 
-While In some scenarios, we may choose not to delve into SLUB allocation
-details if initial triage indicates that SLUB memory usage is within
-acceptable limits. To support this, a control knob is introduced to enable
-or disable SLUB object tracking.
-The "noslub" knob disables SLUB tracking, preventing further allocation of
-slabobj_ext structures.
-
-Signed-off-by: Zhenhua Huang <quic_zhenhuah@quicinc.com>
+Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- Documentation/mm/allocation-profiling.rst |  7 +++++-
- include/linux/alloc_tag.h                 |  8 +++++++
- lib/alloc_tag.c                           | 26 +++++++++++++++++------
- mm/slub.c                                 | 10 ++++-----
- 4 files changed, 38 insertions(+), 13 deletions(-)
+ .../device_drivers/ethernet/index.rst         |   1 +
+ .../device_drivers/ethernet/rpmsg_eth.rst     | 339 ++++++++++++++++++
+ 2 files changed, 340 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/rpmsg_eth.rst
 
-diff --git a/Documentation/mm/allocation-profiling.rst b/Documentation/mm/allocation-profiling.rst
-index 316311240e6a..9ecae74e0365 100644
---- a/Documentation/mm/allocation-profiling.rst
-+++ b/Documentation/mm/allocation-profiling.rst
-@@ -18,7 +18,7 @@ kconfig options:
-   missing annotation
+diff --git a/Documentation/networking/device_drivers/ethernet/index.rst b/Documentation/networking/device_drivers/ethernet/index.rst
+index 40ac552641a3..941f60585ee4 100644
+--- a/Documentation/networking/device_drivers/ethernet/index.rst
++++ b/Documentation/networking/device_drivers/ethernet/index.rst
+@@ -61,6 +61,7 @@ Contents:
+    wangxun/txgbevf
+    wangxun/ngbe
+    wangxun/ngbevf
++   rpmsg_eth
  
- Boot parameter:
--  sysctl.vm.mem_profiling={0|1|never}[,compressed]
-+  sysctl.vm.mem_profiling={0|1|never}[,compressed][,noslub]
+ .. only::  subproject and html
  
-   When set to "never", memory allocation profiling overhead is minimized and it
-   cannot be enabled at runtime (sysctl becomes read-only).
-@@ -30,6 +30,11 @@ Boot parameter:
-   If compression fails, a warning is issued and memory allocation profiling gets
-   disabled.
- 
-+  The optional noslub parameter disables tracking of individual SLUB objects. This
-+  approach, similar to how page owner tracking works, relies on slub_debug for SLUB
-+  object insights instead. While this reduces memory overhead, it also limits the
-+  ability to observe detailed SLUB allocation behavior.
+diff --git a/Documentation/networking/device_drivers/ethernet/rpmsg_eth.rst b/Documentation/networking/device_drivers/ethernet/rpmsg_eth.rst
+new file mode 100644
+index 000000000000..70c13deb31ea
+--- /dev/null
++++ b/Documentation/networking/device_drivers/ethernet/rpmsg_eth.rst
+@@ -0,0 +1,339 @@
++.. SPDX-License-Identifier: GPL-2.0
 +
- sysctl:
-   /proc/sys/vm/mem_profiling
- 
-diff --git a/include/linux/alloc_tag.h b/include/linux/alloc_tag.h
-index 8f7931eb7d16..af3c139712ce 100644
---- a/include/linux/alloc_tag.h
-+++ b/include/linux/alloc_tag.h
-@@ -134,6 +134,13 @@ static inline bool mem_alloc_profiling_enabled(void)
- 				   &mem_alloc_profiling_key);
- }
- 
-+DECLARE_STATIC_KEY_TRUE(slub_mem_alloc_profiling_key);
++===================================
++RPMSG Based Virtual Ethernet Driver
++===================================
 +
-+static inline bool slub_mem_alloc_profiling_enabled(void)
-+{
-+	return static_key_enabled(&slub_mem_alloc_profiling_key);
-+}
++Overview
++========
 +
- static inline struct alloc_tag_counters alloc_tag_read(struct alloc_tag *tag)
- {
- 	struct alloc_tag_counters v = { 0, 0 };
-@@ -227,6 +234,7 @@ static inline void alloc_tag_sub(union codetag_ref *ref, size_t bytes)
- 
- #define DEFINE_ALLOC_TAG(_alloc_tag)
- static inline bool mem_alloc_profiling_enabled(void) { return false; }
-+static inline bool slub_mem_alloc_profiling_enabled(void) { return false; }
- static inline void alloc_tag_add(union codetag_ref *ref, struct alloc_tag *tag,
- 				 size_t bytes) {}
- static inline void alloc_tag_sub(union codetag_ref *ref, size_t bytes) {}
-diff --git a/lib/alloc_tag.c b/lib/alloc_tag.c
-index 0142bc916f73..b79b0d987427 100644
---- a/lib/alloc_tag.c
-+++ b/lib/alloc_tag.c
-@@ -33,6 +33,8 @@ DEFINE_STATIC_KEY_MAYBE(CONFIG_MEM_ALLOC_PROFILING_ENABLED_BY_DEFAULT,
- EXPORT_SYMBOL(mem_alloc_profiling_key);
- 
- DEFINE_STATIC_KEY_FALSE(mem_profiling_compressed);
-+DEFINE_STATIC_KEY_TRUE(slub_mem_alloc_profiling_key);
-+EXPORT_SYMBOL(slub_mem_alloc_profiling_key);
- 
- struct alloc_tag_kernel_section kernel_tags = { NULL, 0 };
- unsigned long alloc_tag_ref_mask;
-@@ -710,6 +712,7 @@ static inline void free_mod_tags_mem(void) {}
- static int __init setup_early_mem_profiling(char *str)
- {
- 	bool compressed = false;
-+	bool noslub = false;
- 	bool enable;
- 
- 	if (!str || !str[0])
-@@ -725,16 +728,19 @@ static int __init setup_early_mem_profiling(char *str)
- 		if (kstrtobool(token, &enable))
- 			return -EINVAL;
- 
--		if (str) {
--
--			if (strcmp(str, "compressed"))
-+		while ((token = strsep(&str, ",")) != NULL) {
-+			if (strcmp(token, "compressed") == 0)
-+				compressed = true;
-+			else if (strcmp(token, "noslub") == 0)
-+				noslub = true;
-+			else
- 				return -EINVAL;
--
--			compressed = true;
- 		}
- 		mem_profiling_support = true;
--		pr_info("Memory allocation profiling is enabled %s compression and is turned %s!\n",
--			compressed ? "with" : "without", enable ? "on" : "off");
-+		pr_info("Memory allocation profiling is enabled %s compression, %s slub track and is turned %s!\n",
-+			compressed ? "with" : "without",
-+			noslub ? "without" : "with",
-+			enable ? "on" : "off");
- 	}
- 
- 	if (enable != mem_alloc_profiling_enabled()) {
-@@ -749,6 +755,12 @@ static int __init setup_early_mem_profiling(char *str)
- 		else
- 			static_branch_disable(&mem_profiling_compressed);
- 	}
-+	if (noslub == static_key_enabled(&slub_mem_alloc_profiling_key)) {
-+		if (noslub)
-+			static_branch_disable(&slub_mem_alloc_profiling_key);
-+		else
-+			static_branch_enable(&slub_mem_alloc_profiling_key);
-+	}
- 
- 	return 0;
- }
-diff --git a/mm/slub.c b/mm/slub.c
-index 31e11ef256f9..e8378b092b30 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -2093,7 +2093,7 @@ prepare_slab_obj_exts_hook(struct kmem_cache *s, gfp_t flags, void *p)
- 	return slab_obj_exts(slab) + obj_to_index(s, slab, p);
- }
- 
--/* Should be called only if mem_alloc_profiling_enabled() */
-+/* Should be called only if slub_mem_alloc_profiling_enabled() */
- static noinline void
- __alloc_tagging_slab_alloc_hook(struct kmem_cache *s, void *object, gfp_t flags)
- {
-@@ -2102,7 +2102,7 @@ __alloc_tagging_slab_alloc_hook(struct kmem_cache *s, void *object, gfp_t flags)
- 	obj_exts = prepare_slab_obj_exts_hook(s, flags, object);
- 	/*
- 	 * Currently obj_exts is used only for allocation profiling.
--	 * If other users appear then mem_alloc_profiling_enabled()
-+	 * If other users appear then slub_mem_alloc_profiling_enabled()
- 	 * check should be added before alloc_tag_add().
- 	 */
- 	if (likely(obj_exts))
-@@ -2112,11 +2112,11 @@ __alloc_tagging_slab_alloc_hook(struct kmem_cache *s, void *object, gfp_t flags)
- static inline void
- alloc_tagging_slab_alloc_hook(struct kmem_cache *s, void *object, gfp_t flags)
- {
--	if (mem_alloc_profiling_enabled())
-+	if (slub_mem_alloc_profiling_enabled())
- 		__alloc_tagging_slab_alloc_hook(s, object, flags);
- }
- 
--/* Should be called only if mem_alloc_profiling_enabled() */
-+/* Should be called only if slub_mem_alloc_profiling_enabled() */
- static noinline void
- __alloc_tagging_slab_free_hook(struct kmem_cache *s, struct slab *slab, void **p,
- 			       int objects)
-@@ -2143,7 +2143,7 @@ static inline void
- alloc_tagging_slab_free_hook(struct kmem_cache *s, struct slab *slab, void **p,
- 			     int objects)
- {
--	if (mem_alloc_profiling_enabled())
-+	if (slub_mem_alloc_profiling_enabled())
- 		__alloc_tagging_slab_free_hook(s, slab, p, objects);
- }
- 
++The RPMSG Based Virtual Ethernet Driver provides a virtual Ethernet interface for
++communication between a host processor and a remote processor using the RPMSG
++framework. This driver enables Ethernet-like packet transmission and reception
++over shared memory, facilitating inter-core communication in systems with
++heterogeneous processors.
++
++The driver is designed to work with the RPMSG framework, which is part of the
++Linux Remote Processor (remoteproc) subsystem. It uses shared memory for data
++exchange and supports features like multicast address management, dynamic MAC
++address assignment, and efficient packet processing using NAPI.
++
++This driver is generic and can be used by any vendor. Vendors can develop their
++own firmware for the remote processor to make it compatible with this driver.
++The firmware must adhere to the shared memory layout, RPMSG communication
++protocol, and data exchange requirements described in this documentation.
++
++Key Features
++============
++
++- Virtual Ethernet interface using RPMSG.
++- Shared memory-based packet transmission and reception.
++- Support for multicast address management.
++- Dynamic MAC address assignment.
++- NAPI (New API) support for efficient packet processing.
++- State machine for managing interface states.
++- Workqueue-based asynchronous operations.
++- Support for notifications and responses from the remote processor.
++
++Magic Number
++============
++
++A **magic number** is used in the shared memory layout to validate that the
++memory region is correctly initialized and accessible by both the host and the
++remote processor. This value is a unique constant (for example,
++``0xABCDABCD``) that is written to specific locations (such as the head and
++tail structures) in the shared memory by the firmware and checked by the Linux
++driver during the handshake process.
++
++Purpose of the Magic Number
++---------------------------
++
++- **Validation:** Ensures that the shared memory region has been properly set up
++  and is not corrupted or uninitialized.
++- **Synchronization:** Both the host and remote processor must agree on the
++  magic number value, which helps detect mismatches in memory layout or protocol
++  version.
++- **Error Detection:** If the driver detects an incorrect magic number during
++  initialization or runtime, it can abort the handshake and report an error,
++  preventing undefined behavior.
++
++Implementation Details
++----------------------
++
++- The magic number is defined as a macro in the driver source (e.g.,
++  ``#define RPMSG_ETH_SHM_MAGIC_NUM 0xABCDABCD``).
++- The firmware must write this value to the ``magic_num`` field of the head and
++  tail structures in the shared memory region.
++- During the handshake, the Linux driver reads these fields and compares them to
++  the expected value. If any mismatch is detected, the driver will log an error
++  and refuse to proceed.
++
++Example Usage in Shared Memory
++------------------------------
++
++.. code-block:: text
++
++      Shared Memory Layout:
++      ---------------------------
++      |   MAGIC_NUM (0xABCDABCD) |   <-- rpmsg_eth_shm_head
++      |          HEAD            |
++      ---------------------------
++      |   MAGIC_NUM (0xABCDABCD) |   <-- rpmsg_eth_shm_tail
++      |          TAIL            |
++      ---------------------------
++
++The magic number must be present in both the head and tail structures for the
++handshake to succeed.
++
++Firmware developers must ensure that the correct magic number is written to the
++appropriate locations in shared memory before the Linux driver attempts to
++initialize the interface.
++
++Shared Memory Layout
++====================
++
++The RPMSG Based Virtual Ethernet Driver uses a shared memory region to exchange
++data between the host and the remote processor. The shared memory is divided
++into transmit and receive regions, each with its own `head` and `tail` pointers
++to track the buffer state.
++
++Shared Memory Parameters
++------------------------
++
++The following parameters are exchanged between the host and the firmware to
++configure the shared memory layout:
++
++1. **num_pkt_bufs**:
++
++   - The total number of packet buffers available in the shared memory.
++   - This determines the maximum number of packets that can be stored in the
++     shared memory at any given time.
++
++2. **buff_slot_size**:
++
++   - The size of each buffer slot in the shared memory.
++   - This includes space for the packet length, metadata, and the actual packet
++     data.
++
++3. **base_addr**:
++
++   - The base address of the shared memory region.
++   - This is the starting point for accessing the shared memory.
++
++4. **tx_offset**:
++
++   - The offset from the `base_addr` where the transmit buffers begin.
++   - This is used by the host to write packets for transmission.
++
++5. **rx_offset**:
++
++   - The offset from the `base_addr` where the receive buffers begin.
++   - This is used by the host to read packets received from the remote
++     processor.
++
++Shared Memory Structure
++-----------------------
++
++The shared memory layout is as follows:
++
++.. code-block:: text
++
++      Shared Memory Layout:
++      ---------------------------
++      |        MAGIC_NUM        |   rpmsg_eth_shm_head
++      |          HEAD           |
++      ---------------------------
++      |        MAGIC_NUM        |
++      |        PKT_1_LEN        |
++      |          PKT_1          |
++      ---------------------------
++      |           ...           |
++      ---------------------------
++      |        MAGIC_NUM        |
++      |          TAIL           |   rpmsg_eth_shm_tail
++      ---------------------------
++
++1. **MAGIC_NUM**:
++
++   - A unique identifier used to validate the shared memory region.
++   - Ensures that the memory region is correctly initialized and accessible.
++
++2. **HEAD Pointer**:
++
++   - Tracks the start of the buffer for packet transmission or reception.
++   - Updated by the producer (host or remote processor) after writing a packet.
++
++3. **TAIL Pointer**:
++
++   - Tracks the end of the buffer for packet transmission or reception.
++   - Updated by the consumer (host or remote processor) after reading a packet.
++
++4. **Packet Buffers**:
++
++   - Each packet buffer contains:
++
++      - **Packet Length**: A 4-byte field indicating the size of the packet.
++      - **Packet Data**: The actual Ethernet frame data.
++
++5. **Buffer Size**:
++
++   - Each buffer has a fixed size defined by `RPMSG_ETH_BUFFER_SIZE`, which
++     includes space for the packet length and data.
++
++Buffer Management
++-----------------
++
++- The host and remote processor use a circular buffer mechanism to manage the shared memory.
++- The `head` and `tail` pointers are used to determine the number of packets available for processing:
++
++   .. code-block:: c
++
++         num_pkts = head - tail;
++         num_pkts = num_pkts >= 0 ? num_pkts : (num_pkts + max_buffers);
++
++- The producer writes packets to the buffer and increments the `head` pointer.
++- The consumer reads packets from the buffer and increments the `tail` pointer.
++
++RPMSG Communication
++===================
++
++The driver uses RPMSG channels to exchange control messages between the host and
++the remote processor. These messages are used to manage the state of the
++Ethernet interface, configure settings, notify events, and exchange runtime
++information.
++
++Information Exchanged Between RPMSG Channels
++--------------------------------------------
++
++1. **Requests from Host to Remote Processor**:
++
++   - `RPMSG_ETH_REQ_SHM_INFO`: Request shared memory information, such as
++     ``num_pkt_bufs``, ``buff_slot_size``, ``base_addr``, ``tx_offset``, and
++     ``rx_offset``.
++   - `RPMSG_ETH_REQ_SET_MAC_ADDR`: Set the MAC address of the Ethernet
++     interface.
++   - `RPMSG_ETH_REQ_ADD_MC_ADDR`: Add a multicast address to the remote
++     processor's filter list.
++   - `RPMSG_ETH_REQ_DEL_MC_ADDR`: Remove a multicast address from the remote
++     processor's filter list.
++
++2. **Responses from Remote Processor to Host**:
++
++   - `RPMSG_ETH_RESP_SET_MAC_ADDR`: Acknowledge the MAC address configuration.
++   - `RPMSG_ETH_RESP_ADD_MC_ADDR`: Acknowledge the addition of a multicast
++     address.
++   - `RPMSG_ETH_RESP_DEL_MC_ADDR`: Acknowledge the removal of a multicast
++     address.
++   - `RPMSG_ETH_RESP_SHM_INFO`: Respond with shared memory information such as
++     ``num_pkt_bufs``, ``buff_slot_size``, ``base_addr``, ``tx_offset``, and
++     ``rx_offset``.
++
++3. **Notifications from Remote Processor to Host**:
++
++   - `RPMSG_ETH_NOTIFY_PORT_UP`: Notify that the Ethernet port is up and ready
++     for communication.
++   - `RPMSG_ETH_NOTIFY_PORT_DOWN`: Notify that the Ethernet port is down.
++   - `RPMSG_ETH_NOTIFY_PORT_READY`: Notify that the Ethernet port is ready for
++     configuration.
++   - `RPMSG_ETH_NOTIFY_REMOTE_READY`: Notify that the remote processor is ready
++     for communication.
++
++4. **Runtime Information Exchanged**:
++
++   - **Link State**: Notifications about link state changes (e.g., link up or
++     link down).
++   - **Statistics**: Runtime statistics such as transmitted/received packets,
++     errors, and dropped packets.
++   - **Error Notifications**: Notifications about errors like buffer overflows
++     or invalid packets.
++   - **Configuration Updates**: Notifications about changes in configuration,
++     such as updated MTU or VLAN settings.
++
++How-To Guide for Vendors
++========================
++
++This section provides a guide for vendors to develop firmware for the remote
++processor that is compatible with the RPMSG Based Virtual Ethernet Driver.
++
++1. **Implement Shared Memory Layout**:
++
++   - Allocate a shared memory region for packet transmission and reception.
++   - Initialize the `MAGIC_NUM`, `num_pkt_bufs`, `buff_slot_size`, `base_addr`,
++     `tx_offset`, and `rx_offset`.
++
++2. **Magic Number Requirements**
++
++   - The firmware must write a unique magic number (for example, ``0xABCDABCD``)
++     to the `magic_num` field of both the head and tail structures in the shared
++     memory region.
++   - This magic number is used by the Linux driver to validate that the shared
++     memory region is correctly initialized and accessible.
++   - If the driver detects an incorrect magic number during the handshake, it
++     will abort initialization and report an error.
++   - Vendors must ensure the magic number matches the value expected by the
++     Linux driver (see the `RPMSG_ETH_SHM_MAGIC_NUM` macro in the driver
++     source).
++
++3. **Handle RPMSG Requests**:
++
++   - Implement handlers for the following RPMSG requests:
++
++      - `RPMSG_ETH_REQ_SHM_INFO`
++      - `RPMSG_ETH_REQ_SET_MAC_ADDR`
++      - `RPMSG_ETH_REQ_ADD_MC_ADDR`
++      - `RPMSG_ETH_REQ_DEL_MC_ADDR`
++
++4. **Send RPMSG Notifications**:
++
++   - Notify the host about the state of the Ethernet interface using the
++     notifications described above.
++
++5. **Send Runtime Information**:
++
++   - Implement mechanisms to send runtime information such as link state
++     changes, statistics, and error notifications.
++
++6. **Implement Packet Processing**:
++
++   - Process packets in the shared memory transmit and receive buffers.
++
++7. **Test the Firmware**:
++
++   - Use the RPMSG Based Virtual Ethernet Driver on the host to test packet
++     transmission and reception.
++
++Configuration
++=============
++
++The driver relies on the device tree for configuration. The shared memory region
++is specified using the `virtual-eth-shm` node in the device tree.
++
++Example Device Tree Node
++------------------------
++
++.. code-block:: dts
++
++   virtual-eth-shm {
++           compatible = "rpmsg,virtual-eth-shm";
++           reg = <0x80000000 0x10000>; /* Base address and size of shared memory */
++   };
++
++Limitations
++===========
++
++- The driver assumes a specific shared memory layout and may not work with other
++  configurations.
++- Multicast address filtering is limited to the capabilities of the underlying
++  RPMSG framework.
++- The driver currently supports only one transmit and one receive queue.
++
++References
++==========
++
++- RPMSG Framework Documentation: https://www.kernel.org/doc/html/latest/rpmsg.html
++- Linux Networking Documentation: https://www.kernel.org/doc/html/latest/networking/index.html
++
++Authors
++=======
++
++- MD Danish Anwar <danishanwar@ti.com>
 -- 
 2.34.1
 
