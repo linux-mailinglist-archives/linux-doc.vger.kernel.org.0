@@ -1,281 +1,226 @@
-Return-Path: <linux-doc+bounces-53899-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-53902-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6848FB0ECB3
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 10:06:25 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1623BB0ECE0
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 10:13:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AF3761C274AE
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 08:05:39 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1B372164E59
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Jul 2025 08:13:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D721127F73D;
-	Wed, 23 Jul 2025 08:04:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F3DD62797A4;
+	Wed, 23 Jul 2025 08:13:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="YWz1RfaZ"
+	dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b="c2BAurjQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF871279795;
-	Wed, 23 Jul 2025 08:04:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.19.245
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD492A59;
+	Wed, 23 Jul 2025 08:13:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.132.182.106
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753257857; cv=none; b=ge51aatmMX5v9X2WHx2BVpQtpCIVOI3zQQUWCfO26VZPZxEIiaz0kYTg4UVc6vqTWmEHmt4jysqLyNpHKQZFXn79KFchWnohzKSVrQmWSIsiY37OrNqLEVPKy2R2GfzyyqgILaCczlFGlCE/c8BubVB6OnayJ42M1CweYb+eq3I=
+	t=1753258389; cv=none; b=BNkyIeciVYwJwfpf416ODzH3cK9LavHIoUtt88O0DqWvKLhoJ9sHkZptN3l9q9ySeLHAthh4GMDlzw9R67aVci/O8APGpYKPme/a8fvaJNKxu7HzPowX4LqcokOqq3Gj5n7zOohofUnCS/A7tqK28LnFsUxywtml2fjNTd9aZyE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753257857; c=relaxed/simple;
-	bh=Rq8CWf3AxoYslKrBl8R2+0dVi1ZfoIP+gkHNSZ+MeKc=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=CTo402KVuDvq4GQBYzUhOlSTF/JtgTXfZ/I/mIvrxJxolqV8MINMLdlOgp5EhyeBC5BzJaOnXRYkSF3G5pA/bOB+RBVjKORf//vVqUD1Hs/0JymAXbyMyaOekgzPqH02wfitTKoKX1wUSTL/1a+40YrMrgKPQMj8+hIdPrbbK8g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=YWz1RfaZ; arc=none smtp.client-ip=198.47.19.245
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 56N83ej81223420;
-	Wed, 23 Jul 2025 03:03:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1753257820;
-	bh=exLzVkguk6cycSbD88736Px3AndF6YoZ9kK3pIxDvEY=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=YWz1RfaZ6hic28j0p0ng4q1xYW01IvB+9VtkBqQGoCrsuehNm8jFuMBKysFlhNeV3
-	 5u0yDufKNwOzWvb9vezThO1LGXYQ/hnbYtF/K5ijn27S/3DXgpGbPgkDCAca12r+s+
-	 f2LN3UmF0Gl7YJH8raZOgHPLqxG+xOkZfWNdsFTk=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 56N83e9N2219311
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Wed, 23 Jul 2025 03:03:40 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 23
- Jul 2025 03:03:39 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 23 Jul 2025 03:03:39 -0500
-Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 56N83dgO2366059;
-	Wed, 23 Jul 2025 03:03:39 -0500
-Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
-	by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 56N83cwT016007;
-	Wed, 23 Jul 2025 03:03:38 -0500
-From: MD Danish Anwar <danishanwar@ti.com>
-To: "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet
-	<edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni
-	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
-        Jonathan Corbet
-	<corbet@lwn.net>, Andrew Lunn <andrew+netdev@lunn.ch>,
-        Mengyuan Lou
-	<mengyuanlou@net-swift.com>,
-        MD Danish Anwar <danishanwar@ti.com>,
-        Michael
- Ellerman <mpe@ellerman.id.au>,
-        Madhavan Srinivasan <maddy@linux.ibm.com>,
-        Fan
- Gong <gongfan1@huawei.com>, Lee Trager <lee@trager.us>,
-        Lorenzo Bianconi
-	<lorenzo@kernel.org>,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        Lukas
- Bulwahn <lukas.bulwahn@redhat.com>,
-        Parthiban Veerasooran
-	<Parthiban.Veerasooran@microchip.com>
-CC: <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>
-Subject: [PATCH net-next 5/5] net: rpmsg-eth: Add support for multicast filtering
-Date: Wed, 23 Jul 2025 13:33:22 +0530
-Message-ID: <20250723080322.3047826-6-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250723080322.3047826-1-danishanwar@ti.com>
-References: <20250723080322.3047826-1-danishanwar@ti.com>
+	s=arc-20240116; t=1753258389; c=relaxed/simple;
+	bh=x4YCilgrFXmxCXXy8ZoPr6Kw8EmAvhbD3xpyUcNslJU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=QMYI4R98j/vwpgxwQPl0AyExUSVFMn7S15Fm0m1QMwTKwK44u4ZTV6UqC1D7gXMJPZ9s/4IzMNg8hfFXqLOmf1gLd2amVyhInOUUMSfdx7sBPJdl5lzVKpoi9Lm5uo5+MglVQX53FkiOAZDoNqsJbZuaX2TbF+w/R8AldE+oifo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com; spf=pass smtp.mailfrom=foss.st.com; dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b=c2BAurjQ; arc=none smtp.client-ip=185.132.182.106
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+	by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56N6doax017391;
+	Wed, 23 Jul 2025 10:12:48 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=selector1; bh=
+	QK/sgu4bbRdODvf5tGfCdDwOR/bbwmheF/bQDBgiURc=; b=c2BAurjQoIkZx3qZ
+	U2f+PzALTuiatgf01cQJZ+5YLfNH9gWPig4oRGmgheOtBV6Fysjg3Dbjnyq3At1K
+	C06RPHgeUh3BDvg17/h+P/+vsRdODvB4gkDo6OOZFuKie0KGvhlXbXFBb3/SXuYq
+	hRkN/TQBnhr+e8cye3LN3PH5MUR+3JqDcMblh1k+fCMjX13S64aaHHjRCoPXakVq
+	ui2IgS0L9Jb9e+sxtSOl6kjyrnZP+pLaop77Dt5U0vAbHXFPodnoh06RmDssgYUO
+	qsuGOrFmw/0G6jp3XDY/ZThhXSJ2KPAst6jbzuklVuJBOuMO5+1bZw9V6jLMl2l4
+	pqpznw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 480mx4qpqw-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 23 Jul 2025 10:12:48 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+	by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2CEBC40046;
+	Wed, 23 Jul 2025 10:11:22 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB65D76C471;
+	Wed, 23 Jul 2025 10:10:01 +0200 (CEST)
+Received: from [10.48.86.185] (10.48.86.185) by SHFDAG1NODE2.st.com
+ (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 23 Jul
+ 2025 10:10:00 +0200
+Message-ID: <e9e33fc7-4705-4e6d-bd33-ce9dc1a9b94e@foss.st.com>
+Date: Wed, 23 Jul 2025 10:10:00 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 07/19] dt-bindings: memory: factorise LPDDR channel
+ binding into memory channel
+To: Krzysztof Kozlowski <krzk@kernel.org>,
+        Julius Werner
+	<jwerner@chromium.org>
+CC: Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+        Rob
+ Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor
+ Dooley <conor+dt@kernel.org>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        Philipp Zabel
+	<p.zabel@pengutronix.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Gatien Chevallier
+	<gatien.chevallier@foss.st.com>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Gabriel Fernandez
+	<gabriel.fernandez@foss.st.com>,
+        Le Goffic <legoffic.clement@gmail.com>,
+        Julius Werner <jwerner@chromium.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-perf-users@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-stm32@st-md-mailman.stormreply.com>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-clk@vger.kernel.org>
+References: <20250722-ddrperfm-upstream-v3-0-7b7a4f3dc8a0@foss.st.com>
+ <20250722-ddrperfm-upstream-v3-7-7b7a4f3dc8a0@foss.st.com>
+ <20250723-zealous-turtle-of-perfection-e67aee@kuoka>
+Content-Language: en-US
+From: Clement LE GOFFIC <clement.legoffic@foss.st.com>
+In-Reply-To: <20250723-zealous-turtle-of-perfection-e67aee@kuoka>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE2.st.com
+ (10.75.129.70)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-23_01,2025-07-22_01,2025-03-28_01
 
-Add support for multicast filtering for ICVE driver. Implement the
-ndo_set_rx_mode callback as icve_set_rx_mode() API. rx_mode_workqueue is
-initialized in icve_rpmsg_probe() and queued in icve_set_rx_mode().
+Hi Krzysztof,
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
- drivers/net/ethernet/rpmsg_eth.c | 63 ++++++++++++++++++++++++++++++++
- drivers/net/ethernet/rpmsg_eth.h | 12 ++++++
- 2 files changed, 75 insertions(+)
+On 7/23/25 08:57, Krzysztof Kozlowski wrote:
+> On Tue, Jul 22, 2025 at 04:03:24PM +0200, Clément Le Goffic wrote:
+>> LPDDR and DDR channels exist and share the same properties, they have a
+>> compatible, ranks, and an io-width.
+> 
+> Maybe it is true for all types of SDRAM, like RDRAM and eDRAM, but I
+> don't think all memory types do.
+> 
+> I think this should be renamed to sdram-channel.
 
-diff --git a/drivers/net/ethernet/rpmsg_eth.c b/drivers/net/ethernet/rpmsg_eth.c
-index 4efa9b634f8b..a77fc4f3f769 100644
---- a/drivers/net/ethernet/rpmsg_eth.c
-+++ b/drivers/net/ethernet/rpmsg_eth.c
-@@ -148,6 +148,11 @@ static int create_request(struct rpmsg_eth_common *common,
- 		ether_addr_copy(msg->req_msg.mac_addr.addr,
- 				common->port->ndev->dev_addr);
- 		break;
-+	case RPMSG_ETH_REQ_ADD_MC_ADDR:
-+	case RPMSG_ETH_REQ_DEL_MC_ADDR:
-+		ether_addr_copy(msg->req_msg.mac_addr.addr,
-+				common->mcast_addr);
-+		break;
- 	case RPMSG_ETH_NOTIFY_PORT_UP:
- 	case RPMSG_ETH_NOTIFY_PORT_DOWN:
- 		msg->msg_hdr.msg_type = RPMSG_ETH_NOTIFY_MSG;
-@@ -199,6 +204,22 @@ static int rpmsg_eth_create_send_request(struct rpmsg_eth_common *common,
- 	return ret;
- }
- 
-+static int rpmsg_eth_add_mc_addr(struct net_device *ndev, const u8 *addr)
-+{
-+	struct rpmsg_eth_common *common = rpmsg_eth_ndev_to_common(ndev);
-+
-+	ether_addr_copy(common->mcast_addr, addr);
-+	return rpmsg_eth_create_send_request(common, RPMSG_ETH_REQ_ADD_MC_ADDR, true);
-+}
-+
-+static int rpmsg_eth_del_mc_addr(struct net_device *ndev, const u8 *addr)
-+{
-+	struct rpmsg_eth_common *common = rpmsg_eth_ndev_to_common(ndev);
-+
-+	ether_addr_copy(common->mcast_addr, addr);
-+	return rpmsg_eth_create_send_request(common, RPMSG_ETH_REQ_DEL_MC_ADDR, true);
-+}
-+
- static void rpmsg_eth_state_machine(struct work_struct *work)
- {
- 	struct delayed_work *dwork = to_delayed_work(work);
-@@ -282,6 +303,10 @@ static int rpmsg_eth_rpmsg_cb(struct rpmsg_device *rpdev, void *data, int len,
- 			break;
- 		case RPMSG_ETH_RESP_SET_MAC_ADDR:
- 			break;
-+		case RPMSG_ETH_RESP_ADD_MC_ADDR:
-+		case RPMSG_ETH_RESP_DEL_MC_ADDR:
-+			complete(&common->sync_msg);
-+			break;
- 		}
- 		break;
- 	case RPMSG_ETH_NOTIFY_MSG:
-@@ -470,10 +495,15 @@ static int rpmsg_eth_ndo_stop(struct net_device *ndev)
- 
- 	netif_carrier_off(port->ndev);
- 
-+	__dev_mc_unsync(ndev, rpmsg_eth_del_mc_addr);
-+	__hw_addr_init(&common->mc_list);
-+
- 	cancel_delayed_work_sync(&common->state_work);
- 	timer_delete_sync(&port->rx_timer);
- 	napi_disable(&port->rx_napi);
- 
-+	cancel_work_sync(&common->rx_mode_work);
-+
- 	return 0;
- }
- 
-@@ -533,10 +563,35 @@ static int rpmsg_eth_set_mac_address(struct net_device *ndev, void *addr)
- 	return ret;
- }
- 
-+static void rpmsg_eth_ndo_set_rx_mode_work(struct work_struct *work)
-+{
-+	struct rpmsg_eth_common *common;
-+	struct net_device *ndev;
-+
-+	common = container_of(work, struct rpmsg_eth_common, rx_mode_work);
-+	ndev = common->port->ndev;
-+
-+	/* make a mc list copy */
-+	netif_addr_lock_bh(ndev);
-+	__hw_addr_sync(&common->mc_list, &ndev->mc, ndev->addr_len);
-+	netif_addr_unlock_bh(ndev);
-+
-+	__hw_addr_sync_dev(&common->mc_list, ndev, rpmsg_eth_add_mc_addr,
-+			   rpmsg_eth_del_mc_addr);
-+}
-+
-+static void rpmsg_eth_set_rx_mode(struct net_device *ndev)
-+{
-+	struct rpmsg_eth_common *common = rpmsg_eth_ndev_to_common(ndev);
-+
-+	queue_work(common->cmd_wq, &common->rx_mode_work);
-+}
-+
- static const struct net_device_ops rpmsg_eth_netdev_ops = {
- 	.ndo_open = rpmsg_eth_ndo_open,
- 	.ndo_stop = rpmsg_eth_ndo_stop,
- 	.ndo_start_xmit = rpmsg_eth_start_xmit,
-+	.ndo_set_rx_mode = rpmsg_eth_set_rx_mode,
- 	.ndo_set_mac_address = rpmsg_eth_set_mac_address,
- };
- 
-@@ -640,6 +695,13 @@ static int rpmsg_eth_probe(struct rpmsg_device *rpdev)
- 	INIT_DELAYED_WORK(&common->state_work, rpmsg_eth_state_machine);
- 	init_completion(&common->sync_msg);
- 
-+	__hw_addr_init(&common->mc_list);
-+	INIT_WORK(&common->rx_mode_work, rpmsg_eth_ndo_set_rx_mode_work);
-+	common->cmd_wq = create_singlethread_workqueue("rpmsg_eth_rx_work");
-+	if (!common->cmd_wq) {
-+		dev_err(dev, "Failure requesting workqueue\n");
-+		return -ENOMEM;
-+	}
- 	/* Register the network device */
- 	ret = rpmsg_eth_init_ndev(common);
- 	if (ret)
-@@ -658,6 +720,7 @@ static void rpmsg_eth_rpmsg_remove(struct rpmsg_device *rpdev)
- 
- 	netif_napi_del(&port->rx_napi);
- 	timer_delete_sync(&port->rx_timer);
-+	destroy_workqueue(common->cmd_wq);
- }
- 
- static struct rpmsg_device_id rpmsg_eth_rpmsg_id_table[] = {
-diff --git a/drivers/net/ethernet/rpmsg_eth.h b/drivers/net/ethernet/rpmsg_eth.h
-index d7e4d53c8de4..5ff1a0e57c37 100644
---- a/drivers/net/ethernet/rpmsg_eth.h
-+++ b/drivers/net/ethernet/rpmsg_eth.h
-@@ -50,10 +50,14 @@ enum rpmsg_eth_rpmsg_type {
- 	/* Request types */
- 	RPMSG_ETH_REQ_SHM_INFO = 0,
- 	RPMSG_ETH_REQ_SET_MAC_ADDR,
-+	RPMSG_ETH_REQ_ADD_MC_ADDR,
-+	RPMSG_ETH_REQ_DEL_MC_ADDR,
- 
- 	/* Response types */
- 	RPMSG_ETH_RESP_SHM_INFO,
- 	RPMSG_ETH_RESP_SET_MAC_ADDR,
-+	RPMSG_ETH_RESP_ADD_MC_ADDR,
-+	RPMSG_ETH_RESP_DEL_MC_ADDR,
- 
- 	/* Notification types */
- 	RPMSG_ETH_NOTIFY_PORT_UP,
-@@ -232,6 +236,10 @@ enum rpmsg_eth_state {
-  * @state: Interface state
-  * @state_work: Delayed work for state machine
-  * @sync_msg: Completion for synchronous message
-+ * @rx_mode_work: Work structure for rx mode
-+ * @cmd_wq: Workqueue for commands
-+ * @mc_list: List of multicast addresses
-+ * @mcast_addr: Multicast address filter
-  */
- struct rpmsg_eth_common {
- 	struct rpmsg_device *rpdev;
-@@ -248,6 +256,10 @@ struct rpmsg_eth_common {
- 	struct mutex state_lock;
- 	struct delayed_work state_work;
- 	struct completion sync_msg;
-+	struct work_struct rx_mode_work;
-+	struct workqueue_struct *cmd_wq;
-+	struct netdev_hw_addr_list mc_list;
-+	u8 mcast_addr[ETH_ALEN];
- };
- 
- /**
--- 
-2.34.1
+Ok, do you want me to also the memory-props patch into sdram-props ?
+
+> 
+>>
+>> Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
+>> ---
+>>   ...pddr-channel.yaml => jedec,memory-channel.yaml} | 26 +++++++++++-----------
+>>   1 file changed, 13 insertions(+), 13 deletions(-)
+>>
+>> diff --git a/Documentation/devicetree/bindings/memory-controllers/ddr/jedec,lpddr-channel.yaml b/Documentation/devicetree/bindings/memory-controllers/ddr/jedec,memory-channel.yaml
+>> similarity index 82%
+>> rename from Documentation/devicetree/bindings/memory-controllers/ddr/jedec,lpddr-channel.yaml
+>> rename to Documentation/devicetree/bindings/memory-controllers/ddr/jedec,memory-channel.yaml
+>> index 34b5bd153f63..3bf3a63466eb 100644
+>> --- a/Documentation/devicetree/bindings/memory-controllers/ddr/jedec,lpddr-channel.yaml
+>> +++ b/Documentation/devicetree/bindings/memory-controllers/ddr/jedec,memory-channel.yaml
+>> @@ -1,16 +1,16 @@
+>>   # SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+>>   %YAML 1.2
+>>   ---
+>> -$id: http://devicetree.org/schemas/memory-controllers/ddr/jedec,lpddr-channel.yaml#
+>> +$id: http://devicetree.org/schemas/memory-controllers/ddr/jedec,memory-channel.yaml#
+>>   $schema: http://devicetree.org/meta-schemas/core.yaml#
+>>   
+>> -title: LPDDR channel with chip/rank topology description
+>> +title: Memory channel with chip/rank topology description
+>>   
+>>   description:
+>> -  An LPDDR channel is a completely independent set of LPDDR pins (DQ, CA, CS,
+>> -  CK, etc.) that connect one or more LPDDR chips to a host system. The main
+>> -  purpose of this node is to overall LPDDR topology of the system, including the
+>> -  amount of individual LPDDR chips and the ranks per chip.
+>> +  A memory channel is a completely independent set of pins (DQ, CA, CS,
+> 
+> A memory channel of SDRAM memory like DDR SDRAM or LPDDR SDRAM is ...
+
+Ack
+
+> 
+>> +  CK, etc.) that connect one or more memory chips to a host system. The main
+>> +  purpose of this node is to overall memory topology of the system, including the
+>> +  amount of individual memory chips and the ranks per chip.
+>>   
+>>   maintainers:
+>>     - Julius Werner <jwerner@chromium.org>
+>> @@ -26,14 +26,14 @@ properties:
+>>     io-width:
+>>       description:
+>>         The number of DQ pins in the channel. If this number is different
+>> -      from (a multiple of) the io-width of the LPDDR chip, that means that
+>> +      from (a multiple of) the io-width of the memory chip, that means that
+>>         multiple instances of that type of chip are wired in parallel on this
+>>         channel (with the channel's DQ pins split up between the different
+>>         chips, and the CA, CS, etc. pins of the different chips all shorted
+>>         together).  This means that the total physical memory controlled by a
+>>         channel is equal to the sum of the densities of each rank on the
+>> -      connected LPDDR chip, times the io-width of the channel divided by
+>> -      the io-width of the LPDDR chip.
+>> +      connected memory chip, times the io-width of the channel divided by
+>> +      the io-width of the memory chip.
+>>       enum:
+>>         - 8
+>>         - 16
+>> @@ -51,8 +51,8 @@ patternProperties:
+>>     "^rank@[0-9]+$":
+>>       type: object
+>>       description:
+>> -      Each physical LPDDR chip may have one or more ranks. Ranks are
+>> -      internal but fully independent sub-units of the chip. Each LPDDR bus
+>> +      Each physical memory chip may have one or more ranks. Ranks are
+>> +      internal but fully independent sub-units of the chip. Each memory bus
+>>         transaction on the channel targets exactly one rank, based on the
+>>         state of the CS pins. Different ranks may have different densities and
+>>         timing requirements.
+>> @@ -107,7 +107,7 @@ additionalProperties: false
+>>   
+>>   examples:
+>>     - |
+>> -    lpddr-channel0 {
+>> +    memory-channel0 {
+> 
+> If doing this, then separate commit based on generic node name
+> convention. But then we need to come with generic node name first,
+> sdram-channel?
+
+I don't want anything specific so yes it could be cool to have a generic 
+node name.
+"sdram-channel" is fine for me.
+@Julius what do you think about it ?
+Is your existing software generating it in the kernel ?
+I'm curious about dynamic node name generation.
+
+> 
+> And also '-0', not '0' suffix.
+
+Ack
+
+> Best regards,
+> Krzysztof
+> 
 
 
