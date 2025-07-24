@@ -1,189 +1,136 @@
-Return-Path: <linux-doc+bounces-54087-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54083-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D0D8B1034A
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Jul 2025 10:20:08 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52E9BB10341
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Jul 2025 10:19:12 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id ED22D3BFE67
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Jul 2025 08:18:10 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id B7A751CE17D7
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Jul 2025 08:17:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F19EA27467A;
-	Thu, 24 Jul 2025 08:17:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6796E273D6D;
+	Thu, 24 Jul 2025 08:17:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b="3xJHwG0+"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="h58J0Wne"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB9CE2727F8;
-	Thu, 24 Jul 2025 08:17:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.132.182.106
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEED91A4F3C;
+	Thu, 24 Jul 2025 08:17:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753345059; cv=none; b=N/y8fTzNd8SoJ1gV7C5a0nhsMuMrXgEQ5RZfAJLISdKahVkO05IYSXojySnw+zpPdZsE03CP3uMskUTuQppiLApdpfG4e0SNZ3V2NAmvlu5tK8DDYaktwPPmo+k418URopzNQQWnVv4cKR6RrwFWkVw2t7uYhRuyuTvsuW8uZnE=
+	t=1753345023; cv=none; b=E21hWCqWGnberLQYITkbU1nmC0mIshA5Cl1KZF2h9pjwD4DDt32LOplGCfbZhltRRP8JlEf0QqDx7KHNsCtWE/5d6V1mEoV67GzYrQi/9sM6Bolg/cIuS5cbus8daMCfwiGRM8h7/A92EucDcAyw/SsZ5rpZGbjyHVAdmNxcZFU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753345059; c=relaxed/simple;
-	bh=we1YYbfJeCX1MPflf2l+IOI1BZGajSbOOSun4mUg1RU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=hsBKMB+kj+iekkDeAHEPA3yJZl7rcPC/bE65snBzWKQFTMsoJkR5PlN4+hacLxUakn+NCW7THHRyitoULoQs4aA9lO1BKBlIMiNJIY89O0MtuFvnexx0bBGVW8eMXfdbuHYsg2CWq1x2QJgJQjfHIWOkwMzuFEsowkPd+/T/OY0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com; spf=pass smtp.mailfrom=foss.st.com; dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b=3xJHwG0+; arc=none smtp.client-ip=185.132.182.106
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56O7xYXJ019443;
-	Thu, 24 Jul 2025 10:17:02 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=selector1; bh=
-	7kzT0Hpl/NFWqdqEQ0wKSVcFU9pNYe2twdBPGJnr/8o=; b=3xJHwG0+iD9m/4QN
-	rbFCod58Hm2lUpPt6E8AILpoUlGTdQX14xlcdHd0rAdE1Qdfn8FbSay3IhXbCyzC
-	Ea9Kfe3UIySUfRXHvSgtpRFa5RSue6d+0t9SiMuTqc75O3nINnaSFUAwPihCBHwG
-	AkRBgHAFolujHveqkRgwzzee0cIxOEtlkMMBFnsmn9W7tIUB6m4IF+gwJ8i28fhi
-	TcjRlFZX6i8zMOgLJ66dh2U4opER27vPA7m3LpejdCOr3Dc12wer/PfyC1UEKw7u
-	D/6RbrmfrVgRaVv0bh7c8ur44zDZK+/rgjCvAECMHwG6Ed3kc/GE9x7d3OHgUxif
-	rTaqPw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
-	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 480mx4w9y6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 24 Jul 2025 10:17:02 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E75BB40049;
-	Thu, 24 Jul 2025 10:15:32 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 560CB781E01;
-	Thu, 24 Jul 2025 10:14:13 +0200 (CEST)
-Received: from [10.48.86.185] (10.48.86.185) by SHFDAG1NODE2.st.com
- (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 24 Jul
- 2025 10:14:12 +0200
-Message-ID: <204401b4-b483-47e2-ae73-0994b39bd30c@foss.st.com>
-Date: Thu, 24 Jul 2025 10:14:11 +0200
+	s=arc-20240116; t=1753345023; c=relaxed/simple;
+	bh=wptEVqnmBc1ZGct6J0t7hxveJYyKzsJlWIx61MzWRbA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ANITx5XHVHflHQ7NWiBU4GuL6qiczeqxTK/HwJD1ig+9NY54+vkd1VH762g931ruDyIabZjy/2Jn3MraZgrsVd9w71ELkAl5eWRVGdXb/DZqu4BUlsUHzDKINTti0cLDmaLLtnwUS364Zb/g7ACcwwWjvLFgHj6pNkZd/DD6Raw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=h58J0Wne; arc=none smtp.client-ip=209.85.210.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-748d982e92cso494606b3a.1;
+        Thu, 24 Jul 2025 01:17:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1753345021; x=1753949821; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bemT7jVEV2L5HIRvoWrvjFbWT8mOk0f0AWRK4b4eQmE=;
+        b=h58J0Wne4z4iql3a80RHtQ5nnhC7akV74/1GoqhQi91WPmTQCmsEmmZ5b0jonl2LRw
+         rhNpVfCNM/CY3b6j50H929BCYqvyZULt+qVpHon7T/cVV4MLXYQrxbIMOr1i7JWTH/8d
+         FtceHQ2fh4+sOS1EHPfnykXzdX45iowSG6gnYbjTyRpnpRwIWZniVYWziLuVGbT+OpmY
+         p9uwXDMPgMXGiSbUNYw7+zSxJ9hMpt2SSopf5AptjHJxxVGOWwljgWbWffKxqXTs6f5H
+         p8wODh7oyonbd/cJOIe4CRcUa3FmHecpc6b73kg8IkAFwObG/l46/mKOH4NlapZYtTbT
+         ZS4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753345021; x=1753949821;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bemT7jVEV2L5HIRvoWrvjFbWT8mOk0f0AWRK4b4eQmE=;
+        b=GupURPd5DpiDu5v5dBa8bGmp3l1/I0SMbgnbi5xksQwIz314US/qKlfwwmylKlVxC6
+         tWE0tub49dT/DuRUcMbu1O6qtqA1rGhPySEekNIm/JNyaxr+9CO8krrQ3M2pHehTHvK4
+         zlGUn38S0WdJ7TJHYRdGhU4E3aFG1PeKlcEDVhi419EkL7MtF9zMqkGHJ2QIrhfN0ndD
+         rh55SaW0HPBaWa1KEWgBhvgOxDJBnB21N89upRGjaFmkwAzIacDA0KwkjBEfpBamKGCc
+         Xs8rW5J+K2q+/F1EqjBchjih2ncLOYbZqIYrR4SCWSFqlaM5joe6CZ97Pk8/B05gmkiP
+         wiNg==
+X-Forwarded-Encrypted: i=1; AJvYcCU52K3UK8zlxLtWo0sT1lnuQt41NAX9QEdLJzx3B+ojgJqH99cR/UFuAm/zPYSczdzQnJBetWsozwkpRArS@vger.kernel.org, AJvYcCUtW/LgS9t2SVCF6T9MEXGXOenin+4g2G4xK0BPzqmnXa0W6mS0zFbYICkK50HaNvSMzqei/CBO4xs=@vger.kernel.org, AJvYcCVFveJhSlr3FGzXu80o3SUEDxZxhPietO4IVOavVKA8HRLnS923wdvrCBLSxo7YHjPGvm10hpkYalnPxnIwbEQL@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw400bkIuvugCKayM0HwHN2T3azKezLow/7HPvgXt9FoKbD+4Ww
+	qzqrUZqoe4zyQxsdiO4/BdxAoYPClIBrvRe360r8lFLgfa/orhtSeUXSRYx33Hbe
+X-Gm-Gg: ASbGnctR8j1bcIF3l7tjX47K2fYPkll80KFGUGt8zl6zFtuGDtsEKPPHy+g2JdnV3Bv
+	a5aH8r2RfRsntaGSIA2jg5gQLMIr6yQVjW6EMkdIdPeJkNdx/BZBsuzFQZyhLNBZHml/crozkX/
+	HYY6oLDcdmmSSrrGCJ9JZRmkZ4OTiHIB3tZVNr1xZGQumjd/okBidVjgOOpCmWFouUZwpBwCmLM
+	lV3M2NWFFahOen/ydnPq9nWp8TgjeWvhy0fe0uV8J2OgRQay593vSUgCVPuSs2Hzz62/gYkTnGd
+	FstdTnwKrffX9HvCXRIuUrK7Ias2sSBAQM7NecYDeAOv1Yw3NK2Od9vbPfkwUD8A/TWNnQUsXaR
+	KJM77W65WSRnAy/qCgG7sJfLbBF/2B/RaI/XgyKGhGrQ4yjY=
+X-Google-Smtp-Source: AGHT+IHaYBCozI7SqHxrLah+Edbfhj9bliokCAp+L0ubN3e6km2nUgJuI2Xx4ak+xa7g2BmQyMxOHQ==
+X-Received: by 2002:a05:6a20:6a0a:b0:239:d43:4815 with SMTP id adf61e73a8af0-23d490e7f3amr10149916637.28.1753345020922;
+        Thu, 24 Jul 2025 01:17:00 -0700 (PDT)
+Received: from localhost.localdomain ([209.132.188.88])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-761adb7bbeesm1074704b3a.24.2025.07.24.01.16.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Jul 2025 01:17:00 -0700 (PDT)
+From: Hangbin Liu <liuhangbin@gmail.com>
+To: netdev@vger.kernel.org
+Cc: Jay Vosburgh <jv@jvosburgh.net>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Nikolay Aleksandrov <razor@blackwall.org>,
+	Simon Horman <horms@kernel.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Petr Machata <petrm@nvidia.com>,
+	Amit Cohen <amcohen@nvidia.com>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Alessandro Zanni <alessandro.zanni87@gmail.com>,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Hangbin Liu <liuhangbin@gmail.com>
+Subject: [PATCH net-next 0/3] bonding: support aggregator selection based on port priority
+Date: Thu, 24 Jul 2025 08:16:29 +0000
+Message-ID: <20250724081632.12921-1-liuhangbin@gmail.com>
+X-Mailer: git-send-email 2.46.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 05/20] dt-bindings: memory: factorise LPDDR props into
- SDRAM props
-To: Julius Werner <jwerner@chromium.org>
-CC: Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
-        Rob
- Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor
- Dooley <conor+dt@kernel.org>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Philipp Zabel
-	<p.zabel@pengutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Gatien Chevallier
-	<gatien.chevallier@foss.st.com>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Gabriel Fernandez
-	<gabriel.fernandez@foss.st.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Le
- Goffic <legoffic.clement@gmail.com>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-perf-users@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-stm32@st-md-mailman.stormreply.com>,
-        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-clk@vger.kernel.org>
-References: <20250723-ddrperfm-upstream-v4-0-1aa53ca319f4@foss.st.com>
- <20250723-ddrperfm-upstream-v4-5-1aa53ca319f4@foss.st.com>
- <CAODwPW_kex5Agqxg_i-XC308scEpUJU0me55G7iZ8nB9LC0acg@mail.gmail.com>
-Content-Language: en-US
-From: Clement LE GOFFIC <clement.legoffic@foss.st.com>
-In-Reply-To: <CAODwPW_kex5Agqxg_i-XC308scEpUJU0me55G7iZ8nB9LC0acg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE2.st.com
- (10.75.129.70)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-24_01,2025-07-23_01,2025-03-28_01
 
-Hi Julius,
+This patchset introduces a new per-port bonding option: `ad_actor_port_prio`.
 
-On 7/23/25 23:48, Julius Werner wrote:
->> +      Compatible strings can be either explicit vendor names and part numbers
->> +      (e.g. elpida,ECB240ABACN), or generated strings of the form
->> +      (lp)?ddrX-Y,Z where X, Y and Z are in lower case hexadecimal with leading
->> +      zeroes and :
->> +        - X is the SDRAM version (2, 3, 4, etc.)
->> +        - for LPDDR :
->> +          - Y is the manufacturer ID (from MR5), 2 bytes
->> +          - Z is the revision ID (from MR6 and MR7), 4 bytes
-> 
-> It's actually one byte manufacturer, two bytes revision. The YY,ZZZZ
-> is supposed to represent the amount of hex digits needed.
+It allows users to configure the actor's port priority, which can then be used
+by the bonding driver for aggregator selection based on port priority.
 
-Oh yes I see my error..
+This provides finer control over LACP aggregator choice, especially in setups
+with multiple eligible aggregators over 2 switches.
 
-> 
->> +        - for DDR4 with SPD, according to JEDEC SPD4.1.2.L-6 :
->> +          - Y is the manufacturer ID, 2 bytes, from bytes 320 and 321
->> +          - Z is the revision ID, 1 byte, from byte 349
-> 
-> I don't think this will identify a part unambiguously, I would expect
-> the DDR revision ID to be specific to the part number. (In fact, we're
-> also not sure whether manufacturer+revision identifies LPDDR parts
-> unambiguously for every vendor, we just didn't have anything more to
-> work with there.) I would suggest to use either `ddrX-YYYY,AAA...,ZZ`
-> or `ddrX-YYYY,ZZ,AAA...` (where AAA... is the part number string from
-> SPD 329-348 without the trailing spaces). The first version looks a
-> bit more natural but it might get confusing on the off chance that
-> someone uses a comma in a part number string.
+Hangbin Liu (3):
+  bonding: add support for per-port LACP actor priority
+  bonding: support aggregator selection based on port priority
+  selftests: bonding: add test for LACP actor port priority
 
-The first one seems better indeed.
-If the manufacturer put a comma in the part number we should handle it 
-at a software level to me and if it is a devicetree error it is up to 
-the devicetree writer to fix it.
-What do you think ?
+ Documentation/networking/bonding.rst          | 18 ++++-
+ drivers/net/bonding/bond_3ad.c                | 31 ++++++++
+ drivers/net/bonding/bond_netlink.c            | 16 ++++
+ drivers/net/bonding/bond_options.c            | 36 +++++++++
+ include/net/bond_3ad.h                        |  2 +
+ include/net/bond_options.h                    |  1 +
+ include/uapi/linux/if_link.h                  |  1 +
+ .../selftests/drivers/net/bonding/Makefile    |  3 +-
+ .../drivers/net/bonding/bond_lacp_prio.sh     | 73 +++++++++++++++++++
+ tools/testing/selftests/net/forwarding/lib.sh | 24 ------
+ tools/testing/selftests/net/lib.sh            | 24 ++++++
+ 11 files changed, 203 insertions(+), 26 deletions(-)
+ create mode 100755 tools/testing/selftests/drivers/net/bonding/bond_lacp_prio.sh
 
-> 
->> +      The latter form can be useful when SDRAM nodes are created at runtime by
->> +      boot firmware that doesn't have access to static part number information.
-> 
-> nit: This text slightly doesn't make sense anymore when in the DDR
-> case we do actually have the part number. I guess the real thing the
-> bootloader wouldn't have access to is the JEDEC manufacturer ID to
-> name mapping.
+-- 
+2.46.0
 
-Yes I will update it.
-
-> 
->> +      SDRAM revision ID:
->> +        - LPDDR SDRAM, decoded from Mode Register 6 and 7.
->> +        - DDR4 SDRAM, decoded from the SPD from bytes 349 according to
->> +          JEDEC SPD4.1.2.L-6.
-> 
-> nit: Clarify that this is always two bytes for LPDDR and always one
-> byte for DDR.
-
-Ok
-
-> 
->> +      Density of SDRAM chip in megabits:
->> +        - LPDDR SDRAM, decoded from Mode Register 8.
->> +        - DDR4 SDRAM, decoded from the SPD from bytes 322 to 325 according to
->> +          JEDEC SPD4.1.2.L-6.
-> 
-> Are these numbers correct? I downloaded SPD4.1.2.L-6 now and it looks
-> like 322 is manufacturing location and 323-324 are manufacturing date.
-> (Also, I think all of these are specific to DDR4 (and possibly 5?),
-> but not to earlier versions. I don't think we need to list it for
-> every version, but we should at least be specific what it applies to.)
-
-I just reopen the doc and you are right, didn't have my glasses on I guess.
-Accordingly to SPD4.1.2.L-6 it the info seems in the byte 4 on bits 3~0.
-
-Best regards,
-Clément
 
