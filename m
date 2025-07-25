@@ -1,87 +1,117 @@
-Return-Path: <linux-doc+bounces-54174-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54176-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id AED33B1157C
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 03:01:36 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72F5FB11587
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 03:06:31 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8180CAE21F5
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 01:01:07 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0E0533A5AC6
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 01:06:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22B718634A;
-	Fri, 25 Jul 2025 01:01:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D5BB1922C0;
+	Fri, 25 Jul 2025 01:06:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="S//hzPtk"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l9PMn74V"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5259FC0A;
-	Fri, 25 Jul 2025 01:01:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 631A318BBAE;
+	Fri, 25 Jul 2025 01:06:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753405292; cv=none; b=mpUaS6F+LmqU6lHSVbXbJnXCRSRGwR8Zt/E4sTTwnSiey1pUYdFDXXuHxNQureRq6VvbhEfd75IWxYVy3Z6GkoCrPmp/RXbumhgVZO+wHqFNDdBrVYs5AZVnczFUHb8TxgUPt3k+tbKiRq6qcRMFmWmw1tZ19ixsVxAF/IkYIAk=
+	t=1753405586; cv=none; b=jmvUzVmjpumVDgdM/6TEYBfHG05OmDZqrMTFbzTvYQoqmUC5nYDmd8/fuwByCx+81mW4o6mQnwhZQgPIPg+TM44PqQ8uovGdTZHm1cJJfuP2FPiglwOZptFjfGT43LZw5Hly1XIsERY4foxtD+ZYmD2ZIur9XaWz1WfzUqxLvs0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753405292; c=relaxed/simple;
-	bh=2xm7u3ygcZYBzCZXGoS/pCUYoBjZBFKnG8HwfR0nmZA=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=MtO3rch5zSk7+104GLb2IAb8QAcdXBQPfH9h21ByzZFzKmOg6uDDArzkF7gr6u2cq+x8IcRlxWvg51ovRVdgznxY0adMjMrphpqDG1EPHnOYH+o2pgS7fOAhBgmK/MeiqxP4Xp6s4kJkJoZ2PJPgSxLVx1zAt/dqts/XD0S2vHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=S//hzPtk; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E0ECC4CEED;
-	Fri, 25 Jul 2025 01:01:29 +0000 (UTC)
+	s=arc-20240116; t=1753405586; c=relaxed/simple;
+	bh=XRod0fl1x5YkTgo5sRuAN3KnxoLUBTn38asgNRfFLg8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=cEAU4oOj/kFf5iOHWBGj8vBlt7lVFGNyt6a/bva+owPad1xiU4VFs7ZJNkAb/OYHRtfaxRv+hNiZyAeE+NTm6bubmvVUxcIEFZdvf5t+ydHwsFum8qi8QbhoP+cuXRy0FzzAYEVw1P6WuQ7UTzXcX8cmogWm1GTtBd663kTm+G8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l9PMn74V; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B63AC4CEED;
+	Fri, 25 Jul 2025 01:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753405291;
-	bh=2xm7u3ygcZYBzCZXGoS/pCUYoBjZBFKnG8HwfR0nmZA=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=S//hzPtkrEJWtjCpMVveiikuo8YGKwG6HXKQsFWNzKhUo1FqN3Qha5XSwann5Qfh0
-	 8qgq16uXtPh7baKfgU3rbq6tF4hAGNaNnQHvApWdE2oqiRU/Rl2yRN7OTZgRC+LXxn
-	 95gkYGtHVCApuf2h0QczyVlYs3RTMESoE1yX5KIsoEK67EeJoHbMmVPZbujbf+67Ma
-	 6pffUAXSOuY4fZWPPtXjlFUUir8R4XmbVwy2pJtTWzTWPWjBRaPHvAY8PNNw9KFuJC
-	 Y7KQ6PuuG/byFbltcIqK/g9BJnpqLoyUYm2flutmNIcZ6+ldBIsg0Y2tKUUqeS9BkW
-	 8WWl+mvi9bumg==
-Date: Thu, 24 Jul 2025 18:01:28 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Tariq Toukan <tariqt@nvidia.com>
-Cc: Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, Jiri Pirko <jiri@nvidia.com>, Jiri Pirko
- <jiri@resnulli.us>, Donald Hunter <donald.hunter@gmail.com>, Jonathan
- Corbet <corbet@lwn.net>, Brett Creeley <brett.creeley@amd.com>, Michael
- Chan <michael.chan@broadcom.com>, Pavan Chebbi <pavan.chebbi@broadcom.com>,
- "Cai Huoqing" <cai.huoqing@linux.dev>, Tony Nguyen
- <anthony.l.nguyen@intel.com>, Przemek Kitszel
- <przemyslaw.kitszel@intel.com>, Sunil Goutham <sgoutham@marvell.com>, Linu
- Cherian <lcherian@marvell.com>, Geetha sowjanya <gakula@marvell.com>, Jerin
- Jacob <jerinj@marvell.com>, hariprasad <hkelam@marvell.com>, Subbaraya
- Sundeep <sbhatta@marvell.com>, Saeed Mahameed <saeedm@nvidia.com>, Leon
- Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>, Ido Schimmel
- <idosch@nvidia.com>, Petr Machata <petrm@nvidia.com>, Manish Chopra
- <manishc@marvell.com>, <netdev@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
- <intel-wired-lan@lists.osuosl.org>, <linux-rdma@vger.kernel.org>, "Shahar
- Shitrit" <shshitrit@nvidia.com>, Gal Pressman <gal@nvidia.com>
-Subject: Re: [PATCH net-next V2 0/5] Expose grace period delay for devlink
- health reporter
-Message-ID: <20250724180128.338977e3@kernel.org>
-In-Reply-To: <1753390134-345154-1-git-send-email-tariqt@nvidia.com>
-References: <1753390134-345154-1-git-send-email-tariqt@nvidia.com>
+	s=k20201202; t=1753405585;
+	bh=XRod0fl1x5YkTgo5sRuAN3KnxoLUBTn38asgNRfFLg8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=l9PMn74VGXda+ufmUKF1tASCMGoOASBy2/J9Wbj2ntkUHcAjkwFIfmC7NxjSo5fcB
+	 Vhe2yZJvVczzXpiU86tyq8s7R1McsbeBeo7MBQwGtBwrHtsWA/85obea/sgqMqVv73
+	 VUxpGDWULHfpMiN2Mhs/pdGc8bt2Cit/y+jSIycpACkJ1JmUl+6c268SA2ILUS6z52
+	 NG+HC0i0O+U8L1ZTge0gqR9W34ENfsKk61SRDUwxhSu0cm/5XqjA32D2f3mBT94+iM
+	 HZJP2QgOaL48OGjM7VWo/D2NzuaB68Si4ECuSalFxivhgXUxg3jMPFt9XxQe6NUVva
+	 EfpMzgIO2pRPQ==
+Date: Thu, 24 Jul 2025 21:06:23 -0400
+From: Sasha Levin <sashal@kernel.org>
+To: Kees Cook <kees@kernel.org>
+Cc: Steven Rostedt <rostedt@goodmis.org>,
+	"Dr. David Alan Gilbert" <linux@treblig.org>,
+	Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
+	corbet@lwn.net, workflows@vger.kernel.org, josh@joshtriplett.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH] docs: submitting-patches: (AI?) Tool disclosure tag
+Message-ID: <aILYj62tF_1mDjDO@lappy>
+References: <20250724175439.76962-1-linux@treblig.org>
+ <20250724-alluring-fuzzy-tanuki-6e8282@lemur>
+ <202507241337.F9595E1D@keescook>
+ <aIKhvubVqgeXIlrj@gallifrey>
+ <202507241418.34AFD28C@keescook>
+ <20250724194556.105803db@gandalf.local.home>
+ <202507241651.5E9C803C70@keescook>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <202507241651.5E9C803C70@keescook>
 
-On Thu, 24 Jul 2025 23:48:49 +0300 Tariq Toukan wrote:
-> This series by Shahar implements graceful period delay in devlink health
-> reporter, and use it in mlx5e driver.
+On Thu, Jul 24, 2025 at 04:54:11PM -0700, Kees Cook wrote:
+>On Thu, Jul 24, 2025 at 07:45:56PM -0400, Steven Rostedt wrote:
+>> My thought is to treat AI as another developer. If a developer helps you
+>> like the AI is helping you, would you give that developer credit for that
+>> work? If so, then you should also give credit to the tooling that's helping
+>> you.
+>>
+>> I suggested adding a new tag to note any tool that has done non-trivial
+>> work to produce the patch where you give it credit if it has helped you as
+>> much as another developer that you would give credit to.
+>
+>We've got tags to choose from already in that case:
+>
+>Suggested-by: LLM
+>
+>or
+>
+>Co-developed-by: LLM <not@human.with.legal.standing>
+>Signed-off-by: LLM <not@human.with.legal.standing>
+>
+>The latter seems ... not good, as it implies DCO SoB from a thing that
+>can't and hasn't acknowledged the DCO.
 
-You waited a week to get back to me with the reply to my comments on v1:
-https://lore.kernel.org/all/6892bb46-e2eb-4373-9ac0-6c43eca78b8e@gmail.com/
-and 10h later, before I had a chance to reply - you submit a v2. 
-Not very demure.
+In my mind, "any tool" would also be something like gcc giving you a
+"non-trivial" error (think something like a buffer overflow warning that
+could have been a security issue).
+
+In that case, should we encode the entire toolchain used for developing
+a patch?
+
+Maybe...
+
+Some sort of semi-standardized shorthand notation of the tooling used to
+develop a patch could be interesting not just for plain disclosure, but
+also to be able to trace back issues with patches ("oh! the author
+didn't see a warning because they use gcc 13 while the warning was added
+in gcc 14!").
+
+Signed-off-by: John Doe <jd@example.com> # gcc:14.1;ccache:1.2;sparse:4.7;claude-code:0.5
+
+This way some of it could be automated via git hooks and we can recommend
+a relevant string to add with checkpatch.
+
+-- 
+Thanks,
+Sasha
 
