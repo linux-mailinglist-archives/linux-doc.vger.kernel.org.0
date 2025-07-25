@@ -1,162 +1,165 @@
-Return-Path: <linux-doc+bounces-54235-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54237-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1244EB121AE
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 18:16:32 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 683AAB121E4
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 18:23:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8C92B7B91D9
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 16:14:49 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 85F29161767
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 16:23:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9B4F2EE97B;
-	Fri, 25 Jul 2025 16:14:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A1192EF66F;
+	Fri, 25 Jul 2025 16:23:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VFdm9juM"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="az7aai42"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 397F92BB17
-	for <linux-doc@vger.kernel.org>; Fri, 25 Jul 2025 16:14:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BE7C2EF2BE;
+	Fri, 25 Jul 2025 16:23:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753460068; cv=none; b=ETfk3Uza6zxNwQX5mxFKKBNfq97C20XbFSiGb1zWQoGy/lWjYw5yHdXZ2FRDKB20zXFY9/IZPGMbkZdBHkPIxYc+wWmm3AM4A8q2xnCdvki/9OR+YC6UGo1YG8BYpesp2sIH52uBttPQgMS1RLk3Wmcr/gtDahos3pJbh2KEvc4=
+	t=1753460583; cv=none; b=iU/hBagwLm82eo9moRTEjukz3iMLvFLa17d2VSRfR+BFzalNFQRhd+dm4Vs3QoZZdDwJKpVygOwWEWf53YiQ835IHGrZ7VRgKqjpBDYb+loWkEA9oEXEgIO6A6tdet5l+BBU0OPEG1Gy/95kuBJvoRbywKvYnfDYAOSBggnKjSc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753460068; c=relaxed/simple;
-	bh=zy4+5I7aIssi/rmMSBtYygJxN6pNtn3MaFBiLibPOAA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FR6sJAO3ULJYIZFq5+Lrhs9gU9k8OpvxOXo3Xg5ZHYDafR79edZtx4fi/noMJAGNG7jm6dqkoBgny7zo3TX3gREqxg2eYoRY44yI8aAkAWKd2zEYGy78Qp8tfBMwq/gflWHx25eUPeLzLyiKDzFZ3MYyQyNVtQRQP7gxAlV1Gi8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VFdm9juM; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56P8m5fq017965
-	for <linux-doc@vger.kernel.org>; Fri, 25 Jul 2025 16:14:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	pTRAzXltnnQkXzy/4MfHD1BpN0UeO0JYTlGtIooVxhY=; b=VFdm9juMycnYZSHZ
-	zUXA92nIOBcEnWTYEaYZVS7emlqydaCowoY21CWFScsHSDVVExvYnMTn3+dlby5s
-	4hFLISQiz6TZG5bi9tOohYCb2gCWD9ar+XlLTzhbijgIX5E+1GuC37zcPa/MIpya
-	Oo+QWB/wZTSCWzJFBHyT5vIqi3kLN//g/8yaVMd6jODWQHGtad5rkobIVYMVlpGi
-	QLhQbu1VTEgSBYOY3iL0IqqWARLFc6G4r96pz9jb5jkIpBrByhITf5ekJy3yUGmo
-	cGXUD/bTv2Rbch1TAYQSSp7JiozaHKVfDPiHii4f0OPK+8rFfOAqjLYfe6b2gPOs
-	XMi8ug==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 483w2wjpr2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <linux-doc@vger.kernel.org>; Fri, 25 Jul 2025 16:14:26 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-b3f33295703so2961209a12.1
-        for <linux-doc@vger.kernel.org>; Fri, 25 Jul 2025 09:14:26 -0700 (PDT)
+	s=arc-20240116; t=1753460583; c=relaxed/simple;
+	bh=Oj2GNtunj58iszMUxlwwrdfsm7gS8ttBuq0WG8VMIoY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mE9dqDGC3JfIgvuW4qOMpwXpIJBwAbKhmz47hNuLzLkc03ccT8CjH5fJuSP88/fR5qbmsIdk6+4NN1LgXWEx/fKByh2yHhe/CHDhG8lp7WJHHEbcdQjTqPfwiCjPAYiiINiyJuk/X/ll9YIP83lBtpkPnc0S6yBSMzAj5DauZ+w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=az7aai42; arc=none smtp.client-ip=209.85.222.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-7e169ac6009so237418885a.0;
+        Fri, 25 Jul 2025 09:23:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1753460580; x=1754065380; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=tsRvKxISNRBPG2Kb51ym8LU6IwShBIRfDNgq3e6HRCc=;
+        b=az7aai425TVMtfOQhRJVMha+nzVDeivWE6T+fSXq2yDQP5+4zC4iIuri7HOoJyRdMw
+         rPI+WFcRBArrt8tLVCr4CZEoLCuQlEe73Y/b0DZXxBI8O9o5PEmjCpeyXio+ihcH5lsO
+         KkeK5GddL0ICFX3o2KdcE9ArG/8I7zJzcckkVcW0WzKwnZ7G45xjMRYb47TExYnbz7Fl
+         6//M5Xnq5IGvI+2a0mGX3FxDa2ghqncXTKZ2d/K44z2MCucjBAR7I3sYMfAdDlby3Vfy
+         H/bR9jgsTxzhFhXHkucyQ/UQbE8exncizEyCwNtl8GCjr1CYS1Slx7+6CJjYQ4OsTyYh
+         L1aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753460065; x=1754064865;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=pTRAzXltnnQkXzy/4MfHD1BpN0UeO0JYTlGtIooVxhY=;
-        b=UuTmy0Q5oA0uliOdAl3HESGrwj3aN6mx6YPpABNHj/ZlkoklGeBgNkB0NncOKongTE
-         1QdVQhwRrvHOENqWZA1dop4K8hZn5895MauX71T2KSQ2qGK4B7m/yguFHKjUifufB7ZS
-         xSSMNHv5p63IZt4r9/nfM97vJ733YKc6+K+GAWRoeaOI0jR6s40leEObd5W0+YLHR3cE
-         BvAuQmiOWrUu+2d0zxSrTMAM5VNpqr4hTPf5ebuwyDXh+CCaEEIVC3IH8fQfzPZ2BqdL
-         a/i4VlLy1pI2RF7Y9S+01q1KhbRx0xWwaWFh8HF/kBbN9E1i2Y7TVjWxC6lq2yHLfFWL
-         Y1rw==
-X-Forwarded-Encrypted: i=1; AJvYcCUYsfQQm+mQT5BpLsfHEURNN87cR0v9Gn1ab/Zjp+fu/rNXO1Ixo3ZiJ2i6EOJaLyAb+r0gyQ44wCA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwYIll6mHJgBETQoqgRxTJfXd+zMbfyfc9x4jbdlc9e2i+e5dXY
-	aVMxGdQja9n0oZK2Wm8x7teilGSWQUxOHC6AzIAGQMw8oWgpSsqQg3ChtV0RPH8bCCxMRkiL1ee
-	0WWkbcMlymUG7889IZEgZtIEd1Fj9ORb2b4bv+mtm02WIctvHrx796yVy6emLwmI=
-X-Gm-Gg: ASbGncvEaABnzHVVG96AnZr+zB84LG0Tz/9O3Kyvuw1L3VTLM4nZREd36c+9gNcVl2l
-	O0AEr/eyuKGEizQlqOSrx7cGkjwm4W2RFxYdSkYxg0ajq3RiqAMzNTmfk+YQ5lNwl5QTY+tCjon
-	wRpzUuy39MgqUePtzgnp0QPeqi7Proe94uGYn9W6Ylq0Jo6fdBWlPyGjAP3Gggf1SyEgqFCJRud
-	9tjUgLLSQkwp/AMyuEkkprk+YK90CYVfAH7qmWkcQxtKEvvLhd5HhinA47FltiRcVpEDA7+u0BJ
-	cEcjP6wEQJZLoIe3lqV813SYgGREPLAScwV5w4QnSvw8KrgPdntuO4Dx7OGsZJ5HD8dTqo6gkZr
-	hY9reOExu8uNAqA==
-X-Received: by 2002:a05:6a20:7288:b0:239:1c1e:3edf with SMTP id adf61e73a8af0-23d701eaf4cmr4483535637.40.1753460065432;
-        Fri, 25 Jul 2025 09:14:25 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEH45mowQM24zNVVrDWA1OAKen9/Rncat1udl96ywd3HTaGlMrzSKhS42XbAwTPbo2lmkT86g==
-X-Received: by 2002:a05:6a20:7288:b0:239:1c1e:3edf with SMTP id adf61e73a8af0-23d701eaf4cmr4483464637.40.1753460064981;
-        Fri, 25 Jul 2025 09:14:24 -0700 (PDT)
-Received: from [10.226.59.182] (i-global254.qualcomm.com. [199.106.103.254])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7640b8b0c60sm71215b3a.126.2025.07.25.09.14.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 25 Jul 2025 09:14:24 -0700 (PDT)
-Message-ID: <12223a91-82f0-4889-8f07-bfa5833c8ffb@oss.qualcomm.com>
-Date: Fri, 25 Jul 2025 10:14:21 -0600
+        d=1e100.net; s=20230601; t=1753460580; x=1754065380;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tsRvKxISNRBPG2Kb51ym8LU6IwShBIRfDNgq3e6HRCc=;
+        b=WJhnI3gbrU+gaZg649kk/aXXhA6z2sIDsAGD5nPoehH4aI54g6hEOGJ6d9NVrWdBe1
+         +a1DKiXqFVJ/cm9g0WILko26+5nNC0MhAF8Aft/9XWWa/Sz7sz6Ht4ilvp9r0gDMm8go
+         PikaeBarzMiUuZqEaXJ/ppCtH+/funM4ZiPwFTwKMhLNVy4M7EBkmrhVpliOqBRLJfa0
+         wizvD9E85g8/7Tv4C8lDdDpCn1qNZCB2h4l0s1DpE/lRDY3z7ZWaSCpcecF6t6xfhVLf
+         m9/gtFxbEUShOAaKifxYwtBzRu8lnPA27qG2NZbk7efpcd7gF8QI2S1L9xuHVy7PDf68
+         e3oA==
+X-Forwarded-Encrypted: i=1; AJvYcCX4r6opuiAphIf2E5bBriPUxz57I6gJXSXkTtDWea9sF+xhi9xXVeoh+wqG+vfumjeIkoCygfXhEzk=@vger.kernel.org, AJvYcCX6JefpLBFkcortoJ1k4ceJ+3cL3MrUy0KwFJvpg4ZdEzNzli27hzhD4MlVqB178D6k0dCvQo2lIKhJmXzz@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyw2SHWSASEEt26IAovdYneLlf4vGsyoPDkcZBruwZMGGaBeCfH
+	UiI7h64zQs/N5xVVwBm7OKSKyxBeP2JacKXOkEgtn0B9fdmtHyeBdjEN
+X-Gm-Gg: ASbGncvk72RZoXKC7/SXrwz6UPtiTDeepA9mxZw/MzVLNSZFRzivQNZKV+y1oRgsfJO
+	XpQNVwUQKUCw4A2G3GQhiaygIVevd3te7/KFkShz4mDtecpew0KB7uouyadyORRwQyODkUwot3w
+	rmsQKkQLhsm088Bkgzu9yAoFAs4hvUeTolwHWNwlhaxEba/vlFRY4PasumimV7Ke24bG8MwCf+l
+	cV4fGfklGxs+uSRHwuJ5dDqAAiv8ZLSJN5yp4bkJ72w8rWkePTjT3BWCU/HTEdFwKxK683wt1qE
+	bbbde+gt8ykotWv+mDObnM5TyrxthkVIAkcTDq6D2aTC98Xj0k3Y5OE0hAm7QoAl4E0XMjXM9KO
+	6fIUcFS2qwT2IGLcqkWUkIDdJ9JXWuAA=
+X-Google-Smtp-Source: AGHT+IFUPOXO+Rx3b3L9FWMojxy4UgYsuqor8FhdRVAZKo4WeQbM3LrIA/dgX9xaRGdAcSqcaoHl+g==
+X-Received: by 2002:a05:620a:2892:b0:7e6:21cb:c331 with SMTP id af79cd13be357-7e63be53012mr329207485a.5.1753460580101;
+        Fri, 25 Jul 2025 09:23:00 -0700 (PDT)
+Received: from localhost ([2a03:2880:20ff:74::])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-7e643878eb7sm13556985a.46.2025.07.25.09.22.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 25 Jul 2025 09:22:59 -0700 (PDT)
+From: Usama Arif <usamaarif642@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	david@redhat.com,
+	linux-mm@kvack.org
+Cc: linux-fsdevel@vger.kernel.org,
+	corbet@lwn.net,
+	rppt@kernel.org,
+	surenb@google.com,
+	mhocko@suse.com,
+	hannes@cmpxchg.org,
+	baohua@kernel.org,
+	shakeel.butt@linux.dev,
+	riel@surriel.com,
+	ziy@nvidia.com,
+	laoar.shao@gmail.com,
+	dev.jain@arm.com,
+	baolin.wang@linux.alibaba.com,
+	npache@redhat.com,
+	lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com,
+	ryan.roberts@arm.com,
+	vbabka@suse.cz,
+	jannh@google.com,
+	Arnd Bergmann <arnd@arndb.de>,
+	sj@kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	kernel-team@meta.com,
+	Usama Arif <usamaarif642@gmail.com>
+Subject: [PATCH 0/5] prctl: extend PR_SET_THP_DISABLE to only provide THPs when advised
+Date: Fri, 25 Jul 2025 17:22:39 +0100
+Message-ID: <20250725162258.1043176-1-usamaarif642@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 00/10] New DRM accel driver for Rockchip's RKNN NPU
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
-        Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Sebastian Reichel <sebastian.reichel@collabora.com>,
-        Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
-        Kever Yang <kever.yang@rock-chips.com>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Daniel Stone <daniel@fooishbar.org>, Da Xue <da@libre.computer>,
-        Philipp Zabel <p.zabel@pengutronix.de>
-Cc: devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
-        Robert Foss <rfoss@kernel.org>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-References: <20250721-6-10-rocket-v9-0-77ebd484941e@tomeuvizoso.net>
-Content-Language: en-US
-From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-In-Reply-To: <20250721-6-10-rocket-v9-0-77ebd484941e@tomeuvizoso.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: 2P-VbVEVOgWisY6N0WeyzxTQtfJqfA-L
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNzI1MDEzOSBTYWx0ZWRfX5fPLNSL+9OWV
- E5YYzdVegNF9NW9cN+CRtjA96/9SCcwut12EPXsPYhT+l9y38YZTK/oI3tbCgoavaPVkhbZ9ITh
- W3iw6Esd01+uyjXiHxPqTJANpmpWUDBaSZlw9Kw2JeWuqZ8YGAmoBrxLzYfyBUhiqqO6bcU5kZL
- l5e6FnxVgMz6bjdtpexjY3CEhBqlz1eBaVmtOqS9x/xtu2HBp5SLLubi9jPOI6bJFfWQjo7QTwB
- YIHLobDswixf+2ugeycqU2Dq6lOUaMy7Wpim385pefR20e/0VFlPjWxaItE8iR4hJHJCzZ6t38k
- sy0wG26o/+9CxXdE/Qw0nx68NUTBq2gCYbMfqFaxmn8Vabuyf68o1wnXS1XHDCp+VRSK3jbk/yf
- hkgdB+U85f1COc5zCJlCl8IfS1P7jy+gN0zYN1BlW1ZywEX6a7Ms9UkBvcDybEcx+Sh+Kpab
-X-Authority-Analysis: v=2.4 cv=d8b1yQjE c=1 sm=1 tr=0 ts=6883ad62 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=IkcTkHD0fZMA:10 a=Wb1JkmetP80A:10 a=e5mUnYsNAAAA:8 a=DISFzqtZAAAA:8
- a=XWXL-kdBtCKZFopiRrIA:9 a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
- a=Vxmtnl_E_bksehYqCbjh:22 a=aug85vrO5LANNmmtkfAW:22
-X-Proofpoint-ORIG-GUID: 2P-VbVEVOgWisY6N0WeyzxTQtfJqfA-L
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-07-25_04,2025-07-24_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 priorityscore=1501 phishscore=0 adultscore=0
- lowpriorityscore=0 suspectscore=0 spamscore=0 mlxlogscore=818 impostorscore=0
- mlxscore=0 clxscore=1015 classifier=spam authscore=0 authtc=n/a authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
- definitions=main-2507250139
+Content-Transfer-Encoding: 8bit
 
-On 7/21/2025 3:17 AM, Tomeu Vizoso wrote:
-> This series adds a new driver for the NPU that Rockchip includes in its
-> newer SoCs, developed by them on the NVDLA base.
-> 
-> In its current form, it supports the specific NPU in the RK3588 SoC.
-> 
-> The userspace driver is part of Mesa and an initial draft can be found at:
-> 
-> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29698
-> 
-> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+This will allow individual processes to opt-out of THP = "always"
+into THP = "madvise", without affecting other workloads on the system.
+This has been extensively discussed on the mailing list and has been
+summarized very well by David in the first patch which also includes
+the links to alternatives, please refer to the first patch commit message
+for the motivation for this series.
 
-Patches 1-6 pushed to drm-misc-next.
+Patch 1 adds the PR_THP_DISABLE_EXCEPT_ADVISED flag to implement this, along
+with the MMF changes.
+Patch 2 is a cleanup patch for tva_flags that will allow the forced collapse
+case to be transmitted to vma_thp_disabled (which is done in patch 3).
+Patches 4-5 implement the selftests for PR_SET_THP_DISABLE for completely
+disabling THPs (old behaviour) and only enabling it at advise
+(PR_THP_DISABLE_EXCEPT_ADVISED).
 
--Jeff
+The patches are tested on top of 4ad831303eca6ae518c3b3d86838a2a04b90ec41
+from mm-new.
+ 
+David Hildenbrand (3):
+  prctl: extend PR_SET_THP_DISABLE to optionally exclude VM_HUGEPAGE
+  mm/huge_memory: convert "tva_flags" to "enum tva_type" for
+    thp_vma_allowable_order*()
+  mm/huge_memory: treat MADV_COLLAPSE as an advise with
+    PR_THP_DISABLE_EXCEPT_ADVISED
+
+Usama Arif (2):
+  selftests: prctl: introduce tests for disabling THPs completely
+  selftests: prctl: introduce tests for disabling THPs except for
+    madvise
+
+ Documentation/filesystems/proc.rst            |   5 +-
+ fs/proc/array.c                               |   2 +-
+ fs/proc/task_mmu.c                            |   4 +-
+ include/linux/huge_mm.h                       |  60 ++--
+ include/linux/mm_types.h                      |  13 +-
+ include/uapi/linux/prctl.h                    |  10 +
+ kernel/sys.c                                  |  58 +++-
+ mm/huge_memory.c                              |  11 +-
+ mm/khugepaged.c                               |  20 +-
+ mm/memory.c                                   |  20 +-
+ mm/shmem.c                                    |   2 +-
+ tools/testing/selftests/mm/.gitignore         |   1 +
+ tools/testing/selftests/mm/Makefile           |   1 +
+ .../testing/selftests/mm/prctl_thp_disable.c  | 257 ++++++++++++++++++
+ 14 files changed, 394 insertions(+), 70 deletions(-)
+ create mode 100644 tools/testing/selftests/mm/prctl_thp_disable.c
+
+-- 
+2.47.3
+
 
