@@ -1,118 +1,81 @@
-Return-Path: <linux-doc+bounces-54173-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54175-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6BC2B11571
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 02:55:45 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C9924B11582
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 03:02:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id AD9AD1CC8252
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 00:56:03 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 598FD3A3D8F
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Jul 2025 01:01:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4AAA5145355;
-	Fri, 25 Jul 2025 00:55:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b="T9iFiWIa"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 401571991BF;
+	Fri, 25 Jul 2025 01:01:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
+Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FD99BA3D;
-	Fri, 25 Jul 2025 00:55:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.235.229.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D2CA1373;
+	Fri, 25 Jul 2025 01:01:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.189
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753404941; cv=none; b=FZAbRtChTuN36Nyht6ZFbC9Vr1PDQN1zoRG12QWM5qTP1WSNhHfMHDarRzW55s+hBzNp8/iCPSxOal+ZVrNnAu8Pqw9GrqMDnAZpAIG9tk2YbIoB4VIKJfdJbaLF8AEqw3E1zj6cNR7sGy0myFA8XD9uFaoRSk7AvDBnrbuYP5M=
+	t=1753405293; cv=none; b=t89Fx4e44jsKwNDnjvw16UHQBQpQm8XQkOuS/HXjkbzFlXl5fE2bf8038ob84ZUjKE/H7h6F8t0QCoTi+BcrfkPY0eHsB3O3jF7PC/8RBfBAEgHmqWhdXt7bMq1rfv5Dbx1to9Nrv39T4BweIC+y8pwDZJinsAa1KBlnI0qEXDs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753404941; c=relaxed/simple;
-	bh=KvxN5DHjZGSXEwli5Su3Qm7vJiM8XvRrYqw6i3BZUkQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YDJiPLaAfHLD6/K0OTjawtb3wYw6cO8jnvzCB2uX9iQuIY5QE+G9c2M+cbnUZM22Mp5LsJ8NGyoQPORyxpgNrgjaCqjBDrwEhEA2Mp4pqr747mjIhWBYH+g10AuCvd/e9nLga6Mp6YKlyRRYtCeW4TRcz4+Tq2T/P0vjd5wv0Pk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org; spf=pass smtp.mailfrom=treblig.org; dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b=T9iFiWIa; arc=none smtp.client-ip=46.235.229.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=treblig.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
-	; s=bytemarkmx; h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
-	:Subject; bh=StlREuo1scS0BfmCy3StaAeIUyCF5tPTsycVVaKcV94=; b=T9iFiWIagMi1C/Et
-	gM5OuOyS+mMLiTMpLXVy/Qq4acvvgpRuwIiZCX6tEUSHgEeW2JA7f9gIJhOXXYgct4xOPzOhG9d7r
-	FIfobPC6NrE5FHXJLlY4YbnKbQrO94NmDu+HqdjC3oTiOtJNgjuLmsvWczVoY62ziePsTOWjxVOOH
-	UWNUsdlAJDg1Gt0clsjjx/Fpav8+UWOTRQI43YD4Zc76/CmG2mY0jKYc3ALgNCPgkff60OktqBMfH
-	OeSYxHIkpAjRV+DlouvgOtU2CN9CW6soAJ0yaXjGBI8STCqTP5DSXLrXZGkVayFf+jlYPjltBhBxQ
-	NeOQ9dgdYkzISq5rLw==;
-Received: from dg by mx.treblig.org with local (Exim 4.96)
-	(envelope-from <dg@treblig.org>)
-	id 1uf6ie-000WVV-0z;
-	Fri, 25 Jul 2025 00:55:28 +0000
-Date: Fri, 25 Jul 2025 00:55:28 +0000
-From: "Dr. David Alan Gilbert" <linux@treblig.org>
-To: Kees Cook <kees@kernel.org>
-Cc: Steven Rostedt <rostedt@goodmis.org>,
-	Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
-	corbet@lwn.net, workflows@vger.kernel.org, josh@joshtriplett.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH] docs: submitting-patches: (AI?) Tool disclosure tag
-Message-ID: <aILWAELwozskfIgj@gallifrey>
-References: <20250724175439.76962-1-linux@treblig.org>
- <20250724-alluring-fuzzy-tanuki-6e8282@lemur>
- <202507241337.F9595E1D@keescook>
- <aIKhvubVqgeXIlrj@gallifrey>
- <202507241418.34AFD28C@keescook>
- <20250724194556.105803db@gandalf.local.home>
- <202507241651.5E9C803C70@keescook>
+	s=arc-20240116; t=1753405293; c=relaxed/simple;
+	bh=S68IOHF/e0NaShcmphW9LK69DgrIZLy9G7r8GH8JSf0=;
+	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Fvnptmtn7tgzqtP7z/1SqqEsZPDuVOsmpdqUZauhv4m2y21bJTY+BS4IQsVCmuZuAwWPBcR7j1BV2l0GXLGo/MQ7+UYuaKEEzK8THMk45RnlNzFEf9h1vjrFBvH1jF7VGEwJfGs5nVqt2485yK4dEfyJwTBdj6oxhDNEiWbthas=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.189
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.19.163.252])
+	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4bp8bc148hzGq30;
+	Fri, 25 Jul 2025 08:57:16 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id 4280B180B6A;
+	Fri, 25 Jul 2025 09:01:27 +0800 (CST)
+Received: from DESKTOP-F6Q6J7K.china.huawei.com (10.174.175.220) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Fri, 25 Jul 2025 09:01:25 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: <gongfan1@huawei.com>
+CC: <andrew+netdev@lunn.ch>, <christophe.jaillet@wanadoo.fr>,
+	<corbet@lwn.net>, <davem@davemloft.net>, <edumazet@google.com>,
+	<fuguiming@h-partners.com>, <guoxin09@huawei.com>, <gur.stavi@huawei.com>,
+	<helgaas@kernel.org>, <horms@kernel.org>, <jdamato@fastly.com>,
+	<kuba@kernel.org>, <lee@trager.us>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <luosifu@huawei.com>,
+	<meny.yossefi@huawei.com>, <mpe@ellerman.id.au>, <netdev@vger.kernel.org>,
+	<pabeni@redhat.com>, <przemyslaw.kitszel@intel.com>,
+	<shenchenyang1@hisilicon.com>, <shijing34@huawei.com>, <sumang@marvell.com>,
+	<vadim.fedorenko@linux.dev>, <wulike1@huawei.com>, <zhoushuai28@huawei.com>,
+	<zhuyikai1@h-partners.com>
+Subject: [PATCH net-next v11 0/8] net: hinic3: Add a driver for Huawei 3rd gen NIC - management interfaces
+Date: Fri, 25 Jul 2025 09:01:18 +0800
+Message-ID: <20250725010119.4976-1-gongfan1@huawei.com>
+X-Mailer: git-send-email 2.21.0.windows.1
+In-Reply-To: <cover.1753240706.git.zhuyikai1@h-partners.com>
+References: <cover.1753240706.git.zhuyikai1@h-partners.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <202507241651.5E9C803C70@keescook>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.1.0-34-amd64 (x86_64)
-X-Uptime: 00:53:00 up 88 days,  9:06,  1 user,  load average: 0.00, 0.00, 0.00
-User-Agent: Mutt/2.2.12 (2023-09-09)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
 
-* Kees Cook (kees@kernel.org) wrote:
-> On Thu, Jul 24, 2025 at 07:45:56PM -0400, Steven Rostedt wrote:
-> > My thought is to treat AI as another developer. If a developer helps you
-> > like the AI is helping you, would you give that developer credit for that
-> > work? If so, then you should also give credit to the tooling that's helping
-> > you.
-> > 
-> > I suggested adding a new tag to note any tool that has done non-trivial
-> > work to produce the patch where you give it credit if it has helped you as
-> > much as another developer that you would give credit to.
-> 
-> We've got tags to choose from already in that case:
-> 
-> Suggested-by: LLM
+> PATCH 02 V10: https://lore.kernel.org/netdev/cover.1753152592.git.zhuyikai1@h-partners.com
+> * Use spin_lock in aeq & ceq events instead of bits ops (Jakub Kicinski)
+> * Modify memory barriers comments to explain more clearly (Jakub Kicinski)
+>
+> PATCH 02 V11:
+> * Remove unused cb_state variable (Simon Horman)
 
-For me, 'Suggested-by:' seems fine for where an LLM has
-responded to a 'suggest improvements to this function'.
-
-> or
-> 
-> Co-developed-by: LLM <not@human.with.legal.standing>
-> Signed-off-by: LLM <not@human.with.legal.standing>
-> 
-> The latter seems ... not good, as it implies DCO SoB from a thing that
-> can't and hasn't acknowledged the DCO.
-
-Yeh, the Co-developed-by:  isn't terrible,  but in both that and the
-Suggested-by: is there a standard for how you would refer to the tool?
-IMHO it should not have an email address there otherwise it'll confuse tools 
-into cc'ing them.
-
-Dave
-
-> 
-> -- 
-> Kees Cook
-> 
--- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+Oops. This patch was mistakenly sent and the V10 review comments have not been
+fully revised. We will send a new patch after 24 hours.
 
