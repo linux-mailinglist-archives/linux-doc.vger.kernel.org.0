@@ -1,117 +1,339 @@
-Return-Path: <linux-doc+bounces-54443-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54445-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8D59B13AF7
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 15:05:45 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id D99F2B13B51
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 15:18:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0A48618958BE
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 13:06:04 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id E6DB7189D4EE
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 13:18:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5DE31257AF0;
-	Mon, 28 Jul 2025 13:05:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B072726E706;
+	Mon, 28 Jul 2025 13:16:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SgXRYpFk"
+	dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b="nXLFmQf0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com [91.207.212.93])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EB4E16DEB1;
-	Mon, 28 Jul 2025 13:05:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8861B268C55;
+	Mon, 28 Jul 2025 13:16:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.207.212.93
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753707940; cv=none; b=smJjffMyp20w+/odI1QI/g8clkh+nqDHbz3/lijJcw1AVF2oBj2YXZmSxPhf39KpqhelnQDT7RZGb19ISXg41c6dREQX7jCnM3KXAWmkOcjS0xYlwSwJwauwUWXbi8cD/4mqjM9dB5J1XuvnYxlh0dCfLZQVyyS9e3357RzraU0=
+	t=1753708566; cv=none; b=TzhGMyNaDV2YsdqJOLSodJOPoj5nIg512b28yA1HPPEEOGHqIQCUJLWbeYq97n9/fppw9jvDtAfdZPIo1iU4J5QFaRWs28q44MBUP3PuxRJSM19v+7bCfdxUQkSCUj8RbKMuO/NQdS9a/DzAeSav82vHi38NJLTVX4sod1/nDX8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753707940; c=relaxed/simple;
-	bh=R6RI9H1uXWNlU4ETqJK1DDEoTkl/2mn5+ywmuILAy18=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IDdLjnF8LU5T2dnTaiGYO0XVIF3zkMtWGN+wVaqi1nvWK87wEhrhmoo5KaBe1MWU9/iuy8a9ImB4uQjtD2TLzjHGEBq1/2gQtV5166GeyeqMYEYK4JcE/8D5Pa1JAfx9Y8eOVZDhwtVrxgw/HnVDdly5C28cqBW5pXgk5tgY6eM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SgXRYpFk; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52B52C4CEE7;
-	Mon, 28 Jul 2025 13:05:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753707939;
-	bh=R6RI9H1uXWNlU4ETqJK1DDEoTkl/2mn5+ywmuILAy18=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=SgXRYpFkjkwkJw64t2Vwdul68XG1XUcx80GOR6lhsWasEmld1JC39phP0skavgn+Y
-	 vmSo8LB/j6HGgIovw+R0pCuEarSMf90s0d/+5QlkorMVmFWQq/rsI42mV6uHeZ1/qZ
-	 RrLOsqEf1kY4Ast7Rr/gvVYccfE4EyeSIoAC5EC6d1nZxFzxppKrlZoRT7WT83h+oB
-	 vN/kdOXuEG9/8BJgVLp/2b2jnP8DXKGFEMYz7ZyUo8rk3vbVBa2q4jqNjYP2X626q9
-	 waL29A3QqiWxL79xTW5TSsBHX6v3fjZu9GmXd1n0PE/2GzGrRPl2vR97PTS9dV2QWq
-	 +Hu0O/UeMDpIg==
-Date: Mon, 28 Jul 2025 09:05:37 -0400
-From: Sasha Levin <sashal@kernel.org>
-To: David Hildenbrand <david@redhat.com>
-Cc: Greg KH <gregkh@linuxfoundation.org>, Vlastimil Babka <vbabka@suse.cz>,
-	corbet@lwn.net, linux-doc@vger.kernel.org,
-	workflows@vger.kernel.org, josh@joshtriplett.org, kees@kernel.org,
-	konstantin@linuxfoundation.org, linux-kernel@vger.kernel.org,
-	rostedt@goodmis.org
-Subject: Re: [PATCH 0/4] Add agent coding assistant configuration to Linux
- kernel
-Message-ID: <aId1oZn_KFaa0R_Q@lappy>
-References: <20250727195802.2222764-1-sashal@kernel.org>
- <75d86e96-cb18-4996-998c-da7ac0e97468@suse.cz>
- <9afd157a-296d-4f4d-9d65-07b89ab3906f@redhat.com>
- <2025072832-enrich-pampers-54b9@gregkh>
- <1bd04ce1-87c0-4e23-b155-84f7235f6072@redhat.com>
+	s=arc-20240116; t=1753708566; c=relaxed/simple;
+	bh=W+KZZXncins1T9GC8mCt4jsiJpGpKp81eBfzguGPl9w=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=s4wuBx+1qfLoZ06WJoVMGTQWvlxUglb2M1tqorCnedJ/zaMjD2LcxOgRA5tf/zzJIUkU5EQBo8kVjPIpK7oD45voq2qBgJoaWap3sRFnJb0CulOp0K4H4VqKW03+AkVr5uAx4UpxvnRkax+M+WY6zvK001SBUympzjUV3ojrYV8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com; spf=pass smtp.mailfrom=foss.st.com; dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b=nXLFmQf0; arc=none smtp.client-ip=91.207.212.93
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+	by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 56SD78TP018548;
+	Mon, 28 Jul 2025 15:15:27 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=selector1; bh=
+	6ozDjiR1DVr/3HRBmHIYQGBx0Ek2Vvu4LxeRw9hd+a0=; b=nXLFmQf0lGgLF+X9
+	gLaWXmG2IiruQBxDjVB3d0J9Ofg68aZEG/2O2+ed85NLa0ZUIb38INT2yw99xAha
+	GeWHUQUbt9Ee9sBaFLbw0iV/iylfIbXTpieHZ5iRxvZuPYBbNhWhsftdqVMTq2kA
+	qO47UfA862g9kGKb8NK1f5lMnbAg6DH0LirQxfuGPtNyn2QGyKdomZF10fINxa4N
+	c58PWHscY3P7erPOeAhAqQCbcZZwIu8sAV3/dXtKh9i7y0PRVectbVhOv0pxvfym
+	WNZY0Hh69RNseI6BCwCaLQ1OkIuuX6pYQ8bmP2+kiT1a3eGUqRcYNsiqYHzbM9Fp
+	kVfLKg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 484m5906v7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 28 Jul 2025 15:15:27 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+	by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0285640055;
+	Mon, 28 Jul 2025 15:13:50 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A04F177E309;
+	Mon, 28 Jul 2025 15:12:24 +0200 (CEST)
+Received: from [10.252.23.100] (10.252.23.100) by SHFDAG1NODE2.st.com
+ (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Jul
+ 2025 15:12:23 +0200
+Message-ID: <2ceafbbe-064e-4227-8b44-edc67d22f6b4@foss.st.com>
+Date: Mon, 28 Jul 2025 15:12:22 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <1bd04ce1-87c0-4e23-b155-84f7235f6072@redhat.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 12/19] perf: stm32: introduce DDRPERFM driver
+To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+CC: Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+        Rob
+ Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor
+ Dooley <conor+dt@kernel.org>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>,
+        Philipp Zabel
+	<p.zabel@pengutronix.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Gatien Chevallier
+	<gatien.chevallier@foss.st.com>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Gabriel Fernandez
+	<gabriel.fernandez@foss.st.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Le
+ Goffic <legoffic.clement@gmail.com>,
+        Julius Werner <jwerner@chromium.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-perf-users@vger.kernel.org>, <devicetree@vger.kernel.org>,
+        <linux-stm32@st-md-mailman.stormreply.com>,
+        <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-clk@vger.kernel.org>
+References: <20250722-ddrperfm-upstream-v3-0-7b7a4f3dc8a0@foss.st.com>
+ <20250722-ddrperfm-upstream-v3-12-7b7a4f3dc8a0@foss.st.com>
+ <20250725115655.00002304@huawei.com>
+Content-Language: en-US
+From: Clement LE GOFFIC <clement.legoffic@foss.st.com>
+In-Reply-To: <20250725115655.00002304@huawei.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE2.st.com
+ (10.75.129.70)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-07-28_03,2025-07-28_01,2025-03-28_01
 
-On Mon, Jul 28, 2025 at 12:47:55PM +0200, David Hildenbrand wrote:
->We cannot keep complaining about maintainer overload and, at the same 
->time, encourage people to bombard us with even more of that stuff.
+Hi Jonathan
+
+On 7/25/25 12:56, Jonathan Cameron wrote:
+> On Tue, 22 Jul 2025 16:03:29 +0200
+> Clément Le Goffic <clement.legoffic@foss.st.com> wrote:
+> 
+>> Introduce the driver for the DDR Performance Monitor available on
+>> STM32MPU SoC.
+>>
+>> On STM32MP2 platforms, the DDRPERFM allows to monitor up to 8 DDR events
+>> that come from the DDR Controller such as read or write events.
+>>
+>> On STM32MP1 platforms, the DDRPERFM cannot monitor any event on any
+>> counter, there is a notion of set of events.
+>> Events from different sets cannot be monitored at the same time.
+>> The first chosen event selects the set.
+>> The set is coded in the first two bytes of the config value which is on 4
+>> bytes.
+>>
+>> On STM32MP25x series, the DDRPERFM clock is shared with the DDR controller
+>> and may be secured by bootloaders.
+>> Access controllers allow to check access to a resource. Use the access
+>> controller defined in the devicetree to know about the access to the
+>> DDRPERFM clock.
+>>
+>> Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
+> Hi Clément,
+> 
+> Minor comments inline.,
+> 
+> Thanks,
+> 
+> Jonathan
+> 
+>> --- /dev/null
+>> +++ b/drivers/perf/stm32_ddr_pmu.c
+>> @@ -0,0 +1,896 @@
+>> +// SPDX-License-Identifier: GPL-2.0-only
+>> +/*
+>> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
+>> + * Author: Clément Le Goffic <clement.legoffic@foss.st.com> for STMicroelectronics.
+>> + */
+>> +
+>> +#include <linux/bus/stm32_firewall_device.h>
+>> +#include <linux/clk.h>
+>> +#include <linux/hrtimer.h>
+>> +#include <linux/io.h>
+>> +#include <linux/module.h>
+>> +#include <linux/of_platform.h>
+> Why?
+For of_device_id and platform_device structs
+> Looks like of.h is needed so you should include that directly.
+> 
+> Check all your headers.  mod_devicetable.h should be here
+> for instance.
+
+mod_devicetable.h is already included in of_platform.h but imagine it 
+should be directly include as I do not use any symbol from of_platform.h
+
+Thank you for pointing this out.
+I'll have a look on other includes.
+
+Do you have any method to include directly what you need ?
+As of here symbols were available through other include but this is not 
+correct.
+Is there any tool nor tips to find the right include directly and easily ?
+
+>> +#include <linux/perf_event.h>
+>> +#include <linux/reset.h>
+> 
+>> +
+>> +static void stm32_ddr_pmu_event_del(struct perf_event *event, int flags)
+>> +{
+>> +	struct stm32_ddr_pmu *pmu = to_stm32_ddr_pmu(event->pmu);
+>> +	struct stm32_ddr_cnt *counter = event->pmu_private;
+>> +	bool events = true;
+>> +
+>> +	stm32_ddr_pmu_event_stop(event, PERF_EF_UPDATE);
+>> +
+>> +	stm32_ddr_pmu_free_counter(pmu, counter);
+>> +
+>> +	for (int i = 0; i < pmu->cfg->counters_nb; i++)
+>> +		events = !list_empty(&pmu->counters[i]);
+> What is this trying to do?  It seems to be only setting
+> 	events = !list_empty(&pmu->counters[pmu->cfg_counters_nb - 1]);
+> 
+> If so just check that but my guess it you care if there is anything
+> in any of them lists.
+
+Indeed the test must be in the for loop, thanks.
+The idea here is to loop over the counters and check if one of them is 
+still active so we don't stop the HW.
+
+I'll do:
+	for (int i = 0; i < pmu->cfg->counters_nb; i++) {
+		events = !list_empty(&pmu->counters[i]);
+		if (events) /* If there is activity nothing to do */
+			return;
+	}
+
+> 
+>> +
+>> +	/* If there is activity nothing to do */
+>> +	if (events)
+>> +		return;
+>> +
+>> +	hrtimer_cancel(&pmu->hrtimer);
+>> +	stm32_ddr_stop_counters(pmu);
+>> +
+>> +	pmu->selected_set = -1;
+>> +
+>> +	clk_disable(pmu->clk);
+>> +}
+> 
+> 
+>> +static int stm32_ddr_pmu_get_memory_type(struct stm32_ddr_pmu *pmu)
+>> +{
+>> +	struct platform_device *pdev = to_platform_device(pmu->dev);
+>> +	struct device_node *memchan;
+>> +
+>> +	memchan = of_parse_phandle(pdev->dev.of_node, "memory-channel", 0);
+>> +	if (!memchan)
+>> +		return dev_err_probe(&pdev->dev, -EINVAL,
+>> +				     "Missing device-tree property 'memory-channel'\n");
+>> +
+>> +	if (of_device_is_compatible(memchan, "jedec,lpddr4-channel"))
+> 
+> Random thought, feel free to ignore.
+> I wonder if it's worth using an of_device_id match table here?
+I don't think it would be worth it but if wanted I can switch.
 >
->Clearly flagging stuff as AI-generated can maybe help. But really, 
->what we need is a proper AI policy. I think QEMU did a good job 
->(again, maybe too strict, not sure).
+>> +		pmu->dram_type = STM32_DDR_PMU_LPDDR4;
+>> +	else if (of_device_is_compatible(memchan, "jedec,lpddr3-channel"))
+>> +		pmu->dram_type = STM32_DDR_PMU_LPDDR3;
+>> +	else if (of_device_is_compatible(memchan, "jedec,ddr4-channel"))
+>> +		pmu->dram_type = STM32_DDR_PMU_DDR4;
+>> +	else if (of_device_is_compatible(memchan, "jedec,ddr3-channel"))
+>> +		pmu->dram_type = STM32_DDR_PMU_DDR3;
+>> +	else
+>> +		return dev_err_probe(&pdev->dev, -EINVAL, "Unsupported memory channel type\n");
+>> +
+>> +	if (pmu->dram_type == STM32_DDR_PMU_LPDDR3)
+>> +		dev_warn(&pdev->dev,
+>> +			 "LPDDR3 supported by DDRPERFM but not supported by DDRCTRL/DDRPHY\n");
+>> +
+>> +	return 0;
+>> +}
+> 
+>> +static struct attribute *stm32_ddr_pmu_events_attrs_mp[] = {
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_op_is_rd, PERF_OP_IS_RD),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_op_is_wr, PERF_OP_IS_WR),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_op_is_activate, PERF_OP_IS_ACTIVATE),
+>> +	STM32_DDR_PMU_EVENT_ATTR(ctl_idle, CTL_IDLE),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_hpr_req_with_no_credit, PERF_HPR_REQ_WITH_NO_CREDIT),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_lpr_req_with_no_credit, PERF_LPR_REQ_WITH_NO_CREDIT),
+>> +	STM32_DDR_PMU_EVENT_ATTR(cactive_ddrc, CACTIVE_DDRC),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_op_is_enter_powerdown, PERF_OP_IS_ENTER_POWERDOWN),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_op_is_refresh, PERF_OP_IS_REFRESH),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_selfresh_mode, PERF_SELFRESH_MODE),
+>> +	STM32_DDR_PMU_EVENT_ATTR(dfi_lp_req, DFI_LP_REQ),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_hpr_xact_when_critical, PERF_HPR_XACT_WHEN_CRITICAL),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_lpr_xact_when_critical, PERF_LPR_XACT_WHEN_CRITICAL),
+>> +	STM32_DDR_PMU_EVENT_ATTR(perf_wr_xact_when_critical, PERF_WR_XACT_WHEN_CRITICAL),
+>> +	STM32_DDR_PMU_EVENT_ATTR(dfi_lp_req_cpy, DFI_LP_REQ),  /* Suffixed '_cpy' to allow the
+>> +								* choice between sets 2 and 3
+>> +								*/
+>> +	STM32_DDR_PMU_EVENT_ATTR(time_cnt, TIME_CNT),
+>> +	NULL,
+> 
+> No trailing comma for a terminating entry like this.  You got the other cases
+> so I guess this one just got missed.
 
-So I've sent this series because I thought it's a parallel effort to the
-effort of creating an "AI Policy".
+Ack.
 
-Right now we already (implicitly) have a policy as far as these
-contributions go, based on
-https://www.linuxfoundation.org/legal/generative-ai and the lack of
-other guidelines in our codebase, we effectively welcome AI generated
-contributions without any other requirements beyond the ones that affect
-a regular human.
+>> +};
+> 
+>> +static int stm32_ddr_pmu_device_probe(struct platform_device *pdev)
+>> +{
+>> +	struct stm32_firewall firewall;
+>> +	struct stm32_ddr_pmu *pmu;
+>> +	struct reset_control *rst;
+>> +	struct resource *res;
+>> +	int ret;
+>> +
+>> +	pmu = devm_kzalloc(&pdev->dev, struct_size(pmu, counters, MP2_CNT_NB), GFP_KERNEL);
+>> +	if (!pmu)
+>> +		return -ENOMEM;
+>> +
+>> +	platform_set_drvdata(pdev, pmu);
+>> +	pmu->dev = &pdev->dev;
+>> +
+>> +	pmu->cfg = device_get_match_data(pmu->dev);
+>> +
+>> +	pmu->membase = devm_platform_get_and_ioremap_resource(pdev, 0, &res);
+>> +	if (IS_ERR(pmu->membase))
+>> +		return PTR_ERR(pmu->membase);
+>> +
+>> +	if (of_property_present(pmu->dev->of_node, "access-controllers")) {
+>> +		ret = stm32_firewall_get_firewall(pmu->dev->of_node, &firewall, 1);
+> 
+> Jiri is busy driving dev_fwnode() thorugh to get rid of all the directly references
+> to of_node.  Probably better to use that here from the start.
+> 
+> 
+>> +		if (ret)
+>> +			return dev_err_probe(pmu->dev, ret, "Failed to get firewall\n");
+>> +		ret = stm32_firewall_grant_access_by_id(&firewall, firewall.firewall_id);
+>> +		if (ret)
+>> +			return dev_err_probe(pmu->dev, ret, "Failed to grant access\n");
+>> +	}
+>> +
+>> +	pmu->clk = devm_clk_get_optional_enabled(pmu->dev, NULL);
+>> +	if (IS_ERR(pmu->clk))
+>> +		return dev_err_probe(pmu->dev, PTR_ERR(pmu->clk), "Failed to get prepare clock\n");
+> 
+> Comment doesn't match code. This is going to enabled, not just prepared.
+Indeed.
 
-This series of patches attempts to clarify that point to AI: it has to
-follow the same requirements and rules that humans do.
+>> +
+>> +	rst = devm_reset_control_get_optional_exclusive(pmu->dev, NULL);
+>> +	if (IS_ERR(rst))
+>> +		return dev_err_probe(pmu->dev, PTR_ERR(rst), "Failed to get reset\n");
+> 
+>> +}
 
->I'll note one interesting thing in the QEMU commit I linked:
->
->"Thus far though, this is has not been matched by a broadly
->accepted legal interpretation of the licensing implications for code
->generator outputs. While the vendors may claim there is no problem and
->a free choice of license is possible, they have an inherent conflict
->of interest in promoting this interpretation."
->
->[1] https://lkml.kernel.org/r/a4d8b292-154a-4d14-90e4-6c822acf1cfb@redhat.com
-
-I get why QEMU did this: they don't have the resources, the lawyers, nor
-the interest in dealing with this open question, so they're playing it
-safe until we know more. That sounds like a very smart thing to do on
-their end.
-
-On our end, one of the reasons the kernel is part of the LF is to tackle
-exactly this: none of us are lawyers, but luckily we have lawyers and
-resources on our side to help us navigate these challanges.
-
-I'd like to think that there's no conflict of interests within the LF,
-and that their opinion on this matter best represents their client's
-(both Linux Kernel as well as Linus's) best interests.
-
--- 
-Thanks,
-Sasha
+Best regards,
+Clément
 
