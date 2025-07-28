@@ -1,100 +1,153 @@
-Return-Path: <linux-doc+bounces-54510-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54512-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E50BB1420F
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 20:37:50 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72AA4B1422A
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 20:44:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8F66617CFE1
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 18:37:50 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9C84A3B9B7E
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 18:44:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AFFB0217701;
-	Mon, 28 Jul 2025 18:37:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD2A6275AE8;
+	Mon, 28 Jul 2025 18:44:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=smrk.net header.i=@smrk.net header.b="Rfd3+xPc"
+	dkim=pass (2048-bit key) header.d=utah.edu header.i=@utah.edu header.b="Gyw9H5ws"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.smrk.net (mail.smrk.net [45.76.87.244])
+Received: from ipo7.cc.utah.edu (ipo7.cc.utah.edu [155.97.144.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 912E64A11;
-	Mon, 28 Jul 2025 18:37:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.76.87.244
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1B3E1DC1AB;
+	Mon, 28 Jul 2025 18:44:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=155.97.144.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753727866; cv=none; b=XYUPmflfgv0t07lUmw0q1YEmPTHVYbywm8mDG5o8P7GsPvFH5srGI+t5XRvFN+OsBiQJWCTT8U7jkja1bzqwEl/1/UbZpmtqAiEm0YZ5Wh5FaC0pHfPAulAMLq2s9tDhckn8Dv61pkzI80RtTU/6fLNbkLR+GPTFkYu23PkiOn8=
+	t=1753728276; cv=none; b=rXktdiMnLTU2SKNqZ4rf/TWIB2dua4a7fEJrSnSmn16oXAfocAzc36UQOjl3GvBtNO9SqQiqcVJQ/UGY/793hR0EY0aPOdd4eVA/D/Q4NKQgdz40w+YrmEEQwqrZ3yXwuaUvnAqerd5YkuObYNuhEO/0osCkIdGAn9cA6OMRBG8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753727866; c=relaxed/simple;
-	bh=P5DDh7c6UJ4D4+NjwCwZk2I6DNLm/C2wn8jkMDxS96M=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=inK/FuYw7wIIMifqFPmSRVTKSSxCnlrEwkuiE8sifsjoQEvfkPv54Xl1kg9ixl9JzRAjG0K0xEnBuSU3hIK8+y2OIwelM9xwz+s+7c+pFmYiShuiCGU6WhiMW2MsyV/1xdJVs8iEs0OeYsUDJbMCCFbJ6Aquml6CUF6rb5uQC/Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=smrk.net; spf=pass smtp.mailfrom=smrk.net; dkim=pass (2048-bit key) header.d=smrk.net header.i=@smrk.net header.b=Rfd3+xPc; arc=none smtp.client-ip=45.76.87.244
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=smrk.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=smrk.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smrk.net; s=20221002;
-	t=1753727460;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=/P+lLMMRUQ1gMBLqbN9Ho2BJrRqcrV6Qq51DcGJe+Jo=;
-	b=Rfd3+xPc3vnT7KINOIVel9EhP+F+aQs+/mqNWhlTCtEPSRyIDU9jJh7nIMX8JsqVIBYfOX
-	MseULV9M2khcRmZtFSPiHmi+u+aAQHnH4coWGmJ6WEN9ySciScwvn35D056Ro0IGbmTkj5
-	bCPpr32S2DC4nEZRg6kK8UMRnTtKouT/OM9jp+KkieM0kUhvcCehl5Z5cpN1GHCpsKPA/4
-	zfEpvp86KSe8eHwnSp8zTn8v+Z2amhmUFJjY6gDMWPJi0raOHu+36z07y3rRBiG1wTw5eT
-	P6GougDX80beTWlaiPeZuN0YLBXaaNOKQcSzxmW2y1sk2NTt5fYceFL9gJyGKw==
-Received: from localhost (<unknown> [192.168.5.2])
-	by smrk (OpenSMTPD) with ESMTPSA id a0d628f2 (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO);
-	Mon, 28 Jul 2025 20:30:59 +0200 (CEST)
-From: =?utf-8?q?=C5=A0t=C4=9Bp=C3=A1n_N=C4=9Bmec?= <stepnem@smrk.net>
-Date: Mon, 28 Jul 2025 20:30:33 +0200
-Subject: [PATCH] docs: admin-guide: update to current minimum pipe size
- default
+	s=arc-20240116; t=1753728276; c=relaxed/simple;
+	bh=h2slNLSpVmmqyD18w2BHpOp3DrQR4PJX6RRcua16D64=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Z8GfjbCRHEV7T8njnxWffU9uEkB5JCNwfYex3iKc7FCdc+LWj4Ozd8RdphRIr+vq8UUyZHzH3K9z+898R5/dwdVKMdPssVjRF2i1BbLjE8Wou+txdvcCDTSml2GkXNEA/8D45ZOmWYWPh0L+wVvQvo+wvJxMjKqRaD1UhshEFo4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=utah.edu; spf=pass smtp.mailfrom=cs.utah.edu; dkim=pass (2048-bit key) header.d=utah.edu header.i=@utah.edu header.b=Gyw9H5ws; arc=none smtp.client-ip=155.97.144.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=utah.edu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.utah.edu
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=utah.edu; i=@utah.edu; q=dns/txt; s=UniversityOfUtah;
+  t=1753728275; x=1785264275;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=h2slNLSpVmmqyD18w2BHpOp3DrQR4PJX6RRcua16D64=;
+  b=Gyw9H5wsFVtRZ6ZjTWhv4yULOFADGifxjtW0OY2gZXCe6om03nI8lx+F
+   ZLTT8kuPbgVpnY2JYrXG1nnVFcX7Dovrxj2vpzXcW7vf2TwgFEPiDN+D3
+   55RF2b7UmL+y/uGosFsyRA06TaCDeH6A+PenAxLbgf3q5lR22L2KHSAgK
+   DFOPmfFJxt8fzVoLYEyW81suyZ2RuZyA8yR9lqTxV24ZnWGBw+TRUZUGe
+   ttLik18abThqm5/UUxfSJhW7HDnUg19aA75ZR7fsfQb8D1osA/wFBezt6
+   Pi5SjNR9m5n5ubsO5JwiBv0xoCgSnbauBADDw2KLYlaK+y/VcfCzxhZMF
+   w==;
+X-CSE-ConnectionGUID: hP2vyLc9QvKWD7m64bTLyQ==
+X-CSE-MsgGUID: y+JZmYdYTSWX6T2DUuf2Pg==
+X-IronPort-AV: E=Sophos;i="6.16,339,1744092000"; 
+   d="scan'208";a="398910703"
+Received: from mail-svr1.cs.utah.edu ([155.98.64.241])
+  by ipo7smtp.cc.utah.edu with ESMTP; 28 Jul 2025 12:43:22 -0600
+Received: from localhost (localhost [127.0.0.1])
+	by mail-svr1.cs.utah.edu (Postfix) with ESMTP id 8798E3020EF;
+	Mon, 28 Jul 2025 12:41:13 -0600 (MDT)
+X-Virus-Scanned: Debian amavisd-new at cs.utah.edu
+Received: from mail-svr1.cs.utah.edu ([127.0.0.1])
+	by localhost (rio.cs.utah.edu [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id u5RmEL0Ur5UR; Mon, 28 Jul 2025 12:41:12 -0600 (MDT)
+Received: from memphis.cs.utah.edu (memphis.cs.utah.edu [155.98.65.56])
+	by mail-svr1.cs.utah.edu (Postfix) with ESMTP id ABB523020E9;
+	Mon, 28 Jul 2025 12:41:12 -0600 (MDT)
+Received: by memphis.cs.utah.edu (Postfix, from userid 1628)
+	id 556EB1A02A7; Mon, 28 Jul 2025 12:43:20 -0600 (MDT)
+From: Soham Bagchi <soham.bagchi@utah.edu>
+To: dvyukov@google.com,
+	andreyknvl@gmail.com,
+	elver@google.com,
+	akpm@linux-foundation.org,
+	tglx@linutronix.de,
+	glider@google.com,
+	sohambagchi@outlook.com,
+	arnd@arndb.de,
+	kasan-dev@googlegroups.com,
+	linux-kernel@vger.kernel.org,
+	corbet@lwn.net,
+	workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: Soham Bagchi <soham.bagchi@utah.edu>
+Subject: [PATCH 1/2] kcov: use write memory barrier after memcpy() in kcov_move_area()
+Date: Mon, 28 Jul 2025 12:43:17 -0600
+Message-Id: <20250728184318.1839137-1-soham.bagchi@utah.edu>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20250728-pipedoc-v1-1-2dae082a56f5@smrk.net>
-X-B4-Tracking: v=1; b=H4sIAMjBh2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDcyML3YLMgtSU/GTd1BRjcwvL5GQTo5RkJaDqgqLUtMwKsEnRsbW1AEx
- KxyxZAAAA
-X-Change-ID: 20250728-pipedoc-ed3789cc42dc
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: "Alex Xu (Hello71)" <alex_y_xu@yahoo.ca>, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- =?utf-8?q?=C5=A0t=C4=9Bp=C3=A1n_N=C4=9Bmec?= <stepnem@smrk.net>
-X-Mailer: b4 0.14.2
 
-Fixes: 46c4c9d1beb7 ("pipe: increase minimum default pipe size to 2 pages")
-Signed-off-by: Štěpán Němec <stepnem@smrk.net>
----
-The relevant man page was updated in
-7543e84442d7 ("pipe.7: Document change to default pipe size when soft limit is exceeded")
-https://lore.kernel.org/linux-man/20240829204448.2027276-2-kstewart@efficios.com/
----
- Documentation/admin-guide/sysctl/fs.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+KCOV Remote uses two separate memory buffers, one private to the kernel
+space (kcov_remote_areas) and the second one shared between user and
+kernel space (kcov->area). After every pair of kcov_remote_start() and
+kcov_remote_stop(), the coverage data collected in the
+kcov_remote_areas is copied to kcov->area so the user can read the
+collected coverage data. This memcpy() is located in kcov_move_area().
 
-diff --git a/Documentation/admin-guide/sysctl/fs.rst b/Documentation/admin-guide/sysctl/fs.rst
-index 6c54718c9d04ba0e690d064bc50f97ef883234fa..9b7f65c3efd8020d62df5b00388c48f2435da3e3 100644
---- a/Documentation/admin-guide/sysctl/fs.rst
-+++ b/Documentation/admin-guide/sysctl/fs.rst
-@@ -164,8 +164,8 @@ pipe-user-pages-soft
- --------------------
+The load/store pattern on the kernel-side [1] is:
+
+```
+/* dst_area === kcov->area, dst_area[0] is where the count is stored */
+dst_len = READ_ONCE(*(unsigned long *)dst_area);
+...
+memcpy(dst_entries, src_entries, ...);
+...
+WRITE_ONCE(*(unsigned long *)dst_area, dst_len + entries_moved);
+```
+
+And for the user [2]:
+
+```
+/* cover is equivalent to kcov->area */
+n = __atomic_load_n(&cover[0], __ATOMIC_RELAXED);
+```
+
+Without a write-memory barrier, the atomic load for the user can
+potentially read fresh values of the count stored at cover[0],
+but continue to read stale coverage data from the buffer itself.
+Hence, we recommend adding a write-memory barrier between the
+memcpy() and the WRITE_ONCE() in kcov_move_area().
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/kernel/kcov.c?h=master#n978
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/dev-tools/kcov.rst#n364
+
+Signed-off-by: Soham Bagchi <soham.bagchi@utah.edu>
+---
+ kernel/kcov.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/kernel/kcov.c b/kernel/kcov.c
+index 187ba1b80bd..f6ee6d7dc2c 100644
+--- a/kernel/kcov.c
++++ b/kernel/kcov.c
+@@ -978,6 +978,15 @@ static void kcov_move_area(enum kcov_mode mode, void *dst_area,
+ 	memcpy(dst_entries, src_entries, bytes_to_move);
+ 	entries_moved = bytes_to_move >> entry_size_log;
  
- Maximum total number of pages a non-privileged user may allocate for pipes
--before the pipe size gets limited to a single page. Once this limit is reached,
--new pipes will be limited to a single page in size for this user in order to
-+before the pipe size gets limited to two pages. Once this limit is reached,
-+new pipes will be limited to two pages in size for this user in order to
- limit total memory usage, and trying to increase them using ``fcntl()`` will be
- denied until usage goes below the limit again. The default value allows to
- allocate up to 1024 pipes at their default size. When set to 0, no limit is
-
----
-base-commit: 038d61fd642278bab63ee8ef722c50d10ab01e8f
-change-id: 20250728-pipedoc-ed3789cc42dc
++	/*
++	 * A write memory barrier is required here, to ensure
++	 * that the writes from the memcpy() are visible before
++	 * the count is updated. Without this, it is possible for
++	 * a user to observe a new count value but stale
++	 * coverage data.
++	 */
++	smp_wmb();
++
+ 	switch (mode) {
+ 	case KCOV_MODE_TRACE_PC:
+ 		WRITE_ONCE(*(unsigned long *)dst_area, dst_len + entries_moved);
+-- 
+2.34.1
 
 
