@@ -1,93 +1,216 @@
-Return-Path: <linux-doc+bounces-54485-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54487-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65442B13F4E
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 17:58:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8868BB13F5F
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 18:02:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 755761882DC2
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 15:58:38 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A238D189ADEA
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 16:02:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 507D6273D90;
-	Mon, 28 Jul 2025 15:58:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 805F825D53B;
+	Mon, 28 Jul 2025 16:02:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="SMKm/YkZ";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="YtHeT/ZU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QcFmZ33E"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C762D273D84;
-	Mon, 28 Jul 2025 15:58:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4711B1FDA7B;
+	Mon, 28 Jul 2025 16:02:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753718285; cv=none; b=SMc3pVKA7JFk0bweOvTuEsqVKmjkV3vMmaxDApCIObMDAqXoHqSDRbdon5b1Qe0L0J2/vEpD7uu56drVUUxcTDpx+sZoNw6X4queQPSMWRJNdXbGAzUGK3Huk270Fnnc/VRfcGbFiPLRSkpDmS63Wtx7EAvOsYMxVJq7jjqFiE8=
+	t=1753718542; cv=none; b=aF7oqbLdLZwOEFe5YCOF7Lx6uAd4/80D1+T+1BTtt8LIgUSmR86i20pPk5uA2hHHaEFnfoA9OTSVdRfdr9hVefvwgvz9yhgfqh/ezwFoLB5uOz8GBYMsTvn7otRjc/+n92F+grJyljPRMuN7HkFgzb7CTno95ua4ha8968CeRHg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753718285; c=relaxed/simple;
-	bh=f1UEggSNXzgb3Eo4hbbz6GNNcIWPvAtB57wHx3RtvVw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pZAe8sOYHY9UPo+duJX2Cny+K7WiSoxOPp0Et3rLacKCyzFQDKP249g7UrhVKgWjbLdwqAPssZp5u0ahtEYIA4JzO3/P8jIt116yiqZUF0LBBd73LPuQiQEdLjKItRRRtnJMdSTGQ3W0Wq05wh/whGfHzg4QjbN2IePzIrX/pwo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=SMKm/YkZ; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=YtHeT/ZU; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-Date: Mon, 28 Jul 2025 17:58:00 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1753718281;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jpsxSu73SWhAWuzpH+ljmRiUcvfjXN+Xo0DIDiJtFUA=;
-	b=SMKm/YkZvyvT0WBHN53Qsy51q/vKiYHHQwaEPTTzgPY+kE2owwlJA3cd+Pbfo4NbuA7p1A
-	5bpUm9kid8WTyT04u9BQKuMLCFjkFzwD4XlTU5z71Bk8XJtkHJ+Dn3Z7hsDU120Y7y3JQF
-	JU2QOF2nWtlnHvCQ+OFoNKUL7HJPDzR+hORrdLCO3vijMAw4TQc+Cuiy3KdeWm9aCdpHBj
-	D36Igy/TtFE83sNjmMUhbPhIdJg5kuS5q3rcPy/rv6/J+vqzB+TRJxlXBwBPmiPP4aoteQ
-	26bYMpIeT3+M6qg7t9UlQB+Wr28iN/dY1ZNiwC6oL1Zqw3CFKfvRByfuy4i7ew==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1753718281;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=jpsxSu73SWhAWuzpH+ljmRiUcvfjXN+Xo0DIDiJtFUA=;
-	b=YtHeT/ZUj6uc9Q+wHhElD72JCI7pu5+BSwgepswihdY3rK0rB1I2hKx9u4L/qESm+borjd
-	jpr5vowdKWDsGHAA==
-From: Nam Cao <namcao@linutronix.de>
-To: Gabriele Monaco <gmonaco@redhat.com>
-Cc: linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+	s=arc-20240116; t=1753718542; c=relaxed/simple;
+	bh=AXDSigOIfNgykO/qtF5oUAFKeW574QGoSB0Kj22ksb0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=PTHLzeN9Gau+K/2cRf+iFq3KO2TxaGJe3miIKcJjQz7+G/UBjIDM01ddsRKaMvBHpDMJAEmEzxVC/R2hIca5OXP1pOrkTB7KBjNJdmb/O1mmRB2OIVvgFuzuCD9uj2y/iXsRet0UBS7wlVBEPPxZlNqfAbRniS3fC3blm5XMKTc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QcFmZ33E; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE7A1C4CEFA;
+	Mon, 28 Jul 2025 16:02:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1753718542;
+	bh=AXDSigOIfNgykO/qtF5oUAFKeW574QGoSB0Kj22ksb0=;
+	h=From:To:Cc:Subject:Date:From;
+	b=QcFmZ33EDYUSO87dN3I2D2LoOokxpl60i4AbVu0ES6uTFmCibtRMOhLXjuEnx0yGX
+	 rmHyNknqm9Rm9DIU+wdVN2uWqIQXIy9ojMD2TrevxflEIJQ3aQQk1dVCD6En8cWvDF
+	 XCtnnehMoaSDFDp9MECAPMrRTrJ/wcZJgDDWBypKjfzQOV7rhysBNsgdV++hgVKyUp
+	 PUMSC1o8owq+U1IBBtWnJC40tuQfCZ9kNe87kMvxXgJ1q3EsnXAF8cRgJAE0zmlhpT
+	 ZxguhYnASRN72cgnZzpyZ+4W/gfBoQMv6oHDWdjS/QpYd+csfyfeCTn4Vp3H8dzfIW
+	 c2GjA0WCcZslQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab@kernel.org>)
+	id 1ugQIq-00000000Gce-0rIm;
+	Mon, 28 Jul 2025 18:02:16 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: "Message-ID :" <cover.1752076293.git.mchehab+huawei@kernel.org>,
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
 	Jonathan Corbet <corbet@lwn.net>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Ingo Molnar <mingo@redhat.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Tomas Glozar <tglozar@redhat.com>, Juri Lelli <jlelli@redhat.com>,
-	Clark Williams <williams@redhat.com>,
-	John Kacur <jkacur@redhat.com>
-Subject: Re: [PATCH v5 9/9] rv: Add opid per-cpu monitor
-Message-ID: <20250728155800.x-f_sSuD@linutronix.de>
-References: <20250728135022.255578-1-gmonaco@redhat.com>
- <20250728135022.255578-10-gmonaco@redhat.com>
+	Akira Yokosawa <akiyks@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Ignacio Encinas Rubio <ignacio@iencinas.com>,
+	Marco Elver <elver@google.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Eric Dumazet <edumazet@google.com>,
+	Jan Stancek <jstancek@redhat.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Ruben Wauters <rubenru09@aol.com>,
+	joel@joelfernandes.org,
+	linux-kernel-mentees@lists.linux.dev,
+	lkmm@lists.linux.dev,
+	netdev@vger.kernel.org,
+	peterz@infradead.org,
+	stern@rowland.harvard.edu,
+	Breno Leitao <leitao@debian.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Simon Horman <horms@kernel.org>
+Subject: [PATCH v10 00/14] Don't generate netlink .rst files inside $(srctree)
+Date: Mon, 28 Jul 2025 18:01:53 +0200
+Message-ID: <cover.1753718185.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.49.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250728135022.255578-10-gmonaco@redhat.com>
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 
-On Mon, Jul 28, 2025 at 03:50:21PM +0200, Gabriele Monaco wrote:
-> Add a per-cpu monitor as part of the sched model:
-> * opid: operations with preemption and irq disabled
->     Monitor to ensure wakeup and need_resched occur with irq and
->     preemption disabled or in irq handlers.
-> 
-> Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
+Hi Jon,
 
-The monitor implementation looks fine:
-Acked-by: Nam Cao <namcao@linutronix.de>
+That's the v10 version of the parser-yaml series, addressing a couple of
+issues raised by Donald.
 
-And on x86 and riscv64:
-Tested-by: Nam Cao <namcao@linutronix.de>
+It should apply cleanly on the top of docs-next, as I just rebased on
+the top of docs/docs-next.
+
+Please merge it via your tree, as I have another patch series that will
+depend on this one.
+
+-
+
+As discussed at:
+   https://lore.kernel.org/all/20250610101331.62ba466f@foz.lan/
+
+changeset f061c9f7d058 ("Documentation: Document each netlink family")
+added a logic which generates *.rst files inside $(srctree). This is bad
+when O=<BUILDDIR> is used.
+
+A recent change renamed the yaml files used by Netlink, revealing a bad
+side effect: as "make cleandocs" don't clean the produced files and symbols
+appear duplicated for people that don't build the kernel from scratch.
+
+This series adds an yaml parser extension and uses an index file with glob for
+*. We opted to write such extension in a way that no actual yaml conversion
+code is inside it. This makes it flexible enough to handle other types of yaml
+files in the future. The actual yaml conversion logic were placed at 
+netlink_yml_parser.py. 
+
+As requested by YNL maintainers, this version has netlink_yml_parser.py
+inside tools/net/ynl/pyynl/ directory. I don't like mixing libraries with
+binaries, nor to have Python libraries spread all over the Kernel. IMO,
+the best is to put all of them on a common place (scripts/lib, python/lib,
+lib/python, ...) but, as this can be solved later, for now let's keep it this
+way.
+
+---
+
+v10:
+- added a R-B from Donald on patch 5;
+- added an extra patch fixing issues with line numbers. I opted to
+  make  it a separate patch, as this was not a trivial fix, and 
+  I wanted to have it documented why the original way doesn't
+  work, as this information can be useful in the future.
+
+v9:
+- did some cleanups due to changes caused by rebases;
+- added some reviewed-by/reported-by/tested-by tags;
+- addressed some pylint problems at the line numbering patch.
+
+v8:
+- minor fixes based on Donald's feedback;
+- removed unrelated patches.
+
+v7:
+- Added a patch to cleanup conf.py and address coding style issues;
+- Added a docutils version check logic to detect known issues when
+  building the docs with too old or too new docutils version.  The
+  actuall min/max vesion depends on Sphinx version.
+
+v6:
+- YNL doc parser is now at tools/net/ynl/pyynl/lib/doc_generator.py;
+- two patches got merged;
+- added instructions to test docs with Sphinx 3.4.3 (minimal supported
+  version);
+- minor fixes.
+
+v5:
+- some patch reorg;
+- netlink_yml_parser.py is now together with ynl tools;
+- minor fixes.
+
+v4:
+- Renamed the YNL parser class;
+- some minor patch cleanups and merges;
+- added an extra patch to fix a insert_pattern/exclude_pattern logic when
+   SPHINXDIRS is used.
+
+v3:
+- Two series got merged altogether:
+  - https://lore.kernel.org/linux-doc/cover.1749723671.git.mchehab+huawei@kernel.org/T/#t
+  - https://lore.kernel.org/linux-doc/cover.1749735022.git.mchehab+huawei@kernel.org
+
+- Added an extra patch to update MAINTAINERS to point to YNL library
+- Added a (somewhat unrelated) patch that remove warnings check when
+  running "make cleandocs".
+
+
+Mauro Carvalho Chehab (14):
+  docs: netlink: netlink-raw.rst: use :ref: instead of :doc:
+  tools: ynl_gen_rst.py: Split library from command line tool
+  docs: netlink: index.rst: add a netlink index file
+  tools: ynl_gen_rst.py: cleanup coding style
+  docs: sphinx: add a parser for yaml files for Netlink specs
+  docs: use parser_yaml extension to handle Netlink specs
+  docs: uapi: netlink: update netlink specs link
+  tools: ynl_gen_rst.py: drop support for generating index files
+  docs: netlink: remove obsolete .gitignore from unused directory
+  MAINTAINERS: add netlink_yml_parser.py to linux-doc
+  tools: netlink_yml_parser.py: add line numbers to parsed data
+  docs: parser_yaml.py: add support for line numbers from the parser
+  docs: parser_yaml.py: fix backward compatibility with old docutils
+  sphinx: parser_yaml.py: fix line numbers information
+
+ Documentation/Makefile                        |  17 -
+ Documentation/conf.py                         |  20 +-
+ Documentation/netlink/specs/index.rst         |  13 +
+ Documentation/networking/index.rst            |   2 +-
+ .../networking/netlink_spec/.gitignore        |   1 -
+ .../networking/netlink_spec/readme.txt        |   4 -
+ Documentation/sphinx/parser_yaml.py           | 123 ++++++
+ Documentation/userspace-api/netlink/index.rst |   2 +-
+ .../userspace-api/netlink/netlink-raw.rst     |   6 +-
+ Documentation/userspace-api/netlink/specs.rst |   2 +-
+ MAINTAINERS                                   |   1 +
+ tools/net/ynl/pyynl/lib/__init__.py           |   2 +
+ tools/net/ynl/pyynl/lib/doc_generator.py      | 398 ++++++++++++++++++
+ tools/net/ynl/pyynl/ynl_gen_rst.py            | 384 +----------------
+ 14 files changed, 565 insertions(+), 410 deletions(-)
+ create mode 100644 Documentation/netlink/specs/index.rst
+ delete mode 100644 Documentation/networking/netlink_spec/.gitignore
+ delete mode 100644 Documentation/networking/netlink_spec/readme.txt
+ create mode 100755 Documentation/sphinx/parser_yaml.py
+ create mode 100644 tools/net/ynl/pyynl/lib/doc_generator.py
+
+-- 
+2.49.0
+
+
 
