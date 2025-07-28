@@ -1,225 +1,116 @@
-Return-Path: <linux-doc+bounces-54463-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54482-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3AAAB13E82
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 17:33:53 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 21E53B13F3F
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 17:53:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 049984E071D
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 15:33:24 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 526B816B8C8
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 15:53:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 295E2270EAE;
-	Mon, 28 Jul 2025 15:33:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B75452727EB;
+	Mon, 28 Jul 2025 15:53:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DnRyA2wt"
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="f4xVgWWN";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="6keutG0R"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC539270557;
-	Mon, 28 Jul 2025 15:33:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D170134CF5;
+	Mon, 28 Jul 2025 15:53:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753716792; cv=none; b=fY2guuv0g3pA3JCWkjadltk/2TOcklXqnz8mkTJfbusxxuBrHsVWe4G8+Z+9Szuo+v4BVbW+Oy0aMAvNuWLmQJpnDsRjKfitDFQnY65mnZhtyBnxWSMPv7tz/XkZAR4snlMyP/4BAlvczx8ARmcC66JfMmzNffU57X4K7FxqYhM=
+	t=1753718019; cv=none; b=Kuty5s1a6iN53qUmlYUrlFsmp5wFRqO6VWL3p8YSOktC03TjqSiiIq/mwVLfcti9PQ53N5d9tLFyrBcwWm+cJZy93mVdvoNrBxwqciacmgVUqFtCWunT3OSBJfr3Km9cOJOe8I/qxgTvWGgGNtMb+kShsd30TBB36HiwkNK08F8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753716792; c=relaxed/simple;
-	bh=rmQ5Dpw7q70m/bVWkQP+hcMEHhICjmYLdatn19PTQ/Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=i6IZ3co1UupEcwdDzAJsi4zALvtXtB3PmErsa9qp5w0a4g1Q4d+hGYTagGJPm4O/KUt7MPM+qRuRqcHQUoyfKxhbtkWZndcVgJL8+H3iDLioklhiC1ZLhO9ihE9RztK9jdZkJo7lmrl3TD97QzsrWzFCdIFSkgfeiaLtiaHdyJc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DnRyA2wt; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72029C4CEE7;
-	Mon, 28 Jul 2025 15:33:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753716791;
-	bh=rmQ5Dpw7q70m/bVWkQP+hcMEHhICjmYLdatn19PTQ/Y=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=DnRyA2wtst7FjybA3WjyxHI22SvQoXzZiI86OVKatHrIt7Olm5fnPZjRE4opCIAqw
-	 zUgZalyUSlTjwpP+H2/zLcQ/RsPdG3MIvpdO5ilFzoMWIIZbxMeL4UlQD/Eg38ZwU6
-	 rxBp7tOE2o6FtxmSgeqpec1esN9AfeLJKUa7PfPG3t5Mk+Tm4/lAV416R3lU1bYvGq
-	 vqfPcqSR1UdYFuREWbDxPyCcsTqoceGOvCfOmbeHyodSak5v4noX4I3dA4LlE1mPIs
-	 0hXJxqKOMAsp62MG6nyDGhn25MB6GhzrSbyUnJlS2rfeyb84AMTxKeia1/4Ez+Zv/J
-	 cloEW07gK0iFw==
-Date: Mon, 28 Jul 2025 17:33:06 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jani Nikula <jani.nikula@intel.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Laurent Pinchart
- <laurent.pinchart@ideasonboard.com>, Linux Doc Mailing List
- <linux-doc@vger.kernel.org>, linux-kernel@vger.kernel.org,
- workflows@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>
-Subject: Re: [PATCH v2 3/2] docs: changes: better document Python needs
-Message-ID: <20250728173306.2ab1409a@sal.lan>
-In-Reply-To: <83d12d5293e23c622ae390204fed8fd4453014b1@intel.com>
-References: <cover.1752307866.git.mchehab+huawei@kernel.org>
-	<58c0cfb40e600af697b1665ffbc8e5bb3d859bb5.1752309145.git.mchehab+huawei@kernel.org>
-	<20250712163155.GA22640@pendragon.ideasonboard.com>
-	<20250713002517.7f52b0e9@foz.lan>
-	<875xfhabv0.fsf@trenco.lwn.net>
-	<20250724194306.27b98194@foz.lan>
-	<83d12d5293e23c622ae390204fed8fd4453014b1@intel.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1753718019; c=relaxed/simple;
+	bh=U7j2Lbosm4WLYwZsfrLKzY6YAPlSQt9Q6Zc876hxD3Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=raKdXVwkdkiJCQPyXV5Jt8aqyLfmBHB2bxi469SiHBve/uu6gyIPS3iRz7PWkKeeUm9aqwXlQFNMkSjsjbuprFVNYOn/ENNXdnUuQoo4S+asbv/uPgTuYr/rwsV3PIeAmBfHS/mf18ETl4Odp2KIaMs8/3IDnc14kTOl8AOkIpc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=f4xVgWWN; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=6keutG0R; arc=none smtp.client-ip=193.142.43.55
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+Date: Mon, 28 Jul 2025 17:53:32 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1753718014;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+CgF4jfxs5+O2wkAzCTn2YihFiw2i9lKZtG7mYjPuQk=;
+	b=f4xVgWWNm7IXkoSvOBLeGOenMWbJfO60HAKxQsrhHabxSoAmBk2CumZIUD4B7nMrgoRZXA
+	rqjznDqds2XK0eXX/IP+GyJJTicGMJcpXcz6w3AmIAoCrIOXU1s5PR+hWbhrTjJpnsQtzA
+	BrtYy2r80pbqubap62Uw3WAfbVaZC0UXGd6wzTQUgRkqDaeF8ag3lFpzRBm4+iXvMwpcrx
+	lP+rUXXI0EjrdUkpp1fKA7pFQs5IHACi2DOWkuS0tpPmBHYALt8QZbpbaofZZwyc/VS+FW
+	Mko40fot6+CP9ReI5VGIg4WY8c/p2dWXeylSEaVcd5O0TaKqP+N7WD2FAn4Ixg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1753718014;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+CgF4jfxs5+O2wkAzCTn2YihFiw2i9lKZtG7mYjPuQk=;
+	b=6keutG0RXxiyWXfQSP9SWfr9+x9fS9jQvt0HnyO4obBGTDBTHD4UNOJ+4BBZB57ldZYk2M
+	k6hh+toXUJQNwwAQ==
+From: Nam Cao <namcao@linutronix.de>
+To: Gabriele Monaco <gmonaco@redhat.com>
+Cc: linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	Ingo Molnar <mingo@redhat.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Tomas Glozar <tglozar@redhat.com>, Juri Lelli <jlelli@redhat.com>,
+	Clark Williams <williams@redhat.com>,
+	John Kacur <jkacur@redhat.com>
+Subject: Re: [PATCH v5 7/9] rv: Replace tss and sncid monitors with more
+ complete sts
+Message-ID: <20250728155332.sbkepHj7@linutronix.de>
+References: <20250728135022.255578-1-gmonaco@redhat.com>
+ <20250728135022.255578-8-gmonaco@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250728135022.255578-8-gmonaco@redhat.com>
 
-Em Mon, 28 Jul 2025 12:28:45 +0300
-Jani Nikula <jani.nikula@intel.com> escreveu:
+On Mon, Jul 28, 2025 at 03:50:19PM +0200, Gabriele Monaco wrote:
+> The tss monitor currently guarantees task switches can happen only while
+> scheduling, whereas the sncid monitor enforces scheduling occurs with
+> interrupt disabled.
+> 
+> Replace the monitors with a more comprehensive specification which
+> implies both but also ensures that:
+> * each scheduler call disable interrupts to switch
+> * each task switch happens with interrupts disabled
+> 
+> Cc: Ingo Molnar <mingo@redhat.com>
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
 
-> On Thu, 24 Jul 2025, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wr=
-ote:
-> > Em Thu, 24 Jul 2025 08:42:59 -0600
-> > Jonathan Corbet <corbet@lwn.net> escreveu:
-> >
-> >> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
-> >>=20
-> >> > Maybe I can place instead CONFIG_DRM_I915_WERROR.
-> >>=20
-> >> I've held off on this series on the expectation that a new version wou=
-ld
-> >> come.  I guess, at this point, it will be a post-merge-window thing?
-> >
-> > Feel free to postpone. I have already a new version of it here somewher=
-e on
-> > my branches, but I had to take some days off. So, I ended not sending y=
-ou
-> > the (probably) final version.
-> >
-> > I intend to send what I have here during the merge window for you to
-> > review and apply post-merge-window.
->=20
-> I think the main questions here are 1) how to handle optional build tool
-> dependencies, and 2) whether Python is an optional or required
-> dependency.
+I gave this a try on riscv64 and observed some errors:
 
-with regards to (2), besides doc build and kernel-doc --none, there is
-at least another place at the building system requiring Python:=20
-scripts/Makefile.vmlinux_o: There, it has:
+[  620.696055] rv: monitor sts does not allow event sched_switch on state enable_to_exit
+[  621.047705] rv: monitor sts does not allow event sched_switch on state enable_to_exit
+[  642.440209] rv: monitor sts does not allow event sched_switch on state enable_to_exit
 
-	quiet_cmd_gen_initcalls_lds =3D GEN     $@
-	      cmd_gen_initcalls_lds =3D \
-	        $(PYTHON3) $(srctree)/scripts/jobserver-exec \
-	        $(PERL) $(real-prereqs) > $@
+I tested with two user programs:
 
-	.tmp_initcalls.lds: $(srctree)/scripts/generate_initcall_order.pl \
-	                vmlinux.a $(KBUILD_VMLINUX_LIBS) FORCE
-	        $(call if_changed,gen_initcalls_lds)
+    int main() { asm ("unimp"); }
+    int main() { asm ("ebreak"); }
 
-	targets :=3D .tmp_initcalls.lds
+The two programs are repeatedly executed:
 
-	ifdef CONFIG_LTO_CLANG
-	initcalls-lds :=3D .tmp_initcalls.lds
-	endif
+    #!/bin/bash
+    ./test1 &
+    ./test2 &
+    # ... repeat lots of time
 
-Now, I didn't check exactly what conditions trigger
-.tmp_initcalls.lds, but there are some places that use
-select:
+Any idea?
 
-	arch/Kconfig:   select LTO_CLANG
-
-On a quick look, it sounds that some archs will select this
-automatically when built with clang.
-
-I didn't check if other parts of the building system requires it.
-
-In any case, on its current state, I'd say that currently this
-is not optional.
-
-> It might be nice to be able to have an actual Kconfig and dependency for
-> optional tools. "depends on TOOL_PYTHON" or something. Enable the
-> option, and you should have Python.
-
-That would be an option. The question is: is it worth spending
-time on it?
-
-> This in turn raises the question for allyesconfig. It's cumbersome
-> (though not impossible) to add config options that you actually have to
-> enable manually.
-
-IMO it doesn't make sense to manually enable something with *config.
-If they depend on Python, be it: for such targets, Python is
-mandatory.
-
->=20
-> The header test stuff really isn't required to actually build the kernel
-> or drm, however DRM_MSM does depend on Python for building the driver.
-
-Good to know. It means that, for those *config targets:
-
-	arch/arm/configs/imx_v6_v7_defconfig:CONFIG_DRM_MSM=3Dy
-	arch/arm/configs/multi_v7_defconfig:CONFIG_DRM_MSM=3Dm
-	arch/arm/configs/qcom_defconfig:CONFIG_DRM_MSM=3Dm
-
-(plus all{mod|yes}config)
-
-Python is mandatory. As multi_v7_defconfig is one of them, we
-may assume, that, o practical cases, Python 2.7 or 3.2+ is=20
-mandatory for arm support. The current requirement is:
-
-	$ vermin -v --no-tips ./drivers/gpu/drm/msm/registers/gen_header.py
-	Detecting python files..
-	Analyzing using 8 processes..
-	2.7, 3.2     /new_devel/v4l/docs/drivers/gpu/drm/msm/registers/gen_header.=
-py
-	Minimum required versions: 2.7, 3.2
-
-Heh, looking for files that end with .py at Makefile (not all
-Python scripts at the Kernel end with such extension), it seems
-that there are more:
-
-	grep \\\.py $(git ls-files|grep Makefile|grep -v tools)
-
-
-	Makefile:KERNELDOC       =3D $(srctree)/scripts/kernel-doc.py
-	Makefile:		  vmlinux-gdb.py \
-	Makefile:	$(Q)ln -fsn $(abspath $(srctree)/scripts/gdb/vmlinux-gdb.py)
-	Makefile:compile_commands.json: $(srctree)/scripts/clang-tools/gen_compile=
-_commands.py \
-	Makefile:      cmd_clang_tools =3D $(PYTHON3) $(srctree)/scripts/clang-too=
-ls/run-clang-tools.py $@ $<
-	drivers/gpu/drm/msm/Makefile:      cmd_headergen =3D mkdir -p $(obj)/gener=
-ated && $(PYTHON3) $(src)/registers/gen_header.py \
-	drivers/gpu/drm/msm/Makefile:		$(src)/registers/gen_header.py \
-	drivers/gpu/drm/msm/Makefile:		$(src)/registers/gen_header.py \
-	drivers/tty/vt/Makefile:#GENERATE_UCS_TABLES :=3D 2  # invokes gen_ucs_rec=
-ompose_table.py with --full
-	drivers/tty/vt/Makefile:$(obj)/ucs_width_table.h: $(src)/gen_ucs_width_tab=
-le.py
-	drivers/tty/vt/Makefile:$(obj)/ucs_recompose_table.h: $(src)/gen_ucs_recom=
-pose_table.py
-	drivers/tty/vt/Makefile:$(obj)/ucs_fallback_table.h: $(src)/gen_ucs_fallba=
-ck_table.py
-	rust/Makefile:	$(Q)MAKEFLAGS=3D $(srctree)/scripts/generate_rust_analyzer.=
-py \
-	scripts/Makefile.lib:MAKE_FIT :=3D $(srctree)/scripts/make_fit.py
-	scripts/gdb/linux/Makefile:symlinks :=3D $(patsubst $(src)/%,%,$(wildcard =
-$(src)/*.py))
-	scripts/gdb/linux/Makefile:always-y +=3D constants.py
-	scripts/gdb/linux/Makefile:$(obj)/constants.py: $(src)/constants.py.in FOR=
-CE
-	scripts/gdb/linux/Makefile:clean-files :=3D *.pyc *.pyo
-
-(that not including tools/*)
-
-Some seem false positives, but on the other hand, looking for tools,
-several scripts seem to be executed by non-tools Makefiles. I didn't
-check if any of them are written in python, though.
-
-Considering the above, for me it seems that the bus already=20
-departed: there are several cases where Python is required during
-build time. So, adding a "depends on TOOL_PYTHON" doesn't seem
-to be trivial.
-
-=46rom my side, I don't mind much about that, as this is something
-that affects only the Kernel build. I would very much prefer to
-have things like config BPF optional.
-
-Regards,
-Mauro
-
+Nam
 
