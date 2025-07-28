@@ -1,134 +1,112 @@
-Return-Path: <linux-doc+bounces-54511-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54513-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E020B14229
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 20:44:41 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CD03B14264
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 21:08:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9275E17E6FE
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 18:44:41 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 99DA918C033E
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 19:08:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBDB027587C;
-	Mon, 28 Jul 2025 18:44:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E4325273D68;
+	Mon, 28 Jul 2025 19:08:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=utah.edu header.i=@utah.edu header.b="TloSWYpZ"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="bY3bjUDt"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ipo8.cc.utah.edu (ipo8.cc.utah.edu [155.97.144.47])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7E91220F2B;
-	Mon, 28 Jul 2025 18:44:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=155.97.144.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A266213E85;
+	Mon, 28 Jul 2025 19:07:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753728276; cv=none; b=s/rouj3pamO1P+w6/366ewtsnsvbDC4LHYOseQGjFYlBUv9JZsK5la1f85OBngvLKynWxF+sJBLXPaA9GuNxT9SZ+9yigCplPIHYDd/1fkezPYbf6dCprsSFc8Ij1mAsHpnFmjvG2XP0HvT7iEcuVUsxU4Jb3hIXmWgjrvZUUoc=
+	t=1753729681; cv=none; b=kMeiDarDY4p/2JE+wts3ezoYlOmiGVOd0wLxZ3BsdMswN4lIJWL+rBhGX+qwS6EaPXNk4GvGmVjPoRDAnMXE3w/f5Eo6HVNfGX67206sEw6ieyKzGpB0Zpo28BdZP3lW+SCuLALv+CP3yEccHbblZZLY5/tb+L8ZqkwjYIvd3B8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753728276; c=relaxed/simple;
-	bh=ZQmdZxYotchKJucmhhEg6EAkbQtdqUmAAUUk5Fctm8U=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=BCmt1H+6KIptqQWLj8Xjl0dnQeV02buE5QwtDa98v+twuDlHWt8FTv38hWTH0M5dB0M13WaB/Q1mKWdF1mP2pxhL6AHCk+mot5IqiBv1EOZc1aZLwMHDg6KFerq5+YvN8dCwAltGXEO6X5m4sWWIQqFJ15ZjmyvfD54gkxh8VK8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=utah.edu; spf=pass smtp.mailfrom=cs.utah.edu; dkim=pass (2048-bit key) header.d=utah.edu header.i=@utah.edu header.b=TloSWYpZ; arc=none smtp.client-ip=155.97.144.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=utah.edu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.utah.edu
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=utah.edu; i=@utah.edu; q=dns/txt; s=UniversityOfUtah;
-  t=1753728275; x=1785264275;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=ZQmdZxYotchKJucmhhEg6EAkbQtdqUmAAUUk5Fctm8U=;
-  b=TloSWYpZBT9ggDkHdkwwbfHYT5n7HGPhB8rdHSUeTSb26mBOYe9nXBxe
-   VaIg5BcE8YfzGsz9XUEOUGg6ACT9E67Hbc93aU4xIVflP9J3aET1Pfb1o
-   QhWSBdQ9FYC1A4MA+6V4YDqwO35zY4JfYaNkDSjxA+JMjVqi9FSopNVwP
-   37e01UzpaUAMz0HiIyw0VjEv5IhTsNrbSg29LXY0bRQJJFymKeQP5GMWs
-   hrvTH5JBm17lQuTFO4yRethofviE0euX2I4m2Q8IvshCg+ncHGbf/4aFv
-   s1+5oFoVjkTKqFFapP55XxyN6fxj66FeNNB8PPnUtmrIatxZdjt1ZpbjN
-   Q==;
-X-CSE-ConnectionGUID: Nk14R2r5QbiSUWohi0GGzw==
-X-CSE-MsgGUID: A/rCkRQdRFCd9E7CeEuQWw==
-X-IronPort-AV: E=Sophos;i="6.16,339,1744092000"; 
-   d="scan'208";a="78049462"
-Received: from rio.cs.utah.edu (HELO mail-svr1.cs.utah.edu) ([155.98.64.241])
-  by ipo8.smtp.cc.utah.edu with ESMTP; 28 Jul 2025 12:43:22 -0600
-Received: from localhost (localhost [127.0.0.1])
-	by mail-svr1.cs.utah.edu (Postfix) with ESMTP id 049CF3021AE;
-	Mon, 28 Jul 2025 12:41:13 -0600 (MDT)
-X-Virus-Scanned: Debian amavisd-new at cs.utah.edu
-Received: from mail-svr1.cs.utah.edu ([127.0.0.1])
-	by localhost (rio.cs.utah.edu [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IJQq1hn-PunM; Mon, 28 Jul 2025 12:41:12 -0600 (MDT)
-Received: from memphis.cs.utah.edu (memphis.cs.utah.edu [155.98.65.56])
-	by mail-svr1.cs.utah.edu (Postfix) with ESMTP id B14813020EF;
-	Mon, 28 Jul 2025 12:41:12 -0600 (MDT)
-Received: by memphis.cs.utah.edu (Postfix, from userid 1628)
-	id 58C651A02B5; Mon, 28 Jul 2025 12:43:20 -0600 (MDT)
-From: Soham Bagchi <soham.bagchi@utah.edu>
-To: dvyukov@google.com,
-	andreyknvl@gmail.com,
-	elver@google.com,
-	akpm@linux-foundation.org,
-	tglx@linutronix.de,
-	glider@google.com,
-	sohambagchi@outlook.com,
-	arnd@arndb.de,
-	kasan-dev@googlegroups.com,
-	linux-kernel@vger.kernel.org,
-	corbet@lwn.net,
-	workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Cc: Soham Bagchi <soham.bagchi@utah.edu>
-Subject: [PATCH 2/2] kcov: load acquire coverage count in user-space code
-Date: Mon, 28 Jul 2025 12:43:18 -0600
-Message-Id: <20250728184318.1839137-2-soham.bagchi@utah.edu>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250728184318.1839137-1-soham.bagchi@utah.edu>
-References: <20250728184318.1839137-1-soham.bagchi@utah.edu>
+	s=arc-20240116; t=1753729681; c=relaxed/simple;
+	bh=tmCHjLOJ72iOAXZqEWnyle1ztE8nfZ1ufcXgM1QwdaI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=AHgeN/ijJAWcZ8kFbrarDw2iFeQiPJjj8aOhFrRdHRROAbqwAANjcUbBdtgC+PGdB3xzeQol8lEQRQpZElsKzE+Ft9SbPJEKsOFKv3tqrq2FSHExlUbYNZnvL9UW5zTJVeyu10AXAkGa1wV4btj159U1s+80TTKaPKQGUyrqLw4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=bY3bjUDt; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1B06540AD1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1753729679; bh=fnlUyUCJvDNSa7htJMdjOZh8nkiOciGX7zvIO4vjOfA=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=bY3bjUDt81w0sCignVfkO0fJdjd/psdSfxpqbSWi7TK6Ig8yHgCrD9mSFJEL98ySu
+	 CBoDL0Lg/k/iDiAZxgUFZ5Gyg7kvJlvW8DtcAPoOESaSxwYduWED+EU2IwU5ua9ajG
+	 GxNM35kOKmfKyybcU7Lnbp6vL//emMUemRh2StuERkPjtnMP1azI/aMS/XkKYZSdBi
+	 XN98GETJBmjiUWrjIWxZFe3zTlOjgnvjzB0bZSTxwAzcEkEHAjT+U2NFNsQI28Id/0
+	 DnjMKPP1d8jJnT2wq4KyMGHkjUjsJGJE9E4IKRgqWyRnClRudmvXua4Bm2/iOSYcuT
+	 h+Y/YLCssU7uQ==
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 1B06540AD1;
+	Mon, 28 Jul 2025 19:07:59 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: =?utf-8?B?xaB0xJtww6FuIE7Em21lYw==?= <stepnem@smrk.net>
+Cc: "Alex Xu (Hello71)" <alex_y_xu@yahoo.ca>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, =?utf-8?B?xaB0xJtww6FuIE7Em21lYw==?=
+ <stepnem@smrk.net>
+Subject: Re: [PATCH] docs: admin-guide: update to current minimum pipe size
+ default
+In-Reply-To: <20250728-pipedoc-v1-1-2dae082a56f5@smrk.net>
+References: <20250728-pipedoc-v1-1-2dae082a56f5@smrk.net>
+Date: Mon, 28 Jul 2025 13:07:58 -0600
+Message-ID: <87seigxhf5.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Updating the KCOV documentation to use a load-acquire
-operation for the first element of the shared memory
-buffer between kernel-space and user-space.
+=C5=A0t=C4=9Bp=C3=A1n N=C4=9Bmec <stepnem@smrk.net> writes:
 
-The load-acquire pairs with the write memory barrier
-used in kcov_move_area()
+> Fixes: 46c4c9d1beb7 ("pipe: increase minimum default pipe size to 2 pages=
+")
+> Signed-off-by: =C5=A0t=C4=9Bp=C3=A1n N=C4=9Bmec <stepnem@smrk.net>
+> ---
+> The relevant man page was updated in
+> 7543e84442d7 ("pipe.7: Document change to default pipe size when soft lim=
+it is exceeded")
+> https://lore.kernel.org/linux-man/20240829204448.2027276-2-kstewart@effic=
+ios.com/
+> ---
+>  Documentation/admin-guide/sysctl/fs.rst | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/Documentation/admin-guide/sysctl/fs.rst b/Documentation/admi=
+n-guide/sysctl/fs.rst
+> index 6c54718c9d04ba0e690d064bc50f97ef883234fa..9b7f65c3efd8020d62df5b003=
+88c48f2435da3e3 100644
+> --- a/Documentation/admin-guide/sysctl/fs.rst
+> +++ b/Documentation/admin-guide/sysctl/fs.rst
+> @@ -164,8 +164,8 @@ pipe-user-pages-soft
+>  --------------------
+>=20=20
+>  Maximum total number of pages a non-privileged user may allocate for pip=
+es
+> -before the pipe size gets limited to a single page. Once this limit is r=
+eached,
+> -new pipes will be limited to a single page in size for this user in orde=
+r to
+> +before the pipe size gets limited to two pages. Once this limit is reach=
+ed,
+> +new pipes will be limited to two pages in size for this user in order to
+>  limit total memory usage, and trying to increase them using ``fcntl()`` =
+will be
 
-Signed-off-by: Soham Bagchi <soham.bagchi@utah.edu>
----
- Documentation/dev-tools/kcov.rst | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+This seems like a reasonable change, but can I ask you to resubmit it
+with a proper changelog, please?
 
-diff --git a/Documentation/dev-tools/kcov.rst b/Documentation/dev-tools/kcov.rst
-index 6611434e2dd..46450fb46fe 100644
---- a/Documentation/dev-tools/kcov.rst
-+++ b/Documentation/dev-tools/kcov.rst
-@@ -287,6 +287,11 @@ handle instance id.
- The following program demonstrates using KCOV to collect coverage from both
- local tasks spawned by the process and the global task that handles USB bus #1:
- 
-+The user-space code for KCOV should also use an acquire to fetch the count
-+of coverage entries in the shared buffer. This acquire pairs with the
-+corresponding write memory barrier (smp_wmb()) on the kernel-side in
-+kcov_move_area().
-+
- .. code-block:: c
- 
-     /* Same includes and defines as above. */
-@@ -361,7 +366,7 @@ local tasks spawned by the process and the global task that handles USB bus #1:
- 	 */
- 	sleep(2);
- 
--	n = __atomic_load_n(&cover[0], __ATOMIC_RELAXED);
-+	n = __atomic_load_n(&cover[0], __ATOMIC_ACQUIRE);
- 	for (i = 0; i < n; i++)
- 		printf("0x%lx\n", cover[i + 1]);
- 	if (ioctl(fd, KCOV_DISABLE, 0))
--- 
-2.34.1
+Thanks,
 
+jon
 
