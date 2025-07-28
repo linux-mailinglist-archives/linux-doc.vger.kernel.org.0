@@ -1,186 +1,424 @@
-Return-Path: <linux-doc+bounces-54448-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54450-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB385B13B79
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 15:28:55 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 04C74B13B94
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 15:36:10 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 381183BC10B
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 13:28:26 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 56A763BC364
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 13:35:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0245279CF;
-	Mon, 28 Jul 2025 13:28:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 736C4265CBD;
+	Mon, 28 Jul 2025 13:36:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="cisC2RQ4"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="lWi3zelG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 436A34437A
-	for <linux-doc@vger.kernel.org>; Mon, 28 Jul 2025 13:28:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAAD71E379B;
+	Mon, 28 Jul 2025 13:36:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753709330; cv=none; b=eAMdwJqnkiMaegZNtuion6HC7KUbqFxA6JCCzBxcq2j5S91r70mS49cffwuoxwXE1JrS8eer5vnZoU3lD+c2RFWT+vFTWzPkMn1+PHXngs0BCY+sfIOUC06wSVwQs8H7VbReMMWPNSbSv8gHXnF2QkcNXbtrZc/Knzfm60+gQz0=
+	t=1753709766; cv=none; b=GedvXz7qtJQjLKnUrarNenwf6izaLerRffv4XJ74lPKX84IsoA2eeB6fFiRkTdGZWeSyhJDQu1pyAwFGsOSG6tkp/q35Y3s99Hg1PckW7omV9L6jHsR4fHnkIRv+u5BdQR8sylcxHu6ySNmDHtC5xclqLtKGS+qN4EMjLZTMk/0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753709330; c=relaxed/simple;
-	bh=TlSoO3vPV8cZBvh33T6m3vWvJPn44ULMpjGzeTRvAiM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=EFJttAx4SbTs6zGPoXzFnmFg+XIKmPCuHIF1kRqTgRiWoly1ZUwcVPbNTot0isWk1qzMYD+f0SlUxjMrdZAX6WHsuIa4/oXYWLuL3OTJQsSSC4eHdGHrNA54roXqOstjjQTD/Q3RnvxxzBe/uzcuaJm0m3G4nkqTGNYbAwhNSzs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=cisC2RQ4; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1753709328;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Le65crWkL2r0S+fv/QPgs84i+1vkmflDFPmUD2ynLfM=;
-	b=cisC2RQ427Q03SUBhXnvlXYrVQJ8rFpN/C0YkOIK34AeLNdNNR6yoFZOaN/GYK71Mr0xBg
-	2Qb27pZZlO0YbPSihza7K377kGIUHDMZyPUIM2Bq6NJNOKqRTM0tdMmn9+oSNKm2QrNhRb
-	N3fwamXtDGJbEinYWAfYvreZ8+kK9Wg=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-147-ZjojcpbkPGKIBCbou5BRBA-1; Mon, 28 Jul 2025 09:28:45 -0400
-X-MC-Unique: ZjojcpbkPGKIBCbou5BRBA-1
-X-Mimecast-MFC-AGG-ID: ZjojcpbkPGKIBCbou5BRBA_1753709324
-Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-451ac1b43c4so17145705e9.0
-        for <linux-doc@vger.kernel.org>; Mon, 28 Jul 2025 06:28:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1753709324; x=1754314124;
-        h=content-transfer-encoding:in-reply-to:organization:autocrypt
-         :content-language:from:references:cc:to:subject:user-agent
-         :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=Le65crWkL2r0S+fv/QPgs84i+1vkmflDFPmUD2ynLfM=;
-        b=TC+r1XmLi+nQVl58jZStM+iYlYMXYZW14RJFHMX7kQ5a8ZFJOI3Cs8VFbw2SpJJR1e
-         K+DBZYklatp78FEeV1RNx5UBhM2qFbXjGH+bEP54RxouoSZG6T4W5NND7eYjXAmWGBwl
-         uVPkm/ExviTGIosS9cs5N8FaCP4iHCqHcFG6JInyusQ4Yc9A2DNDBiR1FO5A3tINlYSD
-         AojqY0ZBRSAeLM7Ba68Z7hGQZb+zqpLil4coeR1PUEBLlwhtIZbpQFTIhT73hyxRnIdZ
-         0BeN2F8c+tI86lE0DXq76vZ0XISEjZ/iTZzPD1gQ4AckqTOenAyDfdk6xgDsF87LWrhj
-         dLNA==
-X-Forwarded-Encrypted: i=1; AJvYcCUlcBsXprrg36OUV9hEaDv+wIQ+Ny8A/oFWj4hJCmBIucexn02ov8tNTKjT3dE8WzVRcuVX59MW8S0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyCEEuh8nhlkzss43mi4fjgMfOBVj34sWVcDiCaKr65kyZApcg0
-	ZDvfyW4Z7KR6nhSd3nh93T/qdjBY6oaNsMjGb4t0pkZ1trOJLngz5fq7+/PHwci7mZcdehznaUu
-	9RGS5F37rPMQiFHD5/NIvXKxZGNGS9j7WonUdQxFXpaj6u/PqsjQr031uRPj2Kw==
-X-Gm-Gg: ASbGncu7OWA02qeKW/qigJbqAr18VKqUH8z8oSf2/t5X5Cklj0U2NMOmFzYhZo77iLS
-	wqpSVMsvDLEV8fQI5Zahw8C/yD1n4b4XYcgZ1HjEWfLqxVy3HDUDTYGBqkPs7o9d3XYNsV3/LvD
-	57RAg9iZqAjQMOYABicB80NfUNra8++J65v85lcI/1FpD1Wi8Jt5Yx9mUFerTksSeBPRmpp028k
-	zIX4Zj+MtJr75+5xJg+F9XNrVsJpg/BDIkwpPVZ5cw2eMDUUlyOOwy+frnUC86d/HpVbwLAsZmu
-	j9XRZEIg8lSNQNXLx8D4c4ehP8DF1b8vcnpSvOSP0vAdudzPO1lfAF5qp+A5TCm/bkKsrk7cv5g
-	V/pYW7KLc8kl7lTc9p9X0TEW9+Fm8NfvBvrpdJ0N4yU0t06IE55zSrKDTkT3wo7zKXuY=
-X-Received: by 2002:a05:600c:821a:b0:450:d37d:7c with SMTP id 5b1f17b1804b1-45876447cfamr87417975e9.21.1753709324269;
-        Mon, 28 Jul 2025 06:28:44 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEsVPv+MWr7O6tN7PNmT8Q2J8IDZY4LgEZaJPbBaAXxPD+wuoWYfzqkdrvfI0jOOB8Ha1wgzg==
-X-Received: by 2002:a05:600c:821a:b0:450:d37d:7c with SMTP id 5b1f17b1804b1-45876447cfamr87417625e9.21.1753709323785;
-        Mon, 28 Jul 2025 06:28:43 -0700 (PDT)
-Received: from ?IPV6:2003:d8:2f47:2b00:c5f3:4053:2918:d17c? (p200300d82f472b00c5f340532918d17c.dip0.t-ipconnect.de. [2003:d8:2f47:2b00:c5f3:4053:2918:d17c])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-458705377f0sm156708195e9.6.2025.07.28.06.28.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 28 Jul 2025 06:28:43 -0700 (PDT)
-Message-ID: <e83ac8e3-06fa-4ccb-95e5-4f95ba5aba7b@redhat.com>
-Date: Mon, 28 Jul 2025 15:28:41 +0200
+	s=arc-20240116; t=1753709766; c=relaxed/simple;
+	bh=cKMH/l5NO1e8a5z2Dh9mCC8wzf97yxMzULdkOpRx5tM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=pwBEuXARutDDUsB1sCsB0UQxghkBA6gBojCitSbVBXLlUNpuneS0VcnxFzh7cxkBNH+UnyeTZuaKU2bIuURTqOpKstGgESl7BEf90i/3mgunEIa1ov5JWvcSyiHY2kODBu54cjixJC2BO31vOXFdQLagWviQM9BpGr3GWFN0TRw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=lWi3zelG; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 84B7240AA9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1753709754; bh=TGOGL4+9w8rjwWq76PI2mRNxZVObIaWVG55BoXnctDU=;
+	h=From:To:Cc:Subject:Date:From;
+	b=lWi3zelGDPKhiG0SVH0CFrBBmqcYrw0Eq7vvmiImvXYQrnrAteGMil1LRqt65PASQ
+	 J241LFWM4n3RD6xOtcSfFmVL1DYFyQ7XAUvKoBTNXQI4egx2Tot8joVgC6wpcx+kAN
+	 i17DHIbhrA496XNvC8IhxSwfEzESjsQin+z/cUX5IGkyMQUNXkfOjtSL3AqLKOu4OT
+	 Wm2we2jdNWqPdPfMFORpln1zNjChhg0bouleOqI2zVZV1rYVgN7cjqR3y3uCf8my3X
+	 A7KlYLBnWQSQdRu6+jd2lEwrvv1YfIH5QqAd+kEeErGmtdsyDlE40FqS4AeoOf6QKD
+	 +vSgC/6miaOLg==
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 84B7240AA9;
+	Mon, 28 Jul 2025 13:35:54 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Linus Torvalds <torvalds@linuxfoundation.org>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [GIT PULL] Documentation for 6.17
+Date: Mon, 28 Jul 2025 07:35:53 -0600
+Message-ID: <87y0s81lqe.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] mm/huge_memory: convert "tva_flags" to "enum
- tva_type" for thp_vma_allowable_order*()
-To: Usama Arif <usamaarif642@gmail.com>,
- Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org
-Cc: linux-fsdevel@vger.kernel.org, corbet@lwn.net, rppt@kernel.org,
- surenb@google.com, mhocko@suse.com, hannes@cmpxchg.org, baohua@kernel.org,
- shakeel.butt@linux.dev, riel@surriel.com, ziy@nvidia.com,
- laoar.shao@gmail.com, dev.jain@arm.com, baolin.wang@linux.alibaba.com,
- npache@redhat.com, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com,
- ryan.roberts@arm.com, vbabka@suse.cz, jannh@google.com,
- Arnd Bergmann <arnd@arndb.de>, sj@kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, kernel-team@meta.com
-References: <20250725162258.1043176-1-usamaarif642@gmail.com>
- <20250725162258.1043176-3-usamaarif642@gmail.com>
-From: David Hildenbrand <david@redhat.com>
-Content-Language: en-US
-Autocrypt: addr=david@redhat.com; keydata=
- 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
- g3eXuA==
-Organization: Red Hat
-In-Reply-To: <20250725162258.1043176-3-usamaarif642@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 25.07.25 18:22, Usama Arif wrote:
-> From: David Hildenbrand <david@redhat.com>
-> 
-> Describing the context through a type is much clearer, and good enough
-> for our case.
-> 
-> We have:
-> * smaps handling for showing "THPeligible"
-> * Pagefault handling
-> * khugepaged handling
-> * Forced collapse handling: primarily MADV_COLLAPSE, but one other odd case
-> 
-> Really, we want to ignore sysfs only when we are forcing a collapse
-> through MADV_COLLAPSE, otherwise we want to enforce.
-> 
-> With this change, we immediately know if we are in the forced collapse
-> case, which will be valuable next.
-> 
-> Signed-off-by: David Hildenbrand <david@redhat.com>
-> Acked-by: Usama Arif <usamaarif642@gmail.com>
+The following changes since commit 19272b37aa4f83ca52bdf9c16d5d81bdd1354494:
 
-Nit: if you forward patches untouched, make sure to add your SOB as well.
+  Linux 6.16-rc1 (2025-06-08 13:44:43 -0700)
 
--- 
-Cheers,
+are available in the Git repository at:
 
-David / dhildenb
+  git://git.lwn.net/linux.git tags/docs-6.17
 
+for you to fetch changes up to 35293ebbb65e0295d3b9357f786004ae1026d00f:
+
+  scripts: add origin commit identification based on specific patterns (202=
+5-07-24 08:41:15 -0600)
+
+----------------------------------------------------------------
+It has been a relatively busy cycle for docs, especially the build system:
+
+- The Perl kernel-doc script was added to 2.3.52pre1 just after the turn of
+  the millennium.  Over the following 25 years, it accumulated a vast
+  amount of cruft, all in a language few people want to deal with anymore.
+  Mauro's Python replacement in 6.16 faithfully reproduced all of the cruft
+  in the hope of avoiding regressions.  Now that we have a more reasonable
+  code base, though, we can work on cleaning it up; many of the changes
+  this time around are toward that end.
+
+- A reorganization of the ext4 docs into the usual TOC format.
+
+- Various Chinese translations and updates.
+
+- A new script from Mauro to help with docs-build testing.
+
+- A new document for linked lists
+
+- A sweep through MAINTAINERS fixing broken GitHub git:// repository links.
+
+...and lots of fixes and updates.
+
+Expect trivial conflicts with the GPIO and block trees.
+
+----------------------------------------------------------------
+Ahelenia Ziemia=C5=84ska (1):
+      tracing: doc: fix "for a while" typo
+
+Alison Schofield (1):
+      docs: ABI: make the KernelVersion field optional
+
+Andrew Donnellan (2):
+      Documentation: core-api: entry: Fix typo "systcalls" -> "syscalls"
+      Documentation: core-api: entry: Replace deprecated KVM entry/exit fun=
+ctions
+
+Bagas Sanjaya (11):
+      Documentation: treewide: Replace remaining spinics links with lore
+      Documentation: ext4: Convert includes into toctrees
+      Documentation: ext4: Reduce toctree depth
+      Documentation: ext4: atomic_writes: Demote last three sections
+      Documentation: ext4: blockgroup: Add explicit title heading
+      Documentation: ext4: Move inode table short docs into its own file
+      Documentation: ioctl-number: Fix linuxppc-dev mailto link
+      Documentation: ioctl-number: Extend "Include File" column width
+      Documentation: ioctl-number: Correct full path to papr-physical-attes=
+tation.h
+      Documentation: ioctl-number: Shorten macros table
+      Documentation: ioctl-number: Don't repeat macro names
+
+Breno Leitao (1):
+      docs: kernel: Clarify printk_ratelimit_burst reset behavior
+
+Brigham Campbell (1):
+      docs: powerpc: Add htm.rst to table of contents
+
+Collin Funk (3):
+      docs: packing: Fix a typo in example code.
+      ver_linux: Remove checks for reiserfsprogs.
+      docs: Remove reiserfsprogs from dependencies.
+
+Costa Shulyupin (2):
+      Documentation/rtla: Add include common_appendix.rst
+      Documentation/rtla: Describe exit status
+
+Cui Wei (1):
+      Docs/zh_CN: Translate speculation.rst to Simplified Chinese
+
+Daniel Palmer (1):
+      doc: Remove misleading reference to brd in dax.rst
+
+Dongliang Mu (7):
+      docs/zh_CN: update the translation of process/1.Intro.rst
+      docs/zh_CN: update the translation of process/6.Followthrough.rst
+      docs/zh_CN: update the translation of process/7.AdvancedTopics.rst
+      docs/zh_CN: update the translation of process/2.Process.rst
+      docs/zh_CN: update the translation of process/5.Posting.rst
+      docs/zh_CN: improve formatting and content clarity
+      docs/zh_CN: update git command examples in how-to.rst
+
+Hanne-Lotta M=C3=A4enp=C3=A4=C3=A4 (2):
+      docs: Improve grammar in Userspace API/fwctl
+      docs: Fix typos, improve grammar in Userspace API
+
+Jakub Kicinski (1):
+      docs: process: discourage pointless boilerplate kdoc
+
+Jonathan Corbet (66):
+      docs: kdoc: simplify the PROTO continuation logic
+      docs: kdoc: move the core dispatch into a state table
+      docs: kdoc: remove the section_intro variable
+      docs: kdoc: simplify the kerneldoc recognition code
+      docs: kdoc: remove the KernelEntry::is_kernel_comment member
+      docs: kdoc: remove the KernelEntry::descr pseudo member
+      docs: kdoc: remove some ineffective code
+      docs: kdoc: move the declaration regexes out of process_name()
+      docs: kdoc: some final touches for process_name()
+      docs: automarkup: Remove some Sphinx 2 holdovers
+      docs: automarkup: Mark up undocumented entities too
+      docs: CSS: make cross-reference links more evident
+      docs: sphinx: avoid using the deprecated node.set_class()
+      docs: kdoc: Make body_with_blank_line parsing more flexible
+      docs: kdoc: consolidate the "begin section" logic
+      docs: kdoc: separate out the handling of the declaration phase
+      docs: kdoc: split out the special-section state
+      docs: kdoc: coalesce the new-section handling
+      docs: kdoc: rework the handling of SPECIAL_SECTION
+      docs: kdoc: coalesce the end-of-comment processing
+      docs: kdoc: Add some comments to process_decl()
+      docs: kdoc: finish disentangling the BODY and SPECIAL_SECTION states
+      docs: kdoc: remove KernelEntry::in_doc_sect
+      docs: kdoc: Move content handling into KernelEntry
+      docs: kdoc: remove a bit of dead code
+      docs: kdoc: remove KernelEntry::function
+      docs: kdoc: rework process_export() slightly
+      docs: kdoc: remove the INLINE_END state
+      docs: kdoc: remove the inline states-within-a-state
+      docs: kdoc: split the processing of the two remaining inline states
+      docs: kdoc: don't reinvent string.strip()
+      docs: kdoc: micro-optimize KernRe
+      docs: kdoc: remove the brcount floor in process_proto_type()
+      docs: kdoc: remove KernelEntry::in_doc_sect
+      docs: kdoc: Move content handling into KernelEntry
+      docs: kdoc: remove a bit of dead code
+      docs: kdoc: remove KernelEntry::function
+      docs: kdoc: rework process_export() slightly
+      docs: kdoc: remove the INLINE_END state
+      docs: kdoc: remove the inline states-within-a-state
+      docs: kdoc: split the processing of the two remaining inline states
+      docs: kdoc: rework type prototype parsing
+      docs: kdoc: some tweaks to process_proto_function()
+      docs: kdoc: Remove a Python 2 comment
+      docs: kdoc: pretty up dump_enum()
+      docs: kdoc; Add a rudimentary class to represent output items
+      docs: kdoc: simplify the output-item passing
+      docs: kdoc: don't reinvent string.strip()
+      docs: kdoc: micro-optimize KernRe
+      docs: kdoc: remove the brcount floor in process_proto_type()
+      docs: kdoc: rework type prototype parsing
+      docs: kdoc: some tweaks to process_proto_function()
+      docs: kdoc: Remove a Python 2 comment
+      docs: kdoc: pretty up dump_enum()
+      Merge tag 'chinese-doc-6.16-rc1' of gitolite.kernel.org:pub/scm/linux=
+/kernel/git/alexs/linux into docs-mw
+      docs: kdoc: drop "sectionlist"
+      docs: kdoc: Centralize handling of the item section list
+      docs: kdoc: remove the "struct_actual" machinery
+      docs: kdoc: use self.entry.parameterlist directly in check_sections()
+      docs: kdoc: Coalesce parameter-list handling
+      docs: kdoc: Regularize the use of the declaration name
+      docs: kdoc: straighten up dump_declaration()
+      docs: kdoc: directly access the always-there KdocItem fields
+      docs: kdoc: clean up check_sections()
+      docs: kdoc: emit a warning for ancient versions of Python
+      Merge branch 'kdoc-item2' into docs-mw
+
+Matthew Wilcox (Oracle) (2):
+      kernel-doc: Fix symbol matching for dropped suffixes
+      doc: Include scatterlist APIs in htmldocs
+
+Matthias Frank (1):
+      overlayfs.rst: fix typos
+
+Mauro Carvalho Chehab (18):
+      docs: conf.py: properly handle include and exclude patterns
+      docs: Makefile: disable check rules on make cleandocs
+      scripts: scripts/test_doc_build.py: add script to test doc build
+      scripts: test_doc_build.py: make capture assynchronous
+      scripts: test_doc_build.py: better control its output
+      scripts: test_doc_build.py: better adjust to python version
+      scripts: test_doc_build.py: improve dependency list
+      scripts: test_doc_build.py: improve cmd.log logic
+      scripts: test_doc_build.py: make the script smarter
+      scripts: sphinx-pre-install: properly handle SPHINXBUILD
+      scripts: sphinx-pre-install: fix release detection for Fedora
+      scripts: test_doc_build.py: regroup and rename arguments
+      docs: sphinx: add a file with the requirements for lowest version
+      docs: conf.py: several coding style fixes
+      docs: sphinx: add missing SPDX tags
+      docs: kernel-doc: emit warnings for ancient versions of Python
+      scripts: kdoc: make it backward-compatible with Python 3.7
+      sphinx: kernel_abi: fix performance regression with O=3D<dir>
+
+Nicolas Frattaroli (1):
+      docs: document linked lists
+
+Petr Tesarik (8):
+      docs: dma-api: use "DMA API" consistently throughout the document
+      docs: dma-api: replace consistent with coherent
+      docs: dma-api: remove remnants of PCI DMA API
+      docs: dma-api: add a kernel-doc comment for dma_pool_zalloc()
+      docs: dma-api: remove duplicate description of the DMA pool API
+      docs: dma-api: clarify DMA addressing limitations
+      docs: dma-api: update streaming DMA physical address constraints
+      docs: dma-api: clean up documentation of dma_map_sg()
+
+Qiu Yutan (2):
+      Docs/zh_CN: Translate vxlan.rst to Simplified Chinese
+      Docs/zh_CN: Translate alias.rst to Simplified Chinese
+
+Richard Weinberger (1):
+      overlayfs.rst: Fix inode table
+
+Runji Liu (1):
+      docs: trace: boottime-trace.rst: fix typo
+
+Salvatore Bonaccorso (1):
+      Documentation/sysctl: coredump: add %F for pidfd number
+
+Shashank Balaji (2):
+      sched_deadline, docs: replace rt-app examples with chrt or use config=
+.json
+      sched_deadline, docs: add affinity setting with cgroup2 cpuset contro=
+ller
+
+Shouye Liu (1):
+      Documentation: amd-pstate:fix minimum performance state label error
+
+Sumeet Pawnikar (1):
+      Documentation: Remove duplicate word size in bootconfig
+
+Swapnil Sapkal (1):
+      docs/sched: Make the sched-stats documentation consistent
+
+Vignesh Raman (1):
+      docs: fault-injection: drop reference to md-faulty
+
+Wang Yaxin (4):
+      Docs/zh_CN: Translate napi.rst to Simplified Chinese
+      Docs/zh_CN: Translate netif-msg.rst to Simplified Chinese
+      Docs/zh_CN: Translate xfrm_proc.rst to Simplified Chinese
+      Docs/zh_CN: Translate netmem.rst to Simplified Chinese
+
+WangYuli (1):
+      gitignore: allow .pylintrc to be tracked
+
+Xose Vazquez Perez (1):
+      MAINTAINERS: replace git protocol for github
+
+Yuanye Ma (1):
+      docs: f2fs: fix typos in f2fs.rst
+
+Zhiyu Zhang (1):
+      scripts: add origin commit identification based on specific patterns
+
+ .gitignore                                         |   1 +
+ Documentation/ABI/README                           |   4 +-
+ Documentation/Makefile                             |   2 +
+ Documentation/admin-guide/bootconfig.rst           |   2 +-
+ Documentation/admin-guide/pm/amd-pstate.rst        |   2 +-
+ Documentation/admin-guide/sysctl/kernel.rst        |   4 +-
+ Documentation/arch/powerpc/index.rst               |   1 +
+ Documentation/conf.py                              | 398 +++++-----
+ Documentation/core-api/dma-api-howto.rst           |  36 +-
+ Documentation/core-api/dma-api.rst                 | 197 ++---
+ Documentation/core-api/entry.rst                   |   6 +-
+ Documentation/core-api/index.rst                   |   1 +
+ Documentation/core-api/kernel-api.rst              |   6 -
+ Documentation/core-api/list.rst                    | 776 +++++++++++++++++=
+++
+ Documentation/core-api/mm-api.rst                  |   6 -
+ Documentation/core-api/packing.rst                 |   2 +-
+ Documentation/doc-guide/sphinx.rst                 |  23 +
+ Documentation/driver-api/gpio/driver.rst           |   2 +-
+ Documentation/fault-injection/fault-injection.rst  |   2 +-
+ Documentation/filesystems/dax.rst                  |   1 -
+ Documentation/filesystems/ext4/atomic_writes.rst   |  10 +-
+ Documentation/filesystems/ext4/bitmaps.rst         |   7 -
+ Documentation/filesystems/ext4/blockgroup.rst      |  11 +-
+ Documentation/filesystems/ext4/dynamic.rst         |  10 +-
+ Documentation/filesystems/ext4/globals.rst         |  15 +-
+ Documentation/filesystems/ext4/index.rst           |   2 +-
+ Documentation/filesystems/ext4/inode_table.rst     |   9 +
+ Documentation/filesystems/ext4/overview.rst        |  22 +-
+ Documentation/filesystems/f2fs.rst                 |   4 +-
+ Documentation/filesystems/overlayfs.rst            |  26 +-
+ Documentation/filesystems/ubifs-authentication.rst |   2 +-
+ .../networking/device_drivers/ethernet/ti/cpsw.rst |   6 +-
+ Documentation/process/changes.rst                  |  14 -
+ Documentation/process/coding-style.rst             |   5 +-
+ Documentation/scheduler/sched-deadline.rst         |  85 +-
+ Documentation/scheduler/sched-stats.rst            |  53 +-
+ Documentation/sphinx-static/custom.css             |  15 +
+ Documentation/sphinx/automarkup.py                 |  27 +-
+ Documentation/sphinx/cdomain.py                    |   1 +
+ Documentation/sphinx/kernel_abi.py                 |   6 +-
+ Documentation/sphinx/kernel_include.py             |   1 +
+ Documentation/sphinx/kerneldoc.py                  |   3 +-
+ Documentation/sphinx/kfigure.py                    |   1 +
+ Documentation/sphinx/load_config.py                |   1 +
+ Documentation/sphinx/min_requirements.txt          |  11 +
+ Documentation/sphinx/parse-headers.pl              |   5 +-
+ Documentation/sphinx/requirements.txt              |   1 +
+ Documentation/sphinx/rstFlatTable.py               |   1 +
+ Documentation/tools/rtla/common_appendix.rst       |  11 +
+ Documentation/tools/rtla/rtla-timerlat-hist.rst    |   2 +
+ Documentation/trace/boottime-trace.rst             |   4 +-
+ Documentation/trace/histogram.rst                  |   2 +-
+ Documentation/translations/zh_CN/how-to.rst        | 108 +--
+ .../translations/zh_CN/networking/alias.rst        |  56 ++
+ .../translations/zh_CN/networking/index.rst        |  12 +-
+ .../translations/zh_CN/networking/napi.rst         | 362 +++++++++
+ .../translations/zh_CN/networking/netif-msg.rst    |  92 +++
+ .../translations/zh_CN/networking/netmem.rst       |  92 +++
+ .../translations/zh_CN/networking/vxlan.rst        |  85 ++
+ .../translations/zh_CN/networking/xfrm_proc.rst    | 126 +++
+ .../translations/zh_CN/process/1.Intro.rst         |  10 +-
+ .../translations/zh_CN/process/2.Process.rst       |   7 +-
+ .../translations/zh_CN/process/5.Posting.rst       |  11 +
+ .../translations/zh_CN/process/6.Followthrough.rst |   5 +
+ .../zh_CN/process/7.AdvancedTopics.rst             |  14 +
+ Documentation/translations/zh_CN/staging/index.rst |   2 +-
+ .../translations/zh_CN/staging/speculation.rst     |  85 ++
+ Documentation/usb/gadget-testing.rst               |   2 +-
+ Documentation/userspace-api/fwctl/fwctl.rst        |  30 +-
+ Documentation/userspace-api/ioctl/ioctl-number.rst | 552 ++++++-------
+ .../userspace-api/sysfs-platform_profile.rst       |   6 +-
+ MAINTAINERS                                        |  24 +-
+ include/linux/dmapool.h                            |   8 +
+ mm/dmapool.c                                       |   6 +-
+ scripts/checktransupdate.py                        |  38 +-
+ scripts/kernel-doc.py                              |  10 +
+ scripts/lib/kdoc/kdoc_files.py                     |   4 +-
+ scripts/lib/kdoc/kdoc_item.py                      |  42 +
+ scripts/lib/kdoc/kdoc_output.py                    | 172 ++---
+ scripts/lib/kdoc/kdoc_parser.py                    | 857 ++++++++++-------=
+----
+ scripts/lib/kdoc/kdoc_re.py                        |   7 +-
+ scripts/sphinx-pre-install                         |   6 +-
+ scripts/test_doc_build.py                          | 513 ++++++++++++
+ scripts/ver_linux                                  |   2 -
+ 84 files changed, 3750 insertions(+), 1441 deletions(-)
+ create mode 100644 Documentation/core-api/list.rst
+ create mode 100644 Documentation/filesystems/ext4/inode_table.rst
+ create mode 100644 Documentation/sphinx/min_requirements.txt
+ create mode 100644 Documentation/translations/zh_CN/networking/alias.rst
+ create mode 100644 Documentation/translations/zh_CN/networking/napi.rst
+ create mode 100644 Documentation/translations/zh_CN/networking/netif-msg.r=
+st
+ create mode 100644 Documentation/translations/zh_CN/networking/netmem.rst
+ create mode 100644 Documentation/translations/zh_CN/networking/vxlan.rst
+ create mode 100644 Documentation/translations/zh_CN/networking/xfrm_proc.r=
+st
+ create mode 100644 Documentation/translations/zh_CN/staging/speculation.rst
+ create mode 100644 scripts/lib/kdoc/kdoc_item.py
+ create mode 100755 scripts/test_doc_build.py
 
