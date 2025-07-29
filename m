@@ -1,159 +1,128 @@
-Return-Path: <linux-doc+bounces-54529-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54531-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id B55ACB144B7
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Jul 2025 01:38:06 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5EF2B14549
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Jul 2025 02:19:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 02D371AA03A4
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Jul 2025 23:38:25 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CC48917988C
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Jul 2025 00:18:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1049D2367DF;
-	Mon, 28 Jul 2025 23:37:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14EEBBA33;
+	Tue, 29 Jul 2025 00:18:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="aKdmePZb"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dn9MkEoV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2C18225784;
-	Mon, 28 Jul 2025 23:37:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB814611E;
+	Tue, 29 Jul 2025 00:18:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753745878; cv=none; b=rWeC58dhlOhkbHltz16usQP0IlYLKuvWLR4+X+ydQ3LTdr+3mktnypx3rQQEQcAcR2spp9lQoydXSrY1nwlms3je/UrbErl3WAyHYcX3yeoJ2oTOtgxxISAsQItDOQrXq+2K4khwp/60ABCkqRGUIY9RT3tL1sEaoGtDZJHEppU=
+	t=1753748329; cv=none; b=J8jNoG1R7lyU0uz4Dx17xz8ropLTh5egq8V4sbwdwqVU877UB6Ftyjoa+pR43/0iVFelk1atpVuc96PcdcDvmZmsBPFFxZBaH4ipxvUnwHIgQ7TGiwmIwD2M+AXd6GGPIwda+ow3O/DLVa8QoWU2BkkvlFJQ/qL+SZtSDFN0IL4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753745878; c=relaxed/simple;
-	bh=M9KO/2aYIoLlJKYj0B6g/Dtc60iGI3XL4WVkIVReWRc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bKZOqa47KoyYShK0FswXp02f+s6fF828V7P++WuLI5NaaCnW5m0ClQUKK03A/9DC8aLRbhGZSw22b1pohyizqajI3GWdRIYIgq2Z9UQgRuq694lwCIPBciF2t1VUAu+RSau5MBzvVU234y1/DE1zQ8Z1+AJFgZUhuPJMGn5oKDA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=aKdmePZb; arc=none smtp.client-ip=198.175.65.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1753745876; x=1785281876;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=M9KO/2aYIoLlJKYj0B6g/Dtc60iGI3XL4WVkIVReWRc=;
-  b=aKdmePZb0W5MwKHrylLZtxm/Q8mJ94vRDX33eOrDCUxemybeDM1h8UT4
-   W/EG84AURDyelAASaygFBMnEGtwIsPEk/J3dVwdfMAJdlrKUrpHqAQ+wN
-   KDNtIClKaqdB81l1ZsvaN14TLvFO1xD3a81gc91GSkBzLkkDuF3zKy2P0
-   WUj43nN2kRcGeycLHUAKJPtPjTFgzvvPw638WGHS9d/xoiK9Qwlc0nDhA
-   ZILfPBJgV8iO0CnIYgaH07ApZPlWv9t6FX1ctMs+snVzDtQwMoQp6XBZ2
-   APLo5NpR//m7ZkOVHJgkjV34f3Y5SLVTIFq1yiQQYOqsaBWuG/62ZcS8x
-   A==;
-X-CSE-ConnectionGUID: 4M+yrrc2RFyunh6SmNEXJw==
-X-CSE-MsgGUID: omhOuLmLSYq37lgeHMGOJA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11505"; a="78557780"
-X-IronPort-AV: E=Sophos;i="6.16,348,1744095600"; 
-   d="scan'208";a="78557780"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jul 2025 16:37:56 -0700
-X-CSE-ConnectionGUID: PC1Oj44zRXy0Y4pJHQBufw==
-X-CSE-MsgGUID: +hKsHsYQR5qcGaeo+xhvlw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,348,1744095600"; 
-   d="scan'208";a="162113821"
-Received: from lkp-server01.sh.intel.com (HELO 160750d4a34c) ([10.239.97.150])
-  by fmviesa007.fm.intel.com with ESMTP; 28 Jul 2025 16:37:52 -0700
-Received: from kbuild by 160750d4a34c with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1ugXPi-0000pJ-0o;
-	Mon, 28 Jul 2025 23:37:50 +0000
-Date: Tue, 29 Jul 2025 07:36:57 +0800
-From: kernel test robot <lkp@intel.com>
-To: "Derek J. Clark" <derekjohn.clark@gmail.com>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Hans de Goede <hansg@kernel.org>
-Cc: oe-kbuild-all@lists.linux.dev, Jean Delvare <jdelvare@suse.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Alok Tiwari <alok.a.tiwari@oracle.com>,
-	David Box <david.e.box@linux.intel.com>,
-	"Derek J . Clark" <derekjohn.clark@gmail.com>,
-	platform-driver-x86@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 3/4] platform/x86: (ayn-ec) Add RGB Interface
-Message-ID: <202507290730.7XZMyOM7-lkp@intel.com>
-References: <20250726204041.516440-4-derekjohn.clark@gmail.com>
+	s=arc-20240116; t=1753748329; c=relaxed/simple;
+	bh=x8tvYZmVKuAqtiJu5GxhyqKrIDYiII9xZx6ML2eDwMc=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=p2AhnnQGLXj0OhoEznDs2EG4MUriDyurVol+QRW9WLxX4R+vmbVHgR2F5F3hXxdvtPzlewKi35E7X+rcZBhiizvsj5DF5AomEjGCujVRDmZTGcj2vKRqX0EVUF/0qGe8HYcSCa2eQUSpd/LmWazVH2RmapicTlywTRvsaqoKgnU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dn9MkEoV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0AB72C4CEE7;
+	Tue, 29 Jul 2025 00:18:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1753748328;
+	bh=x8tvYZmVKuAqtiJu5GxhyqKrIDYiII9xZx6ML2eDwMc=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=dn9MkEoVLb/pxXOYjFx3bYRpBjPYE39I1kyUPxf8iy3LlDMZ77CzGOYRUYBW31jqz
+	 /GKurD/wOivcwcwAZQtZxc+Gz38xX3nC7jl3+PlZcO/UNH3eGJZYITPVAgYKelFSPi
+	 dG4EECGYBgntcIo1TIExojC5t7stumHoqrBTr/W2yC+JBebQwwSbJNhG7l3lOoUzWl
+	 da+mtyfZfif8c5SQ/OHnmZLHXbPjFt1LgQZoZNT6ovTvmPZJthWBqJNR6flms3B5Yw
+	 1BZd/ecCuQbMTGRrpT5OxjQUEKIrmLMYKfrIQfExbeQD/ICoZ+BCFhxBK6CYKyrI/0
+	 wMMQEn61J5ciQ==
+Date: Tue, 29 Jul 2025 02:18:42 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Steven Rostedt <rostedt@goodmis.org>
+Cc: <dan.j.williams@intel.com>, Jakub Kicinski <kuba@kernel.org>, Sasha
+ Levin <sashal@kernel.org>, <workflows@vger.kernel.org>,
+ <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <kees@kernel.org>, <konstantin@linuxfoundation.org>, <corbet@lwn.net>,
+ <josh@joshtriplett.org>
+Subject: Re: [RFC 0/2] Add AI coding assistant configuration to Linux kernel
+Message-ID: <20250729021842.521c757f@foz.lan>
+In-Reply-To: <20250729001233.4dead173@foz.lan>
+References: <20250725175358.1989323-1-sashal@kernel.org>
+	<20250725114114.3b13e7b1@kernel.org>
+	<20250725150046.3adb556c@gandalf.local.home>
+	<20250725125906.1db40a7f@kernel.org>
+	<6883ea58b5685_134cc71006e@dwillia2-xfh.jf.intel.com.notmuch>
+	<20250728134653.635a9dc5@batman.local.home>
+	<20250729001233.4dead173@foz.lan>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250726204041.516440-4-derekjohn.clark@gmail.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Hi Derek,
+Em Tue, 29 Jul 2025 00:12:33 +0200
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
 
-kernel test robot noticed the following build warnings:
+> Em Mon, 28 Jul 2025 13:46:53 -0400
+> Steven Rostedt <rostedt@goodmis.org> escreveu:
+> 
+> > On Fri, 25 Jul 2025 13:34:32 -0700
+> > <dan.j.williams@intel.com> wrote:
+> >   
+> > > > This touches on explainability of AI. Perhaps the metadata would be
+> > > > interesting for XAI research... not sure that's enough to be lugging
+> > > > those tags in git history.      
+> > > 
+> > > Agree. The "who to blame" is "Author:". They signed DCO they are
+> > > responsible for debugging what went wrong in any stage of the
+> > > development of a patch per usual. We have a long history of debugging
+> > > tool problems without tracking tool versions in git history.    
+> > 
+> > My point of the "who to blame" was not about the author of said code,
+> > but if two or more developers are using the same AI agent and then some
+> > patter of bugs appears that is only with that AI agent, then we know
+> > that the AI agent is likely the culprit and to look for code by other
+> > developers that used that same AI agent.
+> > 
+> > It's a way to track down a bug in a tool that is creating code, not
+> > about moving blame from a developer to the agent itself.  
+> 
+> I don't think you shall blame the tool, as much as you you cannot 
+> blame gcc for a badly written code. Also, the same way a kernel
+> maintainer needs to know how to produce a good code, someone using
+> AI also must learn how to properly use the tool.
+> 
+> After all, at least at the current stage, AI is not intelligent. 
 
-[auto build test WARNING on groeck-staging/hwmon-next]
-[also build test WARNING on linus/master v6.16 next-20250728]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Heh, after re-reading my post, I realized that I could have been too
+technical, specially for people not familiar with electrical engineering
+and systems control theory(*).
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Derek-J-Clark/platform-x86-ayn-ec-Add-PWM-Fan-HWMON-Interface/20250727-044332
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/groeck/linux-staging.git hwmon-next
-patch link:    https://lore.kernel.org/r/20250726204041.516440-4-derekjohn.clark%40gmail.com
-patch subject: [PATCH v3 3/4] platform/x86: (ayn-ec) Add RGB Interface
-config: i386-randconfig-061-20250728 (https://download.01.org/0day-ci/archive/20250729/202507290730.7XZMyOM7-lkp@intel.com/config)
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250729/202507290730.7XZMyOM7-lkp@intel.com/reproduce)
+What I'm trying to say is that, while AI is a great tool, it is just
+another tool that tries to guess something. If you get enough luck,
+you'll get decent results, but one should never trust on its result,
+as it is based on statistics: it will guess an answer that will likely
+be the right one, but could also be completely off.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202507290730.7XZMyOM7-lkp@intel.com/
+(*) systems control theory is a field that studies a system stability.
+    It can be used, for instance, to ensure that an electrical motor
+    can be properly controlled and provide precise movements. It is
+    not limited to mechanics, though. It can used to explain other
+    systems that have any sort of feedbacks. at the light of the 
+    control theory, an AI training would be mapped as a feedback.
 
-sparse warnings: (new ones prefixed by >>)
-   drivers/platform/x86/ayn-ec.c:87:5: sparse: sparse: symbol 'ayn_pwm_curve_registers' was not declared. Should it be static?
->> drivers/platform/x86/ayn-ec.c:753:18: sparse: sparse: symbol 'ayn_led_mc_subled_info' was not declared. Should it be static?
->> drivers/platform/x86/ayn-ec.c:774:24: sparse: sparse: symbol 'ayn_led_mc' was not declared. Should it be static?
+Regards,
+Mauro
 
-vim +/ayn_led_mc_subled_info +753 drivers/platform/x86/ayn-ec.c
-
-   752	
- > 753	struct mc_subled ayn_led_mc_subled_info[] = {
-   754		{
-   755			.color_index = LED_COLOR_ID_RED,
-   756			.brightness = 0,
-   757			.intensity = 0,
-   758			.channel = AYN_LED_MC_RED_REG,
-   759		},
-   760		{
-   761			.color_index = LED_COLOR_ID_GREEN,
-   762			.brightness = 0,
-   763			.intensity = 0,
-   764			.channel = AYN_LED_MC_GREEN_REG,
-   765		},
-   766		{
-   767			.color_index = LED_COLOR_ID_BLUE,
-   768			.brightness = 0,
-   769			.intensity = 0,
-   770			.channel = AYN_LED_MC_BLUE_REG,
-   771		},
-   772	};
-   773	
- > 774	struct led_classdev_mc ayn_led_mc = {
-   775		.led_cdev = {
-   776			.name = "ayn:rgb:joystick_rings",
-   777			.brightness = 0,
-   778			.max_brightness = 255,
-   779			.brightness_set = ayn_led_mc_brightness_set,
-   780			.brightness_get = ayn_led_mc_brightness_get,
-   781			.color = LED_COLOR_ID_RGB,
-   782		},
-   783		.num_colors = ARRAY_SIZE(ayn_led_mc_subled_info),
-   784		.subled_info = ayn_led_mc_subled_info,
-   785	};
-   786	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Thanks,
+Mauro
 
