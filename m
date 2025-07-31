@@ -1,178 +1,216 @@
-Return-Path: <linux-doc+bounces-54752-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54757-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04C09B17168
-	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 14:41:23 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 32399B171CE
+	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 15:12:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 2F55C7A7C58
-	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 12:39:52 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1D07F4E6C15
+	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 13:12:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 308CA239E9F;
-	Thu, 31 Jul 2025 12:41:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DDF02C15A3;
+	Thu, 31 Jul 2025 13:12:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aolaepm/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E00591C84C5;
-	Thu, 31 Jul 2025 12:41:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 255273A8C1;
+	Thu, 31 Jul 2025 13:12:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753965676; cv=none; b=EkoX1SpLDJSNPgFuMg6wL4UqPEk8NOdh8XP66YF2fchpNPipkzM7ZmJJlHrBml6AXXBur3kXWm7TuzGNKtDROnfp30fIfhuafreR0vv+jlryC5zcBC7f6Rjk87Oc8XPGCxRj6ITOE4AiqXrIpRWiWQYgwkcT8yUhjQpYxKMiGvU=
+	t=1753967572; cv=none; b=gqO59FHyaEnCIVdU0iC+Mcq0qM0vXSTnmmg5bRs94I/nS3gKcjdM6LRhpnsk5dI5IuH8UdeQyQhiSIyDv7754eycI8hxk28CZpJJD19DMYZBVuk2FPtAW/MhTnZi7zQswn349aNvIFooO86PyX9RiHNXLVl1J9FUWei6cQ4ZLsA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753965676; c=relaxed/simple;
-	bh=A8SPR7x7U/Pf/eDeqxWiI48HRFqavciMy1UGMfaZW60=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=FUxh2P56hiAHu8OjD8p4sDfmJaKcb5qW1N0YlMkgcmSHY8GkQ4K58p88nvi6k1PxheUtw50bpKb+v19PGIsoEkKTHUSolDUJDM7sPaR7qI3h/ZkxPLPCHXFu+oTsXW+GPIO9p9KAKHk+L2VZbChzAWiSpaJhypkHpbsCobHQy+I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.186.31])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4bt7v64Rk8z6D9Th;
-	Thu, 31 Jul 2025 20:39:30 +0800 (CST)
-Received: from frapeml500005.china.huawei.com (unknown [7.182.85.13])
-	by mail.maildlp.com (Postfix) with ESMTPS id 1A8A91402F4;
-	Thu, 31 Jul 2025 20:41:08 +0800 (CST)
-Received: from china (10.220.118.114) by frapeml500005.china.huawei.com
- (7.182.85.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 31 Jul
- 2025 14:40:53 +0200
-From: Gur Stavi <gur.stavi@huawei.com>
-To: <horms@kernel.org>
-CC: <andrew+netdev@lunn.ch>, <christophe.jaillet@wanadoo.fr>,
-	<corbet@lwn.net>, <davem@davemloft.net>, <edumazet@google.com>,
-	<fuguiming@h-partners.com>, <gongfan1@huawei.com>, <guoxin09@huawei.com>,
-	<gur.stavi@huawei.com>, <helgaas@kernel.org>, <jdamato@fastly.com>,
-	<kuba@kernel.org>, <lee@trager.us>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <luosifu@huawei.com>,
-	<meny.yossefi@huawei.com>, <mpe@ellerman.id.au>, <netdev@vger.kernel.org>,
-	<pabeni@redhat.com>, <przemyslaw.kitszel@intel.com>,
-	<shenchenyang1@hisilicon.com>, <shijing34@huawei.com>, <sumang@marvell.com>,
-	<vadim.fedorenko@linux.dev>, <wulike1@huawei.com>, <zhoushuai28@huawei.com>,
-	<zhuyikai1@h-partners.com>
-Subject: Re: [PATCH net-next v10 1/8] hinic3: Async Event Queue interfaces
-Date: Thu, 31 Jul 2025 15:58:39 +0300
-Message-ID: <20250731125839.1137083-1-gur.stavi@huawei.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250725152709.GE1367887@horms.kernel.org>
-References: <20250725152709.GE1367887@horms.kernel.org>
+	s=arc-20240116; t=1753967572; c=relaxed/simple;
+	bh=2ZmX7sn6WqXiiCv2ozkaiBMaJRWIoJBKVEEHm5DW9eI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=fh9IwxsTVTegz2+RflAwRbELS4gvLrWbh3+RjDz2p5+kI0CoUfYKd25YzqpafYoM6kaICwhZXXNNuKarPHIwqt+W8T3/LinMOus8yPqRV3moE6/9rM1rE/JeY3PbLbJSul1LDcgtnCwpzqMwBY/DH4aVJhNZz/sNhVxOMssbtPg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aolaepm/; arc=none smtp.client-ip=209.85.221.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-3b79bddd604so314310f8f.0;
+        Thu, 31 Jul 2025 06:12:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1753967569; x=1754572369; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=AqqlX6H3NPp9rTTwA7tpGQOcaxAxM3NcsBHKv6NCffQ=;
+        b=aolaepm/SbDWKiGBfHLoyW4O3kH1XGLZ5KuBwRAT/kWeM3X0xlFY9acmaYAqeiurZm
+         aVGa3Zw7PxKOL+Wfhb33MMFSFPTmCcYLCBNiL+7dzNO6xDEroTbHL6ZND0l9rhd1lYzB
+         GK3tyiV9q74NazTIbaWA+wAx5sSeHYsUZyiz9wJChvakgbkW98PuzXneGKHGXPb9PhPL
+         ovdcnr57xbtsFvkOURribFnK+uRWyXQttyWiSv7hYdq5GKMVdx3CVRe9aiO8y+BTz+C/
+         s5eWa2+wLudRmt5Lpf41r6zMAbR90IKlY9TpzbFaT5qBputU7wrNOa9x8ezWdfkCYWKU
+         oPZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753967569; x=1754572369;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=AqqlX6H3NPp9rTTwA7tpGQOcaxAxM3NcsBHKv6NCffQ=;
+        b=moOPRbU59FQ2TQE7GGk9kQcytjmr32dZJnPMoaciYoX4DclV6Xu605VFQpK+wjzF7I
+         5ocEQuy+hlxdj25GoGuioXxrKlmt9MHFld+P9JP3U1S6NurHhdU2V0kJKkHnwwmDKYxI
+         JbBcbaPdp9Zhxr5W1m1gasgOCS1NetuSAMjSM29J5xPIqjThe8TFoWQoy5QUBfgtJ9I8
+         cmY9ygj2f8E2hLdhuxUUegUFK+LpBpo76Iollj+siVLVnpHGBDaS4tqybkNu0Q+wFQmT
+         NTbdULPkWsPfN75Z9ZDZnMGzBw3ogs2k7W/WWjzAImOx9dssWRZv6oxyT+zvuZr0Jm4s
+         PRKQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUwOb8zuICL5dR/PN3q8zl2Ws30L8Ka0JyGLaZIv8fwoRnyOpngb1XotuvmRIcuWGAyTiRRPPQuxlE=@vger.kernel.org, AJvYcCVr1iUs8QV/Md+YuUAXjantQFd03r4huinbAptyqUBxNQI5Vgdw9xqHnW/g0L+A9kwkZrsnFWHY1mMcgX+EFg==@vger.kernel.org, AJvYcCX9pr57O5YuItJpEWljgu1V9nBQFAdocLsuLJJ7tYbUvbkvCeQlvBOdlsQlExK4w3HMkilMMtws8p2W7eG9@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx2CBDtTADZ6TK6a+9L0E8SdxrTO5B+vJdR3eAX0guDc0Asgw2u
+	hW0KFajiXsBX5b1jHqQOxKhqAisYyZIxOoRj+6iydh4aBFO3BmfYOa8H
+X-Gm-Gg: ASbGnctvs2vn0fQBDeErn8In1KYUiDPRfcrDk7srbxZvWp8/XY8ieK09y4ZH++bQTs/
+	MLqaau9ZTOZn/K0rFvIj6OsPcG8gd3Iwvnz9iOMc4mRvJ7moZqxymZtggi6NCsLTQoPtoCYIWp/
+	LCp4+VcOYA5vVWGuENqtceQFzlwMhoK5bwALrkFA/tGhg+cHXoL+bHoDLnozfOo5lpWB1fdiA+H
+	M6Fvth1U9QlqjYAuXrOKODMtG033SjlUJopncfPfJUPoQXUhHrxWJqx3eI4pdqFNCyR+siDRvK+
+	u2sxkaRJaeCJBRHYFH1/D+55py+IpTrbvN5/INmd0sNLeD5cQMFPhQioLR3xftqXXvEPA69bddE
+	o6TUfrTY/UR7ZnTsbjX4VQeg75S6RBFiZDXvEV0kQj64Xk/VDdxsXIgwnWTmeIEVQTjqz3UsU0k
+	PtTGH3KQ==
+X-Google-Smtp-Source: AGHT+IGD13KMKtVRmBQPVTq0wp4e/PMVr1M8WgWSZYRxA7tPP99Spg6G2qe4tDRrHVIXUfkLlzE9cA==
+X-Received: by 2002:a05:6000:188f:b0:3a5:2465:c0c8 with SMTP id ffacd0b85a97d-3b794fbe44emr5778988f8f.7.1753967569066;
+        Thu, 31 Jul 2025 06:12:49 -0700 (PDT)
+Received: from ?IPV6:2a03:83e0:1126:4:14f1:c189:9748:5e5a? ([2620:10d:c092:500::4:3f35])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4589ee621adsm27160265e9.30.2025.07.31.06.12.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 31 Jul 2025 06:12:48 -0700 (PDT)
+Message-ID: <c9896875-fb86-4b6c-8091-27c8152ba6d0@gmail.com>
+Date: Thu, 31 Jul 2025 14:12:44 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems500001.china.huawei.com (7.221.188.70) To
- frapeml500005.china.huawei.com (7.182.85.13)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] prctl: extend PR_SET_THP_DISABLE to optionally
+ exclude VM_HUGEPAGE
+To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, david@redhat.com,
+ linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, corbet@lwn.net,
+ rppt@kernel.org, surenb@google.com, mhocko@suse.com, hannes@cmpxchg.org,
+ baohua@kernel.org, shakeel.butt@linux.dev, riel@surriel.com, ziy@nvidia.com,
+ laoar.shao@gmail.com, dev.jain@arm.com, baolin.wang@linux.alibaba.com,
+ npache@redhat.com, Liam.Howlett@oracle.com, ryan.roberts@arm.com,
+ vbabka@suse.cz, jannh@google.com, Arnd Bergmann <arnd@arndb.de>,
+ sj@kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ kernel-team@meta.com, Matthew Wilcox <willy@infradead.org>
+References: <20250731122825.2102184-1-usamaarif642@gmail.com>
+ <20250731122825.2102184-2-usamaarif642@gmail.com>
+ <dda2e42f-7c20-4530-93f9-d3a73bb1368b@lucifer.local>
+Content-Language: en-US
+From: Usama Arif <usamaarif642@gmail.com>
+In-Reply-To: <dda2e42f-7c20-4530-93f9-d3a73bb1368b@lucifer.local>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-> On Thu, Jul 24, 2025 at 09:45:51PM +0800, Fan Gong wrote:
-> > > > +
-> > > > +/* Data provided to/by cmdq is arranged in structs with little endian fields but
-> > > > + * every dword (32bits) should be swapped since HW swaps it again when it
-> > > > + * copies it from/to host memory.
-> > > > + */
-> > >
-> > > This scheme may work on little endian hosts.
-> > > But if so it seems unlikely to work on big endian hosts.
-> > >
-> > > I expect you want be32_to_cpu_array() for data coming from hw,
-> > > with a source buffer as an array of __be32 while
-> > > the destination buffer is an array of u32.
-> > >
-> > > And cpu_to_be32_array() for data going to the hw,
-> > > with the types of the source and destination buffers reversed.
-> > >
-> > > If those types don't match your data, then we have
-> > > a framework to have that discussion.
-> > >
-> > >
-> > > That said, it is more usual for drivers to keep structures in the byte
-> > > order they are received. Stored in structures with members with types, in
-> > > this case it seems that would be __be32, and accessed using a combination
-> > > of BIT/GENMASK, FIELD_PREP/FIELD_GET, and cpu_to_be*/be*_to_cpu (in this
-> > > case cpu_to_be32/be32_to_cpu).
-> > >
-> > > An advantage of this approach is that the byte order of
-> > > data is only changed when needed. Another is that it is clear
-> > > what the byte order of data is.
-> >
-> > There is a simplified example:
-> >
-> > Here is a 64 bit little endian that may appear in cmdq:
-> > __le64 x
-> > After the swap it will become:
-> > __be32 x_lo
-> > __be32 x_hi
-> > This is NOT __be64.
-> > __be64 looks like this:
-> > __be32 x_hi
-> > __be32 x_lo
->
-> Sure, byte swapping 64 bit entities is different to byte swapping two
-> consecutive 32 bit entities. I completely agree.
->
-> >
-> > So the swapped data by HW is neither BE or LE. In this case, we should use
-> > swab32 to obtain the correct LE data because our driver currently supports LE.
-> > This is for compensating for bad HW decisions.
->
-> Let us assume that the host is reading data provided by HW.
->
-> If the swab32 approach works on a little endian host
-> to allow the host to access 32-bit values in host byte order.
-> Then this is because it outputs a 32-bit little endian values
 
-Values can be any size. 32 bit is arbitrary.
-.
->
-> But, given the same input, it will not work on a big endian host.
-> This is because the same little endian output will be produced,
-> while the host byte order is big endian.
->
-> I think you need something based on be32_to_cpu()/cpu_to_be32().
-> This will effectively be swab32 on little endian hosts (no change!).
-> And a no-op on big endian hosts (addressing my point above).
->
-> More specifically, I think you should use be32_to_cpu_array() and
-> cpu_to_be32_array() instead of swab32_array().
->
 
-Lets define a "coherent struct" as a structure made of fields that makes sense
-to human beings. Every field endianity is defined and fields are arranged in
-order that "makes sense". Fields can be of any integer size 8,16,32,64 and not
-necessarily naturally aligned.
+On 31/07/2025 13:40, Lorenzo Stoakes wrote:
+> On Thu, Jul 31, 2025 at 01:27:18PM +0100, Usama Arif wrote:
+> [snip]
+>> Acked-by: Usama Arif <usamaarif642@gmail.com>
+>> Tested-by: Usama Arif <usamaarif642@gmail.com>
+>> Cc: Jonathan Corbet <corbet@lwn.net>
+>> Cc: Andrew Morton <akpm@linux-foundation.org>
+>> Cc: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+>> Cc: Zi Yan <ziy@nvidia.com>
+>> Cc: Baolin Wang <baolin.wang@linux.alibaba.com>
+>> Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>
+>> Cc: Nico Pache <npache@redhat.com>
+>> Cc: Ryan Roberts <ryan.roberts@arm.com>
+>> Cc: Dev Jain <dev.jain@arm.com>
+>> Cc: Barry Song <baohua@kernel.org>
+>> Cc: Vlastimil Babka <vbabka@suse.cz>
+>> Cc: Mike Rapoport <rppt@kernel.org>
+>> Cc: Suren Baghdasaryan <surenb@google.com>
+>> Cc: Michal Hocko <mhocko@suse.com>
+>> Cc: Usama Arif <usamaarif642@gmail.com>
+>> Cc: SeongJae Park <sj@kernel.org>
+>> Cc: Jann Horn <jannh@google.com>
+>> Cc: Liam R. Howlett <Liam.Howlett@oracle.com>
+>> Cc: Yafang Shao <laoar.shao@gmail.com>
+>> Cc: Matthew Wilcox <willy@infradead.org>
+> 
+> You don't need to include these Cc's, Andrew will add them for you.
+> 
+>> Signed-off-by: David Hildenbrand <david@redhat.com>
+>> Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+> 
+> Shouldn't this also be signed off by you? 2/5 and 3/5 has S-o-b for both
+> David and yourself?
+> 
+> This is inconsistent at the very least.
+> 
 
-swab32_array transforms a coherent struct into "byte jumble". Small fields are
-reordered and larger (misaligned) fields may be split into 2 (or even 3) parts.
-swab32_array is reversible so a 2nd call with byte jumble as input will produce
-the original coherent struct.
+Signed-off-by: Usama Arif <usamaarif642@gmail.com>
 
-hinic3 dma has "swab32_array" built in.
-On send-to-device it expects a byte jubmle so the DMA engine will transform it
-into a coherent struct.
-On receive-from-device it provides a byte jumble so the driver needs
-to call swab32_array to transform it into a coherent struct.
+The Ccs were added by David, and I didn't want to remove them.
 
-The hinic3_cmdq_buf_swab32 function will work correctly, producing byte jumble,
-on little endian and big endian hosts.
+>>
+>> ---
+>>
+> 
+> Nothing below the --- will be included in the patch, so we can drop the
+> below, it's just noise that people can find easily if needed.
+> 
+>> At first, I thought of "why not simply relax PR_SET_THP_DISABLE", but I
+>> think there might be real use cases where we want to disable any THPs --
+>> in particular also around debugging THP-related problems, and
+>> "never" not meaning ... "never" anymore ever since we add MADV_COLLAPSE.
+>> PR_SET_THP_DISABLE will also block MADV_COLLAPSE, which can be very
+>> helpful for debugging purposes. Of course, I thought of having a
+>> system-wide config option to modify PR_SET_THP_DISABLE behavior, but
+>> I just don't like the semantics.
+> 
+> [snip]
+> 
+>>
+>> Signed-off-by: David Hildenbrand <david@redhat.com>
+> 
+> This S-o-b is weird, it's in a comment essentially. Let's drop that too
+> please.
 
-The code that runs prior to hinic3_cmdq_buf_swab32 that initializes a coherent
-struct is endianity sensitive. It needs to initialize fields based on their
-coherent endianity with or without byte swap. Practically use cpu_to_le or
-cpu_to_be based on the coherent definition.
 
-Specifically, cmdq "coherent structs" in hinic3 use little endian and since
-Kconfig currently declares that big endian hosts are not supported then
-coherent structs are initialized without explicit cpu_to_le macros.
+Everything below --- was added by David I believe to provide further explanation that
+doesn't need to be included in the commit message, and I didn't want to remove it
+or his 2nd sign-off, as its discarded anyways. Its useful info that can just be
+ignored.
 
-And this is what the comment says:
+> 
+>> ---
+>>  Documentation/filesystems/proc.rst |  5 ++-
+>>  fs/proc/array.c                    |  2 +-
+>>  include/linux/huge_mm.h            | 20 +++++++---
+>>  include/linux/mm_types.h           | 13 +++----
+>>  include/uapi/linux/prctl.h         | 10 +++++
+>>  kernel/sys.c                       | 59 ++++++++++++++++++++++++------
+>>  mm/khugepaged.c                    |  2 +-
+>>  7 files changed, 82 insertions(+), 29 deletions(-)
+>>
+> 
+> [snip]
+> 
+>> +static int prctl_get_thp_disable(unsigned long arg2, unsigned long arg3,
+>> +				 unsigned long arg4, unsigned long arg5)
+>> +{
+>> +	unsigned long *mm_flags = &current->mm->flags;
+>> +
+>> +	if (arg2 || arg3 || arg4 || arg5)
+>> +		return -EINVAL;
+>> +
+>> +	/* If disabled, we return "1 | flags", otherwise 0. */
+> 
+> Thanks! LGTM.
+> 
+>> +	if (test_bit(MMF_DISABLE_THP_COMPLETELY, mm_flags))
+>> +		return 1;
+>> +	else if (test_bit(MMF_DISABLE_THP_EXCEPT_ADVISED, mm_flags))
+>> +		return 1 | PR_THP_DISABLE_EXCEPT_ADVISED;
+>> +	return 0;
+>> +}
+>> +
+> 
+> [snip]
 
-/* Data provided to/by cmdq is arranged in structs with little endian fields but
- * every dword (32bits) should be swapped since HW swaps it again when it
- * copies it from/to host memory.
- */
 
