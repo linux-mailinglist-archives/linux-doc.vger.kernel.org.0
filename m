@@ -1,173 +1,151 @@
-Return-Path: <linux-doc+bounces-54795-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-54797-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD7A3B177ED
-	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 23:17:16 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 974ABB177F9
+	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 23:20:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5F2571C2740C
-	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 21:17:35 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B4D2A585E06
+	for <lists+linux-doc@lfdr.de>; Thu, 31 Jul 2025 21:20:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 04DF2262FC8;
-	Thu, 31 Jul 2025 21:17:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED7942641F3;
+	Thu, 31 Jul 2025 21:20:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a2dccOxl"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="1SdQupD7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com [209.85.210.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C12D7202962;
-	Thu, 31 Jul 2025 21:17:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4709017DFE7
+	for <linux-doc@vger.kernel.org>; Thu, 31 Jul 2025 21:20:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1753996623; cv=none; b=pK1MYzhU/Z1YWlsLp4BOWBK0Q8WWl5nl7n0pBfu3vuY1ybJF4htBtzsMMiMk8PTMl3VcorLDhohGzd6pytnQ/A6GCC/z8cGd88FiUBHBgJ621+S2+SsTGss2AChYumPg+8TGXW0pcIJx6Kv4dbP/GLUaAvyNbZ/2k0jNmwvE4ds=
+	t=1753996809; cv=none; b=SAZSdXLt26m1/HuJ7pEZqvxqLzsxFjj4CY3elJb6zcvF0n/p3B5CwkXmqv/5uMKxcD0IMsyZvhyjkU/hTY9BQjF2mVVfp3sAHzZourj7gbVUntl/7eWDx6yhh+d75EUzyyT3r33PeUpnmN//vE2YaTqGEV5OtgF5eNDUUmXX1LU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1753996623; c=relaxed/simple;
-	bh=1ixpZp7CIxilpaIq5f9PmB4aAh7XXulplpDrhLfLjfo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EglsyYj74wPTY3urgQW5t7pR1WYacx4p5kkFhasMnrliEYTt5iLwSE6U1PRlJFnXLosnMR2G5lxKuKArYs8uj2pnhPARQLmGNRe7BenaZMv2/63SSrWQK+Uf0pNWv92GSH67PVhjGc00HaQkH/5mO/dfJ9v6xLoBPQc0tyhdrmk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a2dccOxl; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 58BBBC4CEF4;
-	Thu, 31 Jul 2025 21:17:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1753996623;
-	bh=1ixpZp7CIxilpaIq5f9PmB4aAh7XXulplpDrhLfLjfo=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=a2dccOxlVIGuvBGIyxKy2f29u3rwfovcnOikXMEQ2S/sNHcJmslsyYxKPZUSAZCYP
-	 o/t1LvpndYf1aSGzq3RAcJWWO+pUtf+LiushnMfBuW/qyQcdU/Xenl3xBbMv5z1dW/
-	 R+tuK9xbjKiS7vBypm+vOPbcJMmYaxh+JA/4iZszSZi7M0aQWhXdHJ9BcESZF5WO/t
-	 LSZw690QGtSXb8LG7GTEuu3glyh8c+/pfGSBCO+RS/G2qjps3rWqKBD+MDPuIsqe+7
-	 H3ceYN/bgLizvypMoKM53ToPJbvxtYWAnMd1Vshs3BjpoUVzDpm5TRAUgGWxTTijpl
-	 b1EtX7ZNtTZhQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DD9FC87FD2;
-	Thu, 31 Jul 2025 21:17:03 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Thu, 31 Jul 2025 23:17:02 +0200
-Subject: [PATCH v6 2/2] arm64: dts: qcom: sdm845-oneplus: Add alert-slider
+	s=arc-20240116; t=1753996809; c=relaxed/simple;
+	bh=ap4Iq3A10A/U7xF+iUIaP24oQmDfl5UInmU7sGDN7Y4=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=Ds5MbRI5YiR4n9lyaQbYAQ5kFIeg6a8SGAhYfepjtxM1L0h5YV0nyNfdCemAQPlX2n5dFhSmi6I58B8RCto9d8kyaeW+c0IPI1ye6zl7ULXkz4lYyRBz4wmYXq4F9Zh6dx+fjib0aGt2QlE32CZQn7qvJ3r8aBtOZpG0TN2OTxs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jiaqiyan.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=1SdQupD7; arc=none smtp.client-ip=209.85.210.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--jiaqiyan.bounces.google.com
+Received: by mail-pf1-f201.google.com with SMTP id d2e1a72fcca58-748e1e474f8so1673573b3a.2
+        for <linux-doc@vger.kernel.org>; Thu, 31 Jul 2025 14:20:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1753996808; x=1754601608; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=3LhBmNVj47n+/Xo2CBpWpkvNL4bzPFglARthS3E980E=;
+        b=1SdQupD7Tg8GEmKfvBdy95SLcSzqhAL6nFHgeI5duLcSTxHo1eqZwywJKOwLXSmVxS
+         IVnasdMXQaaohihhLSWyCgeqdAX9qEiTjIhksSEMi89YQcg6E8/mj7qZeS9MSUlMg+58
+         5zFlN3StczjqcaoML/iCAxBTf0VOz3DGvZo7G+A8nEYBEBVeHBPQCISF2GyRQs3FgJm0
+         iNQmVNhAkaxxC5aQw4sjERnT7AjVYXfFyGpGi7GFc/OgZSNW54oxRPrtHYbrAlE6CS3g
+         wAg4lUlcsCpzWf6rUHZiRUgP3Xg0mCfV8Nq7bPI8gfscpEvQn0YqaJIYjF7b8+Qv2syl
+         A8Aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1753996808; x=1754601608;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=3LhBmNVj47n+/Xo2CBpWpkvNL4bzPFglARthS3E980E=;
+        b=XdVGBhCTPauwPVfOwa7e31Of29vSm51w8t1g8spbo+3jSdt24yiGO7wj7xHp4grYnu
+         NKrWBScBbL9mOfH/fOGCuqT6C7bNZKhgHk9aU+kgaQxgHpDS8v4es3L6GIZ4j9MR1qbo
+         50AaNV+KaelS3Do6Q1YI7xv+0RVh0CohbzPpE7IMYQ+yyZgFjGGZE9sxMrrmyIvjGHh8
+         wPfbrbOJ1DEkRS2yOkIkeHz0OCufh2bAXupfGkw2YxvFbYfvK4HkSBP4QhK4hiEaUJnV
+         nX/VnaVMTTnJGiAvjLTo+Bm+BpkU67RRAg54j3cEWAUukKpC3KWtSdBwyfWLvNPjigBs
+         w2Ng==
+X-Forwarded-Encrypted: i=1; AJvYcCVBuNSL2lPhog53m+3CBT0O1idjBbBF/ed79C4fDB43gA79OykI1P0fLM63bN/8ag5wfFSwkZzmYbY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyMtrQFBIdbqt7sSrm0RZIL8OD7y8cfB3fv5VfB3uPC+uKbpJ7H
+	QJKvhw6FK0nE2yFgzoXgg/F86hzy+si+Xz5MRXA2mO7VoQtP9UN/hrBxVc+5yf5QOZL/TEGB6+s
+	6jLiLSdx6qyZJ2g==
+X-Google-Smtp-Source: AGHT+IHVlDuY+fYNSvzWaCl78j3JqbZZEEmbQtyEYvAT3m66mv+lhaRSlgO6MH1HydCWLvX+Ha9fBEBU/p76uA==
+X-Received: from pfhx36.prod.google.com ([2002:a05:6a00:18a4:b0:75f:8367:a75a])
+ (user=jiaqiyan job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:6a20:7f93:b0:215:d611:5d9b with SMTP id adf61e73a8af0-23de80e503cmr119146637.12.1753996807524;
+ Thu, 31 Jul 2025 14:20:07 -0700 (PDT)
+Date: Thu, 31 Jul 2025 21:20:00 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250731-op6-tri-state-v6-2-569c25cbc8c2@ixit.cz>
-References: <20250731-op6-tri-state-v6-0-569c25cbc8c2@ixit.cz>
-In-Reply-To: <20250731-op6-tri-state-v6-0-569c25cbc8c2@ixit.cz>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
- Jonathan Corbet <corbet@lwn.net>, Jiri Kosina <jikos@kernel.org>, 
- Benjamin Tissoires <bentiss@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-input@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, Gergo Koteles <soyer@irl.hu>, 
- Casey Connolly <casey@connolly.tech>, David Heidelberg <david@ixit.cz>, 
- Konrad Dybcio <konradybcio@kernel.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2333; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=DXHdtGfW2ujmBmU5jNstKdQ/ztd3ylHZnqWhAQYlHgI=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBoi91NRxOGFBofJhr/R5Qdt2mdrdvgOYd4CdEY/
- uWPxnDvh4OJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaIvdTQAKCRBgAj/E00kg
- cszzEADJPC237t0NxPire+2qZzcPXxWYcO+wmI15gTOVT6+wrSM23ipHcqO5jaIr1QgFY40i0Pw
- uPSgd3MFV3+u9K+FcYFzyuOkQZkXv5XD+YKZE/D3kXDUtAvEWZzj5Nt0nJGVWAKApTTqP9JdIa2
- Jdwz54VuKl4567SLe7fJsddZ68UH7cpsp5Q0yUMQtjvJ//I4a8dOaiNG1KnB+vI2iElRkRBFL5E
- bt5I6b5fnQKG1b+fg8ZeN7gUg70vRTl4oEk8dxwJnfogSJ4b9kNuHnfR39ku26Dssls3CIbsaq1
- u0cwdNRwfINl5xs93JiwrWE6jJNy4Vz5hLvOwc29SXBrKHAj+g8T4SAX3PUZM9mAq9klUss6yED
- uLa0mT7ni6OZ2jiKAMVNJ5X5goM0T+7ZxwE4GaLwO7bdEEPDkmksB5l+7vUHonRAJpebdisiOCj
- sZ54XzIFMtXCq4aYoy0MM2NVSpPITVlZNqYrq9p4Jko65xRp57tAUYfOD1AYLHpM7dP1oLlpwVP
- UF/66IcCB60tKcLLshWhHayu5d1XP9V9TK5ckGFahSmhEZKHa52G58HHceZEWsbXYQI1ZlF+0f+
- 5ogFenEmvZzgy4KIhaqafM/gZQytYAD1WYct4b00z7hWrtjZNGg0yLTIIgE/zRkp1ILarCDBepu
- V/UDPYponoAfzZA==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.50.1.565.gc32cd1483b-goog
+Message-ID: <20250731212004.1437336-1-jiaqiyan@google.com>
+Subject: [PATCH v1 0/4] A couple of improvements for VMM to inject external
+ abort to guest
+From: Jiaqi Yan <jiaqiyan@google.com>
+To: maz@kernel.org, oliver.upton@linux.dev
+Cc: joey.gouly@arm.com, suzuki.poulose@arm.com, yuzenghui@huawei.com, 
+	catalin.marinas@arm.com, will@kernel.org, pbonzini@redhat.com, corbet@lwn.net, 
+	shuah@kernel.org, kvm@vger.kernel.org, kvmarm@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	rananta@google.com, Jiaqi Yan <jiaqiyan@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-From: Gergo Koteles <soyer@irl.hu>
+There are several situations where VMM is involved when handling
+synchronous external instruction or data aborts, and often VMM
+needs to inject external aborts to guest. In addition to manipulating
+individual registers with KVM_SET_ONE_REG API, an easier way is to
+use the KVM_SET_VCPU_EVENTS API.
 
-The alert-slider is a tri-state sound profile switch found on the
-OnePlus 6, Android maps the states to "silent", "vibrate" and "ring".
-Expose them as ABS_SND_PROFILE events.
-The previous GPIO numbers were wrong. Update them to the correct ones.
+This patchset adds two new features to the KVM_SET_VCPU_EVENTS API.
+1. Extend KVM_SET_VCPU_EVENTS to support external instruction abort.
+2. Allow userspace to emulate ESR_ELx.ISS by supplying ESR_ELx.
+   In this way, we can also allow userspace to emulate ESR_ELx.ISS2
+   in future.
 
-Co-developed-by: Casey Connolly <casey@connolly.tech>
-Signed-off-by: Casey Connolly <casey@connolly.tech>
-Signed-off-by: Gergo Koteles <soyer@irl.hu>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@linaro.org>
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- .../arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi | 39 ++++++++++++++++++++--
- 1 file changed, 37 insertions(+), 2 deletions(-)
+The UAPI change for #1 is straightforward. However, I would appreciate
+some feedback on the ABI change for #2:
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-index b118d666e535a433f44b66c71b36e55df2ce5c80..242c78828992f9fbb384b690352660a496b22411 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi
-@@ -21,6 +21,41 @@
- /delete-node/ &rmtfs_mem;
- 
- / {
-+	alert-slider {
-+		compatible = "gpio-keys";
-+		label = "Alert slider";
-+
-+		pinctrl-0 = <&alert_slider_default>;
-+		pinctrl-names = "default";
-+
-+		switch-top {
-+			label = "Silent";
-+			linux,input-type = <EV_ABS>;
-+			linux,code = <ABS_SND_PROFILE>;
-+			linux,input-value = <SND_PROFILE_SILENT>;
-+			gpios = <&tlmm 126 GPIO_ACTIVE_LOW>;
-+			linux,can-disable;
-+		};
-+
-+		switch-middle {
-+			label = "Vibrate";
-+			linux,input-type = <EV_ABS>;
-+			linux,code = <ABS_SND_PROFILE>;
-+			linux,input-value = <SND_PROFILE_VIBRATE>;
-+			gpios = <&tlmm 52 GPIO_ACTIVE_LOW>;
-+			linux,can-disable;
-+		};
-+
-+		switch-bottom {
-+			label = "Ring";
-+			linux,input-type = <EV_ABS>;
-+			linux,code = <ABS_SND_PROFILE>;
-+			linux,input-value = <SND_PROFILE_RING>;
-+			gpios = <&tlmm 24 GPIO_ACTIVE_LOW>;
-+			linux,can-disable;
-+		};
-+	};
-+
- 	aliases {
- 		serial0 = &uart9;
- 		serial1 = &uart6;
-@@ -799,8 +834,8 @@ hall_sensor_default: hall-sensor-default-state {
- 		bias-disable;
- 	};
- 
--	tri_state_key_default: tri-state-key-default-state {
--		pins = "gpio40", "gpio42", "gpio26";
-+	alert_slider_default: alert-slider-default-state {
-+		pins = "gpio126", "gpio52", "gpio24";
- 		function = "gpio";
- 		drive-strength = <2>;
- 		bias-disable;
+  struct kvm_vcpu_events {
+    struct {
+        __u8 serror_pending;
+        __u8 serror_has_esr;
+        __u8 ext_dabt_pending;
+        __u8 ext_iabt_pending;
+        __u8 ext_abt_has_esr;
+        __u8 pad[3];
+        __u64 serror_esr;
+        __u64 ext_abt_esr;  // <= +8 bytes
+      } exception;
+    __u32 reserved[10];     // <= -8 bytes
+  };
+
+The offset to kvm_vcpu_events.reserved changes, and the size of
+exception changes. I think we can't say userspace will never access
+reserved, or they will never use sizeof(exception). Theoretically this
+is an ABI break and I want to call it out and ask if a new ABI is needed
+for feature #2. For example, is it worthy to introduce exception_v2
+or kvm_vcpu_events_v2.
+
+Based on commit 7b8346bd9fce6 ("KVM: arm64: Don't attempt vLPI mappings
+when vPE allocation is disabled")
+
+Jiaqi Yan (3):
+  KVM: arm64: Allow userspace to supply ESR when injecting SEA
+  KVM: selftests: Test injecting external abort with ISS
+  Documentation: kvm: update UAPI for injecting SEA
+
+Raghavendra Rao Ananta (1):
+  KVM: arm64: Allow userspace to inject external instruction abort
+
+ Documentation/virt/kvm/api.rst                |  48 +++--
+ arch/arm64/include/asm/kvm_emulate.h          |   9 +-
+ arch/arm64/include/uapi/asm/kvm.h             |   7 +-
+ arch/arm64/kvm/arm.c                          |   1 +
+ arch/arm64/kvm/emulate-nested.c               |   6 +-
+ arch/arm64/kvm/guest.c                        |  42 ++--
+ arch/arm64/kvm/inject_fault.c                 |  16 +-
+ include/uapi/linux/kvm.h                      |   1 +
+ tools/arch/arm64/include/uapi/asm/kvm.h       |   7 +-
+ .../selftests/kvm/arm64/external_aborts.c     | 191 +++++++++++++++---
+ .../testing/selftests/kvm/arm64/inject_iabt.c |  98 +++++++++
+ 11 files changed, 352 insertions(+), 74 deletions(-)
+ create mode 100644 tools/testing/selftests/kvm/arm64/inject_iabt.c
 
 -- 
-2.50.1
-
+2.50.1.565.gc32cd1483b-goog
 
 
