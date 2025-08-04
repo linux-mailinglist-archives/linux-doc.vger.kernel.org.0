@@ -1,270 +1,219 @@
-Return-Path: <linux-doc+bounces-55016-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55018-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90E79B1956B
-	for <lists+linux-doc@lfdr.de>; Sun,  3 Aug 2025 23:03:11 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id C8B8DB199C7
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Aug 2025 03:12:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B37CE16EE8D
-	for <lists+linux-doc@lfdr.de>; Sun,  3 Aug 2025 21:03:11 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 8A5D63A7EBD
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Aug 2025 01:12:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AEC5020F079;
-	Sun,  3 Aug 2025 21:03:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 66E061DD9AC;
+	Mon,  4 Aug 2025 01:12:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="EubrEoOp"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="QEg4HgIR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F82F20B1E8;
-	Sun,  3 Aug 2025 21:02:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.17.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B031E1A9B24
+	for <linux-doc@vger.kernel.org>; Mon,  4 Aug 2025 01:11:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754254981; cv=none; b=S9e13CJU0LfSA+RjUzcTNdbaM0jjXPWthNveZ+sMGXQ1G8IGUMtRxDS89+u9Q7Bb32jcVEpI5Wq9aJYJQAuJNIwtfHgJEynsDuSOPv/+iAO7N7kwB885b2emN9Jlcpy9kA5DLjghQ+eAlso1E06KhVS8Uo1BoRW6vJ2KmvWMzCc=
+	t=1754269920; cv=none; b=FZxLff0ZRLYAlBj6NddkfGplXpY6HZJNfOt8MOVGV9KfRZaHdnvma+enQK3T9lnJXVVLyetcSnjaqMw8nJFK0EjJe1jq/uqgC7Pp5ItAeCfaNBX6Ge5sMLVY2TnGA8Rg8rzBb9CxI9f09Ekoudns0bvazJEv08ls0Uhxg5gqvLw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754254981; c=relaxed/simple;
-	bh=r9vit6NjexpH9K6wh4FHnOHtqvh4NGndMUo/s4RoAqo=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=XifdMivQrPwPGafnrJNDktuXKiSbEw/Y/yD3NKU074WzN93+18KqscI3dzO4PtJASwlT01504W0EygDmRcotqUo+0pcOR9Dz6Le40x6OCRwn5irOzZIvEJxtO5H0h18jbRcNkDLJM3Emfs1X5WaQrj4kGdOuKIpmvpWZe2MKMlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=EubrEoOp; arc=none smtp.client-ip=212.227.17.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
-	s=s31663417; t=1754254960; x=1754859760; i=w_armin@gmx.de;
-	bh=+HguzVaZjQwCRLHwPDHCswjzYiuTBsCiRdUvMoXWxvM=;
-	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:cc:
-	 content-transfer-encoding:content-type:date:from:message-id:
-	 mime-version:reply-to:subject:to;
-	b=EubrEoOpZNM/BJA2UzKa0wlwOWyPzA8U7zeQ2+CE9da54hrBitJQZ8gF86ZXD1Se
-	 tpooGuKMmZbPG0O8QHHM13IoJaDmERwt1Q1+yScw7nSozloX6sAvLqKvOnQxfosm4
-	 C2uUnRZ9JTLPAeaIoKPS0knC02kdhu+aYtXZ2LvmOV+9CLND7k460jiQHESpralwq
-	 LL6Lfk+rubpreW+9ndkLNlK0uzsYqE6GgkY2V7rQQ5DZxoUoifomYjBWk1fYHgi2j
-	 1K/GGDJRbe2Pev9f5qDe04Ni3KHZwjggBYzWqytSKr+XyfaZhTJRrKnDD6dAXyGBo
-	 t6SA0eBk+oQ2Z6PRWQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from mx-amd-b650.fritz.box ([87.177.78.219]) by mail.gmx.net
- (mrgmx104 [212.227.17.168]) with ESMTPSA (Nemesis) id
- 1MCKBm-1uqxJC0m5i-00EBYe; Sun, 03 Aug 2025 23:02:40 +0200
-From: Armin Wolf <W_Armin@gmx.de>
-To: ilpo.jarvinen@linux.intel.com,
-	hdegoede@redhat.com,
-	chumuzero@gmail.com,
-	corbet@lwn.net,
-	cs@tuxedo.de,
-	wse@tuxedocomputers.com,
-	ggo@tuxedocomputers.com
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org,
-	rdunlap@infradead.org,
-	alok.a.tiwari@oracle.com,
-	linux-leds@vger.kernel.org,
-	lee@kernel.org,
-	pobrn@protonmail.com
-Subject: [PATCH v2 3/3] Documentation: laptops: Add documentation for uniwill laptops
-Date: Sun,  3 Aug 2025 23:01:57 +0200
-Message-Id: <20250803210157.8185-4-W_Armin@gmx.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250803210157.8185-1-W_Armin@gmx.de>
-References: <20250803210157.8185-1-W_Armin@gmx.de>
+	s=arc-20240116; t=1754269920; c=relaxed/simple;
+	bh=dwYOkfkrLuTx/MFAcxiCoQ08IEU73UxalscP4C3rAnE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Ez0xwf0EAbIDAw9EBkt+9aMmB/yNwmnWaDIEzZxLruBOQ9BHqk0WYxEDDyzG7vWK9VBKhpeije9z/k08S1sbm95KlA3tongq+xs0Xa5dAde3UdnYRX4arNZ4X4vZfyliD2WNrRNHo1kFUt3EtO1jq2fq5osRMR0mbqb8yWFwY90=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=QEg4HgIR; arc=none smtp.client-ip=209.85.160.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
+Received: by mail-qt1-f177.google.com with SMTP id d75a77b69052e-4ab814c4f2dso58823051cf.1
+        for <linux-doc@vger.kernel.org>; Sun, 03 Aug 2025 18:11:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google; t=1754269917; x=1754874717; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=5EHC7Bo4Tna4lRMiPBPdxLTjpzf5j4XSXmXAx1SxHbs=;
+        b=QEg4HgIRS9N4H1et3Jj6itt+EpgeASfgoWdFChVLa/GpHmHZwTO749KMj/M0qVT9qL
+         t03TxH0ncEc9mOrotDxSviMm8Wsn8jBVAWn5QUdZa9EsZQJQCCopWG14kicCqUBRmSf+
+         zgyMYD06vPTJD7FWGjDJnvkoVZaRkM4z9SaLfM5pz6wTDpvpXgKLvQemlTfO0yvXOxrm
+         XpG6jq5Px5ZXBNxcfjI/msUyD8WDY2McIbKCyE9SRHLWbQnsUOY6KL7Y169EGI33wpHI
+         36WIDeDaj+pRUBYTf6UQNb8sk1lomqwWrRptXi9l2x9ysPDc/hwNqdbc0g3y+hmWbZUp
+         +YmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1754269917; x=1754874717;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=5EHC7Bo4Tna4lRMiPBPdxLTjpzf5j4XSXmXAx1SxHbs=;
+        b=Qp5E1bevX8CSHWVyBsRtWWmLsUagGj6GJr8NW3xS0cwRdnHWpKGULvy7ksTxGp8Wdi
+         aNfULXfKqfokr5gwTvT4GhZgsjwvNtGwOxHObVXvSPl4od90ahFTxegUewLg4qPYkUHt
+         2cisZsmq7IBY2ViYyAqzQJnPGV5u4wTPxyx74crnPvqv3tvXiyD2kujEj3C8n9/QVGiv
+         NtembCOp/1TJGaJA1SxWm47bpK8InLI+Ka/dDBBC/ste7Fm3P1tC1oE6hyYXH1GgYEzs
+         hRod/t9AUKr9cuEMC2UDblEXX6BTVbsH0jpBtR3rDfhKpG5tTeZg4G4WCQ3lkVOG2Pw0
+         xtCQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWxbJ94wEdjDnxWp4dfCQE7irn/Q2UDiS74DC0sT2k/EQlmZgtwwOfxbUPSilX7HdOOzDRTia4bgJM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy8SdcsoGhsFvTj0Pb7lN3mb7p9hCJt63aZiY7tvlrx4ChtnU2w
+	/9YNGkaxFut/aG9eXhQoIl7N/sLJGjQt0zDqYlg/4L3HzZ+M1GQ4SDdshhtqKkZNWMBqL8d+lql
+	kCuDY2sFVmNqYjog2vPsOAmAmuk6aoe+OBlmKjj6Y6g==
+X-Gm-Gg: ASbGnctiG11DdwGpG5fKHGMWT/sIV+r/aMu0BtNOakSrCoXvwm/Eg4y4HgUDzhCJA4P
+	YfeW/PUnAz7Nwqhn6eZs34dqP6ugp26zPq+ETZUCfnQL04gf1bATtcrvGU9cAJzf9Ib4nv+5cyf
+	SJN7dqd+2EYeb6LWdDLDV2UxZYz9k4r7e6CCE5m9mDy/xXn2Xwptqfk1gO3FddcsIVEuyxOtCnM
+	nXwn5CODCg/0QE=
+X-Google-Smtp-Source: AGHT+IElK+avqeyYUn54//o2iNNGJM5V66RJUxPCF/JnBBNYlvcJkU9/zn67Ob/Mjz52DPZ282PLlisDVXGG6S/YoQU=
+X-Received: by 2002:ac8:5a12:0:b0:4ab:7d96:bbca with SMTP id
+ d75a77b69052e-4af1098b133mr128405741cf.24.1754269917325; Sun, 03 Aug 2025
+ 18:11:57 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:7WK4/ICtgPlNP9j6dR+MGRI9cu8WAHkqMvR098ChQhwhtQCVj8n
- hM0w5OMl1JLiJPeLfG52Q06OSCgrtgLeBEcUtFsp4fffszAxhCGFFBNW0Abtw8RWZop2RN8
- ce6dB+jMXJZQKeALRfe+37HRCaPwLUCdG2eSmiSQF8ldO3O2G7xsEQhc8PpUm0t8/vZ+xNk
- LwaMKymyZzLL3No+47xiw==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:o+J9Q/TTcf4=;e8RT/l0AVQxXjP4T44Ye8o3BfOL
- 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
- Bg==
+References: <20250723144649.1696299-1-pasha.tatashin@soleen.com>
+ <20250723144649.1696299-11-pasha.tatashin@soleen.com> <20250729172812.GP36037@nvidia.com>
+In-Reply-To: <20250729172812.GP36037@nvidia.com>
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+Date: Sun, 3 Aug 2025 21:11:20 -0400
+X-Gm-Features: Ac12FXyfTkQo6Oo5aMdGv4BzhEny3uN9Ow76q668n06TlX48YEn8zjMHGbMDq6Q
+Message-ID: <CA+CK2bCrfVef_sFWCQpdwe9N_go8F_pU4O-w+XBJZ6yEuXRj9g@mail.gmail.com>
+Subject: Re: [PATCH v2 10/32] liveupdate: luo_core: Live Update Orchestrator
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: pratyush@kernel.org, jasonmiu@google.com, graf@amazon.com, 
+	changyuanl@google.com, rppt@kernel.org, dmatlack@google.com, 
+	rientjes@google.com, corbet@lwn.net, rdunlap@infradead.org, 
+	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com, ojeda@kernel.org, 
+	aliceryhl@google.com, masahiroy@kernel.org, akpm@linux-foundation.org, 
+	tj@kernel.org, yoann.congal@smile.fr, mmaurer@google.com, 
+	roman.gushchin@linux.dev, chenridong@huawei.com, axboe@kernel.dk, 
+	mark.rutland@arm.com, jannh@google.com, vincent.guittot@linaro.org, 
+	hannes@cmpxchg.org, dan.j.williams@intel.com, david@redhat.com, 
+	joel.granados@kernel.org, rostedt@goodmis.org, anna.schumaker@oracle.com, 
+	song@kernel.org, zhangguopeng@kylinos.cn, linux@weissschuh.net, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-mm@kvack.org, 
+	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com, 
+	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, 
+	rafael@kernel.org, dakr@kernel.org, bartosz.golaszewski@linaro.org, 
+	cw00.choi@samsung.com, myungjoo.ham@samsung.com, yesanishhere@gmail.com, 
+	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com, 
+	aleksander.lobakin@intel.com, ira.weiny@intel.com, 
+	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de, 
+	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com, 
+	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net, 
+	brauner@kernel.org, linux-api@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	saeedm@nvidia.com, ajayachandra@nvidia.com, parav@nvidia.com, 
+	leonro@nvidia.com, witu@nvidia.com
+Content-Type: text/plain; charset="UTF-8"
 
-Add documentation for admins regarding Uniwill laptops. This should
-help users to setup the uniwill-laptop and uniwill-wmi drivers, which
-sadly cannot be loaded automatically.
+> > +enum liveupdate_event {
+> > +     LIVEUPDATE_PREPARE,
+> > +     LIVEUPDATE_FREEZE,
+> > +     LIVEUPDATE_FINISH,
+> > +     LIVEUPDATE_CANCEL,
+> > +};
+>
+> I saw a later patch moves these hunks, that is poor patch planning.
 
-Reported-by: cyear <chumuzero@gmail.com>
-Closes: https://github.com/lm-sensors/lm-sensors/issues/508
-Closes: https://github.com/Wer-Wolf/uniwill-laptop/issues/3
-Signed-off-by: Armin Wolf <W_Armin@gmx.de>
-=2D--
- Documentation/admin-guide/laptops/index.rst   |  1 +
- .../admin-guide/laptops/uniwill-laptop.rst    | 68 +++++++++++++++++++
- MAINTAINERS                                   |  1 +
- 3 files changed, 70 insertions(+)
- create mode 100644 Documentation/admin-guide/laptops/uniwill-laptop.rst
+Yes, you're right. I have since moved this to uapi/linux/liveupdate.h
+in the introductory patch to improve the structure of the patch
+series.
 
-diff --git a/Documentation/admin-guide/laptops/index.rst b/Documentation/a=
-dmin-guide/laptops/index.rst
-index db842b629303..6432c251dc95 100644
-=2D-- a/Documentation/admin-guide/laptops/index.rst
-+++ b/Documentation/admin-guide/laptops/index.rst
-@@ -17,3 +17,4 @@ Laptop Drivers
-    sonypi
-    thinkpad-acpi
-    toshiba_haps
-+   uniwill-laptop
-diff --git a/Documentation/admin-guide/laptops/uniwill-laptop.rst b/Docume=
-ntation/admin-guide/laptops/uniwill-laptop.rst
-new file mode 100644
-index 000000000000..890328273c9e
-=2D-- /dev/null
-+++ b/Documentation/admin-guide/laptops/uniwill-laptop.rst
-@@ -0,0 +1,68 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Uniwill laptop extra features
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-+
-+On laptops manufactured by Uniwill (either directly or as ODM), the ``uni=
-will-laptop`` and
-+``uniwill-wmi`` driver both handle various platform-specific features.
-+However due to a design flaw in the underlying firmware interface, both d=
-rivers may need
-+to be loaded manually on some devices.
-+
-+.. warning:: Not all devices supporting the firmware interface will neces=
-sarily support those
-+             drivers, please be careful.
-+
-+Module Loading
-+--------------
-+
-+The ``uniwill-laptop`` driver relies on a DMI table to automatically load=
- on supported devices.
-+When using the ``force`` module parameter, this DMI check will be omitted=
-, allowing the driver
-+to be loaded on unsupported devices for testing purposes.
-+
-+The ``uniwill-wmi`` driver always needs to be loaded manually. However th=
-e ``uniwill-laptop``
-+driver will automatically load it as a dependency.
-+
-+Hotkeys
-+-------
-+
-+Usually the FN keys work without a special driver. However as soon as the=
- ``uniwill-laptop`` driver
-+is loaded, the FN keys need to be handled manually. This is done by the `=
-`uniwill-wmi`` driver.
-+
-+Keyboard settings
-+-----------------
-+
-+The ``uniwill-laptop`` driver allows the user to enable/disable:
-+
-+ - the FN and super key lock functionality of the integrated keyboard
-+ - the touchpad toggle functionality of the integrated touchpad
-+
-+See Documentation/ABI/testing/sysfs-driver-uniwill-laptop for details.
-+
-+Hwmon interface
-+---------------
-+
-+The ``uniwill-laptop`` driver supports reading of the CPU and GPU tempera=
-ture and supports up to
-+two fans. Userspace applications can access sensor readings over the hwmo=
-n sysfs interface.
-+
-+Platform profile
-+----------------
-+
-+Support for changing the platform performance mode is currently not imple=
-mented.
-+
-+Battery Charging Control
-+------------------------
-+
-+The ``uniwill-laptop`` driver supports controlling the battery charge lim=
-it. This happens over
-+the standard ``charge_control_end_threshold`` power supply sysfs attribut=
-e. All values
-+between 1 and 100 percent are supported.
-+
-+Additionally the driver signals the presence of battery charging issues t=
-hrough the standard
-+``health`` power supply sysfs attribute.
-+
-+Lightbar
-+--------
-+
-+The ``uniwill-laptop`` driver exposes the lightbar found on some models a=
-s a standard multicolor
-+LED class device. The default name of this LED class device is ``uniwill:=
-multicolor:status``.
-+
-+See Documentation/ABI/testing/sysfs-driver-uniwill-laptop for details on =
-how to control the various
-+animation modes of the lightbar.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d1901990a7a3..8ca029e6f450 100644
-=2D-- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -25504,6 +25504,7 @@ M:	Armin Wolf <W_Armin@gmx.de>
- L:	platform-driver-x86@vger.kernel.org
- S:	Maintained
- F:	Documentation/ABI/testing/sysfs-driver-uniwill-laptop
-+F:	Documentation/admin-guide/laptops/uniwill-laptop.rst
- F:	Documentation/wmi/devices/uniwill-laptop.rst
- F:	drivers/platform/x86/uniwill/uniwill-laptop.c
-=20
-=2D-=20
-2.39.5
+> Ideally an ioctl subsystem should start out with the first patch
+> introducing the basic cdev, file open, ioctl dispatch, ioctl uapi
+> header and related simple infrastructure.
 
+I have modified the patch series as follows: The rudimentary parts of
+the cdev, including the uapi/liveupdate.h header, are now in this
+introductory patch. The rest of the ioctl interface is added in the
+old patch that introduced luo_ioctl.c.
+
+> Then you'd go basically ioctl by ioctl adding the new ioctls and
+> explaining what they do in the patch commit messages.
+>
+> > +/**
+> > + * liveupdate_state_updated - Check if the system is in the live update
+> > + * 'updated' state.
+> > + *
+> > + * This function checks if the live update orchestrator is in the
+> > + * ``LIVEUPDATE_STATE_UPDATED`` state. This state indicates that the system has
+> > + * successfully rebooted into a new kernel as part of a live update, and the
+> > + * preserved devices are expected to be in the process of being reclaimed.
+> > + *
+> > + * This is typically used by subsystems during early boot of the new kernel
+> > + * to determine if they need to attempt to restore state from a previous
+> > + * live update.
+> > + *
+> > + * @return true if the system is in the ``LIVEUPDATE_STATE_UPDATED`` state,
+> > + * false otherwise.
+> > + */
+> > +bool liveupdate_state_updated(void)
+> > +{
+> > +     return is_current_luo_state(LIVEUPDATE_STATE_UPDATED);
+> > +}
+> > +EXPORT_SYMBOL_GPL(liveupdate_state_updated);
+>
+> Unless there are existing in tree users there should not be exports.
+
+Thank you, I have removed the exports from this patch and all others
+in the series.
+
+> I'm also not really sure why there is global state, I would expect the
+> fd and session objects to record what kind of things they are, not
+> having weird globals.
+
+Having a global state is necessary for performance optimizations. This
+is similar to why we export the state to userspace via sysfs: it
+allows other subsystems to behave differently during a
+performance-optimized live update versus a normal boot.
+
+For example, in our code base we have a driver that doesn't
+participate in the live update itself (it has no state to preserve).
+However, during boot, it checks this global state. If it's a live
+update boot, the driver skips certain steps, like loading firmware, to
+accelerate the overall boot time.
+
+In other words, even before userspace starts, this global awareness
+enables optimizations that aren't necessary during a cold boot or a
+regular kexec.
+
+> Like liveupdate_register_subsystem() stuff, it already has a lock,
+> &luo_subsystem_list_mutex, if you want to block mutation of the list
+> then, IMHO, it makes more sense to stick a specific variable
+> 'luo_subsystems_list_immutable' under that lock and make it very
+> obvious.
+>
+> Stuff like luo_files_startup() feels clunky to me:
+>
+> +       ret = liveupdate_register_subsystem(&luo_file_subsys);
+> +       if (ret) {
+> +               pr_warn("Failed to register luo_file subsystem [%d]\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       if (liveupdate_state_updated()) {
+>
+> Thats going to be a standard pattern - I would expect that
+> liveupdate_register_subsystem() would do the check for updated and
+> then arrange to call back something like
+> liveupdate_subsystem.ops.post_update()
+>
+> And then post_update() would get the info that is currently under
+> liveupdate_get_subsystem_data() as arguments instead of having to make
+> more functions calls.
+>
+> Maybe even the fdt_node_check_compatible() can be hoisted.
+>
+> That would remove a bunch more liveupdate_state_updated() calls.
+
+That's a good suggestion for a potential refactor. For now, the
+state-check call is inexpensive and is not in a performance-critical
+path. We can certainly implement this optimization later if it becomes
+necessary.
+
+Thank you,
+Pasha
 
