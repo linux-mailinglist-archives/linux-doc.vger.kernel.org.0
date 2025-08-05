@@ -1,139 +1,183 @@
-Return-Path: <linux-doc+bounces-55158-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55160-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99C0FB1B72B
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 17:09:10 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4B80B1B7A7
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 17:38:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 9A4AA4E29DE
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 15:09:09 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6297E18A7317
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 15:38:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72C54279903;
-	Tue,  5 Aug 2025 15:09:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31B0D27A10D;
+	Tue,  5 Aug 2025 15:36:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IMTd3rYF"
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="ME13T7ql"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A483D279DB1;
-	Tue,  5 Aug 2025 15:09:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D13E19343B
+	for <linux-doc@vger.kernel.org>; Tue,  5 Aug 2025 15:36:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754406544; cv=none; b=CWMUu0n2PVUwotWMA1YTmlYdEOjZCQA3wIDHPJlZFfAwoxyOv+BcSLPH7tnWxMugFcyBc0C5/IWtkKPqjLX2QOZYCZe4aO/VJuuLyxb5dOl+6EE8Yk5XkR7kLUlGu43B92yCEpaY89M08DT88jhLdtG5SD78tRVLF2Eqk7q5MDc=
+	t=1754408171; cv=none; b=OOpbwKumQ8YJcy6/GWEq10FjaEaLF4fX+KShQuvwMccnRwPZ3rLCn4n9yJkW/YPDIrN+WDAiyORM1hVsN1DRkvVnR8cJwTHSSYqDgDRBwbhbBjXTts6bFj1z1aTfBwgaSz1/Oh9kXLufZDVBOqkvhOKcXqItX7zfWNX9x6A0qD4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754406544; c=relaxed/simple;
-	bh=CloU7AwQ+4ed8BmT0f+moVCt+pXdA9kyuCa+TPRFKQU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=EkG2vKrF5lMLgppjnOtg2JUc5TbOegDWxrHkHgfL3uQMT7kpoH17qPfNQMaEk6aXypvTh3DFVpk0Vv19S/kyeGgqByexT6B7EcxWeA4lthMKk8hmjIPB/GNeq29LnLh2EHw/P3MrSl3/EHhYKc7ZNwxMQCwCcYg1g1EKApKzVvQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IMTd3rYF; arc=none smtp.client-ip=209.85.128.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4589968e001so36529895e9.0;
-        Tue, 05 Aug 2025 08:09:02 -0700 (PDT)
+	s=arc-20240116; t=1754408171; c=relaxed/simple;
+	bh=wdxaYDaFuQGcdWab2u1vRWh6ubZ0FBcIJSPOHoprdZM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MQM8lxJGzmhwuUHZfBX/3iyopIdriD3LltNOJiCPugxYnVOHkXxU38CeFVy9JzAMju7FlpxRLdFv+6c9D8EmeEvZrHOqKzZtuK7VCjjRW/pDyA1jTfIBy3N+RSiJSJbp8Wte6LvWk0h4VZZ3Ze/sDVQ5YN9nQgQG0OhYOa6J/JI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=ME13T7ql; arc=none smtp.client-ip=209.85.222.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
+Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-7e809baeef7so149862785a.0
+        for <linux-doc@vger.kernel.org>; Tue, 05 Aug 2025 08:36:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1754406541; x=1755011341; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=clkjTg5nzbZkcjPnCyY4ICyTnv2rK6xqFAiXWelGD9U=;
-        b=IMTd3rYFSvF219EphUpdhRaee2XcN9S1I2zvzjxTQPztIcMmdS50t204R3KYAH4Wdg
-         scsEWOWUBwHh8jxO6jvWuFU3EtMXj2Ja92oCnn5y+QMi42aT22GVrn2SFkHgJgfwD1i7
-         29lAG8XipK8DF98QqRHq4RRvI3YlZWd9oEdMCkYjYV/LzPkqUeiCmr9acAm9FT7O29oY
-         YdJBScTXVEd4gl1LG2Pbcox64QUJzokCOAJ5uYaOrafaZr7bckdsg3SELQ3GyRZtW9Eq
-         AdZrsaZHn+JNg+yjDL/QoEV9/H4G2NQjpkE+ZfIb9KQMyTb9eSWO2bNp+fPFCx29nYVR
-         cJog==
+        d=ziepe.ca; s=google; t=1754408168; x=1755012968; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=N1MKz8dfPt28HzEOpdUPkfZENcnUFV9NfsoMVTYwzbE=;
+        b=ME13T7qlujFLxq8mKX31c/Td7LIBGSUIjNS9Z6W5QS1QsalqTz3hlx9PvxNNKHvUIa
+         Xmrfl17cPhbG7Kc8V/bFqsuVtobMfEXk0xIwFaMAGQsa+mx+W14YFLcmqpf+XAVWrQvO
+         nRT50LH0BAPqQQWC4eYGFTIkVYw1tvKll6akmdBcqTDaBE72MLPbWjVGjiInjnVlm93s
+         AVAzkkiXV2Uo1Vb+tsXHMQlERMV4zaSSg1/H6O97HkdwdqxxR7ubHze86HF/8+l9LzYB
+         aF36TMxjVnLNh8FzH3iJYNu12rFTPh1Hup7iO7j4zp4Qf2XxZ+frJJC5pb/Y/igpTT4p
+         p+Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754406541; x=1755011341;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=clkjTg5nzbZkcjPnCyY4ICyTnv2rK6xqFAiXWelGD9U=;
-        b=nTOknL3MbJM3EsktL76BRfo01FhNdM5ZigikDe6Fk1vOGtbwXVb0B/m2p/jJwkxomV
-         wLEKsiBgFHpbNueq3USeikyInvdTvILYX9ZMCxqQlGbG1rKV7P1NZ310+g5E8OTizx10
-         +KZbzrp7j46JXihEsB81ntN9JG/2k5V6KNg/GaWZppH4fwJzLX0JVEvclRLg273qBzFf
-         zJeOSV6+r65HmqD0mfFPCoAw5wiYw9T/YmCuY1/yse3Z/niICK/n0MrafabhWn6bbdrT
-         Yr77An9MHAIupTLKdUWgw53FTPAoy1yabcS3tsBhWS43qB+0IzH+5xpyDcU6c1SvrVD8
-         5t6w==
-X-Forwarded-Encrypted: i=1; AJvYcCWElB3ycTn4o9ptVgoG+Vc/iMv+zN/17U787rpJ+NTn8cF0uuL+b4ost4vHH1K60CTa4FNHsaXTZfZ8Lwg0@vger.kernel.org, AJvYcCWhAKCj61tBqOnS3BBZe+u9R2EcUojdEnaFH4KuA9KnZVLy22GSIhY/qGiKRwF4p1OWgMxNEIaR9ayTs0qCsg==@vger.kernel.org, AJvYcCXPunKBZgzKOGm9K1AtzT7tQm1UXxw9QIhJEjqOlBrrbJA+0/cL+r1pdwJDvA6iXeRGWgAMuFm14iU=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw/5QJr5CiCW+oGj0PJBaKjpVGSuV1d2BFTWnZAlKB7/AimuCme
-	n8g/yq7OAqsi5VPq44M0wwYc1z89SV2PwTlz2Cln7wrWrTT5yf3G691P
-X-Gm-Gg: ASbGncseJqwg9dJaIEr7mgfZoKnTzUgW1Lf5bmK5vLrtN60z9q8c6FjVCtRJ2kStNOi
-	MWZW0CZjVtlMBQVitF8hVEpnboCEMRLpkkHC+lbBe1Me433lWIEM73WTmaV43e4nmajZXnIYIzr
-	YSsPlz6nEWWIwtgpBwFKpWG4sI2ZtY8jl0McV6VYYLSn0PfYaKDFr0YC6gTdPi1PgOBUvhx35Wb
-	moTBL8lBYpTCJ9jnNjy4U/kjEKKfh6kPKUwl/UcGLbnlJcf3dfHTgc+WfecCelcJ0pSCN3uVyLi
-	PeQcGjZRQOJ9SnbLRQOtYcHABYxFty8s81d3JRA1r9erQj35AWdy9KWFHQ17UPmDuzELO/HpQel
-	RxL1FyjiOw7eGV2eUe31gSouhwxkauS3LRwwb896xO5ozw9+aWgVSTDG7Vx0y0KbiLgtLbe8=
-X-Google-Smtp-Source: AGHT+IEJleTvyo7dw5ZGzLVioDY9Jwr93ljNYRwnTw/ri7vqTNIxJbrhwwu2JSLWJ5dOnaJY7nNELw==
-X-Received: by 2002:a05:600c:3548:b0:459:db80:c2d0 with SMTP id 5b1f17b1804b1-459dbf8f654mr60706285e9.7.1754406540648;
-        Tue, 05 Aug 2025 08:09:00 -0700 (PDT)
-Received: from ?IPV6:2a03:83e0:1126:4:14f1:c189:9748:5e5a? ([2620:10d:c092:500::6:98ea])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-459e0a24bf1sm40017195e9.1.2025.08.05.08.08.58
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 05 Aug 2025 08:08:59 -0700 (PDT)
-Message-ID: <cd99f0f2-260d-4494-bbf6-99daec3e0683@gmail.com>
-Date: Tue, 5 Aug 2025 16:08:55 +0100
+        d=1e100.net; s=20230601; t=1754408168; x=1755012968;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=N1MKz8dfPt28HzEOpdUPkfZENcnUFV9NfsoMVTYwzbE=;
+        b=pGQ5+KEuJECYsnqnYdqd84wPBhRkUHn+tBxXDae3aRl8wGFIBNZVXfSDQhVq/9p7cg
+         dsOYPJWUs3jVUIPs7GRdC44xtWUlLFjcE+kslJrTJ6Ly2EVVrEz6rxuiVOkLfDfAdZVI
+         eMZaZKZ7TTQjw8tr89HowPuQeadlANFXXxT3O8vnY8rHO1B1kLJ+AbkKNEwYsZdsyzVo
+         bZEdKz/aOvWgGJJVcx59vZiIxf1SgTaRCv/Hu4ZXg5hNUCgYHGmagyuSRmX1fiwl/Stw
+         Vzqo4gxbkcqbcTU/xtLUMnhQ6equ4WRxIjtlfw2sxvqK/5t1TIL5Z9/GH3n76+jDQCHW
+         gxNA==
+X-Forwarded-Encrypted: i=1; AJvYcCUU7YQpvs5aCEYot0SRTLU3OIvFNCEXTpIav7FRRwj8N2qk5rECZHFtE0FOfQ/DzmlQY/A92GmgbRE=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy7Ge/6ktn+YrlVYvMkyI/VJPbd0FP0OMCwfqHbXRII1poFZZcl
+	WEr3l7HWh5oJBR9p5aYkvDdT3HyXq728ZAjlkv7jrvsD/XHudX25rLyo1hHnJWxkxPg=
+X-Gm-Gg: ASbGncvkiv+ZZAr/rZM9jm6kPCa0vjIh/OCvngU9Ac+1HMSXp5u3G3civxyflEA++v9
+	4oHqxWJ/NCCDaXpzn5J9ym1/6VBGDwKac+qbpjbodxl0dua1/nC05N2ur9qmayqY1h+ww2lDGyy
+	KVcSPXut6gN5hQ8wKEEf+kJqPk1/AUSpP/MyGGUkd4Dg9R2gWqrSybv5hZwEoB1SRpfY1Lg6Qci
+	6FlCZccGGHbf9/K02MJLtMmP2UBn7N4p5VhAw4vB8wRhK1T+yp16MjmshCWx/nRDymzl/un2at4
+	NrUK0VDgKUHgQFxHx6d31E8Fqvv/cNOvlRFBF5TXORWS3TI30Sk0o4cQyvW9i7jqzQtqq1IS8/X
+	My4QrS9uTMKTFKy5EUqfCdtj72OVH9/Q55oh9BmZViddwkKzkTV2WvhBFlnDZPM2bO+kNIuzEYq
+	u5iYo=
+X-Google-Smtp-Source: AGHT+IF1+3bX6DUQCrRo5YyM2fp0OCvjM/jusyZc5iy/VSCxNo0II2PGkJ9MrYPb1oYSw7F9hqkESg==
+X-Received: by 2002:a05:620a:12c6:b0:7e6:8f41:2055 with SMTP id af79cd13be357-7e6962e0c1bmr1733279285a.21.1754408168128;
+        Tue, 05 Aug 2025 08:36:08 -0700 (PDT)
+Received: from ziepe.ca (hlfxns017vw-47-55-120-4.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.120.4])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-7e67f5cd63fsm689744985a.39.2025.08.05.08.36.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Aug 2025 08:36:07 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1ujJhu-00000001YWx-3rSt;
+	Tue, 05 Aug 2025 12:36:06 -0300
+Date: Tue, 5 Aug 2025 12:36:06 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Matthew Wilcox <willy@infradead.org>
+Cc: Robin Murphy <robin.murphy@arm.com>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Christoph Hellwig <hch@lst.de>, Leon Romanovsky <leon@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>,
+	Alexander Potapenko <glider@google.com>,
+	Marco Elver <elver@google.com>, Dmitry Vyukov <dvyukov@google.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	=?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org, iommu@lists.linux.dev,
+	virtualization@lists.linux.dev, kasan-dev@googlegroups.com,
+	linux-trace-kernel@vger.kernel.org, linux-mm@kvack.org
+Subject: Re: [PATCH 0/8] dma-mapping: migrate to physical address-based API
+Message-ID: <20250805153606.GR26511@ziepe.ca>
+References: <CGME20250625131920eucas1p271b196cde042bd39ac08fb12beff5baf@eucas1p2.samsung.com>
+ <cover.1750854543.git.leon@kernel.org>
+ <35df6f2a-0010-41fe-b490-f52693fe4778@samsung.com>
+ <20250627170213.GL17401@unreal>
+ <20250630133839.GA26981@lst.de>
+ <69b177dc-c149-40d3-bbde-3f6bad0efd0e@samsung.com>
+ <f912c446-1ae9-4390-9c11-00dce7bf0fd3@arm.com>
+ <aIupx_8vOg8wQh6w@casper.infradead.org>
+ <20250803155906.GM26511@ziepe.ca>
+ <aJArFNkuP8DJIdMY@casper.infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/6] mm/huge_memory: respect MADV_COLLAPSE with
- PR_THP_DISABLE_EXCEPT_ADVISED
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, david@redhat.com,
- linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, corbet@lwn.net,
- rppt@kernel.org, surenb@google.com, mhocko@suse.com, hannes@cmpxchg.org,
- baohua@kernel.org, shakeel.butt@linux.dev, riel@surriel.com, ziy@nvidia.com,
- laoar.shao@gmail.com, dev.jain@arm.com, baolin.wang@linux.alibaba.com,
- npache@redhat.com, Liam.Howlett@oracle.com, ryan.roberts@arm.com,
- vbabka@suse.cz, jannh@google.com, Arnd Bergmann <arnd@arndb.de>,
- sj@kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- kernel-team@meta.com
-References: <20250804154317.1648084-1-usamaarif642@gmail.com>
- <20250804154317.1648084-4-usamaarif642@gmail.com>
- <8bfed1e2-ec44-473b-b006-8cb2505220d4@lucifer.local>
-Content-Language: en-US
-From: Usama Arif <usamaarif642@gmail.com>
-In-Reply-To: <8bfed1e2-ec44-473b-b006-8cb2505220d4@lucifer.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aJArFNkuP8DJIdMY@casper.infradead.org>
 
-
->> diff --git a/include/uapi/linux/prctl.h b/include/uapi/linux/prctl.h
->> index 9c1d6e49b8a9..cdda963a039a 100644
->> --- a/include/uapi/linux/prctl.h
->> +++ b/include/uapi/linux/prctl.h
->> @@ -185,7 +185,7 @@ struct prctl_mm_map {
->>  #define PR_SET_THP_DISABLE	41
->>  /*
->>   * Don't disable THPs when explicitly advised (e.g., MADV_HUGEPAGE /
->> - * VM_HUGEPAGE).
->> + * VM_HUGEPAGE, MADV_COLLAPSE).
->>   */
->>  # define PR_THP_DISABLE_EXCEPT_ADVISED	(1 << 1)
->>  #define PR_GET_THP_DISABLE	42
->> diff --git a/mm/huge_memory.c b/mm/huge_memory.c
->> index 85252b468f80..ef5ccb0ec5d5 100644
->> --- a/mm/huge_memory.c
->> +++ b/mm/huge_memory.c
->> @@ -104,7 +104,8 @@ unsigned long __thp_vma_allowable_orders(struct vm_area_struct *vma,
->>  {
->>  	const bool smaps = type == TVA_SMAPS;
->>  	const bool in_pf = type == TVA_PAGEFAULT;
->> -	const bool enforce_sysfs = type != TVA_FORCED_COLLAPSE;
->> +	const bool forced_collapse = type == TVA_FORCED_COLLAPSE;
->> +	const bool enforce_sysfs = !forced_collapse;
+On Mon, Aug 04, 2025 at 04:37:56AM +0100, Matthew Wilcox wrote:
+> On Sun, Aug 03, 2025 at 12:59:06PM -0300, Jason Gunthorpe wrote:
+> > Matthew, do you think it makes sense to introduce types to make this
+> > clearer? We have two kinds of values that a phys_addr_t can store -
+> > something compatible with kmap_XX_phys(), and something that isn't.
 > 
-> I guess as discussed we'll return to this.
-> 
+> I was with you up until this point.  And then you said "What if we have
+> a raccoon that isn't a raccoon" and my brain derailed.
 
-Thanks for the review!
+I though it was clear..
 
-Yes I have a follow up patch ready, will send that when things stabalize and this series
-makes into mm-new.
+   kmap_local_pfn(phys >> PAGE_SHIFT)
+   phys_to_virt(phys)
+
+Does not work for all values of phys. It definately illegal for
+non-cachable MMIO. Agree?
+
+There is a subset of phys that is cachable and has struct page that is
+usable with kmap_local_pfn()/etc
+
+phys is always this:
+
+> - CPU untranslated.  This is the "physical" address.  Physical address
+>   0 is what the CPU sees when it drives zeroes on the memory bus.
+
+But that is a pure HW perspective. It doesn't say which of our SW APIs
+are allowed to use this address.
+
+We have callchains in DMA API land that want to do a kmap at the
+bottom. It would be nice to mark the whole call chain that the
+phys_addr being passed around is actually required to be kmappable.
+
+Because if you pass a non-kmappable MMIO backed phys it will explode
+in some way on some platforms.
+
+> > We clearly have these two different ideas floating around in code,
+> > page tables, etc.
+
+> No.  No, we don't.  I've never heard of this asininity before.
+
+Welcome to the fun world of cachable and non-cachable memory.
+
+Consider, today we can create struct pages of type
+MEMORY_DEVICE_PCI_P2PDMA for non-cachable MMIO. I think today you
+"can" use kmap to establish a cachable mapping in the vmap.
+
+But it is *illegal* to establish a cachable CPU mapping of MMIO. Archs
+are free to MCE if you do this - speculative cache line load of MMIO
+can just error in HW inside the interconnect.
+
+So, the phys_addr is always a "CPU untranslated physical address" but
+the cachable/non-cachable cases, or DRAM vs MMIO, are sometimes
+semantically very different things for the SW!
+
+Jason
 
