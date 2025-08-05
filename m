@@ -1,88 +1,88 @@
-Return-Path: <linux-doc+bounces-55132-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55135-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3E98B1B206
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 12:30:36 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id F2A39B1B21B
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 12:36:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5FC1B189CCB5
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 10:30:55 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 16BDD17A08C
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 10:36:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 03A672566;
-	Tue,  5 Aug 2025 10:30:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA29023BCF8;
+	Tue,  5 Aug 2025 10:36:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="f0QXJtJ1"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="W3EQ0HsV"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C6DE154BF5
-	for <linux-doc@vger.kernel.org>; Tue,  5 Aug 2025 10:30:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2A31207A0B
+	for <linux-doc@vger.kernel.org>; Tue,  5 Aug 2025 10:36:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754389831; cv=none; b=mVeSqs7ARn7UJpgdWBPoWuN4obiF2SYHhoMaSC8INmHHDBw6yaatcgNhMQ8nPSQj3bdaZi//9lqNXjv94KkmChZlkwslS2f5dE98hWuKNxVP+KIN/TSNTi3jcYgW2zXp1gkVhhcSiQkX8ANqzldkZ0540fZdzZkoMlvcpgjAim8=
+	t=1754390199; cv=none; b=B3flTc7LMz3WjzLfySOyF1CK+SZMlzRnYkm4F4wHcxK1T/P5MRmKUMJmXybbP+0ZyQWlC+t2XXG0UfVVkWOiK/D/+Ajr22ChOZoboya4frbRiAjN6REyHyOutnVfViIxk26IfVTkr4qnx0xA2yCPv8T/LFAM/RTmGi82XNgL+Cg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754389831; c=relaxed/simple;
-	bh=lYTsqHfgtClSaq4hDWkmMzi3zRvfGNpaaiR4LI3ZV4w=;
+	s=arc-20240116; t=1754390199; c=relaxed/simple;
+	bh=Cnxh6DN3ni8Y+KmkTa/tBdiSQ9JUY6wzfuiufw/04MU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UVv4SH/C53Bi/DUEYdGWFWakM/xQ6HTPP7V4UgHKpEpTD4dvWby5eNFx2/7SiXQy2aTuaCB0EimipPi0K7UVnc+6AwtIG3tch+5uw9X6kOfw2+Ggtrs8TigeYOn67QCy2tEhsveIN5So5PVwYc8cVNsOq5BI3xR6W8moepZtsQI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=f0QXJtJ1; arc=none smtp.client-ip=170.10.129.124
+	 In-Reply-To:Content-Type; b=NBEIyH62K82/43192Uytj6xZyLrq0t+XE35RunhmTVzWuFaRssaBniT8+TR8k7rvve3n2KpKfPqTu+MDcelw1R11BG8HjB2fE3yyk/1rIgJiEKLgBnY9aMLBRlAFQxfp7/xh9ZDuvAAFENnzcvm43S+fXFpc+6UT8qUW8i2k9a8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=W3EQ0HsV; arc=none smtp.client-ip=170.10.129.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1754389829;
+	s=mimecast20190719; t=1754390195;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=5QBRGAqc9wV2ClFxJdEhBBHYCynit2/ZYJDeC1A7nhI=;
-	b=f0QXJtJ1IRJ0iZFsI2d+6JInanogkBsidZod2z+losqONy3WjMr5b7DJGDx7F9fqzBQdVJ
-	ItBbed3gnuNEzj3Wfns9aZO21KlMy7nFpFCmHxY72TYJr3gdyqxfQ541u46cZPcP+S38xa
-	y6O2wW+BDyMsDmMhDrBjXb0pp8zHtlI=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=Wl4ZijE/HHMB43Fi7BAYKpOKxsawoOhIpbaL37luJFI=;
+	b=W3EQ0HsVdh5KXrjZgAEQowiq2XjJQjNHX62mSDlHRQUVCzOEyw8zFcRMwDqaWyL2P/XIkv
+	pU7WM8SYIgE/D95ixNUU5qWV660FxPYPfhIOHvr2cLwJFJHHKlJ/MvTNaoEpaLnALdrSuQ
+	hH8vPx98y2BBE83xA6whbfv/doD/l2Q=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-599-awCBA4l3M0iC8f5nXgGbQQ-1; Tue, 05 Aug 2025 06:30:28 -0400
-X-MC-Unique: awCBA4l3M0iC8f5nXgGbQQ-1
-X-Mimecast-MFC-AGG-ID: awCBA4l3M0iC8f5nXgGbQQ_1754389827
-Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-3a54a8a0122so2203596f8f.2
-        for <linux-doc@vger.kernel.org>; Tue, 05 Aug 2025 03:30:27 -0700 (PDT)
+ us-mta-31-xdDAMS_FOV2rOqL9FrkVuA-1; Tue, 05 Aug 2025 06:36:33 -0400
+X-MC-Unique: xdDAMS_FOV2rOqL9FrkVuA-1
+X-Mimecast-MFC-AGG-ID: xdDAMS_FOV2rOqL9FrkVuA_1754390193
+Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-3b7891afb31so2786984f8f.2
+        for <linux-doc@vger.kernel.org>; Tue, 05 Aug 2025 03:36:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754389827; x=1754994627;
+        d=1e100.net; s=20230601; t=1754390193; x=1754994993;
         h=content-transfer-encoding:in-reply-to:organization:autocrypt
          :content-language:from:references:cc:to:subject:user-agent
          :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=5QBRGAqc9wV2ClFxJdEhBBHYCynit2/ZYJDeC1A7nhI=;
-        b=h2wG72leSoqkVnH0Cl+gPJiN4G5tPewPIVKNuLGMw7wX83hIRQqAPFfJ7rn8Tnx3bX
-         0ymacyuMR1Ds4f/83Shjvbnyb0TXwCqryPxACQVJYsARUj6Zy3R3zzI4hLY6Igiv2XO0
-         Ews+qVjXeB3DRjp5T5Jk861Tb2JLL78Qv40gJp3YQ+M/KjiK/Mx+9ZDlFw490jjUQAGD
-         8W3pXtk8RNafvoPzOgM8prwLJdphEA2v6HE5YMpAm+iYuYdgULqK2UJKOYM/bQXqXl4z
-         lyYvzYHBIEceK4jVwHgXaqgY6u39iDCMcokpJbm6eF7gVInxX/Ub9YI7U+f+JZkutbEx
-         agVw==
-X-Forwarded-Encrypted: i=1; AJvYcCURHqBQQ/Tt/F8Jg8TZFRAgDTuIwbo4K6nrKYKnTu5l8iH6EETme0g9XLXMZ2CdBjlEd9bBydaR0Kw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy2CX9IIYGLrHVHhasobWyNwvGEOcFxQz/4+85rfkw03idVDXVw
-	fD9ADc9CP6c3yFIn3ab9zP49sfROSoyA8yiPY8zipSZ71O6i8E3CBD1e560nhHCRcHO87SbtdcT
-	+3A5e3NIwokv/BNFM4u6xNMP7aOuhfI2sKNj1Tn5HhpFi1VruHxqED/uWQlCCFA==
-X-Gm-Gg: ASbGncsmUoDewOnb3xfbh5iUfXPZBUN/LGRfoIY4sSaU+REry7jswiSbcQP1blWFx/Q
-	VG2+URdruBfScPnWIo365Dj9PfS9puPNEd7+o5f/O4fwgqzkQCdLMLyQMgQFZdtLYIAT0xorkfN
-	ZBkXgMIhHIecfKDcij1O6ikReDG2X5zcCXIDuMc8k83wW7ryvswWQlIw+dNR2DTSOJEcI+1kvnb
-	zP4mIdfS/yZphGHL52JzSsuJgQuccIUA0lWuuhIQMg6vpc6bJiJVz8D5bWc4mXinc4kIAhHk+uh
-	10mlu5ccKrdupT2l/Hfqb0xJEWcvpQ0VCVede0VCv8OeXmzk2Il3zi/IpgCoQMbQeJ+Y2PHdpC4
-	heUoGJwheMTeXRrIMEqIsIwu3sXd1ziLsdG41suQwRknqDUegM+xQ2NhdK/MSQmC3bUo=
-X-Received: by 2002:a5d:5849:0:b0:3b7:8481:e365 with SMTP id ffacd0b85a97d-3b8d946807cmr8921453f8f.10.1754389826739;
-        Tue, 05 Aug 2025 03:30:26 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE1mB+c6XVjZUqBR7O+G7xU80WhlBPcGKDy3bCyz+mMN14dRewdIyXB/kqLc4gAzRNnToKQLw==
-X-Received: by 2002:a5d:5849:0:b0:3b7:8481:e365 with SMTP id ffacd0b85a97d-3b8d946807cmr8921405f8f.10.1754389826173;
-        Tue, 05 Aug 2025 03:30:26 -0700 (PDT)
+        bh=Wl4ZijE/HHMB43Fi7BAYKpOKxsawoOhIpbaL37luJFI=;
+        b=Gz9ATlNIfpwHuAE2xYo1bl5DTPW11/gQskLQULQqKJkqUMSOO7Kf90jbwGwYFltgAR
+         4L4aTxN4GHKHjNkw7eHh0KBMnp/UIjt8fIV4C/CMfveKKAzCO+uinZkW86XZNK9H6eh3
+         BATUlfMstQeladqqKv3cBwzySxT1ffKOuAmslibncd4y7mV3IqWyQa/Zt4NJzUCWQGv8
+         XCccgRlhzsjiXx41PzebXf6B34yHGgL87++F+TGEGz2dME/YaPAHL/xgztXQlrhkvIA3
+         6hJHYitgWOxOrLpG5vTg8uC4DSBjbmvZiFBiYulLquUMrW5M7VxLsubzU+XBeL12bTgm
+         FWKw==
+X-Forwarded-Encrypted: i=1; AJvYcCUyrh2YDqzfkXt3ZrsgVbDB12RvdnYnPxZ6puhgRBP7hEk5uTIRsSBgDR5uKWf/U6ibsPuFC4G75no=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyz926/2WJIQW09GiEGoq+4yFaHFcc4AYz1Io6JldU7tARPysF7
+	J+ndOJiBDvYTerwEBbebEWTaW2Djnv3b2mWIsLj4stGyhKSnQBJSn7knJAt9GswPJkHLs8KkHh7
+	rjUMl0YIspPkmKK0exAG0exX1ZvYToO6N0nf0bY4Qy504aBoRPqB0Qy5kVNZE6A==
+X-Gm-Gg: ASbGncuCRgJLSRp+DninJmnwzbDG2C8YmEeRTFTKps2mxOAXRfQjPFu2a37DC9Oe+1Q
+	W0siJHy/PruVPPbfcgglzoG+fHiM2mReaxJ2/cofpP3rBLKy4tIsrJolXObEyI6J6gOtiunIZNm
+	5u5QbssYaxJE4chkawmzrTiVpXK4JIF/EjRzY1CW9cAqsdOi2EHTwTgd+ZwUl1C5T9RtZf10VYL
+	oKXKN0px0mNbe1EfOgTYV7C1D8HSQ7U3h0pcZI/+1hX6h97RsM/5ZdW9cFRmy/pcIAeKW1vyIFB
+	xLcah3b/qMzCro4CjjXBVJpa/18Ja2ctjdJkJwLgbaUeBEeUi1nMwB1kpMWBvsUE8nSiaQ9mN76
+	YM/F3DM5jGF69Nx5sp1kaooPVSHMuWrSyY82HZmpxQjQULs6JCb1sBKYowVgJLUnoknw=
+X-Received: by 2002:a05:6000:4305:b0:3b7:89a2:bb8c with SMTP id ffacd0b85a97d-3b8d9474e63mr8616393f8f.16.1754390192604;
+        Tue, 05 Aug 2025 03:36:32 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGAOnGMnGXyh1ND7MnUFCBNlWbq0W6kMApMwVAYJuatGTqk1QunVq1YA2SrRT1HUU1vGbKqVw==
+X-Received: by 2002:a05:6000:4305:b0:3b7:89a2:bb8c with SMTP id ffacd0b85a97d-3b8d9474e63mr8616359f8f.16.1754390192127;
+        Tue, 05 Aug 2025 03:36:32 -0700 (PDT)
 Received: from ?IPV6:2003:d8:2f2b:b200:607d:d3d2:3271:1be0? (p200300d82f2bb200607dd3d232711be0.dip0.t-ipconnect.de. [2003:d8:2f2b:b200:607d:d3d2:3271:1be0])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-459d712c386sm81117925e9.23.2025.08.05.03.30.23
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b79c3ad803sm18564762f8f.6.2025.08.05.03.36.30
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 05 Aug 2025 03:30:25 -0700 (PDT)
-Message-ID: <eec7e868-a61f-41ed-a8ef-7ff80548089f@redhat.com>
-Date: Tue, 5 Aug 2025 12:30:23 +0200
+        Tue, 05 Aug 2025 03:36:31 -0700 (PDT)
+Message-ID: <9bcb1dee-314e-4366-9bad-88a47d516c79@redhat.com>
+Date: Tue, 5 Aug 2025 12:36:29 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,8 +90,8 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/6] selftests: prctl: introduce tests for disabling
- THPs completely
+Subject: Re: [PATCH v3 6/6] selftests: prctl: introduce tests for disabling
+ THPs except for madvise
 To: Usama Arif <usamaarif642@gmail.com>,
  Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org
 Cc: linux-fsdevel@vger.kernel.org, corbet@lwn.net, rppt@kernel.org,
@@ -101,10 +101,9 @@ Cc: linux-fsdevel@vger.kernel.org, corbet@lwn.net, rppt@kernel.org,
  npache@redhat.com, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com,
  ryan.roberts@arm.com, vbabka@suse.cz, jannh@google.com,
  Arnd Bergmann <arnd@arndb.de>, sj@kernel.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, kernel-team@meta.com,
- Donet Tom <donettom@linux.ibm.com>
+ linux-doc@vger.kernel.org, kernel-team@meta.com
 References: <20250804154317.1648084-1-usamaarif642@gmail.com>
- <20250804154317.1648084-6-usamaarif642@gmail.com>
+ <20250804154317.1648084-7-usamaarif642@gmail.com>
 From: David Hildenbrand <david@redhat.com>
 Content-Language: en-US
 Autocrypt: addr=david@redhat.com; keydata=
@@ -152,103 +151,70 @@ Autocrypt: addr=david@redhat.com; keydata=
  WBe5lqcozu9LpNDH/brVSzHCSb7vjNGvvSVESDuoiHK8gNlf0v+epy5WYd7CGAgODPvDShGN
  g3eXuA==
 Organization: Red Hat
-In-Reply-To: <20250804154317.1648084-6-usamaarif642@gmail.com>
+In-Reply-To: <20250804154317.1648084-7-usamaarif642@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 04.08.25 17:40, Usama Arif wrote:
 > The test will set the global system THP setting to never, madvise
 > or always depending on the fixture variant and the 2M setting to
-> inherit before it starts (and reset to original at teardown).
+> inherit before it starts (and reset to original at teardown)
 > 
 > This tests if the process can:
-> - successfully set and get the policy to disable THPs completely.
-> - never get a hugepage when the THPs are completely disabled
->    with the prctl, including with MADV_HUGE and MADV_COLLAPSE.
+> - successfully set and get the policy to disable THPs expect for madvise.
+> - get hugepages only on MADV_HUGE and MADV_COLLAPSE if the global policy
+>    is madvise/always and only with MADV_COLLAPSE if the global policy is
+>    never.
 > - successfully reset the policy of the process.
 > - after reset, only get hugepages with:
 >    - MADV_COLLAPSE when policy is set to never.
 >    - MADV_HUGE and MADV_COLLAPSE when policy is set to madvise.
 >    - always when policy is set to "always".
-> - repeat the above tests in a forked process to make sure
->    the policy is carried across forks.
+> - repeat the above tests in a forked process to make sure  the policy is
+>    carried across forks.
 > 
 > Signed-off-by: Usama Arif <usamaarif642@gmail.com>
 > ---
->   tools/testing/selftests/mm/.gitignore         |   1 +
->   tools/testing/selftests/mm/Makefile           |   1 +
->   .../testing/selftests/mm/prctl_thp_disable.c  | 173 ++++++++++++++++++
->   tools/testing/selftests/mm/thp_settings.c     |   9 +-
->   tools/testing/selftests/mm/thp_settings.h     |   1 +
->   5 files changed, 184 insertions(+), 1 deletion(-)
->   create mode 100644 tools/testing/selftests/mm/prctl_thp_disable.c
-> 
-> diff --git a/tools/testing/selftests/mm/.gitignore b/tools/testing/selftests/mm/.gitignore
-> index e7b23a8a05fe..eb023ea857b3 100644
-> --- a/tools/testing/selftests/mm/.gitignore
-> +++ b/tools/testing/selftests/mm/.gitignore
-> @@ -58,3 +58,4 @@ pkey_sighandler_tests_32
->   pkey_sighandler_tests_64
->   guard-regions
->   merge
-> +prctl_thp_disable
-> diff --git a/tools/testing/selftests/mm/Makefile b/tools/testing/selftests/mm/Makefile
-> index d13b3cef2a2b..2bb8d3ebc17c 100644
-> --- a/tools/testing/selftests/mm/Makefile
-> +++ b/tools/testing/selftests/mm/Makefile
-> @@ -86,6 +86,7 @@ TEST_GEN_FILES += on-fault-limit
->   TEST_GEN_FILES += pagemap_ioctl
->   TEST_GEN_FILES += pfnmap
->   TEST_GEN_FILES += process_madv
-> +TEST_GEN_FILES += prctl_thp_disable
->   TEST_GEN_FILES += thuge-gen
->   TEST_GEN_FILES += transhuge-stress
->   TEST_GEN_FILES += uffd-stress
-> diff --git a/tools/testing/selftests/mm/prctl_thp_disable.c b/tools/testing/selftests/mm/prctl_thp_disable.c
-> new file mode 100644
-> index 000000000000..ef150180daf4
-> --- /dev/null
-> +++ b/tools/testing/selftests/mm/prctl_thp_disable.c
-> @@ -0,0 +1,173 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Basic tests for PR_GET/SET_THP_DISABLE prctl calls
-> + *
-> + * Author(s): Usama Arif <usamaarif642@gmail.com>
-> + */
-> +#include <stdio.h>
-> +#include <stdlib.h>
-> +#include <string.h>
-> +#include <unistd.h>
-> +#include <sys/mman.h>
-> +#include <sys/prctl.h>
-> +#include <sys/wait.h>
-> +
-> +#include "../kselftest_harness.h"
-> +#include "thp_settings.h"
-> +#include "vm_util.h"
-> +
-> +static int sz2ord(size_t size, size_t pagesize)
+
+[...]
+
+> +FIXTURE_VARIANT(prctl_thp_disable_except_madvise)
 > +{
-> +	return __builtin_ctzll(size / pagesize);
-> +}
+> +	enum thp_enabled thp_policy;
+> +};
+> +
+> +FIXTURE_VARIANT_ADD(prctl_thp_disable_except_madvise, never)
+> +{
+> +	.thp_policy = THP_NEVER,
+> +};
+> +
+> +FIXTURE_VARIANT_ADD(prctl_thp_disable_except_madvise, madvise)
+> +{
+> +	.thp_policy = THP_MADVISE,
+> +};
+> +
+> +FIXTURE_VARIANT_ADD(prctl_thp_disable_except_madvise, always)
+> +{
+> +	.thp_policy = THP_ALWAYS,
+> +};
+> +
+> +FIXTURE_SETUP(prctl_thp_disable_except_madvise)
+> +{
+> +	if (!thp_available())
+> +		SKIP(return, "Transparent Hugepages not available\n");
+> +
+> +	self->pmdsize = read_pmd_pagesize();
+> +	if (!self->pmdsize)
+> +		SKIP(return, "Unable to read PMD size\n");
 
-Note: We have this helper duplicated elsewhere (e.g., cow.c).
+Should we test here if the kernel knows PR_THP_DISABLE_EXCEPT_ADVISED, 
+and if not, skip?
 
-See [1] how we're going to clean it up.
+Might be as simple as trying issuing two prctl, and making sure the 
+first disabling attempt doesn't fail. If so, SKIP.
 
-Not sure how to resolve this. Probably, which series lands first in 
-mm-unstable should clean it up.
-
-I would assume that Donet's series would go in first, such that you can 
-just reuse the helper from vm_utils.h
-
-[1] https://lkml.kernel.org/r/20250804090410.of5xwrlker665bdp@master
-
-
-Nothing else jumped at me
-
-Acked-by: David Hildenbrand <david@redhat.com>
+Nothing else jumped at me. Can you include a test run result in the 
+patch description?
 
 -- 
 Cheers,
