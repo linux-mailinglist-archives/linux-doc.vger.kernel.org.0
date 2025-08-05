@@ -1,811 +1,239 @@
-Return-Path: <linux-doc+bounces-55116-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55121-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF655B1ACBF
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 05:30:32 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B1B1B1ADBD
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 07:54:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1552D189D731
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 03:30:51 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2201B3BF67B
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Aug 2025 05:54:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E716B1E1E16;
-	Tue,  5 Aug 2025 03:30:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0728E217F36;
+	Tue,  5 Aug 2025 05:54:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="l/mUcFmC"
+	dkim=pass (2048-bit key) header.d=cyphar.com header.i=@cyphar.com header.b="bBjDfKYW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f202.google.com (mail-pl1-f202.google.com [209.85.214.202])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBF5E1F5858
-	for <linux-doc@vger.kernel.org>; Tue,  5 Aug 2025 03:30:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8AE3175A5;
+	Tue,  5 Aug 2025 05:54:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.241.56.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754364608; cv=none; b=d3ISlgfHjJVBL5ZszGZW1SpDiBU4r2L4eS15DC9xcU/ny95VRNg8AK814F8NFUPLwkLkdWB4DPhJG9gr/Ruc8vJOx7V+MZh5YbmIhqoVnktyz7pt9uUL4F11IVmCcvzE6zs4V6IOOCIp+SzAOZqFT4eGUvQr8xNeLDHBzpBwtsE=
+	t=1754373243; cv=none; b=ZBp17RtvMN/SPj4VqTRlHUJrzCBkQVSGk+8KHj1xzTk2Tuo12vypppyeB2IxUORm2oXeYchWy1Ygr1yh8KCyalqU1NKWrKsyl0daUedYDx4vxJsDPVGC1fz0UOEqrHLbZF77zKIH4YCW8goPzpTwbGy1pD0bl6z7GSmBmcEd4mQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754364608; c=relaxed/simple;
-	bh=ysWe7TnoOFnH8lxx33hmcXOlweoL+Bbh0q78mUcHxng=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=E35JMd6vDemmHwh9+dMNWKUhkDGaN0MVhkGzr7A+jcffrV46eJhTG9gBQZngranCJP2yd9Mr6ozrX4um+Upf9zFeYh8keMgtxIwq08CBiSSFGzoZdwuhGn3wgkrLmcMQbNZP2suKU4r4L63frbKEAS8BTFJuk1R2HiwkhVhfH0M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--ynaffit.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=l/mUcFmC; arc=none smtp.client-ip=209.85.214.202
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--ynaffit.bounces.google.com
-Received: by mail-pl1-f202.google.com with SMTP id d9443c01a7336-240012b74dfso32301585ad.2
-        for <linux-doc@vger.kernel.org>; Mon, 04 Aug 2025 20:30:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1754364606; x=1754969406; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=DExi0VtMWJacoQVv1mFzUvUcPh2EilKcKwfkrYmyue0=;
-        b=l/mUcFmCWoKXD2OoJfa+sO4CdV2TjeJm5QBWSLlzOoCeeHECMJUPdP4MZRpyvIRvJ0
-         3Vhp3GccZ4u6FuxtbF18nJtyBDr+qMvFTPpumtoM7MI+KOaSQDhEkijFnMugzp11oKxF
-         2wmt6cFjNpeKsCRYERtMWLL9isijT6n3F0JPFL/vk4L9GzdQJTq3ddeP0ytqJl2AVJrd
-         6xVKVjAmOxRsKjBLrC2zS/WKiLeAbKE5PRX1VhRblIdqDkguTDdT9g9VBm5sp+zqprPo
-         Pb1Nhm0pdXKcEwHTq8mg5DKk/hT267rhV2FD7gqGBxN0QbokDwNYblgUytilrbMSnXs6
-         yTSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754364606; x=1754969406;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=DExi0VtMWJacoQVv1mFzUvUcPh2EilKcKwfkrYmyue0=;
-        b=tzTA06UHjzp5Pb54eyV9BHOe8cMeraykAwKQJwp+OmLzoJCpAQPthhXFd6Wf+/vXyM
-         Z03bZ/zKGCRu6DCyTYmzmae7uyu6l4cWPQs1c+QskjCEFEn97ebHcWlL1qSLY4Pnb/qC
-         /wpRmXRVxyyOYHZ9ESBUA5onjoErBflNKNdwGvb82MRFkju/Yy07y10jsT0FL+HasMnF
-         a8yOn1fAMmI6gdk//d9OrZJNuhBpCAd8bIL73gBZ8VN25SeytExI8za+03kuHzSx8j5C
-         idLv9DHcJGbRq2fzvaxjPxJRSCah5lj9EWFU6DYsUAeLsk9Vd6FHRpL23E7BC2OwWxfV
-         zrnQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW9IpYva6ZHRT6QQgjVacI1/HhxnhQv1paX3h0M36GmhZN/2ci0f1rqkjq8YIBIWGkhx1u87TgOMCI=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw3EUJT2SEvSxwHSxTo8yy7o1HQP4zhjBlpDoEUHy5FfCaYSlR4
-	/nJ9ZzhevQ/+nYAy0iWmkTPFRj2vqyBB16cyv2IFJJWy+eJcWeBYc5OrMFOHSx0tegIr0h0JlwI
-	XjRrDy7TuOg==
-X-Google-Smtp-Source: AGHT+IGdakJcbBe+tQwW4UnsZqdEi1ZIwNj4IVWQVkGFg5s//P7OXZj0OmQJJmxF8FOEGdw9b2hDUM2m0rii
-X-Received: from plq11.prod.google.com ([2002:a17:903:2f8b:b0:23f:d929:167b])
- (user=ynaffit job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:ea06:b0:240:887c:7b95
- with SMTP id d9443c01a7336-24246f30415mr182640075ad.5.1754364606134; Mon, 04
- Aug 2025 20:30:06 -0700 (PDT)
-Date: Mon,  4 Aug 2025 20:29:42 -0700
-In-Reply-To: <20250805032940.3587891-4-ynaffit@google.com>
+	s=arc-20240116; t=1754373243; c=relaxed/simple;
+	bh=b3qLvidQt2IQmyqEcAsLJbmTR+wVyp6SbcerHb1qMcs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=hy2vXOhRTo/c4zigZyhpweHyn1q2wDksmrE76+qAsU1UMAWCu1ch6Jw47tSkM1FynqTTNe4u0jny3VAb64+hmCfT9w5DYfkU9IASUpF2EodOtzmjQoshbe+CBtVoiUOhcKW84AOeykvGmk3oDQtdKL9zn9TwJ/P1zIq1lUtpNPU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=cyphar.com; spf=pass smtp.mailfrom=cyphar.com; dkim=pass (2048-bit key) header.d=cyphar.com header.i=@cyphar.com header.b=bBjDfKYW; arc=none smtp.client-ip=80.241.56.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=cyphar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cyphar.com
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [IPv6:2001:67c:2050:b231:465::2])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4bx2T60Psrz9t8l;
+	Tue,  5 Aug 2025 07:45:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cyphar.com; s=MBO0001;
+	t=1754372730;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=bPF4WdQCtv984o72KwXLxMISxhU/aJPqgLwzYtsm72M=;
+	b=bBjDfKYWT21NFwvhbyK5aFKtO6yFlm8WKPH9dWAj5oD5m1o+cPDeaf3RswmG9jD83irGDi
+	OpSvCvXeZuBix3/tg2FMC3AL8+gyQwrHiZibGBamiSy0+gusfknYSXjoUG11XufHr79v3u
+	MlViEwFLGuQ3lGIcljKeXIn8m4w6+Fsj6atzQWPSheC0cBLTAigLG/UyXtsbl9AnMLXxvE
+	Xh3lR5sdmm9nFCjCaZpezk3FnoxlEBuDmYJ/6vqSp4OH4Sn5xcuTJsiKuPM5+mqs78ViPV
+	o17N3NWGq4KpbOeOgNto/Uksx9Cu4EwpetVbqhnax656nKXT5VIaTRzEDWBH9Q==
+Authentication-Results: outgoing_mbo_mout;
+	dkim=none;
+	spf=pass (outgoing_mbo_mout: domain of cyphar@cyphar.com designates 2001:67c:2050:b231:465::2 as permitted sender) smtp.mailfrom=cyphar@cyphar.com
+From: Aleksa Sarai <cyphar@cyphar.com>
+Subject: [PATCH v4 0/4] procfs: make reference pidns more user-visible
+Date: Tue, 05 Aug 2025 15:45:07 +1000
+Message-Id: <20250805-procfs-pidns-api-v4-0-705f984940e7@cyphar.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20250805032940.3587891-4-ynaffit@google.com>
-X-Mailer: git-send-email 2.50.1.565.gc32cd1483b-goog
-Message-ID: <20250805032940.3587891-6-ynaffit@google.com>
-Subject: [RFC PATCH v3 2/2] cgroup: selftests: Add tests for freezer time
-From: Tiffany Yang <ynaffit@google.com>
-To: linux-kernel@vger.kernel.org
-Cc: John Stultz <jstultz@google.com>, Thomas Gleixner <tglx@linutronix.de>, 
-	Stephen Boyd <sboyd@kernel.org>, Anna-Maria Behnsen <anna-maria@linutronix.de>, 
-	Frederic Weisbecker <frederic@kernel.org>, Tejun Heo <tj@kernel.org>, 
-	Johannes Weiner <hannes@cmpxchg.org>, "=?UTF-8?q?Michal=20Koutn=C3=BD?=" <mkoutny@suse.com>, 
-	"Rafael J. Wysocki" <rafael@kernel.org>, Pavel Machek <pavel@kernel.org>, 
-	Roman Gushchin <roman.gushchin@linux.dev>, Chen Ridong <chenridong@huawei.com>, 
-	kernel-team@android.com, Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, 
-	cgroups@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGOakWgC/23NTQ6CMBCG4auYrq3p9IcWV97DuCDtIF0ITWsaC
+ eHuFuICA8v3S+aZiSSMHhO5niYSMfvkh76EPJ+I7Zr+idS70oQzrpgGTUMcbJto8K5PtAmeGnS
+ gjJACWkbKWYjY+s9K3h+lO5/eQxzXDxmW9Ydx2GMZKKPKupoxjQq4u9kxdE282OFFFi3zrSAOB
+ F6EigNqdM6gZDtBbAV5IIgiSFsZZWtgNRd/wjzPX4EKj1I1AQAA
+To: Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>
+Cc: Andy Lutomirski <luto@amacapital.net>, linux-kernel@vger.kernel.org, 
+ linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org, 
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+ Aleksa Sarai <cyphar@cyphar.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7460; i=cyphar@cyphar.com;
+ h=from:subject:message-id; bh=b3qLvidQt2IQmyqEcAsLJbmTR+wVyp6SbcerHb1qMcs=;
+ b=owGbwMvMwCWmMf3Xpe0vXfIZT6slMWRMnJV35/6lhU2bWe6c99t5d/cht20Cy821S3StD09t/
+ V617E/f4Y5SFgYxLgZZMUWWbX6eoZvmL76S/GklG8wcViaQIQxcnAIwEekljAwv5yivvVnkLrSR
+ vfXk4+Wpn166LLTnnrJ5VZB6vEPwv6z7jAzbNp5fo5x/vczhas+Cjh1/LR3a7bbue9Pf/bPhdPe
+ dCiEGAA==
+X-Developer-Key: i=cyphar@cyphar.com; a=openpgp;
+ fpr=C9C370B246B09F6DBCFC744C34401015D1D2D386
+X-Rspamd-Queue-Id: 4bx2T60Psrz9t8l
 
-Test cgroup v2 freezer time stat. Freezer time accounting should
-be independent of other cgroups in the hierarchy and should increase
-iff a cgroup is CGRP_FREEZE (regardless of whether it reaches
-CGRP_FROZEN).
+Ever since the introduction of pid namespaces, procfs has had very
+implicit behaviour surrounding them (the pidns used by a procfs mount is
+auto-selected based on the mounting process's active pidns, and the
+pidns itself is basically hidden once the mount has been constructed).
 
-Skip these tests on systems without freeze time accounting.
+/* pidns mount option for procfs */
 
-Signed-off-by: Tiffany Yang <ynaffit@google.com>
+This implicit behaviour has historically meant that userspace was
+required to do some special dances in order to configure the pidns of a
+procfs mount as desired. Examples include:
+
+ * In order to bypass the mnt_too_revealing() check, Kubernetes creates
+   a procfs mount from an empty pidns so that user namespaced containers
+   can be nested (without this, the nested containers would fail to
+   mount procfs). But this requires forking off a helper process because
+   you cannot just one-shot this using mount(2).
+
+ * Container runtimes in general need to fork into a container before
+   configuring its mounts, which can lead to security issues in the case
+   of shared-pidns containers (a privileged process in the pidns can
+   interact with your container runtime process). While
+   SUID_DUMP_DISABLE and user namespaces make this less of an issue, the
+   strict need for this due to a minor uAPI wart is kind of unfortunate.
+
+Things would be much easier if there was a way for userspace to just
+specify the pidns they want. Patch 1 implements a new "pidns" argument
+which can be set using fsconfig(2):
+
+    fsconfig(procfd, FSCONFIG_SET_FD, "pidns", NULL, nsfd);
+    fsconfig(procfd, FSCONFIG_SET_STRING, "pidns", "/proc/self/ns/pid", 0);
+
+or classic mount(2) / mount(8):
+
+    // mount -t proc -o pidns=/proc/self/ns/pid proc /tmp/proc
+    mount("proc", "/tmp/proc", "proc", MS_..., "pidns=/proc/self/ns/pid");
+
+The initial security model I have in this RFC is to be as conservative
+as possible and just mirror the security model for setns(2) -- which
+means that you can only set pidns=... to pid namespaces that your
+current pid namespace is a direct ancestor of and you have CAP_SYS_ADMIN
+privileges over the pid namespace. This fulfils the requirements of
+container runtimes, but I suspect that this may be too strict for some
+usecases.
+
+The pidns argument is not displayed in mountinfo -- it's not clear to me
+what value it would make sense to show (maybe we could just use ns_dname
+to provide an identifier for the namespace, but this number would be
+fairly useless to userspace). I'm open to suggestions. Note that
+PROCFS_GET_PID_NAMESPACE (see below) does at least let userspace get
+information about this outside of mountinfo.
+
+Note that you cannot change the pidns of an already-created procfs
+instance. The primary reason is that allowing this to be changed would
+require RCU-protecting proc_pid_ns(sb) and thus auditing all of
+fs/proc/* and some of the users in fs/* to make sure they wouldn't UAF
+the pid namespace. Since creating procfs instances is very cheap, it
+seems unnecessary to overcomplicate this upfront. Trying to reconfigure
+procfs this way errors out with -EBUSY.
+
+/* ioctl(PROCFS_GET_PID_NAMESPACE) */
+
+In addition, being able to figure out what pid namespace is being used
+by a procfs mount is quite useful when you have an administrative
+process (such as a container runtime) which wants to figure out the
+correct way of mapping PIDs between its own namespace and the namespace
+for procfs (using NS_GET_{PID,TGID}_{IN,FROM}_PIDNS). There are
+alternative ways to do this, but they all rely on ancillary information
+that third-party libraries and tools do not necessarily have access to.
+
+To make this easier, add a new ioctl (PROCFS_GET_PID_NAMESPACE) which
+can be used to get a reference to the pidns that a procfs is using.
+
+Rather than copying the (fairly strict) security model for setns(2),
+apply a slightly looser model to better match what userspace can already
+do:
+
+ * Make the ioctl only valid on the root (meaning that a process without
+   access to the procfs root -- such as only having an fd to a procfs
+   file or some open_tree(2)-like subset -- cannot use this API). This
+   means that the process already has some level of access to the
+   /proc/$pid directories.
+
+ * If the calling process is in an ancestor pidns, then they can already
+   create pidfd for processes inside the pidns, which is morally
+   equivalent to a pidns file descriptor according to setns(2). So it
+   seems reasonable to just allow it in this case. (The justification
+   for this model was suggested by Christian.)
+
+ * If the process has access to /proc/1/ns/pid already (i.e. has
+   ptrace-read access to the pidns pid1), then this ioctl is equivalent
+   to just opening a handle to it that way.
+
+   Ideally we would check for ptrace-read access against all processes
+   in the pidns (which is very likely to be true for at least one
+   process, as SUID_DUMP_DISABLE is cleared on exec(2) and is rarely set
+   by most programs), but this would obviously not scale.
+
+I'm open to suggestions for whether we need to make this stricter (or
+possibly allow more cases).
+
+Signed-off-by: Aleksa Sarai <cyphar@cyphar.com>
 ---
- tools/testing/selftests/cgroup/test_freezer.c | 686 ++++++++++++++++++
- 1 file changed, 686 insertions(+)
+Changes in v4:
+- Remove unneeded EXPORT_SYMBOL_GPL. [Christian Brauner]
+- Return -EOPNOTSUPP for new APIs for CONFIG_PID_NS=n rather than
+  pretending they don't exist entirely. [Christian Brauner]
+- PROCFS_IOCTL_MAGIC conflicts with XSDFEC_MAGIC, so we need to allocate
+  subvalues more carefully (switch to _IO(PROCFS_IOCTL_MAGIC, 32)).
+- Add some more selftests for PROCFS_GET_PID_NAMESPACE.
+- Reword argument for PROCFS_GET_PID_NAMESPACE security model based on
+  Christian's suggestion, and remove CAP_SYS_ADMIN edge-case (in most
+  cases, such a process would also have ptrace-read credentials over the
+  pidns pid1).
+- v3: <https://lore.kernel.org/r/20250724-procfs-pidns-api-v3-0-4c685c910923@cyphar.com>
 
-diff --git a/tools/testing/selftests/cgroup/test_freezer.c b/tools/testing/selftests/cgroup/test_freezer.c
-index 8730645d363a..c0880ecfa814 100644
---- a/tools/testing/selftests/cgroup/test_freezer.c
-+++ b/tools/testing/selftests/cgroup/test_freezer.c
-@@ -804,6 +804,685 @@ static int test_cgfreezer_vfork(const char *root)
- 	return ret;
- }
- 
-+/*
-+ * Get the current freeze_time_total for the cgroup.
-+ */
-+static long cg_check_freezetime(const char *cgroup)
-+{
-+	return cg_read_key_long(cgroup, "cgroup.freeze.stat.local",
-+				"freeze_time_total ");
-+}
-+
-+/*
-+ * Test that the freeze time will behave as expected for an empty cgroup.
-+ */
-+static int test_cgfreezer_time_empty(const char *root)
-+{
-+	int ret = KSFT_FAIL;
-+	char *cgroup = NULL;
-+	long prev, curr;
-+	int i;
-+
-+	cgroup = cg_name(root, "cg_time_test_empty");
-+	if (!cgroup)
-+		goto cleanup;
-+
-+	/*
-+	 * 1) Create an empty cgroup and check that its freeze time
-+	 *    is 0.
-+	 */
-+	if (cg_create(cgroup))
-+		goto cleanup;
-+
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr) {
-+		if (curr < 0)
-+			ret = KSFT_SKIP;
-+		else
-+			debug("Expect time (%ld) to be 0\n", curr);
-+
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 2) Freeze the cgroup. Check that its freeze time is
-+	 *    larger than 0.
-+	 */
-+	if (cg_freeze_nowait(cgroup, true))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) > 0\n", curr);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 3) Sleep for 100 us. Check that the freeze time is at
-+	 *    least 100 us larger than it was at 2).
-+	 */
-+	usleep(100);
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if ((curr - prev) < 100) {
-+		debug("Expect time (%ld) to be at least 100 us more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 4) Unfreeze the cgroup. Check that the freeze time is
-+	 *    larger than at 3).
-+	 */
-+	if (cg_freeze_nowait(cgroup, false))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 5) Check the freeze time again to ensure that it has not
-+	 *    changed.
-+	 */
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr != prev) {
-+		debug("Expect time (%ld) to be unchanged from previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	ret = KSFT_PASS;
-+
-+cleanup:
-+	if (cgroup)
-+		cg_destroy(cgroup);
-+	free(cgroup);
-+	return ret;
-+}
-+
-+/*
-+ * A simple test for cgroup freezer time accounting. This test follows
-+ * the same flow as test_cgfreezer_time_empty, but with a single process
-+ * in the cgroup.
-+ */
-+static int test_cgfreezer_time_simple(const char *root)
-+{
-+	int ret = KSFT_FAIL;
-+	char *cgroup = NULL;
-+	long prev, curr;
-+	int i;
-+
-+	cgroup = cg_name(root, "cg_time_test_simple");
-+	if (!cgroup)
-+		goto cleanup;
-+
-+	/*
-+	 * 1) Create a cgroup and check that its freeze time is 0.
-+	 */
-+	if (cg_create(cgroup))
-+		goto cleanup;
-+
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr) {
-+		if (curr < 0)
-+			ret = KSFT_SKIP;
-+		else
-+			debug("Expect time (%ld) to be 0\n", curr);
-+
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 2) Populate the cgroup with one child and check that the
-+	 *    freeze time is still 0.
-+	 */
-+	cg_run_nowait(cgroup, child_fn, NULL);
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr > prev) {
-+		debug("Expect time (%ld) to be 0\n", curr);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 3) Freeze the cgroup. Check that its freeze time is
-+	 *    larger than 0.
-+	 */
-+	if (cg_freeze_nowait(cgroup, true))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) > 0\n", curr);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 4) Sleep for 100 us. Check that the freeze time is at
-+	 *    least 100 us larger than it was at 3).
-+	 */
-+	usleep(100);
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if ((curr - prev) < 100) {
-+		debug("Expect time (%ld) to be at least 100 us more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 5) Unfreeze the cgroup. Check that the freeze time is
-+	 *    larger than at 4).
-+	 */
-+	if (cg_freeze_nowait(cgroup, false))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 6) Sleep for 100 us. Check that the freeze time is the
-+	 *    same as at 5).
-+	 */
-+	usleep(100);
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr != prev) {
-+		debug("Expect time (%ld) to be unchanged from previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	ret = KSFT_PASS;
-+
-+cleanup:
-+	if (cgroup)
-+		cg_destroy(cgroup);
-+	free(cgroup);
-+	return ret;
-+}
-+
-+/*
-+ * Test that freezer time accounting works as expected, even while we're
-+ * populating a cgroup with processes.
-+ */
-+static int test_cgfreezer_time_populate(const char *root)
-+{
-+	int ret = KSFT_FAIL;
-+	char *cgroup = NULL;
-+	long prev, curr;
-+	int i;
-+
-+	cgroup = cg_name(root, "cg_time_test_populate");
-+	if (!cgroup)
-+		goto cleanup;
-+
-+	if (cg_create(cgroup))
-+		goto cleanup;
-+
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr) {
-+		if (curr < 0)
-+			ret = KSFT_SKIP;
-+		else
-+			debug("Expect time (%ld) to be 0\n", curr);
-+
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 1) Populate the cgroup with 100 processes. Check that
-+	 *    the freeze time is 0.
-+	 */
-+	for (i = 0; i < 100; i++)
-+		cg_run_nowait(cgroup, child_fn, NULL);
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr != prev) {
-+		debug("Expect time (%ld) to be 0\n", curr);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 2) Wait for the group to become fully populated. Check
-+	 *    that the freeze time is 0.
-+	 */
-+	if (cg_wait_for_proc_count(cgroup, 100))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr != prev) {
-+		debug("Expect time (%ld) to be 0\n", curr);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 3) Freeze the cgroup and then populate it with 100 more
-+	 *    processes. Check that the freeze time continues to grow.
-+	 */
-+	if (cg_freeze_nowait(cgroup, true))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	for (i = 0; i < 100; i++)
-+		cg_run_nowait(cgroup, child_fn, NULL);
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 4) Wait for the group to become fully populated. Check
-+	 *    that the freeze time is larger than at 3).
-+	 */
-+	if (cg_wait_for_proc_count(cgroup, 200))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 5) Unfreeze the cgroup. Check that the freeze time is
-+	 *    larger than at 4).
-+	 */
-+	if (cg_freeze_nowait(cgroup, false))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 6) Kill the processes. Check that the freeze time is the
-+	 *    same as it was at 5).
-+	 */
-+	if (cg_killall(cgroup))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr != prev) {
-+		debug("Expect time (%ld) to be unchanged from previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * 7) Freeze and unfreeze the cgroup. Check that the freeze
-+	 *    time is larger than it was at 6).
-+	 */
-+	if (cg_freeze_nowait(cgroup, true))
-+		goto cleanup;
-+	if (cg_freeze_nowait(cgroup, false))
-+		goto cleanup;
-+	prev = curr;
-+	curr = cg_check_freezetime(cgroup);
-+	if (curr <= prev) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr, prev);
-+		goto cleanup;
-+	}
-+
-+	ret = KSFT_PASS;
-+
-+cleanup:
-+	if (cgroup)
-+		cg_destroy(cgroup);
-+	free(cgroup);
-+	return ret;
-+}
-+
-+/*
-+ * Test that frozen time for a cgroup continues to work as expected,
-+ * even as processes are migrated. Frozen cgroup A's freeze time should
-+ * continue to increase and running cgroup B's should stay 0.
-+ */
-+static int test_cgfreezer_time_migrate(const char *root)
-+{
-+	long prev_A, curr_A, curr_B;
-+	char *cgroup[2] = {0};
-+	int ret = KSFT_FAIL;
-+	int pid, i;
-+
-+	cgroup[0] = cg_name(root, "cg_time_test_migrate_A");
-+	if (!cgroup[0])
-+		goto cleanup;
-+
-+	cgroup[1] = cg_name(root, "cg_time_test_migrate_B");
-+	if (!cgroup[1])
-+		goto cleanup;
-+
-+	if (cg_create(cgroup[0]))
-+		goto cleanup;
-+
-+	if (cg_check_freezetime(cgroup[0]) < 0) {
-+		ret = KSFT_SKIP;
-+		goto cleanup;
-+	}
-+
-+	if (cg_create(cgroup[1]))
-+		goto cleanup;
-+
-+	pid = cg_run_nowait(cgroup[0], child_fn, NULL);
-+	if (pid < 0)
-+		goto cleanup;
-+
-+	if (cg_wait_for_proc_count(cgroup[0], 1))
-+		goto cleanup;
-+
-+	curr_A = cg_check_freezetime(cgroup[0]);
-+	if (curr_A) {
-+		debug("Expect time (%ld) to be 0\n", curr_A);
-+		goto cleanup;
-+	}
-+	curr_B = cg_check_freezetime(cgroup[1]);
-+	if (curr_B) {
-+		debug("Expect time (%ld) to be 0\n", curr_B);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * Freeze cgroup A.
-+	 */
-+	if (cg_freeze_wait(cgroup[0], true))
-+		goto cleanup;
-+	prev_A = curr_A;
-+	curr_A = cg_check_freezetime(cgroup[0]);
-+	if (curr_A <= prev_A) {
-+		debug("Expect time (%ld) to be > 0\n", curr_A);
-+		goto cleanup;
-+	}
-+
-+	/*
-+	 * Migrate from A (frozen) to B (running).
-+	 */
-+	if (cg_enter(cgroup[1], pid))
-+		goto cleanup;
-+
-+	usleep(1000);
-+	curr_B = cg_check_freezetime(cgroup[1]);
-+	if (curr_B) {
-+		debug("Expect time (%ld) to be 0\n", curr_B);
-+		goto cleanup;
-+	}
-+
-+	prev_A = curr_A;
-+	curr_A = cg_check_freezetime(cgroup[0]);
-+	if (curr_A <= prev_A) {
-+		debug("Expect time (%ld) to be more than previous check (%ld)\n",
-+		      curr_A, prev_A);
-+		goto cleanup;
-+	}
-+
-+	ret = KSFT_PASS;
-+
-+cleanup:
-+	if (cgroup[0])
-+		cg_destroy(cgroup[0]);
-+	free(cgroup[0]);
-+	if (cgroup[1])
-+		cg_destroy(cgroup[1]);
-+	free(cgroup[1]);
-+	return ret;
-+}
-+
-+/*
-+ * The test creates a cgroup and freezes it. Then it creates a child cgroup.
-+ * After that it checks that the child cgroup has a non-zero freeze time
-+ * that is less than the parent's. Next, it freezes the child, unfreezes
-+ * the parent, and sleeps. Finally, it checks that the child's freeze
-+ * time has grown larger than the parent's.
-+ */
-+static int test_cgfreezer_time_parent(const char *root)
-+{
-+	char *parent, *child = NULL;
-+	int ret = KSFT_FAIL;
-+	long ptime, ctime;
-+
-+	parent = cg_name(root, "cg_test_parent_A");
-+	if (!parent)
-+		goto cleanup;
-+
-+	child = cg_name(parent, "cg_test_parent_B");
-+	if (!child)
-+		goto cleanup;
-+
-+	if (cg_create(parent))
-+		goto cleanup;
-+
-+	if (cg_check_freezetime(parent) < 0) {
-+		ret = KSFT_SKIP;
-+		goto cleanup;
-+	}
-+
-+	if (cg_freeze_wait(parent, true))
-+		goto cleanup;
-+
-+	usleep(1000);
-+	if (cg_create(child))
-+		goto cleanup;
-+
-+	if (cg_check_frozen(child, true))
-+		goto cleanup;
-+
-+	/*
-+	 * Since the parent was frozen the entire time the child cgroup
-+	 * was being created, we expect the parent's freeze time to be
-+	 * larger than the child's.
-+	 *
-+	 * Ideally, we would be able to check both times simultaneously,
-+	 * but here we get the child's after we get the parent's.
-+	 */
-+	ptime = cg_check_freezetime(parent);
-+	ctime = cg_check_freezetime(child);
-+	if (ptime <= ctime) {
-+		debug("Expect ptime (%ld) > ctime (%ld)\n", ptime, ctime);
-+		goto cleanup;
-+	}
-+
-+	if (cg_freeze_nowait(child, true))
-+		goto cleanup;
-+
-+	if (cg_freeze_wait(parent, false))
-+		goto cleanup;
-+
-+	if (cg_check_frozen(child, true))
-+		goto cleanup;
-+
-+	usleep(100000);
-+
-+	ctime = cg_check_freezetime(child);
-+	ptime = cg_check_freezetime(parent);
-+
-+	if (ctime <= ptime) {
-+		debug("Expect ctime (%ld) > ptime (%ld)\n", ctime, ptime);
-+		goto cleanup;
-+	}
-+
-+	ret = KSFT_PASS;
-+
-+cleanup:
-+	if (child)
-+		cg_destroy(child);
-+	free(child);
-+	if (parent)
-+		cg_destroy(parent);
-+	free(parent);
-+	return ret;
-+}
-+
-+/*
-+ * The test creates a parent cgroup and a child cgroup. Then, it freezes
-+ * the child and checks that the child's freeze time is greater than the
-+ * parent's, which should be zero.
-+ */
-+static int test_cgfreezer_time_child(const char *root)
-+{
-+	char *parent, *child = NULL;
-+	int ret = KSFT_FAIL;
-+	long ptime, ctime;
-+
-+	parent = cg_name(root, "cg_test_child_A");
-+	if (!parent)
-+		goto cleanup;
-+
-+	child = cg_name(parent, "cg_test_child_B");
-+	if (!child)
-+		goto cleanup;
-+
-+	if (cg_create(parent))
-+		goto cleanup;
-+
-+	if (cg_check_freezetime(parent) < 0) {
-+		ret = KSFT_SKIP;
-+		goto cleanup;
-+	}
-+
-+	if (cg_create(child))
-+		goto cleanup;
-+
-+	if (cg_freeze_wait(child, true))
-+		goto cleanup;
-+
-+	ctime = cg_check_freezetime(child);
-+	ptime = cg_check_freezetime(parent);
-+	if (ptime != 0) {
-+		debug("Expect ptime (%ld) to be 0\n", ptime);
-+		goto cleanup;
-+	}
-+
-+	if (ctime <= ptime) {
-+		debug("Expect ctime (%ld) <= ptime (%ld)\n", ctime, ptime);
-+		goto cleanup;
-+	}
-+
-+	ret = KSFT_PASS;
-+
-+cleanup:
-+	if (child)
-+		cg_destroy(child);
-+	free(child);
-+	if (parent)
-+		cg_destroy(parent);
-+	free(parent);
-+	return ret;
-+}
-+
-+/*
-+ * The test creates the following hierarchy:
-+ *    A
-+ *    |
-+ *    B
-+ *    |
-+ *    C
-+ *
-+ * Then it freezes the cgroups in the order C, B, A.
-+ * Then it unfreezes the cgroups in the order A, B, C.
-+ * Then it checks that C's freeze time is larger than B's and
-+ * that B's is larger than A's.
-+ */
-+static int test_cgfreezer_time_nested(const char *root)
-+{
-+	char *cgroup[3] = {0};
-+	int ret = KSFT_FAIL;
-+	long time[3] = {0};
-+	int i;
-+
-+	cgroup[0] = cg_name(root, "cg_test_time_A");
-+	if (!cgroup[0])
-+		goto cleanup;
-+
-+	cgroup[1] = cg_name(cgroup[0], "B");
-+	if (!cgroup[1])
-+		goto cleanup;
-+
-+	cgroup[2] = cg_name(cgroup[1], "C");
-+	if (!cgroup[2])
-+		goto cleanup;
-+
-+	if (cg_create(cgroup[0]))
-+		goto cleanup;
-+
-+	if (cg_check_freezetime(cgroup[0]) < 0) {
-+		ret = KSFT_SKIP;
-+		goto cleanup;
-+	}
-+
-+	if (cg_create(cgroup[1]))
-+		goto cleanup;
-+
-+	if (cg_create(cgroup[2]))
-+		goto cleanup;
-+
-+	if (cg_freeze_nowait(cgroup[2], true))
-+		goto cleanup;
-+
-+	if (cg_freeze_nowait(cgroup[1], true))
-+		goto cleanup;
-+
-+	if (cg_freeze_nowait(cgroup[0], true))
-+		goto cleanup;
-+
-+	usleep(1000);
-+
-+	if (cg_freeze_nowait(cgroup[0], false))
-+		goto cleanup;
-+
-+	if (cg_freeze_nowait(cgroup[1], false))
-+		goto cleanup;
-+
-+	if (cg_freeze_nowait(cgroup[2], false))
-+		goto cleanup;
-+
-+	time[2] = cg_check_freezetime(cgroup[2]);
-+	time[1] = cg_check_freezetime(cgroup[1]);
-+	time[0] = cg_check_freezetime(cgroup[0]);
-+
-+	if (time[2] <= time[1]) {
-+		debug("Expect C's time (%ld) > B's time (%ld)", time[2], time[1]);
-+		goto cleanup;
-+	}
-+
-+	if (time[1] <= time[0]) {
-+		debug("Expect B's time (%ld) > A's time (%ld)", time[1], time[0]);
-+		goto cleanup;
-+	}
-+
-+	ret = KSFT_PASS;
-+
-+cleanup:
-+	for (i = 2; i >= 0 && cgroup[i]; i--) {
-+		cg_destroy(cgroup[i]);
-+		free(cgroup[i]);
-+	}
-+
-+	return ret;
-+}
-+
- #define T(x) { x, #x }
- struct cgfreezer_test {
- 	int (*fn)(const char *root);
-@@ -819,6 +1498,13 @@ struct cgfreezer_test {
- 	T(test_cgfreezer_stopped),
- 	T(test_cgfreezer_ptraced),
- 	T(test_cgfreezer_vfork),
-+	T(test_cgfreezer_time_empty),
-+	T(test_cgfreezer_time_simple),
-+	T(test_cgfreezer_time_populate),
-+	T(test_cgfreezer_time_migrate),
-+	T(test_cgfreezer_time_parent),
-+	T(test_cgfreezer_time_child),
-+	T(test_cgfreezer_time_nested),
- };
- #undef T
- 
+Changes in v3:
+- Disallow changing pidns for existing procfs instances, as we'd
+  probably have to RCU-protect everything that touches the pinned pidns
+  reference.
+- Improve tests with slightly nicer ASSERT_ERRNO* macros.
+- v2: <https://lore.kernel.org/r/20250723-procfs-pidns-api-v2-0-621e7edd8e40@cyphar.com>
+
+Changes in v2:
+- #ifdef CONFIG_PID_NS
+- Improve cover letter wording to make it clear we're talking about two
+  separate features with different permission models. [Andy Lutomirski]
+- Fix build warnings in pidns_is_ancestor() patch. [kernel test robot]
+- v1: <https://lore.kernel.org/r/20250721-procfs-pidns-api-v1-0-5cd9007e512d@cyphar.com>
+
+---
+Aleksa Sarai (4):
+      pidns: move is-ancestor logic to helper
+      procfs: add "pidns" mount option
+      procfs: add PROCFS_GET_PID_NAMESPACE ioctl
+      selftests/proc: add tests for new pidns APIs
+
+ Documentation/filesystems/proc.rst        |  12 ++
+ fs/proc/root.c                            | 166 +++++++++++++++-
+ include/linux/pid_namespace.h             |   9 +
+ include/uapi/linux/fs.h                   |   4 +
+ kernel/pid_namespace.c                    |  22 ++-
+ tools/testing/selftests/proc/.gitignore   |   1 +
+ tools/testing/selftests/proc/Makefile     |   1 +
+ tools/testing/selftests/proc/proc-pidns.c | 315 ++++++++++++++++++++++++++++++
+ 8 files changed, 514 insertions(+), 16 deletions(-)
+---
+base-commit: 66639db858112bf6b0f76677f7517643d586e575
+change-id: 20250717-procfs-pidns-api-8ed1583431f0
+
+Best regards,
 -- 
-2.50.1.565.gc32cd1483b-goog
+Aleksa Sarai <cyphar@cyphar.com>
 
 
