@@ -1,162 +1,140 @@
-Return-Path: <linux-doc+bounces-55207-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55209-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B31EB1C2D7
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Aug 2025 11:06:42 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 68703B1C2EF
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Aug 2025 11:11:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DA1356201E0
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Aug 2025 09:06:40 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id A2DB27A4114
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Aug 2025 09:09:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D5F322256F;
-	Wed,  6 Aug 2025 09:05:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6887028937A;
+	Wed,  6 Aug 2025 09:11:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eAfQ2HUd"
+	dkim=fail reason="key not found in DNS" (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b="XEsBx9IL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from www3579.sakura.ne.jp (www3579.sakura.ne.jp [49.212.243.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE8081F9EC0;
-	Wed,  6 Aug 2025 09:05:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B06892AD2F;
+	Wed,  6 Aug 2025 09:11:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=49.212.243.89
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754471143; cv=none; b=Cr/mKk2VWoWBEHqXE4jpWHO0NixCinO9rNICMBU37eZ5xt/R8SI2tGnnIJhu/jK4CHPfef5CeeOzQAMrBm5l71GSKDxgsQUtRPZK5AhX6M0TNDhFkgMZj0qswrEHQ3UhcMyZ5bG6dKuRPZAAjrZwYjYegFp5bZV87Kj6N+ipJwo=
+	t=1754471476; cv=none; b=Abxu57uklSxvEFlZblivOnQ/5uP1nCDoZOSXy0fBHi+oewhornODAXwHw8PIj3xNP3Xkvoh+oEdxV12oOzTJaXPMzoPW2+NWZf3KiTQyoiU/u0ZF+OodErAs/xutYzcls4Ev61iHcEWGIJ6xsXfaMyJE4a6bXPvNJtdNNPHL3qc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754471143; c=relaxed/simple;
-	bh=HJ2Vdqce5q53Z4X8gWRYDViukTz5Nztf0mQCr9Y9UE4=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=cYbxgLNTK/5fJYKOOzwK551t3FCThZ5Ub9tm6lkz8UttQTkzP2coHNIUf5xVi/T1CWLk3eTQgm81mXrbQJhZh9o/GEnnNposVbSFwZeFoPu/8QNJq4n35kS2yxTap+kuUm+jQ5ncxpJQprAZzvmI1VsATwGn/aH8yceryBaoDk0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eAfQ2HUd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5CA70C4CEE7;
-	Wed,  6 Aug 2025 09:05:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1754471142;
-	bh=HJ2Vdqce5q53Z4X8gWRYDViukTz5Nztf0mQCr9Y9UE4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=eAfQ2HUdQ+zar9zQIGr+7F6sQrrXTpbQ+Him7njvXYaBRgxEiMcSbh52S2xDmL1Xj
-	 G4jkR7/Fi5BI5mL76Hcy1hPI6N60YDfrsvmxL0v6vT2NbBkR+NjXuvuDOCsCDZWZvE
-	 jYUlZNx+pvNTAI/3ZPisoOavzwjR/WV6x8TFwPkVJvUZn5yU3wde8uUfg+rOi3Xzl4
-	 Lo6+6S+q1fLThPOhM3OLW6HWDgJaskMrsGZNpe0L8elyqnoryAWEUYZam1KvlgYm5S
-	 ZFwK71Xnsdq2P6Z3qigl1Lk70JDI51WU9kvSo3Ls1THBAf2K6ynSFKwfsgmR4ezKer
-	 CbnkBV3YFCNMA==
-Date: Wed, 6 Aug 2025 11:05:38 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Akira Yokosawa
- <akiyks@gmail.com>
-Subject: Re: [PATCH 10/12] docs: kdoc: further rewrite_struct_members()
- cleanup
-Message-ID: <20250806110538.35bcc127@foz.lan>
-In-Reply-To: <87ms8djsjx.fsf@trenco.lwn.net>
-References: <20250801001326.924276-1-corbet@lwn.net>
-	<20250801001326.924276-11-corbet@lwn.net>
-	<20250801080744.14f83626@foz.lan>
-	<87v7n6pscu.fsf@trenco.lwn.net>
-	<20250804151511.73ffb949@foz.lan>
-	<87ms8djsjx.fsf@trenco.lwn.net>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1754471476; c=relaxed/simple;
+	bh=31I6WjXhRwY1ZO5yYnIVtAEAXW02SAJ1j4oJyCrK7cU=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=jnqtmrXMdnjTZ47iOczjDEq0UaEMjaH0BnWNYFsGzWHUBrRIECqd6bN31G7u0h5dNkKzkZHZTACgrVLqRalK3ypwYXv1Q2etzFle28Ut/v5kCrqraHIiw8lje0yGlueb5SOAXiajcAPk1R9kyhxRcDhrWNL82WDlWXHanDG1Aas=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp; dkim=fail (0-bit key) header.d=rsg.ci.i.u-tokyo.ac.jp header.i=@rsg.ci.i.u-tokyo.ac.jp header.b=XEsBx9IL reason="key not found in DNS"; arc=none smtp.client-ip=49.212.243.89
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rsg.ci.i.u-tokyo.ac.jp
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rsg.ci.i.u-tokyo.ac.jp
+Received: from h205.csg.ci.i.u-tokyo.ac.jp (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
+	(authenticated bits=0)
+	by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 5769A4Q3005818
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Wed, 6 Aug 2025 18:10:13 +0900 (JST)
+	(envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
+DKIM-Signature: a=rsa-sha256; bh=04SbAc//VYkDj1IMLyHG/BmwbhPG6uTcl3uHd/dz/BI=;
+        c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
+        h=From:Subject:Date:Message-Id:To;
+        s=rs20250326; t=1754471413; v=1;
+        b=XEsBx9IL1udj/IyQHko/lhxsGUKJnAMTGyD6LZOzTQNNIBBMmB+owrZBhNRAY3Zt
+         DCl7SGKRwTdo0a/DCr88QNE4yZrv4Y4qiMvLI8Ba48/tWugukGW0HkDvgp1brHEY
+         WMAGmkFQHI3jbtf3vHTgRpLTMVbCrMhB/NQVPTDKJ0JdM6hwuRB50Memt2+KbBTE
+         UbiasCzNdvjQSKAKqJi7qqwybDdmOLx6wgUtcpV/fMk/2TKAaSTBx9s6LfhA+qEi
+         L/Ly7LCfvGHHUshrmn+2UFUI4eqTLbNHiWdAiTdysMPTWcuWwPe5gb63gFtw9E9y
+         4fxayjyrq+lW7QIi7WGvPA==
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Subject: [PATCH RFC v2 0/2] KVM: arm64: PMU: Use multiple host PMUs
+Date: Wed, 06 Aug 2025 18:09:53 +0900
+Message-Id: <20250806-hybrid-v2-0-0661aec3af8c@rsg.ci.i.u-tokyo.ac.jp>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOEbk2gC/zWOyw6CMBBFf4XM2pK28oisTEz8ALeGRWEGmQWgL
+ TYQwr/bVF3eOyfnzgaOLJODKtnAkmfH0xiCPiTQ9mZ8kGAMGbTUudQ6E/3aWEYhFeZdl5WEqCH
+ AT0sdL1F0h9v1AvW3tPR6B+n8uzTGkWinYeC5SnyRqiKCPbt5smv8wqtIxsGjOv0HvRJKZKgMG
+ iWplPkZzTrykgYb1Pu+fwAs6cmzywAAAA==
+X-Change-ID: 20250224-hybrid-01d5ff47edd2
+To: Marc Zyngier <maz@kernel.org>, Oliver Upton <oliver.upton@linux.dev>,
+        Joey Gouly <joey.gouly@arm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Zenghui Yu <yuzenghui@huawei.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <shuah@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org, kvmarm@lists.linux.dev,
+        linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
+        devel@daynix.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+X-Mailer: b4 0.14.2
 
-Em Tue, 05 Aug 2025 16:46:10 -0600
-Jonathan Corbet <corbet@lwn.net> escreveu:
+On heterogeneous arm64 systems, KVM's PMU emulation is based on the
+features of a single host PMU instance. When a vCPU is migrated to a
+pCPU with an incompatible PMU, counters such as PMCCNTR_EL0 stop
+incrementing.
 
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
-> 
-> > Perhaps one alternative would do something like:
-> >
-> > 	tuples = struct_members.findall(members)
-> >         if not tuples:
-> >             break
-> >
-> > 	maintype, -, -, content, -, s_ids = tuples
-> >
-> > (assuming that we don't need t[1], t[2] and t[4] here)
-> >
-> > Btw, on this specific case, better to use non-capture group matches
-> > to avoid those "empty" spaces, e.g. (if I got it right):  
-> 
-> The problem is this line here:
-> 
->                 oldmember = "".join(t) # Reconstruct the original formatting
-> 
-> The regex *has* to capture the entire match string so that it can be
-> reconstructed back to its original form, which we need to edit the full
-> list of members later on.
-> 
-> This code could use a deep rethink, but it works for now :)
+Although this behavior is permitted by the architecture, Windows does
+not handle it gracefully and may crash with a division-by-zero error.
 
-well, we can still do:
+The current workaround requires VMMs to pin vCPUs to a set of pCPUs
+that share a compatible PMU. This is difficult to implement correctly in
+QEMU/libvirt, where pinning occurs after vCPU initialization, and it
+also restricts the guest to a subset of available pCPUs.
 
-	for t in tuples:
-	    maintype, -, -, content, -, s_ids = t
-	    oldmember = "".join(t)
+This patch introduces the KVM_ARM_VCPU_PMU_V3_COMPOSITION attribute to
+create a "composite" PMU. When set, KVM exposes a PMU that is compatible
+with all pCPUs by advertising only a single cycle counter, a feature
+common to all PMUs.
 
-this way, we'll be naming the relevant parameters and reconstructing
-the the original form.
+This allows Windows guests to run reliably on heterogeneous systems
+without crashing, even without vCPU pinning, and enables VMMs to
+schedule vCPUs across all available pCPUs, making full use of the host
+hardware.
 
-IMO, this is a lot better than using t[0], t[3], t[5] at the code,
-as the names makes it clear what each one actually captured.
+A QEMU patch that demonstrates the usage of the new attribute is
+available at:
+https://lore.kernel.org/qemu-devel/20250806-kvm-v1-1-d1d50b7058cd@rsg.ci.i.u-tokyo.ac.jp/
+("[PATCH RFC] target/arm/kvm: Choose PMU backend")
 
--
+Signed-off-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+---
+Changes in v2:
+- Added the KVM_ARM_VCPU_PMU_V3_COMPOSITION attribute to opt in the
+  feature.
+- Added code to handle overflow.
+- Link to v1: https://lore.kernel.org/r/20250319-hybrid-v1-1-4d1ada10e705@daynix.com
 
-Btw, while re.findall() has an API that doesn't return match
-objects which is incoherent with the normal re API, while looking
-at the specs today(*), there is an alternative: re.finditer(). 
-We could add it to KernRE cass and use it on a way that it will use
-a Match instance. Something like:
+---
+Akihiko Odaki (2):
+      KVM: arm64: PMU: Introduce KVM_ARM_VCPU_PMU_V3_COMPOSITION
+      KVM: arm64: selftests: Test guest PMUv3 composition
 
-	# Original regex expression
-	res = Re.finditer(...)
+ Documentation/virt/kvm/devices/vcpu.rst            |  30 ++
+ arch/arm64/include/asm/kvm_host.h                  |   2 +
+ arch/arm64/include/uapi/asm/kvm.h                  |   1 +
+ arch/arm64/kvm/arm.c                               |   5 +-
+ arch/arm64/kvm/pmu-emul.c                          | 495 +++++++++++++--------
+ arch/arm64/kvm/sys_regs.c                          |   2 +-
+ include/kvm/arm_pmu.h                              |  12 +-
+ .../selftests/kvm/arm64/vpmu_counter_access.c      | 148 ++++--
+ 8 files changed, 461 insertions(+), 234 deletions(-)
+---
+base-commit: 8ec6d99a41e3d1dbdff2bdb3aa42951681e1e76c
+change-id: 20250224-hybrid-01d5ff47edd2
 
-	# Not much difference here. Probably not worh using it
-	for match in res:
-	    oldmember = "".join(match.groups())
-            maintype, -, -, content, -, s_ids = match.groups()
+Best regards,
+-- 
+Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
-Or alternatively:
-
-	res = Re.finditer(...)
-
-	# Not much difference here. Probably not worth using it
-	for match in res:
-	    oldmember = "".join(match.groups())
-
-		# replace at the code below:
-		#	maintype -> match.group('maintype')
-		#	content -> match.group('content')
-		#	s_ids -> match.group('s_ids')
-
-No idea about performance differences between findall and finditer.
-(*) https://docs.python.org/3/library/re.html
-
-btw, one possibility that would avoid having tuples and t is
-to do something like:
-
-	struct_members = KernRe("(" +			# group 1: the entire pattern
-				type_pattern +	        # Capture main type
-				r'([^\{\};]+)' +
-				r'(?:\{)' +
-				r'(?:[^\{\}]*)' +	# Capture content
-				r'(?:\})' +
-				r'([^\{\};]*)(;)')	# Capture IDs
-				")")
-
-	match = struct_members.finditer(line)
-	for match in res:
-	    oldmember, maintype, content, s_ids = match.groups()
-
-(disclaimer notice: none of the above was tested)
-	
-
-Thanks,
-Mauro
 
