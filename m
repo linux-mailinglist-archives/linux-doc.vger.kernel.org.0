@@ -1,436 +1,121 @@
-Return-Path: <linux-doc+bounces-55495-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55497-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E71A8B1F690
-	for <lists+linux-doc@lfdr.de>; Sat,  9 Aug 2025 23:19:40 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C2B9B1F73A
+	for <lists+linux-doc@lfdr.de>; Sun, 10 Aug 2025 01:40:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A221B3B36E8
-	for <lists+linux-doc@lfdr.de>; Sat,  9 Aug 2025 21:19:39 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3C9F7189B675
+	for <lists+linux-doc@lfdr.de>; Sat,  9 Aug 2025 23:40:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E01227CB21;
-	Sat,  9 Aug 2025 21:18:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B0832566F5;
+	Sat,  9 Aug 2025 23:40:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="QDEvd3DL"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bmp9+4xE"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5AF22C1592;
-	Sat,  9 Aug 2025 21:18:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDAAE1F3FC8;
+	Sat,  9 Aug 2025 23:40:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754774301; cv=none; b=lg04u113nZgJpanXyvc9xAeiBmLE0xuy2/l9oeY5E/OFpqCijTHDWxn/UVGtzeXzVHBLFKG34ymixp0DInFF3U+IUU93ZJrxIWMeZeHvTVQ8XPXyPssabo4vSWPfkj1HD0GCrdjuG+uLxU6cbVdPZ6BSWEp3z18DHMQ6t/4wFOk=
+	t=1754782822; cv=none; b=piiurP6fXIhdCH2emHFQRc7KgbMI/xLHD9tubB8I1cUEjQubiFOAcm7MkPaCO58MFFXvx2uK0u7sWPM4KELUDzQqWLambj6PoaD/OlDDwbfrHrLyYmo+mqAA4dO7Yf/EYK0Q9+eGowOq/dCt5YtmjqQWV92+cPH+4MP3O1lIp0Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754774301; c=relaxed/simple;
-	bh=LDCCC+MPtpW54+RJ22HPIOtJcjhlNZkCyss0Vo3yekA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=JfyyqOMJ6TsqlmLPDvf2Lfstg73m+3uNoQOoAxyBhqkLJKg+CR3My+x65VlkfvrmYhy9mk2Cv7geWWVpLnnK86CaLnxTMh9xfD7tjMfG2X0lewSRKFvM9KQG3dyg5yEm95LYL5a7elsIgLMTG+6aM5h9zmNa7Li5dGE4Elj7BFg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=QDEvd3DL; arc=none smtp.client-ip=213.167.242.64
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
-Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi [81.175.209.231])
-	by perceval.ideasonboard.com (Postfix) with UTF8SMTPSA id 9F8C01FD3;
-	Sat,  9 Aug 2025 23:17:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1754774233;
-	bh=LDCCC+MPtpW54+RJ22HPIOtJcjhlNZkCyss0Vo3yekA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QDEvd3DLI/2bz6K6839UDR0P7egvItFrRxdqlT7a5UF36WiyqPKrlOaOb1dSLDj3z
-	 6swD5yvqB0s3oqJVnMo/1DDGcBIyg9/62oPaGuVR5+WqbWfkUUTTOPhPzNZIhrZMiY
-	 rS7wvoP2sqTU9kC8UW+RMvjuKHmG1kQHLFAiDWoA=
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: linux-media@vger.kernel.org
-Cc: Hans Verkuil <hans@jjverkuil.nl>,
-	Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
-	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
-	Alex Shi <alexs@kernel.org>,
-	Yanteng Si <si.yanteng@linux.dev>,
-	Dongliang Mu <dzm91@hust.edu.cn>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Tomasz Figa <tfiga@chromium.org>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Ricardo Ribalda <ribalda@chromium.org>,
-	Hans de Goede <hansg@kernel.org>,
-	Sebastian Fricke <sebastian.fricke@collabora.com>,
-	Ma Ke <make24@iscas.ac.cn>,
-	Erling Ljunggren <hljunggr@cisco.com>,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v2 32/76] media: Drop V4L2_FL_USES_V4L2_FH checks
-Date: Sun, 10 Aug 2025 00:16:09 +0300
-Message-ID: <20250809211654.28887-33-laurent.pinchart@ideasonboard.com>
-X-Mailer: git-send-email 2.49.1
-In-Reply-To: <20250809211654.28887-1-laurent.pinchart@ideasonboard.com>
-References: <20250809211654.28887-1-laurent.pinchart@ideasonboard.com>
+	s=arc-20240116; t=1754782822; c=relaxed/simple;
+	bh=0krP812oyw02W1PFcWpcjqMHYTl6SRO9CmN1xtE8Rk8=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Uogk4YmJuJUgkGUeGqObbWT+hUMT3UTjPnLsvFEWXEZt+T176oL6xDH8ROMzSFMHV1MFP1Qu8zThzlKVFw24mj+bRhvTgjy4EcwfwNYNuhFpPZP1feZMxAGph1yicIZsvPHE3/xNP0RkyEtvHjixk0URgeJzeUvI9WsPgcLdlAI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bmp9+4xE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF65DC4CEE7;
+	Sat,  9 Aug 2025 23:40:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1754782820;
+	bh=0krP812oyw02W1PFcWpcjqMHYTl6SRO9CmN1xtE8Rk8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=bmp9+4xEr2qiiE1XjuY/l91izABP77eVMTv5AQFNVnfKO08VTb4d1EJhhtDCQT4My
+	 AksM/RLDoWr16TsS+oBsjZNQEOtaccekFIWenBCZtXFKwRQrReWsevuz3s79Amr7kL
+	 CmmzcloRyApHM0HBNwwDjZhJONrJTgjEUJA6n57VR+gGs4wmERCv/Ven4SUxRkrOzs
+	 KAyy70L8vg63DnU2RZDu00yT//4zFZXpnP1ijQunsDOOpHPmwvVKfenoMAxFUtRQqb
+	 j0D22uYdd0IAZ9GtCSH8x5TjSrej5uKBfUVS0F0s/WKQQh7Ob5QHWaLxEtAjJ4eEj9
+	 EZ9Em8u/tsIGA==
+From: Sasha Levin <sashal@kernel.org>
+To: sashal@kernel.org
+Cc: corbet@lwn.net,
+	josh@joshtriplett.org,
+	kees@kernel.org,
+	konstantin@linuxfoundation.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	rostedt@goodmis.org,
+	workflows@vger.kernel.org
+Subject: [PATCH v2 0/2] Add unified configuration for coding agents
+Date: Sat,  9 Aug 2025 19:40:06 -0400
+Message-Id: <20250809234008.1540324-1-sashal@kernel.org>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+This patch series adds unified configuration and documentation for coding
+agents working with the Linux kernel codebase. As coding agents become
+increasingly common in software development, it's important to establish
+clear guidelines for their use in kernel development.
 
-Now that all drivers use v4l2_fh, we can drop the V4L2_FL_USES_V4L2_FH
-checks through the V4L2 core.
+The series consists of two patches:
 
-To ensure that all new drivers use v4l2_fh, keep setting the
-V4L2_FL_USES_V4L2_FH flag in v4l2_fh_init(), and verify it is set after
-the .open() file operation returns.
+1. README: restructure with role-based documentation and guidelines
+   - Reorganizes README to provide targeted documentation paths for
+     different user roles (developers, researchers, security experts,
+     maintainers, and AI coding assistants)
+   - Adds quick start section and essential documentation links
+   - Establishes proper attribution requirements for AI-assisted
+     contributions using Assisted-by tags with agent details
 
-Signed-off-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
----
- Documentation/driver-api/media/v4l2-fh.rst    | 15 +-------
- .../zh_CN/video4linux/v4l2-framework.txt      |  5 ---
- .../media/common/videobuf2/videobuf2-v4l2.c   | 12 ++----
- drivers/media/v4l2-core/v4l2-compat-ioctl32.c |  7 +---
- drivers/media/v4l2-core/v4l2-ctrls-api.c      |  2 +-
- drivers/media/v4l2-core/v4l2-dev.c            | 21 ++++++++---
- drivers/media/v4l2-core/v4l2-ioctl.c          | 37 ++++++-------------
- drivers/media/v4l2-core/v4l2-mem2mem.c        | 12 ++----
- include/media/v4l2-dev.h                      |  2 +-
- 9 files changed, 42 insertions(+), 71 deletions(-)
+2. agents: add unified agent coding assistant configuration
+   - Creates configuration files for major coding agents (Claude,
+     GitHub Copilot, Cursor, Codeium, Continue, Windsurf, and Gemini)
+   - Uses @README references to point all agents to the central
+     documentation, ensuring consistency across tools
 
-diff --git a/Documentation/driver-api/media/v4l2-fh.rst b/Documentation/driver-api/media/v4l2-fh.rst
-index afcad22ead7c..a934caa483a4 100644
---- a/Documentation/driver-api/media/v4l2-fh.rst
-+++ b/Documentation/driver-api/media/v4l2-fh.rst
-@@ -3,13 +3,8 @@
- V4L2 File handles
- -----------------
- 
--struct v4l2_fh provides a way to easily keep file handle specific
--data that is used by the V4L2 framework.
--
--.. attention::
--	New drivers must use struct v4l2_fh
--	since it is also used to implement priority handling
--	(:ref:`VIDIOC_G_PRIORITY`).
-+struct v4l2_fh provides a way to easily keep file handle specific data that is
-+used by the V4L2 framework. Its usage is mandatory in all drivers.
- 
- struct v4l2_fh is allocated in the driver's ``open()`` file operation handler.
- It is typically embedded in a larger driver-specific structure. The
-@@ -134,12 +129,6 @@ associated device node:
- 
- - Same, but it calls v4l2_fh_is_singular with filp->private_data.
- 
--.. note::
--        The V4L2 framework knows whether a driver uses :c:type:`v4l2_fh` as its
--        ``file->private_data`` pointer by testing the ``V4L2_FL_USES_V4L2_FH``
--        bit in :c:type:`video_device`->flags. This bit is set whenever
--        :c:func:`v4l2_fh_init` is called.
--
- 
- V4L2 fh functions and data structures
- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-diff --git a/Documentation/translations/zh_CN/video4linux/v4l2-framework.txt b/Documentation/translations/zh_CN/video4linux/v4l2-framework.txt
-index 1653c6e2cb46..f0be21a60a0f 100644
---- a/Documentation/translations/zh_CN/video4linux/v4l2-framework.txt
-+++ b/Documentation/translations/zh_CN/video4linux/v4l2-framework.txt
-@@ -775,11 +775,6 @@ v4l2_fh 结构体提供一个保存用于 V4L2 框架的文件句柄特定数据
- 如果 video_device 标志，新驱动
- 必须使用 v4l2_fh 结构体，因为它也用于实现优先级处理（VIDIOC_G/S_PRIORITY）。
- 
--v4l2_fh 的用户（位于 V4l2 框架中，并非驱动）可通过测试
--video_device->flags 中的 V4L2_FL_USES_V4L2_FH 位得知驱动是否使用
--v4l2_fh 作为他的 file->private_data 指针。这个位会在调用 v4l2_fh_init()
--时被设置。
--
- v4l2_fh 结构体作为驱动自身文件句柄结构体的一部分被分配，且驱动在
- 其打开函数中将 file->private_data 指向它。
- 
-diff --git a/drivers/media/common/videobuf2/videobuf2-v4l2.c b/drivers/media/common/videobuf2/videobuf2-v4l2.c
-index f29307e59be5..d911021c1bb0 100644
---- a/drivers/media/common/videobuf2/videobuf2-v4l2.c
-+++ b/drivers/media/common/videobuf2/videobuf2-v4l2.c
-@@ -973,18 +973,14 @@ EXPORT_SYMBOL_GPL(vb2_queue_change_type);
- 
- __poll_t vb2_poll(struct vb2_queue *q, struct file *file, poll_table *wait)
- {
--	struct video_device *vfd = video_devdata(file);
-+	struct v4l2_fh *fh = file_to_v4l2_fh(file);
- 	__poll_t res;
- 
- 	res = vb2_core_poll(q, file, wait);
- 
--	if (test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags)) {
--		struct v4l2_fh *fh = file_to_v4l2_fh(file);
--
--		poll_wait(file, &fh->wait, wait);
--		if (v4l2_event_pending(fh))
--			res |= EPOLLPRI;
--	}
-+	poll_wait(file, &fh->wait, wait);
-+	if (v4l2_event_pending(fh))
-+		res |= EPOLLPRI;
- 
- 	return res;
- }
-diff --git a/drivers/media/v4l2-core/v4l2-compat-ioctl32.c b/drivers/media/v4l2-core/v4l2-compat-ioctl32.c
-index 8a5559225ff2..e5642e639811 100644
---- a/drivers/media/v4l2-core/v4l2-compat-ioctl32.c
-+++ b/drivers/media/v4l2-core/v4l2-compat-ioctl32.c
-@@ -672,15 +672,12 @@ struct v4l2_ext_control32 {
- static inline bool ctrl_is_pointer(struct file *file, u32 id)
- {
- 	struct video_device *vdev = video_devdata(file);
--	struct v4l2_fh *fh = NULL;
-+	struct v4l2_fh *fh = file_to_v4l2_fh(file);
- 	struct v4l2_ctrl_handler *hdl = NULL;
- 	struct v4l2_query_ext_ctrl qec = { id };
- 	const struct v4l2_ioctl_ops *ops = vdev->ioctl_ops;
- 
--	if (test_bit(V4L2_FL_USES_V4L2_FH, &vdev->flags))
--		fh = file_to_v4l2_fh(file);
--
--	if (fh && fh->ctrl_handler)
-+	if (fh->ctrl_handler)
- 		hdl = fh->ctrl_handler;
- 	else if (vdev->ctrl_handler)
- 		hdl = vdev->ctrl_handler;
-diff --git a/drivers/media/v4l2-core/v4l2-ctrls-api.c b/drivers/media/v4l2-core/v4l2-ctrls-api.c
-index b0bba8eec143..afb4e5581b90 100644
---- a/drivers/media/v4l2-core/v4l2-ctrls-api.c
-+++ b/drivers/media/v4l2-core/v4l2-ctrls-api.c
-@@ -1254,7 +1254,7 @@ int v4l2_ctrl_log_status(struct file *file, void *fh)
- {
- 	struct video_device *vfd = video_devdata(file);
- 
--	if (test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) && vfd->v4l2_dev) {
-+	if (vfd->v4l2_dev) {
- 		struct v4l2_fh *vfh = file_to_v4l2_fh(file);
- 
- 		v4l2_ctrl_handler_log_status(vfh->ctrl_handler,
-diff --git a/drivers/media/v4l2-core/v4l2-dev.c b/drivers/media/v4l2-core/v4l2-dev.c
-index 1a4184b94838..10a126e50c1c 100644
---- a/drivers/media/v4l2-core/v4l2-dev.c
-+++ b/drivers/media/v4l2-core/v4l2-dev.c
-@@ -425,14 +425,26 @@ static int v4l2_open(struct inode *inode, struct file *filp)
- 	video_get(vdev);
- 	mutex_unlock(&videodev_lock);
- 
--	if (video_is_registered(vdev))
--		ret = vdev->fops->open(filp);
--	else
-+	if (!video_is_registered(vdev)) {
- 		ret = -ENODEV;
-+		goto done;
-+	}
- 
-+	ret = vdev->fops->open(filp);
-+	if (ret)
-+		goto done;
-+
-+	/* All drivers must use v4l2_fh. */
-+	if (WARN_ON(!test_bit(V4L2_FL_USES_V4L2_FH, &vdev->flags))) {
-+		vdev->fops->release(filp);
-+		ret = -ENODEV;
-+	}
-+
-+done:
- 	if (vdev->dev_debug & V4L2_DEV_DEBUG_FOP)
- 		dprintk("%s: open (%d)\n",
- 			video_device_node_name(vdev), ret);
-+
- 	/* decrease the refcount in case of an error */
- 	if (ret)
- 		video_put(vdev);
-@@ -1114,8 +1126,7 @@ void video_unregister_device(struct video_device *vdev)
- 	 */
- 	clear_bit(V4L2_FL_REGISTERED, &vdev->flags);
- 	mutex_unlock(&videodev_lock);
--	if (test_bit(V4L2_FL_USES_V4L2_FH, &vdev->flags))
--		v4l2_event_wake_all(vdev);
-+	v4l2_event_wake_all(vdev);
- 	device_unregister(&vdev->dev);
- }
- EXPORT_SYMBOL(video_unregister_device);
-diff --git a/drivers/media/v4l2-core/v4l2-ioctl.c b/drivers/media/v4l2-core/v4l2-ioctl.c
-index 8c81852c3046..6c684884873e 100644
---- a/drivers/media/v4l2-core/v4l2-ioctl.c
-+++ b/drivers/media/v4l2-core/v4l2-ioctl.c
-@@ -1195,8 +1195,6 @@ static int v4l_s_priority(const struct v4l2_ioctl_ops *ops,
- 	u32 *p = arg;
- 
- 	vfd = video_devdata(file);
--	if (!test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags))
--		return -ENOTTY;
- 	vfh = file_to_v4l2_fh(file);
- 	return v4l2_prio_change(vfd->prio, &vfh->prio, *p);
- }
-@@ -2297,8 +2295,7 @@ static int v4l_queryctrl(const struct v4l2_ioctl_ops *ops,
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_query_ext_ctrl qec = {};
- 	struct v4l2_queryctrl *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 	int ret;
- 
- 	if (vfh && vfh->ctrl_handler)
-@@ -2322,8 +2319,7 @@ static int v4l_query_ext_ctrl(const struct v4l2_ioctl_ops *ops,
- {
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_query_ext_ctrl *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 
- 	if (vfh && vfh->ctrl_handler)
- 		return v4l2_query_ext_ctrl(vfh->ctrl_handler, p);
-@@ -2339,8 +2335,7 @@ static int v4l_querymenu(const struct v4l2_ioctl_ops *ops,
- {
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_querymenu *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 
- 	if (vfh && vfh->ctrl_handler)
- 		return v4l2_querymenu(vfh->ctrl_handler, p);
-@@ -2356,8 +2351,7 @@ static int v4l_g_ctrl(const struct v4l2_ioctl_ops *ops,
- {
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_control *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 	struct v4l2_ext_controls ctrls;
- 	struct v4l2_ext_control ctrl;
- 
-@@ -2388,8 +2382,7 @@ static int v4l_s_ctrl(const struct v4l2_ioctl_ops *ops,
- {
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_control *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 	struct v4l2_ext_controls ctrls;
- 	struct v4l2_ext_control ctrl;
- 	int ret;
-@@ -2418,8 +2411,7 @@ static int v4l_g_ext_ctrls(const struct v4l2_ioctl_ops *ops,
- {
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_ext_controls *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 
- 	p->error_idx = p->count;
- 	if (vfh && vfh->ctrl_handler)
-@@ -2439,8 +2431,7 @@ static int v4l_s_ext_ctrls(const struct v4l2_ioctl_ops *ops,
- {
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_ext_controls *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 
- 	p->error_idx = p->count;
- 	if (vfh && vfh->ctrl_handler)
-@@ -2460,8 +2451,7 @@ static int v4l_try_ext_ctrls(const struct v4l2_ioctl_ops *ops,
- {
- 	struct video_device *vfd = video_devdata(file);
- 	struct v4l2_ext_controls *p = arg;
--	struct v4l2_fh *vfh =
--		test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags) ? fh : NULL;
-+	struct v4l2_fh *vfh = fh;
- 
- 	p->error_idx = p->count;
- 	if (vfh && vfh->ctrl_handler)
-@@ -3073,7 +3063,7 @@ static long __video_do_ioctl(struct file *file,
- 	struct v4l2_ioctl_info default_info;
- 	const struct v4l2_ioctl_info *info;
- 	void *fh = file->private_data;
--	struct v4l2_fh *vfh = NULL;
-+	struct v4l2_fh *vfh = file_to_v4l2_fh(file);
- 	int dev_debug = vfd->dev_debug;
- 	long ret = -ENOTTY;
- 
-@@ -3083,9 +3073,6 @@ static long __video_do_ioctl(struct file *file,
- 		return ret;
- 	}
- 
--	if (test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags))
--		vfh = file_to_v4l2_fh(file);
--
- 	/*
- 	 * We need to serialize streamon/off with queueing new requests.
- 	 * These ioctls may trigger the cancellation of a streaming
-@@ -3117,10 +3104,10 @@ static long __video_do_ioctl(struct file *file,
- 		info = &v4l2_ioctls[_IOC_NR(cmd)];
- 
- 		if (!is_valid_ioctl(vfd, cmd) &&
--		    !((info->flags & INFO_FL_CTRL) && vfh && vfh->ctrl_handler))
-+		    !((info->flags & INFO_FL_CTRL) && vfh->ctrl_handler))
- 			goto done;
- 
--		if (vfh && (info->flags & INFO_FL_PRIO)) {
-+		if (info->flags & INFO_FL_PRIO) {
- 			ret = v4l2_prio_check(vfd->prio, vfh->prio);
- 			if (ret)
- 				goto done;
-@@ -3139,7 +3126,7 @@ static long __video_do_ioctl(struct file *file,
- 		ret = -ENOTTY;
- 	} else {
- 		ret = ops->vidioc_default(file, fh,
--			vfh ? v4l2_prio_check(vfd->prio, vfh->prio) >= 0 : 0,
-+			v4l2_prio_check(vfd->prio, vfh->prio) >= 0,
- 			cmd, arg);
- 	}
- 
-diff --git a/drivers/media/v4l2-core/v4l2-mem2mem.c b/drivers/media/v4l2-core/v4l2-mem2mem.c
-index e67e67f76f72..7678b8dbedbd 100644
---- a/drivers/media/v4l2-core/v4l2-mem2mem.c
-+++ b/drivers/media/v4l2-core/v4l2-mem2mem.c
-@@ -951,7 +951,7 @@ static __poll_t v4l2_m2m_poll_for_data(struct file *file,
- __poll_t v4l2_m2m_poll(struct file *file, struct v4l2_m2m_ctx *m2m_ctx,
- 		       struct poll_table_struct *wait)
- {
--	struct video_device *vfd = video_devdata(file);
-+	struct v4l2_fh *fh = file_to_v4l2_fh(file);
- 	struct vb2_queue *src_q = v4l2_m2m_get_src_vq(m2m_ctx);
- 	struct vb2_queue *dst_q = v4l2_m2m_get_dst_vq(m2m_ctx);
- 	__poll_t req_events = poll_requested_events(wait);
-@@ -970,13 +970,9 @@ __poll_t v4l2_m2m_poll(struct file *file, struct v4l2_m2m_ctx *m2m_ctx,
- 	if (req_events & (EPOLLOUT | EPOLLWRNORM | EPOLLIN | EPOLLRDNORM))
- 		rc = v4l2_m2m_poll_for_data(file, m2m_ctx, wait);
- 
--	if (test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags)) {
--		struct v4l2_fh *fh = file_to_v4l2_fh(file);
--
--		poll_wait(file, &fh->wait, wait);
--		if (v4l2_event_pending(fh))
--			rc |= EPOLLPRI;
--	}
-+	poll_wait(file, &fh->wait, wait);
-+	if (v4l2_event_pending(fh))
-+		rc |= EPOLLPRI;
- 
- 	return rc;
- }
-diff --git a/include/media/v4l2-dev.h b/include/media/v4l2-dev.h
-index a69801274800..a213c3398dcf 100644
---- a/include/media/v4l2-dev.h
-+++ b/include/media/v4l2-dev.h
-@@ -74,7 +74,7 @@ struct dentry;
-  * @V4L2_FL_USES_V4L2_FH:
-  *	indicates that file->private_data points to &struct v4l2_fh.
-  *	This flag is set by the core when v4l2_fh_init() is called.
-- *	All new drivers should use it.
-+ *	All drivers must use it.
-  * @V4L2_FL_QUIRK_INVERTED_CROP:
-  *	some old M2M drivers use g/s_crop/cropcap incorrectly: crop and
-  *	compose are swapped. If this flag is set, then the selection
+The agent configuration files now use @README references instead of
+symlinks.
+
+Example agent attribution in commits:
+
+    Assisted-by: Claude-claude-3-opus-20240229 checkpatch
+
+This ensures full transparency about agent involvement in code development
+while maintaining proper attribution standards.
+
+Sasha Levin (2):
+  README: restructure with role-based documentation and guidelines
+  agents: add unified agent coding assistant configuration
+
+ .codeium/instructions.md        |   1 +
+ .continue/context.md            |   1 +
+ .cursorrules                    |   1 +
+ .github/copilot-instructions.md |   1 +
+ .gitignore                      |  10 ++
+ .windsurfrules                  |   1 +
+ CLAUDE.md                       |   1 +
+ GEMINI.md                       |   1 +
+ README                          | 184 ++++++++++++++++++++++++++++++--
+ 9 files changed, 190 insertions(+), 11 deletions(-)
+ create mode 100644 .codeium/instructions.md
+ create mode 100644 .continue/context.md
+ create mode 100644 .cursorrules
+ create mode 100644 .github/copilot-instructions.md
+ create mode 100644 .windsurfrules
+ create mode 100644 CLAUDE.md
+ create mode 100644 GEMINI.md
+
 -- 
-Regards,
-
-Laurent Pinchart
+2.39.5
 
 
