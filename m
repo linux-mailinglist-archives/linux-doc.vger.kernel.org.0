@@ -1,140 +1,124 @@
-Return-Path: <linux-doc+bounces-55573-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55575-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8EB2B210F5
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 18:08:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B00CB211E4
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 18:27:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E8A566E06B3
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 16:01:53 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 173C5684417
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 16:18:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A4022E2DCF;
-	Mon, 11 Aug 2025 15:48:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDD612E2F06;
+	Mon, 11 Aug 2025 16:13:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DkKBeFf1"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ioJ2Tcv8"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C9D22E2DC1;
-	Mon, 11 Aug 2025 15:48:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C5522E2EE8;
+	Mon, 11 Aug 2025 16:13:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754927286; cv=none; b=U9hROXLGcMAKrkgwauLjIXpVnV9f+zL7VcHsleVTIQ3MF4xIKicyPgM0wYSpegUVjH72jfQgzn5hfrDbjs58hhwSVkeYAFyghgrO/Y65DTHaQePQSiO5nTA4C8Py7jh2Q5/uBNoUjyRq5TnvzRvoqcYOpBUxYABaEHubgI0DZwE=
+	t=1754928796; cv=none; b=iphJ88kc4hxCDm4zHdW4UeFVwfFbgRIcvbXfmhe4UpjOK3ctTyiGReTQdbnb+P59eaCf2kC1bStopfT4kiL5lU99uXgI/c4SCfj2BkwvLl797yMX1N3mBsxpwKnlIiR3B2X6mIdXgSRJTq6bAwSd6icIOh7uo+n11nCGswAEcjQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754927286; c=relaxed/simple;
-	bh=8gmWeKWrJeK2Xkqz/8/mh/JFMl+WMCygehd7PMn2K1I=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PsVRxXcCr41ULSWxc7xmD8mnp6rOBSv4y1Y+9BIjuP7YBZ0vjpUPeVzNVgFHuIqNaPDEkyDKDzvn9IMPlVh2LMLOq/TZuJb5UvryQXdj4TVXv3+roIE08GVHKzoWiP9XcGo55i5Ap/Qko7CB4fI7aTDezGxSf7pdATxQt5xaSnI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DkKBeFf1; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61320C4CEED;
-	Mon, 11 Aug 2025 15:48:05 +0000 (UTC)
+	s=arc-20240116; t=1754928796; c=relaxed/simple;
+	bh=BngNvQtxxPHzANuXTDA6edjPk7rZAtFM5WdYLG3It70=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=dBTzoY5EVN9FrWnC+9waNPzpCP/x1+L/H7/DcopsyIho8YEU8iQH+iE6qpHLtJ97g3VF3TLeJkwVy8bk1v8Xp/2fk460eMdpWcWjVCXehZrPKTdZACwZ14vIHob5XuO9BGsb2UTgR+zTaGVCXwa6ozawESyE85lJJw7/iHSl4jQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ioJ2Tcv8; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2204DC4CEF4;
+	Mon, 11 Aug 2025 16:13:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1754927285;
-	bh=8gmWeKWrJeK2Xkqz/8/mh/JFMl+WMCygehd7PMn2K1I=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=DkKBeFf1TXwV2F0ZOL9ioAkAZlbyz1mBR7cI5v4XGX1SgG96WAhj7uO1wVK5vWPft
-	 mvhSF68zCaiZv0e/313lzJq2fXxZjisu9w00pKKCcyjmg8c3YiJ2FL8+O3z+lL5E8w
-	 avSOcY74Ui7UIInfSSPhyarl/DuXEweNKo+8+aDCRQXPY6+AB9FzVuY1Ki3p/d0ziM
-	 e9AOS+GvjD8JNJK/74LHXkqL3sJZSs0Mf+APtWUp1D22vWYSrZoXYWgND19fjrE8xi
-	 kdx4GxBIRT2s/5uVUMUTTGFolE5AiukVGp9PQGCtgVczj/2/vXp0MGSvLwRsq+riBS
-	 AF7fCp/sKxsIA==
-Date: Mon, 11 Aug 2025 11:48:03 -0400
-From: Sasha Levin <sashal@kernel.org>
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: corbet@lwn.net, josh@joshtriplett.org, kees@kernel.org,
-	konstantin@linuxfoundation.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, rostedt@goodmis.org,
-	workflows@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] README: restructure with role-based documentation
- and guidelines
-Message-ID: <aJoQs_5Mp7-LAtTS@lappy>
-References: <20250809234008.1540324-1-sashal@kernel.org>
- <20250809234008.1540324-2-sashal@kernel.org>
- <CAMuHMdWaVvAfm6LMxSpPuz3yZ7FDAexbUTOXrg58TqoWbce5ag@mail.gmail.com>
+	s=k20201202; t=1754928796;
+	bh=BngNvQtxxPHzANuXTDA6edjPk7rZAtFM5WdYLG3It70=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=ioJ2Tcv8wWPTyFSIevlLFL6UcLgrJOsPkqcx90GEbJjcylOHEcTIqgWkXP/wHNuPx
+	 ZDSKYKOUwqpc2rBFQclBqU36v1jyXMfc6o+98W+PnyZt1XusW3qIpn5KnbaSYOgwRC
+	 mLwLbhbHeAxm5XUDR91v+6cNgHHigGE6T0pMXQD7IoCua0iTq7LFPy6fpA8Ipt3BkC
+	 TtIv6k7iSG7X7l4tmmp1awhaScM09CaW63XAy0Yu1zdyLJjX9QyOyQXOaB658w/Tgb
+	 JU7IqM3rl7vONjcQCPKwS+OH1ryswxNc/H5QBk53iy66xpsEAegJdrf0C4TcP/ANIZ
+	 6/CYGVvI5UFBg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 199D8CA0ED1;
+	Mon, 11 Aug 2025 16:13:16 +0000 (UTC)
+From: Gregory Fuchedgi via B4 Relay <devnull+gfuchedgi.gmail.com@kernel.org>
+Subject: [PATCH v2 0/2] hwmon: (tps23861) add class restrictions and
+ semi-auto mode support
+Date: Mon, 11 Aug 2025 09:13:14 -0700
+Message-Id: <20250811-hwmon-tps23861-add-class-restrictions-v2-0-ebd122ec5e3b@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CAMuHMdWaVvAfm6LMxSpPuz3yZ7FDAexbUTOXrg58TqoWbce5ag@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJoWmmgC/03NywrDIBBA0V8JrjvBBzG2q/5H6UJ0okKMxbEPC
+ Pn3Sldd3s25OyOsCYldhp1VfCVKZeshTwNz0W4BIfneTHI5ccMNxHcuG7QHSWW0AOs9uNUSQUV
+ qNbnWAQKjHCrHpTdmYt16VFzS5/e53XsvtWRosaL912cpJq7mUZiz0FqDgLA8XUQf0jVkm9bRl
+ cyO4wt5ZQr0tgAAAA==
+X-Change-ID: 20250808-hwmon-tps23861-add-class-restrictions-83ce3c02d885
+To: Robert Marko <robert.marko@sartura.hr>, 
+ Luka Perkov <luka.perkov@sartura.hr>, Jean Delvare <jdelvare@suse.com>, 
+ Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ Gregory Fuchedgi <gfuchedgi@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1754928795; l=1529;
+ i=gfuchedgi@gmail.com; s=20250811; h=from:subject:message-id;
+ bh=BngNvQtxxPHzANuXTDA6edjPk7rZAtFM5WdYLG3It70=;
+ b=A72Hmv6jDYqCbccWDuiRCxTupDmvpCXwUE2eoETQvNLrJQNL5w6+BIGbMk+WNvBkYuVhDX720
+ cNF2R9o2EbaD5qiS0viNzdjDD0LmUssBk2/F8wmBY4GRJ1ATYsevy8X
+X-Developer-Key: i=gfuchedgi@gmail.com; a=ed25519;
+ pk=J3o48+1a2mUIebH8K4S3SPuR5bmamUvjlsf8onoIccA=
+X-Endpoint-Received: by B4 Relay for gfuchedgi@gmail.com/20250811 with
+ auth_id=484
+X-Original-From: Gregory Fuchedgi <gfuchedgi@gmail.com>
+Reply-To: gfuchedgi@gmail.com
 
-On Mon, Aug 11, 2025 at 10:22:34AM +0200, Geert Uytterhoeven wrote:
->Hi Sasha,
->
->On Sun, 10 Aug 2025 at 10:09, Sasha Levin <sashal@kernel.org> wrote:
->> Reorganize README to provide targeted documentation paths for different
->> user roles including developers, researchers, security experts,
->> maintainers, and AI coding assistants. Add quick start section and
->> essential docs links.
->>
->> Include proper attribution requirements for AI-assisted contributions
->> using Assisted-by tags with agent details and tools used.
->>
->> Signed-off-by: Sasha Levin <sashal@kernel.org>
->
->Thanks for your patch!
->
->> --- a/README
->> +++ b/README
->
->> +Who Are You?
->> +============
->> +
->> +Find your role below:
->> +
->> +* New Kernel Developer - Getting started with kernel development
->> +* Academic Researcher - Studying kernel internals and architecture
->> +* Security Expert - Hardening and vulnerability analysis
->> +* Backport/Maintenance Engineer - Maintaining stable kernels
->> +* System Administrator - Configuring and troubleshooting
->> +* Maintainer - Leading subsystems and reviewing patches
->
->Kernel Maintainer?
->Driver/Subsystem Maintainer?
+This patch series introduces per-port device tree configuration with poe class
+restrictions. Also adds optional reset/shutdown gpios.
 
-I tried to use similar terms to the ones used by the rest of our docs.
-In this case, the CoC interpertation actually defines this term :)
+Tested with hw poe tester:
+ - Auto mode tested with no per-port DT settings as well as explicit port DT
+   class=4. Tested that no IRQ is required in this case.
+ - Semi-Auto mode with class restricted to 0, 1, 2 or 3. IRQ required.
+ - Tested current cut-offs in Semi-Auto mode.
+ - On/off by default setting tested for both Auto and Semi-Auto modes.
+ - Tested fully disabling the ports in DT.
+ - Tested with both reset and shutdown gpios defined, as well as with reset
+   only, as well as with neither reset nor shutdown.
 
-	The Code of Conduct uses the term "maintainers" numerous times.
-	In the kernel community, a "maintainer" is anyone who is
-	responsible for a subsystem, driver, or file, and is listed in
-	the MAINTAINERS file in the kernel source tree.
+V1->V2:
+ - code cleanup
+ - split bindings into separate patch
+ - use patternProperties
+ - use labels instead of DT node names
+ - add few comments for clarity
 
-So I just went with "Maintainer".
+Signed-off-by: Gregory Fuchedgi <gfuchedgi@gmail.com>
+---
+Gregory Fuchedgi (2):
+      hwmon: (tps23861) add class restrictions and semi-auto mode support
+      dt-bindings: hwmon: update TI TPS23861 bindings with per-port schema
 
->> +* Hardware Vendor - Writing drivers for new hardware
->> +* Distribution Maintainer - Packaging kernels for distros
->> +* Agentic Coding - AI assistants working with kernel code
->
->Given the extensive split, what about normal (existing) kernel
->developers?
+ .../devicetree/bindings/hwmon/ti,tps23861.yaml     |  86 +++++++
+ Documentation/hwmon/tps23861.rst                   |   6 +-
+ drivers/hwmon/tps23861.c                           | 249 ++++++++++++++++++++-
+ 3 files changed, 335 insertions(+), 6 deletions(-)
+---
+base-commit: b1549501188cc9eba732c25b033df7a53ccc341f
+change-id: 20250808-hwmon-tps23861-add-class-restrictions-83ce3c02d885
 
-Those people don't read the docs anyway :p
-
-How about something like:
-
-Existing Kernel Developer
--------------------------
-
-Continue advancing your kernel development expertise:
-
-* Locking and Concurrency: Documentation/locking/index.rst
-* RCU (Read-Copy Update): Documentation/RCU/index.rst
-* Subsystem APIs: Documentation/driver-api/index.rst
-* Performance Analysis: Documentation/trace/index.rst
-* Testing Infrastructure: Documentation/dev-tools/testing-overview.rst
-* Patch Series Management: Documentation/process/5.Posting.rst
-* Maintainer Handbooks: Documentation/process/maintainer-handbooks.rst
-* Cross-Architecture Development: Documentation/arch/index.rst
-* Kernel Debugging: Documentation/process/debugging/kgdb.rst
-
+Best regards,
 -- 
-Thanks,
-Sasha
+Gregory Fuchedgi <gfuchedgi@gmail.com>
+
+
 
