@@ -1,89 +1,119 @@
-Return-Path: <linux-doc+bounces-55599-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55601-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77712B21880
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 00:39:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A026B218FB
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 01:11:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1F6213A8C76
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 22:37:35 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D746B428592
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 23:11:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 71E6A28726F;
-	Mon, 11 Aug 2025 22:37:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DC1E23C509;
+	Mon, 11 Aug 2025 23:11:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=os.amperecomputing.com header.i=@os.amperecomputing.com header.b="VCBNEGgU"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="I5qE9yf5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2096.outbound.protection.outlook.com [40.107.244.96])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D7081862;
-	Mon, 11 Aug 2025 22:37:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.244.96
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8256B2581;
+	Mon, 11 Aug 2025 23:11:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.14
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754951850; cv=fail; b=tJyGljnP6wUjW1R1FCKLtR5znmmLcDZtk2ObNI20elu66scY68IFgk7S3xHWmNqC4Pyrf0mAvoelLZ44w8iAlzc+mujHL3AHMNtRZ9dGmTis63+PR+9nG0VrM9qTQ/SBlKUt9z9KHWcE3lfmtLu+TdRou7oFQ0b4bOoROm41I+s=
+	t=1754953881; cv=fail; b=DgTdBDm3qgtr8qzeiT6NooIz2mmSBUfqHxNaglPvRgONdwNipHpoUmvNxsvsGZzbiqD7s2npSCbSWhlJ3FEgqi38b51G9UrZm8gaxBM9m68bKoU7+e31EPvLhS0mu8LY2tAcIIlXo4uzEAlcHVCsZi6kD//PPlbdlnIWACuCJVs=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754951850; c=relaxed/simple;
-	bh=4NAnkU9CoEUBPhPshACCe4MAACtrhJduDpfRtU1skHw=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=ibcQ0JlPxWk+aByLuyMRZv6p89N7LCmPrgEWrEpdj5r91yGrZAMmK7mbYqbaItDpZQq4TQf+ZHBjWXBJuD4tbVZpixvaOcoccfjqAhIy4ipYIFNLrXmDiNm8lWJeTl2yZ8MCL/E8Iuf+DYTISwh4wPAkfeQeDyNNdjwPL8ZrgRo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=os.amperecomputing.com; spf=pass smtp.mailfrom=os.amperecomputing.com; dkim=pass (1024-bit key) header.d=os.amperecomputing.com header.i=@os.amperecomputing.com header.b=VCBNEGgU; arc=fail smtp.client-ip=40.107.244.96
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=os.amperecomputing.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=os.amperecomputing.com
+	s=arc-20240116; t=1754953881; c=relaxed/simple;
+	bh=g7JiYqh6kdDmR4S4UXOYT7+HQQHaVCc0R9i/uIYpxAM=;
+	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=Ip9Nvx+sutX9z8Iehi8RNF2MzBLeeDYCrst8d1ufHnp+nt/M8avI84VscgBXHQmBaodIYNo8XA+JOh00mmhLSPPMOShPspKg5hFlc2RMoOl84hZ/klWDvZTbHT9mN/nwWMRUdwLiVlm3H5/SNcK9MG/SoZ26cMBpjH2sKfHzkW0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=I5qE9yf5; arc=fail smtp.client-ip=198.175.65.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1754953880; x=1786489880;
+  h=message-id:date:subject:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=g7JiYqh6kdDmR4S4UXOYT7+HQQHaVCc0R9i/uIYpxAM=;
+  b=I5qE9yf5XpbfNLOLx9KHNFJWXr7cGMTIcdn+Dh5PprkavR8g84gDgQi5
+   4QcA6hTnxfEndzbQP/9gN9d8K+TbMbuT2KZVX2Gjp2OY/iEijIytAzbyA
+   2lWgnsSsOihYNvi66PHDycfTEBvxAG7n36pJiB44tf10eyjsImedECGV4
+   4IdIhwtc8/aci7fST8DX7xYfUWGom223lqCwBfTltxPlIymaz71F5Sw5w
+   L2y1rDVjb68K5INZP2RfrLnbeSdpovIeRmSji0As03Cr1oYFjNHZ6cBaf
+   sli2t6W5RNAIuTlcKmv6AJ/+SmjFuBcgUMncYYt5gjkxsxCcS21ALMwsf
+   A==;
+X-CSE-ConnectionGUID: mnk+qlBPQgC8y7ChYgQW9A==
+X-CSE-MsgGUID: BVzU6y2BRp+5bHKOgryKiA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11518"; a="61061111"
+X-IronPort-AV: E=Sophos;i="6.17,284,1747724400"; 
+   d="scan'208";a="61061111"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Aug 2025 16:11:18 -0700
+X-CSE-ConnectionGUID: J6VCUPewQAWoeLOrbcGdIw==
+X-CSE-MsgGUID: o2mdckIWRtOme81s0uiSNw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.17,284,1747724400"; 
+   d="scan'208";a="166032348"
+Received: from fmsmsx903.amr.corp.intel.com ([10.18.126.92])
+  by orviesa007.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Aug 2025 16:11:18 -0700
+Received: from FMSMSX903.amr.corp.intel.com (10.18.126.92) by
+ fmsmsx903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.26; Mon, 11 Aug 2025 16:11:17 -0700
+Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
+ FMSMSX903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.26 via Frontend Transport; Mon, 11 Aug 2025 16:11:17 -0700
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (40.107.94.49) by
+ edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.26; Mon, 11 Aug 2025 16:11:17 -0700
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UD4ubW7xDZh05ewFrfKTcSBljDgiU9DXw4vK0Tra9hL9ohMYGgEpX3ouMJ4TtAPPciBDitUk4hTMtT4oa8jMAZRGZqo/UB6nlDuVbQpLEoyZ2GDPOs3RZZq9ljx7J6saJ5P149IaZDRLAlv1fI7dN0eEzhLH8Pcrr9UrybC8PkpFNQAUoy4TSwsmiY2H4FEFk1W7Dw+ih471qDvptZjYrfhAkWxAL/lpe/IbDZacw2Sh9H4vXBVBO8XOlvTZSMntPyBIQboRz17s0Suo68bwSJgx9vhIuCZf2OtJ9CgCWQ91EZSLM9mSL502wjvTs9TdGPStzeqo+dFR1UM9h5ITrg==
+ b=h2yzzYwZENkYrfkjI6fYXkBMIk6nzF3u8FYU9h5iJHG96NHA/4wV0N+SAEuOH7j+8zmecoXgBQJbvCrZ12VbIqbfQlfh5RNVLHBKpsm/KdUQ0FjxXMSzdGHy5E2NGUydDvDrReEJL7d89a3V0KMj06k5lM6EzqPPGp5GgrWF8E38QewnUV2GaQXHq+RLnCUJkGw/pUbIJdfhSxQ8hcZybeIVqXWy2BdzM/z3hDdovQJHhjopFd4lw++JQWk1ht2GQq9QNNGMzx/UV8UGRP+ifXfS324SNjVwChxDll233ilaze32pNj9i1uiU/2KPq2x5JrXngeSPWY5Y07QFqch9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VD/vNvXBWyR/7raIRpUT3pi8uZpW7fXWX9ODuxByMkg=;
- b=DRPv61Srbc/mPa04w6nv5WHeLrcm25DGlYVTrDYZAn6et08uglm4axAYByHe2ydYnov+byU5+mV0U7GzRA8QayoKXkoATkTC6WkBgsSMmZApm2FV2fVVQ8Aa2hEBbNetKQs3ZMnqbJWALvkkceG92sVHhNm9izezLwf3mZ434NWMN0q0Ufcga5Hmq6vkTXWCxSMxTuxZQB2kDmGab9dVV0g/U6IMXBYWDcSbf9u//WOKB6/K2NzUVF6nlkYwgBN3N0bAi31ZC3ldxJJBTHSxUmH9TU7FUh0v08ScoqQ+q8E/mKXzt3VqKqvcv4T4zJBpjEHscYZp2EOojUgPOFN5rw==
+ bh=wFadxSmiffaSp1Wi8eaN4YC4DmvSHeE6IjZftoOosZo=;
+ b=C3YiNTNXqLT/gyGBaHKCNhTN0XxCuch+gonP56mf71OCcLZxq6x/dGEBp/RfFFuIVGVUh7f0qfmicjPbeuhrhu6aunmTceZ5Mfmtiis1tq5mS29vtMSoSbg8Ym9stkRCrnNneqSl7Mj1FeU3e7Lf05rQt+RuXzwQ0MvaxDu+vUsd3p3PqWcYx+rK9SKAZiQrXBuWc1ZEnzREfzWrR9Ehe1E7Irfsw15OCfrdRLfEGZMjFlM6lWqNowtgauslpWIDOkIRK0p1ivNVOBuIrbItGZ88KG7Mf0SdwFuPMbBIOG3IZH+3ZUwpJ5kX4EZz5HqPJzJNsPW5snB5sr/l5LWqZg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
- header.from=os.amperecomputing.com; dkim=pass
- header.d=os.amperecomputing.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=os.amperecomputing.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VD/vNvXBWyR/7raIRpUT3pi8uZpW7fXWX9ODuxByMkg=;
- b=VCBNEGgUWByFx+2fKnX9IsFSn+hQR4OJUfl5f+aEJ+ZH+IWlHEfqygyhXBz6up2G6YpPf0fqMe08vIO73OVJmMBmoVul/UIx36DGTUJ567IgUvipanYW/h2IqGtoH3ebDXmwYuNNfKVYqlRqDn2SZyjCr2/36O2PuW2Dr9Av8Nw=
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=os.amperecomputing.com;
-Received: from SA3PR01MB8473.prod.exchangelabs.com (2603:10b6:806:397::12) by
- LV5PR01MB9441.prod.exchangelabs.com (2603:10b6:408:2b7::10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9009.21; Mon, 11 Aug 2025 22:37:24 +0000
-Received: from SA3PR01MB8473.prod.exchangelabs.com
- ([fe80::46d7:1d3a:dc9c:69c3]) by SA3PR01MB8473.prod.exchangelabs.com
- ([fe80::46d7:1d3a:dc9c:69c3%6]) with mapi id 15.20.9009.018; Mon, 11 Aug 2025
- 22:37:24 +0000
-Message-ID: <a302543c-7a99-4ea4-9559-e4cf4ea79b5e@os.amperecomputing.com>
-Date: Mon, 11 Aug 2025 15:37:18 -0700
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from MN6PR11MB8102.namprd11.prod.outlook.com (2603:10b6:208:46d::9)
+ by CY5PR11MB6188.namprd11.prod.outlook.com (2603:10b6:930:24::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8989.18; Mon, 11 Aug
+ 2025 23:11:09 +0000
+Received: from MN6PR11MB8102.namprd11.prod.outlook.com
+ ([fe80::15b2:ee05:2ae7:cfd6]) by MN6PR11MB8102.namprd11.prod.outlook.com
+ ([fe80::15b2:ee05:2ae7:cfd6%6]) with mapi id 15.20.9009.018; Mon, 11 Aug 2025
+ 23:11:09 +0000
+Message-ID: <17492545-4a71-4809-ad19-f7e54139415e@intel.com>
+Date: Tue, 12 Aug 2025 01:11:04 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/5] RAS: Report all ARM processor CPER information to
- userspace
-To: Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Ard Biesheuvel <ardb@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Len Brown <lenb@kernel.org>,
- James Morse <james.morse@arm.com>, Tony Luck <tony.luck@intel.com>,
- Borislav Petkov <bp@alien8.de>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
- linux-efi@vger.kernel.org, linux-edac@vger.kernel.org,
- Jason Tian <jason@os.amperecomputing.com>,
- Shengwei Luo <luoshengwei@huawei.com>, Shiju Jose <shiju.jose@huawei.com>
-References: <20250805-mauro_v3-v6-16-rev2-v4-0-ea538759841c@os.amperecomputing.com>
- <20250805-mauro_v3-v6-16-rev2-v4-1-ea538759841c@os.amperecomputing.com>
- <20250808162209.000068f5@huawei.com> <20250809175519.74b08ea9@foz.lan>
- <20250811115238.0000272b@huawei.com>
+Subject: Re: [PATCH net-next v2 3/5] dpll: zl3073x: Add firmware loading
+ functionality
+To: Ivan Vecera <ivecera@redhat.com>
+CC: Jiri Pirko <jiri@resnulli.us>, <netdev@vger.kernel.org>, "David S. Miller"
+	<davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski
+	<kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
+	<horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Prathosh Satish
+	<Prathosh.Satish@microchip.com>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, Michal Schmidt <mschmidt@redhat.com>, "Petr
+ Oros" <poros@redhat.com>
+References: <20250811144009.2408337-1-ivecera@redhat.com>
+ <20250811144009.2408337-4-ivecera@redhat.com>
+From: Przemek Kitszel <przemyslaw.kitszel@intel.com>
 Content-Language: en-US
-From: Daniel Ferguson <danielf@os.amperecomputing.com>
-In-Reply-To: <20250811115238.0000272b@huawei.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20250811144009.2408337-4-ivecera@redhat.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: CY5PR15CA0150.namprd15.prod.outlook.com
- (2603:10b6:930:67::9) To SA3PR01MB8473.prod.exchangelabs.com
- (2603:10b6:806:397::12)
+X-ClientProxiedBy: DU2P250CA0018.EURP250.PROD.OUTLOOK.COM
+ (2603:10a6:10:231::23) To MN6PR11MB8102.namprd11.prod.outlook.com
+ (2603:10b6:208:46d::9)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -91,278 +121,482 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA3PR01MB8473:EE_|LV5PR01MB9441:EE_
-X-MS-Office365-Filtering-Correlation-Id: 26ab83ab-a3de-47ac-5135-08ddd927a43e
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: MN6PR11MB8102:EE_|CY5PR11MB6188:EE_
+X-MS-Office365-Filtering-Correlation-Id: c41d24cf-be49-4740-dc47-08ddd92c5b5d
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|52116014|376014|7416014|38350700014|7053199007;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?QjNMblRyUE42djdCdXZ1U0dUZmk0dWZkUEhKTWdiT250bE5Gam9YckV4aCt6?=
- =?utf-8?B?NXNZUWdIU3RXbTBBdEtrOFNqNk04MVhhd01UYzF5bXFwVmc3ZVc2RmNpLzRT?=
- =?utf-8?B?LzA4U29HTXl5b29xRStRSnRWSEg1R3RaUVFXT0YyRFhuWUtGTThkYW8rUW9M?=
- =?utf-8?B?N01haG5iYXExWHZWeWxrTWlWQ09NTGRYS3U1UEFEbWI4SEdzVC9sSDFGVFRR?=
- =?utf-8?B?VkxvK0NheGdxM0pUNTFjZnZvdGRLa0hzYzlhcXdmSUhid1ltd3JqZ1BIWitw?=
- =?utf-8?B?RmFZMlM4V0VmcWpLWFNjQis0R25YUEtYNG1QZE90dUpDUWE2bHBhSGh1UTY1?=
- =?utf-8?B?MWVBeE9nNU1zNmhqK0lOUDdQU1M2c0dheFd4cCswR09Qa2lnbXlUck5GelBv?=
- =?utf-8?B?UEhRV0w2RXVwdlFFSWRvSDRNMXZsWmp4SFRlYXdwTlZZMEFCKzRxQzlOenRS?=
- =?utf-8?B?N01KT0hnVDFBRmhXRjVrWFRyY1Zyd2V0diszYUk1RjNnQkZBVWtVQ3ZMM3JI?=
- =?utf-8?B?aG9ZZ3IyRDBURTlhSU1leUZyZ2g2R2EycmY5dERIb2JoNG1OSTNMbjNianc3?=
- =?utf-8?B?dWZkNE9HN1NPVm5RSVJ1Y2JsZW5xbHN2Znh3ZkZHOWYrdkNTWGIwcjZZTHNZ?=
- =?utf-8?B?WjBTZEhoWWdTd3hoamQ2Z0ZBZ0hPRzJpUk5YSVc5RVpWSlNxQnVBRmJKeVM2?=
- =?utf-8?B?ZU1ab2k5WjRmNXRJKzVKYXFiY1F4b0JPeVo4cFQvN0twK0JYRXcxY1EzWCtO?=
- =?utf-8?B?aDdwVGN5SUxGQm54STlsckZJWEdwMTViT3YyQm5NY0NOa1FHSzJvWFc3U0Jr?=
- =?utf-8?B?ZnVjMVA0dElnclBtNWdlVzkzSGdJeDZNdDN6MkVNdnFVYjEvdzZlL3R1T2R3?=
- =?utf-8?B?TDJ5RHBpSmFLekZOaThFUWJkVVhYa3Z4NkhTcXhrREVpd3dlYzQyZ3FLam05?=
- =?utf-8?B?TWV2Qk9Pb0tvNW5zUnVlbFNJZjFESTZnd2ZHUThZbjRzN3pISCt1QS9tdFIy?=
- =?utf-8?B?MFJla2dHNlZkTGVvUGVSR3MvWXQrR2ZSeTVGa2Y2WmxsUkFzcFdFM3VBYVFs?=
- =?utf-8?B?aTAzeW9zdytIdWxIdCtMcEdJT1Awd0N6ZlRqa1pyUTZQSm1SS01Jckw2eTMr?=
- =?utf-8?B?L2ZEZ1dZUWQ4NjdscXdrVllrRGRuN09pUFNnTE5GNTdjVnlkeWlucmNLQzI0?=
- =?utf-8?B?Rm0yWHFoZlJjejQ4OWZLY3d2U1hEOElXV0tLeDM1OWdGdk1Gd3NvSGJpTWo3?=
- =?utf-8?B?eFU1VGtiTkpOY1NrU0c1aURmSzIrVUJIaXhRdlhncTVNSllmSkc2bkhESi9i?=
- =?utf-8?B?QjE5RXB6MDdwSDRZeHA5SGFTcU94cjlHQUJna1VJWjlVMnYvL1IrNWNBQ0lH?=
- =?utf-8?B?L3Q4WDV0OG9KNUlXNkRSUUgyMVYrc0p4Y3ZZZXpIcjR6WTJqakJYdGo1Mldi?=
- =?utf-8?B?MEN4TWRkZC9BNlZhK004SDErOVJsU2dMSEpyRDNnakZ5Y2dob29ENDFsM00w?=
- =?utf-8?B?aTZYNzcxWERVYkllenRZam5UcG9QOU5JWkpiay9sejZTMGFKaFBla3VVTUVi?=
- =?utf-8?B?WFg1cXU0dlJFWnFpNmdGZnAzdExaMXphdTlUUGM2bVptYTlyNVR5OGxIa2ly?=
- =?utf-8?B?a2xTcHNITkh1UUc4SFVZa05sbFZOdFhqcU90blFUaXoyaWc3MFJCQ3lneFJ0?=
- =?utf-8?B?QmJDMkJPa09rR2xuM2NWZUtjRFc0YmQzK2VkVTBYQzZzYU1hQTRCbU9BSThU?=
- =?utf-8?B?VXlSVG9OblkxcUZzaUVvTGhEbmZKY0MzbWZuaFQrSHNoTjdwYUUxZ0FLRDNx?=
- =?utf-8?B?OElsUnh4SGV6dEJHVGozUnNaTnR3dkxEZ1JrUkdKUjhpc2F4c0Qyc0xBS1pB?=
- =?utf-8?B?QzhiVU5iVWxBSUlCejArNnU5TWZOSXVhcHFYeFlFbUpObHY5Q1hBK1czY1Yw?=
- =?utf-8?Q?Lv8ckP18QPw=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA3PR01MB8473.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(376014)(7416014)(38350700014)(7053199007);DIR:OUT;SFP:1102;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RXVsWElGT1p0QlBFak9mU2dPRjc3Q0QxUk9kMGhaSmtqZEJ5cWlhTlpZU1ph?=
+ =?utf-8?B?a1FUaFVZYXR4bDZaUHoyb2E4SlcwSGVDZUxhN2xpY0w0ZFlZRVliSmxPQU9h?=
+ =?utf-8?B?U2ZCejlOK0dXL1BIR2xMa0ZXclZMUVl5ekJmQTJpcWY4aWNUcElKaHRLRzlE?=
+ =?utf-8?B?TWY3TTk3RVpWUlZUZXlIcndmV0Zoa1Rvd2piQ3Z1Y2xlV20yMlVzYkQ2cnhN?=
+ =?utf-8?B?QkZhVUx4eXA1WjFuZ2NRWVh1R1Z5SklnQWtpZm1XaitiZlJpU1BZUWJ2czZF?=
+ =?utf-8?B?V3FDaXhQd1NVdDkyQjhaQkhLdkhUUGp2WFAxOEdkbTBweXVzdU15SU40cFZJ?=
+ =?utf-8?B?NjR1SnU4MVZsaUpDU24vMi8vYWRqOFZZMG5DZUZkNUlnQlRIek1XR3d4emJM?=
+ =?utf-8?B?THRUaUZZdlovZUxGWUJ4R3NicWtzUzVpTWVaTG1aRVFCOFJaUHdMSkM3WUVy?=
+ =?utf-8?B?ZjZqeDJ1TUU0cUd0OWsxZkpXZ0pOck1sSDFKWE5JYkxnZ0ZxZG5meWlMNC9o?=
+ =?utf-8?B?eWFPck1KRnltZThTVmN2ZmpGUnZBM292YTI0OURPNVd2WlEzcHlaSUhMa0V3?=
+ =?utf-8?B?bmFpVWd0UXYzdTZuemJrb2ZUNHF5N0xENDh2MGpxVHNKaFZrYXE3YUx4dXhv?=
+ =?utf-8?B?MS9PR0VNRHJjK1U1MWxqQjNWcVNFdCt6ZURaV2Q0b3BJdkI1bm9NeUsvQkxU?=
+ =?utf-8?B?UUcxV2xjbG81cXB2OVZPbUQrQWpFRUpCZW1uSTJqNEhjNEVSbUNyNVRaQ2NQ?=
+ =?utf-8?B?YlFDRmFFZ0pPN1UyNUc2SVRycUs1V210MVBodjhKeWhidFJZRnNWZWpnTnpq?=
+ =?utf-8?B?aWdhNHVFVW1QTlNZTUQ3a3JDcmtLZTQ5bGZKczFiR1k0UkZ2Rjh4dFBHWUI4?=
+ =?utf-8?B?ZEtlUlZrbjU4OGZ2QzVHakdFTERha2RsckVqNVNKNzd4TVNWdHI3UWhkalR0?=
+ =?utf-8?B?YURrczRlWlQ1QjFCRkFvY25xMWl6eWZnSmY4elIvWTFSWTA0QTdkM2ZJUXh1?=
+ =?utf-8?B?K2h3UEhIWW03cXc4L3Y5UExLN3hxSXlkbUM4b3RzT3lPci90eUFrZW51RytH?=
+ =?utf-8?B?Qjhxd0FPZjBXTmdZeFl0MTBSYktlMHJEejdIR2dZWEpsbnQxRldYd3gvUE5z?=
+ =?utf-8?B?NmFzWXc0alVFYmV4YjBnZC9MYVFhdFVGOHdLcmxoZG81SmpzSWFLSWNVR1Fq?=
+ =?utf-8?B?bUdZK212c1pza2hYWUhpWUZrSXpFK0JKMm81R3g5elN6TllmYUU5SEQ0SFVE?=
+ =?utf-8?B?L1dyR0NkTHBVWi9yWSt1L1hZSjZ0YTR3WnFuVlR2dVdUTGhiUXFSanVodWtL?=
+ =?utf-8?B?WCtSQmMrc3psbUJaakJ2N1FyNnN6T0V2U0w2SUZuRjRWYTZ2ZTNGS1o1QVI2?=
+ =?utf-8?B?M3hkekU3cFlFalhKNjhaY0FWaUwvNmQ5NXFibTN5WEhydlg0RExKRXFianIv?=
+ =?utf-8?B?TGVTUzluMGlZZnVQemZ5ZU9rY01MbklRK1B6aFluL3dHVllKdWlRSmE1eVRB?=
+ =?utf-8?B?M1VpeHBSc3JaeUQ3cEpqWUZXM2JWL2ppM3RuOHZQUjE4TGxMRS9vTU5MY0My?=
+ =?utf-8?B?LzFqekFHR1BBQXFEandRNVV1RXloYlg0cWJNVldjQnJyaUNHTnIxTkV6eklU?=
+ =?utf-8?B?T3ZyWm9nYUhXRkNBNW54Z0x2Y3RHV0tLdkNjM1M0dkREcWMrTGlvbVZqM0J6?=
+ =?utf-8?B?dDM1R3YxeElJaHlRSmNyVm4xbzIzYVV5RWg1VUlBa2NOTnhnYmZxNkgxZEp6?=
+ =?utf-8?B?dElFMDNRNVRwU0lsVmRRZ0YrQTc0bWVHL3JncXpJcTFFMTZMTlpqQXhFeEow?=
+ =?utf-8?B?dE9BRFRIZlhXN01hZHZucTN3bytnQk1HZEQ0TDRabStEU3hWMlhmQTdnaUx1?=
+ =?utf-8?B?L3hYUWwrQjY5UUxydktIOURiRWxjeGlBbzZqR3lCMFc0ZmNaZWJsNFo2cTRa?=
+ =?utf-8?Q?MHDhJNjyPo8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN6PR11MB8102.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(7053199007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NmZ3YkxZMFdoVHp1Vm41ZmRjYUlvd3RHaU50cnoyaG1hc1ZHdWk5Ti8xcEZz?=
- =?utf-8?B?cnE3WnRIWUhLOUppZnJYSFllM01lN21STzB5Zm5wZitJdzRYdUNmbVh1aGtn?=
- =?utf-8?B?V1VIYnFnTnBsbmZ6bHAya05vRE8zd1hJMlJhazJVQTF2Ly9xNWMvV3RReW91?=
- =?utf-8?B?QURFV05lVlRTY0s5ME05SkhtcE5YSVBIaUVIUzd1a2Y5NlRRTUU2N2JBQm5B?=
- =?utf-8?B?ZW1aSE1xQmwwcm93eHd2cjFRTUhsVk90NE9SU1IyQ1NYYklNUnJjYU5tbysv?=
- =?utf-8?B?aERDRGxBMFBEQ0d5SDBoY2V4N3JtV0JWUjV0eGY0dEVCNTNsSzZ1ZjJFT00y?=
- =?utf-8?B?WTNsMmdlRmhUQ2dEZzVyU3V4ZjBrcXQzZXdnL0N0YjlXWkVoQU1oUGc0RU1x?=
- =?utf-8?B?M0hhTnlHbHJnRTRQSkxrRDc1QTV6N2NGSmp6cnBZQXp3U2xXSVQ1N082TFh3?=
- =?utf-8?B?Q1NCYkZQVkh0anZLVlIvVzFEeDhUcVlWSVNvd0lybm81bUJFRlN1YjJHN0RU?=
- =?utf-8?B?VXlmYk9ITzRkWEhBNG1QbGxKZk9wSEJ6cmpzdFFmWkxtWk9UY1JNNVBmUVZs?=
- =?utf-8?B?WTIwcDZNTE53QjE5L3hiVTQ1aDNadVFpT29aZjhhaHdJQUw3eG5PRkNZdGVX?=
- =?utf-8?B?cUpCSUVOSzgyS3hCdjVJZ1Z5RDM3aXR5cFE4TFJNaWFidUZoZ2xQdTZ3b3N2?=
- =?utf-8?B?M2V6cHVsKzZka0c5dWJYdGRmK2ZuZVZ5M2JBdHJlQi85NU1zWHNjdGRhQjBl?=
- =?utf-8?B?WWMyaHpDN1FCU29leWhEcVlTRGdQZTE5ZzNHZEN3TFJBczcwMVFPRVpmRjFH?=
- =?utf-8?B?TFU3TVdQK0RIRVQ1YTNVRWluUmd3SFpzNUU5dnA1QnE4UzhZMUQzVkxIam1P?=
- =?utf-8?B?RzNQd2pXRkFFWkNiSnFhNFc1ZEM4SU1QMk9TMCtieG9pRElCOUlHTUg1eGk1?=
- =?utf-8?B?Y2o3NXNMcFRHYWpYVVR3dzlsL0FacWhmRFJva0Z1cHdTZ0Z6SEQxcU5SR3lU?=
- =?utf-8?B?R2Y5Q3JvYXVOU0tTRys2ZUpMV0hJVW8rRTVncmppSzllbm5ib0VaTUxSNmwy?=
- =?utf-8?B?Yjd1SlVEejdlZDFUNXR4NkIyOWNYZnFia3RLNFlsVlVPS3dNNnNSQndYaHNQ?=
- =?utf-8?B?TUxrd3FjR21STWxYZ1NLMFZzSHIyZDRlSmFiZ05BeCtmZDV1M2VDTU8rQXZM?=
- =?utf-8?B?Y2FBa002WGZkWFpzc3U4emMvbFM5VGJhdTA2cUFid1huejBYd08wTDZSUG1B?=
- =?utf-8?B?eVh0RUpSNTJHbVZ5ZU9IS0loMkt4MWVWaDJsMkZ1VjVOZ0hNbnppcVhEZmty?=
- =?utf-8?B?eVJpR1hnSWM5K1lMTTNKU0lGcCthM0lXZk9LTlRFV29MMHR3OFgwSnQ3b0VO?=
- =?utf-8?B?YjdHb2tPTE5ITmxxeWdSNXVPTWFwN0dIUmorMEZQamsyN3ZWTm1jeGFFbzQx?=
- =?utf-8?B?aTNSS2Vvb2NXN29OcWlPb0tmUUYzSGtMaXdJeEt4aXEwaG1DRVdTdkFDRWgz?=
- =?utf-8?B?REdaVEh6bDhibFNyQVZUVTRwYmtXZ29kWkh2NUVuWlA2UjhvYXpSN2hObDZv?=
- =?utf-8?B?M0Nqb2NvcitiWHRZQzRxQ09BYms0MkhseE9VVVI3U1d2THBRdWhMeFdqVjhV?=
- =?utf-8?B?ZGJYZXZROXVtdy82ZFllR3g4Qkpnc1QveDdkbjJCU0k0MW54ZEdaTVVmdVpn?=
- =?utf-8?B?S0djdUVvKzVkU0N4MW1VblRyWGJnZWpGdEhBRVVKYXNud3dLYXpMNjFTY0Vq?=
- =?utf-8?B?RzdTZEFCVDhhaUlQOXhiNDNKMHk0N2hpS3Q3enEyeVU5Vk13Y1FCQThKVEFE?=
- =?utf-8?B?Tno1VWkwRC9WT21wZlBtbFJ5Z1pieU0vK2xJUTRGNGs3TVR4YVFHNHFMQ1d5?=
- =?utf-8?B?VWFiUlJpbzluVEdzakhlalc0NzVURTM5Kzg5MFJKTi9PZkNCbkh5VndiQWx2?=
- =?utf-8?B?NjVSdHVETnpZOGdYdHljQUdBcE9kV2ljWE1PMStRR0hpK1k5dzdSamJNM2xo?=
- =?utf-8?B?aStpbjBnV1pKKzdqWVhMOG9MVUpHdkwxU2JJWGhFSUVTM2FhVGpWUVorS29a?=
- =?utf-8?B?WFppVHdkbXQ2MzU2bGtwV1FWNitmaUZ2bWF2TTNuYUxKOUg0WWRpaFVvS0Vo?=
- =?utf-8?B?b1Fwdks4YTNiVGJ3TDVzQmxkeUlGQzRWWURLOElwMW01emRtWElpL0VrelBt?=
- =?utf-8?Q?b6hiRb5GMsjHYTSugPkQIVM=3D?=
-X-OriginatorOrg: os.amperecomputing.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 26ab83ab-a3de-47ac-5135-08ddd927a43e
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR01MB8473.prod.exchangelabs.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UmdRUExNQmdrRmJIMEdIaVpBb1ljd3BlU1REYkU0ajdvbURMM0sybFFZenFV?=
+ =?utf-8?B?TVRweWFyVllMLzVRdE5IeHhpdlg2MS92ajFmbFJDV2gzaGduQWxTbTJLbDMz?=
+ =?utf-8?B?eFJqRDFyVWNuYU9qcDdaNDdISGdac3dKTzNyRmEvZGFHdHNRM2Q0d1ZHY0Ux?=
+ =?utf-8?B?THB2dnRwbGRPMkdDUEJ2b3p3LzVMUGRMOE82a2tVdENPZVZsMDJFRG5SZmdv?=
+ =?utf-8?B?S2Y3VVNpL2pFQ29rZVUxUm82V1hrOSs5Yk1hSzI3OVNwRkFpbHdRbDRYbkhT?=
+ =?utf-8?B?a1JMOXJlZ3BuQisraXZIZzNGRGVqTW0xV2pRRlZiZzBOdGRxR2dZSS9COXpR?=
+ =?utf-8?B?N253eUpha3JzeElWUXBiaTR2bnJ3TzJOMmJjc0t4VFExemN0ckcvVHU2MkhJ?=
+ =?utf-8?B?L3dtc2srQ09vMERORjMyL3JGNjRwZVgxczZGdC80MTI1Yzd1NWc3Y3A4aW8w?=
+ =?utf-8?B?RXl5OGNtY0prcUFQbmIrMFJqR2NsRnFjMDZrREw3YmRtaUFoVDVadlpUWVlh?=
+ =?utf-8?B?ZWZMVFVpT2p5THJHSDBaMEVadFM0WnA3L2NLYzNDaFRmQVlTVnJUQldWQmw1?=
+ =?utf-8?B?Y1ZKODVHYzFqU2E0ZVltZGdjOExqdUZyU0RFQ28xUmkwcnpYdEN1SFpRNUlF?=
+ =?utf-8?B?NmhUak1peXl4SFJWY21KcVpGeTdNaGEwOGthcXdJemd5bTdMZUplN2FJaVQ3?=
+ =?utf-8?B?dTlTYk8xM21EMUhVQUkyWWJ3M1ZUL21MT0FIaWhzVGdCYmE3dzUxdDVsc3hC?=
+ =?utf-8?B?QjljbmtCSFIrdnlxZUFvR1FPVTlYaThxNlNuUlpHalRlWE42eTUrWmV3NkJJ?=
+ =?utf-8?B?V0JZZ0pwWEsvWkMxTmxMNkdCLzBRdHNscWRyMnRqdzc1NkVtM1lRbEdubGF4?=
+ =?utf-8?B?VDhROUxYUy9JMFV2NGxQb2o0bUxBVFVsYUF5UDh6TzFnVTFMeFZ5VGJsNnF3?=
+ =?utf-8?B?UmgyM0ViY0hGSUQ1MEx6ZEdRMUhpN25uTkcvY1pMT0luTXM2d1RBcTBxd3ha?=
+ =?utf-8?B?UkdWbXVLcmFoK1BCdmRQdjVUdzZsUDZPcVdQVFl6bHMyQUd6VTlJTDNXbHBR?=
+ =?utf-8?B?eXg4V2wybVNEQXpkdFE5MUhLWGxlTVljbys0MHF5enlEbGEvM2pVQjJtN1hC?=
+ =?utf-8?B?WUVwaEZQbzQxaC9IdWhheXNlc2llOUw1Q0tTd1d1UzhVQUJXTlllS0VaMFVH?=
+ =?utf-8?B?Mkc2NWlkZk9GKzF0VExKZDVKZXp3QUdjTXhYYU5DRWg1RnBRZHhCSDdhV0Yx?=
+ =?utf-8?B?MzIrOXQ4MU1tTWVaUzQ3M21vN2lYaVdjeUE0dlRpbEdiT2Z0dWRGK2Jjaisv?=
+ =?utf-8?B?ckdQb3d0TVlraC8rbWRKT20rMk5VTHhJN3BMTkc4dGd3dWkxSGJyUXFBSHpC?=
+ =?utf-8?B?TVlid2pQUS93QXhFa2dmeG5scmcvNnRUd2xLL2dzMjZtclhlOUFOdVlpZkgw?=
+ =?utf-8?B?VlBLdFJkbktmRjM5WmsrU3poYkRSdmNiRllVSU1reEN2T2ZjVldBWFJDZGJs?=
+ =?utf-8?B?SjBna0Q3SHUxdURIdFVtTEpyMVhCYUZlZjFLenlKUDAzd0hYSWc2N1g2S24x?=
+ =?utf-8?B?WWpUajFQdmtXTVlCTFB0bHdyYml5VTVHdzhkUGJ2UklqZFc3UzJuZ0Z1MDFM?=
+ =?utf-8?B?aFlBZnIwN1g5djY4SG1EdlBIZ1F6NVBZNmZqWEgyajVRaU5OZkFieGYzYVQ4?=
+ =?utf-8?B?NlRrek0rTXJQVUFKaGFmc0RPZk95aURKandpVEs5VENPMERvZzVYT1p0Tmtt?=
+ =?utf-8?B?Vm1ZSzZ3MExjcHFPbm1CeGFuOFRzdUNiYVFLZFpLbWY2U1JmaGJEVERVTVNq?=
+ =?utf-8?B?ejY4R05GRFF6Wk9rZTZuMmhqWGxheFpXcXFCNVlzREZkSVlPQ0FRc0J1c1RN?=
+ =?utf-8?B?VVl4RUtwN09yN0tKUGlTY2dlM2JEbnYxMkQ1R0pnVVZtajVDdWR2Mm5qVTAr?=
+ =?utf-8?B?SzNvcnFuakVnYzhCTnBNeG1OVjFRdHNUTzBNTXBRRW9OdjlOeW9IWU54Um93?=
+ =?utf-8?B?b1dMdjd5VDVtZ0g4WTQrdjRNM2Z2d2RYVm9yS3ltWmtKL2wxZHdiOXpDUkZt?=
+ =?utf-8?B?ak92Mi9XVDVWSjgzQkJ2MW9XNDNrcU41azQrMHdUSUk4YzdwVkJnNlhTdGZu?=
+ =?utf-8?B?empBTmt0WVJEenlPTGdzcnBMckxVT3J3TldzUWlwemd5TUlLeWJPWlhZMUNY?=
+ =?utf-8?Q?sn4L30ol4EH75VvikJsRbKI=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: c41d24cf-be49-4740-dc47-08ddd92c5b5d
+X-MS-Exchange-CrossTenant-AuthSource: MN6PR11MB8102.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2025 22:37:24.2046
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2025 23:11:09.3244
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +f3Ti5OOqpu0ajBVANfp5CRKHx2ypGTU+myNT5gholZDhgT79FdEl70xE1T6rt4rQwlr4a+WoSPwDabL2+Kl7u+EukkUbxLFmC+95eUOgX9/vMrRLUjzx+rAclpFZ7Qi
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR01MB9441
+X-MS-Exchange-CrossTenant-UserPrincipalName: s1GV2T61lECPUipmTprOnvjKe+1+Ja7ctQ/xEPpt/gwhpppspP/tIxA/JP1TJkLohnXb8F0CPb0jmfGnviu2rYvCSJ14WWO5CfcGvMrBFZI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR11MB6188
+X-OriginatorOrg: intel.com
 
-
-
-On 8/11/2025 3:52 AM, Jonathan Cameron wrote:
-> On Sat, 9 Aug 2025 17:55:19 +0200
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+On 8/11/25 16:40, Ivan Vecera wrote:
+> Add functionality for loading firmware files provided by the vendor
+> to be flashed into the device's internal flash memory. The firmware
+> consists of several components, such as the firmware executable itself,
+> chip-specific customizations, and configuration files.
 > 
->> Em Fri, 8 Aug 2025 16:22:09 +0100
->> Jonathan Cameron <Jonathan.Cameron@huawei.com> escreveu:
->>
->>> On Tue, 05 Aug 2025 11:35:38 -0700
->>> Daniel Ferguson <danielf@os.amperecomputing.com> wrote:
->>>   
->>>> From: Jason Tian <jason@os.amperecomputing.com>
->>>>
->>>> The ARM processor CPER record was added in UEFI v2.6 and remained
->>>> unchanged up to v2.10.
->>>>
->>>> Yet, the original arm_event trace code added by
->>>>
->>>>   e9279e83ad1f ("trace, ras: add ARM processor error trace event")
->>>>
->>>> is incomplete, as it only traces some fields of UAPI 2.6 table N.16, not
->>>> exporting any information from tables N.17 to N.29 of the record.
->>>>
->>>> This is not enough for the user to be able to figure out what has
->>>> exactly happened or to take appropriate action.
->>>>
->>>> According to the UEFI v2.9 specification chapter N2.4.4, the ARM
->>>> processor error section includes:
->>>>
->>>> - several (ERR_INFO_NUM) ARM processor error information structures
->>>>   (Tables N.17 to N.20);
->>>> - several (CONTEXT_INFO_NUM) ARM processor context information
->>>>   structures (Tables N.21 to N.29);
->>>> - several vendor specific error information structures. The
->>>>   size is given by Section Length minus the size of the other
->>>>   fields.
->>>>
->>>> In addition, it also exports two fields that are parsed by the GHES
->>>> driver when firmware reports it, e.g.:
->>>>
->>>> - error severity
->>>> - CPU logical index
->>>>
->>>> Report all of these information to userspace via a the ARM tracepoint so
->>>> that userspace can properly record the error and take decisions related
->>>> to CPU core isolation according to error severity and other info.
->>>>
->>>> The updated ARM trace event now contains the following fields:
->>>>
->>>> ======================================  =============================
->>>> UEFI field on table N.16                ARM Processor trace fields
->>>> ======================================  =============================
->>>> Validation                              handled when filling data for
->>>>                                         affinity MPIDR and running
->>>>                                         state.
->>>> ERR_INFO_NUM                            pei_len
->>>> CONTEXT_INFO_NUM                        ctx_len
->>>> Section Length                          indirectly reported by
->>>>                                         pei_len, ctx_len and oem_len
->>>> Error affinity level                    affinity
->>>> MPIDR_EL1                               mpidr
->>>> MIDR_EL1                                midr
->>>> Running State                           running_state
->>>> PSCI State                              psci_state
->>>> Processor Error Information Structure   pei_err - count at pei_len
->>>> Processor Context                       ctx_err- count at ctx_len
->>>> Vendor Specific Error Info              oem - count at oem_len
->>>> ======================================  =============================
->>>>
->>>> It should be noted that decoding of tables N.17 to N.29, if needed, will
->>>> be handled in userspace. That gives more flexibility, as there won't be
->>>> any need to flood the kernel with micro-architecture specific error
->>>> decoding.
->>>>
->>>> Also, decoding the other fields require a complex logic, and should be
->>>> done for each of the several values inside the record field.  So, let
->>>> userspace daemons like rasdaemon decode them, parsing such tables and
->>>> having vendor-specific micro-architecture-specific decoders.
->>>>
->>>>   [mchehab: modified description, solved merge conflicts and fixed coding style]
->>>>
->>>> Fixes: e9279e83ad1f ("trace, ras: add ARM processor error trace event")
->>>>     
->>>
->>> Fixes tag is part of the main tag block so no blank line here.
->>> There are at least some scripts running on the kernel tree that trip
->>> up on this (and one that moans at the submitter ;)
->>>
->>> I'd also add something to explain the SoB sequence for the curious.
->>>   
->>>> Co-developed-by: Jason Tian <jason@os.amperecomputing.com>    
->>>
->>> Jason's the Author, so shouldn't have a Co-dev tag.
->>> There is some info on this in
->>> https://docs.kernel.org/process/submitting-patches.html  
->>
->> My understanding is that all co-authors shall have co-developed-by
->> and SoB. Anyway, doesn't matter much in practice, I guess.
+> The firmware file contains at least a flash utility, which is executed
+> on the device side, and one or more flashable components. Each component
+> has its own specific properties, such as the address where it should be
+> loaded during flashing, one or more destination flash pages, and
+> the flashing method that should be used.
 > 
-> Nope.  In the description the docs say "in addition to the author
-> attribute in the From: tag"  There are also examples where there
-> isn't a Co-dev for the From author including the subtle question of
-> ordering if someone else posts that patch.
-> 
-> I have a vague recollection one of the scripts checking linux-next
-> might moan about this. 
-> 
->>
->>>   
->>>> Signed-off-by: Jason Tian <jason@os.amperecomputing.com>
->>>> Co-developed-by: Shengwei Luo <luoshengwei@huawei.com>
->>>> Signed-off-by: Shengwei Luo <luoshengwei@huawei.com>
->>>> Co-developed-by: Daniel Ferguson <danielf@os.amperecomputing.com>
->>>> Signed-off-by: Daniel Ferguson <danielf@os.amperecomputing.com>    
->>>
->>> As person submitting I'd normally expect your SoB last.
->>>   
->>>> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>    
->>>
->>> I guess this is because Mauro posted an earlier version in which
->>> case this is arguably correct, but likely to confuse.
->>> For cases like this I add comments.  
->>
->> If the patch is identical, and it is just a resubmission,
->> I would keep the original order.
->>
->> Otherwise, if Daniel did some changes at the code (except for a
->> trivial rebase stuff), better to move his co-developed-by/SoB to
->> the end, eventually adding:
->>
->> [Daniel: <did something>] before the custody chain block.
-> 
-> Docs are clear that sender of the patch must be last SoB.
-> That's also checked by the some of the tag block check scripts
-> I think.  There's an example of exactly this case in the in the
-> submitting-patches.rst file (last one in the section that talks
-> about Co-developed-by.
-> 
-> For meaning I don't care that much, but keeping to the rigid
-> rules in that doc makes it easier for scripts to check for the
-> more important stuff like whether all necessary SoB are there.
-> 
-> Jonathan
+> Signed-off-by: Ivan Vecera <ivecera@redhat.com>
+> ---
+> v2:
+> * added additional includes
+> * removed empty line
+> * '*(dst+len)' -> '*(dst + len)'
+> * 'Santity' -> 'Sanity'
+> * fixed smatch warning about uninitialized 'rc'
+> ---
+>   drivers/dpll/zl3073x/Makefile |   2 +-
+>   drivers/dpll/zl3073x/fw.c     | 498 ++++++++++++++++++++++++++++++++++
+>   drivers/dpll/zl3073x/fw.h     |  52 ++++
+>   3 files changed, 551 insertions(+), 1 deletion(-)
+>   create mode 100644 drivers/dpll/zl3073x/fw.c
+>   create mode 100644 drivers/dpll/zl3073x/fw.h
 > 
 
-Just to make sure I get this right...
+overview:
+I don't like zl3073x_fw_readline() and it's usage - sscanf will do IMO
 
-I will move my SoB and my Co-developed-by after any other SoB's in the tag
-block. As a result, I do not need to provide an explanation in this case,
-because there is nothing curious remaining ? Or should I still add comments
-indicating why I rearranged the tag block ?
+please find other feedback inline
 
-Based on your feedback, I'm intending to organize the tag block to look like this:
+> +/* Sanity check */
+> +static_assert(ARRAY_SIZE(component_info) == ZL_FW_NUM_COMPONENTS);
+> +
+> +/**
+> + * zl3073x_fw_readline - Read next line from firmware
+> + * @dst: destination buffer
+> + * @dst_sz: destination buffer size
+> + * @psrc: source buffer
+> + * @psrc_sz: source buffer size
+> + *
+> + * The function read next line from the firmware buffer specified by @psrc
+> + * and @psrc_sz and stores it into buffer specified by @dst and @dst_sz.
+> + * The pointer @psrc and remaining bytes in @psrc_sz are updated accordingly.
+> + *
+> + * Return: number of characters read on success, -EINVAL on error
+> + */
+> +static ssize_t
+> +zl3073x_fw_readline(char *dst, size_t dst_sz, const char **psrc,
+> +		    size_t *psrc_sz)
+> +{
+> +	const char *ptr = *psrc;
+> +	size_t len;
+> +
+> +	/* Skip any existing new-lines at the beginning */
+> +	ptr = memchr_inv(*psrc, '\n', *psrc_sz);
+> +	if (ptr) {
+> +		*psrc_sz -= ptr - *psrc;
+> +		*psrc = ptr;
+> +	}
+> +
+> +	/* Now look for the next new-line in the source */
+> +	ptr = memscan((void *)*psrc, '\n', *psrc_sz);
+> +	len = ptr - *psrc;
+> +
+> +	/* Return error if the source line is too long for destination */
+> +	if (len >= dst_sz)
+> +		return -EINVAL;
+> +
+> +	/* Copy the line from source and append NUL char  */
+> +	memcpy(dst, *psrc, len);
+> +	*(dst + len) = '\0';
+> +
+> +	*psrc = ptr;
+> +	*psrc_sz -= len;
+> +
+> +	/* Return number of read chars */
+> +	return len;
+> +}
+> +
+> +/**
+> + * zl3073x_fw_component_alloc - Alloc structure to hold firmware component
+> + * @size: size of buffer to store data
+> + *
+> + * Return: pointer to allocated component structure or NULL on error.
+> + */
+> +static struct zl3073x_fw_component *
+> +zl3073x_fw_component_alloc(size_t size)
+> +{
+> +	struct zl3073x_fw_component *comp;
+> +
+> +	comp = kzalloc(sizeof(*comp), GFP_KERNEL);
+> +	if (!comp)
+> +		return NULL;
+> +
+> +	comp->size = size;
+> +	comp->data = kzalloc(size, GFP_KERNEL);
+> +	if (!comp->data) {
+> +		kfree(comp);
+> +		return NULL;
+> +	}
+> +
+> +	return comp;
+> +}
+> +
+> +/**
+> + * zl3073x_fw_component_free - Free allocated component structure
+> + * @comp: pointer to allocated component
+> + */
+> +static void
+> +zl3073x_fw_component_free(struct zl3073x_fw_component *comp)
+> +{
+> +	if (comp)
+> +		kfree(comp->data);
+> +
+> +	kfree(comp);
+> +}
+> +
+> +/**
+> + * zl3073x_fw_component_id_get - Get ID for firmware component name
+> + * @name: input firmware component name
+> + *
+> + * Return:
+> + * - ZL3073X_FW_COMPONENT_* ID for known component name
+> + * - ZL3073X_FW_COMPONENT_INVALID if the given name is unknown
+> + */
+> +static enum zl3073x_fw_component_id
+> +zl3073x_fw_component_id_get(const char *name)
+> +{
+> +	enum zl3073x_fw_component_id id;
+> +
+> +	for (id = ZL_FW_COMPONENT_UTIL; id < ZL_FW_NUM_COMPONENTS; id++)
 
- Signed-off-by: Jason Tian <jason@os.amperecomputing.com>
- Co-developed-by: Shengwei Luo <luoshengwei@huawei.com>
- Signed-off-by: Shengwei Luo <luoshengwei@huawei.com>
- Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
- Co-developed-by: Daniel Ferguson <danielf@os.amperecomputing.com>
- Signed-off-by: Daniel Ferguson <danielf@os.amperecomputing.com>
- Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
- Tested-by: Shiju Jose <shiju.jose@huawei.com>
- Acked-by: Borislav Petkov (AMD) <bp@alien8.de>
- Fixes: e9279e83ad1f ("trace, ras: add ARM processor error trace event")
- Link:
-https://uefi.org/specs/UEFI/2.10/Apx_N_Common_Platform_Error_Record.html#arm-processor-error-section
+I would type the start as "id = 0"
+(as you did in other functions, eg zl3073x_fw_free())
+
+> +		if (!strcasecmp(name, component_info[id].name))
+> +			return id;
+> +
+> +	return ZL_FW_COMPONENT_INVALID;
+> +}
+> +
+> +/**
+> + * zl3073x_fw_component_load - Load component from firmware source
+> + * @zldev: zl3073x device structure
+> + * @pcomp: pointer to loaded component
+> + * @psrc: data pointer to load component from
+> + * @psize: remaining bytes in buffer
+> + * @extack: netlink extack pointer to report errors
+> + *
+> + * The function allocates single firmware component and loads the data from
+> + * the buffer specified by @psrc and @psize. Pointer to allocated component
+> + * is stored in output @pcomp. Source data pointer @psrc and remaining bytes
+> + * @psize are updated accordingly.
+> + *
+> + * Return: 0 on success, <0 on error
+
+document return of 1
+
+> + */
+> +static ssize_t
+> +zl3073x_fw_component_load(struct zl3073x_dev *zldev,
+> +			  struct zl3073x_fw_component **pcomp,
+> +			  const char **psrc, size_t *psize,
+> +			  struct netlink_ext_ack *extack)
+> +{
+> +	const struct zl3073x_fw_component_info *info;
+> +	struct zl3073x_fw_component *comp = NULL;
+> +	struct device *dev = zldev->dev;
+> +	enum zl3073x_fw_component_id id;
+> +	ssize_t len, count;
+> +	u32 comp_size;
+> +	char line[32];
+> +	int rc;
+> +
+> +	/* Fetch image name from input */
+> +	len = zl3073x_fw_readline(line, sizeof(line), psrc, psize);
+> +	if (len < 0) {
+> +		rc = len;
+> +		goto err_unexpected;
+> +	} else if (!len) {
+> +		/* No more data */
+> +		return 0;
+> +	}
+> +
+> +	dev_dbg(dev, "Firmware component '%s' found\n", line);
+> +
+> +	id = zl3073x_fw_component_id_get(line);
+> +	if (id == ZL_FW_COMPONENT_INVALID) {
+> +		ZL3073X_FW_ERR_MSG(zldev, extack, "[%s] unknown component type",
+> +				   line);
+> +		return -EINVAL;
+> +	}
+> +
+> +	info = &component_info[id];
+> +
+> +	/* Fetch image size from input */
+> +	len = zl3073x_fw_readline(line, sizeof(line), psrc, psize);
+> +	if (len < 0) {
+> +		rc = len;
+> +		goto err_unexpected;
+> +	} else if (!len) {
+> +		ZL3073X_FW_ERR_MSG(zldev, extack, "[%s] missing size",
+> +				   info->name);
+> +		return -ENODATA;
+> +	}
+> +
+> +	rc = kstrtou32(line, 10, &comp_size);
+> +	if (rc) {
+> +		ZL3073X_FW_ERR_MSG(zldev, extack,
+> +				   "[%s] invalid size value '%s'", info->name,
+> +				   line);
+> +		return rc;
+> +	}
+
+why not sscanf()? it would greatly simplify the above, and likely you
+could entriely remove zl3073x_fw_readline() too
+
+> +
+> +	comp_size *= sizeof(u32); /* convert num of dwords to bytes */
+> +
+> +	/* Check image size validity */
+> +	if (comp_size > component_info[id].max_size) {
+> +		ZL3073X_FW_ERR_MSG(zldev, extack,
+> +				   "[%s] component is too big (%u bytes)\n",
+> +				   info->name, comp_size);
+> +		return -EINVAL;
+> +	}
+> +
+> +	dev_dbg(dev, "Indicated component image size: %u bytes\n", comp_size);
+> +
+> +	/* Alloc component */
+> +	comp = zl3073x_fw_component_alloc(comp_size);
+> +	if (!comp) {
+> +		ZL3073X_FW_ERR_MSG(zldev, extack, "failed to alloc memory");
+> +		return -ENOMEM;
+> +	}
+> +	comp->id = id;
+> +
+> +	/* Load component data from firmware source */
+> +	for (count = 0; count < comp_size; count += 4) {
+> +		len = zl3073x_fw_readline(line, sizeof(line), psrc, psize);
+> +		if (len < 0) {
+> +			rc = len;
+> +			goto err_unexpected;
+> +		} else if (!len) {
+> +			ZL3073X_FW_ERR_MSG(zldev, extack, "[%s] missing data",
+> +					   info->name);
+> +			rc = -ENODATA;
+> +			goto err;
+> +		}
+> +
+> +		rc = kstrtou32(line, 16, comp->data + count);
+> +		if (rc) {
+> +			ZL3073X_FW_ERR_MSG(zldev, extack,
+> +					   "[%s] invalid data: '%s'",
+> +					   info->name, line);
+> +			goto err;
+> +		}
+> +	}
+> +
+> +	*pcomp = comp;
+> +
+> +	return 1;> +
+> +err_unexpected:
+> +	ZL3073X_FW_ERR_MSG(zldev, extack, "unexpected input");
+> +err:
+> +	zl3073x_fw_component_free(comp);
+> +
+> +	return rc;
+> +}
+> +
+> +/**
+> + * zl3073x_fw_free - Free allocated firmware
+> + * @fw: firmware pointer
+> + *
+> + * The function frees existing firmware allocated by @zl3073x_fw_load.
+> + */
+> +void zl3073x_fw_free(struct zl3073x_fw *fw)
+> +{
+> +	size_t i;
+> +
+> +	if (!fw)
+> +		return;
+> +
+> +	for (i = 0; i < ZL_FW_NUM_COMPONENTS; i++)
+> +		zl3073x_fw_component_free(fw->component[i]);
+> +
+> +	kfree(fw);
+> +}
+> +
+> +/**
+> + * zl3073x_fw_load - Load all components from source
+> + * @zldev: zl3073x device structure
+> + * @data: source buffer pointer
+> + * @size: size of source buffer
+> + * @extack: netlink extack pointer to report errors
+> + *
+> + * The functions allocate firmware structure and loads all components from
+> + * the given buffer specified by @data and @size.
+> + *
+> + * Return: pointer to firmware on success, error pointer on error
+> + */
+> +struct zl3073x_fw *zl3073x_fw_load(struct zl3073x_dev *zldev, const char *data,
+> +				   size_t size, struct netlink_ext_ack *extack)
+> +{
+> +	struct zl3073x_fw_component *comp;
+> +	enum zl3073x_fw_component_id id;
+> +	struct zl3073x_fw *fw;
+> +	ssize_t rc;
+> +
+> +	/* Allocate firmware structure */
+> +	fw = kzalloc(sizeof(*fw), GFP_KERNEL);
+> +	if (!fw)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	do {
+> +		/* Load single component */
+> +		rc = zl3073x_fw_component_load(zldev, &comp, &data, &size,
+> +					       extack);
+> +		if (rc <= 0)
+> +			/* Everything was read or error occurred */
+> +			break;
+> +
+> +		id = comp->id;
+> +
+> +		/* Report error if the given component is present twice
+> +		 * or more.
+> +		 */
+> +		if (fw->component[id]) {
+> +			ZL3073X_FW_ERR_MSG(zldev, extack,
+> +					   "duplicate component '%s' detected",
+> +					   component_info[id].name);
+> +			zl3073x_fw_component_free(comp);
+> +			rc = -EINVAL;
+> +			break;
+> +		}
+> +
+> +		fw->component[id] = comp;
+> +	} while (1);
+
+s/1/true/
+
+> +
+> +	if (rc) {
+> +		/* Free allocated firmware in case of error */
+> +		zl3073x_fw_free(fw);
+
+I found no call to it on success.
+
+> +		return ERR_PTR(rc);
+> +	}
+> +
+> +	return fw;
+> +}
 
 
-Is that satisfactory?
+> +++ b/drivers/dpll/zl3073x/fw.h
+> @@ -0,0 +1,52 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +
+> +#ifndef _ZL3073X_FW_H
+> +#define _ZL3073X_FW_H
+> +
+> +/*
+> + * enum zl3073x_fw_component_id - Identifiers for possible flash components
+> + */
+> +enum zl3073x_fw_component_id {
+> +	ZL_FW_COMPONENT_INVALID = -1,
+> +	ZL_FW_COMPONENT_UTIL = 0,
+> +	ZL_FW_COMPONENT_FW1,
+> +	ZL_FW_COMPONENT_FW2,
+> +	ZL_FW_COMPONENT_FW3,
+> +	ZL_FW_COMPONENT_CFG0,
+> +	ZL_FW_COMPONENT_CFG1,
+> +	ZL_FW_COMPONENT_CFG2,
+> +	ZL_FW_COMPONENT_CFG3,
+> +	ZL_FW_COMPONENT_CFG4,
+> +	ZL_FW_COMPONENT_CFG5,
+> +	ZL_FW_COMPONENT_CFG6,
+> +	ZL_FW_NUM_COMPONENTS,
 
-Thank you,
-Daniel
+no comma after enum that will be last forever (guard/size/max/num/cnt)
 
->>
->> Thanks,
->> Mauro
->>
-> 
-
+> +};
 
