@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-55541-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55543-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53A89B203BA
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 11:33:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8594B203BB
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 11:33:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id EAF9E1895476
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 09:33:35 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 775F0188E1B6
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Aug 2025 09:34:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AFD6D224B01;
-	Mon, 11 Aug 2025 09:32:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00185221572;
+	Mon, 11 Aug 2025 09:32:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="a5m2uTZV"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="bOyCkbIl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F8D5218AB9
-	for <linux-doc@vger.kernel.org>; Mon, 11 Aug 2025 09:32:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A73272DE70B
+	for <linux-doc@vger.kernel.org>; Mon, 11 Aug 2025 09:32:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754904765; cv=none; b=k9fzUEeUOHPWNuP5NKHJ+U9BPcsqWqP1wPSuxHnuxBQmgLDQAZU4RdIaHDvWr4G/7ogWB+a0B+SfcGBxz4hu7eA+IwmfYpxoyzn85W3qZ0vncKAVztNNkrsJthQrEUgWYGUdZui9fsSNuKEdZ+1cDKa4CbtRoh21KVtkOKoSUuQ=
+	t=1754904768; cv=none; b=XACd5M8xAMFdFubMrzYkvzy538SqqS7GY9xhTY6PvpFz21gA2WRaVemor60SHGnKZC//Flvh2RvgOrpw37tL/u6Rr5+NfyI3aRRRN1l3MU/StdwUDxAkrzjgUkvXSwhtYnEGoS4f1PU9hUy6xrZJhra8ZfydbGSP/ZUoC7P3sCI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754904765; c=relaxed/simple;
-	bh=Ghk9v8X6ZI95UzDotAn+mX7JIMr1ajnOOt+YAT0AZyc=;
+	s=arc-20240116; t=1754904768; c=relaxed/simple;
+	bh=m7ucCcGVN0FUBECCGdzVEI3m8S2GTPWLCEum9ShUMNA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=kgsHDba8Yq9SYPFaXceHXoi68Tl2AR7/Qoj5UVxikTqHuIWZ74bzyBrZwG+CPH6MCeqpIAMl0cf73CZPxMp5zFgWPX423Q4pv3oCcQtbKiRJMJmdwi1n5PVEizgei/PGPpbGMybbN5Oqzy1ShJrHm34z/K6uRAbGlwqolV0mc8w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=a5m2uTZV; arc=none smtp.client-ip=209.85.221.54
+	 In-Reply-To:To:Cc; b=mhXk7vaGBd3zQVDH1BMplyAZxhTPFQG/IHCcIIJ+JNhKAT0q3mlrLuCQNWPnO7cYiTVo4JdCqKNGmWThG+pl0RKb4OAmEqg6epVv3j1seEfHloMJfXNGeWZZONSQe9qdTrsaPZTFjsCbJkvCxuZ63dqK7A+FFzAP2ozG208vjX0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=bOyCkbIl; arc=none smtp.client-ip=209.85.128.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3b7910123a0so3851632f8f.1
-        for <linux-doc@vger.kernel.org>; Mon, 11 Aug 2025 02:32:43 -0700 (PDT)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-454f428038eso37706565e9.2
+        for <linux-doc@vger.kernel.org>; Mon, 11 Aug 2025 02:32:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1754904762; x=1755509562; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1754904763; x=1755509563; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=KdeJ4JSRd2ijrq8xQhXxaRgP6MLKlDNmproFaVga4Ac=;
-        b=a5m2uTZVGIwKTuVt2sU1f5NGG8cD24Mr/QP9+AR6d/Z7XSzlSFMtVYphcXV18rC9pM
-         RjFhWjl3Wq5Yqa8ooxYJofAEg228Oy2Zz4Dkjp9+YF0Ic5rhwOvYxQa129GekhbfsNpD
-         mJPpE2a15zFvtBRlx0OlEG5O9bM0zosPoRcR4HOIUR4KyxvI9VZAQGD2eQJ3kl3NM6Hw
-         hnqxkiSWTtQcqEf7ys9HkcbYKaJ1NjQOyWB2CNdycs8rD1yTsUhtecwVtFsMRZzrhCRr
-         8/akQpJeOJrODWaFH6jFDYYy6pOKlxEN8HIJFUrcbNGW2fEVCfjfqwrgxXOAuYefbTFp
-         5pyQ==
+        bh=3GDsN9LxSDEitQ0pzvRQqf9bGA4AutUNUEYwRrkhQ70=;
+        b=bOyCkbIlQGlaaFvckPGg9UK/kyDTwKtKG7AHC5+YeUbp3TfntVNJ3nXrItmFgixAp+
+         NZZkhw7zgyL4TTXafNkqjvo25tmBZW62Nfisn5btteUQPxRd1ot0vXkbnhZoJ3TQTt7w
+         d7JAodKnFY75Us+QSnAUI2Gkx2CxrNrgZVHNCesydn5F+s9Qn5TYdViybWRAACOySflg
+         FlZ9tb97+HMR0U8i8y1qUmUbJto35VufmOBbllB8smXW4I3mEfnD38DwkJc1PANgRZuA
+         WTCO7uyEBBAANyxIReAR85bRblqi+BZSX/OXmGw4njWcw3HL1owKUnbAMVIGQV3ugK7k
+         VBXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1754904762; x=1755509562;
+        d=1e100.net; s=20230601; t=1754904763; x=1755509563;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=KdeJ4JSRd2ijrq8xQhXxaRgP6MLKlDNmproFaVga4Ac=;
-        b=D5SpJmGhhDmAKCDQ4dYdhPAw3o24ORr7fBUM6kqt0YZvCUlDvW+HFZPYjA7w8JUAAb
-         XEmbHKRlp+ETEQ0bOilrMzXBJfyS6DOzexpWaHP5N/i3gx9RKME6MsBw4pJMFlthK73e
-         wEG81ECNJ9o+Jn+QnSOFOMDmCJ5Cl+rpOaMPH2J6ZpE5zjqeE6uYAraDohGEk9+sWvtY
-         Ymq+oeCk5fgajdj1RSR9njWUhOmJWpG1ZAHtS1LE6k5rZvF8FIT6OfCauSODaoKtVH0Q
-         esY2QvwjBTh1cbCrSrA/k7tA7UobwB+iwEKge7R09b2RK8UMRR77T7JYtda7fz37JsBJ
-         zG3w==
-X-Forwarded-Encrypted: i=1; AJvYcCUS3aiOwqNo9eghlzSIgld1UlLxnt00p2qMpPctO05dkgbuV8KyKU4pNvBNwAE7D7spnaKMvDG2has=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyJ8nXcjelynRtK4TyBxcgej6jjIdXzetjnptvxsobXE1XmNj0J
-	cqkEmfrI9vxn21PaAbn8/mUKv6NKz5qnwfJbyRQda1MRGdAB10uxUkGcIKBwuknakeg=
-X-Gm-Gg: ASbGncuCZNoCZO/zYDWYLqoxOSANOkhaDTdnG7CrKAuxM9mLOmkoY/a8CapyQNaGxB9
-	Q1FmcRaKq32U2674Vu9K/9wRsBryv/52ShU7rNykqnLzEyc04JHHHIzP5Y3DVHppRtH0MYzEDcY
-	kmvgKlQn8aYTJYIhV7CJem9qZkTjrowzNgftuf/2fIAQuk7ViSUzPcqTC+uw7X7dAVoWrh4oHN6
-	F5tsqFXpw0eNfbR/428fRWV7A2q3rSjT9q+NWb1zgOq68cdKuR5lYBNTeYkYVbQjl1IDsL0gLPp
-	K3N83R7QUTrj+BQA4nyqQ3Axbgq02/vvdwIFfgVhn5dDt2lqCnsl4PL29iw43GknzCQK5QzUJJg
-	SANwH0lqLIA7eDoxRx86TGmQnrVa3m3c=
-X-Google-Smtp-Source: AGHT+IF4rGypTA6LAa8xSMn4qKFuOrcs8J0oYr3jFggkDuO4RAE4D4QxeRDmMlz2n46JWmeJ8gWF6w==
-X-Received: by 2002:a05:6000:290a:b0:3b7:9c79:3293 with SMTP id ffacd0b85a97d-3b900b8bf31mr8716728f8f.58.1754904761700;
-        Mon, 11 Aug 2025 02:32:41 -0700 (PDT)
+        bh=3GDsN9LxSDEitQ0pzvRQqf9bGA4AutUNUEYwRrkhQ70=;
+        b=oj1yYJFrEoVBAIpGp2bQIGY/DFQgTCvrM8i5F3FevgdhKBYizVvbJNKIvBGomLbBF2
+         zt875sErr5TBrSwvdID+9xPuo8UBZfPcZJqfNMY1FIMAuLz3ckrHRib6ZuBWMfu2A+gz
+         whE1p9Jc6bXSaAlC8Q7R3PiSEODewFu3OKGDzLVf744jIm9VFEbxgI8VD9inhMYFEMA/
+         nErl48D+PGFvUrn00SQupMuTUTWSY/qffqL9beAvEv6FTTvUx4+zN961msECoGULghRa
+         1fUcH0X0L74XguC52YlhfrbUxPKMCjY2gEgXuL+4omvj2SUEgtl5C+BlAZSOGxghe6NA
+         cMPw==
+X-Forwarded-Encrypted: i=1; AJvYcCXa5kyMw4KovTx5qFW/mzD/cLAfOtDFrQhu157Uetnvx6a92BEJgiSUl/n6bQx4A7HE0SIo7cYTcZM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx+jB/AwOZY8vxyqwYEQksSndSZoPcqep3Nbr/kdCrMLYYmWGXF
+	gNWfEUud0xtblMGPqfiOqUdJF9h60PhDY1dKeS1gwnlm6hDpY+yN4mAPVLEIGKNT5GM=
+X-Gm-Gg: ASbGncuXqVj0iFg1Aa+Lsa0W8shcc+oLlKNFBuoFq1C72+t79X8Qtj88rVmK47l7ut0
+	V+4t23twI+RNzMRq3X/ikvOOVO3Gw7DPPBciXAF565eiVfhaL7hu8YyWR7pqnPnxc0JRZ6gy8Zl
+	xUnrbc1etMVNtxLRNROHYVn/72ddmZk69E9mOSXemjUDeQnLQtheuYQ64KpMUik8sub2Fkghkvo
+	D1z65eYp2joo9seJoHroDYzZeZZdbwUgocwskZ9u9EfVY8mBZS1FXe1P4BWpI1Nn5ru8j44PC3u
+	2SSxvP8GxkfbobcgPB9NxMx2OTs+3A/sJ9P95FVaOGS121F4W2NKyW3MC64w9YUJZcX3h/MEWtU
+	ym0G9+6EYvg8+ZT3WL/eAh3lz8iYxf2Y=
+X-Google-Smtp-Source: AGHT+IGq+ywQDRPYbHWh34YnCQ/IpGU3if6J27Zgp8ZmTttsheGYVInR3KO4d/MWZnAmbDz0jxuqcA==
+X-Received: by 2002:a05:600c:450e:b0:456:1006:5418 with SMTP id 5b1f17b1804b1-459f4eb5e2dmr95609655e9.13.1754904762901;
+        Mon, 11 Aug 2025 02:32:42 -0700 (PDT)
 Received: from ho-tower-lan.lan ([185.48.76.109])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b79c45346asm39904799f8f.39.2025.08.11.02.32.40
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b79c45346asm39904799f8f.39.2025.08.11.02.32.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 Aug 2025 02:32:41 -0700 (PDT)
+        Mon, 11 Aug 2025 02:32:42 -0700 (PDT)
 From: James Clark <james.clark@linaro.org>
-Date: Mon, 11 Aug 2025 10:32:07 +0100
-Subject: [PATCH 2/6] coresight: Fix holes in struct etmv4_config
+Date: Mon, 11 Aug 2025 10:32:08 +0100
+Subject: [PATCH 3/6] coresight: Repack struct etmv4_drvdata
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -84,7 +84,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250811-james-cs-syncfreq-v1-2-b001cd6e3404@linaro.org>
+Message-Id: <20250811-james-cs-syncfreq-v1-3-b001cd6e3404@linaro.org>
 References: <20250811-james-cs-syncfreq-v1-0-b001cd6e3404@linaro.org>
 In-Reply-To: <20250811-james-cs-syncfreq-v1-0-b001cd6e3404@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -96,59 +96,68 @@ Cc: coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
  James Clark <james.clark@linaro.org>
 X-Mailer: b4 0.14.0
 
-Lots of u8s are mixed with u64s and u32s so repack it to save a bit
-of space because there's one of these for each ETM.
+Fix holes and convert the long list of bools to single bits to save
+some space because there's one of these for each ETM.
 
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- drivers/hwtracing/coresight/coresight-etm4x.h | 19 ++++++++++++-------
- 1 file changed, 12 insertions(+), 7 deletions(-)
+ drivers/hwtracing/coresight/coresight-etm4x.h | 39 ++++++++++++++-------------
+ 1 file changed, 20 insertions(+), 19 deletions(-)
 
 diff --git a/drivers/hwtracing/coresight/coresight-etm4x.h b/drivers/hwtracing/coresight/coresight-etm4x.h
-index 746627476bd3..a355a1e9606d 100644
+index a355a1e9606d..1c67b263b01b 100644
 --- a/drivers/hwtracing/coresight/coresight-etm4x.h
 +++ b/drivers/hwtracing/coresight/coresight-etm4x.h
-@@ -832,28 +832,33 @@ struct etmv4_config {
- 	u32				vipcssctlr;
- 	u8				seq_idx;
- 	u8				syncfreq;
-+	u8				cntr_idx;
-+	u8				res_idx;
-+	u8				ss_idx;
-+	u8				addr_idx;
-+	u8				addr_type[ETM_MAX_SINGLE_ADDR_CMP];
-+	u8				ctxid_idx;
-+	u8				vmid_idx;
- 	u32				seq_ctrl[ETM_MAX_SEQ_STATES];
- 	u32				seq_rst;
- 	u32				seq_state;
--	u8				cntr_idx;
+@@ -1020,29 +1020,30 @@ struct etmv4_drvdata {
+ 	u8				ns_ex_level;
+ 	u8				q_support;
+ 	u8				os_lock_model;
+-	bool				sticky_enable;
+-	bool				boot_enable;
+-	bool				os_unlock;
+-	bool				instrp0;
+-	bool				q_filt;
+-	bool				trcbb;
+-	bool				trccond;
+-	bool				retstack;
+-	bool				trccci;
+-	bool				trc_error;
+-	bool				syncpr;
+-	bool				stallctl;
+-	bool				sysstall;
+-	bool				nooverflow;
+-	bool				atbtrig;
+-	bool				lpoverride;
++	bool				sticky_enable : 1;
++	bool				boot_enable : 1;
++	bool				os_unlock : 1;
++	bool				instrp0 : 1;
++	bool				q_filt : 1;
++	bool				trcbb : 1;
++	bool				trccond : 1;
++	bool				retstack : 1;
++	bool				trccci : 1;
++	bool				trc_error : 1;
++	bool				syncpr : 1;
++	bool				stallctl : 1;
++	bool				sysstall : 1;
++	bool				nooverflow : 1;
++	bool				atbtrig : 1;
++	bool				lpoverride : 1;
++	bool				state_needs_restore : 1;
++	bool				skip_power_up : 1;
++	bool				paused : 1;
+ 	u64				trfcr;
+ 	struct etmv4_config		config;
+ 	u64				save_trfcr;
+ 	struct etmv4_save_state		*save_state;
+-	bool				state_needs_restore;
+-	bool				skip_power_up;
+-	bool				paused;
 +
- 	u32				cntrldvr[ETMv4_MAX_CNTR];
- 	u32				cntr_ctrl[ETMv4_MAX_CNTR];
- 	u32				cntr_val[ETMv4_MAX_CNTR];
--	u8				res_idx;
-+
- 	u32				res_ctrl[ETM_MAX_RES_SEL];
--	u8				ss_idx;
-+
- 	u32				ss_ctrl[ETM_MAX_SS_CMP];
- 	u32				ss_status[ETM_MAX_SS_CMP];
- 	u32				ss_pe_cmp[ETM_MAX_SS_CMP];
--	u8				addr_idx;
-+
- 	u64				addr_val[ETM_MAX_SINGLE_ADDR_CMP];
- 	u64				addr_acc[ETM_MAX_SINGLE_ADDR_CMP];
--	u8				addr_type[ETM_MAX_SINGLE_ADDR_CMP];
--	u8				ctxid_idx;
-+
- 	u64				ctxid_pid[ETMv4_MAX_CTXID_CMP];
- 	u32				ctxid_mask0;
- 	u32				ctxid_mask1;
--	u8				vmid_idx;
- 	u64				vmid_val[ETM_MAX_VMID_CMP];
- 	u32				vmid_mask0;
- 	u32				vmid_mask1;
+ 	DECLARE_BITMAP(arch_features, ETM4_IMPDEF_FEATURE_MAX);
+ };
+ 
 
 -- 
 2.34.1
