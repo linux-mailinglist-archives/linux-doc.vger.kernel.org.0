@@ -1,90 +1,57 @@
-Return-Path: <linux-doc+bounces-55790-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55788-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40EE6B23A47
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 22:57:55 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F48BB23A3C
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 22:53:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 5334C7A7B2E
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 20:56:18 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 9FE571B63A5D
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 20:53:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9CDEE2F0666;
-	Tue, 12 Aug 2025 20:57:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 493052D3EDA;
+	Tue, 12 Aug 2025 20:52:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JRJe/Fco"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CcPCJ67T"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B82F2C21C4
-	for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 20:57:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 231D62D0620
+	for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 20:52:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755032255; cv=none; b=mu4Zyb0XaF30r/yRxBIsUT+ZySr4q3NUzMmmbREwn1Jkr6or4GEOZxpS1e4x78NmnPmPoDXdKeA6ai2zmh4o5HRc+X6FkRn5K4WA0DVvKQ2FreOpoJWJdsXcIlkiqrj5H0wfib1ZfNGh3xwQiqNMBFOC6Zei9xaW014jDUfjtQI=
+	t=1755031973; cv=none; b=RSc2f5DJG0YXXgn+No4RdmWmk/F1DlGZ7F+lynRRIDRDAxbHoC7Wwpqqir0Ai8USyAJ6w61VjQs+AWH+zBUPqTQT92emBB6XzRGJyOUv27ZJfCrGtMBNF+mAqWTLKLyXA0HLJU8I3+6pBDdtmqRG54+2Gb4BQmQfQbN2wWZuzn8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755032255; c=relaxed/simple;
-	bh=JnOZqfn79GC53E9zM39GFlcenYz3qv5SpG5ZpKA/NzU=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=OvK7wapfJUTZIbGGRe/NDwmsDgjlz1qpZCEO89p8aXKezs+Dzc7nxeecttKbS6JThCk4nVdt0Mi2hIJPtSo0/NLOlsYc/nr2J6iQE42wTBlLdOL5XsUzqzS0MQ0c0uElw6SgIJbtxJYyXSM8Woxju//26DyCKBW9d48+kh+4vDc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JRJe/Fco; arc=none smtp.client-ip=209.85.214.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-242ff06b130so11407215ad.0
-        for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 13:57:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755032253; x=1755637053; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kmZthDskyxW8xzonHUEwtNNf/Dt5g4RPoLwfFwhwy9Q=;
-        b=JRJe/FcoVFtQ43hrJO3n1LZ1nVmURE77AI3HX3VCDgo4SUuvMIZ8TajY2G2w1dO49N
-         dMYGwWmXyusRxIojcMKQ5Y0jj+9230GzInk3S8eOUNubVCQlaGnAixqbCXgbdBY/L1U9
-         UStqgeKvDyeOxsm7MZ3GHIRtXLQxsTCt/lvmVczauUxziq0Z0q5/8nadVQeuvRdfA5Qm
-         GVzdwGulhIuUTxjMUgi3ba8OAW6DjXvgVq6gw8nAJuRpLrOZq++TnaewGUqK/mrZ+CK2
-         LU2wPCFKt0ytpe3kB2EIJR6iByZxl5IrCPAFyrWNoT+hXFqsqOFrzsWkftMkl0pJ4dnf
-         CLyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755032253; x=1755637053;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=kmZthDskyxW8xzonHUEwtNNf/Dt5g4RPoLwfFwhwy9Q=;
-        b=ip+67EfFuaspp2UWkPO7wSBtHcVdrEOiP6VzRCOU01mERgw8doBvVjZIJqq+6/gQiZ
-         ryBqzAhna4LZJygOuHco5E5M7EUPxng5rNWjLTI2Tjp05wQqCJL4hpNYgnCKPCufFl0x
-         6+y+gG1juOne3rLZgyxsGWhpPCuMoAaXU45loBSKJbGpqVxkN62EZstyAXsyLs9KF7MH
-         wih01KxVQDyxKyLynLbkwxDbL9phjUKDFSZycBZw6fOc8lmQT+plRxd03WvD7tHWXx99
-         +oMmyzLGI6Dmqx2n+wKUAI1WqOoYTq7ySfEK93kPceitAkUoRUnZl9ajr1QgDoJ5P320
-         wFhQ==
-X-Gm-Message-State: AOJu0Yw77twUe61lMmgL+4VTBwZm4sSNkd+CjX9+wjVEFAxSnxwK8WGY
-	3y4/q3UA+ezmmu+Vehm/s2hLotSRAMNukKxDo7VYhOerOYsU9Kk2KgJayO1LEgg2/h8=
-X-Gm-Gg: ASbGncuUPopG03ik7GQXtfO9uxn+8hW6omPK5s5WrXFQsUjh5vi51mnOFIbTwy5OjEz
-	yCmXOQO7focP0hl/2dnRdMSlpDXf6mcoQ5eD5rFydFD39cLOuHpY/cxTvePpWSSfe39fYdtxQi5
-	x4834gmFRO6Qg3MU8PPk2rxD1bskBbnI3tuRhg4T0AsFiAQlJWrsPNmCpYSn9va1Cn/zkoYRrLE
-	kyXoqhk1jh8GedWdbivrb7Qy8uzrQzYAUgtnycVCgymjeb7boEBu3cGjAS+SvFSKZ6BxXqPITOU
-	O6iBuBUlPyAX309EPN9oTBh7RrQOsXg85m1GLpQk8b+sG8jf40BSP1Q9NxLKCI6TcLKxqMMGgf/
-	Gd5hLt8KCW9kEnX7IZh7R1KAnRQY7u1c=
-X-Google-Smtp-Source: AGHT+IGM8HIEu1Us+IhduzFnSKT/JHu5SzuX1gQ8aLIHirIgj5NNt0Xh4sirRZhZrb11MwpstkGpoA==
-X-Received: by 2002:a17:902:fc50:b0:242:ff89:d724 with SMTP id d9443c01a7336-2430d2271a2mr9643995ad.47.1755032252911;
-        Tue, 12 Aug 2025 13:57:32 -0700 (PDT)
-Received: from soham-laptop.. ([103.182.158.106])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-321d1db5cccsm76048a91.18.2025.08.12.13.57.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Aug 2025 13:57:32 -0700 (PDT)
-From: Soham Metha <sohammetha01@gmail.com>
-To: linux-doc@vger.kernel.org
-Cc: linux-kernel-mentees@lists.linuxfoundation.org,
-	skhan@linuxfoundation.org,
-	Soham Metha <sohammetha01@gmail.com>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	WANG Xuerui <kernel@xen0n.name>,
+	s=arc-20240116; t=1755031973; c=relaxed/simple;
+	bh=jSGnmTYL1hsbSTnKzcjU42qulnFdcN0oc+eOfUzqkm4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=RNF7jv3zfbOfcmzfL/uIR5SDxqGX9EXPbzMDUTfa99DUq5yYf3i2s4y2wvqXc3FiHWmA69QQ17hJ0m4CPJrWRQgKXIFfwe4B08R6qmfIGBZyIymMW9JhHGIDXAuhdK80nB84q62KHR6Xc/iFaoAF675M9iyj6ur4s1QpdL0VUdw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CcPCJ67T; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 805EAC4CEF0;
+	Tue, 12 Aug 2025 20:52:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755031972;
+	bh=jSGnmTYL1hsbSTnKzcjU42qulnFdcN0oc+eOfUzqkm4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=CcPCJ67TU3yOHHBcb4fcGnGOl16lKeG7Ej9mgzwgxQAn/jek9aXnvCto12Q0Ax1cs
+	 /AMd0i5yrOAoZMuaQtmnSz22zUUAuqHIAtAtyBroVsMdjCOvimbNT+2sOIldsfV8dI
+	 iP8PdhqZuH3bQrryUCaOW4jAa9+CYl/yKfQpTwfBXrBy6Uj8Yh/T/wy2F7sIU6bYhf
+	 0qprmBtyosvEftwxn56FN3bn+eg1mutp15481cpLkO13pxKXENWJEmVum37BqPAG9p
+	 4FY7+3k/k1KEtdJxkvptRSDyzXu5Gh1wAte1UI48I4oNK4XQdfcC6t0d7E8qND5onW
+	 rOVTceoiddqLQ==
+Date: Tue, 12 Aug 2025 10:52:51 -1000
+From: Tejun Heo <tj@kernel.org>
+To: Soham Metha <sohammetha01@gmail.com>
+Cc: linux-doc@vger.kernel.org,
+	linux-kernel-mentees@lists.linuxfoundation.org,
+	skhan@linuxfoundation.org, Johannes Weiner <hannes@cmpxchg.org>,
+	Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>,
 	Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v2 7/9] docs: loongarch: fixed spelling mistake in documentation
-Date: Wed, 13 Aug 2025 02:19:50 +0530
-Message-Id: <20250812204952.73136-5-sohammetha01@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250812204952.73136-1-sohammetha01@gmail.com>
+Subject: Re: [PATCH v2 3/9] docs: cgroup: fixed spelling mistakes in
+ documentation
+Message-ID: <aJupoz5mJ9jjwASY@slm.duckdns.org>
 References: <20250812201523.69221-1-sohammetha01@gmail.com>
  <20250812204952.73136-1-sohammetha01@gmail.com>
 Precedence: bulk
@@ -93,33 +60,23 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250812204952.73136-1-sohammetha01@gmail.com>
 
-found/fixed the following typo
+On Wed, Aug 13, 2025 at 02:19:46AM +0530, Soham Metha wrote:
+> found/fixed the following typo
+> 
+> - Availablity -> Availability
+> 
+> in `Documentation/admin-guide/cgroup-v2.rst`
+> 
+> Signed-off-by: Soham Metha <sohammetha01@gmail.com>
 
-- entension -> extension
+Applied to cgroup/for-6.17-fixes.
 
-in `Documentation/arch/loongarch/irq-chip-model.rst`
+Thanks.
 
-Signed-off-by: Soham Metha <sohammetha01@gmail.com>
----
- Documentation/arch/loongarch/irq-chip-model.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Documentation/arch/loongarch/irq-chip-model.rst b/Documentation/arch/loongarch/irq-chip-model.rst
-index a7ecce11e445..94ed2858a570 100644
---- a/Documentation/arch/loongarch/irq-chip-model.rst
-+++ b/Documentation/arch/loongarch/irq-chip-model.rst
-@@ -139,7 +139,7 @@ Feature EXTIOI_HAS_INT_ENCODE is part of standard EIOINTC. If it is 1, it
- indicates that CPU Interrupt Pin selection can be normal method rather than
- bitmap method, so interrupt can be routed to IP0 - IP15.
- 
--Feature EXTIOI_HAS_CPU_ENCODE is entension of V-EIOINTC. If it is 1, it
-+Feature EXTIOI_HAS_CPU_ENCODE is extension of V-EIOINTC. If it is 1, it
- indicates that CPU selection can be normal method rather than bitmap method,
- so interrupt can be routed to CPU0 - CPU255.
- 
 -- 
-2.34.1
-
+tejun
 
