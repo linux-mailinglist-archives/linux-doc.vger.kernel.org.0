@@ -1,183 +1,507 @@
-Return-Path: <linux-doc+bounces-55689-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55721-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A89DB22C2C
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 17:52:58 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9652CB22C6B
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 17:59:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0BE2F170ACD
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 15:51:10 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id BC9361AA20F0
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 15:56:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3662323D7C7;
-	Tue, 12 Aug 2025 15:49:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 131192F9475;
+	Tue, 12 Aug 2025 15:53:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="A+YUMXGO"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HYSn9tzS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com [91.218.175.178])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4A7B23D7C1
-	for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 15:49:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7BAA2F83C5;
+	Tue, 12 Aug 2025 15:53:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755013787; cv=none; b=XK/UM1cnZT7NPFuH1ZXqKc8PMXQQelE6/QqPtbGFHEcleQ9VKU7EteUd7UTtjDTDYxIhXFn4GVKDALP7ASTfGfGv1eXuVEoRXikOKUowfoSOAt/V3BDO6lhHHVJySsQ/d5scYQDJh6XydyVab4gj4/EEeTaj+MrOFe3ZwmyqDnU=
+	t=1755013985; cv=none; b=ruJXncmPJO0Dqq9nQYK3SNuzLA7eCozGkaYKwLwrnTnHtirJaxXy07K+wrl3P6nJhbRAFnQ45o0fGMbfknANahGD0XvBmk7KtUpsRXFYGRNwOSeuV/EM4K6v26UgxMh6Hn+YUrfSE6f8IsI2NQmVPSsUTgUpqZltGdmS6XMGNOU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755013787; c=relaxed/simple;
-	bh=r9nRSmpQ0Q1tnVWbPzsdrA0J+YfIItvBLXSSqI5H8xw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hDfAkLeMUbYFbD0ImrbKGJElHSj/mhRdsxvll06t3UjNV7RqJiXlHMRKzS2IccvH6A46nhvewqqT6ES2cw844Y3ZEtstezzild7nNc3Geg6kkcGRzETBFJeqn9Vu3SWokPaWFKvZJZ6Oxo5UP81FcVsnQr3+XC1llXjutsEWj5Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=A+YUMXGO; arc=none smtp.client-ip=91.218.175.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Message-ID: <69d797eb-4a17-4d54-a7c0-8409fa8bc066@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1755013780;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ucz50+HGWOpZtiZEia1PUziWiFKm4k3f8o7eN5YWlBw=;
-	b=A+YUMXGO9/ZJ/BvfIFZB/f/+10+t4OQMyamYip6EDn1+sfGFJji3Y8XrgrddrjckeRU/qt
-	8cSdHxJNKXFZsSpVegngEZElXogSJJ2W3EH5+aAzR1dkpiAqMAcSJVsOvc02FofPHGTEI7
-	e6F8Za4nGCi3v/l+Ovkr5h5yyiXnoUA=
-Date: Tue, 12 Aug 2025 16:49:33 +0100
+	s=arc-20240116; t=1755013985; c=relaxed/simple;
+	bh=at2mdtprGw43Jj2RV+t0cp9yhUlxFfCUk1YC8d9y9g8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=eoBfn7mOYTyqPsXZ6zbHzlpq6k5zawTj5N6vvJcXD4nGnaP7MGbR91B/A/hxNaCUaAz+3KB9ircoOVkHYUWk7gwbFSazzbRCNYBGPrSv1eMAdmeLi3DpBw1zaI7+POv6Z9E4B9+fy1f8iXGv8PUQLCamSK/f+iUcInZycqbkz7o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HYSn9tzS; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB951C4AF0E;
+	Tue, 12 Aug 2025 15:53:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755013985;
+	bh=at2mdtprGw43Jj2RV+t0cp9yhUlxFfCUk1YC8d9y9g8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=HYSn9tzSd9SOwYzwZWJ6Cezfojdu9/xSFsqaN/R5TGai/3kr1y3uCpn+MDaX1S4GV
+	 9ZwBwduJYlNsVCoq2Rm/IJaASnmQ/Q3mduiCKro7pA3FH1q4aBw8/olopEJQ50EyBf
+	 vjxXy5Reu1L3qYyHQzny2mrkPoQ/TNxR756kGQ5PfBKZzSn8VKaiPOxDFesG8JDhGA
+	 fWOsoiaC2cXmGHxaQ4smvkVFDYTfbnk4E9IGxzhImvJz3OJqUtjI9XbZ23ICXs0dTf
+	 8mLsN3DY08XT774Y8ddT76WooTDtKlrRlugZP9XRSvNVY+iaqH+NE0A28bpyt41W3F
+	 pCXzzlVgTW4uA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1ulrJ8-00000006kVD-0CwU;
+	Tue, 12 Aug 2025 17:53:02 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Nathan Chancellor <mchehab+huawei@kernel.org>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	llvm@lists.linux.dev
+Subject: [PATCH v2 00/39] Translate sphinx-pre-install to Python
+Date: Tue, 12 Aug 2025 17:52:17 +0200
+Message-ID: <cover.1754992972.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 2/5] net: rnpgbe: Add n500/n210 chip support
-To: Dong Yibo <dong100@mucse.com>, andrew+netdev@lunn.ch,
- davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
- pabeni@redhat.com, horms@kernel.org, corbet@lwn.net, gur.stavi@huawei.com,
- maddy@linux.ibm.com, mpe@ellerman.id.au, danishanwar@ti.com, lee@trager.us,
- gongfan1@huawei.com, lorenzo@kernel.org, geert+renesas@glider.be,
- Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
- alexanderduyck@fb.com, richardcochran@gmail.com
-Cc: netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20250812093937.882045-1-dong100@mucse.com>
- <20250812093937.882045-3-dong100@mucse.com>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Vadim Fedorenko <vadim.fedorenko@linux.dev>
-In-Reply-To: <20250812093937.882045-3-dong100@mucse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
+Hi Jon,
 
-> +struct mucse_dma_info {
-> +	void __iomem *dma_base_addr;
-> +	void __iomem *dma_ring_addr;
-> +	void *back;
+that's the second version of the patch series which converts
+sphinx-pre-install to Python.
 
-it might be better to keep the type of back pointer and give it
-a bit more meaningful name ...
+The core patches are basically the same as on v1, but it has lots of
+fixes over the original script after testing sphinx-install on 22
+distros.
 
-> +	u32 dma_version;
-> +};
-> +
-> +struct mucse_eth_info {
-> +	void __iomem *eth_base_addr;
-> +	void *back;
+Please notice that I have a separate patch series addressing issues
+that are specific to PDF generation.
 
-.. here ...
+Test Results Summary:
+====================
 
-> +};
-> +
-> +struct mucse_mac_info {
-> +	void __iomem *mac_addr;
-> +	void *back;
+  PASSED - AlmaLinux release 9.6 (Sage Margay) (4 tests)
+  PASSED - Amazon Linux release 2023 (Amazon Linux) (4 tests)
+  PASSED - Arch Linux (4 tests)
+  PASSED - CentOS Stream release 9 (4 tests)
+  PASSED - Debian GNU/Linux 12 (4 tests)
+  PASSED - Devuan GNU/Linux 5 (4 tests)
+  PASSED - Fedora release 42 (Adams) (4 tests)
+  PASSED - Gentoo Base System release 2.17 (4 tests)
+  PASSED - Kali GNU/Linux 2025.2 (4 tests)
+  PASSED - Mageia 9 (4 tests)
+  PASSED - Linux Mint 22 (4 tests)
+  PASSED - openEuler release 25.03 (4 tests)
+  PARTIAL - OpenMandriva Lx 4.3 (4 tests)
+	ensurepip package doesn't exist there. So, venv install failed.
+	Installed via package worked
+  PASSED - openSUSE Leap 15.6 (4 tests)
+  PASSED - openSUSE Tumbleweed (4 tests)
+  PASSED - Oracle Linux Server release 9.6 (4 tests)
+  FAILED - Red Hat Enterprise Linux release 8.10 (Ootpa) (4 tests)
+	I couldn't test properly, as it requires a repository under
+	paywall. I suspect It should work fine
+  PARTIAL - Rocky Linux release 8.9 (Green Obsidian) (4 tests)
+	Install via package didn't work. Instaling via venv works.
+  PASSED - Rocky Linux release 9.6 (Blue Onyx) (4 tests)
+  PARTIAL - Springdale Open Enterprise Linux release 9.2 (Parma) (4 tests)
+	Failed to install ImageMagick (affects pdf only)
+  PASSED - Ubuntu 24.04.2 LTS (4 tests)
+  PASSED - Ubuntu 25.04 (4 tests)
 
-and here...
+In short, I expect that, for all the above, the script will properly
+recommend the right packages to have sphinx-build working.
 
-> +};
-> +
-> +struct mucse_mbx_info {
-> +	/* fw <--> pf mbx */
-> +	u32 fw_pf_shm_base;
-> +	u32 pf2fw_mbox_ctrl;
-> +	u32 pf2fw_mbox_mask;
-> +	u32 fw_pf_mbox_mask;
-> +	u32 fw2pf_mbox_vec;
-> +};
-> +
-> +struct mucse_hw {
-> +	void *back;
+A more detailed list of tests that passed/failed and detected Sphinx
+versions can be seeing below:
 
-you can also use container_of() as all these structures are embedded and
-simple pointer math can give you proper result.
+AlmaLinux release 9.6 (Sage Margay):
+------------------------------------
+    PASSED: OS detection: AlmaLinux release 9.6 (Sage Margay)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
 
-> +	void __iomem *hw_addr;
-> +	void __iomem *ring_msix_base;
-> +	struct pci_dev *pdev;
-> +	enum rnpgbe_hw_type hw_type;
-> +	struct mucse_dma_info dma;
-> +	struct mucse_eth_info eth;
-> +	struct mucse_mac_info mac;
-> +	struct mucse_mbx_info mbx;
-> +	u32 driver_version;
-> +	u16 usecstocount;
-> +};
-> +
->   struct mucse {
->   	struct net_device *netdev;
->   	struct pci_dev *pdev;
-> +	struct mucse_hw hw;
->   	u16 bd_number;
->   };
->   
+Amazon Linux release 2023 (Amazon Linux):
+-----------------------------------------
+    PASSED: OS detection: Amazon Linux release 2023 (Amazon Linux)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
 
-[...]
+Arch Linux:
+-----------
+    PASSED: OS detection: Arch Linux
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.2.3
 
-> +/**
-> + * rnpgbe_add_adapter - Add netdev for this pci_dev
-> + * @pdev: PCI device information structure
-> + * @info: chip info structure
-> + *
-> + * rnpgbe_add_adapter initializes a netdev for this pci_dev
-> + * structure. Initializes Bar map, private structure, and a
-> + * hardware reset occur.
-> + *
-> + * @return: 0 on success, negative on failure
-> + **/
-> +static int rnpgbe_add_adapter(struct pci_dev *pdev,
-> +			      const struct rnpgbe_info *info)
-> +{
-> +	struct net_device *netdev;
-> +	void __iomem *hw_addr;
-> +	static int bd_number;
+CentOS Stream release 9:
+------------------------
+    PASSED: OS detection: CentOS Stream release 9
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
 
-it's not clear from the patchset why do you need this static variable...
+Debian GNU/Linux 12:
+--------------------
+    PASSED: OS detection: Debian GNU/Linux 12
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 5.3.0
 
-> +	struct mucse *mucse;
-> +	struct mucse_hw *hw;
-> +	u32 dma_version = 0;
-> +	u32 queues;
-> +	int err;
-> +
-> +	queues = info->total_queue_pair_cnts;
-> +	netdev = alloc_etherdev_mq(sizeof(struct mucse), queues);
-> +	if (!netdev)
-> +		return -ENOMEM;
-> +
-> +	SET_NETDEV_DEV(netdev, &pdev->dev);
-> +	mucse = netdev_priv(netdev);
-> +	mucse->netdev = netdev;
-> +	mucse->pdev = pdev;
-> +	mucse->bd_number = bd_number++;
+Devuan GNU/Linux 5:
+-------------------
+    PASSED: OS detection: Devuan GNU/Linux 5
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 5.3.0
 
-... but this code is racy by design
+Fedora release 42 (Adams):
+--------------------------
+    PASSED: OS detection: Fedora release 42 (Adams)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
 
-> +	pci_set_drvdata(pdev, mucse);
-> +
-> +	hw = &mucse->hw;
-> +	hw->back = mucse;
-> +	hw->hw_type = info->hw_type;
-> +	hw->pdev = pdev;
-> +
+Gentoo Base System release 2.17:
+--------------------------------
+    PASSED: OS detection: Gentoo Base System release 2.17
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.2.3
+
+Kali GNU/Linux 2025.2:
+----------------------
+    PASSED: OS detection: Kali GNU/Linux 2025.2
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
+
+Mageia 9:
+---------
+    PASSED: OS detection: Mageia 9
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 6.1.3
+    PASSED: Sphinx package: Sphinx 6.1.3
+
+Linux Mint 22:
+--------------
+    PASSED: OS detection: Linux Mint 22
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.1.3
+    PASSED: Sphinx package: Sphinx 4.3.2
+
+openEuler release 25.03:
+------------------------
+    PASSED: OS detection: openEuler release 25.03
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
+
+OpenMandriva Lx 4.3:
+--------------------
+    PASSED: OS detection: OpenMandriva Lx 4.3
+    FAILED: System packages:  Error: Unable to find a match: ensurepip
+    FAILED: Sphinx on venv: Installation failed
+    PASSED: Sphinx package: Sphinx 4.3.2
+
+openSUSE Leap 15.6:
+-------------------
+    PASSED: OS detection: openSUSE Leap 15.6
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 7.2.6
+
+openSUSE Tumbleweed:
+--------------------
+    PASSED: OS detection: openSUSE Tumbleweed
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.2.3
+
+Oracle Linux Server release 9.6:
+--------------------------------
+    PASSED: OS detection: Oracle Linux Server release 9.6
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Red Hat Enterprise Linux release 8.10 (Ootpa):
+----------------------------------------------
+    PASSED: OS detection: Red Hat Enterprise Linux release 8.10 (Ootpa)
+    FAILED: System packages:  Error: Unable to find a match: google-noto-sans-cjk-ttc-fonts librsvg2-tools texlive-amscls texlive-amsfonts texlive-amsmath texlive-anyfontsize texlive-capt-of texlive-cmap texlive-collection-fontsrecommended texlive-collection-latex texlive-ec texlive-eqparbox texlive-euenc texlive-fancybox texlive-fancyvrb texlive-float texlive-fncychap texlive-framed texlive-luatex85 texlive-mdwtools texlive-multirow texlive-needspace texlive-oberdiek texlive-parskip texlive-polyglossia texlive-psnfss texlive-tabulary texlive-threeparttable texlive-titlesec texlive-tools texlive-ucs texlive-upquote texlive-wrapfig texlive-xecjk texlive-xetex-bin
+    FAILED: Sphinx on venv: No Sphinx version detected
+    FAILED: Sphinx package: No Sphinx version detected
+
+Rocky Linux release 8.9 (Green Obsidian):
+-----------------------------------------
+    PASSED: OS detection: Rocky Linux release 8.9 (Green Obsidian)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    FAILED: Sphinx package: No Sphinx version detected
+
+Rocky Linux release 9.6 (Blue Onyx):
+------------------------------------
+    PASSED: OS detection: Rocky Linux release 9.6 (Blue Onyx)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Springdale Open Enterprise Linux release 9.2 (Parma):
+-----------------------------------------------------
+    PASSED: OS detection: Springdale Open Enterprise Linux release 9.2 (Parma)
+    FAILED: System packages:  Error:   Problem: package ImageMagick-6.9.13.25-1.el9.x86_64 requires libMagickCore-6.Q16.so.7()(64bit), but none of the providers can be installed   - package ImageMagick-6.9.13.25-1.el9.x86_64 requires libMagickWand-6.Q16.so.7()(64bit), but none of the providers can be installed   - package ImageMagick-6.9.13.25-1.el9.x86_64 requires ImageMagick-libs(x86-64) = 6.9.13.25-1.el9, but none of the providers can be installed   - conflicting requests   - nothing provides libraw_r.so.23()(64bit) needed by ImageMagick-libs-6.9.13.25-1.el9.x86_64
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Ubuntu 24.04.2 LTS:
+-------------------
+    PASSED: OS detection: Ubuntu 24.04.2 LTS
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 7.2.6
+
+Ubuntu 25.04:
+-------------
+    PASSED: OS detection: Ubuntu 25.04
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
+
+Summary
+=======
+  PASSED - AlmaLinux release 9.6 (Sage Margay) (4 tests)
+  PASSED - Amazon Linux release 2023 (Amazon Linux) (4 tests)
+  PASSED - Arch Linux (4 tests)
+  PASSED - CentOS Stream release 9 (4 tests)
+  PASSED - Debian GNU/Linux 12 (4 tests)
+  PASSED - Devuan GNU/Linux 5 (4 tests)
+  PASSED - Fedora release 42 (Adams) (4 tests)
+  PASSED - Gentoo Base System release 2.17 (4 tests)
+  PASSED - Kali GNU/Linux 2025.2 (4 tests)
+  PASSED - Mageia 9 (4 tests)
+  PASSED - Linux Mint 22 (4 tests)
+  PASSED - openEuler release 25.03 (4 tests)
+  FAILED - OpenMandriva Lx 4.3 (4 tests)
+  PASSED - openSUSE Leap 15.6 (4 tests)
+  PASSED - openSUSE Tumbleweed (4 tests)
+  PASSED - Oracle Linux Server release 9.6 (4 tests)
+  FAILED - Red Hat Enterprise Linux release 8.10 (Ootpa) (4 tests)
+  FAILED - Rocky Linux release 8.9 (Green Obsidian) (4 tests)
+  PASSED - Rocky Linux release 9.6 (Blue Onyx) (4 tests)
+  FAILED - Springdale Open Enterprise Linux release 9.2 (Parma) (4 tests)
+  PASSED - Ubuntu 24.04.2 LTS (4 tests)
+  PASSED - Ubuntu 25.04 (4 tests)
+(base) mchehab@foz /new_devel/mchehab_scripts $ ktap_reader.py /tmp/test_logs/*
+
+AlmaLinux release 9.6 (Sage Margay):
+------------------------------------
+    PASSED: OS detection: AlmaLinux release 9.6 (Sage Margay)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Amazon Linux release 2023 (Amazon Linux):
+-----------------------------------------
+    PASSED: OS detection: Amazon Linux release 2023 (Amazon Linux)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Arch Linux:
+-----------
+    PASSED: OS detection: Arch Linux
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.2.3
+
+CentOS Stream release 9:
+------------------------
+    PASSED: OS detection: CentOS Stream release 9
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Debian GNU/Linux 12:
+--------------------
+    PASSED: OS detection: Debian GNU/Linux 12
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 5.3.0
+
+Devuan GNU/Linux 5:
+-------------------
+    PASSED: OS detection: Devuan GNU/Linux 5
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 5.3.0
+
+Fedora release 42 (Adams):
+--------------------------
+    PASSED: OS detection: Fedora release 42 (Adams)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
+
+Gentoo Base System release 2.17:
+--------------------------------
+    PASSED: OS detection: Gentoo Base System release 2.17
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.2.3
+
+Kali GNU/Linux 2025.2:
+----------------------
+    PASSED: OS detection: Kali GNU/Linux 2025.2
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
+
+Mageia 9:
+---------
+    PASSED: OS detection: Mageia 9
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 6.1.3
+    PASSED: Sphinx package: Sphinx 6.1.3
+
+Linux Mint 22:
+--------------
+    PASSED: OS detection: Linux Mint 22
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.1.3
+    PASSED: Sphinx package: Sphinx 4.3.2
+
+openEuler release 25.03:
+------------------------
+    PASSED: OS detection: openEuler release 25.03
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
+
+OpenMandriva Lx 4.3:
+--------------------
+    PASSED: OS detection: OpenMandriva Lx 4.3
+    FAILED: System packages:  Error: Unable to find a match: ensurepip
+    PARTIAL: Sphinx on venv: Installation failed
+    PASSED: Sphinx package: Sphinx 4.3.2
+
+openSUSE Leap 15.6:
+-------------------
+    PASSED: OS detection: openSUSE Leap 15.6
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 7.2.6
+
+openSUSE Tumbleweed:
+--------------------
+    PASSED: OS detection: openSUSE Tumbleweed
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.2.3
+
+Oracle Linux Server release 9.6:
+--------------------------------
+    PASSED: OS detection: Oracle Linux Server release 9.6
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Red Hat Enterprise Linux release 8.10 (Ootpa):
+----------------------------------------------
+    PASSED: OS detection: Red Hat Enterprise Linux release 8.10 (Ootpa)
+    FAILED: System packages:  Error: Unable to find a match: google-noto-sans-cjk-ttc-fonts librsvg2-tools texlive-amscls texlive-amsfonts texlive-amsmath texlive-anyfontsize texlive-capt-of texlive-cmap texlive-collection-fontsrecommended texlive-collection-latex texlive-ec texlive-eqparbox texlive-euenc texlive-fancybox texlive-fancyvrb texlive-float texlive-fncychap texlive-framed texlive-luatex85 texlive-mdwtools texlive-multirow texlive-needspace texlive-oberdiek texlive-parskip texlive-polyglossia texlive-psnfss texlive-tabulary texlive-threeparttable texlive-titlesec texlive-tools texlive-ucs texlive-upquote texlive-wrapfig texlive-xecjk texlive-xetex-bin
+    PARTIAL: Sphinx on venv: No Sphinx version detected
+    PARTIAL: Sphinx package: No Sphinx version detected
+
+Rocky Linux release 8.9 (Green Obsidian):
+-----------------------------------------
+    PASSED: OS detection: Rocky Linux release 8.9 (Green Obsidian)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PARTIAL: Sphinx package: No Sphinx version detected
+
+Rocky Linux release 9.6 (Blue Onyx):
+------------------------------------
+    PASSED: OS detection: Rocky Linux release 9.6 (Blue Onyx)
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Springdale Open Enterprise Linux release 9.2 (Parma):
+-----------------------------------------------------
+    PASSED: OS detection: Springdale Open Enterprise Linux release 9.2 (Parma)
+    FAILED: System packages:  Error:   Problem: package ImageMagick-6.9.13.25-1.el9.x86_64 requires libMagickCore-6.Q16.so.7()(64bit), but none of the providers can be installed   - package ImageMagick-6.9.13.25-1.el9.x86_64 requires libMagickWand-6.Q16.so.7()(64bit), but none of the providers can be installed   - package ImageMagick-6.9.13.25-1.el9.x86_64 requires ImageMagick-libs(x86-64) = 6.9.13.25-1.el9, but none of the providers can be installed   - conflicting requests   - nothing provides libraw_r.so.23()(64bit) needed by ImageMagick-libs-6.9.13.25-1.el9.x86_64
+    PASSED: Sphinx on venv: Sphinx 7.4.7
+    PASSED: Sphinx package: Sphinx 3.4.3
+
+Ubuntu 24.04.2 LTS:
+-------------------
+    PASSED: OS detection: Ubuntu 24.04.2 LTS
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 7.2.6
+
+Ubuntu 25.04:
+-------------
+    PASSED: OS detection: Ubuntu 25.04
+    PASSED: System packages: Packages installed
+    PASSED: Sphinx on venv: Sphinx 8.2.3
+    PASSED: Sphinx package: Sphinx 8.1.3
+
+---
+
+Mauro Carvalho Chehab (39):
+  scripts: sphinx-pre-install: fix version check for Fedora
+  scripts: sphinx-pre-install: rename it to
+    scripts/sphinx-pre-install.pl
+  scripts: sphinx-pre-install: Convert script to Python
+  scripts: sphinx-pre-install: Make it compatible with Python 3.6
+  scripts: sphinx-pre-install: run on a supported version
+  scripts: sphinx-pre-install: drop obsolete routines
+  scripts: sphinx-pre-install: drop support for old virtualenv
+  scripts: sphinx-pre-install: Address issues with OpenSUSE Leap 15.x
+  scripts: sphinx-pre-install: fix opensuse Leap hint for PyYAML
+  scripts: sphinx-pre-install: fix support for gentoo
+  scripts: sphinx-pre-install: Address issues with OpenSUSE Tumbleweed
+  scripts: sphinx-pre-install: only show portage hints once
+  scripts: sphinx-pre-install: cleanup rhel support
+  scripts: sphinx-pre-install: output Python and docutils version
+  scripts: sphinx-pre-install: add a missing f-string marker
+  scripts: sphinx-pre-install: fix Leap support for rsvg-convert
+  scripts: sphinx-pre-install: fix rhel recomendations
+  scripts: sphinx-pre-install: remove Scientific Linux
+  scripts: sphinx-pre-install: improve Gentoo package deps logic
+  scripts: sphinx-pre-install: fix OpenMandriva support
+  scripts: sphinx-pre-install: move package instructions to a new func
+  scripts: sphinx-pre-install: adjust a warning message
+  scripts: sphinx-pre-install: better handle Python min version
+  scripts: sphinx-pre-install: convert is_optional to a class
+  scripts: sphinx-pre-install: better handle RHEL-based distros
+  scripts: sphinx-pre-install: move missing logic to a separate class
+  scripts: sphinx-pre-install: move ancillary checkers to a separate
+    class
+  scripts: sphinx-pre-install: add more generic checkers on a class
+  scripts: sphinx-pre-install: move get_system_release()
+  scripts: sphinx-pre-install: add documentation for the ancillary
+    classes.
+  scripts: sphinx-pre-install: add docstring documentation
+  scripts: sphinx-pre-install: fix several codingstyle issues
+  scripts: sphinx-pre-install: rework install command logic
+  docs: Makefile: switch to the new scripts/sphinx-pre-install.py
+  scripts: sphinx-pre-install.pl: get rid of the old script
+  scripts: sphinx-pre-install: update mandatory system deps
+  scripts: sphinx-pre-install: add support for RHEL8-based distros
+  scripts: sphinx-pre-install: add a warning for Debian-based distros
+  scripts: sphinx-pre-install: some adjustments related to venv
+
+ scripts/sphinx-pre-install | 2641 ++++++++++++++++++++++--------------
+ 1 file changed, 1589 insertions(+), 1052 deletions(-)
+
+-- 
+2.50.1
+
 
