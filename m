@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-55700-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55691-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F63BB22C5D
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 17:58:47 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id B6F98B22C50
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 17:57:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 74E531AA15A4
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 15:56:15 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 1AE657B7B22
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 15:54:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A12632F83BB;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E3322F8BE5;
 	Tue, 12 Aug 2025 15:53:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zg9+phgP"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I/+T373I"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66B572F8BEA;
-	Tue, 12 Aug 2025 15:53:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A78C2F659E;
+	Tue, 12 Aug 2025 15:53:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755013985; cv=none; b=hFP3mtAhZBGDl+vSw3b0lUO+iv7nsFxdJYYKDHyh6/vvmYuaFPanznuIePCXKMJ/EAxJ+KlZ0liWVSo6Nh6dX4LbnlVqUvOJYbWfWRLs/fjNSv6ZfR4bk9/syWkQXGOSHpi9LpTeDjI9HzN8dEiUeJG6d6lcLbk34drqD85yxTs=
+	t=1755013985; cv=none; b=C3eQLQ4T2hFmKNEeg4CdZrxVaMlDmZ2HGWhV4u7teHFKohKNSdBvVXXUUG7dy862kZ1GJf16VtJT7n3iROi/hyUc6gJd/+jPKXpARX2KwqMjlBCmtcA4vTHq+3J0OiLqa7VERok0xRfpaXQpGs8c6sK8kU+vM31RlXUIfSEnX/s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1755013985; c=relaxed/simple;
-	bh=vRnsNCgM3YDMxmN+8rNiF2tJ0DjUjMBLbtkTm4kNDsA=;
+	bh=tUovukr9LJAZFuTCxPr3I6APWlpK5/pEVeW1gSeYrBI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=m3NS4/Frr4zXQIToyI+3jfp9FjAWzD6UN+yWXZ9pps+tdiJ7uVh+07HWaON4Hqro+9sGXpU/Rni7EIbTKnpjGuWTaqpYeeSUn3Ry7CRutKyIPu2MT8khuTVBv7d5kI8ProCygLq1VulEwiMr1IWGaepqwchtTplUsNuZJBRSdLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zg9+phgP; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B30CCC4AF0B;
+	 MIME-Version; b=hJSMgRDYyxOqI3vmP/7UjlTAuf4IgCN5L9f8UNbfkznZvni2NeNXGLKCY8UFjZCDGuUUTfmIvjKfNKgNeEXS7cKSBmI4fa0CqgQ2JB0AdEDVgoHu2C6BsbochldqzM9RMHGfi/yrRjR3iWxSEnCpjtn9wcVpaKgecoCKEwIZl0w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I/+T373I; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA9BEC4CEF7;
 	Tue, 12 Aug 2025 15:53:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1755013984;
-	bh=vRnsNCgM3YDMxmN+8rNiF2tJ0DjUjMBLbtkTm4kNDsA=;
+	bh=tUovukr9LJAZFuTCxPr3I6APWlpK5/pEVeW1gSeYrBI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Zg9+phgPZLhUffMRUl030IJ328z2sfa3qoqxB+/JmkolJDwbax5Di9rzzstuO8nBr
-	 mnLVMBbC/ce4olnSO4h9kqbdDXrQiFXginVneHRqf0f5a+yubvA5Ryddv/WU1VHfuf
-	 GARm3lIU5SECBI+teXCJF8zT8q0tkJ9KKJgZqKO3jfV8n6YKez6bcA7FspgiuZ61IR
-	 sExHOZJvaqhWCiMH1BcTsS2aEqTdpId6DB0EHXr5IlnCzOzse6Sbm30Y5qyB4279qD
-	 47qcMp9v4Muj2mLxT571EzzixWVt1wtyCKi6bUTUF0KGd/5m56z4TrAXfSzsFxh8NI
-	 HxFDbdGy1aq/w==
+	b=I/+T373IkRxMN4+DbM1srsAKLqJA4EpftaFElQ21Z13GAB1+HutvQICiDJDocfqMF
+	 EfS5atY9zpDFPSH6RbYx16uq8cvZsw6BRgQvZJ0kKMA/OCxk5Z2EidulJxmuoIR4u0
+	 aZyLXWeJciCwPkGwTMR2cwtONhoHP7ilJqQ3HQYTjZm3nMBCazgMOX0FZ+nq+6jzNP
+	 VwlgcrKRCgs3ju7XbFRVDxA6k++hjNb7Zz8kRk4kGs3P3Rb5ybovsDnu9d0KUkSCrC
+	 raV4o0DqUFQ8oy1Idt8IMiO1gr3/WDy30rgT32TgsheX2h+0HfMXy4V8nPTvCgvMXv
+	 coIGXToQ8uRnw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1ulrJ8-00000006kWc-2yPm;
+	id 1ulrJ8-00000006kWg-35r3;
 	Tue, 12 Aug 2025 17:53:02 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -51,9 +51,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 22/39] scripts: sphinx-pre-install: adjust a warning message
-Date: Tue, 12 Aug 2025 17:52:39 +0200
-Message-ID: <74a17edd70364ca623a54b62bd97a344bb474988.1754992972.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 23/39] scripts: sphinx-pre-install: better handle Python min version
+Date: Tue, 12 Aug 2025 17:52:40 +0200
+Message-ID: <013aeb848ecc3f6b69b4518cf3d335bd2353b6e1.1754992972.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1754992972.git.mchehab+huawei@kernel.org>
 References: <cover.1754992972.git.mchehab+huawei@kernel.org>
@@ -66,29 +66,66 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-There is one extra space at the first line. Also, as now we only
-support Python 3.4+, update the text.
+Don't do any recommendations about Sphinx install with too
+old python versions.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- scripts/sphinx-pre-install.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ scripts/sphinx-pre-install.py | 20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/scripts/sphinx-pre-install.py b/scripts/sphinx-pre-install.py
-index 2360ca2ed21c..365590f81551 100755
+index 365590f81551..a5c777e529ec 100755
 --- a/scripts/sphinx-pre-install.py
 +++ b/scripts/sphinx-pre-install.py
-@@ -1081,8 +1081,8 @@ class SphinxDependencyChecker:
-             self.recommend_package()
+@@ -92,6 +92,10 @@ class SphinxDependencyChecker:
+         # Some distros may not have a Sphinx shipped package compatible with
+         # our minimal requirements
+         self.package_supported = True
++
++        # Recommend a new python version
++        self.recommend_python = None
++
+         # Certain hints are meant to be shown only once
+         self.first_hint = True
  
-         print("\n" \
--              "    Please note that Sphinx >= 3.0 will currently produce false-positive\n" \
--              "   warning when the same name is used for more than one type (functions,\n" \
-+              "   Please note that Sphinx currentlys produce false-positive\n" \
-+              "   warnings when the same name is used for more than one type (functions,\n" \
-               "   structs, enums,...). This is known Sphinx bug. For more details, see:\n" \
-               "\thttps://github.com/sphinx-doc/sphinx/pull/8313")
+@@ -511,11 +515,11 @@ class SphinxDependencyChecker:
+                 print("ERROR: Distro not supported. Too old?")
+                 return
  
+-            # TODO: check if RHEL8 still works.
+-            # On my tests with  docker "redhat/ubi8" image, there's no
+-            # python3-sphinx (or similar) package. It comes with Python 3.6,
+-            # but there are other python packages over there, so it may be
+-            # possible to work with venv.
++            # RHEL 8 uses Python 3.6, which is not compatible with
++            # the build system anymore. Suggest Python 3.11
++            if rel == 8:
++                self.add_package("python39", 0)
++                self.recommend_python = True
+ 
+             if self.first_hint:
+                 print("Note: RHEL-based distros typically require extra repositories.\n" \
+@@ -596,6 +600,7 @@ class SphinxDependencyChecker:
+             # the build system anymore. Suggest Python 3.11
+             if rel == 15:
+                 if not self.which(self.python_cmd):
++                    self.recommend_python = True
+                     self.add_package(self.python_cmd, 0)
+ 
+                 progs.update({
+@@ -1000,6 +1005,11 @@ class SphinxDependencyChecker:
+         #	- recommended version.
+         # It also needs to work fine with both distro's package and venv/virtualenv
+ 
++        if self.recommend_python:
++            print("\nPython version is incompatible with doc build.\n" \
++                  "Please upgrade it and re-run.\n")
++            return
++
+         # Version is OK. Nothing to do.
+         if self.cur_version != (0, 0, 0) and self.cur_version >= RECOMMENDED_VERSION:
+             return
 -- 
 2.50.1
 
