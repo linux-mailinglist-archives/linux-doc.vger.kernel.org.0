@@ -1,87 +1,95 @@
-Return-Path: <linux-doc+bounces-55787-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55789-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD8ACB23A3B
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 22:53:13 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D425B23A43
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 22:56:56 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 863DD1B638F7
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 20:53:15 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8ACCB188C79A
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 20:56:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A39902D0624;
-	Tue, 12 Aug 2025 20:52:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B02632D0639;
+	Tue, 12 Aug 2025 20:56:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="V3qaq/aL"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EKKg2WXz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31B6D2C21C4
-	for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 20:52:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 386472D0620
+	for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 20:56:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755031968; cv=none; b=GleLUnbH0ZRsHLjjk/t+wP582qgF6dRnSODzlkzJ/ZrFcZvyiZMKj1XqaPeqURgMFzUUKvqM+lCL/WyMw2Az2xuBL+QvBfZjuEFvT+U3haHCmwrvJjIYEJ1Juyc9gii0bS9DctEyB/jsnwvnuLXAuxkJGXCI7rbftLQM3bLi+jY=
+	t=1755032190; cv=none; b=WCMdp24IfaUepcB/bNWX2ZjVXGcx92LCI+NN7a1IHFgHaH0K+MV8/hhKxMXIgAK2eZZBRvZMg5Ypt6dKaA4F0E8pxR0bRnnlTRHPKyUhT7KStZiAhUZoAt5IvYTIJRieXYohy4JzFolQ54NI5TDa7W0CgcBMq8IMySVAyZuHqk4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755031968; c=relaxed/simple;
-	bh=G9IZNrwYZ61htAsy9aM1e2VQRFo2Dq9OFnY0wAam0cI=;
+	s=arc-20240116; t=1755032190; c=relaxed/simple;
+	bh=b50XDWuSoO4DukBYvfUq+UKIaGiKlcxo42yLKr/QuqA=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=kn/46paoGWuGBDxwTIOWBg5UVL965cpKwq9rAVAu+Xc7I7Ozuhqd8qqZjoQOYHfIryx5/ddfWlP2wj92KpzgEmivgciq1efSaPFYD4nvbjpm5yHJE73ffKhHPwJ7Iiz8wlTL7leBlOuBsUFUuwv1/6DxKpjWu9dWCkznLziGYCs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=V3qaq/aL; arc=none smtp.client-ip=209.85.214.178
+	 MIME-Version; b=liTh+GD7Xv3MAWX6g3IziaKb17uM5kS1uXsGACpKRmgsRtaki0E7uEfISrDNX/1oA1LKDLmcxHwsYgZqKsL8DZevLGCBwLMikkEH/uiL4w2S2j0+d8ti+T3DPAniUU2rib/1ob8wvDPWeKcn4W7G5UM9wxMMUYXYovwTf5QFt98=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EKKg2WXz; arc=none smtp.client-ip=209.85.210.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-23aeac7d77aso50865815ad.3
-        for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 13:52:46 -0700 (PDT)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-76c18568e5eso6665331b3a.1
+        for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 13:56:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755031966; x=1755636766; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1755032188; x=1755636988; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VKdqkBsgb8sVcM/PyhPgyMjptZ81BESp0fKKLIlCrE8=;
-        b=V3qaq/aL0x+AT0qM0GflmIhYYCTvQbAGlThQ6NxvySUrTrW/tq1bGwcHOxCXrR5yeb
-         HJpXrb8H0XsPx0Qd8XuLuoI3GctaoKzxGsbLQuK3WwgdgomgtnhqNCVaEKkxPYxK8l/D
-         RX0Ik014xoTyTVeIyRjAHC9AwTNxgA3ySIZ4j23V3Da3dFHILrhjZ9Zgv/gm/ucikjvS
-         xT6T5/CgmXuLwtR8NxM80Os1Ltw9e69ifHJrtOAYRYINXZw2JK049QTYk7x9oL/m2zgS
-         yWX0I6tahaz3VngclhriShkdv9f0+EOQY/Pgfa4k6ztsk1ta4KUfEYfDOKBqr4nTazPi
-         WmVg==
+        bh=ZQLcr/Hc/1la2qzpBNmuXzcig5cEllMajLPohQU0lJ0=;
+        b=EKKg2WXz1ngM84XNbCjMXl4P32/OpetcR+FTHFRB1uz3g63qvVHdYoQnvNAS1TTIQJ
+         ArDuMGjuPrOw+t/FY6OQubSi4hNWPW7rnjO3nVUpQ6L1WAWgmb9S5BXfSyRgEmc2J2Po
+         zrABM+rQR1P8QP8NfgMLOBtIC+z2XdTOZsZNcD98ER9jWNzGUaDOw1g5RsyxLDhWkRyg
+         q5c56f54ejwCdp5U8WxlFLyqK5FxtpgozkE4lHpavBLO2Gh6u3MeTYK9yKFirjmysK+e
+         rv4YvfaSALx6I8O12r7xxjbv3LEUkmGvgKC3UpkmuNlMPT841O37T3xITsiQ4pzf2j0b
+         kuuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755031966; x=1755636766;
+        d=1e100.net; s=20230601; t=1755032188; x=1755636988;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=VKdqkBsgb8sVcM/PyhPgyMjptZ81BESp0fKKLIlCrE8=;
-        b=plCLxYw3Ag0Ye7w8HMXFn5sL5H3pxNrcKVinv1Wz1dBdSA5m10PKxGdouqQ13h64+Q
-         uZ3Am20NTk5hDOwen2r0u9guVv6yhPaH6itmZzQ8ABfxdevZdWzzeU174Jh0iQv/D8dG
-         jCVDdyNb2xpkeho6ECzyvIRDHe/klbwtlkMgIUcrMRe9JWhqHA9yAnQXqjR4ZasQMuX+
-         JQeBiMNeKPXPsNqRupRfJVR7aDrK+GaBKJG7LEzkGrdB5gpCXLolqjodgcDK/FObisqR
-         hhcuuuh/CCS+A1o93TVIzV8VabBGFQrGbg4I0yJCy5VlGuK28keCikX/uskSz7vuLZuo
-         Lsng==
-X-Gm-Message-State: AOJu0Yyuy87WyzLGl1qellZN7FmqX8reM3KUyLSXhmP8Ru7wMup0Jucu
-	gFZURsnXCd1alNfhS/FPFT4A7/vLSVkpq9Zr9xmnCEZZIKVg2r76QcwXeri32IjF6cc=
-X-Gm-Gg: ASbGncuY+Ki87XoxC+0rFm1K5I+YD0Skq4qLqDtjOMnddTG1zdDExbKN0cAiXoMRyTK
-	2oP5vgMbrk5BSb3THS9wOznqw6PuuCzgR+RTCiUl91mOVJrMZNB4Yw5QbwB7SNDWBBkt07fhIXB
-	FzjZd78kd34V8TFMVnZSQZk09Km1nu74AvxrVxvPGazRKHFjUrA/uoUo4PVR7niwuXZbex8l3hc
-	TboPZ076+G5yufqdetsuE1RWqTc9sljCKQApW25X+DIO3FxN3DZqJFS27tklOrKdOyEwKBgVXz9
-	m6f6teB1gilsWR26FItbNa+j5QII2lQ56IEjlIiZRLBWiwH/yZgwY89eq92KbuejjyASGu28svu
-	kxNJeysdx4mEd0Dix/mnG3gL+LNL52Ew=
-X-Google-Smtp-Source: AGHT+IFgFMX1RhujMsG9we6nXKVttkMfV8WFbd5L9WXgoutdEQl5tNFIRuuQJ04bmfjMzKiUh76UjQ==
-X-Received: by 2002:a17:902:f70e:b0:240:2774:8372 with SMTP id d9443c01a7336-2430d1f86c9mr8512545ad.36.1755031965598;
-        Tue, 12 Aug 2025 13:52:45 -0700 (PDT)
+        bh=ZQLcr/Hc/1la2qzpBNmuXzcig5cEllMajLPohQU0lJ0=;
+        b=rwEje6m2rZanOwCuA2kquoemrm/OfU/tugX3egt9xQ2vyhje5Tvu3+AOvrFx6g7TBG
+         dJieX/uBzofYixwQ2qRNsnAfNEEvwxp30FXJy0sR2Ra51RhBgg6CVloFxOcnrZx/j6sg
+         Puux5KJvqvK7u98E4alyP75kch0a3UOpt/HIyJFNEZb4vvsncvTO7HMG0oE7h1knQZXz
+         DPLjLJ15OdjfUDCN1jqJbALv1FGk/uj8kSfsbzj+clZH9JBejeDY6aNczJNN1eG5mObX
+         0VGeOW4NE+D70uNf0ZN2w1Bd2OHRvsOQZBwDk+GVY3a0v01QUq27Ypl3umsGsBvDDHM3
+         9q1A==
+X-Gm-Message-State: AOJu0YzviQZrC9erIZk8o7mNAAnfKCEnoI+zswBUw+QWf8aQtTcwX+Fw
+	Jdtsh5JwlUHps/lw8eDgleLMVeLD13XKjqge78W8A0sO0GpujfZ7GzqMJCJTArV1n6U=
+X-Gm-Gg: ASbGnctwrk37iuagRNEmz0A68OWPKOBfX7DKximdi18KPtHKo5tqUI7k20ex+cPl4jF
+	hR32oQaETl17vuvkFTYnyl+s/f+iIoNylMEC3OBv56YR2PovDX1L9EpbSl29vNRNtijyfyEkIPp
+	NrVRMkr4q7mNQdedtJQv4TnIik4gNhVxGWMSsj/QWNBpPvemG2+88qDAapcrLo73B4gO3yhQf2v
+	2WxRLxhq9CxW0+RLUmCsxdPEgsoS1+bs3n2VqiC/9MZ9k3aGdIqO5Hefdj4J2BFjY7GELyYsDNg
+	ABAvOhZW63CkI4wXcot9feyQ1sNWsF+NwZ/+5/o33EmUwsi59xTkTtawcw+3f0Uq/UWxbjLDbUM
+	EJ2hLC8AC+kBjuojs81f5uwwxNGNOLOs=
+X-Google-Smtp-Source: AGHT+IHj3Rc8NkX4woDnqtbsC29mLapjLaI43gJrsz3K6HVsCx7MUVlry0TFBrHh8QOjrERbBRqLwA==
+X-Received: by 2002:a17:90b:1c0e:b0:312:1ae9:152b with SMTP id 98e67ed59e1d1-321d0ea6458mr520513a91.23.1755032187823;
+        Tue, 12 Aug 2025 13:56:27 -0700 (PDT)
 Received: from soham-laptop.. ([103.182.158.106])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-321d1db5cccsm76048a91.18.2025.08.12.13.52.42
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-321d1db5cccsm76048a91.18.2025.08.12.13.56.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Aug 2025 13:52:45 -0700 (PDT)
+        Tue, 12 Aug 2025 13:56:27 -0700 (PDT)
 From: Soham Metha <sohammetha01@gmail.com>
 To: linux-doc@vger.kernel.org
 Cc: linux-kernel-mentees@lists.linuxfoundation.org,
 	skhan@linuxfoundation.org,
 	Soham Metha <sohammetha01@gmail.com>,
-	Kurt Borja <kuurtb@gmail.com>,
+	SeongJae Park <sj@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@redhat.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
 	Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v2 5/9] docs: alienware-wmi: fixed spelling mistake in admin guide
-Date: Wed, 13 Aug 2025 02:19:48 +0530
-Message-Id: <20250812204952.73136-3-sohammetha01@gmail.com>
+Subject: [PATCH v2 6/9] docs: damon: fixed spelling mistakes in documentation
+Date: Wed, 13 Aug 2025 02:19:49 +0530
+Message-Id: <20250812204952.73136-4-sohammetha01@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250812204952.73136-1-sohammetha01@gmail.com>
 References: <20250812201523.69221-1-sohammetha01@gmail.com>
@@ -94,30 +102,48 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-found/fixed the following typo
+found/fixed the following typos
 
-- aproximate -> approximate
+- directores -> directories
 
-in `Documentation/admin-guide/laptops/alienware-wmi.rst`
+in `Documentation/admin-guide/mm/damon/usage.rst`, and
+
+- multipled -> multiplied
+
+in `Documentation/mm/damon/design.rst`.
 
 Signed-off-by: Soham Metha <sohammetha01@gmail.com>
 ---
- Documentation/admin-guide/laptops/alienware-wmi.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/admin-guide/mm/damon/usage.rst | 2 +-
+ Documentation/mm/damon/design.rst            | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/admin-guide/laptops/alienware-wmi.rst b/Documentation/admin-guide/laptops/alienware-wmi.rst
-index 27a32a8057da..e532c60db8e2 100644
---- a/Documentation/admin-guide/laptops/alienware-wmi.rst
-+++ b/Documentation/admin-guide/laptops/alienware-wmi.rst
-@@ -105,7 +105,7 @@ information.
+diff --git a/Documentation/admin-guide/mm/damon/usage.rst b/Documentation/admin-guide/mm/damon/usage.rst
+index ff3a2dda1f02..5cd42d428c89 100644
+--- a/Documentation/admin-guide/mm/damon/usage.rst
++++ b/Documentation/admin-guide/mm/damon/usage.rst
+@@ -357,7 +357,7 @@ The directory for the :ref:`quotas <damon_design_damos_quotas>` of the given
+ DAMON-based operation scheme.
  
- Manual fan control on the other hand, is not exposed directly by the AWCC
- interface. Instead it let's us control a fan `boost` value. This `boost` value
--has the following aproximate behavior over the fan pwm:
-+has the following approximate behavior over the fan pwm:
+ Under ``quotas`` directory, four files (``ms``, ``bytes``,
+-``reset_interval_ms``, ``effective_bytes``) and two directores (``weights`` and
++``reset_interval_ms``, ``effective_bytes``) and two directories (``weights`` and
+ ``goals``) exist.
  
- ::
+ You can set the ``time quota`` in milliseconds, ``size quota`` in bytes, and
+diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+index 03f8137256f5..de95cc74b0fe 100644
+--- a/Documentation/mm/damon/design.rst
++++ b/Documentation/mm/damon/design.rst
+@@ -364,7 +364,7 @@ The tuning is turned off by default, and need to be set explicitly by the user.
+ As a rule of thumbs and the Parreto principle, 4% access samples ratio target
+ is recommended.  Note that Parreto principle (80/20 rule) has applied twice.
+ That is, assumes 4% (20% of 20%) DAMON-observed access events ratio (source)
+-to capture 64% (80% multipled by 80%) real access events (outcomes).
++to capture 64% (80% multiplied by 80%) real access events (outcomes).
  
+ To know how user-space can use this feature via :ref:`DAMON sysfs interface
+ <sysfs_interface>`, refer to :ref:`intervals_goal <sysfs_scheme>` part of
 -- 
 2.34.1
 
