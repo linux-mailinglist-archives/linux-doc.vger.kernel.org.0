@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-55691-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55724-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6F98B22C50
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 17:57:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FEC3B22C80
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 18:00:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 1AE657B7B22
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 15:54:17 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B7ED67B7EE5
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 15:54:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E3322F8BE5;
-	Tue, 12 Aug 2025 15:53:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1E8B02F9478;
+	Tue, 12 Aug 2025 15:53:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I/+T373I"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nh6VbEAk"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A78C2F659E;
-	Tue, 12 Aug 2025 15:53:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF70A2F83C8;
+	Tue, 12 Aug 2025 15:53:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755013985; cv=none; b=C3eQLQ4T2hFmKNEeg4CdZrxVaMlDmZ2HGWhV4u7teHFKohKNSdBvVXXUUG7dy862kZ1GJf16VtJT7n3iROi/hyUc6gJd/+jPKXpARX2KwqMjlBCmtcA4vTHq+3J0OiLqa7VERok0xRfpaXQpGs8c6sK8kU+vM31RlXUIfSEnX/s=
+	t=1755013985; cv=none; b=gx19QgwZU9n90PSGSOnq2f+g5ILZ4ELSCYkhcA4gMRnhQqcGy/Bjpr1sdlf21woaGCKxDQVbgGJAeNwk4f/s6BvYgqkIIkIDQhmuttQR6fG4R2lTr6M2iRq56kIk1aDVUY9nSEg8xEBjKRJlYPgtTSksLjwx2dF86I2loeK0bFg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1755013985; c=relaxed/simple;
-	bh=tUovukr9LJAZFuTCxPr3I6APWlpK5/pEVeW1gSeYrBI=;
+	bh=fRpeYNnkO/XLm29IsXGOKl1Wayy/ayQJh5RKfx/WcYg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hJSMgRDYyxOqI3vmP/7UjlTAuf4IgCN5L9f8UNbfkznZvni2NeNXGLKCY8UFjZCDGuUUTfmIvjKfNKgNeEXS7cKSBmI4fa0CqgQ2JB0AdEDVgoHu2C6BsbochldqzM9RMHGfi/yrRjR3iWxSEnCpjtn9wcVpaKgecoCKEwIZl0w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I/+T373I; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA9BEC4CEF7;
+	 MIME-Version; b=ERYR0tzO0fx7rGImiBvvMsgpY1ULran58oc/fD2tFmsYbckA6nJA29+k6HLx1sDe6esfLW4/llfeQ+jzG939WsODLbC+mVWVbTZOoJ2XQm4aK2opLpbthEcU37yBKTAoFI3CnB3tGbxtfp4a3BEQRfEfgvtD42jszHZ2XnaAtQE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nh6VbEAk; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBF0DC19422;
 	Tue, 12 Aug 2025 15:53:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1755013984;
-	bh=tUovukr9LJAZFuTCxPr3I6APWlpK5/pEVeW1gSeYrBI=;
+	s=k20201202; t=1755013985;
+	bh=fRpeYNnkO/XLm29IsXGOKl1Wayy/ayQJh5RKfx/WcYg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=I/+T373IkRxMN4+DbM1srsAKLqJA4EpftaFElQ21Z13GAB1+HutvQICiDJDocfqMF
-	 EfS5atY9zpDFPSH6RbYx16uq8cvZsw6BRgQvZJ0kKMA/OCxk5Z2EidulJxmuoIR4u0
-	 aZyLXWeJciCwPkGwTMR2cwtONhoHP7ilJqQ3HQYTjZm3nMBCazgMOX0FZ+nq+6jzNP
-	 VwlgcrKRCgs3ju7XbFRVDxA6k++hjNb7Zz8kRk4kGs3P3Rb5ybovsDnu9d0KUkSCrC
-	 raV4o0DqUFQ8oy1Idt8IMiO1gr3/WDy30rgT32TgsheX2h+0HfMXy4V8nPTvCgvMXv
-	 coIGXToQ8uRnw==
+	b=nh6VbEAkrpGkiQBmRU7Q1vWCDyxzxBiLDbL6eEKRzd6IwDHyGUuWNC0sxAPppOuUB
+	 G7GgcjkfLiMYjLkSkrQG1cXVjX6DDsM9fGtQzfK+8PsSXS9KdmxWkiqV/tVoTs2Duy
+	 ZCUWuardoRQ41Y3paTgBFURyEkBXxn1abKCNLU3UQ52L4uRNSf3oSulem+v/4ECLq2
+	 P12j3A+N7gLLxQFy1++645wGgy8MPc6ikKViXlaI0xZB3VHcmoFWZ1e/OsO5rH/QnN
+	 9nJocF8XtTCw7sdQa+GpGvPLXUd4AjdZo+pZ9JjbgrdmljfgO76CTAAC2MsegkpiPc
+	 i+kaSTtoAsPuA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1ulrJ8-00000006kWg-35r3;
+	id 1ulrJ8-00000006kWk-3DAF;
 	Tue, 12 Aug 2025 17:53:02 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -51,9 +51,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 23/39] scripts: sphinx-pre-install: better handle Python min version
-Date: Tue, 12 Aug 2025 17:52:40 +0200
-Message-ID: <013aeb848ecc3f6b69b4518cf3d335bd2353b6e1.1754992972.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 24/39] scripts: sphinx-pre-install: convert is_optional to a class
+Date: Tue, 12 Aug 2025 17:52:41 +0200
+Message-ID: <42290a24f3b1dbea9ebe19747cf5622bb2f2cf5c.1754992972.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1754992972.git.mchehab+huawei@kernel.org>
 References: <cover.1754992972.git.mchehab+huawei@kernel.org>
@@ -66,66 +66,394 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Don't do any recommendations about Sphinx install with too
-old python versions.
+When is_optional was added in Perl, it was a boolean. With
+time, it ended becoming a sort of enum, which makes the
+module harder to maintain.
+
+Convert it to a enum-like class and add more options to it.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- scripts/sphinx-pre-install.py | 20 +++++++++++++++-----
- 1 file changed, 15 insertions(+), 5 deletions(-)
+ scripts/sphinx-pre-install.py | 192 +++++++++++++++++++++++-----------
+ 1 file changed, 130 insertions(+), 62 deletions(-)
 
 diff --git a/scripts/sphinx-pre-install.py b/scripts/sphinx-pre-install.py
-index 365590f81551..a5c777e529ec 100755
+index a5c777e529ec..0963da21c27b 100755
 --- a/scripts/sphinx-pre-install.py
 +++ b/scripts/sphinx-pre-install.py
-@@ -92,6 +92,10 @@ class SphinxDependencyChecker:
-         # Some distros may not have a Sphinx shipped package compatible with
-         # our minimal requirements
-         self.package_supported = True
-+
-+        # Recommend a new python version
-+        self.recommend_python = None
-+
-         # Certain hints are meant to be shown only once
-         self.first_hint = True
+@@ -32,6 +32,53 @@ RECOMMENDED_VERSION = parse_version("3.4.3")
+ MIN_PYTHON_VERSION = parse_version("3.7")
  
-@@ -511,11 +515,11 @@ class SphinxDependencyChecker:
-                 print("ERROR: Distro not supported. Too old?")
+ 
++class DepType:
++
++    # Internal types of dependencies.
++    _SYS_TYPE = 0
++    _PHY_TYPE = 1
++    _PDF_TYPE = 2
++
++    # Let's define keys as a tuple with the type and mandatory/optional.
++    # This way, checking for optional or type is easy.
++
++    SYSTEM_MANDATORY = (_SYS_TYPE, True)
++    PYTHON_MANDATORY = (_PHY_TYPE, True)
++    PDF_MANDATORY = (_PDF_TYPE, True)
++
++    # Currently we're not using all optional types, but let's keep all
++    # combinations here, as we may end needing them in the future. Also,
++    # it allows a name() function that handles all possibilities.
++    SYSTEM_OPTIONAL = (_SYS_TYPE, False)
++    PYTHON_OPTIONAL = (_PHY_TYPE, False)
++    PDF_OPTIONAL = (_PDF_TYPE, True)
++
++    @staticmethod
++    def name(dtype):
++        if dtype[0] == DepType._SYS_TYPE:
++            msg = "build"
++        elif dtype[0] == DepType._PHY_TYPE:
++            msg = "Python"
++        else:
++            msg = "PDF"
++
++        if dtype[1]:
++            return f"ERROR: {msg} mandatory deps missing"
++        else:
++            out = f"Warning: {msg} optional deps missing"
++
++    @staticmethod
++    def is_optional(dtype):
++        return not dtype[1]
++
++    @staticmethod
++    def is_pdf(dtype):
++        if (dtype[0] == DepType._PDF_TYPE):
++            return True
++
++        return False
++
++
+ class SphinxDependencyChecker:
+     # List of required texlive packages on Fedora and OpenSuse
+     texlive = {
+@@ -223,56 +270,68 @@ class SphinxDependencyChecker:
+     # Methods to check if a feature exists
+     #
+ 
+-    # Note: is_optional has 3 states:
+-    #   - 0: mandatory
+-    #   - 1: optional, but nice to have
+-    #   - 2: LaTeX optional - pdf builds without it, but may have visual impact
+-
+     def check_missing(self, progs):
+-        for prog, is_optional in sorted(self.missing.items()):
++        run = {}
++
++        for prog, dtype in sorted(self.missing.items()):
+             # At least on some LTS distros like CentOS 7, texlive doesn't
+             # provide all packages we need. When such distros are
+             # detected, we have to disable PDF output.
+             #
+             # So, we need to ignore the packages that distros would
+             # need for LaTeX to work
+-            if is_optional == 2 and not self.pdf:
++            if DepType.is_pdf(dtype) and not self.pdf:
+                 self.optional -= 1
+                 continue
+ 
++            if not dtype in run:
++                run[dtype] = []
++
++            run[dtype].append(prog)
++
++        output_msg = ""
++
++        for dtype in sorted(run.keys()):
++            progs = " ".join(run[dtype])
++
+             if self.verbose_warn_install:
+-                if is_optional:
+-                    print(f'Warning: better to also install "{prog}".')
+-                else:
+-                    print(f'ERROR: please install "{prog}", otherwise, build won\'t work.')
++                try:
++                    name = DepType.name(dtype)
++                    output_msg += f'{name}:\t{progs}\n'
++                except KeyError:
++                    raise KeyError(f"ERROR!!!: invalid dtype for {progs}: {dtype}")
+ 
+-            self.install += " " + progs.get(prog, prog)
++            self.install += " " + progs
++
++        if output_msg:
++            print(f"\n{output_msg}\n")
+ 
+         self.install = self.install.lstrip()
+ 
+-    def add_package(self, package, is_optional):
+-        self.missing[package] = is_optional
++    def add_package(self, package, dtype):
++        is_optional = DepType.is_optional(dtype)
++        self.missing[package] = dtype
+         if is_optional:
+             self.optional += 1
+         else:
+             self.need += 1
+ 
+-    def check_missing_file(self, files, package, is_optional):
++    def check_missing_file(self, files, package, dtype):
+         for f in files:
+             if os.path.exists(f):
                  return
+-        self.add_package(package, is_optional)
++        self.add_package(package, dtype)
  
--            # TODO: check if RHEL8 still works.
--            # On my tests with  docker "redhat/ubi8" image, there's no
--            # python3-sphinx (or similar) package. It comes with Python 3.6,
--            # but there are other python packages over there, so it may be
--            # possible to work with venv.
-+            # RHEL 8 uses Python 3.6, which is not compatible with
-+            # the build system anymore. Suggest Python 3.11
-+            if rel == 8:
-+                self.add_package("python39", 0)
-+                self.recommend_python = True
+-    def check_program(self, prog, is_optional):
++    def check_program(self, prog, dtype):
+         found = self.which(prog)
+         if found:
+             return found
+ 
+-        self.add_package(prog, is_optional)
++        self.add_package(prog, dtype)
+ 
+         return None
+ 
+-    def check_perl_module(self, prog, is_optional):
++    def check_perl_module(self, prog, dtype):
+         # While testing with lxc download template, one of the
+         # distros (Oracle) didn't have perl - nor even an option to install
+         # before installing oraclelinux-release-el9 package.
+@@ -281,46 +340,52 @@ class SphinxDependencyChecker:
+         # add it as a mandatory package, as some parts of the doc builder
+         # needs it.
+         if not self.which("perl"):
+-            self.add_package("perl", 0)
+-            self.add_package(prog, is_optional)
++            self.add_package("perl", DepType.SYSTEM_MANDATORY)
++            self.add_package(prog, dtype)
+             return
+ 
+         try:
+             self.run(["perl", f"-M{prog}", "-e", "1"], check=True)
+         except subprocess.CalledProcessError:
+-            self.add_package(prog, is_optional)
++            self.add_package(prog, dtype)
+ 
+-    def check_python_module(self, module, is_optional):
+-        # FIXME: is it needed at the Python version? Maybe due to venv?
+-        if not self.python_cmd:
+-            return
++    def check_python_module(self, module, is_optional=False):
++        if is_optional:
++            dtype = DepType.PYTHON_OPTIONAL
++        else:
++            dtype = DepType.PYTHON_MANDATORY
+ 
+         try:
+             self.run([self.python_cmd, "-c", f"import {module}"], check=True)
+         except subprocess.CalledProcessError:
+-            self.add_package(module, is_optional)
++            self.add_package(module, dtype)
+ 
+-    def check_rpm_missing(self, pkgs, is_optional):
++    def check_rpm_missing(self, pkgs, dtype):
+         for prog in pkgs:
+             try:
+                 self.run(["rpm", "-q", prog], check=True)
+             except subprocess.CalledProcessError:
+-                self.add_package(prog, is_optional)
++                self.add_package(prog, dtype)
+ 
+-    def check_pacman_missing(self, pkgs, is_optional):
++    def check_pacman_missing(self, pkgs, dtype):
+         for prog in pkgs:
+             try:
+                 self.run(["pacman", "-Q", prog], check=True)
+             except subprocess.CalledProcessError:
+-                self.add_package(prog, is_optional)
++                self.add_package(prog, dtype)
++
++    def check_missing_tex(self, is_optional=False):
++        if is_optional:
++            dtype = DepType.PDF_OPTIONAL
++        else:
++            dtype = DepType.PDF_MANDATORY
+ 
+-    def check_missing_tex(self, is_optional):
+         kpsewhich = self.which("kpsewhich")
+         for prog, package in self.texlive.items():
+ 
+             # If kpsewhich is not there, just add it to deps
+             if not kpsewhich:
+-                self.add_package(package, is_optional)
++                self.add_package(package, dtype)
+                 continue
+ 
+             # Check if the package is needed
+@@ -331,11 +396,11 @@ class SphinxDependencyChecker:
+ 
+                 # Didn't find. Add it
+                 if not result.stdout.strip():
+-                    self.add_package(package, is_optional)
++                    self.add_package(package, dtype)
+ 
+             except subprocess.CalledProcessError:
+                 # kpsewhich returned an error. Add it, just in case
+-                self.add_package(package, is_optional)
++                self.add_package(package, dtype)
+ 
+     def get_sphinx_fname(self):
+         if "SPHINXBUILD" in os.environ:
+@@ -446,9 +511,9 @@ class SphinxDependencyChecker:
+             }
+ 
+             for package, files in pdf_pkgs.items():
+-                self.check_missing_file(files, package, 2)
++                self.check_missing_file(files, package, DepType.PDF_MANDATORY)
+ 
+-            self.check_program("dvipng", 2)
++            self.check_program("dvipng", DepType.PDF_MANDATORY)
+ 
+         self.check_missing(progs)
+ 
+@@ -518,7 +583,7 @@ class SphinxDependencyChecker:
+             # RHEL 8 uses Python 3.6, which is not compatible with
+             # the build system anymore. Suggest Python 3.11
+             if rel == 8:
+-                self.add_package("python39", 0)
++                self.add_package("python39", DepType.SYSTEM_MANDATORY)
+                 self.recommend_python = True
  
              if self.first_hint:
-                 print("Note: RHEL-based distros typically require extra repositories.\n" \
-@@ -596,6 +600,7 @@ class SphinxDependencyChecker:
-             # the build system anymore. Suggest Python 3.11
+@@ -540,13 +605,13 @@ class SphinxDependencyChecker:
+                 "/usr/share/fonts/google-noto-sans-cjk-fonts/NotoSansCJK-Regular.ttc",
+             ]
+ 
+-            self.check_missing_file(pdf_pkgs, noto_sans_redhat, 2)
++            self.check_missing_file(pdf_pkgs, noto_sans_redhat, DepType.PDF_MANDATORY)
+ 
+             if not old:
+-                self.check_rpm_missing(fedora26_opt_pkgs, 2)
+-                self.check_rpm_missing(fedora_tex_pkgs, 2)
++                self.check_rpm_missing(fedora26_opt_pkgs, DepType.PDF_MANDATORY)
++                self.check_rpm_missing(fedora_tex_pkgs, DepType.PDF_MANDATORY)
+ 
+-            self.check_missing_tex(2)
++            self.check_missing_tex()
+ 
+         self.check_missing(progs)
+ 
+@@ -601,7 +666,7 @@ class SphinxDependencyChecker:
              if rel == 15:
                  if not self.which(self.python_cmd):
-+                    self.recommend_python = True
-                     self.add_package(self.python_cmd, 0)
+                     self.recommend_python = True
+-                    self.add_package(self.python_cmd, 0)
++                    self.add_package(self.python_cmd, DepType.SYSTEM_MANDATORY)
  
                  progs.update({
-@@ -1000,6 +1005,11 @@ class SphinxDependencyChecker:
-         #	- recommended version.
-         # It also needs to work fine with both distro's package and venv/virtualenv
+                     "python-sphinx": "python311-Sphinx",
+@@ -623,9 +688,9 @@ class SphinxDependencyChecker:
+         # "Noto Sans CJK SC" on openSUSE
  
-+        if self.recommend_python:
-+            print("\nPython version is incompatible with doc build.\n" \
-+                  "Please upgrade it and re-run.\n")
-+            return
+         if self.pdf:
+-            self.check_rpm_missing(suse_tex_pkgs, 2)
++            self.check_rpm_missing(suse_tex_pkgs, DepType.PDF_MANDATORY)
+         if self.pdf:
+-            self.check_missing_tex(2)
++            self.check_missing_tex()
+         self.check_missing(progs)
+ 
+         if not self.need and not self.optional:
+@@ -672,8 +737,8 @@ class SphinxDependencyChecker:
+                 "/usr/share/fonts/TTF/NotoSans-Regular.ttf",
+             ]
+ 
+-            self.check_missing_file(pdf_pkgs, noto_sans, 2)
+-            self.check_rpm_missing(tex_pkgs, 2)
++            self.check_missing_file(pdf_pkgs, noto_sans, DepType.PDF_MANDATORY)
++            self.check_rpm_missing(tex_pkgs, DepType.PDF_MANDATORY)
+ 
+         self.check_missing(progs)
+ 
+@@ -701,7 +766,7 @@ class SphinxDependencyChecker:
+         ]
+ 
+         if self.pdf:
+-            self.check_pacman_missing(archlinux_tex_pkgs, 2)
++            self.check_pacman_missing(archlinux_tex_pkgs, DepType.PDF_MANDATORY)
+ 
+             self.check_missing_file(
+                 ["/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc"],
+@@ -739,7 +804,7 @@ class SphinxDependencyChecker:
+                 ],
+             }
+             for package, files in pdf_pkgs.items():
+-                self.check_missing_file(files, package, 2)
++                self.check_missing_file(files, package, DepType.PDF_MANDATORY)
+ 
+         self.check_missing(progs)
+ 
+@@ -878,7 +943,7 @@ class SphinxDependencyChecker:
+         #
+         progs = {"sphinx-build": "sphinx"}
+         if self.pdf:
+-            self.check_missing_tex(2)
++            self.check_missing_tex()
+ 
+         self.check_missing(progs)
+ 
+@@ -990,7 +1055,7 @@ class SphinxDependencyChecker:
+         old_verbose = self.verbose_warn_install
+         self.verbose_warn_install = 0
+ 
+-        self.add_package("python-sphinx", 0)
++        self.add_package("python-sphinx", DepType.PYTHON_MANDATORY)
+ 
+         self.check_distros()
+ 
+@@ -1010,6 +1075,7 @@ class SphinxDependencyChecker:
+                   "Please upgrade it and re-run.\n")
+             return
+ 
 +
          # Version is OK. Nothing to do.
          if self.cur_version != (0, 0, 0) and self.cur_version >= RECOMMENDED_VERSION:
              return
+@@ -1128,21 +1194,23 @@ class SphinxDependencyChecker:
+ 
+             else:
+                 virtualenv_cmd = f"{self.python_cmd} -m venv"
+-                self.check_python_module("ensurepip", 0)
++                self.check_python_module("ensurepip")
+ 
+         # Check for needed programs/tools
+-        self.check_perl_module("Pod::Usage", 0)
+-        self.check_python_module("yaml", 0)
+-        self.check_program("make", 0)
+-        self.check_program("gcc", 0)
+-        self.check_program("dot", 1)
+-        self.check_program("convert", 1)
++        self.check_perl_module("Pod::Usage", DepType.SYSTEM_MANDATORY)
++
++        self.check_program("make", DepType.SYSTEM_MANDATORY)
++        self.check_program("gcc", DepType.SYSTEM_MANDATORY)
++
++        self.check_program("dot", DepType.SYSTEM_OPTIONAL)
++        self.check_program("convert", DepType.SYSTEM_OPTIONAL)
++
++        self.check_python_module("yaml")
+ 
+         if self.pdf:
+-            # Extra PDF files - should use 2 for LaTeX is_optional
+-            self.check_program("xelatex", 2)
+-            self.check_program("rsvg-convert", 2)
+-            self.check_program("latexmk", 2)
++            self.check_program("xelatex", DepType.PDF_MANDATORY)
++            self.check_program("rsvg-convert", DepType.PDF_MANDATORY)
++            self.check_program("latexmk", DepType.PDF_MANDATORY)
+ 
+         # Do distro-specific checks and output distro-install commands
+         self.check_distros()
 -- 
 2.50.1
 
