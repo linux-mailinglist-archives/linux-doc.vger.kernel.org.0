@@ -1,148 +1,170 @@
-Return-Path: <linux-doc+bounces-55624-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55626-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A826B2234D
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 11:35:56 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3085CB22373
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 11:42:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A1EE21889FE8
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 09:34:02 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4FC083B060F
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Aug 2025 09:41:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2235B2E8DF1;
-	Tue, 12 Aug 2025 09:33:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pf7fzn4L"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 749CA2E9EDE;
+	Tue, 12 Aug 2025 09:41:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFF812E7BB1;
-	Tue, 12 Aug 2025 09:33:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B55F22E8E0E;
+	Tue, 12 Aug 2025 09:41:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.206.16.166
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1754991218; cv=none; b=pJQCDj667lCoQipV+hvU+BvG438Wy7dTY7ruuHDFE1mMByIwWqNiADVtSJRWd/WvWyA39vAVqkNMN6GLeuEaDGb6bG0UKUnF4qjKau6e7y9DhAWDUoyBsRIiclOZrgTQLiuiYH1H+ZGnoLPJHKb3wKJNI8e39F1gZrTmM8oUiAY=
+	t=1754991667; cv=none; b=Upy2KfduTa4QlQezv238eouCj35G6RPRbYTgQMa9cgiUWzY2F2I8+7AiNgQKiUSxiqD+2KgAPhtpBQnVGEVsB8uoeF8NUapkBRlTSvW8bkOnhJ6Ekgx3F9IUjIISWSUp9oOAq3YEbwyi6hdw0yl+6mZxtEinHyR3sMBBSvGXjho=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1754991218; c=relaxed/simple;
-	bh=awVECIkj//NC3B2TraxKMvGe3uB8kJQ4UisWIm+eQEc=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=ZIt/cdGj6rzmHeglkzty4Fi8htmJPaJyeO7L6pO+DD5Xm1nQ+LCirUsZ/PI2nuqi/0Nx2kTTATekkb0kIo9JuJzzXqJ5lzPToEiWDx3ujMqIz8YWiKCTECUF5uuiJu6hgXcM+sG+AdAXVaDzR7yFFhYpnhy11F/QkKDMpGrFGAs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pf7fzn4L; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A6FCC4CEF6;
-	Tue, 12 Aug 2025 09:33:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1754991217;
-	bh=awVECIkj//NC3B2TraxKMvGe3uB8kJQ4UisWIm+eQEc=;
-	h=Date:From:To:Cc:Subject:From;
-	b=pf7fzn4LaH5bQkMgjAiTtoP7T8keIrINlrcT/r7eagYQZjVIg9rmj6TIq0QJO5qq/
-	 lqcF8U7lezBatG5vitwCuO09s+OVWKNcPfw5O738QqQoh0q6W1ow0OPcmC3U8DHrCT
-	 AqqyIUSYmOqd0CBPkQz/7fOSISfQIy9Y6FhP2ZyASwV2PAJiVD5FNLiwiBiJyNkrsw
-	 p2B8/sXnDkizhStV548h/jyNap1kTeeZ1C8KCzrkxYuQzP13gtbX568ZHtyNTPdhAP
-	 vnyzJdK5obpPEMR+7OzHZntbzFX/Q4TJ5QaIdSvcooAuKO4ipSZ3jGag4Ye37zBCTl
-	 iufHl20YZyiQg==
-Date: Tue, 12 Aug 2025 11:33:29 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>, Jakub Kicinski <kuba@kernel.org>
-Cc: EDAC Mailing List <linux-edac@vger.kernel.org>, Linux Kernel Mailing
- List <linux-kernel@vger.kernel.org>, Linux Doc Mailing List
- <linux-doc@vger.kernel.org>, linux-kernel@vger.kernel.org, Akira Yokosawa
- <akiyks@gmail.com>, "David S. Miller" <davem@davemloft.net>, Ignacio
- Encinas Rubio <ignacio@iencinas.com>, Marco Elver <elver@google.com>, Shuah
- Khan <skhan@linuxfoundation.org>, Donald Hunter <donald.hunter@gmail.com>,
- Eric Dumazet <edumazet@google.com>, Jan Stancek <jstancek@redhat.com>,
- Paolo Abeni <pabeni@redhat.com>, Ruben Wauters <rubenru09@aol.com>,
- joel@joelfernandes.org, linux-kernel-mentees@lists.linux.dev,
- lkmm@lists.linux.dev, netdev@vger.kernel.org, peterz@infradead.org,
- stern@rowland.harvard.edu, Breno Leitao <leitao@debian.org>, Randy Dunlap
- <rdunlap@infradead.org>, Simon Horman <horms@kernel.org>
-Subject: [GIT PULL for v6.17-rc2] add a generic yaml parser integrated with
- Netlink specs generation
-Message-ID: <20250812113329.356c93c2@foz.lan>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1754991667; c=relaxed/simple;
+	bh=E30CA2OyE6yW18KhFeMGAY+johqRCBEBiBJLS6lL8x8=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=YJp5WjtAmkJhqwFHVpn/f4MFlBI5xOhbZVX+3dldE81eiQJdXOx/ISk+TpAG/rAnIMyoTCDMHq6ykTtc7U9bSsSNI5mKAW/C7MTkfymnZt+9lKZfB/WrIAnFYkgnQP8OycjswFU6uav3Wdyyy+j9QE75/QSDWTMhHhtzJMFMi/U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.206.16.166
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
+X-QQ-mid: zesmtpgz7t1754991596t293a4c67
+X-QQ-Originating-IP: PnCszxP7z8c8wtX64M80yLJLhPuH0abNPFPw2j7FmGg=
+Received: from localhost.localdomain ( [203.174.112.180])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Tue, 12 Aug 2025 17:39:52 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 17493466095422222965
+EX-QQ-RecipientCnt: 23
+From: Dong Yibo <dong100@mucse.com>
+To: andrew+netdev@lunn.ch,
+	davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	corbet@lwn.net,
+	gur.stavi@huawei.com,
+	maddy@linux.ibm.com,
+	mpe@ellerman.id.au,
+	danishanwar@ti.com,
+	lee@trager.us,
+	gongfan1@huawei.com,
+	lorenzo@kernel.org,
+	geert+renesas@glider.be,
+	Parthiban.Veerasooran@microchip.com,
+	lukas.bulwahn@redhat.com,
+	alexanderduyck@fb.com,
+	richardcochran@gmail.com
+Cc: netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	dong100@mucse.com
+Subject: [PATCH v3 0/5] Add driver for 1Gbe network chips from MUCSE
+Date: Tue, 12 Aug 2025 17:39:32 +0800
+Message-Id: <20250812093937.882045-1-dong100@mucse.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpgz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: MtnV5/DUURsJNAjWVY+kf5NIALCm6d6jcOTsgGxdyPByH2f7BNbZz8yS
+	li+Qlwko5IwWLXbBAtsWHp1T6NHNW/y3/kllahwn749pJbnCs+RVRawLHzcLTyWC34gGkQD
+	8aXMaKEszwd7ViAzG70wExNdB6Ofg+cbw47zNkPWdxiMSrdlSZguXtUbVdiXJ04Z0ifAkPy
+	HoM00H9xsXei/bSpP9MeQiCF6by4V+lojGc+oLZ0NnpL0vZWBoqkb4WwPL3QIPO7xypY2LE
+	Uh1iAYcYHNcx3J5TFfpKOf1o1mXiTX/rfxBlcBSpo3NzGiAyOEXlHC+F3zhKxLaIxHBMnpb
+	xooILqyeLkyWWp6ry5iPlPWU/hiJLbHjCygNwr/GYfrRlvaGj5Yy16gQIbFN8pZRQ8k55FG
+	vrf6UaD2OmjX+ACWy4KBmuMsuyA1i1xZLSn3Lan5OpTYIMYjhILF+iMYuyniElJu97oBq6k
+	dK/dHTJGb2BHw0j3UiKyITX7ljyhqfVbHDOjwEt3YLKDQyuu73md0+6BZ3wH0wpLJTPw+iQ
+	zdjn6tUX7yakD6sDFe+TkrxPvmhtCOBVD4ibb5vRMMfWbjI36RTgBGeRyHzSVDH4NZmlC5G
+	oHqMkNvN8jCr51IPiZM4wQLdKEVuSrhtT6XdRWV8/h1lZzDbRl6w3Mfx8M68xZaGbRYjpDg
+	OvdDQ2b+8SuEUW53ajgtZzt/FBmPXnjQt6TRXX1fNIBpl52j7Z3EymMeoOt3nw2bQ8ccOMl
+	K81I6KoXFcXJbfd2iB0DlhEgaoGepfOvh6/c9vAuNy7wLaaOMsbKIc8rYgC4x57Gf/L5qrY
+	qHEe3KX4spohXzJk+9ss5/HrjZ9Ur4aJHbBrbEiRxnEllSfZs0j7wAqQ4cf6owhlsm6wGR4
+	VVeXgsvpmqW1p3yJBkl8rEfWrtabG34SFOFSYDzFcTYGtHzdrvIXtKPy7uQgwfB795gEauR
+	B29HvZ026k72r1RRgGLMCSeJn5Sz9XgrC1WBPDYSV8cqnWih9l2aqwlGUPtAclLY/A7f8bg
+	lU2FNSb0iL9UbKLo6NUGLS/rbBW1Wbpk7PdHUVFJpT6sGGj51nNVR7e4bo0GoNFG8vmd/25
+	g==
+X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+X-QQ-RECHKSPAM: 0
 
-Hi Jon/Jakub,
+Hi maintainers,
 
-In case you both prefer to merge from a stable tag, please pull from:
+This patch series is v3 to introduce support for MUCSE N500/N210 1Gbps
+Ethernet controllers. I divide codes into multiple series, this is the
+first one which only register netdev without true tx/rx functions.
 
-	git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-docs.git docs/v6.17-1
+The driver has been tested on the following platform:
+   - Kernel version: 6.16.0
+   - Intel Xeon Processor
 
-For:
+Changelog:
+v2 -> v3:
+  [patch 1/5]:
+  1. Fix rnpgbe_driver_name as static.
+  2. Fix sorted-list for index.rst Kconfig Makefile.
+  [patch 2/5]
+  1. Using common funcs to initialize common parts across multiple chips.
+  [patch 3/5]
+  1. Fix no initialised error.
+  [patch 4/5]:
+  1. Fix invalid bitfield specifier for type restricted __le32
+  
+  Some common modifications:
+  1. Remove extra parentheses for constant.
+  2. Check code-spell error and comment.
+  3. Remove no used code and define.
+  4. Use const for all ops.
+  5. Modify the code based on Brett Creeley, andrew, horms's feedbacks.
 
-- An YAML parser Sphinx plugin, integrated with Netlink YAML doc
-  parser.
+links:
+v2: https://lore.kernel.org/netdev/20250721113238.18615-1-dong100@mucse.com/
+v1: https://lore.kernel.org/netdev/20250703014859.210110-1-dong100@mucse.com/
 
-The patch content is identical to my v10 submission:
+Dong Yibo (5):
+  net: rnpgbe: Add build support for rnpgbe
+  net: rnpgbe: Add n500/n210 chip support
+  net: rnpgbe: Add basic mbx ops support
+  net: rnpgbe: Add basic mbx_fw support
+  net: rnpgbe: Add register_netdev
 
-	https://lore.kernel.org/linux-doc/cover.1753718185.git.mchehab+huawei@kernel.org/
+ .../device_drivers/ethernet/index.rst         |   1 +
+ .../device_drivers/ethernet/mucse/rnpgbe.rst  |  21 +
+ MAINTAINERS                                   |   8 +
+ drivers/net/ethernet/Kconfig                  |   1 +
+ drivers/net/ethernet/Makefile                 |   1 +
+ drivers/net/ethernet/mucse/Kconfig            |  34 ++
+ drivers/net/ethernet/mucse/Makefile           |   7 +
+ drivers/net/ethernet/mucse/rnpgbe/Makefile    |  11 +
+ drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    | 148 ++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   | 166 +++++++
+ drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |  15 +
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 352 ++++++++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c    | 443 ++++++++++++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h    |  31 ++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c | 275 +++++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h | 201 ++++++++
+ 16 files changed, 1715 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/mucse/rnpgbe.rst
+ create mode 100644 drivers/net/ethernet/mucse/Kconfig
+ create mode 100644 drivers/net/ethernet/mucse/Makefile
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/Makefile
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_main.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h
 
-The tag was rebased on the top of v6.17-rc1 to make easier for it to be
-merged on both docs and netlink trees. 
+-- 
+2.25.1
 
-No code changes since v10.
-
-Regards,
-Mauro
-
----
-
-The following changes since commit 8f5ae30d69d7543eee0d70083daf4de8fe15d585:
-
-  Linux 6.17-rc1 (2025-08-10 19:41:16 +0300)
-
-are available in the Git repository at:
-
-  git://git.kernel.org/pub/scm/linux/kernel/git/mchehab/linux-docs.git tags/docs/v6.17-1
-
-for you to fetch changes up to 47459937be8031aae6aaa17ac5f60985f7c9e1bd:
-
-  sphinx: parser_yaml.py: fix line numbers information (2025-08-12 07:47:31 +0200)
-
-----------------------------------------------------------------
-[GIT PULL for v6.17-rc2] add a generic yaml parser integrated with Netlink specs generation
-
-----------------------------------------------------------------
-Mauro Carvalho Chehab (14):
-      docs: netlink: netlink-raw.rst: use :ref: instead of :doc:
-      tools: ynl_gen_rst.py: Split library from command line tool
-      docs: netlink: index.rst: add a netlink index file
-      tools: ynl_gen_rst.py: cleanup coding style
-      docs: sphinx: add a parser for yaml files for Netlink specs
-      docs: use parser_yaml extension to handle Netlink specs
-      docs: uapi: netlink: update netlink specs link
-      tools: ynl_gen_rst.py: drop support for generating index files
-      docs: netlink: remove obsolete .gitignore from unused directory
-      MAINTAINERS: add netlink_yml_parser.py to linux-doc
-      tools: netlink_yml_parser.py: add line numbers to parsed data
-      docs: parser_yaml.py: add support for line numbers from the parser
-      docs: parser_yaml.py: fix backward compatibility with old docutils
-      sphinx: parser_yaml.py: fix line numbers information
-
- Documentation/Makefile                             |  17 -
- Documentation/conf.py                              |  20 +-
- Documentation/netlink/specs/index.rst              |  13 +
- Documentation/networking/index.rst                 |   2 +-
- Documentation/networking/netlink_spec/.gitignore   |   1 -
- Documentation/networking/netlink_spec/readme.txt   |   4 -
- Documentation/sphinx/parser_yaml.py                | 123 +++++++
- Documentation/userspace-api/netlink/index.rst      |   2 +-
- .../userspace-api/netlink/netlink-raw.rst          |   6 +-
- Documentation/userspace-api/netlink/specs.rst      |   2 +-
- MAINTAINERS                                        |   1 +
- tools/net/ynl/pyynl/lib/__init__.py                |   2 +
- tools/net/ynl/pyynl/lib/doc_generator.py           | 398 +++++++++++++++++++++
- tools/net/ynl/pyynl/ynl_gen_rst.py                 | 384 +-------------------
- 14 files changed, 565 insertions(+), 410 deletions(-)
- create mode 100644 Documentation/netlink/specs/index.rst
- delete mode 100644 Documentation/networking/netlink_spec/.gitignore
- delete mode 100644 Documentation/networking/netlink_spec/readme.txt
- create mode 100755 Documentation/sphinx/parser_yaml.py
- create mode 100644 tools/net/ynl/pyynl/lib/doc_generator.py
 
