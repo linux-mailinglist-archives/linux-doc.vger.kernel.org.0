@@ -1,31 +1,31 @@
-Return-Path: <linux-doc+bounces-55857-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55854-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3416B2440F
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 10:19:51 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 316FCB243EC
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 10:15:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 72A193B2576
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 08:17:19 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 978FD58066E
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 08:15:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31B712F2902;
-	Wed, 13 Aug 2025 08:15:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 338F42EFDAC;
+	Wed, 13 Aug 2025 08:15:19 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D1212F0C73
-	for <linux-doc@vger.kernel.org>; Wed, 13 Aug 2025 08:15:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C23F2EE29D
+	for <linux-doc@vger.kernel.org>; Wed, 13 Aug 2025 08:15:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755072926; cv=none; b=nz+apzendhXVxVkPGxzvcH53s2cmwx3jlVHlX7SLKqjl6+s/iF4T/sDFd1ZZMnN7c6c4IzncyDp1rwbn5cxg36mcZLTQyRuZ9Eqstv7L5MVoDnT2gKVDVZcjPvzcMJ+eLuhVpt0EunF2Qhf+QOoH6TDAXpBxvTnonfppAyFWRrY=
+	t=1755072919; cv=none; b=MY/uTtF+ZAjt4VauVz9YkDJEDUtBEci4Hu0G24fj986gLIVPxtjYV06LJE2fB3iyBLUNecGNJ4xqbwcxd8ez4Pw2UDUm7wMvhBusUCU9XPXPo09lBfcAPtpP4gZgtbfTJFwtRMhnjJ1kK7WqBYUmWNt2GnaLfq4pZcUz3cPfUbA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755072926; c=relaxed/simple;
-	bh=88E+bBuiK44gGWZ53KQgTj9G0qoaUSqfmoDM/l2RsZY=;
+	s=arc-20240116; t=1755072919; c=relaxed/simple;
+	bh=34LTcszKLeYDmHdbnh9rrfPNBpaMAPrseZ4WCws0Ieg=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kvkcODKhbPPNPUAS8cgTRg3Aa4xwB4KU07xEXIekzzmQ/b8l70rPYJx9nI5z/7/Hk74c9R94AEaYnovv0cyoS0N6aMqdQRq3dLyGW07QIFQ8Pj9uF+iQi7ZXaiDZVFzEuhTFUXM2OVMgivCM4gnl1RNQWzzWiAMm4my/qzCoDC0=
+	 MIME-Version; b=KEi1h3O4IpAZXURiCsb6EFYEs3L3x7kMWa2VC0k3B/0txOSew4x2ilEEU1LUaoUrf6Xnt9uaLWjgB8ur04XBBAyGdQuZ42IfUhnQicWnwRz74uXgaEI7QEmRi3HLnYJnsa13imXD+mHmQ7RV0g3DhsMjIbfyYsAkVKZh7orlAoM=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
@@ -33,16 +33,16 @@ Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
 	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
 	(Exim 4.92)
 	(envelope-from <ore@pengutronix.de>)
-	id 1um6dO-0002Ka-FF; Wed, 13 Aug 2025 10:14:58 +0200
+	id 1um6dO-0002Kb-FF; Wed, 13 Aug 2025 10:14:58 +0200
 Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
 	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 	(Exim 4.96)
 	(envelope-from <ore@pengutronix.de>)
-	id 1um6dK-0003m4-1i;
+	id 1um6dK-0003m5-1p;
 	Wed, 13 Aug 2025 10:14:54 +0200
 Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.96)
 	(envelope-from <ore@pengutronix.de>)
-	id 1um6dK-00Ey77-1N;
+	id 1um6dK-00Ey7H-1R;
 	Wed, 13 Aug 2025 10:14:54 +0200
 From: Oleksij Rempel <o.rempel@pengutronix.de>
 To: Andrew Lunn <andrew@lunn.ch>,
@@ -66,9 +66,9 @@ Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
 	linux-doc@vger.kernel.org,
 	Michal Kubecek <mkubecek@suse.cz>,
 	Roan van Dijk <roan@protonic.nl>
-Subject: [PATCH net-next v1 4/5] net: phy: micrel: add MSE interface support for KSZ9477 family
-Date: Wed, 13 Aug 2025 10:14:52 +0200
-Message-Id: <20250813081453.3567604-5-o.rempel@pengutronix.de>
+Subject: [PATCH net-next v1 5/5] net: phy: dp83td510: add MSE interface support for 10BASE-T1L
+Date: Wed, 13 Aug 2025 10:14:53 +0200
+Message-Id: <20250813081453.3567604-6-o.rempel@pengutronix.de>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250813081453.3567604-1-o.rempel@pengutronix.de>
 References: <20250813081453.3567604-1-o.rempel@pengutronix.de>
@@ -78,134 +78,99 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
 X-SA-Exim-Mail-From: ore@pengutronix.de
 X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
 X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-Implement the get_mse_config() and get_mse_snapshot() PHY driver ops
-for KSZ9477-series integrated PHYs to demonstrate the new PHY MSE
+Implement get_mse_config() and get_mse_snapshot() for the DP83TD510E
+to expose its Mean Square Error (MSE) register via the new PHY MSE
 UAPI.
 
-These PHYs do not expose a documented direct MSE register, but the
-Signal Quality Indicator (SQI) registers are derived from the
-internal MSE computation. This hook maps SQI readings into the MSE
-interface so that tooling can retrieve the raw value together with
-metadata for correct interpretation in userspace.
+The DP83TD510E does not document any peak MSE values; it only exposes
+a single average MSE register used internally to derive SQI. This
+implementation therefore advertises only PHY_MSE_CAP_AVG, along with
+LINK and channel-A selectors. Scaling is fixed to 0xFFFF, and the
+refresh interval/number of symbols are estimated from 10BASE-T1L
+symbol rate (7.5 MBd) and typical diagnostic intervals (~1 ms).
 
-Behaviour:
-  - For 1000BASE-T, report per-channel (A–D) values and support a
-    WORST channel selector.
-  - For 100BASE-TX, only LINK-wide measurements are available.
-  - Report average MSE only, with a max scale based on
-    KSZ9477_MMD_SQI_MASK and a fixed refresh rate of 2 µs.
-
-This mapping differs from the OPEN Alliance SQI definition, which
-assigns thresholds such as pre-fail indices; the MSE interface
-instead provides the raw measurement, leaving interpretation to
-userspace.
+For 10BASE-T1L deployments, SQI is a reliable indicator of link
+modulation quality once the link is established, but it does not
+indicate whether autonegotiation pulses will be correctly received
+in marginal conditions. MSE provides a direct measurement of slicer
+error rate that can be used to evaluate if autonegotiation is likely
+to succeed under a given cable length and condition. In practice,
+testing such scenarios often requires forcing a fixed-link setup to
+isolate MSE behaviour from the autonegotiation process.
 
 Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
 ---
- drivers/net/phy/micrel.c | 76 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 76 insertions(+)
+ drivers/net/phy/dp83td510.c | 44 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/drivers/net/phy/micrel.c b/drivers/net/phy/micrel.c
-index dc0e6b55147b..4505053bf5f1 100644
---- a/drivers/net/phy/micrel.c
-+++ b/drivers/net/phy/micrel.c
-@@ -2316,6 +2316,80 @@ static int kszphy_get_sqi_max(struct phy_device *phydev)
- 	return KSZ9477_SQI_MAX;
- }
+diff --git a/drivers/net/phy/dp83td510.c b/drivers/net/phy/dp83td510.c
+index 23af1ac194fa..094c070f3f96 100644
+--- a/drivers/net/phy/dp83td510.c
++++ b/drivers/net/phy/dp83td510.c
+@@ -249,6 +249,47 @@ struct dp83td510_priv {
+ #define DP83TD510E_ALCD_COMPLETE			BIT(15)
+ #define DP83TD510E_ALCD_CABLE_LENGTH			GENMASK(10, 0)
  
-+static int kszphy_get_mse_config(struct phy_device *phydev,
-+				 struct phy_mse_config *config)
++static int dp83td510_get_mse_config(struct phy_device *phydev,
++				    struct phy_mse_config *config)
 +{
-+	if (phydev->speed == SPEED_1000)
-+		config->supported_caps |= PHY_MSE_CAP_CHANNEL_A |
-+					  PHY_MSE_CAP_CHANNEL_B |
-+					  PHY_MSE_CAP_CHANNEL_C |
-+					  PHY_MSE_CAP_CHANNEL_D |
-+					  PHY_MSE_CAP_WORST_CHANNEL;
-+	else if (phydev->speed == SPEED_100)
-+		config->supported_caps |= PHY_MSE_CAP_LINK;
-+	else
-+		return -EOPNOTSUPP;
-+
-+	config->max_average_mse = FIELD_MAX(KSZ9477_MMD_SQI_MASK);
-+	config->refresh_rate_ps = 2000000; /* 2 us */
-+	/* Estimated from link modulation (125 MBd per channel) and documented
-+	 * refresh rate of 2 µs
++	/* The DP83TD510E datasheet does not specify peak MSE values.
++	 * It only provides a single MSE value which is used to derive SQI.
++	 * Therefore, we only support the average MSE capability.
 +	 */
-+	config->num_symbols = 250;
++	config->supported_caps = PHY_MSE_CAP_AVG | PHY_MSE_CAP_LINK |
++		PHY_MSE_CAP_CHANNEL_A;
++	config->max_average_mse = 0xFFFF;
 +
-+	config->supported_caps |= PHY_MSE_CAP_AVG;
++	/* The datasheet does not specify the refresh rate or symbol count,
++	 * but based on similar PHYs and standards, we can assume a common
++	 * value. For 10BaseT1L, the symbol rate is 7.5 MBd. A common
++	 * diagnostic interval is around 1ms.
++	 * 7.5e6 symbols/sec * 0.001 sec = 7500 symbols.
++	 */
++	config->refresh_rate_ps = 1000000000; /* 1 ms */
++	config->num_symbols = 7500;
 +
 +	return 0;
 +}
 +
-+static int kszphy_get_mse_snapshot(struct phy_device *phydev, u32 channel,
-+				   struct phy_mse_snapshot *snapshot)
++static int dp83td510_get_mse_snapshot(struct phy_device *phydev, u32 channel,
++				      struct phy_mse_snapshot *snapshot)
 +{
-+	u8 num_channels;
 +	int ret;
 +
-+	if (phydev->speed == SPEED_1000)
-+		num_channels = 4;
-+	else if (phydev->speed == SPEED_100)
-+		num_channels = 1;
-+	else
++	if (channel != PHY_MSE_CHANNEL_LINK &&
++	    channel != PHY_MSE_CHANNEL_A)
 +		return -EOPNOTSUPP;
 +
-+	if (channel == PHY_MSE_CHANNEL_WORST) {
-+		u32 worst_val = 0;
-+		int i;
++	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TD510E_MSE_DETECT);
++	if (ret < 0)
++		return ret;
 +
-+		for (i = 0; i < num_channels; i++) {
-+			ret = phy_read_mmd(phydev, MDIO_MMD_PMAPMD,
-+					KSZ9477_MMD_SIGNAL_QUALITY_CHAN_A + i);
-+			if (ret < 0)
-+				return ret;
-+
-+			ret = FIELD_GET(KSZ9477_MMD_SQI_MASK, ret);
-+			if (ret > worst_val)
-+				worst_val = ret;
-+		}
-+		snapshot->average_mse = worst_val;
-+	} else if (channel == PHY_MSE_CHANNEL_LINK && num_channels == 1) {
-+		ret = phy_read_mmd(phydev, MDIO_MMD_PMAPMD,
-+				   KSZ9477_MMD_SIGNAL_QUALITY_CHAN_A);
-+		if (ret < 0)
-+			return ret;
-+		snapshot->average_mse = FIELD_GET(KSZ9477_MMD_SQI_MASK, ret);
-+	} else if (channel >= PHY_MSE_CHANNEL_A &&
-+		   channel <= PHY_MSE_CHANNEL_D) {
-+		ret = phy_read_mmd(phydev, MDIO_MMD_PMAPMD,
-+				   KSZ9477_MMD_SIGNAL_QUALITY_CHAN_A + channel);
-+		if (ret < 0)
-+			return ret;
-+		snapshot->average_mse = FIELD_GET(KSZ9477_MMD_SQI_MASK, ret);
-+	} else {
-+		return -EINVAL;
-+	}
++	snapshot->average_mse = ret;
 +
 +	return 0;
 +}
 +
- static void kszphy_enable_clk(struct phy_device *phydev)
+ static int dp83td510_led_brightness_set(struct phy_device *phydev, u8 index,
+ 					enum led_brightness brightness)
  {
- 	struct kszphy_priv *priv = phydev->priv;
-@@ -5954,6 +6028,8 @@ static struct phy_driver ksphy_driver[] = {
- 	.cable_test_get_status	= ksz9x31_cable_test_get_status,
- 	.get_sqi	= kszphy_get_sqi,
- 	.get_sqi_max	= kszphy_get_sqi_max,
-+	.get_mse_config = kszphy_get_mse_config,
-+	.get_mse_snapshot = kszphy_get_mse_snapshot,
- 	.link_change_notify	= kszphy_link_change_notify,
- 	.soft_reset	= genphy_soft_reset,
- } };
+@@ -893,6 +934,9 @@ static struct phy_driver dp83td510_driver[] = {
+ 	.get_phy_stats	= dp83td510_get_phy_stats,
+ 	.update_stats	= dp83td510_update_stats,
+ 
++	.get_mse_config	= dp83td510_get_mse_config,
++	.get_mse_snapshot = dp83td510_get_mse_snapshot,
++
+ 	.led_brightness_set = dp83td510_led_brightness_set,
+ 	.led_hw_is_supported = dp83td510_led_hw_is_supported,
+ 	.led_hw_control_set = dp83td510_led_hw_control_set,
 -- 
 2.39.5
 
