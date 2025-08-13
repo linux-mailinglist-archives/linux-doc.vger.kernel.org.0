@@ -1,278 +1,119 @@
-Return-Path: <linux-doc+bounces-55826-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55828-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id D57A3B23D41
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 02:40:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C11B2B23E5C
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 04:46:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B700B5830A3
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 00:39:51 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 152EE5836B1
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 02:46:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DBF418786A;
-	Wed, 13 Aug 2025 00:37:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7B9C4200BAE;
+	Wed, 13 Aug 2025 02:45:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AZqlctAO"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="H2W4jEK7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E6F721421E
-	for <linux-doc@vger.kernel.org>; Wed, 13 Aug 2025 00:37:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC38E1FCFE7;
+	Wed, 13 Aug 2025 02:45:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755045446; cv=none; b=eWW1fx9n9ZKykL+eKTTq/36ftKpj8Ej+fZjLn3g9Sz7taGVujuwnVvo+Wc5Zj8ZLtQDRWs4+8SflRoM639pNbS8rNJcTeyvsOnChi5BC10QCSFwz2PBrIqaFovt3KOMTRgCGhFk+nvfG9oXpMVwMFaQkos5F6txQ2+zx7X6hNFI=
+	t=1755053123; cv=none; b=Y0CKm5vE41P5WeiZeiVkRWuumcBgOV5o7L5dByZQ4UvvM9C1Tac74piwnzQIChmej8wesGjiBJEXYrf7y8MclIm99K/1SvrZ1eQcqxj2e5H5IxVKXmRRAM0J1e1xc/e+nEJz3Aw7phLjGsRAZ8dG9OEpSLkhR/zGPhYpkQpsCGQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755045446; c=relaxed/simple;
-	bh=8Vle92yZY9xDtV8ytKjL5d+JCb2sWNmHvm13yHE47Fc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=j0BpSj7nsHAs4gmsXVryM7Mvbnc3XbHb3GIx4hzf0d26Dw4H/ge3irGvhJdLXz6pvCByCGQcMSUQL58S115Vu1XHlPGaDStwBgT+3MIpjGqRi9ox+Qe1VWqleGYaS9KEiTRcpay2F+WDljzjc8FLLKVTH1J6dHquUAwEUPDv21U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AZqlctAO; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57CL5cb8020355
-	for <linux-doc@vger.kernel.org>; Wed, 13 Aug 2025 00:37:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	E9mIUmeVItJmyNwVFThGc/lr2aPxFoGHJijUqp9TSw4=; b=AZqlctAOyc6uApD2
-	2Dvft7OJAvLN3DqMZTOexglXu5CtJjX210i9h3xdeCad6ICLWA6QU4V4Bm9rpiEe
-	/5yM/6PV+QHBRNNRwaa6rlc7rg8h/RV2c3Tkmu/QdDDDy17NqfPOjRcQVJsa/2B8
-	/JH69lCW929T9eWFx/yE9EajcfMrdD4VpbTt54yVflauE/1YmFvixpLWGMDQw7tM
-	/M6/bdZdfjuTVyiPV4wrddxhZx7DYlyeBD3NPF5G4xIDICO6s0aosqz+ccRr8UyY
-	8SkXPe3gFwQ6OGBpMkZ4kmL9plzYUcIxPQY7w04XZM+qUez5dEg+vUx3y4gSknEZ
-	xI17zA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 48eqhx82v5-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <linux-doc@vger.kernel.org>; Wed, 13 Aug 2025 00:37:17 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-24283069a1cso66456295ad.1
-        for <linux-doc@vger.kernel.org>; Tue, 12 Aug 2025 17:37:17 -0700 (PDT)
+	s=arc-20240116; t=1755053123; c=relaxed/simple;
+	bh=Kvg8fvdZercb/1tUH1fx/ZCsiW65Avvhaf/buqFYuWo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=HzOk3SdDAIcUgCyLWfXBewG+8Vhr3equBxx3p1H2NkQk1/u+ym46hj9foS5W5Ud6O1NMvvCQ70wBsfP8pseqFzpzAqOMe+2xAV7GWsctmnZAfZ3/EKSNci/zbcEz4IMrHZ72K5efCFNubnPadLeFIdvbuFYeaQHAKfJNcRJOPEY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=H2W4jEK7; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-45a15fd04d9so2525985e9.1;
+        Tue, 12 Aug 2025 19:45:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1755053118; x=1755657918; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Kvg8fvdZercb/1tUH1fx/ZCsiW65Avvhaf/buqFYuWo=;
+        b=H2W4jEK7oxQIp6zLxQA7QGQ1jmL6nZ9kOQs9YvBT9InsFks/0WG3aP6Px1B6SZpDJE
+         X6VJlh+GazFdGJhiSl0TN3YxfpSpd5EqkVa9kcUdH0TAh3gNsNJa1B+A51VhX5x+/JXA
+         FIWjmA+sFReRwgWrky81JiO9ctMojy9Sq5cCTOQi5CMLKitT5hxUL0TqM9y7DPkzhgD/
+         s3KMbyVeC3kqJl9O9AFzxZiCVy8cAR563EG6H7rv+RzR88pSYSLkSby7YzNLXRqrkKDx
+         XdEW005FP84V7NkTxNDtsRHTdMhKqUSAWCWoDHLxLv5iN+eIY2L2XaOX5BkLvMh1xhJH
+         8GyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755045436; x=1755650236;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1755053118; x=1755657918;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=E9mIUmeVItJmyNwVFThGc/lr2aPxFoGHJijUqp9TSw4=;
-        b=dbTIs7eHCsFLmqfXv2rvw+5A1EUMBOYAPaW1+domGpDdOZ8yE6j0j6RgdNx/bCZPoB
-         Ca2HFY0Q4e78ggx8a6NgoiIAyvU9IOK8+Q5SATRze8CuhZsmyxHyK/YXIz+o9/O8cWcC
-         7co7i9sEQ/Q5r3Fn008BZjl4/wdydsNeZR1+5qJqfU0CLr7MutgjmjBKRmt8sRKmzjRT
-         RtLX+nrxV+A6CUvJs01h0vOIfh5wZjDwcCi63UB0oK+yVEYK522f0BBn8AhBQIVyvHjW
-         qTLAGQch7luBTBKBradj9gcKwXvM1OEf6WB/OaDXS3ljYsIakvlzevB7dX7XUd6eJrjK
-         eHBA==
-X-Forwarded-Encrypted: i=1; AJvYcCVpy0wfx8bL9ebI+VKNL6+QI0hS+gUrY0Mj3gmmFUsSlLeBqjI6z3pzDpgw+EdoxKaqSjZMrksTwUo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwmApGjsmdtLpI/JR5cuFfjSvBpFHknOQiEQdjk3KjquI46mjoJ
-	6E/FLoD36JB8o6kY8EPWkiGk1L6NcM3w1vVZT7BEGpgJw4WlNutLA099JdoYdkkfI3XchsnCt4W
-	mWwScIoAqUVKt0d3QltyzfD/F6nDzpHGNbZyO/I1gyzcdcPnU8FJLQaWWNbY8fg==
-X-Gm-Gg: ASbGncuXmtjjwH2DIT2e5L5mD4WU9ILR3U6vEVhEGPsjv7EQ5szJe0aOcGF2o/vyeT9
-	vZYWYo7NGAIfEXKJW1vPYVPB+VdCB0b7TqPkNTYDNYvgGHw3yLl4Go5ojIXRbwXauvSY416duaA
-	zeR334sdclXFYMl3nkn+Xfsb/BRfFJjvn5R85DUiDapkvh73uFjtqALpw6unXP68MPPdY1tx2Zi
-	KaeLql3RwtJhbbU5ojsa8J9AUzEq57PMkZ88kTx5BnphdhlMXQKYskG4quuUG1m8LP9nTK0tArm
-	L+RaswJZ4yArFLZHHszJl5eQQz14Bl0RIon8MKqXoQJVln+ucwTYDWMtSU0EwS+wgV3+/32YwLt
-	ZZGev/shDyO5oUd/uWl2zwVM=
-X-Received: by 2002:a17:903:2406:b0:240:49bf:6332 with SMTP id d9443c01a7336-2430d218afamr18366315ad.47.1755045436356;
-        Tue, 12 Aug 2025 17:37:16 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHFZ8I3i9S0gbmT7ZeBnhrBjqJHd1AmbumO63/UoIlLeoWED+/XTZ7ApkX0E4vEWA225OAgzQ==
-X-Received: by 2002:a17:903:2406:b0:240:49bf:6332 with SMTP id d9443c01a7336-2430d218afamr18365875ad.47.1755045435828;
-        Tue, 12 Aug 2025 17:37:15 -0700 (PDT)
-Received: from hu-azarrabi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-241e8975c89sm308781585ad.96.2025.08.12.17.37.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Aug 2025 17:37:15 -0700 (PDT)
-From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Date: Tue, 12 Aug 2025 17:35:40 -0700
-Subject: [PATCH v7 11/11] Documentation: tee: Add Qualcomm TEE driver
+        bh=Kvg8fvdZercb/1tUH1fx/ZCsiW65Avvhaf/buqFYuWo=;
+        b=lu9mw3AtJMZ7z0kyE+d4YLMvvSVCvV/W4NqVcJA3I38xs6FP3oL9iHhi3a4PKSDgkN
+         q+R7CFxv82lKNXfgcRzp4nw+WQyWdHNeOS0XO242H2zFz3Ky1wcjDwJjvmZN10hY6iGk
+         Ued6u7uI9tRbU4XJVLaT9FLeB0mz+x+wNeWYP3rFtttYdMgVQS2w9urTD9/9UJg9F9/E
+         2CJYfPYHp3gGV232lL9S/tukGXwOkwgWP0BrCry4TO+4DzzkYbhtuenYOua6yn/e5H4t
+         Xd9Kq1ulX83LXyrForkmWAuOH8vTPd6CJhcRDMZ9DdwAfkZs7Lj+M+zr3grnnILeQDUj
+         /+vg==
+X-Forwarded-Encrypted: i=1; AJvYcCUAL2hWjqK958poIuzONUaCY8wjo3lsRrllHlmYCbFd28c75Hu55vaOPPUeewxJ273dAF4pFN9U3iSl@vger.kernel.org, AJvYcCWriC5PuT9fGP6UgbZLhTaMpTwvLZoQo78U0IjfDmq7tqKqKbVwZjwWomUCIN4STMB6sEep4HOly6wIj2dB@vger.kernel.org, AJvYcCXhlIe1eNlre8AAcU6gensrPIkEx9nEhtQ38hDzWjXEkmRci93b70YFh5AAlpCyh673g8HD8Cgfi7I=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxAphTOcYgK8SpUaBLV+oid42Z+9wdduBr1vl31ec6dWSPalfmD
+	89AoZOw3bWJbJrXATwAfWdobg/tKMqNpvbmhbDPli2GL/Uy94g1tR8RFr58qYvyCCGHHzueAEiK
+	R3Qy2E4taLFjXm3esvPQUhl2ifVZPOTc=
+X-Gm-Gg: ASbGncuD0/4/POl6+M0KDilOXstgMQx+JKUuOR8qSe0gyHAjzzNLewslDZMGb5MfVQH
+	sjD/hkcDFSdvpXMz1Mzh1wM8HBD4osChKS3p/M68P70oVQieM3NAHR1E8HOy7hF3LZ8COCN7+Fw
+	7xpj95k1f9MbpH9LbsWze9DjoQZb1lGbywbBhf53r9WctOodtgvkbc0hZgL4XD/f1pI8yYm0Y2e
+	+TViAI=
+X-Google-Smtp-Source: AGHT+IER/xoh2r0fiZY/zHhrvqqJNO6/Cga2A0F4VDogmsdOv+We2VyU1IsS8IDXJ7I5efqv8sxiKAzD1n7IC1pvaew=
+X-Received: by 2002:a05:600c:4e8d:b0:459:443e:b18a with SMTP id
+ 5b1f17b1804b1-45a1704f681mr4589345e9.14.1755053117827; Tue, 12 Aug 2025
+ 19:45:17 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-11-ce7a1a774803@oss.qualcomm.com>
-References: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-0-ce7a1a774803@oss.qualcomm.com>
-In-Reply-To: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-0-ce7a1a774803@oss.qualcomm.com>
-To: Jens Wiklander <jens.wiklander@linaro.org>,
-        Sumit Garg <sumit.garg@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-        Apurupa Pattapu <quic_apurupa@quicinc.com>,
-        Kees Cook <kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: Harshal Dev <quic_hdev@quicinc.com>, linux-arm-msm@vger.kernel.org,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-        linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org,
-        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>
-X-Mailer: b4 0.13.0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODEwMDA1NyBTYWx0ZWRfX/HsoEpG911jo
- mqj3p9kdePUSmO7FrinezVF54k/qIJJlP4ZEPp/92OZjzjzK1XpdOAoMcLuAYBj0G3HxDAzth0E
- zeuX6sJFg6X5/fdbx5Gt/Bcx4fzgB4nqbvonNJxMipXOyTx17lMwdRS21/l3N78ULsPwBeFz7WX
- vsGAJkT36DkFRV5X5jhx2EoR9+96QDcwRym3+AjuB96VjZnDVWBYDvIKu32X8mPs+ny26LLMKQr
- QEiLo0/lE4OTd3qCBJZNOFvskMYtPsLoy8ng6m2LylCpMVzuHDvkiOB34XSaQI8gZ+VWvcu5keA
- Xqvq9Nd7Ya+ZFdB9E+8Kby+xJFdtDlnr60jifbZgWnk6j8Jr0yyNDdojg1yH4LSuxhHXslsyOdo
- ZikCdkgg
-X-Proofpoint-GUID: 6GgbXhKgDTmvW3U2mF1w5LAmo09Uhbon
-X-Authority-Analysis: v=2.4 cv=aYNhnQot c=1 sm=1 tr=0 ts=689bde3d cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=IkcTkHD0fZMA:10 a=2OwXVqhp2XgA:10 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8
- a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=vCTlBN6rBY5pDr9NrAkA:9 a=QEXdDO2ut3YA:10
- a=M0EVDjxxv-UA:10 a=GvdueXVYPmCkWapjIL-Q:22 a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-ORIG-GUID: 6GgbXhKgDTmvW3U2mF1w5LAmo09Uhbon
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-12_08,2025-08-11_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 priorityscore=1501 suspectscore=0 phishscore=0
- impostorscore=0 bulkscore=0 malwarescore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2507300000 definitions=main-2508100057
+References: <20250811173626.1878783-1-yeoreum.yun@arm.com> <20250811173626.1878783-3-yeoreum.yun@arm.com>
+ <CA+fCnZeSV4fDBQr-WPFA66OYxN8zOQ2g1RQMDW3Ok8FaE7=NXQ@mail.gmail.com>
+ <aJtyR3hCW5fG+niV@e129823.arm.com> <CA+fCnZeznLqoLsUOgB1a1TNpR9PxjZKrrVBhotpMh0KVwvzj_Q@mail.gmail.com>
+ <aJuxuKBm9qfpVkBC@e129823.arm.com>
+In-Reply-To: <aJuxuKBm9qfpVkBC@e129823.arm.com>
+From: Andrey Konovalov <andreyknvl@gmail.com>
+Date: Wed, 13 Aug 2025 04:45:06 +0200
+X-Gm-Features: Ac12FXx6Pc1KJl2LaFe2eqFw1_0jb589tm6uNaUFSn8Yw7SbSnihGg_Kc_aD0sw
+Message-ID: <CA+fCnZdWOh3=KkM4AL1ZYfhyMhdSqgW97Rz+uxO88mMkqT6WTg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] kasan: apply store-only mode in kasan kunit testcases
+To: Yeoreum Yun <yeoreum.yun@arm.com>
+Cc: ryabinin.a.a@gmail.com, glider@google.com, dvyukov@google.com, 
+	vincenzo.frascino@arm.com, corbet@lwn.net, catalin.marinas@arm.com, 
+	will@kernel.org, akpm@linux-foundation.org, scott@os.amperecomputing.com, 
+	jhubbard@nvidia.com, pankaj.gupta@amd.com, leitao@debian.org, 
+	kaleshsingh@google.com, maz@kernel.org, broonie@kernel.org, 
+	oliver.upton@linux.dev, james.morse@arm.com, ardb@kernel.org, 
+	hardevsinh.palaniya@siliconsignals.io, david@redhat.com, 
+	yang@os.amperecomputing.com, kasan-dev@googlegroups.com, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-mm@kvack.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add documentation for the Qualcomm TEE driver.
+On Tue, Aug 12, 2025 at 11:28=E2=80=AFPM Yeoreum Yun <yeoreum.yun@arm.com> =
+wrote:
+>
+> > > But in case of sync, when the MTE fault happens, it doesn't
+> > > write to memory so, I think it's fine.
+> >
+> > Does it not? I thought MTE gets disabled and we return from the fault
+> > handler and let the write instruction execute. But my memory on this
+> > is foggy. And I don't have a setup right now to test.
+>
+> Right. when fault is hit the MTE gets disabled.
+> But in kasan_test_c.c -- See the KUNIT_EXPECT_KASAN_FAIL,
+> It re-enables for next test by calling kasan_enable_hw_tags().
 
-Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
----
- Documentation/tee/index.rst |  1 +
- Documentation/tee/qtee.rst  | 96 +++++++++++++++++++++++++++++++++++++++++++++
- MAINTAINERS                 |  1 +
- 3 files changed, 98 insertions(+)
-
-diff --git a/Documentation/tee/index.rst b/Documentation/tee/index.rst
-index 4be6e69d7837..62afb7ee9b52 100644
---- a/Documentation/tee/index.rst
-+++ b/Documentation/tee/index.rst
-@@ -11,6 +11,7 @@ TEE Subsystem
-    op-tee
-    amd-tee
-    ts-tee
-+   qtee
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/tee/qtee.rst b/Documentation/tee/qtee.rst
-new file mode 100644
-index 000000000000..2fa2c1bf6384
---- /dev/null
-+++ b/Documentation/tee/qtee.rst
-@@ -0,0 +1,96 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============================================
-+QTEE (Qualcomm Trusted Execution Environment)
-+=============================================
-+
-+The QTEE driver handles communication with Qualcomm TEE [1].
-+
-+The lowest level of communication with QTEE builds on the ARM SMC Calling
-+Convention (SMCCC) [2], which is the foundation for QTEE's Secure Channel
-+Manager (SCM) [3] used internally by the driver.
-+
-+In a QTEE-based system, services are represented as objects with a series of
-+operations that can be called to produce results, including other objects.
-+
-+When an object is hosted within QTEE, executing its operations is referred
-+to as "direct invocation". QTEE can also invoke objects hosted in the non-secure
-+world using a method known as "callback request".
-+
-+The SCM provides two functions to support direct invocation and callback requests:
-+
-+- QCOM_SCM_SMCINVOKE_INVOKE: Used for direct invocation. It can return either
-+  a result or initiate a callback request.
-+- QCOM_SCM_SMCINVOKE_CB_RSP: Used to submit a response to a callback request
-+  triggered by a previous direct invocation.
-+
-+The QTEE Transport Message [4] is stacked on top of the SCM driver functions.
-+
-+A message consists of two buffers shared with QTEE: inbound and outbound
-+buffers. The inbound buffer is used for direct invocation, and the outbound
-+buffer is used to make callback requests. This picture shows the contents of
-+a QTEE transport message::
-+
-+                                      +---------------------+
-+                                      |                     v
-+    +-----------------+-------+-------+------+--------------------------+
-+    | qcomtee_msg_    |object | buffer       |                          |
-+    |  object_invoke  |  id   | offset, size |                          | (inbound buffer)
-+    +-----------------+-------+--------------+--------------------------+
-+    <---- header -----><---- arguments ------><- in/out buffer payload ->
-+
-+                                      +-----------+
-+                                      |           v
-+    +-----------------+-------+-------+------+----------------------+
-+    | qcomtee_msg_    |object | buffer       |                      |
-+    |  callback       |  id   | offset, size |                      | (outbound buffer)
-+    +-----------------+-------+--------------+----------------------+
-+
-+Each buffer is started with a header and array of arguments.
-+
-+QTEE Transport Message supports four types of arguments:
-+
-+- Input Object (IO) is an object parameter to the current invocation
-+  or callback request.
-+- Output Object (OO) is an object parameter from the current invocation
-+  or callback request.
-+- Input Buffer (IB) is (offset, size) pair to the inbound or outbound region
-+  to store parameter to the current invocation or callback request.
-+- Output Buffer (OB) is (offset, size) pair to the inbound or outbound region
-+  to store parameter from the current invocation or callback request.
-+
-+Picture of the relationship between the different components in the QTEE
-+architecture::
-+
-+         User space               Kernel                     Secure world
-+         ~~~~~~~~~~               ~~~~~~                     ~~~~~~~~~~~~
-+   +--------+   +----------+                                +--------------+
-+   | Client |   |callback  |                                | Trusted      |
-+   +--------+   |server    |                                | Application  |
-+      /\        +----------+                                +--------------+
-+      ||  +----------+ /\                                          /\
-+      ||  |callback  | ||                                          ||
-+      ||  |server    | ||                                          \/
-+      ||  +----------+ ||                                   +--------------+
-+      ||       /\      ||                                   | TEE Internal |
-+      ||       ||      ||                                   | API          |
-+      \/       \/      \/   +--------+--------+             +--------------+
-+   +---------------------+  | TEE    | QTEE   |             | QTEE         |
-+   |   libqcomtee [5]    |  | subsys | driver |             | Trusted OS   |
-+   +-------+-------------+--+----+-------+----+-------------+--------------+
-+   |      Generic TEE API        |       |   QTEE MSG                      |
-+   |      IOCTL (TEE_IOC_*)      |       |   SMCCC (QCOM_SCM_SMCINVOKE_*)  |
-+   +-----------------------------+       +---------------------------------+
-+
-+References
-+==========
-+
-+[1] https://docs.qualcomm.com/bundle/publicresource/topics/80-70015-11/qualcomm-trusted-execution-environment.html
-+
-+[2] http://infocenter.arm.com/help/topic/com.arm.doc.den0028a/index.html
-+
-+[3] drivers/firmware/qcom/qcom_scm.c
-+
-+[4] drivers/tee/qcomtee/qcomtee_msg.h
-+
-+[5] https://github.com/quic/quic-teec
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d19a49d60b41..0b476b794f8b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -20882,6 +20882,7 @@ QUALCOMM TEE (QCOMTEE) DRIVER
- M:	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
- L:	linux-arm-msm@vger.kernel.org
- S:	Maintained
-+F:	Documentation/tee/qtee.rst
- F:	drivers/tee/qcomtee/
- 
- QUALCOMM TRUST ZONE MEMORY ALLOCATOR
-
--- 
-2.34.1
-
+But before that, does the faulting instruction get executed? After MTE
+gets disabled in the fault handler.
 
