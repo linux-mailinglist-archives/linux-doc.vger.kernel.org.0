@@ -1,174 +1,164 @@
-Return-Path: <linux-doc+bounces-55970-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55972-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD5F6B2556F
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 23:30:20 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E4CAB2557F
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 23:34:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8A3515C19DC
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 21:29:31 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DC532189C23F
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 21:33:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CFC0030AACB;
-	Wed, 13 Aug 2025 21:28:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 71A092C2AA2;
+	Wed, 13 Aug 2025 21:32:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="K51EcfuM"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="AK4M5pne"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CEAE30AAAD;
-	Wed, 13 Aug 2025 21:28:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 975322C0F6C;
+	Wed, 13 Aug 2025 21:32:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755120538; cv=none; b=orCfbeD7HiNnWm6EbDM0dg08Elu+KAJqidy0hSzbfLghcSIWqBGiETJXzfvHgZBeWLmbjNARSTAqYUQ0kLQwgSKIqQi4EtcGgwf2NSkiqGGjdORkIgVaB3JFpVH8qMq1BlXhlBCTp+QdWfHUVckloNIOpFxkgEU2VpUSE8VegME=
+	t=1755120755; cv=none; b=uNejAoM75GKaBS49Rq9T6iqpkdAh3esCBszojR0RQU/jJHdM3x5n1woXwbRrwPgeo27qoDk0lbntRyTNZjbCSr7T1caebT5oFaS470KD5ZEsMZxwyRxUArDMnOdCBhpTZmr/QzCoBSHl5NTdMnk1grCreLXWUsad+bVfdxg6fbQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755120538; c=relaxed/simple;
-	bh=ofdvNgNJdkJbmwEfKc1AUQhG3hnc8SN1vSgvqxoKNRM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rUntrrHEJNq7orgcWDB4OhgvNqyH8kTb2O2iaADpcqDtjbI/zAOrs7pNPAyStXzU1E1L2buIdJnnTxndMWi0N4HVJd80koFZ6PvqNL9oMbeZVNV2wj9GtUU3ROvDFgNcTGR1ZQ3Y9SM6CpVK0dNQte97pB9AJUz1phZJhA0pMUk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=K51EcfuM; arc=none smtp.client-ip=192.198.163.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1755120537; x=1786656537;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ofdvNgNJdkJbmwEfKc1AUQhG3hnc8SN1vSgvqxoKNRM=;
-  b=K51EcfuMji3G/PSi84SfLVCj0Rnb5cscrkb+ZxNIkyAnsDiZGayzKRBR
-   HoBBLz6WIVAN+InJSZd3oguXkl5z5+LqxtCqPFefWBLUdSRWm7bFDJQti
-   F0YCSTs2k7amUYqIzoolSUNEDyVdXxncf6T0DGmjZg61L5WmEnX8rsIwQ
-   y34fff1LKN/Euf2zIiXAQqncqf3YZFtwWhEpXycmZZktqrD+EzmYou+Ks
-   4Alh94fXQnaV1fPX67leRSAfoaZNmcl7swoJ5US87+tKMZhxf9G0owJxn
-   Wt08Qqj0/oY5i2YwfwNEZnv1YBSIZhdsPMSg0enJ299StlNhXDz9dSPdF
-   A==;
-X-CSE-ConnectionGUID: ySZ/xGzaTCeqFP/+C3tgfQ==
-X-CSE-MsgGUID: /kSYUB64Rwy1GoSQl1+MNw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11520"; a="57351324"
-X-IronPort-AV: E=Sophos;i="6.17,287,1747724400"; 
-   d="scan'208";a="57351324"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Aug 2025 14:28:57 -0700
-X-CSE-ConnectionGUID: NnWqMrE8TtWi2BeCREw8Ug==
-X-CSE-MsgGUID: tloz5Ue9QdSbrGoa8xCmwg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.17,287,1747724400"; 
-   d="scan'208";a="165807755"
-Received: from lkp-server02.sh.intel.com (HELO 4ea60e6ab079) ([10.239.97.151])
-  by orviesa010.jf.intel.com with ESMTP; 13 Aug 2025 14:28:52 -0700
-Received: from kbuild by 4ea60e6ab079 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1umJ1d-000AKg-0i;
-	Wed, 13 Aug 2025 21:28:49 +0000
-Date: Thu, 14 Aug 2025 05:28:10 +0800
-From: kernel test robot <lkp@intel.com>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jens.wiklander@linaro.org>,
-	Sumit Garg <sumit.garg@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-	Apurupa Pattapu <quic_apurupa@quicinc.com>,
-	Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Cc: oe-kbuild-all@lists.linux.dev, Harshal Dev <quic_hdev@quicinc.com>,
-	linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
-	linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-doc@vger.kernel.org,
-	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v7 08/11] tee: add Qualcomm TEE driver
-Message-ID: <202508140527.ighXikjo-lkp@intel.com>
-References: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-8-ce7a1a774803@oss.qualcomm.com>
+	s=arc-20240116; t=1755120755; c=relaxed/simple;
+	bh=aH/XhcoxK5+xsYwCIg0HXR7FYUacfE5oSjAX8/zKZdo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=U0E7MeB1/Y+CHfpOrygX638yqqw6bY2wTULr5rGc8KWq8DN4bRiTbjUHkaqnFHWXUMAGqtisTYz/ahdOnetWspgYBCt2VXcAZL6uchxdI+nfqcVALlOIQ5003lM4mpezQ90eFNeJlsrfVhVIvlnNDfNhvWNbODYsLi9MOV0AUco=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=AK4M5pne; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 4F9B940AB4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1755120747; bh=KBY6lEuTrDQ1werGJLYGj3gDC7V/DWoVgSoxV56zSaM=;
+	h=From:To:Cc:Subject:Date:From;
+	b=AK4M5pneMcSeauzUTh0z7uIKVKwdWJszAtvcZ/UY0Enas4nG8iGieRP39nW0eeX/N
+	 sp7qcsCBOJiy5t06asdHeuAkfgqqDTLfBi8xLzIo806lrkI08veCcaar/ChcOWvdAs
+	 KxFhpZ2Elv4bmTSVLAR7wxJ3j9McE6Nl9m0nAS8Qb8ZJzIXv0ImHd32m4PonkHpAx1
+	 kyHMhgQRjdkKapAQfKant06fUrzFUqICkTQSU6L8gqYgNxn9aBnwgsnsMvNJ4Iq0wC
+	 TbhtrVhagvChQcmE3IC9zTikGzl6Lj9ctNvoP2uIfywoxFLTmRayiwz3DtUlYR6gvT
+	 Dl6jS5Y8Glnjg==
+Received: from trenco.lwn.net (unknown [IPv6:2601:280:4600:2da9::1fe])
+	by ms.lwn.net (Postfix) with ESMTPA id 4F9B940AB4;
+	Wed, 13 Aug 2025 21:32:27 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Akira Yokosawa <akiyks@gmail.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH RFC 00/13] Collect documention-related tools under tools/doc
+Date: Wed, 13 Aug 2025 15:31:59 -0600
+Message-ID: <20250813213218.198582-1-corbet@lwn.net>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-8-ce7a1a774803@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-Hi Amirreza,
+Our documentation-related tools are spread out over various directories;
+several are buried in the scripts/ dumping ground.  That makes them harder
+to discover and harder to maintain.
 
-kernel test robot noticed the following build warnings:
+Recently, the idea of creating a dedicated directory for documentation tools
+came up; I decided to see what it would look like.  This series creates a
+new directory, tools/doc, and moves various utilities there, hopefully
+fixing up all of the relevant references in the process.
 
-[auto build test WARNING on 2674d1eadaa2fd3a918dfcdb6d0bb49efe8a8bb9]
+At the end, rather than move the old, Perl kernel-doc, I simply removed it.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Amirreza-Zarrabi/tee-allow-a-driver-to-allocate-a-tee_device-without-a-pool/20250813-084152
-base:   2674d1eadaa2fd3a918dfcdb6d0bb49efe8a8bb9
-patch link:    https://lore.kernel.org/r/20250812-qcom-tee-using-tee-ss-without-mem-obj-v7-8-ce7a1a774803%40oss.qualcomm.com
-patch subject: [PATCH v7 08/11] tee: add Qualcomm TEE driver
-config: hexagon-randconfig-r072-20250814 (https://download.01.org/0day-ci/archive/20250814/202508140527.ighXikjo-lkp@intel.com/config)
-compiler: clang version 22.0.0git (https://github.com/llvm/llvm-project 3769ce013be2879bf0b329c14a16f5cb766f26ce)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250814/202508140527.ighXikjo-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202508140527.ighXikjo-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/tee/qcomtee/user_obj.c:384:12: warning: format specifies type 'unsigned long' but the argument has type 'u64' (aka 'unsigned long long') [-Wformat]
-     383 |                                        &qcomtee_user_object_ops, "uo-%lu",
-         |                                                                      ~~~
-         |                                                                      %llu
-     384 |                                        param->u.objref.id);
-         |                                        ^~~~~~~~~~~~~~~~~~
-   1 warning generated.
+The big elephant lurking in this small room is the home for Python modules;
+I left them under scripts/lib, but that is an even less appropriate place
+than it was before.  I would propose either tools/python or lib/python;
+thoughts on that matter welcome.
 
 
-vim +384 drivers/tee/qcomtee/user_obj.c
+Jonathan Corbet (13):
+  docs: Move the "features" tools to tools/doc
+  docs: move checktransupdate.py to tools/doc
+  docs: move scripts/check-variable-fonts.sh to tools/doc
+  docs: move scripts/documentation-file-ref-check to tools/doc
+  docs: move parallel-wrapper.sh to tools/doc/
+  docs: move get_abi.py to tools/doc
+  docs: move sphinx-pre-install to tools/doc
+  docs: move test_doc_build.py to tools/doc
+  docs: move parse-headers.pl to tools/doc
+  docs: move kernel-doc to tools/doc
+  docs: move split-man.pl to tools/doc
+  docs: move find-unused-docs.sh to tools/doc
+  docs: remove kernel-doc.pl
 
-   355	
-   356	/**
-   357	 * qcomtee_user_param_to_object() - OBJREF parameter to &struct qcomtee_object.
-   358	 * @object: object returned.
-   359	 * @param: TEE parameter.
-   360	 * @ctx: context in which the conversion should happen.
-   361	 *
-   362	 * @param is an OBJREF with %QCOMTEE_OBJREF_FLAG_USER flags.
-   363	 *
-   364	 * Return: On success, returns 0; on failure, returns < 0.
-   365	 */
-   366	int qcomtee_user_param_to_object(struct qcomtee_object **object,
-   367					 struct tee_param *param,
-   368					 struct tee_context *ctx)
-   369	{
-   370		struct qcomtee_user_object *user_object __free(kfree) = NULL;
-   371		int err;
-   372	
-   373		user_object = kzalloc(sizeof(*user_object), GFP_KERNEL);
-   374		if (!user_object)
-   375			return -ENOMEM;
-   376	
-   377		user_object->ctx = ctx;
-   378		user_object->object_id = param->u.objref.id;
-   379		/* By default, always notify userspace upon release. */
-   380		user_object->notify = true;
-   381		err = qcomtee_object_user_init(&user_object->object,
-   382					       QCOMTEE_OBJECT_TYPE_CB,
-   383					       &qcomtee_user_object_ops, "uo-%lu",
- > 384					       param->u.objref.id);
-   385		if (err)
-   386			return err;
-   387		/* Matching teedev_ctx_put() is in qcomtee_user_object_release(). */
-   388		teedev_ctx_get(ctx);
-   389	
-   390		*object = &no_free_ptr(user_object)->object;
-   391	
-   392		return 0;
-   393	}
-   394	
+ Documentation/Kconfig                         |    2 +-
+ Documentation/Makefile                        |   24 +-
+ Documentation/conf.py                         |    2 +-
+ Documentation/doc-guide/checktransupdate.rst  |    6 +-
+ Documentation/doc-guide/contributing.rst      |    2 +-
+ Documentation/doc-guide/kernel-doc.rst        |   18 +-
+ Documentation/doc-guide/parse-headers.rst     |    6 +-
+ Documentation/doc-guide/sphinx.rst            |    6 +-
+ Documentation/kbuild/kbuild.rst               |    2 +-
+ Documentation/process/coding-style.rst        |    2 +-
+ Documentation/sphinx/kernel_abi.py            |    2 +-
+ Documentation/sphinx/kernel_feat.py           |    4 +-
+ Documentation/sphinx/kerneldoc-preamble.sty   |    2 +-
+ .../it_IT/doc-guide/kernel-doc.rst            |    8 +-
+ .../it_IT/doc-guide/parse-headers.rst         |    6 +-
+ .../translations/it_IT/doc-guide/sphinx.rst   |    4 +-
+ .../sp_SP/process/coding-style.rst            |    2 +-
+ .../zh_CN/doc-guide/checktransupdate.rst      |    6 +-
+ .../zh_CN/doc-guide/contributing.rst          |    2 +-
+ .../zh_CN/doc-guide/kernel-doc.rst            |   16 +-
+ .../zh_CN/doc-guide/parse-headers.rst         |    6 +-
+ .../translations/zh_CN/doc-guide/sphinx.rst   |    4 +-
+ Documentation/translations/zh_CN/how-to.rst   |    4 +-
+ .../translations/zh_CN/kbuild/kbuild.rst      |    2 +-
+ .../zh_CN/process/coding-style.rst            |    2 +-
+ .../zh_TW/process/coding-style.rst            |    2 +-
+ Documentation/userspace-api/media/Makefile    |    2 +-
+ MAINTAINERS                                   |   11 +-
+ Makefile                                      |    2 +-
+ drivers/gpu/drm/i915/Makefile                 |    2 +-
+ scripts/kernel-doc                            |    1 -
+ scripts/kernel-doc.pl                         | 2439 -----------------
+ .../doc}/check-variable-fonts.sh              |    2 +-
+ {scripts => tools/doc}/checktransupdate.py    |    8 +-
+ .../doc}/documentation-file-ref-check         |    2 +-
+ .../scripts => tools/doc}/features-refresh.sh |    0
+ {scripts => tools/doc}/find-unused-docs.sh    |    8 +-
+ {scripts => tools/doc}/get_abi.py             |    0
+ {scripts => tools/doc}/get_feat.pl            |    2 +-
+ scripts/kernel-doc.py => tools/doc/kernel-doc |    0
+ .../features => tools/doc}/list-arch.sh       |    2 +-
+ .../sphinx => tools/doc}/parallel-wrapper.sh  |    0
+ .../sphinx => tools/doc}/parse-headers.pl     |    4 +-
+ {scripts => tools/doc}/sphinx-pre-install     |    2 +-
+ {scripts => tools/doc}/split-man.pl           |    0
+ {scripts => tools/doc}/test_doc_build.py      |    0
+ 46 files changed, 91 insertions(+), 2538 deletions(-)
+ delete mode 120000 scripts/kernel-doc
+ delete mode 100755 scripts/kernel-doc.pl
+ rename {scripts => tools/doc}/check-variable-fonts.sh (98%)
+ rename {scripts => tools/doc}/checktransupdate.py (98%)
+ rename {scripts => tools/doc}/documentation-file-ref-check (99%)
+ rename {Documentation/features/scripts => tools/doc}/features-refresh.sh (100%)
+ rename {scripts => tools/doc}/find-unused-docs.sh (79%)
+ rename {scripts => tools/doc}/get_abi.py (100%)
+ rename {scripts => tools/doc}/get_feat.pl (99%)
+ rename scripts/kernel-doc.py => tools/doc/kernel-doc (100%)
+ rename {Documentation/features => tools/doc}/list-arch.sh (83%)
+ rename {Documentation/sphinx => tools/doc}/parallel-wrapper.sh (100%)
+ rename {Documentation/sphinx => tools/doc}/parse-headers.pl (98%)
+ rename {scripts => tools/doc}/sphinx-pre-install (99%)
+ rename {scripts => tools/doc}/split-man.pl (100%)
+ rename {scripts => tools/doc}/test_doc_build.py (100%)
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.50.1
+
 
