@@ -1,59 +1,59 @@
-Return-Path: <linux-doc+bounces-55869-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55871-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 871A5B24640
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 11:57:30 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id C0E98B2466B
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 12:02:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B93FD3A97AB
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 09:52:14 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id BCB8F18932AF
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 09:56:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46CCF2BE03D;
-	Wed, 13 Aug 2025 09:50:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 701DE2F3C2E;
+	Wed, 13 Aug 2025 09:53:48 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpbg154.qq.com (smtpbg154.qq.com [15.184.224.54])
+Received: from smtpbgeu1.qq.com (smtpbgeu1.qq.com [52.59.177.22])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91E9121257C;
-	Wed, 13 Aug 2025 09:50:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=15.184.224.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ED0D2F3C2B;
+	Wed, 13 Aug 2025 09:53:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.59.177.22
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755078648; cv=none; b=jFJIzntItt/tAjclsCgy60fOhDUTvgkrZzaq01HoD4D8OQ8WCeMG2xwmD/bG2RpNJgODioSMiqIif4K+WmvAump99Ufbf/9jJGYLnMF5IwSR2Lcd2sbla02ABpcu1h0DhgTfRBnta6Rvewp8hfficg9vfCrXb2FLVs+hpAzeNZY=
+	t=1755078828; cv=none; b=TgasvbHpzFSocHicJM8MwtmqaoJSWLK+66p2BIccAuPFc9kdRlKInsB2jQE92GtLZaA8NZFPYxAaFd9Yvft+KpJXtEU7xL/W7JKTBojXEXeibW2st6Iqp5fxVGXmn1pFqRMh4eq+3R7fwSDjXooZ3bBbt2GYzFWOZ2anAPp6FjI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755078648; c=relaxed/simple;
-	bh=5NjWnfB3j0SmFDYMTbW6G/aUvyqoKnQU7ro3SxcuX84=;
+	s=arc-20240116; t=1755078828; c=relaxed/simple;
+	bh=+WZMCb2th4q4S3QCII5BAqLwjZKqas5JP8nnZISgNUY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QZ108eZUsn/IKQDc3DjHabZD2ExRLjKve2cq4Q80h8QvR2mEds54tE2hryQ0j2y7vdFE0bKt4xKxcIoauO1SHplbf59dT2V5/9fKKxJy3FJFtxCcaIdtQMZyZoR8TxyBJRK0Aa8AVGLTwFW/KYN73eklzKex0OTHypGIoSUT7sk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=15.184.224.54
+	 Content-Type:Content-Disposition:In-Reply-To; b=DA5hdETvJMbY+8riaQaOED+vMBOCMDJNEJ7QBKkl3dHBgZ0TgNikuHQ+Ix+N84p2XKjjv3XGXRu9vJLXyKskDQgAtmrlLHP8pm4L3bj5PDXBk3jZaX6TRv+ONbcgy1Y95a8vOMEG6VYT++hTcKStEf3EGWDHsG7OAAq2GGAg+d8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=52.59.177.22
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
-X-QQ-mid: esmtpsz16t1755078556t50122486
-X-QQ-Originating-IP: jHUKPmaXLURVrfNnE3/1JIusEU5dtzB9sfHBB4pZc1s=
+X-QQ-mid: zesmtpsz5t1755078736t6188a4b4
+X-QQ-Originating-IP: Fzg1HaXRH1kgNyX7pYbXPr6PlV+6nK7OiSq/8/Z95Fc=
 Received: from localhost ( [203.174.112.180])
 	by bizesmtp.qq.com (ESMTP) with 
-	id ; Wed, 13 Aug 2025 17:49:14 +0800 (CST)
+	id ; Wed, 13 Aug 2025 17:52:14 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 3286716278462949229
-Date: Wed, 13 Aug 2025 17:49:14 +0800
+X-BIZMAIL-ID: 535063988125251016
+Date: Wed, 13 Aug 2025 17:52:14 +0800
 From: Yibo Dong <dong100@mucse.com>
-To: MD Danish Anwar <danishanwar@ti.com>
+To: Vadim Fedorenko <vadim.fedorenko@linux.dev>
 Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
 	kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
 	corbet@lwn.net, gur.stavi@huawei.com, maddy@linux.ibm.com,
-	mpe@ellerman.id.au, lee@trager.us, gongfan1@huawei.com,
-	lorenzo@kernel.org, geert+renesas@glider.be,
+	mpe@ellerman.id.au, danishanwar@ti.com, lee@trager.us,
+	gongfan1@huawei.com, lorenzo@kernel.org, geert+renesas@glider.be,
 	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
 	alexanderduyck@fb.com, richardcochran@gmail.com,
 	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 5/5] net: rnpgbe: Add register_netdev
-Message-ID: <B301753EBB777DDB+20250813094914.GB972027@nic-Precision-5820-Tower>
+Subject: Re: [PATCH v3 4/5] net: rnpgbe: Add basic mbx_fw support
+Message-ID: <9A6132D78B40DAFD+20250813095214.GA979548@nic-Precision-5820-Tower>
 References: <20250812093937.882045-1-dong100@mucse.com>
- <20250812093937.882045-6-dong100@mucse.com>
- <94eeae65-0e4b-45ef-a9c0-6bc8d37ae789@ti.com>
+ <20250812093937.882045-5-dong100@mucse.com>
+ <eafb8874-a7a3-4028-a4ad-d71fc5689813@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,187 +62,88 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <94eeae65-0e4b-45ef-a9c0-6bc8d37ae789@ti.com>
+In-Reply-To: <eafb8874-a7a3-4028-a4ad-d71fc5689813@linux.dev>
 X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: OQNQM5UP8StMDdmKQ4cRpMKOIhXI86KRyY6GW62byRr3PlxyTbNjhc5l
-	l/XiOGF3/9rMVo4hpO8kmd8ZY7d9/f50dVidSvlceUIheO8KHGzajutyGSAmUSIapnrsHBK
-	g8vxds4EhAqaDK6qpnEuleRGxBtelCu13dZ+ovGe4Mokq5GoZ/bbn2T966KrokwufIUudjb
-	2jbWje0DA7wMih7K6rWX3rD7sEgpaquhXbuELbX33CTxR1uW6aARNhI/q9DWrGElH+/9YWa
-	B+MO0JmbjvJbmsJBB3Cu9bKrdh+gA8cor4C1PZmqxknJ1ju0BO35cA/m3BOSttgqk9sDrYA
-	zkzcPgly7Sk37W+GNQ7ii2EGHvuVTVp+FqdNsqSIvs30spsIlOJCF66DuOQcWby7eJoJq1g
-	uJ37h39XAa1o6dKQCM1uRIn+ZwUYXo87Qqo+nEMMc4QrW3umlBWBkXO+p/4dedRUhUmpZaD
-	18l59jNFRKo8L2KgoI4PPHJKRWJ5No3ojnoJ6EvZJMa6IpPcQwmhLMxHOVDEua8keMJbzSU
-	n0YqjI4c9eFlm10Q+TuRCEx6TRCec5GF1mSHgTAXaVAdUMWAELEbg9Idbe3Z6+OVGoE7m5x
-	G5E8YBEFYcZSLxNzdMNOFv0xPKz7HvUUnUv/kxkwvFXS143D6FcgflNSexknfQ8dds/Xffu
-	4KIk1qHHoMgY4Pt8ISdMjbN7GsH9hMcMHyexeEv6xBcBCzLbOheydjSLslyaj2h2XEzPwvw
-	qCYcaWV6jXjuH26apLphuwVAAi1a9Oho1QLHsQbWCxmoxJotINUHhR9+1cdUzZx99F9kEZC
-	Pp3ZD0fHPB5LqCI/O82meRaMU8d08bnLhN0cI3dXLAXan+htKtsKIMyOeGCm6OON/NfrSXL
-	d7SoOocGZhdLvWcxQH7793GxN+K9y3ed1unjIcfL3gKcJs0AsJycItqz9CTtFycTAUFNwhH
-	I1scdWZxGQrqOZuN/uSifPwnJBx6BTXZ3ykLD9dZZLBOyBfpNotFyQSLgX64NN5d/jmUbKX
-	tUYxtS2w==
-X-QQ-XMRINFO: NS+P29fieYNw95Bth2bWPxk=
+Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: MP9Cvol/R4C0d9vWA8xRaCafhl2zr34fFURZKEm7v/dCHF6Xzv5zZ+Vo
+	JVNrX25ngPsr6pSmkJfDsi2TxYR0kt234iB7nbEdivNX6w9Asai7jC9qXWHtcGL5ipWfzTz
+	MQYdov4pmHZXPBTewkv/XYb90AynolD8rLd4ZfL9253bKBiCWSpri8fjt484K45T7ajyKLb
+	swIvxyzBGI1yucccECKq9IdhdD6KB1Sr66WL4CCKL6RDVnI0hJXSZAQ4v7aUdkJPbzWsL07
+	0yabWbBNy66ale3z0uqyOiMxJFUHDXTFYDmh6TuzcWr+3CphaoScsKPabiWkqkt1T4qEVcI
+	JXfb0x1fx83TOYlEAAFLcBVfE5bQn1ldgWMmhHum3unLqpA/nDtP0ZoLHYK8zi81DaZrSot
+	dVvFoLru5m5EuBlcQnc7pTewgMGJbm1d5DTC/QnajFE8I2ngydE892N2UID9BlCCFlx0w/L
+	/84Qq+LhJ0pU59fTNgaG4IeR6gMn3JKEMOTjzDSCy0CXgbkO7dCGKP2K1QHnvGpVf3cYejA
+	jrYBP8sLcEJYaV/ewvjf70EpPq5YRLrBf0JsEx9t929AmBjYHYT74voJ40VZBU8eR1RMp73
+	I9MHYxlvTovYwusivPSizoFqt+8fT387TicXRPUJ7vvobs5bhu5t5CTIEmDkHIpYAR5enw7
+	u0+gYhDoW/tTsoy47kvR/Lf7ccKVQebVqu04a9Vzh1OX791pc/Iny1fcVvSqz6me5i8LUKw
+	ph7ENv6knyQ5UoNMmpH5BGzfEvf5R32jfE1cePlWfuEqiv/w96epcA9AFEb2U9mac5wq8nA
+	mT6bJOeN16A0kytrQ60lMmnqyndk7x8j1wg13/ftD8cjhjbvL7WMFHXjLS1asX2b9Kq0h7O
+	jB47kGcKAGwLw8s/eW5tP7vYhJhBwcX+za0jOXtSuB3h9r2RpLWmq0dOpXgwRczROqHg4EX
+	Cxdyvj0VD1ysYyclNj7ZLt7Yt/0Zmawzu5N5rJLYXf86RwodK0SisGGiWucbnepPahkzxoq
+	MPNkc51LAJh+cutfxd
+X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
 X-QQ-RECHKSPAM: 0
 
-On Wed, Aug 13, 2025 at 01:56:07PM +0530, MD Danish Anwar wrote:
-> On 12/08/25 3:09 pm, Dong Yibo wrote:
-> > Initialize get mac from hw, register the netdev.
+On Tue, Aug 12, 2025 at 05:14:15PM +0100, Vadim Fedorenko wrote:
+> On 12/08/2025 10:39, Dong Yibo wrote:
+> > Initialize basic mbx_fw ops, such as get_capability, reset phy
+> > and so on.
 > > 
 > > Signed-off-by: Dong Yibo <dong100@mucse.com>
-> > ---
-> >  drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    | 22 ++++++
-> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   | 73 ++++++++++++++++++
-> >  drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |  1 +
-> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 76 +++++++++++++++++++
-> >  4 files changed, 172 insertions(+)
-> > 
-> > diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-> > index 6cb14b79cbfe..644b8c85c29d 100644
-> > --- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-> > +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-> > @@ -6,6 +6,7 @@
-> >  
-> >  #include <linux/types.h>
-> >  #include <linux/mutex.h>
-> > +#include <linux/netdevice.h>
-> >  
-> >  extern const struct rnpgbe_info rnpgbe_n500_info;
-> >  extern const struct rnpgbe_info rnpgbe_n210_info;
-> > @@ -86,6 +87,18 @@ struct mucse_mbx_info {
-> >  	u32 fw2pf_mbox_vec;
-> >  };
-> >  
-> > +struct mucse_hw_operations {
-> > +	int (*init_hw)(struct mucse_hw *hw);
-> > +	int (*reset_hw)(struct mucse_hw *hw);
-> > +	void (*start_hw)(struct mucse_hw *hw);
-> > +	void (*init_rx_addrs)(struct mucse_hw *hw);
-> > +	void (*driver_status)(struct mucse_hw *hw, bool enable, int mode);
-> > +};
-> 
-> You define functions init_hw, start_hw, and init_rx_addrs in this
-> structure but they aren't implemented in this patch. Either implement
-> them or remove them if not needed yet.
-> 
-> 
-
-Got it, I will remove not implemented define.
-
-> > +
-> > +enum {
-> > +	mucse_driver_insmod,
-> > +};
-> > +
-> >  struct mucse_hw {
-> >  	void *back;
-> >  	u8 pfvfnum;
-> > @@ -96,12 +109,18 @@ struct mucse_hw {
-> >  	u32 axi_mhz;
-> >  	u32 bd_uid;
-> >  	enum rnpgbe_hw_type hw_type;
-> > +	const struct mucse_hw_operations *ops;
-> >  	struct mucse_dma_info dma;
-> >  	struct mucse_eth_info eth;
-> >  	struct mucse_mac_info mac;
-> >  	struct mucse_mbx_info mbx;
-> > +	u32 flags;
-> > +#define M_FLAGS_INIT_MAC_ADDRESS BIT(0)
-> >  	u32 driver_version;
-> >  	u16 usecstocount;
-> > +	int lane;
-> > +	u8 addr[ETH_ALEN];
-> > +	u8 perm_addr[ETH_ALEN];
-> >  };
-> >  
-> >  struct mucse {
-> > @@ -123,4 +142,7 @@ struct rnpgbe_info {
-> >  #define PCI_DEVICE_ID_N500_DUAL_PORT 0x8318
-> >  #define PCI_DEVICE_ID_N210 0x8208
-> >  #define PCI_DEVICE_ID_N210L 0x820a
-> > +
-> > +#define dma_wr32(dma, reg, val) writel((val), (dma)->dma_base_addr + (reg))
-> > +#define dma_rd32(dma, reg) readl((dma)->dma_base_addr + (reg))
-> >  #endif /* _RNPGBE_H */
-> > diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
-> > index 16d0a76114b5..3eaa0257f3bb 100644
-> > --- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
-> > +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
-> > @@ -2,10 +2,82 @@
-> >  /* Copyright(c) 2020 - 2025 Mucse Corporation. */
-> >  
-> >  #include <linux/string.h>
-> > +#include <linux/etherdevice.h>
-> >  
-> >  #include "rnpgbe.h"
-> >  #include "rnpgbe_hw.h"
-> >  #include "rnpgbe_mbx.h"
-> > +#include "rnpgbe_mbx_fw.h"
-> > +
-> > +/**
-> > + * rnpgbe_get_permanent_mac - Get permanent mac
-> > + * @hw: hw information structure
-> > + * @mac_addr: pointer to store mac
-> > + *
-> > + * rnpgbe_get_permanent_mac tries to get mac from hw.
-> > + * It use eth_random_addr if failed.
-> > + **/
-> > +static void rnpgbe_get_permanent_mac(struct mucse_hw *hw,
-> > +				     u8 *mac_addr)
+> > +static int mucse_fw_send_cmd_wait(struct mucse_hw *hw,
+> > +				  struct mbx_fw_cmd_req *req,
+> > +				  struct mbx_fw_cmd_reply *reply)
 > > +{
-> > +	if (mucse_fw_get_macaddr(hw, hw->pfvfnum, mac_addr, hw->lane)) {
-> > +		eth_random_addr(mac_addr);
-> > +	} else {
-> > +		if (!is_valid_ether_addr(mac_addr))
-> > +			eth_random_addr(mac_addr);
+> > +	int len = le16_to_cpu(req->datalen) + MBX_REQ_HDR_LEN;
+> > +	int retry_cnt = 3;
+> > +	int err;
+> > +
+> > +	err = mutex_lock_interruptible(&hw->mbx.lock);
+> > +	if (err)
+> > +		return err;
+> > +	err = hw->mbx.ops->write_posted(hw, (u32 *)req,
+> > +					L_WD(len));
+> > +	if (err) {> +		mutex_unlock(&hw->mbx.lock);
+> > +		return err;
 > > +	}
-> > +
 > 
-> The function should log a warning when falling back to a random MAC
-> address, especially in the second case where the hardware returned an
-> invalid MAC.
+> it might look a bit cleaner if you add error label and have unlock code
+> once in the end of the function...
 > 
 
-Got it, I will fix it.
+If it is more cleaner bellow?
 
-> > +	hw->flags |= M_FLAGS_INIT_MAC_ADDRESS;
-> > +}
-> > +
-> 
-> > +/**
-> > + * rnpgbe_xmit_frame - Send a skb to driver
-> > + * @skb: skb structure to be sent
-> > + * @netdev: network interface device structure
-> > + *
-> > + * @return: NETDEV_TX_OK or NETDEV_TX_BUSY
-> > + **/
-> > +static netdev_tx_t rnpgbe_xmit_frame(struct sk_buff *skb,
-> > +				     struct net_device *netdev)
-> > +{
-> > +		dev_kfree_skb_any(skb);
-> > +		return NETDEV_TX_OK;
-> > +}
-> 
-> Extra indentation on these two lines. Also, the function just drops all
-> packets without any actual transmission. This should at least increment
-> the drop counter statistics.
-> 
+static int mucse_fw_send_cmd_wait(struct mucse_hw *hw,
+                                  struct mbx_fw_cmd_req *req,
+                                  struct mbx_fw_cmd_reply *reply)
+{
+        int len = le16_to_cpu(req->datalen) + MBX_REQ_HDR_LEN;
+        int retry_cnt = 3;
+        int err;
 
-Got it, I will add 'netdev->stats.tx_dropped++;' here.
+        err = mutex_lock_interruptible(&hw->mbx.lock);
+        if (err)
+                return err;
+        err = hw->mbx.ops->write_posted(hw, (u32 *)req,
+                                        L_WD(len));
+        if (err)
+                goto quit;
+        do {
+                err = hw->mbx.ops->read_posted(hw, (u32 *)reply,
+                                               L_WD(sizeof(*reply)));
+                if (err)
+                        goto quit;
+        } while (--retry_cnt >= 0 && reply->opcode != req->opcode);
 
-> > +
-> > +static const struct net_device_ops rnpgbe_netdev_ops = {
-> > +	.ndo_open = rnpgbe_open,
-> > +	.ndo_stop = rnpgbe_close,
-> > +	.ndo_start_xmit = rnpgbe_xmit_frame,
-> > +};
-> 
-> 
-> -- 
-> Thanks and Regards,
-> Danish
-> 
-> 
-
-Thanks for your feedback.
+        mutex_unlock(&hw->mbx.lock);
+        if (retry_cnt < 0)
+                return -ETIMEDOUT;
+        if (reply->error_code)
+                return -EIO;
+        return 0;
+quit:
+        mutex_unlock(&hw->mbx.lock);
+        return err;
+}
 
 
