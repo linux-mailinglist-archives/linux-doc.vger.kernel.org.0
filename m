@@ -1,164 +1,159 @@
-Return-Path: <linux-doc+bounces-55850-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55856-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39281B243DB
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 10:14:05 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48B23B2440E
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 10:19:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4862B687212
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 08:13:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C7D9D3B173B
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 08:17:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8030E2ED15E;
-	Wed, 13 Aug 2025 08:13:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1060D2F2911;
+	Wed, 13 Aug 2025 08:15:26 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A220C2D540B;
-	Wed, 13 Aug 2025 08:13:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.204.34.129
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 585622F28F4
+	for <linux-doc@vger.kernel.org>; Wed, 13 Aug 2025 08:15:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755072810; cv=none; b=GNdcE+XCV5mtItOH9OFLNr2/U94ivExkwiS2fBja5CsY7flpYqIZDVksbJwll1QjDVEIhqdiBRaad8Ga29dDsk4t3sVZee+CCOv/2zMGoyZwwm+IiRGHLc8ZXLc/hx9/zPmvCdVqBI+CLY6aNBfYomP+B7VTsP59GwPdSEFWCX0=
+	t=1755072925; cv=none; b=UBAd4ugkGi/sMY22doU9BVl8TPOFdvrBklht8diEdOw07n0dC28YQ0A4l9q/3YOFqTVEVrhpzS5/6tX5bec+57R3VIAkX2NTlEY3aG7eiwfFG36npU1ukG4hekhvwIZ+p8f1JVi9YKMR3hjoHDcSAfcr0CP3VQKguSB1eKrKako=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755072810; c=relaxed/simple;
-	bh=6+7jJZ3HhTmLYJo9sruLtdjHZVI54SZ6HNZmAF5DWM4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bzirCO7vem7X1T6+rVCskG8XaPX28mo8yJOshqnSQc5Agm2/2AvtFZFncUXB5H6YiOKHwDbtlpOlYVxzoPg65fzLWCF85fu0yjgGQ3fHr4zWpuB7mVVR1cuscrii3rfUZROdnz+m0UYbl6Nz9tLCKlNvoonnr3Ogmglasg3GZCs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.204.34.129
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
-X-QQ-mid: zesmtpgz4t1755072724t6817de95
-X-QQ-Originating-IP: +icP6DoFFNymN8R74c7afLzyc/7lvOHbSeRS8oPVEgw=
-Received: from localhost ( [203.174.112.180])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Wed, 13 Aug 2025 16:12:02 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 1664480856713457679
-Date: Wed, 13 Aug 2025 16:12:02 +0800
-From: Yibo Dong <dong100@mucse.com>
-To: Vadim Fedorenko <vadim.fedorenko@linux.dev>
-Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
-	kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
-	corbet@lwn.net, gur.stavi@huawei.com, maddy@linux.ibm.com,
-	mpe@ellerman.id.au, danishanwar@ti.com, lee@trager.us,
-	gongfan1@huawei.com, lorenzo@kernel.org, geert+renesas@glider.be,
-	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
-	alexanderduyck@fb.com, richardcochran@gmail.com,
-	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 4/5] net: rnpgbe: Add basic mbx_fw support
-Message-ID: <211A876E5960B039+20250813081202.GB965498@nic-Precision-5820-Tower>
-References: <20250812093937.882045-1-dong100@mucse.com>
- <20250812093937.882045-5-dong100@mucse.com>
- <eafb8874-a7a3-4028-a4ad-d71fc5689813@linux.dev>
+	s=arc-20240116; t=1755072925; c=relaxed/simple;
+	bh=Rn30g3qpMMLoYAxHJkUjA4DCXwescxRud1yxcLpacIU=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=pKER/gIi094BBVuU//QUKl6mEXA0N+0mbPr0qCdHcdgMaCefBjigZO58KZtTRamP+6TiHCtEvQfYSxModrhaXLqj5GylCQFXNo77O6tgVJp36IkxYJwrXODhr25wC1oQyVTDfMPAavYAC5j50aA9ClULtat8590VlpHD0yD/6Lw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <ore@pengutronix.de>)
+	id 1um6dO-0002KW-FE; Wed, 13 Aug 2025 10:14:58 +0200
+Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1um6dK-0003lz-1K;
+	Wed, 13 Aug 2025 10:14:54 +0200
+Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1um6dK-00Ey6T-10;
+	Wed, 13 Aug 2025 10:14:54 +0200
+From: Oleksij Rempel <o.rempel@pengutronix.de>
+To: Andrew Lunn <andrew@lunn.ch>,
+	Jakub Kicinski <kuba@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Kory Maincent <kory.maincent@bootlin.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Nishanth Menon <nm@ti.com>
+Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
+	kernel@pengutronix.de,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	UNGLinuxDriver@microchip.com,
+	linux-doc@vger.kernel.org,
+	Michal Kubecek <mkubecek@suse.cz>,
+	Roan van Dijk <roan@protonic.nl>
+Subject: [PATCH net-next v1 0/5] ethtool: introduce PHY MSE diagnostics UAPI and drivers
+Date: Wed, 13 Aug 2025 10:14:48 +0200
+Message-Id: <20250813081453.3567604-1-o.rempel@pengutronix.de>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <eafb8874-a7a3-4028-a4ad-d71fc5689813@linux.dev>
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpgz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: N3l5ASPewLWqYR3azMlZEiI6nfFXBz1FR6v3zkKFwZJOmkNMYtY5MC05
-	w5AJs/OXVEnt0MolHUVxnXj4HukzRudKq2eH7LdEPPDyareSStT191dBTH4kOxOcglEja9v
-	PhI7/dR40k/W4wVcp+tlCh8p+LYQCJTbfdH9rradN1DQTj79mWlFT1nK3U6jX70sqoDFkkW
-	WNFAH5RMrBXRwTEwEvRg9Lka3hfn+2YQosoidoaN8SXIowV3fMxxvzuaalWRYbi7MC9nUqW
-	UVXLqcXL0efhmAnW1Tl85oASi6KX6NMnwzQUGggp0G57bWx9Nun8Nwk6wLqlciPQrJHlaVv
-	J+iNWzMSiecoNrWsmqRMoSEjM7pK/sajt9XMpKQIXTQcTNQ++GJyVKOCrRDsCeOPpioWcI3
-	15tOEXTnMQBzqbKjK9TRKHODGXd08x3U/kaoXj2mzIDCaKWdfcttxoeuyOrl/H7BiNx3bR6
-	gwqlVpqVjEgsO2kSBgtrmpETSvQsNnrfRR5+bpr8aMKm6104G6DjsQK08suOogJ5TzrTW85
-	GLGjlmzbvRyMScgfzDK7JMyCrMgDoU1UtmUAp4y9cKKcpBO0uhM9C2Ay5Mb4emn/XB1HLs/
-	yW5zQsBLhsprGC1LfdwZnbdD7sd2fXy6wvUzlj5fapImXZWhbMuMS+vhzVlN0FnLWEwk+7y
-	PNuijB4HOkKkQ9ZHXMq1OVUA+sYsiPdmSo1E6mzCQdXnhOkdb5Z+lDeOqcm/vBtRKnnJzgO
-	Ojtb/wyJvaAN+x27JsuuNATH9n3zRuviY/OATzaoiW+m/BbrBl3gKGVXfm76C2+txmUtTm7
-	ony1Akxdqflo1Nnm07FFq8hq6o1/0FkGYbuen8DRhrJlJUGrw7R+/aoMXDnD3jAEqggc1C+
-	Gf0kuyiYyNzBu1QpzdwQj8LbYAQQKr1FdzegbtVYzcg1Y9rW5j+tipduD8/fx/sQQdjV9Ib
-	mRaGpHCnbkPNyBJpgp8fxd8+8ScQB6KoR0hsRzxWV8egCQl08VYQOOMLNOL1iLb3YynpNLR
-	Sc5AV+Xkf3V7XlgEcrJUS62+d9FeuU05/TEvHk7Q==
-X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
-X-QQ-RECHKSPAM: 0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ore@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-On Tue, Aug 12, 2025 at 05:14:15PM +0100, Vadim Fedorenko wrote:
-> On 12/08/2025 10:39, Dong Yibo wrote:
-> > Initialize basic mbx_fw ops, such as get_capability, reset phy
-> > and so on.
-> > 
-> > Signed-off-by: Dong Yibo <dong100@mucse.com>
-> > +static int mucse_fw_send_cmd_wait(struct mucse_hw *hw,
-> > +				  struct mbx_fw_cmd_req *req,
-> > +				  struct mbx_fw_cmd_reply *reply)
-> > +{
-> > +	int len = le16_to_cpu(req->datalen) + MBX_REQ_HDR_LEN;
-> > +	int retry_cnt = 3;
-> > +	int err;
-> > +
-> > +	err = mutex_lock_interruptible(&hw->mbx.lock);
-> > +	if (err)
-> > +		return err;
-> > +	err = hw->mbx.ops->write_posted(hw, (u32 *)req,
-> > +					L_WD(len));
-> > +	if (err) {> +		mutex_unlock(&hw->mbx.lock);
-> > +		return err;
-> > +	}
-> 
-> it might look a bit cleaner if you add error label and have unlock code
-> once in the end of the function...
-> 
+This series introduces a generic kernel-userspace API for retrieving PHY
+Mean Square Error (MSE) diagnostics, together with netlink integration,
+a fast-path reporting hook in LINKSTATE_GET, and initial driver
+implementations for the KSZ9477 and DP83TD510E PHYs.
 
-Ok, I will try to update this.
+MSE is defined by the OPEN Alliance "Advanced diagnostic features for
+100BASE-T1 automotive Ethernet PHYs" specification [1] as a measure of
+slicer error rate, typically used internally to derive the Signal
+Quality Indicator (SQI). While SQI is useful as a normalized quality
+index, it hides raw measurement data, varies in scaling and thresholds
+between vendors, and may not indicate certain failure modes - for
+example, cases where autonegotiation would fail even though SQI reports
+a good link. In practice, such scenarios can only be investigated in
+fixed-link mode; here, MSE can provide an empirically estimated value
+indicating conditions under which autonegotiation would not succeed.
 
-> > +	do {
-> > +		err = hw->mbx.ops->read_posted(hw, (u32 *)reply,
-> > +					       L_WD(sizeof(*reply)));
-> > +		if (err) {
-> > +			mutex_unlock(&hw->mbx.lock);
-> > +			return err;
-> > +		}
-> > +	} while (--retry_cnt >= 0 && reply->opcode != req->opcode);
-> > +	mutex_unlock(&hw->mbx.lock);
-> > +	if (retry_cnt < 0 || reply->error_code)
-> > +		return -EIO;
-> > +	return 0;
-> > +}
-> > +
-> > +/**
-> > + * mucse_fw_get_capability - Get hw abilities from fw
-> > + * @hw: pointer to the HW structure
-> > + * @abil: pointer to the hw_abilities structure
-> > + *
-> > + * mucse_fw_get_capability tries to get hw abilities from
-> > + * hw.
-> > + *
-> > + * @return: 0 on success, negative on failure
-> > + **/
-> > +static int mucse_fw_get_capability(struct mucse_hw *hw,
-> > +				   struct hw_abilities *abil)
-> > +{
-> > +	struct mbx_fw_cmd_reply reply;
-> > +	struct mbx_fw_cmd_req req;
-> > +	int err;
-> > +
-> > +	memset(&req, 0, sizeof(req));
-> > +	memset(&reply, 0, sizeof(reply));
-> 
-> probably
-> 
-> 	struct mbx_fw_cmd_reply reply = {};
-> 	struct mbx_fw_cmd_req req = {};
-> 
-> will look better. in the other functions as well..
-> 
-> 
-> 
+Example output with current implementation:
+root@DistroKit:~ ethtool lan1
+Settings for lan1:
+...
+        Speed: 1000Mb/s
+        Duplex: Full
+...
+        Link detected: yes
+        SQI: 5/7
+        MSE: 3/127 (channel: worst)
 
-Got it, I will update it.
+root@DistroKit:~ ethtool --show-mse lan1
+MSE diagnostics for lan1:
+MSE Configuration:
+        Max Average MSE: 127
+        Refresh Rate: 2000000 ps
+        Symbols per Sample: 250
+        Supported capabilities: average channel-a channel-b channel-c
+                                channel-d worst
 
-Thanks for your feedback.
+MSE Snapshot (Channel: a):
+        Average MSE: 4
+
+MSE Snapshot (Channel: b):
+        Average MSE: 3
+
+MSE Snapshot (Channel: c):
+        Average MSE: 2
+
+MSE Snapshot (Channel: d):
+        Average MSE: 3
+
+[1] https://opensig.org/wp-content/uploads/2024/01/Advanced_PHY_features_for_automotive_Ethernet_V1.0.pdf
+
+Oleksij Rempel (5):
+  ethtool: introduce core UAPI and driver API for PHY MSE diagnostics
+  ethtool: netlink: add ETHTOOL_MSG_MSE_GET and wire up PHY MSE access
+  ethtool: netlink: add lightweight MSE reporting to LINKSTATE_GET
+  net: phy: micrel: add MSE interface support for KSZ9477 family
+  net: phy: dp83td510: add MSE interface support for 10BASE-T1L
+
+ Documentation/netlink/specs/ethtool.yaml      | 166 ++++++++
+ Documentation/networking/ethtool-netlink.rst  |  74 ++++
+ drivers/net/phy/dp83td510.c                   |  44 +++
+ drivers/net/phy/micrel.c                      |  76 ++++
+ include/linux/phy.h                           | 126 ++++++
+ .../uapi/linux/ethtool_netlink_generated.h    |  94 +++++
+ net/ethtool/Makefile                          |   2 +-
+ net/ethtool/linkstate.c                       |  84 ++++
+ net/ethtool/mse.c                             | 362 ++++++++++++++++++
+ net/ethtool/netlink.c                         |  10 +
+ net/ethtool/netlink.h                         |   2 +
+ 11 files changed, 1039 insertions(+), 1 deletion(-)
+ create mode 100644 net/ethtool/mse.c
+
+--
+2.39.5
 
 
