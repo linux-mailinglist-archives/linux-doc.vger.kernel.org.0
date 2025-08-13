@@ -1,177 +1,138 @@
-Return-Path: <linux-doc+bounces-55854-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-55860-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 316FCB243EC
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 10:15:55 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99ACDB2441B
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 10:20:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 978FD58066E
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 08:15:53 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0ACC27237DB
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Aug 2025 08:17:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 338F42EFDAC;
-	Wed, 13 Aug 2025 08:15:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AC6372EFDA3;
+	Wed, 13 Aug 2025 08:16:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hkfryBge"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C23F2EE29D
-	for <linux-doc@vger.kernel.org>; Wed, 13 Aug 2025 08:15:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 835752EFD9A;
+	Wed, 13 Aug 2025 08:16:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755072919; cv=none; b=MY/uTtF+ZAjt4VauVz9YkDJEDUtBEci4Hu0G24fj986gLIVPxtjYV06LJE2fB3iyBLUNecGNJ4xqbwcxd8ez4Pw2UDUm7wMvhBusUCU9XPXPo09lBfcAPtpP4gZgtbfTJFwtRMhnjJ1kK7WqBYUmWNt2GnaLfq4pZcUz3cPfUbA=
+	t=1755072998; cv=none; b=Q2jw6ZP45tgvvkCCX1gZ4RCGNAfbTy4jzW9rWjMDIyifUXDx/FC2IBUxXBAG95PzsnWkAk/agvD7U07gaqWAqPOscqnrzp2LVBvadcl/8BkwxHW7SJkBUrFdht468uFkKbNiIBKBzzCcw6ojkgFnfwxgtiKLa+hPVI7nLwxJU0k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755072919; c=relaxed/simple;
-	bh=34LTcszKLeYDmHdbnh9rrfPNBpaMAPrseZ4WCws0Ieg=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=KEi1h3O4IpAZXURiCsb6EFYEs3L3x7kMWa2VC0k3B/0txOSew4x2ilEEU1LUaoUrf6Xnt9uaLWjgB8ur04XBBAyGdQuZ42IfUhnQicWnwRz74uXgaEI7QEmRi3HLnYJnsa13imXD+mHmQ7RV0g3DhsMjIbfyYsAkVKZh7orlAoM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1um6dO-0002Kb-FF; Wed, 13 Aug 2025 10:14:58 +0200
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1um6dK-0003m5-1p;
-	Wed, 13 Aug 2025 10:14:54 +0200
-Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1um6dK-00Ey7H-1R;
-	Wed, 13 Aug 2025 10:14:54 +0200
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Andrew Lunn <andrew@lunn.ch>,
-	Jakub Kicinski <kuba@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Donald Hunter <donald.hunter@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Kory Maincent <kory.maincent@bootlin.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Nishanth Menon <nm@ti.com>
-Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
-	kernel@pengutronix.de,
-	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	UNGLinuxDriver@microchip.com,
-	linux-doc@vger.kernel.org,
-	Michal Kubecek <mkubecek@suse.cz>,
-	Roan van Dijk <roan@protonic.nl>
-Subject: [PATCH net-next v1 5/5] net: phy: dp83td510: add MSE interface support for 10BASE-T1L
-Date: Wed, 13 Aug 2025 10:14:53 +0200
-Message-Id: <20250813081453.3567604-6-o.rempel@pengutronix.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250813081453.3567604-1-o.rempel@pengutronix.de>
-References: <20250813081453.3567604-1-o.rempel@pengutronix.de>
+	s=arc-20240116; t=1755072998; c=relaxed/simple;
+	bh=HpmLvrPHn4sb+82i2lRKMP37vraziwdZWtrOQHjkRDc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=j4XYJmw4acukmSbUSHUUGu0cHr4cm9744VJcGJujdpfMj/XdPtZ8R6tLANKJtuvfZJYNO66yo91c3hisTf4mDs0D04cDEwCdN58rb5oNNeLj0FcQuZRmrCoQ6KqzrmQgMIUjvhjuH94rJnloA1mJs4f/09GuIggXh0MfeSqp2BM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hkfryBge; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AAC9C4CEEB;
+	Wed, 13 Aug 2025 08:16:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755072996;
+	bh=HpmLvrPHn4sb+82i2lRKMP37vraziwdZWtrOQHjkRDc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=hkfryBgeEEtiAWYIAQM4oQy2XQ9Z4BPn9Ge0qwzZB/gVcEWi6hUMZeyimxqR5eK1X
+	 zMTyToZyJ8ClSiddiN5ACV823OpY68O96TkrI5PN5MYUWtCwhQn6KIAOstUth1wm9m
+	 3U2Mvc1WWQkvIgF/2qfazdGDQdQ459nPKGN5DpWERkKNxbTdgQW/QTJ/mvQBq0c4mf
+	 GMSeWyMjI6HSS0qu23qk5qvFLTe1Jp6m5Nw7wsouTSbfNL/1A43XbaY6YJwXZCORd2
+	 oeQb3oNnUfp2IIoNUQgtKUI3/dx1R5sBbikq9o7AM439nJSrLoPFoy0dCuDTlpT24v
+	 ZiA/xS2wWCHFw==
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+	by mailfauth.phl.internal (Postfix) with ESMTP id B8421F40067;
+	Wed, 13 Aug 2025 04:16:32 -0400 (EDT)
+Received: from phl-mailfrontend-01 ([10.202.2.162])
+  by phl-compute-06.internal (MEProxy); Wed, 13 Aug 2025 04:16:32 -0400
+X-ME-Sender: <xms:4EmcaJ9bYlqpENhWu9ZM3b1rkWpwlG0ejAGfN5hl5gpmWDsXJZb2dg>
+    <xme:4EmcaENOzt1tVLSLCMXrultW8L17ql7E4FM4HK4IpxV0IwbEtdp1obf0VUusmmMyw
+    IcwitAMdbROBw4JosY>
+X-ME-Received: <xmr:4EmcaFQ0k6CLoJc_wiBIEX78Ie8QrsLWwJlSGdc_NpJQrnqaDtOjJI6MFkkG>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgddufeejjeduucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepfffhvfevuffkfhggtggujgesthdtsfdttddtvdenucfhrhhomhepmfhirhihlhcu
+    ufhhuhhtshgvmhgruhcuoehkrghssehkvghrnhgvlhdrohhrgheqnecuggftrfgrthhtvg
+    hrnhepheeikeeuveduheevtddvffekhfeufefhvedtudehheektdfhtdehjeevleeuffeg
+    necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhhirh
+    hilhhlodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduieduudeivdeiheeh
+    qddvkeeggeegjedvkedqkhgrsheppehkvghrnhgvlhdrohhrghesshhhuhhtvghmohhvrd
+    hnrghmvgdpnhgspghrtghpthhtohepudejvddpmhhouggvpehsmhhtphhouhhtpdhrtghp
+    thhtohepmhgrtghivghjrdifihgvtgiiohhrqdhrvghtmhgrnhesihhnthgvlhdrtghomh
+    dprhgtphhtthhopehnrghthhgrnheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheprghr
+    nhgusegrrhhnuggsrdguvgdprhgtphhtthhopegsrhhoohhnihgvsehkvghrnhgvlhdroh
+    hrghdprhgtphhtthhopehlihgrmhdrhhhofihlvghtthesohhrrggtlhgvrdgtohhmpdhr
+    tghpthhtohepuhhrvgiikhhisehgmhgrihhlrdgtohhmpdhrtghpthhtohepfihilhhlse
+    hkvghrnhgvlhdrohhrghdprhgtphhtthhopehkrghlvghshhhsihhnghhhsehgohhoghhl
+    vgdrtghomhdprhgtphhtthhopehrphhptheskhgvrhhnvghlrdhorhhg
+X-ME-Proxy: <xmx:4EmcaG8rQsE8nkO8Pw7BXFUXXd-RiXJNyqApIZXatEwUdlY2ztWfjA>
+    <xmx:4EmcaP1k2sWKIPsVnixXMBMnZq2BC4N6nxNUox2x8df5vJ19bCsHAA>
+    <xmx:4EmcaIKL7gUAWTyNuo8HT5jw93fJosAdbDIZuVFUt4IZ5EQd4puIQA>
+    <xmx:4EmcaN73ABzTnA_tXNVpp2lcwvZwZx0hbVCFteVB1zox2VpbNSuCPA>
+    <xmx:4EmcaEjpfrJQy1TacPbbA7uC_HvJWGEvLn3o1pPc_tSJJSAJSSn_V_gA>
+Feedback-ID: i10464835:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 13 Aug 2025 04:16:31 -0400 (EDT)
+Date: Wed, 13 Aug 2025 09:16:29 +0100
+From: Kiryl Shutsemau <kas@kernel.org>
+To: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
+Cc: nathan@kernel.org, arnd@arndb.de, broonie@kernel.org,
+ 	Liam.Howlett@oracle.com, urezki@gmail.com, will@kernel.org,
+ kaleshsingh@google.com, 	rppt@kernel.org, leitao@debian.org,
+ coxu@redhat.com, surenb@google.com, 	akpm@linux-foundation.org,
+ luto@kernel.org, jpoimboe@kernel.org, changyuanl@google.com,
+ 	hpa@zytor.com, dvyukov@google.com, corbet@lwn.net,
+ vincenzo.frascino@arm.com, 	smostafa@google.com,
+ nick.desaulniers+lkml@gmail.com, morbo@google.com, 	andreyknvl@gmail.com,
+ alexander.shishkin@linux.intel.com, thiago.bauermann@linaro.org,
+ 	catalin.marinas@arm.com, ryabinin.a.a@gmail.com, jan.kiszka@siemens.com,
+ jbohac@suse.cz, 	dan.j.williams@intel.com, joel.granados@kernel.org,
+ baohua@kernel.org, 	kevin.brodsky@arm.com, nicolas.schier@linux.dev,
+ pcc@google.com, 	andriy.shevchenko@linux.intel.com, wei.liu@kernel.org,
+ bp@alien8.de, ada.coupriediaz@arm.com, 	xin@zytor.com,
+ pankaj.gupta@amd.com, vbabka@suse.cz, glider@google.com,
+ 	jgross@suse.com, kees@kernel.org, jhubbard@nvidia.com,
+ joey.gouly@arm.com, 	ardb@kernel.org, thuth@redhat.com,
+ pasha.tatashin@soleen.com, 	kristina.martsenko@arm.com,
+ bigeasy@linutronix.de, lorenzo.stoakes@oracle.com,
+ 	jason.andryuk@amd.com, david@redhat.com, graf@amazon.com,
+ wangkefeng.wang@huawei.com, 	ziy@nvidia.com, mark.rutland@arm.com,
+ dave.hansen@linux.intel.com, 	samuel.holland@sifive.com,
+ kbingham@kernel.org, trintaeoitogc@gmail.com,
+ 	scott@os.amperecomputing.com, justinstitt@google.com,
+ kuan-ying.lee@canonical.com, 	maz@kernel.org, tglx@linutronix.de,
+ samitolvanen@google.com, mhocko@suse.com,
+ 	nunodasneves@linux.microsoft.com, brgerst@gmail.com,
+ willy@infradead.org, ubizjak@gmail.com, 	peterz@infradead.org,
+ mingo@redhat.com, sohil.mehta@intel.com, linux-mm@kvack.org,
+ 	linux-kbuild@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ x86@kernel.org, 	llvm@lists.linux.dev, kasan-dev@googlegroups.com,
+ linux-doc@vger.kernel.org, 	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 00/18] kasan: x86: arm64: KASAN tag-based mode for x86
+Message-ID: <mt3agowg6ghwhvcjqfgqgua3m3al566ewmvwvqkkenxfkbslhq@eun5r3quvcqq>
+References: <cover.1755004923.git.maciej.wieczor-retman@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1755004923.git.maciej.wieczor-retman@intel.com>
 
-Implement get_mse_config() and get_mse_snapshot() for the DP83TD510E
-to expose its Mean Square Error (MSE) register via the new PHY MSE
-UAPI.
+On Tue, Aug 12, 2025 at 03:23:36PM +0200, Maciej Wieczor-Retman wrote:
+> Compilation time comparison (10 cores):
+> * 7:27 for clean kernel
+> * 8:21/7:44 for generic KASAN (inline/outline)
+> * 8:20/7:41 for tag-based KASAN (inline/outline)
 
-The DP83TD510E does not document any peak MSE values; it only exposes
-a single average MSE register used internally to derive SQI. This
-implementation therefore advertises only PHY_MSE_CAP_AVG, along with
-LINK and channel-A selectors. Scaling is fixed to 0xFFFF, and the
-refresh interval/number of symbols are estimated from 10BASE-T1L
-symbol rate (7.5 MBd) and typical diagnostic intervals (~1 ms).
+It is not clear if it is compilation time of a kernel with different
+config options or compilation time of the same kernel running on machine
+with different kernels (KASAN-off/KASAN-generic/KASAN-tagged).
 
-For 10BASE-T1L deployments, SQI is a reliable indicator of link
-modulation quality once the link is established, but it does not
-indicate whether autonegotiation pulses will be correctly received
-in marginal conditions. MSE provides a direct measurement of slicer
-error rate that can be used to evaluate if autonegotiation is likely
-to succeed under a given cable length and condition. In practice,
-testing such scenarios often requires forcing a fixed-link setup to
-isolate MSE behaviour from the autonegotiation process.
-
-Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
----
- drivers/net/phy/dp83td510.c | 44 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
-
-diff --git a/drivers/net/phy/dp83td510.c b/drivers/net/phy/dp83td510.c
-index 23af1ac194fa..094c070f3f96 100644
---- a/drivers/net/phy/dp83td510.c
-+++ b/drivers/net/phy/dp83td510.c
-@@ -249,6 +249,47 @@ struct dp83td510_priv {
- #define DP83TD510E_ALCD_COMPLETE			BIT(15)
- #define DP83TD510E_ALCD_CABLE_LENGTH			GENMASK(10, 0)
- 
-+static int dp83td510_get_mse_config(struct phy_device *phydev,
-+				    struct phy_mse_config *config)
-+{
-+	/* The DP83TD510E datasheet does not specify peak MSE values.
-+	 * It only provides a single MSE value which is used to derive SQI.
-+	 * Therefore, we only support the average MSE capability.
-+	 */
-+	config->supported_caps = PHY_MSE_CAP_AVG | PHY_MSE_CAP_LINK |
-+		PHY_MSE_CAP_CHANNEL_A;
-+	config->max_average_mse = 0xFFFF;
-+
-+	/* The datasheet does not specify the refresh rate or symbol count,
-+	 * but based on similar PHYs and standards, we can assume a common
-+	 * value. For 10BaseT1L, the symbol rate is 7.5 MBd. A common
-+	 * diagnostic interval is around 1ms.
-+	 * 7.5e6 symbols/sec * 0.001 sec = 7500 symbols.
-+	 */
-+	config->refresh_rate_ps = 1000000000; /* 1 ms */
-+	config->num_symbols = 7500;
-+
-+	return 0;
-+}
-+
-+static int dp83td510_get_mse_snapshot(struct phy_device *phydev, u32 channel,
-+				      struct phy_mse_snapshot *snapshot)
-+{
-+	int ret;
-+
-+	if (channel != PHY_MSE_CHANNEL_LINK &&
-+	    channel != PHY_MSE_CHANNEL_A)
-+		return -EOPNOTSUPP;
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TD510E_MSE_DETECT);
-+	if (ret < 0)
-+		return ret;
-+
-+	snapshot->average_mse = ret;
-+
-+	return 0;
-+}
-+
- static int dp83td510_led_brightness_set(struct phy_device *phydev, u8 index,
- 					enum led_brightness brightness)
- {
-@@ -893,6 +934,9 @@ static struct phy_driver dp83td510_driver[] = {
- 	.get_phy_stats	= dp83td510_get_phy_stats,
- 	.update_stats	= dp83td510_update_stats,
- 
-+	.get_mse_config	= dp83td510_get_mse_config,
-+	.get_mse_snapshot = dp83td510_get_mse_snapshot,
-+
- 	.led_brightness_set = dp83td510_led_brightness_set,
- 	.led_hw_is_supported = dp83td510_led_hw_is_supported,
- 	.led_hw_control_set = dp83td510_led_hw_control_set,
 -- 
-2.39.5
-
+  Kiryl Shutsemau / Kirill A. Shutemov
 
