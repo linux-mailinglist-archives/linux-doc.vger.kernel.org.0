@@ -1,115 +1,94 @@
-Return-Path: <linux-doc+bounces-56198-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56201-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E06CDB26AD2
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 17:25:08 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E32C3B26B6C
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 17:49:12 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4B8F19E268B
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 15:19:58 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A3CF660598F
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 15:41:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1716D225402;
-	Thu, 14 Aug 2025 15:19:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 471C523D7FD;
+	Thu, 14 Aug 2025 15:40:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=szeredi.hu header.i=@szeredi.hu header.b="nLbSPa6w"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="QIeEBQcn"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87682221FC6
-	for <linux-doc@vger.kernel.org>; Thu, 14 Aug 2025 15:19:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E47A23ABAF;
+	Thu, 14 Aug 2025 15:40:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755184776; cv=none; b=Nr3JjEDsW0JcrxhwM28ne47lHNc3viQoWRIZJbB9c5wFVQHJ07eyGS890/CZd+zCsZFjhHxHZEMRj0o6A0j3waJNzx+iJRfT5B4AuToOC3anqApNJjxMk20JccztKM/R54hzHEYxP0CIt+2w8417NFjzn51vJytkr6LC/OYsC/E=
+	t=1755186049; cv=none; b=BfsPV/QKu68VsEwCo7sc4c8O6GHv3jJ+iGib9QNmF0IU3iBB6tgPi6BmxjOwlYVJc8P+Z+++v45TfMJYxDsrMEb1uQv9AVksXIPi0Mqbl4U/FSFKTV49Kk3mIaF8kMBvwYalJiFe0zRtf38+z5PT44XnkR5Z18RAo5dNNkcKzAY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755184776; c=relaxed/simple;
-	bh=w0w0dvsu6k/K6PwFlV7vPpkTwV9o99ZgnYkwYYG/8s4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=PXgRLE29Gk8RcsVD0Z1gCgt+Qn9S8RGTY3ZXTgho0+vGZWOx5frCwPTcdfi/e+iYR8gGC1HLNSUWoBSK7sniaqmEpgDVeX4dfcOOkr+iD8wiRoFkLe+IPDC8UOgPwb0cA9yslc2pSRtewHOu0uCxACKl1lgnqWHEgo0Z7biQbH0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=szeredi.hu; spf=pass smtp.mailfrom=szeredi.hu; dkim=pass (1024-bit key) header.d=szeredi.hu header.i=@szeredi.hu header.b=nLbSPa6w; arc=none smtp.client-ip=209.85.160.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=szeredi.hu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=szeredi.hu
-Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-4b109919a09so13704151cf.0
-        for <linux-doc@vger.kernel.org>; Thu, 14 Aug 2025 08:19:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=szeredi.hu; s=google; t=1755184772; x=1755789572; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=EA1ZvFf+qWrndIFVkpDd7IpLWJx6+2D8DPmrDSfzpF0=;
-        b=nLbSPa6wSfW6iCCBQoxh4+p9jCDfOizqypU73rXtCjn1BgXV957iRTFTtfAR3X1aK2
-         ojqSsWGo4QLxAJmi5KwRfXOo3wvWLyp6gyMHoktgawOgtvte0P8E5OPp68kiup5CY1uV
-         ENnEaxbmpkhRj84GdnITQXTFiwiooHB35Gat0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755184772; x=1755789572;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EA1ZvFf+qWrndIFVkpDd7IpLWJx6+2D8DPmrDSfzpF0=;
-        b=fs8XXhvgqKDL20zO/YLP7LkxND4jUR2LZC32uwH8kgaYD6IdogR6ucgiS+TUn6rVLO
-         1Oez5JGsRtk+iYmoIiyqfwpT55PhOgf2Nn/NDMQ9UN9AuInhyP7yXsntzbG2D88okMbi
-         80mAGfwfcpnewh7cXVNfEI9qdkX6ECqfvLSam+AG9d18j35PltLnztTZXtWtrRNwNR2F
-         eseio9mMe4JXNnsQGcKF7ox2kgtT/L+SayrvIOZ9nlAvYoM7+WR5CgJNws1Tt3FTgDUi
-         32ObwB8zYZKBcyykc6iK9lbNKYZ1hZnq7fLkM++H3MAgy+w0ybfY2UI5hry4BC4lL+6L
-         RU7g==
-X-Forwarded-Encrypted: i=1; AJvYcCUr4RZPm19Jacd2zj6YfdQBHfqsJ9hJHeBVWK95Kf7nc6f0lBEcbDGhcCHLGfVdoSssnlB34NdZyTo=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw1SrkHlfJLXKbviXF3AoWiU8K0gJlvilIJD9g/cLgcRUsJYVEN
-	ISgzc8SAeio/SJo2Z6F2g/HUYm8SHE/rDy1aLHFecS05qCrP319yZsoXW5QMBKzErt1+fJI3mqO
-	2aN59xFiRDcPgWxEj3LQbb+1Kqr2VVoNSNbmBBRgtiA==
-X-Gm-Gg: ASbGncu53c1lqKrTwyKZek24DAvrk6ckkx/ZkHlIGDDEqHrRE40EnmAV54VuUSGmj67
-	lf8IaU8rZm+uG9tF0EKvs/KIIntfGqgfgKM0wfhQlX0mCCtpj+CqU+y8lErtdsI9Flon9Dtbl7s
-	oGv9amQUO3ucGwkkRLLW11b10+XdNTHBDE/XWNLfy/ybSIixu8eaHwhB1dUjvcUZ/MXWXUweY4N
-	VkuD1vO
-X-Google-Smtp-Source: AGHT+IG2qa/e3q/lS7fdE17E/mieIqz9XZskfeQdm0xkHvlzBuR85dHk6whip69ESAWWHza3LlnZuCoCgfbTex8i3Ho=
-X-Received: by 2002:a05:622a:5c9a:b0:4b0:7327:1bf5 with SMTP id
- d75a77b69052e-4b10a958412mr55498911cf.6.1755184772275; Thu, 14 Aug 2025
- 08:19:32 -0700 (PDT)
+	s=arc-20240116; t=1755186049; c=relaxed/simple;
+	bh=28F8C/NhsTapDShFQG87dbSaXHiEW5eNCvsqqW7MNx0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=n17tpTEuEExxfYbmYyr3QSoE1KbFt+mjiGi5UdvFBp+jMX+Q9h+cWJbM1D+C06n3FLy/VLG0LrRtb7Br5lU36/kB+DEGoiPX1cjG8BSY1z1tcdRpg2HNnXLmCgnBiyYSKwjUoaSIT0DvKpwngnnyWYv6bdomID/gmtu3x0moLBE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=QIeEBQcn; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 0EE9A40AF3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1755186045; bh=9uaRAHZWdznycc5uOOSPbqkjtsTiEE7IHFczLLA5sWs=;
+	h=From:To:Cc:Subject:Date:From;
+	b=QIeEBQcng3XOFK/aFaiyLk90kpbfcpYK5c3G/wteCqRdmrs475BZYVtWFJkBA6hJa
+	 J9eAcVgAQHonfWS3GSt3o+NTliNt9uv2YraQCs6ZL+5YHSlcMR37HIS4RIB7UqL5zE
+	 yNwKXhqs/h8tPNfWZ/QNCqgg6ZRaYrL/aIrOG84dSgygPKOVyUa99ETok6WYDhpkA9
+	 xVl8eswvkBxT68BNsA8myiiZkXpq6wTyCc6JtNXQkOs/gBp0MYnktNALSrfauGT07w
+	 8mG7qTr1z5mDlwBZ+fWmfUCMSmhVhkaNsaKyn+cIgRAopTe3iatfbph8mcF9Cx/RST
+	 LFLhonS0Q9spw==
+Received: from trenco.lwn.net (unknown [IPv6:2601:280:4600:2da9::1fe])
+	by ms.lwn.net (Postfix) with ESMTPA id 0EE9A40AF3;
+	Thu, 14 Aug 2025 15:40:44 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Akira Yokosawa <akiyks@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH v2 0/7] 
+Date: Thu, 14 Aug 2025 09:40:28 -0600
+Message-ID: <20250814154035.328769-1-corbet@lwn.net>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250703185032.46568-1-john@groves.net> <20250703185032.46568-12-john@groves.net>
- <20250709035911.GE2672029@frogsfrogsfrogs> <ttjh3gqk3fmykwrb7dg6xaqhkpxk7g773fkvuzvbdlefimpseg@l5ermgxixeen>
- <20250712055405.GK2672029@frogsfrogsfrogs> <CAJfpegspQYVbWVztU5_XFwbGaTQKe2NCm2mcui6J3qv1VDxdSQ@mail.gmail.com>
- <z56yzi6y4hbbvcwpqzysbmztdhgsuqavjbnhsjxp3iumzvvywv@ymudodg3mb5x>
-In-Reply-To: <z56yzi6y4hbbvcwpqzysbmztdhgsuqavjbnhsjxp3iumzvvywv@ymudodg3mb5x>
-From: Miklos Szeredi <miklos@szeredi.hu>
-Date: Thu, 14 Aug 2025 17:19:20 +0200
-X-Gm-Features: Ac12FXw8eO26MUJ86ncWZmuTB9wijlUFGNEwkcMvFc2CD_KfkHGAKLg17yDdXIs
-Message-ID: <CAJfpegsQxSv+x5=u1-ikR_Pk7L+h_AqNBW1XxM-b1G2TLPP4LA@mail.gmail.com>
-Subject: Re: [RFC V2 11/18] famfs_fuse: Basic famfs mount opts
-To: John Groves <John@groves.net>
-Cc: "Darrick J. Wong" <djwong@kernel.org>, Dan Williams <dan.j.williams@intel.com>, 
-	Bernd Schubert <bschubert@ddn.com>, John Groves <jgroves@micron.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Vishal Verma <vishal.l.verma@intel.com>, Dave Jiang <dave.jiang@intel.com>, 
-	Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, 
-	Randy Dunlap <rdunlap@infradead.org>, Jeff Layton <jlayton@kernel.org>, 
-	Kent Overstreet <kent.overstreet@linux.dev>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, nvdimm@lists.linux.dev, 
-	linux-cxl@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	Amir Goldstein <amir73il@gmail.com>, Jonathan Cameron <Jonathan.Cameron@huawei.com>, 
-	Stefan Hajnoczi <shajnocz@redhat.com>, Joanne Koong <joannelkoong@gmail.com>, 
-	Josef Bacik <josef@toxicpanda.com>, Aravind Ramesh <arramesh@micron.com>, 
-	Ajay Joshi <ajayjoshi@micron.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, 14 Aug 2025 at 16:39, John Groves <John@groves.net> wrote:
+docs: kdoc: tidy up create_parameter_list() somewhat
 
-> Having a generic approach rather than a '-o' option would be fine with me.
-> Also happy to entertain other ideas...
+A relatively brief series to straighten up the code in
+create_parameter_list(), remove unneeded operations, and add a few
+comments.  No changes to the generated output.
 
-We could just allow arbitrary options to be set by the server.  It
-might break cases where the server just passes unknown options down
-into the kernel, which currently are rejected.  I don't think this is
-common practice, but still it sounds a bit risky.
+Changes since v1:
 
-Alternatively allow INIT_REPLY to set up misc options, which can only
-be done explicitly, so no risk there.
+- Put split regexes onto multiple lines for improved readability
+- Simplify one overly complex regex
+- Improve the patch 5 changelog
 
-Thanks,
-Miklos
+Mauro, I've added your tags from the first round - scream if that's not
+what you wanted!
+
+Jonathan Corbet (7):
+  docs: kdoc: remove dead code
+  docs: kdoc: tidy up space removal in create_parameter_list()
+  docs: kdoc: clean up the create_parameter_list() "first arg" logic
+  docs: kdoc: add a couple more comments in create_parameter_list()
+  docs: kdoc: tighten up the array-of-pointers case
+  docs: kdoc: tighten up the pointer-to-function case
+  docs: kdoc: remove redundant comment stripping
+
+ scripts/lib/kdoc/kdoc_parser.py | 100 +++++++++++++++-----------------
+ 1 file changed, 46 insertions(+), 54 deletions(-)
+
+-- 
+2.50.1
+
 
