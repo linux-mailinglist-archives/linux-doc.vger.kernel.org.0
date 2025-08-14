@@ -1,341 +1,330 @@
-Return-Path: <linux-doc+bounces-56170-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56172-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8247FB26828
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 15:54:33 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6643AB2684A
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 16:00:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A9569566055
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 13:49:28 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 247E91CE2E45
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 13:54:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D61353002D3;
-	Thu, 14 Aug 2025 13:49:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="l+XoEblV"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31D173009F2;
+	Thu, 14 Aug 2025 13:54:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2089.outbound.protection.outlook.com [40.107.100.89])
+Received: from smtpbgau2.qq.com (smtpbgau2.qq.com [54.206.34.216])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13AC01E9B2A;
-	Thu, 14 Aug 2025 13:49:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.100.89
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755179363; cv=fail; b=kxVnnTb/XLRabKhGSXHjwJMomWwU7nKYDapPxh/mzsiRINxPmb+5IGtperglwfSqKTX92mdtfWyyDKB4MhypALsoLEvMov0cNuPsp1Ziq/2VkutBI/VktrxhbjDTaECU2SZ8j8Zz3rOUWli977aPWRLTAvIZTmQnJkKw46MMkkU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755179363; c=relaxed/simple;
-	bh=0fqLoyDJLpjW10Nwqs0M4QPwUMc3fvQ9avvjueT5Q0c=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=lI/uzJG7pGW4Bwqfs9A8heEXkeBKFblJNu69/pNm3sJmybXCi47trd9GQpNx1R2Uoz0WJaEaKexDlUN7A3X8QKT/Noz9+AZY7cQxS6FnSbOmVh5DfquxecYDr9JjjXRqtheJMme0LxNZoVz3D+859wwNd09nKP8hM4RAlST9J7U=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=l+XoEblV; arc=fail smtp.client-ip=40.107.100.89
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PHvQaS4/9nzicodu9HpAKZfee35JO13t9ramBUIvRXBIT6Ru4jgaUDdaakalRlkwZ2KwJdGY5xZ0AUzOE1SmbPnt/XejLzGWnjfYPdilxiRQ0Pz1Qe8TLv3RSQohn3WcROfSQ2Bfkntg4Xn4r+mwfCWW6YsS9Z5rYruaWfU48sa4rU+mH7bxmiyBCxiaGnW0oi3M2CU82rq3s1LXMXrgsD5OrdKEru5ovQJBr1nZ1zQZz9FH0gQaJrtPULSiMCTSRh8zM2EXr7OcKxYCVFYcscelrdbmap38gXGpvB9MzCCWEk2ThT9LpPZNbkpx2HahX1P3fBWNwFDjv6aYPHPH1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LqmoVPhcyiGlfQ2STdBHMfbirQT5BpD8Nh67k+N+aKw=;
- b=ea7V2zfVDTOk2BsMDBBh9nq63jGGRLfa0Jwh5WeSeL5Cp5OYGCxS3WyNFOGjPpEqkQTeXRBzI/MJKnJmlJHXAYfsaqMj3qIitWyBiNyekSBpYbtd4B27whPOA65ipON3zeFCfThpfSJDtbLg9lb2J8sXW4p+1IOedC/EkC8DDXZ7L6/w13QMhgevWmrp0vdYpa8llqUPZ0yBIVzq2o2NcGz+WdBv6hu30KMcHEEZV2HL0nRRUTMjlN4ZkFsj/5zFB2DkcURFqQBtuo846ycMhKl8Zz28ceZEZ+jBTpHymzaQcPOG3CzhcpgMtZ8Ri+Re8AUI0YapWVuMyxnikF7qgw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LqmoVPhcyiGlfQ2STdBHMfbirQT5BpD8Nh67k+N+aKw=;
- b=l+XoEblVG6KTH5a6RNma6dnpL9ENtvQNIEM9aN9ar+vxnquvmdJKq/oKwEBws8byhohEVwaGE03r3Dt4g1NdBQNYzXjBVBBfDDOrah7YqnhGFXB0hsCWo2tYKucqSM6ywblHOf6NMlbJB7iu/IPmD6mjwQGY2Pyunm+IYRA6vnixEougQVx4GJrCt7XGUrBWkh+0CqSyEcfi/TmeyTAtFtzRfYYDf809EWAk6cUJmPi3Qlxp84Aw/sspl0RH2I3lDEAORBcxYErt9mhm69Nlb6931OR1f9eiDxQEvM9ew6tsSEZZp3sVipV+gsT8toKF3t4b66/sseDvydVcSa1Z6w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com (2603:10b6:610:17c::13)
- by DS0PR12MB7509.namprd12.prod.outlook.com (2603:10b6:8:137::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.18; Thu, 14 Aug
- 2025 13:49:19 +0000
-Received: from CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732]) by CH3PR12MB8659.namprd12.prod.outlook.com
- ([fe80::6eb6:7d37:7b4b:1732%4]) with mapi id 15.20.9031.012; Thu, 14 Aug 2025
- 13:49:19 +0000
-Date: Thu, 14 Aug 2025 10:49:17 -0300
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Pasha Tatashin <pasha.tatashin@soleen.com>
-Cc: pratyush@kernel.org, jasonmiu@google.com, graf@amazon.com,
-	changyuanl@google.com, rppt@kernel.org, dmatlack@google.com,
-	rientjes@google.com, corbet@lwn.net, rdunlap@infradead.org,
-	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com,
-	ojeda@kernel.org, aliceryhl@google.com, masahiroy@kernel.org,
-	akpm@linux-foundation.org, tj@kernel.org, yoann.congal@smile.fr,
-	mmaurer@google.com, roman.gushchin@linux.dev, chenridong@huawei.com,
-	axboe@kernel.dk, mark.rutland@arm.com, jannh@google.com,
-	vincent.guittot@linaro.org, hannes@cmpxchg.org,
-	dan.j.williams@intel.com, david@redhat.com,
-	joel.granados@kernel.org, rostedt@goodmis.org,
-	anna.schumaker@oracle.com, song@kernel.org, zhangguopeng@kylinos.cn,
-	linux@weissschuh.net, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-mm@kvack.org,
-	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com,
-	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
-	hpa@zytor.com, rafael@kernel.org, dakr@kernel.org,
-	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com,
-	myungjoo.ham@samsung.com, yesanishhere@gmail.com,
-	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com,
-	aleksander.lobakin@intel.com, ira.weiny@intel.com,
-	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de,
-	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com,
-	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net,
-	brauner@kernel.org, linux-api@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, saeedm@nvidia.com,
-	ajayachandra@nvidia.com, parav@nvidia.com, leonro@nvidia.com,
-	witu@nvidia.com
-Subject: Re: [PATCH v3 16/30] liveupdate: luo_ioctl: add userpsace interface
-Message-ID: <20250814134917.GE802098@nvidia.com>
-References: <20250807014442.3829950-1-pasha.tatashin@soleen.com>
- <20250807014442.3829950-17-pasha.tatashin@soleen.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250807014442.3829950-17-pasha.tatashin@soleen.com>
-X-ClientProxiedBy: YT3PR01CA0026.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:86::14) To CH3PR12MB8659.namprd12.prod.outlook.com
- (2603:10b6:610:17c::13)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EF9B26FD84;
+	Thu, 14 Aug 2025 13:53:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.206.34.216
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1755179648; cv=none; b=cMDcrct/A0p8Wq7v+1NeKU4QmeVMvnA+4hi2YPIlcmOzs6dQsUF4ss0QLM+RcjtaMaRf2o62MB+rhZBvyQG8WPR48HzsgwWRobSR19DdeqIHiwegaIvYE85lvZ5cE5S87hvVbia3IHcoUhnf/R8ngdt/IvZTXit416PLUI/Bo8U=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1755179648; c=relaxed/simple;
+	bh=aCddeyp2wykbHL0o2ItlIM8ElLwpa+Qx3TvCvjfVTe8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=JLWZ+PTkUyxEh9fuq0IQVpuutWyj0afjMPqEIF9EHJ+YWszKzVZEPXGJJ04xJ5BvAJhHY5wPs+gZ3PwLen6TqiFlzhY01qHI6pX2QOLy0A1bd6MNl5vxgxCvi8XOABzQJUvRX/3kxQ7C44SyK6K0o75cxPSMIxMAiVJrtfRX6Fc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.206.34.216
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
+X-QQ-mid: zesmtpsz8t1755179525t0c4b564a
+X-QQ-Originating-IP: K4YTPx/FzH/0WKWZMeWOv8TngE/p6vFSRGE6pNA3ri8=
+Received: from localhost ( [203.174.112.180])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Thu, 14 Aug 2025 21:52:03 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 3016173073873674600
+Date: Thu, 14 Aug 2025 21:52:03 +0800
+From: Yibo Dong <dong100@mucse.com>
+To: MD Danish Anwar <danishanwar@ti.com>
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+	kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
+	corbet@lwn.net, gur.stavi@huawei.com, maddy@linux.ibm.com,
+	mpe@ellerman.id.au, lee@trager.us, gongfan1@huawei.com,
+	lorenzo@kernel.org, geert+renesas@glider.be,
+	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
+	alexanderduyck@fb.com, richardcochran@gmail.com,
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 2/5] net: rnpgbe: Add n500/n210 chip support
+Message-ID: <172956B3368FC20D+20250814135203.GA1094497@nic-Precision-5820-Tower>
+References: <20250814073855.1060601-1-dong100@mucse.com>
+ <20250814073855.1060601-3-dong100@mucse.com>
+ <8a041e8e-b9a8-4bd9-ab1a-de66f943dea6@ti.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR12MB8659:EE_|DS0PR12MB7509:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2528fbdd-1513-4c5e-eaeb-08dddb395d9f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?h4o4EUIL6jNJi94sJUT8sZRCqzk+a027Po6lGbnVi1XUcDgferYFzXcYPHza?=
- =?us-ascii?Q?0ZWF42j0RhBK4EwfzKS6vyLGgXsxjEyJOukhlVQDUEFxkvXIaqwKaDPEMW6t?=
- =?us-ascii?Q?KNUZaOi0TV6FdsX2ycdXv5tVPzg1q9gWonZ+zEwT4pPLe7HH5uOrs3OI2uSf?=
- =?us-ascii?Q?JMHFjoWYjyppA9kSWCPJ2goN57fZiVrfhjFfgoSHVM4yKVoc4AdbrKcu8M39?=
- =?us-ascii?Q?fQCXQAQn+Gdgy6gF6vIaK8Fc1KRG5gJONUzWIunlQJue4C9fU4bpxtJ8je8P?=
- =?us-ascii?Q?5AhSckVNzgJO4QKMt+BSRG73QMctSgoHv8D5xgcLlrLw9YcGet3IY5JfMHn8?=
- =?us-ascii?Q?mCtrCBRdGTgQqSdNZHHQuLe95EpMJLWnYlyfWXXZmszhoQwNre1yRtzcdDSP?=
- =?us-ascii?Q?3l6d3L0YoJO9ajxmN3oYcMRB0V08fEnLLKC+tUIg2xwC8nEW1OqUJvO9OKAp?=
- =?us-ascii?Q?ZahiO1/tBPrzPsgWyxmCejZKsTz4k1Il3Gc1Krs9opwI0Xt9vBUOQOvQW8x4?=
- =?us-ascii?Q?q68cZurNykeAPPw4UMy4TNCf+Z2Kk7xXTNMK5ZgfVcuc+NJfxDjcdFsNAo2d?=
- =?us-ascii?Q?XBReCoedxDHqqdmPEsil/8qAkza+YZUk1ZawcDLjkU3UJuwflAX+Co4z/e6i?=
- =?us-ascii?Q?EJPRQHNjAkHnd9p50raPidEXejCUberBc1rJLSihg6ekhkLri0N+KCFqRovH?=
- =?us-ascii?Q?9v/gj7ZGw2EpufnNN82MZSB+TB1kZWPo1Y5NXWUQj4kAo4aAE4B+oehiP/Si?=
- =?us-ascii?Q?2+fF6CwqU7RYOrQjsyn19rq9PZVbKTNcmjFbCTVreaAESccSleL6gFQ2lLGg?=
- =?us-ascii?Q?tOyARG4pTKMPqQq6MrtWtfOdAlq8UkFpfDYCNAPguLmVlKWiPulM+HkgmX7E?=
- =?us-ascii?Q?Fhu0vRayoodnvrlDrJOQazeCsvWdmeDRdbkFXmBP8OqzPlwjkxbprTYlDWYK?=
- =?us-ascii?Q?8SU4FOYyXR3R069D32MlRELmJnVQ1JuBvpJ2XHoHkUJsLHtxUuRo4nrZEEfw?=
- =?us-ascii?Q?VjGsijNlYvMEAvAZ1sXo028caKyxt8RsGrZ1xlqxxpXfwXcFMQPJiluQ2Uzl?=
- =?us-ascii?Q?vBqjjry8w548VpfRgpmOGp9opQKHhj2rKLXLKwpplWF6HwRRAskWw0N4yS7D?=
- =?us-ascii?Q?yODpAsjbML8t7KFI8P2u66rcLRPKiaFU+b4lgJ/1ArM39EqM6IIv5FlCjmLV?=
- =?us-ascii?Q?3ao/Ad7Uf1WV+hXEObyXcUPbvulUQyYfpyZWB0vlS/RIX1VeP8OZiq/Ab/8V?=
- =?us-ascii?Q?k4mrKZChywPC3CMGcwJfFy+6en5qHwJ6T/Z2B4sKS26guDI5jr3+b7Mwt4gW?=
- =?us-ascii?Q?4r1LGEdNa4t3CPvxRXzZnigT1Ow4lKW2m+wWsRycpPT6eJe0tx3aLnCqoW50?=
- =?us-ascii?Q?1e+m3sNZZZz/O7Vg0yVa3v7LZf/gwLbo2CHLUh8k0afDJ9CZYLmC5YQKOAKh?=
- =?us-ascii?Q?u96OoMSdPaE=3D?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR12MB8659.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?tD4giBDiuTeRstLrh8/v6HO2B/+bCa1Me/AOCJsBCXHW9HcIunHJBLwSPuQc?=
- =?us-ascii?Q?PXrz6n57/STA6YuINrXa9bUgh8i5g6zeEisF0GD/UPnU70ayulfKu9tCcbeB?=
- =?us-ascii?Q?1auWvZkCoEGvWqW0C6ghhKaCjfWeFfQp5gV+d/MbmPXJnmeioqCTDKFtyDgL?=
- =?us-ascii?Q?9k9EK++T5d8xRteQGek1RiAlkvIXR1fzK4XCbEHI8m0ceAyd1FaBsTTzajpH?=
- =?us-ascii?Q?qEcgKnDvYEeYNfft47UPCL1nKuuvLpdY8vXdVX1+HBnHUq8K/QsUtHHLMGV+?=
- =?us-ascii?Q?kaKPkCTQa6XlMBcwR0bsqXDA3h+uYJ5QelsXElpnNM7H4hszk27Rcnm+yT02?=
- =?us-ascii?Q?kXzFD1JzzgbjYgMBm6PJfROPYMa7SH9ix0eT+kGgcTU5HjYvuDx9H+dJMHGB?=
- =?us-ascii?Q?zGWxYhL0dWwArQA7tXqhYmW9Kthp/8h6qWF+ZOxxNXtpgQe8cXPq+ciGn9Np?=
- =?us-ascii?Q?n6EBl3Zds7MdK3bm1UIiEbZMQYs6axHr144wwzH9a5D1U7yqrY0wWj4TOmNW?=
- =?us-ascii?Q?Hf3bZ9o3udp5nD7YuFAtP9GMaSxzq0h/g1M3Epbxk+QQ5s/cvLHVK9URSk8J?=
- =?us-ascii?Q?ZlY4p1JXrgg31IpXS8yOvRq8BGULiG9fUINP+NzT/gmcG0qoPEFScwrdibGe?=
- =?us-ascii?Q?IPv5GgO5GOtranm8UJGVtL8rA4b+eeQvuAKbdu2r9ZNf/VjanLWvSNXDIeMs?=
- =?us-ascii?Q?dHPZWYlbMVP10toYxnxrRxkIfFJOvvEZq7FtT7ziglGkS9mI6D6bvfTH/cGw?=
- =?us-ascii?Q?UNLMYliv9SXv7xjxORXNbQDbrSP5AFyHd1PTOnzd/R+atQaz7zCaghGHD2Kv?=
- =?us-ascii?Q?TsofBQvlqBk4V5mu8mJiPW+PgRiiLcpR4sNniuqIRlaT0OcXKHBvNs4POpjL?=
- =?us-ascii?Q?Vg/92R/70phZjpPqIPXRgQUEJLuqnoVhy6js8LIVwo703lA3nIONuWMTHYny?=
- =?us-ascii?Q?BQxkHvzWMDzm8CDyoYMfb7fW0pxBrwpjaUZbZteMIvi5QQ7rpVm4fmYDdd6X?=
- =?us-ascii?Q?5qHFuDGVmgyDtb9AQxcWzhHErtBE9P35/oXzSTfF3MEh41iBHm+sBM6CZOn0?=
- =?us-ascii?Q?QPk/xaeUht/VzdZxPd/GmdamYBq/5pBE3UD7sio31v4aU1xsvCh01Z3ReHqY?=
- =?us-ascii?Q?YnpUtrrlJp2NB4/raRdIGx3/UEo0U2wYG6aXA9xrpi3FwUINA8bzzN4RWYYv?=
- =?us-ascii?Q?aFJeVs+pzvoW2CatEx/ZzcDFCC/ej34m/fq0wK1dNmm+lTMuZ8czvkfAcnWY?=
- =?us-ascii?Q?HSpOzLall0tv68a6tppAIXcpc8/eTyOqMpoILpHgZ/XsEVcAyWN+MVAaLoNL?=
- =?us-ascii?Q?SFCYyhuDFybNmjyBvqmI/iOB5opHLyICJtvjoYnztV0EEMAH/Y1zg9U2PxxZ?=
- =?us-ascii?Q?H+Aw+W+h9CsG+CW/LBRyTRkSLs0f1Ny6a9Ryqz4maJkYYYPb4aMTvVv4w+cu?=
- =?us-ascii?Q?SJnB+zlnTbmTkgb/2h4MCxjmFnXIWZnsQI/C79Vsdsg86mne8FvN2JMtmo4e?=
- =?us-ascii?Q?gL3heLfiLHB0yiV8zdwyhdD6w82H8IL3apseES56IDacelgWs9l2pmNISgw/?=
- =?us-ascii?Q?yV6OU1rwPZKfdx+4rck=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2528fbdd-1513-4c5e-eaeb-08dddb395d9f
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR12MB8659.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2025 13:49:18.9325
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MdxNoDMiV0WXqVDji+VlVeeSPo6nYmqdw1CGOnPScmXm99plWFs7S0QDxXYC09FJ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7509
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8a041e8e-b9a8-4bd9-ab1a-de66f943dea6@ti.com>
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: MAMW4dxoxFyt4QS9Wrwt6BZVV0CYwV1rHq/klM1IMsQrgFTlksz2H0tK
+	jYRjW5vZkvyxdHKR+DLRUVcA139KbWckQ/qnq4pIwCSEqegmfQYfonovqmXlRGVzeuaK7ab
+	Vuja6xKSnd0WsZ9FBlEHU9L5xv/4a1IOuccQQHCf9HyzHopzwb5oRS3MT6S54r2rcQBtzcJ
+	FblnUzQyJzuxfMDGGeCKrvgszeCSlSZOW485CbfD4uMysTiriUAMMOdpw98qdm/W6qiFqtt
+	HsQfEf30HTThJYSgqZw3USleRwixCidSCUIyw1vwIyDQsEaDLkpZGcF+GPr5P0ycDC5JkNM
+	Lw2/BkO5Xw5yhjB30ZVsAMKPEEGyHWvU6taIoTE3ll5oUGosF+N8sV9SEiwD5fjQy3vaMpL
+	Ae/AwI4CoPtb4wJKi6cBZq4oRySjpmM/UJ/yBCcItptm0F3fKH4qwiti/O6jFHotae0W3Mf
+	WVOJSV7ODa+/3Ng6UUEz37UbbrgkfM/jTQniDeI4aeYW1CSKAtc3XtiXH4jc8kilTOXpLAF
+	w8yoB5JtV6eLjdOIwAlFMSj6/08I7GUmsS+ryTFo+O6CNSW3+IE6mf9q1Bduwzvak7ZV/15
+	01llwwdm0meb+P0pXiGKChfhe4DnYHyMbn5CuBvA15WEszsbBySy2kptH3/FnxbPr2pDAKg
+	6rVBitgakXriUn+5/b+r2X85MPmakFLZ/bS+HsVZU0dJdc98OzBntPE3g8QLF8r016pE3Yx
+	MM6z0v6cghn2XUoVbl3zQTu6m2VrNXt3tXURM4BKXvNMzHShM4Cbi2VyHsYV+m7e6Dkpuu5
+	QpmxkLkyONz41lRI2b5C4HyV+Eql4LfSOaHAO+M6YLjsHl4lm26cnhLmF530OqnQi5JgJcX
+	v51puhGE3Mw6q2uAPGM/zMEKIP7n8oA8j9T4E/0Xp2ZYnPFoYJ7OqK5C2uVjp7Ayu3IEkmY
+	BTaNqg3FblR9h++rCWAfDpzY+8wi96avSZTUR93J1FzirtoR5L6+qr60wav3YTXMAX6ZlkG
+	7sNky+CsXj0EEFG7Yp
+X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
+X-QQ-RECHKSPAM: 0
 
-On Thu, Aug 07, 2025 at 01:44:22AM +0000, Pasha Tatashin wrote:
-> +/**
-> + * DOC: General ioctl format
-> + *
-> + * The ioctl interface follows a general format to allow for extensibility. Each
-> + * ioctl is passed in a structure pointer as the argument providing the size of
-> + * the structure in the first u32. The kernel checks that any structure space
-> + * beyond what it understands is 0. This allows userspace to use the backward
-> + * compatible portion while consistently using the newer, larger, structures.
-> + *
-> + * ioctls use a standard meaning for common errnos:
-> + *
-> + *  - ENOTTY: The IOCTL number itself is not supported at all
-> + *  - E2BIG: The IOCTL number is supported, but the provided structure has
-> + *    non-zero in a part the kernel does not understand.
-> + *  - EOPNOTSUPP: The IOCTL number is supported, and the structure is
-> + *    understood, however a known field has a value the kernel does not
-> + *    understand or support.
-> + *  - EINVAL: Everything about the IOCTL was understood, but a field is not
-> + *    correct.
-> + *  - ENOENT: An ID or IOVA provided does not exist.
-                    ^^^^^^^^^
+On Thu, Aug 14, 2025 at 05:37:21PM +0530, MD Danish Anwar wrote:
+> On 14/08/25 1:08 pm, Dong Yibo wrote:
+> > Initialize n500/n210 chip bar resource map and
+> > dma, eth, mbx ... info for future use.
+> > 
+> > Signed-off-by: Dong Yibo <dong100@mucse.com>
+> > ---
+> >  drivers/net/ethernet/mucse/rnpgbe/Makefile    |   3 +-
+> >  drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    |  55 +++++++++
+> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   |  85 +++++++++++++
+> >  drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |  12 ++
+> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 112 ++++++++++++++++++
+> >  5 files changed, 266 insertions(+), 1 deletion(-)
+> >  create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+> >  create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h
+> > 
+> > diff --git a/drivers/net/ethernet/mucse/rnpgbe/Makefile b/drivers/net/ethernet/mucse/rnpgbe/Makefile
+> > index 9df536f0d04c..42c359f459d9 100644
+> > --- a/drivers/net/ethernet/mucse/rnpgbe/Makefile
+> > +++ b/drivers/net/ethernet/mucse/rnpgbe/Makefile
+> > @@ -5,4 +5,5 @@
+> >  #
+> >  
+> >  obj-$(CONFIG_MGBE) += rnpgbe.o
+> > -rnpgbe-objs := rnpgbe_main.o
+> > +rnpgbe-objs := rnpgbe_main.o\
+> > +	       rnpgbe_chip.o
+> > diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> > index 64b2c093bc6e..08faac3a67af 100644
+> > --- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> > +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> > @@ -4,15 +4,70 @@
+> >  #ifndef _RNPGBE_H
+> >  #define _RNPGBE_H
+> >  
+> > +#include <linux/types.h>
+> > +
+> > +extern const struct rnpgbe_info rnpgbe_n500_info;
+> > +extern const struct rnpgbe_info rnpgbe_n210_info;
+> > +extern const struct rnpgbe_info rnpgbe_n210L_info;
+> > +
+> >  enum rnpgbe_boards {
+> >  	board_n500,
+> >  	board_n210,
+> >  	board_n210L,
+> >  };
+> >  
+> > +enum rnpgbe_hw_type {
+> > +	rnpgbe_hw_n500 = 0,
+> > +	rnpgbe_hw_n210,
+> > +	rnpgbe_hw_n210L,
+> > +	rnpgbe_hw_unknown
+> > +};
+> > +
+> > +struct mucse_dma_info {
+> > +	void __iomem *dma_base_addr;
+> > +	void __iomem *dma_ring_addr;
+> > +	u32 dma_version;
+> > +};
+> > +
+> > +struct mucse_eth_info {
+> > +	void __iomem *eth_base_addr;
+> > +};
+> > +
+> > +struct mucse_mac_info {
+> > +	void __iomem *mac_addr;
+> > +};
+> > +
+> > +struct mucse_mbx_info {
+> > +	/* fw <--> pf mbx */
+> > +	u32 fw_pf_shm_base;
+> > +	u32 pf2fw_mbox_ctrl;
+> > +	u32 fw_pf_mbox_mask;
+> > +	u32 fw2pf_mbox_vec;
+> > +};
+> > +
+> > +struct mucse_hw {
+> > +	void __iomem *hw_addr;
+> > +	void __iomem *ring_msix_base;
+> > +	struct pci_dev *pdev;
+> > +	enum rnpgbe_hw_type hw_type;
+> > +	struct mucse_dma_info dma;
+> > +	struct mucse_eth_info eth;
+> > +	struct mucse_mac_info mac;
+> > +	struct mucse_mbx_info mbx;
+> > +	u32 driver_version;
+> > +	u16 usecstocount;
+> > +};
+> > +
+> >  struct mucse {
+> >  	struct net_device *netdev;
+> >  	struct pci_dev *pdev;
+> > +	struct mucse_hw hw;
+> > +};
+> > +
+> > +struct rnpgbe_info {
+> > +	int total_queue_pair_cnts;
+> > +	enum rnpgbe_hw_type hw_type;
+> > +	void (*init)(struct mucse_hw *hw);
+> >  };
+> >  
+> >  /* Device IDs */
+> > diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+> > new file mode 100644
+> > index 000000000000..79aefd7e335d
+> > --- /dev/null
+> > +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+> > @@ -0,0 +1,85 @@
+> > +// SPDX-License-Identifier: GPL-2.0
+> > +/* Copyright(c) 2020 - 2025 Mucse Corporation. */
+> > +
+> > +#include "rnpgbe.h"
+> > +#include "rnpgbe_hw.h"
+> > +
+> > +/**
+> > + * rnpgbe_init_common - Setup common attribute
+> > + * @hw: hw information structure
+> > + **/
+> > +static void rnpgbe_init_common(struct mucse_hw *hw)
+> > +{
+> > +	struct mucse_dma_info *dma = &hw->dma;
+> > +	struct mucse_eth_info *eth = &hw->eth;
+> > +	struct mucse_mac_info *mac = &hw->mac;
+> > +
+> > +	dma->dma_base_addr = hw->hw_addr;
+> > +	dma->dma_ring_addr = hw->hw_addr + RNPGBE_RING_BASE;
+> > +
+> > +	eth->eth_base_addr = hw->hw_addr + RNPGBE_ETH_BASE;
+> > +
+> > +	mac->mac_addr = hw->hw_addr + RNPGBE_MAC_BASE;
+> > +}
+> > +
+> > +/**
+> > + * rnpgbe_init_n500 - Setup n500 hw info
+> > + * @hw: hw information structure
+> > + *
+> > + * rnpgbe_init_n500 initializes all private
+> > + * structure, such as dma, eth, mac and mbx base on
+> > + * hw->hw_addr for n500
+> > + **/
+> > +static void rnpgbe_init_n500(struct mucse_hw *hw)
+> > +{
+> > +	struct mucse_mbx_info *mbx = &hw->mbx;
+> > +
+> > +	rnpgbe_init_common(hw);
+> > +
+> > +	mbx->fw2pf_mbox_vec = 0x28b00;
+> > +	mbx->fw_pf_shm_base = 0x2d000;
+> > +	mbx->pf2fw_mbox_ctrl = 0x2e000;
+> > +	mbx->fw_pf_mbox_mask = 0x2e200;
+> > +	hw->ring_msix_base = hw->hw_addr + 0x28700;
+> > +	hw->usecstocount = 125;
+> > +}
+> 
+> These hardcoded values should be defined in rnpgbe_hw.h as macros rather
+> than using magic numbers.
+> 
 
-Maybe this should be 'token' ?
+Got it, I will update this.
 
-> + *  - ENOMEM: Out of memory.
-> + *  - EOVERFLOW: Mathematics overflowed.
-> + *
-> + * As well as additional errnos, within specific ioctls.
-> + */
+> > +
+> > +/**
+> > + * rnpgbe_init_n210 - Setup n210 hw info
+> 
+> > +static int rnpgbe_add_adapter(struct pci_dev *pdev,
+> > +			      const struct rnpgbe_info *info)
+> > +{
+> > +	struct net_device *netdev;
+> > +	void __iomem *hw_addr;
+> > +	struct mucse *mucse;
+> > +	struct mucse_hw *hw;
+> > +	u32 dma_version = 0;
+> > +	u32 queues;
+> > +	int err;
+> > +
+> > +	queues = info->total_queue_pair_cnts;
+> > +	netdev = alloc_etherdev_mq(sizeof(struct mucse), queues);
+> > +	if (!netdev)
+> > +		return -ENOMEM;
+> > +
+> > +	SET_NETDEV_DEV(netdev, &pdev->dev);
+> > +	mucse = netdev_priv(netdev);
+> > +	mucse->netdev = netdev;
+> > +	mucse->pdev = pdev;
+> > +	pci_set_drvdata(pdev, mucse);
+> > +
+> > +	hw = &mucse->hw;
+> > +	hw->hw_type = info->hw_type;
+> > +	hw->pdev = pdev;
+> > +
+> > +	switch (hw->hw_type) {
+> > +	case rnpgbe_hw_n500:
+> > +		hw_addr = devm_ioremap(&pdev->dev,
+> > +				       pci_resource_start(pdev, 2),
+> > +				       pci_resource_len(pdev, 2));
+> > +		if (!hw_addr) {
+> > +			err = -EIO;
+> > +			goto err_free_net;
+> > +		}
+> > +
+> > +		dma_version = readl(hw_addr);
+> > +		break;
+> > +	case rnpgbe_hw_n210:
+> > +	case rnpgbe_hw_n210L:
+> > +		hw_addr = devm_ioremap(&pdev->dev,
+> > +				       pci_resource_start(pdev, 2),
+> > +				       pci_resource_len(pdev, 2));
+> > +		if (!hw_addr) {
+> > +			err = -EIO;
+> > +			goto err_free_net;
+> > +		}
+> > +
+> > +		dma_version = readl(hw_addr);
+> > +		break;
+> 
+> The code in both case branches is identical. Remove the switch statement
+> and use the common code instead.
+> 
 
-Ah if you copy the comment make sure to faithfully follow it in the
-implementation :)
+Got it, I will fix this.
 
-> +struct liveupdate_ioctl_fd_unpreserve {
-> +       __u32           size;
-> +       __aligned_u64   token;
-> +};
-
-It is best to explicitly pad, so add a __u32 reserved between size and
-token
-
-Then you need to also check that the reserved is 0 when parsing it,
-return -EOPNOTSUPP otherwise.
-
-> +static atomic_t luo_device_in_use = ATOMIC_INIT(0);
-
-I suggest you bundle this together into one struct with the misc_dev
-and the other globals and largely pretend it is not global, eg refer
-to it through container_of, etc
-
-Following practices like this make it harder to abuse the globals.
-
-> +struct luo_ucmd {
-> +	void __user *ubuffer;
-> +	u32 user_size;
-> +	void *cmd;
-> +};
-> +
-> +static int luo_ioctl_fd_preserve(struct luo_ucmd *ucmd)
-> +{
-> +	struct liveupdate_ioctl_fd_preserve *argp = ucmd->cmd;
-> +	int ret;
-> +
-> +	ret = luo_register_file(argp->token, argp->fd);
-> +	if (!ret)
-> +		return ret;
-> +
-> +	if (copy_to_user(ucmd->ubuffer, argp, ucmd->user_size))
-> +		return -EFAULT;
-
-This will overflow memory, ucmd->user_size may be > sizeof(*argp)
-
-The respond function is an important part of this scheme:
-
-static inline int iommufd_ucmd_respond(struct iommufd_ucmd *ucmd,
-                                       size_t cmd_len)
-{
-        if (copy_to_user(ucmd->ubuffer, ucmd->cmd,
-                         min_t(size_t, ucmd->user_size, cmd_len)))
-                return -EFAULT;
-
-The min (sizeof(*argp) in this case) can't be skipped!
-
-> +static int luo_ioctl_fd_restore(struct luo_ucmd *ucmd)
-> +{
-> +	struct liveupdate_ioctl_fd_restore *argp = ucmd->cmd;
-> +	struct file *file;
-> +	int ret;
-> +
-> +	argp->fd = get_unused_fd_flags(O_CLOEXEC);
-> +	if (argp->fd < 0) {
-> +		pr_err("Failed to allocate new fd: %d\n", argp->fd);
-
-No need
-
-> +		return argp->fd;
-> +	}
-> +
-> +	ret = luo_retrieve_file(argp->token, &file);
-> +	if (ret < 0) {
-> +		put_unused_fd(argp->fd);
-> +
-> +		return ret;
-> +	}
-> +
-> +	fd_install(argp->fd, file);
-> +
-> +	if (copy_to_user(ucmd->ubuffer, argp, ucmd->user_size))
-> +		return -EFAULT;
-
-Wrong order, fd_install must be last right before return 0. Failing
-system calls should not leave behind installed FDs.
-
-> +static int luo_ioctl_set_event(struct luo_ucmd *ucmd)
-> +{
-> +	struct liveupdate_ioctl_set_event *argp = ucmd->cmd;
-> +	int ret;
-> +
-> +	switch (argp->event) {
-> +	case LIVEUPDATE_PREPARE:
-> +		ret = luo_prepare();
-> +		break;
-> +	case LIVEUPDATE_FINISH:
-> +		ret = luo_finish();
-> +		break;
-> +	case LIVEUPDATE_CANCEL:
-> +		ret = luo_cancel();
-> +		break;
-> +	default:
-> +		ret = -EINVAL;
-
-EOPNOTSUPP
-
-> +union ucmd_buffer {
-> +	struct liveupdate_ioctl_fd_preserve	preserve;
-> +	struct liveupdate_ioctl_fd_unpreserve	unpreserve;
-> +	struct liveupdate_ioctl_fd_restore	restore;
-> +	struct liveupdate_ioctl_get_state	state;
-> +	struct liveupdate_ioctl_set_event	event;
-> +};
-
-I discourage the column alignment. Also sort by name.
-
-> +static const struct luo_ioctl_op luo_ioctl_ops[] = {
-> +	IOCTL_OP(LIVEUPDATE_IOCTL_FD_PRESERVE, luo_ioctl_fd_preserve,
-> +		 struct liveupdate_ioctl_fd_preserve, token),
-> +	IOCTL_OP(LIVEUPDATE_IOCTL_FD_UNPRESERVE, luo_ioctl_fd_unpreserve,
-> +		 struct liveupdate_ioctl_fd_unpreserve, token),
-> +	IOCTL_OP(LIVEUPDATE_IOCTL_FD_RESTORE, luo_ioctl_fd_restore,
-> +		 struct liveupdate_ioctl_fd_restore, token),
-> +	IOCTL_OP(LIVEUPDATE_IOCTL_GET_STATE, luo_ioctl_get_state,
-> +		 struct liveupdate_ioctl_get_state, state),
-> +	IOCTL_OP(LIVEUPDATE_IOCTL_SET_EVENT, luo_ioctl_set_event,
-> +		 struct liveupdate_ioctl_set_event, event),
-
-Sort by name
-
-Jason
+> > +	default:
+> > +		err = -EIO;
+> > +		goto err_free_net;
+> > +	}
+> > +	hw->hw_addr = hw_addr;
+> > +	hw->dma.dma_version = dma_version;
+> > +	hw->driver_version = 0x0002040f;
+> > +	info->init(hw);
+> > +	return 0;
+> > +
+> > +err_free_net:
+> > +	free_netdev(netdev);
+> > +	return err;
+> > +}
+> > +
+> 
+> 
+> -- 
+> Thanks and Regards,
+> Danish
+> 
+> 
 
