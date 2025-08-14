@@ -1,108 +1,140 @@
-Return-Path: <linux-doc+bounces-56171-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56173-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B1A8B2683E
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 15:58:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85F60B26881
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 16:06:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 372AF189DF6D
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 13:52:52 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8D8A71CE2247
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 13:57:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 862382FFDDE;
-	Thu, 14 Aug 2025 13:52:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="kLEZfiw6"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 98C683019A5;
+	Thu, 14 Aug 2025 13:56:17 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from smtpbgbr2.qq.com (smtpbgbr2.qq.com [54.207.22.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D936D1E9B2A;
-	Thu, 14 Aug 2025 13:52:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2A843002DB;
+	Thu, 14 Aug 2025 13:56:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.207.22.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755179546; cv=none; b=r3efDmE0v17EopTdTurHbzw5ZIJO8t1EutntT6A1UPr2jAPrN57osBByPptvJ2N9+91NI7CFgPnn0E0v61iDNJxSI6ufjg72tik39JrvB3pE28lL0qVDxom4SpbrLETetmRLmZfZEaw7n05jgktJGcUu19inFSmVtdLBFZKeE3E=
+	t=1755179777; cv=none; b=KvblzUYFX/qZPUAeMpWz4I6wI/nbltdVo136OFagnqypUM85wb4mbq7ErHnBfnsL8kfNW06GSRIQDmbEQJBwfmgz9w97ifGMrJRanndEkeDv2OKZ8GMJ4g379yBzKDWgk/drfuBDFRUwKSPJNpKc741r1UBoOxOfe5Xv/Fc1RjA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755179546; c=relaxed/simple;
-	bh=H/ucUNltvWA/WNQ7vYUrWuJ/a+PdsIb2eVUVXAtMNqA=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=OH2RJJMB8JUvSZlEMxPTASVGNrO01FEpJTznUTAyrhHvwjhNtBTqu71HEZbJBvsLFXJ6sHSWbEFrw4EUy+2hxOYeLGq8VlZpqJQOHaSPhLK95YBUckG96MDLW2E0LicR5ZlsadFpDkvBwpkkCroHnYnDmbLw0Ptbo7Was/wo7Rk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=kLEZfiw6; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net D0D3B40AB4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1755179544; bh=dIIZeueswEIgOf/YgafKN0m66ZuMdvcw1i04wbyCAgk=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=kLEZfiw668KanKXhgcHU9d/ETqcWCk9mKykyonNdemzyj7m+SPrCSFtIPyPun96Ok
-	 ybRWmBWFyJdcTUsRMXFGM2taALmdaJRoqf9MyXcMCGoK4epK4uRkG6bEKXZcxzVAWK
-	 G4Z5NgV8nJg+Qdep+qeqv8Ql81J75BN1JfesCo7tAEVJUizmoG5I5Md7xXEoLmx34w
-	 QUo6Uy4dibhp+Ai5pW48Cvtyhnox3kteAfSKCfpqYVTsVNEtT5hHHShjEf/8HgmfvR
-	 p+WAKcO2YKbgpUbmdvxRff7Y/9t4wXnB3OdJacXBLxRN+y/EtbHt99L33sjQdVKK1+
-	 44dHNXfenty8g==
-Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id D0D3B40AB4;
-	Thu, 14 Aug 2025 13:52:23 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Akira Yokosawa
- <akiyks@gmail.com>, Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH 07/13] docs: move sphinx-pre-install to tools/doc
-In-Reply-To: <20250814080539.2218eb4e@foz.lan>
-References: <20250813213218.198582-1-corbet@lwn.net>
- <20250813213218.198582-8-corbet@lwn.net> <20250814013600.5aec0521@foz.lan>
- <871ppehcod.fsf@trenco.lwn.net> <20250814080539.2218eb4e@foz.lan>
-Date: Thu, 14 Aug 2025 07:52:22 -0600
-Message-ID: <87wm76f1t5.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1755179777; c=relaxed/simple;
+	bh=FY5sbNBK7qZlnMcmmL7hNtLU1I+7sRKJWqEJAf4IRlo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GglJZeI2UEK3aLJ5770UdZAqGBg8GAzVrShhIpiRAoeThNUosG314XPvurwWasa86s7VUP/ZxbKPfR1Xqxqgrak5czfZsWuEEu8pNn6I8sCgjN/Ge/BL8kWe7qbJBm99twNi9GufInFzXjVUMuom9o1c1vLwkdWDip7McysVnM8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.207.22.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
+X-QQ-mid: zesmtpsz9t1755179680t7764a06f
+X-QQ-Originating-IP: kAirI4c1dFDqOa0MCUTbPS30JYAfzpXeBXjviMMwVKo=
+Received: from localhost ( [203.174.112.180])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Thu, 14 Aug 2025 21:54:38 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 2664948985724009700
+Date: Thu, 14 Aug 2025 21:54:37 +0800
+From: Yibo Dong <dong100@mucse.com>
+To: MD Danish Anwar <danishanwar@ti.com>
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+	kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
+	corbet@lwn.net, gur.stavi@huawei.com, maddy@linux.ibm.com,
+	mpe@ellerman.id.au, lee@trager.us, gongfan1@huawei.com,
+	lorenzo@kernel.org, geert+renesas@glider.be,
+	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
+	alexanderduyck@fb.com, richardcochran@gmail.com,
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 4/5] net: rnpgbe: Add basic mbx_fw support
+Message-ID: <3866866DBCE66734+20250814135437.GB1094497@nic-Precision-5820-Tower>
+References: <20250814073855.1060601-1-dong100@mucse.com>
+ <20250814073855.1060601-5-dong100@mucse.com>
+ <c69d6a87-3d9f-49dc-836e-f33508c62c1a@ti.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c69d6a87-3d9f-49dc-836e-f33508c62c1a@ti.com>
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: M18A+sp1qNHzq4pS8N4zhVqEyqkwpR7zx0f9witggg/dsBSbKWlYGfF+
+	KSC3lTws0MRn5ALXJj3gWlUBde/tPG8qQZIuw9kYIoRZfRZFFtLRp+junxyMZti2Y0gpduW
+	YJvddH7f3qf9BSTA5DlQbk7u4lQOr81HEloppjsHkh4IY0H4N0j1iGLdtiSFmC7Tiep5KtS
+	x5HCbA5ul6dHGomY8MnWW0mF4TEIetJeX+JpNx70Y69THDIlK+LDPGsT0snlthmprBriTCX
+	gLjd5NXoy++aH4VXnniVSMjqSTcpE+GTDgXx0Y9ClnxggdliMF1Zhm+TaIcpY3n4mZuGgke
+	r91IrVzsmG1cXNYDJOMnxFI+mgoaYnzgBVsSAkE2WC2yOOf23Vf564Ju7WfUROmfH3lmIbz
+	oxhyuUqnz0GkXDFo3xuiIYkJKLbPQnu/D8kuNE8OM5R+bIXCZ8TjPer9yIOS6SKuFgxyAHN
+	JWDBSBQg/O4lTgpE7zDkYTG3vbd8ihzhTF4zhVTWiwrc2ANPUClZogOFwW85B2YORNc/nUX
+	Tw3t5IqeEZDNTAxEqPPZLp6isxWQck0MbYfrXVg9Ng1Rlp2nr8nkkOO+L8voZ/E8B1HDF3j
+	BmD8X7NhUAyPd14ehGsElAF88EpUCfIfTt0y1KAtwsfTlx0vXFuKxkzz90tRRqyby/VPZ2E
+	Madd51B/uDQTEwJ0O+IOE8eKQQfg6BpPytaA+hIbG1fonPhJPRqn3ZfmwH46QPy/letg+QU
+	B9Cmw0mRbrZrgSIqOirE2lanKLFbdwrR0DcelfVeZJvc/jFnTMquoosSt4s0h5RPUKhNlND
+	gMbW1ojh9bKBSXBy4wHnI+HJGcVoe3bFhvVJe7AzRckIGs9m8y9pXE6w2WE5c/qS0bh7UcD
+	2ajtooU3vBi8EoJZmYDSQ2sSvbaNl6YvVqOACdx4qk4boRWpiSdNMMI4uH/szhcvORE71/G
+	q2goKo/jxgMfHnfjGbEYM2rbw2Mku9KbuAwxBYgVx8bFIv0rFKBY//hgPQNwAeHnulXuGFd
+	rHcFCNrbtfvTuuPIpuut2ALHBsU8M=
+X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
+X-QQ-RECHKSPAM: 0
 
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+On Thu, Aug 14, 2025 at 05:40:14PM +0530, MD Danish Anwar wrote:
+> On 14/08/25 1:08 pm, Dong Yibo wrote:
+> > Initialize basic mbx_fw ops, such as get_capability, reset phy
+> > and so on.
+> > 
+> > Signed-off-by: Dong Yibo <dong100@mucse.com>
+> > ---
+> >  drivers/net/ethernet/mucse/rnpgbe/Makefile    |   3 +-
+> >  drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    |   4 +
+> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c | 264 ++++++++++++++++++
+> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h | 201 +++++++++++++
+> >  4 files changed, 471 insertions(+), 1 deletion(-)
+> >  create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c
+> >  create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h
+> > 
+> 
+> > +
+> > +/**
+> > + * mbx_cookie_zalloc - Alloc a cookie structure
+> > + * @priv_len: private length for this cookie
+> > + *
+> > + * @return: cookie structure on success
+> > + **/
+> > +static struct mbx_req_cookie *mbx_cookie_zalloc(int priv_len)
+> > +{
+> > +	struct mbx_req_cookie *cookie;
+> > +
+> > +	cookie = kzalloc(struct_size(cookie, priv, priv_len), GFP_KERNEL);
+> > +	if (cookie) {
+> > +		cookie->timeout_jiffes = 30 * HZ;
+> 
+> Typo: should be "timeout_jiffies" instead of "timeout_jiffes"
+> 
 
-> This series is big (51 patches) because it needs to fix thousands of
-> broken cross references on media. I may end splitting it on two series
-> to make easier for review, one for the script and another for media doc
-> fixes.
+Got it, I will fix it.
 
-That might help, yes.
+> > +		cookie->magic = COOKIE_MAGIC;
+> > +		cookie->priv_len = priv_len;
+> > +	}
+> > +	return cookie;
+> > +}
+> > +
+> > +/**
+> 
+> 
+> -- 
+> Thanks and Regards,
+> Danish
+> 
+> 
 
-> Such series affect this RFC as it is creating a tools/docs and placing 
-> there the parse-headers.py code as:
->
-> 	 tools/docs/lib/parse_data_structs.py                                  |  230 +++++++++++++++--------------------
-> 	 tools/docs/parse-headers.py                                           |    5 
->
-> Now, if you prefer tools/doc instead and/or place the libs elsewhere,
-> we have a couple of options:
->
-> 1. rebase my series to do the changes. I suspect that there won't
->    be much conflicts, but this may delay a little bit sending you
->    what I have;
->
-> 2. add a patch at the end moving stuff elsewhere;
->
-> 3. on your series, move them elsewhere.
->
-> What do you prefer?
+Thanks for you feedback.
 
-Between "tools/doc" and "tools/docs" I don't really have overly strong
-feelings; if you work has the latter we can just stick with that.  If
-you propose "tools/Documentation", though, expect resistance :)
-
-As I said, my series was an RFC to see what it would look like; it did't
-take all that long the first time around, and will be even quicker to
-redo on top of a new base, whatever that turns out to be.
-
-Thanks,
-
-jon
 
