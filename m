@@ -1,81 +1,52 @@
-Return-Path: <linux-doc+bounces-56127-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56129-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD88BB26375
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 12:56:34 +0200 (CEST)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 17B51B26368
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 12:53:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1DC003AF4F3
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 10:52:18 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id DA5354E3A51
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 10:53:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9EFD130100F;
-	Thu, 14 Aug 2025 10:51:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 42D382FD7DA;
+	Thu, 14 Aug 2025 10:52:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="zBdbMAJs"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aJ1g/ViX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90B492FD1B1
-	for <linux-doc@vger.kernel.org>; Thu, 14 Aug 2025 10:51:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 082A42FC89B;
+	Thu, 14 Aug 2025 10:52:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755168689; cv=none; b=HM83KXrseij6GCEGha8aUaCsw7im/S2/vNIWuQ9XCTLI4segZ68RWpec87f2vrymR7B2fdVkuhJnD7ZKsgVI7/8Zj3KOvIzPu8ShhXDxJfsCLBnfXZpIhZOdQNDsrR/rL8XUOIc+wyWjch4jL3v/QTWxcf3Pq3kUGTexp02TcGc=
+	t=1755168734; cv=none; b=jFiFkz6N1y0MWX+m+GZf1Kp7Mg7JgWMP7MCDpBVhih1ZwS1RhrYDuwkfmtk2dIQKs1XsfeS9qATtAnO6wG3SWT57MRGsI333mzlRATIIfIyOkBOjcwAtAW8JOcWG6mOSKVAcxoYu5Ln7vEnZYHWB0CZNhAtbZs5ZODd3AfcwGaw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755168689; c=relaxed/simple;
-	bh=o8uIpvdm8rS/o+S1mykUYGGLHkWfPhCsX3cg0yw1X58=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=rLaNrtRdDfM0J5O5upRNBT66kcJGoqOtd+9WbuZV8W13TvOATk2MNcYwL5cnZkDJdvL+9G7AmeQMgElIHKhvZjs6QxfB16UW5SPaD5oJ5ex46LvPkV7uFffGvyvyP6HHJtdRN3kmOTSybKfFeZotXaB2DuMsN3F0dxBpEJ4hg10=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=zBdbMAJs; arc=none smtp.client-ip=209.85.128.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-45a1b0bde14so3808255e9.2
-        for <linux-doc@vger.kernel.org>; Thu, 14 Aug 2025 03:51:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1755168686; x=1755773486; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=S28JNZPWK+3sAmARH83rSsyGla0uTsZRncPjJTp9toA=;
-        b=zBdbMAJs9CCm85BjdAfc74UUMg1aS1BRv72lP5XEfJ2MdK4TkcC6mninks4lzA4ZnF
-         ScPR4mxDiXyAJuGHSfi57AZjJl4HHdBeENXsNnwYNIZQumInYrjWtxDZIq5SmkWLpvFw
-         TVnZV+IC3ZbrYnj6tTvTjB5wq+5WgM93J2OctEMrQX2nWiKRqZzlJGpmjCwS+82mKNLA
-         i177iYLDLG3Y+/WRIkKd6B/Ub+sa482ghzzGM80S5bCFyvXx1YOvNoLunk08eK7hEiK3
-         JsoUcak5mPGDMx/cuGqbUmokmuMQUAfFX4dyW5VZI3rMvE8evkcsbAwjZFQTGiV6pfkK
-         9GeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755168686; x=1755773486;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=S28JNZPWK+3sAmARH83rSsyGla0uTsZRncPjJTp9toA=;
-        b=w8EBdGnHQV5MpdCQSMr2QfUrvc8hhOFHjMwgudoRNKpNHj16TfjXIqf6qlDZCGyKU4
-         vgmAPwWLDh25tyo+gzBBAgqPrCMQSdyA+Na3CCq6UvMg+apDtFVzagsvzN65vA8P1Cdk
-         OOwhitflO61HJitiP5dY+16p5byE5u5HUTHlHWjvCWCxwNyk/yXuY7WZHYAiG5+Aczna
-         V7Wc1kaBjNafrqDu1V2hs7ZyXBsO99vL55VZ/Xs1n2QFUxan11urv0GkTra1XaSaezhb
-         BGV2pI8r9WrLKQImAcVsRbhc4GcUi5zcC8EQAXrPPHGwMbelWZoK4Jt3kPsnhAnzB4sG
-         r+dA==
-X-Forwarded-Encrypted: i=1; AJvYcCXpnUGZ3lnRV2JjCJ0YBWkZOpa/2N7jn1YGei0IDLWciJd8GXZ+HIMSz3jW223qR/mQNgrGuvMwCrk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyKqqeQw9DeJMs3yu1sb+wofefm23cIIyJtTeg5la7URiYXNekY
-	r1EbfF4yN+6wzidZ3PG8lnnrMiiSLfbmZ5oiW1oBGYEvAKZLp20r1HI/SHSnD9q9MpM=
-X-Gm-Gg: ASbGnctGrtsz5JYDN/S7mhQ88psBHQEkfRUTEnyI9Pwv8V+9K8fpjbuaOEEJn0X8kO3
-	o2V5mB8axqtm0NMOsvQQgd2TczQoR+M0hSLgGadu9q03Ofx+miOd4AZQ3nD5t/KQ7XVLgCAv7VV
-	cShbE3LbflAfHK61R9yli5ZL9mRqs4O1tZcY6q1/J2RNdBJsyGEn4HJi+AX/Ea6dvQDr9cKHQ22
-	62egYpnVBEFcmUO1qjNxBmSGJQjO65XkE0hsin7JfXoTZLhAFanSUSMO/bHCV8dWWPjUQy6GWwf
-	zokTzgALxG7L+P8umEudL7XQIlZYEUyBXakEpyzhK8D6bbpu8xhHheAu3Q64QsXRfoq3cjoXty5
-	zRdYGfFw0c3ZsxqUV9oMbGplTBgxi2KU=
-X-Google-Smtp-Source: AGHT+IF68KOqRUAOMHDKBpVY9t7uVgR8MmpK7ImpWi3/zcrlNC+5/ptZ2W1zXkHPP+sNnqPRzwGUWw==
-X-Received: by 2002:a05:600c:4708:b0:459:e025:8c5b with SMTP id 5b1f17b1804b1-45a1b674677mr23813915e9.30.1755168685858;
-        Thu, 14 Aug 2025 03:51:25 -0700 (PDT)
-Received: from ho-tower-lan.lan ([185.48.76.109])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45a1b226eecsm14228345e9.1.2025.08.14.03.51.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 Aug 2025 03:51:25 -0700 (PDT)
-From: James Clark <james.clark@linaro.org>
-Date: Thu, 14 Aug 2025 11:49:57 +0100
-Subject: [PATCH v2 6/6] coresight: docs: Document etm4x ts_interval
+	s=arc-20240116; t=1755168734; c=relaxed/simple;
+	bh=LS7UVXZq5BcWKHTjEz4xF0C5gnYu/PomYCrf0wF8d4E=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=HHQxU+p2QlZgcqCe9fgqIL86Siww5dqVk+4FiEwdaXbJN8PYRLnUSeUb9cdK1TtGKw15Bp1DaLL7Gxpv8fO13r6Yvf4WvSOv1rJx0DpAvkyr1NuS6+P+MFnASwFJs/rDhUd+B/8jyFj8OHDC+0bthzGlYqp2Gc3ykgZinNrMZC0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aJ1g/ViX; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 9614AC4CEED;
+	Thu, 14 Aug 2025 10:52:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755168733;
+	bh=LS7UVXZq5BcWKHTjEz4xF0C5gnYu/PomYCrf0wF8d4E=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=aJ1g/ViXBXs2iruF7oQkCtU1HxWGhnC09lXi6kvjc8adbYelCRMgpNgXZkAG9tu9B
+	 Vg7oVvPl23Bog5EbB+q2Xtslou7c6shQ5gMp5jxpRQYWYrRF8IAnWLhVJKz+gLL11B
+	 jqI0eRLIaF/gWgLPoHmMV46tSvE2HYHJ7v0MSb48VcgppRV6HVDabGWy+5kYi9XlZ4
+	 88oGmOSH1iCeLP0yEtvaNpvRRSJbKN1xkPytNZMLeEAXnm2S1R/HzcbZvEozuQcmG9
+	 pFe/uQMc9HQmsfikV//L7AZ9+5pPuSc/0N7i7+NZPn7IvBcUlBQ6zSHGsYmY/NHltb
+	 koVaLhMkaRcCA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85884CA0EE4;
+	Thu, 14 Aug 2025 10:52:13 +0000 (UTC)
+From: =?utf-8?q?Nuno_S=C3=A1_via_B4_Relay?= <devnull+nuno.sa.analog.com@kernel.org>
+Subject: [PATCH 0/6] mfd: Add support for the LTC4283 Hot Swap Controller
+Date: Thu, 14 Aug 2025 11:52:22 +0100
+Message-Id: <20250814-ltc4283-support-v1-0-88b2cef773f2@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -83,54 +54,87 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250814-james-cs-syncfreq-v2-6-c76fcb87696d@linaro.org>
-References: <20250814-james-cs-syncfreq-v2-0-c76fcb87696d@linaro.org>
-In-Reply-To: <20250814-james-cs-syncfreq-v2-0-c76fcb87696d@linaro.org>
-To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
- Mike Leach <mike.leach@linaro.org>, 
- Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
- Jonathan Corbet <corbet@lwn.net>, Leo Yan <leo.yan@arm.com>
-Cc: coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- James Clark <james.clark@linaro.org>
-X-Mailer: b4 0.14.0
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAOe/nWgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDC0Mj3ZySZBMjC2Pd4tKCgvyiEl0j82SLZJNUM8tksyQloK6CotS0zAq
+ widGxtbUAb10EdGEAAAA=
+X-Change-ID: 20250812-ltc4283-support-27c8c4e69c6b
+To: linux-hwmon@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jean Delvare <jdelvare@suse.com>, 
+ Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Bartosz Golaszewski <brgl@bgdev.pl>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1755168752; l=2545;
+ i=nuno.sa@analog.com; s=20231116; h=from:subject:message-id;
+ bh=LS7UVXZq5BcWKHTjEz4xF0C5gnYu/PomYCrf0wF8d4E=;
+ b=MYo3wIvH+i4xncYor+OvLaAiEb1eJDXKd170JjyFYsTrHb/1XGEBmjy7wA+RsfpOVF9yBBaDf
+ xLciOBqry6+CDhImzd4dU9U25eN8kmw/N78xJAXiS+eJWxTHiAId65b
+X-Developer-Key: i=nuno.sa@analog.com; a=ed25519;
+ pk=3NQwYA013OUYZsmDFBf8rmyyr5iQlxV/9H4/Df83o1E=
+X-Endpoint-Received: by B4 Relay for nuno.sa@analog.com/20231116 with
+ auth_id=100
+X-Original-From: =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>
+Reply-To: nuno.sa@analog.com
 
-Document how the new field is used, maximum value and the interaction
-with SYNC timestamps.
+The LTC4283 device features programmable current limit with foldback and
+independently adjustable inrush current to optimize the MOSFET safe
+operating area (SOA). The SOA timer limits MOSFET temperature rise for
+reliable protection against overstresses.
 
-Signed-off-by: James Clark <james.clark@linaro.org>
----
- Documentation/trace/coresight/coresight.rst | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+An I2C interface and onboard ADC allow monitoring of board current, voltage,
+power, energy, and fault status.
 
-diff --git a/Documentation/trace/coresight/coresight.rst b/Documentation/trace/coresight/coresight.rst
-index 806699871b80..0cd83119b83f 100644
---- a/Documentation/trace/coresight/coresight.rst
-+++ b/Documentation/trace/coresight/coresight.rst
-@@ -619,6 +619,20 @@ They are also listed in the folder /sys/bus/event_source/devices/cs_etm/format/
-      - Cycle count threshold value. If nothing is provided here or the provided value is 0, then the
-        default value i.e 0x100 will be used. If provided value is less than minimum cycles threshold
-        value, as indicated via TRCIDR3.CCITMIN, then the minimum value will be used instead.
-+   * - ts_level
-+     - Controls frequency of timestamps. The reload value of the
-+       timestamp counter is 2 raised to the power of this value. If the value is
-+       0 then the reload value is 1, if the value is 10 then the reload value is
-+       1024. Maximum allowed value is 15, and setting the maximum disables
-+       generation of timestamps via the counter, freeing the counter resources.
-+       Timestamps will be generated after 2 ^ ts_level cycles.
-+
-+       Separately to this value, timestamps will also be emitted when a SYNC
-+       packet is generated, although this is only for every 4096 bytes of trace.
-+       Therefore it's not possible to generate timestamps less frequently than
-+       that and ts_level timestamps are always in addition to SYNC timestamps.
-+       Timestamps must be enabled for this to have effect.
-+
+It also features 8 pins that can be configured as GPIO devices. But since
+the main usage for this device is monitoring, the GPIO part is optional
+while the HWMON is being made as required.
+
+Also to note that the device has some similarities with the already
+supported ltc4282 hwmon driver but it is different enough to be in it's own
+driver (apart from being added as MFD). The register map is also fairly
+different.
+
+Last time (for the ltc4282) I tried to add the gpio bits directly in the
+hwmon driver but Guenter did not really liked it and so this time I'm doing
+it as MFD.
  
- How to use the STM module
- -------------------------
 
--- 
-2.34.1
+---
+Nuno Sá (6):
+      dt-binbings: mfd: Add bindings for the LTC4283 Swap Controller
+      mfd: ltc4283: Add support for the LTC4283 Swap Controller
+      dt-binbings: hwmon: Add bindings for the LTC4283 Swap Controller
+      hwmon: ltc4283-hwmon: Add support for the LTC4283 Swap Controller
+      dt-binbings: gpio: Add bindings for the LTC4283 Swap Controller
+      gpio: gpio-ltc4283: Add support for the LTC4283 Swap Controller
+
+ .../devicetree/bindings/gpio/adi,ltc4283.yaml      |   33 +
+ .../devicetree/bindings/hwmon/adi,ltc4283.yaml     |  159 ++
+ .../devicetree/bindings/mfd/adi,ltc4283.yaml       |   85 +
+ Documentation/hwmon/ltc4283.rst                    |  266 ++++
+ MAINTAINERS                                        |   13 +
+ drivers/gpio/Kconfig                               |   10 +
+ drivers/gpio/Makefile                              |    1 +
+ drivers/gpio/gpio-ltc4283.c                        |  233 +++
+ drivers/hwmon/Kconfig                              |   10 +
+ drivers/hwmon/Makefile                             |    1 +
+ drivers/hwmon/ltc4283-hwmon.c                      | 1658 ++++++++++++++++++++
+ drivers/mfd/Kconfig                                |   11 +
+ drivers/mfd/Makefile                               |    1 +
+ drivers/mfd/ltc4283.c                              |  140 ++
+ include/linux/mfd/ltc4283.h                        |   33 +
+ 15 files changed, 2654 insertions(+)
+---
+base-commit: 9703c672af8dd3573c76ce509dfff26bf6c4768d
+change-id: 20250812-ltc4283-support-27c8c4e69c6b
+--
+
+Thanks!
+- Nuno Sá
+
 
 
