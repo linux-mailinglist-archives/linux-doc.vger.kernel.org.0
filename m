@@ -1,173 +1,199 @@
-Return-Path: <linux-doc+bounces-56115-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56119-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3384EB26316
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 12:46:12 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C308B26331
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 12:48:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A7AB6725682
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 10:43:44 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7D13F5E460B
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Aug 2025 10:44:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC5582F39B2;
-	Thu, 14 Aug 2025 10:43:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B292286D5E;
+	Thu, 14 Aug 2025 10:44:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="C1CNG4Gb"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="W+UhYTQu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4D2328C009;
-	Thu, 14 Aug 2025 10:43:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8D9A2264CF;
+	Thu, 14 Aug 2025 10:44:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755168204; cv=none; b=n17FN+5XGIaTJPzfdwFRYKZTNAroJQxkpLg5B65hqAD4JutduXu8N14BJ9bjFXg0125D1CXXuz5tVSfBX1zffNiz13QZAZkhjWvcN1DraPip5hI1oCBH7+uFDs4l48G+kQ8WyoBmt9zSB8hQOEhivOZHt8FUH9lwDSF4yxr0Xkw=
+	t=1755168283; cv=none; b=JAUqoSoTMwaPLsAiRBf6oCe0008eg65KLQYV8mYB/26RCDTFFQGRrVS4a1mPi+fXzAdfFfGLPjmeyovsAl5Uit2t9rLjskStGpJTSD9mFe1quUuuBs20wlCVG53TdOHDT8lLf/E1WVY9Q+OjaMYwTMp7NzK4ZiVtMflBXUWGGGw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755168204; c=relaxed/simple;
-	bh=AJ/C4uyJeukio2kY3R3eYR4LVUJD08Pake2nTRq5oeo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FIAJIVxiMXZo45TFI1uaYYUpglichwqhdpbPAhKEiNu93Ur3R5Az7b914blC+x/E8EBXMg4TO72gePCutK/w3XGD7hrTqpkl4QR3G2YJ4k0JXd7xB5etuav/wP7g2fkct3vo6eVGLCY/8Rh4v/Ft2FVePfbNNAs2eKqK25hvo+I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=C1CNG4Gb; arc=none smtp.client-ip=209.85.221.52
+	s=arc-20240116; t=1755168283; c=relaxed/simple;
+	bh=a5aQntAasDOv4w0vb7Hnf18WsX2N48zMQ6FzyCFSG54=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ty727KiabqLwd9uTTE8d2MVc9Ak2Te7va7msJpFUH2aSPfIV5FegT7Frqp/3dA4ZHtPnNvYKQdoM3OckKV4xiLBm82Al5OsERGYilRpfov01Kmxl0ORTNxFPTA4GfEa/Vzosq8nQS0/ISOw1sUZ1Q5sE3S0KL5/RWk0CXtr7iwU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=W+UhYTQu; arc=none smtp.client-ip=209.85.214.181
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-3b9ba300cb9so570713f8f.1;
-        Thu, 14 Aug 2025 03:43:22 -0700 (PDT)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-24457f581aeso5893545ad.0;
+        Thu, 14 Aug 2025 03:44:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755168201; x=1755773001; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=YLtt5xMhmDFA2ShL0rr0DmKUZACD1c7sVV5qlbjjBKA=;
-        b=C1CNG4Gbw2bKd8lw389LhavP0lre3TJJXGy++I8XGcCj9KGIeTQhKbHGf3YGnTeaHN
-         xB5z77tWGawpXsZWtvvESPBcyxoscH1/nPL4PRI6RUonSMO7QP9/tUEvwqzNNpm3sOKM
-         RPYAD8HMpxaxl8WsDnGm6qC9p5MOwZtXY+1ZdUXY4F/Iw9T5v+igNYYWNGTpYhZZQ9aD
-         10i6iVTlBtQ0tF/NboRlfYdRl/kEIUHT1crC0mfidVaI86oaoSY2raPJZZXuZssP6FwU
-         s4wELsmkT+r/yvWZ4vUyqK5jAdBCKYggWpz5HSvHYahquupfJ4pP96xAgy4jhRZAQkW6
-         OKIg==
+        d=gmail.com; s=20230601; t=1755168281; x=1755773081; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Bq//dQi0YTa3IQHQYVjTykJ5ZK01C8v6LFJj8kuymN8=;
+        b=W+UhYTQuXA4fZIe8jYyHDHoauusfX/640FsQnlgzZ4kRnpA9OODds2n7mIpdGRBZxn
+         HbPyjQdyPiw2pZ45qoabHLjyADYQT6gbvyX3iwWac9rFd1h8f+yG0g+FOZeKeulRiDD4
+         OO4+Y1FIY6yx/xNTVzTNj2THaN3MXRe/6vvwCWK+COZOk5ihA6/RyXFICjdylcN96F6b
+         GxB2Mbhpko9glet8oYd2M65TO23MCMe4/f8LFopG4SpljzUhuKIg8GwzaMxchM7Efsrf
+         M/6sQLqaSUky+qRCWl7O/vi10/2YW3Z29XflsQaBph6lAwL+iGq7nob9VgiGZGpe2ykJ
+         BZrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755168201; x=1755773001;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YLtt5xMhmDFA2ShL0rr0DmKUZACD1c7sVV5qlbjjBKA=;
-        b=iIPCIqUFV2BF+19xtB9TWBpF4XlEmhLpcwqm/KiW88BIsPs47DOv0yXKb17lgYWA4s
-         DxWbDJ3KKZ1CuH3Nqz0oar4MUdXUCzsSS3L3kmwUcp6tySnsdIHimkVTFTikAFYmYwyv
-         6rh+zgw5QGcx4id4qvWZDCMaARHbc0AqERTqCKH16HNj8bmBjdpXbnKDe8hazCzGGbHq
-         VeX2wIl0NTYjAfV5o2cpELFNRXxdlvkml2kYbpxGD3ECNkleDKS9ociAn796DuVKXPFs
-         iAeYt9GIF5P+T/cxjvoeqZvkExTL5AVLfgZR21tTeEK5l8vqIFtqBxIXVt3unzMVcJE2
-         RAfQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUhTWAldsXevAaaExLWpQgmLHRUtuCefMtjQPKksf24WamEGekHH164PxKGYg6cVxCF6+L0LzRIsMoXdtlazQ==@vger.kernel.org, AJvYcCVNo9im1JETub/iHrKX5WXT8WdymMUF6emVC5KZQMnm1FO35srSEYYeAD6+63kJOjJ8saqtKMp0/lw=@vger.kernel.org, AJvYcCVeSstQ80xCqAbHR+cBdJ53Ph5/Lw2JLik93cx3o1Gtw5Z1D0ZlYku+I3kde+ZMtkiiRI6mH9N1yhbtw9lh@vger.kernel.org
-X-Gm-Message-State: AOJu0YzYKyrKyfU39oKrtQEAnM0xKHXVdBsRDxs6I5TFFgquQpSYkzoH
-	0jd/yoC59+36G+3iZlenTyQpWchCVSMseQ5MmaMGtTuvi98z2vJj2BPF
-X-Gm-Gg: ASbGncvnT4REz/DwqYSj/RQucC5ArSF/ZGR0s7oS5azVPjXZzWvH9oy/Qw6pFKljDG+
-	AmVgXuXoK25gQ+SaiHNv7/71AVdhoxuxkeLnYsZLQ1KAgKOAETAQKLVz5dF1yA12dwD+w1GXkp+
-	wqBL34P4+ybIfvzR84TIzsLIaOOeP78r4TzUsPgdg3f85peOFOPg6qGJGkSypDzsLkX5cuzw+qa
-	7B+hORZJGiDO5jgrW3BOXF48UZGr6OTbPvN4jvzmsHMYJ5V9oEp1XsJKLvf5DDLa/xjKdu5f4UY
-	fQzYQwxuLtX11jAJQrB9Lx9f6qcRYgDtbBs8PDrGHRPcj5r6KZhPV2ms6+OaVW6mH+1A/ZOtLkd
-	x/K75CvZYOfO4tT/q1b2lAXK3e5mqzJH7k1uo0URQY6UYuoDTDKu2zH/GUsgTCgpkoTXbmUQUzM
-	zHVGwlvg==
-X-Google-Smtp-Source: AGHT+IHHxD/2V76qZjPAaomdu2zzYXxDs5OzsF/We/4FunFKZx8JdJGlm4zSbvh7T4zkS/IvSG5F2w==
-X-Received: by 2002:a05:6000:2891:b0:3b8:de54:6e64 with SMTP id ffacd0b85a97d-3ba50d5c0fdmr1738678f8f.26.1755168200966;
-        Thu, 14 Aug 2025 03:43:20 -0700 (PDT)
-Received: from ?IPV6:2a03:83e0:1126:4:14f1:c189:9748:5e5a? ([2620:10d:c092:500::7:8979])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3b79c3b9eddsm50514108f8f.22.2025.08.14.03.43.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 14 Aug 2025 03:43:20 -0700 (PDT)
-Message-ID: <c8a47a7d-3810-426f-a2cf-7c020ce25c7d@gmail.com>
-Date: Thu, 14 Aug 2025 11:43:16 +0100
+        d=1e100.net; s=20230601; t=1755168281; x=1755773081;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Bq//dQi0YTa3IQHQYVjTykJ5ZK01C8v6LFJj8kuymN8=;
+        b=DKW97zSYq0PXRcc9pWlIlTgWgp6l11kDKWA7yrZLSMWoxqyFQkA0YF9D+w02Cv2jZa
+         1j85PgK++ve7E941mp3aHqNoUIDQq1ahOoWfgRChrfu9Bx1kebx+jiVH0YFPhVeOUTKm
+         FkzBoAsbxlLVCRV4/lGz334Sa3P4GysfxgwZjvowOKBLPDBVVGYcA+iaY6jWgeyA6+vt
+         W68J+5nsjKDzG0mwwJ1MDNS0Ums/HhdSCIkPNrjH7nvp3C2R9QHel65E1t9HJnlpV+0n
+         29RPYBnb8AaDw+CfZiHTqGgOVD5u8m+qeYtJouVymey8QJ6IyKmltNWMDDVEUzoV1P0H
+         89kQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVq0iWCRhQQjjzvbDxSHuKA21MkCoqOSAo3dJccTJtzaf87nUNM3eMQy6Df2UCJyfi4bkD6RJc1IUc=@vger.kernel.org, AJvYcCWiVjqYVyApvtLIW7iOZ6u5OBSQg5JYGYQDi0NZtWezDoJqmJF5wwtBK3jTr8uyTwAbAcXYNzHyZo2MZc16fnkc@vger.kernel.org
+X-Gm-Message-State: AOJu0YwIty6qz2xRqtKH2uvsIj8VM9Y+hzTAXkKnfh8YArjqrz7WUSn5
+	VgEgLEQVfDDXVLLfrolk2R6V3yrkWf9z41z4kyPA8nKSEjUzykxdubijk5lGO6zc
+X-Gm-Gg: ASbGnctoo+knWVi1NMXLFDmGZ0uDb3zx0e+QRXL9CTaICIuOH26T1QD2506EPHmZORI
+	PdnqioXllffYMFPxhLWuLqzVWTb10wjUpDfpwMuUkGa91ExT8leWf5RGFsYtrZCwRoAl+/xcyaz
+	FAjYOxePTjJ3ODAyivO4khIfPWJVnsw2PwyXBsn0uULo0v5TsdlW7d8dxs2aAo3YdmdDf1vr4UP
+	IHhUEubacCELmSmdZZkuaOJF4oD+44QLAL0Ud8V8FxAgPKxSlVN+Crp/Om2UDMhhwVcY+DJ6jnp
+	a2Od2XLJj1LTcNvxoNn9r2cChp60am1HyvDKsRyvTcdcGj7FmH/Xz0yVuc/EMTl4OSRjGlq9WkQ
+	HiuZsrbHJhUOmPREZ9WJE+xwlzN0Q6BLPqZQhFOQACA==
+X-Google-Smtp-Source: AGHT+IF/oHgevoCi2cRDLT2+Tnabm5Nwu5/FXhs9Dsy0nrg+AwZLk16ZM2fMrEq6/faNqNl03ZOquw==
+X-Received: by 2002:a17:902:c947:b0:243:e3:a4e5 with SMTP id d9443c01a7336-244586db845mr41317635ad.48.1755168280885;
+        Thu, 14 Aug 2025 03:44:40 -0700 (PDT)
+Received: from fedora.redhat.com ([209.132.188.88])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2426dec66desm267055485ad.54.2025.08.14.03.44.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 14 Aug 2025 03:44:40 -0700 (PDT)
+From: Hangbin Liu <liuhangbin@gmail.com>
+To: netdev@vger.kernel.org
+Cc: Jay Vosburgh <jv@jvosburgh.net>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Nikolay Aleksandrov <razor@blackwall.org>,
+	Simon Horman <horms@kernel.org>,
+	Shuah Khan <shuah@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Petr Machata <petrm@nvidia.com>,
+	Amit Cohen <amcohen@nvidia.com>,
+	Vladimir Oltean <vladimir.oltean@nxp.com>,
+	Stephen Hemminger <stephen@networkplumber.org>,
+	David Ahern <dsahern@gmail.com>,
+	linux-doc@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	Hangbin Liu <liuhangbin@gmail.com>
+Subject: [PATCHv2 iproute-next] iplink: bond_slave: add support for ad_actor_port_prio
+Date: Thu, 14 Aug 2025 10:44:28 +0000
+Message-ID: <20250814104428.18431-1-liuhangbin@gmail.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/7] mm/huge_memory: convert "tva_flags" to "enum
- tva_type"
-To: Yafang Shao <laoar.shao@gmail.com>,
- Andrew Morton <akpm@linux-foundation.org>, david@redhat.com
-Cc: linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, corbet@lwn.net,
- rppt@kernel.org, surenb@google.com, mhocko@suse.com, hannes@cmpxchg.org,
- baohua@kernel.org, shakeel.butt@linux.dev, riel@surriel.com, ziy@nvidia.com,
- dev.jain@arm.com, baolin.wang@linux.alibaba.com, npache@redhat.com,
- lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, ryan.roberts@arm.com,
- vbabka@suse.cz, jannh@google.com, Arnd Bergmann <arnd@arndb.de>,
- sj@kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- kernel-team@meta.com
-References: <20250813135642.1986480-1-usamaarif642@gmail.com>
- <20250813135642.1986480-3-usamaarif642@gmail.com>
- <CALOAHbAe9Rbb2iC3Vnw29jxHEQiWA83jw72fb_CQKGDFHv6+FQ@mail.gmail.com>
-Content-Language: en-US
-From: Usama Arif <usamaarif642@gmail.com>
-In-Reply-To: <CALOAHbAe9Rbb2iC3Vnw29jxHEQiWA83jw72fb_CQKGDFHv6+FQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Add support for the ad_actor_port_prio option for bond slaves.
+This per-port priority can be used by the bonding driver in ad_select to
+choose the higher-priority aggregator during failover.
 
+Signed-off-by: Hangbin Liu <liuhangbin@gmail.com>
+---
+v2: kernel side update, no update for iproute side
+---
+ ip/iplink_bond.c       |  1 +
+ ip/iplink_bond_slave.c | 18 ++++++++++++++++--
+ man/man8/ip-link.8.in  |  6 ++++++
+ 3 files changed, 23 insertions(+), 2 deletions(-)
 
-On 14/08/2025 04:07, Yafang Shao wrote:
-> On Wed, Aug 13, 2025 at 9:57 PM Usama Arif <usamaarif642@gmail.com> wrote:
->>
->> From: David Hildenbrand <david@redhat.com>
->>
->> When determining which THP orders are eligible for a VMA mapping,
->> we have previously specified tva_flags, however it turns out it is
->> really not necessary to treat these as flags.
->>
->> Rather, we distinguish between distinct modes.
->>
->> The only case where we previously combined flags was with
->> TVA_ENFORCE_SYSFS, but we can avoid this by observing that this
->> is the default, except for MADV_COLLAPSE or an edge cases in
->> collapse_pte_mapped_thp() and hugepage_vma_revalidate(), and
->> adding a mode specifically for this case - TVA_FORCED_COLLAPSE.
->>
->> We have:
->> * smaps handling for showing "THPeligible"
->> * Pagefault handling
->> * khugepaged handling
->> * Forced collapse handling: primarily MADV_COLLAPSE, but also for
->>   an edge case in collapse_pte_mapped_thp()
->>
->> Disregarding the edge cases, we only want to ignore sysfs settings only
->> when we are forcing a collapse through MADV_COLLAPSE, otherwise we
->> want to enforce it, hence this patch does the following flag to enum
->> conversions:
->>
->> * TVA_SMAPS | TVA_ENFORCE_SYSFS -> TVA_SMAPS
->> * TVA_IN_PF | TVA_ENFORCE_SYSFS -> TVA_PAGEFAULT
->> * TVA_ENFORCE_SYSFS             -> TVA_KHUGEPAGED
->> * 0                             -> TVA_FORCED_COLLAPSE
->>
->> With this change, we immediately know if we are in the forced collapse
->> case, which will be valuable next.
->>
->> Signed-off-by: David Hildenbrand <david@redhat.com>
->> Acked-by: Usama Arif <usamaarif642@gmail.com>
->> Signed-off-by: Usama Arif <usamaarif642@gmail.com>
->> Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
->> Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-> 
-> Acked-by: Yafang Shao <laoar.shao@gmail.com>
-> 
-> Hello Usama,
-> 
-> This change is also required by my BPF-based THP order selection
-> series [0]. Since this patch appears to be independent of the series,
-> could we merge it first into mm-new or mm-everything if the series
-> itself won't be merged shortly?
-> 
-> Link: https://lwn.net/Articles/1031829/ [0]
-> 
-
-Thanks for reviewing!
-
-All of the patches in the series have several acks/reviews. Only a small change
-might be required in selftest, so hopefully the next revision is the last one.
-
-Andrew - would it be ok to start including this entire series in the mm-new now?
-
-Thanks!
+diff --git a/ip/iplink_bond.c b/ip/iplink_bond.c
+index d6960f6d9b03..1a2c1b3042a0 100644
+--- a/ip/iplink_bond.c
++++ b/ip/iplink_bond.c
+@@ -91,6 +91,7 @@ static const char *ad_select_tbl[] = {
+ 	"stable",
+ 	"bandwidth",
+ 	"count",
++	"prio",
+ 	NULL,
+ };
+ 
+diff --git a/ip/iplink_bond_slave.c b/ip/iplink_bond_slave.c
+index ad6875006950..67b154e194f7 100644
+--- a/ip/iplink_bond_slave.c
++++ b/ip/iplink_bond_slave.c
+@@ -15,7 +15,9 @@
+ 
+ static void print_explain(FILE *f)
+ {
+-	fprintf(f, "Usage: ... bond_slave [ queue_id ID ] [ prio PRIORITY ]\n");
++	fprintf(f, "Usage: ... bond_slave [ queue_id ID ] [ prio PRIORITY ]\n"
++		   "                      [ ad_actor_port_prio PRIORITY ]\n"
++	);
+ }
+ 
+ static void explain(void)
+@@ -145,12 +147,18 @@ static void bond_slave_print_opt(struct link_util *lu, FILE *f, struct rtattr *t
+ 			  state);
+ 		print_slave_oper_state(f, "ad_partner_oper_port_state_str", state);
+ 	}
++
++	if (tb[IFLA_BOND_SLAVE_AD_ACTOR_PORT_PRIO])
++		print_int(PRINT_ANY,
++			  "ad_actor_port_prio",
++			  "ad_actor_port_prio %d ",
++			  rta_getattr_u16(tb[IFLA_BOND_SLAVE_AD_ACTOR_PORT_PRIO]));
+ }
+ 
+ static int bond_slave_parse_opt(struct link_util *lu, int argc, char **argv,
+ 				struct nlmsghdr *n)
+ {
+-	__u16 queue_id;
++	__u16 queue_id, ad_actor_port_prio;
+ 	int prio;
+ 
+ 	while (argc > 0) {
+@@ -164,6 +172,12 @@ static int bond_slave_parse_opt(struct link_util *lu, int argc, char **argv,
+ 			if (get_s32(&prio, *argv, 0))
+ 				invarg("prio is invalid", *argv);
+ 			addattr32(n, 1024, IFLA_BOND_SLAVE_PRIO, prio);
++		} else if (strcmp(*argv, "ad_actor_port_prio") == 0) {
++			NEXT_ARG();
++			if (get_u16(&ad_actor_port_prio, *argv, 0))
++				invarg("actor prio is invalid", *argv);
++			addattr16(n, 1024, IFLA_BOND_SLAVE_AD_ACTOR_PORT_PRIO,
++				  ad_actor_port_prio);
+ 		} else {
+ 			if (matches(*argv, "help") != 0)
+ 				fprintf(stderr,
+diff --git a/man/man8/ip-link.8.in b/man/man8/ip-link.8.in
+index e3297c577152..5714dbecabcf 100644
+--- a/man/man8/ip-link.8.in
++++ b/man/man8/ip-link.8.in
+@@ -2846,6 +2846,12 @@ the following additional arguments are supported:
+ (a 32bit signed value). This option only valid for active-backup(1),
+ balance-tlb (5) and balance-alb (6) mode.
+ 
++.sp
++.BI ad_actor_port_prio " PRIORITY"
++- set the slave's ad actor port priority for 802.3ad aggregation selection
++logic during failover (a 16bit unsigned value). This option only valid for
++802.3ad (4) mode.
++
+ .in -8
+ 
+ .TP
+-- 
+2.39.5 (Apple Git-154)
 
 
