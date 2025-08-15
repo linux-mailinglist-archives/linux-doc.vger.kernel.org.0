@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-56406-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56412-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69FBFB27F57
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 13:38:20 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82987B27F83
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 13:51:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2A71BAE6199
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 11:37:42 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 9ABA57BFDCF
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 11:49:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8E912FE068;
-	Fri, 15 Aug 2025 11:37:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 406EC288521;
+	Fri, 15 Aug 2025 11:51:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="vLOIUVNc"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KTjHLg0V"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79F4A28851C;
-	Fri, 15 Aug 2025 11:37:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1666B3B1AB;
+	Fri, 15 Aug 2025 11:51:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755257846; cv=none; b=iKC5J+k6hScXz0xl27QuhxYJP6g3kkayr7GrVvQ3fb9a6uQyWZLkjGMMnJczUNfTXn5uAZHRX2gq1c8+ybhRO7H+dM37UvsmZ1rbsYvu1n+IP5eHB/r2No/jg2zXeVjeYT9MwS2Fqgkds4EoO/I++gwcJZazw3w+mnCWNGwKCTY=
+	t=1755258666; cv=none; b=TKlBrhwq5wCU8nMzTr8DzHOKxNqQFysJHtD36MVah0+fWQ7MOdS3s/sh9c6mbYh6sKhiCU0vb5qDKz1juHhmpFuwyRRoLAFOgB6rGF77fq5o8+pgjZyhN4ixArL4szirG5v9AUcAX2G0DRadTzMfshPImBoTrXDn1/nQJ8k4Sos=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755257846; c=relaxed/simple;
-	bh=FF6CTJItuLQX4L+saUiPgdc0K549DCILUpiRkhl6c30=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jHa1NBYDj5VeBRoaCU961DUxyPSXjuna6nd+Eg1fYPnEIqGA1oDrJFz/P+KDGk4sTHJpHCP8Y2jmSFH+AzGTrLMfg72DoxnUjWjp5Iz2QnLlPs4ArYZdxk7eD3P5S6LdW52oACn0q0i/H2K3YJJh0hvFYi5p+3eB1z5kXvh1a6E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=vLOIUVNc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16F36C116B1;
-	Fri, 15 Aug 2025 11:37:26 +0000 (UTC)
+	s=arc-20240116; t=1755258666; c=relaxed/simple;
+	bh=nldqsF3EOmQUIwjzdXAE0KBnBekNdat4KRfd+U9Y8V8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=dUWNPMU1T9myPJ2fgv/Q5gPI2e5c7dldbpLwagXj/6Uzizbwa8AKg2oJdJcJ0T/5OFMqDJmDdinaNj4IqBV3VYDLVK3DzTue8q7Lhl0itDz4K/T9H6B8oMztE8BGBWAWqkGfcXYaqcp3rv8uHqBzT8XPSQkB/ztRUU86qb+/rSQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KTjHLg0V; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BDA5AC4CEF0;
+	Fri, 15 Aug 2025 11:51:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1755257846;
-	bh=FF6CTJItuLQX4L+saUiPgdc0K549DCILUpiRkhl6c30=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=vLOIUVNcxzibC03/MJr57laqLFHNh4zKfsrDIxXugUTygc+6I2VcnO+yYYaYIdigV
-	 BcEusm2FKdC0qRq9zLxzPV11cMpY2wUoBT/5S8Ta/KcxhqaP5ju7hvVp6FyiYv5yUu
-	 +VLBXIoD3XY+WMM3ap6bcDAnXUQ3xlHwmH6voojjAx+RDRxmKLLG7xnJWy8f8Qtje/
-	 3Ro0XSOWzlaOhHJuSc0NAluRaYF0VQP74F3FPR2N4nhGFrSu3vYbWFFoYoGaFKpKSz
-	 ZWd6VG93gkAY3uCSwspTvmUi3jbgNxEx8tKv4fTkqNfB1u01jRzKT0pCdSQCiM6+wW
-	 0mAsqyZWSHirg==
+	s=k20201202; t=1755258665;
+	bh=nldqsF3EOmQUIwjzdXAE0KBnBekNdat4KRfd+U9Y8V8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=KTjHLg0V0d6MZpKmtqEEl/E3JIgAOp1uXyr635HAqIObJ94g2gsbtSpmJRRsihArX
+	 kmSjqS/6cYfjdhBoTYw7dSR5SPcqoSYWr9bT2ZFlb82yMklMMzUzX97Y3lbVL1QffF
+	 OYHjfyFIZiUHliIy4jOLs6S4rLrKkKZCK3IQYX3k7VhRTp/hYEjzI/RJCvsJvA2QTE
+	 XdW/kQ1l5GzHuwS2YiYPkwzqVr7TiHSCVFXqvzqhHf27IhKrPATIr/HsR7p7qC6G5T
+	 FnbX4kGXSPcqrFYwKGswyqxRlrrUTKoshtASTwh8BK7TgktzrK788FAuuLza39ZOLD
+	 v7nYRmXcNmEJg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1umskO-000000042Tb-10C5;
-	Fri, 15 Aug 2025 13:37:24 +0200
+	id 1umsxb-000000042oD-432r;
+	Fri, 15 Aug 2025 13:51:03 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
 	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
 	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	Alex Gaynor <alex.gaynor@gmail.com>,
 	Alice Ryhl <aliceryhl@google.com>,
 	Andreas Hindborg <mchehab+huawei@kernel.org>,
@@ -60,15 +60,11 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	Gary Guo <gary@garyguo.net>,
 	Miguel Ojeda <mchehab+huawei@kernel.org>,
 	Trevor Gross <tmgross@umich.edu>,
-	bpf@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
 	rust-for-linux@vger.kernel.org
-Subject: [PATCH 11/11] scripts: sphinx-pre-install: fix PDF dependencies for gentoo
-Date: Fri, 15 Aug 2025 13:36:27 +0200
-Message-ID: <fc1dbf7d4eb4cb0887a19f75d1ae71d683648771.1755256868.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 00/11] Split sphinx call logic from docs Makefile
+Date: Fri, 15 Aug 2025 13:50:28 +0200
+Message-ID: <cover.1755258303.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1755256868.git.mchehab+huawei@kernel.org>
-References: <cover.1755256868.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,99 +74,51 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Package fonts are wrong. Fix it. With that, most PDF files
-now builds.
+This series does a major cleanup at docs Makefile by moving the
+actual doc build logic to a helper script (scripts/sphinx-build-wrapper).
 
-  PDF docs:
-  ---------
-      PASSED: dev-tools: pdf/dev-tools.pdf
-      PASSED: tools: pdf/tools.pdf
-      PASSED: filesystems: pdf/filesystems.pdf
-      PASSED: w1: pdf/w1.pdf
-      PASSED: maintainer: pdf/maintainer.pdf
-      PASSED: process: pdf/process.pdf
-      PASSED: isdn: pdf/isdn.pdf
-      PASSED: fault-injection: pdf/fault-injection.pdf
-      PASSED: iio: pdf/iio.pdf
-      PASSED: scheduler: pdf/scheduler.pdf
-      PASSED: staging: pdf/staging.pdf
-      PASSED: fpga: pdf/fpga.pdf
-      PASSED: power: pdf/power.pdf
-      PASSED: leds: pdf/leds.pdf
-      PASSED: edac: pdf/edac.pdf
-      PASSED: PCI: pdf/PCI.pdf
-      PASSED: firmware-guide: pdf/firmware-guide.pdf
-      PASSED: cpu-freq: pdf/cpu-freq.pdf
-      PASSED: mhi: pdf/mhi.pdf
-      PASSED: wmi: pdf/wmi.pdf
-      PASSED: timers: pdf/timers.pdf
-      PASSED: accel: pdf/accel.pdf
-      PASSED: hid: pdf/hid.pdf
-      FAILED: userspace-api: Build failed (FAILED)
-      PASSED: spi: pdf/spi.pdf
-      PASSED: networking: pdf/networking.pdf
-      PASSED: virt: pdf/virt.pdf
-      PASSED: nvme: pdf/nvme.pdf
-      FAILED: translations: Build failed (FAILED)
-      PASSED: input: pdf/input.pdf
-      PASSED: tee: pdf/tee.pdf
-      PASSED: doc-guide: pdf/doc-guide.pdf
-      PASSED: cdrom: pdf/cdrom.pdf
-      FAILED: gpu: Build failed (FAILED)
-      FAILED: i2c: Build failed (FAILED)
-      FAILED: RCU: Build failed (FAILED)
-      PASSED: watchdog: pdf/watchdog.pdf
-      PASSED: usb: pdf/usb.pdf
-      PASSED: rust: pdf/rust.pdf
-      PASSED: crypto: pdf/crypto.pdf
-      PASSED: kbuild: pdf/kbuild.pdf
-      PASSED: livepatch: pdf/livepatch.pdf
-      PASSED: mm: pdf/mm.pdf
-      PASSED: locking: pdf/locking.pdf
-      PASSED: infiniband: pdf/infiniband.pdf
-      PASSED: driver-api: pdf/driver-api.pdf
-      PASSED: bpf: pdf/bpf.pdf
-      PASSED: devicetree: pdf/devicetree.pdf
-      PASSED: block: pdf/block.pdf
-      PASSED: target: pdf/target.pdf
-      FAILED: arch: Build failed (FAILED)
-      PASSED: pcmcia: pdf/pcmcia.pdf
-      PASSED: scsi: pdf/scsi.pdf
-      PASSED: netlabel: pdf/netlabel.pdf
-      PASSED: sound: pdf/sound.pdf
-      PASSED: security: pdf/security.pdf
-      PASSED: accounting: pdf/accounting.pdf
-      PASSED: admin-guide: pdf/admin-guide.pdf
-      FAILED: core-api: Build failed (FAILED)
-      PASSED: fb: pdf/fb.pdf
-      PASSED: peci: pdf/peci.pdf
-      PASSED: trace: pdf/trace.pdf
-      PASSED: misc-devices: pdf/misc-devices.pdf
-      PASSED: kernel-hacking: pdf/kernel-hacking.pdf
-      PASSED: hwmon: pdf/hwmon.pdf
+Such script was written in a way that it can be called either
+directly or via a makefile. When running via makefile, it will
+use GNU jobserver to ensure that, when sphinx-build is
+called, the number of jobs will match at most what it is
+specified by the "-j" parameter.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- scripts/sphinx-pre-install | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The first 3 patches do a cleanup at scripts/jobserver-exec
+and moves the actual code to a library. Such library is used
+by both the jobserver-exec command line and by 
+sphinx-build-wrappper.
 
-diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
-index 758a84ae6347..c46d7b76f93c 100755
---- a/scripts/sphinx-pre-install
-+++ b/scripts/sphinx-pre-install
-@@ -1069,10 +1069,10 @@ class SphinxDependencyChecker(MissingCheckers):
-         Provide package installation hints for Gentoo.
-         """
-         texlive_deps = [
-+            "dev-texlive/texlive-fontsrecommended",
-             "dev-texlive/texlive-latexextra",
-             "dev-texlive/texlive-xetex",
-             "media-fonts/dejavu",
--            "media-fonts/lm",
-         ]
- 
-         progs = {
+The change also gets rid of parallel-wrapper.sh, whose
+functions are now part of the wrapper code.
+
+Mauro Carvalho Chehab (11):
+  scripts/jobserver-exec: move the code to a class
+  scripts/jobserver-exec: move its class to the lib directory
+  scripts/jobserver-exec: add a help message
+  scripts: sphinx-build-wrapper: add a wrapper for sphinx-build
+  docs: Makefile: cleanup the logic by using sphinx-build-wrapper
+  docs: parallel-wrapper.sh: remove script
+  docs: Makefile: document latex/PDF PAPER= parameter
+  scripts/sphinx-build-wrapper: restore SPHINXOPTS parsing
+  scripts: sphinx-build-wrapper: add an argument for LaTeX interactive
+    mode
+  scripts: sphinx-*: prevent sphinx-build crashes
+  docs: Makefile: cleanup the logic by using sphinx-build-wrapper
+
+ .pylintrc                                |   2 +-
+ Documentation/Makefile                   | 140 ++---
+ Documentation/sphinx/parallel-wrapper.sh |  33 --
+ scripts/jobserver-exec                   |  88 +--
+ scripts/lib/jobserver.py                 | 149 +++++
+ scripts/sphinx-build-wrapper             | 696 +++++++++++++++++++++++
+ scripts/sphinx-pre-install               |  14 +-
+ 7 files changed, 922 insertions(+), 200 deletions(-)
+ delete mode 100644 Documentation/sphinx/parallel-wrapper.sh
+ create mode 100755 scripts/lib/jobserver.py
+ create mode 100755 scripts/sphinx-build-wrapper
+
 -- 
 2.50.1
+
 
 
