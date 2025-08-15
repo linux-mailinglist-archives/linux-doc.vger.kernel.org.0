@@ -1,181 +1,164 @@
-Return-Path: <linux-doc+bounces-56320-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56312-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE8D4B2760A
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 04:38:41 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 180F6B275E6
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 04:34:50 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4569CB62A93
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 02:35:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 758CF600670
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 02:33:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 541AE2BDC29;
-	Fri, 15 Aug 2025 02:30:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="pHDJCx2m"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0744E2C0F61;
+	Fri, 15 Aug 2025 02:29:45 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2041.outbound.protection.outlook.com [40.107.94.41])
+Received: from smtpbgbr2.qq.com (smtpbgbr2.qq.com [54.207.22.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D41782BDC09;
-	Fri, 15 Aug 2025 02:30:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.94.41
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755225041; cv=fail; b=F1R6H04K+iTWnN4vLlv0js2Dj0IzVjsy7lpE/JiuYv1+5xWoDNoHuGWxDa+IOiRYd7XQyFJpQQUDEHboPSsK+6y3d9m+hUUiTfdR9DFOkRr0UyBloffrw4e+TGfEjzqFBv1MYKe+miT7o8vrgOVx/kUHJgiwQG9kRp5QzcX+3sU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755225041; c=relaxed/simple;
-	bh=X/4YmlbAkyWeSZMbiOA2c+CjPSHu8dig2KOg3/no3Dw=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RVTpay9LoInRVGSQe+5szjhEocwXd4PmlAMllZzWLxgad/t6/ACGdV9xj4BAXtITtjtxdUhuo5mNU6MF/VeNGf8JDmz6EiG1HltWF9WqXzVSUH5Lc5sunQvDN94WHXXvcrBrLgsj6A+G6XEZNVZuTklgUfjzVh0+GW9OKQn4XGE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=pHDJCx2m; arc=fail smtp.client-ip=40.107.94.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zKqu7oeARBa7zEVIDkLb8l7cEFUNZNQegn8P5n+PQAJ+Pnfq8dBQ4mXARJdWnXLkDxCMkDgtuCqJ1aoFy40VnsFKhK3fVbOrlfrmQykqmfbVYAPDI8r4hbNtYryjOqDQZp3gHxtdLcUMrggNLl8+YUwCBl+ahPs4m51TJrDn/pBSUyXEwkttGmKTlsmWJkXvW89d7+cOPyA8Ihu6mo9bv1QPr03tPkkksO9PjLH05AT5YWxdgQxjEatlKIWhRiBurvury8ceGffRAS37AQ04ragv2Z9AQc8CUGQmFhd9AiHVj2vOonR2T96pz8iLKpnmxluLVTGSswiLZGW+Pt5agg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6NEIBDC6iRJNeAag2EwSyJls8bju/k74xrLXsX5lvjg=;
- b=vwcO+hfrQ4zJYQVU/3Udg8SZhFRh1N5m30VdDcvJ+cHbTOPhfHITHu+AkI51QZgpFd2tvcG1C6EjgnNe+SixJlJ+AF3wdQgQFq6USRGL3luEZ6SvClV/BYIUei8cruoggy/3o2YRYYonZKSgTxwGm1p1yLifV8fwpkRDbd5/bztOeRzuJiQLmxLkX+dJPOMrLtJyA/tO9cVLYh0tcKSRXYSfIbZv/tn14S1+rpgKjIC4Ih2h/0bdHmQSr8RPo4r3//r4ZP1mYgZ+oVMFnmaAsa6zW89KTGNZ3YR5gjcsBdCOe4k6qLqezXUcl8gAFpKVn/uvIiCQUzaTu7kUn9zbXQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lwn.net smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6NEIBDC6iRJNeAag2EwSyJls8bju/k74xrLXsX5lvjg=;
- b=pHDJCx2mwMIIfYLIBkjztaTEvu48ut72NamMZNpUCugE1u4teZg2khYUEBGCMX8FTbWrgGH/8HpcJXQfURmS/f9PTO/Aj/IZOkxgvvZeJitauc7MYwPvbiWz4TjMkj1eWFlu7jKxWoYsv/XcWgdRv8w201N8mse7/hAiLEhIVC4=
-Received: from SJ0PR13CA0236.namprd13.prod.outlook.com (2603:10b6:a03:2c1::31)
- by SJ0PR12MB8092.namprd12.prod.outlook.com (2603:10b6:a03:4ee::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.14; Fri, 15 Aug
- 2025 02:30:36 +0000
-Received: from SJ5PEPF000001EF.namprd05.prod.outlook.com
- (2603:10b6:a03:2c1:cafe::76) by SJ0PR13CA0236.outlook.office365.com
- (2603:10b6:a03:2c1::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9052.7 via Frontend Transport; Fri,
- 15 Aug 2025 02:30:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001EF.mail.protection.outlook.com (10.167.242.203) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9031.11 via Frontend Transport; Fri, 15 Aug 2025 02:30:35 +0000
-Received: from bmoger-ubuntu.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 14 Aug
- 2025 21:30:33 -0500
-From: Babu Moger <babu.moger@amd.com>
-To: <corbet@lwn.net>, <tony.luck@intel.com>, <reinette.chatre@intel.com>,
-	<tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>,
-	<dave.hansen@linux.intel.com>
-CC: <Dave.Martin@arm.com>, <james.morse@arm.com>, <babu.moger@amd.com>,
-	<x86@kernel.org>, <hpa@zytor.com>, <akpm@linux-foundation.org>,
-	<rostedt@goodmis.org>, <paulmck@kernel.org>,
-	<pawan.kumar.gupta@linux.intel.com>, <kees@kernel.org>, <arnd@arndb.de>,
-	<fvdl@google.com>, <seanjc@google.com>, <thomas.lendacky@amd.com>,
-	<yosry.ahmed@linux.dev>, <xin@zytor.com>, <sohil.mehta@intel.com>,
-	<kai.huang@intel.com>, <xiaoyao.li@intel.com>, <peterz@infradead.org>,
-	<mario.limonciello@amd.com>, <xin3.li@intel.com>, <perry.yuan@amd.com>,
-	<chang.seok.bae@intel.com>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <peternewman@google.com>,
-	<eranian@google.com>, <gautham.shenoy@amd.com>
-Subject: [PATCH v17 33/33] MAINTAINERS: resctrl: add myself as reviewer
-Date: Thu, 14 Aug 2025 21:25:37 -0500
-Message-ID: <b5f527fc33ec5c187af0ffa02a4b6366bccd1c65.1755224735.git.babu.moger@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1755224735.git.babu.moger@amd.com>
-References: <cover.1755224735.git.babu.moger@amd.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B34FC2BFC70;
+	Fri, 15 Aug 2025 02:29:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.207.22.56
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1755224984; cv=none; b=QtXUY5zWIJD3IyD1IkfI7Z/zIEADCXSJRaof+haMfSXohWRIPo2h2wiSM1WCPOfwvmApO3JdZ9GkSx3lCC3peOeGagF7xMddt7QEokVTn/kJ9H9hMUAi8RDnve8mrb1APJtzze39dTJMUOJ8f+tjui815loho+DQHmdqmTOQS8s=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1755224984; c=relaxed/simple;
+	bh=oTwHpvBn7rRBE05Lhy4Welan6z37EI/3shtPNKhD5P0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=kR1fLIImWn1jCUawNAeQNM3kTmYuY4Rhfn8RkHdQHj413uXyW60iYiiojBhOYgJfgbCwWe9cyF4RM+A5pT2fZrnlwdWfmyN3VAxN6Q5ZWfqCAxHHt+9BlvZJQSUVrlBMOFSYjTeuWg/mVUzYSwX1BWHFeB3rGKe2xjAWSk8TF4Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.207.22.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
+X-QQ-mid: esmtpsz17t1755224914t57364eb7
+X-QQ-Originating-IP: pDdm8tMuwOvreDyYR2nYI91BlNcEEzd/DnQrXhmpqE4=
+Received: from localhost ( [203.174.112.180])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Fri, 15 Aug 2025 10:28:32 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 10377373078801611813
+Date: Fri, 15 Aug 2025 10:28:31 +0800
+From: Yibo Dong <dong100@mucse.com>
+To: MD Danish Anwar <danishanwar@ti.com>
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+	kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
+	corbet@lwn.net, gur.stavi@huawei.com, maddy@linux.ibm.com,
+	mpe@ellerman.id.au, lee@trager.us, gongfan1@huawei.com,
+	lorenzo@kernel.org, geert+renesas@glider.be,
+	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
+	alexanderduyck@fb.com, richardcochran@gmail.com,
+	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 5/5] net: rnpgbe: Add register_netdev
+Message-ID: <3D47BB8C932EF2F5+20250815022831.GA1137415@nic-Precision-5820-Tower>
+References: <20250814073855.1060601-1-dong100@mucse.com>
+ <20250814073855.1060601-6-dong100@mucse.com>
+ <dd6ece66-ae4b-424a-aa09-872ac15e1549@ti.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EF:EE_|SJ0PR12MB8092:EE_
-X-MS-Office365-Filtering-Correlation-Id: 669a62e4-4fa7-43f1-57ec-08dddba3b76e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|82310400026|36860700013|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?0iVSOQL3hpecCk1n+uKmkwaaRLB0JSSzY9fv4Cc0DPrWccEzmS7WvwpepQLR?=
- =?us-ascii?Q?qPEDNVlssjQ0JjFKaGbKfMIu0Ws6q+ehmnc8pj5UZoVdaM8eHXETmqbBATsi?=
- =?us-ascii?Q?P6MKIdLBzeMo2XbSMBqJBWCYjQ8ZHnSccEHg5zBpFZoD6Q0QSZrzsTeoL9ML?=
- =?us-ascii?Q?fVul0LLAAVZi1Px3POrdPKjvulHCPswhIxiVWDSYnzoLgJFUvrb8miaGrkRg?=
- =?us-ascii?Q?bFR1Oht9vE1mU/zndg7beNTsVjPmYCqTE0QNXJUstN2jFr9x1tiqpSplBdp3?=
- =?us-ascii?Q?pGxcyPTKPdwbw3ssBn8LUXpsd61tWQwrP16hObtr4sxsL1rSPOfJw39x+AeH?=
- =?us-ascii?Q?6stuFPWF0dZREtqUIzPHBagDKqVtZXN7U+a/RAQgbphJEy3Y60UBYFMkxb2r?=
- =?us-ascii?Q?6OaogUrl6nQ+LXuxUGifWFlBN8/1IKqWEJltLMqJhboApZsC318haNcCnT4/?=
- =?us-ascii?Q?2x8sm8+sqxLStCXpVfzC9fVwk1dvjBjWDQd1IRr+JHbCjQb/TaXNOE/tvSKN?=
- =?us-ascii?Q?E0+3DkAg8Nqc8uYVqIVdSbMDndmc8TQDjeNcD2KZr7vMskqkke55x3f4mYFK?=
- =?us-ascii?Q?wwvHrlzHAzaf5BzBJTd2QKrAL3pwoHRpgDGq3XqJoqPAnBCcZD0CIpekFVLA?=
- =?us-ascii?Q?8Db7I6Q53zeu9VALVARoAG+jN3rlIxr5gCrFmmVknEXgSE6lZq3IRLGY/VOO?=
- =?us-ascii?Q?KZ33gDu9gA1W8g8TwGvTO8tC6gMY6OJed4d+8EuNr/o3gk/ZW/8aA8zj3j8p?=
- =?us-ascii?Q?NdMmFurROjC0O4xM636+xmpPfgjCcuj6UdHhM4NEF1sl0pfE8KqkRWBOobPW?=
- =?us-ascii?Q?aSeUlpltxO9X4ju2mjMG4B1W63YfzvGd+RlZYqyVUABNXSvpWYvUMWglhepr?=
- =?us-ascii?Q?7FZ7TCHLadXHBV+sqtYgpUjEeg566jzHFnDf5yAh6poQ3bIvwc6S4jQA72U1?=
- =?us-ascii?Q?y39dqwRPVLozMP2AeOaWha8PUyGf1JtfOrRifxWqyB5gUWYMLOKuT6S9zX85?=
- =?us-ascii?Q?tpmnv9zFIdtC6W6z6x6sh65Iq432Enbpxc/BDsCabm3R2lYanIEjBXUefUh+?=
- =?us-ascii?Q?rmyuql7pB4PTSEOOVf+5JAxp7a0RaWaFt6kxTFT7NrfW5lhLef+CzXUWASaD?=
- =?us-ascii?Q?Yuqx9Wxsosy3tpiS3JLhAQ8tM7z09BMkEsxzsM6Mp3mniKok74Zb1rASRSsc?=
- =?us-ascii?Q?EmGnxvWklyAdxlV9pnou4SASmK46vVWJtShbyFcgjkgSXKgONg39ZpUHBCJQ?=
- =?us-ascii?Q?GKeewtlK56RRHUmDtVIHKutOJ1bzZ8rMNF+CGLipc4tfQDVVggQbzLZsMhzu?=
- =?us-ascii?Q?Ndu5hrpvzZZ4YoHhuVABk2+3iXN/CdGdOcGudJuNHa6acl3At3cGffTCJl07?=
- =?us-ascii?Q?wWdry6KALEKggeyoz8lenGfR4XZcCtYH+xvZm8wnGLjnPvnr8Nl3LrjPx3un?=
- =?us-ascii?Q?sAs3ahdomx4Qv1nOiZtOPa3Xd1JS2wizwSpW+O9hnVQKNqn6ChwdMFYk833t?=
- =?us-ascii?Q?khKa0K8wKsmEpVvs1f5398lKKhK27m89VDGt?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Aug 2025 02:30:35.8752
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 669a62e4-4fa7-43f1-57ec-08dddba3b76e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001EF.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8092
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <dd6ece66-ae4b-424a-aa09-872ac15e1549@ti.com>
+X-QQ-SENDSIZE: 520
+Feedback-ID: esmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: OY7kNFRo2XI4RDa6UkZ4bz7nvYikmRRRSO1EQTcA/42sfVRl0vmmstWs
+	IF3pH1zV6/lJUr6h67z2jFA0LS6nNpcDx0DgW65+l/84VYejkG0pg8Y63AYeznlO2RvUCR4
+	B31Pka5uYI69vKYqajU8VdeJW7/pPA5jeY+PFr2VtwWRqtoYzB8vr26awHuOhywoWqhYy4s
+	ufnpWKM/j2EuP80wAJhHWby/4vi1GnDZ3Fj8b6JZ0zT+Sh0WFsVSrWtuzCE0PmSb0jiIhBm
+	R+CwW+SgrKKhPutqJYn64C3Qf2DzOveZX8bL9Zg1uLDr5KoA8OLTA4FldE82YAJoS3Ndzu4
+	PSVY7zyCK447gAsdbxnno4uhq/8lmvUu4I8d0m0wZ7Bg7sYPfH7hBQFHb24egP7KvjcjTlc
+	NzltwwKB9qPZw70mIsAE5EVGNECkI75GJR+lLV80uzO4Dr8bQIQIQbNrcwAerW0U+ghl35m
+	IDPxQtGVimBYIxBBuyyb2jksoVwzWjCnAeNL/Ol70V4U4k9gHFmACbglRAWcBnHcLMp17sk
+	aYZkvxa/vDXg4LwF3DyvOXDkH5c2tkPe/z2omuFvrRq33pT37mYsDhPNH3rfx6cEv4rATxw
+	2n785gRXJwxCs2aBwY5plmReGv9ukMzFj8RwkTr3eLw+gOaxxVWapCYmT3mxEaxWXZPcF7N
+	mnPbwGXR65MvSH3RaSJVs4Y7b1cyexY0J8suGwvT889NkWFRcVJEKyNBj70XgpMJ5pvrye9
+	gdFrcP9OPYgB7SX8z1NoOSY2bLy60PuUjEHQYHO4ZAobqgCxzTxA//mVWYdEVZd7A+CcHVU
+	9I4LYqoLiIANyPcmOE27HMiCZCY0Ci4GPg1WYphOzmzJXP7EqaurYRG1nK8d3QLZ/4mUjan
+	WR+w5YYOYarH3O83F4wb7fI05TrxhAorKX9hwpJZ9Qi7JiSO3KntJHArRHXyqHQ4/4iT3g1
+	j3yhnl23D0rvZu7Ik5AAGYzMpnK9yCJwOe1x9yNMZ0bx44sJS0Wd8+ByzxB6FV+Ih/E6N3o
+	OlABTQYOta9ieMTBCVms3ytUc/3IWP5r/lNIq7KBmOUwD9gXsyF9MN9eea+Aw=
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+X-QQ-RECHKSPAM: 0
 
-I have been contributing to resctrl for sometime now and I would like to
-help with code reviews as well.
+On Thu, Aug 14, 2025 at 05:44:51PM +0530, MD Danish Anwar wrote:
+> On 14/08/25 1:08 pm, Dong Yibo wrote:
+> > Initialize get mac from hw, register the netdev.
+> > 
+> > Signed-off-by: Dong Yibo <dong100@mucse.com>
+> > ---
+> >  drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    | 18 +++++
+> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   | 73 ++++++++++++++++++
+> >  drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |  1 +
+> >  .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 75 +++++++++++++++++++
+> >  4 files changed, 167 insertions(+)
+> > 
+> > diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> > index 7ab1cbb432f6..7e51a8871b71 100644
+> > --- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> > +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> > @@ -6,6 +6,7 @@
+> >  
+> >  #include <linux/types.h>
+> >  #include <linux/mutex.h>
+> > +#include <linux/netdevice.h>
+> >  
+> >  extern const struct rnpgbe_info rnpgbe_n500_info;
+> >  extern const struct rnpgbe_info rnpgbe_n210_info;
+> > @@ -82,6 +83,15 @@ struct mucse_mbx_info {
+> >  	u32 fw2pf_mbox_vec;
+> >  };
+> >  
+> > +struct mucse_hw_operations {
+> > +	int (*reset_hw)(struct mucse_hw *hw);
+> > +	void (*driver_status)(struct mucse_hw *hw, bool enable, int mode);
+> > +};
+> > +
+> > +enum {
+> > +	mucse_driver_insmod,
+> > +};
+> > +
+> >  struct mucse_hw {
+> >  	u8 pfvfnum;
+> >  	void __iomem *hw_addr;
+> > @@ -91,12 +101,17 @@ struct mucse_hw {
+> >  	u32 axi_mhz;
+> >  	u32 bd_uid;
+> >  	enum rnpgbe_hw_type hw_type;
+> > +	const struct mucse_hw_operations *ops;
+> >  	struct mucse_dma_info dma;
+> >  	struct mucse_eth_info eth;
+> >  	struct mucse_mac_info mac;
+> >  	struct mucse_mbx_info mbx;
+> > +	u32 flags;
+> > +#define M_FLAGS_INIT_MAC_ADDRESS BIT(0)
+> >  	u32 driver_version;
+> >  	u16 usecstocount;
+> > +	int lane;
+> > +	u8 perm_addr[ETH_ALEN];
+> >  };
+> >  
+> >  struct mucse {
+> > @@ -117,4 +132,7 @@ struct rnpgbe_info {
+> >  #define PCI_DEVICE_ID_N500_DUAL_PORT 0x8318
+> >  #define PCI_DEVICE_ID_N210 0x8208
+> >  #define PCI_DEVICE_ID_N210L 0x820a
+> > +
+> > +#define dma_wr32(dma, reg, val) writel((val), (dma)->dma_base_addr + (reg))
+> > +#define dma_rd32(dma, reg) readl((dma)->dma_base_addr + (reg))
+> 
+> These macros could collide with other definitions. Consider prefixing
+> them with the driver name (rnpgbe_dma_wr32).
+> 
+> I don't see these macros getting used anywhere in this series. They
+> should be introduced when they are used.
+> 
 
-Signed-off-by: Babu Moger <babu.moger@amd.com>
-Acked-by: Reinette Chatre <reinette.chatre@intel.com>
----
-v17: Added Acked-by tag.
-
-v16: Reinette suggested to add me as a reviewer. I am glad to help as a reviewer.
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fe168477caa4..875c4cc8bcfe 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -21144,6 +21144,7 @@ M:	Tony Luck <tony.luck@intel.com>
- M:	Reinette Chatre <reinette.chatre@intel.com>
- R:	Dave Martin <Dave.Martin@arm.com>
- R:	James Morse <james.morse@arm.com>
-+R:	Babu Moger <babu.moger@amd.com>
- L:	linux-kernel@vger.kernel.org
- S:	Supported
- F:	Documentation/filesystems/resctrl.rst
--- 
-2.34.1
+dma_wr32 is used in rnpgbe_reset_hw_ops (rnpgbe_chip.c). I rename it to
+rnpgbe_dma_wr32.
+dma_rd32 is not used, I will remove it.
 
 
