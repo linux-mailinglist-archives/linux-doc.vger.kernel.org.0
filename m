@@ -1,43 +1,43 @@
-Return-Path: <linux-doc+bounces-56321-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56323-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 932E5B27631
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 04:43:04 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66FD7B2764E
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 04:48:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3F1BE16EB31
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 02:41:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D50553AF67E
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Aug 2025 02:44:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C3B50298264;
-	Fri, 15 Aug 2025 02:40:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95D5426AF3;
+	Fri, 15 Aug 2025 02:44:16 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtpbg154.qq.com (smtpbg154.qq.com [15.184.224.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96ECB287246;
-	Fri, 15 Aug 2025 02:40:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D99D29ACD1;
+	Fri, 15 Aug 2025 02:44:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=15.184.224.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755225612; cv=none; b=gY/rA+lM0vKXI1gGpZ91Va2U2dxOzHdw5mJfxXqKsqg4yUo+J8LaFxu9sboj9XzrP8ex8qInTGZe1mO/+q9yEKtGQobUuZadd1m5u7ho0oB99MhB5mAOX9OYQQ3s6oU8StCrThEO2ftRMdv+f9f2shuxcWC6Iz5JA8VJYgQbFkw=
+	t=1755225856; cv=none; b=tt22ViuojHMLim0/pFFNtcSAY7pIK8erG2hF5rT+Hyq1Bz6NgIyPtRnjvrWbkM23kBH7bpGwC1kDyK7aJ/6Yt6fjwN4FNvlG83ACDAyyGMkWiU+Dzhn18sQbnbf+0/+xdm/puj/8iuGauuGl+Wqu+l/Qsaf3uRnpPkcDL8YP2Sw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755225612; c=relaxed/simple;
-	bh=u8I2X25WR4fgpDkMDlFyC0T3LW3CMF15mu1UZnKTUlc=;
+	s=arc-20240116; t=1755225856; c=relaxed/simple;
+	bh=C+nv8PjvjRT5VVseg8mFqHqLGLycXA0mcxiRZuNVllA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LfBmJH5gE99sBLibdtk3LvpNmMIX9qN8CpidEc49xw+7PKS1zk5g3yETwjAoOysjnUZ8EEXGMrKGfdePbPZkV7ItM0CVQXVHhxGgdWsRb9kfnU0MeWADsXtqF9i2n6fNbkmrbutajHM1NsLPEh8UK5PbUSpnzl7IsPxcSbtuiTw=
+	 Content-Type:Content-Disposition:In-Reply-To; b=roYNNnmHwwHT5prkJcNk9gv9qrplDL2Mi1lOv5B25OVSC5yG06J6hmYVs5GezQsr1veztVnJ5J0yPPhD3HIYtAOC8rbvBT4yXrCqjRHgqw+vUSf40VE2ehp/5z6RKGNSn24RxAU+j9WzzNYa3/HyXYcYiZiyqulfkelu36l2TWk=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=15.184.224.54
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
-X-QQ-mid: esmtpgz11t1755225519t45fc5bba
-X-QQ-Originating-IP: yq0E6dA0Nd3VzJJptiSQmJVFvn7q1TzIAMReu6KVsPY=
+X-QQ-mid: zesmtpsz9t1755225785t18a98fe0
+X-QQ-Originating-IP: qZWec32v0f2IQWBPzJqvPtOzV3dv+pEGwUf5SLtvS68=
 Received: from localhost ( [203.174.112.180])
 	by bizesmtp.qq.com (ESMTP) with 
-	id ; Fri, 15 Aug 2025 10:38:36 +0800 (CST)
+	id ; Fri, 15 Aug 2025 10:43:03 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 5342344533602567481
-Date: Fri, 15 Aug 2025 10:38:36 +0800
+X-BIZMAIL-ID: 2926667803765780674
+Date: Fri, 15 Aug 2025 10:43:02 +0800
 From: Yibo Dong <dong100@mucse.com>
 To: Andrew Lunn <andrew@lunn.ch>
 Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
@@ -49,11 +49,11 @@ Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
 	alexanderduyck@fb.com, richardcochran@gmail.com,
 	netdev@vger.kernel.org, linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 2/5] net: rnpgbe: Add n500/n210 chip support
-Message-ID: <F74E98A5E4BF5DA4+20250815023836.GB1137415@nic-Precision-5820-Tower>
+Subject: Re: [PATCH v4 3/5] net: rnpgbe: Add basic mbx ops support
+Message-ID: <497996B7269F1229+20250815024302.GC1137415@nic-Precision-5820-Tower>
 References: <20250814073855.1060601-1-dong100@mucse.com>
- <20250814073855.1060601-3-dong100@mucse.com>
- <a0553f1d-46dd-470c-aabf-163442449e19@lunn.ch>
+ <20250814073855.1060601-4-dong100@mucse.com>
+ <fa273889-f96e-4ca8-9d19-ff3b226e2e29@lunn.ch>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -62,48 +62,50 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <a0553f1d-46dd-470c-aabf-163442449e19@lunn.ch>
+In-Reply-To: <fa273889-f96e-4ca8-9d19-ff3b226e2e29@lunn.ch>
 X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpgz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: M613wnTrQKZbbJVjJPiVF5qUZkkZaUCybkZ1Rrq/LD7XscKj2g+IMy8i
-	ZeVTua40pupIfse+Ejlzg4pQY71gRw8XkdHiJABJKhjKij+9IGr3vwG+i4eFpKqNqvhiMMr
-	XpETE1WfYWELv+DJAfM/CIkfczlQDIOpraskMUJOPR9Hd1EpFYXxXXcamFxFJU2Z6XnNrQq
-	luySaaIucWztMzbAyFajdX7MHZQ1QJCH6vzxzb8oo52A4eQBaPkb2HUjuFPDFO4vO5PDMS1
-	6w/aaCLdOn7zTGfnsv0CLLlOhG/Bh9h67RVNwd9aqpWMAMY7pOnE7/91gx7OQN5ov+0lkqD
-	6z4bRjaDoten8o1ptazvIns+mBRAkW5NxZFRazW+selTg43SoU1sZNJ3WhTJgqV4OaUk+1l
-	T4yCnnZ8CBo8fgzLtDh8LEH5boc7/C+4HzKW4JLRl29PhD5L8h4h4AuOQU0dQH/MSga9tMW
-	PjS4KO4vCwMHd3OfUU0HRu63JwjeqEA03yyfVBiDrG9x/pBZ9CGTmJTjtvb9joz8iBEKJhj
-	gQrKWgHD0fu0vUgf/RgH2kq6anueZiWexHwb0qiOIY9YS9NQDgz5N9Zes2YXq1k2tYTEuKI
-	wlEXSay5I3wA6evl2SELA4d3oQUNFqqaABh61/CSVJPhFoKNi+GQcX1inH53rWDiKG6seCl
-	ursXmI5+HdnvLzUCoI1a1RAfV85pOucnJD5LkM/4dUlqTyCX1tZR9u8Q7MvKYReghODv2yf
-	q25XPhCuOOurDAbNHpCFez33gQoGJSH4DSxnUr1WQgK0mVife83h1UeAhMkhmOXaJwWZ1M9
-	3DTA2SWb6aqYZPZcOYn9puhCNAaz/2O0MSLmHQIBZrtcH+mB0W/FhoX2spIkEow0BQnZ0fn
-	JkeRgYPemfzDM6DdyR3Wu+aeu9Q3WOSD3uUWkb5WqSxb6DibI0vNb7lYYpS9aNLplxd6aJp
-	7sgvPTKXslxPaYZAzOBZiMzhsx242GrEGO4y5I2EtCjLYAHZV+NAh+2sS8vmaFaKlWa6Zoe
-	rd4yZ/vhTT9G2TsRz1Ih7A12+BhUhr3qdhLGZ0j9yMGSZyv0ki6KIHvUBLL3SNd/AnnhcKD
-	Evd/jLLbwfjm3dLsqNcmcXxOiChWw7C+w==
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: MBun5VhikmqxOknxadMkRYFgh3iA9R62QtHUMW7W2T0TCccgUBIz25Rm
+	WHcLGgFEMM0vR3XKNscCvV4zK4v6iEip1mloBcwGqK86rzdloQ1vVj+b1xArepmkEf9ynUW
+	ZOMK9XIDql9zRpnRpA3YAHGvhCcL48MN8BKG8qbN+4TSsfPgQsUR3vv5yMPECaZ34x+rwGO
+	MgQRtIgUIISmERV2EiVXx9/o5KZnEyyDy2r2IXG/pCWsAqPkYUJWzDPCtCj2B9q9uSJgSBi
+	Z6zfXjTzPCEpzIkI8cEdH1AOSK9gFYDyakLWUTBcwROEwslBB2eVxTyStjEsHaKmhF+ODnE
+	XM88BBEoTRt06UxBPeAskq4b3gSR3aa4+Ts+f4p99aGpur4XTmX1GZ7yp9MfFn8mQHxb7Oq
+	3zlGQWdW360iMGrYiwIZ0DMLYGKaXMfYvWHLAaRgy6Y1rtKOWy/VwX0xYYOyMaRnD+/V2za
+	m5C8UIuTY0SUHmEYHSobAA0aUvwLHhs2q/DD9o8UyGq8RMHZqAwW5InRoL7K8jmJamKGiY+
+	VYfFdzIZIcKtDtRNbADphOHMakTRCv/GnQNIS0Rd1eLkCg+lu7AWFeRZKRyUR5YDfAZiqrO
+	hul+ZMsR4rdAgVxpFk83+8QyE6medOqDc2lo/nfutKv9V850VpUsWaxGRuNVvRchCH1HSon
+	ozmnyQ/9UP4Sd15l8DB/rIrrnzQDb/P+uAbMuOJzAnN1eVlOVYcz2HaFoGju4hrOc6/F3ZN
+	eAw3gBgHkUviQ0CL0R7xy37xlbxVpHFNA/TAIqSxF1P16ynpVtr9m8+KVtrmMJdWqDb+pBT
+	vc971plkHDuy16swCU+cZvlOM1jGvAAdygK09QkvX8bk9udrlJN/npeuxvMS0fNbWYTz0qK
+	2MNbYkwPwmpgKAre4xKwfeyqPhw8bPhYRMw8OT6CKaLGSZopElX7o2qJdeIINPTrHIoPIVp
+	UScySX5iVb6++hHNF5/lsmrl8EkezMbmJqMbWxLLBpC2l7+4/PSX9KNS8Nd3cWm4+ZO5KTa
+	6wcKHQAHsOz1KRcfFgPfEZu34Ou6cr6HuEeBJxdUgF4Z0UJrSYphdPXZ6LFNosKkLUjA6+Y
+	OxW7xYg7grCktSgHvvSha4=
+X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
 X-QQ-RECHKSPAM: 0
 
-On Fri, Aug 15, 2025 at 04:05:32AM +0200, Andrew Lunn wrote:
-> > +	hw->driver_version = 0x0002040f;
+On Fri, Aug 15, 2025 at 04:13:52AM +0200, Andrew Lunn wrote:
+> > +const struct mucse_mbx_operations mucse_mbx_ops_generic = {
+> > +	.init_params = mucse_init_mbx_params_pf,
+> > +	.read = mucse_read_mbx_pf,
+> > +	.write = mucse_write_mbx_pf,
+> > +	.read_posted = mucse_read_posted_mbx,
+> > +	.write_posted = mucse_write_posted_mbx,
+> > +	.check_for_msg = mucse_check_for_msg_pf,
+> > +	.check_for_ack = mucse_check_for_ack_pf,
+> > +	.configure = mucse_mbx_configure_pf,
+> > +};
 > 
-> What does this mean? It is not used anywhere. Such values are usually
-> useless, because they never change, where as the kernel around the
-> driver changes all the time, and it is the combination of the driver
-> and the kernel which matters.
+> As far as i can see, this is the only instance of
+> mucse_mbx_operations. Will there be other instances of this structure?
 > 
->     Andrew
-> 
-> ---
-> pw-bot: cr
+> 	Andrew
 > 
 
-It means driver version 0.2.4.16.
-I used it in 'mucse_mbx_ifinsmod'(patch4, I will move this to that patch),
-to echo 'driver version' to FW. FW reply different command for different driver.
+Yes, It is the only instance. Not other instances at all.
+Is there any improvement?
 
 Thanks for your feedback.
-
 
 
