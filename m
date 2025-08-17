@@ -1,108 +1,133 @@
-Return-Path: <linux-doc+bounces-56523-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56525-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD64DB2949F
-	for <lists+linux-doc@lfdr.de>; Sun, 17 Aug 2025 19:50:55 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id D9C66B294A5
+	for <lists+linux-doc@lfdr.de>; Sun, 17 Aug 2025 19:55:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6583B5E39FF
-	for <lists+linux-doc@lfdr.de>; Sun, 17 Aug 2025 17:50:54 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id CD055196390F
+	for <lists+linux-doc@lfdr.de>; Sun, 17 Aug 2025 17:56:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A7DB2EAB6E;
-	Sun, 17 Aug 2025 17:50:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECFF22FE068;
+	Sun, 17 Aug 2025 17:55:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LRFgyqPi"
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="o1LThcsY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8E5C1FE44D;
-	Sun, 17 Aug 2025 17:50:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6EA423E358
+	for <linux-doc@vger.kernel.org>; Sun, 17 Aug 2025 17:55:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755453049; cv=none; b=alIkYkO9Wqe2j5fxfhhFSIWs/7XlotQkzt9QHhCe6VJgsgy9CUsOvmInbjbyykVPjpNufC+bhywdV9Mat/goON+xySH/nJMbzPpGw1rs6/psmCkZOo9ocYT6hhbq7p85F7LN0PQyBN4eX3hLC6fZDve5teUw4+Rn/apaC7DJgss=
+	t=1755453337; cv=none; b=QSEVW4AP3aoK9St8EcTRvlz8BYgOZ+IAUl9lkEVInw4YlEXYXgLMcOZcwsujAq0LOjexJFA5uqiclif9nb7HfmF3du80BTUgVePnKj7P6tX3wMnMA4Fahr8lL+eoOsJyzj6qzAlhnTTiTW2VtLK6FgWtth9rVqrgRWCin4hQ22E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755453049; c=relaxed/simple;
-	bh=kxPQgkJiRwpdamMhQNsqSB3KW+32Rbalfx4xy59hTTc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=FjpIkODqo5ucDfhUVBYq/UvFYlzx2vW22DVKTSUfb47cnNayarWwtxV+oWcxKLT1/ick0gprERIr6xVRP2X7O2KoH3JswkmLTZ441N7Jh1rfNS6jAGgO/5/TYUcBtNVVJ+9UlGPHXfbm+QX5EURNJ8EfbKkIJpYeX60Q4rTV/VE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LRFgyqPi; arc=none smtp.client-ip=209.85.216.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-323266b2368so2184898a91.0;
-        Sun, 17 Aug 2025 10:50:47 -0700 (PDT)
+	s=arc-20240116; t=1755453337; c=relaxed/simple;
+	bh=ZX65Osj3KZd+3VMcWnHgTciqbWcOdnJj8eq+6yip750=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=CcLqHRwHMKU2D6H0D6Gfb+cLaOpDlWVbEY0O0QTREPsI7fjqK3omFpuhQkk+Pw3wBNL0yuumP8qggU5rVvwT4R+uM/7Imcznvm2r6lG32nFXgLT7YhHyKjMH4d5oWBVWFyQ4rfAtXGn7KCn4wFElv507DDjBE87kB4uRmeBcyzs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=o1LThcsY; arc=none smtp.client-ip=209.85.160.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
+Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-4b109c59dc9so46454761cf.3
+        for <linux-doc@vger.kernel.org>; Sun, 17 Aug 2025 10:55:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755453047; x=1756057847; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YWZaVseHO/HpQONflG4VKxSa+b3LTJhK7Ltl+j+pOUg=;
-        b=LRFgyqPij+rQARj8moQjXOQeEH/0eA2Npv0zlBi3/4Qg6xow6esfYautBdGWkWiShj
-         YRRIdki6rDWDE9pSF70lZ+iLvx8uxN1Szg8PBugcyr0iyNU4dRU0S/Xns9cR55RFK4Wf
-         xuLYo0P1YTlz3sVvkPVBt5vaClPB04wPzwsHb6ajD5VtXPim1YNLNvL4ypj/sHZf7hOA
-         zAi1J5rKQZNTtHiD1UfyX6AqELSG/Yn/iD9aHFYb1/o5ovTy7jp0tS4u4+oYlv2p+VsN
-         jo7dwffMicfFOVzNSg90xZ81ScSfL0sFQEB6rB2g1rV/TyDBWnK3D2Q8DyR8v/GGZ3CM
-         VIwA==
+        d=gourry.net; s=google; t=1755453334; x=1756058134; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=7ef15y+hBWoFQAF/OeWDYMRMusZ2qkkd9+CBv2gOjP8=;
+        b=o1LThcsYcTqdLu7JXhyJ0Wj95rKJBG2xc5LaXMBkhScqIVGPGztqh561yyVz015fBm
+         F+BToe2KaXtglUms/VEsiRXp6jyeXWzWrN42+NKWFHO80Mevgb4zu5SYWkJGyFsewI+K
+         Fg71ITR2PGREaP+apBlPz1Bco1dfK5SZeb7a1GLlQYaXfoME5cXfBVOqRKRXRk+sfWdE
+         k7x/qG77acYCCjTF4oYPiA8pQOXiUqSG9hn6lXdRwAemMVSma86TqhXcT/JOVZM3xY8G
+         HhmS/jEF5W8Thr9m/ka4miTp7iWBO5YatYgCLyKvOLDWxDi0JEUTNe6dsLz9IqxtYty8
+         JJbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755453047; x=1756057847;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YWZaVseHO/HpQONflG4VKxSa+b3LTJhK7Ltl+j+pOUg=;
-        b=ai/U9FIotgOz4h1gn1WrJy6gKBqC7tNIGwNCg6IKgg8pZTaNlR6m9hFc/IGJm6kAfz
-         yFWNno+qBg4Wf0lNnfLi+eEHvd16Tz3ZNISWKhiRDn1+dotSZU25recUKqEqmCcEr2Oy
-         UdN2Snh/G0jAx2bzF8gobgAoai8rsCkNGW7tw+DJveX3I1/D5ygIp7xZxFUvaMx3IaVA
-         M1tkEVFMpC1MsST3y0vsqeZhf5OuC+8NMQeek1T4oWQu+ArnMMxQ33FmIfPt/WcyEtwR
-         qMVr8AjuNDULKbNa+tStTA8RnBkeOb/YkNRMQrqvFn2DVg5ZrnY/4eJrvxz+R2lSKoq3
-         D9xQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVGGZQ8DnF3BY6d+x6L5y5jhOgC5TIOWNBWu0DJrRx24kVRq8WQxjLtuiF9xGvl6u4yNRKZ4PjvhNA=@vger.kernel.org, AJvYcCXfjZQqoKB1tr33XFw/JG9JR4fxNpaxzlNvmYt9G1fTKVHDXHXOUz4pIzUw1AV4+bCJ/Cjh7/1rwd/U@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzkx4nMwFy/qc3dUDFsESRcAFNLVQC1aUYY+9z76SgVXUiUBE95
-	ixeqD25hV1myUqzq5cVaEuXkHPxgUSpA6Uq6JXKARrhSrAmQlO0/i9IW
-X-Gm-Gg: ASbGncvSlFEgYGXaMBBcENALu6HM9ice+NG2MvqVHjsSqXy5anj04eZO2rzjWSRzgQz
-	vOlxicVg7M1p//Azw8TOPePdras4a3yGQhsBJR/+N5UD7soN+BJ/kOuFZiuXsl+d6JuSDpxVeoz
-	njRB8lgArdCrarN9YG97zZJ55SuRlZItwk8pT7hxavNhNJbf6kGq6Dwf5o6nzf/6f4KVGra6BoU
-	2cIGc0FBH1INy9X/B8i4DXWFWsru99Wb8qLq3jFOOoCp+5UfVzECMSib2E6YvQ270Y9w2smPpZu
-	xShu0f1NnOiIlFn7cmbch3Q3sRG6JNw+H0rW4LpylxRxgDFXMV4xTOpgdulQC68QFmT8mWNRb9r
-	qdaMraUUA+CAiVMtnxxO3A9agk8kmEL0tO4AkTXK0
-X-Google-Smtp-Source: AGHT+IGZ24e0gHA+JVsQY6YX2jt/f72OrzDBs2UDcSTBqyD5prVbXpazBufiCCm5Zs5j+Xpo9qIt6Q==
-X-Received: by 2002:a17:90b:3c42:b0:312:e76f:5213 with SMTP id 98e67ed59e1d1-3234215b3eamr13428682a91.28.1755453046625;
-        Sun, 17 Aug 2025 10:50:46 -0700 (PDT)
-Received: from lkmp.. ([157.51.85.44])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b472d799c8csm6243856a12.55.2025.08.17.10.50.40
+        d=1e100.net; s=20230601; t=1755453334; x=1756058134;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7ef15y+hBWoFQAF/OeWDYMRMusZ2qkkd9+CBv2gOjP8=;
+        b=EUFfnZmTfIAMZ4zYJPwyxjeiKZQZbU9NyZUTRYEIDSKjOjXmsnNX8ZOW+wvzhHGRuC
+         5yQVa4jRjLbjSewIte+jp0xZntz4lJa5exDLOOios7LSOVRwd2v9CZwcjCGfP/UooGVB
+         E2c4FfELssZ+Vi1PLGGq3QVpfuBO5KZuVs+WzyKISOYYtu6H9h8OUF5X9Nl1+k3FLLL1
+         0h6fgvgkyJznVoMClPBHXBLRI7mryb3+XZ2a1sBST1KxNE99pyZeejBcCl6jqDq5c1Dx
+         U3oJr/5CEGFtj50dJtghI0bvuCyPXksGLIVsRTHWs1TSE1eIqR4nHVu80T95XEyVNAsM
+         gDsw==
+X-Gm-Message-State: AOJu0YxoUyzBLM3m1yK1qCNvSwaplJP94f4GDrBTT5fH/4kGQH7x9qeL
+	iB+goqtzUANlOiMz90LzMRdk5SuDose75AdKnOCwvVwphPt9Mt4zOhnF+5WA7/M019o=
+X-Gm-Gg: ASbGncuiZnhuZcu51nTw+RM6x1jNgUsbh2BVWzkbB3mpIzNPBAUY3t0uoujKEF0I5PA
+	E+tzD0UJeuGbaUi9Us+WzeWi66IEc5fAY3YsbO7drxo9ky36kdI3Oh2b4Ctwi3AAYSJo5HGN9Ci
+	a/h3B8HdfOhN0o5UHdc8mS6svJX9+T/Ufx71llghLLed48iw9Z+g8AyMQEWe1PmJmjbOxGtZBxW
+	4FakppfaeN4RyzA/zPMFcyU1KxbyjCmklG6RKDaCHq+FkIrShxWYHILNwpyFTvxbbvh0g+frYuv
+	+k+f0N2bxYxZxG66hy1CDzAJfm1LxDvP7RBnuADz5aynMxYzNAHZfxB9rK91vicCx39I2Mn8/6d
+	J501o03n6gR2TgWSrw+v0cJC+/Si9zYb3p4cMeaQ9yqqML92hkTciYdWO
+X-Google-Smtp-Source: AGHT+IGGPniltbwWGADuC89Da2QodO4Z1fNUe08TbR56jJKviW2gzde0TZQ0UAs5hoxjQJhD9PIKdw==
+X-Received: by 2002:a05:622a:1f0b:b0:4b0:b36e:b151 with SMTP id d75a77b69052e-4b11e0bb988mr130888341cf.16.1755453333798;
+        Sun, 17 Aug 2025 10:55:33 -0700 (PDT)
+Received: from fedora (pool-96-255-20-42.washdc.ftas.verizon.net. [96.255.20.42])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4b11dc1aa56sm39748811cf.7.2025.08.17.10.55.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Aug 2025 10:50:45 -0700 (PDT)
-From: rakuram <rakuram.e96@gmail.com>
-To: gourry@gourry.net
-Cc: alison.schofield@intel.com,
-	corbet@lwn.net,
-	dan.j.williams@intel.com,
-	dave.jiang@intel.com,
-	dave@stgolabs.net,
-	ira.weiny@intel.com,
-	jonathan.cameron@huawei.com,
-	linux-cxl@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel-mentees@lists.linuxfoundation.org,
-	rakuram.e96@gmail.com,
+        Sun, 17 Aug 2025 10:55:33 -0700 (PDT)
+Date: Sun, 17 Aug 2025 13:55:31 -0400
+From: Gregory Price <gourry@gourry.net>
+To: rakuram <rakuram.e96@gmail.com>
+Cc: linux-doc@vger.kernel.org, dan.j.williams@intel.com, dave@stgolabs.net,
+	dave.jiang@intel.com, jonathan.cameron@huawei.com,
+	vishal.l.verma@intel.com, ira.weiny@intel.com,
+	linux-cxl@vger.kernel.org, alison.schofield@intel.com,
 	skhan@linuxfoundation.org,
-	vishal.l.verma@intel.com
-Subject: Re: [PATCH] Documentation/driver-api: Fix typo error in cxl
-Date: Sun, 17 Aug 2025 23:20:35 +0530
-Message-ID: <20250817175036.6906-1-rakuram.e96@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <aKILiuYaijqAZvPR@fedora>
-References: <aKILiuYaijqAZvPR@fedora>
+	linux-kernel-mentees@lists.linuxfoundation.org, corbet@lwn.net
+Subject: Re: [PATCH v2] Documentation/driver-api: Fix typo error in cxl
+Message-ID: <aKIXk8SKIMKSuGDv@fedora>
+References: <20250817173355.6615-2-rakuram.e96@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250817173355.6615-2-rakuram.e96@gmail.com>
 
-Ok, Gregory. 
+On Sun, Aug 17, 2025 at 11:03:56PM +0530, rakuram wrote:
+> Fixed the following typo errors
+> 
+> intersparsed ==> interspersed
+> in Documentation/driver-api/cxl/platform/bios-and-efi.rst
+> 
+> ---
+> Changelog:
+> 
+> Changes since v1:
+> Dropped fix for page-allocator.rst as requested by Gregory
+> 
+> Suggested-by: Gregory Price <gourry@gourry.net> 
+> Signed-off-by: rakuram <rakuram.e96@gmail.com>
 
-I will send v2 without page-allocator changes as suggested. 
+Reviewed-by: Gregory Price <gourry@gourry.net>
+
+> ---
+>  Documentation/driver-api/cxl/platform/bios-and-efi.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/driver-api/cxl/platform/bios-and-efi.rst b/Documentation/driver-api/cxl/platform/bios-and-efi.rst
+> index 645322632cc9..a9aa0ccd92af 100644
+> --- a/Documentation/driver-api/cxl/platform/bios-and-efi.rst
+> +++ b/Documentation/driver-api/cxl/platform/bios-and-efi.rst
+> @@ -202,7 +202,7 @@ future and such a configuration should be avoided.
+>  
+>  Memory Holes
+>  ------------
+> -If your platform includes memory holes intersparsed between your CXL memory, it
+> +If your platform includes memory holes interspersed between your CXL memory, it
+>  is recommended to utilize multiple decoders to cover these regions of memory,
+>  rather than try to program the decoders to accept the entire range and expect
+>  Linux to manage the overlap.
+> -- 
+> 2.43.0
+> 
 
