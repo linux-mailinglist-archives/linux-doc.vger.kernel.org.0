@@ -1,116 +1,404 @@
-Return-Path: <linux-doc+bounces-56612-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56614-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46B6BB2AA94
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Aug 2025 16:33:41 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48CF5B2AB18
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Aug 2025 16:42:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EFE74682C8E
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Aug 2025 14:25:34 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B32345C3DF6
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Aug 2025 14:34:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CEF2231E11F;
-	Mon, 18 Aug 2025 14:15:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51D3B308F13;
+	Mon, 18 Aug 2025 14:29:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="bMEPNlUE"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="Oj8yDaSm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
+Received: from mail-io1-f74.google.com (mail-io1-f74.google.com [209.85.166.74])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D77F238C33
-	for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 14:15:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 458AB22157F
+	for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 14:28:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.74
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755526538; cv=none; b=b2q7wDx0S9upNDO/58W4rQ9fe5LO0DBE3qfwiZAZoXhJ+fm+65eMy2rvbNqOBmpbnuH+84YaIsB29k7XrMuHb0P5DkRpL9h7KGPkqKRZnQoVTTIaETOdD8nAiX37GGMtrGDCPbgaNTqPaBWsZtm/WT3zaXLvUKGkrq/58C8OKho=
+	t=1755527340; cv=none; b=kB1wDElX6QDQuv1Yn1R3rLPjMLUl4SP89CDpg3iRTz248f5SoeId0xbXJHZ6n2f4evluovfIiIMf7cC4LfXTK9xe9fUnHIG+SMHVnf6eCA3gLZ1FBEQebYp2/OfuwZmrCZUN5qaAlMZ8zRKHWIVjo/8NKjYt88ckzMWZ13W0VT0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755526538; c=relaxed/simple;
-	bh=rUDEqLaGKm6ZQUUXN90WHjd/zoe+fc5cuVujd6LddVQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lZop1Z76blu/e+UpVEzyWKx0K+v79oE+5fQToeGiKhrkFEs3vxO9afoRDznUe9G73ECj23u4f8DUH6ZufpStWSBnDstDtsGrSNWQZ8nGQW0W9Zlf/4degVkrpDdsbDpkDiqMo/ygmlDSMZk0lo1/wQZKAJfaHG2JPlutaDrrxQw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=bMEPNlUE; arc=none smtp.client-ip=209.85.167.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
-Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-435de5b2f29so1302181b6e.0
-        for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 07:15:35 -0700 (PDT)
+	s=arc-20240116; t=1755527340; c=relaxed/simple;
+	bh=FAqQGV3Ke2gx5F8X9Iui2YLCfRBa4dhio9Dqgb/b4WI=;
+	h=Date:Mime-Version:Message-ID:Subject:From:To:Cc:Content-Type; b=X1NRQc7+p1irn1lzULvhtx49/ztM3egKMJSyTJatIzR4NZWcrDoNFGMb4m4+S4BxCY7v+HKOHOwKD2Lrkrx0oIm4Yn3XxZo7pVAEC9egLn/J8qYka0RNQKCAZnF5BZBJofcYhwOP5sIqtg/8XIG552W1JLpZV+JP1CzIGNevxEc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jdenose.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=Oj8yDaSm; arc=none smtp.client-ip=209.85.166.74
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--jdenose.bounces.google.com
+Received: by mail-io1-f74.google.com with SMTP id ca18e2360f4ac-8845b4f5394so95316839f.3
+        for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 07:28:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google; t=1755526535; x=1756131335; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=mvgGnTzuqm5EUCC8liL9F7L/fpNCxBXVLfxe21l/PJw=;
-        b=bMEPNlUE2svk3bDa3a8I9vzpTcNDMzqzDfTy+u9BMtR+GRrB6GEOMiuLWmLmRPYEtm
-         W21UvFTU5uRboXuQphWnyBSmeunXvzwsdG7eJUy+5Z6QczKl1hqvH7cv1mW5vUWceWkc
-         giBhYHhuLfqyYoXpvtv5UyD9LbSOgnZVf4dgGeJml1aW3ah1uuCGoibwr05iRknf7N5z
-         eO6Lh1hmE2ZflhEK5mirYLY3Ct88gce9b8SicXRdLnyANk/i/96gMnLVf9EGdgajne0W
-         9HUNHNKFpCm1eOQZnaD9zNaUTXdQe0eWAuj56ZsIIO8H5M673CM4iKrSABCgGUAv2BWT
-         Z01A==
+        d=google.com; s=20230601; t=1755527336; x=1756132136; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:from:subject:message-id
+         :mime-version:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=SFLeRUjEYD3BkpymJXqmECsVI217TETJMUIOSlL8bNE=;
+        b=Oj8yDaSma2AZNXoEYSSZlvH024LYXaHwoJ9VJpX5ad4sBSDNU74s5+urKCn1n8G1uw
+         Uupwmh3scDns+koPmngFTYwGcU4hEAlRWyV7zm+JT+GnkXa3gEfX2X/TCzTzx+bCPA5C
+         8gWR3rWpnk7GxN/65XCBr+e1Q4yJSkjuYWt8ipWzp+87hxqT9pjN30wds29qHC/8IyPj
+         ysnYziEkhvRetwBZwj77N+hLWrG2b3SRqpWGF87VGErp8kaqCZIq7CPfYqozbscXN87v
+         0Fs9M6weDpClOg8yYKBTZuTF+Z30edQuXUe6/dcypxVsl5zKwBpi96VVwoOGXJm4shyk
+         4JvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755526535; x=1756131335;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1755527336; x=1756132136;
+        h=content-transfer-encoding:cc:to:from:subject:message-id
+         :mime-version:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mvgGnTzuqm5EUCC8liL9F7L/fpNCxBXVLfxe21l/PJw=;
-        b=hJVirTEa6GlOe+CyW44yTuI+STdvzCBcMtdllhHzfmhtcww4iAEOhAqV8NTu67sX+Z
-         4/AO6ToV1Z3GxrVTXmBDCDQpNwou06MZjcSW9Pbxt8NTR9GzRGnX1Zpjn5eJ+eP7v7W/
-         gr31hJC00Fu7lurQjmkhY2AZxkg1b+XHKsRNA496vYVyFoxmlF13R09y36wNpC3vlZjX
-         p8php4kRJXGAxOUzRHhimRe2T7RdhXnjBmNZuB9snGt7hLaTM7wvE1O2sZ2zt9owWgfY
-         dexIAaeQuwAbXokZs+Lt346AUmHVRy1GMKau004hltnyvxB9ZK+RbPIhimRg+D1A70ON
-         SE/w==
-X-Forwarded-Encrypted: i=1; AJvYcCUuoILNAr70sMIkJvERfFTuWb7Vyz+g0ufL1yhlruG0WiXfRglPkpTgCl58XHmqlUTN4V/t84xMJ0Y=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpqfM6nyMRi1mE3FHhMY06YWjIIs1QjRz2KyxHJWcT8C86sssw
-	V9UtiDMhTV39j8uSk8RDyBEBJHfc4ZCbPqYdUu8VHa3+KsKz94YMpHGkK3ihomMxIhDnY08ZH5Q
-	hLMkW
-X-Gm-Gg: ASbGncuXcOexVbGPlUpuWORc2X5HU2JDrKDBcSpd48Ng86MrAZdeGD3EypMvS257UPQ
-	442ckIUhdx0JfIABXYFj6hYwrXYHBVK4Wo5mWR+ivo4QtlphuyasG2URwTg0e+GRpGNwQa+SMeq
-	OfStKqk31nzlhN+Zi+NJEcPTx0DBXPxmi4M8Zhagaj/nMxVp1s/M6nwaGif61rbSQ42FkT4zd/5
-	9cSP6Bh2E5r/r0/FO4i5qTlhNcudMAo6cRWgRKCmHpyxc/+AiBY7tguENq0ti9DfehXT2ttqq8u
-	KWUZL4Bcxa0OkAGmwRyv6PIU+0+A8Mz4JMo5vDJ2MZ+XQmiEutRNvY315g/prV6SMJkLgXtb
-X-Google-Smtp-Source: AGHT+IHvo7ZOM5rHAk24hmKZc+hkAikSEtRWDKvfOcli7KYViAuT56UrJGkQ79fMBBVlt+XNlS5WsQ==
-X-Received: by 2002:a05:6808:5147:b0:435:7231:74f1 with SMTP id 5614622812f47-435f5e9c626mr5304208b6e.23.1755526534821;
-        Mon, 18 Aug 2025 07:15:34 -0700 (PDT)
-Received: from ziepe.ca ([130.41.10.202])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-435ed1e96adsm1821089b6e.26.2025.08.18.07.15.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Aug 2025 07:15:34 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.97)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1uo0e5-00000004NAz-0Sve;
-	Mon, 18 Aug 2025 11:15:33 -0300
-Date: Mon, 18 Aug 2025 11:15:33 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Alessandro Ratti <alessandro@0x65c.net>
-Cc: kevin.tian@intel.com, corbet@lwn.net, skhan@linuxfoundation.org,
-	iommu@lists.linux.dev, linux-doc@vger.kernel.org,
-	alessandro.ratti@gmail.com
-Subject: Re: [PATCH] Documentation: fix spelling errors in iommufd.rst
-Message-ID: <20250818141533.GF599331@ziepe.ca>
-References: <20250815153840.188213-1-alessandro@0x65c.net>
- <20250815153840.188213-2-alessandro@0x65c.net>
+        bh=SFLeRUjEYD3BkpymJXqmECsVI217TETJMUIOSlL8bNE=;
+        b=McZqpJRJ1vQaNkKXV9B6tyiltnSBma0n4yqfscUTYJxK5e2pJL7Ys3lZ8gWbbRtk52
+         tUVrjyzLInSgBtQ02idr0u3aVBLrYA5/A/+/rLP5ltkGTqRAv+/bZY7oeK9Hs61vLOPh
+         rQj1IjeW/nQUvxgoWpyTPB/9jbUyaatiA4IMjqxb24iCUsOVwx4oGUI47fKLwwdcO7jG
+         aNpQ5+5FzuB9D3WVTAfYNq/k98cjEe9Gl+EmkFY0FSm0OypL2KTcl8WnpyklUv+vmiR9
+         8/gpwQCvoIinVWFShoS7iR4AWD1HC6fdBNdounXbPaM0njq+WSOcLwaUQZynFTq2+5xS
+         Mklw==
+X-Forwarded-Encrypted: i=1; AJvYcCUBRZ51L6ykUEAzZPC8Io325Y7hMhWYyb3vQsHMgjc8KYlkcPPQxI5w4K1b7Mzb/SCS+yuMu+ygRR8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxbTZKtfbWkG4YdRNWaNZedYc04mNZR1XNjjKA1oGLQ5ThdwD1S
+	XbLfNNUq6c+oYqeQ+Zrialk2BNzzR06Z8jq8yvLLFNwVfM3cjjTCzXY0mlQuoqZMBZ8ikUXom1g
+	19VTxpBVhDg==
+X-Google-Smtp-Source: AGHT+IENlrHCKRrHMdWjkYiMqgRbUWykHtySlNXHP6tuneZCk119arXyHoOMub6OTc/yo0028tNgbvEYm2DY
+X-Received: from iomg7.prod.google.com ([2002:a6b:7607:0:b0:881:85ed:3c6c])
+ (user=jdenose job=prod-delivery.src-stubby-dispatcher) by 2002:a5e:8d15:0:b0:86c:fdb3:2798
+ with SMTP id ca18e2360f4ac-8843e4d56d7mr1989631639f.11.1755527336426; Mon, 18
+ Aug 2025 07:28:56 -0700 (PDT)
+Date: Mon, 18 Aug 2025 14:28:00 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250815153840.188213-2-alessandro@0x65c.net>
+Mime-Version: 1.0
+X-B4-Tracking: v=1; b=H4sIAHA4o2gC/22NwQ7CIBAFf6XZsxhAEO3J/zA9VFgoiXYJ1EbT9
+ N/FevU4k7x5CxTMEQu0zQIZ51gijRXkrgE79GNAFl1lkFxqfpSalWdKlCfmKVtMvSuM35Q3yru
+ D4z3UXcro42trXrvKQywT5fd2MYuv/dWMUH9qs2CcGWGN5dqokz1fAlG4497SA7p1XT97tkNas wAAAA==
+X-Change-Id: 20250625-support-forcepads-0b4f74fd3d0a
+X-Mailer: b4 0.14.2
+Message-ID: <20250818-support-forcepads-v2-0-ca2546e319d5@google.com>
+Subject: [PATCH v2 00/11] HID: Implement haptic touchpad support
+From: Jonathan Denose <jdenose@google.com>
+To: Jiri Kosina <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, 
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Henrik Rydberg <rydberg@bitmath.org>
+Cc: linux-input@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, Angela Czubak <aczubak@google.com>, 
+	"Sean O'Brien" <seobrien@google.com>, Jonathan Denose <jdenose@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 15, 2025 at 05:37:26PM +0200, Alessandro Ratti wrote:
-> This patch corrects two minor spelling issues found in
-> Documentation/userspace-api/iommufd.rst:
-> 
-> - "primarly" -> "primarily"
-> - "sharable" -> "shareable"
-> 
-> Found using codespell(1).
-> 
-> Signed-off-by: Alessandro Ratti <alessandro@0x65c.net>
-> ---
->  Documentation/userspace-api/iommufd.rst | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+Hello,
 
-I'll pick this up to for-rc, thanks
+This is an updated implementation of the interface for controlling haptic
+touchpads.
 
-Jason
+Below is an updated design proposal for the userspace and HID interfaces,
+modified from what one of my colleagues submitted in 2019 [0].
+
+We would appreciate any feedback you might have.
+
+Thank you,
+
+Jonathan Denose
+Chromium OS Team
+
+Background
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+There are multiple independent projects to develop a touchpad with force se=
+nsors
+and haptic actuators, instead of a traditional button.  These haptic touchp=
+ads
+have several advantages and potential uses; they allow clicking across the
+entire touchpad surface, adjusting the force requirement for clicks, haptic
+feedback initiated by UI, etc. Supporting these features will potentially
+require two new communication channels at the kernel level:
+* Control of haptic motor by the host
+* Force sensor data from device to host
+
+This document includes two related proposals:
+1. HID design proposal, that hardware makers would need to implement
+2. Kernel design proposal
+
+Objective
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Develop a standard protocol to allow userspace applications to communicate =
+with
+haptic touchpads, and minimize duplicated code and effort.
+
+Requirements:
+1. Support UI-initiated haptic feedback.
+2. Allow userspace to control when button press and button release haptic
+   effects are triggered. (Useful when detecting a false click, changing fo=
+rce
+   thresholds, or sending context-dependent effects).
+3. Reveal force sensor readings to userspace applications.
+4. Only allow OS-controlled haptic feedback for those systems which support=
+ it.
+
+Proposal
+=3D=3D=3D=3D=3D=3D=3D=3D
+
+In order to minimize duplicated effort, we propose standardized haptic touc=
+hpad
+support in the linux kernel.
+
+HID API
+-------
+
+Modes
+.....
+
+The haptic touchpad should be able to operate under two different modes.
+
+1. Device-controlled mode
+
+The haptic touchpad should start up in "device-controlled mode"
+(HID_HAPTIC_MODE_DEVICE), meaning it acts as a normal touchpad. This means =
+it
+should perform the press and release haptic feedback autonomously at predef=
+ined
+force thresholds, and send the appropriate BTN_* events.
+
+2. Host-controlled mode
+
+Once the touchpad has been confirmed as supporting haptics (described in mo=
+re
+detail in the the "Click and release control" section below), the device sh=
+ould
+enter "host-controlled mode" (HID_HAPTIC_MODE_HOST). In this mode userspace
+should take control. From here, userspace will take control over
+press/release haptic feedback, relying on the effects sent by the kernel.
+
+Multitouch
+..........
+
+The HID API for multitouch reports should follow the Microsoft precision
+touchpad spec [1], with the following changes:
+* A tip pressure field [2] should be used to report the force. The physical=
+ unit
+  Type (Newtons or grams), exponent, and limits should be reported in the
+  report descriptor for the force field.
+* The device will always report the button state according to its predefine=
+d
+  force thresholds, even when not in device-controlled mode.
+* The device must expose a "simple haptic controller" logical collection
+  alongside the touchpad collection.
+
+Haptic control
+..............
+
+The HID protocol described in HUTRR63[3] must be used.
+
+The following waveforms should be supported:
+
+| WAVEFORMNONE             | Implicit waveforms required by protocol       =
+    |
+| WAVEFORMSTOP             |                                               =
+    |
+| ------------------------ | ----------------------------------------------=
+--- |
+| WAVEFORMPRESS            | To be used to simulate button press. In device=
+-   |
+|                          | controlled mode, it will also be used to simul=
+ate |
+|                          | button release.                               =
+    |
+| ------------------------ | ----------------------------------------------=
+--- |
+| WAVEFORMRELEASE          | To be used to simulate button release.        =
+    |
+
+All waveforms will have an associated duration; continuous waveforms will b=
+e
+ignored by the kernel.
+
+Triggers & Mode switching
+.........................
+
+The =E2=80=9Cauto trigger waveform=E2=80=9D should be set to WAVEFORM_PRESS=
+ by default, and the
+button from the touchpad collection should be set as the =E2=80=9Cauto trig=
+ger
+associated control=E2=80=9D.
+
+The kernel can trigger the different modes in the following ways:
+* Device-controlled mode can be enabled by setting the =E2=80=9Cauto trigge=
+r waveform=E2=80=9D to
+  WAVEFORM_PRESS.
+* Host-controlled mode can be enabled by setting the "auto trigger waveform=
+" to
+  WAVEFORM_STOP.
+
+The device must also support manual triggering. If intensity modification f=
+or
+waveforms is supported by the device, the intensity control should be inclu=
+ded
+in the manual trigger output report. This allows modification of the intens=
+ity
+on a per-waveform basis. Retriggering does not need to be supported by the
+device.
+
+Userspace API
+-------------
+
+Multitouch protocol
+...................
+
+ABS_MT_PRESSURE will be used to report force. The resolution of ABS_MT_PRES=
+SURE
+should also be defined and reported in force units of grams or Newtons.
+ABS_PRESSURE should be reported as the total force applied to the touchpad.
+When the kernel is in host-controlled mode, it should always forward the bu=
+tton
+press and release events to userspace.
+
+Use Force Feedback protocol to request pre-defined effects
+..........................................................
+
+The force feedback protocol [4] should be used to control predefined effect=
+s.
+
+Typical use of the force feedback protocol requires loading effects to the
+driver by describing the output waveform, and then requesting those effects
+using an ID provided by the driver. However, for haptic touchpads we do not=
+ want
+to describe the output waveform explicitly, but use a set of predefined eff=
+ects,
+which are identified by HID usage.
+
+The force feedback protocol will need to be extended to allow requests for =
+HID
+haptic effects. This requires a new feedback effect type:
+
+/**
+ * struct ff_haptic_effect
+ * @hid_usage: hid_usage according to Haptics page (WAVEFORM_CLICK, etc.)
+ * @vendor_id: the waveform vendor ID if hid_usage is in the vendor-defined
+ * range
+ * @vendor_id: the vendor waveform page if hid_usage is in the vendor-defin=
+ed
+ * range
+ * @intensity: strength of the effect
+ * @repeat_count: number of times to retrigger effect
+ * @retrigger_period: time before effect is retriggered (in ms)
+ */
+struct ff_haptic_effect {
+        __u16 hid_usage;
+        __u16 vendor_id;
+        __u8  vendor_waveform_page;
+        __s16 intensity;
+        __u16 repeat_count;
+        __u16 retrigger_period;
+}
+
+Since the standard waveform id namespace does not overlap with the vendor
+waveform id namespace, the vendor id and page can be ignored for standard
+waveforms.
+
+Click and release control
+.........................
+
+Haptic functionality shall be gated behind the HID_MULTITOUCH_HAPTIC kernel
+configuration option, and this kernel configuration option should only be
+enabled if userspace will support haptic capabilities. Haptic functionality=
+ will
+only be initialized and used if HID_MULTITOUCH_HAPTIC is enabled, and if th=
+e
+following conditions have been met:
+* ABS_MT_PRESSURE is defined and reporting force units of Newtons or grams.
+* The device supports haptic effects according to the hid protocol defined =
+in
+  HUTRR63 [3].
+These checks will happen when the driver probes and initializes the multito=
+uch
+device.
+
+In the case when the kernel configuration option has been set and the devic=
+e
+reports pressure and haptic effects as defined above, the kernel will initi=
+alize
+the haptic device and configure the haptic driver to signal that the touchp=
+ad is
+haptic-compatible. To signal to userspace that the touchpad is haptic-compa=
+tible
+the kernel will mark INPUT_PROP_HAPTIC_TOUCHPAD.
+
+With userspace willing and able to take control, the kernel will signal to =
+the
+device to exit device-controlled mode once a WAVEFORMPRESS or WAVEFORMRELEA=
+SE
+event is uploaded. From here, userspace will take control over press/releas=
+e
+haptic feedback, relying on the effects sent by the kernel.
+
+In all other cases, the driver will take no action to enable haptic
+functionality.
+
+Summary of normal use-case
+1. The kernel waits for userspace to upload WAVEFORMPRESS or
+   WAVEFORMRELEASE.
+2. Userspace determines when a click has been performed based on its own
+   criteria and tells the touchpad to perform a haptic effect.
+3. When userspace erases the WAVEFORMPRESS or WAVEFORMRELEASE effect, signa=
+l the
+   device to return to device-controlled mode.
+
+[0]: https://www.spinics.net/lists/linux-input/msg60938.html
+[1]: https://learn.microsoft.com/en-us/windows-hardware/design/component-gu=
+idelines/touchpad-devices
+[2]: Usage ID 0x30 of HID usage table 0x0D. See chapter 16:
+     https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf
+[3]: https://www.usb.org/sites/default/files/hutrr63b_-_haptics_page_redlin=
+e_0.pdf
+[4]: https://www.kernel.org/doc/html/v4.20/input/ff.html
+
+Signed-off-by: Jonathan Denose <jdenose@google.com>
+---
+Changes in v2:
+- Rename FF_HID and ff_hid_effect to FF_HAPTIC and ff_haptic_effect
+- Add more detail to CONFIG_HID_HAPTIC config option description
+- Remove CONFIG_MULTITOUCH_HAPTIC config option
+- Utilize devm api in hid-multitouch haptic functions
+- Link to v1: https://lore.kernel.org/all/20250714-support-forcepads-v1-0-7=
+1c7c05748c9@google.com
+
+---
+Angela Czubak (11):
+      HID: add haptics page defines
+      Input: add FF_HAPTIC effect type
+      Input: add INPUT_PROP_HAPTIC_TOUCHPAD
+      HID: haptic: introduce hid_haptic_device
+      HID: input: allow mapping of haptic output
+      HID: haptic: initialize haptic device
+      HID: input: calculate resolution for pressure
+      HID: haptic: add functions handling events
+      Input: MT - add INPUT_MT_TOTAL_FORCE flags
+      HID: haptic: add hid_haptic_switch_mode
+      HID: multitouch: add haptic multitouch support
+
+ Documentation/input/event-codes.rst    |  14 +
+ drivers/hid/Kconfig                    |  11 +
+ drivers/hid/Makefile                   |   1 +
+ drivers/hid/hid-haptic.c               | 580 +++++++++++++++++++++++++++++=
+++++
+ drivers/hid/hid-haptic.h               | 131 ++++++++
+ drivers/hid/hid-input.c                |  18 +-
+ drivers/hid/hid-multitouch.c           |  47 +++
+ drivers/input/input-mt.c               |  14 +-
+ include/linux/hid.h                    |  29 ++
+ include/linux/input/mt.h               |   1 +
+ include/uapi/linux/input-event-codes.h |   1 +
+ include/uapi/linux/input.h             |  22 +-
+ 12 files changed, 862 insertions(+), 7 deletions(-)
+---
+base-commit: 86731a2a651e58953fc949573895f2fa6d456841
+change-id: 20250625-support-forcepads-0b4f74fd3d0a
+
+Best regards,
+--=20
+Jonathan Denose <jdenose@google.com>
+
 
