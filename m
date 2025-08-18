@@ -1,70 +1,70 @@
-Return-Path: <linux-doc+bounces-56671-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56680-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17E10B2B458
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Aug 2025 01:10:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED291B2B472
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Aug 2025 01:12:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2CC8D3B824B
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Aug 2025 23:10:49 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9D9413B6FC3
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Aug 2025 23:12:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C3312773CD;
-	Mon, 18 Aug 2025 23:10:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6EC6C2765CD;
+	Mon, 18 Aug 2025 23:10:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="H6pnQoVB"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="obh3M1he"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f202.google.com (mail-il1-f202.google.com [209.85.166.202])
+Received: from mail-io1-f74.google.com (mail-io1-f74.google.com [209.85.166.74])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 114C72765C0
-	for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 23:10:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.202
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40BBA280305
+	for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 23:10:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.74
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755558638; cv=none; b=J6wZL+SnMi5DBbIgeyiSF4ucZKLi9fZWnp72t4SOtJ2tam0DxXmTgXb/jUik0OQdpmJh09MKNGcqgTt71XhGMDxnmixH7NacFl+8z80I+Ao0AgSbjFlMp/HGg5eGKK+RqM01wok4FD7fpclrxZ9XoFvKKTYfXZjmCPO5rXihkog=
+	t=1755558648; cv=none; b=VCkHD9EgJ9FD+x+MvXJo6G/RCubcxM9u5fjJ2lWIsbFYYGYj6eLq/H4B82yMojg1OpN63kGBwU1byUc/7TMISBqLtOfduR5heSV2xNhzLNpuynxaCNhN6THy74odTQPW+m0iH60h+c1SS+5jqzeIbQdNqB4GRTP7C/3ZrOC+rzI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755558638; c=relaxed/simple;
-	bh=fmhEJJJB/E1FFPI5LjG9ozybSomAbkYBLER6Pk9jyms=;
+	s=arc-20240116; t=1755558648; c=relaxed/simple;
+	bh=pm1W0YfpOpWRiFbJt4o4DwVnxjqV5znVwyUekdvRLXU=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=HeRLQUo6GIPa8g4/QQfr5aQOJ2RRAQiQehKKn8bkzIN2WV/uxlmzgqgt8o67QIg8qS1+nN2HQS2ST5Ulya71iFDYKerkZvDc19ZSbP1zuj0ayUjBSDjbSbKAgs4+FR/BX6lEtQsGSLs+1W0C6WDdvgZfsxEboSazKAQEC31GyxA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jdenose.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=H6pnQoVB; arc=none smtp.client-ip=209.85.166.202
+	 To:Cc:Content-Type; b=aa1Tt/G+/K29s+/cGcVhIfWECd/ODoHcQOQEapvDhuRiinkJya/EwDpJQg6XVkHiXDy26In8fqV1YkNukTFC2p64Rx/1q4Rwph5IyyMx3EEhMNvUyQXf19B/P9jW9gAbmlnK92ItBuv05UIAHTFRx6lrjIDT8ZYjELipIuFMCbs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--jdenose.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=obh3M1he; arc=none smtp.client-ip=209.85.166.74
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--jdenose.bounces.google.com
-Received: by mail-il1-f202.google.com with SMTP id e9e14a558f8ab-3e671c9e964so10945135ab.3
-        for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 16:10:35 -0700 (PDT)
+Received: by mail-io1-f74.google.com with SMTP id ca18e2360f4ac-88432e1c782so585144039f.2
+        for <linux-doc@vger.kernel.org>; Mon, 18 Aug 2025 16:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1755558634; x=1756163434; darn=vger.kernel.org;
+        d=google.com; s=20230601; t=1755558645; x=1756163445; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=H0QevRU85Pi+9axz8eFxpRKcQRe8ukOlLHQx9hBgz38=;
-        b=H6pnQoVBSjnxDHOw8nUX5IrGcTb67khWH+mXN0py21h+cRLyrLx//f4BOCbEj00O5g
-         7tHDfWumzYoT6SYRxw75nATdGvB5jnY/2YR9UY4ofnYDcdkzeXwrDEOJX7KXCFQps+Ds
-         9GkTxwcDlwdNFQSZaRjFL+FYaO9sTq133m3KmgOolIjCqFmFTdKGUsjK1D+6VKz1FjSA
-         UELLJNDzOd3Jf2Wp3y9H5prYCVNHlIC8v8C9iXfvoI8i0Iaa8nCvZlGs1IDR57ommzpn
-         KTyD+2Dot2X1GZr0K78chufYGyigTTOGekN8qYMXmI0NwBpMm8gvufYXsxkL7PAeomfo
-         Y+TA==
+        bh=weSzBVnDQwjDP7j2MvS38YwDqh+Hi+XeLH59AMJj2cU=;
+        b=obh3M1he/uBiWescp4u2j2cnFx0V6CQ8VIFWaPfcNxgQckqYIwj0JkLktkp7fiihcr
+         n+DUjQ6KtEIEC3O7KDhFwyvSpVYVDQkVqN4Wfe2x0vQCHOXFReh1cvrQ+/JCj1HYKf8j
+         x2GuAZVDk7OgFg4Ggpi+dFCrkvnzjk776urDjUauwlgAe18wsPEwHnN2o56NB5X1X7yW
+         TQJr3kPzKZUwyYwISj9eSi8VYdhffgTUGQEHa+ueSHA9YQkouUOoRonZAV33tKvZMOxM
+         CI3ANjSPTZ2kir5KKfdFkaHKrTyQRHPUrF982KyBNdJHC0asiR6QXhEOLNWaOkKqShYs
+         ozMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755558634; x=1756163434;
+        d=1e100.net; s=20230601; t=1755558645; x=1756163445;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=H0QevRU85Pi+9axz8eFxpRKcQRe8ukOlLHQx9hBgz38=;
-        b=HHLWlVJlm4WA15G5BdPMeQTbhKqYjWOFZ4x7Urn0xMzpyaqezUGq3ZGUpTIYOvS64I
-         KkVKBmgJAImjTewxlJ1ZpDlFLbkBKHsSuyXlk4Q1Al3v/q0v/X0CQX+v2HumoF+e7Ikp
-         MdHjusV3VRbtll+zRmdYqn2gEL5S9Y5rS5y2KN2IA0c32BMeDjL7npL6wx0qK8GrbMy7
-         eNHcBol0DIwXdpU5I3pEeJSe6z2k7322SYb9e6tRugUl1FAvM8dG66gOb5FXW4e4tX7Q
-         zrkBDnogJMA52U2F1mPPjkKaOz/7ussIlSFKkAKQ6cUJVraJDJ0CUcaAn347ug2XtRJ9
-         p+Pg==
-X-Forwarded-Encrypted: i=1; AJvYcCWPbtoOawUGbSsPdWKkA19r1/4y+FJ+0v2w6JIvYllDBPBYheB3Td6JVkxUXtL7b+eVYxwZr5C9lNc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzMMxCXL5RR/Opqs/BjkEAsa0SU3TDvE9VADuiGMYo5gVTFk9K/
-	Z/athdl88SbcamDJKdvcYkCXv/YV5JA25QVH0KDAxlGbxBbMjhPKGa601C0OtRK0D7kCc1v8f5N
-	lLasYBgrYYA==
-X-Google-Smtp-Source: AGHT+IFCfiADlQxcsJnYSe59mlfocD3gP94iu57cJNx0vOjYhVOrRJWHhrHJK//rZTjPILcmNtM8bbwrPkcR
-X-Received: from jabc24.prod.google.com ([2002:a05:6638:c218:b0:50a:68a6:1578])
- (user=jdenose job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6e02:1a26:b0:3e3:cc1b:2b5e
- with SMTP id e9e14a558f8ab-3e676627764mr9826585ab.15.1755558634367; Mon, 18
- Aug 2025 16:10:34 -0700 (PDT)
-Date: Mon, 18 Aug 2025 23:08:42 +0000
+        bh=weSzBVnDQwjDP7j2MvS38YwDqh+Hi+XeLH59AMJj2cU=;
+        b=iHFIR+L4yDqX/VlFoCfuqiwU9DGFUJchceENKMZL2lfqtkF/uDlDLQoAkFcdSgxFSe
+         6ABJsiYfqG+atRTeYZ3lWOrgNPWwYXLTI/u6ZTXaoNRHSaUap382hHJQja0r3wGLrUVP
+         mzJ5l+tlw7a8b2dCkuPOF9b3dmQTxRvdVfrPRyUG/2J/MszTmTEscKYZIkZ17YH3GPe7
+         bIJIIg+UvmoQdNbvPZCjRnJe3nFaf9EIDoeX/awSI9Wwd49uF7+u+4WKI4aOm9w+ENAs
+         bz7dCOt+Zsr+L2Zy/6yVFEdgIomYTZWedziHy+335LXtBkSVKFfXDK/XywktTxhZctFE
+         gZdw==
+X-Forwarded-Encrypted: i=1; AJvYcCWycl77lBqYInAcphzoE4dyTh+Xx5agKXtWQ/20AACL11EbTnjxrM5UAZw1er6f33SwL35CbmdnQLk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwqPVKIshRy9Rbu+l69lFS+KumrsgWqHpWkb0UL/7MiOfC4LoYA
+	E5NJA3OSTFIRc1dj/ChyQ5YH3A240R8JyJop24W4yWCY1DXIljtpGgyjM62s4zIjRIRrHocYIMi
+	Z3jdOkDamGQ==
+X-Google-Smtp-Source: AGHT+IEaW72/Pb59rNZtAEgraB28P029G7O5swShzAoxNgLe6iTZBLDO7jtuVyNiADWynNE2azecOrk3BnJX
+X-Received: from iobbe15.prod.google.com ([2002:a05:6602:378f:b0:884:3f50:a648])
+ (user=jdenose job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6602:2dd4:b0:884:315d:e433
+ with SMTP id ca18e2360f4ac-88467f6312fmr87282339f.12.1755558635646; Mon, 18
+ Aug 2025 16:10:35 -0700 (PDT)
+Date: Mon, 18 Aug 2025 23:08:43 +0000
 In-Reply-To: <20250818-support-forcepads-v3-0-e4f9ab0add84@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -74,8 +74,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20250818-support-forcepads-v3-0-e4f9ab0add84@google.com>
 X-Mailer: b4 0.14.2
-Message-ID: <20250818-support-forcepads-v3-1-e4f9ab0add84@google.com>
-Subject: [PATCH v3 01/11] HID: add haptics page defines
+Message-ID: <20250818-support-forcepads-v3-2-e4f9ab0add84@google.com>
+Subject: [PATCH v3 02/11] Input: add FF_HAPTIC effect type
 From: Jonathan Denose <jdenose@google.com>
 To: Jiri Kosina <jikos@kernel.org>, Benjamin Tissoires <bentiss@kernel.org>, 
 	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Jonathan Corbet <corbet@lwn.net>, 
@@ -87,70 +87,70 @@ Content-Type: text/plain; charset="utf-8"
 
 From: Angela Czubak <aczubak@google.com>
 
-Introduce haptic usages as defined in HID Usage Tables specification.
-Add HID units for newton and gram.
+FF_HAPTIC effect type can be used to trigger haptic feedback with HID
+simple haptic usages.
 
 Signed-off-by: Angela Czubak <aczubak@google.com>
 Co-developed-by: Jonathan Denose <jdenose@google.com>
 Signed-off-by: Jonathan Denose <jdenose@google.com>
 ---
- include/linux/hid.h | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ include/uapi/linux/input.h | 22 +++++++++++++++++++++-
+ 1 file changed, 21 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/hid.h b/include/linux/hid.h
-index 568a9d8c749bc5547ff78d5abe6db7bce2f62d2b..344ab0e40f29afe55575e5a7544496b7bb48a266 100644
---- a/include/linux/hid.h
-+++ b/include/linux/hid.h
-@@ -156,6 +156,7 @@ struct hid_item {
- #define HID_UP_TELEPHONY	0x000b0000
- #define HID_UP_CONSUMER		0x000c0000
- #define HID_UP_DIGITIZER	0x000d0000
-+#define HID_UP_HAPTIC		0x000e0000
- #define HID_UP_PID		0x000f0000
- #define HID_UP_BATTERY		0x00850000
- #define HID_UP_CAMERA		0x00900000
-@@ -316,6 +317,28 @@ struct hid_item {
- #define HID_DG_TOOLSERIALNUMBER	0x000d005b
- #define HID_DG_LATENCYMODE	0x000d0060
+diff --git a/include/uapi/linux/input.h b/include/uapi/linux/input.h
+index 2557eb7b056178b2b8be98d9cea855eba1bd5aaf..a440fafaa018947f4d9ca0a15af2b4c6bd0ae6a0 100644
+--- a/include/uapi/linux/input.h
++++ b/include/uapi/linux/input.h
+@@ -428,6 +428,24 @@ struct ff_rumble_effect {
+ 	__u16 weak_magnitude;
+ };
  
-+#define HID_HP_SIMPLECONTROLLER	0x000e0001
-+#define HID_HP_WAVEFORMLIST	0x000e0010
-+#define HID_HP_DURATIONLIST	0x000e0011
-+#define HID_HP_AUTOTRIGGER	0x000e0020
-+#define HID_HP_MANUALTRIGGER	0x000e0021
-+#define HID_HP_AUTOTRIGGERASSOCIATEDCONTROL 0x000e0022
-+#define HID_HP_INTENSITY	0x000e0023
-+#define HID_HP_REPEATCOUNT	0x000e0024
-+#define HID_HP_RETRIGGERPERIOD	0x000e0025
-+#define HID_HP_WAVEFORMVENDORPAGE	0x000e0026
-+#define HID_HP_WAVEFORMVENDORID	0x000e0027
-+#define HID_HP_WAVEFORMCUTOFFTIME	0x000e0028
-+#define HID_HP_WAVEFORMNONE	0x000e1001
-+#define HID_HP_WAVEFORMSTOP	0x000e1002
-+#define HID_HP_WAVEFORMCLICK	0x000e1003
-+#define HID_HP_WAVEFORMBUZZCONTINUOUS	0x000e1004
-+#define HID_HP_WAVEFORMRUMBLECONTINUOUS	0x000e1005
-+#define HID_HP_WAVEFORMPRESS	0x000e1006
-+#define HID_HP_WAVEFORMRELEASE	0x000e1007
-+#define HID_HP_VENDORWAVEFORMMIN	0x000e2001
-+#define HID_HP_VENDORWAVEFORMMAX	0x000e2fff
-+
- #define HID_BAT_ABSOLUTESTATEOFCHARGE	0x00850065
- #define HID_BAT_CHARGING		0x00850044
- 
-@@ -423,6 +446,12 @@ struct hid_item {
- #define HID_REPORT_PROTOCOL	1
- #define HID_BOOT_PROTOCOL	0
- 
-+/*
-+ * HID units
++/**
++ * struct ff_haptic_effect
++ * @hid_usage: hid_usage according to Haptics page (WAVEFORM_CLICK, etc.)
++ * @vendor_id: the waveform vendor ID if hid_usage is in the vendor-defined range
++ * @vendor_waveform_page: the vendor waveform page if hid_usage is in the vendor-defined range
++ * @intensity: strength of the effect as percentage
++ * @repeat_count: number of times to retrigger effect
++ * @retrigger_period: time before effect is retriggered (in ms)
 + */
-+#define HID_UNIT_GRAM		0x0101
-+#define HID_UNIT_NEWTON		0xe111
++struct ff_haptic_effect {
++	__u16 hid_usage;
++	__u16 vendor_id;
++	__u8  vendor_waveform_page;
++	__u16 intensity;
++	__u16 repeat_count;
++	__u16 retrigger_period;
++};
 +
+ /**
+  * struct ff_effect - defines force feedback effect
+  * @type: type of the effect (FF_CONSTANT, FF_PERIODIC, FF_RAMP, FF_SPRING,
+@@ -464,6 +482,7 @@ struct ff_effect {
+ 		struct ff_periodic_effect periodic;
+ 		struct ff_condition_effect condition[2]; /* One for each axis */
+ 		struct ff_rumble_effect rumble;
++		struct ff_haptic_effect haptic;
+ 	} u;
+ };
+ 
+@@ -471,6 +490,7 @@ struct ff_effect {
+  * Force feedback effect types
+  */
+ 
++#define FF_HAPTIC		0x4f
+ #define FF_RUMBLE	0x50
+ #define FF_PERIODIC	0x51
+ #define FF_CONSTANT	0x52
+@@ -480,7 +500,7 @@ struct ff_effect {
+ #define FF_INERTIA	0x56
+ #define FF_RAMP		0x57
+ 
+-#define FF_EFFECT_MIN	FF_RUMBLE
++#define FF_EFFECT_MIN	FF_HAPTIC
+ #define FF_EFFECT_MAX	FF_RAMP
+ 
  /*
-  * This is the global environment of the parser. This information is
-  * persistent for main-items. The global environment can be saved and
 
 -- 
 2.51.0.rc1.193.gad69d77794-goog
