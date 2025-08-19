@@ -1,140 +1,229 @@
-Return-Path: <linux-doc+bounces-56689-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-56692-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97C22B2B5ED
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Aug 2025 03:26:34 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 45FF6B2B69E
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Aug 2025 04:03:25 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8A4A916985B
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Aug 2025 01:26:34 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E57BD7B03C5
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Aug 2025 02:01:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5648C1E520A;
-	Tue, 19 Aug 2025 01:26:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F587286402;
+	Tue, 19 Aug 2025 02:03:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hb1YSJUR"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ti/3Zh77"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41B9A1E47BA;
-	Tue, 19 Aug 2025 01:26:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6179C21FF3E;
+	Tue, 19 Aug 2025 02:03:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755566788; cv=none; b=p/XlRh7cQEOP5/gAjr7yU45n+tH5d9oWl5mkLimY0Y5RFPn34pY61SL2f6NJGa3x3rZuzYnnhBtAbsZes8ue8GXZW6ydU5P/K3Ow0QWeiubeiK6hMRWnIZUsv/eN/IyemKONZQa/QOl18wC3FGQs1SqV/DPBhG0qsBIh1fgUjrI=
+	t=1755568999; cv=none; b=FI1COMvolPSxcv21iFkoYaeWKQwI5+lDxrj+yoihq/MXkFXn14cUB0BdGop/jScjk5CtfogA/+f9Ywlmuda+yMuirftzUA1RhqcZBOt9Uy4nqLZfPv6kvujleVPCaNbl5CU1G95gdE+8BHhiDNYSIwRP/JuRMgKsTqlOopuVZfY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755566788; c=relaxed/simple;
-	bh=agYR481QyjyS/7Enp2FSpAI7AE9rLtWb/AeMmfEvraM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Fh/BenRUDE/GyBqjxv01/G9sbHKkUxwiAfpENLh+kGbTCwy6fpnwFBJI+aLqukGBZ71emWcyBeDNA8fcwnyvr4yeQksH415oiJKXAI5SGSTkhlQzX+FUKnSF06zrWSanhamJJ7XZbmtb9l3U6DGiGxNsHGSFMChxUEYxQwjgXyE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hb1YSJUR; arc=none smtp.client-ip=209.85.210.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-76e2eb9ae80so3645598b3a.3;
-        Mon, 18 Aug 2025 18:26:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755566785; x=1756171585; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Pmmqb+0QJFMvstqyZRbkCupg6wif2qsh214IwZwNpHg=;
-        b=hb1YSJURPDVksdcMEMJWSXuQfRDCl1xcLwTR3cHRO0Znz7cRxgwJSINjFLLEM5q2zW
-         rqluew5G75O8erBAqii89N1hFcLda+PQFRpRSrzGQDPLYmz6d9wpRRrbMyXH/TlWE779
-         8C7Vjmhr+VK/FVnRtLZYy4lZeaxnYcPwd9IRzw7pzhtL7dL9LliHK7yS8fvFlihtMOpy
-         HCvu6+4bgjSnQYlAu60EweJ+vx6HVmh/0JWRH40LRgPpv6bFShKkhN2hbsyxK5IDSjX6
-         ul6G59lAgFagfYJigqdSnmE0VJgESF0hDdpas6e29v8UCcn/tCYTBcE4OQ3H34flljbB
-         JAtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755566785; x=1756171585;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Pmmqb+0QJFMvstqyZRbkCupg6wif2qsh214IwZwNpHg=;
-        b=HeJcdUVFTKZgQyhsFUfckPFuVen0FjYYh8TVM86rvJujYQFz3IhKjuQJUdy+q6UjYV
-         YtHAPEFpTlAF+m24UBxYGbobr8fxnNLw+9O0gDQ8Zw0m48AE/iEVpcUQSqinsKxmMynn
-         INrv7SVvsrfWZnh5VhGiqVPhydYUZouJz6IO0Ljox4P9PsGueYw0dbAbq/YJaxWqeWJ6
-         nrIVWvrGUUydLeaxIiyTCRkSYQzD9e/aDwHIhyTYI6nO+Oy1PdfOnxt9OQH0cR7QGFbF
-         0CVgMGtfhj/b+zubNuz0sOVz2D5sKYPNefhRjHJEDB20DWjIkRdpZEkiVY5zJ8GV3A/w
-         rGWw==
-X-Forwarded-Encrypted: i=1; AJvYcCUhzqQQ+f1S77Q9U3CW/y2BD6CCmKo+D3Vv7V/piT9iKgYRE6xXWLD6mqcPvOvZbQf1kEjg@vger.kernel.org, AJvYcCXrd+Y0kqJMPQRnkmabtK/rzW0Nhq2f++sIxtGgXJkZMG93nB8QBZf+flUEa3EqA8NX1JUYhUfiegE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YziSAkOOyICH6pde8d87snXKyAdF/bkPvfnAVfupK/d/GP6q8my
-	uA/QOthEibJHadh1J45q/uD2Hi0QlX3c1D7sKqDHCJneE+jjhGh2dCGX
-X-Gm-Gg: ASbGnctiYuRKWor8n5wTpEJs4t1QHoAJgBJA/2ItG4rR9DN8XJJD0Bgmy809YrCPZMC
-	+Z/gEm4zapfqMvFOyEa8M7+5FcpIVC4d1ch4o4m0z1zQM/bp4f5DGs2lfZVHsnJDCGAlM64KrEs
-	JWKGLkhPzoBf3SFfiN6X1fS38+AQQj5K4aRXdyvC5KDBxyQr03ilsV0zPTd216fusOpXxaNy9Jp
-	bldkXVOXybT5hHxePhFG0c2K35qak+tGe82IdCZv7ywUYEMM1hned3/oBP1leHWVwN/gq+4gCM4
-	H/E2QyxESOb232H0m+85FWaeDRyPAZ1SVD37qDaMCzabFMgRvR/suOB3oQQRPKuHnmfCDEo1Qg8
-	PbLkzEO9461xzIw/NJnDmcA==
-X-Google-Smtp-Source: AGHT+IEGm3fOi7RZ6OFatZkRkuK8HD72RWjYnMacH+NdmRC96egxUW7vWOrEEdTAOOfeYgZPGVaMUg==
-X-Received: by 2002:a05:6a20:2590:b0:243:78a:827c with SMTP id adf61e73a8af0-2430d4c75b9mr996849637.52.1755566785206;
-        Mon, 18 Aug 2025 18:26:25 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b474e146654sm2266972a12.34.2025.08.18.18.26.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Aug 2025 18:26:24 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id AF29F42BF5D4; Tue, 19 Aug 2025 08:26:22 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux RCU <rcu@vger.kernel.org>
-Cc: "Paul E. McKenney" <paulmck@kernel.org>,
-	Frederic Weisbecker <frederic@kernel.org>,
-	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
-	Joel Fernandes <joelagnelf@nvidia.com>,
-	Josh Triplett <josh@joshtriplett.org>,
-	Boqun Feng <boqun.feng@gmail.com>,
-	Uladzislau Rezki <urezki@gmail.com>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Zqiang <qiang.zhang@linux.dev>,
-	Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH 2/2] Documentation: RCU: Retitle toctree index
-Date: Tue, 19 Aug 2025 08:26:20 +0700
-Message-ID: <20250819012620.14606-3-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250819012620.14606-1-bagasdotme@gmail.com>
-References: <20250819012620.14606-1-bagasdotme@gmail.com>
+	s=arc-20240116; t=1755568999; c=relaxed/simple;
+	bh=25ifC56kUlkKG18BYWJYBsBe4Rs7A4OYFDR8dl4reqg=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=k6PV6Zh/bHSQ08D4oXf/w1MhEXRsxOiJfKOrljsMXnmVdd5oJsqqhmFdoLdicWEbzikgcZk5o43fA/b04Wj+r4euS0llz3uD8mhEQ+Xu+uE77w5DBrwc09sSWcfPINTHH9MTZAkOe9cgk/l9YDfeMs7lecOqlL++OqR6qMEPgug=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ti/3Zh77; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57F3DC4CEEB;
+	Tue, 19 Aug 2025 02:03:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755568997;
+	bh=25ifC56kUlkKG18BYWJYBsBe4Rs7A4OYFDR8dl4reqg=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=Ti/3Zh77da/Y4/jR0dJVLEZoWxNIFsCQw3+bTD/y4GaxwGeUc8makT02pbE4DFdLx
+	 Oh/0KUxUoaKSRZiZOu7WfWY2E9eLpfr6udFbPkFXdq0r5puSP/swP/vQ4epqeBPwGX
+	 qLO5kWQ4P/0NK/4TnP1O6xJv6UcKAlfnJWKr0NX8YGlXRx6upbmrXXyI5L2sI+jQ12
+	 qiN1Jgw3PSwhBbhL1F5aFlQSsd25P2b7N34gLovKbK7VEARsHVtNJU09zG/d07EXT9
+	 nm8/CnZxCiWTLfJ4n3t5BQt4T//mzvX00zejuZd3xJQE7Ce2jac/erWfrtawfzySJQ
+	 G2goZhaj1J2Aw==
+Date: Mon, 18 Aug 2025 19:03:16 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Oleksij Rempel <o.rempel@pengutronix.de>
+Cc: Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet
+ <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Florian
+ Fainelli <f.fainelli@gmail.com>, Maxime Chevallier
+ <maxime.chevallier@bootlin.com>, Kory Maincent <kory.maincent@bootlin.com>,
+ Lukasz Majewski <lukma@denx.de>, Jonathan Corbet <corbet@lwn.net>,
+ kernel@pengutronix.de, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
+ Divya.Koppera@microchip.com, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next v2 1/1] Documentation: networking: add detailed
+ guide on Ethernet flow control configuration
+Message-ID: <20250818190316.0bfdc719@kernel.org>
+In-Reply-To: <20250814075342.212732-1-o.rempel@pengutronix.de>
+References: <20250814075342.212732-1-o.rempel@pengutronix.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=815; i=bagasdotme@gmail.com; h=from:subject; bh=agYR481QyjyS/7Enp2FSpAI7AE9rLtWb/AeMmfEvraM=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBmLL7kFrMrxaXiw5sOZXfEV51azctbJL5U5cXWKXuzV/ 8F7gz5WdJSyMIhxMciKKbJMSuRrOr3LSORC+1pHmDmsTCBDGLg4BWAii/YyMkyr+Jyw7mii/7fY ZPcNec6PPrxawK5/KOGLQn6dgW7VRH+G//6zQ6VECg6UFjP5P/M5Hhr8RVPD/PThjtiHUTOeHP0 whQkA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-toctree index title ("RCU concepts") is rather a misnomer: RCU concepts
-is already described in rcu.rst, whereas the toctree suggests that
-the docs themes about handbook on RCU subsystem instead.
+On Thu, 14 Aug 2025 09:53:42 +0200 Oleksij Rempel wrote:
+> Introduce a new document, flow_control.rst, providing a comprehensive
+> overview of Ethernet Flow Control in Linux. It explains how flow control
+> works in full- and half-duplex modes, how autonegotiation resolves pause
+> capabilities, and how users can inspect and configure flow control using
+> ethtool and Netlink interfaces.
+> 
+> The document also covers typical MAC implementations, PHY behavior,
+> ethtool driver operations, and provides a test plan for verifying driver
+> behavior across various scenarios.
+> 
+> The legacy flow control section in phy.rst is replaced with a reference
+> to this new document.
+> 
+> Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
 
-Edit the title to reflect the fact.
+This conflicts again, FWIW, another rebase will be needed.
 
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/RCU/index.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> diff --git a/Documentation/networking/flow_control.rst b/Documentation/networking/flow_control.rst
+> new file mode 100644
+> index 000000000000..5585434178e7
+> --- /dev/null
+> +++ b/Documentation/networking/flow_control.rst
+> @@ -0,0 +1,383 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +=====================
+> +Ethernet Flow Control
+> +=====================
+> +
+> +This document is a practical guide to Ethernet Flow Control in Linux, covering
+> +what it is, how it works, and how to configure it.
+> +
+> +What is Flow Control?
+> +=====================
+> +
+> +Flow control is a mechanism to prevent a fast sender from overwhelming a
+> +slow receiver with data, which would cause buffer overruns and dropped packets.
+> +The receiver can signal the sender to temporarily stop transmitting, giving it
+> +time to process its backlog.
 
-diff --git a/Documentation/RCU/index.rst b/Documentation/RCU/index.rst
-index e1be5b3c2c6773..ef26c78507d369 100644
---- a/Documentation/RCU/index.rst
-+++ b/Documentation/RCU/index.rst
-@@ -1,9 +1,9 @@
- .. SPDX-License-Identifier: GPL-2.0
- 
--.. _rcu_concepts:
-+.. _rcu_handbook:
- 
- ============
--RCU concepts
-+RCU Handbook
- ============
- 
- .. toctree::
+You haven't covered PFC. Is PFC not used in TSN?
+
+> +How It Works: The Two Mechanisms
+> +================================
+> +
+> +The method used for flow control depends on the link's duplex mode.
+> +
+> +1. Full-Duplex: PAUSE Frames (IEEE 802.3 Annex 31B)
+> +---------------------------------------------------
+> +On full-duplex links, devices can send and receive at the same time. Flow
+> +control is achieved by sending a special **PAUSE frame**.
+> +
+> +* **What it is**: A standard Ethernet frame with a globally reserved
+> +    destination MAC address (``01-80-C2-00-00-01``). This address is in a range
+> +    that standard IEEE 802.1D-compliant bridges do not forward. However, some
+> +    unmanaged or misconfigured bridges have been reported to forward these
+> +    frames, which can disrupt flow control across a network.
+> +
+> +* **How it works**: The frame contains a `pause_time` value, telling the
+
+What's the logic behind using single backticks? 
+I'm a bit unclear on the expectations, AFAIU the single
+backtick are supposed to be mostly references?
+Unless you intend that it's safer to use double ticks everywhere
+(ccL linux-doc to keep me honest).
+
+> +Many MACs also implement automatic PAUSE frame transmission based on the fill
+> +level of their internal RX FIFO. This is typically configured with two
+> +thresholds:
+> +
+> +* **FLOW_ON (High Water Mark)**: When the RX FIFO usage reaches this
+> +    threshold, the MAC automatically transmits a PAUSE frame to stop the sender.
+> +
+> +* **FLOW_OFF (Low Water Mark)**: When the RX FIFO usage drops below this
+> +    threshold, the MAC transmits a PAUSE frame with a quanta of zero to tell
+> +    the sender it can resume transmission.
+> +
+> +The optimal values for these thresholds often depend on the bandwidth of the
+> +bus between the MAC and the system's CPU or RAM. Like the pause quanta, there
+> +is currently no generic kernel interface for tuning these thresholds.
+
+I'm not sure if this is true. In the "fast devices" I'm familiar
+with, at least, the pause threshold is only covering latency of
+stopping the internal device pipeline, and the *wire side*.
+Basically you need to be able to cover RTT/2 * link speed
+with internal MAP IP buffering. I thought there were even
+some formulas in the spec on how much latency the far end
+is allowed before it processes the ctrl frame.
+
+Long story short the thresholds generally have little to do with
+"CPU or RAM" and much more with cable length. It should be worth
+calling out that the driver is responsible for configuring sensible
+defaults per IEEE spec. The only reason user should have to tweak 
+these thresholds, really, is on long fiber connections. Or I guess
+if the user knows that the peer is buggy.
+
+> +User Space Interface
+> +--------------------
+> +The primary user space tool for flow control configuration is `ethtool`. It
+> +communicates with the kernel via netlink messages, specifically
+> +`ETHTOOL_MSG_PAUSE_GET` and `ETHTOOL_MSG_PAUSE_SET`.
+
+Linking to the ethtool_netlink section would be great, instead of
+repeating her.e
+
+> +These messages use a simple set of attributes that map to the members of the
+> +`struct ethtool_pauseparam`:
+> +
+> +* `ETHTOOL_A_PAUSE_AUTONEG` -> `autoneg`
+> +* `ETHTOOL_A_PAUSE_RX` -> `rx_pause`
+> +* `ETHTOOL_A_PAUSE_TX` -> `tx_pause`
+> +
+> +The driver's implementation of the `.get_pauseparam` and `.set_pauseparam`
+> +ethtool operations must correctly interpret these fields.
+> +
+> +* **On `get_pauseparam`**, the driver must report the user's configured flow
+> +    control policy.
+> +
+> +    * The `autoneg` flag indicates the driver's behavior: if `on`, the driver
+> +      will respect the negotiated outcome; if `off`, the driver will use a
+> +      forced configuration.
+> +
+> +    * The `rx_pause` and `tx_pause` flags reflect the currently preferred
+> +      configuration state, which depends on multiple factors.
+> +
+> +* **On `set_pauseparam`**, the driver must interpret the user's request:
+> +
+> +    * The `autoneg` flag acts as a mode selector. If `on`, the driver
+> +      configures the PHY's advertisement based on `rx_pause` and `tx_pause`.
+> +
+> +    * If `off`, the driver forces the MAC into the state defined by
+> +      `rx_pause` and `tx_pause`.
+
+This belongs in the code. Please render this into the kdoc of correct
+structs and use the power of kdoc to refer to those structs here.
+Worst case you can use a DOC: section, if kdoc is too hard, but please
+try to move description of the internal kernel APIs into code comments
+which are included/referred to in the Documentation output.
+And some kind of "See Documentation/networking/flow_control.rst" in
+relevant places in the kernel code would be nice, too
+
+> +Test Plan
+> +=========
+
+Obvious question.. could you make this into a python test?
+put it under ..selftests/drivers/net/hw/, the SW emulation 
+of the features is not required.
+
+> +This section outlines test cases for verifying flow control configuration. The
+> +`ethtool -s` command is used to set the base link state (autoneg on/off), and
+> +`ethtool -A` is used to configure the pause parameters within that state.
+> +
+> +Case 1: Base Link is Autonegotiating
+> +------------------------------------
+> +*Prerequisite*: `ethtool -s eth0 autoneg on`
 -- 
-An old man doll... just what I always wanted! - Clara
-
+pw-bot: cr
 
