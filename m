@@ -1,147 +1,121 @@
-Return-Path: <linux-doc+bounces-57049-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57051-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2EAEB2F17A
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 10:25:45 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FF46B2F24A
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 10:36:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5D7576007BB
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 08:21:14 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 044B51CE161F
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 08:30:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 699A22ECD10;
-	Thu, 21 Aug 2025 08:17:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C91D12EA726;
+	Thu, 21 Aug 2025 08:26:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="akVg+l4E"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KB/twgsA"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43EC22EBDCA;
-	Thu, 21 Aug 2025 08:17:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 940BA2EA49E;
+	Thu, 21 Aug 2025 08:26:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755764225; cv=none; b=YaaEkaWirZGOfmgEG8jo+wRfpYBVGocrR37hI/ONtf4IZxxXNvWYdfCw1cC2hJeor9wRS0xaxOmnhIxc1cr4s1vmbw+PGiCVxJMGlta+p3QiTj1t14EcSiO5PcxvFqD0pnDHCOGjwzRdSsR2bYMNSX8RvPEFacGnpc4AcK7lA90=
+	t=1755764774; cv=none; b=BKSPd2hBuVjsXZMr4uddGSRrQ0Of3Ntzj8GMENmaHdfm01KrQA6AQRnTDBeSDByISR/MzpNeg4CgPjyOj64wYTzc5V7aYX5WdA+uQfrSKjg7gLsDP5z2ukC5Atg8ALnAE8VtCYwwA33P1kH6L+4t/IcdUYhZIZPPoxZMTQkP4UM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755764225; c=relaxed/simple;
-	bh=+0AJ0cWG/9OFYSPOjOfNLiW9rTewkgZT7lE9vDRgSBw=;
+	s=arc-20240116; t=1755764774; c=relaxed/simple;
+	bh=cLUbOqUr6cTb/vKgSfC31FXfcobLn5rCi7Usx5zRpc0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=brdtHdIudeSpW3YRrepuAAieiGCY5jrWm0gXVtxhUyPmBK9NRgUHfd+dT1IF3/SQqdJ1ERJufyn0Durs8AN35Gggx8uabiBfDCXNC6j362sgpXEyC0EyZ2llC8Ta26vpI+TjcG3XB/H14PsmbipoVXWsonr9dynoe4klMkOZTOg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=akVg+l4E; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CBFF4C2BCB7;
-	Thu, 21 Aug 2025 08:17:04 +0000 (UTC)
+	 MIME-Version:Content-Type; b=DJQ2g9VMLuSvJYwZILZ7Y/6/Hml00r+uii6JP38shCEttNUYpCMdJDCfHKNJxTUjArrTPel75lwHXUM05/Snhj2vIhNt9a6Iiw7kOygfbt4mDbclU9lg/Qf9Y9sl+qS0A6+Lax+dOjzG20Z+q7CUD1USilCI1NdXvoRTt39vYu8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KB/twgsA; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AD01C4CEEB;
+	Thu, 21 Aug 2025 08:26:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1755764224;
-	bh=+0AJ0cWG/9OFYSPOjOfNLiW9rTewkgZT7lE9vDRgSBw=;
+	s=k20201202; t=1755764774;
+	bh=cLUbOqUr6cTb/vKgSfC31FXfcobLn5rCi7Usx5zRpc0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=akVg+l4EyuUOLB2ezLIsGpaqJ5VlEMWNQzFfgwHPHeil2dkl7MGYirWCyyGuI11gu
-	 0FvRNeMFQnqXAXfzQisDOWqVD03RcZfrmyJCFXQmdBmR5CgDFs+TBVc7CA+yu52ytA
-	 KwSLbPK5O/IuqDJweBECi/FeB3lXGqmPbkCa7YnLoRQfk9BzYdwiU14YBVYRd5FMK/
-	 luUILGiTGX3uoQlJhZS0LptCp5WTGCWxdtzDtlv1wu4QFLcIgMU+FTIH6pvPxFqlZZ
-	 2TPSyH98mt5d0Y54NmXen1q2pEfodGGCiyAj/4523+UHoGgk6dHDs/MM2bD6EDcv7a
-	 uvfrvwxcFLfdg==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1up0Tm-0000000BLgv-3sqz;
-	Thu, 21 Aug 2025 10:17:02 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 14/14] scripts/sphinx-pre-install: fix Archlinux PDF dependencies
-Date: Thu, 21 Aug 2025 10:16:50 +0200
-Message-ID: <574d902f7691861e18339217f42409850ee58791.1755763127.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1755763127.git.mchehab+huawei@kernel.org>
-References: <cover.1755763127.git.mchehab+huawei@kernel.org>
+	b=KB/twgsA/CTVnp586RP3GyuIdvA0EyWAAu+91jwzNtpbYbFOXHSU+jhu4roGlyYaB
+	 BxV+AOwx9I0X+6uSH1kDHGrWRCz5VW4AjFllgPvHKsWA5GjEhBoTsBtmc2sQ09hzK5
+	 jQuxubCyXuxk/Fe2zDo0iQi/7yW6zxEmdnetP1tMY7f7jUGykW5edx68Zmf5wRLqM1
+	 AaGdKlxJfMGHLS7Dw6iFgcgxUCI0acFJ+cmRXj/ME/nXBKoswdmAChcBH49jSUT7AT
+	 nNClgUYNQbD/ibAssVpOs7cjGiJbe9NxlKJR5WwEypQ96O8gqU8pcz1UxbhkZGpIi3
+	 Vsg9b0HqcCtvA==
+From: Christian Brauner <brauner@kernel.org>
+To: Lichen Liu <lichliu@redhat.com>
+Cc: Christian Brauner <brauner@kernel.org>,
+	linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	safinaskar@zohomail.com,
+	kexec@lists.infradead.org,
+	rob@landley.net,
+	weilongchen@huawei.com,
+	cyphar@cyphar.com,
+	linux-api@vger.kernel.org,
+	zohar@linux.ibm.com,
+	stefanb@linux.ibm.com,
+	initramfs@vger.kernel.org,
+	corbet@lwn.net,
+	linux-doc@vger.kernel.org,
+	viro@zeniv.linux.org.uk,
+	jack@suse.cz
+Subject: Re: [PATCH v2] fs: Add 'rootfsflags' to set rootfs mount options
+Date: Thu, 21 Aug 2025 10:24:11 +0200
+Message-ID: <20250821-zirkel-leitkultur-2653cba2cd5b@brauner>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20250815121459.3391223-1-lichliu@redhat.com>
+References: <20250815121459.3391223-1-lichliu@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1905; i=brauner@kernel.org; h=from:subject:message-id; bh=cLUbOqUr6cTb/vKgSfC31FXfcobLn5rCi7Usx5zRpc0=; b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWQsuyF9J8I8+ZPI912RyxZ9nXK0nUlMZilruGDJHpOm7 9cirH4HdZSyMIhxMciKKbI4tJuEyy3nqdhslKkBM4eVCWQIAxenAEzE5BbDX+kbB6buCWFhtarJ sWE8wewxpUXp9twbsTPVd/5ZsXix9k9GhvNr7pbsmytTaOiSs/k6/9MrFlk+jBf5/2xw5Z0eo9v QwAcA
+X-Developer-Key: i=brauner@kernel.org; a=openpgp; fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
 Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-There are some missing packages causing PDF build to fail on
-Archlinux and add latexmk (from texlive-binextra package).
+On Fri, 15 Aug 2025 20:14:59 +0800, Lichen Liu wrote:
+> When CONFIG_TMPFS is enabled, the initial root filesystem is a tmpfs.
+> By default, a tmpfs mount is limited to using 50% of the available RAM
+> for its content. This can be problematic in memory-constrained
+> environments, particularly during a kdump capture.
+> 
+> In a kdump scenario, the capture kernel boots with a limited amount of
+> memory specified by the 'crashkernel' parameter. If the initramfs is
+> large, it may fail to unpack into the tmpfs rootfs due to insufficient
+> space. This is because to get X MB of usable space in tmpfs, 2*X MB of
+> memory must be available for the mount. This leads to an OOM failure
+> during the early boot process, preventing a successful crash dump.
+> 
+> [...]
 
-Yet, at least today, PDF builds are failing on a very late
-stage, when trying to run xdvipdfmx:
+This seems rather useful but I've renamed "rootfsflags" to
+"initramfs_options" because "rootfsflags" is ambiguous and it's not
+really just about flags.
 
-	$ xdvipdfmx -E -o "peci.pdf"  "peci.xdv"
-	xdvipdfmx:fatal: Unrecognized paper format: # Simply write the paper name. See man 1 paper and "paper --no-size --all" for possible values
+Other than that I think it would make sense to just raise the limit to
+90% for the root_fs_type mount. I'm not sure why this super privileged
+code would only be allowed 50% by default.
 
-Despite its message, even using a very simple document like:
-
-        \def\sphinxdocclass{report}
-	\documentclass[a4paper,11pt,english]{sphinxmanual}
-	\begin{document}
-	Test
-	\end{document}
-
-or even:
-
-	\def\sphinxdocclass{report}
-	\documentclass{sphinxmanual}
-	\begin{document}
-	Test
-	\end{document}
-
-Is causing xdvipdfmx to complain about geometry. As Archlinux is
-a rolling release distro, maybe I got it on a bad day. So, let's
-fix it in the hope that soon enough someone would fix the issues
-there.
-
-Such broken scenario happens with those packages installed:
-
-texlive-basic 2025.2-1
-texlive-bin 2025.2-1
-texlive-binextra 2025.2-1
-texlive-fontsrecommended 2025.2-1
-texlive-langchinese 2025.2-1
-texlive-langcjk 2025.2-1
-texlive-latex 2025.2-1
-texlive-latexextra 2025.2-1
-texlive-latexrecommended 2025.2-1
-texlive-pictures 2025.2-1
-texlive-xetex 2025.2-1
-python-docutils 1:0.21.2-3
-python-sphinx 8.2.3-1
-python-sphinx-alabaster-theme 1.0.0-4
-python-sphinxcontrib-applehelp 2.0.0-3
-python-sphinxcontrib-devhelp 2.0.0-4
-python-sphinxcontrib-htmlhelp 2.1.0-3
-python-sphinxcontrib-jsmath 1.0.1-19
-python-sphinxcontrib-qthelp 2.0.0-3
-python-sphinxcontrib-serializinghtml 2.0.0-3
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- scripts/sphinx-pre-install | 5 +++++
- 1 file changed, 5 insertions(+)
 
-diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
-index c46d7b76f93c..954ed3dc0645 100755
---- a/scripts/sphinx-pre-install
-+++ b/scripts/sphinx-pre-install
-@@ -1048,7 +1048,12 @@ class SphinxDependencyChecker(MissingCheckers):
-         }
- 
-         archlinux_tex_pkgs = [
-+            "texlive-basic",
-+            "texlive-binextra",
-             "texlive-core",
-+            "texlive-fontsrecommended",
-+            "texlive-langchinese",
-+            "texlive-langcjk",
-             "texlive-latexextra",
-             "ttf-dejavu",
-         ]
--- 
-2.50.1
+Applied to the vfs-6.18.misc branch of the vfs/vfs.git tree.
+Patches in the vfs-6.18.misc branch should appear in linux-next soon.
 
+Please report any outstanding bugs that were missed during review in a
+new review to the original patch series allowing us to drop it.
+
+It's encouraged to provide Acked-bys and Reviewed-bys even though the
+patch has now been applied. If possible patch trailers will be updated.
+
+Note that commit hashes shown below are subject to change due to rebase,
+trailer updates or similar. If in doubt, please check the listed branch.
+
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs.git
+branch: vfs-6.18.misc
+
+[1/1] fs: Add 'rootfsflags' to set rootfs mount options
+      https://git.kernel.org/vfs/vfs/c/278033a225e1
 
