@@ -1,505 +1,394 @@
-Return-Path: <linux-doc+bounces-57134-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57136-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76292B2FC88
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 16:29:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD173B2FCC9
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 16:34:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4A3EBAA3FA5
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 14:22:45 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 478A13AB2D2
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 14:29:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E025296BAD;
-	Thu, 21 Aug 2025 14:21:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF1062C11D9;
+	Thu, 21 Aug 2025 14:25:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BYKypHZ/"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="fPFH/xPq";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="rzPFh/jN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D0AE28AB0B;
-	Thu, 21 Aug 2025 14:21:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755786100; cv=none; b=RR/CP2Eup3K6XuXBQa0T4hI3JHLaWsK9A9U+teEGhYGW60J5ZKfsZFppLFTCQQMnWpA6PDYxrOFTILlLWmS9eGsqFf49K50d8MDiI7n6nkmEOmZ6rORfJa3vhm1NRHoxnF51wuSVtkzYzEps0Qn1PSOW0BkycRKFei2tQpxZDN4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755786100; c=relaxed/simple;
-	bh=uYEK1a2ZG5UzKHVraa8W5O9cCQbPaE3FbRWgQy8mxrI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VM6Bgr1A/iQu7NqVe/bNMmW06GQmJ+GGLa+j6DIhtTzh7OD7E53r9XLf6hqVP+9O3wUIbJYnlIGaDpNc/SG2a86mSU0AacSoJKrOzaUvfGwmFZPZaZCOoE/75lN/2FkOeZVaeKshrjYeesngUR36b2+wqzJtlsiHIFrXzXK5/i8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BYKypHZ/; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C5FFC16AAE;
-	Thu, 21 Aug 2025 14:21:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1755786100;
-	bh=uYEK1a2ZG5UzKHVraa8W5O9cCQbPaE3FbRWgQy8mxrI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=BYKypHZ/p75IMUVHV2u1aeOlh/lFPeeUMsCfZP8rey7YwoACZ0n8h3ZQh1cZxNNIt
-	 u9+y8UykM5RNnBnG9A6UqEVNuf6umgGmEeblRhJQ0ciUFv8IVJxEHVGdqHSJ3HkD6/
-	 RlfgexA0Fq47+1g/jP2bBx4/pZ3GN2tokd9NdiY/gc91beWj5dO0OYR28yEYbX389n
-	 F0EfglEi0Pb/7mn0Ffyq1HAkXkWuPs8eM4YG9fbXgd09yHwSUXseVGYta1CZUM81li
-	 nXetHbQCfzUvgEw+tt6J6+ZKmBw15zHKVbLUyRFh7iP8CBBhXBaMiPytWizJqKRxmo
-	 FdCLGFrrfFbtQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1up6Ab-0000000BT9Y-2XwE;
-	Thu, 21 Aug 2025 16:21:37 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 24/24] docs: sphinx: drop parse-headers.pl
-Date: Thu, 21 Aug 2025 16:21:30 +0200
-Message-ID: <cd825f90abec4828725e8143af010bd0d802c3ca.1755784930.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1755784929.git.mchehab+huawei@kernel.org>
-References: <cover.1755784929.git.mchehab+huawei@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CEC1235046;
+	Thu, 21 Aug 2025 14:25:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1755786341; cv=fail; b=pdTKFlKJojLPGLRlHQcyWcB61FX9DthNc5FOEL8GhZDtssGdA/b/bgt69OyUjJdRLS6dfYU5SXBTdP3skCjnf8p98IpkuixAE2D7XeUE7okWhwY/xYaut8PGFd4mr+0XN9puHI8FBgmtLvyaECG7TConUOFZqEgZFY1Q70oURZQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1755786341; c=relaxed/simple;
+	bh=vDV2mPvTFeGtX0ibRJwEHgv24BWyyRdrqJlCeZffGkY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=RHA/6ypG7UvTBmiqjG2V/jNlDeQ55HBOc8iAmLVxXKWqipNS7g0udc/sqk6+z2nw96KildZ5wXMlKJ8oSg+Vqptb+Y6baxoblcnZYYMig1dxF9q+GYcZE6lJjfQOYB3LeqzijCEBGsz2rg3JwmdbnW8IcIiGpEXgNTi7g2jRMJI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=fPFH/xPq; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=rzPFh/jN; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57LCv07R016962;
+	Thu, 21 Aug 2025 14:24:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=J2xR1dvhOn7Ev+7skt
+	bZ/YJYGGHuterTXPWsCqSQTxw=; b=fPFH/xPq14Kzz8CvBxq9eaw1oAtD3+yo4Y
+	9gt2OR18cs6n2RNMi8p0yt5bNbwybnukpuntidDGRcv8rkTt58n79u+5WkekQybO
+	+Uz7tI3qAbX+/es05WjNvtGpxOXtqnaTp3X2twCmt4syaDJgSv+8F4wYYMPgNKM2
+	dnnc0YKb5f4/KiNYIT/ZjoyuSXmQSK7fTmtOSC+dY9xDIkfC3dy+1PWwRhdUA93U
+	oUD3FcbFhFzRY4TTrOxna+6wfVCb9HvrJ0SqBYUSpLfkL1Ae3iqDzyi0rN7czEOU
+	bNUBxYMHwFXt15ljX2Bf2tXqeiREJurEwcG1NTO+G8phsWudMufA==
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 48n0tquqd2-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 21 Aug 2025 14:24:29 +0000 (GMT)
+Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 57LE4mlX027084;
+	Thu, 21 Aug 2025 14:24:28 GMT
+Received: from sj2pr03cu001.outbound.protection.outlook.com (mail-westusazon11012014.outbound.protection.outlook.com [52.101.43.14])
+	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 48n3sxm6ff-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 21 Aug 2025 14:24:28 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YSG5JMEmMRlYMsNpAA84U+5ryu9RfzjVo8MU9QX9w/LwGyUtPgLijv0KAbrJ9oBvH1p6UbHMGzCstBwNEBsg50tqma4RarKujSnj0pp5ucGeDP3P/SSvcx1+CDlObPDVhkgp10esqmMUMZiAhWBnHYEmzXnwarpJYPHFuYYmro0L15ixFsq9/KrCw0BXrfQquj6pGXNdZpng/sz0JvdL2S0+jk1HXyHvs1pBvjEcNYuUJfFFiYA8240XU0rzSEc+oCFxJ7gyQfQsnTiEtHpFH+2HKtp9Q0ClBV16LvqV0E4l5ZRKD4cHq1aene+fURhyfYce8UDQrXZe/yhge9yWBw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=J2xR1dvhOn7Ev+7sktbZ/YJYGGHuterTXPWsCqSQTxw=;
+ b=VVeEXooX7QY14IZoGjz2jmCa9uTEdRhcZ02d/hL51tsp7yGPvB5xiGBWJarPgJ47Nu8AWl03bGV3HZ5ZD9NPAcrk5hM6CaENNRDen2Ze1N3fKN22GbBbIHHaSGn0TZXGdmt9E5ZAuaT9q5pIOGJDp6YduJuMofxGZLIBEbmtsjk7Qki3LHXIQO5L30iA+c+EtLKiQMecpYFuexiYVFnTwPI/eXrTLBmmL1ny3VFGwCW20rba+YQZ4uI4zJ+66bkI+/jDEHiYxGxW0srSs6OXN2xl1GmIWj1TUpguZH4z7315kfCVpqH5OgbpNhKn8bf+nFz6NcUCvk+ttTfT1z6w3g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=J2xR1dvhOn7Ev+7sktbZ/YJYGGHuterTXPWsCqSQTxw=;
+ b=rzPFh/jN3iRCVF/BCtbgxxPvotV8SzfbqLN0PFJ59noTpULtjnSITRG/c+4e9BeGY8P7gWyLBD2hyCW2qcSfw4huNKYBFIb3O41xHbntGf/t12UGkoEDVwhjfCD+W1+1rjIQMwlxcI3aLm7x70G3HElwpAGs9t1iumsM+6dtrHw=
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
+ by DS7PR10MB7345.namprd10.prod.outlook.com (2603:10b6:8:ef::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9031.24; Thu, 21 Aug
+ 2025 14:24:19 +0000
+Received: from DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2]) by DM4PR10MB8218.namprd10.prod.outlook.com
+ ([fe80::2650:55cf:2816:5f2%5]) with mapi id 15.20.9031.024; Thu, 21 Aug 2025
+ 14:24:19 +0000
+Date: Thu, 21 Aug 2025 15:24:17 +0100
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: Nico Pache <npache@redhat.com>
+Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+        david@redhat.com, ziy@nvidia.com, baolin.wang@linux.alibaba.com,
+        Liam.Howlett@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com,
+        corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org,
+        mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
+        baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
+        wangkefeng.wang@huawei.com, usamaarif642@gmail.com,
+        sunnanyong@huawei.com, vishal.moola@gmail.com,
+        thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com,
+        kirill.shutemov@linux.intel.com, aarcange@redhat.com,
+        raquini@redhat.com, anshuman.khandual@arm.com, catalin.marinas@arm.com,
+        tiwai@suse.de, will@kernel.org, dave.hansen@linux.intel.com,
+        jack@suse.cz, cl@gentwo.org, jglisse@google.com, surenb@google.com,
+        zokeefe@google.com, hannes@cmpxchg.org, rientjes@google.com,
+        mhocko@suse.com, rdunlap@infradead.org, hughd@google.com
+Subject: Re: [PATCH v10 11/13] khugepaged: improve tracepoints for mTHP orders
+Message-ID: <8ce6482f-4e24-4f6c-b28d-641fa878b4fd@lucifer.local>
+References: <20250819134205.622806-1-npache@redhat.com>
+ <20250819134205.622806-12-npache@redhat.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250819134205.622806-12-npache@redhat.com>
+X-ClientProxiedBy: MM0P280CA0003.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:a::14) To DM4PR10MB8218.namprd10.prod.outlook.com
+ (2603:10b6:8:1cc::16)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|DS7PR10MB7345:EE_
+X-MS-Office365-Filtering-Correlation-Id: 66d9f333-65a1-4309-df21-08dde0be6acf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?uw7WVe8K8wwsjDVvs84SzReDh7X+wRnBgHV+XoL5/kxba70rKSBaO3MAxm/f?=
+ =?us-ascii?Q?Hi9V3PpQexOfOh9Lx0EWWR5YXgbMpFASlzKsIP4gp4XssvykzWa8dqq1IlwX?=
+ =?us-ascii?Q?bYwFkzMCp8/eun6qglKYMiD8S9P5fuhChEgYntXbDwKxY4wAzBi/2OxnvlhB?=
+ =?us-ascii?Q?vL53VnY8Obm27Jh7kvq+guDO33jO1mSfQs/HA/L71RPTzaATDCc+ddjyl0fA?=
+ =?us-ascii?Q?oGAaws9K79b9BzgYmXLv+pJAWCl/6zR1qtSgD8d0sCVMRokLnu4rG09Pka88?=
+ =?us-ascii?Q?6o10FARD7H0dyoxEUkBRu6hNyzFLdPq6kT/Um5ZfxLidbPQukFBpPGiZVzAo?=
+ =?us-ascii?Q?NF6g5nWek7Yq/dw/A+TZYB5e2VPL5GY30psPVONOKghW1C43mm6kP3JFakok?=
+ =?us-ascii?Q?2KdT/DE2Tu+fasBSQMjiryuKLk3px8QGRqzRSvb9GMtg4ycmtW+IxKlN9LDY?=
+ =?us-ascii?Q?LozdEMVqNiaAZSwI4d9/Sr7yZVeJfM+aWlzVqN8oWS405hCVrokCVJ823133?=
+ =?us-ascii?Q?DDxZOTiuliz5wrDesaRx84D8eOqixZRWaHtqgsceRXcmBdD+9pApkFse3oKH?=
+ =?us-ascii?Q?5Ugp0lXmIJ32iEGb9xjW5TCIDbD8fd5LkhXPWTwi3gi3TDDKOb6YQCs0wamy?=
+ =?us-ascii?Q?/vG5WwQ8Lx+e6fehlUsPqNakfK9dDeV9tRV31R4Pj7TzQJfFmlnpK/ROGIhl?=
+ =?us-ascii?Q?cRge64WlFyh+spU3B/qE0OJrc3n/YwW4zdiM4RuDlw/i1fKzzV/Erngih4yB?=
+ =?us-ascii?Q?uSAaY8X7wJgGW4OKMgCIUUmqSR+sEyOz6TyTwyJOZfxEbwuztTXglPf15voa?=
+ =?us-ascii?Q?7jCQQgMthJR7Uw28/fw2n/ostvsBdWtZjHe3te/DEHeaaHudyU44mc+XieXE?=
+ =?us-ascii?Q?ZrAsZ/UrTcYDT7lPGUzmz/uWwtG0lptYotLzP79B/pj1WSiXhEeUgR8NzKE+?=
+ =?us-ascii?Q?fDZxfqnB0i8Ze8lClz9AgFFJxTdMuRLNr11s7PBevM9WOBDfzhqd3eIp3nWT?=
+ =?us-ascii?Q?aC9qDaoTKfI7ckSSoDxd6yo+7CMmZSJTJ3LZ4ycBew3jKjGKg3QrZ4S8LIq/?=
+ =?us-ascii?Q?EzxE8u0raqPKjHm5iUIBGIhdeRpUU7yZfz9U/gqyW4midFLRyGugC0GMEHy+?=
+ =?us-ascii?Q?osS/JG0Bnk+p84kyD5/HSn0L7sRof58Z4CnUsOAvgHyIY9IoRrPPOl9ZMrNd?=
+ =?us-ascii?Q?curX6Hhd5/0Bd1DRTLXYw1eNCCKq29XiV0umFKbUegkK8sUq+1MF5Bn2nStu?=
+ =?us-ascii?Q?O0Jg82BWp1MHW7kIRJuTt8FCoCX96/hrETI4oDXYp0zXCRu5l7zgPxXtKR/J?=
+ =?us-ascii?Q?2StWF8yRzRn7EqlNEcNmThEU0K+kKmn1sAF9r6yuNLvRmdwjePoppmgHpdYA?=
+ =?us-ascii?Q?vX2FQyQoctROcomxJ/WFQUjG8UT1OvcPPZ6nYzrO1ZClg6rVD9jzD3leqd+w?=
+ =?us-ascii?Q?/D1DN+Rohm8=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB8218.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?S1lVHl7LrI3qFgpzp0AucvAaMuYK+2gPI1LDdrPrGg1kFlZ//ow2CBVtAhjY?=
+ =?us-ascii?Q?oalbf1Ire4umxd4fTnd57uUai0pNsd4HY53TQr/myMB0YM/p0Mew3yaFIQ2N?=
+ =?us-ascii?Q?tJKsZN1KO09+5rzRqv5T7ka5EJ/QEL52oyxwnu3NxKwM2464IcdtNlQoePu4?=
+ =?us-ascii?Q?47iUm3mQ1WYoTTPj422tuD85WASZ5cAx3v5blMSrBsTcWwq20hgwyScHyMsA?=
+ =?us-ascii?Q?+V5SBmSFj0LIvTk2Sf1xHEpWWTwR9W7if0EQqQ3BOHl8WnMa3m2mt/HpccRP?=
+ =?us-ascii?Q?mqGikaA1V5rK6O7w7pkaXhMN3S6xtvcDrJ8oJgEeNNQk6Xi4IDFpOClzW5hD?=
+ =?us-ascii?Q?7P2CQuxEpVh2S0jikzWZP8VJxjFZdx8wWj3aWwUz1xBXDH0gFACVXihq+D8X?=
+ =?us-ascii?Q?PaqMpJ7lYa5rSHmfBlqxf5fJPJh9eN6cCkBB4uQukZiZG6p8Z5zy2Il+hheG?=
+ =?us-ascii?Q?v7G04FKVd1thKJxfSPtMFFWN/1F5HRxYt0wCkq6aB1VkJ+RxTLyflQX0s91E?=
+ =?us-ascii?Q?roNUEHnl8CJtZ0hUF6HWPb1lBwEAnYxRPeUaTPHOgR0ZMPwfH0W4l+AMrRSZ?=
+ =?us-ascii?Q?wPQl69P3Z1b1LOsVHV8nLLI3Q6R7mXkxqCSpe3eHe3YZHNAieZeTVT415tZ4?=
+ =?us-ascii?Q?/Y9PXOjwC2hFYghzQPmyaG2YqeCnJN8FMmV5mPc7yDuR7jtK8VAzuQ0mr5SN?=
+ =?us-ascii?Q?gCMfJz2HF1mmgwRa3VmPnIZzz5RI3wEIKfRdCAUUdGgcWdXBPqWnFFFmbWrw?=
+ =?us-ascii?Q?CFEUboTwQVQFxeDZMwGTezsXTh6+mEL/W899SSXeeHPScKyPHHQ4sgQkHJOb?=
+ =?us-ascii?Q?Z7beSLNoW8Kf4BkAp/KxpneiHAPueaXVpR3fyg+lEwMwKQnLxwa/b2GBXhd4?=
+ =?us-ascii?Q?KhrFzXiHCgT42vzsApCRSwPI1U2GZkRIe412g3WLuTBFHXe0utKHlscTsrh3?=
+ =?us-ascii?Q?SE9Wdp3qLHpOh0SrJ7q3uB6eVnIqNio3YWwYdY4mDJIac30ugkMoW4T0At1Z?=
+ =?us-ascii?Q?2o9sF/ws8mHBDU1slVt6eA5wcqIYMG4yR6C50GVqZLpAe7M3b/ciclvJEXs2?=
+ =?us-ascii?Q?JMgv2zMTj6IDs0+GzJtYL24UERkvjTr72e4h3FSScL2xge7jyJUaRzAg/Ip9?=
+ =?us-ascii?Q?6Qz4U5TYjbDNV30R+NyvQ22FL1EwxdJP3CWETli5g+ztjJjiEI2mAuXL7PWO?=
+ =?us-ascii?Q?jBMDL4TtXFdrfyrAA7xe2pD6WBYN/krMbCu4M0MwSo7PwEdOKFa6jhBDBMg2?=
+ =?us-ascii?Q?6EGdtr+RfNqyBA3JIrPVTI5vmRcmzQ5KhN67YPiv7qj6iHjBMt3JljD8nOK3?=
+ =?us-ascii?Q?VLCcoyRhExILS7ETUVT8tiipn1YdBlpCK+FwydQTU1AqAqJMLgOQlbXKdZcJ?=
+ =?us-ascii?Q?7ei611tnzAdcP3qg5WJrbcn00/zczvzOJjnxWiOUTbssskArpTSUN/ke2k+Y?=
+ =?us-ascii?Q?AJtVIrS5S+PTomd0zSBYZdMp51n9k5UoxhdJkAC7MrCAXmS/cP9cxXIJHiLI?=
+ =?us-ascii?Q?r9cvL4lSDH/inIiDjC4MsDvBQBeDepqD/i8UBHsKiXlKOncBzl2v8rhJFopk?=
+ =?us-ascii?Q?JUBMuNaUkgIt2pvamWYcGGzC+A8n15GFbIkYWdAH+HL8AcZ/GJW9rXcxXPWM?=
+ =?us-ascii?Q?VA=3D=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	7K1FhCyhHJjXV5U39sY0XSR2S4++Coh6wFe5pUGT4N4w9QO8pCA5AiSEQYXfADwMgX4SCMHW2vfKEH22ybH2EgloNZyoSwNpsg2HZgov0PEqJvgr1Rqi4OvlxJW2N1FNyk7hp8JTIyR32pFqS1wCMTt6EEPjGF74DiIKpjp8v3YVsnRj4+I8VUPfDXa012c5xSPjkXZHj0cwi/WHxcZGjKdlUq4mTTgRUw7+FKLTDao0QrIud3T0lkbB0N+Lh0MhHxP6T+oqBvaIxojt++QpV6qTmOJVv2j3aLR/jaGaGgBSLy2czeqUxyz2Y7kqqMc9JB9tqndizgGaNCJZEwWK9N1EdxAOP/lGsudp1rUoObR5yZ5DL/taM7+ROkIs5hfZq4W9QCZblozGvVromlw+ctuRO0/aTHXwT8dYUOe0ZKR9oCd0exZyaxYtLCzlKsFcXBPxm23v2++xI6k5wT1ksckl4UWk0tMbCc/yUJPx2cux3eizBTkUS7xOiKj0P5CgDsUmDz2hwj99rtzX2NaMTFBQNYEMumqjycGd+4rWQqk2nRmBzpHZ0OaQsyvEWoGJ0ML+VpnCYJTnhuzvz3rN+CD3Lrw2ho5qn/cYRlTGIVc=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66d9f333-65a1-4309-df21-08dde0be6acf
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Aug 2025 14:24:19.7699
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eVUxyZ859luux1/rFlnY8lxiL04S3C+1NW7c4wjbjko+f7xjR6DhfpcAvbT+wJO+BkeEd7rlf+KNNxEgVJbyFyARxu/3Fj2jUbKsFXe5JtA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB7345
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-08-21_03,2025-08-20_03,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 mlxscore=0 suspectscore=0
+ spamscore=0 phishscore=0 mlxlogscore=999 bulkscore=0 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2508110000
+ definitions=main-2508210116
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODE5MDE5NyBTYWx0ZWRfXy140zumW+dE5
+ MWQcjPZTcgEA4D+cBdUuQTdR4pZzZrHxnPA5+IlOj7uS2FhpLlvq2igHv54TRsaDhlQDPhPdpX5
+ lPKJOEwUzBTRsd5ZuD/zwvDeXgXybwIREkdLSPSDN9o2gUtHLwdQsXN/CaC/Ch0R22JRpacBzZm
+ tZdtXeLlbOsurc+1k5Y3PCi2zxSQqlJnP6xHxsm9NYBOlj6k8Bdq+rbJY8WajJGPj+poj9NLDgG
+ L2ubv1Z4OOxRtY4dgSa64+kIsV8MkXsumIOtvC+Ylhc6ghcP3BKIQdjz70BFYP7sjFv2/B7H7HK
+ VpvFrz1Pdbwe7jYbECq97/2Hgf7LtVn0rRrxs6/xZ/JLE15PCQE38cwC9VMIVGXlEdEKLXxQ97h
+ i86dh/l6oe6pbi335gXm1jHYiqZSLA==
+X-Proofpoint-ORIG-GUID: 4RoGAKHqTJWq2Iwwwu2D58m5ch_B9isV
+X-Proofpoint-GUID: 4RoGAKHqTJWq2Iwwwu2D58m5ch_B9isV
+X-Authority-Analysis: v=2.4 cv=K/p73yWI c=1 sm=1 tr=0 ts=68a72c1d cx=c_pps
+ a=OOZaFjgC48PWsiFpTAqLcw==:117 a=OOZaFjgC48PWsiFpTAqLcw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=2OwXVqhp2XgA:10 a=GoEa3M9JfhUA:10 a=20KFwNOVAAAA:8 a=SRrdq9N9AAAA:8
+ a=yPCof4ZbAAAA:8 a=v-LYk_omI0BxYk_5GfEA:9 a=CjuIK1q_8ugA:10
+ a=UhEZJTgQB8St2RibIkdl:22 a=Z5ABNNGmrOfJ6cZ5bIyy:22 a=QOGEsqRv6VhmHaoFNykA:22
 
-Now that we have a replacement in place, drop the old version.
+On Tue, Aug 19, 2025 at 07:42:03AM -0600, Nico Pache wrote:
+> Add the order to the tracepoints to give better insight into what order
+> is being operated at for khugepaged.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/sphinx/parse-headers.pl | 419 --------------------------
- 1 file changed, 419 deletions(-)
- delete mode 100755 Documentation/sphinx/parse-headers.pl
+NIT: Would be good to list the tracepoints you changed here.
 
-diff --git a/Documentation/sphinx/parse-headers.pl b/Documentation/sphinx/parse-headers.pl
-deleted file mode 100755
-index 560685926cdb..000000000000
---- a/Documentation/sphinx/parse-headers.pl
-+++ /dev/null
-@@ -1,419 +0,0 @@
--#!/usr/bin/env perl
--# SPDX-License-Identifier: GPL-2.0
--# Copyright (c) 2016 by Mauro Carvalho Chehab <mchehab@kernel.org>.
--
--use strict;
--use Text::Tabs;
--use Getopt::Long;
--use Pod::Usage;
--
--my $debug;
--my $help;
--my $man;
--
--GetOptions(
--	"debug" => \$debug,
--	'usage|?' => \$help,
--	'help' => \$man
--) or pod2usage(2);
--
--pod2usage(1) if $help;
--pod2usage(-exitstatus => 0, -verbose => 2) if $man;
--pod2usage(2) if (scalar @ARGV < 2 || scalar @ARGV > 3);
--
--my ($file_in, $file_out, $file_exceptions) = @ARGV;
--
--my $data;
--my %ioctls;
--my %defines;
--my %typedefs;
--my %enums;
--my %enum_symbols;
--my %structs;
--
--#
--# read the file and get identifiers
--#
--
--my $is_enum = 0;
--my $is_comment = 0;
--open IN, $file_in or die "Can't open $file_in";
--while (<IN>) {
--	$data .= $_;
--
--	my $ln = $_;
--	if (!$is_comment) {
--		$ln =~ s,/\*.*(\*/),,g;
--
--		$is_comment = 1 if ($ln =~ s,/\*.*,,);
--	} else {
--		if ($ln =~ s,^(.*\*/),,) {
--			$is_comment = 0;
--		} else {
--			next;
--		}
--	}
--
--	if ($is_enum && $ln =~ m/^\s*([_\w][\w\d_]+)\s*[\,=]?/) {
--		my $s = $1;
--		my $n = $1;
--		$n =~ tr/A-Z/a-z/;
--		$n =~ tr/_/-/;
--
--		$enum_symbols{$s} =  "\\ :ref:`$s <$n>`\\ ";
--
--		$is_enum = 0 if ($is_enum && m/\}/);
--		next;
--	}
--	$is_enum = 0 if ($is_enum && m/\}/);
--
--	if ($ln =~ m/^\s*#\s*define\s+([_\w][\w\d_]+)\s+_IO/) {
--		my $s = $1;
--		my $n = $1;
--		$n =~ tr/A-Z/a-z/;
--
--		$ioctls{$s} = "\\ :ref:`$s <$n>`\\ ";
--		next;
--	}
--
--	if ($ln =~ m/^\s*#\s*define\s+([_\w][\w\d_]+)\s+/) {
--		my $s = $1;
--		my $n = $1;
--		$n =~ tr/A-Z/a-z/;
--		$n =~ tr/_/-/;
--
--		$defines{$s} = "\\ :ref:`$s <$n>`\\ ";
--		next;
--	}
--
--	if ($ln =~ m/^\s*typedef\s+([_\w][\w\d_]+)\s+(.*)\s+([_\w][\w\d_]+);/) {
--		my $s = $2;
--		my $n = $3;
--
--		$typedefs{$n} = "\\ :c:type:`$n <$s>`\\ ";
--		next;
--	}
--	if ($ln =~ m/^\s*enum\s+([_\w][\w\d_]+)\s+\{/
--	    || $ln =~ m/^\s*enum\s+([_\w][\w\d_]+)$/
--	    || $ln =~ m/^\s*typedef\s*enum\s+([_\w][\w\d_]+)\s+\{/
--	    || $ln =~ m/^\s*typedef\s*enum\s+([_\w][\w\d_]+)$/) {
--		my $s = $1;
--
--		$enums{$s} =  "enum :c:type:`$s`\\ ";
--
--		$is_enum = $1;
--		next;
--	}
--	if ($ln =~ m/^\s*struct\s+([_\w][\w\d_]+)\s+\{/
--	    || $ln =~ m/^\s*struct\s+([[_\w][\w\d_]+)$/
--	    || $ln =~ m/^\s*typedef\s*struct\s+([_\w][\w\d_]+)\s+\{/
--	    || $ln =~ m/^\s*typedef\s*struct\s+([[_\w][\w\d_]+)$/
--	    ) {
--		my $s = $1;
--
--		$structs{$s} = "struct $s\\ ";
--		next;
--	}
--}
--close IN;
--
--#
--# Handle multi-line typedefs
--#
--
--my @matches = ($data =~ m/typedef\s+struct\s+\S+?\s*\{[^\}]+\}\s*(\S+)\s*\;/g,
--	       $data =~ m/typedef\s+enum\s+\S+?\s*\{[^\}]+\}\s*(\S+)\s*\;/g,);
--foreach my $m (@matches) {
--	my $s = $m;
--
--	$typedefs{$s} = "\\ :c:type:`$s`\\ ";
--	next;
--}
--
--#
--# Handle exceptions, if any
--#
--
--my %def_reftype = (
--	"ioctl"   => ":ref",
--	"define"  => ":ref",
--	"symbol"  => ":ref",
--	"typedef" => ":c:type",
--	"enum"    => ":c:type",
--	"struct"  => ":c:type",
--);
--
--if ($file_exceptions) {
--	open IN, $file_exceptions or die "Can't read $file_exceptions";
--	while (<IN>) {
--		next if (m/^\s*$/ || m/^\s*#/);
--
--		# Parsers to ignore a symbol
--
--		if (m/^ignore\s+ioctl\s+(\S+)/) {
--			delete $ioctls{$1} if (exists($ioctls{$1}));
--			next;
--		}
--		if (m/^ignore\s+define\s+(\S+)/) {
--			delete $defines{$1} if (exists($defines{$1}));
--			next;
--		}
--		if (m/^ignore\s+typedef\s+(\S+)/) {
--			delete $typedefs{$1} if (exists($typedefs{$1}));
--			next;
--		}
--		if (m/^ignore\s+enum\s+(\S+)/) {
--			delete $enums{$1} if (exists($enums{$1}));
--			next;
--		}
--		if (m/^ignore\s+struct\s+(\S+)/) {
--			delete $structs{$1} if (exists($structs{$1}));
--			next;
--		}
--		if (m/^ignore\s+symbol\s+(\S+)/) {
--			delete $enum_symbols{$1} if (exists($enum_symbols{$1}));
--			next;
--		}
--
--		# Parsers to replace a symbol
--		my ($type, $old, $new, $reftype);
--
--		if (m/^replace\s+(\S+)\s+(\S+)\s+(\S+)/) {
--			$type = $1;
--			$old = $2;
--			$new = $3;
--		} else {
--			die "Can't parse $file_exceptions: $_";
--		}
--
--		if ($new =~ m/^\:c\:(data|func|macro|type)\:\`(.+)\`/) {
--			$reftype = ":c:$1";
--			$new = $2;
--		} elsif ($new =~ m/\:ref\:\`(.+)\`/) {
--			$reftype = ":ref";
--			$new = $1;
--		} else {
--			$reftype = $def_reftype{$type};
--		}
--		if (!$reftype) {
--		    print STDERR "Warning: can't find ref type for $type";
--		}
--		$new = "$reftype:`$old <$new>`";
--
--		if ($type eq "ioctl") {
--			$ioctls{$old} = $new if (exists($ioctls{$old}));
--			next;
--		}
--		if ($type eq "define") {
--			$defines{$old} = $new if (exists($defines{$old}));
--			next;
--		}
--		if ($type eq "symbol") {
--			$enum_symbols{$old} = $new if (exists($enum_symbols{$old}));
--			next;
--		}
--		if ($type eq "typedef") {
--			$typedefs{$old} = $new if (exists($typedefs{$old}));
--			next;
--		}
--		if ($type eq "enum") {
--			$enums{$old} = $new if (exists($enums{$old}));
--			next;
--		}
--		if ($type eq "struct") {
--			$structs{$old} = $new if (exists($structs{$old}));
--			next;
--		}
--
--		die "Can't parse $file_exceptions: $_";
--	}
--}
--
--if ($debug) {
--	my @all_hashes = (
--		{ioctl      => \%ioctls},
--		{typedef    => \%typedefs},
--		{enum       => \%enums},
--		{struct     => \%structs},
--		{define     => \%defines},
--		{symbol     => \%enum_symbols}
--	);
--
--	foreach my $hash (@all_hashes) {
--		while (my ($name, $hash_ref) = each %$hash) {
--			next unless %$hash_ref;  # Skip empty hashes
--
--			print "$name:\n";
--			for my $key (sort keys %$hash_ref) {
--				print "  $key -> $hash_ref->{$key}\n";
--			}
--			print "\n";
--		}
--	}
--}
--
--#
--# Align block
--#
--$data = expand($data);
--$data = "    " . $data;
--$data =~ s/\n/\n    /g;
--$data =~ s/\n\s+$/\n/g;
--$data =~ s/\n\s+\n/\n\n/g;
--
--#
--# Add escape codes for special characters
--#
--$data =~ s,([\_\`\*\<\>\&\\\\:\/\|\%\$\#\{\}\~\^]),\\$1,g;
--
--$data =~ s,DEPRECATED,**DEPRECATED**,g;
--
--#
--# Add references
--#
--
--my $start_delim = "[ \n\t\(\=\*\@]";
--my $end_delim = "(\\s|,|\\\\=|\\\\:|\\;|\\\)|\\}|\\{)";
--
--foreach my $r (keys %ioctls) {
--	my $s = $ioctls{$r};
--
--	$r =~ s,([\_\`\*\<\>\&\\\\:\/]),\\\\$1,g;
--
--	print "$r -> $s\n" if ($debug);
--
--	$data =~ s/($start_delim)($r)$end_delim/$1$s$3/g;
--}
--
--foreach my $r (keys %defines) {
--	my $s = $defines{$r};
--
--	$r =~ s,([\_\`\*\<\>\&\\\\:\/]),\\\\$1,g;
--
--	print "$r -> $s\n" if ($debug);
--
--	$data =~ s/($start_delim)($r)$end_delim/$1$s$3/g;
--}
--
--foreach my $r (keys %enum_symbols) {
--	my $s = $enum_symbols{$r};
--
--	$r =~ s,([\_\`\*\<\>\&\\\\:\/]),\\\\$1,g;
--
--	print "$r -> $s\n" if ($debug);
--
--	$data =~ s/($start_delim)($r)$end_delim/$1$s$3/g;
--}
--
--foreach my $r (keys %enums) {
--	my $s = $enums{$r};
--
--	$r =~ s,([\_\`\*\<\>\&\\\\:\/]),\\\\$1,g;
--
--	print "$r -> $s\n" if ($debug);
--
--	$data =~ s/enum\s+($r)$end_delim/$s$2/g;
--}
--
--foreach my $r (keys %structs) {
--	my $s = $structs{$r};
--
--	$r =~ s,([\_\`\*\<\>\&\\\\:\/]),\\\\$1,g;
--
--	print "$r -> $s\n" if ($debug);
--
--	$data =~ s/struct\s+($r)$end_delim/$s$2/g;
--}
--
--foreach my $r (keys %typedefs) {
--	my $s = $typedefs{$r};
--
--	$r =~ s,([\_\`\*\<\>\&\\\\:\/]),\\\\$1,g;
--
--	print "$r -> $s\n" if ($debug);
--	$data =~ s/($start_delim)($r)$end_delim/$1$s$3/g;
--}
--
--$data =~ s/\\ ([\n\s])/\1/g;
--
--#
--# Generate output file
--#
--
--my $title = $file_in;
--$title =~ s,.*/,,;
--
--open OUT, "> $file_out" or die "Can't open $file_out";
--print OUT ".. -*- coding: utf-8; mode: rst -*-\n\n";
--print OUT "$title\n";
--print OUT "=" x length($title);
--print OUT "\n\n.. parsed-literal::\n\n";
--print OUT $data;
--close OUT;
--
--__END__
--
--=head1 NAME
--
--parse_headers.pl - parse a C file, in order to identify functions, structs,
--enums and defines and create cross-references to a Sphinx book.
--
--=head1 SYNOPSIS
--
--B<parse_headers.pl> [<options>] <C_FILE> <OUT_FILE> [<EXCEPTIONS_FILE>]
--
--Where <options> can be: --debug, --help or --usage.
--
--=head1 OPTIONS
--
--=over 8
--
--=item B<--debug>
--
--Put the script in verbose mode, useful for debugging.
--
--=item B<--usage>
--
--Prints a brief help message and exits.
--
--=item B<--help>
--
--Prints a more detailed help message and exits.
--
--=back
--
--=head1 DESCRIPTION
--
--Convert a C header or source file (C_FILE), into a ReStructured Text
--included via ..parsed-literal block with cross-references for the
--documentation files that describe the API. It accepts an optional
--EXCEPTIONS_FILE with describes what elements will be either ignored or
--be pointed to a non-default reference.
--
--The output is written at the (OUT_FILE).
--
--It is capable of identifying defines, functions, structs, typedefs,
--enums and enum symbols and create cross-references for all of them.
--It is also capable of distinguish #define used for specifying a Linux
--ioctl.
--
--The EXCEPTIONS_FILE contain two rules to allow ignoring a symbol or
--to replace the default references by a custom one.
--
--Please read Documentation/doc-guide/parse-headers.rst at the Kernel's
--tree for more details.
--
--=head1 BUGS
--
--Report bugs to Mauro Carvalho Chehab <mchehab@kernel.org>
--
--=head1 COPYRIGHT
--
--Copyright (c) 2016 by Mauro Carvalho Chehab <mchehab@kernel.org>.
--
--License GPLv2: GNU GPL version 2 <https://gnu.org/licenses/gpl.html>.
--
--This is free software: you are free to change and redistribute it.
--There is NO WARRANTY, to the extent permitted by law.
--
--=cut
--- 
-2.50.1
+>
+> Acked-by: David Hildenbrand <david@redhat.com>
+> Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
+> Signed-off-by: Nico Pache <npache@redhat.com>
 
+LGTM to me, so:
+
+Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+
+> ---
+>  include/trace/events/huge_memory.h | 34 +++++++++++++++++++-----------
+>  mm/khugepaged.c                    | 10 +++++----
+>  2 files changed, 28 insertions(+), 16 deletions(-)
+>
+> diff --git a/include/trace/events/huge_memory.h b/include/trace/events/huge_memory.h
+> index 2305df6cb485..56aa8c3b011b 100644
+> --- a/include/trace/events/huge_memory.h
+> +++ b/include/trace/events/huge_memory.h
+> @@ -92,34 +92,37 @@ TRACE_EVENT(mm_khugepaged_scan_pmd,
+>
+>  TRACE_EVENT(mm_collapse_huge_page,
+>
+> -	TP_PROTO(struct mm_struct *mm, int isolated, int status),
+> +	TP_PROTO(struct mm_struct *mm, int isolated, int status, unsigned int order),
+>
+> -	TP_ARGS(mm, isolated, status),
+> +	TP_ARGS(mm, isolated, status, order),
+>
+>  	TP_STRUCT__entry(
+>  		__field(struct mm_struct *, mm)
+>  		__field(int, isolated)
+>  		__field(int, status)
+> +		__field(unsigned int, order)
+>  	),
+>
+>  	TP_fast_assign(
+>  		__entry->mm = mm;
+>  		__entry->isolated = isolated;
+>  		__entry->status = status;
+> +		__entry->order = order;
+>  	),
+>
+> -	TP_printk("mm=%p, isolated=%d, status=%s",
+> +	TP_printk("mm=%p, isolated=%d, status=%s order=%u",
+>  		__entry->mm,
+>  		__entry->isolated,
+> -		__print_symbolic(__entry->status, SCAN_STATUS))
+> +		__print_symbolic(__entry->status, SCAN_STATUS),
+> +		__entry->order)
+>  );
+>
+>  TRACE_EVENT(mm_collapse_huge_page_isolate,
+>
+>  	TP_PROTO(struct folio *folio, int none_or_zero,
+> -		 int referenced, bool  writable, int status),
+> +		 int referenced, bool  writable, int status, unsigned int order),
+>
+> -	TP_ARGS(folio, none_or_zero, referenced, writable, status),
+> +	TP_ARGS(folio, none_or_zero, referenced, writable, status, order),
+>
+>  	TP_STRUCT__entry(
+>  		__field(unsigned long, pfn)
+> @@ -127,6 +130,7 @@ TRACE_EVENT(mm_collapse_huge_page_isolate,
+>  		__field(int, referenced)
+>  		__field(bool, writable)
+>  		__field(int, status)
+> +		__field(unsigned int, order)
+>  	),
+>
+>  	TP_fast_assign(
+> @@ -135,27 +139,31 @@ TRACE_EVENT(mm_collapse_huge_page_isolate,
+>  		__entry->referenced = referenced;
+>  		__entry->writable = writable;
+>  		__entry->status = status;
+> +		__entry->order = order;
+>  	),
+>
+> -	TP_printk("scan_pfn=0x%lx, none_or_zero=%d, referenced=%d, writable=%d, status=%s",
+> +	TP_printk("scan_pfn=0x%lx, none_or_zero=%d, referenced=%d, writable=%d, status=%s order=%u",
+>  		__entry->pfn,
+>  		__entry->none_or_zero,
+>  		__entry->referenced,
+>  		__entry->writable,
+> -		__print_symbolic(__entry->status, SCAN_STATUS))
+> +		__print_symbolic(__entry->status, SCAN_STATUS),
+> +		__entry->order)
+>  );
+>
+>  TRACE_EVENT(mm_collapse_huge_page_swapin,
+>
+> -	TP_PROTO(struct mm_struct *mm, int swapped_in, int referenced, int ret),
+> +	TP_PROTO(struct mm_struct *mm, int swapped_in, int referenced, int ret,
+> +		 unsigned int order),
+>
+> -	TP_ARGS(mm, swapped_in, referenced, ret),
+> +	TP_ARGS(mm, swapped_in, referenced, ret, order),
+>
+>  	TP_STRUCT__entry(
+>  		__field(struct mm_struct *, mm)
+>  		__field(int, swapped_in)
+>  		__field(int, referenced)
+>  		__field(int, ret)
+> +		__field(unsigned int, order)
+>  	),
+>
+>  	TP_fast_assign(
+> @@ -163,13 +171,15 @@ TRACE_EVENT(mm_collapse_huge_page_swapin,
+>  		__entry->swapped_in = swapped_in;
+>  		__entry->referenced = referenced;
+>  		__entry->ret = ret;
+> +		__entry->order = order;
+>  	),
+>
+> -	TP_printk("mm=%p, swapped_in=%d, referenced=%d, ret=%d",
+> +	TP_printk("mm=%p, swapped_in=%d, referenced=%d, ret=%d, order=%u",
+>  		__entry->mm,
+>  		__entry->swapped_in,
+>  		__entry->referenced,
+> -		__entry->ret)
+> +		__entry->ret,
+> +		__entry->order)
+>  );
+>
+>  TRACE_EVENT(mm_khugepaged_scan_file,
+> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
+> index 81d2ffd56ab9..c13bc583a368 100644
+> --- a/mm/khugepaged.c
+> +++ b/mm/khugepaged.c
+> @@ -721,13 +721,14 @@ static int __collapse_huge_page_isolate(struct vm_area_struct *vma,
+>  	} else {
+>  		result = SCAN_SUCCEED;
+>  		trace_mm_collapse_huge_page_isolate(folio, none_or_zero,
+> -						    referenced, writable, result);
+> +						    referenced, writable, result,
+> +						    order);
+>  		return result;
+>  	}
+>  out:
+>  	release_pte_pages(pte, _pte, compound_pagelist);
+>  	trace_mm_collapse_huge_page_isolate(folio, none_or_zero,
+> -					    referenced, writable, result);
+> +					    referenced, writable, result, order);
+>  	return result;
+>  }
+>
+> @@ -1123,7 +1124,8 @@ static int __collapse_huge_page_swapin(struct mm_struct *mm,
+>
+>  	result = SCAN_SUCCEED;
+>  out:
+> -	trace_mm_collapse_huge_page_swapin(mm, swapped_in, referenced, result);
+> +	trace_mm_collapse_huge_page_swapin(mm, swapped_in, referenced, result,
+> +					   order);
+>  	return result;
+>  }
+>
+> @@ -1348,7 +1350,7 @@ static int collapse_huge_page(struct mm_struct *mm, unsigned long address,
+>  	*mmap_locked = false;
+>  	if (folio)
+>  		folio_put(folio);
+> -	trace_mm_collapse_huge_page(mm, result == SCAN_SUCCEED, result);
+> +	trace_mm_collapse_huge_page(mm, result == SCAN_SUCCEED, result, order);
+>  	return result;
+>  }
+>
+> --
+> 2.50.1
+>
 
