@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-57014-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57018-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03712B2EB93
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 05:02:19 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A13AB2EBA6
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 05:06:38 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 667BC5837DE
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 03:01:16 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 56C801C865D0
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 03:06:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C0E62D877D;
-	Thu, 21 Aug 2025 03:01:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7AC5F2D4B61;
+	Thu, 21 Aug 2025 03:06:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="LHaJIIP/"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="d7HeN6U1"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 449232D47F3;
-	Thu, 21 Aug 2025 03:00:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB4D0277C90;
+	Thu, 21 Aug 2025 03:06:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755745265; cv=none; b=NXq6qKAdRw1L6MOCHwl6XxuD03/fcNinGkpCf0FR823JjVesf8DFcHw4FkPibUb6u4gBYsVn5trZJAYjbaM9jbtNDKZjKcWcg1PUjHiP/KLApuQKWmGCtx91ns9cqlA7tYY1iNAauk1bQC56qIu5XVXwc2xcH953Ozi74Hi9jig=
+	t=1755745593; cv=none; b=Eoc4aciwSzqM2MKnCItzcuZec9odHAXjy1RqeY8XUoFT1MddASiDPDqR3q0gNBeJeVOH9nWA1X4UMeh7VytA4PXML8J4LCQfnO/2EPlzcQoYNTSWgv7uHE1AmMWFyQsi9BKcCAbU8BbI49lGlDdOjPAcHndBE5f66+g/3UUsUkc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755745265; c=relaxed/simple;
-	bh=YSomtZR6Iz7wSwrI5TeM7V9WNaumQMzoGVwrf7QRGz4=;
+	s=arc-20240116; t=1755745593; c=relaxed/simple;
+	bh=/CQU+pgB2TsyKM5TEeSk4WJeYgiQiaAeoxcIf4oo4J8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pQvUHi1fMhXfeB1XM8iWjqSjcVlxtZDuO/MCI8Uc9KyIdW0F4t/h2p/pEdmPVLtwhboy/uYwTV9Cbauvj4QAS8wZBYY6cAN0VRZ47CFVNronlUopZH5D9TtDylhodZjMq29RMkJnc4cxlhN7pPinInAEJjYCEz96yzbdgfHy/as=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=LHaJIIP/; arc=none smtp.client-ip=198.137.202.133
+	 In-Reply-To:Content-Type; b=rja4HVblwPZJWb3fJ3igHt179b7YLfhkk8UIvw0Ph6yLq9a66DRKBep0ArLxAPDLkKg6wK4zPCF4gZEsCcnxPLwsoq7fOfRa5hLNiRXjEnGFQgOMZGzMjzWZB2PB/NhLjDs8S3jWrRgMa+N6/vaiRBmvOd2gTj3V1ezkBBnWUMY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=d7HeN6U1; arc=none smtp.client-ip=198.137.202.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
 	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=Ym4acFbpyZkWo01fruGU50a8fZfe3lsN3Yu1x/gnGho=; b=LHaJIIP/BPmL3xSWO79c9LvL5y
-	48vJFiCPAdGFQmIKAvt3seRkVwfg1GoPtdmXrLF1DxicRhO6vLEGe2qPmmR5WxaLTWA2Za7g30Gy5
-	Fi4/8Uu8afz9oSjqNKJHkwQ1nE//3L/aV43yTiniSTe4cRrZzpeuQ1Uqb3GT04OwmZzAU9eHeJs2i
-	fHYYiLGrao8Rw4f/2MKdtoF+27JQNh5AZZcucH19Lz4kORPeA2Tc6R0I0f2DyLo4KV4My/kLeznWJ
-	aWh28vl0KT17Q7oBPbosSn+lIyP0ZeTdyYzwbc6xHrQEMUuLUzWoMXsqIheKuaGrfp+gnzo0mbe/i
-	3OS3HQcg==;
+	bh=hyX8lYPAronULWeVXJ+quZoKMwRITcvWkFrMcTYt3L4=; b=d7HeN6U1qx7JRmLdDoHfTDeEQL
+	ozU0H8deFujGarIRqlpaRlA3847cObTumeb/HMHK+k8/3P5fcjDJsMp9wu9n64nfbIcJuiAbkP9ZY
+	Hk7toPD+Z11Ss5F/wQ02z12RaXemmkuW6qg4DhvdUb6x+nkNdaN/7K2WmqtYsxjN+Sn2MV/EvS+cI
+	fBwkEjVZDl3ivJmXvUHrGJIjH09JbzehGu8bW6m9vVdaNGqddEjVz7cppfLo1aSltyXoK2uFGWFZG
+	FeA7T2B4wJHkCzqEPnYCUsYXMpS+z7qHtU8KAIyGj6KEIwyo8VrTqlfIEH4RyJnq7eAiw2X+OHiSS
+	LxY5lnLw==;
 Received: from [50.53.25.54] (helo=[192.168.254.17])
 	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1uovXs-0000000FaOF-1FQU;
-	Thu, 21 Aug 2025 03:00:56 +0000
-Message-ID: <5e0fdb1e-08c5-4d32-92d1-00bc547d62d9@infradead.org>
-Date: Wed, 20 Aug 2025 20:00:55 -0700
+	id 1uovd9-0000000Fayb-3xBh;
+	Thu, 21 Aug 2025 03:06:23 +0000
+Message-ID: <0254008f-1cdf-480f-ad6f-8f002b35d754@infradead.org>
+Date: Wed, 20 Aug 2025 20:06:23 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -54,61 +54,57 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] Documentation: bcachefs: Add explicit title for idle
- work design doc
-To: Bagas Sanjaya <bagasdotme@gmail.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Linux bcachefs <linux-bcachefs@vger.kernel.org>
-Cc: Kent Overstreet <kent.overstreet@linux.dev>,
- Jonathan Corbet <corbet@lwn.net>
-References: <20250821004620.10772-2-bagasdotme@gmail.com>
+Subject: Re: [PATCH v2 1/2] docs: gpu: amdgpu: Fix spelling in amdgpu
+ documentation
+To: Rakuram Eswaran <rakuram.e96@gmail.com>, linux-doc@vger.kernel.org,
+ alexander.deucher@amd.com, christian.koenig@amd.com, airlied@gmail.com,
+ corbet@lwn.net
+Cc: tzimmermann@suse.de, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, simona@ffwll.ch, siqueira@igalia.com,
+ harry.wentland@amd.com, amd-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-kernel-mentees@lists.linuxfoundation.org, skhan@linuxfoundation.org
+References: <20250821025957.22546-1-rakuram.e96@gmail.com>
+ <20250821025957.22546-2-rakuram.e96@gmail.com>
 Content-Language: en-US
 From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20250821004620.10772-2-bagasdotme@gmail.com>
+In-Reply-To: <20250821025957.22546-2-rakuram.e96@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 
 
-On 8/20/25 5:46 PM, Bagas Sanjaya wrote:
-> Commit 9e260e4590e044 ("docs: bcachefs: idle work scheduling design
-> doc") adds design doc for idle work scheduling, but misses explicit
-> title heading, causing its two section headings to be toctree entries
-> instead.
+On 8/20/25 7:59 PM, Rakuram Eswaran wrote:
+> Fixed following typos reported by Codespell
 > 
-> Add the title.
+> 1. propogated ==> propagated
+>    aperatures ==> apertures
+> In Documentation/gpu/amdgpu/debugfs.rst
 > 
-> Fixes: 9e260e4590e0 ("docs: bcachefs: idle work scheduling design doc")
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> 2. parition ==> partition
+> In Documentation/gpu/amdgpu/process-isolation.rst
+> 
+> 3. conections ==> connections
+> In Documentation/gpu/amdgpu/display/programming-model-dcn.rst
+> 
+> In addition to above,
+> Fixed wrong bit-partition naming in gpu/amdgpu/process-isolation.rst
+> from "fourth" partition to "third" partition.
+> 
+> Suggested-by: Randy Dunlap <rdunlap@infradead.org>
+> Suggested-by: Alexander Deucher <Alexander.Deucher@amd.com>
+> Signed-off-by: Rakuram Eswaran <rakuram.e96@gmail.com>
 
 Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
 
 Thanks.
 
 > ---
-> Changes since v1 [1]:
-> 
->   * Keep original "design doc" title (Kent)
-> 
-> [1]: https://lore.kernel.org/linux-doc/20250820002218.11547-1-bagasdotme@gmail.com/
-> 
->  Documentation/filesystems/bcachefs/future/idle_work.rst | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/filesystems/bcachefs/future/idle_work.rst b/Documentation/filesystems/bcachefs/future/idle_work.rst
-> index 59a332509dcd97..8519fdcaa5ff49 100644
-> --- a/Documentation/filesystems/bcachefs/future/idle_work.rst
-> +++ b/Documentation/filesystems/bcachefs/future/idle_work.rst
-> @@ -1,4 +1,5 @@
-> -Idle/background work classes design doc:
-> +Idle/background work classes design doc
-> +=======================================
->  
->  Right now, our behaviour at idle isn't ideal, it was designed for servers that
->  would be under sustained load, to keep pending work at a "medium" level, to
-> 
-> base-commit: 37c52167b007d9d0bb8c5ed53dd6efc4969a1356
+>  Documentation/gpu/amdgpu/debugfs.rst                       | 4 ++--
+>  Documentation/gpu/amdgpu/display/programming-model-dcn.rst | 2 +-
+>  Documentation/gpu/amdgpu/process-isolation.rst             | 2 +-
+>  3 files changed, 4 insertions(+), 4 deletions(-)
+
 
 -- 
 ~Randy
