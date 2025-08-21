@@ -1,76 +1,108 @@
-Return-Path: <linux-doc+bounces-57085-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57088-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1E9DB2F8F5
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 14:55:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23CE5B2F949
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 15:04:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 719813A5981
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 12:50:49 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CEB6AAC63E6
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 12:57:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DD0D320CD7;
-	Thu, 21 Aug 2025 12:48:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90E84320CAE;
+	Thu, 21 Aug 2025 12:56:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="oPBDgy4w"
+	dkim=pass (2048-bit key) header.d=debanilchowdhury.com header.i=@debanilchowdhury.com header.b="FqdcS1LB";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="Y9XkwSiW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from flow-b5-smtp.messagingengine.com (flow-b5-smtp.messagingengine.com [202.12.124.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA9102EF662
-	for <linux-doc@vger.kernel.org>; Thu, 21 Aug 2025 12:48:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9B94319844;
+	Thu, 21 Aug 2025 12:56:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755780514; cv=none; b=RJhkH/6CHQuKQf0ztSDtYtfZ0muR33Tqr6DOKpDq/z5HVyxTy/7lvCBVsPIFzvqmxXQWfn5WiqmkvNcInqsai41QsXty8N9vf/BIdCmi+0Z2wVB8FQMZAeAGkUmH59vKx8wK/eVGBLiY3NDZFDLXbQvM5O736CPhcMN6aLdv2T8=
+	t=1755780976; cv=none; b=eGIFG+VEzCI1jUHX+KTVhaiwI8n6VeynMzztPXtOUTwuzzqS+JAtqkztRYQ0jP216ycjghOHj3FqUo4kVyv8Mq+gwhntOumwVbAHtcWJN9xSiv9EFED+u6s/cjkUge+V8Yft4QvHFKZyLNyuUid3jX4uSTa4+kT/0Q7OWQrqckY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755780514; c=relaxed/simple;
-	bh=e5AxcMNFe2BmP6DgNRaFjmyz8146UxtEiz8JgyQYR5w=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KXo+a6bkFY1FPN1y+BcrB/Uji9Zo7PETHMGAoH8s8E+AeK9eTCka9yfycUOm7mFU2woZaEPoMg+5hKvm96D+YO7VnJ+m/mrZ67ebEmgXay7KnTB3nST28E/h5PKrWRSvrCnTNMMHfxptQO7w4/p0sYUs6Tddq0l8WGBzSpmrm+I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=oPBDgy4w; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 31404C6B38E;
-	Thu, 21 Aug 2025 12:48:16 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id C5C6C60303;
-	Thu, 21 Aug 2025 12:48:29 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C17B51C22C719;
-	Thu, 21 Aug 2025 14:48:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1755780508; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=p8uUxuNsLfBmFT0zlKo0G7eW+/dKQR0Dj6mRGBqxQII=;
-	b=oPBDgy4w0QUcLO4TwoWiFiQCaejSvwVTsMz91KWgY770lHRSAy+FtmThrUsMF9sWKZGgVX
-	1ft1wk4m6FJ1RUO9ZV/lcLnzCVRqsS9TcRFkJ9FmN4kkJ7mFSbJxIPJmSTBKpDx2MQ+Ub6
-	kloAf4CWZdQA9R/MNVbT1lSeBL6Cro6zep/6PiY7v3SGtARu6QakJxjorbXIUho2AaCD3y
-	X/cQ5gLPrDPawtz0TZ+2DpDa+R0w0Exj/bamBj8Cnm+/HFo+KUQFqyAwwmyBhO8Zj2qvik
-	RZm2KQJxZem+uOka/X4VQRHL57YEYsOVYKhoybDrUAYvWScSzaOhgnyuhRdQFQ==
-Date: Thu, 21 Aug 2025 14:47:56 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Oleksij Rempel <o.rempel@pengutronix.de>
-Cc: Andrew Lunn <andrew@lunn.ch>, Jakub Kicinski <kuba@kernel.org>, "David
- S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo
- Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Donald Hunter
- <donald.hunter@gmail.com>, Jonathan Corbet <corbet@lwn.net>, Heiner
- Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>,
- Maxime Chevallier <maxime.chevallier@bootlin.com>, Nishanth Menon
- <nm@ti.com>, kernel@pengutronix.de, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, UNGLinuxDriver@microchip.com,
- linux-doc@vger.kernel.org, Michal Kubecek <mkubecek@suse.cz>, Roan van Dijk
- <roan@protonic.nl>
-Subject: Re: [PATCH net-next v4 2/5] ethtool: netlink: add
- ETHTOOL_MSG_MSE_GET and wire up PHY MSE access
-Message-ID: <20250821144756.7385b313@kmaincent-XPS-13-7390>
-In-Reply-To: <aKbx1EoO0iWe2bMU@pengutronix.de>
-References: <20250821091101.1979201-1-o.rempel@pengutronix.de>
-	<20250821091101.1979201-3-o.rempel@pengutronix.de>
-	<20250821115830.3a231885@kmaincent-XPS-13-7390>
-	<aKbx1EoO0iWe2bMU@pengutronix.de>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1755780976; c=relaxed/simple;
+	bh=whkJEqsTOCyePNjD7NYZqFQXAji21QPdY2r46YSe06w=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=OZhx5drUCeTg1okG/9go1NGHMwA6qbyw+sifCys1ow8ZQ43YO0h8TorPC24s3aNcxwZEjyZkwTbdF19q18Lilu4WD3sUI5p0HpYu2eXaOBcFnVszTl3yCiBdSmi+T3Z4rySDeTtqgHorwbr/ZTxDZ2JvJpCdZ25d9zFM2wGgQ3w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debanilchowdhury.com; spf=pass smtp.mailfrom=debanilchowdhury.com; dkim=pass (2048-bit key) header.d=debanilchowdhury.com header.i=@debanilchowdhury.com header.b=FqdcS1LB; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=Y9XkwSiW; arc=none smtp.client-ip=202.12.124.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debanilchowdhury.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=debanilchowdhury.com
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+	by mailflow.stl.internal (Postfix) with ESMTP id 784BA1300595;
+	Thu, 21 Aug 2025 08:56:11 -0400 (EDT)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+  by phl-compute-05.internal (MEProxy); Thu, 21 Aug 2025 08:56:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	debanilchowdhury.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
+	 t=1755780971; x=1755784571; bh=yBewjbsnFCVygw4nugjy4355G6givRfy
+	7NgyrPli+2A=; b=FqdcS1LB2GklU63pvDvxbGY3hYnvGEPRIB1dXcrlMcld8lsz
+	Y0prwgvAg0AtlWiWblqQM285FIx4ynBMRUsx58RK6k/M8tHuvr4QfuX4Cg1Glzgj
+	X4sRYitrxAB7awuamTDxq4Fo9qDDhE0KfpVlpD3B/aHZGCnmtOENczbVzbcBbpCV
+	ZhRzMeZvSCWwiVJqxWA8kw/Ut6lDmm7FRFNtTSrliB4wqdkIw92xVcE7AcL7fKum
+	tKTL2WvkKqUpTUozONVGOzxm4DZ+R1VRUw51/KvtcdgMrC5nKCvx1TJjEa5OvRjD
+	N7VOr9fGVUOmgwlvjgC+mtl+YT+XXFLteq1nUA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm3; t=1755780971; x=1755784571; bh=yBewjbsnFCVygw4nugjy4355G6gi
+	vRfy7NgyrPli+2A=; b=Y9XkwSiWw2oKIrsGmOYdovQrZP/myCrInJVy/wWNVcoE
+	g1BGRYhToWe65vXU0UMwYZIvvg45ts+v0GayJoCkHsdDjAgDHtyosSGJ/pNH3raL
+	5prr4UGWqL1iuj24YRa3QFReZUXeyM3WwY0HZ04r+j39P9aQfYhmEA5DaUvxl3d3
+	oa4Q1ihYLMO0D+iF1k1yIIXc/2b5CrYF1u+Bf6/lrDwMdnOGKfDSmrXWGaf7WTMd
+	nX8ot8yubYtKnKeTLMkS1s6DSGdLK+B/EFZMPLpmFdlj5NpcW/UwMCRW94c4FUaN
+	Nn1NYEgw9X+G/d7ghYGHotKUUU26qjaRjTjR7TUaTQ==
+X-ME-Sender: <xms:ahenaFT-UyARaEYh9hqMmKXXcfeap6glqh-ApRDcBi6WNUxSJDbl4A>
+    <xme:ahenaHYFAX_l_p3HqPykRK7wRf8UH8ZURF9KzSo3gJYFJEdQiuQMGxp3OiPCNzXCm
+    pgSU0fUMYwfTTiJOrw>
+X-ME-Received: <xmr:ahenaCQqBFLqhdalGjPKx3Hz9hnWrE450AoOOe5wMDZ8jvNB-nMI5qsbj7KtisYEBewLF6nJ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdefgdduieduvdelucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkffogggtgfesthekredtre
+    dtjeenucfhrhhomhepffgvsggrnhhilhcuvehhohifughhuhhrhicuoehkvghrnhgvlhgu
+    vghvseguvggsrghnihhltghhohifughhuhhrhidrtghomheqnecuggftrfgrthhtvghrnh
+    epuddtfefgffffiefgtddugeefvdeuteefhfeltdeuieejvdeludetveettdetheefnecu
+    vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhgvrhhnvg
+    hluggvvhesuggvsggrnhhilhgthhhofiguhhhurhihrdgtohhmpdhnsggprhgtphhtthho
+    pedutddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepshhkhhgrnheslhhinhhugi
+    hfohhunhgurghtihhonhdrohhrghdprhgtphhtthhopehjuggvlhhvrghrvgesshhushgv
+    rdgtohhmpdhrtghpthhtoheplhhinhhugiesrhhovggtkhdquhhsrdhnvghtpdhrtghpth
+    htoheptghorhgsvghtsehlfihnrdhnvghtpdhrtghpthhtoheplhhinhhugidqkhgvrhhn
+    vghlqdhmvghnthgvvghssehlihhsthhsrdhlihhnuhigrdguvghvpdhrtghpthhtohepnh
+    hinhgrugeslhhinhhugidrihgsmhdrtghomhdprhgtphhtthhopehlihhnuhigqdhhfihm
+    ohhnsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotg
+    esvhhgvghrrdhkvghrnhgvlhdrohhrghdprhgtphhtthhopehlihhnuhigqdhkvghrnhgv
+    lhesvhhgvghrrdhkvghrnhgvlhdrohhrgh
+X-ME-Proxy: <xmx:ahenaG9knYorJgkQYRgz7YM3p3lyPRV3cqoNG12IkcW2WVDJd2_z6Q>
+    <xmx:ahenaCjoxALiQ0LkmrMCoGmxime9ZmmBJowKr7VgggAgf00oRPz2Tg>
+    <xmx:ahenaHYCnJMsyND4BYWUig_CWYyeOONuPqY9VPKx8vJEq8xdDe_NxQ>
+    <xmx:ahenaH9NGc_jfnMYr0cNHSJU4u0xP9zIJvp2SeDU0pd0idND-FKhpw>
+    <xmx:axenaDWR-9T882OJpeI-NS_0A7OeDipszvLn5FjvJKT-cuJ90gvuDVdd>
+Feedback-ID: i77364836:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 21 Aug 2025 08:56:07 -0400 (EDT)
+From: Debanil Chowdhury <kerneldev@debanilchowdhury.com>
+To: skhan@linuxfoundation.org,
+	jdelvare@suse.com,
+	linux@roeck-us.net,
+	corbet@lwn.net
+Cc: linux-kernel-mentees@lists.linux.dev,
+	ninad@linux.ibm.com,
+	linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Debanil Chowdhury <kerneldev@debanilchowdhury.com>
+Subject: [PATCH v2] Fix typos in hwmon docs
+Date: Thu, 21 Aug 2025 18:20:24 +0530
+Message-ID: <20250821125539.58313-1-kerneldev@debanilchowdhury.com>
+X-Mailer: git-send-email 2.49.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -78,133 +110,43 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 
-Le Thu, 21 Aug 2025 12:15:48 +0200,
-Oleksij Rempel <o.rempel@pengutronix.de> a =C3=A9crit :
+Fixed some typos ("Critial" → "Critical") in hwmon documentation.
 
-> Hello Kory,
->=20
-> On Thu, Aug 21, 2025 at 11:59:14AM +0200, Kory Maincent wrote:
-> > Hello Oleksij,
-> >=20
-> > Le Thu, 21 Aug 2025 11:10:58 +0200,
-> > Oleksij Rempel <o.rempel@pengutronix.de> a =C3=A9crit :
-> >  =20
-> > > Introduce the userspace entry point for PHY MSE diagnostics via
-> > > ethtool netlink. This exposes the core API added previously and
-> > > returns both configuration and one or more snapshots.
-> > >=20
-> > > Userspace sends ETHTOOL_MSG_MSE_GET with an optional channel
-> > > selector. The reply carries:
-> > >   - ETHTOOL_A_MSE_CONFIG: scale limits, timing, and supported
-> > >     capability bitmask
-> > >   - ETHTOOL_A_MSE_SNAPSHOT+: one or more snapshots, each tagged
-> > >     with the selected channel
-> > >=20
-> > > If no channel is requested, the kernel returns snapshots for all
-> > > supported selectors (per=E2=80=91channel if available, otherwise WORS=
-T,
-> > > otherwise LINK). Requests for unsupported selectors fail with
-> > > -EOPNOTSUPP; link down returns -ENOLINK.
-> > >=20
-> > > Changes:
-> > >   - YAML: add attribute sets (mse, mse-config, mse-snapshot) and
-> > >     the mse-get operation
-> > >   - UAPI (generated): add ETHTOOL_A_MSE_* enums and message IDs,
-> > >     ETHTOOL_MSG_MSE_GET/REPLY
-> > >   - ethtool core: add net/ethtool/mse.c implementing the request,
-> > >     register genl op, and hook into ethnl dispatch
-> > >   - docs: document MSE_GET in ethtool-netlink.rst
-> > >=20
-> > > The include/uapi/linux/ethtool_netlink_generated.h is generated
-> > > from Documentation/netlink/specs/ethtool.yaml.
-> > >=20
-> > > Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de> =20
-> >=20
-> > ...
-> >  =20
-> > > +MSE Configuration
-> > > +-----------------
-> > > +
-> > > +This nested attribute contains the full configuration properties for=
- the
-> > > MSE +measurements
-> > > +
-> > > +  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-  =3D=3D=3D=3D=3D=3D
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > +  ETHTOOL_A_MSE_CONFIG_MAX_AVERAGE_MSE             u32     max avg_m=
-se
-> > > scale
-> > > +  ETHTOOL_A_MSE_CONFIG_MAX_PEAK_MSE                u32     max peak_=
-mse
-> > > scale
-> > > +  ETHTOOL_A_MSE_CONFIG_REFRESH_RATE_PS             u64     sample ra=
-te
-> > > (ps)
-> > > +  ETHTOOL_A_MSE_CONFIG_NUM_SYMBOLS                 u64     symbols p=
-er
-> > > sample
-> > > +  ETHTOOL_A_MSE_CONFIG_SUPPORTED_CAPS              bitset  capability
-> > > bitmask
-> > > +  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-  =3D=3D=3D=3D=3D=3D
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D + =20
-> >=20
-> > Why did you remove the kernel doc identifiers to phy_mse_config?
-> > It was useful for the documentation.
-> >  =20
-> > > +MSE Snapshot
-> > > +------------
-> > > +
-> > > +This nested attribute contains an atomic snapshot of MSE values for a
-> > > specific +channel or for the link as a whole.
-> > > +
-> > > +  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-  =3D=3D=3D=3D=3D=3D
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > +  ETHTOOL_A_MSE_SNAPSHOT_CHANNEL                   u32     channel e=
-num
-> > > value
-> > > +  ETHTOOL_A_MSE_SNAPSHOT_AVERAGE_MSE               u32     average M=
-SE
-> > > value
-> > > +  ETHTOOL_A_MSE_SNAPSHOT_PEAK_MSE                  u32     current p=
-eak
-> > > MSE
-> > > +  ETHTOOL_A_MSE_SNAPSHOT_WORST_PEAK_MSE            u32     worst-case
-> > > peak MSE
-> > > +  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-  =3D=3D=3D=3D=3D=3D =20
-> >=20
-> > Same question here for phy_mse_snapshot. =20
->=20
-> I had following warnings:
-> Documentation/networking/ethtool-netlink:2499: ./include/linux/phy.h:3:
-> WARNING: Duplicate C declaration, also defined at kapi:892. Declaration is
-> '.. c:struct:: phy_mse_config'.
-> Documentation/networking/ethtool-netlink:2515: ./include/linux/phy.h:3:
-> WARNING: Duplicate C declaration, also defined at kapi:915. Declaration is
-> '.. c:struct:: phy_mse_snapshot'
->=20
-> I didn't found proper was to solve it, so I removed them.
+Reported-by: codespell
+Signed-off-by: Debanil Chowdhury <kerneldev@debanilchowdhury.com>
+---
+changed in v2:
+- In previous patch "From" header did not have my name in it. Fixed
+  that.
 
-Indeed kapi.rst is already referencing phy.h globally.
-I don't know if there is a way to avoid this warning.
+ Documentation/hwmon/crps.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Else you could simply add something like that:
-See ``struct phy_mse_config`` Kernel documentation defined in
-``include/linux/phy.h``
+diff --git a/Documentation/hwmon/crps.rst b/Documentation/hwmon/crps.rst
+index 87380b496..d42ea59d2 100644
+--- a/Documentation/hwmon/crps.rst
++++ b/Documentation/hwmon/crps.rst
+@@ -43,7 +43,7 @@ curr1_label		"iin"
+ curr1_input		Measured input current
+ curr1_max		Maximum input current
+ curr1_max_alarm		Input maximum current high alarm
+-curr1_crit		Critial high input current
++curr1_crit		Critical high input current
+ curr1_crit_alarm	Input critical current high alarm
+ curr1_rated_max		Maximum rated input current
+ 
+@@ -51,7 +51,7 @@ curr2_label		"iout1"
+ curr2_input		Measured output current
+ curr2_max		Maximum output current
+ curr2_max_alarm		Output maximum current high alarm
+-curr2_crit		Critial high output current
++curr2_crit		Critical high output current
+ curr2_crit_alarm	Output critical current high alarm
+ curr2_rated_max		Maximum rated output current
+ 
+-- 
+2.49.1
 
-Regards
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
 
