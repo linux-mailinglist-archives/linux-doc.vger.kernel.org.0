@@ -1,207 +1,169 @@
-Return-Path: <linux-doc+bounces-57055-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57058-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40575B2F35C
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 11:09:15 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 77611B2F38E
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 11:17:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 783251CC39C8
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 09:09:14 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D94EB5C11F8
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Aug 2025 09:13:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 345FC2F5304;
-	Thu, 21 Aug 2025 09:07:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7799E2F49F4;
+	Thu, 21 Aug 2025 09:11:34 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CE8E2BD031;
-	Thu, 21 Aug 2025 09:07:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83BFF2EF65B
+	for <linux-doc@vger.kernel.org>; Thu, 21 Aug 2025 09:11:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755767232; cv=none; b=a8Puz/aY7JKJWSmi1EANeB02zzs9MKopngoXrpOvjvSPSqVfl1cb93yzeSpzRtrr2USj28B4TLT3O0rr8vNszCComPssEQkcbnu4IT+fqfxNscFKWN2TmUOp3Tw4Rzowqf+Qkrd4DuTKLNFMW9NPkD0AsJUf7pV2LMDgekEDnJY=
+	t=1755767494; cv=none; b=LVNer2Kv2m1q9Z+Uc0OKDh2sFdQ2Y5RClAfu5jjIASnmQ5ttxw4epnoV0w1H0r0gKlo43uPHQqYCjb96ukkjyg1tfSqIw24m4rpPcezxXvBErdF+uby8ewF+IlI0xS7xWQYXr31VV0ZAoHOd2UyqkBwP5EVdbmMCLggugeJGZBM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755767232; c=relaxed/simple;
-	bh=Zh+kkBZNDfZfIiwJzIeX6K/FMXbnoYDsLw2oj5rNOsk=;
-	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=nare+ksjeuP0DiKSLu5eu1khHb1pssztNTSepE5B+UHlBr0q7R+5/t5nSCupOOUYM8JcUYaJPyPh+foEr74rXrOGRB3CIyTz+gba2OeFSweSEZvDmmgY9gBA8v4eVRFlymZUzc4zH5S5LIkTzmTjdK9Vj6hsORgnL9EXAltrD6I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.186.231])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4c6y9t4GNYz6JBWR;
-	Thu, 21 Aug 2025 17:06:42 +0800 (CST)
-Received: from frapeml500008.china.huawei.com (unknown [7.182.85.71])
-	by mail.maildlp.com (Postfix) with ESMTPS id 43D6A1400DB;
-	Thu, 21 Aug 2025 17:06:58 +0800 (CST)
-Received: from localhost (10.203.177.66) by frapeml500008.china.huawei.com
- (7.182.85.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 21 Aug
- 2025 11:06:56 +0200
-Date: Thu, 21 Aug 2025 10:06:55 +0100
-From: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-To: Mike Rapoport <rppt@kernel.org>
-CC: Shiju Jose <shiju.jose@huawei.com>, "rafael@kernel.org"
-	<rafael@kernel.org>, "bp@alien8.de" <bp@alien8.de>,
-	"akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-	"dferguson@amperecomputing.com" <dferguson@amperecomputing.com>,
-	"linux-edac@vger.kernel.org" <linux-edac@vger.kernel.org>,
-	"linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
-	"linux-mm@kvack.org" <linux-mm@kvack.org>, "linux-doc@vger.kernel.org"
-	<linux-doc@vger.kernel.org>, "tony.luck@intel.com" <tony.luck@intel.com>,
-	"lenb@kernel.org" <lenb@kernel.org>, "leo.duran@amd.com" <leo.duran@amd.com>,
-	"Yazen.Ghannam@amd.com" <Yazen.Ghannam@amd.com>, "mchehab@kernel.org"
-	<mchehab@kernel.org>, Linuxarm <linuxarm@huawei.com>, "rientjes@google.com"
-	<rientjes@google.com>, "jiaqiyan@google.com" <jiaqiyan@google.com>,
-	"Jon.Grimm@amd.com" <Jon.Grimm@amd.com>, "dave.hansen@linux.intel.com"
-	<dave.hansen@linux.intel.com>, "naoya.horiguchi@nec.com"
-	<naoya.horiguchi@nec.com>, "james.morse@arm.com" <james.morse@arm.com>,
-	"jthoughton@google.com" <jthoughton@google.com>, "somasundaram.a@hpe.com"
-	<somasundaram.a@hpe.com>, "erdemaktas@google.com" <erdemaktas@google.com>,
-	"pgonda@google.com" <pgonda@google.com>, "duenwen@google.com"
-	<duenwen@google.com>, "gthelen@google.com" <gthelen@google.com>,
-	"wschwartz@amperecomputing.com" <wschwartz@amperecomputing.com>,
-	"wbs@os.amperecomputing.com" <wbs@os.amperecomputing.com>,
-	"nifan.cxl@gmail.com" <nifan.cxl@gmail.com>, tanxiaofei
-	<tanxiaofei@huawei.com>, "Zengtao (B)" <prime.zeng@hisilicon.com>, Roberto
- Sassu <roberto.sassu@huawei.com>, "kangkang.shen@futurewei.com"
-	<kangkang.shen@futurewei.com>, wanghuiqiang <wanghuiqiang@huawei.com>
-Subject: Re: [PATCH v11 1/3] mm: Add support to retrieve physical address
- range of memory from the node ID
-Message-ID: <20250821100655.00003942@huawei.com>
-In-Reply-To: <aKX_rk0DasbDgJrS@kernel.org>
-References: <20250812142616.2330-1-shiju.jose@huawei.com>
-	<20250812142616.2330-2-shiju.jose@huawei.com>
-	<20250819175420.00007ce6@huawei.com>
-	<aKV6dVkPiBPw595T@kernel.org>
-	<20250820095413.00003bd7@huawei.com>
-	<964fc2721fb7499daa5f49eddfed54ff@huawei.com>
-	<aKX_rk0DasbDgJrS@kernel.org>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
+	s=arc-20240116; t=1755767494; c=relaxed/simple;
+	bh=JMLkpt8gghy+8Q85DSYe9pZz4nrrCgAxwVxnlfm0Hvo=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=su3zxPv0I5YS9AXbaIfozW6YMR/4HnoVQDbabpwXiebz6cojRwv1Z6RsRcCI62CYdfF1QN2NgY+/Wxxv5vx917tmdGOjm550HdyvwSBdJPxF1jwnLN6/kbLZQEdLjq/3dQFaJsi1JDx8xVISO7PK24E7yt6M8K0HxqYsDzGe/Hg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <ore@pengutronix.de>)
+	id 1up1K4-0001Pe-32; Thu, 21 Aug 2025 11:11:04 +0200
+Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1up1K2-001O87-1O;
+	Thu, 21 Aug 2025 11:11:02 +0200
+Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1up1K2-008It5-16;
+	Thu, 21 Aug 2025 11:11:02 +0200
+From: Oleksij Rempel <o.rempel@pengutronix.de>
+To: Andrew Lunn <andrew@lunn.ch>,
+	Jakub Kicinski <kuba@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Kory Maincent <kory.maincent@bootlin.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Nishanth Menon <nm@ti.com>
+Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
+	kernel@pengutronix.de,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	UNGLinuxDriver@microchip.com,
+	linux-doc@vger.kernel.org,
+	Michal Kubecek <mkubecek@suse.cz>,
+	Roan van Dijk <roan@protonic.nl>
+Subject: [PATCH net-next v4 0/5] ethtool: introduce PHY MSE diagnostics UAPI and drivers
+Date: Thu, 21 Aug 2025 11:10:56 +0200
+Message-Id: <20250821091101.1979201-1-o.rempel@pengutronix.de>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: lhrpeml100006.china.huawei.com (7.191.160.224) To
- frapeml500008.china.huawei.com (7.182.85.71)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ore@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-On Wed, 20 Aug 2025 20:02:38 +0300
-Mike Rapoport <rppt@kernel.org> wrote:
+changes v4:
+- remove -ENETDOWN as expected error value for get_mse_config() and
+  get_mse_snapshot()
+- fix htmldocs builds
+- s/__ethtool-a-mse/--ethtool-a-mse
+changes v3:
+- add missing ETHTOOL_A_LINKSTATE_MSE_* yaml changes
+changes v2:
+- rebase on latest net-next
 
-> On Wed, Aug 20, 2025 at 10:00:50AM +0000, Shiju Jose wrote:
-> > >-----Original Message-----
-> > >From: Jonathan Cameron <jonathan.cameron@huawei.com>
-> > >Sent: 20 August 2025 09:54
-> > >To: Mike Rapoport <rppt@kernel.org>
-> > >Cc: Shiju Jose <shiju.jose@huawei.com>; rafael@kernel.org; bp@alien8.de;
-> > >akpm@linux-foundation.org; dferguson@amperecomputing.com; linux-
-> > >edac@vger.kernel.org; linux-acpi@vger.kernel.org; linux-mm@kvack.org; linux-
-> > >doc@vger.kernel.org; tony.luck@intel.com; lenb@kernel.org;
-> > >leo.duran@amd.com; Yazen.Ghannam@amd.com; mchehab@kernel.org;
-> > >Linuxarm <linuxarm@huawei.com>; rientjes@google.com;
-> > >jiaqiyan@google.com; Jon.Grimm@amd.com; dave.hansen@linux.intel.com;
-> > >naoya.horiguchi@nec.com; james.morse@arm.com; jthoughton@google.com;
-> > >somasundaram.a@hpe.com; erdemaktas@google.com; pgonda@google.com;
-> > >duenwen@google.com; gthelen@google.com;
-> > >wschwartz@amperecomputing.com; wbs@os.amperecomputing.com;
-> > >nifan.cxl@gmail.com; tanxiaofei <tanxiaofei@huawei.com>; Zengtao (B)
-> > ><prime.zeng@hisilicon.com>; Roberto Sassu <roberto.sassu@huawei.com>;
-> > >kangkang.shen@futurewei.com; wanghuiqiang <wanghuiqiang@huawei.com>
-> > >Subject: Re: [PATCH v11 1/3] mm: Add support to retrieve physical address
-> > >range of memory from the node ID
-> > >
-> > >On Wed, 20 Aug 2025 10:34:13 +0300
-> > >Mike Rapoport <rppt@kernel.org> wrote:
-> > >  
-> > >> On Tue, Aug 19, 2025 at 05:54:20PM +0100, Jonathan Cameron wrote:  
-> > >> > On Tue, 12 Aug 2025 15:26:13 +0100
-> > >> > <shiju.jose@huawei.com> wrote:
-> > >> >  
-> > >> > > From: Shiju Jose <shiju.jose@huawei.com>
-> > >> > >
-> > >> > > In the numa_memblks, a lookup facility is required to retrieve the
-> > >> > > physical address range of memory in a NUMA node. ACPI RAS2 memory
-> > >> > > features are among the use cases.
-> > >> > >
-> > >> > > Suggested-by: Jonathan Cameron <jonathan.cameron@huawei.com>
-> > >> > > Signed-off-by: Shiju Jose <shiju.jose@huawei.com>  
-> > >> >
-> > >> > Looks fine to me.  Mike, what do you think?  
-> > >>
-> > >> I still don't see why we can't use existing functions like
-> > >> get_pfn_range_for_nid() or memblock_search_pfn_nid().
-> > >>
-> > >> Or even node_start_pfn() and node_spanned_pages().  
-> > >
-> > >Good point.  No reason anyone would scrub this on memory that hasn't been
-> > >hotplugged yet, so no need to use numa-memblk to get the info.
-> > >I guess I was thinking of the wrong hammer :)
-> > >
-> > >I'm not sure node_spanned_pages() works though as we need not to include
-> > >ranges that might be on another node as we'd give a wrong impression of what
-> > >was being scrubbed.  
-> 
-> If nodes are not interleaved node_spanned_pages() would work, even if there
-> are holes inside the node, like e.g. e820-reserved memory.
-> So with non-interleaved nodes node_start_pfn() and either
-> node_spanned_pages() or node_end_pfn() will give the node extents and they
-> are faster than get_pfn_range_for_nid().
-> 
-> If the nodes are interleaved, though, a single mem_base, mem_size are not
-> enough for a node as there are a few contiguous ranges in that node, e.g.
-> 
->   0              4G              8G             12G            16G
->   +-------------+ +-------------+ +-------------+ +-------------+
->   |    node 0   | |    node 1   | |    node 0   | |    node 1   |
->   +-------------+ +-------------+ +-------------+ +-------------+
-> 
-> I didn't look into the details of the RAS2 driver, but isn't it's something
-> it should handle?
+This series introduces a generic kernel-userspace API for retrieving PHY
+Mean Square Error (MSE) diagnostics, together with netlink integration,
+a fast-path reporting hook in LINKSTATE_GET, and initial driver
+implementations for the KSZ9477 and DP83TD510E PHYs.
 
-The aim here is that a query prior to setting a specific range returns
-data for at least a range that the scrub controller covers and nothing
-it doesn't. So just presenting the first chunk for a node is fine.
-There is plenty of info for userspace to figure things out if it wants
-to trigger a scrub on 8-12G in your example, but until it does we want
-to return 0-4G for the default range.
+MSE is defined by the OPEN Alliance "Advanced diagnostic features for
+100BASE-T1 automotive Ethernet PHYs" specification [1] as a measure of
+slicer error rate, typically used internally to derive the Signal
+Quality Indicator (SQI). While SQI is useful as a normalized quality
+index, it hides raw measurement data, varies in scaling and thresholds
+between vendors, and may not indicate certain failure modes - for
+example, cases where autonegotiation would fail even though SQI reports
+a good link. In practice, such scenarios can only be investigated in
+fixed-link mode; here, MSE can provide an empirically estimated value
+indicating conditions under which autonegotiation would not succeed.
 
-I hacked up some SRAT tables to give something like the above for testing.
-> 
-> > >Should be able to use some combination of node_start_pfn() and maybe
-> > >memblock_search_pfn_nid() to get it though (that also gets the nid we already
-> > >know but meh, no ral harm in that.)  
-> > 
-> > Thanks Mike and Jonathan.
-> > 
-> > The following approaches were tried as you suggested, instead of newly proposed
-> > nid_get_mem_physaddr_range().
-> > Methods 1 to 3 give the same result as nid_get_mem_physaddr_range(), but
-> > Method 4 gives a different value for the size.  
-> 
-> I believe that's because on x86 the node 0 is really scrambled because of
-> e820/efi reservations that never make it to memblock.
+Example output with current implementation:
+root@DistroKit:~ ethtool lan1
+Settings for lan1:
+...
+        Speed: 1000Mb/s
+        Duplex: Full
+...
+        Link detected: yes
+        SQI: 5/7
+        MSE: 3/127 (channel: worst)
 
-Fun question of whether we should take any notice of those.
-Would depend on whether anyone's scrub firmware gets confused if we scrub
-them and they aren't backed by memory.  If they are we can rely on system
-constraints refusing to scrub that stuff at an 'unsafe' level and if we
-set it higher than it otherwise would be only possibility is we see earlier
-error detections in those and have to deal with them.
+root@DistroKit:~ ethtool --show-mse lan1
+MSE diagnostics for lan1:
+MSE Configuration:
+        Max Average MSE: 127
+        Refresh Rate: 2000000 ps
+        Symbols per Sample: 250
+        Supported capabilities: average channel-a channel-b channel-c
+                                channel-d worst
 
-Jonathan
+MSE Snapshot (Channel: a):
+        Average MSE: 4
 
+MSE Snapshot (Channel: b):
+        Average MSE: 3
 
->  
-> > Please advise which method should be used for the RAS2?
-> > 
-> > Thanks,
-> > Shiju
-> >   
-> 
+MSE Snapshot (Channel: c):
+        Average MSE: 2
+
+MSE Snapshot (Channel: d):
+        Average MSE: 3
+
+[1] https://opensig.org/wp-content/uploads/2024/01/Advanced_PHY_features_for_automotive_Ethernet_V1.0.pdf
+
+Oleksij Rempel (5):
+  ethtool: introduce core UAPI and driver API for PHY MSE diagnostics
+  ethtool: netlink: add ETHTOOL_MSG_MSE_GET and wire up PHY MSE access
+  ethtool: netlink: add lightweight MSE reporting to LINKSTATE_GET
+  net: phy: micrel: add MSE interface support for KSZ9477 family
+  net: phy: dp83td510: add MSE interface support for 10BASE-T1L
+
+ Documentation/netlink/specs/ethtool.yaml      | 175 +++++++++
+ Documentation/networking/ethtool-netlink.rst  |  65 ++++
+ drivers/net/phy/dp83td510.c                   |  44 +++
+ drivers/net/phy/micrel.c                      |  76 ++++
+ include/linux/phy.h                           | 115 ++++++
+ .../uapi/linux/ethtool_netlink_generated.h    |  94 +++++
+ net/ethtool/Makefile                          |   2 +-
+ net/ethtool/linkstate.c                       |  84 ++++
+ net/ethtool/mse.c                             | 362 ++++++++++++++++++
+ net/ethtool/netlink.c                         |  10 +
+ net/ethtool/netlink.h                         |   2 +
+ 11 files changed, 1028 insertions(+), 1 deletion(-)
+ create mode 100644 net/ethtool/mse.c
+
+--
+2.39.5
 
 
