@@ -1,154 +1,271 @@
-Return-Path: <linux-doc+bounces-57225-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57245-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B612CB30B34
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 04:00:48 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA034B30BA5
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 04:10:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 295C93B9560
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 01:57:43 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A3EFE1C20F95
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 02:07:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B685226B77A;
-	Fri, 22 Aug 2025 01:55:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F1281DED5F;
+	Fri, 22 Aug 2025 02:06:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Qd73yZhr"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JU/gMn37"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 437841E1DE9;
-	Fri, 22 Aug 2025 01:55:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2C241D90DF;
+	Fri, 22 Aug 2025 02:06:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755827707; cv=none; b=I8RoYGa9hL5DacY5wOBRlVwWSXpSW1jdE5ZOFhZLL0/30uVtWHb9hvHHPgsXIZbc0zMbrDAyLmq1VpLh3feYB4F16CbnfP76WqCkO2wgzbxp/V1BS4xAUJOk3mmMGo1BFPO5M8olF4yTxvPXNWdpViUTjwib4wNxl9W+QAP5iXc=
+	t=1755828415; cv=none; b=am1J6cWxjg6nHgmeZLutcq3tRhaCfbi/O5qTM2R1lR2TNxOZ2Xph/IdTWS84NbKh7NbnZk6aV+NGVNavjPmSIFdaI4U8wPHmBARDiHOrjTJih2n3zplTy1pGOUA6kBT6VnYDpWFrnHQqnkWVam9WLUt+atYSEU/8u2jrDRe0fHU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755827707; c=relaxed/simple;
-	bh=U/uRSC5EGWcyMQzBbgILNWMp+WFzjumqMb7BuIlxvwk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KWbjaD8RZxdqmxiP65kxLA787QN/HWQAmN+B9+sFIxsgnF+m9wc7iDyfPCrpHKb/YEwkITNr0YXhzJ7mx7dOWapqR+yMwbk8LslW1bRcmvV2DzSdx5EtXWzBSMkxEh9DnK56xSNcPbPH4v309dI9fSz3hn0CNKNvh0GU5NmZeXM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Qd73yZhr; arc=none smtp.client-ip=209.85.210.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-76e2eb09041so1572024b3a.3;
-        Thu, 21 Aug 2025 18:55:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1755827705; x=1756432505; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=9VlbTxozbSzQO9ARnT0FclUjFleOp0pjebJJyPSVXg0=;
-        b=Qd73yZhrTYz/osjtunJcS94ITqMf4YSIvB7lxZoQ00PU8YEXYeSxz4p0LG7PJK38MZ
-         Deocn+Bqyq3QuEPCaEPjZ26QydGSYhGirFWOKY7iwCDcl0bU59WBWxeYiQhx+NoAmEzL
-         CGiPjJoHZnOTIc5MZYwf1m7YwvoXP2gRBEkegO0BD1+KC/Rb518uz13WrUR7V4gVG+rA
-         q7LrFyKmXhVVJ+MdrBjgCQQwo32VAYqx4W2ArzLmmWLR9SiyhcDM7npkb0rR8dU4n/Ys
-         kbibc5AAsYGtfpTcrBHlSomsVhNCTO1FO4FUA1YdnFXbZtfisMfobTic5AL+cHe6MItk
-         Tc8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1755827705; x=1756432505;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9VlbTxozbSzQO9ARnT0FclUjFleOp0pjebJJyPSVXg0=;
-        b=A+QWkdN1I5NNA816JDKu35/zoqDVnceLv4BpqLAups9UNr85ifRsCztSFgGmn1JiDF
-         6nUrq4AZie8zsmqpYd+VLIb6FIl6sqS0RHKG/XpQyga4e78BvdfHXs5slFmQschUc37F
-         z0BwGV+o1gY9dlmgQNRi2+GmdCoXusK+9PcSvtKOksejIpORUxNWyoumROGy0u25o5I0
-         IkpeSk/9JKfPMLAP6d1xDDblbAcVS3B55YahG+knSrcp9N2pAMPiVBSgLE7bJDygBP2I
-         rvFCR3QLIrhnheyyVDe4rKK2/Nq4TG4miQ9VzW91k8486sHHVSTCLVpw6HMqsq3R8Dz1
-         TPKQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUsD61jVOnJn6wOwjuQLJKODpMnJ9gG5d2eymEb/FdacJUnr99J/JAqCSp61u24inj+wfuwFW8jtjg=@vger.kernel.org, AJvYcCW8TTYJcJ8/wNsIQVxvb6ChBsHDusMd/ONQoK0wIsb96cqectf1Miu8a5Z70+n9Vl5tCkVMs9ZFAu3/r/xq@vger.kernel.org, AJvYcCWcDeIF50OdvIUWtk4B15y2By5R3jifjSuS+V3kNJenijLjiochzkX5HBM9qB84K+sspm5WbvRGgZMI@vger.kernel.org
-X-Gm-Message-State: AOJu0YwOk+4xA4fc6k4Sg+ivnqyGL1svwyu9vgCcu+MMjuej0CwxIQjO
-	yd8NNtF8C4jqrdQveLxm+EIXB1a51T2UMhIgmwwdKfZgegOvuStgRWSJ
-X-Gm-Gg: ASbGnctytO48R2vaGS0apEMXBQWpxdqiaBBhcEE8IeXfCHSRQizUrgRP90m3QXjfLb+
-	8oIyhNsmGq9gfeXWOI3UxSraNMAuFo3qhnuQxH8zFu0hjIZpEWQxWHqUvgz2LRMQ9byHabV3Oqq
-	G4TE0MZyMc5D7wBaFEbBr5NHqlomUCcWCjyRuTThJ1qJScN+fBPbTvEE0Ecu2KHN4hgP07PGmLq
-	eREh8N7l91ek17s+uJ+tw8/rxu1XTAz4e1wQfdJKdq0apBGeqTJ3zXF4abor/EwoYBduLo/9KnG
-	pmac09t80BR4rbq6Y2HkuzDYyAjdtbQrYy8r4oe2kZup4KgXbeqmvqVGuz/ZPLhS2dzzq8KzqqA
-	vCxGAziqBNVx5qjrRqK7zvQMFdqf+LQVt
-X-Google-Smtp-Source: AGHT+IFtii/rdTCol8k9qDHs+gJGJCS+hHZTdi6/kZwNVS5GBodQwNFmbhwjQpzrd1QHNB6kcahQTg==
-X-Received: by 2002:a05:6a00:3923:b0:76e:99fc:dde7 with SMTP id d2e1a72fcca58-7702fad0ee9mr1541193b3a.22.1755827705341;
-        Thu, 21 Aug 2025 18:55:05 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-76e830d3558sm8693894b3a.75.2025.08.21.18.55.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Aug 2025 18:55:04 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id 8A737420B4E3; Fri, 22 Aug 2025 08:55:01 +0700 (WIB)
-Date: Fri, 22 Aug 2025 08:55:01 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: "Fabio M. De Francesco" <fabio.m.de.francesco@linux.intel.com>,
-	linux-cxl@vger.kernel.org
-Cc: Davidlohr Bueso <dave@stgolabs.net>,
-	Jonathan Cameron <jonathan.cameron@huawei.com>,
-	Dave Jiang <dave.jiang@intel.com>,
-	Alison Schofield <alison.schofield@intel.com>,
-	Vishal Verma <vishal.l.verma@intel.com>,
-	Ira Weiny <ira.weiny@intel.com>,
-	Dan Williams <dan.j.williams@intel.com>,
-	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	ALOK TIWARI <alok.a.tiwari@oracle.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Gregory Price <gourry@gourry.net>
-Subject: Re: [PATCH v4] cxl: docs/driver-api/conventions resolve conflicts
- between CFMWS, LMH, Decoders
-Message-ID: <aKfN9d-REhpr2o7w@archie.me>
-References: <20250820150655.1170975-1-fabio.m.de.francesco@linux.intel.com>
+	s=arc-20240116; t=1755828415; c=relaxed/simple;
+	bh=tadX5fun3sS111NNjkdLAHXaqFbfGvQfjJ8uKRlqs9A=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=CXzMDFn2JHqhM1K01u/CATqTnXVTS0c7mcVeEhqI9bSVXotev9EPZjGbj8smky+lBkVoN8CYKsncLR8F4mLz9oDjrUaMzPCeyuk/1MSVWlUdOLLWyZPm7Uet8DxjqHVAv2Bp+zQFU8ej8MfBJarUqy5bn28+leLCZAqZmXmKoOc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JU/gMn37; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40231C4CEEB;
+	Fri, 22 Aug 2025 02:06:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1755828414;
+	bh=tadX5fun3sS111NNjkdLAHXaqFbfGvQfjJ8uKRlqs9A=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=JU/gMn37onvXHWyoKAM9uBFclvr+uf+OT2MGsP25CrX6jxmdkdW1srBwe1CDaq4su
+	 Aew4LRJ/396aRnL9mSlcjcHRoNiomDAFVeqmwkYHIEiZisvaAhQaJBf1VdIsXlc4ES
+	 WqKT75WuNEHGvImgPi276LdrX1x8xf2ALWGYsXYHM3ffpKdC7i+B53OtPBF53R44nC
+	 5xf77gEy5uoaes2+OJ32IRzZ4PwfzaJXUHtW8yJ6Li3ZqxO2FhLXGeLHVNZ0f7KD7p
+	 lD4wZfcLyR4X832XrrM0nB5hWZusJba5NwCidb+qy50yVvgdEwSjt1+fhj9YTOQiem
+	 5gXC9I2wqgssw==
+Date: Fri, 22 Aug 2025 04:06:45 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>, =?UTF-8?B?QmrDtnJu?=
+ Roy Baron <bjorn3_gh@protonmail.com>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Alice Ryhl <aliceryhl@google.com>, Boqun Feng <boqun.feng@gmail.com>, Gary
+ Guo <gary@garyguo.net>, Trevor Gross <tmgross@umich.edu>,
+ linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH 04/11] scripts: sphinx-build-wrapper: add a wrapper for
+ sphinx-build
+Message-ID: <20250822040645.75d5faf4@foz.lan>
+In-Reply-To: <87plco5tb9.fsf@trenco.lwn.net>
+References: <cover.1755258303.git.mchehab+huawei@kernel.org>
+	<88a95c7f6996cafb247d6706060173b17a46d570.1755258303.git.mchehab+huawei@kernel.org>
+	<87plco5tb9.fsf@trenco.lwn.net>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="WDtJnK6kwVDtJAI2"
-Content-Disposition: inline
-In-Reply-To: <20250820150655.1170975-1-fabio.m.de.francesco@linux.intel.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+
+Em Thu, 21 Aug 2025 14:11:06 -0600
+Jonathan Corbet <corbet@lwn.net> escreveu:
+
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+> 
+> > There are too much magic inside docs Makefile to properly run
+> > sphinx-build. Create an ancillary script that contains all
+> > kernel-related sphinx-build call logic currently at Makefile.
+> >
+> > Such script is designed to work both as an standalone command
+> > and as part of a Makefile. As such, it properly handles POSIX
+> > jobserver used by GNU make.
+> >
+> > It should be noticed that, when running the script alone,
+> > it will only take care of sphinx-build and cleandocs target.
+> > As such:
+> >
+> > - it won't run "make rustdoc";
+> > - no extra checks.
+> >
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > ---
+> >  .pylintrc                    |   2 +-
+> >  scripts/sphinx-build-wrapper | 627 +++++++++++++++++++++++++++++++++++
+> >  2 files changed, 628 insertions(+), 1 deletion(-)
+> >  create mode 100755 scripts/sphinx-build-wrapper  
+> 
+> As a whole I like the idea of this - I would rather be reading code in
+> Python than in makefilese.  But I have some overall notes...
+> 
+> I am a bit dismayed by the size of it; this is many times the amount of
+> code it allows us to remove from the makefile.  Perhaps there's nothing
+> to be done for that, but ...
+
+True:
+
+ 7 files changed, 922 insertions(+), 200 deletions(-)
+
+Yet, a lot of them are blank lines, comments, docstrings and 
+argparse. Also, there are some improvements on it, like the PDF
+build error handling logic (more below).
+
+One of the things I wanted to do is precisely better describe
+what it does. The Makefile has lots of magic and complex macros
+that, even the ones that wrote it have headaches trying to understand
+after some time not looking on it.
+
+Also, part of it will be dropped at the next patch series when
+we will get rid of userspace-api/media/Makefile:
+
+	$ git diff 182fa089db0b..parse_headers scripts/sphinx-build-wrapper|diffstat -p1 
+	 scripts/sphinx-build-wrapper |   48 ---------------------
+	 1 file changed, 48 deletions(-)
+
+I guess there are some space to clean it up a little bit, for instance
+getting rid of most of the env vars and passing them as command
+line only. Yet, I opted to be a bit conservative at the cleanups at the
+env vars to reduce the risk of breaking something.
+
+> Is there value in the SphinxBuilder class?  Just because you can create
+> classes in Python doesn't mean that you have to; I'm not sure why you
+> would create one here rather than just doing it all at the module level.
+
+On Python, I prefer using classes, as:
+
+1. I don't like passing lots of arguments to functions;
+2. Python doesn't have struct. The closest concept of struct in Python
+   is a data class;
+3. Classes help to avoid global vars. In this specific case, the size of 
+   its data "struct" (e.g. class variables) is not small, as it has to
+   parse lots of environment vars, and several of those are used on
+   multiple places.
+
+> Is the "search for a newer Python" code really going to be useful for
+> anybody? 
+
+Well, I could have written it in shell script or Perl ;-)
+
+Seriously, the rationale was not to search for a newer Python code, but
+instead, to have a place were it is easier to understand what's
+going on and adjust to our actual needs.
+
+I actually started it because of the pdfdocs check: doing make
+pdfdocs currently will return an error code when building docs
+no matter what. Fixing it inside the Makefile would be doable, but
+complex and would likely require an script anyway (or a script-like
+code embedded on it).
+
+Now, instead of adding yet another hack there, why not do it
+right?
+
+> It seems like a lot of work (and code) to try to quietly patch
+> things up for somebody who has some sort of a strange setup.
+
+My idea was not to support some strange setup, but to I had a few
+goals. Mainly:
+
+1. to have the simplest possible Makefile without loosing anything;
+2. to be able to call the script directly, as it helps debugging;
+3. to remove that ugly for sphinx-build call macro logic inside
+   Makefile, with is hard to understand and even harder to touch;
+4. to fix a known bug with the current approach with regards
+   to PDF build: no matter if PDF build succeeded or not, it
+   always return an error code;
+5. to have a summary of the PDF build. Even with latexmk, the
+   PDF build is a way too noisy, being hard to check what broke
+   and what succeeded.
+6. to make easier to build PDFs in interactive mode (I added this
+   later at the development cycle).
+
+-
+
+For the future, if time permits, there are two possible improvements
+
+a) I'd like to change the way SPHINXDIRS work. Right now, it is a very
+   dirty hack, that makes sphinx-build becalled several times (one for
+   each dir), and breaks cross-references.
+
+   I'd like to be able to allow building multiple dirs at the
+  same time, with a proper index between them.
+
+b) By having this in python, we can do other cleanups like:
+
+   - instance convert sphinx-pre-install into a class, calling
+     it directly there;
+   - pick the logic inside conf.py that handles SPHINXDIRS and
+     latex documents.
+
+In summary, the advantage is that it is a lot easier to fine tune
+the script in the proper way than to add more hacks to docs Makefile.
+
+> Please, no "except Exception:"  (or the equivalent bare "except:").
+
+Ok.
+
+> That bit of locale tweaking shows up in enough places that it should
+> maybe go into a little helper module rather than being repeatedly
+> open-coded?
+
+Do you mean this?
+
+        # The sphinx-build tool has a bug: internally, it tries to set
+        # locale with locale.setlocale(locale.LC_ALL, ''). This causes a
+        # crash if language is not set. Detect and fix it.
+        try:
+            locale.setlocale(locale.LC_ALL, '')
+        except Exception:		# I'll replace it with locale.Error
+            self.env["LC_ALL"] = "C"
+            self.env["LANG"] = "C"
+
+This was also added later, to fix a current Sphinx (or Python?) bug.
+
+Try to run sphinx-build on a Debian-based or Gentoo distro without 
+setting any locale (which is the default after installing them):
+
+	# sphinx-build --help
+	Traceback (most recent call last):
+	  File "/usr/bin/sphinx-build", line 8, in <module>
+	    sys.exit(main())
+	             ~~~~^^
+	  File "/usr/lib/python3/dist-packages/sphinx/cmd/build.py", line 546, in main
+	    locale.setlocale(locale.LC_ALL, '')
+	    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+	  File "/usr/lib/python3.13/locale.py", line 615, in setlocale
+	    return _setlocale(category, locale)
+	locale.Error: unsupported locale setting
+
+	# LC_ALL=C sphinx-build --help
+	usage: sphinx-build [OPTIONS] SOURCEDIR OUTPUTDIR [FILENAMES...]
+	...
 
 
---WDtJnK6kwVDtJAI2
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Well, sphinx-build will crash even if called with "--help". Btw, 
+spinx-build is following Python recommendation of using '':
+	https://docs.python.org/3/library/locale.html#locale.setlocale
 
-On Wed, Aug 20, 2025 at 05:06:39PM +0200, Fabio M. De Francesco wrote:
-> +Creator/Contributors
-> +--------------------
-> +
-> +Fabio M. De Francesco, Intel
-> +Dan J. Williams, Intel
-> +Mahesh Natu, Intel
+Ok, we could drop that, but on the other hand it is just 5 LOC.
+(actually it can be 4 LOC, as self.env["LANG"] = "C" is not really needed 
+to avoid the crash).
 
-Maybe bullet list?
+One thing I'm in doubt is with regards to --venv command line argument.
+It could be dropped, or it could be auto-detected. The code is also
+small, and IMHO it could help for the ones using venv:
 
-> +E.g, a real x86 platform with two CFMWS, 384 GB total memory, and LMH
-> +starting at 2 GB:
-> +
-> +Window | CFMWS Base | CFMWS Size | HDM Decoder Base | HDM Decoder Size |=
- Ways | Granularity
-> +  0    |   0 GB     |     2 GB   |      0 GB        |       3 GB       |=
-  12  |    256
-> +  1    |   4 GB     |   380 GB   |      0 GB        |     380 GB       |=
-  12  |    256
-> +
+        # If venv parameter is specified, run Sphinx from venv
+        if venv:
+            bin_dir = os.path.join(venv, "bin")
+            if os.path.isfile(os.path.join(bin_dir, "activate")):
+                # "activate" virtual env
+                self.env["PATH"] = bin_dir + ":" + self.env["PATH"]
+                self.env["VIRTUAL_ENV"] = venv
+                if "PYTHONHOME" in self.env:
+                    del self.env["PYTHONHOME"]
+                print(f"Setting venv to {venv}")
+            else:
+                sys.exit(f"Venv {venv} not found.")
 
-I see CFMWS table above as normal paragraph instead in htmldocs output.
+Btw, this is the kind of code that makes sense to be inside some
+library.
 
-Thanks.
-
---=20
-An old man doll... just what I always wanted! - Clara
-
---WDtJnK6kwVDtJAI2
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaKfN8QAKCRD2uYlJVVFO
-o3BDAP9jy+wb3kJL+5zEr4wPjs2/Wf/kgEyZpO1tIEJkMmr/YwD+OYvZgfDj3lGc
-nWpYZFfxjxMYkawIEOqjLuIax8bAPQo=
-=gyqi
------END PGP SIGNATURE-----
-
---WDtJnK6kwVDtJAI2--
+Thanks,
+Mauro
 
