@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-57304-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57310-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A2C0B31B6A
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 16:28:09 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id ECB8FB31B70
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 16:28:26 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 88ADA643012
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 14:21:46 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 85619B27E0F
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Aug 2025 14:21:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D121E3126BD;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ECB663126D3;
 	Fri, 22 Aug 2025 14:19:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zgmhr3DZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F1sGOReh"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 987C5311977;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B80B83126A9;
 	Fri, 22 Aug 2025 14:19:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755872388; cv=none; b=sBk3eapjgedg6EyLXr2NJIenzh+PhC/87gY6WbaNlO8XL4p9JGwGJjMXWFuyYaf+ivGCsCGs5jF2ZVwGI/HKEj2nHMNoLB+xXv5YjmjfcPGqSCjcbEFKCeOByaTz2ldggzXNRRNH+iqh2WgONvAN4PQxW0ctGTvjLAMYl5c/zWI=
+	t=1755872388; cv=none; b=Dl3jvL4OCbMIGR7+ZpHzO5R6ZRto7u2HQ4LokFbToTzS94o6AoabG1lgn90gvuDibLccK/kT2Wn5JzzsUFxTphMbPJPlVOSZk7LU33SXFsGys/Mq29wdT5N66rgGoe+czMSicGYw+oSY5M3pohIhpicZXXiyw2Ce4jsA2peRR/4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1755872388; c=relaxed/simple;
-	bh=wQmzELiyLlP6dYnGbR5xm0Wl2cXgsAK4Vx4o5Slpgnw=;
+	bh=XLpGjVmiz7KWSgkDl0zwCX9wJOnCvElrKCUuUORJrj4=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=b1BLz7ZyTVp4J8wvZojFyePONFcD9yZ9T5FzMjXtQxDihaTvozYPVMj0S+8yOIUEbbdk11zhPqR+Z/NIXWOCEgSva7+p+HsiMs420iOliFFOX+5wygFHtCUWyF5t/eXWcLXd0vdeH3Ha8rRg8j6Kqi298fyDGUyGX5l9l/afDJ4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zgmhr3DZ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4037BC2BCB7;
+	 MIME-Version; b=RSdzuA+0ow5XOBeB+KUGPCEqkX3aH0OQP/FE+HCxcK9li3h5xUA6jhS/VAj1g2E+dauAKIyUiGE3HBatoZxr4+T9dAc/MpUACvsxQwYiMMOv+KiWxFWz4rgHRP//ANePbgyUfhhchVdkwpHCX0WrnYc2aMI1xdYnfJpKecW+wO8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F1sGOReh; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44211C2BCB8;
 	Fri, 22 Aug 2025 14:19:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1755872388;
-	bh=wQmzELiyLlP6dYnGbR5xm0Wl2cXgsAK4Vx4o5Slpgnw=;
+	bh=XLpGjVmiz7KWSgkDl0zwCX9wJOnCvElrKCUuUORJrj4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Zgmhr3DZt+Ed1uvBvlGY6a0RI3Qw7O7QBPDF2XQDJvwwuhtFW4YIVZnU2WiUdtnXy
-	 RZ6Gc1RJRbRACwbkhdZJ8UdE6Vv/0XMyicEl3jkF+wt80SQ1cf2nKRVj+p4kcg34G/
-	 Wo2fKhy1W3zqrj9n9g18rwI9uj+3uYLg+7ms3Vr/2/hvhixcL4MIZdKlRMuGt15dzk
-	 SfFZw4BPyIVCyRhOdHxY6ZCPD3OrCKHvmntddpns1C4ViDTOgwRmMQ0JCvOBoJHvGe
-	 BQPk9Igq2xL9iHvh9Uhm1W2WpfNejvvj4Y2Iz72516mizzANBsm7K1f3ETrphzCKih
-	 nOjuuX2gRKaRA==
+	b=F1sGORehtpcfx0NvTk0TWxy4b1/C9716/JIBnVQYA2XcZl6dwmLl/aAPKjbRF4Onl
+	 GOz6J9sz/mTkMTSYlkhyE4iASqOcerz/nKWw6v8J/0Pb0ZsLzmz5r8DFe16Rwd/+2B
+	 youByWaCw7uodBK2E3wY5ksN7z3hScnKBVZFeBueFA2XEapIewoMcRk5WINRUq+QJ+
+	 nDyz5i96sNLUcLQk73kp+JTe/SKmjqYv3u/hqq/qmfpzDXZh93wYYFeh4ZRt4oJy1x
+	 OqOTkRxoO19j5nlVc86hekohRSO0GWW5BXj1W/wMAUJTGHuiVUYzqz5feWZLgj7C6d
+	 zvParDAEiN+LQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1upScM-0000000CCrp-26gB;
+	id 1upScM-0000000CCru-2DaE;
 	Fri, 22 Aug 2025 16:19:46 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -52,9 +52,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
 	Kees Cook <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 15/24] docs: kernel_include.py: remove range restriction for gen docs
-Date: Fri, 22 Aug 2025 16:19:27 +0200
-Message-ID: <5dff693860a6a3faade15c24abdc380f09db468d.1755872208.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 16/24] docs: kernel_include.py: move code and literal functions
+Date: Fri, 22 Aug 2025 16:19:28 +0200
+Message-ID: <78d08dfa3f08adabc30bf93b8a1cde4e19b7bd41.1755872208.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1755872208.git.mchehab+huawei@kernel.org>
 References: <cover.1755872208.git.mchehab+huawei@kernel.org>
@@ -67,42 +67,144 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Originally, parse-readers were generating an output where
-the first two lines were setting a literal block.
+Simplify run() even more by moving the code which handles
+with code and literal blocks to their own functions.
 
-The script now gets only the actual parsed data without that,
-so it is now safe to allow start-line and end-line parameters
-to be handled.
+No functional changes.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/sphinx/kernel_include.py | 6 ------
- 1 file changed, 6 deletions(-)
+ Documentation/sphinx/kernel_include.py | 100 +++++++++++++++----------
+ 1 file changed, 59 insertions(+), 41 deletions(-)
 
 diff --git a/Documentation/sphinx/kernel_include.py b/Documentation/sphinx/kernel_include.py
-index c5f4f34e22cb..4cdd1c77982e 100755
+index 4cdd1c77982e..0909eb3a07ea 100755
 --- a/Documentation/sphinx/kernel_include.py
 +++ b/Documentation/sphinx/kernel_include.py
-@@ -122,9 +122,6 @@ class KernelInclude(Include):
-             exceptions_file = os.path.join(source_dir, self.options['exception-file'])
-             parser.process_exceptions(exceptions_file)
+@@ -160,6 +160,52 @@ class KernelInclude(Include):
  
--        if self.options.get("start-line") or self.options.get("end-line"):
--            raise self.severe('generate-cross-refs can\'t be used with "start-line" or "end-line"')
--
-         # Store references on a symbol dict to be used at check time
-         if 'warn-broken' in self.options:
-             env._xref_files.add(path)
-@@ -209,9 +206,6 @@ class KernelInclude(Include):
+         return rawtext
  
-             title = os.path.basename(path)
++    def literal(self, path, tab_width, rawtext):
++        """Output a literal block"""
++
++        # Convert tabs to spaces, if `tab_width` is positive.
++        if tab_width >= 0:
++            text = rawtext.expandtabs(tab_width)
++        else:
++            text = rawtext
++        literal_block = nodes.literal_block(rawtext, source=path,
++                                            classes=self.options.get("class", []))
++        literal_block.line = 1
++        self.add_name(literal_block)
++        if "number-lines" in self.options:
++            try:
++                startline = int(self.options["number-lines"] or 1)
++            except ValueError:
++                raise self.error(":number-lines: with non-integer start value")
++            endline = startline + len(include_lines)
++            if text.endswith("\n"):
++                text = text[:-1]
++            tokens = NumberLines([([], text)], startline, endline)
++            for classes, value in tokens:
++                if classes:
++                    literal_block += nodes.inline(value, value,
++                                                    classes=classes)
++                else:
++                    literal_block += nodes.Text(value, value)
++        else:
++            literal_block += nodes.Text(text, text)
++        return [literal_block]
++
++    def code(self, path, include_lines):
++        """Output a code block"""
++
++        self.options["source"] = path
++        codeblock = CodeBlock(self.name,
++                                [self.options.pop("code")],  # arguments
++                                self.options,
++                                include_lines,
++                                self.lineno,
++                                self.content_offset,
++                                self.block_text,
++                                self.state,
++                                self.state_machine)
++        return codeblock.run()
++
+     def run(self):
+         """Include a file as part of the content of this reST file."""
+         env = self.state.document.settings.env
+@@ -200,6 +246,13 @@ class KernelInclude(Include):
+         startline = self.options.get("start-line", None)
+         endline = self.options.get("end-line", None)
  
--            if startline or endline:
--                raise self.severe('generate-cross-refs can\'t be used together with "start-line" or "end-line"')
--
-             if "code" not in self.options:
-                 rawtext = ".. parsed-literal::\n\n" + rawtext
-         else:
++        if "literal" in self.options:
++            ouptut_type = "literal"
++        elif "code" in self.options:
++            ouptut_type = "code"
++        else:
++            ouptut_type = "normal"
++
+         # Get optional arguments to related to cross-references generation
+         if 'generate-cross-refs' in self.options:
+             rawtext = self.read_rawtext_with_xrefs(env, path)
+@@ -213,50 +266,15 @@ class KernelInclude(Include):
+ 
+         rawtext = self.apply_range(rawtext)
+ 
++        if ouptut_type == "literal":
++            return self.literal(path, tab_width, rawtext)
++
+         include_lines = statemachine.string2lines(rawtext, tab_width,
+                                                   convert_whitespace=True)
+-        if "literal" in self.options:
+-            # Convert tabs to spaces, if `tab_width` is positive.
+-            if tab_width >= 0:
+-                text = rawtext.expandtabs(tab_width)
+-            else:
+-                text = rawtext
+-            literal_block = nodes.literal_block(rawtext, source=path,
+-                                                classes=self.options.get("class", [])
+-            )
+-            literal_block.line = 1
+-            self.add_name(literal_block)
+-            if "number-lines" in self.options:
+-                try:
+-                    startline = int(self.options["number-lines"] or 1)
+-                except ValueError:
+-                    raise self.error(":number-lines: with non-integer start value")
+-                endline = startline + len(include_lines)
+-                if text.endswith("\n"):
+-                    text = text[:-1]
+-                tokens = NumberLines([([], text)], startline, endline)
+-                for classes, value in tokens:
+-                    if classes:
+-                        literal_block += nodes.inline(value, value,
+-                                                      classes=classes)
+-                    else:
+-                        literal_block += nodes.Text(value, value)
+-            else:
+-                literal_block += nodes.Text(text, text)
+-            return [literal_block]
+ 
+-        if "code" in self.options:
+-            self.options["source"] = path
+-            codeblock = CodeBlock(self.name,
+-                                  [self.options.pop("code")],  # arguments
+-                                  self.options,
+-                                  include_lines,  # content
+-                                  self.lineno,
+-                                  self.content_offset,
+-                                  self.block_text,
+-                                  self.state,
+-                                  self.state_machine)
+-            return codeblock.run()
++        if ouptut_type == "code":
++            return self.code(path, include_lines)
++
+         self.state_machine.insert_input(include_lines, path)
+         return []
+ 
 -- 
 2.50.1
 
