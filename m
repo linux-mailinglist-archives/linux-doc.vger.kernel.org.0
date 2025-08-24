@@ -1,157 +1,210 @@
-Return-Path: <linux-doc+bounces-57362-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57364-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id B43A2B32CAA
-	for <lists+linux-doc@lfdr.de>; Sun, 24 Aug 2025 02:08:18 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71F73B32CE7
+	for <lists+linux-doc@lfdr.de>; Sun, 24 Aug 2025 03:37:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 06D5D2018E9
-	for <lists+linux-doc@lfdr.de>; Sun, 24 Aug 2025 00:08:17 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4373B20748A
+	for <lists+linux-doc@lfdr.de>; Sun, 24 Aug 2025 01:37:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 710551862;
-	Sun, 24 Aug 2025 00:08:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AC7BE17A305;
+	Sun, 24 Aug 2025 01:37:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="SS6KRbjr"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Re0Opgd9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D92A728E7;
-	Sun, 24 Aug 2025 00:08:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA2A01FB3;
+	Sun, 24 Aug 2025 01:37:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1755994092; cv=none; b=lkVSvkWYsjrZZTexOAYK90kO/SgEuqAcNHOLsAe/9pJeOSShEo7M8uNRJVbcmHUl0Z9AHBA5V+6oZ22zUrrgvHbOOtQTrt3GH0G4UZ1Ext6VUW3PvDSaUam8sHCOoi+MIBpovNHP3dm7Jh64CxF63f6Fw4NOjXo0f2hDy0+McTE=
+	t=1755999472; cv=none; b=MIjOKI+axLNr/vrOIdK/kueQVIUvpB/Q613wOr5rePWVipZvsaRUQ7bF5pbzrf6OJ9qJjqyQfPFHA/8HtK2WQEw4DZAApJ3fwOh/eJ0mERVe1C3GoIHU8dMUBcYzBNyZ+SyhY3zX70lh2RemKBKYutfn8WnZmrosFGJW8IHIih0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1755994092; c=relaxed/simple;
-	bh=p6tdH8tBUzTt3XM9QotbHtv99ePeCk312qZmjfd1qS0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mAD8+jIHWKUKwVUoALQU/6JKGt7qNIzs4pKUUCcK7CZjaWAVBvErvCY8D4g5SBpFZt0SWC+sILpJdUqGK3jW69QISGpZhE9fwPoAKBw0P1ywsY1cRkuVfMgvlANuW7UUj7iMFpPrqiBNQL8+avc9Y/ZOqahLbob0kPisBZsPZaE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=SS6KRbjr; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=Ht26JN6V8aJTQSiAdIEAXi691XkBeaZpaNivjGEiewE=; b=SS6KRbjrVcqOSsWL5xnae64XvZ
-	lhA1rbp/6RT3BrbzxWLxiiqbhKyln8qBquir2RAOdfq5NmNvargMVGKQxzMBauHfkLcbOJx/P0h45
-	8+Yp0dpURrNab+GT+ulQoYCvOMMFvOIbG87uAYik2in3/TTTL7QIK0kDX0ZHKYEvKv76MsZao/DHZ
-	nILNaJlsAr1xlWYl5WP8CRRt7x/uaVZME4GyHPduFZefxoZBW4CAxBkMGVw5AiNcbdt6UiMFdCvdp
-	UBDwHLgQgjuLIPB/1UOR7/bVNqMl9B3YaggYND54f4Z+wY0fp4wItmk5cIyD+shRKJAGOBjMQwrWc
-	h8TIli3g==;
-Received: from [50.53.25.54] (helo=[192.168.254.17])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1upyHG-00000005U69-021J;
-	Sun, 24 Aug 2025 00:08:06 +0000
-Message-ID: <d35459bc-cf52-4fd5-886a-e9f6db7fda5e@infradead.org>
-Date: Sat, 23 Aug 2025 17:08:05 -0700
+	s=arc-20240116; t=1755999472; c=relaxed/simple;
+	bh=+nC/GVo0QfwdaQuyT0nNE/Npbuly6IsAQTazyH5tsZM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mYF35lORFVrqtv/6+BKCb2e311/+n7pxt89TjxJ+XmRr+w8e1XSSOWtRnTHNeWP4BkJpjeDrGer7ZBEQZ/AKgXZR09sSrDEkPd5a4pmh0oVmbzpQnqjsDg5daY9HjDf+xW8VsgAHE2xtU5GFUOi676p0TP5E/0q/PR6PqcXqGKI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Re0Opgd9; arc=none smtp.client-ip=209.85.208.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-61c20e28380so3010435a12.1;
+        Sat, 23 Aug 2025 18:37:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1755999469; x=1756604269; darn=vger.kernel.org;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :reply-to:message-id:subject:cc:to:from:date:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6UBZPF5YbhnRufm437C0PF5qAjXN/Uh/I6Zgp8tz2Ts=;
+        b=Re0Opgd9jYlnwFpT6h+aVDFIjfXeYEmHQzqRsWqYSexyLkE1Whe9Va2mcV6aawmtp3
+         VteU1OPu0TVHsxcKajkixt7WqdUQGJguM8kSpKyw/J2G0TACUKbA9NqkKOjNC9+5NLaf
+         lzIHssA4/EGrlExK9Hv2PHwYySRY+SMmMkfo5sPzFrAuplk04WgVI8J02JIqZ9rDx/5V
+         OYm8haE0mb7B7Wi1Ly69ZMGMxe6XXljeg8oXRjLzLeySkOzO8sw8Pd5meWeicifmxZl/
+         FE8HyWlrKHEOPbmgkSGrEUSGfX8MZh+/NK8xeS/2gMEApu9qzMzxCpCs8728hRUmWkdf
+         ItcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1755999469; x=1756604269;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :reply-to:message-id:subject:cc:to:from:date:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=6UBZPF5YbhnRufm437C0PF5qAjXN/Uh/I6Zgp8tz2Ts=;
+        b=iYRL0CyEZvD5Ji1VDT+ILBrZMS9g7laFM2mI3WA1UVFxJxQcufs2MDsOwWAiETB6Gp
+         GGt1WOOHebQx3Zwuawv9WkGNZjLEKNKSXu3bR469XpcCh9y7Vq1ChLqT27DzWHSOvqg8
+         4+WJP73MzlfevA02U2tvqUUqL9ldcGM/sN4gMEWvyHWDIgXcqba4rJMe6CCOtEivSe1p
+         kKb4RFvsKH5r9v2LLNJa7oehVOnhmCSC/impfJUYFMYCHvovylmldTG3DGtyqP8Mm/+2
+         1SfKNGkFz1tAlENWqtuynRyBOX+AvaV/Fk3SkzXfiMM/uGuiLSCDUDTxcsQ0nwAdc4IW
+         WBXw==
+X-Forwarded-Encrypted: i=1; AJvYcCUH1YD1exwXwYjp3A5DnXI2CfHP21tQRooBKPIJkwM0kqk3qTxG6vPsRXhOz5GRkdT42J9J525sQYbwz3P1@vger.kernel.org, AJvYcCVGJjaE0Mx7lridWrkIjSFb3vU/N8KuA9RVi/mOobcw5r8gJd3B4TPKDGG549zRoO0+a6w61VQS6jc=@vger.kernel.org, AJvYcCWPPgI/lDdblIydXojlUkFh4U/ryZhgbh1uZ+u0xkEsxnQrsX7lp/xN0O4MPE05AMJ1aDdOnJE2rpWaLGuMlOxtqZRV@vger.kernel.org
+X-Gm-Message-State: AOJu0YxaaK61PZ1ayCouga1c1iySzYlj1HDyJ+C52wEt/FeJt2aNJeKZ
+	1JVoOQGxBLX1vpceIYMZmG9we8SGiGSMqvABTRUQiIbq+G+w8E1Hw13N
+X-Gm-Gg: ASbGncuRKnAPefp+65bCSeScioek1bbonfZ8QVyudVORliHbuaQernQjA5ggWk8frU4
+	i5nhYQquNuTak3oer60jecgaTYNEFD0Vm1I90/ga2ogYkOVPG3DUi7kIlM4AThEgxGsWAgRQE9W
+	olU+NFGloe6oSjWXnwG58C/eNwWnlqski26xNeqIXee0OPNKWzGmhHLPSzYBnMwirJETs7AiZmm
+	1SoKYZnzGpr7H4EBXYMmSydUJIntnYwHHYPo2YB2KVgvswrlCTIZYLv13F3JJ1sekLQvp2t32Oj
+	sMV1DlbawKs1qKYBBxuTBOlkvkxg4Sn9i0ULXaq+q8OMrHZLvEFQDthWPpiOocpltanX0/NlfYu
+	AqtbX7GEJb6ZEiq4quaJc2sKFPw==
+X-Google-Smtp-Source: AGHT+IHxdAZXliDg4Pz7o7ZUiSoOONIAXZLqOCQdY0hkLH1p+jqAseH5s/K0XVWooeUz0LaIMhIjAQ==
+X-Received: by 2002:a05:6402:5057:b0:61a:8c7c:a1f4 with SMTP id 4fb4d7f45d1cf-61c1b48f5e9mr5913145a12.11.1755999468866;
+        Sat, 23 Aug 2025 18:37:48 -0700 (PDT)
+Received: from localhost ([185.92.221.13])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-61c3174f4d4sm2476072a12.54.2025.08.23.18.37.46
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Sat, 23 Aug 2025 18:37:47 -0700 (PDT)
+Date: Sun, 24 Aug 2025 01:37:46 +0000
+From: Wei Yang <richard.weiyang@gmail.com>
+To: Nico Pache <npache@redhat.com>
+Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+	david@redhat.com, ziy@nvidia.com, baolin.wang@linux.alibaba.com,
+	lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com,
+	ryan.roberts@arm.com, dev.jain@arm.com, corbet@lwn.net,
+	rostedt@goodmis.org, mhiramat@kernel.org,
+	mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
+	baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
+	wangkefeng.wang@huawei.com, usamaarif642@gmail.com,
+	sunnanyong@huawei.com, vishal.moola@gmail.com,
+	thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com,
+	kirill.shutemov@linux.intel.com, aarcange@redhat.com,
+	raquini@redhat.com, anshuman.khandual@arm.com,
+	catalin.marinas@arm.com, tiwai@suse.de, will@kernel.org,
+	dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org,
+	jglisse@google.com, surenb@google.com, zokeefe@google.com,
+	hannes@cmpxchg.org, rientjes@google.com, mhocko@suse.com,
+	rdunlap@infradead.org, hughd@google.com
+Subject: Re: [PATCH v10 03/13] khugepaged: generalize hugepage_vma_revalidate
+ for mTHP support
+Message-ID: <20250824013746.bvsz3vajjj2kphrl@master>
+Reply-To: Wei Yang <richard.weiyang@gmail.com>
+References: <20250819134205.622806-1-npache@redhat.com>
+ <20250819134205.622806-4-npache@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/7] cpufreq: CPPC: add autonomous mode boot parameter
- support
-To: Sumit Gupta <sumitg@nvidia.com>, rafael@kernel.org,
- viresh.kumar@linaro.org, lenb@kernel.org, robert.moore@intel.com,
- corbet@lwn.net, pierre.gondois@arm.com, zhenglifeng1@huawei.com,
- ray.huang@amd.com, gautham.shenoy@amd.com, mario.limonciello@amd.com,
- perry.yuan@amd.com, linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org,
- linux-doc@vger.kernel.org, acpica-devel@lists.linux.dev,
- linux-kernel@vger.kernel.org
-Cc: linux-tegra@vger.kernel.org, treding@nvidia.com, jonathanh@nvidia.com,
- vsethi@nvidia.com, ksitaraman@nvidia.com, sanjayc@nvidia.com,
- bbasu@nvidia.com
-References: <20250823200121.1320197-1-sumitg@nvidia.com>
- <20250823200121.1320197-8-sumitg@nvidia.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20250823200121.1320197-8-sumitg@nvidia.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250819134205.622806-4-npache@redhat.com>
+User-Agent: NeoMutt/20170113 (1.7.2)
 
+Hi, Nico
 
+Some nit below.
 
-On 8/23/25 1:01 PM, Sumit Gupta wrote:
-> Add kernel boot parameter 'cppc_cpufreq.auto_sel_mode' to enable CPPC
-> autonomous performance selection at system startup. When autonomous mode
-> is enabled, the hardware automatically adjusts CPU performance based on
-> workload demands using Energy Performance Preference (EPP) hints from
-> the OS.
+On Tue, Aug 19, 2025 at 07:41:55AM -0600, Nico Pache wrote:
+>For khugepaged to support different mTHP orders, we must generalize this
+>to check if the PMD is not shared by another VMA and the order is enabled.
+>
+>To ensure madvise_collapse can support working on mTHP orders without the
+>PMD order enabled, we need to convert hugepage_vma_revalidate to take a
+>bitmap of orders.
+>
+>No functional change in this patch.
+>
+>Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
+>Acked-by: David Hildenbrand <david@redhat.com>
+>Co-developed-by: Dev Jain <dev.jain@arm.com>
+>Signed-off-by: Dev Jain <dev.jain@arm.com>
+>Signed-off-by: Nico Pache <npache@redhat.com>
+>---
+> mm/khugepaged.c | 13 ++++++++-----
+> 1 file changed, 8 insertions(+), 5 deletions(-)
+>
+>diff --git a/mm/khugepaged.c b/mm/khugepaged.c
+>index b7b98aebb670..2d192ec961d2 100644
+>--- a/mm/khugepaged.c
+>+++ b/mm/khugepaged.c
+
+There is a comment above this function, which says "revalidate vma before
+taking mmap_lock".
+
+I am afraid it is "after taking mmap_lock"? or "after taking mmap_lock again"?
+
+>@@ -917,7 +917,7 @@ static int collapse_find_target_node(struct collapse_control *cc)
+> static int hugepage_vma_revalidate(struct mm_struct *mm, unsigned long address,
+> 				   bool expect_anon,
+> 				   struct vm_area_struct **vmap,
+>-				   struct collapse_control *cc)
+>+				   struct collapse_control *cc, unsigned long orders)
+> {
+> 	struct vm_area_struct *vma;
+> 	enum tva_type type = cc->is_khugepaged ? TVA_KHUGEPAGED :
+>@@ -930,9 +930,10 @@ static int hugepage_vma_revalidate(struct mm_struct *mm, unsigned long address,
+> 	if (!vma)
+> 		return SCAN_VMA_NULL;
 > 
-> This parameter allows to configure the autonomous mode on all CPUs
-> without requiring runtime sysfs manipulation if the 'auto_sel' register
-> is present.
+>+	/* Always check the PMD order to insure its not shared by another VMA */
+> 	if (!thp_vma_suitable_order(vma, address, PMD_ORDER))
+> 		return SCAN_ADDRESS_RANGE;
+>-	if (!thp_vma_allowable_order(vma, vma->vm_flags, type, PMD_ORDER))
+>+	if (!thp_vma_allowable_orders(vma, vma->vm_flags, type, orders))
+> 		return SCAN_VMA_CHECK;
+> 	/*
+> 	 * Anon VMA expected, the address may be unmapped then
+
+Below is a comment, "thp_vma_allowable_order may return".
+
+Since you use thp_vma_allowable_orders, maybe we need to change the comment
+too.
+
+>@@ -1134,7 +1135,8 @@ static int collapse_huge_page(struct mm_struct *mm, unsigned long address,
+> 		goto out_nolock;
 > 
-> When auto_sel_mode=1:
-> - All CPUs are configured for autonomous operation during driver init
-> - EPP is set to performance preference (0x0) by default
-> - Min/max performance bounds use defaults
-> - CPU frequency scaling is handled by hardware rather than OS
-> 
-> Also ensure that when autonomous mode is active, the set_target callback
-> returns early since hardware controls frequency scaling directly.
-> 
-> Signed-off-by: Sumit Gupta <sumitg@nvidia.com>
-
-
-
-> ---
->  .../admin-guide/kernel-parameters.txt         |  12 ++
->  drivers/cpufreq/cppc_cpufreq.c                | 171 ++++++++++++++++--
->  2 files changed, 168 insertions(+), 15 deletions(-)
-> 
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index 86f395f2933b..ea58deb88c36 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -911,6 +911,18 @@
->  			Format:
->  			<first_slot>,<last_slot>,<port>,<enum_bit>[,<debug>]
->  
-> +	cppc_cpufreq.auto_sel_mode=
-> +			[CPU_FREQ] Autonomous Performance Level Selection.
-> +			When Autonomous selection is enabled, then the hardware is
-> +			allowed to autonomously select the CPU frequency.
-> +			In Autonomous mode, Energy Performance Preference(EPP)
-> +			provides input to the hardware to favour performance (0x0)
-> +			or energy efficiency (0xff).
-> +			Format: <bool>
-> +			Default: disabled.
-> +			0: force disabled
-> +			1: force enabled
-> +
->  	cpuidle.off=1	[CPU_IDLE]
->  			disable the cpuidle sub-system
->  
-> diff --git a/drivers/cpufreq/cppc_cpufreq.c b/drivers/cpufreq/cppc_cpufreq.c
-> index 5e1bbb5f67b8..bbf654c56ff9 100644
-> --- a/drivers/cpufreq/cppc_cpufreq.c
-> +++ b/drivers/cpufreq/cppc_cpufreq.c
-
-[snip]
-
->  
-> +module_param(auto_sel_mode, bool, 0000);
-
-Hm. Is this changed to readable at some point or
-does it stay invisible?
-
-> +MODULE_PARM_DESC(auto_sel_mode, "Enable Autonomous Performance Level Selection");
-> +
->  module_exit(cppc_cpufreq_exit);
->  MODULE_AUTHOR("Ashwin Chaugule");
->  MODULE_DESCRIPTION("CPUFreq driver based on the ACPI CPPC v5.0+ spec");
-
-For Documentation/:
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
-
-Thanks.
+> 	mmap_read_lock(mm);
+>-	result = hugepage_vma_revalidate(mm, address, true, &vma, cc);
+>+	result = hugepage_vma_revalidate(mm, address, true, &vma, cc,
+>+					 BIT(HPAGE_PMD_ORDER));
+> 	if (result != SCAN_SUCCEED) {
+> 		mmap_read_unlock(mm);
+> 		goto out_nolock;
+>@@ -1168,7 +1170,8 @@ static int collapse_huge_page(struct mm_struct *mm, unsigned long address,
+> 	 * mmap_lock.
+> 	 */
+> 	mmap_write_lock(mm);
+>-	result = hugepage_vma_revalidate(mm, address, true, &vma, cc);
+>+	result = hugepage_vma_revalidate(mm, address, true, &vma, cc,
+>+					 BIT(HPAGE_PMD_ORDER));
+> 	if (result != SCAN_SUCCEED)
+> 		goto out_up_write;
+> 	/* check if the pmd is still valid */
+>@@ -2807,7 +2810,7 @@ int madvise_collapse(struct vm_area_struct *vma, unsigned long start,
+> 			mmap_read_lock(mm);
+> 			mmap_locked = true;
+> 			result = hugepage_vma_revalidate(mm, addr, false, &vma,
+>-							 cc);
+>+							 cc, BIT(HPAGE_PMD_ORDER));
+> 			if (result  != SCAN_SUCCEED) {
+> 				last_fail = result;
+> 				goto out_nolock;
+>-- 
+>2.50.1
+>
 
 -- 
-~Randy
+Wei Yang
+Help you, Help me
 
