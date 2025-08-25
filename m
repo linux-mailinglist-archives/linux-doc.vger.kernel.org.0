@@ -1,71 +1,65 @@
-Return-Path: <linux-doc+bounces-57401-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57406-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 143FDB34240
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 15:56:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56CE1B343AC
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 16:28:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7E1521891C3C
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 13:55:53 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7F17B1882ACF
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 14:27:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17B9C2F0C4F;
-	Mon, 25 Aug 2025 13:48:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 404992FCBEA;
+	Mon, 25 Aug 2025 14:26:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=marvell.com header.i=@marvell.com header.b="kxVGwWCy"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qhtif550"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0016f401.pphosted.com (mx0a-0016f401.pphosted.com [67.231.148.174])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 176852F0C44;
-	Mon, 25 Aug 2025 13:48:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=67.231.148.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA30B2FB990;
+	Mon, 25 Aug 2025 14:26:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756129721; cv=none; b=i90n4m9x0mUF9mnO7mLel0/sQus+HLJSGoYksXtkYlbZonF2cB+UXKc69u7DUhErxoBteOXRMhzzQf5xVg4JEKp2jNBdbHM82U1jjoKZtIyomt5Dy4tCn9cCmDr1ZQObGegYhLdWxaX+v0Ors0UeO5wzzm20m1Hb/xltW4RHFmc=
+	t=1756131964; cv=none; b=MpTYX87xZOnhAiZuE5i9OsAiOR/h3/L/ERJZ857MhVKqVAVCBctNj0MOZRY1Yc02kPrjbhrd52fyvYp0Iyg7uIVzXkjT/S7cac6f9LVsglwttWlevFDzxwmkqLD7Omb4p74k103k7I3za4nGoPqSj0ae97J7eTLIiOBCoog/Dn4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756129721; c=relaxed/simple;
-	bh=debTZXkkIpj9zmW8PgTAccY0m2emTzb1QtwH00Px3r0=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=R3bbZfEfENJvq0/B60pkZtQqpAwhkwGBNDv18neREjFQW0Z21xlSSGwi87A92J76coKHJeuxxRx585JajvExH/gcFAcfacQ7P1w6+RKM/6//eIZ/onosrDiFCVUUkp5UsFd7YpcJY7mSDvyO1Edh/NGXhilMvICfCYcmC7xLvtc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=marvell.com; spf=pass smtp.mailfrom=marvell.com; dkim=pass (2048-bit key) header.d=marvell.com header.i=@marvell.com header.b=kxVGwWCy; arc=none smtp.client-ip=67.231.148.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=marvell.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=marvell.com
-Received: from pps.filterd (m0431384.ppops.net [127.0.0.1])
-	by mx0a-0016f401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 57PDm3nL021849;
-	Mon, 25 Aug 2025 06:48:11 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=pfpt0220; bh=btcG3PoWQXAVDS5VoFlRoJV
-	NVK/NQl6OsYRo9KlZmBY=; b=kxVGwWCy07G/8+B9yOJyDWNLEZXaufzXLwTPtVw
-	f6yzli7frxbOcJtpm6NTluNv+nfRHcF3lcPbvNvzo3WJuZmpIOndUaSMF7VweDdq
-	2lGC4m0EsHJ9Wy0EtHWpmW09h/IBu1aWmtjkIoFbJpevSvBHEOGQFqj1SZBU+z79
-	DUGqF+UiTym2xrkUBM31Ls5+BgjlxET+388+GyX8vbxK64T5jVIg7+ucbnWHNDka
-	o7S2AQJfjw0UqkrxvVmC0glSFMcVqYXxrA7cf9dLAeJk/oF5IGyYsiVCCO2wH2df
-	W67bnGiY1qRWh+UdGC0gQUsVrnt82X0m0Nxy7Mn8ZbeSevA==
-Received: from dc6wp-exch02.marvell.com ([4.21.29.225])
-	by mx0a-0016f401.pphosted.com (PPS) with ESMTPS id 48rs1kr00g-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 25 Aug 2025 06:48:11 -0700 (PDT)
-Received: from DC6WP-EXCH02.marvell.com (10.76.176.209) by
- DC6WP-EXCH02.marvell.com (10.76.176.209) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Mon, 25 Aug 2025 06:48:09 -0700
-Received: from maili.marvell.com (10.69.176.80) by DC6WP-EXCH02.marvell.com
- (10.76.176.209) with Microsoft SMTP Server id 15.2.1544.25 via Frontend
- Transport; Mon, 25 Aug 2025 06:48:09 -0700
-Received: from naveenm-PowerEdge-T630.marvell.com (unknown [10.29.37.44])
-	by maili.marvell.com (Postfix) with ESMTP id 5985B3F7055;
-	Mon, 25 Aug 2025 06:48:06 -0700 (PDT)
-From: Naveen Mamindlapalli <naveenm@marvell.com>
-To: <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
-        <pabeni@redhat.com>, <horms@kernel.org>, <corbet@lwn.net>,
-        <andrew@lunn.ch>
-CC: <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>,
-        Naveen Mamindlapalli <naveenm@marvell.com>
-Subject: [PATCH net-next] docs: networking: clarify expectation of persistent stats
-Date: Mon, 25 Aug 2025 19:17:55 +0530
-Message-ID: <20250825134755.3468861-1-naveenm@marvell.com>
+	s=arc-20240116; t=1756131964; c=relaxed/simple;
+	bh=wgWu+8XypexFEPIMyZ5cUv+a841NNieT1SYM+X0Qx/k=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=FwmhD+WTxy3Z3UqRPI1WrR+XP7pOrWx+r1qkmTUe24697MnLeRrk4EzJrQ8+PpgoNf075smFQoy5Se4haUfnqv29ZUJYCI4Vy6JBukGiVn45nMVfv4V7zKRsX3GoGaIfbgRVoZfksqH/B24InsVPcyNA9qQZW+A5Q1p6X8p1IM4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qhtif550; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78AA6C4CEED;
+	Mon, 25 Aug 2025 14:26:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1756131963;
+	bh=wgWu+8XypexFEPIMyZ5cUv+a841NNieT1SYM+X0Qx/k=;
+	h=From:To:Cc:Subject:Date:From;
+	b=qhtif550k7UP88ylX7mXFhF3o1Ewy/94q+uBREqP5wwVj4p5tKWo4YIYxqabfCm7o
+	 RXbpoE5lUS9A4eX6olO0JQHJX7II7zucifIUT4t5oGSDjVm5tEUvNG7nDTaTagf8MC
+	 jr7RemyFaL1wlR9Kr70Sg2zVepCA8TRpRF4n178+y1/WeWFAYnDer2xVGz5oBJ0Lzm
+	 0uYOJ+IQmCdVYQdGABtrzKO32BebHlOxGDRRKOqu8JezSkNdHqIcMoMGgLe2oVQ2xq
+	 QdjlzNO81fwO8SDSNET5/Yoj4vn7Gds6gMmBMfvGySNCf4krhzhfmv4KmE2sfHEjQA
+	 zncS7Q1vVyi0w==
+From: Kees Cook <kees@kernel.org>
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: Kees Cook <kees@kernel.org>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Puranjay Mohan <puranjay@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Nathan Chancellor <nathan@kernel.org>,
+	x86@kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-riscv@lists.infradead.org,
+	llvm@lists.linux.dev,
+	linux-hardening@vger.kernel.org
+Subject: [PATCH 0/5] kcfi: Prepare for GCC support
+Date: Mon, 25 Aug 2025 07:25:47 -0700
+Message-Id: <20250825141316.work.967-kees@kernel.org>
 X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -74,52 +68,93 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODI1MDEyNCBTYWx0ZWRfXzSKSk+jAVbOp nzoUNhZewD5twwTNOYrkKZk1Wr8H7cCJIIJAu4MjKol0IWohr1X7UVINbQu8pE4wvG1VhVpLe18 eMElFqwnOcmhlz4gVrCVz9+jD997KJQeC4aXangzxCcsIBCvHO30wsj5LLHbfOydk8CeuCcKkkA
- Y19pJti0VBYEKJjVDMMR0sGjYgTiDSUUmLG0/WIFLgdZF2zWaiazy81xBv1MEjs5QamweG8+3pI 3wsAjIR9KWrxPArGdVdI+SMl1/DhoBzTiVk/C4lSNtJNJIsVjzNmw1D9wyObbQhQpRqq5oFniQn e5tj2GW6JbMgIOIiDXdTJvpnaJMCo82veHXB2GwDzeVdlgC899EHakWOpRQG+nCitfQHVjH7vms
- VNZftndrpADf6WSHyiTQGMicZohcpuCuz2FkJBQlL/sIbcTRoFaIQoTD9r3GDrIcrjF5XGxo
-X-Authority-Analysis: v=2.4 cv=Lf886ifi c=1 sm=1 tr=0 ts=68ac699b cx=c_pps a=gIfcoYsirJbf48DBMSPrZA==:117 a=gIfcoYsirJbf48DBMSPrZA==:17 a=2OwXVqhp2XgA:10 a=M5GUcnROAAAA:8 a=ztq4QwoSifUOyHU0YMQA:9 a=OBjm3rFKGHvpk9ecZwUJ:22
-X-Proofpoint-ORIG-GUID: PlkojfvPRGIC7xtThaC7Lhm3IHyfDX2W
-X-Proofpoint-GUID: PlkojfvPRGIC7xtThaC7Lhm3IHyfDX2W
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-08-25_06,2025-08-20_03,2025-03-28_01
 
-This update clarifies the requirement for preserving statistics across
-interface up/down cycles, noting that some drivers may not support this
-due to inherent limitations. It also outlines the potential effects on
-monitoring and observability tools.
+Hi,
 
-Signed-off-by: Naveen Mamindlapalli <naveenm@marvell.com>
----
- Documentation/networking/statistics.rst | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+With KCFI support in GCC coming[1], we need to make some (relatively
+small) changes in the kernel to deal with it:
 
-diff --git a/Documentation/networking/statistics.rst b/Documentation/networking/statistics.rst
-index 518284e287b0..857b08d633f7 100644
---- a/Documentation/networking/statistics.rst
-+++ b/Documentation/networking/statistics.rst
-@@ -222,8 +222,18 @@ Retrieving ethtool statistics is a multi-syscall process, drivers are advised
- to keep the number of statistics constant to avoid race conditions with
- user space trying to read them.
- 
--Statistics must persist across routine operations like bringing the interface
--down and up.
-+Statistics are expected to persist across routine operations like bringing the
-+interface down and up. This includes both standard interface statistics and
-+driver-defined statistics reported via `ethtool -S`.
-+
-+However, this behavior is not always strictly followed, and some drivers do
-+reset these counters to zero when the device is closed and reopened. This can
-+lead to misinterpretation of network behavior by monitoring tools, such as
-+SNMP, that expect monotonically increasing counters.
-+
-+Driver authors are expected to preserve statistics across interface down/up
-+cycles to ensure consistent reporting and better integration with monitoring
-+tools that consume these statistics.
- 
- Kernel-internal data structures
- -------------------------------
+- move __nocfi out of compilers-clang.h (so GCC can see it too)
+- add cfi=debug so future Kees can find breakage easier
+- remove problematic __noinitretpoline usage
+- rename CONFIG_CFI_CLANG to CONFIG_CFI (otherwise is it quite confusing)
+
+Thanks!
+
+-Kees
+
+[1] https://lore.kernel.org/linux-hardening/20250821064202.work.893-kees@kernel.org/
+
+Kees Cook (5):
+  compiler_types.h: Move __nocfi out of compiler-specific header
+  x86/traps: Clarify KCFI instruction layout
+  x86/cfi: Add option for cfi=debug bootparam
+  x86/cfi: Remove __noinitretpoline and __noretpoline
+  kcfi: Rename CONFIG_CFI_CLANG to CONFIG_CFI
+
+ arch/Kconfig                                  | 22 +++++-----
+ arch/arm/Kconfig                              |  2 +-
+ arch/arm64/Kconfig                            |  4 +-
+ arch/riscv/Kconfig                            |  6 +--
+ arch/x86/Kconfig                              | 12 +++---
+ init/Kconfig                                  |  4 +-
+ kernel/module/Kconfig                         |  2 +-
+ lib/Kconfig.debug                             |  2 +-
+ Makefile                                      |  2 +-
+ arch/arm/mm/Makefile                          |  2 +-
+ arch/riscv/kernel/Makefile                    |  2 +-
+ arch/riscv/purgatory/Makefile                 |  2 +-
+ arch/x86/kernel/Makefile                      |  2 +-
+ arch/x86/purgatory/Makefile                   |  2 +-
+ kernel/Makefile                               |  2 +-
+ .../admin-guide/kernel-parameters.txt         | 18 ++++++++
+ arch/riscv/include/asm/cfi.h                  |  4 +-
+ arch/x86/include/asm/cfi.h                    |  4 +-
+ include/asm-generic/vmlinux.lds.h             |  2 +-
+ include/linux/cfi.h                           |  6 +--
+ include/linux/cfi_types.h                     |  8 ++--
+ include/linux/compiler-clang.h                |  5 ---
+ include/linux/compiler-gcc.h                  |  4 --
+ include/linux/compiler.h                      |  2 +-
+ include/linux/compiler_types.h                |  4 +-
+ include/linux/init.h                          |  8 ----
+ tools/include/linux/cfi_types.h               |  6 +--
+ tools/perf/util/include/linux/linkage.h       |  2 +-
+ arch/arm/mm/cache-fa.S                        |  2 +-
+ arch/arm/mm/cache-v4.S                        |  2 +-
+ arch/arm/mm/cache-v4wb.S                      |  4 +-
+ arch/arm/mm/cache-v4wt.S                      |  2 +-
+ arch/arm/mm/cache-v6.S                        |  2 +-
+ arch/arm/mm/cache-v7.S                        |  2 +-
+ arch/arm/mm/cache-v7m.S                       |  2 +-
+ arch/arm/mm/proc-arm1020.S                    |  2 +-
+ arch/arm/mm/proc-arm1020e.S                   |  2 +-
+ arch/arm/mm/proc-arm1022.S                    |  2 +-
+ arch/arm/mm/proc-arm1026.S                    |  2 +-
+ arch/arm/mm/proc-arm920.S                     |  2 +-
+ arch/arm/mm/proc-arm922.S                     |  2 +-
+ arch/arm/mm/proc-arm925.S                     |  2 +-
+ arch/arm/mm/proc-arm926.S                     |  2 +-
+ arch/arm/mm/proc-arm940.S                     |  2 +-
+ arch/arm/mm/proc-arm946.S                     |  2 +-
+ arch/arm/mm/proc-feroceon.S                   |  2 +-
+ arch/arm/mm/proc-mohawk.S                     |  2 +-
+ arch/arm/mm/proc-xsc3.S                       |  2 +-
+ arch/arm/mm/tlb-v4.S                          |  2 +-
+ arch/arm/kernel/hw_breakpoint.c               |  2 +-
+ arch/arm64/kernel/debug-monitors.c            |  2 +-
+ arch/arm64/kernel/traps.c                     |  4 +-
+ arch/arm64/kvm/handle_exit.c                  |  2 +-
+ arch/arm64/net/bpf_jit_comp.c                 |  2 +-
+ arch/riscv/net/bpf_jit_comp64.c               |  4 +-
+ arch/x86/kernel/alternative.c                 | 43 +++++++++++++++----
+ arch/x86/kernel/cfi.c                         |  2 +-
+ arch/x86/kernel/kprobes/core.c                |  2 +-
+ drivers/misc/lkdtm/cfi.c                      |  2 +-
+ kernel/module/tree_lookup.c                   |  2 +-
+ kernel/configs/hardening.config               |  2 +-
+ 61 files changed, 141 insertions(+), 113 deletions(-)
+
 -- 
 2.34.1
 
