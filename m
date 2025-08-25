@@ -1,206 +1,153 @@
-Return-Path: <linux-doc+bounces-57418-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57422-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71C78B34735
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 18:24:05 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A87E8B34759
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 18:30:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 5E5017A6358
-	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 16:22:12 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 627B13AF4D7
+	for <lists+linux-doc@lfdr.de>; Mon, 25 Aug 2025 16:30:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5427B3002AC;
-	Mon, 25 Aug 2025 16:23:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA710301010;
+	Mon, 25 Aug 2025 16:30:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cuZQedcg"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a1yQLSey"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F23111713;
-	Mon, 25 Aug 2025 16:23:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FF4A2FE06F;
+	Mon, 25 Aug 2025 16:30:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756139023; cv=none; b=fZeN5KU9FQHQdGtKQd4z+41HPsrzinnRfDZTP3aCJnoeIpcdAyXaAyijMfXtQwOwcMIJrxXcQgwU/0f6av5w/9AtlmBjmStRukJfkL+kWblRt0a2CkidDugW/FaxWQERujq1MjxJpSNQfXYS4n0N267ZbL8HW6n3p1cw8eA6nV8=
+	t=1756139449; cv=none; b=oVMQ5naWEA1JNmosYQJpZJcBwEdKFnOPcATtpkmvBkQpNmzMPs5Fhc+D6RcvXzOsUalxo7WrPW67orN9VkMR1xebfGR5FEAGYWu++50yiVd8iAbSw3jkPKJdRCPVFtYLOGSDKdzU6so+/ypwX38LujMorL3ypPQcazWYihF7S7o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756139023; c=relaxed/simple;
-	bh=KgpIyi6RAg5MAXdti7zU0f2hj8RJXYvhBuIqG1e+0CE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=S7qDhJcZIBfVPzXSu/dG60hK0wJ7SLrorqbmvcFiunQkGyNdyCB3EUCvsYvHiXydfj+hjbnhF02Wre3rZrWrWG6GIfZNmvmOwAHN17y1fehoZnYSmarbbKURxkHGm5xB9C4A+Kkflvr6d6eVzQ6/8nvO+THLwoefrQ/SBCVspNk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cuZQedcg; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09423C4CEED;
-	Mon, 25 Aug 2025 16:23:36 +0000 (UTC)
+	s=arc-20240116; t=1756139449; c=relaxed/simple;
+	bh=vVMKlKNXIWqTUAgQ0OfDfdnw/Qqi34KoxBHr44+YOAg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=hIuMldPTm4PC/kEWUS+CunwJ+hLc7aVRFYN8cv294AYcG0xYJjAsw0XhC3eWewdpbmwMDzmSEFh3U7eAVFlbvXJXnuQDsu7ilqGmEegxpO22guNjG/p9nLGI6y2V9VzkUdYeIRWfk+BEPZwbQu/BU1uZf6JzA2mcLqk0SNLkKIg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a1yQLSey; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25CF1C19423;
+	Mon, 25 Aug 2025 16:30:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756139022;
-	bh=KgpIyi6RAg5MAXdti7zU0f2hj8RJXYvhBuIqG1e+0CE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=cuZQedcg1Zp25ehlMzicSD+8IdnsfbE4M/4qDW+GBk9ac9z4eDU7QA6R5eTSxBxbe
-	 IFjDzU/5VAjaY7v9KqbVmjsEbZWtdaSccRasiAxWh7JdLtkj+ykHU+0OaB9UTDfEgW
-	 8v3PFGD7ukTKEdGiWSqbat61DdJsQ9rU/FEmZLPNkKxQDhf/heHdagLNykxupDCCSm
-	 3lu7uf5m1eR2ji0UUJezLjeh0pDx9h8qfk1AU2OFNwyw+HTJPTewAnEGi434B1V6Br
-	 p9w1zuysufJvFxZwXfaIKGYzFCI2xiznEsqSR8PVd5faWmyVnMEqXjwtewDrGZOMx5
-	 kCya4XmM0eXwQ==
-Date: Mon, 25 Aug 2025 17:23:34 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Pincheng Wang <pincheng.plct@isrc.iscas.ac.cn>
-Cc: paul.walmsley@sifive.com, palmer@dabbelt.com, aou@eecs.berkeley.edu,
-	alex@ghiti.fr, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, anup@brainfault.org, pbonzini@redhat.com,
-	shuah@kernel.org, cyan.yang@sifive.com, cleger@rivosinc.com,
-	charlie@rivosinc.com, cuiyunhui@bytedance.com,
-	samuel.holland@sifive.com, namcao@linutronix.de, jesse@rivosinc.com,
-	inochiama@gmail.com, yongxuan.wang@sifive.com,
-	ajones@ventanamicro.com, parri.andrea@gmail.com,
-	mikisabate@gmail.com, yikming2222@gmail.com,
-	thomas.weissschuh@linutronix.de, linux-riscv@lists.infradead.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	devicetree@vger.kernel.org, kvm@vger.kernel.org,
-	kvm-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v1 RESEND 1/5] dt-bidings: riscv: add Zilsd and Zclsd
- extension descriptions
-Message-ID: <20250825-clang-husband-bcb5defdb5f3@spud>
-References: <20250821140131.225756-1-pincheng.plct@isrc.iscas.ac.cn>
- <20250821140131.225756-2-pincheng.plct@isrc.iscas.ac.cn>
- <20250822-purge-doubling-f38988284db1@spud>
- <a2cc4cbe-82ca-4a89-b623-73721a1f3baf@isrc.iscas.ac.cn>
+	s=k20201202; t=1756139449;
+	bh=vVMKlKNXIWqTUAgQ0OfDfdnw/Qqi34KoxBHr44+YOAg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=a1yQLSeyANUJuVo8YWqNlpBfRTt5qnxjqggmvRgb82T8792MEf77ABh9ZN8SiYPNP
+	 M8+pUVcLK/yA4NEdeiu5ScLrAp9GvbGRSJ6zgx9KbxFIlONn/G0EG9eLFOV9ApuczI
+	 +n3RHjbtGTFbIdiaLv9a6HkdH3U7hrYIRtxzs4M2Mc6aGaYpYUbG2NlbAu7S5VVwiw
+	 ezRCNTzR89dj6gsRJTPP/Zm/70e8lVTD1bBbQTk/dgK0fd9VF3dA4SWpF0WX/OtV9I
+	 W4naQnz2qNJZJv3vw3Me9pduqpg6PZFeCZq7LpFz4p1jWhgUF8ymeiPQSKd1S/w24H
+	 uGCaVsmzG/n1g==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1uqa5n-0000000HALF-0aIB;
+	Mon, 25 Aug 2025 18:30:47 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Andreas Hindborg <mchehab+huawei@kernel.org>,
+	Benno Lossin <mchehab+huawei@kernel.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Danilo Krummrich <mchehab+huawei@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	Miguel Ojeda <mchehab+huawei@kernel.org>,
+	Trevor Gross <tmgross@umich.edu>,
+	rust-for-linux@vger.kernel.org
+Subject: [PATCH v2 00/13] Split sphinx call logic from docs Makefile
+Date: Mon, 25 Aug 2025 18:30:27 +0200
+Message-ID: <cover.1756138805.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="przAQh4lUz2Eomq/"
-Content-Disposition: inline
-In-Reply-To: <a2cc4cbe-82ca-4a89-b623-73721a1f3baf@isrc.iscas.ac.cn>
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
+Hi Jon,
 
---przAQh4lUz2Eomq/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series does a major cleanup at docs Makefile by moving the
+actual doc build logic to a helper script (scripts/sphinx-build-wrapper).
 
-On Mon, Aug 25, 2025 at 11:26:13PM +0800, Pincheng Wang wrote:
-> On 2025/8/23 0:33, Conor Dooley wrote:
-> > On Thu, Aug 21, 2025 at 10:01:27PM +0800, Pincheng Wang wrote:
-> > > Add descriptions for the Zilsd (Load/Store pair instructions) and
-> > > Zclsd (Compressed Load/Store pair instructions) ISA extensions
-> > > which were ratified in commit f88abf1 ("Integrating load/store
-> > > pair for RV32 with the main manual") of the riscv-isa-manual.
-> > >=20
-> > > Signed-off-by: Pincheng Wang <pincheng.plct@isrc.iscas.ac.cn>
-> > > ---
-> > >   .../devicetree/bindings/riscv/extensions.yaml | 39 ++++++++++++++++=
-+++
-> > >   1 file changed, 39 insertions(+)
-> > >=20
-> > > diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml =
-b/Documentation/devicetree/bindings/riscv/extensions.yaml
-> > > index ede6a58ccf53..d72ffe8f6fa7 100644
-> > > --- a/Documentation/devicetree/bindings/riscv/extensions.yaml
-> > > +++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
-> > > @@ -366,6 +366,20 @@ properties:
-> > >               guarantee on LR/SC sequences, as ratified in commit b1d=
-806605f87
-> > >               ("Updated to ratified state.") of the riscv profiles sp=
-ecification.
-> > > +        - const: zilsd
-> > > +          description:
-> > > +            The standard Zilsd extension which provides support for =
-aligned
-> > > +            register-pair load and store operations in 32-bit instru=
-ction
-> > > +            encodings, as ratified in commit f88abf1 ("Integrating
-> > > +            load/store pair for RV32 with the main manual") of riscv=
--isa-manual.
-> > > +
-> > > +        - const: zclsd
-> > > +          description:
-> > > +            The Zclsd extension implements the compressed (16-bit) v=
-ersion of the
-> > > +            Load/Store Pair for RV32. As with Zilsd, this extension =
-was ratified
-> > > +            in commit f88abf1 ("Integrating load/store pair for RV32=
- with the
-> > > +            main manual") of riscv-isa-manual.
-> > > +
-> > >           - const: zk
-> > >             description:
-> > >               The standard Zk Standard Scalar cryptography extension =
-as ratified
-> > > @@ -847,6 +861,16 @@ properties:
-> > >               anyOf:
-> > >                 - const: v
-> > >                 - const: zve32x
-> > > +      # Zclsd depends on Zilsd and Zca
-> > > +      - if:
-> > > +          contains:
-> > > +            anyOf:
-> > > +              - const: zclsd
-> > > +        then:
-> > > +          contains:
-> > > +            anyOf:
-> > > +              - const: zilsd
-> > > +              - const: zca
-> > >   allOf:
-> > >     # Zcf extension does not exist on rv64
-> > > @@ -864,6 +888,21 @@ allOf:
-> > >             not:
-> > >               contains:
-> > >                 const: zcf
-> > > +  # Zilsd extension does not exist on rv64
-> > > +  - if:
-> > > +      properties:
-> >=20
-> > > +        riscv,isa-extensions:
-> > > +          contains:
-> > > +            const: zilsd
-> >=20
-> > This syntax is odd, it shouldn't be required to have zilsd in here and
-> > in the then. Did you copy this from Zcf or come up with it yourself
-> > because it didn't work otherwise?
-> >=20
->=20
-> Yes, I did model this after the existing Zcf constraint in the same file.
-> The structure is nearly identical: cheking for presence of the extension =
-and
-> rv64i, then forbidding it in the "then" branch.
->=20
-> I've tested confirmed that removing the "contains: const: zilsd" from the
-> "if" condition still correctly enforces that zilsd must not appear when
-> rv64i is present. The "then" clause with "not: contains" is sufficient.
->=20
-> Given that the validation behavior is equivalent, but the logic is cleaner
-> and less redundant without the extra "contains", would you recommend
-> updating it to the simpler form:
->=20
->     - if:
->         properties:
->           riscv,isa-base:
->             contains:
->               const: rv64i
->       then:
->         properties:
->           riscv,isa-extensions:
->             not:
->               contains:
->                 const: zilsd
->=20
-> If so, I'll update it in the next revision.
+Such script was written in a way that it can be called either
+directly or via a makefile. When running via makefile, it will
+use GNU jobserver to ensure that, when sphinx-build is
+called, the number of jobs will match at most what it is
+specified by the "-j" parameter.
 
-Yeah, please reduce it to this form.
+The first 3 patches do a cleanup at scripts/jobserver-exec
+and moves the actual code to a library. Such library is used
+by both the jobserver-exec command line and by sphinx-build-wrappper.
 
---przAQh4lUz2Eomq/
-Content-Type: application/pgp-signature; name="signature.asc"
+The change also gets rid of parallel-wrapper.sh, whose
+functions are now part of the wrapper code.
 
------BEGIN PGP SIGNATURE-----
+This series is now on top of:
+	https://lore.kernel.org/linux-doc/0ad4fefca2855603c66d513474a687058e780931@intel.com/
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaKyOBgAKCRB4tDGHoIJi
-0tBmAPwITOW6B962WAfPzymCU4z9xZ51B5BtYVuDFIxypRRcogD/bJcgHnZ/rI15
-6Mdyko1A6Tb+pZvgrrtqkICniCrQogc=
-=3Dwx
------END PGP SIGNATURE-----
+As I'm expecting that the oner one (although it is bigger)
+won't cause too much noise, as it impacts only the media builds,
+and remove a hack that would otherwise require some code here.
 
---przAQh4lUz2Eomq/--
+While version 2 has the same features and almost the same code,
+I did some changes to make easier to review:
+
+- there's no generic exception handler anymore;
+- it moves sphinx-pre-install to tools/docs;
+- the logic which ensures a minimal Python version got moved
+  to a library, which is now used by both pre-install and wrapper;
+- The first wrapper (05/13) doesn't contain comments (except for
+  shebang and SPDX). The goal is to help showing the size increase
+  when moving from Makefile to Python. Some file increase is
+  unavoidable, as Makefile is more compact: no includes, multple
+  statements per line, no argparse, etc;
+- The second patch adds docstrings and comments. It has almost
+  the same size of the code itself;
+- I moved the venv logic to a third wrapper patch;
+- I fixed an issue at the paraller build logic;
+- There are no generic except blocks anymore.
+
+Mauro Carvalho Chehab (13):
+  scripts/jobserver-exec: move the code to a class
+  scripts/jobserver-exec: move its class to the lib directory
+  scripts/jobserver-exec: add a help message
+  scripts: sphinx-pre-install: move it to tools/docs
+  tools/docs: sphinx-pre-install: move Python version handling to lib
+  tools/docs: sphinx-build-wrapper: add a wrapper for sphinx-build
+  tools/docs: sphinx-build-wrapper: add comments and blank lines
+  tools/docs: sphinx-build-wrapper: add support to run inside venv
+  docs: parallel-wrapper.sh: remove script
+  docs: Makefile: document latex/PDF PAPER= parameter
+  tools/docs: sphinx-build-wrapper: add an argument for LaTeX
+    interactive mode
+  tools/docs,scripts: sphinx-*: prevent sphinx-build crashes
+  tools/docs: sphinx-build-wrapper: allow building PDF files in parallel
+
+ Documentation/Makefile                     | 133 +----
+ Documentation/sphinx/parallel-wrapper.sh   |  33 --
+ scripts/jobserver-exec                     |  88 +--
+ scripts/lib/jobserver.py                   | 149 +++++
+ tools/docs/lib/python_version.py           | 133 +++++
+ tools/docs/sphinx-build-wrapper            | 660 +++++++++++++++++++++
+ {scripts => tools/docs}/sphinx-pre-install | 134 +----
+ 7 files changed, 1022 insertions(+), 308 deletions(-)
+ delete mode 100644 Documentation/sphinx/parallel-wrapper.sh
+ create mode 100755 scripts/lib/jobserver.py
+ create mode 100644 tools/docs/lib/python_version.py
+ create mode 100755 tools/docs/sphinx-build-wrapper
+ rename {scripts => tools/docs}/sphinx-pre-install (93%)
+
+-- 
+2.51.0
+
 
