@@ -1,278 +1,215 @@
-Return-Path: <linux-doc+bounces-57686-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57689-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09969B37DCB
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Aug 2025 10:28:34 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7562B37E8E
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Aug 2025 11:17:30 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 806C61BA3075
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Aug 2025 08:28:51 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B2B81206943
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Aug 2025 09:17:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 035F8343D63;
-	Wed, 27 Aug 2025 08:27:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D3B3287252;
+	Wed, 27 Aug 2025 09:17:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DHfUquFE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Asr76mip"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFE9C338F48;
-	Wed, 27 Aug 2025 08:27:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1B912773C3;
+	Wed, 27 Aug 2025 09:17:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756283222; cv=none; b=NJMrrNAVhaqxwPAwGqaqskAin+1Yui51Q4WvvCXxjeKbHWGzRZ0OJSoIOyvFcSetTMTWe9RYq6wKh6+bK8G7q89K3mIYqmWTyZfkPrXTsuPYWEwDrwXBqwjgF3YNVn/Ywbm8/wi2BwbHFi3+DNKDFh59b60CbNDNbzsNpeweb7g=
+	t=1756286245; cv=none; b=aFOLnfHqdSCh2bxitUpnUFZN1zoYrs7+1toiPAkZd7RV7G5BMD/dwyn6z1YyjoVgKjIA66VD/U0d4veHRIxfui/FJ++wAzn7iWeHiBQu08PRRm1oC7R4CFTe/oQAiyn3EusF/9ciFgNZiLYOwzuBt28IgNDbM9FHvTITRDp7vog=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756283222; c=relaxed/simple;
-	bh=bNOmw1tzFH8Sl7kR3p+wUYP6U5+a6FHYIcsXQNkIydI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=P2aVPmyD0QpqiJ3WCKKQGws40cgluE6ajWCcIBm8dRD1gYPRgyP5GTTrw4OgfGQ9H2DO1GuvwMALh7FzvAPtL4QtJwKK4Vhb+McPUyhtxepWN1K4+q61hH++TC+vRxwrqlVRXsQWfSrUbJfrF1s2wRxphyEqulNGGuFoctH1apk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DHfUquFE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F816C116C6;
-	Wed, 27 Aug 2025 08:27:02 +0000 (UTC)
+	s=arc-20240116; t=1756286245; c=relaxed/simple;
+	bh=TYyx1Z0CNHtXF1OQjZhKtuBTijXSsUPz57zuUcrMcvA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ENgBGOkmcO0o0kjC0UZsmZOQqEimMJsAhnOvg9mt2Fd8cQstDz5BlzwzBrr6Ozfr3MbO/0Fxd3yGESus0vlmhkeP8SkYklGalYYvSRNtvSTxl/P6nm2KDhi2C32rN/DQNUkujkXM0EMfoPs70Ns8PhO98CR0vEzUi74ficW6/1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Asr76mip; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BDF9CC113CF;
+	Wed, 27 Aug 2025 09:17:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756283222;
-	bh=bNOmw1tzFH8Sl7kR3p+wUYP6U5+a6FHYIcsXQNkIydI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=DHfUquFEi6CklQ3HPSJwSpYmJybPa/3q6d6icQ1flmYboswEFJo5kvOSiYXO+36Hv
-	 0tTYd+wDYjMcFlyw3pHJUZL1Lmo1ymNrI8drFIjDrue14ar+DVFXvr04aUMWSlubMp
-	 +Ma91FtMstLyrzjbz7MiTfAp652Yd11KB3jDwBD7PpNkYICUcUMwwUl36CinrFf5w8
-	 daKMBxhy6S6E5Bj/1gqpSIRKu3DvW5GaUh3FiBoEcYfg0EbHh15ejFEVyNPeY+47ed
-	 T+7hkejNZwcVyVlBl+YBG6BkFZq7mp/rEmk/dV2VBrr5eQ02fsZ8StNh1QowYTQteK
-	 zjjgY3c+7J7KQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1urBUi-00000000uUY-12Ds;
-	Wed, 27 Aug 2025 10:27:00 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 2/2] tools: kernel-doc: add a see also section at man pages
-Date: Wed, 27 Aug 2025 10:26:38 +0200
-Message-ID: <58c6e079ab456dd6514eba09ce3efafa10b7b6bd.1756282370.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <cover.1756282370.git.mchehab+huawei@kernel.org>
-References: <cover.1756282370.git.mchehab+huawei@kernel.org>
+	s=k20201202; t=1756286245;
+	bh=TYyx1Z0CNHtXF1OQjZhKtuBTijXSsUPz57zuUcrMcvA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Asr76mipEwGUVqlmQiWISvswLcwClR12ZwT7goxVWatoDn6RaUI2EvuUir5jc4ZOi
+	 pVDBodH6b4RdBDcKYhF67601faqJKFIAxT67Cxr3XoilZRyOGuzwSiJCliOImN6FsS
+	 rzgVonSjgUP8MpttBxXseKia9cgXo1F9rahoREOdV+aOuz5ErDQ6UrSbm2vu+DW/ec
+	 HQILjuNSczallNk3E/hbN4yRaikm3kKbSfg9TdZ0x3bd+sgT74seFE3ZlhaO2+1a7m
+	 IzWg9Fq72BffVaWAWAojuDMDfWxejd/55/E1KCU3yz6FoR7zjEielbez8xD/voiFAv
+	 hWN5o7P5m8lQQ==
+Date: Wed, 27 Aug 2025 11:17:22 +0200
+From: Amit Shah <amit@kernel.org>
+To: Sean Christopherson <seanjc@google.com>
+Cc: linux-kernel@vger.kernel.org, kvm@vger.kernel.org, x86@kernel.org,
+	linux-doc@vger.kernel.org, amit.shah@amd.com,
+	thomas.lendacky@amd.com, bp@alien8.de, tglx@linutronix.de,
+	peterz@infradead.org, jpoimboe@kernel.org,
+	pawan.kumar.gupta@linux.intel.com, corbet@lwn.net, mingo@redhat.com,
+	dave.hansen@linux.intel.com, hpa@zytor.com, pbonzini@redhat.com,
+	daniel.sneddon@linux.intel.com, kai.huang@intel.com,
+	sandipan.das@amd.com, boris.ostrovsky@oracle.com,
+	Babu.Moger@amd.com, david.kaplan@amd.com, dwmw@amazon.co.uk,
+	andrew.cooper3@citrix.com
+Subject: Re: [PATCH v5 1/1] x86: kvm: svm: set up ERAPS support for guests
+Message-ID: <aK7NIk1ArgQaDPHp@mun-amitshah-l>
+References: <20250515152621.50648-1-amit@kernel.org>
+ <20250515152621.50648-2-amit@kernel.org>
+ <aKYBeIokyVC8AKHe@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aKYBeIokyVC8AKHe@google.com>
 
-While cross-references are complex, as related ones can be on
-different files, we can at least correlate the ones that belong
-to the same file, adding a SEE ALSO section for them.
+On (Wed) 20 Aug 2025 [10:10:16], Sean Christopherson wrote:
+> On Thu, May 15, 2025, Amit Shah wrote:
 
-The result is not bad. See for instance:
+[...]
 
-	$ tools/docs/sphinx-build-wrapper --sphinxdirs driver-api/media -- mandocs
-	$ man Documentation/output/driver-api/man/edac_pci_add_device.9
+> > For guests to observe and use this feature, 
+> 
+> Guests don't necessarily "use" this feature.  It's something that's enabled by
+> KVM and affects harware behavior regardless of whether or not the guest is even
+> aware ERAPS is a thing.
 
-	edac_pci_add_device(9)  Kernel Hacker's Manual  edac_pci_add_device(9)
+OK wording it is tricky.  "use" in the sense of for the entire RSB to be
+utilized within guest context.  Not "use" as in guest needs enablement or
+needs to do anything special.
 
-	NAME
-	       edac_pci_add_device  - Insert the 'edac_dev' structure into the
-	       edac_pci global list and create sysfs entries  associated  with
-	       edac_pci structure.
+"For the extended size to also be utilized when the CPU is in guest context,
+the hypervisor needs to..." ?
 
-	SYNOPSIS
-	       int  edac_pci_add_device  (struct  edac_pci_ctl_info *pci , int
-	       edac_idx );
+> > the hypervisor needs to expose the CPUID bit, and also set a VMCB bit.
+> > Without one or both of those, 
+> 
+> No?  If there's no enabling for bare metal usage, I don't see how emulation of
+> CPUID can possibly impact usage of RAP size.  The only thing that matters is the
+> VMCB bit.  And nothing in this patch queries guest CPUID.
 
-	ARGUMENTS
-	       pci         pointer to the edac_device structure to be added to
-	                   the list
+True.
 
-	       edac_idx    A unique numeric identifier to be assigned to the
+> Observing ERAPS _might_ cause the guest to forego certain mitigations, but KVM
+> has zero visibility into whether or not such mitigations exist, if the guest will
+> care about ERAPS, etc.
 
-	RETURN
-	       0 on Success, or an error code on failure
+Sure, there's nothing guest-specific about this; any OS, when it detects
+ERAPS, may or may not want to adapt to its existence.  (As it turns out, for
+Linux, no adaptation is necessary.)
 
-	SEE ALSO
-	       edac_pci_alloc_ctl_info(9),          edac_pci_free_ctl_info(9),
-	       edac_pci_alloc_index(9),  edac_pci_del_device(9), edac_pci_cre‐
-	       ate_generic_ctl(9),            edac_pci_release_generic_ctl(9),
-	       edac_pci_create_sysfs(9), edac_pci_remove_sysfs(9)
+> > guests continue to use the older default RSB size and behaviour for backwards
+> > compatibility.  This means the hardware RSB size is limited to 32 entries for
+> > guests that do not have this feature exposed to them.
 
-	August 2025               edac_pci_add_device   edac_pci_add_device(9)
+[...]
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- scripts/lib/kdoc/kdoc_files.py  |  5 +-
- scripts/lib/kdoc/kdoc_output.py | 84 +++++++++++++++++++++++++++++++--
- 2 files changed, 83 insertions(+), 6 deletions(-)
+> > 2. Hosts that disable NPT: the ERAPS feature also flushes the RSB
+> >    entries when the CR3 is updated.  When using shadow paging, CR3
+> >    updates within the guest do not update the CPU's CR3 register.
+> 
+> Yes they do, just indirectly.  KVM changes the effective CR3 in reaction to the
+> guest's new CR3.  If hardware doesn't flush in that situation, then it's trivially
+> easy to set ERAP_CONTROL_FLUSH_RAP on writes to CR3.
 
-diff --git a/scripts/lib/kdoc/kdoc_files.py b/scripts/lib/kdoc/kdoc_files.py
-index 9e09b45b02fa..061c033f32da 100644
---- a/scripts/lib/kdoc/kdoc_files.py
-+++ b/scripts/lib/kdoc/kdoc_files.py
-@@ -275,7 +275,10 @@ class KernelFiles():
-                 self.config.log.warning("No kernel-doc for file %s", fname)
-                 continue
- 
--            for arg in self.results[fname]:
-+            symbols = self.results[fname]
-+            self.out_style.set_symbols(symbols)
-+
-+            for arg in symbols:
-                 m = self.out_msg(fname, arg.name, arg)
- 
-                 if m is None:
-diff --git a/scripts/lib/kdoc/kdoc_output.py b/scripts/lib/kdoc/kdoc_output.py
-index ea8914537ba0..1eca9a918558 100644
---- a/scripts/lib/kdoc/kdoc_output.py
-+++ b/scripts/lib/kdoc/kdoc_output.py
-@@ -215,6 +215,9 @@ class OutputFormat:
- 
-     # Virtual methods to be overridden by inherited classes
-     # At the base class, those do nothing.
-+    def set_symbols(self, symbols):
-+        """Get a list of all symbols from kernel_doc"""
-+
-     def out_doc(self, fname, name, args):
-         """Outputs a DOC block"""
- 
-@@ -577,6 +580,7 @@ class ManFormat(OutputFormat):
- 
-         super().__init__()
-         self.modulename = modulename
-+        self.symbols = []
- 
-         dt = None
-         tstamp = os.environ.get("KBUILD_BUILD_TIMESTAMP")
-@@ -593,6 +597,68 @@ class ManFormat(OutputFormat):
- 
-         self.man_date = dt.strftime("%B %Y")
- 
-+    def arg_name(self, args, name):
-+        """
-+        Return the name that will be used for the man page.
-+
-+        As we may have the same name on different namespaces,
-+        prepend the data type for all types except functions and typedefs.
-+
-+        The doc section is special: it uses the modulename.
-+        """
-+
-+        dtype = args.type
-+
-+        if dtype == "doc":
-+            return self.modulename
-+
-+        if dtype in ["function", "typedef"]:
-+            return name
-+
-+        return f"{dtype} {name}"
-+
-+    def set_symbols(self, symbols):
-+        """
-+        Get a list of all symbols from kernel_doc.
-+
-+        Man pages will uses it to add a SEE ALSO section with other
-+        symbols at the same file.
-+        """
-+        self.symbols = symbols
-+
-+    def out_tail(self, fname, name, args):
-+        """Adds a tail for all man pages"""
-+
-+        # SEE ALSO section
-+        if len(self.symbols) >= 2:
-+            cur_name = self.arg_name(args, name)
-+
-+            self.data += f'.SH "SEE ALSO"' + "\n.PP\n"
-+            related = []
-+            for arg in self.symbols:
-+                out_name = self.arg_name(arg, arg.name)
-+
-+                if cur_name == out_name:
-+                    continue
-+
-+                related.append(f"\\fB{out_name}\\fR(9)")
-+
-+            self.data += ",\n".join(related) + "\n"
-+
-+        # TODO: does it make sense to add other sections? Maybe
-+        # REPORTING ISSUES? LICENSE?
-+
-+    def msg(self, fname, name, args):
-+        """
-+        Handles a single entry from kernel-doc parser.
-+
-+        Add a tail at the end of man pages output.
-+        """
-+        super().msg(fname, name, args)
-+        self.out_tail(fname, name, args)
-+
-+        return self.data
-+
-     def output_highlight(self, block):
-         """
-         Outputs a C symbol that may require being highlighted with
-@@ -618,7 +684,9 @@ class ManFormat(OutputFormat):
-         if not self.check_doc(name, args):
-             return
- 
--        self.data += f'.TH "{self.modulename}" 9 "{self.modulename}" "{self.man_date}" "API Manual" LINUX' + "\n"
-+        out_name = self.arg_name(args, name)
-+
-+        self.data += f'.TH "{self.modulename}" 9 "{out_name}" "{self.man_date}" "API Manual" LINUX' + "\n"
- 
-         for section, text in args.sections.items():
-             self.data += f'.SH "{section}"' + "\n"
-@@ -627,7 +695,9 @@ class ManFormat(OutputFormat):
-     def out_function(self, fname, name, args):
-         """output function in man"""
- 
--        self.data += f'.TH "{name}" 9 "{name}" "{self.man_date}" "Kernel Hacker\'s Manual" LINUX' + "\n"
-+        out_name = self.arg_name(args, name)
-+
-+        self.data += f'.TH "{name}" 9 "{out_name}" "{self.man_date}" "Kernel Hacker\'s Manual" LINUX' + "\n"
- 
-         self.data += ".SH NAME\n"
-         self.data += f"{name} \\- {args['purpose']}\n"
-@@ -671,7 +741,9 @@ class ManFormat(OutputFormat):
-             self.output_highlight(text)
- 
-     def out_enum(self, fname, name, args):
--        self.data += f'.TH "{self.modulename}" 9 "enum {name}" "{self.man_date}" "API Manual" LINUX' + "\n"
-+        out_name = self.arg_name(args, name)
-+
-+        self.data += f'.TH "{self.modulename}" 9 "{out_name}" "{self.man_date}" "API Manual" LINUX' + "\n"
- 
-         self.data += ".SH NAME\n"
-         self.data += f"enum {name} \\- {args['purpose']}\n"
-@@ -703,8 +775,9 @@ class ManFormat(OutputFormat):
-     def out_typedef(self, fname, name, args):
-         module = self.modulename
-         purpose = args.get('purpose')
-+        out_name = self.arg_name(args, name)
- 
--        self.data += f'.TH "{module}" 9 "{name}" "{self.man_date}" "API Manual" LINUX' + "\n"
-+        self.data += f'.TH "{module}" 9 "{out_name}" "{self.man_date}" "API Manual" LINUX' + "\n"
- 
-         self.data += ".SH NAME\n"
-         self.data += f"typedef {name} \\- {purpose}\n"
-@@ -717,8 +790,9 @@ class ManFormat(OutputFormat):
-         module = self.modulename
-         purpose = args.get('purpose')
-         definition = args.get('definition')
-+        out_name = self.arg_name(args, name)
- 
--        self.data += f'.TH "{module}" 9 "{args.type} {name}" "{self.man_date}" "API Manual" LINUX' + "\n"
-+        self.data += f'.TH "{module}" 9 "{out_name}" "{self.man_date}" "API Manual" LINUX' + "\n"
- 
-         self.data += ".SH NAME\n"
-         self.data += f"{args.type} {name} \\- {purpose}\n"
--- 
-2.51.0
+Yea, that's right - since it doesn't happen in-guest (i.e. there's an exit
+instead), it needs KVM to set that bit.
+
+[...]
+
+> > @@ -3482,6 +3485,7 @@ static void dump_vmcb(struct kvm_vcpu *vcpu)
+> >  	pr_err("%-20s%016llx\n", "tsc_offset:", control->tsc_offset);
+> >  	pr_err("%-20s%d\n", "asid:", control->asid);
+> >  	pr_err("%-20s%d\n", "tlb_ctl:", control->tlb_ctl);
+> > +	pr_err("%-20s%d\n", "erap_ctl:", control->erap_ctl);
+> >  	pr_err("%-20s%08x\n", "int_ctl:", control->int_ctl);
+> >  	pr_err("%-20s%08x\n", "int_vector:", control->int_vector);
+> >  	pr_err("%-20s%08x\n", "int_state:", control->int_state);
+> > @@ -3663,6 +3667,11 @@ static int svm_handle_exit(struct kvm_vcpu *vcpu, fastpath_t exit_fastpath)
+> >  
+> >  		trace_kvm_nested_vmexit(vcpu, KVM_ISA_SVM);
+> >  
+> > +		if (vmcb_is_extended_rap(svm->vmcb01.ptr)) {
+> > +			vmcb_set_flush_guest_rap(svm->vmcb01.ptr);
+> > +			vmcb_clr_flush_guest_rap(svm->nested.vmcb02.ptr);
+> > +		}
+> > +
+> >  		vmexit = nested_svm_exit_special(svm);
+> >  
+> >  		if (vmexit == NESTED_EXIT_CONTINUE)
+> > @@ -3670,6 +3679,11 @@ static int svm_handle_exit(struct kvm_vcpu *vcpu, fastpath_t exit_fastpath)
+> >  
+> >  		if (vmexit == NESTED_EXIT_DONE)
+> >  			return 1;
+> > +	} else {
+> > +		if (vmcb_is_extended_rap(svm->vmcb01.ptr) && svm->nested.initialized) {
+> > +			vmcb_set_flush_guest_rap(svm->nested.vmcb02.ptr);
+> > +			vmcb_clr_flush_guest_rap(svm->vmcb01.ptr);
+> > +		}
+> 
+> Handling this in the common exit path is confusing, inefficient, and lacking.
+
+Heh, I agree.  I toyed with doing this just before VMRUN.  But I can't recall
+why I disliked that more.
+
+> Assuming hardware doesn't automatically clear ERAP_CONTROL_FLUSH_RAP, then KVM
+
+That's right - it doesn't.
+
+> should clear the flag after _any_ exit, not just exits that reach this point,
+> e.g. if KVM stays in the fast path.
+
+(or just before VMRUN).  Right.
+
+> And IIUC, ERAP_CONTROL_FLUSH_RAP needs to be done on _every_ nested transition,
+> not just those that occur in direct response to a hardware #VMEXIT. So, hook
+> nested_vmcb02_prepare_control() for nested VMRUN and nested_svm_vmexit() for
+> nested #VMEXIT.
+
+Does sound better.  I think the case I wanted to preserve in this complex
+logic was if we have a L2->exit->L2 transition, I didn't want to set the FLUSH
+bit.
+
+> Side topic, the changelog should call out that KVM deliberately ignores guest
+> CPUID, and instead unconditionally enables the full size RAP when ERAPS is
+> supported.  I.e. KVM _could_ check guest_cpu_cap_has() instead of kvm_cpu_cap_has()
+> in all locations, to avoid having to flush the RAP on nested transitions when
+> ERAPS isn't enumerated to the guest, but presumably using the full size RAP is
+> better for overall performance.
+
+Yea.
+
+> The changelog should also call out that if the full size RAP is enabled, then
+> it's KVM's responsibility to flush the RAP on nested transitions irrespective
+> of whether or not ERAPS is advertised to the guest.  Because if ERAPS isn't
+> advertised, the the guest's mitigations will likely be insufficient.
+
+You mean the L2 guest?  ACK on the update.
+
+> With the caveat that I'm taking a wild guess on the !npt behavior, something
+> like this?
+
+[...]
+
+> +#define ERAP_CONTROL_FULL_SIZE_RAP BIT(0)
+> +#define ERAP_CONTROL_FLUSH_RAP BIT(1)
+
+Oh I def prefer to keep the APM-specified names.
+
+[...]
+
+Patch looks good!
+
+I'll test it a bit and repost.
+
+Thanks,
+
+		Amit
 
 
