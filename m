@@ -1,128 +1,115 @@
-Return-Path: <linux-doc+bounces-57850-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57852-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7BC0B3A7CC
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Aug 2025 19:23:12 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65D64B3AA0E
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Aug 2025 20:30:52 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 2AC551C21563
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Aug 2025 17:23:33 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3327317BCA1
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Aug 2025 18:30:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6A7833A025;
-	Thu, 28 Aug 2025 17:22:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 69084215F7C;
+	Thu, 28 Aug 2025 18:30:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NniPVCL7"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="BNeBrZ+E"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84CB12264B2;
-	Thu, 28 Aug 2025 17:22:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FD9721579F
+	for <linux-doc@vger.kernel.org>; Thu, 28 Aug 2025 18:30:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756401775; cv=none; b=DHp6EBqWXOCKPOpJ4yV/HcXPdVIZ+AdVG3/ym+A5v1RktZfWwAez69ufUGLbSfo5dtKsud6n+P+zoZR6FyBi7McqV8DmtDNuLpPOaEHFFJ/7F/xBgFnLY+m4n18eNqO9uN+iNWnGXB2w2e9Sx/pDP5cNCEz/cqw2Dv7YYHX4DGQ=
+	t=1756405848; cv=none; b=fPJ86kglzyV9cSD8t5FIxQ9w5lhpJU1Z0q+wrWVv8G9xR+bd5uq7a9z7XUfydfHxcSdgEmqfWTL/UfWdTlZ/Qd+CoAlEVhiYdaIVfAu23NUxaHsI76N6s1yazcFmKH8PVspmE97EVaHjkdvKHSkGwvKCVfP2xL70ZW9PWOQ/EPQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756401775; c=relaxed/simple;
-	bh=D64Dcw+3Q7Bhw7cRL3Mx51sKXxd32kG6A6P2l/nGXPI=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=FafkJa0bY9kuEfeINYH/pXw93JbhhRFvA8fR0nqzbToYx6aHI3qKhBJE6nbA3DO7r7Lnox6GChdmVskLMkWdF4jqWoPwW6Xtb9lHhpTaQ6/2ubYDhnCDsjvGnE5R3zr6aoNBnJxPixmOMtVIzrcqgaUT5wozYK+K49wMyRQ21V8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NniPVCL7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7B7EC4CEF5;
-	Thu, 28 Aug 2025 17:22:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756401775;
-	bh=D64Dcw+3Q7Bhw7cRL3Mx51sKXxd32kG6A6P2l/nGXPI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:From;
-	b=NniPVCL70CJLdBOdxQoW1jaUw3KHNNjTpnByZBXqpMVCAZP6eWtTCp1uK0XEEB00u
-	 kuHZ0awF3fnjhHf6IH6lJMdKgqVDcRh42ivtIHDLmJRs8ttBqcFf87Jy2jplZeLM3o
-	 zV9PXCeb/dnaMbPIH0VPYOJ5JKvIpMI2uV6RRVexO3ZmIZaS4mStzp7Wgt12uDwPOi
-	 Z6/VxNFYcJG2ZtfnAevv1gZT+T0kUpAtm+74fTBX9TXUh7C6HM99sp/lHozeiLbFng
-	 gEsXq5bQHE6s2jopMhGWOQsPuHfUhZtsa+Fmx1U8CkEtQcw9dUK3tYt6YoW7TAwc35
-	 /2mMgE9BOicQg==
-Date: Thu, 28 Aug 2025 12:22:53 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Christian Bruel <christian.bruel@foss.st.com>
-Cc: lpieralisi@kernel.org, kwilczynski@kernel.org, mani@kernel.org,
-	robh@kernel.org, bhelgaas@google.com, krzk+dt@kernel.org,
-	conor+dt@kernel.org, mcoquelin.stm32@gmail.com,
-	alexandre.torgue@foss.st.com, linus.walleij@linaro.org,
-	corbet@lwn.net, p.zabel@pengutronix.de, shradha.t@samsung.com,
-	mayank.rana@oss.qualcomm.com, namcao@linutronix.de,
-	qiang.yu@oss.qualcomm.com, thippeswamy.havalige@amd.com,
-	inochiama@gmail.com, quic_schintav@quicinc.com,
-	johan+linaro@kernel.org, linux-pci@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v13 06/11] PCI: stm32: Add PCIe Endpoint support for
- STM32MP25
-Message-ID: <20250828172253.GA949714@bhelgaas>
+	s=arc-20240116; t=1756405848; c=relaxed/simple;
+	bh=+cJ/42k0VYV0M2aXW9zlZKPdMXAl4MnJ7P2jUvIq4L4=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=SCHZBwMTiNd4auCdR9I6nBwo2B1fG4om1btPCDAA2BhZW3YjOyBIgPBaoR/8uTBm2iuBToIGWqqmnAlvVAYUdY7rrJ87a3yv3FeLHbNjrGiKm582a1nPC8kFuKO7tjcwhafHLyc9vK0Pnbkoh6Y/S3hlF6PZIpa+HoVlpKC6fcQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=BNeBrZ+E; arc=none smtp.client-ip=209.85.167.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-55f3dcb2b9fso2263074e87.1
+        for <linux-doc@vger.kernel.org>; Thu, 28 Aug 2025 11:30:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1756405845; x=1757010645; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XuEqj8/T+xiUJS7ax+9xjCXIR39EG8IKnjSfY7eLrqE=;
+        b=BNeBrZ+E38BjyjvupSb2gQHpE1SplDzA9594rrZVAFinmH6jndpyrOES7ZCYjEawX7
+         Zu0Q+VE+9IdXeHMVLPrzvkbDzItx9IfMnAyP2IPlsOLU7HMiawzKS36nYt6dXjtbRZNo
+         7xjwH7XnljcnSyxmb+MSrj4wJegCell3tik0YXHc+v2KiffxqsVvM1lSEye06j4wS6vy
+         bDOdXZEF5uKfzfsC2q1hTZ46afGd+A25JzBmdbv+dl8D6dR+/5+k5c3e3lNdBrn5WOBb
+         RLCjpTxvYXpM23xRSqmyhs0S8A2MVZyr1ZrA2S2bDx/aWlch9M3VRKTjNMchJcnIpS5T
+         avQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756405845; x=1757010645;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=XuEqj8/T+xiUJS7ax+9xjCXIR39EG8IKnjSfY7eLrqE=;
+        b=VU7V5r7ac3dRwISlSxHVpbtbr+WhXv4a7Ema8S5tQNeybn5U723Z06JVl0jA7ughxw
+         /jFoEDbLmmN3aL9TSJLG5eMUea4rPuCvwHvjUQ6c6avQI+kkprxKeWPbCOqEtG8B5uNI
+         whz9CLdkul5nm4HiupOutmXWE16SekVqkjidDOZC1jdlEHrYTmQzK1104D0P8X0cvmi2
+         h68/fh1THzpK6jfuGZHSw+n5NKHw8YqoBZkQl9MOl/BJSjD+fkNLdUBP0+U/rqOGzauz
+         c9sDC3p08lGw56o0RDUeuyZBfg9pCKpiA1mp1B7/x2dJJk8qB8dNszGZeiZ6CpCivhRa
+         wgeg==
+X-Forwarded-Encrypted: i=1; AJvYcCUVZI7cYDm2sxQesxbAbvBu89N0rBF7xeb3mnhWpqRnZASVgO0oUSTmRzWRYHafqxraZvMeqeL/+eE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzyO6entlKGSNlmoswNB4XRBUv/vSJntYG7JcdVFIgE6nzBdwUR
+	AC1TDAL0bs+Dj5nEdWmvv1xW4SZYhcPDjuT1sxuILMvhstNoIk+MsyQec6toHtfHQNpobzXvwjc
+	Zs3dh6T8RKLRW0BSLVRKeztMJjmcFgBWg6fqkcdDLCw==
+X-Gm-Gg: ASbGncsTegALPVxtViyMjCbSqlDq2bT0l16cNgJ3QquO2TFwxdmJOrJuFLlkTcFpSF2
+	mox1baCfYQKXY4PNIKLdbieq7RWt4q5cmxNgo46kdr1tjVK8SDZUCbfCVAEGGOvsvtOwMwTIgoQ
+	YkbsK2JNz4DtVhz9yXp/zQRYK3RT0A3yvvAIRukltMeC35tYVfv0xC73J04JMT12aUzeAwnSh2j
+	4C+dyCGntnUAbQyXQ==
+X-Google-Smtp-Source: AGHT+IH/8kZJERm22+qgVkI/2abRlg7jFqSaoz19NfilAs8gqvm1/HMq3/qWcpNYFOG6zrPS0q3FvE7sFdLPB8sog2w=
+X-Received: by 2002:a05:6512:2c0f:b0:55f:3f0c:e267 with SMTP id
+ 2adb3069b0e04-55f4f4c66f2mr2837563e87.17.1756405844595; Thu, 28 Aug 2025
+ 11:30:44 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250820075411.1178729-7-christian.bruel@foss.st.com>
+References: <20250827074525.685863-1-alex.t.tran@gmail.com>
+In-Reply-To: <20250827074525.685863-1-alex.t.tran@gmail.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Thu, 28 Aug 2025 20:30:33 +0200
+X-Gm-Features: Ac12FXzu3BqzQAEjjUx4V_NHl1QbSsY2Iqe-wW7HgjaVEzgtXC011QXplgETcSQ
+Message-ID: <CACRpkdbct3o-=-hy97OMg1O+E_Tw8cNzRTa_kh0WB2LxJrHwJw@mail.gmail.com>
+Subject: Re: [PATCH v2] docs: driver-api pinctrl cleanup
+To: Alex Tran <alex.t.tran@gmail.com>
+Cc: corbet@lwn.net, linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 20, 2025 at 09:54:06AM +0200, Christian Bruel wrote:
-> Add driver to configure the STM32MP25 SoC PCIe Gen1 2.5GT/s or Gen2 5GT/s
-> controller based on the DesignWare PCIe core in endpoint mode.
-> ...
+On Wed, Aug 27, 2025 at 9:45=E2=80=AFAM Alex Tran <alex.t.tran@gmail.com> w=
+rote:
 
-> +static int stm32_pcie_start_link(struct dw_pcie *pci)
-> +{
-> +	struct stm32_pcie *stm32_pcie = to_stm32_pcie(pci);
-> +	int ret;
-> +
-> +	if (stm32_pcie->link_status == STM32_PCIE_EP_LINK_ENABLED) {
-> +		dev_dbg(pci->dev, "Link is already enabled\n");
-> +		return 0;
-> +	}
+> changelog:
+> v2
 
-While looking at the "incorrectly reset" comment, I noticed
-stm32_pcie->link_status and wondered why it exists.  It looks like
-it's only used in stm32_pcie_start_link() and stm32_pcie_stop_link(),
-and I don't see similar tracking in other drivers.
+I think Jonathan will trim these two lines when applying...
 
-It feels a little racy because the link might go down for reasons
-other than calling stm32_pcie_stop_link().
+> Replace FIXME comments in the pinctrl documentation example with
+> proper cleanup code:
+> - Add devm_pinctrl_put() calls in error paths
+>   (pinctrl_lookup_state, pinctrl_select_state)
+>   after successful devm_pinctrl_get()
+> - Set foo->p to NULL when devm_pinctrl_get() fails
+> - Add ret variable for cleaner error handling
+> - provides proper example of pinctrl resource management on failure
+>
+> Signed-off-by: Alex Tran <alex.t.tran@gmail.com>
 
-> +	dev_dbg(pci->dev, "Enable link\n");
-> +
-> +	ret = stm32_pcie_enable_link(pci);
-> +	if (ret) {
-> +		dev_err(pci->dev, "PCIe cannot establish link: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	enable_irq(stm32_pcie->perst_irq);
-> +
-> +	stm32_pcie->link_status = STM32_PCIE_EP_LINK_ENABLED;
-> +
-> +	return 0;
-> +}
-> +
-> +static void stm32_pcie_stop_link(struct dw_pcie *pci)
-> +{
-> +	struct stm32_pcie *stm32_pcie = to_stm32_pcie(pci);
-> +
-> +	if (stm32_pcie->link_status == STM32_PCIE_EP_LINK_DISABLED) {
-> +		dev_dbg(pci->dev, "Link is already disabled\n");
-> +		return;
-> +	}
-> +
-> +	dev_dbg(pci->dev, "Disable link\n");
-> +
-> +	disable_irq(stm32_pcie->perst_irq);
-> +
-> +	stm32_pcie_disable_link(pci);
-> +
-> +	stm32_pcie->link_status = STM32_PCIE_EP_LINK_DISABLED;
-> +}
+... but it looks good otherwise!
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+
+Yours,
+Linus Walleij
 
