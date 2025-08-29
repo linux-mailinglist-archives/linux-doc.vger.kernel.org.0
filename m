@@ -1,66 +1,152 @@
-Return-Path: <linux-doc+bounces-57977-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57979-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36836B3BF6C
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 17:36:06 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 17C27B3BF9B
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 17:42:39 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id E5CE1189B124
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 15:35:50 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F0B9B3AA648
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 15:40:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D4E9337699;
-	Fri, 29 Aug 2025 15:33:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D77E3314C8;
+	Fri, 29 Aug 2025 15:37:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="QzO/OIOb"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hxRjy6JU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8299F32C323;
-	Fri, 29 Aug 2025 15:33:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B8BC3314B5;
+	Fri, 29 Aug 2025 15:37:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756481593; cv=none; b=FCt1mAWAl7E9kU4Dnruy25FM788fRi4jEXFNil8jCfEYn0FZ6ryPiPUjRrRX0VtASe9RHnShEnw1UuVPEc2DihgO/zO17X88yIg7Ju2RxCKeE0VtCRTsMwYRGQu4Wg+GGtVfipAGW8Q4V8jU6JCd42e/8RR94llYH2K74i4VXoM=
+	t=1756481821; cv=none; b=HFQK+i1BkoweWh+BDSVEZDu5TZac3GMoZgJUDHT/q+ExtXvmNvUuPT8nPjxV1gPgbwPFPTvhtYCA3LT5IbcgMPbCsSOhhWBsjK/MfCuqCajso5dwh0qgknDOYgNhZudyKj1TcQ05S6CauQXrCqSllT6u++ajsn1jo538d2o5DLk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756481593; c=relaxed/simple;
-	bh=MmJAzEUGDY1ZnvfJNdRoRc6RjXuN3iyRXcJ727tV5TU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=qrIgXpIqvI7IabIV177Z5nDgJTuV5qWKbbHl6cVvOzDvkdtiN6ONAhcRg6Ksqmqm9wV5rYrYRkFQLbNe5N6RHIojT4d6KKP9PgC/nT0jGQ2Erxw1XkE3Bh9vSiFcC3Zd4iwA1emXum0MfaG0NYumbnxp//6N4trI/IWbjEou7co=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=QzO/OIOb; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from terminus.zytor.com (terminus.zytor.com [IPv6:2607:7c80:54:3:0:0:0:136])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 57TFVo4R2871953
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Fri, 29 Aug 2025 08:32:31 -0700
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 57TFVo4R2871953
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025082201; t=1756481552;
-	bh=mellVT/XIrNm1NNFUupzwoYDU9A7op6LrJLW8EqFyuE=;
+	s=arc-20240116; t=1756481821; c=relaxed/simple;
+	bh=Z0Bv7WaDdOXi4UMDM6ZgBS7CKcxMZ6kvuSO3nqYq5X8=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=tsIfPZa7mQzdBEr0SQkeuIybGgclalZa2TMbE3XaXUV70tsaXAjZZ0QnaymCyqt0KvlDCCwP/TShTmqFVpEeBu8C7VkMRbnFocgkvDBUWaB2fRNyHScrjbOxuMhy62lbhebt3XO5L19lEbhC7fg8CfBo0laeTWqUN5obMTgFhMU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hxRjy6JU; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61569C4CEFC;
+	Fri, 29 Aug 2025 15:37:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1756481820;
+	bh=Z0Bv7WaDdOXi4UMDM6ZgBS7CKcxMZ6kvuSO3nqYq5X8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QzO/OIOb8Ai1XZiY376ctczVEpIhP5HKnm6b8dEy/jyetDMG1HKc1YDZRzURy/wev
-	 UZWUpF8PJ06XlSfTa9v7Gs7I9evQlCR4+FdoD7fS1fv5rJramNbm3qdvnqKJ7DJZM2
-	 TJNMFWCogjnYF8hRD6+YNqtgA6X8/id01poZcWNgRvl1fFJtGj8K4GvIgkSPRFdhVR
-	 wF/ynd9r2dyh/2p+s/M4plMolV+Vnx9vxiTgvsm6ZIFogCvpvW/7XlVsuzqiLlrucG
-	 vOjnQLLBteDcknYYN4Yt9PP/Y9Revxts7dW7Ezkc/cjSnhdUaXU3Jkmgnh8ss/WDpx
-	 3AaOMr+0bC3Lw==
-From: "Xin Li (Intel)" <xin@zytor.com>
-To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Cc: pbonzini@redhat.com, seanjc@google.com, corbet@lwn.net, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
-        x86@kernel.org, hpa@zytor.com, xin@zytor.com, luto@kernel.org,
-        peterz@infradead.org, andrew.cooper3@citrix.com, chao.gao@intel.com,
-        hch@infradead.org
-Subject: [PATCH v7 21/21] KVM: nVMX: Allow VMX FRED controls
-Date: Fri, 29 Aug 2025 08:31:49 -0700
-Message-ID: <20250829153149.2871901-22-xin@zytor.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250829153149.2871901-1-xin@zytor.com>
-References: <20250829153149.2871901-1-xin@zytor.com>
+	b=hxRjy6JU/oDw6RINsxcmGRsTVGeDOVIb4ykJmLCqUX+QQzeylWuLrDXAGu73hmOa8
+	 cXkBsFfxubx34foFYG+QHJojJeqb3QzXsHL83AkHDPdn/Qv4/IIR3e2qaYlaHVj7X8
+	 /ujZy8fCtuvOl+p3ABN9mW0y/L62IEPa3LIB45zqcEIJiII+iaRRjvCxcFZVIe4UIP
+	 kaEKsYFY6b00ExIR7mNyizMsT0mnem6gSXppPc1I0E+Yiwnl2Whyv7VtVp7zbfroC1
+	 buwbPy49vW/4gXiHEGPpC1YTGlyYCgxjAJ+Hb56S4jwabvggJ+9rHuCjN6QDMZMzu7
+	 EVcfRMiw+6syA==
+From: SeongJae Park <sj@kernel.org>
+To: Bagas Sanjaya <bagasdotme@gmail.com>
+Cc: SeongJae Park <sj@kernel.org>,
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux DAMON <damon@lists.linux.dev>,
+	Linux Memory Management List <linux-mm@kvack.org>,
+	Linux Power Management <linux-pm@vger.kernel.org>,
+	Linux Block Devices <linux-block@vger.kernel.org>,
+	Linux BPF <bpf@vger.kernel.org>,
+	Linux Kernel Workflows <workflows@vger.kernel.org>,
+	Linux KASAN <kasan-dev@googlegroups.com>,
+	Linux Devicetree <devicetree@vger.kernel.org>,
+	Linux fsverity <fsverity@lists.linux.dev>,
+	Linux MTD <linux-mtd@lists.infradead.org>,
+	Linux DRI Development <dri-devel@lists.freedesktop.org>,
+	Linux Kernel Build System <linux-lbuild@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>,
+	Linux Sound <linux-sound@vger.kernel.org>,
+	Borislav Petkov <bp@alien8.de>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@redhat.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Huang Rui <ray.huang@amd.com>,
+	"Gautham R. Shenoy" <gautham.shenoy@amd.com>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Perry Yuan <perry.yuan@amd.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Martin KaFai Lau <martin.lau@linux.dev>,
+	Eduard Zingerman <eddyz87@gmail.com>,
+	Song Liu <song@kernel.org>,
+	Yonghong Song <yonghong.song@linux.dev>,
+	John Fastabend <john.fastabend@gmail.com>,
+	KP Singh <kpsingh@kernel.org>,
+	Stanislav Fomichev <sdf@fomichev.me>,
+	Hao Luo <haoluo@google.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Dwaipayan Ray <dwaipayanray1@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+	Joe Perches <joe@perches.com>,
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	Vincenzo Frascino <vincenzo.frascino@arm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Eric Biggers <ebiggers@kernel.org>,
+	tytso@mit.edu,
+	Richard Weinberger <richard@nod.at>,
+	Zhihao Cheng <chengzhihao1@huawei.com>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nicolas Schier <nicolas.schier@linux.dev>,
+	Ingo Molnar <mingo@redhat.com>,
+	Will Deacon <will@kernel.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Waiman Long <longman@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Shay Agroskin <shayagr@amazon.com>,
+	Arthur Kiyanovski <akiyano@amazon.com>,
+	David Arinzon <darinzon@amazon.com>,
+	Saeed Bishara <saeedb@amazon.com>,
+	Andrew Lunn <andrew@lunn.ch>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Alexandru Ciobotaru <alcioa@amazon.com>,
+	The AWS Nitro Enclaves Team <aws-nitro-enclaves-devel@amazon.com>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Steve French <stfrench@microsoft.com>,
+	Meetakshi Setiya <msetiya@microsoft.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <linux@weissschuh.net>,
+	Masahiro Yamada <masahiroy@kernel.org>
+Subject: Re: [PATCH 02/14] Documentation: damon: reclaim: Convert "Free Page Reporting" citation link
+Date: Fri, 29 Aug 2025 08:36:58 -0700
+Message-Id: <20250829153658.69466-1-sj@kernel.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250829075524.45635-3-bagasdotme@gmail.com>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,59 +155,21 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Xin Li <xin3.li@intel.com>
+On Fri, 29 Aug 2025 14:55:12 +0700 Bagas Sanjaya <bagasdotme@gmail.com> wrote:
 
-Allow nVMX FRED controls as nested FRED support is in place.
+> Use internal cross-reference for the citation link to Free Page
+> Reporting docs.
 
-Signed-off-by: Xin Li <xin3.li@intel.com>
-Signed-off-by: Xin Li (Intel) <xin@zytor.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
-Tested-by: Xuelian Guo <xuelian.guo@intel.com>
----
+Thank you for fixing this!
 
-Change in v5:
-* Add TB from Xuelian Guo.
----
- arch/x86/kvm/vmx/nested.c | 5 +++--
- arch/x86/kvm/vmx/vmx.c    | 1 +
- 2 files changed, 4 insertions(+), 2 deletions(-)
+> 
+> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 
-diff --git a/arch/x86/kvm/vmx/nested.c b/arch/x86/kvm/vmx/nested.c
-index 266115525b9e..0b266e95db60 100644
---- a/arch/x86/kvm/vmx/nested.c
-+++ b/arch/x86/kvm/vmx/nested.c
-@@ -7436,7 +7436,8 @@ static void nested_vmx_setup_exit_ctls(struct vmcs_config *vmcs_conf,
- 		 * advertise any feature in it to nVMX until its nVMX support
- 		 * is ready.
- 		 */
--		msrs->secondary_exit_ctls &= 0;
-+		msrs->secondary_exit_ctls &= SECONDARY_VM_EXIT_SAVE_IA32_FRED |
-+					     SECONDARY_VM_EXIT_LOAD_IA32_FRED;
- 	}
- }
- 
-@@ -7452,7 +7453,7 @@ static void nested_vmx_setup_entry_ctls(struct vmcs_config *vmcs_conf,
- 		VM_ENTRY_IA32E_MODE |
- #endif
- 		VM_ENTRY_LOAD_IA32_PAT | VM_ENTRY_LOAD_BNDCFGS |
--		VM_ENTRY_LOAD_CET_STATE;
-+		VM_ENTRY_LOAD_CET_STATE | VM_ENTRY_LOAD_IA32_FRED;
- 	msrs->entry_ctls_high |=
- 		(VM_ENTRY_ALWAYSON_WITHOUT_TRUE_MSR | VM_ENTRY_LOAD_IA32_EFER |
- 		 VM_ENTRY_LOAD_IA32_PERF_GLOBAL_CTRL);
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index c280e4cd4485..8d61b9b8bd9b 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -7964,6 +7964,7 @@ static void nested_vmx_cr_fixed1_bits_update(struct kvm_vcpu *vcpu)
- 
- 	entry = kvm_find_cpuid_entry_index(vcpu, 0x7, 1);
- 	cr4_fixed1_update(X86_CR4_LAM_SUP,    eax, feature_bit(LAM));
-+	cr4_fixed1_update(X86_CR4_FRED,       eax, feature_bit(FRED));
- 
- #undef cr4_fixed1_update
- }
--- 
-2.51.0
+Reviewed-by: SeongJae Park <sj@kernel.org>
 
+
+Thanks,
+SJ
+
+[...]
 
