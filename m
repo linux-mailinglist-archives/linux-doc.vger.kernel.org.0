@@ -1,140 +1,130 @@
-Return-Path: <linux-doc+bounces-57892-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-57889-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCB04B3B168
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 05:07:09 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F9EDB3B158
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 05:05:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 421B1A0300A
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 03:06:40 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 306E256442B
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Aug 2025 03:05:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7B432236E5;
-	Fri, 29 Aug 2025 03:05:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA8DF224891;
+	Fri, 29 Aug 2025 03:05:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="P7NB0q0r"
+	dkim=pass (2048-bit key) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="pvzkBOKm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz [202.36.163.20])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4370C22256F;
-	Fri, 29 Aug 2025 03:05:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED92B221FDA
+	for <linux-doc@vger.kernel.org>; Fri, 29 Aug 2025 03:05:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.36.163.20
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756436740; cv=none; b=D9N7UMETUpLQzXIXXrgF4eXnX9WEwkZOC08LCHWFTguDZxZNNeKSoe6T3uZOTVcme3jHNOXhOvgFrIVBQTXX11FYuBCw98FrAbDbhCr5Dg7IXzJCZAIixOZOAXc4YPrgdXJDUbC/0qa9JObmpbzHTAZQzp9e53ceGvIdMnKFK2U=
+	t=1756436726; cv=none; b=QuIUfStU1o6o8hCWnyGneT+PW5MWQqY+8b10fUIv4hLn/7jlT3qFtgXZHrZqActGfKarXsIGQMTSF4OXfAsA1izFTlZ5SHLEmCF8+i0+I9ZNTlTbxccxZbFCj/hJHAUN/WWVcowMThqH9kdHsoJteU2awlaf70Zi++QiJy6ss+8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756436740; c=relaxed/simple;
-	bh=AIBuNQqIkGuV4P+bJp7hqxoHQqtC9eBLltRVRaguEk0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=sltFA1/HV2M7rQ2LAo7UgHqcxgdC/nSrX7pbwrbr4xhR72KrgTI2dYlDj+JR4KgvmrF8261Xdb+aAXM1T+0Ecmk8WacX/3t5botjiAwmd8ZJOM9X+Z5scM8+YUg7AXP35Oc0rx4iCCTyj1NapEuzJAWHQDHgwq9qjgaXYmz4Y28=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=P7NB0q0r; arc=none smtp.client-ip=209.85.219.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-70ba7aa13dcso14665786d6.3;
-        Thu, 28 Aug 2025 20:05:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1756436738; x=1757041538; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rm9UORu61ILt8i4V4EUJUDwciURTt9U7GCvX8oYPwcg=;
-        b=P7NB0q0rcpOAk21iczbOO/vI/XaXKs9ujIyKl/BDMEn/htfpXv+O8LQosLEjHrGGnP
-         YOLC/QK46NNHvKmaeYMU0E6E/thm6bhXIqtje/qE5Eh0H965ufxQvkUHENmNLHXA1rCj
-         vzQ29wEmkP7+Ejzv1CBTP9Cyl8T7wOVICxXCSSkl+55TaSfbYhT4rSKOydBieVtnoy1E
-         0IMEbjrquGksvCufVAGcCki7bTSPS3k8Qn+ArCaVVzGaQMIvP9CL/egV/Tvzu9GQH59D
-         HOF8uy5LR+efgzXEwuegeht76eojbhhqKewDPjRUXT7DDoNhZ+HGgE0LKAGHLWTyde6n
-         uvGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1756436738; x=1757041538;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rm9UORu61ILt8i4V4EUJUDwciURTt9U7GCvX8oYPwcg=;
-        b=ufs81PRrtjEjfoFdDeQgI2EfYaFwNPgyj+9wpiAObvZe8jvwaL671VnBRvsiBDrOMe
-         lpQ3yPo+/9V+P3/NikoBh9Mte+FsLS+OfzRenOcO9I99pDGwKgFelE8yQyeCDPd3/X9X
-         8F/ZcuM3Rf7KqQxu6olIogIA+3rBWivne1jXA8TMA7M6AOg9RRQEdHYJPacL3tO+vJw4
-         lv4aBDV/rlPL5dfpxazMhg7tqN3HpWGtAUPoAaMNn88C8ygLmyaktkBN1MUrszSKAx1q
-         hVEzgu0tlbbg5ox3+Rms9Uk44BXnaJlHA67nwl4KK38lnrpZSAiycLWUHwo63Pge6Tje
-         XVfg==
-X-Forwarded-Encrypted: i=1; AJvYcCWdbQD6gLShkP6BVw3T1iSfl2qsCCP1okQBCwJobxqm1O0yvJzrvgfwX9e/WsejcPHREIY=@vger.kernel.org, AJvYcCX+5lkg/QEfFtNfRSLjLBfYq6dz/Mxe/zhQ6518Qo6HjPYiZ66haiujIKDtJsO9UloOSG6yqXDPKe1M@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxvk4Poz0iky6GthV8VU+kEGktpSbHewWxQ47u/M8/MdAX0bOY/
-	fSlQDqTh2BMAbkLuYYT+LUjAdAasGwpy+OolKMuUwTb0OdmdlfE+EErksJyF3szsnbjE5Gu/1rN
-	2CAP7E+gTXduZBsy0ywOtPLswiP090Js=
-X-Gm-Gg: ASbGncsLnzatC7Px10p2XMkmx0j3numGe98E5fHZYbH1SnLvR4dUcwY3pYI7hspOYu3
-	Yrkh6JCBuOdoNYG9FVx11XJ4FLQZYiBaCLlwDgLpzwQxKfP/t3MVug2/2OKjJv5gOkG3vNN6nF5
-	LI36Fz3FNYbIa+zSMl7y2Kytw0PTDVCY4U+t79tNAaWjPg4/9FaWYIqVe9uydxrxt32zSyo3MCq
-	ZAhfo+X27nplcj0kXS+ZOWUfxHy7+11Mrxzd9Q=
-X-Google-Smtp-Source: AGHT+IFXdA7LJArbjhB50zi9oIGtUBIHMcF+ph6Q/htUjjp/1ateQP201klw17fLGsGNyNz6MLeHTAPUSbdTC5BQtKg=
-X-Received: by 2002:a05:6214:248c:b0:70d:cd1a:4a43 with SMTP id
- 6a1803df08f44-70dcd1a4ad2mr152609386d6.46.1756436737975; Thu, 28 Aug 2025
- 20:05:37 -0700 (PDT)
+	s=arc-20240116; t=1756436726; c=relaxed/simple;
+	bh=1++jJYuzNykA5VvnqPYFpQYjkH2amH6zLJAIV6vVzOc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HlERRgiFAaqdURp38K5y7MKLpvKl0pjE75lQF9SYY8+sUtngshFPxAy811vSRROYKdVtevkLy/KRIsuILCWRTirouylPxNygLkmuaLUjLGX5wbHZR68oBKZB3/a/BCiFwUFC3QcQWu1DFw0dZMFxQc0BGZ4DU0CJZtL6v3/Uj4w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz; spf=pass smtp.mailfrom=alliedtelesis.co.nz; dkim=pass (2048-bit key) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b=pvzkBOKm; arc=none smtp.client-ip=202.36.163.20
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alliedtelesis.co.nz
+Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 5F5E02C08CC;
+	Fri, 29 Aug 2025 15:05:15 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+	s=mail181024; t=1756436715;
+	bh=P9bZIoYjbV+nZf/wxT97YQo37CNMsR7rVL380oiGi3E=;
+	h=From:To:Cc:Subject:Date:From;
+	b=pvzkBOKmTvDyuN+19u1PvNzwYlFFW9eA7v0BB/2ASHCVjdyvqYqo6MSv5tTuHACK/
+	 0bu8nfgZJ5HXxSyq+BqcNuNiBYOYzys8iCF2aHv/XeyYoJ64jZ1tDMgT8eY24GnsKI
+	 RG7JWo8mVCddRemC0/Tgl2vgTttCOXJD53nWXPPS/Uni4ogYw1cQKeS7gt6eD5mQNM
+	 NVIfHtYY7qBC8JzOzOCuZ2g+Q4iiRwBT79vQZJUVWcZ8yPDhd39YQt+NngK5n356Tg
+	 sGDJu9IZxs7JaotTa6BLHf8/u1KdlilDAOGli7NmYiR4utCDRAAY86cvpHekUHX07M
+	 268D3/jNl2JmA==
+Received: from pat.atlnz.lc (Not Verified[10.32.16.33]) by svr-chch-seg1.atlnz.lc with Trustwave SEG (v8,2,6,11305)
+	id <B68b118eb0000>; Fri, 29 Aug 2025 15:05:15 +1200
+Received: from chrisp-dl.ws.atlnz.lc (chrisp-dl.ws.atlnz.lc [10.33.22.30])
+	by pat.atlnz.lc (Postfix) with ESMTP id 1859713EE41;
+	Fri, 29 Aug 2025 15:05:15 +1200 (NZST)
+Received: by chrisp-dl.ws.atlnz.lc (Postfix, from userid 1030)
+	id 140D3280725; Fri, 29 Aug 2025 15:05:15 +1200 (NZST)
+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
+To: jdelvare@suse.com,
+	linux@roeck-us.net,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	corbet@lwn.net,
+	wenliang202407@163.com,
+	jre@pengutronix.de
+Cc: linux-hwmon@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Chris Packham <chris.packham@alliedtelesis.co.nz>
+Subject: [PATCH v3 0/4] hwmon: Add support for INA780
+Date: Fri, 29 Aug 2025 15:05:08 +1200
+Message-ID: <20250829030512.1179998-1-chris.packham@alliedtelesis.co.nz>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250826071948.2618-1-laoar.shao@gmail.com> <20250826071948.2618-5-laoar.shao@gmail.com>
- <bca7698c-7617-4584-afaa-4c3d2c971a79@lucifer.local> <CALOAHbDxxN8CsGwAWQU4XRkG8NvU-chbiDv=oKW0mADSf1vaiQ@mail.gmail.com>
- <b335afe9-be7a-46bb-bf92-37abf806d164@lucifer.local>
-In-Reply-To: <b335afe9-be7a-46bb-bf92-37abf806d164@lucifer.local>
-From: Yafang Shao <laoar.shao@gmail.com>
-Date: Fri, 29 Aug 2025 11:05:01 +0800
-X-Gm-Features: Ac12FXyRkVAu3IBFWqROm107KDRmxs-OaNCft6vWe5MQxiSekVcD1hUUDL-ITVU
-Message-ID: <CALOAHbApv0Sj25La7EQZg7UBxfvkfMXpGPtNrYKABSYpNV6ORA@mail.gmail.com>
-Subject: Re: [PATCH v6 mm-new 04/10] bpf: mark vma->vm_mm as trusted
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: akpm@linux-foundation.org, david@redhat.com, ziy@nvidia.com, 
-	baolin.wang@linux.alibaba.com, Liam.Howlett@oracle.com, npache@redhat.com, 
-	ryan.roberts@arm.com, dev.jain@arm.com, hannes@cmpxchg.org, 
-	usamaarif642@gmail.com, gutierrez.asier@huawei-partners.com, 
-	willy@infradead.org, ast@kernel.org, daniel@iogearbox.net, andrii@kernel.org, 
-	ameryhung@gmail.com, rientjes@google.com, corbet@lwn.net, bpf@vger.kernel.org, 
-	linux-mm@kvack.org, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-SEG-SpamProfiler-Analysis: v=2.4 cv=Yo+sRJYX c=1 sm=1 tr=0 ts=68b118eb a=KLBiSEs5mFS1a/PbTCJxuA==:117 a=2OwXVqhp2XgA:10 a=VwQbUJbxAAAA:8 a=C3wMKfzXq0U6J_64E7oA:9 a=3ZKOabzyN94A:10
+X-SEG-SpamProfiler-Score: 0
+x-atlnz-ls: pat
 
-On Thu, Aug 28, 2025 at 7:11=E2=80=AFPM Lorenzo Stoakes
-<lorenzo.stoakes@oracle.com> wrote:
->
-> On Thu, Aug 28, 2025 at 02:12:12PM +0800, Yafang Shao wrote:
-> > On Wed, Aug 27, 2025 at 11:46=E2=80=AFPM Lorenzo Stoakes
-> > <lorenzo.stoakes@oracle.com> wrote:
-> > >
-> > > On Tue, Aug 26, 2025 at 03:19:42PM +0800, Yafang Shao wrote:
-> > > > Every VMA must have an associated mm_struct, and it is safe to acce=
-ss
-> > >
-> > > Err this isn't true? Pretty sure special VMAs don't have that set.
-> >
-> > I=E2=80=99m not aware of any VMA that doesn=E2=80=99t belong to an mm_s=
-truct. If there
-> > is such a case, it would be helpful if you could point it out. In any
-> > case, I=E2=80=99ll remove the VMA-related code in the next version sinc=
-e it=E2=80=99s
-> > unnecessary.
->
-> If you lok at get_vma_name() in fs/proc/task_mmu.c you'll see:
->
->         if (!vma->vm_mm) {
->                 *name =3D "[vdso]";
->                 return;
->         }
->
-> So a VDSO will have this condition.
->
-> I did a quick drgn()/printk() test and didn't see any, but maybe my syste=
-m - but
-> in any case this appears to be a valid situation that can arise, presumab=
-ly
-> because it's a VMA somehow shared with multiple mm's or something truly g=
-od
-> awful like that :)
+This series adds support for the INA780 to the existing ina238.c driver.
 
-Thanks for clarifying that.
+v2: https://lore.kernel.org/linux-hwmon/20250808030510.552724-1-chris.pac=
+kham@alliedtelesis.co.nz/
+v1: https://lore.kernel.org/linux-hwmon/20250806005127.542298-1-chris.pac=
+kham@alliedtelesis.co.nz/
+
+One important bit of feedback I've not addressed is this
+
+> Follow-up: I ordered evaluation boards for INA228, INA237, INA238, and =
+INA780A.
+> I'll want to see support added for current limits on all chips, using a=
+ similar
+> approach as the one in the ina2xx driver. After all, the shunt voltage =
+limits
+> are really current limits in disguise. With that and appropriate chip s=
+pecific
+> parameters the differences between the chips should become relatively m=
+inor.
+>
+> This should also simplify adding support for INA700 which seems similar=
+ to INA780A.
+
+I wasn't sure if that meant you were going to look at adding current limi=
+ts to
+the existing chips and I should wait or if you wanted me to try based on =
+the
+code. Given our timezone differences I figured I'd send the series anyway=
+.
+Patch 2 is a bugfix that you might want to pick up sooner.
+
+Chris Packham (4):
+  dt-bindings: hwmon: ti,ina2xx: Add INA780 device
+  hwmon: (ina238) Correctly clamp temperature
+  hwmon: (ina238) Add ina238_config fields
+  hwmon: (ina238) Add support for INA780
+
+ .../devicetree/bindings/hwmon/ti,ina2xx.yaml  |   1 +
+ Documentation/hwmon/ina238.rst                |  20 ++
+ drivers/hwmon/ina238.c                        | 273 ++++++++++++++----
+ 3 files changed, 238 insertions(+), 56 deletions(-)
 
 --=20
-Regards
-Yafang
+2.51.0
+
 
