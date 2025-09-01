@@ -1,63 +1,67 @@
-Return-Path: <linux-doc+bounces-58244-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58246-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E71A5B3E786
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Sep 2025 16:43:02 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D2FFB3E79B
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Sep 2025 16:47:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9E1E93BEC2E
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Sep 2025 14:43:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6C869160403
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Sep 2025 14:46:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5BB93343203;
-	Mon,  1 Sep 2025 14:42:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8E903431E5;
+	Mon,  1 Sep 2025 14:44:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NULceRIE"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rE/UMgkN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C7F4342C83;
-	Mon,  1 Sep 2025 14:42:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85C722EF653;
+	Mon,  1 Sep 2025 14:44:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756737758; cv=none; b=DwJlqoccGiicJccPwXr1GTduvF8Q1k5i2x3tE+NQ4pcKe+eOEe20fv6rqvbUMVVC1Gr4noEgXr0Ppd7K9QZezKOAUml9T1T0oV0KKPgzChqjq5cQkkOhY2v5jAyHSuJPGAL19ECenr32okFRSt8k3QoLyf4DYJ3EBv0FE2TU4oU=
+	t=1756737880; cv=none; b=IegbCq4PK074yQDH8vwiW4QYUxrSVjV/LTS+b0DdKb3B8NafP2WsPF3/drnIgkKxXZAVga34j3Y0E0sLU1zlZTsHbzutMABwFb51xY3rUJgGu9TzeQnl0Ds5fNTPOqG2BjqYH+sl4Knz+c2mR5ZHT2+LjOI67CiWRkgorMldbdU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756737758; c=relaxed/simple;
-	bh=Cb16z1/0cG8uXX9y27PAi61cRM0Ept/VZmAGlenSmQY=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ooX83Ld3DJZM2efKJAWPMvnKJfxI7g4VFOAZkfSIu1nfwJwHX7gvBoHIsCZ43EpvrVxQBeNcXdw0zILNFCNae59GKfd0kVOdXrJ2Uz+o+M8rSl+J2e8HwY3CbAMM6WZwHhFw9XDeQeh7T20Zn+MaMGJpN4r941N77mQGYHTOIoQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NULceRIE; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A45BEC19421;
-	Mon,  1 Sep 2025 14:42:37 +0000 (UTC)
+	s=arc-20240116; t=1756737880; c=relaxed/simple;
+	bh=rOQuaa8RDkK43QH4byDdVI+QZow0U6m4AZGslI0lojk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=BjBv9aM98h3OtWKlICoJ4vJxS+yOz76IdcHrO3stpBNc9jCsbp50ZFL/W39BOMhUnlRIHYaKfC3Qo29Md8DvHW3uDF40bZMcVENW05Xj+0z1mYXT/67N7Un4RBgXsi8zpd43+lpTEPuPduukqSi1gKd4WMF++t18/99AhLGl1fI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rE/UMgkN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54952C4CEF0;
+	Mon,  1 Sep 2025 14:44:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756737757;
-	bh=Cb16z1/0cG8uXX9y27PAi61cRM0Ept/VZmAGlenSmQY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=NULceRIE2ddUpVqust0BYHUM4Lpz7zKbgYK8/oqyt8XbRKI7iQb4bS+wQufb9W+Og
-	 /E/2JGHhMbMi0GtKM3sB3wrQrH5BqYFBuqZoew+Az/mC3jUDtx4aq9/JREftzncgfj
-	 dfZLuMZye2uUs/cHSKJsGVmNZXw9OgPRM0DbK74UT8QS0Z7bSJWlff78JLO+oGYSv/
-	 ykUmQ80Li2wi9kyl/YwJbM1J3BbChWTR716F4y9zL9BmiKusHClaXMwUPoT7Pkbmtn
-	 qoJpc0d50Unl1L2u0Mczq8qYMmR3zxlaQvK7seDNw0hd6UBjcHtdndZMsm9Wypr2YN
-	 ahRxA4s9zlLoA==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1ut5jv-00000003G44-3jxE;
-	Mon, 01 Sep 2025 16:42:35 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 15/15] tools: kernel-doc: add a see also section at man
-  pages
-Date: Mon,  1 Sep 2025 16:42:31 +0200
-Message-ID: <2c5ede8d8bf6ea87e82555eb072eb64c1cf7afab.1756737440.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <cover.1756737440.git.mchehab+huawei@kernel.org>
-References: <cover.1756737440.git.mchehab+huawei@kernel.org>
+	s=k20201202; t=1756737880;
+	bh=rOQuaa8RDkK43QH4byDdVI+QZow0U6m4AZGslI0lojk=;
+	h=From:To:Cc:Subject:Date:From;
+	b=rE/UMgkNnYVi4ZNLy8sjvPBhINyu5faw4K0yw857IeiDzM82os/aOyNuW6Wj8YdH6
+	 3QGsDyOpCCQAqmq43Bk5LlQ0cVMl5Q7jZki+gmCkk7lZL2citbZSzH0Wow5q8oUgga
+	 7LGVs4CURcQ7X06kjMbR+lOIcXVH+jDsK+BZeJfi0Jffg3Rtl2fx7OoPwKt2ojGBWI
+	 I59xIKRMfFJa4SLxDXI+y/yidmO6aKwfGpqciBpWLJ957jHbJCqSjrNcOD3pHkMsje
+	 z5QtHULPQ7rpw0DGpMQO/wiGuWKI4mmTDz67K4fha8Sar6ZPt0xrrURTe7OWsq3/Y8
+	 RYcAsnZouu0GQ==
+From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
+To: Steven Rostedt <rostedt@goodmis.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Ingo Molnar <mingo@kernel.org>,
+	x86@kernel.org
+Cc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H . Peter Anvin" <hpa@zytor.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Ian Rogers <irogers@google.com>,
+	linux-kernel@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-perf-users@vger.kernel.org
+Subject: [RFC PATCH 0/6] tracing: wprobe: Add wprobe for watchpoint
+Date: Mon,  1 Sep 2025 23:44:35 +0900
+Message-ID: <175673787502.478080.3342912952394010967.stgit@devnote2>
+X-Mailer: git-send-email 2.43.0
+User-Agent: StGit/0.19
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,267 +69,124 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Transfer-Encoding: 8bit
 
-V2hpbGUgY3Jvc3MtcmVmZXJlbmNlcyBhcmUgY29tcGxleCwgYXMgcmVsYXRlZCBvbmVzIGNhbiB=
-i=0D
-ZSBvbgpkaWZmZXJlbnQgZmlsZXMsIHdlIGNhbiBhdCBsZWFzdCBjb3JyZWxhdGUgdGhlIG9uZXM=
-g=0D
-dGhhdCBiZWxvbmcKdG8gdGhlIHNhbWUgZmlsZSwgYWRkaW5nIGEgU0VFIEFMU08gc2VjdGlvbiB=
-m=0D
-b3IgdGhlbS4KClRoZSByZXN1bHQgaXMgbm90IGJhZC4gU2VlIGZvciBpbnN0YW5jZToKCgkkIHR=
-v=0D
-b2xzL2RvY3Mvc3BoaW54LWJ1aWxkLXdyYXBwZXIgLS1zcGhpbnhkaXJzIGRyaXZlci1hcGkvbWV=
-k=0D
-aWEgLS0gbWFuZG9jcwoJJCBtYW4gRG9jdW1lbnRhdGlvbi9vdXRwdXQvZHJpdmVyLWFwaS9tYW4=
-v=0D
-ZWRhY19wY2lfYWRkX2RldmljZS45CgoJZWRhY19wY2lfYWRkX2RldmljZSg5KSAgS2VybmVsIEh=
-h=0D
-Y2tlcidzIE1hbnVhbCAgZWRhY19wY2lfYWRkX2RldmljZSg5KQoKCU5BTUUKCSAgICAgICBlZGF=
-j=0D
-X3BjaV9hZGRfZGV2aWNlICAtIEluc2VydCB0aGUgJ2VkYWNfZGV2JyBzdHJ1Y3R1cmUgaW50byB=
-0=0D
-aGUKCSAgICAgICBlZGFjX3BjaSBnbG9iYWwgbGlzdCBhbmQgY3JlYXRlIHN5c2ZzIGVudHJpZXM=
-g=0D
-IGFzc29jaWF0ZWQgIHdpdGgKCSAgICAgICBlZGFjX3BjaSBzdHJ1Y3R1cmUuCgoJU1lOT1BTSVM=
-K=0D
-CSAgICAgICBpbnQgIGVkYWNfcGNpX2FkZF9kZXZpY2UgIChzdHJ1Y3QgIGVkYWNfcGNpX2N0bF9=
-p=0D
-bmZvICpwY2kgLCBpbnQKCSAgICAgICBlZGFjX2lkeCApOwoKCUFSR1VNRU5UUwoJICAgICAgIHB=
-j=0D
-aSAgICAgICAgIHBvaW50ZXIgdG8gdGhlIGVkYWNfZGV2aWNlIHN0cnVjdHVyZSB0byBiZSBhZGR=
-l=0D
-ZCB0bwoJICAgICAgICAgICAgICAgICAgIHRoZSBsaXN0CgoJICAgICAgIGVkYWNfaWR4ICAgIEE=
-g=0D
-dW5pcXVlIG51bWVyaWMgaWRlbnRpZmllciB0byBiZSBhc3NpZ25lZCB0byB0aGUKCglSRVRVUk4=
-K=0D
-CSAgICAgICAwIG9uIFN1Y2Nlc3MsIG9yIGFuIGVycm9yIGNvZGUgb24gZmFpbHVyZQoKCVNFRSB=
-B=0D
-TFNPCgkgICAgICAgZWRhY19wY2lfYWxsb2NfY3RsX2luZm8oOSksICAgICAgICAgIGVkYWNfcGN=
-p=0D
-X2ZyZWVfY3RsX2luZm8oOSksCgkgICAgICAgZWRhY19wY2lfYWxsb2NfaW5kZXgoOSksICBlZGF=
-j=0D
-X3BjaV9kZWxfZGV2aWNlKDkpLCBlZGFjX3BjaV9jcmXigJAKCSAgICAgICBhdGVfZ2VuZXJpY19=
-j=0D
-dGwoOSksICAgICAgICAgICAgZWRhY19wY2lfcmVsZWFzZV9nZW5lcmljX2N0bCg5KSwKCSAgICA=
-g=0D
-ICBlZGFjX3BjaV9jcmVhdGVfc3lzZnMoOSksIGVkYWNfcGNpX3JlbW92ZV9zeXNmcyg5KQoKCUF=
-1=0D
-Z3VzdCAyMDI1ICAgICAgICAgICAgICAgZWRhY19wY2lfYWRkX2RldmljZSAgIGVkYWNfcGNpX2F=
-k=0D
-ZF9kZXZpY2UoOSkKClNpZ25lZC1vZmYtYnk6IE1hdXJvIENhcnZhbGhvIENoZWhhYiA8bWNoZWh=
-h=0D
-YitodWF3ZWlAa2VybmVsLm9yZz4KLS0tCiBzY3JpcHRzL2xpYi9rZG9jL2tkb2NfZmlsZXMucHk=
-g=0D
-IHwgIDUgKy0KIHNjcmlwdHMvbGliL2tkb2Mva2RvY19vdXRwdXQucHkgfCA4NCArKysrKysrKys=
-r=0D
-KysrKysrKysrKysrKysrKysrKysrLS0KIDIgZmlsZXMgY2hhbmdlZCwgODMgaW5zZXJ0aW9ucyg=
-r=0D
-KSwgNiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9zY3JpcHRzL2xpYi9rZG9jL2tkb2NfZml=
-s=0D
-ZXMucHkgYi9zY3JpcHRzL2xpYi9rZG9jL2tkb2NfZmlsZXMucHkKaW5kZXggOWUwOWI0NWIwMmZ=
-h=0D
-Li4wNjFjMDMzZjMyZGEgMTAwNjQ0Ci0tLSBhL3NjcmlwdHMvbGliL2tkb2Mva2RvY19maWxlcy5=
-w=0D
-eQorKysgYi9zY3JpcHRzL2xpYi9rZG9jL2tkb2NfZmlsZXMucHkKQEAgLTI3NSw3ICsyNzUsMTA=
-g=0D
-QEAgY2xhc3MgS2VybmVsRmlsZXMoKToKICAgICAgICAgICAgICAgICBzZWxmLmNvbmZpZy5sb2c=
-u=0D
-d2FybmluZygiTm8ga2VybmVsLWRvYyBmb3IgZmlsZSAlcyIsIGZuYW1lKQogICAgICAgICAgICA=
-g=0D
-ICAgIGNvbnRpbnVlCiAKLSAgICAgICAgICAgIGZvciBhcmcgaW4gc2VsZi5yZXN1bHRzW2ZuYW1=
-l=0D
-XToKKyAgICAgICAgICAgIHN5bWJvbHMgPSBzZWxmLnJlc3VsdHNbZm5hbWVdCisgICAgICAgICA=
-g=0D
-ICBzZWxmLm91dF9zdHlsZS5zZXRfc3ltYm9scyhzeW1ib2xzKQorCisgICAgICAgICAgICBmb3I=
-g=0D
-YXJnIGluIHN5bWJvbHM6CiAgICAgICAgICAgICAgICAgbSA9IHNlbGYub3V0X21zZyhmbmFtZSw=
-g=0D
-YXJnLm5hbWUsIGFyZykKIAogICAgICAgICAgICAgICAgIGlmIG0gaXMgTm9uZToKZGlmZiAtLWd=
-p=0D
-dCBhL3NjcmlwdHMvbGliL2tkb2Mva2RvY19vdXRwdXQucHkgYi9zY3JpcHRzL2xpYi9rZG9jL2t=
-k=0D
-b2Nfb3V0cHV0LnB5CmluZGV4IGVhODkxNDUzN2JhMC4uMWVjYTlhOTE4NTU4IDEwMDY0NAotLS0=
-g=0D
-YS9zY3JpcHRzL2xpYi9rZG9jL2tkb2Nfb3V0cHV0LnB5CisrKyBiL3NjcmlwdHMvbGliL2tkb2M=
-v=0D
-a2RvY19vdXRwdXQucHkKQEAgLTIxNSw2ICsyMTUsOSBAQCBjbGFzcyBPdXRwdXRGb3JtYXQ6CiA=
-K=0D
-ICAgICAjIFZpcnR1YWwgbWV0aG9kcyB0byBiZSBvdmVycmlkZGVuIGJ5IGluaGVyaXRlZCBjbGF=
-z=0D
-c2VzCiAgICAgIyBBdCB0aGUgYmFzZSBjbGFzcywgdGhvc2UgZG8gbm90aGluZy4KKyAgICBkZWY=
-g=0D
-c2V0X3N5bWJvbHMoc2VsZiwgc3ltYm9scyk6CisgICAgICAgICIiIkdldCBhIGxpc3Qgb2YgYWx=
-s=0D
-IHN5bWJvbHMgZnJvbSBrZXJuZWxfZG9jIiIiCisKICAgICBkZWYgb3V0X2RvYyhzZWxmLCBmbmF=
-t=0D
-ZSwgbmFtZSwgYXJncyk6CiAgICAgICAgICIiIk91dHB1dHMgYSBET0MgYmxvY2siIiIKIApAQCA=
-t=0D
-NTc3LDYgKzU4MCw3IEBAIGNsYXNzIE1hbkZvcm1hdChPdXRwdXRGb3JtYXQpOgogCiAgICAgICA=
-g=0D
-IHN1cGVyKCkuX19pbml0X18oKQogICAgICAgICBzZWxmLm1vZHVsZW5hbWUgPSBtb2R1bGVuYW1=
-l=0D
-CisgICAgICAgIHNlbGYuc3ltYm9scyA9IFtdCiAKICAgICAgICAgZHQgPSBOb25lCiAgICAgICA=
-g=0D
-IHRzdGFtcCA9IG9zLmVudmlyb24uZ2V0KCJLQlVJTERfQlVJTERfVElNRVNUQU1QIikKQEAgLTU=
-5=0D
-Myw2ICs1OTcsNjggQEAgY2xhc3MgTWFuRm9ybWF0KE91dHB1dEZvcm1hdCk6CiAKICAgICAgICA=
-g=0D
-c2VsZi5tYW5fZGF0ZSA9IGR0LnN0cmZ0aW1lKCIlQiAlWSIpCiAKKyAgICBkZWYgYXJnX25hbWU=
-o=0D
-c2VsZiwgYXJncywgbmFtZSk6CisgICAgICAgICIiIgorICAgICAgICBSZXR1cm4gdGhlIG5hbWU=
-g=0D
-dGhhdCB3aWxsIGJlIHVzZWQgZm9yIHRoZSBtYW4gcGFnZS4KKworICAgICAgICBBcyB3ZSBtYXk=
-g=0D
-aGF2ZSB0aGUgc2FtZSBuYW1lIG9uIGRpZmZlcmVudCBuYW1lc3BhY2VzLAorICAgICAgICBwcmV=
-w=0D
-ZW5kIHRoZSBkYXRhIHR5cGUgZm9yIGFsbCB0eXBlcyBleGNlcHQgZnVuY3Rpb25zIGFuZCB0eXB=
-l=0D
-ZGVmcy4KKworICAgICAgICBUaGUgZG9jIHNlY3Rpb24gaXMgc3BlY2lhbDogaXQgdXNlcyB0aGU=
-g=0D
-bW9kdWxlbmFtZS4KKyAgICAgICAgIiIiCisKKyAgICAgICAgZHR5cGUgPSBhcmdzLnR5cGUKKwo=
-r=0D
-ICAgICAgICBpZiBkdHlwZSA9PSAiZG9jIjoKKyAgICAgICAgICAgIHJldHVybiBzZWxmLm1vZHV=
-s=0D
-ZW5hbWUKKworICAgICAgICBpZiBkdHlwZSBpbiBbImZ1bmN0aW9uIiwgInR5cGVkZWYiXToKKyA=
-g=0D
-ICAgICAgICAgIHJldHVybiBuYW1lCisKKyAgICAgICAgcmV0dXJuIGYie2R0eXBlfSB7bmFtZX0=
-i=0D
-CisKKyAgICBkZWYgc2V0X3N5bWJvbHMoc2VsZiwgc3ltYm9scyk6CisgICAgICAgICIiIgorICA=
-g=0D
-ICAgICBHZXQgYSBsaXN0IG9mIGFsbCBzeW1ib2xzIGZyb20ga2VybmVsX2RvYy4KKworICAgICA=
-g=0D
-ICBNYW4gcGFnZXMgd2lsbCB1c2VzIGl0IHRvIGFkZCBhIFNFRSBBTFNPIHNlY3Rpb24gd2l0aCB=
-v=0D
-dGhlcgorICAgICAgICBzeW1ib2xzIGF0IHRoZSBzYW1lIGZpbGUuCisgICAgICAgICIiIgorICA=
-g=0D
-ICAgICBzZWxmLnN5bWJvbHMgPSBzeW1ib2xzCisKKyAgICBkZWYgb3V0X3RhaWwoc2VsZiwgZm5=
-h=0D
-bWUsIG5hbWUsIGFyZ3MpOgorICAgICAgICAiIiJBZGRzIGEgdGFpbCBmb3IgYWxsIG1hbiBwYWd=
-l=0D
-cyIiIgorCisgICAgICAgICMgU0VFIEFMU08gc2VjdGlvbgorICAgICAgICBpZiBsZW4oc2VsZi5=
-z=0D
-eW1ib2xzKSA+PSAyOgorICAgICAgICAgICAgY3VyX25hbWUgPSBzZWxmLmFyZ19uYW1lKGFyZ3M=
-s=0D
-IG5hbWUpCisKKyAgICAgICAgICAgIHNlbGYuZGF0YSArPSBmJy5TSCAiU0VFIEFMU08iJyArICJ=
-c=0D
-bi5QUFxuIgorICAgICAgICAgICAgcmVsYXRlZCA9IFtdCisgICAgICAgICAgICBmb3IgYXJnIGl=
-u=0D
-IHNlbGYuc3ltYm9sczoKKyAgICAgICAgICAgICAgICBvdXRfbmFtZSA9IHNlbGYuYXJnX25hbWU=
-o=0D
-YXJnLCBhcmcubmFtZSkKKworICAgICAgICAgICAgICAgIGlmIGN1cl9uYW1lID09IG91dF9uYW1=
-l=0D
-OgorICAgICAgICAgICAgICAgICAgICBjb250aW51ZQorCisgICAgICAgICAgICAgICAgcmVsYXR=
-l=0D
-ZC5hcHBlbmQoZiJcXGZCe291dF9uYW1lfVxcZlIoOSkiKQorCisgICAgICAgICAgICBzZWxmLmR=
-h=0D
-dGEgKz0gIixcbiIuam9pbihyZWxhdGVkKSArICJcbiIKKworICAgICAgICAjIFRPRE86IGRvZXM=
-g=0D
-aXQgbWFrZSBzZW5zZSB0byBhZGQgb3RoZXIgc2VjdGlvbnM/IE1heWJlCisgICAgICAgICMgUkV=
-Q=0D
-T1JUSU5HIElTU1VFUz8gTElDRU5TRT8KKworICAgIGRlZiBtc2coc2VsZiwgZm5hbWUsIG5hbWU=
-s=0D
-IGFyZ3MpOgorICAgICAgICAiIiIKKyAgICAgICAgSGFuZGxlcyBhIHNpbmdsZSBlbnRyeSBmcm9=
-t=0D
-IGtlcm5lbC1kb2MgcGFyc2VyLgorCisgICAgICAgIEFkZCBhIHRhaWwgYXQgdGhlIGVuZCBvZiB=
-t=0D
-YW4gcGFnZXMgb3V0cHV0LgorICAgICAgICAiIiIKKyAgICAgICAgc3VwZXIoKS5tc2coZm5hbWU=
-s=0D
-IG5hbWUsIGFyZ3MpCisgICAgICAgIHNlbGYub3V0X3RhaWwoZm5hbWUsIG5hbWUsIGFyZ3MpCis=
-K=0D
-KyAgICAgICAgcmV0dXJuIHNlbGYuZGF0YQorCiAgICAgZGVmIG91dHB1dF9oaWdobGlnaHQoc2V=
-s=0D
-ZiwgYmxvY2spOgogICAgICAgICAiIiIKICAgICAgICAgT3V0cHV0cyBhIEMgc3ltYm9sIHRoYXQ=
-g=0D
-bWF5IHJlcXVpcmUgYmVpbmcgaGlnaGxpZ2h0ZWQgd2l0aApAQCAtNjE4LDcgKzY4NCw5IEBAIGN=
-s=0D
-YXNzIE1hbkZvcm1hdChPdXRwdXRGb3JtYXQpOgogICAgICAgICBpZiBub3Qgc2VsZi5jaGVja19=
-k=0D
-b2MobmFtZSwgYXJncyk6CiAgICAgICAgICAgICByZXR1cm4KIAotICAgICAgICBzZWxmLmRhdGE=
-g=0D
-Kz0gZicuVEggIntzZWxmLm1vZHVsZW5hbWV9IiA5ICJ7c2VsZi5tb2R1bGVuYW1lfSIgIntzZWx=
-m=0D
-Lm1hbl9kYXRlfSIgIkFQSSBNYW51YWwiIExJTlVYJyArICJcbiIKKyAgICAgICAgb3V0X25hbWU=
-g=0D
-PSBzZWxmLmFyZ19uYW1lKGFyZ3MsIG5hbWUpCisKKyAgICAgICAgc2VsZi5kYXRhICs9IGYnLlR=
-I=0D
-ICJ7c2VsZi5tb2R1bGVuYW1lfSIgOSAie291dF9uYW1lfSIgIntzZWxmLm1hbl9kYXRlfSIgIkF=
-Q=0D
-SSBNYW51YWwiIExJTlVYJyArICJcbiIKIAogICAgICAgICBmb3Igc2VjdGlvbiwgdGV4dCBpbiB=
-h=0D
-cmdzLnNlY3Rpb25zLml0ZW1zKCk6CiAgICAgICAgICAgICBzZWxmLmRhdGEgKz0gZicuU0ggInt=
-z=0D
-ZWN0aW9ufSInICsgIlxuIgpAQCAtNjI3LDcgKzY5NSw5IEBAIGNsYXNzIE1hbkZvcm1hdChPdXR=
-w=0D
-dXRGb3JtYXQpOgogICAgIGRlZiBvdXRfZnVuY3Rpb24oc2VsZiwgZm5hbWUsIG5hbWUsIGFyZ3M=
-p=0D
-OgogICAgICAgICAiIiJvdXRwdXQgZnVuY3Rpb24gaW4gbWFuIiIiCiAKLSAgICAgICAgc2VsZi5=
-k=0D
-YXRhICs9IGYnLlRIICJ7bmFtZX0iIDkgIntuYW1lfSIgIntzZWxmLm1hbl9kYXRlfSIgIktlcm5=
-l=0D
-bCBIYWNrZXJcJ3MgTWFudWFsIiBMSU5VWCcgKyAiXG4iCisgICAgICAgIG91dF9uYW1lID0gc2V=
-s=0D
-Zi5hcmdfbmFtZShhcmdzLCBuYW1lKQorCisgICAgICAgIHNlbGYuZGF0YSArPSBmJy5USCAie25=
-h=0D
-bWV9IiA5ICJ7b3V0X25hbWV9IiAie3NlbGYubWFuX2RhdGV9IiAiS2VybmVsIEhhY2tlclwncyB=
-N=0D
-YW51YWwiIExJTlVYJyArICJcbiIKIAogICAgICAgICBzZWxmLmRhdGEgKz0gIi5TSCBOQU1FXG4=
-i=0D
-CiAgICAgICAgIHNlbGYuZGF0YSArPSBmIntuYW1lfSBcXC0ge2FyZ3NbJ3B1cnBvc2UnXX1cbiI=
-K=0D
-QEAgLTY3MSw3ICs3NDEsOSBAQCBjbGFzcyBNYW5Gb3JtYXQoT3V0cHV0Rm9ybWF0KToKICAgICA=
-g=0D
-ICAgICAgIHNlbGYub3V0cHV0X2hpZ2hsaWdodCh0ZXh0KQogCiAgICAgZGVmIG91dF9lbnVtKHN=
-l=0D
-bGYsIGZuYW1lLCBuYW1lLCBhcmdzKToKLSAgICAgICAgc2VsZi5kYXRhICs9IGYnLlRIICJ7c2V=
-s=0D
-Zi5tb2R1bGVuYW1lfSIgOSAiZW51bSB7bmFtZX0iICJ7c2VsZi5tYW5fZGF0ZX0iICJBUEkgTWF=
-u=0D
-dWFsIiBMSU5VWCcgKyAiXG4iCisgICAgICAgIG91dF9uYW1lID0gc2VsZi5hcmdfbmFtZShhcmd=
-z=0D
-LCBuYW1lKQorCisgICAgICAgIHNlbGYuZGF0YSArPSBmJy5USCAie3NlbGYubW9kdWxlbmFtZX0=
-i=0D
-IDkgIntvdXRfbmFtZX0iICJ7c2VsZi5tYW5fZGF0ZX0iICJBUEkgTWFudWFsIiBMSU5VWCcgKyA=
-i=0D
-XG4iCiAKICAgICAgICAgc2VsZi5kYXRhICs9ICIuU0ggTkFNRVxuIgogICAgICAgICBzZWxmLmR=
-h=0D
-dGEgKz0gZiJlbnVtIHtuYW1lfSBcXC0ge2FyZ3NbJ3B1cnBvc2UnXX1cbiIKQEAgLTcwMyw4ICs=
-3=0D
-NzUsOSBAQCBjbGFzcyBNYW5Gb3JtYXQoT3V0cHV0Rm9ybWF0KToKICAgICBkZWYgb3V0X3R5cGV=
-k=0D
-ZWYoc2VsZiwgZm5hbWUsIG5hbWUsIGFyZ3MpOgogICAgICAgICBtb2R1bGUgPSBzZWxmLm1vZHV=
-s=0D
-ZW5hbWUKICAgICAgICAgcHVycG9zZSA9IGFyZ3MuZ2V0KCdwdXJwb3NlJykKKyAgICAgICAgb3V=
-0=0D
-X25hbWUgPSBzZWxmLmFyZ19uYW1lKGFyZ3MsIG5hbWUpCiAKLSAgICAgICAgc2VsZi5kYXRhICs=
-9=0D
-IGYnLlRIICJ7bW9kdWxlfSIgOSAie25hbWV9IiAie3NlbGYubWFuX2RhdGV9IiAiQVBJIE1hbnV=
-h=0D
-bCIgTElOVVgnICsgIlxuIgorICAgICAgICBzZWxmLmRhdGEgKz0gZicuVEggInttb2R1bGV9IiA=
-5=0D
-ICJ7b3V0X25hbWV9IiAie3NlbGYubWFuX2RhdGV9IiAiQVBJIE1hbnVhbCIgTElOVVgnICsgIlx=
-u=0D
-IgogCiAgICAgICAgIHNlbGYuZGF0YSArPSAiLlNIIE5BTUVcbiIKICAgICAgICAgc2VsZi5kYXR=
-h=0D
-ICs9IGYidHlwZWRlZiB7bmFtZX0gXFwtIHtwdXJwb3NlfVxuIgpAQCAtNzE3LDggKzc5MCw5IEB=
-A=0D
-IGNsYXNzIE1hbkZvcm1hdChPdXRwdXRGb3JtYXQpOgogICAgICAgICBtb2R1bGUgPSBzZWxmLm1=
-v=0D
-ZHVsZW5hbWUKICAgICAgICAgcHVycG9zZSA9IGFyZ3MuZ2V0KCdwdXJwb3NlJykKICAgICAgICA=
-g=0D
-ZGVmaW5pdGlvbiA9IGFyZ3MuZ2V0KCdkZWZpbml0aW9uJykKKyAgICAgICAgb3V0X25hbWUgPSB=
-z=0D
-ZWxmLmFyZ19uYW1lKGFyZ3MsIG5hbWUpCiAKLSAgICAgICAgc2VsZi5kYXRhICs9IGYnLlRIICJ=
-7=0D
-bW9kdWxlfSIgOSAie2FyZ3MudHlwZX0ge25hbWV9IiAie3NlbGYubWFuX2RhdGV9IiAiQVBJIE1=
-h=0D
-bnVhbCIgTElOVVgnICsgIlxuIgorICAgICAgICBzZWxmLmRhdGEgKz0gZicuVEggInttb2R1bGV=
-9=0D
-IiA5ICJ7b3V0X25hbWV9IiAie3NlbGYubWFuX2RhdGV9IiAiQVBJIE1hbnVhbCIgTElOVVgnICs=
-g=0D
-IlxuIgogCiAgICAgICAgIHNlbGYuZGF0YSArPSAiLlNIIE5BTUVcbiIKICAgICAgICAgc2VsZi5=
-k=0D
-YXRhICs9IGYie2FyZ3MudHlwZX0ge25hbWV9IFxcLSB7cHVycG9zZX1cbiIKLS0gCjIuNTEuMAo=
-K=0D
+Hi,
+
+Here is an RFC series for adding new wprobe (watch probe) which
+provides memory access tracing event. Moreover, this can be used via
+event trigger. Thus it can trace memory access on a dynamically
+allocated objects too.
+
+In this version, I reuse Jinchao's arch_reinstall_hw_breakpoint()
+patch[1].
+
+[1] https://lore.kernel.org/all/20250828073311.1116593-6-wangjinchao600@gmail.com/
+
+The basic usage of this wprobe is similar to other probes;
+
+  w:[GRP/][EVENT] [r|w|rw]@<ADDRESS|SYMBOL[+OFFS]> [FETCHARGS]
+
+This defines a new wprobe event. For example, to trace jiffies update,
+you can do;
+
+ echo 'w:my_jiffies w@jiffies:8 value=+0($addr)' >> dynamic_events
+ echo 1 > events/wprobes/my_jiffies/enable
+
+Moreover, this can be combined with event trigger to trace the memory
+accecss on slab objects. The trigger syntax is;
+
+  set_wprobe:WPROBE_EVENT:FIELD[+ADJUST]
+  clear_wprobe:WPROBE_EVENT
+
+For example, trace the first 8 byte of the dentry data structure passed
+to do_truncate() until it is deleted by __dentry_kill().
+(Note: all tracefs setup uses '>>' so that it does not kick do_truncate())
+
+  # echo 'w:watch rw@0:8 address=$addr value=+0($addr)' > dynamic_events
+
+  # echo 'f:truncate do_truncate dentry=$arg2' >> dynamic_events
+  # echo 'set_wprobe:watch:dentry' >> events/fprobes/truncate/trigger
+
+  # echo 'f:dentry_kill __dentry_kill dentry=$arg1' >> dynamic_events
+  # echo 'clear_wprobe:watch' >> events/fprobes/dentry_kill/trigger
+
+  # echo 1 >> events/fprobes/truncate/enable
+  # echo 1 >> events/fprobes/dentry_kill/enable
+
+  # echo aaa > /tmp/hoge
+  # echo bbb > /tmp/hoge
+  # echo ccc > /tmp/hoge
+  # rm /tmp/hoge
+
+Then, the trace data will show;
+
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 16/16   #P:8
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#    [    7.026136] sh (113) used greatest stack depth: 12912 bytes left
+          | |         |   |||||     |         |
+              sh-113     [002] .....     7.024402: truncate: (do_truncate+0x4/0x120) dentry=0xffff8880069194b8
+              sh-113     [002] ..Zff     7.024822: watch: (lookup_fast+0xaa/0x150) address=0xffff8880069194b8 value=0x200008
+              sh-113     [002] ..Zff     7.024830: watch: (step_into+0x82/0x360) address=0xffff8880069194b8 value=0x200008
+              sh-113     [002] ..Zff     7.024834: watch: (step_into+0x9f/0x360) address=0xffff8880069194b8 value=0x200008
+              sh-113     [002] ..Zff     7.024839: watch: (path_openat+0xb3a/0xe70) address=0xffff8880069194b8 value=0x200008
+              sh-113     [002] ..Zff     7.024843: watch: (path_openat+0xb9a/0xe70) address=0xffff8880069194b8 value=0x200008
+              sh-113     [002] .....     7.024847: truncate: (do_truncate+0x4/0x120) dentry=0xffff8880069194b8
+              sh-113     [002] ...1.     7.025364: dentry_kill: (__dentry_kill+0x0/0x220) dentry=0xffff888006919380
+              sh-113     [002] ...1.     7.025511: dentry_kill: (__dentry_kill+0x0/0x220) dentry=0xffff8880069195f0
+              rm-118     [003] ...1.     7.027543: dentry_kill: (__dentry_kill+0x0/0x220) dentry=0xffff8880069194b8
+              sh-113     [002] ...2.     7.027825: dentry_kill: (__dentry_kill+0x0/0x220) dentry=0xffff8880044429c0
+              sh-113     [002] ...2.     7.027833: dentry_kill: (__dentry_kill+0x0/0x220) dentry=0xffff888004442270
+
+
+Thank you,
+
+---
+
+Jinchao Wang (1):
+      x86/HWBP: introduce arch_reinstall_hw_breakpoint() for atomic context
+
+Masami Hiramatsu (Google) (5):
+      tracing: wprobe: Add watchpoint probe event based on hardware breakpoint
+      HWBP: Add modify_wide_hw_breakpoint_local() API
+      tracing: wprobe: Add wprobe event trigger
+      selftests: tracing: Add a basic testcase for wprobe
+      selftests: tracing: Add syntax testcase for wprobe
+
+
+ Documentation/trace/index.rst                      |    1 
+ Documentation/trace/wprobetrace.rst                |  129 ++
+ arch/Kconfig                                       |   10 
+ arch/x86/Kconfig                                   |    1 
+ arch/x86/include/asm/hw_breakpoint.h               |    3 
+ arch/x86/kernel/hw_breakpoint.c                    |   61 +
+ include/linux/hw_breakpoint.h                      |    6 
+ include/linux/trace_events.h                       |    3 
+ kernel/events/hw_breakpoint.c                      |   36 +
+ kernel/trace/Kconfig                               |   24 
+ kernel/trace/Makefile                              |    1 
+ kernel/trace/trace.c                               |    9 
+ kernel/trace/trace.h                               |    5 
+ kernel/trace/trace_probe.c                         |   20 
+ kernel/trace/trace_probe.h                         |    8 
+ kernel/trace/trace_wprobe.c                        | 1111 ++++++++++++++++++++
+ .../ftrace/test.d/dynevent/add_remove_wprobe.tc    |   68 +
+ .../test.d/dynevent/wprobes_syntax_errors.tc       |   20 
+ 18 files changed, 1513 insertions(+), 3 deletions(-)
+ create mode 100644 Documentation/trace/wprobetrace.rst
+ create mode 100644 kernel/trace/trace_wprobe.c
+ create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/add_remove_wprobe.tc
+ create mode 100644 tools/testing/selftests/ftrace/test.d/dynevent/wprobes_syntax_errors.tc
+
+--
+Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
