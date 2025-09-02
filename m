@@ -1,159 +1,160 @@
-Return-Path: <linux-doc+bounces-58456-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58458-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 849EFB40808
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 16:55:42 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DF330B40822
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 16:57:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id F37F4188C0F1
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 14:54:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7C2323B7095
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 14:55:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61D253451B8;
-	Tue,  2 Sep 2025 14:50:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 847642DFA3C;
+	Tue,  2 Sep 2025 14:51:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XDqouYHc"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lbs9hUM5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C0D5312802;
-	Tue,  2 Sep 2025 14:50:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D539321F51
+	for <linux-doc@vger.kernel.org>; Tue,  2 Sep 2025 14:51:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756824611; cv=none; b=Vaq0lOnhfzwVtfT8MIuGvTCMerYzCEG5tooC6gO5GCbUYBzuExvQVBvncuKpEb0X7olrT0dajLt2J3lP8yniY6rijPZtalkpZHgqDwdtsAV2ifX9gXvrU13TBrUb0pDDuwD8fHptkqJbjnrxGCjLcZho7YRhnupIzQfjNsyfh0k=
+	t=1756824710; cv=none; b=k754FG6W5h3HcLExt2RGapoRT8d8onSBuNgUAkJ7KMrVkCu7X0UHpzOkc+dwoAN8NFBMEDszNNsJPy7p+xymr/Z9GbV0t1cNb+X0ZWZr0OIfmA3cv6s6WJHEGSm1gsR42BJcuGb/QwGDDOrlcfhkTJkU2Ta82mn6gaKCebdJ+eo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756824611; c=relaxed/simple;
-	bh=loKqVytyVDIeLrj3FO1P5XlYadT3usoA9sJi/ZhWYE4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=IbbOLbi7Xs9ud3SiXuzIngp24ZdVnaAG+oZq1uUCTn0yhe+TAZUBy6ut27ctLaFKBzzi9f9CjhyBG592a8hjwuMzoKTq4cHZCCdsdfvnVtXzoyQjpccr2+Ahv06O0qHJdbpPPRjGHY7hcaQ0z1CQhhKRz10p9SGfITkCoaEeXPQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XDqouYHc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF152C4CEED;
-	Tue,  2 Sep 2025 14:50:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756824610;
-	bh=loKqVytyVDIeLrj3FO1P5XlYadT3usoA9sJi/ZhWYE4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XDqouYHc8vRB0ajJZqK4lwxspBtMW6b4AWggjQsPi5/K2g2R10AjUbWT8azo/7M7O
-	 N6Jh6bQk4hBxULYIt59wnr7HzVq+T18QfRotRvkr6SqeRycgt3KrMgeI2f9YoYF65R
-	 AMah6TQRO20arumHElmz/9xJv71VS+55KKRTzUhrWxBMRXKYC/ULWECIEily7rCTXe
-	 eS9NQqKv9qVWkNYpMk5mwrAgRsMMcEg2+JJNlzJdw/9SSH0fatvocB6pT/Dy/lfKbD
-	 W+rnlIzxGxfqLNVSwZwF1T0salbWquRx/dFWfgfMqcj//UlZSSQb08JaE3KYrMoHxH
-	 hxEoSoVhdeDtQ==
-From: Leon Romanovsky <leon@kernel.org>
-To: Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Leon Romanovsky <leonro@nvidia.com>,
-	Jason Gunthorpe <jgg@nvidia.com>,
-	Abdiel Janulgue <abdiel.janulgue@gmail.com>,
-	Alexander Potapenko <glider@google.com>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Christoph Hellwig <hch@lst.de>,
-	Danilo Krummrich <dakr@kernel.org>,
-	David Hildenbrand <david@redhat.com>,
-	iommu@lists.linux.dev,
-	Jason Wang <jasowang@redhat.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Joerg Roedel <joro@8bytes.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Juergen Gross <jgross@suse.com>,
-	kasan-dev@googlegroups.com,
-	Keith Busch <kbusch@kernel.org>,
-	linux-block@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-nvme@lists.infradead.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-trace-kernel@vger.kernel.org,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	rust-for-linux@vger.kernel.org,
-	Sagi Grimberg <sagi@grimberg.me>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	virtualization@lists.linux.dev,
-	Will Deacon <will@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v5 16/16] nvme-pci: unmap MMIO pages with appropriate interface
-Date: Tue,  2 Sep 2025 17:48:53 +0300
-Message-ID: <fedc4cb3d79c81dae7d8b4ef45b5b3373f6a8bad.1756822782.git.leon@kernel.org>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <cover.1756822782.git.leon@kernel.org>
-References: <cover.1756822782.git.leon@kernel.org>
+	s=arc-20240116; t=1756824710; c=relaxed/simple;
+	bh=ZUa3Dvq40CFgxs3mEO+9zGe6eA+vkcIwweuUq2ZnnBk=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=D4JCCFLqv/H3hSBK+xDjqdv16P+TRhEc6yFu62/O58H48YZNn4kueKvZRLuSec8Au2orrWrXE4xK+G8htrZ5lmUE3IDHmYbYV2v7RH8HhzJKswDVDR7V4Wid2A2zGcwionWAUyIhQKQhCAmwDce5tTGwJSJ05VIEpoINLk8slWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lbs9hUM5; arc=none smtp.client-ip=209.85.208.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-61cd3748c6dso11348521a12.3
+        for <linux-doc@vger.kernel.org>; Tue, 02 Sep 2025 07:51:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756824707; x=1757429507; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=A9TJ2ulC20w1+YJTZX+a2bMgVN6mnrHpWKqDumLFSJ8=;
+        b=lbs9hUM5g4W8iQY2XTHgqLdAEabRTFjJLUDct2HHMcKAzXFUtXOd3gr4hmjoJxNJLU
+         53mKMijgLyMQiPRNXRGL4gPiXGpN7ctUG6fWurfQIJJQXVG4X0vA358IhOD4H+UVry1C
+         wc7DMnJqG03VfnxOaSZqh/Wc2TfwD3ta2yuH3qRrz2MDXvSk2Sr6D67sXjN3szBoipQB
+         xO8uMqh+X3zov2Km2V9rRJe1dl8R56bfkB2jGyzw6kxg9w6RR8TnIiXvsvhFx3orfiS7
+         PO10BLTd4gvXCTO6Pq+CdSgCSvuLawm4T8fbpiM4ruxeC4Rgz4bgFRCr9LYUYoVdOvD8
+         1BMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756824707; x=1757429507;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=A9TJ2ulC20w1+YJTZX+a2bMgVN6mnrHpWKqDumLFSJ8=;
+        b=fd0x66DvjpbJJwfhjL9GV2neLJFkhCQnDtlnQFZLCBF0V98z0X64V6mpeAyZDXNTaU
+         /buDR+M32u9PW3l6tcKExydOJPRmtvRQt+A/Zo6/skAG88Pe/1jMA+gunTkWSNY7cmvQ
+         g5vDqf4CezdvmJuaMx9zY+fAkIIpffEsPxgvKUbtESOmDtn7H8zHpoevPwqhNCsobEok
+         aGA1yS1C3B2droD/vgz8OacW2MO6pTu1gEOSpJfkS9xbTo0rXrRMJNKXXz2apDwP+jlv
+         ojiutFKvzjsi3qSa37KKSJ0uXS3shbLRAi5b18JZfQLLeQCiv2/Vs7hqWmdKyv4hzNDt
+         19lQ==
+X-Gm-Message-State: AOJu0YwH2T1Qbcn6NHdHjP1jA1e/le/POatb+dnQBsDIDrbOEM45AiDG
+	72Fk799KX5xLiaX3l4tUpZmDfSCkv40FkkCba1Hi9xi5eFbRn6szH/Oxb+UVuxqrK+3aBhA7xBx
+	+rEkh+HEfb8rXkSoPqJnSXenb1sN6cz+ZkvEA
+X-Gm-Gg: ASbGncsnFHdhhmd2C1J3spTv8w0sGhUSTvoTZRaFbtyxSJa+sqRidp6gJ8vfa+W+vZA
+	UdkEw53Vo5FQa2w46SJlN8j3h2MgTvTPxBk37QpsZJkrj9p+CCNJIUoXEIzWMC9RMa01+R1bAFb
+	2UcUZPadkwXnVTy4wAW3iw2P98HIr6sdOHk5VFpih4JjppiUuKAmtDSc59WFdj4pTmOVHoZAjtc
+	fXT5/9W2g+570+78c7eAHAue+/EjA==
+X-Google-Smtp-Source: AGHT+IEtTOgGUoIhgd7u+3yL078MmXDwwAmeprlZeMIhhoZQwfMYIkYjxU8WGf6kKGUTu+yvIIHoPEIwygWm4xK+QVY=
+X-Received: by 2002:a05:6402:5211:b0:61d:1d16:19b1 with SMTP id
+ 4fb4d7f45d1cf-61d2699c0bamr10520553a12.14.1756824706532; Tue, 02 Sep 2025
+ 07:51:46 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Zhixu Liu <zhixu.liu@gmail.com>
+Date: Tue, 2 Sep 2025 22:51:10 +0800
+X-Gm-Features: Ac12FXzpjyhUGVmD4vMM4Z81raBn9ob2QcSg0s3JP5nvscB7sDiA3GQZf-hUNrU
+Message-ID: <CALMA0xbOLkE8kUwrZA3FY=EFfV9ZCBdbFW5BTLbPM99E9TP+ng@mail.gmail.com>
+Subject: [PATCH v2] docs: sphinx: handle removal of utils.error_reporting in
+ docutils 0.22
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-From: Leon Romanovsky <leonro@nvidia.com>
+docutils.utils.error_reporting was removed in docutils v0.22, causing sphinx
+extensions (e.g. kernel_include) to fail with:
 
-Block layer maps MMIO memory through dma_map_phys() interface
-with help of DMA_ATTR_MMIO attribute. There is a need to unmap
-that memory with the appropriate unmap function, something which
-wasn't possible before adding new REQ attribute to block layer in
-previous patch.
+>   File "/usr/lib/python3.12/site-packages/sphinx/registry.py", line 544, in load_extension
+>     raise ExtensionError(
+> sphinx.errors.ExtensionError: Could not import extension kernel_include (exception: No module named 'docutils.utils.error_reporting')
 
-Reviewed-by: Keith Busch <kbusch@kernel.org>
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+Add compatibility handling with try/except (more robust than checking
+version numbers):
+- SafeString  -> str
+- ErrorString -> docutils.io.error_string()
+
+Signed-off-by: Z. Liu <zhixu.liu@gmail.com>
 ---
- drivers/nvme/host/pci.c | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ Documentation/sphinx/kernel_feat.py         | 6 +++++-
+ Documentation/sphinx/kernel_include.py      | 7 ++++++-
+ Documentation/sphinx/maintainers_include.py | 6 +++++-
+ 3 files changed, 16 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/nvme/host/pci.c b/drivers/nvme/host/pci.c
-index 2c6d9506b172..f8ecc0e0f576 100644
---- a/drivers/nvme/host/pci.c
-+++ b/drivers/nvme/host/pci.c
-@@ -682,11 +682,15 @@ static void nvme_free_prps(struct request *req)
- {
- 	struct nvme_iod *iod = blk_mq_rq_to_pdu(req);
- 	struct nvme_queue *nvmeq = req->mq_hctx->driver_data;
-+	unsigned int attrs = 0;
- 	unsigned int i;
- 
-+	if (req->cmd_flags & REQ_MMIO)
-+		attrs = DMA_ATTR_MMIO;
-+
- 	for (i = 0; i < iod->nr_dma_vecs; i++)
--		dma_unmap_page(nvmeq->dev->dev, iod->dma_vecs[i].addr,
--				iod->dma_vecs[i].len, rq_dma_dir(req));
-+		dma_unmap_phys(nvmeq->dev->dev, iod->dma_vecs[i].addr,
-+				iod->dma_vecs[i].len, rq_dma_dir(req), attrs);
- 	mempool_free(iod->dma_vecs, nvmeq->dev->dmavec_mempool);
- }
- 
-@@ -699,15 +703,19 @@ static void nvme_free_sgls(struct request *req)
- 	unsigned int sqe_dma_len = le32_to_cpu(iod->cmd.common.dptr.sgl.length);
- 	struct nvme_sgl_desc *sg_list = iod->descriptors[0];
- 	enum dma_data_direction dir = rq_dma_dir(req);
-+	unsigned int attrs = 0;
-+
-+	if (req->cmd_flags & REQ_MMIO)
-+		attrs = DMA_ATTR_MMIO;
- 
- 	if (iod->nr_descriptors) {
- 		unsigned int nr_entries = sqe_dma_len / sizeof(*sg_list), i;
- 
- 		for (i = 0; i < nr_entries; i++)
--			dma_unmap_page(dma_dev, le64_to_cpu(sg_list[i].addr),
--				le32_to_cpu(sg_list[i].length), dir);
-+			dma_unmap_phys(dma_dev, le64_to_cpu(sg_list[i].addr),
-+				le32_to_cpu(sg_list[i].length), dir, attrs);
- 	} else {
--		dma_unmap_page(dma_dev, sqe_dma_addr, sqe_dma_len, dir);
-+		dma_unmap_phys(dma_dev, sqe_dma_addr, sqe_dma_len, dir, attrs);
- 	}
- }
- 
--- 
-2.50.1
+diff --git a/Documentation/sphinx/kernel_feat.py
+b/Documentation/sphinx/kernel_feat.py
+index e3a51867f27bd..d077645254cd4 100644
+--- a/Documentation/sphinx/kernel_feat.py
++++ b/Documentation/sphinx/kernel_feat.py
+@@ -40,7 +40,11 @@ import sys
+ from docutils import nodes, statemachine
+ from docutils.statemachine import ViewList
+ from docutils.parsers.rst import directives, Directive
+-from docutils.utils.error_reporting import ErrorString
++try:
++    from docutils.utils.error_reporting import ErrorString
++except ImportError:
++    # docutils >= 0.22
++    from docutils.io import error_string as ErrorString
+ from sphinx.util.docutils import switch_source_input
 
+ __version__  = '1.0'
+diff --git a/Documentation/sphinx/kernel_include.py
+b/Documentation/sphinx/kernel_include.py
+index 1e566e87ebcdd..6c3cfcb904884 100755
+--- a/Documentation/sphinx/kernel_include.py
++++ b/Documentation/sphinx/kernel_include.py
+@@ -35,7 +35,12 @@
+ import os.path
+
+ from docutils import io, nodes, statemachine
+-from docutils.utils.error_reporting import SafeString, ErrorString
++try:
++    from docutils.utils.error_reporting import SafeString, ErrorString
++except ImportError:
++    # docutils >= 0.22
++    SafeString = str
++    from docutils.io import error_string as ErrorString
+ from docutils.parsers.rst import directives
+ from docutils.parsers.rst.directives.body import CodeBlock, NumberLines
+ from docutils.parsers.rst.directives.misc import Include
+diff --git a/Documentation/sphinx/maintainers_include.py
+b/Documentation/sphinx/maintainers_include.py
+index d31cff8674367..efd866ff066b7 100755
+--- a/Documentation/sphinx/maintainers_include.py
++++ b/Documentation/sphinx/maintainers_include.py
+@@ -22,7 +22,11 @@ import re
+ import os.path
+
+ from docutils import statemachine
+-from docutils.utils.error_reporting import ErrorString
++try:
++    from docutils.utils.error_reporting import ErrorString
++except ImportError:
++    # docutils >= 0.22
++    from docutils.io import error_string as ErrorString
+ from docutils.parsers.rst import Directive
+ from docutils.parsers.rst.directives.misc import Include
+
+--
+2.49.1
 
