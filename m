@@ -1,61 +1,85 @@
-Return-Path: <linux-doc+bounces-58384-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58391-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3F83B3FDF5
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 13:40:39 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F8CCB3FE18
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 13:46:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 869102C4F48
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 11:40:39 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 6245E2C50BC
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 11:46:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A8ACF2F7440;
-	Tue,  2 Sep 2025 11:40:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89C202FD1AC;
+	Tue,  2 Sep 2025 11:44:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rUj9IxHj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GcGkOYvo"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E3281A08DB;
-	Tue,  2 Sep 2025 11:40:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 539C22FCC02;
+	Tue,  2 Sep 2025 11:44:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756813234; cv=none; b=Y2u7czQhO4/jur2SEYOi7C7q3nkjYBuhuVzz1NxyBsN1XFYr1Y/szdO7+q2kPtFJNjsxxO6b11dH6wllDS5+UTYMrumh2MK2gZMuy4sEPS5H5o0MTpmpLvn2iyEYZeWuXcR/qqfUwSkU0WKlpEEy1Wh807z/TpVDjyXiJmuUv4A=
+	t=1756813485; cv=none; b=siQ1+w15vnO61SXjeanw40XM/fXQOaGUWG8qGDEGM4IpVru3/ChcSFLaKuzOWipIntr70GjcMmca1913iDb0ZL+uFVBCS9O8M2O1CufIHVHLVkX/QNppOq02CWdlQnjErv7K4Ou5PEKVNtegtSmUsGChwFKwAxl9igEGFsFfRxE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756813234; c=relaxed/simple;
-	bh=wPSaH7cjW+NldJZ1SPTIET9Tf1SoUAdrI/uEh3a0nTo=;
+	s=arc-20240116; t=1756813485; c=relaxed/simple;
+	bh=PsdWXEKScSpvyy0S+Dxl056IK+zdYsrlrpfYJKzyZ9Y=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sBy4FXGTw3HZByEpxSQp7J2VVmBFzByBDjKg+EdzKsDhDbDf0/FShLqcl5slKDevZd1VtfAyY9nTLN7CL4hBrL9eLi5pjR2O5aFq5eaV6b7d7sQKknYnscpl/RGuUDCw33sEYFlTOvKAj3Fi3EpQ/PkQIBCYh6zF1qaEHOOWzfc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rUj9IxHj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FE74C4CEED;
-	Tue,  2 Sep 2025 11:40:30 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=i1+vN3sdgJv2BHMUtZRJVcfsWITJRTBauSL0vquUTbNsktS2a7yr916es6959Zs+aK0R/PGqOmMItAd5veKHdJsAAqpDdY4dISzUNmmR9xKr5g7gaSV8uEwa3g7AvDJm4ZcxBILsmmRvs1N6pqMUwNPvNuLOl7XooI6wc3334ZM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GcGkOYvo; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0680C4CEED;
+	Tue,  2 Sep 2025 11:44:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756813234;
-	bh=wPSaH7cjW+NldJZ1SPTIET9Tf1SoUAdrI/uEh3a0nTo=;
+	s=k20201202; t=1756813484;
+	bh=PsdWXEKScSpvyy0S+Dxl056IK+zdYsrlrpfYJKzyZ9Y=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=rUj9IxHjDKnLpou31B+i5MNND3MCnio/527nPeG6gqRYhVSY1S70j7jhIEhUirTWx
-	 Bg8tZoM3xDUymFY4YaPfj4h3s42nZGqiTKQW1MWv1EE6MHRDb9431jP5D2ilKi9x37
-	 79pN/8k38vHHbOucIkP6Fd9kuLTpLyXHyqgItartg/sJepj7jziVwoc9AZ0dRRbCY0
-	 BERICBhSiZH11LxJ0iSjI07FvdgOT5qROIJkbtsF6BBr+nPMHFpT/1VV0/J0iNFhjv
-	 K9xt2gRxub4Ns1Xq2HVsN8Sx3K5OHv7sGK92pVrQ8ME+capTKxh5CIugZX3eHDP8ZY
-	 NuVLhWU/0m6fg==
-Date: Tue, 2 Sep 2025 12:40:27 +0100
-From: Simon Horman <horms@kernel.org>
-To: Wilfred Mallawa <wilfred.opensource@gmail.com>
-Cc: "David S . Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	John Fastabend <john.fastabend@gmail.com>, netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Damien Le'Moal <dlemoal@kernel.org>,
-	Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Subject: Re: [PATCH v2] net/tls: support maximum record size limit
-Message-ID: <20250902114027.GD15473@horms.kernel.org>
-References: <20250902033809.177182-2-wilfred.opensource@gmail.com>
+	b=GcGkOYvoGCguKJ/jUPJf7VxrZdwrL4lVESQFTriaR2Al6lroyZ1GB6QAt5k5qWJf6
+	 q3qN+YuCyjEj06tqOyAvFa6LmxWY+fkNRRvM2Fm/FaWZ47BrhQ57c5IkbTs+Kmjbxo
+	 jYn3m/b2Qt+qEWFTfr7Motq5MlPMe1vWqQ2sCSESTGio/7/xhmbPYdOH4Q1OcuVHUj
+	 0Qf6LRJj60aZatHetbId9ILp7QfUSrYcYBf+2DcIKerzqQP4jv1B+F4QtNdlONUyTb
+	 oqSiFYIiLItMyOvFUFDVomGAq1PbDiyqYtk62VAgEE+tHDutp1f6++/ufGbmNlFvY7
+	 geX873CKX7JcA==
+Date: Tue, 2 Sep 2025 14:44:19 +0300
+From: Mike Rapoport <rppt@kernel.org>
+To: Pratyush Yadav <pratyush@kernel.org>
+Cc: Jason Gunthorpe <jgg@nvidia.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>, jasonmiu@google.com,
+	graf@amazon.com, changyuanl@google.com, dmatlack@google.com,
+	rientjes@google.com, corbet@lwn.net, rdunlap@infradead.org,
+	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com,
+	ojeda@kernel.org, aliceryhl@google.com, masahiroy@kernel.org,
+	akpm@linux-foundation.org, tj@kernel.org, yoann.congal@smile.fr,
+	mmaurer@google.com, roman.gushchin@linux.dev, chenridong@huawei.com,
+	axboe@kernel.dk, mark.rutland@arm.com, jannh@google.com,
+	vincent.guittot@linaro.org, hannes@cmpxchg.org,
+	dan.j.williams@intel.com, david@redhat.com,
+	joel.granados@kernel.org, rostedt@goodmis.org,
+	anna.schumaker@oracle.com, song@kernel.org, zhangguopeng@kylinos.cn,
+	linux@weissschuh.net, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-mm@kvack.org,
+	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
+	hpa@zytor.com, rafael@kernel.org, dakr@kernel.org,
+	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com,
+	myungjoo.ham@samsung.com, yesanishhere@gmail.com,
+	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com,
+	aleksander.lobakin@intel.com, ira.weiny@intel.com,
+	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de,
+	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com,
+	stuart.w.hayes@gmail.com, lennart@poettering.net,
+	brauner@kernel.org, linux-api@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, saeedm@nvidia.com,
+	ajayachandra@nvidia.com, parav@nvidia.com, leonro@nvidia.com,
+	witu@nvidia.com
+Subject: Re: [PATCH v3 29/30] luo: allow preserving memfd
+Message-ID: <aLbYk30V2EEJJtAf@kernel.org>
+References: <20250807014442.3829950-1-pasha.tatashin@soleen.com>
+ <20250807014442.3829950-30-pasha.tatashin@soleen.com>
+ <20250826162019.GD2130239@nvidia.com>
+ <aLXIcUwt0HVzRpYW@kernel.org>
+ <mafs0ldmyw1hp.fsf@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -64,66 +88,96 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250902033809.177182-2-wilfred.opensource@gmail.com>
+In-Reply-To: <mafs0ldmyw1hp.fsf@kernel.org>
 
-On Tue, Sep 02, 2025 at 01:38:10PM +1000, Wilfred Mallawa wrote:
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Hi Pratyush,
+
+On Mon, Sep 01, 2025 at 07:01:38PM +0200, Pratyush Yadav wrote:
+> Hi Mike,
 > 
-> During a handshake, an endpoint may specify a maximum record size limit.
-> Currently, the kernel defaults to TLS_MAX_PAYLOAD_SIZE (16KB) for the
-> maximum record size. Meaning that, the outgoing records from the kernel
-> can exceed a lower size negotiated during the handshake. In such a case,
-> the TLS endpoint must send a fatal "record_overflow" alert [1], and
-> thus the record is discarded.
+> On Mon, Sep 01 2025, Mike Rapoport wrote:
 > 
-> Upcoming Western Digital NVMe-TCP hardware controllers implement TLS
-> support. For these devices, supporting TLS record size negotiation is
-> necessary because the maximum TLS record size supported by the controller
-> is less than the default 16KB currently used by the kernel.
+> > On Tue, Aug 26, 2025 at 01:20:19PM -0300, Jason Gunthorpe wrote:
+> >> On Thu, Aug 07, 2025 at 01:44:35AM +0000, Pasha Tatashin wrote:
+> >> 
+> >> > +	/*
+> >> > +	 * Most of the space should be taken by preserved folios. So take its
+> >> > +	 * size, plus a page for other properties.
+> >> > +	 */
+> >> > +	fdt = memfd_luo_create_fdt(PAGE_ALIGN(preserved_size) + PAGE_SIZE);
+> >> > +	if (!fdt) {
+> >> > +		err = -ENOMEM;
+> >> > +		goto err_unpin;
+> >> > +	}
+> >> 
+> >> This doesn't seem to have any versioning scheme, it really should..
+> >> 
+> >> > +	err = fdt_property_placeholder(fdt, "folios", preserved_size,
+> >> > +				       (void **)&preserved_folios);
+> >> > +	if (err) {
+> >> > +		pr_err("Failed to reserve folios property in FDT: %s\n",
+> >> > +		       fdt_strerror(err));
+> >> > +		err = -ENOMEM;
+> >> > +		goto err_free_fdt;
+> >> > +	}
+> >> 
+> >> Yuk.
+> >> 
+> >> This really wants some luo helper
+> >> 
+> >> 'luo alloc array'
+> >> 'luo restore array'
+> >> 'luo free array'
+> >
+> > We can just add kho_{preserve,restore}_vmalloc(). I've drafted it here:
+> > https://git.kernel.org/pub/scm/linux/kernel/git/rppt/linux.git/log/?h=kho/vmalloc/v1
+> >
+> > Will wait for kbuild and then send proper patches.
 > 
-> This patch adds support for retrieving the negotiated record size limit
-> during a handshake, and enforcing it at the TLS layer such that outgoing
-> records are no larger than the size negotiated. This patch depends on
-> the respective userspace support in tlshd and GnuTLS [2].
+> I have been working on something similar, but in a more generic way.
 > 
-> [1] https://www.rfc-editor.org/rfc/rfc8449
-> [2] https://gitlab.com/gnutls/gnutls/-/merge_requests/2005
+> I have implemented a sparse KHO-preservable array (called kho_array)
+> with xarray like properties. It can take in 4-byte aligned pointers and
+> supports saving non-pointer values similar to xa_mk_value(). For now it
+> doesn't support multi-index entries, but if needed the data format can
+> be extended to support it as well.
 > 
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> The structure is very similar to what you have implemented. It uses a
+> linked list of pages with some metadata at the head of each page.
+> 
+> I have used it for memfd preservation, and I think it is quite
+> versatile. For example, your kho_preserve_vmalloc() can be very easily
+> built on top of this kho_array by simply saving each physical page
+> address at consecutive indices in the array.
 
-Hi Wilfred,
+I've started to work on something similar to your kho_array for memfd case
+and then I thought that since we know the size of the array we can simply
+vmalloc it and preserve vmalloc, and that lead me to implementing
+preservation of vmalloc :)
 
-I'll leave review of this approach to others.
-But in the meantime I wanted to pass on a minor problem I noticed in the code
+I like the idea to have kho_array for cases when we don't know the amount
+of data to preserve in advance, but for memfd as it's currently
+implemented I think that allocating and preserving vmalloc is simpler.
 
-> diff --git a/net/tls/tls_sw.c b/net/tls/tls_sw.c
-> index bac65d0d4e3e..9f9359f591d3 100644
-> --- a/net/tls/tls_sw.c
-> +++ b/net/tls/tls_sw.c
-> @@ -1033,6 +1033,7 @@ static int tls_sw_sendmsg_locked(struct sock *sk, struct msghdr *msg,
->  	unsigned char record_type = TLS_RECORD_TYPE_DATA;
->  	bool is_kvec = iov_iter_is_kvec(&msg->msg_iter);
->  	bool eor = !(msg->msg_flags & MSG_MORE);
-> +	u16 record_size_limit;
->  	size_t try_to_copy;
->  	ssize_t copied = 0;
->  	struct sk_msg *msg_pl, *msg_en;
-> @@ -1058,6 +1059,9 @@ static int tls_sw_sendmsg_locked(struct sock *sk, struct msghdr *msg,
->  		}
->  	}
->  
-> +	record_size_limit = tls_ctx->record_size_limit ?
-> +			    tls_ctx->record_size_limit : TLS_MAX_PAYLOAD_SIZE;
-> +
->  	while (msg_data_left(msg)) {
->  		if (sk->sk_err) {
->  			ret = -sk->sk_err;
-
-record_size_limit is set but otherwise unused.
-Did you forget to add something here?
-
-If not, please remove record_size_limit from this function.
+As for porting kho_preserve_vmalloc() to kho_array, I also feel that it
+would just make kho_preserve_vmalloc() more complex and I'd rather simplify
+it even more, e.g. with preallocating all the pages that preserve indices
+in advance.
+ 
+> The code is still WIP and currently a bit hacky, but I will clean it up
+> in a couple days and I think it should be ready for posting. You can
+> find the current version at [0][1]. Would be good to hear your thoughts,
+> and if you agree with the approach, I can also port
+> kho_preserve_vmalloc() to work on top of kho_array as well.
+> 
+> [0] https://git.kernel.org/pub/scm/linux/kernel/git/pratyush/linux.git/commit/?h=kho-array&id=cf4c04c1e9ac854e3297018ad6dada17c54a59af
+> [1] https://git.kernel.org/pub/scm/linux/kernel/git/pratyush/linux.git/commit/?h=kho-array&id=5eb0d7316274a9c87acaeedd86941979fc4baf96
+> 
+> -- 
+> Regards,
+> Pratyush Yadav
 
 -- 
-pw-bot: changes-requested
+Sincerely yours,
+Mike.
 
