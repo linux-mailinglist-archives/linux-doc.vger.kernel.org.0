@@ -1,161 +1,107 @@
-Return-Path: <linux-doc+bounces-58366-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58369-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAA3FB3F9D4
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 11:10:36 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4640EB3F9EA
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 11:12:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 61EB01891E8D
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 09:10:42 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9E307174896
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Sep 2025 09:12:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8532D2EBDE3;
-	Tue,  2 Sep 2025 09:08:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8590A2EA46C;
+	Tue,  2 Sep 2025 09:11:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="CM3E6cN5"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="nClZo4i9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEC742EB872;
-	Tue,  2 Sep 2025 09:08:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.19.245
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D10DA1EF0B0;
+	Tue,  2 Sep 2025 09:11:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756804129; cv=none; b=sKu1AHQ1m4h2JT1EchmMnQfpCjmqB7lFtaU8wJPeSntB9JK1kmXAv/XXvas3LxKoSkC9fgYVNvGXiMYb20nUKnOl+7D0v83KI1BGaKpd5F/wBDFv1J86nNiBau8Bn6ihlDoMJRJKiYZ1OXZL21E0nkuzaTO05BkQfB2aVrlOgbA=
+	t=1756804306; cv=none; b=ZQnnio1MhAT7Ov2WSUbtfEfsMmscVifYGA5TWZCY7FWXyuHCXr8diAvjxAgTicQ1NPq0cD4Xmkn3Qb2jCEzEXTi7Wd9rVmWvlj8uALGsw1B5PXBz9CJRtU7KGUNfgMDLY81BQUhsXMS5SUIw576KgLGg43mg0qx56HNAPxiXjAw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756804129; c=relaxed/simple;
-	bh=YpQx/ne+1XhP7+eTj3SuVONYdciDWydKv8YoJhFPUb4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=dJc15WTrK/l2lo3BM9QpGyK4SJTGDbjEbbo7ZUYdyPQuT69xD/bsADsNmhFd81amSlMdx3QLiOF0T9uL0HHTVuu/7GIFHA+tMQ0WrlK8w6ZFzVP12c+sofouaPCit+ZkjBQwMcBWzzFf2tn3BPz2LhXXdKd3zCsgQ0/hN2EDR58=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=CM3E6cN5; arc=none smtp.client-ip=198.47.19.245
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
-	by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 582989on2494778;
-	Tue, 2 Sep 2025 04:08:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1756804090;
-	bh=EH84awB0hQAV7qsuekViMKwHSfbM3fDnPKPyuSR3p2s=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=CM3E6cN5Fu7FzkXQDDHHo7qSp3l+L4xb9j/ZL0QOfsVolWILwfRCwKmBe1n9ahxiG
-	 QUOuIwN5MWMwSA6/oZ1f7kNP8q7tHIg4vGQtY3jYOWim6jdudxlJBX7jOZC3vxtByG
-	 fGWXdENgHrJ+1O8OT3cfQl7NuPuBjDfDxnjm4GDk=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 582989Wu2171850
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Tue, 2 Sep 2025 04:08:09 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 2
- Sep 2025 04:08:09 -0500
-Received: from fllvem-mr07.itg.ti.com (10.64.41.89) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 2 Sep 2025 04:08:09 -0500
-Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
-	by fllvem-mr07.itg.ti.com (8.18.1/8.18.1) with ESMTP id 582989Qq1061812;
-	Tue, 2 Sep 2025 04:08:09 -0500
-Received: from localhost (danish-tpc.dhcp.ti.com [172.24.231.152])
-	by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 58298894020897;
-	Tue, 2 Sep 2025 04:08:08 -0500
-From: MD Danish Anwar <danishanwar@ti.com>
-To: Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller"
-	<davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski
-	<kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring
-	<robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
-	<conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mathieu
- Poirier <mathieu.poirier@linaro.org>,
-        Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Nishanth Menon <nm@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>,
-        Mengyuan Lou <mengyuanlou@net-swift.com>,
-        MD
- Danish Anwar <danishanwar@ti.com>, Xin Guo <guoxin09@huawei.com>,
-        Lei Wei
-	<quic_leiwei@quicinc.com>, Lee Trager <lee@trager.us>,
-        Michael Ellerman
-	<mpe@ellerman.id.au>, Fan Gong <gongfan1@huawei.com>,
-        Lorenzo Bianconi
-	<lorenzo@kernel.org>,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        Lukas
- Bulwahn <lukas.bulwahn@redhat.com>,
-        Parthiban Veerasooran
-	<Parthiban.Veerasooran@microchip.com>,
-        Suman Anna <s-anna@ti.com>
-CC: Tero Kristo <kristo@kernel.org>, <netdev@vger.kernel.org>,
-        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>, <srk@ti.com>,
-        Roger Quadros
-	<rogerq@kernel.org>
-Subject: [PATCH net-next v2 8/8] arch: arm64: dts: k3-am64*: Add rpmsg-eth node
-Date: Tue, 2 Sep 2025 14:37:46 +0530
-Message-ID: <20250902090746.3221225-9-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250902090746.3221225-1-danishanwar@ti.com>
-References: <20250902090746.3221225-1-danishanwar@ti.com>
+	s=arc-20240116; t=1756804306; c=relaxed/simple;
+	bh=0BL1nnM0OlVJrsOwJo4O+SjKC+dVRggUthGwZ1s3Ilg=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=rnogVNFBsymHyfqdP8C4UZJcSJIWRJGyeebxSBwMwcJHqXwLfsEaNOn8wweG+WFsLvnwHNhhdE1ceL99dTDHk/7eHtM9Lb78zBP71Lqz+q9M5ndiQw86ENZ1pvUd4u56eYqJoVieQQjU+sri7R7iZ0qbV3nxKHQuXEwx00OqHXM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=nClZo4i9; arc=none smtp.client-ip=198.175.65.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1756804304; x=1788340304;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=0BL1nnM0OlVJrsOwJo4O+SjKC+dVRggUthGwZ1s3Ilg=;
+  b=nClZo4i9J6KGikJQE/LXOjeo1VDYk1R+mqqftvjBM0ot99a7+vSZH23F
+   j1D93QKg/4npBQjIrbOWGHLl2k4XrRJFTCjBXIxYCXKRitjg02t+iZDAe
+   f9wzVLk2S9ngBV8HHxYKVYr23j+vuInhsOKTT2mUI/jpECfVFeKlm/5cY
+   qxooAFc4xtoDamm+TwjUb8XpDIh2CcQFa2MycqW+HPUvD19+QpHSgs7Zn
+   Q+xuDx8smhz2LBLRLWJpvzlIq3xkbHhRkWMI9Wpty4jWCxsddsgIJLIX3
+   Be5/BJWOoNqNhHo1LhKlJtHbzBgxUSIDKFqObucejzdww4FDd9YhxIhLL
+   g==;
+X-CSE-ConnectionGUID: S5lQ17+xTU+hSQQmoYKsDg==
+X-CSE-MsgGUID: jcy5BwrOTlWz71G6W+Agwg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="81649813"
+X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; 
+   d="scan'208";a="81649813"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Sep 2025 02:11:44 -0700
+X-CSE-ConnectionGUID: Udk4grxwTLKqK3tvYBkvlg==
+X-CSE-MsgGUID: ttO48yWjSJqg9NS8awJpww==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.18,230,1751266800"; 
+   d="scan'208";a="170480186"
+Received: from igk-lkp-server01.igk.intel.com (HELO ca260db0ef79) ([10.91.175.65])
+  by orviesa006.jf.intel.com with ESMTP; 02 Sep 2025 02:11:43 -0700
+Received: from kbuild by ca260db0ef79 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1utN3E-0003HN-21;
+	Tue, 02 Sep 2025 09:11:40 +0000
+Date: Tue, 2 Sep 2025 11:11:17 +0200
+From: kernel test robot <lkp@intel.com>
+To: Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: oe-kbuild-all@lists.linux.dev, linux-media@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [linux-next:master 4560/5641] htmldocs: Warning: MAINTAINERS
+ references a file that doesn't exist: Documentation/sphinx/parse-headers.pl
+Message-ID: <202509021100.e3nEldXk-lkp@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Add rpmsg-eth node to main_r5fss0_core0. This node describes the memory
-region to be used for rpmsg ethernet communication. The commit adds
-below changes,
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+head:   3db46a82d467bd23d9ebc473d872a865785299d8
+commit: aebcc3009ed55564b74378945206642a372c3e27 [4560/5641] docs: sphinx: drop parse-headers.pl
+reproduce: (https://download.01.org/0day-ci/archive/20250902/202509021100.e3nEldXk-lkp@intel.com/reproduce)
 
-- Adding new reserved memory region main_r5fss0_core0_memory_region_shm
-- Adding rpmsg-eth node to main_r5fss0_core0 with memory-region as
-  main_r5fss0_core0_memory_region_shm
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202509021100.e3nEldXk-lkp@intel.com/
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
- arch/arm64/boot/dts/ti/k3-am642-evm.dts | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+All warnings (new ones prefixed by >>):
 
-diff --git a/arch/arm64/boot/dts/ti/k3-am642-evm.dts b/arch/arm64/boot/dts/ti/k3-am642-evm.dts
-index e01866372293..1e5ee9ac9966 100644
---- a/arch/arm64/boot/dts/ti/k3-am642-evm.dts
-+++ b/arch/arm64/boot/dts/ti/k3-am642-evm.dts
-@@ -61,7 +61,13 @@ main_r5fss0_core0_dma_memory_region: r5f-dma-memory@a0000000 {
- 
- 		main_r5fss0_core0_memory_region: r5f-memory@a0100000 {
- 			compatible = "shared-dma-pool";
--			reg = <0x00 0xa0100000 0x00 0xf00000>;
-+			reg = <0x00 0xa0100000 0x00 0x300000>;
-+			no-map;
-+		};
-+
-+		main_r5fss0_core0_memory_region_shm: r5f-shm-memory@a0400000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0xa0400000 0x00 0xc00000>;
- 			no-map;
- 		};
- 
-@@ -768,6 +774,9 @@ &main_r5fss0_core0 {
- 	mboxes = <&mailbox0_cluster2 &mbox_main_r5fss0_core0>;
- 	memory-region = <&main_r5fss0_core0_dma_memory_region>,
- 			<&main_r5fss0_core0_memory_region>;
-+	rpmsg-eth {
-+		memory-region = <&main_r5fss0_core0_memory_region_shm>;
-+	};
- };
- 
- &main_r5fss0_core1 {
+   Warning: Documentation/translations/zh_CN/dev-tools/gdb-kernel-debugging.rst references a file that doesn't exist: Documentation/dev-tools/gdb-kernel-debugging.rst
+   Warning: Documentation/translations/zh_CN/doc-guide/parse-headers.rst references a file that doesn't exist: Documentation/userspace-api/media/Makefile
+   Warning: Documentation/translations/zh_CN/how-to.rst references a file that doesn't exist: Documentation/xxx/xxx.rst
+   Warning: Documentation/translations/zh_TW/admin-guide/README.rst references a file that doesn't exist: Documentation/dev-tools/kgdb.rst
+   Warning: Documentation/translations/zh_TW/dev-tools/gdb-kernel-debugging.rst references a file that doesn't exist: Documentation/dev-tools/gdb-kernel-debugging.rst
+>> Warning: MAINTAINERS references a file that doesn't exist: Documentation/sphinx/parse-headers.pl
+   Warning: arch/riscv/kernel/kexec_image.c references a file that doesn't exist: Documentation/riscv/boot-image-header.rst
+   Warning: drivers/clocksource/timer-armada-370-xp.c references a file that doesn't exist: Documentation/devicetree/bindings/timer/marvell,armada-370-xp-timer.txt
+   Warning: include/rv/da_monitor.h references a file that doesn't exist: Documentation/trace/rv/da_monitor_synthesis.rst
+   Using alabaster theme
+
 -- 
-2.34.1
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
