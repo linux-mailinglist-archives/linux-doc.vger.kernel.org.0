@@ -1,47 +1,47 @@
-Return-Path: <linux-doc+bounces-58535-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58536-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58A1DB411AC
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 03:09:44 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id A47ECB411BB
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 03:15:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 141DC5E8453
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 01:09:43 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 658D23A5FB1
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 01:15:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B1F061C6FF5;
-	Wed,  3 Sep 2025 01:09:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E069A84A3E;
+	Wed,  3 Sep 2025 01:15:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KXQfTOMc"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ceQZPDYQ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8665B8F40;
-	Wed,  3 Sep 2025 01:09:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B091132F77B;
+	Wed,  3 Sep 2025 01:15:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756861779; cv=none; b=MRvHuw+WzJ5R7fdgdQZWFHvLOxYd7d5g8koVTSxDOte4yXzb+h1NPsAkNUP5V2++/1zDm4dI23AQmC/USdRut0G8Otnk1wjjavX+2fHdpHgDi3bNp9QZtcekpRh1Ee9rxI3s3bDa1mZAgiOrDojabKVifi6T/0Gx6xCnHllwAWM=
+	t=1756862144; cv=none; b=gWHTCTdCQI1PlTOVg6kt8RvhrUd1aWixdT64TLUolFs1hRelG5rXMD1qGe1yKFbUzBdNvp8vB5LqGj3QddxnLi993BWUP5oOGhJ6T4wvyuZAOdynIx3GZWFCb0qJvNu4zcKCB2oBBhWXd+jCo48i+6MQBBT+4XwauPf4qGIWmAw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756861779; c=relaxed/simple;
-	bh=zkp4q4vpL4Adj+QEd8KAgIulqnR2SfQyjtB0YsIJotA=;
+	s=arc-20240116; t=1756862144; c=relaxed/simple;
+	bh=ZpfymFp0LbzfFuRzfVKm33O6kOUhmfqrYRp51EQ+AUQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KHBlekyQyPRO5G3X5S1RxvT1ykMh9iULqUC631NoK/TBrdlhrTkPHdTn94jHLfzZ8AMSKvDhbctomlfKJqaLprYBOxuV1rkyNpBQA4fecxJJzCiCYJ9MgX4xt34r7dWBW6Ybo4hJtnd+rmT4QK39M5nM0y5bzarrVWC5MNiT2C4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KXQfTOMc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 128D8C4CEED;
-	Wed,  3 Sep 2025 01:09:38 +0000 (UTC)
+	 MIME-Version:Content-Type; b=dUXJtOYJcgvJCgGDm1wwt2jOAFA/tJGAv+xu+e61bYc6SQ7hl5ozdGuYj+dHH5Edv4cHDI5k/mZHCkFGWvHTBwPFteWDzMDKk3UR2d7U+dLN/npsc3Jc4lUuaWvxbPMnxhsfDUy03RHwURLVgsc8fDn+N3LR3PkIaKk475Hyxp0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ceQZPDYQ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2342DC4CEED;
+	Wed,  3 Sep 2025 01:15:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756861779;
-	bh=zkp4q4vpL4Adj+QEd8KAgIulqnR2SfQyjtB0YsIJotA=;
+	s=k20201202; t=1756862144;
+	bh=ZpfymFp0LbzfFuRzfVKm33O6kOUhmfqrYRp51EQ+AUQ=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=KXQfTOMcGj/u4j/lzRnkK4vYBBlZ7x4kVuxR7qAIEkOFi5T5rPZKC04sby3DOACvF
-	 WGrd1Or79Cd4VzyvFWu+LzqFbSQKfL6E3+rTus7JqkqlQNfOEgqGrW8bN3gyyOVcJ7
-	 YzvTohaXWcHjfsp+LI1SHbRjdAQyaLO7Zd3auONuNSnZtKs6I9uNinxbPFhaBKZArr
-	 yXEbJshTWduQao2OP9NSaqn3tUF0x8CiLBqkzZh8obaMfyI7wZSX2Jgtg2mm5qkWMP
-	 On9mtuUhwWXV62bfyZH9k2Rj0CDDNVmJCljo19DlKSlLMvxR5m2mW1a8BgdqcOCX/a
-	 DZWjN4Dh5ntjQ==
-Date: Tue, 2 Sep 2025 18:09:37 -0700
+	b=ceQZPDYQwkIaLVMJpz4yK4o9czagFZGCdnHDxpQMrWXwFmdtnMOfkdBsR503+Sy56
+	 AWlOBM7ME6JLXAaNphCOoXjdKYxQZP1DvkhsSLRame3hnyegfgjUsVT0Uk3wi4AkvH
+	 128BgUCZRx5FsXbspfQyvwCBrppLpaKG5bFH08sxesgzHtPVJK96TMTKOGBhXLL3Hf
+	 D6nKo44QxwHfvITM9RHpf5pw5PHwAJUAeQscdFCIRyNNhZpftXQ28LtA0AGq0uneqA
+	 aiooNAw8XhhgNSr6cUx16ww9ZJZkROBxEdY645JHB73lsoH9pe6rz8gHjZDamepCYe
+	 3y24Mdla1cbEA==
+Date: Tue, 2 Sep 2025 18:15:42 -0700
 From: Jakub Kicinski <kuba@kernel.org>
 To: Fan Gong <gongfan1@huawei.com>
 Cc: Zhu Yikai <zhuyikai1@h-partners.com>, <netdev@vger.kernel.org>,
@@ -58,11 +58,12 @@ Cc: Zhu Yikai <zhuyikai1@h-partners.com>, <netdev@vger.kernel.org>,
  Ghosh <sumang@marvell.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>,
  Joe Damato <jdamato@fastly.com>, Christophe JAILLET
  <christophe.jaillet@wanadoo.fr>
-Subject: Re: [PATCH net-next v03 02/14] hinic3: HW management interfaces
-Message-ID: <20250902180937.4c8d9eb3@kernel.org>
-In-Reply-To: <07e099c1395b725d880900550eaceb44a189d901.1756524443.git.zhuyikai1@h-partners.com>
+Subject: Re: [PATCH net-next v03 05/14] hinic3: Command Queue flush
+ interfaces
+Message-ID: <20250902181542.13fc234b@kernel.org>
+In-Reply-To: <a82cf0c769d351a3245343bc1b1de93927d694c6.1756524443.git.zhuyikai1@h-partners.com>
 References: <cover.1756524443.git.zhuyikai1@h-partners.com>
-	<07e099c1395b725d880900550eaceb44a189d901.1756524443.git.zhuyikai1@h-partners.com>
+	<a82cf0c769d351a3245343bc1b1de93927d694c6.1756524443.git.zhuyikai1@h-partners.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -72,14 +73,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Sat, 30 Aug 2025 16:08:41 +0800 Fan Gong wrote:
-> +err_destroy_workqueue:
-> +	destroy_workqueue(hwdev->workq);
-> +
->  err_free_hwif:
->  	hinic3_free_hwif(hwdev);
->  
+On Sat, 30 Aug 2025 16:08:44 +0800 Fan Gong wrote:
+> +	/* wait for chip to stop I/O */
+> +	msleep(100);
 
-nit: it's more idiomatic not to add empty lines between the actions on
-the error handling path
+This is a bit questionable. Is there no way to find out if the
+transactions for a given queues are still in flight?
 
