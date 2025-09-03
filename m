@@ -1,196 +1,132 @@
-Return-Path: <linux-doc+bounces-58609-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58611-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53C20B41B04
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 12:04:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AE9EB41B15
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 12:05:18 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D187918926F5
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 10:04:47 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 33BA81883BE7
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 10:05:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6632D2DAFB0;
-	Wed,  3 Sep 2025 10:04:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A78632E8B6C;
+	Wed,  3 Sep 2025 10:04:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FsCszhQj"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qs8xSQ4N"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 395282D7DE1;
-	Wed,  3 Sep 2025 10:04:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BF7D277CA4;
+	Wed,  3 Sep 2025 10:04:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756893860; cv=none; b=X0XKBkppfAqChoq91cXRGQqFNEWoIaiPqXhXscQFzxH0xlOuokMV2kY3Zpcr8J6v7HT9BF0Oy/IQyphLBaXwZ/ySJTeYlPB0dBY9mCppU255oDylSwhMUnuk/YuPX8Z9qpAHNysvOd+LF72DsycUGYbJzP1vG/6YHgbMk/mVuQw=
+	t=1756893882; cv=none; b=TKnMOAenS8JIRp2dXCSjeU2og+SCvj7UN1KlbV1xKMfgoz8yDoF3nRJVzDfOX12NyZRL3R+P/RQbX7Mt9LzXiU7e+LDgi9RM/XapdREciwchKN9PlTVojJO1R7U3bZHN2M3ioxxnKO4D/s1e+eK4EPncferkuF7zPJFyXSZJl8E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756893860; c=relaxed/simple;
-	bh=TMUN6PFhfhcUU8RCNu4OiY2dL1oQRvq5zVR1U5sOBkk=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=D6KhuyJ7q1Ky79+3bK03dmoGQzgTVhpXQZYPKFtJQBYZqKuvRYFSqU+O6CF7MR56EOu0/neObWpBv4pct3SkR7GJs9s1zGp+jFJIdjPiBPhmWns5A7sAVLrcRyB4FU4IL2GHVg3ej+a4uQyOYU/vdieVfF2rGrduut3QKhN+LtU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FsCszhQj; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB6D3C4CEF0;
-	Wed,  3 Sep 2025 10:04:17 +0000 (UTC)
+	s=arc-20240116; t=1756893882; c=relaxed/simple;
+	bh=jJDm398o/PQUOO/PqYBt0YkNR5iks/1VGE1vFW3OeEc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=NpzPEsEDhjxa2IqzrVjtnfQuzWKt0yijbjjQ3GAAS06fxNoYJASqDByhejtMuU0UJNZoK/uFmdFXtYotRCcaX3mOJ47K5+MbLJs4EHxa6Tsibet4XT3idznLvkfwnX5XNLNHLhqOrDRuSdGUJ2ITdbANdaUuf5jH5CziFbgJO2Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qs8xSQ4N; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id F398EC4CEF0;
+	Wed,  3 Sep 2025 10:04:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756893859;
-	bh=TMUN6PFhfhcUU8RCNu4OiY2dL1oQRvq5zVR1U5sOBkk=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=FsCszhQjLmKaW9ff2FSnZgd4sz9134eX3QrXWdWm63TG70bZ2FvgjZaZ7SNxbmJw6
-	 nspOWcyRRV9Dcxsp/gC0+I3jA4raZhr9+1wvIeuZ6tX3tvo1wv1DvXMQp7ZuH4Jvaw
-	 Qh2qHY/LwaJDA2ElNmQCFPC/oKnghGPN8iBno/JqWW7HTl5QdzaYmUyjBW5phkCbfB
-	 1XpaveX8HhbZoZ0xvFW5rc9oo5OIh+6mFvdBPAJFO6GLjQYHKuQsyDtvFfwXZWYGB6
-	 pVpLcNQvpg5l9KLAFYSKZxE03VT84gvLZr41TR5UPVWv5hc8JY4GCEvo90aBJVRImP
-	 T3Ub1E//oiDhQ==
-Date: Wed, 3 Sep 2025 12:04:09 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jani Nikula <jani.nikula@intel.com>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Jonathan Corbet
- <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, Vegard Nossum
- <vegard.nossum@oracle.com>, ksummit@lists.linux.dev, Linux Documentation
- <linux-doc@vger.kernel.org>, Akira Yokosawa <akiyks@gmail.com>, Bagas
- Sanjaya <bagasdotme@gmail.com>, Matthew Wilcox <willy@infradead.org>
-Subject: Re: [TECH TOPIC] Kernel documentation - update and future
- directions
-Message-ID: <20250903120409.32f3b3b0@foz.lan>
-In-Reply-To: <50492e9bd0d647a6ba7eccbed73f782181f83499@intel.com>
-References: <20250901204635.51b81ffd@foz.lan>
-	<1bf8a898-e697-46e2-86b1-4158b021d652@sirena.org.uk>
-	<j3iblg4xx4nu64dgaxhl62mtherszeh3jyrskkf7l2jigld7wf@lr7mtq33gbi7>
-	<865e583b-4c97-4db1-963c-ed8539fa56dc@sirena.org.uk>
-	<20250902135938.35048fbc@foz.lan>
-	<20250902141434.3e5b14e4@foz.lan>
-	<8339a5dd-446d-4717-9d68-983f5e2354b3@sirena.org.uk>
-	<xni5csulan6a3kngfw66okhrea2v2u4cwvfkk5vqy5p4xonowf@ajubzphgygit>
-	<87ecsox4uy.fsf@trenco.lwn.net>
-	<20250902191929.504977bf@foz.lan>
-	<20250902185221.GA1602@pendragon.ideasonboard.com>
-	<50492e9bd0d647a6ba7eccbed73f782181f83499@intel.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=k20201202; t=1756893882;
+	bh=jJDm398o/PQUOO/PqYBt0YkNR5iks/1VGE1vFW3OeEc=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=Qs8xSQ4NlnkmhZNK6yKruo+dvSjSptQp7I9Qoo4JrreIncgDbmoth4/0eau9gZo+j
+	 3BSjyyXEr7404RX9WBZQdw00sxAYEdu76CZoGKlvKy7fWE4FUD5aHkfDFaVLPnoHD7
+	 Kh9lfHrocFs23zD88KaC9jK8/SAtCsznwJ9rtM+4+mFcZqKQFzH9yhGZWijf7Pw4U3
+	 03mTm7oUb2dzKxF9ZXwek5ooZ2Bu42AAMqBo78Dzfj2SUNGDPxxY8iXl1nE3+NsdyU
+	 A6x2bj8wYR5S2U6wKQDXLSoT09brbAoBBMkO1vB7xcL6vWSokarncnMWpM/Y2OxQtp
+	 byPfOOY8YJViw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0649CA0FF2;
+	Wed,  3 Sep 2025 10:04:41 +0000 (UTC)
+From: =?utf-8?q?Nuno_S=C3=A1_via_B4_Relay?= <devnull+nuno.sa.analog.com@kernel.org>
+Subject: [PATCH v2 0/3] hwmon: Add support for the LTC4283 Hot Swap
+ Controller
+Date: Wed, 03 Sep 2025 11:04:58 +0100
+Message-Id: <20250903-ltc4283-support-v2-0-6bce091510bf@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAMoSuGgC/2WNQQ6CMBBFr0JmbQ0MCNWV9zAsyjhAE6RNWxsN6
+ d2tJK5cvpf89zfw7DR7uBQbOI7aa7NmwEMBNKt1YqHvmQFLPJWyQrEEalDWwj+tNS4I7EhSw+2
+ Z2gHyyjoe9Wsv3vrMs/bBuPd+EKuv/bWav1asRCmkHJB47Lp6xKta1WKmI5kH9CmlDz6FV4avA
+ AAA
+X-Change-ID: 20250812-ltc4283-support-27c8c4e69c6b
+To: linux-hwmon@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jean Delvare <jdelvare@suse.com>, 
+ Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Bartosz Golaszewski <brgl@bgdev.pl>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1756893904; l=1868;
+ i=nuno.sa@analog.com; s=20231116; h=from:subject:message-id;
+ bh=jJDm398o/PQUOO/PqYBt0YkNR5iks/1VGE1vFW3OeEc=;
+ b=eJjKsNbH0FJuhzg4gT9i/d0rAuEi9J84idpe5trIcPOXe5Vvzz+nFebIcK4T2IJ7zcZRdPe4h
+ jzV/YMFZBJjAebyqCREHSJsg7vFXpQ0fMR7l9bFIF2WM5sLAV67ppyx
+X-Developer-Key: i=nuno.sa@analog.com; a=ed25519;
+ pk=3NQwYA013OUYZsmDFBf8rmyyr5iQlxV/9H4/Df83o1E=
+X-Endpoint-Received: by B4 Relay for nuno.sa@analog.com/20231116 with
+ auth_id=100
+X-Original-From: =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>
+Reply-To: nuno.sa@analog.com
 
-Em Wed, 03 Sep 2025 10:47:28 +0300
-Jani Nikula <jani.nikula@intel.com> escreveu:
+This is v2 for the LTC4283 how swap controller. Main change is that I'm
+now using the auxiliary bus for adding the GPIO device (done depending
+on FW properties).
 
-> On Tue, 02 Sep 2025, Laurent Pinchart <laurent.pinchart@ideasonboard.com> wrote:
-> > I'm with Jon here, I wouldn't blindly override the Python interpreter
-> > selected by the user. What we could however do is print a message if we
-> > detect a version of Python that could improve performance, telling the
-> > user they could switch.  
-> 
-> Just piling on here, totally agreed.
-> 
-> Don't surprise the user. Let the user be in control. If they choose a
-> silly combo, let them. You know, they might be debugging the issues in
-> that silly combo to begin with, and don't want to jump through hoops to
-> work around tools that think they know better.
-> 
-> Letting the user know they're using a silly combo and suggesting better
-> alternatives is a whole different matter.
+Similar to the LTC4282 device, we're clearing some fault logs in the
+reset_history attributes. 
 
-The code can be changed to suggest a better alternative, and having an
-optional argument to load the newest one automatically, but the issue
-still remains:
+I also feels this is basically "v1" so the changelog will be a bit more
+generic.
 
-if one has native python3.6, for instance, and he installed a newer one
-to build htmldocs with:
+Linus, I'm not using the gpio-regmap helpers because I'm using the
+.init_valid_mask() callback and I don't think we can use it with the
+gpio-regmap interface (unless I missed something). If you feel you
+should change the interface to allow it, I can think on something for
+v3.. 
 
-	dnf install -y python3.11 # or zypper/apt-get/urpmi/... install python3.11
+---
+Changes in v2:
+- Dropped MFD related patches and bindings (now just one binding file
+  for the hwmon device);
+- Moved to the auxiliary bus; 
+- Link to v1: https://lore.kernel.org/r/20250814-ltc4283-support-v1-0-88b2cef773f2@analog.com
 
-python3 will still be a soft link to python3.5, and all attempts to
-build docs will fail.
+---
+Nuno Sá (3):
+      dt-binbings: hwmon: Document the LTC4283 Swap Controller
+      hwmon: ltc4283: Add support for the LTC4283 Swap Controller
+      gpio: gpio-ltc4283: Add support for the LTC4283 Swap Controller
 
-With the approach I'm taken, Makefile will call sphinx-pre-install
-and sphinx-build-wrapper. They both use a function that checks for
-incompatible versions, re-running the code with one which works,
-warning the user about that. So, on openSUSE leap, for instance, 
-we have two official packages with Sphinx:
+ .../devicetree/bindings/hwmon/adi,ltc4283.yaml     |  280 ++++
+ Documentation/hwmon/ltc4283.rst                    |  266 +++
+ MAINTAINERS                                        |    9 +
+ drivers/gpio/Kconfig                               |   10 +
+ drivers/gpio/Makefile                              |    1 +
+ drivers/gpio/gpio-ltc4283.c                        |  217 +++
+ drivers/hwmon/Kconfig                              |   12 +
+ drivers/hwmon/Makefile                             |    1 +
+ drivers/hwmon/ltc4283.c                            | 1748 ++++++++++++++++++++
+ 9 files changed, 2544 insertions(+)
+---
+base-commit: 9703c672af8dd3573c76ce509dfff26bf6c4768d
+change-id: 20250812-ltc4283-support-27c8c4e69c6b
+--
 
-	$ grep PRETTY_NAME /etc/os-release 
-	PRETTY_NAME="openSUSE Leap 15.6"
-
-	$ zypper search sphinx |grep -E "python\S+\-Sphinx "
-	   | python3-Sphinx                          | Python documentation generator                                              | package
-	i+ | python311-Sphinx                        | Python documentation generator                                              | package
+Thanks!
+- Nuno Sá
 
 
-There, python3-Sphinx is too old:
-
-	# sphinx-build --version
-	sphinx-build 2.3.1
-
-As docs minimal requirement is 3.4.3. Also, it is based on python3.6,
-which is not compatible with the kernel Sphinx extensions.
-
-Which the approach I took, once one installs python311-Sphinx like I did,
-the build happens cleanly:
-
-	$ make htmldocs
-	# sphinx-pre-install, which checks is needed packages are installed
-	Python 3.6.15 not supported. Changing to /usr/bin/python3.11
-	# sphinx-build-wrapper, which calls Sphinx to build the docs
-	Python version: 3.11.9
-	Python 3.6.15 not supported. Changing to /usr/bin/python3.11
-	Python version: 3.11.9
-	Using alabaster theme
-	Using Python kernel-doc
-	...
-
-but if we remove the switch logic:
-
-        -print(f"Python {python_ver} not supported. Changing to {new_python_cmd}")
-        -
-        -try:
-        -    os.execv(new_python_cmd, args)
-        -except OSError as e:
-        -    sys.exit(f"Failed to restart with {new_python_cmd}: {e}")
-        -
-	+print(f"Python {python_ver} not supported.")
-
-The build will then fail:
-
-	# make htmldocs
-	Python 3.6.15 not supported.
-	Python 3.6.15 not supported.
-	Traceback (most recent call last):
-	  File "/usr/bin/sphinx-build", line 5, in <module>
-	    from sphinx.cmd.build import main
-	ModuleNotFoundError: No module named 'sphinx'
-
-because:
-
-- python3.6 is not supported;
-- sphinx-build is installed with python311-Sphinx, which also installed
-  python311 package.
-
-See, in this case, the user wanted docs build to use python3.11, as
-it installed python311-Sphinx package from a distro official package.
-
-Without the version-check logic, the only option would be for the user
-to do:
-
-	ln -sf python3 python3.11  # or something equivalent
-
--
-
-Btw, the same type of packaging multiple versions of python and 
-Sphinx is quite common on several distributions. This is not
-an issue specific to openSUSE.
-
-Also, notice that we're talking here about building docs with
-distros that are using a 9+ years old python3, e.g.:
-
-	- openSUSE Leap;
-	- RHEL8-based distros;
-	- other old LTS and EOL distros that have a too old Python 
-	  versions.
-
-Thanks,
-Mauro
 
