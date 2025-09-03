@@ -1,116 +1,106 @@
-Return-Path: <linux-doc+bounces-58575-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58577-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50E52B41422
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 07:10:00 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FF81B41472
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 07:46:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id CAB101BA0136
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 05:10:20 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1E31654228E
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 05:46:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E096B2D595D;
-	Wed,  3 Sep 2025 05:09:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 662C22253EC;
+	Wed,  3 Sep 2025 05:46:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HS40c5Po"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LJkN5Ubk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1ACB2D3ECA;
-	Wed,  3 Sep 2025 05:09:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57C6A20EB;
+	Wed,  3 Sep 2025 05:46:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756876187; cv=none; b=D6hQ6q0hgp6bxm0PxoYTWMjDPrNNuhyULwwV5WBpvbckJd3ANLyI+45mpOTYl2xpLLNPnf4bsTG2D5gE7g9j94EN713EOEpHekjFUx9MGy1XTmSnq+SQnF7N81NesNNnsbqAJsAAoKft/bss0DvigmszW/DVFmygIh6NUS5Q+Pc=
+	t=1756878398; cv=none; b=HlXFAwAJq1eEPr1PwJul5FtDhTkbnwGeq1PIDahuHi6eoMA5vViTiH+XI71IWWM9PB9FumH7te2TApFDYVb6xiTz9sbOfnMkfx/nlvRlNxYb++i6nqZRWHO0a+uB6I8sBuCaT6Dlx+mBjHNlVwE3wSAGTM1nXSrWfSij6lFoAaE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756876187; c=relaxed/simple;
-	bh=+0mTKTtsuCB9dFm243PXtxnJL1c9wmKQIOd8m9PW3Kc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=JuQFsK8cnyNrUR3F1Lip0q20lpq3AGlEFnqgY+cpPe1R5w7pSK/sT3aUywo66vr6WYb+MWg01MaWeDS6PoNnwA1fBd5vGtL2KRsbhNiiMRR+P2eOup+1C6UKsi41/WcvSkwSPWChN2nvoGMWzy9bkkPOOEg9ZOQmOVSEYkniB9M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HS40c5Po; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 545BFC4CEF9;
-	Wed,  3 Sep 2025 05:09:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756876187;
-	bh=+0mTKTtsuCB9dFm243PXtxnJL1c9wmKQIOd8m9PW3Kc=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=HS40c5Po1oWGl3J206WXL9hfHDuG8uJODCBi2deOsOSZ+5vTBbDVsJzPHJZzCiGyY
-	 1BVlzyD66fvzMin7cQx8TM3g7Uz/XSKwxld42QHIiWZzLn+R+E5HyBmb+bRu9/nR4J
-	 fE8kWKwo5STCvinrgb6+bluvlCUKr6IRJPMjN0DaW/zavZyYw2LNf5Dgzl/02tLteR
-	 7vc0WyKwUYsxJmvNHtQYGIAF7BEkLVUFqcMYy4xliqDPPKvn8ci5mxWgL5lMRExSZw
-	 NjJqpzkA/B1QVK12TPV9Lb10zck0DwI0JMuF7L+T+3mDjLLIJNmH38ZGgZ8AzkVuHH
-	 w74LH5iNvtKQA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C71ACA100B;
-	Wed,  3 Sep 2025 05:09:47 +0000 (UTC)
-From: Cryolitia PukNgae via B4 Relay <devnull+cryolitia.uniontech.com@kernel.org>
-Date: Wed, 03 Sep 2025 13:09:48 +0800
-Subject: [PATCH 4/4] ALSA: usb-audio: apply quirk for MOONDROP Quark2
+	s=arc-20240116; t=1756878398; c=relaxed/simple;
+	bh=lba/onyM72LkmC40tYiUqo276H57gB2CvydBi6T6zoM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=n9jfzYPoawK8XZ7DRe0cJZ48BGpezrBfYonkV5QJNM2JZJGvYRGuqpkby2Qth583VDBIUbrKflXCIcXOm/NBqiP9l1xBLSg4LiO4vQPoE/XSYvz89YNbNP3LeBNMaSpzPL5i4oU1uTGdRb0NKoVmy234s/sPfndZpNzj9Dro8cA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LJkN5Ubk; arc=none smtp.client-ip=209.85.210.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-7723bf02181so2794064b3a.1;
+        Tue, 02 Sep 2025 22:46:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756878395; x=1757483195; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=N56o4i6wpcq7MoneUhLU2w8v3e0MP3V6I9jOXvxsGzI=;
+        b=LJkN5UbkpIgKi9hWzW1+ZvtofG/CEDOFrSEFpvhWgJ+ev7GZRKEb0kMjVQtMAJ3mAG
+         Tp32nEJpT9Jnl+jCpCqL1S4RdDLajm1Coj5JPj5NXBtj0VE7dXZVR6UPUWNTB9/rJ7Am
+         53ZAaNc0khBgKAKE5X7idgU7O0Wv9xcMUKHPkJghw9EhIla1Bpi6KGDUGSSdcRTHT+Ga
+         ciX1ZzsLM3Hkqvm8GyeR9k6BJ+IIBK4NAKtfXfoUaqyJipVGr3uSiBPCM6/GacJjTLUJ
+         Awxv86vzyy1lS/c/FAtcQnaTIRHLOR7MLzzRNM5z6sABu4ENIVzLKSHH1/qfRmlfSOrZ
+         Qfmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756878395; x=1757483195;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=N56o4i6wpcq7MoneUhLU2w8v3e0MP3V6I9jOXvxsGzI=;
+        b=K2aobvkYBJqksVBfHjoFRl+WjdS62PjKuPKPTWK1aqk+rcLW41cm/Rn1rHvBPetir6
+         5/+f//K4QpruK6qJEVadb9DY9YBFN399eEBorAnut8q2AWdLluQU58shcsHwBIPRA4Eo
+         gDw203omn4nOnXm0I1VK8kf3BuIfCuRE1+kmrb/jc8DXK6vgpxWPtVTl5qqYAVod/nb7
+         eHmj+a67rtfGXXV0tmevK1GONkyFAuWfg7aufY7GGgYTD35DDSIxgv8MT2ZUdUG3rftg
+         o5WkaIJXpX4fb237lQ9kpRk91XISRWGH3UPuGZmG5I9BKcpfkQJQP01RGX5AiDwVwJnf
+         5lqg==
+X-Forwarded-Encrypted: i=1; AJvYcCV6YunO1MBlyY0jl6IbeHjjDpg0PxfmKMeieNh5zF7gogmYERNnzZVllsJLqFgrcrLt+Xb2sAiO6WA=@vger.kernel.org, AJvYcCWG8HdCkgdVynKUG0xsnnRljJNlaDDfL70RWz9Hw0SxGGM8qtOomz+VUKnnpeFROiN/9Gzjk0RBReO2wbkJ@vger.kernel.org, AJvYcCXb3oBiptDVB7b2pda9G4hgYng5mN+3VHuTfOcUAV/KTroCa2zEWq6UtdUqqutJ07TH9kz+JEtS7vDptGU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxoKnpRxomMlZpheSCvyaGsVm8LE8/ygOx3SOAA60KxV3h+rjxh
+	DNMM1zEGeViiTpTzJlsYHbvsdkMk+1XqPkeTF4cot/jCLU4I7eqry4V5
+X-Gm-Gg: ASbGncu3JoeS3ipIe9fiGwV+kWiqf4tWI61ObgGNsnrRrO+f0GJVf2RtOEBoCPQeBSd
+	i+qD7D7xBxPn4ByCThT8JTb6cdo6Hv1C+Fq/BSSMxMnd6mLkkSD3+RC/58RVQe7pGbvqn2wZPR0
+	xWMv2w8iex9jbJeO1ry/r6KTqZma4gYH+vCRSoC5JGKPHZQz0kMXZjURTH88KP66DsrusHQEVA3
+	Vsb0rj87fBpvN4izkMJKUFGyQYSYSNU1ZnqZ07tfySP0y5NUCWXSSoxmYWm4CpA0OazHq41MlzU
+	xYyMkwlZ65tZ3Bw+bQd8tWhNqi6b4oveUjQBNC39HPibDz5ssbSpy9plygVlIsVVPsS9YNjjR1D
+	JYnRq9RSP2/0XjSzUOuyg5H0HTJR4tOlAGdSBqyj4FRSJOA==
+X-Google-Smtp-Source: AGHT+IEV4Vd2Y2C/hEN7OzTOzJalF3mXaqeIzl0gxBoE8BM9yE4GNNUoGTh8tHsozmaUEx+RVqUCyA==
+X-Received: by 2002:a05:6a20:1595:b0:243:af83:6c75 with SMTP id adf61e73a8af0-243d6f0293fmr19716646637.28.1756878395509;
+        Tue, 02 Sep 2025 22:46:35 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b4f317ee7cfsm8828644a12.3.2025.09.02.22.46.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Sep 2025 22:46:34 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Tue, 2 Sep 2025 22:46:33 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Tom Ingleby <tom@ewsting.com>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Eugene Shalygin <eugene.shalygin@gmail.com>,
+	linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] hwmon: (asus-ec-sensors) add ROG STRIX Z690-E GAMING
+ WIFI
+Message-ID: <cb9a8cf7-4e20-49a0-b590-8190d329178c@roeck-us.net>
+References: <20250903031800.4173-1-tom@ewsting.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250903-sound-v1-4-d4ca777b8512@uniontech.com>
-References: <20250903-sound-v1-0-d4ca777b8512@uniontech.com>
-In-Reply-To: <20250903-sound-v1-0-d4ca777b8512@uniontech.com>
-To: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Mingcong Bai <jeffbai@aosc.io>, Kexy Biscuit <kexybiscuit@aosc.io>, 
- Nie Cheng <niecheng1@uniontech.com>, Zhan Jun <zhanjun@uniontech.com>, 
- Feng Yuan <fengyuan@uniontech.com>, Celeste Liu <uwu@coelacanthus.name>, 
- qaqland <anguoli@uniontech.com>, linux-doc@vger.kernel.org, 
- Cryolitia PukNgae <cryolitia@uniontech.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1756876185; l=882;
- i=cryolitia@uniontech.com; s=20250730; h=from:subject:message-id;
- bh=7pAYirEG6noZ5IXNpIYlyRGjI9vbDXOa2QYKKttvvvI=;
- b=G++rkHQVWT4ctoWBFWaBkDBP66wgyo7rvmHJAIrZIqjZVsBwYyoyP1LUt1nhxRDjgGa1RmAE5
- ebV8TrP6lF/CjRl2sNThL2XgI6qBiKNxV6CoZVjn9ubYedh7P/osLbW
-X-Developer-Key: i=cryolitia@uniontech.com; a=ed25519;
- pk=tZ+U+kQkT45GRGewbMSB4VPmvpD+KkHC/Wv3rMOn/PU=
-X-Endpoint-Received: by B4 Relay for cryolitia@uniontech.com/20250730 with
- auth_id=474
-X-Original-From: Cryolitia PukNgae <cryolitia@uniontech.com>
-Reply-To: cryolitia@uniontech.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250903031800.4173-1-tom@ewsting.com>
 
-From: Cryolitia PukNgae <cryolitia@uniontech.com>
+On Tue, Sep 02, 2025 at 08:17:56PM -0700, Tom Ingleby wrote:
+> Add support for the ASUS ROG STRIX Z690-E GAMING WIFI
+> 
+> Signed-off-by: Tom Ingleby <tom@ewsting.com>
 
-It reports a MIN value -15360 for volume control, but will mute when
-setting it less than -14208
+Applied.
 
-Tested-by: Guoli An <anguoli@uniontech.com>
-Signed-off-by: Cryolitia PukNgae <cryolitia@uniontech.com>
----
- sound/usb/mixer.c | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/sound/usb/mixer.c b/sound/usb/mixer.c
-index 5fcf1117777d1a1423806ea139a7692eea3c9ee8..34bcbfd8b54e66abc0229eefd354eb7bc4c01576 100644
---- a/sound/usb/mixer.c
-+++ b/sound/usb/mixer.c
-@@ -1182,6 +1182,13 @@ static void volume_control_quirks(struct usb_mixer_elem_info *cval,
- 			cval->res = 1;
- 		}
- 		break;
-+	case USB_ID(0x3302, 0x12db): /* MOONDROP Quark2 */
-+		if (!strcmp(kctl->id.name, "PCM Playback Volume")) {
-+			usb_audio_info(chip,
-+				"set volume quirk for MOONDROP Quark2\n");
-+			cval->min = -14208; /* Mute under it */
-+		}
-+		break;
- 	}
- }
- 
-
--- 
-2.51.0
-
-
+Guenter
 
