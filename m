@@ -1,430 +1,243 @@
-Return-Path: <linux-doc+bounces-58559-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58562-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29ADBB412A0
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 04:56:26 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id E4302B412A9
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 04:59:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6E4194862AE
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 02:55:53 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A51C416291E
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 02:59:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E9D6B223328;
-	Wed,  3 Sep 2025 02:55:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A35A823817C;
+	Wed,  3 Sep 2025 02:59:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="A8vbIoLR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpbgsg1.qq.com (smtpbgsg1.qq.com [54.254.200.92])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A5AB221721;
-	Wed,  3 Sep 2025 02:55:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.254.200.92
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756868129; cv=none; b=WVpnmfaRiiCMFi5UZfUgxiUiqZ4yGER/Bzkvqe0PyPTWOSGqi0jmefzcicHk4LIIixCQ86jYVZBkUwMHZObSOiW31PWl+edirBmlAab9bCs22LYcFzyqkuwCHjibJ6nuxIIQ4x0Gc6AppReWC0UBt3HXoCN+Mk8cNtSXbT5kH7Y=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756868129; c=relaxed/simple;
-	bh=e6opYFhVojaH9Sx8RFqPHGPIWMMRkKTov8qsVvCkaa8=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=RNx604dbJVmZNo/GGfxXaDsIbZxq/GG0YaFJhIAXBalHdbO4gwreJ+QQGTvkVuPxukf1bvneObsfHDO9NNjUjAXHXGF+kkNAtGyEGPqakYufe2rXG983TQKD4hYNg5zb5n8vtOKwOUhl+IERvnkxL2miIe2qvbwGdepUIYNZS9s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.254.200.92
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
-X-QQ-mid: esmtpsz11t1756868099t2251f2e2
-X-QQ-Originating-IP: gy1EKhzwJKWgk6rPuTzo8+IpRk+xDR9RQcBV/tZWzxQ=
-Received: from localhost.localdomain ( [203.174.112.180])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Wed, 03 Sep 2025 10:54:56 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 10481075631396352496
-EX-QQ-RecipientCnt: 28
-From: Dong Yibo <dong100@mucse.com>
-To: andrew+netdev@lunn.ch,
-	davem@davemloft.net,
-	edumazet@google.com,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	horms@kernel.org,
-	corbet@lwn.net,
-	gur.stavi@huawei.com,
-	maddy@linux.ibm.com,
-	mpe@ellerman.id.au,
-	danishanwar@ti.com,
-	lee@trager.us,
-	gongfan1@huawei.com,
-	lorenzo@kernel.org,
-	geert+renesas@glider.be,
-	Parthiban.Veerasooran@microchip.com,
-	lukas.bulwahn@redhat.com,
-	alexanderduyck@fb.com,
-	richardcochran@gmail.com,
-	kees@kernel.org,
-	gustavoars@kernel.org,
-	rdunlap@infradead.org,
-	vadim.fedorenko@linux.dev
-Cc: netdev@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	dong100@mucse.com
-Subject: [PATCH net-next v10 5/5] net: rnpgbe: Add register_netdev
-Date: Wed,  3 Sep 2025 10:54:30 +0800
-Message-Id: <20250903025430.864836-6-dong100@mucse.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250903025430.864836-1-dong100@mucse.com>
-References: <20250903025430.864836-1-dong100@mucse.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1844C25A2BB;
+	Wed,  3 Sep 2025 02:59:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.8
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1756868391; cv=fail; b=nzPvz1FRvFzK6Redtpf+yZjJwrWhYehrsTGTZvz8Tiv9J6pGWqrUfyLMm+zOv9fmAAMSUkWc0a2SYkM8RSIBzA44vndYa5qUoA64Ojk2oRtnku1waiUMxp03nH4N2ApGJ3nswuFeylGsEKMexzgVJ4+It6rVISjKooWQSj9xnfk=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1756868391; c=relaxed/simple;
+	bh=kL4KghgUjmyDwHBEL7E2KdMh3U/oqIKfnomS9B/q+kM=;
+	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=UyIML8eqqqFANtptsEPEAFWMZdBBOAMIgsZJio+dsKqvrYlMpJVtMu32PUalb2a50RBBYfL/cWyDJFnqNyC9IQ9kuaZx9UycWipYaC1ZejyXgvXmJnpYiJdm7neGcZVj8BH3H2RrXznNZkJp1FjDKepMZzx4yOuQLLXt5sWSCpE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=A8vbIoLR; arc=fail smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1756868390; x=1788404390;
+  h=message-id:date:subject:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=kL4KghgUjmyDwHBEL7E2KdMh3U/oqIKfnomS9B/q+kM=;
+  b=A8vbIoLR5qAkKs18PJ4cT+NPfitejf3/uFKI9Im8BVTksFIJE22nwCku
+   nOdqJihVc7jAAsY9GgKqYHV9fQh4ZiNMhlC3Oy69kaCObN391BrXAbVBa
+   ZPllzCDdzH6vvVAApR0/utO/MPTJHNjDksx2VSvKntFpElWvDMtqOiwfi
+   eqIkj9yfNgd6wYgUQJwmbN/Dm967m4xT7H7m7t7p69I4S7l0UbdOu8MvR
+   CmB5b/q9ONjMnyBenypFVvdEAfYkB17lrxPaBp1jVaP02dVc+bEa1Tafl
+   AUHCi7hDxYrBzAFhRldnrJbpnIQ9G1koRmo9xTMUJBbvVj4r+UCpr75AO
+   w==;
+X-CSE-ConnectionGUID: BB7/BVFKS6q6hFBp4iLGcQ==
+X-CSE-MsgGUID: 0iLZuVC5SHyHPTm8cOjj1A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11541"; a="76770644"
+X-IronPort-AV: E=Sophos;i="6.18,233,1751266800"; 
+   d="scan'208";a="76770644"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Sep 2025 19:59:49 -0700
+X-CSE-ConnectionGUID: kOHQnywtRXqVxpVtYUwe/Q==
+X-CSE-MsgGUID: 9oKc8lA8ToG5wwjfZ9s0Iw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.18,233,1751266800"; 
+   d="scan'208";a="195099954"
+Received: from orsmsx903.amr.corp.intel.com ([10.22.229.25])
+  by fmviesa002.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Sep 2025 19:59:48 -0700
+Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX903.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Tue, 2 Sep 2025 19:59:47 -0700
+Received: from ORSEDG903.ED.cps.intel.com (10.7.248.13) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17 via Frontend Transport; Tue, 2 Sep 2025 19:59:47 -0700
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (40.107.94.75) by
+ edgegateway.intel.com (134.134.137.113) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Tue, 2 Sep 2025 19:59:47 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jdRxNh7VPnxHDR/LZ5irqg9JlwENQ/X2mSeDvbDwUKnWI+JzKx1k9TuRjdsTcateLEYDVVqOQzhRReYJaYlwie6MnizZzmyFNAVbUbI4CHbmZwFYjCmPB0HxvyWInOmCudpSWwp7eq01tBPjjQ8g/23p3xmtvbAWcXfzm+unKqH3Sz5WlN2zrFgQHs25hCMv+bAXJNi7dJVtJenKA6JxkJQtGS78jmpplZD/M+XIemFU15F/GP5MOmY+nJxBduZfSZh5/m8rnPhjF8hSZXoHt412KjHVbYf3KOAzvFGJvwglGK2xK2Z3xsFBD5bUjLr3UyPlsQeWnS5zi1qC9Kwx1w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UJBeoun556+2p3vfmG1X5VTFIhsLKgZqGs8rFHWx8+k=;
+ b=aSg2h52wD0XuNr5OTzBBPolSPy9OyT4+CO4mxCAiv5hZZsohlRG0/t7Q4Ih08XfJjeIpjX/wLcdi6hCr9E+rh5MJ8D+mAry4z/FDH0UEVDuryOeghfOWlajFNHLYdNjEZuKa8jsTiyZQIS6OnnW7SbCwFJ3FPkgPbJJ6Y6tqR22dLnTP/SSK3NGmoIVZT31ExlbId+f/hjxbR7bruB82+Rx67lHxixGeUtVNob+KdeFEgVx0CmojFpWucjTKxReEzkYGTItphhBqlkzyB1Mf3afq8zR5iwMjgZfffTudWMDimKrcFu1sZbmHuG7UDPF4c+12LZzC4nAewj9piw4iiw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from SJ2PR11MB7573.namprd11.prod.outlook.com (2603:10b6:a03:4d2::10)
+ by DS0PR11MB7410.namprd11.prod.outlook.com (2603:10b6:8:151::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.17; Wed, 3 Sep
+ 2025 02:59:44 +0000
+Received: from SJ2PR11MB7573.namprd11.prod.outlook.com
+ ([fe80::61a:aa57:1d81:a9cf]) by SJ2PR11MB7573.namprd11.prod.outlook.com
+ ([fe80::61a:aa57:1d81:a9cf%4]) with mapi id 15.20.9073.026; Wed, 3 Sep 2025
+ 02:59:44 +0000
+Message-ID: <c7cfadb6-4751-4ea7-b602-896334014411@intel.com>
+Date: Tue, 2 Sep 2025 19:59:41 -0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v17 28/33] fs/resctrl: Introduce mbm_L3_assignments to
+ list assignments in a group
+To: Babu Moger <babu.moger@amd.com>, <corbet@lwn.net>, <tony.luck@intel.com>,
+	<tglx@linutronix.de>, <mingo@redhat.com>, <bp@alien8.de>,
+	<dave.hansen@linux.intel.com>
+CC: <Dave.Martin@arm.com>, <james.morse@arm.com>, <x86@kernel.org>,
+	<hpa@zytor.com>, <akpm@linux-foundation.org>, <rostedt@goodmis.org>,
+	<paulmck@kernel.org>, <pawan.kumar.gupta@linux.intel.com>, <kees@kernel.org>,
+	<arnd@arndb.de>, <fvdl@google.com>, <seanjc@google.com>,
+	<thomas.lendacky@amd.com>, <yosry.ahmed@linux.dev>, <xin@zytor.com>,
+	<sohil.mehta@intel.com>, <kai.huang@intel.com>, <xiaoyao.li@intel.com>,
+	<peterz@infradead.org>, <mario.limonciello@amd.com>, <xin3.li@intel.com>,
+	<perry.yuan@amd.com>, <chang.seok.bae@intel.com>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<peternewman@google.com>, <eranian@google.com>, <gautham.shenoy@amd.com>
+References: <cover.1755224735.git.babu.moger@amd.com>
+ <ceb6a32f3d539fb52f5271242a4fa68b1a173279.1755224735.git.babu.moger@amd.com>
+From: Reinette Chatre <reinette.chatre@intel.com>
+Content-Language: en-US
+In-Reply-To: <ceb6a32f3d539fb52f5271242a4fa68b1a173279.1755224735.git.babu.moger@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MW4PR04CA0250.namprd04.prod.outlook.com
+ (2603:10b6:303:88::15) To SJ2PR11MB7573.namprd11.prod.outlook.com
+ (2603:10b6:a03:4d2::10)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: esmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: NYH+ffWV0Wms6a5GcFrFfp7PHrYWalChGKRGqLmAfQrj4YGExFeDXaoA
-	wg8z2KS7CXp+Z9DiSWujhG3RmFkca/5ipk7CmuotWBJAPxUy0DHJ//or7SWT6g3Bu0SJFGy
-	lB6e0iGaw0QsrE9axTDtwrXpE1iDK50qddrIfV5F0fwGifhQ9ZxSt80Z/nRJkr6eIAzw05B
-	2kK7oHtPrsU1wY3/vY26/y9wZOXNJ5oEtm6FWBdwEFywUq7iQTT/W46Ca4u8PIKMBL+rF8d
-	g6vNC/Kz/F77ekrvgoAeNWxojqT/SCa9qNNqkeWGLpMcgpCuYr08PwJHHfYnkioHRzJji3u
-	zeBv/Ekz1G6qPLJ5TyD37mYsYJQ+AsJwbJI3CDs/ec48xH8XAjJ+8BI4koSttbi+MbCJap1
-	rcB1FUgp6eCoQV6MBNjcV5dv03nwnJURZ8+DtgvZBBxAutzwUFap6CXVS0A09sCmsDnzXj/
-	QfkNf/Z/aBJ2RtEIl6TwxyDVvlmf01OdKu9VG+3IPIzvTL9i/lCeHeXT0TQyZoDA50Rh1l6
-	ZO6pYAsMQaRUHA+Fh7uaYYyXgs0SLl9dwnHe97uABtbv1/TXXiN2l5YfpFXG7krcTVNxGUD
-	ztvhiD4smWqIfc1PHEEF0emIEwvz/As6egpCa1bOx1x94fjd48oLC99c1Yq5LxFXLlILRhH
-	fbDQPqOUQ+niXUAETfdoLFXQIjKLqyjdS+fFi259XAbRh5X2nFul0lNFJxR8cOum4O74wvA
-	yDfZcSObaMtV9AFX8/u2tywcTi+uMkFGt5CQBggkRiqqhCEVECafZ9AbzG7T0QyPZ/f6mmW
-	KDgaiot0+vnaM78R98TXkeWo95EvNgg8gKkd5uj94DFGtGxXM1B93cJavc/gfnaQvH37WO/
-	5hXw/tc42eE0YTIAK/HEfBp+ves3xNwDGOcoo1/wmrK1l5VjqaeORg8WSgy5pTAIjAT4YGe
-	gxJNvVXqIr3rhRga97jSGa5PfK35uLXgT1f1znUqBhXtSTze+azlpC0yMn+d15hcOKfmIqH
-	c0ObwOAUVu4Uk59NCi0r3jFKUfkg7aeFfeFiOg/DHc9uA0e6sU
-X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
-X-QQ-RECHKSPAM: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR11MB7573:EE_|DS0PR11MB7410:EE_
+X-MS-Office365-Filtering-Correlation-Id: fdad21ad-323f-4772-9f68-08ddea95ef75
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UGhXVUUxSENWcDhnb3hmWmx3OU1qVEIzWFpTNWNMbDBPdnROdldjK2pObTkr?=
+ =?utf-8?B?emtNSzFxVXBKQ0ZsdmJpbjFxVURhOUMyVUFNcmw4VWpKY2pqOGF6Vmp0UGxF?=
+ =?utf-8?B?MUo2T1JhT1NCdytSbzVUa0RzRmVNTi81SGNCRVY0QWxYUDVKc0lsNUpjb0RQ?=
+ =?utf-8?B?MnIvL0R2d0hsa0hxYTU5NXIzdWtmSVRQQ25wWmxYcGtXc1pRa2tORFlTZGNY?=
+ =?utf-8?B?azhsVnBwN1BRTEcrZjdabFhZNUZid0ZsQ0R4VUVpVmI2UWRuR0ZtZEpWcHRD?=
+ =?utf-8?B?TXVadmVMdlFNamRGcVVmOTlXYW1Ddm1zZVE1QTAxbUFzNlZXc0k5MXVqYkhM?=
+ =?utf-8?B?OWJGcURvbEJ0TjMxTy9Qa3NIUkRoNi9DQnY4dHgxRHIwa3RhWmViUnVyYlJt?=
+ =?utf-8?B?K1hqZ0QreG82UlhVZHpncGF6d0hwSStjZkZ3RXBtVnBQcFNWM2JYYTgzSUVY?=
+ =?utf-8?B?QjVBd0lmeXBQajRIbkdTeGFLOWtXbjJSd3JKcHVrQnRPWFZ6WFRsRHN0TUdC?=
+ =?utf-8?B?TW9UOEtiOEhWemZsak8rUVNCdXhnUnFveldEUzBCS3hUemRaK1lDQzVPb2dD?=
+ =?utf-8?B?d1Yvdmx1a0kvajNNWlkrUHE2N0ZJZEJUMWtvUldVM01wMndVd3JxVU85TzJL?=
+ =?utf-8?B?WlY2N09jTGhVN0VFOVhOdyt0WGc4aHhCck5UZmpGalIyZzFpYW80MzlBOCth?=
+ =?utf-8?B?Ri9jV1dwVTc4SUZxcUl5Y2RCOGt1YlZiblAwYW1zNFIvMUdGSGJZNEZJYWlt?=
+ =?utf-8?B?V0l2SGpoQnQ0TkF1UXZkRTJJRlZLK0srZHVWL2FDcHorb3dUMHJvUDRtQmt0?=
+ =?utf-8?B?cVk1VGtJZHBjbFI5NW9KSTVxcWdJait1S05pVTJwTlkvTVRQb085NVE1OW9M?=
+ =?utf-8?B?cUxxbmxhWDNEaU1qdUtkMnFXYlNMNGtnOTlxVTdnRVo3VklPMzhlS01oNWQr?=
+ =?utf-8?B?WmUwam1yTWF0OXJYT20vUnoxVDBlQmk2LytvbUdHUnZneHlQdTg0MEJtb0VF?=
+ =?utf-8?B?MlZBOFZVeWZ0MEZtYWJnWkFvOVZYR2JVSlByTWRMaUs1YnVFUlFOcUxncm5T?=
+ =?utf-8?B?VVVWTGprUFFiZ04waDFqRXJzY3B6ZEF2WWEvT0RmTzNHNFJ1NzVjUmszVW9U?=
+ =?utf-8?B?dXh3S3NkUlVtU0RRM1kza3NZdjZtSVV4aVpiYUZwbTM5NnJibnBiSGxZNGJI?=
+ =?utf-8?B?SWdmTnErZEd1U1liM3NNMU84MDg4QVJQbm5MSU8xUEM2TG10WXk1WkNTU0pL?=
+ =?utf-8?B?NU9NNCtON1QxVTgwUWtXaERoajd5czM0K1NkVHhEQ1JKZTFXRHNLNmFQM2N0?=
+ =?utf-8?B?QXo3eGRCS3dpVnhRODJqT1ZQUDY1dGR6SmozZVE3T25id2VOVjhEeWE4cVB5?=
+ =?utf-8?B?WWc2OVhrWkNoc2xvQVZYeFRLVDJzTitBSmljOFJPVVpkSW1tVnl5QjlKWVZR?=
+ =?utf-8?B?aWowVGJ3UGV3cTB4RlJPN0oxYkh6Q0FzTWFLOEhxdEh0aDFWaG9oYVpMdW1S?=
+ =?utf-8?B?LzVTazhtcytmVXNQbUE1UFpIMkMvaU5mZStnZHVSa0gyb042UGdYY0xaRU15?=
+ =?utf-8?B?QzVrODE3OW16ZXZ4ZnFmUW1xd3hpZWtKVnd5YitSL2R2SVV1L2Q3UkZvbWpm?=
+ =?utf-8?B?czJRNEZ2Q3dRaytaUWMySC9nK1JOVlpHWjk4Sk5NM003ZTJicnRGZDlaSWkz?=
+ =?utf-8?B?K2pjQUxIcGZ5NDQ4MnRjejAyckJQOER2aEkyU0tMYWZtMWxTTWhPT3hsek1O?=
+ =?utf-8?B?RFMwcTNMa0hvdllTckxWWS9KNVRnV3pPaVlWdVhMYmtlUGoxcllHcmJDQmYv?=
+ =?utf-8?B?VWI0T1M0dnVFWkdRSGdVZUVLOHdXdlE3SkQ5YlUvZjBFU1QzcnRHQ3RDeSt5?=
+ =?utf-8?B?SkJYNFFpWno2OXBJWml3bythc0RUM0RrNWtOMVU3WWZPY2dNdVM3d2xQR3E4?=
+ =?utf-8?Q?ZTU9KamanAc=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR11MB7573.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RXNVbS9SZmFvaFFjbyszVTBmTkhMemxkSWlzQW5JU3p5NWZVRHBHbkZqeVVv?=
+ =?utf-8?B?cEdyK2hJYldsTmZPeWorRFVia2I1VDRhQ3VJM0hNdkNPSXhsQ0Z5OVNLMWFq?=
+ =?utf-8?B?VkgvTVJ3OU51allIbmZjZEF6bng2dWZsTWcxOTZ2cWJCZnY2ZTkvMDlsUW1p?=
+ =?utf-8?B?alN1RWh1aVJQaGRBbDk4ZFllS1duNndSeEc4RGQwbUIzL05wekdJNnhiekVj?=
+ =?utf-8?B?c3FWTzVWb2ZpRkxuemZXNGU4aDBDd1dRTFVOWUNzdW16Nkh6WE5TeWZ1Tm1h?=
+ =?utf-8?B?RnF2Y0N1S3ZWakd1Y2xpdnp0MC9pV0xPRkw3UVhFSlVNOE9LeXM5NVd3Vi9n?=
+ =?utf-8?B?SmdLanV0WjEzcGFic1VDU212SzduN1loUmpKaHJHU0RJSDlVVlpMbFdIeWF6?=
+ =?utf-8?B?RWdubWx3Si9JQmRwSDN6bUlFMmxEbmRMQm9QdTZtMnBIb1lsK1R2TXJQNjdK?=
+ =?utf-8?B?MVpWM0lYUUc0OWNrcEoxM1hQSld1dCtuTVdKOVVIUU9zS1VyUUV6NWRtYzFQ?=
+ =?utf-8?B?eHFvdHNxT1RPNWlLZkc3UnlxR3lwMjQ1TTd3eEx4T0FZcXpqSW5rVyt5TVQ3?=
+ =?utf-8?B?UWdKRUFxcDlmYjNqWCtGVUFYZjJyeEtYOHNXVXE2Y01uNjlsWDNEeSthazd0?=
+ =?utf-8?B?WVJWSjlCSGhQVWUxRmNvSFI3K3orQ3dnb0xIWVhvc0pBN3dudFhNZUMvWkhp?=
+ =?utf-8?B?eHRDZXljdjVLbktabFc5c21CTEZDZU1sYmlRcGQ1UGV3QWJkZjgzKzh1UERq?=
+ =?utf-8?B?djA3ZXZKdkpqOE50TlN5MDFOenBDVzMvVEFYMjk0aDhnZlFhSk5udk0zQ3ly?=
+ =?utf-8?B?bnJONFhFYzkyc3AwNCtFbkoxbkk1eTJsYW1pUVcwQkFCdHlWbEFPZmJjYmFI?=
+ =?utf-8?B?VnNHSWN6YmdPaytxZVJrb21sd3pMZm80NzZyT1VDRXBQYVhQTW9rMmhiUXRR?=
+ =?utf-8?B?WVRDM2pIVlkrUkdTaHhwZU9hYXNlNUJDbDhTWEJmMVlGNURMNkVNb3E3L2RR?=
+ =?utf-8?B?Mm93SVh5RVphUlZxbVdVbXNBVmhQT0ZMNzhGMDUvUUVZY2plMTMvbGlpR2pa?=
+ =?utf-8?B?ZXJrTUVPemJveExsM013ODhycEtFQUc5a2FxQXFONkZ5VVZUbXRkV3pPVDVR?=
+ =?utf-8?B?N3M3RGJITXZqLzFTNXhNTENabWxOYTRxQ250ZnlHVW1UQVZVV1VNa29KZXo3?=
+ =?utf-8?B?Rm9HbHdZWUI5VU5pdTNaRHJyN01OYUN0cjIwdVp6aHZzSk5VbTBtT2k3MlRr?=
+ =?utf-8?B?Y09sUnI3OUk2SkpHZmkzRTRoRExHZzdKQXBsenZOOWx5cEFvcnMzaThMVldr?=
+ =?utf-8?B?RENkY2RjWGNZSTIrRWhHTys5RkVnSEFxT04xd3NCSjhFVkVVMENMdkQwUVdW?=
+ =?utf-8?B?Y3FJMmxVTXM4U0lvOGxkdU1mS2ZNbnFMcnUraWo0dlEvN1R5akdhNDM3bjZY?=
+ =?utf-8?B?b0hTamltVzZQd0NQS2JVSnBTa1Rxa0F3TERnWVhLSm5XS05LYlJSc2I1UktT?=
+ =?utf-8?B?eUloVllLY0VBOXordXBjUmoxU1NYRVVWVDN4dWFEYzNiUnlzeVNLdjJkemNo?=
+ =?utf-8?B?UlpDRFNwaUpMSEZwMnkrY0d0OWNqOGF6Z2tCMEQrRWxoR1pVd3lIUjVhMm9q?=
+ =?utf-8?B?V0Fra0VOZlRzeU02WTBWSEo4Q0d2dnRPUHg1NWpLd1pRakZETkZERlZQVmNL?=
+ =?utf-8?B?SE9NQkxRMWU0Q1ZKRk80Q2ZrdnlSSlZ6Ymx4MTFETlZJdXZNcVNhT0pqenYx?=
+ =?utf-8?B?UEZuN3oxdUVkWU1jbUVzemRlcExVa1hrVnFIZTNtY01uM2srcW8wL3kxTnNR?=
+ =?utf-8?B?MDRsem4xM29BZ0RUeFpEMHRQUWdDQVFMeUtzWWhvUUc2RmphbVpIMFYxaSt0?=
+ =?utf-8?B?MDcyalJ6TUU4M0Q0cmdjd2RmVzZKTWJ0Z3l2UnB3cml2RUp1aklxbzNCWU1B?=
+ =?utf-8?B?NUZGWmZqblhvMTdPeFhGbW1YTHN4THJUZGVtcGY3WnJraWY4NEtLZ245akhE?=
+ =?utf-8?B?bjdWTTJrNklTMnp4S0swNEtyeEdIdjlab2w1c2oyV2N4ZlMyZ0NuekU3UDZN?=
+ =?utf-8?B?L2RUaGkySlRuS2s4OFpLS09CQnJnSUovK2FSbmlIR0hLV1pzeWdpam5KVlhE?=
+ =?utf-8?B?TVpLSW90RkVFTUlXb2NNRld6YTErT0dXczdNWStQdG1vcWRqRGJ2U01mck4v?=
+ =?utf-8?B?N3c9PQ==?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: fdad21ad-323f-4772-9f68-08ddea95ef75
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB7573.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2025 02:59:44.6670
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1xkdVPMqmthIr/DxYY5D9IxXwUsN/ToWAMg3knAyJiOFkWpJQQArxBy0IeBhmnjyOoXlpgglv4GudYwStSeqNDVTyqy+S0nd/NHZPN5CwUY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB7410
+X-OriginatorOrg: intel.com
 
-Initialize get mac from hw, register the netdev.
+Hi Babu,
 
-Signed-off-by: Dong Yibo <dong100@mucse.com>
----
- drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    | 24 +++++
- .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   | 86 ++++++++++++++++++
- drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |  2 +
- .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 89 +++++++++++++++++++
- 4 files changed, 201 insertions(+)
+On 8/14/25 7:25 PM, Babu Moger wrote:
+> diff --git a/Documentation/filesystems/resctrl.rst b/Documentation/filesystems/resctrl.rst
+> index 1de815b3a07b..af0c38206bab 100644
+> --- a/Documentation/filesystems/resctrl.rst
+> +++ b/Documentation/filesystems/resctrl.rst
+> @@ -519,6 +519,34 @@ When the "mba_MBps" mount option is used all CTRL_MON groups will also contain:
+>  	/sys/fs/resctrl/info/L3_MON/mon_features changes the input
+>  	event.
+>  
+> +"mbm_L3_assignments":
 
-diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-index 4d2cca59fb23..92bd3ba76c72 100644
---- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-+++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
-@@ -6,6 +6,7 @@
- 
- #include <linux/types.h>
- #include <linux/mutex.h>
-+#include <linux/netdevice.h>
- 
- extern const struct rnpgbe_info rnpgbe_n500_info;
- extern const struct rnpgbe_info rnpgbe_n210_info;
-@@ -24,6 +25,10 @@ enum rnpgbe_hw_type {
- 	rnpgbe_hw_unknown
- };
- 
-+struct mucse_dma_info {
-+	void __iomem *dma_base_addr;
-+};
-+
- struct mucse_mbx_stats {
- 	u32 msgs_tx;
- 	u32 msgs_rx;
-@@ -47,12 +52,28 @@ struct mucse_mbx_info {
- 	u32 fw2pf_mbox_vec;
- };
- 
-+struct mucse_hw;
-+
-+struct mucse_hw_operations {
-+	int (*reset_hw)(struct mucse_hw *hw);
-+	int (*get_perm_mac)(struct mucse_hw *hw);
-+	int (*echo_fw_status)(struct mucse_hw *hw, bool enable, int mode);
-+};
-+
-+enum {
-+	mucse_fw_powerup,
-+};
-+
- struct mucse_hw {
- 	void __iomem *hw_addr;
- 	struct pci_dev *pdev;
- 	enum rnpgbe_hw_type hw_type;
- 	u8 pfvfnum;
-+	const struct mucse_hw_operations *ops;
-+	struct mucse_dma_info dma;
- 	struct mucse_mbx_info mbx;
-+	int port;
-+	u8 perm_addr[ETH_ALEN];
- };
- 
- struct mucse {
-@@ -72,4 +93,7 @@ struct rnpgbe_info {
- #define PCI_DEVICE_ID_N500_DUAL_PORT 0x8318
- #define PCI_DEVICE_ID_N210 0x8208
- #define PCI_DEVICE_ID_N210L 0x820a
-+
-+#define rnpgbe_dma_wr32(dma, reg, val) \
-+	writel((val), (dma)->dma_base_addr + (reg))
- #endif /* _RNPGBE_H */
-diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
-index f38daef752a3..1c70653545f2 100644
---- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
-+++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
-@@ -1,11 +1,91 @@
- // SPDX-License-Identifier: GPL-2.0
- /* Copyright(c) 2020 - 2025 Mucse Corporation. */
- 
-+#include <linux/pci.h>
- #include <linux/string.h>
-+#include <linux/etherdevice.h>
- 
- #include "rnpgbe.h"
- #include "rnpgbe_hw.h"
- #include "rnpgbe_mbx.h"
-+#include "rnpgbe_mbx_fw.h"
-+
-+/**
-+ * rnpgbe_get_permanent_mac - Get permanent mac
-+ * @hw: hw information structure
-+ *
-+ * rnpgbe_get_permanent_mac tries to get mac from hw.
-+ * It use eth_random_addr if failed.
-+ *
-+ * Return: 0 on success, negative errno on failure
-+ **/
-+static int rnpgbe_get_permanent_mac(struct mucse_hw *hw)
-+{
-+	struct device *dev = &hw->pdev->dev;
-+	u8 *mac_addr = hw->perm_addr;
-+	int err;
-+
-+	err = mucse_mbx_get_macaddr(hw, hw->pfvfnum, mac_addr, hw->port);
-+	if (err) {
-+		dev_err(dev, "Failed to get MAC from FW %d\n", err);
-+		return err;
-+	}
-+
-+	if (!is_valid_ether_addr(mac_addr)) {
-+		dev_err(dev, "Failed to get valid MAC from FW\n");
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * rnpgbe_reset_hw_ops - Do a hardware reset
-+ * @hw: hw information structure
-+ *
-+ * rnpgbe_reset_hw_ops calls fw to do a hardware
-+ * reset, and cleans some regs to default.
-+ *
-+ * Return: 0 on success, negative errno on failure
-+ **/
-+static int rnpgbe_reset_hw_ops(struct mucse_hw *hw)
-+{
-+	struct mucse_dma_info *dma = &hw->dma;
-+
-+	rnpgbe_dma_wr32(dma, RNPGBE_DMA_AXI_EN, 0);
-+	return mucse_mbx_reset_hw(hw);
-+}
-+
-+/**
-+ * rnpgbe_echo_fw_status_hw_ops - Echo fw status
-+ * @hw: hw information structure
-+ * @enable: true or false status
-+ * @mode: status mode
-+ *
-+ * Return: 0 on success, negative errno on failure
-+ **/
-+static int rnpgbe_echo_fw_status_hw_ops(struct mucse_hw *hw,
-+					bool enable,
-+					int mode)
-+{
-+	int err;
-+
-+	switch (mode) {
-+	case mucse_fw_powerup:
-+		err = mucse_mbx_powerup(hw, enable);
-+		break;
-+	default:
-+		err = -EINVAL;
-+	}
-+
-+	return err;
-+}
-+
-+static const struct mucse_hw_operations rnpgbe_hw_ops = {
-+	.reset_hw = &rnpgbe_reset_hw_ops,
-+	.get_perm_mac = &rnpgbe_get_permanent_mac,
-+	.echo_fw_status = &rnpgbe_echo_fw_status_hw_ops,
-+};
- 
- /**
-  * rnpgbe_init_common - Setup common attribute
-@@ -13,10 +93,16 @@
-  **/
- static void rnpgbe_init_common(struct mucse_hw *hw)
- {
-+	struct mucse_dma_info *dma = &hw->dma;
- 	struct mucse_mbx_info *mbx = &hw->mbx;
- 
-+	dma->dma_base_addr = hw->hw_addr;
-+
- 	mbx->pf2fw_mbox_ctrl = GBE_PF2FW_MBX_MASK_OFFSET;
- 	mbx->fw_pf_mbox_mask = GBE_FWPF_MBX_MASK;
-+
-+	hw->ops = &rnpgbe_hw_ops;
-+	hw->port = 0;
- }
- 
- /**
-diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h
-index 746dca78f1df..0ab2c328c9e9 100644
---- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h
-+++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h
-@@ -11,6 +11,8 @@
- #define GBE_FWPF_MBX_MASK 0x5700
- #define N210_FW2PF_MBX_VEC_OFFSET 0x29400
- #define N210_FWPF_SHM_BASE_OFFSET 0x2d900
-+/**************** DMA Registers ****************************/
-+#define RNPGBE_DMA_AXI_EN 0x0010
- /**************** CHIP Resource ****************************/
- #define RNPGBE_MAX_QUEUES 8
- #endif /* _RNPGBE_HW_H */
-diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_main.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_main.c
-index 25b7119d6ecb..4562aeba4a24 100644
---- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_main.c
-+++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_main.c
-@@ -9,6 +9,8 @@
- 
- #include "rnpgbe.h"
- #include "rnpgbe_hw.h"
-+#include "rnpgbe_mbx.h"
-+#include "rnpgbe_mbx_fw.h"
- 
- static const char rnpgbe_driver_name[] = "rnpgbe";
- static const struct rnpgbe_info *rnpgbe_info_tbl[] = {
-@@ -35,6 +37,55 @@ static struct pci_device_id rnpgbe_pci_tbl[] = {
- 	{0, },
- };
- 
-+/**
-+ * rnpgbe_open - Called when a network interface is made active
-+ * @netdev: network interface device structure
-+ *
-+ * The open entry point is called when a network interface is made
-+ * active by the system (IFF_UP).
-+ *
-+ * Return: 0 on success, negative value on failure
-+ **/
-+static int rnpgbe_open(struct net_device *netdev)
-+{
-+	return 0;
-+}
-+
-+/**
-+ * rnpgbe_close - Disables a network interface
-+ * @netdev: network interface device structure
-+ *
-+ * The close entry point is called when an interface is de-activated
-+ * by the OS.
-+ *
-+ * Return: 0, this is not allowed to fail
-+ **/
-+static int rnpgbe_close(struct net_device *netdev)
-+{
-+	return 0;
-+}
-+
-+/**
-+ * rnpgbe_xmit_frame - Send a skb to driver
-+ * @skb: skb structure to be sent
-+ * @netdev: network interface device structure
-+ *
-+ * Return: NETDEV_TX_OK or NETDEV_TX_BUSY
-+ **/
-+static netdev_tx_t rnpgbe_xmit_frame(struct sk_buff *skb,
-+				     struct net_device *netdev)
-+{
-+	dev_kfree_skb_any(skb);
-+	netdev->stats.tx_dropped++;
-+	return NETDEV_TX_OK;
-+}
-+
-+static const struct net_device_ops rnpgbe_netdev_ops = {
-+	.ndo_open = rnpgbe_open,
-+	.ndo_stop = rnpgbe_close,
-+	.ndo_start_xmit = rnpgbe_xmit_frame,
-+};
-+
- /**
-  * rnpgbe_add_adapter - Add netdev for this pci_dev
-  * @pdev: PCI device information structure
-@@ -78,6 +129,38 @@ static int rnpgbe_add_adapter(struct pci_dev *pdev,
- 
- 	hw->hw_addr = hw_addr;
- 	info->init(hw);
-+	mucse_init_mbx_params_pf(hw);
-+	err = hw->ops->echo_fw_status(hw, true, mucse_fw_powerup);
-+	if (err) {
-+		dev_warn(&pdev->dev, "Send powerup to hw failed %d\n", err);
-+		dev_warn(&pdev->dev, "Maybe low performance\n");
-+	}
-+
-+	err = mucse_mbx_sync_fw(hw);
-+	if (err) {
-+		dev_err(&pdev->dev, "Sync fw failed! %d\n", err);
-+		goto err_free_net;
-+	}
-+	netdev->netdev_ops = &rnpgbe_netdev_ops;
-+	netdev->watchdog_timeo = 5 * HZ;
-+	err = hw->ops->reset_hw(hw);
-+	if (err) {
-+		dev_err(&pdev->dev, "Hw reset failed %d\n", err);
-+		goto err_free_net;
-+	}
-+	err = hw->ops->get_perm_mac(hw);
-+	if (err == -EINVAL) {
-+		dev_warn(&pdev->dev, "Try to use random MAC\n");
-+		eth_random_addr(hw->perm_addr);
-+	} else if (err) {
-+		dev_err(&pdev->dev, "get perm_addr failed %d\n", err);
-+		goto err_free_net;
-+	}
-+	eth_hw_addr_set(netdev, hw->perm_addr);
-+	err = register_netdev(netdev);
-+	if (err)
-+		goto err_free_net;
-+
- 	return 0;
- 
- err_free_net:
-@@ -145,12 +228,18 @@ static int rnpgbe_probe(struct pci_dev *pdev, const struct pci_device_id *id)
- static void rnpgbe_rm_adapter(struct pci_dev *pdev)
- {
- 	struct mucse *mucse = pci_get_drvdata(pdev);
-+	struct mucse_hw *hw = &mucse->hw;
- 	struct net_device *netdev;
-+	int err;
- 
- 	if (!mucse)
- 		return;
- 	netdev = mucse->netdev;
-+	unregister_netdev(netdev);
- 	mucse->netdev = NULL;
-+	err = hw->ops->echo_fw_status(hw, false, mucse_fw_powerup);
-+	if (err)
-+		dev_warn(&pdev->dev, "Send powerdown to hw failed %d\n", err);
- 	free_netdev(netdev);
- }
- 
--- 
-2.25.1
+Looking at the final documentation this addition is made in unexpected section titled:
+"When the "mba_MBps" mount option is used all CTRL_MON groups will also contain:"
 
+How about placing this description in a new section titled "When monitoring is enabled all
+MON groups may also contain:" (note the word *may*) under the "mon_hw_id" description to complement
+the earlier "When monitoring is enabled all MON groups will also contain:" (note the
+word *will*). Open to other ideas of course.
+
+Actual change looks good to me, just the doc placement is unexpected.
+
+Reinette
 
