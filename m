@@ -1,114 +1,106 @@
-Return-Path: <linux-doc+bounces-58703-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58705-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBD38B4299E
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 21:17:49 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 71D3BB429CE
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 21:23:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id AC6DE3B24CF
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 19:17:48 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2D54C68841A
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 19:23:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B89872D6E6D;
-	Wed,  3 Sep 2025 19:17:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0B2A32D9789;
+	Wed,  3 Sep 2025 19:23:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gS3mKbMF"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="m8C3Urxn"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BE1F2D374A;
-	Wed,  3 Sep 2025 19:17:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F4FB30AAD0;
+	Wed,  3 Sep 2025 19:23:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756927060; cv=none; b=JpZoG85biDGZl5knz7sYdwCU8MuYZG2F4AZuk9FDHQcgB7Yeep6kqIyqgwHZ8rqIsrbdyzEc0XBa7qr45N+XUstp2M1QQzb+/huBMe9/uM17Ujb6iyUXg3p/x5+2UL1ug52EFvtYHcDqXvEWA/klvT+pW10+zJ2xaZflEQcRx6c=
+	t=1756927420; cv=none; b=ZsZJulL2LyxoRV4PJUTVrXaW65Qbu7wPKZYlakuSgVPQfI1jKqkDSQUEtx6FhJ/B2ND/8IRcEtuHo9ZK/N145lAYQvglj54U6zStv5rpawW5src6ui/Eoqdj45LriQAfqrHuLvhDk9ES7EGBQMyZOJxXCnTi5e1S4utcxT19q1E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756927060; c=relaxed/simple;
-	bh=g/Bz4I6EWjnXiglfW0xnAhMe1F3tQ/a9mgK7S6YMdN0=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=lQBU1gXKQ69GXjL+6z4K2DX7hpBRCmh6EVl6IxS2+d9tMpWFgD8u6xudBYDO5po7m11K9HY0f/HU5cVmHy/89ShoPFeDx7kzvnmUNLkCGZiCty/8/tf91k0ybk5cf6TQ6BwneGevVmh9T7nAMGlGXkDsb5Ec9UN+4RlloFw5H0c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gS3mKbMF; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8135C4CEE7;
-	Wed,  3 Sep 2025 19:17:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756927060;
-	bh=g/Bz4I6EWjnXiglfW0xnAhMe1F3tQ/a9mgK7S6YMdN0=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=gS3mKbMFFfM1sF+4vr4MZRsga3oIjgveJIbt4Gk2a7fjaU3DTtgliLwygscwY9+W9
-	 W9xDtE04f3+XxhzgOypXVCvK0cm8Rivq5m1jiZYE7oqD+Mu1VBWP+cxqEEn6DkaS0U
-	 16lTlkEeEkwmBA3VjM+EZiEnkNiEdUH7So1LAGfi8FeHreWDrBAKn2gnYuc+sPXG4F
-	 kBjLOeeeMJdf28QohPM5MwTSQLDzy/HSHJ8EhCdEhsJU7/8cDMeZmmQ5DSjxgOEU5X
-	 +VicOPrz1o0jh8PZn+0kIi3ys7l+GzcAfskb6LwKAJcHL2byyB6gUgqFxJAHUgxklT
-	 6wzSwd437uE3g==
-Date: Wed, 3 Sep 2025 21:17:35 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, Linux Doc Mailing List
- <linux-doc@vger.kernel.org>, =?UTF-8?B?QmrDtnJu?= Roy Baron
- <bjorn3_gh@protonmail.com>, Alex Gaynor <alex.gaynor@gmail.com>, Alice Ryhl
- <aliceryhl@google.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo
- <gary@garyguo.net>, Trevor Gross <tmgross@umich.edu>,
- linux-kernel@vger.kernel.org, rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v2 3/3] tools/docs: sphinx-* break documentation bulds
- on openSUSE
-Message-ID: <20250903211735.5a541530@foz.lan>
-In-Reply-To: <76c552d4-878f-4ec4-a22c-c5b0f7903eba@infradead.org>
-References: <cover.1756916565.git.mchehab+huawei@kernel.org>
-	<29135db8c8094006f256e1fa0b64663c735737e7.1756916565.git.mchehab+huawei@kernel.org>
-	<76c552d4-878f-4ec4-a22c-c5b0f7903eba@infradead.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1756927420; c=relaxed/simple;
+	bh=4JDJTgQ3r53uYyj3HBe4zhubm/4WXNR7BVJpSU9g2CI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MBM5erbRkvhHgMw63YpD/vBWCXet/e1iETsd606hnjC8vwa3RCUG72XKRZnxAqJKRxiB+fw2PcqHfVAHoopbsJwmYwZn8wHOpHhHcdubDRqlmt2yj7hs8J5OuSaJksLxI28ZKUf/Ii/HG2RrL2IVtZH+mqFOAjwbO+ROH5FGkoE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=m8C3Urxn; arc=none smtp.client-ip=209.85.214.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2445805aa2eso3170885ad.1;
+        Wed, 03 Sep 2025 12:23:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1756927418; x=1757532218; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:sender
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=8Rz5uVzOA7H7auuSeE0duRCSB0VUtJjaNdjd61cz4Do=;
+        b=m8C3UrxnXdT0XH8tex2ossXNvl1E6jsANEJAu/0jLkRb8d+mAOb8R5lbZqAkUrom6z
+         GeKBrSQMjrg98rtcU9bvKpgjpIHtbZxqj00I4+Dl0mdAQUySAwsQKA+TxGrKnSQzDaaE
+         1tvIWjtjvYH9S7Fju3Z/saCuPCy7stsHWxaFDDSiP7AE5zChD9zX1V5QEZrEG9EVLA6X
+         N8GO3jTjkPfLk32zyv0jMsdVzvjsyAO/u6yRIGv3TsCaa+SE89v+f67uhgJ35WocjtWT
+         dFUg/xi0duSGptIH+l287GTNxl6kKXId/Ne6qzuhz8Zq1ZAk1jOf/foBC2R29loUxw0q
+         wEHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1756927418; x=1757532218;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:sender
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=8Rz5uVzOA7H7auuSeE0duRCSB0VUtJjaNdjd61cz4Do=;
+        b=ZbazGFQXFNmClRCPC392JgHdZ8EonT6JU/lpiBGWk++SO5joSg/pu+r+aMI3im54I5
+         B2JgjXOZTSwgn2PGTHBNZr6BBErLLtV1g3jA9cqTh/7XqS+4SvFPeOG6MbmukLbEudBm
+         kziZk2E2+W0bAyvWPgIjxBju2IySlEaYTo5vvLWZpK9YM8pZBbNl7K1G8yYXwnw2Ou2A
+         EhM30TTvv/n537RGW+VHIW+bNj0OCEvB4nW2QCgngHSCQHiraIyK5xTn6PTxO1QNFOZB
+         y+SuBRQhM3fYVlip/1TgOMJndpA1+Ogm7XpKzOybFQuCFHuQCCAvtCzdD1mfxvgEMOUQ
+         bsaA==
+X-Forwarded-Encrypted: i=1; AJvYcCUrJXFkF2msBm1aszD8NuS5/1SzePEXCaC9GK/56/ny8xgd8VeuYS+5gnPoaXKJ+Vo9a0LGPLIvadPWphVv@vger.kernel.org, AJvYcCV3LGLMnRG8Z2YvcIFBJZ/rKk5W3UW5T1kIeJR1yDuFU5BrSkVPhM1nthFHIRm4BSbp+Tv/Vg1LbBQ=@vger.kernel.org, AJvYcCX5I0tK8bkqb9cVfawlysJ2t5hTI1qqgQgod5YRLQ/wRGLsFcRYwShOXML/5sbXs5IsUv5/gmyVkuhPZ70=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyOz6XmyfCVpW8DwuutSNyy5GrYMJ9kkApsAimGDiwzIN6hkuWC
+	m3EFCSOBfiPFJ0jqm4syC9+XueQKx0NwSE0uYQZ7KaxX1lCZlmKkFDtq
+X-Gm-Gg: ASbGncvzZPapt7p0f/QWD+LXmA7BR8n8JfMgrtIMT0N9hXm6kBynzHmIIriT4i657Zo
+	f22HvbldEjTsutAQB5CqLKRWzfB8+LbI0RA2y567/7y0kIILehomdga+YfDQ/L2o+s/ivTNIqfp
+	TPnrY9UfieNRQHvzfm+lnWLI+Y+gnXp6/3vuYFMy9Uoy9dZ0GLvljsMwf16WvQfcZJefkGYsVwn
+	2Q30HExK9baKEg+g5TuSuZ045ZyvbKPuIk/UPJdum7N2zSpig+0nKq3pOw4IiCelOYNUlBETmRt
+	/xJezJvKEvoVEsVnDHtRUBu/HFXGSFMQvyr6OB45I3SkfmYrXmBpZ6/NLFZzitAi7XL0kALU+a9
+	IDv5Rqsf2FFhH2zD59THsLJM43gATMeW4CiE42pET3j8ddg==
+X-Google-Smtp-Source: AGHT+IGUTqUq93P4mmxYqAbOauXZPiq6DOgxdCVvRL0pOfr0mjA2ttsMFgSWafh2QAEcvC1EsRvFUg==
+X-Received: by 2002:a17:903:32cc:b0:24b:1692:e0bf with SMTP id d9443c01a7336-24b1692e695mr115434545ad.31.1756927417419;
+        Wed, 03 Sep 2025 12:23:37 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2490375b6d0sm169024895ad.62.2025.09.03.12.23.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Sep 2025 12:23:36 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Wed, 3 Sep 2025 12:23:35 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Eugene Shalygin <eugene.shalygin@gmail.com>
+Cc: Jan Philipp =?iso-8859-1?Q?Gro=DF?= <janphilippgross@mailbox.org>,
+	Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] hwmon: (asus-ec-sensors) add PRIME Z270-A
+Message-ID: <848b6d49-e21f-4e75-9bd2-9e251a8d8e09@roeck-us.net>
+References: <20250903191736.14451-1-eugene.shalygin@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250903191736.14451-1-eugene.shalygin@gmail.com>
 
-Em Wed, 3 Sep 2025 10:41:12 -0700
-Randy Dunlap <rdunlap@infradead.org> escreveu:
-
-> On 9/3/25 9:24 AM, Mauro Carvalho Chehab wrote:
-> > Before this patch, building htmldocs on opensuseLEAP works
-> > fine:
-> > 
-> >     # make htmldocs
-> >     Available Python versions:
-> >       /usr/bin/python3.11
-> > 
-> >     Python 3.6.15 not supported. Changing to /usr/bin/python3.11
-> >     Python 3.6.15 not supported. Changing to /usr/bin/python3.11
-> >     Using alabaster theme
-> >     Using Python kernel-doc
-> > 
-> >     ...
-> > 
-> > As the logic detects that Python 3.6 is too old and recommends
-> > intalling python311-Sphinx. If installed, documentation builds
-> > work like a charm.
-> > 
-> > Yet, some develpers complained that running python3.11 instead
-> > of python3 should not happen. So, let's break the build to make
-> > them happier:
-> > 
-> >     $ make htmldocs
-> >     Python 3.6.15 not supported. Bailing out
-> >     You could run, instead:
-> >       /usr/bin/python3.11 /root/tools/docs/sphinx-build-wrapper htmldocs --sphinxdirs=. --conf=conf.py --theme= --css= --paper=  
+On Wed, Sep 03, 2025 at 09:17:26PM +0200, Eugene Shalygin wrote:
+> Add support for the PRIME Z270-A board.
 > 
->                             /root
-> ??
+> Tested-by: Jan Philipp Groﬂ <janphilippgross@mailbox.org>
+> Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
 
-heh, you got me :-D
+Applied.
 
-I ran it on an opensuse Leap container, created only to test builds.
-I didn't care enough to create any user on such test containers, just
-running everything there as root via lxc-attach, as, at the worse case
-scenario, I can just re-run the script to re-create it.
-
-
-Thanks,
-Mauro
+Guenter
 
