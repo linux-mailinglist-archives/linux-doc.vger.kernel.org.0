@@ -1,295 +1,127 @@
-Return-Path: <linux-doc+bounces-58631-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58633-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 357EDB41E27
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 14:02:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8F7EB41F74
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 14:43:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 74F47542353
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 12:02:39 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8163716DC4E
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Sep 2025 12:43:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6208A2773EF;
-	Wed,  3 Sep 2025 12:01:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 623B52FE587;
+	Wed,  3 Sep 2025 12:43:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="seFdAecn"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="iIAG0WhX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from out-181.mta0.migadu.com (out-181.mta0.migadu.com [91.218.175.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A36C25E813
-	for <linux-doc@vger.kernel.org>; Wed,  3 Sep 2025 12:01:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F8962F1FCF
+	for <linux-doc@vger.kernel.org>; Wed,  3 Sep 2025 12:43:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756900889; cv=none; b=KibiDO7AjiNCAVjN3dSxXT23tRyZJavdggWCQQNz7uTFyzK93kMjddga4Kcbh5Fe06xQpzZ2k56mPhX9fRQYc3X4ZqoIDlvTeUBIDqzXMnPv/xyDiLF+XCWxJHy7oQKQMp73cs6R8Cii74qNYMTskM0I28sL7XzersNtNAkF3F8=
+	t=1756903400; cv=none; b=KFcOFZmY7Hmk9vnJfvK9/1/3QQVYM1UEtu6asH1HxwavNDWfRd8vQa2EHzjeypmPS6oIeix7urqZ7aP22hB0JU9QX1LJbjerOb6gCJkLD1XI9gN/azsciYnsOO3XLVuKcCHNLFFH0XjAYYEekLeU++xsduyLq3NB39aO+d6I4yg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756900889; c=relaxed/simple;
-	bh=SgEIiuwLcSrw6MD5nIirqY+K5Kdo4DYK6RCMVmv6iUU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=KUjEn9MIMWSRwitOsolCm3HorMx5mEqenpl6+qQGWvJDcbvk7ngAN+lATKsx3IsCxPRDsAF0SPoDuxc0U7UDwrTjpIiL01XQ168FmWDFiTzMcb4a9Ur1vzPfje5ecFBaXAGsVqA73JFzcTvjsyl8FUJFfFbD8ADCnaoNi4LLOIM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=seFdAecn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D60DAC116D0
-	for <linux-doc@vger.kernel.org>; Wed,  3 Sep 2025 12:01:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756900888;
-	bh=SgEIiuwLcSrw6MD5nIirqY+K5Kdo4DYK6RCMVmv6iUU=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=seFdAecnG1qveg5c3JIG3C3AuSojUmp6mEnSxrnSyYrVvsRSQbSttjvUCAasW24c4
-	 LrXp9y2rg4GA1kENDdDLyBK2iA/7hlpzCZdu3kcf0ErsFNOIiUb4yN7F6D90ulRDIo
-	 aC+kdne7gt5y9rGUxOb/k4WLn18aqnIXJD3QvaO5yJI4C/XHc8yoBn5ah6g9qeXsYM
-	 B5Ls58ipa2CmBmFnGh+0gTo1qo0EVTrjGfKTMXMvRVi+dzTXCV1nyHVtT/Gi2yo10h
-	 k8bMB/NNtqjuuA4QAKXi7gQ0+FLnZ3m9z/cu8gOkw+S1gXExlTrmhJQ1eBHco3FpGN
-	 sXbY7z7N/oSIA==
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-71d60504788so55052517b3.2
-        for <linux-doc@vger.kernel.org>; Wed, 03 Sep 2025 05:01:28 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCUqqN4Z2u542b0dtjVdBoLS1xaTsXNTEDO4tyZEqM1BLRqmG/mRPmZvkeVIiw+9w0p4mY49FruUtB8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyBE3xthe2d2thNMC88GOYTgcrW1X0NpKB0x4Hd5i4HR0Htva/y
-	KClxczudYzAKTclzFyNFZdBAQxx+vmRonHlBEBlt0q8mShuGNsioz/jfZKXG+UMka246jsh4Ef2
-	a+d8+nQddZu/sbTuZfTbVvbU5vjFTlh7mK0OVs603FA==
-X-Google-Smtp-Source: AGHT+IE4JH+G2zBjwcp5ZndEi3KH81dyDqIXqxzLOg6ubc41EehCrYJhcRJA7wdiZ97h/waR6UCU6+RrLKpBoRMuIMg=
-X-Received: by 2002:a05:690c:6c91:b0:720:58fd:6433 with SMTP id
- 00721157ae682-722764fde88mr185636597b3.35.1756900886929; Wed, 03 Sep 2025
- 05:01:26 -0700 (PDT)
+	s=arc-20240116; t=1756903400; c=relaxed/simple;
+	bh=HQ3VMbDjr7VjvTfjTlzDn4O+W5z0G3h8J21Loi+EOCA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RmXrPZ1ML+KDaD5E2uDJMSNyrXSXHCiEyeSmngBTNCmqMT1p4nYUufRLmKEcxxN7DjmpteysiIBDlID/DfLM9EBXdX2+snBaXE/5f/pl0s8ks64tGMwPYleN+/tKByJb9sQ93G+7vd67EP9ptQ+dp0BBeZ0HzaHc8FSzc4N2VRI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=iIAG0WhX; arc=none smtp.client-ip=91.218.175.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <861c5b23-2d51-40b1-8363-67e666431251@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1756903386;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=OAUWIxBkjWta2hnn76FZubOcaNeLcydHbkTxSsCe2sc=;
+	b=iIAG0WhX1/Er6AZv5EKBUQHsRBDPvraJRUWVdvX8FUwQWOozJhIUxBl8EgwQoIqcG1Rjth
+	J3PXEuJvevnbiIOZSw5E6zFlE1lPmQB9MtUBrIsxfbhA63hhvWhF7sVgc2zx4d9188/aPc
+	jp9lQc5YnCGcYu74vfO2990TBFbuL6k=
+Date: Wed, 3 Sep 2025 13:43:02 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250807014442.3829950-1-pasha.tatashin@soleen.com>
- <20250807014442.3829950-30-pasha.tatashin@soleen.com> <20250826162019.GD2130239@nvidia.com>
- <CAF8kJuPaSQN04M-pvpFTjjpzk3pfHNhpx+mCkvWpZOs=0TF3gg@mail.gmail.com> <20250902134156.GM186519@nvidia.com>
-In-Reply-To: <20250902134156.GM186519@nvidia.com>
-From: Chris Li <chrisl@kernel.org>
-Date: Wed, 3 Sep 2025 05:01:15 -0700
-X-Gmail-Original-Message-ID: <CACePvbWGR+XPfTub41=Ekj3aSMjzyO+FyJmzMy5HEQKq0-wqag@mail.gmail.com>
-X-Gm-Features: Ac12FXxFJL5c-w1tGynHxdN6KdFavaA7kvNM60j8pd-MmHVmJ4Um0SW70V3tLbU
-Message-ID: <CACePvbWGR+XPfTub41=Ekj3aSMjzyO+FyJmzMy5HEQKq0-wqag@mail.gmail.com>
-Subject: Re: [PATCH v3 29/30] luo: allow preserving memfd
-To: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Pasha Tatashin <pasha.tatashin@soleen.com>, pratyush@kernel.org, jasonmiu@google.com, 
-	graf@amazon.com, changyuanl@google.com, rppt@kernel.org, dmatlack@google.com, 
-	rientjes@google.com, corbet@lwn.net, rdunlap@infradead.org, 
-	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com, ojeda@kernel.org, 
-	aliceryhl@google.com, masahiroy@kernel.org, akpm@linux-foundation.org, 
-	tj@kernel.org, yoann.congal@smile.fr, mmaurer@google.com, 
-	roman.gushchin@linux.dev, chenridong@huawei.com, axboe@kernel.dk, 
-	mark.rutland@arm.com, jannh@google.com, vincent.guittot@linaro.org, 
-	hannes@cmpxchg.org, dan.j.williams@intel.com, david@redhat.com, 
-	joel.granados@kernel.org, rostedt@goodmis.org, anna.schumaker@oracle.com, 
-	song@kernel.org, zhangguopeng@kylinos.cn, linux@weissschuh.net, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-mm@kvack.org, 
-	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com, 
-	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, 
-	rafael@kernel.org, dakr@kernel.org, bartosz.golaszewski@linaro.org, 
-	cw00.choi@samsung.com, myungjoo.ham@samsung.com, yesanishhere@gmail.com, 
-	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com, 
-	aleksander.lobakin@intel.com, ira.weiny@intel.com, 
-	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de, 
-	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com, 
-	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net, 
-	brauner@kernel.org, linux-api@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	saeedm@nvidia.com, ajayachandra@nvidia.com, parav@nvidia.com, 
-	leonro@nvidia.com, witu@nvidia.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH net-next v10 3/5] net: rnpgbe: Add basic mbx ops support
+To: Yibo Dong <dong100@mucse.com>
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+ kuba@kernel.org, pabeni@redhat.com, horms@kernel.org, corbet@lwn.net,
+ gur.stavi@huawei.com, maddy@linux.ibm.com, mpe@ellerman.id.au,
+ danishanwar@ti.com, lee@trager.us, gongfan1@huawei.com, lorenzo@kernel.org,
+ geert+renesas@glider.be, Parthiban.Veerasooran@microchip.com,
+ lukas.bulwahn@redhat.com, alexanderduyck@fb.com, richardcochran@gmail.com,
+ kees@kernel.org, gustavoars@kernel.org, rdunlap@infradead.org,
+ netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
+References: <20250903025430.864836-1-dong100@mucse.com>
+ <20250903025430.864836-4-dong100@mucse.com>
+ <be2b4af0-838e-4c7c-bae1-e74c027ad8fe@linux.dev>
+ <9156A3C8F1EFA452+20250903111237.GA967815@nic-Precision-5820-Tower>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Vadim Fedorenko <vadim.fedorenko@linux.dev>
+In-Reply-To: <9156A3C8F1EFA452+20250903111237.GA967815@nic-Precision-5820-Tower>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
 
-On Tue, Sep 2, 2025 at 6:42=E2=80=AFAM Jason Gunthorpe <jgg@nvidia.com> wro=
-te:
->
-> On Fri, Aug 29, 2025 at 12:18:43PM -0700, Chris Li wrote:
->
-> > Another idea is that having a middle layer manages the life cycle of
-> > the reserved memory for you. Kind of like a slab allocator for the
-> > preserved memory.
->
-> If you want a slab allocator then I think you should make slab
-> preservable.. Don't need more allocators :\
+On 03/09/2025 12:12, Yibo Dong wrote:
+> On Wed, Sep 03, 2025 at 11:53:17AM +0100, Vadim Fedorenko wrote:
+>> On 03/09/2025 03:54, Dong Yibo wrote:
+>>> Initialize basic mbx function.
+>>>
+>>> Signed-off-by: Dong Yibo <dong100@mucse.com>
+>>> ---
+>>>    drivers/net/ethernet/mucse/rnpgbe/Makefile    |   3 +-
+>>>    drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    |  16 +
+>>>    .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   |   3 +
+>>>    .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c    | 393 ++++++++++++++++++
+>>>    .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h    |  25 ++
+>>>    5 files changed, 439 insertions(+), 1 deletion(-)
+>>>    create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c
+>>>    create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h
+>>>
+>>> diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+>>> index 179621ea09f3..f38daef752a3 100644
+>>> --- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+>>> +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+>>> @@ -1,8 +1,11 @@
+>>>    // SPDX-License-Identifier: GPL-2.0
+>>>    /* Copyright(c) 2020 - 2025 Mucse Corporation. */
+>>> +#include <linux/string.h>
+>>
+>> I don't see a reason to have string.h included into rnpgbe_chip.c
+>>
+> 
+> You are right, I should add it when it is used.
+> 
+>>> +
+>>>    #include "rnpgbe.h"
+>>>    #include "rnpgbe_hw.h"
+>>> +#include "rnpgbe_mbx.h"
+>>
+>> I believe this part has to be done in the previous patch.
+>> Please, be sure that the code can compile after every patch in the
+>> patchset.
+>>
+> 
+> You mean 'include "rnpgbe_mbx.h"'? But 'rnpgbe_mbx.h' is added in this patch.
 
-Sure, we can reuse the slab allocator to add the KHO function to it. I
-consider that as the implementation detail side, I haven't even
-started yet. I just want to point out that we might want to have a
-high level library to take care of the life cycle of the preserved
-memory. Less boilerplate code for the caller.
+Ok, so what's in rnpgbe_chip.c which needs rnpgbe_mbx.h to be included?
+If the change is introduced later in patch 5, the move this include to
+it as well.
 
-> > Question: Do we have a matching FDT node to match the memfd C
-> > structure hierarchy? Otherwise all the C struct will lump into one FDT
-> > node. Maybe one FDT node for all C struct is fine. Then there is a
-> > risk of overflowing the 4K buffer limit on the FDT node.
->
-> I thought you were getting rid of FDT? My suggestion was to be taken
-> as a FDT replacement..
+> I had compiled every patch before submission for this series. And as you
+> remind, I will keep check this in the future.
+> 
+> Thanks for your feedback.
+> 
 
-Thanks for the clarification. Yes, I do want to get rid of FDT, very much s=
-o.
-
-If we are not using FDT, adding an object might change the underlying
-C structure layout causing a chain reaction of C struct change back to
-the root. That is where I assume you might be still using FDT. I see
-your later comments address that with a list of objects. I will
-discuss it there.
-
-> You need some kind of hierarchy of identifiers, things like memfd
-> should chain off some higher level luo object for a file descriptor.
-
-Ack.
-
->
-> PCI should be the same, but not fd based.
-
-Ack.
-
-> It may be that luo maintains some flat dictionary of
->   string -> [object type, version, u64 ptr]*
-
-I see, got it. That answers my question of how to add a new object
-without changing the C structure layout. You are using a list of the
-same C structure. When adding more objects to it, just add more items
-to the list. This part of the boiler plate detail is not mentioned in
-your original suggestion.  I understand your proposal better now.
-
-> And if you want to serialize that the optimal path would be to have a
-> vmalloc of all the strings and a vmalloc of the [] data, sort of like
-> the kho array idea.
-
-The KHO array idea is already implemented in the existing KHO code or
-that is something new you want to propose?
-
-Then we will have to know the combined size of the string up front,
-similar to the FDT story. Ideally the list can incrementally add items
-to it. May be stored as a list as raw pointer without vmalloc
-first,then have a final pass vmalloc and serialize the string and
-data.
-
-With the additional detail above, I would like to point out something
-I have observed earlier: even though the core idea of the native C
-struct is simple and intuitive, the end of end implementation is not.
-When we compare C struct implementation, we need to include all those
-additional boilerplate details as a whole, otherwise it is not a apple
-to apple comparison.
-
-> > At this stage, do you see that exploring such a machine idea can be
-> > beneficial or harmful to the project? If such an idea is considered
-> > harmful, we should stop discussing such an idea at all. Go back to
-> > building more batches of hand crafted screws, which are waiting by the
-> > next critical component.
->
-> I haven't heard a compelling idea that will obviously make things
-> better.. Adding more layers and complexity is not better.
-
-Yes, I completely understand how you reason it, and I agree with your
-assessment.
-
-I like to add to that you have been heavily discounting the
-boilerplate stuff in the C struct solution. Here is where our view
-point might different:
-If the "more layer" has its counterpart in the C struct solution as
-well, then it is not "more", it is the necessary evil. We need to
-compare apples to apples.
-
-> Your BTF proposal doesn't seem to benifit memfd at all, it was focused
-> on extracting data directly from an existing struct which I feel very
-> strongly we should never do.
-
-From data flow point of view, the data is get from a C struct and
-eventually store into a C struct. That is no way around that. That is
-the necessary evil if you automate this process. Hey, there is also no
-rule saying that you can't use a bounce buffer of some kind of manual
-control in between.
-
-It is just a way to automate stuff to reduce the boilerplate. We can
-put different label on that and escalate that label or concept is bad.
-Your C struct has the exact same thing pulling data from the C struct
-and storing into C struct. It is just the label we are arguing. This
-label is good and that label is bad. Underlying it has the similar
-common necessary evil.
-
-> The above dictionary, I also don't see how BTF helps. It is such a
-> special encoding. Yes you could make some elaborate serialization
-> infrastructure, like FDT, but we have all been saying FDT is too hard
-> to use and too much code. I'm not sure I'm convinced there is really a
-
-Are you ready to be connived? If you keep this as a religion you can
-never be convinced.
-
-The reason FDT is too hard to use have other reason. FDT is design to
-be constructed by offline tools. In kernel mostly just read only. We
-are using FDT outside of its original design parameter. It does not
-mean that some thing (the machine) specially design for this purpose
-can't be build and easier to use.
-
-> better middle ground :\
-
-With due respect, it sounds like you have the risk of judging
-something you haven't fully understood. I feel that a baby, my baby,
-has been thrown out with the bathwater.
-
-As a test of water for the above statement, can you describe my idea
-equal or better than I do so it passes the test of I say: "yes, this
-is exactly what I am trying to build".
-
-That is the communication barrier I am talking about. I estimate at
-this rate it will take us about 15 email exchanges to get to the core
-stuff. It might be much quicker to lock you and me in a room, Only
-release us when you and I can describe each other's viewpoint at a
-mutual satisfactory level. I understand your time is precious, and I
-don't want to waste your time. I fully respect and comply with your
-decision. If you want me to stop now, I can stop. No question asked.
-
-That gets back to my original question, do we already have a ruling
-that even the discussion of "the machine" idea is forbidden.
-
-> IMHO if there is some way to improve this it still yet to be found,
-
-In my mind, I have found it. I have to get over the communication
-barrier to plead my case to you. You can issue a preliminary ruling to
-dismiss my case. I just wish you fully understood the case facts
-before you make such a ruling.
-
-> and I think we don't well understand what we need to serialize just
-> yet.
-
-That may be true, we don't have 100% understanding of what needs to be
-serialized.  On the other hand, it is not 0% either. Based on what we
-understand, we can already use "the machine" to help us do what we
-know much more effectively. Of course, there is a trade off for
-developing "the machine". It takes extra time and the complexity to
-maintain such a machine. I fully understand that.
-
-> Smaller ideas like preserve the vmalloc will make big improvement
-> already.
-
-Yes, I totally agree. It is a local optimization we can do, it might
-not be the global optimized though. "the machine" might not use
-vmalloc at all, all this small incremental change will be throw away
-once we have "the machine".
-
-I put this situation in the airplane story, yes, we build diamond
-plated filers to produce the hand craft screws faster. The missing
-opportunity is that, if we have "the machine" earlier, we can pump out
-machined screws much faster at scale, minus the time to build the
-machine, it might still be an overall win. We don't need to use
-diamond plated filter if we have the machine.
-
-> Lets not race ahead until we understand the actual problem properly.
-
-Is that the final ruling? It feels like so. Just clarifying what I am recei=
-ving.
-
-I feel a much stronger sense of urgency than you though.  The stakes
-are high, currently you already have four departments can use this
-common serialization library right now:
-1) PCI
-2) VFIO
-3) IOMMU
-4) Memfd.
-
-We are getting into the more complex data structures. If we merge this
-into the mainline, it is much harder to pull them out later.
-Basically, this is a done deal. That is why I am putting my reputation
-and my job on the line to pitch "the machine" idea. It is a very risky
-move, I fully understand that.
-
-Chris
 
