@@ -1,206 +1,124 @@
-Return-Path: <linux-doc+bounces-58810-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58813-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEF09B435CE
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 10:33:47 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F6AEB436E4
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 11:20:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id AA2501700E6
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 08:33:47 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 4D2F07A902F
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 09:18:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6F482C11E7;
-	Thu,  4 Sep 2025 08:33:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KvcJpCfa"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B6B12E2DFE;
+	Thu,  4 Sep 2025 09:19:57 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 990B3258EED;
-	Thu,  4 Sep 2025 08:33:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 049362DFA26;
+	Thu,  4 Sep 2025 09:19:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1756974822; cv=none; b=WW/WBFBWW1GKSdPyZ8Y2OckFwEG0EHvzXBp4uWFFPfCCkg7gnbN9U31kORdw7IAzVMX2SXKBx34edXzoFpHc1a3AIDdnSexZwqe0aB08BMIVF17O05fHMSrJuWm/TY6SkDPmEkz+bwz+D7KfM4iE1kkcLATpP5nDotZOhQd3JYI=
+	t=1756977597; cv=none; b=IbyI0DfUtkjJo3TJhaPXsHbbAHCi320mdsZhh0QCru580OH78sdzS8z6qv1bPe0lHgCKYRKBoA4jnbYnjqGNqJQIVHs56oB4DVpN/pUU3CiT61ZPpPizR8wVtmXhSqbYQmCyoJvKAVanXgOZLAjSFuLWh9Kj/2OUj3Nv+tqwJ34=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1756974822; c=relaxed/simple;
-	bh=xa1DNZh9ZS1PCU6W7gGSjK02tfE2cD6nLJfB1gnM5PI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=F//xhcGbRSygO1r5b5P+r7go5eVmPgtJEHTyny4vSz8XmCU8/GbEbysQNWtfXfycEPzOaEKwA047TOtDaGcyE0EeDIjAX/Jogsz6gyXSG7B6KYqkG/62L5iA2qfiQugeBcaSdiZtgr4fWK2woDQYxQuPFmstkGLNjxs4Z+wB0yI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KvcJpCfa; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5A241C4CEF1;
-	Thu,  4 Sep 2025 08:33:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1756974822;
-	bh=xa1DNZh9ZS1PCU6W7gGSjK02tfE2cD6nLJfB1gnM5PI=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=KvcJpCfaYNNRQilKjRoW3jmSHmV1Hdzliu1dOsOKNFM/kLnu50KyyaeainO4Y30YA
-	 vF36WCYkLTQ28JFaYmdlz/RLZaUGjnlLvXSWskHpIH2Iq58rUxec4DvSulajP1m8ab
-	 DVH/tu5wdQKxfFO4wV/jbTHWXdakAyMa9LrGbRdFhQ5KISjF5wi2lfkvYtgMCTYPXv
-	 /LE/tnBbIXV/ehjdYe1e+OBXbOCqmAUlNFwgirX4xpdRAjTiu7O/sAjJZ2Emb4n1a6
-	 y6D/To8UOpafcZlNRfFe6RPIVsbobMO71liDE2FvZ5FGhUBaZINZa+HhWysnCP97dp
-	 rZLAR/dg8q3+Q==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E072CA1013;
-	Thu,  4 Sep 2025 08:33:42 +0000 (UTC)
-From: Cryolitia PukNgae via B4 Relay <devnull+cryolitia.uniontech.com@kernel.org>
-Date: Thu, 04 Sep 2025 16:33:42 +0800
-Subject: [PATCH v8 2/2] hwmon: document: add gpd-fan
+	s=arc-20240116; t=1756977597; c=relaxed/simple;
+	bh=gcxK35ct7x68sSLxRnUL8USHJPcYxUnjSbIyvrRLSPU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=BPUt/gJ1i9GLbFNTcrU8r964OJRsNqr0MQ5fktj1KZxuCyPtzkbn+WHKQV2ZBuxe7EqNmsPLGTrVviLZRmfzFfdZ7eu9Gna6wg2wyT2rP+fxmvINILq185+i4Mqxsla10ZXTGWa8T2yazlFvrjem9MwUJcGq9wqtLgiT2w1X/30=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
+Received: from mail.maildlp.com (unknown [172.19.163.235])
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4cHYpX5x5dzYQvHT;
+	Thu,  4 Sep 2025 17:19:48 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.128])
+	by mail.maildlp.com (Postfix) with ESMTP id 4FAC11A058E;
+	Thu,  4 Sep 2025 17:19:47 +0800 (CST)
+Received: from [10.174.179.247] (unknown [10.174.179.247])
+	by APP4 (Coremail) with SMTP id gCh0CgB3wY2xWblocc9nBQ--.16239S3;
+	Thu, 04 Sep 2025 17:19:47 +0800 (CST)
+Message-ID: <e4da9027-abb4-76d1-04df-fff9798baae1@huaweicloud.com>
+Date: Thu, 4 Sep 2025 17:19:45 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Subject: Re: [PATCH v7 md-6.18 11/11] md/md-llbitmap: introduce new lockless
+ bitmap
+To: Yu Kuai <yukuai1@huaweicloud.com>, hch@infradead.org, xni@redhat.com,
+ colyli@kernel.org, corbet@lwn.net, agk@redhat.com, snitzer@kernel.org,
+ mpatocka@redhat.com, song@kernel.org, yukuai3@huawei.com, hare@suse.de
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dm-devel@lists.linux.dev, linux-raid@vger.kernel.org, yi.zhang@huawei.com,
+ yangerkun@huawei.com, johnny.chenyi@huawei.com, hailan@yukuai.org.cn
+References: <20250829080426.1441678-1-yukuai1@huaweicloud.com>
+ <20250829080426.1441678-12-yukuai1@huaweicloud.com>
+From: Li Nan <linan666@huaweicloud.com>
+In-Reply-To: <20250829080426.1441678-12-yukuai1@huaweicloud.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Message-Id: <20250904-gpd_fan-v8-2-0752584f16da@uniontech.com>
-References: <20250904-gpd_fan-v8-0-0752584f16da@uniontech.com>
-In-Reply-To: <20250904-gpd_fan-v8-0-0752584f16da@uniontech.com>
-To: Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, 
- Jonathan Corbet <corbet@lwn.net>, 
- Cryolitia PukNgae <cryolitia@uniontech.com>
-Cc: linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
- linux-doc@vger.kernel.org, Celeste Liu <CoelacanthusHex@gmail.com>, 
- Yao Zi <ziyao@disroot.org>, Derek John Clark <derekjohn.clark@gmail.com>, 
- Jun Zhan <zhanjun@uniontech.com>, Cheng Nie <niecheng1@uniontech.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1756974821; l=3706;
- i=cryolitia@uniontech.com; s=20250730; h=from:subject:message-id;
- bh=LpIT/dc1H9CoyCcFgvvZK2Mbndl3sEjj5NTpoDZaSng=;
- b=TpLbyysrkvlDAZXFVN6a6xnwrd6Zu4nmp7QsMEFNb5HGs1gGOag1kgmrf3SPXcFnEawtpaNMO
- cQK2ULzM/6GCL1cNYWBcBk+JPbNglTf1Um3479E+i6sDvBYzWxX+TnX
-X-Developer-Key: i=cryolitia@uniontech.com; a=ed25519;
- pk=tZ+U+kQkT45GRGewbMSB4VPmvpD+KkHC/Wv3rMOn/PU=
-X-Endpoint-Received: by B4 Relay for cryolitia@uniontech.com/20250730 with
- auth_id=474
-X-Original-From: Cryolitia PukNgae <cryolitia@uniontech.com>
-Reply-To: cryolitia@uniontech.com
+X-CM-TRANSID:gCh0CgB3wY2xWblocc9nBQ--.16239S3
+X-Coremail-Antispam: 1UD129KBjvJXoW7KF48ZFyUuF1DuFykCFW7Arb_yoW8JFWkpF
+	Z7K398CrZ8Ar4fuw1xJrWxZa4rZrWkZr1fKrWrt347Zr98Grn3WF1xKa1FgFyvyryxWF9I
+	vr4UKryrGr90kaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUPI14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
+	JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+	CE3s1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
+	F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
+	4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v
+	4I1lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0262kKe7
+	AKxVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
+	F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_Wr
+	ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7Cj
+	xVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
+	1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0pRB
+	Vb9UUUUU=
+X-CM-SenderInfo: polqt0awwwqx5xdzvxpfor3voofrz/
 
-From: Cryolitia PukNgae <cryolitia@uniontech.com>
 
-Add GPD fan driver document
 
-Signed-off-by: Cryolitia PukNgae <cryolitia@uniontech.com>
----
- Documentation/hwmon/gpd-fan.rst | 79 +++++++++++++++++++++++++++++++++++++++++
- Documentation/hwmon/index.rst   |  1 +
- MAINTAINERS                     |  1 +
- 3 files changed, 81 insertions(+)
+在 2025/8/29 16:04, Yu Kuai 写道:
+> From: Yu Kuai <yukuai3@huawei.com>
+> 
+> Redundant data is used to enhance data fault tolerance, and the storage
+> method for redundant data vary depending on the RAID levels. And it's
+> important to maintain the consistency of redundant data.
+> 
+> Bitmap is used to record which data blocks have been synchronized and which
+> ones need to be resynchronized or recovered. Each bit in the bitmap
+> represents a segment of data in the array. When a bit is set, it indicates
+> that the multiple redundant copies of that data segment may not be
+> consistent. Data synchronization can be performed based on the bitmap after
+> power failure or readding a disk. If there is no bitmap, a full disk
+> synchronization is required.
+> 
+> Due to known performance issues with md-bitmap and the unreasonable
+> implementations:
+> 
+>   - self-managed IO submitting like filemap_write_page();
+>   - global spin_lock
+> 
+> I have decided not to continue optimizing based on the current bitmap
+> implementation, this new bitmap is invented without locking from IO fast
+> path and can be used with fast disks.
+> 
+> For designs and details, see the comments in drivers/md-llbitmap.c.
+> 
+> Signed-off-by: Yu Kuai <yukuai3@huawei.com>
 
-diff --git a/Documentation/hwmon/gpd-fan.rst b/Documentation/hwmon/gpd-fan.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..a8541049d680beef93c5f7623de77e759242ffac
---- /dev/null
-+++ b/Documentation/hwmon/gpd-fan.rst
-@@ -0,0 +1,79 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Kernel driver gpd-fan
-+=========================
-+
-+Author:
-+    - Cryolitia PukNgae <cryolitia@uniontech.com>
-+
-+Description
-+------------
-+
-+Handheld devices from Shenzhen GPD Technology Co., Ltd. provide fan readings
-+and fan control through their embedded controllers.
-+
-+Supported devices
-+-----------------
-+
-+Currently the driver supports the following handhelds:
-+
-+ - GPD Win Mini (7840U)
-+ - GPD Win Mini (8840U)
-+ - GPD Win Mini (HX370)
-+ - GPD Pocket 4
-+ - GPD Duo
-+ - GPD Win Max 2 (6800U)
-+ - GPD Win Max 2 2023 (7840U)
-+ - GPD Win Max 2 2024 (8840U)
-+ - GPD Win Max 2 2025 (HX370)
-+ - GPD Win 4 (6800U)
-+ - GPD Win 4 (7840U)
-+
-+Module parameters
-+-----------------
-+
-+gpd_fan_board
-+  Force specific which module quirk should be used.
-+  Use it like "gpd_fan_board=wm2".
-+
-+   - wm2
-+       - GPD Win 4 (7840U)
-+       - GPD Win Max 2 (6800U)
-+       - GPD Win Max 2 2023 (7840U)
-+       - GPD Win Max 2 2024 (8840U)
-+       - GPD Win Max 2 2025 (HX370)
-+   - win4
-+       - GPD Win 4 (6800U)
-+   - win_mini
-+       - GPD Win Mini (7840U)
-+       - GPD Win Mini (8840U)
-+       - GPD Win Mini (HX370)
-+       - GPD Pocket 4
-+       - GPD Duo
-+
-+Sysfs entries
-+-------------
-+
-+The following attributes are supported:
-+
-+fan1_input
-+  Read Only. Reads current fan RPM.
-+
-+pwm1_enable
-+  Read/Write. Enable manual fan control. Write "0" to disable control and run
-+  at full speed. Write "1" to set to manual, write "2" to let the EC control
-+  decide fan speed. Read this attribute to see current status.
-+
-+  NB：In consideration of the safety of the device, when setting to manual mode,
-+  the pwm speed will be set to the maximum value (255) by default. You can set
-+  a different value by writing pwm1 later.
-+
-+pwm1
-+  Read/Write. Read this attribute to see current duty cycle in the range
-+  [0-255]. When pwm1_enable is set to "1" (manual) write any value in the
-+  range [0-255] to set fan speed.
-+
-+  NB: Many boards (except listed under wm2 above) don't support reading the
-+  current pwm value in auto mode. That will just return 255 as default on
-+  those boards, or a previously written value. In manual mode it will always
-+  return the real value.
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index d292a86ac5da902cad02c1965c90f5de530489df..ce4419f064e1368740387af70af38a85cadd952d 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -82,6 +82,7 @@ Hardware Monitoring Kernel Drivers
-    gigabyte_waterforce
-    gsc-hwmon
-    gl518sm
-+   gpd-fan
-    gxp-fan-ctrl
-    hih6130
-    hp-wmi-sensors
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 14a616be5ff08aaeee52436dff54a86c4a81e5fb..0b6ae95c2007f0737bc4a4e1f2bac52f71628f78 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -10425,6 +10425,7 @@ GPD FAN DRIVER
- M:	Cryolitia PukNgae <cryolitia@uniontech.com>
- L:	linux-hwmon@vger.kernel.org
- S:	Maintained
-+F:	Documentation/hwmon/gpd-fan.rst
- F:	drivers/hwmon/gpd-fan.c
- 
- GPD POCKET FAN DRIVER
+LGTM
+
+Reviewed-by: Li Nan <linan122@huawei.com>
 
 -- 
-2.51.0
-
+Thanks,
+Nan
 
 
