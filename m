@@ -1,487 +1,262 @@
-Return-Path: <linux-doc+bounces-58853-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58856-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68636B4446A
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 19:34:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70151B4447F
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 19:35:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 14F74189291C
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 17:34:30 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 298DB188C042
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Sep 2025 17:35:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 689603090D5;
-	Thu,  4 Sep 2025 17:34:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5570231354F;
+	Thu,  4 Sep 2025 17:34:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="snAYkkSc"
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="VnBQxi8b"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2042.outbound.protection.outlook.com [40.107.223.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38FD723278D;
-	Thu,  4 Sep 2025 17:34:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757007243; cv=none; b=GaOo1Iwtu8tEFgCSGQZVPskNfelJklTzmzN6j6mvFjdHtmRLsXQUdjEoNO2qWO2CRyDC4H6cJBiner7luRRb0Cui35/78gmg6bdjhp2Ia0UJdqmeupJNAwbKrgBkvPVcKVcDKoCThpGLnHMEgwxeCuI76Ahq58BIntPeKRO+IyY=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757007243; c=relaxed/simple;
-	bh=N0Rlj8n3HzJmcOjut15w2D46KZ0U3HPBWFbUforq2gk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CItCSMeTkMbZYE02/Lslw0o1H+gAki1oOt4p0LKBQ8UUb2zfJTltoJxSGBOTLMGe9dsZ9kl7wJUJ0zPMVOukk1gI2KoOyKzPp+oR2qX9vi+Ea5VOhqGJHwkx8omHz4p4fMipFrkq0g5vw9lTwEGjoeFfv9tGg2lYV8spBtMa/Mc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=snAYkkSc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DBE48C4CEF1;
-	Thu,  4 Sep 2025 17:34:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757007242;
-	bh=N0Rlj8n3HzJmcOjut15w2D46KZ0U3HPBWFbUforq2gk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=snAYkkSca756CaqOckdtXALBmwIUHQhoF0W/xFz8fvbjOKch7X+LfWfzkdVJRw0rV
-	 jSviSnR+MKwysjDG+qC7MG1kkk1AGE9YDHPuv/TrSbgOru4Q6tkZN3m5T3UTkbI91g
-	 XXaPdtCBAd5wfezX2BOAvNvd3xGICRZOQfAcmSAILDbjjhRr19x+jbPkYscH5SmkK3
-	 v+UuBRBur77zKeQ8sAAsmKgldhPQPNMTFC+Zj77VADvRmMG8Hnccj/MQZCYdX37SmM
-	 KEta68izZ/FtYGUOw1DNsgzGaTOVUbr+WcXF/CAEYkgc88Gq2GLGKguBGzO4SDs47w
-	 nifyspnMAe7Tw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF21DCA1015;
-	Thu,  4 Sep 2025 17:34:02 +0000 (UTC)
-From: Gregory Fuchedgi via B4 Relay <devnull+gfuchedgi.gmail.com@kernel.org>
-Date: Thu, 04 Sep 2025 10:33:45 -0700
-Subject: [PATCH v3 2/2] hwmon: (tps23861) add class restrictions and
- semi-auto mode support
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83AE1312802;
+	Thu,  4 Sep 2025 17:34:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.223.42
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1757007281; cv=fail; b=V9EnVx8KZ6DgnXaxRL1nFqoOYJiNXmVRQlaCxuDEk8sq7GbjW5nKG+tUKWCTrZknCAG3A5Jdo2b08g+zSbAOMaydwSFw5F4jbWlfmGhgmq+ytkL6VBJor7apZeznst4tvrfhs7Br27SI8Fu6xbhRnKSdOP9zMVxwvywpFvjgHgY=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1757007281; c=relaxed/simple;
+	bh=oXvrpJafdKQ0iSat79MpXL96gHtyPd/JpZ5v9ELxkaQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=Bf9/dDr4P5PUI43hqUnmvSK5KvD3VEI/FV09eaCGhm3JzVvZQ94oY5JU5h0vIHc2ORIQeYC7nAbrPL2kzJxVA8gEbjYkvEIrI3VvOq/KV+eooL3NpqNCK0RZI2ACOmQDf3cI6CYEBHE5GzN0eeT904iS+EMXwhAozbWgnwFHjMo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=VnBQxi8b; arc=fail smtp.client-ip=40.107.223.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ekmqO7Fm7SSlw8vRmNX3H500JRzpNBemIvtJwSSUPANOxdmNW5y4WoFrk49m3k8cO4qZgQFAZz/yOdrT3BGK8QUtmkKe5TL1a2OwnlF2/uGAYpAmE/cna25RCNFDQSUV/RlEBOiJFpIXSPEMii+guqQ1MbH0EScJLwyxO8EXkTf/Js8jBcCBPCbBxnhu3dqybZb5w4we9dbaf98K58XpSW4aMa6g39LKhvLAEDfQEDbtji15/SUXU/u4YOBE4r33QwzfO66Mz6h3E1BcH1MTfVT7mU5SB3X2MYZRCFntUM/auIGG3GFZvE6RxUALw4Lg/nY6meqQVgTE+q5ShCjDOw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=N+J8omS1gnNZidD6HpQBltWpb5njgr7U1lD1TVKcTk4=;
+ b=WifC5NqVCWMfkVXnPU5oXYHOIDJ4nRIVy/GSwkddYrCnqV1DxePkl1BMRfYEjYhzoWkSvSUjb/xD8PMexCMThIUOFAELQ3VO6//bjrPHuTYeMHFYYp0a+wsB8hEYkHjvie2/IRQcHVsrz/OmCkBkPKhkm82lZD7Iz7QIfd+t0DdVeNOIY0+A88kzhk6DCsr7o2bYut6bTNqOXyX+j1FF7Z484QObX7emeyCRXdVDtGLPorGxX9QpOVIdPdYEXu1CpY3xXfDhCEiUWqoDnTTMFx51QKcgeUMgdxzy5mR+LgXOXaP+yOB24vxl5+Sp1KmOpRuMSEv7G3RkVcwqhULE5A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=N+J8omS1gnNZidD6HpQBltWpb5njgr7U1lD1TVKcTk4=;
+ b=VnBQxi8b8QPmXq+r5dOWzRaoi9QfAhDmLq2ggqzJsipyS65MvwVlnR8LNMw5T29V0XXzzsRi4Dp5nHXoDSX7jt8TTsKIgzdM7M6UZkWS//cDRbHwHZDwfUm+4pSotUzfv/SEOSDgQUAZA//uZ8wtsTd9b1Gn6QIcZFFgBor1kgqLjbuGV2bwrmb9Ij588MQOaK01uHL+NayjtTlwOBX704UMTTUnngkyR6EPRojvzb/EBqpIWpDKmt3plOV5tcSOUIe5Dykq+CPtEB3sDM1dVng7iZVQNSboPP7e5H2qzwBk0YA7C/O5yULVxkjwgrtwv89MWtuehNNQjEEiMYth9Q==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com (2603:10b6:510:1d0::13)
+ by DM4PR12MB7647.namprd12.prod.outlook.com (2603:10b6:8:105::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.17; Thu, 4 Sep
+ 2025 17:34:36 +0000
+Received: from PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632]) by PH7PR12MB5757.namprd12.prod.outlook.com
+ ([fe80::f012:300c:6bf4:7632%2]) with mapi id 15.20.9094.017; Thu, 4 Sep 2025
+ 17:34:35 +0000
+Date: Thu, 4 Sep 2025 14:34:33 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Chris Li <chrisl@kernel.org>
+Cc: Pasha Tatashin <pasha.tatashin@soleen.com>, pratyush@kernel.org,
+	jasonmiu@google.com, graf@amazon.com, changyuanl@google.com,
+	rppt@kernel.org, dmatlack@google.com, rientjes@google.com,
+	corbet@lwn.net, rdunlap@infradead.org,
+	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com,
+	ojeda@kernel.org, aliceryhl@google.com, masahiroy@kernel.org,
+	akpm@linux-foundation.org, tj@kernel.org, yoann.congal@smile.fr,
+	mmaurer@google.com, roman.gushchin@linux.dev, chenridong@huawei.com,
+	axboe@kernel.dk, mark.rutland@arm.com, jannh@google.com,
+	vincent.guittot@linaro.org, hannes@cmpxchg.org,
+	dan.j.williams@intel.com, david@redhat.com,
+	joel.granados@kernel.org, rostedt@goodmis.org,
+	anna.schumaker@oracle.com, song@kernel.org, zhangguopeng@kylinos.cn,
+	linux@weissschuh.net, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-mm@kvack.org,
+	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com,
+	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
+	hpa@zytor.com, rafael@kernel.org, dakr@kernel.org,
+	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com,
+	myungjoo.ham@samsung.com, yesanishhere@gmail.com,
+	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com,
+	aleksander.lobakin@intel.com, ira.weiny@intel.com,
+	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de,
+	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com,
+	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net,
+	brauner@kernel.org, linux-api@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, saeedm@nvidia.com,
+	ajayachandra@nvidia.com, parav@nvidia.com, leonro@nvidia.com,
+	witu@nvidia.com
+Subject: Re: [PATCH v3 29/30] luo: allow preserving memfd
+Message-ID: <20250904173433.GA616306@nvidia.com>
+References: <20250807014442.3829950-1-pasha.tatashin@soleen.com>
+ <20250807014442.3829950-30-pasha.tatashin@soleen.com>
+ <20250826162019.GD2130239@nvidia.com>
+ <CAF8kJuPaSQN04M-pvpFTjjpzk3pfHNhpx+mCkvWpZOs=0TF3gg@mail.gmail.com>
+ <20250902134156.GM186519@nvidia.com>
+ <CACePvbWGR+XPfTub41=Ekj3aSMjzyO+FyJmzMy5HEQKq0-wqag@mail.gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CACePvbWGR+XPfTub41=Ekj3aSMjzyO+FyJmzMy5HEQKq0-wqag@mail.gmail.com>
+X-ClientProxiedBy: YT3PR01CA0113.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:85::16) To PH7PR12MB5757.namprd12.prod.outlook.com
+ (2603:10b6:510:1d0::13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250904-hwmon-tps23861-add-class-restrictions-v3-2-b4e33e6d066c@gmail.com>
-References: <20250904-hwmon-tps23861-add-class-restrictions-v3-0-b4e33e6d066c@gmail.com>
-In-Reply-To: <20250904-hwmon-tps23861-add-class-restrictions-v3-0-b4e33e6d066c@gmail.com>
-To: Robert Marko <robert.marko@sartura.hr>, 
- Luka Perkov <luka.perkov@sartura.hr>, Jean Delvare <jdelvare@suse.com>, 
- Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
- Gregory Fuchedgi <gfuchedgi@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1757007242; l=14027;
- i=gfuchedgi@gmail.com; s=20250811; h=from:subject:message-id;
- bh=uEEJhtco22XR9vWCDdxLHrPxqD55wHrJqx5SHjzRZ5g=;
- b=Ylg/s3OmMeKm9dRwkWbnLFL9yX9Y+dZvEMOwb1RXRU2sqUfJGgoLNpZ113LupDgDSRH6BJwgd
- JhCgfrJTjnmBwvRwXh+tYFqfPNTEWnFhNEqF1ANcAjvmJOOdz82l5F9
-X-Developer-Key: i=gfuchedgi@gmail.com; a=ed25519;
- pk=J3o48+1a2mUIebH8K4S3SPuR5bmamUvjlsf8onoIccA=
-X-Endpoint-Received: by B4 Relay for gfuchedgi@gmail.com/20250811 with
- auth_id=484
-X-Original-From: Gregory Fuchedgi <gfuchedgi@gmail.com>
-Reply-To: gfuchedgi@gmail.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5757:EE_|DM4PR12MB7647:EE_
+X-MS-Office365-Filtering-Correlation-Id: f3260731-1526-4e39-1031-08ddebd950e5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?aurMXdrr6LKoVLcTFvS6PfF5mZYp6DNE3iP2Oru5onkh6xQtycW1/F3PZtsS?=
+ =?us-ascii?Q?+2KdryoeJqPae4dzFvq5CPdCNf70QeMpJzyTfP2g+CZr2rR4fpkoutjzVycd?=
+ =?us-ascii?Q?s+F7bKfY0Kt4chuRCSbuLCJMYPfDSsUWJirnFSOtcabjEAuNKsJON0cIi/Ul?=
+ =?us-ascii?Q?IKRUnPHMBgiI0eCOBlEti9OeCYh38cwhWr+3gdVvg7CsgjWFxrsKKAjyW7m5?=
+ =?us-ascii?Q?9SahQmKscdbXJ5c874q/h9K8pNTyDqR6/z40bbZ60oPVwsRqFXpRCKzHNmZ0?=
+ =?us-ascii?Q?Nime2qB3URGaxzlBZrPSBdZISxsnfZWcmKcz1tI6RfO9q6xJoHaBfqNIKiGV?=
+ =?us-ascii?Q?atToe79gvSE4n3f5R8aMWO8aTVnyobxkJU1FPAY65t604cmBVrmJl4xRbnpx?=
+ =?us-ascii?Q?Na4DPvmSz6ZxQdmE4n4h7xKXDjXB3+DUMbW2HfhEmT9c94r/DLz0vrlemrGX?=
+ =?us-ascii?Q?pHkZi2trGBHlCepBfSL6edt4jN4C01tMlUp5RIctNXbeVkFAlm57hSn9EygG?=
+ =?us-ascii?Q?XjW7nPfdOC3CPLP0bKNhQRzhTbTsvp97zEq2m01ExKys4LMsb7E9A8kG3P9G?=
+ =?us-ascii?Q?O5H5JUmd0W23UhJp8GpEvNuB8ckQ5CbqaBjDuZvH+HUXZqV1DKRdIqOhu2oA?=
+ =?us-ascii?Q?iEpL7oExaxPXsgADYsijNzxdbnhPPXsIw+o6SMAL8GYi1wwu9b2W4kWHh4dq?=
+ =?us-ascii?Q?aVFaxY6wZcRNyGTd0J7JY2VIM4cz8lM2Wk6njAfsWm+B/EGmQtO1AdCQZkD/?=
+ =?us-ascii?Q?Jj0UewhBYjrHOm0RVMbF5dCpY3ToGO/QbR7pP3h0DUcoAD1QIzhwNJJzppad?=
+ =?us-ascii?Q?xEk9kRlgeWU1pBiYHMQmu2cZ0xWc+JBIdJV/zi+MHsx2lioXn5tH1yI82bwU?=
+ =?us-ascii?Q?fpyJ0mpv5xkt1vSW2vhgMGCRzFpV9yUHGdbFZAWny/pkQX1v0TgbpoH91und?=
+ =?us-ascii?Q?QBGpTYz6yp2gjYuO5GnRve7R8VKb2WLmhnBX82oRS2QDz2BnFdaJ6RIafARk?=
+ =?us-ascii?Q?dyApT01q5PsaHeXC/i3ZfF625JMcRGlUdAGx+/W6OUTWYH6PFCPe6IigL406?=
+ =?us-ascii?Q?XZ70EdMPFbNzxuKSjqiFRVuX1+9DafQfO/FpYYw2vO1vt/1f8G9wkFrnKpUc?=
+ =?us-ascii?Q?esMllAytk/zOpFCgsK5NoQnPBGJE3kKEOc4JcCfmti/ganpgJP0r5D8MZo2M?=
+ =?us-ascii?Q?Ya9ndB1p5HtEnFdIpwYTo5Ho0xqHv2fXn2u8POCPf/bM48UwqkadD5ZD1qRv?=
+ =?us-ascii?Q?J0bmTgRMA1KzH7inRW10PmtKaDO8D2fqHqZfE9sEpHgiAYIb2oo0kswWujFR?=
+ =?us-ascii?Q?WiOjmi8Dh2Mnz/HrROP35bn01s3yTgkBM/guodMjLZhyKy1A2F1i1R0VEJGI?=
+ =?us-ascii?Q?K54QkO/Ei4PMg6QPb2ePQ+Rm9+WX661bt+6f5eXa1EHoL0Wy+aC509C5A95g?=
+ =?us-ascii?Q?SkTPrerPgN8=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5757.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?hCv7NbxP5ogWB//mMoMseWsizTYVmg73lt3Xl4+9TZ+UdRCEojeAClmVxb+O?=
+ =?us-ascii?Q?2+YnuFaKvrxLqWRRWWislSovHpIW7l7AO0rP1MZ/7KJuhALMNrOhC64ixTGH?=
+ =?us-ascii?Q?5BObFgCVNaxKDys2Cs2Q89IOL5EJ5NbOfQbs9tojW0DrP9F776n0jx+OG7/h?=
+ =?us-ascii?Q?Rq8kwWC6el7Pg653jBA/Dcx/nLEAc8Fm4tGURj4MlxEXd810EPk4O1zCfJxe?=
+ =?us-ascii?Q?qVjSDtq9I72hZ4n6ZR/Ss1ULi1DkFrYweATXQ6Z2UymhtPBnhZWz7Lz4fsTq?=
+ =?us-ascii?Q?3JtdqFEeFlVAzLVkSG00ErcAFSSOJwm2p8O+xMO/Ec+sZXh30uQt42kujLY2?=
+ =?us-ascii?Q?gFD84RV7/waWE/lMe3BZilRNJ//q9FVwIqv6p1RfzdIN7aAzisRto1h4WU5U?=
+ =?us-ascii?Q?t6yylBcysp6/B3yZ9bg4gamW8PwIGh6ZrvcnxPRqh8r3zZTnu3Gw38iI0DVB?=
+ =?us-ascii?Q?hIcHpCo/jdkfeyWLhoYEscBMvrluFLND41TmYoep5JXEPGlIlVWJtjyDW7rM?=
+ =?us-ascii?Q?k42B5efZd+w1802yJEDu+OVfEYyivMd2Od19PcLD6o/bXr7Eb03GKwtDMqfo?=
+ =?us-ascii?Q?eGDLeXBNNpLHvMNCvgHlHE6XIQMOI3F2autGP3s0QaBQhDyHbTbc/Wcpw7BE?=
+ =?us-ascii?Q?Cx+rJ2Kg50XxgBPXYRJdRNm8O2eWdSKWzOsmEFT5+VoubFPxZ4eHOu2skzan?=
+ =?us-ascii?Q?ABvoC+NYoxTzs6ex/Sr3/kg3+Dfw3Wj2Pmd44LSBIQ7qjeX7ASb3UD+qJ3N2?=
+ =?us-ascii?Q?8LTM3KUsDP+68bLl1x5kKwAgF57r5Tf33PFiLArM+9GeuXkztSXGYgcxme8P?=
+ =?us-ascii?Q?2+ffCk2HSbAAr4J3nkskBBW7wFg9KYtmuzISVw+pEZ3rn5/WyllK9jVInkqj?=
+ =?us-ascii?Q?uOMCK0t4jUqZxVodgaOALjCdIRFYq7ocgiooVVo0o4v4lSsC4OVYwB9TJChg?=
+ =?us-ascii?Q?ufmtObtU1VKUPa7LopQ9xXt0Ug2hLhdUoP+TovRq4S4+Y37GAfbSIG/DDP27?=
+ =?us-ascii?Q?pvUJksvidkqoEr139asDalLjzwafmsq3Eqjknwv4Cv4GleLy1e6prEGK/RBV?=
+ =?us-ascii?Q?9yJuy7vyIVsnO9Mb89zJPyf7hrAGFMoZNOL5XCe/QpW/VP7cl2+VOnr5ePaE?=
+ =?us-ascii?Q?nU52A92xxTqnfseB/K5fiLwHSj4ar9rfVZTs4pW7swmZ1rNiMCBnHNVnjFIr?=
+ =?us-ascii?Q?uH2o3tGeat9IM0NR1qFRi5GY9ky7i4HXhovhzZSSpwihuSY7H06J70de1yzL?=
+ =?us-ascii?Q?OfRXfnxWQSiMaaFCBKngHfYle/mPuTLiicVLnCDSs+5eXCjSvEoRzgKUE/xT?=
+ =?us-ascii?Q?3n4nJrrSdV3JgxL9Xh1jKZw/hcpCTBir83oU6uYciOQAUueg5M7xmVlRphMi?=
+ =?us-ascii?Q?zXWenecppGI5Bx8I0pDdQNH7tjL5iVYR9UqSgM8vsoKRuLKloyO9FGhyoequ?=
+ =?us-ascii?Q?XJQHQsHO6eWxJUgXTsi4f6+b7wfV1eNPYt4P3go6JdsL90xnWNkgGEfQmt6M?=
+ =?us-ascii?Q?sQW3XCnM5v0SmcKnKa84gLlmiv9hvnddZeuBNVo5RqNDKwZmwmGzqHmhugCu?=
+ =?us-ascii?Q?lbhin1k6pfexo5px+gI=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f3260731-1526-4e39-1031-08ddebd950e5
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5757.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 17:34:35.7123
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: M544s/fY+8S+xhI3kLyf0nuab/zepz7raQD1z0T7q8AXqazPi4rr3RRD83r0Omz2
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7647
 
-From: Gregory Fuchedgi <gfuchedgi@gmail.com>
+On Wed, Sep 03, 2025 at 05:01:15AM -0700, Chris Li wrote:
 
-This commit adds optional individual per-port device tree nodes, in which
-ports can be:
-  - restricted by class. For example, ti,class = <2> for a port would only
-    enable power if class 1 or class 2 were negotiated. Requires interrupt
-    handler to be configured if class != 4 (max supported). This is because
-    hardware cannot be set with acceptable classes in advance. So the
-    driver would enable Semi-Auto mode and in the interrupt handler would
-    check negotiated class against device tree config and enable power only
-    if it is acceptable class.
-  - fully disabled. For boards that do not use all 4 ports. This would put
-    disabled ports in Off state and would hide corresponding hwmon files.
-  - off by default. The port is kept disabled, until enabled via
-    corresponding in_enable in sysfs.
+> > And if you want to serialize that the optimal path would be to have a
+> > vmalloc of all the strings and a vmalloc of the [] data, sort of like
+> > the kho array idea.
+> 
+> The KHO array idea is already implemented in the existing KHO code or
+> that is something new you want to propose?
 
-The driver keeps current behavior of using Auto mode for all ports if no
-per-port device tree nodes given.
+Pratyush has proposed it
 
-This commit also adds optional reset and ti,ports-shutdown pin support:
-  - if reset pin is configured the chip will be reset in probe.
-  - if both reset and shutdown pins are configured the driver would keep
-    ports shut down while configuring the tps23861 over i2c. Having both
-    shutdown and reset pins ensures no PoE activity happens while i2c
-    configuration is happening.
+> Then we will have to know the combined size of the string up front,
+> similar to the FDT story. Ideally the list can incrementally add items
+> to it. May be stored as a list as raw pointer without vmalloc
+> first,then have a final pass vmalloc and serialize the string and
+> data.
 
-Tested with hw poe tester:
- - Auto mode tested with no per-port DT settings as well as explicit port
-   DT ti,class=4. Tested that no IRQ is required in this case.
- - Semi-Auto mode with class restricted to 0, 1, 2 or 3. IRQ required.
- - Tested current cut-offs in Semi-Auto mode.
- - On/off by default setting tested for both Auto and Semi-Auto modes.
- - Tested fully disabling the ports in DT.
- - Tested with both reset and ti,ports-shutdown gpios defined, as well as
-   with reset only, as well as with neither reset nor shutdown.
+There are many options, and the dynamic extendability from the KHO
+array might be a good fit here. But you can also just store the
+serializations in a linked list and then write them out.
 
-Signed-off-by: Gregory Fuchedgi <gfuchedgi@gmail.com>
----
- Documentation/hwmon/tps23861.rst |   6 +-
- drivers/hwmon/tps23861.c         | 249 ++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 249 insertions(+), 6 deletions(-)
+> With the additional detail above, I would like to point out something
+> I have observed earlier: even though the core idea of the native C
+> struct is simple and intuitive, the end of end implementation is not.
+> When we compare C struct implementation, we need to include all those
+> additional boilerplate details as a whole, otherwise it is not a apple
+> to apple comparison.
 
-diff --git a/Documentation/hwmon/tps23861.rst b/Documentation/hwmon/tps23861.rst
-index 46d121ff3f316d977ab3d1ab4e0d7b7736a57c60..5d14f683d0de11091f4a845a78a613604cbde4cc 100644
---- a/Documentation/hwmon/tps23861.rst
-+++ b/Documentation/hwmon/tps23861.rst
-@@ -22,9 +22,13 @@ and monitoring capabilities.
- 
- TPS23861 offers three modes of operation: Auto, Semi-Auto and Manual.
- 
--This driver only supports the Auto mode of operation providing monitoring
-+This driver supports Auto and Semi-Auto modes of operation providing monitoring
- as well as enabling/disabling the four ports.
- 
-+Ports that do not have associated child device tree entry or do not restrict poe
-+class to 3 or lower will operate in Auto mode. Otherwise the port will port will
-+operate in Semi-Auto mode and require an interrupt pin.
-+
- Sysfs entries
- -------------
- 
-diff --git a/drivers/hwmon/tps23861.c b/drivers/hwmon/tps23861.c
-index 4cb3960d51704f6ad4106adc927f213d090c0f9a..c43c667c5d7e6f7813f8ac6bc5267cb8fe562f9c 100644
---- a/drivers/hwmon/tps23861.c
-+++ b/drivers/hwmon/tps23861.c
-@@ -10,13 +10,26 @@
- #include <linux/bitfield.h>
- #include <linux/debugfs.h>
- #include <linux/delay.h>
-+#include <linux/gpio/consumer.h>
- #include <linux/hwmon-sysfs.h>
- #include <linux/hwmon.h>
- #include <linux/i2c.h>
-+#include <linux/interrupt.h>
- #include <linux/module.h>
- #include <linux/of.h>
-+#include <linux/of_irq.h>
- #include <linux/regmap.h>
- 
-+#define MAX_SUPPORTED_POE_CLASS		4
-+#define INTERRUPT_STATUS		0x0
-+#define INTERRUPT_ENABLE		0x1
-+#define INTERRUPT_CLASS			BIT(4)
-+#define DETECTION_EVENT			0x5
-+#define POWER_STATUS			0x10
-+#define PORT_1_ICUT			0x2A
-+#define PORT_1_ICUT_MASK		GENMASK(2, 0)
-+#define RESET				0x1a
-+#define RESET_CLRAIN			0x80
- #define TEMPERATURE			0x2c
- #define INPUT_VOLTAGE_LSB		0x2e
- #define INPUT_VOLTAGE_MSB		0x2f
-@@ -102,6 +115,12 @@
- #define TPS23861_GENERAL_MASK_1		0x17
- #define TPS23861_CURRENT_SHUNT_MASK	BIT(0)
- 
-+#define TPS23861_TIME_RESET_US		5
-+#define TPS23861_TIME_RESET_US_MAX	1000
-+
-+#define TPS23861_TIME_POWER_ON_RESET_MS 23
-+#define TPS23861_TIME_I2C_MS		20
-+
- #define TEMPERATURE_LSB			652 /* 0.652 degrees Celsius */
- #define VOLTAGE_LSB			3662 /* 3.662 mV */
- #define SHUNT_RESISTOR_DEFAULT		255000 /* 255 mOhm */
-@@ -110,10 +129,28 @@
- #define RESISTANCE_LSB			110966 /* 11.0966 Ohm*/
- #define RESISTANCE_LSB_LOW		157216 /* 15.7216 Ohm*/
- 
-+struct tps23861_port_data { // From DT.
-+	const char *label;
-+	/* Maximum class accepted by the port. The hardware cannot be
-+	 * preconfigured to accept certain class only, so classification
-+	 * interrupt handler is required to for power-on decision if class is
-+	 * not MAX_SUPPORTED_POE_CLASS.
-+	 */
-+	u32 class;
-+	/* true if the port is disabled in the DT */
-+	bool fully_disabled;
-+	/* true if the port shouldn't be enabled on driver init */
-+	bool off_by_default;
-+};
-+
- struct tps23861_data {
- 	struct regmap *regmap;
- 	u32 shunt_resistor;
- 	struct i2c_client *client;
-+	struct gpio_desc *reset_gpio;
-+	struct gpio_desc *shutdown_gpio;
-+	int irq;
-+	struct tps23861_port_data ports[TPS23861_NUM_PORTS];
- };
- 
- static const struct regmap_config tps23861_regmap_config = {
-@@ -205,13 +242,19 @@ static int tps23861_port_enable(struct tps23861_data *data, int channel)
- 	regval |= BIT(channel);
- 	regval |= BIT(channel + 4);
- 	err = regmap_write(data->regmap, DETECT_CLASS_RESTART, regval);
--
--	return err;
-+	if (err)
-+		return err;
-+	return regmap_write(data->regmap, RESET, RESET_CLRAIN);
- }
- 
--static umode_t tps23861_is_visible(const void *data, enum hwmon_sensor_types type,
-+static umode_t tps23861_is_visible(const void *input_data, enum hwmon_sensor_types type,
- 				   u32 attr, int channel)
- {
-+	const struct tps23861_data *data = input_data;
-+
-+	/* Channel may be >=TPS23861_NUM_PORTS for common Input voltage */
-+	if (channel < TPS23861_NUM_PORTS && data->ports[channel].fully_disabled)
-+		return 0;
- 	switch (type) {
- 	case hwmon_temp:
- 		switch (attr) {
-@@ -325,10 +368,15 @@ static int tps23861_read_string(struct device *dev,
- 				enum hwmon_sensor_types type,
- 				u32 attr, int channel, const char **str)
- {
-+	struct tps23861_data *data = dev_get_drvdata(dev);
-+
- 	switch (type) {
- 	case hwmon_in:
- 	case hwmon_curr:
--		*str = tps23861_port_label[channel];
-+		if (channel < TPS23861_NUM_PORTS)
-+			*str = data->ports[channel].label;
-+		else
-+			*str = tps23861_port_label[channel];
- 		break;
- 	case hwmon_temp:
- 		*str = "Die";
-@@ -502,17 +550,155 @@ static int tps23861_port_status_show(struct seq_file *s, void *data)
- 
- DEFINE_SHOW_ATTRIBUTE(tps23861_port_status);
- 
-+static inline bool tps23861_auto_mode(struct tps23861_port_data *port)
-+{
-+	return port->class == MAX_SUPPORTED_POE_CLASS;
-+}
-+
-+static irqreturn_t tps23861_irq_handler(int irq, void *dev_id)
-+{
-+	struct tps23861_data *data = (struct tps23861_data *)dev_id;
-+	struct tps23861_port_data *ports = data->ports;
-+	struct device *dev = &data->client->dev;
-+
-+	unsigned int intr_status, status, class, i;
-+	unsigned int det_status = 0;
-+	int ret;
-+
-+	ret = regmap_read(data->regmap, INTERRUPT_STATUS, &intr_status);
-+	if (ret || intr_status == 0)
-+		return IRQ_NONE;
-+	if (intr_status & INTERRUPT_CLASS) {
-+		regmap_read(data->regmap, DETECTION_EVENT, &det_status);
-+		for (i = 0; i < TPS23861_NUM_PORTS; i++) {
-+			if (tps23861_auto_mode(ports + i))
-+				continue;
-+			if (!(det_status & BIT(i + 4)))
-+				continue;
-+			ret = regmap_read(data->regmap, PORT_1_STATUS + i, &status);
-+			if (ret)
-+				continue;
-+			class = FIELD_GET(PORT_STATUS_CLASS_MASK, status);
-+			if (class == PORT_CLASS_0) {
-+				/* class 0 is same power as class 3, change 0 to
-+				 * 3 for easy comparison
-+				 */
-+				class = 3;
-+			}
-+			if (class == PORT_CLASS_UNKNOWN ||
-+			    class > MAX_SUPPORTED_POE_CLASS)
-+				continue;
-+			if (class > ports[i].class) {
-+				dev_info(dev, "%s class mismatch: got %d, want <= %d",
-+					 ports[i].label, class, ports[i].class);
-+				continue;
-+			}
-+			regmap_read(data->regmap, POWER_STATUS, &status);
-+			if (status & BIT(i))
-+				continue; /* already enabled */
-+			/* Set ICUT and poe+ according to class. Values in ICUT table happen
-+			 * to match class values, so just set class.
-+			 */
-+			regmap_update_bits(data->regmap,
-+					   PORT_1_ICUT + i / 2,
-+					   PORT_1_ICUT_MASK << ((i % 2) * 4),
-+					   class << ((i % 2) * 4));
-+			regmap_update_bits(data->regmap, POE_PLUS,
-+					   BIT(i + 4),
-+					   class > 3 ? BIT(i + 4) : 0);
-+			dev_info(dev, "%s class %d, enabling power",
-+				 ports[i].label, class);
-+			regmap_write(data->regmap, POWER_ENABLE, BIT(i));
-+		}
-+	}
-+	regmap_write(data->regmap, RESET, RESET_CLRAIN);
-+	return IRQ_HANDLED;
-+}
-+
-+static int tps23861_reset(struct i2c_client *client)
-+{
-+	struct tps23861_data *data = i2c_get_clientdata(client);
-+	unsigned int val;
-+
-+	if (data->reset_gpio) {
-+		gpiod_direction_output(data->reset_gpio, true);
-+		/* If shutdown pin is defined, use it to keep ports off, while
-+		 * turning the chip on for i2c configuration.
-+		 */
-+		if (data->shutdown_gpio)
-+			gpiod_direction_output(data->shutdown_gpio, true);
-+		usleep_range(TPS23861_TIME_RESET_US, TPS23861_TIME_RESET_US_MAX);
-+		gpiod_set_value_cansleep(data->reset_gpio, false);
-+		msleep(TPS23861_TIME_POWER_ON_RESET_MS);
-+		if (data->shutdown_gpio)
-+			gpiod_set_value_cansleep(data->shutdown_gpio, false);
-+		msleep(TPS23861_TIME_I2C_MS);
-+	}
-+
-+	/* Check the device is responsive */
-+	return regmap_read(data->regmap, OPERATING_MODE, &val);
-+}
-+
-+static void tps23861_init_ports(struct i2c_client *client)
-+{
-+	struct tps23861_data *data = i2c_get_clientdata(client);
-+	struct tps23861_port_data *ports = data->ports;
-+	unsigned int i, mode;
-+
-+	for (i = 0; i < TPS23861_NUM_PORTS; i++) {
-+		mode = ports[i].fully_disabled	     ? OPERATING_MODE_OFF :
-+		       tps23861_auto_mode(&ports[i]) ? OPERATING_MODE_AUTO :
-+						       OPERATING_MODE_SEMI;
-+		regmap_update_bits(data->regmap, OPERATING_MODE,
-+				   OPERATING_MODE_PORT_1_MASK << (2 * i),
-+				   mode << (2 * i));
-+		if (ports[i].fully_disabled)
-+			continue;
-+		if (ports[i].off_by_default)
-+			tps23861_port_disable(data, i);
-+		else
-+			tps23861_port_enable(data, i);
-+	}
-+}
-+
- static int tps23861_probe(struct i2c_client *client)
- {
- 	struct device *dev = &client->dev;
- 	struct tps23861_data *data;
-+	struct tps23861_port_data *ports;
- 	struct device *hwmon_dev;
-+	struct gpio_desc *gpio;
-+	struct device_node *child;
- 	u32 shunt_resistor;
-+	int ret;
-+	unsigned int i;
-+	bool need_irq = false;
-+	const char *hwmon_name = client->name;
- 
- 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
- 	if (!data)
- 		return -ENOMEM;
- 
-+	ports = data->ports;
-+	for (i = 0; i < TPS23861_NUM_PORTS; i++) {
-+		ports[i].label = tps23861_port_label[i];
-+		ports[i].class = MAX_SUPPORTED_POE_CLASS;
-+	}
-+
-+	gpio = devm_gpiod_get_optional(dev, "reset", GPIOD_ASIS);
-+	if (IS_ERR(gpio)) {
-+		devm_kfree(dev, data);
-+		return -EPROBE_DEFER;
-+	}
-+	data->reset_gpio = gpio;
-+
-+	gpio = devm_gpiod_get_optional(dev, "ti,ports-shutdown", GPIOD_ASIS);
-+	if (IS_ERR(gpio)) {
-+		devm_kfree(dev, data);
-+		return -EPROBE_DEFER;
-+	}
-+	data->shutdown_gpio = gpio;
-+
- 	data->client = client;
- 	i2c_set_clientdata(client, data);
- 
-@@ -521,6 +707,55 @@ static int tps23861_probe(struct i2c_client *client)
- 		dev_err(dev, "failed to allocate register map\n");
- 		return PTR_ERR(data->regmap);
- 	}
-+	ret = tps23861_reset(client);
-+	if (ret)
-+		return -ENODEV;
-+	for_each_child_of_node(dev->of_node, child) {
-+		ret = of_property_read_u32(child, "reg", &i);
-+		if (ret || i >= TPS23861_NUM_PORTS) {
-+			dev_err(dev, "node %s must define 'reg' < %d\n",
-+				child->name, TPS23861_NUM_PORTS);
-+			continue;
-+		}
-+		if (!of_device_is_available(child)) {
-+			ports[i].fully_disabled = true;
-+			continue;
-+		}
-+		ports[i].off_by_default = of_property_read_bool(child, "ti,off-by-default");
-+		of_property_read_string(child, "label", &ports[i].label);
-+		of_property_read_u32(child, "ti,class", &ports[i].class);
-+		if (ports[i].class > MAX_SUPPORTED_POE_CLASS) {
-+			dev_err(dev, "%s invalid class, disabling\n", ports[i].label);
-+			ports[i].fully_disabled = true;
-+			continue;
-+		}
-+		if (ports[i].class == 0) {
-+			/* class 0 is same power as class 3, change 0 to 3 for
-+			 * easy comparison
-+			 */
-+			ports[i].class = 3;
-+		}
-+		need_irq = need_irq || !tps23861_auto_mode(&ports[i]);
-+		dev_info(dev, "%s: max class: %d, %s by default\n",
-+			 ports[i].label, ports[i].class,
-+			 ports[i].off_by_default ? "off" : "on");
-+	}
-+	if (need_irq) {
-+		data->irq = irq_of_parse_and_map(dev->of_node, 0);
-+		if (!data->irq) {
-+			dev_err(dev, "failed to configure irq\n");
-+			return -EINVAL;
-+		}
-+		ret = devm_request_threaded_irq(dev, data->irq, NULL,
-+						tps23861_irq_handler,
-+						IRQF_TRIGGER_FALLING,
-+						"tps23861_irq", data);
-+		if (ret) {
-+			dev_err(dev, "failed to request irq %d\n", data->irq);
-+			return ret;
-+		}
-+		regmap_write(data->regmap, INTERRUPT_ENABLE, INTERRUPT_CLASS);
-+	}
- 
- 	if (!of_property_read_u32(dev->of_node, "shunt-resistor-micro-ohms", &shunt_resistor))
- 		data->shunt_resistor = shunt_resistor;
-@@ -536,7 +771,11 @@ static int tps23861_probe(struct i2c_client *client)
- 				TPS23861_GENERAL_MASK_1,
- 				TPS23861_CURRENT_SHUNT_MASK);
- 
--	hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name,
-+	of_property_read_string(dev->of_node, "label", &hwmon_name);
-+
-+	tps23861_init_ports(client);
-+
-+	hwmon_dev = devm_hwmon_device_register_with_info(dev, hwmon_name,
- 							 data, &tps23861_chip_info,
- 							 NULL);
- 	if (IS_ERR(hwmon_dev))
+You need all of this anyhow, BTF doesn't create version meta data,
+evaluate which version are suitable, or de-serialize complex rbtree or
+linked lists structures.
 
--- 
-2.43.0
+> > Your BTF proposal doesn't seem to benifit memfd at all, it was focused
+> > on extracting data directly from an existing struct which I feel very
+> > strongly we should never do.
+> 
+> From data flow point of view, the data is get from a C struct and
+> eventually store into a C struct. That is no way around that. That is
+> the necessary evil if you automate this process. Hey, there is also no
+> rule saying that you can't use a bounce buffer of some kind of manual
+> control in between.
 
+Yeah but if I already wrote the code to make the required C struct
+there only difference is 'memcpy c struct' vs 'serialze with btf c
+struct' and that isn't meaningful.
 
+If the boilerplate is around arrays of C structs and things then the
+KHO array proposal is a good direction to de-duplicate code.
+
+> It is just a way to automate stuff to reduce the boilerplate. 
+
+You haven't clearly spelled out what the boilerplate even is, this was
+my feedback to you to be very clear on what is being improved.
+
+> I feel a much stronger sense of urgency than you though.  The stakes
+> are high, currently you already have four departments can use this
+> common serialization library right now:
+> 1) PCI
+> 2) VFIO
+> 3) IOMMU
+> 4) Memfd.
+
+We don't know what they actually need to write out, we haven't seen
+any patches. 
+
+Let's start with simple patches and deal with the fundamental problems
+like versioning, then you can come with ideas to optimize if it turns
+out there is something to improve here.
+
+I'm not convinced PCI (a few bits per struct pci_device to start),
+memfd (xarray) and IOMMU (dictionaries of HW physical pointers) share
+a significant overlap of serialization requirements beyond luo level
+managing the objects and versioning.
+
+Jason
 
