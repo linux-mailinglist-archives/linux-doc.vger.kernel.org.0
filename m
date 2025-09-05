@@ -1,222 +1,276 @@
-Return-Path: <linux-doc+bounces-58973-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58975-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACC18B45ADD
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 16:46:38 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CBB3B45AE8
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 16:48:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id A28331744AB
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 14:46:35 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7C3B47A7B5C
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 14:47:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 972461DED42;
-	Fri,  5 Sep 2025 14:46:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9E2637289C;
+	Fri,  5 Sep 2025 14:48:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="f725i3Wg"
+	dkim=pass (2048-bit key) header.d=cyphar.com header.i=@cyphar.com header.b="0THawW7w"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4F704400
-	for <linux-doc@vger.kernel.org>; Fri,  5 Sep 2025 14:46:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.177.32
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E490536CDE5;
+	Fri,  5 Sep 2025 14:48:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.241.56.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757083591; cv=none; b=glTd8BjAMZvTUVpl4KaQ/2VqdG3xI88R7kn8PayE4BGBALkQ1XdXosWvPVQezKQKQcA//dmvq4GkhcuFL9ryXV8jiZfsoZqPMjC8kCPpegbxNxvqoaM321QSC9h5QJBvKUAww++Oo2iny2LF23z4EJRwCQqSdL9D4MSE4/HzmSk=
+	t=1757083713; cv=none; b=mrQ5PWecnpLb03nyZS2gbFWz30vPWFHd8bfzFmmlJUdBjcMl3P1DM4dghI57QU7JLVsAD0yI7yp5ZqQ8YY0RSalK9zS84VXus3vKpRL6o/d2eYYYjX7LPN9HNwo6DIrRj3/TwDeZxZeNBQNgJgJn3jQAIkl0P36EumM8Z0BXvMQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757083591; c=relaxed/simple;
-	bh=fasin47LGarLKDIEqRCJ7siD6oBMYRImiNLdEaUY6qs=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=i1OBQDH/6UxmpHF5EI2eCS1VFiBur9fSmvCbrjCB8RSH8f4P8+WUQziJOIz25pEdiev2N585JgptD2/1qgxDCtdh6AbnSJNO5pnXk8q0uWgxDqK4n4202Bs7QhtbC+kEERQN9cNYj0sIUQLskGeimmpsJPrswdT/yTHbEOoyp2k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=f725i3Wg; arc=none smtp.client-ip=205.220.177.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 585EXZHn003245;
-	Fri, 5 Sep 2025 14:46:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	corp-2025-04-25; bh=Ss/wh0BQ+xaFV6VIgpUO5v/veX0f7entj58+g9epLQc=; b=
-	f725i3Wg4UjY4z1z0R3LYycLsxL3QAIwvTlJMaZhWud2sVLd4iNorV7ATABH1TBU
-	4w7AqfI4trbEOuoTaVVjNH+Tc188iHZaQ9j0vWV38OfdEX1X80R47Bt8viorRB7w
-	gxg5lo4oh1NYrYSt+ml/TBwKg4nWuvD9eURoeO3zzt2CsASz3pfzt80pNUfD+gAV
-	JNZh4UVOLqJ6+JOOQStV4g8hL3VatpuiEDrZSaknWWKp0IwAMGGoT2U/cCG36pjf
-	adGG4UnW/YxqbKIpHZnY+yk+25Qu/r+m+yZsn4KL8NuOCA1xv9DUHi9qZNF8Lr0u
-	ea1FxtDF5aJznsJRAKMr+g==
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4901qp00s2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 05 Sep 2025 14:46:25 +0000 (GMT)
-Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 585DmG2Z026221;
-	Fri, 5 Sep 2025 14:46:24 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 48uqrd3vsv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Fri, 05 Sep 2025 14:46:24 +0000
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 585EkKZe022015;
-	Fri, 5 Sep 2025 14:46:24 GMT
-Received: from localhost.localdomain (dhcp-10-154-122-46.vpn.oracle.com [10.154.122.46])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id 48uqrd3vm5-4;
-	Fri, 05 Sep 2025 14:46:24 +0000
-From: Vegard Nossum <vegard.nossum@oracle.com>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
-        Vegard Nossum <vegard.nossum@oracle.com>
-Subject: [PATCH v2 3/3] docs: add tools/docs/gen-redirects.py
-Date: Fri,  5 Sep 2025 16:46:08 +0200
-Message-Id: <20250905144608.577449-4-vegard.nossum@oracle.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250905144608.577449-1-vegard.nossum@oracle.com>
-References: <20250905144608.577449-1-vegard.nossum@oracle.com>
+	s=arc-20240116; t=1757083713; c=relaxed/simple;
+	bh=IeuCwHP7fxBMyZnUg7lRAegA+KMiIxaSfVE4kK3bhJI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PkcykVlyiggWhuhXbWVIl8/2WJP/KESF70iDWybknVmL14MyHbi2jwRmOPD2r1JX7JCcVxqJIf2EfODfYxafOcLBevrS85CqzOIbroltFm2JWz8r1o2BiRJBNyLQ5qWwJYD74m5Dvl5qXkSJaPzKm+fVHM3b2UsbS3L8E8P8Kg8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=cyphar.com; spf=pass smtp.mailfrom=cyphar.com; dkim=pass (2048-bit key) header.d=cyphar.com header.i=@cyphar.com header.b=0THawW7w; arc=none smtp.client-ip=80.241.56.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=cyphar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cyphar.com
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [IPv6:2001:67c:2050:b231:465::102])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cJK3G0wV2z9spq;
+	Fri,  5 Sep 2025 16:48:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cyphar.com; s=MBO0001;
+	t=1757083706;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=2yxz7OYC7knSMwqm1/ga1qwzQ1qS/2PhiFrxz5xbnhg=;
+	b=0THawW7wLt4yGtJVklnGykWYvtdY8tmFTAYk6XeFDA+dALD0RH0oFkl36NAnq5puArcylf
+	3jMlvKTeGHbF28yVP4qN7S4zrKl6yWo8wnAARcZPsylin9gDNCSnIdV0ykR+S4SPJoK8Fq
+	02Emfx/ZPuEQalW9jyhYm4OPs4Xrhk1wbjkdl5i8i3hPndBGVjw+0Gj94XJIRQb+yFU2e0
+	FQqf2K/6UeL5hdIw1cdYeLMsXupx9uNPzPYvd9EONNfjL+SpSS/03/nzkM1dMbPbXH3Is1
+	o7WCb/Bow5ALIIPYd+A9RZ2Laizw2G1waOO3dQG+qcdXoyRzwDRxihdk/9JY1w==
+Authentication-Results: outgoing_mbo_mout;
+	dkim=none;
+	spf=pass (outgoing_mbo_mout: domain of cyphar@cyphar.com designates 2001:67c:2050:b231:465::102 as permitted sender) smtp.mailfrom=cyphar@cyphar.com
+Date: Sat, 6 Sep 2025 00:48:13 +1000
+From: Aleksa Sarai <cyphar@cyphar.com>
+To: Christian Brauner <brauner@kernel.org>
+Cc: Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, 
+	Andy Lutomirski <luto@amacapital.net>, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	linux-api@vger.kernel.org, linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH v4 0/4] procfs: make reference pidns more user-visible
+Message-ID: <2025-09-05-kinky-napping-auction-creeks-pbN1Vi@cyphar.com>
+References: <20250805-procfs-pidns-api-v4-0-705f984940e7@cyphar.com>
+ <20250902-gehofft-ruheraum-3c286b25b6d3@brauner>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-09-05_04,2025-09-04_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 adultscore=0
- suspectscore=0 spamscore=0 phishscore=0 mlxscore=0 malwarescore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2508110000 definitions=main-2509050145
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA1MDE0MSBTYWx0ZWRfXxswxmRI+g24h
- OS6hE2gDUOnsEjjmBcf42lYFVkqIwVpsiISlU6PT5RzAMZqewb5auxI5IS+eB04KRtmRhrDZNhd
- dPTyugmHy8QHBesrBFr9JVyyjDmWTGITQVj82yoP8/PAtdwlPPGMplPvBBkhhVYWHWUuzszHeJI
- V3x+TTbFShMgk4e2fG9p0Ktpv7tS9YYW4/bhCBLuqHA/BJgmnKFLO8MMn0hvwiZ0KqbtZR/xHOu
- pJA11aQMClJwwtYmqH3h0LIBGJOjiQvQR8vgM9o86JgRnAQzSkGdLtTKo82tLq6Cnqby04nctMm
- RDfRSJpuR0Or1SUNSP1VkgSKpsBgpmCZtj2xqZAVSxUqrGO1iVxM2NQjpC0J/j5oJZ7d6/JtB8c
- LiTQkXTOeQJZlstxxi5hTODNg66sSQ==
-X-Proofpoint-GUID: bGixF9wtoWMyan02khd9gXr-Y00RBaPB
-X-Authority-Analysis: v=2.4 cv=PqOTbxM3 c=1 sm=1 tr=0 ts=68baf7c1 b=1 cx=c_pps
- a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17
- a=IkcTkHD0fZMA:10 a=yJojWOMRYYMA:10 a=ag1SF4gXAAAA:8 a=07d9gI8wAAAA:8
- a=yPCof4ZbAAAA:8 a=pKj-dFjRtrQsPEjPR58A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=Yupwre4RP9_Eg_Bd0iYG:22 a=e2CUPOnPG4QKp8I52DXD:22 cc=ntf awl=host:13602
-X-Proofpoint-ORIG-GUID: bGixF9wtoWMyan02khd9gXr-Y00RBaPB
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="s6blnnuwdbg65wg3"
+Content-Disposition: inline
+In-Reply-To: <20250902-gehofft-ruheraum-3c286b25b6d3@brauner>
+X-Rspamd-Queue-Id: 4cJK3G0wV2z9spq
 
-Add a new script and a new documentation 'make' target,
-htmldocs-redirects.
 
-This will generate HTML stub files in the HTML documentation output
-directory that redirect the browser to the new path.
+--s6blnnuwdbg65wg3
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v4 0/4] procfs: make reference pidns more user-visible
+MIME-Version: 1.0
 
-Suggested-by: Konstantin Ryabitsev <konstantin@linuxfoundation.org>
-Suggested-by: Jonathan Corbet <corbet@lwn.net>
-Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>
----
- Documentation/Makefile      |  4 +++
- Makefile                    |  5 ++--
- tools/docs/gen-redirects.py | 54 +++++++++++++++++++++++++++++++++++++
- 3 files changed, 61 insertions(+), 2 deletions(-)
- create mode 100755 tools/docs/gen-redirects.py
+On 2025-09-02, Christian Brauner <brauner@kernel.org> wrote:
+> On Tue, Aug 05, 2025 at 03:45:07PM +1000, Aleksa Sarai wrote:
+> > Ever since the introduction of pid namespaces, procfs has had very
+> > implicit behaviour surrounding them (the pidns used by a procfs mount is
+> > auto-selected based on the mounting process's active pidns, and the
+> > pidns itself is basically hidden once the mount has been constructed).
+> >=20
+> > /* pidns mount option for procfs */
+> >=20
+> > This implicit behaviour has historically meant that userspace was
+> > required to do some special dances in order to configure the pidns of a
+> > procfs mount as desired. Examples include:
+> >=20
+> >  * In order to bypass the mnt_too_revealing() check, Kubernetes creates
+> >    a procfs mount from an empty pidns so that user namespaced containers
+> >    can be nested (without this, the nested containers would fail to
+> >    mount procfs). But this requires forking off a helper process because
+> >    you cannot just one-shot this using mount(2).
+> >=20
+> >  * Container runtimes in general need to fork into a container before
+> >    configuring its mounts, which can lead to security issues in the case
+> >    of shared-pidns containers (a privileged process in the pidns can
+> >    interact with your container runtime process). While
+> >    SUID_DUMP_DISABLE and user namespaces make this less of an issue, the
+> >    strict need for this due to a minor uAPI wart is kind of unfortunate.
+> >=20
+> > Things would be much easier if there was a way for userspace to just
+> > specify the pidns they want. Patch 1 implements a new "pidns" argument
+> > which can be set using fsconfig(2):
+> >=20
+> >     fsconfig(procfd, FSCONFIG_SET_FD, "pidns", NULL, nsfd);
+> >     fsconfig(procfd, FSCONFIG_SET_STRING, "pidns", "/proc/self/ns/pid",=
+ 0);
+> >=20
+> > or classic mount(2) / mount(8):
+> >=20
+> >     // mount -t proc -o pidns=3D/proc/self/ns/pid proc /tmp/proc
+> >     mount("proc", "/tmp/proc", "proc", MS_..., "pidns=3D/proc/self/ns/p=
+id");
+> >=20
+> > The initial security model I have in this RFC is to be as conservative
+> > as possible and just mirror the security model for setns(2) -- which
+> > means that you can only set pidns=3D... to pid namespaces that your
+> > current pid namespace is a direct ancestor of and you have CAP_SYS_ADMIN
+> > privileges over the pid namespace. This fulfils the requirements of
+> > container runtimes, but I suspect that this may be too strict for some
+> > usecases.
+> >=20
+> > The pidns argument is not displayed in mountinfo -- it's not clear to me
+> > what value it would make sense to show (maybe we could just use ns_dname
+> > to provide an identifier for the namespace, but this number would be
+> > fairly useless to userspace). I'm open to suggestions. Note that
+> > PROCFS_GET_PID_NAMESPACE (see below) does at least let userspace get
+> > information about this outside of mountinfo.
+> >=20
+> > Note that you cannot change the pidns of an already-created procfs
+> > instance. The primary reason is that allowing this to be changed would
+> > require RCU-protecting proc_pid_ns(sb) and thus auditing all of
+> > fs/proc/* and some of the users in fs/* to make sure they wouldn't UAF
+> > the pid namespace. Since creating procfs instances is very cheap, it
+> > seems unnecessary to overcomplicate this upfront. Trying to reconfigure
+> > procfs this way errors out with -EBUSY.
+> >=20
+> > /* ioctl(PROCFS_GET_PID_NAMESPACE) */
+> >=20
+> > In addition, being able to figure out what pid namespace is being used
+> > by a procfs mount is quite useful when you have an administrative
+> > process (such as a container runtime) which wants to figure out the
+> > correct way of mapping PIDs between its own namespace and the namespace
+> > for procfs (using NS_GET_{PID,TGID}_{IN,FROM}_PIDNS). There are
+> > alternative ways to do this, but they all rely on ancillary information
+> > that third-party libraries and tools do not necessarily have access to.
+> >=20
+> > To make this easier, add a new ioctl (PROCFS_GET_PID_NAMESPACE) which
+> > can be used to get a reference to the pidns that a procfs is using.
+> >=20
+> > Rather than copying the (fairly strict) security model for setns(2),
+> > apply a slightly looser model to better match what userspace can already
+> > do:
+> >=20
+> >  * Make the ioctl only valid on the root (meaning that a process without
+> >    access to the procfs root -- such as only having an fd to a procfs
+> >    file or some open_tree(2)-like subset -- cannot use this API). This
+> >    means that the process already has some level of access to the
+> >    /proc/$pid directories.
+> >=20
+> >  * If the calling process is in an ancestor pidns, then they can already
+> >    create pidfd for processes inside the pidns, which is morally
+> >    equivalent to a pidns file descriptor according to setns(2). So it
+> >    seems reasonable to just allow it in this case. (The justification
+> >    for this model was suggested by Christian.)
+> >=20
+> >  * If the process has access to /proc/1/ns/pid already (i.e. has
+> >    ptrace-read access to the pidns pid1), then this ioctl is equivalent
+> >    to just opening a handle to it that way.
+> >=20
+> >    Ideally we would check for ptrace-read access against all processes
+> >    in the pidns (which is very likely to be true for at least one
+> >    process, as SUID_DUMP_DISABLE is cleared on exec(2) and is rarely set
+> >    by most programs), but this would obviously not scale.
+> >=20
+> > I'm open to suggestions for whether we need to make this stricter (or
+> > possibly allow more cases).
+> >=20
+> > Signed-off-by: Aleksa Sarai <cyphar@cyphar.com>
+>=20
+> Thanks for the patchset. Being able to specify what pid namespace the
+> procfs instance is supposed to belong to is super useful and will make
+> things easier for userspace for sure.
 
-diff --git a/Documentation/Makefile b/Documentation/Makefile
-index b98477df5ddfc..fdd6d8469155b 100644
---- a/Documentation/Makefile
-+++ b/Documentation/Makefile
-@@ -124,6 +124,9 @@ htmldocs:
- 	@$(srctree)/scripts/sphinx-pre-install --version-check
- 	@+$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,html,$(var),,$(var)))
- 
-+htmldocs-redirects: $(srctree)/Documentation/.renames.txt
-+	@tools/docs/gen-redirects.py --output $(BUILDDIR) < $<
-+
- # If Rust support is available and .config exists, add rustdoc generated contents.
- # If there are any, the errors from this make rustdoc will be displayed but
- # won't stop the execution of htmldocs
-@@ -193,6 +196,7 @@ cleandocs:
- dochelp:
- 	@echo  ' Linux kernel internal documentation in different formats from ReST:'
- 	@echo  '  htmldocs        - HTML'
-+	@echo  '  htmldocs-redirects - generate HTML redirects for moved pages'
- 	@echo  '  texinfodocs     - Texinfo'
- 	@echo  '  infodocs        - Info'
- 	@echo  '  latexdocs       - LaTeX'
-diff --git a/Makefile b/Makefile
-index 06c28b1d7e67a..5dc8ce3d28a2a 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1799,8 +1799,9 @@ $(help-board-dirs): help-%:
- 
- # Documentation targets
- # ---------------------------------------------------------------------------
--DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs epubdocs cleandocs \
--	       linkcheckdocs dochelp refcheckdocs texinfodocs infodocs
-+DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs htmldocs-redirects \
-+	       epubdocs cleandocs linkcheckdocs dochelp refcheckdocs \
-+	       texinfodocs infodocs
- PHONY += $(DOC_TARGETS)
- $(DOC_TARGETS):
- 	$(Q)$(MAKE) $(build)=Documentation $@
-diff --git a/tools/docs/gen-redirects.py b/tools/docs/gen-redirects.py
-new file mode 100755
-index 0000000000000..6a6ebf6f42dc8
---- /dev/null
-+++ b/tools/docs/gen-redirects.py
-@@ -0,0 +1,54 @@
-+#! /usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0
-+#
-+# Copyright © 2025, Oracle and/or its affiliates.
-+# Author: Vegard Nossum <vegard.nossum@oracle.com>
-+
-+"""Generate HTML redirects for renamed Documentation/**.rst files using
-+the output of tools/docs/gen-renames.py.
-+
-+Example:
-+
-+    tools/docs/gen-redirects.py --output Documentation/output/ < Documentation/.renames.txt
-+"""
-+
-+import argparse
-+import os
-+import sys
-+
-+parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-+parser.add_argument('-o', '--output', help='output directory')
-+
-+args = parser.parse_args()
-+
-+for line in sys.stdin:
-+    line = line.rstrip('\n')
-+
-+    old_name, new_name = line.split(' ', 2)
-+
-+    old_html_path = os.path.join(args.output, old_name + '.html')
-+    new_html_path = os.path.join(args.output, new_name + '.html')
-+
-+    if not os.path.exists(new_html_path):
-+        print(f"warning: target does not exist: {new_html_path} (redirect from {old_html_path})")
-+        continue
-+
-+    old_html_dir = os.path.dirname(old_html_path)
-+    if not os.path.exists(old_html_dir):
-+        os.makedirs(old_html_dir)
-+
-+    relpath = os.path.relpath(new_name, os.path.dirname(old_name)) + '.html'
-+
-+    with open(old_html_path, 'w') as f:
-+        print(f"""\
-+<!DOCTYPE html>
-+
-+<html lang="en">
-+<head>
-+    <title>This page has moved</title>
-+    <meta http-equiv="refresh" content="0; url={relpath}">
-+</head>
-+<body>
-+<p>This page has moved to <a href="{relpath}">{new_name}</a>.</p>
-+</body>
-+</html>""", file=f)
--- 
-2.34.1
+I was going to send a new version changing the whole thing to be struct
+path based (and adding FSCONFIG_SET_PATH{,_EMPTY} support) so we don't
+need to allocate a file explicitly for the non-FSCONFIG_SET_FD case, but
+we can do that as a follow-up I guess.
 
+> The code you added contains a minor wrinkle that I disliked which I've
+> changed and you tell me if you can live with this restriction or not.
+>=20
+> The way you've implemented it specifying a pid namespace that the caller
+> holds privilege over would silently also override the user namespace the
+> filesystem is supposed to belong to.
+>=20
+> Specifically, you did something like:
+>=20
+>         put_pid_ns(ctx->pid_ns);
+>         ctx->pid_ns =3D get_pid_ns(target);
+>         put_user_ns(fc->user_ns);
+>         fc->user_ns =3D get_user_ns(ctx->pid_ns->user_ns);
+>=20
+> This silently overrides the user namespace recorded at fsopen() time. I
+> think that's too subtle and we should just not allow that at all for
+> now.
+>=20
+> Instead I've changed this to:
+>=20
+>         if (fc->user_ns !=3D target->user_ns)
+>                 return invalfc(fc, "owning user namespace of pid namespac=
+e doesn't match procfs user namespace");
+>=20
+>         put_pid_ns(ctx->pid_ns);
+>         ctx->pid_ns =3D get_pid_ns(target);
+>=20
+> so we just refuse different owernship.
+
+That sounds fine, I wasn't quite sure what to do with fc->user_ns to be
+honest. Being more conservative is probably the right call here.
+
+> I've also dropped the procfs ioctl because I'm not sure how much value
+> it will actually add given that you can do this via /proc/1/ns/pid.
+>=20
+> If that is something that libpathrs despearately needs I would like to
+> do it as a separate patch anyways.
+
+The main issues are:
+
+1. pid1 can often be non-dumpable, which can block you from doing that.
+   In principle, because the dumpable flag is reset on execve, it is
+   theoretically possible to get access to /proc/$pid/ns/pid if you win
+   the race in a pid namespace with lots of process activity, but this
+   kind of sucks.
+
+2. This approach doesn't work for empty pid namesapces.
+   pidns_for_children doesn't let you get a handle to an empty pid
+   namespace either (I briefly looked at the history and it seems this
+   was silently changed in v2 of the patchset based on some feedback
+   that I'm not sure was entirely correct).
+
+3. Now that you can configure the procfs mount, it seems like a
+   half-baked interface to not provide diagnostic information about the
+   namespace. (I suspect the criu folks would be happy to have this too
+   ;).)
+
+--=20
+Aleksa Sarai
+Senior Software Engineer (Containers)
+SUSE Linux GmbH
+https://www.cyphar.com/
+
+--s6blnnuwdbg65wg3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJEEABYKADkWIQS2TklVsp+j1GPyqQYol/rSt+lEbwUCaLr4LRsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIACgkQKJf60rfpRG+mLwD+OBLrKDjD/AagMCzfrvCF
+gB1Co3GReX99caLh6G7vUqMA/2ZGF2udlINLu5ajN5rT7zw4nvJfvN+ZrkwDzJ9A
+9YwG
+=VwoX
+-----END PGP SIGNATURE-----
+
+--s6blnnuwdbg65wg3--
 
