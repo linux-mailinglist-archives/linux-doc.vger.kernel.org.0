@@ -1,271 +1,287 @@
-Return-Path: <linux-doc+bounces-58958-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-58960-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F25BB4587B
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 15:08:53 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 43D5EB45890
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 15:18:04 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 8B068B60B05
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 13:06:54 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id ECD673BC8A8
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Sep 2025 13:18:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 067BD1C8632;
-	Fri,  5 Sep 2025 13:08:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E327A283FE1;
+	Fri,  5 Sep 2025 13:17:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="R53xjVxZ"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="K7qfCKNm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5580B19CCEC;
-	Fri,  5 Sep 2025 13:08:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.9
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757077691; cv=fail; b=VTdXkpsm3T5rtTCwZI1TrTy/2uDAfFyPmJgjJLe5oPNZrKUii+Hev3i6eDecKMm0R5ENYr4kEovyqYMZmC0+C+DD5Z6oQRf25v2L6K3ZLFwdDeAZ0zGqEpRLWB6GeAb/VHVUHdsEnCed7MKDsZVtfeQaKn5EcLXaXPWYiBqrpmU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757077691; c=relaxed/simple;
-	bh=1X4OOixR/5TQ9SitEefCndzN+8eEFWgVWcpMdm7DQrE=;
-	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=rHnC7tPGnuu0sp9F3K/cq9vD25BUo5SWCVgMv4ecmhcfKnnppLAsDC5C8ETYw5/65tZJVfOmMBFdI+N4awXTvu43dgcOFuvRF9rvNWMlKZLfG81AleSNuH3Ikg6BKhQ+y0X4nw+edTLC0l2iJ8FE6I84HheA0OHPM1n3ari4GLw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=R53xjVxZ; arc=fail smtp.client-ip=198.175.65.9
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1757077690; x=1788613690;
-  h=message-id:date:subject:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=1X4OOixR/5TQ9SitEefCndzN+8eEFWgVWcpMdm7DQrE=;
-  b=R53xjVxZHaI6RGEMHfnB4ui7EoPLd37xmkp7YLCWYZU1FFevUQEqKfmq
-   TVBWQ6AIGFy9gtHVOzkMAQJ+0WxZeqg69Z2Orf9ST+R7QzPeU4s3LJLau
-   5w2l4NXWNSlRreTJfZT6AKPQjCPYJ8+eMbNNqcKclARokhTDNyH0UxgF1
-   ylAU1jIdetpTb8VcBEHDVmRworFoOTTc97QQzeTwDuWbNXX87YxBLlR/D
-   N6CAm8Fhs9ouXbwCuR/nEIc+Mx++Nt7dbslHdciFiYQUCnsw9qx2PVCib
-   LPlw1v285dIXj15WkA3gfrJwyhFdyXICXTz7QB02A/u7jPHDgeupI8jZ5
-   Q==;
-X-CSE-ConnectionGUID: Wbio9QnXRIuGWBkXKrmppQ==
-X-CSE-MsgGUID: f30nRaUlQt2VBmeVCVORhA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="82020869"
-X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; 
-   d="scan'208";a="82020869"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Sep 2025 06:08:09 -0700
-X-CSE-ConnectionGUID: 2QGQTb3XRYOnlmzCXWXrLg==
-X-CSE-MsgGUID: pqAdck/hSJiuApCM9NEEsA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.18,241,1751266800"; 
-   d="scan'208";a="203088469"
-Received: from fmsmsx902.amr.corp.intel.com ([10.18.126.91])
-  by fmviesa001.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Sep 2025 06:08:09 -0700
-Received: from FMSMSX903.amr.corp.intel.com (10.18.126.92) by
- fmsmsx902.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Fri, 5 Sep 2025 06:08:09 -0700
-Received: from fmsedg903.ED.cps.intel.com (10.1.192.145) by
- FMSMSX903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17 via Frontend Transport; Fri, 5 Sep 2025 06:08:09 -0700
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (40.107.237.40)
- by edgegateway.intel.com (192.55.55.83) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.17; Fri, 5 Sep 2025 06:08:08 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FphWGaWKXszJqgbHxvbz5fzqE7YL+Zvbo56tdQ6L2F0xV0W+qGFJ+BMmfQzwHRyb8sHgLhLwQd+kydBsM6uwOWP5+x5wzobXQtg8tJHbJFJy4vWt5MUkFis+vyvAwAeFo3oUgKvYZXu6rnIR0MnWUAvinVCBGVgtCtGOLmAl00bIXWfpcKcRravmaCZHhGsuqopzj7U4sPBznUt7mrVW0nhxp/rlNyZ9x3cQkOglVsvBRXekyrdhmTSRK65/2fHw/fHNXQG4pHPkFyIDEGnB17SsgBcmU4HeDE35WNXV5zzzHtFej9yDqYf9zHxUpWW5KOCijLx2fkFx180tUwsrBg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vUZ6F38lpe3ZPc9PWkFs9rn2+Rtfp96Y0/7XXhhP3kY=;
- b=VfArdwIuJScZmi1gEZZR6ZlN6nZ5YQFlgmbxobj4K/zqChxFs+2hNtxbNJsrlsURs9uvi3Rbuxckp5YUYYfODz9uTRUxPYAX6r9sHi6mqBDIPFVh3Gxpk5SXMnwyDN8mMbFx3E6SbtD8D1k20DYSQ1JNyK1aB4xaI4Ajtu7sR9C9CefER1WWsVTvox2/VuFLA6Ls1wIkiD8AIfs3En73yTRzKd51WjBd1EPvCPDQjV+ks308hhyRRbpksJL/R8M4N9Crrn1uwNBuu8g2ZhFOs0Q45LppX60pRXc9R1pDsfKYOH7x+/6qiY++qaADhRJdPQYAXRMEMAEBKeF7sAg6tQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from MN6PR11MB8102.namprd11.prod.outlook.com (2603:10b6:208:46d::9)
- by SJ0PR11MB5120.namprd11.prod.outlook.com (2603:10b6:a03:2d1::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.19; Fri, 5 Sep
- 2025 13:08:00 +0000
-Received: from MN6PR11MB8102.namprd11.prod.outlook.com
- ([fe80::15b2:ee05:2ae7:cfd6]) by MN6PR11MB8102.namprd11.prod.outlook.com
- ([fe80::15b2:ee05:2ae7:cfd6%6]) with mapi id 15.20.9094.017; Fri, 5 Sep 2025
- 13:08:00 +0000
-Message-ID: <b5be0b7d-35e4-43ca-85f6-fa17c139edba@intel.com>
-Date: Fri, 5 Sep 2025 15:07:55 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v4 0/5] dpll: zl3073x: Add support for devlink
- flash
-To: Ivan Vecera <ivecera@redhat.com>
-CC: Jiri Pirko <jiri@resnulli.us>, <netdev@vger.kernel.org>, "David S. Miller"
-	<davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski
-	<kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
-	<horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Prathosh Satish
-	<Prathosh.Satish@microchip.com>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, Michal Schmidt <mschmidt@redhat.com>, "Petr
- Oros" <poros@redhat.com>
-References: <20250903100900.8470-1-ivecera@redhat.com>
-From: Przemek Kitszel <przemyslaw.kitszel@intel.com>
-Content-Language: en-US
-In-Reply-To: <20250903100900.8470-1-ivecera@redhat.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: DU7P189CA0026.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:10:552::23) To MN6PR11MB8102.namprd11.prod.outlook.com
- (2603:10b6:208:46d::9)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9F31279780;
+	Fri,  5 Sep 2025 13:17:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.176
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1757078267; cv=none; b=fRj0Ho8jHL2Jv542Mkfr5B/Liz8WskwcBtEFRpsvLr13qyjON87rjT1qmMbRnU+SiHIfHnHbnCQ5TqUHE+gho8aToOygIdWdSbouxyio2+xlPWZuREF1UcnBe74T0zYEPJOXlrPY9uVwlaakM2CBRhmkXYlCS8NJeeAoJSk5NwA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1757078267; c=relaxed/simple;
+	bh=x72jwWF4H/aOwVvuzhj8Ydlc8AiYOYS3TvagtWNuNsg=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=sGWz20d01nMQADQEW33nRbZxvC35ULTV9v1jUJ0ODGZoGLsIYnu0b9DCoYDyMsDtUAv+J9ImrGfwlsqmWZQsC+JI2KnFdjPuBE4OwJVoKs+z2g0dQ5hk6LfTi4lOm9RB8ZcD572PCLFacJeYMqO999mguodz71u8XfDwqZFnqig=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=K7qfCKNm; arc=none smtp.client-ip=209.85.208.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-336b071e806so19414331fa.1;
+        Fri, 05 Sep 2025 06:17:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757078264; x=1757683064; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oc8f2nWwsFgS1BPAIMfi6Jzr3Bff83194zVVHmAnwo8=;
+        b=K7qfCKNmDq1rGP29axRwB1MHDahpoGHH3BFYzwVisRsbvG0GltgoU8MB4E8gjm0Gm8
+         3o+g4G1rlUswEXaJDImDutbgBzmOg4PIr2VBmp57kT/+eS7ySKvAv9MGRETXxg6FjToc
+         7dmRCZFOaJvtWQ4pTokZmw3W80VRV0vBnUuFp2DgY3dmMPbAUsVfUo0Z3zamhiIqju3+
+         gW6sFfqZbszvAq6hjgCrRD867pn4KA4vCjG9gMcY5iehmB9EeQx5rmvTwjYH29ka8mBe
+         vmEjewZDtskgnK5J9aKUU6CnBwFiUKBqEAbF9Ue2zt4Q1kQ8bu2PrfVlubVg54giY4AS
+         qFoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757078264; x=1757683064;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=oc8f2nWwsFgS1BPAIMfi6Jzr3Bff83194zVVHmAnwo8=;
+        b=lQ4fkfzn1vvnx+ytk8wqWhrv1TodhANK1Y0NCWdnjJ/Zx6DgkbLrvrWaLJeMWy5bA3
+         ed7ND9UC0DkTJEqJ/iQnInTeTuelbYMMIKBEKbE89CvtjoAIDFLb+KsRtywLC6sQCPQs
+         fgyacKVphf4UqA0QI8xvW/M7FiaGDcqcxMO89l/jSXEmlc+8HcPvAh4+AL/YzPEl1ni/
+         6x1H892kes4aY5EnWtB5DliZOZ7M/S8s9wAMDX1OangOmbYUBmkwZYlT+afyl05SkX5s
+         Jzc6AOecl1xQ/DRxuxi9GXFWryLR8uU8aQHEhp2O6oOrilDqawc3+UYYOa5/sEYViXYi
+         WhTA==
+X-Forwarded-Encrypted: i=1; AJvYcCV0t5nEMCUV8A5C4iDCY3awtRDhdeUaT0lW6KWD9q+h3OcZdR0Y/2F5UDtcdVbdqFWfARn8Pbj8ey+qzl8B@vger.kernel.org, AJvYcCVAfNWymGnbG/gyMPW3reyCI+HloVVVTAFEcVQ3u73ViiM7O8TYxzMKLIif0ExPK1vI1Sy4fl5ijbTRMZ0=@vger.kernel.org, AJvYcCVKXCl7wfB4dysBuHWlkFnSzlJSho7dNz67Z4uUWeIlkM1QQmLqsYqgnlVgrPK3sqPzvly7VhmsSrw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxP3rZ+2wH5M6uNoSaTS3edGq/UETZ6C1r4LmhoKyRoTDuhiQ5S
+	dMFcv3lJCAObhLzjw0OvC2xSeCICDMHhm/4gsQSKWVP84D4o4qNe3x2rhu4d+L8NEX0xpN0YsNf
+	Y8eF+oFN3tHP+MX2SQmX8n7hfEU1qlGU=
+X-Gm-Gg: ASbGnctikJ/A/ai5jzuSfaraebPgQOCV6L/VfSh86B+ID9yuY3m0pYekgz86ALLSInz
+	K/A8F1g4BZRpKfRMU4YGZQBFBrOzFH3hWwvwJYSLfFpcF4k0cU8eNBln8DHXhxXe89zyAClaGVa
+	3r3RoW9tuf2lrzmP5Wyse/Qa2EYukeNsG/00bqVHNaCCqFa8jyTMjfyLHNv4WjpgWORI1rJKYAB
+	S/zfJ3EiBwBs2nrtXwy0xBUhMYxIoBSn8U6DeKy40Y+ycpyaweQ
+X-Google-Smtp-Source: AGHT+IEC/BApMqlsYHZkbGMlt/qZevzap7f6MVnsAtSAYRqKkCOV7uWI4ltujHwTzJedGNX4bIln/2ZFSKyvcY2vmJ4=
+X-Received: by 2002:a05:651c:b13:b0:337:e8cf:f049 with SMTP id
+ 38308e7fff4ca-337e8cff1b1mr47189851fa.32.1757078263730; Fri, 05 Sep 2025
+ 06:17:43 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN6PR11MB8102:EE_|SJ0PR11MB5120:EE_
-X-MS-Office365-Filtering-Correlation-Id: ef9dcfc3-92f2-4862-5089-08ddec7d3d5d
-X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UnJ2MUZoajF0UWw1SFZEemJLbkxtckNQSmpSWkQ2QUlNZjRMVjFUdkFkd1Z1?=
- =?utf-8?B?VUhVSUJpcXQ0azJ0aERnQi9yY2lUNThVZzdRY2dTSnF4cmYySjZBbGpwQ2xN?=
- =?utf-8?B?dENsdWM1OGgxTExDdk9YeStvTVA2ZUNySVd4czFyVnZ0OUR1QTdma3hTQ0RL?=
- =?utf-8?B?amtpajc0RlpPQ3YveUdWZVhxU25meEpiRS92ZmRieEN0UHUyWlloS28zTDJG?=
- =?utf-8?B?LzRTRkM2Y0g0NXRwRlFIdWNCbTlBYUVsTTA3ckZPMlR0dFh3WCtOYkE3b1gr?=
- =?utf-8?B?Uy9wQUVld0QrUHhUdnNUTTFnWStkbE5ubTkrYStNeGJzRDB0MTJkZE9XRHk4?=
- =?utf-8?B?RFgzeUNVbFhkSDZMT2J5OHFzQmpTMlJxVHRubFg2UURXWW9XMTJNTTJ4ci81?=
- =?utf-8?B?REQvVlE5NzAxYjgxcFIxdXBZU0doWEV6U0F6eVFGOHE3bEdIVzZZd1BTc1pG?=
- =?utf-8?B?emVtWEt6bnU2cU9LT2xZbGhlUzExcmIvNkFTSnp5OEEwZk5FaGM2WDdPdSt6?=
- =?utf-8?B?OTV3SWh1WjdlQk9PNXJqS3Q0OFdZcnF4QmgrQmhzWlpPSmNhNCtSYnduUDZN?=
- =?utf-8?B?Ym9ucXFlMlJNZUJzSzJBQ0REaFpKT2hBMEN4R1RrdEhoTlRWM3Vha1FmUG1X?=
- =?utf-8?B?Tmwwcno0NktBY0NIbThuQ1ZaK2l1bXUrcG45b2ZCL3JPdG1NODZYOGRrdDM3?=
- =?utf-8?B?UUtLSER3SkpsMzFSckdpWnBLODNDQkNZdXMycmJwMXJnVkQvZVlMRm5Gdm9s?=
- =?utf-8?B?VjNpaUhZYzVRZG51NXhHTjB5SzZsRmgxQk1YRTRyNlpUUVNyeFJDV2JhYkxP?=
- =?utf-8?B?Ujg5UE0yUFMxVFdTcGdhaDByT09mUFJoN1NzeGowWkh2MEJKK1NuNW5Wc2lN?=
- =?utf-8?B?OFhYOGorQVd2SkNOWndCbFpQdWpDd1dmUXhVUmZ6U3EyNytJa25aUEZIcmw3?=
- =?utf-8?B?VE9RYlFrcnhCdm1vMXd2YWpjc3hNTHgxbDBLOGlXblc2YW0vdkdVUCsxMHk4?=
- =?utf-8?B?aFk2bGpTU1FUS1pNSGM4alJ0MnNxcHdmdFRrSldMck96eDU2dS80MWxiMWRY?=
- =?utf-8?B?eklEQ1JMcWFsNzMxTVkwT3M1YllaT0tROXFGcXNLQU5HV3lVS1UvSUkzTW8v?=
- =?utf-8?B?ellhQi9ER01ReS9VNTBGSGtwZ1RtOWV0MEtDZU00cVE4QVlXdkF4T2lzZGFW?=
- =?utf-8?B?QTNmWm1lL0FvVksyc2NiQVdNamh4VGxESm5LK2lDN3U4NU5kWng1dmdFa1NW?=
- =?utf-8?B?TlVTa2daRGVDYlA3Mm10V1o1RnZqVHJLa082dThGSVNEVnVYbW9wdGZtQXRt?=
- =?utf-8?B?TmVEUWZqZ21DK0pPaU40eHoweVdFNWtQUTN4bVFORW5YSGhQVXkrOEtOYS85?=
- =?utf-8?B?UzFZZXM5Vkh2VlZuNzZXS0Vnc3d4NTFPL2h1SU8yWHQ0bEs1UlgvNVdhYUN2?=
- =?utf-8?B?VHJYZFcyaHJuUjZmZ3JVYVFsTG1BSS9UODZIcStGdnVUMmV4OG96L0JVNUdC?=
- =?utf-8?B?aDBlVy85aG0vTHNIT28rVmV0aUlZWmU1QU5pTVBEeTNvSlpKWVB5RkRjcnJH?=
- =?utf-8?B?NFRkL3pMOWNrZzZKK3BUZjNvRUdiRktxanJUN2ZYNGt5dUpWUHphNHZpSm9u?=
- =?utf-8?B?NHh3ay9QeXFJdlZoZEc2Z2x0UWpwcEpndTl1ZVlYTDVYZEd4L3FLOVh1Lzdv?=
- =?utf-8?B?MTlsTVRnRVV6cnhQQ1oyR3ZCVVg0MmF3S0ttSm9VczJuTFRzejQzcEZlTm1D?=
- =?utf-8?B?K0FjK1lBY2FzUFgwaDJjY0pZbGVMQStrTEEyZ2dBRVhkWkxJSkZpMGs3eUQx?=
- =?utf-8?B?N2VtSVlLWE45NzJQa3hvcHZ4VGxuUngzNERod1NieDRKY3dzQmJONjNUaTBt?=
- =?utf-8?B?R3lvVEJ1WlBBZFZJVEMrYlZ5MkFQYW5GTmxnazFhMHZhQW1oUmY3NStMWnpT?=
- =?utf-8?Q?a85/HPooKXY=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN6PR11MB8102.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MnlsMkhWN1lhWC9iY29KRS8yWkhPaXB1cDNRdm5wYXhOS2s5RkhsRzBRQkdI?=
- =?utf-8?B?WmhrbFVuczZnVFpTNkxPMGFzUXR2R2JQR3ozTFVJQTZZTThEVVZUZ2FaeVNI?=
- =?utf-8?B?STMvbyt4enpnUm9JekVEOFllTFBKZFE5NWtkZC94OWgya1ZmS2tUZ2w1V0p4?=
- =?utf-8?B?UFJYbjhqckZ1SFNNSjJwWm1MdUllc3Y3TkxGZUdWL1RlcUY1b296NFMzbllV?=
- =?utf-8?B?WC9QQTUxSkxxTVRJWGRpd1c4SnN1ZytqOHVZb2tiZWdZRWpKTXBLVzFQekxS?=
- =?utf-8?B?aURTNWhkK0M1V2o2UHQvSUVxTGVONDR1bXBabUtoQ3Z3TVNVcWFVU3Fmb1J5?=
- =?utf-8?B?dCt0THJwaW9WZnVBZmx6enV1dTVuUVVlejBjVlRKakV6WVdaV1VoSGdjUDVu?=
- =?utf-8?B?bHF4NE5WTDhVY003Y056Uzg3VTlHNkNxNzZOQU43NWxpbHhiS2hEaHJYUDVP?=
- =?utf-8?B?UkFsaGVNYjUzSzhyR0llaHg1ako2ZjdEYWNNSWE4SmZZdmVZZ2JEdE5WWENh?=
- =?utf-8?B?UG9QVEE2T2V1R0liWGJ0OU9nenVVZmc4eEZObDRJMzAvYUVyNUcxTE1ZSG4z?=
- =?utf-8?B?cU8wamNMSjJWT2h2S1dJQXZheThzTDFKeitkSEpJK212OGhVT3kzZFRpWDQx?=
- =?utf-8?B?citPKzgwNXVZNHVqWmEveVU2N1Bsa3ZWS3B5VXo4WmkxSlBMOXNWSWhCdjQ3?=
- =?utf-8?B?VU55QmRKUjlLUTJ0WkVIblc1MEJPb3FsMmkrWlBLb3RnSWo5ZTkvZlhOOUMw?=
- =?utf-8?B?QUhxMjBuT2Z0TlphWVlEY0d1eDVOVWVoWnR1U3JQMWlPMHV0QmlaOGZVbmVn?=
- =?utf-8?B?SDFDbXc1L1VtK0J6bmpicU1iejV5eDlGWmFtTDFWekhYOGRlL2psS0JZdTU4?=
- =?utf-8?B?MHFPNUtpQnc0TWR0KzNUdFY1Q2Q0MU93aVJlbGJzdmRWS01JQVNQaW1lRDFM?=
- =?utf-8?B?Nk94UUlmSmxvZmVMNFZZTUJwMWtwY1o1ZlNaOEhNeVlrUDN2b1hHSUorUGsv?=
- =?utf-8?B?bzVZU0pkQ0FjMWZBY3FRSmF2OWt6L0xmZjdIVjhGYmJmTEEzT214VnhINGZ1?=
- =?utf-8?B?c21QVGExMGR0VzlqWk0rTk9LTXZKQlRDYnphVnpSOUk4WlFDUXNuSXVhWGtn?=
- =?utf-8?B?ZEptd2dmakNHb3Rwa21UVXcrbUJtN3MwUUROWVM4TFZiV2tPNnFUaEVudTVP?=
- =?utf-8?B?WVR0eS9qU2JCemxleUd0MFVOUVZUN2IwQVlTUHZLemVyZlV1cmdsYnJmR2Mz?=
- =?utf-8?B?bFAySDRGYUsxa2V4UVd5SkpYNEVrT2pZS2dtMDMyYmMzZVBIYm45NU00RTFE?=
- =?utf-8?B?bHc3OS9oWnB1UXF1ak1sMlptS1dKeTZCWXlUUkZLZVRBQ21EZm1ld2JlZ2sz?=
- =?utf-8?B?cW5qekNxRXNNbEMvd0t0OVBwKzhTYmcxVm5ORzlGK2ZaaXorSFJuaEJQbFpU?=
- =?utf-8?B?RURXZGlnNE5iS01JTndDSkVHWWZoUVNwTGdyZUNzcHBkK0pPcWQyb040dDY4?=
- =?utf-8?B?aXRpMWJqMGZVR1BGNllud0FzbXlKbC91QlJSdEtEWDJyOHIwc0l0Tjg4NElm?=
- =?utf-8?B?Z2Y4OVB2YTBsZW9wZG1wOHAxYmt1Uzl4QmkvSmtRd2VhSUVGMktLRndDYTZE?=
- =?utf-8?B?Q2JsSVBJcjRZWkR4aWlkTHp5dC9NNitSd3JSRUQwbDZLYTZDRDNEcUFLdjdH?=
- =?utf-8?B?QTIwOFdpdFZKdk9qR0Rtd2R2OTBsazd0aWVoYjZ6endsdDVwRGdld055RXN4?=
- =?utf-8?B?ZjBsZGxKc0pFMGNVOXNDcFlpNjA4dXJGMXVOWU1nR0tXaVlENkpza3pkZXpi?=
- =?utf-8?B?K1BBQVo2bm9MN2lZV2dFcHRuWHF4WjZKWUNjYVVUQWNXL0EvblV6QVhoWUlE?=
- =?utf-8?B?QWJXOVdQWEZYUzloRnVRM3o3MjJtMkQzM2k1UEFpSFJsZlRBaWszLzVEY0R4?=
- =?utf-8?B?TDNLY3k2V2hyTDlIVHNTM3JicnowaTR6Sm5ERkEwZ29CdG1QSEpjMHZ4U0My?=
- =?utf-8?B?RzhkTG9rYW9nQ2xteTg0TnNpcGU0SkFBbFBXN2ZWTnUwaVEyd05XRVVvL0Mr?=
- =?utf-8?B?ZFZjbGxUTWxHSkx2eTRvelg4cXZjZnhrdG00QzBwWm1Oa2tycnV5blhrdmhN?=
- =?utf-8?B?TFJJRHZlTjhFd1ZJZFJGdDdoUDByN2FaVXFwYm9jYVhiaVJORm9ueGNncHQw?=
- =?utf-8?B?UlE9PQ==?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: ef9dcfc3-92f2-4862-5089-08ddec7d3d5d
-X-MS-Exchange-CrossTenant-AuthSource: MN6PR11MB8102.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2025 13:08:00.2864
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZSku0w/oBl5zQdvYIb+A+baDJqw+WacyrF3h2WmqtabTo+VCdN1maLeMyvKwmlXT2LOIH/gJ3wsHxBt9FAVMx4nYyIpaU8XLQhpRnawKyRc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR11MB5120
-X-OriginatorOrg: intel.com
+References: <20250820135043.19048-2-bp@kernel.org> <202509021646.bc78d9ef-lkp@intel.com>
+ <20250904113752.GDaLl6ELJRd3LZYBQl@fat_crate.local> <20250904232952.GA875818@ax162>
+In-Reply-To: <20250904232952.GA875818@ax162>
+From: Ryusuke Konishi <konishi.ryusuke@gmail.com>
+Date: Fri, 5 Sep 2025 22:17:26 +0900
+X-Gm-Features: Ac12FXysML9OmLZRBaPmH0HKfzslDEecbKrddVizojnskVBDLR0KAYFv1WjAUQg
+Message-ID: <CAKFNMo=QxweJwTxf-ubYfmBVYBpNEennGLFLRxqhB+evre7zhw@mail.gmail.com>
+Subject: Re: [PATCH -v1 1/2] x86/microcode: Add microcode= cmdline parsing
+To: Nathan Chancellor <nathan@kernel.org>
+Cc: Borislav Petkov <bp@alien8.de>, kernel test robot <oliver.sang@intel.com>, Borislav Petkov <bp@kernel.org>, 
+	oe-lkp@lists.linux.dev, lkp@intel.com, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, X86 ML <x86@kernel.org>, 
+	"Chang S. Bae" <chang.seok.bae@intel.com>, Sohil Mehta <sohil.mehta@intel.com>, 
+	linux-nilfs@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 9/3/25 12:08, Ivan Vecera wrote:
-> Add functionality for accessing device hardware registers, loading
-> firmware bundles, and accessing the device's internal flash memory,
-> and use it to implement the devlink flash functionality.
-> 
-> Patch breakdown:
-> Patch1: helpers to access hardware registers
-> Patch2: low level functions to access flash memory
-> Patch3: support to load firmware bundles
-> Patch4: refactoring device initialization and helper functions
->          for stopping and resuming device normal operation
-> Patch5: devlink .flash_update callback implementation
-> 
-> Changes:
-> v4:
-> * fixed issues reported by Jakub (see patches' changelogs)
-> v3:
-> * fixed issues reported by Przemek (see patches' changelogs)
+On Fri, Sep 5, 2025 at 8:29=E2=80=AFAM Nathan Chancellor  wrote:
+>
+> Hi Boris and the Intel folks,
+>
+> + Ryusuke and linux-nilfs
+>
+> On Thu, Sep 04, 2025 at 01:37:52PM +0200, Borislav Petkov wrote:
+> > On Tue, Sep 02, 2025 at 04:45:12PM +0800, kernel test robot wrote:
+...
+>   $ cat /sys/fs/nilfs2/features/revision
+>   [    6.975426][  T150] CFI failure at kobj_attr_show+0x59/0x80 (target:=
+ nilfs_feature_revision_show+0x0/0x30; expected type: 0xed60cafc)
+>   [    6.976822][  T150] Oops: invalid opcode: 0000 [#1] KASAN
+>   [    6.977407][  T150] CPU: 0 UID: 0 PID: 150 Comm: cat Not tainted 6.1=
+7.0-rc2-00016-g894af4a1cde6 #1 NONE
+>   [    6.978432][  T150] Hardware name: QEMU Standard PC (i440FX + PIIX, =
+1996), BIOS rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org 04/01/2014
+>   [    6.979752][  T150] RIP: 0010:kobj_attr_show+0x59/0x80
+>   [    6.980321][  T150] Code: 08 00 74 08 4c 89 e7 e8 05 6b d6 fb 4d 8b =
+1c 24 4d 85 db 74 1f 4c 89 ff 4c 89 f6 48 89 da 41 ba 04 35 9f 12 45 03 53 =
+f1 74 02 <0f> 0b 41 ff d3 0f 1f 00 eb 07 48 c7 c0 fb ff ff ff 5b 41 5c 41 5=
+e
+>   [    6.982456][  T150] RSP: 0018:ffa0000000e17b28 EFLAGS: 00010216
+>   [    6.983163][  T150] RAX: 1ffffffff3753765 RBX: ff11000109eca000 RCX:=
+ dffffc0000000000
+>   [    6.984012][  T150] RDX: ff11000109eca000 RSI: ffffffff9ba9bb00 RDI:=
+ ff11000100b4f250
+>   [    6.984900][  T150] RBP: ffa0000000e17b48 R08: ff11000109ecafff R09:=
+ ff11000109eca000
+>   [    6.985830][  T150] R10: 000000007b3f6fc3 R11: ffffffff9541ea80 R12:=
+ ffffffff9ba9bb28
+>   [    6.986658][  T150] R13: 1fe2200020fdfe80 R14: ffffffff9ba9bb00 R15:=
+ ff11000100b4f250
+>   [    6.987542][  T150] FS:  00007f4818d2b740(0000) GS:0000000000000000(=
+0000) knlGS:0000000000000000
+>   [    6.988508][  T150] CS:  0010 DS: 0000 ES: 0000 CR0: 000000008005003=
+3
+>   [    6.989241][  T150] CR2: 00007f481899a000 CR3: 0000000109f3b002 CR4:=
+ 0000000000371eb0
+>   [    6.990120][  T150] Call Trace:
+>   [    6.990498][  T150]  <TASK>
+>   [    6.990867][  T150]  sysfs_kf_seq_show+0x2a6/0x390
+>   [    6.991410][  T150]  ? __cfi_kobj_attr_show+0x10/0x10
+>   [    6.992015][  T150]  kernfs_seq_show+0x104/0x15b
+>   [    6.992542][  T150]  seq_read_iter+0x580/0xe2b
+>   [    6.993076][  T150]  kernfs_fop_read_iter+0x137/0x470
+>   [    6.993650][  T150]  new_sync_read+0x27e/0x365
+>   [    6.994185][  T150]  vfs_read+0x1e8/0x46b
+>   [    6.994650][  T150]  ksys_read+0xc2/0x170
+>   [    6.995129][  T150]  __x64_sys_read+0x7f/0x90
+>   [    6.995631][  T150]  ? entry_SYSCALL_64_after_hwframe+0x6b/0x73
+>   [    6.996299][  T150]  x64_sys_call+0x2589/0x2cdb
+>   [    6.996843][  T150]  do_syscall_64+0x89/0xfa0
+>   [    6.997343][  T150]  ? irqentry_exit+0x33/0x70
+>   [    6.997882][  T150]  ? exc_page_fault+0x96/0xe0
+>   [    6.998400][  T150]  entry_SYSCALL_64_after_hwframe+0x6b/0x73
+>   [    6.999068][  T150] RIP: 0033:0x7f4818dc11ce
+>   [    6.999564][  T150] Code: 4d 89 d8 e8 64 be 00 00 4c 8b 5d f8 41 8b =
+93 08 03 00 00 59 5e 48 83 f8 fc 74 11 c9 c3 0f 1f 80 00 00 00 00 48 8b 45 =
+10 0f 05 <c9> c3 83 e2 39 83 fa 08 75 e7 e8 13 ff ff ff 0f 1f 00 f3 0f 1e f=
+a
+>   [    7.001627][  T150] RSP: 002b:00007ffc2d325600 EFLAGS: 00000202 ORIG=
+_RAX: 0000000000000000
+>   [    7.002558][  T150] RAX: ffffffffffffffda RBX: 0000000000040000 RCX:=
+ 00007f4818dc11ce
+>   [    7.003443][  T150] RDX: 0000000000040000 RSI: 00007f481899b000 RDI:=
+ 0000000000000003
+>   [    7.004363][  T150] RBP: 00007ffc2d325610 R08: 0000000000000000 R09:=
+ 0000000000000000
+>   [    7.005260][  T150] R10: 0000000000000000 R11: 0000000000000202 R12:=
+ 0000000000040000
+>   [    7.006143][  T150] R13: 00007f481899b000 R14: 0000000000000003 R15:=
+ 0000000000000000
+>   [    7.007027][  T150]  </TASK>
+>   [    7.007411][  T150] Modules linked in:
+>   [    7.007994][  T150] ---[ end trace 0000000000000000 ]---
+>   [    7.008711][  T150] RIP: 0010:kobj_attr_show+0x59/0x80
+>   [    7.009430][  T150] Code: 08 00 74 08 4c 89 e7 e8 05 6b d6 fb 4d 8b =
+1c 24 4d 85 db 74 1f 4c 89 ff 4c 89 f6 48 89 da 41 ba 04 35 9f 12 45 03 53 =
+f1 74 02 <0f> 0b 41 ff d3 0f 1f 00 eb 07 48 c7 c0 fb ff ff ff 5b 41 5c 41 5=
+e
+>   [    7.011712][  T150] RSP: 0018:ffa0000000e17b28 EFLAGS: 00010216
+>   [    7.012369][  T150] RAX: 1ffffffff3753765 RBX: ff11000109eca000 RCX:=
+ dffffc0000000000
+>   [    7.013214][  T150] RDX: ff11000109eca000 RSI: ffffffff9ba9bb00 RDI:=
+ ff11000100b4f250
+>   [    7.014202][  T150] RBP: ffa0000000e17b48 R08: ff11000109ecafff R09:=
+ ff11000109eca000
+>   [    7.015201][  T150] R10: 000000007b3f6fc3 R11: ffffffff9541ea80 R12:=
+ ffffffff9ba9bb28
+>   [    7.016202][  T150] R13: 1fe2200020fdfe80 R14: ffffffff9ba9bb00 R15:=
+ ff11000100b4f250
+>   [    7.017212][  T150] FS:  00007f4818d2b740(0000) GS:0000000000000000(=
+0000) knlGS:0000000000000000
+>   [    7.018332][  T150] CS:  0010 DS: 0000 ES: 0000 CR0: 000000008005003=
+3
+>   [    7.019154][  T150] CR2: 00007f481899a000 CR3: 0000000109f3b002 CR4:=
+ 0000000000371eb0
+>   [    7.020147][  T150] Kernel panic - not syncing: Fatal exception
+>   [    7.020837][  T150] Kernel Offset: 0x12e00000 from 0xffffffff8100000=
+0 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+>
+> The fix should be something like the following, which resolves the issue
+> for me.
+>
+>   nilfs_sysfs_init() ->
+>     kset_create_and_add() ->
+>       kset_create()
+>
+> has
+>
+>   kset->kobj.ktype =3D &kset_ktype
+>
+> which is
+>
+>   static const struct kobj_type kset_ktype =3D {
+>     .sysfs_ops      =3D &kobj_sysfs_ops,
+>     .release        =3D kset_release,
+>     .get_ownership  =3D kset_get_ownership,
+>   };
+>
+> Note the kobj_sysfs_ops.
+>
+>   const struct sysfs_ops kobj_sysfs_ops =3D {
+>     .show   =3D kobj_attr_show,
+>     .store  =3D kobj_attr_store,
+>   };
+>
+> nilfs_feature_attr_group is added to the nilfs_kset->kobj via
+> sysfs_create_group(), where the kernfs_ops for each file in
+> nilfs_feature_attr_group becomes
+>
+>   sysfs_create_group() ->
+>     internal_create_group() ->
+>       create_files() ->
+>         sysfs_add_file_mode_ns() ->
+>           ops =3D &sysfs_file_kfops_rw;
+>           __kernfs_create_file() ->
+>             kn->attr.ops =3D ops;
+>
+>   static const struct kernfs_ops sysfs_file_kfops_rw =3D {
+>     .seq_show =3D sysfs_kf_seq_show,
+>     .write    =3D sysfs_kf_write,
+>   };
+>
+> sysfs_kf_seq_show() calls kobj_attr_show() via
+>
+>   const struct sysfs_ops *ops =3D sysfs_file_ops(of->kn);
+>   ...
+>   count =3D ops->show(kobj, of->kn->priv, buf);
+>
+> kobj_attr_show() calls one of the nilfs_feature_*_show() functions via
+> after casting to 'struct kobj_attribute':
+>
+>   kattr =3D container_of(attr, struct kobj_attribute, attr);
+>   if (kattr->show)
+>     ret =3D kattr->show(kobj, kattr, buf);
+>
+>   struct kobj_attribute {
+>     struct attribute attr;
+>     ssize_t (*show)(struct kobject *kobj, struct kobj_attribute *attr,
+>             char *buf);
+>     ssize_t (*store)(struct kobject *kobj, struct kobj_attribute *attr,
+>             const char *buf, size_t count);
+>   };
+>
+> So the types of nilfs_feature_*_show() need to match
+> kobj_attribute->show() to avoid triggering CFI here.
+>
+> Cheers,
+> Nathan
 
-in general you should carry tags added in previous revisions,
-especially if there were no big/opposing/controversial changes
-anyway, for the series:
-Reviewed-by: Przemek Kitszel <przemyslaw.kitszel@intel.com>
+Thank you very much, Nathan, for sharing your detailed report and
+proposing a fix.
 
-> v2:
-> * fixed several warnings found by patchwork bot
-> * added includes into new .c files
-> * fixed typos
-> * fixed uninitialized variable
-> 
-> Ivan Vecera (5):
->    dpll: zl3073x: Add functions to access hardware registers
->    dpll: zl3073x: Add low-level flash functions
->    dpll: zl3073x: Add firmware loading functionality
+I actually performed a reproduction test in an environment with
+CONFIG_LTO_CLANG_THIN=3Dy and confirmed that the CFI panic reoccurs, and
+that your patch fixes it.
 
-overflow prevention added here looks good
+I also followed your analysis of sysfs and concluded that it is
+correct and that your changes to the two
+nilfs_feature_{revision,README}_show() functions are necessary. I'll
+check whether these were necessary from the beginning or whether they
+became necessary later.
 
->    dpll: zl3073x: Refactor DPLL initialization
->    dpll: zl3073x: Implement devlink flash callback
-> 
->   Documentation/networking/devlink/zl3073x.rst |  14 +
->   drivers/dpll/zl3073x/Makefile                |   2 +-
->   drivers/dpll/zl3073x/core.c                  | 362 +++++++---
->   drivers/dpll/zl3073x/core.h                  |  33 +
->   drivers/dpll/zl3073x/devlink.c               | 154 ++++-
->   drivers/dpll/zl3073x/devlink.h               |   3 +
->   drivers/dpll/zl3073x/flash.c                 | 674 +++++++++++++++++++
->   drivers/dpll/zl3073x/flash.h                 |  29 +
->   drivers/dpll/zl3073x/fw.c                    | 419 ++++++++++++
->   drivers/dpll/zl3073x/fw.h                    |  52 ++
->   drivers/dpll/zl3073x/regs.h                  |  51 ++
->   11 files changed, 1702 insertions(+), 91 deletions(-)
->   create mode 100644 drivers/dpll/zl3073x/flash.c
->   create mode 100644 drivers/dpll/zl3073x/flash.h
->   create mode 100644 drivers/dpll/zl3073x/fw.c
->   create mode 100644 drivers/dpll/zl3073x/fw.h
-> 
+I'd like to send your proposed fixes upstream, but could you please
+send it to me and linux-nilfs in the form of a proper patch? (I'll
+need at least your SoB line).
 
+Thank you in advance.
+
+Ryusuke Konishi
 
