@@ -1,681 +1,308 @@
-Return-Path: <linux-doc+bounces-59238-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59240-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 275EFB48FBF
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 15:36:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B1E7B48FE1
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 15:39:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E8EAC16780E
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 13:36:30 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2C591345996
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 13:39:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89B6B30AD14;
-	Mon,  8 Sep 2025 13:36:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 495F830BB89;
+	Mon,  8 Sep 2025 13:38:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="j200WoF8"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="IRaKDESF";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="tiagTWsu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EC781DF26E;
-	Mon,  8 Sep 2025 13:36:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757338587; cv=none; b=CSY1kZ3gDM/RjzY4iHzG/gy+VL+uZ/D9vydeq0ksU2LUUS2PU98pBStK011b/6ddToattQeZ+FOArfjaIdNTrODmki1L5MOFfw9Gj+qM+shS1IB8tWFb0bq7++RdS5QhDQky6WFbIzDQHc1LqRgvhaUWJDt/A9h6Ig/7wlHkzes=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757338587; c=relaxed/simple;
-	bh=sUYa4hsMG9X79wWbvfsd3MfjnJKxA0DDn26Sm22gQY4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pgLJwMYFbtoGAqk9BvqigV1D3XWZZCP2YruNh/+FW8E/T2twfMzHYNpQpxK8mDGuNT+Zf0zDiK9esbuMPod6fd8KWA+Zwk/VbviE38PavvTbC//ImE6DysGVpc4dNaFyP/OVlJvyEHNI2cr7E7I/tBlz4vC113+0SSlTjhgvb8s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=j200WoF8; arc=none smtp.client-ip=209.85.214.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-24c9a399346so32918375ad.0;
-        Mon, 08 Sep 2025 06:36:24 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FAB030BB84;
+	Mon,  8 Sep 2025 13:38:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1757338713; cv=fail; b=J6g0slxgIglP458YhtTkphyMlrjuZc3bDil0XUBgCLBjYI6wS1WKswEvhVx8kJtdIFbCa1+LzT58im9OOrjX168LmIaEC4ka9QFrq1//cts0k86If1wC/q8yruVo3v8ktZjaqThtqmN4a5WAacAC5x4TM5r6Ftl+SlHXDwytWe0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1757338713; c=relaxed/simple;
+	bh=b89e/9nQu0AHfaOMVCoE+IE4iPTTDLr45vU4CzvG+vg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=tkM6YnJJmpy+ZnZQRmJQuHFHwi1Wt9pUEYg8UHckKTK69ILn39y5FtGrK64cT7SscjNckBgqnZOMYzMnPj0CQwB8AUO6Z7H/6tIhJCdhe7522G/uANgqMLNtaMOe++DeN+cPVua8gtK5mSch1s9YPaJyvsc6Eq5YFhLnlgE0knk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=IRaKDESF; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=tiagTWsu; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 588DTsj4022207;
+	Mon, 8 Sep 2025 13:37:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=QKDQQeIgJvrBmA1J1O
+	vo4nTrwIFDKNW21ZOYIK1ive8=; b=IRaKDESFj/koqTvYzVqSsPgsLzbKZvhiNf
+	woC3uR70o0DHpaKVup6l0OrbImECbuDJqMCnI8DvVNhRsaTLZdtL1ncs3jaK6iQi
+	5wZ2gL2G71Nd6tE4LLZvyiCqpPCodM72glp+mbrMqZ7FvgQw45sxdj7qmcpYwf1W
+	8GqJrjZtfj6X2uAeCYHpJw2ywVcot0Pjos4EJr29W3f/8u3Xcn52O14ppCFex6S2
+	QIzLAJ9BTWrN+K9UuQn4RtzDHg++SpyU+PxP1Fm12+ooXt7a6Eq3ahOsa1ZkJ7y0
+	vA5D+dz61I/fePpqCnAmHlMv7+gs9gl3nGVno6zu4jJVRN/V+7Kw==
+Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 49202ur0tf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 08 Sep 2025 13:37:52 +0000 (GMT)
+Received: from pps.filterd (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 588D31CW002971;
+	Mon, 8 Sep 2025 13:37:51 GMT
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12on2040.outbound.protection.outlook.com [40.107.243.40])
+	by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 490bdeqaj7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 08 Sep 2025 13:37:51 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=uS4QM7AGMADr3KsC2OyORgamfJjUWoGH6rDC5Dg6MtHblJrJ+uQHw+BeciMQZYGKzbcxoSeGhepuVoLHLyVlf3TCizRlW7vYA+YQY9yTeh5IvQBMYaik8GBlPrN8XPz0ydld077RyqKBGwW3uCJsrfD6e96+rEKO+/3/s0/g78MDJYLmYOhVvWW7ojiZn2iIn3cRca1n2cBt15WrSk51ppegbQL4PwJFSybTkTEUucYlpqTEIOMWwjGpEsw0Qov6viuGF0BN9uVYXvcTWow6Zn9QN2FZ16fl3OnmmGN+5BHBm/jh3KI+DJmPSAkQ7RA5XNXYr3gp/6VtPyBrc8CX1w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QKDQQeIgJvrBmA1J1Ovo4nTrwIFDKNW21ZOYIK1ive8=;
+ b=scAkj8+a717c0eeBvT/96SYEJzoN/isbQW07eHDbaPgR3sPrKV1xyDA72BfIYE0ICsYnTgtCt7yU1oL9WSlmRrrUl7BZrQySZcsnpbHqA83WeugUzVAIypmN8/ns/eNeFiSDmAHm3Nu+s6a7EzrAKOZx61UIQDunKcYNqlxhDbkrPHpHh08ZlAQgYHRnaqU80mkbKi3Ly0NIwMDVhP8c6PgJa7ixwGmOOn7qwEjbFc2J9S0teIYghHCy6zhhUfS5RO/MkBg6lFloGsuNTYcfck0OG8TxeWwW8EwhMBqfe/b5ZTlCd5QA985V4HkyP28J/NsbQ5lM/rw405EyeUQjlQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757338583; x=1757943383; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=8OYzu1SK6uep1Hui0fYSBmdGt1Jp5jxnTDE2WXSMNFw=;
-        b=j200WoF8ucudjr6IPV4vx6k0xFQuDGPK+KewlMVDiIVjemcYjeZUJz2rrXIuLTMJlC
-         ycSEH+su+7lrMVAKQU6Df00MddyQSIk4XiiWakoV9giRkgBf3axyCJvCUETUO5doo2l/
-         akeClrWDTl7LXB4zFkfq5OOVODwvvvsHSjYn/g5KxSISHDqjitJ2oli7zIfBIdbriumX
-         G5ETQeHSzjaaakN74Yb4s1Yz/hJNb3QZghRYguw0QIqpk8y+6c0oMjpkf9UYA4w7k+I/
-         jBNwTaPsr42EZhWu0M5Cggb/9J5XTYE7sUuFZ2QVsO72DcXOWuro1yaejvLtFzxt1L+i
-         ovRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757338583; x=1757943383;
-        h=content-transfer-encoding:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8OYzu1SK6uep1Hui0fYSBmdGt1Jp5jxnTDE2WXSMNFw=;
-        b=kcOedSThfuCMoqtSSGJ31/I1annRQzMjCJpUFtG3PclE+WWe41iDbFZNKL+w0SlvZb
-         nJ6oMdnUvpBZaYxghcKaAiHfeVleQ9nW6ZHHnDJxgeIg4ZUWnx7w9EjgjigNJqADDjmP
-         C29kQnwpNUEhWx9GjTtIsqStEGbeKakDdaMp3Wvzvz16V0biT3+Iz0BC6tqsqbwLdHYk
-         c0n3G/w8xDOZuCa4OUPYhKTP6y1CwpVscsPqQ2fnKmvyzN3h4BpRUXHZ82vIbacT81z/
-         47UT0NipeQ5qHCwhoOQG+NHtVt1lMQDMjwJzVfjce42BVhwbq8CffUT+gMnbt5OlcocO
-         Z4iQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW7GMf5/9idLXET0rskASJafiJj6uQCgCg0mTxlBYnDOFb0jG7A0rwH469RtO4ZlMVIkDN33oPvTSAf4Mg=@vger.kernel.org, AJvYcCXvCuKVIxPcJRBsRZA7cp+gOEZeYzlGtfYSq+IGe2iKOjZpVNtaFaQUbK/2MfsMLTn3RgmD6uMyWLNqtL03@vger.kernel.org, AJvYcCXwgTtcYTpvRf5TGLX/Xl3qW12G/ExBJ82G2vOdfND+AG4zk8Y/zgnjWb4BwTijXSTXnttyI8H9rao=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxv5IvAFwi3CX3Jz9QAdvGRHMTke2BhPLlr7S5I+dIo4ETvRXjN
-	RcfQTKsuioWI3Pet4br63UanPYnAguT7CCi5rvmV6d49cqbuX8UHpRlK
-X-Gm-Gg: ASbGncvnys9TwDrCdLR7yRa3HCmodkx+uzmo7tZe1ccZr9DBTSNzKb6qbZbyi2GutVp
-	iFlNYyNoEBjfUQ/YverIqLiLQXNFajjdkoPDhejLQ+egD9AH2mMN3X5zNmhViYgHvWnnStaQ6RM
-	AjV8RalY49ADehb93WUmERE7Vo31C5IVtOyEpE4lEmjOTPmykaQnDrHeBaYB3FHSIpVILd8pgt2
-	dX8g3vWDKeHW4uhFYCWZT3N4e1SZ+3qlch3tkKBmsK1FoYhGOe7PNZDmsgfaynBQ9EqbADLtoTQ
-	r4gwR27VZtsJWyyK0YrIhs4BVLYfaw75yd0116zAHkJzirodW/1jwLzNlc4FNyJzWG7RCCfDACY
-	aLueEPOO2hTWV7wIxXe70R76XaNNX945MWucdgtdVQnw3ht9HIv/NDfPuaIBNfKABMFWU6GQ=
-X-Google-Smtp-Source: AGHT+IEp2OKxGxcYiaHUOxg4a3Nqp74h27zD8P3uJd2ANGu7wGDnI0L9d0wracbJVxh2z9SrfdcVUA==
-X-Received: by 2002:a17:903:20d5:b0:24c:ba71:c58d with SMTP id d9443c01a7336-2517257b8bfmr67598995ad.52.1757338583166;
-        Mon, 08 Sep 2025 06:36:23 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-24b14206426sm175882265ad.17.2025.09.08.06.36.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 08 Sep 2025 06:36:22 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <c1dd9473-262c-433b-994b-4bc70afc93c8@roeck-us.net>
-Date: Mon, 8 Sep 2025 06:36:21 -0700
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QKDQQeIgJvrBmA1J1Ovo4nTrwIFDKNW21ZOYIK1ive8=;
+ b=tiagTWsuTHVLZTI5kq8IvPe3tZaXj+LhrkknEK8nTW3e3HJ/TIW1QsG5Kr9PyIF36+Rtukiu7pkwIcplh9xdxzG66LaDN29XRh3ZQ60E3VCXKGvBGRz2gaj+i6z4S4L9n5LJsK1QYmgoL/D+AUHY7/JOTapFu1fd+Ftd2o0dnJY=
+Received: from BL4PR10MB8229.namprd10.prod.outlook.com (2603:10b6:208:4e6::14)
+ by DM4PR10MB6864.namprd10.prod.outlook.com (2603:10b6:8:103::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.19; Mon, 8 Sep
+ 2025 13:37:46 +0000
+Received: from BL4PR10MB8229.namprd10.prod.outlook.com
+ ([fe80::552b:16d2:af:c582]) by BL4PR10MB8229.namprd10.prod.outlook.com
+ ([fe80::552b:16d2:af:c582%3]) with mapi id 15.20.9094.021; Mon, 8 Sep 2025
+ 13:37:46 +0000
+Date: Mon, 8 Sep 2025 14:37:44 +0100
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>, Matthew Wilcox <willy@infradead.org>,
+        Guo Ren <guoren@kernel.org>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Andreas Larsson <andreas@gaisler.com>, Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Vishal Verma <vishal.l.verma@intel.com>,
+        Dave Jiang <dave.jiang@intel.com>, Nicolas Pitre <nico@fluxnic.net>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        David Hildenbrand <david@redhat.com>,
+        Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+        Baoquan He <bhe@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
+        Dave Young <dyoung@redhat.com>, Tony Luck <tony.luck@intel.com>,
+        Reinette Chatre <reinette.chatre@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>, James Morse <james.morse@arm.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+        "Liam R . Howlett" <Liam.Howlett@oracle.com>,
+        Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+        Hugh Dickins <hughd@google.com>,
+        Baolin Wang <baolin.wang@linux.alibaba.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Andrey Konovalov <andreyknvl@gmail.com>, Jann Horn <jannh@google.com>,
+        Pedro Falcato <pfalcato@suse.de>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-csky@vger.kernel.org, linux-mips@vger.kernel.org,
+        linux-s390@vger.kernel.org, sparclinux@vger.kernel.org,
+        nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org, linux-mm@kvack.org,
+        ntfs3@lists.linux.dev, kexec@lists.infradead.org,
+        kasan-dev@googlegroups.com
+Subject: Re: [PATCH 10/16] mm/hugetlb: update hugetlbfs to use mmap_prepare,
+ mmap_complete
+Message-ID: <f81fe6d4-43d2-461d-81b9-032a590f5b22@lucifer.local>
+References: <cover.1757329751.git.lorenzo.stoakes@oracle.com>
+ <346e2d1e768a2e5bf344c772cfbb0cd1d6f2fd15.1757329751.git.lorenzo.stoakes@oracle.com>
+ <20250908131121.GA616306@nvidia.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250908131121.GA616306@nvidia.com>
+X-ClientProxiedBy: LO4P123CA0377.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18e::22) To BL4PR10MB8229.namprd10.prod.outlook.com
+ (2603:10b6:208:4e6::14)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] hwmon: add MP2925 and MP2929 driver
-To: wenswang@yeah.net, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, jdelvare@suse.com, corbet@lwn.net
-Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20250908105951.1002332-1-wenswang@yeah.net>
- <20250908110128.1002655-1-wenswang@yeah.net>
- <20250908110128.1002655-2-wenswang@yeah.net>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20250908110128.1002655-2-wenswang@yeah.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL4PR10MB8229:EE_|DM4PR10MB6864:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5cef9cd8-e496-49e9-88cc-08ddeedce573
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|7416014|376014;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?flIDQQemqMMmbsM+NoeGLiDNZ0azH523/6jda4Jdq10FNY7OCxRJW3ClUeXX?=
+ =?us-ascii?Q?AWcVdVyo/smo+C7e4SZNLuDm3uRf/rSF3JlETIwZxQcqW0b7JLHx8DS32pet?=
+ =?us-ascii?Q?/CgLZW99NCNacZd23zK1Wl8gzZ7h9qNAw4n1i3u76pyD0uvFf63x5Qdtlpo/?=
+ =?us-ascii?Q?Q/CsIv1phf9ugnHaj9Ij1pIhy0XkO828PqNUhSFwuuLFNm3SoM7edeqALytW?=
+ =?us-ascii?Q?4piGj9p84oMB7VBkWEz46FUSt2EP0JwS13tVQ7mtvBiLfpcrH6GBP4SLrMuV?=
+ =?us-ascii?Q?Id1duZ5bWZa2M0I0auH9XcvRygBFwHlEJBRQRs1w/8eijw/xyen/kF6DHL5B?=
+ =?us-ascii?Q?KB1jcbnRpuv+f6auq3bd5nt2nfXcUHjSNPIGRtVOMu4MqXeekeS6EixDLlea?=
+ =?us-ascii?Q?R7yXLsftv10aY+5p03wLUqUxQkqvAVgkTF+PphLDkd1mTDuTuZj3E9pymzn0?=
+ =?us-ascii?Q?F0nCPSo3AmhdvjBujdprnppxPjikiDj823wWUfRg9dtYF23N1c4h02KzbhYI?=
+ =?us-ascii?Q?zn3ZJ1wkX3iQ8os6GE47L43NuqMTvN1hP9tKiNhf/fsrUq0fP7YAF/hCXt7T?=
+ =?us-ascii?Q?rPBD9s8MVOfSpb3AgvRmwynA1N8mYwIcEmr8QAecboYqRFyCEKkrLupRlduR?=
+ =?us-ascii?Q?R5rWwIIZNq4x9bCu0uSxVXmETDi+TjtMELvtjVjd0jD90YD72adUAWVCVMrw?=
+ =?us-ascii?Q?zXxK76Q3jPu0wMk70T18TWOsBoM+fhKy+qzIQYSKO4yGEn5VKqFZ/4NZrSwq?=
+ =?us-ascii?Q?IQQuLzJLLiXk7mpUE9EgRAgM0tvJIzAJBqAIqU8+yeEczRv7UxlQeFSt13PN?=
+ =?us-ascii?Q?+BCtK7LSfrKRbn1mBuTUEwlVSbBMsSLvbcQbhZlhf1eQkS6yi76CZV2MrmeG?=
+ =?us-ascii?Q?QBbLAeABUcS1Bdtv3nGxV0g+3hICNF5GmdsWIEoQ16Ck0fO13VmDuXnVbUk/?=
+ =?us-ascii?Q?DqJcmQhaJQ73DCVw53whSBiAhALhU/ePmIw9edJH2TjAWaiGvcvMPZuvQY44?=
+ =?us-ascii?Q?TScIvnAppQG4jCQsQmbtEzQANkKxc0RCTsoOrsiBIoj5M3ZsD3Z6Uw+gulhB?=
+ =?us-ascii?Q?a91g5UH2dSc8ROJoG3EAypKwIIjNJZEU+6aVXtecKD71zaPKQyaYyArny3aO?=
+ =?us-ascii?Q?7MoSTh6xnX9AUT2Iw+s+OnQ695yLd6wVMzSLmjTt3R7BIN0hGfRsooOQ8bvj?=
+ =?us-ascii?Q?K41AjW5ioeNyu/GOHE7cxulKYo9lj9TbdGb798e93MyDNfNRddqaiRr4tq72?=
+ =?us-ascii?Q?L8xaY1BosjRfUq6DAvYUv7p1MtY1owZvlBF2M5mNxuN3fBVQG6k7tOlFlO57?=
+ =?us-ascii?Q?CLglKLZgTt6wgtd6YTz/66ehETHZsLf+Ib5gZ8iKclE/LzA5vi5WLA+GqOVC?=
+ =?us-ascii?Q?8fF1XkWi1rVcb7CCfA58YMEqaXMFlAF+XVcEA+AGnrrm5nOT8w=3D=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL4PR10MB8229.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?ZO3KFM9CtZUtT+mkMMrLumiMaHvhOPZfgkO63YfdJ0ldFEcr2Sanoa+aUqCH?=
+ =?us-ascii?Q?ZMNpsqFV9E0CB65lBhGwHI65RCuCFK6k46dXqs5FMQGNbLVPJIKfDgTZ/niA?=
+ =?us-ascii?Q?ZqE5bGbk+8SETfYSfX4TOcSDzBGKe1VfSDkqhl8bEQTpkDBMtQGddmP4uWj0?=
+ =?us-ascii?Q?LFAdFSWgFnzFDyNRsIHramVwVcEy7R0YWP/BsclChpKgJ6tEovx29cwr7HYD?=
+ =?us-ascii?Q?+yhoMDXXITFB9GJmZK8JUDC9K9wT8BX1M3ArKlEI2GxyIL2Jk7KdkC7NDHDw?=
+ =?us-ascii?Q?91ARDFk8bgmR24O3xrL1ppJ+1bIB91NjmSPkDzX50YH1x7gkQ9K+vGBbSq3u?=
+ =?us-ascii?Q?3kzC/cIZO1ARnyqdRR8gvPRpZCJ8P05pDEW6GhdbxgyRA58TmTnqLkdXAbst?=
+ =?us-ascii?Q?VbovrRe7Vg0NLg8ZsDjtSbH+V0j5Iy1R9WXHadT9NMF30zs1Q3+SYB4TFnXS?=
+ =?us-ascii?Q?bRitJkZyHuEnXRoHzY5ur8IjyacdIuHByxui46NxaeQoYnAwugcWg99tF//o?=
+ =?us-ascii?Q?IFAKjpTNscJSUu58d3GyAx8A9uNrHXxPjIUkwHfs5aXMISu9RDn/Ekb7EPkc?=
+ =?us-ascii?Q?aJJGEfNaLvHGqBoRMFunPrrfT2Ttz2815tcONKL+/RiPKuds/KTXPrLl/TsQ?=
+ =?us-ascii?Q?W1DHmNBSZBGfLpbo5KlZhEY0YC6Ku3Kz3h+dVVg/JJ9LU/DdZff6GJvndQpV?=
+ =?us-ascii?Q?tzfhGAK5xwU1nayTwiuclEqOv1g71cTJVIScStQBcovpnd5ifr3Fhcso57av?=
+ =?us-ascii?Q?8p9laj9Q9+qlNm+dybLAUuUXVr4iiM9nr9LF1+LzQohRS5SZShOhgvhOVaMz?=
+ =?us-ascii?Q?fg3lYZNoY+F8DGJ2kBCosvtYwoQfyIkuF5dDhH8g7WQkseFXjP1K0Ol2ex0j?=
+ =?us-ascii?Q?C8UtN+0WZBwUuzQVz5pIq2egBkq5XKbTRqPw4qVOT6NPxbeehRfjQB3hJNK6?=
+ =?us-ascii?Q?PpH2Nkd0T6inOp1SGPNJRZBotqS3Fk7YQOz/2Dd52gui3ueWrsAqNb18Cl/8?=
+ =?us-ascii?Q?Iy4a3tOpQK9iTgqNTd/qaEx3lOt6kXhH4ys26jBHx+GinNT56SWezI0RpOx6?=
+ =?us-ascii?Q?LcIKxjNaFwRLfDNuEqQgtPl+0F6oT+gX7nEInq0zg40VMx49Hw8HHVF+1Vgu?=
+ =?us-ascii?Q?j25kJe0Gre0TdYBGwMoVNZ8odY6/XEsCFEChr4oDvQfMQ9FPOlquWXANttKZ?=
+ =?us-ascii?Q?R+QvNWumgPNUHCe32eebs5VQO+C/22BkYrSlD2tSc3YpeUl88f9MybBa6nGl?=
+ =?us-ascii?Q?nL6pyD8KlnIZERezfL6ATGHoOzdanMvpPDXRh1+y1l0tckOtY26Gyg4kvnSg?=
+ =?us-ascii?Q?doCUDylRGQ01vFBnyQiNAYfcba3CtTQeMvhUrgGMkn+GWBdKlnOqWMZuQ6lZ?=
+ =?us-ascii?Q?+XQNNPTiKsyysTYqqFN6ir+xUA7CrHL93qt7nREdgqau6JaBo4YcRKiNLVqX?=
+ =?us-ascii?Q?HO0vaMin7GSbDN0FHUnTb6vPWpGbukC2IXxd5SUuvCsnjm/iE4TnZ11VrKkG?=
+ =?us-ascii?Q?6IndFm4fJtdbaPYqcmFP/NWBB1KaGHYMS4YP/1+p1kpmmnCcZLLGc0ehisQf?=
+ =?us-ascii?Q?7umLkVt5pTBwaPrelL+jzKJQARHise+HoV8fDo81MHT8or58cCiDKtAOU9MG?=
+ =?us-ascii?Q?AA=3D=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	xBpO7J7igySuPaekXR9dzMzDE1w7HP1fDgYNHwAd3l7cnxQBNiW9ncW/5QBTswU+nfvWG6FLdrk19buGjShrXxRujlmShHVKE/JSo8TAZLjDMI5MgWUd7B2VCNoDOrKgBqZRBpjsmyo65ZG08AIhUesx19TAzRAdynBNuNbL5uVlrb79SFcPuEibYMOqjyhZwco7lccyxacZzzlf8xGcciENttpzLOM6ZP/d6qra4h42IKhV+3mtLN3+EYHtCzA5vHPf/mYXhyYhT5UZNN9I7EBqRaJOarueh3CeeJjMBOafJIhjOkPNuIDATuTa9U09LW+ftuTXkQvZQheDmlscZSahfITSUpk3+j85IGD0IELrdZ3mckDagihALTtPFzH03Le5OxNryBl24oaQxca6bWqeqEVGbxFJmz76BUBBZ8WK7HKetgteEVrif44RlFO7rdOx2pb1nTj13MprE92k+7uGVrfmbd3fDFgOPkvTdJINxLWzjpVT6RvifUW16GRauWvZsldUTVgmYMknGV3Q6uff5iic5v/zQ9PGx/AwpNlmFa5OZka39qRDzDmRrqPAB58PVE1EM1trf1/7MpwDyBgVKOcipFqZ3cXYJHuL62Q=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5cef9cd8-e496-49e9-88cc-08ddeedce573
+X-MS-Exchange-CrossTenant-AuthSource: BL4PR10MB8229.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2025 13:37:46.7139
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: v+YF7jNwe47kmwt5uQBQyBb7EGsVqa3Hqe9F95zfc6naC6BHES1UQ0ZpAgqurINxq0iv526P/HyBpycYdEu4oeSf8fWYLThxS38VOw3hPeI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6864
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-08_04,2025-09-08_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 adultscore=0 suspectscore=0
+ bulkscore=0 mlxscore=0 mlxlogscore=830 phishscore=0 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2508110000
+ definitions=main-2509080136
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA4MDEzNSBTYWx0ZWRfXxgdYLuWQ9/vg
+ z8xNoNRhSECjLlC3mF6ItZdkKKGoAMU/i7beQz/XukGrYsBImAo+5untvHG76TTYAgX5CkYSAZx
+ 5g1sBDwtHWNH0rSp4EInxoIZPzcCX6gT75Ya0NZRL/GVVjF2e4Ta22eQ52YNTziD6OKRqqBnUEb
+ tYQ3mUJmUpWlhRbORLBVYfnAmEFOrfxRKPE7Ly5ioX9t0k8EBMA+RCoZ05hGsLJ3iPAh4Dp/5Nn
+ iPAiCEb+rjovmbZ4+1NbBsEJUFTqHb+vwqFneTs3tKTvcqBpAv/eSZQaN3ibUMDfxQ8eTaSE2po
+ /1bBCStLgZzZBzFOidhL9lhmWeJupFWznTYKgxs7sAyGyFa05SZ6Kz1wvCZSGJLbRtcuFvEZS1v
+ Y3R+C98sKSh7NGGCTS1KR+NwA4VkCQ==
+X-Proofpoint-GUID: q70cHU5ELKcMLGjGb--ig5pvOGonFV-7
+X-Proofpoint-ORIG-GUID: q70cHU5ELKcMLGjGb--ig5pvOGonFV-7
+X-Authority-Analysis: v=2.4 cv=HN3DFptv c=1 sm=1 tr=0 ts=68bedc30 b=1 cx=c_pps
+ a=qoll8+KPOyaMroiJ2sR5sw==:117 a=qoll8+KPOyaMroiJ2sR5sw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=yJojWOMRYYMA:10 a=GoEa3M9JfhUA:10 a=5G2UyHYFvs9mNkJOU74A:9
+ a=CjuIK1q_8ugA:10 cc=ntf awl=host:12069
 
-On 9/8/25 04:01, wenswang@yeah.net wrote:
-> From: Wensheng Wang <wenswang@yeah.net>
-> 
-> Add support for MPS VR mp2925 and mp2929 controller. This driver exposes
-> telemetry and limit value readings and writtings.
-> 
-> Signed-off-by: Wensheng Wang <wenswang@yeah.net>
-> ---
->   Documentation/hwmon/index.rst  |   1 +
->   Documentation/hwmon/mp2925.rst | 151 ++++++++++++++++
->   MAINTAINERS                    |   7 +
->   drivers/hwmon/pmbus/Kconfig    |   9 +
->   drivers/hwmon/pmbus/Makefile   |   1 +
->   drivers/hwmon/pmbus/mp2925.c   | 312 +++++++++++++++++++++++++++++++++
->   6 files changed, 481 insertions(+)
->   create mode 100644 Documentation/hwmon/mp2925.rst
->   create mode 100644 drivers/hwmon/pmbus/mp2925.c
-> 
-> diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-> index d292a86ac5da..95bcf71ff6d9 100644
-> --- a/Documentation/hwmon/index.rst
-> +++ b/Documentation/hwmon/index.rst
-> @@ -175,6 +175,7 @@ Hardware Monitoring Kernel Drivers
->      mp2856
->      mp2888
->      mp2891
-> +   mp2925
->      mp2975
->      mp2993
->      mp5023
-> diff --git a/Documentation/hwmon/mp2925.rst b/Documentation/hwmon/mp2925.rst
-> new file mode 100644
-> index 000000000000..63eda215b6cb
-> --- /dev/null
-> +++ b/Documentation/hwmon/mp2925.rst
-> @@ -0,0 +1,151 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +Kernel driver mp2925
-> +====================
-> +
-> +Supported chips:
-> +
-> +  * MPS mp2925
-> +
-> +    Prefix: 'mp2925'
-> +
-> +  * MPS mp2929
-> +
-> +    Prefix: 'mp2929'
-> +
-> +Author:
-> +
-> +	Wensheng Wang <wenswang@yeah.net>
-> +
-> +Description
-> +-----------
-> +
-> +This driver implements support for Monolithic Power Systems, Inc. (MPS)
-> +MP2925 Dual Loop Digital Multi-phase Controller.
-> +
-> +Device compliant with:
-> +
-> +- PMBus rev 1.3 interface.
-> +
-> +The driver exports the following attributes via the 'sysfs' files
-> +for input voltage:
-> +
-> +**in1_input**
-> +
-> +**in1_label**
-> +
-> +**in1_crit**
-> +
-> +**in1_crit_alarm**
-> +
-> +**in1_lcrit**
-> +
-> +**in1_lcrit_alarm**
-> +
-> +**in1_max**
-> +
-> +**in1_max_alarm**
-> +
-> +**in1_min**
-> +
-> +**in1_min_alarm**
-> +
-> +The driver provides the following attributes for output voltage:
-> +
-> +**in2_input**
-> +
-> +**in2_label**
-> +
-> +**in2_crit**
-> +
-> +**in2_crit_alarm**
-> +
-> +**in2_lcrit**
-> +
-> +**in2_lcrit_alarm**
-> +
-> +**in3_input**
-> +
-> +**in3_label**
-> +
-> +**in3_crit**
-> +
-> +**in3_crit_alarm**
-> +
-> +**in3_lcrit**
-> +
-> +**in3_lcrit_alarm**
-> +
-> +The driver provides the following attributes for input current:
-> +
-> +**curr1_input**
-> +
-> +**curr1_label**
-> +
-> +The driver provides the following attributes for output current:
-> +
-> +**curr2_input**
-> +
-> +**curr2_label**
-> +
-> +**curr2_crit**
-> +
-> +**curr2_crit_alarm**
-> +
-> +**curr2_max**
-> +
-> +**curr2_max_alarm**
-> +
-> +**curr3_input**
-> +
-> +**curr3_label**
-> +
-> +**curr3_crit**
-> +
-> +**curr3_crit_alarm**
-> +
-> +**curr3_max**
-> +
-> +**curr3_max_alarm**
-> +
-> +The driver provides the following attributes for input power:
-> +
-> +**power1_input**
-> +
-> +**power1_label**
-> +
-> +**power2_input**
-> +
-> +**power2_label**
-> +
-> +The driver provides the following attributes for output power:
-> +
-> +**power3_input**
-> +
-> +**power3_label**
-> +
-> +**power4_input**
-> +
-> +**power4_label**
-> +
-> +The driver provides the following attributes for temperature:
-> +
-> +**temp1_input**
-> +
-> +**temp1_crit**
-> +
-> +**temp1_crit_alarm**
-> +
-> +**temp1_max**
-> +
-> +**temp1_max_alarm**
-> +
-> +**temp2_input**
-> +
-> +**temp2_crit**
-> +
-> +**temp2_crit_alarm**
-> +
-> +**temp2_max**
-> +
-> +**temp2_max_alarm**
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index cd7ff55b5d32..6444cf742098 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -17184,6 +17184,13 @@ S:	Maintained
->   F:	Documentation/hwmon/mp2891.rst
->   F:	drivers/hwmon/pmbus/mp2891.c
->   
-> +MPS MP2925 DRIVER
-> +M:	Noah Wang <wenswang@yeah.net>
-> +L:	linux-hwmon@vger.kernel.org
-> +S:	Maintained
-> +F:	Documentation/hwmon/mp2925.rst
-> +F:	drivers/hwmon/pmbus/mp2925.c
-> +
->   MPS MP2993 DRIVER
->   M:	Noah Wang <noahwang.wang@outlook.com>
->   L:	linux-hwmon@vger.kernel.org
-> diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
-> index 55e492452ce8..d0e1eb500215 100644
-> --- a/drivers/hwmon/pmbus/Kconfig
-> +++ b/drivers/hwmon/pmbus/Kconfig
-> @@ -391,6 +391,15 @@ config SENSORS_MP2891
->         This driver can also be built as a module. If so, the module will
->         be called mp2891.
->   
-> +config SENSORS_MP2925
-> +    tristate "MPS MP2925"
-> +    help
-> +      If you say yes here you get hardware monitoring support for MPS
-> +      MP2925 Dual Loop Digital Multi-Phase Controller.
-> +
-> +      This driver can also be built as a module. If so, the module will
-> +      be called mp2925.
-> +
->   config SENSORS_MP2975
->   	tristate "MPS MP2975"
->   	help
-> diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
-> index 29cd8a3317d2..64c1b03bf47b 100644
-> --- a/drivers/hwmon/pmbus/Makefile
-> +++ b/drivers/hwmon/pmbus/Makefile
-> @@ -39,6 +39,7 @@ obj-$(CONFIG_SENSORS_MAX8688)	+= max8688.o
->   obj-$(CONFIG_SENSORS_MP2856)	+= mp2856.o
->   obj-$(CONFIG_SENSORS_MP2888)	+= mp2888.o
->   obj-$(CONFIG_SENSORS_MP2891)	+= mp2891.o
-> +obj-$(CONFIG_SENSORS_MP2925)	+= mp2925.o
->   obj-$(CONFIG_SENSORS_MP2975)	+= mp2975.o
->   obj-$(CONFIG_SENSORS_MP2993)	+= mp2993.o
->   obj-$(CONFIG_SENSORS_MP5023)	+= mp5023.o
-> diff --git a/drivers/hwmon/pmbus/mp2925.c b/drivers/hwmon/pmbus/mp2925.c
-> new file mode 100644
-> index 000000000000..453995fca3bf
-> --- /dev/null
-> +++ b/drivers/hwmon/pmbus/mp2925.c
-> @@ -0,0 +1,312 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Hardware monitoring driver for MPS Multi-phase Digital VR Controllers(MP2925)
-> + */
-> +
-> +#include <linux/bitfield.h>
-> +#include <linux/i2c.h>
-> +#include <linux/module.h>
-> +#include <linux/of_device.h>
-> +#include "pmbus.h"
-> +
-> +/*
-> + * Vender specific register MFR_VR_MULTI_CONFIG(0x08).
-> + * This register is used to obtain vid scale.
-> + */
-> +#define MFR_VR_MULTI_CONFIG	0x08
-> +
-> +#define MP2925_VOUT_DIV	512
-> +#define MP2925_VOUT_OVUV_UINT	195
-> +#define MP2925_VOUT_OVUV_DIV	100
-> +
-> +#define MP2925_PAGE_NUM	2
-> +
-> +#define MP2925_RAIL1_FUNC	(PMBUS_HAVE_VIN | PMBUS_HAVE_PIN | \
-> +							 PMBUS_HAVE_VOUT | PMBUS_HAVE_IOUT | \
-> +							 PMBUS_HAVE_POUT | PMBUS_HAVE_TEMP | \
-> +							 PMBUS_HAVE_STATUS_VOUT | \
-> +							 PMBUS_HAVE_STATUS_IOUT | \
-> +							 PMBUS_HAVE_STATUS_TEMP | \
-> +							 PMBUS_HAVE_STATUS_INPUT)
-> +
-> +#define MP2925_RAIL2_FUNC	(PMBUS_HAVE_PIN | PMBUS_HAVE_VOUT | \
-> +							 PMBUS_HAVE_IOUT | PMBUS_HAVE_POUT | \
-> +							 PMBUS_HAVE_TEMP | PMBUS_HAVE_IIN | \
-> +							 PMBUS_HAVE_STATUS_VOUT | \
-> +							 PMBUS_HAVE_STATUS_IOUT | \
-> +							 PMBUS_HAVE_STATUS_TEMP | \
-> +							 PMBUS_HAVE_STATUS_INPUT)
-> +
-> +struct mp2925_data {
-> +	struct pmbus_driver_info info;
-> +	int vout_scale[MP2925_PAGE_NUM];
-> +};
-> +
-> +#define to_mp2925_data(x) container_of(x, struct mp2925_data, info)
-> +
-> +static u16 mp2925_linear_exp_transfer(u16 word, u16 expect_exponent)
-> +{
-> +	s16 exponent, mantissa, target_exponent;
-> +
-> +	exponent = ((s16)word) >> 11;
-> +	mantissa = ((s16)((word & 0x7ff) << 5)) >> 5;
-> +	target_exponent = (s16)((expect_exponent & 0x1f) << 11) >> 11;
-> +
-> +	if (exponent > target_exponent)
-> +		mantissa = mantissa << (exponent - target_exponent);
-> +	else
-> +		mantissa = mantissa >> (target_exponent - exponent);
-> +
-> +	return (mantissa & 0x7ff) | ((expect_exponent << 11) & 0xf800);
-> +}
-> +
-> +static int mp2925_read_byte_data(struct i2c_client *client, int page, int reg)
-> +{
-> +	int ret;
-> +
-> +	switch (reg) {
-> +	case PMBUS_VOUT_MODE:
-> +		/*
-> +		 * The MP2925 does not follow standard PMBus protocol completely,
-> +		 * and the calculation of vout in this driver is based on direct
-> +		 * format. As a result, the format of vout is enforced to direct.
-> +		 */
-> +		ret = PB_VOUT_MODE_DIRECT;
-> +		break;
-> +	default:
-> +		ret = -ENODATA;
-> +		break;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int mp2925_read_word_data(struct i2c_client *client, int page, int phase,
-> +				 int reg)
-> +{
-> +	const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
-> +	struct mp2925_data *data = to_mp2925_data(info);
-> +	int ret;
-> +
-> +	switch (reg) {
-> +	case PMBUS_READ_VOUT:
-> +		ret = pmbus_read_word_data(client, page, phase, reg);
-> +		if (ret < 0)
-> +			return ret;
-> +
-> +		ret = DIV_ROUND_CLOSEST((ret & GENMASK(11, 0)) * data->vout_scale[page],
-> +					MP2925_VOUT_DIV);
-> +		break;
-> +	case PMBUS_VOUT_OV_FAULT_LIMIT:
-> +	case PMBUS_VOUT_UV_FAULT_LIMIT:
-> +		ret = pmbus_read_word_data(client, page, phase, reg);
-> +		if (ret < 0)
-> +			return ret;
-> +
-> +		ret = DIV_ROUND_CLOSEST((ret & GENMASK(11, 0)) * MP2925_VOUT_OVUV_UINT,
-> +					MP2925_VOUT_OVUV_DIV);
-> +		break;
-> +	case PMBUS_STATUS_WORD:
-> +	case PMBUS_READ_VIN:
-> +	case PMBUS_READ_IOUT:
-> +	case PMBUS_READ_POUT:
-> +	case PMBUS_READ_PIN:
-> +	case PMBUS_READ_IIN:
-> +	case PMBUS_READ_TEMPERATURE_1:
-> +	case PMBUS_VIN_OV_FAULT_LIMIT:
-> +	case PMBUS_VIN_OV_WARN_LIMIT:
-> +	case PMBUS_VIN_UV_WARN_LIMIT:
-> +	case PMBUS_VIN_UV_FAULT_LIMIT:
-> +	case PMBUS_IOUT_OC_FAULT_LIMIT:
-> +	case PMBUS_IOUT_OC_WARN_LIMIT:
-> +	case PMBUS_OT_FAULT_LIMIT:
-> +	case PMBUS_OT_WARN_LIMIT:
-> +		ret = -ENODATA;
-> +		break;
-> +	default:
-> +		ret = -EINVAL;
-> +		break;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int mp2925_write_word_data(struct i2c_client *client, int page, int reg,
-> +				  u16 word)
-> +{
-> +	int ret;
-> +
-> +	switch (reg) {
-> +	case PMBUS_VIN_OV_FAULT_LIMIT:
-> +	case PMBUS_VIN_OV_WARN_LIMIT:
-> +	case PMBUS_VIN_UV_WARN_LIMIT:
-> +	case PMBUS_VIN_UV_FAULT_LIMIT:
-> +		/*
-> +		 * The PMBUS_VIN_OV_FAULT_LIMIT, PMBUS_VIN_OV_WARN_LIMIT,
-> +		 * PMBUS_VIN_UV_WARN_LIMIT and PMBUS_VIN_UV_FAULT_LIMIT
-> +		 * of MP2925 is linear11 format, and the exponent is a
-> +		 * constant value(5'b11100)， so the exponent of word
-> +		 * parameter should be converted to 5'b11100(0x1C).
-> +		 */
-> +		ret = pmbus_write_word_data(client, page, reg,
-> +					    mp2925_linear_exp_transfer(word, 0x1C));
-> +		if (ret < 0)
-> +			return ret;
-> +		break;
-> +	case PMBUS_VOUT_OV_FAULT_LIMIT:
-> +	case PMBUS_VOUT_UV_FAULT_LIMIT:
-> +		ret = pmbus_write_word_data(client, page, reg,
-> +					    (ret & ~GENMASK(11, 0)) |
-> +				FIELD_PREP(GENMASK(11, 0),
-> +					   DIV_ROUND_CLOSEST(word * MP2925_VOUT_OVUV_DIV,
-> +							     MP2925_VOUT_OVUV_UINT)));
-> +		break;
-> +	case PMBUS_OT_FAULT_LIMIT:
-> +	case PMBUS_OT_WARN_LIMIT:
-> +		/*
-> +		 * The PMBUS_OT_FAULT_LIMIT and PMBUS_OT_WARN_LIMIT of
-> +		 * MP2925 is linear11 format, and the exponent is a
-> +		 * constant value(5'b00000), so the exponent of word
-> +		 * parameter should be converted to 5'b00000.
-> +		 */
-> +		ret = pmbus_write_word_data(client, page, reg,
-> +					    mp2925_linear_exp_transfer(word, 0x00));
-> +		if (ret < 0)
-> +			return ret;
-> +		break;
-> +	case PMBUS_IOUT_OC_FAULT_LIMIT:
-> +	case PMBUS_IOUT_OC_WARN_LIMIT:
-> +		/*
-> +		 * The PMBUS_IOUT_OC_FAULT_LIMIT and PMBUS_IOUT_OC_WARN_LIMIT
-> +		 * of MP2925 is linear11 format, and the exponent is a
-> +		 * can not be changed.
-> +		 */
-> +		ret = pmbus_read_word_data(client, page, 0xff, reg);
-> +		if (ret < 0)
-> +			return ret;
-> +
-> +		ret = pmbus_write_word_data(client, page, reg,
-> +					    mp2925_linear_exp_transfer(word,
-> +								       FIELD_GET(GENMASK(15, 11),
-> +										 ret)));
-> +		break;
-> +	default:
-> +		ret = -EINVAL;
-> +		break;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int
-> +mp2925_identify_vout_scale(struct i2c_client *client, struct pmbus_driver_info *info,
-> +			   int page)
-> +{
-> +	struct mp2925_data *data = to_mp2925_data(info);
-> +	int ret;
-> +
-> +	ret = i2c_smbus_write_byte_data(client, PMBUS_PAGE, page);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = i2c_smbus_read_byte_data(client, PMBUS_VOUT_MODE);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	if (FIELD_GET(GENMASK(5, 5), ret)) {
-> +		ret = i2c_smbus_write_byte_data(client, PMBUS_PAGE,
-> +						page == 0 ? 3 : 4);
-> +		if (ret < 0)
-> +			return ret;
-> +
-> +		ret = i2c_smbus_read_word_data(client, MFR_VR_MULTI_CONFIG);
-> +		if (ret < 0)
-> +			return ret;
-> +
-> +		if (FIELD_GET(GENMASK(5, 5), ret))
-> +			data->vout_scale[page] = 2560;
-> +		else
-> +			data->vout_scale[page] = 5120;
-> +	} else if (FIELD_GET(GENMASK(4, 4), ret)) {
-> +		data->vout_scale[page] = 1;
-> +	} else {
-> +		data->vout_scale[page] = 512;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int mp2925_identify(struct i2c_client *client, struct pmbus_driver_info *info)
-> +{
-> +	int ret;
-> +
-> +	ret = mp2925_identify_vout_scale(client, info, 0);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	return mp2925_identify_vout_scale(client, info, 1);
-> +}
-> +
-> +static const struct pmbus_driver_info mp2925_info = {
-> +	.pages = MP2925_PAGE_NUM,
-> +	.format[PSC_VOLTAGE_IN] = linear,
-> +	.format[PSC_CURRENT_IN] = linear,
-> +	.format[PSC_CURRENT_OUT] = linear,
-> +	.format[PSC_POWER] = linear,
-> +	.format[PSC_TEMPERATURE] = linear,
-> +	.format[PSC_VOLTAGE_OUT] = direct,
-> +
-> +	.m[PSC_VOLTAGE_OUT] = 1,
-> +	.R[PSC_VOLTAGE_OUT] = 3,
-> +	.b[PSC_VOLTAGE_OUT] = 0,
-> +
-> +	.func[0] = MP2925_RAIL1_FUNC,
-> +	.func[1] = MP2925_RAIL2_FUNC,
-> +	.read_word_data = mp2925_read_word_data,
-> +	.read_byte_data = mp2925_read_byte_data,
-> +	.write_word_data = mp2925_write_word_data,
-> +	.identify = mp2925_identify,
-> +};
-> +
-> +static int mp2925_probe(struct i2c_client *client)
-> +{
-> +	struct mp2925_data *data;
-> +
-> +	data = devm_kzalloc(&client->dev, sizeof(struct mp2925_data), GFP_KERNEL);
-> +	if (!data)
-> +		return -ENOMEM;
-> +
-> +	memcpy(&data->info, &mp2925_info, sizeof(mp2925_info));
-> +
-> +	return pmbus_do_probe(client, &data->info);
-> +}
-> +
-> +static const struct i2c_device_id mp2925_id[] = {
-> +	{"mp2925", 0},
-> +	{"mp2929", 1},
+On Mon, Sep 08, 2025 at 10:11:21AM -0300, Jason Gunthorpe wrote:
+> On Mon, Sep 08, 2025 at 12:10:41PM +0100, Lorenzo Stoakes wrote:
+> > @@ -151,20 +123,55 @@ static int hugetlbfs_file_mmap(struct file *file, struct vm_area_struct *vma)
+> >  		vm_flags |= VM_NORESERVE;
+> >
+> >  	if (hugetlb_reserve_pages(inode,
+> > -				vma->vm_pgoff >> huge_page_order(h),
+> > -				len >> huge_page_shift(h), vma,
+> > -				vm_flags) < 0)
+> > +			vma->vm_pgoff >> huge_page_order(h),
+> > +			len >> huge_page_shift(h), vma,
+> > +			vm_flags) < 0) {
+>
+> It was split like this because vma is passed here right?
+>
+> But hugetlb_reserve_pages() doesn't do much with the vma:
+>
+> 	hugetlb_vma_lock_alloc(vma);
+> [..]
+> 	vma->vm_private_data = vma_lock;
+>
+> Manipulates the private which should already exist in prepare:
+>
+> Check non-share a few times:
+>
+> 	if (!vma || vma->vm_flags & VM_MAYSHARE) {
+> 	if (vma && !(vma->vm_flags & VM_MAYSHARE) && h_cg) {
+> 	if (!vma || vma->vm_flags & VM_MAYSHARE) {
+>
+> And does this resv_map stuff:
+>
+> 		set_vma_resv_map(vma, resv_map);
+> 		set_vma_resv_flags(vma, HPAGE_RESV_OWNER);
+> [..]
+> 	set_vma_private_data(vma, (unsigned long)map);
+>
+> Which is also just manipulating the private data.
+>
+> So it looks to me like it should be refactored so that
+> hugetlb_reserve_pages() returns the priv pointer to set in the VMA
+> instead of accepting vma as an argument. Maybe just pass in the desc
+> instead?
 
-I don't see where {0, 1} is used. If the chips do not require chip
-specific handling, drop and just pass 0 for both chips. If they do,
-use an enum.
+Well hugetlb_vma_lock_alloc() does:
 
-Thanks,
-Guenter
+	vma_lock->vma = vma;
 
+Which we cannot do in prepare.
+
+This is checked in hugetlb_dup_vma_private(), and obviously desc is not a stable
+pointer to be used for comparing anything.
+
+I'm also trying to do the minimal changes I can here, I'd rather not majorly
+refactor things to suit this change if possible.
+
+>
+> Then no need to introduce complete. I think it is probably better to
+> try to avoid using complete except for filling PTEs..
+
+I'd rather do that yes. hugetlbfs is the exception to many rules, unfortunately.
+
+>
+> Jason
+
+Cheers, Lorenzo
 
