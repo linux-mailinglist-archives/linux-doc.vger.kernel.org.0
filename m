@@ -1,139 +1,176 @@
-Return-Path: <linux-doc+bounces-59208-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59210-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9F5CB48C24
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 13:28:25 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08926B48C4B
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 13:35:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7B58A3B2399
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 11:28:24 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 855957AF6B5
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Sep 2025 11:34:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BADC021D3E4;
-	Mon,  8 Sep 2025 11:28:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D6DCE2253F2;
+	Mon,  8 Sep 2025 11:35:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="giC/O0HM"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H1ZZpm+j"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ua1-f42.google.com (mail-ua1-f42.google.com [209.85.222.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3181C3209;
-	Mon,  8 Sep 2025 11:28:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC37D1E1E19;
+	Mon,  8 Sep 2025 11:35:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757330899; cv=none; b=ZYr/qsnDTaooLB3yBOdCYAfIuJlsn7K5MXcHDghiioR6mq6nT1GUfdl5huWJ8++bHmlTfTqGDpkoURHkJGcuVfpjfMROSCPPVkKYSja7K1uZUqaVly4w0BMov6ynRuXvgs1BGODsgGb8VNXyC0NMwYhgdXOWO83+TWPXJ3s504o=
+	t=1757331336; cv=none; b=Umly6ELCVi4eDlj0pgg95oOz4iteY8Ol5+qPAarBinvQzZICNnjhOALG6nqvB9fkdfGHL7PEQw1/WtWWkhxmJ59jRl0Dvxd0uZzTCIDjFa/w2yN2MPspIHgmflAD8tzl96uGDDUAy/64MuLshAG+4IxTOtQho/780vbzPjXwez4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757330899; c=relaxed/simple;
-	bh=yn3DFY54dpfRYE23YFj22qSGMrD08cs5ROb/kz6rhzY=;
-	h=Mime-Version:Content-Type:Date:Message-Id:To:Cc:Subject:From:
-	 References:In-Reply-To; b=uckPpIl8+bJ+2y58xze3vt6BeizXUKHDxEBedfOtK5JLfV8mw1g3dAipxm6kubTC59AyGaLLNpe/Nx8JTykcEqHTl7fhldRylaS1CBbXlBsCHdvgG1PcDwpDwF+dP9sFb2FqwNgweEs+Nqx1zLIlHr0NWAaqGoYx5HPpkCIUpAs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=giC/O0HM; arc=none smtp.client-ip=209.85.222.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ua1-f42.google.com with SMTP id a1e0cc1a2514c-8a756436f44so1278164241.3;
-        Mon, 08 Sep 2025 04:28:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757330897; x=1757935697; darn=vger.kernel.org;
-        h=in-reply-to:references:from:subject:cc:to:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yn3DFY54dpfRYE23YFj22qSGMrD08cs5ROb/kz6rhzY=;
-        b=giC/O0HMysKBvufK5CSc1LJ+6NmNapZE8EoVLAltBcaXhUiNpCaomxwNpvJCJUrwx5
-         2bCDPMXTsZ9TRd9vswGQ+M5u/N/EwULuBlKawJwMtZQL1+pOYtK+Fxwu16hT8dWTINHp
-         NA4/tPpQgI0hJQ0T9zJ9mMyWS3qGnQWrvQbSBSuJiwcG/ymqbIK+W0YZ3ONXkWhuaFxo
-         +ff6AApafwAb4I33AKvYVFsAoSgh3w/d/FpwnZ7LbTKAVhFnzrb3Agels5ZVH3wjfdoa
-         nk5M8iAlkZWlb16j3k5odEHtfeoUq8BJVQj1wRbXCDi62j7jQa9aV5FDBlvTJOnngwN2
-         1RYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757330897; x=1757935697;
-        h=in-reply-to:references:from:subject:cc:to:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=yn3DFY54dpfRYE23YFj22qSGMrD08cs5ROb/kz6rhzY=;
-        b=MM1NdahdGGAOlc+Ah965OqvnLnWcfoK3npQCJJLRfvS4cPTlmvCJfK3cq1i/jWTGO6
-         n6QSxBn+K0QduB0YjYvTQGWadEWOdeQDLkGuKJQSCUVsN+nJgBH2PxL4B6pKdnsJl/0I
-         mlQlUpZD7n4PPUQ1adQiGmxtiinUqoG8iwxEFPuioPRETuq46bLqJ5tt6Nc5DWHxy16K
-         r4JQpIvz4+qR1E04e1iwWDoFft5EaEgx5zbpq030TjMsFTt1nEIOMnKu4hBZogqHsOOs
-         iPXJ2wQgzVHt+BJMSRy4i3+p3iODDxRU4h+8OqwhCRdn+iPfEFclc9/nQUp6FDco1tiu
-         SqEw==
-X-Forwarded-Encrypted: i=1; AJvYcCWZDq5hzT2yEEUKq1HuAvQgi5GToScuzAyWMqsQNlAPfgGs7lpotrHrDPBx/5PkLhu3lEwphbp1qrgh@vger.kernel.org, AJvYcCX27mxCt45E3l3RvA6q4czqQhBt59qtuk6xEG2VJSvg4zycXodfGqucd/lk+gNe8J+Poy4TCY77Klbb@vger.kernel.org, AJvYcCXAc1NfJ4gWlXJk29rXDp5IPwjJm5uOkupPnprkl+yXCyEn5YMwKVrsOqIIO3fYuWD9MXp3TNr0zvLN3179@vger.kernel.org, AJvYcCXqbiOywWEoWfs+jWlQBA1A2Ss7bC/vbN+Ys7f5vyC5I6VgIEiG2vp/clRqfDe0ZnpqjqMiBYpB@vger.kernel.org
-X-Gm-Message-State: AOJu0Yywn4pWBDPj/v+bQESPZGAzWBZJxt+rkjaV5vjPuKUKqR8FqBMa
-	VrhxdEcKOi+9sqOeb6GmqP9s616a5o8VWXQJzOaU4yU8cFEWDfYSRIbA
-X-Gm-Gg: ASbGncuW2VknR10/J2mogSXh9Tpw6RC8UhBTM2TSDZrqw/mBzPX4fZG6KfyeQGwX75g
-	vw626XJdAFvQkso2IHzkDR0utz9n7TGvLCR70oYhvHRz2PoeDihOBTdBj66YaAh3DrKuUa8Ai//
-	dsFvSyGOoMgZqJtj1gUbewnbGfXo3jp0FIU3ySxgpaGhJa+4QDYCqXcaRqgQRchpy8AzFGwngHP
-	vubfLEEmpd2ctaUHeumi7aMlElfVfdrG0yuqbRG4cujuPqneuwB+DVu79GFv84DiM+fx7wiv8Ic
-	i4KplbmBSN7vmzHNmY2/4qP1wd77teloTsMWx6etyJFN5VWRtrsqHvsOY3hlsdjeXWCPrkaqN0P
-	VK/Ms8CIK/8ePdrA=
-X-Google-Smtp-Source: AGHT+IEmxj5SRucLxgsqc+XZK/hD/wEdSRDYn5/LVNzSGWmoBPOWSOPPWS7ZDyNcF+IG54oWcnCxTQ==
-X-Received: by 2002:a05:6102:c8f:b0:521:f809:9969 with SMTP id ada2fe7eead31-53d1c3d62c5mr2376675137.8.1757330896892;
-        Mon, 08 Sep 2025 04:28:16 -0700 (PDT)
-Received: from localhost ([2800:bf0:82:3d2:875c:6c76:e06b:3095])
-        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-52af1915741sm10417808137.10.2025.09.08.04.28.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 08 Sep 2025 04:28:16 -0700 (PDT)
+	s=arc-20240116; t=1757331336; c=relaxed/simple;
+	bh=FqvTpKoAL4sbdB9E3kCKVZwWGdTsIkbto1wVMKUNI30=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=EV+ixeiZflQ0B1j1rbN8bL/xsnuz3MgBYeqQZs603WetSg949mz1m90U4CStfDQspnc1aiiOyG0E7i8vUfztLJZ0XCB4t47dnFgYyygLufs02fKgd8bdvhxo3leP8ZHpZWvI/sIR6n6zzCFXBWMrgXHZQ3MLYtaeZRCq/OaxTYo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H1ZZpm+j; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1002C4CEF1;
+	Mon,  8 Sep 2025 11:35:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1757331336;
+	bh=FqvTpKoAL4sbdB9E3kCKVZwWGdTsIkbto1wVMKUNI30=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=H1ZZpm+jY44sJchL9i8k82WM+dUfGroOmG68PnFpdeKf9Zzsz4+yPlv4EHp2idD9o
+	 l5mFE87BTM3P4VNmJJsZit2hlzEdmLLz20esv9AhZdUk0KsfLvnl7vnWkOnQkMEbmN
+	 VfQGa2j46E3KzKrEleaDEJm6nQ44GPnM8OtwYoJdl0aNwOa3sogs7zI20qQpypEMQ9
+	 hxlI7/USQQ2eeG5DP4e5EM0Lo4cdtz+yv8NJrxvNkVyIKQLFgBlZkgG0/PS2Wu7NRD
+	 WT4dVRe98DalzpCUDje/nz6JypAjwum8FmYnEZPDhuHE83EEfyOMHDz3EtI4WdvpMj
+	 MrTm2cdDFOJ/A==
+Date: Mon, 8 Sep 2025 12:35:29 +0100
+From: Will Deacon <will@kernel.org>
+To: Huang Shijie <shijie@os.amperecomputing.com>
+Cc: catalin.marinas@arm.com, corbet@lwn.net, patches@amperecomputing.com,
+	cl@linux.com, yang@os.amperecomputing.com,
+	akpm@linux-foundation.org, paulmck@kernel.org, rostedt@goodmis.org,
+	Neeraj.Upadhyay@amd.com, bp@alien8.de, ardb@kernel.org,
+	anshuman.khandual@arm.com, suzuki.poulose@arm.com, gshan@redhat.com,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, rdunlap@infradead.org,
+	Christoph Lameter <cl@gentwo.org>
+Subject: Re: [PATCH V6 1/2] arm64: refactor the rodata=xxx
+Message-ID: <aL6_gZWeqAGZjda2@willie-the-truck>
+References: <20250703094212.20294-1-shijie@os.amperecomputing.com>
+ <20250703094212.20294-2-shijie@os.amperecomputing.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 08 Sep 2025 06:28:14 -0500
-Message-Id: <DCNDT81S98GW.2SJOV5C94E43H@gmail.com>
-To: "Krzysztof Kozlowski" <krzk@kernel.org>, "Jean Delvare"
- <jdelvare@suse.com>, "Guenter Roeck" <linux@roeck-us.net>, "Jonathan
- Corbet" <corbet@lwn.net>, "Andy Shevchenko"
- <andriy.shevchenko@linux.intel.com>, "Rob Herring" <robh@kernel.org>,
- "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
- <conor+dt@kernel.org>
-Cc: <linux-hwmon@vger.kernel.org>, <linux-doc@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
- <stable@vger.kernel.org>
-Subject: Re: [PATCH v3 4/4] dt-bindings: trivial-devices: Add sht2x sensors
-From: "Kurt Borja" <kuurtb@gmail.com>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250907-sht2x-v3-0-bf846bd1534b@gmail.com>
- <20250907-sht2x-v3-4-bf846bd1534b@gmail.com>
- <edc840e1-44ed-4397-8e5f-2f5e468ec030@kernel.org>
-In-Reply-To: <edc840e1-44ed-4397-8e5f-2f5e468ec030@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250703094212.20294-2-shijie@os.amperecomputing.com>
 
-Hi Krzysztof,
+On Thu, Jul 03, 2025 at 05:42:11PM +0800, Huang Shijie wrote:
+> As per admin guide documentation, "rodata=on" should be the default on
+> platforms. Documentation/admin-guide/kernel-parameters.txt describes
+> these options as
+> 
+>    rodata=         [KNL,EARLY]
+>            on      Mark read-only kernel memory as read-only (default).
+>            off     Leave read-only kernel memory writable for debugging.
+>            full    Mark read-only kernel memory and aliases as read-only
+>                    [arm64]
+> 
+> But on arm64 platform, "rodata=full" is the default instead.
 
-On Mon Sep 8, 2025 at 2:02 AM -05, Krzysztof Kozlowski wrote:
-> On 08/09/2025 03:33, Kurt Borja wrote:
->> Add sensirion,sht2x trivial sensors.
->>=20
->> Cc: stable@vger.kernel.org
->
-> No, drop. No bug to fix here.
+Please mention RODATA_FULL_DEFAULT_ENABLED here.
 
-I included it because stable is fine with device IDs [1]. Is this
-avoided with dt-bindings related stuff?
+> This patch implements the following changes.
+> 
+>  - Make "rodata=on" behaviour same as the original "rodata=full"
 
->
-> Please organize the patch documenting compatible (DT bindings) before
-> their user.
-> See also:
-> https://elixir.bootlin.com/linux/v6.14-rc6/source/Documentation/devicetre=
-e/bindings/submitting-patches.rst#L46
+You should mention that this gives us parity with x86.
 
-I will reorder.
+>  - Make "rodata=noalias" (new) behaviour same as the original "rodata=on"
+>  - Drop the original "rodata=full"
 
-Thanks for the review!
+>  - Add comment for arch_parse_debug_rodata()
+>  - Update kernel-parameters.txt as required
 
->>=20
->
->
-> Best regards,
-> Krzysztof
+These last two are self-evident from the code and don't need to be listed
+here.
 
-[1] https://elixir.bootlin.com/linux/v6.17-rc4/source/Documentation/process=
-/stable-kernel-rules.rst#L15
+> After this patch, the "rodata=on" will be the default on arm64 platform
+> as well.
+> 
+> Reviewed-by: Christoph Lameter (Ampere) <cl@gentwo.org>
+> Signed-off-by: Huang Shijie <shijie@os.amperecomputing.com>
+> ---
+>  .../admin-guide/kernel-parameters.txt         |  2 +-
+>  arch/arm64/include/asm/setup.h                | 28 +++++++++++++++++--
+>  2 files changed, 27 insertions(+), 3 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index ee0735c6b8e2..3590bdc8d9a5 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -6354,7 +6354,7 @@
+>  	rodata=		[KNL,EARLY]
+>  		on	Mark read-only kernel memory as read-only (default).
+>  		off	Leave read-only kernel memory writable for debugging.
+> -		full	Mark read-only kernel memory and aliases as read-only
+> +		noalias	Use more block mappings, may have better performance.
+>  		        [arm64]
 
---=20
- ~ Kurt
+This isn't particularly helpful documentation and I think we need to mention
+the linear alias rather than talk about the page-table structure.
 
+How about:
+
+	noalias	Mark read-only kernel memory as read-only but retain
+		writable aliases in the direct map for regions outside
+		of the kernel image. [arm64]
+
+?
+
+> diff --git a/arch/arm64/include/asm/setup.h b/arch/arm64/include/asm/setup.h
+> index ba269a7a3201..6b994d0881d1 100644
+> --- a/arch/arm64/include/asm/setup.h
+> +++ b/arch/arm64/include/asm/setup.h
+> @@ -13,6 +13,30 @@
+>  extern phys_addr_t __fdt_pointer __initdata;
+>  extern u64 __cacheline_aligned boot_args[4];
+>  
+> +/*
+> + * rodata=on (default)
+> + *
+> + *    This applies read-only attributes to VM areas and to the linear
+> + *    alias of the backing pages as well. This prevents code or read-
+> + *    only data from being modified (inadvertently or intentionally),
+> + *    via another mapping for the same memory page.
+> + *
+> + *    But this might cause linear map region to be mapped down to base
+> + *    pages, which may adversely affect performance in some cases.
+> + *
+> + * rodata=off
+> + *
+> + *    This provides more block mappings and contiguous hints for linear
+> + *    map region which would minimize TLB footprint. This also leaves
+> + *    read-only kernel memory writable for debugging.
+> + *
+> + * rodata=noalias
+> + *
+> + *    This provides more block mappings and contiguous hints for linear
+> + *    map region which would minimize TLB footprint. This leaves the linear
+> + *    alias of read-only mappings in the vmalloc space writeable, making
+> + *    them susceptible to inadvertent modification by software.
+> + */
+
+Please remove this comment. If you want to keep it, this information
+belongs either in the commit message (to justify the performance impact)
+or the Documentation (to describe the functional impact) but there's
+little point having it hidden away here.
+
+With those changes, this looks good and I can pick it up for 6.18 if
+you respin.
+
+Cheers,
+
+Will
 
