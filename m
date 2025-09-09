@@ -1,130 +1,145 @@
-Return-Path: <linux-doc+bounces-59527-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59529-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84CEEB4FF78
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Sep 2025 16:32:45 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93839B4FFA0
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Sep 2025 16:38:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 3D8081709AE
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Sep 2025 14:32:45 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9B5AD167506
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Sep 2025 14:38:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55B5433EB14;
-	Tue,  9 Sep 2025 14:32:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FCB8352FD0;
+	Tue,  9 Sep 2025 14:37:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="CjTMvVOG"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="OBtCrRsb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com [91.218.175.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57F9C3D6F;
-	Tue,  9 Sep 2025 14:32:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.23.235
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65907350820
+	for <linux-doc@vger.kernel.org>; Tue,  9 Sep 2025 14:37:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757428360; cv=none; b=ZSJbw4pPnPW+s2x4NOx0qfZAdS+FUhYpDhTYkML3uIj/qTk0EECoFqG84eI4VhTmgDF/LiBhoneYgJsL/hBChd51igeKTwsNDcHkevV+CZkwoM9RKjtFmqZaNQnlkWClEeh0f2fo+6GOeNcxP26HPR6TO9u/yAxcKegPRy3KSR4=
+	t=1757428658; cv=none; b=EEae7r/jsHTpEmEZhtcQzXHSRTh4kURYeQm/1MYLjH5hX+hoafc4Az0gQUniY8/YU0xmp8OkWkrdEV7qNt6kdUBjp70UIpN+sDNN55oZF/lgIyRfG7HdbcmVtcON91mP0arvKZ+HQ341UQ21MuDx3ycDokXBPWLRV3L7DjV+9bo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757428360; c=relaxed/simple;
-	bh=uEpeLMtA+nt8my0EDQ4Co7+OdONko3/KLIe5wrgdqBw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=LkJNQIeAR9tEMieF1YOkyl3dbJgeaS4VIMx34YH4/QtOtyx69CzyECFig0ECA/lG82XyaBtw8m9Q5ruhUcZwWEPL5tafMSQ4+ni+j/GjFM2R/OVvQ9HSPmUxlvVGxYbX4TFbs/6z4W+jE8HGULBe3j1ej5mdPwbBfeDfwpaCLYY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=CjTMvVOG; arc=none smtp.client-ip=198.47.23.235
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 589EVjYJ356867;
-	Tue, 9 Sep 2025 09:31:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1757428305;
-	bh=vykbjnLzz8rpOz9CYESVqRDv7BiXG2bRuVLyRjDYwak=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=CjTMvVOGPgw0ugbauj/vW5ePOLo5FNRisZUjMHPKmlHLU5nF4vvScIxn4r/ch5zgM
-	 7zbBCeGRjORVmzpT8nFtNnwcs5an86ZReIVzCgBrJJc8nTTYW+kQFFDFJP9r1afBvE
-	 KLd3bMPXJSpctbegkLg23Q50xYmH+mz2ut+ke2s0=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 589EViKD424810
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Tue, 9 Sep 2025 09:31:45 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 9
- Sep 2025 09:31:44 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 9 Sep 2025 09:31:44 -0500
-Received: from [10.249.130.74] ([10.249.130.74])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 589EVYIi2475049;
-	Tue, 9 Sep 2025 09:31:35 -0500
-Message-ID: <548eb7e2-ebde-464e-9467-7086e9448181@ti.com>
-Date: Tue, 9 Sep 2025 20:01:33 +0530
+	s=arc-20240116; t=1757428658; c=relaxed/simple;
+	bh=hImgRP5PDSJ8tahE+RtUsG3WvwJy/+Y1BnkvJrIMRfM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=NjZwTxomSIAEEnDxcNgUs3NfCQI9wSSDLRPNl1yR9fsONLkBspLqb3iDw17srtRkLqapV6LArt/B7QKDd1FsxTraA0Ab/c8zw9gtqFQmgplJLZ4Tl11DZSKKTjJvp6RdXkzUSvyCKUiD9Mq3RKytSMEcdV0B9Kue32oK1IdEPFY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=OBtCrRsb; arc=none smtp.client-ip=91.218.175.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <2ec8c7f8-cf79-4701-97dc-2d0a687f0f3b@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1757428643;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=joBHHo2vNOa9/tISXv4x8ETwG4JXU3LtDMt2JeCyLyM=;
+	b=OBtCrRsbxfPzoj5D3rkn5kRq6++vRm4cPJxZet2JnWn0QfYPTL7nbnbOZWm5Tw3rBdC3uq
+	IQJ0BUlyseKMXmdkTRZLSkawjmyuAbFXu0zZjb8Zo/VdP0anjTSxei8fqRFe84t6u9fRD4
+	WcPczDipxB6bdThSvMIuiY+tTZsSQ+Y=
+Date: Tue, 9 Sep 2025 15:37:19 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH net-next v11 5/5] net: rnpgbe: Add register_netdev
-To: Dong Yibo <dong100@mucse.com>, <andrew+netdev@lunn.ch>,
-        <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
-        <pabeni@redhat.com>, <horms@kernel.org>, <corbet@lwn.net>,
-        <gur.stavi@huawei.com>, <maddy@linux.ibm.com>, <mpe@ellerman.id.au>,
-        <danishanwar@ti.com>, <lee@trager.us>, <gongfan1@huawei.com>,
-        <lorenzo@kernel.org>, <geert+renesas@glider.be>,
-        <Parthiban.Veerasooran@microchip.com>, <lukas.bulwahn@redhat.com>,
-        <alexanderduyck@fb.com>, <richardcochran@gmail.com>, <kees@kernel.org>,
-        <gustavoars@kernel.org>, <rdunlap@infradead.org>,
-        <vadim.fedorenko@linux.dev>
-CC: <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-hardening@vger.kernel.org>
+To: Dong Yibo <dong100@mucse.com>, andrew+netdev@lunn.ch,
+ davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+ pabeni@redhat.com, horms@kernel.org, corbet@lwn.net, gur.stavi@huawei.com,
+ maddy@linux.ibm.com, mpe@ellerman.id.au, danishanwar@ti.com, lee@trager.us,
+ gongfan1@huawei.com, lorenzo@kernel.org, geert+renesas@glider.be,
+ Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
+ alexanderduyck@fb.com, richardcochran@gmail.com, kees@kernel.org,
+ gustavoars@kernel.org, rdunlap@infradead.org
+Cc: netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-hardening@vger.kernel.org
 References: <20250909120906.1781444-1-dong100@mucse.com>
  <20250909120906.1781444-6-dong100@mucse.com>
 Content-Language: en-US
-From: "Anwar, Md Danish" <a0501179@ti.com>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Vadim Fedorenko <vadim.fedorenko@linux.dev>
 In-Reply-To: <20250909120906.1781444-6-dong100@mucse.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Migadu-Flow: FLOW_OUT
 
-
-
-On 9/9/2025 5:39 PM, Dong Yibo wrote:
+On 09/09/2025 13:09, Dong Yibo wrote:
 > Complete the network device (netdev) registration flow for Mucse Gbe
 > Ethernet chips, including:
 > 1. Hardware state initialization:
->    - Send powerup notification to firmware (via echo_fw_status)
->    - Sync with firmware
->    - Reset hardware
+>     - Send powerup notification to firmware (via echo_fw_status)
+>     - Sync with firmware
+>     - Reset hardware
 > 2. MAC address handling:
->    - Retrieve permanent MAC from firmware (via mucse_mbx_get_macaddr)
->    - Fallback to random valid MAC (eth_random_addr) if not valid mac
->      from Fw
+>     - Retrieve permanent MAC from firmware (via mucse_mbx_get_macaddr)
+>     - Fallback to random valid MAC (eth_random_addr) if not valid mac
+>       from Fw
 > 
 > Signed-off-by: Dong Yibo <dong100@mucse.com>
-> ---
 
-> +/**
-> + * rnpgbe_xmit_frame - Send a skb to driver
-> + * @skb: skb structure to be sent
-> + * @netdev: network interface device structure
-> + *
-> + * Return: NETDEV_TX_OK or NETDEV_TX_BUSY
-> + **/
-> +static netdev_tx_t rnpgbe_xmit_frame(struct sk_buff *skb,
-> +				     struct net_device *netdev)
-> +{
-> +	dev_kfree_skb_any(skb);
-> +	netdev->stats.tx_dropped++;
-> +	return NETDEV_TX_OK;
-> +}
+[...]
 
-The function comment says it returns NETDEV_TX_OK or NETDEV_TX_BUSY, but
-it only returns NETDEV_TX_OK.
+> +struct mucse_hw;
 
+why do you need this forward declaration ...> +
+> +struct mucse_hw_operations {
+> +	int (*reset_hw)(struct mucse_hw *hw);
+> +	int (*get_perm_mac)(struct mucse_hw *hw);
+> +	int (*mbx_send_notify)(struct mucse_hw *hw, bool enable, int mode);
+> +};
+> +
+> +enum {
+> +	mucse_fw_powerup,
+> +};
+> +
+>   struct mucse_hw {
+>   	void __iomem *hw_addr;
+> +	struct pci_dev *pdev;
+> +	const struct mucse_hw_operations *ops;
+> +	struct mucse_dma_info dma;
+>   	struct mucse_mbx_info mbx;
+> +	int port;
+> +	u8 perm_addr[ETH_ALEN];
+>   	u8 pfvfnum;
+>   };
 
--- 
-Thanks and Regards,
-Md Danish Anwar
+... if you can simply move mucse_hw_operations down here?
 
+>   
+> @@ -54,4 +76,7 @@ int rnpgbe_init_hw(struct mucse_hw *hw, int board_type);
+>   #define PCI_DEVICE_ID_N500_DUAL_PORT 0x8318
+>   #define PCI_DEVICE_ID_N210 0x8208
+>   #define PCI_DEVICE_ID_N210L 0x820a
+> +
+> +#define rnpgbe_dma_wr32(dma, reg, val) \
+> +	writel((val), (dma)->dma_base_addr + (reg))
+
+[...]
+
+> @@ -48,8 +127,14 @@ static void rnpgbe_init_n210(struct mucse_hw *hw)
+>    **/
+>   int rnpgbe_init_hw(struct mucse_hw *hw, int board_type)
+>   {
+> +	struct mucse_dma_info *dma = &hw->dma;
+>   	struct mucse_mbx_info *mbx = &hw->mbx;
+>   
+> +	hw->ops = &rnpgbe_hw_ops;
+> +	hw->port = 0;
+> +
+> +	dma->dma_base_addr = hw->hw_addr;
+
+not quite sure why do you need additional structure just to store the
+value that already exists in mucse_hw?
+
+> +
+>   	mbx->pf2fw_mbx_ctrl = MUCSE_GBE_PFFW_MBX_CTRL_OFFSET;
+>   	mbx->fwpf_mbx_mask = MUCSE_GBE_FWPF_MBX_MASK_OFFSET;
+>   
 
