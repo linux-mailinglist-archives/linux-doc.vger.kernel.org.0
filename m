@@ -1,172 +1,213 @@
-Return-Path: <linux-doc+bounces-59691-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59693-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37569B50FCF
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 09:43:30 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 05049B50FEF
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 09:47:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 353EF7BBFEC
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 07:41:34 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EC5E41C26BB0
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 07:47:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5559331D39C;
-	Wed, 10 Sep 2025 07:43:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A1BB930CD92;
+	Wed, 10 Sep 2025 07:47:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="g1K7H1SU"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jDeaDYDj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A0A230C373
-	for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 07:43:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=203.254.224.33
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9EA022333B;
+	Wed, 10 Sep 2025 07:47:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757490187; cv=none; b=lMrYcXHbQIfKwkHGEipEITWxwL7nHVFOc39V2yQ/H84SYx7ZibAzw1Zgf1W/tXRukoWO7XPeikLHTYwJf0o9mkAWEoU6UUmj0qlCiUG/eDD5avFfo/CEvvKX7XggXk5HGPTxwneOw5G7v7Zt9ExpPmjCyTE2/sXIJrY82CH4cQc=
+	t=1757490429; cv=none; b=Y89cPWMVwu5+QySGN4r+2I2vhYyvaKz5C9gYRVUGncK41ShJyiUdmjR/+6C/2zKANpC+cRQzlWdvYduwdbApIxab16MmfNQME+A4/edVF+EsiANjnoBaC0IT0h0XnesE6jix8XlOd3mLn2kx+11P5ROI1AZi6KElQdNlpuTT1ZU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757490187; c=relaxed/simple;
-	bh=oYh90tcsDpw7CrDcG/7P8GueqMyroIAKQgKmfVUY8Ds=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:MIME-Version:
-	 Content-Type:References; b=mu5YKNpl3LZqYDIUvFVfzjp2jly8xNGyx5IRHJ+ozJisM3cJyLv5omzM2lJHaqWFut3unIctHBk9tllwBB/luqGCTGhWpUAi2jBxJuBx9vKRcAc4antLOfX4sfI9ocgtXh9yrGRkG4O333qdDEHZlhpC1062v6IvbqxonOdtrCY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=g1K7H1SU; arc=none smtp.client-ip=203.254.224.33
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
-	by mailout3.samsung.com (KnoxPortal) with ESMTP id 20250910074302epoutp039c72359fdd05bde9ed58d761cb273efa~j3AJW4RfK2083920839epoutp03b
-	for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 07:43:02 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com 20250910074302epoutp039c72359fdd05bde9ed58d761cb273efa~j3AJW4RfK2083920839epoutp03b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1757490182;
-	bh=9expbpYhVgObgPfAlnk7ZtalLHtzPTqZxjjfHnnvWUM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=g1K7H1SU6dBatpr+nVZDuSvnVweadziYubv6VvWrbYUdErO4isxWKjE+t0m0F2S7x
-	 xRokdIcLB6iGJH15yqGdvwYcQbZPDH81bkB30udnnuLew5+5vIYbwn93CXEq/CTb8o
-	 3dHLk7pm9lzCCOM94o2JASGFp75N07/5luOOzJKg=
-Received: from epsnrtp04.localdomain (unknown [182.195.42.156]) by
-	epcas2p4.samsung.com (KnoxPortal) with ESMTPS id
-	20250910074301epcas2p4adda38d3e6226f46dd5097b221807b46~j3AIfxcA_0054800548epcas2p4W;
-	Wed, 10 Sep 2025 07:43:01 +0000 (GMT)
-Received: from epcas2p4.samsung.com (unknown [182.195.36.101]) by
-	epsnrtp04.localdomain (Postfix) with ESMTP id 4cMCN44DMnz6B9mS; Wed, 10 Sep
-	2025 07:43:00 +0000 (GMT)
-Received: from epsmtip1.samsung.com (unknown [182.195.34.30]) by
-	epcas2p2.samsung.com (KnoxPortal) with ESMTPA id
-	20250910074259epcas2p294790d53f9e2c7a7b9ecea003ad66092~j3AHRKlPC2105321053epcas2p2P;
-	Wed, 10 Sep 2025 07:42:59 +0000 (GMT)
-Received: from KORCO190374.samsungds.net (unknown [12.36.160.50]) by
-	epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20250910074259epsmtip14649612a61786e5a6a1da6aee4d8f6af~j3AHOfeQs2861828618epsmtip1O;
-	Wed, 10 Sep 2025 07:42:59 +0000 (GMT)
-From: Sehee Jeong <sehee1.jeong@samsung.com>
-To: anna-maria@linutronix.de, frederic@kernel.org, tglx@linutronix.de,
-	corbet@lwn.net
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	sehee1.jeong@samsung.com
-Subject: [PATCH v2 1/1] timers/migration: add 'tmigr' kernel parameter to
- optionally disable timer migration
-Date: Wed, 10 Sep 2025 16:42:51 +0900
-Message-Id: <20250910074251.8148-2-sehee1.jeong@samsung.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250910074251.8148-1-sehee1.jeong@samsung.com>
+	s=arc-20240116; t=1757490429; c=relaxed/simple;
+	bh=liVmnk8QHJ8DU7cSnweepl2EzqreCFPaY8VRfmTnkmY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=TjSkMpYGpvBaQpSmr3Ztxix8AMBp8u/0ONavtf61161eSh9NI74QxpV1K4N3/ON56LKoLP95qPuB0v/Hz0R9HZDyH2oW5U7Qk2hpErgK10RkWYnLsc+xDVxmHrHU7HNZ4pt5CWWGO4K6lufpbBzpzHOm/WTQjvRCAnjCQKsBffI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jDeaDYDj; arc=none smtp.client-ip=209.85.128.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-45cb5e5e71eso33222395e9.2;
+        Wed, 10 Sep 2025 00:47:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757490426; x=1758095226; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=+WG/fOgOed7F+q/vykBWwKRqhGGU2/L6CsAzZkzcjHA=;
+        b=jDeaDYDjz8xjZHCBMizgQ4BkC70nHP7JimHG4M+0u/AMZnABpkhXdr6ABNI2GPpl1k
+         e8xfK/OkH70QCIjL509W7c3y9P0vvXgW2TapfMMAxdrTe6cG0IBJiRykd7EaHCCl9DhF
+         oe1MvjmJakn2bmboZCjAR07KnqEsHBkeLPv08M4b1nVmTn9gsmUOo7KgAM8M/aCMU0Ia
+         KfWgsdCmXUtOCe8aVLn4ORA9nnOEMUEeKoxBLjAK1FKcRpF2g1qLUcuT/WBz4m/MxNt/
+         MyfTWGoJdOnpkIYMzliRHtB4OImKdEALAEWztjAsnk9TTrNpUVCKMSXQlL+qGP7Ns1mz
+         Z+Dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757490426; x=1758095226;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=+WG/fOgOed7F+q/vykBWwKRqhGGU2/L6CsAzZkzcjHA=;
+        b=g/xMFhr/Q17GQjpB/zN9VGlxAR1cLr4KAzXc86HGHyv/zacEPkCfZgpxe3FiqTzLMX
+         5/t4oYQy3oO5r4//TYYeAj9Hw7TH4CQ2ONRYcoX9ng0HKBhXf8yMhGyvlMLGY2KkMars
+         Zv30qUf1NM8AtHpO3PR7EbQieKvkfp90GDkl2ILmaKoHOksj1BUoPc+b28xKYeQ6M3oA
+         UoZiq9SRNGEEgFQbbhNRiOYgoIb7QxnuJKbyTmAW+3i+SU/YEsTWF21+7vrhh4hTdDKA
+         52Q6qTpwX9+l51jo7k6Qc6WfFYygpPsEojXaJzxJ2b4xpMp8xKhTEuMp67KPwjYnFchA
+         ZiBQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVHslPSRcc/NBBqOc97+o+nPYuyRrj1rWy4LQqjmLoXdu3CkLVAQr84GvRx+TubKqZxEyWAj5kjWYV4@vger.kernel.org, AJvYcCX4OJeK6NTc4jKPUpsWrEOTD2JYH3Wbh0s+DO4e9Lc/mDGKDQKqB9aYhOFssHCMt6v752M8/5cK/d1A@vger.kernel.org, AJvYcCXCDnfB49Dqck08tl3lnUs4WCuoCujA44ogLDoqjhGLeBu83GJyReE4OgBryZg7pTRfynOmJXULajSateA7rnnfQw==@vger.kernel.org, AJvYcCXlfJSHpkaOrS/Zo5fMhFq5+aGfBJnzbUjfmOyW1rJI5vBfdBg6WLS3YlpQfwwvTRAxS2zhyzpiXW4u@vger.kernel.org, AJvYcCXqOFGvihM2RqL3H/ZsWwCnKQHKtaUGsLSkcVQsrOyIP8SLHm7zCUfKAUdv7yzZHI0BlOotTpsUhAE072Ca@vger.kernel.org
+X-Gm-Message-State: AOJu0YztD7RD+86t3u6lhCapc0A9WrHeGDPPfAtqiU6O8Y+kadbrw1Aw
+	KSTPlJvDr9NjFT6qp1AnmB+/yjqgkfrZ/HziG6cLnQPsPCNkfoeIseqY
+X-Gm-Gg: ASbGnctDWZAiWa9N1BMSjVz5T/XbG9B3wFbHmyeKU0QkJH+rXr5LM4o9ezawsp4fdK/
+	+Ap7xYpcvyySH2uXcVBe9ZTCoO2I3EfDc2VuO9Q37tPfHDM7bPS1CjGhhzYrmv7Zz6xmuDRoE5Q
+	iDAIfVnSfI2QJHkg9f1bQBI21zoDzjPtFC9aKBYd86795Y7ezlTbHxiGn4wm2UgThBrLyUE5g5f
+	r7j9DeDDtReP7AxkQvm/+HWhWbu5fLDvq1gQgueECzFDqveFrktM0AS7GM3IdBWpb5G7GAJ9/eB
+	VD5Riv3IWJdhwUYvr7edtOhAeDSp47zrTQKdr531/0kMu8ufmPUGqil3Zf3ntqn+hLFZwqJ9hXj
+	tsAuL2uu0MNoR7nW9zTUJqla06elM5ITy8/+qndf2SFYhrjqlnLZ/Xm8SKGhcyG243hWOUT5+7L
+	QpM/b5d9QiZSW4uF/G9qbOhm/fqcXZCYxaVO1gEL/XV2fTb6w1smqV25eXWbSvtyM5rMibNyUn8
+	w==
+X-Google-Smtp-Source: AGHT+IHCQlyEGA4dQJ+eF6cYPq/TcQfhp+X5TSRzHZoqn+jcag/Ng+LaHLBRVKb0m1OSVaCN+kNKcA==
+X-Received: by 2002:a05:600c:4f91:b0:45b:88d6:8db5 with SMTP id 5b1f17b1804b1-45ddde82fc0mr127441425e9.12.1757490425798;
+        Wed, 10 Sep 2025 00:47:05 -0700 (PDT)
+Received: from ?IPV6:2a02:8440:7135:4f4c:9000:7072:695b:3ef? (2a02-8440-7135-4f4c-9000-7072-695b-03ef.rev.sfr.net. [2a02:8440:7135:4f4c:9000:7072:695b:3ef])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45df821f714sm17367435e9.16.2025.09.10.00.47.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 10 Sep 2025 00:47:05 -0700 (PDT)
+Message-ID: <19e664da-df4c-4bc0-84ce-41e4364f10bc@gmail.com>
+Date: Wed, 10 Sep 2025 09:47:03 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 01/20] bus: firewall: move stm32_firewall header file
+ in include folder
+To: Gatien CHEVALLIER <gatien.chevallier@foss.st.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>, Julius Werner <jwerner@chromium.org>,
+ Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>
+Cc: linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-perf-users@vger.kernel.org, linux-doc@vger.kernel.org,
+ =?UTF-8?Q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
+References: <20250909-b4-ddrperfm-upstream-v6-0-ce082cc801b5@gmail.com>
+ <20250909-b4-ddrperfm-upstream-v6-1-ce082cc801b5@gmail.com>
+ <9a46c8a8-1d25-410c-9fa2-267eb4040390@foss.st.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Cl=C3=A9ment_Le_Goffic?= <legoffic.clement@gmail.com>
+In-Reply-To: <9a46c8a8-1d25-410c-9fa2-267eb4040390@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20250910074259epcas2p294790d53f9e2c7a7b9ecea003ad66092
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-cpgsPolicy: CPGSC10-234,Y
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20250910074259epcas2p294790d53f9e2c7a7b9ecea003ad66092
-References: <20250910074251.8148-1-sehee1.jeong@samsung.com>
-	<CGME20250910074259epcas2p294790d53f9e2c7a7b9ecea003ad66092@epcas2p2.samsung.com>
 
-On heterogeneous systems with big.LITTLE architectures, timer migration
-may cause timers from little cores to run on big cores, or vice versa,
-because core type differences are not considered in the current timer
-migration logic. This can be undesirable in systems that require
-strict power management.
+On 09/09/2025 14:25, Gatien CHEVALLIER wrote:
+> 
+> 
+> On 9/9/25 12:12, Clément Le Goffic wrote:
+>> From: Clément Le Goffic <clement.legoffic@foss.st.com>
+>>
+>> Other driver than rifsc and etzpc can implement firewall ops, such as
+>> rcc.
+>> In order for them to have access to the ops and type of this framework,
+>> we need to get the `stm32_firewall.h` file in the include/ folder.
+>>
+>> Signed-off-by: Clément Le Goffic <clement.legoffic@foss.st.com>
+>> Signed-off-by: Clément Le Goffic <legoffic.clement@gmail.com>
+>> ---
+>>   drivers/bus/stm32_etzpc.c                       | 3 +--
+>>   drivers/bus/stm32_firewall.c                    | 3 +--
+>>   drivers/bus/stm32_rifsc.c                       | 3 +--
+>>   {drivers => include/linux}/bus/stm32_firewall.h | 0
+>>   4 files changed, 3 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/drivers/bus/stm32_etzpc.c b/drivers/bus/stm32_etzpc.c
+>> index 7fc0f16960be..4918a14e507e 100644
+>> --- a/drivers/bus/stm32_etzpc.c
+>> +++ b/drivers/bus/stm32_etzpc.c
+>> @@ -5,6 +5,7 @@
+>>   #include <linux/bitfield.h>
+>>   #include <linux/bits.h>
+>> +#include <linux/bus/stm32_firewall.h>
+>>   #include <linux/device.h>
+>>   #include <linux/err.h>
+>>   #include <linux/init.h>
+>> @@ -16,8 +17,6 @@
+>>   #include <linux/platform_device.h>
+>>   #include <linux/types.h>
+>> -#include "stm32_firewall.h"
+>> -
+>>   /*
+>>    * ETZPC registers
+>>    */
+>> diff --git a/drivers/bus/stm32_firewall.c b/drivers/bus/stm32_firewall.c
+>> index 2fc9761dadec..ef4988054b44 100644
+>> --- a/drivers/bus/stm32_firewall.c
+>> +++ b/drivers/bus/stm32_firewall.c
+>> @@ -5,6 +5,7 @@
+>>   #include <linux/bitfield.h>
+>>   #include <linux/bits.h>
+>> +#include <linux/bus/stm32_firewall.h>
+>>   #include <linux/bus/stm32_firewall_device.h>
+>>   #include <linux/device.h>
+>>   #include <linux/err.h>
+>> @@ -18,8 +19,6 @@
+>>   #include <linux/types.h>
+>>   #include <linux/slab.h>
+>> -#include "stm32_firewall.h"
+>> -
+>>   /* Corresponds to STM32_FIREWALL_MAX_EXTRA_ARGS + firewall ID */
+>>   #define STM32_FIREWALL_MAX_ARGS        
+>> (STM32_FIREWALL_MAX_EXTRA_ARGS + 1)
+>> diff --git a/drivers/bus/stm32_rifsc.c b/drivers/bus/stm32_rifsc.c
+>> index 4cf1b60014b7..643ddd0a5f54 100644
+>> --- a/drivers/bus/stm32_rifsc.c
+>> +++ b/drivers/bus/stm32_rifsc.c
+>> @@ -5,6 +5,7 @@
+>>   #include <linux/bitfield.h>
+>>   #include <linux/bits.h>
+>> +#include <linux/bus/stm32_firewall.h>
+>>   #include <linux/device.h>
+>>   #include <linux/err.h>
+>>   #include <linux/init.h>
+>> @@ -16,8 +17,6 @@
+>>   #include <linux/platform_device.h>
+>>   #include <linux/types.h>
+>> -#include "stm32_firewall.h"
+>> -
+>>   /*
+>>    * RIFSC offset register
+>>    */
+>> diff --git a/drivers/bus/stm32_firewall.h b/include/linux/bus/ 
+>> stm32_firewall.h
+>> similarity index 100%
+>> rename from drivers/bus/stm32_firewall.h
+>> rename to include/linux/bus/stm32_firewall.h
+>>
 
-For example, if timers are frequently migrated to a big CPU, it must
-handle callbacks that could have run on a little CPU. This reduces the
-big CPU's idle residency and increases overall energy consumption due to
-higher power draw on the big CPU.
+Hi Gatien
 
-To avoid this issue, introduce an early boot parameter to optionally
-disable timer migration:
+> As the firewall header is moved to a dedicated firewall directory,
 
-    tmigr=on|off	(default: on)
+I don't move it to a dedicated firewall directory just to the "bus" 
+directory where the "stm32_firewall_device.h" header file is already 
+located.
 
-When set to "off", timer migration initialization is skipped entirely.
+> maybe it would be coherent to create the same kind of directory
+> for the sources as non-buses drivers use it. I can test it on my
+> side if you're willing to make the change.
 
-Signed-off-by: Sehee Jeong <sehee1.jeong@samsung.com>
----
- .../admin-guide/kernel-parameters.txt         |  4 ++++
- kernel/time/timer_migration.c                 | 19 +++++++++++++++++++
- 2 files changed, 23 insertions(+)
+Do you mean create an include/linux/bus/firewall/ directory ?
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index ab4c049faba9..0f5d42c046bb 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -6783,6 +6783,10 @@
- 			Force threading of all interrupt handlers except those
- 			marked explicitly IRQF_NO_THREAD.
- 
-+	tmigr		[KNL,EARLY] Enable/disable timer migration
-+			Valid parameters: on, off
-+			Default: on
-+
- 	topology=	[S390,EARLY]
- 			Format: {off | on}
- 			Specify if the kernel should make use of the cpu
-diff --git a/kernel/time/timer_migration.c b/kernel/time/timer_migration.c
-index 72538baa7a1f..00e3740aec98 100644
---- a/kernel/time/timer_migration.c
-+++ b/kernel/time/timer_migration.c
-@@ -422,6 +422,8 @@ static unsigned int tmigr_crossnode_level __read_mostly;
- 
- static DEFINE_PER_CPU(struct tmigr_cpu, tmigr_cpu);
- 
-+static bool tmigr_enabled = true;
-+
- #define TMIGR_NONE	0xFF
- #define BIT_CNT		8
- 
-@@ -1790,6 +1792,9 @@ static int __init tmigr_init(void)
- 
- 	BUILD_BUG_ON_NOT_POWER_OF_2(TMIGR_CHILDREN_PER_GROUP);
- 
-+	if (!tmigr_enabled)
-+		return 0;
-+
- 	/* Nothing to do if running on UP */
- 	if (ncpus == 1)
- 		return 0;
-@@ -1854,3 +1859,17 @@ static int __init tmigr_init(void)
- 	return ret;
- }
- early_initcall(tmigr_init);
-+
-+static int __init tmigr_setup(char *str)
-+{
-+	if (!str)
-+		return 0;
-+
-+	if (!strcmp(str, "off"))
-+		tmigr_enabled = false;
-+	else if (!strcmp(str, "on"))
-+		tmigr_enabled = true;
-+
-+	return 0;
-+}
-+early_param("tmigr", tmigr_setup);
--- 
-2.49.0
-
+Best regards,
+Clément
 
