@@ -1,277 +1,375 @@
-Return-Path: <linux-doc+bounces-59782-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59784-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 472C9B51F27
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 19:41:48 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 73449B52057
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 20:38:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 01D8E4461B2
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 17:41:47 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7BFD01C86CA6
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 18:38:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 414271E3DD7;
-	Wed, 10 Sep 2025 17:41:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88DDB2C235F;
+	Wed, 10 Sep 2025 18:38:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ESkeav3L"
+	dkim=pass (2048-bit key) header.d=hpe.com header.i=@hpe.com header.b="DgTe6o5R"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-002e3701.pphosted.com (mx0a-002e3701.pphosted.com [148.163.147.86])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51E972D0C91
-	for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 17:41:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71BA61E5219;
+	Wed, 10 Sep 2025 18:38:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.147.86
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757526102; cv=none; b=UKjFL65iIUdvhaObPePfvMo5FYQUol2DX8srkhQhg+NAA10FBZ7fuD1idJXgmksKIJy86XeJD9f4C6vh7Xf/ErlIOwpJU3RD8OuXok/E4no5zFlFppfWZ/XNsoXYvVxHB4GwgEhXZjQ6AEx9C+cBVkscQr9yUzqD5hLnbLHD720=
+	t=1757529508; cv=none; b=RkWNvcIcyoOkqxeYWv3IEmSNGRMJwmsP6xvpIe7pvksGRDzjiC/uq0VOzKnpfy/xDliq5FyehFpQ+Y9zKa49wRybkpFZilGFqSE4TjXp1ER8z5I+mqCpXdpWVwUHwfbxgHPyGVQzK9PfbTXRMfkqJFmIadrG/wa2qszNvpR1lLk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757526102; c=relaxed/simple;
-	bh=ya3nCeHXX4cIOcVB3zT+qGwqtNq6bvInaVnCb1Wx2VE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=eWdgUUP9pyBd7Vns7Kozr1r0OFfx2AW0B0pMGFuD0iszgr7L3WOl7Gn7YO91juRCEU/5kl3DGEWdm0KwwbdXdwqxzZkHEqX7D76AOtaZMr/SzDthJKd1OQbnKWMMcyTk7Qn4L3Lxtjz72O7fIqRaSdBop+92arIHbdNf8Uza87Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ESkeav3L; arc=none smtp.client-ip=209.85.160.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qt1-f170.google.com with SMTP id d75a77b69052e-4b5f6ad78e4so48649181cf.1
-        for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 10:41:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757526099; x=1758130899; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qHT+u2S9m3RVDHyPVmpZb2IEdtnx3gNXVCQQWQ1AuyM=;
-        b=ESkeav3L1JysDAQu8Z3qVss0OcDtwx/8+xGNo7tA6jAl5WtvBeNZ2PFPmetQKo8gdW
-         WKmVgT/Mw3VUSuwX8FKdgCH18t8zs3IR8wSMXzj+wRJnzId51LIca5ArJ+Ge5CCTr3Hr
-         W7hvwTimN3YbCFyo3nnGahUakdOPSQTSOkrBl8XW6VCkru6Zlh9wpesSU4cDcIWJmPkE
-         IZi3Qy3nE5eMKg2KLPssYRXY2RtWMF640hkYA0c3+50ndWVzKdzTCEWavaEIgwNGX1gu
-         Pe6wMZ5nreXtx/eJ7Go71KLSCN8vuTHOhSeaIZtpOX6u5bLf+B1DN3Dpm7rzx0C7gST5
-         E+eA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757526099; x=1758130899;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=qHT+u2S9m3RVDHyPVmpZb2IEdtnx3gNXVCQQWQ1AuyM=;
-        b=dndyS70AMrLpXbnyr/Fk4CQ7oU20Mlg3Bn2/Ra/EoHEVWZZoB1HpuDH1UOXr82tcJn
-         Hxj+w5fF6z92rwG/vH70q5pVT7z0QMA4pP79kaistdbFmqVhP9XvINewdX89ZF/57y8k
-         /tPEnekyVwCwRbJsi1hPKfiny/DIt51ygGFFHHMrMCxWdE4i3VLNpgNAf8rwpWqcUGwm
-         RsrtVH5/2GJEWX5fHhyO1Db2FKSbrYNcwnVzFz4Zy+yrfWYfwAfzCtoE5ZIj8cSnOhTH
-         dZyn7uDa/wZpAlDXKodMYyu9RT9lEdw3XyUMfqxX1PgKzdhj1OUsXpqNahch7grLyE64
-         ozwA==
-X-Forwarded-Encrypted: i=1; AJvYcCUM0fxhUf1Up+0NJ7HIpPlYEtf85bbe7ox0yLEYiYoTDXPtAu5joEvDSy6l3sfuWtRiKomCAPferiI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwMdW0+mqb73QfiPRdC+PkE1TDlJkfvCgyuRCmldxeSa6/CpHK1
-	RkwV7lYshOaePsIRs481lvx9B9/vQIoXOD1XRLjF4Nrkv/86R6TfeWojxHTnqRPQs1/Wc/ZiCvk
-	K6lB0BXEfy7M+ihGC2yNy0/tDo1hytD4=
-X-Gm-Gg: ASbGncvcXrCR8KDQWGnQ24Z11B2Pt/OsLBVPtWUUxVw4d6kaqfz29ooTB1jt1RZEfwA
-	mVC91pplSuAH/u1DTemOgriDuIEzvadbYlhyvasHRYObkf1MLyi36JZNc6k8DRldL09RREXKeXe
-	hndnzT9Co/vxO23qQBQG2vVaYJ5aD/S1GFSu0yQx1l43J9hSyf7cEdZUsrMPNQOiLxOB+L3aiSa
-	ZIZqjtfw9E4fza1Chn4yGgO7rTZUcRilw==
-X-Google-Smtp-Source: AGHT+IGM4v8CCbZik1kELSMXAYG/GKBchBBFALBliyv/onlKWZFY2W1P7n4z7sWDqXgSFcqrmLLSXIe+ROn9OwqKnI0=
-X-Received: by 2002:ac8:5f14:0:b0:4b3:50b0:d7f with SMTP id
- d75a77b69052e-4b5f8464d8amr161064711cf.61.1757526099174; Wed, 10 Sep 2025
- 10:41:39 -0700 (PDT)
+	s=arc-20240116; t=1757529508; c=relaxed/simple;
+	bh=auEXkjS9eGsy5eS8nnhgf6WBNhu6Dz8aKxoEQIYFu1w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=n3EUad2xITFYj8nN4wIgCV9Wbo4/2zl5U207pILXTiMqQzIL8lpaPzjGlfbT+zEIP+2RitvRxb8k9hVyIqwK66EYSoVKBBX8YXZqsNKYSqF+PO3x0WGGO8Af5MRjoWoymgwzY5foE1ytbFl8SX56oAzl2F1btrDifQYwnP/PY6U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=hpe.com; spf=pass smtp.mailfrom=hpe.com; dkim=pass (2048-bit key) header.d=hpe.com header.i=@hpe.com header.b=DgTe6o5R; arc=none smtp.client-ip=148.163.147.86
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=hpe.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hpe.com
+Received: from pps.filterd (m0148663.ppops.net [127.0.0.1])
+	by mx0a-002e3701.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58A8X3fW019889;
+	Wed, 10 Sep 2025 17:50:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hpe.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pps0720; bh=/g
+	eJMzrD/stAu84GwKoohScKyZtKCpH1bmIPC+CipSA=; b=DgTe6o5RviA2xUGFlw
+	9GQjI4Kd3KwBC0VZriEmVdQlIMCYRHby/V4q+bmpkqrBt/USkrKGwByxWsTjhDQo
+	GYAQHzDpAol8ln8jQ+8be/wABj+Q56y2Fe7YT+0OrZYUOWYQKEJH6aayZuxHKaPG
+	citMYwtAATrDEO3vLDMUJuGrbEdgMQvMpiT5PFoepx2MlFscwc9pPbYTovshCJK4
+	tGa9BiEnSbyyjd7qP8zRiM9orGoy3uKjp5/VXBTR5Loepkm/r91cur8HXFH9bBP0
+	kKsUYDmN0Lgepwp7kqyWAyO+b+1S3STyGE9jCs8EYsOQZhJgkUe7ru6H9Fzf8Txq
+	jEzQ==
+Received: from p1lg14879.it.hpe.com ([16.230.97.200])
+	by mx0a-002e3701.pphosted.com (PPS) with ESMTPS id 492pbmbht8-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 10 Sep 2025 17:50:08 +0000 (GMT)
+Received: from p1lg14885.dc01.its.hpecorp.net (unknown [10.119.18.236])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by p1lg14879.it.hpe.com (Postfix) with ESMTPS id E781A132DA;
+	Wed, 10 Sep 2025 17:50:06 +0000 (UTC)
+Received: from HPE-5CG20646DK.localdomain (unknown [16.231.227.36])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by p1lg14885.dc01.its.hpecorp.net (Postfix) with ESMTPS id BCD60808B9E;
+	Wed, 10 Sep 2025 17:50:03 +0000 (UTC)
+Date: Wed, 10 Sep 2025 12:50:01 -0500
+From: Kyle Meyer <kyle.meyer@hpe.com>
+To: Jiaqi Yan <jiaqiyan@google.com>
+Cc: akpm@linux-foundation.org, corbet@lwn.net, david@redhat.com,
+        linmiaohe@huawei.com, shuah@kernel.org, tony.luck@intel.com,
+        Liam.Howlett@oracle.com, bp@alien8.de, hannes@cmpxchg.org,
+        jack@suse.cz, jane.chu@oracle.com, joel.granados@kernel.org,
+        laoar.shao@gmail.com, lorenzo.stoakes@oracle.com,
+        mclapinski@google.com, mhocko@suse.com, nao.horiguchi@gmail.com,
+        osalvador@suse.de, rafael.j.wysocki@intel.com, rppt@kernel.org,
+        russ.anderson@hpe.com, shawn.fan@intel.com, surenb@google.com,
+        vbabka@suse.cz, linux-acpi@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-mm@kvack.org
+Subject: Re: [PATCH] mm/memory-failure: Disable soft offline for HugeTLB
+ pages by default
+Message-ID: <aMG6SRckMsnQH7ov@hpe.com>
+References: <aMGkAI3zKlVsO0S2@hpe.com>
+ <CACw3F50yTvMphcp111Qzh3PKm+FYoXX9g_sLpV5TPuubqK2+Qw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250908185122.3199171-1-joannelkoong@gmail.com>
- <20250908185122.3199171-12-joannelkoong@gmail.com> <aL9xb5Jw8tvIRMcQ@debian>
- <CAJnrk1YPpNs811dwWo+ts1xwFi-57OgWvSO4_8WLL_3fJgzrFw@mail.gmail.com> <488d246b-13c7-4e36-9510-8ae2de450647@linux.alibaba.com>
-In-Reply-To: <488d246b-13c7-4e36-9510-8ae2de450647@linux.alibaba.com>
-From: Joanne Koong <joannelkoong@gmail.com>
-Date: Wed, 10 Sep 2025 13:41:25 -0400
-X-Gm-Features: Ac12FXx3f2gw2O3qOKT1Xmh_ecXNa2Ke7YGwp9bTrR6B-OHcqgL5c7RB1qg35NQ
-Message-ID: <CAJnrk1a5af-BMPUM3HfGwKZ=zoN4bcmbViLBWMtLao1KfK2gww@mail.gmail.com>
-Subject: Re: [PATCH v2 11/16] iomap: add caller-provided callbacks for read
- and readahead
-To: Gao Xiang <hsiangkao@linux.alibaba.com>
-Cc: djwong@kernel.org, hch@infradead.org, brauner@kernel.org, 
-	miklos@szeredi.hu, linux-block@vger.kernel.org, gfs2@lists.linux.dev, 
-	linux-fsdevel@vger.kernel.org, kernel-team@meta.com, 
-	linux-xfs@vger.kernel.org, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CACw3F50yTvMphcp111Qzh3PKm+FYoXX9g_sLpV5TPuubqK2+Qw@mail.gmail.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA5MDE0NSBTYWx0ZWRfX70fGiEohJ9bP
+ lIvn92CIdAh7lj4EcZGMnRtHE+i1TJkGazCcTQ3KuwLV1yjg+5JMJhdnGK61fDEBWZA4mRSfWv5
+ wwjvJEAcdRsP+U7PaPjSej75ufZDgAzBbQywpi+6w3r4fL61VZYH4om0OZxO4re2+QZdsnePLiA
+ O/REblox6VzhnCQ4Ju6r/ljAhowDTyRvSJt6SiplkP7JRKE/w03OSuQ2s1QGeHrvZv6Rna9pPw7
+ RRJBOplSqwwdgwOs6/eOJJGt70pVZfIylDgk5kHeIA/JHNOrxRh0zGxBYDclObgjYRUic3+5nHl
+ 6DLW6iAupZgv8qYRC75kR4NlBZbSjlNUs5v3u0WdvCdqSpaVCffZYUYk2r0bFBxuUWrWazpDgGY
+ xi5hsyTB
+X-Proofpoint-ORIG-GUID: sapQoHVJmJuz9U7H9ppYAnZnn-khBFFJ
+X-Authority-Analysis: v=2.4 cv=AOzi3l3A c=1 sm=1 tr=0 ts=68c1ba50 cx=c_pps
+ a=5jkVtQsCUlC8zk5UhkBgHg==:117 a=5jkVtQsCUlC8zk5UhkBgHg==:17
+ a=IkcTkHD0fZMA:10 a=yJojWOMRYYMA:10 a=VwQbUJbxAAAA:8 a=QyXUC8HyAAAA:8
+ a=MvuuwTCpAAAA:8 a=jDLjrVBNiWNpbI7x-vQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: sapQoHVJmJuz9U7H9ppYAnZnn-khBFFJ
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-10_03,2025-09-10_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 spamscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 bulkscore=0 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2507300000 definitions=main-2509090145
 
-On Tue, Sep 9, 2025 at 7:21=E2=80=AFPM Gao Xiang <hsiangkao@linux.alibaba.c=
-om> wrote:
->
-> Hi Joanne,
->
-> On 2025/9/9 23:24, Joanne Koong wrote:
-> > On Mon, Sep 8, 2025 at 8:14=E2=80=AFPM Gao Xiang <xiang@kernel.org> wro=
-te:
-> >>
-> >> Hi Joanne,
-> >>
-> >> On Mon, Sep 08, 2025 at 11:51:17AM -0700, Joanne Koong wrote:
-> >>> Add caller-provided callbacks for read and readahead so that it can b=
-e
-> >>> used generically, especially by filesystems that are not block-based.
-> >>>
-> >>> In particular, this:
-> >>> * Modifies the read and readahead interface to take in a
-> >>>    struct iomap_read_folio_ctx that is publicly defined as:
-> >>>
-> >>>    struct iomap_read_folio_ctx {
-> >>>        const struct iomap_read_ops *ops;
-> >>>        struct folio *cur_folio;
-> >>>        struct readahead_control *rac;
-> >>>        void *private;
-> >>>    };
-> >>>
-> >>>    where struct iomap_read_ops is defined as:
-> >>>
-> >>>    struct iomap_read_ops {
-> >>>        int (*read_folio_range)(const struct iomap_iter *iter,
-> >>>                               struct iomap_read_folio_ctx *ctx,
-> >>>                               loff_t pos, size_t len);
-> >>>        int (*read_submit)(struct iomap_read_folio_ctx *ctx);
-> >>>    };
-> >>>
-> >>
-> >> No, I don't think `struct iomap_read_folio_ctx` has another
-> >> `.private` makes any sense, because:
-> >>
-> >>   - `struct iomap_iter *iter` already has `.private` and I think
-> >>     it's mainly used for per-request usage; and your new
-> >>     `.read_folio_range` already passes
-> >>      `const struct iomap_iter *iter` which has `.private`
-> >>     I don't think some read-specific `.private` is useful in any
-> >>     case, also below.
-> >>
-> >>   - `struct iomap_read_folio_ctx` cannot be accessed by previous
-> >>     .iomap_{begin,end} helpers, which means `struct iomap_read_ops`
-> >>     is only useful for FUSE read iter/submit logic.
-> >>
-> >> Also after my change, the prototype will be:
-> >>
-> >> int iomap_read_folio(const struct iomap_ops *ops,
-> >>                       struct iomap_read_folio_ctx *ctx, void *private2=
-);
-> >> void iomap_readahead(const struct iomap_ops *ops,
-> >>                       struct iomap_read_folio_ctx *ctx, void *private2=
-);
-> >>
-> >> Is it pretty weird due to `.iomap_{begin,end}` in principle can
-> >> only use `struct iomap_iter *` but have no way to access
-> >> ` struct iomap_read_folio_ctx` to get more enough content for
-> >> read requests.
+On Wed, Sep 10, 2025 at 09:44:24AM -0700, Jiaqi Yan wrote:
+> On Wed, Sep 10, 2025 at 9:16 AM Kyle Meyer <kyle.meyer@hpe.com> wrote:
 > >
-> > Hi Gao,
+> > Soft offlining a HugeTLB page reduces the available HugeTLB page pool.
+> > Since HugeTLB pages are preallocated, reducing the available HugeTLB
+> > page pool can cause allocation failures.
 > >
-> > imo I don't think it makes sense to, if I'm understanding what you're
-> > proposing correctly, have one shared data pointer between iomap
-> > read/readahead and the iomap_{begin,end} helpers because
->
-> My main concern is two `private` naming here: I would like to add
-> `private` to iomap_read/readahead() much like __iomap_dio_rw() at
-> least to make our new feature work efficiently.
->
+> > /proc/sys/vm/enable_soft_offline provides a sysctl interface to
+> > disable/enable soft offline:
 > >
-> > a) I don't think it's guaranteed that the data needed by
-> > read/readahead and iomap_{begin,end} is the same.  I guess we could
-> > combine the data each needs altogether into one struct, but it seems
-> > simpler and cleaner to me to just have the two be separate.
+> > 0 - Soft offline is disabled.
+> > 1 - Soft offline is enabled.
 > >
-> > b) I'm not sure about the erofs use case, but at least for what I'm
-> > seeing for fuse and the block-based filesystems currently using iomap,
-> > the data needed by iomap read/readahead (eg bios, the fuse
-> > fuse_fill_read_data) is irrelevant for iomap_{begin/end} and it seems
-> > unclean to expose that extraneous info. (btw I don't think it's true
-> > that iomap_iter is mainly used for per-request usage - for readahead
-> > for example, iomap_{begin,end} is called before and after we service
-> > the entire readahead, not called per request, whereas
-> > .read_folio_range() is called per request).
->
-> I said `per-request` meant a single sync read or readahead request,
-> which is triggered by vfs or mm for example.
->
+> > The current sysctl interface does not distinguish between HugeTLB pages
+> > and other page types.
 > >
-> > c) imo iomap_{begin,end} is meant to be a more generic interface and I
-> > don't think it makes sense to tie read-specific data to it. For
-> > example, some filesystems (eg gfs2) use the same iomap_ops across
-> > different file operations (eg buffered writes, direct io, reads, bmap,
-> > etc).
->
-> Previously `.iomap_{begin,end}` participates in buffer read and write
-> I/O paths (except for page writeback of course) as you said, in
-> principle users only need to care about fields in `struct iomap_iter`.
->
-> `struct iomap_readpage_ctx` is currently used as an internal structure
-> which is completely invisible to filesystems (IOWs, filesystems don't
-> need to care or specify any of that).
->
-> After your proposal, new renamed `struct iomap_read_folio_ctx` will be
-> exposed to individual filesystems too, but that makes two external
-> context structures for the buffer I/O reads (`struct iomap_iter` and
-> `struct iomap_read_folio_ctx`) instead of one.
->
-> I'm not saying your proposal doesn't work, but:
->
->   - which is unlike `struct iomap_writepage_ctx` because writeback path
->     doesn't have `struct iomap_iter` involved, and it has only that
->     exact one `struct iomap_writepage_ctx` context and all callbacks
->     use that only;
->
->   - take a look at `iomap_dio_rw` and `iomap_dio_ops`, I think it's
->     somewhat similiar to the new `struct iomap_read_ops` in some
->     extent, but dio currently also exposes the exact one context
->     (`struct iomap_iter`) to users.
->
->   - take a look at `iomap_write_ops`, it also exposes
->     `struct iomap_iter` only. you may say `folio`, `pos`, `len` can be
->     wrapped as another `struct iomap_write_ctx` if needed, but that is
->     not designed to be exposed to be specfied by write_iter (e.g.
->     fuse_cache_write_iter)
->
-> In short, traditionally the buffered read/write external context is
-> the only unique one `struct iomap_iter` (`struct iomap_readpage_ctx`
-> is only for iomap internal use), after your proposal there will be
-> two external contexts specified by users (.read_folio and .readahead)
-> but `.iomap_{begin,end}` is unable to get one of them, which is
-> unlike the current writeback and direct i/o paths (they uses one
-> external context too.)
->
-> Seperate into two contexts works for your use case, but it may
-> cause issues since future developers have to decide where to
-> place those new context fields for buffer I/O paths (
-> `struct iomap_iter` or `struct iomap_read_folio_ctx`), it's still
-> possible but may cause further churn on the codebase perspective.
->
-> That is my minor concern, but my main concern is still `private`
-> naming.
+> > Disable soft offline for HugeTLB pages by default (1) and extend the
+> > sysctl interface to preserve existing behavior (2):
+> >
+> > 0 - Soft offline is disabled.
+> > 1 - Soft offline is enabled (excluding HugeTLB pages).
+> > 2 - Soft offline is enabled (including HugeTLB pages).
+> >
+> > Update documentation for the sysctl interface, reference the sysctl
+> > interface in the sysfs ABI documentation, and update HugeTLB soft
+> > offline selftests.
+> >
+> > Reported-by: Shawn Fan <shawn.fan@intel.com>
+> > Suggested-by: Tony Luck <tony.luck@intel.com>
+> > Signed-off-by: Kyle Meyer <kyle.meyer@hpe.com>
+> > ---
+> >
+> > Tony's original patch disabled soft offline for HugeTLB pages when
+> > a correctable memory error reported via GHES (with "error threshold
+> > exceeded" set) happened to be on a HugeTLB page:
+> >
+> > https://lore.kernel.org/all/20250904155720.22149-1-tony.luck@intel.com 
+> >
+> > This patch disables soft offline for HugeTLB pages by default
+> > (not just from GHES).
+> >
+> > ---
+> >  .../ABI/testing/sysfs-memory-page-offline     |  6 ++++
+> >  Documentation/admin-guide/sysctl/vm.rst       | 18 ++++++++---
+> >  mm/memory-failure.c                           | 21 ++++++++++--
+> >  .../selftests/mm/hugetlb-soft-offline.c       | 32 +++++++++++++------
+> >  4 files changed, 60 insertions(+), 17 deletions(-)
+> >
+> > diff --git a/Documentation/ABI/testing/sysfs-memory-page-offline b/Documentation/ABI/testing/sysfs-memory-page-offline
+> > index 00f4e35f916f..befb89ae39ec 100644
+> > --- a/Documentation/ABI/testing/sysfs-memory-page-offline
+> > +++ b/Documentation/ABI/testing/sysfs-memory-page-offline
+> > @@ -20,6 +20,12 @@ Description:
+> >                 number, or a error when the offlining failed.  Reading
+> >                 the file is not allowed.
+> >
+> > +               Soft-offline can be disabled/enabled via sysctl:
+> > +               /proc/sys/vm/enable_soft_offline
+> > +
+> > +               For details, see:
+> > +               Documentation/admin-guide/sysctl/vm.rst
+> > +
+> >  What:          /sys/devices/system/memory/hard_offline_page
+> >  Date:          Sep 2009
+> >  KernelVersion: 2.6.33
+> > diff --git a/Documentation/admin-guide/sysctl/vm.rst b/Documentation/admin-guide/sysctl/vm.rst
+> > index 4d71211fdad8..ae56372bd604 100644
+> > --- a/Documentation/admin-guide/sysctl/vm.rst
+> > +++ b/Documentation/admin-guide/sysctl/vm.rst
+> > @@ -309,19 +309,29 @@ physical memory) vs performance / capacity implications in transparent and
+> >  HugeTLB cases.
+> >
+> >  For all architectures, enable_soft_offline controls whether to soft offline
+> > -memory pages.  When set to 1, kernel attempts to soft offline the pages
+> > -whenever it thinks needed.  When set to 0, kernel returns EOPNOTSUPP to
+> > -the request to soft offline the pages.  Its default value is 1.
+> > +memory pages:
+> > +
+> > +- 0: Soft offline is disabled.
+> > +- 1: Soft offline is enabled (excluding HugeTLB pages).
+> > +- 2: Soft offline is enabled (including HugeTLB pages).
+> 
+> Would it be better to keep/inherit the previous documented behavior "1
+> - Soft offline is enabled (no matter what type of the page is)"? Thus
+> it will have no impact to users that are very nervous about corrected
+> memory errors and willing to lose hugetlb page. Something like:
+> 
+>   enum soft_offline {
+>       SOFT_OFFLINE_DISABLED = 0,
+>       SOFT_OFFLINE_ENABLED,
+>       SOFT_OFFLINE_ENABLED_SKIP_HUGETLB,
+>       // SOFT_OFFLINE_ENABLED_SKIP_XXX...
+>   };
 
-Hi Gao,
+I don't have a strong opinion on the default because there's a sysctl
+interface, but that seems reasonable. I'll wait for more feedback before
+putting together a v2.
 
-In my mind, the big question is whether or not the data the
-filesystems pass in is logically shared by both iomap_begin/end and
-buffered reads/writes/dio callbacks, or whether the data needed by
-both are basically separate entities but have to be frankensteined
-together so that it can be passed in through iter->private. My sense
-of the read/readahead code is that the data needed by iomap begin/end
-vs buffered reads are basically logically separate entities. I see
-your point about how the existing code for buffered writes and dio in
-iomap have them combined into one, but imo, if the iomap_iter data is
-a separate entity from the data needed in the callbacks, then those
-pointers should be separate.
-
-But I also am happy to change this back to having it the way it was
-for v1 where everything just went through iter->private. I don't feel
-strongly about this decision, I'm happy with whichever way we go with.
-
-Thanks,
-Joanne
-
->
-> Thanks,
-> Gao Xiang
->
-> > Thanks,
-> > Joanne
+> > +
+> > +The default is 1.
+> > +
+> > +If soft offline is disabled for the requested page type, EOPNOTSUPP is returned.
 > >
-> >>
-> >> Thanks,
-> >> Gao Xiang
->
+> >  It is worth mentioning that after setting enable_soft_offline to 0, the
+> >  following requests to soft offline pages will not be performed:
+> >
+> > +- Request to soft offline from sysfs (soft_offline_page).
+> > +
+> >  - Request to soft offline pages from RAS Correctable Errors Collector.
+> >
+> > -- On ARM, the request to soft offline pages from GHES driver.
+> > +- On ARM and X86, the request to soft offline pages from GHES driver.
+> >
+> >  - On PARISC, the request to soft offline pages from Page Deallocation Table.
+> >
+> > +Note: Soft offlining a HugeTLB page reduces the HugeTLB page pool.
+> > +
+> >  extfrag_threshold
+> >  =================
+> >
+> > diff --git a/mm/memory-failure.c b/mm/memory-failure.c
+> > index fc30ca4804bf..cb59a99b48c5 100644
+> > --- a/mm/memory-failure.c
+> > +++ b/mm/memory-failure.c
+> > @@ -64,11 +64,18 @@
+> >  #include "internal.h"
+> >  #include "ras/ras_event.h"
+> >
+> > +enum soft_offline {
+> > +       SOFT_OFFLINE_DISABLED = 0,
+> > +       SOFT_OFFLINE_ENABLED_SKIP_HUGETLB,
+> > +       SOFT_OFFLINE_ENABLED
+> > +};
+> > +
+> >  static int sysctl_memory_failure_early_kill __read_mostly;
+> >
+> >  static int sysctl_memory_failure_recovery __read_mostly = 1;
+> >
+> > -static int sysctl_enable_soft_offline __read_mostly = 1;
+> > +static int sysctl_enable_soft_offline __read_mostly =
+> > +       SOFT_OFFLINE_ENABLED_SKIP_HUGETLB;
+> >
+> >  atomic_long_t num_poisoned_pages __read_mostly = ATOMIC_LONG_INIT(0);
+> >
+> > @@ -150,7 +157,7 @@ static const struct ctl_table memory_failure_table[] = {
+> >                 .mode           = 0644,
+> >                 .proc_handler   = proc_dointvec_minmax,
+> >                 .extra1         = SYSCTL_ZERO,
+> > -               .extra2         = SYSCTL_ONE,
+> > +               .extra2         = SYSCTL_TWO,
+> >         }
+> >  };
+> >
+> > @@ -2799,12 +2806,20 @@ int soft_offline_page(unsigned long pfn, int flags)
+> >                 return -EIO;
+> >         }
+> >
+> > -       if (!sysctl_enable_soft_offline) {
+> > +       if (sysctl_enable_soft_offline == SOFT_OFFLINE_DISABLED) {
+> >                 pr_info_once("disabled by /proc/sys/vm/enable_soft_offline\n");
+> >                 put_ref_page(pfn, flags);
+> >                 return -EOPNOTSUPP;
+> >         }
+> >
+> > +       if (sysctl_enable_soft_offline == SOFT_OFFLINE_ENABLED_SKIP_HUGETLB) {
+> > +               if (folio_test_hugetlb(pfn_folio(pfn))) {
+> > +                       pr_info_once("disabled for HugeTLB pages by /proc/sys/vm/enable_soft_offline\n");
+> > +                       put_ref_page(pfn, flags);
+> > +                       return -EOPNOTSUPP;
+> > +               }
+> > +       }
+> > +
+> >         mutex_lock(&mf_mutex);
+> >
+> >         if (PageHWPoison(page)) {
+> > diff --git a/tools/testing/selftests/mm/hugetlb-soft-offline.c b/tools/testing/selftests/mm/hugetlb-soft-offline.c
+> > index f086f0e04756..7e2873cd0a6d 100644
+> > --- a/tools/testing/selftests/mm/hugetlb-soft-offline.c
+> > +++ b/tools/testing/selftests/mm/hugetlb-soft-offline.c
+> > @@ -1,10 +1,15 @@
+> >  // SPDX-License-Identifier: GPL-2.0
+> >  /*
+> >   * Test soft offline behavior for HugeTLB pages:
+> > - * - if enable_soft_offline = 0, hugepages should stay intact and soft
+> > - *   offlining failed with EOPNOTSUPP.
+> > - * - if enable_soft_offline = 1, a hugepage should be dissolved and
+> > - *   nr_hugepages/free_hugepages should be reduced by 1.
+> > + *
+> > + * - if enable_soft_offline = 0 (SOFT_OFFLINE_DISABLED), HugeTLB pages
+> > + *   should stay intact and soft offlining failed with EOPNOTSUPP.
+> > + *
+> > + * - if enable_soft_offline = 1 (SOFT_OFFLINE_ENABLED_SKIP_HUGETLB), HugeTLB pages
+> > + *   should stay intact and soft offlining failed with EOPNOTSUPP.
+> > + *
+> > + * - if enable_soft_offline = 2 (SOFT_OFFLINE_ENABLED), a HugeTLB page should be
+> > + *   dissolved and nr_hugepages/free_hugepages should be reduced by 1.
+> >   *
+> >   * Before running, make sure more than 2 hugepages of default_hugepagesz
+> >   * are allocated. For example, if /proc/meminfo/Hugepagesize is 2048kB:
+> > @@ -32,6 +37,12 @@
+> >
+> >  #define EPREFIX " !!! "
+> >
+> > +enum soft_offline {
+> > +       SOFT_OFFLINE_DISABLED = 0,
+> > +       SOFT_OFFLINE_ENABLED_SKIP_HUGETLB,
+> > +       SOFT_OFFLINE_ENABLED
+> > +};
+> > +
+> >  static int do_soft_offline(int fd, size_t len, int expect_errno)
+> >  {
+> >         char *filemap = NULL;
+> > @@ -83,7 +94,7 @@ static int set_enable_soft_offline(int value)
+> >         char cmd[256] = {0};
+> >         FILE *cmdfile = NULL;
+> >
+> > -       if (value != 0 && value != 1)
+> > +       if (value < SOFT_OFFLINE_DISABLED || value > SOFT_OFFLINE_ENABLED)
+> >                 return -EINVAL;
+> >
+> >         sprintf(cmd, "echo %d > /proc/sys/vm/enable_soft_offline", value);
+> > @@ -155,7 +166,7 @@ static int create_hugetlbfs_file(struct statfs *file_stat)
+> >  static void test_soft_offline_common(int enable_soft_offline)
+> >  {
+> >         int fd;
+> > -       int expect_errno = enable_soft_offline ? 0 : EOPNOTSUPP;
+> > +       int expect_errno = (enable_soft_offline == SOFT_OFFLINE_ENABLED) ? 0 : EOPNOTSUPP;
+> >         struct statfs file_stat;
+> >         unsigned long hugepagesize_kb = 0;
+> >         unsigned long nr_hugepages_before = 0;
+> > @@ -198,7 +209,7 @@ static void test_soft_offline_common(int enable_soft_offline)
+> >         // No need for the hugetlbfs file from now on.
+> >         close(fd);
+> >
+> > -       if (enable_soft_offline) {
+> > +       if (enable_soft_offline == SOFT_OFFLINE_ENABLED) {
+> >                 if (nr_hugepages_before != nr_hugepages_after + 1) {
+> >                         ksft_test_result_fail("MADV_SOFT_OFFLINE should reduced 1 hugepage\n");
+> >                         return;
+> > @@ -219,10 +230,11 @@ static void test_soft_offline_common(int enable_soft_offline)
+> >  int main(int argc, char **argv)
+> >  {
+> >         ksft_print_header();
+> > -       ksft_set_plan(2);
+> > +       ksft_set_plan(3);
+> >
+> > -       test_soft_offline_common(1);
+> > -       test_soft_offline_common(0);
+> > +       test_soft_offline_common(SOFT_OFFLINE_ENABLED);
+> > +       test_soft_offline_common(SOFT_OFFLINE_ENABLED_SKIP_HUGETLB);
+> > +       test_soft_offline_common(SOFT_OFFLINE_DISABLED);
+> 
+> Thanks for updating the test code! Looks good to me.
+> 
+> >
+> >         ksft_finished();
+> >  }
+> > --
+> > 2.51.0
+> >
 
