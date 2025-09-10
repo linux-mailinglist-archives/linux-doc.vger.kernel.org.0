@@ -1,123 +1,100 @@
-Return-Path: <linux-doc+bounces-59735-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59737-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0ED27B5151E
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 13:12:32 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74E44B5153F
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 13:16:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 750065602A8
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 11:12:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id D73FE169A28
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 11:16:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F27F316915;
-	Wed, 10 Sep 2025 11:11:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B4AAA26A0A7;
+	Wed, 10 Sep 2025 11:16:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GvjS5m7C"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="TWTNTkOo"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC32130E0D9;
-	Wed, 10 Sep 2025 11:11:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 228B0265CC9
+	for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 11:16:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757502719; cv=none; b=MDDIuCl2Jb7NmMgsENTl/6BSxd5DtE02pOjwfoAZWpS7sjnWLoDDqlr+VIY4j/NRY4iLcKiZSR3cUPVIhgZF4YeJsS2e6B3v1CQDfwGMiiH65Vc2OtaPUqnU77fEjtCH5Ij8aOEsTHhzSmYTqirRdlG4IV7Va3f35ay6DPJ9p9A=
+	t=1757502969; cv=none; b=CspnD62zt5FRFTPESJCJB7IBmMeVxNAja6hnSnGeU3NtjQE7726rHvyX9G0qqdteWOuMCFPAYyfvwXYWbJxkIyNs4dYVMrM1zKdN3ol1oTNK1WxSFmzbL8PtpqT6tgdtrWYPLfHiB5mwJAODKpFOerSNqUwmq+Hx81NNYPFkNzk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757502719; c=relaxed/simple;
-	bh=HH9rNYiFPXzEBmEkHzbBpqhQvk+IcfDxvUnqhY5ubKI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=KZ+rNOl5kGiDCu2xEgx66ZdaHs4sLD/LxsdfCszdkcJdIN86Juaoe+d/U7M2JOl2iw7W5IdfIGJ1jUDc6UKcinIaAr1LBeOqLK2hKA4lY7PfCR+CJE21mf1FG2OtCtTSCTm5AQai/6vFUH9Wx93kzr/PkpmPiv7sW6OPsEBtJ9c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GvjS5m7C; arc=none smtp.client-ip=209.85.210.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-76e2ea933b7so463194b3a.1;
-        Wed, 10 Sep 2025 04:11:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757502717; x=1758107517; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=OpfgucuvJDOycH0vvclXgaxAB2hhuLX8EhU4WrxRvag=;
-        b=GvjS5m7CAz7ZF5BA3HcBLBVs0y7nh7vmNwsXs4lf4NCz65RZ6vNxAGD6QfjmihOcjK
-         WPVs3sXMU6yXsR2z3Vx0SedWZM+Cdc669VxrFlYdD5TxY3qhh2KvBRsT4hrCQvK3SIbo
-         E4M9Tn8sWdChmPvV2RZe7kw6IlY/4zLxgNBNru0Y7y4Dr4kar5A4j7aoj3Z6uXSnUkd0
-         cyC0jfiPYQZpMvBvOqZcipnoraVPhBkKpB0+UKVTm9vEZh7dQqO99wEv0+8UACrT3Qqd
-         tQCYHta64XOuhGPb/nqIaW+k2GLOHpndbbSA3lPCdryFENEfO6FPDXx7pAHut0xTbdue
-         bL7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757502717; x=1758107517;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=OpfgucuvJDOycH0vvclXgaxAB2hhuLX8EhU4WrxRvag=;
-        b=TghE8H28s3zqsLIg2zb1i0RDH2UHmmib26hi2xQxCbG/oIBfJSHhJxWaFSOhdXJfPu
-         RSa0sdh0d/Q+k0TxeZ4g3G+NKSHyK1G+wMeNrGtmUIBCO0dCh5VEHdyzVZrY3wMyUAx+
-         fRtPAHD7UFCJSYwbqIb8qQC5/JipGO+sllRnWtsZz8F9rGwbxwctpsZOGEpewafVzkeK
-         ECHalefDDbW73eb0lDofIOLVeg0ApPlIMweiB3SmV/UuC3ZS7tdxvG4V0a0PaBKgbzxF
-         a/4ehqQD9QqYzt6rs3cqunjRmvgqMPEZ3nauRLhCCIM0oF2pBQ2vpJd4IjvRsYGBhJC0
-         z4gQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUMMb0NHYjIf8DlE6TGmaUDzojk23h52pKHb3kJjsjWHdQJMH5vsULIqYAJzdmgDf9Doz8sesR07Rk5@vger.kernel.org, AJvYcCWlD2Gbxe71y5ojxf4zPsSP6s8ytkq3ayrRM2WIWY+ErCl9citzr8PWZlf0hp7h7WQ2cuDk+iGv@vger.kernel.org
-X-Gm-Message-State: AOJu0YwKAL7McULMrutHdpFo2bpQ1Tt151T70xAxwJaUiiU6YF/sIdNf
-	gO8o4a9IsohQKssNyKscADfIv6n7f2E0+/VZkAuUn6xp1jM3I5Bnh77Z
-X-Gm-Gg: ASbGncvADWYnt8xeGLrI6MxEcNHqagfydHUac88YLdrnYwzW2t3uNiunaq9qJCgON9D
-	duRfxGma0sT8/oPVYDF9nIbcIAout9SoTwl8+oTFgW/nMD/UeR3YQ/7o4tg08CmSmX9oZXmK0+l
-	zqjphQWQHhYIcTnf41dVu6m386zskufrG35hOl0ZpSuKE+MvltsEw7yLe1NqZmFr4IHEggO1nvA
-	TuZghjCitof8tUYdPxlJcMJnvDtQ//0Jh6ZHv/RXewaiIwMQ4XBWrKzUAW7rhGTcgHc4vgS2tOi
-	7jHDamlMyyIL2qJoqQAxS//hLUakvOfSVo5M/BhOfkzz35Ri7TIrI6EeVs2b2Hd8dbyiouu+F1R
-	eZj98PRA+GG4nAY96P/j7m1X0bDfR10Ckkw==
-X-Google-Smtp-Source: AGHT+IGgpsMa58ODg7KKsYPe7knbh5aVk4ORwLNiUbqV8cXt1dmaSjam+ARmTn82BKRl7ZezWl8JVQ==
-X-Received: by 2002:a05:6a00:66cd:b0:772:33e1:1d8a with SMTP id d2e1a72fcca58-7741bdf5ad5mr24054025b3a.0.1757502716887;
-        Wed, 10 Sep 2025 04:11:56 -0700 (PDT)
-Received: from [192.168.0.150] ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-77466123e13sm4720578b3a.28.2025.09.10.04.11.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 10 Sep 2025 04:11:56 -0700 (PDT)
-Message-ID: <a7c600ed-7caa-47fa-b735-8f569442f1c8@gmail.com>
-Date: Wed, 10 Sep 2025 18:11:51 +0700
+	s=arc-20240116; t=1757502969; c=relaxed/simple;
+	bh=YCJpMj9qaG7japfoXPYyCpmx96TYyuOz3YoP7SVYaT0=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=GCxyRz4/5ujP9AIhgUdNM6NoPf9tv4YGOHhh5VnLlGJtowlTn1vb5nRn+HgKSNwJHa6HXQnF/dCMP//cMhq2+4XIwlGU3RsHuy1+hmVibUpa1y4FTe5M6KsyHgIAs1fwIPl1amvvuFE1bZQPOFLNYFb0TgND+1Qer1Ter9HEaak=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=TWTNTkOo; arc=none smtp.client-ip=192.198.163.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1757502968; x=1789038968;
+  h=date:from:to:cc:subject:message-id:mime-version;
+  bh=YCJpMj9qaG7japfoXPYyCpmx96TYyuOz3YoP7SVYaT0=;
+  b=TWTNTkOoYP6NMWVcLWpDQykTabxQbNQXx4LshnD3xrYw9XsTGPimUqRq
+   0//kEfqKQMm3Fqu27queuwxEDaloZGzUNRNX+AwlsTt6BH/MTfFoJrk1n
+   Eam9TM2tOvpAdgdtyYdlR23QMWzKtn93gwkQbiSoeWeYbjj8W2sCLaXio
+   TrQHkHau9qVbvvREsWXYOj6nIvpEXWTgEFSrBAceh4xuqPt4dYjBziC76
+   kKOLbYM7L2A6jP2EcNy8wBTJE5Mv1+UvmCBFiynpgjvq4cKhyYN8j+9n8
+   chn+VaHMvCnA2Pl3ZUS6x2RFGRb3Aedergh8RGWj/AkNtmMDfr28+L0w3
+   A==;
+X-CSE-ConnectionGUID: gLBClEQqQ+yVpZyfoj9KqQ==
+X-CSE-MsgGUID: PfA7SGB+QQKsbyB2JJveMA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11548"; a="59884098"
+X-IronPort-AV: E=Sophos;i="6.18,254,1751266800"; 
+   d="scan'208";a="59884098"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2025 04:16:08 -0700
+X-CSE-ConnectionGUID: 4Uw1rM+kTU+uBzdKpqls9g==
+X-CSE-MsgGUID: zenIs4FWQMSXOF82Ar6veg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.18,254,1751266800"; 
+   d="scan'208";a="173278330"
+Received: from lkp-server01.sh.intel.com (HELO 114d98da2b6c) ([10.239.97.150])
+  by fmviesa006.fm.intel.com with ESMTP; 10 Sep 2025 04:16:06 -0700
+Received: from kbuild by 114d98da2b6c with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1uwIo0-0005rv-11;
+	Wed, 10 Sep 2025 11:16:04 +0000
+Date: Wed, 10 Sep 2025 19:15:48 +0800
+From: kernel test robot <lkp@intel.com>
+To: Vegard Nossum <vegard.nossum@oracle.com>
+Cc: oe-kbuild-all@lists.linux.dev, Jonathan Corbet <corbet@lwn.net>,
+	linux-doc@vger.kernel.org
+Subject: [linux-next:master 7525/7856] Documentation/.renames.txt: warning:
+ ignored by one of the .gitignore files
+Message-ID: <202509101930.OsSQJxIP-lkp@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] Documentation: cgroup-v2: Replace manual table of
- contents with contents:: directive
-To: =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Linux cgroups <cgroups@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
- Andrea Righi <arighi@nvidia.com>, Johannes Bechberger
- <me@mostlynerdless.de>, Changwoo Min <changwoo@igalia.com>,
- Shashank Balaji <shashank.mahadasyam@sony.com>,
- Ingo Molnar <mingo@kernel.org>, Jake Rice <jake@jakerice.dev>,
- Cengiz Can <cengiz@kernel.wtf>
-References: <20250910072334.30688-1-bagasdotme@gmail.com>
- <20250910072334.30688-3-bagasdotme@gmail.com>
- <6geggl3iu2hffdop43rtd6yp2ivd26ytfn4xdclurwce6mapal@4ve46y652dbj>
-Content-Language: en-US
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-In-Reply-To: <6geggl3iu2hffdop43rtd6yp2ivd26ytfn4xdclurwce6mapal@4ve46y652dbj>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 9/10/25 15:13, Michal Koutný wrote:
-> On Wed, Sep 10, 2025 at 02:23:34PM +0700, Bagas Sanjaya <bagasdotme@gmail.com> wrote:
->> manually-arranged table of contents (as reST comments) gets out-of-sync
->> with actual toctree as not all of these are added to it.
-> 
-> Is this true? I generated HTML with this patch and the resulting ToC
-> matches what's in the comment.
-> 
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+head:   5f540c4aade9f1d58fb7b9490b4b7d5214ec9746
+commit: 4b6fba464322f5850dbcce32f3a25eeebf64e770 [7525/7856] docs: add Documentation/.renames.txt
+config: arc-allnoconfig (https://download.01.org/0day-ci/archive/20250910/202509101930.OsSQJxIP-lkp@intel.com/config)
+compiler: arc-linux-gcc (GCC) 15.1.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20250910/202509101930.OsSQJxIP-lkp@intel.com/reproduce)
 
-I see some sections are missing instead when compared to auto-generated
-toctree.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202509101930.OsSQJxIP-lkp@intel.com/
 
-Thanks.
+All warnings (new ones prefixed by >>):
+
+>> Documentation/.renames.txt: warning: ignored by one of the .gitignore files
 
 -- 
-An old man doll... just what I always wanted! - Clara
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
