@@ -1,181 +1,146 @@
-Return-Path: <linux-doc+bounces-59664-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59668-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5905EB50BC8
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 04:50:27 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C28AB50C50
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 05:26:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7E0054E3884
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 02:49:40 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 69ED11C20745
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 03:26:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CCBFC25C822;
-	Wed, 10 Sep 2025 02:46:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F6DC25A2C3;
+	Wed, 10 Sep 2025 03:25:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HdmJwKQT"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="KVVabbYX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FB9A253B58;
-	Wed, 10 Sep 2025 02:46:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C7C131D39C;
+	Wed, 10 Sep 2025 03:25:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757472407; cv=none; b=lsFo1jPTrN725p2iAknkFxuwqO0JTQZRyQm/kRUaiWRO0mtcUD6ca4/yhMB7UoFoAhVPhWVSwj+GD/bCGfFVtTqQk6faoBwZcu9IaA3xAgQyic/yGHqyNB9TMWD7PHzuyyWN78r1PJa8kutufXiEPmKrrkHdmZbT2Sr637xRyiI=
+	t=1757474751; cv=none; b=k7i1jY9kxWVTGoabla/OIPJDFhaIOg3bgsuEPU4lC0e89Ttvyg44+GFTaJDUGjktxjJ33rOKhc5cwz6BL1e/ROMXFfwKDELHMLxN+BCEScNVkXX56u8CWiFbX8Gjd3whStjF4+M0m6QvxsB3gteKMWZ7n0xbadAZBqUgGC12gdw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757472407; c=relaxed/simple;
-	bh=YAOyLtl/yT0KurVAS8jkCGgDLW5ZDt6xjaeBTXqfenE=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=aTluRAwMEjxtQw7vk6i0mDmhkdmbZ8ZSffbtCqNWR3LDHN/kPCv4V94FLwLszPMaYScB/lQJMAH/6yIRmHLbZCSgVzGwqsNWbRuIHhMVsw3s8hpDldYQr/ydE/haPt95ZCw0vX08b7EZPCkbuj8AUfOHLZIEpDj8tPbnRu5kBb4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HdmJwKQT; arc=none smtp.client-ip=209.85.216.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-329b760080fso6188170a91.1;
-        Tue, 09 Sep 2025 19:46:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757472406; x=1758077206; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=y5jPTpqPMOi1hpcfswRT5c+4UlwlwSKkHLVyMRU04bc=;
-        b=HdmJwKQTbfMmkyFJsrbtXF4kpDZqCuwW9p46Oor2wLrAZXbub3afkflh0LBuwrh6bw
-         jsGgzxqjTgLXhw+6n0PB0uYV1iDMN8JVwrADtEO6k4guduvSVTr7duucdrJ7SAWFWyC2
-         MNbz6pgahVxLDP/8cAPy1ROVMsxYs6so/EMUWDPtMwAXtPQwXNcaBJlJmfoi5oUWinzg
-         TQuXIzzRFRZxSm6JpI5mtmCkAYMh7NIH4Gq1R0pHnCiBWVDU7+JJsL36mC6BWBzZQjmK
-         04XbmRL7qLHb3xPKkyO/9Gf3DE9FJto605ek88OHkdWEigo+IFzgqVtxafdSBBEMrF+W
-         reKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757472406; x=1758077206;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=y5jPTpqPMOi1hpcfswRT5c+4UlwlwSKkHLVyMRU04bc=;
-        b=lem+8YGTz/dlOu2owmf4GNy6uL4JNKHsRRZkwXS4RTnCA0x8FvCFF/w4Gy3AMdQZwE
-         lb6vHuMs3no8J964hk8jFN/EIDbz4CW3p7Wl30ANqGzb10Ir3MhHBfVXU4ln0MqWJJPw
-         F1DF/lp6zDweF8KjbMQpoHGf09Qxd5XDp3x4ExpCx5iDE1IYicU2A2Cb86S9++VLo9jn
-         pte4QvBuU4quvv5i2NOaiHf/NlJOKJ4l1KPTbGISj/LFP2lXgI9aq67GHYMqdxmvxb1l
-         I0ZWoGQRCG8EY+X1unpcqizgfyXeQNrjAk+xfe5aJH+oY7v/EMvV1YvKZ+aIsqIxHu6w
-         /ESA==
-X-Forwarded-Encrypted: i=1; AJvYcCUv5hhBTGO9yLfCGvXy2sQtlGGieZ6z9DADvLhEEdp6aomK/6amy9v7tHAfFV+ODOua/rEbVL6Bha0=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzm5QxQrNL/5m2HODQJKeGXOZmT3ApWRaG7r+qrVVyrBvwy2WmR
-	CGW96DEuufRaljaVYkbAxc0GBjbc62qJudPMtMGEu27noybHxPZcawQq
-X-Gm-Gg: ASbGncvyeJIe5qwe18wi6JWPAkJUBT6eVDwrtb0jSHClVbhlmEGyxpLu5fackjMa2PK
-	WGb61LirCZwXaNgfMROT1BUNQcIWvvOyAa8ahLNcryMlclRQHfa9BQEQBKmnyLxWD0NzZvPvWjf
-	sAC39HRAVBLppss+XeceooeP+TQP3w2wlFPLnrR0nD97Gt84c5hUIkx/TmJcpR0u3dq+Feg0R7E
-	T/ZaSrFaQfUCPVZu3Kj4tLkO4Tavi/7KXXPMhJW+rMpW5hIkpLM+I8faOLBcwNvhtB0dfvKXgkE
-	tFucwDX8FhWOPaCcr/1FiH36fTznf/pyhXdfP8uOYEjEiy9Rz+UgR1ardF+/Fi9IAt159Jsn3+7
-	xt4OqJhDczEjg6PtI8ekcgz4clZG/YT4A1XqAvaLgxwCgNBMk2OjaMklpFXor+J0b3wSHcF4NUV
-	SpjYKJkHEYpfBqzLoamdRb+U4m
-X-Google-Smtp-Source: AGHT+IFZpY3V/uOIGTyZ8BzKdRQSeK3R6TIpn8+CqivqfkEb3qFahG1VblvOigKRq+kSt04Qfxrjgg==
-X-Received: by 2002:a17:90b:2fd0:b0:329:f535:6e3c with SMTP id 98e67ed59e1d1-32d43f9338cmr18153184a91.35.1757472405568;
-        Tue, 09 Sep 2025 19:46:45 -0700 (PDT)
-Received: from localhost.localdomain ([101.82.183.17])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-32dbb314bcesm635831a91.12.2025.09.09.19.46.35
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 09 Sep 2025 19:46:45 -0700 (PDT)
-From: Yafang Shao <laoar.shao@gmail.com>
-To: akpm@linux-foundation.org,
-	david@redhat.com,
-	ziy@nvidia.com,
-	baolin.wang@linux.alibaba.com,
-	lorenzo.stoakes@oracle.com,
-	Liam.Howlett@oracle.com,
-	npache@redhat.com,
-	ryan.roberts@arm.com,
-	dev.jain@arm.com,
-	hannes@cmpxchg.org,
-	usamaarif642@gmail.com,
-	gutierrez.asier@huawei-partners.com,
-	willy@infradead.org,
-	ast@kernel.org,
-	daniel@iogearbox.net,
-	andrii@kernel.org,
-	ameryhung@gmail.com,
-	rientjes@google.com,
-	corbet@lwn.net,
-	21cnbao@gmail.com,
-	shakeel.butt@linux.dev
-Cc: bpf@vger.kernel.org,
-	linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	Yafang Shao <laoar.shao@gmail.com>
-Subject: [PATCH v7 mm-new 10/10] Documentation: add BPF-based THP policy management
-Date: Wed, 10 Sep 2025 10:44:47 +0800
-Message-Id: <20250910024447.64788-11-laoar.shao@gmail.com>
-X-Mailer: git-send-email 2.37.1 (Apple Git-137.1)
-In-Reply-To: <20250910024447.64788-1-laoar.shao@gmail.com>
-References: <20250910024447.64788-1-laoar.shao@gmail.com>
+	s=arc-20240116; t=1757474751; c=relaxed/simple;
+	bh=xY5rA+hMSVyjSus3zfT68myqKGV0onGxAgOMxyqjBOc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=QteAKvLXKW1gRlKBTNb/j7HFm8X24nFduweya7MeV+9+8CsFTQUUH0P63WM6mtQJ3IM91LlUdNGN3IQeFgaHJDKYnjDnGXsqBcaxnyUkcNfwuJ5DBuI+WU1nyG4T/CfmWLLlIOZrT12xWL+cGWNnXIjf/7uDNG+4EVtEGZK0fXU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=KVVabbYX; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=AY3GxwGfKCJrcEiXZl9PXnIPzFNTmR/piIW0AtCYuQc=; b=KVVabbYX/g9eYv64OWWc6ChYiT
+	r7xbN6sr+zwhEQxS0J2An1J3slt14Qug3u/BosEZHGxUxeyrUtjp+4gy8K8PJwr6OlEyKqMjQ0x0/
+	KsaWb/Ccp9Yoo+/wLclwB5jF4icyHVaS+zPftWOiikPORHy91YvMOYaSU899N3mJThuXj6Sd9GHJ8
+	oOgvWRPKcTeOuFgDBNwHV4Gj7FtymNUMJ6VnfP5zf/3kVHpnSGpuyaZy54w1sguxywJCHb6Pl2OvM
+	XtIhHMPSfobHMzPzQnmM0fNd3w+i7yLPznxBWAeOeAhkL/A6Cd71/fnHTwWZWxPP1vUldvBz0mdkf
+	7U7QIxnQ==;
+Received: from [50.53.25.54] (helo=[192.168.254.17])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1uwBSh-0000000BpMn-2NtJ;
+	Wed, 10 Sep 2025 03:25:35 +0000
+Message-ID: <0b61b6f3-f11a-494c-9d4e-94ca19fd1eb6@infradead.org>
+Date: Tue, 9 Sep 2025 20:25:34 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/Documentation: explain LINUX_EFI_INITRD_MEDIA_GUID
+To: Bagas Sanjaya <bagasdotme@gmail.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Documentation <linux-doc@vger.kernel.org>,
+ Linux EFI <linux-efi@vger.kernel.org>
+Cc: Ard Biesheuvel <ardb@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+ Hugo Osvaldo Barrera <hugo@whynothugo.nl>
+References: <20250910015738.14848-2-bagasdotme@gmail.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20250910015738.14848-2-bagasdotme@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add the documentation.
+Hi Bagas,
 
-Signed-off-by: Yafang Shao <laoar.shao@gmail.com>
----
- Documentation/admin-guide/mm/transhuge.rst | 46 ++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
+This mostly looks good to me. I have a couple of small comments
+below.
 
-diff --git a/Documentation/admin-guide/mm/transhuge.rst b/Documentation/admin-guide/mm/transhuge.rst
-index 1654211cc6cf..1e072eaacf65 100644
---- a/Documentation/admin-guide/mm/transhuge.rst
-+++ b/Documentation/admin-guide/mm/transhuge.rst
-@@ -738,3 +738,49 @@ support enabled just fine as always. No difference can be noted in
- hugetlbfs other than there will be less overall fragmentation. All
- usual features belonging to hugetlbfs are preserved and
- unaffected. libhugetlbfs will also work fine as usual.
-+
-+BPF-based THP adjustment
-+========================
-+
-+Overview
-+--------
-+
-+When the system is configured with "always" or "madvise" THP mode, a BPF program
-+can be used to adjust THP allocation policies dynamically. This enables
-+fine-grained control over THP decisions based on various factors including
-+workload identity, allocation context, and system memory pressure.
-+
-+Program Interface
-+-----------------
-+
-+This feature implements a struct_ops BPF program with the following interface::
-+
-+  int thp_get_order(struct vm_area_struct *vma,
-+                    enum bpf_thp_vma_type vma_type,
-+                    enum tva_type tva_type,
-+                    unsigned long orders);
-+
-+Parameters::
-+
-+  @vma: vm_area_struct associated with the THP allocation
-+  @vma_type: The VMA type, such as BPF_THP_VM_HUGEPAGE if VM_HUGEPAGE is set
-+             BPF_THP_VM_NOHUGEPAGE if VM_NOHUGEPAGE is set, or BPF_THP_VM_NONE
-+             if neither is set.
-+  @tva_type: TVA type for current @vma
-+  @orders: Bitmask of requested THP orders for this allocation
-+           - PMD-mapped allocation if PMD_ORDER is set
-+           - mTHP allocation otherwise
-+
-+Return value::
-+
-+  The suggested THP order from the BPF program for allocation. It will not
-+  exceed the highest requested order in @orders. Return -1 to indicate that the
-+  original requested @orders should remain unchanged.
-+
-+Implementation Notes
-+--------------------
-+
-+This is currently an experimental feature.
-+CONFIG_BPF_GET_THP_ORDER must be enabled to use it.
-+Only one BPF program can be attached at a time, but the program can be updated
-+dynamically to adjust policies without requiring affected tasks to be restarted.
+
+On 9/9/25 6:57 PM, Bagas Sanjaya wrote:
+> From: Hugo Osvaldo Barrera <hugo@whynothugo.nl>
+> 
+> Since the Handover Protocol was deprecated, the recommended approach is
+> to provide an initrd using a UEFI boot service with the
+> LINUX_EFI_INITRD_MEDIA_GUID device path. Documentation for the new
+> approach has been no more than an admonition with a link to an existing
+> implementation.
+> 
+> Provide a short explanation of this functionality, to ease future
+> implementations without having to reverse engineer existing ones.
+> 
+> Signed-off-by: Hugo Osvaldo Barrera <hugo@whynothugo.nl>
+> Link: https://lore.kernel.org/r/20250428131206.8656-2-hugo@whynothugo.nl
+> [Bagas: Don't use :ref: link to EFI stub documentation]
+> Co-developed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> ---
+>  Documentation/admin-guide/efi-stub.rst |  3 +++
+>  Documentation/arch/x86/boot.rst        | 35 ++++++++++++++++++++------
+>  2 files changed, 30 insertions(+), 8 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/efi-stub.rst b/Documentation/admin-guide/efi-stub.rst
+> index 090f3a185e1897..2f0f040f6913a4 100644
+> --- a/Documentation/admin-guide/efi-stub.rst
+> +++ b/Documentation/admin-guide/efi-stub.rst
+> @@ -79,6 +79,9 @@ because the image we're executing is interpreted by the EFI shell,
+>  which understands relative paths, whereas the rest of the command line
+>  is passed to bzImage.efi.
+>  
+> +.. hint::
+> +   It is also possible to provide an initrd using UEFI boot services. See
+> +   :ref:`pe-coff-entry-point` for details.
+>  
+>  The "dtb=" option
+>  -----------------
+> diff --git a/Documentation/arch/x86/boot.rst b/Documentation/arch/x86/boot.rst
+> index 77e6163288db08..fadbe66517bdf2 100644
+> --- a/Documentation/arch/x86/boot.rst
+> +++ b/Documentation/arch/x86/boot.rst
+
+> +.. _pe-coff-entry-point:
+> +
+> +PE/COFF entry point
+> +===================
+> +
+> +When compiled with ``CONFIG_EFI_STUB=y``, the kernel can be executed as a
+> +regular PE/COFF binary. See Documentation/admin-guide/efi-stub.rst for
+> +implementation details.
+> +
+> +The stub loader can request the initrd via a UEFI protocol. For this to work,
+> +the firmware or bootloader needs to register a handle which implements the
+> +``EFI_LOAD_FILE2`` protocol with the ``LINUX_EFI_INITRD_MEDIA_GUID`` device
+> +path. In this case, a kernel booting via the EFI stub will use the ``LoadFile``
+> +function on the registered handle to obtain a reference to the initrd.
+
+drivers/firmware/efi/libstub/efi-stub-helper.c (line 509) says LoadFile2
+protocol. Is that the same as the LoadFile function?
+
+https://github.com/u-boot/u-boot/commit/ec80b4735a593961fe701cc3a5d717d4739b0fd0
+(the link below) also says LoadFile2() 4 times (and LoadFile 0 times).
+
+thanks.
 -- 
-2.47.3
+~Randy
 
 
