@@ -1,476 +1,143 @@
-Return-Path: <linux-doc+bounces-59706-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59708-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBC77B511D7
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 10:55:03 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CF5DB511EF
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 10:59:11 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8A0AA167714
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 08:55:03 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 74E991C80205
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 08:59:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 054E330F544;
-	Wed, 10 Sep 2025 08:54:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C418A2C1583;
+	Wed, 10 Sep 2025 08:59:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hbIocpzC"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="HeqqGFvx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D37AD266595;
-	Wed, 10 Sep 2025 08:54:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 327B91C700C
+	for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 08:59:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757494498; cv=none; b=r5/PEFgupCSL3mev4kyJJ5LBI1WpXW64GSYlfIcxFiS2jhWfLBN5380uYFkAVz59inlnt2K6kEcG1p9QOu83p53vh5FvaV+3omagHZWf9KG5yz7IC8ldlNT8DMQDgQUAwrnkyJ4BPMqYHqX0ilI30XngBHWRZGf3LaNrmyGoUQU=
+	t=1757494747; cv=none; b=OG/dDW6WlkrCNs1f8k5liU8Rnl+aweE6QmXlC1hlyecwYYVni+KE2gn6P2Mn0Wq7r1WeU4EPUmnI1pvEDOSJDkk+GpygFrZGUbnBNan//oYj3viLdp/PRGRqOGgM831solj5O3ZH4OAUJ+kq7gN4dshVCTSE+Xzf/guZXpuVU/0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757494498; c=relaxed/simple;
-	bh=xWW7B6je9AYEXYw2of7F8kAV8RVAO7+9xjaJ9u+nM7Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=s4756yCgF5GNjdk/P+lfGOE2qd8JzPNC3vb+mOCGkBkZj1TkMzd6hnUF+FdkadZXj6rzvZdv/Ilq6setNG+z1IvTGE8kMuYEqC9eI0CxtMSAl8ulsdviakl902utwWZDVcpVgteh2iF/webGB7Pir4THiWiep7wdQB4biIugySs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hbIocpzC; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44AB3C4CEF0;
-	Wed, 10 Sep 2025 08:54:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757494498;
-	bh=xWW7B6je9AYEXYw2of7F8kAV8RVAO7+9xjaJ9u+nM7Q=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=hbIocpzCj3EazV0oCQe8vbWSkYLxbROL0jd1BiFqYlEoURHCTidd2OuSfWEpcRRMK
-	 DT9xGvwQt7MnnUgmmMXW9NMUF3T4raV7Vy75ZagH531oFjuh8G+/xdsOrIwauslQKd
-	 S5tJ8KNgBN/u3zsApQ08l08cce73pbUl1SxIwJzvSawWfXI/EUjp5xsLaG9L2wZ1Bf
-	 T9FpOP2x10XoOcaBEeJjJ/QFZbpIQ6ixEEGQyYJQ2JjCEkchS+hw/0AiaDUDwcRo8U
-	 zwvaKmqgT4wgmMmOyS2ovMJ5arruHrSfCZBEsp75f+wHCnskk/7uUpBNc4nDAh3EIG
-	 nG9meZ53yavKQ==
-Date: Wed, 10 Sep 2025 10:54:54 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>, Jonathan Corbet
- <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] kernel-doc: add support for handling global variables
-Message-ID: <20250910105454.6a6c57e6@foz.lan>
-In-Reply-To: <c5262290-38e3-4c48-af00-b91f03a065a8@infradead.org>
-References: <80f85eacc306e62de8c9c68712c653ba290c2ff2.1757262141.git.mchehab+huawei@kernel.org>
-	<d85e3f24-dbcd-4f28-b31f-a77661fc66fb@infradead.org>
-	<20250909215824.1968220c@foz.lan>
-	<5dc41508-43e8-4e80-b4e0-149af7bbdf19@infradead.org>
-	<20250910010903.5388bffc@foz.lan>
-	<0d190bf0-b9d4-4d5c-a1cc-6d5d79be3886@infradead.org>
-	<656591ff-fa7d-4763-8759-0a0af3a4039a@infradead.org>
-	<c195c68f-e815-4428-9134-8746198a4611@infradead.org>
-	<20250910062323.059bb078@foz.lan>
-	<14133b75-a984-4244-a18d-f02f0b81d1b7@infradead.org>
-	<c5262290-38e3-4c48-af00-b91f03a065a8@infradead.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1757494747; c=relaxed/simple;
+	bh=qVUqCiNWKhbm4OJQ/h1GXQ4Ue76QXxYJE1ZLypTGFuk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=JUPBqdZVrDX0JqAnFuFKPh8sjZbnlO54EVFpGkeLCp2GYFF5zPG4b5FGj/UDXD8X+G2sD29YSHIXPRkR/IfhyvEqckdRZcuNiufMjn/NFlapk/WETkI/bkoLdPobDrAOZfW2OesSrVbw3jIqHiL9jjKWitWpYQ0G5h2jqx2SL+Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=HeqqGFvx; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1757494745;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=YbNpi+kDNBgUr3iCBEGx1sOECaER/m1rAGG176HSF7M=;
+	b=HeqqGFvxb84KgnFV5/+PBjLBGDuHkIKMBWGuRiR3yl2dm7ht3qjHY7n5D3u3dqq3L235yT
+	7FWjL2zXnF4ONFgDajA0lXAYaNN+lgyV9GN8YI8l6jOKUXR4vNWMWgwZXTkVLD5tfAsMMx
+	pCnD1YwetWeQ3Hl2bo++EwuZ8dJu0wE=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-252-pjvEexObMpOXY0pMDFoyDQ-1; Wed, 10 Sep 2025 04:59:03 -0400
+X-MC-Unique: pjvEexObMpOXY0pMDFoyDQ-1
+X-Mimecast-MFC-AGG-ID: pjvEexObMpOXY0pMDFoyDQ_1757494742
+Received: by mail-ed1-f69.google.com with SMTP id 4fb4d7f45d1cf-628f17953c7so4097321a12.3
+        for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 01:59:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757494742; x=1758099542;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YbNpi+kDNBgUr3iCBEGx1sOECaER/m1rAGG176HSF7M=;
+        b=D/kIRF9eib8CmrHBCBDnNofYZGN4gsEfwNpe3tH/sK4nA4DnVa3fmNx7KxCWtXmDSk
+         Yzyrh0J0r2h5CgrdWPcUQHaGw9mKd2mfllTePebpXZXRqPk57yjWdzE+j22Ct+30d8NY
+         lqaDjnnQi1hLf/pE0k8j0QHItmu+dWKWBr2cRTgZKTJ8NmkKYIjERF/H5ZWrTNMoefLE
+         0rdxiCAcHl+NXx9/hlpsJt1AvL4zCnQHydG2rxU/OlmxUhKzzGAI1FlLJdxumI9+LOU8
+         wpH+bJ8fjYzrs4vmJW7G6aHOzSND5yDyROwDJNx9n8vaOk7MP7VL3N37y6f+jIakkLpY
+         Fg0Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUcfNTorLiZLzMYsk2MY7f0ky8e515+Ua9AdFXGS6/IG7TCScstFiWAjNuJHb843luEPlY6WawqojY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzBG0sZzmXJG0M1naWAQeewlCVpF3xQuVE1GkXUwSUOzScTXPqV
+	e26QLMU/wjNyn6pIU4orLYCUdb5Ijnz2oCxzc2uSrBqYfpN4XHcF5xPqZeIHCAo+bLN77fds/vb
+	o4Nj4IRlaFltGQb5KQh57qhacS2xZxYqmjzyqzdK974iL06hHfV8xBKbarZnOlg==
+X-Gm-Gg: ASbGncuRtiBzY9ZHOmlPFd70Qct66Qp23lg5ieiWXeBQGMpdknxnQOYoQHQD4CQQzqQ
+	acR0/eDiUuWUXlGX6JEi4ZLs/wpqcH0kMoxDo1UETufpaNCjY7ein3udc6/D+4vUptV6yswLll4
+	PeuN3/Wi11QVgkZE4XIEnL6IpQYsA7OGMbbKvgd9lcP5KFAHTA5MQLe7Wg4ipsmUXUq+gPqpzHj
+	3m79kbtS2bRFC5ptWbCi3Jlz++S3g/5mHw3kRNYPzAlh0YA8obAgmhBHO0uFtDD5CiJ29VLwVp7
+	+cnINc3DkaxiemWsm38LdBKHa1fLA8Hoi+S/7Fcg1H2wZt5Y8cdY6/y6dtdyTGMEn/dV+LEC2vp
+	CtvnfZWopHxEAVw==
+X-Received: by 2002:a05:6402:1d4c:b0:62c:710d:5600 with SMTP id 4fb4d7f45d1cf-62c710d58b3mr3918123a12.5.1757494742444;
+        Wed, 10 Sep 2025 01:59:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHIhjF/hQzrKDBiBG++LNsoFWIGNfnxMPAxlcabo5++O/vC/iz8XosvW+jycdz3EyQro8e4TQ==
+X-Received: by 2002:a05:6402:1d4c:b0:62c:710d:5600 with SMTP id 4fb4d7f45d1cf-62c710d58b3mr3918105a12.5.1757494741975;
+        Wed, 10 Sep 2025 01:59:01 -0700 (PDT)
+Received: from lbulwahn-thinkpadx1carbongen12.rmtde.csb ([2a02:810d:7e01:ef00:1622:5a48:afdc:799f])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62c0123f35esm2792862a12.32.2025.09.10.01.59.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Sep 2025 01:59:01 -0700 (PDT)
+From: Lukas Bulwahn <lbulwahn@redhat.com>
+X-Google-Original-From: Lukas Bulwahn <lukas.bulwahn@redhat.com>
+To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Clark Williams <clrkwllms@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-rt-devel@lists.linux.dev,
+	linux-doc@vger.kernel.org
+Cc: kernel-janitors@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Lukas Bulwahn <lukas.bulwahn@redhat.com>
+Subject: [PATCH] Documentation: update config name in real-time architecture support
+Date: Wed, 10 Sep 2025 10:58:59 +0200
+Message-ID: <20250910085859.47818-1-lukas.bulwahn@redhat.com>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Em Tue, 9 Sep 2025 23:13:24 -0700
-Randy Dunlap <rdunlap@infradead.org> escreveu:
+From: Lukas Bulwahn <lukas.bulwahn@redhat.com>
 
-> On 9/9/25 10:59 PM, Randy Dunlap wrote:
-> > Hi Mauro,
-> >=20
-> > On 9/9/25 9:23 PM, Mauro Carvalho Chehab wrote: =20
-> >> Em Tue, 9 Sep 2025 17:02:00 -0700
-> >> Randy Dunlap <rdunlap@infradead.org> escreveu:
-> >> =20
-> >>> On 9/9/25 4:50 PM, Randy Dunlap wrote: =20
-> >>>>
-> >>>>
-> >>>> On 9/9/25 4:49 PM, Randy Dunlap wrote:   =20
-> >>>>>
-> >>>>>
-> >>>>> On 9/9/25 4:09 PM, Mauro Carvalho Chehab wrote:   =20
-> >>>>>> Em Tue, 9 Sep 2025 14:06:43 -0700
-> >>>>>> Randy Dunlap <rdunlap@infradead.org> escreveu:
-> >>>>>>   =20
-> >>>>>>> On 9/9/25 12:58 PM, Mauro Carvalho Chehab wrote:   =20
-> >>>>>>>> Em Tue, 9 Sep 2025 00:27:20 -0700
-> >>>>>>>> Randy Dunlap <rdunlap@infradead.org> escreveu:   =20
-> >>>>>>   =20
-> >>>>>>>>> +.. kernel-doc:: init/kdoc-globals-test.c
-> >>>>>>>>> +   :identifiers:
-> >>>>>>>>>
-> >>>>>>>>> The html output says
-> >>>>>>>>> "Kernel Globals"
-> >>>>>>>>> but nothing else.     =20
-> >>>>>>>>
-> >>>>>>>> I usually don't add :identifiers: on kernel-doc entries. If you =
-use
-> >>>>>>>> identifiers, you need to explicitly tell what symbols you want. =
-    =20
-> >>>>>>>
-> >>>>>>> Well, it worked/works without using having any identifiers listed=
-, and
-> >>>>>>> the docs in Documentation/doc-guide/kernel-doc.rst says that they=
- are
-> >>>>>>> optional:
-> >>>>>>>
-> >>>>>>> identifiers: *[ function/type ...]*
-> >>>>>>>   Include documentation for each *function* and *type* in *source=
-*.
-> >>>>>>>   If no *function* is specified, the documentation for all functi=
-ons
-> >>>>>>>   and types in the *source* will be included.
-> >>>>>>>   *type* can be a struct, union, enum, or typedef identifier.   =
-=20
-> >>>>>> =20
->=20
->=20
->=20
-> >>>>> Anyway, does this take away something that currently works?   =20
-> >>>
-> >>> The output looks the same with this patch AFAICT. =20
-> >>
-> >> run it in verbose mode to see what command line was passed to
-> >> the file:
-> >>
-> >> 	$ make SPHINXDIRS=3Dyour_test_dir V=3D1 htmldocs
-> >>
-> >> This should be printing how the kernel-doc.py command line would be(*):
-> >>
-> >> 	scripts/kernel-doc.py -rst -enable-lineno ./include/linux/peci.h
-> >> 	./include/linux/peci.h:20 Scanning doc for struct peci_controller_ops
-> >> 	./include/linux/peci.h:32 Scanning doc for struct peci_controller
-> >> 	./include/linux/peci.h:58 Scanning doc for struct peci_device
-> >> 	./include/linux/peci.h:88 Scanning doc for struct peci_request
-> >>
-> >> (*) the kerneldoc.py extension doesn't call kernel-doc.py, but instead
-> >>     run directly the Python classes from the library. Yet, to help one
-> >>     to debug it, the command line is displayed. =20
-> >=20
-> > I see. Thanks.
-> >=20
-> > I get this if I list all of them (on 2 separate identifiers lines):
-> >=20
-> > ../scripts/kernel-doc.py -rst -enable-lineno -function ROOT_DEV -functi=
-on system_state -function saved_command_line -function diskseq ../init/kdoc=
--globals-test.c
-> > ../init/kdoc-globals-test.c:5 Scanning doc for global ROOT_DEV
-> > ../init/kdoc-globals-test.c:15 Scanning doc for global system_state
-> > ../init/kdoc-globals-test.c:27 Scanning doc for global saved_command_li=
-ne
-> > ../init/kdoc-globals-test.c:33 Scanning doc for global loops_per_jiffy
-> > ../init/kdoc-globals-test.c:40 Scanning doc for global preset_lpj
-> > ../init/kdoc-globals-test.c:49 Scanning doc for global linux_proc_banner
-> > ../init/kdoc-globals-test.c:63 Scanning doc for global linux_banner
-> > ../init/kdoc-globals-test.c:72 Scanning doc for global diskseq
-> > ../init/kdoc-globals-test.c:80 Scanning doc for global rtnl_mutex
-> > ../scripts/kernel-doc.py -rst -enable-lineno -function loops_per_jiffy =
--function preset_lpj -function linux_proc_banner -function linux_banner ../=
-init/kdoc-globals-test.c
-> >=20
-> > or this is I don't use the identifiers line at all:
-> >=20
-> > ../scripts/kernel-doc.py -rst -enable-lineno ../init/kdoc-globals-test.c
-> > ../init/kdoc-globals-test.c:5 Scanning doc for global ROOT_DEV
-> > ../init/kdoc-globals-test.c:15 Scanning doc for global system_state
-> > ../init/kdoc-globals-test.c:27 Scanning doc for global saved_command_li=
-ne
-> > ../init/kdoc-globals-test.c:33 Scanning doc for global loops_per_jiffy
-> > ../init/kdoc-globals-test.c:40 Scanning doc for global preset_lpj
-> > ../init/kdoc-globals-test.c:49 Scanning doc for global linux_proc_banner
-> > ../init/kdoc-globals-test.c:63 Scanning doc for global linux_banner
-> > ../init/kdoc-globals-test.c:72 Scanning doc for global diskseq
-> > ../init/kdoc-globals-test.c:80 Scanning doc for global rtnl_mutex
-> >=20
-> >=20
-> > And then both of them report these warnings (already discussed):
-> >=20
-> > Documentation/core-api/kernel-api:435: ../init/kdoc-globals-test.c:10: =
-WARNING: Invalid C declaration: Expected end of definition. [error at 32]
-> >   enum system_states system_state __read_mostly;
-> >   --------------------------------^
-> > Documentation/core-api/kernel-api:435: ../init/kdoc-globals-test.c:20: =
-WARNING: Invalid C declaration: Expected end of definition. [error at 25]
-> >   char *saved_command_line __ro_after_init;
-> >   -------------------------^
-> >=20
-> > and the 3 globals with initialization values are skipped/omitted.
-> >=20
-> > So to get "all identifiers," I should just omit the :identifiers:
-> > line completely. kernel-doc.rst could use some clarification on that
-> > point. =20
->=20
->=20
-> Oh darn, the html output is different:
->=20
-> when I omit the :identifiers: line, I see:
->=20
-> Kernel Globals
-> dev_t ROOT_DEV;
-> system root device
->=20
-> enum system_states system_state __read_mostly;
-> system state used during boot or suspend/hibernate/resume
->=20
-> char *saved_command_line __ro_after_init;
-> kernel=E2=80=99s command line, saved from use at any later time in the ke=
-rnel.
->=20
-> unsigned long preset_lpj;
-> lpj (loops per jiffy) value set from kernel command line using =E2=80=9Cl=
-pj=3DVALUE=E2=80=9D
->=20
-> static atomic64_t diskseq;
-> unique sequence number for block device instances
->=20
-> and when I list all 8 identifiers (on 2 separate lines), I see:
->=20
-> Kernel Globals
-> dev_t ROOT_DEV;
-> system root device
->=20
-> static atomic64_t diskseq;
-> unique sequence number for block device instances
->=20
-> unsigned long preset_lpj;
-> lpj (loops per jiffy) value set from kernel command line using =E2=80=9Cl=
-pj=3DVALUE=E2=80=9D
->=20
-> so for some reason, system_state, saved_command_line, and diskseq are
-> skipped/omitted when I list all 8 identifiers.
+Commit 14ec35ff5786 ("entry: Rename "kvm" entry code assets to "virt" to
+genericize APIs") renames the config KVM_XFER_TO_GUEST_WORK to
+VIRT_XFER_TO_GUEST_WORK. In a concurrent development work with commit
+f51fe3b7e48c ("Documentation: Add real-time to core-api"), the
+documentation on making an architecture support PREEMPT_RT has been
+included referring to this config with its previous name.
 
-It is because of the regex we're using:
+Adjust the documentation to the current situation, and specifically
+refer to the new name of the config.
 
-+        VAR_ATTRIBS =3D [
-+            "extern",
-+        ]
-+        OPTIONAL_VAR_ATTR =3D "^(?:" + "|".join(VAR_ATTRIBS) + ")?"
-+
-+        r=3D KernRe(OPTIONAL_VAR_ATTR + r"(\w.*)\s+([\w_]+)[\d\]\[]*\s*;(?=
-:#.*)?$")
-...
-+        declaration_name =3D r.group(2)
-+	 var_type =3D r.group(0)
+Fixes: f51fe3b7e48c ("Documentation: Add real-time to core-api")
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@redhat.com>
+---
+ Documentation/core-api/real-time/architecture-porting.rst | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-the above stores the entire line as var_type, and the last string
-as declaration_name. The output logic will use var_type as function
-prototype, and declaration_name as the key to check for identifiers.
-
-Here:
-
-	enum system_states system_state __read_mostly;
-	char *saved_command_line __ro_after_init;
-
-the regex would pick __read_mostly and __ro_after_init as=20
-identifiers.
-
-Once we fix the regex to pick the actual var name, both ways should work
-equally.
-
-Btw, the best way to test complex regular expressions is, IMHO, to use:
-
-	https://regex101.com/
-
-Don't forget to select first <Python> as the default is pcre2.
-
-there, you can place the regex on the top and several test strings and
-see if everything is working.
-
-Anyway, I did some changes at the code for it to better parse your
-examples. I'm also storing two additional fields captured at parsing
-time:
-
-1. full_proto: the prototype before any transformation;
-2. default_val: if not None, contains the initialized value.
-
-Right now, I'm using only default_val ato output, but, with both,
-we can play with printing them or not at kdoc_output logic.
-
-Thanks,
-Mauro
-
-[PATCH v2] kernel-doc: add support for handling global variables
-
-Specially on kAPI, sometimes it is desirable to be able to
-describe global variables that are part of kAPI.
-
-Documenting vars with Sphinx is simple, as we don't need
-to parse a data struct. All we need is the variable
-declaration and use natice C domain ::c:var: to format it
-for us.
-
-Add support for it.
-
-Link: https://lore.kernel.org/linux-doc/491c3022-cef8-4860-a945-c9c4a3b63c0=
-9@infradead.org/T/#m947c25d95cb1d96a394410ab1131dc8e9e5013f1
-Suggested-by: Randy Dunlap <rdunlap@infradead.org>
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
-diff --git a/scripts/lib/kdoc/kdoc_output.py b/scripts/lib/kdoc/kdoc_output=
-.py
-index 1eca9a918558..469f01a74724 100644
---- a/scripts/lib/kdoc/kdoc_output.py
-+++ b/scripts/lib/kdoc/kdoc_output.py
-@@ -199,6 +199,10 @@ class OutputFormat:
-             self.out_enum(fname, name, args)
-             return self.data
-=20
-+        if dtype =3D=3D "global":
-+            self.out_global(fname, name, args)
-+            return self.data
-+
-         if dtype =3D=3D "typedef":
-             self.out_typedef(fname, name, args)
-             return self.data
-@@ -227,6 +231,9 @@ class OutputFormat:
-     def out_enum(self, fname, name, args):
-         """Outputs an enum"""
-=20
-+    def out_global(self, fname, name, args):
-+        """Outputs a global variable"""
-+
-     def out_typedef(self, fname, name, args):
-         """Outputs a typedef"""
-=20
-@@ -472,6 +479,24 @@ class RestFormat(OutputFormat):
-         self.lineprefix =3D oldprefix
-         self.out_section(args)
-=20
-+    def out_global(self, fname, name, args):
-+        oldprefix =3D self.lineprefix
-+        ln =3D args.declaration_start_line
-+        prototype =3D args.other_stuff["var_type"]
-+
-+        self.data +=3D f"\n\n.. c:var:: {prototype}\n\n"
-+
-+        self.print_lineno(ln)
-+        self.lineprefix =3D "  "
-+        self.output_highlight(args.get('purpose', ''))
-+        self.data +=3D "\n"
-+
-+        if args.other_stuff["default_val"]:
-+            self.data +=3D f'{self.lineprefix}**Initialization**\n\n'
-+            self.output_highlight(f'default: ``{args.other_stuff["default_=
-val"]}``')
-+
-+        self.out_section(args)
-+
-     def out_typedef(self, fname, name, args):
-=20
-         oldprefix =3D self.lineprefix
-@@ -772,6 +797,26 @@ class ManFormat(OutputFormat):
-             self.data +=3D f'.SH "{section}"' + "\n"
-             self.output_highlight(text)
-=20
-+    def out_global(self, fname, name, args):
-+        out_name =3D self.arg_name(args, name)
-+        prototype =3D args.other_stuff["var_type"]
-+
-+        self.data +=3D f'.TH "{self.modulename}" 9 "{out_name}" "{self.man=
-_date}" "API Manual" LINUX' + "\n"
-+
-+        self.data +=3D ".SH NAME\n"
-+        self.data +=3D f"{prototype} \\- {args['purpose']}\n"
-+
-+        self.data +=3D ".SH SYNOPSIS\n"
-+        self.data +=3D f"enum {name}" + " {\n"
-+
-+        if args.other_stuff["default_val"]:
-+            self.data +=3D f'.SH "Initialization"' + "\n"
-+            self.output_highlight(f'default: {args.other_stuff["default_va=
-l"]}')
-+
-+        for section, text in args.sections.items():
-+            self.data +=3D f'.SH "{section}"' + "\n"
-+            self.output_highlight(text)
-+
-     def out_typedef(self, fname, name, args):
-         module =3D self.modulename
-         purpose =3D args.get('purpose')
-diff --git a/scripts/lib/kdoc/kdoc_parser.py b/scripts/lib/kdoc/kdoc_parser=
-.py
-index 574972e1f741..93a2fcebec28 100644
---- a/scripts/lib/kdoc/kdoc_parser.py
-+++ b/scripts/lib/kdoc/kdoc_parser.py
-@@ -64,7 +64,7 @@ type_param =3D KernRe(r"@(\w*((\.\w+)|(->\w+))*(\.\.\.)?)=
-", cache=3DFalse)
- # Tests for the beginning of a kerneldoc block in its various forms.
- #
- doc_block =3D doc_com + KernRe(r'DOC:\s*(.*)?', cache=3DFalse)
--doc_begin_data =3D KernRe(r"^\s*\*?\s*(struct|union|enum|typedef)\b\s*(\w*=
-)", cache =3D False)
-+doc_begin_data =3D KernRe(r"^\s*\*?\s*(struct|union|enum|typedef|global)\b=
-\s*(\w*)", cache =3D False)
- doc_begin_func =3D KernRe(str(doc_com) +			# initial " * '
-                         r"(?:\w+\s*\*\s*)?" + 		# type (not captured)
-                         r'(?:define\s+)?' + 		# possible "define" (not cap=
-tured)
-@@ -886,6 +886,57 @@ class KernelDoc:
-         self.output_declaration('enum', declaration_name,
-                                 purpose=3Dself.entry.declaration_purpose)
-=20
-+    def dump_global(self, ln, proto):
-+        """
-+        Stores global variables that are part of kAPI.
-+        """
-+        VAR_ATTRIBS =3D [
-+            "extern",
-+        ]
-+        OPTIONAL_VAR_ATTR =3D "^(?:" + "|".join(VAR_ATTRIBS) + ")?"
-+
-+        sub_prefixes =3D [
-+            (KernRe(r"__read_mostly"), ""),
-+            (KernRe(r"__ro_after_init"), ""),
-+            (KernRe(r"(?://.*)$"), ""),
-+            (KernRe(r"(?:/\*.*\*/)"), ""),
-+            (KernRe(r";$"), ""),
-+        ]
-+
-+        #
-+        # Store the full prototype before modifying it
-+        #
-+        full_proto =3D proto
-+
-+        #
-+        # Drop comments and macros to have a pure C prototype
-+        #
-+        for search, sub in sub_prefixes:
-+            proto =3D search.sub(sub, proto)
-+
-+        proto =3D proto.rstrip()
-+
-+        #
-+        # Variable name is at the end of the declaration
-+        #
-+
-+        r=3D KernRe(OPTIONAL_VAR_ATTR + r"\w.*\s+([\w_]+)\s*[\d\]\[]*\s*(=
-=3D.*)?")
-+        if not r.match(proto):
-+           self.emit_msg(ln,f"{proto}: can't parse variable")
-+           return
-+
-+        var_type =3D r.group(0)
-+        declaration_name =3D r.group(1)
-+        default_val =3D r.group(2)
-+        if default_val:
-+            default_val =3D default_val.lstrip("=3D").strip()
-+
-+        self.output_declaration("global", declaration_name,
-+                                full_proto=3Dfull_proto,
-+                                var_type=3Dvar_type,
-+                                default_val=3Ddefault_val,
-+                                purpose=3Dself.entry.declaration_purpose)
-+
-     def dump_declaration(self, ln, prototype):
-         """
-         Stores a data declaration inside self.entries array.
-@@ -897,6 +948,8 @@ class KernelDoc:
-             self.dump_typedef(ln, prototype)
-         elif self.entry.decl_type in ["union", "struct"]:
-             self.dump_struct(ln, prototype)
-+        elif self.entry.decl_type =3D=3D "global":
-+            self.dump_global(ln, prototype)
-         else:
-             # This would be a bug
-             self.emit_message(ln, f'Unknown declaration type: {self.entry.=
-decl_type}')
+diff --git a/Documentation/core-api/real-time/architecture-porting.rst b/Documentation/core-api/real-time/architecture-porting.rst
+index d822fac29922..3062cff0e5a3 100644
+--- a/Documentation/core-api/real-time/architecture-porting.rst
++++ b/Documentation/core-api/real-time/architecture-porting.rst
+@@ -35,9 +35,10 @@ POSIX CPU timers and KVM
+   POSIX CPU timers must expire from thread context rather than directly within
+   the timer interrupt. This behavior is enabled by setting the configuration
+   option CONFIG_HAVE_POSIX_CPU_TIMERS_TASK_WORK.
+-  When KVM is enabled, CONFIG_KVM_XFER_TO_GUEST_WORK must also be set to ensure
+-  that any pending work, such as POSIX timer expiration, is handled before
+-  transitioning into guest mode.
++  When virtualization support, such as KVM, is enabled,
++  CONFIG_VIRT_XFER_TO_GUEST_WORK must also be set to ensure that any pending
++  work, such as POSIX timer expiration, is handled before transitioning into
++  guest mode.
+ 
+ Hard-IRQ and Soft-IRQ stacks
+   Soft interrupts are handled in the thread context in which they are raised. If
+-- 
+2.51.0
 
 
