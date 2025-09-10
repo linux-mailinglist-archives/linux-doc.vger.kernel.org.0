@@ -1,97 +1,264 @@
-Return-Path: <linux-doc+bounces-59642-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59644-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C838B50B05
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 04:30:14 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id B83FEB50B5A
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 04:44:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id EB8BD466222
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 02:30:13 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4FB13178B84
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 02:44:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14DFF23D7F3;
-	Wed, 10 Sep 2025 02:30:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBB0D243387;
+	Wed, 10 Sep 2025 02:43:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cMu73/Jx"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NPmFGVje"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D97A119D8AC;
-	Wed, 10 Sep 2025 02:30:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF723244660
+	for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 02:43:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757471411; cv=none; b=TAW5BXxr+eFUhKpJimoB1jBnI4KnA3U164lFqCMxV8v8SlSZDn/UqfnhPox9/KsoOOepNw1jVXLbEERjFkIU/wFAuINfKJDApKplcARDsJPmzwzlw+SHiStSpn6G72p0NrfHGrterNGVrrLGQKz5yxMyLXeCYYI5ff4RZ9oA4Kg=
+	t=1757472238; cv=none; b=Jf/TkAcPDMzDcEo3gydgu0csdeM0HtWsU1JSiGE2oblioGFopEv8QYLh3Rw3oYQm86t7aMfD99TKXGDsxeNQGdTFnLyvP1AS610rtl4nSnWuxbR98MLHN4ajvUH0nlk8kWJSN3MC1Wih9hoJ2P9eWssAL3tg0FF5//Lf166mZpg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757471411; c=relaxed/simple;
-	bh=f42uKL7muikKt8i17Y8V5ypDbGKRVNJBBDLHVh1JR9I=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=q0m42r5VaS7217Ci50ZgtLcGvpxfaxj1OHDzQV+WodOjtnTgEDhozrQ9O+tGn7bgNKWlcF45pTCDPEYjnVrmoSVpzq8yZUhqkDH43XGhb7lW0W4bQnYinLYNOimjSyahxVOO5RME/YFHk3/oYT5hirdN05FHLEMm/AaMU9gwtoY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cMu73/Jx; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5DA26C4CEF4;
-	Wed, 10 Sep 2025 02:30:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757471410;
-	bh=f42uKL7muikKt8i17Y8V5ypDbGKRVNJBBDLHVh1JR9I=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=cMu73/JxUcG3Jj+kQUky5EGbd6w/hyeq/bN23bo4ob36njCw/CIInxXJXAm4IJgLT
-	 /EvvLiyZbjCCoUod8GDP/4HVc9Mm/70vNVC84hzo/Z6+VjzAbcKwSeekruI1/JcTpP
-	 NNKmYRI91whSB7042OytkQaBkCe4UMry/W1wWYpt7zB2A3PeX2F0D80Re6IFNnQBvi
-	 jF+YdkmIHya1OaiQUjSJZh5Ocvm+8VefM67e5vXntPtUvlhRN9GnKIN+BjuLRsU3vZ
-	 MYtPH7LdDvzQSg6gjTxM/qNdFSo6JyOOa7UeE+sDusk3qQ+JjvbZeSE4/kGug5BUsu
-	 E/t77xYwh9spw==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id ADFA8383BF69;
-	Wed, 10 Sep 2025 02:30:14 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	s=arc-20240116; t=1757472238; c=relaxed/simple;
+	bh=YkGAhUMgv4n62Z+ysk68FYvIotbnN4rNKVg76eclr+0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=jgEPFhdkUSo2Bf3yu6poaiyit6ab0wexC0s93IuEtYpDylFfdDnN7jkj4RzCfySHQxLoM8y033inwO55UjTdZwnTlfyeFXfqWOQOC6mYbCnhFY+zI6Kur19rN4ywTYOkIKCoqk1jTSFSIR8gx4hytCkeO8tuFq3Yuf179g7f+fY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NPmFGVje; arc=none smtp.client-ip=209.85.214.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-25634c5ebdeso31062225ad.0
+        for <linux-doc@vger.kernel.org>; Tue, 09 Sep 2025 19:43:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757472236; x=1758077036; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7bLAL3/wNh9TSZolDjbNqAfIBJnmt2XQBMTZKVFm5qw=;
+        b=NPmFGVje/xMIaQLO3+87zG+JJMLgBJTZdL/T6FRhetCHgfb3TJh6TlyJxBExw7MG+Y
+         mk675xDzpTuojiN3CfNHaaApl06c+4M41VkuKa5gDL7qEeoayO7tzATA6a+PN8HhoAG9
+         1U4LJ4b+zfTT6yodIIXxx2TxUCxboxnIgsTl2CnRlkLpwxyvFI2PI/65r2edzZ5RY/Up
+         aKZI5I0VD3BO9w1MPPJvzPOmvPZOTJfxTKh4/wfQOKwYc0r/UaGcSl1JMnnpfFhZJuM+
+         lSVf+5LAge+39zYh5yXSpH1UjfgB0GbP7/QhjyFhwmeZkh3x9z671Ytt1whAyr6Bku/X
+         F/Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757472236; x=1758077036;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7bLAL3/wNh9TSZolDjbNqAfIBJnmt2XQBMTZKVFm5qw=;
+        b=DZeLomKaTvEq5C7FvpuBhjv+SzACc255jQgLc4e/mV3r+S00BVZVEADib6MVfzuerx
+         sTrqCN/ITuF14c+QWLuGRzQKFTYT1ENFlxMNcWSxBY2+uuMoL0sfPOlMRyRMkGdktF81
+         VPQkvgDXVdZeKP17OIABdaN3FM5w+x6OTe1S3eK9oQkmd2sVe3RHoqxctSNkomOQ9QT4
+         V3Dz8kn5htP6yr7meZhrL0Zo402rgBDeaxYb/d1rzE5/585hE6elIB/FdPmr9LhjQcuX
+         PuSEWqeLICOAvPd18pqT0C7lt+7e3OjRrQB2KfHEtGQwBTyABDpcR03/OVum8+wieAkL
+         6fUQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVGL1FeFWLFdlLa145n3EPBemaEWqyWqCdbaLRwsxRIkxxp+LBaUb4NAIyQXUMz3zCyECUOKOu71vg=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy8DFe7WqkMqgGGl1ygarqnx933iE0yMG8LROzbebvRQWFEAMy5
+	Nooqhx/HL6TE98Ge+abEiYvunBO4jTp2kc72/SbgIdW4yqpYsp7yq5GT
+X-Gm-Gg: ASbGncuQL2KG6YvuDia/tgo6DNxCAtDDjkZVSJbbTc+aoawbczHh5u7jL36W4BxApX/
+	UNr1VlBv46sQTX8R9/9wLBhNJ5H0pivabbhCjT5aXhGJD2M6GVEMCsiWd1wJaH4v6RKpYwurFWs
+	SAefBdbZEAr8FebqemNEzwibYXfXvq7K2zUbhZ6JmWLbZvzRSLJ17u7A/1GkqyWVMkfhW0iXMeI
+	80In61lcvouth08TkdeU7lHUz+0FMHEL6P/0QQ1iv4TgLgBZgEIgIzGXHFiT4dhA+nx2VOxlKf0
+	9of2tbw4sBOU5EKrtZRVKARk+sBOrZ8Gc5qckaV9/zFEkOabBmOtwTkoDLawFIWUEoCy4VXkHbg
+	NyLvNbie7wNJLEMM0ELLK4an33B7hgCc4oIC1
+X-Google-Smtp-Source: AGHT+IFGZSc9/jA9fPG6OfeDi4bv1kxrVTimgNKDvpjkwaVrL+5SueCfropq9o2yM0pmLNmhCmQCiQ==
+X-Received: by 2002:a17:903:2350:b0:252:1d6e:df75 with SMTP id d9443c01a7336-2521d6ee123mr177310555ad.41.1757472236069;
+        Tue, 09 Sep 2025 19:43:56 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-32dbb313dc5sm629853a91.1.2025.09.09.19.43.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 Sep 2025 19:43:55 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id BD1A64206923; Wed, 10 Sep 2025 09:43:51 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux DAMON <damon@lists.linux.dev>,
+	Linux Memory Management List <linux-mm@kvack.org>,
+	Linux Power Management <linux-pm@vger.kernel.org>,
+	Linux Block Devices <linux-block@vger.kernel.org>,
+	Linux BPF <bpf@vger.kernel.org>,
+	Linux Kernel Workflows <workflows@vger.kernel.org>,
+	Linux KASAN <kasan-dev@googlegroups.com>,
+	Linux Devicetree <devicetree@vger.kernel.org>,
+	Linux fsverity <fsverity@lists.linux.dev>,
+	Linux MTD <linux-mtd@lists.infradead.org>,
+	Linux DRI Development <dri-devel@lists.freedesktop.org>,
+	Linux Kernel Build System <linux-kbuild@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>,
+	Linux Sound <linux-sound@vger.kernel.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>,
+	Borislav Petkov <bp@alien8.de>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	SeongJae Park <sj@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@redhat.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Huang Rui <ray.huang@amd.com>,
+	"Gautham R. Shenoy" <gautham.shenoy@amd.com>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Perry Yuan <perry.yuan@amd.com>,
+	Jens Axboe <axboe@kernel.dk>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Martin KaFai Lau <martin.lau@linux.dev>,
+	Eduard Zingerman <eddyz87@gmail.com>,
+	Song Liu <song@kernel.org>,
+	Yonghong Song <yonghong.song@linux.dev>,
+	John Fastabend <john.fastabend@gmail.com>,
+	KP Singh <kpsingh@kernel.org>,
+	Stanislav Fomichev <sdf@fomichev.me>,
+	Hao Luo <haoluo@google.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Dwaipayan Ray <dwaipayanray1@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+	Joe Perches <joe@perches.com>,
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	Vincenzo Frascino <vincenzo.frascino@arm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Eric Biggers <ebiggers@kernel.org>,
+	tytso@mit.edu,
+	Richard Weinberger <richard@nod.at>,
+	Zhihao Cheng <chengzhihao1@huawei.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nicolas Schier <nicolas.schier@linux.dev>,
+	Ingo Molnar <mingo@redhat.com>,
+	Will Deacon <will@kernel.org>,
+	Boqun Feng <boqun.feng@gmail.com>,
+	Waiman Long <longman@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Shay Agroskin <shayagr@amazon.com>,
+	Arthur Kiyanovski <akiyano@amazon.com>,
+	David Arinzon <darinzon@amazon.com>,
+	Saeed Bishara <saeedb@amazon.com>,
+	Andrew Lunn <andrew@lunn.ch>,
+	Alexandru Ciobotaru <alcioa@amazon.com>,
+	The AWS Nitro Enclaves Team <aws-nitro-enclaves-devel@amazon.com>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Ranganath V N <vnranganath.20@gmail.com>,
+	Steve French <stfrench@microsoft.com>,
+	Meetakshi Setiya <msetiya@microsoft.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <linux@weissschuh.net>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Jani Nikula <jani.nikula@intel.com>
+Subject: [PATCH v2 00/13] Internalize www.kernel.org/doc cross-references
+Date: Wed, 10 Sep 2025 09:43:15 +0700
+Message-ID: <20250910024328.17911-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3670; i=bagasdotme@gmail.com; h=from:subject; bh=YkGAhUMgv4n62Z+ysk68FYvIotbnN4rNKVg76eclr+0=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBkHnkjdCX+kN/Vk8dEtTx4oXHJVUlr871/34wNfprkGL ftS0Hh2bkcpC4MYF4OsmCLLpES+ptO7jEQutK91hJnDygQyhIGLUwAmss2M4X9W7lbP1sh5f5RO Hw1mqOzaUvQkVGr5Yv7A7uJI7gMzyrwZ/nD+Ytx+cpXRX/eb/x2rj6W/XClZe5lBR2mP0knB37f n7WUAAA==
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next 0/2] net/mlx5e: Add pcie congestion event extras
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <175747141350.881840.9602387660242823143.git-patchwork-notify@kernel.org>
-Date: Wed, 10 Sep 2025 02:30:13 +0000
-References: <1757237976-531416-1-git-send-email-tariqt@nvidia.com>
-In-Reply-To: <1757237976-531416-1-git-send-email-tariqt@nvidia.com>
-To: Tariq Toukan <tariqt@nvidia.com>
-Cc: edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
- andrew+netdev@lunn.ch, davem@davemloft.net, saeedm@nvidia.com,
- leon@kernel.org, mbloch@nvidia.com, corbet@lwn.net, jiri@resnulli.us,
- netdev@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, gal@nvidia.com,
- dtatulea@nvidia.com
 
-Hello:
+Cross-references to other docs (so-called internal links) are typically
+done following Documentation/doc-guide/sphinx.rst: either simply write
+the target docs (preferred) or use :doc: or :ref: reST directives (for
+use-cases like having anchor text or cross-referencing sections). In
+some places, however, links to https://www.kernel.org/doc are used
+instead (outgoing, external links), owing inconsistency as these
+requires Internet connection only to see docs that otherwise can be
+accessed locally (after building with ``make htmldocs``).
 
-This series was applied to netdev/net-next.git (main)
-by Jakub Kicinski <kuba@kernel.org>:
+Convert such external links to internal links, while keeping the
+original anchor texts using :doc: directive. Note that this does not
+cover docs.kernel.org links nor touching Documentation/tools (as docs
+containing external links are in manpages).
 
-On Sun, 7 Sep 2025 12:39:34 +0300 you wrote:
-> Hi,
-> 
-> This small series by Dragos covers gaps requested in the initial pcie
-> congestion series [1]:
-> - Make pcie congestion thresholds configurable via devlink.
-> - Add a counter for stale pcie congestion events.
-> 
-> [...]
+This series is based on docs-next tree. Maintainers can feel free to
+apply any of patches in this series to their own tree.
 
-Here is the summary with links:
-  - [net-next,1/2] net/mlx5e: Make PCIe congestion event thresholds configurable
-    https://git.kernel.org/netdev/net-next/c/f4053490a6f6
-  - [net-next,2/2] net/mlx5e: Add stale counter for PCIe congestion events
-    https://git.kernel.org/netdev/net-next/c/cdc492746e3f
+Changes since v1 [1]:
 
-You are awesome, thank you!
+  * Apply review tags
+  * Drop patch [12/14] as it has been applied to sound tree
+
+[1]: https://lore.kernel.org/linux-doc/20250829075524.45635-1-bagasdotme@gmail.com/
+
+Bagas Sanjaya (13):
+  Documentation: hw-vuln: l1tf: Convert kernel docs external links
+  Documentation: damon: reclaim: Convert "Free Page Reporting" citation
+    link
+  Documentation: perf-security: Convert security credentials
+    bibliography link
+  Documentation: amd-pstate: Use internal link to kselftest
+  Documentation: blk-mq: Convert block layer docs external links
+  Documentation: bpf: Convert external kernel docs link
+  Documentation: kasan: Use internal link to kunit
+  Documentation: gpu: Use internal link to kunit
+  Documentation: filesystems: Fix stale reference to device-mapper docs
+  Documentation: smb: smbdirect: Convert KSMBD docs link
+  Documentation: net: Convert external kernel networking docs
+  nitro_enclaves: Use internal cross-reference for kernel docs links
+  Documentation: checkpatch: Convert kernel docs references
+
+ Documentation/admin-guide/hw-vuln/l1tf.rst    |   9 +-
+ .../admin-guide/mm/damon/reclaim.rst          |   2 +-
+ Documentation/admin-guide/perf-security.rst   |   2 +-
+ Documentation/admin-guide/pm/amd-pstate.rst   |   3 +-
+ Documentation/block/blk-mq.rst                |  23 ++--
+ Documentation/bpf/bpf_iterators.rst           |   3 +-
+ Documentation/bpf/map_xskmap.rst              |   5 +-
+ Documentation/dev-tools/checkpatch.rst        | 121 ++++++++++++------
+ Documentation/dev-tools/kasan.rst             |   6 +-
+ .../bindings/submitting-patches.rst           |   2 +
+ .../driver-api/driver-model/device.rst        |   2 +
+ Documentation/filesystems/fsverity.rst        |  11 +-
+ Documentation/filesystems/smb/smbdirect.rst   |   4 +-
+ Documentation/filesystems/sysfs.rst           |   2 +
+ .../filesystems/ubifs-authentication.rst      |   4 +-
+ Documentation/gpu/todo.rst                    |   6 +-
+ Documentation/kbuild/reproducible-builds.rst  |   2 +
+ Documentation/locking/lockdep-design.rst      |   2 +
+ .../can/ctu/ctucanfd-driver.rst               |   3 +-
+ .../device_drivers/ethernet/amazon/ena.rst    |   4 +-
+ Documentation/networking/ethtool-netlink.rst  |   3 +-
+ Documentation/networking/snmp_counter.rst     |  12 +-
+ Documentation/process/coding-style.rst        |  15 +++
+ Documentation/process/deprecated.rst          |   4 +
+ Documentation/process/submitting-patches.rst  |   4 +
+ Documentation/virt/ne_overview.rst            |  10 +-
+ 26 files changed, 161 insertions(+), 103 deletions(-)
+
+
+base-commit: f44a29784f685804d9970cfb0d3439c9e30981d7
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+An old man doll... just what I always wanted! - Clara
 
 
