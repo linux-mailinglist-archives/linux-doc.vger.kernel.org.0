@@ -1,143 +1,243 @@
-Return-Path: <linux-doc+bounces-59708-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59710-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CF5DB511EF
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 10:59:11 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EE78B51269
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 11:25:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 74E991C80205
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 08:59:32 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id AAAAB560047
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Sep 2025 09:25:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C418A2C1583;
-	Wed, 10 Sep 2025 08:59:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3437330E825;
+	Wed, 10 Sep 2025 09:24:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="HeqqGFvx"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="X+w3maF6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 327B91C700C
-	for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 08:59:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACC2E30CD92;
+	Wed, 10 Sep 2025 09:24:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757494747; cv=none; b=OG/dDW6WlkrCNs1f8k5liU8Rnl+aweE6QmXlC1hlyecwYYVni+KE2gn6P2Mn0Wq7r1WeU4EPUmnI1pvEDOSJDkk+GpygFrZGUbnBNan//oYj3viLdp/PRGRqOGgM831solj5O3ZH4OAUJ+kq7gN4dshVCTSE+Xzf/guZXpuVU/0=
+	t=1757496297; cv=none; b=sX8mzuvn3YqKAsrLTUKbfYPW7DQLmk0boBo8YJE5ro5BvS+bCDVU6eRmPL6mIvzcUeVcXq1my4YlobdoQgDp6itNkE6xWjWMobYkRYK7Jx8YvQo+osF4VFjA58YWFRU3Cv/Xi+seByyAkYRTAhl6ouI11f8/69OFxmIHB3a6h4s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757494747; c=relaxed/simple;
-	bh=qVUqCiNWKhbm4OJQ/h1GXQ4Ue76QXxYJE1ZLypTGFuk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=JUPBqdZVrDX0JqAnFuFKPh8sjZbnlO54EVFpGkeLCp2GYFF5zPG4b5FGj/UDXD8X+G2sD29YSHIXPRkR/IfhyvEqckdRZcuNiufMjn/NFlapk/WETkI/bkoLdPobDrAOZfW2OesSrVbw3jIqHiL9jjKWitWpYQ0G5h2jqx2SL+Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=HeqqGFvx; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1757494745;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=YbNpi+kDNBgUr3iCBEGx1sOECaER/m1rAGG176HSF7M=;
-	b=HeqqGFvxb84KgnFV5/+PBjLBGDuHkIKMBWGuRiR3yl2dm7ht3qjHY7n5D3u3dqq3L235yT
-	7FWjL2zXnF4ONFgDajA0lXAYaNN+lgyV9GN8YI8l6jOKUXR4vNWMWgwZXTkVLD5tfAsMMx
-	pCnD1YwetWeQ3Hl2bo++EwuZ8dJu0wE=
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-252-pjvEexObMpOXY0pMDFoyDQ-1; Wed, 10 Sep 2025 04:59:03 -0400
-X-MC-Unique: pjvEexObMpOXY0pMDFoyDQ-1
-X-Mimecast-MFC-AGG-ID: pjvEexObMpOXY0pMDFoyDQ_1757494742
-Received: by mail-ed1-f69.google.com with SMTP id 4fb4d7f45d1cf-628f17953c7so4097321a12.3
-        for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 01:59:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757494742; x=1758099542;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YbNpi+kDNBgUr3iCBEGx1sOECaER/m1rAGG176HSF7M=;
-        b=D/kIRF9eib8CmrHBCBDnNofYZGN4gsEfwNpe3tH/sK4nA4DnVa3fmNx7KxCWtXmDSk
-         Yzyrh0J0r2h5CgrdWPcUQHaGw9mKd2mfllTePebpXZXRqPk57yjWdzE+j22Ct+30d8NY
-         lqaDjnnQi1hLf/pE0k8j0QHItmu+dWKWBr2cRTgZKTJ8NmkKYIjERF/H5ZWrTNMoefLE
-         0rdxiCAcHl+NXx9/hlpsJt1AvL4zCnQHydG2rxU/OlmxUhKzzGAI1FlLJdxumI9+LOU8
-         wpH+bJ8fjYzrs4vmJW7G6aHOzSND5yDyROwDJNx9n8vaOk7MP7VL3N37y6f+jIakkLpY
-         Fg0Q==
-X-Forwarded-Encrypted: i=1; AJvYcCUcfNTorLiZLzMYsk2MY7f0ky8e515+Ua9AdFXGS6/IG7TCScstFiWAjNuJHb843luEPlY6WawqojY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzBG0sZzmXJG0M1naWAQeewlCVpF3xQuVE1GkXUwSUOzScTXPqV
-	e26QLMU/wjNyn6pIU4orLYCUdb5Ijnz2oCxzc2uSrBqYfpN4XHcF5xPqZeIHCAo+bLN77fds/vb
-	o4Nj4IRlaFltGQb5KQh57qhacS2xZxYqmjzyqzdK974iL06hHfV8xBKbarZnOlg==
-X-Gm-Gg: ASbGncuRtiBzY9ZHOmlPFd70Qct66Qp23lg5ieiWXeBQGMpdknxnQOYoQHQD4CQQzqQ
-	acR0/eDiUuWUXlGX6JEi4ZLs/wpqcH0kMoxDo1UETufpaNCjY7ein3udc6/D+4vUptV6yswLll4
-	PeuN3/Wi11QVgkZE4XIEnL6IpQYsA7OGMbbKvgd9lcP5KFAHTA5MQLe7Wg4ipsmUXUq+gPqpzHj
-	3m79kbtS2bRFC5ptWbCi3Jlz++S3g/5mHw3kRNYPzAlh0YA8obAgmhBHO0uFtDD5CiJ29VLwVp7
-	+cnINc3DkaxiemWsm38LdBKHa1fLA8Hoi+S/7Fcg1H2wZt5Y8cdY6/y6dtdyTGMEn/dV+LEC2vp
-	CtvnfZWopHxEAVw==
-X-Received: by 2002:a05:6402:1d4c:b0:62c:710d:5600 with SMTP id 4fb4d7f45d1cf-62c710d58b3mr3918123a12.5.1757494742444;
-        Wed, 10 Sep 2025 01:59:02 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHIhjF/hQzrKDBiBG++LNsoFWIGNfnxMPAxlcabo5++O/vC/iz8XosvW+jycdz3EyQro8e4TQ==
-X-Received: by 2002:a05:6402:1d4c:b0:62c:710d:5600 with SMTP id 4fb4d7f45d1cf-62c710d58b3mr3918105a12.5.1757494741975;
-        Wed, 10 Sep 2025 01:59:01 -0700 (PDT)
-Received: from lbulwahn-thinkpadx1carbongen12.rmtde.csb ([2a02:810d:7e01:ef00:1622:5a48:afdc:799f])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-62c0123f35esm2792862a12.32.2025.09.10.01.59.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Sep 2025 01:59:01 -0700 (PDT)
-From: Lukas Bulwahn <lbulwahn@redhat.com>
-X-Google-Original-From: Lukas Bulwahn <lukas.bulwahn@redhat.com>
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Clark Williams <clrkwllms@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-rt-devel@lists.linux.dev,
-	linux-doc@vger.kernel.org
-Cc: kernel-janitors@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Lukas Bulwahn <lukas.bulwahn@redhat.com>
-Subject: [PATCH] Documentation: update config name in real-time architecture support
-Date: Wed, 10 Sep 2025 10:58:59 +0200
-Message-ID: <20250910085859.47818-1-lukas.bulwahn@redhat.com>
-X-Mailer: git-send-email 2.51.0
+	s=arc-20240116; t=1757496297; c=relaxed/simple;
+	bh=2tjya5D9cnGgRanoRcp4aCC6LMSjB7GbonEFWYPcVQw=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=B5JtZYejqKBpaBrySCQz9aVJ41M2+BuntogXr7x7UIjmqGYnxyfmdOHC5nDRXahzVwomZJxW5BEEcQK0ZBx28hVE3ua1YURVaAK+BqL1b1h7hrn/FBkrtvY3q3QhMnNDnskmD0Jss5Vm2qjsfk9fo7Mgd00SHP1hTGJQT3zwY3U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=X+w3maF6; arc=none smtp.client-ip=198.175.65.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1757496295; x=1789032295;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version;
+  bh=2tjya5D9cnGgRanoRcp4aCC6LMSjB7GbonEFWYPcVQw=;
+  b=X+w3maF6vNxlLFTHr+NuZRNgk660MpToMFungA91Np3yZ1dBhjTmcSu9
+   i+VjDIOuGe5btH8wioB+mRaEvB7X1qxUD/0BwdChEN4lQC/2amctSzS3V
+   gxy8aZoHngat/GURMZ+f9FD6fHCZD60d04VDd/eJ2fQvjPADF4AIybHSH
+   dkAwN5rWDull27sRKhj4dtVGBjnLzTkjHAEg8JU61limuM0mabyP18JPp
+   ML8R3oh0VZqnzU8XoX+MogSN6zy/tgvZggGWxDBYkcmxHrB5IxwRSm95d
+   eRYZ0HBXv+UmxQ9qU/pAfhlLtEu8rTaHQrGxvXqR7xQy2XWXYe/OdePxF
+   A==;
+X-CSE-ConnectionGUID: Qinbj0XkToWrKGUqBfAmnw==
+X-CSE-MsgGUID: 06YrZWfTSXKAFQqk8ItK+Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="59863477"
+X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; 
+   d="scan'208";a="59863477"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2025 02:24:54 -0700
+X-CSE-ConnectionGUID: OaUDq58OQe+zMr6Fwn87cA==
+X-CSE-MsgGUID: +Blb/w1USVa6gV6E7GjzoQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.18,253,1751266800"; 
+   d="scan'208";a="172626775"
+Received: from mjarzebo-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.246.72])
+  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2025 02:24:51 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Linux Doc Mailing
+ List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Jonathan Corbet
+ <corbet@lwn.net>, Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Randy
+ Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] kernel-doc: add support for handling global variables
+In-Reply-To: <80f85eacc306e62de8c9c68712c653ba290c2ff2.1757262141.git.mchehab+huawei@kernel.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <80f85eacc306e62de8c9c68712c653ba290c2ff2.1757262141.git.mchehab+huawei@kernel.org>
+Date: Wed, 10 Sep 2025 12:24:47 +0300
+Message-ID: <b9f8831490b9e8e3e4f6d90d6092b0b78c79137f@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Lukas Bulwahn <lukas.bulwahn@redhat.com>
+On Sun, 07 Sep 2025, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> Specially on kAPI, sometimes it is desirable to be able to
+> describe global variables that are part of kAPI.
+>
+> Documenting vars with Sphinx is simple, as we don't need
+> to parse a data struct. All we need is the variable
+> declaration and use natice C domain ::c:var: to format it
+> for us.
+>
+> Add support for it.
 
-Commit 14ec35ff5786 ("entry: Rename "kvm" entry code assets to "virt" to
-genericize APIs") renames the config KVM_XFER_TO_GUEST_WORK to
-VIRT_XFER_TO_GUEST_WORK. In a concurrent development work with commit
-f51fe3b7e48c ("Documentation: Add real-time to core-api"), the
-documentation on making an architecture support PREEMPT_RT has been
-included referring to this config with its previous name.
+Bikeshedding on "global", it sort of implies visibility or linkage, but
+here it means "variable".
 
-Adjust the documentation to the current situation, and specifically
-refer to the new name of the config.
+You could document variables that are static, global to the module, or
+exported to the entire kernel. And you could document functions that are
+global (for some meaning of global).
 
-Fixes: f51fe3b7e48c ("Documentation: Add real-time to core-api")
-Signed-off-by: Lukas Bulwahn <lukas.bulwahn@redhat.com>
----
- Documentation/core-api/real-time/architecture-porting.rst | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+I didn't look into kernel-doc, but can't you figure the type out from
+the source, instead of having to tell it? And if you can't, why not just
+make it "var" (matching Sphinx) or "variable"?
 
-diff --git a/Documentation/core-api/real-time/architecture-porting.rst b/Documentation/core-api/real-time/architecture-porting.rst
-index d822fac29922..3062cff0e5a3 100644
---- a/Documentation/core-api/real-time/architecture-porting.rst
-+++ b/Documentation/core-api/real-time/architecture-porting.rst
-@@ -35,9 +35,10 @@ POSIX CPU timers and KVM
-   POSIX CPU timers must expire from thread context rather than directly within
-   the timer interrupt. This behavior is enabled by setting the configuration
-   option CONFIG_HAVE_POSIX_CPU_TIMERS_TASK_WORK.
--  When KVM is enabled, CONFIG_KVM_XFER_TO_GUEST_WORK must also be set to ensure
--  that any pending work, such as POSIX timer expiration, is handled before
--  transitioning into guest mode.
-+  When virtualization support, such as KVM, is enabled,
-+  CONFIG_VIRT_XFER_TO_GUEST_WORK must also be set to ensure that any pending
-+  work, such as POSIX timer expiration, is handled before transitioning into
-+  guest mode.
- 
- Hard-IRQ and Soft-IRQ stacks
-   Soft interrupts are handled in the thread context in which they are raised. If
+
+BR,
+Jani.
+
+>
+> Link: https://lore.kernel.org/linux-doc/491c3022-cef8-4860-a945-c9c4a3b63c09@infradead.org/T/#m947c25d95cb1d96a394410ab1131dc8e9e5013f1
+> Suggested-by: Randy Dunlap <rdunlap@infradead.org>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  scripts/lib/kdoc/kdoc_output.py | 31 +++++++++++++++++++++++++++++++
+>  scripts/lib/kdoc/kdoc_parser.py | 25 ++++++++++++++++++++++++-
+>  2 files changed, 55 insertions(+), 1 deletion(-)
+>
+> diff --git a/scripts/lib/kdoc/kdoc_output.py b/scripts/lib/kdoc/kdoc_output.py
+> index 1eca9a918558..405a5c407522 100644
+> --- a/scripts/lib/kdoc/kdoc_output.py
+> +++ b/scripts/lib/kdoc/kdoc_output.py
+> @@ -199,6 +199,10 @@ class OutputFormat:
+>              self.out_enum(fname, name, args)
+>              return self.data
+>  
+> +        if dtype == "global":
+> +            self.out_global(fname, name, args)
+> +            return self.data
+> +
+>          if dtype == "typedef":
+>              self.out_typedef(fname, name, args)
+>              return self.data
+> @@ -227,6 +231,9 @@ class OutputFormat:
+>      def out_enum(self, fname, name, args):
+>          """Outputs an enum"""
+>  
+> +    def out_global(self, fname, name, args):
+> +        """Outputs a global variable"""
+> +
+>      def out_typedef(self, fname, name, args):
+>          """Outputs a typedef"""
+>  
+> @@ -472,6 +479,18 @@ class RestFormat(OutputFormat):
+>          self.lineprefix = oldprefix
+>          self.out_section(args)
+>  
+> +    def out_global(self, fname, name, args):
+> +        oldprefix = self.lineprefix
+> +        ln = args.declaration_start_line
+> +        prototype = args.other_stuff["var_type"]
+> +
+> +        self.data += f"
+>
+> .. c:var:: {prototype}
+>
+> "
+> +
+> +        self.print_lineno(ln)
+> +        self.lineprefix = "  "
+> +        self.output_highlight(args.get('purpose', ''))
+> +        self.data += "
+> "
+> +
+>      def out_typedef(self, fname, name, args):
+>  
+>          oldprefix = self.lineprefix
+> @@ -772,6 +791,18 @@ class ManFormat(OutputFormat):
+>              self.data += f'.SH "{section}"' + "
+> "
+>              self.output_highlight(text)
+>  
+> +    def out_global(self, fname, name, args):
+> +        out_name = self.arg_name(args, name)
+> +        prototype = args.other_stuff["var_type"]
+> +
+> +        self.data += f'.TH "{self.modulename}" 9 "{out_name}" "{self.man_date}" "API Manual" LINUX' + "
+> "
+> +
+> +        self.data += ".SH NAME
+> "
+> +        self.data += f"{prototype} \- {args['purpose']}
+> "
+> +
+> +        self.data += ".SH SYNOPSIS
+> "
+> +        self.data += f"enum {name}" + " {
+> "
+> +
+>      def out_typedef(self, fname, name, args):
+>          module = self.modulename
+>          purpose = args.get('purpose')
+> diff --git a/scripts/lib/kdoc/kdoc_parser.py b/scripts/lib/kdoc/kdoc_parser.py
+> index 574972e1f741..e2a3f4574894 100644
+> --- a/scripts/lib/kdoc/kdoc_parser.py
+> +++ b/scripts/lib/kdoc/kdoc_parser.py
+> @@ -64,7 +64,7 @@ type_param = KernRe(r"@(\w*((\.\w+)|(->\w+))*(\.\.\.)?)", cache=False)
+>  # Tests for the beginning of a kerneldoc block in its various forms.
+>  #
+>  doc_block = doc_com + KernRe(r'DOC:\s*(.*)?', cache=False)
+> -doc_begin_data = KernRe(r"^\s*\*?\s*(struct|union|enum|typedef)\s*(\w*)", cache = False)
+> +doc_begin_data = KernRe(r"^\s*\*?\s*(struct|union|enum|typedef|global)\s*(\w*)", cache = False)
+>  doc_begin_func = KernRe(str(doc_com) +			# initial " * '
+>                          r"(?:\w+\s*\*\s*)?" + 		# type (not captured)
+>                          r'(?:define\s+)?' + 		# possible "define" (not captured)
+> @@ -886,6 +886,27 @@ class KernelDoc:
+>          self.output_declaration('enum', declaration_name,
+>                                  purpose=self.entry.declaration_purpose)
+>  
+> +    def dump_global(self, ln, proto):
+> +        """
+> +        Stores global variables that are part of kAPI.
+> +        """
+> +        VAR_ATTRIBS = [
+> +            "extern",
+> +        ]
+> +        OPTIONAL_VAR_ATTR = "^(?:" + "|".join(VAR_ATTRIBS) + ")?"
+> +
+> +        r= KernRe(OPTIONAL_VAR_ATTR + r"(\w.*)\s+([\w_]+)[\d\]\[]*\s*;(?:#.*)?$")
+> +        if not r.match(proto):
+> +           self.emit_msg(ln,f"{proto}: can't parse variable")
+> +           return
+> +
+> +        declaration_name = r.group(2)
+> +        var_type = r.group(0)
+> +
+> +        self.output_declaration("global", declaration_name,
+> +                                var_type=var_type,
+> +                                purpose=self.entry.declaration_purpose)
+> +
+>      def dump_declaration(self, ln, prototype):
+>          """
+>          Stores a data declaration inside self.entries array.
+> @@ -897,6 +918,8 @@ class KernelDoc:
+>              self.dump_typedef(ln, prototype)
+>          elif self.entry.decl_type in ["union", "struct"]:
+>              self.dump_struct(ln, prototype)
+> +        elif self.entry.decl_type == "global":
+> +            self.dump_global(ln, prototype)
+>          else:
+>              # This would be a bug
+>              self.emit_message(ln, f'Unknown declaration type: {self.entry.decl_type}')
+
 -- 
-2.51.0
-
+Jani Nikula, Intel
 
