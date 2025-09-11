@@ -1,155 +1,157 @@
-Return-Path: <linux-doc+bounces-59909-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59939-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9F0AB52EBF
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 12:39:34 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6133BB53005
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 13:21:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 976431709CC
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 10:39:34 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6DEB31883521
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 11:21:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0836630F94A;
-	Thu, 11 Sep 2025 10:39:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C61F6313E3E;
+	Thu, 11 Sep 2025 11:20:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="G/vy/uXH"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BY5usAHu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44B1530DD15
-	for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 10:39:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0503B1A83F9
+	for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 11:20:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757587169; cv=none; b=E6DkiRvPSxTc2dExBz1cPS1+ieRPaej9eiBWDf0T1fJ9Y1mCcvKIr0fw1rJg2zsmQe36j8ZtGv2VTnpCt61vXAfXChrZlJToZqK82MWdomszv9NliE2L1PDluDleyjodJdyaFxRpRdg2No9w4omLeFGFf6DN+iifyFWp3yOqJOw=
+	t=1757589655; cv=none; b=R4rFlIpglk+YN2tjq4PxTiko1be6lhwl8x/bvIJzTf6fXQUXyDGMwQbHnull9/SvipFEH/MLYt0zLlqyOtLozmPx0AfyvR8T6q95cTmfo4mHI96an2C2YoSKy6yPeXi4gbRTPJHJi+ReATNq+X/FtWsAyYiN3wLa44DA2wYn9AI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757587169; c=relaxed/simple;
-	bh=i3K4Fxf7hfpTZXUakuir9VBvWZAWa30Q3SjDrMBWzpw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=m2lveYK23RHfjlo6HGPAUGMWJDKl6PR+GycJ9q+YXCrc3pj73co7mRMD4FerOLhLDuxni1AtgyvCtRhVqlZ/HWHRFKjPr5DlDwh9yFObv4U3g4WF0swjR3Gmst6NGTWquf4Do/U9D3OgtuS6jGP/e7J2tNwjh5PdL7VdLixQz3M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=G/vy/uXH; arc=none smtp.client-ip=209.85.222.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-80e2c52703bso46880685a.1
-        for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 03:39:28 -0700 (PDT)
+	s=arc-20240116; t=1757589655; c=relaxed/simple;
+	bh=H8yk+xrqMoi1BmiRtNvzwsuYwehWP27jlscfOOwW9g0=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
+	 MIME-Version:Content-Type; b=CcS8qDitGRKpZKsZA7tD7MuHw0ptRjLIH+3ZgQwvQh3b3l6vJX3vx5jiDi8rF1K+yzvlYMM4HZc+QfCV7sjVYMgub1lGzKMFmaeP8S0E/KU8bZHq7c21yBVos27vsXnOKorfKlqQocn2SHx8Lig3aQKItZEPYl3sTzHep8CgqkA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BY5usAHu; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-3d44d734cabso537381f8f.3
+        for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 04:20:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1757587167; x=1758191967; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=n/5NZRakXMPSefxzoUTWOFF7jXrb0Qk67PQkNmcLMfM=;
-        b=G/vy/uXH4hHaInZrUtcu+gbfF2UZyccQx4XnA3wTYLPdasbltn7qXFSemjaE8ktMAa
-         TeWwTnYowdTL3bHAjQ8IlQJmJl8R+4HKZgVnQNCl4VBz0j7FAdZtNkMYOTFZyagPJmII
-         mxzM4xeJ/OA8vH4kq6taAJaboA08DoDCA09qxRFP4/WpS/ibDfDYKtrC1MZLWVeTLajV
-         1YMRyBRe1TIUYzz3mReZALnmrUdiWDCX/zcZbK87z2J/exJDSOGk9ouZSux9etq21L9K
-         pwKow4u2vwEgcuB697KarH8VZcWnv8LVW0WqRkYv4W0wSkUKGd3dvQPC0m1NSHNZdETo
-         JY8w==
+        d=gmail.com; s=20230601; t=1757589652; x=1758194452; darn=vger.kernel.org;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=h2HQS+cQinE0HErUF+RK2/CMrXAUaYTUSDi0hoQyZeM=;
+        b=BY5usAHuL0pcxURLrYzKIpLS9bohcNiHdFZGsM/RAQJaGFnRX2PgBX/kQRB5VeygMT
+         2/EKGTXw6usiTZnn8ISx8WWdmHJDCXZKnia4D9r+l8uVdSqH0AgtQ3wgFBbpB0zBUCND
+         j1D5sUOWavyIDoYKtWUEPeXT8BHs9A0UjnH1XSdlouQxV1JM6+b4BRjv+4XGWE2RWf6h
+         Yn7DyUgbZe7ypeUI3lna7zBODaeZW5gBi6qr+YoJ+n5vPnBGNS0M28PHzzTVRjC+CbHg
+         pm2S/cL/3LmOy+4tSpPiGtzCEWgZacwHeEJt+kzooMj6SV4eWbQokBeVI0ZIrHFSUYfs
+         hgiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757587167; x=1758191967;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=n/5NZRakXMPSefxzoUTWOFF7jXrb0Qk67PQkNmcLMfM=;
-        b=MhSMFQVpPldB0fCT6ca2ShG8Mw8CwfB43Cxcy1FQSkM3CEAdEVMAyXFgk8HmnokDqb
-         YkADBeeZOqd/2MT5yrH826x7YuDLto10A8y7A3wsSs9Xn5JvvkN7Qoqp6j+3VoQ+Es8y
-         DMJt16tMkhj13WayEAeGcuRcXHOsjFSh5InbYopVkRaufHDvhG80dFMX968SyAcWppNs
-         XyzGA6cEd6L0lYm7byxuhEbVEzb5hsZ+YJTTaW0esRJcHHs5CqoMbVMzjYDvgXOXlwMS
-         sggtD+Lj8t+2HYhSMuElh5OAJKxgNjPeFm5LSmrNbvxf2lkV2NYfJKXKHyqQwPy7oKtf
-         5cxQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUnpvsNuR0aGidu9u/WmddJk/C55YH7DeccIugRsX+9T8MWEYDryDikyt4ezXHNBynVUI5KyNIIA0Q=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyMlGd2GU1w7qtzX4m6oLfXZwCOBUSZWaFwzX/yuxQRWDD8rQY1
-	qK6wCvqNCK+JDyV44K9g3dCE+eqQ/M/BpOwMlx2piZhLBJJxvj2SBBFdatIcBih/lZureTuhpgv
-	lElBI9mYLB8/zxqhDrtfYPBMs3TxxgSoOwvp0nLs8
-X-Gm-Gg: ASbGncuBK3Km6wDtPtQZYOIUgbIunv7kPHUoyI2Dyht9bP5rXExdUx120KyUNdevjkI
-	sATeKcxwV/00JmLdFj3X4TjjXB68r6Yok/q4u4YHXDMBIaachMZl5DxLiHEgObOxxP10xMYLJUQ
-	1XiwoxqrGEUEaIMMRBTGsnWhHkqLKBMBHxufNjVf9coGFGF5xX5sr7yiHHt8yQ5s+PuOxlIcDsr
-	672rqcOdkJatLXo2pFLcspQ
-X-Google-Smtp-Source: AGHT+IF13RHUxixDCnJaQJD5HYKG53fEjs1UREQfhmAQiVkkh3Z8KzpXFO+znykAoH6YQe4Wu+wBZD5IVHQdxauw0gI=
-X-Received: by 2002:a05:620a:191a:b0:812:693c:bce4 with SMTP id
- af79cd13be357-813c596ff46mr2299523985a.39.1757587166519; Thu, 11 Sep 2025
- 03:39:26 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1757589652; x=1758194452;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=h2HQS+cQinE0HErUF+RK2/CMrXAUaYTUSDi0hoQyZeM=;
+        b=ZTIUO2HJEF8Ack4CysQGgSapvgIsRur25rilHmvEyC5QN//3F3t8nGbcTiy7/R0uHD
+         WgyG8xdLPLGf67JZC0nOe0EBCXb21OseIQTRj5bQCtE0D6ZfQODETtyO/Yoz7etsS8rl
+         BldKDDABf39lEEh1ZdBg+bPcTOC1Nlv3ymOCUon5wbmFcDMQG04j9NKg0YFtcrhT44Ac
+         5jdedFHOar0iytDHsdz74N0FEZF76niPW2L3rcJgFMGykNzXeNTOC4lVQ9g+aeUblk6X
+         deOaG9ruuA1LryaJzTC7RBAQzplBDFeDryuIqB0y3spYDqCFH1ICMFBLn2cspQH0nL0y
+         92XQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVjeb0Am0YV2SBFvZhUZE3NxDLFuGZZObOiMeziXk011WmpGvZPlGnRPcmCs+H1HJEsr/43nwEz4wM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwPxmSAje6pQUS4BBxsDWwVBHEKo+GJS+OGNM023RJPJ92tbLuK
+	/is+gPW/TdFMJMrLJx5awRuf046LbLkSRVjHo3z4u7j1F9fn3dXer6qh
+X-Gm-Gg: ASbGncsH3aBYupeDQdB5tZXW+8l85LpLyG4jNwbXY/FfKp5+1eESq2OsHcAif/FDhQY
+	/1JawuhWHdcgcn+dAEaEHzLAOK+Rwc4IqpdEhvRVDPyH8g7RngKXAn+HRI3H3B3nQAPIqO09Feu
+	yR7A2aTPQd7TZ5iIIcCgnlUg3s12O0REjE+cS1u62cilwQLET++b/X+vitWmnkaQ5PzTD6H5xtX
+	qn5o72Abd0ijByigfxABg2KnEqAJJCYJx3eIFaOVE27uGrVcH1FjdG0rAn2lq0s3uLl7YcdYD4F
+	L1BygTxwByLPRguVaIT1ORGDcg8fjOTpj+3IoEgtIH7NEWw8qxuys1LD5HiI6f8yZdWJ8v5T0wM
+	GGg7fI+XjqZ7tBl3JRiYSpbzsBMIU5+FGEAxtegw=
+X-Google-Smtp-Source: AGHT+IGo+F4NUZA5jrtFJZ3gols7D7bXthNGq85BXY2ZGDeIz6G8pf+puXsiQ9wTfeZ6/fjO6sDA+Q==
+X-Received: by 2002:a5d:64e7:0:b0:3da:e7d7:f1ec with SMTP id ffacd0b85a97d-3e646257889mr15832414f8f.32.1757589651961;
+        Thu, 11 Sep 2025 04:20:51 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:18f9:fa9:c12a:ac60])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3e760786ceasm2152003f8f.16.2025.09.11.04.20.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 11 Sep 2025 04:20:51 -0700 (PDT)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: "Matthieu Baerts (NGI0)" <matttbe@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,  Jakub Kicinski <kuba@kernel.org>,
+  "David S. Miller" <davem@davemloft.net>,  Eric Dumazet
+ <edumazet@google.com>,  Paolo Abeni <pabeni@redhat.com>,  Simon Horman
+ <horms@kernel.org>,  linux-doc@vger.kernel.org,  netdev@vger.kernel.org,
+  linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next] tools: ynl: rst: display attribute-set doc
+In-Reply-To: <20250910-net-next-ynl-attr-doc-rst-v1-1-0bbc77816174@kernel.org>
+Date: Thu, 11 Sep 2025 11:44:55 +0100
+Message-ID: <m2v7lpuv2w.fsf@gmail.com>
+References: <20250910-net-next-ynl-attr-doc-rst-v1-1-0bbc77816174@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250908173408.79715-1-chia-yu.chang@nokia-bell-labs.com> <20250908173408.79715-15-chia-yu.chang@nokia-bell-labs.com>
-In-Reply-To: <20250908173408.79715-15-chia-yu.chang@nokia-bell-labs.com>
-From: Eric Dumazet <edumazet@google.com>
-Date: Thu, 11 Sep 2025 03:39:14 -0700
-X-Gm-Features: Ac12FXwjNGPxnTzV9uOkde1KbfezAZ4pzyFGGkehM4wIScw1o9g0Jk-pKtQTlfw
-Message-ID: <CANn89iJzdnwtJcEwdyAzNF206bYzmHKqNGoBF7G2pR101ZWS+Q@mail.gmail.com>
-Subject: Re: [PATCH v17 net-next 14/14] tcp: accecn: try to fit AccECN option
- with SACK
-To: chia-yu.chang@nokia-bell-labs.com
-Cc: pabeni@redhat.com, linux-doc@vger.kernel.org, corbet@lwn.net, 
-	horms@kernel.org, dsahern@kernel.org, kuniyu@amazon.com, bpf@vger.kernel.org, 
-	netdev@vger.kernel.org, dave.taht@gmail.com, jhs@mojatatu.com, 
-	kuba@kernel.org, stephen@networkplumber.org, xiyou.wangcong@gmail.com, 
-	jiri@resnulli.us, davem@davemloft.net, andrew+netdev@lunn.ch, 
-	donald.hunter@gmail.com, ast@fiberby.net, liuhangbin@gmail.com, 
-	shuah@kernel.org, linux-kselftest@vger.kernel.org, ij@kernel.org, 
-	ncardwell@google.com, koen.de_schepper@nokia-bell-labs.com, 
-	g.white@cablelabs.com, ingemar.s.johansson@ericsson.com, 
-	mirja.kuehlewind@ericsson.com, cheshire@apple.com, rs.ietf@gmx.at, 
-	Jason_Livingood@comcast.com, vidhi_goel@apple.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-On Mon, Sep 8, 2025 at 10:34=E2=80=AFAM <chia-yu.chang@nokia-bell-labs.com>=
- wrote:
->
-> From: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
->
-> As SACK blocks tend to eat all option space when there are
-> many holes, it is useful to compromise on sending many SACK
-> blocks in every ACK and attempt to fit the AccECN option
-> there by reducing the number of SACK blocks. However, it will
-> never go below two SACK blocks because of the AccECN option.
->
-> As the AccECN option is often not put to every ACK, the space
-> hijack is usually only temporary. Depending on the reuqired
-> AccECN fields (can be either 3, 2, 1, or 0, cf. Table 5 in
-> AccECN spec) and the NOPs used for alignment of other
-> TCP options, up to two SACK blocks will be reduced. Please
-> find below tables for more details:
->
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+
-> | Number of | Required | Remaining |  Number of  |    Final    |
-> |   SACK    |  AccECN  |  option   |  reduced    |  number of  |
-> |  blocks   |  fields  |  spaces   | SACK blocks | SACK blocks |
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+
-> |  x (<=3D2)  |  0 to 3  |    any    |      0      |      x      |
-> +-----------+----------+-----------+-------------+-------------+
-> |     3     |    0     |    any    |      0      |      3      |
-> |     3     |    1     |    <4     |      1      |      2      |
-> |     3     |    1     |    >=3D4    |      0      |      3      |
-> |     3     |    2     |    <8     |      1      |      2      |
-> |     3     |    2     |    >=3D8    |      0      |      3      |
-> |     3     |    3     |    <12    |      1      |      2      |
-> |     3     |    3     |    >=3D12   |      0      |      3      |
-> +-----------+----------+-----------+-------------+-------------+
-> |  y (>=3D4)  |    0     |    any    |      0      |      y      |
-> |  y (>=3D4)  |    1     |    <4     |      1      |     y-1     |
-> |  y (>=3D4)  |    1     |    >=3D4    |      0      |      y      |
-> |  y (>=3D4)  |    2     |    <8     |      1      |     y-1     |
-> |  y (>=3D4)  |    2     |    >=3D8    |      0      |      y      |
-> |  y (>=3D4)  |    3     |    <4     |      2      |     y-2     |
-> |  y (>=3D4)  |    3     |    <12    |      1      |     y-1     |
-> |  y (>=3D4)  |    3     |    >=3D12   |      0      |      y      |
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+
->
-> Signed-off-by: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
-> Co-developed-by: Ilpo J=C3=A4rvinen <ij@kernel.org>
-> Signed-off-by: Ilpo J=C3=A4rvinen <ij@kernel.org>
+"Matthieu Baerts (NGI0)" <matttbe@kernel.org> writes:
 
-Reviewed-by: Eric Dumazet <edumazet@google.com>
+> Some attribute-set have a documentation (doc:), but it was not displayed
+> in the RST / HTML version. Such field can be found in ethtool, netdev,
+> tcp_metrics and team YAML files.
+>
+> Only the 'name' and 'attributes' fields from an 'attribute-set' section
+> were parsed. Now the content of the 'doc' field, if available, is added
+> as a new paragraph before listing each attribute. This is similar to
+> what is done when parsing the 'operations'.
+
+This fix looks good, but exposes the same issue with the team
+attribute-set in team.yaml.
+
+The following patch is sufficient to generate output that sphinx doesn't
+mangle:
+
+diff --git a/Documentation/netlink/specs/team.yaml b/Documentation/netlink/specs/team.yaml
+index cf02d47d12a4..fae40835386c 100644
+--- a/Documentation/netlink/specs/team.yaml
++++ b/Documentation/netlink/specs/team.yaml
+@@ -25,7 +25,7 @@ definitions:
+ attribute-sets:
+   -
+     name: team
+-    doc:
++    doc: |
+       The team nested layout of get/set msg looks like
+           [TEAM_ATTR_LIST_OPTION]
+               [TEAM_ATTR_ITEM_OPTION]
+
+> Signed-off-by: Matthieu Baerts (NGI0) <matttbe@kernel.org>
+> ---
+> Note: this patch can be applied without conflicts on top of net-next and
+> docs-next. To be honest, it is not clear to me who is responsible for
+> applying it :)
+> ---
+>  tools/net/ynl/pyynl/lib/doc_generator.py | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/tools/net/ynl/pyynl/lib/doc_generator.py b/tools/net/ynl/pyynl/lib/doc_generator.py
+> index 403abf1a2edaac6936d0e9db0623cd3e07aaad8e..3a16b8eb01ca0cf61a5983d3bd6a866e04c75844 100644
+> --- a/tools/net/ynl/pyynl/lib/doc_generator.py
+> +++ b/tools/net/ynl/pyynl/lib/doc_generator.py
+> @@ -289,6 +289,10 @@ class YnlDocGenerator:
+>          for entry in entries:
+>              lines.append(self.fmt.rst_section(namespace, 'attribute-set',
+>                                                entry["name"]))
+> +
+> +            if "doc" in entry:
+> +                lines.append(self.fmt.rst_paragraph(entry["doc"], 0) + "\n")
+> +
+>              for attr in entry["attributes"]:
+>                  if LINE_STR in attr:
+>                      lines.append(self.fmt.rst_lineno(attr[LINE_STR]))
+>
+> ---
+> base-commit: deb105f49879dd50d595f7f55207d6e74dec34e6
+> change-id: 20250910-net-next-ynl-attr-doc-rst-b61532634245
+>
+> Best regards,
 
