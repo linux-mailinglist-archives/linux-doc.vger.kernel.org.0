@@ -1,130 +1,144 @@
-Return-Path: <linux-doc+bounces-59856-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59858-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7147DB5278D
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 06:26:23 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A4CAB527CF
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 06:46:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2CBEA480153
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 04:26:22 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 314F4563C5A
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 04:46:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D3A70253B4C;
-	Thu, 11 Sep 2025 04:25:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CC39120766E;
+	Thu, 11 Sep 2025 04:46:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Y8GjP8FT"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QVUvX8H9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F86924A04A;
-	Thu, 11 Sep 2025 04:25:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 231F84315F
+	for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 04:46:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757564740; cv=none; b=htaXQhTnKS69JJKrkN2GIhSQ9IjxUEF/ta00adSXjgk98MiRtNXdlsHBV3cfejw2/k9Da50YGm24n4tHt42UwFIyc2BYqXLADrRnVobVaoI8FyYtsuGlzwRGtoOEoapZOF83InMNVCcbRHH7mVOwUkHisOd4Zl80FmqW3WViDYE=
+	t=1757565973; cv=none; b=Rng17x313E06Wq3erstzC4SI+gk+6blHKP+dTpC2j5f1jETqhcEs9rPQW/VHcP2aIa/Z6UKopa3OsI00z2lFfhQVGydAMSvDbiqUECP4XGw7HRnBLO8e13IrqKfPwKEVFXdKEVNEaaZIHLvl7PG2YHkODAmIgCndX2RJz/85xwU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757564740; c=relaxed/simple;
-	bh=jZWB1p//ISIVh97qcAyBtmJJXK3oz2kT8G7DjODCOR8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=byyydchr3hbiIEtBe4ineq3Bn+NBC92kVff5h/bMne6RhW4lJ8iLMydzt9ai0VmBzrENHN21dxyFDQ0rOHZE85mT2jv3YKcT2NitDFRcdTAQEA8q2z48uCfq/YeSk7gEUD5ew486akq72WiUInCmDyXcpF6Rr3XcV82DiQuRiFw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Y8GjP8FT; arc=none smtp.client-ip=209.85.214.176
+	s=arc-20240116; t=1757565973; c=relaxed/simple;
+	bh=ZYQmQVPBF8zKRLNJ+D4bhiIq4DL1k5MFPT2Ve8g115I=;
+	h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=RfFpn6h0p3WAN0YmOj0J9tZ/jvbeU0n5LywjG8fB5mbulDXSlGRMtxA+Pt2jd+8VcLVD1Q0wdiytYG5r3yJKOX2BivMH+W2HGeOpZKH4piy2Nf7gVXLGdoWAEQaDxZA3uW6CDkapW4E0YeqWuf6UiEiFIZ3Hde4aa3xOf9DLbsU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QVUvX8H9; arc=none smtp.client-ip=209.85.128.182
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-25221fa3c9bso11370565ad.0;
-        Wed, 10 Sep 2025 21:25:38 -0700 (PDT)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-71d605c6501so2231617b3.3
+        for <linux-doc@vger.kernel.org>; Wed, 10 Sep 2025 21:46:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757564738; x=1758169538; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lU89Xc9Cv0xX/7xLo9LGEng1r4NnOlTOyfnu4zvH4C0=;
-        b=Y8GjP8FTgSjDRIc3nn5byfb3hojdO5klb0b3uhASwIl0/yE+v7/EHNd2wvosDC1UzZ
-         hO+nbCqNJLDeS0AUmOzlehlPH6dLDxzbIzf8RJLNO6J1oMmfX1MudQuwpPEOGTbmAAvw
-         2QTRftfNwfWGC8bqQgB2B0gc1lzUREilkEXxBLPoorUZC1HdNllMcFcrjUokX/oodg9+
-         9QE7/dSOtVaShqVS5Li+UfZSB/ftKct3mEygOxXh/TrneuuiKOO1az2nuFwu+Oi913EQ
-         BHFt+AWQsmKEXHs8EUqxAVojLs33bTb+G1gSg4gOb72LuqmDjvq+x1bsqF/jnhxEXOZq
-         gVGg==
+        d=gmail.com; s=20230601; t=1757565971; x=1758170771; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=1OFQORNmMyhF8NqnLlI7wxOYnlK/yXDebbJxZdkpHcc=;
+        b=QVUvX8H99YU7pKHdlG0uydz/0HeW8qJ53/5dxsUs7PeTDkdQi08HUM3DSol7FAMrc1
+         QjvuOZ6McvDLrVzHOPstBnf2dM352XnRuaM+Oya5mh/EV3Dk1/YZtXvGgYXwV8N02Ptk
+         mZ+cNc/0dGHSXwQHYM2lJEzl+2IN+h1eZWaQ+jMWNhkFrIaGbtI0msA0m8G9lG+MI/os
+         nFSXEZFBWMwik4LSj2G2gh9/t/T4eSZwGZrr4LtyFCPJIuPvsC3rMo0Qq3CQXrvHD+QM
+         ZJ+BBPZLAw+BWzNaBAR437h889AHD/XGanoQ7YJ197Ld1WVYEF+foVEuv+qK1jj3wiXp
+         gp+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757564738; x=1758169538;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=lU89Xc9Cv0xX/7xLo9LGEng1r4NnOlTOyfnu4zvH4C0=;
-        b=jwROwEF0FQXW/WKP7RhJqKONxyIiu0NrYVOYE0WBDB4sG5GmTkV6jEzqtxKG4t+V0+
-         npVpWu9SUkRjtnddMJxJGP/h4oTVRfiXv0CUGJCKXzYU18h8zN2vVOCG0YHdkmTr1aP6
-         9ZV3NU0jS5tGyqWCbZy9G3340VddU3r1KkrfQ2R7nhxRyGxaYigxmScKiy0zHjfrybtG
-         FgO/gZifsJd+rwxFizxEBfcAG0S7vO5bd5JVJw1j/gdnaWRFJm0r1YjLxUfBhWRFEv91
-         m06RE1kvIIuHZHGn2j4RpEXs+tprjpo0YyzkfX6OjTpkl5Q3NbxHx75NVS2TgqZcqgrT
-         ypaw==
-X-Forwarded-Encrypted: i=1; AJvYcCUFLvsE3FxlTutQf20+BnaqRxH8XE++2PyTgyFeg/R33XxPFpIP93orZMWSg0q2g42tHNPPzj8n0bo=@vger.kernel.org, AJvYcCW93YgXJm4lJWP/N0d6yL2opMHrGfMb0j23sceV9P1e9lvdC+/g2eBzudpRH2fXhzvnDk+JJvOHQS5KpEVCiy0MtQT4@vger.kernel.org
-X-Gm-Message-State: AOJu0YzsTU7irtCaWCOMdQYOqoiO+Ff11XrWKI+Ml4y4/u1IKZwiY1bS
-	RmuhwNMAaUI9IDnnkjtP16/AjxxR2PqrPEwzMPE4LDMXscv9/H2SlY+O
-X-Gm-Gg: ASbGncuCVM5OWns8rEb6wyhHsGSIY9NGtBFIcQOTTlLRluwlAzTBccU2z1gp1p9GKGY
-	vd/e6A0MLMkhbC0ebVXG6IJjzeBzeNZ6zGOanIYbaGVajDzfmStMLBWz1GaCnILnA677X/vMnq6
-	BcyRLzfFMgeoOYQE2cXJl3IRv5RVn7WhJmzRY9hmbLOI81aLndT8HVq92IuzDdSrKxafw4y+Rfz
-	G4HQEjKDOC9NMI4zCIOW6UuxNp4LutdqaclImbn5j9gzZWIvWfC6wkb4wwrbTs2yT2CyNrMViKb
-	010/bxEWz+2x27dBghOLA5SFqilnHyqKAfFNqc/B3ELjKBbKoqcp+tjU6RMLZ2aJJomjqMTqS6c
-	3NZ6xJQnS2abFsOxXnDN6dTRjmw==
-X-Google-Smtp-Source: AGHT+IHbS9cB5BACUix80S5lFEGDN0c9HkDKYow+/+wRkyV1CA17KHmwOoLnPeMBuOiW9pBwUbDVfw==
-X-Received: by 2002:a17:903:2442:b0:231:d0da:5e1f with SMTP id d9443c01a7336-25bad5670b1mr20564335ad.21.1757564738271;
-        Wed, 10 Sep 2025 21:25:38 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-25c3a84a62esm4148865ad.66.2025.09.10.21.25.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Sep 2025 21:25:36 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id D4B8141BEA9C; Thu, 11 Sep 2025 11:25:30 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux Kernel Tracing <linux-trace-kernel@vger.kernel.org>
-Cc: Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Tom Zanussi <zanussi@kernel.org>,
-	Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH 5/5] Documentation: trace: histogram: Link to ftrace docs
-Date: Thu, 11 Sep 2025 11:25:27 +0700
-Message-ID: <20250911042527.22573-6-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250911042527.22573-1-bagasdotme@gmail.com>
-References: <20250911042527.22573-1-bagasdotme@gmail.com>
+        d=1e100.net; s=20230601; t=1757565971; x=1758170771;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=1OFQORNmMyhF8NqnLlI7wxOYnlK/yXDebbJxZdkpHcc=;
+        b=sG+jpfYxf9b3ggkRVEXmhPzHRI7dZvl1UJ/E+BgdxJeFUogtBKbwMOB7Z4Lx1WJt62
+         MoRFye0bvwX8vI+hWU0HFNBPvlXPz0QPJKRQk2s7eS7KVQJhGOgs5I76OcwEnEj8d+Te
+         zgQVFXmtchdXmbL0VJAgYFd6ekBKYTJZHashZ9q0iUfI0MpZgErFw95o6XPCruIkH+nO
+         UFutQTgJmlpL3YeNY+G8OUzapU5Lm6L5id86fohTxlFpD7n7pKCdAAE5xJr+7L0yndHF
+         N4/GuvTVopumerpalHmu/TVZRzbwjON3SuoK5f6fnivXrpFBDLstRx8IcnURZ3Z5WnQy
+         WyNQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVmmixv/oWi6U5Dib5980r24fbUKv/0VPSYlVKCyHpomRmWFQL/Wl1nESZdxJZ5Z4DYynaw7BuO9So=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzcLpi/wV0nVGIKhqvW/DA8rPdaxSsowc12K+QyTVp5aMfkCVN7
+	jFPdCoQrgsNsv/BNTlD+zKvFeZirx2kJeeo4Gj7IJwtjoMF2/fAF2dx1
+X-Gm-Gg: ASbGncsGur4Yn6WkE7NOdKfKA2rOfjIz2ELNGLdpN5Jumi+EQyTNqnt5zgOBWWj5ybL
+	HAMeltKnLqFfitUvJuFWJ05gz9O+r/T6oP8gN/STbSHx/sNDo/mSNY7taPgnys+QImgHWtcGMdW
+	buJ52ivDGpJGPT1Yf5cVbo4bi+p1oMbpbBJrePK1cr1CQiHhN/NWofN4H04ljey6w/c1WYwmJVZ
+	/IkntH4u69hxw7XjdbIxW+T8+IAnYzkqvqVXvA3JyBgL0UpnXpQpQn7i4xFF2dBi+vEKi57/VIS
+	1VfEqwlDoVV6Qr7yzJq0e7yoXIIPlbgm1hTgrb0TX+Q33CpNO5A9JIMVK4hnkqH0vRAJodjEjL2
+	ewE8CBUk5z8IJQi+neWQZLUAnhhj6ZhDXxqFGSKb6ymn5fpK8Og+1E1yUgkRmO+nC36sKBDbP4w
+	==
+X-Google-Smtp-Source: AGHT+IE09XmvpU67NiXH7rk2LbrDMhUi3e2OWnnlWTn7trnF2NMGewy0hktXoxQgahi3Y4iKLHRnRg==
+X-Received: by 2002:a05:690c:6309:b0:722:7a7f:5358 with SMTP id 00721157ae682-727f28e7503mr153782967b3.4.1757565970388;
+        Wed, 10 Sep 2025 21:46:10 -0700 (PDT)
+Received: from [192.168.1.209] (74.211.99.176.16clouds.com. [74.211.99.176])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-72f76c28400sm1130767b3.30.2025.09.10.21.46.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 10 Sep 2025 21:46:09 -0700 (PDT)
+From: Asuna <spriteovo@gmail.com>
+X-Google-Original-From: Asuna <SpriteOvO@gmail.com>
+Message-ID: <6bceca9d-44cd-4373-a456-7c2129b418e3@gmail.com>
+Date: Thu, 11 Sep 2025 12:46:01 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1030; i=bagasdotme@gmail.com; h=from:subject; bh=jZWB1p//ISIVh97qcAyBtmJJXK3oz2kT8G7DjODCOR8=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBmH/C7wBhZHffl0yaDud05e5vp007M3c7Jd50XXHA+cM i+Hof9BRykLgxgXg6yYIsukRL6m07uMRC60r3WEmcPKBDKEgYtTACZy9xgjw+snTy3TOQ6+N2d+ eMW7LNTVITpmcWh2jVRNMM+9qZscdBkZ1rZc1M/2c7mxMjj1qq5rknjL02xxlSP3ZwfMObl07tx yRgA=
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] RISC-V: re-enable gcc + rust builds
+To: Conor Dooley <conor@kernel.org>
+Cc: Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Benno Lossin <lossin@kernel.org>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+ Danilo Krummrich <dakr@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
+ Alexandre Ghiti <alex@ghiti.fr>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+ Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ Han Gao <rabenda.cn@gmail.com>, rust-for-linux@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-riscv@lists.infradead.org, linux-kbuild@vger.kernel.org,
+ llvm@lists.linux.dev
+References: <20250909-gcc-rust-v2-v2-1-35e086b1b255@gmail.com>
+ <20250910-harmless-bamboo-ebc94758fdad@spud>
+Content-Language: en-US
+In-Reply-To: <20250910-harmless-bamboo-ebc94758fdad@spud>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-In brief "Extended error information" section, details on error
-condition is referred to ftrace docs. Add the link to it.
+On 9/10/25 10:27 PM, Conor Dooley wrote:
+> FWIW, this --- breaks git, and anything after this line (including your
+> signoff) is lost when the patch is applied.
 
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/trace/histogram.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I used b4 command to prepare and send the cover letter and patch for v2, 
+not sure what happened.
 
-diff --git a/Documentation/trace/histogram.rst b/Documentation/trace/histogram.rst
-index d158dadaa42447..340bcb5099e7a4 100644
---- a/Documentation/trace/histogram.rst
-+++ b/Documentation/trace/histogram.rst
-@@ -209,8 +209,8 @@ Documentation written by Tom Zanussi
- 
-   For some error conditions encountered when invoking a hist trigger
-   command, extended error information is available via the
--  tracing/error_log file.  See Error Conditions in
--  :file:`Documentation/trace/ftrace.rst` for details.
-+  tracing/error_log file.  See "Error conditions" section in
-+  Documentation/trace/ftrace.rst for details.
- 
- 2.3. 'hist' trigger examples
- ----------------------------
--- 
-An old man doll... just what I always wanted! - Clara
+I see that other people's patches have a [PATCH 0/n] email as a start 
+that describes their patch series, this is called a cover-letter in b4 
+and git-send-email right?
 
+> The riscv patchwork CI stuff is really unhappy with this change:
+> init/Kconfig:87: syntax error
+> init/Kconfig:87: invalid statement
+> init/Kconfig:88: invalid statement
+> init/Kconfig:89:warning: ignoring unsupported character '`'
+> init/Kconfig:89:warning: ignoring unsupported character '`'
+> init/Kconfig:89:warning: ignoring unsupported character '.'
+> init/Kconfig:89: unknown statement "This"
+>
+> Is this bogus, or can rustc-bindgen-libclang-version return nothing
+> under some conditions where rust is not available?
+> Should this have 2 default lines like some other options in the file?
+
+This is because rustc-bindgen-libclang-version can't find the bindgen 
+and returns nothing. Sorry I forgot to mention this, it's another reason 
+why I wanted to separate the script, in a separate script we can easily 
+fallback to return 0 when an error is encountered.
+
+Adding a second line `default 0` doesn't work, I'll try to fix it. BTW, 
+when I fix it, if the diff isn't too large, do I need to open a v3 
+patch, or simply replying to the thread just fine?
 
