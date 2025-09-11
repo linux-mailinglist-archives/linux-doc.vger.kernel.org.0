@@ -1,281 +1,388 @@
-Return-Path: <linux-doc+bounces-59873-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59885-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E28EB52AB8
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 09:57:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DE49B52B2C
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 10:06:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 974A31BC2E09
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 07:57:11 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id F105A1C210CD
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 08:06:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77DAC2C0270;
-	Thu, 11 Sep 2025 07:56:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="C1dkI6Oo"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7BD8C2D3EF8;
+	Thu, 11 Sep 2025 08:06:33 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx3.molgen.mpg.de (mx3.molgen.mpg.de [141.14.17.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B36E2C026A
-	for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 07:56:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC9452D1932;
+	Thu, 11 Sep 2025 08:06:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=141.14.17.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757577397; cv=none; b=DPky7wTLH48SPWc3Mxhe1/jmZxGa7+Na+gNoG1cf1s8//nzC/f5LnQRPfickk7n/F7XlHrR3ZMQ+8gkiT2qepgeEx2R0llyk1tGjMHVFvpU3doS7+hkRbL/ukC9gnfA4FM8+88HPv3ybsV/7KqkLF7RWEXn138P4FXlzrTLtFl8=
+	t=1757577993; cv=none; b=HG0PHw11HpyZjWJ0OLMX0EPeMxuj4h1eMltLyBhlUTf+DhnGmW2w5WfDI0xD93BFwZOGcHRBKqToMKd2F4ErOoD3dRVto5js4C9VyyOGDcPV/hGxtP3KHw4+aDprS003CbGHETPQLyGmX2rGSnfo+NiUi4X5O6MtceUUjmYQLG0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757577397; c=relaxed/simple;
-	bh=iQptQ7gTbmXxopSjxBxOANU0HqRVgiApdv76+PN6Eag=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=JOYkTzEYntyBtDCdItz77PTN1OwbuLJI6EbFwXTiAf3PEGnxh5HB5Wb/BZ3LegkaiyHpSOvQZKd+r8jOPFX9/f5nonPqAK4zLUfe2w3eFRgh5v8kRiA0drYTwxPpC+wdsq8E43JvztVOSVU/3WHcRSlCGe8Frcpqii9BaH3eFNY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=C1dkI6Oo; arc=none smtp.client-ip=209.85.210.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-ot1-f50.google.com with SMTP id 46e09a7af769-746d72028e0so369979a34.2
-        for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 00:56:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1757577394; x=1758182194; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gcHgyDkcspweVIk7kRhliSymO4E+l9imWizmqVG+IwQ=;
-        b=C1dkI6OoBl84RGEkPIel8mXic7XqikfRUDV7psj/UWtUjQYMj4vonX53DwUYqjiMsT
-         fAR3QR1UKz4Txn7pTSSQ1zSwljsLSGqIE2UQe1ebOdFMU/EmeUo2KasMEPJ+8hrn7Waa
-         /cDvCmmvjI8NnK+j+0iQwxeido3CA6/o/7tpiodBIVsIhA/2q3e0aqcUguenA59OuwPz
-         147MQNleCaTsFIZFd9AWHX3m7fOBy+P46SewE3hwLGH++x4mViBEL6DSh9KipnYyalyL
-         sCSkUS8ctdj4xxU6mNnNtUPtT9ys9B5Fy2fniCKDjQXT3wDpJCbTnjtty5dg0g6JgpqK
-         jjBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757577394; x=1758182194;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gcHgyDkcspweVIk7kRhliSymO4E+l9imWizmqVG+IwQ=;
-        b=OEnhCWgUOAycncUtZrIxE+oj2938cmj2DSALdhiZWkyAWKY6vsfUa/NBXLfw0SQIUe
-         8RvmVMXziH5Pwy8zFwANs+c7hG4MiPadRgCneCP1W4mXCNP2KZS4ZI/84le4oCi6P0jm
-         579U0642yh2YcW1dHnAqiig0tv5NmkVSwsB70ULsV4yXx03xzjqqo5wXKtIGD553WALf
-         rLyOoBh3DJKbBVDc8LdRj7di4Do+AJmNUDX31MHxjCtcYZ35tRouWBekAavL58VCTNeQ
-         ScRz+wXfYHo/lW1pbM9k+p4Xee9h1JoxzQmH6WbmRYwI1pwP95SvVRbWwRGgJHi1nDdv
-         0HXA==
-X-Forwarded-Encrypted: i=1; AJvYcCV/DI1gGn8Vt0wPEXlmthI6rEpHGhTDD1dvXFBWkVk+r8RAIIxzDe0+8SEzkL+dswcEq1wbu2ziJG4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxMg40zWR1AGFEaVQJnPavAYdZlONg8pVUenXrm2mr/kwHklxzF
-	KEoXrGj0g9mBarAuC42usR3JrkJJi8aHNk84hMx2PFeGrtRQI4RQ7tbfOXseEkiPBDHSPD7pzHw
-	IQ/up/pCKYARXCbe5WFrzBQak5PXmbtpPL4ZL4gyRCA==
-X-Gm-Gg: ASbGnctKrEEauxZhtjXWxYxU7HihrUyPSyLZhnHu6ty8a7soZXT1qxXGm/1OAfWkhA4
-	ULYFr84ciqe08qUPNzIYBCjgLYnpwTNLnW/EyhPCLbuWBD9LZuTb4+2d/2UfDdrwW1aDJULziCd
-	lYLLbf6nL3j6VDwa5QSYlqH8WIrMEscwmrWO9WpjUSKwQ6WcbPg+jh4S8WqnVDTWFYXqomuC5v8
-	c1q0m+z3ukdjKZq/oo=
-X-Google-Smtp-Source: AGHT+IG9ZMBIi6nBb96Zia9gSrtbi78A+YjqGi7eJdd43h+fxHz0Dsu/RXvlzn6cV1ytlcXB923nl0QOCRHh3jcErhM=
-X-Received: by 2002:a05:6830:67c5:b0:746:d4d3:c8b3 with SMTP id
- 46e09a7af769-74c720f972bmr10157224a34.15.1757577394426; Thu, 11 Sep 2025
- 00:56:34 -0700 (PDT)
+	s=arc-20240116; t=1757577993; c=relaxed/simple;
+	bh=Tctf7guLh0JbnxfzZRx44ezfKNWdFjKymefYous9EeY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=H7XnuG0LcByEH8cwShY0JgieUWCJ7pZQ2NKFoHfplJBRa7Smzn4sKVzOVv0d5OQxzvwKaQVkhspwABpitH/YJRC+vGFEbdMYPwEmIvgXWn902ue6oSnFbkNMunG+1B8ftERcEaJ6acDm0WHvgHy5q8+E7imoJbr8ig7IxgKPjYM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=molgen.mpg.de; spf=pass smtp.mailfrom=molgen.mpg.de; arc=none smtp.client-ip=141.14.17.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=molgen.mpg.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=molgen.mpg.de
+Received: from [192.168.0.192] (ip5f5af7f6.dynamic.kabel-deutschland.de [95.90.247.246])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: pmenzel)
+	by mx.molgen.mpg.de (Postfix) with ESMTPSA id A412260213B27;
+	Thu, 11 Sep 2025 10:05:18 +0200 (CEST)
+Message-ID: <3759cfba-93a3-4252-99a3-97219e50bdf5@molgen.mpg.de>
+Date: Thu, 11 Sep 2025 10:05:18 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250910-qcom-tee-using-tee-ss-without-mem-obj-v11-0-520e867b3d74@oss.qualcomm.com>
- <20250910-qcom-tee-using-tee-ss-without-mem-obj-v11-5-520e867b3d74@oss.qualcomm.com>
-In-Reply-To: <20250910-qcom-tee-using-tee-ss-without-mem-obj-v11-5-520e867b3d74@oss.qualcomm.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Thu, 11 Sep 2025 09:56:23 +0200
-X-Gm-Features: Ac12FXyIP0WtPINFQV_xAL4fJ4Nl0DDdmiM8KSkVr4BQuuRBN2IjnhZ18XWv8gI
-Message-ID: <CAHUa44EsGNuYzjZo_kBJfa6O6u0o14tfDNo2fhSeo+g0BpwX7Q@mail.gmail.com>
-Subject: Re: [PATCH v11 05/11] tee: add TEE_IOCTL_PARAM_ATTR_TYPE_UBUF
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, Apurupa Pattapu <quic_apurupa@quicinc.com>, 
-	Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
-	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	Harshal Dev <quic_hdev@quicinc.com>, linux-arm-msm@vger.kernel.org, 
-	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org, 
-	linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, 
-	Sumit Garg <sumit.garg@oss.qualcomm.com>, Neil Armstrong <neil.armstrong@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/2] md: allow configuring logical_block_size
+To: Li Nan <linan666@huaweicloud.com>
+Cc: corbet@lwn.net, song@kernel.org, yukuai3@huawei.com, linan122@huawei.com,
+ xni@redhat.com, hare@suse.de, martin.petersen@oracle.com,
+ bvanassche@acm.org, filipe.c.maia@gmail.com, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-raid@vger.kernel.org,
+ yangerkun@huawei.com, yi.zhang@huawei.com
+References: <20250911073144.42160-1-linan666@huaweicloud.com>
+ <20250911073144.42160-3-linan666@huaweicloud.com>
+Content-Language: en-US
+From: Paul Menzel <pmenzel@molgen.mpg.de>
+In-Reply-To: <20250911073144.42160-3-linan666@huaweicloud.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi Amir,
+Dear Nan,
 
-On Thu, Sep 11, 2025 at 5:41=E2=80=AFAM Amirreza Zarrabi
-<amirreza.zarrabi@oss.qualcomm.com> wrote:
->
-> For drivers that can transfer data to the TEE without using shared
-> memory from client, it is necessary to receive the user address
-> directly, bypassing any processing by the TEE subsystem. Introduce
-> TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT/OUTPUT/INOUT to represent
-> userspace buffers.
->
-> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-> Tested-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Tested-by: Harshal Dev <quic_hdev@quicinc.com>
-> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+
+Thank you for your patch. Some minor nits. i’d write logical block size 
+without underscores in the summary and commit message body, if the 
+variable is not referenced.
+
+Am 11.09.25 um 09:31 schrieb linan666@huaweicloud.com:
+> From: Li Nan <linan122@huawei.com>
+> 
+> Previously, raid array used the maximum logical_block_size (LBS) of
+> all member disks. Adding a larger LBS during disk at runtime could
+
+… when adding a disk …?
+
+> unexpectedly increase RAID's LBS, risking corruption of existing
+> partitions.
+> 
+> Simply restricting larger-LBS disks is inflexible. In some scenarios,
+> only disks with 512 LBS are available currently, but later, disks with
+
+512 bytes
+
+> 4k LBS may be added to the array.
+
+4 kB
+
+> Making LBS configurable is the best way to solve this scenario.
+> After this patch, the raid will:
+>    - stores LBS in disk metadata.
+
+store without 3rd person s
+
+>    - add a read-write sysfs 'mdX/logical_block_size'.
+
+I’d remove the the dot/period at the end of the items.
+
+> Future mdadm should support setting LBS via metadata field during RAID
+> creation and the new sysfs. Though the kernel allows runtime LBS changes,
+> users should avoid modifying it after creating partitions or filesystems
+> to prevent compatibility issues.
+> 
+> Note that many RAID paths rely on PAGE_SIZE alignment, including for
+> metadata I/O. A logical_block_size larger than PAGE_SIZE will result in
+> metadata reads/writes failures. So this config should be prevented.
+
+read/write
+
+> Only 1.x meta supports configurable logical_block_size. 0.90 meta init
+
+initializes/init*s*
+
+> all fields to default at auto-detect. Supporting 0.90 would require more
+> extensive changes and no such use case has been observed.
+
+It’d be great if you added a section, how you tested your patch.
+
+> Signed-off-by: Li Nan <linan122@huawei.com>
 > ---
->  drivers/tee/tee_core.c   | 33 +++++++++++++++++++++++++++++++++
->  include/linux/tee_drv.h  |  6 ++++++
->  include/uapi/linux/tee.h | 22 ++++++++++++++++------
->  3 files changed, 55 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/tee/tee_core.c b/drivers/tee/tee_core.c
-> index f8534a00c56c..bb2e3a6c23a3 100644
-> --- a/drivers/tee/tee_core.c
-> +++ b/drivers/tee/tee_core.c
-> @@ -457,6 +457,17 @@ static int params_from_user(struct tee_context *ctx,=
- struct tee_param *params,
->                         params[n].u.value.b =3D ip.b;
->                         params[n].u.value.c =3D ip.c;
->                         break;
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT:
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INOUT:
-> +                       params[n].u.ubuf.uaddr =3D u64_to_user_ptr(ip.a);
-> +                       params[n].u.ubuf.size =3D ip.b;
-> +
-> +                       if (!access_ok(params[n].u.ubuf.uaddr,
-> +                                      params[n].u.ubuf.size))
-> +                               return -EFAULT;
-> +
-> +                       break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
-> @@ -490,6 +501,11 @@ static int params_to_user(struct tee_ioctl_param __u=
-ser *uparams,
->                             put_user(p->u.value.c, &up->c))
->                                 return -EFAULT;
->                         break;
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INOUT:
-> +                       if (put_user((u64)p->u.ubuf.size, &up->b))
-> +                               return -EFAULT;
-> +                       break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
->                         if (put_user((u64)p->u.memref.size, &up->b))
-> @@ -690,6 +706,13 @@ static int params_to_supp(struct tee_context *ctx,
->                         ip.b =3D p->u.value.b;
->                         ip.c =3D p->u.value.c;
->                         break;
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT:
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INOUT:
-> +                       ip.a =3D (__force u64)p->u.ubuf.uaddr;
+>   Documentation/admin-guide/md.rst |  7 +++
+>   drivers/md/md.h                  |  1 +
+>   include/uapi/linux/raid/md_p.h   |  3 +-
+>   drivers/md/md-linear.c           |  1 +
+>   drivers/md/md.c                  | 75 ++++++++++++++++++++++++++++++++
+>   drivers/md/raid0.c               |  1 +
+>   drivers/md/raid1.c               |  1 +
+>   drivers/md/raid10.c              |  1 +
+>   drivers/md/raid5.c               |  1 +
+>   9 files changed, 90 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/admin-guide/md.rst b/Documentation/admin-guide/md.rst
+> index 1c2eacc94758..f5c81fad034a 100644
+> --- a/Documentation/admin-guide/md.rst
+> +++ b/Documentation/admin-guide/md.rst
+> @@ -238,6 +238,13 @@ All md devices contain:
+>        the number of devices in a raid4/5/6, or to support external
+>        metadata formats which mandate such clipping.
+>   
+> +  logical_block_size
+> +     Configures the array's logical block size in bytes. This attribute
+> +     is only supported for RAID1, RAID5, RAID10 with 1.x meta. The value
 
-There's a warning on arm32:
-drivers/tee/tee_core.c: In function 'params_to_supp':
-drivers/tee/tee_core.c:821:32: warning: cast from pointer to integer
-of different size [-Wpointer-to-int-cast]
-  821 |                         ip.a =3D (__force u64)p->u.ubuf.uaddr;
+metadata
 
-I think you need to cast to unsigned long instead.
+> +     should be written before starting the array. The final array LBS
+> +     will use the max value between this configuration and all rdev's LBS.
 
-Cheers,
-Jens
+Should rdev be explained in the documentation?
 
+> +     Note that LBS cannot exceed PAGE_SIZE.
 
-> +                       ip.b =3D p->u.ubuf.size;
-> +                       ip.c =3D 0;
-> +                       break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
-> @@ -792,6 +815,16 @@ static int params_from_supp(struct tee_param *params=
-, size_t num_params,
->                         p->u.value.b =3D ip.b;
->                         p->u.value.c =3D ip.c;
->                         break;
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
-> +               case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INOUT:
-> +                       p->u.ubuf.uaddr =3D u64_to_user_ptr(ip.a);
-> +                       p->u.ubuf.size =3D ip.b;
+How can PAGE_SIZE be determined? To be clear, that the implementation 
+disallows this:
+
+Not, LBS values larger than PAGE_SIZE are rejected.
+
 > +
-> +                       if (!access_ok(params[n].u.ubuf.uaddr,
-> +                                      params[n].u.ubuf.size))
-> +                               return -EFAULT;
+>     reshape_position
+>        This is either ``none`` or a sector number within the devices of
+>        the array where ``reshape`` is up to.  If this is set, the three
+> diff --git a/drivers/md/md.h b/drivers/md/md.h
+> index afb25f727409..b0147b98c8d3 100644
+> --- a/drivers/md/md.h
+> +++ b/drivers/md/md.h
+> @@ -432,6 +432,7 @@ struct mddev {
+>   	sector_t			array_sectors; /* exported array size */
+>   	int				external_size; /* size managed
+>   							* externally */
+> +	unsigned int			logical_block_size;
+>   	__u64				events;
+>   	/* If the last 'event' was simply a clean->dirty transition, and
+>   	 * we didn't write it to the spares, then it is safe and simple
+> diff --git a/include/uapi/linux/raid/md_p.h b/include/uapi/linux/raid/md_p.h
+> index ac74133a4768..310068bb2a1d 100644
+> --- a/include/uapi/linux/raid/md_p.h
+> +++ b/include/uapi/linux/raid/md_p.h
+> @@ -291,7 +291,8 @@ struct mdp_superblock_1 {
+>   	__le64	resync_offset;	/* data before this offset (from data_offset) known to be in sync */
+>   	__le32	sb_csum;	/* checksum up to devs[max_dev] */
+>   	__le32	max_dev;	/* size of devs[] array to consider */
+> -	__u8	pad3[64-32];	/* set to 0 when writing */
+> +	__le32  logical_block_size;	/* same as q->limits->logical_block_size */
+> +	__u8	pad3[64-36];	/* set to 0 when writing */
+>   
+>   	/* device state information. Indexed by dev_number.
+>   	 * 2 bytes per device
+> diff --git a/drivers/md/md-linear.c b/drivers/md/md-linear.c
+> index 5d9b08115375..da8babb8da59 100644
+> --- a/drivers/md/md-linear.c
+> +++ b/drivers/md/md-linear.c
+> @@ -72,6 +72,7 @@ static int linear_set_limits(struct mddev *mddev)
+>   
+>   	md_init_stacking_limits(&lim);
+>   	lim.max_hw_sectors = mddev->chunk_sectors;
+> +	lim.logical_block_size = mddev->logical_block_size;
+>   	lim.max_write_zeroes_sectors = mddev->chunk_sectors;
+>   	lim.io_min = mddev->chunk_sectors << 9;
+>   	err = mddev_stack_rdev_limits(mddev, &lim, MDDEV_STACK_INTEGRITY);
+> diff --git a/drivers/md/md.c b/drivers/md/md.c
+> index 40f56183c744..e0184942c8ec 100644
+> --- a/drivers/md/md.c
+> +++ b/drivers/md/md.c
+> @@ -1963,6 +1963,7 @@ static int super_1_validate(struct mddev *mddev, struct md_rdev *freshest, struc
+>   		mddev->layout = le32_to_cpu(sb->layout);
+>   		mddev->raid_disks = le32_to_cpu(sb->raid_disks);
+>   		mddev->dev_sectors = le64_to_cpu(sb->size);
+> +		mddev->logical_block_size = le32_to_cpu(sb->logical_block_size);
+>   		mddev->events = ev1;
+>   		mddev->bitmap_info.offset = 0;
+>   		mddev->bitmap_info.space = 0;
+> @@ -2172,6 +2173,7 @@ static void super_1_sync(struct mddev *mddev, struct md_rdev *rdev)
+>   	sb->chunksize = cpu_to_le32(mddev->chunk_sectors);
+>   	sb->level = cpu_to_le32(mddev->level);
+>   	sb->layout = cpu_to_le32(mddev->layout);
+> +	sb->logical_block_size = cpu_to_le32(mddev->logical_block_size);
+>   	if (test_bit(FailFast, &rdev->flags))
+>   		sb->devflags |= FailFast1;
+>   	else
+> @@ -5900,6 +5902,66 @@ static struct md_sysfs_entry md_serialize_policy =
+>   __ATTR(serialize_policy, S_IRUGO | S_IWUSR, serialize_policy_show,
+>          serialize_policy_store);
+>   
+> +static int mddev_set_logical_block_size(struct mddev *mddev,
+> +				unsigned int lbs)
+> +{
+> +	int err = 0;
+> +	struct queue_limits lim;
 > +
-> +                       break;
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT:
->                 case TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT:
->                         /*
-> diff --git a/include/linux/tee_drv.h b/include/linux/tee_drv.h
-> index 824f1251de60..7915e8869cbd 100644
-> --- a/include/linux/tee_drv.h
-> +++ b/include/linux/tee_drv.h
-> @@ -82,6 +82,11 @@ struct tee_param_memref {
->         struct tee_shm *shm;
->  };
->
-> +struct tee_param_ubuf {
-> +       void __user *uaddr;
-> +       size_t size;
-> +};
+> +	if (queue_logical_block_size(mddev->gendisk->queue) >= lbs) {
+> +		pr_err("%s: incompatible logical_block_size %u, can not set\n",
+
+Please also log `queue_logical_block_size(mddev->gendisk->queue)`.
+
+> +		       mdname(mddev), lbs);
+> +		return -EINVAL;
+> +	}
 > +
->  struct tee_param_value {
->         u64 a;
->         u64 b;
-> @@ -92,6 +97,7 @@ struct tee_param {
->         u64 attr;
->         union {
->                 struct tee_param_memref memref;
-> +               struct tee_param_ubuf ubuf;
->                 struct tee_param_value value;
->         } u;
->  };
-> diff --git a/include/uapi/linux/tee.h b/include/uapi/linux/tee.h
-> index d843cf980d98..0e3b735dcfca 100644
-> --- a/include/uapi/linux/tee.h
-> +++ b/include/uapi/linux/tee.h
-> @@ -151,6 +151,13 @@ struct tee_ioctl_buf_data {
->  #define TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_OUTPUT        6
->  #define TEE_IOCTL_PARAM_ATTR_TYPE_MEMREF_INOUT 7       /* input and outp=
-ut */
->
-> +/*
-> + * These defines userspace buffer parameters.
-> + */
-> +#define TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT   8
-> +#define TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT  9
-> +#define TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INOUT   10      /* input and outp=
-ut */
+> +	lim = queue_limits_start_update(mddev->gendisk->queue);
+> +	lim.logical_block_size = lbs;
+> +	pr_info("%s: logical_block_size is changed, data may be lost\n",
+> +		mdname(mddev));
+
+Please print the values, and maybe make it a warning as data loss is 
+possible?
+
+> +	err = queue_limits_commit_update(mddev->gendisk->queue, &lim);
+> +	if (err)
+> +		return err;
 > +
->  /*
->   * Mask for the type part of the attribute, leaves room for more types
->   */
-> @@ -186,14 +193,17 @@ struct tee_ioctl_buf_data {
->  /**
->   * struct tee_ioctl_param - parameter
->   * @attr: attributes
-> - * @a: if a memref, offset into the shared memory object, else a value p=
-arameter
-> - * @b: if a memref, size of the buffer, else a value parameter
-> + * @a: if a memref, offset into the shared memory object,
-> + *     else if a ubuf, address of the user buffer,
-> + *     else a value parameter
-> + * @b: if a memref or ubuf, size of the buffer, else a value parameter
->   * @c: if a memref, shared memory identifier, else a value parameter
->   *
-> - * @attr & TEE_PARAM_ATTR_TYPE_MASK indicates if memref or value is used=
- in
-> - * the union. TEE_PARAM_ATTR_TYPE_VALUE_* indicates value and
-> - * TEE_PARAM_ATTR_TYPE_MEMREF_* indicates memref. TEE_PARAM_ATTR_TYPE_NO=
-NE
-> - * indicates that none of the members are used.
-> + * @attr & TEE_PARAM_ATTR_TYPE_MASK indicates if memref, ubuf, or value =
-is
-> + * used in the union. TEE_PARAM_ATTR_TYPE_VALUE_* indicates value,
-> + * TEE_PARAM_ATTR_TYPE_MEMREF_* indicates memref, and TEE_PARAM_ATTR_TYP=
-E_UBUF_*
-> + * indicates ubuf. TEE_PARAM_ATTR_TYPE_NONE indicates that none of the m=
-embers
-> + * are used.
->   *
->   * Shared memory is allocated with TEE_IOC_SHM_ALLOC which returns an
->   * identifier representing the shared memory object. A memref can refere=
-nce
->
-> --
-> 2.34.1
->
+> +	mddev->logical_block_size = lbs;
+> +	return 0;
+> +}
+> +
+> +static ssize_t
+> +lbs_show(struct mddev *mddev, char *page)
+> +{
+> +	return sprintf(page, "%u\n", mddev->logical_block_size);
+> +}
+> +
+> +static ssize_t
+> +lbs_store(struct mddev *mddev, const char *buf, size_t len)
+> +{
+> +	unsigned int lbs;
+> +	int err = -EBUSY;
+> +
+> +	/* Only 1.x meta supports configurable LBS */
+
+metadata
+
+> +	if (mddev->major_version == 0)
+> +		return -EINVAL;
+> +
+> +	if (mddev->pers)
+> +		return -EBUSY;
+> +
+> +	err = kstrtouint(buf, 10, &lbs);
+> +	if (err < 0)
+> +		return -EINVAL;
+> +
+> +	err = mddev_lock(mddev);
+> +	if (err)
+> +		goto unlock;
+> +
+> +	err = mddev_set_logical_block_size(mddev, lbs);
+> +
+> +unlock:
+> +	mddev_unlock(mddev);
+> +	return err ?: len;
+
+No idea, if a space should be added before the colon :.
+
+> +}
+> +
+> +static struct md_sysfs_entry md_logical_block_size =
+> +__ATTR(logical_block_size, S_IRUGO|S_IWUSR, lbs_show, lbs_store);
+>   
+>   static struct attribute *md_default_attrs[] = {
+>   	&md_level.attr,
+> @@ -5933,6 +5995,7 @@ static struct attribute *md_redundancy_attrs[] = {
+>   	&md_scan_mode.attr,
+>   	&md_last_scan_mode.attr,
+>   	&md_mismatches.attr,
+> +	&md_logical_block_size.attr,
+>   	&md_sync_min.attr,
+>   	&md_sync_max.attr,
+>   	&md_sync_io_depth.attr,
+> @@ -6052,6 +6115,17 @@ int mddev_stack_rdev_limits(struct mddev *mddev, struct queue_limits *lim,
+>   			return -EINVAL;
+>   	}
+>   
+> +	/*
+> +	 * Before RAID adding folio support, the logical_block_size
+> +	 * should be smaller than the page size.
+> +	 */
+> +	if (lim->logical_block_size > PAGE_SIZE) {
+> +		pr_err("%s: logical_block_size must not larger than PAGE_SIZE\n",
+
+1.  not *be* larger
+2.  Please print the value of PAGE_SIZE.
+
+> +			mdname(mddev));
+> +		return -EINVAL;
+> +	}
+> +	mddev->logical_block_size = lim->logical_block_size;
+> +
+>   	return 0;
+>   }
+>   EXPORT_SYMBOL_GPL(mddev_stack_rdev_limits);
+> @@ -6690,6 +6764,7 @@ static void md_clean(struct mddev *mddev)
+>   	mddev->chunk_sectors = 0;
+>   	mddev->ctime = mddev->utime = 0;
+>   	mddev->layout = 0;
+> +	mddev->logical_block_size = 0;
+>   	mddev->max_disks = 0;
+>   	mddev->events = 0;
+>   	mddev->can_decrease_events = 0;
+> diff --git a/drivers/md/raid0.c b/drivers/md/raid0.c
+> index f1d8811a542a..705889a09fc1 100644
+> --- a/drivers/md/raid0.c
+> +++ b/drivers/md/raid0.c
+> @@ -382,6 +382,7 @@ static int raid0_set_limits(struct mddev *mddev)
+>   	md_init_stacking_limits(&lim);
+>   	lim.max_hw_sectors = mddev->chunk_sectors;
+>   	lim.max_write_zeroes_sectors = mddev->chunk_sectors;
+> +	lim.logical_block_size = mddev->logical_block_size;
+>   	lim.io_min = mddev->chunk_sectors << 9;
+>   	lim.io_opt = lim.io_min * mddev->raid_disks;
+>   	lim.chunk_sectors = mddev->chunk_sectors;
+> diff --git a/drivers/md/raid1.c b/drivers/md/raid1.c
+> index d0f6afd2f988..de0c843067dc 100644
+> --- a/drivers/md/raid1.c
+> +++ b/drivers/md/raid1.c
+> @@ -3223,6 +3223,7 @@ static int raid1_set_limits(struct mddev *mddev)
+>   
+>   	md_init_stacking_limits(&lim);
+>   	lim.max_write_zeroes_sectors = 0;
+> +	lim.logical_block_size = mddev->logical_block_size;
+>   	lim.features |= BLK_FEAT_ATOMIC_WRITES;
+>   	err = mddev_stack_rdev_limits(mddev, &lim, MDDEV_STACK_INTEGRITY);
+>   	if (err)
+> diff --git a/drivers/md/raid10.c b/drivers/md/raid10.c
+> index c3cfbb0347e7..68c8148386b0 100644
+> --- a/drivers/md/raid10.c
+> +++ b/drivers/md/raid10.c
+> @@ -4005,6 +4005,7 @@ static int raid10_set_queue_limits(struct mddev *mddev)
+>   
+>   	md_init_stacking_limits(&lim);
+>   	lim.max_write_zeroes_sectors = 0;
+> +	lim.logical_block_size = mddev->logical_block_size;
+>   	lim.io_min = mddev->chunk_sectors << 9;
+>   	lim.chunk_sectors = mddev->chunk_sectors;
+>   	lim.io_opt = lim.io_min * raid10_nr_stripes(conf);
+> diff --git a/drivers/md/raid5.c b/drivers/md/raid5.c
+> index c32ffd9cffce..ff0daa22df65 100644
+> --- a/drivers/md/raid5.c
+> +++ b/drivers/md/raid5.c
+> @@ -7747,6 +7747,7 @@ static int raid5_set_limits(struct mddev *mddev)
+>   	stripe = roundup_pow_of_two(data_disks * (mddev->chunk_sectors << 9));
+>   
+>   	md_init_stacking_limits(&lim);
+> +	lim.logical_block_size = mddev->logical_block_size;
+>   	lim.io_min = mddev->chunk_sectors << 9;
+>   	lim.io_opt = lim.io_min * (conf->raid_disks - conf->max_degraded);
+>   	lim.features |= BLK_FEAT_RAID_PARTIAL_STRIPES_EXPENSIVE;
+
 
