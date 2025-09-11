@@ -1,151 +1,157 @@
-Return-Path: <linux-doc+bounces-59947-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-59943-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FBD4B530E9
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 13:39:51 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 400F9B530DC
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 13:39:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B9DCB1C81624
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 11:40:12 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id CD9A117DE09
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Sep 2025 11:38:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F28E321F4C;
-	Thu, 11 Sep 2025 11:37:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CFF231E10E;
+	Thu, 11 Sep 2025 11:36:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="csaVuRTW"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VZ6NWQJl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 540AF321442;
-	Thu, 11 Sep 2025 11:37:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.23.235
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D58CB320381
+	for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 11:36:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757590631; cv=none; b=bmAsKvTNjm7bELpuPflnDZJXTJ5PGArfI8S4tiAlGVYBOD3am5pRHFqH08fWlWWsRuQkh83jDhmhD/CXw5dHLTtawKokTiZtg8TYDCiZUeFWqbZ28SykzPtxXOoHEZicZg7dJOBuQhQohg+5pfSvyDHMFrMbsbJMxP0N4CYF8xg=
+	t=1757590610; cv=none; b=e5cUN0FU7mXU0aY4ddstChblE80SWAj8tY4itUg3cr06tykhP5leYTDQLtmjxacrMffFvHQYV+O5SomkhCO8FHP4KzNjGOCuMDLMTZMd8rl2wZN9P+mvTqlD0e/1GTrJ6zWIAW7Wi4m5xX5X15JeyrBIaH2eOZsqFY7FI0MHLBU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757590631; c=relaxed/simple;
-	bh=uCqh6weCbxxwSYUyrSLOci8g9ps7pnde7H7nW1y6vTI=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=LEZPSdLHHa+q08l2rKx0PbgdNx1yuuAMIfl59R4y2Y4zfPkrBFIyFRfWIY/2D+jtnEe88EXmiHN4mIqEN+HgtRqBLhODA+N6MQs+AyViPiOmGgKtkEX34/GEPdRPKfc+RYEacOS5u/6Nokb0yY+CfZxLFj7TqXqI/DDoHK2uyGY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=csaVuRTW; arc=none smtp.client-ip=198.47.23.235
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
-	by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BBaWZ0793678;
-	Thu, 11 Sep 2025 06:36:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1757590592;
-	bh=zRsIr23BIzgLzTmL8Py68DcXdNh7zzWEy6t51VP+4LQ=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References;
-	b=csaVuRTWANMjTWvJzA+8pI34HZcinEHvdvvHBq/vPXeimK0ExgheZbJ59jgLUQuha
-	 CiSgL0fBWumCz/N0hclO5oyHkHipU4+gqZC5cgeJuk3jMJGiR0oN9QHoK8dorJQzvA
-	 NaVcgiwywP8HPeQLU/wowrmJrcrZwOnNtUEDo8R8=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
-	by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BBaWPC1027214
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
-	Thu, 11 Sep 2025 06:36:32 -0500
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 11
- Sep 2025 06:36:32 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 11 Sep 2025 06:36:32 -0500
-Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BBaWWU1766328;
-	Thu, 11 Sep 2025 06:36:32 -0500
-Received: from localhost (danish-tpc.dhcp.ti.com [172.24.231.152])
-	by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 58BBaVFh032092;
-	Thu, 11 Sep 2025 06:36:31 -0500
-From: MD Danish Anwar <danishanwar@ti.com>
-To: "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet
-	<edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni
-	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
-        Jonathan Corbet
-	<corbet@lwn.net>, Nishanth Menon <nm@ti.com>,
-        Vignesh Raghavendra
-	<vigneshr@ti.com>,
-        Tero Kristo <kristo@kernel.org>, Rob Herring
-	<robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
-	<conor+dt@kernel.org>,
-        Andrew Lunn <andrew+netdev@lunn.ch>,
-        MD Danish Anwar
-	<danishanwar@ti.com>,
-        Mengyuan Lou <mengyuanlou@net-swift.com>,
-        Lei Wei
-	<quic_leiwei@quicinc.com>, Xin Guo <guoxin09@huawei.com>,
-        Michael Ellerman
-	<mpe@ellerman.id.au>, Fan Gong <gongfan1@huawei.com>,
-        Lorenzo Bianconi
-	<lorenzo@kernel.org>,
-        Parthiban Veerasooran
-	<Parthiban.Veerasooran@microchip.com>,
-        Lukas Bulwahn
-	<lukas.bulwahn@redhat.com>,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-CC: <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-        <devicetree@vger.kernel.org>
-Subject: [PATCH net-next v4 7/7] arch: arm64: dts: k3-am64*: Add shared memory region
-Date: Thu, 11 Sep 2025 17:06:12 +0530
-Message-ID: <20250911113612.2598643-8-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250911113612.2598643-1-danishanwar@ti.com>
-References: <20250911113612.2598643-1-danishanwar@ti.com>
+	s=arc-20240116; t=1757590610; c=relaxed/simple;
+	bh=/rVSsz4zURSRH6cQYurBS9NzYyNvGJ8R8I2UkETrSDI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ats6HVOrtYro0zjf+3iqckjsDHz7gmESIhOSLmiwo9jvWyQBl7Axuq8LB6oe2CK5/ot9+mXhCDmFEqBYUXYs9E776F9krSgKSK6U+T3zoAPHN++xqYxX4Tuvh1c7cj69RbUyd09RLYUL3nUTAOvFOyo2eNPR+GlYHr1468DWcvo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VZ6NWQJl; arc=none smtp.client-ip=209.85.215.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-b4f9d61e7deso441215a12.2
+        for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 04:36:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757590608; x=1758195408; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=/rVSsz4zURSRH6cQYurBS9NzYyNvGJ8R8I2UkETrSDI=;
+        b=VZ6NWQJlM3lS7Fk6lrtVcS6dLeXoqkS9dpJCcH3EKL4AEvDcfsT0XTFIrAWk9a1XGd
+         50mYu4L+9pPOGo0ORYIIB5eQuGFd7gu+fkMpHT49fBbTJm4pL5V0fLrQBrQt84vDp5+n
+         gJh2Pn2CqvBoavZ9M6gDWGJpEXz932x18yBOjiNUP7Ep2TOoWR518IG95NEHDIv0dqVH
+         IRukqx0f3nMgQz/rMVw1fVMTnThIhMsENtAMvinQj6pgCitKqcrxdexQW89BfMY+sncW
+         QfBzO6vG0dD3zMfmjDsWXNlohQvDccLu2YqqTdJgkfLCbW4McjuOBdy+UHMhM2uDJjOc
+         khSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757590608; x=1758195408;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/rVSsz4zURSRH6cQYurBS9NzYyNvGJ8R8I2UkETrSDI=;
+        b=uLRRZ6QztNzlpMZnKPLxRSpMDv0eg89OtaPEBK9xir02yJxE/vBgFO0wX3AIwDsEGo
+         MGiCO0waNtrgyJmck1U//eTOPJgb7+hAk7rpghhBAzqm8G8XruRZjkVY3098UV9EFTYo
+         6ZbfiljeR5nxI1nrwgevHU7qyrICbVPZ6iaSH5t3ljEo7rrFxsms1UEGlckj++0EzegS
+         1K1yEFhfURv0HFd8ghjdSu+cxc8+leu0Ye0H5pBe+yQo/54D3UqJVUuz4+jOl2KlZUA3
+         QXR7p9UoFkK2m3f0EdRtU3pdohO0iSe/pd5EETQj6HSt5BjDgApukdaEAtOAOEYqsbq6
+         fLOw==
+X-Forwarded-Encrypted: i=1; AJvYcCUbcaffQ3FIdjpCXNy2hY2ftlIMlkPQe/7TgGFzvAkmrsg5LXnpOLvQTHfsd1VzrFZBxO6FUWPXAwA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxpAS2EJN/4E8EwPRC+J8XTEAjwHF6I/EOZMRv9glW/7DkBzXws
+	/VCKtF9V8yZaE2Xntmq7he+wQOAoXCocaTr/xPW643BXqL9aSNFdsyBE
+X-Gm-Gg: ASbGncts3Rsp1PQKDbfDQcknUg97PE0T5onZ9+oQyHqNeDmihuqMrvr/R77h8JDEiux
+	GxAVCw93W9VdssdPbnf55Qse+09CQwRTxLYdactgEbfqd8yA+AmF0n1EZdHV1BQgCH5RqsVfYp4
+	BHn4Iz9YiL9r2rQ7QOAaJPvmrKpkabeurCMh29OQ2acXYGBLx1AhJCDnc652qvnLCu0e0FaZ0kQ
+	oibGgealxu1ia7qcrcXXWkPjvQinoci+tr2xWAKyQsMK9yOuiPKAbqPMyhDOTKUWK5haCzQQzJP
+	POL9bYOaY5/VnB9W6CPs3tyUPLYOax6tYADW8c8tKdq4QS7kiSngch5U0jP9HJwVEiZmkgllUlQ
+	2rjad8gd746RrjqsjVLZ6SF6kqA==
+X-Google-Smtp-Source: AGHT+IGODxcwXdfHAsRfp0VXOV718vy1zFbFo7MXwhCxvdkM6aonShv8X7Ss+ZzUqwEpBGF+WUBA0Q==
+X-Received: by 2002:a17:902:db01:b0:24d:e8f5:13b1 with SMTP id d9443c01a7336-25171bc0549mr238763465ad.40.1757590607913;
+        Thu, 11 Sep 2025 04:36:47 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-25c36cc53adsm17096545ad.25.2025.09.11.04.36.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 11 Sep 2025 04:36:46 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 2100341FA3A1; Thu, 11 Sep 2025 18:36:43 +0700 (WIB)
+Date: Thu, 11 Sep 2025 18:36:42 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux EFI <linux-efi@vger.kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Hugo Osvaldo Barrera <hugo@whynothugo.nl>
+Subject: Re: [PATCH] x86/Documentation: explain LINUX_EFI_INITRD_MEDIA_GUID
+Message-ID: <aMK0SnY9NMby4X_F@archie.me>
+References: <20250910015738.14848-2-bagasdotme@gmail.com>
+ <CAMj1kXHCi1pr3XNzwe7b7EFBkPGjkppeNWNSvy4wU1VBHj9kfA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="/CycQuWEbUcN6Xks"
+Content-Disposition: inline
+In-Reply-To: <CAMj1kXHCi1pr3XNzwe7b7EFBkPGjkppeNWNSvy4wU1VBHj9kfA@mail.gmail.com>
 
-Reserve a shared memory region for rpmsg eth communication and add it to
-the remote proc device `main_r5fss0_core0`.
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
- arch/arm64/boot/dts/ti/k3-am642-evm.dts | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+--/CycQuWEbUcN6Xks
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm64/boot/dts/ti/k3-am642-evm.dts b/arch/arm64/boot/dts/ti/k3-am642-evm.dts
-index e01866372293..6e8e2c39146b 100644
---- a/arch/arm64/boot/dts/ti/k3-am642-evm.dts
-+++ b/arch/arm64/boot/dts/ti/k3-am642-evm.dts
-@@ -61,7 +61,13 @@ main_r5fss0_core0_dma_memory_region: r5f-dma-memory@a0000000 {
- 
- 		main_r5fss0_core0_memory_region: r5f-memory@a0100000 {
- 			compatible = "shared-dma-pool";
--			reg = <0x00 0xa0100000 0x00 0xf00000>;
-+			reg = <0x00 0xa0100000 0x00 0x300000>;
-+			no-map;
-+		};
-+
-+		main_r5fss0_core0_memory_region_shm: r5f-shm-memory@a0400000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x00 0xa0400000 0x00 0xc00000>;
- 			no-map;
- 		};
- 
-@@ -767,7 +773,8 @@ mbox_m4_0: mbox-m4-0 {
- &main_r5fss0_core0 {
- 	mboxes = <&mailbox0_cluster2 &mbox_main_r5fss0_core0>;
- 	memory-region = <&main_r5fss0_core0_dma_memory_region>,
--			<&main_r5fss0_core0_memory_region>;
-+			<&main_r5fss0_core0_memory_region>,
-+			<&main_r5fss0_core0_memory_region_shm>;
- };
- 
- &main_r5fss0_core1 {
--- 
-2.34.1
+On Thu, Sep 11, 2025 at 08:46:50AM +0200, Ard Biesheuvel wrote:
+> On Wed, 10 Sept 2025 at 03:58, Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+> > +PE/COFF entry point
+> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > +
+> > +When compiled with ``CONFIG_EFI_STUB=3Dy``, the kernel can be executed=
+ as a
+> > +regular PE/COFF binary. See Documentation/admin-guide/efi-stub.rst for
+> > +implementation details.
+> > +
+> > +The stub loader can request the initrd via a UEFI protocol. For this t=
+o work,
+> > +the firmware or bootloader needs to register a handle which implements=
+ the
+>=20
+> ... which carries implementations of the ``EFI_LOAD_FILE2`` protocol
+> and the device path protocol exposing the
+> ``LINUX_EFI_INITRD_MEDIA_GUID`` vendor media device path.
+>=20
+> > +``EFI_LOAD_FILE2`` protocol with the ``LINUX_EFI_INITRD_MEDIA_GUID`` d=
+evice
+> > +path. In this case, a kernel booting via the EFI stub will use the ``L=
+oadFile``
+> > +function on the registered handle to obtain a reference to the initrd.
+> > +
+>=20
+> ... will invoke LoadFile2::LoadFile() method on the registered
+> protocol to instruct the firmware to load the initrd into a memory
+> location chosen by the kernel/EFI stub.
 
+Thanks for the wording suggestions!
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--/CycQuWEbUcN6Xks
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaMK0RgAKCRD2uYlJVVFO
+ozStAP9mQA9cCfHsaQldql/hMVFcwMOShKbDfTeC6DADNy+HuQEA8+ArAu2x9zYZ
+ON+dh6RUyGHdAxdwM2QwtIT8cv91UQI=
+=SYxy
+-----END PGP SIGNATURE-----
+
+--/CycQuWEbUcN6Xks--
 
