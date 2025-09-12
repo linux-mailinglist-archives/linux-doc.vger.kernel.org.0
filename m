@@ -1,119 +1,176 @@
-Return-Path: <linux-doc+bounces-60182-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60218-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE485B54A94
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 13:04:31 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2138BB54D43
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 14:21:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id CD07F7AECF4
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 11:02:51 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 275AC189C101
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 12:17:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D0092E6CD9;
-	Fri, 12 Sep 2025 11:04:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C204E322544;
+	Fri, 12 Sep 2025 12:08:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TngnCdv3"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="j/oSd1W4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3497D2DECBC;
-	Fri, 12 Sep 2025 11:04:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F46431CA78
+	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 12:08:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757675065; cv=none; b=cpxC7xXImV1rSXXCOz0rpeLkzLUdy7SiA2VqD4r7p53135kVj81Lu10ondqmgCGfM3qD1Ney4sOLdRcan0AKJJNkIog2UV5USC5LKQvcDOa+pUB1acj3SwTIQYvHxK0k3Ote6zvOdKS6U9W4j0wr6GPo452OQlvYazHziI6fomY=
+	t=1757678932; cv=none; b=LGG9GaAL8KZ7KwN3lTtkyMEcp5RpOab2uXVX7ug0W77f3ZcTQ/ulZyT2UnbK4fbjI64qAfXJvKf/ftgqd+S6DqccaLdik1RnjS6BwBTRX9hQm50LxoBhwnBCp2xJZ9yA2ijfLHL4N6p61grVQZc4+MGW2yW5NTJnaxznzWJcyzQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757675065; c=relaxed/simple;
-	bh=LWW3qkzTHqxFfVn0e2vWAWfsKkyT4vOUAIOgqy6CFkE=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=DR+snhNVArTT7gJzSbgncBvNENxWR/4thjVCrNO10OgG+a7RQj9rJfOl4Fj7NGzEJdsBYynxboAlqxlSIH1T9r9nSjtj5jxrmkcAjkLM7xZOCyehP4HJYmApm+w9BlTt1roJ8lQxCPoBsJOiZFnBRyC2HMK05FAoThSwIjBhqE4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TngnCdv3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40680C4CEF1;
-	Fri, 12 Sep 2025 11:04:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757675064;
-	bh=LWW3qkzTHqxFfVn0e2vWAWfsKkyT4vOUAIOgqy6CFkE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=TngnCdv3CgS6R8AiKSrzXiQRMntsF7ol0dUHXffCq2RAHxxYqngn8EERLUpcqj9w5
-	 ycOSALpP3hKu/a0r1JBYu5yPabYdl0yVw6PM19TEVEt7e4ZkM5cmQ3s77DHoznf0qH
-	 agU1Xg0cMIXTfXt1UvXjxdweNFiVN3Dx/ZNpk0B9ie+nIhbltI6wx2R76CKpxTESM7
-	 mnwh4BHLXjLc488Mji1FG/1sntX/8YqWDPKzsPzOlV9RRwtVyYD8HDESucNc6s2kus
-	 cFv7DrhtTseSPu8pPLHeKlHQV0hn1IgM7pwW5SpIWgx3wWqPVj5VOkj0USk9pPyAXP
-	 KCdEEIL2bhTMQ==
-Date: Fri, 12 Sep 2025 13:04:20 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Akira Yokosawa <akiyks@gmail.com>
-Cc: corbet@lwn.net, jani.nikula@linux.intel.com, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, tmgross@umich.edu
-Subject: Re: [PATCH v4 08/19] tools/docs: sphinx-build-wrapper: add a
- wrapper for sphinx-build
-Message-ID: <20250912130420.6c14dbbd@foz.lan>
-In-Reply-To: <28c45f53-a3ff-428f-ba99-ebb09e0581d3@gmail.com>
-References: <20250910153334.0b3e1440@foz.lan>
-	<28c45f53-a3ff-428f-ba99-ebb09e0581d3@gmail.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1757678932; c=relaxed/simple;
+	bh=pg2OzxfdDmvV4PZ3/yrEF/ttLXM7KmEXR3GgYwf88oM=;
+	h=From:To:Cc:Subject:In-Reply-To:Date:Message-ID:References:
+	 MIME-Version:Content-Type; b=MVXz2f5PK4/0woB9p6PuI1qptsVDbDKRH2OBuiJ4mxrDmnNFYogj2al2c9SNR9HH8OJHRbCt1oVvqvKSI4Ot3e/D9gYCqtc+oWfvfurXJDkCFpWOj8oD0awwfP7wTxHUcV4bA9lchoJy60eLKfxoLLZnDVJ51fvMhTxD9nFh++4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=j/oSd1W4; arc=none smtp.client-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-45dd7b15a64so16374805e9.0
+        for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 05:08:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757678928; x=1758283728; darn=vger.kernel.org;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Z3mBB6R4Rvgptsn0OxjqAYg70NanrEyHXxP0kqh9yyw=;
+        b=j/oSd1W49q5GqUpc4lcLYvy2FpJ6r6ZYirBlz6SCqXtj+q1E4NhrYMAZRt2jCALf3Z
+         aYdOqFTvZZ7W3ga1P0A4UJ4iPdackJG2xm3HJTeoqJnVJ3+xXSFFYLDYJ6rBlWxTyIvS
+         u8CIOf11nkX+DDYBU9a4/FJ7TDYPDJTJ3d5Pjn4MOJcDzWSBjvjp/59HyOerZOkzWRrz
+         P3Yl115aDgI4ZVtknoMN6rAtqJ9Uh9w+3qjzQK3X0WdDAvFPmDmhCLcS/QoXXqXtzi5q
+         EgzhFN7HpA1/iV+GgMS10JQNKzIiXB64Iukc582CTVveKrg/kBbBhvImGFf9zN8MN/JP
+         z0yA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757678928; x=1758283728;
+        h=mime-version:user-agent:references:message-id:date:in-reply-to
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Z3mBB6R4Rvgptsn0OxjqAYg70NanrEyHXxP0kqh9yyw=;
+        b=uVCSZftLk9bvVuYstDtSSQx/o/gKmuAs9hoE2+iHljlk4MR/otEYQEb7xu0Tw5ERYf
+         vbapz8L8X+ghj19GNPEFU56IF3vxZjhEFxObZDozMO9oJKq275YRXhVpoch4pHMrDjln
+         eFKfrASu4ZM1VhzIEBGvdKJ9ZWO/v9V7I97DXcuUAIJSzNPfZ5sXosNojsaMZsGnDqGc
+         Nvg3Ga7egwvoNYVrVCKQk3y7Ae/d1Z5Yko7ky0AB8pH5m3hgxfdAKT33BwjeyRU/yTwW
+         hKRwsaqkeKFhEbWazkv0/F0ctq7cFjGesmeju/imD3WGokY+5F9t1TFwAXP/p4/25IuC
+         7wKQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUf4/1CYNU777mIwuYM7y0Tlaa086vpDdmfgYa6+EyWh18Lgd45XwDQ7/PATcqJU1ZTfGRCN2QD0j0=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxa3gXrL/5zPuDAEy5loeQjhjytIV14SwLCPji03RhWsYcx7T6k
+	knqgRWtQwhBmWDfsRd4mot+pCom79inEHHBPjhmWYnrPAhV3LsHummrX
+X-Gm-Gg: ASbGncteN66F5jw+oTKKDucL+nW/ugz5HbofNusHKcPtQsWb9HuV/BMWtbwU+ZXS24j
+	18iP0hsSLpvJD4KHOTUBdQZLLqMrFbP8cT3uEsKXwj+2rLkeldWJZTKeH5cgCZ44zuLGjUPgqoQ
+	zGEsZICcsf4Hr2xlyvzpRkm+09GUeF4i+GWRsnGJPHjw+FPv1+RnQVyhYbXz/Bwc0xSjehm9qER
+	d4guUcxrCb+bY1Cmq6mYpfMooKqOGUzk9HFQeDWG8DwTf4GJ3RJawnjODSVos/C4xUXZoIaAGHE
+	eFS5WCXAWF/Zr2y5FL8OZYfMGCh6I3fgd8FzqUvNUpGvdIX91x/pPU2ndDgBgQLfOJRfkiSXVYu
+	ejH4f7WkqJNqO1/pd/HuzV+f6Z9U66BvEdg==
+X-Google-Smtp-Source: AGHT+IGv/35p/W7r3GHx5SA997jhumk8Hh17nHWyXFsjPVhFKF0I3tiZFXsC/nBQd4qsEp3pwnV0nA==
+X-Received: by 2002:a05:600c:548f:b0:45b:8ad2:76c8 with SMTP id 5b1f17b1804b1-45f2125d5cdmr28593575e9.2.1757678927561;
+        Fri, 12 Sep 2025 05:08:47 -0700 (PDT)
+Received: from imac ([2a02:8010:60a0:0:18f9:fa9:c12a:ac60])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45e037186e5sm60557925e9.5.2025.09.12.05.08.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 12 Sep 2025 05:08:47 -0700 (PDT)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: Matthieu Baerts <matttbe@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,  Jakub Kicinski <kuba@kernel.org>,
+  "David S. Miller" <davem@davemloft.net>,  Eric Dumazet
+ <edumazet@google.com>,  Paolo Abeni <pabeni@redhat.com>,  Simon Horman
+ <horms@kernel.org>,  linux-doc@vger.kernel.org,  netdev@vger.kernel.org,
+  linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next] tools: ynl: rst: display attribute-set doc
+In-Reply-To: <a1f55940-7115-4650-835c-2f1138c5eaa4@kernel.org>
+Date: Fri, 12 Sep 2025 12:07:04 +0100
+Message-ID: <m2ecscudyf.fsf@gmail.com>
+References: <20250910-net-next-ynl-attr-doc-rst-v1-1-0bbc77816174@kernel.org>
+	<m2v7lpuv2w.fsf@gmail.com>
+	<a1f55940-7115-4650-835c-2f1138c5eaa4@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 
-Em Fri, 12 Sep 2025 19:15:44 +0900
-Akira Yokosawa <akiyks@gmail.com> escreveu:
+Matthieu Baerts <matttbe@kernel.org> writes:
 
-> [-CC: rust people and list]
-> 
-> OK, Looks like I have to bite.
-> 
-> On Wed, 10 Sep 2025 15:33:34 +0200, Mauro Carvalho Chehab wrote:
-> [...]
-> 
-> > The current approach of using LaTeX for PDF is dirty:
-> > 
-> > - Sphinx can't produce a LaTeX file from the Kernel trees without
-> >   hundreds of warnings;
-> > - latexmk hides some of them, but even it just one warning is reported,
-> >   the return status is not zero.  
-> 
-> This sounds interesting to me.
-> As far I remember, I have never seen such strange results of latexmk
-> under build envs where all the necessary packages are properly installed.
+> Hi Donald,
+>
+> On 11/09/2025 12:44, Donald Hunter wrote:
+>> "Matthieu Baerts (NGI0)" <matttbe@kernel.org> writes:
+>> 
+>>> Some attribute-set have a documentation (doc:), but it was not displayed
+>>> in the RST / HTML version. Such field can be found in ethtool, netdev,
+>>> tcp_metrics and team YAML files.
+>>>
+>>> Only the 'name' and 'attributes' fields from an 'attribute-set' section
+>>> were parsed. Now the content of the 'doc' field, if available, is added
+>>> as a new paragraph before listing each attribute. This is similar to
+>>> what is done when parsing the 'operations'.
+>> 
+>> This fix looks good, but exposes the same issue with the team
+>> attribute-set in team.yaml.
+>
+> Good catch! I forgot to check why the output was like that before
+> sending this patch.
+>
+>> The following patch is sufficient to generate output that sphinx doesn't
+>> mangle:
+>> 
+>> diff --git a/Documentation/netlink/specs/team.yaml b/Documentation/netlink/specs/team.yaml
+>> index cf02d47d12a4..fae40835386c 100644
+>> --- a/Documentation/netlink/specs/team.yaml
+>> +++ b/Documentation/netlink/specs/team.yaml
+>> @@ -25,7 +25,7 @@ definitions:
+>>  attribute-sets:
+>>    -
+>>      name: team
+>> -    doc:
+>> +    doc: |
+>>        The team nested layout of get/set msg looks like
+>>            [TEAM_ATTR_LIST_OPTION]
+>>                [TEAM_ATTR_ITEM_OPTION]
+> Yes, that's enough to avoid the mangled output in .rst and .html files.
+>
+> Do you plan to send this patch, or do you prefer if I send it? As part
+> of another series or do you prefer a v2?
 
-I saw it here on multiple distros including Fedora (which is the one
-I use on my desktop). Media jenkins CI running on Debian always suffered
-from such issues, up to the point I started ignoring pdf build results.
+Could you add it to a v2 please.
 
-> I think what you are trying here is to paper over whatever bug in latexmk/
-> xelatex by always ignoring their exit status.  Am I guessing right?
-> 
-> If that is the case, I'd rather report such an issue at upstream
-> lagtexmk/xelatex.
+> Note that a few .yaml files have the doc definition starting at the next
+> line, but without this '|' at the end. It looks strange to me to have
+> the string defined at the next line like that. I was thinking about
+> sending patches containing modifications created by the following
+> command, but I see that this way of writing the string value is valid in
+> YAML.
+>
+>   $ git grep -l "doc:$" -- Documentation/netlink/specs | \
+>         xargs sed -i 's/doc:$/doc: |/g'
+>
+> Except the one with "team", the other ones don't have their output
+> mangled. So such modifications are probably not needed for the other ones.
 
-I'm not entirely sure if this is a bug or a feature. Last time I got
-one such error and did a web search, I saw similar reports explaining
-the error code as if it is an expected behavior.
+Yeah, those doc: entries look weird to me too. Not sure it's worth
+fixing them up, given that they are valid. Also worth noting that the
+two formats that we should encourage are
 
-This is a known bug, and the current building system has a poor man
-workaround for it already:
+  doc: >-
+    Multi line text that will get folded and
+    stripped, i.e. internal newlines and trailing
+    newlines will be removed.
 
-	pdfdocs: latexdocs
-	       @$(srctree)/scripts/sphinx-pre-install --version-check
-	       $(foreach var,$(SPHINXDIRS), \
-	          $(MAKE) PDFLATEX="$(PDFLATEX)" LATEXOPTS="$(LATEXOPTS)" $(DENY_VF) -C $(BUILDDIR)/$(var)/latex || sh $(srctree)/scripts/check-variable-fonts.sh || exit; \
-	          mkdir -p $(BUILDDIR)/$(var)/pdf; \
-	          mv $(subst .tex,.pdf,$(wildcard $(BUILDDIR)/$(var)/latex/*.tex)) $(BUILDDIR)/$(var)/pdf/; \
-	       )
+  doc: |
+    Multi line text that will be handled literally
+    and clipped, i.e. internal newlines and trailing
+    newline are preserved but additional trailing
+    newlines get removed.
 
+So if we were to fix up the doc:$ occurrences, then I'd suggest using
+doc: >-
 
-see the "||" at make pipeline. The final "|| exit" makes the build
-ignore pdf build errors. It is there since the beginning:
-
-	cb43fb5775df ("docs: remove DocBook from the building system")
-
-Thanks,
-Mauro
+Cheers,
+Donald
 
