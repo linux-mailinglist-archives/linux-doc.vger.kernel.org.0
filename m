@@ -1,278 +1,243 @@
-Return-Path: <linux-doc+bounces-60071-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60073-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0882FB5418D
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 06:09:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 570DCB54198
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 06:11:06 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id AFC245681E6
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 04:09:58 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 055D956854F
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 04:11:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1F94126CE39;
-	Fri, 12 Sep 2025 04:08:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 758FB257827;
+	Fri, 12 Sep 2025 04:09:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="maeNwf1F"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DgkgIL8Z"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 279CD28725A
-	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 04:08:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 939C62367A8
+	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 04:09:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757650089; cv=none; b=d8M1hoJ2uynQr+sPHaUhfqxyTVZRpZ2bWD51rPteXayXRiZBD0Qng2ENG42wk+kBKbczOgmM2BF0+KecSejK9zz3XqcvTOPkh+7McuzHfCEKxzA8eFtTVJ37Kb8qk+jnwSvb+33sQRgsh/kVC9TPiWxxuwHl/w8zyw9XoDYPkf0=
+	t=1757650188; cv=none; b=ByGdkcvvNmnvIo6PzNI3cKx2J+rFHSaYgL/zofUoytL6w7PFVDQETeAt4Qo4dDibFxY/ZJIz3Na2fK6rGX1iLQY2eKfTVibO1bSDqLYUKKJ8/bi25sDLoDWfrYOqL+BGO+q1iE8AwTIb7ojD8S1gfcy0kJuZfsblbt/kZFuRSQ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757650089; c=relaxed/simple;
-	bh=RN0nKuxToKAQ9VOhyNYte58FvHuKeDhMEOShy3rUoJE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=s0c2KCzq+xyPRkBD6ve6q6N9bbvIbYyc0VsjZk6uQTL9rpVIIzsNJldo6n1ly28YcSVS9asjCuXs32ug2Uqi47nHGrXrDH6cBX6QOaFVVfnrLzBs9e4i5AfbOTP+XTTIKmSPVQGRfyxmLb4kUL3ACYYQyI+yMQiWaeu09piri5k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=maeNwf1F; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58BKMpfq016084
-	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 04:08:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	OdVTKF925ssMm3cQuiq+O1uNYUiJEhXOdcH2WTZnulA=; b=maeNwf1F+KqV/B09
-	GtrNuOj9VsKp8/indOeA/tp7PIqvqOgB0XvIZkZuKnJuhuNhhlGT5xrlUKumPPQl
-	61EhqbLE+O1bLU9K5pnTBp6DbhJDAED/bC60gnvEziBinzmbIwRKKI5LU5XarMsK
-	TUe7d4dFy3/E8mpnP2AalvLD6ydWhv8Us+JIynxCqLvio5Q2uDhWUpDA1bU1ClJZ
-	28oAOHl+c+ZVszJ1NyyO7VGIyzBJ9en7iGiKecFwV+GucH90LBa9Q3KpVIgEM+xt
-	2NYl8E8evrO2QsEN3BYZfSUHfBlghVFHIcJUKPHpRtq8SAind5kJTqIvteNzd4NN
-	/KKN8g==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 491t386jxn-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 04:08:06 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-32b51a481feso1395933a91.1
-        for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 21:08:06 -0700 (PDT)
+	s=arc-20240116; t=1757650188; c=relaxed/simple;
+	bh=zZkkZ9jtVN9zl8MOUiaRZ/AhuJkVluKe+HXlB+7F8d0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=k/tQmE61NkqqbuSCYgwvHeBeCti2n+zWStT+0IVtcZZCv0oP4cMlb8mfgakX/VNMgbmUlFxwSvS5gejZAa+jiU6wFNAymBOg+GecittaeL9GVE3XQnyi9zHAbCooRd9XQs7+512Kj6mcPbtvCNashqzK0UhADGyS54BCzAvXUuE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DgkgIL8Z; arc=none smtp.client-ip=209.85.210.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-7722bcb989aso1045884b3a.1
+        for <linux-doc@vger.kernel.org>; Thu, 11 Sep 2025 21:09:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757650186; x=1758254986; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=N6PvSPHugeaR1Sq9Pxzgn3oZJDYqC50hx/s/XnB6afU=;
+        b=DgkgIL8ZThy0fXYIBjsFOufI4kP8lGxLNf3FyPUBa4MgBzKNvqIU8VVQh5/jtziSX+
+         lsS+FV1j1Rek3zuwmHxMZ59VQSkOHFst7ZG/kKbsHw/0/o5PlnpA+V0LmVmxsGHHn0tS
+         A8bdIW/kztOJsyzTpRE1LsHw/azJvPepSwsu+K8CcIrQzpg+4VP0gMgN2oItGrKVXCFM
+         hwZprNeEA4j4XtuRxry7Fs+6H53ElDL0YAD0uTzJTBJR2VVOo8vcApXDvjW54+BqWjbq
+         fb5ljrKa1EcuVGySzTgdx+Yr74kmJG4fwVyC4f8tkLK+yp6omq8m8VcFOc2KjGp5Rc0a
+         UamQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757650086; x=1758254886;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OdVTKF925ssMm3cQuiq+O1uNYUiJEhXOdcH2WTZnulA=;
-        b=WBDgFRHK1nxjIkJkv4//itLUkdQZHes+DNUMh+8XKap7ArcdYBFMFYn+VCV9oqXYM1
-         s8Nr6FGeCGtHNqVE5v51G/8TpioYonwBmvWbdLPjftsZ9CbOH+QpSOR3iGTbgk+aGSK8
-         2lq8ZJ+ew1cHKyMxj3WC/+UzALxPgdALi9O0rac3y24GRph+cQtR2iL2z3pK6ULByd93
-         nG17rPVQwup1IysrSSCxqyuENV037GmuLde7vTDNpKPbauGld8CZmdwUMtbjAQ6ZeG1c
-         0TPOiqBNiTUrPTqzGak/8KrhcPy3DAxZ09Gq+TceJzVVSBsWYY/n48YbJosMRCyNZycM
-         q9ag==
-X-Forwarded-Encrypted: i=1; AJvYcCUAaa+ru6wRabrGZ10JmMeOpfqbHNx+9tFZlFhAZCDEWL2ATyr+QuXjMn8yc5riNIsZgTcMSlkXk4Q=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy1/pgXcia7LMTvp6BU5JPD6eQLdfONt17xWK7Irb283dgYakAO
-	U0elAEmpJ3U0Df5RCnxBasBYNuRlwo/9wsCCmjoCDy0OtI/v7GmphZwAD5DZ2YH39Id/xBvcfmN
-	xr9J9xznqSi8oWOFQyuMMePaDLYNMv3PamgU4nDZXvfSqTtxUmM+CxVPLfx8tGA==
-X-Gm-Gg: ASbGncve9nDEstwGVkirCmeORgox7ysSABojKwxCwmc/dHAdhU5I0i6rB8PiQDsKdFX
-	5LJDtu3je6KWqstxv1ni2KTHegWJl+U2Qy/6EK5WybQ0MOwwAl1wSJry3QcdcVcD6MD+UIkFhOF
-	gnnRRVNrcW++6Toua7NAcZVcLDmZU1/ZCR99rgpB5vnKWkt6c0++1oM6YAANelkNKyLv3tQO9f0
-	1N+kvMe6bT1htVCzvO/qCJTgeWrIdZbP4YGUgwxhGGcyEnEWbxir5aXp5SXCVHy3+J5Q/MtQKhS
-	LBe9dGnNOGAJLfStzSzgcY7ODI+7/K9Oi1A6SjX6Ux1/xygCq78HUzzrxs5nRpxERNEzLvgeCpI
-	/s6p39GOQcmrkowAgrlC+TmU=
-X-Received: by 2002:a17:90b:35c3:b0:325:25fb:9128 with SMTP id 98e67ed59e1d1-32de4c33d52mr1818617a91.9.1757650085509;
-        Thu, 11 Sep 2025 21:08:05 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHX1RaQl33ilIfwxao3aJgpnfFU7FLqmjTzLfuny6Mj/xGDe+7OnVCAMTCzx6nAXfuI73Atcg==
-X-Received: by 2002:a17:90b:35c3:b0:325:25fb:9128 with SMTP id 98e67ed59e1d1-32de4c33d52mr1818571a91.9.1757650085067;
-        Thu, 11 Sep 2025 21:08:05 -0700 (PDT)
-Received: from hu-azarrabi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b54ad5e168fsm690960a12.13.2025.09.11.21.08.03
+        d=1e100.net; s=20230601; t=1757650186; x=1758254986;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=N6PvSPHugeaR1Sq9Pxzgn3oZJDYqC50hx/s/XnB6afU=;
+        b=gGRMc+j70UQRbTxKrvst+TZIXN8nEkvM9O/HyO6iL/H6mZ1krUL42vu8gNY6tXlEfo
+         B3wTSu7mT7ZvtQGKskREsHChGAjpFP9pfc68XsOU728SiWK6pN2h2MvvtiNmJUfKz5vE
+         9QBFGLJcdpE9eumRjuiFmneYW33r/eAbIcTk9fS9+M0CB/lgfUF64iaM5bs19gl4v4FH
+         5D+2ittzFkVAc5WQ8EirGiRra5da/aP+whnI428O9usPAHrkikDgHggJLWoxSuXl3zxf
+         BFqmpWXVIbRHrzAohAppkWRpIBKnBYzW23r1sh7KXjz5LA2yyCPSSi43cGJgjLyvjF+/
+         Iu2g==
+X-Forwarded-Encrypted: i=1; AJvYcCVb5P6hZ/60oAAd6LpofqmAUn3tZUo7YOUT3D3D1t36avud7GgeLeOqg3dm3lbabJ2q5jw6VMcqG3w=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzU+ZlHCJS9iF7je80u58q1ZIjAh+WlOqh6gwFu2qEhxEm7PXKd
+	bAfpcHixOT5MuJ+sCcrZq5EHyOymVWzvNg9ZxpMH8YiWvF6JBE2kqRrH
+X-Gm-Gg: ASbGncsgwjF1++m2biggGYrb2Cw78EKcUTclnESbAJsC/eh0+PtcGpaNJ40yEf1DXF5
+	wKaJ04zKSxsC5mm3LTj867DNpLnzwCGIapxEQWtcR1TMmVACEwgkqklLSrf4853fc1f57RCaZWS
+	C99tX+JU/5dKKtS8OAJNgEaq6/cISWozo3UDWqUbycaIQreYi1cDGKTkRjaQJTyfGC047HLLtQx
+	gghsIWMhtdiF1JmrgqAguU0KUE4FmL11xeIuIM3nrN55WEo+3hArfjpdPb0Q41eWIbyvqz+D3g1
+	3laDtehGxpHItWq2Z1pDJ20++DlINIOQX40KcBQS+IvOZ/DjEskdonRb2lmkw4o+VCVuYaSeUQo
+	xDqiyzdkcL++8lJAMKaYydSbhpw==
+X-Google-Smtp-Source: AGHT+IHHcMjVW/z8OdxzzV0OTOhOnUEH80JZvwj4ElBZ0sgfnVRc6qC2OR+IY91vy5y/SGy5PU25Qg==
+X-Received: by 2002:a05:6a00:2d8c:b0:772:5165:3f77 with SMTP id d2e1a72fcca58-77612189e56mr2035163b3a.26.1757650185575;
+        Thu, 11 Sep 2025 21:09:45 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-77607a4a24esm3780924b3a.40.2025.09.11.21.09.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Sep 2025 21:08:04 -0700 (PDT)
-From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-Date: Thu, 11 Sep 2025 21:07:50 -0700
-Subject: [PATCH v12 11/11] Documentation: tee: Add Qualcomm TEE driver
+        Thu, 11 Sep 2025 21:09:44 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id E4AD941FA3A4; Fri, 12 Sep 2025 11:09:42 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kenel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Michael Grzeschik <m.grzeschik@pengutronix.de>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH net-next] Documentation: ARCnet: Update obsolete contact info
+Date: Fri, 12 Sep 2025 11:09:33 +0700
+Message-ID: <20250912040933.19036-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250911-qcom-tee-using-tee-ss-without-mem-obj-v12-11-17f07a942b8d@oss.qualcomm.com>
-References: <20250911-qcom-tee-using-tee-ss-without-mem-obj-v12-0-17f07a942b8d@oss.qualcomm.com>
-In-Reply-To: <20250911-qcom-tee-using-tee-ss-without-mem-obj-v12-0-17f07a942b8d@oss.qualcomm.com>
-To: Jens Wiklander <jens.wiklander@linaro.org>,
-        Sumit Garg <sumit.garg@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-        Apurupa Pattapu <quic_apurupa@quicinc.com>,
-        Kees Cook <kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Cc: Harshal Dev <quic_hdev@quicinc.com>, linux-arm-msm@vger.kernel.org,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-        linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org,
-        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>
-X-Mailer: b4 0.13.0
-X-Proofpoint-ORIG-GUID: l14D5PxDddMv7vM4kUioNF0Chics1cEf
-X-Proofpoint-GUID: l14D5PxDddMv7vM4kUioNF0Chics1cEf
-X-Authority-Analysis: v=2.4 cv=NdLm13D4 c=1 sm=1 tr=0 ts=68c39ca6 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=IkcTkHD0fZMA:10 a=yJojWOMRYYMA:10 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8
- a=NEAV23lmAAAA:8 a=VwQbUJbxAAAA:8 a=vCTlBN6rBY5pDr9NrAkA:9 a=QEXdDO2ut3YA:10
- a=M0EVDjxxv-UA:10 a=uKXjsCUrEbL0IQVhDsJ9:22 a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA4MDA2NiBTYWx0ZWRfXxeTErhvcCApp
- WGf2kSB+r2fhUIhO9bFgHIU+433WsaG0iELfM+4/BI/7x17OmQfKhgPNPXgSy6iTf0ayxD6TcL7
- FyvXgfrd0XyCzkh0/DHzD58AAP7+pfOjxtia927p0jGjyKB70MN5CHsS9AnWE5mta1tp0e3d7VG
- GHrb5lWq/vKOuvmngsXa+96HpVpmqN4CHml7UgTNd91Vjqx2mr/NwoXs/19uufFM7P/+WjFliNO
- 5RVOsxEnfocvYm0lsJvsk2f8lH9i4ETa2k0g/PJUCHca3jVu56mD2IcJXUWblcXkQU3C8g8RSl2
- svpf9l/bg9p0NiTAAApSMQJQjPiL8bbdKv9tO6GE8FZNNNyyofxv1ZjHYeWSwpipRZZmc5M5Tgl
- 5F3U2Dn4
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-09-12_01,2025-09-11_02,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 adultscore=0 suspectscore=0 phishscore=0
- clxscore=1015 impostorscore=0 spamscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2507300000 definitions=main-2509080066
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5408; i=bagasdotme@gmail.com; h=from:subject; bh=zZkkZ9jtVN9zl8MOUiaRZ/AhuJkVluKe+HXlB+7F8d0=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBmH58zTXHXN/cokgV2FNVrZQs5FpVXXSzs49+3mXn719 qTMHYsOdJSyMIhxMciKKbJMSuRrOr3LSORC+1pHmDmsTCBDGLg4BWAidn8YGRo3X54iO+XypoXn juz8JsewakJA0kc9jt5zDsETD1ziVHjE8Fd88ctFJ/c6/JcoOvvXtT5FdF7cpT8K7Om6uQHn//4 5w8gNAA==
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
-Add documentation for the Qualcomm TEE driver.
+ARCnet docs states that inquiries on the subsystem should be emailed to
+Avery Pennarun <apenwarr@worldvisions.ca>, for whom has been in CREDITS
+since the beginning of kernel git history and the subsystem is now
+maintained by Michael Grzeschik since c38f6ac74c9980 ("MAINTAINERS: add
+arcnet and take maintainership"). In addition, there used to be a
+dedicated ARCnet mailing list but its archive at epistolary.org has been
+shut down. ARCnet discussion nowadays take place in netdev list.
 
-Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+Update contact information.
+
+Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- Documentation/tee/index.rst |  1 +
- Documentation/tee/qtee.rst  | 96 +++++++++++++++++++++++++++++++++++++++++++++
- MAINTAINERS                 |  1 +
- 3 files changed, 98 insertions(+)
+ Documentation/networking/arcnet-hardware.rst | 13 +++---
+ Documentation/networking/arcnet.rst          | 48 +++++---------------
+ 2 files changed, 17 insertions(+), 44 deletions(-)
 
-diff --git a/Documentation/tee/index.rst b/Documentation/tee/index.rst
-index 4be6e69d7837..62afb7ee9b52 100644
---- a/Documentation/tee/index.rst
-+++ b/Documentation/tee/index.rst
-@@ -11,6 +11,7 @@ TEE Subsystem
-    op-tee
-    amd-tee
-    ts-tee
-+   qtee
+diff --git a/Documentation/networking/arcnet-hardware.rst b/Documentation/networking/arcnet-hardware.rst
+index 3bf7f99cd7bbf0..1e4484d880fe67 100644
+--- a/Documentation/networking/arcnet-hardware.rst
++++ b/Documentation/networking/arcnet-hardware.rst
+@@ -4,6 +4,8 @@
+ ARCnet Hardware
+ ===============
  
- .. only::  subproject and html
++:Author: Avery Pennarun <apenwarr@worldvisions.ca>
++
+ .. note::
  
-diff --git a/Documentation/tee/qtee.rst b/Documentation/tee/qtee.rst
-new file mode 100644
-index 000000000000..2fa2c1bf6384
---- /dev/null
-+++ b/Documentation/tee/qtee.rst
-@@ -0,0 +1,96 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============================================
-+QTEE (Qualcomm Trusted Execution Environment)
-+=============================================
-+
-+The QTEE driver handles communication with Qualcomm TEE [1].
-+
-+The lowest level of communication with QTEE builds on the ARM SMC Calling
-+Convention (SMCCC) [2], which is the foundation for QTEE's Secure Channel
-+Manager (SCM) [3] used internally by the driver.
-+
-+In a QTEE-based system, services are represented as objects with a series of
-+operations that can be called to produce results, including other objects.
-+
-+When an object is hosted within QTEE, executing its operations is referred
-+to as "direct invocation". QTEE can also invoke objects hosted in the non-secure
-+world using a method known as "callback request".
-+
-+The SCM provides two functions to support direct invocation and callback requests:
-+
-+- QCOM_SCM_SMCINVOKE_INVOKE: Used for direct invocation. It can return either
-+  a result or initiate a callback request.
-+- QCOM_SCM_SMCINVOKE_CB_RSP: Used to submit a response to a callback request
-+  triggered by a previous direct invocation.
-+
-+The QTEE Transport Message [4] is stacked on top of the SCM driver functions.
-+
-+A message consists of two buffers shared with QTEE: inbound and outbound
-+buffers. The inbound buffer is used for direct invocation, and the outbound
-+buffer is used to make callback requests. This picture shows the contents of
-+a QTEE transport message::
-+
-+                                      +---------------------+
-+                                      |                     v
-+    +-----------------+-------+-------+------+--------------------------+
-+    | qcomtee_msg_    |object | buffer       |                          |
-+    |  object_invoke  |  id   | offset, size |                          | (inbound buffer)
-+    +-----------------+-------+--------------+--------------------------+
-+    <---- header -----><---- arguments ------><- in/out buffer payload ->
-+
-+                                      +-----------+
-+                                      |           v
-+    +-----------------+-------+-------+------+----------------------+
-+    | qcomtee_msg_    |object | buffer       |                      |
-+    |  callback       |  id   | offset, size |                      | (outbound buffer)
-+    +-----------------+-------+--------------+----------------------+
-+
-+Each buffer is started with a header and array of arguments.
-+
-+QTEE Transport Message supports four types of arguments:
-+
-+- Input Object (IO) is an object parameter to the current invocation
-+  or callback request.
-+- Output Object (OO) is an object parameter from the current invocation
-+  or callback request.
-+- Input Buffer (IB) is (offset, size) pair to the inbound or outbound region
-+  to store parameter to the current invocation or callback request.
-+- Output Buffer (OB) is (offset, size) pair to the inbound or outbound region
-+  to store parameter from the current invocation or callback request.
-+
-+Picture of the relationship between the different components in the QTEE
-+architecture::
-+
-+         User space               Kernel                     Secure world
-+         ~~~~~~~~~~               ~~~~~~                     ~~~~~~~~~~~~
-+   +--------+   +----------+                                +--------------+
-+   | Client |   |callback  |                                | Trusted      |
-+   +--------+   |server    |                                | Application  |
-+      /\        +----------+                                +--------------+
-+      ||  +----------+ /\                                          /\
-+      ||  |callback  | ||                                          ||
-+      ||  |server    | ||                                          \/
-+      ||  +----------+ ||                                   +--------------+
-+      ||       /\      ||                                   | TEE Internal |
-+      ||       ||      ||                                   | API          |
-+      \/       \/      \/   +--------+--------+             +--------------+
-+   +---------------------+  | TEE    | QTEE   |             | QTEE         |
-+   |   libqcomtee [5]    |  | subsys | driver |             | Trusted OS   |
-+   +-------+-------------+--+----+-------+----+-------------+--------------+
-+   |      Generic TEE API        |       |   QTEE MSG                      |
-+   |      IOCTL (TEE_IOC_*)      |       |   SMCCC (QCOM_SCM_SMCINVOKE_*)  |
-+   +-----------------------------+       +---------------------------------+
-+
-+References
-+==========
-+
-+[1] https://docs.qualcomm.com/bundle/publicresource/topics/80-70015-11/qualcomm-trusted-execution-environment.html
-+
-+[2] http://infocenter.arm.com/help/topic/com.arm.doc.den0028a/index.html
-+
-+[3] drivers/firmware/qcom/qcom_scm.c
-+
-+[4] drivers/tee/qcomtee/qcomtee_msg.h
-+
-+[5] https://github.com/quic/quic-teec
-diff --git a/MAINTAINERS b/MAINTAINERS
-index bde449308736..589f8ea62bcf 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -20860,6 +20860,7 @@ QUALCOMM TEE (QCOMTEE) DRIVER
- M:	Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
- L:	linux-arm-msm@vger.kernel.org
- S:	Maintained
-+F:	Documentation/tee/qtee.rst
- F:	drivers/tee/qcomtee/
+    1) This file is a supplement to arcnet.txt.  Please read that for general
+@@ -13,9 +15,9 @@ ARCnet Hardware
  
- QUALCOMM TRUST ZONE MEMORY ALLOCATOR
+ Because so many people (myself included) seem to have obtained ARCnet cards
+ without manuals, this file contains a quick introduction to ARCnet hardware,
+-some cabling tips, and a listing of all jumper settings I can find. Please
+-e-mail apenwarr@worldvisions.ca with any settings for your particular card,
+-or any other information you have!
++some cabling tips, and a listing of all jumper settings I can find. If you
++have any settings for your particular card, and/or any other information you
++have, do not hesistate to :ref:`email to netdev <arcnet-netdev>`.
+ 
+ 
+ Introduction to ARCnet
+@@ -3226,9 +3228,6 @@ Settings for IRQ Selection (Lower Jumper Line)
+ Other Cards
+ ===========
+ 
+-I have no information on other models of ARCnet cards at the moment.  Please
+-send any and all info to:
+-
+-	apenwarr@worldvisions.ca
++I have no information on other models of ARCnet cards at the moment.
+ 
+ Thanks.
+diff --git a/Documentation/networking/arcnet.rst b/Documentation/networking/arcnet.rst
+index 82fce606c0f0bc..cd43a18ad1494b 100644
+--- a/Documentation/networking/arcnet.rst
++++ b/Documentation/networking/arcnet.rst
+@@ -4,6 +4,8 @@
+ ARCnet
+ ======
+ 
++:Author: Avery Pennarun <apenwarr@worldvisions.ca>
++
+ .. note::
+ 
+    See also arcnet-hardware.txt in this directory for jumper-setting
+@@ -30,18 +32,7 @@ Come on, be a sport!  Send me a success report!
+ 
+ (hey, that was even better than my original poem... this is getting bad!)
+ 
+-
+-.. warning::
+-
+-   If you don't e-mail me about your success/failure soon, I may be forced to
+-   start SINGING.  And we don't want that, do we?
+-
+-   (You know, it might be argued that I'm pushing this point a little too much.
+-   If you think so, why not flame me in a quick little e-mail?  Please also
+-   include the type of card(s) you're using, software, size of network, and
+-   whether it's working or not.)
+-
+-   My e-mail address is: apenwarr@worldvisions.ca
++----
+ 
+ These are the ARCnet drivers for Linux.
+ 
+@@ -59,23 +50,14 @@ ARCnet 2.10 ALPHA, Tomasz's all-new-and-improved RFC1051 support has been
+ included and seems to be working fine!
+ 
+ 
++.. _arcnet-netdev:
++
+ Where do I discuss these drivers?
+ ---------------------------------
+ 
+-Tomasz has been so kind as to set up a new and improved mailing list.
+-Subscribe by sending a message with the BODY "subscribe linux-arcnet YOUR
+-REAL NAME" to listserv@tichy.ch.uj.edu.pl.  Then, to submit messages to the
+-list, mail to linux-arcnet@tichy.ch.uj.edu.pl.
+-
+-There are archives of the mailing list at:
+-
+-	http://epistolary.org/mailman/listinfo.cgi/arcnet
+-
+-The people on linux-net@vger.kernel.org (now defunct, replaced by
+-netdev@vger.kernel.org) have also been known to be very helpful, especially
+-when we're talking about ALPHA Linux kernels that may or may not work right
+-in the first place.
+-
++ARCnet discussions take place on netdev. Simply send your email to
++netdev@vger.kernel.org and make sure to Cc: maintainer listed in
++"ARCNET NETWORK LAYER" heading of Documentation/process/maintainers.rst.
+ 
+ Other Drivers and Info
+ ----------------------
+@@ -523,17 +505,9 @@ can set up your network then:
+ It works: what now?
+ -------------------
+ 
+-Send mail describing your setup, preferably including driver version, kernel
+-version, ARCnet card model, CPU type, number of systems on your network, and
+-list of software in use to me at the following address:
+-
+-	apenwarr@worldvisions.ca
+-
+-I do send (sometimes automated) replies to all messages I receive.  My email
+-can be weird (and also usually gets forwarded all over the place along the
+-way to me), so if you don't get a reply within a reasonable time, please
+-resend.
+-
++Send mail following :ref:`arcnet-netdev`. Describe your setup, preferably
++including driver version, kernel version, ARCnet card model, CPU type, number
++of systems on your network, and list of software in use.
+ 
+ It doesn't work: what now?
+ --------------------------
 
+base-commit: 2f186dd5585c3afb415df80e52f71af16c9d3655
 -- 
-2.34.1
+An old man doll... just what I always wanted! - Clara
 
 
