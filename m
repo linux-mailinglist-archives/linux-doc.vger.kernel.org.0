@@ -1,340 +1,186 @@
-Return-Path: <linux-doc+bounces-60229-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60231-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFEECB54F67
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 15:24:33 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9308FB54F84
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 15:27:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 504BEA03DD3
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 13:24:21 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 46D3C5A4E44
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 13:27:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C476C31280F;
-	Fri, 12 Sep 2025 13:23:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 803B830EF70;
+	Fri, 12 Sep 2025 13:27:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YP+Pzyzt"
+	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="Q7ngLdU1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99EC93126DD;
-	Fri, 12 Sep 2025 13:23:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 438B330C621;
+	Fri, 12 Sep 2025 13:27:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757683399; cv=none; b=O9C5TjlO186euvq8bmTzd2ru0G2uydN8aQ7saY1a+qbCo/zPyhcr30dHP2UJffWwM3xZkVvZH5+mO8FecskIl4nB90IN8RaGttLcNWlpLGOYvy7+qvXGqKPSKRjPVvXR0s4U25g6ZZ3c5DDvQ0YL5K0v4t1uJQJsRc08Q/5+62I=
+	t=1757683653; cv=none; b=eT5fRnXF6pjG/EB4LGpWHUIGcxj1EHuOYHc2vUIGRlqLMqhVmOWN2VLY0p2OJURcelskhI7++p0kuaHAv+pG3iKxf6c9mWOoLCUVswMx8X8NcJWRpODjJGTA4nmq0imPwVvbRD3o7r1eDvGdlMRnTTkwHEx4aBIhaQT7h5wxfKM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757683399; c=relaxed/simple;
-	bh=CQynYlI5Jbr7BRqUpmCrgkbOcNBBYC+jF1PwTtv6dEI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=LkSolS0VGgBWrHdhoDblb68XE/pO3VZFWV2Vu20LuNDj8ijuyyzod72tEmEtkNDIwoZ1rtGh72Pzcr/kcC9Sv4LpqgscURLNEqUWiDGd7465c6/1WjNL7OCIew+GXsARNMZ9B98rwWYb3405316sJ1LXFd47xnG/DJee5J8xTfI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YP+Pzyzt; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60AC3C4CEF9;
-	Fri, 12 Sep 2025 13:23:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757683399;
-	bh=CQynYlI5Jbr7BRqUpmCrgkbOcNBBYC+jF1PwTtv6dEI=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=YP+PzyztFHZUItTulaPmGGfxTAv9bxm2/SYbyDXi/HtCINOyKw4cqzft4iUcg/RL8
-	 ptOD6Ty7GrKCPmZglUO/W4jdw4/9QKOHnun6w9IMP5IMqFTZj9alSkfOEG0nk1WNgA
-	 OhfYumaznzkgRA0gSivxfmarUD8wgTt1SWNwPqSMOyuOrsrmB8+Etb1kvXlp2KhQ3Q
-	 ipdP5NTuwkMJjQx7fp5yMBtRQPd2DDR29VXjf8nrhgi1ZUEQg4t9RcARH6m+iBKEjk
-	 tgDzVzcx0OtmAyFt3rMnEBrgkDUPl70RdZ/haExzr7croJVWl7Eznc9ZBYQ+OijbJU
-	 9uadTlojbxHRQ==
-From: "Matthieu Baerts (NGI0)" <matttbe@kernel.org>
-Date: Fri, 12 Sep 2025 15:23:01 +0200
-Subject: [PATCH net-next v2 3/3] netlink: specs: explicitly declare block
- scalar strings
+	s=arc-20240116; t=1757683653; c=relaxed/simple;
+	bh=1KPKvhaCASvnnKPF6ZQkRAik3mQETKR6yqvgaQOTVgY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fMszraYvVwIwh0WvBIMpCdkxPKC/mDMjVLB7SsmyqRrx7lyW4PxXhU8wObhcxNfgVPIRtgmAR8PDa4WHq7eoatjCla/BeyR+J3YxI1ij0mkCueae6w+o0+3NjfDxd14E8L9cb2xVM7vf6wN6SsvpQIS91KvhTdUiTJsGENWUaSg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=Q7ngLdU1; arc=none smtp.client-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
+Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi [81.175.209.231])
+	by perceval.ideasonboard.com (Postfix) with UTF8SMTPSA id 6B96C596;
+	Fri, 12 Sep 2025 15:26:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1757683567;
+	bh=1KPKvhaCASvnnKPF6ZQkRAik3mQETKR6yqvgaQOTVgY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Q7ngLdU1ox2AMLBxPiFBN7yBqFEyj+uuUOs3gVusw5UKeu1YjhBfk82yE79uLojxG
+	 yROOWUk0YWcFN9dRtW3L0DkbS9sVIUYwUaeYAG+F+HtSTl7HMsRjlwF0N2FDJQ6r5W
+	 nzgvyyLdmIPr1+vJAJZeypvU+/jWk5pkTEZSsN1A=
+Date: Fri, 12 Sep 2025 16:26:56 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Tzung-Bi Shih <tzungbi@kernel.org>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Benson Leung <bleung@chromium.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+	Dawid Niedzwiecki <dawidn@google.com>, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev,
+	linux-kselftest@vger.kernel.org,
+	Wolfram Sang <wsa+renesas@sang-engineering.com>, brgl@bgdev.pl
+Subject: Re: [PATCH v3 0/5] platform/chrome: Fix a possible UAF via revocable
+Message-ID: <20250912132656.GC31682@pendragon.ideasonboard.com>
+References: <20250912081718.3827390-1-tzungbi@kernel.org>
+ <2033c6cd-4112-4c8a-a9ef-2ab34f3504b8@kernel.org>
+ <CACMJSeuKH+WKOXLNU92dMssqhK02xG3z=cT0VeXYM+ZGuPCB9g@mail.gmail.com>
+ <aMQW2jUFlx7Iu9U5@tzungbi-laptop>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250912-net-next-ynl-attr-doc-rst-v2-3-c44d36a99992@kernel.org>
-References: <20250912-net-next-ynl-attr-doc-rst-v2-0-c44d36a99992@kernel.org>
-In-Reply-To: <20250912-net-next-ynl-attr-doc-rst-v2-0-c44d36a99992@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>, 
- Donald Hunter <donald.hunter@gmail.com>, Jakub Kicinski <kuba@kernel.org>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
- Jiri Pirko <jiri@resnulli.us>
-Cc: linux-doc@vger.kernel.org, netdev@vger.kernel.org, 
- linux-kernel@vger.kernel.org, "Matthieu Baerts (NGI0)" <matttbe@kernel.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9196; i=matttbe@kernel.org;
- h=from:subject:message-id; bh=CQynYlI5Jbr7BRqUpmCrgkbOcNBBYC+jF1PwTtv6dEI=;
- b=owGbwMvMwCVWo/Th0Gd3rumMp9WSGDKOyO2VMZ0QUi0YdX/rkVaOQ7vrrzNOitXa4Plt41tn1
- 4oiv+MfO0pZGMS4GGTFFFmk2yLzZz6v4i3x8rOAmcPKBDKEgYtTACYivIWR4bqR5FEtEY4fBzeq
- 538/8/mqoLBn/dZS3ldvQvbUXSiIbWdkOPtzyQ+eE1vsjb5LRq69nGK4dHbiQoFLqw+4i3ZksRo
- 8YwUA
-X-Developer-Key: i=matttbe@kernel.org; a=openpgp;
- fpr=E8CB85F76877057A6E27F77AF6B7824F4269A073
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <aMQW2jUFlx7Iu9U5@tzungbi-laptop>
 
-In YAML, it is allowed to declare a scalar strings at the next lines
-without explicitly declaring them as a block. Yet, they looks weird, and
-can cause issues when ':' or '#' are present.
+On Fri, Sep 12, 2025 at 08:49:30PM +0800, Tzung-Bi Shih wrote:
+> On Fri, Sep 12, 2025 at 11:24:10AM +0200, Bartosz Golaszewski wrote:
+> > On Fri, 12 Sept 2025 at 11:09, Krzysztof Kozlowski wrote:
+> > > On 12/09/2025 10:17, Tzung-Bi Shih wrote:
+> > > > Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> > > > Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> > > > Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>
+> > >
+> > > Thanks for the work. Just a note, please start using b4, so above Cc
+> > > will be propagated to all patches. Folks above received only the cover
+> > > letter...
+> 
+> Thank you for bringing this to my attention.  I wasn't aware of that and
+> will ensure this is handled correctly in the future.
+> 
+> > Thanks to Krzysztof for making me aware of this. Could you please Cc
+> > my brgl@bgdev.pl address on the next iteration.
+> 
+> Sure, will do.
+> 
+> > I haven't looked into the details yet but the small size of the first
+> > patch strikes me as odd. The similar changes I did for GPIO were quite
+> > big and they were designed just for a single sub-system.
+> > 
+> > During the talk you reference, after I suggested a library like this,
+> > Greg KH can be heard saying: do this for two big subsystems so that
+> > you're sure it's a generic solution. Here you're only using it in a
+> > single driver which makes me wonder if we can actually use it to
+> > improve bigger offenders, like for example I2C, or even replace the
+> > custom, SRCU-based solution in GPIO we have now. Have you considered
+> > at least doing a PoC in a wider kernel framework?
+> 
+> Yes, I'm happy to take this on.
+> 
+> To help me get started, could you please point me to some relevant code
+> locations?  Also, could you let me know if any specific physical devices
+> will be needed for testing?
 
-The modified lines didn't have issues with the special characters, but
-it seems better to explicitly declare such blocks as scalar strings to
-encourage people to "properly" declare future scalar strings.
+One interesting test would be to move the logic to the cdev layer. The
+use-after-free problem isn't specific to one type of character device,
+and so shouldn't require a fix in every driver instantiating a cdev
+directly (or indirectly). See [1] for a previous attempt to handle this
+at the V4L2 level and [2] for an attempt to handle it at the cdev level.
 
-The right angle bracket is used with a minus sign to indicate that the
-folded style should be used without adding extra newlines. By doing
-that, the output is not changed compared to what was done before this
-patch.
+In [1], two new functions named video_device_enter() and
+video_device_exit() flag the beginning and end of protected code
+sections. The equivalent in [2] is the manual get/put of cdev->qactive,
+and if I understand things correctly, your series creates a REVOCABLE()
+macro to do the same. I'm sure we'll bikesheed about names at some
+point, but for the time being, what I'd like to see if this being done
+in fs/char_dev.c to cover all entry points from userspace at the cdev
+level.
 
-Suggested-by: Donald Hunter <donald.hunter@gmail.com>
-Signed-off-by: Matthieu Baerts (NGI0) <matttbe@kernel.org>
----
- Documentation/netlink/specs/conntrack.yaml    |  2 +-
- Documentation/netlink/specs/netdev.yaml       | 22 +++++++++++-----------
- Documentation/netlink/specs/nftables.yaml     |  2 +-
- Documentation/netlink/specs/nl80211.yaml      |  2 +-
- Documentation/netlink/specs/ovs_datapath.yaml |  2 +-
- Documentation/netlink/specs/ovs_flow.yaml     |  2 +-
- Documentation/netlink/specs/ovs_vport.yaml    |  2 +-
- Documentation/netlink/specs/rt-addr.yaml      |  2 +-
- Documentation/netlink/specs/rt-link.yaml      |  2 +-
- Documentation/netlink/specs/rt-neigh.yaml     |  2 +-
- Documentation/netlink/specs/rt-route.yaml     |  2 +-
- Documentation/netlink/specs/rt-rule.yaml      |  2 +-
- Documentation/netlink/specs/tc.yaml           |  2 +-
- 13 files changed, 23 insertions(+), 23 deletions(-)
+We then have video_device_unplug() in [1], which I think is more or less
+the equivalent of revocable_provider_free(). I don't think we'll be able
+to hide this completely from drivers, at least not in all cases. We
+should however design the API to make it easy for drivers, likely with
+subsystem-specific wrappers.
 
-diff --git a/Documentation/netlink/specs/conntrack.yaml b/Documentation/netlink/specs/conntrack.yaml
-index c6832633ab7bf9517194da3e2227ace0fa03b013..642ac859cb7ade772e5a7674509475ab32ea3319 100644
---- a/Documentation/netlink/specs/conntrack.yaml
-+++ b/Documentation/netlink/specs/conntrack.yaml
-@@ -4,7 +4,7 @@ name: conntrack
- protocol: netlink-raw
- protonum: 12
- 
--doc:
-+doc: >-
-   Netfilter connection tracking subsystem over nfnetlink
- 
- definitions:
-diff --git a/Documentation/netlink/specs/netdev.yaml b/Documentation/netlink/specs/netdev.yaml
-index c035dc0f64fd6245669c9df82a208c7afddcc3cf..e00d3fa1c152d7165e9485d6d383a2cc9cef7cfd 100644
---- a/Documentation/netlink/specs/netdev.yaml
-+++ b/Documentation/netlink/specs/netdev.yaml
-@@ -2,7 +2,7 @@
- ---
- name: netdev
- 
--doc:
-+doc: >-
-   netdev configuration over generic netlink.
- 
- definitions:
-@@ -13,33 +13,33 @@ definitions:
-     entries:
-       -
-         name: basic
--        doc:
-+        doc: >-
-           XDP features set supported by all drivers
-           (XDP_ABORTED, XDP_DROP, XDP_PASS, XDP_TX)
-       -
-         name: redirect
--        doc:
-+        doc: >-
-           The netdev supports XDP_REDIRECT
-       -
-         name: ndo-xmit
--        doc:
-+        doc: >-
-           This feature informs if netdev implements ndo_xdp_xmit callback.
-       -
-         name: xsk-zerocopy
--        doc:
-+        doc: >-
-           This feature informs if netdev supports AF_XDP in zero copy mode.
-       -
-         name: hw-offload
--        doc:
-+        doc: >-
-           This feature informs if netdev supports XDP hw offloading.
-       -
-         name: rx-sg
--        doc:
-+        doc: >-
-           This feature informs if netdev implements non-linear XDP buffer
-           support in the driver napi callback.
-       -
-         name: ndo-xmit-sg
--        doc:
-+        doc: >-
-           This feature informs if netdev implements non-linear XDP buffer
-           support in ndo_xdp_xmit callback.
-   -
-@@ -67,15 +67,15 @@ definitions:
-     entries:
-       -
-         name: tx-timestamp
--        doc:
-+        doc: >-
-           HW timestamping egress packets is supported by the driver.
-       -
-         name: tx-checksum
--        doc:
-+        doc: >-
-           L3 checksum HW offload is supported by the driver.
-       -
-         name: tx-launch-time-fifo
--        doc:
-+        doc: >-
-           Launch time HW offload is supported by the driver.
-   -
-     name: queue-type
-diff --git a/Documentation/netlink/specs/nftables.yaml b/Documentation/netlink/specs/nftables.yaml
-index 2ee10d92d644a6e25e746f4981457e0dc28181ad..cce88819ba71650cbdcf1f04a728d799d7aaa196 100644
---- a/Documentation/netlink/specs/nftables.yaml
-+++ b/Documentation/netlink/specs/nftables.yaml
-@@ -4,7 +4,7 @@ name: nftables
- protocol: netlink-raw
- protonum: 12
- 
--doc:
-+doc: >-
-   Netfilter nftables configuration over netlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/nl80211.yaml b/Documentation/netlink/specs/nl80211.yaml
-index 610fdd5e000ebfdfbc882a0b7929ed9cf1b206ae..802097128bdaede58d67a862298ccd752261761d 100644
---- a/Documentation/netlink/specs/nl80211.yaml
-+++ b/Documentation/netlink/specs/nl80211.yaml
-@@ -3,7 +3,7 @@
- name: nl80211
- protocol: genetlink-legacy
- 
--doc:
-+doc: >-
-   Netlink API for 802.11 wireless devices
- 
- definitions:
-diff --git a/Documentation/netlink/specs/ovs_datapath.yaml b/Documentation/netlink/specs/ovs_datapath.yaml
-index 0c0abf3f9f050f37ac3905dedb2270af1a6594ca..f7b3671991e6cb5d0e868977b83cad43327cb98b 100644
---- a/Documentation/netlink/specs/ovs_datapath.yaml
-+++ b/Documentation/netlink/specs/ovs_datapath.yaml
-@@ -5,7 +5,7 @@ version: 2
- protocol: genetlink-legacy
- uapi-header: linux/openvswitch.h
- 
--doc:
-+doc: >-
-   OVS datapath configuration over generic netlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/ovs_flow.yaml b/Documentation/netlink/specs/ovs_flow.yaml
-index 2dac9c8add57bb87a707b4c62d8e4794dc970a43..951837b72e1d280468272a85747a08db2d16170f 100644
---- a/Documentation/netlink/specs/ovs_flow.yaml
-+++ b/Documentation/netlink/specs/ovs_flow.yaml
-@@ -5,7 +5,7 @@ version: 1
- protocol: genetlink-legacy
- uapi-header: linux/openvswitch.h
- 
--doc:
-+doc: >-
-   OVS flow configuration over generic netlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/ovs_vport.yaml b/Documentation/netlink/specs/ovs_vport.yaml
-index da47e65fd574203f5ead79d6d470923e0440a1be..fa975f8821b6c9283a9c4a8a2dc51452b14c89e5 100644
---- a/Documentation/netlink/specs/ovs_vport.yaml
-+++ b/Documentation/netlink/specs/ovs_vport.yaml
-@@ -5,7 +5,7 @@ version: 2
- protocol: genetlink-legacy
- uapi-header: linux/openvswitch.h
- 
--doc:
-+doc: >-
-   OVS vport configuration over generic netlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/rt-addr.yaml b/Documentation/netlink/specs/rt-addr.yaml
-index bafe3bfeabfb572167a746279edb1a2cac52cbb2..3a582eac1629ee50bd6257dcdfc54ca27a03c03a 100644
---- a/Documentation/netlink/specs/rt-addr.yaml
-+++ b/Documentation/netlink/specs/rt-addr.yaml
-@@ -5,7 +5,7 @@ protocol: netlink-raw
- uapi-header: linux/rtnetlink.h
- protonum: 0
- 
--doc:
-+doc: >-
-   Address configuration over rtnetlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/rt-link.yaml b/Documentation/netlink/specs/rt-link.yaml
-index 210394c188a3bc0ed2e248717cce414a20a19089..6ab31f86854db3894ba7c05b398ad6f087facd19 100644
---- a/Documentation/netlink/specs/rt-link.yaml
-+++ b/Documentation/netlink/specs/rt-link.yaml
-@@ -5,7 +5,7 @@ protocol: netlink-raw
- uapi-header: linux/rtnetlink.h
- protonum: 0
- 
--doc:
-+doc: >-
-   Link configuration over rtnetlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/rt-neigh.yaml b/Documentation/netlink/specs/rt-neigh.yaml
-index 30a9ee16f128eac9b9f2f0cf1b8aea1940f1e62d..2f568a6231c9309aa8aec00907ea10a4e3359c1a 100644
---- a/Documentation/netlink/specs/rt-neigh.yaml
-+++ b/Documentation/netlink/specs/rt-neigh.yaml
-@@ -5,7 +5,7 @@ protocol: netlink-raw
- uapi-header: linux/rtnetlink.h
- protonum: 0
- 
--doc:
-+doc: >-
-   IP neighbour management over rtnetlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/rt-route.yaml b/Documentation/netlink/specs/rt-route.yaml
-index 5b514ddeff1db01784e4398a0092490616ca51a2..1ecb3fadc0679fb577d73717ddda4e9c5d61d624 100644
---- a/Documentation/netlink/specs/rt-route.yaml
-+++ b/Documentation/netlink/specs/rt-route.yaml
-@@ -5,7 +5,7 @@ protocol: netlink-raw
- uapi-header: linux/rtnetlink.h
- protonum: 0
- 
--doc:
-+doc: >-
-   Route configuration over rtnetlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/rt-rule.yaml b/Documentation/netlink/specs/rt-rule.yaml
-index 46b1d426e7e863a3ee90199b0c3adeb1e34c1465..bebee452a95073332e7b0681ddd97560ce873f20 100644
---- a/Documentation/netlink/specs/rt-rule.yaml
-+++ b/Documentation/netlink/specs/rt-rule.yaml
-@@ -5,7 +5,7 @@ protocol: netlink-raw
- uapi-header: linux/fib_rules.h
- protonum: 0
- 
--doc:
-+doc: >-
-   FIB rule management over rtnetlink.
- 
- definitions:
-diff --git a/Documentation/netlink/specs/tc.yaml b/Documentation/netlink/specs/tc.yaml
-index b1afc7ab353951d5eeab20323db9dd91966789a2..b398f7a46dae19ba82669404e85665e56139c22e 100644
---- a/Documentation/netlink/specs/tc.yaml
-+++ b/Documentation/netlink/specs/tc.yaml
-@@ -5,7 +5,7 @@ protocol: netlink-raw
- uapi-header: linux/pkt_cls.h
- protonum: 0
- 
--doc:
-+doc: >-
-   Netlink raw family for tc qdisc, chain, class and filter configuration
-   over rtnetlink.
- 
+What I have in mind is roughly the following:
+
+1. Protect all access to the cdev from userspace with enter/exit calls
+   that flag if a call is in progress. This can be done with explicit
+   function calls, or with a scope guard as in your series.
+
+2. At .remove() time, start by flagging that the device is being
+   removed. That has to be an explicit call from drivers I believe,
+   likely using subsystem-specific wrappers to simplify things.
+
+3. Once the device is marked as being removed, all enter() calls should
+   fail at the cdev level.
+
+4. In .remove(), proceed to perform driver-specific operations that will
+   stop the device and wake up any userspace task blocked on a syscall
+   protected by enter()/remove(). This isn't needed for
+   drivers/subsystems that don't provide any blocking API, but is
+   required otherwise.
+
+5. Unregister, still in .remove(), the cdev (likely through
+   subsystem-specific APIs in most cases). This should block until all
+   protected sections have exited.
+
+6. The cdev is now unregistered, can't be opened anymore, and any
+   new syscall on any opened file handle will return an error. The
+   driver's .remove() function can proceed to free data, there won't be
+   any UAF caused by userspace.
+
+[1] implemented this fairly naively with flags and spinlocks. An
+RCU-based implementation is probably more efficient, even if I don't
+know how performance-sensitive all this is.
+
+Does this align with your design, and do you think you could give a try
+at pushing revocable resource handling to the cdev level ?
+
+On a separate note, I'm not sure "revocable" is the right name here. I
+believe a revocable resource API is needed, and well-named, for
+in-kernel consumers (e.g. drivers consuming a GPIO or clock). For the
+userspace syscalls racing with .remove(), I don't think we're dealing
+with "revocable resources". Now, if a "revocable resources" API were to
+support the in-kernel users, and be usable as a building block to fix
+the cdev issue, I would have nothing against it, but the "revocable"
+name should be internal in that case, used in the cdev layer only, and
+not exposed to drivers (or even subsystem helpers that should wrap cdev
+functions instead).
+
+[1] https://lore.kernel.org/r/20171116003349.19235-1-laurent.pinchart+renesas@ideasonboard.com
+[2] https://lore.kernel.org/r/161117153248.2853729.2452425259045172318.stgit@dwillia2-desk3.amr.corp.intel.com
 
 -- 
-2.51.0
+Regards,
 
+Laurent Pinchart
 
