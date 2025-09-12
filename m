@@ -1,246 +1,244 @@
-Return-Path: <linux-doc+bounces-60263-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60278-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D28E8B552B8
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 17:10:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 407B4B552FC
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 17:18:02 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 873F6581CAF
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 15:10:48 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id E3DCA16829D
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 15:18:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 814E631352E;
-	Fri, 12 Sep 2025 15:10:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 302EC2264C4;
+	Fri, 12 Sep 2025 15:15:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="PvctjGLf";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="T7cdSouk";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="PvctjGLf";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="T7cdSouk"
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ZQkPnZnU";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="o9EJkBgC";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ZQkPnZnU";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="o9EJkBgC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43FBA31353E
-	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 15:10:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2039F222560
+	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 15:15:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757689803; cv=none; b=TaRYIhXkmynDZKM9gvXwqQxOuNG7EBRJqqjRIB4Jqs4mHTc0pNzoLN62n7IEp7xTjJtRWEvetVLXJ95gHqt+c6Cuwzjw4uk4VQlmVCZAXoiCQIb7QgnO/Fz0ibPUJenyfjILE/fhiS4zU1x3tqbAX8zC2WAzGTeAQJZyv+XhodU=
+	t=1757690137; cv=none; b=fpjzrwQCP7n75vuzhIQL7vihhnrAmiUjL0jahZWylttfdFZdRipx7UHEOvHq+ooMha1pwXM1+gWKbzqGiliJfnQDsORj7d+2Dibrp/dR1kKatalIVoA5BjU5IiwJ3inOLSxrwqn+qFkC3DnQVOrs4Qyt0GfvPvn/4XqIfUMWAdM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757689803; c=relaxed/simple;
-	bh=yBMtdHR8Z2DW6AnutSlIlWUYFnDNkrdCerjgdZMZ7KU=;
-	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ss4mbloEMkbjHHmlnHjST3U0O72XiQOlQ/IZVNScdi+bY5A5v4AmVYOl5F8RQm3lTaf0tt4e/azvzpj/M4JC8zMejlMd2WCpYfga0RooCog/F5J3p4s5ry6ynuY78Y2XdhIBKDtKgABDhBMr1Db6uT2UsU6YyrPkWzHTuSY+7/I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=PvctjGLf; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=T7cdSouk; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=PvctjGLf; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=T7cdSouk; arc=none smtp.client-ip=195.135.223.131
+	s=arc-20240116; t=1757690137; c=relaxed/simple;
+	bh=i0qQXh+7DIrwwhu0DnxHg44sg9lfslYI1FKhuGJhOUo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WtJ2D2985RIM5iAw2FjLxB4RBPBKduEuMFNByEzzTsNX9PlF+tcrmsgSEuUBJKcX/60GmNsxrexgR1QqdRlh/iF/UQqrm07fo0PpDkx7QGQZZ/BZ8th8bJAf5qFotFVWP1t4MOdGfeKEOysOeKm4EmEE774TSPJB/22NIbiNDkk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=ZQkPnZnU; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=o9EJkBgC; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=ZQkPnZnU; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=o9EJkBgC; arc=none smtp.client-ip=195.135.223.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 36FC620F12;
-	Fri, 12 Sep 2025 15:09:58 +0000 (UTC)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 9819F5F89F;
+	Fri, 12 Sep 2025 15:15:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1757689798; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1757690132; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=F/pM/9W1r75+CaDorOZpGk2LU+S6hOX+QgOMBroL+zs=;
-	b=PvctjGLfSuDclCddVBNmBQSwY9/Flua3RqMf0XLlwJ0ZwrSrQzsQkvzOzIHqHbbMlrVVf3
-	SMHveOmH9RTeuGx+A6NvQZpSaoe2A/1Yq+AoT8mgpM0pmfSy00GSzGb+n1YLaigb5xwA+n
-	e7GxWfsk9Xmim5wGMqimqplINPibA+g=
+	bh=FWdXdLhM1N+CqR/OguV/6Acj3qPcJbiUisZav4LkXGY=;
+	b=ZQkPnZnUu0qs3kJEusmuAXceM6Cr2U2hTKszSrPMNpY2THiPZeW/Juuus6RPE2J94Y8IQk
+	CEkqZwKLD3dlDwefjM+0IUpZo0a0CnkApYDdt1MtFrVgEfmsQn7PctIVYwdPve20guNUI+
+	ZRjYiJbsdYTcQ1gs3ZC/4H+K7PDpU2k=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1757689798;
+	s=susede2_ed25519; t=1757690132;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=F/pM/9W1r75+CaDorOZpGk2LU+S6hOX+QgOMBroL+zs=;
-	b=T7cdSouk/K4l81JJ/UOIziYPp4EFoWTjUIl9vPrTFC0u88tskt6+l+DR6pgfOdpfMy//q1
-	ku1F5jIgoOkcWsCA==
+	bh=FWdXdLhM1N+CqR/OguV/6Acj3qPcJbiUisZav4LkXGY=;
+	b=o9EJkBgCdfy9n0AMynRlG7cd+7nwcG2V+Rxk2lHxoLENnKZiD+UnslU7EURZvxnDhezG2O
+	10PBsEc2Ijyq+cAw==
 Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=PvctjGLf;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=T7cdSouk
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=ZQkPnZnU;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=o9EJkBgC
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1757689798; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1757690132; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=F/pM/9W1r75+CaDorOZpGk2LU+S6hOX+QgOMBroL+zs=;
-	b=PvctjGLfSuDclCddVBNmBQSwY9/Flua3RqMf0XLlwJ0ZwrSrQzsQkvzOzIHqHbbMlrVVf3
-	SMHveOmH9RTeuGx+A6NvQZpSaoe2A/1Yq+AoT8mgpM0pmfSy00GSzGb+n1YLaigb5xwA+n
-	e7GxWfsk9Xmim5wGMqimqplINPibA+g=
+	bh=FWdXdLhM1N+CqR/OguV/6Acj3qPcJbiUisZav4LkXGY=;
+	b=ZQkPnZnUu0qs3kJEusmuAXceM6Cr2U2hTKszSrPMNpY2THiPZeW/Juuus6RPE2J94Y8IQk
+	CEkqZwKLD3dlDwefjM+0IUpZo0a0CnkApYDdt1MtFrVgEfmsQn7PctIVYwdPve20guNUI+
+	ZRjYiJbsdYTcQ1gs3ZC/4H+K7PDpU2k=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1757689798;
+	s=susede2_ed25519; t=1757690132;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=F/pM/9W1r75+CaDorOZpGk2LU+S6hOX+QgOMBroL+zs=;
-	b=T7cdSouk/K4l81JJ/UOIziYPp4EFoWTjUIl9vPrTFC0u88tskt6+l+DR6pgfOdpfMy//q1
-	ku1F5jIgoOkcWsCA==
+	bh=FWdXdLhM1N+CqR/OguV/6Acj3qPcJbiUisZav4LkXGY=;
+	b=o9EJkBgCdfy9n0AMynRlG7cd+7nwcG2V+Rxk2lHxoLENnKZiD+UnslU7EURZvxnDhezG2O
+	10PBsEc2Ijyq+cAw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C867113869;
-	Fri, 12 Sep 2025 15:09:57 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C73C713869;
+	Fri, 12 Sep 2025 15:15:29 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id b1yDL8U3xGi0MQAAD6G6ig
-	(envelope-from <tiwai@suse.de>); Fri, 12 Sep 2025 15:09:57 +0000
-Date: Fri, 12 Sep 2025 17:09:57 +0200
-Message-ID: <87a52zr9kq.wl-tiwai@suse.de>
-From: Takashi Iwai <tiwai@suse.de>
-To: cryolitia@uniontech.com
-Cc: Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-sound@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Mingcong Bai <jeffbai@aosc.io>,
-	Kexy Biscuit <kexybiscuit@aosc.io>,
-	Nie Cheng <niecheng1@uniontech.com>,
-	Zhan Jun <zhanjun@uniontech.com>,
-	Feng Yuan <fengyuan@uniontech.com>,
-	qaqland <anguoli@uniontech.com>,
-	kernel@uniontech.com
-Subject: Re: [PATCH v2 0/3] ALSA: usb-audio: add module param device_quirk_flags
-In-Reply-To: <20250912-sound-v2-0-01ea3d279f4b@uniontech.com>
-References: <20250912-sound-v2-0-01ea3d279f4b@uniontech.com>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/27.2 Mule/6.0
+	id fndjLRE5xGi0MwAAD6G6ig
+	(envelope-from <pfalcato@suse.de>); Fri, 12 Sep 2025 15:15:29 +0000
+Date: Fri, 12 Sep 2025 16:15:23 +0100
+From: Pedro Falcato <pfalcato@suse.de>
+To: David Hildenbrand <david@redhat.com>
+Cc: Johannes Weiner <hannes@cmpxchg.org>, Kiryl Shutsemau <kas@kernel.org>, 
+	Nico Pache <npache@redhat.com>, linux-mm@kvack.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, ziy@nvidia.com, 
+	baolin.wang@linux.alibaba.com, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, 
+	ryan.roberts@arm.com, dev.jain@arm.com, corbet@lwn.net, rostedt@goodmis.org, 
+	mhiramat@kernel.org, mathieu.desnoyers@efficios.com, akpm@linux-foundation.org, 
+	baohua@kernel.org, willy@infradead.org, peterx@redhat.com, 
+	wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com, 
+	vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com, 
+	aarcange@redhat.com, raquini@redhat.com, anshuman.khandual@arm.com, 
+	catalin.marinas@arm.com, tiwai@suse.de, will@kernel.org, dave.hansen@linux.intel.com, 
+	jack@suse.cz, cl@gentwo.org, jglisse@google.com, surenb@google.com, 
+	zokeefe@google.com, rientjes@google.com, mhocko@suse.com, rdunlap@infradead.org, 
+	hughd@google.com, richard.weiyang@gmail.com, lance.yang@linux.dev, vbabka@suse.cz, 
+	rppt@kernel.org, jannh@google.com
+Subject: Re: [PATCH v11 00/15] khugepaged: mTHP support
+Message-ID: <hcpxpo3xpqcppxlxhmyxkqkqnu4syohhkt5oeyh7qse7kvuwiw@qbhiubf2ubtm>
+References: <20250912032810.197475-1-npache@redhat.com>
+ <ppzgohmkll7dbf2aiwhw7f4spf6kxjtwwe3djkx26pwy4ekrnd@mgeantq5sn2z>
+ <d0e81c75-ad63-4e37-9948-3ae89bc94334@redhat.com>
+ <20250912133701.GA802874@cmpxchg.org>
+ <da251159-b39f-467b-a4e3-676aa761c0e8@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=US-ASCII
-X-Spamd-Result: default: False [-3.51 / 50.00];
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <da251159-b39f-467b-a4e3-676aa761c0e8@redhat.com>
+X-Spamd-Result: default: False [-2.51 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
 	MX_GOOD(-0.01)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[49];
 	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
 	RCVD_TLS_ALL(0.00)[];
 	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:mid,suse.de:dkim];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	DKIM_TRACE(0.00)[suse.de:+]
+	FREEMAIL_CC(0.00)[cmpxchg.org,kernel.org,redhat.com,kvack.org,vger.kernel.org,nvidia.com,linux.alibaba.com,oracle.com,arm.com,lwn.net,goodmis.org,efficios.com,linux-foundation.org,infradead.org,huawei.com,gmail.com,linux.intel.com,os.amperecomputing.com,suse.de,suse.cz,gentwo.org,google.com,suse.com,linux.dev];
+	TAGGED_RCPT(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[suse.de:+];
+	R_RATELIMIT(0.00)[to_ip_from(RLp4so9kg11imxa9yzyism77ru)];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.de:dkim]
 X-Spam-Flag: NO
 X-Spam-Level: 
-X-Rspamd-Queue-Id: 36FC620F12
+X-Rspamd-Queue-Id: 9819F5F89F
 X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Rspamd-Action: no action
-X-Spam-Score: -3.51
+X-Spam-Score: -2.51
 
-On Fri, 12 Sep 2025 08:48:57 +0200,
-Cryolitia PukNgae via B4 Relay wrote:
+On Fri, Sep 12, 2025 at 03:46:36PM +0200, David Hildenbrand wrote:
+> On 12.09.25 15:37, Johannes Weiner wrote:
+> > On Fri, Sep 12, 2025 at 02:25:31PM +0200, David Hildenbrand wrote:
+> > > On 12.09.25 14:19, Kiryl Shutsemau wrote:
+> > > > On Thu, Sep 11, 2025 at 09:27:55PM -0600, Nico Pache wrote:
+> > > > > The following series provides khugepaged with the capability to collapse
+> > > > > anonymous memory regions to mTHPs.
+> > > > > 
+> > > > > To achieve this we generalize the khugepaged functions to no longer depend
+> > > > > on PMD_ORDER. Then during the PMD scan, we use a bitmap to track individual
+> > > > > pages that are occupied (!none/zero). After the PMD scan is done, we do
+> > > > > binary recursion on the bitmap to find the optimal mTHP sizes for the PMD
+> > > > > range. The restriction on max_ptes_none is removed during the scan, to make
+> > > > > sure we account for the whole PMD range. When no mTHP size is enabled, the
+> > > > > legacy behavior of khugepaged is maintained. max_ptes_none will be scaled
+> > > > > by the attempted collapse order to determine how full a mTHP must be to be
+> > > > > eligible for the collapse to occur. If a mTHP collapse is attempted, but
+> > > > > contains swapped out, or shared pages, we don't perform the collapse. It is
+> > > > > now also possible to collapse to mTHPs without requiring the PMD THP size
+> > > > > to be enabled.
+> > > > > 
+> > > > > When enabling (m)THP sizes, if max_ptes_none >= HPAGE_PMD_NR/2 (255 on
+> > > > > 4K page size), it will be automatically capped to HPAGE_PMD_NR/2 - 1 for
+> > > > > mTHP collapses to prevent collapse "creep" behavior. This prevents
+> > > > > constantly promoting mTHPs to the next available size, which would occur
+> > > > > because a collapse introduces more non-zero pages that would satisfy the
+> > > > > promotion condition on subsequent scans.
+> > > > 
+> > > > Hm. Maybe instead of capping at HPAGE_PMD_NR/2 - 1 we can count
+> > > > all-zeros 4k as none_or_zero? It mirrors the logic of shrinker.
+> > > > 
+> > > 
+> > > I am all for not adding any more ugliness on top of all the ugliness we
+> > > added in the past.
+> > > 
+> > > I will soon propose deprecating that parameter in favor of something
+> > > that makes a bit more sense.
+> > > 
+> > > In essence, we'll likely have an "eagerness" parameter that ranges from
+> > > 0 to 10. 10 is essentially "always collapse" and 0 "never collapse if
+> > > not all is populated".
+> > > 
+> > > In between we will have more flexibility on how to set these values.
+> > > 
+> > > Likely 9 will be around 50% to not even motivate the user to set
+> > > something that does not make sense (creep).
+> > 
+> > One observation we've had from production experiments is that the
+> > optimal number here isn't static. If you have plenty of memory, then
+> > even very sparse THPs are beneficial.
 > 
-> As an implementation of what has been discussed previously[1].
+> Exactly.
 > 
-> > An open question is whether we may want yet a new module option or
-> > rather extend the existing quirk option to accept the strings
-> > instead.  Basically, when the given argument has a colon, it's a new
-> > syntax.  If it's only a number, it's an old syntax, and parse like
-> > before.  But, I'm open for either way (a new option or extend the
-> > existing one).
-> 
-> I would like to add a new param. The existed param
-> `static unsigned int quirk_flags[SNDRV_CARDS]` seems to related to
-> some sequence the card probed. To be honest, I havn't fully understood
-> it. And it seems hard to improve it while keeping compatibility.
-> 
-> 1. https://lore.kernel.org/all/87h5xm5g7f.wl-tiwai@suse.de/
-> 
-> Signed-off-by: Cryolitia PukNgae <cryolitia@uniontech.com>
-> ---
-> Changes in v2:
-> - Cleaned up some internal rebase confusion, sorry for that
-> - Link to v1: https://lore.kernel.org/r/20250912-sound-v1-0-cc9cfd9f2d01@uniontech.com
-> 
-> ---
-> Cryolitia PukNgae (3):
->       ALSA: usb-audio: add two-way convert between name and bit for QUIRK_FLAG_*
->       ALSA: usb-audio: add module param device_quirk_flags
->       ALSA: doc: add docs about device_device_quirk_flags in snd-usb-audio
+> And willy suggested something like "eagerness" similar to "swapinness" that
+> gives us more flexibility when implementing it, including dynamically
+> adjusting the values in the future.
+>
 
-Well, what I had in mind is something like:
+Ideally we would be able to also apply this to the page faulting paths.
+In many cases, there's no good reason to create a THP on the first fault...
 
---- a/sound/usb/card.c
-+++ b/sound/usb/card.c
-@@ -73,7 +73,7 @@ static bool lowlatency = true;
- static char *quirk_alias[SNDRV_CARDS];
- static char *delayed_register[SNDRV_CARDS];
- static bool implicit_fb[SNDRV_CARDS];
--static unsigned int quirk_flags[SNDRV_CARDS];
-+static char *quirk_flags[SNDRV_CARDS];
- 
- bool snd_usb_use_vmalloc = true;
- bool snd_usb_skip_validation;
-@@ -103,8 +103,8 @@ module_param_array(delayed_register, charp, NULL, 0444);
- MODULE_PARM_DESC(delayed_register, "Quirk for delayed registration, given by id:iface, e.g. 0123abcd:4.");
- module_param_array(implicit_fb, bool, NULL, 0444);
- MODULE_PARM_DESC(implicit_fb, "Apply generic implicit feedback sync mode.");
--module_param_array(quirk_flags, uint, NULL, 0444);
--MODULE_PARM_DESC(quirk_flags, "Driver quirk bit flags.");
-+module_param_array(quirk_flags, charp, NULL, 0444);
-+MODULE_PARM_DESC(quirk_flags, "Driver quirk overrides.");
- module_param_named(use_vmalloc, snd_usb_use_vmalloc, bool, 0444);
- MODULE_PARM_DESC(use_vmalloc, "Use vmalloc for PCM intermediate buffers (default: yes).");
- module_param_named(skip_validation, snd_usb_skip_validation, bool, 0444);
-@@ -692,6 +692,22 @@ static void usb_audio_make_longname(struct usb_device *dev,
- 	}
- }
- 
-+static void set_quirk_flags(struct snd_usb_audio *chip, int idx)
-+{
-+	int i;
-+
-+	/* old style option found: the position-based integer value */
-+	if (quirk_flags[idx] &&
-+	    !kstrtou32(quirk_flags[idx], 0, &chip->quirk_flags))
-+		return;
-+
-+	/* take the default quirk from the quirk table */
-+	snd_usb_init_quirk_flags(chip);
-+	/* add or correct quirk bits from options */
-+	for (i = 0; i < ARRAY_SIZE(quirk_flags); i++)
-+		snd_usb_apply_quirk_option(chip, quirk_flags[i]);
-+}
-+
- /*
-  * create a chip instance and set its names.
-  */
-@@ -750,10 +766,7 @@ static int snd_usb_audio_create(struct usb_interface *intf,
- 	INIT_LIST_HEAD(&chip->midi_v2_list);
- 	INIT_LIST_HEAD(&chip->mixer_list);
- 
--	if (quirk_flags[idx])
--		chip->quirk_flags = quirk_flags[idx];
--	else
--		snd_usb_init_quirk_flags(chip);
-+	set_quirk_flags(chip, idx);
- 
- 	card->private_free = snd_usb_audio_free;
- 
-.... and snd_usb_apply_quirk_option() adds or corrects the quirk bits
-based on the string value if it matches with the probed device.
-This function will be similar like your parser.
+> > 
+> > An extreme example: if all your THPs have 2/512 pages populated,
+> > that's still cutting TLB pressure in half!
+> 
+> IIRC, you create more pressure on the huge entries, where you might have
+> less TLB entries :) But yes, there can be cases where it is beneficial, if
+> there is absolutely no memory pressure.
+>
 
-In that way, the old quirk_flags options work as-is, while you can use
-a new style by passing values with "X:Y:Z" style.
+Correct, but it depends on the microarchitecture. For modern x86_64 AMD, it
+happens that the L1 TLB entries are shared between 4K/2M/1G. This was not
+(is not?) the case for Intel, where e.g back on kabylake, you had separate
+entries for 4K/2MB/1GB.
 
+Maybe in the Great Glorious Future (how many of those do we have?!) it would
+be a good idea to take this kinds of things into account. Just because we can
+map a THP, doesn't mean we should.
 
-Takashi
+Shower thought: it might be in these cases especially where the FreeBSD
+reservation system comes in handy - best effort allocating a THP, but not
+actually mapping it as such until you really _know_ it is hot - and until
+then, memory reclaim can just break your THP down if it really needs to.
+
+-- 
+Pedro
 
