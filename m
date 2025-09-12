@@ -1,149 +1,151 @@
-Return-Path: <linux-doc+bounces-60243-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60245-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D56AB55051
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 16:04:45 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E645EB5509E
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 16:14:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1FB89582F4E
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 14:03:59 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 53EE17C85B9
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 14:14:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2C39308F2D;
-	Fri, 12 Sep 2025 14:03:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B402330FC2B;
+	Fri, 12 Sep 2025 14:12:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FDD1fCTe"
+	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="W250Hofs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 323456D1A7
-	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 14:03:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0A802F4A;
+	Fri, 12 Sep 2025 14:12:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757685828; cv=none; b=gLe3SYgyVAC8Uys9VCQ/pbTB/Nn4LFTZJTLzuzDMDzx+SfyUzOyYjppPiRAMQNDR/AVkRnI4wNuL3x6ht1HxL5oLfSr8LteFx97Wxny6w7HsPaEpSCS61y7AaDOYT5gJm9Ja0WT7yS8PiTOG8q97f1BUVoyNnD6czoMAFuu3Fzg=
+	t=1757686373; cv=none; b=dUi9nGUiuiVg0UsAE0QF0rYBi+wD5aOdKbDo+3Mb7JHw7s24Is6wbHQOCpvo2NakkIC4bYoIv/BRzQlxF+a6wgglbMnu/d0CEtfzcABfTKB4VFcyLYtUUA9uaByNrauecHWKm8xBNLLrZPSz4UC5CgpUTc4kdewkMJizo15PQnE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757685828; c=relaxed/simple;
-	bh=1I9+Pj5YQSChf3iBDwOVDQ5DkCm9d8fa1LEnpkGTDlw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VyT1d7CN2sn0Ya8iOH2nLvfJUuJ0S1TjnkGg5O0xcgX4tRjaEBi9uh1t89+DqeqfOG0aPPYAsy0M3Y9ChHuZ2lGQ7Ne2Mc3h9EIj0KK8+ZkRsqS/RN+MSGNw/Wo279xDMWRPKQnXZxdciK1U/1foTLGNI5Jz1sc8l5X9siMIUiI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FDD1fCTe; arc=none smtp.client-ip=209.85.215.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-b54acc8c96eso683492a12.0
-        for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 07:03:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757685826; x=1758290626; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=V1QxBTlE7wBHAWIKlSIVw+tKYZtGp4FqMWgYg6ZMy6M=;
-        b=FDD1fCTe0boeNQMn0OkkSqRGKuFiBhKfXtBambUo4DvrRts4OvHU9pCRWOEzjhcStI
-         xbmOOPlNyw71Fk/BnXI4mE2k5GtA/1e2qYfWWWLFU9QUhi7WdGlZtMEAhjXrSthCqBAI
-         50U8AUTMJMeonlPSJyc+K6qfTBXcqwkYfbmKX0/ekdK7VrERh5R5ysvygHhmbBhNBEkE
-         FBum+0t0IRmmMjzzx3volw4q2NhV/uTIogsKMJUATZ91D6sthep3kS94OjB0nkMuwWrE
-         /vx7BE9rjZv2DXai6D28c9+20oqwAUxseecxziMeG2kKIDhqHDFptyyflDNBRALkkTND
-         mDvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757685826; x=1758290626;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=V1QxBTlE7wBHAWIKlSIVw+tKYZtGp4FqMWgYg6ZMy6M=;
-        b=C12cNEHu2Svwc2VZsBshaoJJ8MWGw8xkmKJRM20YkFSOTelknLu3XVK6FAhX23dHvm
-         h8ZWXCaTbtMO3piHotbEl9hn7fiiiOP1A1YQtaz4SM64LdSifgfgVhlxNmuOr1imeYrl
-         t5kNbbP2jA4vPuLB4H953PmpkqOXZLTMl5/T3oOfLo+4SuwO11b5BB55rmxYourVJWOQ
-         CCKR9+6wNWLUoSp4l+3g5f3VClBH+Nvt6+gpFokomB0AVJBOlV10gwa9BFT+1aM/XQWN
-         Td+/gx/c2AlcZGttzeFJrppPmRNmdZAJFFgQ33c9021Pv+2HfdktvOsV59KYjZYReXsf
-         RaKw==
-X-Forwarded-Encrypted: i=1; AJvYcCWa2BB+CkUbcdvUFkHWbIgTMmJlpbTzXaWDYIRg4c3xT24Fpcj3IK2/otqdsLkKZujTdW1Av9Kfduc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxjCDHa0XBpaI0kWkcD1EaBcW8cGkiDZLmNKSWZZN4/DUAyuHeI
-	+S/Mi/SckGv5Z1pdJ2QxTz95l1HuiXxjsyLv/wI6MrOGANSXKA9RRxVx
-X-Gm-Gg: ASbGnct0wol9OTswRdujF4jlKUewF0ErETB4Zy53RbSq9TWkNkx1hU9VIJ1sKhARsvJ
-	wfsyv2l3pA2eDCKRz6aEssUjV3aX8MrSIDHqOFNhZTwETUAmc3DIHOyDRnTGUDEhep7vtGjLlCE
-	5hBMNBQiKyM08egjxTHq8t4Xefhqw0j/b1yykYmqfNgNu/Ct4QUTWmv3+u1HzmsfByMhp/DqDPS
-	R7WvEuYFPKptFt5eGYQmggrG0SNTiVuRCPdXklePY40ZU4GiFXPLWATJg3jgzhgAbXO2VHg+CsS
-	2O2UO3nQKyHtGTvPB2SAeXwarzhz6FR/urmd1Vg/m60uaL+k7iSNE+ht46S9N/Kw2wrvs9BcMGx
-	br3MKnjG+yYPA41TzAUwtXCp6IM4r6xC2rp2NMjEn2LrnNwGS8DJIlaFIgVrccNVJbuo6WE32eN
-	PlFeQ=
-X-Google-Smtp-Source: AGHT+IG5X1Gan6zjQjJMTNF/rCRnIvsPNEFCkkjRGBaWPrcJK0WciPjQY9PjPdMsK2clZM3/U1Sepg==
-X-Received: by 2002:a17:902:ccca:b0:25d:f26d:3b9e with SMTP id d9443c01a7336-25df26d3c13mr21633615ad.11.1757685825575;
-        Fri, 12 Sep 2025 07:03:45 -0700 (PDT)
-Received: from [10.0.2.15] (KD106167137155.ppp-bb.dion.ne.jp. [106.167.137.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-25c37293d12sm49743615ad.39.2025.09.12.07.03.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 12 Sep 2025 07:03:45 -0700 (PDT)
-Message-ID: <f3d142be-3980-4d4e-9d66-c03276694bf9@gmail.com>
-Date: Fri, 12 Sep 2025 23:03:43 +0900
+	s=arc-20240116; t=1757686373; c=relaxed/simple;
+	bh=T8cKU7GX1nkbL2NcsD+XuaY1d1XDFVWZOQimj/0jD0c=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=UeWexej/U3EsToHVTDkRQkahdREz/pCnN6MrchPqfiO7tIrpPmRNgSjgDvUS+0GkZJ4cZghAhOvwBZomNj3HXC5jIL78JIIflytXXFUusZcj3vixv9I2Ke4ZDP+Uh2iZCLJEDsMCEnX7o382/W1rg33TSZDAvngLZJTn6MxOSEg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=W250Hofs; arc=none smtp.client-ip=65.109.113.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id D0F8B40E015C;
+	Fri, 12 Sep 2025 14:12:41 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id ctliiuI1qv13; Fri, 12 Sep 2025 14:12:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1757686358; bh=tkZAXzfE56Ye+65KcJu3D+78RmJwSGKf5LKjnICPk0A=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=W250Hofs3CAu2xKR7YwCa+iuLV0a0Hass4IjlijRdWxTDhiQQrX5MMxcjFX/Muc19
+	 L1D9c9Lb04ZjcZf2KbXFQiyCtAZkXdrAvGqG3NsN38YXvViWfFhq3P0qTKJhMAoDtQ
+	 6UGaVchmykQilTK2/QSbuXaV+EiXymkTV0TZvEiQmPcJ9I0YHSQejDJXCwfIbEj6Vm
+	 G82J1yDYKg8aVzqOuciVXFDjtRzsZBjG214DEdiy5w4HRkaQgpbr9bqur9Dn4iIy+G
+	 kUEKLKzCNYgwDfBobGKajNUoiHCg1W0aYCKRpRyJgrKkrptRO3UAkR+8VAi2i/X4dd
+	 OJiTh87FPlwX5ZYud/PEw6fK/bMAFObYM9H8+6ZA0bJgAWhCCE7E2K5ZeCBch71PJ7
+	 ec3fzVkjxAt1hg8ejNy+olL5CCuC7iTcNROQynBJNScdIV1SUCJWANA9rP0ZqSoeV0
+	 fQ4ChX9Ohn7lYM7tj7Csy7+36rXAEKPCnTft1D/juHMPjpnN3GuSelzM6eN2ldRDPQ
+	 10q3tNaz2HGvwBOzQHWUWiiR7DrqZPQL7a9bJUMlBSqtM/i2yS/ATc4iyOplB8BAiX
+	 cGCC0JD2nAMdgH2VtFBFe971EdKWqTPbJYopr/QR5spgvae29gJxJ+ZXY3XQCRzdvH
+	 Hd5DDtPIhAX+N27TiOyX93NY=
+Received: from zn.tnic (p5de8ed27.dip0.t-ipconnect.de [93.232.237.39])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	(No client certificate requested)
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with UTF8SMTPSA id C653340E0140;
+	Fri, 12 Sep 2025 14:12:01 +0000 (UTC)
+Date: Fri, 12 Sep 2025 16:11:55 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Shiju Jose <shiju.jose@huawei.com>
+Cc: "rafael@kernel.org" <rafael@kernel.org>,
+	"akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+	"rppt@kernel.org" <rppt@kernel.org>,
+	"dferguson@amperecomputing.com" <dferguson@amperecomputing.com>,
+	"linux-edac@vger.kernel.org" <linux-edac@vger.kernel.org>,
+	"linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+	"linux-mm@kvack.org" <linux-mm@kvack.org>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	"tony.luck@intel.com" <tony.luck@intel.com>,
+	"lenb@kernel.org" <lenb@kernel.org>,
+	"leo.duran@amd.com" <leo.duran@amd.com>,
+	"Yazen.Ghannam@amd.com" <Yazen.Ghannam@amd.com>,
+	"mchehab@kernel.org" <mchehab@kernel.org>,
+	Jonathan Cameron <jonathan.cameron@huawei.com>,
+	Linuxarm <linuxarm@huawei.com>,
+	"rientjes@google.com" <rientjes@google.com>,
+	"jiaqiyan@google.com" <jiaqiyan@google.com>,
+	"Jon.Grimm@amd.com" <Jon.Grimm@amd.com>,
+	"dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+	"naoya.horiguchi@nec.com" <naoya.horiguchi@nec.com>,
+	"james.morse@arm.com" <james.morse@arm.com>,
+	"jthoughton@google.com" <jthoughton@google.com>,
+	"somasundaram.a@hpe.com" <somasundaram.a@hpe.com>,
+	"erdemaktas@google.com" <erdemaktas@google.com>,
+	"pgonda@google.com" <pgonda@google.com>,
+	"duenwen@google.com" <duenwen@google.com>,
+	"gthelen@google.com" <gthelen@google.com>,
+	"wschwartz@amperecomputing.com" <wschwartz@amperecomputing.com>,
+	"wbs@os.amperecomputing.com" <wbs@os.amperecomputing.com>,
+	"nifan.cxl@gmail.com" <nifan.cxl@gmail.com>,
+	tanxiaofei <tanxiaofei@huawei.com>,
+	"Zengtao (B)" <prime.zeng@hisilicon.com>,
+	Roberto Sassu <roberto.sassu@huawei.com>,
+	"kangkang.shen@futurewei.com" <kangkang.shen@futurewei.com>,
+	wanghuiqiang <wanghuiqiang@huawei.com>
+Subject: Re: [PATCH v12 1/2] ACPI:RAS2: Add ACPI RAS2 driver
+Message-ID: <20250912141155.GAaMQqK4vS8zHd1z4_@fat_crate.local>
+References: <20250902173043.1796-1-shiju.jose@huawei.com>
+ <20250902173043.1796-2-shiju.jose@huawei.com>
+ <20250910192707.GAaMHRCxWx37XitN3t@fat_crate.local>
+ <9dd5e9d8e9b04a93bd4d882ef5d8b63e@huawei.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 08/19] tools/docs: sphinx-build-wrapper: add a wrapper
- for sphinx-build
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: corbet@lwn.net, jani.nikula@linux.intel.com, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, tmgross@umich.edu
-References: <20250910153334.0b3e1440@foz.lan>
- <28c45f53-a3ff-428f-ba99-ebb09e0581d3@gmail.com>
- <20250912130420.6c14dbbd@foz.lan>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <20250912130420.6c14dbbd@foz.lan>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <9dd5e9d8e9b04a93bd4d882ef5d8b63e@huawei.com>
 
-On Fri, 12 Sep 2025 13:04:20 +0200, Mauro Carvalho Chehab wrote:
-> Em Fri, 12 Sep 2025 19:15:44 +0900
-> Akira Yokosawa <akiyks@gmail.com> escreveu:
-> 
->> [-CC: rust people and list]
->>
->> OK, Looks like I have to bite.
->>
->> On Wed, 10 Sep 2025 15:33:34 +0200, Mauro Carvalho Chehab wrote:
->> [...]
->>
->>> The current approach of using LaTeX for PDF is dirty:
->>>
->>> - Sphinx can't produce a LaTeX file from the Kernel trees without
->>>   hundreds of warnings;
->>> - latexmk hides some of them, but even it just one warning is reported,
->>>   the return status is not zero.  
->>
->> This sounds interesting to me.
->> As far I remember, I have never seen such strange results of latexmk
->> under build envs where all the necessary packages are properly installed.
-> 
-> I saw it here on multiple distros including Fedora (which is the one
-> I use on my desktop). Media jenkins CI running on Debian always suffered
-> from such issues, up to the point I started ignoring pdf build results.
-> 
+On Fri, Sep 12, 2025 at 12:04:57PM +0000, Shiju Jose wrote:
+> >Why is this requirement here?
+> The physical memory address range retrieved here for the NUMA domain is used in the subsequent
+> patch  [PATCH v12 2/2] ras: mem: Add memory ACPI RAS2 driver,
+> 1. to set Requested Address Range(INPUT) field of Table 5.87: Parameter Block Structure for PATROL_SCRUB
+> when send GET_PATROL_PARAMETERS command to the firmware, to get scrub parameters, running status,
+> current scrub rate etc.
+> 2. for the validity check of the user requested memory address range to scrub. 
 
-So please provide exact steps for me to see such errors.
+Again, why does it have to be *lowest* and *contiguous*?
 
-I don't have any issues after strictly following the suggestions from
-sphinx-pre-install under Fedora.
+Your answer doesn't explain that.
 
-I even invoked [...]/output/latex/Makefile manually after running
-"make latexdocs" by:
+> Also intended to expose this supported memory address range to the
+> userspace via EDAC scrub control interface, though it is not present now.
 
-  - cd [...]/output/latex/
-  - make PDFLATEX="latexmk -xelatex" LATEXOPTS="-interaction=batchmode -no-shell-escape" -j6 -O all
+Why? To tie ourselves with even more user ABI?!
 
-, and all the PDFs were built without any issues.
+There better be a good reason and not a better design for what this is trying
+to do.
 
-Quite puzzling ...
+> >What happens with the aux devices you created successfully here? Unwind?
+> Please see the previous discussions on this were about allowing the successfully created
+> auxiliary devices to exist.
+> https://lore.kernel.org/all/20250415210504.GA854098@yaz-khff2.amd.com/
 
-Or does your Fedora have some Noto CJK variable fonts installed?
+There's no discussion here. And nothing answers the question "why" this is ok
+to do this way.
 
-Hmm ...
+-- 
+Regards/Gruss,
+    Boris.
 
-Thanks,
-Akira
-
+https://people.kernel.org/tglx/notes-about-netiquette
 
