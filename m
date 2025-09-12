@@ -1,88 +1,88 @@
-Return-Path: <linux-doc+bounces-60288-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60290-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 644B1B55429
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 17:51:51 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E788BB55438
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 17:56:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 54FD37A9F47
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 15:50:11 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9509217ED25
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 15:56:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 045B725B695;
-	Fri, 12 Sep 2025 15:51:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CD9A313533;
+	Fri, 12 Sep 2025 15:56:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="UcMw5SUv"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="IpxVOCdA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C8D61FDE39
-	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 15:51:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF32830BBB7
+	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 15:56:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757692304; cv=none; b=dAR8D7c82jvkeoWGzeXqma2IKNuYHoqfofbRFOGH1wsWkIgVZlHcMMjeqvCTeTLiknwPkEllTUnZYz6djACEHB7/hE/BvG2LtTo6Ga7jJKwWG6ngZKHmwqLhFf2ALBYHUz8TcoR1QiyZxwBSRx2bfC67Da0IqVpu2xO+l+MJqXE=
+	t=1757692592; cv=none; b=AiNSU6KRfjlHw2X13XdWZV5kSi5295BE/deA9q3nKSh7VZ0Qnfhy+WcBrDybLyA+1/6UPCHDROgQZ9lZhIt3IpjeztWqOi/QzBGfq5PFqUvoYyXZtNaNMA9O21B/HXOEhld7IXrzlAQLJooQHcYvFhD5bBngTmWAxUx3HOpNDvU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757692304; c=relaxed/simple;
-	bh=8rdXAHjf1qNhSLyvo4ghb/MFVMN9CJC6T58LiqUjX7s=;
+	s=arc-20240116; t=1757692592; c=relaxed/simple;
+	bh=mwW56UXsjqcvDGGsCe5C+HUYMfxKIh5VjjsG46235iY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mAAGff9PuW/3zd6tKVsC+K8QSJIwi1LUCsX/tuA4D7DbEA+yyEC5DoodU3JjG8Ts61fXxKMi2KRg+Uq41Q2+asEv4/897oPWkqFhAz94lyZyiLtZZmokAZjScIx6uqoJwcRFOV1zu+bjDhzQpQBpCYc5BpAOEJByHpA1gE2o1Ps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=UcMw5SUv; arc=none smtp.client-ip=170.10.133.124
+	 In-Reply-To:Content-Type; b=A1k0hADtamDbktO/30Dapz96iSRi2loNlLUUu9CxDFQPIPwA7Q3ynrYGo6Re933vqldCaIbsylFILK0HwckaXkIfxb+zOu23Aizm5bCxL/wUDYhBW2J4+De8JL3SC5DbIWYuoTyIjv9ZRiXyHmpbXUaQm6ffKA8zzXkevaOz6vA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=IpxVOCdA; arc=none smtp.client-ip=170.10.129.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1757692302;
+	s=mimecast20190719; t=1757692589;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=evSM+hUM6XOAVnv4pWD+Pp87EHuxINXdM8cowVunr7o=;
-	b=UcMw5SUvI9wT0spNvE4O6YS4ihll63pjbUUdShE9Jrq3HQp13uH1vkpHWQ0IyudWEglS4n
-	y5gSaK+I82LAVOtgSsB8ZP/clAZvuxkFrlJoNMyGGhvgsG2ngQzLExHBcAFm6tRBKvEGQe
-	uVR5BQ9v1zDNoo+MYxgwOXIGZw7NBWk=
+	bh=LwtSBiRgh7l8m3eHqvj0Z/4D72nKcmOwOzm2avrIc6A=;
+	b=IpxVOCdAfcu5LYzxMkiYz5IfI56C1K8WvQ2hQRDUzw7XsRbnWgw4NaYBOvpy1nba34Ym9P
+	LQNacpk7n5xoLX8H+OeSdkOpX6C/mR1NgWniagZEsZ1mN1xSrdFMbU2gMzcxP8RahkpQgY
+	ENyExhgWq2BLYWJc1HZfFMQtxgfiUk4=
 Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
  [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-654-OqnAlwiAPVqZROUkJQzsmw-1; Fri, 12 Sep 2025 11:51:41 -0400
-X-MC-Unique: OqnAlwiAPVqZROUkJQzsmw-1
-X-Mimecast-MFC-AGG-ID: OqnAlwiAPVqZROUkJQzsmw_1757692300
-Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-45df609b181so16097775e9.2
-        for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 08:51:41 -0700 (PDT)
+ us-mta-407-z64wrRQ5MByQwt8rNm9T5g-1; Fri, 12 Sep 2025 11:56:26 -0400
+X-MC-Unique: z64wrRQ5MByQwt8rNm9T5g-1
+X-Mimecast-MFC-AGG-ID: z64wrRQ5MByQwt8rNm9T5g_1757692585
+Received: by mail-wm1-f71.google.com with SMTP id 5b1f17b1804b1-45e037fd142so16279725e9.3
+        for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 08:56:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757692300; x=1758297100;
+        d=1e100.net; s=20230601; t=1757692585; x=1758297385;
         h=content-transfer-encoding:in-reply-to:autocrypt:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=evSM+hUM6XOAVnv4pWD+Pp87EHuxINXdM8cowVunr7o=;
-        b=iBVPgDdIQ39eV26hlw+y9b/XP76MoKtuXOb9XwYY/WH/YFq0jWsmJfDDEpas1jicja
-         +7rTHitUkHT1r06G3iOEaoqF0+V828al1vAl/74u5LvWg7J9ziiElfOgRlMpk0WvenHn
-         zyCGXpVeXy5N3LPG1uzj71DUo2ibsEYvejOFuqT1Y8nJ0wQyCGkXWbtNL0135P23QeVM
-         HZyfNdqjruYVqJr0cVVx25ylMYPMWgb1YhhyCdkfDzh2Sq6Ti46nC84V5rRGBV4ibt7n
-         ao/lbA1VRAgbM0d1P3B3+tzNnRwmNwxBL3J9oyOr/MPuI9dLyXHc4uyER9fXh6J7K1zQ
-         QntA==
-X-Forwarded-Encrypted: i=1; AJvYcCUepvOwGoiOVNULaHPSDfbN6TOzYhumHoCuC7PvLLjm1UVpfkQCnqcSNMEzOA/jg6vLQAqUSOFCoFc=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywv8G7LR9zOSL0dbJqoxsshIUZoYOKz+crfazVb8uqhO+lasQNe
-	ccnOvP9VF2oAxQFFRJknt8p3VH2ttETdYeKPSDhxWOIX0kXrltWgAu5qhmhQKWdu+ckbSXF81yj
-	4dxBxUc14Me5BtTlD5oYURk2Q4R+3Tmuto/xQPbklj0BQiFna6RrPg1vpBdbLVA==
-X-Gm-Gg: ASbGnctSEtYCQtHFZkOMQPs5vobnPlWyyGWz4A6ACkKJAi7Il6t5YpdpoQ1WOMG/8pD
-	8mRPapCM7y2B7k4Xv8yYHCqo6B7IEBOj7dgfnxQkmBet3LN+2wFMBSXWuFUssMm24Wc13T0S9MF
-	JVSuTT4oeoT3W1ta6J8aGngKTNHcUYESdSdhaiZ/hk395CPPljZtLug+BjwplLnHQKJr8wad5+m
-	ZMA89H9MB0mIMrLC5vS33tLlGdsC2tlriyF6kBBXt9/v0Zv5yUUeYIb81/ShNaqAdmLkIVdRbOi
-	LXNSU2ES2y5dLjH/KsY+UptJa+dFVpfMcenVYQD3b7L5FHhbPSMrBaWiFe4qk81LAtBd+ny1LYM
-	/5qwLaEPjg1M88t6SvDloALyeNi95m01rYYn2/1wE7bK+zaUYIXDIb64iqv+n2aViA3w=
-X-Received: by 2002:a05:600c:2251:b0:45d:f7e4:88b4 with SMTP id 5b1f17b1804b1-45f211fee13mr31607365e9.30.1757692299856;
-        Fri, 12 Sep 2025 08:51:39 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFTJ5GavPsbuXit70YFZCDKrkElDxaBYazDmnr1RZ35Woeh3Th8WiB7RfPyeeDQGWEoFz+o1w==
-X-Received: by 2002:a05:600c:2251:b0:45d:f7e4:88b4 with SMTP id 5b1f17b1804b1-45f211fee13mr31606965e9.30.1757692299300;
-        Fri, 12 Sep 2025 08:51:39 -0700 (PDT)
+        bh=LwtSBiRgh7l8m3eHqvj0Z/4D72nKcmOwOzm2avrIc6A=;
+        b=Ggz5BkZbuhnzibahqcf++vqGtSEWXMppRVNs7mBMabzyEhT2BNC35bARgbje3Lm9eg
+         7XDXP3BD38zzSi4iT02sYQ22yh8KBnec/UrPRdp4sk3cH6p8wcD7J6zJ86gVYnyIhTL7
+         eTJMTDgjAde7kwCgfDPULVY5A+u0fsgfGd2fRnl1I8OZ+nySlAcbb/IX0x4aykAwUkox
+         VrAIU7X5K3ZNuFry+jAIlTuk5qQyOyQaQNNRm60dEkXhDz1j6KBiodB85eGnhYl02dYx
+         6u1/q6nwd+A/9cYRKn/ggaS6rUVmQ2NEMQwAiunzSPeJIaeVLIghvcA7oV3neuZwMFHU
+         oxuA==
+X-Forwarded-Encrypted: i=1; AJvYcCW1oS9Mz1dfJwEi1l8BCygBE4MQXoQx5zF621orLTGCPhLZZHYXFTnu5I4r1smkyDZ85aqZny1I3h8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz7lTuYynnwr4gJyUAvXSOUzVzRhjMIBEAVvI+TXfRGY2K4XXHr
+	Xnb2N1JklB9ts9wb0K7w+wwOVTZPziQ3qY/CDm9yQ4HId1dA8+vnhTpyJi9l7IbYUbXnHrCILvs
+	125R8YEodg4u0JSMqyhJj+Sn0tIvX3WipCliDmIx41EWNT32O1eA1uN5m4NQo5Q==
+X-Gm-Gg: ASbGncta5Je9VndqeJlZZY3bR0eXLczDuwsvJXVEFbCxBPtKomjvl25YL4FTVCSRuXG
+	9NvqCUPE9z1BLu2GtNRa3It9d8rrYC3mOybVTE0Z2MiJu5MI6DHkcsKJbHIcWy1FHnrmYya7dCb
+	8MR7mlDeD8VJ2oi2AYwIyGysr0wn+bjtOgwYIjysvPAA1nioqq8tgkvFmI5A5MRHKDRt6oMGVYv
+	xWQzyuxwD8CdUbMF1NygM1NUh0PbKggBZlLPtb53VHNdP7gm1n2NEp754hKT6+oJWI59I0RyK6c
+	I9IK6pVT9EUgf/jWGucp0zYAlq5Wi7IvnQZvw/AlWRjd78uHoG2uTt+k9cyrRcl8x7ALVv8Wlc9
+	WqsMdlPnE6nkroqJUgz/cHc1iB+wM85AlKRA5wUcxCTuIhY3rLzwp10VkY0+BX1FMuHw=
+X-Received: by 2002:a05:600c:22d2:b0:45d:ec9d:5fc3 with SMTP id 5b1f17b1804b1-45f211f6790mr33105565e9.18.1757692585242;
+        Fri, 12 Sep 2025 08:56:25 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFac7W1MrERsCK511VnCTt0k5ir4FTQySao9wgWh9TgtQ8MeIZa8a3y4/zUuscFnBsbmei1sA==
+X-Received: by 2002:a05:600c:22d2:b0:45d:ec9d:5fc3 with SMTP id 5b1f17b1804b1-45f211f6790mr33105325e9.18.1757692584728;
+        Fri, 12 Sep 2025 08:56:24 -0700 (PDT)
 Received: from ?IPV6:2003:d8:2f20:da00:b70a:d502:3b51:1f2d? (p200300d82f20da00b70ad5023b511f2d.dip0.t-ipconnect.de. [2003:d8:2f20:da00:b70a:d502:3b51:1f2d])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3e7ff9f77c4sm647828f8f.27.2025.09.12.08.51.36
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45e037d62besm65340495e9.21.2025.09.12.08.56.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 12 Sep 2025 08:51:38 -0700 (PDT)
-Message-ID: <6c8a85b6-232e-4341-8df1-501b9d73e14e@redhat.com>
-Date: Fri, 12 Sep 2025 17:51:35 +0200
+        Fri, 12 Sep 2025 08:56:24 -0700 (PDT)
+Message-ID: <9c2e289c-0258-4e25-aaeb-a97be89ebd84@redhat.com>
+Date: Fri, 12 Sep 2025 17:56:23 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,33 +90,16 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 00/15] khugepaged: mTHP support
-To: Kiryl Shutsemau <kas@kernel.org>, Pedro Falcato <pfalcato@suse.de>
-Cc: Johannes Weiner <hannes@cmpxchg.org>, Nico Pache <npache@redhat.com>,
- linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, ziy@nvidia.com,
- baolin.wang@linux.alibaba.com, lorenzo.stoakes@oracle.com,
- Liam.Howlett@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com,
- corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org,
- mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
- baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
- wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com,
- vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com,
- yang@os.amperecomputing.com, aarcange@redhat.com, raquini@redhat.com,
- anshuman.khandual@arm.com, catalin.marinas@arm.com, tiwai@suse.de,
- will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org,
- jglisse@google.com, surenb@google.com, zokeefe@google.com,
- rientjes@google.com, mhocko@suse.com, rdunlap@infradead.org,
- hughd@google.com, richard.weiyang@gmail.com, lance.yang@linux.dev,
- vbabka@suse.cz, rppt@kernel.org, jannh@google.com
-References: <20250912032810.197475-1-npache@redhat.com>
- <ppzgohmkll7dbf2aiwhw7f4spf6kxjtwwe3djkx26pwy4ekrnd@mgeantq5sn2z>
- <d0e81c75-ad63-4e37-9948-3ae89bc94334@redhat.com>
- <20250912133701.GA802874@cmpxchg.org>
- <da251159-b39f-467b-a4e3-676aa761c0e8@redhat.com>
- <hcpxpo3xpqcppxlxhmyxkqkqnu4syohhkt5oeyh7qse7kvuwiw@qbhiubf2ubtm>
- <k54teuep6r63gbgivpka32tk47zvzmy5thik2mekl5xpycvead@fth2lv4kuicg>
- <y6ljs2byyzxkxqqxaf37kx5lqpshv47ndejksen2ihrvhcwksc@4r6f4sdtjd3g>
+Subject: Re: [RFC][PATCH v3 00/16] Introduce kmemdump
+To: Eugen Hristev <eugen.hristev@linaro.org>, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org, tglx@linutronix.de,
+ andersson@kernel.org, pmladek@suse.com, rdunlap@infradead.org,
+ corbet@lwn.net, mhocko@suse.com
+Cc: tudor.ambarus@linaro.org, mukesh.ojha@oss.qualcomm.com,
+ linux-arm-kernel@lists.infradead.org, linux-hardening@vger.kernel.org,
+ jonechou@google.com, rostedt@goodmis.org, linux-doc@vger.kernel.org,
+ devicetree@vger.kernel.org
+References: <20250912150855.2901211-1-eugen.hristev@linaro.org>
 From: David Hildenbrand <david@redhat.com>
 Content-Language: en-US
 Autocrypt: addr=david@redhat.com; keydata=
@@ -163,31 +146,24 @@ Autocrypt: addr=david@redhat.com; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <y6ljs2byyzxkxqqxaf37kx5lqpshv47ndejksen2ihrvhcwksc@4r6f4sdtjd3g>
+In-Reply-To: <20250912150855.2901211-1-eugen.hristev@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 12.09.25 17:44, Kiryl Shutsemau wrote:
-> On Fri, Sep 12, 2025 at 04:39:02PM +0100, Kiryl Shutsemau wrote:
->>> Shower thought: it might be in these cases especially where the FreeBSD
->>> reservation system comes in handy - best effort allocating a THP, but not
->>> actually mapping it as such until you really _know_ it is hot - and until
->>> then, memory reclaim can just break your THP down if it really needs to.
->>
->> This is just silly. All downsides without benefit until maybe later. And
->> for short-lived processes the "later" never comes.
 > 
-> The right way out is to get better info on access pattern from hardware.
-> For instance, if we move access bit out of page table entry and make it
-> independent of the actually mapping size that would give us much better
-> view on what actually is going on.
+> Changelog since the v2 of the RFC:
+> - V2 available here : https://lore.kernel.org/all/20250724135512.518487-1-eugen.hristev@linaro.org/
+> - Removed the .section as requested by David Hildenbrand.
+> - Moved all kmemdump registration(when possible) to vmcoreinfo.
+> - Because of this, some of the variables that I was registering had to be non-static
+> so I had to modify this as per David Hildenbrand suggestion.
+> - Fixed minor things in the Kinfo driver: one field was broken, fixed some
+> compiler warnings, fixed the copyright and remove some useless includes.
+> - Moved the whole kmemdump from drivers/debug into mm/ and Kconfigs into mm/Kconfig.debug
+> and it's now available in kernel hacking, as per Randy Dunlap review
+> - Reworked some of the Documentation as per review from Jon Corbet
 
-We discussed this a couple of times in the past, the problem is that it 
-does not help anybody really if all but a handful piece of hardware 
-provides such a features.
-
-Long long long term I agree, short term we cannot really build core 
-infrastructure around any of that.
+IIUC, it's now only printk.c where we do kmemdump-related magic, right?
 
 -- 
 Cheers
