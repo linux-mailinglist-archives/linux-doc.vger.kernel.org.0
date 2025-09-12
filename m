@@ -1,174 +1,102 @@
-Return-Path: <linux-doc+bounces-60217-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60219-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1F48B54D16
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 14:18:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D617B54D7F
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 14:26:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 81DAB3AC997
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 12:13:50 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6AA453BA355
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Sep 2025 12:21:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EBB3B31987A;
-	Fri, 12 Sep 2025 12:06:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="atpGPLOR"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46BCE285CBB;
+	Fri, 12 Sep 2025 12:17:15 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7218319867;
-	Fri, 12 Sep 2025 12:06:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C01F33043BC
+	for <linux-doc@vger.kernel.org>; Fri, 12 Sep 2025 12:17:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757678789; cv=none; b=Amfe3XOHzBi1suOJN+SiHSwzekYXIHM/xCEdXLNI/hJH+Y7yyiUaU3TGoR2BV9XhUSBPDAAs6uvP7zTOcsmMB3jw5EwjbWo29UO3ToN6z+FyH19j50RUHOFwX+0U6SuzPRHLkQZrfk2sO36M+J5mLaRs1Uc59AxkuL+IruhY0Sw=
+	t=1757679435; cv=none; b=e5vgJ7TJajvwxTL4f1zzeplHzuGSRL6tBCnXTzl+HmRUD1wuRyxStNjDBQiGk9S7v3BlGOB/17hptlSv37i5kvFY4IWxa45DPW/fwzC5WZHH3y0SFCtGDLqi7V9Yzrd3HS2KDB3fKQNAfyQSOu6i8zOlAAml1mS8g0BAhqVOm7c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757678789; c=relaxed/simple;
-	bh=A8petOVqvEdmsFYA3MjCwiqV/huIzU9ROOZeN0k+x1E=;
-	h=Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=TLqSgOPHiwCVr1CEkrRJhoNQFTVBblhnLgkopo46yu9+Y/bFG727IBybe8Oxk46w0BryZK05HDmOHLpljL0cCIqhDH+rLVICSfO4b6gFMiTJYFRveWH5nhJX7Rx+1iql3sEOi1BYYjHOKx2WiSIN5V4NXbKlQe6YCjF1yu4Wu8c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=atpGPLOR; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC493C4CEF1;
-	Fri, 12 Sep 2025 12:06:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757678789;
-	bh=A8petOVqvEdmsFYA3MjCwiqV/huIzU9ROOZeN0k+x1E=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=atpGPLOReo+o5b9Rzv1hFX5OHQtBhIslvrltVKK+XFmeOjKWb7HbOmV/MP2zAljnc
-	 f2268nyZ6gRgMvCP8U8fegkNEy6meOwcHuM7ZLnzHMlKqbsaX7Jl1o/LIVwWLUSBLK
-	 GclVPUTVBeBvDAXJ6RkjFsISQ3Yhi4RD4JqzPGUhzT/5sJR9fXEJQ9ApusaEC9d3oE
-	 haQTNGUKAfDqK+UO3xX0bRFPifFVMTxndB/QM09+/1UJ+HWIjUGQf1/9/301tryJKM
-	 sQpf0S2jyWpYK6KT48esOOoAE7+HJ+GsQ5NmD1P/udDXxVZaBU5qZ3Mt4hUZckmfeS
-	 d8abCAdiA5kWA==
-Received: from sofa.misterjones.org ([185.219.108.64] helo=goblin-girl.misterjones.org)
-	by disco-boy.misterjones.org with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <maz@kernel.org>)
-	id 1ux2Xq-00000005g5A-3t5W;
-	Fri, 12 Sep 2025 12:06:27 +0000
-Date: Fri, 12 Sep 2025 13:06:26 +0100
-Message-ID: <864it7dge5.wl-maz@kernel.org>
-From: Marc Zyngier <maz@kernel.org>
-To: Mark Brown <broonie@kernel.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Oliver Upton <oliver.upton@linux.dev>,
-	Joey Gouly <joey.gouly@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Shuah Khan <shuah@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-doc@vger.kernel.org,
-	kvmarm@lists.linux.dev,
-	linux-kselftest@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v16 4/6] KVM: arm64: Validate GCS exception lock when emulating ERET
-In-Reply-To: <20250912-arm64-gcs-v16-4-6435e5ec37db@kernel.org>
-References: <20250912-arm64-gcs-v16-0-6435e5ec37db@kernel.org>
-	<20250912-arm64-gcs-v16-4-6435e5ec37db@kernel.org>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
- FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/30.1
- (aarch64-unknown-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+	s=arc-20240116; t=1757679435; c=relaxed/simple;
+	bh=MtdXDkuhQB6rp+E1C+67yfD3I4ELkQ5GrzFDuW0w7b0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=M1INS7sX4fHC5YC4h4XE4TimXcz+w2AU2brn52Vtc94sasD+AD8EDEuqpYy9Rm0BjsqtIViBMFVXlhrVLqcrzbHca4+du7KHwR/jUzbifW9S3uEXrdJGtzpgGcihQ9P5vbNIFhW8DpeGk/6u6BU5vp3GX/r/ZkQg4Uq5bKBUgTk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <ore@pengutronix.de>)
+	id 1ux2hv-0008AY-Ud; Fri, 12 Sep 2025 14:16:51 +0200
+Received: from pty.whiteo.stw.pengutronix.de ([2a0a:edc0:2:b01:1d::c5])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1ux2ht-000vcp-2h;
+	Fri, 12 Sep 2025 14:16:49 +0200
+Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1ux2ht-002zp1-2I;
+	Fri, 12 Sep 2025 14:16:49 +0200
+Date: Fri, 12 Sep 2025 14:16:49 +0200
+From: Oleksij Rempel <o.rempel@pengutronix.de>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Kory Maincent <kory.maincent@bootlin.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Nishanth Menon <nm@ti.com>, kernel@pengutronix.de,
+	linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+	UNGLinuxDriver@microchip.com, linux-doc@vger.kernel.org,
+	Michal Kubecek <mkubecek@suse.cz>, Roan van Dijk <roan@protonic.nl>
+Subject: Re: [PATCH net-next v5 0/5] ethtool: introduce PHY MSE diagnostics
+ UAPI and drivers
+Message-ID: <aMQPMUODGODuq8YF@pengutronix.de>
+References: <20250908124610.2937939-1-o.rempel@pengutronix.de>
+ <20250911191846.273bc7db@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=US-ASCII
-X-SA-Exim-Connect-IP: 185.219.108.64
-X-SA-Exim-Rcpt-To: broonie@kernel.org, catalin.marinas@arm.com, will@kernel.org, oliver.upton@linux.dev, joey.gouly@arm.com, suzuki.poulose@arm.com, shuah@kernel.org, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, kvmarm@lists.linux.dev, linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org); SAEximRunCond expanded to false
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20250911191846.273bc7db@kernel.org>
+X-Sent-From: Pengutronix Hildesheim
+X-URL: http://www.pengutronix.de/
+X-Accept-Language: de,en
+X-Accept-Content-Type: text/plain
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ore@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-On Fri, 12 Sep 2025 10:25:30 +0100,
-Mark Brown <broonie@kernel.org> wrote:
+On Thu, Sep 11, 2025 at 07:18:46PM -0700, Jakub Kicinski wrote:
+> On Mon,  8 Sep 2025 14:46:05 +0200 Oleksij Rempel wrote:
+> >  In practice, such scenarios can only be investigated in
+> > fixed-link mode; here, MSE can provide an empirically estimated value
+> > indicating conditions under which autonegotiation would not succeed.
 > 
-> As per DDI0487 R_TYTWB GCS adds an additional case where an illegal
-> exception return can be generated. If all of:
-> 
->  - PSTATE.EXLOCK is 0.
->  - The EL is not being changed by the ERET.
->  - GCSCR_ELx.EXLOCKEN is 1.
-> 
-> are true then the return is illegal. Emulate this behaviour when
-> emulating ERET for nested guests.
-> 
-> Signed-off-by: Mark Brown <broonie@kernel.org>
-> ---
->  arch/arm64/kvm/emulate-nested.c | 40 +++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 39 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm64/kvm/emulate-nested.c b/arch/arm64/kvm/emulate-nested.c
-> index 90cb4b7ae0ff..9b02b85eda64 100644
-> --- a/arch/arm64/kvm/emulate-nested.c
-> +++ b/arch/arm64/kvm/emulate-nested.c
-> @@ -2632,6 +2632,41 @@ bool forward_debug_exception(struct kvm_vcpu *vcpu)
->  	return forward_mdcr_traps(vcpu, MDCR_EL2_TDE);
->  }
->  
-> +/*
-> + * A subset of the pseudocode ELFromSPSR(), validity checks are
-> + * assumed to have been done in code that is not GCS specific.
-> + */
-> +static inline int exlock_el_from_spsr(u64 spsr)
-> +{
-> +	return FIELD_GET(GENMASK(3, 2), spsr);
-> +}
-> +
-> +/* See IllegalExceptionReturn() pseudocode */
-> +static bool kvm_check_illegal_exlock_return(struct kvm_vcpu *vcpu, u64 spsr)
-> +{
-> +	u64 cur_el, target_el;
-> +	u64 gcscr;
-> +
-> +	if (!kvm_has_gcs(vcpu->kvm))
-> +		return false;
-> +
-> +	if (spsr & PSR_EXLOCK_BIT)
-> +		return false;
-> +
-> +	cur_el = exlock_el_from_spsr(vcpu->arch.ctxt.regs.pstate);
-> +	target_el = exlock_el_from_spsr(spsr);
-> +
-> +	if (cur_el != target_el)
-> +		return false;
-> +
-> +	if (vcpu_is_el2(vcpu))
-> +		gcscr = __vcpu_sys_reg(vcpu, GCSCR_EL2);
-> +	else
-> +		gcscr = __vcpu_sys_reg(vcpu, GCSCR_EL1);
+> Does fixed-link make sense here? I thought fixed-link meant MAC-to-MAC
+> in most contexts
 
-At the point where we check for an illegal exception return, the state
-is live on the CPU. How does this work? Also, we only handle ERET
-traps for EL2, not EL1.
-
-> +
-> +	return gcscr & GCSCR_ELx_EXLOCKEN;
-> +}
-> +
->  static u64 kvm_check_illegal_exception_return(struct kvm_vcpu *vcpu, u64 spsr)
->  {
->  	u64 mode = spsr & PSR_MODE_MASK;
-> @@ -2642,12 +2677,15 @@ static u64 kvm_check_illegal_exception_return(struct kvm_vcpu *vcpu, u64 spsr)
->  	 * - trying to return to an illegal M value
->  	 * - trying to return to a 32bit EL
->  	 * - trying to return to EL1 with HCR_EL2.TGE set
-> +	 * - GCSCR_ELx.EXLOCKEN is 1 and PSTATE.EXLOCK is 0 when attempting
-> +	 *   to return from ELx the same EL.
->  	 */
->  	if (mode == PSR_MODE_EL3t   || mode == PSR_MODE_EL3h ||
->  	    mode == 0b00001         || (mode & BIT(1))       ||
->  	    (spsr & PSR_MODE32_BIT) ||
->  	    (vcpu_el2_tge_is_set(vcpu) && (mode == PSR_MODE_EL1t ||
-> -					   mode == PSR_MODE_EL1h))) {
-> +					   mode == PSR_MODE_EL1h)) ||
-> +	    kvm_check_illegal_exlock_return(vcpu, spsr)) {
-
-This code is simply never reached. Hint: kvm_hyp_handle_eret().
-
-	M.
+Ah.. sorry, i mean forced link, without auoneg enabled.
 
 -- 
-Without deviation from the norm, progress is not possible.
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
