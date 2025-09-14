@@ -1,93 +1,203 @@
-Return-Path: <linux-doc+bounces-60435-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60407-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CD1DB5669A
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 06:07:53 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5257CB56475
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 05:07:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 822F6200491
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 04:07:52 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 09B752A0C15
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 03:07:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1419014A0BC;
-	Sun, 14 Sep 2025 04:07:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F38651F2C45;
+	Sun, 14 Sep 2025 03:07:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="XZFbpcAT"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="ZIQ0kxZS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m2430.xmail.ntesmail.com (mail-m2430.xmail.ntesmail.com [45.195.24.30])
+Received: from mail-m12861.netease.com (mail-m12861.netease.com [103.209.128.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBBC77A13A
-	for <linux-doc@vger.kernel.org>; Sun, 14 Sep 2025 04:07:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.195.24.30
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F59B1EEA54
+	for <linux-doc@vger.kernel.org>; Sun, 14 Sep 2025 03:07:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=103.209.128.61
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757822869; cv=none; b=CbJ163wC6KLCbqp3pds9/h1EiiaNVCk63t/X/u9V5RDxZN21kHU+OnsxlFUkPqHh97IkYGHSY06qCm6h/zCJaTAnJmCSN+4dHBMpEnh0DT4G2aPZWuH39u5axafU4qsToW5LhD0s8G0E9OyukwZpIi3fOXqrirYKINlc68lk2ag=
+	t=1757819259; cv=none; b=L2kkPF0GtVLyDLzmcjLqS638X0gymb29YAYrcbFLxE3BH4UxEjEGEPFOngFzbrZMgBHttglCZLU8q715ncjT2IbR5PiVzMuj59RsrPJFlJP6ly52BVwIMNnwvkUCYN21EMUFsSLddZl9Cun2p1n9CI1oEHP5gnyxmEfYICsWC4o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757822869; c=relaxed/simple;
-	bh=0t0O6Wd3cfGS8SlujhENSm6yYjv2rTGYL5iuNQVLpSE=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=fBg9IIGbIvUTnrXrjqNsNchsXK42M81SjEdPFhrze4wAKhqViQ3loRjQmBSiafwv6bQxaQpc/AFDMMOWxY7nBiJoncwDyf329RRt308aIK5VFgW7ZJds9Mg8oKKVzxo24pdr41YlOHkgGFbFl4PUqJZ6xmvJTqsAzTO7VCbLcFw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=XZFbpcAT; arc=none smtp.client-ip=45.195.24.30
+	s=arc-20240116; t=1757819259; c=relaxed/simple;
+	bh=TM7Tu/NeVL/socabeecEnQGQN41pZUmfnEFN0aXgXB4=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=FTgiS6dVQMn95QNTRnR5wxj8nOIekH6TpPidkQtOxa3cezWkAb9L0+mf2mqUFZMfml6WLqXsxg5NhAtmDO6uKjT86/DuT79UIPQXpqc/Pf657rwSTKk2Q6OQy7xhqq+fE2PXmolDTwBXBFBy+rvxR36KLcpAYIohTlePGP3uBEs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=ZIQ0kxZS; arc=none smtp.client-ip=103.209.128.61
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from localhost.localdomain (unknown [120.246.23.60])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 22b62fc45;
-	Sun, 14 Sep 2025 10:52:09 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 22b62fc46;
+	Sun, 14 Sep 2025 10:52:10 +0800 (GMT+08:00)
 From: doubled <doubled@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v3 0/7] Add chinese translation for scsi
-Date: Sun, 14 Sep 2025 10:52:01 +0800
-Message-Id: <cover.1757686158.git.doubled@leap-io-kernel.com>
+Subject: [PATCH v3 1/7] docs/zh_CN: Add scsi/index.rst translation
+Date: Sun, 14 Sep 2025 10:52:02 +0800
+Message-Id: <e83c0c993642dbb0a4530c8aa557c1436aac6152.1757686158.git.doubled@leap-io-kernel.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1757686158.git.doubled@leap-io-kernel.com>
+References: <cover.1757686158.git.doubled@leap-io-kernel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a994623187b09cckunmff566153890525
+X-HM-Tid: 0a9946231c8b09cckunmff56615389052d
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaTElCVkkfGRkaTkhKHk8YQ1YVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSBpNVkhKQk1MSU8fHh4aTVYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKSUtVSU9NVUlIVU1LWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg++
 DKIM-Signature: a=rsa-sha256;
-	b=XZFbpcATGwl5C1Rgqnd7CDPbWm0OC6m9QGS6kjZsUzef2FKfSPrnkqmzAN6gV+3SCBdGyaP8GDYpSDZej86dVeBDlLv7XjQHXNowNO8pf9xvB1sspNgvxCjEUuKcDBSv60E9rapanl4fEdUEuy1Lh3gG9XcdgMA0/kfkVg3LaD9BXDYZS77UBY3yRp1NAZX5ibTwKiO2oTUEl5egfxKkJ65SD/j0VeY1tJtiu/lgMMqxwFBwKks14GPoL1Cyn8O0vXkpS7SyEaguClBs4fYoqN1GURFB6iTBdvio3JUZJpedzgzzse1unBkzU1h8kxGImFvB7Z6TqeKYqJ1ME1rqNA==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
-	bh=1I25hbjUf8hjd4b/OoeLScJChHqDX/zjSCIJAQE3qEs=;
+	b=ZIQ0kxZSHoKmdmPmjtkgqCbKKwU3C2yhtMtsNtl+2Q0kmTqD54Dqc6dLy8y2tg5ODAWJCVLot2HPvVRDniufk8/pwEZBdhAPYBy394XJI1NZoQklNUwXO7iGDwyMFs/HJqiNOGf/0J8P4pglJZZFwOw8UeTmYNMYUQUas3WdN82/LU+hKQz0iEpeX7MStv62Do5EBPpE1LP/i+yBTj88DKSNQ9tuwxxizAKUcsbklm8LzcRX1XflWyVOuUJO8bPP0A+JMDVlRPYFSSuGMWO1vYJ9AoYY+m6PSYy/9Y5MYvsqrFpFHnkgLtCEeFE6F8dBZvUx4VBYXExQjnbKYZtf4g==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
+	bh=83si3Lw8rmd277KPNy5BSpnH0smihGQIlEoAnsfDHp8=;
 	h=date:mime-version:subject:message-id:from;
 
-This patch set adds chinese translations for the SCSI documentation.
+Translate .../scsi/index.rst into Chinese and
+update subsystem-apis.rst translation
 
-doubled (7):
-  docs/zh_CN: Add scsi/index.rst translation
-  docs/zh_CN: Add scsi.rst translation
-  docs/zh_CN: Add scsi_mid_low_api.rst translation
-  docs/zh_CN: Add scsi_eh.rst translation
-  docs/zh_CN: Add scsi-parameters.rst translation
-  docs/zh_CN: Add link_power_management_policy.rst translation
-  docs/zh_CN: Add sd-parameters.rst translation
+Update the translation through commit 682b07d2ff54
+("scsi: docs: Organize the SCSI documentation")
 
- .../translations/zh_CN/scsi/index.rst         |   92 ++
- .../scsi/link_power_management_policy.rst     |   32 +
- .../zh_CN/scsi/scsi-parameters.rst            |  118 ++
- .../translations/zh_CN/scsi/scsi.rst          |   48 +
- .../translations/zh_CN/scsi/scsi_eh.rst       |  482 +++++++
- .../zh_CN/scsi/scsi_mid_low_api.rst           | 1174 +++++++++++++++++
- .../translations/zh_CN/scsi/sd-parameters.rst |   38 +
- .../translations/zh_CN/subsystem-apis.rst     |    2 +-
- 8 files changed, 1985 insertions(+), 1 deletion(-)
+Signed-off-by: doubled <doubled@leap-io-kernel.com>
+---
+ .../translations/zh_CN/scsi/index.rst         | 97 +++++++++++++++++++
+ .../translations/zh_CN/subsystem-apis.rst     |  2 +-
+ 2 files changed, 98 insertions(+), 1 deletion(-)
  create mode 100644 Documentation/translations/zh_CN/scsi/index.rst
- create mode 100644 Documentation/translations/zh_CN/scsi/link_power_management_policy.rst
- create mode 100644 Documentation/translations/zh_CN/scsi/scsi-parameters.rst
- create mode 100644 Documentation/translations/zh_CN/scsi/scsi.rst
- create mode 100644 Documentation/translations/zh_CN/scsi/scsi_eh.rst
- create mode 100644 Documentation/translations/zh_CN/scsi/scsi_mid_low_api.rst
- create mode 100644 Documentation/translations/zh_CN/scsi/sd-parameters.rst
 
+diff --git a/Documentation/translations/zh_CN/scsi/index.rst b/Documentation/translations/zh_CN/scsi/index.rst
+new file mode 100644
+index 000000000000..9126a642e43a
+--- /dev/null
++++ b/Documentation/translations/zh_CN/scsi/index.rst
+@@ -0,0 +1,97 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/scsi/index.rst
++
++:翻译:
++
++ 郝栋栋 doubled <doubled@leap-io-kernel.com>
++
++:校译:
++
++
++
++==========
++SCSI子系统
++==========
++
++.. toctree::
++   :maxdepth: 1
++
++简介
++====
++
++.. toctree::
++   :maxdepth: 1
++
++Todolist:
++
++* scsi
++
++SCSI驱动接口
++============
++
++.. toctree::
++   :maxdepth: 1
++
++Todolist:
++
++* scsi_mid_low_api
++* scsi_eh
++
++SCSI驱动参数
++============
++
++.. toctree::
++   :maxdepth: 1
++
++Todolist:
++
++* scsi-parameters
++* link_power_management_policy
++
++SCSI主机适配器驱动
++==================
++
++.. toctree::
++   :maxdepth: 1
++
++Todolist:
++
++* sd-parameters
++* 53c700
++* aacraid
++* advansys
++* aha152x
++* aic79xx
++* aic7xxx
++* arcmsr_spec
++* bfa
++* bnx2fc
++* BusLogic
++* cxgb3i
++* dc395x
++* dpti
++* FlashPoint
++* g_NCR5380
++* hpsa
++* hptiop
++* libsas
++* lpfc
++* megaraid
++* ncr53c8xx
++* NinjaSCSI
++* ppa
++* qlogicfas
++* scsi-changer
++* scsi_fc_transport
++* scsi-generic
++* smartpqi
++* st
++* sym53c500_cs
++* sym53c8xx_2
++* tcm_qla2xxx
++* ufs
++* wd719x
++
++* scsi_transport_srp/figures
+diff --git a/Documentation/translations/zh_CN/subsystem-apis.rst b/Documentation/translations/zh_CN/subsystem-apis.rst
+index 8b646c1010be..0f121f9b0f70 100644
+--- a/Documentation/translations/zh_CN/subsystem-apis.rst
++++ b/Documentation/translations/zh_CN/subsystem-apis.rst
+@@ -71,12 +71,12 @@ TODOList:
+    :maxdepth: 1
+ 
+    filesystems/index
++   scsi/index
+ 
+ TODOList:
+ 
+ * block/index
+ * cdrom/index
+-* scsi/index
+ * target/index
+ 
+ **Fixme**: 这里还需要更多的分类组织工作。
 -- 
 2.25.1
 
