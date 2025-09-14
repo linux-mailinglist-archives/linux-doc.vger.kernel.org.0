@@ -1,143 +1,197 @@
-Return-Path: <linux-doc+bounces-60440-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60408-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABD8CB5670C
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 08:21:38 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B7496B5647C
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 05:18:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 61EC217F0CD
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 06:21:38 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 732153A7653
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 03:18:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2782611CBA;
-	Sun, 14 Sep 2025 06:21:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D63B258CFF;
+	Sun, 14 Sep 2025 03:18:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="oR8+lkzl"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eXNev6lY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m81134.netease.com (mail-m81134.netease.com [47.88.81.134])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 796001DE8A4
-	for <linux-doc@vger.kernel.org>; Sun, 14 Sep 2025 06:21:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=47.88.81.134
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A00E8223DE5
+	for <linux-doc@vger.kernel.org>; Sun, 14 Sep 2025 03:18:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757830895; cv=none; b=LEaf+lvKk14jg7xEDqj3NYec9QA84YC91VNjNKE5yFWNz+lzAE17hAMC1wt+7AEzDjgyq5k3wGrwuqqxW/P4LuGAhvQukj2RnHhZHXEdTznqKUWdPiI2ZINWnVQCoYs2SvBUff02EA6HgMi8XuKZJJb1wpF6Ah4wdI0nwiMCqUU=
+	t=1757819924; cv=none; b=FZJYr+gXsAan4ZAKwzXMPzyzXfQ2BEnLHb/qt4UIuOTS1e6HPq6WDJruB9h8hiWnIfbMx+iTrROZGl24bZIJ5hbsuzBBdH3qWcTKSe51ixH+3lNSAPEMujIdM7zN0I4nVTu14p+Pk/SqzGCJ+z5Stj0s8WXuaF6hb9xdtQSSxac=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757830895; c=relaxed/simple;
-	bh=LqS2kwq700VN2LJivhc96mW551oiQZnsw9OjwsvjTVQ=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=W777XtLlOytAEzy1g7AlKuAf36b5V229fMIoZod8HN1TzJmaqIr+F2TqLJE28LLf6zmKk8t3z6u9+xLNtX5Rd+y7C1i/p0z4J61DmRTDKq03Ws4+LpIuEcIHYMgqog+uANQJA3k05u5Y30XNgFE1HaC6xasz0PVmuK4qd5Q9fXg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=oR8+lkzl; arc=none smtp.client-ip=47.88.81.134
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
-Received: from localhost.localdomain (unknown [120.246.23.60])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 22b65cb12;
-	Sun, 14 Sep 2025 10:52:17 +0800 (GMT+08:00)
-From: doubled <doubled@leap-io-kernel.com>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev
-Cc: dzm91@hust.edu.cn,
-	corbet@lwn.net,
-	linux-doc@vger.kernel.org
-Subject: [PATCH v3 7/7] docs/zh_CN: Add sd-parameters.rst translation
-Date: Sun, 14 Sep 2025 10:52:08 +0800
-Message-Id: <616b8c6ed6313647bd02fc4c8cd17b40c2bcfc5a.1757686158.git.doubled@leap-io-kernel.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1757686158.git.doubled@leap-io-kernel.com>
-References: <cover.1757686158.git.doubled@leap-io-kernel.com>
+	s=arc-20240116; t=1757819924; c=relaxed/simple;
+	bh=fX1ndpBU4fvAGj/TiKrzNZpJkrSsqxx3jRXmpXIcYAg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=HxQY85gHZPwr+dbLaGVluKJIT3b1qHAB/dgEOlwSwXmcX8EYPY+wcuZWvdGz5GzIhTdGfqp9gRD7CEaXlZJKO7tPyt9YKliopSQjFCD1/lVab76oirMdjA7P/PyUWv3DJtlb6zm88GWMLDzH7uNWXkCjTPCIcOnWhpk3kS3MYkE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eXNev6lY; arc=none smtp.client-ip=209.85.215.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-b4e84a61055so2034002a12.0
+        for <linux-doc@vger.kernel.org>; Sat, 13 Sep 2025 20:18:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757819921; x=1758424721; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=8FArxBasW3WnGtC8Io4ujTCS0qc12lP7qP5YZiH908s=;
+        b=eXNev6lYyexAIkuxgDgFEaq//780eHlZah5VX6umx5/zH9keWfSU/T4+6cVWyE6Jbb
+         jcNtFU0ZsifU2cLVFyABYJX0cB7wdlyGU+d5wAa3UCPvJ9LecIqEp97X8/sVho4+lU3M
+         ef8GOAlnXuGVBflYXtmM+NgYudg/ELegNaVHqOoEZRc8ukr0Xk1WYahB2bmHbcAhjOQW
+         sVagirVy94GwgspwdLwZMA2FSSpDSogiHptVwUW0apn0dYOaYpWWoe1mHfvqktdaRiw6
+         FQIWet+GjAF1nt+feV+cXo9xhlrqkhGsqZieuuvYxCPRw9DMS24Mvf1b76YeIOGVAldx
+         y0rQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757819921; x=1758424721;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=8FArxBasW3WnGtC8Io4ujTCS0qc12lP7qP5YZiH908s=;
+        b=SyZJZGnLRLoND2S6egHJI0XJKVTaVzbZzSLwt2ReOX2CXgZyqIrJswIslTHtwMUz69
+         AcLHA9ctGu5248D3TzjAiOrsbAAfHzcX/nWtJiAghawqrUc7niPQ3wVpkXGhVHi0h1dT
+         hZPjqDG2G4CEhw5LTShB5SAEd6RS67ln3LGcZale5qSs6ijUcO2gXFlPCN2j0qW/2L/z
+         ZkTS90hCkW8vgOcS9EedGzfT/4QZOm70rZ1KeMg1RHIZb4ma+R9mr+pFC4LwVzQsi8bF
+         PxJQx+zu57Awa+CpibGN54LMHukixQmwhmUBsqVHRi1qcZvGSpnpwp8ze5t+6zeoH1pC
+         wy2g==
+X-Forwarded-Encrypted: i=1; AJvYcCVzKPYnOBktuvVtCWpbf7Fiuynkl+30KrZ+EvldVBxSNUVZN5O0Tet8gsFaNH5n3cLPRigU/0tMG6E=@vger.kernel.org
+X-Gm-Message-State: AOJu0YywPpWqGI7zVJn8/vTqqYJnXYye0Zv4DOwd1bW8yJS7Qxs9HIrp
+	k4INOgrJVP4X3mq9bY56FyrDM7XpV10AE8veUwTVFibYHLkB/7bTXdhW
+X-Gm-Gg: ASbGncucvQP06AMItaleKKlCOyCeglBEB+G0jwTqqW59VacGq7eyqnNDcuHWQnGYIE4
+	ODjnZpqtFdO1LCuFdmlY/UJwz0gicThFSXnlOQX25DWEC6J19rp+zYeegC43b+Wetv4jOa5c21p
+	17v1FyZ0ypD0B2dysgZh3K+5cj/ENjGSXo1QfXj5bP9coMLRLG1PFAvMXM6D9EO+463KaDvJBbM
+	5hDd1mVuTWvzpBuCLQTvcV1h7zvcfSQctIlObDFLLwJsJiCKjqQ4r7osLtouBDTNKa2KEppqBkF
+	Y854jkDiOh71I3/ikM+0y3k8pWmcKyXjnkP2sz43Bq3QyUNzM2f+XkwuEcLdZhlWwvAQa9sGSRF
+	mA2aw2oAdiGczqqXTN4zWjWSOWD5fDi6/OMxuAao7+gCH
+X-Google-Smtp-Source: AGHT+IESgBAIB0Mj8/I1QLh4binzo0OXdjp/gLkwS6VlQjNmb/O7+eP5lJKfTEntVqlmFJ9XKoiplw==
+X-Received: by 2002:a17:903:1590:b0:24e:af92:70c2 with SMTP id d9443c01a7336-25d24ea0302mr101648445ad.24.1757819920769;
+        Sat, 13 Sep 2025 20:18:40 -0700 (PDT)
+Received: from [192.168.0.150] ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-264885eda79sm6926775ad.6.2025.09.13.20.18.37
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 13 Sep 2025 20:18:39 -0700 (PDT)
+Message-ID: <aaf3dffd-cc88-46e2-a65b-a1ff4fcc6eec@gmail.com>
+Date: Sun, 14 Sep 2025 10:18:34 +0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a994623391209cckunmff566153890573
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCSRlNVhlNTRkdS0MYSE8YSVYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKSUtVSU9NVUlIVU1LWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=oR8+lkzlb7Zdfer3sJVQzVTXtzJ8SSs7Y+aYcnn/XS8GH2cJic/f0zIWvoeFv5fvIxVpjB66myOdeWwtz50CpGDeTRwy53wrDxuQSXgRfrHY9EUtn+V68cx7ijndiJF31kv0BCXNS3AgdSAtzTGF3vQTKsNSvnwsc88WnhT9F2CkCb56NSSELe2ido2Vu+cGyLv0fG/uZsx9zh5mAejDO9Dbq57d/9s+wW5Dxo8kHUq04PzTdgK38RhtTFoIrGocfw28+D8UDnkbRZZ3jRGj7qnb8TQJJJE09eeznpxSWeY3caXM/myTqUlO6wx18ftnLOFWThHkJDefBOkyuMLQCw==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
-	bh=akNZxDgr79pt3anuIFyU3alPqLRn2nGlUS3Wyk8niMw=;
-	h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Documentation: process: Do not hardcode kernel major
+ version number
+To: Randy Dunlap <rdunlap@infradead.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Documentation <linux-doc@vger.kernel.org>,
+ Linux Kernel Workflows <workflows@vger.kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Dante Strock <dantestrock@hotmail.com>
+References: <20250913015147.9544-1-bagasdotme@gmail.com>
+ <61249b3d-3996-4d9f-814b-3794aa42c40b@infradead.org>
+Content-Language: en-US
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+In-Reply-To: <61249b3d-3996-4d9f-814b-3794aa42c40b@infradead.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Translate .../scsi/sd-parameters.rst into Chinese.
-Add sd-parameters into .../scsi/index.rst.
+On 9/14/25 04:40, Randy Dunlap wrote:
+> On 9/12/25 6:51 PM, Bagas Sanjaya wrote:   
+>> -The kernel developers use a loosely time-based release process, with a new
+>> -major kernel release happening every two or three months.  The recent
+>> -release history looks like this:
+>> +Linux kernel uses a loosely time-based, rolling release development model.
+> 
+>     The Linux kernel
+> 
+>> +A new major kernel release (a.x) [1]_ happens every two or three monts, which
+> 
+> I'm much more used to x.y                                           months,
+> 
 
-Update the translation through commit d835971b2b89
-("scsi: docs: convert sd-parameters.txt to ReST")
+The reason I use a.x is because a is indeed supermajor (only incremented 
+on occasional cases i.e. in Linux kernel when x gets large enough), and
+x is already used as second placeholder component.
 
-Signed-off-by: doubled <doubled@leap-io-kernel.com>
----
- .../translations/zh_CN/scsi/index.rst         |  3 +-
- .../translations/zh_CN/scsi/sd-parameters.rst | 38 +++++++++++++++++++
- 2 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/scsi/sd-parameters.rst
+>> +comes with new features, internal API changes, and more. A typical release
+>> +can contain about 13,000 changesets with changes to several hundred thousand
+>> +lines of code. Recent releases, along with their dates, can be found at
+>> +`Wikipedia <https://en.wikipedia.org/wiki/Linux_kernel_version_history>`_.
+>>   
+>> -	======  =================
+>> -	5.0	March 3, 2019
+>> -	5.1	May 5, 2019
+>> -	5.2	July 7, 2019
+>> -	5.3	September 15, 2019
+>> -	5.4	November 24, 2019
+>> -	5.5	January 6, 2020
+>> -	======  =================
+>> -
+>> -Every 5.x release is a major kernel release with new features, internal
+>> -API changes, and more.  A typical release can contain about 13,000
+>> -changesets with changes to several hundred thousand lines of code.  5.x is
+>> -the leading edge of Linux kernel development; the kernel uses a
+>> -rolling development model which is continually integrating major changes.
+>> +.. [1] Strictly speaking, Linux kernel do not use semantic versioning
+> 
+>                               the Linux kernel does not
+> 
+>> +       number scheme, but rather a.x pair identifies major release
+> 
+> x.y ?
+> m.n ?
+>                               rather the a.x
+> 
 
-diff --git a/Documentation/translations/zh_CN/scsi/index.rst b/Documentation/translations/zh_CN/scsi/index.rst
-index 4d83ab431d2c..f13c419b134c 100644
---- a/Documentation/translations/zh_CN/scsi/index.rst
-+++ b/Documentation/translations/zh_CN/scsi/index.rst
-@@ -50,9 +50,10 @@ SCSI主机适配器驱动
- .. toctree::
-    :maxdepth: 1
- 
-+   sd-parameters
-+
- Todolist:
- 
--* sd-parameters
- * 53c700
- * aacraid
- * advansys
-diff --git a/Documentation/translations/zh_CN/scsi/sd-parameters.rst b/Documentation/translations/zh_CN/scsi/sd-parameters.rst
-new file mode 100644
-index 000000000000..b3d0445dc9f3
---- /dev/null
-+++ b/Documentation/translations/zh_CN/scsi/sd-parameters.rst
-@@ -0,0 +1,38 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/scsi/sd-parameters.rst
-+
-+:翻译:
-+
-+ 郝栋栋 doubled <doubled@leap-io-kernel.com>
-+
-+:校译:
-+
-+
-+
-+============================
-+Linux SCSI磁盘驱动（sd）参数
-+============================
-+
-+缓存类型（读/写）
-+------------------
-+启用/禁用驱动器读写缓存。
-+
-+===========================    =====   =====   =======   =======
-+ 缓存类型字符串                 WCE     RCD     写缓存    读缓存
-+===========================    =====   =====   =======   =======
-+ write through                   0       0       关闭      开启
-+ none                            0       1       关闭      关闭
-+ write back                      1       0       开启      开启
-+ write back, no read (daft)      1       1       开启      关闭
-+===========================    =====   =====   =======   =======
-+
-+将缓存类型设置为“write back”并将该设置保存到驱动器::
-+
-+  # echo "write back" > cache_type
-+
-+如果要修改缓存模式但不使更改持久化，可在缓存类型字符串前
-+添加“temporary ”。例如::
-+
-+  # echo "temporary write back" > cache_type
+See my above reply.
+
+>> +       version as a whole number. For each release, x is incremented,
+>> +       but a is incremented only if x is deemed large enough (e.g.
+>> +       Linux 5.0 is released following Linux 4.20).
+>>   
+>>   A relatively straightforward discipline is followed with regard to the
+>>   merging of patches for each release.  At the beginning of each development
+>> @@ -48,9 +42,9 @@ detail later on).
+>>   
+>>   The merge window lasts for approximately two weeks.  At the end of this
+>>   time, Linus Torvalds will declare that the window is closed and release the
+>> -first of the "rc" kernels.  For the kernel which is destined to be 5.6,
+>> +first of the "rc" kernels.  For the kernel which is destined to be a.x,
+>>   for example, the release which happens at the end of the merge window will
+>> -be called 5.6-rc1.  The -rc1 release is the signal that the time to
+>> +be called a.x-rc1.  The -rc1 release is the signal that the time to
+>>   merge new features has passed, and that the time to stabilize the next
+>>   kernel has begun.
+>>   
+>> @@ -99,13 +93,13 @@ release is made.  In the real world, this kind of perfection is hard to
+>>   achieve; there are just too many variables in a project of this size.
+>>   There comes a point where delaying the final release just makes the problem
+>>   worse; the pile of changes waiting for the next merge window will grow
+>> -larger, creating even more regressions the next time around.  So most 5.x
+>> -kernels go out with a handful of known regressions though, hopefully, none
+>> -of them are serious.
+>> +larger, creating even more regressions the next time around.  So most kernels
+>> +go out with a handful of known regressions though, hopefully, none of them
+> 
+> I would add another comma:        regressions,
+> 
+>> +are serious.
+>>   
+>>   Once a stable release is made, its ongoing maintenance is passed off to the
+>>   "stable team," currently Greg Kroah-Hartman. The stable team will release
+> 
+> and Sasha Levin:
+> STABLE BRANCH
+> M:	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> M:	Sasha Levin <sashal@kernel.org>
+> 
+
+This can go on separate patch, I think.
+
+Thanks.
+
 -- 
-2.25.1
-
+An old man doll... just what I always wanted! - Clara
 
