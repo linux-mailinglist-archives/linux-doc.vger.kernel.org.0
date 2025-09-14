@@ -1,151 +1,141 @@
-Return-Path: <linux-doc+bounces-60452-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60454-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AFACB5682C
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 13:56:42 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8402DB5690C
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 15:03:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id DD70C7AA74B
-	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 11:55:02 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3EB903B550E
+	for <lists+linux-doc@lfdr.de>; Sun, 14 Sep 2025 13:03:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0BB025A357;
-	Sun, 14 Sep 2025 11:56:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72ED31C6FF4;
+	Sun, 14 Sep 2025 13:02:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ol+Jb1WD"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tfN1I3Sx"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83FBF2580ED;
-	Sun, 14 Sep 2025 11:56:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 381901BE871;
+	Sun, 14 Sep 2025 13:02:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757850989; cv=none; b=gmwVRJY2oqz99KMgtB/7ErvrwcDjqBYYfYCeO87m37dOoVtMzZlhcO0+L5HeXu5HgujCExP4lZgRF4x02FAPP9TdyGQAhmVNL1gESh8kNtr9xRZA3Meh9CEIC9z+hXB/l7xPPTOty62EiuLtQwbrRf+OD8O0hHH5Y8qE+CppbHA=
+	t=1757854978; cv=none; b=dDcehig+a79snmTlySJi4kcy6cFSn91p/j9QU7YCiVnb/0NkyROrh0Q0DCs72xTSGs087/uXN7tJBHc7Dsfc/pHzCrzQF5hTikg7MpwygzirCbhIWRIrTuDHoZxpZkBJJpMLVxVWoT43S1Jk9OVgCBH+oAL9DOytmcS/LUocy8o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757850989; c=relaxed/simple;
-	bh=72P1XeE7gCDZuUaE9HGq0KcOlPy2jCWwmfe+8Bijb1Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=LcJ8QnyiipowvZ9epvNovAmKiy4CKq5SBO3oOsQbPBB8Qda8zorIOqyo5yA1pUb6QbZLLiRhuNw+fMXoBCBtEGHVK7zk3IzV733CoO7ZpM7+XqjDSE3yuneusEc0zLzXIs1OiY7wSKGcrNtQysH3a2dHBn6A85S6Tsp4MdnxJYE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ol+Jb1WD; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DCCDC4CEF0;
-	Sun, 14 Sep 2025 11:56:24 +0000 (UTC)
+	s=arc-20240116; t=1757854978; c=relaxed/simple;
+	bh=YYDp1ijpwWt09S5HVfnu4kiNUYZD0PpGT+F41GYPadw=;
+	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
+	 Mime-Version:Content-Type; b=AtzFaIqy5v6F6spUhMDSWDtAVls5ondLd1dJAJp6cfT7IAyfeP76UB8V18YvbHHAWqshAo5NtLzYkSw4RRxsn2PZdbpvEYbrE41EqHM3JDbfDB/IHGr5KXwyFFWv4XKHPAt38zqZgZSL4R5RJaZ5GCfyqyAb/0//2RKorq8uffU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tfN1I3Sx; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6FC9EC4CEF0;
+	Sun, 14 Sep 2025 13:02:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757850989;
-	bh=72P1XeE7gCDZuUaE9HGq0KcOlPy2jCWwmfe+8Bijb1Y=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Ol+Jb1WDabHGqEYRRuzYJnuUlxI0TPcRedF4LOzhRwy8qt4x/RgCwK7skMLAwSCSh
-	 kZUkFrMXD36Md5U34jeUcfO8IsPsChQea4GO3wSj6dgx8rn0TDd0HQoUGmVtT5Jm7w
-	 4vbO2KEvBayBBL0avTBS1NNFdxwC06aRJ3zBRaFGXdgg59vBDvifFKbvWJV/W8zhJs
-	 h3JFikHNdItKWRo559a/vTFqgiVliY+2fJdgzM8XEPmEB2JiOHbpvs3YlcflCt+R/7
-	 XiqGeb2dS0XeZBx7XaJNdBDxXpg6OqUGJCvXInpFKLUIh1gsjUw2C7plVitmtAaXSt
-	 EMbSMqiD9WL/w==
-Message-ID: <21e78a0c-f1fd-4476-9553-c3890d05b635@kernel.org>
-Date: Sun, 14 Sep 2025 13:56:23 +0200
+	s=k20201202; t=1757854977;
+	bh=YYDp1ijpwWt09S5HVfnu4kiNUYZD0PpGT+F41GYPadw=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=tfN1I3SxboPtqg8tVy6FWKrpiKrpPQ9z8Cv44K48WXiEcad4ZNNLZydJ65S/qI29k
+	 EwBkEyHjGDbdx6IiIbX8u+Gc9sh1/7LhYv0KuDenuZg3dAkx920SCHCrx3ejXdB4CZ
+	 kkZv+EZ8tXEH2aLHGTp7G3jfLmgvYXteZnydpp0UsPKMgf3HAzoIv8i/yxHQkoxOSP
+	 75VFXHCUQMfSFW3LEOUGVqLmXvVBvEcw/SnA32l/9OUmQ7vCkJ2ODaCUXeNlxE0Rl4
+	 8f6jp6BUeK9hULpSdxe6NnOO5CuoAwWTcVvlywnTL2AONaQjHYXi1lA376VzJCi5nx
+	 sdvSbzTn6c09A==
+Date: Sun, 14 Sep 2025 22:02:42 +0900
+From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+To: Randy Dunlap <rdunlap@infradead.org>
+Cc: Jinchao Wang <wangjinchao600@gmail.com>, Andrew Morton
+ <akpm@linux-foundation.org>, Peter Zijlstra <peterz@infradead.org>, Mike
+ Rapoport <rppt@kernel.org>, Alexander Potapenko <glider@google.com>,
+ Jonathan Corbet <corbet@lwn.net>, Thomas Gleixner <tglx@linutronix.de>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, Dave Hansen
+ <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
+ <hpa@zytor.com>, Juri Lelli <juri.lelli@redhat.com>, Vincent Guittot
+ <vincent.guittot@linaro.org>, Dietmar Eggemann <dietmar.eggemann@arm.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>, Mel
+ Gorman <mgorman@suse.de>, Valentin Schneider <vschneid@redhat.com>, Arnaldo
+ Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin
+ <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, Ian
+ Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>,
+ "Liang, Kan" <kan.liang@linux.intel.com>, David Hildenbrand
+ <david@redhat.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
+ <vbabka@suse.cz>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko
+ <mhocko@suse.com>, Nathan Chancellor <nathan@kernel.org>, Nick Desaulniers
+ <nick.desaulniers+lkml@gmail.com>, Bill Wendling <morbo@google.com>, Justin
+ Stitt <justinstitt@google.com>, Kees Cook <kees@kernel.org>, Alice Ryhl
+ <aliceryhl@google.com>, Sami Tolvanen <samitolvanen@google.com>, Miguel
+ Ojeda <ojeda@kernel.org>, Masahiro Yamada <masahiroy@kernel.org>, Rong Xu
+ <xur@google.com>, Naveen N Rao <naveen@kernel.org>, David Kaplan
+ <david.kaplan@amd.com>, Andrii Nakryiko <andrii@kernel.org>, Jinjie Ruan
+ <ruanjinjie@huawei.com>, Nam Cao <namcao@linutronix.de>,
+ workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
+ linux-mm@kvack.org, llvm@lists.linux.dev, Andrey Ryabinin
+ <ryabinin.a.a@gmail.com>, Andrey Konovalov <andreyknvl@gmail.com>, Dmitry
+ Vyukov <dvyukov@google.com>, Vincenzo Frascino <vincenzo.frascino@arm.com>,
+ kasan-dev@googlegroups.com, "David S. Miller" <davem@davemloft.net>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ linux-trace-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 03/21] HWBP: Add modify_wide_hw_breakpoint_local()
+ API
+Message-Id: <20250914220242.1e8dc83e011b9568dd7a5ace@kernel.org>
+In-Reply-To: <6b5e5d3e-5db8-44f2-8dca-42f317be8e0d@infradead.org>
+References: <20250912101145.465708-1-wangjinchao600@gmail.com>
+	<20250912101145.465708-4-wangjinchao600@gmail.com>
+	<6b5e5d3e-5db8-44f2-8dca-42f317be8e0d@infradead.org>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC][PATCH v3 16/16] dt-bindings: Add Google Kinfo
-To: Eugen Hristev <eugen.hristev@linaro.org>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, tglx@linutronix.de,
- andersson@kernel.org, pmladek@suse.com, rdunlap@infradead.org,
- corbet@lwn.net, david@redhat.com, mhocko@suse.com
-Cc: tudor.ambarus@linaro.org, mukesh.ojha@oss.qualcomm.com,
- linux-arm-kernel@lists.infradead.org, linux-hardening@vger.kernel.org,
- jonechou@google.com, rostedt@goodmis.org, linux-doc@vger.kernel.org,
- devicetree@vger.kernel.org
-References: <20250912150855.2901211-1-eugen.hristev@linaro.org>
- <20250912150855.2901211-17-eugen.hristev@linaro.org>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <20250912150855.2901211-17-eugen.hristev@linaro.org>
-Content-Type: text/plain; charset=UTF-8
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On 12/09/2025 17:08, Eugen Hristev wrote:
-> Add documentation for Google Kinfo kmemdump backend driver.
+On Fri, 12 Sep 2025 21:13:07 -0700
+Randy Dunlap <rdunlap@infradead.org> wrote:
+
 > 
-> Signed-off-by: Eugen Hristev <eugen.hristev@linaro.org>
-> ---
->  .../bindings/misc/google,kinfo.yaml           | 36 +++++++++++++++++++
->  MAINTAINERS                                   |  1 +
->  2 files changed, 37 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/misc/google,kinfo.yaml
 > 
-> diff --git a/Documentation/devicetree/bindings/misc/google,kinfo.yaml b/Documentation/devicetree/bindings/misc/google,kinfo.yaml
-> new file mode 100644
-> index 000000000000..b1e4fac43586
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/misc/google,kinfo.yaml
-> @@ -0,0 +1,36 @@
-> +# SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/misc/google,kinfo.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Google Pixel Kinfo debug driver
-> +
-> +maintainers:
-> +  - Eugen Hristev <eugen.hristev@linaro.org>
-> +
-> +description:
-> +  The Google Pixel Kinfo debug driver uses a supplied reserved memory area
-> +  to save debugging information on the running kernel.
+> On 9/12/25 3:11 AM, Jinchao Wang wrote:
+> > +/**
+> > + * modify_wide_hw_breakpoint_local - update breakpoint config for local cpu
+> > + * @bp: the hwbp perf event for this cpu
+> > + * @attr: the new attribute for @bp
+> > + *
+> > + * This does not release and reserve the slot of HWBP, just reuse the current
+> 
+>                                                  of a HWBP; it just reuses
+
+OK,
+
+> 
+> and preferable s/cpu/CPU/ in comments.
+
+OK.
+
+Thanks for review!
+
+> 
+> > + * slot on local CPU. So the users must update the other CPUs by themselves.
+> > + * Also, since this does not release/reserve the slot, this can not change the
+> > + * type to incompatible type of the HWBP.
+> > + * Return err if attr is invalid or the cpu fails to update debug register
+> > + * for new @attr.
+> > + */
+> > +#ifdef CONFIG_HAVE_REINSTALL_HW_BREAKPOINT
+> > +int modify_wide_hw_breakpoint_local(struct perf_event *bp,
+> > +				    struct perf_event_attr *attr)
+> > +{
+> 
+> -- 
+> ~Randy
+> 
 
 
-Bindings should be for hardware, not drivers, so this does not belong to
-DT. It might be a dedicated reserved memory node, though.
-
-
-Best regards,
-Krzysztof
+-- 
+Masami Hiramatsu (Google) <mhiramat@kernel.org>
 
