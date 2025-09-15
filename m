@@ -1,181 +1,134 @@
-Return-Path: <linux-doc+bounces-60553-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60557-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1B02B57A33
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 14:16:58 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 271A8B57A9D
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 14:23:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id ABC1A3A433F
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 12:16:54 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 22E701AA0036
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 12:22:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84B0F26E6FE;
-	Mon, 15 Sep 2025 12:16:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9EB63093AC;
+	Mon, 15 Sep 2025 12:21:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lVj+RNSj"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="A0svqQWY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B34092AD11
-	for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 12:16:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D727A30AAB8
+	for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 12:21:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757938612; cv=none; b=hHWDyXTwVjw/aErJWzQNIVvk+5920wTQKwKOD+++6wF1Fln38QiJS6SdENsA+XlekqAsKrYmPE4BUsrV8CW5t6pCKOReiwDAY48quCmpKz6zPk2CDgl8Zz8p12bJ+oeyfFMytSj4kVubLhNj7BtoEVSYZho3ucowvoJ6sLSEi0A=
+	t=1757938865; cv=none; b=X0zkRnErYyBBHFwl//SbgOFQ2zPI4lxVgv8OBRdt2mUBoQzk0g6el3c04L9PNL//CvxBd7Nky8Rrjkac045f7C1ZsA1irA77eIVZFzFlGDKeGxrYysjAzg6e1SCKOYrwhnK96b+/TB6cQ2LWXJ1pz5COVgpX3tUniFLsVM/Gs0Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757938612; c=relaxed/simple;
-	bh=++dZYV/juMI5pl6UTOl5lGiPaGz60jWMWAPjOPQh934=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ecnokd3asgSC3GXY3pSU/bmBdnURUeNyGIskR/d6StQlCdpbR2SwvUAKelJxWlW6ZxgX4VuSve0ajkzvt+nz86PnLJ+6cDKxKDigJuIEMAwFepnsrthIdwzKlu4r242wE3RfcLeZvs8Qv4LboQHBrOMzkEIbZHLRB6meBQKqbps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lVj+RNSj; arc=none smtp.client-ip=209.85.128.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-45f2c5ef00fso10111695e9.1
-        for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 05:16:50 -0700 (PDT)
+	s=arc-20240116; t=1757938865; c=relaxed/simple;
+	bh=dRXGhWojN/zmxVhLhhV7UBCFaTwMPK23OlCcE6/vJA0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=SE1LEmwhmW7WbPWu5dqmbU/FUvsxJxqoH4/ZxkILlSDsVFCxzktI8WfK2gEUrF0yNY5Fb+7z9pVuJU6Rxr1S1qlBYZk2jLnPcsLKSe+z7cfF+gY2aKaMQoO7Np7rcNXMkEaTxQVAmvxo3Q7+dm9CE6LcU0Lc4L4rf1wBK+dlkdY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=A0svqQWY; arc=none smtp.client-ip=209.85.221.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-3df726ecff3so2250183f8f.3
+        for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 05:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1757938609; x=1758543409; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=hkh90FvShjKuQpnhzVfehnVtCnrky/4Hn2fBZ8wL670=;
-        b=lVj+RNSjqxDyJAhTcfPQzJl+DcmHpkBwiSK4bth/MseJZpIGD3rVM4e0NLt4u354uf
-         hve9JkMN1+aatCJgicCLwScHi6K38mzBw+RgW2zdYD1JiXZ5Vv7kOaLBQZWLshiJrkYO
-         qOk/PucYsYttxw8kbyU3FVOih9e+RGEGseyidf21Vyai6Z5hr7ETd1QHv+XNfGFTQNLl
-         rfiOB0MmGjsunRrlHON1ibuq6tcVHtORzaMM3pnkGg3vUa6E9jZGYGFAfoT17fjoUARI
-         ntuTFbJWHQGCVWwB3wQpZxgOFka50qsB59aVwfin25dHteSaj819ElxdFv1+XImbmXgG
-         wLzQ==
+        d=suse.com; s=google; t=1757938862; x=1758543662; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=dRXGhWojN/zmxVhLhhV7UBCFaTwMPK23OlCcE6/vJA0=;
+        b=A0svqQWYY98nAXTi9kuDSTEPPipJjudbrmhCo2ftEGwGqaqCr9QiYUsuHjrBfWrfAD
+         +Uan2JVN+pog/3GfkAhB5tvG2HWwNGSS2DkT+/bqXwcrzDh4oAPFcltxjeShd9BzrxE9
+         dCLq9atUMYZHGakoVjG59DEO8Y4YRX7d37eV4KQ+LctVHUnIB0lcVEiUaMF5s1So/P7z
+         sTY7dXsQaHTYiNUmB5pSr5F7vpRbJ9MWO7XDcYMrAnt1sW6etYKyPuT+fGRKs57wfj0O
+         8vQuNXDUnvTWxiPeO8Fr32Y4BCpfD1AZmeXRehOH9CqysvfDylpp5FfWZN3YcJWIFso0
+         eD1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1757938609; x=1758543409;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hkh90FvShjKuQpnhzVfehnVtCnrky/4Hn2fBZ8wL670=;
-        b=gg7ACeZer6qQKosub6rVgixZEFdmIS4brz26eQmBMe9vK6sXyrBdq2y84wdWagDhhu
-         4NFkXP05YMMGUPQs8EBrZlGHIbecYcVhfObfUKZcFrdUHLAJcRlWPrPDbmM2ADgfy4kW
-         zTb0il+w34OMj9kZs0ovr5Shf18BhiVKfDtFg6eZH/ZQwU+R/CRLz8gOFGfu/TW0/52W
-         NwzcnKyWeQJzsxYTI1AuS+EloeXFPFWom66abJDGGywaYbJYVtbuXltRqVofjdMtb85X
-         trpt8iFKD1qf23/WbzA5BuIwCHu0wjNTkb1PS11pQnnkySgsOmf1lLtPR8v3nvszUFi9
-         j0Jw==
-X-Forwarded-Encrypted: i=1; AJvYcCXNFEc3u20RU+Uy8a3s4aHe0cGjDPIuylQ4gXSaAfXwpiZSuxKYELxpFDkNTDRO9D8UJ3KCAhd9GBA=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw/ne1iLx/0Ko2P2/wzFlXVmRRRNseTMJ6/nQv17bN9TUtDONA3
-	E92AHy4K1RPd9MiYmz4IQ92l8rMCg72cATxl6IZDwBnS1RYfV6XRgcQq
-X-Gm-Gg: ASbGncvNx4KtH2HsNf6BhjA/IvQyI8orqgvBrDhBoFihKiyQS2ua84S33YT5ch62IJZ
-	PKfmEQr4Et5gcgjGZ//hAZIqcLqGkbbLgm5aJ/Wz5XhFBVGUwFR2MeNBhW5zMSRJAzajgZ41YUt
-	+2bopCIXqNothyb/He5Onq+yERyMv+THARICd51pEl9qP/5XhdIv2CQeoq0PyY4/0UBGQ+Mn3ZE
-	2WGrydCLKSZzA7U05nFeeCnTtOh2oPNtbHt6OgZLWnoop2d5wfhct238eC8LLy4zmosW38VCRlu
-	awFapBlqAZP5wsZpYxTj/IZWQFL48L/Z6hvIEtNgpoCN+42+aGoMY7ql5XukXLABtqjtIwRMAso
-	ZX+5Zzi4g7D8onC5GqMqOvEjcgtOUkFSj1LuIh4ycaPvdkeyIs8x4BxCv+m0gCy3sz7NpjY4bEM
-	1TainfSA==
-X-Google-Smtp-Source: AGHT+IHLdvnlzkDOd7uXK6UlLVGn66En8B0SEaqf+MBMTOLNt+IzT6bYlms/O5Yrrl4aVtgHa35tlA==
-X-Received: by 2002:a05:600c:4691:b0:45f:28d5:fae with SMTP id 5b1f17b1804b1-45f28d511f7mr65042655e9.4.1757938608737;
-        Mon, 15 Sep 2025 05:16:48 -0700 (PDT)
-Received: from ?IPV6:2a03:83e0:1126:4:1449:d619:96c0:8e08? ([2620:10d:c092:500::5:94b0])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45e037d62besm173987755e9.21.2025.09.15.05.16.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 15 Sep 2025 05:16:48 -0700 (PDT)
-Message-ID: <f34dbfd0-2291-4a19-bbd8-b61fe7754e55@gmail.com>
-Date: Mon, 15 Sep 2025 13:16:44 +0100
+        d=1e100.net; s=20230601; t=1757938862; x=1758543662;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dRXGhWojN/zmxVhLhhV7UBCFaTwMPK23OlCcE6/vJA0=;
+        b=hqZYAtJNitRurXWAGUdzC9txkrR9Pdo2VqW8ojCXzxeX4mQrSJSaTecHloiRO3eceo
+         NQFEdrFiL5eMJ8N2E6iMQKJ1ken5dtXEU8yc5UjPOoOVHk4VX6+JTI6Ah6JVRq+aaWSM
+         GQyPbUiLFfPkAqQIBIQ4Gz0rM3AMtkmXIi2RDJpnA6QC+HwQFJUzgmeud7SVg0UGQN1S
+         yNrWOTT0aivK4Rav4JD6oLQLU8bjkIkm+ahw6d96yQKg4kuJIHTnrhEr/vePXkaddZgE
+         ndYEVrZqR8J6RHUCotgYRjo07DIZj95kPlf6j8gCDNJqbIB5+CtZHAkpJC3C3EgPMs17
+         /w0w==
+X-Forwarded-Encrypted: i=1; AJvYcCVVGneHmxYnnjdB7IscARewSJMEsffViNT/XVUVfm4bee8wIdMqHsDoJTtNvcoh+Kab9ieBDgBZlww=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwLR7FH6G6yqXzmYPY8ai/1/b0VdxDZZbdKJnTIsMpgWTMM3Pw8
+	S1XWHeGflItU+e+YptadQWTEbGtBq6fjNegyyPruBdZvxPtUZFyoGmpP1HpH+Q0bfyQ=
+X-Gm-Gg: ASbGncuaaEsRxXkqzJmY9lPBBmwat5iBQ/05iqevvTRCarVUakmqYqsjDvUuqMm6g4I
+	EYHWnK5A/YEeQOdiUkjL1caHSLns/4lj0b2aF1DZLNIXKVzoZ2hbh4YezYM3zInXZfLUdRjp5AL
+	zm2Y+jqslFHx+GuYQFXUANEWzXSpHJStVoIdqGrXSs9SSSU2VHGZ7cNxy+p2shnkY01G47xVDaG
+	YTl3TmTT7mQz470atq8SBHC4ZG9FuMOr0yziCHLhGJ+ubKR9BM3Q75PjXWbl6kP87RtqIByfIUB
+	PORgpPUuaD6ovKEHTedomwlKMpgRJ6eahlRNedaYpVg+5WpR18S86LX2sGxaSvWRNViiy+Xabyj
+	KOMi7O4ffdG9WgOEIu/vZhffh
+X-Google-Smtp-Source: AGHT+IHZxjPiVftQFFSVsD2VxpuAkBezLqcbHM5N6FMX7Nja48uVvgnW5IZJk5T4dZviTmbAHvCxyQ==
+X-Received: by 2002:a5d:64c3:0:b0:3d1:42dc:c710 with SMTP id ffacd0b85a97d-3e76579317emr9382433f8f.16.1757938862113;
+        Mon, 15 Sep 2025 05:21:02 -0700 (PDT)
+Received: from blackbook2 ([84.19.86.74])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3e96dee54d8sm7498070f8f.12.2025.09.15.05.21.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 Sep 2025 05:21:01 -0700 (PDT)
+Date: Mon, 15 Sep 2025 14:20:59 +0200
+From: Michal =?utf-8?Q?Koutn=C3=BD?= <mkoutny@suse.com>
+To: Bagas Sanjaya <bagasdotme@gmail.com>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, 
+	Linux Documentation <linux-doc@vger.kernel.org>, Linux cgroups <cgroups@vger.kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, 
+	Andrea Righi <arighi@nvidia.com>, Johannes Bechberger <me@mostlynerdless.de>, 
+	Changwoo Min <changwoo@igalia.com>, Shashank Balaji <shashank.mahadasyam@sony.com>, 
+	Ingo Molnar <mingo@kernel.org>, Jake Rice <jake@jakerice.dev>, Cengiz Can <cengiz@kernel.wtf>, 
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: Re: [PATCH v2 2/4] Documentation: cgroup-v2: Add section numbers
+Message-ID: <duppgeomaflt6fbymdk5443glmw7d3bgli2yu7gx6awb7q2dhn@syjq5mmia6pb>
+References: <20250915081942.25077-1-bagasdotme@gmail.com>
+ <20250915081942.25077-3-bagasdotme@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 00/15] khugepaged: mTHP support
-Content-Language: en-GB
-To: David Hildenbrand <david@redhat.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: Kiryl Shutsemau <kas@kernel.org>, Nico Pache <npache@redhat.com>,
- linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, ziy@nvidia.com,
- baolin.wang@linux.alibaba.com, Liam.Howlett@oracle.com,
- ryan.roberts@arm.com, dev.jain@arm.com, corbet@lwn.net, rostedt@goodmis.org,
- mhiramat@kernel.org, mathieu.desnoyers@efficios.com,
- akpm@linux-foundation.org, baohua@kernel.org, willy@infradead.org,
- peterx@redhat.com, wangkefeng.wang@huawei.com, sunnanyong@huawei.com,
- vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com,
- yang@os.amperecomputing.com, aarcange@redhat.com, raquini@redhat.com,
- anshuman.khandual@arm.com, catalin.marinas@arm.com, tiwai@suse.de,
- will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org,
- jglisse@google.com, surenb@google.com, zokeefe@google.com,
- hannes@cmpxchg.org, rientjes@google.com, mhocko@suse.com,
- rdunlap@infradead.org, hughd@google.com, richard.weiyang@gmail.com,
- lance.yang@linux.dev, vbabka@suse.cz, rppt@kernel.org, jannh@google.com,
- pfalcato@suse.de
-References: <ppzgohmkll7dbf2aiwhw7f4spf6kxjtwwe3djkx26pwy4ekrnd@mgeantq5sn2z>
- <d0e81c75-ad63-4e37-9948-3ae89bc94334@redhat.com>
- <CAA1CXcA+pb5KvEnJJqdf1eSjaFiBZ82MRB+KDmyhj3DbiQqOxg@mail.gmail.com>
- <enrgrocqajwu5d3x34voghja7pbvau45oobxgabawrly44ld4u@ahch3xn6rtq5>
- <cd8e7f1c-a563-4ae9-a0fb-b0d04a4c35b4@redhat.com>
- <2c5328ee-fb6e-45cf-a151-868cc8e7ff97@lucifer.local>
- <4508810d-7645-4f57-a0c5-2ee9f44206fc@lucifer.local>
- <34754ca4-fced-4a3c-8ff8-c00967d487de@redhat.com>
- <92352257-5be4-4aaa-b97f-c4e879ac6959@lucifer.local>
- <de3f5502-ef81-4f44-96a9-995e512301a3@redhat.com>
- <5099d9fe-4a07-4acd-95c8-782ffc74df37@lucifer.local>
- <1312fa3e-88dd-490a-9e07-9749c625933b@redhat.com>
-From: Usama Arif <usamaarif642@gmail.com>
-In-Reply-To: <1312fa3e-88dd-490a-9e07-9749c625933b@redhat.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="ml2yrs6lektswjhv"
+Content-Disposition: inline
+In-Reply-To: <20250915081942.25077-3-bagasdotme@gmail.com>
 
 
+--ml2yrs6lektswjhv
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Subject: Re: [PATCH v2 2/4] Documentation: cgroup-v2: Add section numbers
+MIME-Version: 1.0
 
-On 15/09/2025 12:10, David Hildenbrand wrote:
-> On 15.09.25 12:59, Lorenzo Stoakes wrote:
->> On Mon, Sep 15, 2025 at 12:52:53PM +0200, David Hildenbrand wrote:
->>> On 15.09.25 12:48, Lorenzo Stoakes wrote:
->>>> On Mon, Sep 15, 2025 at 12:44:34PM +0200, David Hildenbrand wrote:
->>>>>>>> Mapping that to actual THP sizes (#pages in a thp) on an arch will be easy.
->>>>>>>
->>>>>>> And at different mTHP levels too right?
->>>>>>>
->>>>>>
->>>>>> Another point here, since we have to keep:
->>>>>>
->>>>>> /sys/kernel/mm/transparent_hugepage/khugepaged/max_ptes_none
->>>>>>
->>>>>> Around, and users will try to set values there, presumably we will now add:
->>>>>>
->>>>>> /sys/kernel/mm/transparent_hugepage/khugepaged/eagerness
->>>>>>
->>>>>> How will we map <-> the two tunables?
->>>>>
->>>>> Well, the easy case if someone updates eagerness, then we simply et it to
->>>>> whatever magic value we compute and document.
->>>>>
->>>>> The other direction is more problematic, likely we'll simply warn and do
->>>>> something reasonable (map it to whatever eagerness scale is closest or
->>>>> simply indicate it as "-1" -- user intervened or sth like that)
->>>>
->>>> I don't love the idea of a -1 situation, as that's going to create some
->>>> confusion.
->>>
->>> swapiness also has a "max" parameter, so we could just say "override" /"
->>> disabled" / whatever?
->>
->> I don't love the user being able to override this though, let's just nuke their
->> ability to set this pleeeease.
+On Mon, Sep 15, 2025 at 03:19:25PM +0700, Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+> Add section numbers, following the numbering scheme in the manual
+> toctree. Note that sectnum:: directive cannot be used as it also
+> numbers the docs title.
 
-Do you mean stop people from changing max_ptes_none? I am not sure if thats a good idea,
-Its existed for a very long time and even a few release warnings might not be enough
-of a warning for sysadmins that might not have a kernel team to notice this.
+Erm, so in addition to keeping manual ToC in sync, we'd also need to
+maintain the section numbers manually?
 
-If the eagerness solution is just a logarithmic mapping of max_ptes_none at the start, I do
-think we need to keep max_ptes_none completely supported. As eagerness isnt really doing
-something new? Once eagnerness diverges from just setting max_ptes_none, only then
-we should start thinking about deprecating it?
+What about dropping the numbers from manual ToC and sections? (If manual
+ToC is to be preserved.)
 
+Thanks,
+Michal
 
->>
->> Because if they can override it, then we have to do some deeply nasty scaling
->> for mTHP again.
-> 
-> There are ways to have it working internally, just using a different "scale" instead of the 100 -> 50 -> 25 etc.
-> 
-> I am afraid we cannot change the parameter to ignore other values because of the interaction with the shrinker that easily .... we might be able to detracted at wait a bunch of kernel releases probably.
-> 
+--ml2yrs6lektswjhv
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iJEEABYKADkWIQRCE24Fn/AcRjnLivR+PQLnlNv4CAUCaMgEqBsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIACgkQfj0C55Tb+AgBMAEA5FwahNfScmcGEHeTMPg/
+fK1406QYr3ODWMP8GdbwXk8A/3ZGZNF3X3LOGQ4Okk40J612ukJscIDXRv9sFEbP
+V8UC
+=5Zpi
+-----END PGP SIGNATURE-----
+
+--ml2yrs6lektswjhv--
 
