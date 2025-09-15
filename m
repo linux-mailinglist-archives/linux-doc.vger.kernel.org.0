@@ -1,446 +1,309 @@
-Return-Path: <linux-doc+bounces-60620-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60613-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86B26B582E7
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 19:09:50 +0200 (CEST)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F47CB582BC
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 19:05:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 889E04C5403
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 17:09:21 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 906994E233C
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 17:05:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E4F9287273;
-	Mon, 15 Sep 2025 17:09:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C5C02765CD;
+	Mon, 15 Sep 2025 17:05:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=landley.net header.i=@landley.net header.b="hHM4pYd/"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="OEuipUee"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from poodle.tulip.relay.mailchannels.net (poodle.tulip.relay.mailchannels.net [23.83.218.249])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E429B1E411C;
-	Mon, 15 Sep 2025 17:09:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=23.83.218.249
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CD472080C8;
+	Mon, 15 Sep 2025 17:05:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=192.198.163.13
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757956150; cv=pass; b=jRuLz3OhCyXL6HWqADOAX9tQzJHniEFwi5PNsUgK24oFU5tuqqhWMKdMRG6pB30jp8CFkSDSXcTFUQl9a33QXX3tAwQ415AospaGban+wnQrNwoPbiR7AU2VA2wwAQOs0zE8HO+yGb6Ih1RL49xACXJuDG52CSe87dunwFv7v0k=
+	t=1757955908; cv=fail; b=MCswoOZCwlEGRjZ0W2sOe2sMnMuk/dIXUuhEKgxg+9PNP5wXxLpfOcl3t9uIT4lbx4368jBcceJdb6u/t/bBOnRGMU6pvLQuyPFTUAz38cgDzKOvOkbcfIbs8YwNtixvQXQ+fjdAKV9nL6vi1x2CX6JB9WTeuDG9zSj4QYBb/6w=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757956150; c=relaxed/simple;
-	bh=QcXwkxkXJJSavuVQocajTsXXfAli+FzNVs3Cosik7T4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=txkuqdfyDg9MRwZYU9FPR8wGfn+UDjNro9ILF4p0RbxeTb4RWrpjag8SOuqzOofZ8l74Wr4eHB8eBW/VgWBvYkOTN/YQv1WhWELyuKlUktm6EblD9u6OkfiWjDdoiIgN1Geb5BPGWLEruUAcdOM7Ff9xkVxIG+GbUKfxMPEn06Y=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=landley.net; spf=pass smtp.mailfrom=landley.net; dkim=pass (2048-bit key) header.d=landley.net header.i=@landley.net header.b=hHM4pYd/; arc=pass smtp.client-ip=23.83.218.249
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=landley.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=landley.net
-X-Sender-Id: dreamhost|x-authsender|rob@landley.net
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
-	by relay.mailchannels.net (Postfix) with ESMTP id 39E08702EA9;
-	Mon, 15 Sep 2025 16:43:58 +0000 (UTC)
-Received: from pdx1-sub0-mail-a263.dreamhost.com (100-107-6-72.trex-nlb.outbound.svc.cluster.local [100.107.6.72])
-	(Authenticated sender: dreamhost)
-	by relay.mailchannels.net (Postfix) with ESMTPA id 9BB55702282;
-	Mon, 15 Sep 2025 16:43:54 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1757954637; a=rsa-sha256;
-	cv=none;
-	b=jcH1teqBLlSbjLGm8wSnPehjkoxnqnKDUpG0VLOzFQvMVhZ2RDdFx48JVTnsWir31ckqMu
-	EvHw7ndPjn6x3ejP/grrUuf0A3eh0N2g0queP5YloUWZd31ELnY6AwtaV3MGseURoNdaoS
-	zscSVSlE1syzCOnfqWMXHqv2BNZPfKgMjyC2VEzAcakw89VkuKuBaP90ntArsIib7mZKX5
-	ZgdyEESnQCqTf94vRuZObuGhTP1RPfIX0PnGy3kQhlP5kUt/Dz9EbRDsiobBB3oTpkdYWy
-	k6PF9vasGxEY9B6Kc77KSSvLrFmYIRfBHJgN7n0ZqoQA6jkN51HIOvnq2TpRMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net;
-	s=arc-2022; t=1757954637;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:dkim-signature;
-	bh=xA0gszu8fOIEF8+fZ/zdihDvOFxt7L1IOq6Jl8u2kgw=;
-	b=uf5JurJxL6zPD5ygwIBxiT6IG/NGQSMFBfI/j25Q+JK2yjF3vO/ZeFUzkivSugs95eaoMg
-	59qSqcFbNTSjbKJMujtP6awqbU503n4OV/R0ncaq21v7J9x5Rmz4NG64ypHTRA39FK+kIQ
-	QcvIWdAN8US3InpTGJ0E/js2x9iRNDG6I4ylgwOyesBRTyLg247F0Kqo1EFdrR+ljEh1Av
-	5GQCiDYAEUXavwumWE/vBnelmY4Gbj+BC4uBSlh8dneVcfD4sq5ftE6dv/8SS57HKfdNIL
-	CE1mKhd2skglApswBp3iKe06w5MtCJr2cExHZcQU+hkmm5PzcKoApEbN8wR0GA==
-ARC-Authentication-Results: i=1;
-	rspamd-7d6d7bb5c5-768t4;
-	auth=pass smtp.auth=dreamhost smtp.mailfrom=rob@landley.net
-X-Sender-Id: dreamhost|x-authsender|rob@landley.net
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: dreamhost|x-authsender|rob@landley.net
-X-MailChannels-Auth-Id: dreamhost
-X-Unite-White: 537c80b115ac1c1b_1757954638045_367269675
-X-MC-Loop-Signature: 1757954638045:1180864403
-X-MC-Ingress-Time: 1757954638045
-Received: from pdx1-sub0-mail-a263.dreamhost.com (pop.dreamhost.com
- [64.90.62.162])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
-	by 100.107.6.72 (trex/7.1.3);
-	Mon, 15 Sep 2025 16:43:58 +0000
-Received: from [192.168.88.7] (unknown [209.81.127.98])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: rob@landley.net)
-	by pdx1-sub0-mail-a263.dreamhost.com (Postfix) with ESMTPSA id 4cQW7q36Pxz87;
-	Mon, 15 Sep 2025 09:43:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=landley.net;
-	s=dreamhost; t=1757954634;
-	bh=xA0gszu8fOIEF8+fZ/zdihDvOFxt7L1IOq6Jl8u2kgw=;
-	h=Date:Subject:To:Cc:From:Content-Type:Content-Transfer-Encoding;
-	b=hHM4pYd/5trdTXN8EQrQ00lNAioPSBHN1EqLeHX8tyv2t598Ei1gLYc67SRexxr0o
-	 V0b5BOT6HHaq8Ssq9in/lkr4tC1sG2QaTTQae3Lbu/rnfHom969Ad4mHyQ7NqbQYcw
-	 gP53fXuyiZlBDvddyeoS0qzObAO9y3gkmXtrQOaXHNUfK5TwQ+L96ToYgoS+Gu35CI
-	 V1YXP+0R1LGjVdii8SPZYWnlquLSvuDhcO4PELQxHEyOVux+Xbp+BpIruEIgRvA5Qu
-	 KHe36UtOS8E3jxHb8nrG1IU4Gx6FlURDKqDa9h0q4ahxoeXsq8J5/itWfZ6J5I+Smp
-	 owTGtnU7EFjUg==
-Message-ID: <0342fbda-9901-4293-afa7-ba6085eb1688@landley.net>
-Date: Mon, 15 Sep 2025 11:43:50 -0500
+	s=arc-20240116; t=1757955908; c=relaxed/simple;
+	bh=YYPaZypjXf3qByJ+LKoiVVb9R2e6NekpAthPZCIJLyQ=;
+	h=Date:From:To:CC:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=PO5n9XkvRbRKVomKeIQ8IUBmZGEZtk7rk2Hb1M7y3L/v1g6MEL4gzLRS7xrXD0sbwZCgE28x+86X0MC5S2IqH+Pt4U8Vl7ASdj1bZ7vbz952jhADfglORRo41epy938psoAnQusuEs1Ev187bF6RqGZGcQMuLC3GKZ5qctlHAkI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=OEuipUee; arc=fail smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1757955907; x=1789491907;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=YYPaZypjXf3qByJ+LKoiVVb9R2e6NekpAthPZCIJLyQ=;
+  b=OEuipUeeYHrpoleuiSxCXVYzq0L4O7q8WccB+iA9sNF0ZKCUV6RIZ6eH
+   UmeM+Uleg4TmrbP6EKXZvseNEyOCTv7sj5Dc6wAEoWTzAM5BS3LArYzuZ
+   47SdC775JNxNKEz+E1Mug59AjMtIa4SXPIxzkS7oC5WnhuZlyP/hdy+nN
+   HLALZ0VGagWp2MTM6xxuv8P8P4QVoQ3Mbxn7dLFx3X0K2s3Elk7tJnjAH
+   hrKFxQeQ/kCB4H9AXbWIpcW4P9FeRmmI03jzA9qO8iUMEQPhZfka6T5ty
+   GTJl/OMUmCcNU3dwptWIRN2F3G4MCGbk1fYpZ+5hCk1ELudQDrnNxLH4D
+   Q==;
+X-CSE-ConnectionGUID: OXG4RM6HTjCIxRTD2NN/7g==
+X-CSE-MsgGUID: Z2bT08yCQHWTBQclfjyG7w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11554"; a="62853977"
+X-IronPort-AV: E=Sophos;i="6.18,266,1751266800"; 
+   d="scan'208";a="62853977"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2025 10:05:05 -0700
+X-CSE-ConnectionGUID: TNv6z3SbRQG4wdqwKlnnmw==
+X-CSE-MsgGUID: 7I1xWa1UTSev0rldURMGHw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.18,266,1751266800"; 
+   d="scan'208";a="175094701"
+Received: from orsmsx901.amr.corp.intel.com ([10.22.229.23])
+  by fmviesa008.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2025 10:05:04 -0700
+Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Mon, 15 Sep 2025 10:05:03 -0700
+Received: from ORSEDG902.ED.cps.intel.com (10.7.248.12) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17 via Frontend Transport; Mon, 15 Sep 2025 10:05:03 -0700
+Received: from BL2PR02CU003.outbound.protection.outlook.com (52.101.52.71) by
+ edgegateway.intel.com (134.134.137.112) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.17; Mon, 15 Sep 2025 10:05:02 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LHQ+M+dzs1uQDFXOX7AAGLXM0w0aaYyvadL+sx9HDhKvDLROkwItnm9mogqRwpBv4BC4nG2dxAxBrL7Fq1Yi9AgTh0/eXoi5GIxvWD7tYEp33gVg2TEccIKy12/VeGyBDwhRTkDhPKt9wPQQlX2zvpfGrvM6dmr99dIJNUshqkdxKLf60VL3ek2hD9sCyLFdADU1TUH4J3R657cPaR9PdNpMjO1A+TYHNsndLoLhlRYck3iEo5D23f8yhTqaQW8hrxh+NJazl30Syuxr9GV8uvv3IqI71hmGEpcmZtpLY8hV2D65Nu7Ju6k8ORM+Y44Xl0alSooT+gWsx6TkmTk1VQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WLmkSb/5Ky/zgmIEirYXEVVW36LIrdBtsC2Pso4hxR4=;
+ b=ChUDs9XMGHneHYcK15g/sEfEn/Atn8FP5TAroQUKUBzhHVErY68OMMts0jSDpGw12ZmzEbRDB+lfGWEnwU2KKpTU/0YZTHMSHRTc/cFF5IXWJqtdWh3Os6GCzN4cmjR+9Ti86sYJr9BiLqbTrsxtTMLdarNzL4GszbFMgsS7ecEZLS3my2yHzXjTDG8lCPkYFGoFWH359lT6PPQTJCnSeU4VNbyWlp+89J+skDpyy69QjyxB+0JPWWzLqU+nZ4OR9igXeG1Fr+5+6M+jYzxGjovisSAObMn1YCkZKoTMDAl+x7zjio20YS3tbUYVGaktRchUMI7qj1ycAutsbeTcsQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from CY5PR11MB6139.namprd11.prod.outlook.com (2603:10b6:930:29::17)
+ by DS7PR11MB8805.namprd11.prod.outlook.com (2603:10b6:8:254::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.19; Mon, 15 Sep
+ 2025 17:04:58 +0000
+Received: from CY5PR11MB6139.namprd11.prod.outlook.com
+ ([fe80::7141:316f:77a0:9c44]) by CY5PR11MB6139.namprd11.prod.outlook.com
+ ([fe80::7141:316f:77a0:9c44%6]) with mapi id 15.20.9115.020; Mon, 15 Sep 2025
+ 17:04:58 +0000
+Date: Mon, 15 Sep 2025 12:04:53 -0500
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+To: Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>
+CC: <linux-pci@vger.kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>, Christian
+ =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, "=?utf-8?Q?Micha=C5=82?=
+ Winiarski" <michal.winiarski@intel.com>, Alex Deucher
+	<alexander.deucher@amd.com>, <amd-gfx@lists.freedesktop.org>, David Airlie
+	<airlied@gmail.com>, <dri-devel@lists.freedesktop.org>,
+	<intel-gfx@lists.freedesktop.org>, <intel-xe@lists.freedesktop.org>, "Jani
+ Nikula" <jani.nikula@linux.intel.com>, Joonas Lahtinen
+	<joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Simona Vetter <simona@ffwll.ch>, Tvrtko Ursulin <tursulin@ursulin.net>,
+	?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+	"Michael J . Ruhl" <mjruhl@habana.ai>, <linux-kernel@vger.kernel.org>,
+	<linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v2 00/11] PCI: Resizable BAR improvements
+Message-ID: <wqukxnxni2dbpdhri3cbvlrzsefgdanesgskzmxi5sauvsirsl@xor663jw2cdw>
+References: <20250915091358.9203-1-ilpo.jarvinen@linux.intel.com>
+Content-Type: text/plain; charset="iso-8859-1"; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250915091358.9203-1-ilpo.jarvinen@linux.intel.com>
+X-ClientProxiedBy: SJ0PR13CA0071.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c4::16) To CY5PR11MB6139.namprd11.prod.outlook.com
+ (2603:10b6:930:29::17)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/62] initrd: remove classic initrd support
-To: Askar Safin <safinaskar@zohomail.com>, linux-fsdevel@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Christian Brauner <brauner@kernel.org>, Al Viro <viro@zeniv.linux.org.uk>,
- Jan Kara <jack@suse.cz>, Christoph Hellwig <hch@lst.de>,
- Jens Axboe <axboe@kernel.dk>, Andy Shevchenko <andy.shevchenko@gmail.com>,
- Aleksa Sarai <cyphar@cyphar.com>,
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Julian Stecklina <julian.stecklina@cyberus-technology.de>,
- Gao Xiang <hsiangkao@linux.alibaba.com>, Art Nikpal <email2tema@gmail.com>,
- Andrew Morton <akpm@linux-foundation.org>, Eric Curtin <ecurtin@redhat.com>,
- Alexander Graf <graf@amazon.com>, Lennart Poettering <mzxreary@0pointer.de>,
- linux-arch@vger.kernel.org, linux-alpha@vger.kernel.org,
- linux-snps-arc@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
- loongarch@lists.linux.dev, linux-m68k@lists.linux-m68k.org,
- linux-mips@vger.kernel.org, linux-openrisc@vger.kernel.org,
- linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
- linux-sh@vger.kernel.org, sparclinux@vger.kernel.org,
- linux-um@lists.infradead.org, x86@kernel.org, Ingo Molnar
- <mingo@redhat.com>, linux-block@vger.kernel.org, initramfs@vger.kernel.org,
- linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-efi@vger.kernel.org, linux-ext4@vger.kernel.org,
- "Theodore Y . Ts'o" <tytso@mit.edu>, linux-acpi@vger.kernel.org,
- Michal Simek <monstr@monstr.eu>, devicetree@vger.kernel.org,
- Luis Chamberlain <mcgrof@kernel.org>, Kees Cook <kees@kernel.org>,
- Thorsten Blum <thorsten.blum@linux.dev>, Heiko Carstens <hca@linux.ibm.com>,
- patches@lists.linux.dev
-References: <20250912223937.3735076-1-safinaskar@zohomail.com>
-Content-Language: en-US
-From: Rob Landley <rob@landley.net>
-In-Reply-To: <20250912223937.3735076-1-safinaskar@zohomail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-On 9/12/25 17:38, Askar Safin wrote:
-> Intro
-> ====
-> This patchset removes classic initrd (initial RAM disk) support,
-> which was deprecated in 2020.
-
-Still useful for embedded systems that can memory map flash, but it's 
-getting harder to find embedded developers who consider new kernels an 
-improvement over older ones...
-
-> Initramfs still stays, and RAM disk itself (brd) still stays, too.
-
-While you're at it, could you fix static/builtin initramfs so PID 1 has 
-a valid stdin/stdout/stderr?
-
-A static initramfs won't create /dev/console if the embedded initramfs 
-image doesn't contain it, which a non-root build can't mknod, so the 
-kernel plumbing won't see it dev in the directory we point it at unless 
-we build with root access. This means the open("/dev/console") fails, so 
-init starts with no error reporting and we have to get far enough to 
-mount our own devtmpfs or similar and open our own stdout/stderr before 
-we can see any error output from init, which is kinda brittle.
-
-I posted various patches to make CONFIG_DEVTMPFS_MOUNT work for initmpfs 
-repeatedly since 2017, which also addressed it, but the kernel 
-community's been hermetically sealed against outside intrusion for a 
-while now...
-
-https://lkml.iu.edu/hypermail/linux/kernel/2005.1/09399.html
-
-https://lkml.iu.edu/2302.2/05597.html
-
-> init/do_mounts* and init/*initramfs* are listed in VFS entry in
-> MAINTAINERS, so I think this patchset should go through VFS tree.
-> This patchset touchs every subdirectory in arch/, so I tested it
-> on 8 (!!!) archs in Qemu (see details below).
-
-Oh hey, somebody using mkroot. Cool. :)
-
-My current "passes basic automated smoketests" list for 6.16 is:
-
-aarch64 armv4l armv5l armv7l i486 i686 m68k mips64 mipsel mips powerpc 
-powerpc64le powerpc64 riscv32 riscv64 s390x sh4 x86_64
-
-I'm assuming that's your 8: arm, x86, m68k, mips, ppc, riscv, s390x, 
-superh. (The variants are mostly 32/64 bit and bit/little endian, couple 
-architecture generations in there. The old ones go out of patent first, 
-you can always tell patents are about to expire and get generic clones 
-when corporate shills start insisting that support for something REALLY 
-NEEDS TO GO AWAY RIGHT NOW...)
-
-The or1k, microblaze, and sh4eb targets mostly work: sh4eb has broken 
-eithernet (never tracked down whether it's kernel or qemu that's wrong I 
-just know they disagree), or1k doesn't know how to exit ala 
-https://lists.gnu.org/archive/html/qemu-devel/2024-11/msg04522.html and 
-microblaze never wired up -hda to their hard drive emulation 
-https://lists.nongnu.org/archive/html/qemu-devel/2025-01/msg01149.html
-but I haven't had the spoons to argue with IBM Hat developers about 
-procedure compliance auditing.
-
-I need to track down a decent qemu emulation for armv7m, last time I 
-tried with vanilla was https://landley.net/notes-2023.html#23-02-2023 
-which was not promising, I downloaded a pic32 qemu fork last week, but 
-haven't had the spoons to follow up on that either. Or to ship a new 
-toybox/mkroot release: I've had 6.16 kernel patches since the week it 
-came out, unbreaking powerpc and adding fdpic support to sh4-mmu, but 
-hobbyist friendly this community ain't. Sigh, I should get back on the 
-(beating a dead) horse...
-
-I had hexagon userspace working for a while ("qemu-hexagon ls -l") but 
-no kernel for it: Taylor Simpson said he was going to post a 
-qemu-system-hexagon patchset with a comet board emulation, but that 
-architecture has no gcc support (there was a gcc fork on code aurora but 
-they abandoned it when the FSF went gplv3) so it needs an llvm-only 
-toolchain build with a non-vanilla musl libc fork... Honestly the 
-problem is compiler-rt sucks rocks: I should cycle back around to 
-https://landley.net/notes-2021.html#28-07-2021 but just haven't.
-
-(Although part of the "Just haven't" is that I posted a patch to lkml 
-making generic $CROSS_COMPILE prefixes automatically work whether your 
-toolchain was gcc or llvm, and the response was literally "we decided to 
-manually specify LLVM= on the command line so you must always do that 
-and we're refusing your two line fix to NOT need to do that". No really: 
-https://lkml.iu.edu/2302.2/08170.html
-
-> Warning: this patchset renames CONFIG_BLK_DEV_INITRD (!!!) to CONFIG_INITRAMFS
-> and CONFIG_RD_* to CONFIG_INITRAMFS_DECOMPRESS_* (for example,
-> CONFIG_RD_GZIP to CONFIG_INITRAMFS_DECOMPRESS_GZIP).
-> If you still use initrd, see below for workaround.
-
-Which will break existing configs for what benefit?
-
-I'm not convinced the churn improves matters. Presumably the kernel 
-command line paremeter is still rdinit= and grub still uses the "initrd" 
-command to load an external cpio.gz.
-
-But I bisect to find breakage like that every release so I assume the 
-other embedded linux developers... are mostly shipping 10+ year old 
-kernels that use half the memory of today's.
-
-> Details
-> ====
-> I not only removed initrd, I also removed a lot of code, which
-> became dead, including a lot of code in arch/.
-> 
-> Still I think the only two architectures I touched in non-trivial
-> way are sh and 32-bit arm.
-> 
-> Also I renamed some files, functions and variables (which became misnomers) to proper names,
-> moved some code around, removed a lot of mentions of initrd
-> in code and comments. Also I cleaned up some docs.
-
-Now that lkml.iu.edu is back up (yay!) all the links in 
-ramfs-rootfs-initramfs.txt can theoretically be fixed just by switching 
-the domain name.
-
-> For example, I renamed the following global variables:
-> 
-> __initramfs_start
-> __initramfs_size
-
-That already said initramfs, and you renamed it.
-
-> phys_initrd_start
-> phys_initrd_size
-> initrd_start
-> initrd_end
-
-Which is data delivered through grub's "initrd" command. Here's how I've 
-been explaining it to people for years:
-
-1) initrd is the external blob from the bootloader's initrd= option.
-
-2) initramfs is the extractor plumbing, _init code that gets discarded.
-
-3) rootfs is (for some reason) the name of the mounted filesystem in 
-/proc/mounts (because letting it say "ramfs" or "tmpfs" like normal in 
-/proc/mounts would be consistent and immediately understandable, so they 
-couldn't have that).
-
-(No I don't know why it's called rootfs. Having things like df not show 
-overmounted filesystems isn't special case logic, why...? The argument 
-to special case this because you can't unmount it is like saying PID 1 
-shouldn't have a number because it can't exit. I would happily call the 
-whole thing initramfs... but it's already not.)
-
-> to:
-> 
-> __builtin_initramfs_start
-> __builtin_initramfs_size
-> phys_external_initramfs_start
-> phys_external_initramfs_size
-> virt_external_initramfs_start
-> virt_external_initramfs_end
-
-Do you believe people will understand what the slightly longer names are 
-without looking them up?
-
-I'm all for removing obsolete code, but a partial cleanup that still 
-leaves various sharp edges around isn't necessarily a net improvement. 
-Did you remove the NFS mount code from init/do_mounts.c? Part of the 
-initramfs justification back in 2005 was "you can have a tiny initramfs 
-set up our root filesystem so most of the init special casing can go"... 
-and then they added CONFIG_DEVTMPFS_MOUNT but made it ONLY apply to the 
-fallback root after the system has decided NOT to stay on rootfs, and 
-ignored my patches to at least make it consistent.
-
-The one config symbol that really seems to bite people in this area is 
-BLK_DEV_INITRD because a common thing people running from initramfs want 
-to do is yank the block layer entirely (CONFIG_BLOCK=n) and use 
-initramfs instead, and needing to enable CONFIG_BLK_DEV_INITRD while
-
-And the INSANE part is they generally want a static initrd to do it so 
-they're not using the external loader, but Kconfig has INITRAMFS_SOURCE 
-under CONFIG_BLK_DEV_INITRD and it's a mess. Renaming THAT symbol would 
-be good.
-
-But then, CONFIG_BLOCK is hidden under CONFIG_EXPERT which selects 
-DEBUG_KERNEL (INCREASING KERNEL SIZE!!!) and thus everybody who does 
-this patches the kconfig plumbing to be less stupid anyway. So the 
-problem isn't JUST renaming the symbol...
-
-(Oh CONFIG_EXPERT is SO STUPID. It's got a menu under it, but 
-CONFIG_BLOCK isn't in that menu, it's at the top of menuconfig between 
-loadable module support and executable file formats, just invisible 
-unless you go down into a menu and switch on a setting and then back out 
-to go find it. WHY WOULD YOU DO THAT?)
-
-> New names precisely capture meaning of these variables.
-
-To you. I'm not entirely sure what virt_external means. (Yes I could go 
-read the code. No I don't want to. I EXPECT to need context and 
-refreshing stuff, but having it change out from under me since the LAST 
-time I did that is annoying when it's "same thing, new name, because".)
-
-It makes more sense to YOU because you changed it to smell like you. 
-Meanwhile 35 years of installed base expertise in other people's heads 
-has been discarded and developed version skew for anyone maintaining an 
-existing system. (That's not a "never do this", that's a "be aware 
-humans consistently have the wrong weightings in our heads for this".)
-
-Personally I usually have to look it up either way. And am spending more 
-and more of my time poking at older kernels rather because newer stuff 
-has either removed support for things I need or grown dependencies. (And 
-because there's 20 years of installed base still in various stages of 
-use, I'm personally likely to spend more time looking at the old names 
-than the new ones.)
-
-> This will break all configs out there (update your configs!).
-> Still I think this is okay,
-
-Because you don't have to clean up after it.
-
-> because config names never were part of stable API.
-
-I can forward everyone who asks me questions to you, or just agree when 
-they tell me it's yet another reason not to upgrade.
-
-> Other user-visible changes:
-> 
-> - Removed kernel command line parameters "load_ramdisk" and
-> "prompt_ramdisk", which did nothing and were deprecated
-
-Sure.
-
-> - Removed kernel command line parameter "ramdisk_start",
-> which was used for initrd only (not for initramfs)
-
-Some bootloaders appended that to the kernel command line to specify 
-where in memory they've loaded the initrd image, which could be a 
-cpio.gz once upon a time. No idea what regressions happened since though.
-
-(Last new bootloader I was involved with that had to make it work used 
-some horrible hack editing a dtb at a fixed offset, like the old "rdev" 
-trick but more brittle. Because "device tree better" than human readable 
-textual mechanism. Fixing ramdisk_start to work right sounded like a 
-more sane approach to me, but...)
-
-> I tested my patchset on many architectures in Qemu using my Rust
-> program, heavily based on mkroot [1].
-
-You rewrote a 400 line bash script in rust.
-
-Yeah, that's a rust developer. (And it smells like you now...)
-
-> I used the following cross-compilers:
-> 
-> aarch64-linux-musleabi
-> armv4l-linux-musleabihf
-> armv5l-linux-musleabihf
-> armv7l-linux-musleabihf
-> i486-linux-musl
-> i686-linux-musl
-> mips-linux-musl
-> mips64-linux-musl
-> mipsel-linux-musl
-> powerpc-linux-musl
-> powerpc64-linux-musl
-> powerpc64le-linux-musl
-> riscv32-linux-musl
-> riscv64-linux-musl
-> s390x-linux-musl
-> sh4-linux-musl
-> sh4eb-linux-musl
-> x86_64-linux-musl
-
-or1k and microblaze work, they just don't pass the full smoketest for 
-reasons that shouldn't affect initramfs testing.
-
-I'm still waiting for Rich to ship the next musl release to do new 
-toolchains...
-
-https://www.openwall.com/lists/musl/2025/08/04/1
-
-> Workaround
-> ====
-> If "retain_initrd" is passed to kernel, then initramfs/initrd,
-> passed by bootloader, is retained and becomes available after boot
-> as read-only magic file /sys/firmware/initrd [3].
-
-Common use case for eg romfs is memory mapped flash or rom, so the 
-address range in question isn't actually ram anyway. Mostly on mmu 
-systems you just don't want the mapping to go away, so the kernel can 
-still reach out and read it.
-
-> This is even better than classic initrd, because:
-> - You can use fs not supported by classic initrd, for example erofs
-
-Network block device was the most recent one I saw used, but it had a 
-tiny initramfs to set up and switch_root into it...
-
-(Network block device != network filesystem. I have a todo item to 
-integrate nbd-server into mkroot/testroot.sh but "-hda works" is one of 
-the things it's testing...)
-
-> - One copy is involved (from /sys/firmware/initrd to some file in /)
-> as opposed to two when using classic initrd
-
-Embedded developers have always been reaching out and using mappable 
-flash directly. Vitaly Wool's ELC talk in 2015 (about running Linux in 
-256k of sram, yes one quarter of one megabyte) described the process:
-
-https://elinux.org/images/9/90/Linux_for_Microcontrollers-_From_Marginal_to_Mainstream.pdf
-
-Rob
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY5PR11MB6139:EE_|DS7PR11MB8805:EE_
+X-MS-Office365-Filtering-Correlation-Id: 75239d60-9000-4494-64b2-08ddf479ffd3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?iso-8859-1?Q?vGNjZM28kr6V8JI11y4MvKGGBOdfTgmV6gl3EW7UOJAKYTwTiQkKsV5ykz?=
+ =?iso-8859-1?Q?5lG/RIaMDTbXM/7iveYuNd9H9c5LgdHr8g6H9eGKv9MUo2ZCsCk5CVoOee?=
+ =?iso-8859-1?Q?+KLlt7I9kh+aufMnUHbR0rDlBa7u0gx2apeErSCw4wyQHaCtxbJpVx4Wvq?=
+ =?iso-8859-1?Q?GDw3WZqXHiU6R2EjAMd0goO2G0yG/7Zs3SrsJc+8XJ9vK9XC+PJQ0ieVo6?=
+ =?iso-8859-1?Q?GDC6KDcv5SzM7Au71IkSxVWARoysEc75VyBKIiAEyHNUwPyWqOClEHGD1f?=
+ =?iso-8859-1?Q?QnV/glostv/xAxP4MQHww0rQJTdhEIADvit53gjLfzE4v2GK7hZy41Eop1?=
+ =?iso-8859-1?Q?BwidtMAq0VxdqaEBv0uBdV0GeeUtHHLSV5AZl5Ce1plA1kL3m72D65xj6p?=
+ =?iso-8859-1?Q?QsOxaKs/BZOX91e7vilpAd+KqarrzhtG+EO389bEw2Ei0ds9xQjE4V6Pdp?=
+ =?iso-8859-1?Q?8vxPcQMzfv/qdbD5nKtLBf0IO05AUWHem0HDge+K//H/cyT4dI4E9iOQQ9?=
+ =?iso-8859-1?Q?aFWzSxZXdFwHOrx542mWmRQfE7tQay3/r/Y3/HbMGH+fbtwbMiSAG4BT4C?=
+ =?iso-8859-1?Q?K4w0di0NmxDp4ATYvHu8D8Y1VGmAsxRug015EVniA7L9BGRX3v5I2FYL9/?=
+ =?iso-8859-1?Q?1p4ei8jfEvT0UhrjV1unL/laMwGL8XC3LILmcPFyOwdl+8wuyZbLM3wMr6?=
+ =?iso-8859-1?Q?2L+vF7hEEWz6vvQyQIsFKmTTgCj3L+E23hTiWEPKY9HtLsutSl1D42/HH6?=
+ =?iso-8859-1?Q?j3D21OMKahBTdcgiC6gxX3h5TLn2CTHR4pnupdQjBPgpIyM72FRNpiL/0b?=
+ =?iso-8859-1?Q?gPHKs24ZtkdJfYbU4Cyv0vri2vmkyXzldu4l8F2GlXeq1R8EXLEVHqHTee?=
+ =?iso-8859-1?Q?6MloO+dEEE5M8MiI4kp02d+wHRFPEymeQ4wWybJSZJcRtaozkgKvjK9N9N?=
+ =?iso-8859-1?Q?Z5cwdvZNPe7OmGg+Eb9WZnbFjw0qLt7RSVvMdguLThQ2Lwe/ZgojYSDwmk?=
+ =?iso-8859-1?Q?JGS4zu/2VoXESniESVuICyaONL3bKstnaz4+EANH1OeSL7wTbuSO+FfMY+?=
+ =?iso-8859-1?Q?nF7f3Tdx0r245bXwntW5s3zmPnDHqAszRIYFWIXRyokS+AP6nPN58KFy4+?=
+ =?iso-8859-1?Q?WF+8WvfkFPsQIXi9Dba8jUIe02NysroYszw6SnMYVCfIkKnhh3foLi+Gel?=
+ =?iso-8859-1?Q?8mZahW581sFC7hgaQLZtGv729KE0oHHFGP1/MUcYLDj+/WvvZwVE2qDrkD?=
+ =?iso-8859-1?Q?6ebD3P/G532pyFgXzsV9OQP42DRBRCpRER38Tt906elJklgxoV8ZIScVDJ?=
+ =?iso-8859-1?Q?V/KapgUBnapHllrmVjcmtrv1LBe7gTYoXPB2590WeQXcvXbNXZeYDlntmx?=
+ =?iso-8859-1?Q?6VABHcyq1dF+CSf5fKp5vy4Nfzn6qSgxIDYQ0dCpeatxmE/OPBlxB7tkQI?=
+ =?iso-8859-1?Q?r84mPdw0mmnvvUfmeiXID/6ZWZj0QwhvFwRDd4kgwvCN3GbBvNOxfi9lVu?=
+ =?iso-8859-1?Q?s=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CY5PR11MB6139.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?FXCviziYuhehGS/3hFYtW3r+HiP8Z66uio2ofNm4S0hcZ0oRzfrFAjzv4u?=
+ =?iso-8859-1?Q?+OBtgx8SFDXGsbbPWQcEgkFve4N2ISRT4SZtSeS/JeBBxvLzYNbRf/7gOl?=
+ =?iso-8859-1?Q?mNuNdR0RJn3y+hY+oZCXpgyuqH6N85aSKKHUqKfSM8KOGu24vN57vZr/zc?=
+ =?iso-8859-1?Q?GzEbJ2vzFkTAIJl56lLu9Y/zCxoaEqQBZr3cVFyUk7RDCnngvzrIlSsGZb?=
+ =?iso-8859-1?Q?jgbVOMT2vmsi3h8iNV0CR4wuzvU4xoCNqYrn8oy8K9ifW+UInMBaD3S7eq?=
+ =?iso-8859-1?Q?oqc9bPb1GwO9/TDgsfDny5upJpmnaeBjwR5AGC/MaFGU38Rxu1Rhi9WKl3?=
+ =?iso-8859-1?Q?ekAAZocb+WXDWt3uDdXqU0VwH+kqlKxsmEgbSNum1BBOIrgZqiICsNvsrw?=
+ =?iso-8859-1?Q?6TNdJzsmVM7jI+hFQpN9Z288eiAa/7gYM9BGSloK8y4iMD5TWV7mhRpD8h?=
+ =?iso-8859-1?Q?iNjTNVjRU8Ow4Yr7aDGpYNV32RiWn16Aa4DWofgduIaNufR+QkUkGpCu2A?=
+ =?iso-8859-1?Q?pqVcGArcHy0j3yA6HLxUBHZ6UKqSQTG15UxGh2853ekSV3Jf4cRKU78OKN?=
+ =?iso-8859-1?Q?BbmJ1qg7rc5CWEH54es2lEORzvf06arq8wgpY8rox7nsr31GoxAetk1FB2?=
+ =?iso-8859-1?Q?P8DJ8KWokX1xMM7NC/jtNXtYa9TUOKuPRcrSJ+QMvt/23PHwrDB83lKmR4?=
+ =?iso-8859-1?Q?HQQLWCoPiSQf4SiEpMCOTbA+bCFPhvquggB476yDsbWbt5fj/vw591rfw7?=
+ =?iso-8859-1?Q?SGPx324TqzAmXZJ3tgf7dartcpvyX+9DeG47J44Bc/iS4EOU7eFlgLHxZa?=
+ =?iso-8859-1?Q?aMWwg4nOAeMFC3rriXffRDByfI4Zz50zjFrcCwqe6icUKndE9uXVTsNL9y?=
+ =?iso-8859-1?Q?ZAHZu1+Y5frjTuo+glIA5C6gl0Cy3oWC6P73yf3h3VFwPItyXHE07umRIb?=
+ =?iso-8859-1?Q?OkVHmUXtU2W9T+1yANYXDRicSgekrv9qz5UGwOZZ+f4wLGdLOTI5liRdBZ?=
+ =?iso-8859-1?Q?+MwgzBZlCHnFD6s8jjNmSt4LkopHcKPmJe0DQS5nQ3nyN0jjeJgk9Aa7x+?=
+ =?iso-8859-1?Q?aQyOjotOrzpEFYxfSrbKo9gMIBUepVYyllziwppCSzgbDI1nfykB/Fk+Ou?=
+ =?iso-8859-1?Q?i41oOoTvZRkW7zcfkuBZes7+b+2VHmtKbGL/sCcdELjRefU12FEkOqmIa1?=
+ =?iso-8859-1?Q?jDj+uTVxf++VRoM8hz9ewhjRpyhgVcw4VlL0pX+U5ajD3q2PgkKNlNvvg1?=
+ =?iso-8859-1?Q?3AxugZBZt2fDUDcmNflZ2XcOjmJ09msy7o5OZGsnQ8q9hggUSVIn9vsDIB?=
+ =?iso-8859-1?Q?Vgo7xW9QdTnZ62RMWOMCy86UqKgxBD0J1FVPIItG3/mkc70hhmiy0XGEAW?=
+ =?iso-8859-1?Q?Hdwyf0U1L46G61BRAvDQIyK9X4QbOz4bstOf+ij1r9RmJt42fdTfVf5rnb?=
+ =?iso-8859-1?Q?KV+cZ07MewRCJO8YD3FjYT46ZYZ+gtgNmnYT94NzO47vn8r3AS2mwVylOP?=
+ =?iso-8859-1?Q?cE5x8S6V8HzC9pBlmu00pvlAwlW8h1LyHbGn5uRNJjUP9BTadVXojJipK3?=
+ =?iso-8859-1?Q?5WZX6XSErKdM8ZaDlANBvFBPjoFvUgaR8agBJexGzc9yFOf7/Un3hcdTUf?=
+ =?iso-8859-1?Q?zHJGeAuNiC57CGx4aGYtXq1idmTJhz8UEINyzjvFiA828inlqeIYOQug?=
+ =?iso-8859-1?Q?=3D=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75239d60-9000-4494-64b2-08ddf479ffd3
+X-MS-Exchange-CrossTenant-AuthSource: CY5PR11MB6139.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2025 17:04:58.4007
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YpbCg1oYSXht8JUcr/fWXHvf0xEIdpCKAyRl814ifbydikPJI0K7nN6SHfuC5II9NRJ/hGIkPvcTvshJFFQKRMbM+Jd6ZNWwHyF51q8faZo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB8805
+X-OriginatorOrg: intel.com
+
+On Mon, Sep 15, 2025 at 12:13:47PM +0300, Ilpo Järvinen wrote:
+>pci.c has been used as catch everything that doesn't fits elsewhere
+>within PCI core and thus resizable BAR code has been placed there as
+>well. Move Resizable BAR related code to a newly introduced rebar.c to
+>reduce size of pci.c. After move, there are no pci_rebar_*() calls from
+>pci.c indicating this is indeed well-defined subset of PCI core.
+>
+>Endpoint drivers perform Resizable BAR related operations which could
+>well be performed by PCI core to simplify driver-side code. This
+>series adds a few new API functions to that effect and converts the
+>drivers to use the new APIs (in separate patches).
+>
+>While at it, also convert BAR sizes bitmask to u64 as PCIe spec already
+>specifies more sizes than what will fit u32 to make the API typing more
+>future-proof. The extra sizes beyond 128TB are not added at this point.
+>
+>These are based on pci/main plus a simple "adapter" patch to add the
+>include for xe_vram_types.h that was added by a commit in drm-tip.
+>Hopefully that is enough to avoid the within context conflict with
+>BAR_SIZE_SHIFT removal to let the xe CI tests to be run for this
+>series.
+>
+>There are two minor conflicts with the work in pci/resource but I'm
+>hesitant to base this on top of it as this is otherwise entirely
+>independent (and would likely prevent GPU CI tests as well). If we end
+>up having to pull the bridge window select changes, there should be no
+>reason why this does have to become collateral damage (so my
+>suggestion, if this is good to go in this cycle, to take this into a
+>separate branch than pci/resource and deal with those small conflicts
+>while merging into pci/next).
+>
+>I've tested sysfs resize, i915, and xe BAR resizing functionality. In
+>the case of xe, I did small hack patch as its resize is anyway broken
+>as is because BAR0 pins the bridge window so resizing BAR2 fails. My
+>hack caused other problems further down the road (likely because BAR0
+>is in use by the driver so releasing it messed assumptions xe driver
+>has) but the BAR resize itself was working which was all I was
+
+is the hack you mention here to release all BARs before attempting the
+resize?
+
+>interested to know. I'm not planning to pursue fixing the pinning
+>problem within xe driver because the core changes to consider maximum
+>size of the resizable BARs should take care of the main problem by
+>different means.
+
+I'd actually like to pursue that myself as that could be propagated to
+stable since we do have some resize errors in xe with BMG that I wasn't
+understanding. It's likely due to xe_mmio_probe_early() taking a hold of
+BAR0 and not expecting it to be moved. We could either remap if we have
+have to resize or just move the resize logic early on.
+
+thanks
+Lucas De Marchi
+
+>
+>Some parts of this are to be used by the resizable BAR changes into the
+>resource fitting/assingment logic but these seem to stand on their own
+>so sending these out now to reduce the size of the other patch series.
+>
+>v2:
+>- Kerneldoc:
+>  - Improve formatting of errno returns
+>  - Open "ctrl" -> "control"
+>  - Removed mislead "bit" words (when referring to BAR size)
+>  - Rewrote pci_rebar_get_possible_sizes() kernel doc to not claim the
+>    returned bitmask is defined in PCIe spec as the capability bits now
+>    span across two registers in the spec and are not continuous (we
+>    don't support the second block of bits yet, but this API is expected
+>    to return the bits without the hole so it will not be matching with
+>    the spec layout).
+>- Dropped superfluous zero check from pci_rebar_size_supported()
+>- Small improvement to changelog of patch 7
+>
+>Ilpo Järvinen (11):
+>  PCI: Move Resizable BAR code into rebar.c
+>  PCI: Cleanup pci_rebar_bytes_to_size() and move into rebar.c
+>  PCI: Move pci_rebar_size_to_bytes() and export it
+>  PCI: Improve Resizable BAR functions kernel doc
+>  PCI: Add pci_rebar_size_supported() helper
+>  drm/i915/gt: Use pci_rebar_size_supported()
+>  drm/xe/vram: Use PCI rebar helpers in resize_vram_bar()
+>  PCI: Add pci_rebar_get_max_size()
+>  drm/xe/vram: Use pci_rebar_get_max_size()
+>  drm/amdgpu: Use pci_rebar_get_max_size()
+>  PCI: Convert BAR sizes bitmasks to u64
+>
+> Documentation/driver-api/pci/pci.rst        |   3 +
+> drivers/gpu/drm/amd/amdgpu/amdgpu_device.c  |   8 +-
+> drivers/gpu/drm/i915/gt/intel_region_lmem.c |  10 +-
+> drivers/gpu/drm/xe/xe_vram.c                |  32 +-
+> drivers/pci/Makefile                        |   2 +-
+> drivers/pci/iov.c                           |   9 +-
+> drivers/pci/pci-sysfs.c                     |   2 +-
+> drivers/pci/pci.c                           | 145 ---------
+> drivers/pci/pci.h                           |   5 +-
+> drivers/pci/rebar.c                         | 314 ++++++++++++++++++++
+> drivers/pci/setup-res.c                     |  78 -----
+> include/linux/pci.h                         |  15 +-
+> 12 files changed, 350 insertions(+), 273 deletions(-)
+> create mode 100644 drivers/pci/rebar.c
+>
+>
+>base-commit: 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+>prerequisite-patch-id: 35bd3cd7a60ff7d887450a7fdde73b055a76ae24
+>-- 
+>2.39.5
+>
 
