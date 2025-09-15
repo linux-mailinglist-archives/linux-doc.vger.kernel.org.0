@@ -1,140 +1,147 @@
-Return-Path: <linux-doc+bounces-60582-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60574-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A347B57EB6
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 16:20:30 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF52DB57DFF
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 15:54:15 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 79C8A480875
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 14:17:59 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 58A211892D0A
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 13:51:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE1D01F4C90;
-	Mon, 15 Sep 2025 14:17:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CFC0F1F4C83;
+	Mon, 15 Sep 2025 13:50:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CFIodkMd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mailout2.hostsharing.net (mailout2.hostsharing.net [83.223.78.233])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A59E627461;
-	Mon, 15 Sep 2025 14:17:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=83.223.78.233
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6FF21F4C8B;
+	Mon, 15 Sep 2025 13:50:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757945876; cv=none; b=I/oirZ2DPrDNHW8ZxRd7OZTGm8W4hwVN6mlu81ZqkKXA0JtqFyhelRemwKbQvTxKSM1G1hxkNgEcmgT3y6ZHbcEVikLhJjzS5IEU696EULnt8goivA3sJNGoKfDKqWQ5i15LXX1JI2j4NQbM8r4h4S2LYmxVO3Pu9VQzanRrGQ0=
+	t=1757944242; cv=none; b=syoJbqWnL4rF/xbsK/VGHxLr7+uy2UqoR2hP7eMK13NNe+4d/95nrIWJKXvhvZveocE6JWKG0o9cd5fuII43Eo5kRA4kZ/H8U6hfLiSevGUtsHMILudjMiMktpWuZVsqHutQU4Scc1FT/6+gl8cZOt+CVWfdh0x14Cjwj3sEQJw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757945876; c=relaxed/simple;
-	bh=5bNpN13B5tY+0LgnctPNRzOuLatTSOTgfjc5DoFZQnI=;
-	h=Message-ID:In-Reply-To:References:From:Date:Subject:To:Cc; b=X06bk/Hp6uqJuiIn7Jc7QYsi2sK+VQnYfJ/sc5833rUdgua3S7nzwjTfFUNcSKOf2oVs2gTHrlNADXWNOLfxTxYsKMNqNers2Yg7XiSlETX4bbeG29R1jcqWzgJt4tksYysSgUqfByn2s5+phRo87jl5YkutsjH+N2coS7RnBRU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=wunner.de; spf=pass smtp.mailfrom=wunner.de; arc=none smtp.client-ip=83.223.78.233
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=wunner.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=wunner.de
-Received: from h08.hostsharing.net (h08.hostsharing.net [IPv6:2a01:37:1000::53df:5f1c:0])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "*.hostsharing.net", Issuer "RapidSSL TLS RSA CA G1" (verified OK))
-	by mailout2.hostsharing.net (Postfix) with UTF8SMTPS id B90DD2C1E4C1;
-	Mon, 15 Sep 2025 16:17:52 +0200 (CEST)
-Received: from localhost (unknown [89.246.108.87])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by h08.hostsharing.net (Postfix) with UTF8SMTPSA id 8D379600B5BC;
-	Mon, 15 Sep 2025 16:17:52 +0200 (CEST)
-X-Mailbox-Line: From db56b7ef12043f709a04ce67c1d1e102ab5f4e19 Mon Sep 17 00:00:00 2001
-Message-ID: <db56b7ef12043f709a04ce67c1d1e102ab5f4e19.1757942121.git.lukas@wunner.de>
-In-Reply-To: <cover.1757942121.git.lukas@wunner.de>
-References: <cover.1757942121.git.lukas@wunner.de>
-From: Lukas Wunner <lukas@wunner.de>
-Date: Mon, 15 Sep 2025 15:50:04 +0200
-Subject: [PATCH v2 4/4] Documentation: PCI: Tidy error recovery doc's PCIe
- nomenclature
-To: Bjorn Helgaas <helgaas@kernel.org>, Jonathan Corbet <corbet@lwn.net>
-Cc: Terry Bowman <terry.bowman@amd.com>, Ilpo Jarvinen <ilpo.jarvinen@linux.intel.com>, Sathyanarayanan Kuppuswamy <sathyanarayanan.kuppuswamy@linux.intel.com>, Niklas Schnelle <schnelle@linux.ibm.com>, Linas Vepstas <linasvepstas@gmail.com>, "Mahesh J Salgaonkar" <mahesh@linux.ibm.com>, "Oliver OHalloran" <oohall@gmail.com>, linuxppc-dev@lists.ozlabs.org, linux-pci@vger.kernel.org, linux-doc@vger.kernel.org, Brian Norris <briannorris@chromium.org>
+	s=arc-20240116; t=1757944242; c=relaxed/simple;
+	bh=VVQSZnONJmQxNkcY9qahnzNb2KqMvwCvZikB0PJzuC8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=eSR6eyOP2adN+v4WoVs7S9bkXapleXXbUK3dfk/cgyyjcid/8kAIHgqQkzye6fivKyAMgWaeYnLkAucv9Jp2BTXuBY/Zhz4uheXQ7fxRSf4TctZ5EQU0sV1XREhqnVbXnRkwmmQUJ1XJ8hWE7gM1eD+Q4aQpj7iKzGa1wcRU13o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CFIodkMd; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FEC1C4CEF9;
+	Mon, 15 Sep 2025 13:50:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1757944242;
+	bh=VVQSZnONJmQxNkcY9qahnzNb2KqMvwCvZikB0PJzuC8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=CFIodkMdEQxYvS8UdQjhKiaJ1Oud523FjVkTUx9kUtbjwkeBFAKXSWGZ5bNi9SlXi
+	 J4f9zHrf7vdowBooqY2YS8nqH/Bl/Dy1zt/4bUiTzZnL8WMpfQcjTNugzG12EGlEvZ
+	 35mi3GZhTBzkyb5YHO/LGs8cHzY9Tml3voBlKNzvYU2IOKySRDm3bV7vZdVAdGQ7AN
+	 KsPQjaJDx5Jr4lLMGmBJLcQVIsx+hmrvj+OY4aUJDW0f91TZDkNngy11AHSbHYU5T2
+	 sL6pFvAHW9JRmkSpPOYUnZJXNYL94H3xKTlA+oK1k2kJrQ5K0ruln0VV/yW/We0lYt
+	 v6SJ9I+tuNmRA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1uy9bL-0000000AJon-36ku;
+	Mon, 15 Sep 2025 15:50:39 +0200
+Date: Mon, 15 Sep 2025 15:50:39 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jani Nikula <jani.nikula@linux.intel.com>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
+	Akira Yokosawa <akiyks@gmail.com>, corbet@lwn.net, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, tmgross@umich.edu
+Subject: Re: [PATCH v4 08/19] tools/docs: sphinx-build-wrapper: add a wrapper
+ for sphinx-build
+Message-ID: <s5gyu27qlfg7frb4v3ssqms6inqammtakwchgl635r3ahooj5n@vhw5tnyti7nd>
+References: <20250910153334.0b3e1440@foz.lan>
+ <28c45f53-a3ff-428f-ba99-ebb09e0581d3@gmail.com>
+ <20250912130420.6c14dbbd@foz.lan>
+ <f3d142be-3980-4d4e-9d66-c03276694bf9@gmail.com>
+ <6hhhn5go2yb7ecdrqtuti23i6pfgckqbdk5nhuhn2ijrhmvvmw@awswbm3tvmwp>
+ <aa2aa8d2-f7f1-4f04-a9b0-f08160f9ea81@gmail.com>
+ <20250915125805.25b48d09@foz.lan>
+ <803501857ad28fc9635c84b7db08250dc4b9a451@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <803501857ad28fc9635c84b7db08250dc4b9a451@intel.com>
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Commit 11502feab423 ("Documentation: PCI: Tidy AER documentation")
-replaced the terms "PCI-E", "PCI-Express" and "PCI Express" with "PCIe"
-in the AER documentation.
+On Mon, Sep 15, 2025 at 03:54:26PM +0300, Jani Nikula wrote:
+> On Mon, 15 Sep 2025, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> > IMHO, long term solution is to change SPHINXDIRS into something
+> > like:
+> >
+> > 	make O=doc_build SPHINXTITLE="Media docs" SPHINXDIRS="admin-guide/media userspace-api/media driver-api/media/"
+> >
+> > would create something similar to this(*):
+> >
+> > 	doc_build/sphindirs/
+> > 		|
+> > 		+--> index.rst
+> > 		+--> admin-guide -> {srcdir}/Documentation/admin-guide/media/
+> > 		+--> usespace-api -> {srcdir}/Documentation/admin-guide/media/
+> > 		\--> driver-api -> {srcdir}/Documentation/admin-guide/media/
+> 
+> So you're basically suggesting the documentation build should support
+> cherry-picking parts of the documentation with categories different from
+> what the upstream documentation has? 
 
-Do the same in the documentation on PCI error recovery.  While at it,
-add a missing period and a missing blank.
+No. I'm saying that, if we want to have a single build process
+for multiple sphinxdirs, that sounds to be the better way to do it
+to override sphinx-build limitation of having single source directory.
 
-Signed-off-by: Lukas Wunner <lukas@wunner.de>
-Reviewed-by: Brian Norris <briannorris@chromium.org>
----
- Documentation/PCI/pci-error-recovery.rst | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+The advantages is that:
+    - brings more performance, as a single build would be enough;
+    - cross-references between them will be properly solved.
 
-diff --git a/Documentation/PCI/pci-error-recovery.rst b/Documentation/PCI/pci-error-recovery.rst
-index 9e1e2f2a13fa..5df481ac6193 100644
---- a/Documentation/PCI/pci-error-recovery.rst
-+++ b/Documentation/PCI/pci-error-recovery.rst
-@@ -13,7 +13,7 @@ PCI Error Recovery
- Many PCI bus controllers are able to detect a variety of hardware
- PCI errors on the bus, such as parity errors on the data and address
- buses, as well as SERR and PERR errors.  Some of the more advanced
--chipsets are able to deal with these errors; these include PCI-E chipsets,
-+chipsets are able to deal with these errors; these include PCIe chipsets,
- and the PCI-host bridges found on IBM Power4, Power5 and Power6-based
- pSeries boxes. A typical action taken is to disconnect the affected device,
- halting all I/O to it.  The goal of a disconnection is to avoid system
-@@ -206,7 +206,7 @@ reset or some such, but not restart operations. This callback is made if
- all drivers on a segment agree that they can try to recover and if no automatic
- link reset was performed by the HW. If the platform can't just re-enable IOs
- without a slot reset or a link reset, it will not call this callback, and
--instead will have gone directly to STEP 3 (Link Reset) or STEP 4 (Slot Reset)
-+instead will have gone directly to STEP 3 (Link Reset) or STEP 4 (Slot Reset).
- 
- .. note::
- 
-@@ -259,14 +259,14 @@ The driver should return one of the following result codes:
- 
- The next step taken depends on the results returned by the drivers.
- If all drivers returned PCI_ERS_RESULT_RECOVERED, then the platform
--proceeds to either STEP3 (Link Reset) or to STEP 5 (Resume Operations).
-+proceeds to either STEP 3 (Link Reset) or to STEP 5 (Resume Operations).
- 
- If any driver returned PCI_ERS_RESULT_NEED_RESET, then the platform
- proceeds to STEP 4 (Slot Reset)
- 
- STEP 3: Link Reset
- ------------------
--The platform resets the link.  This is a PCI-Express specific step
-+The platform resets the link.  This is a PCIe specific step
- and is done whenever a fatal error has been detected that can be
- "solved" by resetting the link.
- 
-@@ -288,13 +288,13 @@ that is equivalent to what it would be after a fresh system
- power-on followed by power-on BIOS/system firmware initialization.
- Soft reset is also known as hot-reset.
- 
--Powerpc fundamental reset is supported by PCI Express cards only
-+Powerpc fundamental reset is supported by PCIe cards only
- and results in device's state machines, hardware logic, port states and
- configuration registers to initialize to their default conditions.
- 
- For most PCI devices, a soft reset will be sufficient for recovery.
- Optional fundamental reset is provided to support a limited number
--of PCI Express devices for which a soft reset is not sufficient
-+of PCIe devices for which a soft reset is not sufficient
- for recovery.
- 
- If the platform supports PCI hotplug, then the reset might be
-@@ -338,7 +338,7 @@ Result codes:
- 	- PCI_ERS_RESULT_DISCONNECT
- 	  Same as above.
- 
--Drivers for PCI Express cards that require a fundamental reset must
-+Drivers for PCIe cards that require a fundamental reset must
- set the needs_freset bit in the pci_dev structure in their probe function.
- For example, the QLogic qla2xxx driver sets the needs_freset bit for certain
- PCI card types::
+The disadvantages are:
+    - it would very likely need to create copies (or hard symlinks)
+      at the build dir, which may reduce performance;
+    - yet-another-hack;
+    - increased build complexity.
+
+I'm not convinced myself about doing it or not. I didn't like when
+I had to do that after the media book was split on 3 books. If one thinks
+that having for loops to build targets is a problem, we need a separate
+discussion about how to avoid it. Also, this is outside of the scope of
+this series.
+
+-
+
+Another alternative to achieve such goal of not needing a loop at Sphinx
+to handle multiple books in parallel would be to submit a patch for 
+Sphinx to get rid of the current limitation of having a single book
+with everything on a single directory. Sphinx has already hacks for it
+with "latex_documents", "man_pages", "texinfo_documents" conf.py variables
+that are specific for non-html builders.
+
+Still, when such variables are used, a post-sphinx-build logic with a
+per-output-file loop is needed.
+
+> I.e. even if we figured out how to
+> do intersphinx books, you'd want to grab parts from them and turn them
+> into something else?
+
+Either doing it or not, intersphinx is intestesting. 
+
+> Ugh.
+> 
+> 
+> BR,
+> Jani.
+> 
+> 
+> -- 
+> Jani Nikula, Intel
+
 -- 
-2.51.0
-
+Thanks,
+Mauro
 
