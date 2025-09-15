@@ -1,143 +1,154 @@
-Return-Path: <linux-doc+bounces-60587-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60589-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78FB7B5800D
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 17:10:46 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id CA23EB57FFE
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 17:09:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B60A7188FB21
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 15:06:09 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0404A201017
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 15:07:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC15631B124;
-	Mon, 15 Sep 2025 15:05:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4CEC2341AD1;
+	Mon, 15 Sep 2025 15:07:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zb2eGxQr"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cNGDXU4c"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 945083002A3;
-	Mon, 15 Sep 2025 15:05:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75DDF341AA3
+	for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 15:07:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757948745; cv=none; b=F4OlY9yhKcYowK+z21wzJpAGypIQULvH4EPHpa3vH81bQ7YXKMBueOSGvcLXFXoeG5mCb9673UmR+7VH83Jzm/wCNe+STfeKUQ3HyNPDuwX+zqtVjcgsy1UrlJaPBdDaZPVwMyUPFfj9rgvvXLLZ3rUREsyaABz9O8z0x2wAacU=
+	t=1757948827; cv=none; b=OzXqSc3pHzAqyOcY+311Chg7g4PqZydBwP6wsa2tDEonC3tdLoxxLLiWwj2WuZ2yYx8ioaoAAiG8S/ppLtL3kWOlf+cJCbDNhj5TiAI2QI6pLkHc94ltqGi7WK6Z7qEPwY3x3rpLpkiivyy3CtLcfcfbGsPtVz3oB9ACc21sz9g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757948745; c=relaxed/simple;
-	bh=47i5pQEkkKKiG7KfLTvsZvpIllcI7jHYYFbj/kGs428=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XhmDo6MtzKYtV/OEeGEurBvJC5BCLY/LmpQhmLMRkuHhrLuF0OTeWU239YWTCSvD35r54xWGsE0h+U9DaeQr/zN8BPxEC1jP62dSwBM4zZJX5qp0anPcWMoosq0iu62pJZX0cnlZHrmy8Fymm99SVaPjMuAHQpKcbBqo8HlZEKk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zb2eGxQr; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10E80C4CEF7;
-	Mon, 15 Sep 2025 15:05:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1757948745;
-	bh=47i5pQEkkKKiG7KfLTvsZvpIllcI7jHYYFbj/kGs428=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Zb2eGxQrYnBRkE6RANwOXCecEibXSFVooOaNiz8HzGwmH22yIQMA3ufQNc5sKyelg
-	 qWgvafQv8YwlhHlffvLO42P2F4SVRHKDnUESejPS85K0XzwbfU3uSolps9/moLVjAL
-	 C0N2w7hZfhDEqeCFo6z0pzqVWDycV0XC+1POpD03msrhX+awl0hlCvixxtpYCK9yJP
-	 7txzcicgyd+mbg0X5e5yuNdLdiSXCsyPYpwfyPR/fiUN9dHrULXiPdHUCu2eGOuwdb
-	 tqMbtwNl0QV8gfhJtt4tJyOo61tscek729Kz+0m5ySg9o2h3GpR33Ac1QCeQFZldSi
-	 fp6kpnP9xgnLg==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1uyAlz-0000000ALQK-05Rc;
-	Mon, 15 Sep 2025 17:05:43 +0200
-Date: Mon, 15 Sep 2025 17:05:42 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
-	Akira Yokosawa <akiyks@gmail.com>, corbet@lwn.net, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, tmgross@umich.edu
-Subject: Re: [PATCH v4 08/19] tools/docs: sphinx-build-wrapper: add a wrapper
- for sphinx-build
-Message-ID: <mfbjzrac7q2vmvieudwagi4n6ozxl5b5ey2vy3z34bjuyweblp@s7gnmdche5cq>
-References: <20250910153334.0b3e1440@foz.lan>
- <28c45f53-a3ff-428f-ba99-ebb09e0581d3@gmail.com>
- <20250912130420.6c14dbbd@foz.lan>
- <f3d142be-3980-4d4e-9d66-c03276694bf9@gmail.com>
- <6hhhn5go2yb7ecdrqtuti23i6pfgckqbdk5nhuhn2ijrhmvvmw@awswbm3tvmwp>
- <aa2aa8d2-f7f1-4f04-a9b0-f08160f9ea81@gmail.com>
- <20250915125805.25b48d09@foz.lan>
- <803501857ad28fc9635c84b7db08250dc4b9a451@intel.com>
- <s5gyu27qlfg7frb4v3ssqms6inqammtakwchgl635r3ahooj5n@vhw5tnyti7nd>
- <750e7225a88b7eb81c8f084477ebad66734c4dd7@intel.com>
+	s=arc-20240116; t=1757948827; c=relaxed/simple;
+	bh=mvhyhVaE1NgOtTceXq0ofadHYAv2ARkQsHSzvKbsxAM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Zb5QjQcwZxtRW/MK8Uh+zLmsgGCgtogL9SxtQEBGgogvfFOm5J8LkrDrgjFQ32KTYC0sFM6oQhvaQZdnvSoqVi3HJbqBAFeHvvgZy5H9o+HhQlBcjHWmdE0BNrXLNwMMZBZ/b99tX7gWhltHl3gLYHdRTwtxxzKOI8x2E4SECIg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cNGDXU4c; arc=none smtp.client-ip=209.85.128.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-71d60157747so30081257b3.0
+        for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 08:07:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757948824; x=1758553624; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nDVeU4L3YG1TiJ1MEpll75Z/ltEov2CndLJiRR2rTQE=;
+        b=cNGDXU4cLMphcRFCN8Amu19B7PiGR84snnbKi6b03nPASBmKDYxWygDtCTMy7CoQ/c
+         BQqpXggPD9Ba9nr0NhW82sjz25XMhvoXrgujw59wNecm7ftXx4bROU5UAOsTCUjvXmx5
+         mcsIVhbMjmmvEH7usHmLFAQEfeRT+OIjKGpei684vmzLVucuee+1XeEoxk/Mk2VuMkvD
+         /jrOufQQe+mwh/TaedkcmX2Hsd4PPS0Mghs8hIQInEODJopGp5Y42Y/ShcVisGzXMpAn
+         WQELI82FE7p61lYM8htFC/ZSHghYlJkuhaY9/DIxhKNO9neJcv1heARpaGUoCnOfXMwE
+         G1tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757948824; x=1758553624;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=nDVeU4L3YG1TiJ1MEpll75Z/ltEov2CndLJiRR2rTQE=;
+        b=NRR4dqBMsl8WIh6EDXhOxRqypYckCZRTtlM7qw0NtAXH7nWWR244OHYuI7MjwosqCF
+         nV8J04qVsMUVobJdTUH20PEsNKDPC4O+FLkNZoDnj5Z8LPNCMBPbcia56i5wIl6K7RMr
+         l3Ffatxo8ydz6BoWF15FuV0nylLTZjUPaG7DCFN3+NphOXLDH9NTkCVEU/Cw2wI9LgYP
+         T4U/zJXaZ+C0McReX1gM57ktUknt++UsTgPf5hSfQ5gE1N0A+d15MGBQ2jhPKu/C5FGl
+         Vyo7TjCOJFjoKCSMnv5Ao+O0xqonoGEwQaQo7pawA0kSsN6pOv+GDHjOIC+dcblgd3r5
+         yODg==
+X-Forwarded-Encrypted: i=1; AJvYcCWXuewIv66bLNV4ZXTcp9941XfktJyaMhKgLEk58xfDUNI5riXy2sGRCZ+UX8nvoxnczZ9oKiet7CE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzPiUkbIuZItscZHuugIn0DRIF12EcJqf9nYM2593IMOmd1bRdy
+	p1GOyKhDHw1IgxJf/Ov/59SQx+Rz9khZzZctZXgkNoIA2BXWGooO9vIC
+X-Gm-Gg: ASbGncslkhtUae3EELcwasWseS3M/klLM2VRPtj4bQzJctPOtgv3S2Tx/ACXjY2MrOx
+	tDGeHz4JZbe0nep7yjdUk4QXkTtBpbik9VPOnULMiv6Vg1bT0phGNDsQyKGpiB7NT/0esB9nEoz
+	zAwGsX1DYLhCaLC1rFFsu+MY2i32t+gjbnrYcuJKtP3EqMK+K6Gkvm+HkgIO/zsWcag22wLjoVY
+	giAOCjjsjGFPTBy898hhiLdkLFu3RQZlZyAYfIF13f0qzYHzb/AFKxciW6m1DVEwFrQP+skq2P6
+	OHkVByX/VAix0yugMecOb3kBdfa/6m3jeM4/HR25pvjaRxCrgbr9sQgg50LuloEMNPkTvBvl4OP
+	TI0unpGQd9xzMNkN064m66NsQDz4Wczp2QYXFLfsHXCrlrg2VoXC9jV21f+H/w0Ad
+X-Google-Smtp-Source: AGHT+IH7pt4IX2Xw7+CU3ZHlHQK6hR4lJhRz8r+4QNMMkKKZ9nkGgDixZer0GbSaS8MxEPVoUip+3w==
+X-Received: by 2002:a05:690c:3388:b0:721:5b31:54be with SMTP id 00721157ae682-730650e0036mr114848797b3.39.1757948824149;
+        Mon, 15 Sep 2025 08:07:04 -0700 (PDT)
+Received: from localhost ([2a03:2880:25ff:5c::])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-72f76238392sm32913737b3.1.2025.09.15.08.07.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 Sep 2025 08:07:03 -0700 (PDT)
+From: Joshua Hahn <joshua.hahnjy@gmail.com>
+To: SeongJae Park <sj@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	David Hildenbrand <david@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	damon@lists.linux.dev,
+	kernel-team@meta.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: Re: [PATCH 4/6] Docs/mm/damon/maintainer-profile: update community meetup for reservation requirements
+Date: Mon, 15 Sep 2025 08:07:01 -0700
+Message-ID: <20250915150702.1499965-1-joshua.hahnjy@gmail.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20250915015807.101505-5-sj@kernel.org>
+References: 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <750e7225a88b7eb81c8f084477ebad66734c4dd7@intel.com>
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Sep 15, 2025 at 05:33:37PM +0300, Jani Nikula wrote:
-> On Mon, 15 Sep 2025, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> > On Mon, Sep 15, 2025 at 03:54:26PM +0300, Jani Nikula wrote:
-> >> On Mon, 15 Sep 2025, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> >> > IMHO, long term solution is to change SPHINXDIRS into something
-> >> > like:
-> >> >
-> >> > 	make O=doc_build SPHINXTITLE="Media docs" SPHINXDIRS="admin-guide/media userspace-api/media driver-api/media/"
-> >> >
-> >> > would create something similar to this(*):
-> >> >
-> >> > 	doc_build/sphindirs/
-> >> > 		|
-> >> > 		+--> index.rst
-> >> > 		+--> admin-guide -> {srcdir}/Documentation/admin-guide/media/
-> >> > 		+--> usespace-api -> {srcdir}/Documentation/admin-guide/media/
-> >> > 		\--> driver-api -> {srcdir}/Documentation/admin-guide/media/
-> >> 
-> >> So you're basically suggesting the documentation build should support
-> >> cherry-picking parts of the documentation with categories different from
-> >> what the upstream documentation has? 
-> >
-> > No. I'm saying that, if we want to have a single build process
-> > for multiple sphinxdirs, that sounds to be the better way to do it
-> > to override sphinx-build limitation of having single source directory.
-> >
-> > The advantages is that:
-> >     - brings more performance, as a single build would be enough;
-> >     - cross-references between them will be properly solved.
-> >
-> > The disadvantages are:
-> >     - it would very likely need to create copies (or hard symlinks)
-> >       at the build dir, which may reduce performance;
-> >     - yet-another-hack;
-> >     - increased build complexity.
-> >
-> > I'm not convinced myself about doing it or not. I didn't like when
-> > I had to do that after the media book was split on 3 books. If one thinks
-> > that having for loops to build targets is a problem, we need a separate
-> > discussion about how to avoid it. Also, this is outside of the scope of
-> > this series.
+On Sun, 14 Sep 2025 18:58:05 -0700 SeongJae Park <sj@kernel.org> wrote:
+
+> DAMON community meetup was having two different kinds of meetups:
+> reservation required ones and unrequired ones.  Now the reservation
+> unrequested one is gone, but the documentation on the maintainer-profile
+> is not updated.  Update.
+
+LGTM!
+Reviewed-by: Joshua Hahn <joshua.hahnjy@gmail.com>
+
+> Signed-off-by: SeongJae Park <sj@kernel.org>
+> ---
+>  Documentation/mm/damon/maintainer-profile.rst | 17 ++++++-----------
+>  1 file changed, 6 insertions(+), 11 deletions(-)
 > 
-> I honestly don't even understand what you're saying above
+> diff --git a/Documentation/mm/damon/maintainer-profile.rst b/Documentation/mm/damon/maintainer-profile.rst
+> index 5cd07905a193..58a3fb3c5762 100644
+> --- a/Documentation/mm/damon/maintainer-profile.rst
+> +++ b/Documentation/mm/damon/maintainer-profile.rst
+> @@ -89,18 +89,13 @@ the maintainer.
+>  Community meetup
+>  ----------------
+>  
+> -DAMON community is maintaining two bi-weekly meetup series for community
+> -members who prefer synchronous conversations over mails.
+> +DAMON community has a bi-weekly meetup series for members who prefer
+> +synchronous conversations over mails.  It is for discussions on specific topics
+> +between a group of members including the maintainer.  The maintainer shares the
+> +available time slots, and attendees should reserve one of those at least 24
+> +hours before the time slot, by reaching out to the maintainer.
+>  
+> -The first one is for any discussion between every community member.  No
+> -reservation is needed.
+> -
+> -The seconds one is for discussions on specific topics between restricted
+> -members including the maintainer.  The maintainer shares the available time
+> -slots, and attendees should reserve one of those at least 24 hours before the
+> -time slot, by reaching out to the maintainer.
+> -
+> -Schedules and available reservation time slots are available at the Google `doc
+> +Schedules and reservation status are available at the Google `doc
+>  <https://docs.google.com/document/d/1v43Kcj3ly4CYqmAkMaZzLiM2GEnWfgdGbZAH3mi2vpM/edit?usp=sharing>`_.
+>  There is also a public Google `calendar
+>  <https://calendar.google.com/calendar/u/0?cid=ZDIwOTA4YTMxNjc2MDQ3NTIyMmUzYTM5ZmQyM2U4NDA0ZGIwZjBiYmJlZGQxNDM0MmY4ZTRjOTE0NjdhZDRiY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t>`_
+> -- 
+> 2.39.5
 
-Perhaps it is due to the lack of context. I was replying some comments
-from Akira where he mentioned about cherry-picking *.tex files after
-sphinx build, and do some tricks to build all of them altogether.
-
-My reply to his comments is that, if we're willing to cherry-pick things,
-it is better/cleaner/safer to do it at the beginning, before even running
-sphinx-build, ensuring no conflicts at the filename mapping.
-
-Yet, analyzing the alternative I proposed, I see both pros and cons - up
-to the point that I'm not convinced myself if it is worth doing such
-changes upstream or not.
-
-> and how it
-> contradicts with what I said about cherry-picking the documentation to
-> build.
-
-It doesn't.
- 
--- 
-Thanks,
-Mauro
+Sent using hkml (https://github.com/sjp38/hackermail)
 
