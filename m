@@ -1,143 +1,148 @@
-Return-Path: <linux-doc+bounces-60482-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60485-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 436B6B572AF
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 10:18:33 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B346B572B8
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 10:20:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 84FC13A3EBB
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 08:18:31 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 7D23117CC59
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 08:20:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CB3322EC08F;
-	Mon, 15 Sep 2025 08:18:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E01D72ED163;
+	Mon, 15 Sep 2025 08:19:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="YgmUThlR"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jfJa1qXD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0891C2EA73C
-	for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 08:18:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A7412ECD11
+	for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 08:19:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757924305; cv=none; b=fKMa3TGVkVBi5D2Gt+OWk7kMVeuaGuyUG+gBjmLFbZq8DpqpsWJ3XrN+QOZPGPmnxdpfzsmI0TJvhd0FhpCZsmjbcpPOdJaaryFcZi5w5cgY/ot7sF2GIlKb81AbiZHXOKsYy303LanS4GThYvaZmsbMdgWxkWb3WLnDvUKxsQ0=
+	t=1757924397; cv=none; b=GfwPLkL4uNqiUMCC6UHVC0LuJ/+wovuPugoAFf5TW8IdSUHIaaS5qNWKMJlrYNvz9Cnxm3qvl18d8CiSDcJJTadiC+gGeoLSEdqBWK/A9WBGm9DPkurBGBnaKD4ENySSvj4i0pbtpPXhH64hyw6l8bP01y1EEUErdPTEn8JNlB8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757924305; c=relaxed/simple;
-	bh=GHrc0yQIb9KLUpWhvQ29IYnGW02UxYT9eFseO4jZP4Y=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=g43u+Ngmc/QuD0/hHHBxeIj20oXrfoC21FQFoMek4yiLf7PTlbwb9tDGdGJryOReyiGCi6Tl+RcekPn5rLxjXB6ZIYjU+bKPPKshF7t2l4A+XL+y4Cca4punN75W7T+A0ye9jed3Fwtb/mCtdMCiPMjycTscKaRC2nb+DoLN0l0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=YgmUThlR; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1757924303;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=PqEIjCNSum5pekZp097c2PmEi/H7x+xWDTcPJJSAOCs=;
-	b=YgmUThlRCZQtleY85BoY+DXVUJsR1mM9FBWSJ4kfBLyVS3aK1AhMQHRtNE60RfskY+hmzR
-	+jE4yAtDbdo7PUsEamiES+rPoarA4fvss5onuBDNqS1xJGvM0NthPxCgwWP3XjpJBnXD2Q
-	aw9zsSdTMmO5mX+679KxSySzvLF/rtA=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-227-kt0tbXspMEeJwx-LqWhRtA-1; Mon,
- 15 Sep 2025 04:18:18 -0400
-X-MC-Unique: kt0tbXspMEeJwx-LqWhRtA-1
-X-Mimecast-MFC-AGG-ID: kt0tbXspMEeJwx-LqWhRtA_1757924297
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 79347180045C;
-	Mon, 15 Sep 2025 08:18:16 +0000 (UTC)
-Received: from [10.45.226.64] (unknown [10.45.226.64])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 7F89419560A2;
-	Mon, 15 Sep 2025 08:18:05 +0000 (UTC)
-Message-ID: <4bd1847b-00b6-42a6-8391-aba08aeb3721@redhat.com>
-Date: Mon, 15 Sep 2025 10:18:03 +0200
+	s=arc-20240116; t=1757924397; c=relaxed/simple;
+	bh=gvyVXDAN+PRAExWv2YFpEC6fbhrhU8H3L0vY5TSVLGQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Gr3uMM4uIujFOHwr6SqM2NXtLQ3C8+PE+nwa6RGF1BpPTnap63cVOcaygae8KiO8EYSayvEgOagXhFIIKeUv5RPzGsVeqNI/jy1oqwwY2W3//mpcP8okty4JH38E4GwWP0vFymkM8LpWxIMVDlKyxFyc180zhDxxZWOYvsY0nOQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jfJa1qXD; arc=none smtp.client-ip=209.85.210.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-77619f3f41aso1892682b3a.2
+        for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 01:19:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1757924395; x=1758529195; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=EXJupOmkIaxYSorJ/E2Lxs1az8QJSAWePObgIta/6Wc=;
+        b=jfJa1qXDjRGCGIFTDFqeAEZLL1pPPSTZo1GOGv0MD2aKDgB+Bu4sQb0xwGT4oslWF8
+         5pjuQbpI4taYvvbOPxSxkOeD1AUErGpfDFoi44aDaEf01fPu+fFyBXjdqZKEwMNj0p2Y
+         kmVJeGqDOK+r7Mtgvc/SV+Og6qEBxWs+loN7+9nFKIxw3He11E9vrhFDVjXZawnKx8gQ
+         3T60zYMhkZX1F/L8kx2YsTyWiG4sUyqBdSN/GQviY9uJ17hT9DFYypdfF5VpeAqXA4sN
+         jyxePJ19oI5tvycF8FFS1WkNIJN9TLXDk1+Q0LxRTFK0B7t9DEZZBIt3jK2z22P18Kn0
+         dK/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757924395; x=1758529195;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EXJupOmkIaxYSorJ/E2Lxs1az8QJSAWePObgIta/6Wc=;
+        b=SLkMqXDeYHQ928MdQB8A3LFEimMy9ouGYj9O4nZi2QQp4tEviIS3r8mq3Ac9AfUWSn
+         aSS/hOJ3ozLFLl1DcpJAnqteZaYngf3BI5jPEVo8BWGcAPBQK6HBpH7Q9UF6BjOQDHBu
+         fezw3AJ4HHb83vnKYZBDCEGYCC1hIK+wqlT/LNo8iKuV0mfigCZ5KMkf4QhiQ0o8qT15
+         OFfL+9OpfR1jb8JQbLKlGb18l5Dtdqt+6ZlsHDV292/YsgkAfccqPXEq4iNJmSYKXCjU
+         0robHBZYCHDxDlFbtuYU/MlL2zxKF6JCEmxsZK7R3VQm4xnCBKPyQVhR0eYdvIcFoEvS
+         PkLw==
+X-Forwarded-Encrypted: i=1; AJvYcCUiy/Oos9tMyGk/AHyR0F14iAfo5pEKr15ADAubmBdBXA3OTqGp2EdX9k3ecOXfg8ouScBXpbzot9A=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzkv80JXxiTF+1MLZi7aqwkcU2OS2zm0bNbFtZf20Sgkvg9911N
+	GAUPJL2cVXIM+z2JSrHJdL/+BEyswVPwl+PPccRu+6xv9jud8QMw7u6O
+X-Gm-Gg: ASbGncu8ly1wjG5jeUOv4WzKo04n6NhNTcVFuUoFTAcyqkRhI6UQ/vGOc34OtI5O3C0
+	eUexEIlOuIRPbrmTpq/eVvuwrPjLEGTkRwrYoqPgYEW7/Hb0bq2a11Wt4EiwCBjX4IOP80xZms9
+	t9eCR9EbJd14F2RbV4yQhuGQJpiVl1Z1jcO179Sp1LSJb9UhkIXxWpPvpwcLpsO95GmoyRGr8Xz
+	SpHb94ttYDcN2xz+SbUEpDpjyA7+Q1opIb5oMRAF0/OZFczpBJroCfFmc7foj0S8KFrD5iPlGDB
+	Skhau3v8JcL9ilpbQU+QN2ShygcsgPSAhQd0K9522UeLEHOhAKj3KGnN2wbfhNKimU4waFFdsw0
+	fkUd6pxhQPK9ceAzfZ4zO/v7n5QiTZE0fk+Mj
+X-Google-Smtp-Source: AGHT+IFaPTKZ5L7QGynopLRlymyt3sutrsE9UT7Flmj2NzAt7FTbK7sGSLueOqI3SFAEwnGEtIVHhg==
+X-Received: by 2002:a05:6a00:139a:b0:774:2274:a555 with SMTP id d2e1a72fcca58-77612167d2fmr14310264b3a.15.1757924395491;
+        Mon, 15 Sep 2025 01:19:55 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-77607c471dcsm12581782b3a.96.2025.09.15.01.19.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 Sep 2025 01:19:54 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id BFF114209E9D; Mon, 15 Sep 2025 15:19:48 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux cgroups <cgroups@vger.kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
+	"Bagas Sanjaya" <bagasdotme@gmail.com>,
+	Tejun Heo <tj@kernel.org>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Andrea Righi <arighi@nvidia.com>,
+	Johannes Bechberger <me@mostlynerdless.de>,
+	Changwoo Min <changwoo@igalia.com>,
+	Shashank Balaji <shashank.mahadasyam@sony.com>,
+	Ingo Molnar <mingo@kernel.org>,
+	Jake Rice <jake@jakerice.dev>,
+	Cengiz Can <cengiz@kernel.wtf>,
+	"Mauro Carvalho Chehab" <mchehab@kernel.org>
+Subject: [PATCH v2 0/4] cgroup v2 toctree cleanup
+Date: Mon, 15 Sep 2025 15:19:23 +0700
+Message-ID: <20250915081942.25077-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v6 3/5] dpll: zl3073x: Add firmware loading
- functionality
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org, Przemek Kitszel <przemyslaw.kitszel@intel.com>,
- Jiri Pirko <jiri@resnulli.us>, "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Prathosh Satish <Prathosh.Satish@microchip.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Michal Schmidt <mschmidt@redhat.com>,
- Petr Oros <poros@redhat.com>
-References: <20250909091532.11790-1-ivecera@redhat.com>
- <20250909091532.11790-4-ivecera@redhat.com>
- <20250914144549.2c8d7453@kernel.org>
-Content-Language: en-US
-From: Ivan Vecera <ivecera@redhat.com>
-In-Reply-To: <20250914144549.2c8d7453@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1542; i=bagasdotme@gmail.com; h=from:subject; bh=gvyVXDAN+PRAExWv2YFpEC6fbhrhU8H3L0vY5TSVLGQ=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBnHT+ftFawoT5Zt8rHS15fm4uvyO2PHpBQjnFv++hiP3 pSwLxwdpSwMYlwMsmKKLJMS+ZpO7zISudC+1hFmDisTyBAGLk4BmEjDd4b/KZ+jZZ235Ztdyb/8 5eBx69kaq3c+MefaYTIno+HLSbGXkYwMO45O5qncVfb4hM2CnGftDy+zfph+89v8m3enrz6QHy2 0nwUA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
+
+Hi,
+
+Unlike cgroup v1, cgroup v2 documentation is a rather lengthy single document
+(Documentation/admin-guide/cgroup-v2.rst), although is not as long as KVM
+API docs (Documentation/virt/kvm/api.rst). As such, it needs a roadmap for
+allowing readers to easily navigate it: the toctree.
+
+While plaintext (reST source) readers are delighted with already-existing,
+manually-written toctree, readers in html format (including docs.kernel.org
+visitors) don't get such luxury. Let's add reST toctree for them.
+
+The first two patches ([1/4] and [2/4]) are section numbers preparation (just
+as one would see the book toctree). Actual toctree generation is in [3/4],
+and in the service of plaintext readers, also sync the manual toctree in
+[4/4].
+
+Enjoy!
+
+Changes since v1 [1]:
+
+  * Drop unrelated cross-reference patch
+  * Keep the manual toctree, but fix it up to sync with actual sections
+    listing/automatic toctree (Jon)
+
+[1]: https://lore.kernel.org/linux-doc/20250910072334.30688-1-bagasdotme@gmail.com/
+
+Bagas Sanjaya (4):
+  Documentation: cgroup-v2: Use dot delimiter in manual toctree section
+    numbers
+  Documentation: cgroup-v2: Add section numbers
+  Documentation: cgroup-v2: Automatically-generate toctree
+  Documentation: cgroup-v2: Sync manual toctree
+
+ Documentation/admin-guide/cgroup-v2.rst | 447 ++++++++++++------------
+ 1 file changed, 227 insertions(+), 220 deletions(-)
 
 
-
-On 14. 09. 25 11:45 odp., Jakub Kicinski wrote:
-> On Tue,  9 Sep 2025 11:15:30 +0200 Ivan Vecera wrote:
->> +	/* Fetch image name and size from input */
->> +	strscpy(buf, *psrc, min(sizeof(buf), *psize));
->> +	rc = sscanf(buf, "%15s %u %n", name, &count, &pos);
->> +	if (!rc) {
->> +		/* No more data */
->> +		return 0;
->> +	} else if (rc == 1 || count > U32_MAX / sizeof(u32)) {
->> +		ZL3073X_FW_ERR_MSG(extack, "invalid component size");
->> +		return -EINVAL;
->> +	}
->> +	*psrc += pos;
->> +	*psize -= pos;
-> 
-> Still worried about pos not being bounds checked.
-> Admin can crash the kernel with invalid FW file.
-> 
-> 	if (pos > *psize)
-> 		/* error */
-
-This cannot happen...
-
-1) strscpy(buf, *psrc, min(sizeof(buf, *psize)) ensures that the string
-    will be zero padded and strlen(buf) will be less than *psize
-
-2) sscanf(buf, "%15s %u %n", name, &count, &pos) scans for string with
-    max length of 15, one or more whitespace(s), number and one or more
-    whitespaces(s). And reports number of parsed arguments. Note that
-    the %n does not increase the count returned.
-
-So... if:
-1) buf is empty then sscanf returns 0 and /* No more data */ code path
-    is executed
-2) buf contains only string (1st argument) OR string and non-numeric
-    2nd argument then the sscanf returns 1 and 'invalid component size'
-    is executed
-3) buf contains string (1st arg) and numeric 2nd arg then the sscanf
-    returns 2 and the 2nd arg is stored into 'count' and number of
-    consumed characters into 'pos'
-4) if 'count' > (U32_MAX / 4) then 'invalid component size' path is
-    executed
-
-> Also what if sscanf() return 2? pos is uninitialized?
-
-If the sscanf() returns 2 then pos is initialized, in other words
-'pos' is initialized and less then *psize if the 'count' is correctly
-parsed as the numeric value.
-
-Thanks,
-Ivan
+base-commit: cf9c2bbba2735831f1200227c7f13404b7d7908e
+-- 
+An old man doll... just what I always wanted! - Clara
 
 
