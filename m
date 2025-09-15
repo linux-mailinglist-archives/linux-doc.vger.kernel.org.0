@@ -1,117 +1,188 @@
-Return-Path: <linux-doc+bounces-60566-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60568-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CA14B57C09
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 14:55:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB3A2B57C20
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 14:59:37 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id CA5D7188A3DF
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 12:55:19 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 152BE1892E41
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Sep 2025 12:59:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7606930DD05;
-	Mon, 15 Sep 2025 12:54:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8B6E30C376;
+	Mon, 15 Sep 2025 12:59:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="IXJOZUGX"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="fkCTDSIs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7A8C3090EC;
-	Mon, 15 Sep 2025 12:54:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4488B30BF7F
+	for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 12:59:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1757940874; cv=none; b=R3+wrsp2iqjVwso+L5KChJgK+yorTr6zvlNjSrIKsOr14gvP5TGA0z0BQC/StA+sOZG0Vui6wstyfxzBqv+weiOqsbaUFjh7qNXts21Xd8mcZOLpbiAUgP5qbOgV3WtmFIypQNyBC7bTgDPpt7GkStDpyM4HGGg2xZwlLUG/zEo=
+	t=1757941167; cv=none; b=lndOiqG+n6RLIVyZD49AI50pmDswpARPesfMfDgcmE9N/0NE0r7Egeq9RRNMInczeQ6T4mO6/sNDNvDxGq+1aMPi0h0d/zrHVeC+7wKfB2zVC+AAS2QS1pzz8yTyZku3zuJV/kL3dA6xX4jSOWcK/lOcdh77nIqfnahoGJ9J3oY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1757940874; c=relaxed/simple;
-	bh=QMrqRulBz9o7yVmKVfC3sH8o1Nw5qoOwG55e6D1j5gI=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=ACZ+x3FjSQzfRaEDvuJbstCiz63VK3iTSiYp3CDZKrzhl0gWsuk84X0fatLolkayP2VUiHbJB2ewpyz+OCwE76HRuG8GepWMbb30KWJ+YuvhbmZNu/phiM087vDji+bHvfagERlrdYR3pay7oJ6OtDym2Wj58jjeQ+9HX+Xzo4g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=IXJOZUGX; arc=none smtp.client-ip=192.198.163.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1757940872; x=1789476872;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version;
-  bh=QMrqRulBz9o7yVmKVfC3sH8o1Nw5qoOwG55e6D1j5gI=;
-  b=IXJOZUGXcBUk9vDOUX+bgMuCwnTuBiYwT3WMlATwoUR6mUm6n3dp9cGM
-   oL+ubYRlIntkp0CYyre3lSJjfPGS/i2IKVhnSlIoMF+dGftRnyMNjyitn
-   3QwPQdXR7bFHGL8ek4Y/a7Dbn/H7JontZxK8f+z5plu7y1J123yxD6AKh
-   o0HqHB3RzJei81DcMbNBUNw7iznHpntTXPsgTj8+WaDOnP4/akq6lT03A
-   glw+x28+pYo9/omK6EsrrvjG80JsUBQPEjntA3LrNhEVh1wtfcXFPfdqB
-   qRzLTEUISMI/X2no72AxtLszML5YdhS70fZTSwRDARqVpg1lPcnihgZ8x
-   w==;
-X-CSE-ConnectionGUID: xL2C2I86SdS4tQeNOyBBTA==
-X-CSE-MsgGUID: /6LbdwKdTSW3yze8lnRk1Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11554"; a="60127978"
-X-IronPort-AV: E=Sophos;i="6.18,266,1751266800"; 
-   d="scan'208";a="60127978"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2025 05:54:32 -0700
-X-CSE-ConnectionGUID: Cq0mxcsTRom5XHlR7qTzPQ==
-X-CSE-MsgGUID: vj9nl9wiTz+1QAQgZ2BTxw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.18,266,1751266800"; 
-   d="scan'208";a="175024850"
-Received: from carterle-desk.ger.corp.intel.com (HELO localhost) ([10.245.246.17])
-  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2025 05:54:29 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Akira Yokosawa
- <akiyks@gmail.com>
-Cc: corbet@lwn.net, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- tmgross@umich.edu
-Subject: Re: [PATCH v4 08/19] tools/docs: sphinx-build-wrapper: add a
- wrapper for sphinx-build
-In-Reply-To: <20250915125805.25b48d09@foz.lan>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20250910153334.0b3e1440@foz.lan>
- <28c45f53-a3ff-428f-ba99-ebb09e0581d3@gmail.com>
- <20250912130420.6c14dbbd@foz.lan>
- <f3d142be-3980-4d4e-9d66-c03276694bf9@gmail.com>
- <6hhhn5go2yb7ecdrqtuti23i6pfgckqbdk5nhuhn2ijrhmvvmw@awswbm3tvmwp>
- <aa2aa8d2-f7f1-4f04-a9b0-f08160f9ea81@gmail.com>
- <20250915125805.25b48d09@foz.lan>
-Date: Mon, 15 Sep 2025 15:54:26 +0300
-Message-ID: <803501857ad28fc9635c84b7db08250dc4b9a451@intel.com>
+	s=arc-20240116; t=1757941167; c=relaxed/simple;
+	bh=F/zAZgU2FomGVtqnhxBwQWziN36p1+sFiuLHtl9Ytrk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=E00FUnczZrHaiuFbdISkpBKevYvvW/EnnxR6nRVlufaHp2gIVeIduqvvY5SITeR+7Af1Y/ohz+0WpuPb5dxMqnZDaIPYzqDNEMMl8oX28HVXN9u1bwUDok6FKnxlTr35vt/5J40t1rfJ4p1MlnQKyaGvjI2F5o+zgNTzf8gVVMs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=fkCTDSIs; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1757941165;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Z9AyUt4haocv7F95i9a+JlLpc0x0YT4r6qftqX3qLrs=;
+	b=fkCTDSIsbl48ReGGj+xigoTjnaFlixpMGDCSPxA/O+LBiWEpGmbmz5D8KYtxlYWwHtzpc0
+	+fmCwaUuAl6chO7Q6T4YkQUKNXGQKpRn+qultnxChbreQ6+7Z0oE4Yj6SnrNQB2JqPbAI2
+	G+/J07fzDxxG48VKIj/pkwVHilL1rNw=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-668-noPyy74AOw26cz0k59LRdA-1; Mon, 15 Sep 2025 08:59:24 -0400
+X-MC-Unique: noPyy74AOw26cz0k59LRdA-1
+X-Mimecast-MFC-AGG-ID: noPyy74AOw26cz0k59LRdA_1757941163
+Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-45f2f1a650dso4954005e9.2
+        for <linux-doc@vger.kernel.org>; Mon, 15 Sep 2025 05:59:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1757941163; x=1758545963;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Z9AyUt4haocv7F95i9a+JlLpc0x0YT4r6qftqX3qLrs=;
+        b=DgWmSaivFT8cQ3To6AuIBRMuSvDbeKMkS3OxYIXUS1yWgAINebSedqMiZe+UhAlOiT
+         xcFFN3B2lY5+OOhObxDPg0OmCzzXb0jKXqCcFaL+nhoBM+RK+ZY4D+1jIwtcKIlceCwt
+         iJT5HIRgQOVurYNolOE9oqxekNoc4mp4o4X6jp1tqc7dPKg3+6OuORLqqJ+1aU4lrpgd
+         ajCAMWchi334ChKw958BPiVMA8/x1fujgpSHlzsZX60iwi1V3Jv0IWKl/u+NsTp+RElW
+         OjVpSUxYvB2FNeH373HJQEALyJ2sWJRsfER2S38HozwlPLlip9Jl3xiQxik6FL38S3DR
+         mmrQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUNjVFfHQp3p8uqrSGN9tAzVwyU58nIeQz8FIlgS761Kwer/VcZYuNPzOt8H7qnLjbX37MZLeNTeTk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxMiGHy+9a/8jLIqcO8KW0Eh10NFrHUgw+UnQOtEChUKsCFtIF/
+	DVEqBQs7WKozHr5mB2vhZJFbE9/dvEKmI/+GG2tXG4Znf+IMWujYtyrjC5Mm5Z/A4KXUyM50Bf2
+	Q3WEgkDtQ+yechEYAIQdohzqNrd462uQtNBHO6l2dDIONR0RQ0sFsGrsoNfUVjw==
+X-Gm-Gg: ASbGncsj31EYCWY2dnOivDmxK3Uf6uz9MWeV21gyp7+i6fFMvWf8UuFkSbuTSF93sEM
+	AfMNZbZsQvls3dqNtvEq3/3vSkAz1L40hV8hXR+zMmJgHLwCVIUrhrIIJPxc6CEBWE8mWrq6vbc
+	73NdGAe5J19COyCTNUXyaA6HpH8ScDvwZMvRiTzFHv2JPMezHj9LVlzYdCVgZSR+PqdiheiSbbW
+	JvecfxRThUgQYDCxNKS6dx+k63nCQ7l/hYQY2ck83ipt83dhfLWHsxoTUUoigwSVfgg+y6WCkl8
+	ZcztXNaz6WQq74wx/ZOTqj7LFgGxqYX8MkdLpJ9nkotiEvBgpqcJtRgWmXK84NbhAW05CExoABU
+	LXfb2gFzl6pbWjuFC7FgPsfbbkWT0wU2DY94tG3UqWRRselMLrXDaPklbRUfHjpHi7es=
+X-Received: by 2002:a05:600c:198f:b0:45d:db2a:ce37 with SMTP id 5b1f17b1804b1-45f24df556fmr95539195e9.0.1757941162500;
+        Mon, 15 Sep 2025 05:59:22 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFKriu8iaZGvf/bFu9nYRr4M1WXgTzDA+G+Qti4ilusiGCyEBdwFxvpcMyyGZ5HQLQRNLOcSg==
+X-Received: by 2002:a05:600c:198f:b0:45d:db2a:ce37 with SMTP id 5b1f17b1804b1-45f24df556fmr95538715e9.0.1757941161998;
+        Mon, 15 Sep 2025 05:59:21 -0700 (PDT)
+Received: from ?IPV6:2003:d8:2f18:f900:e0ae:65d5:8bf8:8cfd? (p200300d82f18f900e0ae65d58bf88cfd.dip0.t-ipconnect.de. [2003:d8:2f18:f900:e0ae:65d5:8bf8:8cfd])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-45e04cf2870sm94355605e9.1.2025.09.15.05.59.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 15 Sep 2025 05:59:21 -0700 (PDT)
+Message-ID: <2af510cc-8173-49fd-87b7-a6f9c59bd104@redhat.com>
+Date: Mon, 15 Sep 2025 14:59:18 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 00/15] khugepaged: mTHP support
+To: Nico Pache <npache@redhat.com>
+Cc: Kiryl Shutsemau <kas@kernel.org>, linux-mm@kvack.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, ziy@nvidia.com,
+ baolin.wang@linux.alibaba.com, lorenzo.stoakes@oracle.com,
+ Liam.Howlett@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com,
+ corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org,
+ mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
+ baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
+ wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com,
+ vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com,
+ yang@os.amperecomputing.com, aarcange@redhat.com, raquini@redhat.com,
+ anshuman.khandual@arm.com, catalin.marinas@arm.com, tiwai@suse.de,
+ will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org,
+ jglisse@google.com, surenb@google.com, zokeefe@google.com,
+ hannes@cmpxchg.org, rientjes@google.com, mhocko@suse.com,
+ rdunlap@infradead.org, hughd@google.com, richard.weiyang@gmail.com,
+ lance.yang@linux.dev, vbabka@suse.cz, rppt@kernel.org, jannh@google.com,
+ pfalcato@suse.de
+References: <20250912032810.197475-1-npache@redhat.com>
+ <ppzgohmkll7dbf2aiwhw7f4spf6kxjtwwe3djkx26pwy4ekrnd@mgeantq5sn2z>
+ <d0e81c75-ad63-4e37-9948-3ae89bc94334@redhat.com>
+ <CAA1CXcA+pb5KvEnJJqdf1eSjaFiBZ82MRB+KDmyhj3DbiQqOxg@mail.gmail.com>
+ <enrgrocqajwu5d3x34voghja7pbvau45oobxgabawrly44ld4u@ahch3xn6rtq5>
+ <cd8e7f1c-a563-4ae9-a0fb-b0d04a4c35b4@redhat.com>
+ <CAA1CXcD1BhXqYM7oOTLuqPHyWSztdCEk462sYXFXxJCmOpe_Rg@mail.gmail.com>
+From: David Hildenbrand <david@redhat.com>
+Content-Language: en-US
+Autocrypt: addr=david@redhat.com; keydata=
+ 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
+ qIws/H2t
+In-Reply-To: <CAA1CXcD1BhXqYM7oOTLuqPHyWSztdCEk462sYXFXxJCmOpe_Rg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, 15 Sep 2025, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> IMHO, long term solution is to change SPHINXDIRS into something
-> like:
->
-> 	make O=doc_build SPHINXTITLE="Media docs" SPHINXDIRS="admin-guide/media userspace-api/media driver-api/media/"
->
-> would create something similar to this(*):
->
-> 	doc_build/sphindirs/
-> 		|
-> 		+--> index.rst
-> 		+--> admin-guide -> {srcdir}/Documentation/admin-guide/media/
-> 		+--> usespace-api -> {srcdir}/Documentation/admin-guide/media/
-> 		\--> driver-api -> {srcdir}/Documentation/admin-guide/media/
 
-So you're basically suggesting the documentation build should support
-cherry-picking parts of the documentation with categories different from
-what the upstream documentation has? I.e. even if we figured out how to
-do intersphinx books, you'd want to grab parts from them and turn them
-into something else?
+>> ...
+>> 10 -> ~0% used (~100% none)
+> I think this scale is too specific, I think it would be easier to map
+> to the one above for the reasons stated there. There would be little
+> to no benefit to having such small adjustments between 4-10
 
-Ugh.
+It's probably best to discuss that once I have something more concrete 
+to share :)
 
-
-BR,
-Jani.
-
+I yet have to think about some cases I have in mind, and once I figured 
+them out (and had time to do so ...) I'll post something.
 
 -- 
-Jani Nikula, Intel
+Cheers
+
+David / dhildenb
+
 
