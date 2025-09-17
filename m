@@ -1,88 +1,63 @@
-Return-Path: <linux-doc+bounces-60875-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60878-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32E54B7F619
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 15:36:11 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 440E6B7C60E
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 13:59:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EE1243BD9E2
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 07:03:08 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 664361B26566
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 07:12:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6291B2BD020;
-	Wed, 17 Sep 2025 07:03:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5FBD22DECC2;
+	Wed, 17 Sep 2025 07:12:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Rs/0kaYy"
+	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="oFbLN6uL"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFF2929898B
-	for <linux-doc@vger.kernel.org>; Wed, 17 Sep 2025 07:03:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10F61200127;
+	Wed, 17 Sep 2025 07:12:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.47.23.234
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758092584; cv=none; b=qQx066ELL3UgMrI8jGWxkOxPQdmuaSiYhIPmpX/CUrzH9IxPjnwKNVd0uFiLyyXC4w3iE1AmHaqfjTrPnMFWZDKYJZWcfxvB/QxL/S72VJgaZE0w+ZQip9mRTp0s9aniQMi5WgJbgEyjbtRGckqLUUPV+utdG+KTzVmSV9Jqhls=
+	t=1758093136; cv=none; b=sJCEJzhxyxWFwuIsi4ZlV07ziN3UIBpTfAcPmt66oD3P6DQgqZ5hCTBVy+Ym1/FsHVfRZrZ+RLviERcLmJN7oesjwJ+Igz07MGt1k5/rWtFCDnXLYov8vBf3jEE2rXxtfTkfk1L+LUtWPkbwsL5Dpht9KvW/UHaqUvps3mzsG5Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758092584; c=relaxed/simple;
-	bh=ko/99fPEHJQwgLb5nCPWVD8uy5wLTxH5KAinDw/smNk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Kgy8kzDPp9xR+7DJPMx/4sRVhyPLbvybDsfx4s2bvT/ajOGrHAtzaF2PB2TqxkmFlo2luOWtKBKusec6n2RJiC1u1rmxHp2GbdDGcoG5E+f5ncwecL/6O2rCOEBZf2Io/ZTEjsSMa6SNz0J7DWVIOhhUNsMgreH4n/mypWYn5b0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Rs/0kaYy; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1758092581;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=nawTqrlEeqSv7zVujc+JzfalbuSXfxtcl1SSEsQficc=;
-	b=Rs/0kaYyBONENmZNXCGrPlFtnbnQCTHQYIfwwsI5JjDhsUmBfBQ3i79UEqWXu0/s5J/cJY
-	uB+ZVkZr6jizbMQJr0hUm9nsRuPkeyeWPFTgQMnN7lXZQe4AoA+hx5GPqy40vnjCQY1Z5W
-	iP5gPf6ZPcUdGTYxJXO/7vs02ZuJnVk=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-137-7bZNRtnUNS64tOoFeWC6dA-1; Wed, 17 Sep 2025 03:03:00 -0400
-X-MC-Unique: 7bZNRtnUNS64tOoFeWC6dA-1
-X-Mimecast-MFC-AGG-ID: 7bZNRtnUNS64tOoFeWC6dA_1758092579
-Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-45b920a0c89so33234375e9.2
-        for <linux-doc@vger.kernel.org>; Wed, 17 Sep 2025 00:03:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758092579; x=1758697379;
-        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nawTqrlEeqSv7zVujc+JzfalbuSXfxtcl1SSEsQficc=;
-        b=e9IlZMxsIoo2xnaoxkKKu+Yjq51+4rJv+y3No5x5/tDZpMgghASls0fCe47azlCNJA
-         9cr6Ar6Z11h3G8onqyelQQTDx3ql73S+M/dC3SW5lCvorA7RyiJi57yEFGQdATyMczqt
-         JvkM2rQQZ97MEW5U0/Ty6CuhOmPONerYG2i1CBxI3ULGtHHMStt9acW3oH3U153nA05K
-         TRCggOd93xSY3E2R2bUtYpPJ5hj3Lym5qVlc4UuDxAc3zkLHKL48ScVyIHlioi1PePvF
-         q+MQXIxdkfgLWxAPWTkrjXw3Xkbqv0wMxFQyPkNtVDJ+iN4K5YBuQl0TweAH/dJP35z6
-         czEw==
-X-Forwarded-Encrypted: i=1; AJvYcCXq0xhcNGzwZHahPKAWpY+3nr7VPSZ0G1xfMtGD0NN3ia2J6bfAQ7hulqrQu8N3cOXs5vqtpr1I3gY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxqBJz+J/m2NJfx3OL8ZCKIP0xS5fqE3xn7pfa5BoHi8EPnwdB1
-	TsIFS7pPc/U8eT89U0DRpirM6L+FduqFou647YiQmNWOriqJjK7fTAAjIgcmq0fdwQrTzk6Flne
-	FHSQ0DyMOqnuHkioF6qyRPvVmSml1gX500mvxF1JSgWFogIu4RWREQKh8XQA46w==
-X-Gm-Gg: ASbGncvjvzpHGl1TYuXaJmPz4Hn8RskNGCWwqusCLGCY+rXrNYYHcL/K3n3u5V3IY1q
-	UIfciPoYYVTG6OP930WICfoocBvi6PoOXkyOfS4o43oTF7edEd0/GxX5jx+Rf+sED9qUTxUzd80
-	nfEyomPvIQ3YGpbrOG8TJZPrHpQAjpieSZH1NFQdDVzJHuSH6EsUV5I5TLaHzQQYs/Yafjm46O5
-	FAqkn29DNQ8worGN4q41FKCNKiaJ2rR0ZbpCsCt/QPLKYpckUzvnilPqR8ZxeEt7Ol55Qmb6p/R
-	Q7Mi35x/8sM0i407IATDiLCuLAkkxjMy/p50226pjIkzJszJF9JiYCDTrLX/NyOBrbN675W5bZW
-	T/2iRmPda3grfom9RmL5nvFEMRA3xYlDHMJixZhuH1fE/7KoTxBe5dUbwrDSmR0Bw
-X-Received: by 2002:a05:600c:1e88:b0:45c:b56c:4183 with SMTP id 5b1f17b1804b1-46205adf753mr8270765e9.18.1758092579140;
-        Wed, 17 Sep 2025 00:02:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHCHXqLZgubOsFpSEryXy6qEwTu5TBAMNWT2kDUAPReOb9ESdWMxgF+theDpncx+aIUqSILpQ==
-X-Received: by 2002:a05:600c:1e88:b0:45c:b56c:4183 with SMTP id 5b1f17b1804b1-46205adf753mr8270405e9.18.1758092578660;
-        Wed, 17 Sep 2025 00:02:58 -0700 (PDT)
-Received: from ?IPV6:2003:d8:2f27:6d00:7b96:afc9:83d0:5bd? (p200300d82f276d007b96afc983d005bd.dip0.t-ipconnect.de. [2003:d8:2f27:6d00:7b96:afc9:83d0:5bd])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46137a252fasm23338645e9.7.2025.09.17.00.02.56
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 17 Sep 2025 00:02:58 -0700 (PDT)
-Message-ID: <8c3188da-7078-4099-973a-1d0d74db2720@redhat.com>
-Date: Wed, 17 Sep 2025 09:02:55 +0200
+	s=arc-20240116; t=1758093136; c=relaxed/simple;
+	bh=AnUEUznLqClCmdYSXr4NxPzJ7PnwHzaxSWx9a+Ughrs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=pbmuPZAwWxM8E7CFwm2LZVIzh0Otza6p0ztGW0cYlV58NCuniUmLB1srDsHeGDxz0vqjv5MBvAUnnodWJgTAWtSqzFkUPEEu62M5qU034tJUY3n0SjpeI07nZ1dH+/yhJV3hun58ZpurAphpPs+v8jDZIB2YwhY2OQpCiCcOU5E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=oFbLN6uL; arc=none smtp.client-ip=198.47.23.234
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+	by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58H7A95w1551071;
+	Wed, 17 Sep 2025 02:10:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1758093009;
+	bh=JhpSRRMgVqAgduSNDjKmLQdUXJ0KKY7dsmGJD0xdH98=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=oFbLN6uL9Yp+2AUPSNOKZwf1JWAVNRsp0wg5LTa8IHaUSXtGQKLTzjUXK6ptQpM9D
+	 IsVEOwUoDjB1NvyqeuovRGSHWwofGcJD7/XhEHBwJhmLSo+KVY6Qu37WaAE9RKqs/R
+	 SXrGoQPR/uutEu3YeZ2vscJ/6JlAqs8ZwRw9Hm3c=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+	by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58H7A8O0575420
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+	Wed, 17 Sep 2025 02:10:08 -0500
+Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
+ Sep 2025 02:10:08 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 17 Sep 2025 02:10:08 -0500
+Received: from [172.24.231.152] (danish-tpc.dhcp.ti.com [172.24.231.152])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58H79xa42605473;
+	Wed, 17 Sep 2025 02:10:00 -0500
+Message-ID: <f095f31c-b725-4a3f-bc73-7cc57428e5f2@ti.com>
+Date: Wed, 17 Sep 2025 12:39:59 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -90,108 +65,192 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mm/memory-failure: Support disabling soft offline for
- HugeTLB pages
-To: Anshuman Khandual <anshuman.khandual@arm.com>,
- Kyle Meyer <kyle.meyer@hpe.com>, akpm@linux-foundation.org, corbet@lwn.net,
- linmiaohe@huawei.com, shuah@kernel.org, tony.luck@intel.com,
- jane.chu@oracle.com, jiaqiyan@google.com
-Cc: Liam.Howlett@oracle.com, bp@alien8.de, hannes@cmpxchg.org, jack@suse.cz,
- joel.granados@kernel.org, laoar.shao@gmail.com, lorenzo.stoakes@oracle.com,
- mclapinski@google.com, mhocko@suse.com, nao.horiguchi@gmail.com,
- osalvador@suse.de, rafael.j.wysocki@intel.com, rppt@kernel.org,
- russ.anderson@hpe.com, shawn.fan@intel.com, surenb@google.com,
- vbabka@suse.cz, linux-acpi@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
- linux-mm@kvack.org
-References: <aMiu_Uku6Y5ZbuhM@hpe.com>
- <a99eb11f-a7ac-48a3-a671-c5f0f6b5b491@arm.com>
-From: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH net-next v12 5/5] net: rnpgbe: Add register_netdev
+To: Dong Yibo <dong100@mucse.com>, <andrew+netdev@lunn.ch>,
+        <davem@davemloft.net>, <edumazet@google.com>, <kuba@kernel.org>,
+        <pabeni@redhat.com>, <horms@kernel.org>, <corbet@lwn.net>,
+        <gur.stavi@huawei.com>, <maddy@linux.ibm.com>, <mpe@ellerman.id.au>,
+        <lee@trager.us>, <gongfan1@huawei.com>, <lorenzo@kernel.org>,
+        <geert+renesas@glider.be>, <Parthiban.Veerasooran@microchip.com>,
+        <lukas.bulwahn@redhat.com>, <alexanderduyck@fb.com>,
+        <richardcochran@gmail.com>, <kees@kernel.org>, <gustavoars@kernel.org>,
+        <rdunlap@infradead.org>, <vadim.fedorenko@linux.dev>, <joerg@jo-so.de>
+CC: <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-hardening@vger.kernel.org>
+References: <20250916112952.26032-1-dong100@mucse.com>
+ <20250916112952.26032-6-dong100@mucse.com>
 Content-Language: en-US
-Autocrypt: addr=david@redhat.com; keydata=
- xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
- dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
- QZLQMzNE74ap+GDK0wnacPQFpcG1AE9RMq3aeErY5tujekBS32jfC/7AnH7I0v1v1TbbK3Gp
- XNeiN4QroO+5qaSr0ID2sz5jtBLRb15RMre27E1ImpaIv2Jw8NJgW0k/D1RyKCwaTsgRdwuK
- Kx/Y91XuSBdz0uOyU/S8kM1+ag0wvsGlpBVxRR/xw/E8M7TEwuCZQArqqTCmkG6HGcXFT0V9
- PXFNNgV5jXMQRwU0O/ztJIQqsE5LsUomE//bLwzj9IVsaQpKDqW6TAPjcdBDPLHvriq7kGjt
- WhVhdl0qEYB8lkBEU7V2Yb+SYhmhpDrti9Fq1EsmhiHSkxJcGREoMK/63r9WLZYI3+4W2rAc
- UucZa4OT27U5ZISjNg3Ev0rxU5UH2/pT4wJCfxwocmqaRr6UYmrtZmND89X0KigoFD/XSeVv
- jwBRNjPAubK9/k5NoRrYqztM9W6sJqrH8+UWZ1Idd/DdmogJh0gNC0+N42Za9yBRURfIdKSb
- B3JfpUqcWwE7vUaYrHG1nw54pLUoPG6sAA7Mehl3nd4pZUALHwARAQABzSREYXZpZCBIaWxk
- ZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT7CwZoEEwEIAEQCGwMCF4ACGQEFCwkIBwICIgIG
- FQoJCAsCBBYCAwECHgcWIQQb2cqtc1xMOkYN/MpN3hD3AP+DWgUCaJzangUJJlgIpAAKCRBN
- 3hD3AP+DWhAxD/9wcL0A+2rtaAmutaKTfxhTP0b4AAp1r/eLxjrbfbCCmh4pqzBhmSX/4z11
- opn2KqcOsueRF1t2ENLOWzQu3Roiny2HOU7DajqB4dm1BVMaXQya5ae2ghzlJN9SIoopTWlR
- 0Af3hPj5E2PYvQhlcqeoehKlBo9rROJv/rjmr2x0yOM8qeTroH/ZzNlCtJ56AsE6Tvl+r7cW
- 3x7/Jq5WvWeudKrhFh7/yQ7eRvHCjd9bBrZTlgAfiHmX9AnCCPRPpNGNedV9Yty2Jnxhfmbv
- Pw37LA/jef8zlCDyUh2KCU1xVEOWqg15o1RtTyGV1nXV2O/mfuQJud5vIgzBvHhypc3p6VZJ
- lEf8YmT+Ol5P7SfCs5/uGdWUYQEMqOlg6w9R4Pe8d+mk8KGvfE9/zTwGg0nRgKqlQXrWRERv
- cuEwQbridlPAoQHrFWtwpgYMXx2TaZ3sihcIPo9uU5eBs0rf4mOERY75SK+Ekayv2ucTfjxr
- Kf014py2aoRJHuvy85ee/zIyLmve5hngZTTe3Wg3TInT9UTFzTPhItam6dZ1xqdTGHZYGU0O
- otRHcwLGt470grdiob6PfVTXoHlBvkWRadMhSuG4RORCDpq89vu5QralFNIf3EysNohoFy2A
- LYg2/D53xbU/aa4DDzBb5b1Rkg/udO1gZocVQWrDh6I2K3+cCs7BTQRVy5+RARAA59fefSDR
- 9nMGCb9LbMX+TFAoIQo/wgP5XPyzLYakO+94GrgfZjfhdaxPXMsl2+o8jhp/hlIzG56taNdt
- VZtPp3ih1AgbR8rHgXw1xwOpuAd5lE1qNd54ndHuADO9a9A0vPimIes78Hi1/yy+ZEEvRkHk
- /kDa6F3AtTc1m4rbbOk2fiKzzsE9YXweFjQvl9p+AMw6qd/iC4lUk9g0+FQXNdRs+o4o6Qvy
- iOQJfGQ4UcBuOy1IrkJrd8qq5jet1fcM2j4QvsW8CLDWZS1L7kZ5gT5EycMKxUWb8LuRjxzZ
- 3QY1aQH2kkzn6acigU3HLtgFyV1gBNV44ehjgvJpRY2cC8VhanTx0dZ9mj1YKIky5N+C0f21
- zvntBqcxV0+3p8MrxRRcgEtDZNav+xAoT3G0W4SahAaUTWXpsZoOecwtxi74CyneQNPTDjNg
- azHmvpdBVEfj7k3p4dmJp5i0U66Onmf6mMFpArvBRSMOKU9DlAzMi4IvhiNWjKVaIE2Se9BY
- FdKVAJaZq85P2y20ZBd08ILnKcj7XKZkLU5FkoA0udEBvQ0f9QLNyyy3DZMCQWcwRuj1m73D
- sq8DEFBdZ5eEkj1dCyx+t/ga6x2rHyc8Sl86oK1tvAkwBNsfKou3v+jP/l14a7DGBvrmlYjO
- 59o3t6inu6H7pt7OL6u6BQj7DoMAEQEAAcLBfAQYAQgAJgIbDBYhBBvZyq1zXEw6Rg38yk3e
- EPcA/4NaBQJonNqrBQkmWAihAAoJEE3eEPcA/4NaKtMQALAJ8PzprBEXbXcEXwDKQu+P/vts
- IfUb1UNMfMV76BicGa5NCZnJNQASDP/+bFg6O3gx5NbhHHPeaWz/VxlOmYHokHodOvtL0WCC
- 8A5PEP8tOk6029Z+J+xUcMrJClNVFpzVvOpb1lCbhjwAV465Hy+NUSbbUiRxdzNQtLtgZzOV
- Zw7jxUCs4UUZLQTCuBpFgb15bBxYZ/BL9MbzxPxvfUQIPbnzQMcqtpUs21CMK2PdfCh5c4gS
- sDci6D5/ZIBw94UQWmGpM/O1ilGXde2ZzzGYl64glmccD8e87OnEgKnH3FbnJnT4iJchtSvx
- yJNi1+t0+qDti4m88+/9IuPqCKb6Stl+s2dnLtJNrjXBGJtsQG/sRpqsJz5x1/2nPJSRMsx9
- 5YfqbdrJSOFXDzZ8/r82HgQEtUvlSXNaXCa95ez0UkOG7+bDm2b3s0XahBQeLVCH0mw3RAQg
- r7xDAYKIrAwfHHmMTnBQDPJwVqxJjVNr7yBic4yfzVWGCGNE4DnOW0vcIeoyhy9vnIa3w1uZ
- 3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
- CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
- qIws/H2t
-In-Reply-To: <a99eb11f-a7ac-48a3-a671-c5f0f6b5b491@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: MD Danish Anwar <danishanwar@ti.com>
+In-Reply-To: <20250916112952.26032-6-dong100@mucse.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 
 
->> +
->> +	0 - Enable soft offline
->> +	1 - Disable soft offline for HugeTLB pages
->> +
->> +Supported values::
->> +
->> +	0 - Soft offline is disabled
->> +	1 - Soft offline is enabled
->> +	3 - Soft offline is enabled (disabled for HugeTLB pages)
+
+On 16/09/25 4:59 pm, Dong Yibo wrote:
+> Complete the network device (netdev) registration flow for Mucse Gbe
+> Ethernet chips, including:
+> 1. Hardware state initialization:
+>    - Send powerup notification to firmware (via echo_fw_status)
+>    - Sync with firmware
+>    - Reset hardware
+> 2. MAC address handling:
+>    - Retrieve permanent MAC from firmware (via mucse_mbx_get_macaddr)
+>    - Fallback to random valid MAC (eth_random_addr) if not valid mac
+>      from Fw
 > 
-> This looks very adhoc even though existing behavior is preserved.
+> Signed-off-by: Dong Yibo <dong100@mucse.com>
+> ---
+>  drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    |  18 +++
+>  .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   |  80 ++++++++++++++
+>  drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |   2 +
+>  .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 103 ++++++++++++++++++
+>  4 files changed, 203 insertions(+)
 > 
-> - Are HugeTLB pages the only page types to be considered ?
-> - How the remaining bits here are going to be used later ?
-> 
+> diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> index 41b580f2168f..4c4b2f13cb4a 100644
+> --- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+> @@ -6,6 +6,7 @@
+>  
+>  #include <linux/types.h>
+>  #include <linux/mutex.h>
+> +#include <linux/netdevice.h>
+>  
+>  enum rnpgbe_boards {
+>  	board_n500,
+> @@ -34,12 +35,26 @@ struct mucse_mbx_info {
+>  	u32 fwpf_ctrl_base;
+>  };
+>  
+> +enum {
+> +	mucse_fw_powerup,
+> +};
+> +
 
-What I proposed (that could be better documented here) is that all other 
-bits except the first one will be a disable mask when bit 0 is set.
+This enum has only one value. You should either use a #define or add
+more values to justify having an enum.
 
-2 - ... but yet disabled for hugetlb
-4 - ... but yet disabled for $WHATEVER
-8 - ... but yet disabled for $WHATEVERELSE
+>  struct mucse_hw {
+>  	void __iomem *hw_addr;
+> +	struct pci_dev *pdev;
+> +	const struct mucse_hw_operations *ops;
+>  	struct mucse_mbx_info mbx;
+> +	int port;
+> +	u8 perm_addr[ETH_ALEN];
+>  	u8 pfvfnum;
+>  };
+>  
+> +struct mucse_hw_operations {
+> +	int (*reset_hw)(struct mucse_hw *hw);
+> +	int (*get_perm_mac)(struct mucse_hw *hw);
+> +	int (*mbx_send_notify)(struct mucse_hw *hw, bool enable, int mode);
+> +};
+> +
+>  struct mucse {
+>  	struct net_device *netdev;
+>  	struct pci_dev *pdev;
+> @@ -54,4 +69,7 @@ int rnpgbe_init_hw(struct mucse_hw *hw, int board_type);
+>  #define PCI_DEVICE_ID_N500_DUAL_PORT 0x8318
+>  #define PCI_DEVICE_ID_N210 0x8208
+>  #define PCI_DEVICE_ID_N210L 0x820a
+> +
+> +#define mucse_hw_wr32(hw, reg, val) \
+> +	writel((val), (hw)->hw_addr + (reg))
+>  #endif /* _RNPGBE_H */
+> diff --git a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+> index 86f1c75796b0..667e372387a2 100644
+> --- a/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+> +++ b/drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+> @@ -1,11 +1,88 @@
+>  // SPDX-License-Identifier: GPL-2.0
+>  /* Copyright(c) 2020 - 2025 Mucse Corporation. */
+>  
+> +#include <linux/pci.h>
+>  #include <linux/errno.h>
+> +#include <linux/etherdevice.h>
+>  
+>  #include "rnpgbe.h"
+>  #include "rnpgbe_hw.h"
+>  #include "rnpgbe_mbx.h"
+> +#include "rnpgbe_mbx_fw.h"
+> +
+> +/**
+> + * rnpgbe_get_permanent_mac - Get permanent mac
+> + * @hw: hw information structure
+> + *
+> + * rnpgbe_get_permanent_mac tries to get mac from hw
+> + *
+> + * Return: 0 on success, negative errno on failure
+> + **/
+> +static int rnpgbe_get_permanent_mac(struct mucse_hw *hw)
+> +{
+> +	struct device *dev = &hw->pdev->dev;
+> +	u8 *mac_addr = hw->perm_addr;
+> +	int err;
+> +
+> +	err = mucse_mbx_get_macaddr(hw, hw->pfvfnum, mac_addr, hw->port);
+> +	if (err) {
+> +		dev_err(dev, "Failed to get MAC from FW %d\n", err);
+> +		return err;
+> +	}
+> +
+> +	if (!is_valid_ether_addr(mac_addr)) {
+> +		dev_err(dev, "Failed to get valid MAC from FW\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * rnpgbe_reset - Do a hardware reset
+> + * @hw: hw information structure
+> + *
+> + * rnpgbe_reset calls fw to do a hardware
+> + * reset, and cleans some regs to default.
+> + *
+> + * Return: 0 on success, negative errno on failure
+> + **/
+> +static int rnpgbe_reset(struct mucse_hw *hw)
+> +{
+> +	mucse_hw_wr32(hw, RNPGBE_DMA_AXI_EN, 0);
+> +	return mucse_mbx_reset_hw(hw);
+> +}
+> +
+> +/**
+> + * rnpgbe_mbx_send_notify - Echo fw status
+> + * @hw: hw information structure
+> + * @enable: true or false status
+> + * @mode: status mode
+> + *
+> + * Return: 0 on success, negative errno on failure
+> + **/
+> +static int rnpgbe_mbx_send_notify(struct mucse_hw *hw,
+> +				  bool enable,
+> +				  int mode)
+> +{
+> +	int err;
+> +
+> +	switch (mode) {
+> +	case mucse_fw_powerup:
+> +		err = mucse_mbx_powerup(hw, enable);
+> +		break;
+> +	default:
+> +		err = -EINVAL;
+> +	}
+> +
 
-> Also without a bit-wise usage roadmap, is not changing a procfs
-> interface (ABI) bit problematic ?
+Since you only have one mode currently, this switch statement seems
+unnecessary.
 
-For now we failed setting it to values that are neither 0 or 1, IIUC 
-set_enable_soft_offline() correctly?
-
-So there should not be any problem, or which scenario do you have in mind?
+> +	return err;
+> +}
 
 
 -- 
-Cheers
-
-David / dhildenb
+Thanks and Regards,
+Danish
 
 
