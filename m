@@ -1,209 +1,225 @@
-Return-Path: <linux-doc+bounces-60857-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-60859-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C6D3B7CD44
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 14:10:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C17BDB7CD2B
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 14:10:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0F0533BA94E
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 03:51:45 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DF7F4582F23
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Sep 2025 03:54:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6F4626C3BF;
-	Wed, 17 Sep 2025 03:51:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D226926159E;
+	Wed, 17 Sep 2025 03:54:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from szxga05-in.huawei.com (szxga05-in.huawei.com [45.249.212.191])
+Received: from mxct.zte.com.cn (mxct.zte.com.cn [183.62.165.209])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D09F1266B52;
-	Wed, 17 Sep 2025 03:51:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.191
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF8E42E1F0D;
+	Wed, 17 Sep 2025 03:54:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=183.62.165.209
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758081102; cv=none; b=dgVgqK9HJVfD/aHtR7hapGiPa48nmn++Ub12VHptXAH1W45uC2u0RUxyNr+rTEfO4EhotU6gesvSRI/UGKvh1UH/a8Xr4RwVugPDKxy9c9XdaBU8GyLTSNiLUMNAMQbB9T1kqg0njHZvvFpfSJznHayJUbVkuZHDg3dyImVeY+4=
+	t=1758081279; cv=none; b=CMiCrs59h3k4DOn6peSQIwNQHnzaCxb8YKRViWIYZ+KmUnlUxgg5IMhmtuhz2ZbpvVObbco0mEQ/q8V5Zt4T40tt1NRx7+RyDqpzNvk/duVqdK2aZcSR8wnii4Lhe3jzB/sZYnYXhsS1OAVCebtCgKl7niFipdh5X4ni/DM3tX8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758081102; c=relaxed/simple;
-	bh=u7c+r//wgKuoq5mfIPiqxIeI+U7gJ7weyS82CWY8jL0=;
-	h=CC:Subject:To:References:From:Message-ID:Date:MIME-Version:
-	 In-Reply-To:Content-Type; b=HPQhl/8EF20cAX30TJL9DqiaiFvSkCo7hHnV6eZmM5lJY5cco0lN/mRvzIXvV1dDBW9OOjw5soLXKmMI64/vjycY+R51jiyjLajy30jaIAjoaqhhl2+8eWll+fEUBWnRrDd+IJbKsmAw9if8Z4qUzdDmu0IeWw1uPvpVEzYyDgY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=45.249.212.191
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.19.163.44])
-	by szxga05-in.huawei.com (SkyGuard) with ESMTP id 4cRPqw6FCQz24j6S;
-	Wed, 17 Sep 2025 11:48:12 +0800 (CST)
-Received: from dggemv705-chm.china.huawei.com (unknown [10.3.19.32])
-	by mail.maildlp.com (Postfix) with ESMTPS id 032081401F4;
-	Wed, 17 Sep 2025 11:51:37 +0800 (CST)
-Received: from kwepemq200018.china.huawei.com (7.202.195.108) by
- dggemv705-chm.china.huawei.com (10.3.19.32) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Wed, 17 Sep 2025 11:51:22 +0800
-Received: from [10.67.121.177] (10.67.121.177) by
- kwepemq200018.china.huawei.com (7.202.195.108) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Wed, 17 Sep 2025 11:51:21 +0800
-CC: <yangyicong@hisilicon.com>, Will Deacon <will@kernel.org>, "Jonathan
- Cameron" <jonathan.cameron@huawei.com>, <maz@kernel.org>,
-	<oliver.upton@linux.dev>, <corbet@lwn.net>,
-	<linux-arm-kernel@lists.infradead.org>, <kvmarm@lists.linux.dev>,
-	<linux-kselftest@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<joey.gouly@arm.com>, <suzuki.poulose@arm.com>, <yuzenghui@huawei.com>,
-	<shuah@kernel.org>, <shameerali.kolothum.thodi@huawei.com>,
-	<linuxarm@huawei.com>, <prime.zeng@hisilicon.com>, <xuwei5@huawei.com>,
-	<tangchengchang@huawei.com>, <wangzhou1@hisilicon.com>
-Subject: Re: [PATCH v4 5/7] arm64: Add support for FEAT_{LS64, LS64_V}
-To: Catalin Marinas <catalin.marinas@arm.com>
-References: <20250715081356.12442-1-yangyicong@huawei.com>
- <20250715081356.12442-6-yangyicong@huawei.com>
- <aL7Fgx__LeLfbDyU@willie-the-truck>
- <5d2ba565-715b-9b17-951b-f805dde5988b@huawei.com>
- <aMLvtpaCgRqPAU2Z@willie-the-truck> <20250912144736.00007673@huawei.com>
- <666e3588-2e42-2275-f9ec-94ba0954bdc6@huawei.com> <aMl6u7xTDLhrZmqK@arm.com>
-From: Yicong Yang <yangyicong@huawei.com>
-Message-ID: <0dfe5781-7ca7-7d9f-b099-b20da5e10a1b@huawei.com>
-Date: Wed, 17 Sep 2025 11:51:20 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.1
+	s=arc-20240116; t=1758081279; c=relaxed/simple;
+	bh=Q2kM3lnHr5P4zMjlGfNl/diKMPh85vv3c9VIC7C07HA=;
+	h=Date:Message-ID:In-Reply-To:References:Mime-Version:From:To:Cc:
+	 Subject:Content-Type; b=d1h+n1rMlhV+PdTvGr+vKN6e1Med7gEe3D8ae3hDWpj40e7H2uWvi6FJGIlC8+07QPfYX1wPRkpHZcT7Y0ZkHi1iPV66bF6geQv2mQDHujFtSeYzCAONo2jwKS+bd0Mp6k0vBUBI/6yofBJvFtLzT01Cpnv85vIZ6pEr+szhydk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn; spf=pass smtp.mailfrom=zte.com.cn; arc=none smtp.client-ip=183.62.165.209
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
+Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mxct.zte.com.cn (FangMail) with ESMTPS id 4cRPz71x8Qz5B146;
+	Wed, 17 Sep 2025 11:54:27 +0800 (CST)
+Received: from xaxapp01.zte.com.cn ([10.88.99.176])
+	by mse-fl2.zte.com.cn with SMTP id 58H3r3u6005823;
+	Wed, 17 Sep 2025 11:53:04 +0800 (+08)
+	(envelope-from shao.mingyin@zte.com.cn)
+Received: from mapi (xaxapp04[null])
+	by mapi (Zmail) with MAPI id mid32;
+	Wed, 17 Sep 2025 11:53:05 +0800 (CST)
+Date: Wed, 17 Sep 2025 11:53:05 +0800 (CST)
+X-Zmail-TransId: 2afb68ca30a15ba-e6a56
+X-Mailer: Zmail v1.0
+Message-ID: <20250917115305176nSeCtz0xVxMrUHVC_vRd4@zte.com.cn>
+In-Reply-To: <20250917115057635tlnrFBfUcn1C1pBCZ02gN@zte.com.cn>
+References: 20250917115057635tlnrFBfUcn1C1pBCZ02gN@zte.com.cn
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-In-Reply-To: <aMl6u7xTDLhrZmqK@arm.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
- kwepemq200018.china.huawei.com (7.202.195.108)
+Mime-Version: 1.0
+From: <shao.mingyin@zte.com.cn>
+To: <shao.mingyin@zte.com.cn>
+Cc: <alexs@kernel.org>, <si.yanteng@linux.dev>, <dzm91@hust.edu.cn>,
+        <corbet@lwn.net>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <yang.yang29@zte.com.cn>,
+        <xu.xin16@zte.com.cn>, <yang.tao172@zte.com.cn>,
+        <wang.longjie1@zte.com.cn>
+Subject: =?UTF-8?B?W1BBVENIIHY1IDEvN10gRG9jcy96aF9DTjogVHJhbnNsYXRlIHViaWZzLnJzdCB0byBTaW1wbGlmaWVkIENoaW5lc2U=?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL:mse-fl2.zte.com.cn 58H3r3u6005823
+X-TLS: YES
+X-SPF-DOMAIN: zte.com.cn
+X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
+X-SPF: None
+X-SOURCE-IP: 10.5.228.133 unknown Wed, 17 Sep 2025 11:54:27 +0800
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 68CA30F3.000/4cRPz71x8Qz5B146
 
-On 2025/9/16 22:56, Catalin Marinas wrote:
-> On Mon, Sep 15, 2025 at 04:29:25PM +0800, Yicong Yang wrote:
->> On 2025/9/12 21:47, Jonathan Cameron wrote:
->>> On Thu, 11 Sep 2025 16:50:14 +0100
->>> Will Deacon <will@kernel.org> wrote:
->>>> On Tue, Sep 09, 2025 at 09:48:04AM +0800, Yicong Yang wrote:
->>>>> per ARM DDI0487 L.b section C3.2.6,
->>>>>
->>>>>   When the instructions access a memory type that is not one of the following,
->>>>>   a data abort for unsupported Exclusive or atomic access is generated...  
->>>>
->>>> That's about the memory _type_. I'm talking about a supported memory type
->>>> (e.g. writeback cacheable) but when the physical location doesn't support
->>>> the instruction. That's captured a little later in the same section:
->>>>
->>>>   | If the target memory location does not support the LD64B or ST64B
->>>>   | instructions, then one of the following behaviors occurs:
->>>>   |  * A stage 1 Data Abort, reported using the DFSC code of 0b110101,
->>>>   |    is generated.
->>>>   |  * The instruction performs the memory accesses, but the accesses
->>>>   |    are not single-copy atomic above the byte level
-> 
-> Is this a new addition to the L.b release of the ARM ARM? Maybe it was
-> there before in some other form (or a different place). At least it
-> doesn't say "unpredictable".
-> 
+From: Shao Mingyin <shao.mingyin@zte.com.cn>
 
-i think it's new in L.b. didn't find this is mentioned in K.a either.
+translate the "ubifs.rst" into Simplified Chinese.
 
->>>> and I think that's a bad interface to expose blindly to userspace solely
->>>> as a boolean hwcap.
->>>
->>> Nasty, so now I'm curious. Any thoughts on how to expose what regions it is appropriate
->>> for?  I can think of various heavy weight options but wondering if there is a simple
->>> solution.
->>
->> in my understanding the hwcap only describes the capabilities of the CPU but not
->> the whole system. the users should make sure the function works as expected if the
->> CPU supports it and they're going to use it. specifically the LS64 is intended for
->> device memory only, so the user should take responsibility of using it on supported
->> memory.
-> 
-> We have other cases like MTE where we avoid exposing the HWCAP to user
-> if we know the memory system does not support MTE, though we intercepted
-> this early and asked the (micro)architects to tie the CPU ID field to
-> what the system supports.
-> 
+Update to commit 5f5cae9b0e81("Documentation: ubifs: Fix
+compression idiom")
 
-but we lack the same identification mechanism as CPU for the memory system, so it's just a
-restriction for the hardware vendor that if certain feature is not supported for the whole
-system (SoC) then do not advertise it in the CPU's ID field. otherwise i think we're currently
-doing in the manner that if capability mismatch or cannot work as expected together then a
-errata/workaround is used to disable the feature or add some workaround on this certain
-platform.
+Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
+Signed-off-by: yang tao <yang.tao172@zte.com.cn>
+---
+v4->v5
+fix some format issues.
+ .../translations/zh_CN/filesystems/index.rst  |   2 +-
+ .../translations/zh_CN/filesystems/ubifs.rst  | 114 ++++++++++++++++++
+ 2 files changed, 115 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/filesystems/ubifs.rst
 
-this is also the case for LS64 but a bit more complex, since it involves the completer outside
-the SoC (the device) and could be a hotplug one (PCIe). from the SoC part we can restrict to
-advertise the feature only if it's fully supported (what we've already done on our hardware).
-
->> may raise the similar question if use other atomic instructions (e.g. LSE) on the
->> memory does not support atomicity. find this restriction in ARM DDI0487 L.b section B2.2.6
->>
->>   Some system implementations might not support atomic instructions for all regions of the
->>   memory
-> 
-> With exclusives or atomics, we require that the general purpose (system)
-> RAM supports the feature, otherwise Linux won't work properly (I don't
-> think we specifically documented this but it would be fairly obvious
-> when the kernel doesn't boot or user-space randomly crashes).
-> 
-
-yes the spec requires general purpose memory to support atomicity.
-
-  The architecture only requires that Conventional memory that is mapped in this way supports
-  this functionality
-
-otherwise users should have knowledge whether the target memory agent support atomicity.
-
->> and if perform atomic instruction on unsupported memory it's allowed to implement as
->>
->>   * The instruction generates a synchronous External abort.
->>   * The instruction generates a System Error interrupt.
->>   * The instruction generates an IMPLEMENTATION DEFINED MMU fault reported using the Data
->>     Abort Fault status code of ESR_ELx.DFSC = 110101.
->>   * The instruction is treated as a NOP.
->>   * The instructions are performed, but there is no guarantee that the memory accesses were
->>     performed atomically in regard to other agents that access memory. In this case, the
->>     instruction might also generate a System Error interrupt.
->>
->> if instruction performed without generate a SEI in the last implementation, it's quite similar
->> to the condition of LS64.
-> 
-> The difference is that we don't support Linux on such systems.
-> 
-> Arguably, the use of LD/ST64B* is fairly specialised and won't be used
-> on the general purpose RAM and by random applications. It needs a device
-> driver to create the NC/Device mapping and specific programs/libraries
-> to access it. I'm not sure the LS64 properties are guaranteed by the
-> device alone or the device together with the interconnect. I suspect the
-> latter and neither the kernel driver nor user space can tell. In the
-> best case, you get a fault and realise the system doesn't work as
-> expected. Worse is the non-atomicity with potentially silent corruption.
-> 
-
-will be the latter one, both interconnect and the target device need to
-support it. but I think the driver developer (kernel driver or userspace
-driver) must have knowledge about the support status, otherwise they
-should not use it.
-
-for general purpose ram currently we have fault mechenism to avoid ld/st64b
-usage (there's maybe an exception if FEAT_LS64WB is supported, which is
-introduced in the latest feature list but no spec describe it and allows
-perform ld/st64b on memory with write-back attribute. but currently I have
-no details about this feature from any public documents)
-
-> So, to Will's point, the HWCAP is not sufficient for user space to make
-> an informed decision on whether it can safely use the LS64 instructions.
-> Can a (generic) device driver tell or do we need additional information
-> in firmware tables to advertise the correct behaviour?
-> 
-
-my thoughts is that the driver developer should have known whether their
-device support it or not if going to use this. the information in the
-firmware table should be fine for platform devices, but cannot describe
-information for hotpluggable ones like PCIe endpoint devices which may
-not be listed in a firmware table.
-
-thanks.
-
+diff --git a/Documentation/translations/zh_CN/filesystems/index.rst b/Documentation/translations/zh_CN/filesystems/index.rst
+index 9f2a8b003778..6049b599dec8 100644
+--- a/Documentation/translations/zh_CN/filesystems/index.rst
++++ b/Documentation/translations/zh_CN/filesystems/index.rst
+@@ -26,4 +26,4 @@ Linux Kernel中的文件系统
+    virtiofs
+    debugfs
+    tmpfs
+-
++   ubifs
+diff --git a/Documentation/translations/zh_CN/filesystems/ubifs.rst b/Documentation/translations/zh_CN/filesystems/ubifs.rst
+new file mode 100644
+index 000000000000..16c28bfd6fc3
+--- /dev/null
++++ b/Documentation/translations/zh_CN/filesystems/ubifs.rst
+@@ -0,0 +1,114 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/filesystems/ubifs.rst
++
++:翻译:
++
++   邵明寅 Shao Mingyin <shao.mingyin@zte.com.cn>
++
++:校译:
++
++   - 杨涛 yang tao <yang.tao172@zte.com.cn>
++
++============
++UBI 文件系统
++============
++
++简介
++====
++
++UBIFS 文件系统全称为 UBI 文件系统（UBI File System）。UBI 代表无序块镜
++像（Unsorted Block Images）。UBIFS 是一种闪存文件系统，这意味着它专为闪
++存设备设计。需要理解的是，UBIFS与 Linux 中任何传统文件系统（如 Ext2、
++XFS、JFS 等）完全不同。UBIFS 代表一类特殊的文件系统，它们工作在 MTD 设备
++而非块设备上。该类别的另一个 Linux 文件系统是 JFFS2。
++
++为更清晰说明，以下是 MTD 设备与块设备的简要比较：
++
++1. MTD 设备代表闪存设备，由较大尺寸的擦除块组成，通常约 128KiB。块设备由
++   小块组成，通常 512 字节。
++2. MTD 设备支持 3 种主要操作：在擦除块内偏移位置读取、在擦除块内偏移位置写
++   入、以及擦除整个擦除块。块设备支持 2 种主要操作：读取整个块和写入整个块。
++3. 整个擦除块必须先擦除才能重写内容。块可直接重写。
++4. 擦除块在经历一定次数的擦写周期后会磨损，通常 SLC NAND 和 NOR 闪存为
++   100K-1G 次，MLC NAND 闪存为 1K-10K 次。块设备不具备磨损特性。
++5. 擦除块可能损坏（仅限 NAND 闪存），软件需处理此问题。硬盘上的块通常不会损
++   坏，因为硬件有坏块替换机制（至少现代 LBA 硬盘如此）。
++
++这充分说明了 UBIFS 与传统文件系统的本质差异。
++
++UBIFS 工作在 UBI 层之上。UBI 是一个独立的软件层（位于 drivers/mtd/ubi），
++本质上是卷管理和磨损均衡层。它提供称为 UBI 卷的高级抽象，比 MTD 设备更上层。
++UBI 设备的编程模型与 MTD 设备非常相似，仍由大容量擦除块组成，支持读/写/擦
++除操作，但 UBI 设备消除了磨损和坏块限制（上述列表的第 4 和第 5 项）。
++
++某种意义上，UBIFS 是 JFFS2 文件系统的下一代产品，但它与 JFFS2 差异巨大且
++不兼容。主要区别如下：
++
++* JFFS2 工作在 MTD 设备之上，UBIFS 依赖于 UBI 并工作在 UBI 卷之上。
++* JFFS2 没有介质索引，需在挂载时构建索引，这要求全介质扫描。UBIFS 在闪存
++  介质上维护文件系统索引信息，无需全介质扫描，因此挂载速度远快于 JFFS2。
++* JFFS2 是直写（write-through）文件系统，而 UBIFS 支持回写
++  （write-back），这使得 UBIFS 写入速度快得多。
++
++与 JFFS2 类似，UBIFS 支持实时压缩，可将大量数据存入闪存。
++
++与 JFFS2 类似，UBIFS 能容忍异常重启和断电。它不需要类似 fsck.ext2 的工
++具。UBIFS 会自动重放日志并从崩溃中恢复，确保闪存数据结构的一致性。
++
++UBIFS 具有对数级扩展性（其使用的数据结构多为树形），因此挂载时间和内存消耗不
++像 JFFS2 那样线性依赖于闪存容量。这是因为 UBIFS 在闪存介质上维护文件系统
++索引。但 UBIFS 依赖于线性扩展的 UBI 层，因此整体 UBI/UBIFS 栈仍是线性扩
++展。尽管如此，UBIFS/UBI 的扩展性仍显著优于 JFFS2。
++
++UBIFS 开发者认为，未来可开发同样具备对数级扩展性的 UBI2。UBI2 将支持与
++UBI 相同的 API，但二进制不兼容。因此 UBIFS 无需修改即可使用 UBI2。
++
++挂载选项
++========
++
++(*) 表示默认选项。
++
++====================    =======================================================
++bulk_read               批量读取以利用闪存介质的顺序读取加速特性
++no_bulk_read (*)        禁用批量读取
++no_chk_data_crc (*)     跳过数据节点的 CRC 校验以提高读取性能。 仅在闪存
++                        介质高度可靠时使用此选项。 此选项可能导致文件内容损坏无法被
++                        察觉。
++chk_data_crc            强制校验数据节点的 CRC
++compr=none              覆盖默认压缩器，设置为"none"
++compr=lzo               覆盖默认压缩器，设置为"LZO"
++compr=zlib              覆盖默认压缩器，设置为"zlib"
++auth_key=               指定用于文件系统身份验证的密钥。
++                        使用此选项将强制启用身份验证。
++                        传入的密钥必须存在于内核密钥环中， 且类型必须是'logon'
++auth_hash_name=         用于身份验证的哈希算法。同时用于哈希计算和 HMAC
++                        生成。典型值包括"sha256"或"sha512"
++====================    =======================================================
++
++快速使用指南
++============
++
++挂载的 UBI 卷通过 "ubiX_Y" 或 "ubiX:NAME" 语法指定，其中 "X" 是 UBI
++设备编号，"Y" 是 UBI 卷编号，"NAME" 是 UBI 卷名称。
++
++将 UBI 设备 0 的卷 0 挂载到 /mnt/ubifs::
++
++    $ mount -t ubifs ubi0_0 /mnt/ubifs
++
++将 UBI 设备 0 的 "rootfs" 卷挂载到 /mnt/ubifs（"rootfs" 是卷名）::
++
++    $ mount -t ubifs ubi0:rootfs /mnt/ubifs
++
++以下是内核启动参数的示例，用于将 mtd0 附加到 UBI 并挂载 "rootfs" 卷：
++ubi.mtd=0 root=ubi0:rootfs rootfstype=ubifs
++
++参考资料
++========
++
++UBIFS 文档及常见问题解答/操作指南请访问 MTD 官网：
++
++- http://www.linux-mtd.infradead.org/doc/ubifs.html
++- http://www.linux-mtd.infradead.org/faq/ubifs.html
+-- 
+2.27.0
 
