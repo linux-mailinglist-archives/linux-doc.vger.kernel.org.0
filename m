@@ -1,203 +1,172 @@
-Return-Path: <linux-doc+bounces-61255-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61257-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1310CB872A0
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Sep 2025 23:37:47 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 15E50B872EE
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Sep 2025 23:53:17 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C15DF3B608C
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Sep 2025 21:37:45 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B8519566A34
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Sep 2025 21:53:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A2192ED85D;
-	Thu, 18 Sep 2025 21:37:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D9A792D7DDE;
+	Thu, 18 Sep 2025 21:53:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l7grNq3d"
+	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="EAa0YF35"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB271F4181;
-	Thu, 18 Sep 2025 21:37:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A3AF2222B4
+	for <linux-doc@vger.kernel.org>; Thu, 18 Sep 2025 21:53:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758231462; cv=none; b=UsVP+V/wsnbXSo98LID3xwBtIyJdtS92wrsjKvdmJFZv1J+RAzZJs6XayM7ptYJzXolHwvirCPLt8uUhbWdbEZ02d6zBtVKjydMKybT34Ub91Qj3XHtSDKCZRyV4VTJFYptancac+4cyuoK58un4as6MnMpj8vZqcXOIhpPCw50=
+	t=1758232393; cv=none; b=OMQLMS1+hwGQERKOzsEaDGAa1+eP/bO6a6vvqxX2cbFhIX49PzOtzH90/6E9PQVHJVjw9mpPi4kdA2xIg4kE/r0IVlxmvBJ3SbWr+FahT2ibmVHPjDF529/oycRlLCNJn4GAxc9yDMTnJW3JlnMzyEQ9udZbVc0O5x0m0kWfKMg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758231462; c=relaxed/simple;
-	bh=nenRloHhZZ/kclJh+U9hD8GUkdddf+gbcseCB9vGaTA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jMx1kbHOoR4TeGz0XGyA7KILgUUA2hQ95sJk8BzJ0DQasAY4XGdPCdP7OjLFNz8lyS/FVrGOfJkHEQF7aLJDLBE8+Bk4/GjV3CbSTtWAUK2Hhpl2AkNYVk1LzVQWErC0+hoH1wp527T1dxb2WPiWHDgONmxN8ia1D0k/ODBM/+4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l7grNq3d; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 678F0C4CEE7;
-	Thu, 18 Sep 2025 21:37:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758231461;
-	bh=nenRloHhZZ/kclJh+U9hD8GUkdddf+gbcseCB9vGaTA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=l7grNq3d0Kdjc0jbyt0wdda6yxWRm/Oer5VgGBWej6sjwWfWxTFlFwbPSTbKf+6l4
-	 /PaJkQ4fIDoZnz47KXyaczu+zBvqKT/jSRiA/N7iqLTWdclY/k104BdXcY3ZTnUoYg
-	 bBZOM5aB/rPpOWpo1NdgfJSIHxvUX8IQXiPzS1d4arlHUH4i95Gw5P5IH5tT6UZVr9
-	 cyUXtu20Ilhtaz0kQmJQnh2Zef+b9nIynjv062tEyZTO6UfMYlMfvMgvmmgwZX5bpg
-	 HQ+7H4TEadKHZAwFtpwk4uzVTX+8QapEFTJwaRNWhWYQLYt+B7Kso3rqstY2UQkOiE
-	 9fJuhh/u8FMzg==
-Date: Thu, 18 Sep 2025 14:37:40 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: Joanne Koong <joannelkoong@gmail.com>
-Cc: brauner@kernel.org, miklos@szeredi.hu, hch@infradead.org,
-	hsiangkao@linux.alibaba.com, linux-block@vger.kernel.org,
-	gfs2@lists.linux.dev, linux-fsdevel@vger.kernel.org,
-	kernel-team@meta.com, linux-xfs@vger.kernel.org,
-	linux-doc@vger.kernel.org, Christoph Hellwig <hch@lst.de>
-Subject: Re: [PATCH v3 04/15] iomap: iterate over entire folio in
- iomap_readpage_iter()
-Message-ID: <20250918213740.GV1587915@frogsfrogsfrogs>
-References: <20250916234425.1274735-1-joannelkoong@gmail.com>
- <20250916234425.1274735-5-joannelkoong@gmail.com>
+	s=arc-20240116; t=1758232393; c=relaxed/simple;
+	bh=OBdCMGeWv7G/tkOmZiDbcUQKLH/CnWF06gVEbnVu89c=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=oZLP3WzvTbxr56TiM3LxEW1l0TWvoGkS1g/IdQmVa0W9CvxVEb22g9xL8Xgl4G2IUZwq2aPbbFONaJ5W65fh2F+Hy0TeZnOOw9huzZkbGwbk/nptdwsDERExoT4ippW/YTGL62WIatyeOIerr6UMmCssf9rm6AyGIqQUySnZzV4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-foundation.org; spf=pass smtp.mailfrom=linuxfoundation.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=EAa0YF35; arc=none smtp.client-ip=209.85.167.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-foundation.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linuxfoundation.org
+Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5688ac2f39dso1797005e87.3
+        for <linux-doc@vger.kernel.org>; Thu, 18 Sep 2025 14:53:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google; t=1758232389; x=1758837189; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=mLiszfQw8YctXWgw7Rv1CzeIAYsEhv/enJDimwborHo=;
+        b=EAa0YF35X3B4dhLliCr6+gjlm1egWOy2/cSxo2UqBQym8ac0RaWsXy3prghYtXgUYs
+         aYkKqOYXl6YQ2H/Xozv/dnpZap8dDSgllR2vzh3cj89DeP3xF3iwKw3I6DSmo/U0hAX2
+         V3IS8s3NJ5FEJ+LkJlXVWWQTIXoxTkk6aHiBs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758232389; x=1758837189;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mLiszfQw8YctXWgw7Rv1CzeIAYsEhv/enJDimwborHo=;
+        b=L2TnODy/32Qrrz05211/+6VC0OIc0t1bAdVNRFBOgJelAkkVsPnEF2cpfHcw+naZdg
+         LCosFrvThYpvnfRVlsqYHlYiXtG8T4fjuoAL9xtpTbjF9FF6Xlhyd6sKGOwOE/sIlUPS
+         rLLgHO00JFHer4pmmWKo4aBYKVzbL+somt6J3f9RwhTSNXoF7RPOGoBBny8QOKFz+MGE
+         1Cb8XfnziC5teEhb/H96AKdwG182i5Dd+mO3ezkN4rPcIFqvIlFaJhUJyadutcmgMhqd
+         flm7WS1yr1Jzga9016oLhAdvO+3yEuZWWsv7CaVJhRTYPnv64BH6JE49pzL2T6TvkIA0
+         xygA==
+X-Forwarded-Encrypted: i=1; AJvYcCU34nCCCC2ljHiIjTFIXUcPb5kjPcYVpcn5ozMn8K4BO/SMorz98s9iKcFM6AWjtjyCnrkh8SfAbko=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx/Z6kB9XO+np/5qGov1Gw+6JA5Ta/jdu4arp260WYMTqVU9jlp
+	foutYghfwxarpHg8xbai4ldkK8RjLAxNJ6t2/Vk79GbamYSUEEJsfMgGQQpYT/XlYPdc94R6E/z
+	wJW0oRJ0qsw==
+X-Gm-Gg: ASbGncukl0UeJYB3sbUY6WhhBp0fm//tFV1PmH5s7TXjsrSV4PL20/H/cha3NhFG/GS
+	Tnl3hdmg5RSo7kVd0uOtVMKpR7lgH2K0Mmnlj8sCWb1GjvnvHdCzPbgkcZafQ5QkRyeo8EwPJLQ
+	PGBERht1nE+KSjs7BabSXVzOBGLsMaIsvRsDMUm2PQEGHyR3moUDMVLit33rmUEyVovYasGzSov
+	OBUfHrBtveeEME38/R7CgPUVReDnpEFpEdy9oa5FRK+nsc5CefUWllFqJX//3m3ysOllHJPT1X4
+	b8v7nSpB3BKMxTT2SS3rhCdeGhCGyh3+aYljpAAsL7vNE23L9TZa0BMmFPWmdnjTV7AHFJVZ8vb
+	KJ4ykTwdbI3VF5WjqD5snSvDBs9RopRgdJyibYkfoxFG+tAqe8hIyAHH9P/nL+6NiyAU/AvzrsL
+	Tk+/ellHherz8mi+c=
+X-Google-Smtp-Source: AGHT+IE6v5jn2PsNEuKSH2dro4AnzY+at3OpRDqqjaslVgKTuYGmK5hcq//R0ycKekKGq2AQph7CZw==
+X-Received: by 2002:a05:6512:6713:b0:57a:3d7e:7275 with SMTP id 2adb3069b0e04-57a3d7e762emr10267e87.36.1758232388401;
+        Thu, 18 Sep 2025 14:53:08 -0700 (PDT)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com. [209.85.167.44])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-578a65070d2sm943679e87.37.2025.09.18.14.53.07
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 18 Sep 2025 14:53:08 -0700 (PDT)
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-55f7039aa1eso1637450e87.1
+        for <linux-doc@vger.kernel.org>; Thu, 18 Sep 2025 14:53:07 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCXibi0IBNBHHzhD9WrbaylHRP3khc88XqZHt+OQjW1WvcgQBhZULeIxTQ42jsUcVY5z35hvDX1vOAo=@vger.kernel.org
+X-Received: by 2002:a17:906:dc89:b0:b0f:a22a:4c30 with SMTP id
+ a640c23a62f3a-b24f5685fdemr62738866b.47.1758232077501; Thu, 18 Sep 2025
+ 14:47:57 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250916234425.1274735-5-joannelkoong@gmail.com>
+References: <20250918140451.1289454-1-elver@google.com> <CAHk-=wgd-Wcp0GpYaQnU7S9ci+FvFmaNw1gm75mzf0ZWdNLxvw@mail.gmail.com>
+ <aMx4-B_WAtX2aiKx@elver.google.com>
+In-Reply-To: <aMx4-B_WAtX2aiKx@elver.google.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Thu, 18 Sep 2025 14:47:41 -0700
+X-Gmail-Original-Message-ID: <CAHk-=wgQO7c0zc8_VwaVSzG3fEVFFcjWzVBKM4jYjv8UiD2dkg@mail.gmail.com>
+X-Gm-Features: AS18NWBxHuMwwtU-EoNbPFA3uJ1YRJkAKqdurj12n-PWNJgH6ecKwZ8QZrX3P28
+Message-ID: <CAHk-=wgQO7c0zc8_VwaVSzG3fEVFFcjWzVBKM4jYjv8UiD2dkg@mail.gmail.com>
+Subject: Re: [PATCH v3 00/35] Compiler-Based Capability- and Locking-Analysis
+To: Marco Elver <elver@google.com>
+Cc: Peter Zijlstra <peterz@infradead.org>, Boqun Feng <boqun.feng@gmail.com>, 
+	Ingo Molnar <mingo@kernel.org>, Will Deacon <will@kernel.org>, 
+	"David S. Miller" <davem@davemloft.net>, Luc Van Oostenryck <luc.vanoostenryck@gmail.com>, 
+	"Paul E. McKenney" <paulmck@kernel.org>, Alexander Potapenko <glider@google.com>, Arnd Bergmann <arnd@arndb.de>, 
+	Bart Van Assche <bvanassche@acm.org>, Bill Wendling <morbo@google.com>, Christoph Hellwig <hch@lst.de>, 
+	Dmitry Vyukov <dvyukov@google.com>, Eric Dumazet <edumazet@google.com>, 
+	Frederic Weisbecker <frederic@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, Ian Rogers <irogers@google.com>, 
+	Jann Horn <jannh@google.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Josh Triplett <josh@joshtriplett.org>, 
+	Justin Stitt <justinstitt@google.com>, Kees Cook <kees@kernel.org>, 
+	Kentaro Takeda <takedakn@nttdata.co.jp>, Lukas Bulwahn <lukas.bulwahn@gmail.com>, 
+	Mark Rutland <mark.rutland@arm.com>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Miguel Ojeda <ojeda@kernel.org>, Nathan Chancellor <nathan@kernel.org>, 
+	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>, Thomas Gleixner <tglx@linutronix.de>, 
+	Thomas Graf <tgraf@suug.ch>, Uladzislau Rezki <urezki@gmail.com>, Waiman Long <longman@redhat.com>, 
+	kasan-dev@googlegroups.com, linux-crypto@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-security-module@vger.kernel.org, linux-sparse@vger.kernel.org, 
+	llvm@lists.linux.dev, rcu@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Sep 16, 2025 at 04:44:14PM -0700, Joanne Koong wrote:
-> Iterate over all non-uptodate ranges in a single call to
-> iomap_readpage_iter() instead of leaving the partial folio iteration to
-> the caller.
-> 
-> This will be useful for supporting caller-provided async folio read
-> callbacks (added in later commit) because that will require tracking
-> when the first and last async read request for a folio is sent, in order
-> to prevent premature read completion of the folio.
-> 
-> This additionally makes the iomap_readahead_iter() logic a bit simpler.
-> 
-> Signed-off-by: Joanne Koong <joannelkoong@gmail.com>
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
+On Thu, 18 Sept 2025 at 14:26, Marco Elver <elver@google.com> wrote:
+>
+> Fair points. "Context Analysis" makes sense, but it makes the thing
+> (e.g. lock) used to establish that context a little awkward to refer to
+> -- see half-baked attempt at reworking the documentation below.
 
-This looks pretty straightforward, so 
-Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+Yeah, I agree that some of that reads more than a bit oddly.
 
---D
+I wonder if we could talk about "context analysis", but then when
+discussing what is *held* for a particular context, call that a
+"context token" or something like that?
 
-> ---
->  fs/iomap/buffered-io.c | 69 ++++++++++++++++++++----------------------
->  1 file changed, 32 insertions(+), 37 deletions(-)
-> 
-> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-> index 2a1709e0757b..0c4ba2a63490 100644
-> --- a/fs/iomap/buffered-io.c
-> +++ b/fs/iomap/buffered-io.c
-> @@ -420,6 +420,7 @@ static int iomap_readpage_iter(struct iomap_iter *iter,
->  	loff_t length = iomap_length(iter);
->  	struct folio *folio = ctx->cur_folio;
->  	size_t poff, plen;
-> +	loff_t count;
->  	int ret;
->  
->  	if (iomap->type == IOMAP_INLINE) {
-> @@ -431,39 +432,33 @@ static int iomap_readpage_iter(struct iomap_iter *iter,
->  
->  	/* zero post-eof blocks as the page may be mapped */
->  	ifs_alloc(iter->inode, folio, iter->flags);
-> -	iomap_adjust_read_range(iter->inode, folio, &pos, length, &poff, &plen);
-> -	if (plen == 0)
-> -		goto done;
->  
-> -	if (iomap_block_needs_zeroing(iter, pos)) {
-> -		folio_zero_range(folio, poff, plen);
-> -		iomap_set_range_uptodate(folio, poff, plen);
-> -	} else {
-> -		iomap_bio_read_folio_range(iter, ctx, pos, plen);
-> -	}
-> +	length = min_t(loff_t, length,
-> +			folio_size(folio) - offset_in_folio(folio, pos));
-> +	while (length) {
-> +		iomap_adjust_read_range(iter->inode, folio, &pos, length, &poff,
-> +				&plen);
->  
-> -done:
-> -	/*
-> -	 * Move the caller beyond our range so that it keeps making progress.
-> -	 * For that, we have to include any leading non-uptodate ranges, but
-> -	 * we can skip trailing ones as they will be handled in the next
-> -	 * iteration.
-> -	 */
-> -	length = pos - iter->pos + plen;
-> -	return iomap_iter_advance(iter, &length);
-> -}
-> +		count = pos - iter->pos + plen;
-> +		if (WARN_ON_ONCE(count > length))
-> +			return -EIO;
->  
-> -static int iomap_read_folio_iter(struct iomap_iter *iter,
-> -		struct iomap_readpage_ctx *ctx)
-> -{
-> -	int ret;
-> +		if (plen == 0)
-> +			return iomap_iter_advance(iter, &count);
->  
-> -	while (iomap_length(iter)) {
-> -		ret = iomap_readpage_iter(iter, ctx);
-> +		if (iomap_block_needs_zeroing(iter, pos)) {
-> +			folio_zero_range(folio, poff, plen);
-> +			iomap_set_range_uptodate(folio, poff, plen);
-> +		} else {
-> +			iomap_bio_read_folio_range(iter, ctx, pos, plen);
-> +		}
-> +
-> +		length -= count;
-> +		ret = iomap_iter_advance(iter, &count);
->  		if (ret)
->  			return ret;
-> +		pos = iter->pos;
->  	}
-> -
->  	return 0;
->  }
->  
-> @@ -482,7 +477,7 @@ int iomap_read_folio(struct folio *folio, const struct iomap_ops *ops)
->  	trace_iomap_readpage(iter.inode, 1);
->  
->  	while ((ret = iomap_iter(&iter, ops)) > 0)
-> -		iter.status = iomap_read_folio_iter(&iter, &ctx);
-> +		iter.status = iomap_readpage_iter(&iter, &ctx);
->  
->  	iomap_bio_submit_read(&ctx);
->  
-> @@ -504,16 +499,16 @@ static int iomap_readahead_iter(struct iomap_iter *iter,
->  	int ret;
->  
->  	while (iomap_length(iter)) {
-> -		if (ctx->cur_folio &&
-> -		    offset_in_folio(ctx->cur_folio, iter->pos) == 0) {
-> -			if (!ctx->cur_folio_in_bio)
-> -				folio_unlock(ctx->cur_folio);
-> -			ctx->cur_folio = NULL;
-> -		}
-> -		if (!ctx->cur_folio) {
-> -			ctx->cur_folio = readahead_folio(ctx->rac);
-> -			ctx->cur_folio_in_bio = false;
-> -		}
-> +		if (ctx->cur_folio && !ctx->cur_folio_in_bio)
-> +			folio_unlock(ctx->cur_folio);
-> +		ctx->cur_folio = readahead_folio(ctx->rac);
-> +		/*
-> +		 * We should never in practice hit this case since the iter
-> +		 * length matches the readahead length.
-> +		 */
-> +		if (WARN_ON_ONCE(!ctx->cur_folio))
-> +			return -EINVAL;
-> +		ctx->cur_folio_in_bio = false;
->  		ret = iomap_readpage_iter(iter, ctx);
->  		if (ret)
->  			return ret;
-> -- 
-> 2.47.3
-> 
-> 
+But I don't mind your "Context guard" notion either. I'm not loving
+it, but it's not offensive to me either.
+
+Then the language would be feel fairly straightforward,
+
+Eg:
+
+> +Context analysis is a way to specify permissibility of operations to depend on
+> +contexts being held (or not held).
+
+That "contexts being held" sounds odd, but talking about "context
+markers", or "context tokens" would seem natural.
+
+An alternative would be to not talk about markers / tokens / guards at
+all, but simply about a context being *active*.
+
+IOW, instead of wording it like this:
+
+> +The set of contexts that are actually held by a given thread at a given point
+> +in program execution is a run-time concept.
+
+that talks about "being held", you could just state it in the sense of
+the "set of contexts being active", and that immediately reads fairly
+naturally, doesn't it?
+
+Because a context is a *state* you are in, it's not something you hold on to.
+
+The tokens - or whatever - would be only some internal implementation
+detail of how the compiler keeps track of which state is active, not
+the conceptual idea itself.
+
+So you name states, and you have functions to mark those context
+states as being entered or exited, but you don't really even have to
+talk about "holding" anything.
+
+No?
+
+               Linus
 
