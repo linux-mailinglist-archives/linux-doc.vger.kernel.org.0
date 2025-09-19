@@ -1,105 +1,123 @@
-Return-Path: <linux-doc+bounces-61330-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61331-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 349F9B8A2AD
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Sep 2025 17:05:21 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 42B53B8A33D
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Sep 2025 17:10:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id C92BC166D2F
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Sep 2025 15:04:30 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EB8C71898EC5
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Sep 2025 15:10:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 703E33148DE;
-	Fri, 19 Sep 2025 15:04:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 492AC314A66;
+	Fri, 19 Sep 2025 15:10:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="xE58bSsG"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O68SLvaS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1190313E30;
-	Fri, 19 Sep 2025 15:04:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FEAC30DEA7;
+	Fri, 19 Sep 2025 15:10:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758294259; cv=none; b=HbJJN1e4FAWDVuPVGmtsjHeBKze2uc38mQEZjDdULlKvcg27QIWgSFyDmNLc9wE8xG+9B5vqIABHmApgpb0L79GPilybwax/I3pgiZMCV6uyyJrCAYiBTwfhgzzQ2nuUgS2QOfDdCZggbLFPQTW6AhUOmVYlw1HJughU9z18zCg=
+	t=1758294607; cv=none; b=fEs8n6JbFtFUMF3mN424S4H8oLosl2CbfC7q8ZuVGh1qBQ4g0suzEflbEaYHQ8eMzqarJ5cSDSk6j4RHhov0CvcgMvXqbn98Z3EbWiAnUrQGAsm5KxPftUMI+9zAafo3754qe4/LDicvSGZt7394/prWgD0pPFvWaXVvZrcyHm0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758294259; c=relaxed/simple;
-	bh=42isF/WZsmBh5ZmpcnOp7XXD2OgHyQsMKCD1TyuRvOQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VN2/+oin6ofIldrpAiYtGYcPdcwVv17KAAB1x9vKXxfMye6NXwdieJg23jCYoGhvt0lD9Sirnj5DDZDw4gtU0llwVAizZwKIkPrYwKSTJj0XqcMMJ/ocvfcwSf0i920n+lLALAQP2hR/XEmWIQ8WiHxVkfiUOjWiEsA48U9z650=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=xE58bSsG; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=Ci6GUzt/zBUPg8YgjcIKFzIGceTJiYQmoDw0F7XTobs=; b=xE58bSsGEbJk8MPAMD2lNBwyCj
-	6iZDmXZHma806PABiz8+4MZk6xBVmBkKSUKOwwfbK0ZW9i6LG426urRxZlRNnhY10U3rOXkAcNtDi
-	AnQslLXWyOblSLTibCbCBDIdT843nD8KmiyaqkmSbCSkHfIf+NtOCQcuLSf20gUL/5vCE1TNo8qqS
-	Mj0jufB8Upbl+JOjMcvKD8I0RT+1Mve9xDgfwXEIhde+lBkSDWYFu676ISkAOFj0DAPZZJ1SMZHxh
-	nZ4qTK4qwLekk3aqpg4TqBAkSM9X8M4W8dJhuIGyhg+dNTAstEzapteJc9jV5iGN2VjgpqYY51pwx
-	O/l+KiBg==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1uzcel-00000003G5z-2STi;
-	Fri, 19 Sep 2025 15:04:15 +0000
-Date: Fri, 19 Sep 2025 08:04:15 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Joanne Koong <joannelkoong@gmail.com>
-Cc: Christoph Hellwig <hch@infradead.org>, brauner@kernel.org,
-	miklos@szeredi.hu, djwong@kernel.org, hsiangkao@linux.alibaba.com,
-	linux-block@vger.kernel.org, gfs2@lists.linux.dev,
-	linux-fsdevel@vger.kernel.org, kernel-team@meta.com,
-	linux-xfs@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 12/16] iomap: add bias for async read requests
-Message-ID: <aM1w77aJZrQPq8Hw@infradead.org>
-References: <20250908185122.3199171-1-joannelkoong@gmail.com>
- <20250908185122.3199171-13-joannelkoong@gmail.com>
- <aMKzG3NUGsQijvEg@infradead.org>
- <CAJnrk1Z2JwUKKoaqExh2gPDxtjRbzSPxzHi3YdBWXKvygGuGFA@mail.gmail.com>
- <CAJnrk1YmxMbT-z9SLxrnrEwagLeyT=bDMzaONYAO6VgQyFHJOQ@mail.gmail.com>
+	s=arc-20240116; t=1758294607; c=relaxed/simple;
+	bh=OZrDpXvXlQuEM0VXhxJ50BrsDq1+DzNvoYuPk5LMHe8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=J1jwAcEdluYcFnqBpzI7ELO/7Y7mTMc2AYxOslzaQf72Wc/fDlSCOzqZmQzcEh/yRGfXHVFRXVaezeTvNpqQjLaFVVCWFNImUoDztf2JTCy5EvmYdp3V0OLJTEk9gPR3SWztrn8ukUBqPYLFMYMqxMcRLxxpCN3Vi3Dt9efH4VM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O68SLvaS; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9365C4CEF0;
+	Fri, 19 Sep 2025 15:10:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1758294606;
+	bh=OZrDpXvXlQuEM0VXhxJ50BrsDq1+DzNvoYuPk5LMHe8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=O68SLvaSpbSq56oSpBpEaVYe8gBf7pm9LFZZ1hetAhH1ZaVYClQOy4zw3RP4I6zRd
+	 jerZMqZnymDa1RRCjFHDH1tbIpC6A4dd1lDNtnGVBDj5Naf3Hik0J9OOeP98qI+qV7
+	 U0/qK8mVv6xXZ3HAE6KSo2ejmVtyLDOvtIchS254EvujMzvYVgpoK1hwn6WzWHweuC
+	 nji0pdPFQaLpd5IXSvtjebQBY05Y6PZNbIfM8cOq0z/d3cs1DFPkC3Hei9uQob8h2g
+	 jUnZJPzpauufUszGLks10dPrEPHTwLsbKgmVOZCOHVkrPJW1uU3COtYnMRd0ETf68e
+	 vLL+DP4e3R+Wg==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1uzckO-0000000443a-3HYl;
+	Fri, 19 Sep 2025 17:10:04 +0200
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 0/2] A couple patches for sphinx-build-wrapper
+Date: Fri, 19 Sep 2025 17:09:58 +0200
+Message-ID: <cover.1758294450.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJnrk1YmxMbT-z9SLxrnrEwagLeyT=bDMzaONYAO6VgQyFHJOQ@mail.gmail.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-On Tue, Sep 16, 2025 at 12:14:05PM -0700, Joanne Koong wrote:
-> > I think you're right, this is probably clearer without trying to share
-> > the function.
-> >
-> > I think maybe we can make this even simpler. Right now we mark the
-> > bitmap uptodate every time a range is read in but I think instead we
-> > can just do one bitmap uptodate operation for the entire folio when
-> > the read has completely finished.  If we do this, then we can make
-> > "ifs->read_bytes_pending" back to an atomic_t since we don't save one
-> > atomic operation from doing it through a spinlock anymore (eg what
-> > commit f45b494e2a "iomap: protect read_bytes_pending with the
-> > state_lock" optimized). And then this bias thing can just become:
-> >
-> > if (ifs) {
-> >     if (atomic_dec_and_test(&ifs->read_bytes_pending))
-> >         folio_end_read(folio, !ret);
-> >     *cur_folio_owned = true;
-> > }
-> >
-> 
-> This idea doesn't work unfortunately because reading in a range might fail.
+Hi Jon,
 
-As in the asynchronous read generats an error, but finishes faster
-than the submitting context calling the atomic_dec_and_test here?
+This small series is against docs/build-script branch.
 
-Yes, that is possible, although rare.  But having a way to pass
-that information on somehow.  PG_uptodate/folio uptodate would make
-sense for that, but right now we expect folio_end_read to set that.
-And I fail to understand the logic folio_end_read - it should clear
-the locked bit and add the updatodate one, but I have no idea how
-it makes that happen.
+The first patch addresses the lack of a check after running
+sphinx-build to see if it returned some error code.
+
+The second patch is a bonus cleanup: it get rids with
+load_config.py, replacing it by a single line at conf.py,
+simplifying even further docs Makefile. Thanks for
+reminding me about that legacy code that we can drop!
+
+-
+
+I didn't implement yet Akira's suggestion of having a way
+to use make -i to ignore errors from latexdocs while
+doing pdf builds. I have a couple of ideas on my head.
+
+I'm tempting to implement a:
+
+    --no-sphinx
+
+command line argument at sphinx-build-wrapper, which would
+make it ignore the sphinx-build step. this way a makefile
+rule like:
+
+    pdf-after-latex: latexdocs
+        +$(Q)$(PYTHON3) $(BUILD_WRAPPER) $@ $(RUSTDOC) \
+                --sphinxdirs="$(SPHINXDIRS)" \
+                --builddir="$(BUILDDIR)" --deny-vf=$(FONTS_CONF_DENY_VF) \
+                --css=$(DOCS_CSS) --paper=$(PAPER) --no-sphinx
+
+would allow people to play with "-i", "-k", "--output-sync" and
+other make arguments.
+
+However, Friday's happy hour is quickly approaching here... Not the
+best time to implement new ideas :-D
+
+I'll try to materialize it next week.
+
+Have a nice weekend!
+Mauro
+
+Mauro Carvalho Chehab (2):
+  tools/docs: sphinx-build-wrapper: handle sphinx-build errors
+  docs: conf.py: get rid of load_config.py
+
+ Documentation/Makefile              |  4 --
+ Documentation/conf.py               | 15 +++-----
+ Documentation/sphinx/load_config.py | 60 -----------------------------
+ tools/docs/sphinx-build-wrapper     |  9 ++++-
+ 4 files changed, 12 insertions(+), 76 deletions(-)
+ delete mode 100644 Documentation/sphinx/load_config.py
+
+-- 
+2.51.0
 
 
