@@ -1,121 +1,99 @@
-Return-Path: <linux-doc+bounces-61377-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61379-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDCC1B8C4BB
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 11:36:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB5EFB8C4D5
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 11:40:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A8FFC7C3CD2
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 09:36:52 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 57DCC3BBBFC
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 09:40:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2537C27F4D5;
-	Sat, 20 Sep 2025 09:36:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EF09229ACD1;
+	Sat, 20 Sep 2025 09:40:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BLOtVyj4"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MCDoAt2T"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFC7126D4EB;
-	Sat, 20 Sep 2025 09:36:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C276F28689B;
+	Sat, 20 Sep 2025 09:40:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758361009; cv=none; b=IAmeSB4e89qAbc2eyg5GcGBpb4g2WoCGvdGdAwmPPr9CJkh4pbpyZsZJ7SC3oldYUrOLFkj1+lGAV6DCV+uEB+v3PUjGsng1SNrjVyV+9MPMO04ZP5qmwuv043g5OkNrSsA0+8PWw2+KEhtdlmZEjSYgiJaXiJLZlSp+OJMACSc=
+	t=1758361234; cv=none; b=QtxWGejVkwaiVbj1RKZLW4v6TZ2zOPDLpBWq22m6w6u084uFQMxgkacByomNeG4/h1oL7ZzO/pFL6HkBnDtrKH4oJjrxP2TurnevLugirxbd2/jPnPnhFtjnlJDVV0unsJkbDrZN8LXLCLEIyz31F55OlaM9PeJ6lhnolfmGd78=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758361009; c=relaxed/simple;
-	bh=ioK/g2FFEI+gdbItPz3WVvnNTK2pU8RZwhRi41dmYSw=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=dwetq6ry+TEm24oiQYfn48hVJuwYLPkPTwZl18UWBuCdOnfy4R5yFHdStLHbc5ZOYZd8VCI5NbELOkqYNFGGMnVI37PHquGWMvvb3WZ43GEMFj3M2rreLsEHsVoAhM0easa3kBZmsx0uRfZKxtxNjVvq87R+QGKfCyfE+rGDUl4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BLOtVyj4; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD725C4CEEB;
-	Sat, 20 Sep 2025 09:36:47 +0000 (UTC)
+	s=arc-20240116; t=1758361234; c=relaxed/simple;
+	bh=V3i0EJlJy0Ol7ItqJxFm4AqKCM48LgFSOdW0M2CfvxM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=m+GLvT6aEsdg/YX4iZIuOcIggdFJEXWCiTflh/HPglvUKP8KAECtkE17HuLJ6mIxOkJv9j3+7Gj+4wQMg1ngV0IoPRyZSETMrgZ2kzES9nLfnTdm2sccOL4UDtDMeV7pLqz/zebVpsXCdfsEpbNg9dsVpnkL4FBN3dZxJ98FXTY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MCDoAt2T; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5646DC4CEF1;
+	Sat, 20 Sep 2025 09:40:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758361008;
-	bh=ioK/g2FFEI+gdbItPz3WVvnNTK2pU8RZwhRi41dmYSw=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=BLOtVyj4wCwPDI9nzN5gZAFdCantdboLMD41sk+sTEBfYmAgliAgLIP5omhFSaPw3
-	 zAzfqSoJWhtSdOd2Mg4Ez7wjbNcrkgaVPkVS1SjyJfeJkMH31Ne5hJcmqxmynsJSXr
-	 PISlfdyReDXEMNtwpBhCOLbx+E0f2LIS5PyctHBpYXsncZj5PTr6k+YHkUTWrQeWmV
-	 tDyWMQynUGVFeNAXzJM3bNVje1eA3/fq4ktPGIQpF2nAcukUaTImiYjNAwmoS4Gj9b
-	 q4u8dmsiX8ZNqE8k3lRM+VesUA4oHs1H9Aq4NIh+Ubsxvx6vGZwO6ZUKpLdQUQdXN5
-	 jzfyR3DfpNSxg==
-Date: Sat, 20 Sep 2025 11:36:44 +0200
+	s=k20201202; t=1758361234;
+	bh=V3i0EJlJy0Ol7ItqJxFm4AqKCM48LgFSOdW0M2CfvxM=;
+	h=From:To:Cc:Subject:Date:From;
+	b=MCDoAt2TriGgEq9Z7vxnreVGN3Hp9IjCF+jMncemX5zDY5Q0JImv8Sy2bWql2Ciqu
+	 VrilAY8+kih8klNJVJORHQrpgDU04BhI74/KnRI1C0T9DjZoGp0wcN8GaO/p7c2AM/
+	 UoCQ5C7Dv01eFbwrlNYARS4WpRBjM1+OOmrF8EEBVyrulmFeayrenuvq6QHKrnPfCM
+	 k+MBOMLWsm5cnSatUgMK96UdqDGAc2ntdoBV0v9HsJAhkgsgbbvSAtNU49WS3Tk+a8
+	 EvCiWS3xAuVg/HJtR9FnanrdjL1yWsnIv2wbmGqtXE5uRewMUDlXXny3/crAKAfCot
+	 qR657MuFj/X9A==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1uzu52-00000004Z2p-1Fuu;
+	Sat, 20 Sep 2025 11:40:32 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/2] docs: conf.py: get rid of load_config.py
-Message-ID: <20250920113644.67194409@foz.lan>
-In-Reply-To: <87plbmqg0f.fsf@trenco.lwn.net>
-References: <cover.1758294450.git.mchehab+huawei@kernel.org>
-	<65ce87136d8f4a74e88e956a3a5bc3ba9a528be4.1758294450.git.mchehab+huawei@kernel.org>
-	<87plbmqg0f.fsf@trenco.lwn.net>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH v2 0/3] A couple of patches for sphinx-build-wrapper 
+Date: Sat, 20 Sep 2025 11:40:23 +0200
+Message-ID: <cover.1758361087.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Em Fri, 19 Sep 2025 15:38:56 -0600
-Jonathan Corbet <corbet@lwn.net> escreveu:
+Hi Jon,
 
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
-> 
-> > The code here was meant to handle 3 functions:
-> > 1. allow having a separate conf.py file, per subdir;
-> > 2. generate a list of latex documents.
-> > 3. set "subproject" tag if SPHINXDIRS points to a subdir.
-> >
-> > We don't have (1) anymore, and (3) is now properly handled
-> > entirely inside conf.py.
-> >
-> > So, only (3) is still needed, and this is a single-line change
-> > at conf.py.
-> >
-> > So, drop it, moving the remaining code to conf.py.
-> >
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> > ---
-> >  Documentation/Makefile              |  4 --
-> >  Documentation/conf.py               | 15 +++-----
-> >  Documentation/sphinx/load_config.py | 60 -----------------------------
-> >  3 files changed, 5 insertions(+), 74 deletions(-)
-> >  delete mode 100644 Documentation/sphinx/load_config.py
-> >
-> > diff --git a/Documentation/Makefile b/Documentation/Makefile
-> > index 6ccd5db1dcbd..9663e7a31feb 100644
-> > --- a/Documentation/Makefile
-> > +++ b/Documentation/Makefile
-> > @@ -24,7 +24,6 @@ SPHINXDIRS    = .
-> >  DOCS_THEME    =
-> >  DOCS_CSS      =
-> >  RUSTDOC       =
-> > -SPHINX_CONF   = conf.py
-> >  PAPER         =
-> >  BUILDDIR      = $(obj)/output
-> >  PDFLATEX      = xelatex
-> > @@ -108,9 +107,6 @@ dochelp:
-> >  	@echo  '  make SPHINXDIRS="s1 s2" [target] Generate only docs of folder s1, s2'
-> >  	@echo  '  valid values for SPHINXDIRS are: $(_SPHINXDIRS)'
-> >  	@echo
-> > -	@echo  '  make SPHINX_CONF={conf-file} [target] use *additional* sphinx-build'
-> > -	@echo  '  configuration. This is e.g. useful to build with nit-picking config.'
-> > -	@echo
-> >  	@echo  '  make DOCS_THEME={sphinx-theme} selects a different Sphinx theme.'  
-> 
-> So probably I'm a little slow today, but this confuses me.  Even after
-> this change, the makefile still uses SPHINX_CONF, so I'm not sure how it
-> is supposed to be set?
+This small series is against docs/build-script branch.
 
-Heh, incomplete patch, sorry for that. I'll send a v2 of this series.
+The first patch addresses the lack of a check after running
+sphinx-build to see if it returned some error code.
+
+The second patch is a partial revert: we wneded including
+sphinx-build-wrapper twice due to a badly-solved rebase from
+my side.
+
+The third patch is a bonus cleanup: it get rids with
+load_config.py, replacing it by a single line at conf.py,
+simplifying even further docs Makefile and docs build system.
+
+Mauro Carvalho Chehab (3):
+  tools/docs: sphinx-build-wrapper: handle sphinx-build errors
+  scripts: remove sphinx-build-wrapper from scripts/
+  docs: conf.py: get rid of load_config.py
+
+ Documentation/Makefile              |   8 +-
+ Documentation/conf.py               |  15 +-
+ Documentation/sphinx/load_config.py |  60 ---
+ scripts/sphinx-build-wrapper        | 719 ----------------------------
+ tools/docs/sphinx-build-wrapper     |  18 +-
+ 5 files changed, 16 insertions(+), 804 deletions(-)
+ delete mode 100644 Documentation/sphinx/load_config.py
+ delete mode 100755 scripts/sphinx-build-wrapper
+
+-- 
+2.51.0
 
 
-Thanks,
-Mauro
 
