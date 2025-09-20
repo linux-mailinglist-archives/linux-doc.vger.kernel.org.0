@@ -1,203 +1,135 @@
-Return-Path: <linux-doc+bounces-61368-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61371-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A65EB8BD8F
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 04:43:20 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C487B8BE7D
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 05:55:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B09947AB934
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 02:41:39 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id DB6BD3BED41
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Sep 2025 03:55:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9A8691F582B;
-	Sat, 20 Sep 2025 02:43:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6C1DB22157E;
+	Sat, 20 Sep 2025 03:55:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SDs4+W4W"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZFPKZ+Oq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com [209.85.219.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11AD51D63FB
-	for <linux-doc@vger.kernel.org>; Sat, 20 Sep 2025 02:43:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 737017081A
+	for <linux-doc@vger.kernel.org>; Sat, 20 Sep 2025 03:55:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758336193; cv=none; b=qmJ8ac/oDCa3it4yvnQrERpYHXUsbLeKMuTtPNA04N4qmrtX/XuVu/qMrmXphgy1A+L7u77wiqhNSP8OWq59sVLAfDOhcJMt5NMLCP19+AOP82GdtVt+5juSky1H3rch+JJSePNYp1HUm9bXEaxZAChpQRtKl/J73ZO7g6h3HFA=
+	t=1758340538; cv=none; b=gk2ZRMcclVPr5OAcTc7WGuegRcl7gIFfLSxwXlFWXcPeeWezqLI4+4jb2Qgv8B8iXt6X81Y9Ey/hJjqoPAkg53H/tfOrBDGUgSucTmqoRVqJUvcgcpFmBuA9R7/MQQhL+ePMiFeINYE0n1NM0PO9A2TmNjh2qj1i2rtodSZxL8w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758336193; c=relaxed/simple;
-	bh=DDKJTv2gUhx9NT8eq3N7/s/2EXymv1Z6SzQngx6JskI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=c+4okiRgZBpNQCQdrWd0AT7enUwp5rcjzwWszA4a1WXrOXl+003m87+ze3aJp98tTw19Bt7S8YrvaX0GrPytepdtlNtPDscAlbuscJlGbeD/o/3np+nKcYGwe4pBnPyTSitR4uBa9COfOomTh/iusm2S4IRJbsK6ZUhUC+ruIko=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SDs4+W4W; arc=none smtp.client-ip=209.85.215.181
+	s=arc-20240116; t=1758340538; c=relaxed/simple;
+	bh=wLR5A4WVJygISPHG42IIvYb+LPD25B9I3WH7jC2e5xU=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=R+ztk2LstOWH5b/Sj1xd6h3mVQ0E6e7f6FJs2YsDh/Cw9PBfaXrLglzFI9IZh+Wuga6Cri3LYu4tHwXGDOliVTAizg5hJvf+S4EveyEjun7832PSgfDsU+3Ku2eXBakF/wY5zk/6xeXc25nQle09wfV9AbX4/BIDk64M1+nOqZE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZFPKZ+Oq; arc=none smtp.client-ip=209.85.219.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-b54b0434101so2454607a12.2
-        for <linux-doc@vger.kernel.org>; Fri, 19 Sep 2025 19:43:11 -0700 (PDT)
+Received: by mail-yb1-f169.google.com with SMTP id 3f1490d57ef6-ea5bc345eddso2257559276.1
+        for <linux-doc@vger.kernel.org>; Fri, 19 Sep 2025 20:55:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758336191; x=1758940991; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1758340534; x=1758945334; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=poa66ZgSmeh+4H17NCB38PC7vFoDWQ1JOuDGdup6VRM=;
-        b=SDs4+W4WYWju8f9SjeM/aTUyTb14+mx8gG1jMeBNjZZKI7OgzMxwZ4VOxbslwWWXHp
-         jTrolsIJjiUrTIRsysMwb5b/s5+OSe8T4W06ZHawdzK1zgA6Z9FNHyYeXqY8T7aQiiNx
-         K74jjIqR+DU8r2s1owa4SkmtEGCq+Yt8IuLedOgzJ4BWkz3IIdI9UuXfDY482fu18C8x
-         hvsYvGWGNSVMey7Q/TKsOq7/FwWovnqUb2cm0rj0Bi1YQVRJHhwj4XyKRWL+0NGU9ZpO
-         NTWdEFP7mCVe0evjyfM95pcWA9uHshMYdwIZzam6zlU4x8qThICdSkL61j38H5SNPjZl
-         x9kA==
+        bh=wLR5A4WVJygISPHG42IIvYb+LPD25B9I3WH7jC2e5xU=;
+        b=ZFPKZ+OqAAj1VhKugky3kjemp/VIqd75of38HGEmt1IOj91W4b7jLe+Myfu3ent1n8
+         I+OsNztO7baVS7SDNqQDhsKyRcudzp5fPl2dQ3EsKmIi5TGzzTSREF9BOYtdvwLtcCQ9
+         lX8BgfQDKyo0m2JfxIC+zD4CzDFgLzCucCTNnl0sqYXFOybMgodTGPU/RxeED3KpD6Ge
+         7yQG/mA18ZVwa9TAvZspdmtVMoFft3MmApalEp7/PJVnD7pAqdNfemDIdWOkktS1fK7N
+         5MIan1ZBYEJnEUm4lD9oNaRI/NjfTi3RIA4zVC5lAmPgo6eel/h/B86mXEMgdrCKJemE
+         DM2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758336191; x=1758940991;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1758340534; x=1758945334;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=poa66ZgSmeh+4H17NCB38PC7vFoDWQ1JOuDGdup6VRM=;
-        b=X6RWfXaJ7Tr0GrUlszeyqpzIpXuzI0VQfc5gPQWsXALqi27bU8ndxrJZ9KrBgplv87
-         pmKVrJqzojP8zYB0bOd+0iCEVgkW8UyDalovRmbqrH11JYJOPr9wSH+XKURhQxOgxIoR
-         tZa9pziR0ZrHwlCFY55pjCCKdZ3qQXUMO8eOvXmApA5llLqFBiKYPZVVodCZGAc1eGBo
-         kzfalsmNMM9yxi0x3wU38POyS1SbkdH5MFTq+cCT81imkcJUo0ehtw4Yr2qp/YsJBvEx
-         SulyDic/HPfC3N6uG3DUO9pBw8dJD7C3RajYqmGi9l8I1R4VeUJkwuuJ2svyjtyreAw9
-         N1Cw==
-X-Forwarded-Encrypted: i=1; AJvYcCV+nLy//aUrSqzgciimksckIRyP800cVYYg3zGgLmo3tysxUfXCTYQyyMqPjCk25DvnkZzejtKiyew=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyWNUM3+wmqSO981wVA+xqXF9f61yVvSlG9Zm1eCm0HckGrGrX0
-	NxNZbh4jmXGprzHAYMpqXJYu/FfYznvcEZLbJXLaOqM55XXCBYPGQI4i
-X-Gm-Gg: ASbGncukAhiimIPIWchZ2+2Jm5ortVrigsy7PNfJ3fTFvrRqV/pE38CJh89u4/1rTgY
-	/vJPi9QqEc4wgYxXgzs4wOoSoXxCl7SFnsx+hQIq3Dj0d4+9fJDY6hjvSC2uH05dkOluM806WBb
-	s362R0v0Xj5lzIhbtSvVcQKxlJHJSj32Z61lbRDr+LL3Fvah8sEk/3VxDOWkz4qmzz+P5xTbzGq
-	29G979VhyPcv/Apz/6rPQE6AFAKA6y1kHU4UHNlOcq8n7l0hDM0NpBfjD5sA7R1k0f+MBMCq8fo
-	f5ArrVuKXJc5SZk5B1y83hSCu8Za9w/aKs1kkxQNyr8lrv86chaaqY0HfCL4OZhHg3GaD6hva8H
-	0pd05Tlmflzlvy6kbZ1HO4P5jP9GvHrKc
-X-Google-Smtp-Source: AGHT+IF/BI612rR/YcMFm6BDriwszkiWQ3lawEOyMeF1XwV/NPEU1DpX9s0SVrJuvUX8PVyswbJ/Bg==
-X-Received: by 2002:a17:903:2f08:b0:25c:982e:2b1d with SMTP id d9443c01a7336-269ba567414mr68110295ad.59.1758336191220;
-        Fri, 19 Sep 2025 19:43:11 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3306085e6dcsm6813162a91.29.2025.09.19.19.43.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Sep 2025 19:43:10 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id 4F7DE4227237; Sat, 20 Sep 2025 09:43:08 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Will Deacon <will@kernel.org>,
-	Markus Heiser <markus.heiser@darmarit.de>,
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Silvio Fricke <silvio.fricke@gmail.com>
-Subject: [PATCH 2/2] Documentation: assoc_array: Format internal tree layout tables
-Date: Sat, 20 Sep 2025 09:42:28 +0700
-Message-ID: <20250920024227.19474-4-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250920024227.19474-2-bagasdotme@gmail.com>
-References: <20250920024227.19474-2-bagasdotme@gmail.com>
+        bh=wLR5A4WVJygISPHG42IIvYb+LPD25B9I3WH7jC2e5xU=;
+        b=m0wGDjktPHrDVhQaHyqD8zBNipaXmmQm5cMUizNEWreaNmd2kgkxKPG7LDc4WRE7z0
+         X8edXwpY/zdNPAoWPA4nTa1SLCi9UrB3FDu41u45go+HRcOe3CDr055V83f5WWAn4CPF
+         hPEckvM+KLaw4zpQ2nPtRL2fabw9G8eM96x5d9pZ3Jm8hfY5gjLn40btgMdxwMTWq7eP
+         mEJvb/jvhq4+9bWlHSNIjiqO9NQt/4JGsXz6wzro+nhjsxge8JbvC5QMvY0gom/EDoWI
+         hVTXEe9HOCct7AqUtfG37/5YaTrE8HWYwd8nU01dPYvbGA5z4YqG7gkx4iIJj3xYbPSv
+         Mi3A==
+X-Forwarded-Encrypted: i=1; AJvYcCXEYwHWoxZn6cSRofNzm8kJvWu+I2oIMM1rWuYGxUR2g5p3lJS3VuZnUSdqPn2O0hysVXbYwmU1uCE=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx1IIscHhrjDczW05OwQWOcVQBZjAlGM3J5xWvvu+AOM1Ai/HZU
+	DtDvlap0M8xI/nAoWbSpBW8W65L+ln1bKKIa0Kgl6g4//WuAQ0sBJuFEWX3QLPLQSsgSuAwVte4
+	nKLkca5TRb6AlQ5HLzPfkzcj4Em/eOqU=
+X-Gm-Gg: ASbGnctFQAPoIt58bgvy9Rio6RBRQNjLpstauehrJ1nYlqc+w6EclrNtmTl5ZBdCLeS
+	n/kGWkGWnNyxMQS0c4m/U74y31Fn7QMTPNtTyGYxdYDo04bVg8F99tb40cAZVrJsysL2T46MByd
+	ekpE44C0cgcrbd3J490zlCqhjgIKrid/CPLI9QQA1A7sim7IRG2CZpAq9cWkXQfzlfsJ+nMDphw
+	AMSPD4=
+X-Google-Smtp-Source: AGHT+IH7cxRQcDAWrx6iopGK0fgAvvotX/SwRt/T/KElvH4XQULrd96czgOrVv1CSvA0vDpbRNCMKcVlhfdowxEBryU=
+X-Received: by 2002:a53:b3c5:0:b0:622:4818:ce38 with SMTP id
+ 956f58d0204a3-6347f610c7emr3546092d50.37.1758340534336; Fri, 19 Sep 2025
+ 20:55:34 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3500; i=bagasdotme@gmail.com; h=from:subject; bh=DDKJTv2gUhx9NT8eq3N7/s/2EXymv1Z6SzQngx6JskI=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBnnhDMlljVIJDDknZ++KvkKW0jw5wk1r6pWNqbKq78za liW9y+3o5SFQYyLQVZMkWVSIl/T6V1GIhfa1zrCzGFlAhnCwMUpABOpamFkuPV1jtOuBbu331Hp zz11JVxT9/acACnuzPCcD9fWtjxdXsTIsK6dO/lXcXjF/pclnlfV57hWCzxcrbji9poJT66kic4 34AQA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+References: <20250918152830.438554-1-nschichan@freebox.fr> <20250918195806.6337-1-safinaskar@gmail.com>
+ <CAHNNwZAzecVcJXZmycX063-=p-M5jVkfStfgYVKJruOFo7y9zg@mail.gmail.com>
+In-Reply-To: <CAHNNwZAzecVcJXZmycX063-=p-M5jVkfStfgYVKJruOFo7y9zg@mail.gmail.com>
+From: Askar Safin <safinaskar@gmail.com>
+Date: Sat, 20 Sep 2025 06:54:58 +0300
+X-Gm-Features: AS18NWCqg0xtU5KiNe17DWjmiPCEbBI_FSj5NCOyDGZFj_7oFaRqSu7O_vUKCrA
+Message-ID: <CAPnZJGDwETQVVURezSRxZB8ZAwBETQ5fwbXyeMpfDLuLW4rVdg@mail.gmail.com>
+Subject: Re: [PATCH RESEND 00/62] initrd: remove classic initrd support
+To: Nicolas Schichan <nschichan@freebox.fr>
+Cc: akpm@linux-foundation.org, andy.shevchenko@gmail.com, axboe@kernel.dk, 
+	brauner@kernel.org, cyphar@cyphar.com, devicetree@vger.kernel.org, 
+	ecurtin@redhat.com, email2tema@gmail.com, graf@amazon.com, 
+	gregkh@linuxfoundation.org, hca@linux.ibm.com, hch@lst.de, 
+	hsiangkao@linux.alibaba.com, initramfs@vger.kernel.org, jack@suse.cz, 
+	julian.stecklina@cyberus-technology.de, kees@kernel.org, 
+	linux-acpi@vger.kernel.org, linux-alpha@vger.kernel.org, 
+	linux-api@vger.kernel.org, linux-arch@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-block@vger.kernel.org, 
+	linux-csky@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-efi@vger.kernel.org, linux-ext4@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, linux-hexagon@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-m68k@lists.linux-m68k.org, 
+	linux-mips@vger.kernel.org, linux-openrisc@vger.kernel.org, 
+	linux-parisc@vger.kernel.org, linux-riscv@lists.infradead.org, 
+	linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, 
+	linux-snps-arc@lists.infradead.org, linux-um@lists.infradead.org, 
+	linuxppc-dev@lists.ozlabs.org, loongarch@lists.linux.dev, mcgrof@kernel.org, 
+	mingo@redhat.com, monstr@monstr.eu, mzxreary@0pointer.de, 
+	patches@lists.linux.dev, rob@landley.net, sparclinux@vger.kernel.org, 
+	thomas.weissschuh@linutronix.de, thorsten.blum@linux.dev, 
+	torvalds@linux-foundation.org, tytso@mit.edu, viro@zeniv.linux.org.uk, 
+	x86@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Format tables in "Basic internal tree layout" as reST tables.
+On Fri, Sep 19, 2025 at 6:25=E2=80=AFPM Nicolas Schichan <nschichan@freebox=
+.fr> wrote:
+> Considering that the deprecation message didn't get displayed in some
+> configurations, maybe it's a bit early at the very least.
 
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/core-api/assoc_array.rst | 33 ++++++++++++++++----------
- 1 file changed, 21 insertions(+), 12 deletions(-)
+I changed my opinion.
+Breaking users, who did not see a deprecation message at all,
+is unfair.
+I will send a patchset soon, which will remove initrd codepath,
+which currently contains deprecation notice. And I will put
+deprecation notice to
+other codepath.
 
-diff --git a/Documentation/core-api/assoc_array.rst b/Documentation/core-api/assoc_array.rst
-index 61c7ba1e7b877f..19d89f92bf8da8 100644
---- a/Documentation/core-api/assoc_array.rst
-+++ b/Documentation/core-api/assoc_array.rst
-@@ -317,8 +317,7 @@ There are two functions for accessing an associative array:
-    modified, provided the RCU read lock is held.
- 
-    The function will return the object if found (and set ``*_type`` to the
--   object
--   type) or will return ``NULL`` if the object was not found.
-+   object type) or will return ``NULL`` if the object was not found.
- 
- 
- Index Key Form
-@@ -400,10 +399,11 @@ fixed levels.  For example::
- 
- In the above example, there are 7 nodes (A-G), each with 16 slots (0-f).
- Assuming no other meta data nodes in the tree, the key space is divided
--thusly::
-+thusly:
- 
-+    ===========     ====
-     KEY PREFIX      NODE
--    ==========      ====
-+    ===========     ====
-     137*            D
-     138*            E
-     13[0-69-f]*     C
-@@ -411,10 +411,12 @@ thusly::
-     e6*             G
-     e[0-57-f]*      F
-     [02-df]*        A
-+    ===========     ====
- 
- So, for instance, keys with the following example index keys will be found in
--the appropriate nodes::
-+the appropriate nodes:
- 
-+    =============== ======= ====
-     INDEX KEY       PREFIX  NODE
-     =============== ======= ====
-     13694892892489  13      C
-@@ -423,12 +425,13 @@ the appropriate nodes::
-     138bbb89003093  138     E
-     1394879524789   12      C
-     1458952489      1       B
--    9431809de993ba  -       A
--    b4542910809cd   -       A
-+    9431809de993ba  \-      A
-+    b4542910809cd   \-      A
-     e5284310def98   e       F
-     e68428974237    e6      G
-     e7fffcbd443     e       F
--    f3842239082     -       A
-+    f3842239082     \-      A
-+    =============== ======= ====
- 
- To save memory, if a node can hold all the leaves in its portion of keyspace,
- then the node will have all those leaves in it and will not have any metadata
-@@ -442,8 +445,9 @@ metadata pointer.  If the metadata pointer is there, any leaf whose key matches
- the metadata key prefix must be in the subtree that the metadata pointer points
- to.
- 
--In the above example list of index keys, node A will contain::
-+In the above example list of index keys, node A will contain:
- 
-+    ====    =============== ==================
-     SLOT    CONTENT         INDEX KEY (PREFIX)
-     ====    =============== ==================
-     1       PTR TO NODE B   1*
-@@ -451,11 +455,16 @@ In the above example list of index keys, node A will contain::
-     any     LEAF            b4542910809cd
-     e       PTR TO NODE F   e*
-     any     LEAF            f3842239082
-+    ====    =============== ==================
- 
--and node B::
-+and node B:
- 
--    3	PTR TO NODE C	13*
--    any	LEAF		1458952489
-+    ====    =============== ==================
-+    SLOT    CONTENT         INDEX KEY (PREFIX)
-+    ====    =============== ==================
-+    3       PTR TO NODE C   13*
-+    any     LEAF            1458952489
-+    ====    =============== ==================
- 
- 
- Shortcuts
--- 
-An old man doll... just what I always wanted! - Clara
+Then in September 2026 I will fully remove initrd.
 
+> SMTP server I used wasn't authenticated to google, so all gmail
+> recipients were dropped. Hopefully this work better today.
+
+Yes, this time I got your email
+
+--=20
+Askar Safin
 
