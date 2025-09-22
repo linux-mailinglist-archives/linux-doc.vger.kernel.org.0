@@ -1,80 +1,80 @@
-Return-Path: <linux-doc+bounces-61454-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61452-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D941B90228
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 12:40:11 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB7B2B9024B
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 12:40:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id A154B18A35CF
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 10:39:31 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1EFF64243E1
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 10:38:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1EB8C303CBB;
-	Mon, 22 Sep 2025 10:36:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83E12303A1A;
+	Mon, 22 Sep 2025 10:36:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lru7tpuL"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mZ8dhDOa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB6D1303A15
-	for <linux-doc@vger.kernel.org>; Mon, 22 Sep 2025 10:36:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5BB62FF15A
+	for <linux-doc@vger.kernel.org>; Mon, 22 Sep 2025 10:36:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758537402; cv=none; b=UMQfZbm8YHTDStTeU90uLCO66cIkv7vk9pPA99xID1XPZX0FOpnWHC0KtSf0px/ZQwzReif88G/Y/LrAjWhyg4EUkKjOOkvDKhrkGCOeVizn09RhezrKH3YNTwrXTuv2CEaOR7ovz8kQX+T77WhpZ2W1Z6G1Fda2Tt7t3g0rVGA=
+	t=1758537399; cv=none; b=dtWlVeFHdZP1DMqU+8TyQTO4Acek9Ty2fmRnEcQI9FslGcLSO7ZSmvc5jEKSzn7ZZUyM/dEPA8rgsE4cjiB9Kt34iCCcetu0XiX1SAQPoFndlalaOtnT3R3suaoobTsr+y+HGviZToG8LJfcP+31287TtjAt0LjSVUrnUSHxG+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758537402; c=relaxed/simple;
-	bh=VekAVktQARbqymlhO6wwZZmB2sjuhPKVv7aIjYWH0zY=;
+	s=arc-20240116; t=1758537399; c=relaxed/simple;
+	bh=0YwIDNcM8Gu6DduxYzaPysxCd6Y3vQAF9cqA61KQ8WU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=rWRWyrYLAzKi5GAiZfrc0le8RLSZmvRbqY3kboImssAka9NRxABzdSAcMqCFH72kf82QCFsuvhhQev1fVBDWCEAMnaZw03KuSn2ogt9NtpJ50WBslCVlXVAReBbIXznNIKHKXpnam8k0hnjwlBBvI9QF2EpJXdFMkB/HwVJhaek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lru7tpuL; arc=none smtp.client-ip=209.85.210.178
+	 MIME-Version; b=Xx8h8EkgyWg0y/e+rUafauJGDJX6PwvupDXlLJjYJikWz/IXUv+v1fnH414Pvj11fF05xrWZyVgvzc9hgDkrPesIpZVMFHUd4NVrXXo4hCq3YZI0BZXo4F93k4vChva/wRgVcslWLOovxKFKPbFJrvwfgPUmKK82Z+Hixdni7Ac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mZ8dhDOa; arc=none smtp.client-ip=209.85.210.173
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-77f22902b46so1216786b3a.0
-        for <linux-doc@vger.kernel.org>; Mon, 22 Sep 2025 03:36:38 -0700 (PDT)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-77f2a62e44dso1668488b3a.1
+        for <linux-doc@vger.kernel.org>; Mon, 22 Sep 2025 03:36:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758537398; x=1759142198; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1758537397; x=1759142197; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=QUsWM/yu7Jel0zw1CX63zsJor2DdbZT5LSBHT64S5Mk=;
-        b=lru7tpuL6X0JAqu97rueSZ/deGGNnifPdmEaO84/8st6kRrAhH6d0LeefSEDW65N11
-         +hTrFGvbuD/MMKd7opJi4Q8q+aDoBXt2GOH2Mf/tbAYFa2R2O+PVfX0/79RsDz9iaWg+
-         plU/p+SRkTld5X0mYRX6jM6NMaLQO+2ojhjEkPYiEifN5LfuIeuuHC8SWdNG6frF7sJj
-         O6z1A7va9dIsezvXxGWxTlmeYRBMcs0K89WlZhT1ZYxtPRbQ83KXQ47xozoSQEe64xF6
-         r6gprAqPjevOavGdlF775dxdDP7GtsC9wUWG90MlXCN6cUhSgQ0Uypcz91WfYEDVvuyN
-         jC0Q==
+        bh=W+9n632otRhZijt2C+vVcISfhaawIfWAEGIOaCRnvcg=;
+        b=mZ8dhDOaq22B8poapwaBJm5HHg4Th5d5mTW5fUJYZvW9bOj91V1kPBuLJmY1UpkxVW
+         ZqhFO7cKnNEZm3lmB7DbFqo9IPIDM5jcukPm452Z1PFYu7DrZPpjcpeLFA3cFfsbkSxD
+         QSut333Rnx1HgNINlUVVA8sfXmSsJPFtpIXcw8SEcfUf8lVq7Rr2Phb7ctHd2/qA8xU9
+         1SR8/rnUHfnxsrgekgkq/wHf5RYWLJZEMUH2YDjcl2dgaMAK2BxCTlIs5P5ZxI/kZAEq
+         JuxZ2jb2VblYlBPgT5xcPrtu1TJ7zF7cAaI+qwtYGvL77NNd+g69LQ4SaJiNQ9aj5A/G
+         vCfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758537398; x=1759142198;
+        d=1e100.net; s=20230601; t=1758537397; x=1759142197;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=QUsWM/yu7Jel0zw1CX63zsJor2DdbZT5LSBHT64S5Mk=;
-        b=O8T0wqMziD82CvVjNgOXamSVGPb+6Uz0BRI+wrt2n9Ncs7goIis+/n2fWOkIPZSOIu
-         ZupsciWd1qlqCJebLjnucaWoh2rGrzWC/XU3YtzpcvM9oMMyR435UbnvTHVKlUGwa5yo
-         6W4cmdT6WvkqD/jc3qY57Kwh9TZGLnqIyyXkU+PZh9ZmftUqzi5TGuOYdPPy6WQM1M/p
-         hoveveFOHluE99JL/A/S7l8tdT4jr1AZpxIPm7b+EpXhfcksPDluehtflwruSoTiIiSF
-         TvURDl++/BKhe9Odk1MGzFLc354zWto2LvKh7eZixMM1bgzOsik3EmJQc1uwBKOjVhEX
-         kDhg==
-X-Forwarded-Encrypted: i=1; AJvYcCWXYKgG4Zrllkyk6c7x+Oxi3Q2k/gfB1DhHCWMMjGVeiyXBkdT8RI6BNrS42IPngez9kwdhEJ6TRh0=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyqLOnTQTCQAI5RgjyaPWH7vWtaaqNkJ2Xkqw+BvtqEt3gDv80k
-	G3BsP5AhdZRwQdCbJd+h/3yu3bmEW/WrgyMlhKg8pWhN0rrZx+RhmT6q
-X-Gm-Gg: ASbGnctsxfcAN0TrwWFFIBqv4hCoMM3grXc8KRjoYPu7wrPELwtUnrKpndaJ+aTQ+Hr
-	WjyBqM4GRTgcLHOkCVR+LTHM+4Jckb7RYgU/IEaojc8ThqpCPClF7OO37liQ98rhYecz/B+qHM6
-	GAFu4W0kKInFie/rcOWPoZZofv2i+xIFuXGHCI2w21RwNuyGvtQMfNaQDledCt4HoxvshTCpCqe
-	5aZ33TBdC/VzN7XW1RO3IDxZ1gEYEbhwS6QyZQksUwh7kEsHjE/5L7ATSPWFNbnb+PQyqYTeKpj
-	XTG9wm9oQzaoPM5bJZrpTt6AqZ3qMWt++xeQySVdY+H7vk65qw31GMD14WXrYW4B1h2lyIiLkwt
-	2qF79JHwhQWPYPJxbau08ow==
-X-Google-Smtp-Source: AGHT+IFUhE34CR13u3pkqJ2FQbCBkH8zk1hwNOLtzeEtwFNcYfGFUDEb6C1tE0SbXMUBVYslIX63RQ==
-X-Received: by 2002:a05:6a00:39a3:b0:770:73ed:e6e8 with SMTP id d2e1a72fcca58-77e4eabb491mr13122300b3a.22.1758537397949;
+        bh=W+9n632otRhZijt2C+vVcISfhaawIfWAEGIOaCRnvcg=;
+        b=vwyrPp5j442RC9dGmV+mk9bGFO6JeB3/WlBtEE9w/XJ3N5bybGWcI9x+6FHhhPfadr
+         jPXuNo+f3timDbiAfjRHuin6nUjGsaX1P1gkRjtzoDkjlNyepgHo6sH24L5uJ2u7N6iF
+         N6BmFWPtF/+DMs6iR9+73+d+E7fvtcQVVXxB+ugN7s1qHVd1kZGEWuG1OPY6n5A9xmhv
+         1Wz7dc9F3ANKFr9YuS4bfrTsm2yHyKU9LqjIAgvADFkEFeYxZpempWTpyawfj4MuJD29
+         YcK2SkdwAqn4KT3hLHgihFWEmn0coFT2PyBJwrUF5cjmcMHrWZD70s7ZVy2NSOWEs6Ku
+         jGSw==
+X-Forwarded-Encrypted: i=1; AJvYcCXR1SSEzfxroiO+duB/TIYJVgLmuaQXIxplVUV/y4oddr9LgaifOnSnftlhPkltbJHbnx5xWUByH1Q=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzYegZSRY1S2MKq/42PFOHLOrBec9GE4VLtuIwLHhW8ud8q/7sj
+	x2pOahqwOeWrnxAXyGULZJfKlRMjoqtyKbX2Z/5XRda5JMhVWJyn/yT5
+X-Gm-Gg: ASbGnctL4qzk1I2NT0g+fy7WiPZ3fH+FS996nFEeVRBpeSf83+sjhJ2KD0v6MkrsLab
+	1dBnzn2yxKPYe8KzzqY1aPB29ZV3v22F8T6mM+xh+/ZgwWAWu0qvY7PXIrslp7hqQrSWBNsJa2p
+	Iv9k4vxHcGaMvsxLSb0XkSytF5hLmR3QiBRpZCPhmwwCc+ZOYp09ySPx/EMqo5ejTpMKk3SA+41
+	8oll7fCo7KuR5YRYZ3woOAyJjfyw8eTOgBIOySxpJlI0gWbDSQWtZvoerzwhskGp9qRBjnbNqKp
+	1EquJ2KHqHX5CFJqRnVerdDL3Iu4aJBCIcSRVDcDgmWAzY5qoF23t4pVNGIRQPeAiDRy3En/6gk
+	oMASCpe37Xs/YyD1Dz1DWZg==
+X-Google-Smtp-Source: AGHT+IG7ZxvvTr2SI8V/6MXjM0DofGqWRIdjLfLiO24Xsu1dt/6bTU0M6VuI2CCXGER50ApZGb8/7w==
+X-Received: by 2002:a17:903:3846:b0:24c:82ad:a4ef with SMTP id d9443c01a7336-269ba511744mr183795435ad.32.1758537397151;
         Mon, 22 Sep 2025 03:36:37 -0700 (PDT)
 Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-77da1584eafsm11238858b3a.20.2025.09.22.03.36.36
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-269800541adsm129353965ad.4.2025.09.22.03.36.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 22 Sep 2025 03:36:36 -0700 (PDT)
 Received: by archie.me (Postfix, from userid 1000)
-	id A2F8341A2ED4; Mon, 22 Sep 2025 17:36:34 +0700 (WIB)
+	id B5F5741A2EDF; Mon, 22 Sep 2025 17:36:34 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Documentation <linux-doc@vger.kernel.org>,
@@ -90,9 +90,9 @@ Cc: Helge Deller <deller@gmx.de>,
 	Ard Biesheuvel <ardb@kernel.org>,
 	Arvind Sankar <nivedita@alum.mit.edu>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 2/3] Documentation: fb: Retitle driver docs
-Date: Mon, 22 Sep 2025 17:36:15 +0700
-Message-ID: <20250922103615.42925-4-bagasdotme@gmail.com>
+Subject: [PATCH v2 3/3] Documentation: fb: Split toctree
+Date: Mon, 22 Sep 2025 17:36:16 +0700
+Message-ID: <20250922103615.42925-5-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250922103615.42925-2-bagasdotme@gmail.com>
 References: <20250922103615.42925-2-bagasdotme@gmail.com>
@@ -102,214 +102,114 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7230; i=bagasdotme@gmail.com; h=from:subject; bh=VekAVktQARbqymlhO6wwZZmB2sjuhPKVv7aIjYWH0zY=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBkX1QIFY4JuaLwWP8268MXcu4/Lt1XvPnmFt/rfdJPZ8 7dc3eN+taOUhUGMi0FWTJFlUiJf0+ldRiIX2tc6wsxhZQIZwsDFKQATsd3GyPDWTydwfp75sZhu I08n9lTZfWfSXFkPZLlb519dMFt5uTDDP8tjH+97pt5uEE7SZza+vF16s8K3+qitrj2v9UveiFx Q4wUA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1885; i=bagasdotme@gmail.com; h=from:subject; bh=0YwIDNcM8Gu6DduxYzaPysxCd6Y3vQAF9cqA61KQ8WU=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBkX1QIVnK5u3dp4tidRuGuf881Jk7v7zsfWPt73O/Ri9 apqG541HaUsDGJcDLJiiiyTEvmaTu8yErnQvtYRZg4rE8gQBi5OAZjIhGeMDI8SoxyYZS6dTnK7 etq6N3aKr5lKZ/RF5kOyy5Y+F496ac/w372CuVbCyfvaFfFrDydEXvnpY/faY8al8qv7FeKi+oO esgEA
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
 
-Many framebuffer driver docs are copied from vesafb docs as their
-template, including "What is <driver name>" title. Such title
-implies the introductory section, however, and not the whole docs.
+Framebuffer docs toctree consists of driver-independent docs
+(e.g. API docs) and driver-specific docs. The latter has much
+more entries.
 
-Retitle them.
+Group the docs into separate toctrees.
 
 Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
 Tested-by: Randy Dunlap <rdunlap@infradead.org>
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- Documentation/fb/aty128fb.rst | 8 +++-----
- Documentation/fb/efifb.rst    | 6 +++---
- Documentation/fb/gxfb.rst     | 8 +++-----
- Documentation/fb/lxfb.rst     | 9 +++------
- Documentation/fb/matroxfb.rst | 9 +++------
- Documentation/fb/pvr2fb.rst   | 6 +++---
- Documentation/fb/sa1100fb.rst | 9 +++------
- Documentation/fb/sisfb.rst    | 6 +++---
- Documentation/fb/sm712fb.rst  | 6 +++---
- Documentation/fb/tgafb.rst    | 6 +++---
- Documentation/fb/udlfb.rst    | 6 +++---
- Documentation/fb/vesafb.rst   | 6 +++---
- 12 files changed, 36 insertions(+), 49 deletions(-)
+ Documentation/fb/index.rst | 80 +++++++++++++++++++++-----------------
+ 1 file changed, 45 insertions(+), 35 deletions(-)
 
-diff --git a/Documentation/fb/aty128fb.rst b/Documentation/fb/aty128fb.rst
-index 3f107718f933fc..0da8070a552165 100644
---- a/Documentation/fb/aty128fb.rst
-+++ b/Documentation/fb/aty128fb.rst
-@@ -1,8 +1,6 @@
--=================
--What is aty128fb?
--=================
--
--.. [This file is cloned from VesaFB/matroxfb]
-+=========================================
-+aty128fb - ATI Rage128 framebuffer driver
-+=========================================
+diff --git a/Documentation/fb/index.rst b/Documentation/fb/index.rst
+index 33e3c49f885695..e2f7488b6e2e42 100644
+--- a/Documentation/fb/index.rst
++++ b/Documentation/fb/index.rst
+@@ -4,42 +4,52 @@
+ Frame Buffer
+ ============
  
- This is a driver for a graphic framebuffer for ATI Rage128 based devices
- on Intel and PPC boxes.
-diff --git a/Documentation/fb/efifb.rst b/Documentation/fb/efifb.rst
-index 6badff64756f49..3d4aab406dee0a 100644
---- a/Documentation/fb/efifb.rst
-+++ b/Documentation/fb/efifb.rst
-@@ -1,6 +1,6 @@
--==============
--What is efifb?
--==============
-+===================================
-+efifb - Generic EFI platform driver
-+===================================
+-.. toctree::
+-    :maxdepth: 1
++General information
++===================
  
- This is a generic EFI platform driver for systems with UEFI firmware. The
- system must be booted via the EFI stub for this to be usable. efifb supports
-diff --git a/Documentation/fb/gxfb.rst b/Documentation/fb/gxfb.rst
-index 5738709bccbbf3..3fda485606bdc1 100644
---- a/Documentation/fb/gxfb.rst
-+++ b/Documentation/fb/gxfb.rst
-@@ -1,8 +1,6 @@
--=============
--What is gxfb?
--=============
--
--.. [This file is cloned from VesaFB/aty128fb]
-+=======================================
-+gxfb - AMD Geode GX2 framebuffer driver
-+=======================================
+-    api
+-    arkfb
+-    aty128fb
+-    cirrusfb
+-    cmap_xfbdev
+-    deferred_io
+-    efifb
+-    ep93xx-fb
+-    fbcon
+-    framebuffer
+-    gxfb
+-    intel810
+-    internals
+-    lxfb
+-    matroxfb
+-    metronomefb
+-    modedb
+-    pvr2fb
+-    pxafb
+-    s3fb
+-    sa1100fb
+-    sh7760fb
+-    sisfb
+-    sm501
+-    sm712fb
+-    sstfb
+-    tgafb
+-    tridentfb
+-    udlfb
+-    uvesafb
+-    vesafb
+-    viafb
+-    vt8623fb
++.. toctree::
++   :maxdepth: 1
++
++   api
++   cmap_xfbdev
++   deferred_io
++   fbcon
++   framebuffer
++   internals
++   modedb
++
++Driver documentation
++====================
++
++.. toctree::
++   :maxdepth: 1
++
++   arkfb
++   aty128fb
++   cirrusfb
++   efifb
++   ep93xx-fb
++   gxfb
++   intel810
++   lxfb
++   matroxfb
++   metronomefb
++   pvr2fb
++   pxafb
++   s3fb
++   sa1100fb
++   sh7760fb
++   sisfb
++   sm501
++   sm712fb
++   sstfb
++   tgafb
++   tridentfb
++   udlfb
++   uvesafb
++   vesafb
++   viafb
++   vt8623fb
  
- This is a graphics framebuffer driver for AMD Geode GX2 based processors.
- 
-diff --git a/Documentation/fb/lxfb.rst b/Documentation/fb/lxfb.rst
-index 863e6b98fbae55..0a176ab376e30e 100644
---- a/Documentation/fb/lxfb.rst
-+++ b/Documentation/fb/lxfb.rst
-@@ -1,9 +1,6 @@
--=============
--What is lxfb?
--=============
--
--.. [This file is cloned from VesaFB/aty128fb]
--
-+======================================
-+lxfb - AMD Geode LX framebuffer driver
-+======================================
- 
- This is a graphics framebuffer driver for AMD Geode LX based processors.
- 
-diff --git a/Documentation/fb/matroxfb.rst b/Documentation/fb/matroxfb.rst
-index 6158c49c857148..8ac7534a2e6168 100644
---- a/Documentation/fb/matroxfb.rst
-+++ b/Documentation/fb/matroxfb.rst
-@@ -1,9 +1,6 @@
--=================
--What is matroxfb?
--=================
--
--.. [This file is cloned from VesaFB. Thanks go to Gerd Knorr]
--
-+================================================
-+matroxfb - Framebuffer driver for Matrox devices
-+================================================
- 
- This is a driver for a graphic framebuffer for Matrox devices on
- Alpha, Intel and PPC boxes.
-diff --git a/Documentation/fb/pvr2fb.rst b/Documentation/fb/pvr2fb.rst
-index fcf2c21c8fcfeb..315ce085a5855b 100644
---- a/Documentation/fb/pvr2fb.rst
-+++ b/Documentation/fb/pvr2fb.rst
-@@ -1,6 +1,6 @@
--===============
--What is pvr2fb?
--===============
-+===============================================
-+pvr2fb - PowerVR 2 graphics frame buffer driver
-+===============================================
- 
- This is a driver for PowerVR 2 based graphics frame buffers, such as the
- one found in the Dreamcast.
-diff --git a/Documentation/fb/sa1100fb.rst b/Documentation/fb/sa1100fb.rst
-index 67e2650e017d12..c5ca019b361a94 100644
---- a/Documentation/fb/sa1100fb.rst
-+++ b/Documentation/fb/sa1100fb.rst
-@@ -1,9 +1,6 @@
--=================
--What is sa1100fb?
--=================
--
--.. [This file is cloned from VesaFB/matroxfb]
--
-+=================================================
-+sa1100fb - SA-1100 LCD graphic framebuffer driver
-+=================================================
- 
- This is a driver for a graphic framebuffer for the SA-1100 LCD
- controller.
-diff --git a/Documentation/fb/sisfb.rst b/Documentation/fb/sisfb.rst
-index 8f4e502ea12ea7..9982f5ee05601b 100644
---- a/Documentation/fb/sisfb.rst
-+++ b/Documentation/fb/sisfb.rst
-@@ -1,6 +1,6 @@
--==============
--What is sisfb?
--==============
-+=====================================
-+sisfb - SiS framebuffer device driver
-+=====================================
- 
- sisfb is a framebuffer device driver for SiS (Silicon Integrated Systems)
- graphics chips. Supported are:
-diff --git a/Documentation/fb/sm712fb.rst b/Documentation/fb/sm712fb.rst
-index 8e000f80b5bc6d..abbc6efae25f46 100644
---- a/Documentation/fb/sm712fb.rst
-+++ b/Documentation/fb/sm712fb.rst
-@@ -1,6 +1,6 @@
--================
--What is sm712fb?
--================
-+==========================================================
-+sm712fb - Silicon Motion SM712 graphics framebuffer driver
-+==========================================================
- 
- This is a graphics framebuffer driver for Silicon Motion SM712 based processors.
- 
-diff --git a/Documentation/fb/tgafb.rst b/Documentation/fb/tgafb.rst
-index 0c50d2134aa433..f0944da1ea5ef1 100644
---- a/Documentation/fb/tgafb.rst
-+++ b/Documentation/fb/tgafb.rst
-@@ -1,6 +1,6 @@
--==============
--What is tgafb?
--==============
-+=======================================
-+tgafb - TGA graphics framebuffer driver
-+=======================================
- 
- This is a driver for DECChip 21030 based graphics framebuffers, a.k.a. TGA
- cards, which are usually found in older Digital Alpha systems. The
-diff --git a/Documentation/fb/udlfb.rst b/Documentation/fb/udlfb.rst
-index 99cfbb7a192238..9e75ac6b07c36a 100644
---- a/Documentation/fb/udlfb.rst
-+++ b/Documentation/fb/udlfb.rst
-@@ -1,6 +1,6 @@
--==============
--What is udlfb?
--==============
-+==================================
-+udlfb - DisplayLink USB 2.0 driver
-+==================================
- 
- This is a driver for DisplayLink USB 2.0 era graphics chips.
- 
-diff --git a/Documentation/fb/vesafb.rst b/Documentation/fb/vesafb.rst
-index f890a4f5623b45..d8241e38bb28d6 100644
---- a/Documentation/fb/vesafb.rst
-+++ b/Documentation/fb/vesafb.rst
-@@ -1,6 +1,6 @@
--===============
--What is vesafb?
--===============
-+===========================================
-+vesafb - Generic graphic framebuffer driver
-+===========================================
- 
- This is a generic driver for a graphic framebuffer on intel boxes.
+ .. only::  subproject and html
  
 -- 
 An old man doll... just what I always wanted! - Clara
