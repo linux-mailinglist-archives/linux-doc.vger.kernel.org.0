@@ -1,148 +1,155 @@
-Return-Path: <linux-doc+bounces-61460-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61462-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C82B9B905A3
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 13:28:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1C9DB905D7
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 13:30:49 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 90492167E4E
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 11:28:32 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 83DDA17C1DC
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Sep 2025 11:30:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 85E18305964;
-	Mon, 22 Sep 2025 11:28:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2E955272E7A;
+	Mon, 22 Sep 2025 11:30:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uDhIOwyI"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="S4AsqHM+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F16E305053;
-	Mon, 22 Sep 2025 11:28:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6D7F4A1E
+	for <linux-doc@vger.kernel.org>; Mon, 22 Sep 2025 11:30:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758540496; cv=none; b=us2sVGyXKBMe3uhLMv+w0FGcfxx2O5xZrsz3zPvG4iJ+s9OU+FRgc3ybL4idjB8P4D2dZus8Zbr8G7+zIOr8Y/oYv+AZER+nriN5irraPWu9kHuBo31f7Wx6TNeggbHMr2HHdDLI6mVB/FwOOXCd9Lv5BmerLnQrgjl3prlj+Ws=
+	t=1758540646; cv=none; b=cEunL+9P0bfrZmfOex6LNWMrFXsvrLK3/DWWBlm737owxDrNdta6nlDDBzWnYVNNI/lZ+W4Qx2e8emxk2lhyd9D6pJ/2iJmjSXAwkF+RJLeKMZVH0hEqyobPoxFFXvEE3JrffWG0uNEeDMMthHp92k26oEs70E0FHbzGdLnKjJo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758540496; c=relaxed/simple;
-	bh=PrZzCy2cGIvNKyqPlF29RNpkiBN75wr7qz5JmPP/oR4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DtAYWfB4sBe0IaFa7Fhor8cfsG/SK0coQBYk/57b73sIfsHgnnxQdVh2G0g3XrjOPi+Aa0u9ko/XB7xQKGVh0YWO6YpiY9x1ntWCtFvLB3oSPtMW3J2PCCHtmBFHl0hupOGEpEio9UJfpOUBn1l8UgqJLEBw+3onZe5Eijx4js8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uDhIOwyI; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD4F7C116B1;
-	Mon, 22 Sep 2025 11:28:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758540495;
-	bh=PrZzCy2cGIvNKyqPlF29RNpkiBN75wr7qz5JmPP/oR4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=uDhIOwyIaX/Jfz/QdWhfC1ByDLg2hRGYygbuzpqXa8H4XOYc8rDFWATznPlZy72I7
-	 qMjZaMATotRcV97OxDC4Y9Nsigjz40HXl2bYRAKJG3U++Pp5LTgNgULcapNqvCc+le
-	 7mmnxyX2npYLNPxIIVKVIQha+Bv+e6ui3w/5HhZVBxbpekgpCrpijoVWX8hBcQC8B2
-	 3o8nUo9P0f+V3r+9hCp78tuUQghWbSGqVXiP3p+H8psgijvxNtUkfGbAc//vMuneDi
-	 FHlboFQDuA2mW+ga+lgSXCtj7yX4vg4QRcMynhJqaQEq8VMwFikfWq6VP56MqH2KOl
-	 RqZNJcmUI9bxw==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1v0eiL-00000005vOx-3c40;
-	Mon, 22 Sep 2025 13:28:13 +0200
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: "Jonathan Corbet" <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	Akira Yokosawa <akiyks@gmail.com>
-Subject: [PATCH v2 3/3] tools/docs/sphinx-build-wrapper: allow skipping sphinx-build step
-Date: Mon, 22 Sep 2025 13:27:40 +0200
-Message-ID: <30dae295606ae1735f3bbeef4ca041a76dcd4540.1758539031.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <cover.1758539031.git.mchehab+huawei@kernel.org>
-References: <cover.1758539031.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1758540646; c=relaxed/simple;
+	bh=exJIaGVZRA41ft1d8kldxrGWTT6BfUiUQXmXRuV8u7Q=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KwpmWgjOCD7zeH9OGkLAznxD30voLiRnZiJHPNrHSDx23b/2Q5Ejdb2kL9uVgEp4R6+2LiPCa4lUwB3ZZECAOAEIFOaxAVXd1H/fOpB5aYf4++wWpexUjw3lch0cS15XinxuR9A2R6MhloU/pNZaNIx/Aj54mnuJHk8iNgbMuqQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=S4AsqHM+; arc=none smtp.client-ip=209.85.210.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-77f41086c11so602849b3a.0
+        for <linux-doc@vger.kernel.org>; Mon, 22 Sep 2025 04:30:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1758540644; x=1759145444; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=d19kgaF4cF7llUtlCB54elxTKW7Xa+l9+r8wNmLGWJc=;
+        b=S4AsqHM+5vJgfCvIG50kpNj5WK9bfsWFJg3HYHbsOVzydDRH3dFyABCKqncyWEZADo
+         j0r9J1bMGrywAWKaJjUELcjLDtwAPHlxTFvhlMbfuQ7PriBJfFT7/aoOEgGY77ydfUs6
+         HIkDXl7EizSTWRQeQtiNS9FH4mATWvcLflZnCQyaYav+dlBq8v602PlihUzOPP2sBsmc
+         dGtwJ50L+aF85IKldEpQtLJKVD5RFZJyBr6oAvHuDRWhJTal2uG8GBJnXh57s7/luke4
+         Ic4H7CCWl6eSO4suZpNwvSNjJZQS/82UrBMKbuhsRNXKKmzXz2arpJE5dc3s+wWUxXg1
+         4j2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758540644; x=1759145444;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=d19kgaF4cF7llUtlCB54elxTKW7Xa+l9+r8wNmLGWJc=;
+        b=TGfxG7xOuYTPBKTJNNJSALp3HFaYyj49mQcM5ag1Z4xGV06FnaizDebnOJuqAQ5Bag
+         cHwrC4j27yHi6fVRK+s5qeWeqhPP6sLxiNlD6SaaYceEEQW4HSVu3+VIIhu9yoD5aNHO
+         IYxiJOr6v6DVU+puEAr02+MdbJy8MpiX568D32sYqWWxF4FyxAG3cI25/4qojtBqOvQX
+         5qtYLysk4R2jy1G9IfDuAlkmCuUkkL4jNHinlHjItbTz3a74WLJ44C/aIMB+6X8BFrbo
+         UQ51ifozU9LUdhks3v5YWMOVhh71f0eQPJxYUH7kBo1PV8CM+cF4lh07NhDh2+lpvSv1
+         nxXw==
+X-Forwarded-Encrypted: i=1; AJvYcCV8BFfvF3raf5nO4rwGSpJOd63Bg350qqCCF2+UYDMEFq9iDUAi1D09gpJZ1wzfuS1r8QQIhA20CB4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxgwDmHM6nQsucsNuf/DjjdkyZi0OB4F+haXqEQ4nKYzUvTLOWl
+	YkiXd44ibjHzxCOGXetKKioeAwRT8tZpfpBHtUzMyUZNJ1CdifMBqNS3
+X-Gm-Gg: ASbGncu1rPetUjEjIZGPi6wBjFkxxov0a3/j7O4upUeNYH/87TXpyPHJpOJeSzU7GrX
+	72lp3aq9y6y32nOZ0u81BYH9VM0AXUPW3YFAQItzI1DfjsykdzJG9/klnW88WkIJ/1loo/z0T6P
+	GYHmrqsaRQGYZhOrWbxu6XuGdFgBAjzg+RG/EZuVn7dGMxEj6dXf//GSUZ4vffgYxrIkekYW1an
+	enwu1tm7ejBzTGHu6D6UZ8jf3f3tYcqa9vjvdA86EQ3ZhjoGlf89ugPRCllFkOgUm6IrOU4VTFO
+	C/+HxtENaQfbErFZgtXDkhlZlSyOnko1deocaRMJMsed0FMvslb4KRE2nihqB6XzFVopUozlGFQ
+	p8GKRj+xpZ/+L48YktBYT4guwd+gmMVMVJNSUG0dyIUPyetWFp/oaQkLWmsMZ6GLYz8ls
+X-Google-Smtp-Source: AGHT+IEmGQ8ezO3TtOdftc+mCIAJ6aLgEsQSmxgVxjQfrvzQONfiVHgyQHAP9sLiLBgvDFkwTF21oA==
+X-Received: by 2002:a17:902:ce12:b0:274:5030:2906 with SMTP id d9443c01a7336-27450302a03mr76858975ad.46.1758540643820;
+        Mon, 22 Sep 2025 04:30:43 -0700 (PDT)
+Received: from [10.0.2.15] (KD106167137155.ppp-bb.dion.ne.jp. [106.167.137.155])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-269802df852sm131071645ad.87.2025.09.22.04.30.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 22 Sep 2025 04:30:43 -0700 (PDT)
+Message-ID: <f31c2169-cd0e-438a-9e59-d6ebd8eaea6e@gmail.com>
+Date: Mon, 22 Sep 2025 20:30:40 +0900
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/1] sphinx-build-wrapper: add support for skipping
+ sphinx-build
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: linux-kernel@vger.kernel.org,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Akira Yokosawa <akiyks@gmail.com>
+References: <cover.1758444913.git.mchehab+huawei@kernel.org>
+Content-Language: en-US
+From: Akira Yokosawa <akiyks@gmail.com>
+In-Reply-To: <cover.1758444913.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Most targets have two steps:
-- step 1: run sphinx-build;
-- step 2: run a post-build logic.
+On Sun, 21 Sep 2025 11:13:24 +0200, Mauro Carvalho Chehab wrote:
+> Hi Jon,
+> 
+> This patch adds support for not running sphinx-build at the wrapper
+> tool. It was requested by Akira, who wanted to be able to ignore
+> Sphinx errors during latex build and still try to build PDF.
 
-The second step can be as simple as copying static files like CSS,
-but may may also envolve running make. allowing to skip the first
-step helps debugging what's broken, and also allows using make
-command line arguments like --ignore-errors.
+Thank you for trying to figure out my intention.
+However, you failed to see the point.
 
-Add an option to skip step 1.
+> 
+> This patch is against docs/build-script and applies after the 3 patch
+> series I sent yesterday:
+> 
+>     https://lore.kernel.org/linux-doc/cover.1758361087.git.mchehab+huawei@kernel.org/
+> 
+> 
+> While Akira's original intention is to have pdfdocs target depend on
+> latexdocs, IMO, this is overkill, as probably only Akira and a couple
+> of other developers might want to have such behavior.
 
-Requested-by: Akira Yokosawa <akiyks@gmail.com>
-Link: https://lore.kernel.org/linux-doc/5031e0c4-f17e-41b8-8955-959989e797f2@gmail.com/
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- tools/docs/sphinx-build-wrapper | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+I think it is only you who don't want such behavior.
 
-diff --git a/tools/docs/sphinx-build-wrapper b/tools/docs/sphinx-build-wrapper
-index 98c4db5b7c47..cce985dced00 100755
---- a/tools/docs/sphinx-build-wrapper
-+++ b/tools/docs/sphinx-build-wrapper
-@@ -622,7 +622,8 @@ class SphinxBuilder:
-         shutil.rmtree(self.builddir, ignore_errors=True)
- 
-     def build(self, target, sphinxdirs=None,
--              theme=None, css=None, paper=None, deny_vf=None, rustdoc=False):
-+              theme=None, css=None, paper=None, deny_vf=None, rustdoc=False,
-+              skip_sphinx=False):
-         """
-         Build documentation using Sphinx. This is the core function of this
-         module. It prepares all arguments required by sphinx-build.
-@@ -644,9 +645,10 @@ class SphinxBuilder:
-         #
-         # Other targets require sphinx-build, so check if it exists
-         #
--        sphinxbuild = shutil.which(self.sphinxbuild, path=self.env["PATH"])
--        if not sphinxbuild and target != "mandocs":
--            sys.exit(f"Error: {self.sphinxbuild} not found in PATH.\n")
-+        if not skip_sphinx:
-+            sphinxbuild = shutil.which(self.sphinxbuild, path=self.env["PATH"])
-+            if not sphinxbuild and target != "mandocs":
-+                sys.exit(f"Error: {self.sphinxbuild} not found in PATH.\n")
- 
-         if builder == "latex":
-             if not self.pdflatex_cmd and not self.latexmk_cmd:
-@@ -732,7 +734,7 @@ class SphinxBuilder:
- 
-             if target == "mandocs":
-                 self.handle_man(kerneldoc, docs_dir, src_dir, output_dir)
--            else:
-+            elif not skip_sphinx:
-                 try:
-                     result = self.run_sphinx(sphinxbuild, build_args,
-                                              env=self.env)
-@@ -814,6 +816,9 @@ def main():
-     parser.add_argument('-i', '--interactive', action='store_true',
-                         help="Change latex default to run in interactive mode")
- 
-+    parser.add_argument('-s', '--skip-sphinx-build', action='store_true',
-+                        help="Skip sphinx-build step")
-+
-     parser.add_argument("-V", "--venv", nargs='?', const=f'{VENV_DEFAULT}',
-                         default=None,
-                         help=f'If used, run Sphinx from a venv dir (default dir: {VENV_DEFAULT})')
-@@ -829,7 +834,8 @@ def main():
- 
-     builder.build(args.target, sphinxdirs=args.sphinxdirs,
-                   theme=args.theme, css=args.css, paper=args.paper,
--                  rustdoc=args.rustdoc, deny_vf=args.deny_vf)
-+                  rustdoc=args.rustdoc, deny_vf=args.deny_vf,
-+                  skip_sphinx=args.skip_sphinx_build)
- 
- if __name__ == "__main__":
-     main()
--- 
-2.51.0
+> 
+> See, after all changes, the makefile rule for *all* doc build targets
+> is simple:
+> 
+>         $(Q)@$(srctree)/tools/docs/sphinx-pre-install --version-check
+>         +$(Q)$(PYTHON3) $(BUILD_WRAPPER) $@ \
+>                 --sphinxdirs="$(SPHINXDIRS)" $(RUSTDOC) \
+>                 --builddir="$(BUILDDIR)" --deny-vf=$(FONTS_CONF_DENY_VF) \
+>                 --theme=$(DOCS_THEME) --css=$(DOCS_CSS) --paper=$(PAPER)
+> 
+> After applying patch 1 from this series, it is really easy to replicate 
+> "make -i" by writing a small script that does:
+> 
+> 	tools/docs/sphinx-pre-install --version-check	
+> 	tools/docs/sphinx-build-wrapper latexdocs || echo "LaTeX build failed, but we'll try build PDF anyway"
+> 	tools/docs/sphinx-build-wrapper -s pdfdocs
+> 
+
+Hello?
+
+You are the one who is changing the way "make pdfdocs" behaves.
+All I want is to restore the current behavior, without any need to
+use such an ad-hoc script.
+
+Sorry, but I think I have to NAK this.
+
+Furthermore, your "cleanup" is obfuscating the very fact that "pdfdocs"
+needs a successful "latexdocs" stage.
+
+I believe Documentation/Makefile is the right place to describe it.
+
+Good luck,
+Akira
 
 
