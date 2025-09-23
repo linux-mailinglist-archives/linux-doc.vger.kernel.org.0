@@ -1,151 +1,89 @@
-Return-Path: <linux-doc+bounces-61619-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61623-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3B21B97C4E
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 01:03:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1237FB97EC1
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:43:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 7C27D7A2AB4
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 23:02:08 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C24B37A159D
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 00:42:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B0991301705;
-	Tue, 23 Sep 2025 23:03:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C10B1A314B;
+	Wed, 24 Sep 2025 00:43:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MbcKmYAX"
+	dkim=pass (1024-bit key) header.d=maguitec.com.mx header.i=@maguitec.com.mx header.b="MFjZ188Y"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from sender4-g3-154.zohomail360.com (sender4-g3-154.zohomail360.com [136.143.188.154])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F65621348
-	for <linux-doc@vger.kernel.org>; Tue, 23 Sep 2025 23:03:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.178
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758668623; cv=none; b=dpZ4R7dI/qFfoWfCr6HrRtXDt+a6zVGO9tLC3LU1slCPOVWW/6nr1yZcf21wnwpAJKaFhk6gPpox7Bq/bzqLCuh3lbO+qW056xLsed+oR4/rIOH4NZWGHFMWV0JYoxo2j770+GmBoyLzuu7UT+6MOB6SmH+NwLG7STxxmk93Xco=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758668623; c=relaxed/simple;
-	bh=MHMaUS9naR0vIV9JTYsRgzOChzGdvox3pKFEbqzWur8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NLUWhacHbLRQiSsO6ccIRhERJ5y08ql6p1uBmoT/hlBwCQA8Xjz9ow+Odu6Rsy7JJ6awBNivUYhoAjXwW0B1mSlhzYIWgY3dKQnkDYJD5K9Mkz3SSOM5CYz2Zh5hYtcCNMuOeiAdnoQeC45qAi8JFvJlBTiQZFPw/NuB0Eff1xo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MbcKmYAX; arc=none smtp.client-ip=209.85.215.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-b5506b28c98so3901003a12.1
-        for <linux-doc@vger.kernel.org>; Tue, 23 Sep 2025 16:03:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758668621; x=1759273421; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=MHMaUS9naR0vIV9JTYsRgzOChzGdvox3pKFEbqzWur8=;
-        b=MbcKmYAXBLu15h/Rf1JsS4T01Zwm+caHUe0qeeBr3sBHR3+KTViCOqwPpfYzfIRNqB
-         enRFr+5SY5W2JuQEpQmk5w3XV/EUDpiRvzBqumGBWVCkkuwEbv+TGkwq5V3G5HwIbJ3d
-         8K5NleZraMpVMaN8zACO8UYeM6NMCq74qnQCuxtNoMgvY3RvI+Q7H/ircBktDzx82aEG
-         4h/dM+JHAzQ+PsNTQe7sIg2l7ahP3sgBq4PutHadWUFHUAmq0nX5Bcdf60vSPdL2TZsS
-         cYA9yURRY7GUK3Jc79E9nJ9VkidyscqdBwBEFhTAhbZom16lai4Y3W+8U0Dw94ugcZzC
-         MTNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758668621; x=1759273421;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MHMaUS9naR0vIV9JTYsRgzOChzGdvox3pKFEbqzWur8=;
-        b=VAwzwxxUeJ2yz5kWDdPl+xxURdN46D4I2AOV/OaQd2Hy/YxadQREwMMC0B9J97iTAO
-         8DmwQ1AJ0wfJANvVl4wn4etFIYtWbiiwEGMsGG+vbURtGERNy/py4nhpOuJzr6lbNl+5
-         ALuAe7xcXuhMh+A8W9RgN+HZPtM/s+wOaAocRtFDeLXzIioDvWeX5OmE4rUoNVEWDQ6f
-         7AtUZUC1SB6rLq0StRjFvDk5JE8eOqBvwKvxKqlGSEn8sZoXSNJTfi9eIUz0c+osf29L
-         rvXslHPYu21feC1lX5j23VHzj/aPtpr1O46cEfAHbagVt0F2VdvjeBvuC6Hi2/hBnl0Z
-         eyQQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUXpW5N3XLGUHiun5uAKU4oEptTMhv/hsKM7MdhqQIF38vw7SoNePtvvZnUEDbiW97/T/S7ghEBrWY=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy42/AhzjZZjz3GWP8AQ1M06Ut2oQYEgDTyPZibnyXpj0DxJVBB
-	X8cdqp+ATAaVjm7NRaucVpu/CYD7DdaG7Sn58BcM8/m4jyZiMndqrmzn
-X-Gm-Gg: ASbGnctD9nnAs3u4ZeSHhKGJyXx/Xq2dcXndFKrsYhjUbYMUG7+nmmrqB9QDEKV3pqb
-	WQAUhT/Mv6PStMtFoqUtk+ByaXBL3hJwV2sjc532n8smU2LzKGotZJrg7WNIn2JZhjiW7Xt7eb1
-	zgpvWy4KC2c9pVHLUSq4lY0Nf2E5qLQn2LrvaLh6KO4CtOTWQ0Jg7ytAn1YLJkeJEqiB4HA/5E5
-	PGkTOkZyMnTyXZRUGR9kY+qbo11iSliVQ6YI9rYj6AuMnI/z1Cpuu8S398h9d+mOlKTu2aBz3eN
-	N09DdAucJ0ao3E4anV5+DG3epI5ASjJTStBQe5QH6fKhSLqQyoa/DHxCXARSWomDWmEKMpyU3N4
-	bazs5tB4Xct4Td5ievdtk9zv3Y8xiXJE6
-X-Google-Smtp-Source: AGHT+IGB29W3TqgK5gfHdx17rWs6QdlKifvPHsUNAQVltUUYu2zh/Zwdpk0V6cpL4DLVztirvIJtZw==
-X-Received: by 2002:a17:903:2352:b0:254:70cb:5b36 with SMTP id d9443c01a7336-27cc0db9ba4mr41304715ad.8.1758668621281;
-        Tue, 23 Sep 2025 16:03:41 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-272435b6822sm103636345ad.125.2025.09.23.16.03.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 16:03:40 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id 1DAC6423FA7C; Wed, 24 Sep 2025 06:03:38 +0700 (WIB)
-Date: Wed, 24 Sep 2025 06:03:37 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Andreas Gruenbacher <agruenba@redhat.com>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux GFS2 <gfs2@lists.linux.dev>, Jonathan Corbet <corbet@lwn.net>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Bjorn Helgaas <bhelgaas@google.com>, Jan Kara <jack@suse.cz>,
-	Christian Brauner <brauner@kernel.org>,
-	Miklos Szeredi <mszeredi@redhat.com>,
-	Jeff Layton <jlayton@kernel.org>,
-	"Darrick J. Wong" <djwong@kernel.org>,
-	James Morse <james.morse@arm.com>,
-	Bernd Schubert <bschubert@ddn.com>,
-	Chen Linxuan <chenlinxuan@uniontech.com>,
-	Matthew Wilcox <willy@infradead.org>
-Subject: Re: [PATCH v4] Documentation: gfs2: Consolidate GFS2 docs into its
- own subdirectory
-Message-ID: <aNMnSapfyfwga0Oz@archie.me>
-References: <20250911004416.8663-2-bagasdotme@gmail.com>
- <aNJ9yJ7XT4Pnsl9E@archie.me>
- <CAHc6FU7aGJZZzN8zhtnwDgXX9gVMh_fbi+sUpJ7tg1MWMa8XVA@mail.gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C70CC2E0
+	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 00:43:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.154
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1758674621; cv=pass; b=dkmIWpV1x3LjEuySYwKHfL8yuBJWIIfPJvZIWQOKOBXcIRbTMetEz33W2pvD/2LAMHB2+eIIIcTw8MeJZwSrTqqmuLahEjjXc/clnR316EmDYtnlrq0aZ0YA746mflqPI0A4VoAu0p4FniSbktogl0ePDQJTsIGzYJInVhlMGCI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1758674621; c=relaxed/simple;
+	bh=jVC0f54KxIaXPohvxMBE4QoFJdeV8vR0/DlR6lS19qY=;
+	h=Date:From:To:Message-ID:Subject:MIME-Version:Content-Type; b=SIgXJI7f6PpswjfHREVDLxqwlA3Th5dzy+KQqTJN/r6K90rkHOKY1265rB5XIJNAZm02MAOW+2JlYAYXRP2bt4JjtzDJ7/EiVbtBFhoMccEavosMdrPvKltHk+Lz7qiqEKZgKVhBC4+p1Ds+yRlpmZWvaT3OYAUdEApCCcmW3Ec=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=maguitec.com.mx; spf=pass smtp.mailfrom=bounce-zem.maguitec.com.mx; dkim=pass (1024-bit key) header.d=maguitec.com.mx header.i=@maguitec.com.mx header.b=MFjZ188Y; arc=pass smtp.client-ip=136.143.188.154
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=maguitec.com.mx
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bounce-zem.maguitec.com.mx
+ARC-Seal: i=1; a=rsa-sha256; t=1758674618; cv=none; 
+	d=us.zohomail360.com; s=zohoarc; 
+	b=BYLlbu3LG3NWZl0YImJy7tc+BBt31Gmluxl/EK962T4+spr6fLf5XBBngX18qILt+xCabDGJ2hmFXCG1DI3mSEeenWay9ockmo5C7PfrMCiapZ8RPbCh75ZubRIjkbG64eAfYzk24Cle/dZlCFjljDGuf59F3GOnCpgOod46D8g=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=us.zohomail360.com; s=zohoarc; 
+	t=1758674618; h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Reply-To:Reply-To:Subject:Subject:To:To:Message-Id:Cc; 
+	bh=jVC0f54KxIaXPohvxMBE4QoFJdeV8vR0/DlR6lS19qY=; 
+	b=LeAHiVuz4tVoSj2obbJJ/0AdkhDEB9c0qp5vSxC4Bfli7C9KBk36RoV/60rkf3zNRVqGSOyluCb0Sl7tWWhJk2uL5DTcmuSCkUAJ1+zyNpqvfD5sYBOcYGRynB0zj+U7MhVFfW3nBb7H5+rUTyC4d4tprYy9XV5ekg8P9s6Hm1c=
+ARC-Authentication-Results: i=1; mx.us.zohomail360.com;
+	dkim=pass  header.i=maguitec.com.mx;
+	spf=pass  smtp.mailfrom=investorrelations+9a671490-98d8-11f0-9ce0-52540088df93_vt1@bounce-zem.maguitec.com.mx;
+	dmarc=pass header.from=<investorrelations@maguitec.com.mx>
+Received: by mx.zohomail.com with SMTPS id 1758671652882815.4961298202282;
+	Tue, 23 Sep 2025 16:54:12 -0700 (PDT)
+DKIM-Signature: a=rsa-sha256; b=MFjZ188YoQbqs8Nag56ps8YzfkMcscoiyR0MW9BcdWP00bhSz39u7CPqJ3RMX//IJMDdGBEf/owve2pi5UiOY18vQAdlpEQRC1TCtYGS1SX29nBGDw7b+IsYqTzIizXDI6e/7abqw01H8Ir1WAlaEVISOD9+5FK8taMKRGpwFK0=; c=relaxed/relaxed; s=15205840; d=maguitec.com.mx; v=1; bh=jVC0f54KxIaXPohvxMBE4QoFJdeV8vR0/DlR6lS19qY=; h=date:from:reply-to:to:message-id:subject:mime-version:content-type:content-transfer-encoding:date:from:reply-to:to:message-id:subject;
+Date: Tue, 23 Sep 2025 16:54:12 -0700 (PDT)
+From: Al Sayyid Sultan <investorrelations@maguitec.com.mx>
+Reply-To: investorrelations@alhaitham-investment.ae
+To: linux-doc@vger.kernel.org
+Message-ID: <2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459@bounce-zem.maguitec.com.mx>
+Subject: Thematic Funds Letter Of Intent
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="TJFNCLqvXEgyfWhu"
-Content-Disposition: inline
-In-Reply-To: <CAHc6FU7aGJZZzN8zhtnwDgXX9gVMh_fbi+sUpJ7tg1MWMa8XVA@mail.gmail.com>
-
-
---TJFNCLqvXEgyfWhu
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain;
+	charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
+content-transfer-encoding-Orig: quoted-printable
+content-type-Orig: text/plain;\r\n\tcharset="utf-8"
+Original-Envelope-Id: 2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
+X-JID: 2d6f.1aedd99b146bc1ac.s1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
+TM-MAIL-JID: 2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
+X-App-Message-ID: 2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
+X-Report-Abuse: <abuse+2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459@zeptomail.com>
+X-ZohoMailClient: External
 
-On Tue, Sep 23, 2025 at 01:44:18PM +0200, Andreas Gruenbacher wrote:
-> On Tue, Sep 23, 2025 at 1:00=E2=80=AFPM Bagas Sanjaya <bagasdotme@gmail.c=
-om> wrote:
-> > On Thu, Sep 11, 2025 at 07:44:17AM +0700, Bagas Sanjaya wrote:
-> > > Documentation for GFS2 is scattered in three docs that are in
-> > > Documentation/filesystems/ directory. As these docs are standing out =
-as
-> > > a group, move them into separate gfs2/ subdirectory.
-> >
-> > Hi Andreas,
-> >
-> > It looks like this patch isn't in 6.18 PR [1]. Should I resend it after
-> > merge window (and for 6.19 instead)?
->=20
-> Ah, I was already wondering what had happened to that patch.
->=20
-> Can we just put this into the next (6.20?) merge window?
+To: linux-doc@vger.kernel.org
+Date: 24-09-2025
+Thematic Funds Letter Of Intent
 
-OK, I will resend after 6.18-rc1 is out.
+It's a pleasure to connect with you
 
---=20
-An old man doll... just what I always wanted! - Clara
+Having been referred to your investment by my team, we would be=20
+honored to review your available investment projects for onward=20
+referral to my principal investors who can allocate capital for=20
+the financing of it.
 
---TJFNCLqvXEgyfWhu
-Content-Type: application/pgp-signature; name=signature.asc
+kindly advise at your convenience
 
------BEGIN PGP SIGNATURE-----
+Best Regards,
 
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaNMnRQAKCRD2uYlJVVFO
-o0qlAP45w7y0ijoPca+WRWWR7uDsyafheW+piv5hf202bJQxhQEAnpSuvMubtyMj
-GGi6LPIrwatrZPCjfKwexwl+kv/kRQQ=
-=XR2A
------END PGP SIGNATURE-----
-
---TJFNCLqvXEgyfWhu--
+Respectfully,
+Al Sayyid Sultan Yarub Al Busaidi
+Director
 
