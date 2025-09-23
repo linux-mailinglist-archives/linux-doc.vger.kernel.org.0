@@ -1,117 +1,173 @@
-Return-Path: <linux-doc+bounces-61611-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61613-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD340B978EA
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 23:17:13 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66AF1B97930
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 23:34:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 680524C28FA
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 21:17:12 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6837819C7A98
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 21:34:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D92B30C370;
-	Tue, 23 Sep 2025 21:17:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 490D330ACE5;
+	Tue, 23 Sep 2025 21:34:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b="YQt4yJD4"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AMHgqyqx"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B26BF309F12;
-	Tue, 23 Sep 2025 21:17:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19C39303CB2;
+	Tue, 23 Sep 2025 21:34:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758662228; cv=none; b=PVHlDbqMvJZj0ItQGaDgQ+uqwAiaN64FgKa0TKo2KsUWa2H51pg71vABtbhN+1kN6tIMgUVHEXfFvrGsaKyMLj6R7wCeKjaPq6PPL2chUT1rkMLDKYfwnDgSjSnx2JxM3xpFTmcreDIP41Edm73mi0YdfiMxMB2A1ZcqHJeTt3U=
+	t=1758663263; cv=none; b=B4DbEJWQCg2FfBD24rioE8fzoEty6HZWDG8xlrLnoIeggE92N9nHpvNuQKx1Lbss3hbCEF41PWeEIOnN7URHIYYUGOsfiNxNz/cMqT7aXM5AJ54nO4Swxo/BRwa5pSQdGvenfvMVQTlhI7xKEmgyYWFelf3Q+mEb2RdwKlFt9o0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758662228; c=relaxed/simple;
-	bh=9maMwx7/tfxHiKFTD825WGlX9Scv4cfcxvOcT74ZDTg=;
-	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=Pi0DfaJdRl5ndPhT9JZmFJDPc3iVs+8tFZuMJf37jiy6ALr6yMWpKMuN4fNUflp9U2An4pEBQR4Ya4B6fV5NrhXYbo2O3OujraoYOp4x4/LMAHnDdEvBxr79LruOlqifo+gnrVFcTyU5xX+LkTg8gqJ73cpF+YT4kzPUAms4Hrk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linux-foundation.org header.i=@linux-foundation.org header.b=YQt4yJD4; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51CB1C4CEF5;
-	Tue, 23 Sep 2025 21:17:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
-	s=korg; t=1758662227;
-	bh=9maMwx7/tfxHiKFTD825WGlX9Scv4cfcxvOcT74ZDTg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=YQt4yJD4LLyMB/AA7fhRdzHKMMyKrYX7tPYO7bcgLcaYZEMTEEDS+V/u87paR8mvk
-	 vaZ6Hf5HJhiz4iN6UcpLvuzXo0K/kulYjPZuGmcFLhgj45aLOuctbBJIR6+SoLAoCq
-	 q1aNHSIO3K1aKeAi1QD+S0yrDrsK77/N3Jf/bOOk=
-Date: Tue, 23 Sep 2025 14:17:04 -0700
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Sumanth Korikkar <sumanthk@linux.ibm.com>
-Cc: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Jonathan Corbet
- <corbet@lwn.net>, Matthew Wilcox <willy@infradead.org>, Guo Ren
- <guoren@kernel.org>, Thomas Bogendoerfer <tsbogend@alpha.franken.de>, Heiko
- Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>, Alexander
- Gordeev <agordeev@linux.ibm.com>, Christian Borntraeger
- <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>,
- "David S . Miller" <davem@davemloft.net>, Andreas Larsson
- <andreas@gaisler.com>, Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman
- <gregkh@linuxfoundation.org>, Dan Williams <dan.j.williams@intel.com>,
- Vishal Verma <vishal.l.verma@intel.com>, Dave Jiang <dave.jiang@intel.com>,
- Nicolas Pitre <nico@fluxnic.net>, Muchun Song <muchun.song@linux.dev>,
- Oscar Salvador <osalvador@suse.de>, David Hildenbrand <david@redhat.com>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Baoquan He
- <bhe@redhat.com>, Vivek Goyal <vgoyal@redhat.com>, Dave Young
- <dyoung@redhat.com>, Tony Luck <tony.luck@intel.com>, Reinette Chatre
- <reinette.chatre@intel.com>, Dave Martin <Dave.Martin@arm.com>, James Morse
- <james.morse@arm.com>, Alexander Viro <viro@zeniv.linux.org.uk>, Christian
- Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, "Liam R . Howlett"
- <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport
- <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, Michal Hocko
- <mhocko@suse.com>, Hugh Dickins <hughd@google.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, Uladzislau Rezki <urezki@gmail.com>,
- Dmitry Vyukov <dvyukov@google.com>, Andrey Konovalov
- <andreyknvl@gmail.com>, Jann Horn <jannh@google.com>, Pedro Falcato
- <pfalcato@suse.de>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-csky@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-s390@vger.kernel.org, sparclinux@vger.kernel.org,
- nvdimm@lists.linux.dev, linux-cxl@vger.kernel.org, linux-mm@kvack.org,
- ntfs3@lists.linux.dev, kexec@lists.infradead.org,
- kasan-dev@googlegroups.com, Jason Gunthorpe <jgg@nvidia.com>,
- iommu@lists.linux.dev, Kevin Tian <kevin.tian@intel.com>, Will Deacon
- <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>
-Subject: Re: [PATCH v4 11/14] mm/hugetlbfs: update hugetlbfs to use
- mmap_prepare
-Message-Id: <20250923141704.90fba5bdf8c790e0496e6ac1@linux-foundation.org>
-In-Reply-To: <aNKJ6b7kmT_u0A4c@li-2b55cdcc-350b-11b2-a85c-a78bff51fc11.ibm.com>
-References: <cover.1758135681.git.lorenzo.stoakes@oracle.com>
-	<e5532a0aff1991a1b5435dcb358b7d35abc80f3b.1758135681.git.lorenzo.stoakes@oracle.com>
-	<aNKJ6b7kmT_u0A4c@li-2b55cdcc-350b-11b2-a85c-a78bff51fc11.ibm.com>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1758663263; c=relaxed/simple;
+	bh=pDaooK30U19hne34JuAhtizKT1ZuonmtreK5zAdeXEQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Wjgq9F5wi997JXHCQ2N0MG3NrkE3C9OYxo/1p7LBqOqgmF09aLBrPRzxfrCqWKVFGSw+pDxSUVdV5NknQgmQM0W8l6g5IxSKFdW4eCsEG1qdWxgFRLpn8P8s6jvKRfyzRWjYdeiaetOc5J23XgqM52YRLx2PZMotlQEuPtzOr14=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AMHgqyqx; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BB8CC4CEF7;
+	Tue, 23 Sep 2025 21:34:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1758663262;
+	bh=pDaooK30U19hne34JuAhtizKT1ZuonmtreK5zAdeXEQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=AMHgqyqxwI5lfJweeS04+lwkcSXxTkHN9b8/sOWwcRdFyFO0cSqdi/aLqiTdxq+tE
+	 xmYZVDb+Rt2a5GwQ0Pu3I/8L7yE30XT8lY1hpF1vqapEdeG49R9SDZZA1SloaSkjwC
+	 BwgBHrjx+zSASbCCQ8dmlOJXJBqWDDf6PA4DvS3r7EgDcS6/ysAy7p7ezoQECdYy5j
+	 UZDz2bm2xu3MqXp5mUNXgyTU2nAHObnAIqWdROMq1I50xrcd0C05LvUbDrs31hUPi6
+	 2tMnMWK16hCa3ooSe+g7YZ8Tazo/ntvypsPprBvyrDLJvLIcfvYHOATBbmS6VDJzh3
+	 2mgNboXQtrZ3g==
+From: Kees Cook <kees@kernel.org>
+To: Nathan Chancellor <nathan@kernel.org>
+Cc: Kees Cook <kees@kernel.org>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	Nicolas Schier <nicolas.schier@linux.dev>,
+	Vegard Nossum <vegard.nossum@oracle.com>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Puranjay Mohan <puranjay@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	linux-kbuild@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-hardening@vger.kernel.org
+Subject: [PATCH v3 0/3] kconfig: Add transitional symbol attribute for migration support
+Date: Tue, 23 Sep 2025 14:34:16 -0700
+Message-Id: <20250923213120.make.332-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5037; i=kees@kernel.org; h=from:subject:message-id; bh=pDaooK30U19hne34JuAhtizKT1ZuonmtreK5zAdeXEQ=; b=owGbwMvMwCVmps19z/KJym7G02pJDBmXhSK3r2aK/PXg54dMhznxGZqxv1/z6zX7Vj+ayCLc8 DaI0Temo5SFQYyLQVZMkSXIzj3OxeNte7j7XEWYOaxMIEMYuDgFYCKeZxgZdtz9pfVwOU9zhO3E 6rj/Ve4VcfG7dPvKtths89a6yRm/jOG/0z+lhJvXZM24l60ubnl3buGPDyyead98Jdfv4uLzar3 NBQA=
+X-Developer-Key: i=kees@kernel.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
+Content-Transfer-Encoding: 8bit
 
-On Tue, 23 Sep 2025 13:52:09 +0200 Sumanth Korikkar <sumanthk@linux.ibm.com> wrote:
+Hi,
 
-> > --- a/fs/hugetlbfs/inode.c
-> > +++ b/fs/hugetlbfs/inode.c
-> > @@ -96,8 +96,15 @@ static const struct fs_parameter_spec hugetlb_fs_parameters[] = {
-> >  #define PGOFF_LOFFT_MAX \
-> >  	(((1UL << (PAGE_SHIFT + 1)) - 1) <<  (BITS_PER_LONG - (PAGE_SHIFT + 1)))
-> >  
-> > -static int hugetlbfs_file_mmap(struct file *file, struct vm_area_struct *vma)
-> > +static int hugetlb_file_mmap_prepare_success(const struct vm_area_struct *vma)
-> >  {
-> > +	/* Unfortunate we have to reassign vma->vm_private_data. */
-> > +	return hugetlb_vma_lock_alloc((struct vm_area_struct *)vma);
-> > +}
-> 
-> Hi Lorenzo,
-> 
-> The following tests causes the kernel to enter a blocked state,
-> suggesting an issue related to locking order. I was able to reproduce
-> this behavior in certain test runs.
+Add the new "transitional" keyword to kconfig and use it to rename
+CONFIG_CFI_CLANG to CONFIG_CFI.
 
-Thanks.  I pulled this series out of mm.git's mm-stable branch, put it
-back into mm-unstable.
+ v3: use Vegard's approach, add selftests
+ v2: https://lore.kernel.org/lkml/20250830020109.it.598-kees@kernel.org/
+ v1: https://lore.kernel.org/all/20250830014438.work.682-kees@kernel.org/
+
+-Kees
+
+Kees Cook (3):
+  kconfig: Fix BrokenPipeError warnings in selftests
+  kconfig: Add transitional symbol attribute for migration support
+  kcfi: Rename CONFIG_CFI_CLANG to CONFIG_CFI
+
+ arch/Kconfig                                  |  36 ++++---
+ arch/arm/Kconfig                              |   2 +-
+ arch/arm64/Kconfig                            |   4 +-
+ arch/riscv/Kconfig                            |   6 +-
+ arch/x86/Kconfig                              |  12 +--
+ init/Kconfig                                  |   4 +-
+ kernel/module/Kconfig                         |   2 +-
+ .../kconfig/tests/err_transitional/Kconfig    |  52 +++++++++
+ scripts/kconfig/tests/transitional/Kconfig    | 100 ++++++++++++++++++
+ lib/Kconfig.debug                             |   2 +-
+ Makefile                                      |   2 +-
+ arch/arm/mm/Makefile                          |   2 +-
+ arch/riscv/kernel/Makefile                    |   2 +-
+ arch/riscv/purgatory/Makefile                 |   2 +-
+ arch/x86/kernel/Makefile                      |   2 +-
+ arch/x86/purgatory/Makefile                   |   2 +-
+ kernel/Makefile                               |   2 +-
+ scripts/kconfig/expr.h                        |   1 +
+ scripts/kconfig/lexer.l                       |   1 +
+ scripts/kconfig/parser.y                      |  47 ++++++++
+ scripts/kconfig/symbol.c                      |   7 +-
+ scripts/kconfig/tests/conftest.py             |  17 ++-
+ .../tests/err_transitional/__init__.py        |  14 +++
+ .../tests/err_transitional/expected_stderr    |   7 ++
+ .../kconfig/tests/transitional/__init__.py    |  18 ++++
+ .../tests/transitional/expected_config        |  12 +++
+ .../kconfig/tests/transitional/initial_config |  16 +++
+ Documentation/kbuild/kconfig-language.rst     |  32 ++++++
+ arch/riscv/include/asm/cfi.h                  |   4 +-
+ arch/x86/include/asm/cfi.h                    |   4 +-
+ include/asm-generic/vmlinux.lds.h             |   2 +-
+ include/linux/cfi.h                           |   6 +-
+ include/linux/cfi_types.h                     |   8 +-
+ include/linux/compiler.h                      |   2 +-
+ include/linux/compiler_types.h                |   2 +-
+ tools/include/linux/cfi_types.h               |   6 +-
+ tools/perf/util/include/linux/linkage.h       |   2 +-
+ arch/arm/mm/cache-fa.S                        |   2 +-
+ arch/arm/mm/cache-v4.S                        |   2 +-
+ arch/arm/mm/cache-v4wb.S                      |   4 +-
+ arch/arm/mm/cache-v4wt.S                      |   2 +-
+ arch/arm/mm/cache-v6.S                        |   2 +-
+ arch/arm/mm/cache-v7.S                        |   2 +-
+ arch/arm/mm/cache-v7m.S                       |   2 +-
+ arch/arm/mm/proc-arm1020.S                    |   2 +-
+ arch/arm/mm/proc-arm1020e.S                   |   2 +-
+ arch/arm/mm/proc-arm1022.S                    |   2 +-
+ arch/arm/mm/proc-arm1026.S                    |   2 +-
+ arch/arm/mm/proc-arm920.S                     |   2 +-
+ arch/arm/mm/proc-arm922.S                     |   2 +-
+ arch/arm/mm/proc-arm925.S                     |   2 +-
+ arch/arm/mm/proc-arm926.S                     |   2 +-
+ arch/arm/mm/proc-arm940.S                     |   2 +-
+ arch/arm/mm/proc-arm946.S                     |   2 +-
+ arch/arm/mm/proc-feroceon.S                   |   2 +-
+ arch/arm/mm/proc-mohawk.S                     |   2 +-
+ arch/arm/mm/proc-xsc3.S                       |   2 +-
+ arch/arm/mm/tlb-v4.S                          |   2 +-
+ arch/arm/kernel/hw_breakpoint.c               |   2 +-
+ arch/arm64/kernel/debug-monitors.c            |   2 +-
+ arch/arm64/kernel/traps.c                     |   4 +-
+ arch/arm64/kvm/handle_exit.c                  |   2 +-
+ arch/arm64/net/bpf_jit_comp.c                 |   2 +-
+ arch/riscv/net/bpf_jit_comp64.c               |   4 +-
+ arch/x86/kernel/alternative.c                 |   4 +-
+ arch/x86/kernel/kprobes/core.c                |   2 +-
+ drivers/misc/lkdtm/cfi.c                      |   2 +-
+ kernel/module/tree_lookup.c                   |   2 +-
+ kernel/configs/hardening.config               |   2 +-
+ 69 files changed, 422 insertions(+), 92 deletions(-)
+ create mode 100644 scripts/kconfig/tests/err_transitional/Kconfig
+ create mode 100644 scripts/kconfig/tests/transitional/Kconfig
+ create mode 100644 scripts/kconfig/tests/err_transitional/__init__.py
+ create mode 100644 scripts/kconfig/tests/err_transitional/expected_stderr
+ create mode 100644 scripts/kconfig/tests/transitional/__init__.py
+ create mode 100644 scripts/kconfig/tests/transitional/expected_config
+ create mode 100644 scripts/kconfig/tests/transitional/initial_config
+
+-- 
+2.34.1
+
 
