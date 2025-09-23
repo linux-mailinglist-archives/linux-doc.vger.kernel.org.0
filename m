@@ -1,161 +1,163 @@
-Return-Path: <linux-doc+bounces-61530-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61532-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40D14B93D27
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 03:18:47 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6116B94289
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 05:54:14 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 0446A2E1C3D
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 01:18:47 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id ABA577A365F
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 03:52:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36FDF1F4165;
-	Tue, 23 Sep 2025 01:18:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UKZGvtEC"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A422C236437;
+	Tue, 23 Sep 2025 03:54:08 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from baidu.com (mx24.baidu.com [111.206.215.185])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07D591D798E;
-	Tue, 23 Sep 2025 01:18:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E638720C47C;
+	Tue, 23 Sep 2025 03:54:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=111.206.215.185
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758590297; cv=none; b=GNi5ZQ79DYNr6q6kmrOLIQHuoC1bfhRABPtjWL1b6aoLhawVAJOin3omCAEM7wx2yzy+oVVB/q7GxevNJQ+Jxu7l24bG/30AP/RdWwcsxrPzI5XV2kVuRCptK1k9nfmyEHT9hCcs4ZHTj4XWH4D9GGWswwf6F0DAtTWb+RQz86s=
+	t=1758599648; cv=none; b=rxHEFXcpx+HQEQfgxfGr/nZ7yvkeeCG9g/DS5BbSROSs+CMjLDdTMlxb6AoQhjK8CxR9De2YqNzWYHDfBW1CuOtNlJpc4O4RKbkLEVLgnAJoHwx2LbIYEjb+V89bgj763QQOgF8RLF34JwYwFIfC4j5b0NSSPFEfAl1RKF+RZyE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758590297; c=relaxed/simple;
-	bh=yWrgfH6o6tBojpygb/3hwUZPMazgwgCEKyJzb90YtAg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=lpoyQcRAMFo/Qu/zvHQVOshE5m7Cye9rFscJJlgBR6MAfAgF9k6sRtLembTkedTuyhALugWuxkZH7UJhphf2I78V80q66SLc5k+UkfGHlJuIGadYO/YdZAIUb0AovrFcT8x9V8g7sbkcHQ3ylCnrGsifWn0zwRbLtoWoJh6QCS4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UKZGvtEC; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 510D4C4CEF0;
-	Tue, 23 Sep 2025 01:18:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758590296;
-	bh=yWrgfH6o6tBojpygb/3hwUZPMazgwgCEKyJzb90YtAg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=UKZGvtECgMz333UnPKEQKvTJc3iuycFS/3PpSOaVp/zNr60F7bywnA4nIdc2YmrCa
-	 5LULhTFJsVfuuvGwyKZfN8hulyl3gwr4/NSTdoWf/W2aJTiSEivCs+ViQCkXspF2w1
-	 8bjmqx7i/QLOjJQO31bA1HTzfi768lMz8CafthFsiWW7ytzUSXTOypfocXnsJFF1OC
-	 ErXxERsnYge+aWE+K5Pox+Tu90aFIsyKQMYygK3pj3WTZb14z7XbcdJ65zqf2dvshh
-	 eqIM6UP+aogJTLxY6P7whl1DCmAgJeoPtgRHvvgmhJTSMRpw6KkjsUEroF8dTDWj4A
-	 l/z+ns0CCVCag==
-From: "Masami Hiramatsu (Google)" <mhiramat@kernel.org>
-To: Steven Rostedt <rostedt@goodmis.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Ingo Molnar <mingo@kernel.org>,
-	x86@kernel.org
-Cc: Jinchao Wang <wangjinchao600@gmail.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H . Peter Anvin" <hpa@zytor.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Ian Rogers <irogers@google.com>,
-	linux-kernel@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-perf-users@vger.kernel.org
-Subject: [PATCH v5 8/8] selftests: ftrace: Add wprobe trigger testcase
-Date: Tue, 23 Sep 2025 10:18:09 +0900
-Message-ID: <175859028948.374439.13079482023691271097.stgit@devnote2>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <175859019940.374439.7398451124225791618.stgit@devnote2>
-References: <175859019940.374439.7398451124225791618.stgit@devnote2>
-User-Agent: StGit/0.19
+	s=arc-20240116; t=1758599648; c=relaxed/simple;
+	bh=Zg3FPoSHnAv2PObrg/i19fiiMx4nTL23ooT1KVwjkss=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=GyvVcmrgkwtavki/i3+MOS5KGofkzlgo9ouOYFro8gFrXBJK2xb0OAkzI/YbKfWX0dlb7SZiRxHBiYTRprenaomzm7KcXsedUE/h57wZMJFPa4VkZaysQIkcIzPlZ6NZP1P9fn1qYzAG5SM3vGetWwkrnduSWdaqlmQiTRgfGHY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=baidu.com; spf=pass smtp.mailfrom=baidu.com; arc=none smtp.client-ip=111.206.215.185
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=baidu.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baidu.com
+From: lirongqing <lirongqing@baidu.com>
+To: <corbet@lwn.net>, <akpm@linux-foundation.org>, <lance.yang@linux.dev>,
+	<mhiramat@kernel.org>, <paulmck@kernel.org>,
+	<pawan.kumar.gupta@linux.intel.com>, <mingo@kernel.org>,
+	<dave.hansen@linux.intel.com>, <rostedt@goodmis.org>, <kees@kernel.org>,
+	<arnd@arndb.de>, <lirongqing@baidu.com>, <feng.tang@linux.alibaba.com>,
+	<pauld@redhat.com>, <joel.granados@kernel.org>, <linux-doc@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>
+Subject: [PATCH][RFC] hung_task: Support to panic when the maximum number of hung task warnings is reached
+Date: Tue, 23 Sep 2025 11:37:40 +0800
+Message-ID: <20250923033740.2696-1-lirongqing@baidu.com>
+X-Mailer: git-send-email 2.17.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: bjhj-exc12.internal.baidu.com (172.31.3.22) To
+ bjkjy-exc3.internal.baidu.com (172.31.50.47)
+X-FEAS-Client-IP: 172.31.50.47
+X-FE-Policy-ID: 52:10:53:SYSTEM
 
-From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+From: Li RongQing <lirongqing@baidu.com>
 
-Add a testcase for checking wprobe trigger. This sets set_wprobe and
-clear_wprobe triggers on fprobe events to watch dentry access.
-So this depends on both wprobe and fprobe.
+Currently the hung task detector can either panic immediately or continue
+operation when hung tasks are detected. However, there are scenarios
+where we want a more balanced approach:
 
-Signed-off-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
+- We don't want the system to panic immediately when a few hung tasks
+  are detected, as the system may be able to recover
+- And we also don't want the system to stall indefinitely with multiple
+  hung tasks
+
+This commit introduces a new mode (value 2) for the hung task panic behavior.
+When set to 2, the system will panic only after the maximum number of hung
+task warnings (hung_task_warnings) has been reached.
+
+This provides a middle ground between immediate panic and potentially
+infinite stall, allowing for automated vmcore generation after a reasonable
+number of hung task incidents.
+
+Signed-off-by: Li RongQing <lirongqing@baidu.com>
 ---
- Changes in v5:
-  - Enable CONFIG_WPROBE_TRIGGERS in the config for ftrace test.
- Changes in v3:
-  - Newly added.
----
- tools/testing/selftests/ftrace/config              |    1 
- .../ftrace/test.d/trigger/trigger-wprobe.tc        |   48 ++++++++++++++++++++
- 2 files changed, 49 insertions(+)
- create mode 100644 tools/testing/selftests/ftrace/test.d/trigger/trigger-wprobe.tc
+ Documentation/admin-guide/kernel-parameters.txt | 15 ++++++++-------
+ Documentation/admin-guide/sysctl/kernel.rst     |  1 +
+ kernel/hung_task.c                              |  5 +++--
+ lib/Kconfig.debug                               |  4 ++--
+ 4 files changed, 14 insertions(+), 11 deletions(-)
 
-diff --git a/tools/testing/selftests/ftrace/config b/tools/testing/selftests/ftrace/config
-index d2f503722020..ecdee77f360f 100644
---- a/tools/testing/selftests/ftrace/config
-+++ b/tools/testing/selftests/ftrace/config
-@@ -28,3 +28,4 @@ CONFIG_TRACER_SNAPSHOT=y
- CONFIG_UPROBES=y
- CONFIG_UPROBE_EVENTS=y
- CONFIG_WPROBE_EVENTS=y
-+CONFIG_WPROBE_TRIGGERS=y
-diff --git a/tools/testing/selftests/ftrace/test.d/trigger/trigger-wprobe.tc b/tools/testing/selftests/ftrace/test.d/trigger/trigger-wprobe.tc
-new file mode 100644
-index 000000000000..a012f7b92405
---- /dev/null
-+++ b/tools/testing/selftests/ftrace/test.d/trigger/trigger-wprobe.tc
-@@ -0,0 +1,48 @@
-+#!/bin/sh
-+# SPDX-License-Identifier: GPL-2.0
-+# description: event trigger - test wprobe trigger
-+# requires: dynamic_events "w[:[<group>/][<event>]] [r|w|rw]@<addr>[:<len>]":README events/sched/sched_process_fork/trigger
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 5a7a83c..f2a9876 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -1993,13 +1993,14 @@
+ 
+ 	hung_task_panic=
+ 			[KNL] Should the hung task detector generate panics.
+-			Format: 0 | 1
+-
+-			A value of 1 instructs the kernel to panic when a
+-			hung task is detected. The default value is controlled
+-			by the CONFIG_BOOTPARAM_HUNG_TASK_PANIC build-time
+-			option. The value selected by this boot parameter can
+-			be changed later by the kernel.hung_task_panic sysctl.
++			Format: 0 | 1 | 2
 +
-+echo 0 > tracing_on
-+
-+:;: "Add a wprobe event used by trigger" ;:
-+echo 'w:watch rw@0:8 address=$addr value=+0($addr)' > dynamic_events
-+
-+:;: "Add events for triggering wprobe" ;:
-+echo 'f:truncate do_truncate dentry=$arg2' >> dynamic_events
-+echo 'f:dentry_kill __dentry_kill dentry=$arg1' >> dynamic_events
-+
-+:;: "Add wprobe triggers" ;:
-+echo 'set_wprobe:watch:dentry' >> events/fprobes/truncate/trigger
-+echo 'clear_wprobe:watch:dentry' >> events/fprobes/dentry_kill/trigger
-+cat events/fprobes/truncate/trigger | grep ^set_wprobe
-+cat events/fprobes/dentry_kill/trigger | grep ^clear_wprobe
-+
-+:;: "Ensure wprobe is still disabled" ;:
-+cat events/wprobes/watch/enable | grep 0
-+
-+:;: "Enable events for triggers" ;:
-+echo 1 >> events/fprobes/truncate/enable
-+echo 1 >> events/fprobes/dentry_kill/enable
-+
-+:;: "Start test workload" ;:
-+echo 1 >> tracing_on
-+
-+echo aaa > /tmp/hoge
-+echo bbb > /tmp/hoge
-+echo ccc > /tmp/hoge
-+rm /tmp/hoge
-+
-+:;: "Check trace results" ;:
-+cat trace | grep watch
-+
-+:;: "Ensure wprobe becomes disabled again" ;:
-+cat events/wprobes/watch/enable | grep 0
-+
-+:;: "Remove wprobe triggers" ;:
-+echo '!set_wprobe:watch:dentry' >> events/fprobes/truncate/trigger
-+echo '!clear_wprobe:watch' >> events/fprobes/dentry_kill/trigger
-+! grep ^set_wprobe events/fprobes/truncate/trigger
-+! grep ^clear_wprobe events/fprobes/dentry_kill/trigger
-+
-+exit 0
-\ No newline at end of file
++			A value of 1 instructs the kernel to panic when a hung task is detected.
++			A value of 2 instructs the kernel to panic when hung_task_warnings is
++			decreased to 0.  The default value is controlled by the
++			CONFIG_BOOTPARAM_HUNG_TASK_PANIC build-time option. The value selected
++			by this boot parameter can be changed later by the kernel.hung_task_panic
++			sysctl.
+ 
+ 	hvc_iucv=	[S390]	Number of z/VM IUCV hypervisor console (HVC)
+ 				terminal devices. Valid values: 0..8
+diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
+index 8b49eab..6f77241 100644
+--- a/Documentation/admin-guide/sysctl/kernel.rst
++++ b/Documentation/admin-guide/sysctl/kernel.rst
+@@ -403,6 +403,7 @@ This file shows up if ``CONFIG_DETECT_HUNG_TASK`` is enabled.
+ = =================================================
+ 0 Continue operation. This is the default behavior.
+ 1 Panic immediately.
++2 Panic when hung_task_warnings is decreased to 0.
+ = =================================================
+ 
+ 
+diff --git a/kernel/hung_task.c b/kernel/hung_task.c
+index 8708a12..b052ec7 100644
+--- a/kernel/hung_task.c
++++ b/kernel/hung_task.c
+@@ -219,7 +219,8 @@ static void check_hung_task(struct task_struct *t, unsigned long timeout)
+ 
+ 	trace_sched_process_hang(t);
+ 
+-	if (sysctl_hung_task_panic) {
++	if ((sysctl_hung_task_panic == 1) ||
++		(!sysctl_hung_task_warnings && sysctl_hung_task_panic == 2)) {
+ 		console_verbose();
+ 		hung_task_show_lock = true;
+ 		hung_task_call_panic = true;
+@@ -385,7 +386,7 @@ static const struct ctl_table hung_task_sysctls[] = {
+ 		.mode		= 0644,
+ 		.proc_handler	= proc_dointvec_minmax,
+ 		.extra1		= SYSCTL_ZERO,
+-		.extra2		= SYSCTL_ONE,
++		.extra2		= SYSCTL_TWO,
+ 	},
+ 	{
+ 		.procname	= "hung_task_check_count",
+diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
+index dc0e0c6..e7cf166 100644
+--- a/lib/Kconfig.debug
++++ b/lib/Kconfig.debug
+@@ -1264,10 +1264,10 @@ config DEFAULT_HUNG_TASK_TIMEOUT
+ 	  Keeping the default should be fine in most cases.
+ 
+ config BOOTPARAM_HUNG_TASK_PANIC
+-	bool "Panic (Reboot) On Hung Tasks"
++	int "Panic (Reboot) On Hung Tasks"
+ 	depends on DETECT_HUNG_TASK
+ 	help
+-	  Say Y here to enable the kernel to panic on "hung tasks",
++	  Say 1|2 here to enable the kernel to panic on "hung tasks",
+ 	  which are bugs that cause the kernel to leave a task stuck
+ 	  in uninterruptible "D" state.
+ 
+-- 
+2.9.4
 
 
