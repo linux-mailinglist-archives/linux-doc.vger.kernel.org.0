@@ -1,144 +1,134 @@
-Return-Path: <linux-doc+bounces-61575-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61577-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6E8AB95CCA
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 14:14:20 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FB2DB95F83
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 15:13:54 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id C7468189DEA5
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 12:14:42 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 52482162AFD
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Sep 2025 13:13:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F2971322A27;
-	Tue, 23 Sep 2025 12:14:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7288D321F3E;
+	Tue, 23 Sep 2025 13:13:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b="mD0xkIhV"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oMzSrmpP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fra-out-010.esa.eu-central-1.outbound.mail-perimeter.amazon.com (fra-out-010.esa.eu-central-1.outbound.mail-perimeter.amazon.com [63.178.143.178])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F3B71FBEB0;
-	Tue, 23 Sep 2025 12:14:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=63.178.143.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40EA5339A8;
+	Tue, 23 Sep 2025 13:13:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758629655; cv=none; b=EFAzeZX6sQO4juNhUolAS53iuYc4hLj5l1DTlsJCkMzDuj2ISaVO8xqQ14HL9FCEBXPGCrQH4pn9JyU0/n4PsS/Tjl+x8qQ8RRaCyg4zMu+gJaKY71LIdFQcSS6XCOd+DcuSDGH2xu3gAa9UFUydegHika9HmwmzQXs1BBKi17s=
+	t=1758633229; cv=none; b=txlqL1sjG+YZhJSf4nV9z4Obo41uiONowuFuRBWLOG3tBI0iEGGsc91B9Vmtqq42tpHAWfZPUhL+cHBy828JxhUPpXrV5t01CHNhW+u2pUVTaqcLZQX4Q7AUCgxKwH9ZlMMP7zUHGd+88FMNNseO8KHTGO5XBndZPqwWaL4B7p8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758629655; c=relaxed/simple;
-	bh=CpmAYnUwoKFsWa3Yk/+PnZyYX7cO9CYe1Xx6E/cVEz0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=P0tyTNljs5eZfmnppJ0AsPWTxsA1eDMxuC0tok+zAG0iJTK37gSc0MvTXSZUw0IQ7z04ULmynKiuFiStXk1EEod6G5LCgcnBqgtnEiiPcCX3pSs2DO5mlrd9Hosjj0Rntw3CecXx+sosBsllvadt9zzFI+gG1Lr0xZWMQNFvCtA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.co.uk; dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b=mD0xkIhV; arc=none smtp.client-ip=63.178.143.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.co.uk
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
-  t=1758629654; x=1790165654;
-  h=message-id:date:mime-version:reply-to:subject:to:cc:
-   references:from:in-reply-to:content-transfer-encoding;
-  bh=C6zoQ1uv1s7hqCsB4ZjAaLblPEL6nAmG0LEH7MpxUwU=;
-  b=mD0xkIhVDRTDD6UdkT8aj9tqZRAT1M8dvEp1Xglhm05XxCXHdwEQDWjp
-   XRqVIjc1+YBP5q/s2A/2u3LUIE73kre3rBM7GmV6yKdFiBPRSpJxHar4E
-   jyGmXyuNyNArCjRnLY/H7CNT5nQpUrIYq3isRBa8jv0CfJjG1lSiqKNMH
-   t0VNLEaZ/XCfqCsjzVf6ex9gcuS6SHojuY1saWK1drGNOjknXrMFDVVfB
-   8V1rnljmyaC6crUwri2CKzDK9QSaAXtlhbUoiVzmffThZo8QufM246akm
-   aDvnitNjE1BwJAAm1gQ6+FYHZUCZ77TLVBfI3LyqEl25XxYf2a2lk4GG4
-   A==;
-X-CSE-ConnectionGUID: FBNj+l+aR1+qu6nlihE2jA==
-X-CSE-MsgGUID: h+GIaP0rSfmTrhi4K2iYPA==
-X-IronPort-AV: E=Sophos;i="6.18,288,1751241600"; 
-   d="scan'208";a="2438561"
-Received: from ip-10-6-3-216.eu-central-1.compute.internal (HELO smtpout.naws.eu-central-1.prod.farcaster.email.amazon.dev) ([10.6.3.216])
-  by internal-fra-out-010.esa.eu-central-1.outbound.mail-perimeter.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Sep 2025 12:13:57 +0000
-Received: from EX19MTAEUA002.ant.amazon.com [54.240.197.232:7935]
- by smtpin.naws.eu-central-1.prod.farcaster.email.amazon.dev [10.0.38.97:2525] with esmtp (Farcaster)
- id 8181f46e-0526-4b06-9460-3a2e1a03356b; Tue, 23 Sep 2025 12:13:57 +0000 (UTC)
-X-Farcaster-Flow-ID: 8181f46e-0526-4b06-9460-3a2e1a03356b
-Received: from EX19D022EUC002.ant.amazon.com (10.252.51.137) by
- EX19MTAEUA002.ant.amazon.com (10.252.50.124) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.20;
- Tue, 23 Sep 2025 12:13:54 +0000
-Received: from [192.168.26.206] (10.106.82.20) by
- EX19D022EUC002.ant.amazon.com (10.252.51.137) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.20;
- Tue, 23 Sep 2025 12:13:53 +0000
-Message-ID: <8408090a-d2cc-4b90-99fe-183d49081ea4@amazon.com>
-Date: Tue, 23 Sep 2025 13:13:51 +0100
+	s=arc-20240116; t=1758633229; c=relaxed/simple;
+	bh=h3D9xtbROxNSb9Gijb8GsRs1BUgX1Qfy/IJ4YGECVdo=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=mYTwflHgnXVyaC6dwcMtzHijmUAo6d4W6lv9fiYalTSwIPViTUmsAG6AWAlsNVSa/o7pVt7woOW4yD93LT4NiFGxUx0mWfEef0l88QVo434dy1AHRe3s/dyIzcOMEi8GnvNF/yFgY1IO0vDlc4DWOCNi16A9Tutfv8DPW8vNZCE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oMzSrmpP; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CE3FC4CEF5;
+	Tue, 23 Sep 2025 13:13:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1758633229;
+	bh=h3D9xtbROxNSb9Gijb8GsRs1BUgX1Qfy/IJ4YGECVdo=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=oMzSrmpPP/PZ4MdZMnfT6nG+/zBR7nn6g4tNnGPoailLJCzHkLsoyL30vp2ur1OAe
+	 EycvqkFLaoVGg4yXwf3Wtfknm3B+XyCYkscA//AR42PLBwLn9pgexqrCmAXYWHg/Iw
+	 H4g3S8fTTcMXihhCLXObOJ1DaQfxHLWyGCGANTs8ARSYE9CZKaenjyK3DCcPmMORyH
+	 iVD2FcM37OTUlRno11vUbxH0btrUd/4HR+12ckF9hFXqUvuZNBJzOLV4wVY0nSSvE4
+	 ftvgaY/8Z5DZc9cL58e1XsahlgGD+qnui47PHZggyP/6oaZZDQLpk3oYdNe/iMQRu3
+	 LiDgzMSCbyraw==
+From: Pratyush Yadav <pratyush@kernel.org>
+To: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: Pratyush Yadav <pratyush@kernel.org>,  jasonmiu@google.com,
+  graf@amazon.com,  changyuanl@google.com,  rppt@kernel.org,
+  dmatlack@google.com,  rientjes@google.com,  corbet@lwn.net,
+  rdunlap@infradead.org,  ilpo.jarvinen@linux.intel.com,
+  kanie@linux.alibaba.com,  ojeda@kernel.org,  aliceryhl@google.com,
+  masahiroy@kernel.org,  akpm@linux-foundation.org,  tj@kernel.org,
+  yoann.congal@smile.fr,  mmaurer@google.com,  roman.gushchin@linux.dev,
+  chenridong@huawei.com,  axboe@kernel.dk,  mark.rutland@arm.com,
+  jannh@google.com,  vincent.guittot@linaro.org,  hannes@cmpxchg.org,
+  dan.j.williams@intel.com,  david@redhat.com,  joel.granados@kernel.org,
+  rostedt@goodmis.org,  anna.schumaker@oracle.com,  song@kernel.org,
+  zhangguopeng@kylinos.cn,  linux@weissschuh.net,
+  linux-kernel@vger.kernel.org,  linux-doc@vger.kernel.org,
+  linux-mm@kvack.org,  gregkh@linuxfoundation.org,  tglx@linutronix.de,
+  mingo@redhat.com,  bp@alien8.de,  dave.hansen@linux.intel.com,
+  x86@kernel.org,  hpa@zytor.com,  rafael@kernel.org,  dakr@kernel.org,
+  bartosz.golaszewski@linaro.org,  cw00.choi@samsung.com,
+  myungjoo.ham@samsung.com,  yesanishhere@gmail.com,
+  Jonathan.Cameron@huawei.com,  quic_zijuhu@quicinc.com,
+  aleksander.lobakin@intel.com,  ira.weiny@intel.com,
+  andriy.shevchenko@linux.intel.com,  leon@kernel.org,  lukas@wunner.de,
+  bhelgaas@google.com,  wagi@kernel.org,  djeffery@redhat.com,
+  stuart.w.hayes@gmail.com,  lennart@poettering.net,  brauner@kernel.org,
+  linux-api@vger.kernel.org,  linux-fsdevel@vger.kernel.org,
+  saeedm@nvidia.com,  ajayachandra@nvidia.com,  jgg@nvidia.com,
+  parav@nvidia.com,  leonro@nvidia.com,  witu@nvidia.com
+Subject: Re: [PATCH v3 17/30] liveupdate: luo_files: luo_ioctl: Unregister
+ all FDs on device close
+In-Reply-To: <CA+CK2bD_-xwwUBnF4TBCBuX33uL6+V_1nN=0Q8_NXwhubTc8yA@mail.gmail.com>
+	(Pasha Tatashin's message of "Mon, 22 Sep 2025 17:23:11 -0400")
+References: <20250807014442.3829950-1-pasha.tatashin@soleen.com>
+	<20250807014442.3829950-18-pasha.tatashin@soleen.com>
+	<mafs07byoye0q.fsf@kernel.org>
+	<CA+CK2bD_-xwwUBnF4TBCBuX33uL6+V_1nN=0Q8_NXwhubTc8yA@mail.gmail.com>
+Date: Tue, 23 Sep 2025 15:13:38 +0200
+Message-ID: <mafs0v7l9l3b1.fsf@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Reply-To: <kalyazin@amazon.com>
-Subject: Re: [PATCH v3 00/15] KVM: Introduce KVM Userfault
-To: Sean Christopherson <seanjc@google.com>, James Houghton
-	<jthoughton@google.com>
-CC: Paolo Bonzini <pbonzini@redhat.com>, Oliver Upton
-	<oliver.upton@linux.dev>, Jonathan Corbet <corbet@lwn.net>, Marc Zyngier
-	<maz@kernel.org>, Yan Zhao <yan.y.zhao@intel.com>, Anish Moorthy
-	<amoorthy@google.com>, Peter Gonda <pgonda@google.com>, Peter Xu
-	<peterx@redhat.com>, David Matlack <dmatlack@google.com>,
-	<wei.w.wang@intel.com>, <kvm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
-	<kvmarm@lists.linux.dev>
-References: <20250618042424.330664-1-jthoughton@google.com>
- <de7da4d8-0e9d-46f2-88ec-cfd5dc14421c@amazon.com>
- <CADrL8HVxvwB4JrnUf6QtDCyzZojEvR4tr-ELEn+fL8=1cnbMQQ@mail.gmail.com>
- <aLrXFWDgDkHqPQda@google.com>
-Content-Language: en-US
-From: Nikita Kalyazin <kalyazin@amazon.com>
-Autocrypt: addr=kalyazin@amazon.com; keydata=
- xjMEY+ZIvRYJKwYBBAHaRw8BAQdA9FwYskD/5BFmiiTgktstviS9svHeszG2JfIkUqjxf+/N
- JU5pa2l0YSBLYWx5YXppbiA8a2FseWF6aW5AYW1hem9uLmNvbT7CjwQTFggANxYhBGhhGDEy
- BjLQwD9FsK+SyiCpmmTzBQJnrNfABQkFps9DAhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQr5LK
- IKmaZPOpfgD/exazh4C2Z8fNEz54YLJ6tuFEgQrVQPX6nQ/PfQi2+dwBAMGTpZcj9Z9NvSe1
- CmmKYnYjhzGxzjBs8itSUvWIcMsFzjgEY+ZIvRIKKwYBBAGXVQEFAQEHQCqd7/nb2tb36vZt
- ubg1iBLCSDctMlKHsQTp7wCnEc4RAwEIB8J+BBgWCAAmFiEEaGEYMTIGMtDAP0Wwr5LKIKma
- ZPMFAmes18AFCQWmz0MCGwwACgkQr5LKIKmaZPNTlQEA+q+rGFn7273rOAg+rxPty0M8lJbT
- i2kGo8RmPPLu650A/1kWgz1AnenQUYzTAFnZrKSsXAw5WoHaDLBz9kiO5pAK
-In-Reply-To: <aLrXFWDgDkHqPQda@google.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: EX19D015EUA002.ant.amazon.com (10.252.50.219) To
- EX19D022EUC002.ant.amazon.com (10.252.51.137)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Sep 22 2025, Pasha Tatashin wrote:
 
-
-On 05/09/2025 13:27, Sean Christopherson wrote:
-> On Thu, Sep 04, 2025, James Houghton wrote:
->> On Thu, Sep 4, 2025 at 9:43 AM Nikita Kalyazin <kalyazin@amazon.com> wrote:
->>> Are there any blockers for merging this series?  We would like to use
->>> the functionality in Firecracker for restoring guest_memfd-backed VMs
->>> from snapshots via UFFD [1].  [2] is a Firecracker feature branch that
->>> builds on top of KVM userfault, along with direct map removal [3], write
->>> syscall [4] and UFFD support [5] in guest_memfd (currently in discussion
->>> with MM at [6]) series.
+> On Wed, Aug 27, 2025 at 11:34=E2=80=AFAM Pratyush Yadav <pratyush@kernel.=
+org> wrote:
 >>
->> Glad to hear that you need this series. :)
-> 
-> Likewise (though I had slightly-advanced warning from Patrick that Firecracker
-> wants KVM Userfault).  The main reason I haven't pushed harder on this series is
-> that I didn't think anyone wanted to use it within the next ~year.
-> 
->> I am on the hook to get some QEMU patches to demonstrate that KVM
->> Userfault can work well with it. I'll try to get that done ASAP now
->> that you've expressed interest. The firecracker patches are a nice
->> demonstration that this could work too... (I wish the VMM I work on
->> was open-source).
+>> Hi Pasha,
 >>
->> I think the current "blocker" is the kvm_page_fault stuff[*]; KVM
->> Userfault will be the first user of this API. I'll review that series
->> in the next few days. I'm pretty sure Sean doesn't have any conceptual
->> issues with KVM Userfault as implemented in this series.
-> 
-> Yep, Oliver and I (and anyone else that has an opinion) just need to align on the
-> interface for arch-neutral code.  I think that's mostly on me to spin a v2, and
-> maybe to show how it all looks when integrated with the userfault stuff.\
+>> On Thu, Aug 07 2025, Pasha Tatashin wrote:
+>>
+>> > Currently, a file descriptor registered for preservation via the remai=
+ns
+>> > globally registered with LUO until it is explicitly unregistered. This
+>> > creates a potential for resource leaks into the next kernel if the
+>> > userspace agent crashes or exits without proper cleanup before a live
+>> > update is fully initiated.
+>> >
+>> > This patch ties the lifetime of FD preservation requests to the lifeti=
+me
+>> > of the open file descriptor for /dev/liveupdate, creating an implicit
+>> > "session".
+>> >
+>> > When the /dev/liveupdate file descriptor is closed (either explicitly
+>> > via close() or implicitly on process exit/crash), the .release
+>> > handler, luo_release(), is now called. This handler invokes the new
+>> > function luo_unregister_all_files(), which iterates through all FDs
+>> > that were preserved through that session and unregisters them.
+>>
+>> Why special case files here? Shouldn't you undo all the serialization
+>> done for all the subsystems?
+>
+> Good point, subsystems should also be cancelled, and system should be
+> brought back to normal state. However, with session support, we will
+> be dropping only FDs that belong to a specific session when its FD is
+> closed, or all FDs+subsystems when closing /dev/liveupdate.
 
-Sounds good, thanks.  Do you think you'll be having time to work on the 
-v2 soonish?  Is defining and implementing the interface a strict 
-prerequisite for this series?
+Yeah, that makes sense.
 
+[...]
+
+--=20
+Regards,
+Pratyush Yadav
 
