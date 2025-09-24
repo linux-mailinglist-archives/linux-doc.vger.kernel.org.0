@@ -1,202 +1,213 @@
-Return-Path: <linux-doc+bounces-61622-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61624-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2733B97DFD
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:28:38 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 97EF5B97EF4
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:44:45 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 780FE3B427E
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 00:28:37 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 943051AE1537
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 00:45:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6F863146D45;
-	Wed, 24 Sep 2025 00:28:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 47C121B6D06;
+	Wed, 24 Sep 2025 00:44:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fAoNdRWc"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nTfEFEyV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AA4D23AD;
-	Wed, 24 Sep 2025 00:28:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A2A918B0A
+	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 00:44:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758673713; cv=none; b=iobPGVYJXSS0K8mnk1IYTqHlGsJVb3GjuBD+WOeodjpf5JG+3gHA3zRQNHZMYr51DTCiM4TpXJpssPdSGNxuOohmUISF+pqOwcjR3BKDa5hFv3L6eQijmel5BXZCtP7bM3KeHGogrTyGfnReRSucAOAMyyxP7dpdyxXBMixdCGA=
+	t=1758674683; cv=none; b=mQ9Ff5uhNOPDXrO5SKYicE8ZNnbUjp7+kA5I41Nw61TiumbRbxWjq028Ps2N/k/Gi36Ja136NtBnE6CV77OQMXncQ3UZxd4BxJSWBjqo0r3JYYTBAjDppOFH8UBgdAYXNCE1qiAMLCMqeh7wSpeYOqoM8ltDTpQB3dK2FbgVFo4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758673713; c=relaxed/simple;
-	bh=NvXiOkoBMOhyoludx8D3RhL/BwY5aAuKdR/v5OmXcB4=;
+	s=arc-20240116; t=1758674683; c=relaxed/simple;
+	bh=hTQr85kA0S/LcGQ2RwxI7Wl9/Jj+qgPic2qJeDq6syY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JtQOcoDbc466ta+NcnONNgsHOZ9K405qjNr4zzOxuQOJ7nB/PCu3VYRHjmk86WF91aRRYA3iOteuX1e0Qih1G2nMmHdyXhoEBfEf50exE4YR92gdZBoWInke6EXZ/IHci9tAyWTaGUI3O/+GHtm/C+1d/nPKCa71zqD4pZ9wIC0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fAoNdRWc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA469C4CEF5;
-	Wed, 24 Sep 2025 00:28:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758673712;
-	bh=NvXiOkoBMOhyoludx8D3RhL/BwY5aAuKdR/v5OmXcB4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=fAoNdRWc2C5qRe8n0tG0oB227VzG9fVOTXlwuzlHtcAJNqO9OPmvn+sQAvMMIzvqU
-	 F2uf5zH8UlyrZxBrDQiP2swPbAh5nlG9exTUf7xCm31qmwRk6nPnGF3Xm0RChk6Ul2
-	 CjQ9DYHem52rayxxiox+BsDt9cwpGp68jdBDMQBZ3KYG/VCPUGm0dzGfWf5wfFTBl3
-	 NFD2KBtfNydqlzNwfWF6yTzs/whO6QKvQiQrBiUheXAMpfJEG44xisroYKOY3UwcD7
-	 tE+EcykXK0fg6n5WHwhP7t2ZSBBA1nakuq1VeVbp2Mj91z7mfy89aAgd9DfDuBycpN
-	 ilmtIEAhFj8Lw==
-Date: Tue, 23 Sep 2025 17:28:32 -0700
-From: "Darrick J. Wong" <djwong@kernel.org>
-To: Joanne Koong <joannelkoong@gmail.com>
-Cc: brauner@kernel.org, miklos@szeredi.hu, hch@infradead.org,
-	linux-block@vger.kernel.org, gfs2@lists.linux.dev,
-	linux-fsdevel@vger.kernel.org, linux-xfs@vger.kernel.org,
-	linux-doc@vger.kernel.org, hsiangkao@linux.alibaba.com,
-	kernel-team@meta.com
-Subject: Re: [PATCH v4 10/15] iomap: add bias for async read requests
-Message-ID: <20250924002832.GN1587915@frogsfrogsfrogs>
-References: <20250923002353.2961514-1-joannelkoong@gmail.com>
- <20250923002353.2961514-11-joannelkoong@gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=qT4E2FtJUnEhw2b3lMDFADZymELdDC98BaiOj/V3nNpvTeZEx0gRsLqCIXhZ2ROv2sdI1Mhf/Vy++Vfzzjm6vzDIZFbb4oZIt3fiiXtUky4YErAv+WXk+VR6SI8PJh2fvu3Vo7p1MURNbmAyN1RGzgxHImiP46REsuOfl/BYhN0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nTfEFEyV; arc=none smtp.client-ip=209.85.214.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2680cf68265so46072685ad.2
+        for <linux-doc@vger.kernel.org>; Tue, 23 Sep 2025 17:44:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1758674681; x=1759279481; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=WLtIHDcQkQtcLlEdHD9/cC+Edaj0vfwf0Q7QH/dx80A=;
+        b=nTfEFEyVoP/Dj+wW5yiHZBa0HBrVVmxKo50AeTGiMBh0ktODXrdv/6tA/H3Y8OoUAf
+         5D6OXqa7wkB2kQwWURVAZmpUPdr7koszZTllbxZBm9w6wbb+CNSje4jZOmoe6M/Np3UF
+         5GbdYTkG8QnV1dNraAaGt8SxlD79CcPjfIzoCFibe+ebX8MxKJeqP9TlvbJoJObDw7FN
+         pXkuzBdutG3UUIcz6RIB2pT+yyJQqMTdGtlWsUiFpyqU9HlOKLGGv0X15Ptlyev87T0v
+         +TQYbNfiyfpv/vKdcKoX8I7iLhSO3Q3xRrYN/JB4oErlMl+TsdezdUR8VWbkWE2H1eCB
+         LKZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758674681; x=1759279481;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WLtIHDcQkQtcLlEdHD9/cC+Edaj0vfwf0Q7QH/dx80A=;
+        b=IMsXmcOxdT5vNXJPP0ZVtNzfurkQRFEqGZGt15m/xtUJDzExiT1H5T4R2i6x6kVBVh
+         9C8kRVdUR5ZywCd1ZLzQABnYRVdzVZD3aJ90uCvWfqk4Ug2BtjCKD+p+D9qWijbh0H0h
+         Wm1vdEIGGszUuhTiKFdVpS0fJ+XO9lLhtz0J1i8S0/JP6fCC3HLXWOl2y2Q1a812G+j1
+         /EroincIEXFhN2ccaPhrNvzUikB97hiwVeTLH+tioXrDfCCUE2L/qQr9TNcI3HeftA5T
+         /t2Ef1Wmsq94ntSivFNQiw6bb2K7sCazrw0wshijpvxU81gUrqxrXOJ18HjjQgD6THdQ
+         ow0g==
+X-Forwarded-Encrypted: i=1; AJvYcCUtGsJV6HR8MvAUed7dkP3n+yDeaIOyA2OBwsx/YS3yPseAW8P5hqOb/6hsocT/gvcj20CO1RY44Yg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxtY+jvPlCl/AiruTlMUUCmpqcOU8nxBRHA46iWdOZpKdiANbjG
+	gMHnonFiuuk6ClHvADxr9Y+xDOyw9xLuZi+EedJ82xOznXfvLYO2Idxc
+X-Gm-Gg: ASbGncvzfwkjO0D+W4nF/S4U4H9nB812FysD14v3mjVKOsHQLUXLEb/QLn+BL4MqQ+2
+	KV1OD50iRaR19/2nOHlOCBdJ4lFcaNcUpjqW7ko/KR/t5zIUi8eqDrvDjjhhdNsoHZrYHo1i5sf
+	sMl76S/xVDbjxeatipg9Or5pFxdfSjUzaC/RMm7k+Y7bvnt10BpHICMImZuOLTABIV096jlm0fI
+	3UdHCPMGZegmiHoTCGSvxEwxTCg6WyikKmDe1xnz3/+c3sKhXruSRPs32tGKVITTbk3Gq7TvefV
+	lvEB3nqF5o7V24x5cSZDN/Rwo1P8WNxf+HqeaBi3qykAhlsLNz2wVtZNRH5SCerx/2sqwmRLiim
+	XxCfK/i2P1/2tczJGoCuJ8A==
+X-Google-Smtp-Source: AGHT+IEfy8cwUlwEqoTLvwbqDRFwZQ4ApyvIBg2trLwd2EtpSVJd0XNuI6VI+4IYR4D1mOyiYMVWqg==
+X-Received: by 2002:a17:903:3bce:b0:24a:fab6:d15a with SMTP id d9443c01a7336-27cc185851emr45338285ad.20.1758674680650;
+        Tue, 23 Sep 2025 17:44:40 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-26980053090sm173462105ad.23.2025.09.23.17.44.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 23 Sep 2025 17:44:39 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id A2B9F4206928; Wed, 24 Sep 2025 07:44:37 +0700 (WIB)
+Date: Wed, 24 Sep 2025 07:44:37 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Simon Horman <horms@kernel.org>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Kees Cook <kees@kernel.org>
+Subject: Re: [PATCH net-next 2/3] net: dns_resolver: Move dns_query()
+ explanation out of code block
+Message-ID: <aNM-9aXWTXITUoDw@archie.me>
+References: <20250922095647.38390-2-bagasdotme@gmail.com>
+ <20250922095647.38390-4-bagasdotme@gmail.com>
+ <20250923101456.GI836419@horms.kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="e/SObf14umAK1Sg6"
 Content-Disposition: inline
-In-Reply-To: <20250923002353.2961514-11-joannelkoong@gmail.com>
+In-Reply-To: <20250923101456.GI836419@horms.kernel.org>
 
-On Mon, Sep 22, 2025 at 05:23:48PM -0700, Joanne Koong wrote:
-> Non-block-based filesystems will be using iomap read/readahead. If they
-> handle reading in ranges asynchronously and fulfill those read requests
-> on an ongoing basis (instead of all together at the end), then there is
-> the possibility that the read on the folio may be prematurely ended if
-> earlier async requests complete before the later ones have been issued.
-> 
-> For example if there is a large folio and a readahead request for 16
-> pages in that folio, if doing readahead on those 16 pages is split into
-> 4 async requests and the first request is sent off and then completed
-> before we have sent off the second request, then when the first request
-> calls iomap_finish_folio_read(), ifs->read_bytes_pending would be 0,
-> which would end the read and unlock the folio prematurely.
-> 
-> To mitigate this, a "bias" is added to ifs->read_bytes_pending before
-> the first range is forwarded to the caller and removed after the last
-> range has been forwarded.
-> 
-> iomap writeback does this with their async requests as well to prevent
-> prematurely ending writeback.
 
-I'm still waiting for responses to the old draft of this patch in the v3
-thread.
+--e/SObf14umAK1Sg6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---D
+On Tue, Sep 23, 2025 at 11:14:56AM +0100, Simon Horman wrote:
+> On Mon, Sep 22, 2025 at 04:56:47PM +0700, Bagas Sanjaya wrote:
+> > Documentation for dns_query() is placed in the function's literal code
+> > block snippet instead. Move it out of there.
+> >=20
+> > Fixes: 9dfe1361261b ("docs: networking: convert dns_resolver.txt to ReS=
+T")
+> > Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+>=20
+> Thanks, this renders much better. In a browser at least.
+>=20
+> I've added a few comments below.
+>=20
+> > ---
+> >  Documentation/networking/dns_resolver.rst | 45 +++++++++++------------
+> >  1 file changed, 22 insertions(+), 23 deletions(-)
+> >=20
+> > diff --git a/Documentation/networking/dns_resolver.rst b/Documentation/=
+networking/dns_resolver.rst
+> > index 5cec37bedf9950..329fb21d005ccd 100644
+> > --- a/Documentation/networking/dns_resolver.rst
+> > +++ b/Documentation/networking/dns_resolver.rst
+> > @@ -64,44 +64,43 @@ before the more general line given above as the fir=
+st match is the one taken::
+> >  Usage
+> >  =3D=3D=3D=3D=3D
+> > =20
+> > -To make use of this facility, one of the following functions that are
+> > -implemented in the module can be called after doing::
+> > +To make use of this facility, the appropriate header must be included =
+first::
+>=20
+> Maybe: ..., first linux/dns_resolver.h must be included.
+>=20
+> > =20
+> >  	#include <linux/dns_resolver.h>
+> > =20
+> > -     ::
+> > +Then you can make queries by calling::
+>=20
+> Please use imperative mood:
+>=20
+> Then queries may be made by calling::
+>=20
+> > =20
+> >  	int dns_query(const char *type, const char *name, size_t namelen,
+> >  		     const char *options, char **_result, time_t *_expiry);
+> > =20
+> > -     This is the basic access function.  It looks for a cached DNS que=
+ry and if
+> > -     it doesn't find it, it upcalls to userspace to make a new DNS que=
+ry, which
+> > -     may then be cached.  The key description is constructed as a stri=
+ng of the
+> > -     form::
+> > +This is the basic access function.  It looks for a cached DNS query an=
+d if
+> > +it doesn't find it, it upcalls to userspace to make a new DNS query, w=
+hich
+> > +may then be cached.  The key description is constructed as a string of=
+ the
+> > +form::
+> > =20
+> >  		[<type>:]<name>
+> > =20
+> > -     where <type> optionally specifies the particular upcall program t=
+o invoke,
+> > -     and thus the type of query to do, and <name> specifies the string=
+ to be
+> > -     looked up.  The default query type is a straight hostname to IP a=
+ddress
+> > -     set lookup.
+> > +where <type> optionally specifies the particular upcall program to inv=
+oke,
+> > +and thus the type of query to do, and <name> specifies the string to be
+>=20
+> I think while we are here "to do" could be removed.
+> But maybe that's just me.
+>=20
+> > +looked up.  The default query type is a straight hostname to IP address
+> > +set lookup.
+>=20
+> ...
 
-> Signed-off-by: Joanne Koong <joannelkoong@gmail.com>
-> ---
->  fs/iomap/buffered-io.c | 48 ++++++++++++++++++++++++++++++++++++++----
->  1 file changed, 44 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-> index 81ba0cc7705a..354819facfac 100644
-> --- a/fs/iomap/buffered-io.c
-> +++ b/fs/iomap/buffered-io.c
-> @@ -430,6 +430,38 @@ const struct iomap_read_ops iomap_bio_read_ops = {
->  };
->  EXPORT_SYMBOL_GPL(iomap_bio_read_ops);
->  
-> +/*
-> + * Add a bias to ifs->read_bytes_pending to prevent the read on the folio from
-> + * being ended prematurely.
-> + *
-> + * Otherwise, if the ranges are read asynchronously and read requests are
-> + * fulfilled on an ongoing basis, there is the possibility that the read on the
-> + * folio may be prematurely ended if earlier async requests complete before the
-> + * later ones have been issued.
-> + */
-> +static void iomap_read_add_bias(struct iomap_iter *iter, struct folio *folio)
-> +{
-> +	ifs_alloc(iter->inode, folio, iter->flags);
-> +	iomap_start_folio_read(folio, 1);
-> +}
-> +
-> +static void iomap_read_remove_bias(struct folio *folio, bool folio_owned)
-> +{
-> +	struct iomap_folio_state *ifs = folio->private;
-> +	bool end_read, uptodate;
-> +
-> +	if (ifs) {
-> +		spin_lock_irq(&ifs->state_lock);
-> +		ifs->read_bytes_pending--;
-> +		end_read = !ifs->read_bytes_pending && folio_owned;
-> +		if (end_read)
-> +			uptodate = ifs_is_fully_uptodate(folio, ifs);
-> +		spin_unlock_irq(&ifs->state_lock);
-> +		if (end_read)
-> +			folio_end_read(folio, uptodate);
-> +	}
-> +}
-> +
->  static int iomap_read_folio_iter(struct iomap_iter *iter,
->  		struct iomap_read_folio_ctx *ctx, bool *folio_owned)
->  {
-> @@ -448,8 +480,6 @@ static int iomap_read_folio_iter(struct iomap_iter *iter,
->  		return iomap_iter_advance(iter, length);
->  	}
->  
-> -	ifs_alloc(iter->inode, folio, iter->flags);
-> -
->  	length = min_t(loff_t, length,
->  			folio_size(folio) - offset_in_folio(folio, pos));
->  	while (length) {
-> @@ -505,6 +535,8 @@ int iomap_read_folio(const struct iomap_ops *ops,
->  
->  	trace_iomap_readpage(iter.inode, 1);
->  
-> +	iomap_read_add_bias(&iter, folio);
-> +
->  	while ((ret = iomap_iter(&iter, ops)) > 0)
->  		iter.status = iomap_read_folio_iter(&iter, ctx,
->  				&folio_owned);
-> @@ -512,6 +544,8 @@ int iomap_read_folio(const struct iomap_ops *ops,
->  	if (ctx->ops->submit_read)
->  		ctx->ops->submit_read(ctx);
->  
-> +	iomap_read_remove_bias(folio, folio_owned);
-> +
->  	if (!folio_owned)
->  		folio_unlock(folio);
->  
-> @@ -533,6 +567,8 @@ static int iomap_readahead_iter(struct iomap_iter *iter,
->  	while (iomap_length(iter)) {
->  		if (ctx->cur_folio &&
->  		    offset_in_folio(ctx->cur_folio, iter->pos) == 0) {
-> +			iomap_read_remove_bias(ctx->cur_folio,
-> +					*cur_folio_owned);
->  			if (!*cur_folio_owned)
->  				folio_unlock(ctx->cur_folio);
->  			ctx->cur_folio = NULL;
-> @@ -541,6 +577,7 @@ static int iomap_readahead_iter(struct iomap_iter *iter,
->  			ctx->cur_folio = readahead_folio(ctx->rac);
->  			if (WARN_ON_ONCE(!ctx->cur_folio))
->  				return -EINVAL;
-> +			iomap_read_add_bias(iter, ctx->cur_folio);
->  			*cur_folio_owned = false;
->  		}
->  		ret = iomap_read_folio_iter(iter, ctx, cur_folio_owned);
-> @@ -590,8 +627,11 @@ void iomap_readahead(const struct iomap_ops *ops,
->  	if (ctx->ops->submit_read)
->  		ctx->ops->submit_read(ctx);
->  
-> -	if (ctx->cur_folio && !cur_folio_owned)
-> -		folio_unlock(ctx->cur_folio);
-> +	if (ctx->cur_folio) {
-> +		iomap_read_remove_bias(ctx->cur_folio, cur_folio_owned);
-> +		if (!cur_folio_owned)
-> +			folio_unlock(ctx->cur_folio);
-> +	}
->  }
->  EXPORT_SYMBOL_GPL(iomap_readahead);
->  
-> -- 
-> 2.47.3
-> 
-> 
+Thanks for the wording suggestions! I'll apply them in v2.
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--e/SObf14umAK1Sg6
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaNM+8AAKCRD2uYlJVVFO
+o4HMAQDXuiy9uvRj/S1nF52q1p1aOvS1r/UzKDM1nsCmxInzHAD8Ci/ndAcRhr6y
+Ve14PdLZ8XDnj6wD7ILRGAAuaC7c3gA=
+=eWVB
+-----END PGP SIGNATURE-----
+
+--e/SObf14umAK1Sg6--
 
