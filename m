@@ -1,135 +1,168 @@
-Return-Path: <linux-doc+bounces-61628-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61631-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 816F2B980AC
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 04:06:59 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1AD3AB9816A
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 04:45:29 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 126811B21129
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:07:17 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id B18367A85F9
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:43:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F02D21ADCB;
-	Wed, 24 Sep 2025 02:06:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nLygZeOK"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17975201113;
+	Wed, 24 Sep 2025 02:45:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtpbgau2.qq.com (smtpbgau2.qq.com [54.206.34.216])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C12E9218ACA
-	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 02:06:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B9514317D;
+	Wed, 24 Sep 2025 02:45:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.206.34.216
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758679605; cv=none; b=GEDtZcG6uKPnru0jWY+0t65YJeofVmva+MFrauD2l/R1n0w3cHuymkjjiUdh5u2C2X4jkWRYx5O1tUbDe+Csyu0WFIN11cuwB/RM43idAweQ1czsWug7OXKZQxuV2lIPil8xdn/BXBSmL+KLDF6BFsdfY1lwnXLZnRiNiPZmshA=
+	t=1758681921; cv=none; b=AxHxHDQASlx57/snfIg1JqGcEmc2D7zr3ByYp+Br7VuxD0rt5mUicb22aer/kswZFkZ7ZGK/Wy1oYKRM6OGf/6x+898bA0jsHjYJRAWq23C6QplbRpbP4TTo/YiDyPSO1bDP53fVnwgPkf99WYj6TW8dsg4vib3/uY50f8a9FDw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758679605; c=relaxed/simple;
-	bh=gaa3l1P1fPt9cEbyVgFnFgXGJaiAtmNJHG4wcmrJDkE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=h5Q4gJ52M+aVGgJZhrlRhWG/tCCHTC6OTerkfoIlrjwWLulW8P2kP6UiPW+vjP6kA91ccNnUGHrobl7SVel3gvkpLSBSBFwbvYpi/J3v5+v2UBPKwTYUMUjwUD3NcD3HHIUfx41ww1kv+m+pquZzmj8AAMpN4z3Gnd1KfM/QX7A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nLygZeOK; arc=none smtp.client-ip=209.85.210.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-780292fcf62so15968b3a.0
-        for <linux-doc@vger.kernel.org>; Tue, 23 Sep 2025 19:06:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758679603; x=1759284403; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fOz5HySBOFVhMskRvxrL+nmIrbz9l42R6X2LmKA1CXk=;
-        b=nLygZeOKsXzyNuc4lu8R8Z82vDCeU46USixky7KVjVHCoHU9dbHpw86dvx0QKXs4nJ
-         vJve6rPY4LLqYma5QkUlV1n/EeUP2j0tHs/5n4eTOKrY1//z08on+1laoFRf4aKrdzpJ
-         dCJIiaS4AFhoWY7rH7kPZ4TecvKYqo93riMNE/ZNZDBCel9v2uZgoy2QWFxs/pmfmOjP
-         V5ewFHBJ/VK3+7MfF17FlPDaiaPqKg5sYB0RyUTfwmxH/zqALX//zps0i9bmPHCphpK4
-         S8pWNBnTXk43aVVrIYFQ+YzRRHMGuVsAwKosQZXIHNNDL4Q3r1gjASfPP77lNSclkubC
-         uNBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758679603; x=1759284403;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fOz5HySBOFVhMskRvxrL+nmIrbz9l42R6X2LmKA1CXk=;
-        b=M0LwlSJZbALmJ7WkoJxdLMr85MX6TyO3alqkI/D91fHHnhQHDZt06RXy8HinpTeRLB
-         2j6/8NZG2exBn9MzJod+IXD296K+u0D+/HC9ecuWObbitzY7hO5tNnbhK0COCRkEhK5R
-         Nqj9xsoi2oPZ6FXY7A679LAb1QZmMY54GLXxlpLjpjjv4AZyA8ctetqHFLpC6ZthPqoH
-         0Er7UlGLSwnO0zv3ghelvHB40BiwvZrjAeCCKV3l2ahWE/5reDp9/WXppKu0lkndV8jQ
-         Zsw/uSiLgAkFWEL2lCJiL9kYjDhB4+b6gS7uNv9nupgowHHmAy2urr9re8J8IOb6Nr3R
-         C/Rw==
-X-Forwarded-Encrypted: i=1; AJvYcCV/hrCs5LpTbYRJmiUv+DSZCEqM/9t9ADAzitqxPgYAaurefqnMg41nTisATpuyyKfU4aJoKp3sL5Y=@vger.kernel.org
-X-Gm-Message-State: AOJu0YysXyo3M4+96Ikaxvohb1JXPJur7a6kabhy4mK6WrUibycI9+rD
-	k1tns3NN7StuJlogcz9OaLGxc+R3DRQcCc/U6Wq2lAV58uF9Szaak7ec
-X-Gm-Gg: ASbGncvF2Xu8Q+A5nlLjpsHu2WqXjub+MEAqcQFp7rTTzfD4RJlmj48cEyLE1I0ojd4
-	l6y6YTgGP0CdRLDzSzxG6ZAZwfa5lA6V/qK9QoDw2FoTIsiVwZd6KQhHcAln7nqbdLWOsbgHCXs
-	V4f+6ZX5IniLtZOibqlkhQ+Xb8LzOAyw+ptlGKCpDBb/436dDb++FWztibhpznjBjByd/JfJYGf
-	uN8xzGlzOBdsEMTKYL2PeVsn5cg0jOOmC8bvY4nXzG54a05zHUbw1dqtokul8KkDa8mqbzN4TOg
-	f4S/f+oBwY+9dxu6BJZ4FdIfN1X9ITJhmf5ZnaiczDOF63tD7PWUNrmJU5s1D4U+uqZnjOqK+Ml
-	+sN6DH6FmXIJ8xac16Z+gqr0Kgdec0oUc
-X-Google-Smtp-Source: AGHT+IEuUYkcZvVzgDknNU04kmG575LjqdFet88ax1daZh+11vPVjnvVKiaeqe4k8m0h/jJ+ROyOEQ==
-X-Received: by 2002:a05:6a00:987:b0:77c:ddd1:749e with SMTP id d2e1a72fcca58-77f53a08fd9mr4910651b3a.19.1758679602841;
-        Tue, 23 Sep 2025 19:06:42 -0700 (PDT)
-Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-77f286119f4sm8955740b3a.74.2025.09.23.19.06.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Sep 2025 19:06:41 -0700 (PDT)
-Received: by archie.me (Postfix, from userid 1000)
-	id AEE7C41A2EE2; Wed, 24 Sep 2025 09:06:39 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux Networking <netdev@vger.kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Kees Cook <kees@kernel.org>,
-	Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH net-next v2 3/3] net: dns_resolver: Fix request-key cross-reference
-Date: Wed, 24 Sep 2025 09:06:25 +0700
-Message-ID: <20250924020626.17073-4-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250924020626.17073-1-bagasdotme@gmail.com>
-References: <20250924020626.17073-1-bagasdotme@gmail.com>
+	s=arc-20240116; t=1758681921; c=relaxed/simple;
+	bh=lqxklR9mOWs81KNj4z4qsLpILTVDdfn7+J979dqGXGc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qB65p3hg/EK0A055wvwdY60W2BkbHlyEjrixCcI67JvgO9XYn6B6nDnWWBSnsEBOC3YPMG3I3bn+9Kv6AStJg3emTp/as8qPBFd5VahP6JCpyJTH93Ec+2lHmknTrYJfgMexMgP32gDn5HOqEi9FLxTtTMbx9ckW/2DRSNJGPCU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.206.34.216
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
+X-QQ-mid: zesmtpsz4t1758681876t1e3ccc25
+X-QQ-Originating-IP: 4kgQSL6STHaKosl1eg/Ylv5lM/i5m44RFczJ2nXYIEw=
+Received: from localhost ( [203.174.112.180])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Wed, 24 Sep 2025 10:44:34 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 17616937174524784097
+Date: Wed, 24 Sep 2025 10:44:34 +0800
+From: Yibo Dong <dong100@mucse.com>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
+	pabeni@redhat.com, horms@kernel.org, corbet@lwn.net,
+	gur.stavi@huawei.com, maddy@linux.ibm.com, mpe@ellerman.id.au,
+	danishanwar@ti.com, lee@trager.us, gongfan1@huawei.com,
+	lorenzo@kernel.org, geert+renesas@glider.be,
+	Parthiban.Veerasooran@microchip.com, lukas.bulwahn@redhat.com,
+	alexanderduyck@fb.com, richardcochran@gmail.com, kees@kernel.org,
+	gustavoars@kernel.org, rdunlap@infradead.org,
+	vadim.fedorenko@linux.dev, joerg@jo-so.de, netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-hardening@vger.kernel.org, Andrew Lunn <andrew@lunn.ch>
+Subject: Re: [PATCH net-next v13 1/5] net: rnpgbe: Add build support for
+ rnpgbe
+Message-ID: <EA71F5311AF8C4FB+20250924024434.GA292859@nic-Precision-5820-Tower>
+References: <20250922014111.225155-1-dong100@mucse.com>
+ <20250922014111.225155-2-dong100@mucse.com>
+ <20250923180854.46adc958@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1143; i=bagasdotme@gmail.com; h=from:subject; bh=gaa3l1P1fPt9cEbyVgFnFgXGJaiAtmNJHG4wcmrJDkE=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBmXA9PaW66v+v921ueFSofW2qYIykxeHzzhu31D3iu9Q K65G1b87ChlYRDjYpAVU2SZlMjXdHqXkciF9rWOMHNYmUCGMHBxCsBErIwY/md9P9HC99X343pv o5iKRWsebGTclsWQXhW1bXu3w7P9rqKMDJv5d03mMDTkk96uY3ResJNrxcQMdRVxtt6c5/sL4gN XcwAA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250923180854.46adc958@kernel.org>
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: N2uUxVy6vITVQTcXJo2r0ul7TI+3+DuMqgDHgQqYv0Eq7/CjlRyceLmV
+	eby+lNbv7omMBKyA96mOP+uIqRqeYm9HbVB/OamPyCZZSUF+xUURZB9LlfbDSkE6vjnYYVY
+	u6TCrfJ2IQ1GXc5hfCqnkE1rBSbdl+A0UAjNglRtBO9Cu7CNZMjUCotPc5a89VAjwKAx4CO
+	ThIJ419eyWmVpOfIjUmmInIisVVZP2s5RJ8mQCzJN7qpebZjam3po6j68SV9bAdEKV3fau+
+	IOvLdIjVSKYlNJ2Bc8tPBT8r2xHVB6lCW/dB1NeUfRPuAlxKxFF9EVS1Gg4DtK5ENWbEc6X
+	JmAHfwKPgslLKYN/IeHKr8cQdiaqe6cEVFpyIKLnDd1wozG5pV9tm4EFw3oYlM9zdkhFBsn
+	N606SfA5vUkR4oPvOhg0lYErpFeKhHX/QRqzRbS39DhCcdhyY1fIAvUtEtcnI9qhsdZ7qJ4
+	X+slA9Um0LYVBwTPfiYGmc9+TwLE8yrCqqcflzHN5bpAKg+JxwlT6fflEIMeiWaFG7P39UJ
+	netksuCoar4aatyB8Lx8vre/6zwcHlUE/UdErpXXoKIeFuThHiiIt9L4MAaVozsIS7uFhC3
+	WB0KQxxlwf4c9+WtFxAOwH1x20u/1x3ZWtN0CCC6DS7L7y7H3SKnom4la+r8DCrfTKGihSq
+	Z6kv/S6uZlAtjccM6A02EfHnSBVEpR5y+bXAiunh0gO03sj2R7tNWwMT+jusP5Oap81bq3A
+	UJD/D2V8iJR9mYWEQFZBHBR0D8XHnUd915sGHNkezKh2jgpuzGodWWx0dExBjGj9dH9Xl6t
+	GLlWdjP8iW4Ne3wYVzPPPZWk1jnCub4sN7Kd4yvmPgY5DCoZkx/u+CBi0tdwfKVD3jX7HYs
+	DT+D6907gxAlk6fKd34ZaxaTJBZmONzrQFGzZBi2ZL14/fgGRnahg4S7+Ts0ArZ4qsxtkEJ
+	OKo3a3So8Xj+8X2rUUAdHW1wUN4GTGsWckWfe867mHpVjhTG7tg7yxqfpp1bPvtap1XPaNw
+	M20HtVLg==
+X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
+X-QQ-RECHKSPAM: 0
 
-Link to "Key Request Service" docs uses file:// scheme instead due to
-angled brackets markup. Fix it to proper cross-reference.
+Hi, Jakub:
 
-Fixes: 3db38ed76890 ("doc: ReSTify keys-request-key.txt")
-Reviewed-by: Simon Horman <horms@kernel.org>
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/networking/dns_resolver.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Tue, Sep 23, 2025 at 06:08:54PM -0700, Jakub Kicinski wrote:
+> On Mon, 22 Sep 2025 09:41:07 +0800 Dong Yibo wrote:
+> > +===========================================================
+> > +Linux Base Driver for MUCSE(R) Gigabit PCI Express Adapters
+> > +===========================================================
+> > +
+> > +MUCSE Gigabit Linux driver.
+> 
+> You already said that in the heading above
+> 
+> > +Copyright (c) 2020 - 2025 MUCSE Co.,Ltd.
+> 
+> copyright is metadata, it should not be part of the user-visible doc.
+> 
+> > +Identifying Your Adapter
+> > +========================
+> > +The driver is compatible with devices based on the following:
+> > +
+> > + * MUCSE(R) Ethernet Controller N500 series
+> > + * MUCSE(R) Ethernet Controller N210 series
+> 
+> These are out of numeric sort order
+> 
+> > +Support
+> > +=======
+> > + If you have problems with the software or hardware, please contact our
+> > + customer support team via email at techsupport@mucse.com or check our
+> > + website at https://www.mucse.com/en/
+> 
+> Please don't add support statements. People can use a search engine if
+> they want to find the corporate support. The kernel docs are for kernel
+> topics, and "support" in the kernel is done on the mailing list.
+> 
+> 
 
-diff --git a/Documentation/networking/dns_resolver.rst b/Documentation/networking/dns_resolver.rst
-index fbbd2c4635cbd5..52f298834db67b 100644
---- a/Documentation/networking/dns_resolver.rst
-+++ b/Documentation/networking/dns_resolver.rst
-@@ -140,8 +140,8 @@ the key will be discarded and recreated when the data it holds has expired.
- dns_query() returns a copy of the value attached to the key, or an error if
- that is indicated instead.
- 
--See <file:Documentation/security/keys/request-key.rst> for further
--information about request-key function.
-+See Documentation/security/keys/request-key.rst for further information about
-+request-key function.
- 
- 
- Debugging
--- 
-An old man doll... just what I always wanted! - Clara
+Got it. I will update this file like this:
+
+.. SPDX-License-Identifier: GPL-2.0
+
+===========================================================
+Linux Base Driver for MUCSE(R) Gigabit PCI Express Adapters
+===========================================================
+
+Identifying Your Adapter
+========================
+The driver is compatible with devices based on the following:
+
+ * MUCSE(R) Ethernet Controller N210 series
+ * MUCSE(R) Ethernet Controller N500 series
+
+> > +config MGBE
+> > +	tristate "Mucse(R) 1GbE PCI Express adapters support"
+> > +	depends on PCI
+> > +	select PAGE_POOL
+> 
+> you're not using page pool in this series
+> 
+
+Yes, I will remove it, and add this when truely use.
+
+> > +MODULE_DEVICE_TABLE(pci, rnpgbe_pci_tbl);
+> > +MODULE_AUTHOR("Mucse Corporation, <techsupport@mucse.com>");
+> 
+> Only humans can author code, not corporations. Delete his AUTHOR entry
+> or add yourself as the author.
+> 
+
+Will fix this.
+
+> > +MODULE_DESCRIPTION("Mucse(R) 1 Gigabit PCI Express Network Driver");
+> > +MODULE_LICENSE("GPL");
+> 
+> 
+
+Thanks for your feedback.
 
 
