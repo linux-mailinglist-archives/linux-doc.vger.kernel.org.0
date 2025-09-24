@@ -1,103 +1,305 @@
-Return-Path: <linux-doc+bounces-61649-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61651-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80518B99745
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 12:40:03 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C6E9B99A9A
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 13:52:05 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CDB2A4A83FC
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 10:40:01 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 929021648E6
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 11:51:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 213682E03EE;
-	Wed, 24 Sep 2025 10:39:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 48C9B3002CF;
+	Wed, 24 Sep 2025 11:51:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="jTJFJBDD"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a4BRMNAs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43D062DF71F
-	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 10:39:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F2DD2ECD22
+	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 11:51:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758710391; cv=none; b=Ge3r8UHlDP7LsaerUDJI/gt/wWT0ewXW71Sg6WY+o78o8ZCuU8MXDX/xdaX6if7u6DDQCABVUudzCW6zGXHNSg9JCMjWgEKERtUR6ldyox9HaifomGv5B3cGFDS9Gye/WI+dlSNr0WxTtNvYQ1xoHNyiQqLCfZzfglayDyFNoDs=
+	t=1758714702; cv=none; b=KlhnqmTWc+p16ixTsKiWk+PrI+nx5/T0uO2tKKJR7OW+phS7c6N+xKD+nfSSUHK+5HTKTVKdluekZEvmp2nOApPOtZqiotWsa0rb+7V6IzTa191N1Q2nl/sSGfeQa/95cAte93vU3CihK/lAXoK65ioAZsShTjRJHn7CxHo1wHQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758710391; c=relaxed/simple;
-	bh=RD2bDCnokvBr2io7nj34I0+bX53THU9utJYuo/5mwBU=;
-	h=From:In-Reply-To:References:To:Cc:Subject:MIME-Version:
-	 Content-Type:Date:Message-ID; b=cm+qiH/mvGu61K8EfZRN2Hg86g68cWHx642BuAwI9rVMpUwePd14JYF/QeQtSYf4Dn/K77iXn9lforxuafnvPcmmypujdirWXzP9wrkHQCurK+XnSOL8+k10AIYLPaxgf/aaVed1LqHLyEHvKrSAzGtOvtmG0QtvxqaIc1ulPRU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=jTJFJBDD; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1758710383;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hF4kiLf7HaqY1/LkvQINP3t8+3I60jrbQmSIFL8i6mM=;
-	b=jTJFJBDDmyyW/SLfPm9FG2f9l1flp9QbVGuAN1TODAI6Jx6g0hlJzYRd0NT8VogXzXrwRF
-	NOB19vqRswVXP5qzXVdQZ3ZYkNOxMt2tskpM4kp4uZyJLrVFgFux1KGH5/VtsWAi5FZqxp
-	iSe0EwN90JRK7bOpZMaUxiAoZMOzEzM=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-586-8jgRHihsNYSXYhc0c7zGRA-1; Wed,
- 24 Sep 2025 06:39:39 -0400
-X-MC-Unique: 8jgRHihsNYSXYhc0c7zGRA-1
-X-Mimecast-MFC-AGG-ID: 8jgRHihsNYSXYhc0c7zGRA_1758710378
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 962B31800366;
-	Wed, 24 Sep 2025 10:39:35 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.42.28.155])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id 7862419560B1;
-	Wed, 24 Sep 2025 10:39:30 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
-	Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
-	Kingdom.
-	Registered in England and Wales under Company Registration No. 3798903
-From: David Howells <dhowells@redhat.com>
-In-Reply-To: <20250922124137.5266-1-bagasdotme@gmail.com>
-References: <20250922124137.5266-1-bagasdotme@gmail.com>
-To: Bagas Sanjaya <bagasdotme@gmail.com>
-Cc: dhowells@redhat.com,
-    Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-    Linux Documentation <linux-doc@vger.kernel.org>,
-    Linux Networking <netdev@vger.kernel.org>,
-    Linux AFS <linux-afs@lists.infradead.org>,
-    Marc Dionne <marc.dionne@auristor.com>,
-    "David S. Miller" <davem@davemloft.net>,
-    Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-    Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
-    Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH net-next RESEND] Documentation: rxrpc: Demote three sections
+	s=arc-20240116; t=1758714702; c=relaxed/simple;
+	bh=UNpz5dM5lO613H1u9Fi56G2SPcRkZnRAbeW6JwAQp0c=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=e8Q7FSDmSzQjIaBVGjCQaOhHF2+tq5jdmxHXGF4NXcTripq2CkCNDLlZbV1ORJGkOsClSnRC28IIw7CViaruz6E6uR9ufwV4vtP/S32m7SRBwNVBECjF1Q61gA7E+1bLjyW0dKbf9S7cnszWf0hlxO6XdG0JYQj3wVKL2xlMPOs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a4BRMNAs; arc=none smtp.client-ip=209.85.215.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-b55562f3130so2048162a12.2
+        for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 04:51:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1758714695; x=1759319495; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=IkFW7ZSlDKq/LZM+zK73rBzgP1/UKF25L/8hqnEAXa4=;
+        b=a4BRMNAsTgPxtWvDIPNjcePbjTSV+ugRmo3bT/A/d71rW21LlCG/XHsARlUQiyPzCZ
+         S4E6u0gzhf/4PhTAr1wlW1G5nxwqUyuu35syW3Zq45No/IofeyuG+MqAe5oa/KwuFAku
+         eoK85P/voqtTHBonAs3823vN36KtFthWQIpPraXD5bjK8mJ9jh9pqqIVqdBhnAxqmVzb
+         qfeGNch+u3CEB/wxow/2/nTKNVZ0douMYsaB5MzuaIkzQ3/HJf/15+yFgZtTqGOaNmMq
+         giv3+sTXBUW8/bSSQwNRMqWcYcNWHh3xAYW9tTSMc6XjdXMVCDTatXNKVYUC2fOGbVyl
+         bBJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758714695; x=1759319495;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=IkFW7ZSlDKq/LZM+zK73rBzgP1/UKF25L/8hqnEAXa4=;
+        b=ad9920Rv9B6BGSvejkfQ52w3hCt0K/5V8L4tB9O9Whx8KHiu/oC5sUNXy4AJsIRYF7
+         KEfKpq8Mw5HPAlVgjl1bbxCvkXR5pZPDrjdeeOHEfYdUGQlLADRFeQ+Bx8Fur4G9sKXZ
+         A5IAXlDLzx2iVJsQU2gQbBGyLXTWeTN1gKyfGyLRJVp82AN04mglZfA4f6ao6m5Mj01R
+         FYsXaW35m8iPhvYG6e9PE6CFwC7IEHxPb/LHvLQUXs0XOn+dOXDD8vH6Z4LeZaTSKWZu
+         R5W9LFcswWzOoZt6ud5/0bmSGSLGO8J4LZc+Jv1PaFbocHUFkEy9evfCWnIPW+WO4jO5
+         ZTfw==
+X-Forwarded-Encrypted: i=1; AJvYcCWbSHa8REdkWGAlNqGs6wHjJBG8pJexBbODrzMvqMM9E2fvYgKupyyAPqSAwObwKYbFMUO3B3SJh8w=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzkMFHerTru3Fh0UnrEqa9aJNGyU40pLniA0WEYrbKvosGAUn0b
+	/03WXuEJIEEnh7rkuboxnn2Wknp9M//FSKAPbMK2wW2vJzxKktnVzNRa
+X-Gm-Gg: ASbGnct8HfoBpwdIYcSNx+IzmFAXhmyBrAA9Fexw9AvqXyNWC08Oh3e+Ubhfpty3dNP
+	40AgPjwlR2Xx+ZBDsMqV/DVCLGvYdYnrODUD2AlbZB4y0NsuPc8/d2B+SfUBiKqvQyaHf5qb9N1
+	Ebc7kdyuvawJEKk9MqkfzBg+Wp0qvBvHrAR/W4MaXVqayaqQQfhD1bg59SyBCRv1IjxxY2zF/kL
+	ghiEL2SdASIvSyEW58y4X73rmrHvLx7TxxQaQo3qL/TDhwD/8vMvSPYr8X5KcqAViqEmh/GMipF
+	M72Lf6RZB+B3KtCPDS1rAd1CkYn+hh9Ay5ayy1vT6Srsr5tg721Rcwkh8bsjV2MPQH3ZkUD9BUZ
+	b6WOqrU3eLZWWM08UvXix/92wUw==
+X-Google-Smtp-Source: AGHT+IFpw5g/nyg0mjoFnafm0OORRDCd2mc5ondqV3KNE7Z5tP/VaQRZBOA+j3BmtPgUBBTfxZ4Mhg==
+X-Received: by 2002:a17:903:3586:b0:240:9dd8:219b with SMTP id d9443c01a7336-27cc61bd32dmr78200575ad.49.1758714694622;
+        Wed, 24 Sep 2025 04:51:34 -0700 (PDT)
+Received: from localhost ([23.142.224.65])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-269802fe096sm189570425ad.104.2025.09.24.04.51.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Sep 2025 04:51:34 -0700 (PDT)
+From: Jinchao Wang <wangjinchao600@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Alexander Potapenko <glider@google.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Juri Lelli <juri.lelli@redhat.com>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	Dietmar Eggemann <dietmar.eggemann@arm.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Ben Segall <bsegall@google.com>,
+	Mel Gorman <mgorman@suse.de>,
+	Valentin Schneider <vschneid@redhat.com>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	"Liang, Kan" <kan.liang@linux.intel.com>,
+	David Hildenbrand <david@redhat.com>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Kees Cook <kees@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Rong Xu <xur@google.com>,
+	Naveen N Rao <naveen@kernel.org>,
+	David Kaplan <david.kaplan@amd.com>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Jinjie Ruan <ruanjinjie@huawei.com>,
+	Nam Cao <namcao@linutronix.de>,
+	workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-perf-users@vger.kernel.org,
+	linux-mm@kvack.org,
+	llvm@lists.linux.dev,
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	Vincenzo Frascino <vincenzo.frascino@arm.com>,
+	kasan-dev@googlegroups.com,
+	"David S. Miller" <davem@davemloft.net>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	linux-trace-kernel@vger.kernel.org
+Cc: Jinchao Wang <wangjinchao600@gmail.com>
+Subject: [PATCH v5 00/23] mm/ksw: Introduce real-time KStackWatch debugging tool
+Date: Wed, 24 Sep 2025 19:50:43 +0800
+Message-ID: <20250924115124.194940-1-wangjinchao600@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <721546.1758710369.1@warthog.procyon.org.uk>
-Date: Wed, 24 Sep 2025 11:39:29 +0100
-Message-ID: <721547.1758710369@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Bagas Sanjaya <bagasdotme@gmail.com> wrote:
+This patch series introduces KStackWatch, a lightweight debugging tool to detect
+kernel stack corruption in real time. It installs a hardware breakpoint
+(watchpoint) at a function's specified offset using `kprobe.post_handler` and
+removes it in `fprobe.exit_handler`. This covers the full execution window and
+reports corruption immediately with time, location, and a call stack.
 
-> Three sections ("Socket Options", "Security", and "Example Client Usage")
-> use title headings, which increase number of entries in the networking
-> docs toctree by three, and also make the rest of sections headed under
-> "Example Client Usage".
-> 
-> Demote these sections back to section headings.
-> 
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+The motivation comes from scenarios where corruption occurs silently in one
+function but manifests later in another, without a direct call trace linking
+the two. Such bugs are often extremely hard to debug with existing tools.
+These scenarios are demonstrated in test 3–5 (silent corruption test, patch 20).
 
-Acked-by: David Howells <dhowells@redhat.com>
+Key features include:
+
+* Immediate and precise corruption detection
+* Support multiple watchpoints for concurrently called functions
+* Lockless design, usable in any context
+* Depth filter for recursive calls
+* Minimal impact on reproducibility
+* Flexible procfs configuration with key=val syntax
+
+To validate the approach, the patch includes a test module and a test script.
+
+There is a workflow example described in detail in the documentation (patch 22).
+Please read the document first if you want an overview.
+
+---
+  Patches 1–3 of this series are also used in the wprobe work proposed by
+  Masami Hiramatsu, so there may be some overlap between our patches.
+  Patch 3 comes directly from Masami Hiramatsu (thanks).
+---
+Changelog
+
+V5:
+  * Support key=value input format
+  * Support multiple watchpoints
+  * Support watching instruction inside loop
+  * Support recursion depth tracking with generation
+  * Ignore triggers from fprobe trampoline
+  * Split watch_on into watch_get and watch_on to fail fast
+  * Handle ksw_stack_prepare_watch error
+  * Rewrite silent corruption test
+  * Add multiple watchpoints test
+  * Add an example in documentation
+
+V4:
+  https://lore.kernel.org/all/20250912101145.465708-1-wangjinchao600@gmail.com/
+  * Solve the lockdep issues with:
+    * per-task KStackWatch context to track depth
+    * atomic flag to protect watched_addr
+  * Use refactored version of arch_reinstall_hw_breakpoint
+
+V3:
+  https://lore.kernel.org/all/20250910052335.1151048-1-wangjinchao600@gmail.com/
+  * Use modify_wide_hw_breakpoint_local() (from Masami)
+  * Add atomic flag to restrict /proc/kstackwatch to a single opener
+  * Protect stack probe with an atomic PID flag
+  * Handle CPU hotplug for watchpoints
+  * Add preempt_disable/enable in ksw_watch_on_local_cpu()
+  * Introduce const struct ksw_config *ksw_get_config(void) and use it
+  * Switch to global watch_attr, remove struct watch_info
+  * Validate local_var_len in parser()
+  * Handle case when canary is not found
+  * Use dump_stack() instead of show_regs() to allow module build
+  * Reduce logging and comments
+  * Format logs with KBUILD_MODNAME
+  * Remove unused headers
+  * Add new document
+
+V2:
+  https://lore.kernel.org/all/20250904002126.1514566-1-wangjinchao600@gmail.com/
+  * Make hardware breakpoint and stack operations architecture-independent.
+
+V1:
+  https://lore.kernel.org/all/20250828073311.1116593-1-wangjinchao600@gmail.com/
+  * Replaced kretprobe with fprobe for function exit hooking, as suggested
+    by Masami Hiramatsu
+  * Introduced per-task depth logic to track recursion across scheduling
+  * Removed the use of workqueue for a more efficient corruption check
+  * Reordered patches for better logical flow
+  * Simplified and improved commit messages throughout the series
+  * Removed initial archcheck which should be improved later
+  * Replaced the multiple-thread test with silent corruption test
+  * Split self-tests into a separate patch to improve clarity.
+  * Added a new entry for KStackWatch to the MAINTAINERS file.
+
+RFC:
+  https://lore.kernel.org/lkml/20250818122720.434981-1-wangjinchao600@gmail.com/
+
+---
+
+The series is structured as follows:
+
+Jinchao Wang (22):
+  x86/hw_breakpoint: Unify breakpoint install/uninstall
+  x86/hw_breakpoint: Add arch_reinstall_hw_breakpoint
+  mm/ksw: add build system support
+  mm/ksw: add ksw_config struct and parser
+  mm/ksw: add singleton /proc/kstackwatch interface
+  mm/ksw: add HWBP pre-allocation
+  mm/ksw: Add atomic watchpoint management api
+  mm/ksw: ignore false positives from exit trampolines
+  mm/ksw: support CPU hotplug
+  sched: add per-task context
+  mm/ksw: add entry kprobe and exit fprobe management
+  mm/ksw: add per-task ctx tracking
+  mm/ksw: resolve stack watch addr and len
+  mm/ksw: manage probe and HWBP lifecycle via procfs
+  mm/ksw: add self-debug helpers
+  mm/ksw: add test module
+  mm/ksw: add stack overflow test
+  mm/ksw: add recursive depth test
+  mm/ksw: add multi-thread corruption test cases
+  tools/ksw: add test script
+  docs: add KStackWatch document
+  MAINTAINERS: add entry for KStackWatch
+
+Masami Hiramatsu (Google) (1):
+  HWBP: Add modify_wide_hw_breakpoint_local() API
+
+ Documentation/dev-tools/index.rst       |   1 +
+ Documentation/dev-tools/kstackwatch.rst | 316 ++++++++++++++++++++++
+ MAINTAINERS                             |   8 +
+ arch/Kconfig                            |  10 +
+ arch/x86/Kconfig                        |   1 +
+ arch/x86/include/asm/hw_breakpoint.h    |   8 +
+ arch/x86/kernel/hw_breakpoint.c         | 148 ++++++-----
+ include/linux/hw_breakpoint.h           |   6 +
+ include/linux/kstackwatch_types.h       |  14 +
+ include/linux/sched.h                   |   5 +
+ kernel/events/hw_breakpoint.c           |  37 +++
+ mm/Kconfig.debug                        |  18 ++
+ mm/Makefile                             |   1 +
+ mm/kstackwatch/Makefile                 |   8 +
+ mm/kstackwatch/kernel.c                 | 263 +++++++++++++++++++
+ mm/kstackwatch/kstackwatch.h            |  58 +++++
+ mm/kstackwatch/stack.c                  | 240 +++++++++++++++++
+ mm/kstackwatch/test.c                   | 332 ++++++++++++++++++++++++
+ mm/kstackwatch/watch.c                  | 305 ++++++++++++++++++++++
+ tools/kstackwatch/kstackwatch_test.sh   |  52 ++++
+ 20 files changed, 1769 insertions(+), 62 deletions(-)
+ create mode 100644 Documentation/dev-tools/kstackwatch.rst
+ create mode 100644 include/linux/kstackwatch_types.h
+ create mode 100644 mm/kstackwatch/Makefile
+ create mode 100644 mm/kstackwatch/kernel.c
+ create mode 100644 mm/kstackwatch/kstackwatch.h
+ create mode 100644 mm/kstackwatch/stack.c
+ create mode 100644 mm/kstackwatch/test.c
+ create mode 100644 mm/kstackwatch/watch.c
+ create mode 100755 tools/kstackwatch/kstackwatch_test.sh
+
+-- 
+2.43.0
 
 
