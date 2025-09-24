@@ -1,89 +1,210 @@
-Return-Path: <linux-doc+bounces-61623-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61620-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1237FB97EC1
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:43:47 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 04B8DB97D9C
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:13:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id C24B37A159D
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 00:42:05 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A3CA54A4591
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 00:13:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2C10B1A314B;
-	Wed, 24 Sep 2025 00:43:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ACA5433E7;
+	Wed, 24 Sep 2025 00:13:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=maguitec.com.mx header.i=@maguitec.com.mx header.b="MFjZ188Y"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ARx5MTrN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from sender4-g3-154.zohomail360.com (sender4-g3-154.zohomail360.com [136.143.188.154])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C70CC2E0
-	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 00:43:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.154
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758674621; cv=pass; b=dkmIWpV1x3LjEuySYwKHfL8yuBJWIIfPJvZIWQOKOBXcIRbTMetEz33W2pvD/2LAMHB2+eIIIcTw8MeJZwSrTqqmuLahEjjXc/clnR316EmDYtnlrq0aZ0YA746mflqPI0A4VoAu0p4FniSbktogl0ePDQJTsIGzYJInVhlMGCI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758674621; c=relaxed/simple;
-	bh=jVC0f54KxIaXPohvxMBE4QoFJdeV8vR0/DlR6lS19qY=;
-	h=Date:From:To:Message-ID:Subject:MIME-Version:Content-Type; b=SIgXJI7f6PpswjfHREVDLxqwlA3Th5dzy+KQqTJN/r6K90rkHOKY1265rB5XIJNAZm02MAOW+2JlYAYXRP2bt4JjtzDJ7/EiVbtBFhoMccEavosMdrPvKltHk+Lz7qiqEKZgKVhBC4+p1Ds+yRlpmZWvaT3OYAUdEApCCcmW3Ec=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=maguitec.com.mx; spf=pass smtp.mailfrom=bounce-zem.maguitec.com.mx; dkim=pass (1024-bit key) header.d=maguitec.com.mx header.i=@maguitec.com.mx header.b=MFjZ188Y; arc=pass smtp.client-ip=136.143.188.154
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=maguitec.com.mx
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bounce-zem.maguitec.com.mx
-ARC-Seal: i=1; a=rsa-sha256; t=1758674618; cv=none; 
-	d=us.zohomail360.com; s=zohoarc; 
-	b=BYLlbu3LG3NWZl0YImJy7tc+BBt31Gmluxl/EK962T4+spr6fLf5XBBngX18qILt+xCabDGJ2hmFXCG1DI3mSEeenWay9ockmo5C7PfrMCiapZ8RPbCh75ZubRIjkbG64eAfYzk24Cle/dZlCFjljDGuf59F3GOnCpgOod46D8g=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=us.zohomail360.com; s=zohoarc; 
-	t=1758674618; h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Reply-To:Reply-To:Subject:Subject:To:To:Message-Id:Cc; 
-	bh=jVC0f54KxIaXPohvxMBE4QoFJdeV8vR0/DlR6lS19qY=; 
-	b=LeAHiVuz4tVoSj2obbJJ/0AdkhDEB9c0qp5vSxC4Bfli7C9KBk36RoV/60rkf3zNRVqGSOyluCb0Sl7tWWhJk2uL5DTcmuSCkUAJ1+zyNpqvfD5sYBOcYGRynB0zj+U7MhVFfW3nBb7H5+rUTyC4d4tprYy9XV5ekg8P9s6Hm1c=
-ARC-Authentication-Results: i=1; mx.us.zohomail360.com;
-	dkim=pass  header.i=maguitec.com.mx;
-	spf=pass  smtp.mailfrom=investorrelations+9a671490-98d8-11f0-9ce0-52540088df93_vt1@bounce-zem.maguitec.com.mx;
-	dmarc=pass header.from=<investorrelations@maguitec.com.mx>
-Received: by mx.zohomail.com with SMTPS id 1758671652882815.4961298202282;
-	Tue, 23 Sep 2025 16:54:12 -0700 (PDT)
-DKIM-Signature: a=rsa-sha256; b=MFjZ188YoQbqs8Nag56ps8YzfkMcscoiyR0MW9BcdWP00bhSz39u7CPqJ3RMX//IJMDdGBEf/owve2pi5UiOY18vQAdlpEQRC1TCtYGS1SX29nBGDw7b+IsYqTzIizXDI6e/7abqw01H8Ir1WAlaEVISOD9+5FK8taMKRGpwFK0=; c=relaxed/relaxed; s=15205840; d=maguitec.com.mx; v=1; bh=jVC0f54KxIaXPohvxMBE4QoFJdeV8vR0/DlR6lS19qY=; h=date:from:reply-to:to:message-id:subject:mime-version:content-type:content-transfer-encoding:date:from:reply-to:to:message-id:subject;
-Date: Tue, 23 Sep 2025 16:54:12 -0700 (PDT)
-From: Al Sayyid Sultan <investorrelations@maguitec.com.mx>
-Reply-To: investorrelations@alhaitham-investment.ae
-To: linux-doc@vger.kernel.org
-Message-ID: <2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459@bounce-zem.maguitec.com.mx>
-Subject: Thematic Funds Letter Of Intent
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7730E1FB1;
+	Wed, 24 Sep 2025 00:13:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1758672816; cv=none; b=GBT3qPRBtZsQ98UUaP07GKj/VOKF4BipzPuOpGeJyAW/PU7zqTsgKcqYyaweDUd+pLG1BLlNdUc+4IWTUsSWzVG23yAaS+nB1e0WQmwGLbiaRK+WeINZPs2ZHcaHq8Rod/CiQbbD7n07JYSaIud4MRqyYB/AQE4wSQqDDVvz9GA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1758672816; c=relaxed/simple;
+	bh=XY0QCw5F75YlXeKBpjwCvQa2FkFZ1g/792l5DMfMKY0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=thIrW1ohEHeSLq+tmYGBklgdOdrljATfR4lS1XeMnsRUQEzSVf6hXL2g8emJoWprBO+D03330vzuORa1GBA2kytLjX2WuZ7qhk2njbjZQbmRGOawevdwCZGR+Hge0LsY/K0r9sAUqNeM/Dk0gY2sbSHwgnih0WGyKo74HQt3l3I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ARx5MTrN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF0ADC4CEF5;
+	Wed, 24 Sep 2025 00:13:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1758672815;
+	bh=XY0QCw5F75YlXeKBpjwCvQa2FkFZ1g/792l5DMfMKY0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ARx5MTrNCc4yiI+cLaco4c9yNoTNEwVRIBu1k+9EMun7L7nTQUU46Pq2agG25uOPR
+	 QJO2RRk+lSafqwR5sEjG+Lv7Yvo3kJwk2gpLCuadyld3p3MAdtEku1qAZb1Rm+WB8c
+	 xjksU0r2PkOenxjTmqhCFvIIaZ0y4EcT2gDdsCZnMLrPHxUGnBaV2+jz70zENNq9cC
+	 t9AeibzKp2Potx6XtNzMILO64LNzp6oJZof1MMBBLNdTubMT6ILzu6ycEYcJ+bx2du
+	 ht+HEFlkFa3/M6gS6v8rpEjvIJYb0zi1u9gMhwSaf747IMQ5jdGcWp2r4N/nMa40C7
+	 AH447rUpeUV4Q==
+Date: Tue, 23 Sep 2025 17:13:35 -0700
+From: "Darrick J. Wong" <djwong@kernel.org>
+To: Joanne Koong <joannelkoong@gmail.com>
+Cc: brauner@kernel.org, miklos@szeredi.hu, hch@infradead.org,
+	linux-block@vger.kernel.org, gfs2@lists.linux.dev,
+	linux-fsdevel@vger.kernel.org, linux-xfs@vger.kernel.org,
+	linux-doc@vger.kernel.org, hsiangkao@linux.alibaba.com,
+	kernel-team@meta.com
+Subject: Re: [PATCH v4 07/15] iomap: track read/readahead folio ownership
+ internally
+Message-ID: <20250924001335.GL1587915@frogsfrogsfrogs>
+References: <20250923002353.2961514-1-joannelkoong@gmail.com>
+ <20250923002353.2961514-8-joannelkoong@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-content-transfer-encoding-Orig: quoted-printable
-content-type-Orig: text/plain;\r\n\tcharset="utf-8"
-Original-Envelope-Id: 2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
-X-JID: 2d6f.1aedd99b146bc1ac.s1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
-TM-MAIL-JID: 2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
-X-App-Message-ID: 2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459
-X-Report-Abuse: <abuse+2d6f.1aedd99b146bc1ac.m1.9a671490-98d8-11f0-9ce0-52540088df93.19978ffc459@zeptomail.com>
-X-ZohoMailClient: External
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250923002353.2961514-8-joannelkoong@gmail.com>
 
-To: linux-doc@vger.kernel.org
-Date: 24-09-2025
-Thematic Funds Letter Of Intent
+On Mon, Sep 22, 2025 at 05:23:45PM -0700, Joanne Koong wrote:
+> The purpose of "struct iomap_read_folio_ctx->cur_folio_in_bio" is to
+> track folio ownership to know who is responsible for unlocking it.
+> Rename "cur_folio_in_bio" to "cur_folio_owned" to better reflect this
+> purpose and so that this can be generically used later on by filesystems
+> that are not block-based.
+> 
+> Since "struct iomap_read_folio_ctx" will be made a public interface
+> later on when read/readahead takes in caller-provided callbacks, track
+> the folio ownership state internally instead of exposing it in "struct
+> iomap_read_folio_ctx" to make the interface simpler for end users.
+> 
+> Signed-off-by: Joanne Koong <joannelkoong@gmail.com>
 
-It's a pleasure to connect with you
+Looks good to me now,
+Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 
-Having been referred to your investment by my team, we would be=20
-honored to review your available investment projects for onward=20
-referral to my principal investors who can allocate capital for=20
-the financing of it.
+--D
 
-kindly advise at your convenience
-
-Best Regards,
-
-Respectfully,
-Al Sayyid Sultan Yarub Al Busaidi
-Director
+> ---
+>  fs/iomap/buffered-io.c | 34 +++++++++++++++++++++++-----------
+>  1 file changed, 23 insertions(+), 11 deletions(-)
+> 
+> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
+> index 09e65771a947..34df1cddf65c 100644
+> --- a/fs/iomap/buffered-io.c
+> +++ b/fs/iomap/buffered-io.c
+> @@ -362,7 +362,6 @@ static void iomap_read_end_io(struct bio *bio)
+>  
+>  struct iomap_read_folio_ctx {
+>  	struct folio		*cur_folio;
+> -	bool			cur_folio_in_bio;
+>  	void			*read_ctx;
+>  	struct readahead_control *rac;
+>  };
+> @@ -386,7 +385,6 @@ static void iomap_bio_read_folio_range(const struct iomap_iter *iter,
+>  	sector_t sector;
+>  	struct bio *bio = ctx->read_ctx;
+>  
+> -	ctx->cur_folio_in_bio = true;
+>  	if (ifs) {
+>  		spin_lock_irq(&ifs->state_lock);
+>  		ifs->read_bytes_pending += plen;
+> @@ -423,7 +421,7 @@ static void iomap_bio_read_folio_range(const struct iomap_iter *iter,
+>  }
+>  
+>  static int iomap_read_folio_iter(struct iomap_iter *iter,
+> -		struct iomap_read_folio_ctx *ctx)
+> +		struct iomap_read_folio_ctx *ctx, bool *folio_owned)
+>  {
+>  	const struct iomap *iomap = &iter->iomap;
+>  	loff_t pos = iter->pos;
+> @@ -460,6 +458,7 @@ static int iomap_read_folio_iter(struct iomap_iter *iter,
+>  			folio_zero_range(folio, poff, plen);
+>  			iomap_set_range_uptodate(folio, poff, plen);
+>  		} else {
+> +			*folio_owned = true;
+>  			iomap_bio_read_folio_range(iter, ctx, pos, plen);
+>  		}
+>  
+> @@ -482,16 +481,22 @@ int iomap_read_folio(struct folio *folio, const struct iomap_ops *ops)
+>  	struct iomap_read_folio_ctx ctx = {
+>  		.cur_folio	= folio,
+>  	};
+> +	/*
+> +	 * If an IO helper takes ownership of the folio, it is responsible for
+> +	 * unlocking it when the read completes.
+> +	 */
+> +	bool folio_owned = false;
+>  	int ret;
+>  
+>  	trace_iomap_readpage(iter.inode, 1);
+>  
+>  	while ((ret = iomap_iter(&iter, ops)) > 0)
+> -		iter.status = iomap_read_folio_iter(&iter, &ctx);
+> +		iter.status = iomap_read_folio_iter(&iter, &ctx,
+> +				&folio_owned);
+>  
+>  	iomap_bio_submit_read(&ctx);
+>  
+> -	if (!ctx.cur_folio_in_bio)
+> +	if (!folio_owned)
+>  		folio_unlock(folio);
+>  
+>  	/*
+> @@ -504,14 +509,15 @@ int iomap_read_folio(struct folio *folio, const struct iomap_ops *ops)
+>  EXPORT_SYMBOL_GPL(iomap_read_folio);
+>  
+>  static int iomap_readahead_iter(struct iomap_iter *iter,
+> -		struct iomap_read_folio_ctx *ctx)
+> +		struct iomap_read_folio_ctx *ctx,
+> +		bool *cur_folio_owned)
+>  {
+>  	int ret;
+>  
+>  	while (iomap_length(iter)) {
+>  		if (ctx->cur_folio &&
+>  		    offset_in_folio(ctx->cur_folio, iter->pos) == 0) {
+> -			if (!ctx->cur_folio_in_bio)
+> +			if (!*cur_folio_owned)
+>  				folio_unlock(ctx->cur_folio);
+>  			ctx->cur_folio = NULL;
+>  		}
+> @@ -519,9 +525,9 @@ static int iomap_readahead_iter(struct iomap_iter *iter,
+>  			ctx->cur_folio = readahead_folio(ctx->rac);
+>  			if (WARN_ON_ONCE(!ctx->cur_folio))
+>  				return -EINVAL;
+> -			ctx->cur_folio_in_bio = false;
+> +			*cur_folio_owned = false;
+>  		}
+> -		ret = iomap_read_folio_iter(iter, ctx);
+> +		ret = iomap_read_folio_iter(iter, ctx, cur_folio_owned);
+>  		if (ret)
+>  			return ret;
+>  	}
+> @@ -554,15 +560,21 @@ void iomap_readahead(struct readahead_control *rac, const struct iomap_ops *ops)
+>  	struct iomap_read_folio_ctx ctx = {
+>  		.rac	= rac,
+>  	};
+> +	/*
+> +	 * If an IO helper takes ownership of the folio, it is responsible for
+> +	 * unlocking it when the read completes.
+> +	 */
+> +	bool cur_folio_owned = false;
+>  
+>  	trace_iomap_readahead(rac->mapping->host, readahead_count(rac));
+>  
+>  	while (iomap_iter(&iter, ops) > 0)
+> -		iter.status = iomap_readahead_iter(&iter, &ctx);
+> +		iter.status = iomap_readahead_iter(&iter, &ctx,
+> +					&cur_folio_owned);
+>  
+>  	iomap_bio_submit_read(&ctx);
+>  
+> -	if (ctx.cur_folio && !ctx.cur_folio_in_bio)
+> +	if (ctx.cur_folio && !cur_folio_owned)
+>  		folio_unlock(ctx.cur_folio);
+>  }
+>  EXPORT_SYMBOL_GPL(iomap_readahead);
+> -- 
+> 2.47.3
+> 
+> 
 
