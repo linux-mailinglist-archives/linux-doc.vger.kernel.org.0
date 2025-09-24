@@ -1,80 +1,80 @@
-Return-Path: <linux-doc+bounces-61630-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61628-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D615B980C7
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 04:07:28 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 816F2B980AC
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 04:06:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9A7074C2CD7
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:07:26 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 126811B21129
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 02:07:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56CC415C0;
-	Wed, 24 Sep 2025 02:06:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F02D21ADCB;
+	Wed, 24 Sep 2025 02:06:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="R7Jazw+L"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nLygZeOK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B3C4221F06
-	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 02:06:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C12E9218ACA
+	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 02:06:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758679608; cv=none; b=Q62T6qfZeX+WwQAFEOA5v2sEk7qurS2WHgRkY04NvIYwxY5VIIC86io95/s1Qs+kPm0qG842weQQRvu9YKA88v0qxaYsYXGUZBoOTWXJchQA4Rrw34EpxQxs6qMy6uQHabFwffoC1pRGDlyUiK6yzEk8vfLZnS+PVwYzMttLS/k=
+	t=1758679605; cv=none; b=GEDtZcG6uKPnru0jWY+0t65YJeofVmva+MFrauD2l/R1n0w3cHuymkjjiUdh5u2C2X4jkWRYx5O1tUbDe+Csyu0WFIN11cuwB/RM43idAweQ1czsWug7OXKZQxuV2lIPil8xdn/BXBSmL+KLDF6BFsdfY1lwnXLZnRiNiPZmshA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758679608; c=relaxed/simple;
-	bh=j06FhP+kipsBirdtsi9W5187JT9Z+wgVUcWg7BEI980=;
+	s=arc-20240116; t=1758679605; c=relaxed/simple;
+	bh=gaa3l1P1fPt9cEbyVgFnFgXGJaiAtmNJHG4wcmrJDkE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XHwSj7+gPNOdxpwN8xkSW91vItIlrFjAUQBWnJv2e+hI3Bwcs++w/ybHq65i08V1P6Qg8dkqiAwVu/Crubwg8/2iKMbj3/3ItxuoaSCo+0jMovRS9H31eRgZkTD2p2I8BNef91ZtwQqox993eT2/yRyxBheFri8l/yD7ZhCh0J4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=R7Jazw+L; arc=none smtp.client-ip=209.85.215.177
+	 MIME-Version; b=h5Q4gJ52M+aVGgJZhrlRhWG/tCCHTC6OTerkfoIlrjwWLulW8P2kP6UiPW+vjP6kA91ccNnUGHrobl7SVel3gvkpLSBSBFwbvYpi/J3v5+v2UBPKwTYUMUjwUD3NcD3HHIUfx41ww1kv+m+pquZzmj8AAMpN4z3Gnd1KfM/QX7A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nLygZeOK; arc=none smtp.client-ip=209.85.210.175
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-b5507d3ccd8so5727477a12.0
-        for <linux-doc@vger.kernel.org>; Tue, 23 Sep 2025 19:06:46 -0700 (PDT)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-780292fcf62so15968b3a.0
+        for <linux-doc@vger.kernel.org>; Tue, 23 Sep 2025 19:06:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758679606; x=1759284406; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1758679603; x=1759284403; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ciePfvdtL+5lomPQDb47RhbqHcSVWA9My3xn0Ig9A5Q=;
-        b=R7Jazw+LXRn1WbtlLQ3N796B3IM10r4Ax4YUW46Y7XMbxPAXFV7f99BfxwbxGqQaQe
-         qcNfpKr56urf18dYNl3cIVirTaVyAq7e9Looe/K8WosrYZN4Bx1PqSXSLccabWsouKpQ
-         /OWbU2+cob28iHOEGt7B/yDOqDoO/hlzno06n7XieYuMrjbrm0cuMwawnEqzYLQGU7fM
-         qT4StRCtVlJbsdAn9BnLn1wZHxjVasgrdn4lQG3EHPlPy+2XINh/7HyE9VFhxK1Pf1+O
-         alv/iN0O2lLSRzY9ad+2y+Ga0GM1eXW14p1+Bl8wjxUQZUbVQDIBiJSZeTOBXO4ClQfC
-         ynFg==
+        bh=fOz5HySBOFVhMskRvxrL+nmIrbz9l42R6X2LmKA1CXk=;
+        b=nLygZeOKsXzyNuc4lu8R8Z82vDCeU46USixky7KVjVHCoHU9dbHpw86dvx0QKXs4nJ
+         vJve6rPY4LLqYma5QkUlV1n/EeUP2j0tHs/5n4eTOKrY1//z08on+1laoFRf4aKrdzpJ
+         dCJIiaS4AFhoWY7rH7kPZ4TecvKYqo93riMNE/ZNZDBCel9v2uZgoy2QWFxs/pmfmOjP
+         V5ewFHBJ/VK3+7MfF17FlPDaiaPqKg5sYB0RyUTfwmxH/zqALX//zps0i9bmPHCphpK4
+         S8pWNBnTXk43aVVrIYFQ+YzRRHMGuVsAwKosQZXIHNNDL4Q3r1gjASfPP77lNSclkubC
+         uNBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758679606; x=1759284406;
+        d=1e100.net; s=20230601; t=1758679603; x=1759284403;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ciePfvdtL+5lomPQDb47RhbqHcSVWA9My3xn0Ig9A5Q=;
-        b=ljLJfSqesyTSSgtt0zre5jyws0JlF+iymlAnhnS9WaBqidPRV9qOLqX2MUIEFb1ma4
-         Jvn+tDAQv9g5Y51aSeX0hdeEG4lIr1MvdF92P6FSsFp78wgZ+qnjPZyumeSRaNoyD0hX
-         b4SlDf7nvxia+s+GElz5mLkyi7TyqmIpWWNgo/Rc+wv3AKAIPt99unOgJJiHxjIcjcaE
-         gGEIf3iqKDOBndMFqi96WN8aJ7cG+Ju5rA5IM72nLXqor0cSTC1M2Qx6aOiMkOSQqr/C
-         gBhMb4JlPqf/c/tel6sVdHOnE5O4h/hnmBimi9zMWXyx53vvH7dVP/xDI1+bab88lsOC
-         pToQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXKwGZk8iVWjc3qEnBn705OdFUhF5n6UzE/zz9WPhwJVSibBfOmtqdj5XFfBi69Ri+QEZbj6BzP3jE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyLJtCwvdi184EyZh4+G3sJhepnS+TthinDW9CYgZAkGc+kvHi2
-	w3eZHueMy3q/q+OGLKXiwxOXeqSeE3+BFqJupWGTiFwUOVJB7Y1Fw2ar
-X-Gm-Gg: ASbGncukLi/iVcTiiNblV3ZK6DHx2QE/phV4MQIdZwMcabu0uhLeVrg+J9+fsp4qtZ2
-	M8iQCqFiyU7hiNdCl6aY2fe7cxoc9TZBODOnQpp9wXKyEhRMFL9+aRDbq9jF7yZYWd6/m7fiuMe
-	p1PR0Uw+x0VgRpS+h95MvGwCMyBOMPmxZAlyY9/7+ll39UvOePpeF7h0CEcmsrQGJ1Ok2dSRnZs
-	KXkW4LorhmO+t1I5yVzR9PBaKVMxqKX2jVvJT8P9DxrAeiszyu8IDnbH6CcBJ/CkbDrzuqZpFVc
-	Q8vVkJTrkHOY/5hPs4c4lcQhgJHges23sT86KAkf1UdsvV0SQ/Yl1uKZGxcx/nCS675w2Kdn+gq
-	2iycKQzOvt8pwub/mt5ipUFiP1VihCsRn
-X-Google-Smtp-Source: AGHT+IGOg6vFWo5UC4mbvo1msbl/MOqcUGSOPdhiIHhmYncFpj5be1F9lexrCoDGvQar9VbrAedjdQ==
-X-Received: by 2002:a17:903:1983:b0:24c:da3b:7376 with SMTP id d9443c01a7336-27cc2d8ef77mr57448685ad.26.1758679605713;
-        Tue, 23 Sep 2025 19:06:45 -0700 (PDT)
+        bh=fOz5HySBOFVhMskRvxrL+nmIrbz9l42R6X2LmKA1CXk=;
+        b=M0LwlSJZbALmJ7WkoJxdLMr85MX6TyO3alqkI/D91fHHnhQHDZt06RXy8HinpTeRLB
+         2j6/8NZG2exBn9MzJod+IXD296K+u0D+/HC9ecuWObbitzY7hO5tNnbhK0COCRkEhK5R
+         Nqj9xsoi2oPZ6FXY7A679LAb1QZmMY54GLXxlpLjpjjv4AZyA8ctetqHFLpC6ZthPqoH
+         0Er7UlGLSwnO0zv3ghelvHB40BiwvZrjAeCCKV3l2ahWE/5reDp9/WXppKu0lkndV8jQ
+         Zsw/uSiLgAkFWEL2lCJiL9kYjDhB4+b6gS7uNv9nupgowHHmAy2urr9re8J8IOb6Nr3R
+         C/Rw==
+X-Forwarded-Encrypted: i=1; AJvYcCV/hrCs5LpTbYRJmiUv+DSZCEqM/9t9ADAzitqxPgYAaurefqnMg41nTisATpuyyKfU4aJoKp3sL5Y=@vger.kernel.org
+X-Gm-Message-State: AOJu0YysXyo3M4+96Ikaxvohb1JXPJur7a6kabhy4mK6WrUibycI9+rD
+	k1tns3NN7StuJlogcz9OaLGxc+R3DRQcCc/U6Wq2lAV58uF9Szaak7ec
+X-Gm-Gg: ASbGncvF2Xu8Q+A5nlLjpsHu2WqXjub+MEAqcQFp7rTTzfD4RJlmj48cEyLE1I0ojd4
+	l6y6YTgGP0CdRLDzSzxG6ZAZwfa5lA6V/qK9QoDw2FoTIsiVwZd6KQhHcAln7nqbdLWOsbgHCXs
+	V4f+6ZX5IniLtZOibqlkhQ+Xb8LzOAyw+ptlGKCpDBb/436dDb++FWztibhpznjBjByd/JfJYGf
+	uN8xzGlzOBdsEMTKYL2PeVsn5cg0jOOmC8bvY4nXzG54a05zHUbw1dqtokul8KkDa8mqbzN4TOg
+	f4S/f+oBwY+9dxu6BJZ4FdIfN1X9ITJhmf5ZnaiczDOF63tD7PWUNrmJU5s1D4U+uqZnjOqK+Ml
+	+sN6DH6FmXIJ8xac16Z+gqr0Kgdec0oUc
+X-Google-Smtp-Source: AGHT+IEuUYkcZvVzgDknNU04kmG575LjqdFet88ax1daZh+11vPVjnvVKiaeqe4k8m0h/jJ+ROyOEQ==
+X-Received: by 2002:a05:6a00:987:b0:77c:ddd1:749e with SMTP id d2e1a72fcca58-77f53a08fd9mr4910651b3a.19.1758679602841;
+        Tue, 23 Sep 2025 19:06:42 -0700 (PDT)
 Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2698005309bsm176147885ad.27.2025.09.23.19.06.41
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-77f286119f4sm8955740b3a.74.2025.09.23.19.06.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 23 Sep 2025 19:06:41 -0700 (PDT)
 Received: by archie.me (Postfix, from userid 1000)
-	id 946E441A2ED7; Wed, 24 Sep 2025 09:06:39 +0700 (WIB)
+	id AEE7C41A2EE2; Wed, 24 Sep 2025 09:06:39 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Documentation <linux-doc@vger.kernel.org>,
@@ -88,9 +88,9 @@ Cc: "David S. Miller" <davem@davemloft.net>,
 	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	Kees Cook <kees@kernel.org>,
 	Bagas Sanjaya <bagasdotme@gmail.com>
-Subject: [PATCH net-next v2 2/3] net: dns_resolver: Move dns_query() explanation out of code block
-Date: Wed, 24 Sep 2025 09:06:24 +0700
-Message-ID: <20250924020626.17073-3-bagasdotme@gmail.com>
+Subject: [PATCH net-next v2 3/3] net: dns_resolver: Fix request-key cross-reference
+Date: Wed, 24 Sep 2025 09:06:25 +0700
+Message-ID: <20250924020626.17073-4-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250924020626.17073-1-bagasdotme@gmail.com>
 References: <20250924020626.17073-1-bagasdotme@gmail.com>
@@ -100,89 +100,35 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3856; i=bagasdotme@gmail.com; h=from:subject; bh=j06FhP+kipsBirdtsi9W5187JT9Z+wgVUcWg7BEI980=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBmXA9OOXTp/TVZggteMNY/Oa01e/27b9L2FPKx3uK5xf Ji/2Ey2oKOUhUGMi0FWTJFlUiJf0+ldRiIX2tc6wsxhZQIZwsDFKQAT2RDG8E+R1bZB23d92C+5 Y85HdBU2Meew+X9ZW2101S+x31FYOIPhf2D7967Exc7akpP6dJn3Fq2Qyn097cG+jsNFU4O+O6y eyQYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1143; i=bagasdotme@gmail.com; h=from:subject; bh=gaa3l1P1fPt9cEbyVgFnFgXGJaiAtmNJHG4wcmrJDkE=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBmXA9PaW66v+v921ueFSofW2qYIykxeHzzhu31D3iu9Q K65G1b87ChlYRDjYpAVU2SZlMjXdHqXkciF9rWOMHNYmUCGMHBxCsBErIwY/md9P9HC99X343pv o5iKRWsebGTclsWQXhW1bXu3w7P9rqKMDJv5d03mMDTkk96uY3ResJNrxcQMdRVxtt6c5/sL4gN XcwAA
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
 
-Documentation for dns_query() is placed in the function's literal code
-block snippet instead. Move it out of there.
+Link to "Key Request Service" docs uses file:// scheme instead due to
+angled brackets markup. Fix it to proper cross-reference.
 
-Fixes: 9dfe1361261b ("docs: networking: convert dns_resolver.txt to ReST")
+Fixes: 3db38ed76890 ("doc: ReSTify keys-request-key.txt")
+Reviewed-by: Simon Horman <horms@kernel.org>
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- Documentation/networking/dns_resolver.rst | 44 +++++++++++------------
- 1 file changed, 21 insertions(+), 23 deletions(-)
+ Documentation/networking/dns_resolver.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/networking/dns_resolver.rst b/Documentation/networking/dns_resolver.rst
-index 5cec37bedf9950..fbbd2c4635cbd5 100644
+index fbbd2c4635cbd5..52f298834db67b 100644
 --- a/Documentation/networking/dns_resolver.rst
 +++ b/Documentation/networking/dns_resolver.rst
-@@ -64,44 +64,42 @@ before the more general line given above as the first match is the one taken::
- Usage
- =====
+@@ -140,8 +140,8 @@ the key will be discarded and recreated when the data it holds has expired.
+ dns_query() returns a copy of the value attached to the key, or an error if
+ that is indicated instead.
  
--To make use of this facility, one of the following functions that are
--implemented in the module can be called after doing::
-+To make use of this facility, first ``dns_resolver.h`` must be included::
+-See <file:Documentation/security/keys/request-key.rst> for further
+-information about request-key function.
++See Documentation/security/keys/request-key.rst for further information about
++request-key function.
  
- 	#include <linux/dns_resolver.h>
  
--     ::
-+Then queries may be made by calling::
- 
- 	int dns_query(const char *type, const char *name, size_t namelen,
- 		     const char *options, char **_result, time_t *_expiry);
- 
--     This is the basic access function.  It looks for a cached DNS query and if
--     it doesn't find it, it upcalls to userspace to make a new DNS query, which
--     may then be cached.  The key description is constructed as a string of the
--     form::
-+This is the basic access function.  It looks for a cached DNS query and if
-+it doesn't find it, it upcalls to userspace to make a new DNS query, which
-+may then be cached.  The key description is constructed as a string of the
-+form::
- 
- 		[<type>:]<name>
- 
--     where <type> optionally specifies the particular upcall program to invoke,
--     and thus the type of query to do, and <name> specifies the string to be
--     looked up.  The default query type is a straight hostname to IP address
--     set lookup.
-+where <type> optionally specifies the particular upcall program to invoke,
-+and thus the type of query, and <name> specifies the string to be looked up.
-+The default query type is a straight hostname to IP address set lookup.
- 
--     The name parameter is not required to be a NUL-terminated string, and its
--     length should be given by the namelen argument.
-+The name parameter is not required to be a NUL-terminated string, and its
-+length should be given by the namelen argument.
- 
--     The options parameter may be NULL or it may be a set of options
--     appropriate to the query type.
-+The options parameter may be NULL or it may be a set of options
-+appropriate to the query type.
- 
--     The return value is a string appropriate to the query type.  For instance,
--     for the default query type it is just a list of comma-separated IPv4 and
--     IPv6 addresses.  The caller must free the result.
-+The return value is a string appropriate to the query type.  For instance,
-+for the default query type it is just a list of comma-separated IPv4 and
-+IPv6 addresses.  The caller must free the result.
- 
--     The length of the result string is returned on success, and a negative
--     error code is returned otherwise.  -EKEYREJECTED will be returned if the
--     DNS lookup failed.
-+The length of the result string is returned on success, and a negative
-+error code is returned otherwise.  -EKEYREJECTED will be returned if the
-+DNS lookup failed.
- 
--     If _expiry is non-NULL, the expiry time (TTL) of the result will be
--     returned also.
-+If _expiry is non-NULL, the expiry time (TTL) of the result will be
-+returned also.
- 
- The kernel maintains an internal keyring in which it caches looked up keys.
- This can be cleared by any process that has the CAP_SYS_ADMIN capability by
+ Debugging
 -- 
 An old man doll... just what I always wanted! - Clara
 
