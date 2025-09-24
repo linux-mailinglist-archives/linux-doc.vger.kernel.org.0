@@ -1,100 +1,292 @@
-Return-Path: <linux-doc+bounces-61747-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61754-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAAC7B9B5D7
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 20:17:48 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD8E9B9B6E2
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 20:22:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 4656B2E3EF0
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 18:17:13 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3337C188A231
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 18:22:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F45432ED33;
-	Wed, 24 Sep 2025 18:08:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6F3031D741;
+	Wed, 24 Sep 2025 18:18:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="P9Qzs41f"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="N+zXtPln"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f201.google.com (mail-pl1-f201.google.com [209.85.214.201])
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADEC632ED27
-	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 18:08:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35C8931D743
+	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 18:18:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758737289; cv=none; b=IO+63+bNGskYSYhwxZCvM8lL/eSfvNHa66tru+W3IfT/cX3YlGclYKxIWwf7m5BrtZoZzH68ke6LGOK96RQrBWGuEZuPZzkJbdAPcX1YMiV23w4ft/faurOmGGDyo1UU8Z1NBuZJAHgrAQZkubSlTddOM7C8FpCN2IrzahsOomM=
+	t=1758737910; cv=none; b=nNwjEYf/9zFROkdtZ1bUe/HXyb8DTPspZrJ3y3kIq9nQmtq1yBG+KbUMhIorlC/f0XZj7YpRVvWQdOkdJ/gYc+O/sPdtd3w4iSaUudJe3tO1gJpuZwtiVpzMUfdpOKsrLJLnZCk7Ni7Z1OJWsmYyLlifnmX7YDnq60vxmDl09BU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758737289; c=relaxed/simple;
-	bh=WbrpXw7uGEedja6sryJIlijHjH7y3h6T6Btd6J3NpBU=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=GqBUJYjLn/FXj7s5UW1cVDQYbCqwnSVCjZep6cd5nI7lZ4YgaCwZQqN0+492BewGca5lmRjTXXjirk9JXXatYh2YDp6q/uCb7+oyDLBJZhzHsgP/39MfM0kAvvVM9N6lX3fVv7oJhK5JqyENbuGcMv/HzDlZxE6tfq39x/kG/UE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=P9Qzs41f; arc=none smtp.client-ip=209.85.214.201
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--seanjc.bounces.google.com
-Received: by mail-pl1-f201.google.com with SMTP id d9443c01a7336-272b7bdf41fso987495ad.0
-        for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 11:08:07 -0700 (PDT)
+	s=arc-20240116; t=1758737910; c=relaxed/simple;
+	bh=ory5+NJ9BvZxsIZXubXLKy+nuRKqeT+Cb3ahLLWzLuw=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=N77vWtb14m2VLYAHXkm0jKkkvrsJfl7K11uR6wZ4fPLk5uG7kHIbrkwNStdh2bbtXauuGRrx/IRvmhga3oPNfO47T5+RWgr4iyEaHDRFgkG7qcjnkzX2bY27T7qX8V9d9vxOInrCTXqKg5uAf4GF4o57GWLAYgGRNYGpkHTbxCU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=N+zXtPln; arc=none smtp.client-ip=209.85.160.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-4d21a3da5d8so1738651cf.1
+        for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 11:18:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1758737287; x=1759342087; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=E114FBK/ER4h0NxFE7k/vJ0RM740rgem63GVoGqlxQY=;
-        b=P9Qzs41f4GlAS7183jz4uMCIJvODeIMvmUOmndRh6UUmC1XtwsvY3yKiHdFwpVclQN
-         aNAfs0850cw1CZolYC1NMLwj3TBgWakDt9Z0QBA6H0dPLR8k7sPYk3OVZaCfAulQojfi
-         AZo+Kgoul7689SieZwLjrBAus3emb3sSjCAk192K+IJppNxQaVcCwSG5Rf6k2eH4VJkx
-         2Tg8oZzao7V4pE75TheHddNI/2lbwF0Jxy8nzAFQV0j3tZo+elsAwigV+S5bSVKOD7TS
-         Nk7WKkt1e0ILdYeNOSYmGhQMwaagBZ70RNot6SrnjjBfNamHkZr4ChyKgWfXbY/mNVeV
-         KhDQ==
+        d=gmail.com; s=20230601; t=1758737907; x=1759342707; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oFTnrBy9ZUzyqzejBWKFr/WfTb6nZweuI2MfFnrt50Y=;
+        b=N+zXtPlnVvENpWQkYMqEDebqaXajeS1Vcq+J4Z7zlTqQBOxMMK3IDg+CtL0yDUcADT
+         +I6XC67pvMv9FF3/SYh72hqp4oiYPzpRyjkrB/GQO3rypASWhVZ+xMRE4ZKnKbL7CtUu
+         Jc9Jhk551hvxEbAKk+2RJCm4nD9nuk+iNatqokdNbWxaSr7IO6JLWaxJRJ+f9X52ZH8q
+         B4Ro4uN7ARVJ7/OAsD7l6b36x85gxzb4ESopn0PS3wEraF6enZPGlX/7UDb3h0eCd6u0
+         VEdVyJjM/LNYJxaSkQCgeCYSNcw1O+ArMwc3mtPMVh/qExEIvr/4YlcwW2DYv9SM1jdR
+         QJEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758737287; x=1759342087;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=E114FBK/ER4h0NxFE7k/vJ0RM740rgem63GVoGqlxQY=;
-        b=cnjMUO7xVvKvTXKjCDI4XrIvn5N9yjP42xFgzIarwEacLBdblD8PYCJPldds+Rqu9Y
-         9W1GXDXAI0gPwthQaNSbGMvXGfDw6U9zD0KhYayGftgGwXcDbEVsPaUjNhnNXHbTqNTP
-         MLN8xxL2kDqK8h7XqRlO3zPuZPk6GcpKorgCECNmSfovmqd5+BAmrx2dTWeEUObBI9mn
-         Icvz+VQq+wbqAVYZOvJKw1DKYBQgxdnuY23wc83NkbhgBxKEvRa5ciW6lI2iohIKbEZW
-         4kEd4XBJKyYrS1Vf+MiZosQ19qeJTfvmN3BQpwN2kIaCIZQMdJJWJ/t1xkfnS8HDHRoM
-         pF3Q==
-X-Forwarded-Encrypted: i=1; AJvYcCW4ncjXl7eHJl/CvrnxfqEyGz8RFViGvtngzf6WYpXQp2zLfHqlKx2Q9oxcQj8g5yoIyggcDsrC+cA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxQECZSbt15UrMFTRLY0u4fvmVAqKLVec8qDdCr0d3IjDKh9VbL
-	Pm5LKYcw58UiCU7BHKTlHPUuP3Q33DY0uQuxv7MRmakKQeqf+zYSO9vRySFV4MkKYokdQGfZzQn
-	Z8mw6DQ==
-X-Google-Smtp-Source: AGHT+IEQILa7qWwOhEOCXJrBhALpzVM3hyQ7cpSMcpqaqrRIUDlUUT4XRCks8JQbnx6Az52uCL5tJS7hm04=
-X-Received: from plxe12.prod.google.com ([2002:a17:902:ef4c:b0:267:dbc3:f98d])
- (user=seanjc job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:e548:b0:272:1320:121f
- with SMTP id d9443c01a7336-27ed49ed435mr6197535ad.27.1758737287040; Wed, 24
- Sep 2025 11:08:07 -0700 (PDT)
-Date: Wed, 24 Sep 2025 11:07:30 -0700
-In-Reply-To: <20250909003952.10314-1-bagasdotme@gmail.com>
+        d=1e100.net; s=20230601; t=1758737907; x=1759342707;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=oFTnrBy9ZUzyqzejBWKFr/WfTb6nZweuI2MfFnrt50Y=;
+        b=b0dzRjKhw95dZZKlWbzdXy25v6VnxEnsmokrUd/87/03QmmtSgV58g5I1zOznDlCpO
+         I7Olxs3yQQLBDY6v/HFE4H9WKr+33lfhgOQVtrVW+rs3NSId0pMp8S0gioi1tDbFNv7W
+         G0F5ZRW3BaYHmZHsXz3L7QdqZpXgYWR+BfRU5aak182EAyGdn4nCPtWppa/SH4UrqR2h
+         5HPFJz8TsMHzUNJPDyCr7yAV6V3LrQde0iGYK9NHVmjR7Z4gLJlBXHYgcWgfKOjK/h+k
+         R3FI+h0RelBGIhvrbrP3z6sqg27xApGqjQu2ybx/7eriZoA1dA1mbWLC4zvsZoTVhpGo
+         fDog==
+X-Forwarded-Encrypted: i=1; AJvYcCXMYpZ9oT7ft28lm5MAmkePfs7+s/UqYoqI5epSZhUMf1ASwTKvE/6OfdVtRJP+JGrg8llmMzIAAGw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxECqalBJp8NsawXjK7udeMIshFng6Wj1NmJPsh1iuHDUJV/+MV
+	kGQoKdUCoViEkOPHyycS6PQp+FVeCceGum8nV6MNDO9kMPpOBwthFkjPnCJ6LQh0oHGYBmE8Ccb
+	wzyU/7Ox+W/xkIiKURtgioKTg/WEMVjs=
+X-Gm-Gg: ASbGnctDVy80XUreR/0BBjp37NmahVwHpv5E3kIasceAYJrnXJTMi2IJuvIQkflIkSr
+	7VHcmObpLxImeN6ZhSqTnOwa9tGpSHBvKb4zfjcAGDjg7LEK9hBx6xyMdAuPXbDcTKX/FdJsLZF
+	iTYe5SeqsWNGJ9WM0D/wWgiwT6R7W4h3o0cF3CU5EL6xv4IniLBLmZFfbpfIS2HG/M01hkgFIx+
+	dv5BJirED0S+4LbsgoG5xZhHwFXSAKgrf/9Idml
+X-Google-Smtp-Source: AGHT+IG0FJNATbowUCK2eCqu4TqdYgCRhA5RU6qsAcXIKcqgqCh/NZfG2X/A/r97ZJ/R+fCGywFmFYaqz9S0mvEbQig=
+X-Received: by 2002:ac8:7d8e:0:b0:4d3:cc12:34ec with SMTP id
+ d75a77b69052e-4da4c39d3d8mr9807261cf.55.1758737906418; Wed, 24 Sep 2025
+ 11:18:26 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20250909003952.10314-1-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.51.0.536.g15c5d4f767-goog
-Message-ID: <175873635915.2146060.11822371958338127087.b4-ty@google.com>
-Subject: Re: [PATCH] KVM: x86: Fix hypercalls docs section number order
-From: Sean Christopherson <seanjc@google.com>
-To: Sean Christopherson <seanjc@google.com>, 
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Linux KVM <kvm@vger.kernel.org>, 
-	Linux Documentation <linux-doc@vger.kernel.org>, Bagas Sanjaya <bagasdotme@gmail.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Wanpeng Li <wanpengli@tencent.com>
-Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+References: <20250923002353.2961514-1-joannelkoong@gmail.com>
+ <20250923002353.2961514-10-joannelkoong@gmail.com> <20250924002654.GM1587915@frogsfrogsfrogs>
+In-Reply-To: <20250924002654.GM1587915@frogsfrogsfrogs>
+From: Joanne Koong <joannelkoong@gmail.com>
+Date: Wed, 24 Sep 2025 11:18:14 -0700
+X-Gm-Features: AS18NWDaLLz-85vyq1nHgT9THLWtQpVfc8Btmf12YhZ9wZJaiXl5Sn6PA4p4yN0
+Message-ID: <CAJnrk1bYAaJofNBpYYKB2fWGVw-9BPrOUBy_ivmfnjR=49BmNQ@mail.gmail.com>
+Subject: Re: [PATCH v4 09/15] iomap: add caller-provided callbacks for read
+ and readahead
+To: "Darrick J. Wong" <djwong@kernel.org>
+Cc: brauner@kernel.org, miklos@szeredi.hu, hch@infradead.org, 
+	linux-block@vger.kernel.org, gfs2@lists.linux.dev, 
+	linux-fsdevel@vger.kernel.org, linux-xfs@vger.kernel.org, 
+	linux-doc@vger.kernel.org, hsiangkao@linux.alibaba.com, kernel-team@meta.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 09 Sep 2025 07:39:52 +0700, Bagas Sanjaya wrote:
-> Commit 4180bf1b655a79 ("KVM: X86: Implement "send IPI" hypercall")
-> documents KVM_HC_SEND_IPI hypercall, yet its section number duplicates
-> KVM_HC_CLOCK_PAIRING one (which both are 6th). Fix the numbering order
-> so that the former should be 7th.
+On Tue, Sep 23, 2025 at 5:26=E2=80=AFPM Darrick J. Wong <djwong@kernel.org>=
+ wrote:
+>
+> On Mon, Sep 22, 2025 at 05:23:47PM -0700, Joanne Koong wrote:
+> > Add caller-provided callbacks for read and readahead so that it can be
+> > used generically, especially by filesystems that are not block-based.
+> >
+> > In particular, this:
+> > * Modifies the read and readahead interface to take in a
+> >   struct iomap_read_folio_ctx that is publicly defined as:
+> >
+> >   struct iomap_read_folio_ctx {
+> >       const struct iomap_read_ops *ops;
+> >       struct folio *cur_folio;
+> >       struct readahead_control *rac;
+> >       void *read_ctx;
+> >   };
+>
+> I'm starting to wonder if struct iomap_read_ops should contain a struct
+> iomap_ops object, but that might result in more churn through this
+> patchset.
+>
+> <shrug> What do you think?
 
-Applied to kvm-x86 misc, thanks!
+Lol I thought the same thing a while back for "struct iomap_write_ops"
+but I don't think Christoph liked the idea [1]
 
-[1/1] KVM: x86: Fix hypercalls docs section number order
-      https://github.com/kvm-x86/linux/commit/86bcd23df9ce
+[1] https://lore.kernel.org/linux-fsdevel/20250618044344.GE28041@lst.de/
 
---
-https://github.com/kvm-x86/linux/tree/next
+>
+> >
+> >   where struct iomap_read_ops is defined as:
+> >
+> >   struct iomap_read_ops {
+> >       int (*read_folio_range)(const struct iomap_iter *iter,
+> >                              struct iomap_read_folio_ctx *ctx,
+> >                              size_t len);
+> >       void (*read_submit)(struct iomap_read_folio_ctx *ctx);
+> >   };
+> >
+> >   read_folio_range() reads in the folio range and is required by the
+> >   caller to provide. read_submit() is optional and is used for
+> >   submitting any pending read requests.
+> >
+> > * Modifies existing filesystems that use iomap for read and readahead t=
+o
+> >   use the new API, through the new statically inlined helpers
+> >   iomap_bio_read_folio() and iomap_bio_readahead(). There is no change
+> >   in functinality for those filesystems.
+>
+> Nit: functionality
+
+Thanks, will fix this!
+>
+> >
+> > Signed-off-by: Joanne Koong <joannelkoong@gmail.com>
+> > ---
+> >  .../filesystems/iomap/operations.rst          | 45 ++++++++++++
+> >  block/fops.c                                  |  5 +-
+> >  fs/erofs/data.c                               |  5 +-
+> >  fs/gfs2/aops.c                                |  6 +-
+> >  fs/iomap/buffered-io.c                        | 68 +++++++++++--------
+> >  fs/xfs/xfs_aops.c                             |  5 +-
+> >  fs/zonefs/file.c                              |  5 +-
+> >  include/linux/iomap.h                         | 62 ++++++++++++++++-
+> >  8 files changed, 158 insertions(+), 43 deletions(-)
+> >
+> > diff --git a/Documentation/filesystems/iomap/operations.rst b/Documenta=
+tion/filesystems/iomap/operations.rst
+> > index 067ed8e14ef3..dbb193415c0e 100644
+> > --- a/Documentation/filesystems/iomap/operations.rst
+> > +++ b/Documentation/filesystems/iomap/operations.rst
+> > @@ -135,6 +135,29 @@ These ``struct kiocb`` flags are significant for b=
+uffered I/O with iomap:
+> >
+> >   * ``IOCB_DONTCACHE``: Turns on ``IOMAP_DONTCACHE``.
+> >
+> > +``struct iomap_read_ops``
+> > +--------------------------
+> > +
+> > +.. code-block:: c
+> > +
+> > + struct iomap_read_ops {
+> > +     int (*read_folio_range)(const struct iomap_iter *iter,
+> > +                             struct iomap_read_folio_ctx *ctx, size_t =
+len);
+> > +     void (*submit_read)(struct iomap_read_folio_ctx *ctx);
+> > + };
+> > +
+> > +iomap calls these functions:
+> > +
+> > +  - ``read_folio_range``: Called to read in the range. This must be pr=
+ovided
+> > +    by the caller. The caller is responsible for calling
+> > +    iomap_start_folio_read() and iomap_finish_folio_read() before and =
+after
+> > +    reading in the folio range. This should be done even if an error i=
+s
+> > +    encountered during the read. This returns 0 on success or a negati=
+ve error
+> > +    on failure.
+> > +
+> > +  - ``submit_read``: Submit any pending read requests. This function i=
+s
+> > +    optional.
+> > +
+> >  Internal per-Folio State
+> >  ------------------------
+> >
+> > @@ -182,6 +205,28 @@ The ``flags`` argument to ``->iomap_begin`` will b=
+e set to zero.
+> >  The pagecache takes whatever locks it needs before calling the
+> >  filesystem.
+> >
+> > +Both ``iomap_readahead`` and ``iomap_read_folio`` pass in a ``struct
+> > +iomap_read_folio_ctx``:
+> > +
+> > +.. code-block:: c
+> > +
+> > + struct iomap_read_folio_ctx {
+> > +    const struct iomap_read_ops *ops;
+> > +    struct folio *cur_folio;
+> > +    struct readahead_control *rac;
+> > +    void *read_ctx;
+> > + };
+> > +
+> > +``iomap_readahead`` must set:
+> > + * ``ops->read_folio_range()`` and ``rac``
+> > +
+> > +``iomap_read_folio`` must set:
+> > + * ``ops->read_folio_range()`` and ``cur_folio``
+>
+> Hrmm, so we're multiplexing read and readahead through the same
+> iomap_read_folio_ctx.  Is there ever a case where cur_folio and rac can
+> both be used by the underlying machinery?  I think the answer to that
+> question is "no" but I don't think the struct definition makes that
+> obvious.
+
+In the ->read_folio_range() callback, both rac and cur_folio are used
+for readahead, but in passing in the "struct iomap_read_folio_ctx" to
+the main iomap_read_folio()/iomap_readahead() entrypoint, no both rac
+and cur_folio do not get set at the same time.
+
+We could change the signature back to something like:
+int iomap_read_folio(struct folio *folio, const struct iomap_ops *ops,
+const struct iomap_read_ops *ops, void *read_ctx);
+void iomap_readahead(struct readahead_control *rac, const struct
+iomap_ops *ops, const struct iomap_read_ops *ops, void *read_ctx);
+
+but I think it might get a bit much if/when "void *private" needs to
+get added too for iomap iter metadata, though maybe that's okay now
+that the private read data has been renamed to read_ctx.
+
+
+>
+> > +
+> >  static int iomap_read_folio_iter(struct iomap_iter *iter,
+> >               struct iomap_read_folio_ctx *ctx, bool *folio_owned)
+> >  {
+> > @@ -436,7 +438,7 @@ static int iomap_read_folio_iter(struct iomap_iter =
+*iter,
+> >       loff_t length =3D iomap_length(iter);
+> >       struct folio *folio =3D ctx->cur_folio;
+> >       size_t poff, plen;
+> > -     loff_t count;
+> > +     loff_t pos_diff;
+> >       int ret;
+> >
+> >       if (iomap->type =3D=3D IOMAP_INLINE) {
+> > @@ -454,12 +456,16 @@ static int iomap_read_folio_iter(struct iomap_ite=
+r *iter,
+> >               iomap_adjust_read_range(iter->inode, folio, &pos, length,=
+ &poff,
+> >                               &plen);
+> >
+> > -             count =3D pos - iter->pos + plen;
+> > -             if (WARN_ON_ONCE(count > length))
+> > +             pos_diff =3D pos - iter->pos;
+> > +             if (WARN_ON_ONCE(pos_diff + plen > length))
+> >                       return -EIO;
+>
+> Er, can these changes get their own patch describing why the count ->
+> pos_diff change was made?
+
+I will separate this out into its own patch. The reasoning behind this
+is so that the ->read_folio_range() callback doesn't need to take in a
+pos arg but instead can get it from iter->pos [1]
+
+[1] https://lore.kernel.org/linux-fsdevel/aMKt52YxKi1Wrw4y@infradead.org/
+
+Thanks for looking at this patchset!
+
+Thanks,
+Joanne
+>
+> --D
+>
 
