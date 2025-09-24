@@ -1,111 +1,235 @@
-Return-Path: <linux-doc+bounces-61686-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61690-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4EA0B9A6E3
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 17:01:37 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02ADCB9A904
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 17:17:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3D4073A5BCB
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 14:59:20 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id F26971B26037
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Sep 2025 15:18:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A4AC1309F1A;
-	Wed, 24 Sep 2025 14:55:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7EE0330C622;
+	Wed, 24 Sep 2025 15:17:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Pk3XV05/"
+	dkim=pass (2048-bit key) header.d=lmu.de header.i=@campus.lmu.de header.b="hVFE+7S8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from postout2.mail.lrz.de (postout2.mail.lrz.de [129.187.255.138])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FB202DAFBA
-	for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 14:55:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D44C309DB5;
+	Wed, 24 Sep 2025 15:17:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=129.187.255.138
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758725752; cv=none; b=po4HSi6f1TDZK/UEI7ZuLSo1eZIJ7uytuKmx2JcUEa0FiKuP6afl0nckxcETBjgyrrR9NyGOu9XlCcXsA7dM7f5Zq+nXufHDi2FpA+xjRUDEdVj2VrTL0ggUVOs6fBgbzgs/H7VKrU1dpZdKuASRXfIQld8l4FItTXnVfbjnoXE=
+	t=1758727071; cv=none; b=ROeTEiEq11g7ZX/aV7NJUak4jbe8EIqtNAKu4CX/lrKB2SHa1Yperar8+ONCTX7fLRHI5cwidtZaWgLt1kTu0Tm1Us/4JPuBFZm4axe9B5YiH/mchnM8snRcVIn+QqNAfUuAs6FtyMup26XQvZu3NJGGvMtdIqS6KcQhQLuq0p8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758725752; c=relaxed/simple;
-	bh=1bdm4ZwS+vnY4SEljyRMQtCEmwu0wpVnwkmS35goyks=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Yhyw0CStGbPduZxK0ELA8++Q+5D3chCJ/rAFj4rrqdTUKTaMHnN3tHzh6rn60HGyGFa++nYSgzwy61bwqfVZ/qjOsvAY3v+puSlXTek4BR5+vRgz/ykl0lQiA7d6m3bv5cJKOKUnSuy+H/yj2NUrAI7fNPDDstmlI+cm9o1kE9k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Pk3XV05/; arc=none smtp.client-ip=209.85.214.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-27d2c35c459so16401025ad.0
-        for <linux-doc@vger.kernel.org>; Wed, 24 Sep 2025 07:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1758725750; x=1759330550; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jtg/RW/ZQ2hPIrm+uMAg0L2Wfe97VEQrXZv2YdHCE9I=;
-        b=Pk3XV05/0gZsasKG5lxzY1piM6pfZCiNjiSkFyEWgkvMDWWpBOJYPW9R/pZt/5JxuU
-         jsCN3GHXD7notX9VVHXVUtUCgNma6nnSZxEaYUTJEYnTeXux5vOxC6nMniBNapo0/rf4
-         r529bjHzHQK4FCcgTSPVQ6gf/NfNwdlCc9LdI5XSvetU2gP2NQrVu/j+B/gWImVbG6V7
-         yIeT1Wp8ZW9rzXwt7foEfDKq8IHpa4/eghupT+r1nesa+3yThnJVKubA/j+oioE0ODJm
-         GqDnI4vtC7bYTBynRMoLLwVsO7IzOKE4aH1bnEYz/XyvSW2FMRBp1FkNOExoVMUh5spI
-         mH5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1758725750; x=1759330550;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jtg/RW/ZQ2hPIrm+uMAg0L2Wfe97VEQrXZv2YdHCE9I=;
-        b=RHWNyzplZJoBDwJ982J6s7DHH9WBVEn9x/DHwQgZswgH0aGx6OnLeWU9pE8yRncxRP
-         g511efuA3zNczbUR/e50rfK7dXO1eXUrP6fHOzS6hIzxGv7v2ZEdNhxPF1U3oIH54Bjp
-         M2YLeQ+cMt54CdK2xWJdLImM8QI4yuNhHXmxn2vlO/c9RVzEr5CVsKFg4i35ZgFsJJIb
-         /AyBBJLxWLtCm2+8D9pPlj6FYWnW9YqNWvk+JIpaDm+dODZ3VXahpQrR6bviummeYyku
-         YXzZKtfpn9eXZLLfCJxPg6B8AASGFc/Bom/Saify8FNW/1DKLe9regznKJsDweVPHEik
-         jE5A==
-X-Forwarded-Encrypted: i=1; AJvYcCWVkBer0ZpVqhGPotBDlIUMNETNux2+zAZCUXK3Q01AsqCOD7jd9LoGhG44GzHDJIAX31BccitRkRQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwMBNEM6C6PrUBkaByRzm2S/0xUMHE6yYeiIOprDuO6NBiuyRek
-	PuAsdjo6jyJaavqHsydCzQP1dhIrxaXj/SbgOQK+/FLcMZddIVoyHGJN
-X-Gm-Gg: ASbGncvayW4EX7a4Fhjp3Azz1+ejDAO8hlZ6PhZLFmx1zy7N1sbPega/9pA8hesVs2X
-	m2Crhz75y4DluyheLQBchMxZaIYHNz2z4HghDW/BB7f0qP3BfH1eHBJ59VIJVovsDP8lgMDs9TZ
-	TFyjz84eb5RAPJ0V0mBzQCg/m626eULkM2ROOw/PX8Y945LDBYADpQyU7bwn+Iam22zqN9U4lil
-	9XYJkvpghhWHiC51ZKKa5y8SgO3/heSGlZ9Eegbco7yuYGlunZg0+YYa5K90jmvDNjbTS0l5V6n
-	wY36bRc3dhNYpWfAphFEsmPeeEf8e7rF9D6cQsRHHtRivPZRkp0Q/Hf7m98bJOXIK3C4acYjX5L
-	rcpfWF4tPgn6lkwVaaAPo37mEHiFqtFKdbDA=
-X-Google-Smtp-Source: AGHT+IGnenyE6frrx61hpk2H1dyCzynS+vL3sXDmbZJarOVCZ/cfik7xdg7mftRkCokyhtVFgoFyZA==
-X-Received: by 2002:a17:902:c94f:b0:24c:7b94:2f87 with SMTP id d9443c01a7336-27ed49d0885mr199075ad.14.1758725750379;
-        Wed, 24 Sep 2025 07:55:50 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-26980053248sm194608665ad.15.2025.09.24.07.55.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Sep 2025 07:55:49 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Wed, 24 Sep 2025 07:55:49 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: wenswang@yeah.net
-Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-	jdelvare@suse.com, corbet@lwn.net, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] hwmon: add MP2925 and MP2929 driver
-Message-ID: <360d3c4a-79ca-4482-a020-2cd477dccc54@roeck-us.net>
-References: <20250918080349.1154140-1-wenswang@yeah.net>
- <20250918080603.1154497-1-wenswang@yeah.net>
- <20250918080603.1154497-2-wenswang@yeah.net>
+	s=arc-20240116; t=1758727071; c=relaxed/simple;
+	bh=qHJFbsYgS91YYDoS3pNiLv0mtvxMAELdSxOXkcm25+4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=YlAdYo7LAvOzhUuPe6Op4rqXxTAoL7Jg6hHd9BRhgSOZTsMBJeQBxRftugFC6wS7HqFNQaBgFXvjfKm/l0kLNFkYXds7CvW+jyWCg69mkyUk8kIo4Ny/XyCZy7AeChfwB+pSagndSkG1f/R6gdjPVUHmeLbCgkFDQPq7WU55pac=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=campus.lmu.de; spf=pass smtp.mailfrom=campus.lmu.de; dkim=pass (2048-bit key) header.d=lmu.de header.i=@campus.lmu.de header.b=hVFE+7S8; arc=none smtp.client-ip=129.187.255.138
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=campus.lmu.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=campus.lmu.de
+Received: from lxmhs52.srv.lrz.de (localhost [127.0.0.1])
+	by postout2.mail.lrz.de (Postfix) with ESMTP id 4cX0fy3FrjzySk;
+	Wed, 24 Sep 2025 17:11:22 +0200 (CEST)
+Authentication-Results: postout.lrz.de (amavis); dkim=pass (2048-bit key)
+ reason="pass (just generated, assumed good)" header.d=lmu.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lmu.de; h=
+	content-transfer-encoding:mime-version:x-mailer:message-id:date
+	:date:subject:subject:from:from:received:received; s=
+	lm-postout21; i=@campus.lmu.de; t=1758726681; bh=T6LxtLsJSjh5VFa
+	qIEo/5wr5RrqvMX416qBvYTVfg0E=; b=hVFE+7S8Fn4/3XjSufKRyxWHwW1bTtz
+	VmlF6g1t4TlmQrUK2g6F6vLFlU40czoRwEq0RsFT/3IH7GMQ5G2Ibu8haG+BFOfJ
+	8zZe76T3pWxXCby+AgHbP88DGrWGP+ho9qz0miGx/2adAFJYmk7+vs2VjMqiu7Xh
+	yASlcM7coWzhItLtC4rvkK5u/f1ktq9yjN1Sax5zRaIXtvfODBmowx5M8OtnLBnM
+	79T3dgWtXp1eUoF/g2u9tss/ucgkyjOiwJdjoUojvziOhDN9PlPFzEFrj0M3Pn5p
+	JmU6RCdR9hpgfd6nTab7IgTRGw3ihak6ss8Sxi5Aq73ihDT6fW4jgKA==
+X-Virus-Scanned: by amavisd-new at lrz.de in lxmhs52.srv.lrz.de
+X-Spam-Flag: NO
+X-Spam-Score: -2.886
+X-Spam-Level:
+Received: from postout2.mail.lrz.de ([127.0.0.1])
+ by lxmhs52.srv.lrz.de (lxmhs52.srv.lrz.de [127.0.0.1]) (amavis, port 20024)
+ with LMTP id zUqMeowYmgiG; Wed, 24 Sep 2025 17:11:21 +0200 (CEST)
+Received: from spacestation.cable.virginm.net (oxfd-27-b2-v4wan-164230-cust474.vm42.cable.virginm.net [86.22.133.219])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	by postout2.mail.lrz.de (Postfix) with ESMTPSA id 4cX0fr09PgzyS8;
+	Wed, 24 Sep 2025 17:11:15 +0200 (CEST)
+From: Patrick Roy <patrick.roy@campus.lmu.de>
+To: 
+Cc: Patrick Roy <roypat@amazon.co.uk>,
+	pbonzini@redhat.com,
+	corbet@lwn.net,
+	maz@kernel.org,
+	oliver.upton@linux.dev,
+	joey.gouly@arm.com,
+	suzuki.poulose@arm.com,
+	yuzenghui@huawei.com,
+	catalin.marinas@arm.com,
+	will@kernel.org,
+	tglx@linutronix.de,
+	mingo@redhat.com,
+	bp@alien8.de,
+	dave.hansen@linux.intel.com,
+	x86@kernel.org,
+	hpa@zytor.com,
+	luto@kernel.org,
+	peterz@infradead.org,
+	willy@infradead.org,
+	akpm@linux-foundation.org,
+	david@redhat.com,
+	lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com,
+	vbabka@suse.cz,
+	rppt@kernel.org,
+	surenb@google.com,
+	mhocko@suse.com,
+	song@kernel.org,
+	jolsa@kernel.org,
+	ast@kernel.org,
+	daniel@iogearbox.net,
+	andrii@kernel.org,
+	martin.lau@linux.dev,
+	eddyz87@gmail.com,
+	yonghong.song@linux.dev,
+	john.fastabend@gmail.com,
+	kpsingh@kernel.org,
+	sdf@fomichev.me,
+	haoluo@google.com,
+	jgg@ziepe.ca,
+	jhubbard@nvidia.com,
+	peterx@redhat.com,
+	jannh@google.com,
+	pfalcato@suse.de,
+	shuah@kernel.org,
+	seanjc@google.com,
+	kvm@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	kvmarm@lists.linux.dev,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org,
+	bpf@vger.kernel.org,
+	linux-kselftest@vger.kernel.org,
+	xmarcalx@amazon.co.uk,
+	kalyazin@amazon.co.uk,
+	jackabt@amazon.co.uk,
+	derekmn@amazon.co.uk,
+	tabba@google.com,
+	ackerleytng@google.com
+Subject: [PATCH v7 00/12] Direct Map Removal Support for guest_memfd
+Date: Wed, 24 Sep 2025 16:10:40 +0100
+Message-ID: <20250924151101.2225820-1-patrick.roy@campus.lmu.de>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250918080603.1154497-2-wenswang@yeah.net>
+Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 18, 2025 at 04:06:03PM +0800, wenswang@yeah.net wrote:
-> From: Wensheng Wang <wenswang@yeah.net>
-> 
-> Add support for MPS VR mp2925 and mp2929 controller. This driver exposes
-> telemetry and limit value readings and writtings.
-> 
-> Signed-off-by: Wensheng Wang <wenswang@yeah.net>
+From: Patrick Roy <roypat@amazon.co.uk>
 
-Applied.
+[ based on kvm/next ]
 
-Thanks,
-Guenter
+Unmapping virtual machine guest memory from the host kernel's direct map is a
+successful mitigation against Spectre-style transient execution issues: If the
+kernel page tables do not contain entries pointing to guest memory, then any
+attempted speculative read through the direct map will necessarily be blocked
+by the MMU before any observable microarchitectural side-effects happen. This
+means that Spectre-gadgets and similar cannot be used to target virtual machine
+memory. Roughly 60% of speculative execution issues fall into this category [1,
+Table 1].
+
+This patch series extends guest_memfd with the ability to remove its memory
+from the host kernel's direct map, to be able to attain the above protection
+for KVM guests running inside guest_memfd.
+
+Additionally, a Firecracker branch with support for these VMs can be found on
+GitHub [2].
+
+For more details, please refer to the v5 cover letter [v5]. No
+substantial changes in design have taken place since.
+
+=== Changes Since v6 ===
+
+- Drop patch for passing struct address_space to ->free_folio(), due to
+  possible races with freeing of the address_space. (Hugh)
+- Stop using PG_uptodate / gmem preparedness tracking to keep track of
+  direct map state.  Instead, use the lowest bit of folio->private. (Mike, David)
+- Do direct map removal when establishing mapping of gmem folio instead
+  of at allocation time, due to impossibility of handling direct map
+  removal errors in kvm_gmem_populate(). (Patrick)
+- Do TLB flushes after direct map removal, and provide a module
+  parameter to opt out from them, and a new patch to export
+  flush_tlb_kernel_range() to KVM. (Will)
+
+[1]: https://download.vusec.net/papers/quarantine_raid23.pdf
+[2]: https://github.com/firecracker-microvm/firecracker/tree/feature/secret-hiding
+[RFCv1]: https://lore.kernel.org/kvm/20240709132041.3625501-1-roypat@amazon.co.uk/
+[RFCv2]: https://lore.kernel.org/kvm/20240910163038.1298452-1-roypat@amazon.co.uk/
+[RFCv3]: https://lore.kernel.org/kvm/20241030134912.515725-1-roypat@amazon.co.uk/
+[v4]: https://lore.kernel.org/kvm/20250221160728.1584559-1-roypat@amazon.co.uk/
+[v5]: https://lore.kernel.org/kvm/20250828093902.2719-1-roypat@amazon.co.uk/
+[v6]: https://lore.kernel.org/kvm/20250912091708.17502-1-roypat@amazon.co.uk/
+
+
+Patrick Roy (12):
+  arch: export set_direct_map_valid_noflush to KVM module
+  x86/tlb: export flush_tlb_kernel_range to KVM module
+  mm: introduce AS_NO_DIRECT_MAP
+  KVM: guest_memfd: Add stub for kvm_arch_gmem_invalidate
+  KVM: guest_memfd: Add flag to remove from direct map
+  KVM: guest_memfd: add module param for disabling TLB flushing
+  KVM: selftests: load elf via bounce buffer
+  KVM: selftests: set KVM_MEM_GUEST_MEMFD in vm_mem_add() if guest_memfd
+    != -1
+  KVM: selftests: Add guest_memfd based vm_mem_backing_src_types
+  KVM: selftests: cover GUEST_MEMFD_FLAG_NO_DIRECT_MAP in existing
+    selftests
+  KVM: selftests: stuff vm_mem_backing_src_type into vm_shape
+  KVM: selftests: Test guest execution from direct map removed gmem
+
+ Documentation/virt/kvm/api.rst                |  5 ++
+ arch/arm64/include/asm/kvm_host.h             | 12 ++++
+ arch/arm64/mm/pageattr.c                      |  1 +
+ arch/loongarch/mm/pageattr.c                  |  1 +
+ arch/riscv/mm/pageattr.c                      |  1 +
+ arch/s390/mm/pageattr.c                       |  1 +
+ arch/x86/include/asm/tlbflush.h               |  3 +-
+ arch/x86/mm/pat/set_memory.c                  |  1 +
+ arch/x86/mm/tlb.c                             |  1 +
+ include/linux/kvm_host.h                      |  9 +++
+ include/linux/pagemap.h                       | 16 +++++
+ include/linux/secretmem.h                     | 18 -----
+ include/uapi/linux/kvm.h                      |  2 +
+ lib/buildid.c                                 |  4 +-
+ mm/gup.c                                      | 19 ++----
+ mm/mlock.c                                    |  2 +-
+ mm/secretmem.c                                |  8 +--
+ .../testing/selftests/kvm/guest_memfd_test.c  |  2 +
+ .../testing/selftests/kvm/include/kvm_util.h  | 37 ++++++++---
+ .../testing/selftests/kvm/include/test_util.h |  8 +++
+ tools/testing/selftests/kvm/lib/elf.c         |  8 +--
+ tools/testing/selftests/kvm/lib/io.c          | 23 +++++++
+ tools/testing/selftests/kvm/lib/kvm_util.c    | 61 +++++++++--------
+ tools/testing/selftests/kvm/lib/test_util.c   |  8 +++
+ tools/testing/selftests/kvm/lib/x86/sev.c     |  1 +
+ .../selftests/kvm/pre_fault_memory_test.c     |  1 +
+ .../selftests/kvm/set_memory_region_test.c    | 50 ++++++++++++--
+ .../kvm/x86/private_mem_conversions_test.c    |  7 +-
+ virt/kvm/guest_memfd.c                        | 66 +++++++++++++++++--
+ virt/kvm/kvm_main.c                           |  8 +++
+ 30 files changed, 290 insertions(+), 94 deletions(-)
+
+
+base-commit: a6ad54137af92535cfe32e19e5f3bc1bb7dbd383
+-- 
+2.51.0
+
 
