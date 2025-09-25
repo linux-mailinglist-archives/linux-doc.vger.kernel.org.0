@@ -1,216 +1,197 @@
-Return-Path: <linux-doc+bounces-61790-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61794-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1BABB9E4DA
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Sep 2025 11:25:34 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66FA1B9E5AF
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Sep 2025 11:31:19 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9EAFE1698A3
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Sep 2025 09:25:34 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 125EA4A26CC
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Sep 2025 09:31:18 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A12232EA165;
-	Thu, 25 Sep 2025 09:25:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 91A2D2EA16A;
+	Thu, 25 Sep 2025 09:27:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i6Qtwvmr"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="ahLQOEsu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77F3B2E9ECC;
-	Thu, 25 Sep 2025 09:25:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8EE12EA165
+	for <linux-doc@vger.kernel.org>; Thu, 25 Sep 2025 09:27:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758792320; cv=none; b=Xsa1r9l05AmW04CVmF9pKji4rjMHWW3V5/4ndTMEJawBsKIQGvaUzZsjcf6i3Nr5by3m5Ra20DclVSFaAJZaEpxQcFiaCthEn2M+pj9Zz2wEFPCVOc0Ogx8Haeu5/UAoagksjDQYyglcv4/yhAfvvOJqOf0wAGiwD78lTySD+JQ=
+	t=1758792466; cv=none; b=Fnj/ysluZpCyROlbuzyNaB7dslThkpx1qKyx1yr9waCfYvCVUAI/0FavkAyY5uQi/pv4hiHqIhXdwLcjM5+n5InW36Wr8zDOcc8wRDeZOS1uUPN0pIpZDE9hfr9AaZMAIAHzL3xM6kTG5on2MkTO4uCXtuw2+qi4JY2KPBlX8bI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758792320; c=relaxed/simple;
-	bh=QnpfcFBQ5y1ajLhLSaa9D98NMjKab3ak3j8y6wQMZK8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=U2bzU1tM/9YByeOGRUy+7z7Qa1MMbKv/uXyWholNR0wi0SVlQqFEeqErvbP21IIHs+wKERZuxn9n0QUw1pPSUaNhjfZe1Tvpn88EzE+5hNX/76G88ToPtCc/2lmr8htZLVVWCJqdyqBgK5Jwap8wyB3hkwvoYM9hEuNvwSxjIkc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i6Qtwvmr; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5283EC16AAE;
-	Thu, 25 Sep 2025 09:25:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758792320;
-	bh=QnpfcFBQ5y1ajLhLSaa9D98NMjKab3ak3j8y6wQMZK8=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=i6QtwvmrD8WTicilLzKyJemuZ0ig/4NtBiH10+mCcBdBEeVe0kKZ5CcPALvMHxpLW
-	 Iyf73b06/lDPaXY5YOHyIFTAJ9HasLsLerhV4dyM51PgfbScv9aahihDm7XXW/zNeH
-	 7gMLLDkTbXLxu3MK7mvmvzbRjFSkD2X8uRmuVKN3rDnDPNlTiDqBwUfrk4NyG2N4Ke
-	 nmHnjemWLCa+2U+oGG4OJOrHr7/NZ2xJpmfSwCazV+qRk4Y3Y7FdNGfy1tkCcP+dQZ
-	 S59O9DTJK5F0uh1HdaLlTmPvme6E8LGaBv4tXvYaEOjoeFirE9eZwrE1tQ5uwkyyQD
-	 3/RqKjquS/d3A==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46789CAC5B5;
-	Thu, 25 Sep 2025 09:25:20 +0000 (UTC)
-From: Cryolitia PukNgae via B4 Relay <devnull+cryolitia.uniontech.com@kernel.org>
-Date: Thu, 25 Sep 2025 17:25:19 +0800
-Subject: [PATCH v5 4/4] ALSA: doc: add docs about improved quirk_flags in
- snd-usb-audio
+	s=arc-20240116; t=1758792466; c=relaxed/simple;
+	bh=4Yv3Q5cOmyZVTHyUxtyXh72sHLtXQN/FSgzj4obRUDY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=G0mto8G9p69zsg71rD7gQ0nbDBO/HAR8tKijRNTumKJw/RiAivdc0NrnF1D+5vbpTXaU8E95Hy8XUlWaqd+X8+aspo20Z0YPYY2OrY75VMVrWSfavdkHB/AkjjcxM0++3jwzZYI+lO5Kp17km4RvgFdMDdyJLrr95lFpW778lCU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=ahLQOEsu; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1758792463;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=UWFAvZzxsmjhh9q6bJ5VMROTWJuLviIpjPx87FL9KGM=;
+	b=ahLQOEsuJAlRSGpN3nTznj1ZHQrtDjFUWHtgM2wtYfMtM5wFFspBNzCM9INFVmy6xJ+fEx
+	Aj+l1m2baFTS88wMNjSmMaYxQkGHkrodxyhROiTQfTywA+PKT3iqzmIUBitVQx/kdy1knp
+	BVRBU/PtHf/mJVR6fIYpcMPCf9Oz24o=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-648-zYz5DUuGOlKEjp0Zvn2EHw-1; Thu, 25 Sep 2025 05:27:41 -0400
+X-MC-Unique: zYz5DUuGOlKEjp0Zvn2EHw-1
+X-Mimecast-MFC-AGG-ID: zYz5DUuGOlKEjp0Zvn2EHw_1758792461
+Received: by mail-wr1-f69.google.com with SMTP id ffacd0b85a97d-3ece0cb7c9cso597631f8f.1
+        for <linux-doc@vger.kernel.org>; Thu, 25 Sep 2025 02:27:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1758792460; x=1759397260;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=UWFAvZzxsmjhh9q6bJ5VMROTWJuLviIpjPx87FL9KGM=;
+        b=JPPBJGKsDlGPEut5vD4mH69KJ9nzW/KcsiB0D5+TM27v9MCnJK0dNloWo0ifgMataB
+         yTv8eQq1HeWMGXJltmN/HLns6gY40Q10Slrt1WEiPdIpW2Uw2BTfICjN0oS07rlenyir
+         tca30yqnk87wLbblr8J5ALC0Jwc3cGT7eS80nwxN/95h2u5255HhtpIfibPf5h9SSfK8
+         HrlL03zBbmhHTBgGZF1ZraU5XTowOtm3Yi7LQjfJ/hUr/XZ0yoIHSF8xiemz1zeqpdRW
+         P+Cp+07iztn/5oKjVodPexz6RMZvHd/cXrUrjmXF97Ht8iTny07OAUU/xjgJWdGar3FW
+         gH+g==
+X-Forwarded-Encrypted: i=1; AJvYcCWowklNf+Fc99DPDH4+vrOya8UjcocF4jp486rE9IOhnjJnlUndNO1clNfzDcrV1oTeLiVYlz13tpc=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyWArs5gS3HD1CXWBld2O1/8vevuL0O99XxzjMpoupWB9l/jV4y
+	YCS8vHCn/miMx3zUd8TrYocZfDWDCzVxUju9w919hsJIawgB1TpvbNRiU/d3qHHL5sGMe0JXd98
+	0LkcGuPyYIAiUX5OfZmT5Nwzod1TmyR8N9wqiwu0kXSfOA90UoZHn1Mlv3smc0g==
+X-Gm-Gg: ASbGncvfLcqn+pvwQkn+4/oNe6rMOv77An/2ewccTKOMs+yqBsK1kuZM7i2gqUdrNMv
+	1Ktj2TcFeasA9jimiLiZPUQ42Vpgpi99Q+Ftyhojm+ALRPjfe3u7t7RDSGc7QrbMjNx+wfgKqim
+	Ix6J+joXnhEcTfSl98mhAmm+i/Jf8u0IESVgJ+ahcDM6nYmVifVUEDPnbkrB/l9Vb/RZ88GQtjP
+	pm66+Qp/X/W1+z4iOyhkX1SBnd3VFca18Q1ru79+lpTmwM4bxZcFxw1sUhCanFihbfeD8McOkF8
+	24nqLIMyjG6y4KwVcaYn3qjRd6xP2C/RJvyNszO+1FKis6pQslmzYMRkMiGGZtug52gv/LfyC+n
+	OHcHpE+vMTcw7
+X-Received: by 2002:a05:6000:2306:b0:3ec:dd19:5ab with SMTP id ffacd0b85a97d-40e4dabf4bcmr2260619f8f.61.1758792460434;
+        Thu, 25 Sep 2025 02:27:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH4KO3m6UVzFQeKSl0okBGg5bJ0PBmfh3JJWmV5i+8yo09g9ZgqQZzl0ahuXJF36hdJNUY9+g==
+X-Received: by 2002:a05:6000:2306:b0:3ec:dd19:5ab with SMTP id ffacd0b85a97d-40e4dabf4bcmr2260602f8f.61.1758792459988;
+        Thu, 25 Sep 2025 02:27:39 -0700 (PDT)
+Received: from ?IPV6:2a0d:3344:2712:7e10:4d59:d956:544f:d65c? ([2a0d:3344:2712:7e10:4d59:d956:544f:d65c])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e2ab61eecsm69224455e9.20.2025.09.25.02.27.38
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 25 Sep 2025 02:27:39 -0700 (PDT)
+Message-ID: <7cc2df09-0230-40cb-ad4f-656b0d1d785b@redhat.com>
+Date: Thu, 25 Sep 2025 11:27:38 +0200
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v3 1/2] net/smc: make wr buffer count
+ configurable
+To: Halil Pasic <pasic@linux.ibm.com>, Jakub Kicinski <kuba@kernel.org>,
+ Simon Horman <horms@kernel.org>, "D. Wythe" <alibuda@linux.alibaba.com>,
+ Dust Li <dust.li@linux.alibaba.com>, Sidraya Jayagond
+ <sidraya@linux.ibm.com>, Wenjia Zhang <wenjia@linux.ibm.com>,
+ Mahanta Jambigi <mjambigi@linux.ibm.com>, Tony Lu
+ <tonylu@linux.alibaba.com>, Wen Gu <guwen@linux.alibaba.com>,
+ netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-s390@vger.kernel.org
+References: <20250921214440.325325-1-pasic@linux.ibm.com>
+ <20250921214440.325325-2-pasic@linux.ibm.com>
+Content-Language: en-US
+From: Paolo Abeni <pabeni@redhat.com>
+In-Reply-To: <20250921214440.325325-2-pasic@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250925-sound-v5-4-2593586ff350@uniontech.com>
-References: <20250925-sound-v5-0-2593586ff350@uniontech.com>
-In-Reply-To: <20250925-sound-v5-0-2593586ff350@uniontech.com>
-To: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Jonathan Corbet <corbet@lwn.net>
-Cc: Mingcong Bai <jeffbai@aosc.io>, Kexy Biscuit <kexybiscuit@aosc.io>, 
- Nie Cheng <niecheng1@uniontech.com>, Zhan Jun <zhanjun@uniontech.com>, 
- Feng Yuan <fengyuan@uniontech.com>, qaqland <anguoli@uniontech.com>, 
- kernel@uniontech.com, linux-sound@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- Cryolitia PukNgae <cryolitia@uniontech.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1758792317; l=6701;
- i=cryolitia@uniontech.com; s=20250730; h=from:subject:message-id;
- bh=D3poYh0GYU+tFf7qnpPKUesjmRl5ytfmzzsTuIWMHmQ=;
- b=Jf+f4ibh9/Lt5l5mLXKCcsRSqBjapHFreV4PC6YPgtBrtubTli4o6CUwIujEGcYdwWctQRNW6
- xOVRtRl0LeoAB+0Y46GpnpCDC4KZGL2pXCvVyGD8mk0+Nv6yThbY6Ed
-X-Developer-Key: i=cryolitia@uniontech.com; a=ed25519;
- pk=tZ+U+kQkT45GRGewbMSB4VPmvpD+KkHC/Wv3rMOn/PU=
-X-Endpoint-Received: by B4 Relay for cryolitia@uniontech.com/20250730 with
- auth_id=474
-X-Original-From: Cryolitia PukNgae <cryolitia@uniontech.com>
-Reply-To: cryolitia@uniontech.com
 
-From: Cryolitia PukNgae <cryolitia@uniontech.com>
+On 9/21/25 11:44 PM, Halil Pasic wrote:
+> diff --git a/Documentation/networking/smc-sysctl.rst b/Documentation/networking/smc-sysctl.rst
+> index a874d007f2db..c94d750c7c84 100644
+> --- a/Documentation/networking/smc-sysctl.rst
+> +++ b/Documentation/networking/smc-sysctl.rst
+> @@ -71,3 +71,39 @@ smcr_max_conns_per_lgr - INTEGER
+>  	acceptable value ranges from 16 to 255. Only for SMC-R v2.1 and later.
+>  
+>  	Default: 255
+> +
+> +smcr_max_send_wr - INTEGER
+> +	So called work request buffers are SMCR link (and RDMA queue pair) level
+> +	resources necessary for performing RDMA operations. Since up to 255
+> +	connections can share a link group and thus also a link and the number
+> +	of the work request buffers is decided when the link is allocated,
+> +	depending on the workload it can a bottleneck in a sense that threads
 
-Just briefly described about the option.
+missing 'be' or 'become'           here^^
 
-Signed-off-by: Cryolitia PukNgae <cryolitia@uniontech.com>
----
- Documentation/sound/alsa-configuration.rst | 108 ++++++++++++++++++++---------
- 1 file changed, 75 insertions(+), 33 deletions(-)
+> +	have to wait for work request buffers to become available. Before the
+> +	introduction of this control the maximal number of work request buffers
+> +	available on the send path used to be hard coded to 16. With this control
+> +	it becomes configurable. The acceptable range is between 2 and 2048.
+> +
+> +	Please be aware that all the buffers need to be allocated as a physically
+> +	continuous array in which each element is a single buffer and has the size
+> +	of SMC_WR_BUF_SIZE (48) bytes. If the allocation fails we give up much
+> +	like before having this control.
+> +
+> +	Default: 16
+> +
+> +smcr_max_recv_wr - INTEGER
+> +	So called work request buffers are SMCR link (and RDMA queue pair) level
+> +	resources necessary for performing RDMA operations. Since up to 255
+> +	connections can share a link group and thus also a link and the number
+> +	of the work request buffers is decided when the link is allocated,
+> +	depending on the workload it can a bottleneck in a sense that threads
 
-diff --git a/Documentation/sound/alsa-configuration.rst b/Documentation/sound/alsa-configuration.rst
-index a2fb8ed251dd0294e7a62209ca15d5c32c6adfae..0a4eaa7d66ddd05e7c7378596a351bb6ea17f9ba 100644
---- a/Documentation/sound/alsa-configuration.rst
-+++ b/Documentation/sound/alsa-configuration.rst
-@@ -2297,39 +2297,81 @@ skip_validation
-     of the unit descriptor instead of a driver probe error, so that we
-     can check its details.
- quirk_flags
--    Contains the bit flags for various device specific workarounds.
--    Applied to the corresponding card index.
--
--        * bit 0: Skip reading sample rate for devices
--        * bit 1: Create Media Controller API entries
--        * bit 2: Allow alignment on audio sub-slot at transfer
--        * bit 3: Add length specifier to transfers
--        * bit 4: Start playback stream at first in implement feedback mode
--        * bit 5: Skip clock selector setup
--        * bit 6: Ignore errors from clock source search
--        * bit 7: Indicates ITF-USB DSD based DACs
--        * bit 8: Add a delay of 20ms at each control message handling
--        * bit 9: Add a delay of 1-2ms at each control message handling
--        * bit 10: Add a delay of 5-6ms at each control message handling
--        * bit 11: Add a delay of 50ms at each interface setup
--        * bit 12: Perform sample rate validations at probe
--        * bit 13: Disable runtime PM autosuspend
--        * bit 14: Ignore errors for mixer access
--        * bit 15: Support generic DSD raw U32_BE format
--        * bit 16: Set up the interface at first like UAC1
--        * bit 17: Apply the generic implicit feedback sync mode
--        * bit 18: Don't apply implicit feedback sync mode
--        * bit 19: Don't closed interface during setting sample rate
--        * bit 20: Force an interface reset whenever stopping & restarting
--          a stream
--        * bit 21: Do not set PCM rate (frequency) when only one rate is
--          available for the given endpoint.
--        * bit 22: Set the fixed resolution 16 for Mic Capture Volume
--        * bit 23: Set the fixed resolution 384 for Mic Capture Volume
--        * bit 24: Set minimum volume control value as mute for devices
--          where the lowest playback value represents muted state instead
--          of minimum audible volume
--        * bit 25: Be similar to bit 24 but for capture streams
-+    The option provides a refined and flexible control for applying quirk
-+    flags.  It allows to specify the quirk flags for each device, and can
-+    be modified dynamically via sysfs.
-+    The old usage accepts an array of integers, each of which applies quirk
-+    flags on the device in the order of probing.
-+    E.g., ``quirk_flags=0x01,0x02`` applies get_sample_rate to the first
-+    device, and share_media_device to the second device.
-+    The new usage accepts a string in the format of
-+    ``VID1:PID1:FLAGS1;VID2:PID2:FLAGS2;...``, where ``VIDx`` and ``PIDx``
-+    specify the device, and ``FLAGSx`` specify the flags to be applied.
-+    ``VIDx`` and ``PIDx`` are 4-digit hexadecimal numbers, and can be
-+    specified as ``*`` to match any value.  ``FLAGSx`` can be a set of
-+    flags given by name, separated by ``|``, or a hexadecimal number
-+    representing the bit flags.  The available flag names are listed below.
-+    An exclamation mark can be prefixed to a flag name to negate the flag.
-+    For example, ``1234:abcd:mixer_playback_min_mute|!ignore_ctl_error;*:*:0x01;``
-+    applies the ``mixer_playback_min_mute`` flag and clears the
-+    ``ignore_ctl_error`` flag for the device 1234:abcd, and applies the
-+    ``skip_sample_rate`` flag for all devices.
-+
-+        * bit 0: ``get_sample_rate``
-+          Skip reading sample rate for devices
-+        * bit 1: ``share_media_device``
-+          Create Media Controller API entries
-+        * bit 2: ``align_transfer``
-+          Allow alignment on audio sub-slot at transfer
-+        * bit 3: ``tx_length``
-+          Add length specifier to transfers
-+        * bit 4: ``playback_first``
-+          Start playback stream at first in implement feedback mode
-+        * bit 5: ``skip_clock_selector``
-+          Skip clock selector setup
-+        * bit 6: ``ignore_clock_source``
-+          Ignore errors from clock source search
-+        * bit 7: ``itf_usb_dsd_dac``
-+          Indicates ITF-USB DSD-based DACs
-+        * bit 8: ``ctl_msg_delay``
-+          Add a delay of 20ms at each control message handling
-+        * bit 9: ``ctl_msg_delay_1m``
-+          Add a delay of 1-2ms at each control message handling
-+        * bit 10: ``ctl_msg_delay_5m``
-+          Add a delay of 5-6ms at each control message handling
-+        * bit 11: ``iface_delay``
-+          Add a delay of 50ms at each interface setup
-+        * bit 12: ``validate_rates``
-+          Perform sample rate validations at probe
-+        * bit 13: ``disable_autosuspend``
-+          Disable runtime PM autosuspend
-+        * bit 14: ``ignore_ctl_error``
-+          Ignore errors for mixer access
-+        * bit 15: ``dsd_raw``
-+          Support generic DSD raw U32_BE format
-+        * bit 16: ``set_iface_first``
-+          Set up the interface at first like UAC1
-+        * bit 17: ``generic_implicit_fb``
-+          Apply the generic implicit feedback sync mode
-+        * bit 18: ``skip_implicit_fb``
-+          Don't apply implicit feedback sync mode
-+        * bit 19: ``iface_skip_close``
-+          Don't close interface during setting sample rate
-+        * bit 20: ``force_iface_reset``
-+          Force an interface reset whenever stopping & restarting a stream
-+        * bit 21: ``fixed_rate``
-+          Do not set PCM rate (frequency) when only one rate is available
-+          for the given endpoint
-+        * bit 22: ``mic_res_16``
-+          Set the fixed resolution 16 for Mic Capture Volume
-+        * bit 23: ``mic_res_384``
-+          Set the fixed resolution 384 for Mic Capture Volume
-+        * bit 24: ``mixer_playback_min_mute``
-+          Set minimum volume control value as mute for devices where the
-+          lowest playback value represents muted state instead of minimum
-+          audible volume
-+        * bit 25: ``mixer_capture_min_mute``
-+          Similar to bit 24 but for capture streams
- 
- This module supports multiple devices, autoprobe and hotplugging.
- 
+same                               here^^
 
--- 
-2.51.0
+[...]
+> @@ -683,6 +678,8 @@ int smc_ib_create_queue_pair(struct smc_link *lnk)
+>  	};
+>  	int rc;
+>  
+> +	qp_attr.cap.max_send_wr = 3 * lnk->lgr->max_send_wr;
+> +	qp_attr.cap.max_recv_wr = lnk->lgr->max_recv_wr;
 
+Possibly:
+
+	cap = max(3 * lnk->lgr->max_send_wr, lnk->lgr->max_recv_wr);
+	qp_attr.cap.max_send_wr = cap;
+	qp_attr.cap.max_recv_wr = cap
+
+to avoid assumption on `max_send_wr`, `max_recv_wr` relative values.
+
+[...]
+> diff --git a/net/smc/smc_sysctl.h b/net/smc/smc_sysctl.h
+> index eb2465ae1e15..8538915af7af 100644
+> --- a/net/smc/smc_sysctl.h
+> +++ b/net/smc/smc_sysctl.h
+> @@ -25,6 +25,8 @@ static inline int smc_sysctl_net_init(struct net *net)
+>  	net->smc.sysctl_autocorking_size = SMC_AUTOCORKING_DEFAULT_SIZE;
+>  	net->smc.sysctl_max_links_per_lgr = SMC_LINKS_PER_LGR_MAX_PREFER;
+>  	net->smc.sysctl_max_conns_per_lgr = SMC_CONN_PER_LGR_PREFER;
+> +	net->smc.sysctl_smcr_max_send_wr = SMCR_MAX_SEND_WR_DEF;
+> +	net->smc.sysctl_smcr_max_recv_wr = SMCR_MAX_RECV_WR_DEF;
+>  	return 0;
+>  }
+>  
+> diff --git a/net/smc/smc_wr.c b/net/smc/smc_wr.c
+> index b04a21b8c511..f5b2772414fd 100644
+> --- a/net/smc/smc_wr.c
+> +++ b/net/smc/smc_wr.c
+> @@ -34,6 +34,7 @@
+>  #define SMC_WR_MAX_POLL_CQE 10	/* max. # of compl. queue elements in 1 poll */
+>  
+>  #define SMC_WR_RX_HASH_BITS 4
+> +
+
+Please avoid unrelated whitespace only changes.
+
+Thanks,
+
+Paolo
 
 
