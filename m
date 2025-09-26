@@ -1,141 +1,112 @@
-Return-Path: <linux-doc+bounces-61907-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-61910-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FAA6BA351A
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Sep 2025 12:16:33 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id B4C51BA353F
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Sep 2025 12:19:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2B2C4561BEE
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Sep 2025 10:16:33 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 11CD81C01D8B
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Sep 2025 10:19:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E88C52EBB92;
-	Fri, 26 Sep 2025 10:16:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B3332EAD16;
+	Fri, 26 Sep 2025 10:19:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WHU4CKYc"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YISELRqU"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFDAB2EB87B;
-	Fri, 26 Sep 2025 10:16:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F0C138DEC;
+	Fri, 26 Sep 2025 10:19:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1758881791; cv=none; b=ss0eUmVJVYZc1MxcFM2rtzuyBAyxHVR9RJRyPPfZDvISuW/m3wmgVYaQnoVTDIY/+l1xSJFEt2VWtncXlRA5cb1cffROkK53v1jMv9WG1/Z4dWDh7YH/qHVi4fHRbQbSvovqKhC7R7JhRdvuBWmPKrUEmlea9AACYDqf4nRBa7s=
+	t=1758881951; cv=none; b=C4/jEdm/ITGcBx2t8SRlBff8zpKEiSsDY4W2SBCSWj1BaExtmHiPDg/gOS9jH9JgFUimLTIbIuYJKJo8MaSoa+fWUMNVY+uGLQbgdIDhv6YSSBaK2V9KRZxJ/wiF51ULH2ZjKx9VeGNeNkshkJn+hOMblRCucmxqhV6e4qDfrXo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1758881791; c=relaxed/simple;
-	bh=qmAx3BU5iYpF0BhCqjMwryZ9h4swiPNSkQhkpvI834A=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=K1qVzUXXt+QHsry6GBuzuopmikdJvS6W4tCd8MS6fzG5euELmCyxPNMJmEFcetH2NG50yRaeEtVuEKYe63DrvUjjkL13PEdxdxITnUBUf56CFILbK0tg/qhlmPtEKhBwzcenJ1MkzjOo7VUklL/ZomCcwAEYTTQEJCwlStLZOKg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WHU4CKYc; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55DD7C4CEF7;
-	Fri, 26 Sep 2025 10:16:31 +0000 (UTC)
+	s=arc-20240116; t=1758881951; c=relaxed/simple;
+	bh=JFDZxhbAOWY6uLKoeoQWYCsOzYG6G0mCmDq0bzhHoIU=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=qpZok1OhCmgrpMUuGiGdQyPzUtrT0DcyMFAIdxNI19SkSvBK20X0sjpjS3xh0wl+oJ5qmtzUid0Yq8ydKp4BGpGo1dSd4DgX41cXz3CwZ1aCdBdKjQFtM2MRbeJwlrMp2K3IwWVaBeJdOOzrmlVns3jeUuhpxJdqo5CRgW6ZYcM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YISELRqU; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BF026C4CEF4;
+	Fri, 26 Sep 2025 10:19:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1758881791;
-	bh=qmAx3BU5iYpF0BhCqjMwryZ9h4swiPNSkQhkpvI834A=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=WHU4CKYcKEJrNeZpNzhUfnHeMgRON0t7giyIYvluFOB0MulNggBwnCXb5jdOp3mB/
-	 Oj6YsxL68tV08KGwtlwMFWG53JottQXEeQZzVTlzPPhHHm8QhUzodNB8JCkh8wWdBh
-	 kcvGm1g4jDsNfcMup8D6jzV0xugfYB9doCoYAKoTaGsw1a2D3Tb44yv0z3d/dCxOWC
-	 pYMEAXglJjvOVhH8Xd+abi/O9QDkVHjaOlY4idD3gGWqHCnhygejR07FIoqz90Zsi+
-	 mmCTvotO6566A7NlNLgbSSZWRc/vOs6laIGNQunkxKNcmoXtGBTkqqP7zw0HXSuKjz
-	 AzFIPRQzHHk7w==
-Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1v25V7-00000005Xoq-1LRq;
-	Fri, 26 Sep 2025 12:16:29 +0200
+	s=k20201202; t=1758881950;
+	bh=JFDZxhbAOWY6uLKoeoQWYCsOzYG6G0mCmDq0bzhHoIU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=YISELRqU8JjUyCu0p7Yr3c4QF9KtW8c6wZLw86zXIvaPqeg+pO5usY2CcVXgTlwoT
+	 uwvLtp2NTUWu+7UKkkAIV+xY+3iFrhAQiIL75ONB2PUVsbsgAhzfmRXbupYmpQH1Yg
+	 gHpVhcYjilpblF0ZzAsT3hoDni0asVkowerZdZK+f1ToXhu9F/SsHj2uC2oPvzVYSb
+	 gfa9UqQMez+spLESq/jJ7Q8jMtpLZ3RrONrbhXDY1oRswMQzY5piutWo0ebPQAZ9j1
+	 yzm8F7nIugdb8++8TIorcZgu85WSlcVWHTSPwdi61azQkBISex0po77uEzjWsQLRD+
+	 yv3sR3Q4k7VOA==
+Date: Fri, 26 Sep 2025 12:19:05 +0200
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: "Jonathan Corbet" <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	"Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-	"Randy Dunlap" <rdunlap@infradead.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 2/2] docs: Makefile: avoid a warning when using without texlive
-Date: Fri, 26 Sep 2025 12:16:19 +0200
-Message-ID: <e23e03dd41e044d55e4ae24ffd9e1b49e3f2515a.1758881658.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <cover.1758881658.git.mchehab+huawei@kernel.org>
-References: <cover.1758881658.git.mchehab+huawei@kernel.org>
+To: Randy Dunlap <rdunlap@infradead.org>
+Cc: Akira Yokosawa <akiyks@gmail.com>, broonie@kernel.org, corbet@lwn.net,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-next@vger.kernel.org, mchehab@kernel.org
+Subject: Re: linux-next: Tree for Sep 24 (htmldocs / pdfdocs)
+Message-ID: <20250926121905.385a084d@foz.lan>
+In-Reply-To: <fbfb1bf8-c4b9-4c9b-9d58-84c2dda22649@infradead.org>
+References: <e7c29532-71de-496b-a89f-743cef28736e@infradead.org>
+	<3666a4ec-ef29-4342-b3aa-8c602c258bea@gmail.com>
+	<fbfb1bf8-c4b9-4c9b-9d58-84c2dda22649@infradead.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-As reported by Randy, running make htmldocs on a machine
-without textlive now produce warnings:
+Em Thu, 25 Sep 2025 09:59:45 -0700
+Randy Dunlap <rdunlap@infradead.org> escreveu:
 
-    $ make O=DOCS htmldocs
-    ../Documentation/Makefile:70: warning: overriding recipe for target 'pdfdocs'
-    ../Documentation/Makefile:61: warning: ignoring old recipe for target 'pdfdocs'
+> Hi Akira,
+> 
+> On 9/25/25 7:15 AM, Akira Yokosawa wrote:
+> > Hi Randy,
+> > 
+> > On Wed, 24 Sep 2025 10:54:18 -0700, Randy Dunlap wrote:  
+> >> On 9/24/25 7:41 AM, Mark Brown wrote:  
+> >>> Hi all,
+> >>>
+> >>> There will be no -next releases Tuesday and Wednesday next week, and
+> >>> it's possible I might run out of time on Monday.
+> >>>  
+> >>
+> >> When I run 'make O=DOCS htmldocs', I see these warning messages:
+> >>
+> >> ../Documentation/Makefile:70: warning: overriding recipe for target 'pdfdocs'
+> >> ../Documentation/Makefile:61: warning: ignoring old recipe for target 'pdfdocs'
+> >>
+> >>
+> >> Is this a known issue?  
+> > 
+> > I could reproduce these warnings under containers who have minimal
+> > packages needed for htmldocs *only*.
+> > 
+> > Current "docs-mw" branch doesn't show them.  "build-scripts" is the
+> > one who carries this harmless regression.
+> > 
+> > By "harmless", I mean "pdfdocs" needs texlive packages anyway.  
+> 
+> 
+> Right, I don't have any texlive (or latex or tetex) packages installed.
+> I shouldn't need to since I am not building any pdfdocs, so I
+> shouldn't get these warning messages. But if they go away in the near
+> future, that's great.
 
-That's because the code has now two definitions for pdfdocs in
-case $PDFLATEX command is not found. With the new script, such
-special case is not needed anymore, as the script checks it.
+Just sent the fixes. They are because I forgot to do another cleanup
+at docs Makefile and didn't test on an environment without latex.
 
-Drop the special case. Even after dropping it, on a machine
-without LaTeX, it will still produce an error as expected,
-as running:
+Fix is trivial: just drop the second (unneeded) pdfdocs target.
 
-    $ ./tools/docs/sphinx-build-wrapper pdfdocs
-    Error: pdflatex or latexmk required for PDF generation
 
-does the check. After applying the patch we have:
-
-    $ make SPHINXDIRS=peci htmldocs
-    Using alabaster theme
-    Using Python kernel-doc
-
-    $ make SPHINXDIRS=peci pdfdocs
-    Error: pdflatex or latexmk required for PDF generation
-    make[2]: *** [Documentation/Makefile:64: pdfdocs] Error 1
-    make[1]: *** [/root/Makefile:1808: pdfdocs] Error 2
-    make: *** [Makefile:248: __sub-make] Error 2
-
-Which is the expected behavior.
-
-Reported-by: Randy Dunlap <rdunlap@infradead.org>
-Link: https://lore.kernel.org/linux-doc/e7c29532-71de-496b-a89f-743cef28736e@infradead.org/
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/Makefile | 13 ++++---------
- 1 file changed, 4 insertions(+), 9 deletions(-)
-
-diff --git a/Documentation/Makefile b/Documentation/Makefile
-index c60db1038c9c..f764604fa1ac 100644
---- a/Documentation/Makefile
-+++ b/Documentation/Makefile
-@@ -66,20 +66,15 @@ htmldocs mandocs infodocs texinfodocs latexdocs epubdocs xmldocs pdfdocs linkche
- 		--builddir="$(BUILDDIR)" --deny-vf=$(FONTS_CONF_DENY_VF) \
- 		--theme=$(DOCS_THEME) --css=$(DOCS_CSS) --paper=$(PAPER)
- 
--# Special handling for pdfdocs
--ifneq ($(shell which $(PDFLATEX) >/dev/null 2>&1; echo $$?),0)
--pdfdocs:
--	$(warning The '$(PDFLATEX)' command was not found. Make sure you have it installed and in PATH to produce PDF output.)
--	@echo "  SKIP    Sphinx $@ target."
--endif
- 
--htmldocs-redirects: $(srctree)/Documentation/.renames.txt
--	@tools/docs/gen-redirects.py --output $(BUILDDIR) < $<
--endif # HAVE_SPHINX
-+endif
- 
- # The following targets are independent of HAVE_SPHINX, and the rules should
- # work or silently pass without Sphinx.
- 
-+htmldocs-redirects: $(srctree)/Documentation/.renames.txt
-+	@tools/docs/gen-redirects.py --output $(BUILDDIR) < $<
-+
- refcheckdocs:
- 	$(Q)cd $(srctree);scripts/documentation-file-ref-check
- 
--- 
-2.51.0
-
+Thanks,
+Mauro
 
