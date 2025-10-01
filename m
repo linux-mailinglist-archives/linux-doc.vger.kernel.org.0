@@ -1,80 +1,80 @@
-Return-Path: <linux-doc+bounces-62223-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-62225-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEF6FBB08CA
-	for <lists+linux-doc@lfdr.de>; Wed, 01 Oct 2025 15:44:20 +0200 (CEST)
+Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
+	by mail.lfdr.de (Postfix) with ESMTPS id C1292BB094E
+	for <lists+linux-doc@lfdr.de>; Wed, 01 Oct 2025 15:58:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 296AF1926CD9
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Oct 2025 13:44:43 +0000 (UTC)
+	by sy.mirrors.kernel.org (Postfix) with ESMTPS id E2A497AEBC6
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Oct 2025 13:56:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F1562EF676;
-	Wed,  1 Oct 2025 13:44:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7752D2FCC16;
+	Wed,  1 Oct 2025 13:58:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="d8fVYTZj"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="K1LKbfYf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3502429D270
-	for <linux-doc@vger.kernel.org>; Wed,  1 Oct 2025 13:44:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E50AB2FCBEF
+	for <linux-doc@vger.kernel.org>; Wed,  1 Oct 2025 13:58:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1759326252; cv=none; b=M0eVpS6vnKBHDuUpw2KGcWqsNt0zPEtoazSXCbDiqz2nKuDjxyFjVNF6ycfENzJ3P5SBvG1jm6qe4DSMkSOYiBVhr84oakk52KqBIodUxluu9xHbZqHeGUwa68QYpwFmu0mDrqRZhqqNNZX4e5SSxkq6qtL7JHPGzIZ40QrY62I=
+	t=1759327101; cv=none; b=S5dVkECJqYtsJ5ihuBFS7dzeyntMLsKu23HzqAxDTZjWouejh1/fFPX9xca4IB8NrEHGX13UvOmhC3WEzvFT4KwAg5Ptp2RTej+8XW7XLCWiSHHMuwuTcRFzVlV89162u1kqyAitYGRfr3I5P2rU2n6kvJEnt7IsmLhufOiwTIs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1759326252; c=relaxed/simple;
-	bh=zZG41IIPpecftPSR/BMuKoOK5Drk5rCESRq1EzmErag=;
+	s=arc-20240116; t=1759327101; c=relaxed/simple;
+	bh=AErz9DRE4zvoV1QAhCMy5Ce5EIwMk6a2u/GPbn+LmQ4=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qdLwZDAdYgbYtkfdV9De2TlS5zSb5/VxKKvaoWS8L+bJSljfXvwP98ME0d4J1TiJzg9FnKd7PPJ138C+ZPmheZ9Xr1CNwt5mQ+ZRru2RS7xvB3bHAjc2wnLtFNDKIPzAixxhREt0tp3dqQINwq6Mpo8m5V9cXQ8LDxGk2/cTFc4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=d8fVYTZj; arc=none smtp.client-ip=209.85.128.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-46b303f755aso63942215e9.1
-        for <linux-doc@vger.kernel.org>; Wed, 01 Oct 2025 06:44:08 -0700 (PDT)
+	 In-Reply-To:Content-Type; b=EY6gUYbwAfKdoZ4S2w+z3XA9/ibdrI+SHDQVK19rIQp02WCxzA0cdRxNsT3XRX8d59eNSrmPNFROscduaUqoLxXK/nSD+RVqO6eevq2Q8KUu+dEgCjsyAEg6kq+pgZRIYq50YZO8+UKMScQQpih2LgAzDD9ZTh7hPjLzccyvsT4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=K1LKbfYf; arc=none smtp.client-ip=209.85.210.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-77f605f22easo6665021b3a.2
+        for <linux-doc@vger.kernel.org>; Wed, 01 Oct 2025 06:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1759326247; x=1759931047; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1759327099; x=1759931899; darn=vger.kernel.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=sk9/01sjLhSDKrsz2vI2OXUeP/F7c38Pwscg4TdgVDU=;
-        b=d8fVYTZjCsKyvZALElY1lsLUXATVDT8AzqlDb4am5IdPnsgxUl95tP2R2i8hr2f8ry
-         EL2Cu8Woz6/bBb2oyMaI8PuUiwujxLFxSV+qwIwyRPCaul9fG6HzWSJOxHnsoFIXYtes
-         o6LZXUWcpJDxvwq7VTYhmHtrze+Djf20PEXQINA1p/rcQI+/NmA594cIZ0/YX5GOXlax
-         ULJAisesNkNHdaNz6BDGQAxibpaYSKTGbOBoGIL+GrbGpkPrQgK4RqT3k7YgBzGCcnDH
-         pCDASkbL7Xj5lnqXgV/Pq8b89j0J4mv7kyXG0euLKbTeQeqgRbIQQkW2zX8BgichHeMT
-         jFzw==
+        bh=cHICQ9kYf8w+w6O3p0zJJOxecrN+M89vOZ1OdrVwWEc=;
+        b=K1LKbfYfUGXFWYvfX9kmYN4cWonxTWwRsQHoZ/jqJmu2PUT3AZ+tIn6EUVgftXh8tB
+         4WXSJ2H2fGyw4k2cz5iknj4W9+t4WvIgkeQAZChB4l+giybjKfJDerXnTOpfPNbAglXC
+         tj82md1n4DRn171jFJGeQs6jGmklWW4Rlg3Gy0dViy+sW44/D0J862hcZaf6X+V6ysu3
+         /6e1ag5aAFU+CM4J3aewn6HBL74th60oJYAGw2MiR7R6jLXlkQE+UzN2Ptj9lcCX1JvD
+         uc5cFR9Efhdo1E+n0KB9ZzUz9vPQ6CHBWFSUY4ttEqc7yeeEeEIHvmkVNPrh64/CGTNt
+         z51g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759326247; x=1759931047;
+        d=1e100.net; s=20230601; t=1759327099; x=1759931899;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=sk9/01sjLhSDKrsz2vI2OXUeP/F7c38Pwscg4TdgVDU=;
-        b=RlGsCfw0+/0qHwRuU9p8SyykRAv1OIGngKScDuGbz3aBTQM65ciILJlmkvrqwPr/7X
-         JTUnfpQr91OOk4GtV0mdI4BXStoGtaM0lCCpFGF398Iy4vQtO2POuZ7SvpuFAlv7w7WG
-         M0kBoCr/v35uLOlqXr8p+lrJOYt2qiZAga5l9WuxgqasIswn2l/604aZhYzSF2mL7EXm
-         gchaWoenO8JfWU0re70UExj22RwYY+9Fz5fuqtT6R3IHMYJB5Q3zsyTuABhWtr5J+Ohk
-         dW3S6IaKN/xdGlv8XpBn4YyaRhsU3qOB0A3uDFdJ2tXQcxlZj8UahK5518Vtr608iUnW
-         2RWQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVGN7Rr584iOnqewd8O5huGrnlU5a8rHwM/X5LEz8w04L0/2eg1P43tM2QV2HoXBia8yn/UcFX/sgs=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxVpvX0kDX8w/IFTyW4K+Q+ljHgWndnCLofD8iaG9a75Do+YCcp
-	JPmjG9KQa86OW5GuM/PZnn+b6Ool/O51meuQEnTTa9nFa4JAD5/HGOxV610bZsYaD28=
-X-Gm-Gg: ASbGncvM0qHboc9z/uPcMHajNS6ZzEnNs+x+JP7Cdh633vuHklgsM7mXC5qOE5Tn0wd
-	FIZVosnlW/6Xy5mssywW+OHqRWH9II9kKADjX/JIHZ/e6FoCUqVoyajnNcBLI5g0WTIPC/YCEku
-	J4SVxCLLg1yTiRSZ5poU2t0nuT1WoLWQmZFMCAWASZO7pqlFJkIsklDRyv0pA9j+QRJrjCoJZ4l
-	gljFBxOjLxd+qVT0lSARlIellbUFCPnI4UAAVBIBW9r/I23P26RCCL/dD9/l80RSMjTtd2iezO2
-	rpteBcYOlUV2jHYOO3QwqmWj3j5D62On//7clW5/j9a2CY9wZKj8QzccjV5y1WNcSFuuVUEZS33
-	R4fzPMC/YLFEkr58RcDhHQwaLuGQlN9fanlalMSgbeFwQEWSgHNDxFumr48bCtfY=
-X-Google-Smtp-Source: AGHT+IEWE5njzkAVMh0iSC7VPEQmyUpucrPcJT/AcJg5bY23uL7H8GGcf4J5p6a5shSngpQ//r/sAg==
-X-Received: by 2002:a05:600c:c162:b0:46e:49dd:525e with SMTP id 5b1f17b1804b1-46e612bc070mr25722595e9.21.1759326247407;
-        Wed, 01 Oct 2025 06:44:07 -0700 (PDT)
-Received: from [192.168.1.3] ([185.48.76.109])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-46e6199250bsm41317945e9.3.2025.10.01.06.44.06
+        bh=cHICQ9kYf8w+w6O3p0zJJOxecrN+M89vOZ1OdrVwWEc=;
+        b=pvpliesN/kNC829Yv4lK3Gd1YtadT54uN1VAsR4VREnozxHxlr3DmtjXI394Vw80G1
+         3IvWGLlaBZSrtsEWA6H3p3400zwR5IHNPHGdFF7EaQQtiAPkzxmUTyOLwx32dd60IRs6
+         JCmv0Rx9o4rAHPEjQTjf8FGyp0kHcj8nGjQH8dkNRHhaNFq5hw8rTV9zMH9h4u7FhOJn
+         YTTDguXb6ofOyswaPp348p+ODMdJWsQGSqjDLmqqTiplAwlcO4vALSn7qDPDXdR28yW2
+         DQUIaKJXLVX/idDX7MHFxiNFu1iV8p0aW4kSO+EPr20p7nijBf6sIp2msCOkVoa7UNoh
+         L/wg==
+X-Forwarded-Encrypted: i=1; AJvYcCVQ+w5TV4LBTZ8NL3GwZ97SdIGhbemqTb18DY9+A/9nS46m/vXTOSQ3xwEfo6Par1j1DcVIzrjZ3po=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwzHDgF1Iv5vIzEsgn0dbzhHudEbyGOT03JnFPdsOVPtOq1YgkH
+	lqVtcWvIoNUDlGAYpLoa5+MV5CFMRz47UCUnSIfYvv4WSdUq14KXpTh4B8zX94m8
+X-Gm-Gg: ASbGncs07SAUjT3rq8s47eLR/Iy+7Us+3zxKLiLbgibj3pESGlD0cw54zfiiilqkS0Q
+	SEcO55zA+5hsw5PKeCnaNmmj3+1YWa2V92o9rP2K2k87dfs3RAdXmnxsNMQ1bkux4o+SX/En/N2
+	ef0aeabDJEFcDrtmjZuykegUNbBBvFmho7Ugff3gs9KaQbnWVw54mkDmzbeOHkVDsTV779bcu7o
+	01FeIgoGfPovMkEz5xYuzKsDCVkuSvAa5mQPeTJS3P4SnuD0Tg/H2nDIcl+DqalRPYC+1gJ8QHR
+	NYcQdsTSDk1fXvfHHoYtLF4qfVaAmYHj8LnfqYru8XKvVEEsqmSfOq/d39j7PcsWvZL2/FAEd53
+	qiyqiDZJSt8nxF6sgPCVBL88UKFBuTWhehqspLLFNKWHya4tZ7rnMC8s4TXasM0IZYwqpHA==
+X-Google-Smtp-Source: AGHT+IEVrUrSHnJxKWleti3ip/7ssnZbESbu792noCsfEcKl9fEdE1xbBALgSKgo50vIeSR68LO4xQ==
+X-Received: by 2002:a17:90b:2249:b0:330:852e:2bcc with SMTP id 98e67ed59e1d1-339a6f38013mr4558738a91.21.1759327099110;
+        Wed, 01 Oct 2025 06:58:19 -0700 (PDT)
+Received: from [10.0.2.15] ([157.50.95.38])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3399be87425sm2129797a91.1.2025.10.01.06.58.13
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 01 Oct 2025 06:44:06 -0700 (PDT)
-Message-ID: <708a5bbd-2bad-4f94-8fd1-6bd10825ba71@linaro.org>
-Date: Wed, 1 Oct 2025 14:44:06 +0100
+        Wed, 01 Oct 2025 06:58:18 -0700 (PDT)
+Message-ID: <425ef7bd-011c-4b05-99fe-2b0e3313c3ce@gmail.com>
+Date: Wed, 1 Oct 2025 19:19:13 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -82,90 +82,45 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/6] coresight: Add format attribute for setting the
- timestamp interval
-To: Leo Yan <leo.yan@arm.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
- Mike Leach <mike.leach@linaro.org>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jonathan Corbet <corbet@lwn.net>, coresight@lists.linaro.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20250814-james-cs-syncfreq-v2-0-c76fcb87696d@linaro.org>
- <20250814-james-cs-syncfreq-v2-5-c76fcb87696d@linaro.org>
- <20250930151414.GK7985@e132581.arm.com>
- <3a731a9e-0621-42b6-b7fc-4b0fd9b7da6e@linaro.org>
- <20251001132815.GN7985@e132581.arm.com>
+Subject: Re: [PATCH] fs: doc: Fix typos
+To: Carlos Maiolino <cem@kernel.org>
+Cc: Kent Overstreet <kent.overstreet@linux.dev>,
+ Jonathan Corbet <corbet@lwn.net>, David Howells <dhowells@redhat.com>,
+ Paulo Alcantara <pc@manguebit.org>, Alexander Viro
+ <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>,
+ Jan Kara <jack@suse.cz>, linux-bcachefs@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-xfs@vger.kernel.org, netfs@lists.linux.dev,
+ linux-fsdevel@vger.kernel.org,
+ linux-kernel-mentees@lists.linuxfoundation.org, skhan@linuxfoundation.org,
+ david.hunter.linux@gmail.com
+References: <DrG_H24-pk-ha8vkOEHoZYVXyMFA60c_g4l7cZX4Z7lnKQIM4FjdI_qS-UIpFxa-t7T_JDAOSqKjew7M0wmYYw==@protonmail.internalid>
+ <20251001083931.44528-1-bhanuseshukumar@gmail.com>
+ <kp4tzf7hvtorldoktxelrvway6w4v4idmu5q3egeaacs7eg2tz@dovkk323ir3b>
 Content-Language: en-US
-From: James Clark <james.clark@linaro.org>
-In-Reply-To: <20251001132815.GN7985@e132581.arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Bhanu Seshu Kumar Valluri <bhanuseshukumar@gmail.com>
+In-Reply-To: <kp4tzf7hvtorldoktxelrvway6w4v4idmu5q3egeaacs7eg2tz@dovkk323ir3b>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-
-
-On 01/10/2025 2:28 pm, Leo Yan wrote:
-> On Wed, Oct 01, 2025 at 01:40:37PM +0100, James Clark wrote:
-> 
-> [...]
-> 
->>>> @@ -103,6 +111,9 @@ static struct attribute *etm_config_formats_attr[] = {
->>>>    	&format_attr_configid.attr,
->>>>    	&format_attr_branch_broadcast.attr,
->>>>    	&format_attr_cc_threshold.attr,
->>>> +#if IS_ENABLED(CONFIG_CORESIGHT_SOURCE_ETM4X)
->>>> +	&format_attr_ts_level.attr,
->>>> +#endif
->>>
->>> By using .visible() callback for attrs, we can improve a bit code
->>> without spreading "#ifdef IS_ENABLED()" in this file. E.g.,
->>>
->>>      static umode_t format_attr_is_visible(struct kobject *kobj,
->>>                                      struct attribute *attr, int n)
->>>      {
->>>           struct device *dev = kobj_to_dev(kobj);
->>>
->>>           if (attr == &format_attr_ts_level.attr &&
->>> 	    !IS_ENABLED(CONFIG_CORESIGHT_SOURCE_ETM4X))
->>>                   return 0;
->>>
->>>           return attr->mode;
->>>      }
->>>
->>> Otherwise, LGTM:
->>>
->>> Reviewed-by: Leo Yan <leo.yan@arm.com>
->>>
+On 01/10/25 17:32, Carlos Maiolino wrote:
+> On Wed, Oct 01, 2025 at 02:09:31PM +0530, Bhanu Seshu Kumar Valluri wrote:
+>> Fix typos in doc comments
 >>
->> Unfortunately that won't work because you'd have to always include
->> coresight-etm4x.h. This file is compiled for both arm32 and arm64 so it
->> would break the arm32 build.
->>
->> I could define the TTR_CFG_FLD_ts_level_* stuff somewhere else but then it
->> becomes messier than just doing the #ifdefs here.
+>> Signed-off-by: Bhanu Seshu Kumar Valluri <bhanuseshukumar@gmail.com>
 > 
-> ATTR_CFG_FLD_ts_level_* is only used in coresight-etm4x-core.c, it is not
-> used in coresight-etm-perf.c. Thus, we don't need to include
-> coresight-etm4x.h in coresight-etm-perf.c. Do I miss anything?
-
-Yes, GEN_PMU_FORMAT_ATTR() uses them but it makes it hard to see.
-
+> Perhaps would be better to split this into subsystem-specific patches?
 > 
-> A similiar case is the attr 'cc_threshold' is only used by ETMv4, it is
-> exported always. It is not bad for me to always expose these attrs but
-> in the are ignored in the ETMv3 driver - so we even don't need to
-> bother adding .visible() callback.
+> This probably needs to be re-sent anyway as bcachefs was removed from
+> mainline.
 > 
+I just did a google search and understood about frozen state of bcachefs
+in linux kernel since 6.17 release onward. It is going to be maintained 
+externally. 
 
-I disagree with always showing them. I think they should be hidden if 
-they're not used, or at least return an error to avoid confusing users. 
-It also wastes config bits if they're allocated but never used.
+Thanks for your comment. I will resend the patch excluding bcachefs.
 
-Either way, this was done because of the header mechanics which can only 
-be avoided by adding more changes than just the #ifdefs. There are also 
-already ETM4 #ifdefs in the file.
+Thanks.
 
-> Thanks,
-> Leo
 
 
