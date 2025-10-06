@@ -1,159 +1,100 @@
-Return-Path: <linux-doc+bounces-62485-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-62488-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 773A9BBE9D7
-	for <lists+linux-doc@lfdr.de>; Mon, 06 Oct 2025 18:18:55 +0200 (CEST)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id C0ED5BBEA6B
+	for <lists+linux-doc@lfdr.de>; Mon, 06 Oct 2025 18:31:43 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 324143BC95D
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Oct 2025 16:18:54 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 4898B4E5100
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Oct 2025 16:31:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A7C71F4717;
-	Mon,  6 Oct 2025 16:18:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AB4142D4B5F;
+	Mon,  6 Oct 2025 16:31:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="VKxnlQon"
+	dkim=pass (1024-bit key) header.d=onurozkan.dev header.i=@onurozkan.dev header.b="N9UIorxy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from forward204d.mail.yandex.net (forward204d.mail.yandex.net [178.154.239.217])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA0351E5705
-	for <linux-doc@vger.kernel.org>; Mon,  6 Oct 2025 16:18:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D63E81C84C0;
+	Mon,  6 Oct 2025 16:31:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=178.154.239.217
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1759767518; cv=none; b=EIKJnN0auN6MHzHVHufZIlpe8EvnLdWhAVQ0PU+/ld9Qr9cq46Rcu9zLWQr/KuitLOBo7bWUdysj9qHobAQSs8Tg13n4qBwI1aFEsSutpZvPEASBUiDJpbCtVjsb09UMWFsiLafMO6yTdP/qgCoiQO6j7J9oP9GsSjaj2ELJCo8=
+	t=1759768298; cv=none; b=P4/j2559cRF5I/e+bia0wPTRENChh2KIhAJThsnm8q5iZFHzqLXp9cKJEoYcGZ32J2NgD77FlL2Aksawj1ebNYo6paSQvfBuMPLiJ+ai8jdx6UrBdT6H1h2ReOaRZT9uDW33+gXxO94xft6+YthZuLTroKhcjPRgzzHm0J8MXZs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1759767518; c=relaxed/simple;
-	bh=Qz9D6w3G/yjpN7oFudrZ5DCv7qahcZFISREkkOiWrf8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=goBmlau6GQXRFkrl2Rx1ivvHihX+mwKWdaODbvGTV50A5nMaQHh7alcYvtABpW0/B8O2NeRDFCZDWA9E/ay7D+5A4NRPFFWCCcm3OHw8y6qyAC1GwbcOK5hZc+M1sqhZRDY4oe7z31JB8D1GOvlQeZytSvnIfoa07gqJz/xZ4zo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=VKxnlQon; arc=none smtp.client-ip=209.85.160.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-qt1-f182.google.com with SMTP id d75a77b69052e-4e6d9573c2aso10699571cf.3
-        for <linux-doc@vger.kernel.org>; Mon, 06 Oct 2025 09:18:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1759767514; x=1760372314; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XrjZ2N3nijkKvhfmQO1vA7QLR5P8LLIRs7v5R7YmxE0=;
-        b=VKxnlQonDU17q6xDTEbfLgRYJ+JTaCw5HtH8g+bESBjpYEk2C9DC3hHwnntK3WJk/S
-         2cp2hYKdkul/t9YZsAH7knaUSNCfjIu9aahu6mtuB0LfLfc5jlD3QS2E/c/oJTRH9X5/
-         W/tougYGwUK6/pLT0sX0zvBkKVYRJFJzrX0xKDHX9H/ch2fPrDSwTvs3HHnuvK1Y7yQM
-         M4RGvtAWl3DwYiPBesEhuN97tpbhLOUqYxVdlbiBeljlK1en4sSOZ9Iq+qtcDEY1p74U
-         kQbnNPVWRxMSAhooqBAru8reNiFSoQlPZghLznA59oQkzSIQ2W5DDBo+TtDBhQWkuZD3
-         b28w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1759767514; x=1760372314;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=XrjZ2N3nijkKvhfmQO1vA7QLR5P8LLIRs7v5R7YmxE0=;
-        b=EjLEHW0Z1aGS1YsBGGjpm1BgsNwa2L9N2cK5fu9UC2BCg4xgLtPIzArI+EvxpVPhJc
-         Keq2RRg3LtOu3I65HETS8kRmPwx9WxvhK/IxmRJ7TcN7QqKIA453+Mwh1NshhS/ipmdo
-         itUwu5dANNBkWUPJ3t7P9epWnanxJAeCzdLdazOG/5aYqLufw5cnWwIj85NIcsgk/DdH
-         Z9gIn3iuE8h1z700qaFo/BlwWkQKTjnRGWZ+xVFhn5mvqF29D40v634+ccsFxfK5RdJD
-         SmL1dwArQAGsAaJ3ucy5WYSwclGmzfseoz0Fa+GAO3x6mcnHion4KmLEtSaUmf5PPeWB
-         Kjhw==
-X-Forwarded-Encrypted: i=1; AJvYcCV2NWXqYNGrZ4AzOVb+i0RFLIYe0a4WV/jkQ7ZOv4eirLbghZtcNYm4+ai2kG7ma2I73BlZVAhxQhM=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx7R1B8LMnk8NwcQSsdOoZcGW9gAYtLm5kWgqc9K1FJwxY5rMqi
-	Rb2RnK8IvlRHyl1UZQLFjv1wuEWYRbOC4RQuNhZlaCE+Jxjp9Mcs9WvCUh4pnBbVdG4EHeO6dnP
-	jch1Nmp4nofNe3agUjxFY6MZTpPb5CSxyC4Z/TmnRPQ==
-X-Gm-Gg: ASbGncuH15wShtDRt0FsOZ8GyDQGlSomIvuioof4ZbRllxvsXFZVPf0912kHeR4Jbrd
-	MaUXA9cx7Tq6PSt3b3QQ4AruxSeMKpyl4wKJCo80aP1krvk6ueGpeGCz9dF/qAtGamHvH1BItzm
-	BqSRx6G6uQPjVsuu2jbOfYMBNV+r40L/q1w1q4bzcqmD/1JyVYJGqFn22TZMq4OmxOGI+s56FMz
-	U1MAKvXYnzBSJX77cSYyrgk3uRAcQUetBey3vY=
-X-Google-Smtp-Source: AGHT+IFwm4V/zCKBkbgm7pfKIp77PJD1NOmB2z+7xVCEcG6LKB3NFoKIKgya5mufGjYCV3AhGt61yn25CRIzX8BM9QU=
-X-Received: by 2002:ac8:5fc5:0:b0:4b7:a7b6:eafc with SMTP id
- d75a77b69052e-4e576a5c404mr198174771cf.13.1759767511840; Mon, 06 Oct 2025
- 09:18:31 -0700 (PDT)
+	s=arc-20240116; t=1759768298; c=relaxed/simple;
+	bh=Pj5FBmURN0MJhid2NpmmyCY7G+N+6opOsOnbXyIW6es=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Bheho/sDB1vP1LeslIjt1hf2PCqehylpRaZ74wtIjjR1beRSziBGtb9G0pTAQmwayaJC60DnVLs0lkmK6xNQBDeU+K6OkATd6tm16tpVt9RUIHqQ+OAyyGeHSZGMSGduVwE8aLuNRoWPqBrsymZnGNfypvr1tmbJiRpY3PXCmx4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=onurozkan.dev; spf=pass smtp.mailfrom=onurozkan.dev; dkim=pass (1024-bit key) header.d=onurozkan.dev header.i=@onurozkan.dev header.b=N9UIorxy; arc=none smtp.client-ip=178.154.239.217
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=onurozkan.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=onurozkan.dev
+Received: from forward102d.mail.yandex.net (forward102d.mail.yandex.net [IPv6:2a02:6b8:c41:1300:1:45:d181:d102])
+	by forward204d.mail.yandex.net (Yandex) with ESMTPS id 901E1854E8;
+	Mon, 06 Oct 2025 19:31:28 +0300 (MSK)
+Received: from mail-nwsmtp-smtp-production-main-80.klg.yp-c.yandex.net (mail-nwsmtp-smtp-production-main-80.klg.yp-c.yandex.net [IPv6:2a02:6b8:c43:4985:0:640:840f:0])
+	by forward102d.mail.yandex.net (Yandex) with ESMTPS id A94E9C008C;
+	Mon, 06 Oct 2025 19:31:19 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-80.klg.yp-c.yandex.net (smtp/Yandex) with ESMTPSA id QUnb3i1LqqM0-j4CcWPi5;
+	Mon, 06 Oct 2025 19:31:18 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=onurozkan.dev;
+	s=mail; t=1759768278;
+	bh=b6RZui74oJI0+b+gAS9vAzyvMEg16T7qvnhR/fBExVc=;
+	h=Message-ID:Date:Cc:Subject:To:From;
+	b=N9UIorxyEw8zo6Z1grbW5yIkLZBDPHbx+hqs1uc3GOvS9AA6IReDd7bEF+HY2psi5
+	 bnOE64nTfh1TDtoL6npR65vC3JL3qaxEunfNrrVfUNh8YLroRPwm/SrZpnRhWWZRtr
+	 ZfOL8UgLvaULDfEWbdPJoCNUZnFBwSWjZMzWANuM=
+Authentication-Results: mail-nwsmtp-smtp-production-main-80.klg.yp-c.yandex.net; dkim=pass header.i=@onurozkan.dev
+From: =?UTF-8?q?Onur=20=C3=96zkan?= <work@onurozkan.dev>
+To: rust-for-linux@vger.kernel.org
+Cc: ojeda@kernel.org,
+	alex.gaynor@gmail.com,
+	boqun.feng@gmail.com,
+	gary@garyguo.net,
+	bjorn3_gh@protonmail.com,
+	lossin@kernel.org,
+	aliceryhl@google.com,
+	tmgross@umich.edu,
+	dakr@kernel.org,
+	linux-kernel@vger.kernel.org,
+	acourbot@nvidia.com,
+	airlied@gmail.com,
+	simona@ffwll.ch,
+	maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	tzimmermann@suse.de,
+	corbet@lwn.net,
+	lyude@redhat.com,
+	linux-doc@vger.kernel.org,
+	=?UTF-8?q?Onur=20=C3=96zkan?= <work@onurozkan.dev>
+Subject: [PATCH 0/3] rust: xarray: abstract `xa_alloc` and `xa_alloc_cyclic`
+Date: Mon,  6 Oct 2025 19:30:21 +0300
+Message-ID: <20251006163024.18473-1-work@onurozkan.dev>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250929010321.3462457-1-pasha.tatashin@soleen.com>
- <20250929010321.3462457-4-pasha.tatashin@soleen.com> <mafs0bjmkp0gb.fsf@kernel.org>
-In-Reply-To: <mafs0bjmkp0gb.fsf@kernel.org>
-From: Pasha Tatashin <pasha.tatashin@soleen.com>
-Date: Mon, 6 Oct 2025 12:17:53 -0400
-X-Gm-Features: AS18NWC8dVdnh9WrIeR8a0qx05q3jEVozl0VBzvOu40iLLzMHk8IAd4vKASusLs
-Message-ID: <CA+CK2bBS-v_djpvw3v-xumPizzmOaiPsuPpoxnSUub-LocghjQ@mail.gmail.com>
-Subject: Re: [PATCH v4 03/30] kho: drop notifiers
-To: Pratyush Yadav <pratyush@kernel.org>
-Cc: jasonmiu@google.com, graf@amazon.com, changyuanl@google.com, 
-	rppt@kernel.org, dmatlack@google.com, rientjes@google.com, corbet@lwn.net, 
-	rdunlap@infradead.org, ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com, 
-	ojeda@kernel.org, aliceryhl@google.com, masahiroy@kernel.org, 
-	akpm@linux-foundation.org, tj@kernel.org, yoann.congal@smile.fr, 
-	mmaurer@google.com, roman.gushchin@linux.dev, chenridong@huawei.com, 
-	axboe@kernel.dk, mark.rutland@arm.com, jannh@google.com, 
-	vincent.guittot@linaro.org, hannes@cmpxchg.org, dan.j.williams@intel.com, 
-	david@redhat.com, joel.granados@kernel.org, rostedt@goodmis.org, 
-	anna.schumaker@oracle.com, song@kernel.org, zhangguopeng@kylinos.cn, 
-	linux@weissschuh.net, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-mm@kvack.org, gregkh@linuxfoundation.org, tglx@linutronix.de, 
-	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, 
-	hpa@zytor.com, rafael@kernel.org, dakr@kernel.org, 
-	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com, 
-	myungjoo.ham@samsung.com, yesanishhere@gmail.com, Jonathan.Cameron@huawei.com, 
-	quic_zijuhu@quicinc.com, aleksander.lobakin@intel.com, ira.weiny@intel.com, 
-	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de, 
-	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com, 
-	stuart.w.hayes@gmail.com, lennart@poettering.net, brauner@kernel.org, 
-	linux-api@vger.kernel.org, linux-fsdevel@vger.kernel.org, saeedm@nvidia.com, 
-	ajayachandra@nvidia.com, jgg@nvidia.com, parav@nvidia.com, leonro@nvidia.com, 
-	witu@nvidia.com, hughd@google.com, skhawaja@google.com, chrisl@kernel.org, 
-	steven.sistare@oracle.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 6, 2025 at 10:30=E2=80=AFAM Pratyush Yadav <pratyush@kernel.org=
-> wrote:
->
-> Hi Pasha,
->
-> On Mon, Sep 29 2025, Pasha Tatashin wrote:
->
-> > From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
-> >
-> > The KHO framework uses a notifier chain as the mechanism for clients to
-> > participate in the finalization process. While this works for a single,
-> > central state machine, it is too restrictive for kernel-internal
-> > components like pstore/reserve_mem or IMA. These components need a
-> > simpler, direct way to register their state for preservation (e.g.,
-> > during their initcall) without being part of a complex,
-> > shutdown-time notifier sequence. The notifier model forces all
-> > participants into a single finalization flow and makes direct
-> > preservation from an arbitrary context difficult.
-> > This patch refactors the client participation model by removing the
-> > notifier chain and introducing a direct API for managing FDT subtrees.
-> >
-> > The core kho_finalize() and kho_abort() state machine remains, but
-> > clients now register their data with KHO beforehand.
-> >
-> > Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
-> > Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
->
-> This patch breaks build of test_kho.c (under CONFIG_TEST_KEXEC_HANDOVER):
->
->         lib/test_kho.c:49:14: error: =E2=80=98KEXEC_KHO_ABORT=E2=80=99 un=
-declared (first use in this function)
->            49 |         case KEXEC_KHO_ABORT:
->               |              ^~~~~~~~~~~~~~~
->         [...]
->         lib/test_kho.c:51:14: error: =E2=80=98KEXEC_KHO_FINALIZE=E2=80=99=
- undeclared (first use in this function)
->            51 |         case KEXEC_KHO_FINALIZE:
->               |              ^~~~~~~~~~~~~~~~~~
->         [...]
->
-> I think you need to update it as well to drop notifier usage.
+Initial version of xa_alloc and xa_alloc_cyclic abstraction
+patch series.
 
-Yes, thank you Pratyush. I missed this change in my patch.
+Onur Özkan (3):
+  rust: xarray: abstract `xa_alloc`
+  rust: xarray: abstract `xa_alloc_cyclic`
+  remove completed task from nova-core task list
 
-Pasha
+ Documentation/gpu/nova/core/todo.rst |  8 ---
+ rust/kernel/xarray.rs                | 82 ++++++++++++++++++++++++++++
+ 2 files changed, 82 insertions(+), 8 deletions(-)
+
+--
+2.51.0
+
 
