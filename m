@@ -1,104 +1,165 @@
-Return-Path: <linux-doc+bounces-62640-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-62643-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02AAABC2F9B
-	for <lists+linux-doc@lfdr.de>; Wed, 08 Oct 2025 01:42:30 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9CB9BC304F
+	for <lists+linux-doc@lfdr.de>; Wed, 08 Oct 2025 01:56:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 4F27C4F18E3
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Oct 2025 23:42:18 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id B89883E3E03
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Oct 2025 23:56:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 27A04260580;
-	Tue,  7 Oct 2025 23:42:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86055279329;
+	Tue,  7 Oct 2025 23:56:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="BlAiRmbo"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GLz8WOVG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-188.mta1.migadu.com (out-188.mta1.migadu.com [95.215.58.188])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2857525DD0C
-	for <linux-doc@vger.kernel.org>; Tue,  7 Oct 2025 23:42:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.188
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DF3A2773ED
+	for <linux-doc@vger.kernel.org>; Tue,  7 Oct 2025 23:56:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1759880532; cv=none; b=H+Np4NcBaACfd2Mcb0JqILzlclYM1IXXqib7KqnFzLMJHbhAS7RpkGw8eYOm0U4tkijABmAgxBVl5xXE36mFk0bFN3Vwogmu+yVi0clGIVwUnDcc9qAujbl5O7GZ3NLN2H5tD4tQkDO1m+ak+dGHeSqtxKV7XmSHELhPcyMLygA=
+	t=1759881407; cv=none; b=Z5w3P4cU1EXlO6+eVJpNXqztDivhLZuuN5n4UQTAcJEyFPnObPdA6KWa3ujcsOcGZFOl4l/HTnpuSR3RfVJ+HELdLkRUbTnN05n+jMs/PICdBfwotiwRKG9UtlTAnbMTwWFh2JkQOkUqqe5BnRrgdyqOep9pB0/x/Z2DgQNRRxg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1759880532; c=relaxed/simple;
-	bh=7XB3xd67udOzpVRY0snHzHj1y68oWyc6y21sgYjtJdE=;
+	s=arc-20240116; t=1759881407; c=relaxed/simple;
+	bh=AqqqImyVX4Ca3i3a0FyZ/Awd7F5tA5oiYrQNUtG8eUA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=J0lIsbaFuVTT24S7PKJ/YuoPAlypcRy1UCGaqqtPRdIZi1nSU2O4VxGU6mGZRE5swX1apWS0CZXtGxqWiRuy30uyJAlAdLqUTm/GROhRFD/rNcw2mttek6RVC6+sqCdmykO9bQ6pgDND3Ofezvdlda/pKfzZLt2mhoEHWRfycnY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=BlAiRmbo; arc=none smtp.client-ip=95.215.58.188
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
-Date: Tue, 7 Oct 2025 23:42:01 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1759880528;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=69vstxN5iaeMoAXTOwPIMnQcC6rAdKt4sbd5u04ANzU=;
-	b=BlAiRmboDCZPs7XL7X0mEv7qifobtDsgXHjmE+NVxUfqnUHgwNKlg1RYUpAdu8Mmv2mLET
-	7gyRyD6jDILB8Ig4aahNRrnYtIfkoUlZZKqjml5b2JsK/crvXZsZgbDvWfPIn1fVX1/8BJ
-	DHc/JefufH9NeS0RxKebXuEDXbhdqFA=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Yosry Ahmed <yosry.ahmed@linux.dev>
-To: SeongJae Park <sj@kernel.org>
-Cc: "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
-	Andrew Morton <akpm@linux-foundation.org>, Chengming Zhou <chengming.zhou@linux.dev>, 
-	David Hildenbrand <david@redhat.com>, Johannes Weiner <hannes@cmpxchg.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
-	Michal Hocko <mhocko@suse.com>, Mike Rapoport <rppt@kernel.org>, Nhat Pham <nphamcs@gmail.com>, 
-	Suren Baghdasaryan <surenb@google.com>, Vlastimil Babka <vbabka@suse.cz>, kernel-team@meta.com, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org
-Subject: Re: [PATCH 4/4] Docs/admin-guide/mm/zswap: s/red-black tree/xarray/
-Message-ID: <4mziyxqm3nide6fh7xlbwqkuex4yf2tn6yzkwhzmy4mamazbxk@53an3oyd7amv>
-References: <20251003203851.43128-1-sj@kernel.org>
- <20251003203851.43128-5-sj@kernel.org>
+	 Content-Type:Content-Disposition:In-Reply-To; b=iFgLkygfjKZbVvc+yiPt8n3FQIKk8TJhX0gOXIve2Q5sKe6rjM7rYdirlbQCfR3IdyvD4V7C19Jkud3d82yQnEPvawXq1hU0YdDqaPzOJoyvtelqRNtjym5980+jecCoar1oaKb6+jX8JAj5txHm8qC5B1r0f2ia2dRWrWF0PWo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GLz8WOVG; arc=none smtp.client-ip=209.85.214.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2681660d604so72407985ad.0
+        for <linux-doc@vger.kernel.org>; Tue, 07 Oct 2025 16:56:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1759881405; x=1760486205; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=AqqqImyVX4Ca3i3a0FyZ/Awd7F5tA5oiYrQNUtG8eUA=;
+        b=GLz8WOVGheFn3RBJaFY/U1JgK36OepF93uQJoRhispeXsiPtRsLqFhqs63Bjuk1uhM
+         ophSCnysgbBUxf6QEwtyqHSxrQCtEuio0YUPZ+P75xhXzgPaYq8etiLstBJaMxfEazRO
+         zfuWD1802NUI/eBlw3bkrVEP/DyiYAWp6rn8xoJEiJFUzxdCDUxGIU4quEP0CyJNfHzX
+         AudNZqvRYPeEFilDQ8X4nsblrn8i5dGS3ryDCX/NZ9Ve6p6s8c++4i7gfGTF/QfR5pl6
+         lFju8eVY8qejuOz/n7RtRApTpjUrMf9ZGDhBo9fhDg+wKnRsrC8zSWMNOUFuPrK7l+x3
+         kTXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759881405; x=1760486205;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AqqqImyVX4Ca3i3a0FyZ/Awd7F5tA5oiYrQNUtG8eUA=;
+        b=LQzXwl4gPfvpH6WsJ2I2OaqCujtkwElEjRjbBhJr1itsbx1l8SXI3fC6fVFzoBBRwu
+         ai3Galiv45MC+9dIav1ELo4lmFU9A/QVqVx+vc/4vwscLHoUrMYJfcQcX+TToGv68FzU
+         Uhs8usuT2mYg4uG/2JVQdfOfqONRn2dxKpzbcVuMjbEjuzRxoIBGdbiDln6TacCgHjN7
+         ZQ/gxvvhkXtMUXvF+Sxlzg8OHLhxo8e1oHHyM2Kn8ud92nNA1WQDo3TCIupDBYvQ2H58
+         iV6sLvDDSOahTNw+3eQvkTfcWmjDjg5TrFG2wbHgSR4XhpoDcas620324ctgRZgv3g8e
+         p/Nw==
+X-Forwarded-Encrypted: i=1; AJvYcCXjLqeTwpdJSOsBsEs/HOet2zTD7nR+g0t3RKq8+8IYzRPVQaOtGCxNz63XhZWb+rRrEXrczZ4Hv64=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxZH/C7YYjdRQvOtBm5hc4aBL11xuNVx/7nST5FaVhy8yO2gABF
+	Gpo6/P7W5+nMDNiQueb4MVHtneSYpBMHo/Hv3BO8LE4NK1ZGdd7lKO0C
+X-Gm-Gg: ASbGncuFz4G+d9R8hQ4qPB5wdGa4Sj82dF/t73/Oq7KXWULfuTgUa03jl/DhB6VAEqU
+	d2SbDS5YDshTLGOnntCOizifzRUakcLt3yjZd8Y9L9uqDcYjHCx/rpjKw9QDOSyErFuSSTjR1jR
+	VkHCT0opyEdaEId3ID8q6MJwt5wpUZHUeThZh4RCfhlCK0AEc9Wqo+KByfTl4ziOcvT8T6aDhgb
+	dEI0ELtGROTsp74cjHny1vOYsosEWB9F78Rh2QNBBQj6emsDzD1+QOblaOect0d38rUIQk3jiuk
+	FAJQb2k9foGCozvmXVD7PAmvJlhgkg1B/dm9s0EQvyLntmHERv04h+XkW8gvygfZjF6QgOamN4F
+	drbLyf9l6/J/v/OIfvip7JWNagEFiRFQ2VWzgrPdPknn9cCqv9EF59FjnKctj
+X-Google-Smtp-Source: AGHT+IECR12KH7zCTIlL8PskN4SIrX86zChxhzZyqyWEAG+eeOOhmLw/P52uED83EK633yo7c2PQsw==
+X-Received: by 2002:a17:903:298e:b0:26c:9b12:2b6d with SMTP id d9443c01a7336-290272b550dmr18677895ad.38.1759881405144;
+        Tue, 07 Oct 2025 16:56:45 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33b513ae7d9sm937031a91.24.2025.10.07.16.56.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Oct 2025 16:56:44 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 599D64233430; Wed, 08 Oct 2025 06:56:41 +0700 (WIB)
+Date: Wed, 8 Oct 2025 06:56:40 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Roman Kisel <romank@linux.microsoft.com>
+Cc: benhill@microsoft.com, bperkins@microsoft.com, sunilmut@microsoft.com,
+	arnd@arndb.de, bp@alien8.de, corbet@lwn.net,
+	dave.hansen@linux.intel.com, decui@microsoft.com,
+	haiyangz@microsoft.com, hpa@zytor.com, kys@microsoft.com,
+	mikelley@microsoft.com, mingo@redhat.com, tglx@linutronix.de,
+	Tianyu.Lan@microsoft.com, wei.liu@kernel.org, x86@kernel.org,
+	linux-hyperv@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org
+Subject: Re: [PATCH hyperv-next v6 01/17] Documentation: hyperv: Confidential
+ VMBus
+Message-ID: <aOWouGarxf0FB7ZR@archie.me>
+References: <20251003222710.6257-1-romank@linux.microsoft.com>
+ <20251003222710.6257-2-romank@linux.microsoft.com>
+ <aOR5juzHnsK2E40z@archie.me>
+ <273e0882-24f5-465a-be18-d67b4249ce12@linux.microsoft.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="DTXlXJKe31yrlnoK"
 Content-Disposition: inline
-In-Reply-To: <20251003203851.43128-5-sj@kernel.org>
-X-Migadu-Flow: FLOW_OUT
+In-Reply-To: <273e0882-24f5-465a-be18-d67b4249ce12@linux.microsoft.com>
 
-On Fri, Oct 03, 2025 at 01:38:51PM -0700, SeongJae Park wrote:
-> The change from commit 796c2c23e14e ("zswap: replace RB tree with
-> xarray") is not reflected on the document.  Update the document.
-> 
-> Signed-off-by: SeongJae Park <sj@kernel.org>
 
-Acked-by: Yosry Ahmed <yosry.ahmed@linux.dev>
+--DTXlXJKe31yrlnoK
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> ---
->  Documentation/admin-guide/mm/zswap.rst | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/Documentation/admin-guide/mm/zswap.rst b/Documentation/admin-guide/mm/zswap.rst
-> index 283d77217c6f..2464425c783d 100644
-> --- a/Documentation/admin-guide/mm/zswap.rst
-> +++ b/Documentation/admin-guide/mm/zswap.rst
-> @@ -59,11 +59,11 @@ returned by the allocation routine and that handle must be mapped before being
->  accessed.  The compressed memory pool grows on demand and shrinks as compressed
->  pages are freed.  The pool is not preallocated.
->  
-> -When a swap page is passed from swapout to zswap, zswap maintains a mapping
-> -of the swap entry, a combination of the swap type and swap offset, to the
-> -zsmalloc handle that references that compressed swap page.  This mapping is
-> -achieved with a red-black tree per swap type.  The swap offset is the search
-> -key for the tree nodes.
-> +When a swap page is passed from swapout to zswap, zswap maintains a mapping of
-> +the swap entry, a combination of the swap type and swap offset, to the zsmalloc
-> +handle that references that compressed swap page.  This mapping is achieved
-> +with an xarray per swap type.  The swap offset is the search key for the xarray
-> +nodes.
->  
->  During a page fault on a PTE that is a swap entry, the swapin code calls the
->  zswap load function to decompress the page into the page allocated by the page
-> -- 
-> 2.39.5
+On Tue, Oct 07, 2025 at 01:38:02PM -0700, Roman Kisel wrote:
+>=20
+>=20
+> On 10/6/2025 7:23 PM, Bagas Sanjaya wrote:
+> > On Fri, Oct 03, 2025 at 03:26:54PM -0700, Roman Kisel wrote:
+> > > +The data is transferred directly between the VM and a vPCI device (a=
+=2Ek.a.
+> > > +a PCI pass-thru device, see :doc:`vpci`) that is directly assigned t=
+o VTL2
+> > > +and that supports encrypted memory. In such a case, neither the host=
+ partition
+> >=20
+> > Nit: You can also write the cross-reference simply as vpci.rst.
+> >=20
+>=20
+> Thanks for helping out! I could not find that way of cross-referencing
+> in the Sphinx documentation though:
+> https://www.sphinx-doc.org/en/master/usage/referencing.html#cross-referen=
+cing-documents
+
+That's kernel-specific extension (see Documentation/doc-guide/sphinx.rst).
+
+>=20
+> I tried it out anyway. The suggestion worked out only for the HTML
+> documentation, and would not work for the PDF one. Options attempted:
+>=20
+> 1. vpci
+> 2. vpci.rst
+> 3. Documentation/virt/hyperv/vpci
+> 4. Documentation/virt/hyperv/vpci.rst
+>=20
+> and neither would produce a hyperlink inside virt.pdf. Options 2 & 4
+> generated a hyperlink in HTML.
+
+That's it.
+
+Thanks.
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--DTXlXJKe31yrlnoK
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaOWotAAKCRD2uYlJVVFO
+o/pSAP9eXlQLoQODQqZ+A48QpAAsl+hf9OhLGhdndl6X6JStvAD+OSXtE5WfHadF
+FMFMiFdufdHXrrE7npbMx380tvu34Qs=
+=nx3N
+-----END PGP SIGNATURE-----
+
+--DTXlXJKe31yrlnoK--
 
