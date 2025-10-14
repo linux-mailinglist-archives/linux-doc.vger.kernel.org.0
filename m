@@ -1,131 +1,173 @@
-Return-Path: <linux-doc+bounces-63244-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63247-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AD99BD7E03
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 09:26:59 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CB99BD7E3F
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 09:29:27 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id B4F0618A1AB3
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 07:27:22 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id D7B8B18A2B4F
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 07:29:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A74D130DECD;
-	Tue, 14 Oct 2025 07:26:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="RMo/1SDz"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E331030DEDA;
+	Tue, 14 Oct 2025 07:29:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtpbguseast3.qq.com (smtpbguseast3.qq.com [54.243.244.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84B4230DEC9
-	for <linux-doc@vger.kernel.org>; Tue, 14 Oct 2025 07:26:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E92430DEC9
+	for <linux-doc@vger.kernel.org>; Tue, 14 Oct 2025 07:28:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.243.244.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760426815; cv=none; b=NaW8yFvH/B9ni1jfswHLmBLEVcf//jiYz13eWQRvcUo5Gs4n2cS3pxcoIkAWJLPLB5MBQwxdpHa+H2G0CaH79oYH09txdn8S+7RFVLeXn9dXG0pfiII/RzpzzQkTlztacGRIMWFBYTO94NllP/3eAZiNdehR5J+0TpL1cMrxJmA=
+	t=1760426939; cv=none; b=lWLKafaknTz3zoHylG7DsN0XevJIMT2cmOYpWUPTa4x7r2kelZES65+n8yBTM4akdUCvI5t9dqCQ+0ioinPWIoqWWkVIPi3HqtyuhobRB8OzO/roVZomeoELGNxZhxKduwET3U71wH4fuWJCOGK66QX+T5KCvkHaYOsOwNYwgBs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760426815; c=relaxed/simple;
-	bh=69j+nJDGYxV0SqldgYPw5p2967aw/hJq9L3JovCxY0o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AZlf3ODziSLRuxN2hGT56N/COiOZjKMr1kajj+5m8JvsP72ZGkNU0hxZKLA+jhwZVL5wJuB5V2K+beTPDuV+DItBvvrGrhbt66y+5XxglV3EuRW4LSnDCpJQxNc1/RYQvVRe0Ug4KcrzxLjoIkv6S+QSIti6/acx9uIlYm2b1u8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=RMo/1SDz; arc=none smtp.client-ip=209.85.221.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-426edfffc66so353364f8f.1
-        for <linux-doc@vger.kernel.org>; Tue, 14 Oct 2025 00:26:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1760426810; x=1761031610; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=1p4OZlxOY+NxPP/FLfk1SUzbR8cdY55J35+/tdhphko=;
-        b=RMo/1SDzLvQCfVz1ubtkj+ohMe7hxvHOkxQK6nAyb6COgPjkD+YNqx9dM03dUwjTkU
-         yx28ueUbmimBbnQvk8WrrQlIOA5Xqyyf2+A864An/mwCHN5ZLcSpw5BEbQQi9Czyd5gf
-         1Tk3vzIdIswd+R4zM+EWeQnGpw92IXFZs0qgyWF6ypEAJYTTAB8zdOGffBYFEPgKhmvV
-         LTlcAM7Mc1IHjS6uwMUd64V6H06feAgvT6mmqdoU9paF++Ue3FGdgZdTPayi9dR7GHrk
-         7YJlVSxmDx+MQT7N8UA1ArcoSCqtljlRoEr9WURCfpvb1d0LSmoXdryjqeyNjhrE4nUx
-         sxaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760426810; x=1761031610;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1p4OZlxOY+NxPP/FLfk1SUzbR8cdY55J35+/tdhphko=;
-        b=ZC+4ZbffFo0fSV7ZkEa+oEmncj809ESZx8hO25lX8i3Ey240om7O8M6ERVjWEm4CIj
-         VOo7/Gho4mGEy2m9a5PeqS7JxMoXj2dQoYbtr2XufRQZxwsLie8JMwuYz37M0XFfVXsx
-         Bf0tT1ZsuabHDG1OHVql+sLx9HT/Jnp1IAuOmgXggZr3ZBcvZqR/l8riXMDUJkiesAFm
-         ZpJehFDVa9jzAcEw75iTRTWMZla0/bJ8YRtn1Hhyo4qy23spT3FkG5T1/nVM/aoOAzMC
-         OhizUE/XxkBppWO7ioK2nnE59ER0uh9AdKgGm04ZoLOKEOyVSXa8IMde7YVwzxgqaQ/b
-         g6BQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVm/c+hI0u0+B5hXMjBCucBuBcdkaJEy2OkfWkQez5O2SIlYZ9WSSFwbThLMyQ1C5y33G9iS0TgHKo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzRv6eFj8kFtIECGEHdHq692u1F/iBjRyPEhmcVFoUiVMjFDrOj
-	h1oLG6Ji90EvdzPqaStFWz2Yjxu70uygb0t4eeyQK8/1AM5gdAM1hcoryqrwWnAdWkw=
-X-Gm-Gg: ASbGncu6zzP8f/RvmstH/mxTPmALuZzFhvS+iVd5y3jwJNTGXL+CPX+d/IUulXwu8h3
-	uKZbozLZ8K/34Lci0r56E4vLrGrREt2avcSQGjvqm+OaG+LAsGT0zdfAEGolvSYjxIAz9ZgwS51
-	LdVJBGeyp8WP5TiY74fltc100FcthaYraqw4gTxiSMf3rsvSuunwGtSZMpIFo8KvUQraNc4knfH
-	ovkOR/4zaKJ5B3/Bx7e0/bGPQfRNy2o3mNRvVT4Z80AU/7SDX7Vs/4Zml7fSkUQ5bHrOxRzqQPq
-	2keEr7wHWWE0zkBhQs4eBQHWW4O1XIPw5BoltiguwcsALojAKQegn43LiZjvBG0Ebb2FCM3C5FZ
-	ajRtuQAfHruWlmKrjOggR6R+PDtbQ8njGU0TYEVg66qSBpD83p3DBo6wuN4ImnRt7X0VwtHjWBw
-	==
-X-Google-Smtp-Source: AGHT+IG56u1B06cKrDgh7gziHnjqzu34szt4cpp5w6eBKrKwAL5+ACYASwYe1mymtdVAayUoB54vVg==
-X-Received: by 2002:a05:6000:288f:b0:425:58d0:483a with SMTP id ffacd0b85a97d-425829a5a12mr19773929f8f.3.1760426810474;
-        Tue, 14 Oct 2025 00:26:50 -0700 (PDT)
-Received: from localhost (109-81-16-57.rct.o2.cz. [109.81.16.57])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-46fb55ac08dsm217399135e9.13.2025.10.14.00.26.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Oct 2025 00:26:50 -0700 (PDT)
-Date: Tue, 14 Oct 2025 09:26:49 +0200
-From: Michal Hocko <mhocko@suse.com>
-To: Vlastimil Babka <vbabka@suse.cz>
-Cc: Barry Song <21cnbao@gmail.com>, netdev@vger.kernel.org,
-	linux-mm@kvack.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Barry Song <v-songbaohua@oppo.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Kuniyuki Iwashima <kuniyu@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Willem de Bruijn <willemb@google.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>, Simon Horman <horms@kernel.org>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Brendan Jackman <jackmanb@google.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>,
-	Yunsheng Lin <linyunsheng@huawei.com>,
-	Huacai Zhou <zhouhuacai@oppo.com>,
-	Alexei Starovoitov <alexei.starovoitov@gmail.com>,
-	Harry Yoo <harry.yoo@oracle.com>,
-	David Hildenbrand <david@redhat.com>,
-	Matthew Wilcox <willy@infradead.org>,
-	Roman Gushchin <roman.gushchin@linux.dev>
-Subject: Re: [RFC PATCH] mm: net: disable kswapd for high-order network
- buffer allocation
-Message-ID: <aO37Od0VxOGmWCjm@tiehlicka>
-References: <20251013101636.69220-1-21cnbao@gmail.com>
- <927bcdf7-1283-4ddd-bd5e-d2e399b26f7d@suse.cz>
+	s=arc-20240116; t=1760426939; c=relaxed/simple;
+	bh=ercN3m/lbiVZJOB815AgAGUqHGfZdPa0EZwJQwSSQyE=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=KqHPanKwx02sE/WZj7VusCp29SuiZqXvbV+PPnsM9VhvKvnk6JO0rdrbnTih09TAF3+vK3AaIfYPcWWxBH0Fp5UP2wBFqrz/OUq3VDao5zMhZEQbt6SS8M2kz4v5yriKh7EUNw5HcXe80plVLq2yiRF7mY2c8UHKt8O6XBqpags=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.243.244.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
+X-QQ-mid: zesmtpsz2t1760426847t5f145fa5
+X-QQ-Originating-IP: P2rzOQ8Jqg5nbxg7tVaaQk/FzBrHBGNX/YnzTxqzzR0=
+Received: from localhost.localdomain ( [203.174.112.180])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Tue, 14 Oct 2025 15:27:24 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 4723640594286060993
+EX-QQ-RecipientCnt: 13
+From: Dong Yibo <dong100@mucse.com>
+To: davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	corbet@lwn.net,
+	andrew+netdev@lunn.ch,
+	danishanwar@ti.com,
+	vadim.fedorenko@linux.dev
+Cc: netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	dong100@mucse.com
+Subject: [PATCH net-next v14 0/5] Add driver for 1Gbe network chips from MUCSE
+Date: Tue, 14 Oct 2025 15:27:06 +0800
+Message-Id: <20251014072711.13448-1-dong100@mucse.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <927bcdf7-1283-4ddd-bd5e-d2e399b26f7d@suse.cz>
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: N4onniMhpCsWxmB52Ub7rDuDUVXkhkovMCu2gHVV9Qs6p6faBCl5/U/x
+	bNKlQjKX4D8+2t+L/dkiuHuTHK3LG6bHsV/Aeb2M+HWzohxAUTCXP/0MR92sKpzYpEP0qxV
+	C0AFKc7pAjToZs5g+H8wBhOBYCExdZs9Lmc1aHriCHztT1PTzD10Db4lITQ6yPQ9DFWA2up
+	9CtgaxRLcetKf9ypmrqkh2QUIcOhUMix0A2yPawbMERCD5COn/fUib77HD9Xkx6aFula7Ld
+	w/GoAz5XrV51hJAF/3U0fNI+VTxHBR4RuGKmWitAGrkLUVcxb51HdM8MJtowlBAJqbGy4mW
+	3AGbpciYhvug/cXm3M2tVmtn7F7H/SRAk/gjMqvG1PjuCKX8gHOP8TIFl1pa/bIq2q1eaoh
+	cbBp87MqgxAfgPSyz0RR2gTsOowG5w/AU4h5onqaDCZkgzMRZTdI+dqgeCc0esYaBP7VrcX
+	jy+j4EQ9ODo5k8Jai9FyyMRx/iNLJQKNGQpMu6Le2EV0tbMCCDXJIwGpm0ZoOZtNIi2X3ZU
+	Ih6vb7fIF+4w+UKlt4WG5a56C07p88PLNDFcFMm/VbAxACwK66v2y7fUzE1BBmH4JCgZAO2
+	Ipa9bCedgfjYlhj5LzO0sZ5YjZjrhHso1nOY3pgrftUTvHt2ICQjmdsULoH8l8QMCXGxrCk
+	g94Vd9QCoaNUtNX/meKmyW28bhIWjBzHkNiGpP7c9KbHXK6BnnNI8/keqmjzL4jL/cCJMun
+	8Bemq6TCUUIcNH7zqPVCqItNVGpBJGBTQbU2c9maamwSPHGs45KV4tiUdQ4Mk8jlidiOHah
+	QJMmGFwqVWOppw90A9w6CW2mFLAFtZQ2TebDdbJi78YCeBPkrT1qhbrBkzk1uaHBgaCCtMX
+	p7E64wFrFq7OoJI5n+sAldbFJskXdvwWafPZ+d/SVHgDsYVy/HIEReJs3YRd9iLw9gvraeJ
+	XvvCIsQ7Y4DR8R4/PAmFpfIW5k67O1UgSFgemMOivAayMb6P26BkxRGtmzfGQ25F0cmVOq5
+	ZlOlsn8AboUK+IJ2MFtbfsGuGpr8w7J7BEodRtC53jCLUUrOSn
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+X-QQ-RECHKSPAM: 0
 
-On Mon 13-10-25 20:30:13, Vlastimil Babka wrote:
-> On 10/13/25 12:16, Barry Song wrote:
-> > From: Barry Song <v-songbaohua@oppo.com>
-[...]
-> I wonder if we should either:
-> 
-> 1) sacrifice a new __GFP flag specifically for "!allow_spin" case to
-> determine it precisely.
+Hi maintainers,
 
-As said in other reply I do not think this is a good fit for this
-specific case as it is all or nothing approach. Soon enough we discover
-that "no effort to reclaim/compact" hurts other usecases. So I do not
-think we need a dedicated flag for this specific case. We need a way to
-tell kswapd/kcompactd how much to try instead.
+This patch series adds support for MUCSE RNPGBE 1Gbps PCIe Ethernet controllers
+(N500/N210 series), including build infrastructure, hardware initialization,
+mailbox (MBX) communication with firmware, and basic netdev registration
+(Can show mac witch is got from firmware, and tx/rx will be added later).
+
+Series breakdown (5 patches):
+ 01/05: net: ethernet/mucse: Add build support for rnpgbe
+       - Kconfig/Makefile for MUCSE vendor, basic PCI probe (no netdev)
+ 02/05: net: ethernet/mucse: Add N500/N210 chip support
+       - netdev allocation, BAR mapping
+ 03/05: net: ethernet/mucse: Add basic MBX ops for PF-FW communication
+       - base read/write, write with poll ack, poll and read data
+ 04/05: net: ethernet/mucse: Add FW commands (sync, reset, MAC query)
+       - FW sync retry logic, MAC address retrieval, reset hw with
+         base mbx ops in patch4
+ 05/05: net: ethernet/mucse: Complete netdev registration
+       - HW reset, MAC setup, netdev_ops registration
+
+Changelog:
+v13 -> v14:
+  [patch 1/5]:
+  1. Update rnpgbe.rst (Remove copyright, fix out of order and remove
+     support statements). (Jakub Kicinski)
+  2. remove 'select PAGE_POOL' in Kconfig. (Jakub Kicinski)
+  3. Fix MODULE_AUTHOR in rnpgbe_main.c. (Jakub Kicinski)
+  [patch 5/5]:
+  1. Remove mucse_hw_operations define, call func directly. (Jakub Kicinski)
+  2. Add err_powerdown to handle erros after powerup. (Jakub Kicinski)
+  3. Remove use deprecated netdev->stats.tx_dropped. (Jakub Kicinski)
+
+links:
+v13: https://lore.kernel.org/netdev/20250922014111.225155-1-dong100@mucse.com/
+v12: https://lore.kernel.org/netdev/20250916112952.26032-1-dong100@mucse.com/
+v11: https://lore.kernel.org/netdev/20250909120906.1781444-1-dong100@mucse.com/
+v10: https://lore.kernel.org/netdev/20250903025430.864836-1-dong100@mucse.com/
+v9 : https://lore.kernel.org/netdev/20250828025547.568563-1-dong100@mucse.com/
+v8 : https://lore.kernel.org/netdev/20250827034509.501980-1-dong100@mucse.com/
+v7 : https://lore.kernel.org/netdev/20250822023453.1910972-1-dong100@mucse.com
+v6 : https://lore.kernel.org/netdev/20250820092154.1643120-1-dong100@mucse.com/
+v5 : https://lore.kernel.org/netdev/20250818112856.1446278-1-dong100@mucse.com/
+v4 : https://lore.kernel.org/netdev/20250814073855.1060601-1-dong100@mucse.com/
+v3 : https://lore.kernel.org/netdev/20250812093937.882045-1-dong100@mucse.com/
+v2 : https://lore.kernel.org/netdev/20250721113238.18615-1-dong100@mucse.com/
+v1 : https://lore.kernel.org/netdev/20250703014859.210110-1-dong100@mucse.com/
+
+Dong Yibo (5):
+  net: rnpgbe: Add build support for rnpgbe
+  net: rnpgbe: Add n500/n210 chip support with BAR2 mapping
+  net: rnpgbe: Add basic mbx ops support
+  net: rnpgbe: Add basic mbx_fw support
+  net: rnpgbe: Add register_netdev
+
+ .../device_drivers/ethernet/index.rst         |   1 +
+ .../device_drivers/ethernet/mucse/rnpgbe.rst  |  17 +
+ MAINTAINERS                                   |   8 +
+ drivers/net/ethernet/Kconfig                  |   1 +
+ drivers/net/ethernet/Makefile                 |   1 +
+ drivers/net/ethernet/mucse/Kconfig            |  33 ++
+ drivers/net/ethernet/mucse/Makefile           |   7 +
+ drivers/net/ethernet/mucse/rnpgbe/Makefile    |  11 +
+ drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    |  81 ++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   | 143 ++++++
+ drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |  17 +
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 318 +++++++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c    | 416 ++++++++++++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h    |  20 +
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c | 195 ++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h | 121 +++++
+ 16 files changed, 1390 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/mucse/rnpgbe.rst
+ create mode 100644 drivers/net/ethernet/mucse/Kconfig
+ create mode 100644 drivers/net/ethernet/mucse/Makefile
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/Makefile
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_main.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h
+
 -- 
-Michal Hocko
-SUSE Labs
+2.25.1
+
 
