@@ -1,54 +1,52 @@
-Return-Path: <linux-doc+bounces-63304-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63307-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64E9EBDAC55
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 19:29:58 +0200 (CEST)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id C6952BDADE2
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 19:57:53 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 08FD83556BB
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 17:29:58 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id B60F44F124A
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 17:57:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3A6B43064B5;
-	Tue, 14 Oct 2025 17:29:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F419D3016FB;
+	Tue, 14 Oct 2025 17:57:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fiberby.net header.i=@fiberby.net header.b="RP5bjAah"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="xU12w+3h"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail1.fiberby.net (mail1.fiberby.net [193.104.135.124])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B0F93016FD;
-	Tue, 14 Oct 2025 17:29:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.104.135.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84236296BA7;
+	Tue, 14 Oct 2025 17:57:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760462991; cv=none; b=XXEDJAp5nP7E1KVI1qVv5v2Jg/GqNh3s9vO1u+vNuwqWNfXNzrd0wvtimAMm8Pu7mmoPVnnkrfW6DOfvLtySTRIwglwNyQNP3QvDWuWHbAoG7FN8sqpyBW1D7NNUNoTXnCqSp9eXi27Q3vBoLZcR1HKNaI+0AbIkN3n0oEEeCzk=
+	t=1760464668; cv=none; b=anrFmagFqCdmtKEux/Sed90GFh0A/qyFeZADSh2+WD/VlHyBJ/Q3Ezqv3z/P++MPJLCx3rkSRAPr34EO5s/i/cqEhTpEFD6/K75iXWoQ9DWhPfM4VLi/R0+pQkQMJFBV+IpSPCzwh38FM3mtwJJ5cTfntjXdXdckz+uJtCYhQpI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760462991; c=relaxed/simple;
-	bh=lDjuXCExYFk19/NGzi68q3S7dGAQ5tJ0UHZhqIDkIG4=;
+	s=arc-20240116; t=1760464668; c=relaxed/simple;
+	bh=+MCW3pWeUmZPyGxMrX0RxPKRd723eQqL7FGWAFlCJcY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=E45kOezuxs9iZziu3/7ScdYl2wfYtjNeYBIr19kX+jUnW5lKWdGw7euOUSMLHC/6eAe7qP3yLi3JkJ44Wz+kfra3Kt/RJXF/iOaVzPRRBcJ3u8VRvEOYNvJmDKSSLRXyrSU03+l/XSSMRugqtuzB3/dPmA1MJr4j3cFKyq5YRVQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fiberby.net; spf=pass smtp.mailfrom=fiberby.net; dkim=pass (2048-bit key) header.d=fiberby.net header.i=@fiberby.net header.b=RP5bjAah; arc=none smtp.client-ip=193.104.135.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fiberby.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fiberby.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fiberby.net;
-	s=202008; t=1760462979;
-	bh=lDjuXCExYFk19/NGzi68q3S7dGAQ5tJ0UHZhqIDkIG4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=RP5bjAahHILoBRIuJAG+KGPL08a/B+GkvunRQW09wtRGQV1Ry8J+ZVT3ipilnScKo
-	 ESLYxDhWdsK4SPwX+nvtzpplA7pJ4DQ4clSM6jb11QCnmkxDPhjsZq9bzXsn/2gPdO
-	 8DFSWyA0v9r6eV83k2D2j1wvgCZX6Xs622nnp48GxtOFCtmNgvj/OeliIL3idOTmE4
-	 fKPRZYeqrVJZOOMXcZDsNzJd4pw3LNgWj0eWqR1bvKMLHl/MwduCb7/MNQY4CqGyw1
-	 yCgdZQnpX4iqBLir5jr1k1AeEmS4JSMWDKwDXnU4Q+DiutsGtcQRXZRMcdh8Tk/qDg
-	 Q95hNLp5JWvhA==
-Received: from x201s (193-104-135-243.ip4.fiberby.net [193.104.135.243])
-	by mail1.fiberby.net (Postfix) with ESMTPSA id 7C23B6000C;
-	Tue, 14 Oct 2025 17:29:38 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by x201s (Postfix) with ESMTP id 9E6062005BE;
-	Tue, 14 Oct 2025 17:29:30 +0000 (UTC)
-Message-ID: <bbbdd1a0-2835-44c4-8b9f-942d2309e067@fiberby.net>
-Date: Tue, 14 Oct 2025 17:29:30 +0000
+	 In-Reply-To:Content-Type; b=BMloozitSiGsv+AnOCcGR9UNBmpcMyzN/wzzi1nSKx5kgOdj7bFqIzCnEoz7aaPYRxczVOdlNhYKmOMIDGM4N7qM+MhvTIlhtTrvQFB60iP7bOSJhBTM8I2njex9W28pnug/V4wEoSAm0FjFSptnPDd0+j8Bhu01Y1N0umvljvQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=xU12w+3h; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=r2+wIsDTT/YrPhAA/dkQ7vm5iMhdp0goW9on/CiFr/g=; b=xU12w+3hNb9ltRQ40yzAiQ8eEX
+	eLwUXtuCe25tCXZsYxXQTs+wkOHgDCKEcULtHzYWGIvnZesaKEsFuXaZrLofohWUYKsGPhrFqV9Z0
+	370bdaiGaI2xWJuJRLXFIOO+Nf3bY728T0JZOGqGLelCLpSOUg+YKO9ojPcADR84Ogh5J4QqY8yRh
+	otLPq8KSHppiyeMt6/JUFFLz9LvwttJ+1ata50ti6Io3BRevw4GldC8lrbjBwLPBr7ZRY1La3BAwx
+	Do0QiyD9dLqIyMbfchLI5eGzjVYYgwn764pH5x6e0iNt+YM905C7sM8dwnHv93J4iuLrzBGdTB9ni
+	EYjoIj7A==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1v8jHN-0000000H7sL-3awZ;
+	Tue, 14 Oct 2025 17:57:45 +0000
+Message-ID: <d6cd375c-dad6-4047-9574-bac7dfc24315@infradead.org>
+Date: Tue, 14 Oct 2025 10:57:45 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,63 +54,72 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next 3/6] tools: ynl-gen: use uapi mask definition in
- NLA_POLICY_MASK
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
- Alexei Starovoitov <ast@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
- Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
- Daniel Borkmann <daniel@iogearbox.net>, Daniel Zahka
- <daniel.zahka@gmail.com>, Donald Hunter <donald.hunter@gmail.com>,
- Jacob Keller <jacob.e.keller@intel.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>, Jiri Pirko <jiri@resnulli.us>,
- Joe Damato <jdamato@fastly.com>, John Fastabend <john.fastabend@gmail.com>,
- Jonathan Corbet <corbet@lwn.net>, Simon Horman <horms@kernel.org>,
- Stanislav Fomichev <sdf@fomichev.me>,
- =?UTF-8?Q?Toke_H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>,
- Vadim Fedorenko <vadim.fedorenko@linux.dev>,
- Willem de Bruijn <willemb@google.com>, bpf@vger.kernel.org,
- netdev@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, "Jason A. Donenfeld" <Jason@zx2c4.com>
-References: <20251013165005.83659-1-ast@fiberby.net>
- <20251013165005.83659-4-ast@fiberby.net> <20251013175956.7a2fcf6d@kernel.org>
+Subject: Re: [PATCH] Documentation: sysrq: Remove contradicting sentence on
+ extra /proc/sysrq-trigger characters
+To: Jonathan Corbet <corbet@lwn.net>, Bagas Sanjaya <bagasdotme@gmail.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux Documentation <linux-doc@vger.kernel.org>,
+ Linux Serial <linux-serial@vger.kernel.org>
+Cc: Cengiz Can <cengiz@kernel.wtf>, Tomas Mudrunka
+ <tomas.mudrunka@gmail.com>, Jiri Slaby <jirislaby@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ =?UTF-8?Q?Anselm_Sch=C3=BCler?= <mail@anselmschueler.com>
+References: <20251008112409.33622-1-bagasdotme@gmail.com>
+ <87wm4xbkim.fsf@trenco.lwn.net>
 Content-Language: en-US
-From: =?UTF-8?Q?Asbj=C3=B8rn_Sloth_T=C3=B8nnesen?= <ast@fiberby.net>
-In-Reply-To: <20251013175956.7a2fcf6d@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <87wm4xbkim.fsf@trenco.lwn.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 10/14/25 12:59 AM, Jakub Kicinski wrote:
-> On Mon, 13 Oct 2025 16:50:00 +0000 Asbjørn Sloth Tønnesen wrote:
->> Currently when generating policies using NLA_POLICY_MASK(), then
->> we emit a pre-computed decimal mask.
->>
->> When render-max is set, then we can re-use the mask definition,
->> that has been generated in the uapi header.
+
+
+On 10/14/25 7:55 AM, Jonathan Corbet wrote:
+> Bagas Sanjaya <bagasdotme@gmail.com> writes:
 > 
-> This will encourage people to render masks in uAPI which just pollutes
-> the uAPI files.
+>> /proc/sysrq-trigger documentation states that only first character is
+>> processed and the rest is ignored, yet it is not recommended to write
+>> any extra characters to it. The latter statement is contradictive as
+>> these characters are also ignored as implied by preceding sentence.
+>>
+>> Remove it.
+>>
+>> Link: https://lore.kernel.org/lkml/7ca05672-dc20-413f-a923-f77ce0a9d307@anselmschueler.com/
+>> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+>> ---
+>>  Documentation/admin-guide/sysrq.rst | 4 +---
+>>  1 file changed, 1 insertion(+), 3 deletions(-)
+>>
+>> diff --git a/Documentation/admin-guide/sysrq.rst b/Documentation/admin-guide/sysrq.rst
+>> index 9c7aa817adc72d..63ff415ce85d66 100644
+>> --- a/Documentation/admin-guide/sysrq.rst
+>> +++ b/Documentation/admin-guide/sysrq.rst
+>> @@ -77,9 +77,7 @@ On other
+>>  On all
+>>  	Write a single character to /proc/sysrq-trigger.
+>>  	Only the first character is processed, the rest of the string is
+>> -	ignored. However, it is not recommended to write any extra characters
+>> -	as the behavior is undefined and might change in the future versions.
+>> -	E.g.::
+>> +	ignored. E.g.::
+> 
+> I'm not sure this is right - there is a warning here that additional
+> characters may acquire a meaning in the future, so one should not
+> develop the habit of writing them now.  After all these years, I think
+> the chances of fundamental sysrq changes are pretty small, but I still
+> don't see why we would take the warning out?
 
-It might, but is that a problem, given that most flag-sets are rather small?
+but the following paragraph says:
 
-Example from include/uapi/linux/wireguard.h:
- > enum wgpeer_flag {
- >     WGPEER_F_REMOVE_ME = 1U << 0,
- >     WGPEER_F_REPLACE_ALLOWEDIPS = 1U << 1,
- >     WGPEER_F_UPDATE_ONLY = 1U << 2,
- >     __WGPEER_F_ALL = WGPEER_F_REMOVE_ME | WGPEER_F_REPLACE_ALLOWEDIPS |
- >                      WGPEER_F_UPDATE_ONLY
- > };
+	Alternatively, write multiple characters prepended by underscore.
+	This way, all characters will be processed. E.g.::
 
-I agree that a private "WGPEER_F_ALL" would be pollution, but "__WGPEER_F_ALL"
-is less likely to accidentally be used by user-space.
+		echo _reisub > /proc/sysrq-trigger
 
-I get why Jason likes having the __WGPEER_F_ALL in a place where it is easy
-to review that it has contains all flags, and why he don't like a policy like
-NLA_POLICY_MASK(.., 0x7).
+so it is confuzing.
 
-We could do the mask definition in the kernel code, like many handwritten
-netlink families does, but we still need to keep NETDEV_XDP_ACT_MASK in
-netdev.h or remove it's YNL-GEN header for some time.
+
+-- 
+~Randy
+
 
