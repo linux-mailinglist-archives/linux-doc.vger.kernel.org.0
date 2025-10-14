@@ -1,66 +1,50 @@
-Return-Path: <linux-doc+bounces-63201-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63218-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59E85BD6EDA
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 03:13:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4935BD6F89
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 03:19:03 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id D90D54F6F4A
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 01:12:36 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 04F544FE46C
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 01:16:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F6A72D97B8;
-	Tue, 14 Oct 2025 01:10:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 52B382222A0;
+	Tue, 14 Oct 2025 01:12:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="b5eYmufe"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MvlkGI6Z"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A18942C0293;
-	Tue, 14 Oct 2025 01:10:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 221C619F48D;
+	Tue, 14 Oct 2025 01:12:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760404258; cv=none; b=ujAohBOsgqrCDjkJ0bFIvuXOnTOUPOXZwXKDgMb75fxdRZdPzFE3nWFLMA9XkHi6ILfOyveu/Qj9KZCLUtA4curqmxKcM7VEjfrhkmk1QEy6EmR27XQf41JzI/3IcF9PGShQsmdlq3lPT51XGRVGY523niLQXB/dRWxCSlJZeEQ=
+	t=1760404343; cv=none; b=PGwp97z2hwzOB7M8KRLH7QMQU6xqRuY8GGhHhhE5aT6GmNJz5/tIuA19uoCCpqEsORJAqYqUsPZgpfGCc+uU5GDD17MMqZyoiYJrEXBXaNZT3/KUTqPwG4o/f3ILYzD2ZA5TveacqCOfEJJvn5meQwsc/vsPrm+wjTGNK+fyBdQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760404258; c=relaxed/simple;
-	bh=Pm45zGaYPyq5l4l7efesn2scxVs7fyqBRFKo4aRrHf8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=FP27tSSDYIz1ti6RVygRYaTSw+nB9taBCu3A38JjgxhquJJ8NxMHBKQWyPI7ivKCh/KnCAMGvr4s2sL/B6jvXWU292GubmO8SJf5x0mBWSM//iGhwk5Khovebhh2Ec7FiOJ7aXrBAkeKwP5zYvm1fKszB2MpWxIW/5jDCKRyaUA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=b5eYmufe; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from terminus.zytor.com (terminus.zytor.com [IPv6:2607:7c80:54:3:0:0:0:136])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 59E19p1i1568441
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Mon, 13 Oct 2025 18:10:14 -0700
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 59E19p1i1568441
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025092201; t=1760404215;
-	bh=kz8coyzoOOO7TNq5vADJk9RNm1dpop3qleyprSd53Kw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=b5eYmufeeUiR1I+tUrJ9uz6bCxbXo1rjWiJRnNcJY5pqG3Hy/EcotGhhditJYV2kS
-	 BKZUcaigqiTpyfWZu+nZVqG7C05Lb0FyVTVN71467zOVw8QSsRZwr/KFtU5LqRflK/
-	 CpWRyNk+NXWwApTjkys6VfYu4cxonn2bqfWDmoPqBVqSuhaexyjCDFCrlOchKPSjPq
-	 QShpQ3Xej9udd9qq6JcpkJ59cC8Ao9B5zjJOM+IxAZd5/VrA37LRe5QQaBaw7KtXIs
-	 7owc0+OPlX/jtUTfNfmGzLxPLUe8A3p+A126bj7dxiWerCEpdmz6+GgDucK79Tbudu
-	 nCuX4humh0iQQ==
-From: "Xin Li (Intel)" <xin@zytor.com>
-To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Cc: pbonzini@redhat.com, seanjc@google.com, corbet@lwn.net, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
-        x86@kernel.org, hpa@zytor.com, xin@zytor.com, luto@kernel.org,
-        peterz@infradead.org, andrew.cooper3@citrix.com, chao.gao@intel.com,
-        hch@infradead.org
-Subject: [PATCH v8 21/21] KVM: nVMX: Allow VMX FRED controls
-Date: Mon, 13 Oct 2025 18:09:50 -0700
-Message-ID: <20251014010950.1568389-22-xin@zytor.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251014010950.1568389-1-xin@zytor.com>
-References: <20251014010950.1568389-1-xin@zytor.com>
+	s=arc-20240116; t=1760404343; c=relaxed/simple;
+	bh=v1eh061b6dkek5M9HJLBkji6LBvb2K8CkWCnfAVgFRU=;
+	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc; b=nYt46O1RHc3ie5Ib901AClk3LOfqlFcvFt0uNvM4/7pn4+Gy91eh19Fgu+dcdsco52vNkidK77zkoSI+oU/29LNW8DxHl1frvgvGRScmZwW/st8j/AT/NDCQdrSSn0HcSP9SI+scieBpgua7H3Sm2hM/gtSrZkf4yHiQkHU//as=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MvlkGI6Z; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1278C4CEE7;
+	Tue, 14 Oct 2025 01:12:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1760404342;
+	bh=v1eh061b6dkek5M9HJLBkji6LBvb2K8CkWCnfAVgFRU=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+	b=MvlkGI6Z2YTW1djrM0AQMX/ZnMuujXo3RFRqY6qbgf1EEsX2N1t830Khh849kvBzF
+	 5XsljbgJAS2NHJbFyF1cKlJhfnN1ZVZ/PAYxTTvdWTn0L1g/K0piBjFw/AzquP2mKp
+	 mHVJFtptmyIYe/JM+FEQvob7UIwecA+O9CFExGSCat4HrcwSbSokflIx2IqqWpXDni
+	 BGaDKMl0aXHjOHSUCQd1MSZTigEu3VtW5WFHx0pZQ+L4K+CunYhkS9tT99qBwuwm2J
+	 tEvNvig7VqXOi2COajpKaRKMotsvjloIm+Cnyb6meKSzOnr3W9jumwEB6nQ0uQwtHi
+	 U30g6rEx8OFoQ==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 70DC6380A962;
+	Tue, 14 Oct 2025 01:12:09 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -68,60 +52,55 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH 0/5] kcfi: Prepare for GCC support
+From: patchwork-bot+linux-riscv@kernel.org
+Message-Id: 
+ <176040432799.3390136.12370033021047300981.git-patchwork-notify@kernel.org>
+Date: Tue, 14 Oct 2025 01:12:07 +0000
+References: <20250825141316.work.967-kees@kernel.org>
+In-Reply-To: <20250825141316.work.967-kees@kernel.org>
+To: Kees Cook <kees@kernel.org>
+Cc: linux-riscv@lists.infradead.org, peterz@infradead.org,
+ samitolvanen@google.com, dwmw2@infradead.org, linus.walleij@linaro.org,
+ mark.rutland@arm.com, puranjay@kernel.org, corbet@lwn.net, nathan@kernel.org,
+ x86@kernel.org, linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, llvm@lists.linux.dev,
+ linux-hardening@vger.kernel.org
 
-From: Xin Li <xin3.li@intel.com>
+Hello:
 
-Allow nVMX FRED controls as nested FRED support is in place.
+This series was applied to riscv/linux.git (for-next)
+by Peter Zijlstra <peterz@infradead.org>:
 
-Signed-off-by: Xin Li <xin3.li@intel.com>
-Signed-off-by: Xin Li (Intel) <xin@zytor.com>
-Tested-by: Shan Kang <shan.kang@intel.com>
-Tested-by: Xuelian Guo <xuelian.guo@intel.com>
----
+On Mon, 25 Aug 2025 07:25:47 -0700 you wrote:
+> Hi,
+> 
+> With KCFI support in GCC coming[1], we need to make some (relatively
+> small) changes in the kernel to deal with it:
+> 
+> - move __nocfi out of compilers-clang.h (so GCC can see it too)
+> - add cfi=debug so future Kees can find breakage easier
+> - remove problematic __noinitretpoline usage
+> - rename CONFIG_CFI_CLANG to CONFIG_CFI (otherwise is it quite confusing)
+> 
+> [...]
 
-Change in v5:
-* Add TB from Xuelian Guo.
----
- arch/x86/kvm/vmx/nested.c | 5 +++--
- arch/x86/kvm/vmx/vmx.c    | 1 +
- 2 files changed, 4 insertions(+), 2 deletions(-)
+Here is the summary with links:
+  - [1/5] compiler_types.h: Move __nocfi out of compiler-specific header
+    https://git.kernel.org/riscv/c/038c7dc66e27
+  - [2/5] x86/traps: Clarify KCFI instruction layout
+    https://git.kernel.org/riscv/c/628a15e0536a
+  - [3/5] x86/cfi: Add option for cfi=debug bootparam
+    (no matching commit)
+  - [4/5] x86/cfi: Remove __noinitretpoline and __noretpoline
+    https://git.kernel.org/riscv/c/0b815825b1b0
+  - [5/5] kcfi: Rename CONFIG_CFI_CLANG to CONFIG_CFI
+    (no matching commit)
 
-diff --git a/arch/x86/kvm/vmx/nested.c b/arch/x86/kvm/vmx/nested.c
-index 0867c1f09999..c8edbe9c7e00 100644
---- a/arch/x86/kvm/vmx/nested.c
-+++ b/arch/x86/kvm/vmx/nested.c
-@@ -7443,7 +7443,8 @@ static void nested_vmx_setup_exit_ctls(struct vmcs_config *vmcs_conf,
- 		 * advertise any feature in it to nVMX until its nVMX support
- 		 * is ready.
- 		 */
--		msrs->secondary_exit_ctls &= 0;
-+		msrs->secondary_exit_ctls &= SECONDARY_VM_EXIT_SAVE_IA32_FRED |
-+					     SECONDARY_VM_EXIT_LOAD_IA32_FRED;
- 	}
- }
- 
-@@ -7459,7 +7460,7 @@ static void nested_vmx_setup_entry_ctls(struct vmcs_config *vmcs_conf,
- 		VM_ENTRY_IA32E_MODE |
- #endif
- 		VM_ENTRY_LOAD_IA32_PAT | VM_ENTRY_LOAD_BNDCFGS |
--		VM_ENTRY_LOAD_CET_STATE;
-+		VM_ENTRY_LOAD_CET_STATE | VM_ENTRY_LOAD_IA32_FRED;
- 	msrs->entry_ctls_high |=
- 		(VM_ENTRY_ALWAYSON_WITHOUT_TRUE_MSR | VM_ENTRY_LOAD_IA32_EFER |
- 		 VM_ENTRY_LOAD_IA32_PERF_GLOBAL_CTRL);
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index b92fc81af5c4..c1a6547bc0aa 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -7975,6 +7975,7 @@ static void nested_vmx_cr_fixed1_bits_update(struct kvm_vcpu *vcpu)
- 
- 	entry = kvm_find_cpuid_entry_index(vcpu, 0x7, 1);
- 	cr4_fixed1_update(X86_CR4_LAM_SUP,    eax, feature_bit(LAM));
-+	cr4_fixed1_update(X86_CR4_FRED,       eax, feature_bit(FRED));
- 
- #undef cr4_fixed1_update
- }
+You are awesome, thank you!
 -- 
-2.51.0
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
 
 
