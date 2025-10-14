@@ -1,94 +1,105 @@
-Return-Path: <linux-doc+bounces-63300-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63303-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BBF3BDA724
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 17:41:47 +0200 (CEST)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CFDCBDAC4F
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 19:29:55 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id BF82B545867
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 15:31:30 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 0E6104E07D1
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Oct 2025 17:29:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1949F2FFF95;
-	Tue, 14 Oct 2025 15:28:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 343613054E4;
+	Tue, 14 Oct 2025 17:29:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=fiberby.net header.i=@fiberby.net header.b="mdWttZ76"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67B862FFF87;
-	Tue, 14 Oct 2025 15:28:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail1.fiberby.net (mail1.fiberby.net [193.104.135.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFD3A3019B5;
+	Tue, 14 Oct 2025 17:29:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.104.135.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760455690; cv=none; b=kU668W+KJOecpy9vLz5YlxlfvnkDDAi328pkvd7jd/xnlLPZAhENGplhkfeW06kzpwxKenWvjQqilAz1mavCJU6gvDQ1hUht941yS0okN5m3uMU/yNetf6VOSISSgMfv4/cdD//CgiJMKb5Wzoqku5uc2LV7tsfyD1FgM+mdsM8=
+	t=1760462991; cv=none; b=mUgCG9UtTe8xBCGGJzv48Zc/d1dZtHvI4jlt3/Sv5xwtCMlPNqPDjsFF3VA/CXKCyKTNFXVDCLmS/tuPI4P4yvNt6mhwCL1/40LSzXy07dnlAO7ZqhRAso3x1XaFlMZPac7IzLMDABWnY9wqXxD2ZhqZcb2Wc8pe/nXLrt7e258=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760455690; c=relaxed/simple;
-	bh=2gwkqKgmkP93tErYouCSL+EKMNFEFMnu3v8rIzZDWWk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=soOinV0oUrKGcDZUP23uGDaZAVsh3LPqR6dLLa8jL6PrNVQRDmnbt1F0gKZMM/3nIoLhPw13bwBsG3G9KORntgudcftU/AxFxqdzeZsGKX/Z610eiT/9xLQjvLlOb0b7Im+dDi8Tt+vN883LcaH2KnraXaJ6T9GZ3ueMQYKGfbQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6B4A91A9A;
-	Tue, 14 Oct 2025 08:27:58 -0700 (PDT)
-Received: from JFWG9VK6KM.emea.arm.com (JFWG9VK6KM.cambridge.arm.com [10.1.27.150])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3C4303F66E;
-	Tue, 14 Oct 2025 08:28:05 -0700 (PDT)
-From: Leonardo Bras <leo.bras@arm.com>
-To: Paolo Bonzini <pbonzini@redhat.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: Leonardo Bras <leo.bras@arm.com>,
-	kvm@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 1/1] doc/kvm/api: Fix VM exit code for full dirty ring
-Date: Tue, 14 Oct 2025 16:28:02 +0100
-Message-ID: <20251014152802.13563-1-leo.bras@arm.com>
-X-Mailer: git-send-email 2.50.1
+	s=arc-20240116; t=1760462991; c=relaxed/simple;
+	bh=umIOKuw4Cl92BTjFZLvn+l5GvBsnKpPNG5VctslFvvo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=sIs36a+MA+0rL6Fij8+ZBMmAEA2osu2BRAl8Ew9/EIY9NObKQZr/F4EyoLA3ojbUEaW4PjAxghZMsnovog3Sd89zFFmYJ1MvcdnuB+DvSdo1kaQgi3rwUrZp/0/+jtyfYKzsT68lF/L+qNVgnSRcHGKb+VKnniDsSYM4SHdGSE4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fiberby.net; spf=pass smtp.mailfrom=fiberby.net; dkim=pass (2048-bit key) header.d=fiberby.net header.i=@fiberby.net header.b=mdWttZ76; arc=none smtp.client-ip=193.104.135.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fiberby.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fiberby.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fiberby.net;
+	s=202008; t=1760462979;
+	bh=umIOKuw4Cl92BTjFZLvn+l5GvBsnKpPNG5VctslFvvo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=mdWttZ76qpu6mbUf6Kj3WIQKjBlvUyV2NoAAPBwGNNWh1SGf4B2P1AGl5pYHdZmb3
+	 Xsm705nYkO/mvz6yIyjWf/sJkxgthTOlzjjA+L03s/r35dr82hi8lCTrMdzZt45Rw9
+	 WMd3Q2aM4FFs+rviSn8r74z2UFroU/wVDkOWkFrG8FrvJmNVVxz3SqT1Sg09J3yZet
+	 GUSzkC7YFoGTrEqeEeE06miGOXMm2rkiU8eNXEIfcyYr/ISkY6LymhP+Moo0AWv9kd
+	 V1aIiAOgdQCjqDefFIiNElIXvc6UtUxQFl88wUS4g74DgGkDPQQDitpqq+gUjJQKhA
+	 XT8sWfdCBqQYg==
+Received: from x201s (193-104-135-243.ip4.fiberby.net [193.104.135.243])
+	by mail1.fiberby.net (Postfix) with ESMTPSA id 7E45F60075;
+	Tue, 14 Oct 2025 17:29:38 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by x201s (Postfix) with ESMTP id CCB47201BEC;
+	Tue, 14 Oct 2025 16:27:57 +0000 (UTC)
+Message-ID: <168fe516-b097-4bc3-8b72-acee310216a6@fiberby.net>
+Date: Tue, 14 Oct 2025 16:27:53 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next 1/6] tools: ynl-gen: bitshift the flag values in
+ the generated code
+To: Jacob Keller <jacob.e.keller@intel.com>
+Cc: Alexei Starovoitov <ast@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
+ Daniel Borkmann <daniel@iogearbox.net>, Daniel Zahka
+ <daniel.zahka@gmail.com>, Donald Hunter <donald.hunter@gmail.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>, Jiri Pirko <jiri@resnulli.us>,
+ Joe Damato <jdamato@fastly.com>, John Fastabend <john.fastabend@gmail.com>,
+ Jonathan Corbet <corbet@lwn.net>, Simon Horman <horms@kernel.org>,
+ Stanislav Fomichev <sdf@fomichev.me>,
+ =?UTF-8?Q?Toke_H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>,
+ Vadim Fedorenko <vadim.fedorenko@linux.dev>,
+ Willem de Bruijn <willemb@google.com>, bpf@vger.kernel.org,
+ netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
+ Eric Dumazet <edumazet@google.com>, "David S. Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>
+References: <20251013165005.83659-1-ast@fiberby.net>
+ <20251013165005.83659-2-ast@fiberby.net>
+ <a3835375-6eea-467f-8488-fff62ce4262b@intel.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Asbj=C3=B8rn_Sloth_T=C3=B8nnesen?= <ast@fiberby.net>
+In-Reply-To: <a3835375-6eea-467f-8488-fff62ce4262b@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-While reading the documentation, I saw a exit code I could not grep for, to
-figure out it has a slightly different name.
+On 10/13/25 11:07 PM, Jacob Keller wrote:
+> On 10/13/2025 9:49 AM, Asbjørn Sloth Tønnesen wrote:
+>> Instead of pre-computing the flag values within the code generator,
+>> then move the bitshift operation into the generated code.
+>>
+>> This IMHO makes the generated code read more like handwritten code.
+>>
+>> No functional changes.
+>>
+> 
+> Could we use BIT() here? or is that not available within uAPI headers?
 
-Fix that name in documentation so it points to the right exit code.
+Correct, BIT() is not exported to uAPI[1].
 
-Signed-off-by: Leonardo Bras <leo.bras@arm.com>
----
- Documentation/virt/kvm/api.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thank you for the reviews!
 
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index 6ae24c5ca559..3382adefc772 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -8503,21 +8503,21 @@ It's not necessary for userspace to harvest the all dirty GFNs at once.
- However it must collect the dirty GFNs in sequence, i.e., the userspace
- program cannot skip one dirty GFN to collect the one next to it.
- 
- After processing one or more entries in the ring buffer, userspace
- calls the VM ioctl KVM_RESET_DIRTY_RINGS to notify the kernel about
- it, so that the kernel will reprotect those collected GFNs.
- Therefore, the ioctl must be called *before* reading the content of
- the dirty pages.
- 
- The dirty ring can get full.  When it happens, the KVM_RUN of the
--vcpu will return with exit reason KVM_EXIT_DIRTY_LOG_FULL.
-+vcpu will return with exit reason KVM_EXIT_DIRTY_RING_FULL.
- 
- The dirty ring interface has a major difference comparing to the
- KVM_GET_DIRTY_LOG interface in that, when reading the dirty ring from
- userspace, it's still possible that the kernel has not yet flushed the
- processor's dirty page buffers into the kernel buffer (with dirty bitmaps, the
- flushing is done by the KVM_GET_DIRTY_LOG ioctl).  To achieve that, one
- needs to kick the vcpu out of KVM_RUN using a signal.  The resulting
- vmexit ensures that all dirty GFNs are flushed to the dirty rings.
- 
- NOTE: KVM_CAP_DIRTY_LOG_RING_ACQ_REL is the only capability that
--- 
-2.50.1 (Apple Git-155)
+[1] [PATCH v2] checkpatch: don't complain about BIT macro in uapi
+https://lore.kernel.org/all/1468707033-16173-1-git-send-email-tomas.winkler@intel.com/
 
 
