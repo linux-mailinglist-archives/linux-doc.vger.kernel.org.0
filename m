@@ -1,277 +1,125 @@
-Return-Path: <linux-doc+bounces-63804-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63810-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5DA4BED362
-	for <lists+linux-doc@lfdr.de>; Sat, 18 Oct 2025 18:03:41 +0200 (CEST)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id A1931BED5C2
+	for <lists+linux-doc@lfdr.de>; Sat, 18 Oct 2025 19:36:21 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 7917A189DF90
-	for <lists+linux-doc@lfdr.de>; Sat, 18 Oct 2025 16:04:04 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 4F25E34D6B2
+	for <lists+linux-doc@lfdr.de>; Sat, 18 Oct 2025 17:36:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 68715244660;
-	Sat, 18 Oct 2025 16:03:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61DC2260588;
+	Sat, 18 Oct 2025 17:35:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="QKF7Si/o"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Qf9uh1fO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E24BA217648
-	for <linux-doc@vger.kernel.org>; Sat, 18 Oct 2025 16:03:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7CC821ABC1;
+	Sat, 18 Oct 2025 17:35:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760803411; cv=none; b=MVQ+03Dp0w5q/Blelw/5hXu/Iy49sXSswIeo/l3x5E2PTOU0IdNdweWLP5+XDf/Lh58RD3p24KhcPOE7P4L5PTNILgPhKIUuVZj85PmLbVD3jqxxxVk8AoDL6XUfShBKmTizBEUM//slCmFOfEkTnf9v6+c2PWY/mCqiz79cRMM=
+	t=1760808930; cv=none; b=cRcBowwRda+iqkxrIRT0FO+TuBqqHqa/SbFtYXOPAGxIT4gA0a3AgdX/uBXR2ph7y87DdU9J5Jk/goXl3ksJxVHiEgubcLOAv7gpqZbFNmSFB2NZWddWkrYf6mHgECj8o0xAj14kxTY+dC9n2oKgn1znER+rdYk5GUDw6tRbqd0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760803411; c=relaxed/simple;
-	bh=AqHCcWojn351gM4lS2LpJMueGLu6kVYRaIe4ZTtmHj0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=eJpw1KY0tNljAsE5E+LGYJqnoInC1fCCV8gedc1q0PrJKW3QITcp1RjLDkbd9K4fx7UmEfddvXnBUy3WdnIrV7hvVNlhAOL5kdh0nbxyDN0ZYIwqZzRX0H+wUY+TMAm2201SKq0ITrEFgjcikOwI/yD4+sI1sb3wNyRF9KXJkW8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=QKF7Si/o; arc=none smtp.client-ip=209.85.218.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b472842981fso383063866b.1
-        for <linux-doc@vger.kernel.org>; Sat, 18 Oct 2025 09:03:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1760803406; x=1761408206; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3PDE1i70uMuyHnvAFVWfjyIRl/K/1UfDOKuhRPGumqU=;
-        b=QKF7Si/odLOpgeq3BmCPpvM/a9SPbdeTblMmb4wrYyrJTMY+s5Dtqqj5zqpp8bxA/c
-         g1JqMusvRWHMxG8omKmad7fwld03Sfg5fFttIhDE65K2q16NQI9QMpLIX51oXms7/HS6
-         lnyCgNaDeVNWI6Od9CqKFuC6vLVZENC3Bm2RQIbZIVscpt5dy2zBRM8oTtMjG+99cZAw
-         WoyOJXx3u6vrWVQyya40gqOsJO8rbD01HrOVGspPOk5S8vYqP837Yl2oz4trgIL+0y34
-         Q4XAGREjugN6Q3FTNkcvLVybJODK15LwDN5PZWzu1KOGxSK+bNIvXsTzy4a8XY/EIh2h
-         7SOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760803406; x=1761408206;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3PDE1i70uMuyHnvAFVWfjyIRl/K/1UfDOKuhRPGumqU=;
-        b=R5FRwm2n1VDDkbUCxFuDhkYp2aBGfdWfF0Kfx5A4SyxRFuC5Qa+TcsB3PHTkFHJfFp
-         7F6I5xAWxy3MexCe4FsyAwqi5zhpc/+K9dvb8QgCkq4fKxFH9nEVndIYYJuDIFc66zvG
-         yZYgA6TVzJt9jMfqqBRJSVujrfEVwYC573YSB2RQmX9QTBYjchWjy+3akP5xW3rZEsGM
-         z/FiKJdQjzxBeqfGikLNz+npUaCZA6wPD/kox+LuTm/B3BrmTmEgVtgQjkNI1BdKaPlg
-         vuLE+TR8BWjGxFshXsocenuP1gdkPgNlEAkT0FNIUNk9zgUyOGSFDQPCt05hZ055KowQ
-         +rNg==
-X-Forwarded-Encrypted: i=1; AJvYcCXc3hBzCSlKFnj3d6ao/sWQP44Rlur85M/sqGt+hBoSPYi75E/B2Fc9DIrcnfGnivwNkG5O9ca3FEg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxzZlQuswyquA+kJ6uwoJkOpjg0YzUkxLnG56WMpnmMzLJhyxQn
-	r8g+PrrQi7F7x24DJXExn4hYbnan2VLCmbZ4U9l/1v84GtF47THrJ0ZvMUN0mH00RvRL119m5kp
-	1ypDT/yyqdydIiK4n51O4W5Bg1UQXVfyQ0M4JWFP9KQ==
-X-Gm-Gg: ASbGnctBvRtk2jaiU0uAD4qHQbQEkLtBk1EAtNfLkWpLevcy9SOh3Ynli2fUMHwd5d9
-	BK918G4WA3PEXmjtEQhYY7z0O/zgDBBIWcpzj7fvXZdYpZ9LKHnuvSgiFAQCyX1betYbjqpoZmk
-	smHVs5erV7vr+7x1LUxOwF3P1V6DBvI5JB4zHcecvEQlrSJDejBsfi9iGHGD4aMmVOZZv52VAnG
-	PFcof1r5zAsuReQM+zeX4tptU5ouhvJKvbAeyQkbAHbDWt3XaiwE7AkfpBUKSp48ghzuNTig4zq
-	z7l3JtfWnMi7DbIOaDWxO2cl0N0=
-X-Google-Smtp-Source: AGHT+IHexk19IgNk6IuP2jV+2x2wF7f0unp4c1GwwYyOBf/8w9heBdr+ysi7d7B9dpzKsMkgpYC1PUK3YyRIdsL9bbA=
-X-Received: by 2002:a17:907:97d4:b0:b2a:10a3:7113 with SMTP id
- a640c23a62f3a-b64725722f3mr807862966b.29.1760803406106; Sat, 18 Oct 2025
- 09:03:26 -0700 (PDT)
+	s=arc-20240116; t=1760808930; c=relaxed/simple;
+	bh=DwngqxyBoLU3lOfg2UKKvpT0jQqzGP+BCUhYdDa5wHo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GDyev44xX0nKyjoFOMbDAj7udoOdniKivQxFmo1Z615WnpNiNualpmGfmiNaF1Wmlye8xM59/0iyGZT5b/e1ndTSasF0JF0G6lzK8ssLbzV/HWz6/tuVDThEtDGAYETvJcjGCIH/NTcQdXtGfg/wtQWhOBM7UrmiWZEPBuQNaxE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Qf9uh1fO; arc=none smtp.client-ip=198.175.65.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1760808929; x=1792344929;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=DwngqxyBoLU3lOfg2UKKvpT0jQqzGP+BCUhYdDa5wHo=;
+  b=Qf9uh1fOKtYEtk0F3C8hJnhuEV3ePFUNnzvpdJ3nteyVT6MbfJxIAtTT
+   zehHC8CA2UVYxGSpjib7XzviSo+xRnI0inuDgst0mRUG1q3lCBMOOqvnU
+   OJjI6+8epZ4LO9dtYX3cvklD62unTwI2zzmtI3qiHEeZ+6chadpgpoEZj
+   3pR1l8WAUYYPLTbqG0izCWwS7Lk3C6NWvGCyTmXhCJdVvcn/S6RisFwFM
+   vqZJTUMPv24abeCSMM/peLPs9KnS+iK6jR7KS6/HBihvM4mvbsmKveVFO
+   9EOjkPh9ZJz/OdIqMoGkMqpLk2DQ0M8qKQQWbgmK9y+/tAQ+JedpFJWHV
+   g==;
+X-CSE-ConnectionGUID: q9cWj8wfR6eFDa6PMtp97w==
+X-CSE-MsgGUID: nUau3VGoT92ldX1QPJCBsA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11531"; a="62912196"
+X-IronPort-AV: E=Sophos;i="6.17,312,1747724400"; 
+   d="scan'208";a="62912196"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2025 10:35:28 -0700
+X-CSE-ConnectionGUID: jwYDZRQfTm+ESgUExNKtlw==
+X-CSE-MsgGUID: LsK4YWDAQO+B21zexd15vg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,239,1754982000"; 
+   d="scan'208";a="183400184"
+Received: from pgcooper-mobl3.ger.corp.intel.com (HELO ashevche-desk.local) ([10.245.244.194])
+  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2025 10:35:25 -0700
+Received: from andy by ashevche-desk with local (Exim 4.98.2)
+	(envelope-from <andriy.shevchenko@intel.com>)
+	id 1v91po-00000000KWF-47Ql;
+	Wed, 15 Oct 2025 16:46:32 +0300
+Date: Wed, 15 Oct 2025 16:46:32 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Marcelo Schmitt <marcelo.schmitt@analog.com>
+Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	jic23@kernel.org, michael.hennerich@analog.com, nuno.sa@analog.com,
+	eblanc@baylibre.com, dlechner@baylibre.com, andy@kernel.org,
+	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+	corbet@lwn.net, marcelo.schmitt1@gmail.com,
+	Andy Shevchenko <andy.shevchenko@gmail.com>
+Subject: Re: [PATCH v5 4/7] iio: adc: ad4030: Use BIT macro to improve code
+ readability
+Message-ID: <aO-luIfTsekQC3e4@smile.fi.intel.com>
+References: <cover.1760479760.git.marcelo.schmitt@analog.com>
+ <ec78fd7e4348e2cbc99ae08004c48b7ea238ecf7.1760479760.git.marcelo.schmitt@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251013-dma-buf-ecc-heap-v8-0-04ce150ea3d9@kernel.org> <CAO_48GGD8sCoQt_qWKqcbg6v7Cyi5U9QsxsvNOcqfkLRqHS7_w@mail.gmail.com>
-In-Reply-To: <CAO_48GGD8sCoQt_qWKqcbg6v7Cyi5U9QsxsvNOcqfkLRqHS7_w@mail.gmail.com>
-From: Sumit Semwal <sumit.semwal@linaro.org>
-Date: Sat, 18 Oct 2025 21:33:14 +0530
-X-Gm-Features: AS18NWCxIWZfRS3hG4C_yzteaWS7C2gP5_aCiLwTRjHCdW6sGbeW-DvFPRdxwEc
-Message-ID: <CAO_48GEXC0FDkeRN57e5Yc=4WCwjh=9pDpZXjowZzEaPPsAd-w@mail.gmail.com>
-Subject: Re: [PATCH v8 0/5] dma-buf: heaps: Create a CMA heap for each CMA
- reserved region
-To: Maxime Ripard <mripard@kernel.org>
-Cc: Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, 
-	John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, 
-	Jonathan Corbet <corbet@lwn.net>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, Robin Murphy <robin.murphy@arm.com>, 
-	Andrew Davis <afd@ti.com>, Jared Kangas <jkangas@redhat.com>, 
-	Mattijs Korpershoek <mkorpershoek@kernel.org>, linux-media@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	iommu@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ec78fd7e4348e2cbc99ae08004c48b7ea238ecf7.1760479760.git.marcelo.schmitt@analog.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Wed, 15 Oct 2025 at 13:53, Sumit Semwal <sumit.semwal@linaro.org> wrote:
->
-> Hi Maxime,
->
-> On Mon, 13 Oct 2025 at 14:05, Maxime Ripard <mripard@kernel.org> wrote:
-> >
-> > Hi,
-> >
-> > Here's another attempt at supporting user-space allocations from a
-> > specific carved-out reserved memory region.
->
->
-> Thank you for the series - I think it looks pretty decent, and with
-> Marek's Acked-by for the cma patch [1], I'm inclined to merge it.
->
-> I'll wait till today evening, in case there are any more comments, and
-> then go ahead and merge it.
+On Tue, Oct 14, 2025 at 07:21:58PM -0300, Marcelo Schmitt wrote:
+> Use BIT macro to make the list of average modes more readable.
+> 
+> Suggested-by: Andy Shevchenko <andy.shevchenko@gmail.com>
 
+Okay, but...
 
-Thank you; it's merged to drm-misc-next now.
->
->
-> Best,
-> Sumit.
->
-> >
-> > The initial problem we were discussing was that I'm currently working o=
-n
-> > a platform which has a memory layout with ECC enabled. However, enablin=
-g
-> > the ECC has a number of drawbacks on that platform: lower performance,
-> > increased memory usage, etc. So for things like framebuffers, the
-> > trade-off isn't great and thus there's a memory region with ECC disable=
-d
-> > to allocate from for such use cases.
-> >
-> > After a suggestion from John, I chose to first start using heap
-> > allocations flags to allow for userspace to ask for a particular ECC
-> > setup. This is then backed by a new heap type that runs from reserved
-> > memory chunks flagged as such, and the existing DT properties to specif=
-y
-> > the ECC properties.
-> >
-> > After further discussion, it was considered that flags were not the
-> > right solution, and relying on the names of the heaps would be enough t=
-o
-> > let userspace know the kind of buffer it deals with.
-> >
-> > Thus, even though the uAPI part of it had been dropped in this second
-> > version, we still needed a driver to create heaps out of carved-out mem=
-ory
-> > regions. In addition to the original usecase, a similar driver can be
-> > found in BSPs from most vendors, so I believe it would be a useful
-> > addition to the kernel.
-> >
-> > Some extra discussion with Rob Herring [1] came to the conclusion that
-> > some specific compatible for this is not great either, and as such an
-> > new driver probably isn't called for either.
-> >
-> > Some other discussions we had with John [2] also dropped some hints tha=
-t
-> > multiple CMA heaps might be a good idea, and some vendors seem to do
-> > that too.
-> >
-> > So here's another attempt that doesn't affect the device tree at all an=
-d
-> > will just create a heap for every CMA reserved memory region.
-> >
-> > It also falls nicely into the current plan we have to support cgroups i=
-n
-> > DRM/KMS and v4l2, which is an additional benefit.
-> >
-> > Let me know what you think,
-> > Maxime
-> >
-> > 1: https://lore.kernel.org/all/20250707-cobalt-dingo-of-serenity-dbf92c=
-@houat/
-> > 2: https://lore.kernel.org/all/CANDhNCroe6ZBtN_o=3Dc71kzFFaWK-fF5rCdnr9=
-P5h1sgPOWSGSw@mail.gmail.com/
-> >
-> > Let me know what you think,
-> > Maxime
-> >
-> > Signed-off-by: Maxime Ripard <mripard@kernel.org>
-> > ---
-> > Changes in v8:
-> > - Rebased on top of 6.18-rc1
-> > - Added TJ R-b
-> > - Link to v7: https://lore.kernel.org/r/20250721-dma-buf-ecc-heap-v7-0-=
-031836e1a942@kernel.org
-> >
-> > Changes in v7:
-> > - Invert the logic and register CMA heap from the reserved memory /
-> >   dma contiguous code, instead of iterating over them from the CMA heap=
-.
-> > - Link to v6: https://lore.kernel.org/r/20250709-dma-buf-ecc-heap-v6-0-=
-dac9bf80f35d@kernel.org
-> >
-> > Changes in v6:
-> > - Drop the new driver and allocate a CMA heap for each region now
-> > - Dropped the binding
-> > - Rebased on 6.16-rc5
-> > - Link to v5: https://lore.kernel.org/r/20250617-dma-buf-ecc-heap-v5-0-=
-0abdc5863a4f@kernel.org
-> >
-> > Changes in v5:
-> > - Rebased on 6.16-rc2
-> > - Switch from property to dedicated binding
-> > - Link to v4: https://lore.kernel.org/r/20250520-dma-buf-ecc-heap-v4-1-=
-bd2e1f1bb42c@kernel.org
-> >
-> > Changes in v4:
-> > - Rebased on 6.15-rc7
-> > - Map buffers only when map is actually called, not at allocation time
-> > - Deal with restricted-dma-pool and shared-dma-pool
-> > - Reword Kconfig options
-> > - Properly report dma_map_sgtable failures
-> > - Link to v3: https://lore.kernel.org/r/20250407-dma-buf-ecc-heap-v3-0-=
-97cdd36a5f29@kernel.org
-> >
-> > Changes in v3:
-> > - Reworked global variable patch
-> > - Link to v2: https://lore.kernel.org/r/20250401-dma-buf-ecc-heap-v2-0-=
-043fd006a1af@kernel.org
-> >
-> > Changes in v2:
-> > - Add vmap/vunmap operations
-> > - Drop ECC flags uapi
-> > - Rebase on top of 6.14
-> > - Link to v1: https://lore.kernel.org/r/20240515-dma-buf-ecc-heap-v1-0-=
-54cbbd049511@kernel.org
-> >
-> > ---
-> > Maxime Ripard (5):
-> >       doc: dma-buf: List the heaps by name
-> >       dma-buf: heaps: cma: Register list of CMA regions at boot
-> >       dma: contiguous: Register reusable CMA regions at boot
-> >       dma: contiguous: Reserve default CMA heap
-> >       dma-buf: heaps: cma: Create CMA heap for each CMA reserved region
-> >
-> >  Documentation/userspace-api/dma-buf-heaps.rst | 24 ++++++++------
-> >  MAINTAINERS                                   |  1 +
-> >  drivers/dma-buf/heaps/Kconfig                 | 10 ------
-> >  drivers/dma-buf/heaps/cma_heap.c              | 47 +++++++++++++++++--=
---------
-> >  include/linux/dma-buf/heaps/cma.h             | 16 +++++++++
-> >  kernel/dma/contiguous.c                       | 11 +++++++
-> >  6 files changed, 72 insertions(+), 37 deletions(-)
-> > ---
-> > base-commit: 47633099a672fc7bfe604ef454e4f116e2c954b1
-> > change-id: 20240515-dma-buf-ecc-heap-28a311d2c94e
-> > prerequisite-message-id: <20250610131231.1724627-1-jkangas@redhat.com>
-> > prerequisite-patch-id: bc44be5968feb187f2bc1b8074af7209462b18e7
-> > prerequisite-patch-id: f02a91b723e5ec01fbfedf3c3905218b43d432da
-> > prerequisite-patch-id: e944d0a3e22f2cdf4d3b3906e5603af934696deb
-> >
-> > Best regards,
-> > --
-> > Maxime Ripard <mripard@kernel.org>
-> >
->
->
-> --
-> Thanks and regards,
->
-> Sumit Semwal (he / him)
-> Senior Tech Lead - Android, Platforms and Virtualisation
-> Linaro.org =E2=94=82 Arm Solutions at Light Speed
+...
+
+>  static const int ad4030_average_modes[] = {
+> -	1, 2, 4, 8, 16, 32, 64, 128,
+> -	256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
+> -	65536,
+> +	BIT(0),					/* No averaging/oversampling */
+> +	BIT(1), BIT(2), BIT(3), BIT(4),		/* 2 to 16 */
+> +	BIT(5), BIT(6), BIT(7), BIT(8),		/* 32 to 256 */
+> +	BIT(9), BIT(10), BIT(11), BIT(12),	/* 512 to 4096 */
+> +	BIT(13), BIT(14), BIT(15), BIT(16),	/* 8192 to 65536 */
+
+...the comments now a bit odd as it's unclear in which step the values are.
+Taking this into account I would rather drop the comments for all bits but
+0.
+
+Or even drop all and make a top comment to explain the meaning of values
+0, 1, and bit permutations, if any.
+
+>  };
+
+-- 
+With Best Regards,
+Andy Shevchenko
 
 
-
---=20
-Thanks and regards,
-
-Sumit Semwal (he / him)
-Senior Tech Lead - Android, Platforms and Virtualisation
-Linaro.org =E2=94=82 Arm Solutions at Light Speed
 
