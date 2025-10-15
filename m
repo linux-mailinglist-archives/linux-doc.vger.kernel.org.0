@@ -1,150 +1,139 @@
-Return-Path: <linux-doc+bounces-63362-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63364-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3E4CBDDD16
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Oct 2025 11:39:38 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9E31BDDD6B
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Oct 2025 11:45:23 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 14ADA4E1104
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Oct 2025 09:39:31 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 5625719C0478
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Oct 2025 09:45:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7200831B10F;
-	Wed, 15 Oct 2025 09:39:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B135431A80D;
+	Wed, 15 Oct 2025 09:45:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Vq3Eic35"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FOsnOk01"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B342A306B12
-	for <linux-doc@vger.kernel.org>; Wed, 15 Oct 2025 09:39:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 274677262F
+	for <linux-doc@vger.kernel.org>; Wed, 15 Oct 2025 09:45:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760521167; cv=none; b=tGMAfvuMPa+F2BnMYN0iuMQT4UUtmhdj3YJscTFsSaCzlKpaCdomfJBJ+GLhqc69sQyBaILdRSzWVsOy74IpIbW96j9E7rQ6tXWRcmD+b55cL0MFlBb216CQReNdjxjodzvoCE+A4txITZsSjVx4mWQQ1Wshtm/TlVayS4F6yH4=
+	t=1760521520; cv=none; b=baUtHyXA4cPUcrOZb6iHa9mT3WFN8bIkDNd8cslHKPfM2w/ckaM4bl5rgGDhiwKvB86203pNz5m73j7ZCjdS24LK6LAOGbb9VoTdzSTFKCoKWjzKwKrc/gJP+IQJitynczOD7rigUZG8k4XJTlzoLSzpXLxAOnqZioWHyEauXb4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760521167; c=relaxed/simple;
-	bh=u1eJKOWwZghNRxJv0zHXChCsSqbn7vM9VucZ50DOiNI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AogwfCXmGIZxMrJ1bj4OOzI/+b51ZnN1iahqTwwi7t742Oxrc1L1MB2NPcKBryroolL/beeFpIpO8uardTWMxrZK1ZQqXuszTHa2wfs49rEmIu3zg9KF704es6sfYMv/9dmkuSPDFwQjzGKiW4mV3Ik/zduvUaXgXm0BV003qzY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Vq3Eic35; arc=none smtp.client-ip=209.85.210.172
+	s=arc-20240116; t=1760521520; c=relaxed/simple;
+	bh=JDk5XmJ2D1O7l1i+HH5E85dfIbinCpywgSIc5C2DbME=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=A/7Udl5dEU0AhuHTqmIeFfo99dcNRRpEMN7bbtOMdR8klvzI6/4b0/0YKzSYow5yDDegbM7Nl5rWLBZWT1sHqZtqfClJm9SXlBAOmdGDRpjtNOseQyKdAYD0WckWkcsTHKS97Ekso4rgN+Fo1kV8BsLCsSTBlWOQmQqnF4wytWU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FOsnOk01; arc=none smtp.client-ip=209.85.214.174
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-77f1f29a551so8023193b3a.3
-        for <linux-doc@vger.kernel.org>; Wed, 15 Oct 2025 02:39:24 -0700 (PDT)
+Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-271067d66fbso61163155ad.3
+        for <linux-doc@vger.kernel.org>; Wed, 15 Oct 2025 02:45:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1760521163; x=1761125963; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=u1eJKOWwZghNRxJv0zHXChCsSqbn7vM9VucZ50DOiNI=;
-        b=Vq3Eic35swbvt2ENzbXRVyv1LJm3HT1Q6CIPfG6OhGknsJqgFtyB/Nm0AJjW9+2ol7
-         1yg9WGpzjeNIyl0VnFs/Qs9eg+GOB5UCWGQeXshJgu5GHrPg/79lO2hdqRC+QOczPtc4
-         SMxxBq2KroDP+DEBeaLJDMwcbv1WaGz0HvptQrQz6jF7WyHO1xOf6hpa6EVzIwo8VPca
-         8CfJpfM0QtgLAh1cKAaH6HefVDzW/SqZw68Vcc8bBtmD64BIOMmwDMRv9MPZHIhOomhQ
-         s1mkc3v0qUiVLcN4H4PuxkCpN9xDw1VsyattjVd1FjG40LR68Ln6nFua6dXuyx2gz4rL
-         nVDw==
+        d=gmail.com; s=20230601; t=1760521518; x=1761126318; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bkuDo8Bgn//bjknb8Sc5XnshE8ax9lRnDzc2RFU/M9U=;
+        b=FOsnOk01UHx3xLjcE7c5mRYanphQoNdAiDWiOGUUaJRvtJE+dQ6bBtArtJ/sYyxZah
+         abqa9qS9YrlB/ITYmkxVGeHInhgq+RQzL92ZdbGknskAjNYGa4hs26wZlj3BT3PHc+Q4
+         M9mYKsJttWJMMRoULtgrGDEeucwVmnjZ3zC92doAj4Y61ftgDXIDtBrc3GDJVStSKXgW
+         5CDedeVp3PFm4KT6xKTeG+KYExeviUYQupnwdrT6NEGCs+qMhHaCqldhIzAlofhekGlw
+         B7wgIsfO9slmQJsQjLQ7ls0m5GOIKe6CNkUEWXEXsd1fCz1HCJBmZf6+nM0ZdgWNprOl
+         IXHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760521163; x=1761125963;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=u1eJKOWwZghNRxJv0zHXChCsSqbn7vM9VucZ50DOiNI=;
-        b=hawjndHivwP+dGo6pCOQnTPcj5gxADm5RcD3g72hGWFCXgeMn8g9OxK/VG2iSWUnp6
-         txPQCt6e7HCfL0kJoTg0I9Zg1Uy6PedjpD45YWuj1d5oR0AEsfQVnLRTi4DGt3kecswm
-         aOrFFm1Hg5DuysXWB5lUUf7QP27gxoHo4Z65Xg6lFtcXIGw0gAZZo8YwNIIVHkAApjnZ
-         3zjjg9gjlA+9fAPIwIUFnepL2MjyRB9kf1q43qWWCxlA6Yq2O/i8oEVyAGOPYTSksDGr
-         8ZrbJaGguob2lBWQ21okKRfrM3qGJZsjP6+3XyRgFAEAkhmSLYOo/d4XPoNaZ/fT50d6
-         RXJA==
-X-Forwarded-Encrypted: i=1; AJvYcCVdtcmfoncJf8HAQAJgO9jFlIGQgJcgcvMXmUTY69wxxIbQ9w9C9relizpOZb9KOresGhAS0Q+ZMU4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpK7oqaqXf4blAHONcpTIqoV3pXIdQy3vs8ChEm/nl2DSbDmsd
-	/ifQRHeMpwzhP+ySUHHsskdKFQvYjIB9HRB/uspFqrh7r+G8PlYlpOlm
-X-Gm-Gg: ASbGncuXksootXONOjfeK4ArOVR+G0qUEkXIQCTjcDSpg9g7QM3XNiV1LLv/JSxdd+c
-	uMNWPaFZDVvpagDRTtmzZ2Og1p7H3Vl7Z/z/nINseIzQWXaCyn16r2+Ad0PixCyX+BQwaJE1VQ5
-	DZRfKiR5smQKiuDDNwvf+LW7FMT0ojFx5VEWyXb1F/cqcN/E9V9gWgDI3iu5GySZw9mPN/TiO2c
-	Ng+ZMNA1zgQD0sr2wGtBsCYhdOQ8KDxzKN1mS1P1PcPaqmuZFjBHE2T1geqbkeb3uLSc6xwkPLq
-	Th2o09LjDJzcTeSJpineNVZJG/6nDSPS4P1ksBkP7crDa38ysT/DDLFHLAdqr6VOqsD8zr4J4V7
-	GkDMYNiupYRDIrNkICQfUBfd3m5277WM912kYOhrjUm/VbDrLFIxwxP8=
-X-Google-Smtp-Source: AGHT+IElgVwNPxXRA/tImitB//ntptdYiVe7d9RWZ80dKHs5si0bLCs+yLDawiIS/352iKLuIDMl8A==
-X-Received: by 2002:a05:6a00:4fd4:b0:78a:f784:e8cf with SMTP id d2e1a72fcca58-79387829619mr30080478b3a.27.1760521163332;
-        Wed, 15 Oct 2025 02:39:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1760521518; x=1761126318;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bkuDo8Bgn//bjknb8Sc5XnshE8ax9lRnDzc2RFU/M9U=;
+        b=wtUrGd3DwNvM/ukuUB12tLMeH5ck7q84puVHQP/SDucEDW7veS27dtS27BRrP4hLPT
+         AkxbzJf0kDvRLRbc7XPKBRGuCxusH+orp3FxgEtnsAiv29GMeg1+Bejt25j/UP5ZVCcZ
+         LpZJzu6BojyItcwhFVBpEOiMo7rngAZbkvBk369gxjSTC0poKK6aw/c2nhUuSryGHlxU
+         EEJiwlWUHfxHt4wDss+38hVk2/kve13LxGL52xeseogwnUECMzml7HNeD+hErTtiPXaZ
+         ycpkR9MQ8ZEAXxN7I51bg3JI3jjKsgO/OdpalU2r2sVeyqfKWCaZ8fQADRYIqPWAhOCM
+         E0Ag==
+X-Forwarded-Encrypted: i=1; AJvYcCX45302GfUPueuHsefJcovPRuOs7TAeoIQ/YCUoeKa882DN5vUQA5uygI2DGxFmVh+XursLQCLl3/A=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyDIC/fElqEQDpJBmoT1AZmbhbR7p1yKAfVht0nx59QunqxvRPH
+	bmKAigkpxo82qF7uD4WFlPlgKuE1/9aquPd0lmZQZkty7XeLn0UEHhW1
+X-Gm-Gg: ASbGnct0IQaxAJIm3ODALnAJ0W1RQgu3tBCrrHhzC+kiB2xCo/z1uweBthw+Lan5ub6
+	3s48bHN+XtyP18bFun4DaH0eRhaePSVaQyT8i+HSV5GoiUAzDTr4ZC2G3Vy7cnlopaaCBHNimYg
+	7r9+N4XoEL+rpt1ioOhUshOYqN+CiVK54DroE3/TZkgSZWFmfIab6HVMWuYii93wLVoHRwiTLcp
+	bRovCavBDqD0makA4ZgUx73bw5YBwiwa+x80PjSi1K1urM4eI16Kwayi9kzCwRlwVcddKN+nGwB
+	gPE5Wl+XsILso6v1XRzgEdv4Pb8dRK1sQZz88z7n6Tq1sfdJDT6m/pStFc97PCxtFa9k9j4C0/g
+	elXvbr4FjF8mwinjcTs6wFNoZDUOKmvA32hNu647nN1E85ovQYKOpYzA=
+X-Google-Smtp-Source: AGHT+IE30XdXUjOh6i/Q5dBdxAGcm0ev32OA+D/R2WfdMEVK8VgYMqFT0iFGbeO/kztIN46bqJVLhA==
+X-Received: by 2002:a17:903:1b64:b0:262:9ac8:610f with SMTP id d9443c01a7336-29027374b16mr312217565ad.22.1760521518349;
+        Wed, 15 Oct 2025 02:45:18 -0700 (PDT)
 Received: from archie.me ([103.124.138.155])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b060962sm18269938b3a.1.2025.10.15.02.39.21
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33b61a1d3ffsm18796888a91.1.2025.10.15.02.45.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Oct 2025 02:39:22 -0700 (PDT)
+        Wed, 15 Oct 2025 02:45:16 -0700 (PDT)
 Received: by archie.me (Postfix, from userid 1000)
-	id 6907D452891F; Wed, 15 Oct 2025 16:39:20 +0700 (WIB)
-Date: Wed, 15 Oct 2025 16:39:20 +0700
+	id 9488F452891F; Wed, 15 Oct 2025 16:45:14 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Jiri Slaby <jirislaby@kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux Serial <linux-serial@vger.kernel.org>
-Cc: Cengiz Can <cengiz@kernel.wtf>,
-	Tomas Mudrunka <tomas.mudrunka@gmail.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Anselm =?utf-8?Q?Sch=C3=BCler?= <mail@anselmschueler.com>
-Subject: Re: [PATCH] Documentation: sysrq: Remove contradicting sentence on
- extra /proc/sysrq-trigger characters
-Message-ID: <aO9ryPohDdkoFykR@archie.me>
-References: <20251008112409.33622-1-bagasdotme@gmail.com>
- <87wm4xbkim.fsf@trenco.lwn.net>
- <d6cd375c-dad6-4047-9574-bac7dfc24315@infradead.org>
- <aO7mnXCajeIdUYON@archie.me>
- <0cc09ea7-d4f7-4e1c-9cd0-bf310faba217@kernel.org>
+	Linux Networking <netdev@vger.kernel.org>
+Cc: Sridhar Samudrala <sridhar.samudrala@intel.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Vasudev Kamath <vasudev@copyninja.info>,
+	Krishna Kumar <krikku@gmail.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH net] Documentation: net: net_failover: Separate cloud-ifupdown-helper and reattach-vf.sh code blocks marker
+Date: Wed, 15 Oct 2025 16:45:03 +0700
+Message-ID: <20251015094502.35854-2-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="fSCHwCyZlDgbl+8D"
-Content-Disposition: inline
-In-Reply-To: <0cc09ea7-d4f7-4e1c-9cd0-bf310faba217@kernel.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1214; i=bagasdotme@gmail.com; h=from:subject; bh=JDk5XmJ2D1O7l1i+HH5E85dfIbinCpywgSIc5C2DbME=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBnvc1Yv6zRzXPB0ltFXbWmbb8IGVpwWOr8VVzwUD+qr4 3X1/zeno5SFQYyLQVZMkWVSIl/T6V1GIhfa1zrCzGFlAhnCwMUpABMxOsrwP9NGXWvhS9Wzz7vE zN5VHpp38mpznsf2H5Y77vk6ajxYUMrwvzznszX/yYRMw7WlxyRvaqysDso6ln3S7JiG0q/0EBd WZgA=
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
+cloud-ifupdown-helper patch and reattach-vf.sh script are rendered in
+htmldocs output as normal paragraphs instead of literal code blocks
+due to missing separator from respective code block marker. Add it.
 
---fSCHwCyZlDgbl+8D
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 738baea4970b ("Documentation: networking: net_failover: Fix documentation")
+Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+---
+ Documentation/networking/net_failover.rst | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Wed, Oct 15, 2025 at 08:18:44AM +0200, Jiri Slaby wrote:
-> On 15. 10. 25, 2:11, Bagas Sanjaya wrote:
-> > I guess the whole "On all" description can be rewritten like:
-> >=20
-> > Write a single character to /proc/sysrq-trigger, e.g.::
-> >=20
-> > <snipped>...
-> >=20
-> > If a string (multiple characters) is written instead, only the first ch=
-aracter
-> > is processed unless the string is prepended by an underscore, like::
-> >=20
-> > <snipped>...
->=20
-> Some kind of, yes. So Either:
-> * you write no underscore and a character -- the rest is ignored and you
-> should not write more than one.
-> * you prepend underscore and write more of them -- all are processed.
->=20
+diff --git a/Documentation/networking/net_failover.rst b/Documentation/networking/net_failover.rst
+index f4e1b4e07adc8d..51de30597fbe40 100644
+--- a/Documentation/networking/net_failover.rst
++++ b/Documentation/networking/net_failover.rst
+@@ -99,6 +99,7 @@ Below is the patch snippet used with 'cloud-ifupdown-helper' script found on
+ Debian cloud images:
+ 
+ ::
++
+   @@ -27,6 +27,8 @@ do_setup() {
+        local working="$cfgdir/.$INTERFACE"
+        local final="$cfgdir/$INTERFACE"
+@@ -175,6 +176,7 @@ completes, and it reattaches the VF to the VM and brings down the virtio-net
+ interface.
+ 
+ ::
++
+   # reattach-vf.sh
+   #!/bin/bash
+ 
 
-OK, thanks!
-
---=20
+base-commit: 7f0fddd817ba6daebea1445ae9fab4b6d2294fa8
+-- 
 An old man doll... just what I always wanted! - Clara
 
---fSCHwCyZlDgbl+8D
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaO9ryAAKCRD2uYlJVVFO
-o9OUAP9UtfDuga5xwT18A5agR7OavUEpIPgMB3t54ZaS3LQLdAD9FOa3EizTUaQP
-UG9Pgb7JUNguv5lAowSSyRLyW2sECQk=
-=+4Vu
------END PGP SIGNATURE-----
-
---fSCHwCyZlDgbl+8D--
 
