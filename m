@@ -1,103 +1,179 @@
-Return-Path: <linux-doc+bounces-63646-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63649-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63734BE8098
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 12:22:06 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5682ABE8200
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 12:49:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id CC0A535AE7F
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 10:22:05 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7E9006E19DE
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 10:49:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E3C4C33469C;
-	Fri, 17 Oct 2025 10:22:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="uOygw44X"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 59D10320CA8;
+	Fri, 17 Oct 2025 10:48:07 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout09.his.huawei.com (canpmsgout09.his.huawei.com [113.46.200.224])
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB82D24DFF9;
-	Fri, 17 Oct 2025 10:21:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.224
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E80031AF2A
+	for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 10:48:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760696521; cv=none; b=p6fO4q4u98LlSTAempyjrC9n2Gz+Q2ThAnwlpfXXxkGdeM+NpcpeB4s96GN2Bzm4jRyNAqHdNrAawxw4jcknLSGHsxpwHQhpQL8QTXwHpF99pzddjguIAGWok7NUbZ0dbMTlPJ8ZP4kZ6T0nGROh6pl1fjAvsncVrfXIxhSWSFM=
+	t=1760698087; cv=none; b=oJHECCk8Dko2bTxkvJ5pz3LY0T1s6AmBvxhOba+OAWE84dRerhOLpAx6uMU/L3Ax6TmwDiNQfow8am/F5ZHmP+ECuwBUUqctxNPY7dFLIhPPUIBC0Up9AUIBooBJtFbuoiNQzIwprbgL2IDm4RLlAIxe+4z2ZkBvYSEcvWiL5IE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760696521; c=relaxed/simple;
-	bh=9lKqgtRVwmN4wR69S2KF45kjA7haIPFqMX7NWjzzsSw=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:CC:Content-Type; b=aQZ6M89fEJZp0FoH8oyLyfawqnPEV3/AsW+dOEruv05t0p6HQRNhwKwPih66j6rt7EcwE8lc5lPlfmACumH7S+tq5VRtcs5I8EBaHASb+XlTKCLWnh82dPM4Zx5i/ynQrOUqemB03znR1Ult0v5Id/Q0wbmDt5p1e58ybxw29ZM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=uOygw44X; arc=none smtp.client-ip=113.46.200.224
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=EJOhlXGAy3sYnoMiaEvd/2Fl9Dnh+kBxPY6pTICsGqI=;
-	b=uOygw44XgbQhwDjzsw3hvCsN0gtkZwUUivaPTTrFSYI2Jzo4rVupUyNoEdquuuQYTc4KFc3AZ
-	X/ktEAjodwdABdG5xipW3sAaZc5RX2blhUTePl29sZm9BXjFVHfxDGzEA4JfTcFfBKLAHATrfDW
-	JRj0xtDJgVIba2CBX/9BtJM=
-Received: from mail.maildlp.com (unknown [172.19.163.44])
-	by canpmsgout09.his.huawei.com (SkyGuard) with ESMTPS id 4cp17s1tTzz1cyQ9;
-	Fri, 17 Oct 2025 18:21:29 +0800 (CST)
-Received: from kwepemk100009.china.huawei.com (unknown [7.202.194.57])
-	by mail.maildlp.com (Postfix) with ESMTPS id BFF49140120;
-	Fri, 17 Oct 2025 18:21:50 +0800 (CST)
-Received: from [10.174.186.187] (10.174.186.187) by
- kwepemk100009.china.huawei.com (7.202.194.57) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Fri, 17 Oct 2025 18:21:50 +0800
-Message-ID: <fe693f4d-80c7-4d1f-9430-3ab9c8165df0@huawei.com>
-Date: Fri, 17 Oct 2025 18:21:49 +0800
+	s=arc-20240116; t=1760698087; c=relaxed/simple;
+	bh=FiU1ZUnfZXczH1EIxaAKEC/8DAdVZLKvaIyFtsSNh94=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=nQj0/+4Y1olPn1grFqsl5xqwtnHdPrc/yWJVTsko2NXnijkS0cXLGmRXVG8S0dr0PtJOXsOUPSnfj7G89I8A4rV1CAQ9EFjMNXQHaNgaRQH0qwaYrklz3Eg2X2zhQqRoiPedsWq10e3wNbVsTsAS7YynLeYzdHzxM2WY6U2tcYM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <ore@pengutronix.de>)
+	id 1v9hzn-0000AG-1j; Fri, 17 Oct 2025 12:47:39 +0200
+Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <ore@pengutronix.de>)
+	id 1v9hzl-0042n3-0S;
+	Fri, 17 Oct 2025 12:47:37 +0200
+Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.98.2)
+	(envelope-from <ore@pengutronix.de>)
+	id 1v9hzl-0000000F0A9-09sW;
+	Fri, 17 Oct 2025 12:47:37 +0200
+From: Oleksij Rempel <o.rempel@pengutronix.de>
+To: Andrew Lunn <andrew@lunn.ch>,
+	Jakub Kicinski <kuba@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Donald Hunter <donald.hunter@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Kory Maincent <kory.maincent@bootlin.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Nishanth Menon <nm@ti.com>
+Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
+	kernel@pengutronix.de,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	UNGLinuxDriver@microchip.com,
+	linux-doc@vger.kernel.org,
+	Michal Kubecek <mkubecek@suse.cz>,
+	Roan van Dijk <roan@protonic.nl>
+Subject: [PATCH net-next v6 0/5] ethtool: introduce PHY MSE diagnostics UAPI and drivers
+Date: Fri, 17 Oct 2025 12:47:27 +0200
+Message-ID: <20251017104732.3575484-1-o.rempel@pengutronix.de>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: "longwei (I)" <longwei27@huawei.com>
-Subject: [PATCH] kho: debugfs: Fix finalize interface documentation
-To: Alexander Graf <graf@amazon.com>, Mike Rapoport <rppt@kernel.org>,
-	Changyuan Lyu <changyuanl@google.com>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>
-CC: "hewenliang (C)" <hewenliang4@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
- kwepemk100009.china.huawei.com (7.202.194.57)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ore@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-From 91c2b24855d55fef0e8919b2d39216d5c9aad558 Mon Sep 17 00:00:00 2001
-From: Long Wei <longwei27@huawei.com>
-Date: Wed, 15 Oct 2025 19:58:39 +0800
-Subject: [PATCH]kho: debugfs: Fix finalize interface documentation
+changes v6:
+- rework the code to use uint instead of u32/u64
+- use bitset for flags
+- use nest for each separate channel
+changes v5:
+- add struct phy_mse_snapshot and phy_mse_config to the documentation
+changes v4:
+- remove -ENETDOWN as expected error value for get_mse_config() and
+  get_mse_snapshot()
+- fix htmldocs builds
+- s/__ethtool-a-mse/--ethtool-a-mse
+changes v3:
+- add missing ETHTOOL_A_LINKSTATE_MSE_* yaml changes
+changes v2:
+- rebase on latest net-next
 
-Correct the error in the KHO documentation: 
-when removing the KHO finalization phase, it is necessary 
-to execute echo 0 > /sys/kernel/debug/kho/out/finalize
-instead of echo 0 > /sys/kernel/debug/kho/out/active.
-Fix it.
+This series introduces a generic kernel-userspace API for retrieving PHY
+Mean Square Error (MSE) diagnostics, together with netlink integration,
+a fast-path reporting hook in LINKSTATE_GET, and initial driver
+implementations for the KSZ9477 and DP83TD510E PHYs.
 
-Signed-off-by: Long Wei <longwei27@huawei.com>
----
- Documentation/admin-guide/mm/kho.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+MSE is defined by the OPEN Alliance "Advanced diagnostic features for
+100BASE-T1 automotive Ethernet PHYs" specification [1] as a measure of
+slicer error rate, typically used internally to derive the Signal
+Quality Indicator (SQI). While SQI is useful as a normalized quality
+index, it hides raw measurement data, varies in scaling and thresholds
+between vendors, and may not indicate certain failure modes - for
+example, cases where autonegotiation would fail even though SQI reports
+a good link. In practice, such scenarios can only be investigated in
+fixed-link mode; here, MSE can provide an empirically estimated value
+indicating conditions under which autonegotiation would not succeed.
 
-diff --git a/Documentation/admin-guide/mm/kho.rst b/Documentation/admin-guide/mm/kho.rst
-index 6dc18ed4b..2eda33865 100644
---- a/Documentation/admin-guide/mm/kho.rst
-+++ b/Documentation/admin-guide/mm/kho.rst
-@@ -57,7 +57,7 @@ Abort a KHO exec
- 
- You can move the system out of KHO finalization phase again by calling ::
- 
--  $ echo 0 > /sys/kernel/debug/kho/out/active
-+  $ echo 0 > /sys/kernel/debug/kho/out/finalize
- 
- After this command, the KHO FDT is no longer available in
- ``/sys/kernel/debug/kho/out/fdt``.
--- 
-2.43.0
+Example output with current implementation:
+root@DistroKit:~ ethtool lan1
+Settings for lan1:
+...
+        Speed: 1000Mb/s
+        Duplex: Full
+...
+        Link detected: yes
+        SQI: 5/7
+        MSE: 3/127 (channel: worst)
 
+root@DistroKit:~ ethtool --show-mse lan1
+MSE diagnostics for lan1:
+MSE Configuration:
+        Max Average MSE: 127
+        Refresh Rate: 2000000 ps
+        Symbols per Sample: 250
+        Supported capabilities: average channel-a channel-b channel-c
+                                channel-d worst
+
+MSE Snapshot (Channel: a):
+        Average MSE: 4
+
+MSE Snapshot (Channel: b):
+        Average MSE: 3
+
+MSE Snapshot (Channel: c):
+        Average MSE: 2
+
+MSE Snapshot (Channel: d):
+        Average MSE: 3
+
+[1] https://opensig.org/wp-content/uploads/2024/01/Advanced_PHY_features_for_automotive_Ethernet_V1.0.pdf
+
+Oleksij Rempel (5):
+  ethtool: introduce core UAPI and driver API for PHY MSE diagnostics
+  ethtool: netlink: add ETHTOOL_MSG_MSE_GET and wire up PHY MSE access
+  ethtool: netlink: add lightweight MSE reporting to LINKSTATE_GET
+  net: phy: micrel: add MSE interface support for KSZ9477 family
+  net: phy: dp83td510: add MSE interface support for 10BASE-T1L
+
+ Documentation/netlink/specs/ethtool.yaml      | 195 +++++++++
+ Documentation/networking/ethtool-netlink.rst  |  82 ++++
+ drivers/net/phy/dp83td510.c                   |  61 +++
+ drivers/net/phy/micrel.c                      | 101 +++++
+ include/linux/phy.h                           | 127 ++++++
+ include/uapi/linux/ethtool.h                  |   2 +
+ .../uapi/linux/ethtool_netlink_generated.h    | 109 +++++
+ net/ethtool/Makefile                          |   2 +-
+ net/ethtool/common.c                          |  13 +
+ net/ethtool/common.h                          |   2 +
+ net/ethtool/linkstate.c                       |  94 ++++
+ net/ethtool/mse.c                             | 411 ++++++++++++++++++
+ net/ethtool/netlink.c                         |  10 +
+ net/ethtool/netlink.h                         |   2 +
+ net/ethtool/strset.c                          |   5 +
+ 15 files changed, 1215 insertions(+), 1 deletion(-)
+ create mode 100644 net/ethtool/mse.c
+
+--
+2.47.3
 
 
