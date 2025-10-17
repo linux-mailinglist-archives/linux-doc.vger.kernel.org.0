@@ -1,77 +1,92 @@
-Return-Path: <linux-doc+bounces-63648-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63653-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDCCFBE8206
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 12:50:05 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BC65BE83DF
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 13:06:51 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C165A6E24E5
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 10:49:14 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 21C526EA23D
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 10:58:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7AA03320CAD;
-	Fri, 17 Oct 2025 10:48:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8BF6C328B4C;
+	Fri, 17 Oct 2025 10:58:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MQvPPquH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AD7C31BCAB
-	for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 10:48:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2AAA328B79
+	for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 10:58:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760698087; cv=none; b=JclsMKPwJ3hvog7WuX6YoDdOlrgewbDK9yS9SOknVVj9U7yVRVit9Hg69TflyFRKqk0GULoNYWSdITgCD3SVhA6yVf6mXVgwwjcJnl6emCW3VmuLxRa84F0NpnNy+8ADjHxsbCUuZTU3/jRx0k+0npq6FeMKVTO7LIa95oUf65o=
+	t=1760698696; cv=none; b=MbvC95aFLcFFmijbMfpQqFgJ1IXf38KxSefEw1Lu3TyGI5FiG6uBFCHBV1Cj6FKvnVp89v54XAH/E21EXtBOQUV/i9em8o/ZaqfU4sYFo+RNVneV6eBpaQd1o1bRb70qjM0X87cEJm8iBs8YuSRsYUeMlcQRd0UXDOQyzE/FNJc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760698087; c=relaxed/simple;
-	bh=xsnBDWksIFYs2tN6AROUWU7MAjR27N2SOy5nKWnhUYk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=L2r3hsogSm4VdSwgR0NjL/LiGyBDKksdUX3txVcGyr/JN/raZihchS/1ikj5R0H8wbqifgu2A90d5DfjfHSwz2plAhLoRB511jjlWKsoh9QMJAARE0wyvcZVOSN9HTWiXgl2SjJR7LFXykwDRxUD8hxMKeL5Jeq41woDB8/Kf/E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1v9hzn-0000AL-1j; Fri, 17 Oct 2025 12:47:39 +0200
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1v9hzl-0042n9-0x;
-	Fri, 17 Oct 2025 12:47:37 +0200
-Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.98.2)
-	(envelope-from <ore@pengutronix.de>)
-	id 1v9hzl-0000000F0Aw-0kGd;
-	Fri, 17 Oct 2025 12:47:37 +0200
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Andrew Lunn <andrew@lunn.ch>,
-	Jakub Kicinski <kuba@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Donald Hunter <donald.hunter@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Kory Maincent <kory.maincent@bootlin.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Nishanth Menon <nm@ti.com>
-Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
-	kernel@pengutronix.de,
-	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	UNGLinuxDriver@microchip.com,
+	s=arc-20240116; t=1760698696; c=relaxed/simple;
+	bh=jYLh1g0/g+YswT19wb8sGFf9meznkL5gtg/UsZXCKQU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ZKID6rs5PyXRSW9Kl+Ur5GcNFX19gPpYtNPaukM5KFtbxy1KuancqOw2IBbzl9AuE6C4mr6ciKes+Y9/h8GdBUA6FISeczrdKIhl7brOifQQL15RUATribPCndy5YUTC8S6Ry5iGI0iYtCkHABYwA4WjTzS4nKyR90/NOodcvuc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MQvPPquH; arc=none smtp.client-ip=209.85.210.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-7833765433cso2451056b3a.0
+        for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 03:58:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1760698694; x=1761303494; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=5eRznc/oLGLRRb/vl90nQzjbWZjbdpkXCZdSvk3IxGA=;
+        b=MQvPPquHetcTsZXKOgOgZDvfn79VR8+oaoGUGlKshsGPSw+HpHSISnRIX4ZDFVepA7
+         EFrntiYNqWRunGfdlRio+/Li7+gKOKWqffi2kG6QTBMFCQ3k4TMRpQEaZ5kvGBQMt5BR
+         brWXNiCNT9eq5sLI59Ta+1mHAAIbfnCf8g7GQL0e9vJqMwC77/RLW8eX7Qrp7mEql4kV
+         gMG851XdJPB9bSpBZgH5UQhWL3gTnkSHrZ/dehhQDTk9Vnm/Lwu9tj5CBcXXk+5Wgf3z
+         ujDGbxLwnI5JXSgdaFBD323fQ16o8vgX3RijRoWMAq8d/uFKj+NSU40tigU3Jx+jgLHn
+         I8Vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1760698694; x=1761303494;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=5eRznc/oLGLRRb/vl90nQzjbWZjbdpkXCZdSvk3IxGA=;
+        b=aIqu/HbPmAhvMzThpC/sUiiGlMmFuED0tJ/bLwPEW72efTomdgPMuAB05JxdAVlh5G
+         GWUjICwGSOqNqSBTpAAtR3vI2JpKEIrmartf0k5bpV/aLeXSaySiM5f+cvpw7gb9hsiK
+         jw3b5QTNF0Ytz8+6kaRosM0Mn0jyi9ir+0FhBp+d2RdW32yqu+jzD4vjKqCqCaV2U3By
+         Zzb0pcbI/Gf/hrjAN0JW3ZnjIZen/s8dtFtBWFtnWecqlVD8QvT5P3McesjxJK2VWzSv
+         UcKJifMOBvjLpZAbFxDRBJWeaoo8kyUn8EBNVsTpVMepr/+M2xJOQq4npBL81UkMKWdF
+         e7xw==
+X-Forwarded-Encrypted: i=1; AJvYcCWvUraTkFaTdlXXBmNyoO7VMhwzN7Y5uc1ptP153jCoIqlWY9K1G6w/hZk5CPWIwsIxrW6Z4fObmFw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyACwck777xh8nZQ9g4oaIl0I1RyNjJIh/J/80uM1t0dYJg4hcX
+	png04PIwV399lktzVVqyRPwKzLyBX/LOVWMUZCMdmZXEoi8b06fa3CjR
+X-Gm-Gg: ASbGncs5Z0dfm+e4fyLV9w4fZGtuSpYqylASFem6Go/oFHeWlukw5Qg0jcWdo39EplT
+	YNjThb8eP5Yrw3i034krt2LWzrjhhprLNNZZHxsnsHZkrPP7Go/YB23HBT38r7+8BA/Qp18TJ05
+	lcsbVlioRsnB2gPWsgcXfJXdGTnsGAnx6NVcqhgpv+0OY8nj5+hj/G7M6lSLLSmrqU+E7wSEmVi
+	ckoDKpe5u2MF1TulRJYlrME2DDHoDxhWku4t8OthZayReKjNRsPNqmtAxxrgotKdSGiiqkaatld
+	7qnNm5qiaRtKhqyUIsYNEQkeSDp3VW5ZxZqAzpP1b1XgWrK6paY9fAP01lSXln90KigExaLijtv
+	FEDk8NEXaFgTWETXbwjP7FAXlLOx9x9k80Htb05PW4fiA+OzEi+/GGGj0eA0I65bW65qq8sRWQ+
+	mWSsWLjw==
+X-Google-Smtp-Source: AGHT+IFqhscQ7885gKuszm90YTf0KoEGYReUi6/2alYhWRhod7rmgZECRMNtrRBswwS4tMpqwgKgtg==
+X-Received: by 2002:a05:6a20:7489:b0:32b:721e:ced1 with SMTP id adf61e73a8af0-334a8617237mr4808979637.36.1760698693905;
+        Fri, 17 Oct 2025 03:58:13 -0700 (PDT)
+Received: from tixy.nay.do ([2405:201:8000:a149:4670:c55c:fe13:754d])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7992b639cc8sm25407571b3a.20.2025.10.17.03.58.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 17 Oct 2025 03:58:13 -0700 (PDT)
+From: Ankan Biswas <spyjetfayed@gmail.com>
+To: linux@roeck-us.net,
+	corbet@lwn.net
+Cc: skhan@linuxfoundation.org,
+	khalid@kernel.org,
+	david.hunter.linux@gmail.com,
+	linux-hwmon@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	Michal Kubecek <mkubecek@suse.cz>,
-	Roan van Dijk <roan@protonic.nl>
-Subject: [PATCH net-next v6 5/5] net: phy: dp83td510: add MSE interface support for 10BASE-T1L
-Date: Fri, 17 Oct 2025 12:47:32 +0200
-Message-ID: <20251017104732.3575484-6-o.rempel@pengutronix.de>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251017104732.3575484-1-o.rempel@pengutronix.de>
-References: <20251017104732.3575484-1-o.rempel@pengutronix.de>
+	linux-kernel@vger.kernel.org,
+	linux-kernel-mentees@lists.linux.dev,
+	Ankan Biswas <spyjetfayed@gmail.com>
+Subject: [PATCH 0/3] docs/hwmon: Fix broken and missing Maxim chip links
+Date: Fri, 17 Oct 2025 16:27:15 +0530
+Message-ID: <20251017105740.17646-1-spyjetfayed@gmail.com>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -79,123 +94,48 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-Implement get_mse_capability() and get_mse_snapshot() for the DP83TD510E
-to expose its Mean Square Error (MSE) register via the new PHY MSE
-UAPI.
+This patch series fixes broken or missing links related to Maxim chips in several
+hwmon documentation files. And updates a the links that get redirected to analog.com
+to their analog.com links.
 
-The DP83TD510E does not document any peak MSE values; it only exposes
-a single average MSE register used internally to derive SQI. This
-implementation therefore advertises only PHY_MSE_CAP_AVG, along with
-LINK and channel-A selectors. Scaling is fixed to 0xFFFF, and the
-refresh interval/number of symbols are estimated from 10BASE-T1L
-symbol rate (7.5 MBd) and typical diagnostic intervals (~1 ms).
+These changes remove several warnings generated by `make linkcheckdocs`.
 
-For 10BASE-T1L deployments, SQI is a reliable indicator of link
-modulation quality once the link is established, but it does not
-indicate whether autonegotiation pulses will be correctly received
-in marginal conditions. MSE provides a direct measurement of slicer
-error rate that can be used to evaluate if autonegotiation is likely
-to succeed under a given cable length and condition. In practice,
-testing such scenarios often requires forcing a fixed-link setup to
-isolate MSE behaviour from the autonegotiation process.
+Patches are independent and touch multiple hwmon documentation files.
 
-Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
----
- drivers/net/phy/dp83td510.c | 61 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 61 insertions(+)
+Ankan Biswas (3):
+  docs/hwmon: Fix broken maxim-ic.com links to analog.com
+  docs/hwmon: Add missing datasheet links for Maxim chips
+  docs/hwmon: Update maxim-ic.com links to analog.com
 
-diff --git a/drivers/net/phy/dp83td510.c b/drivers/net/phy/dp83td510.c
-index 23af1ac194fa..6875f418fa78 100644
---- a/drivers/net/phy/dp83td510.c
-+++ b/drivers/net/phy/dp83td510.c
-@@ -61,6 +61,7 @@
- #define DP83TD510E_MASTER_SLAVE_RESOL_FAIL	BIT(15)
- 
- #define DP83TD510E_MSE_DETECT			0xa85
-+#define DP83TD510E_MSE_MAX			U16_MAX
- 
- #define DP83TD510_SQI_MAX	7
- 
-@@ -249,6 +250,63 @@ struct dp83td510_priv {
- #define DP83TD510E_ALCD_COMPLETE			BIT(15)
- #define DP83TD510E_ALCD_CABLE_LENGTH			GENMASK(10, 0)
- 
-+static int dp83td510_get_mse_capability(struct phy_device *phydev,
-+					struct phy_mse_capability *cap)
-+{
-+	/* DP83TD510E documents only a single (average) MSE register
-+	 * (used to derive SQI); no peak or worst-peak counters are
-+	 * described. Advertise only PHY_MSE_CAP_AVG.
-+	 */
-+	cap->supported_caps = PHY_MSE_CAP_AVG;
-+	/* 10BASE-T1L is a single-pair medium, so there are no B/C/D channels.
-+	 * We still advertise PHY_MSE_CAP_CHANNEL_A to indicate that the PHY
-+	 * can attribute the measurement to a specific pair (the only one),
-+	 * rather than exposing it only as a link-aggregate.
-+	 *
-+	 * Rationale:
-+	 *  - Keeps the ethtool MSE_GET selection logic consistent: per-channel
-+	 *    (A/B/C/D) is preferred over WORST/LINK, so userspace receives a
-+	 *    CHANNEL_A nest instead of LINK.
-+	 *  - Signals to tools that "per-pair" data is available (even if there's
-+	 *    just one pair), avoiding the impression that only aggregate values
-+	 *    are supported.
-+	 *  - Remains compatible with multi-pair PHYs and uniform UI handling.
-+	 *
-+	 * Note: WORST and other channels are not advertised on 10BASE-T1L.
-+	 */
-+	cap->supported_caps |= PHY_MSE_CHANNEL_A | PHY_MSE_CAP_LINK;
-+	cap->max_average_mse = DP83TD510E_MSE_MAX;
-+
-+	/* The datasheet does not specify the refresh rate or symbol count,
-+	 * but based on similar PHYs and standards, we can assume a common
-+	 * value. For 10BASE-T1L, the symbol rate is 7.5 MBd. A common
-+	 * diagnostic interval is around 1ms.
-+	 * 7.5e6 symbols/sec * 0.001 sec = 7500 symbols.
-+	 */
-+	cap->refresh_rate_ps = 1000000000; /* 1 ms */
-+	cap->num_symbols = 7500;
-+
-+	return 0;
-+}
-+
-+static int dp83td510_get_mse_snapshot(struct phy_device *phydev, u32 channel,
-+				      struct phy_mse_snapshot *snapshot)
-+{
-+	int ret;
-+
-+	if (channel != PHY_MSE_CHANNEL_LINK &&
-+	    channel != PHY_MSE_CHANNEL_A)
-+		return -EOPNOTSUPP;
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TD510E_MSE_DETECT);
-+	if (ret < 0)
-+		return ret;
-+
-+	snapshot->average_mse = ret;
-+
-+	return 0;
-+}
-+
- static int dp83td510_led_brightness_set(struct phy_device *phydev, u8 index,
- 					enum led_brightness brightness)
- {
-@@ -893,6 +951,9 @@ static struct phy_driver dp83td510_driver[] = {
- 	.get_phy_stats	= dp83td510_get_phy_stats,
- 	.update_stats	= dp83td510_update_stats,
- 
-+	.get_mse_capability = dp83td510_get_mse_capability,
-+	.get_mse_snapshot = dp83td510_get_mse_snapshot,
-+
- 	.led_brightness_set = dp83td510_led_brightness_set,
- 	.led_hw_is_supported = dp83td510_led_hw_is_supported,
- 	.led_hw_control_set = dp83td510_led_hw_control_set,
+ Documentation/hwmon/ds1621.rst   | 20 ++++++++++++----
+ Documentation/hwmon/jc42.rst     |  6 ++---
+ Documentation/hwmon/lm75.rst     | 13 +++++++----
+ Documentation/hwmon/max127.rst   |  4 +++-
+ Documentation/hwmon/max15301.rst |  8 +++++--
+ Documentation/hwmon/max16064.rst |  2 +-
+ Documentation/hwmon/max16065.rst | 16 ++++++-------
+ Documentation/hwmon/max1619.rst  |  4 ++--
+ Documentation/hwmon/max16601.rst |  4 +++-
+ Documentation/hwmon/max1668.rst  |  4 +++-
+ Documentation/hwmon/max197.rst   |  8 +++++--
+ Documentation/hwmon/max20730.rst | 16 +++++++++----
+ Documentation/hwmon/max31722.rst |  8 +++++--
+ Documentation/hwmon/max31730.rst |  4 +++-
+ Documentation/hwmon/max31785.rst |  4 +++-
+ Documentation/hwmon/max31790.rst |  4 +++-
+ Documentation/hwmon/max31827.rst |  5 ++++
+ Documentation/hwmon/max34440.rst | 24 ++++++++++++++-----
+ Documentation/hwmon/max6620.rst  |  4 +++-
+ Documentation/hwmon/max6639.rst  |  4 +++-
+ Documentation/hwmon/max6650.rst  |  8 +++++--
+ Documentation/hwmon/max6697.rst  | 40 ++++++++++++++++++++++++--------
+ Documentation/hwmon/max77705.rst |  4 +++-
+ Documentation/hwmon/max8688.rst  |  4 +++-
+ Documentation/hwmon/pmbus.rst    |  4 ++--
+ 25 files changed, 158 insertions(+), 64 deletions(-)
+
 -- 
-2.47.3
+2.51.0
 
 
