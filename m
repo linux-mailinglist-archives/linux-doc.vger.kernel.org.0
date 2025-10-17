@@ -1,268 +1,214 @@
-Return-Path: <linux-doc+bounces-63613-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63617-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id B67E1BE66A9
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 07:29:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7BA7BE68D7
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 08:11:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 9FDEA4F3B22
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 05:29:03 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 826F84FDDC5
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 06:11:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DDCD730C378;
-	Fri, 17 Oct 2025 05:28:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 021A830FF2E;
+	Fri, 17 Oct 2025 06:10:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="3fuC1Smn"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="GgvUKsPF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B62E930BBB7
-	for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 05:28:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1226430FC3D;
+	Fri, 17 Oct 2025 06:10:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760678934; cv=none; b=kIbTyJ9CBaTJ96IAokUbjrwYksCSVvw7UzwceyQZwJ9BP2wroXvZjzCVsP2vxSNnauMsp6IYK4eLgQXYCydmVkD8cKsKYjP8I/q/eqxpiovt4T7I+DeCj7Jpvcyb2zWwv/gVkBwT/KySnEdYXj2ZGi6aDx4lRISTA3W9h8hz9+8=
+	t=1760681453; cv=none; b=T5460xRd4oNjzkyoAqpkH6LwRNiwZQ1rK8lElfZ2D8fb5UWc7BGDDa6X9WFoYwDYVe3ZuFrE3KLf6exaN+1pv5d/Deg/z0G3KbDPK+uPqgyWVHqZAHxzQ6s+NaUx6DieGNYDBWSHOdCz3k8S0dzXIMuNzuOFJHPO2yUKPiTm2ss=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760678934; c=relaxed/simple;
-	bh=zCJw8QxqnjVaBfLuY1JS4PUPbwGBSlaIv1P0h6+ZqJ8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZQbM9IFEe+5B7aq0SixSsZ7emcjxffglkYSr0V8MvRg+3lC/3uCUADcv7X3fMOYu3WDFPL5l3egtBreEN0+1TKuI35zu4tl4TvSzcwDjfEpFV0P54FRBFrjLjZZyRMj1gBOWHBtKWPnb56dM0dLunVeKQTtXqyzqHhc9WbXLe4o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=3fuC1Smn; arc=none smtp.client-ip=209.85.219.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-78ed682e9d3so21106326d6.0
-        for <linux-doc@vger.kernel.org>; Thu, 16 Oct 2025 22:28:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1760678931; x=1761283731; darn=vger.kernel.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=+VxvJESS/NKkpZS6sbk8TJ7qIdv7jtHRLujVHBFNctw=;
-        b=3fuC1Smnxcya5xnbWUPwCcnkh7FnSe/sN3EJcEZbkQ64biM4h5XRJWuAU867vbtSq/
-         RLP9A3y2HYrQfY5RsoCJJS9wBd98qGqmuZZwa7FGuPZClZ8tNsfO1viGIf//jhHggSgz
-         U3SyLbn+0+yDJOHqRH6xQzBHJ+WvnjDlPmRc+FLonsQ/BT1GoliQfzY7joAwgFhnawVk
-         N6klGO6sk8K3ekcSqZaXob/QBrqwYPpIOzBmLVd6C0Y8znW9hDJN2U6Zu/9aiA4apbTY
-         A4pkKe/kjhKBcPky3/J2GB6bHVy+Kw9qu+UTmRi2WL+ezypd/jH9r/BvwbUiuGePtGnY
-         hjxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760678931; x=1761283731;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+VxvJESS/NKkpZS6sbk8TJ7qIdv7jtHRLujVHBFNctw=;
-        b=cQtuiqe4O/RXuIFOW1t6LDgio+k67kqElHYWDOfb5219Q52WY6I+AXCQLpPc/MYliR
-         +nmkTgUSDqPDLDnlbzhZZFB/sYEJ2n2DRMbNt94y1elkVK7Maom1VES3V0qD7QrzScZi
-         zBvNto6QR2usJNFfCJ6KjWbJdcPJ+Fxl4XDqDE/VlghZtSHbZ88OcjzBC2wjNk1ov6p9
-         cOZWSnKVE6fdaekwpDbOqzK7HwUq6RhfMbkgC/2ylq5/6Qwun6dqiE2FveYZI0Iqly0R
-         fA+8lA6cj9m2nwlYccm8D10ZoLK6CrJ8eRMOqP3JxB2WMfGPHP3fBJ8WEPxIF6ias7XH
-         o+0w==
-X-Forwarded-Encrypted: i=1; AJvYcCWvREnJJJnCV1Kz37GYnEOELaKFhiDPEzpOY0DUsV0xdoAEvVijbeCuLcJkKjrj3bMV4zzXaW7MWRE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxRSwsaSCp7oLiP740WhKAhe5pS8djLE89p3wYW/pgkYJZvqwzp
-	uHQvuWkZE0MeLajB0DmSYftWygbJqhv26TJM8c/mcHjEBN5YtGSZ5OJCIr1VZtMSgdU/1ALB5uc
-	AOqP8Y/vHhSLbJIkrC3YnWTiRjuKfEx2Fg3IMaVAkB81oGsv4C1TWDKu1
-X-Gm-Gg: ASbGncuu9a2MtE/frxPCgHw2IjfgRTbIUlYszny2zb2DhAmr9I/81aonXkuPguBwrwI
-	UVlN+E/tgUZrmLgLfChOkA9uRPt+wbAQ10A7cALj5rYVZZuxrrosZlgWBXJmbr4ABdKSKK6ksnI
-	CZXBj4RReVd1vrxUlEwxzi1PfYD1tmzltahrb1OKOPOHfcLOQfvtYarVUanfkrdbzM6W6wFpUKx
-	tlSlZMhPVh57uBMSxVj57Sen1JOsGgw5RlDdsx3yb+47qVHko4O/LwDJZi2Cfjiffawvw==
-X-Google-Smtp-Source: AGHT+IGf+gsQTZjM8hRPFlQpqHPtWROw5TObb4gokICJ9VZl9H7hVHs8qzgr9HR0LJhw56gpueyrOzrvgw60PmxkpCE=
-X-Received: by 2002:ad4:5d61:0:b0:87c:2847:f7c4 with SMTP id
- 6a1803df08f44-87c2847f8bamr3029636d6.23.1760678930338; Thu, 16 Oct 2025
- 22:28:50 -0700 (PDT)
+	s=arc-20240116; t=1760681453; c=relaxed/simple;
+	bh=XHH3YtsgJTonABcDP1cjjeeuWzSJz8QnHP+0ONp0oR0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=PhYzASfZfxGPe1UH6ibNbdYAhayKEs1NxDT+UgZ6ApXfuqJeirlOGM1innLAGCUaAQDlKRp/Q2gQxOSzeyZeUa3tlOwAXZPnNj7kQmiowL8a30YVMOl76UHZKNkVOZW1osCUY3BiuOK5Nu9GURR4KvXMdHLiM8Z2rcEFAJ0HcGo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=GgvUKsPF; arc=none smtp.client-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1760681452; x=1792217452;
+  h=from:subject:date:message-id:mime-version:
+   content-transfer-encoding:to:cc;
+  bh=XHH3YtsgJTonABcDP1cjjeeuWzSJz8QnHP+0ONp0oR0=;
+  b=GgvUKsPF3OH0VShbI7TFn8JePCS5jkRQ04DH+BcBlYIllCFMc4ZKFBR6
+   /T7SP8F5klfrYSXLmAwxhUw59lPW9wXnmr9eM3z6uhRdf/S5naEeJ+YVg
+   yTSornSPbsUZEOOZbuCq+b3EWH3e6NN1K+A8E6KkcWNmXKhjJ44swPa12
+   wEFnEhFEE2HexcEj6zN2ECa529DDlZMyRxbOVyrE6WhGytt1CbFFpUWIH
+   eEQ4EC24gVyv+BK68iLJH34Nx7MBzXA5CvSryt1sKE076GNjwclVxgK72
+   OPGc0OqNZMPszAsAR1Lj6dTiN3iX5hhVUKcz6j/qMwEznw/o99j0XBGjU
+   Q==;
+X-CSE-ConnectionGUID: 0RP2h5PhS9O0XcClVeiriw==
+X-CSE-MsgGUID: rlVCi3zdQwuFfzA6kO+8bQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11584"; a="50453907"
+X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; 
+   d="scan'208";a="50453907"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2025 23:10:51 -0700
+X-CSE-ConnectionGUID: LhbTq0mKQja6eSo6yrDPjw==
+X-CSE-MsgGUID: N6FlrEnoRc+UZ37A+WrQkg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; 
+   d="scan'208";a="183059468"
+Received: from orcnseosdtjek.jf.intel.com (HELO [10.166.28.70]) ([10.166.28.70])
+  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2025 23:10:50 -0700
+From: Jacob Keller <jacob.e.keller@intel.com>
+Subject: [PATCH net-next v2 00/14] Intel Wired LAN Driver Updates
+ 2025-10-15 (ice, iavf, ixgbe, i40e, e1000e)
+Date: Thu, 16 Oct 2025 23:08:29 -0700
+Message-Id: <20251016-jk-iwl-next-2025-10-15-v2-0-ff3a390d9fc6@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <766a96de401a2c4361867144567bbc31edcf1a9e.1760535996.git.robin.murphy@arm.com>
- <dbc6ec47-78a7-45bc-8df3-4f009731d302@arm.com>
-In-Reply-To: <dbc6ec47-78a7-45bc-8df3-4f009731d302@arm.com>
-From: David Gow <davidgow@google.com>
-Date: Fri, 17 Oct 2025 13:28:38 +0800
-X-Gm-Features: AS18NWCA7Te-p5XqMpA2f9PAKmkYxNk6ZXGjb8B2CJmOqex9hgOGCguGm2_q-Pg
-Message-ID: <CABVgOS=NfRcXYzJVMMKqeXP8SyTewffwb7vdGN1D8esO2f0KOA@mail.gmail.com>
-Subject: Re: [PATCH] Documentation: kunit: Fix kunit_device_register() example
-To: Robin Murphy <robin.murphy@arm.com>
-Cc: brendan.higgins@linux.dev, corbet@lwn.net, rmoar@google.com, 
-	linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, 
-	linux-doc@vger.kernel.org, workflows@vger.kernel.org
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-	boundary="0000000000003f8f5f06415402b4"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGDd8WgC/4WNQQ6CMBBFr0Jm7ZgOQiquuIdhAWWQUSymbRBDu
+ Lu1F3D5/s9/fwPPTtjDJdvA8SJeZhshP2RgxtbeGKWPDLnKS1JU4v2B8p7Q8hrwFyIpjHFFRXF
+ SWhdDSRDHL8eDrEl8BcshDaCJzSg+zO6THhdK/T/5QqhQV0arrur7tjvXYgNPRzM/odn3/Qt/F
+ 4y1xgAAAA==
+X-Change-ID: 20251015-jk-iwl-next-2025-10-15-914430774f51
+To: Jiri Pirko <jiri@resnulli.us>, "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+ Jonathan Corbet <corbet@lwn.net>, Tony Nguyen <anthony.l.nguyen@intel.com>, 
+ Przemek Kitszel <przemyslaw.kitszel@intel.com>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>, 
+ Alexander Lobakin <aleksander.lobakin@intel.com>
+Cc: netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Jacob Keller <jacob.e.keller@intel.com>, 
+ Mohammad Heib <mheib@redhat.com>, 
+ Aleksandr Loktionov <aleksandr.loktionov@intel.com>, 
+ Rafal Romanowski <rafal.romanowski@intel.com>, 
+ Dan Nowlin <dan.nowlin@intel.com>, Junfeng Guo <junfeng.guo@intel.com>, 
+ Ting Xu <ting.xu@intel.com>, Jie Wang <jie1x.wang@intel.com>, 
+ Qi Zhang <qi.z.zhang@intel.com>, 
+ Jedrzej Jagielski <jedrzej.jagielski@intel.com>, 
+ Rahul Rameshbabu <rrameshbabu@nvidia.com>, 
+ Paul Menzel <pmenzel@molgen.mpg.de>, 
+ Marcin Szycik <marcin.szycik@linux.intel.com>, 
+ Rinitha S <sx.rinitha@intel.com>, Hariprasad Kelam <hkelam@marvell.com>, 
+ Kohei Enju <enjuk@amazon.com>, Vitaly Lifshits <vitaly.lifshits@intel.com>, 
+ =?utf-8?q?Timo_Ter=C3=A4s?= <timo.teras@iki.fi>, 
+ Dima Ruinskiy <dima.ruinskiy@intel.com>, 
+ Avraham Koren <Avrahamx.koren@intel.com>, jbrandeburg@cloudflare.com
+X-Mailer: b4 0.15-dev-f4b34
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4886;
+ i=jacob.e.keller@intel.com; h=from:subject:message-id;
+ bh=XHH3YtsgJTonABcDP1cjjeeuWzSJz8QnHP+0ONp0oR0=;
+ b=owGbwMvMwCWWNS3WLp9f4wXjabUkhoyPdx8tTeY5PclbOprLWM1pubHf56VK2w579Yasc82ae
+ F5+mvqzjlIWBjEuBlkxRRYFh5CV140nhGm9cZaDmcPKBDKEgYtTACZi+4mRYdOj1ONlPP3dKdcP
+ dzZGb9KQVDJTMvReEZp97UNz3DSuVEaGCXOsjv1OP2C/3/zvmoZZ2ldrPgVkthp8yFkXbfPlykk
+ VBgA=
+X-Developer-Key: i=jacob.e.keller@intel.com; a=openpgp;
+ fpr=204054A9D73390562AEC431E6A965D3E6F0F28E8
 
---0000000000003f8f5f06415402b4
-Content-Type: text/plain; charset="UTF-8"
+Mohammad Heib introduces a new devlink parameter, max_mac_per_vf, for
+controlling the maximum number of MAC address filters allowed by a VF. This
+allows administrators to control the VF behavior in a more nuanced manner.
 
-Hi Robin,
+Aleksandr and Przemek add support for Receive Side Scaling of GTP to iAVF
+for VFs running on E800 series ice hardware. This improves performance and
+scalability for virtualized network functions in 5G and LTE deployments.
 
-On Fri, 17 Oct 2025 at 01:45, Robin Murphy <robin.murphy@arm.com> wrote:
->
-> On 2025-10-15 2:46 pm, Robin Murphy wrote:
-> > kunit_device_register() only returns error pointers, not NULL.
-> > Furthermore for regular users who aren't testing the KUnit API
-> > itself, errors most likely represent major system failure (e.g. OOM
-> > or sysfs collision) beyond the scope of their own test conditions.
-> > Replace the assert with straightforward error handling for clarity.
-> >
-> > Signed-off-by: Robin Murphy <robin.murphy@arm.com>
-> > ---
-> > This seemed the logical conclusion by inspection, but please do correct
-> > me if I've misunderstood the intent...
-> > ---
-> >   Documentation/dev-tools/kunit/usage.rst | 3 ++-
-> >   1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/Documentation/dev-tools/kunit/usage.rst b/Documentation/dev-tools/kunit/usage.rst
-> > index 038f480074fd..3452c739dd44 100644
-> > --- a/Documentation/dev-tools/kunit/usage.rst
-> > +++ b/Documentation/dev-tools/kunit/usage.rst
-> > @@ -873,7 +873,8 @@ For example:
-> >
-> >               // Create a fake device.
-> >               fake_device = kunit_device_register(test, "my_device");
-> > -             KUNIT_ASSERT_NOT_ERR_OR_NULL(test, fake_device)
-> > +             if (IS_ERR(fake_device))
-> > +                     return;
->
-> On further consideration, I guess kunit_skip() (as used in various other
-> places) is actually what I want here?
->
-> Basically, as someone looking at KUnit with fresh eyes it seems
-> intuitive to me that not being able to run a test case is a not a
-> failure of the thing being tested, so shouldn't be reported as such, and
-> thus this example stood out. I for one wouldn't want to be getting CI
-> notifications to go and debug a "regression" in my code just because a
-> runner OOM'd, for example :)
+Jacob revives one-year-old work from Jesse Brandeburg to implement the
+standardized statistics interfaces from ethtool in the ice driver.
 
-Ultimately, I think this is up to the individual test author -- in
-many cases, I think failing to create a device (for any reason) should
-be considered a test failure. Certainly this is the pattern which
-exists in most tests thus far. In general, KUNIT_ASSERT_* is used to
-verify these sorts of failures (after which the test cannot continue).
+Kohei improves the behavior of the RSS indirection table for ixgbe,
+ensuring it is preserved across device reset and when the device is
+administratively closed and re-open.
 
-That being said, I definitely think you'd need to use at least
-kunit_skip() -- with a good message -- if you wanted to split
-"infrastructure failures" out: having a test marked "success" in
-situations where it couldn't run properly (as in the original patch)
-would be even more misleading. kunit_skip() is definitely used to skip
-tests if prerequisites aren't found, but this tends to be done at the
-start of the test with deterministic, known-in-advance requirements
-(e.g number of processors available), rather than in response to an
-OOM situation. (And, realistically, if the system is so memory
-constrained that we're getting OOMs here, chances are you'll want to
-know about it and re-run the tests anyway.
+Vitaly introduces a new private flag to control the K1 power state of ICH
+network controllers supported by the e1000e driver. This flag has been
+extensively discussed on the list and deemed the best available option to
+provide a field workaround without impacting the many configurations that
+have no issues with the K1 power state.
 
-Regardless, I'd prefer to keep the example in the documentation as-is:
-KUNIT_ASSERT* will correctly exit the test and clean up in this case,
-whereas manually writing the IS_ERR/return bit is a bit more
-contingent on this not being in an init/helper/etc function.
+Signed-off-by: Jacob Keller <jacob.e.keller@intel.com>
+---
+Changes in v2:
+- Fixed the accidental diffstat and '--' separator in patch 6
+- Add missing Return annotation ice_hash_remove
+- Add missing Return annotation for ice_map_ip_ctx_idx
+- Improve Return annotation for ice_hash_moveout
+- Add missing Return annotation for ice_ptg_attr_in_use
+- Verified with ingest_mdir.py tests :D
+- Link to v1: https://lore.kernel.org/r/20251015-jk-iwl-next-2025-10-15-v1-0-79c70b9ddab8@intel.com
 
-But separating "test failures" from "infrastructure failures" is a
-good idea in general, and our current splitting things up into
-"failed", "skipped", and "crashed" (used by the tooling for cases
-where the kernel dies without outputting the result) is clearly not
-ideal for these OOM-adjacent cases.
+---
+Aleksandr Loktionov (4):
+      ice: add flow parsing for GTP and new protocol field support
+      ice: add virtchnl and VF context support for GTP RSS
+      ice: improve TCAM priority handling for RSS profiles
+      iavf: add RSS support for GTP protocol via ethtool
 
-Cheers,
--- David
+Jesse Brandeburg (5):
+      net: docs: add missing features that can have stats
+      ice: implement ethtool standard stats
+      ice: add tracking of good transmit timestamps
+      ice: implement transmit hardware timestamp statistics
+      ice: refactor to use helpers
 
---0000000000003f8f5f06415402b4
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Kohei Enju (1):
+      ixgbe: preserve RSS indirection table across admin down/up
 
-MIIUnQYJKoZIhvcNAQcCoIIUjjCCFIoCAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
-ghIEMIIGkTCCBHmgAwIBAgIQfofDAVIq0iZG5Ok+mZCT2TANBgkqhkiG9w0BAQwFADBMMSAwHgYD
-VQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSNjETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UE
-AxMKR2xvYmFsU2lnbjAeFw0yMzA0MTkwMzUzNDdaFw0zMjA0MTkwMDAwMDBaMFQxCzAJBgNVBAYT
-AkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSowKAYDVQQDEyFHbG9iYWxTaWduIEF0bGFz
-IFI2IFNNSU1FIENBIDIwMjMwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDYydcdmKyg
-4IBqVjT4XMf6SR2Ix+1ChW2efX6LpapgGIl63csmTdJQw8EcbwU9C691spkltzTASK2Ayi4aeosB
-mk63SPrdVjJNNTkSbTowej3xVVGnYwAjZ6/qcrIgRUNtd/mbtG7j9W80JoP6o2Szu6/mdjb/yxRM
-KaCDlloE9vID2jSNB5qOGkKKvN0x6I5e/B1Y6tidYDHemkW4Qv9mfE3xtDAoe5ygUvKA4KHQTOIy
-VQEFpd/ZAu1yvrEeA/egkcmdJs6o47sxfo9p/fGNsLm/TOOZg5aj5RHJbZlc0zQ3yZt1wh+NEe3x
-ewU5ZoFnETCjjTKz16eJ5RE21EmnCtLb3kU1s+t/L0RUU3XUAzMeBVYBEsEmNnbo1UiiuwUZBWiJ
-vMBxd9LeIodDzz3ULIN5Q84oYBOeWGI2ILvplRe9Fx/WBjHhl9rJgAXs2h9dAMVeEYIYkvW+9mpt
-BIU9cXUiO0bky1lumSRRg11fOgRzIJQsphStaOq5OPTb3pBiNpwWvYpvv5kCG2X58GfdR8SWA+fm
-OLXHcb5lRljrS4rT9MROG/QkZgNtoFLBo/r7qANrtlyAwPx5zPsQSwG9r8SFdgMTHnA2eWCZPOmN
-1Tt4xU4v9mQIHNqQBuNJLjlxvalUOdTRgw21OJAFt6Ncx5j/20Qw9FECnP+B3EPVmQIDAQABo4IB
-ZTCCAWEwDgYDVR0PAQH/BAQDAgGGMDMGA1UdJQQsMCoGCCsGAQUFBwMCBggrBgEFBQcDBAYJKwYB
-BAGCNxUGBgkrBgEEAYI3FQUwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUM7q+o9Q5TSoZ
-18hmkmiB/cHGycYwHwYDVR0jBBgwFoAUrmwFo5MT4qLn4tcc1sfwf8hnU6AwewYIKwYBBQUHAQEE
-bzBtMC4GCCsGAQUFBzABhiJodHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vcm9vdHI2MDsGCCsG
-AQUFBzAChi9odHRwOi8vc2VjdXJlLmdsb2JhbHNpZ24uY29tL2NhY2VydC9yb290LXI2LmNydDA2
-BgNVHR8ELzAtMCugKaAnhiVodHRwOi8vY3JsLmdsb2JhbHNpZ24uY29tL3Jvb3QtcjYuY3JsMBEG
-A1UdIAQKMAgwBgYEVR0gADANBgkqhkiG9w0BAQwFAAOCAgEAVc4mpSLg9A6QpSq1JNO6tURZ4rBI
-MkwhqdLrEsKs8z40RyxMURo+B2ZljZmFLcEVxyNt7zwpZ2IDfk4URESmfDTiy95jf856Hcwzdxfy
-jdwx0k7n4/0WK9ElybN4J95sgeGRcqd4pji6171bREVt0UlHrIRkftIMFK1bzU0dgpgLMu+ykJSE
-0Bog41D9T6Swl2RTuKYYO4UAl9nSjWN6CVP8rZQotJv8Kl2llpe83n6ULzNfe2QT67IB5sJdsrNk
-jIxSwaWjOUNddWvCk/b5qsVUROOuctPyYnAFTU5KY5qhyuiFTvvVlOMArFkStNlVKIufop5EQh6p
-jqDGT6rp4ANDoEWbHKd4mwrMtvrh51/8UzaJrLzj3GjdkJ/sPWkDbn+AIt6lrO8hbYSD8L7RQDqK
-C28FheVr4ynpkrWkT7Rl6npWhyumaCbjR+8bo9gs7rto9SPDhWhgPSR9R1//WF3mdHt8SKERhvtd
-NFkE3zf36V9Vnu0EO1ay2n5imrOfLkOVF3vtAjleJnesM/R7v5tMS0tWoIr39KaQNURwI//WVuR+
-zjqIQVx5s7Ta1GgEL56z0C5GJoNE1LvGXnQDyvDO6QeJVThFNgwkossyvmMAaPOJYnYCrYXiXXle
-A6TpL63Gu8foNftUO0T83JbV/e6J8iCOnGZwZDrubOtYn1QwggWDMIIDa6ADAgECAg5F5rsDgzPD
-hWVI5v9FUTANBgkqhkiG9w0BAQwFADBMMSAwHgYDVQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBS
-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
-Dxz3AgMBAAGjggHgMIIB3DAeBgNVHREEFzAVgRNkYXZpZGdvd0Bnb29nbGUuY29tMA4GA1UdDwEB
-/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDBAYIKwYBBQUHAwIwHQYDVR0OBBYEFHZtY3XkWtC2
-e2Idfk+0JyK7BLzzMFgGA1UdIARRME8wCQYHZ4EMAQUBAjBCBgorBgEEAaAyCgMDMDQwMgYIKwYB
-BQUHAgEWJmh0dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAwGA1UdEwEB/wQC
-MAAwgZoGCCsGAQUFBwEBBIGNMIGKMD4GCCsGAQUFBzABhjJodHRwOi8vb2NzcC5nbG9iYWxzaWdu
-LmNvbS9jYS9nc2F0bGFzcjZzbWltZWNhMjAyMzBIBggrBgEFBQcwAoY8aHR0cDovL3NlY3VyZS5n
-bG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NhdGxhc3I2c21pbWVjYTIwMjMuY3J0MB8GA1UdIwQYMBaA
-FDO6vqPUOU0qGdfIZpJogf3BxsnGMEYGA1UdHwQ/MD0wO6A5oDeGNWh0dHA6Ly9jcmwuZ2xvYmFs
-c2lnbi5jb20vY2EvZ3NhdGxhc3I2c21pbWVjYTIwMjMuY3JsMA0GCSqGSIb3DQEBCwUAA4ICAQBo
-hqjbVaHxZoT6HHUuwQcTlbgXpuVi59bQPrSwb/6Pn1t3h3SLeuUCvOYpoQjxlWy/FexsPW+nWS0I
-PUmWpt6sxbIRTKPfb7cPk32XezfnA0jexucybiXzkZKTrbI7zoMOzDIWpTKYZAonB9Zzi7Dso4An
-ZOtz/E3yhdR/q1MK30d5fiCS0vorEd0Oy8Jzcc7TJ2HGMzEEXiFFvVrJYJHvfYOeXE4ywAG6YWO0
-x78+bXeB9vkeWHhOYKyYXuAXrnHASddEICg1QlJCHDAISMC1Wn/tjqTMTt3sDAe+dhi9V1FEGTbG
-g9PxPVP4huJEMIBu/MWNMzHfiW4E7eCHVPrmtX7CFDlMik7qsgQBbO5h6EcxBamhIflfMgoISsRJ
-Vyll2E5BNVwkNstMgU3WMg5yIaQcuGFgFnMTrQcaLEEFPV3cCP9pgXovYDirnB7FKNdCZNHfeBY1
-HEXJ2jIPDP6nWSbYoRry0TvPgxh5ZeM5+sc1L7kY75C8U4FV3t4qdC+p7rgqfAggdvDPa5BJbTRg
-KAzwyf3z7XUrYp38pXybmDnsEcRNBIOEqBXoiBxZXaKQqaY921nWAroMM/6I6CVpTnu6JEeQkoi4
-IgGIEaTFPcgAjvpDQ8waLJL84EP6rbLW6dop+97BXbeO9L/fFf40kBhve6IggpJSeU9RdCQ5czGC
-Al0wggJZAgEBMGgwVDELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKjAo
-BgNVBAMTIUdsb2JhbFNpZ24gQXRsYXMgUjYgU01JTUUgQ0EgMjAyMwIQAYQLf/BIzLow9kWqD8My
-PzANBglghkgBZQMEAgEFAKCBxzAvBgkqhkiG9w0BCQQxIgQg8oKw7HPbLnVNj4Atk8PJANsgMBRq
-z3ISPKjgisYFGqUwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjUx
-MDE3MDUyODUxWjBcBgkqhkiG9w0BCQ8xTzBNMAsGCWCGSAFlAwQBKjALBglghkgBZQMEARYwCwYJ
-YIZIAWUDBAECMAoGCCqGSIb3DQMHMAsGCSqGSIb3DQEBBzALBglghkgBZQMEAgEwDQYJKoZIhvcN
-AQEBBQAEggEABbu/1rjk+szXPC6rL65MIb5bJxqJERzn5+stUjFYv33jCaDsPXBAa0Izi8lCgPO0
-5UMSmFVZWEAlMZnbMnAYoxcuF4+EU/oFQr4vHcqfmfbtC/Qx/LWJSrF3fcV9kcwJU1zkraMm8dkm
-n7HSJVeCPcOQ/3V92z2imrgBDHhRmO92HD9CvPi+46mNknkg9uLZzyBuqXKpL+E37Fns1mTuN2cR
-E50tiFp3HaEZPymwHksJjcg6x5oE/KOrs+JyPs/DmmeCnzIcNWcE6Qr1kg6X8/tJTms+aRcqI5SU
-PyaxVZ16DpWBwxaK0ho6Sn5nWlGM8V02grYgc848R/90RnHGSw==
---0000000000003f8f5f06415402b4--
+Mohammad Heib (2):
+      devlink: Add new "max_mac_per_vf" generic device param
+      i40e: support generic devlink param "max_mac_per_vf"
+
+Przemek Kitszel (1):
+      ice: Extend PTYPE bitmap coverage for GTP encapsulated flows
+
+Vitaly Lifshits (1):
+      e1000e: Introduce private flag to disable K1
+
+ drivers/net/ethernet/intel/e1000e/e1000.h          |    1 +
+ drivers/net/ethernet/intel/i40e/i40e.h             |    4 +
+ drivers/net/ethernet/intel/iavf/iavf_adv_rss.h     |   31 +
+ drivers/net/ethernet/intel/ice/ice_flex_type.h     |    1 +
+ drivers/net/ethernet/intel/ice/ice_flow.h          |   94 +-
+ drivers/net/ethernet/intel/ice/ice_protocol_type.h |   20 +
+ drivers/net/ethernet/intel/ice/ice_ptp.h           |    2 +
+ drivers/net/ethernet/intel/ice/ice_type.h          |    1 +
+ drivers/net/ethernet/intel/ice/ice_vf_lib.h        |   48 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe.h           |    2 +
+ include/linux/avf/virtchnl.h                       |   50 +
+ include/net/devlink.h                              |    4 +
+ drivers/net/ethernet/intel/e1000e/ethtool.c        |   45 +-
+ drivers/net/ethernet/intel/e1000e/ich8lan.c        |   41 +-
+ drivers/net/ethernet/intel/e1000e/netdev.c         |    3 +
+ drivers/net/ethernet/intel/i40e/i40e_devlink.c     |   48 +-
+ drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.c |   31 +-
+ drivers/net/ethernet/intel/iavf/iavf_adv_rss.c     |  119 +-
+ drivers/net/ethernet/intel/iavf/iavf_ethtool.c     |   89 ++
+ drivers/net/ethernet/intel/ice/ice_ethtool.c       |  144 ++-
+ drivers/net/ethernet/intel/ice/ice_flex_pipe.c     |  101 +-
+ drivers/net/ethernet/intel/ice/ice_flow.c          |  270 +++-
+ drivers/net/ethernet/intel/ice/ice_lag.c           |    3 +-
+ drivers/net/ethernet/intel/ice/ice_main.c          |   13 +-
+ drivers/net/ethernet/intel/ice/ice_parser.c        |    3 +
+ drivers/net/ethernet/intel/ice/ice_ptp.c           |   15 +-
+ drivers/net/ethernet/intel/ice/ice_sriov.c         |    3 +-
+ drivers/net/ethernet/intel/ice/virt/rss.c          | 1314 +++++++++++++++++++-
+ drivers/net/ethernet/intel/ixgbe/ixgbe_main.c      |   45 +-
+ net/devlink/param.c                                |    5 +
+ .../networking/devlink/devlink-params.rst          |    4 +
+ Documentation/networking/devlink/i40e.rst          |   32 +
+ Documentation/networking/statistics.rst            |    4 +-
+ 33 files changed, 2361 insertions(+), 229 deletions(-)
+---
+base-commit: 2df75cc5bdc48f8a6f393eaa9d18480aeddac7f2
+change-id: 20251015-jk-iwl-next-2025-10-15-914430774f51
+
+Best regards,
+--  
+Jacob Keller <jacob.e.keller@intel.com>
+
 
