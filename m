@@ -1,114 +1,103 @@
-Return-Path: <linux-doc+bounces-63743-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63698-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D9ECBEBB75
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 22:46:30 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E233BEB712
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 22:08:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id BF8723552FE
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 20:46:29 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E34E53B2F7F
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 20:08:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 84F2A1C3BEB;
-	Fri, 17 Oct 2025 20:46:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 165C62566DD;
+	Fri, 17 Oct 2025 20:08:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V9zR1WIi"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="IOhdQb09"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5ABE2354AC9;
-	Fri, 17 Oct 2025 20:46:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CC5333F8DB;
+	Fri, 17 Oct 2025 20:08:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760733986; cv=none; b=l1JHJqv3rKb6G7bcEKbeTUgQlGNNxIkkM4V9z+wJraXqIUKbxe7t6sTqtVF/eOAOMGPVcztZhNDNvFGNq5H7rtbfuF8O4sjGX46WwnKYcZwUQy/9niDp0pM2yAm0gHC3fLppyy+G55nWDNbZ30ILMXEgOTcu8xVSaDQEqBP7+fY=
+	t=1760731723; cv=none; b=N4MSwcbUwpnJN1R99uvQFLG3BCk1VakO1Jt8mWgQkLnb+An0C8FoyQSg2cv62vnCVXSmwuXSaxE0oS+/CC4PqJsiimQqqZIFOR6wE2aft8Hm067CLy7dIPiCD1mtisu/JfVnRR3WaFekUhlfXhAkfNgl+En1jZMTO3Jg/Q87xdI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760733986; c=relaxed/simple;
-	bh=tonlCgAc2fou04wY9oIAPAvVd1QMUHHqi+nHAFLkvmo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OCVHuAlUIPVJU8kUxp9fzaepCdPxM4imUVOXQ0OodjW+3gO2sOV2Cx24avnFUWlheObzLMZY/0ygXvWl2dgq45aZkNgxflZt5H82lap3OITiZy8+PZ0heXo46vfCYg/CzkSyPWjYyYMAPOkHlzkQx92iH8yh8Umac6TJEYPhVes=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V9zR1WIi; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51D85C4CEE7;
-	Fri, 17 Oct 2025 20:46:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1760733985;
-	bh=tonlCgAc2fou04wY9oIAPAvVd1QMUHHqi+nHAFLkvmo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=V9zR1WIisBlunuVE6mKDmfQIf2gzMFlpC3TblNQxrHTevdhhlFEXthAqRZ3lJ6xx0
-	 wdmdMOP3ij1RkaaMk7ZVBNg66NTfTKTUYr4gPx0EOJcBD1O4WfwuHQrqPq4OWuAAxI
-	 rrk7TrKxWCiSxXiYo6zM6JmTJJnweI9vq6TGe8JfK2RnRXbDDRE9aY4V1W7wWTYIsd
-	 +09IW6/RnRiKHMKrJhYd7V8u2oi195DyfVvQ0QceRJMNAm2CGe76slpZBCsVFZSGtZ
-	 SQJRrh6ztwc8EmSByEtH2cDJnQR40k/2pW5vW07JyrmhxM6fpyUmXQFyckt/7ymIDd
-	 sH2kCkGWHhsCg==
-Date: Fri, 17 Oct 2025 21:54:12 +0200
-From: Nicolas Schier <nsc@kernel.org>
-To: Gang Yan <gang.yan@linux.dev>
-Cc: Nathan Chancellor <nathan@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	David Disseldorp <ddiss@suse.de>, linux-kbuild@vger.kernel.org,
-	linux-doc@vger.kernel.org, Gang Yan <yangang@kylinos.cn>
-Subject: Re: [PATCH, v2] kbuild: doc: improve KBUILD_BUILD_TIMESTAMP
- documentation
-Message-ID: <aPKe5KGR27robyc5@levanger>
-References: <20251017021209.6586-1-gang.yan@linux.dev>
+	s=arc-20240116; t=1760731723; c=relaxed/simple;
+	bh=mqgzHYNbed1bkvPNFELxeM/6jxkFoNeu/evIeYHFfEQ=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=p3aJJJNnQz1mb2Rbyv83AYW3O9enXnxgC8+L6c/ommGk8n2n4ITe/pRADcIY+imIXUi3egzEVK8euMbrMYWOzQFOmIG0J20vtjEwA6cNoUJIm0dvR7fve1rcGcjUrY5CoEEHTkDJCHHLhshO0KjBZNy6PkucCNKB5nwwj6yDtiQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=IOhdQb09; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1110540B1D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1760731720; bh=Eu7Efolufq4MnZu/dPzVcX1UsuGoN4glZCYwWOMEPq4=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=IOhdQb09ZMx5KbybaUxCQ2hP7BAEGCwCDQs4Nlf7Z/TeHcdHwOJ28utrF9t54R5om
+	 ieg64H+PosVgN9OboSecRbnM31lS+Eot3uCUtlIN3iCDuJ3RsD4ZZybM03hj/JlQv7
+	 ujc3PXisIY79RXe54ZKdWsfyL0XF5qTOmee/eOWzS1e+ny5DO1lYwPbzdrTwpPJpXx
+	 m3os40pZSUqtWTWIA49En59TgBlTLSTuFDaySC+fLmheNjAVcjoNEezB56Vp7ChaT1
+	 Xq0gZRc24AEsWltCwzjS292+W38vCFBWAs9LGq3rcTbtQnhPxM67E3SjQ0iCzaadE1
+	 2eGDPXgJ9obbA==
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 1110540B1D;
+	Fri, 17 Oct 2025 20:08:40 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Linux Doc Mailing
+ List <linux-doc@vger.kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org
+Subject: Re: [PATCH 00/23] Fix media uAPI cross references
+In-Reply-To: <cover.1759329363.git.mchehab+huawei@kernel.org>
+References: <cover.1759329363.git.mchehab+huawei@kernel.org>
+Date: Fri, 17 Oct 2025 14:08:39 -0600
+Message-ID: <87h5vx1ebc.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251017021209.6586-1-gang.yan@linux.dev>
+Content-Type: text/plain
 
-On Fri, Oct 17, 2025 at 10:12:09AM +0800, Gang Yan wrote:
-> From: Gang Yan <yangang@kylinos.cn>
-> 
-> This patch adds an example of how to set KBUILD_BUILD_TIMESTAMP to a
-> specific date. Also, note that the provided timestamp is used for
-> initramfs mtime fields, which are 32-bit and thus limited to dates
-> between the Unix epoch and 2106-02-07 06:28:15 UTC. Dates outside this
-> range will cause errors.
-> 
-> Suggested-by: David Disseldorp <ddiss@suse.de>
-> Signed-off-by: Gang Yan <yangang@kylinos.cn>
-> Reviewed-by: David Disseldorp <ddiss@suse.de>
-> ---
-> Changelog:
->  v2:
->   - Replace the invalid example with a valid one.
->   - Apply David's suggestions.
-> ---
->  Documentation/kbuild/kbuild.rst | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
-> 
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-Thanks to both of you!
+> In the past, media used Docbook to generate documentation, together
+> with some logic to ensure that cross-references would match the
+> actual defined uAPI.
+>
+> The rationale is that we wanted to automatically check for uAPI
+> documentation gaps.
+>
+> The same logic was migrated to Sphinx. Back then, broken links
+> were reported. However, recent versions of it and/or changes at
+> conf.py disabled such checks.
+>
+> The result is that several symbols are now not cross-referenced,
+> and we don't get warnings anymore when something breaks.
+>
+> This series consist on 2 parts:
+>
+> Part 1: extra patches to parse_data_structs.py and kernel_include.py;
+> Part 2: media documentation fixes.
+>
+> I'm not sure what's the best strategy to merge it, as some patches
+> belong to doc while others are media. So, they can be merged on
+> either one of the tree, or split on two series and merged in
+> separate or even being merged via a PR applied on both trees.
+>
+> IMO, the latter is the better strategy.
 
-I have only found a tiny nit-pick, see below.
+OK, this series has been applied to -rc1 and is available in my
+media-uapi branch.  I've also merged it into docs-next.
 
-Reviewed-by: Nicolas Schier <nsc@kernel.org>
+Thanks,
 
-> diff --git a/Documentation/kbuild/kbuild.rst b/Documentation/kbuild/kbuild.rst
-> index 3388a10f2dcc..881189ecd0ca 100644
-> --- a/Documentation/kbuild/kbuild.rst
-> +++ b/Documentation/kbuild/kbuild.rst
-> @@ -328,8 +328,14 @@ KBUILD_BUILD_TIMESTAMP
->  ----------------------
->  Setting this to a date string overrides the timestamp used in the
->  UTS_VERSION definition (uname -v in the running kernel). The value has to
-> -be a string that can be passed to date -d. The default value
-> -is the output of the date command at one point during build.
-> +be a string that can be passed to date -d. E.g.::
-> +
-> +$ KBUILD_BUILD_TIMESTAMP="Mon Oct 13 00:00:00 UTC 2025" make
-
-Other code blocks in kbuild.rst are indented by four spaces (and
-accidentally five in one line).
-
-I can add these when applying the patch for kbuild-next, if that is ok
-for you.
-
-Kind regards
-Nicolas
+jon
 
