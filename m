@@ -1,131 +1,121 @@
-Return-Path: <linux-doc+bounces-63742-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63744-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0DAFBEBB2E
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 22:37:58 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A82DBEBCA7
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 23:16:35 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id AD1B84ECE55
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 20:37:57 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id AF19519A3457
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 21:16:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CB402F6938;
-	Fri, 17 Oct 2025 20:37:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 68CAE271449;
+	Fri, 17 Oct 2025 21:16:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="gqI4ABPY"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="jyk5UvgG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DCD6233155
-	for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 20:37:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B25F354ADF;
+	Fri, 17 Oct 2025 21:16:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760733465; cv=none; b=IQB7omFTbgPH84e6Z/8VFh47JQ6lWBK6We75FedHaTV6PYDGA2+pMZfMhKzTxowYHS54lm8ajTCVNwyVpwmKRx3Hw6p+3DYRbuAsoW/usK3iSjBbdnafDp3FeW3ackwdoOUhw5TKKzyN/SgvgGBLYiJrbAfUeaTlYd7IoeGXpvw=
+	t=1760735790; cv=none; b=E3qmDyp/5hLZpT8CgBQEFgOBK69NED4bsdvQRAxLiJk1+m+e7cYwkJEOYcNTZ7Z+ht7yn3oUZIdMAV4PxxmL9Y3ajyH3TMcZRq9U3Rim2+rBHdzPHXfNhvxekgzUZz4ZdWjHgehCanJnCCsQqXuf4KKzPzkWMAjF5ZtFeR3tv24=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760733465; c=relaxed/simple;
-	bh=MctnxTuATai4l54nWLFKFelAF8yZCCN6uTLE/mlmEHc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DmWkSD+PlZTpzE/BL3wOCapHpv83FP79kscUVlcxB6lI7QQwpHWKFYm1M6/TRi8klxYC3ZppRO9ZPdkVJ7pdhpWTl1lwAd3yV8XuJqq/ODzvmyZXaX29GrLRvo/qufJv64J0cga82c1c1R9LUBRtG8wQo8U3xC6B9dSE3Wf7PUA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=gqI4ABPY; arc=none smtp.client-ip=209.85.210.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-789fb76b466so2173053b3a.0
-        for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 13:37:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1760733462; x=1761338262; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6ZeBq3Lk7BVfi39KwhzSp3L/wgMnqHyapiXXWG829qc=;
-        b=gqI4ABPYZ4QxRCc4QY3quTX9wWdAeBGRG4f2PXIHFN3czNr438NrTWUk8dW6xUs91Z
-         IqDmV28cJc8njMpB0h5e6xXleESDsYjrODmGS6FduS67qsKnILcQCObgOz6J5Q0PJ0SZ
-         U1p4pUfI6fQq4zt1eEvwMffrKUtyF1tfAfGDs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1760733462; x=1761338262;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6ZeBq3Lk7BVfi39KwhzSp3L/wgMnqHyapiXXWG829qc=;
-        b=o5bIlwLWVn6kcGhGf9ggZpQHAmjyRP5vY/NYY9UYQvq9cqETYGsAWLAGLHg8KyE/26
-         0bEzNriwOFMcfdT3VjkpJftghdyR/OoQr42YTTj8QZ/WHm//eciMJ9yD/k6fW8x3t0Ed
-         +rXXtEiIwtpPfHXPefEaDSOa4kgEFZWxmys2kjB9e0I4bVaSjmmcgsy6GZriMGw8ka6E
-         sEUdcVGf99pZBFyvwiN3oTBzpCqtzRPXtEupKu69j95q/pr1//L6gsboctFJxYuK2pxh
-         zDVnDqlcIXdYGa6DmASMRKElP/9MEbPOv2mZSWQtcu3bLJFcAkNpnsN08ft9Q0b+1BcW
-         Yzng==
-X-Gm-Message-State: AOJu0YyPmqX6rYC2iqTAvpB2TwidmF+F0u9l4XDTPo6qHXIqI9RYs5y7
-	L+5sNkSrJhvn5ZSWho+R/vqOgJR4fgyr2Mba/vyREu3wuE1f5lR5RrWVrzyU0Krt1A==
-X-Gm-Gg: ASbGnctptsQVIpViRA0zzX6NObMnF/kcjMFSkT1IKFvxbuynVQxNb76WS3BJ+L6w3Ki
-	7fIAxeGmSutdlxv1HdIE9Pl9gVhkDE4HfDv0sWG+sNcWpz/OcJxKePv2Q2LSgkW6Q+FwlrNf2ss
-	1fYi4jDdBeItpQHwkOz3yZ65s5we6hLQTgRhAebYFruhO8yJ0KeUBg6Zpwamkebdsn0P//71/FT
-	Onz3MRIH8AkV+9jgkyVtyOFSM9b96jLGKeLPOSHQ92kiBcyBIbdhbLfmhvvRtP3Rk/lyAR3dJo0
-	be5YD71eUqGGW6rb32n1HNZqC99dY4LRecDuOnlc3rAKV3B9RescvD9qoJEL5mz9ohi7D5eKVz3
-	UQxps38SY4sYY1lW9DrtC+loMxt0sxUbTPmO+A1WHnw0TZsccVEb9kmEhVhtpzvGHLRqtLrMLyI
-	+f2xUpshb4aw8t75ejh0FRetF928al1KvN7I3g6A==
-X-Google-Smtp-Source: AGHT+IE/YYS3o1+JuvtET9j/q+byOk9MK+q6kmDUXS3KntYy67SnJd6kX1S96rUUu+Rtdegc54AW9Q==
-X-Received: by 2002:a05:6a20:2590:b0:334:9fbb:35c3 with SMTP id adf61e73a8af0-334a862167fmr6473965637.46.1760733462564;
-        Fri, 17 Oct 2025 13:37:42 -0700 (PDT)
-Received: from localhost ([2a00:79e0:2e7c:8:5ca9:a8d0:7547:32c6])
-        by smtp.gmail.com with UTF8SMTPSA id 98e67ed59e1d1-33bb65268b1sm2837858a91.2.2025.10.17.13.37.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Oct 2025 13:37:41 -0700 (PDT)
-From: Brian Norris <briannorris@chromium.org>
-To: Dwaipayan Ray <dwaipayanray1@gmail.com>,
-	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Joe Perches <joe@perches.com>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	workflows@vger.kernel.org,
-	Brian Norris <briannorris@chromium.org>
-Subject: [PATCH v2 2/2] docs: checkpatch: Drop networking comment style
-Date: Fri, 17 Oct 2025 13:37:12 -0700
-Message-ID: <20251017203719.1554224-2-briannorris@chromium.org>
-X-Mailer: git-send-email 2.51.0.858.gf9c4a03a3a-goog
-In-Reply-To: <20251017203719.1554224-1-briannorris@chromium.org>
-References: <20251017203719.1554224-1-briannorris@chromium.org>
+	s=arc-20240116; t=1760735790; c=relaxed/simple;
+	bh=WmUPzgLnBG1yK+phNKyl3NvrOgOJI6MjklB6JGxT0UM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZUsoHlvOaOFDD89+lg6+TCQkhOMR2+AdWFvXFuWelaFbC8kd/FPlcINrstegnIuuPevJW99vugg5AiOrzXo9/LsVK1JPYLizHl8TD16DnfYbNKn2a8Q+8Ski+EmV3RMweNsZNPqPZgN84sRR1PGzKAfN62C1bk1ollVP135fKqI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=jyk5UvgG; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=z/TSXdncORw86OBVqBrpLa3jhePghRL2wLGg8BR64rs=; b=jyk5UvgGnpqpJ22faaWu8az0jN
+	fzsPqmx7CHPl0TvcAqhRedctBUOfw3YQc3NQMjBE9BaFjZM3uVTJrdJbSZT80SoIU9QWLHl9S4HHs
+	qTIfJDhJsFfh4rjIzugu734xFhquJyyycElpMSE9GqGWflUI985CAtJHpss9tUGpLJ8Mfb5XtXqQu
+	liy9R8qa+qfanQtfEs9LAVyuh56fMUbAHKpabwfMEsJyS8IidHtIeQQdzWyUukgnPTpn6EoFnE1sd
+	jnjLJALpqdsPgrJTCkb215cvYc2lrCsoPYz7bD9PkIGVn+e0AQZC/ErBGTj+AEHw6vreEszq8JL34
+	me9cR/9Q==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1v9roJ-000000091zh-0vcn;
+	Fri, 17 Oct 2025 21:16:27 +0000
+Message-ID: <e4eaf960-b21b-475e-955c-b40f0adbfbf5@infradead.org>
+Date: Fri, 17 Oct 2025 14:16:26 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] docs: checkpatch: Drop networking comment style
+To: Brian Norris <briannorris@chromium.org>,
+ Dwaipayan Ray <dwaipayanray1@gmail.com>,
+ Lukas Bulwahn <lukas.bulwahn@gmail.com>, Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Joe Perches <joe@perches.com>, workflows@vger.kernel.org
+References: <20251017203719.1554224-1-briannorris@chromium.org>
+ <20251017203719.1554224-2-briannorris@chromium.org>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20251017203719.1554224-2-briannorris@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Networking no longer has their own comment style, and checkpatch no
-longer checks for this.
 
-Signed-off-by: Brian Norris <briannorris@chromium.org>
-Suggested-by: Randy Dunlap <rdunlap@infradead.org>
----
 
-Changes in v2:
- * new in v2
+On 10/17/25 1:37 PM, Brian Norris wrote:
+> Networking no longer has their own comment style, and checkpatch no
+> longer checks for this.
+> 
+> Signed-off-by: Brian Norris <briannorris@chromium.org>
+> Suggested-by: Randy Dunlap <rdunlap@infradead.org>
 
- Documentation/dev-tools/checkpatch.rst | 7 -------
- 1 file changed, 7 deletions(-)
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
 
-diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
-index d7fe023b3080..dfaad0a279ff 100644
---- a/Documentation/dev-tools/checkpatch.rst
-+++ b/Documentation/dev-tools/checkpatch.rst
-@@ -465,13 +465,6 @@ Comments
-        * for multi line comments.
-        */
- 
--    The networking comment style is a bit different, with the first line
--    not empty like the former::
--
--      /* This is the preferred comment style
--       * for files in net/ and drivers/net/
--       */
--
-     See: https://www.kernel.org/doc/html/latest/process/coding-style.html#commenting
- 
-   **C99_COMMENTS**
+and for reference:
+
+commit 82b8000c28b5
+Author: Johannes Berg <johannes.berg@intel.com>
+Date:   Mon Aug 19 11:09:43 2024 +0200
+    net: drop special comment style
+
+
+Thanks.
+
+> ---
+> 
+> Changes in v2:
+>  * new in v2
+> 
+>  Documentation/dev-tools/checkpatch.rst | 7 -------
+>  1 file changed, 7 deletions(-)
+> 
+> diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
+> index d7fe023b3080..dfaad0a279ff 100644
+> --- a/Documentation/dev-tools/checkpatch.rst
+> +++ b/Documentation/dev-tools/checkpatch.rst
+> @@ -465,13 +465,6 @@ Comments
+>         * for multi line comments.
+>         */
+>  
+> -    The networking comment style is a bit different, with the first line
+> -    not empty like the former::
+> -
+> -      /* This is the preferred comment style
+> -       * for files in net/ and drivers/net/
+> -       */
+> -
+>      See: https://www.kernel.org/doc/html/latest/process/coding-style.html#commenting
+>  
+>    **C99_COMMENTS**
+
 -- 
-2.51.0.858.gf9c4a03a3a-goog
-
+~Randy
 
