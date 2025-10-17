@@ -1,343 +1,289 @@
-Return-Path: <linux-doc+bounces-63632-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-63614-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 304BBBE6A10
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 08:20:46 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id ADE2EBE68A2
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 08:10:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 073E162631A
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 06:14:54 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 34CC2620ABA
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Oct 2025 06:10:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3AD4F31DD98;
-	Fri, 17 Oct 2025 06:11:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C6B930F526;
+	Fri, 17 Oct 2025 06:10:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EMHr4521"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IFPChHaB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84D303168FB;
-	Fri, 17 Oct 2025 06:11:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EB0830E0EC
+	for <linux-doc@vger.kernel.org>; Fri, 17 Oct 2025 06:10:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760681471; cv=none; b=l+DLMjRZoNvxpzKEpZdc9loUmkGnvmKyhNQGCMtRRmHgdRtQG/RllC5d8Vkwhj1B1T0gYeL9ryTjzV8FOqhC8TdVLfhRT1a+Lw9nMm6QhUwvGS6Z8DuoS6re3Fkvr5BTTObNquC9w5U8688fngwBl/nTFY+olZRJ+vQkVF/UnGY=
+	t=1760681410; cv=none; b=bt96+ncxGIvx758cqMJ9gzwe0nE5gpf3lyRfe90Qm/jroPUf24a9sahO9epFOxaeaDO7SzKs8/bf2Ib4mlq4y2ginEWow58DE6LSTnsKXWhdGRpTWpQ3zSU+4DEkGyHqYK31gE23+XhE30kBRGtbArVpfPm8nfVJAslVjJnNqzw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760681471; c=relaxed/simple;
-	bh=0YPZ8kN0xDFzPx4eOmBQGeoHeFzYLj3kTyvDZYdZ/K0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=gZtRC28kN3W86zVsXIPw9EhWys3Fi7lquDF0a/R4xNSiuVQmcJOwqbORLzR3EmY5lvZGypz7jirwCbijUplEXFSQ3U8yJwtr274r/oP0DAyvA/otN2UPju9OIjn21jXI5wys7JkCScCaKixA7+ZjRdJyBO2rHtNOgmlmPmtwHtI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EMHr4521; arc=none smtp.client-ip=192.198.163.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1760681467; x=1792217467;
-  h=from:date:subject:mime-version:content-transfer-encoding:
-   message-id:references:in-reply-to:to:cc;
-  bh=0YPZ8kN0xDFzPx4eOmBQGeoHeFzYLj3kTyvDZYdZ/K0=;
-  b=EMHr4521fcgDJhQvbd4fIDDLif+N67CD5c7A/z4iLIhE4WzB8ecT+yX4
-   GTeP6MtBoc4tjwrmJtOeyuVtoFHxiAW0XnAeQMe9s5X6U8UWD61r0CMZD
-   II8LfKNSZPeVQ10O90Py5KXVmxPLy6geguYGTYysH2W+u4JZbX/WGvVPR
-   S9srAOAPCX95YumN/uJTA/xkdn1m4cziKXRhoXRdA+m45EnAgbb42+jYJ
-   H+j1LbPaYtRVHAg4bJ33vQ37g0jyosTrdx+ExEKC2b8TFCqIS8CDEOiCQ
-   TU6nwzk0AbyuhTqd2qhj9b1sOexGezbmF2+664rMcdDIlF/foHHGmj+YT
-   g==;
-X-CSE-ConnectionGUID: 2/U/htO7SQqxCsW5YpWung==
-X-CSE-MsgGUID: YsIM1F1OSWi96JilCmbrVg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11584"; a="50454035"
-X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; 
-   d="scan'208";a="50454035"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2025 23:10:56 -0700
-X-CSE-ConnectionGUID: NCqBHw+0RWyJadntaNXpIQ==
-X-CSE-MsgGUID: GzI3N+57Tqy6phIHVQMtNw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,234,1754982000"; 
-   d="scan'208";a="183059520"
-Received: from orcnseosdtjek.jf.intel.com (HELO [10.166.28.70]) ([10.166.28.70])
-  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2025 23:10:56 -0700
-From: Jacob Keller <jacob.e.keller@intel.com>
-Date: Thu, 16 Oct 2025 23:08:43 -0700
-Subject: [PATCH net-next v2 14/14] e1000e: Introduce private flag to
- disable K1
+	s=arc-20240116; t=1760681410; c=relaxed/simple;
+	bh=PTeCjpmyIduQtL+k+FvKXkT5QKPZ5hJEEZjKkNV8bTE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GcgKU5K3Xjvnsip9yHuS/cvRplf46F99OBtZk180snFOYVj9X/TPhIttUl6PUyHaJohE7Ve5l6m0tLCdTU4zOkkZ5GpPIsw6QnVfMzYgFd6g4VHHtv++y2Gd0X3jMFdw33RlccgBiBXIFvAL1/QKuS2QChmccWX6nz5YFgFEk48=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IFPChHaB; arc=none smtp.client-ip=209.85.221.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-3ee64bc6b90so982160f8f.0
+        for <linux-doc@vger.kernel.org>; Thu, 16 Oct 2025 23:10:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1760681405; x=1761286205; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YKOBkkWD4hkodywyrqPuA/TDPu23QJtZxY6LZ9yXiLM=;
+        b=IFPChHaBoxYdHIzKSr61wiEEQUSUBTOGJJkuFk/9m8BjL4DVxUJ/fTN/X2bVsDWDrp
+         xFwM5Eggu1G5yzj7pnXGJtva4Lm5wozABWA7+drjTBnmR+6DpV18HJfL9NBFrwwtZjDE
+         5hd4PxNSx3kRNRQ5AlpfL1aGnzeInrPfp+ng7PMrE/GCFbaHW56OKdDwsLW+wXJKBHuQ
+         MesI0+PTcg6opFOLurA9gNqhJF9hEUh5EES4KZVJ47i9UpY66PYel5p5gc01i67u8ivI
+         DYY7Ah/26/ZWjJyEhIGZZqgBueq7JKmWZME/UlpQke9WMnc8QRjBYbR+IcUEobVyD5cD
+         aBsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1760681405; x=1761286205;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YKOBkkWD4hkodywyrqPuA/TDPu23QJtZxY6LZ9yXiLM=;
+        b=NaXJLorfPBzbQ/FJuosaETwWYJTIZF9yvRrI87lbFSkbZfE0yVyLBdzuNFU6a3hQ/j
+         O9UzvSu0GYqC3rdmUgFjomiQoQ64Mq+tzTn+GjJBNk5hVA+Tx0ZuDtryo4WeoXVT8Lk9
+         Uynt+jNpEiVxzl/j0FVufgv4kkOOFEhgfOp41Wvns5Cm0uHx9HK3v0NmJ6nE+QqO8JUe
+         ltW68+MbLMXh01Wdvh43s6+x3x2tbU8pivz6zEKB8XqeZ7xbMQYenhvtJ5vywsrN9NQF
+         MSmWi94W+xookXpRX42/DTLCNG1h3pZL/vbDNCOyP5M/URR5PlzcQcAusHownoIlDe2/
+         2ltA==
+X-Forwarded-Encrypted: i=1; AJvYcCVaT6gLPYopxhshHCb1Kw0hzpV53PWa03uKkzqDbgzcYU2YyqwUjFaj3l9pHtTXxjm9Yct67jCcXRg=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy2SLmPSCbZIzASFQV1VBKFJb7HOAvGxwvadREOg8MG2U9nZVOe
+	Y9F47aBgc3keWru23nHy4CvGxsbI/yof+rdMNs3OlKTL4hKdv8s7ZH6m
+X-Gm-Gg: ASbGncvevdsIUbl9re6nkZiAK9hoEB3Nl0za+1QfOxmu1uXaYnra7jXJBHsc6pGNPlz
+	D8nmhQXBWDY+Zx2c67H8l2a0ylRJQGvVQxpMT56JFY/m6T4HRo9P4eorLx5B5ih8mSHOq+1Tb66
+	VgD6Nm9b7HfSpVyu+DR4K4ILd6AAcLW8Pw4yGMjqhZJlC8nWMrgy3DD9+XM6+rF7YLCjOlkBeGc
+	jZNWI71Mv3CGUJdoDbAP51EGuXxNP/PFsb5HvbfyCdTyzD68yt0ByFsg3uryzuWmRiPBZ2cMZkK
+	07KilSXu2NRZR2oSsQ/uy8z+jr/FruEEKXFrquz903ySCiB//bgxeFc72M+iTGWOhaSK+eLif3O
+	9np7nn7xszuM3uTfygQv8MMReVb5UicSvE9qzakgbqD1YZTkHK4/IpuimWXsKsD/GWvU248amJv
+	LVoL3V9hSW5Uc=
+X-Google-Smtp-Source: AGHT+IGZ4ambk8T3o48xvPm40t3Ay+iXThL+hr7h4NpNwxZaAMKHno3K1osHDhvr/3GCz1pzwYtqQQ==
+X-Received: by 2002:a05:6000:178f:b0:3ee:1521:95fc with SMTP id ffacd0b85a97d-42704d8812bmr1885897f8f.14.1760681405257;
+        Thu, 16 Oct 2025 23:10:05 -0700 (PDT)
+Received: from localhost ([212.73.77.104])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-426ce5e1284sm38327970f8f.45.2025.10.16.23.10.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Oct 2025 23:10:04 -0700 (PDT)
+From: Askar Safin <safinaskar@gmail.com>
+To: linux-fsdevel@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Al Viro <viro@zeniv.linux.org.uk>,
+	Jan Kara <jack@suse.cz>,
+	Christoph Hellwig <hch@lst.de>,
+	Jens Axboe <axboe@kernel.dk>,
+	Andy Shevchenko <andy.shevchenko@gmail.com>,
+	Aleksa Sarai <cyphar@cyphar.com>,
+	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+	Julian Stecklina <julian.stecklina@cyberus-technology.de>,
+	Gao Xiang <hsiangkao@linux.alibaba.com>,
+	Art Nikpal <email2tema@gmail.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Alexander Graf <graf@amazon.com>,
+	Rob Landley <rob@landley.net>,
+	Lennart Poettering <mzxreary@0pointer.de>,
+	linux-arch@vger.kernel.org,
+	linux-block@vger.kernel.org,
+	initramfs@vger.kernel.org,
+	linux-api@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Michal Simek <monstr@monstr.eu>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Kees Cook <kees@kernel.org>,
+	Thorsten Blum <thorsten.blum@linux.dev>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Dave Young <dyoung@redhat.com>,
+	Christophe Leroy <christophe.leroy@csgroup.eu>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Borislav Petkov <bp@alien8.de>,
+	Jessica Clarke <jrtc27@jrtc27.com>,
+	Nicolas Schichan <nschichan@freebox.fr>,
+	David Disseldorp <ddiss@suse.de>,
+	patches@lists.linux.dev
+Subject: [PATCH v3 0/3] initrd: remove half of classic initrd support
+Date: Fri, 17 Oct 2025 06:09:53 +0000
+Message-ID: <20251017060956.1151347-1-safinaskar@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20251016-jk-iwl-next-2025-10-15-v2-14-ff3a390d9fc6@intel.com>
-References: <20251016-jk-iwl-next-2025-10-15-v2-0-ff3a390d9fc6@intel.com>
-In-Reply-To: <20251016-jk-iwl-next-2025-10-15-v2-0-ff3a390d9fc6@intel.com>
-To: Jiri Pirko <jiri@resnulli.us>, "David S. Miller" <davem@davemloft.net>, 
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Tony Nguyen <anthony.l.nguyen@intel.com>, 
- Przemek Kitszel <przemyslaw.kitszel@intel.com>, 
- Andrew Lunn <andrew+netdev@lunn.ch>, 
- Alexander Lobakin <aleksander.lobakin@intel.com>
-Cc: netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Jacob Keller <jacob.e.keller@intel.com>, 
- Vitaly Lifshits <vitaly.lifshits@intel.com>, 
- =?utf-8?q?Timo_Ter=C3=A4s?= <timo.teras@iki.fi>, 
- Aleksandr Loktionov <aleksandr.loktionov@intel.com>, 
- Dima Ruinskiy <dima.ruinskiy@intel.com>, 
- Avraham Koren <Avrahamx.koren@intel.com>
-X-Mailer: b4 0.15-dev-f4b34
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8780;
- i=jacob.e.keller@intel.com; h=from:subject:message-id;
- bh=oAY1c4dYNUs/VsyRZ8VffpRmz9QaW5ieBWzoumsBvf0=;
- b=owGbwMvMwCWWNS3WLp9f4wXjabUkhoyPd18pLvljahr380Ld1Ltz1TfwfI6supNnHfPr/G/D/
- d9vB09Y1VHKwiDGxSArpsii4BCy8rrxhDCtN85yMHNYmUCGMHBxCsBE9k1i+GdgFHnvw6IdB43W
- V1jVrl8Rz75AzUthaoSVSsSB7j8CFw0ZGXoNyqb3J4hN61uTEH31bM3Uc5t/dzi8u7/r1plz1zb
- q3OUHAA==
-X-Developer-Key: i=jacob.e.keller@intel.com; a=openpgp;
- fpr=204054A9D73390562AEC431E6A965D3E6F0F28E8
 
-From: Vitaly Lifshits <vitaly.lifshits@intel.com>
+Intro
+====
+This patchset removes half of classic initrd (initial RAM disk) support,
+i. e. linuxrc code path, which was deprecated in 2020.
+Initramfs still stays, RAM disk itself (brd) still stays.
+And other half of initrd stays, too.
+init/do_mounts* are listed in VFS entry in
+MAINTAINERS, so I think this patchset should go through VFS tree.
+I tested the patchset on 8 (!!!) archs in Qemu (see details below).
+If you still use initrd, see below for workaround.
 
-The K1 state reduces power consumption on ICH family network controllers
-during idle periods, similarly to L1 state on PCI Express NICs. Therefore,
-it is recommended and enabled by default.
-However, on some systems it has been observed to have adverse side
-effects, such as packet loss. It has been established through debug that
-the problem may be due to firmware misconfiguration of specific systems,
-interoperability with certain link partners, or marginal electrical
-conditions of specific units.
+In 2020 deprecation notice was put to linuxrc initrd code path.
+In v1 I tried to remove initrd
+fully, but Nicolas Schichan reported that he still uses
+other code path (root=/dev/ram0 one) on million devices [4].
+root=/dev/ram0 code path did not contain deprecation notice.
 
-These problems typically cannot be fixed in the field, and generic
-workarounds to resolve the side effects on all systems, while keeping K1
-enabled, were found infeasible.
-Therefore, add the option for users to globally disable K1 idle state on
-the adapter.
+So, in this version of patchset I remove deprecated code path,
+i. e. linuxrc one, while keeping other, i. e. root=/dev/ram0 one.
 
-Additionally, disable K1 by default for MTL and later platforms, due to
-issues reported with the current configuration.
+Also I put deprecation notice to remaining code path, i. e. to
+root=/dev/ram0 one. I plan to send patches for full removal
+of initrd after one year, i. e. in September 2026 (of course,
+initramfs will still work).
 
-Link: https://lore.kernel.org/intel-wired-lan/CAMqyJG3LVqfgqMcTxeaPur_Jq0oQH7GgdxRuVtRX_6TTH2mX5Q@mail.gmail.com/
-Link: https://lore.kernel.org/intel-wired-lan/20250626153544.1853d106@onyx.my.domain/
-Link: https://lore.kernel.org/intel-wired-lan/Z_z9EjcKtwHCQcZR@mail-itl/
-Link: https://github.com/QubesOS/qubes-issues/issues/9896
-Link: https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2115393
+Also, I tried to make this patchset small to make sure it
+can be reverted easily. I plan to send cleanups later.
 
-Signed-off-by: Vitaly Lifshits <vitaly.lifshits@intel.com>
-Reviewed-by: Timo Teräs <timo.teras@iki.fi>
-Tested-by: Timo Teräs <timo.teras@iki.fi>
-Reviewed-by: Aleksandr Loktionov <aleksandr.loktionov@intel.com>
-Reviewed-by: Dima Ruinskiy <dima.ruinskiy@intel.com>
-Tested-by: Avraham Koren <Avrahamx.koren@intel.com>
-Signed-off-by: Jacob Keller <jacob.e.keller@intel.com>
----
- drivers/net/ethernet/intel/e1000e/e1000.h   |  1 +
- drivers/net/ethernet/intel/e1000e/ethtool.c | 45 +++++++++++++++++++++++++----
- drivers/net/ethernet/intel/e1000e/ich8lan.c | 41 ++++++++++++++------------
- drivers/net/ethernet/intel/e1000e/netdev.c  |  3 ++
- 4 files changed, 67 insertions(+), 23 deletions(-)
+Details
+====
+Other user-visible changes:
 
-diff --git a/drivers/net/ethernet/intel/e1000e/e1000.h b/drivers/net/ethernet/intel/e1000e/e1000.h
-index 018e61aea787..aa08f397988e 100644
---- a/drivers/net/ethernet/intel/e1000e/e1000.h
-+++ b/drivers/net/ethernet/intel/e1000e/e1000.h
-@@ -461,6 +461,7 @@ s32 e1000e_get_base_timinca(struct e1000_adapter *adapter, u32 *timinca);
- #define FLAG2_CHECK_RX_HWTSTAMP           BIT(13)
- #define FLAG2_CHECK_SYSTIM_OVERFLOW       BIT(14)
- #define FLAG2_ENABLE_S0IX_FLOWS           BIT(15)
-+#define FLAG2_DISABLE_K1		   BIT(16)
- 
- #define E1000_RX_DESC_PS(R, i)	    \
- 	(&(((union e1000_rx_desc_packet_split *)((R).desc))[i]))
-diff --git a/drivers/net/ethernet/intel/e1000e/ethtool.c b/drivers/net/ethernet/intel/e1000e/ethtool.c
-index 8e40bb50a01e..cee57a2149ab 100644
---- a/drivers/net/ethernet/intel/e1000e/ethtool.c
-+++ b/drivers/net/ethernet/intel/e1000e/ethtool.c
-@@ -26,6 +26,8 @@ struct e1000_stats {
- static const char e1000e_priv_flags_strings[][ETH_GSTRING_LEN] = {
- #define E1000E_PRIV_FLAGS_S0IX_ENABLED	BIT(0)
- 	"s0ix-enabled",
-+#define E1000E_PRIV_FLAGS_DISABLE_K1	BIT(1)
-+	"disable-k1",
- };
- 
- #define E1000E_PRIV_FLAGS_STR_LEN ARRAY_SIZE(e1000e_priv_flags_strings)
-@@ -2301,26 +2303,59 @@ static u32 e1000e_get_priv_flags(struct net_device *netdev)
- 	if (adapter->flags2 & FLAG2_ENABLE_S0IX_FLOWS)
- 		priv_flags |= E1000E_PRIV_FLAGS_S0IX_ENABLED;
- 
-+	if (adapter->flags2 & FLAG2_DISABLE_K1)
-+		priv_flags |= E1000E_PRIV_FLAGS_DISABLE_K1;
-+
- 	return priv_flags;
- }
- 
- static int e1000e_set_priv_flags(struct net_device *netdev, u32 priv_flags)
- {
- 	struct e1000_adapter *adapter = netdev_priv(netdev);
-+	struct e1000_hw *hw = &adapter->hw;
- 	unsigned int flags2 = adapter->flags2;
-+	unsigned int changed;
-+
-+	flags2 &= ~(FLAG2_ENABLE_S0IX_FLOWS | FLAG2_DISABLE_K1);
- 
--	flags2 &= ~FLAG2_ENABLE_S0IX_FLOWS;
- 	if (priv_flags & E1000E_PRIV_FLAGS_S0IX_ENABLED) {
--		struct e1000_hw *hw = &adapter->hw;
--
--		if (hw->mac.type < e1000_pch_cnp)
-+		if (hw->mac.type < e1000_pch_cnp) {
-+			e_err("S0ix is not supported on this device\n");
- 			return -EINVAL;
-+		}
-+
- 		flags2 |= FLAG2_ENABLE_S0IX_FLOWS;
- 	}
- 
--	if (flags2 != adapter->flags2)
-+	if (priv_flags & E1000E_PRIV_FLAGS_DISABLE_K1) {
-+		if (hw->mac.type < e1000_ich8lan) {
-+			e_err("Disabling K1 is not supported on this device\n");
-+			return -EINVAL;
-+		}
-+
-+		flags2 |= FLAG2_DISABLE_K1;
-+	}
-+
-+	changed = adapter->flags2 ^ flags2;
-+	if (changed)
- 		adapter->flags2 = flags2;
- 
-+	if (changed & FLAG2_DISABLE_K1) {
-+		/* reset the hardware to apply the changes */
-+		while (test_and_set_bit(__E1000_RESETTING,
-+					&adapter->state))
-+			usleep_range(1000, 2000);
-+
-+		if (netif_running(adapter->netdev)) {
-+			e1000e_down(adapter, true);
-+			e1000e_up(adapter);
-+		} else {
-+			e1000e_reset(adapter);
-+		}
-+
-+		clear_bit(__E1000_RESETTING, &adapter->state);
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/drivers/net/ethernet/intel/e1000e/ich8lan.c b/drivers/net/ethernet/intel/e1000e/ich8lan.c
-index df4e7d781cb1..0ff8688ac3b8 100644
---- a/drivers/net/ethernet/intel/e1000e/ich8lan.c
-+++ b/drivers/net/ethernet/intel/e1000e/ich8lan.c
-@@ -286,21 +286,26 @@ static void e1000_toggle_lanphypc_pch_lpt(struct e1000_hw *hw)
- }
- 
- /**
-- * e1000_reconfigure_k1_exit_timeout - reconfigure K1 exit timeout to
-- * align to MTP and later platform requirements.
-+ * e1000_reconfigure_k1_params - reconfigure Kumeran K1 parameters.
-  * @hw: pointer to the HW structure
-  *
-+ * By default K1 is enabled after MAC reset, so this function only
-+ * disables it.
-+ *
-  * Context: PHY semaphore must be held by caller.
-  * Return: 0 on success, negative on failure
-  */
--static s32 e1000_reconfigure_k1_exit_timeout(struct e1000_hw *hw)
-+static s32 e1000_reconfigure_k1_params(struct e1000_hw *hw)
- {
- 	u16 phy_timeout;
- 	u32 fextnvm12;
- 	s32 ret_val;
- 
--	if (hw->mac.type < e1000_pch_mtp)
-+	if (hw->mac.type < e1000_pch_mtp) {
-+		if (hw->adapter->flags2 & FLAG2_DISABLE_K1)
-+			return e1000_configure_k1_ich8lan(hw, false);
- 		return 0;
-+	}
- 
- 	/* Change Kumeran K1 power down state from P0s to P1 */
- 	fextnvm12 = er32(FEXTNVM12);
-@@ -310,6 +315,8 @@ static s32 e1000_reconfigure_k1_exit_timeout(struct e1000_hw *hw)
- 
- 	/* Wait for the interface the settle */
- 	usleep_range(1000, 1100);
-+	if (hw->adapter->flags2 & FLAG2_DISABLE_K1)
-+		return e1000_configure_k1_ich8lan(hw, false);
- 
- 	/* Change K1 exit timeout */
- 	ret_val = e1e_rphy_locked(hw, I217_PHY_TIMEOUTS_REG,
-@@ -373,8 +380,8 @@ static s32 e1000_init_phy_workarounds_pchlan(struct e1000_hw *hw)
- 		/* At this point the PHY might be inaccessible so don't
- 		 * propagate the failure
- 		 */
--		if (e1000_reconfigure_k1_exit_timeout(hw))
--			e_dbg("Failed to reconfigure K1 exit timeout\n");
-+		if (e1000_reconfigure_k1_params(hw))
-+			e_dbg("Failed to reconfigure K1 parameters\n");
- 
- 		fallthrough;
- 	case e1000_pch_lpt:
-@@ -473,10 +480,10 @@ static s32 e1000_init_phy_workarounds_pchlan(struct e1000_hw *hw)
- 		if (hw->mac.type >= e1000_pch_mtp) {
- 			ret_val = hw->phy.ops.acquire(hw);
- 			if (ret_val) {
--				e_err("Failed to reconfigure K1 exit timeout\n");
-+				e_err("Failed to reconfigure K1 parameters\n");
- 				goto out;
- 			}
--			ret_val = e1000_reconfigure_k1_exit_timeout(hw);
-+			ret_val = e1000_reconfigure_k1_params(hw);
- 			hw->phy.ops.release(hw);
- 		}
- 	}
-@@ -4948,17 +4955,15 @@ static s32 e1000_init_hw_ich8lan(struct e1000_hw *hw)
- 	u16 i;
- 
- 	e1000_initialize_hw_bits_ich8lan(hw);
--	if (hw->mac.type >= e1000_pch_mtp) {
--		ret_val = hw->phy.ops.acquire(hw);
--		if (ret_val)
--			return ret_val;
-+	ret_val = hw->phy.ops.acquire(hw);
-+	if (ret_val)
-+		return ret_val;
- 
--		ret_val = e1000_reconfigure_k1_exit_timeout(hw);
--		hw->phy.ops.release(hw);
--		if (ret_val) {
--			e_dbg("Error failed to reconfigure K1 exit timeout\n");
--			return ret_val;
--		}
-+	ret_val = e1000_reconfigure_k1_params(hw);
-+	hw->phy.ops.release(hw);
-+	if (ret_val) {
-+		e_dbg("Error failed to reconfigure K1 parameters\n");
-+		return ret_val;
- 	}
- 
- 	/* Initialize identification LED */
-diff --git a/drivers/net/ethernet/intel/e1000e/netdev.c b/drivers/net/ethernet/intel/e1000e/netdev.c
-index 201322dac233..116f3c92b5bc 100644
---- a/drivers/net/ethernet/intel/e1000e/netdev.c
-+++ b/drivers/net/ethernet/intel/e1000e/netdev.c
-@@ -7675,6 +7675,9 @@ static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	/* init PTP hardware clock */
- 	e1000e_ptp_init(adapter);
- 
-+	if (hw->mac.type >= e1000_pch_mtp)
-+		adapter->flags2 |= FLAG2_DISABLE_K1;
-+
- 	/* reset the hardware with the new settings */
- 	e1000e_reset(adapter);
- 
+- Removed kernel command line parameters "load_ramdisk" and
+"prompt_ramdisk", which did nothing and were deprecated
+- Removed /proc/sys/kernel/real-root-dev . It was used
+for initrd only
+- Command line parameters "noinitrd" and "ramdisk_start=" are deprecated
 
+This patchset is based on v6.18-rc1.
+
+Testing
+====
+I tested my patchset on many architectures in Qemu using my Rust
+program, heavily based on mkroot [1].
+
+I used the following cross-compilers:
+
+aarch64-linux-musleabi
+armv4l-linux-musleabihf
+armv5l-linux-musleabihf
+armv7l-linux-musleabihf
+i486-linux-musl
+i686-linux-musl
+mips-linux-musl
+mips64-linux-musl
+mipsel-linux-musl
+powerpc-linux-musl
+powerpc64-linux-musl
+powerpc64le-linux-musl
+riscv32-linux-musl
+riscv64-linux-musl
+s390x-linux-musl
+sh4-linux-musl
+sh4eb-linux-musl
+x86_64-linux-musl
+
+taken from this directory [2].
+
+So, as you can see, there are 18 triplets, which correspond to 8 subdirs in arch/.
+
+For every triplet I tested that:
+- Initramfs still works (both builtin and external)
+- Direct boot from disk still works
+- Remaining initrd code path (root=/dev/ram0) still works
+
+Workaround
+====
+If "retain_initrd" is passed to kernel, then initramfs/initrd,
+passed by bootloader, is retained and becomes available after boot
+as read-only magic file /sys/firmware/initrd [3].
+
+No copies are involved. I. e. /sys/firmware/initrd is simply
+a reference to original blob passed by bootloader.
+
+This works even if initrd/initramfs is not recognized by kernel
+in any way, i. e. even if it is not valid cpio archive, nor
+a fs image supported by classic initrd.
+
+This works both with my patchset and without it.
+
+This means that you can emulate classic initrd so:
+link builtin initramfs to kernel; in /init in this initramfs
+copy /sys/firmware/initrd to some file in / and loop-mount it.
+
+This is even better than classic initrd, because:
+- You can use fs not supported by classic initrd, for example erofs
+- One copy is involved (from /sys/firmware/initrd to some file in /)
+as opposed to two when using classic initrd
+
+Still, I don't recommend using this workaround, because
+I want everyone to migrate to proper modern initramfs.
+But still you can use this workaround if you want.
+
+Also: it is not possible to directly loop-mount
+/sys/firmware/initrd . Theoretically kernel can be changed
+to allow this (and/or to make it writable), but I think nobody needs this.
+And I don't want to implement this.
+
+On Qemu's -initrd and GRUB's initrd
+====
+Don't panic, this patchset doesn't remove initramfs
+(which is used by nearly all Linux distros). And I don't
+have plans to remove it.
+
+Qemu's -initrd option and GRUB's initrd command refer
+to initrd bootloader mechanism, which is used to
+load both initrd and (external) initramfs.
+
+So, if you use Qemu's -initrd or GRUB's initrd,
+then you likely use them to pass initramfs, and thus
+you are safe.
+
+v1: https://lore.kernel.org/lkml/20250913003842.41944-1-safinaskar@gmail.com/
+
+v1 -> v2 changes:
+- A lot. I removed most patches, see cover letter for details
+
+v2: https://lore.kernel.org/lkml/20251010094047.3111495-1-safinaskar@gmail.com/
+
+v2 -> v3 changes:
+- Commit messages
+- Expanded docs for "noinitrd"
+- Added link to /sys/firmware/initrd workaround to pr_warn
+
+[1] https://github.com/landley/toybox/tree/master/mkroot
+[2] https://landley.net/toybox/downloads/binaries/toolchains/latest
+[3] https://lore.kernel.org/all/20231207235654.16622-1-graf@amazon.com/
+[4] https://lore.kernel.org/lkml/20250918152830.438554-1-nschichan@freebox.fr/
+
+Askar Safin (3):
+  init: remove deprecated "load_ramdisk" and "prompt_ramdisk" command
+    line parameters
+  initrd: remove deprecated code path (linuxrc)
+  init: remove /proc/sys/kernel/real-root-dev
+
+ .../admin-guide/kernel-parameters.txt         |  12 +-
+ Documentation/admin-guide/sysctl/kernel.rst   |   6 -
+ arch/arm/configs/neponset_defconfig           |   2 +-
+ fs/init.c                                     |  14 ---
+ include/linux/init_syscalls.h                 |   1 -
+ include/linux/initrd.h                        |   2 -
+ include/uapi/linux/sysctl.h                   |   1 -
+ init/do_mounts.c                              |  11 +-
+ init/do_mounts.h                              |  18 +--
+ init/do_mounts_initrd.c                       | 107 ++----------------
+ init/do_mounts_rd.c                           |  24 +---
+ 11 files changed, 23 insertions(+), 175 deletions(-)
+
+
+base-commit: 3a8660878839faadb4f1a6dd72c3179c1df56787
 -- 
-2.51.0.rc1.197.g6d975e95c9d7
+2.47.3
 
 
