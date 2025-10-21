@@ -1,127 +1,178 @@
-Return-Path: <linux-doc+bounces-64008-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64010-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8DA7BF5C13
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Oct 2025 12:22:53 +0200 (CEST)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00649BF60DC
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Oct 2025 13:31:24 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4FCF33A5208
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Oct 2025 10:22:52 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 917FC4F46B7
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Oct 2025 11:31:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB7A0303A0F;
-	Tue, 21 Oct 2025 10:22:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DABC132E74A;
+	Tue, 21 Oct 2025 11:30:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="g7l+S0x2"
+	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="AHmyR08t"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27C582EA17D
-	for <linux-doc@vger.kernel.org>; Tue, 21 Oct 2025 10:22:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CD7032E698;
+	Tue, 21 Oct 2025 11:30:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761042168; cv=none; b=pRuOYTDfz/omlEh3lYjN0QtxgXX+t1ECNWTNcsUyufFGEi7+QA+mt05idtvRRM3IkWxGLSYorNJMP6nYeswIT4j9EtYAYCy5XfYI4W3ybErm9gjYl3karQx0qxb1Pe1k0/b++cQ8Mc78IE/8BAG83UCs+Z2YALdfkD7Fc1HSlaM=
+	t=1761046259; cv=none; b=jGXAWRqMrKXdT006+Mdb9e+wLE/Hbo0RYjerBguD5GJTp/yKSwAf64oob1YgovcBKrR6UabZYw9Olakzro9rR3dhf3Sx5WNIl/P6gEVIGba9HRo2KT3HGMWF5e08512m4D/QHwiDol/B/hU1iT/GaYOzgGOMsQzMpdBQPpef2J0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761042168; c=relaxed/simple;
-	bh=1A0W5xTaR9urVjOjv6uluJypcpD+sjwXrvub4CJRLF8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fGp9i0AxvjQ9enLrcxWagVzKbj4tlWiXXKCA9H4uQk/iWWkBat7Yn8kzA58CXrvJWx3L4Gn4BU4WxgqORIUgFhmcfsCIRRDISvfFi7y1BkSuhk3y9HUz11fTCOrOC/a5fUFEF+MWDai93ehO+t7TyVQFZbexQKPrCpscNtOkeR4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=g7l+S0x2; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1761042166;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nS+dBBoi0CBgHRidSyYtoXbkkZV3ymvifoheAJ29ALs=;
-	b=g7l+S0x2+z7tPmySDEkiAVOPOhbBr8bsBol3s58NtkGuwdf8WuyM/lyZNPehME9HULwonJ
-	aqX1f2iyfOHEKYplcWTwohDH3h6MWq5CQRGKfc2bkGuO2zfeyObL5h30OHH9yEojiPeScc
-	2nirMPJHb32mWYhbzsOGe/qKRGp6Vnc=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-164-uzTukj-EPU2x86KYnFgnqg-1; Tue, 21 Oct 2025 06:22:44 -0400
-X-MC-Unique: uzTukj-EPU2x86KYnFgnqg-1
-X-Mimecast-MFC-AGG-ID: uzTukj-EPU2x86KYnFgnqg_1761042164
-Received: by mail-wr1-f72.google.com with SMTP id ffacd0b85a97d-3ee130237e1so2363090f8f.0
-        for <linux-doc@vger.kernel.org>; Tue, 21 Oct 2025 03:22:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761042163; x=1761646963;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=nS+dBBoi0CBgHRidSyYtoXbkkZV3ymvifoheAJ29ALs=;
-        b=EYB/F8roy+D6BIz5k4HSV2zaJnqTn6ggx+taalN4+zDLPlYhcraeemZ7qNy612+OYV
-         ETVMxWOUFCHF8KMqj5nYO97ItE3qsepQtzkjFauwhSY3eEhYGauWS/GAxEtq6zwEZ/1K
-         7+b5qIT0Y+iCmekQCg3mFDw8VbsA1eyab14EB3HI5d96ahDgFfLRm/v8dZwjAHtFl1m9
-         7JtMtQfl4LThiVrKNw/S0DtNjYmQKEdU2/Tp79PeUaS3wKtheitwn0ZjtHpbaZOOo3f/
-         ERKZA/5JGnLCN7cWld4wIj+GMy9Ydu2OERqPkTQDR/I5/0YWS09rcSHMDIK5yDDm+kvh
-         UUuA==
-X-Forwarded-Encrypted: i=1; AJvYcCVxajudzPfrpR+DD4s/GCMOZlaytpjvZ0w5BUzlB6F2NT79DFlBQ6uJUCaWvwjzR7HhZzdJyb8I+Y4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxVkNJiQAAV9LGbPkEP9KOXr7t3670E7i4r/GzY23AE3hF/86OX
-	VT+KQN11QlhgL47nptj0E2XVsKZDbaNLtfXEPZEjkKrjon5q3zOr0lchWm8ni1lQFF/n7g+E94P
-	VukM4IS9NdG9+KX0nGEZ1VLP1q410ELG0vzD30k64zf4xM7PyqPxckhyp//yX+w==
-X-Gm-Gg: ASbGncspOF2XBWp0MdKkS3tIx5xPT7WMAxUoDZSlvVV4bqyj6op/wYUni7Mvz4NQxh8
-	d2vv9Pq4H0VG4io0f8so5f5YMqfOPxHaBYTqHkmhYYhp4KM6j7sY5zdhJrpKa+1/IUoicmxcpc3
-	WRh2raq7RgNVLdSoxu6wuz16XqSC252ilCCVC4LwyRaCDJdvt8/k7kNcmvk+NugxwkfIo2lV13W
-	dR6MNdV15wZNXZvMGlIqe2bHqbRpshpe07+N8k2r0lXq4KQ02gD0+lX69Ej4/MjeQD71XmgOM8Q
-	spwLeJw2VbODb9xBmZB62FfWvyaGdSrPeDMfNrh8ef2s5BkYsPRRkXLPswMFDSkQctqJuiK5XAA
-	8urdjKYWmrDz5JiKJSm9n39IOKBdwmaC+SZulHiWyibXAxWM=
-X-Received: by 2002:a05:600c:5026:b0:46e:477a:f3dd with SMTP id 5b1f17b1804b1-4711792a680mr122675245e9.36.1761042163607;
-        Tue, 21 Oct 2025 03:22:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG6qZ5b7OU/i07O/ltqiS9RbHNjqlvAjVcXuc/1BRt53UhZ8fu0lXE5nlb4ZYhwCLUDcfMkpw==
-X-Received: by 2002:a05:600c:5026:b0:46e:477a:f3dd with SMTP id 5b1f17b1804b1-4711792a680mr122674895e9.36.1761042163195;
-        Tue, 21 Oct 2025 03:22:43 -0700 (PDT)
-Received: from ?IPV6:2a0d:3344:2712:7e10:4d59:d956:544f:d65c? ([2a0d:3344:2712:7e10:4d59:d956:544f:d65c])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4711c487dfesm268791525e9.17.2025.10.21.03.22.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 Oct 2025 03:22:42 -0700 (PDT)
-Message-ID: <e23988d5-4dc9-49d0-ba42-c3d1cbabda26@redhat.com>
-Date: Tue, 21 Oct 2025 12:22:40 +0200
+	s=arc-20240116; t=1761046259; c=relaxed/simple;
+	bh=W6xHmv8+Mi9P5OoxStkwLLPt5j3jLHnOTcNSO0Jg0pk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=MDKn9XptO75Z1AKt4e7/3f1jOyhnYRQ2MTOATLZ87OW/eob0XfZMZ8rSbIfIrBI7V2o8TGRGIGesKOD4SXG883ieF+pav8H5HdMocyhPwCcQs0NaGIojU4VE/xRD6BpHId0+0vv7NGKjYPpOg+7aWAxp2pYr9EXpTYpFcmgJXPQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=AHmyR08t; arc=none smtp.client-ip=148.251.105.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1761046255;
+	bh=W6xHmv8+Mi9P5OoxStkwLLPt5j3jLHnOTcNSO0Jg0pk=;
+	h=From:To:Cc:Subject:Date:From;
+	b=AHmyR08tB2G3J/sn9dARyHQC5PN8/CsdOZ20Jo/YPza0VhWIPPyoWKc+yVrqD0N8l
+	 BxY7maAFsPGS6VRcibQAnfcxxNvgZu6b6AiPknxVpk/zS7mivA07AguIdtXrGCjgle
+	 dqbCoeV73L+buesw0pdbB76vLyaMBFkpfT7mQRlIGLcR9oezn+EAxBfYyZqDS1Aa2G
+	 /1kYwhsxmvIlq9TkEzuT4gPItOG2orS8CN1GaASyyfhcckiBeam5t/05A038C4iMe2
+	 4Tc/ZiLOcYSHzC1WZpnFDdMqkfCXorqFe02TzPjEE416F+YNjAtFtmmy3FY41ZQksO
+	 XQLx4I4TPvoVQ==
+Received: from debian-rockchip-rock5b-rk3588.. (unknown [IPv6:2a01:e0a:5e3:6100:826d:bc07:e98c:84a])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: loicmolinari)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id B547A17E129E;
+	Tue, 21 Oct 2025 13:30:54 +0200 (CEST)
+From: =?UTF-8?q?Lo=C3=AFc=20Molinari?= <loic.molinari@collabora.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	Boris Brezillon <boris.brezillon@collabora.com>,
+	Rob Herring <robh@kernel.org>,
+	Steven Price <steven.price@arm.com>,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Melissa Wen <mwen@igalia.com>,
+	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
+	Hugh Dickins <hughd@google.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	=?UTF-8?q?Lo=C3=AFc=20Molinari?= <loic.molinari@collabora.com>,
+	Al Viro <viro@zeniv.linux.org.uk>,
+	=?UTF-8?q?Miko=C5=82aj=20Wasiak?= <mikolaj.wasiak@intel.com>,
+	Christian Brauner <brauner@kernel.org>,
+	Nitin Gote <nitin.r.gote@intel.com>,
+	Andi Shyti <andi.shyti@linux.intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Christopher Healy <healych@amazon.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Cc: linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	kernel@collabora.com
+Subject: [PATCH v5 00/12] drm: Reduce page tables overhead with THP
+Date: Tue, 21 Oct 2025 13:30:37 +0200
+Message-ID: <20251021113049.17242-1-loic.molinari@collabora.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v02 6/6] hinic3: Fix netif_queue_set_napi
- queue_index parameter passing error
-To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
- netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Simon Horman <horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
- Markus.Elfring@web.de, pavan.chebbi@broadcom.com
-Cc: linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
- luosifu <luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>,
- Shen Chenyang <shenchenyang1@hisilicon.com>,
- Zhou Shuai <zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>,
- Shi Jing <shijing34@huawei.com>, Luo Yang <luoyang82@h-partners.com>,
- Meny Yossefi <meny.yossefi@huawei.com>, Gur Stavi <gur.stavi@huawei.com>
-References: <cover.1760685059.git.zhuyikai1@h-partners.com>
- <c4d3c2ef38ab788aeeb7a7a7988578eb2e70ee8a.1760685059.git.zhuyikai1@h-partners.com>
-Content-Language: en-US
-From: Paolo Abeni <pabeni@redhat.com>
-In-Reply-To: <c4d3c2ef38ab788aeeb7a7a7988578eb2e70ee8a.1760685059.git.zhuyikai1@h-partners.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 10/17/25 10:30 AM, Fan Gong wrote:
-> Incorrectly transmitted interrupt number instead of queue number
-> when using netif_queue_set_napi. Besides, move this to appropriate
-> code location.
-> 
-> Co-developed-by: Zhu Yikai <zhuyikai1@h-partners.com>
-> Signed-off-by: Zhu Yikai <zhuyikai1@h-partners.com>
-> Signed-off-by: Fan Gong <gongfan1@huawei.com>
+This series aims to reduce the page tables overhead of DRM drivers for
+builds with CONFIG_TRANSPARENT_HUGEPAGE enabled and either the sysfs
+knob '/sys/kernel/mm/transparent_hugepage/shmem_enabled' appropriately
+set or drivers using a dedicated huge tmpfs mount point.
 
-This looks like a fix that should land into the 'net' tree separatelly
-from this series, with an appropriate Fixes tag.
+It starts by implementing a map_pages handler for GEM objects to map
+pages around a faulty address in a single batch. It also checks in
+both the fault and fault-around handlers whether a faulty address is
+part of a huge page in order to attempt a PMD sized PFN insertion into
+the VMA. It then introduces a dedicated get_unmapped_area file
+operation on the DRM file descriptor for GEM objects to get the best
+virtual address alignment for the underlying shmem buffers.
 
-/P
+The remaining commits propose shmem helpers to create and release huge
+tmpfs mount points and adapt the i915 and V3D drivers. The helpers are
+then used to optionally enable Transparent Hugepage for Panfrost and
+Panthor.
+
+For Panthor on a Rock 5B, this series makes the first memcpy() to an
+entire BO object mapped in userspace about twice as fast with
+Transparent Hugepage enabled.
+
+Note that some architectures like arm64 with the contiguous page hint
+(contptes) would very likely benefit from a vmf_insert_pfns() function
+based on set_ptes() to insert a range of contiguous ptes.
+
+Loïc Molinari (12):
+  drm/shmem-helper: Simplify page offset calculation in fault handler
+  drm/shmem-helper: Implement map_pages fault-around handler
+  drm/shmem-helper: Map huge pages in fault handlers
+  drm/gem: Introduce drm_gem_get_unmapped_area() fop
+  drm/gem: Add huge tmpfs mountpoint helpers
+  drm/i915: Use huge tmpfs mountpoint helpers
+  drm/v3d: Use huge tmpfs mountpoint helpers
+  drm/gem: Get rid of *_with_mnt helpers
+  drm/panthor: Introduce huge tmpfs mountpoint option
+  drm/panthor: Improve IOMMU map/unmap debugging logs
+  drm/panfrost: Introduce huge tmpfs mountpoint option
+  Documentation/gpu/drm-mm: Add THP paragraph to GEM mapping section
+
+ Documentation/gpu/drm-mm.rst                  |  25 ++-
+ drivers/gpu/drm/drm_gem.c                     | 184 +++++++++++++-----
+ drivers/gpu/drm/drm_gem_shmem_helper.c        | 142 ++++++++++----
+ drivers/gpu/drm/i915/Makefile                 |   3 +-
+ drivers/gpu/drm/i915/gem/i915_gem_shmem.c     |  47 +++--
+ drivers/gpu/drm/i915/gem/i915_gemfs.c         |  69 -------
+ drivers/gpu/drm/i915/gem/i915_gemfs.h         |  14 --
+ .../gpu/drm/i915/gem/selftests/huge_pages.c   |  11 +-
+ drivers/gpu/drm/i915/i915_drv.h               |   5 -
+ drivers/gpu/drm/panfrost/panfrost_device.c    |   3 +
+ drivers/gpu/drm/panfrost/panfrost_drv.c       |   6 +
+ drivers/gpu/drm/panfrost/panfrost_drv.h       |   9 +
+ drivers/gpu/drm/panfrost/panfrost_gem.c       |  18 ++
+ drivers/gpu/drm/panfrost/panfrost_gem.h       |   2 +
+ drivers/gpu/drm/panthor/panthor_device.c      |   3 +
+ drivers/gpu/drm/panthor/panthor_drv.c         |   7 +
+ drivers/gpu/drm/panthor/panthor_drv.h         |   9 +
+ drivers/gpu/drm/panthor/panthor_gem.c         |  18 ++
+ drivers/gpu/drm/panthor/panthor_gem.h         |   2 +
+ drivers/gpu/drm/panthor/panthor_mmu.c         |  19 +-
+ drivers/gpu/drm/v3d/Makefile                  |   3 +-
+ drivers/gpu/drm/v3d/v3d_bo.c                  |   6 +-
+ drivers/gpu/drm/v3d/v3d_drv.c                 |   2 +-
+ drivers/gpu/drm/v3d/v3d_drv.h                 |  11 +-
+ drivers/gpu/drm/v3d/v3d_gem.c                 |  27 ++-
+ drivers/gpu/drm/v3d/v3d_gemfs.c               |  60 ------
+ include/drm/drm_device.h                      |  15 ++
+ include/drm/drm_gem.h                         |  59 +++++-
+ include/drm/drm_gem_shmem_helper.h            |   3 -
+ mm/shmem.c                                    |   1 +
+ 30 files changed, 491 insertions(+), 292 deletions(-)
+ delete mode 100644 drivers/gpu/drm/i915/gem/i915_gemfs.c
+ delete mode 100644 drivers/gpu/drm/i915/gem/i915_gemfs.h
+ create mode 100644 drivers/gpu/drm/panfrost/panfrost_drv.h
+ create mode 100644 drivers/gpu/drm/panthor/panthor_drv.h
+ delete mode 100644 drivers/gpu/drm/v3d/v3d_gemfs.c
+
+-- 
+2.47.3
 
 
