@@ -1,61 +1,99 @@
-Return-Path: <linux-doc+bounces-64323-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64321-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0A19C019F7
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 16:04:45 +0200 (CEST)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FB49C01AC3
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 16:13:20 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 93F271883E41
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 14:05:09 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 0B064562E99
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 14:01:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E00C6314A69;
-	Thu, 23 Oct 2025 14:04:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 02CDF32B994;
+	Thu, 23 Oct 2025 14:01:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="bKcnDu1U"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19DF731D38E;
-	Thu, 23 Oct 2025 14:04:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB62B328630
+	for <linux-doc@vger.kernel.org>; Thu, 23 Oct 2025 14:01:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761228272; cv=none; b=Rmt3ivh7Ac172on4R1f/jarsg/gFVqca1a7odmCEQwduwkU4zveJwNbDGjOqkicudysBzMwZ//7kK2FCcRfDb7vShLQE8Yv9WdFtcC7mzxcz6FyCtKEzn6T/CAPevsUpLTmg6KjxzPQ70ggeVOdc9aRDwQBSLhqG7/LPl1dUY8U=
+	t=1761228076; cv=none; b=cu7wNm3s2yfUPFRbXfMjwg8qcIXkkpKNhm3RGXmnBsdqggC7r1wl2xefgmqKuAl1Frl6lrZru8fPb8vBKrjXQ4JMD9hm2lipH351QbswLY0DR9FtgBJHahDkTU8Etb34m6Z6q/7OzvFtV+vGqR9Q39T5yAHoDoX9UwbfukwW09E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761228272; c=relaxed/simple;
-	bh=LdEFzGAgWDyhRHeXYouOhUtUCFbNzY7zZHVrkrO0oyw=;
+	s=arc-20240116; t=1761228076; c=relaxed/simple;
+	bh=JnMWVm8H5Ck5TN7RGfsn5EcNXl+YklqB9zPZXCC4wAA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IVNKXZ/TJz3crME3+BGDuraEsb52Xs2A0i47Y4Z2lVQbiglu5zHUbFH09yzykofwlTbji9qzifEPLc+OsKXXwVkaFgZFqHbknfCW1AEcEdShdsLE3uSh7gEJPfViD7tEGGEyJKbUBEocRFZ5Px4M9NQV+q19ST4gAkcfBeD+VhU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9D1C91516;
-	Thu, 23 Oct 2025 07:04:22 -0700 (PDT)
-Received: from e133380.arm.com (e133380.arm.com [10.1.197.68])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6CA033F59E;
-	Thu, 23 Oct 2025 07:04:28 -0700 (PDT)
-Date: Thu, 23 Oct 2025 15:04:22 +0100
-From: Dave Martin <Dave.Martin@arm.com>
-To: "Luck, Tony" <tony.luck@intel.com>
-Cc: Reinette Chatre <reinette.chatre@intel.com>,
-	linux-kernel@vger.kernel.org, James Morse <james.morse@arm.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
-	x86@kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] fs/resctrl,x86/resctrl: Factor mba rounding to be
- per-arch
-Message-ID: <aPoqbXmmhlbPRIb7@e133380.arm.com>
-References: <aO/CEuyaIyZ5L28d@e133380.arm.com>
- <dd5ba9e5-9809-4792-966a-e35368ab89f0@intel.com>
- <aPJP52jXJvRYAjjV@e133380.arm.com>
- <e788ca62-ec63-4552-978b-9569f369afd5@intel.com>
- <aPZaTk97RC6sg+uQ@e133380.arm.com>
- <aPZj1nDVEYmYytY9@agluck-desk3>
- <aPearyfcnpJJ/e06@e133380.arm.com>
- <aPf0OKwDZ4XbmVRB@agluck-desk3>
- <aPjxAIudLd16aU4Z@e133380.arm.com>
- <aPkEb4CkJHZVDt0V@agluck-desk3>
+	 Content-Type:Content-Disposition:In-Reply-To; b=AsTGG2RSdvDQFn75DvQBG1GbBGkSzlFtTgpKi3/NvAaMHe+lnVnQlfP2ZHcuFA6ET9r4sI+LE/Gz0jmctkl2l08I6m53aHyqWDyodJrGyf6cf7NzBcZBIrtV5CBpEByKPPZqqoHfm4z1wQKqJHUd2ZdASq4p5fpbLioZy9C445E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=bKcnDu1U; arc=none smtp.client-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-471075c0a18so9799305e9.1
+        for <linux-doc@vger.kernel.org>; Thu, 23 Oct 2025 07:01:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1761228073; x=1761832873; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=JnMWVm8H5Ck5TN7RGfsn5EcNXl+YklqB9zPZXCC4wAA=;
+        b=bKcnDu1Ugc8m1FO2mnc9vhsm9Gt701FFuUye9pb+IQLedRuOOPZ7GH9xP2YLtnqaWA
+         3VWYZdNJluPWjsWKI7bj08iE3QMIoaJnU8TwJUYPVn/0XA0XkuqAHU5BXj7LoJjjzhI+
+         Jt/w+MfFqdWkbmI0HsqDr4W7tk+853JoroELlD6yHZaI6anlSaR+rYrmNHOp1jmiaWFD
+         bRyN7v/bJVXOET0nkcYsGPOCnkR+dK/eo37HgXt2JobJRvmuyK6SZzZEl2gA0M2s61AR
+         mECOx3QCU9G2NjOSy3w79ydxc1TC77gKKwO4rdMFp48bKYCp+HPRYn1Q4LKcTYA2ZnkS
+         9wDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761228073; x=1761832873;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JnMWVm8H5Ck5TN7RGfsn5EcNXl+YklqB9zPZXCC4wAA=;
+        b=HeNl2o+7hPgYOzat+0KbFmJtK1RglRbw9BQgJ+d48WeaK6aS6qr6ba6hl2neoPWbq0
+         w6FgRqvu2W8ZsEAQO1qR4Zovg7zQ25cJ+l3oWE8YC4B94/3mYJta0OyLIe1n0II8UI8X
+         S6osGfurcZloT8CUp71RlSN6xhefJznJN1h+alDKlhFf/vpOSn10D6SFykddc8GbLxuc
+         T8qmrWkWXJXxDLrlhrfXBn/Vd5Yq4leWISLMVSxSgz1KF/iBhWrkDPU+y/Vg8vkUOYWR
+         le3u3sXLuYc/OY5ibrg8/5gqPCT8LKZQZ7QBfaTt7cceWWZ80MHJisc2pO1o2V3ObRf2
+         Hx3g==
+X-Forwarded-Encrypted: i=1; AJvYcCV/Gtr2ODyqTOTKzp25vrh2U2+EFB9WDvxm0ZuzbKYQtJOYYMDUvJcolei+vLotlILiDeBvxPo5/UE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwCnFtgaXbJmQYMooVE2yts8A/DvN7bnq7e7BElpZ5+2BvOhHxX
+	l6BU4ob+ppQBP8as2ilP7T5lZJlLeLFaSGeN1VUQDDtwa9/C/gGwPx32YiE1asnKD3oyndK6bvy
+	NeHz2
+X-Gm-Gg: ASbGncsmiLegQIh7jHBTOs5c2SCbxAM/w3HONalE23icGx830wIVFxq6mCIJct8aYjT
+	QmiLZFy3OOPyAlMju2ost54q56f2iXxM4WgiMYtZhscScbJ+Wj2I7OFtBHmvd8uVEmF37fvbZ75
+	NNoix2qcRsbIuI20tdKkAMN3SCZi1mpQP2oA5qownoSATX3vJVCjT9YG0enxvuvHjRamwRdSIAK
+	hhRBYB3FYjzMoacxaLg4jw57PPIq9pho0CMmr/vztJIzpGM0Pp7xMNdxd67PYykk3zf8N0Ly4R4
+	Wc0vWCcG4IABJChW7RxMyUotFfZ2twZvetEx2kMqGp826wrOFKUT6qtJqgo1TmBVjtk+fU4n5S+
+	S1qb5Ex7GBQz5juZIx5v/2z5hP5Q/EoAkBC1XIx/vOFdQq7as4/K21gvjPlHtMtHco2C97GAowk
+	v+TmJq3Q==
+X-Google-Smtp-Source: AGHT+IEQurVzp77OCpHZFz2TRcOchNrP75ZwR0sZ9FlZgnu+xhnNBWaXzzz3i5vljtf/+Kejv/936A==
+X-Received: by 2002:a05:600c:4688:b0:46f:b42e:ed87 with SMTP id 5b1f17b1804b1-47117925eb5mr165543035e9.40.1761228072957;
+        Thu, 23 Oct 2025 07:01:12 -0700 (PDT)
+Received: from localhost ([196.207.164.177])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-475cae924a1sm49352875e9.2.2025.10.23.07.01.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Oct 2025 07:01:12 -0700 (PDT)
+Date: Thu, 23 Oct 2025 17:01:09 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: ally heev <allyheev@gmail.com>
+Cc: dan.j.williams@intel.com, Dwaipayan Ray <dwaipayanray1@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+	Joe Perches <joe@perches.com>, Jonathan Corbet <corbet@lwn.net>,
+	Andy Whitcroft <apw@canonical.com>, workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	David Hunter <david.hunter.linux@gmail.com>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	linux-pm <linux-pm@vger.kernel.org>
+Subject: Re: [PATCH] checkpatch: add uninitialized pointer with __free
+ attribute check
+Message-ID: <aPo1JU7pe-vvQzEf@stanley.mountain>
+References: <20251021-aheev-checkpatch-uninitialized-free-v1-1-18fb01bc6a7a@gmail.com>
+ <68f7b830ec21a_10e910070@dwillia2-mobl4.notmuch>
+ <f9cabfed7b165299b8048670e548c671f300f2b2.camel@gmail.com>
+ <CAMB6jUG+ES6XY7NL5TF-hFVDmz6O5rd9T-HNk7Q+pJA2_9g4Mw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -64,226 +102,21 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <aPkEb4CkJHZVDt0V@agluck-desk3>
+In-Reply-To: <CAMB6jUG+ES6XY7NL5TF-hFVDmz6O5rd9T-HNk7Q+pJA2_9g4Mw@mail.gmail.com>
 
-Hi Tony,
+On Thu, Oct 23, 2025 at 04:38:43PM +0530, ally heev wrote:
+> I will take this back. Found this in `include/linux/cleanup.h`
+> ```
+> * Given that the "__free(...) = NULL" pattern for variables defined at
+> * the top of the function poses this potential interdependency problem
+> * the recommendation is to always define and assign variables in one
+> * statement and not group variable definitions at the top of the
+> * function when __free() is used.
+> ```
 
-On Wed, Oct 22, 2025 at 09:21:03AM -0700, Luck, Tony wrote:
-> Hi Dave,
-> 
-> On Wed, Oct 22, 2025 at 03:58:08PM +0100, Dave Martin wrote:
-> > Hi Tony,
-> > 
-> > On Tue, Oct 21, 2025 at 01:59:36PM -0700, Luck, Tony wrote:
+Ah, right.
 
-[...]
+regards,
+dan carpenter
 
-> > <soapbox>
-> > 
-> > We could, in the same way that a vendor could wire a UART directly to
-> > the pins of a regular mains power plug.  They could stick a big label
-> > on it saying exactly how the pins should be hooked up to another low-
-> > voltage UART and not plugged into a mains power outlet... but you know
-> > what's going to happen.
-> 
-> The PDP 11/03 for undegraduate Comp Sci student use at my univeristy had allegedly
-> been student proofed against such things. Oral history said you could wire 240V
-> mains across input pins to get a 50 Hz clock. I didn't test this theory.
-
-Now, there's an idea...
-
-
-> > The whole point of a file-like interface is that the user doesn't (or
-> > shouldn't) have to craft I/O directly at the syscall level.  If they
-> > have to do that, then the reasons for not relying on ioctl() or a
-> > binary protocol melt away (like that UART).
-> > 
-> > Because the easy, unsafe way of working with these files almost always
-> > works, people are almost certainly going to use it, even if we tell
-> > them not to (IMHO).
-> > 
-> > </soapbox>
-> > 
-> > 
-> > That said, for practical purposes, the interface is reliable enough
-> > (for now).  We probably shouldn't mess with it unless we can come up
-> > with something that is clearly better.
-> > 
-> > (I have some ideas, but I think it's off-topic, here.)
-> 
-> Agreed off-topic ... but fixing it seems hard. What if I do:
-> 
-> # echo -n "L3:0=" > schemata
-> 
-> and then my control program dies?
-
-Probably nothing?
-
-In my hack for this, I buffered a partial line for each open struct file.
-
-If the struct file survives the terminated program, something else
-could append more to the incomplete line through any fd still open on
-the struct file (as in my { { echo; ... echo; } >schememta; } shell
-example).
-
-Otherwise, when the file is closed with an incomplete line, an error
-could be reported through close().  I implemented this, but it turns
-out not to be a magic bullet -- lots of software doesn't check the
-return value from close() / fclose(), and Linux's version of dup2()
-just silently loses close-time errors on the fd being clobbered.
-(dash, and probably other shells, undo redirections using dup2().
-Dupping the victim fd before the dup2(), so that it can be closed
-separately, can help -- as documented in the dup2() man page.  But as
-of today, most software probably doesn't do this.  Some OSes seem to
-have different dup2() behaviour that doesn't suffer from this problem.)
-
-Anyway, all in all, I wasn't convinced that this approach created fewer
-problems than it solved...
-
-[...]
-
-> > > I'm starting to worry about this co-existence of old/new syntax for
-> > > Intel region aware. Life seems simple if there is only one MB_HW
-> > > connected to the legacy "MB". Updates to either will make both
-> > > appear with new values when the schemata is read. E.g.
-> > > 
-> > > # cat schemata
-> > > MB:0=100
-> > > #MB_HW=255
-> > > 
-> > > # echo MB:0=50 > schemata
-> > > 
-> > > # cat schemata
-> > > MB:0=50
-> > > #MB_HW=127
-> > > 
-> > > But Intel will have several MB_HW controls, one for each region.
-> > > [Schemata names TBD, but I'll just call them 0, 1, 2, 3 here]
-> > > 
-> > > # cat schemata
-> > > MB:0=100
-> > > #MB_HW0=255
-> > > #MB_HW1=255
-> > > #MB_HW2=255
-> > > #MB_HW3=255
-> > > 
-> > > If the user sets just one of the HW controls:
-> > > 
-> > > # echo MB_HW1=64
-> > > 
-> > > what should resctrl display for the legacy "MB:" line?
-> > >
-> > > -Tony
-> > 
-> > Erm, good question.  I hadn't though too carefully about the region-
-> > aware case.
-> > 
-> > I think it's reasonable to expect software that writes MB_HW<n>
-> > independently to pay attention only to these specific schemata when
-> > reading back -- a bit like accessing a C union.
-> > 
-> > # echo 'MB:0=100' >schemata
-> > # cat schemata
-> > ->
-> > 	MB:0=100
-> > 	# MB_HW:0=255
-> > 	# MB_HW0:0=255
-> > 	# MB_HW1:0=255
-> > 	# MB_HW2:0=255
-> > 	# MB_HW3:0=255
-> > 
-> > # echo 'MB:0=100' >schemata
-> > # cat schemata
-> > ->
-> > 	MB:0=50
-> > 	# MB_HW:0=128
-> > 	# MB_HW0:0=128
-> > 	# MB_HW1:0=128
-> > 	# MB_HW2:0=128
-> > 	# MB_HW3:0=128
-> > 
-> > # echo 'MB_HW:0=127' >schemata
-> > # cat schemata
-> > ->
-> > 	MB:0=50
-> > 	# MB_HW:0=127
-> > 	# MB_HW0:0=127
-> > 	# MB_HW1:0=127
-> > 	# MB_HW2:0=127
-> > 	# MB_HW3:0=127
-> > 
-> > # echo 'MB_HW1:0=64' >schemata
-> > # cat schemata
-> > ->
-> > 	MB:0=???
-> > 	# MB_HW:0=???
-> > 	# MB_HW0:0=127
-> > 	# MB_HW1:0=64
-> > 	# MB_HW2:0=127
-> > 	# MB_HW3:0=127
-> > 
-> > The rules for populating the ??? entries could be designed to be
-> > somewhat intuitive, or we could just do the easiest thing.
-> > 
-> > So, could we just pick one, fixed, region to read the MB_HW value from?
-> > Say, MB_HW0:
-> > 
-> > 	MB:0=50
-> > 	# MB_HW:0=127
-> > 	# MB_HW0:0=127
-> > 	# MB_HW1:0=64
-> > 	# MB_HW2:0=127
-> > 	# MB_HW3:0=127
-> > 
-> > Or take the average across all regions:
-> > 
-> > 	MB:0=44
-> > 	# MB_HW:0=111
-> > 	# MB_HW0:0=127
-> > 	# MB_HW1:0=64
-> > 	# MB_HW2:0=127
-> > 	# MB_HW3:0=127
-> > 
-> > The latter may be more costly or complex to implement, and I don't
-> > know whether it is really useful.  Software that knows about the
-> > MB_HW<n> entries also knows that once you have looked at these, MB_HW
-> > and MB tell you nothing else.
-> > 
-> > What do you think?
-> > 
-> > I'm wondering whether setting the MB_HW<n> independently may be quite a
-> > specialised use case, which not everyone will want/need to do, but
-> > that's an assumption on my part.
-> 
-> It's difficult to guess what users will want to do. But it is likely
-> the case that total available bandwidth to regions will be different
-> (local DDR > remote DDR > CXL). So while the system will boot up with
-> no throttling on any region, it may be useful to enforce more throttling
-> on access to the slower regions.
-> 
-> Rather than trying to make up some number to fill in the ?? for the MB:
-> line, another option would be to stop showing the legacy MB: line in schemata
-> as soon as the user shows they know about the direct HW access mode
-> by writing any of the HW lines.
-> 
-> Any sysadmin trying to mix and match legacy access with direct HW access
-> is going to run into problems very quickly. In the spirit of not giving
-> them the cable to connect mains to the UART, perhaps removing the
-> foot-gun from the table might be a good option?
-> 
-> -Tony
-
-Quite possibly.
-
-Ideally, we'd have some kind of generic interface, but (as with "MB")
-there's always the risk that the hardware evolves in directions that
-don't fit the abstraction.
-
-For now, I will try to refocus the discussion back onto the schema
-description topic.  I think that's probably the easiest thing to get
-nailed down before we try to figure out how to deal with the "shadow
-schema" issue.
-
-Cheers
----Dave
 
