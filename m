@@ -1,122 +1,195 @@
-Return-Path: <linux-doc+bounces-64320-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64322-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96095C0182B
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 15:45:06 +0200 (CEST)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 80B3CC019C8
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 16:02:09 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4BACA3AA571
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 13:45:05 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 03D5A35B2B7
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 14:02:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F69C3128DC;
-	Thu, 23 Oct 2025 13:45:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 53E9532C329;
+	Thu, 23 Oct 2025 14:01:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="bPUQUojb"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="FvgvWu7l"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+Received: from mail-pg1-f201.google.com (mail-pg1-f201.google.com [209.85.215.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25B7930BF6D
-	for <linux-doc@vger.kernel.org>; Thu, 23 Oct 2025 13:44:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C178632AAAE
+	for <linux-doc@vger.kernel.org>; Thu, 23 Oct 2025 14:01:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761227101; cv=none; b=QwxdZ3kbDpb3Ab1it9qEkaT5lpN21zRcu6iw3dwfcxsHQS6IfKL2U+KCp7Hv2Rglevz5oEh3Ypg4eokNLKaxKPFxd5ZenXwYM0WdpYy37V9e5DUCRGomGScKGC+PfeDVZyFJ60hF5ZxLkP1wQJR3E0/oaHNHceGHi7KPqZhd/4Q=
+	t=1761228078; cv=none; b=ShU5Z6KWcjq8u/YUco0rt8oNSYviqfz9xNG2nHmfjLzt2ykWKgpWN2xN2DwxpojGfeOz2IbVM1M6IFz6RKK2QMG1Sw48y9GL0im+1s0bt7c0UnbnfrwqsVdzF3iXc3bOdB/hLtOHu7QEbB6p6mCC9LxZwJot5c80ADkC8hVZ498=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761227101; c=relaxed/simple;
-	bh=fQGPL2wAp1su4DsErlG30e9PExo6Wj5zg3lLPe3cQYE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=owRvATkRS/3wJMjRO/A9d37f3fmXAwiVcLD8JprQYVFcSa5R4fYfMXemu6dY2FnAr6Vjrx/vX6rRXzVN8xDpLPsheilWNfvHXO96NY3+yiM1nntd5sc5q/hlC5Skuxzev/AEZ2S9HRkA0an73QePvhv9wahF5mxDiIA7CDegbiw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=bPUQUojb; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4711f3c386eso6404905e9.0
-        for <linux-doc@vger.kernel.org>; Thu, 23 Oct 2025 06:44:59 -0700 (PDT)
+	s=arc-20240116; t=1761228078; c=relaxed/simple;
+	bh=nf2ne/DcUThRcyjkcAtbjjiK8XPQU5PLVC7WSh7jfZU=;
+	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
+	 To:Cc:Content-Type; b=hsmlktkvVed/rKcb9EL3dzKhRWRQU0kAfQB6fLewr7oz+l4IdI05I92sTRglZTE+YunF/X1jfRIRNJUbXn0xZpQMyoTZ7jqRFdMGNZlc35V5DQ3y5SIvLfWhdyY22DZj61LmQWdvf3dAXv+9NMU7oc9fN+4yam6ZCQ1fSc8bEyk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--ackerleytng.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=FvgvWu7l; arc=none smtp.client-ip=209.85.215.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--ackerleytng.bounces.google.com
+Received: by mail-pg1-f201.google.com with SMTP id 41be03b00d2f7-b55735710f0so1328587a12.2
+        for <linux-doc@vger.kernel.org>; Thu, 23 Oct 2025 07:01:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1761227098; x=1761831898; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=FZkEHZ6BvBqCRscatYxdEEZ9hCJa4XN3mU8tPMYldOM=;
-        b=bPUQUojbqNMf+pd7a8jp0Iq5T1YdHmEWH65BHLUcoEKzV/ZEkYDhNCobgUJiVSU8LR
-         hgIWgmPhJl4MpavoNKM7F+CxJNMDwpXQM8eZGR54YQAwwagoWvczqahdH/C082JPEZz3
-         4Ks3QKiSabs3FPt817A3TtXWuLokBL957krRxWAvhQieiJy57vGWleyQrrfomxoVrVNY
-         1cXh0+a7aCH0RPiOByzke4Hi6CFS92NkzDEKufP4YcA4aGFUiOQiNPAC/EyEkJMmILDS
-         KOxJnAlhijLvQ/tYql3+eXk8odU6vJsVc/DolSnH0LrnDnRYzQG+J/eTq8SaVd6ojM9S
-         2WuQ==
+        d=google.com; s=20230601; t=1761228075; x=1761832875; darn=vger.kernel.org;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=inXfddpf6Feyogc8n8Jl5cqVWZOSr51ivnMHY9v0Ey4=;
+        b=FvgvWu7lfkFsFHXEZtj4lw7glbTHzzUEGsEFkLBSyj5lOlrLDU1oghGofvy5n8eOsf
+         hNVds9VXo38wQYB6NTIGzXHSQxJqYajWlPt7009pp2gIii3hh6WwEU9ZD/I4QT7d2bea
+         WCWA56SQxCTKKATjTNzT+lP8oUtynF4+UfwgKPQjst0Xh/ycZHGg8SpB0lZqE/5jPJp6
+         CFTvHYr2ydcrrce3Dm0itC9rIq2bP6EIsKxFqfTiJrJTlg+JsT7q3befgm83FU6T6yNe
+         NI15GlfmkS+YcZs/EH0m47+UgRKGlt6IVvi766TFbKBUkqMBdAj7OK5mBSQiizp6e0mx
+         bTcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761227098; x=1761831898;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FZkEHZ6BvBqCRscatYxdEEZ9hCJa4XN3mU8tPMYldOM=;
-        b=FfCoMsBZHgjlUURSZrFILTapkS/0F4Fn/YGwD+mOmaP1g6EE4++Y71F14i6vQ3cy8T
-         ynvxwkXvWaHFXx59gEocaUqzd3B8W3XblmroSwhDo9OZhdFjdrA3cyGv1lm8b3ZbL1IR
-         7LdJPoqs+uRYuRiWgniHcTSB10Ms+sTWpkSNsDB+g01GErKj67tmZvN6FKf46Hlsar+U
-         1VXfKJW/322XBtIc+Gl3nvIH6c1HJQ3pD+TApg85CUKDpvJ7Vg4j1rrFOKwKN//7bLkh
-         O+Pp6uPz1Ai9rNQb1+wzphxwMABGHZohWdx5BiPLNZRZr3ae4hPJKRKYcaQ789n5eth8
-         K5wA==
-X-Forwarded-Encrypted: i=1; AJvYcCX0XnUgiLITrJVNftMYOHyrrJ+Ht52YO0rqPF7jdtsrjqGT/+c3liBSxGRMIS/WwvK2okK8yXT5lSk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzfheRRS+xwhKn6tFRSC/HOJV0kyLLhc1ypDr/QDfGYTW3zoBPq
-	qenKXHHaVZRcU65R2RqVECgiL/NnUmBtzuYEWnk1V61/pcShNEg1J6M956cSlhZKn+s=
-X-Gm-Gg: ASbGncvnHN07SkAIa3vKVuFYJH1aaf3ppAGwJGfrW6AJVHz4Bsu5fePjEPbjHD7Zo2+
-	ccz3SiBG2OnKykTJcQ/LjFf8hnKzqqrlcJGaAXiitWNhpyHA61bnnSywv+NsoWACJObJ7UBQPON
-	gsv+jyT+RO5NYXWxPyYO7x9f5Do/RcxzbivSQvuNGAmtnJL+lhUmITzwWQExW8Dn9gTfDY3kFWl
-	GMq1TQkHI6mcd0JjunKSQpewtAziKDTBX29vuiw6FqdwGXqAx8smKbzovaLbr2Zu2ojnukG2TnF
-	uZpa3NLq6OSzmPAJkIgnbJtFdFdo3GmwskZ1guxsrxBjZanOl2gWm8EI9pVNafL2ID9iqmMyP+C
-	fUqEz/yuzgRO3BybGMzvTt2NRtkKESnIEV43X6Fac+eKwVrymiDBrsF3lP0i8D7XGR66cH6G4rQ
-	w+/9IQD5Km2+BRn6pisU6rttu58ms=
-X-Google-Smtp-Source: AGHT+IGPd+brTs/tr9uigSHWLaHZFIfinUl3f0FWfAgHyxWRy8RvOdRx08VMDoZTA6McwENXy6a00w==
-X-Received: by 2002:a05:600c:458b:b0:46e:39da:1195 with SMTP id 5b1f17b1804b1-471178784d9mr183926935e9.3.1761227098250;
-        Thu, 23 Oct 2025 06:44:58 -0700 (PDT)
-Received: from localhost ([196.207.164.177])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-475caf152absm46879295e9.9.2025.10.23.06.44.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Oct 2025 06:44:57 -0700 (PDT)
-Date: Thu, 23 Oct 2025 16:44:54 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: dan.j.williams@intel.com
-Cc: Ally Heev <allyheev@gmail.com>, Dwaipayan Ray <dwaipayanray1@gmail.com>,
-	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-	Joe Perches <joe@perches.com>, Jonathan Corbet <corbet@lwn.net>,
-	Andy Whitcroft <apw@canonical.com>, workflows@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	David Hunter <david.hunter.linux@gmail.com>,
-	Shuah Khan <skhan@linuxfoundation.org>
-Subject: Re: [PATCH] checkpatch: add uninitialized pointer with __free
- attribute check
-Message-ID: <aPoxVqxevopRpPu1@stanley.mountain>
-References: <20251021-aheev-checkpatch-uninitialized-free-v1-1-18fb01bc6a7a@gmail.com>
- <68f7b830ec21a_10e910070@dwillia2-mobl4.notmuch>
+        d=1e100.net; s=20230601; t=1761228075; x=1761832875;
+        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=inXfddpf6Feyogc8n8Jl5cqVWZOSr51ivnMHY9v0Ey4=;
+        b=PCRUTpHZR/OxC8G2gSn/8FMVO4BFx+lFrH4FuqX3zH+G4lxY/8oBZcqoeSqVefWK/l
+         Cri4MS3AiST78DXBnhQsPczVCbfl/uy4aXVsKG/9TeO0BkddjBDPkpemu7q1C88Lg4jM
+         OphVOxe9NDDevAnYEuaRfYDTskgH/xFWQG5frEe3B+MKznd5qG6vv44RhQh+aDisdHJn
+         6Bk6mGCieiJ5tHUFLXKLdWxj+Q0pTdrCrFDoktGLbXjdoLRhNJDvMM5F/4eqQOXNfdmf
+         EMTwAG1PciapHDr2I4Z5TqyQWwA6xQZ0JG1fD2jrjNFyZjZ4vmzRtb8xGY2KGy84Nm7o
+         +84w==
+X-Forwarded-Encrypted: i=1; AJvYcCV3VemDpTIZlG4ogB9123SbJIW2rP+UyLnI02gw7syR9Ui5AS8qANOesVr1qPXvo0CyfSTInP5hHec=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxlNbohAnHTKghw9uRoY36oLSrGZD/JBLNbOh8qEVA3aZQcQSVx
+	nfhnTFMZVFdwfMRTa7Q+mUmyAMQn3cUUstIveEL/cgf6hLSaBQyXJ3P3k3R1Nf3CqWNU0kGGwaS
+	/+gKems0oFa9M+/Ec2RqyQN5hZA==
+X-Google-Smtp-Source: AGHT+IFIN8uFRC6EtqcEGeMEkYd8inzutN6W/XJij2WhQjtYZx5ArSxhlm3XOqfP/3yjcqmWzVtyJ1fSE/ev6eLgRw==
+X-Received: from pjnu4.prod.google.com ([2002:a17:90a:8904:b0:339:dc19:ae5d])
+ (user=ackerleytng job=prod-delivery.src-stubby-dispatcher) by
+ 2002:a05:6a20:3956:b0:334:91ab:f182 with SMTP id adf61e73a8af0-334a85286f8mr35842433637.10.1761228074886;
+ Thu, 23 Oct 2025 07:01:14 -0700 (PDT)
+Date: Thu, 23 Oct 2025 07:01:13 -0700
+In-Reply-To: <aPlpKbHGea90IebS@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <68f7b830ec21a_10e910070@dwillia2-mobl4.notmuch>
+Mime-Version: 1.0
+References: <cover.1760731772.git.ackerleytng@google.com> <8ee16fbf254115b0fd72cc2b5c06d2ccef66eca9.1760731772.git.ackerleytng@google.com>
+ <2457cb3b-5dde-4ca1-b75d-174b5daee28a@arm.com> <diqz4irqg9qy.fsf@google.com>
+ <diqzy0p2eet3.fsf@google.com> <aPlpKbHGea90IebS@google.com>
+Message-ID: <diqzv7k5emza.fsf@google.com>
+Subject: Re: [RFC PATCH v1 07/37] KVM: Introduce KVM_SET_MEMORY_ATTRIBUTES2
+From: Ackerley Tng <ackerleytng@google.com>
+To: Sean Christopherson <seanjc@google.com>
+Cc: Steven Price <steven.price@arm.com>, cgroups@vger.kernel.org, kvm@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org, 
+	linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, x86@kernel.org, 
+	akpm@linux-foundation.org, binbin.wu@linux.intel.com, bp@alien8.de, 
+	brauner@kernel.org, chao.p.peng@intel.com, chenhuacai@kernel.org, 
+	corbet@lwn.net, dave.hansen@intel.com, dave.hansen@linux.intel.com, 
+	david@redhat.com, dmatlack@google.com, erdemaktas@google.com, 
+	fan.du@intel.com, fvdl@google.com, haibo1.xu@intel.com, hannes@cmpxchg.org, 
+	hch@infradead.org, hpa@zytor.com, hughd@google.com, ira.weiny@intel.com, 
+	isaku.yamahata@intel.com, jack@suse.cz, james.morse@arm.com, 
+	jarkko@kernel.org, jgg@ziepe.ca, jgowans@amazon.com, jhubbard@nvidia.com, 
+	jthoughton@google.com, jun.miao@intel.com, kai.huang@intel.com, 
+	keirf@google.com, kent.overstreet@linux.dev, liam.merwick@oracle.com, 
+	maciej.wieczor-retman@intel.com, mail@maciej.szmigiero.name, 
+	maobibo@loongson.cn, mathieu.desnoyers@efficios.com, maz@kernel.org, 
+	mhiramat@kernel.org, mhocko@kernel.org, mic@digikod.net, michael.roth@amd.com, 
+	mingo@redhat.com, mlevitsk@redhat.com, mpe@ellerman.id.au, 
+	muchun.song@linux.dev, nikunj@amd.com, nsaenz@amazon.es, 
+	oliver.upton@linux.dev, palmer@dabbelt.com, pankaj.gupta@amd.com, 
+	paul.walmsley@sifive.com, pbonzini@redhat.com, peterx@redhat.com, 
+	pgonda@google.com, prsampat@amd.com, pvorel@suse.cz, qperret@google.com, 
+	richard.weiyang@gmail.com, rick.p.edgecombe@intel.com, rientjes@google.com, 
+	rostedt@goodmis.org, roypat@amazon.co.uk, rppt@kernel.org, 
+	shakeel.butt@linux.dev, shuah@kernel.org, suzuki.poulose@arm.com, 
+	tabba@google.com, tglx@linutronix.de, thomas.lendacky@amd.com, 
+	vannapurve@google.com, vbabka@suse.cz, viro@zeniv.linux.org.uk, 
+	vkuznets@redhat.com, will@kernel.org, willy@infradead.org, wyihan@google.com, 
+	xiaoyao.li@intel.com, yan.y.zhao@intel.com, yilun.xu@intel.com, 
+	yuzenghui@huawei.com
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 21, 2025 at 09:43:28AM -0700, dan.j.williams@intel.com wrote:
-> I would go futher and suggest that the pattern of:
-> 
-> 	type foo __free(free_foo) = NULL;
-> 
-> ...be made into a warning because that easily leads to situations where
-> declaration order is out of sync with allocation order. I.e. can be made
-> technically correct, but at a level of cleverness that undermines the
-> benefit.
+Sean Christopherson <seanjc@google.com> writes:
 
-To be honest, I'm not sure what you're saying here...
+> On Wed, Oct 22, 2025, Ackerley Tng wrote:
+>> Ackerley Tng <ackerleytng@google.com> writes:
+>> 
+>> Found another issue with KVM_CAP_MEMORY_ATTRIBUTES2.
+>> 
+>> KVM_CAP_MEMORY_ATTRIBUTES2 was defined to do the same thing as
+>> KVM_CAP_MEMORY_ATTRIBUTES, but that's wrong since
+>> KVM_CAP_MEMORY_ATTRIBUTES2 should indicate the presence of
+>> KVM_SET_MEMORY_ATTRIBUTES2 and struct kvm_memory_attributes2.
+>
+> No?  If no attributes are supported, whether or not KVM_SET_MEMORY_ATTRIBUTES2
+> exists is largely irrelevant.
 
-I have written code like this.  There are 515 places which use this
-format.  I think it would be a controversial change.
+That's true.
 
-$ git grep __free | grep "= NULL"  | wc -l
-515
+> We can even provide the same -ENOTTY errno by
+> checking that _any_ attributes are supported, i.e. so that doing
+> KVM_SET_MEMORY_ATTRIBUTES2 on KVM without any support whatsoever fails in the
+> same way that KVM with code support but no attributes fails.
+>
 
-regards,
-dan carpenter
+IIUC KVM_SET_MEMORY_ATTRIBUTES doesn't fail with -ENOTTY now when there
+are no valid attributes.
 
+Even if there's no valid attributes (as in
+kvm_supported_mem_attributes() returns 0), it's possible to call
+KVM_SET_MEMORY_ATTRIBUTES with .attributes set to 0, which will be a
+no-op, but will return 0.
+
+I think this is kind of correct behavior since .attributes = 0 is
+actually a valid expression for "I want this range to be shared", and
+for a VM that doesn't support private memory, it's a valid expression.
+
+
+The other way that there are "no attributes" would be if there are no
+/VM/ attributes, in which case KVM_SET_MEMORY_ATTRIBUTES, sent to as a
+vm ioctl, will return -ENOTTY.
+
+> In other words, I don't see why it can't do both.  Even if we can't massage the
+> right errno, I would much rather KVM_SET_MEMORY_ATTRIBUTES2 enumerate the set of
+
+Did you mean KVM_CAP_MEMORY_ATTRIBUTES2 in the line above?
+
+> supported attributes than simply '1'.  E.g. we have no plans to support
+> KVM_SET_MEMORY_ATTRIBUTES on guest_memfd, and so returning simply '1' creates an
+> unwanted and unnecessary dependency.
+>
+
+Okay I'll switch this back to what it was.
+
+>> @@ -1617,4 +1618,15 @@ struct kvm_pre_fault_memory {
+>>  	__u64 padding[5];
+>>  };
+>>  
+>> +/* Available with KVM_CAP_MEMORY_ATTRIBUTES2 */
+>> +#define KVM_SET_MEMORY_ATTRIBUTES2              _IOWR(KVMIO,  0xd6, struct kvm_memory_attributes2)
+>
+> Please use the same literal number, 0xd2, as
+>
+>   #define KVM_SET_MEMORY_ATTRIBUTES              _IOW(KVMIO,  0xd2, struct kvm_memory_attributes)
+>
+> The "final" ioctl number that userspace sees incorporates the directionality and
+> the size of the struct, i.e. KVM_SET_MEMORY_ATTRIBUTES and KVM_SET_MEMORY_ATTRIBUTES2
+> are guaranteed to be distinct even if they both use 0xd2 as the "minor" number.
+>
+
+Will do.
+
+>> +
+>> +struct kvm_memory_attributes2 {
+>> +	__u64 address;
+>> +	__u64 size;
+>> +	__u64 attributes;
+>> +	__u64 flags;
+>> +	__u64 reserved[4];
+>
+> Maybe be paranoid and reserve 12 u64s?
+
+Will do.
 
