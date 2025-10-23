@@ -1,899 +1,715 @@
-Return-Path: <linux-doc+bounces-64376-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64380-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41E43C02959
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 18:56:54 +0200 (CEST)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id E144EC02DE5
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 20:16:40 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8950C1AA7AB3
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 16:55:39 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 67597359FE3
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Oct 2025 18:16:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE7E534B1B7;
-	Thu, 23 Oct 2025 16:51:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MXed7/t2"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 15B712571DC;
+	Thu, 23 Oct 2025 18:16:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5506B34A3C5;
-	Thu, 23 Oct 2025 16:51:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23FA7153BED;
+	Thu, 23 Oct 2025 18:16:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761238273; cv=none; b=nOsnMOryU4wUXSALhgL0q+q51YKy9sJrb6Xit40+PLlvbvbWuPVjs8HiyhKcPeR0xitEAyl/g0SDtiNe2N/byddgQLN4vxr8shzdx5P6ye/RNLppK964GZfM1WazbhkU4w3iiRs8yTR+onw2LM7VgymAXpv3mXKevmomJsAtMeE=
+	t=1761243397; cv=none; b=SeAEN03psbpVo6GozIgL79qwN0I63YDjAfEwyrVROjtG56jiaqaJnduN5s2Ukpf6L3dpvfDJjI7yiKKk1qcvnzHgoXs2SPLKpXuNd6Wp5lD/s87K3I9+5IvefWEdoj57INu/8HozwlfLwOrsOSmEPwzGaJCJJ4jo24NPxtnqKXc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761238273; c=relaxed/simple;
-	bh=fQShIQQ+ak3sZ7vPOttttxaX+iCQFP+V6YCuFOVSbJ4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=I7kjo/WpssvPG2460Oz6OwOeU5mDq1ALUm4DSsknJBhCEX5JTG7tCIm7MRJJegoBSPwzLxYc0BbflYiUPTBv9yKZ+Q/Z+y3XOIDTUfhaknlqI5daf+Ip9pY1x1zUU5N7bpnjOOzDwJnb647oADHghFgxn76xzJXj9LuQfFTzB3Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MXed7/t2; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 30194C4AF0C;
-	Thu, 23 Oct 2025 16:51:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1761238273;
-	bh=fQShIQQ+ak3sZ7vPOttttxaX+iCQFP+V6YCuFOVSbJ4=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=MXed7/t2lV6opOlu8ZwhgndcpsylY2qRSlSc8q7IZ5ODdJA4D7B/Jv7bOSBy0FhlE
-	 9utj3rTBTywyQwv4c4oniZw7UYr/nKARf9rlITxL7X+eC4iG0m7HlJDDDHtLgMkQJr
-	 k6SH1QEAX3sngx730y9Ahq8JWoHAySHswKUH/QlmggXdKuho/+gVcpBGeyUh+g8aro
-	 y1gJfDoJ//8gE2pl6aqDRS2Z/GS7BNqTl47imTWkd08hzZCq/EwfahnXNbDSjQ5mOe
-	 KocoQ+6E90WTlvf5j70vmEDMJzIfEeGVjCe53JAU0bMxnjqKkJDlgPZvp3mq+xs4SG
-	 4tQa7XQYDScEw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17AC0CCD193;
-	Thu, 23 Oct 2025 16:51:13 +0000 (UTC)
-From: Deepak Gupta via B4 Relay <devnull+debug.rivosinc.com@kernel.org>
-Date: Thu, 23 Oct 2025 09:51:33 -0700
-Subject: [PATCH v22 28/28] kselftest/riscv: kselftest for user mode cfi
+	s=arc-20240116; t=1761243397; c=relaxed/simple;
+	bh=L8dU4HjuuI95mGr+wkCxWgUAWVgxK9kNikgME4ulavM=;
+	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=dQSCdQWpBnWwupYo9LsVg6WHDz80VJ8YfvVrjtbOw3WvD9Tn324gTc9AKMPnpsUhsQAWx9qh/FK9w8xIWRfaHGb0rQ3VfVZETZIK2kxTkxi/RlcgF41CbGGFz3z6UT0fQeemirOQ01R6G0Rk1i0qkCM5AwNhjVu1jsbQt63k63M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.186.216])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4csvKP6LChz6L4ys;
+	Fri, 24 Oct 2025 02:13:13 +0800 (CST)
+Received: from dubpeml100005.china.huawei.com (unknown [7.214.146.113])
+	by mail.maildlp.com (Postfix) with ESMTPS id F30691402FD;
+	Fri, 24 Oct 2025 02:16:29 +0800 (CST)
+Received: from localhost (10.203.177.15) by dubpeml100005.china.huawei.com
+ (7.214.146.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 23 Oct
+ 2025 19:16:28 +0100
+Date: Thu, 23 Oct 2025 19:16:27 +0100
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
+To: Aditya Dutt <duttaditya18@gmail.com>
+CC: Jonathan Cameron <jic23@kernel.org>, David Lechner
+	<dlechner@baylibre.com>, Nuno =?ISO-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, "Krzysztof
+ Kozlowski" <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Jonathan
+ Corbet <corbet@lwn.net>, Frank Zago <frank@zago.net>,
+	<linux-kernel@vger.kernel.org>, <linux-iio@vger.kernel.org>,
+	<devicetree@vger.kernel.org>, <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH 2/2] iio: position: Add support for ams AS5600 angle
+ sensor
+Message-ID: <20251023191627.00003b52@huawei.com>
+In-Reply-To: <20251020201653.86181-3-duttaditya18@gmail.com>
+References: <20251020201653.86181-1-duttaditya18@gmail.com>
+	<20251020201653.86181-3-duttaditya18@gmail.com>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="US-ASCII"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251023-v5_user_cfi_series-v22-28-1935270f7636@rivosinc.com>
-References: <20251023-v5_user_cfi_series-v22-0-1935270f7636@rivosinc.com>
-In-Reply-To: <20251023-v5_user_cfi_series-v22-0-1935270f7636@rivosinc.com>
-To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Andrew Morton <akpm@linux-foundation.org>, 
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
- Vlastimil Babka <vbabka@suse.cz>, 
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
- Paul Walmsley <paul.walmsley@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
- Christian Brauner <brauner@kernel.org>, 
- Peter Zijlstra <peterz@infradead.org>, Oleg Nesterov <oleg@redhat.com>, 
- Eric Biederman <ebiederm@xmission.com>, Kees Cook <kees@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, 
- Jann Horn <jannh@google.com>, Conor Dooley <conor+dt@kernel.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Benno Lossin <lossin@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
- linux-mm@kvack.org, linux-riscv@lists.infradead.org, 
- devicetree@vger.kernel.org, linux-arch@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- alistair.francis@wdc.com, richard.henderson@linaro.org, jim.shu@sifive.com, 
- andybnac@gmail.com, kito.cheng@sifive.com, charlie@rivosinc.com, 
- atishp@rivosinc.com, evan@rivosinc.com, cleger@rivosinc.com, 
- alexghiti@rivosinc.com, samitolvanen@google.com, broonie@kernel.org, 
- rick.p.edgecombe@intel.com, rust-for-linux@vger.kernel.org, 
- Deepak Gupta <debug@rivosinc.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761238267; l=22627;
- i=debug@rivosinc.com; s=20251023; h=from:subject:message-id;
- bh=WOWAxX6A3QXldgq80P/nMdsBb70DMucV+lm3CHQPnco=;
- b=+H2AUUxMrQmL2+HeTK89QaAu63YnS11vzS4vnbywzcUHukQ78zj0ZKvgT5MzeCm2QfFNnNVWw
- c6geAxb5t08BUUFlLuXyG1Ft4Z6JKg8sbUjt5ybg/2yCxqubKpi2TzG
-X-Developer-Key: i=debug@rivosinc.com; a=ed25519;
- pk=O37GQv1thBhZToXyQKdecPDhtWVbEDRQ0RIndijvpjk=
-X-Endpoint-Received: by B4 Relay for debug@rivosinc.com/20251023 with
- auth_id=553
-X-Original-From: Deepak Gupta <debug@rivosinc.com>
-Reply-To: debug@rivosinc.com
+X-ClientProxiedBy: lhrpeml100009.china.huawei.com (7.191.174.83) To
+ dubpeml100005.china.huawei.com (7.214.146.113)
 
-From: Deepak Gupta <debug@rivosinc.com>
+On Tue, 21 Oct 2025 01:46:53 +0530
+Aditya Dutt <duttaditya18@gmail.com> wrote:
 
-Adds kselftest for RISC-V control flow integrity implementation for user
-mode. There is not a lot going on in kernel for enabling landing pad for
-user mode. cfi selftest are intended to be compiled with zicfilp and
-zicfiss enabled compiler. Thus kselftest simply checks if landing pad /
-shadow stack for the process are enabled or not and executes ptrace
-selftests on cfi. selftest then register a signal handler for SIGSEGV.
-Any control flow violation are reported as SIGSEGV with si_code =
-SEGV_CPERR. Test will fail on receiving any SEGV_CPERR. Shadow stack part
-has more changes in kernel and thus there are separate tests for that
+> The AS5600 is a Hall-based rotary magnetic position sensor using
+> planar sensors that convert the magnetic field component perpendicular
+> to the surface of the chip into a voltage, or a numerical value
+> available through i2c.
+> 
+> The driver registers the chip as an IIO_ANGL device.
+> It also exposes the raw registers through debugfs for further configuration.
+> 
+> Datasheet: https://ams-osram.com/products/sensor-solutions/position-sensors/ams-as5600-position-sensor
+> Co-developed-by: Frank Zago <frank@zago.net>
+> Signed-off-by: Frank Zago <frank@zago.net>
+> Signed-off-by: Aditya Dutt <duttaditya18@gmail.com>
 
-- Exercise `map_shadow_stack` syscall
-- `fork` test to make sure COW works for shadow stack pages
-- gup tests
-  Kernel uses FOLL_FORCE when access happens to memory via
-  /proc/<pid>/mem. Not breaking that for shadow stack.
-- signal test. Make sure signal delivery results in token creation on
-  shadow stack and consumes (and verifies) token on sigreturn
-- shadow stack protection test. attempts to write using regular store
-  instruction on shadow stack memory must result in access faults
-- ptrace test: adds landing pad violation, clears ELP and continues
+Hi Aditya, Great to see this driver moving forwards.
 
-In case toolchain doesn't support cfi extension, cfi kselftest wont
-get built.
+A few comments inline on specifics but one thing I'm not sure on is whether
+it is actually useful to expose the raw angle channel in real applications.
+I'd kind of assume the limits etc would be programmed for a given physical
+configuration so it might be sensible to just expose that scaled channel
+instead?
 
-Test outut
-==========
+Jonathan
 
-"""
-TAP version 13
-1..5
-  This is to ensure shadow stack is indeed enabled and working
-  This is to ensure shadow stack is indeed enabled and working
-ok 1 shstk fork test
-ok 2 map shadow stack syscall
-ok 3 shadow stack gup tests
-ok 4 shadow stack signal tests
-ok 5 memory protections of shadow stack memory
-"""
+> ---
+>  Documentation/iio/as5600.rst  |  84 ++++++++
+>  Documentation/iio/index.rst   |   1 +
+>  MAINTAINERS                   |   8 +
+>  drivers/iio/position/Kconfig  |  10 +
+>  drivers/iio/position/Makefile |   1 +
+>  drivers/iio/position/as5600.c | 373 ++++++++++++++++++++++++++++++++++
+>  6 files changed, 477 insertions(+)
+>  create mode 100644 Documentation/iio/as5600.rst
+>  create mode 100644 drivers/iio/position/as5600.c
+> 
+> diff --git a/Documentation/iio/as5600.rst b/Documentation/iio/as5600.rst
+> new file mode 100644
+> index 000000000000..d74c4052e590
+> --- /dev/null
+> +++ b/Documentation/iio/as5600.rst
+> @@ -0,0 +1,84 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +=================
+> +ams AS5600 driver
+> +=================
+> +
+> +
+One blank line is probably enough for readability.
 
-Suggested-by: Charlie Jenkins <charlie@rivosinc.com>
-Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
----
- tools/testing/selftests/riscv/Makefile             |   2 +-
- tools/testing/selftests/riscv/cfi/.gitignore       |   3 +
- tools/testing/selftests/riscv/cfi/Makefile         |  16 +
- tools/testing/selftests/riscv/cfi/cfi_rv_test.h    |  82 +++++
- tools/testing/selftests/riscv/cfi/riscv_cfi_test.c | 173 +++++++++
- tools/testing/selftests/riscv/cfi/shadowstack.c    | 385 +++++++++++++++++++++
- tools/testing/selftests/riscv/cfi/shadowstack.h    |  27 ++
- 7 files changed, 687 insertions(+), 1 deletion(-)
+> +Overview
+> +========
+> +
+> +The ams AS5600 is a 12-Bit Programmable Contactless Potentiometer. Its
+> +i2c address is 0x36.
+> +
+> +For more information, see the datasheet at
+> +
+> +  https://ams-osram.com/products/sensor-solutions/position-sensors/ams-as5600-position-sensor
+> +
+One blank line here as well.
 
-diff --git a/tools/testing/selftests/riscv/Makefile b/tools/testing/selftests/riscv/Makefile
-index 099b8c1f46f8..5671b4405a12 100644
---- a/tools/testing/selftests/riscv/Makefile
-+++ b/tools/testing/selftests/riscv/Makefile
-@@ -5,7 +5,7 @@
- ARCH ?= $(shell uname -m 2>/dev/null || echo not)
- 
- ifneq (,$(filter $(ARCH),riscv))
--RISCV_SUBTARGETS ?= abi hwprobe mm sigreturn vector
-+RISCV_SUBTARGETS ?= abi hwprobe mm sigreturn vector cfi
- else
- RISCV_SUBTARGETS :=
- endif
-diff --git a/tools/testing/selftests/riscv/cfi/.gitignore b/tools/testing/selftests/riscv/cfi/.gitignore
-new file mode 100644
-index 000000000000..82545863bac6
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/.gitignore
-@@ -0,0 +1,3 @@
-+cfitests
-+riscv_cfi_test
-+shadowstack
-diff --git a/tools/testing/selftests/riscv/cfi/Makefile b/tools/testing/selftests/riscv/cfi/Makefile
-new file mode 100644
-index 000000000000..55165a93845f
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/Makefile
-@@ -0,0 +1,16 @@
-+CFLAGS += -I$(top_srcdir)/tools/include
-+
-+CFLAGS += -march=rv64gc_zicfilp_zicfiss -fcf-protection=full
-+
-+ifeq ($(shell $(CC) $(CFLAGS) -nostdlib -xc /dev/null -o /dev/null > /dev/null 2>&1; echo $$?),0)
-+TEST_GEN_PROGS := cfitests
-+
-+include ../../lib.mk
-+
-+$(OUTPUT)/cfitests: riscv_cfi_test.c shadowstack.c
-+	$(CC) -o$@ $(CFLAGS) $(LDFLAGS) $^
-+else
-+include ../../lib.mk
-+
-+$(shell echo "Toolchain doesn't support CFI, skipping CFI kselftest." >&2)
-+endif
-diff --git a/tools/testing/selftests/riscv/cfi/cfi_rv_test.h b/tools/testing/selftests/riscv/cfi/cfi_rv_test.h
-new file mode 100644
-index 000000000000..1c8043f2b778
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/cfi_rv_test.h
-@@ -0,0 +1,82 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef SELFTEST_RISCV_CFI_H
-+#define SELFTEST_RISCV_CFI_H
-+#include <stddef.h>
-+#include <sys/types.h>
-+#include "shadowstack.h"
-+
-+#define CHILD_EXIT_CODE_SSWRITE		10
-+#define CHILD_EXIT_CODE_SIG_TEST	11
-+
-+#define my_syscall5(num, arg1, arg2, arg3, arg4, arg5)			\
-+({									\
-+	register long _num  __asm__ ("a7") = (num);			\
-+	register long _arg1 __asm__ ("a0") = (long)(arg1);		\
-+	register long _arg2 __asm__ ("a1") = (long)(arg2);		\
-+	register long _arg3 __asm__ ("a2") = (long)(arg3);		\
-+	register long _arg4 __asm__ ("a3") = (long)(arg4);		\
-+	register long _arg5 __asm__ ("a4") = (long)(arg5);		\
-+									\
-+	__asm__ volatile(						\
-+		"ecall\n"						\
-+		: "+r"							\
-+		(_arg1)							\
-+		: "r"(_arg2), "r"(_arg3), "r"(_arg4), "r"(_arg5),	\
-+		  "r"(_num)						\
-+		: "memory", "cc"					\
-+	);								\
-+	_arg1;								\
-+})
-+
-+#define my_syscall3(num, arg1, arg2, arg3)				\
-+({									\
-+	register long _num  __asm__ ("a7") = (num);			\
-+	register long _arg1 __asm__ ("a0") = (long)(arg1);		\
-+	register long _arg2 __asm__ ("a1") = (long)(arg2);		\
-+	register long _arg3 __asm__ ("a2") = (long)(arg3);		\
-+									\
-+	__asm__ volatile(						\
-+		"ecall\n"						\
-+		: "+r" (_arg1)						\
-+		: "r"(_arg2), "r"(_arg3),				\
-+		  "r"(_num)						\
-+		: "memory", "cc"					\
-+	);								\
-+	_arg1;								\
-+})
-+
-+#ifndef __NR_prctl
-+#define __NR_prctl 167
-+#endif
-+
-+#ifndef __NR_map_shadow_stack
-+#define __NR_map_shadow_stack 453
-+#endif
-+
-+#define CSR_SSP 0x011
-+
-+#ifdef __ASSEMBLY__
-+#define __ASM_STR(x)    x
-+#else
-+#define __ASM_STR(x)    #x
-+#endif
-+
-+#define csr_read(csr)							\
-+({									\
-+	register unsigned long __v;					\
-+	__asm__ __volatile__ ("csrr %0, " __ASM_STR(csr)		\
-+				: "=r" (__v) :				\
-+				: "memory");				\
-+	__v;								\
-+})
-+
-+#define csr_write(csr, val)						\
-+({									\
-+	unsigned long __v = (unsigned long)(val);			\
-+	__asm__ __volatile__ ("csrw " __ASM_STR(csr) ", %0"		\
-+				: : "rK" (__v)				\
-+				: "memory");				\
-+})
-+
-+#endif
-diff --git a/tools/testing/selftests/riscv/cfi/riscv_cfi_test.c b/tools/testing/selftests/riscv/cfi/riscv_cfi_test.c
-new file mode 100644
-index 000000000000..486a2e779053
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/riscv_cfi_test.c
-@@ -0,0 +1,173 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include "../../kselftest.h"
-+#include <sys/signal.h>
-+#include <asm/ucontext.h>
-+#include <linux/prctl.h>
-+#include <errno.h>
-+#include <linux/ptrace.h>
-+#include <sys/wait.h>
-+#include <linux/elf.h>
-+#include <sys/uio.h>
-+#include <asm-generic/unistd.h>
-+
-+#include "cfi_rv_test.h"
-+
-+/* do not optimize cfi related test functions */
-+#pragma GCC push_options
-+#pragma GCC optimize("O0")
-+
-+void sigsegv_handler(int signum, siginfo_t *si, void *uc)
-+{
-+	struct ucontext *ctx = (struct ucontext *)uc;
-+
-+	if (si->si_code == SEGV_CPERR) {
-+		ksft_print_msg("Control flow violation happened somewhere\n");
-+		ksft_print_msg("PC where violation happened %lx\n", ctx->uc_mcontext.gregs[0]);
-+		exit(-1);
-+	}
-+
-+	/* all other cases are expected to be of shadow stack write case */
-+	exit(CHILD_EXIT_CODE_SSWRITE);
-+}
-+
-+bool register_signal_handler(void)
-+{
-+	struct sigaction sa = {};
-+
-+	sa.sa_sigaction = sigsegv_handler;
-+	sa.sa_flags = SA_SIGINFO;
-+	if (sigaction(SIGSEGV, &sa, NULL)) {
-+		ksft_print_msg("Registering signal handler for landing pad violation failed\n");
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+long ptrace(int request, pid_t pid, void *addr, void *data);
-+
-+bool cfi_ptrace_test(void)
-+{
-+	pid_t pid;
-+	int status, ret = 0;
-+	unsigned long ptrace_test_num = 0, total_ptrace_tests = 2;
-+
-+	struct user_cfi_state cfi_reg;
-+	struct iovec iov;
-+
-+	pid = fork();
-+
-+	if (pid == -1) {
-+		ksft_exit_fail_msg("%s: fork failed\n", __func__);
-+		exit(1);
-+	}
-+
-+	if (pid == 0) {
-+		/* allow to be traced */
-+		ptrace(PTRACE_TRACEME, 0, NULL, NULL);
-+		raise(SIGSTOP);
-+		asm volatile (
-+		"la a5, 1f\n"
-+		"jalr a5 \n"
-+		"nop \n"
-+		"nop \n"
-+		"1: nop\n"
-+		: : : "a5");
-+		exit(11);
-+		/* child shouldn't go beyond here */
-+	}
-+
-+	/* parent's code goes here */
-+	iov.iov_base = &cfi_reg;
-+	iov.iov_len = sizeof(cfi_reg);
-+
-+	while (ptrace_test_num < total_ptrace_tests) {
-+		memset(&cfi_reg, 0, sizeof(cfi_reg));
-+		waitpid(pid, &status, 0);
-+		if (WIFSTOPPED(status)) {
-+			errno = 0;
-+			ret = ptrace(PTRACE_GETREGSET, pid, (void *)NT_RISCV_USER_CFI, &iov);
-+			if (ret == -1 && errno)
-+				ksft_exit_fail_msg("%s: PTRACE_GETREGSET failed\n", __func__);
-+		} else
-+			ksft_exit_fail_msg("%s: child didn't stop, failed\n", __func__);
-+
-+		switch (ptrace_test_num) {
-+#define CFI_ENABLE_MASK (PTRACE_CFI_LP_EN_STATE |	\
-+			PTRACE_CFI_SS_EN_STATE |	\
-+			PTRACE_CFI_SS_PTR_STATE)
-+		case 0:
-+			if ((cfi_reg.cfi_status.cfi_state & CFI_ENABLE_MASK) != CFI_ENABLE_MASK)
-+				ksft_exit_fail_msg("%s: ptrace_getregset failed, %llu\n", __func__,
-+				cfi_reg.cfi_status.cfi_state);
-+			if (!cfi_reg.shstk_ptr)
-+				ksft_exit_fail_msg("%s: NULL shadow stack pointer, test failed\n",
-+				__func__);
-+			break;
-+		case 1:
-+			if (!(cfi_reg.cfi_status.cfi_state & PTRACE_CFI_ELP_STATE))
-+				ksft_exit_fail_msg("%s: elp must have been set\n", __func__);
-+			/* clear elp state. not interested in anything else */
-+			cfi_reg.cfi_status.cfi_state = 0;
-+
-+			ret = ptrace(PTRACE_SETREGSET, pid, (void *)NT_RISCV_USER_CFI, &iov);
-+			if (ret == -1 && errno)
-+				ksft_exit_fail_msg("%s: PTRACE_GETREGSET failed\n", __func__);
-+			break;
-+		default:
-+			ksft_exit_fail_msg("%s: unreachable switch case\n", __func__);
-+			break;
-+		}
-+		ptrace(PTRACE_CONT, pid, NULL, NULL);
-+		ptrace_test_num++;
-+	}
-+
-+	waitpid(pid, &status, 0);
-+	if (WEXITSTATUS(status) != 11)
-+		ksft_print_msg("%s, bad return code from child\n", __func__);
-+
-+	ksft_print_msg("%s, ptrace test succeeded\n", __func__);
-+	return true;
-+}
-+
-+int main(int argc, char *argv[])
-+{
-+	int ret = 0;
-+	unsigned long lpad_status = 0, ss_status = 0;
-+
-+	ksft_print_header();
-+
-+	ksft_print_msg("Starting risc-v tests\n");
-+
-+	/*
-+	 * Landing pad test. Not a lot of kernel changes to support landing
-+	 * pad for user mode except lighting up a bit in senvcfg via a prctl
-+	 * Enable landing pad through out the execution of test binary
-+	 */
-+	ret = my_syscall5(__NR_prctl, PR_GET_INDIR_BR_LP_STATUS, &lpad_status, 0, 0, 0);
-+	if (ret)
-+		ksft_exit_fail_msg("Get landing pad status failed with %d\n", ret);
-+
-+	if (!(lpad_status & PR_INDIR_BR_LP_ENABLE))
-+		ksft_exit_fail_msg("Landing pad is not enabled, should be enabled via glibc\n");
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &ss_status, 0, 0, 0);
-+	if (ret)
-+		ksft_exit_fail_msg("Get shadow stack failed with %d\n", ret);
-+
-+	if (!(ss_status & PR_SHADOW_STACK_ENABLE))
-+		ksft_exit_fail_msg("Shadow stack is not enabled, should be enabled via glibc\n");
-+
-+	if (!register_signal_handler())
-+		ksft_exit_fail_msg("Registering signal handler for SIGSEGV failed\n");
-+
-+	ksft_print_msg("Landing pad and shadow stack are enabled for binary\n");
-+	cfi_ptrace_test();
-+
-+	execute_shadow_stack_tests();
-+
-+	return 0;
-+}
-+
-+#pragma GCC pop_options
-diff --git a/tools/testing/selftests/riscv/cfi/shadowstack.c b/tools/testing/selftests/riscv/cfi/shadowstack.c
-new file mode 100644
-index 000000000000..53387dbd9cf5
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/shadowstack.c
-@@ -0,0 +1,385 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include "../../kselftest.h"
-+#include <sys/wait.h>
-+#include <signal.h>
-+#include <fcntl.h>
-+#include <asm-generic/unistd.h>
-+#include <sys/mman.h>
-+#include "shadowstack.h"
-+#include "cfi_rv_test.h"
-+
-+static struct shadow_stack_tests shstk_tests[] = {
-+	{ "shstk fork test\n", shadow_stack_fork_test },
-+	{ "map shadow stack syscall\n", shadow_stack_map_test },
-+	{ "shadow stack gup tests\n", shadow_stack_gup_tests },
-+	{ "shadow stack signal tests\n", shadow_stack_signal_test},
-+	{ "memory protections of shadow stack memory\n", shadow_stack_protection_test }
-+};
-+
-+#define RISCV_SHADOW_STACK_TESTS ARRAY_SIZE(shstk_tests)
-+
-+/* do not optimize shadow stack related test functions */
-+#pragma GCC push_options
-+#pragma GCC optimize("O0")
-+
-+void zar(void)
-+{
-+	unsigned long ssp = 0;
-+
-+	ssp = csr_read(CSR_SSP);
-+	ksft_print_msg("Spewing out shadow stack ptr: %lx\n"
-+			"  This is to ensure shadow stack is indeed enabled and working\n",
-+			ssp);
-+}
-+
-+void bar(void)
-+{
-+	zar();
-+}
-+
-+void foo(void)
-+{
-+	bar();
-+}
-+
-+void zar_child(void)
-+{
-+	unsigned long ssp = 0;
-+
-+	ssp = csr_read(CSR_SSP);
-+	ksft_print_msg("Spewing out shadow stack ptr: %lx\n"
-+			"  This is to ensure shadow stack is indeed enabled and working\n",
-+			ssp);
-+}
-+
-+void bar_child(void)
-+{
-+	zar_child();
-+}
-+
-+void foo_child(void)
-+{
-+	bar_child();
-+}
-+
-+typedef void (call_func_ptr)(void);
-+/*
-+ * call couple of functions to test push pop.
-+ */
-+int shadow_stack_call_tests(call_func_ptr fn_ptr, bool parent)
-+{
-+	ksft_print_msg("dummy calls for sspush and sspopchk in context of %s\n",
-+		       parent ? "parent" : "child");
-+
-+	(fn_ptr)();
-+
-+	return 0;
-+}
-+
-+/* forks a thread, and ensure shadow stacks fork out */
-+bool shadow_stack_fork_test(unsigned long test_num, void *ctx)
-+{
-+	int pid = 0, child_status = 0, parent_pid = 0, ret = 0;
-+	unsigned long ss_status = 0;
-+
-+	ksft_print_msg("Exercising shadow stack fork test\n");
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &ss_status, 0, 0, 0);
-+	if (ret) {
-+		ksft_exit_skip("Shadow stack get status prctl failed with errorcode %d\n", ret);
-+		return false;
-+	}
-+
-+	if (!(ss_status & PR_SHADOW_STACK_ENABLE))
-+		ksft_exit_skip("Shadow stack is not enabled, should be enabled via glibc\n");
-+
-+	parent_pid = getpid();
-+	pid = fork();
-+
-+	if (pid) {
-+		ksft_print_msg("Parent pid %d and child pid %d\n", parent_pid, pid);
-+		shadow_stack_call_tests(&foo, true);
-+	} else {
-+		shadow_stack_call_tests(&foo_child, false);
-+	}
-+
-+	if (pid) {
-+		ksft_print_msg("Waiting on child to finish\n");
-+		wait(&child_status);
-+	} else {
-+		/* exit child gracefully */
-+		exit(0);
-+	}
-+
-+	if (pid && WIFSIGNALED(child_status)) {
-+		ksft_print_msg("Child faulted, fork test failed\n");
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+/* exercise `map_shadow_stack`, pivot to it and call some functions to ensure it works */
-+#define SHADOW_STACK_ALLOC_SIZE 4096
-+bool shadow_stack_map_test(unsigned long test_num, void *ctx)
-+{
-+	unsigned long shdw_addr;
-+	int ret = 0;
-+
-+	ksft_print_msg("Exercising shadow stack map test\n");
-+
-+	shdw_addr = my_syscall3(__NR_map_shadow_stack, NULL, SHADOW_STACK_ALLOC_SIZE, 0);
-+
-+	if (((long)shdw_addr) <= 0) {
-+		ksft_print_msg("map_shadow_stack failed with error code %d\n",
-+			       (int)shdw_addr);
-+		return false;
-+	}
-+
-+	ret = munmap((void *)shdw_addr, SHADOW_STACK_ALLOC_SIZE);
-+
-+	if (ret) {
-+		ksft_print_msg("munmap failed with error code %d\n", ret);
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+/*
-+ * shadow stack protection tests. map a shadow stack and
-+ * validate all memory protections work on it
-+ */
-+bool shadow_stack_protection_test(unsigned long test_num, void *ctx)
-+{
-+	unsigned long shdw_addr;
-+	unsigned long *write_addr = NULL;
-+	int ret = 0, pid = 0, child_status = 0;
-+
-+	ksft_print_msg("Exercising shadow stack protection test (WPT)\n");
-+
-+	shdw_addr = my_syscall3(__NR_map_shadow_stack, NULL, SHADOW_STACK_ALLOC_SIZE, 0);
-+
-+	if (((long)shdw_addr) <= 0) {
-+		ksft_print_msg("map_shadow_stack failed with error code %d\n",
-+			       (int)shdw_addr);
-+		return false;
-+	}
-+
-+	write_addr = (unsigned long *)shdw_addr;
-+	pid = fork();
-+
-+	/* no child was created, return false */
-+	if (pid == -1)
-+		return false;
-+
-+	/*
-+	 * try to perform a store from child on shadow stack memory
-+	 * it should result in SIGSEGV
-+	 */
-+	if (!pid) {
-+		/* below write must lead to SIGSEGV */
-+		*write_addr = 0xdeadbeef;
-+	} else {
-+		wait(&child_status);
-+	}
-+
-+	/* test fail, if 0xdeadbeef present on shadow stack address */
-+	if (*write_addr == 0xdeadbeef) {
-+		ksft_print_msg("Shadow stack WPT failed\n");
-+		return false;
-+	}
-+
-+	/* if child reached here, then fail */
-+	if (!pid) {
-+		ksft_print_msg("Shadow stack WPT failed: child reached unreachable state\n");
-+		return false;
-+	}
-+
-+	/* if child exited via signal handler but not for write on ss */
-+	if (WIFEXITED(child_status) &&
-+	    WEXITSTATUS(child_status) != CHILD_EXIT_CODE_SSWRITE) {
-+		ksft_print_msg("Shadow stack WPT failed: child wasn't signaled for write\n");
-+		return false;
-+	}
-+
-+	ret = munmap(write_addr, SHADOW_STACK_ALLOC_SIZE);
-+	if (ret) {
-+		ksft_print_msg("Shadow stack WPT failed: munmap failed, error code %d\n",
-+			       ret);
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+#define SS_MAGIC_WRITE_VAL 0xbeefdead
-+
-+int gup_tests(int mem_fd, unsigned long *shdw_addr)
-+{
-+	unsigned long val = 0;
-+
-+	lseek(mem_fd, (unsigned long)shdw_addr, SEEK_SET);
-+	if (read(mem_fd, &val, sizeof(val)) < 0) {
-+		ksft_print_msg("Reading shadow stack mem via gup failed\n");
-+		return 1;
-+	}
-+
-+	val = SS_MAGIC_WRITE_VAL;
-+	lseek(mem_fd, (unsigned long)shdw_addr, SEEK_SET);
-+	if (write(mem_fd, &val, sizeof(val)) < 0) {
-+		ksft_print_msg("Writing shadow stack mem via gup failed\n");
-+		return 1;
-+	}
-+
-+	if (*shdw_addr != SS_MAGIC_WRITE_VAL) {
-+		ksft_print_msg("GUP write to shadow stack memory failed\n");
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+bool shadow_stack_gup_tests(unsigned long test_num, void *ctx)
-+{
-+	unsigned long shdw_addr = 0;
-+	unsigned long *write_addr = NULL;
-+	int fd = 0;
-+	bool ret = false;
-+
-+	ksft_print_msg("Exercising shadow stack gup tests\n");
-+	shdw_addr = my_syscall3(__NR_map_shadow_stack, NULL, SHADOW_STACK_ALLOC_SIZE, 0);
-+
-+	if (((long)shdw_addr) <= 0) {
-+		ksft_print_msg("map_shadow_stack failed with error code %d\n", (int)shdw_addr);
-+		return false;
-+	}
-+
-+	write_addr = (unsigned long *)shdw_addr;
-+
-+	fd = open("/proc/self/mem", O_RDWR);
-+	if (fd == -1)
-+		return false;
-+
-+	if (gup_tests(fd, write_addr)) {
-+		ksft_print_msg("gup tests failed\n");
-+		goto out;
-+	}
-+
-+	ret = true;
-+out:
-+	if (shdw_addr && munmap(write_addr, SHADOW_STACK_ALLOC_SIZE)) {
-+		ksft_print_msg("munmap failed with error code %d\n", ret);
-+		ret = false;
-+	}
-+
-+	return ret;
-+}
-+
-+volatile bool break_loop;
-+
-+void sigusr1_handler(int signo)
-+{
-+	break_loop = true;
-+}
-+
-+bool sigusr1_signal_test(void)
-+{
-+	struct sigaction sa = {};
-+
-+	sa.sa_handler = sigusr1_handler;
-+	sa.sa_flags = 0;
-+	sigemptyset(&sa.sa_mask);
-+	if (sigaction(SIGUSR1, &sa, NULL)) {
-+		ksft_print_msg("Registering signal handler for SIGUSR1 failed\n");
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+/*
-+ * shadow stack signal test. shadow stack must be enabled.
-+ * register a signal, fork another thread which is waiting
-+ * on signal. Send a signal from parent to child, verify
-+ * that signal was received by child. If not test fails
-+ */
-+bool shadow_stack_signal_test(unsigned long test_num, void *ctx)
-+{
-+	int pid = 0, child_status = 0, ret = 0;
-+	unsigned long ss_status = 0;
-+
-+	ksft_print_msg("Exercising shadow stack signal test\n");
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &ss_status, 0, 0, 0);
-+	if (ret) {
-+		ksft_print_msg("Shadow stack get status prctl failed with errorcode %d\n", ret);
-+		return false;
-+	}
-+
-+	if (!(ss_status & PR_SHADOW_STACK_ENABLE))
-+		ksft_print_msg("Shadow stack is not enabled, should be enabled via glibc\n");
-+
-+	/* this should be caught by signal handler and do an exit */
-+	if (!sigusr1_signal_test()) {
-+		ksft_print_msg("Registering sigusr1 handler failed\n");
-+		exit(-1);
-+	}
-+
-+	pid = fork();
-+
-+	if (pid == -1) {
-+		ksft_print_msg("Signal test: fork failed\n");
-+		goto out;
-+	}
-+
-+	if (pid == 0) {
-+		while (!break_loop)
-+			sleep(1);
-+
-+		exit(11);
-+		/* child shouldn't go beyond here */
-+	}
-+
-+	/* send SIGUSR1 to child */
-+	kill(pid, SIGUSR1);
-+	wait(&child_status);
-+
-+out:
-+
-+	return (WIFEXITED(child_status) &&
-+		WEXITSTATUS(child_status) == 11);
-+}
-+
-+int execute_shadow_stack_tests(void)
-+{
-+	int ret = 0;
-+	unsigned long test_count = 0;
-+	unsigned long shstk_status = 0;
-+	bool test_pass = false;
-+
-+	ksft_print_msg("Executing RISC-V shadow stack self tests\n");
-+	ksft_set_plan(RISCV_SHADOW_STACK_TESTS);
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &shstk_status, 0, 0, 0);
-+
-+	if (ret != 0)
-+		ksft_exit_fail_msg("Get shadow stack status failed with %d\n", ret);
-+
-+	/*
-+	 * If we are here that means get shadow stack status succeeded and
-+	 * thus shadow stack support is baked in the kernel.
-+	 */
-+	while (test_count < RISCV_SHADOW_STACK_TESTS) {
-+		test_pass = (*shstk_tests[test_count].t_func)(test_count, NULL);
-+		ksft_test_result(test_pass, shstk_tests[test_count].name);
-+		test_count++;
-+	}
-+
-+	ksft_finished();
-+
-+	return 0;
-+}
-+
-+#pragma GCC pop_options
-diff --git a/tools/testing/selftests/riscv/cfi/shadowstack.h b/tools/testing/selftests/riscv/cfi/shadowstack.h
-new file mode 100644
-index 000000000000..0be510167de3
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/shadowstack.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef SELFTEST_SHADOWSTACK_TEST_H
-+#define SELFTEST_SHADOWSTACK_TEST_H
-+#include <stddef.h>
-+#include <linux/prctl.h>
-+
-+/*
-+ * a cfi test returns true for success or false for fail
-+ * takes a number for test number to index into array and void pointer.
-+ */
-+typedef bool (*shstk_test_func)(unsigned long test_num, void *);
-+
-+struct shadow_stack_tests {
-+	char *name;
-+	shstk_test_func t_func;
-+};
-+
-+bool shadow_stack_fork_test(unsigned long test_num, void *ctx);
-+bool shadow_stack_map_test(unsigned long test_num, void *ctx);
-+bool shadow_stack_protection_test(unsigned long test_num, void *ctx);
-+bool shadow_stack_gup_tests(unsigned long test_num, void *ctx);
-+bool shadow_stack_signal_test(unsigned long test_num, void *ctx);
-+
-+int execute_shadow_stack_tests(void);
-+
-+#endif
+> +
+> +Channels
+> +========
+> +
+> +The driver provides **two channels**:
+> +
+> +- **Channel 0**: raw, unscaled angle measurement
+> +- **Channel 1**: scaled angle measurement according to the configured
+> +  ``ZPOS`` / ``MPOS`` range
+> +
+> +``ZPOS`` and ``MPOS`` let a user restrict the angle returned, which improves
+> +the precision returned, since the angle returned is still in the 0 to
+> +4095 range. The minimal angle recommended is 18 degrees.
+> +
+> +The following files are exposed under ``/sys/bus/iio/devices/iio:deviceX``
+> +where X is the IIO index of the device.
+> +
+> ++----------------+-------------------------------------------------+
+> +| File           | Description                                     |
+> ++================+=================================================+
+> +| in_angl0_raw   | Raw angle measurement                           |
+> ++----------------+-------------------------------------------------+
+> +| in_angl0_scale | Scale for channel 0                             |
+> ++----------------+-------------------------------------------------+
+> +| in_angl1_raw   | Adjusted angle measurement, scaled by ZPOS/MPOS |
+> ++----------------+-------------------------------------------------+
+> +| in_angl1_scale | Scale for channel 1                             |
+> ++----------------+-------------------------------------------------+
+> +
+> +
+> +Accessing the device registers
+> +==============================
+> +
+> +The driver exposes direct register access via debugfs. This allows reading and
+> +writing I2C registers for debugging or configuration.
+> +
+> +Assuming the device is iio:deviceX, its debugfs path will be:
+> +
+> +.. code-block:: sh
+> +
+> +  $ AS5600=/sys/kernel/debug/iio/iio:deviceX/direct_reg_access
+> +
+> +Locate the index of a register to access in the datasheet, then use
+> +the following commands to read a value:
+> +
+> +.. code-block:: sh
+> +
+> +  $ echo <reg> > $AS5600/direct_reg_access
+> +  $ cat $AS5600/direct_reg_access
+> +
+> +or this to write a value:
+> +
+> +.. code-block:: sh
+> +
+> +  $ echo <reg> <value> > $AS5600/direct_reg_access
+> +
+> +For instance, this would return the lower byte of RAW ANGLE.
+> +
+> +.. code-block:: sh
+> +
+> +  $ echo 0x0D > $AS5600/direct_reg_access
+> +  $ cat $AS5600/direct_reg_access
+> +
+> +.. warning::
+> +
+> +   Register ``BURN`` (0xFF) permanently modifies device behavior.
+> +   Use with caution after reading the datasheet carefully.
 
--- 
-2.43.0
+Great to have this documentation of useful stuff for a user. Thanks for
+including it!
+> diff --git a/drivers/iio/position/as5600.c b/drivers/iio/position/as5600.c
+> new file mode 100644
+> index 000000000000..fe716d521548
+> --- /dev/null
+> +++ b/drivers/iio/position/as5600.c
+> @@ -0,0 +1,373 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * ams AS5600 -- 12-Bit Programmable Contactless Potentiometer
+> + *
+> + * Copyright (c) 2021 Frank Zago
+> + * Copyright (c) 2025 Aditya Dutt
+> + *
+> + * datasheet
+> + *    https://ams-osram.com/products/sensor-solutions/position-sensors/ams-as5600-position-sensor
+> + *
+> + * The rotating magnet is installed from 0.5mm to 3mm parallel to and
+> + * above the chip.
+> + *
+> + * The raw angle value returned by the chip is [0..4095]. The channel
+> + * 0 (in_angl0_raw) returns the unscaled and unmodified angle, always
+> + * covering the 360 degrees. The channel 1 returns the chip adjusted
+> + * angle, covering from 18 to 360 degrees, as modified by its
+> + * ZPOS/MPOS/MANG values,
 
+I raise the question below on whether there is value in exposing the raw
+angle.  Is userspace ever going to use it?
+> + *
+> + * ZPOS and MPOS can be programmed through their debugfs entries. The
+> + * MANG register doesn't appear to be programmable without flashing
+> + * the chip.
+Whilst true that you can program them I'd not mention it explicitly. That's
+kind of advanced usage that requires someone to really know what they are
+doing.
+
+> + *
+> + * If the DIR pin is grounded, angles will increase when the magnet is
+> + * turned clockwise. If DIR is connected to Vcc, it will be the opposite.
+We need a way to know that state I think. So belongs in DT. 
+We've had some recent discussions on how to handle tied GPIOs on devices
+but for now you'll have to do a property for this.
+
+> + *
+> + * The i2c address of the device is 0x36.
+> + */
+> +
+> +#include <linux/bitfield.h>
+> +#include <linux/delay.h>
+> +#include <linux/i2c.h>
+> +#include <linux/iio/iio.h>
+> +#include <linux/module.h>
+
+Follow include what you use principles (mainly - there are a few headers
+where we can always assume they should include via another).
+e.g. mutex.h should be here.
+
+> +
+> +/* Register definitions */
+> +#define AS5600_REG_ZMCO              0x00
+> +#define     AS5600_MASK_ZMCO         GENMASK(1, 0)
+> +#define AS5600_REG_ZPOS_H            0x01
+> +#define     AS5600_MASK_ZPOS_H       GENMASK(3, 0) /* bits 11:8 */
+Some of these will go away with simplified (less protective) debugfs
+interfaces.  Probably you only need to keep the base register and the
+mask of the whole thing that you have below.
+
+> +#define AS5600_REG_ZPOS_L            0x02
+> +#define AS5600_REG_MPOS_H            0x03
+> +#define     AS5600_MASK_MPOS_H       GENMASK(3, 0) /* bits 11:8 */
+> +#define AS5600_REG_MPOS_L            0x04
+> +#define AS5600_REG_MANG_H            0x05
+> +#define     AS5600_MASK_MANG_H       GENMASK(3, 0) /* bits 11:8 */
+> +#define AS5600_REG_MANG_L            0x06
+> +#define AS5600_REG_CONF_H            0x07
+> +#define     AS5600_MASK_CONF_H       GENMASK(5, 0)
+> +#define     AS5600_MASK_SF           GENMASK(1, 0)
+> +#define     AS5600_MASK_FTH          GENMASK(4, 2)
+> +#define     AS5600_MASK_WD           BIT(5)
+> +#define AS5600_REG_CONF_L            0x08
+> +#define     AS5600_MASK_PM           GENMASK(1, 0)
+> +#define     AS5600_MASK_HYST         GENMASK(3, 2)
+> +#define     AS5600_MASK_OUTS         GENMASK(5, 4)
+> +#define     AS5600_MASK_PWMF         GENMASK(7, 6)
+> +#define AS5600_REG_STATUS            0x0B
+> +#define     AS5600_MASK_STATUS       GENMASK(5, 3)
+These masks will probably go away anyway with simplified debugfs, but
+if you had them, they should be built up from the sub fields that follow.
+
+> +#define     AS5600_MASK_MH           BIT(3)
+Make the field names include which register they are in. e.g.
+#define		AS6500_STATUS_MH
+No need to mention mask in a single bit, but do include that
+or multi bit fields.
+
+
+> +#define     AS5600_MASK_ML           BIT(4)
+> +#define     AS5600_MASK_MD           BIT(5)
+> +#define AS5600_REG_RAW_ANGLE_H       0x0C
+> +#define     AS5600_MASK_RAW_ANGLE_H  GENMASK(3, 0) /* bits 11:8 */
+> +#define AS5600_REG_RAW_ANGLE_L       0x0D
+> +#define AS5600_REG_ANGLE_H           0x0E
+> +#define     AS5600_MASK_ANGLE_H      GENMASK(3, 0) /* bits 11:8 */
+> +#define AS5600_REG_ANGLE_L           0x0F
+> +#define AS5600_REG_AGC               0x1A
+> +#define AS5600_REG_MAGN_H            0x1B
+> +#define     AS5600_MASK_MAGN_H       GENMASK(3, 0) /* bits 11:8 */
+> +#define AS5600_REG_MAGN_L            0x1C
+> +#define AS5600_REG_BURN              0xFF
+> +
+> +/* Combined 16-bit register addresses for clarity */
+
+Don't bother with this.  Just use the starting address defined
+above for the calls.  These to my mind just confuse things
+by implying there are 16 bit registers when there aren't.
+
+> +#define AS5600_REG_ZPOS              0x01
+> +#define AS5600_REG_MPOS              0x03
+> +#define AS5600_REG_RAW_ANGLE         0x0C
+> +#define AS5600_REG_ANGLE             0x0E
+> +
+> +/* Field masks for the entire 2 byte */
+
+As above, these are the only ones you should need for these
+(after stopping masking in debugfs interfaces).
+
+> +#define AS5600_FIELD_ZPOS            GENMASK(11, 0)
+> +#define AS5600_FIELD_MPOS            GENMASK(11, 0)
+> +#define AS5600_FIELD_RAW_ANGLE       GENMASK(11, 0)
+> +#define AS5600_FIELD_ANGLE           GENMASK(11, 0)
+> +
+> +struct as5600_priv {
+> +	struct i2c_client *client;
+> +	struct mutex lock;
+> +	u16 zpos;
+> +	u16 mpos;
+> +};
+> +
+> +static int as5600_read_raw(struct iio_dev *indio_dev,
+> +			   struct iio_chan_spec const *chan,
+> +			   int *val, int *val2, long mask)
+> +{
+> +	struct as5600_priv *priv = iio_priv(indio_dev);
+> +	u16 bitmask;
+> +	s32 ret;
+> +	u16 reg;
+> +
+> +	switch (mask) {
+> +	case IIO_CHAN_INFO_RAW:
+> +		if (chan->channel == 0) {
+> +			reg = AS5600_REG_RAW_ANGLE;
+> +			bitmask = AS5600_FIELD_RAW_ANGLE;
+
+What is the usecase for exposing this RAW angle?
+
+We often decide not to expose channels if they are just there
+for debug and aren't useful to userspace code. I'm not sure if
+that is true here or not.
+
+> +		} else {
+> +			reg = AS5600_REG_ANGLE;
+> +			bitmask = AS5600_FIELD_ANGLE;
+> +		}
+> +		ret = i2c_smbus_read_word_swapped(priv->client, reg);
+> +
+> +		if (ret < 0)
+> +			return ret;
+> +		*val = ret & bitmask;
+> +
+> +		return IIO_VAL_INT;
+> +
+> +	case IIO_CHAN_INFO_SCALE:
+> +		/* Always 4096 steps, but angle range varies between
+Wrap comments at 80 chars, not less than 70. Also
+		/*
+		 * Always 4096 ...
+		 * ...
+		 */
+
+For multiline comments in IIO (and most of the rest of the kernel).
+
+> +		 * 18 and 360 degrees.
+> +		 */
+> +		if (chan->channel == 0) {
+> +			/* Whole angle range = 2*pi / 4096 */
+> +			*val = 2 * 3141592;
+> +			*val2 = 4096000000;
+> +		} else {
+> +			s32 range;
+> +
+> +			/* MPOS - ZPOS defines the active angle selection */
+> +			/* Partial angle = (range / 4096) * (2*pi / 4096) */
+Use multi line comment syntax for htis.
+> +			mutex_lock(&priv->lock);
+> +			range = priv->mpos - priv->zpos;
+
+As mentioned below. I think reading these back form the device here makes more
+sense than caching them.  This is not normally a fast path as typically a userspace
+program only does this occasionally.
+
+
+> +			mutex_unlock(&priv->lock);
+> +			if (range <= 0)
+> +				range += 4096;
+> +
+> +			*val = range * 2 * 314159;
+> +			*val /= 4096;
+
+Why not push that 4096 into val2? Overflow or something else?  If its overflow
+state that here and provide a little info on why.
+
+> +			*val2 = 409600000;
+> +		}
+> +
+> +		return IIO_VAL_FRACTIONAL;
+> +
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +}
+> +
+> +static ssize_t as5600_reg_access_read( as5600_reg_access_readstruct as5600_priv *priv,
+> +				      unsigned int reg, unsigned int *val)
+> +{
+> +	int ret;
+> +	u8 mask;
+> +
+> +	switch (reg) {
+> +	case AS5600_REG_ZMCO:
+> +		mask = AS5600_MASK_ZMCO;
+> +		break;
+> +	case AS5600_REG_ZPOS_H:
+> +		mask = AS5600_MASK_ZPOS_H;
+> +		break;
+> +	case AS5600_REG_MPOS_H:
+> +		mask = AS5600_MASK_MPOS_H;
+> +		break;
+> +	case AS5600_REG_MANG_H:
+> +		mask = AS5600_MASK_MANG_H;
+> +		break;
+> +	case AS5600_REG_CONF_H:
+> +		mask = AS5600_MASK_CONF_H;
+> +		break;
+> +	case AS5600_REG_STATUS:
+> +		mask = AAS5600_MASK_STATUSS5600_MASK_STATUS;
+> +		break;
+> +	case AS5600_REG_RAW_ANGLE_H:
+> +		mask = AS5600_MASK_RAW_ANGLE_H;
+> +		break;
+> +	case AS5600_REG_ANGLE_H:
+> +		mask = AS5600_MASK_ANGLE_H;
+> +		break;
+> +	case AS5600_REG_MAGN_H:
+> +		mask = AS5600_MASK_MAGN_H;
+> +		break;
+> +	case AS5600_REG_ZPOS_L:
+> +	case AS5600_REG_MPOS_L:
+> +	case AS5600_REG_MANG_L:
+> +	case AS5600_REG_CONF_L:
+> +	case AS5600_REG_RAW_ANGLE_L:
+> +	case AS5600_REG_ANGLE_L:
+> +	case AS5600_REG_AGC:
+> +	case AS5600_REG_MAGN_L:
+> +		mask = 0xFF;
+> +		break;
+> +	default:
+> +		/* Not a readable register */
+> +		return -EINVAL;
+> +	}
+> +
+> +
+> +	ret = i2c_smbus_read_byte_data(priv->client, reg);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	/* because the chip may return garbage data in the unused bits */
+> +	*val = ret & mask;
+
+It's a debug interface only.  I don't think we care if unused bits
+are garbage.  More to the point they almost certainly are not. They
+are just undocumented. Potentially tied to 0 by maybe not.
+
+
+> +	return 0;
+> +}
+> +
+> +static ssize_t as5600_reg_access_write(struct as5600_priv *priv,
+> +				       unsigned int reg, unsigned int writeval)
+> +{
+> +	int ret;
+> +	u8 mask;
+> +
+> +	if (writeval > 0xFF)
+> +		return -EINVAL;
+> +
+> +	switch (reg) {
+> +	case AS5600_REG_ZPOS_H:
+> +		mask = AS5600_MASK_ZPOS_H;
+
+For debug write, this isn't our problem.  Also it is entirely possible someone
+wants to write to bits that aren't documented and we shouldn't prevent that.
+
+Debug interfaces let you poke things that are dangerous.
+
+
+> +		break;
+> +	case AS5600_REG_MPOS_H:
+> +		mask = AS5600_MASK_MPOS_H;
+> +		break;
+> +	case AS5600_REG_MANG_H:
+> +		mask = AS5600_MASK_MANG_H;
+> +		break;
+> +	case AS5600_REG_CONF_H:
+> +		mask = AS5600_MASK_CONF_H;
+> +		break;
+> +	case AS5600_REG_ZPOS_L:
+> +	case AS5600_REG_MPOS_L:
+> +	case AS5600_REG_MANG_L:
+> +	case AS5600_REG_CONF_L:
+> +	case AS5600_REG_BURN:
+> +		mask = 0xFF;
+> +		break;
+> +	default:
+> +		/* Not a writable register */
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = i2c_smbus_write_byte_data(priv->client, reg, writeval & mask);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	/* update priv->zpos and priv->mpos */
+> +	mutex_lock(&priv->lock);
+guard(mutex)(&priv->lock);
+simplifies this a little. Remember to include linux/cleanup.h as well as mutex.h for
+that.
+
+> +	switch (reg) {
+> +	case AS5600_REG_ZPOS_H:
+> +		priv->zpos = (priv->zpos & 0x00FF) | ((writeval & mask) << 8);
+
+This caching in driver seems like potential overkill for the relatively slow
+path places I think it is read back. Can you just query the hardware for these?
+Of if you need to cache it consider regmap/ regcache for doing so.
+
+> +		break;
+> +	case AS5600_REG_ZPOS_L:
+> +		priv->zpos = (priv->zpos & 0xFF00) | (writeval & mask);
+> +		break;
+> +	case AS5600_REG_MPOS_H:
+> +		priv->mpos = (priv->mpos & 0x00FF) | ((writeval & mask) << 8);
+> +		break;
+> +	case AS5600_REG_MPOS_L:
+> +		priv->mpos = (priv->mpos & 0xFF00) | (writeval & mask);
+> +		break;
+> +	}
+> +	mutex_unlock(&priv->lock);
+with guard() this goes).
+
+> +	return 0;
+> +}
+> +
+> +static int as5600_reg_access(struct iio_dev *indio_dev, unsigned int reg,
+> +			     unsigned int writeval, unsigned int *readval)
+> +{
+> +	struct as5600_priv *priv = iio_priv(indio_dev);
+> +	int ret;
+> +
+> +	if (readval) {
+> +		ret = as5600_reg_access_read(priv, reg, readval);
+
+Might as well return rather than having a local variable.
+
+> +	} else {
+> +		ret = as5600_reg_access_write(priv, reg, writeval);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static const struct iio_chan_spec as5600_channels[] = {
+> +	{
+> +		.type = IIO_ANGL,
+> +		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
+> +			BIT(IIO_CHAN_INFO_SCALE),
+Trivial but nice to align as.
+		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
+				      BIT(IIO_CHAN_INFO_SCALE),
+
+as helps readability a tiny bit.
+
+> +		.indexed = 1,
+> +		.channel = 0,
+> +	},
+> +	{
+> +		.type = IIO_ANGL,
+> +		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |
+> +			BIT(IIO_CHAN_INFO_SCALE),
+Same here.
+
+> +		.indexed = 1,
+> +		.channel = 1,
+> +	},
+> +};
+
+> +
+> +static int as5600_probe(struct i2c_client *client)
+> +{
+> +	struct as5600_priv *priv;
+> +	struct iio_dev *indio_dev;
+> +	int ret;
+> +
+> +	indio_dev = devm_iio_device_alloc(&client->dev, sizeof(*priv));
+> +	if (!indio_dev)
+> +		return -ENOMEM;
+> +
+> +	priv = iio_priv(indio_dev);
+> +	i2c_set_clientdata(client, indio_dev);
+
+I don't think this is every used.  If not drop setting it.
+
+> +	priv->client = client;
+> +	mutex_init(&priv->lock);
+For new code please use
+	ret = devm_mutex_init(&priv->lock);
+	if (ret)
+		return ret;
+
+Very small advantage if particular lock debugging is turned on.
+It used to not be worth the effort of calling mutex_destroy() but now
+there is this devm_ initializer it adds so little complexity we might
+as well enable that.
+
+> +
+> +	indio_dev->info = &as5600_info;
+> +	indio_dev->name = "as5600";
+> +	indio_dev->modes = INDIO_DIRECT_MODE;
+> +	indio_dev->channels = as5600_channels;
+> +	indio_dev->num_channels = ARRAY_SIZE(as5600_channels);
+> +
+> +	ret = i2c_smbus_read_byte_data(client, AS5600_REG_STATUS);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	/* No magnet present could be a problem. */
+
+Seems a bit more than could be.  Does it make sense to carry on if this
+happens?  I guess maybe there are physical systems in which the magnet
+is only sometime present? If there are then the warning is going to be
+a bit noisy.
+
+
+> +	if ((ret & AS5600_MASK_MD) == 0)
+> +		dev_warn(&client->dev, "Magnet not detected\n");
+> +
+> +	ret = i2c_smbus_read_word_swapped(client, AS5600_REG_ZPOS);
+> +	if (ret < 0)
+> +		return ret;
+> +	priv->zpos = ret & AS5600_FIELD_ZPOS;
+Prefer FIELD_GET() for this as then I don't need to check it is in lowest
+bits.
+> +
+> +	ret = i2c_smbus_read_word_swapped(client, AS5600_REG_MPOS);
+> +	if (ret < 0)
+> +		return ret;
+> +	priv->mpos = ret & AS5600_FIELD_MPOS;
+FIELD_GET() here as well.
+
+> +
+> +	return devm_iio_device_register(&client->dev, indio_dev);
+> +}
+> +
+> +static const struct i2c_device_id as5600_id[] = {
+> +	{ "as5600" },
+> +	{}
+	{ }
+
+To be consistent and in general this is the standard formatting I'm
+trying to encourage in IIO.
+
+> +};
+> +MODULE_DEVICE_TABLE(i2c, as5600_id);
+> +
+> +static const struct of_device_id as5600_match[] = {
+> +	{ .compatible = "ams,as5600" },
+> +	{ },
+No trailing comma for these 'terminating' entries as nothing
+should ever come after them.
+> +};
+> +MODULE_DEVICE_TABLE(of, as5600_match);
+> +
+> +static struct i2c_driver as5600_driver = {
+> +	.driver = {
+> +		.name = "as5600",
+> +		.of_match_table = as5600_match,
+> +	},
+> +	.probe = as5600_probe,
+> +	.id_table   = as5600_id,
+
+I'd prefer just using a single space before = as it is much
+easier to be consistent and void weird looking formatting like
+this.
+
+> +};
+> +
+> +module_i2c_driver(as5600_driver);
+> +
+> +MODULE_AUTHOR("Frank Zago <frank@zago.net>");
+> +MODULE_AUTHOR("Aditya Dutt <duttaditya18@gmail.com>");
+> +MODULE_DESCRIPTION("ams AS5600 Position Sensor");
+> +MODULE_LICENSE("GPL");
 
 
