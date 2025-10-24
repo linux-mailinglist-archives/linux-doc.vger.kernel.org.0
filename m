@@ -1,68 +1,62 @@
-Return-Path: <linux-doc+bounces-64485-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64487-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EE02C08483
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Oct 2025 01:13:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E43BC08526
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Oct 2025 01:33:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id E36A44FE22C
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 23:12:17 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 0920E4F0AEC
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 23:33:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 22DFC30DD0C;
-	Fri, 24 Oct 2025 23:12:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6023330ACF0;
+	Fri, 24 Oct 2025 23:33:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PbIaTNwA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xm4QgmxM"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD21835B130;
-	Fri, 24 Oct 2025 23:12:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C7B22E2DE6;
+	Fri, 24 Oct 2025 23:33:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761347535; cv=none; b=Dl5iwrDDuCu+e0kKoe0Uh+PS53X87P53tjcHugr+tA/ASs0lQXrirMhbEKRWi1hnZKMpPyZslNOL5l5OH16gKVXPGeMxdnn/OfLQp5UUj58BFjTMYjR4+K40Ng3GZJUPFXesXPGya//ZER11aZINCv0HkIquX8xRxseTyWED/GQ=
+	t=1761348818; cv=none; b=tgas6uLm5wOd4GKRX2vyUJYuoqJSjuxpR9PFJG8hzbybb7p+Lhvx4BrVxLI/7dg2FRfhvBGqUMBY92S0A+rb31e8MO1Djh8N304rbvhSXfOfr8oWp+q1ISJWGbJabFsiYeu8d2bnUqQiKQ9VYZbOLhUXgi4LA8g3Qv5Orgd7SeU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761347535; c=relaxed/simple;
-	bh=28QxlZisbpaE6gknR+JP2xBGWi2De4mog++hUTM3srg=;
+	s=arc-20240116; t=1761348818; c=relaxed/simple;
+	bh=bLH0hcdr0O2oqgXLTSBZUC6CB3DtR5b2OLsnxHMDaTw=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=f01Wqaxb2ZMjYS+/sUxdUE+EujCmW9pHdQuFiByXO7nRBAkE6qZ0DF1HIs0kFR8qau+qzHSV8Y7Bw9ET0ZQlNnDtZwm/sIaa3/9BTOy+31HKdUi9ziVTRWF3kvdO+xvP5CeNze7oo08QSG1fD4w4IyZV5xKe9U4j2XoincwAwvw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PbIaTNwA; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF1CAC4CEFB;
-	Fri, 24 Oct 2025 23:12:13 +0000 (UTC)
+	 MIME-Version:Content-Type; b=urz8m2h5IZTnCmhoqlD5+ytkaBAkScjv4OXtrPPl0HC69k2TC2RaG7CUHJhgOW8ydNV8QB+i7ZRxev7GCUxnplnhU5nmX/Ke7bIc/C2YkOBcNjit1/YuLU2JAw3WY+cBhiuOgF6SCc9nhCuzEcJneEfVk2a8UTBs/7WS6xwyRIU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xm4QgmxM; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2198AC4CEF1;
+	Fri, 24 Oct 2025 23:33:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1761347534;
-	bh=28QxlZisbpaE6gknR+JP2xBGWi2De4mog++hUTM3srg=;
+	s=k20201202; t=1761348817;
+	bh=bLH0hcdr0O2oqgXLTSBZUC6CB3DtR5b2OLsnxHMDaTw=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=PbIaTNwAEJO1lUwOPxFA2fp9a9UBYmcb8PVJ04Kbjj17+ZOYk+a0K0+V81F0JAaNX
-	 weW8FwIMmRtJ4VpvelGbwy+RVdrWD9P0aaeQu2axwFCK68KG0n484zpvuNClQU6thh
-	 Aa0mJqhJ8Znf6fyuyhtzQKcaGdpSZn0kYCYnR4kv+FsZa5KArP1VMNUSgHWbdMQ9D2
-	 sN7nJR7ITxbFqYhqMxHtOrNJlpGPXcZv0AjkEQ8o4ochPwxqNYiXJ/J0NBdMg9hkrb
-	 hFdC+ZLaEVX8zu2edZltlYZ1jLRTH1JkG/1epkhPrzxMvwYNhtg2akYHzdJ5yisR5b
-	 sbsvdGTnaKCxw==
-Date: Fri, 24 Oct 2025 16:12:13 -0700
+	b=Xm4QgmxM0CkCUpAccEf6a5yUj0YYyfvZ3QfbpoSFUoooqDuN9shxI4EQ9Ek//stY4
+	 S8s5LapaHnFV5UDoAalYcgTy1MeGtyGUrDfdsGnqaNFjkENNJpJbpQ0LOude5lbIW1
+	 VqS5ht5UittSmCmDujsLPn8FsgRio2qA6U8wRikoH3xZXOjAgAmJ8AGOKf1n1kT7/3
+	 K5iUpdtq70twFWliPfmQeC1RKCjsNoa+6s7rzZOU8f16PVyxksnmR77J5mAZBn7gA4
+	 JWIBcyvHbLHr96sKJMNofOR6+gAlTroireSspcBSXfszPK967XrXHRGXtcxAsUOxkI
+	 XSod705YCxX+w==
+Date: Fri, 24 Oct 2025 16:33:36 -0700
 From: Jakub Kicinski <kuba@kernel.org>
-To: Oleksij Rempel <o.rempel@pengutronix.de>
-Cc: Andrew Lunn <andrew@lunn.ch>, "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Simon
- Horman <horms@kernel.org>, Donald Hunter <donald.hunter@gmail.com>,
- Jonathan Corbet <corbet@lwn.net>, Heiner Kallweit <hkallweit1@gmail.com>,
- Russell King <linux@armlinux.org.uk>, Kory Maincent
- <kory.maincent@bootlin.com>, Maxime Chevallier
- <maxime.chevallier@bootlin.com>, Nishanth Menon <nm@ti.com>,
- kernel@pengutronix.de, linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, UNGLinuxDriver@microchip.com,
- linux-doc@vger.kernel.org, Michal Kubecek <mkubecek@suse.cz>, Roan van Dijk
- <roan@protonic.nl>
-Subject: Re: [PATCH net-next v7 2/5] ethtool: netlink: add
- ETHTOOL_MSG_MSE_GET and wire up PHY MSE access
-Message-ID: <20251024161213.2ed58127@kernel.org>
-In-Reply-To: <aPt8jAXU0l1f2zPG@pengutronix.de>
-References: <20251020103147.2626645-1-o.rempel@pengutronix.de>
-	<20251020103147.2626645-3-o.rempel@pengutronix.de>
-	<20251023181343.30e883a4@kernel.org>
-	<aPt8jAXU0l1f2zPG@pengutronix.de>
+To: Wilfred Mallawa <wilfred.opensource@gmail.com>
+Cc: Sabrina Dubroca <sd@queasysnail.net>, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, "David S . Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
+ Jonathan Corbet	 <corbet@lwn.net>, Simon Horman <horms@kernel.org>, John
+ Fastabend	 <john.fastabend@gmail.com>, Shuah Khan <shuah@kernel.org>
+Subject: Re: [PATCH net-next v8 1/2] net/tls: support setting the maximum
+ payload size
+Message-ID: <20251024163336.5fba5cd1@kernel.org>
+In-Reply-To: <cd557c5b11b04da060f07d3849dc46e7b3625ed1.camel@gmail.com>
+References: <20251022001937.20155-1-wilfred.opensource@gmail.com>
+	<20251023184404.4dd617f0@kernel.org>
+	<cd557c5b11b04da060f07d3849dc46e7b3625ed1.camel@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -72,27 +66,27 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Fri, 24 Oct 2025 15:18:04 +0200 Oleksij Rempel wrote:
-> Hi Jakub,
+On Fri, 24 Oct 2025 12:11:11 +1000 Wilfred Mallawa wrote:
+> In the previous record_size_limit approach for TLS 1.3, we need to
+> account for the ContentType byte. Which complicates get/setsockopt()
+> and tls_get_info(), where in setsockopt() for TLS 1.3 we need to
+> subtract 1 to the user provided value and in getsockopt() we need add 1
+> to keep the symmetry between the two (similarly in tls_get_info()). The
+> underlying assumption was that userspace passes up directly what the
+> endpoint specified as the record_size_limit.
 > 
-> On Thu, Oct 23, 2025 at 06:13:43PM -0700, Jakub Kicinski wrote:
-> > On Mon, 20 Oct 2025 12:31:44 +0200 Oleksij Rempel wrote:  
-> > > +      -
-> > > +        name: supported-caps
-> > > +        type: nest
-> > > +        nested-attributes: bitset
-> > > +        enum: phy-mse-capability  
-> > 
-> > This is read only, does it really have to be a bitset?  
-> 
-> It describes the capabilities of the driver/hardware. You can get always
-> everything... Hm... I think we continue without capabilities for now and
-> also remove the specific channel request.
+> With this approach we don't need to worry about it and we can pass the
+> responsibility to user-space as documented, which I think makes the
+> kernel code simpler.
 
-That's not what I'm saying. I'm just saying that it could be a basic
-uint with appropriate enum rather than bitset? At least with YNL its
-much easier to deal with. The main advantage of bitset is that you
-can modify individual bits, but that doesn't apply to read-only fields.
+But we haven't managed to avoid that completely:
 
-Sorry if I'm confused.
++	if (value < TLS_MIN_RECORD_SIZE_LIM - (tls_13 ? 1 : 0) ||
+
+I understand the motivation, the kernel code is indeed simpler.
+
+Last night I read the RFC and then this patch, and it took me like
+10min to get all of it straight in my head. Maybe I was tried but
+I feel like the user space developers will judge us harshly for 
+the current uAPI.
 
