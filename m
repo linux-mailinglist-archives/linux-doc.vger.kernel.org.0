@@ -1,132 +1,118 @@
-Return-Path: <linux-doc+bounces-64420-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64422-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECDF8C05295
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 10:48:14 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D5C2C05A1F
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 12:40:44 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7D47E404D3A
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 08:40:47 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 75C3E1C212D6
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 10:40:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40CA0307ADE;
-	Fri, 24 Oct 2025 08:38:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A5483126BC;
+	Fri, 24 Oct 2025 10:39:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="0T2yW/9O"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Q7yi6jXF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58A80306485
-	for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 08:38:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E449311971
+	for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 10:39:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761295113; cv=none; b=VG+UEbI7oCAg0cbVCCahIRvq4Qr00SmC+0DzPex3eVd/sqDGu9WEvKqGfG5gj2mPAu8J/8rSsfkQmxzf/ZUkBsbusBYsWmNBkU77xExT9Hv/FINRTR50MA/KXl8u4Xn2HFqpVloR/zhnKPIRbbHI/hkZ9DAbwv+JtSEQ/ocCptc=
+	t=1761302387; cv=none; b=XTEfc9RNo8xmYvVqMm9e25gj6yrqlh8fq/kyuVzkhx/6S8HqxtTYAHcKQGvzZ8H2N85DzmVLq+pWOBwr1QHF0be+UsbswyKZ3MMuCSGVmOhBTmmRQA+jCLddo7+UWgMF1SWbRmbXc9YjAteEuH1dqLW08CrSuBY2AGaXmCJRI8g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761295113; c=relaxed/simple;
-	bh=1sYWKH6IC2Atu0efAqlDzjFXOWx4uiUsQvNOsdd4ofA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rL21B3q6pjanESCQMQKiC3dLO/IkaANRZ+k2Wy+53qq2ZvS842WOjp3sFHX4+PqKDpBVENAWmiZUttHDMgG8uRZ9dX8jmoKEX3uHRQ4Gm7hpJtTlyh+gJQT424A5RqHyCCqVAw4WAvfzyoGYqj//uNri++6gP/s16z9qx3f+ld0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=0T2yW/9O; arc=none smtp.client-ip=209.85.128.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=resnulli.us
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-471191ac79dso18940695e9.3
-        for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 01:38:31 -0700 (PDT)
+	s=arc-20240116; t=1761302387; c=relaxed/simple;
+	bh=uyiLO+LNkEVTknh5PCD2nlZig9mEvwEHQFhgoM6Efq8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=L3pBetb9fih5QV1Ykyk67tICvbd3SzAg+RrFNfOW3/LNMTlGcYXZbQA9UNkuSzREQc9NBdlHZ/E0hfSeP/ThWwuXMhA4uxExKWU5i0qCKm0WOtxJTUOnIbRrn+JvvJLe7aBjfyIGcI5hhVeKd4TfkEdek7VVDcyLgQBNbP4Xyuc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Q7yi6jXF; arc=none smtp.client-ip=209.85.215.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-b6ceba7c97eso1744250a12.0
+        for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 03:39:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1761295110; x=1761899910; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=80QdPW8xs3jigAZkYOK79HscTaaMenUE7Hqh9AqASfs=;
-        b=0T2yW/9O9LdPHrzd7ZPypyJmm6fy4Pw7e7hTWzEUBiDXjA7bYW0Bil26nj5dYG1Ovo
-         De8KMSxbMAE1Xmefv5h2ItwcDqQfIoJbvJDM5xF7KOP0i6ktlXHez5Zh0aKyTryVWRI2
-         B9sr17FNIh39NwailfrvW4+c++kMNnQz8Y0B/UChJs0uBvTRFFKC1KhIc49d5uLrDitq
-         yW/iiwOadW6D6Onq/B2NQoGVtCD6LgzNCWYAJYzMTr1Q2ASHlbIQAIb8TOBaX3zYhlf5
-         zP5yHgubffGBFoItkc6iPOSKdP8xyxebPOUULsfbh5aGSavjvKDjfg/bBE2QYXRGB+ww
-         jbTg==
+        d=gmail.com; s=20230601; t=1761302384; x=1761907184; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qLzt3nHwXvYmUXaWuT5xx9MwPLoAGs/1Oa1T6U/Qgwk=;
+        b=Q7yi6jXFphbw4ew7tGhMrHo76Zi5fbGktMvFTMQQEo0qO8HmPZhd+N39g3T60LuXwb
+         2oCS4WyJYsG6Sy4oNQfhSiSVRyxyfgiRbsoZ9blRRcYzuqzu+WhzPP6jlzVaNYU07hWa
+         n3G0veYa4vschtn220bjCkzfkAxAgAU/j7UeffUBltIm/TjYipDCQNkkFw73fQkCJugD
+         I1t0GqlzbXctB+uCvo/6scKrHtVSBvuc1LwjxWsMmO1/8mOzulg5SbJtIiNSRp5nvfen
+         pwy20839BsmgTow1VmUP75UpnWB/AVdYBq0r1+eG56FEgZifGW3UV8EiOg0cAO5akYbg
+         hYfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761295110; x=1761899910;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=80QdPW8xs3jigAZkYOK79HscTaaMenUE7Hqh9AqASfs=;
-        b=HS4IYMftAUiOIDNE0yyEBs+v+Bg2N65tYjoIsmhunJKfkrOWq77p9SppOH+Cqu4nMi
-         0q0o5awYLJfC/nPRrZMjJMvccS9/WWZeRC9KG7uIIOVAh2ZJoPzjZta8kQFBW1nLvKi+
-         3ZxVHCDMH1zLJ5j2ClgRwr0zi8JXRl/gQXrcCMzmPgh+j/8hS2WjPE9+CHC5qNhvHhFL
-         JSEehlLqQOPLW7MHJV0/vprn8v6DQl4gXNwHI1T3+wLJ+73QONAeoG5F4W/FqicGwh6z
-         eb/ppqz0mE6f0ggKh0hquqXqx2bJdG4jlapXLl6XqJ0z/ZX2h6zUTJn2G2Qc0BA8m2r6
-         EmKA==
-X-Forwarded-Encrypted: i=1; AJvYcCVgJgn/cfFRohx/hixcWHJp1bm7YJU1QbYMykElbCGjNC7FHo9+fTYhgC2ZrGSSzs9lmi+vNaAgjns=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyZND6vQjide8zS+0yqyuPZC2hyn5KAAEev8R3T+SlDO1f94vhZ
-	M7IOR14ZCuSuZU96G+5by+Z3EQKo3ffDWQwJbN0zu+c4hHLTohmTUmCQzAx9qHz+QQY=
-X-Gm-Gg: ASbGncvDEPw91J7ytA2bW+LWYVq3vdZ5aIFHy01m6EXUv8q4/XlJq++hvzie36b1KQh
-	Pk6ZPIy7zVIJZ0i573kTtm/zmKyMX5ShMOprPAa3yrAfVf6Xp17rW1rdMpAFjGJv+lpQFE9WZaJ
-	6SP045fADrbJQ1uW0bHmp0CO7PZ9fISBOKJ8LgoBOxsgQifb5zG0QwwdgTVzo2CfBGXJMHmSoHi
-	kt4NOtQ9w68Iyw8qBUrrIBaV0jlcUEAto3VvrAMELF9tsxuDmcrqQ9WpAUuTnGZSjwIFWhxIfOl
-	UfEInyRUw1Btk4QEtBq4TAFN/BkYYQXYodX03LFmgsdIItiqst96/339lvOrugtVSYcSzCZkQ5j
-	MfrKW8LZL7uq1urWTdhBk6R3EOoC2nNFLKQ3/NzVIjxh913m+dRICphHldPGMrkigu1OTaBLDRQ
-	Vp3rAFYATaGDTMzIqaXSlaxZQ/9+EPV3buloh5WQ==
-X-Google-Smtp-Source: AGHT+IFebyV9pIuNei9GxC51FTBt0x05QRPgJ+uhxLLSTuVNX5j3YbmdoROIxdQ6NS0xF46TN4guIw==
-X-Received: by 2002:a05:600c:a00f:b0:46e:330a:1762 with SMTP id 5b1f17b1804b1-475d2ec570bmr12961075e9.22.1761295108775;
-        Fri, 24 Oct 2025 01:38:28 -0700 (PDT)
-Received: from jiri-mlt.client.nvidia.com ([140.209.217.211])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-475c4342946sm138764075e9.10.2025.10.24.01.38.27
+        d=1e100.net; s=20230601; t=1761302384; x=1761907184;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=qLzt3nHwXvYmUXaWuT5xx9MwPLoAGs/1Oa1T6U/Qgwk=;
+        b=AvO+jGKfjtjRAEY/Os7T+Hlddhar+IRNpunQQY6R52cCyKjxw7Wox4oNtTB8Sm2pb1
+         g4/kV1dM/sXLvHZ82urPGpFQ2u6G4+iRu3xCgUqtKz2FVZlDiUn09kKkILEc4oUNsOPR
+         X6JoeOcVbfrwTQUa7YPtadxPJyTugMtn2iR1caYPC41JBq1IbdPDG5RRBh0l5BRqbSwK
+         q7lgJ7pglPdj9ntQWJL7co/9Y1tbJdP47rLwjf84d9jAPBv0AhB9Ii3B3aEZGMxH4FVS
+         PMXD1xGC5BrhOrJzbbMFq4MW+L11uIb5bDbMW8vFabTu7AGmhM/8EeIqALL/YU3TNFwR
+         h2LQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXU//oKe2IeOyuDP7eQu3r52O3M9RGbYJxJdsHKmd8NlpqAxtypdQqgSKU0l7a9cxquoMjeoXsnTsQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxvzB0XU1vZNv1nP+8+VnaEdRDfaXtj83a2xox+DYy6swaQbPGM
+	AsOg3s0OgvMeKPRRoI3e1XLI5DyTmkkwa5Df9Bsyvsi+ZY5oLYScnY4w
+X-Gm-Gg: ASbGncufOlCBVq6fdhdqKOBRp3jxUulfE+0AzmHyCo2UFU0xypQnYv5a7nFtPEXRhtX
+	W4d1nYTWNavsQW72yyoi35m7qThcx9RPBiVyBq+H6cRqQHz/t/0CjoiodzFlTAm+6BVgR5OqenU
+	jWdrewuhjvCPGHakrdJkGeeCKXRUdN3LzPsgVQexe9XW0nY8VdkJU5V05763yr0WqC2PLJitDc2
+	Wfq5SYB/t5cDApUSsJvIXGMcgHU7fAPbjKExqZ90V94ABn5Q+5N4AGgNC6tibSUtt7yv+S2Achx
+	lmmdxeYLHsmmnNIxQD7CuT0HYyABWE0A5vSORD5M5sGIag8BZv/gm+TazvCOohwYRKins3DE07O
+	tageWRhADTN5sJGduc1WmtzExms3Em2yVVPpXxmTLHhqkGPiYoPKL/aH8obg9cBSFmB4vR0ZoIm
+	5/IIc3bjZdma8=
+X-Google-Smtp-Source: AGHT+IE7bXnfWQJON3TLaojyE2i4thoKnt7jmM3h/3l0Kl0M5gviToItxxqZWN4WOizVmxSBsRm+Gw==
+X-Received: by 2002:a17:903:2b06:b0:25c:b543:2da7 with SMTP id d9443c01a7336-290c9c93a96mr323148085ad.9.1761302384388;
+        Fri, 24 Oct 2025 03:39:44 -0700 (PDT)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2946de0fdc1sm51738365ad.48.2025.10.24.03.39.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Oct 2025 01:38:28 -0700 (PDT)
-Date: Fri, 24 Oct 2025 10:38:26 +0200
-From: Jiri Pirko <jiri@resnulli.us>
-To: Daniel Zahka <daniel.zahka@gmail.com>
-Cc: "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>, 
-	Tariq Toukan <tariqt@nvidia.com>, Simon Horman <horms@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Leon Romanovsky <leon@kernel.org>, 
-	Mark Bloch <mbloch@nvidia.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	Vlad Dumitrescu <vdumitrescu@nvidia.com>, netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org
-Subject: Re: [PATCH net-next] net/mlx5: Implement swp_l4_csum_mode via
- devlink params
-Message-ID: <mywwk6443uvf5mluxqzeylgsfblpsgfefdnrrpjfoerfhmdprw@bfjgiz5cvfou>
-References: <20251022190932.1073898-1-daniel.zahka@gmail.com>
- <uqbng3vzz2ybmrrhdcocsfjtfxitck2rs76hcrsk7aiddjssp2@haqcnmzrljws>
- <ae217501-b1e0-4f85-a965-a99d1c44a55b@gmail.com>
+        Fri, 24 Oct 2025 03:39:43 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 737A64206924; Fri, 24 Oct 2025 17:39:36 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Input Devices <linux-input@vger.kernel.org>
+Cc: Jiri Kosina <jikos@kernel.org>,
+	Benjamin Tissoires <bentiss@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Masaki Ota <masaki.ota@jp.alps.com>,
+	George Anthony Vernon <contact@gvernon.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH 0/2] hid-alps docs heading cleanup
+Date: Fri, 24 Oct 2025 17:39:32 +0700
+Message-ID: <20251024103934.20019-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.1.dirty
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-Developer-Signature: v=1; a=openpgp-sha256; l=457; i=bagasdotme@gmail.com; h=from:subject; bh=uyiLO+LNkEVTknh5PCD2nlZig9mEvwEHQFhgoM6Efq8=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDBm/ww7t3HvO+itrZPcHkfXXX7POv5J7Ivt/t3dNXtw95 cbLikZCHaUsDGJcDLJiiiyTEvmaTu8yErnQvtYRZg4rE8gQBi5OAZjIh2xGhgmngiZOvbv778Mf qt+c6xktz/Pc7ijtvij5rZxfJeSmLAcjw3xj+Vsf/t/RK96vft34pM2JBH3ug1OZyy742Blr3mf TZAAA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ae217501-b1e0-4f85-a965-a99d1c44a55b@gmail.com>
 
-Thu, Oct 23, 2025 at 04:34:15PM +0200, daniel.zahka@gmail.com wrote:
->
->
->On 10/23/25 8:18 AM, Jiri Pirko wrote:
->> Wed, Oct 22, 2025 at 09:09:31PM +0200, daniel.zahka@gmail.com wrote:
->> > swp_l4_csum_mode controls how L4 transmit checksums are computed when
->> > using Software Parser (SWP) hints for header locations.
->> > 
->> > Supported values:
->> >   1. device_default: use device default setting.
->> Is this different between devices/fw_versions?
->
->That is what I presume. I believe the current setting for swp_l4_csum_mode is
->ultimately encoded in the capabilities advertised to the driver during
->initialization. For example, I am mostly interested in mlx5e_psp_init(),
->which depends on:
->
->    if (!MLX5_CAP_ETH(mdev, swp_csum_l4_partial)) {
->        mlx5_core_dbg(mdev, "SWP L4 partial checksum not supported\n");
->        return 0;
->    }
->
->My guess is that "device_default" means that this bit would depend on the
->device/fw_version.
+Hi,
 
-Hmm, I would like to clear the meaning of this before we add it to UAPI.
-Asked internally, will let you know. 
+Here are two section headings cleanup patches for Alps HID documentation.
+Enjoy!
+
+Bagas Sanjaya (2):
+  Documentation: hid-alps: Fix packet format section headings
+  Documentation: hid-alps: Format DataByte* subsection headings
+
+ Documentation/hid/hid-alps.rst | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+
+base-commit: 828aeac92901c1f31b51ae0b9d792b9af5bd3e27
+-- 
+An old man doll... just what I always wanted! - Clara
+
 
