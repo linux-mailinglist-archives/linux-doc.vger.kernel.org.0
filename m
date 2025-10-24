@@ -1,161 +1,183 @@
-Return-Path: <linux-doc+bounces-64484-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64486-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49997C08384
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 23:59:13 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 027CCC084A2
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Oct 2025 01:23:13 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 350BF1C81FBF
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 21:59:37 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 83D0C188D77E
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Oct 2025 23:23:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4948130C35E;
-	Fri, 24 Oct 2025 21:59:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A53A6309F03;
+	Fri, 24 Oct 2025 23:23:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QKmn90F3"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="js72ZsQ6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A57AE261B92
-	for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 21:59:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF7B7309EF7
+	for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 23:23:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761343147; cv=none; b=kI9WfGsM67jKfWirXyA5MlPkN6Lvvv4aWuM1jZ0tPdaR5eFQd/q0LzoXWbIrbcRIMwVsyHYwx/93Nr1xdLKDt6I4wayhTJrikbd+cR1mVopWLanzE3P9j71lChLaheASldZuRkpThL9qRwupjjSs+5lbnw6xoT7R/irGZzgsgTc=
+	t=1761348188; cv=none; b=YvWPvhy95uqet0C6sxhDfS01/zv9qREn7/t1GHydvJnWD8IglGcJuv9z5LADEIJmk3fvSJ9fnguQvPecCvjf/XBlacxN3PvGh54Kf0mGviA13bm8mHVEZLJEiR4s4ptSGLPx8at0LjEVzge9A00K1JwCnU5BB5N/yQGm8+gsVx4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761343147; c=relaxed/simple;
-	bh=mxdDRl5f6ypVZFwxoiySjpzvSm/XaHmi9pbQ4jbflIM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=izm45ILwfLTQI357YE57OQ4urui3ENnscijYUP8WJ20bOQLkxUbPpd9IAJUsbNTrkmG6MRz70B1ptevpKCIrwSPM/25wyBCes6E9J1qYZnOLLJgh+WwbqgFxFuG1n1KrnVwsjV/VrVh3aKqmRY69xn36pTpmg9dsLFcCjt4bk/o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QKmn90F3; arc=none smtp.client-ip=209.85.160.173
+	s=arc-20240116; t=1761348188; c=relaxed/simple;
+	bh=+NEftr7VWmliQcXUqkaO9sJG2DgzF/Yaw8WY6cHdu/c=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=CruEAfpubFSh/ZvvYq2yveTNm4ba02KddWK1B6gvtGSCp9mm6sApDIXa+sUpGdmh4CbDQglHfHD+mYBMkeyupg5PiBvBwwK9RKNdfkngos29caMWevAhfm3DBTlpTnOmlvPEmMZoZJNuzrpD9tBvYpjnM7FzM2CdscdJtmhgnf0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=js72ZsQ6; arc=none smtp.client-ip=209.85.208.41
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-4eb7f0b9041so18959041cf.0
-        for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 14:59:03 -0700 (PDT)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-637e9f9f9fbso4615791a12.0
+        for <linux-doc@vger.kernel.org>; Fri, 24 Oct 2025 16:23:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761343142; x=1761947942; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6JSu4wYR7dGj9hekjT0Scgo7oK7p56khXcsyVLerwhg=;
-        b=QKmn90F3xbYBk9WfK+osCC7TbkFMGWeGuYB9idqjQJemxKN9IqaeBRdDGM5DhnA8/T
-         5fRu4lc7X68u7KXNBHgHx6zWled4MJ5GWQOYMoSihuV2ol8Bo/HN/d+AGkvBGBbSaeZx
-         lqapDG/FeFxIOM34ggwhwYRQLOLTqJjmhVCBMp79sIBqjl12hR/EfPDMDjWZutFiJGdR
-         BTkuB9X/aX+A8BO4M9YRWfKPqqo2bzcOiZ/2G+dixUD4wZT4+q/PhJSvVvLIveHN3LkL
-         9VV0pY4neIJqsNBJB2UZjLj51CUg7LF0bxbJrK3LPqbPc3brCnsirhZAsyJ6u+U1Vs97
-         C0Mw==
+        d=gmail.com; s=20230601; t=1761348183; x=1761952983; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=4qshgmZlkIM4+vcn2er+R5ZwtdRF9Gko5Hx8ZyCDhMI=;
+        b=js72ZsQ62XI0/FyekbMawO85+oPBWcSgkkp5IJ4JDcfsvD9WH3ipuNhDGOyglbM0yr
+         riVTrEUtTNTYqHfhc5Mpwok7SnVv4eClte2E2t2FmYAev/Xnac1TPvqVXNNuHJUN4CP+
+         UQ2guDuI8jdZYV7ApIu7GFV517aIfeZr0j63eLpewPSSkGE5IXT76vjXiSBQntNYReri
+         WKH4lDNslise3akkbDoTNgcMuBTVqEY4v94aT2AGzxPfcZ7ApGDZ5NwIji1FdNW9iXMA
+         S0DN2+jl6T+vgA0WAqa+XH3Om3ZYNFGAX0BBxIHA9h7U3fF3k5/8+E290/6zvrwNOJwy
+         SGiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761343142; x=1761947942;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6JSu4wYR7dGj9hekjT0Scgo7oK7p56khXcsyVLerwhg=;
-        b=HtJDBEuxtDR9bNAqHwnGIjsxtS5W0UkY81MXzCIlU0VsxMaxw8xW0L0rD/AIf+bQHw
-         Rd0ZY/dJflHqDB4yPgT7mRRdQY40rkveLSCeHL3rK794yMSL+hKqluUPmEpkw9MvLciM
-         8O+ZDUyocfLq7N6F9ZPETUEF3y8iVK9B7WCOLmseSdn+268YLvhKZjUi4YgvNAni4lJd
-         xUA+nUWUsaa60QrDTqgKY7LMzMatxO7sVtMY9/WlMQINE00H/wGjjC9Ns8YyPv+S140L
-         IW+PeSgxHvAj6Cxx1Dm28FbHeZpTahmVtKrbAgA9DjfxWoj/8KJFny56G/1+9Yl+GzmF
-         2vYA==
-X-Forwarded-Encrypted: i=1; AJvYcCWUJkbZRl5C7r9wMteOuSfslHtAghz4AFJxmEZTnZLwZyT5lVpXICNPMhYl16RX2aC63yAn+bCg59g=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyHh39rOzMfdzWpIcuPxE15yIOJLDaHuECoyvdLG7pY0Iu6K1rN
-	Uagknjx/WbV5OdK6oew2DBW4kgIDvJLrqIuGxfjlQsbtCewTvpfLlj1OK9z6B2FeIp+Y5cnDlMv
-	mm9p7xSiBHbyrAfTb9Iu9izJKpOG8ZB0=
-X-Gm-Gg: ASbGnctkc/uZMwH5AdjisT7gEnuL6Im56TTUOK5LZOhaIONcW+BJOn0ckT/IOsNlxEo
-	7f6yCFPoJ4Yh33NCcFjojJl6OWldxRCa3oKjz/B3iNK8OipkV+Y939y0jMKuS6CQlHC/f28MFp1
-	O5zMEgPOrc9mvYLqCVcYPu0aC4kKuYCkfGYZRenTvUhb8Z+212qkpotBkSrKqeiVjY5OoloekrC
-	TAeLgF+intB2jlhVsfcarwvw0U3ctJSk4g4TasKnHk3mzySng69Cx44bFJmrxG1KPKGfpmRUdVE
-	CBTHA78u6XsNtQE=
-X-Google-Smtp-Source: AGHT+IEbBcSwdHcN87CM+xJKbvHNa6uFwmLTJi2BasWFhru45dH++MGND3s6/74r0tI8E8W9g7oqhkLME3Y3cb4B/Bg=
-X-Received: by 2002:a05:622a:180a:b0:4e8:bbd4:99d8 with SMTP id
- d75a77b69052e-4e8bbd49fd5mr247392271cf.37.1761343142321; Fri, 24 Oct 2025
- 14:59:02 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1761348183; x=1761952983;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4qshgmZlkIM4+vcn2er+R5ZwtdRF9Gko5Hx8ZyCDhMI=;
+        b=Vo+rYOJ+4URjEaL4yBjCx2Fo9KpqjVh9cMMhOJYMnaFZGVrps5pd+BXip3RD4V042l
+         D9jCFzLvMz6fUedLLi7UbtRjNjd3yM1HY3LllRjuTT5jZ+BiufUwEsgWFNul3pG1TqrI
+         XNneV4wcjgsaaHH8PPSqFSHkJiJW+u8ufGWoMouujL1cb3oKU/cIqxohresdU4KZ0068
+         lt1IFo1cIICKT+RnOVBhocXrdUaelNSDi1sDWvHnBVn3H/MmSOBL98SSr1Qd00Kgqeed
+         RcwqeTV2+Xjx1FrYQHDDuGzqTcsks7dWjomqYMicsm8uYNTXpDDPOyRujvxi2kA6pVsu
+         vqyg==
+X-Forwarded-Encrypted: i=1; AJvYcCWAPaxTIVOJUp1LvQg7S+xl1UQ9lDYQGgtQy/Yz8ZgW8u7Hq/mZ1NAHiO7oh75zv9aIji25w/xhSIE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxXje6qtI2YxfLqwoDPYWYNlEklXo93Dpza7ykvIxeCnz9Ml0Aw
+	udoiOBYU7lPHYHVnytUeOk+pvZdL77tTG9rFJjltHvjIfGs0XLpmAvlwPFULBw==
+X-Gm-Gg: ASbGncsdtzWojKwDX9wt1Md1SfijAkcV4vKMDbRvjCfu1PqeCzh2cgSmTAYldv4Rn84
+	ZgePhDn1D5XyI9X7U4pw4ruWCME8ALHoqeZC9US8JhqUZaYQp1U1JjaNnl06+3qUNzlItqCwlIe
+	oYmger90XRVMZyy7NVMHW/nnLbmBAmyqIB+K2TDmUDv7jD9VeYyacNesC0808dyzeCnYAhYD5ht
+	wQ/1oKEOevlArgCYF6eAiPIgT0HA85qgvTwnDFUOha7Mmi8v/RIlioGvj5+BHymvgP9gFkYBE2Q
+	+oRHx4WXJjA0oFyDxCx5LQuvee5rLACNTwAxBDOZJ0E/LZdssVW2ENNt1LmDl0fWQJcsdDHQlfz
+	ihtz4oyM3rP1sOLIassSpqYqguHZX5AREZv/0Nxruno241A6uXneg59uCUBgXi0OjXQcSNdl1Q1
+	ssa8+Bow==
+X-Google-Smtp-Source: AGHT+IEQw0TA1CC7no4fMAMA9oQRoUt9Lgbn+Uft1azRKrTnyGz7lCiyNuO6p2GHKFOC05VVJ/iKvw==
+X-Received: by 2002:a05:600c:4f89:b0:471:a98:99a6 with SMTP id 5b1f17b1804b1-475cafae164mr64272055e9.11.1761342429974;
+        Fri, 24 Oct 2025 14:47:09 -0700 (PDT)
+Received: from andrea ([31.189.53.175])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47496d4b923sm89676705e9.14.2025.10.24.14.47.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Oct 2025 14:47:09 -0700 (PDT)
+Date: Fri, 24 Oct 2025 23:47:04 +0200
+From: Andrea Parri <parri.andrea@gmail.com>
+To: Xu Lu <luxu.kernel@bytedance.com>
+Cc: corbet@lwn.net, paul.walmsley@sifive.com, palmer@dabbelt.com,
+	aou@eecs.berkeley.edu, alex@ghiti.fr, robh@kernel.org,
+	krzk+dt@kernel.org, conor+dt@kernel.org, will@kernel.org,
+	peterz@infradead.org, boqun.feng@gmail.com, mark.rutland@arm.com,
+	anup@brainfault.org, atish.patra@linux.dev, pbonzini@redhat.com,
+	shuah@kernel.org, ajones@ventanamicro.com, brs@rivosinc.com,
+	guoren@kernel.org, linux-doc@vger.kernel.org,
+	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org, kvm@vger.kernel.org,
+	kvm-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org,
+	apw@canonical.com, joe@perches.com, lukas.bulwahn@gmail.com
+Subject: Re: [PATCH v4 00/10] riscv: Add Zalasr ISA extension support
+Message-ID: <aPvz2Pb6RuWnw9Ht@andrea>
+References: <20251020042056.30283-1-luxu.kernel@bytedance.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20250926002609.1302233-1-joannelkoong@gmail.com>
- <20250926002609.1302233-8-joannelkoong@gmail.com> <aPqDPjnIaR3EF5Lt@bfoster>
- <CAJnrk1aNrARYRS+_b0v8yckR5bO4vyJkGKZHB2788vLKOY7xPw@mail.gmail.com>
- <CAJnrk1b3bHYhbW9q0r4A0NjnMNEbtCFExosAL_rUoBupr1mO3Q@mail.gmail.com>
- <aPu1ilw6Tq6tKPrf@casper.infradead.org> <CAJnrk1az+8iFnN4+bViR0USRHzQ8OejhQNNgUT+yr+g+X4nFEA@mail.gmail.com>
- <aPvolbqCAr1Tx0Pw@casper.infradead.org>
-In-Reply-To: <aPvolbqCAr1Tx0Pw@casper.infradead.org>
-From: Joanne Koong <joannelkoong@gmail.com>
-Date: Fri, 24 Oct 2025 14:58:51 -0700
-X-Gm-Features: AS18NWApxbcNiaK6JJ1--DN9zMQLqfqvI7dAP8Den9ypsz9jSVcP9ZxOIt1Gw7w
-Message-ID: <CAJnrk1YZoFSMGHRK0M_=ND1RyXPgc6Ts4hh+UMOkrGqO5G884w@mail.gmail.com>
-Subject: Re: [PATCH v5 07/14] iomap: track pending read bytes more optimally
-To: Matthew Wilcox <willy@infradead.org>
-Cc: Brian Foster <bfoster@redhat.com>, brauner@kernel.org, miklos@szeredi.hu, 
-	djwong@kernel.org, hch@infradead.org, hsiangkao@linux.alibaba.com, 
-	linux-block@vger.kernel.org, gfs2@lists.linux.dev, 
-	linux-fsdevel@vger.kernel.org, kernel-team@meta.com, 
-	linux-xfs@vger.kernel.org, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251020042056.30283-1-luxu.kernel@bytedance.com>
 
-On Fri, Oct 24, 2025 at 1:59=E2=80=AFPM Matthew Wilcox <willy@infradead.org=
-> wrote:
->
-> On Fri, Oct 24, 2025 at 12:22:32PM -0700, Joanne Koong wrote:
-> > > Feels like more filesystem people should be enabling CONFIG_DEBUG_VM
-> > > when testing (excluding performance testing of course; it'll do ugly
-> > > things to your performance numbers).
-> >
-> > Point taken. It looks like there's a bunch of other memory debugging
-> > configs as well. Do you recommend enabling all of these when testing?
-> > Do you have a particular .config you use for when you run tests?
->
-> Our Kconfig is far too ornate.  We could do with a "recommended for
-> kernel developers" profile.  Here's what I'm currently using, though I
-> know it's changed over time:
->
-> CONFIG_X86_DEBUGCTLMSR=3Dy
-> CONFIG_PM_DEBUG=3Dy
-> CONFIG_PM_SLEEP_DEBUG=3Dy
-> CONFIG_ARCH_SUPPORTS_DEBUG_PAGEALLOC=3Dy
-> CONFIG_BLK_DEBUG_FS=3Dy
-> CONFIG_PNP_DEBUG_MESSAGES=3Dy
-> CONFIG_SCSI_DEBUG=3Dm
-> CONFIG_EXT4_DEBUG=3Dy
-> CONFIG_JFS_DEBUG=3Dy
-> CONFIG_XFS_DEBUG=3Dy
-> CONFIG_BTRFS_DEBUG=3Dy
-> CONFIG_UFS_DEBUG=3Dy
-> CONFIG_DEBUG_BUGVERBOSE=3Dy
-> CONFIG_DEBUG_KERNEL=3Dy
-> CONFIG_DEBUG_MISC=3Dy
-> CONFIG_DEBUG_INFO=3Dy
-> CONFIG_DEBUG_INFO_DWARF4=3Dy
-> CONFIG_DEBUG_INFO_COMPRESSED_NONE=3Dy
-> CONFIG_DEBUG_FS=3Dy
-> CONFIG_DEBUG_FS_ALLOW_ALL=3Dy
-> CONFIG_ARCH_HAS_EARLY_DEBUG=3Dy
-> CONFIG_SLUB_DEBUG=3Dy
-> CONFIG_ARCH_HAS_DEBUG_WX=3Dy
-> CONFIG_HAVE_DEBUG_KMEMLEAK=3Dy
-> CONFIG_SHRINKER_DEBUG=3Dy
-> CONFIG_ARCH_HAS_DEBUG_VM_PGTABLE=3Dy
-> CONFIG_DEBUG_VM_IRQSOFF=3Dy
-> CONFIG_DEBUG_VM=3Dy
-> CONFIG_ARCH_HAS_DEBUG_VIRTUAL=3Dy
-> CONFIG_DEBUG_MEMORY_INIT=3Dy
-> CONFIG_LOCK_DEBUGGING_SUPPORT=3Dy
-> CONFIG_DEBUG_RT_MUTEXES=3Dy
-> CONFIG_DEBUG_SPINLOCK=3Dy
-> CONFIG_DEBUG_MUTEXES=3Dy
-> CONFIG_DEBUG_WW_MUTEX_SLOWPATH=3Dy
-> CONFIG_DEBUG_RWSEMS=3Dy
-> CONFIG_DEBUG_LOCK_ALLOC=3Dy
-> CONFIG_DEBUG_LIST=3Dy
-> CONFIG_X86_DEBUG_FPU=3Dy
-> CONFIG_FAULT_INJECTION_DEBUG_FS=3Dy
->
-> (output from grep DEBUG .build/.config |grep -v ^#)
+On Mon, Oct 20, 2025 at 12:20:46PM +0800, Xu Lu wrote:
+> This patch adds support for the Zalasr ISA extension, which supplies the
+> real load acquire/store release instructions.
+> 
+> The specification can be found here:
+> https://github.com/riscv/riscv-zalasr/blob/main/chapter2.adoc
+> 
+> This patch seires has been tested with ltp on Qemu with Brensan's zalasr
+> support patch[1].
+> 
+> Some false positive spacing error happens during patch checking. Thus I
+> CCed maintainers of checkpatch.pl as well.
+> 
+> [1] https://lore.kernel.org/all/CAGPSXwJEdtqW=nx71oufZp64nK6tK=0rytVEcz4F-gfvCOXk2w@mail.gmail.com/
+> 
+> v4:
+>  - Apply acquire/release semantics to arch_atomic operations. Thanks
+>  to Andrea.
 
-Thank you, I'll copy this.
->
+Perhaps I wasn't clear enough, sorry, but I did mean my suggestion
+(specifically, the use of .aq/.rl annotations) to be conditional on
+zalasr.  Same observation for xchg/cmpxchg below.  IOW, I really
+expected this series to introduce _no changes_ to our lowerings when
+!zalasr.  If any !zalasr-changes are needed, I'd suggest isolating
+/submitting them in dedicated patches.
+
+But other than that, this looks pretty good to me.  Perhaps something
+else to consider for zalasr is our lowering of smp_cond_load_acquire()
+(can't spot an actual bug now, but recall the principle "zalasr -> use
+.aq/.rl annotations ..."): riscv currently uses the "generic", fence-
+based implementation from include/asm-generic/barrier.h; compare that
+with e.g. the implementation from arch/arm64/include/asm/barrier.h .
+
+  Andrea
+
+
+> v3:
+>  - Apply acquire/release semantics to arch_xchg/arch_cmpxchg operations
+>  so as to ensure FENCE.TSO ordering between operations which precede the
+>  UNLOCK+LOCK sequence and operations which follow the sequence. Thanks
+>  to Andrea.
+>  - Support hwprobe of Zalasr.
+>  - Allow Zalasr extensions for Guest/VM.
+> 
+> v2:
+>  - Adjust the order of Zalasr and Zalrsc in dt-bindings. Thanks to
+>  Conor.
+> 
+> Xu Lu (10):
+>   riscv: Add ISA extension parsing for Zalasr
+>   dt-bindings: riscv: Add Zalasr ISA extension description
+>   riscv: hwprobe: Export Zalasr extension
+>   riscv: Introduce Zalasr instructions
+>   riscv: Apply Zalasr to smp_load_acquire/smp_store_release
+>   riscv: Apply acquire/release semantics to arch_xchg/arch_cmpxchg
+>     operations
+>   riscv: Apply acquire/release semantics to arch_atomic operations
+>   riscv: Remove arch specific __atomic_acquire/release_fence
+>   RISC-V: KVM: Allow Zalasr extensions for Guest/VM
+>   RISC-V: KVM: selftests: Add Zalasr extensions to get-reg-list test
+> 
+>  Documentation/arch/riscv/hwprobe.rst          |   5 +-
+>  .../devicetree/bindings/riscv/extensions.yaml |   5 +
+>  arch/riscv/include/asm/atomic.h               |  70 ++++++++-
+>  arch/riscv/include/asm/barrier.h              |  91 +++++++++--
+>  arch/riscv/include/asm/cmpxchg.h              | 144 +++++++++---------
+>  arch/riscv/include/asm/fence.h                |   4 -
+>  arch/riscv/include/asm/hwcap.h                |   1 +
+>  arch/riscv/include/asm/insn-def.h             |  79 ++++++++++
+>  arch/riscv/include/uapi/asm/hwprobe.h         |   1 +
+>  arch/riscv/include/uapi/asm/kvm.h             |   1 +
+>  arch/riscv/kernel/cpufeature.c                |   1 +
+>  arch/riscv/kernel/sys_hwprobe.c               |   1 +
+>  arch/riscv/kvm/vcpu_onereg.c                  |   2 +
+>  .../selftests/kvm/riscv/get-reg-list.c        |   4 +
+>  14 files changed, 314 insertions(+), 95 deletions(-)
+> 
+> -- 
+> 2.20.1
+> 
 
