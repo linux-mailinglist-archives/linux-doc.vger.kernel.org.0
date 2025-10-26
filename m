@@ -1,227 +1,164 @@
-Return-Path: <linux-doc+bounces-64552-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64554-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54723C0A6D5
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 12:59:37 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5863EC0A779
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 13:42:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 86AFF4E137E
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 11:59:31 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id AD75C3AC14E
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 12:42:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9AE321DB13A;
-	Sun, 26 Oct 2025 11:59:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6AC5E2DAFB4;
+	Sun, 26 Oct 2025 12:42:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uT1C1EiW"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="DTreRBbr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75B7E14E2E2
-	for <linux-doc@vger.kernel.org>; Sun, 26 Oct 2025 11:59:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44E0C2D2483;
+	Sun, 26 Oct 2025 12:42:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761479967; cv=none; b=d/xouecjYGhIWaA9HDmgfDCaJMZ9TZJ+jNQawR9NXJ6J8VGOHNgvA3dMZ2e9sKyxVFHkoJ0uAjxlXG3nsKpw0hrwN9qsAzStZ4u150I5HmjgwH3hW7HoPMhTf5wOyTSE4I0S9XPE4FVW7NGodoKeVcN1ChaINZMkHiGQCq1zS28=
+	t=1761482552; cv=none; b=gtlfkiYNf5fdBsaGdy6gEINhGrt7JxiNWf+FBHJd2+3MEFgxK7o2dg9tUNdJWw8ZcbgGPwl/m2XiiQH7CCGH6m8iqf1oqOyF+RyBVKBbunklMDLCMZVWdgrChupimksZHR7SSzpyTpsi4MqtNArT2GouU+69W7A6fRRVcLyGKEA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761479967; c=relaxed/simple;
-	bh=41SKNVNuKBZ3CzKXbj5n9PzuNOWnney2F0U+n2T0Bcc=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KmVezUpa1jPGCfen9T0+LhvuJQcTu6hbxYX0odqpmY75x8+2mTV7Z/Oa95Jy3mAXYGdkbMQu1GKN22IH1iM6EpVNDzL55LCokuWzG1JNkJ92Z+shnWrBxR75Tb34IOkpiYK4UnToUMhIqO83YkmLy74v57PDMqoFvfj23qgG/sM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uT1C1EiW; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DAE6C4CEE7;
-	Sun, 26 Oct 2025 11:59:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1761479967;
-	bh=41SKNVNuKBZ3CzKXbj5n9PzuNOWnney2F0U+n2T0Bcc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=uT1C1EiW2s0SzQCz38HynC8yZ9wF8f5t8JCW9L2uj7c77jlx4A9GXY5u/zPT5A3Mq
-	 I+k0VkWLqcq85rz7lNYNxRnp6b37wqwsEjSDzFbljCFxDK4rvKEJ8ctXQP5zaNF3tO
-	 IC33ReAZFHxLDpJoOcwzp6mI98H3l2s9k+PgYVY6r/a9PAEIdrU3N236QKe2MMFecK
-	 e0N7KmHN/JynHK6WTEA/oiwsKgzwKUanQc36EZvLSTHW+GAbMJHylW1nRNX/NCPJO+
-	 G7MKt3BsGHDZJh9sR8Pd1CfGQsQYOSNCDJYbEBQ9u9471d6J3rPxuto9UcqDXgKjjr
-	 i3Jd9BSTqMvzQ==
-Date: Sun, 26 Oct 2025 08:59:17 -0300
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: Linux Documentation <linux-doc@vger.kernel.org>, Mauro Carvalho Chehab
- <mchehab@kernel.org>
-Subject: Re: about make mandocs warnings
-Message-ID: <20251026085906.2d7e1d70@sal.lan>
-In-Reply-To: <efbccba7-7377-409d-9d0a-4e99b464e2ab@infradead.org>
-References: <efbccba7-7377-409d-9d0a-4e99b464e2ab@infradead.org>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1761482552; c=relaxed/simple;
+	bh=zpFmr2bAa3y9bCKAGucQbllnSsTKjY7O34zopgzM60c=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=jvlgm+x4I9Jis8s2sz27rN2vors7PPyDibu2xr7rEsHDmT93p2RroPegtmckUMQaS8I7+rfblCOVqTMHfBLDx5a7Em6uJ5QDh0DxDleV5UR8FDPVfG1QfJEVynRdEh2ko8Qs4hnkjhWAWtdjMhUd/eQleMbcrDe5pSPolmkw8jg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=DTreRBbr; arc=none smtp.client-ip=80.237.130.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:Message-ID:Date:Subject:Cc:To:From:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=fXIJPHYO42z1iATORgKH8y5WkIUpTXH1/3Hr32G1JXY=; t=1761482550; x=1761914550; 
+	b=DTreRBbruTfqLA80psOcOoxGT0+f/eVY6VTc2yBXCJ9I4vG6bY8xvIwU7rtSJIHWQhoXDOxmeKV
+	84GTaDTSOIJDr4hjgTXAdsL7MkOSYQlB11HII02pI2yLBn37zxLUUTe8xYLiIl9aMRYpauKy4Mf96
+	7ER/LaMPDdZJojF7QIv6JtZqXBnM4zMwfqKTS1QCO62zEQ6co1eMbJz9WuZfEPQR7Kp9C/3A3VTyq
+	6gFxhlmJJG1RysI7TGJrRpGbHA3GOJUrJ5D/47N2VJGC2Q9SQWpiGjJRilsjSYaBYigVdUth7SptE
+	cVTlJ09XbxxB6KXjg3zl1HWspdqdKvWnWzNQ==;
+Received: from [2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160] (helo=luggage.fritz.box); authenticated
+	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	id 1vD04k-001mX6-0U;
+	Sun, 26 Oct 2025 13:42:22 +0100
+From: Thorsten Leemhuis <linux@leemhuis.info>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: workflows@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	regressions@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v1 00/30] docs: reporting-issues: rework
+Date: Sun, 26 Oct 2025 13:41:51 +0100
+Message-ID: <cover.1761481839.git.linux@leemhuis.info>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1761482550;db804c08;
+X-HE-SMSGID: 1vD04k-001mX6-0U
 
-Em Sat, 25 Oct 2025 16:49:21 -0700
-Randy Dunlap <rdunlap@infradead.org> escreveu:
+Hi! This patch reworks various parts of our text on bug reporting. I
+started working on it for six reasons:
 
-> Hi Mauro,
->=20
->=20
-> 'make mandocs' on the full kernel tree generates a little over 10,000
-> lines of Warning:s.  Then it says:
->   Warning: kernel-doc returned 138 warnings
->=20
-> What does that number mean?
+* I noticed that even experienced Linux users had trouble with the TLDR
+  text, despite it being already quite long.
 
-Basically, at kdoc_files, we have:
+* I noticed a few areas where people were struggling when reporting
+  issues and saw potential for improving the situation somewhat by
+  rearranging and fine-tuning the order and the description of the
+  step-by-step guide a little.
 
-    def warning(self, msg):
-        """Ancillary routine to output a warning and increment error count"=
-""
+* I wanted to add a simple to follow "is this regression maybe known
+  already?" option to avoid unnecessary trouble for reporters.
 
-        self.config.log.warning(msg)
-        self.errors +=3D 1
+* I wanted to improve the interaction with
+  Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst,
+  which has a few bits with roots in reporting-issues.rst, but covers
+  verifying bugs and bisecting a lot better.
 
-    def error(self, msg):
-        """Ancillary routine to output an error and increment error count"""
+* I wanted to make it easier to jump to the reference section and back
+  by adding internal links, similar to how we did it in
+  Documentation/admin-guide/quickly-build-trimmed-linux.rst and
+  Documentation/admin-guide/verify-bugs-and-bisect-regressions.rst.
 
-        self.config.log.error(msg)
-        self.errors +=3D 1
+* I found the tone of the old text somewhat off-putting; I think I made
+  it better in a lot of places, but I suspect I missed a few areas that
+  needed treatment – and maybe did not go far enough in some others. So
+  please let me know if you spot cases that are too dim, some external
+  feedback really would help.
 
-And kernel-doc itself exits with:
+ I worked on-and-off on this for maybe two years and the problem is:
+what started as fine tuning in various places piled up. That together
+with the newly added links & anchors and some text movements makes the
+patchset huge. When you ignore those two aspects and look at individual
+patches using a word diff algorithm it looks a lot less scary, but it
+remains big – and thus sadly puts some load on reviewers and
+translators. Sorry. I think it's worth it and tried to split things up
+to facilitate handling.
 
-	error_count =3D kfiles.errors
-	sys.exit(error_count)
+If you want to see how the resulting text looks like, check out:
+https://www.leemhuis.info/files/misc/Reporting%20issues%20%e2%80%94%20The%20Linux%20Kernel%20documentation.html
 
-I guess the problem here is that POSIX exit codes are 8 bits only, so
-it ends reporting a wrong number of errors. Not sure what would be the
-best way to fix it.
+Feel also free to fix any typos you spot
+https://docs.google.com/document/d/1To4xVY8M6BDMBXEhEbaXuacZESdMzNFGECHk1a6nVPI/edit?usp=sharing,
+I'll pick those up for the next version. You can also add notes with
+suggestions there. But please do not add anything that might be covered
+by copyright.
 
-> kernel-doc is doing a very good job at finding issues in kernel-doc
-> notation, but there are a few cases of erroneous reporting. These are not
-> numerous and may not be worth much effort to fix them, although
-> some of them should not take much effort (I think). But I am just
-> reporting these in case someone wants to fix them.
->=20
->=20
-> Examples:
->=20
-> Warning: drivers/misc/vmw_balloon.c:259 struct member '5' not described i=
-n 'vmballoon_batch_entry'
-> "5" is part of an expression "PAGE_SHIFT - 5" for number of bits in a bit=
-field:
-> struct vmballoon_batch_entry {
-> 	u64 status : 5;
-> 	u64 reserved : PAGE_SHIFT - 5;
-> 	u64 pfn : 52;
-> } __packed;
+Ciao, Thorsten
 
-Fixing this one could be tricky, if we want to allow math expressions=20
-at the regex, but sounds doable.
+To: Jonathan Corbet <corbet@lwn.net>
+CC: linux-doc@vger.kernel.org
 
->=20
-> Warning: net/netfilter/nft_set_pipapo.h:102 union member '32' not describ=
-ed in 'nft_pipapo_map_bucket'
-> "32" is part of a static_assert() expression. Probably just
-> ignore the entire static_assert() [any number of lines].
+Thorsten Leemhuis (30):
+  docs: reporting-issues: mention text is best viewed rendered
+  docs: reporting-issues: tweak the reference section intro
+  docs: reporting-issues: add conclusion to the step-by-step guide
+  docs: reporting-issues: add proper appendix
+  docs: reporting-issues: outline why reporting is complicated
+  docs: reporting-issues: replace TLDR guide with more of an into
+  docs: reporting-issues: explain need for fresh vanilla kernel
+  docs: reporting-issues: add step about processing issues separately
+  docs: reporting-issues: tell users to check the kernel log
+  docs: reporting-issues: move 'check tainted flag' upwards
+  docs: reporting-issues: improve first tainted check
+  docs: reporting-issues: move 'check environment' upwards
+  docs: reporting-issues: improve environment check
+  docs: reporting-issues: improve text about checking for existing
+    issues
+  docs: reporting-issues: improve text on classifying the bug
+  docs: reporting-issues: add fast-track for regressions
+  docs: reporting-issues: move text on 'check MAINTAINERS file' upwards
+  docs: reporting-issues: improve text on looking up place to report
+  docs: reporting-issues: move text on 'check other places' upwards
+  docs: reporting-issues: improve text on check other places
+  docs: reporting-issues: improve text on backup et. al
+  docs: reporting-issues: move text on 'initial write-up' upwards
+  docs: reporting-issues: improve text on initial write-up
+  docs: reporting-issues: improve text on bug verification
+  docs: reporting-issues: improve text on non-regressions in stable
+  docs: reporting-issues: improve text on second search
+  docs: reporting-issues: make collecting files a separate step
+  docs: reporting-issues: separate steps for optimizing and submitting
+    reports
+  docs: reporting-issues: separate steps for follow-up tasks
+  docs: reporting-issues: fix a few line breaks
 
-Yeah.
+ .../admin-guide/reporting-issues.rst          | 2958 ++++++++---------
+ 1 file changed, 1426 insertions(+), 1532 deletions(-)
 
-> Warning: include/linux/hrtimer_types.h:47 Invalid param: enum hrtimer_res=
-tart            (*__private function)(struct hrtimer *)
-> Warning: include/linux/hrtimer_types.h:47 struct member 'enum hrtimer_res=
-tart            (*__private function' not described in 'hrtimer'
-> "__private" is an attribute from <linux/compiler_types.h> and the
-> struct member here should be "function", which is described.
->=20
->=20
-> Warning: include/linux/rethook.h:38 Invalid param: void (__rcu *handler) =
-(struct rethook_node *, void *, unsigned long, struct pt_regs *)
-> Warning: include/linux/rethook.h:38 struct member 'void (__rcu *handler' =
-not described in 'rethook'
-> "__rcu" is an attribute from <linux/compiler_types.h> and the
-> struct member here is "handler", which is described.
->=20
-> Warning: security/ipe/hooks.c:54 function parameter '__always_unused' not=
- described in 'ipe_mmap_file'
-> Warning: security/ipe/hooks.c:82 function parameter '__always_unused' not=
- described in 'ipe_file_mprotect'
-> "__always_unused" is an attribute from <linux/compiler_attributes.h>.
->=20
 
-Probably all we need for the above is to add one line for each,
-to ignore the above macros.
+base-commit: b14a05303f06d951c6ef7e23e5c8f3e3be21e17e
+-- 
+2.51.0
 
->=20
-> Warning: security/landlock/fs.c:765 Invalid param: layer_mask_t (*const l=
-ayer_masks_parent1)[LANDLOCK_NUM_ACCESS_FS]
-> Warning: security/landlock/fs.c:765 function parameter 'layer_mask_t (*co=
-nst layer_masks_parent1' not described in 'is_access_to_paths_allowed'
-> Warning: security/landlock/fs.c:765 Invalid param: layer_mask_t (*const l=
-ayer_masks_parent2)[LANDLOCK_NUM_ACCESS_FS]
-> Warning: security/landlock/fs.c:765 function parameter 'layer_mask_t (*co=
-nst layer_masks_parent2' not described in 'is_access_to_paths_allowed'
-> @layer_masks_parent1 and @layer_masks_parent2 are described in kernel-doc.
->
-> Warning: security/landlock/fs.c:1142 Invalid param: layer_mask_t (*const =
-layer_masks_dom)[LANDLOCK_NUM_ACCESS_FS]
-> Warning: security/landlock/fs.c:1142 function parameter 'layer_mask_t (*c=
-onst layer_masks_dom' not described in 'collect_domain_accesses'
-> @layer_masks_dom is described in kernel-doc.
->
->=20
-> Warning: security/landlock/ruleset.c:210 Invalid param: const struct land=
-lock_layer (*const layers)[]
-> Warning: security/landlock/ruleset.c:210 function parameter 'const struct=
- landlock_layer (*const layers' not described in 'insert_rule'
-> @layers is described in kernel-doc.
->=20
-> Warning: security/landlock/ruleset.c:693 Invalid param: layer_mask_t (*co=
-nst layer_masks)[]
-> Warning: security/landlock/ruleset.c:693 function parameter 'layer_mask_t=
- (*const layer_masks' not described in 'landlock_init_layer_masks'
-> @layer_masks is described in kernel-doc.
-
-These would require some extra logic - or a fix at an existing one - to=20
-better handle parenthesis on arguments.
-
-> Note: hundreds (probably thousands) of the mandocs warnings would disappe=
-ar
-> if kernel-doc accepted '-' in addition to ':' as a function parameter
-> or struct/union/enum member separator (like it does for
-> function/struct/union/enum short description).
-
-This is easy to fix, and QEMU has a patch mentioning what is needed
-at:
-	9cbe72b868b7 ("scripts/kernel-doc: tweak for QEMU coding standards")
-
-on its description: basically two regexes from Perl code would need changes:
-
-        -       if (/\s*([\w\s]+?)(\(\))?\s*-/) {
-        +       if (/\s*([\w\s]+?)(\s*-|:)/) {
-
-and:
-        -       if (/-(.*)/) {
-        +       if (/[-:](.*)/) {
-
-If I'm not mistaken, I got rid of the second regex during rewrite,
-but I might be wrong. If I recall correctly, with Python code, the
-change would be aon a single place at scripts/lib/kdoc/kdoc_parser.py:
-
-	doc_sect =3D doc_com + \
--	    KernRe(r'\s*(@[.\w]+|@\.\.\.|' + known_section_names + r')\s*:([^:].*=
-)?$',
-+	    KernRe(r'\s*(@[.\w]+|@\.\.\.|' + known_section_names + r')\s*[:-]([^:=
-].*)?$',
-	           flags=3Dre.I, cache=3DFalse)
-
-btw, the [^:] pattern there seems to be trying to avoid catching
-"::". With the new proposed regex, and if "::" is something that we
-need to avoid, if one uses "-:", it would miss the description.=20
-I guess that's ok.
-
-=46rom my side, I'm OK with the new regex, but one has to verify if
-this won't cause unwanted side-effects.
-
-Regards,
-Mauro
 
