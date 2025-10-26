@@ -1,34 +1,34 @@
-Return-Path: <linux-doc+bounces-64562-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64555-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D4C9C0A797
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 13:43:10 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FBD8C0A781
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 13:42:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id B0F25342C8C
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 12:43:09 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 93F743AEDB4
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 12:42:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C51212DD5F3;
-	Sun, 26 Oct 2025 12:42:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC8E92DC331;
+	Sun, 26 Oct 2025 12:42:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="wJIDYZY+"
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="HsVf0ULQ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44ECB2D4814;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44D682D0635;
 	Sun, 26 Oct 2025 12:42:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761482554; cv=none; b=tqKKfmuvzeshZ5oCTI8nGbFyQekgOV+53HPCCVnWTiT7OFHJl8CUSBpZnEBBfzp7cQaVffDN86lfcZki/HrmLG9zhNon4I1g7j9wVhP/B64saGe0GwzcU0eyaW1PrfRSHeJ2M8r1O4Qj3n+1vaQ2aHTDgN/o05lVa0KIQQYoRMA=
+	t=1761482552; cv=none; b=DHGhvAoLarVwnTBiCdnq8DVPGGCzctUYECbDPcvmsQ1t2Q1ZJKBcJN+xvtXcRJlpP2sb6RGJJUeeAOoKU/N9WSGl8cUwfVFNjB1kx8kaHWQimyPiPWZvQtAGdzV5Uh517LO5bnxDiEzTqHEc24JFrId5GZuLGMNhCpYnvqHMQcQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761482554; c=relaxed/simple;
-	bh=xAI5YfEuTiDep83Xgs+jcdtCYrUUTepDFLMFVQqhTlM=;
+	s=arc-20240116; t=1761482552; c=relaxed/simple;
+	bh=yyf519215u2MDdtHhsuvS1aHgIQQ/WJ2C5bOX/X38zg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=cPRrJQpJmQXF4+02npv2b/JbawDd8brNFh2TnW7hVXzdhOCYsFnLemOS+yHLgYO4REGRlsaDmNS5e8EoxpGqImnGR5dBE+CYymLQ9IjYoexsP6LyMgkcotbfiXzbT+/GgSbRksZ6It/hfileQdPrrv06Apie28L0aAbdJPXoCH0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=wJIDYZY+; arc=none smtp.client-ip=80.237.130.52
+	 MIME-Version; b=Qm++xG5mog+SIGyw+Kb2yGbxStQMCrTNbssYaplriCIA9m8jeqt5wx+o4UEbkWoggptthwuAmjIFQyHBQ7UXBbswviVow9PDLCa3OzPgz6n5X7DoucB7qFWeC24sdhd0Exj0p3ovgSslOa3Oq99F4Yxul1IdMxv2Fxu1OG+aVIg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=HsVf0ULQ; arc=none smtp.client-ip=80.237.130.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -36,25 +36,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:From:Sender:
 	Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
 	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
-	References; bh=634MWhFAXgdF+Ly2EAEMkXBMHvbyAhbHlX3frr8jsXI=; t=1761482550;
-	x=1761914550; b=wJIDYZY+KjnmVBLrvThs0s9Qr5UUJfgaVUuDyqbv2BjZ/gD4i/bvCKKOWb894
-	09HTdZTrJzhow+UOLyY0+nUyI2d61skoNxHCjQyIhqCG2cUfdVcumEzkWRVliKANDEZKYYf7OwuoH
-	ee4XO24aN+EVtcOeXxLH1AIanGZ404DUtBFpU/fefUaszztjedtfvlShAA7KiZtwuYYzUEk2ZaQt6
-	oXhZKFpZwwgfL9tZGLaK/iCIByehS7KDV5L79f6DJoArfF8CPsrM7rkUh3G6Vmqxruiz1RyPs/oGh
-	UCKIQXcFtqtQoRbsuxx1JMv9wk47dQjNBNGseoefNb9mZL3F4Q==;
+	References; bh=+90988As5O3leaoO212A9P2dJ7//kwlH5PvTRnoE+AY=; t=1761482550;
+	x=1761914550; b=HsVf0ULQv3aIaBYOLHIa4TAun6Z2ffZSFGsRWQaiuF1a9yJZczZoEof8EEJDO
+	9hNuqeB1KsNdOE1msHA8UDpbK0wNzs+Te40uI2+QYDul6hVeP0F/XMsgMyAxqyalySSoIyXSMIjMG
+	R692WIDamDf9RYkiHLPBLtCm7gSPCCxf+FtRHKAJA5puX1nSH1dkVCyI0TVRJFhtCadWtWnKvm5lr
+	ONlUEA7Gj7BeqrJYr96+S2YZh3VXIwdZ2AkxvrMVo+P6ouukfzdv6fYcUYcM0Qf3UWZ4y1iTCRFN2
+	JVREu9lOdmP4vpOSIn2CQ9CD8AtqI6zy+vpEg+njhLetujVYXQ==;
 Received: from [2a02:8108:8984:1d00:a8ad:ebd4:6fc6:160] (helo=luggage.fritz.box); authenticated
 	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	id 1vD04k-001mX6-1V;
-	Sun, 26 Oct 2025 13:42:22 +0100
+	id 1vD04k-001mX6-31;
+	Sun, 26 Oct 2025 13:42:23 +0100
 From: Thorsten Leemhuis <linux@leemhuis.info>
 To: Jonathan Corbet <corbet@lwn.net>
 Cc: workflows@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	regressions@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v1 01/30] docs: reporting-issues: mention text is best viewed rendered
-Date: Sun, 26 Oct 2025 13:41:52 +0100
-Message-ID: <4f7e2de2a2336c52e55cc49dcda627a4e86b8793.1761481839.git.linux@leemhuis.info>
+Subject: [PATCH v1 02/30] docs: reporting-issues: tweak the reference section intro
+Date: Sun, 26 Oct 2025 13:41:53 +0100
+Message-ID: <d94aa32d4a1ed5ef9d0f768d05e64987f4a1ae69.1761481839.git.linux@leemhuis.info>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <cover.1761481839.git.linux@leemhuis.info>
 References: <cover.1761481839.git.linux@leemhuis.info>
@@ -66,59 +66,93 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1761482550;db804c08;
-X-HE-SMSGID: 1vD04k-001mX6-1V
+X-HE-SMSGID: 1vD04k-001mX6-31
 
-Add a comment before the step-by-step guide explaining that the document
-is best viewed in the rendered form, as there the internal links will
-work that later patches will add.
-
-While at it change the double quotes in the license hint at the end of
-the document into single quotes, which is the preferred style.
+Small improvements to the intro of the reference section.
 
 Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
 ---
- Documentation/admin-guide/reporting-issues.rst | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+ .../admin-guide/reporting-issues.rst          | 67 +++++++++----------
+ 1 file changed, 31 insertions(+), 36 deletions(-)
 
 diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
-index a68e6d90927471..3bc47afaf85ea0 100644
+index 3bc47afaf85ea0..90b50c27c0d2b6 100644
 --- a/Documentation/admin-guide/reporting-issues.rst
 +++ b/Documentation/admin-guide/reporting-issues.rst
-@@ -48,6 +48,16 @@ Once the report is out, answer any questions that come up and help where you
- can. That includes keeping the ball rolling by occasionally retesting with newer
- releases and sending a status update afterwards.
+@@ -244,42 +244,37 @@ The reference section below explains each of these steps in more detail.
+ Reference section: Reporting issues to the kernel maintainers
+ =============================================================
  
-+..
-+   Note: If you see this note, you are reading the text's source file. You
-+   might want to switch to a rendered version: It makes it a lot easier to
-+   read and navigate this document -- especially when you want to look something
-+   up in the reference section, then jump back to where you left off.
-+..
-+   Find the latest rendered version of this text here:
-+   https://docs.kernel.org/admin-guide/reporting-issues.html
+-The detailed guides above outline all the major steps in brief fashion, which
+-should be enough for most people. But sometimes there are situations where even
+-experienced users might wonder how to actually do one of those steps. That's
+-what this section is for, as it will provide a lot more details on each of the
+-above steps. Consider this as reference documentation: it's possible to read it
+-from top to bottom. But it's mainly meant to skim over and a place to look up
+-details how to actually perform those steps.
+-
+-A few words of general advice before digging into the details:
+-
+- * The Linux kernel developers are well aware this process is complicated and
+-   demands more than other FLOSS projects. We'd love to make it simpler. But
+-   that would require work in various places as well as some infrastructure,
+-   which would need constant maintenance; nobody has stepped up to do that
+-   work, so that's just how things are for now.
+-
+- * A warranty or support contract with some vendor doesn't entitle you to
+-   request fixes from developers in the upstream Linux kernel community: such
+-   contracts are completely outside the scope of the Linux kernel, its
+-   development community, and this document. That's why you can't demand
+-   anything such a contract guarantees in this context, not even if the
+-   developer handling the issue works for the vendor in question. If you want
+-   to claim your rights, use the vendor's support channel instead. When doing
+-   so, you might want to mention you'd like to see the issue fixed in the
+-   upstream Linux kernel; motivate them by saying it's the only way to ensure
+-   the fix in the end will get incorporated in all Linux distributions.
+-
+- * If you never reported an issue to a FLOSS project before you should consider
+-   reading `How to Report Bugs Effectively
+-   <https://www.chiark.greenend.org.uk/~sgtatham/bugs.html>`_, `How To Ask
+-   Questions The Smart Way
+-   <http://www.catb.org/esr/faqs/smart-questions.html>`_, and `How to ask good
+-   questions <https://jvns.ca/blog/good-questions/>`_.
+-
+-With that off the table, find below the details on how to properly report
+-issues to the Linux kernel developers.
++The step-by-step guide above outlines all the major steps in brief fashion,
++which usually covers everything required. But even experienced users will
++sometimes wonder how to actually realize some of those steps or why they are
++needed; there are also corner cases the guide ignores for readability. That is
++what the entries in this reference section are for, which provide additional
++information for each of the steps in the detailed guide.
 +
++A few words of general advice:
 +
- Step-by-step guide how to report issues to the kernel maintainers
- =================================================================
++* The Linux kernel developers are well aware that reporting bugs to them is
++  more complicated and demanding than in other FLOSS projects. Quite a few
++  would love to make it simpler. But that would require convincing a lot of
++  developers to change their habits; it, furthermore, would require improvements
++  on several technical fronts and people that constantly take care of various
++  things. Nobody has stepped up to do or fund that work.
++
++* A warranty or support contract with some vendor doesn't entitle you to
++  request fixes from the upstream Linux developers: Such contracts are
++  completely outside the scope of the upstream Linux kernel, its development
++  community, and this document -- even if those handling the issue work for the
++  vendor who issued the contract. If you want to claim your rights, use the
++  vendor's support channel.
++
++* If you never reported an issue to a FLOSS project before, consider skimming
++  guides like `How to ask good questions
++  <https://jvns.ca/blog/good-questions/>`_, `How To Ask Questions The Smart Way
++  <http://www.catb.org/esr/faqs/smart-questions.html>`_, and `How to Report
++  Bugs Effectively <https://www.chiark.greenend.org.uk/~sgtatham/bugs.html>`_,.
++
++With that off the table, find below details for the steps from the detailed
++guide on reporting issues to the Linux kernel developers.
  
-@@ -1748,13 +1758,13 @@ art will lay some groundwork to improve the situation over time.
-    you spot a typo or small mistake, feel free to let him know directly and
-    he'll fix it. You are free to do the same in a mostly informal way if you
-    want to contribute changes to the text, but for copyright reasons please CC
--   linux-doc@vger.kernel.org and "sign-off" your contribution as
--   Documentation/process/submitting-patches.rst outlines in the section "Sign
--   your work - the Developer's Certificate of Origin".
-+   linux-doc@vger.kernel.org and 'sign-off' your contribution as
-+   Documentation/process/submitting-patches.rst outlines in the section 'Sign
-+   your work - the Developer's Certificate of Origin'.
- ..
-    This text is available under GPL-2.0+ or CC-BY-4.0, as stated at the top
-    of the file. If you want to distribute this text under CC-BY-4.0 only,
--   please use "The Linux kernel developers" for author attribution and link
-+   please use 'The Linux kernel developers' for author attribution and link
-    this as source:
-    https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/Documentation/admin-guide/reporting-issues.rst
- ..
+ 
+ Make sure you're using the upstream Linux kernel
 -- 
 2.51.0
 
