@@ -1,45 +1,46 @@
-Return-Path: <linux-doc+bounces-64596-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64598-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7498EC0AFEA
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 19:22:40 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id F2E17C0AFF6
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 19:22:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 323244E17DB
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 18:22:29 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CA9273B2801
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Oct 2025 18:22:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 15B1226F462;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B19D2ED164;
 	Sun, 26 Oct 2025 18:22:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l6JS8Tx9"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rrUXWisV"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2A60129E6E;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 579D02DA777;
 	Sun, 26 Oct 2025 18:22:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761502944; cv=none; b=MqW6ak5bA9Ga16kwtEvw0kewGg0A/sCU3/t8aKNR5kEjvnGar6udgCdX5rsYjQVpH1eiYo/IZQvAHx/0TD/piDh772EpmGaFZ/33LeZjvewC3pTYIeTeVkZ0Kw+D3E4/wrxCqMPJbyoDWnpKMrjT6FsKQ8joU92HLasn/lVvLr0=
+	t=1761502944; cv=none; b=KatPqsF3caQd/EVflwYqWn1CJuY34b9Vdg5INFiXV0CRWLOQxL4WKZcfSoF4YHqc7X+UI9V02896i6eJX3mrL/0IwpuowmGTDkqOY0cCOyCvLoUF2T/6D9nFfh24T3Jgkiw4WC71jAgh1rc/PaJe2uEhaHX3y+RSuw50APVe6q0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1761502944; c=relaxed/simple;
-	bh=GiKZojVeog5YOllrsDes1GwbWKFkabuDbGBFBP0siC0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=AmBYs2DKj6SiOM/Lcm9ITAfmFJZyNOKIPCA2vNOy3EDyauGdZP9eIcth0ypfuPwBdyl5W7S/gvDPfJ5lLoXTju5O0Jvv7ofhR+EmBThLELozbWUK8/bfsDz7OEbJduvxokQuNGJIVM0whFOFAsLqPom+Wp+Nh3O0+ffE47EWejI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l6JS8Tx9; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3600C4CEE7;
-	Sun, 26 Oct 2025 18:22:22 +0000 (UTC)
+	bh=vR/jN1F5Lce+/wYJ3r7vPrVeoUjeNepMfhGqCYSRWqk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=B95mrDgfopvB3Vz4iLg0wweT8sDcx33rj5kzqcyaPhDvD5Vv5qUC87TuJM/0q1ks9R+/DW4IdF9PG/jXE6BX1QtmDXOKH4OlK6i3EwDNBqWVb6BGFBETPS1gkkmVHd17qX0W54W/73ZBhf8xylmrnNdzvxw4nDUmJ0AM/NJY5d8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rrUXWisV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 913E6C116D0;
+	Sun, 26 Oct 2025 18:22:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1761502943;
-	bh=GiKZojVeog5YOllrsDes1GwbWKFkabuDbGBFBP0siC0=;
-	h=From:To:Cc:Subject:Date:From;
-	b=l6JS8Tx9QJHnZ/QS+03PmXD+ZLF0mnbSH9X7NFXeo+oY9KW77lstrx8MfPsbmFkfi
-	 izQVOMQn/kc9Irh8pG0rCN237YpZHkobm5WXB8DEMkYXZ3oQFihP6tLF5fYMjEZ75j
-	 AQ7qfckSBBVjTWpsz0PLmthmt4pPhHGb9vhdazIN+lZJMX8SjoqgcMLDlXynSrzreD
-	 /puxr1dv+DraGT738SAjH5KNDJ4cdt4ZVplqPX/onibP7TgGRvO+aaJLZjZwL9y0v6
-	 6TdnGn1AnA898sj4g4MVSPCcQzdP+WcD0kvyE11USzfSfZBVhpxGQDJfNKOjcS6EWp
-	 LPrzxg0FoWYig==
+	bh=vR/jN1F5Lce+/wYJ3r7vPrVeoUjeNepMfhGqCYSRWqk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=rrUXWisVTkQuT/o97FuvkpH48DZbMUE8mE2W8Umu5nU3QnHmLelcE5jBmq95VgdCr
+	 pY/zhcBoT8GkIudvveTt1LFwjoCVwxxN58tWskdBWOJ/oadZBuZaTf9l499ApRhP+y
+	 HYlXni3I9sVHVfTDml1uHzYVAxTRvsrBfbuTCCs81RZhz6a29HzIy0mOGp73H/lEDf
+	 EesRjDcqND1pYBOzH7F9SFKGoUdGBZknts4E8rkxMqOhDQ1DXFTzbUs08qVOMlw4JS
+	 +Bk5Womdr7dJUTyra0iV2Wvnrlg0W0qfP42AVCgCzLYoP78dpvJMA1MQboaEuCs/cG
+	 DPdMcDpxOvNHg==
 From: SeongJae Park <sj@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>
 Cc: SeongJae Park <sj@kernel.org>,
@@ -55,10 +56,12 @@ Cc: SeongJae Park <sj@kernel.org>,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH 0/8] mm/damon: misc documentation fixups
-Date: Sun, 26 Oct 2025 11:22:05 -0700
-Message-ID: <20251026182216.118200-1-sj@kernel.org>
+Subject: [PATCH 2/8] Docs/mm/damon/design: fix wrong link to intervals goal section
+Date: Sun, 26 Oct 2025 11:22:07 -0700
+Message-ID: <20251026182216.118200-3-sj@kernel.org>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20251026182216.118200-1-sj@kernel.org>
+References: <20251026182216.118200-1-sj@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -67,35 +70,31 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As the subject says.
+Commit b243d666d107 ("Docs/admin-guide/mm/damon/usage: add
+intervals_goal directory on the hierarchy") mistakenly added a wrong
+reference for intervals goal usage documentation on the design document.
+Fix it.
 
-First three patches fix up issues in the documents, including wrong
-explanation of a behavior, wrong link, and a contextual typo.  Following
-five patches update documents for not yet documented features and
-behaviors.
+Signed-off-by: SeongJae Park <sj@kernel.org>
+---
+ Documentation/mm/damon/design.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-SeongJae Park (8):
-  mm/damon/core: fix wrong comment of damon_call() return timing
-  Docs/mm/damon/design: fix wrong link to intervals goal section
-  Docs/admin-guide/mm/damon/stat: fix a typo: s/sampling events/sampling
-    interval/
-  Docs/admin-guide/mm/damon/usage: document empty target regions commit
-    behavior
-  Docs/admin-guide/mm/damon/reclaim: document addr_unit parameter
-  Docs/admin-guide/mm/damon/lru_sort: document addr_unit parameter
-  Docs/admin-guide/mm/damon/stat: document aggr_interval_us parameter
-  Docs/admin-guide/mm/damon/stat: document negative idle time
-
- .../admin-guide/mm/damon/lru_sort.rst         | 22 ++++++++++++
- .../admin-guide/mm/damon/reclaim.rst          | 22 ++++++++++++
- Documentation/admin-guide/mm/damon/stat.rst   | 35 ++++++++++++++-----
- Documentation/admin-guide/mm/damon/usage.rst  |  8 ++++-
- Documentation/mm/damon/design.rst             |  4 +--
- mm/damon/core.c                               |  2 +-
- 6 files changed, 80 insertions(+), 13 deletions(-)
-
-
-base-commit: 1148e04980a5471922064ff4b19cd154643da743
+diff --git a/Documentation/mm/damon/design.rst b/Documentation/mm/damon/design.rst
+index b54925ea78e9..2d8d8ca1e0a3 100644
+--- a/Documentation/mm/damon/design.rst
++++ b/Documentation/mm/damon/design.rst
+@@ -381,8 +381,8 @@ That is, assumes 4% (20% of 20%) DAMON-observed access events ratio (source)
+ to capture 64% (80% multipled by 80%) real access events (outcomes).
+ 
+ To know how user-space can use this feature via :ref:`DAMON sysfs interface
+-<sysfs_interface>`, refer to :ref:`intervals_goal <sysfs_scheme>` part of
+-the documentation.
++<sysfs_interface>`, refer to :ref:`intervals_goal
++<damon_usage_sysfs_monitoring_intervals_goal>` part of the documentation.
+ 
+ 
+ .. _damon_design_damos:
 -- 
 2.47.3
 
