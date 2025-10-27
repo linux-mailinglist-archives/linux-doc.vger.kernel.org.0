@@ -1,148 +1,186 @@
-Return-Path: <linux-doc+bounces-64763-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64765-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5F61C11E33
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 23:50:43 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C9F3C11E34
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 23:50:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id CF1314FFFF5
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 22:49:04 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DF2611884D54
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 22:50:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B817F32E72F;
-	Mon, 27 Oct 2025 22:46:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0059232D7D7;
+	Mon, 27 Oct 2025 22:49:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="R3bOrsLM"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="itMBx5My"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D41513346AB
-	for <linux-doc@vger.kernel.org>; Mon, 27 Oct 2025 22:46:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46D483128BA;
+	Mon, 27 Oct 2025 22:49:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761605185; cv=none; b=tif03uGx0+SVrvt0S39EHl1m4wl7TKXxszCnHw4T2CA7PsByupb52H7u1qhIGHHGUMYl9ElBYOEvQrtuuf8vowAuBsRgFU/8XsXfbiRo+t2HG5iCQG5qpPZgP88kxeR47kXPb0q2kRoCL4DkS7sSW3bBxoE/H+U+rO+Z5bsZkuc=
+	t=1761605357; cv=none; b=LBoXU4OSz37zlXwlmbZQGwjndzV7qPGh3yNHld0csQCdiRio+zcyc6ySz3TVrA3oE/5NpQKEO6qJlvpSan9rezUR1l9JO2AwIw2DmTYZCSCs7UATTr6u0I8KQSxaoDuivWVlUSU2+TH74wfvPpcUtO0w/YqYDs99Mqsra0VWYeU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761605185; c=relaxed/simple;
-	bh=YbNF9xBLgvPcEJ73q19bteNh3qQ4EWHWmqaSpEAAHPI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=RyU3XKWNgm53O3bMwrd/xNUmKFR9aE7mecG7jeAGKyNLqr5nVYi7or30ClEOrj1m2QF5weMFCwhl8nFZsoCZkNsLlznJQ6zZsqA2aMRafNhEZAgaKxkBMOixrGMrakmp0audsG/ghSR+hya3q4stjboWGFjSXl3Nkt2drJJSXXY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=R3bOrsLM; arc=none smtp.client-ip=209.85.128.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-475dbc3c9efso19996125e9.0
-        for <linux-doc@vger.kernel.org>; Mon, 27 Oct 2025 15:46:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761605182; x=1762209982; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YbNF9xBLgvPcEJ73q19bteNh3qQ4EWHWmqaSpEAAHPI=;
-        b=R3bOrsLM90ph+zhd05Sn7igSwGIPADBCQVTuFiwym7wQ8MlicFuMlUzlwD2gBHkY3f
-         1KuwPuFQ8RbZMqTBSMUpT/qtBmK5aMAQ7cc0iuJVDgU5uJ2JP8ELO+8oOF9euAndL0ZV
-         z2KYBXeHISmwQsR38TzkRPbMniliWRieXTugL++3ur17WWTnGkzyWiuGywC56NZcbsDg
-         cjbrKZy+OqahFx7qRKsT+L1Xl6g3ibUFErq/MNJguA8hRjaxIMnqHW+y3JV1JUvGjPH/
-         +5UkA1HTvjPxAFujFHJBPFPWPsFWNbOUUW9S6zQhcecFM0Z4hIzTmG4E9iGm+Wo72lRi
-         APZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761605182; x=1762209982;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=YbNF9xBLgvPcEJ73q19bteNh3qQ4EWHWmqaSpEAAHPI=;
-        b=k+4ckrAPfBRErFSKpA0SFVo8JpQjt4PFHspjV/jr512toaq7ppXzAguCB6W0TcxrDf
-         upQcbxwK8yM8GqVuM7Wsa/qrgEQjKAG7LY+dJlXEP0fB+Pbfh+iymXT8wsZCV8UcY5e+
-         Z09y52V/2rjleZGM5NG9DlfGXrXa3gn9dtCYYiTcRkJOvM3b9D8wRnpbIZOrarVmV9aK
-         2yZBnkTz7oGySxtluwh9pB5AoNUn0Ne8j3JbIkVx2HCIorlv+YSAErCimhSrWYi13/Js
-         SJwIx3veuPu5h/ugwa7SONZyAh2l7VV2O/7FlPeGy/SCKJ9HCn3Nn9NhkY6VT8Fo9R3r
-         Oouw==
-X-Forwarded-Encrypted: i=1; AJvYcCWvYJ1Y8BOYKmNoMhYmtyxiz9JKZX3/hjKVgXDW1DUxS1+8/UUCtj8L7QUFbNQwg0SRkiVLMcRFaMA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzmIPzbJmKyhXgu5FAhMzBpuEjqGKgjWeUlPlCFYZNr8VuzWxH7
-	ofG712NcwfqGYZmXIJcjdUrlhHNmp0t9cqpXFUAoO9NXLOEvgpeck+Sg+y8wmv6yY4YLkIgaC6Y
-	US7/rdSy8qMxx/vpFCu9rODOr7pjzGo8=
-X-Gm-Gg: ASbGncuvnicfZKs70zwSof7wXYBgoihapjeoqXEOQusC6v+UZuUOM89OFhPOZj7f1cw
-	czv4shR6NbhzX7GUP4mNQp9W2xzK/vpT49nvRtXq3eZ5gY0dsDSgq5Boe1pzXTsbi4IiC4fyfGf
-	+JbLW9Ix7FYukv2BALhvzJQt70aCgJAPnxOv9p+im4zgK1R7hrJcgsc1vEb6UFYDc8K0lj4cTNA
-	rnAiQG9cPsy6hJ2iX++fUEe69mCKY4Fve0xqfk4bgYV+ueJIu8YVP57jpO7vi6gv5J1DA==
-X-Google-Smtp-Source: AGHT+IEeNWo2bsGLLqGLfQNsY0L6lNVZZ2khSDzRsqsRr6Jo8tC6B0Avoq1yBzRM+ieeQ79ZgiTz+pEgGuOt7PLnUe4=
-X-Received: by 2002:a05:600c:46d3:b0:471:1415:b545 with SMTP id
- 5b1f17b1804b1-47717def6demr11070845e9.7.1761605181955; Mon, 27 Oct 2025
- 15:46:21 -0700 (PDT)
+	s=arc-20240116; t=1761605357; c=relaxed/simple;
+	bh=iA2KzMAXzjS0dvEBVNewkroSRiQXPtFeN4k5LUgsyeA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Gea2futsmcn3BuGUeJAMjIRyy1h9Bte4x5c1L/NUVajT9NBPsL7DyFsCJm1X5++MYi/eOPdPkSH7Z8D+v091OyGdn+Mw1Wi99hhi3mRDSukMyiM1LXh3H/TU230p+y3D9boht8Vw3Fxsf6dtejMLWZ8T30RmmcGDZgjE0eh4JOc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=itMBx5My; arc=none smtp.client-ip=148.163.156.1
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59RJV5Au013020;
+	Mon, 27 Oct 2025 22:49:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=pp1; bh=niEgPNdK73IG2K9RPRq+Bi/ZJzkx+OYfS2ccysrNo
+	JA=; b=itMBx5MyOY4wiORNCrtX5DhEw1SeNan3hB4c5c556+DhfHk+ugLJGiC3u
+	W97WX4GOajkCS4pubrQmSG0uUYa6Ime/9Cn3LA9jg3IpVUYGxDtqp2hbU+FuR+EK
+	P20bkjrqFYJYQANbPzxJ22YBwhWZzMyxXWgnfxZ2d3zszcATrJQalj8NT6bg/hKA
+	zrGUddY8afq4eHQ8brqG/j4MruZhZ7jXZew+fyZLb4UQOLLXWUe3oGpS6aOto/SB
+	7IBevKz+t/hkCLfM6lXfHYhet24Lu/HpnKxrMI90KA1GdedL4bXn6dfzuYtjkz2k
+	rvZXmHTrV2cOp+LcltlmT5z51ZHmw==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4a0p2916kw-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 27 Oct 2025 22:49:04 +0000 (GMT)
+Received: from m0360083.ppops.net (m0360083.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.0.8) with ESMTP id 59RMn36n009832;
+	Mon, 27 Oct 2025 22:49:03 GMT
+Received: from ppma11.dal12v.mail.ibm.com (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4a0p2916ku-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 27 Oct 2025 22:49:03 +0000 (GMT)
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+	by ppma11.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59RJL9kv006806;
+	Mon, 27 Oct 2025 22:49:02 GMT
+Received: from smtprelay07.fra02v.mail.ibm.com ([9.218.2.229])
+	by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 4a1bk0ynsj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 27 Oct 2025 22:49:02 +0000
+Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com [10.20.54.103])
+	by smtprelay07.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 59RMmwJe43975158
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Mon, 27 Oct 2025 22:48:58 GMT
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 48B9420043;
+	Mon, 27 Oct 2025 22:48:58 +0000 (GMT)
+Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 05DFC20040;
+	Mon, 27 Oct 2025 22:48:58 +0000 (GMT)
+Received: from tuxmaker.lnxne.boe (unknown [9.152.85.9])
+	by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
+	Mon, 27 Oct 2025 22:48:57 +0000 (GMT)
+From: Halil Pasic <pasic@linux.ibm.com>
+To: "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "D. Wythe" <alibuda@linux.alibaba.com>,
+        Dust Li <dust.li@linux.alibaba.com>,
+        Sidraya Jayagond <sidraya@linux.ibm.com>,
+        Wenjia Zhang <wenjia@linux.ibm.com>,
+        Mahanta Jambigi <mjambigi@linux.ibm.com>,
+        Tony Lu <tonylu@linux.alibaba.com>, netdev@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-rdma@vger.kernel.org, linux-s390@vger.kernel.org
+Cc: Halil Pasic <pasic@linux.ibm.com>, Wen Gu <guwen@linux.alibaba.com>,
+        Guangguan Wang <guangguan.wang@linux.alibaba.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH net-next v6 0/2] net/smc: make wr buffer count configurable 
+Date: Mon, 27 Oct 2025 23:48:54 +0100
+Message-ID: <20251027224856.2970019-1-pasic@linux.ibm.com>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <cover.1761439133.git.jinji.z.zhong@gmail.com>
-In-Reply-To: <cover.1761439133.git.jinji.z.zhong@gmail.com>
-From: Nhat Pham <nphamcs@gmail.com>
-Date: Mon, 27 Oct 2025 15:46:10 -0700
-X-Gm-Features: AWmQ_bma6lyHlpvPtwTt1egk70m2KnBJDjgat6AjIDzKFfoBCYrn6d-bXve4s8M
-Message-ID: <CAKEwX=MqsyWki+DfzePb3SwXWTZ_2tcDV-ONBQu62=otnBXCiQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/3] Introduce per-cgroup compression priority
-To: jinji zhong <jinji.z.zhong@gmail.com>
-Cc: minchan@kernel.org, senozhatsky@chromium.org, philipp.reisner@linbit.com, 
-	lars.ellenberg@linbit.com, christoph.boehmwalder@linbit.com, corbet@lwn.net, 
-	tj@kernel.org, hannes@cmpxchg.org, mkoutny@suse.com, axboe@kernel.dk, 
-	mhocko@kernel.org, roman.gushchin@linux.dev, shakeel.butt@linux.dev, 
-	akpm@linux-foundation.org, terrelln@fb.com, dsterba@suse.com, 
-	muchun.song@linux.dev, linux-kernel@vger.kernel.org, 
-	drbd-dev@lists.linbit.com, linux-doc@vger.kernel.org, cgroups@vger.kernel.org, 
-	linux-block@vger.kernel.org, linux-mm@kvack.org, zhongjinji@honor.com, 
-	liulu.liu@honor.com, feng.han@honor.com, 
-	YoungJun Park <youngjun.park@lge.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI1MDAxOSBTYWx0ZWRfX8ILttVUODp08
+ bsCQK7DdXenRX73MHgW5xg56/1B8u6iTNp622guvFhHKwBPltoDBX6LWZdo8hU+l4kqX4oC/nHT
+ QoGwZwuPQ+IUZwhimZ2cnKywFkvxdgy9eUN56SCJFh3PCDjHCIbwI3Pli7G1XslpD6DxOpvocrK
+ nYPlJWP3Nq/icuz+Cv2OM2D6zlLVxYOY08YO9tb/wCzJkF4jseKwtN0aKrTgR8ZxmuZelGRG2Li
+ 8DO3S6TiDWorrTZeJqQSrgWPHZXg3Mpghb6lXuUKBJdSZ+4INU/OquhrE4D8jHVd8c+RNe3H3Dk
+ GDGiMMRb57PIhl9A6Fp2TY8Sv4xakCj3/YdazhDjx3nDSCJCC0yyHCiRASQ/TiedxU8sY4U3oDN
+ 7tDsUZV2m8vLIXVrn+Te9xkWuMWYtg==
+X-Proofpoint-GUID: AJzGdb778uBJmh8RMt4_oou7HGpMgsOy
+X-Authority-Analysis: v=2.4 cv=V8ZwEOni c=1 sm=1 tr=0 ts=68fff6e0 cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
+ a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=OPAOpny1AAAA:8 a=VwQbUJbxAAAA:8
+ a=VnNF1IyMAAAA:8 a=piJGGMyLFvZckxoXyWEA:9 a=Vt4qOV5uLRUYeah0QK8L:22
+ a=cPQSjfK2_nFv0Q5t_7PE:22
+X-Proofpoint-ORIG-GUID: 7MvIe4UGSYdd4ODUgl0939jlY-IlITLk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-27_09,2025-10-22_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 phishscore=0 lowpriorityscore=0 malwarescore=0
+ adultscore=0 bulkscore=0 spamscore=0 clxscore=1015 suspectscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2510020000
+ definitions=main-2510250019
 
-On Sat, Oct 25, 2025 at 6:53=E2=80=AFPM jinji zhong <jinji.z.zhong@gmail.co=
-m> wrote:
->
-> Hello everyone,
->
-> On Android, different applications have varying tolerance for
-> decompression latency. Applications with higher tolerance for
-> decompression latency are better suited for algorithms like ZSTD,
-> which provides high compression ratio but slower decompression
-> speed. Conversely, applications with lower tolerance for
-> decompression latency can use algorithms like LZ4 or LZO that
-> offer faster decompression but lower compression ratios. For example,
-> lightweight applications (with few anonymous pages) or applications
-> without foreground UI typically have higher tolerance for decompression
-> latency.
->
-> Similarly, in memory allocation slow paths or under high CPU
-> pressure, using algorithms with faster compression speeds might
-> be more appropriate.
->
-> This patch introduces a per-cgroup compression priority mechanism,
-> where different compression priorities map to different algorithms.
-> This allows administrators to select appropriate compression
-> algorithms on a per-cgroup basis.
->
-> Currently, this patch is experimental and we would greatly
-> appreciate community feedback. I'm uncertain whether obtaining
-> compression priority via get_cgroup_comp_priority in zram is the
-> best approach. While this implementation is convenient, it seems
-> somewhat unusual. Perhaps the next step should be to pass
-> compression priority through page->private.
+The current value of SMC_WR_BUF_CNT is 16 which leads to heavy
+contention on the wr_tx_wait workqueue of the SMC-R linkgroup and its
+spinlock when many connections are competing for the work request
+buffers. Currently up to 256 connections per linkgroup are supported.
 
-I agree with TJ's and Shakeel's take on this. You (or some other
-zram/zswap users) will have to present a more compelling case for the
-necessity of a hierarchical structure for this property :)
+To make things worse when finally a buffer becomes available and
+smc_wr_tx_put_slot() signals the linkgroup's wr_tx_wait wq, because
+WQ_FLAG_EXCLUSIVE is not used all the waiters get woken up, most of the
+time a single one can proceed, and the rest is contending on the
+spinlock of the wq to go to sleep again.
 
-The semantics itself is unclear to me - what's the default? How should
-inheritance be defined? What happens when cgroups are killed etc?
+Addressing this by simply bumping SMC_WR_BUF_CNT to 256 was deemed
+risky, because the large-ish physically continuous allocation could fail
+and lead to TCP fall-backs. For reference see this discussion thread on
+"[PATCH net-next] net/smc: increase SMC_WR_BUF_CNT" (in archive
+https://lists.openwall.net/netdev/2024/11/05/186), which concludes with
+the agreement to try to come up with something smarter, which is what
+this series aims for.
 
-As a side note, seems like there is a proposal for swap device
-priority (+ Youngjun)
+Additionally if for some reason it is known that heavy contention is not
+to be expected going with something like 256 work request buffers is
+wasteful. To address these concerns make the number of work requests
+configurable, and introduce a back-off logic with handles -ENOMEM form
+smc_wr_alloc_link_mem() gracefully.
+---
 
-https://lore.kernel.org/all/20250716202006.3640584-1-youngjun.park@lge.com/
+Changelog:
+---------
+v6: 
+ * Added r-b's by Dust Li
+ * Replaced "So called" with "So-called" (Bagas)
+v5: https://lore.kernel.org/netdev/20250929000001.1752206-1-pasic@linux.ibm.com/
+v4: https://lore.kernel.org/netdev/20250927232144.3478161-1-pasic@linux.ibm.com/
+v3: https://lore.kernel.org/netdev/20250921214440.325325-1-pasic@linux.ibm.com/
+v2: https://lore.kernel.org/netdev/20250908220150.3329433-1-pasic@linux.ibm.com/
+v1: https://lore.kernel.org/all/20250904211254.1057445-1-pasic@linux.ibm.com/
 
-Is this something you can leverage?
+Halil Pasic (2):
+  net/smc: make wr buffer count configurable
+  net/smc: handle -ENOMEM from smc_wr_alloc_link_mem gracefully
 
-Another alternative is to make this zram-internal, i.e add knobs to
-zram sysfs, or extend the recomp parameter. I'll defer to zram
-maintainers and users to comment on this :)
+ Documentation/networking/smc-sysctl.rst | 40 +++++++++++++++++++++++++
+ include/net/netns/smc.h                 |  2 ++
+ net/smc/smc_core.c                      | 34 ++++++++++++++-------
+ net/smc/smc_core.h                      |  8 +++++
+ net/smc/smc_ib.c                        | 10 +++----
+ net/smc/smc_llc.c                       |  2 ++
+ net/smc/smc_sysctl.c                    | 22 ++++++++++++++
+ net/smc/smc_sysctl.h                    |  2 ++
+ net/smc/smc_wr.c                        | 31 +++++++++----------
+ net/smc/smc_wr.h                        |  2 --
+ 10 files changed, 121 insertions(+), 32 deletions(-)
+
+
+base-commit: bfe62db5422b1a5f25752bd0877a097d436d876d
+-- 
+2.48.1
+
 
