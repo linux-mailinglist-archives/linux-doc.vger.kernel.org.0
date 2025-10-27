@@ -1,97 +1,172 @@
-Return-Path: <linux-doc+bounces-64656-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64659-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4580BC0BBE4
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 04:25:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65C14C0BC08
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 04:30:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4E62D18A2724
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 03:26:20 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 940A418A28AA
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 03:30:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C03CB2D24BC;
-	Mon, 27 Oct 2025 03:25:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="hkoi81s9"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 735602D6E4B;
+	Mon, 27 Oct 2025 03:29:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-99.freemail.mail.aliyun.com (out30-99.freemail.mail.aliyun.com [115.124.30.99])
+Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED9F22BCF4C;
-	Mon, 27 Oct 2025 03:25:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.99
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9ACD2D5C9B;
+	Mon, 27 Oct 2025 03:29:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.206.16.166
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761535549; cv=none; b=sgnneWU9A3KYPEwKNw/bW+s2wNeW22kggLGm6VAlJWj1ZBHpXCxsF5m77UBIXVu79Y2BNTO7EI2htyVpxn9LuEyyFaHWytUO5gH1N9k6l3zfb18MpnRVcU+lqjax7XKfyBpgD/MUVLN3KjYorDU8ug+Jkc0qLmpgctFGPDzEyMY=
+	t=1761535795; cv=none; b=O0nYOdXsUlXHBRRvgigf5eJzdH9WDobkgA1bbRF+1QjRhuAJFMwTdb4V+H//KrdWqonq37u8mrHwQmRmV/Ju+OP2vnl0MiBxT6llNvRdDshXdyBBAypdIAICsq8hQtcosPkA54ffIH1IiZiCEnxX1j85ZXR88bPz0FH848KC3QU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761535549; c=relaxed/simple;
-	bh=AOcMq98EC8CGBYoVOSn6HcM2Q6moUQ8svsurgr3qy7E=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bKyuxYWYwLT0ORJm3WfuElF+Br+XAZwc78bs4/H2XbLgITISsZQKADUOSIlQ9fY9cix18dt2VCbYkpwqeTqC0TGRMInnwXJG0g1qEUkZ6jQDUGTGWkVRFOAsLkLy4Xb3J4fU3afw1nkRoUVbKKH9zwO/uCgOf6kSByzi/B8eQaM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=hkoi81s9; arc=none smtp.client-ip=115.124.30.99
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1761535538; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
-	bh=/jozjS1vRHTv6C7q6QJDKxw+pz3Pe2g0a97QFylnV28=;
-	b=hkoi81s9qdEt271lM2yx6wIz0Eszac/CbKqTBeqzvYpaxiAuoeXK03rJKtCEguo3QdjsV05KXxPBRmqWTzjdDbkRP1c8cM8isxrAcUfON3LkGlwd1akigWLdhLa0x8vZnB3BbZ4fwpwhu6MGpGVXqzfoZS09TR6QVqSi7cDTYGQ=
-Received: from 30.74.144.189(mailfrom:baolin.wang@linux.alibaba.com fp:SMTPD_---0Wr-v7UX_1761535533 cluster:ay36)
-          by smtp.aliyun-inc.com;
-          Mon, 27 Oct 2025 11:25:34 +0800
-Message-ID: <ad974920-658a-4909-8160-c54f7ac9403a@linux.alibaba.com>
-Date: Mon, 27 Oct 2025 11:25:33 +0800
+	s=arc-20240116; t=1761535795; c=relaxed/simple;
+	bh=lRA8n0TGjHPZcdwnpDWKyoO9RVo48D9SjUt589DFzpA=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=bOkSFmx3DH8ofUx+/pArYfab2YCQcMb8XcW5niHpfPI7Vzc2EctA8lYbf+cz6gG1uNM4CqGMFchUHfqoXj20qC0RO39AG5DxWtxJcsORZys+h/O6gWb+GJxiVoIU8CSPbwjni0w5ixaRDIP9rHESCpA6zuanQb+CYt0V/1ntNgI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com; spf=pass smtp.mailfrom=mucse.com; arc=none smtp.client-ip=54.206.16.166
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mucse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mucse.com
+X-QQ-mid: zesmtpsz2t1761535756tf0b452a9
+X-QQ-Originating-IP: licCKsMsUoauo/qqyG2xiHHmoO/xjMzrMjf1VtSh09w=
+Received: from localhost.localdomain ( [203.174.112.180])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Mon, 27 Oct 2025 11:29:13 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 15893421315603861346
+EX-QQ-RecipientCnt: 17
+From: Dong Yibo <dong100@mucse.com>
+To: davem@davemloft.net,
+	edumazet@google.com,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	horms@kernel.org,
+	corbet@lwn.net,
+	andrew+netdev@lunn.ch,
+	danishanwar@ti.com,
+	vadim.fedorenko@linux.dev,
+	geert+renesas@glider.be,
+	mpe@ellerman.id.au,
+	lorenzo@kernel.org,
+	lukas.bulwahn@redhat.com
+Cc: netdev@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	dong100@mucse.com
+Subject: [PATCH net-next v16 0/5] Add driver for 1Gbe network chips from MUCSE
+Date: Mon, 27 Oct 2025 11:29:00 +0800
+Message-Id: <20251027032905.94147-1-dong100@mucse.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 mm-new 07/15] khugepaged: generalize
- collapse_huge_page for mTHP collapse
-To: Nico Pache <npache@redhat.com>, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-doc@vger.kernel.org
-Cc: david@redhat.com, ziy@nvidia.com, lorenzo.stoakes@oracle.com,
- Liam.Howlett@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com,
- corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org,
- mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
- baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
- wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com,
- vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com,
- yang@os.amperecomputing.com, kas@kernel.org, aarcange@redhat.com,
- raquini@redhat.com, anshuman.khandual@arm.com, catalin.marinas@arm.com,
- tiwai@suse.de, will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz,
- cl@gentwo.org, jglisse@google.com, surenb@google.com, zokeefe@google.com,
- hannes@cmpxchg.org, rientjes@google.com, mhocko@suse.com,
- rdunlap@infradead.org, hughd@google.com, richard.weiyang@gmail.com,
- lance.yang@linux.dev, vbabka@suse.cz, rppt@kernel.org, jannh@google.com,
- pfalcato@suse.de
-References: <20251022183717.70829-1-npache@redhat.com>
- <20251022183717.70829-8-npache@redhat.com>
-From: Baolin Wang <baolin.wang@linux.alibaba.com>
-In-Reply-To: <20251022183717.70829-8-npache@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpsz:mucse.com:qybglogicsvrgz:qybglogicsvrgz3a-1
+X-QQ-XMAILINFO: Nj/x19RzgDOAfKfVhBIh2V6tyS9Hbt9vBpFAfLJuiKBwII3+FWUMh3AF
+	ovpg+RInuyEQO1Ik6JoK7r1wI9f+U9RxpDOpacNQNgkDIcOyhQhXL2cj9O7cyA8YHqSAjoK
+	F31lXWD3pwpPCDoy9PBrmEWkNn7emkhzMP0awIFFuocBPsgcBI2DkjhmWn9oWeoCUXgYseJ
+	FJFBL3zQ7dgh1bihISkHYE3xWCdD107GX+2gA+N9ojTmQroakOtThzp2/NoIexFVWf5SEWg
+	Wpc0EufxF8UWvr+sf5BFu+Ji4BmSZ98fbl3U95P08seeQ7kIfIlusl/mIKAMrqlA3c9UtOZ
+	6MKiGzsSSpillkn23VGxyRtl5MioRljYsr7j877P2Kmk46uyrFbK+iKghDJXcIXhiSIAXK0
+	CPvJWboqTKasBNp8rjMf9t26Ni9W44ZR9tiVWO6jQfuSNHVIM7+CaFbbsvCan9ns/QewNjb
+	DqWNzU24VfL2yau15pRUOBW8hEroz99XYXhr1ZJu5QOca2Xpe0G1cpS1khRKLHwOwUpPbPp
+	mLGEmto4oxcSuNIvCo+3o9+KKF2bgEmkBF2da9GJ7y/ZNu3+NdUB09dWMrHF2Reu4G/Twtt
+	NnULn9ySUGmXLIIQyQJHONONjQ9dWqy0BLMrK0y6IRv1VniTP1tJ2OXjoJxPLBdPYN20gs2
+	fmPynuvmWHzZol8uaskBjgjHRfKBcsYvZQDT+lCVKHsse6Duy7zBBZU+14jOav6Q8I6asn1
+	REllJKR6BynlG3LnFM7T8U2isMaWsFuuMZKsb51hZQ3hsSEKm7LiJLiWbiSk4wYwPuCjuTn
+	MtKQHNsmq4RlKw+YLSmRAx1DFz7dmuDQHPFl5c17NGYtC1NsY4OECohO+iqBmBG00UXkgbY
+	/2gOuv4YSwQnFO1FBFze1UMxSU2if10H/Euc90+2WpOekQwekKR1NwvmassZMCHuAkF2IH6
+	UA+cFbxGQ3SV5q9ZoNZcsZy88L2Uru5DFfqretuVRXhHmv+yGqMmWxkE4NONdUqpET3x1Zb
+	XYWszrZ5eoeUacK5zIIziy+FhDAa0=
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
+X-QQ-RECHKSPAM: 0
 
+Hi maintainers,
 
+This patch series adds support for MUCSE RNPGBE 1Gbps PCIe Ethernet controllers
+(N500/N210 series), including build infrastructure, hardware initialization,
+mailbox (MBX) communication with firmware, and basic netdev registration
+(Can show mac witch is got from firmware, and tx/rx will be added later).
 
-On 2025/10/23 02:37, Nico Pache wrote:
-> Pass an order and offset to collapse_huge_page to support collapsing anon
-> memory to arbitrary orders within a PMD. order indicates what mTHP size we
-> are attempting to collapse to, and offset indicates were in the PMD to
-> start the collapse attempt.
-> 
-> For non-PMD collapse we must leave the anon VMA write locked until after
-> we collapse the mTHP-- in the PMD case all the pages are isolated, but in
-> the mTHP case this is not true, and we must keep the lock to prevent
-> changes to the VMA from occurring.
-> 
-> Signed-off-by: Nico Pache <npache@redhat.com>
-> ---
+Series breakdown (5 patches):
+ 01/05: net: ethernet/mucse: Add build support for rnpgbe
+       - Kconfig/Makefile for MUCSE vendor, basic PCI probe (no netdev)
+ 02/05: net: ethernet/mucse: Add N500/N210 chip support
+       - netdev allocation, BAR mapping
+ 03/05: net: ethernet/mucse: Add basic MBX ops for PF-FW communication
+       - base read/write, write with poll ack, poll and read data
+ 04/05: net: ethernet/mucse: Add FW commands (sync, reset, MAC query)
+       - FW sync retry logic, MAC address retrieval, reset hw with
+         base mbx ops in patch4
+ 05/05: net: ethernet/mucse: Complete netdev registration
+       - HW reset, MAC setup, netdev_ops registration
 
-LGTM. And passed my mTHP collapse testing cases. So:
-Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
-Tested-by: Baolin Wang <baolin.wang@linux.alibaba.com>
+Changelog:
+v15 -> v16:
+  [patch 4/5]:
+  1. Remove local variable 'info' in mucse_mbx_get_info. (Vadim Fedorenko)
+
+links:
+v15: https://lore.kernel.org/netdev/20251022081351.99446-6-dong100@mucse.com/
+v14: https://lore.kernel.org/netdev/20251014072711.13448-1-dong100@mucse.com/
+v13: https://lore.kernel.org/netdev/20250922014111.225155-1-dong100@mucse.com/
+v12: https://lore.kernel.org/netdev/20250916112952.26032-1-dong100@mucse.com/
+v11: https://lore.kernel.org/netdev/20250909120906.1781444-1-dong100@mucse.com/
+v10: https://lore.kernel.org/netdev/20250903025430.864836-1-dong100@mucse.com/
+v9 : https://lore.kernel.org/netdev/20250828025547.568563-1-dong100@mucse.com/
+v8 : https://lore.kernel.org/netdev/20250827034509.501980-1-dong100@mucse.com/
+v7 : https://lore.kernel.org/netdev/20250822023453.1910972-1-dong100@mucse.com
+v6 : https://lore.kernel.org/netdev/20250820092154.1643120-1-dong100@mucse.com/
+v5 : https://lore.kernel.org/netdev/20250818112856.1446278-1-dong100@mucse.com/
+v4 : https://lore.kernel.org/netdev/20250814073855.1060601-1-dong100@mucse.com/
+v3 : https://lore.kernel.org/netdev/20250812093937.882045-1-dong100@mucse.com/
+v2 : https://lore.kernel.org/netdev/20250721113238.18615-1-dong100@mucse.com/
+v1 : https://lore.kernel.org/netdev/20250703014859.210110-1-dong100@mucse.com/
+
+Dong Yibo (5):
+  net: rnpgbe: Add build support for rnpgbe
+  net: rnpgbe: Add n500/n210 chip support with BAR2 mapping
+  net: rnpgbe: Add basic mbx ops support
+  net: rnpgbe: Add basic mbx_fw support
+  net: rnpgbe: Add register_netdev
+
+ .../device_drivers/ethernet/index.rst         |   1 +
+ .../device_drivers/ethernet/mucse/rnpgbe.rst  |  17 +
+ MAINTAINERS                                   |   8 +
+ drivers/net/ethernet/Kconfig                  |   1 +
+ drivers/net/ethernet/Makefile                 |   1 +
+ drivers/net/ethernet/mucse/Kconfig            |  33 ++
+ drivers/net/ethernet/mucse/Makefile           |   7 +
+ drivers/net/ethernet/mucse/rnpgbe/Makefile    |  11 +
+ drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h    |  73 ++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_chip.c   | 143 ++++++
+ drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h |  17 +
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_main.c   | 318 ++++++++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c    | 406 ++++++++++++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h    |  20 +
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c | 191 ++++++++
+ .../net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h |  88 ++++
+ 16 files changed, 1335 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/mucse/rnpgbe.rst
+ create mode 100644 drivers/net/ethernet/mucse/Kconfig
+ create mode 100644 drivers/net/ethernet/mucse/Makefile
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/Makefile
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_chip.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_hw.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_main.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx.h
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.c
+ create mode 100644 drivers/net/ethernet/mucse/rnpgbe/rnpgbe_mbx_fw.h
+
+-- 
+2.25.1
+
 
