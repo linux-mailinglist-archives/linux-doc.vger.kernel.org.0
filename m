@@ -1,120 +1,111 @@
-Return-Path: <linux-doc+bounces-64748-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64750-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60D62C0FA03
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 18:27:12 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id EED9FC0FA30
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 18:29:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 248F54E3524
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 17:27:11 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 1F23F19C67BD
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 17:30:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 639B63161A3;
-	Mon, 27 Oct 2025 17:27:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F2E63168F3;
+	Mon, 27 Oct 2025 17:29:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="FDgk9zr8"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="iCrUOTis"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from out-184.mta0.migadu.com (out-184.mta0.migadu.com [91.218.175.184])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB4A43161A5;
-	Mon, 27 Oct 2025 17:27:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B7A13090C1;
+	Mon, 27 Oct 2025 17:29:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.184
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761586027; cv=none; b=pYnQAS2/9eEUUbS370o3wzWbkpHeZHQBsbWSFgNW5mGyx2hM460+dRIOOB6E1bPyz0DGcuwbYaWv7z1HLF1hqsKCuJoRTlcc1eD+Pp8YZxCERFyUiPdRB/7NuOloPw3RTU5JpRhhcj9M8XCpgsnbVlx57/LfITxqK88ZBqWBg3I=
+	t=1761586168; cv=none; b=N8N1AEW20R/KR50xgD0P2+Wt2zmZng0MqjLH3b3dtpaUq8SMNzGyHQDbYnZ8rYFLDwrm0Yamo/xNtP7vkHmgQSjNDXeHLRQU83eOsPs+5Cq6roLqm15PYXPguHEW22N0yKHpqcoGpR1jDPUACn2TsX34A9/tQWpGnjU4jDPK/dY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761586027; c=relaxed/simple;
-	bh=0cWFS/aHvcf6zGPoUr9HGepAntK8bTSB3I4wKAoK1Hk=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=sq1sJYpQkdXQXs68OFUWD70GBofGnGktAvKXZgImnm6R2mkfhtyw1SCGN5cHTHi1cq5Z8JvYEV+dG065rf1N6WBYC3Z/Mu1ttD7hN5Ajy7nVuxhDXwuZD6RcB0W+zAL9kelEHCN7qKKn+SgYe4Y24Y4JP1lGFfPUBA87DcCBv7Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=FDgk9zr8; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net CFC35406FB
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1761586025; bh=7M4hB0gT8f5ZWd0pSPRtSbMpf9vqmrkcHvnua6p+fBs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=FDgk9zr8hgNZBzf91L7NWjqOhK5QzZhW2xhypC3RxH8Hk13A16klh+m+mWsy6NWFG
-	 b5DB31H4/RY5Ve2B7+Acm97xSst9+4TQlwFosLzR6rGSiE4Bz02OyxOxfud3DqZFGS
-	 LmokGpD+KAG4EDx/pu5aPzNv4OLZXg1ZXTlOp2loq6BNrGbSZeWx5znB02QYKrLQV6
-	 jUjyFd9WLM1rxjbVMUpqDBw2JXndYwpozr6ICkWR97hk0upoYfAGhcRmJEELY7AClp
-	 goLYtqJSIQalwnRT19e2t9l+ONyu9kJAm6ToOKNuP2VGS/T0P2YDdSzMDy2ZTkVqQW
-	 mIXWgR0ChYk7A==
-Received: from localhost (c-73-14-55-248.hsd1.co.comcast.net [73.14.55.248])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id CFC35406FB;
-	Mon, 27 Oct 2025 17:27:04 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Thorsten Leemhuis <linux@leemhuis.info>
-Cc: workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- regressions@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1 02/30] docs: reporting-issues: tweak the reference
- section intro
-In-Reply-To: <d94aa32d4a1ed5ef9d0f768d05e64987f4a1ae69.1761481839.git.linux@leemhuis.info>
-References: <cover.1761481839.git.linux@leemhuis.info>
- <d94aa32d4a1ed5ef9d0f768d05e64987f4a1ae69.1761481839.git.linux@leemhuis.info>
-Date: Mon, 27 Oct 2025 11:27:04 -0600
-Message-ID: <87qzuontlj.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1761586168; c=relaxed/simple;
+	bh=t8Di+fcs9Ip6O8f1bPMb7LPCPEQDcc2NLemRSEhkSzY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=D2p9KNi3E8aaBTVGSZqUzK4ZKxRlyWNcl8s2w/gkejrMh8aSgubW4rJ2PX3Ui4sb5xgPYhRZiaewU/kCAcGnIcI1Rhvfb+6PT7saKv/caYE40PcGavzEFP8a+qpjueTE2IU2GKiIjUJnFhAoHEaOoW8nfQ7wKMVUcvVKquUkrOQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=iCrUOTis; arc=none smtp.client-ip=91.218.175.184
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Date: Mon, 27 Oct 2025 10:29:06 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1761586154;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Hkk/4jH6EBlfw+AjqDX/N89lF3rHfzq/zegSXixlTQg=;
+	b=iCrUOTisVmn0Gyrl01InGTa2hzUTpre3WhDeV4nG+iN68gBLiKGojyC5U0wmDX0tmxfP8z
+	yQJdQfCm8TAAg8+SpB/IJ2zMuTZ+0wMy+kGHMIsY7qgpVRe8LNBWf9cwZImH4btrtwfuDw
+	NENplaCH8pXB94SRHmPauHF+yap+3C8=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Shakeel Butt <shakeel.butt@linux.dev>
+To: jinji zhong <jinji.z.zhong@gmail.com>
+Cc: minchan@kernel.org, senozhatsky@chromium.org, 
+	philipp.reisner@linbit.com, lars.ellenberg@linbit.com, christoph.boehmwalder@linbit.com, 
+	corbet@lwn.net, tj@kernel.org, hannes@cmpxchg.org, mkoutny@suse.com, 
+	axboe@kernel.dk, mhocko@kernel.org, roman.gushchin@linux.dev, 
+	akpm@linux-foundation.org, terrelln@fb.com, dsterba@suse.com, muchun.song@linux.dev, 
+	linux-kernel@vger.kernel.org, drbd-dev@lists.linbit.com, linux-doc@vger.kernel.org, 
+	cgroups@vger.kernel.org, linux-block@vger.kernel.org, linux-mm@kvack.org, 
+	zhongjinji@honor.com, liulu.liu@honor.com, feng.han@honor.com
+Subject: Re: [RFC PATCH 0/3] Introduce per-cgroup compression priority
+Message-ID: <k6jwua5rlkds7dxomwvxotwtjq4hauyevvyoxd5hjz733k7kk5@mmezlradxhpu>
+References: <cover.1761439133.git.jinji.z.zhong@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1761439133.git.jinji.z.zhong@gmail.com>
+X-Migadu-Flow: FLOW_OUT
 
-Thorsten Leemhuis <linux@leemhuis.info> writes:
+Hi Jinji,
 
-> Small improvements to the intro of the reference section.
+On Sun, Oct 26, 2025 at 01:05:07AM +0000, jinji zhong wrote:
+> Hello everyone,
+> 
+> On Android, different applications have varying tolerance for
+> decompression latency. Applications with higher tolerance for
+> decompression latency are better suited for algorithms like ZSTD,
+> which provides high compression ratio but slower decompression
+> speed. Conversely, applications with lower tolerance for
+> decompression latency can use algorithms like LZ4 or LZO that
+> offer faster decompression but lower compression ratios. For example,
+> lightweight applications (with few anonymous pages) or applications
+> without foreground UI typically have higher tolerance for decompression
+> latency.
+> 
+> Similarly, in memory allocation slow paths or under high CPU
+> pressure, using algorithms with faster compression speeds might
+> be more appropriate.
+> 
+> This patch introduces a per-cgroup compression priority mechanism,
+> where different compression priorities map to different algorithms.
+> This allows administrators to select appropriate compression
+> algorithms on a per-cgroup basis.
+> 
+> Currently, this patch is experimental and we would greatly
+> appreciate community feedback. I'm uncertain whether obtaining
+> compression priority via get_cgroup_comp_priority in zram is the
+> best approach. While this implementation is convenient, it seems
+> somewhat unusual. Perhaps the next step should be to pass
+> compression priority through page->private.
+> 
 
-That's a bit uninformative ... what is the purpose of these
-improvements?  That information would be especially helpful in a patch
-that simply replaces that section altogether.
+Setting aside the issues in the implementation (like changing
+compression algorithm of a cgroup while it already has some memory
+compressed using older algo), I don't think memcg interface is the right
+way to go about it. We usually add interfaces to memcg that have
+hierarchical semantics.
 
-> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
-> ---
->  .../admin-guide/reporting-issues.rst          | 67 +++++++++----------
->  1 file changed, 31 insertions(+), 36 deletions(-)
->
-> diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
-> index 3bc47afaf85ea0..90b50c27c0d2b6 100644
-> --- a/Documentation/admin-guide/reporting-issues.rst
-> +++ b/Documentation/admin-guide/reporting-issues.rst
-> @@ -244,42 +244,37 @@ The reference section below explains each of these steps in more detail.
-
-[...]
-
-> +The step-by-step guide above outlines all the major steps in brief fashion,
-> +which usually covers everything required. But even experienced users will
-> +sometimes wonder how to actually realize some of those steps or why they are
-> +needed; there are also corner cases the guide ignores for readability. That is
-> +what the entries in this reference section are for, which provide additional
-> +information for each of the steps in the detailed guide.
-> +
-> +A few words of general advice:
-> +
-> +* The Linux kernel developers are well aware that reporting bugs to them is
-> +  more complicated and demanding than in other FLOSS projects. Quite a few
-> +  would love to make it simpler. But that would require convincing a lot of
-> +  developers to change their habits; it, furthermore, would require improvements
-> +  on several technical fronts and people that constantly take care of various
-> +  things. Nobody has stepped up to do or fund that work.
-
-This paragraph ... essentially says "we're making it hard on you because
-kernel developers can't be bothered to work on GitHub".  But a lot of
-the complexity, as reflected in this guide, has to do with properly
-gathering the information that is needed to have a hope at tracking a
-problem down.  I'm not sure this paragraph is needed at all but, if
-you're going to keep it, have it at least reflect that the complexity of
-problem reporting has a lot to do with the complexity of the problem
-domain rather than developers who are stuck in their habits.
-
-Otherwise seems OK.
-
-Thanks,
-
-jon
+Anyways if you want to have this feature, I think BPF might be the way
+to get this flexibility without introducing any stable API and then you
+can experiment and evaluate if this really helps.
 
