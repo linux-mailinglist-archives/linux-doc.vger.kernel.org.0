@@ -1,208 +1,328 @@
-Return-Path: <linux-doc+bounces-64702-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64707-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5D6BC0D90F
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 13:36:28 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0F8FC0D912
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 13:36:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0B72E3A96E7
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 12:29:46 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 65FB434DB29
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Oct 2025 12:36:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 381B230F7F6;
-	Mon, 27 Oct 2025 12:28:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4906429A9F9;
+	Mon, 27 Oct 2025 12:35:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="UnVzCyFu";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="wgRX50jh";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="UnVzCyFu";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="wgRX50jh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03F2630E83B
-	for <linux-doc@vger.kernel.org>; Mon, 27 Oct 2025 12:28:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56D372E2EEE
+	for <linux-doc@vger.kernel.org>; Mon, 27 Oct 2025 12:35:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761568117; cv=none; b=fzZyd/DKq4FS6W2eOQN6coV/9Sz21OQvjkNwS08QiKIHxAGjzooH2wJy3Rfws6QOQCJ6WpBIf+U9hof3JMZ2+NyN3zJFfsW81U+So5c/KcohYBb9QMsopAHElBlyM/sLv5pzP5eLoXs6LNei8yLw/asBgqqnAo3xoG2ClVObO3I=
+	t=1761568536; cv=none; b=bJr6/ssG0B8enBQWnwqeUhFYHpfgXZGMLW+cyKm5BnUEd5it+PiZe5fog07FsMhRFu6/BfyORSGl2G0/k02FJ7M6R1xxKY2m7BYMN+AYoYF9TfJmtCKZTzE5WtZBpQwWOFLHABjWxV9oACZsXoApEX+2Ty8iPyqBm9hDZ0ZC5/M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761568117; c=relaxed/simple;
-	bh=L9LxTCJnLidjQ0FINVcgyW2iNiTY0y7dkDTbhCm44l4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=qnAuHvQjnTgzwIzCN/LeM1drJCLm0TV0FAZ8zyx+SIoGiJTFBQaxm57SYZOyYRn8qD9WLB5i37IVGTCeZT9QUesICO7NhxFKikroHM8rl+X5mpn4Y9kOXROt9tzxvADp0OGhMFu4LdoRqs7vqHYNqoPdlYNIXlhNZAkz3maWLZk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1vDMKX-0004fr-TA; Mon, 27 Oct 2025 13:28:09 +0100
-Received: from dude04.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::ac])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1vDMKV-005he0-1l;
-	Mon, 27 Oct 2025 13:28:07 +0100
-Received: from ore by dude04.red.stw.pengutronix.de with local (Exim 4.98.2)
-	(envelope-from <ore@pengutronix.de>)
-	id 1vDMKV-000000047aM-1o48;
-	Mon, 27 Oct 2025 13:28:07 +0100
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Andrew Lunn <andrew@lunn.ch>,
-	Jakub Kicinski <kuba@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Donald Hunter <donald.hunter@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Kory Maincent <kory.maincent@bootlin.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Nishanth Menon <nm@ti.com>
-Cc: Oleksij Rempel <o.rempel@pengutronix.de>,
-	kernel@pengutronix.de,
-	linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org,
-	UNGLinuxDriver@microchip.com,
-	linux-doc@vger.kernel.org,
-	Michal Kubecek <mkubecek@suse.cz>,
-	Roan van Dijk <roan@protonic.nl>
-Subject: [PATCH net-next v8 4/4] net: phy: dp83td510: add MSE interface support for 10BASE-T1L
-Date: Mon, 27 Oct 2025 13:28:01 +0100
-Message-ID: <20251027122801.982364-5-o.rempel@pengutronix.de>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251027122801.982364-1-o.rempel@pengutronix.de>
-References: <20251027122801.982364-1-o.rempel@pengutronix.de>
+	s=arc-20240116; t=1761568536; c=relaxed/simple;
+	bh=yDieJ2R7pYIULGr3oSfWytu9e7mAG1qiLzmXt8zHbDk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ORhTSXaGSB8wI7wae255Rzmk3vXycomHsSLvm7268PWyXOPYX0Tn+vLdbCK1ny49cJykH7FjKAIUgopSPnDN2CTU22wFuZ/TznJzv7aDPEA7X9bhfhe0+obwzLdkTY1aCUITQxtsI38ExpOHpT4+v+/0PWi8LiKq+UdGJrvMVnc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=UnVzCyFu; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=wgRX50jh; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=UnVzCyFu; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=wgRX50jh; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 7E40A1F45F;
+	Mon, 27 Oct 2025 12:35:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1761568532; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=L8YKDcVbLcdtv9vkqeCvVb34FYIxMDyVf28aoaptO9U=;
+	b=UnVzCyFu/9tV4cUYX7ePfRXZI8Vpt0si19CyG2sTGr/pkQ41Y+3y08L3xZtAlosgqX0ciA
+	vIngZt/V0Zph2iGsGKAJikZ2KkwCtyYRNuAWAq5Yzh+V+dR+byEfOz4tA+ExIIz6jsTrJk
+	ro9Qk9TfzDdpZArEypcvYM42q17jRKc=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1761568532;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=L8YKDcVbLcdtv9vkqeCvVb34FYIxMDyVf28aoaptO9U=;
+	b=wgRX50jhSX/rXiTHvBOLccLYqxxWZ9/R9trmhcsIXjY2o4ixmi5nsO2W7w2+6g6LalyJY/
+	OkWsXKq9DY6XeNBQ==
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=UnVzCyFu;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=wgRX50jh
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1761568532; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=L8YKDcVbLcdtv9vkqeCvVb34FYIxMDyVf28aoaptO9U=;
+	b=UnVzCyFu/9tV4cUYX7ePfRXZI8Vpt0si19CyG2sTGr/pkQ41Y+3y08L3xZtAlosgqX0ciA
+	vIngZt/V0Zph2iGsGKAJikZ2KkwCtyYRNuAWAq5Yzh+V+dR+byEfOz4tA+ExIIz6jsTrJk
+	ro9Qk9TfzDdpZArEypcvYM42q17jRKc=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1761568532;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=L8YKDcVbLcdtv9vkqeCvVb34FYIxMDyVf28aoaptO9U=;
+	b=wgRX50jhSX/rXiTHvBOLccLYqxxWZ9/R9trmhcsIXjY2o4ixmi5nsO2W7w2+6g6LalyJY/
+	OkWsXKq9DY6XeNBQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1E70513693;
+	Mon, 27 Oct 2025 12:35:32 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id 9sH9BRRn/2hTGwAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Mon, 27 Oct 2025 12:35:32 +0000
+Message-ID: <3edea192-6a3f-44f5-b570-7033776e2ce4@suse.de>
+Date: Mon, 27 Oct 2025 13:35:31 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 0/3] Add splash DRM client
+To: Maxime Ripard <mripard@kernel.org>, Francesco Valla <francesco@valla.it>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Sam Ravnborg <sam@ravnborg.org>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+ linux-embedded@vger.kernel.org
+References: <20251027-drm_client_splash-v1-0-00698933b34a@valla.it>
+ <yq4btdc5qqukuqps7y53dratmu64ghyifgprlndnk5rbgml4of@rvca75sncvsm>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <yq4btdc5qqukuqps7y53dratmu64ghyifgprlndnk5rbgml4of@rvca75sncvsm>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Level: 
+X-Spam-Flag: NO
+X-Rspamd-Queue-Id: 7E40A1F45F
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-4.51 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:mid];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	FREEMAIL_CC(0.00)[linux.intel.com,gmail.com,ffwll.ch,lwn.net,redhat.com,ravnborg.org,vger.kernel.org,lists.freedesktop.org];
+	RCVD_TLS_ALL(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[suse.de:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[bootlin.com:url,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:mid]
+X-Spam-Score: -4.51
 
-Implement get_mse_capability() and get_mse_snapshot() for the DP83TD510E
-to expose its Mean Square Error (MSE) register via the new PHY MSE
-UAPI.
+Hi Francenso, Maxime,
 
-The DP83TD510E does not document any peak MSE values; it only exposes
-a single average MSE register used internally to derive SQI. This
-implementation therefore advertises only PHY_MSE_CAP_AVG, along with
-LINK and channel-A selectors. Scaling is fixed to 0xFFFF, and the
-refresh interval/number of symbols are estimated from 10BASE-T1L
-symbol rate (7.5 MBd) and typical diagnostic intervals (~1 ms).
+Am 27.10.25 um 11:09 schrieb Maxime Ripard:
+> Hi,
+>
+> On Mon, Oct 27, 2025 at 12:03:00AM +0100, Francesco Valla wrote:
+>> this patchset adds a new DRM client offering splash functionalities,
+>> able to draw to screen:
+>>
+>>    - a colored background;
+> So, I like that part, and we were recently discussing about this.
 
-For 10BASE-T1L deployments, SQI is a reliable indicator of link
-modulation quality once the link is established, but it does not
-indicate whether autonegotiation pulses will be correctly received
-in marginal conditions. MSE provides a direct measurement of slicer
-error rate that can be used to evaluate if autonegotiation is likely
-to succeed under a given cable length and condition. In practice,
-testing such scenarios often requires forcing a fixed-link setup to
-isolate MSE behaviour from the autonegotiation process.
+The panic screen has configurable foreground/background colors. Maybe we 
+can harmonize these settings.
 
-Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
-Reviewed-by: Maxime Chevallier <maxime.chevallier@bootlin.com>
----
-changes v8:
-- use enum phy_mse_channel channel instead of u32
-changes v7:
-- add Reviewed-by
----
- drivers/net/phy/dp83td510.c | 62 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
+>
+>>    - a single-line text message, which can be set through sysfs or
+>>      directly from the kernel command line;
 
-diff --git a/drivers/net/phy/dp83td510.c b/drivers/net/phy/dp83td510.c
-index 23af1ac194fa..d75dae6071ad 100644
---- a/drivers/net/phy/dp83td510.c
-+++ b/drivers/net/phy/dp83td510.c
-@@ -61,6 +61,7 @@
- #define DP83TD510E_MASTER_SLAVE_RESOL_FAIL	BIT(15)
- 
- #define DP83TD510E_MSE_DETECT			0xa85
-+#define DP83TD510E_MSE_MAX			U16_MAX
- 
- #define DP83TD510_SQI_MAX	7
- 
-@@ -249,6 +250,64 @@ struct dp83td510_priv {
- #define DP83TD510E_ALCD_COMPLETE			BIT(15)
- #define DP83TD510E_ALCD_CABLE_LENGTH			GENMASK(10, 0)
- 
-+static int dp83td510_get_mse_capability(struct phy_device *phydev,
-+					struct phy_mse_capability *cap)
-+{
-+	/* DP83TD510E documents only a single (average) MSE register
-+	 * (used to derive SQI); no peak or worst-peak counters are
-+	 * described. Advertise only PHY_MSE_CAP_AVG.
-+	 */
-+	cap->supported_caps = PHY_MSE_CAP_AVG;
-+	/* 10BASE-T1L is a single-pair medium, so there are no B/C/D channels.
-+	 * We still advertise PHY_MSE_CAP_CHANNEL_A to indicate that the PHY
-+	 * can attribute the measurement to a specific pair (the only one),
-+	 * rather than exposing it only as a link-aggregate.
-+	 *
-+	 * Rationale:
-+	 *  - Keeps the ethtool MSE_GET selection logic consistent: per-channel
-+	 *    (A/B/C/D) is preferred over WORST/LINK, so userspace receives a
-+	 *    CHANNEL_A nest instead of LINK.
-+	 *  - Signals to tools that "per-pair" data is available (even if there's
-+	 *    just one pair), avoiding the impression that only aggregate values
-+	 *    are supported.
-+	 *  - Remains compatible with multi-pair PHYs and uniform UI handling.
-+	 *
-+	 * Note: WORST and other channels are not advertised on 10BASE-T1L.
-+	 */
-+	cap->supported_caps |= PHY_MSE_CHANNEL_A | PHY_MSE_CAP_LINK;
-+	cap->max_average_mse = DP83TD510E_MSE_MAX;
-+
-+	/* The datasheet does not specify the refresh rate or symbol count,
-+	 * but based on similar PHYs and standards, we can assume a common
-+	 * value. For 10BASE-T1L, the symbol rate is 7.5 MBd. A common
-+	 * diagnostic interval is around 1ms.
-+	 * 7.5e6 symbols/sec * 0.001 sec = 7500 symbols.
-+	 */
-+	cap->refresh_rate_ps = 1000000000; /* 1 ms */
-+	cap->num_symbols = 7500;
-+
-+	return 0;
-+}
-+
-+static int dp83td510_get_mse_snapshot(struct phy_device *phydev,
-+				      enum phy_mse_channel channel,
-+				      struct phy_mse_snapshot *snapshot)
-+{
-+	int ret;
-+
-+	if (channel != PHY_MSE_CHANNEL_LINK &&
-+	    channel != PHY_MSE_CHANNEL_A)
-+		return -EOPNOTSUPP;
-+
-+	ret = phy_read_mmd(phydev, MDIO_MMD_VEND2, DP83TD510E_MSE_DETECT);
-+	if (ret < 0)
-+		return ret;
-+
-+	snapshot->average_mse = ret;
-+
-+	return 0;
-+}
-+
- static int dp83td510_led_brightness_set(struct phy_device *phydev, u8 index,
- 					enum led_brightness brightness)
- {
-@@ -893,6 +952,9 @@ static struct phy_driver dp83td510_driver[] = {
- 	.get_phy_stats	= dp83td510_get_phy_stats,
- 	.update_stats	= dp83td510_update_stats,
- 
-+	.get_mse_capability = dp83td510_get_mse_capability,
-+	.get_mse_snapshot = dp83td510_get_mse_snapshot,
-+
- 	.led_brightness_set = dp83td510_led_brightness_set,
- 	.led_hw_is_supported = dp83td510_led_hw_is_supported,
- 	.led_hw_control_set = dp83td510_led_hw_control_set,
+Put it into the kernel config.
+
+>>    - a very simple progress bar, which can be driven through sysfs;
+
+Once you have options to control these settings from user space, you 
+should do it in user space entirely. As Maxime suggested, please improve 
+plymouth for anything with animation.
+
+>>    - a static image (optional).
+
+Board vendors often provide an image, see /sys/firmware/acpi/bgrt/. This 
+is a candidate for display, or the penguin or a custom image. Please 
+make it configurable by Kconfig. Again, if you need policy and 
+heuristics for deciding what to display, you better do this in user space.
+
+> But there's no reason to have all that in the kernel, and we already
+> have userspace components to do so (plymouth being the main "mainstream"
+> one).
+>
+>> Once compiled inside the kernel, the client can be enabled through the
+>> command line specifying the drm_client_lib.active=splash parameter.
+>>
+>> == Motivation ==
+>>
+>> The motivation behind this work is to offer to embedded system
+>> developers a new path for a simple activation of the display(s)
+>> connected to their system, with the following usecases:
+>>
+>>    - bootsplash - possibly displaying even before init;
+>>    - early activation of the display pipeline, in particular whenever one
+>>      component of the pipeline (e.g.: a panel) takes a non-negligible
+>>      time to initialize;
+>>    - recovery systems, where the splash client can offer a simple feedback
+>>      for unattended recovery tasks;
+>>    - update systems, where the splash client can offer a simple feedback
+>>      for unattended update tasks.
+> If plymouth cannot be used by embedded systems for some reason, then you
+> should work on a plymouth alternative.
+
+Agreed. With an updater running in user space, that process should also 
+manage the display update. No need for this in the kernel.
+
+>
+>> While the first seems the most obvious one, it was the second that acted
+>> as the driver, as in the past I had to implement a ugly workaround using
+>> a systemd generator to kickstart the initialization of a display and
+>> shave ~400ms of boot time.
+>>
+>> The last 2 usecase, instead, are the reason I dropped the "boot" part
+>> from bootsplash.
+>>
+>> == Implementation details ==
+>>
+>> The design is quite simple, with a kernel thread doing the heavylifting
+>> for the rendering part and some locking to protect interactions with it.
+>>
+>> The splash image is loaded using the firmware framework, with the client
+>> expecting to find a binary dump having the right dimensions (width and
+>> height) and FOURCC format for each modeset. Given a 1920x1080 RGB888
+>> modeset, the client will for example search for a firmware named:
+>>
+>>     drm_splash_1920x1080_RG24.raw
+>>
+>> If the firmware cannot be loaded directly, the NOUEVENT sysfs fallback
+>> mechanism is used to let userspace load the appropriate image.
+>>
+>> == Testing ==
+>>
+>> Testing was done on qemu (both with vkms and bochs drivers), on a HDMI
+>> display connected to a Beagleplay and on a ILI9341 SPI display connected
+>> to a i.MX93 FRDM board. All these platforms revealed different
+>> weaknesses that were hopefully removed.
+>>
+>> == Open points / issues ==
+>>
+>> The reason for this being an RFC is that there are several open points:
+>>
+>>    - Support for tiled connectors should be there, but has not been
+>>      tested. Any idea on how to test it?
+> Did you mean tiled formats?
+>
+>>    - I'm not entirely convinced that using the firmware framework to load
+>>      the images is the right path. The idea behind it was to re-use the
+>>      compressed firmware support, but then I discovered it is not there
+>>      for built-in firmware.
+> Yeah, firmware loading for this has a few issues (being tedious to setup
+> for when built-in being one). I think just going the fbdev penguin road
+> is a better choice: you provide the path, and it's embedded in the
+> kernel directly.
+>
+>>    - Again on the firmware loading: CONFIG_LOADPIN would interfere with
+>>      sysfs loading.
+>>    - And again: FW_ACTION_NOUEVENT only has one user inside the kernel,
+>>      leading me to think it is de-facto deprecated. And still, uevents
+>>      for firmware loading seem frowned upon these days...
+>>    - Generating binary dumps for... basically any format is not so
+>>      straightforward. I crafted a Python tool with AI help which seems
+>>      to work quite well, but I honestly did not yet understood which is
+>>      the policy for AI-generated code inside the kernel, so it is not
+>>      included in this patch set. All client code is genuine, though.
+> BMP is simple enough to support so we should probably use that instead
+> of a custom format.
+
+file /sys/firmware/acpi/bgrt/image
+/sys/firmware/acpi/bgrt/image: PC bitmap, Windows 3.x format, 768 x 256 
+x 24, image size 589824, cbSize 589878, bits offset 54
+
+That should probably be the format for now unless your firmware uses 
+something else natively. Code for reading a BMP file can be found in the 
+efifb driver. [1]
+
+[1] 
+https://elixir.bootlin.com/linux/v6.17.5/source/drivers/video/fbdev/efifb.c#L24
+
+Apart from the criticism for complexity, I do like the idea of having a 
+splash screen.
+
+Best regards
+Thomas
+
+>
+> Maxime
+
 -- 
-2.47.3
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstrasse 146, 90461 Nuernberg, Germany
+GF: Ivo Totev, Andrew Myers, Andrew McDonald, Boudien Moerman
+HRB 36809 (AG Nuernberg)
+
 
 
