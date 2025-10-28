@@ -1,218 +1,404 @@
-Return-Path: <linux-doc+bounces-64786-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64788-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74416C1401A
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 11:10:08 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D8FEC14689
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 12:40:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id DB6B319C52A9
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 10:10:27 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 839E84E55AD
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 11:40:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BE38930217D;
-	Tue, 28 Oct 2025 10:09:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 97D73307ADA;
+	Tue, 28 Oct 2025 11:40:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="DM4GyyeD"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mAFHpO/E"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-119.freemail.mail.aliyun.com (out30-119.freemail.mail.aliyun.com [115.124.30.119])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E4E6246327;
-	Tue, 28 Oct 2025 10:09:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.119
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC93B1BC41
+	for <linux-doc@vger.kernel.org>; Tue, 28 Oct 2025 11:40:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761646199; cv=none; b=BnuxvHPyLi/Mm/uhZ67b6H+5DxLuH4vhBzr5KfkllewiM3H+VHFd5BC9bhAKNtdEz1ndi/sCkb1zSCcK0uoCau/LtxmAH5oO8uil2wxZx942sue12O/cLGFsDg1TSM5AVM8ZNTR/BEs5HZeM4za+YMlvNRKujGQhxZT7B+o1/cg=
+	t=1761651609; cv=none; b=GhVxIFNZYEorT2aswfHKkHMHa/4zCu7VvpUWOMPjK1Mu7D/t7L/n80m+2MaC1JfS1qwewxLvaTP45R0jODRsBuQ3a/9hlpqclaJTwxBRPZJSDH5v9v/rvQE1y6ul3Ax7iKBlZAMGhkUe7xTazPqtiimJMLaQpMxer26SO+jJ5W0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761646199; c=relaxed/simple;
-	bh=qn8TL4Pnq29CxpNBsZZBQhthbh6JK6irzIuvCt3Nlno=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Nw4sqSC4GAJ9lKzD4awMGebS4iUZPLBIBHoSvNYoJ5uvg+Uz766YhW8tbMd12KDNflEFV+Kx1c4+iZNMnJdNl2MVenmsiIg/jitBi0z8UU0KV8YqmzuG2+Cc8NDAKmvXWd58V74RjM6gxGp5WLtwQmo1hSYR6tf6fyX1AmrCLWU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=DM4GyyeD; arc=none smtp.client-ip=115.124.30.119
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1761646188; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
-	bh=D1ryY5baZqSqiYaszWAZLXVQIoYi/aODofY8GTd3HL8=;
-	b=DM4GyyeDJGNigw4ek4uvE4agu4aX1tDWLhDK/7sMkF4hyvg/n+92nduqCI2bOx84mWciqHs6seODEDSAVK/sIz46bHp5jadYkYq7oK9h1WT0wJnYSVP4Pj9tWnIwrRsbQYtXkZbhpe5eKI+/BKmjzvau8FCFknVjohaGsYJ6yrQ=
-Received: from 30.74.144.127(mailfrom:baolin.wang@linux.alibaba.com fp:SMTPD_---0WrBnYT2_1761646184 cluster:ay36)
-          by smtp.aliyun-inc.com;
-          Tue, 28 Oct 2025 18:09:45 +0800
-Message-ID: <063f8369-96c7-4345-ab28-7265ed7214cb@linux.alibaba.com>
-Date: Tue, 28 Oct 2025 18:09:43 +0800
+	s=arc-20240116; t=1761651609; c=relaxed/simple;
+	bh=S8+Ja3ralZ2WxCdLK1ixOt+mF2q4rBG1Bbc1fFOF20Q=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=geHGJ0Rc7jP912FmkEmcJPl/DMTnJhK0JfdY4oV9/PUHF6qPb/G+yI+nd9lAaLlBQPmO67bcbQqBjPW9JuHND7DE0HWYaIzTlKzM9OM2y98eRJ69C/jr6hWJiptMq4l9N8LRvXTDFnt7VrtSyMaQBe9atSvj1+rE0lxKbUXZGRI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mAFHpO/E; arc=none smtp.client-ip=209.85.210.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-79af647cef2so4989187b3a.3
+        for <linux-doc@vger.kernel.org>; Tue, 28 Oct 2025 04:40:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761651607; x=1762256407; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UQGkMpWQvkIrFU/utWIdl52vdzB7gtbaDaCLqaVvZwY=;
+        b=mAFHpO/ERlvBgzENIiDBUGgcqj2edkDJ5i9oq4kHVh+9p+z6ZI63uZz1aLXo1wC8pd
+         ZPL1yImqUIAtp+tn6Qbn+M4Z5dUo7RfyfipXqi/I3exuGe2I0N6hO2HD6Q4jj5lg5+T7
+         UalETiVjsShfaZeXFw4Ra+MRgQhQwf097kkyVw8vfu1bXloevb+Cn+q3rzxKhcsBJ5Cb
+         ncNYm61tSwDapv6xoT+E7eCuEBCteb944Jv1J6iZKeOHaYTHhkUZsErmUux9XcVLw9Yf
+         WcUBSS2cPHXxcCVlLMxXkUsUcdB9aN7zXS4U5B60nt4k12R8K/EOs7RnK9z9cm4HUBqv
+         9jyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761651607; x=1762256407;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UQGkMpWQvkIrFU/utWIdl52vdzB7gtbaDaCLqaVvZwY=;
+        b=Oe0Rpfzb2Dk1ligIbHe0O5IMvIbSVGbfx46XbfKERmaCWSe8m1D8ijSyIZQd4Letlm
+         QgOJ7PG+EuKcUBS47iDnyF1ILJ+MoIpMqew6WkWBhQq1nM7Snx/3FEQQzOX6WsGYYm4b
+         gQ3w67w1F/mpC8Pm2DskAHhZLKudZcIL6c1Pl4IetkVAmwEJzUdUD8mG+VeJ6+ytlq0v
+         Ew2ay7vrDpVTe6K6kiLqtZlHu0vcqKB5wJRWDkNx9jFCaPLTn7HCjbZJDa48wokJskQH
+         sBBCwXImYvZz3owi7ydBEcke+mTlrTyMgLxhzsvWSGpMO4XzK2Vd4hhF2pQCySZcJV4g
+         cyug==
+X-Forwarded-Encrypted: i=1; AJvYcCVZgIe24pc7Xj2DJQyam38v2whZu3KsW2UZnnA+V2WUKtVrOy5slqBa9SBo/k7D6zSKy3AjAeLDxyI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxAIvckH7/L/zn3vQ44rjXrQJE4sMnmOvyQCJT4q5FaxNjz8PJW
+	1UbL/5T8NipLDcmDzgkUA1wjWBoD20YTPQA5xZDDwq61gkwgjdJLt4Nf
+X-Gm-Gg: ASbGncsYnVXg3xl+c6mx1K22NaIhKPX4kLtVFvfNBTc8T6dbNfmAgfiSXuGOOqldOfO
+	ptiyPZIVzXHLkhEi+xcIfp+XvTNyBXZ6s0S9Jdh4mD8Td+F3sb1OHcGIRohTktAIsMP48YN+7oS
+	7BvendC3tvvOdchYaPRqOCndgiqNhM6Vdvs99BymCCHsvTEnuTIoXevBSdm2hBNx93g25D6TZMe
+	LFkqRN5zfqAbh5giIsBA37MTD4soiYYxNdFckfTYQSmpI82vdH7Mf4B9q1XHqrcl8S3MsqisjaP
+	OtIzKFgMIf+zfIkLKE/sUzHXZaNyLGONSEkkY+l/kwL9Wl0maEGFP8FBsWJZ7hKiNmUm5yyiUqb
+	UEXnY/yEEONCgJzJbB7MS1MkVmqVtmKrogR66ePZsTd8fkcV9ja5ULx44xkJhRqFoxHysWCpUzW
+	zW
+X-Google-Smtp-Source: AGHT+IELfm1V2/9P9RcJo7ple69Pu8CkbUuJnvOHx1MhFw0DK3gnvsbENWcBcTkx8E417BUE9yB8ag==
+X-Received: by 2002:a05:6a20:3ca7:b0:2ff:3752:8375 with SMTP id adf61e73a8af0-344d3a4fdbamr4255473637.45.1761651607102;
+        Tue, 28 Oct 2025 04:40:07 -0700 (PDT)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b71268bd810sm10351782a12.6.2025.10.28.04.40.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Oct 2025 04:40:06 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 931944209E50; Tue, 28 Oct 2025 18:40:03 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>,
+	Linux BPF <bpf@vger.kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Jesper Dangaard Brouer <hawk@kernel.org>,
+	John Fastabend <john.fastabend@gmail.com>,
+	Stanislav Fomichev <sdf@fomichev.me>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH net-next] net: Reorganize networking documentation toctree
+Date: Tue, 28 Oct 2025 18:39:24 +0700
+Message-ID: <20251028113923.41932-2-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 mm-new 06/15] khugepaged: introduce
- collapse_max_ptes_none helper function
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Nico Pache <npache@redhat.com>
-Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-mm@kvack.org, linux-doc@vger.kernel.org, david@redhat.com,
- ziy@nvidia.com, Liam.Howlett@oracle.com, ryan.roberts@arm.com,
- dev.jain@arm.com, corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org,
- mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
- baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
- wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com,
- vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com,
- yang@os.amperecomputing.com, kas@kernel.org, aarcange@redhat.com,
- raquini@redhat.com, anshuman.khandual@arm.com, catalin.marinas@arm.com,
- tiwai@suse.de, will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz,
- cl@gentwo.org, jglisse@google.com, surenb@google.com, zokeefe@google.com,
- hannes@cmpxchg.org, rientjes@google.com, mhocko@suse.com,
- rdunlap@infradead.org, hughd@google.com, richard.weiyang@gmail.com,
- lance.yang@linux.dev, vbabka@suse.cz, rppt@kernel.org, jannh@google.com,
- pfalcato@suse.de
-References: <20251022183717.70829-1-npache@redhat.com>
- <20251022183717.70829-7-npache@redhat.com>
- <5f8c69c1-d07b-4957-b671-b37fccf729f1@lucifer.local>
-From: Baolin Wang <baolin.wang@linux.alibaba.com>
-In-Reply-To: <5f8c69c1-d07b-4957-b671-b37fccf729f1@lucifer.local>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4925; i=bagasdotme@gmail.com; h=from:subject; bh=S8+Ja3ralZ2WxCdLK1ixOt+mF2q4rBG1Bbc1fFOF20Q=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJkMq17fbp63pyIq0/jpJI47M/d/5uKyXvj/X43GNtfj+ /9Yf02L6yhlYRDjYpAVU2SZlMjXdHqXkciF9rWOMHNYmUCGMHBxCsBEipwZGXZ5L11wZYK8MaPh Kf+v2rG88zJv9U6uKZ/RHm79yuRxkSwjw1WBxJ36EQf4Z4mJJP2yUTi45cp5aZbry750OqZLM8a nsQAA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
+Current netdev docs has one large, unorganized toctree that makes
+finding relevant docs harder like a needle in a haystack. Split the
+toctree into four categories: networking core; protocols; devices; and
+assorted miscellaneous.
 
+While at it, also sort the toctree entries and reduce toctree depth.
 
-On 2025/10/28 01:53, Lorenzo Stoakes wrote:
-> On Wed, Oct 22, 2025 at 12:37:08PM -0600, Nico Pache wrote:
->> The current mechanism for determining mTHP collapse scales the
->> khugepaged_max_ptes_none value based on the target order. This
->> introduces an undesirable feedback loop, or "creep", when max_ptes_none
->> is set to a value greater than HPAGE_PMD_NR / 2.
->>
->> With this configuration, a successful collapse to order N will populate
->> enough pages to satisfy the collapse condition on order N+1 on the next
->> scan. This leads to unnecessary work and memory churn.
->>
->> To fix this issue introduce a helper function that caps the max_ptes_none
->> to HPAGE_PMD_NR / 2 - 1 (255 on 4k page size). The function also scales
->> the max_ptes_none number by the (PMD_ORDER - target collapse order).
->>
->> The limits can be ignored by passing full_scan=true, this is useful for
->> madvise_collapse (which ignores limits), or in the case of
->> collapse_scan_pmd(), allows the full PMD to be scanned when mTHP
->> collapse is available.
->>
->> Signed-off-by: Nico Pache <npache@redhat.com>
->> ---
->>   mm/khugepaged.c | 35 ++++++++++++++++++++++++++++++++++-
->>   1 file changed, 34 insertions(+), 1 deletion(-)
->>
->> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
->> index 4ccebf5dda97..286c3a7afdee 100644
->> --- a/mm/khugepaged.c
->> +++ b/mm/khugepaged.c
->> @@ -459,6 +459,39 @@ void __khugepaged_enter(struct mm_struct *mm)
->>   		wake_up_interruptible(&khugepaged_wait);
->>   }
->>
->> +/**
->> + * collapse_max_ptes_none - Calculate maximum allowed empty PTEs for collapse
->> + * @order: The folio order being collapsed to
->> + * @full_scan: Whether this is a full scan (ignore limits)
->> + *
->> + * For madvise-triggered collapses (full_scan=true), all limits are bypassed
->> + * and allow up to HPAGE_PMD_NR - 1 empty PTEs.
->> + *
->> + * For PMD-sized collapses (order == HPAGE_PMD_ORDER), use the configured
->> + * khugepaged_max_ptes_none value.
->> + *
->> + * For mTHP collapses, scale down the max_ptes_none proportionally to the folio
->> + * order, but caps it at HPAGE_PMD_NR/2-1 to prevent a collapse feedback loop.
->> + *
->> + * Return: Maximum number of empty PTEs allowed for the collapse operation
->> + */
->> +static unsigned int collapse_max_ptes_none(unsigned int order, bool full_scan)
->> +{
->> +	unsigned int max_ptes_none;
->> +
->> +	/* ignore max_ptes_none limits */
->> +	if (full_scan)
->> +		return HPAGE_PMD_NR - 1;
->> +
->> +	if (order == HPAGE_PMD_ORDER)
->> +		return khugepaged_max_ptes_none;
->> +
->> +	max_ptes_none = min(khugepaged_max_ptes_none, HPAGE_PMD_NR/2 - 1);
-> 
-> I mean not to beat a dead horse re: v11 commentary, but I thought we were going
-> to implement David's idea re: the new 'eagerness' tunable, and again we're now just
-> implementing the capping at HPAGE_PMD_NR/2 - 1 thing again?
-> 
-> I'm still really quite uncomfortable with us silently capping this value.
-> 
-> If we're putting forward theoretical ideas that are to be later built upon, this
-> series should be an RFC.
-> 
-> But if we really intend to silently ignore user input the problem is that then
-> becomes established uAPI.
-> 
-> I think it's _sensible_ to avoid this mTHP escalation problem, but the issue is
-> visibility I think.
-> 
-> I think people are going to find it odd that you set it to something, but then
-> get something else.
-> 
-> As an alternative we could have a new sysfs field:
-> 
-> /sys/kernel/mm/transparent_hugepage/khugepaged/max_mthp_ptes_none
-> 
-> That shows the cap clearly.
-> 
-> In fact, it could be read-only... and just expose it to the user. That reduces
-> complexity.
-> 
-> We can then bring in eagerness later and have the same situation of
-> max_ptes_none being a parameter that exists (plus this additional read-only
-> parameter).
+Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+---
+ Documentation/networking/index.rst | 241 ++++++++++++++++-------------
+ 1 file changed, 136 insertions(+), 105 deletions(-)
 
-We all know that ultimately using David's suggestion to add the 
-'eagerness' tunable parameter is the best approach, but for now, we need 
-an initial version to support mTHP collapse (as we've already discussed 
-extensively here:)).
+diff --git a/Documentation/networking/index.rst b/Documentation/networking/index.rst
+index c775cababc8c17..ca86e544c5c8e2 100644
+--- a/Documentation/networking/index.rst
++++ b/Documentation/networking/index.rst
+@@ -5,138 +5,169 @@ Refer to :ref:`netdev-FAQ` for a guide on netdev development process specifics.
+ 
+ Contents:
+ 
++Networking core
++---------------
++
+ .. toctree::
+-   :maxdepth: 2
++   :maxdepth: 1
+ 
+    af_xdp
+-   bareudp
+-   batman-adv
+-   can
+-   can_ucan_protocol
+-   device_drivers/index
+-   diagnostic/index
+-   dsa/index
+-   devlink/index
+-   caif/index
+-   ethtool-netlink
+-   ieee802154
+-   iso15765-2
+-   j1939
+-   kapi
+-   msg_zerocopy
+-   failover
+-   net_dim
+-   net_failover
+-   page_pool
+-   phy
+-   sfp-phylink
+-   alias
+-   bridge
+-   snmp_counter
+    checksum-offloads
+-   segmentation-offloads
+-   scaling
+-   tls
+-   tls-offload
+-   tls-handshake
+-   nfc
+-   6lowpan
+-   6pack
+-   arcnet-hardware
+-   arcnet
+-   atm
+-   ax25
+-   bonding
+-   cdc_mbim
+-   dctcp
+-   devmem
+-   dns_resolver
++   diagnostic/index
+    driver
+-   eql
+-   fib_trie
+-   filter
+-   generic-hdlc
+-   generic_netlink
+-   ../netlink/specs/index
+-   gen_stats
+-   gtp
+-   ila
+-   ioam6-sysctl
+-   iou-zcrx
+-   ip_dynaddr
+-   ipsec
+-   ip-sysctl
+-   ipv6
+-   ipvlan
+-   ipvs-sysctl
+-   kcm
+-   l2tp
+-   lapb-module
++   kapi
+    mac80211-injection
+-   mctp
+-   mpls-sysctl
+-   mptcp
+-   mptcp-sysctl
+-   multiqueue
+-   multi-pf-netdev
++   msg_zerocopy
+    napi
+    net_cachelines/index
+-   netconsole
+    netdev-features
+-   netdevices
+-   netfilter-sysctl
+    netif-msg
+-   netmem
+-   nexthop-group-resilient
+-   nf_conntrack-sysctl
+-   nf_flowtable
+-   oa-tc6-framework
+-   openvswitch
+-   operstates
+    packet_mmap
+-   phonet
++   page_pool
++   phy
+    phy-link-topology
+-   pktgen
++   scaling
++   segmentation-offloads
++   skbuff
++   strparser
++   timestamping
++   xdp-rx-metadata
++   xsk-tx-metadata
++
++Protocols
++---------
++
++.. toctree::
++   :maxdepth: 1
++
++   6pack
++   arcnet
++   ax25
++   bareudp
++   caif/index
++   can
++   can_ucan_protocol
++   dctcp
++   gtp
++   ila
++   ipsec
++   ipv6
++   iso15765-2
++   j1939
++   l2tp
++   mctp
++   mptcp
++   oa-tc6-framework
++   phonet
++   psp
++   rxrpc
++   sctp
++   tcp-thin
++   tcp_ao
++   tipc
++   tls
++   tls-handshake
++   tls-offload
++   udplite
++   vxlan
++   x25
++
++Networking devices
++------------------
++
++.. toctree::
++   :maxdepth: 1
++
++   6lowpan
++   arcnet-hardware
++   bonding
++   bridge
++   cdc_mbim
++   device_drivers/index
++   devlink/index
++   devmem
++   dsa/index
++   eql
++   ipvlan
++   multi-pf-netdev
++   multiqueue
++   netconsole
++   netdevices
++   netmem
++   operstates
+    plip
+    ppp_generic
++   representors
++   sriov
++   statistics
++   switchdev
++   team
++   tuntap
++   vrf
++   x25-iface
++
++Packet filtering
++----------------
++
++.. toctree::
++   :maxdepth: 1
++
++   filter
++   netfilter-sysctl
++   nf_conntrack-sysctl
++   nf_flowtable
++   tc-actions-env-rules
++   tc-queue-filters
++   tproxy
++
++Miscellaneous
++-------------
++
++.. toctree::
++   :maxdepth: 1
++
++   ../netlink/specs/index
++   alias
++   atm
++   batman-adv
++   dns_resolver
++   ethtool-netlink
++   failover
++   fib_trie
++   gen_stats
++   generic-hdlc
++   generic_netlink
++   ieee802154
++   ioam6-sysctl
++   iou-zcrx
++   ip-sysctl
++   ip_dynaddr
++   ipvs-sysctl
++   kcm
++   lapb-module
++   mpls-sysctl
++   mptcp-sysctl
++   net_dim
++   net_failover
++   nexthop-group-resilient
++   nfc
++   openvswitch
++   pktgen
+    proc_net_tcp
+    pse-pd/index
+-   psp
+    radiotap-headers
+    rds
+    regulatory
+-   representors
+-   rxrpc
+-   sctp
+    secid
+    seg6-sysctl
+-   skbuff
++   sfp-phylink
+    smc-sysctl
+-   sriov
+-   statistics
+-   strparser
+-   switchdev
++   snmp_counter
+    sysfs-tagging
+-   tc-actions-env-rules
+-   tc-queue-filters
+-   tcp_ao
+-   tcp-thin
+-   team
+-   timestamping
+-   tipc
+-   tproxy
+-   tuntap
+-   udplite
+-   vrf
+-   vxlan
+-   x25
+-   x25-iface
+    xfrm_device
+    xfrm_proc
+    xfrm_sync
+    xfrm_sysctl
+-   xdp-rx-metadata
+-   xsk-tx-metadata
+ 
+ .. only::  subproject and html
+ 
 
-I don't like the idea of adding another and potentially confusing 
-'max_mthp_ptes_none' interface, which might make it more difficult to 
-accommodate the 'eagerness' parameter in the future.
+base-commit: 5f30bc470672f7b38a60d6641d519f308723085c
+-- 
+An old man doll... just what I always wanted! - Clara
 
-If Nico's current proposal still doesn't satisfy everyone, I personally 
-lean towards David's earlier simplified approach:
-	max_ptes_none == 511 -> collapse mTHP always
-	max_ptes_none != 511 -> collapse mTHP only if all PTEs are non-none/zero
-
-Let's first have an initial approach in place, which will also simplify 
-the following addition of the 'eagerness' tunable parameter.
-
-Nico, Lorenzo, and David, what do you think?
-
-Code should be:
-static unsigned int collapse_max_ptes_none(unsigned int order, bool 
-full_scan)
-{
-         unsigned int max_ptes_none;
-
-         /* ignore max_ptes_none limits */
-         if (full_scan)
-                 return HPAGE_PMD_NR - 1;
-
-         if (order == HPAGE_PMD_ORDER)
-                 return khugepaged_max_ptes_none;
-
-         /*
-          * For mTHP collapse, we can simplify the logic:
-          * max_ptes_none == 511 -> collapse mTHP always
-          * max_ptes_none != 511 -> collapse mTHP only if we all PTEs 
-are non-none/zero
-          */
-         if (khugepaged_max_ptes_none == HPAGE_PMD_NR - 1)
-                 return khugepaged_max_ptes_none >> (HPAGE_PMD_ORDER - 
-order);
-
-         return 0;
-}
 
