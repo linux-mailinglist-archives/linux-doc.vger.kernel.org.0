@@ -1,214 +1,155 @@
-Return-Path: <linux-doc+bounces-64781-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64783-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33738C13767
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 09:10:38 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DC80C13DA6
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 10:37:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7C766583782
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 08:09:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6A4B23BC0F8
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Oct 2025 09:33:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D7FF32D062E;
-	Tue, 28 Oct 2025 08:09:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC3293019DA;
+	Tue, 28 Oct 2025 09:33:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="mO1Jka8W";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="ch8YEI4w"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="fb36uv5q"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.1])
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93A962848AE;
-	Tue, 28 Oct 2025 08:09:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.1
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761638975; cv=pass; b=lqZy+t7kbXZ7kcHoyjIQWvoZemTqNjMQuCwhoFPZWmacmtcD7dj0lGPWzyGMgfbGiEgsmCL3569B0d5Gl6sZZUdl6xn48V6JgQpSUV5w5EqtQnbKj5A0t/Wntw6nEicO7ilgfTrORBs57+EEhkP1EjCvNp7v+KR08HIkQ3ykEwM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761638975; c=relaxed/simple;
-	bh=oM+Qk6/0i7S5n4w2OHuWR3eCnfyQfEjkW2Qc+xb62FA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=q2M8Uc2DfAJsla76e4M17qH5cEnt3eAeSDHW+U89oRF9snJufFL829zUMjHGB4nHbTReD+jLIe7jnppSWbcHGFDg1ln7Pj4j81hPA1fksLS4viAXtR+9vBpfS9f+UeX+KVARc9SsSf34rBorym81q8qUQv2Ia6xLy+E1PgiyP7g=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=mO1Jka8W; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=ch8YEI4w; arc=pass smtp.client-ip=185.56.87.1
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-whct.prod.antispam.mailspamprotection.com; s=arckey; t=1761638973;
-	 b=QgER7zAOxBh2RJH9tiwwAehMkF9CQ0zHTDdyfmwdD+iK+cIHlefFs4LU0DDxp49RL8a0UhKibc
-	  pylBH8h+wm10S/VwKenDaWm3IvZYA3MpJXBll5S+qlFfGaxzzTaBFV7zUoXGEpvWBNuEcq+0Sb
-	  3oyD8itMcIpiDXY60Jb40oxMMwQt1pPshn0dH50DcxTFoD6EROXxFn8ciMocGAWzs0vUyFoBJz
-	  VAbKx+Wrz1k+ruitm7Dn3Sx4CP9N1LJZ8aalz/w66mJc4XQYIwIbBE6bbR/g4ni6cgY3MXwFOM
-	  yw9gWnUFuL3YEwCaDI7QQoU3XrehRSn5DwzYNr/MlOaUGA==;
-ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-whct.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
-	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
-	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
-	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
-	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-whct.prod.antispam.mailspamprotection.com; s=arckey; t=1761638973;
-	bh=oM+Qk6/0i7S5n4w2OHuWR3eCnfyQfEjkW2Qc+xb62FA=;
-	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	  To:From:DKIM-Signature:DKIM-Signature;
-	b=V1Ess1kM/15Z7VtMxnmvr7j/UsBLxZz80SW/xNAn8LM8kVjNDMaRhwYqxZ/3UXSvvXDcYA9Zks
-	  ywGgIxbLirm5wthbMTEbbTOk/U7Sc5URihae/iQHAWKNFOk71HeahrRDdJz+Lv3TTtBvVuwS28
-	  YiQrsbImvO/LZtSfErGoymGngL7paiKCIw8pSk0pWMXi+hCYtAwIuDCVsE2kE1Hw9WqkfzRBmu
-	  t5D+x98xnb9nQk4dnnNc2hb1iVgSn0utZeLVwOitEpGR2pY2pXX53YsMoniVcjTxL12povWePM
-	  YYfoCrSdVQ8hgWLQb+RVzGlyaV2/0QcIE/KvnJoCqvSkYw==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
-	:Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
-	List-Unsubscribe:Content-Transfer-Encoding;
-	bh=ne9rWrothZr4TKac9t+L9M1azOkVDHMJP9hBVA/2hz0=; b=mO1Jka8WCbCdCJtjB3FmruUmvv
-	d/kZonxRVzIvwAx7sXwxIGGImk0ZXcCnCZbvu00W9ZI2xZOyhMXsXJPuqM6ilQJkTMQ4FM8k6KvwI
-	IJ+d2MDyD6Fj3nLKpK3vq1vzTVez49Da5CGDoO5QdF/M9ZRxqjZE34LqjZYWAj2wfFrM=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
-	by instance-europe-west4-whct.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.98.1)
-	(envelope-from <francesco@valla.it>)
-	id 1vDelk-00000001Pnl-2xQ3;
-	Tue, 28 Oct 2025 08:09:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
-	s=default; h=Date:Subject:Cc:To:From:list-help:list-unsubscribe:
-	list-subscribe:list-post:list-owner:list-archive;
-	bh=ne9rWrothZr4TKac9t+L9M1azOkVDHMJP9hBVA/2hz0=; b=ch8YEI4w4BIM4FJluSHOAp48Fx
-	n+ZnDTn0d2LiVvNZy6+NExHAaPKyXqa9uDyQENZvIpqzgufF6Z+VOQLGmnjdeIlImYSynktKq7c4+
-	5idxkp7JdwSLIaH5IWb19HVH6vZ7WYR2XHxm+6D/oWLVoGKMVuK1+ko2p15GMpOmU2eU=;
-Received: from [87.17.42.198] (port=59590 helo=fedora.fritz.box)
-	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.98.1)
-	(envelope-from <francesco@valla.it>)
-	id 1vDelP-00000000PrG-1MNk;
-	Tue, 28 Oct 2025 08:09:07 +0000
-From: Francesco Valla <francesco@valla.it>
-To: Mario Limonciello <mario.limonciello@amd.com>,
- Maxime Ripard <mripard@kernel.org>
-Cc: Thomas Zimmermann <tzimmermann@suse.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Sam Ravnborg <sam@ravnborg.org>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- linux-embedded@vger.kernel.org
-Subject: Re: [PATCH RFC 0/3] Add splash DRM client
-Date: Tue, 28 Oct 2025 09:09:06 +0100
-Message-ID: <4497733.UPlyArG6xL@fedora.fritz.box>
-In-Reply-To: <23clcxtgbzbsji2knwp47xdc5udj7lnhbvzsgqi3vklvmhdgjd@26ycx2ed77l4>
-References:
- <20251027-drm_client_splash-v1-0-00698933b34a@valla.it>
- <93cbbaef-918f-4300-aa5b-11f098e217b2@amd.com>
- <23clcxtgbzbsji2knwp47xdc5udj7lnhbvzsgqi3vklvmhdgjd@26ycx2ed77l4>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27E572BD5A8;
+	Tue, 28 Oct 2025 09:33:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1761644030; cv=none; b=TMjxRSpVYd4AEg3M0WwZ3Uhh+Aos3bII25wUqrA9NUg+iPCjXtqLZiuB2Bxx1vHG0L5n+9Om4U7oOihG/PpwSvkH7ebouz0tWdlqJy/mGAnn3E0+YuhGl47n5M1HqxWk6bUdQK4EJFma9S3G6t66UY6WhKWUGhdfzXlQ05FENNU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1761644030; c=relaxed/simple;
+	bh=gNIoYwnPGl2poq9hJhXrlXgYqCYv7k4kBJYh6yVqD2U=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=LBpmlq+++MugpFnIOc88bHSe/XWA4TUDYg7iBlTcVJtHlIstnfV2240XQvGhc/cqZaRNEMw4fEyhPiJYYQ1oJnj+mToFfsYiqBj0tP6Vt80o+RBVeCjijzn5xfHXdt49CqgrW8JH//8eVfgHTxQb0wlE4LhlYB9iciuJ7lCK49g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=fb36uv5q; arc=none smtp.client-ip=148.163.156.1
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59S1jwrs012355;
+	Tue, 28 Oct 2025 09:33:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=pp1; bh=QRyvVz
+	Y1aSZUvVTazOXD95pRWeNWcRO934GJDJqjh/w=; b=fb36uv5qukFk3JqFvVQvVI
+	GktXEJOPup1juHADYcyswf+EoH7DzRAwm0obR1OBlQb9Dm20auo9s2nluILsI4ew
+	UGIlt6juXUse+EDG8NxxY+KtJwlx/K8PSLpUIs4TmO1WqhduRkES0p9ug4lpDuVI
+	j9gJAD362d9eDnleVN80QTuDOp/53Z0/CLoRSfqkzxvV0csHK8V6nbA+p7KFbhaV
+	N/z+G2ZvwqUWvTac9W+vWp2gl+bTBcom1ONrb9kZlcs6n5BGagLeIlPWBhc4gDgJ
+	/o1uoFNjTd+ia7q9semQNgJ8883sqrOcVCUaQ+UZUtSElYtMgERJCIduUZnJFnDg
+	==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4a0p81u2g1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 28 Oct 2025 09:33:41 +0000 (GMT)
+Received: from m0353729.ppops.net (m0353729.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.0.8) with ESMTP id 59S9Inhm017991;
+	Tue, 28 Oct 2025 09:33:41 GMT
+Received: from ppma23.wdc07v.mail.ibm.com (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4a0p81u2fx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 28 Oct 2025 09:33:41 +0000 (GMT)
+Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59S8lXfG030187;
+	Tue, 28 Oct 2025 09:33:40 GMT
+Received: from smtprelay07.dal12v.mail.ibm.com ([172.16.1.9])
+	by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4a1acjswxn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 28 Oct 2025 09:33:39 +0000
+Received: from smtpav01.dal12v.mail.ibm.com (smtpav01.dal12v.mail.ibm.com [10.241.53.100])
+	by smtprelay07.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 59S9Xces2949800
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Tue, 28 Oct 2025 09:33:38 GMT
+Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 962FD58061;
+	Tue, 28 Oct 2025 09:33:38 +0000 (GMT)
+Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 4BCFE58057;
+	Tue, 28 Oct 2025 09:33:32 +0000 (GMT)
+Received: from [9.109.248.153] (unknown [9.109.248.153])
+	by smtpav01.dal12v.mail.ibm.com (Postfix) with ESMTP;
+	Tue, 28 Oct 2025 09:33:31 +0000 (GMT)
+Message-ID: <0f70d4ff-ad35-42ee-8b99-cf6e3da7c49e@linux.ibm.com>
+Date: Tue, 28 Oct 2025 15:03:30 +0530
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart5779622.ZASKD2KPVS";
- micalg="pgp-sha512"; protocol="application/pgp-signature"
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: aef317f9c7174cbc851f75235c82ea84
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vDelk-00000001Pnl-2xQ3-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-whct.prod.antispam.mailspamprotection.com;
-	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
-	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
-	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
-	arc=none
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v6 1/2] net/smc: make wr buffer count
+ configurable
+To: Halil Pasic <pasic@linux.ibm.com>,
+        "David S. Miller"
+ <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "D. Wythe" <alibuda@linux.alibaba.com>,
+        Dust Li <dust.li@linux.alibaba.com>,
+        Sidraya Jayagond <sidraya@linux.ibm.com>,
+        Wenjia Zhang
+ <wenjia@linux.ibm.com>,
+        Tony Lu <tonylu@linux.alibaba.com>, netdev@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-rdma@vger.kernel.org, linux-s390@vger.kernel.org
+Cc: Wen Gu <guwen@linux.alibaba.com>,
+        Guangguan Wang <guangguan.wang@linux.alibaba.com>,
+        Bagas Sanjaya <bagasdotme@gmail.com>
+References: <20251027224856.2970019-1-pasic@linux.ibm.com>
+ <20251027224856.2970019-2-pasic@linux.ibm.com>
+Content-Language: en-US
+From: Mahanta Jambigi <mjambigi@linux.ibm.com>
+In-Reply-To: <20251027224856.2970019-2-pasic@linux.ibm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Authority-Analysis: v=2.4 cv=fIQ0HJae c=1 sm=1 tr=0 ts=69008df5 cx=c_pps
+ a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
+ a=IkcTkHD0fZMA:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=VnNF1IyMAAAA:8 a=SRrdq9N9AAAA:8 a=ffDd5I00xDUYzGQUyCcA:9 a=QEXdDO2ut3YA:10
+ a=cPQSjfK2_nFv0Q5t_7PE:22
+X-Proofpoint-ORIG-GUID: iLJI276jkQYFSUAkCfrGJUpPke3vGuVq
+X-Proofpoint-GUID: bZgTWHVMeG6WvbqmK9wxllVKaM1ya5qo
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI1MDAyNCBTYWx0ZWRfX/RJ3mImZoIyY
+ aTH2y+Y8353xw54oqcdtwUceZzf7eWySn7fGScsF62TaXsiSpp2HZZd1IkjWjmzyS7KyUwHxw8t
+ YC4jJ8k9YjcQ/GJmDIR3UO/9cAFGxQHL9T5m2ht3f6U2wukpKiwmUvd5bqGkfRH9GUeKAlK67kv
+ iB0IGTY+WZnaz4/PNdhw3Bg/XUwiXj6mkmlb9DkSX1VjBaXySSPtugMS3aLdP4ij8gg+y0pQ8I8
+ S0gQEoJSUVzr3vwTxktDOJJrSeP32IFDVs5cNir/V49lsc5qj1yw118rbe4fHrBvEO/7RVSvidX
+ hC4hpP8kBQLJ9yGrmArlKwdUciWtqWz1IP0T+97clb1FMXhQKAlAQKdVpyBRhNO5jO94TmD4uMs
+ Eqs3tuEx+6vFve/NNyVDL5MH/qQxwQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-28_03,2025-10-22_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 adultscore=0 suspectscore=0 spamscore=0
+ clxscore=1015 bulkscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510250024
 
---nextPart5779622.ZASKD2KPVS
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Francesco Valla <francesco@valla.it>
-Subject: Re: [PATCH RFC 0/3] Add splash DRM client
-Date: Tue, 28 Oct 2025 09:09:06 +0100
-Message-ID: <4497733.UPlyArG6xL@fedora.fritz.box>
-MIME-Version: 1.0
 
-Hi,
 
-On Monday, 27 October 2025 at 18:19:12 Maxime Ripard <mripard@kernel.org> wrote:
-> On Mon, Oct 27, 2025 at 11:31:06AM -0500, Mario Limonciello wrote:
-> > On 10/27/25 11:28 AM, Maxime Ripard wrote:
-> > > On Mon, Oct 27, 2025 at 11:01:55AM -0500, Mario Limonciello wrote:
-> > > > On 10/27/25 7:35 AM, Thomas Zimmermann wrote:
-> > > > > > >     - a very simple progress bar, which can be driven through sysfs;
-> > > > > 
-> > > > > Once you have options to control these settings from user space, you
-> > > > > should do it in user space entirely. As Maxime suggested, please improve
-> > > > > plymouth for anything with animation.
-> > > > > 
-> > > > > > >     - a static image (optional).
-> > > > > 
-> > > > > Board vendors often provide an image, see /sys/firmware/acpi/bgrt/. This
-> > > > > is a candidate for display, or the penguin or a custom image. Please
-> > > > > make it configurable by Kconfig. Again, if you need policy and
-> > > > > heuristics for deciding what to display, you better do this in user
-> > > > > space.
-> > > > 
-> > > > I'd actually argue that the static image from BGRT should be the preferred
-> > > > priority.  This can make for a nice hand off to Plymouth.
-> > > > 
-> > > > The (UEFI) BIOS already will show this image as soon as the GOP driver is
-> > > > loaded.  Bootloaders like GRUB by default will avoid showing anything or
-> > > > will overwrite with the exact same image in the same location.  This can let
-> > > > the kernel do the same, and then the moment Plymouth takes over it could do
-> > > > the same.
-> > > 
-> > > And BGRT isn't typically found on embedded systems at all, so I'm not
-> > > sure it's a sensible default, let alone a priority. At most a possible
-> > 
-> > There are certainly embedded machines using UEFI and that have a BGRT.
+On 28/10/25 4:18 am, Halil Pasic wrote:
+> Think SMC_WR_BUF_CNT_SEND := SMC_WR_BUF_CNT used in send context and
+> SMC_WR_BUF_CNT_RECV := 3 * SMC_WR_BUF_CNT used in recv context. Those
+> get replaced with lgr->max_send_wr and lgr->max_recv_wr respective.
 > 
-> Yes, indeed, hence the "typically".
+> Please note that although with the default sysctl values
+> qp_attr.cap.max_send_wr ==  qp_attr.cap.max_recv_wr is maintained but
+> can not be assumed to be generally true any more. I see no downside to
+> that, but my confidence level is rather modest.
 > 
-> > How about "Sensible default the top of the priority list if it exists"
-> 
-> How about we don't tell contributors what their priorities must be?
-> 
-> Maxime
-> 
+> Signed-off-by: Halil Pasic <pasic@linux.ibm.com>
+> Reviewed-by: Sidraya Jayagond <sidraya@linux.ibm.com>
+> Reviewed-by: Dust Li <dust.li@linux.alibaba.com>
+> ---
 
-I'm not familiar at all with BGRT, I'll study a bit about it.
-
-A build-time configuration could then let the user select:
-
-- a plain solid color
-- a custom static image
-- the penguin logo (?)
-- (on UEFI systems) BGRT source
-
-
-
-Thank you
-
-Regards,
-Francesco
-
---nextPart5779622.ZASKD2KPVS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRUrtjevJ039mawAeLir2xSXEi5AAUCaQB6IgAKCRDir2xSXEi5
-AKhQAP40LB6RZAIqFWMaqTGwU+pfKfbI7xzrwvAnMQg0GyiITQD9GYvelT634R5P
-85RcG3t/ggO2aoRdzaCR0AxVzNLCOQk=
-=xkSs
------END PGP SIGNATURE-----
-
---nextPart5779622.ZASKD2KPVS--
-
-
-
+Tested-by: Mahanta Jambigi <mjambigi@linux.ibm.com>
 
