@@ -1,56 +1,57 @@
-Return-Path: <linux-doc+bounces-64931-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64936-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2928EC1B516
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 15:43:30 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EE6FC1B691
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 15:52:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 4AAA61A233D7
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 14:37:32 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 6A82E5C1589
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 14:38:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2155E2BEC30;
-	Wed, 29 Oct 2025 14:36:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1B9812E1743;
+	Wed, 29 Oct 2025 14:37:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="m2zA1bez"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="SGBIFUvN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 163EA189B84;
-	Wed, 29 Oct 2025 14:36:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02A172DA77E
+	for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 14:37:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761748617; cv=none; b=iXNPZxiUrUpanp/LdUwYXpsRsCH/uFrlMnN0TFXT9sRjoyDIoooXrxlyO9mrtza4+ObIn5Q5GpXrNcDAO5I/vwvj5N04B61HcjtgQ4L/g5BdA4+B0GGS24TRj92gy9XOHaLFqTlTw8l7e5Qk2EwI+TPac7V2vJls4rxVwapGjqY=
+	t=1761748626; cv=none; b=leq2OIHt4yPmKo9iX3d/QyHR210XT75+WMolQWh5mN4/XU2TqNRo9HDbfU3zcYDHHzZ6hPO9mj6vEgeL6mzUOBII6c7DOKSQGvXtPfnwEi3pI/FoGRyC2EYnUDeYEd7rUZvJrYRBAuXs3JAibs938ab4jofInXiWaeatXIEJAUQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761748617; c=relaxed/simple;
-	bh=/zJLRQgbJlUfEK19hPalGGNnAJ4C2mB7Maijaaat2XM=;
+	s=arc-20240116; t=1761748626; c=relaxed/simple;
+	bh=Pl8/wLHil1+4yaisV9T8jn/VjcUTIXsuX+80D3wrKXM=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=geskdwaQFlY2hJPNd3o/TSfxF7exLk5eqBR68yI9Uusr5kxAU+Bl+7XTOeuGJ0TsXNlrXeqFB5wLeuQ+zlQG/6wHsqLs6555/Ify3SGviSO+0l9+Thg86n2anDvOhSCwhzdJqHstxKhd985IAUub2SEL6gZtbYq16BsnzVWC7iE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=m2zA1bez; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=fAPlGeWunncf3XqxvRW8rkke3oCCC34VHzQmkRqNVMgONIhE/FSn+qG57Hu7t/woAq1rK66zkOgnCgFZodSjVWrbo87pWYGnBhuW4Bezy3d6hHkV2xr/zwHZKgrLSckKRs1cP4eHPTyhfKeou+Ctty65ltPNpKWIHj8JpQN1mH4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=SGBIFUvN; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 4BBC54E413CB;
-	Wed, 29 Oct 2025 14:36:54 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 40A741A174B;
+	Wed, 29 Oct 2025 14:37:03 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 225BF606E8;
-	Wed, 29 Oct 2025 14:36:54 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 3A265117F81A9;
-	Wed, 29 Oct 2025 15:36:52 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 0BE7E606E8;
+	Wed, 29 Oct 2025 14:37:03 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 98AE7117F81A9;
+	Wed, 29 Oct 2025 15:37:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1761748613; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1761748622; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=i1b8cguAuDAWMh3z6p1IfLyIILSme00GdU6qG7LpcBQ=;
-	b=m2zA1bezwoqu3zurDoQ94Z5MtQt6uLN9OsCUsArtpwfXXiIFfNaGkLlvjsLUXcLlsDkLcH
-	xBY5DDrNUWOTsMyGyh8HMDsyklmAkbLXLPd2AaemdMj9/e0LVeok/D/44vnyDQqZf3Je2m
-	z+b1bnPysc9N2OOlSUjNi7/jYVgRv9NLkFvUsGRZAeQGmGME5oUTFOpr6H9M/iPD8abIB2
-	oFE+5mAiMeNI6BuPZkGANTybIeOSxYAPVGtRxIOVAUyrFB4pConqjD7KtXkcTd9bdfnu4I
-	5i7oDt7fG+kwV3lcFeX6PFk9DF9odFM6BnpStzuv2YE3r8k/dkA9hnZnRadNSg==
+	bh=gZH4XqHEnkgG+WiGf4L3QVJCg6jApM4gvYwyfSScQxU=;
+	b=SGBIFUvNgkvxzALshu7uZRgC/6m33HWE96lB+htAPa5eJmAuvZop1qi9dakIqwwcv6Ik0X
+	JECpYAm6EB0hGWZon7ZUlqn0toStq8OoU9HoIxDPbIGip9FQgcaNAVvQVChFcDXbwRyfUJ
+	wvGOrDCYMAG7gHiQr5PHW3IzGBbJzSt0awTJmL3rRuiQPphH+HmRS58Fjh9NDK3ayT2Ort
+	rVv+8m+J9Ctxw+7NP0SC98VrLrrDpWPExGCxYnIkHZWx1ULuiF++XufBadpiB0GdTh7tqr
+	GBxZHYURPIrhGRzOXsBLH/ygdoeWeWmVYnXqGWcqqLdnJxUSZq8IkIME0Vbj0w==
 From: Louis Chauvet <louis.chauvet@bootlin.com>
-Date: Wed, 29 Oct 2025 15:36:39 +0100
-Subject: [PATCH RESEND v2 02/32] drm/vkms: Explicitly display plane type
+Date: Wed, 29 Oct 2025 15:36:44 +0100
+Subject: [PATCH RESEND v2 07/32] drm/blend: Get a rotation name from it's
+ bitfield
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +60,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251029-vkms-all-config-v2-2-a49a2d4cba26@bootlin.com>
+Message-Id: <20251029-vkms-all-config-v2-7-a49a2d4cba26@bootlin.com>
 References: <20251029-vkms-all-config-v2-0-a49a2d4cba26@bootlin.com>
 In-Reply-To: <20251029-vkms-all-config-v2-0-a49a2d4cba26@bootlin.com>
 To: Haneen Mohammed <hamohammed.sa@gmail.com>, 
@@ -73,48 +74,108 @@ Cc: victoria@system76.com, sebastian.wick@redhat.com, victoria@system76.com,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  linux-doc@vger.kernel.org, Louis Chauvet <louis.chauvet@bootlin.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=897;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3321;
  i=louis.chauvet@bootlin.com; h=from:subject:message-id;
- bh=/zJLRQgbJlUfEK19hPalGGNnAJ4C2mB7Maijaaat2XM=;
- b=owEBbQKS/ZANAwAKASCtLsZbECziAcsmYgBpAiZ6YJtcz0xN6TVwjzGz36c3EzPxXjnLyF11C
- 6Mq0zX0FmWJAjMEAAEKAB0WIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCaQImegAKCRAgrS7GWxAs
- 4s46D/9Fu1frCAsfKOM7QS8UpkoROepANkt+RonasMS7MWBI8erXKXen5s+F9GS5lqbIvayZOFb
- JSzi1MVo6leKw4U9af2+CDZpWNZAvay6mH1Aqyd1ApolQQc50bxAmiLM1qzcDT0dGaA8tnCyKMi
- TRomV6xZ7pG5SQN9G+mAJek3B11bzE/AjZ2VEZaTHHC1EsvM1OMD8Q1FX+MvgDjniTlCuvd0B6H
- GX49YmYESYWmg/QDZvny42k/J/h0GMgV5x41l/j+voj4gWAkiGE8wEpS93m3Yi1qrQBxtErS2cI
- KfKb1VXbKovaig6Pw/EYiV+XfRqcVGe8FeM+wEZBYle5Nr3iPjOWzhY8D4+rb4X1PYVSZOw/qkB
- FOWyxyFotriE+f8SqKn9HScLxxHSYxNUS6qyMf2TvQIGpgvDjVXM874XIxFBM6DoVih1E7MaTxS
- scMAdkL6d9D9y8OOiVrBm+JjOQbvDKZ6hE+SktDr8Dh8fKwen0KwBmDzkVtEk/JVppJTEws/Kjd
- qaEdTuCOv8oaHzRViddQ0sF8w+xzb2MX1FFd8ExmNcqJokBz6wE9J7ImVl5o/r1E8tnJQCAK066
- GCKorjhZo80MkgbP6LgHmSIu7o0PttIZCXO21nOWm8JyPRI28pbte075AjjDhlObSbRnMj3OICx
- 3lEZzCoyjaHs3fg==
+ bh=Pl8/wLHil1+4yaisV9T8jn/VjcUTIXsuX+80D3wrKXM=;
+ b=owEBbQKS/ZANAwAKASCtLsZbECziAcsmYgBpAiZ7f0FokT9zbt4H75Ux7Gi1z9UBY3E04ndK1
+ LaXAHSYYQmJAjMEAAEKAB0WIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCaQImewAKCRAgrS7GWxAs
+ 4u6tD/9v7Oce9o8e3V/RCjZhhBS6FHRp7LdcCaev5iu3YO8Sqkgn88tyalFUMSUs1JVgyNuYej4
+ 6mX1qu+Dh0mrJvfyO7vyPnrFFQmGX6O84+2OUYkVqFhSQYQlNB3opr/cjJbhPsS65CbqT4ql4qX
+ B/UDbjpeY3rPs1k4/jCXDe1rG+ClWGiQGz2MwC+56bT6VvmsLgnUjJaU/r6rKW3M9EXVWsgRuiy
+ 0zEKi3VFcGGS4EIHz1j0AFt9l3a+N8hYDwvhbfFsdMzMzR4+LtTDNsir6qm3H3ob7ANEn47xiIN
+ OLqwAPt5TbX+LQCWSPhFIDRucRxOVaj44r/wTfpjgFk4VjeFCOkEOtGnfNdEnNvTCUJyzKOKLY+
+ 44NcTnTyQOKFuO8kEaVnuXtrNBvt5KMKMPQFSj+Ja//qjr4a0Gmy8aI2S3/+7GrS9dLKry+/7XQ
+ R2eEWuQCrT0ljVLou7tiFkfCMWewSSd8cZ+gsyXkjLm062ST5qVP1mFmmgYB53EsZ61lLENolvL
+ osFx1odxRLoDjpBEQVWvKs+eUeyPFhgIlCAfCOlXoggyIfPBPMzUVJhLfr1pLww8BwR2Oaj5iNs
+ 9uh/fp01i3JEizdhpUiJCoJFWaQmBfG6nzjr57BIk+XbOkD39/qvMo/AcaCikRFgVFiOyVkZBaa
+ 6pjvCa0aeUeMHaQ==
 X-Developer-Key: i=louis.chauvet@bootlin.com; a=openpgp;
  fpr=8B7104AE9A272D6693F527F2EC1883F55E0B40A5
 X-Last-TLS-Session-Version: TLSv1.3
 
-Debug information are mainly read by human, so use full name instead
-of values.
+Having the rotation/reflection name from its value can be useful for
+debugging purpose. Extract the rotation property table and implement
+drm_get_rotation_name.
 
 Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
 ---
- drivers/gpu/drm/vkms/vkms_config.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/drm_blend.c | 35 ++++++++++++++++++++++++++---------
+ include/drm/drm_blend.h     |  2 ++
+ 2 files changed, 28 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/gpu/drm/vkms/vkms_config.c b/drivers/gpu/drm/vkms/vkms_config.c
-index f8394a063ecf..cfdd5f32f234 100644
---- a/drivers/gpu/drm/vkms/vkms_config.c
-+++ b/drivers/gpu/drm/vkms/vkms_config.c
-@@ -348,8 +348,8 @@ static int vkms_config_show(struct seq_file *m, void *data)
+diff --git a/drivers/gpu/drm/drm_blend.c b/drivers/gpu/drm/drm_blend.c
+index 6852d73c931c..bc7c05e20242 100644
+--- a/drivers/gpu/drm/drm_blend.c
++++ b/drivers/gpu/drm/drm_blend.c
+@@ -241,6 +241,31 @@ int drm_plane_create_alpha_property(struct drm_plane *plane)
+ }
+ EXPORT_SYMBOL(drm_plane_create_alpha_property);
  
- 	vkms_config_for_each_plane(vkmsdev->config, plane_cfg) {
- 		seq_puts(m, "plane:\n");
--		seq_printf(m, "\ttype=%d\n",
--			   vkms_config_plane_get_type(plane_cfg));
-+		seq_printf(m, "\ttype=%s\n",
-+			   drm_get_plane_type_name(vkms_config_plane_get_type(plane_cfg)));
- 	}
++static const struct drm_prop_enum_list rotation_props[] = {
++	{ __builtin_ffs(DRM_MODE_ROTATE_0) - 1,   "rotate-0" },
++	{ __builtin_ffs(DRM_MODE_ROTATE_90) - 1,  "rotate-90" },
++	{ __builtin_ffs(DRM_MODE_ROTATE_180) - 1, "rotate-180" },
++	{ __builtin_ffs(DRM_MODE_ROTATE_270) - 1, "rotate-270" },
++	{ __builtin_ffs(DRM_MODE_REFLECT_X) - 1,  "reflect-x" },
++	{ __builtin_ffs(DRM_MODE_REFLECT_Y) - 1,  "reflect-y" },
++};
++
++/**
++ * drm_get_rotation_name - Return the name of a rotation
++ * @rotation: The rotation mask (DRM_MODE_ROTATE_* | DRM_MODE_REFLECT_*)
++ *
++ * Returns: the name of the rotation type (unknown) if rotation is not
++ * a known rotation/reflection
++ */
++const char *drm_get_rotation_name(unsigned int rotation)
++{
++	if (rotation < ARRAY_SIZE(rotation_props))
++		return rotation_props[rotation].name;
++
++	return "(unknown)";
++}
++EXPORT_SYMBOL(drm_get_rotation_name);
++
+ /**
+  * drm_plane_create_rotation_property - create a new rotation property
+  * @plane: drm plane
+@@ -279,14 +304,6 @@ int drm_plane_create_rotation_property(struct drm_plane *plane,
+ 				       unsigned int rotation,
+ 				       unsigned int supported_rotations)
+ {
+-	static const struct drm_prop_enum_list props[] = {
+-		{ __builtin_ffs(DRM_MODE_ROTATE_0) - 1,   "rotate-0" },
+-		{ __builtin_ffs(DRM_MODE_ROTATE_90) - 1,  "rotate-90" },
+-		{ __builtin_ffs(DRM_MODE_ROTATE_180) - 1, "rotate-180" },
+-		{ __builtin_ffs(DRM_MODE_ROTATE_270) - 1, "rotate-270" },
+-		{ __builtin_ffs(DRM_MODE_REFLECT_X) - 1,  "reflect-x" },
+-		{ __builtin_ffs(DRM_MODE_REFLECT_Y) - 1,  "reflect-y" },
+-	};
+ 	struct drm_property *prop;
  
- 	vkms_config_for_each_crtc(vkmsdev->config, crtc_cfg) {
+ 	WARN_ON((supported_rotations & DRM_MODE_ROTATE_MASK) == 0);
+@@ -294,7 +311,7 @@ int drm_plane_create_rotation_property(struct drm_plane *plane,
+ 	WARN_ON(rotation & ~supported_rotations);
+ 
+ 	prop = drm_property_create_bitmask(plane->dev, 0, "rotation",
+-					   props, ARRAY_SIZE(props),
++					   rotation_props, ARRAY_SIZE(rotation_props),
+ 					   supported_rotations);
+ 	if (!prop)
+ 		return -ENOMEM;
+diff --git a/include/drm/drm_blend.h b/include/drm/drm_blend.h
+index 88bdfec3bd88..381d1f8d815b 100644
+--- a/include/drm/drm_blend.h
++++ b/include/drm/drm_blend.h
+@@ -42,6 +42,8 @@ static inline bool drm_rotation_90_or_270(unsigned int rotation)
+ 
+ #define DRM_BLEND_ALPHA_OPAQUE		0xffff
+ 
++const char *drm_get_rotation_name(unsigned int rotation);
++
+ int drm_plane_create_alpha_property(struct drm_plane *plane);
+ int drm_plane_create_rotation_property(struct drm_plane *plane,
+ 				       unsigned int rotation,
 
 -- 
 2.51.0
