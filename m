@@ -1,167 +1,190 @@
-Return-Path: <linux-doc+bounces-64884-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64874-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07D1DC19376
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 09:54:08 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 49CCAC19180
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 09:37:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 49A593BFC6F
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 08:36:42 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 0037A563046
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 08:27:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CC3272DCC08;
-	Wed, 29 Oct 2025 08:36:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6402B338F23;
+	Wed, 29 Oct 2025 08:18:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pjrgF0fd"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PDkJji5N"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FE6A1B3923;
-	Wed, 29 Oct 2025 08:36:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA3A432143C
+	for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 08:18:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761726999; cv=none; b=puMt+t9rClxlaeirMvwI4DW38iW7/2UdTJeaPdxI7fPuslf6J45X4S/wHw0dSCNqjP8/wCp+3Rech2NXW++FwFjlVZerb4yFk5hBgMidN1psCJop+OsduO/Um3EsK+VxX+HhU721HOk+oslvJICkiUK9cHEyoUxtmkfndXqKK6o=
+	t=1761725910; cv=none; b=o7LS6rabEEqfck7xdstepRxJfwsnzHuW8813A/rUz63vtiOla1UBblG0JUIIQqrCuqE5AXIa0lth5tqqiVLJiaiBg2XwPln3euEDPZBVCckGveDum5mb1AOim6Iw0oW1S02GMWVvN1jzOy+wtw/5WdrRBbxE6xoEMo/LqGG6isM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761726999; c=relaxed/simple;
-	bh=1rKtagzqCuyPPLrsSkpbDvAK+y4SdzCtc2efQBAaXAw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HiwQ/4xsmHJv8gKlJ3voQWDYT0HbLlyz2Pc/mehaS3QnZ1IORTCFfPyFqTzsXwQPAxQQevmj9QrjMilDIxaXyOtL9CX8d33Y9HcPlRjkY83Yvrg7UUFhH8L11td+bli8jhAKvURZIhpZMp0WHA6JzAVVX6K8O9WN6k6swPxLurU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pjrgF0fd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCE9EC4CEF7;
-	Wed, 29 Oct 2025 08:36:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1761726999;
-	bh=1rKtagzqCuyPPLrsSkpbDvAK+y4SdzCtc2efQBAaXAw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=pjrgF0fd1Kw6Rz/hY36Ug6cppaVasCKMFiUTxVsnD3ZwCCquW0JgNgsQDWQSn45OE
-	 Ka0U3KcchPWlwJIPDtlcSxauweiv26U0K2RSuHGHNvbSvVN3rPFhoJiw6En9H+vohz
-	 siC6P4OCbcdk8RO9aqg1erGf7NO7aAPETSdrJnptKWiRf7Yz6GwkEfk8fV46BeScQD
-	 /8nAN1DKNAPffKgftlEfRuZMKmg89xw5c0PgezIaPpF6FX5ef9sYeYzjB32cENm+fh
-	 1bhzcG8iM9dAI3va4KS8UeT2cE3RaCoQtuBs0QphWVLSSrITEEYgiXxEIq6Q+tuwcp
-	 6/yj+oZjlV1vA==
-Date: Wed, 29 Oct 2025 09:36:35 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Francesco Valla <francesco@valla.it>
-Cc: Mario Limonciello <mario.limonciello@amd.com>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>, 
-	Javier Martinez Canillas <javierm@redhat.com>, Sam Ravnborg <sam@ravnborg.org>, linux-kernel@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-embedded@vger.kernel.org
-Subject: Re: [PATCH RFC 0/3] Add splash DRM client
-Message-ID: <4uknyhx7lshybin3qjdyh7oq6udtdw3lqagumg6w6qjre3pn55@23c5itmo55f5>
-References: <20251027-drm_client_splash-v1-0-00698933b34a@valla.it>
- <93cbbaef-918f-4300-aa5b-11f098e217b2@amd.com>
- <23clcxtgbzbsji2knwp47xdc5udj7lnhbvzsgqi3vklvmhdgjd@26ycx2ed77l4>
- <4497733.UPlyArG6xL@fedora.fritz.box>
+	s=arc-20240116; t=1761725910; c=relaxed/simple;
+	bh=ytOgLBaFXH0MjHGi3HQFFq5SOoOzuPaSnXx/JqK3xmY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=a2PnoN/FlG5EvSdE8dlm0dlhJIHaIYnfoa8y25Mf6/Mnj+DCgeQAS/Um0C4tClh2FJDNW0hvNKKdqBnoy0+yoUarJGZ/WXegBZhjWMdQqutFE+o8INHXCU8jXzjkBJDNlrQXAyzD8/W1XBN9t8HNM9s1J5KpJXD16TH+53/md9Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PDkJji5N; arc=none smtp.client-ip=209.85.216.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-33ba5d8f3bfso6261188a91.3
+        for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 01:18:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761725908; x=1762330708; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BU/2ChziUWHxejZHVNmmLwHaGHaf0EEXiVZ1de6fJz8=;
+        b=PDkJji5NpIy/iINL419GnAk+9+qYddfkAKyMuKwFe4mlyO6WGqcObFtOQ+Lptky7WR
+         KJ1Wl2S7CV7RZyN7rjes5T1aweYJdAO3cVjnyE1eIOkSiJxpn0vYDb+9Aowm6Gdv9QCg
+         NqipBCPtCxKEbyo8m9dUSyjA9lKk1B4e/OponYrV6bspekPHH4sAJl3T2EI1Y0xFxgUG
+         XkgNhNQ3p5DvmFratLinp+c/jIfPeTtnog6V0XMo/IJ02fBZAWcgERwN6LMbe8S7mdWK
+         psAfWnLveVVJaQR/Sqfq9Uw3UNAGesj6k0wht6v5yM/SLk6BbMr3MLsh/TK/vfviHkhX
+         Hucw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761725908; x=1762330708;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BU/2ChziUWHxejZHVNmmLwHaGHaf0EEXiVZ1de6fJz8=;
+        b=Mz8RufD+izsdLB/S+xs4HhMNUEasACPtEKGTwKlQ9x2JhPyKgBHFRnqXPbrky4Z78X
+         rT/dvnmp9E+QthCC0o9IpLWlGF502/1LIj/+XWcBzWQ3C4PTQInOaoHNe2tCQLlr401X
+         mO9w2DdGTd2cPDtXk2aSwwmJO/yGmc3H4O1NqubE804glk/UkgDOyUQzx3xj2XGqai8f
+         id5UAr2bGA94PZBeML229cG0Bc2+CV2ypSjbrwXzgpKJsEn3H3JsBDeqOyFA86MpAjEq
+         S/qHtzb6yyqACJiYXq3cOb44eEPjh4c8VXb5Z9G+JAe1SpyK2EBKNwmWXvl9oN42LTI3
+         zjjw==
+X-Forwarded-Encrypted: i=1; AJvYcCXdVwao4zCpCtK+v5TPJzDTZghXmw9XszOQJABYNxY1FqOmqLrkrnAOJ/hcWEvwKRYKjUyMXAx8ObA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxbfqXkNdAMbCLwn5zN72kqGYHBBZNxl0MskSi7iWkPwM/jvdcl
+	I3dpqaExzI2HLSfXGsw1+k4lAxwb28R8tQHz18qRy2AoK04MD+eOZwsZ
+X-Gm-Gg: ASbGncsYkxAmp4vP/BowBrA0pUHGHhFzRFhvrWhQpvEdZprCic2AC/agz4arJQVlI5e
+	60QrGdjKUuS/psBL5cOMwEEz7d4giMoiMDnF6pS1zsErNs5K6Nk6PiAWBE18pYLjVOJO3ih9m7n
+	D8ipEdtPn1URMKgecf21kmUbHVt736qD/g5ZkVdgawHpLvHEQ6/+KzHt0scQ+ZACkFHNcY/aFO8
+	whloD6M0YAwr4Jwege2hHLK+am4tBFGWpdCe2tLTFm3QdgYjC+I40hNdU/1jxHspzoyKxq3ebvc
+	yMY4wyOeco6640efN5V4iJ8a9VlXPnNNdx0FqH0XB01TQtHPYM+RHCgcLmD5Uzk8DGZ1D6H01/Y
+	89ytWL2x4S0/l+eQ9C/OaaQJ50XEpidVIwQi6ca8TPF6q6VMtEYyd2qrgmYB9TZbhZE9QLpMt5g
+	RlKYiimek=
+X-Google-Smtp-Source: AGHT+IG0hKoAdUsMURHNX2F0gCSO4GHclR682zY7XisnLdYkrJ5vgKbkXR26X+9oYI+y2cVVLM86Wg==
+X-Received: by 2002:a17:90b:514c:b0:336:b60f:3936 with SMTP id 98e67ed59e1d1-3403a26500bmr2931834a91.12.1761725907889;
+        Wed, 29 Oct 2025 01:18:27 -0700 (PDT)
+Received: from LilGuy ([2409:40c2:1057:4837:724a:2122:38a7:2755])
+        by smtp.googlemail.com with ESMTPSA id 98e67ed59e1d1-33fee84db04sm7905429a91.2.2025.10.29.01.18.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Oct 2025 01:18:27 -0700 (PDT)
+From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+To: "Rafael J. Wysocki" <rafael@kernel.org>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-pm@vger.kernel.org (open list:CPU FREQUENCY SCALING FRAMEWORK),
+	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+	linux-kernel@vger.kernel.org (open list)
+Cc: skhan@linuxfoundation.org,
+	david.hunter.linux@gmail.com,
+	Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+Subject: [PATCH] Documentation: pm: fix duplicate hyperlink target errors
+Date: Wed, 29 Oct 2025 13:47:37 +0000
+Message-ID: <20251029134737.42229-1-swarajgaikwad1925@gmail.com>
+X-Mailer: git-send-email 2.51.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="escnxwlco7olhzqd"
-Content-Disposition: inline
-In-Reply-To: <4497733.UPlyArG6xL@fedora.fritz.box>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fix reST warnings in
+Documentation/admin-guide/pm/intel_pstate.rst caused by missing explicit
+hyperlink labels for section titles.
+
+Before this change, the following errors were printed during
+`make htmldocs`:
+
+  Documentation/admin-guide/pm/intel_pstate.rst:401:
+    ERROR: Indirect hyperlink target (id="id6") refers to target
+    "passive mode", which is a duplicate, and cannot be used as a
+    unique reference.
+  Documentation/admin-guide/pm/intel_pstate.rst:517:
+    ERROR: Indirect hyperlink target (id="id9") refers to target
+    "active mode", which is a duplicate, and cannot be used as a
+    unique reference.
+  Documentation/admin-guide/pm/intel_pstate.rst:611:
+    ERROR: Indirect hyperlink target (id="id15") refers to target
+    "global attributes", which is a duplicate, and cannot be used as
+    a unique reference.
+  ERROR: Duplicate target name, cannot be used as a unique reference:
+  "passive mode", "active mode", "global attributes".
+
+These errors occurred because the sections "Active Mode",
+"Active Mode With HWP", "Passive Mode", and "Global Attributes"
+did not define explicit hyperlink labels. As a result, Sphinx
+auto-generated duplicate anchors when the same titles appeared
+multiple times within the document.
+
+Because of this, the generated HTML documentation contained
+broken references such as:
+
+  `active mode <Active Mode_>`_
+  `passive mode <Passive Mode_>`_
+  `global attributes <Global Attributes_>`_
+
+This patch adds explicit hyperlink labels for the affected sections,
+ensuring all references are unique and correctly resolved.
+
+After applying this patch, `make htmldocs` completes without
+any warnings, and all hyperlinks in intel_pstate.html render properly.
 
 
---escnxwlco7olhzqd
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH RFC 0/3] Add splash DRM client
-MIME-Version: 1.0
+Signed-off-by: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+---
+ Documentation/admin-guide/pm/intel_pstate.rst | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-On Tue, Oct 28, 2025 at 09:09:06AM +0100, Francesco Valla wrote:
-> Hi,
->=20
-> On Monday, 27 October 2025 at 18:19:12 Maxime Ripard <mripard@kernel.org>=
- wrote:
-> > On Mon, Oct 27, 2025 at 11:31:06AM -0500, Mario Limonciello wrote:
-> > > On 10/27/25 11:28 AM, Maxime Ripard wrote:
-> > > > On Mon, Oct 27, 2025 at 11:01:55AM -0500, Mario Limonciello wrote:
-> > > > > On 10/27/25 7:35 AM, Thomas Zimmermann wrote:
-> > > > > > > >     - a very simple progress bar, which can be driven throu=
-gh sysfs;
-> > > > > >=20
-> > > > > > Once you have options to control these settings from user space=
-, you
-> > > > > > should do it in user space entirely. As Maxime suggested, pleas=
-e improve
-> > > > > > plymouth for anything with animation.
-> > > > > >=20
-> > > > > > > >     - a static image (optional).
-> > > > > >=20
-> > > > > > Board vendors often provide an image, see /sys/firmware/acpi/bg=
-rt/. This
-> > > > > > is a candidate for display, or the penguin or a custom image. P=
-lease
-> > > > > > make it configurable by Kconfig. Again, if you need policy and
-> > > > > > heuristics for deciding what to display, you better do this in =
-user
-> > > > > > space.
-> > > > >=20
-> > > > > I'd actually argue that the static image from BGRT should be the =
-preferred
-> > > > > priority.  This can make for a nice hand off to Plymouth.
-> > > > >=20
-> > > > > The (UEFI) BIOS already will show this image as soon as the GOP d=
-river is
-> > > > > loaded.  Bootloaders like GRUB by default will avoid showing anyt=
-hing or
-> > > > > will overwrite with the exact same image in the same location.  T=
-his can let
-> > > > > the kernel do the same, and then the moment Plymouth takes over i=
-t could do
-> > > > > the same.
-> > > >=20
-> > > > And BGRT isn't typically found on embedded systems at all, so I'm n=
-ot
-> > > > sure it's a sensible default, let alone a priority. At most a possi=
-ble
-> > >=20
-> > > There are certainly embedded machines using UEFI and that have a BGRT.
-> >=20
-> > Yes, indeed, hence the "typically".
-> >=20
-> > > How about "Sensible default the top of the priority list if it exists"
-> >=20
-> > How about we don't tell contributors what their priorities must be?
-> >=20
-> > Maxime
-> >=20
->=20
-> I'm not familiar at all with BGRT, I'll study a bit about it.
->=20
-> A build-time configuration could then let the user select:
->=20
-> - a plain solid color
-> - a custom static image
-> - the penguin logo (?)
-> - (on UEFI systems) BGRT source
+diff --git a/Documentation/admin-guide/pm/intel_pstate.rst b/Documentation/admin-guide/pm/intel_pstate.rst
+index 26e702c7016e..9cdd9dad6516 100644
+--- a/Documentation/admin-guide/pm/intel_pstate.rst
++++ b/Documentation/admin-guide/pm/intel_pstate.rst
+@@ -62,6 +62,8 @@ a certain performance scaling algorithm.  Which of them will be in effect
+ depends on what kernel command line options are used and on the capabilities of
+ the processor.
 
-It wouldn't work for generic distros that would run with the same config
-on systems with and without BGRT.
++.. _Active Mode:
++
+ Active Mode
+ -----------
 
-Again, that whole discussion around BGRT is very premature, I'd suggest
-to drop it for now.
+@@ -94,6 +96,8 @@ Which of the P-state selection algorithms is used by default depends on the
+ Namely, if that option is set, the ``performance`` algorithm will be used by
+ default, and the other one will be used by default if it is not set.
 
-Maxime
++.. _Active Mode With HWP:
++
+ Active Mode With HWP
+ ~~~~~~~~~~~~~~~~~~~~
 
---escnxwlco7olhzqd
-Content-Type: application/pgp-signature; name="signature.asc"
+@@ -192,6 +196,8 @@ This is the default P-state selection algorithm if the
+ :c:macro:`CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE` kernel configuration option
+ is not set.
 
------BEGIN PGP SIGNATURE-----
++.. _Passive Mode:
++
+ Passive Mode
+ ------------
 
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCaQHSEgAKCRAnX84Zoj2+
-dpGIAX422nWOX75YY7H8/KLRytbQNW5Mc3R0yHeeBRF2Es62f2SWmkYJtpd604aL
-gPtkHr0Bf2dw31hWMOP/ppZ975jt6D0JUZCVXttO2ltAPk1jJbxLm0z0Oe2x2aIX
-RT783F5qdw==
-=onat
------END PGP SIGNATURE-----
+@@ -432,6 +438,8 @@ the ``energy_model`` directory in ``debugfs`` (typlically mounted on
+ User Space Interface in ``sysfs``
+ =================================
 
---escnxwlco7olhzqd--
++.. _Global Attributes:
++
+ Global Attributes
+ -----------------
+
+
+base-commit: f30d294530d939fa4b77d61bc60f25c4284841fa
+--
+2.51.1
+
 
