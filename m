@@ -1,216 +1,202 @@
-Return-Path: <linux-doc+bounces-64927-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64929-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA1FCC1BBB2
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 16:41:43 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 945D3C1BCF6
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 16:53:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 096B2560A93
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 14:23:06 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A67BA5819FB
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 14:36:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B53A548EE;
-	Wed, 29 Oct 2025 14:23:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 19FDB286D7B;
+	Wed, 29 Oct 2025 14:36:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="pT0a4RDi"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="BVEpfGO8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95019266EFC
-	for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 14:23:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2749E19D08F;
+	Wed, 29 Oct 2025 14:36:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761747783; cv=none; b=g7NGxWhUBKekccB17FUvtck/asiXbLg+Fwg0/TTcmVw8jXoBeJpSWsp4cOuU9V+HpyUsmXowQk1XUCj5pD0t/at2QTnfKYInsPaMRZZwRneUHcsXPw/IKxOwO6dD4jhsLhPSx2Vd92k/WER98ytPwNoCRRPf6XuCnUZ+AUXtMZI=
+	t=1761748616; cv=none; b=sUoiqqaLbQKz+2Zi39zS8s5m9gUKGL+Wb1xAVovPq2SJSeYqPTV1u+tZkQ6bTRDh70GVaErt2vjXekP70fr5Y8HZhd3S81Ue7UjHEb5HZYXmHzcF+/O+NDjTs/T+UVUXv9BsV2UxsREFhoa+SPBH23BwHYbBeKQFNQbDQsgVQ4E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761747783; c=relaxed/simple;
-	bh=3r1XQRF8DDSRrKj9zbUnuUeGmXqakMD70QFkY1kuWkI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dZYIYXJU5RhK6XCfS7Lybnw8b4aGTpmicjOFoNxzUVQKuEKRdK1zswHgzQ66q3bFSQbkGTYE1Eq5uFUccA56T2Pac0dzFutqhywJv6KNBajKFzgv6pWys9yAuuKVB++MWOQTOb7p+yBIAYG8O2/EIhm/aIdmLvcTwJaT7uFxp8o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=pT0a4RDi; arc=none smtp.client-ip=209.85.167.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-587bdad8919so10640e87.0
-        for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 07:23:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1761747780; x=1762352580; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=3X8rEfNOS8L5ftWnixKzPLC44IltEKPSF05+QvLhNoU=;
-        b=pT0a4RDiIs6sKv5yKt8jxXLlZIZcuZKDgckMvNJ3+qU38g/fB1vquKksB0atwDNQNY
-         Fq1xfNiyfdqcp4yHkEXYVY6kPSqjUDFFZftUpNJzIHqCM2KRQz7xsSJUeCMB4WkE3hzL
-         ZSS7mYgN9ZE0ahx/aZKhg6orGeaAYmboJP6qVFka4nz4jB8Zpslm201HC2H2bOyL2ZYs
-         5prTdl7u4hh8iuWcDMdQD/PRWrbo2aDpfkHXcD2T09tZZ/3Lb1aPicBpFat7h6WcRSl4
-         t9CeWCSAR7r+vhFOvCbSDJtbblzPTSYO25ZU0V592loQ9iJCN8WzqDrS+6Oq5VEPuSz1
-         te8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761747780; x=1762352580;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3X8rEfNOS8L5ftWnixKzPLC44IltEKPSF05+QvLhNoU=;
-        b=Svnsh8Z7WSy3prjTkAxXUHga7njRYn+ZZRN/W0pPRzYmcuOxeMC9HMgNrrRGrkfnHl
-         cvIxfH1plfs8YnujsiqBW6XGBwVYqSi35qI0Isu2yCIe9XAjQ2Z0X9r7MZIjsQCpcTkH
-         Ml7tMNgHT7mnLYny3xxXM6yyR0Ay8pLXqWk6i9hITeon9qF4fMG3CnKCPMHFlZpFpG9o
-         Ac2viXiVZBt9eYa2GP7J3CzleIdsiJS0/jgsFS13tFu8yKSwC/KpZwZDcrSm+OgxWc18
-         v60I5UximENBTrjli4kiPRqqqWj8M4HsefMkNCrLdwzBK6VPs/k05wQOLC4/XqXBBpv0
-         jb2A==
-X-Forwarded-Encrypted: i=1; AJvYcCU5VsnzhMTQQP6Vpl56AIpguShYxN4TXmziQEcBBnJRzGrAMjVDFincvw3SliSQhcVaYC1/6dCzQPY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzNNYLA+utz/OioGnkPr18I8gJCrLOHAH1VeWxauPm11//tSbro
-	F/HAbyX2IZ3M0F4RYveLkEvqCIOsfOF2hdHDUglQOZsQCMPGx6r3QgyYuSaS/J3xJ0pqGNhLwe4
-	JbH5d5w==
-X-Gm-Gg: ASbGncuGwnWamnGCzSbcPVl05DnwssHlQ6vSCL+rXQcPORKkQUtdjwymzESN9WfNazG
-	UMQbAveZDonBc6nNODE6oLc+21BGsvWqXVPjfSlwjQQ8YhA9VyG32LWEafJDpo1sZKaQTKiyMzM
-	YoKakbuJrXmDwEo89WUVZk1Cna9B6Tv9R0wfEwpplknQy9b3Ck0Gp99mcbEn8oioPgIvdIhYJh6
-	Qy5htMwDjqkzIy2tBUeHn7aGjejsUpDswIYfzV+7ixXYGNaFABqROSWu37fSckgxLmcJZqHLwXl
-	4LUXPVb4yfqQWnjduYFLNtJM3Ginvx2YzhlR9KlJdn9zZVT1sW6BVqJ574wlY9KGKmhEqzzNkhr
-	+bQcLOQ+u6BXeSTz5WlUpHW1jTMT3BRa20pdMUMKfRwTUhwhu41ZrnUb1C2KGeULaccYhjD7DDv
-	Y4HAQiSJFJUgEt65AmSDtJaQUxfYJMThh8gfVgHP0=
-X-Google-Smtp-Source: AGHT+IHqpmvhmNQeMUwlxSx22ePgHZKELB9fYGyYcpwDmvfoTwWjtRpntwXiEd4wY5k8KEzx24Mb0A==
-X-Received: by 2002:ac2:5fd0:0:b0:57e:b289:c64a with SMTP id 2adb3069b0e04-59412a39f9emr279787e87.6.1761747779360;
-        Wed, 29 Oct 2025 07:22:59 -0700 (PDT)
-Received: from google.com (54.140.140.34.bc.googleusercontent.com. [34.140.140.54])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429952d5678sm26187265f8f.22.2025.10.29.07.22.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Oct 2025 07:22:58 -0700 (PDT)
-Date: Wed, 29 Oct 2025 14:22:55 +0000
-From: Mostafa Saleh <smostafa@google.com>
-To: =?iso-8859-1?Q?J=F6rg_R=F6del?= <joro@8bytes.org>
-Cc: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, corbet@lwn.net, will@kernel.org,
-	robin.murphy@arm.com, akpm@linux-foundation.org, vbabka@suse.cz,
-	surenb@google.com, mhocko@suse.com, jackmanb@google.com,
-	hannes@cmpxchg.org, ziy@nvidia.com, david@redhat.com,
-	lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com,
-	rppt@kernel.org
-Subject: Re: [RFC PATCH 2/4] drivers/iommu: Add calls for iommu debug
-Message-ID: <aQIjP3jVigyz8t38@google.com>
-References: <20251003173229.1533640-1-smostafa@google.com>
- <20251003173229.1533640-3-smostafa@google.com>
- <hu7ozrdn6la24apa4pco5nkhow2dmthahjomjj6hy4nrefx6j4@lcdfbykoafw4>
+	s=arc-20240116; t=1761748616; c=relaxed/simple;
+	bh=8k4lHzLT7neM0g0BzvOZmUmEADE2dPgk8M+AIwdzG0s=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=NLfBQYv93jzdry3T2uiFNzC3GKUVwu5eKLMHqZoCYwBDAkl0rcidX2AybJZH66fkaz2jKWP5UsaU+G4uyochiYVS9V/KUGFh360lvbgCsYJHNmrQWNVqtNZEg1QC6NzuOeTlOJL9wqMNs7VNxTwUWxgf5BMffpQFiwS51W8OR/Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=BVEpfGO8; arc=none smtp.client-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 1145FC0DA83;
+	Wed, 29 Oct 2025 14:36:31 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 44034606E8;
+	Wed, 29 Oct 2025 14:36:51 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A8108102F24F9;
+	Wed, 29 Oct 2025 15:36:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1761748610; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=jmYUv2V00UoCMYbVhUgMXX8GG9XVWU7wTruT7EINe3I=;
+	b=BVEpfGO8UFCpwaijw+FPufnafc1ANbfwMLb9V1FKdLUtqeiOylZYCo2fezC/KCivbabqgn
+	/inS9Qaz9jKwINYN53it+6w8GNobhKXQutndQg6z5v18hy67Fx2n1DWIrPoB+Lq72DJ1LM
+	RDS/mIadFYJD7SdBXnWe2eWtEqGLkPAK9WsMFF7biE6xdVbjImUQUZsyaazkhhDGtK9XVN
+	kQPxmC252LnpXEwhpLrwcBGqwr2XG7XszunUyUzYLX+z4eLKAkoGjaBZk1SdW9y2UM300N
+	VpAfFrNo3ngNpRMz9Rw6rquwNwltwZOAAnIedyrwtoLG0Yk+y4BkplFdrKNUlw==
+From: Louis Chauvet <louis.chauvet@bootlin.com>
+Subject: [PATCH RESEND v2 00/32] VKMS: Introduce multiple configFS
+ attributes
+Date: Wed, 29 Oct 2025 15:36:37 +0100
+Message-Id: <20251029-vkms-all-config-v2-0-a49a2d4cba26@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <hu7ozrdn6la24apa4pco5nkhow2dmthahjomjj6hy4nrefx6j4@lcdfbykoafw4>
+To: Haneen Mohammed <hamohammed.sa@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, Melissa Wen <melissa.srw@gmail.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, jose.exposito89@gmail.com, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: victoria@system76.com, sebastian.wick@redhat.com, victoria@system76.com, 
+ airlied@gmail.com, thomas.petazzoni@bootlin.com, 
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ linux-doc@vger.kernel.org, Louis Chauvet <louis.chauvet@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5317;
+ i=louis.chauvet@bootlin.com; h=from:subject:message-id;
+ bh=8k4lHzLT7neM0g0BzvOZmUmEADE2dPgk8M+AIwdzG0s=;
+ b=owEBbQKS/ZANAwAKASCtLsZbECziAcsmYgBpAiZ6heT2hcGYscwlgCl5EEIjMrJRz6q2Jm3PK
+ XwDX7iSAd6JAjMEAAEKAB0WIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCaQImegAKCRAgrS7GWxAs
+ 4l7SD/9Blfc5w1B/UdufZVV8UmNkFROrrwX2c6584IO9UVmLLjjYBYVWM8PclIo5Cp5U21PJHgJ
+ gRk0mijM+7idSrIkTvJR6PY4M5x26JN1UtYzU5eXDqPBqr7J+ConaVBOCBAuspWWb1lWrjj6Lsh
+ L7K2mSo4ldOuwMclzTEQ+1sC+ChgMMKq/XYE5DJfJlmzUFAL5jdZ1knmlB1+3s+J58Y4hPtt27Y
+ gBZsG4A8zj8riM1TlSRs7+gZ54vNst5GXDpl89wOTXzk8/e8XNMSrfczRRhW5jXyo/Wnw/oYYDK
+ thoJv30bs3kFjx88OmuH/eeZ+6iYV/1/iYVDjo8ZRcgG/5/gZvcCC4BwR376vjPFFObgbZ3+qkX
+ 33kf15n44VvdGDAYA3gyu8R3ZuxqqqoQAghhpvDlOQwONAIcNwCmzxNffcERVMwOPLaITQngb0G
+ wH/1B3H/EzPtzQBV8fj38rBl96uZgHa20JnJ1iJAe8P66mbjWw9p6TEFsJcvKAk/Ukkkel9/XIb
+ 7PXgs77C4/qHca0LtZPukhFuVFS1fvg5o6nWyYtMgJWdXjEayAZEgdGI1tolpMx5TEBYNO98ukM
+ BZytMoifdl+9aWjXjqJiQ3Fu9X9cTXpf/8BCn8ALbmc9jerB9t7444QstYA2LW0ymoWQn2Uts6j
+ JbrF1a6aOg2EVpg==
+X-Developer-Key: i=louis.chauvet@bootlin.com; a=openpgp;
+ fpr=8B7104AE9A272D6693F527F2EC1883F55E0B40A5
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Mon, Oct 27, 2025 at 12:43:06PM +0100, J�rg R�del wrote:
-> On Fri, Oct 03, 2025 at 05:32:27PM +0000, Mostafa Saleh wrote:
-> > Add calls for the new iommu debug config IOMMU_DEBUG_PAGEALLOC:
-> > - iommu_debug_init: Enable the debug mode if configured by the user.
-> > - iommu_debug_map: Track iommu pages mapped, using physical address.
-> > - iommu_debug_unmap: Track iommu pages unmapped, using IO virtual
-> >   address.
-> > - iommu_debug_remap: Track iommu pages, already mapped using IOVA.
-> > 
-> > We have to do the unmap/remap as once pages are unmapped we lose the
-> > information of the physical address.
-> > This is racy, but the API is racy by construction as it uses refcounts
-> > and doesn't attempt to lock/synchronize with the IOMMU API as that will
-> > be costly, meaning that possibility of false negative exists.
-> > 
-> > Signed-off-by: Mostafa Saleh <smostafa@google.com>
-> > ---
-> >  drivers/iommu/iommu-debug.c | 23 +++++++++++++++++++++++
-> >  drivers/iommu/iommu.c       | 21 +++++++++++++++++++--
-> >  include/linux/iommu-debug.h |  6 ++++++
-> >  3 files changed, 48 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/drivers/iommu/iommu-debug.c b/drivers/iommu/iommu-debug.c
-> > index 297a35137b38..607f1fcf2235 100644
-> > --- a/drivers/iommu/iommu-debug.c
-> > +++ b/drivers/iommu/iommu-debug.c
-> > @@ -5,11 +5,13 @@
-> >   * IOMMU API santaizers and debug
-> >   */
-> >  #include <linux/atomic.h>
-> > +#include <linux/iommu.h>
-> >  #include <linux/iommu-debug.h>
-> >  #include <linux/kernel.h>
-> >  #include <linux/page_ext.h>
-> >  
-> >  static bool needed;
-> > +static DEFINE_STATIC_KEY_FALSE(iommu_debug_initialized);
-> >  
-> >  struct iommu_debug_metadate {
-> >  	atomic_t ref;
-> > @@ -25,6 +27,27 @@ struct page_ext_operations page_iommu_debug_ops = {
-> >  	.need = need_iommu_debug,
-> >  };
-> >  
-> > +void iommu_debug_map(struct iommu_domain *domain, phys_addr_t phys, size_t size)
-> > +{
-> > +}
-> > +
-> > +void iommu_debug_unmap(struct iommu_domain *domain, unsigned long iova, size_t size)
-> > +{
-> > +}
-> > +
-> > +void iommu_debug_remap(struct iommu_domain *domain, unsigned long iova, size_t size)
-> > +{
-> > +}
-> > +
-> > +void iommu_debug_init(void)
-> > +{
-> > +	if (!needed)
-> > +		return;
-> > +
-> > +	pr_info("iommu: Debugging page allocations, expect overhead or disable iommu.debug_pagealloc");
-> > +	static_branch_enable(&iommu_debug_initialized);
-> > +}
-> > +
-> >  static int __init iommu_debug_pagealloc(char *str)
-> >  {
-> >  	return kstrtobool(str, &needed);
-> > diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-> > index 060ebe330ee1..56c89636a33c 100644
-> > --- a/drivers/iommu/iommu.c
-> > +++ b/drivers/iommu/iommu.c
-> > @@ -18,6 +18,7 @@
-> >  #include <linux/errno.h>
-> >  #include <linux/host1x_context_bus.h>
-> >  #include <linux/iommu.h>
-> > +#include <linux/iommu-debug.h>
-> >  #include <linux/iommufd.h>
-> >  #include <linux/idr.h>
-> >  #include <linux/err.h>
-> > @@ -231,6 +232,9 @@ static int __init iommu_subsys_init(void)
-> >  	if (!nb)
-> >  		return -ENOMEM;
-> >  
-> > +#ifdef CONFIG_IOMMU_DEBUG_PAGEALLOC
-> > +	iommu_debug_init();
-> > +#endif
-> >  	for (int i = 0; i < ARRAY_SIZE(iommu_buses); i++) {
-> >  		nb[i].notifier_call = iommu_bus_notifier;
-> >  		bus_register_notifier(iommu_buses[i], &nb[i]);
-> > @@ -2518,10 +2522,14 @@ int iommu_map_nosync(struct iommu_domain *domain, unsigned long iova,
-> >  	}
-> >  
-> >  	/* unroll mapping in case something went wrong */
-> > -	if (ret)
-> > +	if (ret) {
-> >  		iommu_unmap(domain, orig_iova, orig_size - size);
-> > -	else
-> > +	} else {
-> >  		trace_map(orig_iova, orig_paddr, orig_size);
-> > +#ifdef CONFIG_IOMMU_DEBUG_PAGEALLOC
-> > +		iommu_debug_map(domain, orig_paddr, orig_size);
-> > +#endif
-> 
-> These #ifdefs need to be in a header file, not the actual source code.
+VKMS have a wide range of options. The aim of this series is to introduce
+many configfs attribute so VKMS can be used to test a wide range of
+configurations.
 
-I will fix it in v2.
+PATCH 1,7,10,13,23 are to expose human readable strings from drm core
+PATCH 2-4 are to expose human readable plane type in debugfs
+PATCH 5,6 plane attribute
+PATCH 8,9 plane rotation
+PATCH 11,12 plane color encoding
+PATCH 14,15 plane color range
+PATCH 16,17 plane format
+PATCH 18 properly use zpos
+PATCH 19,20 plane zpos
+PATCH 21,22 connector type
+PATCH 24,25 connector supported colorspace
+PATCH 26,27 connector EDID
+PATCH 28,29 preparatory work for dynamic connectors
+PATCH 30,31 dynamic connectors
 
-Thanks,
-Mostafa
+PS: Each pair of config/configfs patch are independant. I could
+technically create ≈10 different series, but there will be a lot of
+(trivial) conflicts between them. I will be happy to reordoer, split and
+partially apply this series to help the review process.
 
-> 
+PPS: Resend because it was rejected by dri-devel
+
+Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
+---
+Changes in v2:
+- PATCH 1: reorder includes (José)
+- PATCH 2: use name property instead of folder name (José)
+- PATCH 3: Fix default rotations (José)
+- PATCH 3,5,7,12: Add tests and extract validation for planes (José)
+- PATCH 3,5: Do not create color range/encoding properties if not set
+- PATCH 5,6,7,8: Set plural form for vkms_config_plane fields (José)
+- PATCH 4,6,8,13: Remove checking for default in supported (José)
+- PATCH 9: Add break in vkms_config_plane_add_format (José)
+- PATCH 12: fix zpos_enabled typo (José)
+- PATCH 13: fix documentation (José)
+- Add debug display (José)
+- PATCH 20: use drmm_kzalloc instead of kzalloc (José)
+- PATCH 22: simplify the code (José)
+- Link to v1: https://lore.kernel.org/r/20251018-vkms-all-config-v1-0-a7760755d92d@bootlin.com
+
+---
+Louis Chauvet (32):
+      drm/drm_mode_config: Add helper to get plane type name
+      drm/vkms: Explicitly display plane type
+      drm/vkms: Use enabled/disabled instead of 1/0 for debug
+      drm/vkms: Explicitly display connector status
+      drm/vkms: Introduce config for plane name
+      drm/vkms: Introduce configfs for plane name
+      drm/blend: Get a rotation name from it's bitfield
+      drm/vkms: Introduce config for plane rotation
+      drm/vkms: Introduce configfs for plane rotation
+      drm/drm_color_mgmt: Expose drm_get_color_encoding_name
+      drm/vkms: Introduce config for plane color encoding
+      drm/vkms: Introduce configfs for plane color encoding
+      drm/drm_color_mgmt: Expose drm_get_color_range_name
+      drm/vkms: Introduce config for plane color range
+      drm/vkms: Introduce configfs for plane color range
+      drm/vkms: Introduce config for plane format
+      drm/vkms: Introduce configfs for plane format
+      drm/vkms: Properly render plane using their zpos
+      drm/vkms: Introduce config for plane zpos property
+      drm/vkms: Introduce configfs for plane zpos property
+      drm/vkms: Introduce config for connector type
+      drm/vkms: Introduce configfs for connector type
+      drm/connector: Export drm_get_colorspace_name
+      drm/vkms: Introduce config for connector supported colorspace
+      drm/vkms: Introduce configfs for connector supported colorspace
+      drm/vkms: Introduce config for connector EDID
+      drm/vkms: Introduce configfs for connector EDID
+      drm/vkms: Store the enabled/disabled status for connector
+      drm/vkms: Rename vkms_connector_init to vkms_connector_init_static
+      drm/vkms: Extract common code for connector initialization
+      drm/vkms: Allow to hot-add connectors
+      drm/vkms: Introduce configfs for dynamic connector creation
+
+ Documentation/gpu/vkms.rst                      |  45 +-
+ drivers/gpu/drm/drm_blend.c                     |  35 +-
+ drivers/gpu/drm/drm_color_mgmt.c                |   4 +-
+ drivers/gpu/drm/drm_connector.c                 |   1 +
+ drivers/gpu/drm/drm_crtc_internal.h             |   6 -
+ drivers/gpu/drm/drm_mode_config.c               |  13 +
+ drivers/gpu/drm/vkms/tests/Makefile             |   1 +
+ drivers/gpu/drm/vkms/tests/vkms_config_test.c   | 247 +++++++
+ drivers/gpu/drm/vkms/tests/vkms_configfs_test.c | 102 +++
+ drivers/gpu/drm/vkms/vkms_config.c              | 333 ++++++++-
+ drivers/gpu/drm/vkms/vkms_config.h              | 577 +++++++++++++++
+ drivers/gpu/drm/vkms/vkms_configfs.c            | 939 +++++++++++++++++++++++-
+ drivers/gpu/drm/vkms/vkms_configfs.h            |   6 +
+ drivers/gpu/drm/vkms/vkms_connector.c           | 168 ++++-
+ drivers/gpu/drm/vkms/vkms_connector.h           |  38 +-
+ drivers/gpu/drm/vkms/vkms_crtc.c                |  11 +-
+ drivers/gpu/drm/vkms/vkms_drv.h                 |   5 +-
+ drivers/gpu/drm/vkms/vkms_output.c              |  19 +-
+ drivers/gpu/drm/vkms/vkms_plane.c               |  79 +-
+ include/drm/drm_blend.h                         |   2 +
+ include/drm/drm_color_mgmt.h                    |   3 +
+ include/drm/drm_mode_config.h                   |   3 +
+ 22 files changed, 2534 insertions(+), 103 deletions(-)
+---
+base-commit: 57fe8285dc4764171fa9eb1f153cae3bb313d6fc
+change-id: 20251017-vkms-all-config-bd0c2a01846f
+
+Best regards,
+-- 
+Louis Chauvet <louis.chauvet@bootlin.com>
+
 
