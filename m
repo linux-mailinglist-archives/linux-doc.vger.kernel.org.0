@@ -1,66 +1,64 @@
-Return-Path: <linux-doc+bounces-64983-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64984-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6B6CC1C35D
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 17:47:42 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85110C1C045
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 17:20:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 243325A7A33
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 16:11:15 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 826C119C2891
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 16:16:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CEF4434DCDF;
-	Wed, 29 Oct 2025 16:08:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86CD11EB9E3;
+	Wed, 29 Oct 2025 16:15:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="C1M3XGyT"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="D2K3ITH8"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17F6834DCCF;
-	Wed, 29 Oct 2025 16:08:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CB7E2D8779;
+	Wed, 29 Oct 2025 16:15:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761754112; cv=none; b=r8R2h0vnEILhoE0cEFggPBPMwC7ZeEuuhu8zlVGKmolF/ktqmaUUFicssN+G6EZnBhaO66GJARmT/bdhqhu/LMCAcKLl95qP9A/8OI+f4KZvpM+P/CDoVrganas8CqRIJwi82I5S76QAVzyL+MPHLFQYn54QAv6T50x9k2GauHw=
+	t=1761754535; cv=none; b=eRduSK0Pqn7ZdYOKnnOJEwvPNkKLfppyIZWatqwA+gH/5XhXnJhtbuhnyy1EAcN3M9J36wODUf66xb9yhJDPWZ5JWCYPKz+kJPvZMSjHmUUoB0GiH0j9h7wEEXzKKKzIJC/zwioLJlsedewpcu2eisPUoJnc0HZUWGCIjD7s6ks=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761754112; c=relaxed/simple;
-	bh=FvheU5MZYCN14xHdWx6Kg7JoYWn2MMAEe9/SqQLNLnc=;
+	s=arc-20240116; t=1761754535; c=relaxed/simple;
+	bh=P4oeid1HL5dlM2icZgrR+rwKVYRUYDzMQTRugMfcxYw=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=imwyRZBUk/zt/kxlF7NKNT+TtYDO1P+gSBrP7cJ7dn/p/Y15fhKpl3Tt+NQl0Jw+hWlfU13kNnVstbIHv6c7dY+ucEw+LYOuSi5Y/Up6JVjL28e1FfbSvUHmIeencIt7fxv618pszewh0AuCyTWuENhgLEJt0hJZFjRFMMlx1WE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=C1M3XGyT; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=ia25ffn6AA7qS9gCirKivHHzx4jLv+A97mlreOSVsgPETY/P5g+DqKhaKPFBj/K3OxcxlQEltUPD94Gho+WrfJPNYSlyFJlqnakFggs0J5LBoRWDcB6Acx9vR9ZEyIHyuUtXwcbo6VXYs6Qur/UnZsvP01oOYcUdctvVZrNK4Z4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=D2K3ITH8; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 24C1A406FB
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 941F3406FB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1761754110; bh=UX7vSfd/TNTub1AvMxw2PX8R0Jt/IunPvXfu0oAPX00=;
+	t=1761754532; bh=L8Kiv1HZUF4H6QpVPZ/toYV2pUWfUfVz6DT+A2payl0=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=C1M3XGyTvOhRKJaAIuPeQoJzo34wRvVAEfH7fCBvFj0MWhZuSYSgw4xBoH+k0+8tA
-	 qg4cCGhNYufz4FBYsIMxJbMSaztmIQWyxGTzGysIpe91MypR+a/Pbsl+zEk9zP0/gm
-	 mESRju9sDHB5pqta+E4v/HnndeWCmw1spgxQNttik39foz0wWsUz0U7f5Hru1NSfTk
-	 9Tl6B5ODRdnt5qUyxLlQE/USLroXWQelsI/aRN3pL6vHKvrjug0a0/sL8RGkMPdwxB
-	 zEwtB79pV/dYVnPQJbylRVy68prN97yPkMydPYKXak18VxYVPgYOrXgRAgxe2yzig6
-	 KBcMderD0oeCA==
+	b=D2K3ITH8Kha3L/FIwspP7fM5n7jF6E1BIxFzPqhUrhs4Gp55B0Qkm9lTWyOcUMSTn
+	 BCM4idQ3UQ9UAGFe7hZhSX/pbXXfOXEjLEhRQIYqJdulF+DVCKsdgeqd4tX4Qafp+6
+	 x2E8mAxubaAFQLFWm4oh5ilnfR6xiZHQ/F9VyqKks6cn5SecFIjU9m5yoTA1rKG12P
+	 aWeERTSVgMdwsJFk+fQENyZTSPKXtEeEXq7sa5MUTM8yAae2kPCQ1cCgBploZz0Thk
+	 jAzxOiTSqXnVopEoL4CPw6HQyT9RkeCwgcB6TVYXJ/T3UPLBoWbxqDrWRNQMtq9yVI
+	 iYKex9Bltjokw==
 Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 24C1A406FB;
-	Wed, 29 Oct 2025 16:08:30 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 941F3406FB;
+	Wed, 29 Oct 2025 16:15:32 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
-To: Bagas Sanjaya <bagasdotme@gmail.com>, Linux Kernel Mailing List
- <linux-kernel@vger.kernel.org>, Linux Documentation
- <linux-doc@vger.kernel.org>, Linux Kernel Workflows
- <workflows@vger.kernel.org>
-Cc: Randy Dunlap <rdunlap@infradead.org>, Greg Kroah-Hartman
- <gregkh@linuxfoundation.org>, Sasha Levin <sashal@kernel.org>, Bagas
- Sanjaya <bagasdotme@gmail.com>, stable@vger.kernel.org
-Subject: Re: [PATCH] Documentation: process: Also mention Sasha Levin as
- stable tree maintainer
-In-Reply-To: <20251022034336.22839-1-bagasdotme@gmail.com>
-References: <20251022034336.22839-1-bagasdotme@gmail.com>
-Date: Wed, 29 Oct 2025 10:08:29 -0600
-Message-ID: <87frb1r8qq.fsf@trenco.lwn.net>
+To: Brendan Jackman <jackmanb@google.com>, Thomas Gleixner
+ <tglx@linutronix.de>, Borislav Petkov <bp@alien8.de>, Peter Zijlstra
+ <peterz@infradead.org>, Josh Poimboeuf <jpoimboe@kernel.org>, Pawan Gupta
+ <pawan.kumar.gupta@linux.intel.com>, Balbir Singh <sblbir@amazon.com>
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, Brendan Jackman
+ <jackmanb@google.com>, Kees Cook <kees@kernel.org>
+Subject: Re: [PATCH 0/2] Documentation: fixups for L1D flushing
+In-Reply-To: <20251015-l1d-flush-doc-v1-0-f8cefea3f2f2@google.com>
+References: <20251015-l1d-flush-doc-v1-0-f8cefea3f2f2@google.com>
+Date: Wed, 29 Oct 2025 10:15:31 -0600
+Message-ID: <878qgtr8f0.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,35 +67,19 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Bagas Sanjaya <bagasdotme@gmail.com> writes:
+Brendan Jackman <jackmanb@google.com> writes:
 
-> Sasha has also maintaining stable branch in conjunction with Greg
-> since cb5d21946d2a2f ("MAINTAINERS: Add Sasha as a stable branch
-> maintainer"). Mention him in 2.Process.rst.
->
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> Signed-off-by: Brendan Jackman <jackmanb@google.com>
 > ---
->  Documentation/process/2.Process.rst | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+> Brendan Jackman (2):
+>       Documentation: clarify PR_SPEC_L1D_FLUSH
+>       Documentation: fix reference to PR_SPEC_L1D_FLUSH
 >
-> diff --git a/Documentation/process/2.Process.rst b/Documentation/process/2.Process.rst
-> index 8e63d171767db8..7bd41838a5464f 100644
-> --- a/Documentation/process/2.Process.rst
-> +++ b/Documentation/process/2.Process.rst
-> @@ -99,8 +99,10 @@ go out with a handful of known regressions, though, hopefully, none of them
->  are serious.
->  
->  Once a stable release is made, its ongoing maintenance is passed off to the
-> -"stable team," currently Greg Kroah-Hartman. The stable team will release
-> -occasional updates to the stable release using the 9.x.y numbering scheme.
-> +"stable team," currently consists of Greg Kroah-Hartman and Sasha Levin. The
-> +stable team will release occasional updates to the stable release using the
-> +9.x.y numbering scheme.
-> +
->  To be considered for an update release, a patch must (1) fix a significant
+>  Documentation/admin-guide/hw-vuln/l1d_flush.rst | 2 +-
+>  Documentation/userspace-api/spec_ctrl.rst       | 6 +++++-
+>  2 files changed, 6 insertions(+), 2 deletions(-)
 
-Applied, thanks.
+I've gone ahead and applied these two, thanks.
 
 jon
 
