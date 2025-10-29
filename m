@@ -1,105 +1,139 @@
-Return-Path: <linux-doc+bounces-64875-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64879-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1793C191C6
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 09:41:27 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 13D10C1921A
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 09:43:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 73593567AD7
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 08:28:55 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A51B45648B3
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 08:32:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 18C6C313540;
-	Wed, 29 Oct 2025 08:20:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE804330B0D;
+	Wed, 29 Oct 2025 08:26:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QzzWL/h0"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jKK4/puC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D80EF3128A6;
-	Wed, 29 Oct 2025 08:20:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 147A732E734
+	for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 08:26:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761726013; cv=none; b=qk95LacpAE7P6Euu97cBVx/nJ3uFJAQQHvA057C2mpA7aF8BrZRbEw4BaJXKzG+eiZ3CV36vKItNnzrYzzt5Mw+ngG6Avtbyptlp97zvxH6JLxWEfJC25LISONrriLqRA7LOCAkjhwD1VcSeh7vCtXbDdgVIiOr+NndPjPb4q/A=
+	t=1761726393; cv=none; b=VfMpRsEK3/OocLzVz41W2ZIQgCTFKoxbkd87W6D76ArZLUPRCunuhfAz4bNPWA42jj42dObobGCJLigEfek4zPzLKszI2lFUtDmC4KhpGC7N/QgkbLioRHBycGVuSkrLkmTC91zZl5wcrTsbRokHPHhSy8EwjMIZBwAouOD5af0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761726013; c=relaxed/simple;
-	bh=2KtQfpwXxBgRt5H6xF9pV7eRjqbrJ70Ux995ibkvkWI=;
-	h=Date:From:To:Cc:Subject:Message-Id:In-Reply-To:References:
-	 Mime-Version:Content-Type; b=cqbMweYympypwE760PzejCdjrE27LKhCuTcsrxR91Ku3bI5YD4nA5mn6xfv5SrXsQcJ1/i6P/0QViMPFKM2C3J535ErvsQftziuR+iCx/b59KSK5/1nmjqr0JURHdtkCoRIt+ItiCnB0knJENDzU+JssjJVR5P+H1/LOrHVih8s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QzzWL/h0; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 629B0C4CEF7;
-	Wed, 29 Oct 2025 08:20:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1761726011;
-	bh=2KtQfpwXxBgRt5H6xF9pV7eRjqbrJ70Ux995ibkvkWI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=QzzWL/h0ApZ2tjPgLdIF2nyFUg5JHfMCUSLlS6lKzOcpR26PScHzwympwMCN0jO6x
-	 EwuMCtMNmiP0X1hjllNwTmVPgsM6kSDrIQcRTbkx9EsSN45Pscam7mMNXA94ykKBsd
-	 D4lGQYtee13ZjrBFr42AWF3CngaOnvEObnKLIav8/AUImxRYO8ov+XYpzYxXd74dO+
-	 Sg7nsxp2Uv++lx+nVgsb8SHyz641ddSSFPe4jRP608YnhnBRrMPVHcsGfRvFq0fJRN
-	 +J0jfXg2eNnqHW9g3B3CK/3Lh88dJrs7e2K6XvbQU0UFbtAopv2eBBDAfg/j7U1XMl
-	 J7JqyDxHnNjYg==
-Date: Wed, 29 Oct 2025 17:20:04 +0900
-From: Masami Hiramatsu (Google) <mhiramat@kernel.org>
-To: Masami Hiramatsu (Google) <mhiramat@kernel.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>, Will Deacon
- <will@kernel.org>, Mark Brown <broonie@kernel.org>, Steven Rostedt
- <rostedt@goodmis.org>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar
- <mingo@kernel.org>, x86@kernel.org, Jinchao Wang
- <wangjinchao600@gmail.com>, Mathieu Desnoyers
- <mathieu.desnoyers@efficios.com>, Thomas Gleixner <tglx@linutronix.de>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "H . Peter Anvin" <hpa@zytor.com>, Alexander Shishkin
- <alexander.shishkin@linux.intel.com>, Ian Rogers <irogers@google.com>,
- linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-perf-users@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, Aishwarya.TCV@arm.com
-Subject: Re: [PATCH v5 6/8] selftests: tracing: Add a basic testcase for
- wprobe
-Message-Id: <20251029172004.a0aca144735f20a6a59d2aa6@kernel.org>
-In-Reply-To: <20251029114317.167b7d908533385c1c9e6782@kernel.org>
-References: <175859019940.374439.7398451124225791618.stgit@devnote2>
-	<175859026716.374439.14852239332989324292.stgit@devnote2>
-	<aPvwGhMBJqMKcC9D@finisterre.sirena.org.uk>
-	<20251027224347.4c887cc956df63602f377550@kernel.org>
-	<20251028084222.a3c1ae97d125d9bd88fc565b@kernel.org>
-	<20251028105549.ae94e8eeb42f4efc183d2807@kernel.org>
-	<20251029004219.dc9cda0eb56ae46c55855844@kernel.org>
-	<20251029114317.167b7d908533385c1c9e6782@kernel.org>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1761726393; c=relaxed/simple;
+	bh=TSdqCvWTW91ah16HH+aiKsyB97s9GEE5xmypLgw9rrA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HQeSRl14yy7KUiiUNMp/dIphsnjYGV6slMYvaxx8JjkIOuKLJMVa49Oc5aUobfHX2q9mETBvuceKuCDPowlstX/5hSbnrrc6eutrZ/CoYuQhq0ysX58yCGs2ojKhZsOIgrGh/ul7IXQ7N0nvykFGs9AJI1Qo84+lobvvPPGvfCQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jKK4/puC; arc=none smtp.client-ip=209.85.210.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-782e93932ffso5224390b3a.3
+        for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 01:26:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761726391; x=1762331191; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=sudBY2RiWFsiu5y15PJlszzmNRDJVFNp8bjRqr+zwxs=;
+        b=jKK4/puCGBcAevsO/FfE0HT3f4VP5VycYg7IUUROfPmdQ2UBUAw+7Fn7AV7KscVsiN
+         3z9WhrOb6HeXbzktvrLtOqHqsyTyAISDQ7z3OZsgkZPTFryGou5JpSpNCPbtxk5vHKEr
+         J6k6CjlptgZZjvQCwzS48W6mgMesGMXRMzfAvGz4vQ2xHFcceUg9gOOElzJ4tUahgAOO
+         xxBm9LPwU+3y+hS6zkNmW92pMkHhHbmefC/0RvqX43GQBiKIWf72BhPeuXJysbLTjVHW
+         +ysKiroV/xUROCHm+r/wUBT0BgQXTnEBacMpdgDB8X5l4H9g+rQV3ZL5LbWpxDIjVnuf
+         6dfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761726391; x=1762331191;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=sudBY2RiWFsiu5y15PJlszzmNRDJVFNp8bjRqr+zwxs=;
+        b=n8bbblM2TKZKN6Uyi55Ethwj7f5iyM79wXGPwt+a+UAEVYyTzce9oxjTDbpj1C725T
+         lzW1FG2Tc9rqqoChQGG2xWwE76WvGlYrY8EQogJg/haUaFwC95zV7j3lilmp2uE28KRA
+         rQ8Dv9QeBZWvxGKVjLC+hTi7+TZEN0ZA9zF1p2otUmcWqrmhlUACyLdpnjlXdxs3KBZO
+         03f4C7fw24144GSHwt4LTEUpTbPWKhDJ/FUX/bmpj/z0U6vcdMSxhn9E8ix7grRljpIQ
+         Hq8BKv2Ea/orn2R/qVcR6chXVsn7XhIfMWvQmRBQzrqnwGDxzw2zZ1EgW754YnKYbPAO
+         berA==
+X-Forwarded-Encrypted: i=1; AJvYcCVCtCEg3TXPRShEMtW8xxMcdNG8JT4gThYFECmBmy3wpPG0TCWee8lj/phSSYYheOVEPyDDmffo8f4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzczUpo7CwSSacRPlSamQ6wE5Eq1NNhwe9dbr08sX7hBgEuW4I4
+	K8qCC+VWyCbl5k4qEtPtz1zKEvS6lNGbh3CCS6o56XpBUcCIvmah/Qoq
+X-Gm-Gg: ASbGncsxdSLlBEtvhd9qgE+VF0Jn6nymITZJ+Ko8ObNNQGAxcbGhAnn7pZ7axqTDe2q
+	ur6+//xcFrXBxk/id+q8flWODkuO+IAlR5C5xcS4lUrSAGWWZuwhagZokKf/dNmTgqTTZKtj/1t
+	pV/zfF/Hu8oxiEe69imVgvNE+gdz93bgkHpzk3AgMnpUB7a4J5/RYEeVz+aqmGKOOKqnWqOpsfn
+	9GIykZR+wVwzNZnsdnfPVstvEMd6lVO1St8HDkbaEKgmiNWTKcPn4DJhN4Bt8l7gsNI9XZFVQcd
+	dKBQa/kXpddS8gS21N/MZvos+pEGoVFe6SGIGQXrAsYBwV98I6rSHBRcnvVcSQBV7gZIy9JJP/t
+	5t/Ccl6cM2reVKFh6YFUeEONmizPakgo6ONY5BfVZaDcTB7TrSLCmVFWY9nCxkCgoOl83LfeYtn
+	o/ElPYgtlNsd8=
+X-Google-Smtp-Source: AGHT+IF0PkWaskgERMPwSh5sbmy7XRCCr5pEGKg0NaEs3tSvnGcQ3TbjA8agGFwfJCYIZIsLOPwfEA==
+X-Received: by 2002:a17:90a:d64d:b0:32e:5d87:8abc with SMTP id 98e67ed59e1d1-3403a302f52mr2369411a91.36.1761726391321;
+        Wed, 29 Oct 2025 01:26:31 -0700 (PDT)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-b7ffeab2617sm7527888a12.33.2025.10.29.01.26.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Oct 2025 01:26:29 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 25E284206925; Wed, 29 Oct 2025 15:26:19 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Steffen Klassert <steffen.klassert@secunet.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH net-next 0/6] xfrm docs update
+Date: Wed, 29 Oct 2025 15:26:08 +0700
+Message-ID: <20251029082615.39518-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1475; i=bagasdotme@gmail.com; h=from:subject; bh=TSdqCvWTW91ah16HH+aiKsyB97s9GEE5xmypLgw9rrA=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJmM55X/B/rYqRzZO2+edHLWY6YF3021jkR9WHFo19FO1 2dhfDFrO0pZGMS4GGTFFFkmJfI1nd5lJHKhfa0jzBxWJpAhDFycAjARoasM/4OYtr5i+J2+WGLi LYXFcuonAyakn3n9Uyu8Ztd+nlkrXq5g+O/kFL9ot/tLZ11fg6ztygIVNqHyF20yvi+vXcCZnjB 1PiMA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
-On Wed, 29 Oct 2025 11:43:17 +0900
-Masami Hiramatsu (Google) <mhiramat@kernel.org> wrote:
+Hi,
 
-> > Hmm, it seems that jiffies related things are updated frequently
-> > and it may cause interrupt storm or infinit recursive call.
-> 
-> I added another trace_printk() in el1_watchpt(). It seems el1_watchpt()
-> takes too long and there is no time to do any other things.
-> (Note the interval shown below is only within the el1_watchpt function,
->  and in reality various processes (save/restore registers etc) for
->  exception handling will be inserted before and after.)
+Here are xfrm documentation patches. Patches [1-4/6] are formatting polishing;
+[5/6] groups the docs and [6/6] adds MAINTAINERS entries for them.
 
-Forget about this. I found the root cause. The x86 watchpoint exception
-happens after the instruction is executed, the arm64 happens before.
+Enjoy!
 
-Thus what we need is to emulate or do single step the hooked instruction
-and restart from the next instruction from the watchpoint exception on
-arm64. I thought hw_breakpoint does that, but doesn't. Should we do this
-in do_watchpoint() or in user_handler?
+Bagas Sanjaya (6):
+  Documentation: xfrm_device: Wrap iproute2 snippets in literal code
+    block
+  Documentation: xfrm_device: Use numbered list for offloading steps
+  Documentation: xfrm_device: Separate hardware offload sublists
+  Documentation: xfrm_sync: Properly reindent list text
+  net: Move XFRM documentation into its own subdirectory
+  MAINTAINERS: Add entry for XFRM documentation
 
-Thank you,
+ Documentation/networking/index.rst            |  5 +-
+ Documentation/networking/xfrm/index.rst       | 13 +++
+ .../networking/{ => xfrm}/xfrm_device.rst     | 20 +++--
+ .../networking/{ => xfrm}/xfrm_proc.rst       |  0
+ .../networking/{ => xfrm}/xfrm_sync.rst       | 83 ++++++++++---------
+ .../networking/{ => xfrm}/xfrm_sysctl.rst     |  0
+ MAINTAINERS                                   |  1 +
+ 7 files changed, 70 insertions(+), 52 deletions(-)
+ create mode 100644 Documentation/networking/xfrm/index.rst
+ rename Documentation/networking/{ => xfrm}/xfrm_device.rst (95%)
+ rename Documentation/networking/{ => xfrm}/xfrm_proc.rst (100%)
+ rename Documentation/networking/{ => xfrm}/xfrm_sync.rst (68%)
+ rename Documentation/networking/{ => xfrm}/xfrm_sysctl.rst (100%)
 
+
+base-commit: 61958b33ef0bab1c1874c933cd3910f495526782
 -- 
-Masami Hiramatsu (Google) <mhiramat@kernel.org>
+An old man doll... just what I always wanted! - Clara
+
 
