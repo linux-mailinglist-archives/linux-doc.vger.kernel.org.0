@@ -1,190 +1,87 @@
-Return-Path: <linux-doc+bounces-64874-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64885-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49CCAC19180
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 09:37:50 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 19C24C195BF
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 10:25:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 0037A563046
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 08:27:01 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D4E693B9621
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 09:23:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6402B338F23;
-	Wed, 29 Oct 2025 08:18:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17228322A3F;
+	Wed, 29 Oct 2025 09:23:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PDkJji5N"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="GA03knUk"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA3A432143C
-	for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 08:18:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 955F83128CA;
+	Wed, 29 Oct 2025 09:23:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761725910; cv=none; b=o7LS6rabEEqfck7xdstepRxJfwsnzHuW8813A/rUz63vtiOla1UBblG0JUIIQqrCuqE5AXIa0lth5tqqiVLJiaiBg2XwPln3euEDPZBVCckGveDum5mb1AOim6Iw0oW1S02GMWVvN1jzOy+wtw/5WdrRBbxE6xoEMo/LqGG6isM=
+	t=1761729834; cv=none; b=PvLwhdI18CLRRlX6dpEeE0IB7D1wx6Zj2jgxaz0N1BHDNr7n11uATYn4Q6hvlKG4Oq9AQ87aUX7MBo40hXs4Ql3aa9O4qN4fn2g1KP36BuXSo7s44W1PGvH3U74IEM7oa4krXodagNS9ySmdrvCYq4wZqXP2s3f48S+dTzsPIQM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761725910; c=relaxed/simple;
-	bh=ytOgLBaFXH0MjHGi3HQFFq5SOoOzuPaSnXx/JqK3xmY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=a2PnoN/FlG5EvSdE8dlm0dlhJIHaIYnfoa8y25Mf6/Mnj+DCgeQAS/Um0C4tClh2FJDNW0hvNKKdqBnoy0+yoUarJGZ/WXegBZhjWMdQqutFE+o8INHXCU8jXzjkBJDNlrQXAyzD8/W1XBN9t8HNM9s1J5KpJXD16TH+53/md9Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PDkJji5N; arc=none smtp.client-ip=209.85.216.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-33ba5d8f3bfso6261188a91.3
-        for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 01:18:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761725908; x=1762330708; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BU/2ChziUWHxejZHVNmmLwHaGHaf0EEXiVZ1de6fJz8=;
-        b=PDkJji5NpIy/iINL419GnAk+9+qYddfkAKyMuKwFe4mlyO6WGqcObFtOQ+Lptky7WR
-         KJ1Wl2S7CV7RZyN7rjes5T1aweYJdAO3cVjnyE1eIOkSiJxpn0vYDb+9Aowm6Gdv9QCg
-         NqipBCPtCxKEbyo8m9dUSyjA9lKk1B4e/OponYrV6bspekPHH4sAJl3T2EI1Y0xFxgUG
-         XkgNhNQ3p5DvmFratLinp+c/jIfPeTtnog6V0XMo/IJ02fBZAWcgERwN6LMbe8S7mdWK
-         psAfWnLveVVJaQR/Sqfq9Uw3UNAGesj6k0wht6v5yM/SLk6BbMr3MLsh/TK/vfviHkhX
-         Hucw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761725908; x=1762330708;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BU/2ChziUWHxejZHVNmmLwHaGHaf0EEXiVZ1de6fJz8=;
-        b=Mz8RufD+izsdLB/S+xs4HhMNUEasACPtEKGTwKlQ9x2JhPyKgBHFRnqXPbrky4Z78X
-         rT/dvnmp9E+QthCC0o9IpLWlGF502/1LIj/+XWcBzWQ3C4PTQInOaoHNe2tCQLlr401X
-         mO9w2DdGTd2cPDtXk2aSwwmJO/yGmc3H4O1NqubE804glk/UkgDOyUQzx3xj2XGqai8f
-         id5UAr2bGA94PZBeML229cG0Bc2+CV2ypSjbrwXzgpKJsEn3H3JsBDeqOyFA86MpAjEq
-         S/qHtzb6yyqACJiYXq3cOb44eEPjh4c8VXb5Z9G+JAe1SpyK2EBKNwmWXvl9oN42LTI3
-         zjjw==
-X-Forwarded-Encrypted: i=1; AJvYcCXdVwao4zCpCtK+v5TPJzDTZghXmw9XszOQJABYNxY1FqOmqLrkrnAOJ/hcWEvwKRYKjUyMXAx8ObA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxbfqXkNdAMbCLwn5zN72kqGYHBBZNxl0MskSi7iWkPwM/jvdcl
-	I3dpqaExzI2HLSfXGsw1+k4lAxwb28R8tQHz18qRy2AoK04MD+eOZwsZ
-X-Gm-Gg: ASbGncsYkxAmp4vP/BowBrA0pUHGHhFzRFhvrWhQpvEdZprCic2AC/agz4arJQVlI5e
-	60QrGdjKUuS/psBL5cOMwEEz7d4giMoiMDnF6pS1zsErNs5K6Nk6PiAWBE18pYLjVOJO3ih9m7n
-	D8ipEdtPn1URMKgecf21kmUbHVt736qD/g5ZkVdgawHpLvHEQ6/+KzHt0scQ+ZACkFHNcY/aFO8
-	whloD6M0YAwr4Jwege2hHLK+am4tBFGWpdCe2tLTFm3QdgYjC+I40hNdU/1jxHspzoyKxq3ebvc
-	yMY4wyOeco6640efN5V4iJ8a9VlXPnNNdx0FqH0XB01TQtHPYM+RHCgcLmD5Uzk8DGZ1D6H01/Y
-	89ytWL2x4S0/l+eQ9C/OaaQJ50XEpidVIwQi6ca8TPF6q6VMtEYyd2qrgmYB9TZbhZE9QLpMt5g
-	RlKYiimek=
-X-Google-Smtp-Source: AGHT+IG0hKoAdUsMURHNX2F0gCSO4GHclR682zY7XisnLdYkrJ5vgKbkXR26X+9oYI+y2cVVLM86Wg==
-X-Received: by 2002:a17:90b:514c:b0:336:b60f:3936 with SMTP id 98e67ed59e1d1-3403a26500bmr2931834a91.12.1761725907889;
-        Wed, 29 Oct 2025 01:18:27 -0700 (PDT)
-Received: from LilGuy ([2409:40c2:1057:4837:724a:2122:38a7:2755])
-        by smtp.googlemail.com with ESMTPSA id 98e67ed59e1d1-33fee84db04sm7905429a91.2.2025.10.29.01.18.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Oct 2025 01:18:27 -0700 (PDT)
-From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
-To: "Rafael J. Wysocki" <rafael@kernel.org>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-pm@vger.kernel.org (open list:CPU FREQUENCY SCALING FRAMEWORK),
-	linux-doc@vger.kernel.org (open list:DOCUMENTATION),
-	linux-kernel@vger.kernel.org (open list)
-Cc: skhan@linuxfoundation.org,
-	david.hunter.linux@gmail.com,
-	Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
-Subject: [PATCH] Documentation: pm: fix duplicate hyperlink target errors
-Date: Wed, 29 Oct 2025 13:47:37 +0000
-Message-ID: <20251029134737.42229-1-swarajgaikwad1925@gmail.com>
-X-Mailer: git-send-email 2.51.1
+	s=arc-20240116; t=1761729834; c=relaxed/simple;
+	bh=jTxdkb4v5//ZDCSckJFq++uwvUJsKMWAwmKvwtlqekU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=NC+v8RA+NzAyDLUkWkqEVL2e/Y7qr9+FfHf5RNeCjhUmXiCZ2tOknzW5H/wntSxkZGZSHau4KQFE29JDFK3/z5KQc0Z4qjQiHlTdvXkKeb8ITUyc+0aj/69J6SRofuGUaBoynZ5qmnEDH44DGdXoF0qKfxOfk0cPIpaVVDGl1qk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=GA03knUk; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=3Ih05HK+8ZsKOo5cQ+utqVaq+hUnBg4xFJaxP/XkN4A=; b=GA03knUksWMuLiHmkDJ5EtiFSg
+	wtcTt2zLP5rdVxMJlL5t+2bQPR9r1FAu+7TxdPT1FZoVd+9zZqS8DvVU3U58tlcANQo3Ijlxm29r6
+	BIL1s0m3nl0Oj5zeyYWGYkRZrAQgYCgg7EwQeFKub1LK86Uy5OSqSsuBN38/AYPS3gZpPXq24K0x0
+	9hFELXTlQiy0mJ1/LIvBFNKdrwvGhc6WAtCupQZEw8eVo10iVBdtQ2tvC/JcnCTHrsd578Gj8mAoI
+	DiiBs5ov9+QgkPuCXSJMAiWBqFr+vrzwt270IQq6w3w9rvz7L7t9vBla6YL+/OiGk39CXMbQYj+eu
+	RZXfs7tg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vE2P5-00000000TeR-1TcB;
+	Wed, 29 Oct 2025 09:23:39 +0000
+Date: Wed, 29 Oct 2025 02:23:39 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Suren Baghdasaryan <surenb@google.com>
+Cc: Christoph Hellwig <hch@infradead.org>, akpm@linux-foundation.org,
+	david@redhat.com, lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com, vbabka@suse.cz, alexandru.elisei@arm.com,
+	peterx@redhat.com, sj@kernel.org, rppt@kernel.org, mhocko@suse.com,
+	corbet@lwn.net, axboe@kernel.dk, viro@zeniv.linux.org.uk,
+	brauner@kernel.org, jack@suse.cz, willy@infradead.org,
+	m.szyprowski@samsung.com, robin.murphy@arm.com, hannes@cmpxchg.org,
+	zhengqi.arch@bytedance.com, shakeel.butt@linux.dev,
+	axelrasmussen@google.com, yuanchu@google.com, weixugc@google.com,
+	minchan@kernel.org, linux-mm@kvack.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, iommu@lists.linux.dev
+Subject: Re: [PATCH v2 0/8] Guaranteed CMA
+Message-ID: <aQHdG_4yk0-o0iEY@infradead.org>
+References: <20251026203611.1608903-1-surenb@google.com>
+ <aP8XMZ_DfJEvrNxL@infradead.org>
+ <CAJuCfpH1Nmnvmg--T2nYQ4r25pgJhDEo=2-GAXMjWaFU5vH7LQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAJuCfpH1Nmnvmg--T2nYQ4r25pgJhDEo=2-GAXMjWaFU5vH7LQ@mail.gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Fix reST warnings in
-Documentation/admin-guide/pm/intel_pstate.rst caused by missing explicit
-hyperlink labels for section titles.
+On Mon, Oct 27, 2025 at 12:51:17PM -0700, Suren Baghdasaryan wrote:
+> I'm guessing you missed my reply to your comment in the previous
+> submission: https://lore.kernel.org/all/CAJuCfpFs5aKv8E96YC_pasNjH6=eukTuS2X8f=nBGiiuE0Nwhg@mail.gmail.com/
+> Please check it out and follow up here or on the original thread.
 
-Before this change, the following errors were printed during
-`make htmldocs`:
-
-  Documentation/admin-guide/pm/intel_pstate.rst:401:
-    ERROR: Indirect hyperlink target (id="id6") refers to target
-    "passive mode", which is a duplicate, and cannot be used as a
-    unique reference.
-  Documentation/admin-guide/pm/intel_pstate.rst:517:
-    ERROR: Indirect hyperlink target (id="id9") refers to target
-    "active mode", which is a duplicate, and cannot be used as a
-    unique reference.
-  Documentation/admin-guide/pm/intel_pstate.rst:611:
-    ERROR: Indirect hyperlink target (id="id15") refers to target
-    "global attributes", which is a duplicate, and cannot be used as
-    a unique reference.
-  ERROR: Duplicate target name, cannot be used as a unique reference:
-  "passive mode", "active mode", "global attributes".
-
-These errors occurred because the sections "Active Mode",
-"Active Mode With HWP", "Passive Mode", and "Global Attributes"
-did not define explicit hyperlink labels. As a result, Sphinx
-auto-generated duplicate anchors when the same titles appeared
-multiple times within the document.
-
-Because of this, the generated HTML documentation contained
-broken references such as:
-
-  `active mode <Active Mode_>`_
-  `passive mode <Passive Mode_>`_
-  `global attributes <Global Attributes_>`_
-
-This patch adds explicit hyperlink labels for the affected sections,
-ensuring all references are unique and correctly resolved.
-
-After applying this patch, `make htmldocs` completes without
-any warnings, and all hyperlinks in intel_pstate.html render properly.
-
-
-Signed-off-by: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
----
- Documentation/admin-guide/pm/intel_pstate.rst | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/Documentation/admin-guide/pm/intel_pstate.rst b/Documentation/admin-guide/pm/intel_pstate.rst
-index 26e702c7016e..9cdd9dad6516 100644
---- a/Documentation/admin-guide/pm/intel_pstate.rst
-+++ b/Documentation/admin-guide/pm/intel_pstate.rst
-@@ -62,6 +62,8 @@ a certain performance scaling algorithm.  Which of them will be in effect
- depends on what kernel command line options are used and on the capabilities of
- the processor.
-
-+.. _Active Mode:
-+
- Active Mode
- -----------
-
-@@ -94,6 +96,8 @@ Which of the P-state selection algorithms is used by default depends on the
- Namely, if that option is set, the ``performance`` algorithm will be used by
- default, and the other one will be used by default if it is not set.
-
-+.. _Active Mode With HWP:
-+
- Active Mode With HWP
- ~~~~~~~~~~~~~~~~~~~~
-
-@@ -192,6 +196,8 @@ This is the default P-state selection algorithm if the
- :c:macro:`CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE` kernel configuration option
- is not set.
-
-+.. _Passive Mode:
-+
- Passive Mode
- ------------
-
-@@ -432,6 +438,8 @@ the ``energy_model`` directory in ``debugfs`` (typlically mounted on
- User Space Interface in ``sysfs``
- =================================
-
-+.. _Global Attributes:
-+
- Global Attributes
- -----------------
-
-
-base-commit: f30d294530d939fa4b77d61bc60f25c4284841fa
---
-2.51.1
+I didn't feel to comment on it.  Please don't just build abstractions
+on top of abstractions for no reason.  If you later have to introduce
+them add them when they are actually needed.
 
 
