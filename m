@@ -1,743 +1,1301 @@
-Return-Path: <linux-doc+bounces-64988-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64991-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C4E1C1C59F
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 18:06:27 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D25BC1CA9D
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 19:04:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 13A366265DD
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 16:51:44 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 405464E4871
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 18:00:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 21A39346763;
-	Wed, 29 Oct 2025 16:51:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D614354AD8;
+	Wed, 29 Oct 2025 18:00:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="FrI0srwf";
-	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="Pw//QILF"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MXrAQmQu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71823286416;
-	Wed, 29 Oct 2025 16:51:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761756690; cv=fail; b=inaQqqXBVqIMv+JawHxL5gDTMzu/H6rahCQmOE/bax8sLOoBZK6+XUJaa79PRuStxhAvGj/lr9NBfjZn85rsOgcFPGACir85g+Exgiys/KEd6Uko2CvyEmMF4stqsAPF6K1h43FngkBKY0NGb+6TXxtKlTR4Xo/FH7/vsCpWAIg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761756690; c=relaxed/simple;
-	bh=G96rkigAgAKIPlpsgWGhXkQC2vNTozlHfXBXt7ZWB2o=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=vByIf4F0AyyxfUj3+leHhOxNMLzV0BeVpqlc7iVSniRIrEuDzoc1EmuecWx0sqPCPeOsN/c0A1cGqSJa4V2uT+awwFlndZUZ/rBOTqUlv5EmkIfVCvqaaDdE9KBKNKFZYElchnsuVyWyrleHZrh3vRRaUFmIgszD7creavro0xc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=FrI0srwf; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=Pw//QILF; arc=fail smtp.client-ip=205.220.177.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59TGfs4p006499;
-	Wed, 29 Oct 2025 16:51:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	corp-2025-04-25; bh=iMqZnH4omUWxTW4m+0vOfkZf0Qv5j09ed0RYDmGke7Q=; b=
-	FrI0srwfJlg7R+msPulKG7kZ9g9e6xsZpbtfoXJ7l3DnUH6Wr+/DvbJUuPCXcmgg
-	smycYq7gB2+B5TPQ+9vrYd+MOFjZm614H1TBtcRXRcpBVgo4Fnip7rR/uGYdfK+4
-	uOhEwGtmHqBOsc10u9BialseVcVffF/h/zVa22hGhQskpAl0dZKyEWjM+a/cyMpE
-	BrNBCUpSLAQ6+j8Mf08bOhE1+YLsH5CKf0mM5DqdqIP3zXhaY1pnb6DZRF6orPEG
-	3we63PzL/ohfwqoSIEEW3IXdHffwYNJsFyhVshSJXNy6U8ae0L9zkAqVYGk8SVvb
-	TljR2LSxtzzNy1lPf8RMmg==
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4a3cv99j4d-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 29 Oct 2025 16:51:09 +0000 (GMT)
-Received: from pps.filterd (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
-	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 59TFWEZH022996;
-	Wed, 29 Oct 2025 16:51:08 GMT
-Received: from bl0pr03cu003.outbound.protection.outlook.com (mail-eastusazon11012014.outbound.protection.outlook.com [52.101.53.14])
-	by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 4a33xyfvr6-3
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Wed, 29 Oct 2025 16:51:08 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iyAp+gDK8BU9oOpXGMF5t24jjR6AmY25jeQHGtOzqJQJJxxKjZeK9duTbeavY2tiVMOSiiZXMqVCxJj8PdfacQULq9RQeVy274c37/NaAbIRxaoDiQvyjP4a5SqtlxrjMJg2WzIN2O7DZ6sj66vVGBHQSM53zXiOrii5wjDfHBZCkUn0A8RPjoq7b30A6IXvC5W44lW4MwZYVkb/8q0XIKLJVweeAOf0jkpB9coQM/fCFtcUZ7R+uDlTI9WiAJX3ymY6Tv65GYzE6RMUCvz2517oM+IDgNYZDWrJqyC92rK/Hh2DW7atB/vwpsPLtaTU22tT0/ooM4NnNktIMmh67Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iMqZnH4omUWxTW4m+0vOfkZf0Qv5j09ed0RYDmGke7Q=;
- b=ZiugzcPqqIUwGOBVFe6XMKQpTJhsINSyGsRqvdIvHXIB+ZjU5swbWQAFTIdZH936dFBYKJWGp+ZSFarH1xNzNBzFvAq5qtulArNc21HugXSGyZeLnqO7Ud0kdBktf2P4bs8slARLIALB10CpT4g0yfc0pf97t8kBZlk80JC6IRpXvTLBIB3I949NiVo9ltXIVUIHvtLgWKZYTvraDkpyHJ49TxdXiUvBG4ynQ9oXGno4t1Ni9E+z3Z5Hp3PbpnkIpg5Pkf+jNGipW0bXF497zaBREUkxuOLyVJ2Q5U1Ana7uFrTjeNzAmItZu2YPx+291V3k7q1N/dxBwnVOLqrZDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91B90354AEF
+	for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 18:00:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1761760823; cv=none; b=VaDjeTZbWUxOUfF2pak6fhLAgTuR5JwwAZ37gJGWYycYP7SUET4n1CcDu9KUcHKhpFDJIm1ZBAZRr2kdbN6UITziuJqYhtb5gue1J5GrVK/2cgkRHhzobc6WC/xdslDMfaSaMwskMfbdQrcnkN5eOWZntmIl2bzi5WKzH9cCIYk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1761760823; c=relaxed/simple;
+	bh=ISqlX81KQovNOiKg7r35dKBmzVxGaVoN6hgOzDe40RI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=G6AEujHkk9qUHoC6dF2nuahgJNQSExCqetgFyLGRXks7H/HfKGBvJnEIFS3mOCDqyvlw7WHL+3RZefjuZrKxHS3/ekU9fDM3mZHGa+ntvk7yVQ4wIa7B8keKnjhPn+9deLjOs3sCPvp1uNYzNFgzM/fGi/zS/fZeMXqnnrM+7pk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MXrAQmQu; arc=none smtp.client-ip=209.85.216.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-339d7c403b6so175443a91.2
+        for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 11:00:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iMqZnH4omUWxTW4m+0vOfkZf0Qv5j09ed0RYDmGke7Q=;
- b=Pw//QILFJIZgm6EijBGhynRlKO5FlJAm5Rju9fepwdIY5Vl1xMtEahioMopWttxRh9rRLvs0bj5iflAy/4t3RVRF0YWvfA6dmbk3rFPvlBtGn2jFCPQj3HJKXfn5E2CoJib6sVOrhv4Ugwkdb7DMX6kTZML0WKJ8Sw0qGTqxgDg=
-Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
- by DM6PR10MB4251.namprd10.prod.outlook.com (2603:10b6:5:21d::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.12; Wed, 29 Oct
- 2025 16:51:05 +0000
-Received: from DM4PR10MB8218.namprd10.prod.outlook.com
- ([fe80::2650:55cf:2816:5f2]) by DM4PR10MB8218.namprd10.prod.outlook.com
- ([fe80::2650:55cf:2816:5f2%2]) with mapi id 15.20.9253.018; Wed, 29 Oct 2025
- 16:51:05 +0000
-From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: Jonathan Corbet <corbet@lwn.net>, David Hildenbrand <david@redhat.com>,
-        "Liam R . Howlett" <Liam.Howlett@oracle.com>,
-        Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
-        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-trace-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        Andrei Vagin <avagin@gmail.com>
-Subject: [PATCH 2/3] mm: implement sticky, copy on fork VMA flags
-Date: Wed, 29 Oct 2025 16:50:32 +0000
-Message-ID: <ec71238fd1f735ca6e4970ccdc0abfbb60967596.1761756437.git.lorenzo.stoakes@oracle.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <cover.1761756437.git.lorenzo.stoakes@oracle.com>
-References: <cover.1761756437.git.lorenzo.stoakes@oracle.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0304.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:196::21) To DM4PR10MB8218.namprd10.prod.outlook.com
- (2603:10b6:8:1cc::16)
+        d=gmail.com; s=20230601; t=1761760818; x=1762365618; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=BakrbnAJDjEvG5ayfEEs7bzS7XOz1N720WImPZCJa1Y=;
+        b=MXrAQmQuwkcwaukBQWTuz+uonBqgczO4FA77wV+8WGkErS/cuyhzetRPv5d4jaBpFn
+         JnSwyLrRtjlg9IZa/izryKsvQ52qAapX4pTMAhXN5RcdZtNwqG50MQSbiznsNrwzWtTG
+         eFT6R7a1N9eAltAN6R9itym/fygfIWXVJhrX9Bdorw0Y4WZgtl6Fs8eUkPndoPz0GqCT
+         CtEa70wBt5n2s+f5cq073uoErT66jb0trQ1cugkqIm3OqDkFQdbTHqyU3Jrkia/jEjh3
+         CUxYaYk1VZtAZknwz86fIqMLPMDwPaCe+K971NV4D3t6n+nWLo+f5/e7qfDzkEdt269h
+         nczA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761760818; x=1762365618;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=BakrbnAJDjEvG5ayfEEs7bzS7XOz1N720WImPZCJa1Y=;
+        b=QIuUMPoRhPXvCOmEzh/fdPsFRab6JHJr31jtHArQanPmB2un+9AbJDYzLrb5tANFiZ
+         fyn6qaM902yPviLTxvNtepxd2B//s7EbB6D6nQVcvxigFsUV4u0n3EHaa9ynwr1JPt/y
+         B7wqnybFKRU6Hikf0R3I93x9scySEjogIGZ+rKK4P4dGyJH1GWcqJGVAuiKGb+kPxLf2
+         0GSWrcYQaztFZiNiWFE6Oc4oyd8TTRcBtMcH84sw8A09dtzXlK8Vh4hsfHrFgdo/Wu5E
+         1GvQf5Njk4/8FQRBjerx0bkECfe+8YCJzNM1hMVJcegf4g8ZJj47as+6yS7SC3gFXSYR
+         CjuQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVa2UiiWVMRkS3dI7EnB0EBbh13frfdyESsN9XjmNMAH34AAUYAj+NGDF9BckSaB/7v1jfGpRcomAs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzanNXRQ+oq7Y+oAQgqTNf4TGwn3FRfbIu9f/sFaRJFzjpyXSmg
+	010x2GDlM4S473fDh/FTUPQVBNi9h8pIn6D1k7FdkEYBD57r0zS28Ja0
+X-Gm-Gg: ASbGnctqmSLuItetbRGmR8jxP9QPOlWK34I3Fwa6VYRUPnsPHxZIXNMJ+xyxT6NsOVF
+	fiLxGmzlVSD+TUJn5103055TYl8C/4SSDBWi0a1Qz2DnuGVwtAyIiiPrMbATc+DJohaZ/c57P0G
+	Ddkwf+Xqum+UpfYh5YcZn50nFvRsPhNDWZ6oWn/Rh49uLntjwp/lmk6qVWFYI1Rw18N8d4wQ9hR
+	5w7N+M+QfOsSOhpn/gbiAQCSKSY0Xs/4lWVpgkAbDBxiAoUUPADTMXmVFPZIcEmkM9hz2sbBNEV
+	MlL2gThcy9M/9H05U3f9lpa99jLxVfa7g6gcDZjrUKGDNNb6xGxiG4uTGkvSSWlSLKtEeJiZI4y
+	k7dP5MLYL1W66c4R7i8Rsw0Ajq3z3GFEh5hHayP/8xOnxmGg0hKHzwgml1O9Yz3O1PvVjnJtzOR
+	z6JjaCdpMedxeCVqvpUQrSo0zv/aaYMOtUgjUkKczPQ4mT2AUh
+X-Google-Smtp-Source: AGHT+IFwEgbtn5No6+sO8FuTvlUsqtffqn8w2UFsqKGn5iJtdEW3/0WrN0AnUrr0At6wlFKYvwSDMg==
+X-Received: by 2002:a17:90b:5286:b0:32e:4924:6902 with SMTP id 98e67ed59e1d1-3403a1434a6mr4131914a91.3.1761760817281;
+        Wed, 29 Oct 2025 11:00:17 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-33fed7d1fdesm16444536a91.5.2025.10.29.11.00.15
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 29 Oct 2025 11:00:16 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <881ab1a3-e68a-4053-aaf7-9aa637c0ab2c@roeck-us.net>
+Date: Wed, 29 Oct 2025 11:00:14 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|DM6PR10MB4251:EE_
-X-MS-Office365-Filtering-Correlation-Id: d67f0875-8b8a-40e4-4ac8-08de170b59e0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?7I6I3Jj8g3AWtYf1QiLJfYiJWSAsUb2zmuF+q5AMNlo+AeP3qiEMkhq7bclx?=
- =?us-ascii?Q?5XUfeuMuLTqW15uYL6xFa04N/4ZZZSAXl6kKY6o7WCs5lBupozC1mDu/cIaa?=
- =?us-ascii?Q?PriB83eRHb2r1aCvDRjGij+pX2Oq5KfOIBQ2/vS7gFWBkK9L8xs7WpNMqLyG?=
- =?us-ascii?Q?iP5I14GZSfHdgIUnORNhEM3DEc7jB6GeAnBZ70FEsB7bVgDhoz+fUPUSpPEw?=
- =?us-ascii?Q?NIsDYPdyEmTzJ/Ir8Q5GWzYvfu5j/Bzdvo/9Tmr3HildSik9kXNyrTAEXY3+?=
- =?us-ascii?Q?0KsjdpApduxQNgZtnGUjQbcQeJPHoi/PuQzl5nnUgguUKn4SRjXn8mYblzNz?=
- =?us-ascii?Q?CwCLUYdWaBVxOSF7oNWc8VeU7TeyR+Jp9SlqlZ6m1NCccbLBdbdFZT7wiqIf?=
- =?us-ascii?Q?trLk/NTRCAzYQnghnlkwoMkek1JvBsQ6m7/VBelteS0VPnQDZPC++4reIORC?=
- =?us-ascii?Q?tILblct6fmiPTohj/lhSXYyf+wqr0Z0mqnDwC4Xv2OXt7NQ94KPoPWBpvLrd?=
- =?us-ascii?Q?w4vw0Y92Oq0IbEjc7ZzKCsq7MOhJE2K9dXeCOeh+1dBftJLun1OqeLOKLVpz?=
- =?us-ascii?Q?/KUWDUqrzyqKauYHGEDnhAwmLoWOtijSmOdz1wLLfeBprbs1Yhz3Uots5aDH?=
- =?us-ascii?Q?Tqqt7pLtvg6fiNJWf3mGJ9VL4DWJDOqPgvq69dqSjtz4MtTbPikc5pm0YSjs?=
- =?us-ascii?Q?NIoDrHRoZpN03CAYhs+jyRRa/nZzBIT85meQXGAppL9kPhdu4ynswlq6Vckb?=
- =?us-ascii?Q?k502qWBdHTIUBWgd52CIWTERaoBNmZCPjhalmVPsPj5CGdDdmK3BjVICBVUM?=
- =?us-ascii?Q?H7zvCbwIhbzMBtaR7OPLOQI8Kli5QnZ2IEfs7YOPimhW/5Ept1c40mE1cvkl?=
- =?us-ascii?Q?oQshcmwUsk8nc9Y83NxYHo4t4pwL5Jk/2wUXZYY+353DDBOLgQh1FsuWrR8z?=
- =?us-ascii?Q?LjVXGUYLTWz9U1g7tthX9q/DGzBYW0GhphZDLe/QEI9eAytre/wGFj/Qsczh?=
- =?us-ascii?Q?l2fBjW3fYnEgZ7WPsdYAs88YY6nig1ARakaxWVIhHzc22gTHjWTpLdlip8SG?=
- =?us-ascii?Q?CtKFQHoEQ4h0nec6nDp6u0s4J3E/KXL0dYGzXZignR9TtkH5aUQ8miYqh5dw?=
- =?us-ascii?Q?hybZv4QtwZ6p/4bM+ch9ds/pNOkvsMYmpyeP/JjNiBGQ51QA41WtTai5+5Ev?=
- =?us-ascii?Q?MeBNiHgf793kGcPtBOG3tXpQsXhkj0+ZI3w0E/hUAP0gSay/BYfXjUm1AqPd?=
- =?us-ascii?Q?F2CvgeQwVLjuH7ApAldT6Twikoy4KuO1vZ50ab5wLHJsmgOrFw/x5jO08uAw?=
- =?us-ascii?Q?ykyL+tJmFco2Hcqcxd0M0cCGiQDPkProqoI6HmdxV/k+S9WPodhmL1mQED1t?=
- =?us-ascii?Q?nvoPipvCuQQnRw3QC5yNgjyzU3ZPa4eNE855vhoWLLbhuLY5YMFGI4Vh5LN+?=
- =?us-ascii?Q?fZEgB9sn2ishd/hvJ2Nh726EJkJD6MSb?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB8218.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?pxFJkIQxGrQ6KNOOXBVhFw6GT6QFsxTOHwu7V9W/ctuUIXBa6tgj0uNXxhyU?=
- =?us-ascii?Q?6uwV6EgVE1CgX1EkcxX4tzx3pLjwsGMPsouRe6PKwh5QElfj6+lpTOCLyZ5L?=
- =?us-ascii?Q?MVBg7megO4f6PKJyJ53V6bpZK3gG6C5DgknfukWoOxZDVMVFgrPEGySuS3Sp?=
- =?us-ascii?Q?8b2q9ai7q2rau5lyu9BywNFX5Ak34KTN54OQ7V8G+Pv/ljQ2ZBq8VMWTjMZ3?=
- =?us-ascii?Q?LoxlxB115qUoUDx/DkASE37bPLHPWe5U4OR7dnoT4fV276HizJcZNO8+iDy/?=
- =?us-ascii?Q?434QGlN1VnWdteeNmWzLm0YKLQTMc1tkGOD5OQC72llcQ70qoBttHSgIgbfk?=
- =?us-ascii?Q?0eLjGo40I2XNVvY/d66QjVDAaqs9Vcmqxd2UzKJEUaYP5BhM1GDX09ljvP9w?=
- =?us-ascii?Q?BXdoX0oJ4KYWn0Hfqfq6EUEWfNdnM8Gu8/EeZszwA/D9gng3FJDSclFvL2C2?=
- =?us-ascii?Q?nk/kNiyVeX/9t/OOyDTT4MZHBB0jl4skWpH/vBYF897UOhQ61/JtnXzquNW9?=
- =?us-ascii?Q?ujjOxP2lmgANGoMjwINjZYtoXpshy1VmEPleVWqHpmkgkPEfhScqVbVOEOBm?=
- =?us-ascii?Q?PqUR7sSpcSLLDA2zg87lAmp/XYm4B0Y7ZQhsrbi6PnzxX44tJ3MUOSYEfQi1?=
- =?us-ascii?Q?tW0nyHWYZX9grAsFcPis8/4xyaH0flffJAKzH9MfolVkVdzu1oTtcPKFDPcw?=
- =?us-ascii?Q?X1ae6hDQ9SC3fWhBIb10zToBojMy6enx9fQMIv+kOKxFlf2aB5GV6y4vVD0S?=
- =?us-ascii?Q?dJA78UvhxDG7xRyXpiA1nSZ5stIwmaD90l78ImWXbMVrxQjrP3YPZYDKRjNc?=
- =?us-ascii?Q?XNkrwgnCw7q0IyYmZC0nWXx4mT1YO36K4WDoKPe8HZ9p1OfQT/v5/YitaXIM?=
- =?us-ascii?Q?a+x2C8VWRIwtgF7M8GoLW266hTZHRVc3jJRzHexD7+An4ZgVLzwryaAiTC18?=
- =?us-ascii?Q?+DG9CyKSSVCEjjuAWN0DZagVMq2ab+QYZnD0+aVwIRrzEa5KBy+9e5BgjRvt?=
- =?us-ascii?Q?q8K2Jq8lPtbuKoDu+s2pfWxkBL7XWoGUc3PBMnf3TOvfUSeUttWSUd3alzwS?=
- =?us-ascii?Q?bKFMfY0nQsWtwUEIG9vhLzSHVolGjtqb4Wsn/6rFgeYtN6hRbfRecxTNLljQ?=
- =?us-ascii?Q?3MQ0XtVPouukset7CvT9hofUU+wI6GNR/IfMvU6rnzm8ytsEdqOSPZYXN0l6?=
- =?us-ascii?Q?pIxxPqMmB7PzFTkFGOOy2yG9ONInZZggjDiCmuFu9GBtaLKW9rmmGTQAtaQ5?=
- =?us-ascii?Q?Gk1Mvtp0qQ2l8KvqAyn+ki6OPRGSCPIPy1XsETxvMu55q0yfGEbC9i1Pz/wi?=
- =?us-ascii?Q?WdozBlA+8jwAIkW6ibwWeV57PnMJKWs9s8nwjhBMTEtEtMKAfY5ier6dpoHy?=
- =?us-ascii?Q?WpnOQFSqEEQYFjNQKeo7sPl803Zv1tJPLby+Hjsrkm4xqS4AjCSAVh3KHtck?=
- =?us-ascii?Q?N3oPV2SqRFHOSLhA93aIjrkPm8s9C8UgaKkn86bsWupNJ9BzUAH/yRKpYMCk?=
- =?us-ascii?Q?fiZZTqhyXuEAXT2uMFhLiZ2HDOIz17j8fjRZGd9K1qNXcq1+qTri3NcRsziN?=
- =?us-ascii?Q?6SNKzcB4b93aVfD3G2b2iB1c+kquvfzpsTN1xEnQFugy3KB5YKc4IHe9gj7v?=
- =?us-ascii?Q?Sw=3D=3D?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	vP0YlLcIgRg/dUpvORL8/ZzSGsuMPfAomlGfgx1McRfGomt2uwJjyBKOa0b3HEjxQ47Coy00mBluQr9CSX2ws4gL5SoS8go5hECqDXUcUNJRmMM84ykYy5saYjGz1uGmK24muRA+MndpvHgFndFsFmftVAXeEnzGrRIYMixRBVib4rllIeOAZrftiVB3JaKG92hf+yKds5Pti5tGnqU1lmlVKp8T4T5Wdhy1pXCnXRO5FXFXrtS1PuS/ssVE9AbT0WJrUcwqFGo/tqu26DlHy7L7U8AnQAmHeVvyQOI4kTCWfpXs1cPol8aPEyWaEWHirApxWot4Vm6Q9Ma7yIRNaPZ1amomdiOfZI/szktF3rtLy6Vg0J5Dln3prRTl505kYSCz8JYfQiav7Pzg/99RcHDNgWsevV8Poz7zPdD9A1kv1znLLl7rfZuqITrh5r8GFtmx+MsOkUzp/cI8T6gwFB3m2DaCBMwO9a+nV/s7fUecsVSFT30cjiXBcDe/Gf1f+jJM9cTmULWSM4EBNa74m84Nwk4AP6U1tlPYB13TcxOLgfxqeRwHFGZKhOtstGt4TV0DRNjjL4AoRyxTBl0BNi6tPACTiRdv0QYD5Pww+xw=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d67f0875-8b8a-40e4-4ac8-08de170b59e0
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2025 16:51:05.4706
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2XCarLIk+gFCp+E6SKU9Gs5v36cskRMnQTn+BfrzVkB2b/tYvDoK4Z/I4mTfMW0qDnqb3+aPjHMWe1WhCNhBPzidfIT3jps7KdBgP+IpSZg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4251
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-10-29_06,2025-10-29_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 malwarescore=0 mlxscore=0
- adultscore=0 mlxlogscore=999 suspectscore=0 spamscore=0 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2510240000
- definitions=main-2510290133
-X-Authority-Analysis: v=2.4 cv=NfrrFmD4 c=1 sm=1 tr=0 ts=690245fd cx=c_pps
- a=OOZaFjgC48PWsiFpTAqLcw==:117 a=OOZaFjgC48PWsiFpTAqLcw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=x6icFKpwvdMA:10
- a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22 a=yPCof4ZbAAAA:8
- a=uaDuWM232xa27JKlA18A:9 a=cPQSjfK2_nFv0Q5t_7PE:22
-X-Proofpoint-GUID: UQV4vwmCLcUTxgh0lWgVuvofBFtwyM1R
-X-Proofpoint-ORIG-GUID: UQV4vwmCLcUTxgh0lWgVuvofBFtwyM1R
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDI5MDAzOSBTYWx0ZWRfX3jvzIHMq6sf3
- PyYo1EnsjAiXi4NDxWFoqQbLP7/tqBq5oJ2ny1ICf8OP2UaWdspPdUqidb/hT7xsXTMrBa48svv
- vW0wSTxxlKVzTvAix7IGwRlTiV5x22pztJEO0Y4MPIvRj1Ih8uTD6i4/SyQhLOQ+PAVnvzgo4Sj
- jnhsEidvaP8n5WCecnpLHQ3SrSBgSo0bKjfmEwTrDsrzbkOe1DEMZ5Gh2mUbQlRFYVONiQcmRyF
- mEN5F4wigsGwqCBS3kIYleEH5auTDuejvMLPdWsQ1sNO9b/FdkN6l6ht7YZKfEm6Gc8yN6VWA08
- UPRgQ3oqMP3yupXLjdeUioR6n35z+dSWYmY35vt310Lud2r2GLn2MZF+YLx7cEIkDFkIT/8drP2
- p3Y81QJYNFOYeEvn1h/r6hCejeUfSg==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] hwmon: temperature: add support for EMC1812
+To: Marius Cristea <marius.cristea@microchip.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+References: <20251029-hw_mon-emc1812-v1-0-be4fd8af016a@microchip.com>
+ <20251029-hw_mon-emc1812-v1-2-be4fd8af016a@microchip.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
+ RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
+ nyFiKxUehbNF3r9qlJgPqONwX5vJy4/GvDHdddSCxV41P/ejsZ8PykxyJs98UWhF54tGRWFl
+ 7i1xvaDB9lN5WTLRKSO7wICuLiSz5WZHXMkyF4d+/O5ll7yz/o/JxK5vO/sduYDIlFTvBZDh
+ gzaEtNf5tQjsjG4io8E0Yq0ViobLkS2RTNZT8ICq/Jmvl0SpbHRvYwa2DhNsK0YjHFQBB0FX
+ IdhdUEzNefcNcYvqigJpdICoP2e4yJSyflHFO4dr0OrdnGLe1Zi/8Xo/2+M1dSSEt196rXaC
+ kwu2KgIgmkRBb3cp2vIBBIIowU8W3qC1+w+RdMUrZxKGWJ3juwcgveJlzMpMZNyM1jobSXZ0
+ VHGMNJ3MwXlrEFPXaYJgibcg6brM6wGfX/LBvc/haWw4yO24lT5eitm4UBdIy9pKkKmHHh7s
+ jfZJkB5fWKVdoCv/omy6UyH6ykLOPFugl+hVL2Prf8xrXuZe1CMS7ID9Lc8FaL1ROIN/W8Vk
+ BIsJMaWOhks//7d92Uf3EArDlDShwR2+D+AMon8NULuLBHiEUQARAQABzTJHdWVudGVyIFJv
+ ZWNrIChMaW51eCBhY2NvdW50KSA8bGludXhAcm9lY2stdXMubmV0PsLBgQQTAQIAKwIbAwYL
+ CQgHAwIGFQgCCQoLBBYCAwECHgECF4ACGQEFAmgrMyQFCSbODQkACgkQyx8mb86fmYGcWRAA
+ oRwrk7V8fULqnGGpBIjp7pvR187Yzx+lhMGUHuM5H56TFEqeVwCMLWB2x1YRolYbY4MEFlQg
+ VUFcfeW0OknSr1s6wtrtQm0gdkolM8OcCL9ptTHOg1mmXa4YpW8QJiL0AVtbpE9BroeWGl9v
+ 2TGILPm9mVp+GmMQgkNeCS7Jonq5f5pDUGumAMguWzMFEg+Imt9wr2YA7aGen7KPSqJeQPpj
+ onPKhu7O/KJKkuC50ylxizHzmGx+IUSmOZxN950pZUFvVZH9CwhAAl+NYUtcF5ry/uSYG2U7
+ DCvpzqOryJRemKN63qt1bjF6cltsXwxjKOw6CvdjJYA3n6xCWLuJ6yk6CAy1Ukh545NhgBAs
+ rGGVkl6TUBi0ixL3EF3RWLa9IMDcHN32r7OBhw6vbul8HqyTFZWY2ksTvlTl+qG3zV6AJuzT
+ WdXmbcKN+TdhO5XlxVlbZoCm7ViBj1+PvIFQZCnLAhqSd/DJlhaq8fFXx1dCUPgQDcD+wo65
+ qulV/NijfU8bzFfEPgYP/3LP+BSAyFs33y/mdP8kbMxSCjnLEhimQMrSSo/To1Gxp5C97fw5
+ 3m1CaMILGKCmfI1B8iA8zd8ib7t1Rg0qCwcAnvsM36SkrID32GfFbv873bNskJCHAISK3Xkz
+ qo7IYZmjk/IJGbsiGzxUhvicwkgKE9r7a1rOwU0ETofVZwEQALlLbQeBDTDbwQYrj0gbx3bq
+ 7kpKABxN2MqeuqGr02DpS9883d/t7ontxasXoEz2GTioevvRmllJlPQERVxM8gQoNg22twF7
+ pB/zsrIjxkE9heE4wYfN1AyzT+AxgYN6f8hVQ7Nrc9XgZZe+8IkuW/Nf64KzNJXnSH4u6nJM
+ J2+Dt274YoFcXR1nG76Q259mKwzbCukKbd6piL+VsT/qBrLhZe9Ivbjq5WMdkQKnP7gYKCAi
+ pNVJC4enWfivZsYupMd9qn7Uv/oCZDYoBTdMSBUblaLMwlcjnPpOYK5rfHvC4opxl+P/Vzyz
+ 6WC2TLkPtKvYvXmdsI6rnEI4Uucg0Au/Ulg7aqqKhzGPIbVaL+U0Wk82nz6hz+WP2ggTrY1w
+ ZlPlRt8WM9w6WfLf2j+PuGklj37m+KvaOEfLsF1v464dSpy1tQVHhhp8LFTxh/6RWkRIR2uF
+ I4v3Xu/k5D0LhaZHpQ4C+xKsQxpTGuYh2tnRaRL14YMW1dlI3HfeB2gj7Yc8XdHh9vkpPyuT
+ nY/ZsFbnvBtiw7GchKKri2gDhRb2QNNDyBnQn5mRFw7CyuFclAksOdV/sdpQnYlYcRQWOUGY
+ HhQ5eqTRZjm9z+qQe/T0HQpmiPTqQcIaG/edgKVTUjITfA7AJMKLQHgp04Vylb+G6jocnQQX
+ JqvvP09whbqrABEBAAHCwWUEGAECAA8CGwwFAmgrMyQFCSbODQkACgkQyx8mb86fmYHlgg/9
+ H5JeDmB4jsreE9Bn621wZk7NMzxy9STxiVKSh8Mq4pb+IDu1RU2iLyetCY1TiJlcxnE362kj
+ njrfAdqyPteHM+LU59NtEbGwrfcXdQoh4XdMuPA5ADetPLma3YiRa3VsVkLwpnR7ilgwQw6u
+ dycEaOxQ7LUXCs0JaGVVP25Z2hMkHBwx6BlW6EZLNgzGI2rswSZ7SKcsBd1IRHVf0miwIFYy
+ j/UEfAFNW+tbtKPNn3xZTLs3quQN7GdYLh+J0XxITpBZaFOpwEKV+VS36pSLnNl0T5wm0E/y
+ scPJ0OVY7ly5Vm1nnoH4licaU5Y1nSkFR/j2douI5P7Cj687WuNMC6CcFd6j72kRfxklOqXw
+ zvy+2NEcXyziiLXp84130yxAKXfluax9sZhhrhKT6VrD45S6N3HxJpXQ/RY/EX35neH2/F7B
+ RgSloce2+zWfpELyS1qRkCUTt1tlGV2p+y2BPfXzrHn2vxvbhEn1QpQ6t+85FKN8YEhJEygJ
+ F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
+ FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <20251029-hw_mon-emc1812-v1-2-be4fd8af016a@microchip.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-It's useful to be able to force a VMA to be copied on fork outside of the
-parameters specified by vma_needs_copy(), which otherwise only copies page
-tables if:
+Hi,
 
-* The destination VMA has VM_UFFD_WP set
-* The mapping is a PFN or mixed map
-* The mapping is anonymous and forked in (i.e. vma->anon_vma is non-NULL)
+On 10/29/25 08:50, Marius Cristea wrote:
+> This is the hwmon driver for Microchip EMC1812/13/14/15/33
+> Multichannel Low-Voltage Remote Diode Sensor Family.
+> 
+> Signed-off-by: Marius Cristea <marius.cristea@microchip.com>
 
-Setting this flag implies that the page tables mapping the VMA are such
-that simply re-faulting the VMA will not re-establish them in identical
-form.
+Thanks for the patch.
 
-We introduce VM_COPY_ON_FORK to clearly identify which flags require this
-behaviour, which currently is only VM_MAYBE_GUARD.
+Would it be possible for you to send me register dumps for the supported chips ?
+I would like to write unit test code for the driver.
 
-Any VMA flags which require this behaviour are inherently 'sticky', that
-is, should we merge two VMAs together, this implies that the newly merged
-VMA maps a range that requires page table copying on fork.
+> ---
+>   Documentation/hwmon/emc1812.rst |  68 +++
 
-In order to implement this we must both introduce the concept of a 'sticky'
-VMA flag and adjust the VMA merge logic accordingly, and also have VMA
-merge still successfully succeed should one VMA have the flag set and
-another not.
+Needs to be added to Documentation/hwmon/index.rst
 
-Note that we update the VMA expand logic to handle new VMA merging, as this
-function is the one ultimately called by all instances of merging of new
-VMAs.
+>   MAINTAINERS                     |   2 +
+>   drivers/hwmon/Kconfig           |  11 +
+>   drivers/hwmon/Makefile          |   1 +
+>   drivers/hwmon/emc1812.c         | 967 ++++++++++++++++++++++++++++++++++++++++
+>   5 files changed, 1049 insertions(+)
+> 
+> diff --git a/Documentation/hwmon/emc1812.rst b/Documentation/hwmon/emc1812.rst
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..799111a89541c57a839a121bb3dfc12f42604bc2
+> --- /dev/null
+> +++ b/Documentation/hwmon/emc1812.rst
+> @@ -0,0 +1,68 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +Kernel driver emc1802
+> +=====================
+> +
+> +Supported chips:
+> +
+> +  * Microchip EMC1812, EMC1813, EMC1814, EMC1815, EMC1833
+> +
+> +    Addresses scanned: I2C 0x1c, 0x3c, 0x4c, 0x4d, 0x5c, 0x6c, 0x7c
+> +
+> +    Prefix: 'emc1812'
+> +
+> +    Datasheets:
+> +
+> +	- https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/EMC1812-3-4-5-33-Data-Sheet-DS20005751.pdf
+> +
+> +Author:
+> +    Marius Cristea <marius.cristea@microchip.com
+> +
+> +
+> +Description
+> +-----------
+> +
+> +The Microchip EMC181x/33 chips contain up to 4 remote temperature sensors
+> +and one internal.
+> +- The EMC1812 is a single channel remote temperature sensor.
+> +- The EMC1813 and EMC1833 is a dual channel remote temperature sensor. The
+> +remote channels for this selection of devices can support substrate diodes,
+> +discrete diode-connected transistors or CPU/GPU thermal diodes.
+> +- The EMC1814 is a three channel remote temperature sensor that supports
+> +Anti-Parallel Diode (APD) only on one channel. For the channel that does not
+> +support APD functionality, substrate diodes, discrete diode-connected
+> +transistors or CPU/GPU thermal diodes are supported. For the channel that
+> +supports APD, only discrete diode-connected transistors may be implemented.
+> +However, if APD is disabled on the EMC1814, then the channel that supports
+> +APD will be functional with substrate diodes, discrete diode-connected
+> +transistors and CPU/GPU thermal diodes.
+> +- The EMC1815 is a four channel remote temperature sensor. The EMC1815 and
+> +EMC1833 support APD on all channels. When APD is enabled, the channels support
+> +only diode-connected transistors. If APD is disabled, then the channels will
+> +support substrate transistors, discrete diode-connected transistors and
+> +CPU/GPU thermal diodes.
+> +
+> +Note: Disabling APD functionality to implement substrate diodes on devices
+> +that support APD eliminates the benefit of APD (two diodes on one channel).
+> +
+> +The chips implement three limits for each sensor: low (tempX_min), high
+> +(tempX_max) and critical (tempX_crit). The chips also implement an
+> +hysteresis mechanism which applies to all limits. The relative difference
+> +is stored in a single register on the chip, which means that the relative
+> +difference between the limit and its hysteresis is always the same for
+> +all three limits.
+> +
+> +This implementation detail implies the following:
+> +
+> +* When setting a limit, its hysteresis will automatically follow, the
+> +  difference staying unchanged. For example, if the old critical limit was
+> +  80 degrees C, and the hysteresis was 75 degrees C, and you change the
+> +  critical limit to 90 degrees C, then the hysteresis will automatically
+> +  change to 85 degrees C.
+> +* The hysteresis values can't be set independently. We decided to make
+> +  only tempX_crit_hyst writable, while all other hysteresis attributes
+> +  are read-only. Setting tempX_crit_hyst writes the difference between
+> +  tempX_crit_hyst and tempX_crit into the chip, and the same relative
+> +  hysteresis applies automatically to all other limits.
+> +* The limits should be set before the hysteresis. At power up the device
+> +  starts with a 10 degree written into hysteresis register.
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 85c236df781e47c78deeb7ef4d80bc94bba604c4..fcb712549ea679d49fde8c97840af9528b52d52b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -16651,6 +16651,8 @@ M:	Marius Cristea <marius.cristea@microchip.com>
+>   L:	linux-hwmon@vger.kernel.org
+>   S:	Supported
+>   F:	Documentation/devicetree/bindings/hwmon/microchip,emc1812.yaml
+> +F:	Documentation/hwmon/emc1812.rst
+> +F:	drivers/hwmon/emc1812.c
+>   
+>   MICROCHIP I2C DRIVER
+>   M:	Codrin Ciubotariu <codrin.ciubotariu@microchip.com>
+> diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
+> index 2760feb9f83b5d3b990b27acff572e587b373e9d..3b53572fd8bfbd752c2235ca429c4f74b1db3095 100644
+> --- a/drivers/hwmon/Kconfig
+> +++ b/drivers/hwmon/Kconfig
+> @@ -2042,6 +2042,17 @@ config SENSORS_EMC1403
+>   	  Threshold values can be configured using sysfs.
+>   	  Data from the different diodes are accessible via sysfs.
+>   
+> +config SENSORS_EMC1812
+> +	tristate "Microchip Technology EMC1812 driver"
+> +	depends on I2C
+> +	select REGMAP_I2C
+> +	help
+> +	  If you say yes here to build support for Microchip Technology's
+> +	  EMC181X/33  Multichannel Low-Voltage Remote Diode Sensor Family.
+> +
+> +	  This driver can also be built as a module. If so, the module
+> +	  will be called emc1812.
+> +
+>   config SENSORS_EMC2103
+>   	tristate "SMSC EMC2103"
+>   	depends on I2C
+> diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
+> index 73b2abdcc6dd9cfae4c84b350febc5d8c191e385..e93e4051e99db698dbaae97ac4841e6d810ee8c4 100644
+> --- a/drivers/hwmon/Makefile
+> +++ b/drivers/hwmon/Makefile
+> @@ -73,6 +73,7 @@ obj-$(CONFIG_SENSORS_DRIVETEMP)	+= drivetemp.o
+>   obj-$(CONFIG_SENSORS_DS620)	+= ds620.o
+>   obj-$(CONFIG_SENSORS_DS1621)	+= ds1621.o
+>   obj-$(CONFIG_SENSORS_EMC1403)	+= emc1403.o
+> +obj-$(CONFIG_SENSORS_EMC1812)	+= emc1812.o
+>   obj-$(CONFIG_SENSORS_EMC2103)	+= emc2103.o
+>   obj-$(CONFIG_SENSORS_EMC2305)	+= emc2305.o
+>   obj-$(CONFIG_SENSORS_EMC6W201)	+= emc6w201.o
+> diff --git a/drivers/hwmon/emc1812.c b/drivers/hwmon/emc1812.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..78038dace1fd218346beae7c7d7447f68072d0f4
+> --- /dev/null
+> +++ b/drivers/hwmon/emc1812.c
+> @@ -0,0 +1,967 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * HWMON driver for Microchip EMC1812/13/14/15/33 Multichannel high-accuracy
+> + * 2-wire low-voltage remote diode temperature monitor family.
+> + *
+> + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
+> + *
+> + * Author: Marius Cristea <marius.cristea@microchip.com>
+> + *
+> + * Datasheet can be found here:
+> + * https://ww1.microchip.com/downloads/aemDocuments/documents/MSLD/ProductDocuments/DataSheets/EMC1812-3-4-5-33-Data-Sheet-DS20005751.pdf
+> + */
+> +
+> +#include <linux/bitfield.h>
+> +#include <linux/bitops.h>
+> +#include <linux/bits.h>
+> +#include <linux/delay.h>
+> +#include <linux/err.h>
+> +#include <linux/hwmon.h>
+> +#include <linux/i2c.h>
+> +#include <linux/kernel.h>
+> +#include <linux/math64.h>
+> +#include <linux/property.h>
+> +#include <linux/regmap.h>
+> +#include <linux/string.h>
+> +#include <linux/units.h>
+> +
+> +/* EMC1812 Registers Addresses */
+> +#define EMC1812_STATUS_ADDR				0x02
+> +#define EMC1812_CONFIG_LO_ADDR				0x03
+> +
+> +#define EMC1812_CFG_ADDR				0x09
+> +#define EMC1812_CONV_ADDR				0x0A
+> +#define EMC1812_INT_DIODE_HIGH_LIMIT_ADDR		0x0B
+> +#define EMC1812_INT_DIODE_LOW_LIMIT_ADDR		0x0C
+> +#define EMC1812_EXT1_HIGH_LIMIT_HIGH_BYTE_ADDR		0x0D
+> +#define EMC1812_EXT1_LOW_LIMIT_HIGH_BYTE_ADDR		0x0E
+> +#define EMC1812_ONE_SHOT_ADDR				0x0F
+> +
+> +#define EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR		0x13
+> +#define EMC1812_EXT1_LOW_LIMIT_LOW_BYTE_ADDR		0x14
+> +#define EMC1812_EXT2_HIGH_LIMIT_HIGH_BYTE_ADDR		0x15
+> +#define EMC1812_EXT2_LOW_LIMIT_HIGH_BYTE_ADDR		0x16
+> +#define EMC1812_EXT2_HIGH_LIMIT_LOW_BYTE_ADDR		0x17
+> +#define EMC1812_EXT2_LOW_LIMIT_LOW_BYTE_ADDR		0x18
+> +#define EMC1812_EXT1_THERM_LIMIT_ADDR			0x19
+> +#define EMC1812_EXT2_THERM_LIMIT_ADDR			0x1A
+> +#define EMC1812_EXT_DIODE_FAULT_STATUS_ADDR		0x1B
+> +
+> +#define EMC1812_DIODE_FAULT_MASK_ADDR			0x1F
+> +#define EMC1812_INT_DIODE_THERM_LIMIT_ADDR		0x20
+> +#define EMC1812_THRM_HYS_ADDR				0x21
+> +#define EMC1812_CONSEC_ALERT_ADDR			0x22
+> +
+> +#define EMC1812_EXT1_BETA_CONFIG_ADDR			0x25
+> +#define EMC1812_EXT2_BETA_CONFIG_ADDR			0x26
+> +#define EMC1812_EXT1_IDEALITY_FACTOR_ADDR		0x27
+> +#define EMC1812_EXT2_IDEALITY_FACTOR_ADDR		0x28
+> +
+> +#define EMC1812_EXT3_HIGH_LIMIT_HIGH_BYTE_ADDR		0x2C
+> +#define EMC1812_EXT3_LOW_LIMIT_HIGH_BYTE_ADDR		0x2D
+> +#define EMC1812_EXT3_HIGH_LIMIT_LOW_BYTE_ADDR		0x2E
+> +#define EMC1812_EXT3_LOW_LIMIT_LOW_BYTE_ADDR		0x2F
+> +#define EMC1812_EXT3_THERM_LIMIT_ADDR			0x30
+> +#define EMC1812_EXT3_IDEALITY_FACTOR_ADDR		0x31
+> +
+> +#define EMC1812_EXT4_HIGH_LIMIT_HIGH_BYTE_ADDR		0x34
+> +#define EMC1812_EXT4_LOW_LIMIT_HIGH_BYTE_ADDR		0x35
+> +#define EMC1812_EXT4_HIGH_LIMIT_LOW_BYTE_ADDR		0x36
+> +#define EMC1812_EXT4_LOW_LIMIT_LOW_BYTE_ADDR		0x37
+> +#define EMC1812_EXT4_THERM_LIMIT_ADDR			0x38
+> +#define EMC1812_EXT4_IDEALITY_FACTOR_ADDR		0x39
+> +#define EMC1812_HIGH_LIMIT_STATUS_ADDR			0x3A
+> +#define EMC1812_LOW_LIMIT_STATUS_ADDR			0x3B
+> +#define EMC1812_THERM_LIMIT_STATUS_ADDR			0x3C
+> +#define EMC1812_ROC_GAIN_ADDR				0x3D
+> +#define EMC1812_ROC_CONFIG_ADDR				0x3E
+> +#define EMC1812_ROC_STATUS_ADDR				0x3F
+> +#define EMC1812_R1_RESH_ADDR				0x40
+> +#define EMC1812_R1_LIMH_ADDR				0x41
+> +#define EMC1812_R1_LIML_ADDR				0x42
+> +#define EMC1812_R1_SMPL_ADDR				0x43
+> +#define EMC1812_R2_RESH_ADDR				0x44
+> +#define EMC1812_R2_3_RESL_ADDR				0x45
+> +#define EMC1812_R2_LIMH_ADDR				0x46
+> +#define EMC1812_R2_LIML_ADDR				0x47
+> +#define EMC1812_R2_SMPL_ADDR				0x48
+> +#define EMC1812_PER_MAXTH_1_ADDR			0x49
+> +#define EMC1812_PER_MAXT1L_ADDR				0x4A
+> +#define EMC1812_PER_MAXTH_2_ADDR			0x4B
+> +#define EMC1812_PER_MAXT2_3L_ADDR			0x4C
+> +#define EMC1812_GBL_MAXT1H_ADDR				0x4D
+> +#define EMC1812_GBL_MAXT1L_ADDR				0x4E
+> +#define EMC1812_GBL_MAXT2H_ADDR				0x4F
+> +#define EMC1812_GBL_MAXT2L_ADDR				0x50
+> +#define EMC1812_FILTER_SEL_ADDR				0x51
+> +
+> +#define EMC1812_INT_HIGH_BYTE_ADDR		0x60
+> +#define EMC1812_INT_LOW_BYTE_ADDR		0x61
+> +#define EMC1812_EXT1_HIGH_BYTE_ADDR		0x62
+> +#define EMC1812_EXT1_LOW_BYTE_ADDR		0x63
+> +#define EMC1812_EXT2_HIGH_BYTE_ADDR		0x64
+> +#define EMC1812_EXT2_LOW_BYTE_ADDR		0x65
+> +#define EMC1812_EXT3_HIGH_BYTE_ADDR		0x66
+> +#define EMC1812_EXT3_LOW_BYTE_ADDR		0x67
+> +#define EMC1812_EXT4_HIGH_BYTE_ADDR		0x68
+> +#define EMC1812_EXT4_LOW_BYTE_ADDR		0x69
+> +#define EMC1812_HOTTEST_DIODE_HIGH_BYTE_ADDR	0x6A
+> +#define EMC1812_HOTTEST_DIODE_LOW_BYTE_ADDR	0x6B
+> +#define EMC1812_HOTTEST_STATUS_ADDR		0x6C
+> +#define EMC1812_HOTTEST_CFG_ADDR		0x6D
+> +
+> +#define EMC1812_PRODUCT_ID_ADDR			0xFD
+> +#define EMC1812_MANUFACTURER_ID_ADDR		0xFE
+> +#define EMC1812_REVISION_ADDR			0xFF
+> +
+> +/* EMC1812 Config Bits */
+> +#define EMC1812_CFG_MSKAL			BIT(7)
+> +#define EMC1812_CFG_RS				BIT(6)
+> +#define EMC1812_CFG_ATTHM			BIT(5)
+> +#define EMC1812_CFG_RECD12			BIT(4)
+> +#define EMC1812_CFG_RECD34			BIT(3)
+> +#define EMC1812_CFG_RANGE			BIT(2)
+> +#define EMC1812_CFG_DA_ENA			BIT(1)
+> +#define EMC1812_CFG_APDD			BIT(0)
+> +
+> +/* EMC1812 Status Bits */
+> +#define EMC1812_STATUS_ROCF			BIT(7)
+> +#define EMC1812_STATUS_HOTCHG			BIT(6)
+> +#define EMC1812_STATUS_BUSY			BIT(5)
+> +#define EMC1812_STATUS_HIGH			BIT(4)
+> +#define EMC1812_STATUS_LOW			BIT(3)
+> +#define EMC1812_STATUS_FAULT			BIT(2)
+> +#define EMC1812_STATUS_ETHRM			BIT(1)
+> +#define EMC1812_STATUS_ITHRM			BIT(0)
+> +
+> +#define EMC1812_BETA_LOCK_VAL			0x0F
+> +
+> +#define EMC1812_TEMP_CH_ADDR(index)		(0x60 + 2 * (index))
+> +
+> +#define EMC1812_FILTER_MASK_LEN			2
+> +
+> +#define EMC1812_PID				0x81
+> +#define EMC1813_PID				0x87
+> +#define EMC1814_PID				0x84
+> +#define EMC1815_PID				0x85
+> +#define EMC1833_PID				0x83
+> +
+> +/* The maximum number of channels a member of the family can have */
+> +#define EMC1812_MAX_NUM_CHANNELS		5
+> +#define EMC1812_TEMP_OFFSET			64
+> +
+> +#define EMC1812_DEFAULT_IDEALITY_FACTOR		0x12
+> +
+> +static const struct hwmon_channel_info * const emc1812_info[] = {
+> +	HWMON_CHANNEL_INFO(chip, HWMON_C_UPDATE_INTERVAL),
+> +	HWMON_CHANNEL_INFO(temp,
+> +			   HWMON_T_INPUT | HWMON_T_MIN | HWMON_T_MAX |
+> +			   HWMON_T_CRIT | HWMON_T_MIN_HYST | HWMON_T_MAX_HYST |
+> +			   HWMON_T_CRIT_HYST | HWMON_T_MIN_ALARM |
+> +			   HWMON_T_MAX_ALARM | HWMON_T_CRIT_ALARM | HWMON_T_FAULT |
+> +			   HWMON_T_LABEL,
+> +
 
-This patch implements this, establishing VM_STICKY to contain all such
-flags and VM_IGNORE_MERGE for those flags which should be ignored when
-comparing adjacent VMA's flags for the purposes of merging.
+The internal sensor does not have a fault condition, so HWMON_T_FAULT
+should be dropped here.
 
-As part of this change we place VM_SOFTDIRTY in VM_IGNORE_MERGE as it
-already had this behaviour, alongside VM_STICKY as sticky flags by
-implication must not disallow merge.
+> +			   HWMON_T_INPUT | HWMON_T_MIN | HWMON_T_MAX |
+> +			   HWMON_T_CRIT | HWMON_T_MIN_HYST | HWMON_T_MAX_HYST |
+> +			   HWMON_T_CRIT_HYST | HWMON_T_MIN_ALARM |
+> +			   HWMON_T_MAX_ALARM | HWMON_T_CRIT_ALARM | HWMON_T_FAULT |
+> +			   HWMON_T_LABEL,
+> +
+> +			   HWMON_T_INPUT | HWMON_T_MIN | HWMON_T_MAX |
+> +			   HWMON_T_CRIT | HWMON_T_MIN_HYST | HWMON_T_MAX_HYST |
+> +			   HWMON_T_CRIT_HYST | HWMON_T_MIN_ALARM |
+> +			   HWMON_T_MAX_ALARM | HWMON_T_CRIT_ALARM | HWMON_T_FAULT |
+> +			   HWMON_T_LABEL,
+> +
+> +			   HWMON_T_INPUT | HWMON_T_MIN | HWMON_T_MAX |
+> +			   HWMON_T_CRIT | HWMON_T_MIN_HYST | HWMON_T_MAX_HYST |
+> +			   HWMON_T_CRIT_HYST | HWMON_T_MIN_ALARM |
+> +			   HWMON_T_MAX_ALARM | HWMON_T_CRIT_ALARM | HWMON_T_FAULT |
+> +			   HWMON_T_LABEL,
+> +
+> +			   HWMON_T_INPUT | HWMON_T_MIN | HWMON_T_MAX |
+> +			   HWMON_T_CRIT | HWMON_T_MIN_HYST | HWMON_T_MAX_HYST |
+> +			   HWMON_T_CRIT_HYST | HWMON_T_MIN_ALARM |
+> +			   HWMON_T_MAX_ALARM | HWMON_T_CRIT_ALARM | HWMON_T_FAULT |
+> +			   HWMON_T_LABEL
+> +			   ),
+> +	NULL
+> +};
+> +
+> +/**
+> + * struct emc1812_features - features of a emc1812 instance
+> + * @name:		chip's name
+> + * @phys_channels:	number of physical channels supported by the chip
+> + */
+> +struct emc1812_features {
+> +	const char	*name;
+> +	u8		phys_channels;
+> +};
+> +
+> +static const struct emc1812_features emc1833_chip_config = {
+> +	.name = "emc1833",
+> +	.phys_channels = 3,
+> +};
+> +
+> +static const struct emc1812_features emc1812_chip_config = {
+> +	.name = "emc1812",
+> +	.phys_channels = 2,
+> +};
+> +
+> +static const struct emc1812_features emc1813_chip_config = {
+> +	.name = "emc1813",
+> +	.phys_channels = 3,
+> +};
+> +
+> +static const struct emc1812_features emc1814_chip_config = {
+> +	.name = "emc1814",
+> +	.phys_channels = 4,
+> +};
+> +
+> +static const struct emc1812_features emc1815_chip_config = {
+> +	.name = "emc1815",
+> +	.phys_channels = 5,
+> +};
+> +
+> +enum emc1812_limit_type {temp_min, temp_max};
+> +
+> +static u8 emc1812_temp_map[] = {
+> +	[hwmon_temp_min] = temp_min,
+> +	[hwmon_temp_max] = temp_max,
+> +};
+> +
+> +static u8 emc1812_temp_crit_regs[] = {
+> +	[0] = EMC1812_INT_DIODE_THERM_LIMIT_ADDR,
+> +	[1] = EMC1812_EXT1_THERM_LIMIT_ADDR,
+> +	[2] = EMC1812_EXT2_THERM_LIMIT_ADDR,
+> +	[3] = EMC1812_EXT3_THERM_LIMIT_ADDR,
+> +	[4] = EMC1812_EXT4_THERM_LIMIT_ADDR,
+> +};
+> +
+> +static u8 emc1812_limit_regs[][2] = {
+> +	[0] = {
+> +		[temp_min] = EMC1812_INT_DIODE_LOW_LIMIT_ADDR,
+> +		[temp_max] = EMC1812_INT_DIODE_HIGH_LIMIT_ADDR,
+> +	},
+> +	[1] = {
+> +		[temp_min] = EMC1812_EXT1_LOW_LIMIT_HIGH_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT1_HIGH_LIMIT_HIGH_BYTE_ADDR,
+> +	},
+> +	[2] = {
+> +		[temp_min] = EMC1812_EXT2_LOW_LIMIT_HIGH_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT2_HIGH_LIMIT_HIGH_BYTE_ADDR,
+> +	},
+> +	[3] = {
+> +		[temp_min] = EMC1812_EXT3_LOW_LIMIT_HIGH_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT3_HIGH_LIMIT_HIGH_BYTE_ADDR,
+> +	},
+> +	[4] = {
+> +		[temp_min] = EMC1812_EXT4_LOW_LIMIT_HIGH_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT4_HIGH_LIMIT_HIGH_BYTE_ADDR,
+> +	},
+> +};
+> +
+> +static u8 emc1812_limit_regs_low[][3] = {
+> +	[0] = {
+> +		[temp_min] = 0xff,
+> +		[temp_max] = 0xff,
+> +	},
+> +	[1] = {
+> +		[temp_min] = EMC1812_EXT1_LOW_LIMIT_LOW_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR,
+> +	},
+> +	[2] = {
+> +		[temp_min] = EMC1812_EXT2_LOW_LIMIT_LOW_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT2_HIGH_LIMIT_LOW_BYTE_ADDR,
+> +	},
+> +	[3] = {
+> +		[temp_min] = EMC1812_EXT3_LOW_LIMIT_LOW_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT3_HIGH_LIMIT_LOW_BYTE_ADDR,
+> +	},
+> +	[4] = {
+> +		[temp_min] = EMC1812_EXT4_LOW_LIMIT_LOW_BYTE_ADDR,
+> +		[temp_max] = EMC1812_EXT4_HIGH_LIMIT_LOW_BYTE_ADDR,
+> +	},
+> +};
+> +
+> +/* Lookup table for temperature conversion times in msec */
+> +static const u16 emc1812_conv_time[] = {
+> +	16000, 8000, 4000, 2000, 1000, 500, 250, 125, 62, 31, 16
+> +};
+> +
+> +/**
+> + * struct emc1812_data - information about chip parameters
+> + * @client:		i2c client
 
-We update the VMA userland tests to account for the changes and,
-furthermore, in order to assert that the functionality is workingly
-correctly, update the new VMA and existing VMA merging logic to consider
-every permutation of the flag being set/not set in all VMAs being
-considered for merge.
+Unused.
 
-As a result of this change, VMAs with guard ranges will now not have their
-merge behaviour impacted by doing so and can be freely merged with other
-VMAs without VM_MAYBE_GUARD set.
+> + * @hwmon_dev:		hwmon device
 
-Signed-off-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
----
- include/linux/mm.h               | 32 ++++++++++++
- mm/memory.c                      |  3 +-
- mm/vma.c                         | 22 ++++----
- tools/testing/vma/vma.c          | 89 ++++++++++++++++++++++++++++----
- tools/testing/vma/vma_internal.h | 32 ++++++++++++
- 5 files changed, 156 insertions(+), 22 deletions(-)
+Unused.
 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index f963afa1b9de..a8811ba57150 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -522,6 +522,38 @@ extern unsigned int kobjsize(const void *objp);
- #endif
- #define VM_FLAGS_CLEAR	(ARCH_VM_PKEY_FLAGS | VM_ARCH_CLEAR)
- 
-+/* Flags which should result in page tables being copied on fork. */
-+#define VM_COPY_ON_FORK VM_MAYBE_GUARD
-+
-+/*
-+ * Flags which should be 'sticky' on merge - that is, flags which, when one VMA
-+ * possesses it but the other does not, the merged VMA should nonetheless have
-+ * applied to it:
-+ *
-+ * VM_COPY_ON_FORK - These flags indicates that a VMA maps a range that contains
-+ *                   metadata which should be unconditionally propagated upon
-+ *                   fork. When merging two VMAs, we encapsulate this range in
-+ *                   the merged VMA, so the flag should be 'sticky' as a result.
-+ */
-+#define VM_STICKY VM_COPY_ON_FORK
-+
-+/*
-+ * VMA flags we ignore for the purposes of merge, i.e. one VMA possessing one
-+ * of these flags and the other not does not preclude a merge.
-+ *
-+ * VM_SOFTDIRTY - Should not prevent from VMA merging, if we match the flags but
-+ *                dirty bit -- the caller should mark merged VMA as dirty. If
-+ *                dirty bit won't be excluded from comparison, we increase
-+ *                pressure on the memory system forcing the kernel to generate
-+ *                new VMAs when old one could be extended instead.
-+ *
-+ *    VM_STICKY - If one VMA has flags which most be 'sticky', that is ones
-+ *                which should propagate to all VMAs, but the other does not,
-+ *                the merge should still proceed with the merge logic applying
-+ *                sticky flags to the final VMA.
-+ */
-+#define VM_IGNORE_MERGE (VM_SOFTDIRTY | VM_STICKY)
-+
- /*
-  * mapping from the currently active vm_flags protection bits (the
-  * low four bits) to a page protection mask..
-diff --git a/mm/memory.c b/mm/memory.c
-index a2c79ee43d68..9528133e5147 100644
---- a/mm/memory.c
-+++ b/mm/memory.c
-@@ -1478,8 +1478,7 @@ vma_needs_copy(struct vm_area_struct *dst_vma, struct vm_area_struct *src_vma)
- 	if (src_vma->anon_vma)
- 		return true;
- 
--	/* Guard regions have momdified page tables that require copying. */
--	if (src_vma->vm_flags & VM_MAYBE_GUARD)
-+	if (src_vma->vm_flags & VM_COPY_ON_FORK)
- 		return true;
- 
- 	/*
-diff --git a/mm/vma.c b/mm/vma.c
-index 919d1fc63a52..50a6909c4be3 100644
---- a/mm/vma.c
-+++ b/mm/vma.c
-@@ -89,15 +89,7 @@ static inline bool is_mergeable_vma(struct vma_merge_struct *vmg, bool merge_nex
- 
- 	if (!mpol_equal(vmg->policy, vma_policy(vma)))
- 		return false;
--	/*
--	 * VM_SOFTDIRTY should not prevent from VMA merging, if we
--	 * match the flags but dirty bit -- the caller should mark
--	 * merged VMA as dirty. If dirty bit won't be excluded from
--	 * comparison, we increase pressure on the memory system forcing
--	 * the kernel to generate new VMAs when old one could be
--	 * extended instead.
--	 */
--	if ((vma->vm_flags ^ vmg->vm_flags) & ~VM_SOFTDIRTY)
-+	if ((vma->vm_flags ^ vmg->vm_flags) & ~VM_IGNORE_MERGE)
- 		return false;
- 	if (vma->vm_file != vmg->file)
- 		return false;
-@@ -809,6 +801,7 @@ static bool can_merge_remove_vma(struct vm_area_struct *vma)
- static __must_check struct vm_area_struct *vma_merge_existing_range(
- 		struct vma_merge_struct *vmg)
- {
-+	vm_flags_t sticky_flags = vmg->vm_flags & VM_STICKY;
- 	struct vm_area_struct *middle = vmg->middle;
- 	struct vm_area_struct *prev = vmg->prev;
- 	struct vm_area_struct *next;
-@@ -901,11 +894,13 @@ static __must_check struct vm_area_struct *vma_merge_existing_range(
- 	if (merge_right) {
- 		vma_start_write(next);
- 		vmg->target = next;
-+		sticky_flags |= (next->vm_flags & VM_STICKY);
- 	}
- 
- 	if (merge_left) {
- 		vma_start_write(prev);
- 		vmg->target = prev;
-+		sticky_flags |= (prev->vm_flags & VM_STICKY);
- 	}
- 
- 	if (merge_both) {
-@@ -975,6 +970,7 @@ static __must_check struct vm_area_struct *vma_merge_existing_range(
- 	if (err || commit_merge(vmg))
- 		goto abort;
- 
-+	vm_flags_set(vmg->target, sticky_flags);
- 	khugepaged_enter_vma(vmg->target, vmg->vm_flags);
- 	vmg->state = VMA_MERGE_SUCCESS;
- 	return vmg->target;
-@@ -1125,6 +1121,10 @@ int vma_expand(struct vma_merge_struct *vmg)
- 	bool remove_next = false;
- 	struct vm_area_struct *target = vmg->target;
- 	struct vm_area_struct *next = vmg->next;
-+	vm_flags_t sticky_flags;
-+
-+	sticky_flags = vmg->vm_flags & VM_STICKY;
-+	sticky_flags |= target->vm_flags & VM_STICKY;
- 
- 	VM_WARN_ON_VMG(!target, vmg);
- 
-@@ -1134,6 +1134,7 @@ int vma_expand(struct vma_merge_struct *vmg)
- 	if (next && (target != next) && (vmg->end == next->vm_end)) {
- 		int ret;
- 
-+		sticky_flags |= next->vm_flags & VM_STICKY;
- 		remove_next = true;
- 		/* This should already have been checked by this point. */
- 		VM_WARN_ON_VMG(!can_merge_remove_vma(next), vmg);
-@@ -1160,6 +1161,7 @@ int vma_expand(struct vma_merge_struct *vmg)
- 	if (commit_merge(vmg))
- 		goto nomem;
- 
-+	vm_flags_set(target, sticky_flags);
- 	return 0;
- 
- nomem:
-@@ -1903,7 +1905,7 @@ static int anon_vma_compatible(struct vm_area_struct *a, struct vm_area_struct *
- 	return a->vm_end == b->vm_start &&
- 		mpol_equal(vma_policy(a), vma_policy(b)) &&
- 		a->vm_file == b->vm_file &&
--		!((a->vm_flags ^ b->vm_flags) & ~(VM_ACCESS_FLAGS | VM_SOFTDIRTY)) &&
-+		!((a->vm_flags ^ b->vm_flags) & ~(VM_ACCESS_FLAGS | VM_IGNORE_MERGE)) &&
- 		b->vm_pgoff == a->vm_pgoff + ((b->vm_start - a->vm_start) >> PAGE_SHIFT);
- }
- 
-diff --git a/tools/testing/vma/vma.c b/tools/testing/vma/vma.c
-index 656e1c75b711..ee9d3547c421 100644
---- a/tools/testing/vma/vma.c
-+++ b/tools/testing/vma/vma.c
-@@ -48,6 +48,8 @@ static struct anon_vma dummy_anon_vma;
- #define ASSERT_EQ(_val1, _val2) ASSERT_TRUE((_val1) == (_val2))
- #define ASSERT_NE(_val1, _val2) ASSERT_TRUE((_val1) != (_val2))
- 
-+#define IS_SET(_val, _flags) ((_val & _flags) == _flags)
-+
- static struct task_struct __current;
- 
- struct task_struct *get_current(void)
-@@ -441,7 +443,7 @@ static bool test_simple_shrink(void)
- 	return true;
- }
- 
--static bool test_merge_new(void)
-+static bool __test_merge_new(bool is_sticky, bool a_is_sticky, bool b_is_sticky, bool c_is_sticky)
- {
- 	vm_flags_t vm_flags = VM_READ | VM_WRITE | VM_MAYREAD | VM_MAYWRITE;
- 	struct mm_struct mm = {};
-@@ -469,23 +471,32 @@ static bool test_merge_new(void)
- 	struct vm_area_struct *vma, *vma_a, *vma_b, *vma_c, *vma_d;
- 	bool merged;
- 
-+	if (is_sticky)
-+		vm_flags |= VM_STICKY;
-+
- 	/*
- 	 * 0123456789abc
- 	 * AA B       CC
- 	 */
- 	vma_a = alloc_and_link_vma(&mm, 0, 0x2000, 0, vm_flags);
- 	ASSERT_NE(vma_a, NULL);
-+	if (a_is_sticky)
-+		vm_flags_set(vma_a, VM_STICKY);
- 	/* We give each VMA a single avc so we can test anon_vma duplication. */
- 	INIT_LIST_HEAD(&vma_a->anon_vma_chain);
- 	list_add(&dummy_anon_vma_chain_a.same_vma, &vma_a->anon_vma_chain);
- 
- 	vma_b = alloc_and_link_vma(&mm, 0x3000, 0x4000, 3, vm_flags);
- 	ASSERT_NE(vma_b, NULL);
-+	if (b_is_sticky)
-+		vm_flags_set(vma_b, VM_STICKY);
- 	INIT_LIST_HEAD(&vma_b->anon_vma_chain);
- 	list_add(&dummy_anon_vma_chain_b.same_vma, &vma_b->anon_vma_chain);
- 
- 	vma_c = alloc_and_link_vma(&mm, 0xb000, 0xc000, 0xb, vm_flags);
- 	ASSERT_NE(vma_c, NULL);
-+	if (c_is_sticky)
-+		vm_flags_set(vma_c, VM_STICKY);
- 	INIT_LIST_HEAD(&vma_c->anon_vma_chain);
- 	list_add(&dummy_anon_vma_chain_c.same_vma, &vma_c->anon_vma_chain);
- 
-@@ -520,6 +531,8 @@ static bool test_merge_new(void)
- 	ASSERT_EQ(vma->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_EQ(mm.map_count, 3);
-+	if (is_sticky || a_is_sticky || b_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma->vm_flags, VM_STICKY));
- 
- 	/*
- 	 * Merge to PREVIOUS VMA.
-@@ -537,6 +550,8 @@ static bool test_merge_new(void)
- 	ASSERT_EQ(vma->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_EQ(mm.map_count, 3);
-+	if (is_sticky || a_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma->vm_flags, VM_STICKY));
- 
- 	/*
- 	 * Merge to NEXT VMA.
-@@ -556,6 +571,8 @@ static bool test_merge_new(void)
- 	ASSERT_EQ(vma->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_EQ(mm.map_count, 3);
-+	if (is_sticky) /* D uses is_sticky. */
-+		ASSERT_TRUE(IS_SET(vma->vm_flags, VM_STICKY));
- 
- 	/*
- 	 * Merge BOTH sides.
-@@ -574,6 +591,8 @@ static bool test_merge_new(void)
- 	ASSERT_EQ(vma->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_EQ(mm.map_count, 2);
-+	if (is_sticky || a_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma->vm_flags, VM_STICKY));
- 
- 	/*
- 	 * Merge to NEXT VMA.
-@@ -592,6 +611,8 @@ static bool test_merge_new(void)
- 	ASSERT_EQ(vma->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_EQ(mm.map_count, 2);
-+	if (is_sticky || c_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma->vm_flags, VM_STICKY));
- 
- 	/*
- 	 * Merge BOTH sides.
-@@ -609,6 +630,8 @@ static bool test_merge_new(void)
- 	ASSERT_EQ(vma->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_EQ(mm.map_count, 1);
-+	if (is_sticky || a_is_sticky || c_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma->vm_flags, VM_STICKY));
- 
- 	/*
- 	 * Final state.
-@@ -637,6 +660,20 @@ static bool test_merge_new(void)
- 	return true;
- }
- 
-+static bool test_merge_new(void)
-+{
-+	int i, j, k, l;
-+
-+	/* Generate every possible permutation of sticky flags. */
-+	for (i = 0; i < 2; i++)
-+		for (j = 0; j < 2; j++)
-+			for (k = 0; k < 2; k++)
-+				for (l = 0; l < 2; l++)
-+					ASSERT_TRUE(__test_merge_new(i, j, k, l));
-+
-+	return true;
-+}
-+
- static bool test_vma_merge_special_flags(void)
- {
- 	vm_flags_t vm_flags = VM_READ | VM_WRITE | VM_MAYREAD | VM_MAYWRITE;
-@@ -973,9 +1010,11 @@ static bool test_vma_merge_new_with_close(void)
- 	return true;
- }
- 
--static bool test_merge_existing(void)
-+static bool __test_merge_existing(bool prev_is_sticky, bool middle_is_sticky, bool next_is_sticky)
- {
- 	vm_flags_t vm_flags = VM_READ | VM_WRITE | VM_MAYREAD | VM_MAYWRITE;
-+	vm_flags_t prev_flags = vm_flags;
-+	vm_flags_t next_flags = vm_flags;
- 	struct mm_struct mm = {};
- 	VMA_ITERATOR(vmi, &mm, 0);
- 	struct vm_area_struct *vma, *vma_prev, *vma_next;
-@@ -988,6 +1027,13 @@ static bool test_merge_existing(void)
- 	};
- 	struct anon_vma_chain avc = {};
- 
-+	if (prev_is_sticky)
-+		prev_flags |= VM_STICKY;
-+	if (middle_is_sticky)
-+		vm_flags |= VM_STICKY;
-+	if (next_is_sticky)
-+		next_flags |= VM_STICKY;
-+
- 	/*
- 	 * Merge right case - partial span.
- 	 *
-@@ -1000,7 +1046,7 @@ static bool test_merge_existing(void)
- 	 */
- 	vma = alloc_and_link_vma(&mm, 0x2000, 0x6000, 2, vm_flags);
- 	vma->vm_ops = &vm_ops; /* This should have no impact. */
--	vma_next = alloc_and_link_vma(&mm, 0x6000, 0x9000, 6, vm_flags);
-+	vma_next = alloc_and_link_vma(&mm, 0x6000, 0x9000, 6, next_flags);
- 	vma_next->vm_ops = &vm_ops; /* This should have no impact. */
- 	vmg_set_range_anon_vma(&vmg, 0x3000, 0x6000, 3, vm_flags, &dummy_anon_vma);
- 	vmg.middle = vma;
-@@ -1018,6 +1064,8 @@ static bool test_merge_existing(void)
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_TRUE(vma_write_started(vma_next));
- 	ASSERT_EQ(mm.map_count, 2);
-+	if (middle_is_sticky || next_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma_next->vm_flags, VM_STICKY));
- 
- 	/* Clear down and reset. */
- 	ASSERT_EQ(cleanup_mm(&mm, &vmi), 2);
-@@ -1033,7 +1081,7 @@ static bool test_merge_existing(void)
- 	 *   NNNNNNN
- 	 */
- 	vma = alloc_and_link_vma(&mm, 0x2000, 0x6000, 2, vm_flags);
--	vma_next = alloc_and_link_vma(&mm, 0x6000, 0x9000, 6, vm_flags);
-+	vma_next = alloc_and_link_vma(&mm, 0x6000, 0x9000, 6, next_flags);
- 	vma_next->vm_ops = &vm_ops; /* This should have no impact. */
- 	vmg_set_range_anon_vma(&vmg, 0x2000, 0x6000, 2, vm_flags, &dummy_anon_vma);
- 	vmg.middle = vma;
-@@ -1046,6 +1094,8 @@ static bool test_merge_existing(void)
- 	ASSERT_EQ(vma_next->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma_next));
- 	ASSERT_EQ(mm.map_count, 1);
-+	if (middle_is_sticky || next_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma_next->vm_flags, VM_STICKY));
- 
- 	/* Clear down and reset. We should have deleted vma. */
- 	ASSERT_EQ(cleanup_mm(&mm, &vmi), 1);
-@@ -1060,7 +1110,7 @@ static bool test_merge_existing(void)
- 	 * 0123456789
- 	 * PPPPPPV
- 	 */
--	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, vm_flags);
-+	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, prev_flags);
- 	vma_prev->vm_ops = &vm_ops; /* This should have no impact. */
- 	vma = alloc_and_link_vma(&mm, 0x3000, 0x7000, 3, vm_flags);
- 	vma->vm_ops = &vm_ops; /* This should have no impact. */
-@@ -1080,6 +1130,8 @@ static bool test_merge_existing(void)
- 	ASSERT_TRUE(vma_write_started(vma_prev));
- 	ASSERT_TRUE(vma_write_started(vma));
- 	ASSERT_EQ(mm.map_count, 2);
-+	if (prev_is_sticky || middle_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma_prev->vm_flags, VM_STICKY));
- 
- 	/* Clear down and reset. */
- 	ASSERT_EQ(cleanup_mm(&mm, &vmi), 2);
-@@ -1094,7 +1146,7 @@ static bool test_merge_existing(void)
- 	 * 0123456789
- 	 * PPPPPPP
- 	 */
--	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, vm_flags);
-+	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, prev_flags);
- 	vma_prev->vm_ops = &vm_ops; /* This should have no impact. */
- 	vma = alloc_and_link_vma(&mm, 0x3000, 0x7000, 3, vm_flags);
- 	vmg_set_range_anon_vma(&vmg, 0x3000, 0x7000, 3, vm_flags, &dummy_anon_vma);
-@@ -1109,6 +1161,8 @@ static bool test_merge_existing(void)
- 	ASSERT_EQ(vma_prev->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma_prev));
- 	ASSERT_EQ(mm.map_count, 1);
-+	if (prev_is_sticky || middle_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma_prev->vm_flags, VM_STICKY));
- 
- 	/* Clear down and reset. We should have deleted vma. */
- 	ASSERT_EQ(cleanup_mm(&mm, &vmi), 1);
-@@ -1123,10 +1177,10 @@ static bool test_merge_existing(void)
- 	 * 0123456789
- 	 * PPPPPPPPPP
- 	 */
--	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, vm_flags);
-+	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, prev_flags);
- 	vma_prev->vm_ops = &vm_ops; /* This should have no impact. */
- 	vma = alloc_and_link_vma(&mm, 0x3000, 0x7000, 3, vm_flags);
--	vma_next = alloc_and_link_vma(&mm, 0x7000, 0x9000, 7, vm_flags);
-+	vma_next = alloc_and_link_vma(&mm, 0x7000, 0x9000, 7, next_flags);
- 	vmg_set_range_anon_vma(&vmg, 0x3000, 0x7000, 3, vm_flags, &dummy_anon_vma);
- 	vmg.prev = vma_prev;
- 	vmg.middle = vma;
-@@ -1139,6 +1193,8 @@ static bool test_merge_existing(void)
- 	ASSERT_EQ(vma_prev->anon_vma, &dummy_anon_vma);
- 	ASSERT_TRUE(vma_write_started(vma_prev));
- 	ASSERT_EQ(mm.map_count, 1);
-+	if (prev_is_sticky || middle_is_sticky || next_is_sticky)
-+		ASSERT_TRUE(IS_SET(vma_prev->vm_flags, VM_STICKY));
- 
- 	/* Clear down and reset. We should have deleted prev and next. */
- 	ASSERT_EQ(cleanup_mm(&mm, &vmi), 1);
-@@ -1158,9 +1214,9 @@ static bool test_merge_existing(void)
- 	 * PPPVVVVVNNN
- 	 */
- 
--	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, vm_flags);
-+	vma_prev = alloc_and_link_vma(&mm, 0, 0x3000, 0, prev_flags);
- 	vma = alloc_and_link_vma(&mm, 0x3000, 0x8000, 3, vm_flags);
--	vma_next = alloc_and_link_vma(&mm, 0x8000, 0xa000, 8, vm_flags);
-+	vma_next = alloc_and_link_vma(&mm, 0x8000, 0xa000, 8, next_flags);
- 
- 	vmg_set_range(&vmg, 0x4000, 0x5000, 4, vm_flags);
- 	vmg.prev = vma;
-@@ -1203,6 +1259,19 @@ static bool test_merge_existing(void)
- 	return true;
- }
- 
-+static bool test_merge_existing(void)
-+{
-+	int i, j, k;
-+
-+	/* Generate every possible permutation of sticky flags. */
-+	for (i = 0; i < 2; i++)
-+		for (j = 0; j < 2; j++)
-+			for (k = 0; k < 2; k++)
-+				ASSERT_TRUE(__test_merge_existing(i, j, k));
-+
-+	return true;
-+}
-+
- static bool test_anon_vma_non_mergeable(void)
- {
- 	vm_flags_t vm_flags = VM_READ | VM_WRITE | VM_MAYREAD | VM_MAYWRITE;
-diff --git a/tools/testing/vma/vma_internal.h b/tools/testing/vma/vma_internal.h
-index e40c93edc5a7..3d9cb3a9411a 100644
---- a/tools/testing/vma/vma_internal.h
-+++ b/tools/testing/vma/vma_internal.h
-@@ -117,6 +117,38 @@ extern unsigned long dac_mmap_min_addr;
- #define VM_SEALED	VM_NONE
- #endif
- 
-+/* Flags which should result in page tables being copied on fork. */
-+#define VM_COPY_ON_FORK VM_MAYBE_GUARD
-+
-+/*
-+ * Flags which should be 'sticky' on merge - that is, flags which, when one VMA
-+ * possesses it but the other does not, the merged VMA should nonetheless have
-+ * applied to it:
-+ *
-+ * VM_COPY_ON_FORK - These flags indicates that a VMA maps a range that contains
-+ *                   metadata which should be unconditionally propagated upon
-+ *                   fork. When merging two VMAs, we encapsulate this range in
-+ *                   the merged VMA, so the flag should be 'sticky' as a result.
-+ */
-+#define VM_STICKY VM_COPY_ON_FORK
-+
-+/*
-+ * VMA flags we ignore for the purposes of merge, i.e. one VMA possessing one
-+ * of these flags and the other not does not preclude a merge.
-+ *
-+ * VM_SOFTDIRTY - Should not prevent from VMA merging, if we match the flags but
-+ *                dirty bit -- the caller should mark merged VMA as dirty. If
-+ *                dirty bit won't be excluded from comparison, we increase
-+ *                pressure on the memory system forcing the kernel to generate
-+ *                new VMAs when old one could be extended instead.
-+ *
-+ *    VM_STICKY - If one VMA has flags which must be 'sticky', that is ones
-+ *                which should propagate to all VMAs, but the other does not,
-+ *                the merge should still proceed with the merge logic applying
-+ *                sticky flags to the final VMA.
-+ */
-+#define VM_IGNORE_MERGE (VM_SOFTDIRTY | VM_STICKY)
-+
- #define FIRST_USER_ADDRESS	0UL
- #define USER_PGTABLES_CEILING	0UL
- 
--- 
-2.51.0
+> + * @labels:		labels of the channels
+> + * @active_ch_mask:	active channels
+> + * @chip:		pointer to structure holding chip features
+> + * @freq_idx:		index representing the current sampling frequency
+
+Unused.
+
+> + * @regmap:		device register map
+> + * @recd34_en:		state of Resistance Error Correction (REC) on channels 3 and 4
+> + * @recd12_en:		state of Resistance Error Correction (REC) on channels 1 and 2
+> + * @lock:		synchronize access to driver's state members
+
+Unused.
+
+> + * @apdd_en:		state of anti-parallel diode mode
+> + * @num_channels:	number of active physical channels
+
+Unused.
+
+> + */
+> +struct emc1812_data {
+> +	struct i2c_client *client;
+> +	struct device *hwmon_dev;
+> +	const char *labels[EMC1812_MAX_NUM_CHANNELS];
+> +	unsigned long active_ch_mask;
+> +	const struct emc1812_features *chip;
+> +	unsigned int freq_idx;
+> +	struct regmap *regmap;
+> +	bool recd34_en;
+> +	bool recd12_en;
+> +	struct mutex lock;	 /* Synchronize access to driver's state members */
+> +	bool apdd_en;
+> +	u8 num_channels;
+> +};
+> +
+> +/* emc1812 regmap configuration */
+> +static const struct regmap_range emc1812_regmap_writable_ranges[] = {
+> +	regmap_reg_range(EMC1812_CFG_ADDR, EMC1812_ONE_SHOT_ADDR),
+> +	regmap_reg_range(EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR,
+> +			 EMC1812_EXT_DIODE_FAULT_STATUS_ADDR),
+> +	regmap_reg_range(EMC1812_DIODE_FAULT_MASK_ADDR, EMC1812_CONSEC_ALERT_ADDR),
+> +	regmap_reg_range(EMC1812_EXT1_BETA_CONFIG_ADDR, EMC1812_FILTER_SEL_ADDR),
+> +	regmap_reg_range(EMC1812_HOTTEST_STATUS_ADDR, EMC1812_HOTTEST_CFG_ADDR),
+> +};
+> +
+> +static const struct regmap_access_table emc1812_regmap_wr_table = {
+> +	.yes_ranges = emc1812_regmap_writable_ranges,
+> +	.n_yes_ranges = ARRAY_SIZE(emc1812_regmap_writable_ranges),
+> +};
+> +
+> +static const struct regmap_range emc1812_regmap_rd_ranges[] = {
+> +	regmap_reg_range(EMC1812_STATUS_ADDR, EMC1812_CONFIG_LO_ADDR),
+> +	regmap_reg_range(EMC1812_CFG_ADDR, EMC1812_ONE_SHOT_ADDR),
+> +	regmap_reg_range(EMC1812_EXT1_HIGH_LIMIT_LOW_BYTE_ADDR,
+> +			 EMC1812_EXT_DIODE_FAULT_STATUS_ADDR),
+> +	regmap_reg_range(EMC1812_DIODE_FAULT_MASK_ADDR, EMC1812_CONSEC_ALERT_ADDR),
+> +	regmap_reg_range(EMC1812_EXT1_BETA_CONFIG_ADDR, EMC1812_FILTER_SEL_ADDR),
+> +	regmap_reg_range(EMC1812_INT_HIGH_BYTE_ADDR, EMC1812_HOTTEST_CFG_ADDR),
+> +	regmap_reg_range(EMC1812_PRODUCT_ID_ADDR, EMC1812_REVISION_ADDR),
+> +};
+> +
+> +static const struct regmap_access_table emc1812_regmap_rd_table = {
+> +	.yes_ranges = emc1812_regmap_rd_ranges,
+> +	.n_yes_ranges = ARRAY_SIZE(emc1812_regmap_rd_ranges),
+> +};
+> +
+> +static bool emc1812_is_volatile_reg(struct device *dev, unsigned int reg)
+> +{
+> +	switch (reg) {
+> +	case EMC1812_STATUS_ADDR:
+> +	case EMC1812_EXT_DIODE_FAULT_STATUS_ADDR:
+> +	case EMC1812_DIODE_FAULT_MASK_ADDR:
+> +	case EMC1812_EXT1_BETA_CONFIG_ADDR:
+> +	case EMC1812_EXT2_BETA_CONFIG_ADDR:
+> +	case EMC1812_HIGH_LIMIT_STATUS_ADDR:
+> +	case EMC1812_LOW_LIMIT_STATUS_ADDR:
+> +	case EMC1812_THERM_LIMIT_STATUS_ADDR:
+> +	case EMC1812_ROC_STATUS_ADDR:
+> +	case EMC1812_PER_MAXTH_1_ADDR:
+> +	case EMC1812_PER_MAXT1L_ADDR:
+> +	case EMC1812_PER_MAXTH_2_ADDR:
+> +	case EMC1812_PER_MAXT2_3L_ADDR:
+> +	case EMC1812_GBL_MAXT1H_ADDR:
+> +	case EMC1812_GBL_MAXT1L_ADDR:
+> +	case EMC1812_GBL_MAXT2H_ADDR:
+> +	case EMC1812_GBL_MAXT2L_ADDR:
+> +	case EMC1812_INT_HIGH_BYTE_ADDR:
+> +	case EMC1812_INT_LOW_BYTE_ADDR:
+> +	case EMC1812_EXT1_HIGH_BYTE_ADDR:
+> +	case EMC1812_EXT1_LOW_BYTE_ADDR:
+> +	case EMC1812_EXT2_HIGH_BYTE_ADDR:
+> +	case EMC1812_EXT2_LOW_BYTE_ADDR:
+> +	case EMC1812_EXT3_HIGH_BYTE_ADDR:
+> +	case EMC1812_EXT3_LOW_BYTE_ADDR:
+> +	case EMC1812_EXT4_HIGH_BYTE_ADDR:
+> +	case EMC1812_EXT4_LOW_BYTE_ADDR:
+> +	case EMC1812_HOTTEST_DIODE_HIGH_BYTE_ADDR:
+> +	case EMC1812_HOTTEST_DIODE_LOW_BYTE_ADDR:
+> +	case EMC1812_HOTTEST_STATUS_ADDR:
+> +		return true;
+> +	default:
+> +		return false;
+> +	}
+> +}
+> +
+> +static const struct regmap_config emc1812_regmap_config = {
+> +	.reg_bits = 8,
+> +	.val_bits = 8,
+> +	.rd_table = &emc1812_regmap_rd_table,
+> +	.wr_table = &emc1812_regmap_wr_table,
+> +	.volatile_reg = emc1812_is_volatile_reg,
+> +	.max_register = EMC1812_REVISION_ADDR,
+> +	.cache_type = REGCACHE_MAPLE,
+> +};
+> +
+> +static umode_t emc1812_is_visible(const void *_data, enum hwmon_sensor_types type,
+> +				  u32 attr, int channel)
+> +{
+> +	const struct emc1812_data *data = _data;
+> +
+> +	switch (type) {
+> +	case hwmon_temp:
+> +		/* Don't show channels which are not described into the device tree. */
+
+The driver needs to work on systems without devicetree or firmware nodes,
+so there will have to be some defaults to handle that.
+
+> +		if (!(data->active_ch_mask & (1 << channel)))
+
+BIT(channel)
+
+> +			return 0;
+> +
+> +		/* Don't show channels which are not physically connected. */
+> +		if (channel >= data->chip->phys_channels)
+> +			return 0;
+> +
+> +		switch (attr) {
+> +		case hwmon_temp_input:
+> +		case hwmon_temp_min_alarm:
+> +		case hwmon_temp_max_alarm:
+> +		case hwmon_temp_crit_alarm:
+> +		case hwmon_temp_fault:
+> +		case hwmon_temp_min_hyst:
+> +		case hwmon_temp_max_hyst:
+> +		case hwmon_temp_label:
+> +			return 0444;
+> +		case hwmon_temp_min:
+> +		case hwmon_temp_max:
+> +		case hwmon_temp_crit:
+> +		case hwmon_temp_crit_hyst:
+> +			return 0644;
+> +		default:
+> +			return 0;
+> +		}
+> +	case hwmon_chip:
+> +		switch (attr) {
+> +		case hwmon_chip_update_interval:
+> +			return 0644;
+> +		default:
+> +			return 0;
+> +		}
+> +	default:
+> +		return 0;
+> +	}
+> +};
+> +
+> +static int emc1812_get_temp(struct emc1812_data *data, int channel, long *val)
+> +{
+> +	__be16 tmp_be16;
+> +	int ret;
+> +
+> +	ret = regmap_bulk_read(data->regmap, EMC1812_TEMP_CH_ADDR(channel),
+> +			       &tmp_be16, sizeof(tmp_be16));
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Range is always -64 to 191.875°C */
+> +	*val = ((be16_to_cpu(tmp_be16) >> 5) - 512) * 125;
+> +
+> +	return 0;
+> +}
+> +
+> +static int emc1812_get_crit_limit_temp(struct emc1812_data *data, int channel, long *val)
+> +{
+> +	unsigned int tmp;
+> +	int ret;
+> +
+> +	/* Critical register is 8bits long and keeps only integer part of temperature */
+> +	ret = regmap_read(data->regmap, emc1812_temp_crit_regs[channel], &tmp);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Range is always -64 to 191°C */
+> +	*val = (tmp - EMC1812_TEMP_OFFSET) * 1000;
+> +
+> +	return 0;
+> +}
+> +
+> +static int emc1812_get_limit_temp(struct emc1812_data *data, int ch,
+> +				  enum emc1812_limit_type type, long *val)
+> +{
+> +	unsigned int regvalh;
+> +	unsigned int regvall = 0;
+> +	int ret;
+> +
+> +	ret = regmap_read(data->regmap, emc1812_limit_regs[ch][type], &regvalh);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	if (ch) {
+> +		ret = regmap_read(data->regmap, emc1812_limit_regs_low[ch][type], &regvall);
+> +		if (ret < 0)
+> +			return ret;
+> +	}
+> +	/* Range is always -64 to 191.875°C */
+> +	*val = (((regvalh - EMC1812_TEMP_OFFSET) << 3) | (regvall >> 5)) * 125;
+> +
+> +	return 0;
+> +}
+> +
+> +static int emc1812_read_reg(struct device *dev, struct emc1812_data *data, u32 attr,
+> +			    int channel, long *val)
+> +{
+> +	unsigned int mask;
+> +	int hyst, ret;
+> +
+> +	switch (attr) {
+> +	case hwmon_temp_min:
+> +		return emc1812_get_limit_temp(data, channel, temp_min, val);
+> +	case hwmon_temp_max:
+> +		return emc1812_get_limit_temp(data, channel, temp_max, val);
+> +	case hwmon_temp_crit:
+> +		return emc1812_get_crit_limit_temp(data, channel, val);
+> +	case hwmon_temp_input:
+> +		return emc1812_get_temp(data, channel, val);
+> +	case hwmon_temp_min_hyst:
+> +		ret = emc1812_get_limit_temp(data, channel, temp_min, val);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		ret = regmap_read(data->regmap, EMC1812_THRM_HYS_ADDR, &hyst);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		*val = *val + hyst * 1000;
+> +
+> +		return 0;
+> +
+> +	case hwmon_temp_max_hyst:
+> +		ret = emc1812_get_limit_temp(data, channel, temp_max, val);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		ret = regmap_read(data->regmap, EMC1812_THRM_HYS_ADDR, &hyst);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		*val = *val - hyst * 1000;
+> +
+> +		return 0;
+> +	case hwmon_temp_crit_hyst:
+> +		ret = emc1812_get_crit_limit_temp(data, channel, val);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		ret = regmap_read(data->regmap, EMC1812_THRM_HYS_ADDR, &hyst);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		*val = *val - hyst * 1000;
+> +		return 0;
+> +	case hwmon_temp_min_alarm:
+> +		mask = 1 << channel;
+> +		*val = regmap_test_bits(data->regmap, EMC1812_LOW_LIMIT_STATUS_ADDR, mask);
+> +		if (*val < 0)
+> +			return *val;
+> +		return 0;
+> +	case hwmon_temp_max_alarm:
+> +		mask = 1 << channel;
+> +		*val = regmap_test_bits(data->regmap, EMC1812_HIGH_LIMIT_STATUS_ADDR, mask);
+> +		if (*val < 0)
+> +			return *val;
+> +		return 0;
+> +	case hwmon_temp_crit_alarm:
+> +		mask = 1 << channel;
+> +		*val = regmap_test_bits(data->regmap, EMC1812_THERM_LIMIT_STATUS_ADDR, mask);
+> +		if (*val < 0)
+> +			return *val;
+> +		return 0;
+> +	case hwmon_temp_fault:
+> +		mask = 1 << channel;
+> +		*val = regmap_test_bits(data->regmap, EMC1812_EXT_DIODE_FAULT_STATUS_ADDR, mask);
+> +		if (*val < 0)
+> +			return *val;
+> +		return 0;
+> +	default:
+> +		return -EOPNOTSUPP;
+> +	}
+> +}
+> +
+> +static int emc1812_read(struct device *dev, enum hwmon_sensor_types type, u32 attr,
+> +			int channel, long *val)
+> +{
+> +	struct emc1812_data *data = dev_get_drvdata(dev);
+> +	unsigned int convrate;
+> +	int ret;
+> +
+> +	switch (type) {
+> +	case hwmon_temp:
+> +		return emc1812_read_reg(dev, data, attr, channel, val);
+> +	case hwmon_chip:
+> +		switch (attr) {
+> +		case hwmon_chip_update_interval:
+> +			ret = regmap_read(data->regmap, EMC1812_CONV_ADDR, &convrate);
+> +			if (ret < 0)
+> +				return ret;
+> +
+> +			if (convrate > 10)
+> +				convrate = 4;
+> +
+> +			*val = 16000 >> convrate;
+> +			return 0;
+> +		default:
+> +			return -EOPNOTSUPP;
+> +		}
+> +	default:
+> +		return -EOPNOTSUPP;
+> +	}
+> +}
+> +
+> +static int emc1812_read_string(struct device *dev, enum hwmon_sensor_types type,
+> +			       u32 attr, int channel, const char **str)
+> +{
+> +	struct emc1812_data *data = dev_get_drvdata(dev);
+> +
+> +	if (channel >= data->chip->phys_channels)
+> +		return 0;
+> +
+> +	switch (type) {
+> +	case hwmon_temp:
+> +		switch (attr) {
+> +		case hwmon_temp_label:
+> +			*str = data->labels[channel];
+> +			return 0;
+> +		default:
+> +			return -EOPNOTSUPP;
+> +		}
+> +	default:
+> +		return -EOPNOTSUPP;
+> +	}
+> +}
+> +
+> +static int emc1812_set_hyst(struct emc1812_data *data, int channel, long val)
+> +{
+> +	int hyst, ret;
+> +	int limit;
+> +
+> +	/* Critical register is 8bits long and keeps only integer part of temperature */
+> +	ret = regmap_read(data->regmap, emc1812_temp_crit_regs[channel], &limit);
+> +	if (ret)
+> +		return ret;
+> +
+> +	hyst = clamp_val(limit - val, 0, 256);
+> +
+> +	ret = regmap_write(data->regmap, EMC1812_THRM_HYS_ADDR, hyst);
+> +
+> +	return ret;
+> +}
+> +
+> +static int emc1812_set_temp(struct emc1812_data *data, int channel,
+> +			    enum emc1812_limit_type map, long val)
+> +{
+> +	int ret;
+> +	u8 regh, regl;
+> +
+> +	regh = emc1812_limit_regs[channel][map];
+> +	regl = emc1812_limit_regs_low[channel][map];
+> +
+> +	ret = regmap_write(data->regmap, regh, (val >> 3) & 0xff);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	if (channel)
+> +		ret = regmap_write(data->regmap, regl, (val & 0x07) << 5);
+> +
+> +	return ret;
+> +}
+> +
+> +static int emc1812_write(struct device *dev, enum hwmon_sensor_types type, u32 attr,
+> +			 int channel, long val)
+> +{
+> +	struct emc1812_data *data = dev_get_drvdata(dev);
+> +	unsigned int interval;
+> +	int convrate;
+> +
+> +	switch (type) {
+> +	case hwmon_temp:
+> +		/* Range is always -64 to 191.875°C */
+> +		val = clamp_val(val, -64000, 191875);
+> +		val = val + (EMC1812_TEMP_OFFSET * 1000);
+> +		val = DIV_ROUND_CLOSEST(val, 125);
+> +
+> +		switch (attr) {
+> +		case hwmon_temp_min:
+> +		case hwmon_temp_max:
+> +			return emc1812_set_temp(data, channel, emc1812_temp_map[attr], val);
+> +		case hwmon_temp_crit:
+> +			val = (val >> 3) & 0xff;
+> +			return regmap_write(data->regmap, emc1812_temp_crit_regs[channel], val);
+> +		case hwmon_temp_crit_hyst:
+> +			val = (val >> 3) & 0xff;
+> +			return emc1812_set_hyst(data, channel, val);
+> +		default:
+> +			return -EOPNOTSUPP;
+> +		}
+> +	case hwmon_chip:
+> +		switch (attr) {
+> +		case hwmon_chip_update_interval:
+> +			interval = clamp_val(val, 0, 16000);
+> +			convrate = find_closest_descending(interval, emc1812_conv_time,
+> +							   ARRAY_SIZE(emc1812_conv_time));
+> +			return regmap_write(data->regmap, EMC1812_CONV_ADDR, convrate);
+> +		default:
+> +			return -EOPNOTSUPP;
+> +		}
+> +	default:
+> +		return -EOPNOTSUPP;
+> +	}
+> +}
+> +
+> +static int emc1812_init(struct emc1812_data *priv)
+> +{
+> +	int ret;
+> +	u8 val;
+> +
+> +	/*
+> +	 * Set default values in registers. APDD, RECD12 and RECD34 are active
+> +	 * on 0.
+> +	 * Set the device to be in Run (Active) state and converting on all
+> +	 * channels.
+> +	 * The temperature measurement range is -64°C to +191.875°C.
+> +	 */
+> +	val = FIELD_PREP(EMC1812_CFG_MSKAL, 1) |
+> +	      FIELD_PREP(EMC1812_CFG_RS, 0) |
+> +	      FIELD_PREP(EMC1812_CFG_ATTHM, 1) |
+> +	      FIELD_PREP(EMC1812_CFG_RECD12, !priv->recd12_en) |
+> +	      FIELD_PREP(EMC1812_CFG_RECD34, !priv->recd34_en) |
+> +	      FIELD_PREP(EMC1812_CFG_RANGE, 1) |
+> +	      FIELD_PREP(EMC1812_CFG_DA_ENA, 0) |
+> +	      FIELD_PREP(EMC1812_CFG_APDD, !priv->apdd_en);
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_CFG_ADDR, val);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Default is 4 conversions/seconds */
+> +	ret = regmap_write(priv->regmap, EMC1812_CONV_ADDR, 6);
+> +	if (ret)
+> +		return ret;
+> +	priv->freq_idx = 6;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_THRM_HYS_ADDR, 0x0A);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_CONSEC_ALERT_ADDR, 0x70);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_FILTER_SEL_ADDR, 0);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_HOTTEST_CFG_ADDR, 0);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Enables the beta compensation factor auto-detection function for beta1 and beta2 */
+> +	ret = regmap_write(priv->regmap, EMC1812_EXT1_BETA_CONFIG_ADDR,
+> +			   EMC1812_BETA_LOCK_VAL);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_EXT2_BETA_CONFIG_ADDR,
+> +			   EMC1812_BETA_LOCK_VAL);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Set ideality factor for all external channels */
+> +	ret = regmap_write(priv->regmap, EMC1812_EXT1_IDEALITY_FACTOR_ADDR,
+> +			   EMC1812_DEFAULT_IDEALITY_FACTOR);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_EXT2_IDEALITY_FACTOR_ADDR,
+> +			   EMC1812_DEFAULT_IDEALITY_FACTOR);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_EXT3_IDEALITY_FACTOR_ADDR,
+> +			   EMC1812_DEFAULT_IDEALITY_FACTOR);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = regmap_write(priv->regmap, EMC1812_EXT4_IDEALITY_FACTOR_ADDR,
+> +			   EMC1812_DEFAULT_IDEALITY_FACTOR);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return 0;
+> +}
+> +
+> +static int emc1812_parse_fw_config(struct emc1812_data *data, struct device *dev)
+> +{
+> +	unsigned int reg_nr = 0;
+> +	int ret;
+> +
+> +	data->apdd_en = device_property_read_bool(dev, "microchip,enable-anti-parallel");
+> +	data->recd12_en = device_property_read_bool(dev, "microchip,parasitic-res-on-channel1-2");
+> +	data->recd34_en = device_property_read_bool(dev, "microchip,parasitic-res-on-channel3-4");
+> +
+> +	data->num_channels = device_get_child_node_count(dev) + 1;
+> +
+> +	if (data->num_channels > data->chip->phys_channels)
+> +		return dev_err_probe(dev, -E2BIG, "More channels than the chip supports\n");
+> +
+> +	/* internal temperature channel as always active */
+
+s/as/is/ ?
+
+> +	data->labels[reg_nr] = "internal_diode";
+> +	set_bit(reg_nr, &data->active_ch_mask);
+> +
+> +	device_for_each_child_node_scoped(dev, child) {
+> +		ret = fwnode_property_read_u32(child, "reg", &reg_nr);
+> +		if (ret || reg_nr >= data->chip->phys_channels)
+> +			return dev_err_probe(dev, -EINVAL,
+> +				     "The index of the channels does not match the chip\n");
+> +		/* mark external channel as active */
+> +		set_bit(reg_nr, &data->active_ch_mask);
+> +
+> +		fwnode_property_read_string(child, "label", &data->labels[reg_nr]);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int emc1812_chip_identify(struct emc1812_data *data, struct i2c_client *client)
+> +{
+> +	int ret, tmp;
+> +
+> +	ret = regmap_read(data->regmap, EMC1812_PRODUCT_ID_ADDR, &tmp);
+> +	if (ret)
+> +		return ret;
+> +
+> +	switch (tmp) {
+> +	case EMC1812_PID:
+> +		data->chip = &emc1812_chip_config;
+> +		break;
+> +	case EMC1813_PID:
+> +		data->chip = &emc1813_chip_config;
+> +		break;
+> +	case EMC1814_PID:
+> +		data->chip = &emc1814_chip_config;
+> +		break;
+> +	case EMC1815_PID:
+> +		data->chip = &emc1815_chip_config;
+> +		break;
+> +	case EMC1833_PID:
+> +		data->chip = &emc1833_chip_config;
+> +		break;
+> +	default:
+> +		/*
+> +		 * If failed to identify the hardware based on internal registers,
+> +		 * try using fallback compatible in device tree to deal with some
+> +		 * newer part number.
+> +		 */
+> +		data->chip = device_get_match_data(&client->dev);
+> +		if (!data->chip)
+> +			return -EINVAL;
+> +		break;
+
+Interesting approach. It might be useful though to compare
+devicetree data with the actual chip just in case the devicetree data
+refers to the wrong chip, and display a warning in that case.
+Either case, I would suggest to display a message in the default:
+case to inform the user that the referenced chip is unknown.
+
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct hwmon_ops emc1812_ops = {
+> +	.is_visible = emc1812_is_visible,
+> +	.read = emc1812_read,
+> +	.read_string = emc1812_read_string,
+> +	.write = emc1812_write,
+> +};
+> +
+> +static const struct hwmon_chip_info emc1812_chip_info = {
+> +	.ops = &emc1812_ops,
+> +	.info = emc1812_info,
+> +};
+> +
+> +static int emc1812_probe(struct i2c_client *client)
+> +{
+> +	struct device *dev = &client->dev;
+> +	struct emc1812_data *data;
+> +	int ret;
+> +
+> +	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
+> +	if (!data)
+> +		return -ENOMEM;
+> +
+> +	i2c_set_clientdata(client, data);
+> +	data->client = client;
+> +
+> +	data->regmap = devm_regmap_init_i2c(client, &emc1812_regmap_config);
+> +	if (IS_ERR(data->regmap))
+> +		return dev_err_probe(dev, PTR_ERR(data->regmap),
+> +				     "Cannot initialize register map\n");
+> +
+> +	ret = devm_mutex_init(dev, &data->lock);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = emc1812_chip_identify(data, client);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "Chip identification fails\n");
+> +
+> +	dev_info(dev, "Device name: %s\n", data->chip->name);
+> +
+> +	ret = emc1812_parse_fw_config(data, dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = emc1812_init(data);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "Cannot initialize device\n");
+> +
+> +	data->hwmon_dev = devm_hwmon_device_register_with_info(dev, client->name, data,
+> +							       &emc1812_chip_info, NULL);
+> +	if (IS_ERR(data->hwmon_dev))
+> +		return PTR_ERR(data->hwmon_dev);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct i2c_device_id emc1812_id[] = {
+> +	{ .name = "emc1812", .driver_data = (kernel_ulong_t)&emc1812_chip_config },
+> +	{ .name = "emc1813", .driver_data = (kernel_ulong_t)&emc1813_chip_config },
+> +	{ .name = "emc1814", .driver_data = (kernel_ulong_t)&emc1814_chip_config },
+> +	{ .name = "emc1815", .driver_data = (kernel_ulong_t)&emc1815_chip_config },
+> +	{ .name = "emc1833", .driver_data = (kernel_ulong_t)&emc1833_chip_config },
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(i2c, emc1812_id);
+> +
+> +static const struct of_device_id emc1812_of_match[] = {
+> +	{
+> +		.compatible = "microchip,emc1812",
+> +		.data = &emc1812_chip_config
+> +	},
+> +	{
+> +		.compatible = "microchip,emc1813",
+> +		.data = &emc1813_chip_config
+> +	},
+> +	{
+> +		.compatible = "microchip,emc1814",
+> +		.data = &emc1814_chip_config
+> +	},
+> +	{
+> +		.compatible = "microchip,emc1815",
+> +		.data = &emc1815_chip_config
+> +	},
+> +	{
+> +		.compatible = "microchip,emc1833",
+> +		.data = &emc1833_chip_config
+> +	},
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, emc1812_of_match);
+> +
+> +static struct i2c_driver emc1812_driver = {
+> +	.driver	 = {
+> +		.name = "emc1812",
+> +		.of_match_table = emc1812_of_match,
+> +	},
+> +	.probe = emc1812_probe,
+> +	.id_table = emc1812_id,
+> +};
+> +module_i2c_driver(emc1812_driver);
+> +
+> +MODULE_AUTHOR("Marius Cristea <marius.cristea@microchip.com>");
+> +MODULE_DESCRIPTION("EMC1812/13/14/15/33 high-accuracy remote diode temperature monitor Driver");
+> +MODULE_LICENSE("GPL");
+> 
 
 
