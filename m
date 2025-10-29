@@ -1,57 +1,57 @@
-Return-Path: <linux-doc+bounces-64930-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-64932-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD26BC1BADD
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 16:32:49 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 634C1C1B9B2
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 16:20:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 041695A2C47
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 14:37:02 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BCA62620E2F
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Oct 2025 14:37:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3001B29AB11;
-	Wed, 29 Oct 2025 14:36:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EDB272D2388;
+	Wed, 29 Oct 2025 14:36:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="IMNlMIls"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="LP4xLJtC"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DCB8289378;
-	Wed, 29 Oct 2025 14:36:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D337C2BD5A8
+	for <linux-doc@vger.kernel.org>; Wed, 29 Oct 2025 14:36:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761748617; cv=none; b=tb7Yi9WENntsULmBgX6FKZRy+mj/Pbb7IkPvO8u23QZr/iu2hpiHoUJp1pK6r/NurTfIkXlEtdn6v+vu43YaCN2/t4gTpKlZSJTGUOO0YFnnlC8ccBuCN2YNu0R5Fl/m6eMAq28AGD/5B0wj3S54b90o0ZfquMJFm9hHJUwl6XM=
+	t=1761748619; cv=none; b=UgmWVOZHg933lXH4MGonCe527mdtMNdaHbsF+DCRLB7MOMb/fVnBXUbOCtf7XX642Xq2wZ0AWtZuV5boGIhPempFibVK50ijnAOpxmUv6L+PNcnr0SzkUTLF+FxmcMmsWaRHHb/3carg1evFcBJrwJLdtoBJGhJaO+HeWajFHC4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761748617; c=relaxed/simple;
-	bh=Wsj1m7hVEtg7sU79/U1qOzzdUOMLj+fgjBm3lz+0CaE=;
+	s=arc-20240116; t=1761748619; c=relaxed/simple;
+	bh=P2YQYyxAPSZpXd/i/92Ex57u+40+oZJvWkUOQRGtaCI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=NZ0Ex6JGU3DnODAliB2E0Sc5CRIqajupMNsjhWsq1MCB5TRW+p5U3eH6YepsHEs6xEOhtK3KMbx8kUZUv5A9EaTPmTFHHBEJaXPMWr/kRLL+Ox/iy0lUvQCv1sC5tRDKrDh2slUaPl+Apnvn8BDdcJoCEm35Me/USJtWYrIVx2I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=IMNlMIls; arc=none smtp.client-ip=185.246.84.56
+	 In-Reply-To:To:Cc; b=pT0wf0argkwyqhIKYOifvZjx1CsF+emN5Htyj5VN3RM7wtiunk9yR/QQqGlOa33v1WAwEL39v5HrGBMHW7S+zSwuT6UiA47OeTYr+eg+Oat7tfKfQO7oyPR6HeOwxqDYpJ2BiWqfBrLzJ3Q++Hn4edzeV+UoML91ThfMProMWyc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=LP4xLJtC; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id D49811A174A;
-	Wed, 29 Oct 2025 14:36:52 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 1BEC11A174B;
+	Wed, 29 Oct 2025 14:36:56 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id AB0C5606E8;
-	Wed, 29 Oct 2025 14:36:52 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 95996117F813D;
-	Wed, 29 Oct 2025 15:36:50 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id E59ED606E8;
+	Wed, 29 Oct 2025 14:36:55 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9BEF7102F24F9;
+	Wed, 29 Oct 2025 15:36:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1761748612; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1761748615; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=ZbJg/Ukh5zMJtkFjzl+I9BgVwlaHjwOBuN87NBSPDvA=;
-	b=IMNlMIlssFkqvlfvP4DWIjddvg2gfqj6Xbm1W9TUp9vDqG9WqhP5HjYOd1bGee8FD1/XJs
-	LDg9CK0LRQzLYd+ClIXUXbJBYEDBHm/UCQeZv4kVcJF6/HI3X8KGxY628E/RY0Sod7Cqpi
-	Fnt3aP6G4K3zhlBjUZLztazX2i+3dX0buVDUKsEFR/YTt/feq9GtdKE6gC6N1fyFSsWI8f
-	9IUYMdT2l52W8sR9zvyVSwfuGJlc6WC0cg7E2J/nlEYkYrAldxmWFnUame5Nt2EfyFTdB5
-	TgaRYq9JqU4WtJt+u8CTZbkw40urDSsZ+fgidz30jybd18njJZ7C31A3FjLg2A==
+	bh=Cp6JpAtoASV5c2ZHnxjic8luGPShZOCddn0tveS2zCk=;
+	b=LP4xLJtCpeo0/5dDEGlvCen7w4edznxJlfh4hXIodgwC983y8R+ka7JswykSJVMQfzmKhs
+	7lqUDNOq/iD6uuMldL5pGETpUyT20yXfyIAxuggiVpJI/IjEYzv57GpuN9AxR7NBjI8pqC
+	v8i0/4FIP9gVRWJ0Gkgym79AZk9XMw+9ivEKalIg/U/R8m2NY748Qj1JMe3wqPJ7wND2DU
+	zclGw7bK3OXJhnYO+4++30uGjZmhqacQKSlxgx3dZmc40KwBwf97F7wQfBxxQKK8mJKlgC
+	q1PRAm5Uu+hNublx+XJEpK/aw/v5BNKPkmDbi8QOjZvMnCLeTgkY9rl2kO7iow==
 From: Louis Chauvet <louis.chauvet@bootlin.com>
-Date: Wed, 29 Oct 2025 15:36:38 +0100
-Subject: [PATCH RESEND v2 01/32] drm/drm_mode_config: Add helper to get
- plane type name
+Date: Wed, 29 Oct 2025 15:36:40 +0100
+Subject: [PATCH RESEND v2 03/32] drm/vkms: Use enabled/disabled instead of
+ 1/0 for debug
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -60,7 +60,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251029-vkms-all-config-v2-1-a49a2d4cba26@bootlin.com>
+Message-Id: <20251029-vkms-all-config-v2-3-a49a2d4cba26@bootlin.com>
 References: <20251029-vkms-all-config-v2-0-a49a2d4cba26@bootlin.com>
 In-Reply-To: <20251029-vkms-all-config-v2-0-a49a2d4cba26@bootlin.com>
 To: Haneen Mohammed <hamohammed.sa@gmail.com>, 
@@ -74,78 +74,56 @@ Cc: victoria@system76.com, sebastian.wick@redhat.com, victoria@system76.com,
  dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
  linux-doc@vger.kernel.org, Louis Chauvet <louis.chauvet@bootlin.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1796;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1094;
  i=louis.chauvet@bootlin.com; h=from:subject:message-id;
- bh=Wsj1m7hVEtg7sU79/U1qOzzdUOMLj+fgjBm3lz+0CaE=;
- b=owEBbQKS/ZANAwAKASCtLsZbECziAcsmYgBpAiZ6GCMhQDbZXDVLtQpYyBwfKOHOtYWQFZxnW
- j2db4rNjnOJAjMEAAEKAB0WIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCaQImegAKCRAgrS7GWxAs
- 4sAQD/9ul8waCfMvZl0bPQ0CcIsEPzX5b8SLOw25Sah3ZsE7/ObQr1sHFuOGGU5QU3AoJSA0mD9
- Itdqk0ztk5+SnEvEiJTHhI/Ehj6h/eBCfxRl/NyxknIITJZ+Z6FQiBxse1azBCx8RrOEfhfMp5n
- /PDqfSkxBYPQh53bmgydUzH1+rOuKYkAlNmTjBgsXq0QHfjLcEdhQXdsrs15OgEPfCqgsyP1ZJq
- 3ySzEP9pgRh71X5A+oFsoC6cetSV7ybYKrTFcE/37w/c6nYTlxx1LYIa6+WLmlsP36mEqz+jlNO
- bL9Ff39KOxJmdl3gFKRImHqu98G8R7pc0OnZcsxpaSwl0PA9xuf4vh+oSLl64iwPT0dO24Y+Irm
- wW8RBrY+0GfoH5v4ZDhHZqu7B3UPs4FNlpRtAf9/EWnNiFP+Wl+PTTU2gWvbv1WC0YZOAj/bI1D
- 34OB9JvCmZMqD2lRhsFB7jhj9bSttf4XBjVej8HIgZrymAgc6d/abNBgw7rOq4XnmYt6wC+w0Gu
- Ob3f53VnGOaGEg9m2il5RtVtJw+urL7zgAhe0qvfM8k9s+9wCVwojeCaMjRAU8tOqX4oLWNMwCO
- 7ZhrUd0zyoJ79bUHhkhINc30qaIA78imXYrNVb3gkN8XcFHg0DQGsZnRDs+7H2HI2/3CGE7VTjz
- /4hMxH4LrzmWRKQ==
+ bh=P2YQYyxAPSZpXd/i/92Ex57u+40+oZJvWkUOQRGtaCI=;
+ b=owEBbQKS/ZANAwAKASCtLsZbECziAcsmYgBpAiZ67gTBmoyopTr26ee+sA1L9TqFeiljDye1u
+ t9L9WYhhSuJAjMEAAEKAB0WIQRPj7g/vng8MQxQWQQgrS7GWxAs4gUCaQImegAKCRAgrS7GWxAs
+ 4hISEADIvecDEqTRDOMd30EJrvFoLJdurexYYJOpbiRQw32Oo0Ll7HkT5kVmCYbk6vOUlNeabLI
+ ukxPUg3edy1pY/s5xkiaNiN0pg01HOlEyx50gjhEG1Ex7ghFrb2bWXnJVJaW/I0Pl+nWqkgLvNl
+ 9197W66mCD+UWEejgbsWAjbSESG3z6dpDxlwntcik+aDufgGSBgwvEW6nU4gMiK8C0/Zj13RbLq
+ HhbC1mKkmH8rWOx90ovac8t5BTM4VrUioQBD6OxQgfpNLBWKDnk2QTIy8ljmA2K/WTkmU4sK5eU
+ XsL2MCVmfym8zUMSiptCb9Zvx8lRkUppFfdZQLnb0bxefbL+vFDVGnJ3tgIggrvVDX6qC7rbuBL
+ gOQHsbzmQd9k5cq7QvBqA4hUHyAWj5yG0thY5oVILmTHM8ch1tzOn7bT5Hw/PD3eomR3ttXrk1i
+ uURqRgLALZlCoSzGZy1TL9FV8dhG6F8waG9J54ZR1xc0RsqGp40OKjfUZaNyU0RWixD+VJH06LQ
+ XkKxZcq0erG1J8+Aep2CnS8CukaMXoToZT7T4X4DnC3XFIyXh+gXlHziZtzm1yBE2ejcRK+2DwB
+ qJIGbwWX53TZITJWhU5W7dMUqHgkRIPSqn3kQo6GOdEASwk0JnISOsK4OYHgBWHJnzsYZrKTxV+
+ jkMXTqKG18EtldA==
 X-Developer-Key: i=louis.chauvet@bootlin.com; a=openpgp;
  fpr=8B7104AE9A272D6693F527F2EC1883F55E0B40A5
 X-Last-TLS-Session-Version: TLSv1.3
 
-Create and export an helper to display plane type using the
-property string. This could be used to display debug
-information in VKMS.
+Debug information are mainly read by human, so display human
+readable values.
 
 Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
 ---
- drivers/gpu/drm/drm_mode_config.c | 13 +++++++++++++
- include/drm/drm_mode_config.h     |  3 +++
- 2 files changed, 16 insertions(+)
+ drivers/gpu/drm/vkms/vkms_config.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_mode_config.c b/drivers/gpu/drm/drm_mode_config.c
-index 25f376869b3a..1a1a3f43db4d 100644
---- a/drivers/gpu/drm/drm_mode_config.c
-+++ b/drivers/gpu/drm/drm_mode_config.c
-@@ -226,6 +226,19 @@ static const struct drm_prop_enum_list drm_plane_type_enum_list[] = {
- 	{ DRM_PLANE_TYPE_CURSOR, "Cursor" },
- };
+diff --git a/drivers/gpu/drm/vkms/vkms_config.c b/drivers/gpu/drm/vkms/vkms_config.c
+index cfdd5f32f234..391794d391c5 100644
+--- a/drivers/gpu/drm/vkms/vkms_config.c
++++ b/drivers/gpu/drm/vkms/vkms_config.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+
  
-+/**
-+ * drm_get_plane_type_name - return a string for plane name
-+ * @type: plane type to compute name of
-+ */
-+const char *drm_get_plane_type_name(enum drm_plane_type type)
-+{
-+	if (type < ARRAY_SIZE(drm_plane_type_enum_list))
-+		return drm_plane_type_enum_list[type].name;
-+	else
-+		return "(unknown)";
-+}
-+EXPORT_SYMBOL(drm_get_plane_type_name);
-+
- static int drm_mode_create_standard_properties(struct drm_device *dev)
- {
- 	struct drm_property *prop;
-diff --git a/include/drm/drm_mode_config.h b/include/drm/drm_mode_config.h
-index 2e848b816218..89f3dd46178d 100644
---- a/include/drm/drm_mode_config.h
-+++ b/include/drm/drm_mode_config.h
-@@ -30,6 +30,7 @@
- #include <linux/llist.h>
+ #include <linux/slab.h>
++#include <linux/string_choices.h>
  
- #include <drm/drm_modeset_lock.h>
-+#include <drm/drm_plane.h>
+ #include <drm/drm_print.h>
+ #include <drm/drm_debugfs.h>
+@@ -354,8 +355,8 @@ static int vkms_config_show(struct seq_file *m, void *data)
  
- struct drm_file;
- struct drm_device;
-@@ -983,4 +984,6 @@ static inline int drm_mode_config_init(struct drm_device *dev)
- void drm_mode_config_reset(struct drm_device *dev);
- void drm_mode_config_cleanup(struct drm_device *dev);
+ 	vkms_config_for_each_crtc(vkmsdev->config, crtc_cfg) {
+ 		seq_puts(m, "crtc:\n");
+-		seq_printf(m, "\twriteback=%d\n",
+-			   vkms_config_crtc_get_writeback(crtc_cfg));
++		seq_printf(m, "\twriteback=%s\n",
++			   str_enabled_disabled(vkms_config_crtc_get_writeback(crtc_cfg)));
+ 	}
  
-+const char *drm_get_plane_type_name(enum drm_plane_type type);
-+
- #endif
+ 	vkms_config_for_each_encoder(vkmsdev->config, encoder_cfg)
 
 -- 
 2.51.0
