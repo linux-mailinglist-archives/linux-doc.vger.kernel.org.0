@@ -1,141 +1,104 @@
-Return-Path: <linux-doc+bounces-65101-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65103-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC096C1FDC0
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Oct 2025 12:41:23 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 79484C20104
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Oct 2025 13:42:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 456D7342615
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Oct 2025 11:41:22 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 56AA73AFE6C
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Oct 2025 12:40:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76FCB33F8AD;
-	Thu, 30 Oct 2025 11:41:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32C65322A27;
+	Thu, 30 Oct 2025 12:40:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o9RtIYgy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B6AA5695
-	for <linux-doc@vger.kernel.org>; Thu, 30 Oct 2025 11:41:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2DC626AC3;
+	Thu, 30 Oct 2025 12:40:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761824469; cv=none; b=Kokg4zNlYS+x8VIONy99DVCCupLv8xAFToErE/3QLyufKdWJx/tdUNnzwZv7H7COal1C8eQqKgg2TVv6SPXQRU/ezamxXlelRdeXkoPq6DamY4RQbDN49NuGM5yZgu1Q98x6sDJS7DihLzQg8XBT4PVS3K0hE9wZYtBA3D3HkOo=
+	t=1761828037; cv=none; b=PZ4Eus55o4x1KFJ9bLo7103j1HHuQYWDDl5U0LsUDWoGBx5eKJckCG56qmbwjmytQWSDyvSWVR6Wbn1G1+jRq6QFVwBm5XVSiIA6Q9C8Sw0H91iX24ph6GHqQmf68K6NmXbMuvZDK0Y9v7f30TwsO+QIZpI5e3Px5I63QEcKbD8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761824469; c=relaxed/simple;
-	bh=lZKo9fp4728vlExsBM5BJnKwNB7fqUa1ufmGk3S8KXw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=O7Mr65bjJA4AoTwFaIHYY9Ta5USgIgEObBwndI8PNRnUVq2CSmff3Mpn7QyNhuLrcLG/pC7SYSI2aMDjlTRzTDYKXK5eB3HAhg1ZEyrF5sWOlSSTJ2Uv5RyEIGJ6+w7gT6rem44s2g0cvlhEZc5gwOpDSeqeAE37fnUgmfczP2M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
-	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <ore@pengutronix.de>)
-	id 1vER1M-0004mR-8i; Thu, 30 Oct 2025 12:40:48 +0100
-Received: from pty.whiteo.stw.pengutronix.de ([2a0a:edc0:2:b01:1d::c5])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1vER1J-006CfY-2A;
-	Thu, 30 Oct 2025 12:40:45 +0100
-Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1vER1J-008sMp-1j;
-	Thu, 30 Oct 2025 12:40:45 +0100
-Date: Thu, 30 Oct 2025 12:40:45 +0100
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Paolo Abeni <pabeni@redhat.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, Jakub Kicinski <kuba@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>, Simon Horman <horms@kernel.org>,
-	Donald Hunter <donald.hunter@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Kory Maincent <kory.maincent@bootlin.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Nishanth Menon <nm@ti.com>, kernel@pengutronix.de,
-	linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
-	UNGLinuxDriver@microchip.com, linux-doc@vger.kernel.org,
-	Michal Kubecek <mkubecek@suse.cz>, Roan van Dijk <roan@protonic.nl>
-Subject: Re: [PATCH net-next v8 2/4] ethtool: netlink: add
- ETHTOOL_MSG_MSE_GET and wire up PHY MSE access
-Message-ID: <aQNOvYzUH8OEbw8d@pengutronix.de>
-References: <20251027122801.982364-1-o.rempel@pengutronix.de>
- <20251027122801.982364-3-o.rempel@pengutronix.de>
- <4dc6ca34-d6c5-4eec-87b3-31a6b7fba2f8@redhat.com>
+	s=arc-20240116; t=1761828037; c=relaxed/simple;
+	bh=Vwti+Oyqhh3Vszbl9HbC46xxrM6AGGSoT0/ulRpfj74=;
+	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc; b=Vr6X7neMUo9gicLC2s0jOrlBayb3ibqsweJYu/fI259LZSTiGiOLctu3/cXH1ZyURddChD+9ae9foUxbMH9A8UMt0QO0zz4KzXdC5LwK7tV20NV3ZH2R5UbQf2j2/+N7Cou5hDe5TWWOg6KwLO2JahVqGaMdOQYImAqi4vvPZaU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o9RtIYgy; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79A1CC4CEF1;
+	Thu, 30 Oct 2025 12:40:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1761828036;
+	bh=Vwti+Oyqhh3Vszbl9HbC46xxrM6AGGSoT0/ulRpfj74=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+	b=o9RtIYgyvHzfQjqglILBG0OitmyfsCh0DVy1RNTpjIkhMR/gbFVlqfNvGgAPxXwYi
+	 44Utyug2eNkfAgYyMfNutwHXbCgrMXfjcnohEW1jyNcac02ylUOqDoMdIGwa1QxERo
+	 2v/hpcu8nWiq/X/0R6rfWagSphb1ATQ/SH5BDS0FOXj/JzSBVfgGTKdbASAw96W9H9
+	 GBJ+ajWNmKuATFZhku3HIVfNT13jCYsi2rQ3NVwBSrXnz6n35KIz3VS2U5BUSSqoen
+	 kruzgbmrDQrfgUtiib5Zi/JnmNR+eMk1pNXfNs9qkd+UmpkDr4kkEC1ZiHOYVzKkyq
+	 RfYLD1Jww3JfQ==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 70E8B3A72A60;
+	Thu, 30 Oct 2025 12:40:14 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <4dc6ca34-d6c5-4eec-87b3-31a6b7fba2f8@redhat.com>
-X-Sent-From: Pengutronix Hildesheim
-X-URL: http://www.pengutronix.de/
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ore@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linux-doc@vger.kernel.org
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH net-next v6 0/2] net/smc: make wr buffer count
+ configurable 
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <176182801326.3832937.9219593539259854803.git-patchwork-notify@kernel.org>
+Date: Thu, 30 Oct 2025 12:40:13 +0000
+References: <20251027224856.2970019-1-pasic@linux.ibm.com>
+In-Reply-To: <20251027224856.2970019-1-pasic@linux.ibm.com>
+To: Halil Pasic <pasic@linux.ibm.com>
+Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
+ pabeni@redhat.com, horms@kernel.org, corbet@lwn.net,
+ alibuda@linux.alibaba.com, dust.li@linux.alibaba.com, sidraya@linux.ibm.com,
+ wenjia@linux.ibm.com, mjambigi@linux.ibm.com, tonylu@linux.alibaba.com,
+ netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
+ linux-s390@vger.kernel.org, guwen@linux.alibaba.com,
+ guangguan.wang@linux.alibaba.com, bagasdotme@gmail.com
 
-On Thu, Oct 30, 2025 at 12:04:11PM +0100, Paolo Abeni wrote:
-> On 10/27/25 1:27 PM, Oleksij Rempel wrote:
-> > Introduce the userspace entry point for PHY MSE diagnostics via
-> > ethtool netlink. This exposes the core API added previously and
-> > returns both capability information and one or more snapshots.
-> > 
-> > Userspace sends ETHTOOL_MSG_MSE_GET. The reply carries:
-> > - ETHTOOL_A_MSE_CAPABILITIES: scale limits and timing information
-> > - ETHTOOL_A_MSE_CHANNEL_* nests: one or more snapshots (per-channel
-> >   if available, otherwise WORST, otherwise LINK)
-> > 
-> > Link down returns -ENETDOWN.
-> > 
-> > Changes:
-> >   - YAML: add attribute sets (mse, mse-capabilities, mse-snapshot)
-> >     and the mse-get operation
-> >   - UAPI (generated): add ETHTOOL_A_MSE_* enums and message IDs,
-> >     ETHTOOL_MSG_MSE_GET/REPLY
-> >   - ethtool core: add net/ethtool/mse.c implementing the request,
-> >     register genl op, and hook into ethnl dispatch
-> >   - docs: document MSE_GET in ethtool-netlink.rst
-> > 
-> > The include/uapi/linux/ethtool_netlink_generated.h is generated
-> > from Documentation/netlink/specs/ethtool.yaml.
-> > 
-> > Signed-off-by: Oleksij Rempel <o.rempel@pengutronix.de>
-> > ---
-> > changes v8:
-> > - drop user-space channel selector; kernel always returns available selectors
+Hello:
+
+This series was applied to netdev/net-next.git (main)
+by Paolo Abeni <pabeni@redhat.com>:
+
+On Mon, 27 Oct 2025 23:48:54 +0100 you wrote:
+> The current value of SMC_WR_BUF_CNT is 16 which leads to heavy
+> contention on the wr_tx_wait workqueue of the SMC-R linkgroup and its
+> spinlock when many connections are competing for the work request
+> buffers. Currently up to 256 connections per linkgroup are supported.
 > 
-> Overall LGTM, but it's unclear why you dropped the above. I understand
-> one of the goal here is to achieve fast data retrival. I _guess_ most of
-> the overhead is possibly due to phy regs access. Explicitly selecting a
-> single/limited number of channels could/should reduce the number of
-> registers access; it looks like a worthy option. What am I missing?
+> To make things worse when finally a buffer becomes available and
+> smc_wr_tx_put_slot() signals the linkgroup's wr_tx_wait wq, because
+> WQ_FLAG_EXCLUSIVE is not used all the waiters get woken up, most of the
+> time a single one can proceed, and the rest is contending on the
+> spinlock of the wq to go to sleep again.
+> 
+> [...]
 
-Yes the goal was fast data retrieval. However, I realized the initial
-channel selector was just a guess at the right optimization.
+Here is the summary with links:
+  - [net-next,v6,1/2] net/smc: make wr buffer count configurable
+    https://git.kernel.org/netdev/net-next/c/aef3cdb47bbb
+  - [net-next,v6,2/2] net/smc: handle -ENOMEM from smc_wr_alloc_link_mem gracefully
+    https://git.kernel.org/netdev/net-next/c/8f736087e52f
 
-My concern is that the channel selector do not fully achieve the goal.
-While reading metrics from just one channel is an advantage, the
-optimization could be much better if we also allowed reading only one
-metric from that channel, instead of all of them.
-
-So, rather than push another half-guess, I decided it is safer to
-remove this part of the interface entirely for now. Once we have data on
-where the actual performance bottlenecks are, we can design and add a
-filter that solves the right problem.
-
+You are awesome, thank you!
 -- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
