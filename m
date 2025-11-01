@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-65270-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65268-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF718C27B2A
-	for <lists+linux-doc@lfdr.de>; Sat, 01 Nov 2025 10:49:35 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A06DC27B45
+	for <lists+linux-doc@lfdr.de>; Sat, 01 Nov 2025 10:50:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 5548A34AD2C
-	for <lists+linux-doc@lfdr.de>; Sat,  1 Nov 2025 09:49:35 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A71F7404460
+	for <lists+linux-doc@lfdr.de>; Sat,  1 Nov 2025 09:49:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3BF6A2D73B0;
-	Sat,  1 Nov 2025 09:48:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 621D82D5436;
+	Sat,  1 Nov 2025 09:48:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EthWXMUe"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ABdQt3g0"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DE7C2D5408
-	for <linux-doc@vger.kernel.org>; Sat,  1 Nov 2025 09:48:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEB432D24BF
+	for <linux-doc@vger.kernel.org>; Sat,  1 Nov 2025 09:48:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761990489; cv=none; b=OSahZuvrcyfUZoEevM9p4v7kZk1GlL4H4esCoX1GjMQpz8PgCSE/8FctL+rbkwKsvT8LMIMA3TeVTmbsbP2woVgJc0M/SRWRR8O983QgEDPmCwj5L/JVYK4htAWPX098tcq6fmdUjgd0QG6Gs92Cit50dMzswdT/JnoVzuOY3eg=
+	t=1761990487; cv=none; b=dTaOLWBoLF2KtzJHOtQb0EvMJbqLlyfpFG98ViutwbsIF9/Ok1fP/pWxiAvBqq0HzCAP87wUIvgxGyCn9WjDJJqSC/AMiT60Lcq66E5J/45W8oLqPHZ8qxcI6DkIG0HPtCUQ6ZxmIIPCkKcTxw9y51DJ/mVZ/pOc2J1bXaSZRhA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761990489; c=relaxed/simple;
-	bh=pOYQYpe/p2QLe1BjNGnDKFKMgBDeR7vUGryegGJSYW4=;
+	s=arc-20240116; t=1761990487; c=relaxed/simple;
+	bh=VFD6GtIua5YG7zFmjDzL7GA/HqAr0MELlfN71DmH60w=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XK6TzM3m7Dz7SDfDThoZmkmEZEhMEgyTRLaXPCl9e2L9jtqunvtFVmKGtC781tiveZ0M8eaq5bCcd0UkaOwPkP5YlYz7KRJ8xDwCHzyRL0paCsBpqRq24gNaOa6oNFMepmdEco7JlFGKohv23lKF9+imz6YWOsBXEHUTPfDWVRI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EthWXMUe; arc=none smtp.client-ip=209.85.215.175
+	 MIME-Version; b=dPRQxmSFXTtT7ah4cO62RaIYG/hUgwgGscCNkZUGIP80vMLic6+HxrNpas0JX/RwvOgWbMdzsEuUcOD8n7yOPmE6hA6e6ZSYsAZmCfroAkUQYLeYG31vkFtatn0ZA1ZlH0Z9/dakE4F1HXOqPZqT5dyDVH+duaEncwmrhmwzzCI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ABdQt3g0; arc=none smtp.client-ip=209.85.216.44
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-b67ae7e76abso2248941a12.3
-        for <linux-doc@vger.kernel.org>; Sat, 01 Nov 2025 02:48:06 -0700 (PDT)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-34029cee97fso3181403a91.1
+        for <linux-doc@vger.kernel.org>; Sat, 01 Nov 2025 02:48:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1761990486; x=1762595286; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1761990485; x=1762595285; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=itKwJGhZdbxlkpaaw8hh/vRlQCwh4eBKAzIwk/pIlYA=;
-        b=EthWXMUeY9lkzfb6iFId1nEUr9wmyk7ZbkLOhThmn4nuEKSHGZjVRH9+4iOuZzEoTa
-         DSAZBTzBAdFh2gdzFoD11zyLDsC86DbpSNYnX/mvD9926cLCDYmsbVJLtuVjFKdye8Or
-         Cvazgtkl5+SIovxrLStWPxp8gu31hppEjVj8j+UHh9n8qr9mEotsrMBuBw4qhB0n9xPy
-         nLgtVdq4y928Bul13GZjJV6Am4pEv2WLg0fpg/03781qeTt/QjJcH5PS+rKCy7B7Uj0I
-         Za2RVaX2LRnvQ30pUJnxG16nTC7iYSA/017tgBXAvS+z5wNqlVK2AE3jYmEAzcgsxZmq
-         pYUA==
+        bh=i163pqyR8qyoX26TG357PYVJu78JzhXd/RDPq6ZRj24=;
+        b=ABdQt3g0TTlpYbMo/ARof8OQvjUtMB9l/em7aVs0+wNr3lVgeNbcOcvF5Lqm9n7VVD
+         vTvFntx52tMokyCjK4vCOvaS1p8vHy4YVC3qyFa6MhkZqbWaLBELOxsvMsMcYbaRwF6h
+         rB07DSBxfK59rWuOm7a+bvr2SXGSUBJmBid9R3kM8DFZ24y4UaJB31OZPtNiM8mWxCMS
+         sSK0sTPawyD0exRkqKY0XMwyOeodnBaSUbzdF2AnSjBtUgOPGX1n/+6YXAe7dwZtrvAG
+         pYrsqIhEPD+/L+eCaQkdEagedk+UqnuEtZqxFzTfvACRNtzB5mz8CbAOJE6LVC6LKuJO
+         23Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1761990486; x=1762595286;
+        d=1e100.net; s=20230601; t=1761990485; x=1762595285;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=itKwJGhZdbxlkpaaw8hh/vRlQCwh4eBKAzIwk/pIlYA=;
-        b=oECvFXtBljW1QOvHl0f81EnEPQPsZwHS8B+WAr0A0Z7SXPx2yhlppF2E+M0YVxjRJ4
-         Jr3SNwMCxDmGZW9T04D/rMZeJeuTAoUxPJpc+an2E9KlPUcWKTJWfcZbEPx0SL2ajaox
-         7JNh1KoMV0L8tANnuWVgIaUxO/mQt/Q+gesosDp7edoPTmMr/F2XYQA4RwasT/3I37VM
-         ++NMrYVFl2d3OKv9UuIdTcG9Wh4x4h8xQm8SdTMFB30N0OJ2RPrGDHd2BGUs9NnXb8YF
-         nQlKO/v4TqOS9eaEiPLHR/Wm1TphdzEcGgOr0oHfDJuaRl1WcsL3L9cjVYoqqvvBBoD1
-         iv+w==
-X-Forwarded-Encrypted: i=1; AJvYcCXNsLYMU4azeDX+nuvlx3ylfyjIyMd/LagvFlzl7dIatDBo2t1xgOLpxHoHoGYUePFxUsDRD7NoMfU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwBce8Rjsge00ZAGoMgPi7SvVFaD9S2ZXKfcCihwZLRbUoGcs0h
-	FnsOCV4erVDcMJbyLO7bnHVQTo34Z8JrDzU6fOqbGNpXdBBtKgU1g8Kg
-X-Gm-Gg: ASbGnctUt7j4wQXb30iFXROw38fFmCGNVVTf9RZc00WaY0uK6WkSIGQpPg0egkLKYKt
-	UGod66rZXEgK1FqHxAoeAXPLGCh0rbTZ/+j7gXtr11PEmQTU2ftm8NlpVC14SXyT60JXzJ1SWXL
-	7vdA/BPIflA88OEzwQWtyoBu28aZIQkvMaJisEx7Sk0oyCR68osL3I9P73c59sGO9CMqmKfpnyp
-	sXsmXrP1kdH4934nmvzcUOzHd+cegQPCHVKgSpnixyn6nFd2iO/YwEvsqzgfPVakPpOTM3G8I+0
-	qAVXJUFFBCQeAUjkR9G90tcNGdXzD1JJxOxs7Akk46SFCx+jvMJv84FNt+rcAoeJ5CHErKr9eux
-	Jq1MlSbvyXHC8ZbFhrfRyUwpPvVf4EsJeRngYvo/bXc8np390iF2aMTqd49X6hRmvo+LLZc0b63
-	Qn
-X-Google-Smtp-Source: AGHT+IGmSKAUBfWmJQyRevQMSinNhEHGk8mmuhO/TF63IeIvW13vO2DcRHYCG0bn6xcNqmxzXv7kqg==
-X-Received: by 2002:a17:902:e84f:b0:295:507c:4b80 with SMTP id d9443c01a7336-295507c4c3cmr31484355ad.61.1761990485598;
+        bh=i163pqyR8qyoX26TG357PYVJu78JzhXd/RDPq6ZRj24=;
+        b=h+nm6b4qA68XG7ZMCqyqFC7hhPfo0XFBc/UF/FzYjy+WCLmpLxBG2gqSgb4SsRblAV
+         ll/jJzasegUeQjaV53popBSep1xuow2MHHIRpWFfbD/KEgkoL6cMOmmSIVmxj6tYDl4E
+         zRVW9VNZd/8LOC1g6r/rz71PNXXYE7N5MhyPuSVsA4RfxxRbJULwrgv3FESTtA4peXZ4
+         fAp3/zaTBOHkZss1M9Uhgz6zlyTINWT5tWlYjOmViNxsOACQdsOVddnQ8aOwlyqMT+t/
+         UP9r7Unkv9eQn9enJ+dOe/4/9j0de/voppRLd82UtRl9Z35H9rAlOshlkDbVgisYQEX9
+         LZOw==
+X-Forwarded-Encrypted: i=1; AJvYcCUIKlwZ88Ia9d/Tyefp90zOh1HR347x0Hfr1p0uLLWa5k0zKeRUtDNo/bIfrT3TB9/kd6Pn1hxBQ7U=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw4ZalPSaKcQ+IqVE7AdcGlPwPX4GMfEbTNxyn4vnid6uQC8FIC
+	UcY9Cl58ZNU7LXCdAU7OP641hBMAJ2bjVt4EgeNKXIy1EFOlUzWYDuv0kZqFNPXDlqA=
+X-Gm-Gg: ASbGncsMDDhwNi5Co2heoqBLZk3tg01aFxsLVk2lc604bXR2ltwSe8b0i9iipNRRrhz
+	5rXeX4nCHb92B/qzQajUeEBzneFePP4Rm3qZjdYasRXVjG1r5LZwm4dTPJ2dywHJ4Zd1aAdRieM
+	2OfMaQWg/Pk3GwuSO9YOgpH6bN9wxflX0GSQNcrG9Pwwc4djYVTafdOdXEEknka7jXmqmYPHxB0
+	zR9hT5NVvxNRmYnPjJvMpm8TtnU+HmKT3dlPLKMCRnRu2upENCQb8Fx/q0uNj5LfHPjGVjXR6kH
+	3MaE94UpPW9duVLAkPl5VJs5bsULM6B4BXDeLGo9G00XRCRdbJFQAznC3xpLOOISIYIrzX1CtUy
+	nh1qO8gd3R8+jGuZs4GoEWHf/PXIVPPLvbA0UGzjfYSkJcY8tMv138rQbaZvdVhbmQakOFkOuxG
+	7l
+X-Google-Smtp-Source: AGHT+IGGaTpxpgNC8ciQSQqiqJUywpj2+O3W4oFH7FhMd41eXjxSmQvEhN4sZcxR4XzrFlG6iXv0kA==
+X-Received: by 2002:a17:90b:1c07:b0:340:d511:e163 with SMTP id 98e67ed59e1d1-340d511e58amr540915a91.8.1761990485008;
         Sat, 01 Nov 2025 02:48:05 -0700 (PDT)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29554cba950sm21531135ad.97.2025.11.01.02.48.01
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a7d8982117sm4722357b3a.15.2025.11.01.02.48.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 01 Nov 2025 02:48:03 -0700 (PDT)
 Received: by archie.me (Postfix, from userid 1000)
-	id C5F6541FA3A7; Sat, 01 Nov 2025 16:47:56 +0700 (WIB)
+	id DB82841FA3A8; Sat, 01 Nov 2025 16:47:56 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Documentation <linux-doc@vger.kernel.org>,
@@ -90,9 +90,9 @@ Cc: "David S. Miller" <davem@davemloft.net>,
 	Herbert Xu <herbert@gondor.apana.org.au>,
 	Bagas Sanjaya <bagasdotme@gmail.com>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH net-next v2 5/8] Documentation: xfrm_sync: Trim excess section heading characters
-Date: Sat,  1 Nov 2025 16:47:41 +0700
-Message-ID: <20251101094744.46932-6-bagasdotme@gmail.com>
+Subject: [PATCH net-next v2 6/8] Documentation: xfrm_sync: Number the fifth section
+Date: Sat,  1 Nov 2025 16:47:42 +0700
+Message-ID: <20251101094744.46932-7-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <20251101094744.46932-1-bagasdotme@gmail.com>
 References: <20251101094744.46932-1-bagasdotme@gmail.com>
@@ -102,56 +102,34 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1815; i=bagasdotme@gmail.com; h=from:subject; bh=pOYQYpe/p2QLe1BjNGnDKFKMgBDeR7vUGryegGJSYW4=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJms13KNlx4KFSxULsk3LP3JtY35sWGfXpg2k+SFYP+X2 3yT70V2lLIwiHExyIopskxK5Gs6vctI5EL7WkeYOaxMIEMYuDgFYCKibowMZ0r6ZqdFrjr9f4q2 2kWJGVwLvtyy2M357c0KznVcGYJSGxgZbh9tPhniE+L+LnVzSdOyM2f2XuKyycic2vwn+d9mc6M L7AA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1096; i=bagasdotme@gmail.com; h=from:subject; bh=VFD6GtIua5YG7zFmjDzL7GA/HqAr0MELlfN71DmH60w=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJms1/J61eMXh5r+5VtpuJ9Vae2HZ5pck3/9ZC9+wrTmo CDvkzsLO0pZGMS4GGTFFFkmJfI1nd5lJHKhfa0jzBxWJpAhDFycAjARUUNGhp2cd7vve3/YPVXf p5gnfWOM2NMCjeUTV6z6s+aziv7rI38Y/tl3/V3BVPIkw0ZqYnR3IM8kj2mXPBdYrq8qvHHN4sh LWy4A
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
 
-The first section "Message Structure" has excess underline, while the
-second and third one ("TLVS reflect the different parameters" and
-"Default configurations for the parameters") have trailing colon. Trim
-them.
+Number the fifth section ("Exception to threshold settings") to be
+consistent with the rest of sections.
 
 Suggested-by: Randy Dunlap <rdunlap@infradead.org>
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- Documentation/networking/xfrm_sync.rst | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ Documentation/networking/xfrm_sync.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/networking/xfrm_sync.rst b/Documentation/networking/xfrm_sync.rst
-index c811c3edfa571a..de4da4707037ea 100644
+index de4da4707037ea..112f7c102ad043 100644
 --- a/Documentation/networking/xfrm_sync.rst
 +++ b/Documentation/networking/xfrm_sync.rst
-@@ -36,7 +36,7 @@ is not driven by packet arrival.
- - the replay sequence for both inbound and outbound
+@@ -179,8 +179,8 @@ happened) is set to inform the user what happened.
+ Note the two flags are mutually exclusive.
+ The message will always have XFRMA_LTIME_VAL and XFRMA_REPLAY_VAL TLVs.
  
- 1) Message Structure
------------------------
-+--------------------
+-Exceptions to threshold settings
+---------------------------------
++5) Exceptions to threshold settings
++-----------------------------------
  
- nlmsghdr:aevent_id:optional-TLVs.
- 
-@@ -83,8 +83,8 @@ when going from kernel to user space)
- A program needs to subscribe to multicast group XFRMNLGRP_AEVENTS
- to get notified of these events.
- 
--2) TLVS reflect the different parameters:
-------------------------------------------
-+2) TLVS reflect the different parameters
-+----------------------------------------
- 
- a) byte value (XFRMA_LTIME_VAL)
- 
-@@ -106,8 +106,8 @@ d) expiry timer (XFRMA_ETIMER_THRESH)
-    This is a timer value in milliseconds which is used as the nagle
-    value to rate limit the events.
- 
--3) Default configurations for the parameters:
-----------------------------------------------
-+3) Default configurations for the parameters
-+--------------------------------------------
- 
- By default these events should be turned off unless there is
- at least one listener registered to listen to the multicast
+ If you have an SA that is getting hit by traffic in bursts such that
+ there is a period where the timer threshold expires with no packets
 -- 
 An old man doll... just what I always wanted! - Clara
 
