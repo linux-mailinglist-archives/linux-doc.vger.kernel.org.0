@@ -1,152 +1,148 @@
-Return-Path: <linux-doc+bounces-65263-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65269-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F63EC27ADC
-	for <lists+linux-doc@lfdr.de>; Sat, 01 Nov 2025 10:39:31 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id F03A2C27B1E
+	for <lists+linux-doc@lfdr.de>; Sat, 01 Nov 2025 10:49:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id E82D74E495C
-	for <lists+linux-doc@lfdr.de>; Sat,  1 Nov 2025 09:39:28 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EC40D1A253E0
+	for <lists+linux-doc@lfdr.de>; Sat,  1 Nov 2025 09:49:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C3B02C21C6;
-	Sat,  1 Nov 2025 09:39:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1AF312D5C97;
+	Sat,  1 Nov 2025 09:48:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cJ+WYDY+"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nLcbzdl9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33BB14086A;
-	Sat,  1 Nov 2025 09:39:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 574472D3A72
+	for <linux-doc@vger.kernel.org>; Sat,  1 Nov 2025 09:48:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761989965; cv=none; b=h9MnHuwbeQSesrCWQ9DM2rsMyGDM1Ok6gBqxrPuqc0IlIYX/LB+s5yFnd7fw8lt5zUh66JmIc5v6iEwdbaio+RzfKVHgk/GxMYo949xFbmyjm3CmJMvJAdKlmsAJY84kHZHpyZYkC51VJIw/pNLpBl+GPNZsJeKYJUkTRdtS0nI=
+	t=1761990488; cv=none; b=Z/SWZnwUNUti2G80CiyK6EwZ+ZAt+NF9I3ykWDsG2TaO2RBERkzzOuL5wQ/xBgNgFaHjYK+aWg1jUbYRifxvS9P/laXIyUXJ7G8FOIp0Neypx/lB1flg7bbTXPDqw1IlVaYswYQ5IOx9RaWQvJuJ2Y7TciIjwXS21j/NkT7J/HY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761989965; c=relaxed/simple;
-	bh=jKoa9V9XhQiv7BaQFL5zndUrFnF2g5McGSxuYRyVXf8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ptq5PgaO6Qu7UptyAzLaB1JW5JhrfE/a8zo98unhMo+TgUE7uc7caCzktWBwGtta1ulHOcDqifK1l/FoKXbhTwCqs1LqOCXpuh8nnsq3+BNErkUtgr+c9mwvW62q/cv1G3pBrsmzIHxvEP86S58WGbywigBtEd4MncL8Uu3UFJo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cJ+WYDY+; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5088C4CEF1;
-	Sat,  1 Nov 2025 09:39:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1761989964;
-	bh=jKoa9V9XhQiv7BaQFL5zndUrFnF2g5McGSxuYRyVXf8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=cJ+WYDY+iJ5sz8QoBX/tgU9hS9MUKyxppf6Z2c2jctyOP9E8oK4uNRpvXJ0N7Vtn8
-	 +1BC2YnPbSVKmc/bH7MUpPoZNwya+izl1xNabQT+1XlwS1BQ4mOQge1ALFNjsbnpmH
-	 8dbbR8VGuC2diAqgEA5+pZ7+auNqQQcyoqaky5EjcHqjT6Zh6x5c48FIa6MZAHcUO2
-	 apa+2zlnhJh/yi7yQPnsElQoV2X21wJKxz+CMPsU3MT27ZRV+jsk8w9hUJaFL+SyDM
-	 lvJSrGW+4VcIuBmjfZP5z9FNQIsXfcO66WMXFChCMGvguxkPx5evJAwXAwFgmlWDUz
-	 rGvhbOdFX0KoA==
-Date: Sat, 1 Nov 2025 11:39:02 +0200
-From: Mike Rapoport <rppt@kernel.org>
-To: Brendan Jackman <jackmanb@google.com>
-Cc: "Roy, Patrick" <roypat@amazon.co.uk>,
-	"pbonzini@redhat.com" <pbonzini@redhat.com>,
-	"corbet@lwn.net" <corbet@lwn.net>,
-	"maz@kernel.org" <maz@kernel.org>,
-	"oliver.upton@linux.dev" <oliver.upton@linux.dev>,
-	"joey.gouly@arm.com" <joey.gouly@arm.com>,
-	"suzuki.poulose@arm.com" <suzuki.poulose@arm.com>,
-	"yuzenghui@huawei.com" <yuzenghui@huawei.com>,
-	"catalin.marinas@arm.com" <catalin.marinas@arm.com>,
-	"will@kernel.org" <will@kernel.org>,
-	"tglx@linutronix.de" <tglx@linutronix.de>,
-	"mingo@redhat.com" <mingo@redhat.com>,
-	"bp@alien8.de" <bp@alien8.de>,
-	"dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-	"x86@kernel.org" <x86@kernel.org>, "hpa@zytor.com" <hpa@zytor.com>,
-	"luto@kernel.org" <luto@kernel.org>,
-	"peterz@infradead.org" <peterz@infradead.org>,
-	"willy@infradead.org" <willy@infradead.org>,
-	"akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-	"david@redhat.com" <david@redhat.com>,
-	"lorenzo.stoakes@oracle.com" <lorenzo.stoakes@oracle.com>,
-	"Liam.Howlett@oracle.com" <Liam.Howlett@oracle.com>,
-	"vbabka@suse.cz" <vbabka@suse.cz>,
-	"surenb@google.com" <surenb@google.com>,
-	"mhocko@suse.com" <mhocko@suse.com>,
-	"song@kernel.org" <song@kernel.org>,
-	"jolsa@kernel.org" <jolsa@kernel.org>,
-	"ast@kernel.org" <ast@kernel.org>,
-	"daniel@iogearbox.net" <daniel@iogearbox.net>,
-	"andrii@kernel.org" <andrii@kernel.org>,
-	"martin.lau@linux.dev" <martin.lau@linux.dev>,
-	"eddyz87@gmail.com" <eddyz87@gmail.com>,
-	"yonghong.song@linux.dev" <yonghong.song@linux.dev>,
-	"john.fastabend@gmail.com" <john.fastabend@gmail.com>,
-	"kpsingh@kernel.org" <kpsingh@kernel.org>,
-	"sdf@fomichev.me" <sdf@fomichev.me>,
-	"haoluo@google.com" <haoluo@google.com>,
-	"jgg@ziepe.ca" <jgg@ziepe.ca>,
-	"jhubbard@nvidia.com" <jhubbard@nvidia.com>,
-	"peterx@redhat.com" <peterx@redhat.com>,
-	"jannh@google.com" <jannh@google.com>,
-	"pfalcato@suse.de" <pfalcato@suse.de>,
-	"shuah@kernel.org" <shuah@kernel.org>,
-	"seanjc@google.com" <seanjc@google.com>,
-	"kvm@vger.kernel.org" <kvm@vger.kernel.org>,
-	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
-	"kvmarm@lists.linux.dev" <kvmarm@lists.linux.dev>,
-	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
-	"linux-mm@kvack.org" <linux-mm@kvack.org>,
-	"bpf@vger.kernel.org" <bpf@vger.kernel.org>,
-	"linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
-	"Cali, Marco" <xmarcalx@amazon.co.uk>,
-	"Kalyazin, Nikita" <kalyazin@amazon.co.uk>,
-	"Thomson, Jack" <jackabt@amazon.co.uk>,
-	"derekmn@amazon.co.uk" <derekmn@amazon.co.uk>,
-	"tabba@google.com" <tabba@google.com>,
-	"ackerleytng@google.com" <ackerleytng@google.com>
-Subject: Re: [PATCH v7 05/12] KVM: guest_memfd: Add flag to remove from
- direct map
-Message-ID: <aQXVNuBwEIRBtOc0@kernel.org>
-References: <20250924151101.2225820-4-patrick.roy@campus.lmu.de>
- <20250924152214.7292-1-roypat@amazon.co.uk>
- <20250924152214.7292-2-roypat@amazon.co.uk>
- <DDWOP8GKHESP.2EOY2HGM9RXHU@google.com>
+	s=arc-20240116; t=1761990488; c=relaxed/simple;
+	bh=3OG2wiKH22RCfvC+iceoRBKIWpDNYuCgxZ/0fv2vRj4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=qj8MNe+sd06a87KCT/r+vn+/Rl0r5eofvsKwRLQN2ACucGC1OchyFwCH0/doCve6n3BF4eNcaWipbGO3GuwluCTKHkoRKnxXr3LMO/dK1bafNN1R75LRyKf9WGnRS35ZQIz7DYNjUuTTRBoae5PxmRD1cBG+o7lJbzFOtve3hrc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nLcbzdl9; arc=none smtp.client-ip=209.85.210.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-7a27bf4fbcbso3062433b3a.1
+        for <linux-doc@vger.kernel.org>; Sat, 01 Nov 2025 02:48:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1761990483; x=1762595283; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WH5O/8nAx5rVFTEi7/lXcZZ45r+c3Q9ZyuJj8snlwgs=;
+        b=nLcbzdl9dR0X3krcX6dwvdW2QSYs+p3GtfBlu3l2dEIINpLVz700FoeUkEvGq/kuiM
+         mk6ObxRygf8sG5V1QlH6k4Mcyvz1+hqXbgoHbLL4iSUDAsJBd3NezgbCsDNRfCO6vUam
+         1gHzIn8UzOm80YSQ2UudACKO0iPJL0qltaCF35gEgjPA66GkaAwnF090QE3HHc4Owide
+         rhNUk0bgSFS4z5qXDpLw4pfbqO8zWLbrTY+tZQcMttGe/jyLRHd6wHn35gMD7BsGnaXY
+         hx9lfmc3PXqDRYEMexP11+x7I75c8HWOUAxYihyjjhEjoH65atsT2Ncpb+Gyhn8a9zmZ
+         bhjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1761990483; x=1762595283;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WH5O/8nAx5rVFTEi7/lXcZZ45r+c3Q9ZyuJj8snlwgs=;
+        b=pQnjnLGR4D0AK0wCoTp9YEszLFRZ4LkcmM6yAb04hFzafv7CkVHCG8LlYl1mpbYCyG
+         K97piX3+VExuni6BHWDadalssED7CzoaoSKPhafMpJzXyb0wKm4WYuxKZfws6Hb7OKE6
+         MoZW6QUxURLogmvraxOiAvp1wWlU7WKjyvOoTq0UHHBHTuIpiTA4vYQCBZTBfo0i42jn
+         LEwT9A5TZu2VKyvAWatjpdpFxhwrUF+bBrr6FDwXhy22IsFJ6kuSULEnOMuC/gDi+gV1
+         8su1EEm8Mwe+DUXTaeVNCnU6UUMWPBdpYo4XGagNtPt3w0rhWtTkIsPy2yrMIpLlhIWb
+         Yylg==
+X-Forwarded-Encrypted: i=1; AJvYcCXLifs2Zi5+C6NYiFBG3gccqqdM8FnYeos6EYkuIJFyLsx884MAfCgwGyhjXGcNoxvKp5n7oQKzGcs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxhfKsOVdQiPIJ6Be3KNLdWKqAwv4x0OvqOBnivqpgLLvkWsfSk
+	eG+w8HE1fiH8DN540246qnWSu9pkoofkORYznXyl/ixlL4SXF4eH2IDR
+X-Gm-Gg: ASbGncsKpKD9ICIakR5CrWYYq45u7E1AyX2fmZNq6uYdK0FNbXLxURzKGj4U98yQ0F3
+	7d/HGViRVK/s44lAHXjljxlBe3qSyNTQ1Cb3fJDz6gbtlhCsUXtVo1nRAk+YAbvcJhelxZvdAN0
+	pPCpP+Lq6c/e1Q5gjutV+kpaU68Yv0P+e0hCLVFCjQl8Pc4a/mG+h7HB1jLV+NRkVQxM7+GjF9V
+	w9Q5Nh8BuNP+sLnJMqr+gO11E1bs9NmYXbMvBJ3fLzcKBT50hB23QekCG+Ar7piXczv5uU0CLoL
+	c0TOWbiamIBgwct4q5X+3SIRXnzqbcKRuqrj17Hqa7eez7g/ROhd/dGO9v+SeK+HJ874XJ9B4zI
+	RxkOcAR8/TVNVqB0ojbigr2KurPPd+Wl1HRZd3kIGbWn7fg79cKr1BfSLguDUWshIaZdcFH2szz
+	7U
+X-Google-Smtp-Source: AGHT+IFkkEhMNFBtz799ZVmYFsXMsu0ozafr7JzI6vs8a+fPrI8GNOdanKuJbIbpaRMf1whMNOYWqw==
+X-Received: by 2002:aa7:8883:0:b0:7a2:70f5:c83f with SMTP id d2e1a72fcca58-7a77747a497mr7159153b3a.10.1761990483399;
+        Sat, 01 Nov 2025 02:48:03 -0700 (PDT)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a7d8d72733sm4804521b3a.21.2025.11.01.02.47.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 01 Nov 2025 02:48:00 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 5228C4209E50; Sat, 01 Nov 2025 16:47:56 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Steffen Klassert <steffen.klassert@secunet.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH net-next v2 0/8] xfrm docs update
+Date: Sat,  1 Nov 2025 16:47:36 +0700
+Message-ID: <20251101094744.46932-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DDWOP8GKHESP.2EOY2HGM9RXHU@google.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1792; i=bagasdotme@gmail.com; h=from:subject; bh=3OG2wiKH22RCfvC+iceoRBKIWpDNYuCgxZ/0fv2vRj4=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJms1zJm651g7L3+4YxH5x0enzdfmeoZHySvdDr6TVHpz yZ3ETmXjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAEyk8jQjw9QJLtFbJZYwFVpE udzYf1lR8dq8NYLW9cc3buHV4OUT9mBkuKZv0dzqV/Ji39eN699+4thtcO6Q6M1FJ1+U6PzQnLj ajBEA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 31, 2025 at 05:30:12PM +0000, Brendan Jackman wrote:
-> On Wed Sep 24, 2025 at 3:22 PM UTC, Patrick Roy wrote:
-> > diff --git a/include/linux/kvm_host.h b/include/linux/kvm_host.h
-> > index 1d0585616aa3..73a15cade54a 100644
-> > --- a/include/linux/kvm_host.h
-> > +++ b/include/linux/kvm_host.h
-> > @@ -731,6 +731,12 @@ static inline bool kvm_arch_has_private_mem(struct kvm *kvm)
-> >  bool kvm_arch_supports_gmem_mmap(struct kvm *kvm);
-> >  #endif
-> >  
-> > +#ifdef CONFIG_KVM_GUEST_MEMFD
-> > +#ifndef kvm_arch_gmem_supports_no_direct_map
-> > +#define kvm_arch_gmem_supports_no_direct_map can_set_direct_map
-> > +#endif
-> > +#endif /* CONFIG_KVM_GUEST_MEMFD */
-> 
-> The test robot seems happy so I think I'm probably mistaken here, but
-> AFAICS can_set_direct_map only exists when ARCH_HAS_SET_DIRECT_MAP,
-> which powerpc doesn't set.
+Hi,
 
-We have stubs returning 0 for architectures that don't have
-ARCH_HAS_SET_DIRECT_MAP.
- 
-> If this is indeed an issue I think it can be fixed by just defining
-> can_set_direct_map() to false when !ARCH_HAS_SET_DIRECT_MAP.
+Here are xfrm documentation patches. Patches [1-6/8] are formatting polishing;
+[7/8] groups the docs and [8/8] adds MAINTAINERS entries for them.
 
+Enjoy!
+
+Changes since v1 [1]:
+
+  - Also polish xfrm_sync section headings (Randy)
+  - Apply review trailers (Randy)
+
+[1]: https://lore.kernel.org/lkml/20251029082615.39518-1-bagasdotme@gmail.com/
+
+Bagas Sanjaya (8):
+  Documentation: xfrm_device: Wrap iproute2 snippets in literal code
+    block
+  Documentation: xfrm_device: Use numbered list for offloading steps
+  Documentation: xfrm_device: Separate hardware offload sublists
+  Documentation: xfrm_sync: Properly reindent list text
+  Documentation: xfrm_sync: Trim excess section heading characters
+  Documentation: xfrm_sync: Number the fifth section
+  net: Move XFRM documentation into its own subdirectory
+  MAINTAINERS: Add entry for XFRM documentation
+
+ Documentation/networking/index.rst            |  5 +-
+ Documentation/networking/xfrm/index.rst       | 13 +++
+ .../networking/{ => xfrm}/xfrm_device.rst     | 20 ++--
+ .../networking/{ => xfrm}/xfrm_proc.rst       |  0
+ .../networking/{ => xfrm}/xfrm_sync.rst       | 97 ++++++++++---------
+ .../networking/{ => xfrm}/xfrm_sysctl.rst     |  0
+ MAINTAINERS                                   |  1 +
+ 7 files changed, 77 insertions(+), 59 deletions(-)
+ create mode 100644 Documentation/networking/xfrm/index.rst
+ rename Documentation/networking/{ => xfrm}/xfrm_device.rst (95%)
+ rename Documentation/networking/{ => xfrm}/xfrm_proc.rst (100%)
+ rename Documentation/networking/{ => xfrm}/xfrm_sync.rst (64%)
+ rename Documentation/networking/{ => xfrm}/xfrm_sysctl.rst (100%)
+
+
+base-commit: 01cc760632b875c4ad0d8fec0b0c01896b8a36d4
 -- 
-Sincerely yours,
-Mike.
+An old man doll... just what I always wanted! - Clara
+
 
