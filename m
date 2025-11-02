@@ -1,210 +1,147 @@
-Return-Path: <linux-doc+bounces-65294-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65296-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29158C28BB0
-	for <lists+linux-doc@lfdr.de>; Sun, 02 Nov 2025 09:07:01 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B99BC28E4B
+	for <lists+linux-doc@lfdr.de>; Sun, 02 Nov 2025 12:41:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3C41F3B6E00
-	for <lists+linux-doc@lfdr.de>; Sun,  2 Nov 2025 08:06:20 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 3B27A4E4980
+	for <lists+linux-doc@lfdr.de>; Sun,  2 Nov 2025 11:41:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61C4B283686;
-	Sun,  2 Nov 2025 08:01:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 813A82D9482;
+	Sun,  2 Nov 2025 11:41:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GZGPhL6i"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KhS6ZDlW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 285D619D08F;
-	Sun,  2 Nov 2025 08:01:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD0FE2D8DCF
+	for <linux-doc@vger.kernel.org>; Sun,  2 Nov 2025 11:41:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762070509; cv=none; b=hA2PL6JYAc96QqN7tRmhuV2beahWpRKS7KZto4pAKSwUW3hUCoTxT3+whkWbWt1SVJVyVVHxDE7kyAXXV49kIp3Rw2yZ1Z3ZHvszLk4T6YpX5Ex1c1LjYhSgg5zT6V0m3dFrFclw6HbMuAJgu2femYnejqwkTWDHRGoaE/rfApY=
+	t=1762083690; cv=none; b=a/dRzOo43f5Zge+X0CHrgTgUfAdVDTBTsulgQ5DEUqzAXRJD+uJDYSg9SkFFf9NtMvPP7Nu/8XpUc6pK2PJUbb7/Q2PJ1/5Ev/Gh5jka0yVp4NzSi+tH67HzVadvazLv2MDH3/D4W+Ne39/+2rB5W030nNeIIfDiVkjJnb9fZ7E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762070509; c=relaxed/simple;
-	bh=RFrF2BF/mdmOYmAY1LEiW1Xg5AXsI7VY+PN6Vhlf1FA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mNC8EdC8H8x+Y9D6M5iS+zN2iQbSS3qdz8f2K8rx0Wzfwy6ko32ACEIYQ/7NoXZor2pph+cJVU6ZveI1q8C3S9tcp1QFE9drulYdvrjqP5ixBeiKkLNxAsn50y7hauFkd1EDPDO7hAIHje2Rh7LUMpQ0yHdR3KpmZsWYStjNiHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GZGPhL6i; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F9C3C4CEFB;
-	Sun,  2 Nov 2025 08:01:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1762070509;
-	bh=RFrF2BF/mdmOYmAY1LEiW1Xg5AXsI7VY+PN6Vhlf1FA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=GZGPhL6i0x0jO1hLSYtlil/xgFxl9nFGcgApoOn8jnoJEgQnQ99mAe2AbALvZzTT9
-	 X/FcwfzOoiCHw15iJPlw6JVu1vVVT8Ki389gmSy9GE6Jan3VvRF0Wy3Jc2sjPos6VA
-	 gCF/u99+pMqxTvilzvunCIlzR68fNqoK8bYwVJNasbFPXoWISUsybYHzZCuQMEb1/I
-	 RXL3JPxjUyR3+dCilijLBEQLVsqjUz1KDwwPAcEDyVa/iCsKLKkENnlfetsai/iwvJ
-	 /c9XBl/T45VEgeqAvZ0mpsNSy73y6J83ebQ3D6x5nhhrfu8ZvY+u9lsfH1ho4e9gmK
-	 c6IpsZisbgjRg==
-From: Leon Romanovsky <leon@kernel.org>
-To: Bjorn Helgaas <bhelgaas@google.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Leon Romanovsky <leon@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
+	s=arc-20240116; t=1762083690; c=relaxed/simple;
+	bh=VE04nYBxHQRsPdLjqT4ucuOmSxe8WDwlwIgyAhJMqM4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GU0xcwHxLunmmsLybxmh8fvJXh7ykc3+nJTDKnRMkOyWxoVUufoKfG5VHgDjKnuPVpej7//hbYV6rMxsPnSlkkmprbmD4qFxqr7vkXPAchDKZDXk2XP2YnNuiDqtV+syFchenL8JV+Lz9Yen5wX5JYfioPN7ZzmmnrSA7fzTMXM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KhS6ZDlW; arc=none smtp.client-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-426f1574a14so2237028f8f.3
+        for <linux-doc@vger.kernel.org>; Sun, 02 Nov 2025 03:41:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762083687; x=1762688487; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=CIsrhF8fKl6xpi4S7c5S0dmkUD1dE7woU6dFPC4oses=;
+        b=KhS6ZDlWU/qRiK8YDzB7GGYfqqQ2nxJbtF2Un4k5j1bvqJCO+5/TPucUeQcp+93oTQ
+         2iSc3K19HnolbTUL27bo04iMopQEQTMmleOgH3peFe9g8kZfzAaEqq/KgkOEp5qPJQ4y
+         Dd9/EncN/epgCKPM6Dv2PQtKsmm/9Jmkyo0jAa4bWpCVvWhtKLkqCN+FLMNwlNscYJhU
+         KLY+uprwHF6wUn+o8oQDc/BlCU7oz/gK6YbAOdtqBGpsN/ODRLwJWLc2Xbwo2bIwkboB
+         TDm9cGxX8uZ/7QulpxCAR3cmQHEhE08tcLRENyNbtvR2uGBC/9c+08a/pM1JtC93i3HW
+         y4eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762083687; x=1762688487;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CIsrhF8fKl6xpi4S7c5S0dmkUD1dE7woU6dFPC4oses=;
+        b=rKGPqp7FsihKcD7dnM0HfelcOjaM5uy0vF8GeIbYbAFG0t9VXBW+5A6T/Igs+PpPoE
+         n+QSeJ1PFtNDQ3V6sJ6uMdkiduR9fQfqrLU1vg4kLYVzl4MduAdNTfbMfAS7l7V5YOgu
+         2VaQKCcb39J21W4XBqjnqg4J/b9XGMquV7ESBgEE1nY1NdGKlKfubN+vqHXCm/eozgnf
+         A5o9F7xGEyGeigEXkHv8knNYWzYMmwKI/8zFMstS308Akucylsyq294uIMB0oxV0ln6t
+         u5dYuM3ZONeNyPiiERwDKWzTI2sre2XaORLS1Jit79hFLEgn+DqUxcgrUkqRVS6wqcaL
+         hQmg==
+X-Forwarded-Encrypted: i=1; AJvYcCVVUsaTyRkntt2kfOGnbtUNMu+1l99m7npZxdSsreM5+eWE4/YEIchGBqLmtGpe+ikIuuPBcaIurJA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwKa9amkoXihn7pi976PmsokBH45lQ0rjKhx0lu/EZ3mgd1vH6d
+	mdycVrDqB+uEQlwpvwbwEkK6+MkX5UO66z+o+p1DgX/kKr4jgKgQ/nK3
+X-Gm-Gg: ASbGncvPi6FAftD73JdnHfRdoFZ2OrmLO4FRj5bv2gqO6CQYORgCvKUdEjgaDY/6SVT
+	szJxoOSp5TF6hCKfszADVOE60FTFc4Q0Yfvc7lgcqVikwD7bK7fb7PkDOMXBgxN6QvSre6hCjzd
+	OTsd76mIEHiU4xLRIHljzZqMpeO19TzmHKKsl+ICglcPOzMlg6LqVRAbgiIbnQyEvo74PHRXb3H
+	IHyQRNrqsMsTrDQ+fhDmqvhTNj4p/57a+ovkN3eOtiVWkkkwge9ThHJZw2HoJlVRfNOvMeNe7MQ
+	YmpWjBjb16+oim9PSXb8G+o9XhfkfdoE1Ps1omKa4O7/CqtO/I2CnA8XXvTGZSyxOI/gWpMSqHd
+	L1w+ENrHYt79ZEql/cZivQXeLgiMHzj7KLYlcQFuQ7ivdsJBg2W/9uKYJ24kkKGbnOfexs7IchL
+	YSlBZecWYv/0qG+0mWqg==
+X-Google-Smtp-Source: AGHT+IFAW1GPGUitxzTNuVNXNVuU2PyIJB0/vZWm1b5inLEgfI1x1Obc+/SLssdUjGZyc5c64jbrIg==
+X-Received: by 2002:a05:6000:2489:b0:427:608:c660 with SMTP id ffacd0b85a97d-429bd6adc06mr8057538f8f.59.1762083686851;
+        Sun, 02 Nov 2025 03:41:26 -0800 (PST)
+Received: from puma.museclub.art ([2a00:6020:b326:d300:d19:a765:d8d7:bedc])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-429c13f4732sm14138925f8f.43.2025.11.02.03.41.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 02 Nov 2025 03:41:25 -0800 (PST)
+From: Eugene Shalygin <eugene.shalygin@gmail.com>
+To: eugene.shalygin@gmail.com
+Cc: Guenter Roeck <linux@roeck-us.net>,
 	Jonathan Corbet <corbet@lwn.net>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	=?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Ankit Agrawal <ankita@nvidia.com>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <skolothumtho@nvidia.com>,
-	Kevin Tian <kevin.tian@intel.com>
-Cc: Krishnakant Jaju <kjaju@nvidia.com>,
-	Matt Ochs <mochs@nvidia.com>,
-	linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	iommu@lists.linux.dev,
-	linux-mm@kvack.org,
+	linux-hwmon@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	kvm@vger.kernel.org,
-	linux-hardening@vger.kernel.org
-Subject: [PATCH v6 11/11] vfio/nvgrace: Support get_dmabuf_phys
-Date: Sun,  2 Nov 2025 10:00:59 +0200
-Message-ID: <20251102-dmabuf-vfio-v6-11-d773cff0db9f@nvidia.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251102-dmabuf-vfio-v6-0-d773cff0db9f@nvidia.com>
-References: <20251102-dmabuf-vfio-v6-0-d773cff0db9f@nvidia.com>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] hwmon: (asus-ec-sensors) add ROG STRIX X870-F GAMING WIFI
+Date: Sun,  2 Nov 2025 12:40:28 +0100
+Message-ID: <20251102114038.283396-1-eugene.shalygin@gmail.com>
+X-Mailer: git-send-email 2.51.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.15-dev
 Content-Transfer-Encoding: 8bit
 
-From: Jason Gunthorpe <jgg@nvidia.com>
+Add support for the ROG STRIX X870-F GAMING WIFI board.
+Testing done by the board owner [1].
 
-Call vfio_pci_core_fill_phys_vec() with the proper physical ranges for the
-synthetic BAR 2 and BAR 4 regions. Otherwise use the normal flow based on
-the PCI bar.
+Signed-off-by: Eugene Shalygin <eugene.shalygin@gmail.com>
 
-This demonstrates a DMABUF that follows the region info report to only
-allow mapping parts of the region that are mmapable. Since the BAR is
-power of two sized and the "CXL" region is just page aligned the there can
-be a padding region at the end that is not mmaped or passed into the
-DMABUF.
-
-The "CXL" ranges that are remapped into BAR 2 and BAR 4 areas are not PCI
-MMIO, they actually run over the CXL-like coherent interconnect and for
-the purposes of DMA behave identically to DRAM. We don't try to model this
-distinction between true PCI BAR memory that takes a real PCI path and the
-"CXL" memory that takes a different path in the p2p framework for now.
-
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+[1] https://github.com/zeule/asus-ec-sensors/issues/83
 ---
- drivers/vfio/pci/nvgrace-gpu/main.c | 56 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 56 insertions(+)
+ Documentation/hwmon/asus_ec_sensors.rst | 1 +
+ drivers/hwmon/asus-ec-sensors.c         | 9 +++++++++
+ 2 files changed, 10 insertions(+)
 
-diff --git a/drivers/vfio/pci/nvgrace-gpu/main.c b/drivers/vfio/pci/nvgrace-gpu/main.c
-index e346392b72f6..7d7ab2c84018 100644
---- a/drivers/vfio/pci/nvgrace-gpu/main.c
-+++ b/drivers/vfio/pci/nvgrace-gpu/main.c
-@@ -7,6 +7,7 @@
- #include <linux/vfio_pci_core.h>
- #include <linux/delay.h>
- #include <linux/jiffies.h>
-+#include <linux/pci-p2pdma.h>
- 
- /*
-  * The device memory usable to the workloads running in the VM is cached
-@@ -683,6 +684,54 @@ nvgrace_gpu_write(struct vfio_device *core_vdev,
- 	return vfio_pci_core_write(core_vdev, buf, count, ppos);
- }
- 
-+static int nvgrace_get_dmabuf_phys(struct vfio_pci_core_device *core_vdev,
-+				   struct p2pdma_provider **provider,
-+				   unsigned int region_index,
-+				   struct dma_buf_phys_vec *phys_vec,
-+				   struct vfio_region_dma_range *dma_ranges,
-+				   size_t nr_ranges)
-+{
-+	struct nvgrace_gpu_pci_core_device *nvdev = container_of(
-+		core_vdev, struct nvgrace_gpu_pci_core_device, core_device);
-+	struct pci_dev *pdev = core_vdev->pdev;
-+
-+	if (nvdev->resmem.memlength && region_index == RESMEM_REGION_INDEX) {
-+		/*
-+		 * The P2P properties of the non-BAR memory is the same as the
-+		 * BAR memory, so just use the provider for index 0. Someday
-+		 * when CXL gets P2P support we could create CXLish providers
-+		 * for the non-BAR memory.
-+		 */
-+		*provider = pcim_p2pdma_provider(pdev, 0);
-+		if (!*provider)
-+			return -EINVAL;
-+		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
-+						   nr_ranges,
-+						   nvdev->resmem.memphys,
-+						   nvdev->resmem.memlength);
-+	} else if (region_index == USEMEM_REGION_INDEX) {
-+		/*
-+		 * This is actually cachable memory and isn't treated as P2P in
-+		 * the chip. For now we have no way to push cachable memory
-+		 * through everything and the Grace HW doesn't care what caching
-+		 * attribute is programmed into the SMMU. So use BAR 0.
-+		 */
-+		*provider = pcim_p2pdma_provider(pdev, 0);
-+		if (!*provider)
-+			return -EINVAL;
-+		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
-+						   nr_ranges,
-+						   nvdev->usemem.memphys,
-+						   nvdev->usemem.memlength);
-+	}
-+	return vfio_pci_core_get_dmabuf_phys(core_vdev, provider, region_index,
-+					     phys_vec, dma_ranges, nr_ranges);
-+}
-+
-+static const struct vfio_pci_device_ops nvgrace_gpu_pci_dev_ops = {
-+	.get_dmabuf_phys = nvgrace_get_dmabuf_phys,
-+};
-+
- static const struct vfio_device_ops nvgrace_gpu_pci_ops = {
- 	.name		= "nvgrace-gpu-vfio-pci",
- 	.init		= vfio_pci_core_init_dev,
-@@ -703,6 +752,10 @@ static const struct vfio_device_ops nvgrace_gpu_pci_ops = {
- 	.detach_ioas	= vfio_iommufd_physical_detach_ioas,
+diff --git a/Documentation/hwmon/asus_ec_sensors.rst b/Documentation/hwmon/asus_ec_sensors.rst
+index 2666ed3a8ea3..f0a92ce30a02 100644
+--- a/Documentation/hwmon/asus_ec_sensors.rst
++++ b/Documentation/hwmon/asus_ec_sensors.rst
+@@ -36,6 +36,7 @@ Supported boards:
+  * ROG STRIX X570-I GAMING
+  * ROG STRIX X670E-E GAMING WIFI
+  * ROG STRIX X670E-I GAMING WIFI
++ * ROG STRIX X870-F GAMING WIFI
+  * ROG STRIX X870-I GAMING WIFI
+  * ROG STRIX X870E-E GAMING WIFI
+  * ROG STRIX X870E-H GAMING WIFI7
+diff --git a/drivers/hwmon/asus-ec-sensors.c b/drivers/hwmon/asus-ec-sensors.c
+index 7f35eade3a9b..8c5eadd8786d 100644
+--- a/drivers/hwmon/asus-ec-sensors.c
++++ b/drivers/hwmon/asus-ec-sensors.c
+@@ -645,6 +645,13 @@ static const struct ec_board_info board_info_strix_x670e_i_gaming_wifi = {
+ 	.family = family_amd_600_series,
  };
  
-+static const struct vfio_pci_device_ops nvgrace_gpu_pci_dev_core_ops = {
-+	.get_dmabuf_phys = vfio_pci_core_get_dmabuf_phys,
++static const struct ec_board_info board_info_strix_x870_f_gaming_wifi = {
++	.sensors = SENSOR_TEMP_CPU | SENSOR_TEMP_CPU_PACKAGE |
++		SENSOR_TEMP_MB | SENSOR_TEMP_VRM | SENSOR_TEMP_T_SENSOR,
++	.mutex_path = ASUS_HW_ACCESS_MUTEX_SB_PCI0_SBRG_SIO1_MUT0,
++	.family = family_amd_800_series,
 +};
 +
- static const struct vfio_device_ops nvgrace_gpu_pci_core_ops = {
- 	.name		= "nvgrace-gpu-vfio-pci-core",
- 	.init		= vfio_pci_core_init_dev,
-@@ -965,6 +1018,9 @@ static int nvgrace_gpu_probe(struct pci_dev *pdev,
- 						    memphys, memlength);
- 		if (ret)
- 			goto out_put_vdev;
-+		nvdev->core_device.pci_ops = &nvgrace_gpu_pci_dev_ops;
-+	} else {
-+		nvdev->core_device.pci_ops = &nvgrace_gpu_pci_dev_core_ops;
- 	}
- 
- 	ret = vfio_pci_core_register_device(&nvdev->core_device);
-
+ static const struct ec_board_info board_info_strix_x870_i_gaming_wifi = {
+ 	.sensors = SENSOR_TEMP_CPU | SENSOR_TEMP_CPU_PACKAGE |
+ 		SENSOR_TEMP_MB | SENSOR_TEMP_VRM,
+@@ -810,6 +817,8 @@ static const struct dmi_system_id dmi_table[] = {
+ 					&board_info_strix_x670e_e_gaming_wifi),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG STRIX X670E-I GAMING WIFI",
+ 					&board_info_strix_x670e_i_gaming_wifi),
++	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG STRIX X870-F GAMING WIFI",
++					&board_info_strix_x870_f_gaming_wifi),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG STRIX X870-I GAMING WIFI",
+ 					&board_info_strix_x870_i_gaming_wifi),
+ 	DMI_EXACT_MATCH_ASUS_BOARD_NAME("ROG STRIX X870E-E GAMING WIFI",
 -- 
-2.51.0
+2.51.2
 
 
