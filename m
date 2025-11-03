@@ -1,138 +1,453 @@
-Return-Path: <linux-doc+bounces-65353-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65355-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id D90EDC2ACE4
-	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 10:41:16 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 57BA9C2B033
+	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 11:21:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 7008F4EF1DD
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 09:38:47 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D2F503B2638
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 10:20:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B9842ED167;
-	Mon,  3 Nov 2025 09:38:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 053582FD7D9;
+	Mon,  3 Nov 2025 10:20:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XCg4DDPV"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JER0xask"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C59352EC080
-	for <linux-doc@vger.kernel.org>; Mon,  3 Nov 2025 09:38:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E79A82FD1D7
+	for <linux-doc@vger.kernel.org>; Mon,  3 Nov 2025 10:19:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762162724; cv=none; b=uBNnZURhm4cUHHLX5+COkMm69fisDowmFRAt+sXeC7YKG2YLXaLiWhQdTyel5cRecsoybalvA+k7u+6AxD/1buW90z++UTq3AuTy6XImaU3x5Vo5DeGPjDuJ0YNmVvTAzxvuyHHOUR5PeLUq2NwtmMJA/g9ZBAcZVRbPFigVbVY=
+	t=1762165199; cv=none; b=uYVV8AK1c0dbAHFgPbxmi0u+SaVXs+uUVavCxYcWWgwjCvBon0FESTyJkkHYh838RLyqCNYEUsHhAniOlV1Bb+7cSdIkkDSXDV1tFqj1RA3cKW+tCWbrKRF07NbG5BiAsq7Fg8vABKRTsuUGWRpFn6ftRWfNGoRt0aSn+aUK1Yc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762162724; c=relaxed/simple;
-	bh=XcUoAMRzud/BfROb5OhjCoflIe9MEY9CwYTvjsrXxPI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=a1SE5Z3tjaF4OShMAfloAvPuZXhALbZmccneT7e2wwNKKc7po0dMBDgdQLWHniIensuQtUeF7AqGxRVxFHTRDt0xtcV9pVZVrhyal6x5bmihV6zMcqTLExhPZwgRN9GvUTJGqAG669crt90DLmpv+w8UD01fTUTEp/itxGrXrR0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XCg4DDPV; arc=none smtp.client-ip=209.85.160.174
+	s=arc-20240116; t=1762165199; c=relaxed/simple;
+	bh=Wf8STBfHE0J+NlBplrg4R1B7QWjmStwS584DhC+bjTw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=AbIEzFpxMUV5iNmYO7BVCuDpW0K68MA6fwWmCmNVabOib6OJ5hxAiv916hh0g9eXbp/BtcQPfgavqDHkO2ehW7eQgp3tUTT62DMmVTU2AO7dqQVA8lS3qSS4VK2rRAXJj0MZYh0gFe7KixD0Q+vZqWiIkEhjTejbeunTrGmiOd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JER0xask; arc=none smtp.client-ip=209.85.208.49
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-4eba313770dso54554271cf.3
-        for <linux-doc@vger.kernel.org>; Mon, 03 Nov 2025 01:38:42 -0800 (PST)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-640ca678745so923954a12.2
+        for <linux-doc@vger.kernel.org>; Mon, 03 Nov 2025 02:19:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762162722; x=1762767522; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=orYKOBy17NEykTrxNf6mugIktE10EGb2kttQR8e1ZFU=;
-        b=XCg4DDPV/u4xdSif1BbH7XCvUtUKq3bGISI/gduWjTIBqsD/eGxp0fOtdR5k40VTkv
-         S36Tjo2Owuv+/Wht8jXmTDhuRdoOojjRzpEwKGZP4Nhi0R/zrTw3iSKXa8q/w39XIBVP
-         sgRElx3g2yylFSrt5Tq5RgC9leLzXJPqV1LAtXmaL5r1I4lKAQjoBbWXXxCo5cI1aoWt
-         nEaAFQzgJ9GvmCOBAQRN06hhbwDdMWvhKyUjXQrLuU+Z591eOCiRfTDz2lcjqinCFNxU
-         7RUeBn0IT9GSTF91h5ny7QjM0PY9RwgoJ/cjssnuRZIUoODt05ktlIFU6CCyMWx37fgP
-         vEsQ==
+        d=gmail.com; s=20230601; t=1762165194; x=1762769994; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=GsT5oIN0IsxJt31wWSSeO6UUH61mEwUZvtvJIlXOG5Y=;
+        b=JER0xasknWyIIMyXLZ/7MfBTD0Q+oK98SQ8OfmLDzCiB+YKe9qKE5vg8KxB7ErcWjq
+         qH0uRC9oRWvj0E/cuctwl9gBurVfKejphnewYXVGdUBkpvYxtaKxkzHa0S1qoa5foErT
+         5CK3mjNLfowJri/hCpeST5wKAZQkxlv9dLXcCL4bVTNkAFtAG5Y2dtPHqLkc/y8cQBOU
+         G1buPUQ1B/VsTTTOFT/AauH+hFbWpQPMf9XxcCLsKsRLrdeOAsJbYjo1Tiq9/cKQU8Ya
+         SO8xXWKBg3++STgpObLCsYHgxZ+cby5r1WzbZbSrWavOTYicD1kq1fNaFnaVc9LH2ODm
+         uCMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762162722; x=1762767522;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=orYKOBy17NEykTrxNf6mugIktE10EGb2kttQR8e1ZFU=;
-        b=tKelk7wJGn4WeuqM8JQ22VJsT4wxaEo/29MvrKBnPp66WwfkmBYqKX7c3ffFsJVw2R
-         o7nP4Mgw2Oz1sJjlnu/SkZiGUIij8mIJeBNLD04SLHShykvCRCCUBw9OOnKzAbzP0HaV
-         79qUuTukPwC0EwhAzKBri+nWTIDtKe94tKmu6SXZlAG9XW7M7BkQSU5Kujq3cccswvbb
-         S2rGHUCipFPw3NrzHwNQGhNXa1NMG9HTd0vwUKUSw4ERpUX7tSSG7yRqN1Vq3Ef2XLn4
-         aURKeflXRay3nNGVlCPTKbw6xvM4fS5cY/8MLkZudkD5kXin4amWkhcrgG6U1Kgwm0LS
-         zA4A==
-X-Forwarded-Encrypted: i=1; AJvYcCXwQC2k/b9vdqCLW4x15QulS5/qnxGOXUpEbiQv1g1U2JulGEsXNbeI/5LZkU0HyGyAFZEerqcWAc8=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywfzkxyepz/wEP514xBIuSSGbHdhLMvkhgB9Bg8pS6g2ahaD9el
-	iN1aBC7+roBstrQQYpPMP/AW0xJAS9/cj2C1EpZz3FvAUV0MasTFknio
-X-Gm-Gg: ASbGncv4oS5smEUXNJVao5Pu8cpMZfyiYiLBr2I8p57wpBVh+0Xdxbt4+TQFij9mZzA
-	Xcr/qUBcm0HOKv1vhrPdfFNqN8UvjYwqNsApuh62motOUHErv6F3QSW8KifUsUHi1d2u53LG6Y9
-	0IV6hYYt3WBJgADUiKHIM8W15OYWpoydRRIvXtRmPFHItj6kIo+PGXT/uKTTodHIgZ+iTPsVknS
-	J7cXbjvbr9PUAc5htVjIaedux9sek7T+T8zUGKlcjNoJgpIt1DTDJWfPwSaC2tGrLQR8Vbti/Gu
-	P5ri9DRXcVcyRMwtngC80oldtLsWWFCaSiHoMIAYQYGpJTezMgVttMdoc3rrGOa/Dc5Qk7lUsJb
-	wfluMDWScyv1CTriKlt245HlJCcP9NVcGS35pZQ1lSQmjgNEfJ3ao5WhnFMl5ajO+SgKBOtpXjE
-	Ytob/T5qZqER8=
-X-Google-Smtp-Source: AGHT+IEAjr7EvzErs5Y5N+6wg7bTwAwk6233Z5S8GHDoeYwXQDvl5I5ydM0T8MjRo8Z70j4pCMd7Qg==
-X-Received: by 2002:a05:622a:4c8f:b0:4ec:fba9:e0fe with SMTP id d75a77b69052e-4ed310db742mr156874241cf.55.1762162721600;
-        Mon, 03 Nov 2025 01:38:41 -0800 (PST)
-Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4ed413de9efsm40662811cf.33.2025.11.03.01.38.39
+        d=1e100.net; s=20230601; t=1762165194; x=1762769994;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=GsT5oIN0IsxJt31wWSSeO6UUH61mEwUZvtvJIlXOG5Y=;
+        b=NDNh5wnziIAcz8vjvQAJUlJAIqLVHOee/A398rw4d6B/QJhVUZtHtSVSfVXCm/2Nbx
+         v8ytCDFdwNmv3jy1TVLvb2uvNngPYDnGwCL63QaRa6Tyfh2CG3ViSs0qrmlMtsRdBc+x
+         riHzn0K0lgHRZZ7wW/WcW9ger2TA46QEL6w9LaADMT9V3/9JaYo6tZoFQFBJnqRdmwMA
+         BLnCfezOYe5UB7xGbF69f26/CEySex+DAujQaBzEWFm3zcZQiaDXENB8SqDrJjRBl8px
+         C91c/NE5e5pnZYk4pj7ajmegAPXb374MeWI+rtdqzvbdePsMnJaAJEsTpRfN3z+Ea+r5
+         d2ew==
+X-Forwarded-Encrypted: i=1; AJvYcCVQddaqFVpEQX0/mfdeyvxCMQDY9CTWvZyxcW/6yOoNwF0Hc6e5fqmDyui3YPWqMplbn+3EvL61b+g=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxG2epk4F6Bfv6YcHhSYLgSPuIeeiZiD0PFlOiCiRlJ2zTCge4x
+	7rHZ4o6d0Jfa7YeN/kI1udSbxmGFXjrgHo4v91reEDUWK5wh+Er69iXh
+X-Gm-Gg: ASbGncuCtzao0wRyMoatmdGdrY5PR9X6Xhp4Q8P6Iq5Kq1SFQCZe0SdaDyvX8k6dA5z
+	YJ6MfM/gtIETTBaJzbGTQ2CVjO2SqBuq7q03XZaX68eCMYWVC05BZ2jSQhZfVRiayDDdEEPTV39
+	GrHNX2gm7IJYot1ZF35siRGekWrCIGjiCz8Ime5jklKeQuBZfAuYt1096FlabtuPj6uNuZc3q4R
+	hjZlpUiBROt13X6DSwVVFTC145GQAOp4cObODkvsONWhgyCLCbxPOIehxQrX9Pm/alc4mCjkNhG
+	l2iXbMSXKspnsUWqKaaiiG8GJ84xFd5X9WYjvvudt3GbIjUmiNToKo9iybsjIlT3k9z+a4o7Elz
+	7gR0TFGYnVjxVV1j1YtSmcYQaZiHU1IbtUpOxln2ibmkykz5AlieefVegnLy3lw8p+x+6aGkdyp
+	Cn3Zg9noBl5Igtq0SqGQlrPcZPPvFpRyeFA4+q0AlE7sJkzckMJJW1C8kG1Q==
+X-Google-Smtp-Source: AGHT+IHW8TVfhDD9H9SKiNPijSWOxisr60SHomuOVeq9GVIqU5LeyEg3fnM+15Xzt8icYA3gvS38JA==
+X-Received: by 2002:a05:6402:848:b0:640:c062:8bca with SMTP id 4fb4d7f45d1cf-640c0628f7cmr2158653a12.18.1762165193950;
+        Mon, 03 Nov 2025 02:19:53 -0800 (PST)
+Received: from HYB-DlYm71t3hSl.ad.analog.com ([2a02:3033:267:fba0:684c:28ec:7a00:209c])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6407b392d5dsm9426455a12.15.2025.11.03.02.19.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Nov 2025 01:38:40 -0800 (PST)
-Received: by archie.me (Postfix, from userid 1000)
-	id D3824420A685; Mon, 03 Nov 2025 16:38:35 +0700 (WIB)
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux Accelerators <linux-accelerators@lists.ozlabs.org>
-Cc: Zhangfei Gao <zhangfei.gao@linaro.org>,
-	Zhou Wang <wangzhou1@hisilicon.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2] Documentation: uacce: Add explicit title
-Date: Mon,  3 Nov 2025 16:38:18 +0700
-Message-ID: <20251103093817.52764-2-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.51.2
+        Mon, 03 Nov 2025 02:19:53 -0800 (PST)
+Date: Mon, 3 Nov 2025 11:19:50 +0100
+From: Jorge Marques <gastmaier@gmail.com>
+To: Jonathan Cameron <jic23@kernel.org>
+Cc: Jorge Marques <jorge.marques@analog.com>, 
+	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
+	David Lechner <dlechner@baylibre.com>, Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, 
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 2/7] docs: iio: New docs for ad4062 driver
+Message-ID: <6zxwgpdz6zz3owrr5h277otv4b3gbbc47amgatkyatjdv2ruqv@kgsekg6utqqc>
+References: <20251013-staging-ad4062-v1-0-0f8ce7fef50c@analog.com>
+ <20251013-staging-ad4062-v1-2-0f8ce7fef50c@analog.com>
+ <20251018162113.002d92f7@jic23-huawei>
+ <skcjf6tdo7bktdx4g2bm42gkzd5vdtckxsxzgu7s6dwmiwfdpw@hxhol4g4adcs>
+ <20251102123727.0aa4c031@jic23-huawei>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1313; i=bagasdotme@gmail.com; h=from:subject; bh=XcUoAMRzud/BfROb5OhjCoflIe9MEY9CwYTvjsrXxPI=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJkc5QvaeLqCGSednXTq28oDe3SPO1ypCp7ySS7mrbq4D qfsqRrNjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAExk7g1GhuWcOy+LW/gWLYpK 7Nm9PmfXlCtex9b9bztfriH25GuX6SRGhg0yc5+/7Vf5El1+ymnhXQarJ4+OCHbdfdIr/d63kiX 4OQcA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251102123727.0aa4c031@jic23-huawei>
 
-Uacce docs' sections are listed in misc-devices toctree instead due to
-lack of explicit docs title. Add it to clean up the toctree.
+On Sun, Nov 02, 2025 at 12:37:27PM +0000, Jonathan Cameron wrote:
+> On Tue, 28 Oct 2025 16:31:46 +0100
+> Jorge Marques <gastmaier@gmail.com> wrote:
+> 
+> > On Sat, Oct 18, 2025 at 04:21:13PM +0100, Jonathan Cameron wrote:
+> > > On Mon, 13 Oct 2025 09:28:00 +0200
+> > > Jorge Marques <jorge.marques@analog.com> wrote:
+> > >   
+> > > > This adds a new page to document how to use the ad4062 ADC driver.
+> > > > 
+> > > > Signed-off-by: Jorge Marques <jorge.marques@analog.com>  
+> > > Hi Jorge,
+> > > 
+> > > Various comments inline.
+> > > 
+> > > Thanks,
+> > > 
+> > > Jonathan
+> > >   
+> > 
+> > Hi Jonathan,
+> > 
+> > > > ---
+> > > >  Documentation/iio/ad4062.rst | 89 ++++++++++++++++++++++++++++++++++++++++++++
+> > > >  MAINTAINERS                  |  1 +
+> > > >  2 files changed, 90 insertions(+)
+> > > > 
+> > > > diff --git a/Documentation/iio/ad4062.rst b/Documentation/iio/ad4062.rst
+> > > > new file mode 100644
+> > > > index 0000000000000000000000000000000000000000..b486d7fe1916d2963c94581be3696cf58d51ca48
+> > > > --- /dev/null
+> > > > +++ b/Documentation/iio/ad4062.rst
+> > > > @@ -0,0 +1,89 @@
+> > > > +.. SPDX-License-Identifier: GPL-2.0-only
+> > > > +
+> > > > +=============
+> > > > +AD4062 driver
+> > > > +=============
+> > > > +
+> > > > +ADC driver for Analog Devices Inc. AD4060/AD4062 devices. The module name is
+> > > > +``ad4062``.
+> > > > +
+> > > > +Supported devices
+> > > > +=================
+> > > > +
+> > > > +The following chips are supported by this driver:
+> > > > +
+> > > > +* `AD4060 <https://www.analog.com/AD4060>`_
+> > > > +* `AD4062 <https://www.analog.com/AD4062>`_
+> > > > +
+> > > > +Wiring modes
+> > > > +============
+> > > > +
+> > > > +The ADC is interfaced through an I3C bus, and contains two programmable GPIOs.  
+> > > This raises a question on whether it makes sense for the binding to support providing
+> > > gpios from the start (as alternative to interrupts).  Seems like the two pins
+> > > are completely interchangeable so one might well be 'left' for use by some other
+> > > device that needs a gpio pin.
+> > > 
+> > > I don't mind that much if we want to leave the binding support for that for later
+> > > but in the ideal case we'd have it from the start (even if the driver doesn't
+> > > support it until we have a user).  
+> > 
+> > Yep, they are almost interchangeable except GP0 cannot be DEV_DRY (device is
+> > ready to accept serial interface communications). The question is how to
+> > represent that in the devicetree.
+> > 
+> > I am ok with adding `gpio-controller` as an optional property. If
+> > present, and if the gp0/1 is not taken by the interrupt-names property,
+> > it fallback to expose as a gpo0 (they cannot be set as gpi).
+> > 
+> > For the other roles, based on
+> > https://elixir.bootlin.com/linux/v6.18-rc3/source/Documentation/devicetree/bindings/hwmon/adi,ltc4282.yaml#L109
+> > We would have
+> > 
+> >   adi,gp0-mode = "dev-en";
+> >   adi,gp1-mode = "rdy";
+> > 
+> > Some examples:
+> > 
+> >   // gp0: threshold-either (default), gp1: data ready (default)
+> >   adc@0,2ee007c0000 {
+> >       reg = <0x0 0x2ee 0x7c0000>;
+> >       vdd-supply = <&vdd>;
+> >       vio-supply = <&vio>;
+> >       ref-supply = <&ref>;
+> > 
+> >       interrupt-parent = <&gpio>;
+> >       interrupts = <0 0 IRQ_TYPE_EDGE_RISING>,
+> >                    <0 1 IRQ_TYPE_EDGE_FALLING>;
+> >       interrupt-names = "gp0", "gp1";
+> >   };
+> > 
+> >   // gp0: user GPO, gp1: data ready
+> >   adc@0,2ee007c0000 {
+> >       reg = <0x0 0x2ee 0x7c0000>;
+> >       vdd-supply = <&vdd>;
+> >       vio-supply = <&vio>;
+> >       ref-supply = <&ref>;
+> > 
+> >       gpio-controller;
+> > 
+> >       interrupt-parent = <&gpio>;
+> >       interrupts = <0 1 IRQ_TYPE_EDGE_FALLING>;
+> >       interrupt-names = "gp1";
+> >   };
+> > 
+> >   // gp0: threshold crossed high value, g1: unused
+> >   adc@0,2ee007c0000 {
+> >       reg = <0x0 0x2ee 0x7c0000>;
+> >       vdd-supply = <&vdd>;
+> >       vio-supply = <&vio>;
+> >       ref-supply = <&ref>;
+> > 
+> >       interrupt-parent = <&gpio>;
+> >       interrupts = <0 0 IRQ_TYPE_EDGE_FALLING>;
+> >       interrupt-names = "gp0";
+> > 
+> >       adi,gp0-mode = "thresh-high"
+> >   };
+> > 
+> > 
+> > And the driver constraints the valid configurations.
+> 
 
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
-Tested-by: Randy Dunlap <rdunlap@infradead.org>
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
-Changes since v1 [1]:
+Hi Jonathan,
 
-  - s/acess/access/ (Randy)
+A comment on the gpio modes and sampling frequency.
+Ack on `raw * _scale`.
 
-[1]: https://lore.kernel.org/linux-doc/20251103025950.23159-1-bagasdotme@gmail.com/
+> More or less looks good  We have other drivers effectively doing this.
+> Whether we actively handle the final case or not in driver probably doesn't matter.
+> Wtihout the gpio-controller specified nothing can use the gpios anyway so
+> if we support them they simply won't get used.
+> 
+> I'm not sure on the gpi0-mode though.  Why is that useful? That feels like
+> a choice the driver should make dependent on what is available to it.
+> So if we've specified it is in interrupt, only the modes that might be
+> an interrupt are available to the driver.
+> 
+> The only case I can see being useful is dev_en as that's a specifically timed
+> control signal for the analog front end.
+> 
+> So a specific flag for that probably makes sense - I'm not sure if we'd
+> ever have an AFE where it would make sense to drive it from a hardware
+> signal on the ADC like this one AND from a gpio, so I don't think we need
+> to support binding this as a gpio in that case.
+> 
 
- Documentation/misc-devices/uacce.rst | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+So, by default gp0 is set threshold-either, and gp1 data ready.
+The `adi,gp*-mode` would be useful to invert for example, have gp0 as
+data ready and gp1 as threshold-either.
 
-diff --git a/Documentation/misc-devices/uacce.rst b/Documentation/misc-devices/uacce.rst
-index 1db412e9b1a380..5f78d413e379f4 100644
---- a/Documentation/misc-devices/uacce.rst
-+++ b/Documentation/misc-devices/uacce.rst
-@@ -1,7 +1,10 @@
- .. SPDX-License-Identifier: GPL-2.0
- 
--Introduction of Uacce
-----------------------
-+Uacce (Unified/User-space-access-intended Accelerator Framework)
-+================================================================
-+
-+Introduction
-+------------
- 
- Uacce (Unified/User-space-access-intended Accelerator Framework) targets to
- provide Shared Virtual Addressing (SVA) between accelerators and processes.
+On the threshold, there are 3 different crossings:
+* either: the reading crosses either the upper or lower boundary.
+* max: crosses the upper boundary.
+* min: crosses the lower boundary.
 
-base-commit: e5e7ca66a7fc6b8073c30a048e1157b88d427980
--- 
-An old man doll... just what I always wanted! - Clara
+To not make the `adi,gp*-mode` attribute necessary I can:
+* make the driver set either, max, min roles based on the
+  values written to the IIO attributes, e.g. writing -1 for
+  IIO_EV_INFO_HYSTERESIS, or a max/min value high/low enough?
+* dev_en use case is to shutdown/turn-on an AFE, amplifiers,
+  but I wouldn't support in this series.
 
+So, I believe the solution for the dt-binding is add the optional
+`gpio-controller`, and if set, expose the unused (not in the
+interrupts-names) as GPOutput. And not support inversion gp0<->gp1 of
+the mode, the specific threshold crossing (max, min, either), nor the
+dev_en use case.
+
+This then doesn't change the series much, just appends a commit adding
+the gpio-controller support.
+
+> > 
+> > >   
+> > > > +
+> > > > +The ADC convert-start happens on the SDA rising edge of the I3C stop (P) bit
+> > > > +at the end of the read command.
+> > > > +
+> > > > +The two programmable GPIOS are optional and have a role assigned if present in
+> > > > +the devicetree:
+> > > > +
+> > > > +- GP1: Is assigned the role of Data Ready signal.  
+> > > 
+> > > I assume that's only the case if GP1 is provided?  If GP0 is the only one
+> > > we should allow use that for data ready.  As long as the DT allows that it is
+> > > permissible for the driver to not do so for now.
+> > >   
+> > 
+> > Suggested `adi,gp*-mode` should solve.
+> > 
+> > > > +
+> > > > +Device attributes
+> > > > +=================
+> > > > +
+> > > > +The ADC contains only one channel with following attributes:
+> > > > +
+> > > > +.. list-table:: Channel attributes
+> > > > +   :header-rows: 1
+> > > > +
+> > > > +   * - Attribute
+> > > > +     - Description
+> > > > +   * - ``in_voltage_calibscale``
+> > > > +     - Sets the scale factor to multiply the raw value.  
+> > > That's confusing.  This should be hardware 'tweak' to compensate for
+> > > calibration or similar.  The text doesn't make it clear where that multiply
+> > > is happening. Sounds too much like _scale.  
+> > 
+> > The user does raw * _scale * _calibscale to get the value in volts.
+> 
+> That's not ABI compliant so no general purpose user space is going to do that.
+> So a hard no for this being what userspace needs to apply.
+> 
+> I'm not particularly keen on calibscale for things other than tweaking so
+> that raw * _scale is in milivolts.
+> 
+> Normally if we have other forms of controllable scaling it's a question
+> of wrapping up any such scan factors into a writeable _scale.
+> 
+
+Ack, will update to raw * _scale, embedding the _calibscale into the
+_scale value.
+
+> > 
+> > _calibscale is 1 by default and serves two purposes:
+> > 
+> > * small hw corrections (matches ABI); or 
+> > * an arbitrary user set scale, ideally also for corrections, but not
+> >   constrained.
+> > 
+> > For the prior, the device does support computing the appropriate
+> > _calibscale value, but it is not implemented.
+> > 
+> > If it was implemented, it would occur once during driver initialization
+> > and then _calibscale default value would be approximately 1, (e.g.,
+> > 0.997).
+> > 
+> > >   
+> > > > +   * - ``in_voltage_oversampling_ratio``
+> > > > +     - Sets device's burst averaging mode to over sample using the
+> > > > +       internal sample rate. Value 1 disable the burst averaging mode.
+> > > > +   * - ``in_voltage_oversampling_ratio_available``
+> > > > +     - List of available oversampling values.
+> > > > +   * - ``in_voltage_raw``
+> > > > +     - Returns the raw ADC voltage value.
+> > > > +   * - ``in_voltage_scale``
+> > > > +     - Returs the channel scale in reference to the reference voltage  
+> > > 
+> > > Spell check needed.  Also this describes why it might take different values
+> > > but not the bit users care about which is the standard ABI thing of
+> > > Real value in mV = _raw * _scale 
+> > >   
+> > Ack, will describe
+> > 
+> >  raw * _scale * _calibscale
+> 
+> As above, no to this.  It must be just raw * _scale.
+> 
+
+Ack.
+
+> > 
+> > > > +       ``ref-supply``.
+> > > > +
+> > > > +Also contain the following device attributes:
+> > > > +
+> > > > +.. list-table:: Device attributes
+> > > > +   :header-rows: 1
+> > > > +
+> > > > +   * - Attribute
+> > > > +     - Description
+> > > > +   * - ``samling_frequency``  
+> > > 
+> > > Check these.. sampling_frequency.
+> > >   
+> > > > +     - Sets the sets the device internal sample rate, used in the burst
+> > > > +       averaging mode.  
+> > > 
+> > > It's not use otherwise?  That's unusual ABI.  I'd expect it to give
+> > > the right value at least when burst mode isn't used. Or is burst mode
+> > > the only way we do buffered capture?
+> > >   
+> > 
+> > It is not used otherwise, the device internal sample rate is used only
+> > to evenly distribute readings used in the burst averaging mode.
+> > There is no sampling trigger to evenly space the adc conversion reading,
+> 
+> In event of no internal trigger, sampling_frequency is normally
+> 1/duration of a single scan (or sample if a per channel attribute).
+> 
+> 
+
+The duration of a single scan (duration between the convert-start high
+edge until RDY falling edge), would be ((n_avg - 1) / fosc + tconv)
+(datasheet fig.56, p.31) , where fosc is the internal timer frequency
+directly exposed in this series. I can make the driver use this formula,
+just setting it will be less straight forward, since currently a clear
+enum of the values the register supports is returned by the
+sampling_frequency_available attribute. Instead, it will scale based on
+the number of samples per burst (averaging ratio/n_avg). tconv is typ
+270ns and max 320ns.
+
+> > e.g.,:
+> > 
+> >   Oversampling 4, sampling ratio 2Hz
+> >   Sampling trigger |        |        |        |        |
+> >   ADC conversion   ++++     ++++     ++++     ++++     ++++
+> >   ADC data ready      *        *        *        *        *
+> > 
+> >   Oversampling 4, sampling ratio 1Hz
+> >   Sampling trigger |        |        |        |        |
+> >   ADC conversion   + + + +  + + + +  + + + +  + + + +  + + + +
+> >   ADC data ready         *        *        *        *        *
+> > 
+> > For this driver, the sampling trigger is a register access (the stop bit
+> > of the i3c transfer to be exact), so in buffer mode it reads as fast as
+> > possible.
+> > 
+> > > > +   * - ``sampling_frequency_available``
+> > > > +     - Lists the available device internal sample rates.
+> > > > +
+> > > > +Interrupts
+> > > > +==========
+> > > > +
+> > > > +The interrupts are mapped through the ``interrupt-names`` and ``interrupts``
+> > > > +properties.
+> > > > +
+> > > > +The ``interrupt-names`` ``gp1`` entry sets the role of Data Ready signal.
+> > > > +If it is not present, the driver fallback to enabling the same role as an
+> > > > +I3C IBI.  
+> > > 
+> > > It feels like it should be easy to use the other GPO pin in this case if that
+> > > is present. 
+> > >   
+> > adi-gp0-mode should solve.
+> > 
+> > I wouldn't auto-set the mode by the position in the interrupt-names
+> > array, but let me know your opinion.
+> 
+> Mode when multiple are equally valid (for a given device wiring)
+> is purely down to what the driver wants to do. There is no benefit in
+> encoding that in dt.
+> Thanks,
+> 
+> Jonathan
+> 
+
+Best Regards,
+Jorge
 
