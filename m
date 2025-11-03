@@ -1,146 +1,218 @@
-Return-Path: <linux-doc+bounces-65333-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65342-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E6C9C2A42D
-	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 08:15:03 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id EC9E0C2A6F8
+	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 08:56:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id AF7873435D2
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 07:15:02 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 114F9188C238
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 07:54:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6D20299949;
-	Mon,  3 Nov 2025 07:14:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA22A2C0F73;
+	Mon,  3 Nov 2025 07:54:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="CtIdrG/k"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="N/PbNfs9"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013069.outbound.protection.outlook.com [40.107.201.69])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEF5329993A;
-	Mon,  3 Nov 2025 07:14:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762154097; cv=none; b=R8mqa0XY28YWZ7vsqKKYRjvLzzYmFzaL9OtTQ3qtGyWzJ5h+9AfQFk96i939Ozty4Uh+K2RK+04YD4jb2J67HFOB2UGNgbN5HxyYMw/gpwRhWCJ7zlml4Q7xzO+3Tn5OnhuZzUOkAhdRpqpaXm/2gxnAVNgfMoAz6P8qccgcPtw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762154097; c=relaxed/simple;
-	bh=GcerO7qz3aWbXiAQjF0kjbUC45NGkcH/j2Qy3Cs+Av8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HNI1viaBC1Zm5FeG92Y7BBaByVf/uPyhiGGf90yJPph1gP5UELCsHPJBoMtdPUpkt59swLxDQ4OLaQgbHgWPux0Ubxx6sgX30+b4ALLHbcFH57yeW/qwqjkqxqTV7pifZHSPvG0tPeN5pUu4DeVpGpraS4Irt0CKxIBrZ69h5fs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=CtIdrG/k; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=GIo7T0pEvXOjHk/2UjQ9D+bXEZ7esBCrIMEr5LaABD8=; b=CtIdrG/kicwJtBeyrqdL71kzkf
-	Ixd1Zw47cH9hrhJDvymaOZ9KJ99hCaHYMOU7xAfKCQaheuqdsGRNhyeB6Q2uHYg0gCFCw5Qe+oYO5
-	t3LLyahOUUICMTsnQluvFZp1F2ECx3l6VvpK5E2B3Dm/ohe965p8lmiWZin8skdEKVOM9L4xGtPjC
-	mWXQ3Djqyewcrqr2Rcfh19Xg3574FNAowTahco+GQdrp9SANs5Zs7wRZWmGYlVFep58w/w+x8ym9U
-	dZ8ZxZqex66du2NlF8kjWgpoYohoswZcqsJcUTFKE6LPkV6eY9vCBEzEF/kBVqk0/gEg3Sy1vwbyA
-	z5gjFCXQ==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vFomB-00000009LEa-1CVW;
-	Mon, 03 Nov 2025 07:14:51 +0000
-Message-ID: <7fd1c990-d96e-49ba-9bbb-ebddebf684aa@infradead.org>
-Date: Sun, 2 Nov 2025 23:14:50 -0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF3942BE7B5;
+	Mon,  3 Nov 2025 07:54:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.201.69
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1762156444; cv=fail; b=d4xV/+0VEwjJwM2vSZy+TiqlJjqXVRRu47r6eTgwLfshZl84+K5IeNy6Tqxz9Wa+c47F3qrwxl1Nu39+g4XSZCI4L5taaU55q1ORiI8yl5cgfZ4AutlU+c/KJotCzYb+8HiNIK964Zb/oqFG51X6DSXKJhaaItPaXyAIk4D6c2I=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1762156444; c=relaxed/simple;
+	bh=CucJKitNXZoLkN4DEbz07ngypuyLw4ROnw9LV/3Pllo=;
+	h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:CC; b=qf0+iBgnyPbR8niWUPscbVGFmZ//DqdaFhxTWr/LECyuu40R35nwWHg8VuhkgzahKtuMdOaFKjVXnlBjSXWWWzQvUR8ZVb5iNFFDwXpUYazMgr8sQ3zVmeghTAM67f8n8QjnC/7d0uqs7lSIPFr79dxi7e7pncmrkfcWLdeal+Y=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=N/PbNfs9; arc=fail smtp.client-ip=40.107.201.69
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o1iSYszPB7dyqeDK9gCJzWQwpv0l6vdATmYsxhKtFUggxz5nl5gPLUDzRzAlE+zsmePxRc+y1xZChUsxNPJdEYSGIWOAqW4qY8TiY6oWxSIkIBrbe6Ljn3ohtBVtmRWOWJmXHtyTas/05/oWLSJoO+IfcUtpKMunOh1f9Vhd/1lC955fSfiyHgXYwDgNdP1DLNYeRkUYyBRMJTxXOX+JDh2D+272P376AZyAu6M4+E4aHegOcPy+LdN6q/8cAmRsJErO6J0eMkJtBlnUVAb8AWfT6qGZmBADpnv6ayvLN7YysgwZXwB8m9XL+aOd44UAds7FN7JPeBGfgIXtGF8BYg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=USOYUNbThRk2evQtdJ1ALyZNEU8L73+YE+LgRhUMAJ4=;
+ b=ln49GJR+ge9hxZj5PjmNpovEs02Egl0yNKhGALNFkCoGoOAoLdbE8Pte2vbB38kqx1tJnyRTtSGReOFEkjZUQDddonNF2kMEYwC//HoHG8KPwgHxXm72PJmiVkyhCL2afdmXILHC6/rZlB3k7ZLqzEm04u4qb0TUl3+IH9GhrZnlmOQ/BVjjoGdDZg6DCF+FePDkQoGeNKqIqZuzUYbNB9kT5c+1z/XZ6adNVl8avyeW+XyynKMTN9qg2ouaizLqzJpuG3vfM2/o0Vjf/ESaT/hik3I1n2RllLqjs4TDlPBPBd7S2umtKF0iQMNp5SJJEsAVzZOG0/aDk4YLIQyBOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=linux.intel.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=USOYUNbThRk2evQtdJ1ALyZNEU8L73+YE+LgRhUMAJ4=;
+ b=N/PbNfs9r4pbVfnE+33ABV5EdK/1F0TRRqRasrjIyIP/8CrZvgvGPQF11cqFQXZY184rcjTP4Eqh5zNLWeo2k48HL9mHAhBlYsfsW0CHD0fTgOdHzNxPHQOS0xWGe8+M0TZw/0z3IZF6beh7huEev/y43j3EEzza4WrefyMLNNw=
+Received: from DM6PR10CA0024.namprd10.prod.outlook.com (2603:10b6:5:60::37) by
+ DM4PR12MB6542.namprd12.prod.outlook.com (2603:10b6:8:89::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9275.16; Mon, 3 Nov 2025 07:53:58 +0000
+Received: from DS1PEPF0001708E.namprd03.prod.outlook.com
+ (2603:10b6:5:60:cafe::55) by DM6PR10CA0024.outlook.office365.com
+ (2603:10b6:5:60::37) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.16 via Frontend Transport; Mon,
+ 3 Nov 2025 07:53:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ DS1PEPF0001708E.mail.protection.outlook.com (10.167.17.134) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9298.6 via Frontend Transport; Mon, 3 Nov 2025 07:53:57 +0000
+Received: from [127.0.1.1] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Sun, 2 Nov
+ 2025 23:53:53 -0800
+From: "Yo-Jung Leo Lin (AMD)" <Leo.Lin@amd.com>
+Subject: [PATCH 0/5] drm/amdgpu: add UMA carveout tuning interfaces
+Date: Mon, 3 Nov 2025 15:51:03 +0800
+Message-ID: <20251103-vram-carveout-tuning-for-upstream-v1-0-17e2a72639c5@amd.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Documentation: treewide: Replace marc.info links with
- lore
-To: Bagas Sanjaya <bagasdotme@gmail.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Linux Memory Management List <linux-mm@kvack.org>,
- Linux ARM <linux-arm-kernel@lists.infradead.org>
-Cc: Jonathan Corbet <corbet@lwn.net>,
- Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@redhat.com>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
- <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>,
- Dongliang Mu <dzm91@hust.edu.cn>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Arnd Bergmann <arnd@arndb.de>
-References: <20251031043358.23709-1-bagasdotme@gmail.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20251031043358.23709-1-bagasdotme@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOdeCGkC/x2NywqDMBAAf0X27IKraKO/Ij0Es+oemsjmQUH89
+ 4Yeh4GZGyKrcISluUG5SJTgK1DbwHZafzCKqwx9149E3YBF7Qc3q4VDTpiyF3/gHhTzFZNyleR
+ GMvNkjHsNUDuX8i7f/2N9P88PWJlL2XMAAAA=
+To: Alex Deucher <alexander.deucher@amd.com>, =?utf-8?q?Christian_K=C3=B6nig?=
+	<christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter
+	<simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+	Jonathan Corbet <corbet@lwn.net>
+CC: <amd-gfx@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, "Yo-Jung Leo Lin
+ (AMD)" <Leo.Lin@amd.com>, <anson.tsao@amd.com>, <superm1@kernel.org>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2058; i=Leo.Lin@amd.com;
+ h=from:subject:message-id; bh=CucJKitNXZoLkN4DEbz07ngypuyLw4ROnw9LV/3Pllo=;
+ b=owEBbAKT/ZANAwAKAV8XsZZKKe6GAcsmYgBpCF8KOWehwmRkXY12gPyhha+kD/da4qcWBnxxj
+ lF3qrvdQtWJAjIEAAEKAB0WIQQzqV4kW+yguuqHrw5fF7GWSinuhgUCaQhfCgAKCRBfF7GWSinu
+ htTDD/ii8nm8tV9oLdmVPmUlKbH+Wr4F885CKPJmvEgoIes8nkGyZ1nlVn9MRpM25vCDlJF4nV3
+ 6XB37Zt/4Hug3sXWwGsmNPrO2l8aMBs265gJm8Fg7MyRS5Zynkn+UfKNR9D2GFmcIlPi+GZLlDC
+ uwTV+7niGn7+fwxeapWxKfcP8XvrdgFU7fuC66OJE5WX15saUqa42d6lmKJwzfiknK1I3BMwPTE
+ 4UPOoqhFQrl1JmMwLMI6EJOU/c3prNEPphOK4EYza73pzbOJBQWmRUP4eL94mmxoNfSb/mvoevE
+ cFI7D7ePCkYOkDBFc+J2WZT5nRthXSrTj9UNy0Ch4WrE0mMxKyDwPoCpqBamwRKpGdRMq53EuUF
+ h8xd4+/HE3c7ZyYsIOpqCw8UVqg5Q2/HS/FQbL0F0JgPWePSxWENTgMVNBmXXF/IJ8RDy+uUbpJ
+ KPIpq9NkzOL+M+cQ036tYaNraVXZ79cTqPIQUIpLPkjaKJQaAe6WNkQ7S6ayE3uS49CUGzgZMq8
+ c0kGbpMZgavNfyj+iP57meiRVLxYsNoecNvQt46jBeFWVVHEqJZxWvJNYY2M3bngwcDKrf9vp/1
+ hy51MIAWUFlxjqRwLJelBEpAPcdXLil9Y8nfcFrLcFS8uWnPXAKudiObktM+keTOLyACBSBZtDX
+ O2NBLbaQufy8d
+X-Developer-Key: i=Leo.Lin@amd.com; a=openpgp;
+ fpr=33A95E245BECA0BAEA87AF0E5F17B1964A29EE86
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001708E:EE_|DM4PR12MB6542:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1a1ee43f-e0df-4974-3dea-08de1aae249e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|82310400026|36860700013|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?UlJPd2lObDdKOXdlc05wZWxqSDVDYkczTUsyNllaTjRhdU9oR25QVWdtUHFt?=
+ =?utf-8?B?QXRJRXpRRVlxVUM5bTZaRG43OXVpVEJWOEN5dThCb0lCZndKTWN5YVZWQzJY?=
+ =?utf-8?B?RUk4TUErQ2x0RXhLc1htaStmU0tiUm1tak0wWTJYd0RLV2M3MVRpa2E0Ykhz?=
+ =?utf-8?B?N3RYODErWFZ6T2RZelpHVlh6cDMxOGk0YkdZakYxNndrWnRHY0VDZzBPb3Zm?=
+ =?utf-8?B?UkdoY0I2UHBHYVhCRlVMKzV3M3hDQ3h6RmRwcHpsUFUxVCtJZ1M3dEY0ZTJI?=
+ =?utf-8?B?c0gzc1Vjek9hWjNXU3BNVncrN1c0c0sxUWM5RjNyS0NIby9sZW5Xa09tUDNN?=
+ =?utf-8?B?L2FCdjZwMzFZU1NDdnJhclBUbkFuNURoKzZ5Y2FOM29tTGo3cUFIcXZBdjJN?=
+ =?utf-8?B?Z2FtT2J4YVZMQU50Y2hHUFFETk44WGUwMEIxQU8wbmtLMmt6MkNza095V01s?=
+ =?utf-8?B?UUZ3MnZRSzUvSjE5TU5rS0dDQXY1MkF3ZEluOEpRNnN3cjF0YU5xZjZ5NUFO?=
+ =?utf-8?B?VnFzeHdHRzg3M1pRZjZ1ak9waUFMSTJXRVpNMkZ4cEVVeDV1cTNuaC9ySmo4?=
+ =?utf-8?B?bVMwYlU0U2NjMTBpYWU3bFlpaEUyWHJyam9yclp1cmFoOGVjb25GWGh5b0kz?=
+ =?utf-8?B?dUZsRnhVbEpSSEdHNGlVM09mY3VXaXltVkhvaW5HYW9ZSVdPaTRhYzF4OGF4?=
+ =?utf-8?B?QzZBdDJ2RnJvWkVFaERVaHhHd1FuMFRoc0VJYnQzNGljTWhXVnNoeE85SkNp?=
+ =?utf-8?B?dkRnYVh3KzA0NVRpS01ERWN4WXhGZE5ibVFpRHozWE5yMVV5V2JlaC9DNThu?=
+ =?utf-8?B?cm5mWHBlbVc5MDE2Y01ybTcySFBubU5wUU42OE9nVDZ4Rml4Y1RsbXFYN2NN?=
+ =?utf-8?B?QjRTUE9NWitudzV6L3ZJOHp2NEJNMVhzSEpIbzNFV0F3Uy9RZG1WdXJYVlAy?=
+ =?utf-8?B?ajZyNTR6Y21MTGc3T3ZiREVtb0NKd0MrajEyeWw0MmVkeTlnczBOZGpScHNh?=
+ =?utf-8?B?ZVAyK2VSOHdTOTBxeG1ROFBpY2J1dVNGZDkwTFRnSUg0Y0k4NjJCYllXc3Fr?=
+ =?utf-8?B?Qzh1VVJVd2R2b0d0UnV2YWNDc1ppbFVIOWpPbk54ZnhjczdwYUEvM3hKa3dH?=
+ =?utf-8?B?cUlPY0F4NFI0elZGbVc2bTF6ektyOHQxQmt6ZlZESlE2aDNGb1RnbHArM3ZZ?=
+ =?utf-8?B?L3BuQ3dEbWczdS9PR2V6Ny9HOTdPRnRHYzlQbXJXYlVXTWZRWkpjaGVkeGZ4?=
+ =?utf-8?B?QWlncnU3US9IZ09iWE92TmFrQXlndUtrMlpSTmgzcjg1OU1aenVObm4wK3Vj?=
+ =?utf-8?B?UFd2SHRSK1VaYi9lNXVCT2JUa0dCdHBvcFZHc0EvblZjc3doVm9Ha3NlcTJm?=
+ =?utf-8?B?ZFF3aEt2aW5oaSs2QUdmdVpCSVBxNHBqWEhNbUJ4dnV6T1IvRkprQTBjaHk2?=
+ =?utf-8?B?eWVMb0h5NWM4NkZEQWdBUDVKbG5NR0JvNVBLaDJveWRYd2Z6amRjYzV3aDA2?=
+ =?utf-8?B?RE8zV1JIMSt5VlVoY2o2VnpGQVJMdXZ5NXZIeitzNll6ZjJ6RFRFS1UrSHpa?=
+ =?utf-8?B?TWQ5V1JtRlBkS29sUGxlVVk2b09ZNHdseFJ2SXRUZjIvM0JRL2FUdisrS2Y1?=
+ =?utf-8?B?aXhEeEJaZnR4Y29jQ0JZUU0yZ3phc1VDT0pEelc4WGY2ZWI3R2dnZXpDSnJj?=
+ =?utf-8?B?bE5YMzl0bEl4cTV6ZVNBV2I1ckJzdE1Yb3hOaExSY3llbExkcVNseElEU2JT?=
+ =?utf-8?B?bk5vU3RnTENGLzM4eVRBenZ1S3NCOU92UEs3dDhuRk5vUldueTIvNjc4SjNt?=
+ =?utf-8?B?aTlPZndDL0RwWFpzTzlDajk5dXU4amJPbURUempVMktxL2ZwZVNnZW5Fc2o1?=
+ =?utf-8?B?MzBXQmlEeElDZDIzS1hFNWtqSCtWdFZ6R3lQSDVCZENWVXhJT2pIZzh0d3Zs?=
+ =?utf-8?B?RmZZRWVnb2hzUUpjUzNFZjdkK2NXRHpCcTBQQk5QZmdMbGNQTU1zU1krQ3ZC?=
+ =?utf-8?B?TWNXQVd0TEIrRDNzMG1ZTUhBd2ZzWEQzR2dQWkIzN05MRzZQQ0J0bWZPQ3g1?=
+ =?utf-8?B?cEpOV283a0pSTTI3V1pkN1RUa2QzNFlJUzJ0WjJvdDkzYllzMWpYajFPOU5r?=
+ =?utf-8?Q?nKoI=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(82310400026)(36860700013)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 07:53:57.3380
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a1ee43f-e0df-4974-3dea-08de1aae249e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DS1PEPF0001708E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6542
 
+The integrated info v2.3 table in the Atom ROM exposes available
+options for the VRAM carveout sizes. The carveout size can be changed
+using the ATCS function code 0xA for BIOS that supports this.
 
+Make these features available as sysfs files, so that users can set
+the carveout size in a way similar to what a Windows user can do in
+the "Tuning" tab in the AMD Adrenalin. The newly added sysfs files
+are:
 
-On 10/30/25 9:33 PM, Bagas Sanjaya wrote:
-> In the past, people would link to third-party mailing list archives
-> (like marc.info) for any kernel-related discussions. Now that there
-> is lore archive under kernel.org infrastructure, replace these marc
-> links
-> 
-> Note that the only remaining marc link is "Re: Memory mapping on Cirrus
-> EP9315" [1] since that thread is not available at lore [2].
-> 
-> [1]: https://marc.info/?l=linux-arm-kernel&m=110061245502000&w=2
-> [2]: https://lore.kernel.org/linux-arm-kernel/?q=b%3A%22Re%3A+Memory+mapping+on+Cirrus+EP9315%22
-> 
-> Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
+- uma_carveout_options: this a read-only file listing all available
+  carveout options. They are fetched from the Atom ROM on driver
+  initialization.
 
-Acked-by: Randy Dunlap <rdunlap@infradead.org>
-Thanks.
+- uma_carveout: this shows the index of the currently selected option,
+  as shown in the uma_carveout_options. Writing a valid option index
+  to this file will change the carveout option on next boot.
 
-> ---
->  Documentation/driver-api/usb/writing_musb_glue_layer.rst | 2 +-
->  Documentation/mm/active_mm.rst                           | 2 +-
->  Documentation/translations/zh_CN/mm/active_mm.rst        | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/Documentation/driver-api/usb/writing_musb_glue_layer.rst b/Documentation/driver-api/usb/writing_musb_glue_layer.rst
-> index 0bb96ecdf527b4..b748b9fb1965af 100644
-> --- a/Documentation/driver-api/usb/writing_musb_glue_layer.rst
-> +++ b/Documentation/driver-api/usb/writing_musb_glue_layer.rst
-> @@ -709,7 +709,7 @@ Resources
->  
->  USB Home Page: https://www.usb.org
->  
-> -linux-usb Mailing List Archives: https://marc.info/?l=linux-usb
-> +linux-usb Mailing List Archives: https://lore.kernel.org/linux-usb
->  
->  USB On-the-Go Basics:
->  https://www.maximintegrated.com/app-notes/index.mvp/id/1822
-> diff --git a/Documentation/mm/active_mm.rst b/Documentation/mm/active_mm.rst
-> index d096fc091e2330..60d819d7d0435a 100644
-> --- a/Documentation/mm/active_mm.rst
-> +++ b/Documentation/mm/active_mm.rst
-> @@ -92,4 +92,4 @@ helpers, which abstract this config option.
->   and register state is separate, the alpha PALcode joins the two, and you
->   need to switch both together).
->  
-> - (From http://marc.info/?l=linux-kernel&m=93337278602211&w=2)
-> + (From https://lore.kernel.org/lkml/Pine.LNX.4.10.9907301410280.752-100000@penguin.transmeta.com/)
-> diff --git a/Documentation/translations/zh_CN/mm/active_mm.rst b/Documentation/translations/zh_CN/mm/active_mm.rst
-> index b3352668c4c850..9496a0bb7d0705 100644
-> --- a/Documentation/translations/zh_CN/mm/active_mm.rst
-> +++ b/Documentation/translations/zh_CN/mm/active_mm.rst
-> @@ -87,4 +87,4 @@ Active MM
->   最丑陋的之一--不像其他架构的MM和寄存器状态是分开的，alpha的PALcode将两者
->   连接起来，你需要同时切换两者）。
->  
-> - (文档来源 http://marc.info/?l=linux-kernel&m=93337278602211&w=2)
-> + (文档来源 https://lore.kernel.org/lkml/Pine.LNX.4.10.9907301410280.752-100000@penguin.transmeta.com/)
-> 
-> base-commit: e5e7ca66a7fc6b8073c30a048e1157b88d427980
+Note that above files are created only if BIOS indicates support for
+it, i.e. where the table shows non-zero UMACarveoutIndexMax.
 
+Signed-off-by: Yo-Jung Leo Lin (AMD) <Leo.Lin@amd.com>
+---
+Yo-Jung Leo Lin (AMD) (5):
+      drm/amdgpu: parse UMA size-getting/setting bits in ATCS mask
+      drm/amdgpu: add helper to read UMA carveout info
+      drm/amdgpu: add UMA allocation setting helpers
+      drm/amdgpu: add UMA allocation interfaces to sysfs
+      Documentation/amdgpu: Add UMA carveout details
+
+ Documentation/gpu/amdgpu/driver-misc.rst         |  26 ++++
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h              |   7 ++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c         |  47 ++++++++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c     | 144 +++++++++++++++++++++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_atomfirmware.c |  75 ++++++++++++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_atomfirmware.h |   1 +
+ drivers/gpu/drm/amd/amdgpu/atom.h                |   4 +
+ drivers/gpu/drm/amd/include/amd_acpi.h           |  34 +++++-
+ 8 files changed, 330 insertions(+), 8 deletions(-)
+---
+base-commit: ac9914fa72a5a917bb61c5e87bee6b8f9b751f33
+change-id: 20251103-vram-carveout-tuning-for-upstream-1d5189688d73
+
+Best regards,
 -- 
-~Randy
+Yo-Jung Leo Lin (AMD) <Leo.Lin@amd.com>
+
 
