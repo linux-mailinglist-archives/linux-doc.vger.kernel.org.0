@@ -1,255 +1,242 @@
-Return-Path: <linux-doc+bounces-65347-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65334-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 814FEC2A755
-	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 09:01:24 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C3EDC2A6D1
+	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 08:55:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 210403BA7F1
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 07:55:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2C0993A5B6C
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 07:52:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C52262D2488;
-	Mon,  3 Nov 2025 07:54:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 50116299A94;
+	Mon,  3 Nov 2025 07:52:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="MSjKow7H"
+	dkim=pass (2048-bit key) header.d=shopee.com header.i=@shopee.com header.b="P02YbIPl"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013006.outbound.protection.outlook.com [40.107.201.6])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9ED52D23A8;
-	Mon,  3 Nov 2025 07:54:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.201.6
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762156462; cv=fail; b=fQJa0ytePba4KwMitpYOLEgH9msPdHc3mQgG4cgGYdgBzbHB7IwvMsHKhs3U9xHxBlrBTEHsQseDumURlzWLiTePEYlFhRhm09t373huC2Ftr2K0h+lUuKNpu5Bk7NeRTFTof7cbM8SdRoyu/EPDhlCWIeFbSd2+BVgfui+fhNc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762156462; c=relaxed/simple;
-	bh=qCBX8mmzd8QBvkys4Z3v211HugS1s3SzrXl9HURiq6s=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=IA1To4JLWFPcVLn+HPY7XjUeC1ZzaQdPp/L3pbYR0kQ51uQ1FWXspNaSADBUGptZKBESFJlcAMqhrgEq06fYRKzZYV6gkpV4yhVPE1EoCN7OlUVoSiruGwCcu8iGoLYsoDxXV9beWBTeoJutzmyJEH8gsHScAfE5UPl3rt63/SI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=MSjKow7H; arc=fail smtp.client-ip=40.107.201.6
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=I/GWCETAiBulFC5TV74ZUQI3NBssLdgGa/zsHhDpGYYdCGOqW1fjp+2fxPxj3XaA0CiNEsCqeknaU5BwhP4X4KhP3JZhkcT2rMDjJI37YtZsRDpPfrAoiY99/J6vfLhOgTOyMccxblriKl1y4zwqk4v9+wh4OqlnVBqX1Rpco+q37NicKNWKVwbw1r081ftLQrCOLOusndEIGsePMqsGYjYT9odF7lNZl2kdfA5S39a2JwJJwW1yQrNRr+ktcXq6ijimFJXYi3P0ekLCY9y/5+JbLXpypGLyYjqNREb7gjra/zmMj5C6R5EcAZikLlwYTj/fpIJaNBhFtmZzN34z+A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P45SyX+S9aeJckBLwfrZZSIMp/FztSN/rn5FSYdZdR0=;
- b=cpmoniU8xI5V/Fnc+xfXgmEiJMcp0sQ2Uc0yOLZAYNEfD6HmYPSwvwBlRr2nyM9SBfhcJ+lW2M92cxe091POji8loqkYiQ4O5V/CAy9Uv+fq01ZWz8wA3N//vnfx3IhEMENBTTBM27aKhjMyPnMZAaLoLQI376WzQmx536LMNfq/TB+WLMDwYjiWy0SDhuGXqXQ6Jox9P4neqfXGq3Q3ADSfFv5+4zL+BACvJUqyq5l/QnJFU/kP3gilY7UqrTYipm1TcHlBHV8eZ0UcZMPyrKDRXx/SUtMEC4I+K4LML0itJLyukC6uWO5fJlPdFh1jcojpA+36diY3L921ls9wQg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=linux.intel.com smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P45SyX+S9aeJckBLwfrZZSIMp/FztSN/rn5FSYdZdR0=;
- b=MSjKow7HYiGCG19yW5hh3+7Y/loI3v229L+RIQcLNRn/nDJPJPeJ/SNMXxR5o+86oevfVSszhbGIhMYuOvd6IzhA3mf7bGCJr5HPMeSMAzb65+zQlTTBTTmTKGts69dUTySvPETVLicI9ZjQWaqirjCkAZxKB0y5JXzF57q2EVY=
-Received: from DS7PR05CA0021.namprd05.prod.outlook.com (2603:10b6:5:3b9::26)
- by SJ2PR12MB8784.namprd12.prod.outlook.com (2603:10b6:a03:4d0::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9275.16; Mon, 3 Nov
- 2025 07:54:16 +0000
-Received: from DS1PEPF00017093.namprd03.prod.outlook.com
- (2603:10b6:5:3b9:cafe::9b) by DS7PR05CA0021.outlook.office365.com
- (2603:10b6:5:3b9::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9298.7 via Frontend Transport; Mon, 3
- Nov 2025 07:54:13 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- DS1PEPF00017093.mail.protection.outlook.com (10.167.17.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9298.6 via Frontend Transport; Mon, 3 Nov 2025 07:54:15 +0000
-Received: from [127.0.1.1] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Sun, 2 Nov
- 2025 23:54:11 -0800
-From: "Yo-Jung Leo Lin (AMD)" <Leo.Lin@amd.com>
-Date: Mon, 3 Nov 2025 15:51:08 +0800
-Subject: [PATCH 5/5] Documentation/amdgpu: Add UMA carveout details
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FA8D2BE64C
+	for <linux-doc@vger.kernel.org>; Mon,  3 Nov 2025 07:52:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1762156376; cv=none; b=dW+ygJMtHSJ20nAOcFwR2LfNbvYD8CAV4/XPrnbVe1LcxR3yB9k8OtSQ3ISWej+MwACUordj5nHDbUarCrIxcJMkGIFUFiF67IApJ+QoMiPdTpmPEGUKaBBNQiB7bldEL7eAg8sYbABrgs9E9J0PuG/yufRgQaCDgokB5ocg+4w=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1762156376; c=relaxed/simple;
+	bh=CpM3LvhKwcp4J4lDv8ipejSSGm/KKdsoaJfd2VI7DlA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gVhEI9i0hLqLHEMnON4L70qrvyOjhXX4NQ/wfoHz/hk94zy+k6nt9VT+AkTq3SlfThlC3Oag8rvLLKdWvMkyJqHpy0kaDn1nL8hyDFokZCmnXonsnNQ3StOtHrbOpT8rxMiI4SIbzldA+ep7Qf0c0NvLyJdmbQSKl51v/h63F90=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=shopee.com; spf=pass smtp.mailfrom=shopee.com; dkim=pass (2048-bit key) header.d=shopee.com header.i=@shopee.com header.b=P02YbIPl; arc=none smtp.client-ip=209.85.216.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=shopee.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=shopee.com
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-33255011eafso3460329a91.1
+        for <linux-doc@vger.kernel.org>; Sun, 02 Nov 2025 23:52:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=shopee.com; s=shopee.com; t=1762156374; x=1762761174; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pLkzhtoF4Ahv1FKwU/tjbCnsdl0esqhckJcQdc+yB8A=;
+        b=P02YbIPl/Elwc5XdXXFspjWAfPg6E4vbH9mgSZge3KREFOcZr/MNJA82NKKJyS338Z
+         LEnkiaHbasz2Fplbs+EoUKBUJrqt1Bi2+dcsHy/Dyz7TaULvbCiBj4rsUhsLH7XA++Hh
+         YBP7YOFusXY/eEKcUjF3IVm0eFRtUA1cOiFN9pXBhDLIZYj57IyTsonh86wS2FtdBQJK
+         HbBfMT1shzBp08qQc+LJZiNr9A1TeSy2uaOnkKH3x8YkfdLHiry7MGlcErQ1FZXAQ4RK
+         Q63kHw12o0VeSBnmWop/HSU5j06e2oXuBqUQUo1hfBDBxaMLAWdtDX+LvIU1O+Bu9FHC
+         yjJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762156374; x=1762761174;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pLkzhtoF4Ahv1FKwU/tjbCnsdl0esqhckJcQdc+yB8A=;
+        b=BhXkygFAAXJ0pZhTb433FCYo0P7P3mr0pIlq9oBYxj4hkc6qEAcV8DXOf8G/YPGmvR
+         a7nZh0vgOCMOu1tEQv5TazhrSzqGo0/4TmUig4+SIRX5H9dH3k9gGFdRIEjYR9G7ZwB+
+         tRU6jb+mvF7J+99GtKnO32NAcMT/PsMIlyRHCxXRA3ArPMbxTytQheZunlEekfnF6MFp
+         0zR4khxk+jiQdoyhYH3juCOdBkEOPIt0HLAlOCEZ+qEY7bodK4jP/QHJTMcR7kqGpefR
+         tTl8rvAqG8sejUa+dNE6Gspte7MgUdEG/U6mS+HLFI4tZUFKcrf/ALhZE6MY7/7LC5w3
+         qOpQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVREx6B6ivHk6CamXjq9VuSHcbax8jMVe9+DWAIx33tyD+Rgi26PzGtcoZRUjlnSUgZZVFgbM94uss=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwCi/NJWX6i+ItrFeNEcZVQqVM1OwyMcjMOTOMo/UB6yHRVuC0W
+	9ZPyKmnpxBthhnNg8Q6xNM8kRfGzfEpZSw9xw1XO7iK5iQsXcCYtclpHW2kr76Jnj4U=
+X-Gm-Gg: ASbGncsJOUnlyGtduRtgmFrV28gjCJbKoutZsX62UNGcEaFY7i4OTNkgm61/u7uwutK
+	jL3lx+VFC9skczmeLPp+SL+Ls+8wNf07MUhsSguf6GwanbYbHJlu/eXRXa9smLkc4hsUgw3wAxi
+	SPyIXe2M1Nkp5jzaRBi84r+iiugZzUqRZV3Fm3CcBZkF85CUsaLNb16tcnXKB+QQde6g8lgOpIV
+	fVgM0f54TDts6cAaIDcHieE9GrRB12qrik4k7ucU0g6IlcjN4qlVVgfnqZD4GfmkQ/alJ1JoPaU
+	F1jCdyBAgtSX4CgKVTgqW3hKSpMcifu+gGElA4wvn8ksqBvZHR2LAhSx3EHDPh2ftZaQafV4CvR
+	/JJZZnyYK4jOejCi5HvdjsnOGmFLglukTj+AGYUCxgTp+DlE0rcwHGnk2HcIJTqNqhr3qaLKFsJ
+	5W2dkFk4YbQeihy99uLz+wjRKY
+X-Google-Smtp-Source: AGHT+IFmmflmrHgmAEotptMvyKECeXV6WQu6qDa1mCLOci2pV13NrALFzKLJadVhnxzhUmSBh4pxng==
+X-Received: by 2002:a17:90b:1c06:b0:341:2150:4856 with SMTP id 98e67ed59e1d1-341215049b9mr3820496a91.17.1762156373781;
+        Sun, 02 Nov 2025 23:52:53 -0800 (PST)
+Received: from .shopee.com ([122.11.166.8])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34159a16652sm34552a91.20.2025.11.02.23.52.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 02 Nov 2025 23:52:53 -0800 (PST)
+From: Leon Huang Fu <leon.huangfu@shopee.com>
+To: stable@vger.kernel.org,
+	greg@kroah.com
+Cc: tj@kernel.org,
+	lizefan.x@bytedance.com,
+	hannes@cmpxchg.org,
+	corbet@lwn.net,
+	mhocko@kernel.org,
+	roman.gushchin@linux.dev,
+	shakeelb@google.com,
+	muchun.song@linux.dev,
+	akpm@linux-foundation.org,
+	sjenning@redhat.com,
+	ddstreet@ieee.org,
+	vitaly.wool@konsulko.com,
+	lance.yang@linux.dev,
+	leon.huangfu@shopee.com,
+	shy828301@gmail.com,
+	yosryahmed@google.com,
+	sashal@kernel.org,
+	vishal.moola@gmail.com,
+	cerasuolodomenico@gmail.com,
+	nphamcs@gmail.com,
+	cgroups@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH 6.6.y 0/7] mm: memcg: subtree stats flushing and thresholds
+Date: Mon,  3 Nov 2025 15:51:28 +0800
+Message-ID: <20251103075135.20254-1-leon.huangfu@shopee.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251103-vram-carveout-tuning-for-upstream-v1-5-17e2a72639c5@amd.com>
-References: <20251103-vram-carveout-tuning-for-upstream-v1-0-17e2a72639c5@amd.com>
-In-Reply-To: <20251103-vram-carveout-tuning-for-upstream-v1-0-17e2a72639c5@amd.com>
-To: Alex Deucher <alexander.deucher@amd.com>, =?utf-8?q?Christian_K=C3=B6nig?=
-	<christian.koenig@amd.com>, David Airlie <airlied@gmail.com>, Simona Vetter
-	<simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
-	Jonathan Corbet <corbet@lwn.net>
-CC: <amd-gfx@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
-	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, "Yo-Jung Leo Lin
- (AMD)" <Leo.Lin@amd.com>, <anson.tsao@amd.com>, <superm1@kernel.org>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2809; i=Leo.Lin@amd.com;
- h=from:subject:message-id; bh=qCBX8mmzd8QBvkys4Z3v211HugS1s3SzrXl9HURiq6s=;
- b=owEBbQKS/ZANAwAKAV8XsZZKKe6GAcsmYgBpCF8MzGvkI+THYq3CQNYbycQoBkQ2axPjbG02L
- wUjmleGfoSJAjMEAAEKAB0WIQQzqV4kW+yguuqHrw5fF7GWSinuhgUCaQhfDAAKCRBfF7GWSinu
- hqt6EACkM3KtVkKdLDxifZuLs7SNq52Dnhyi1x4eOqoLsKnq82g+z+sbgl2DFWSbYWRVSPJVf+p
- OPBIY6RWh9hmel/vKf+/aXunlwfFR3/2+K2MoqPmEwWcpx+5hgqjOjNVgTj70RQm/UhvF4TmUwY
- ClLERcfuW3vof7G/Tb2DbIjHvH+XRrffl7v3fmwVTqm/sGnZtBQhYeWaaC7ndMXwt7/S7sW1hwZ
- fOT6KSQy5Nk+oz3RLz9aHgFkKoNx6kpcDruxZZeDHdK+PBknWNU+NMORHvxNJUilyLqa+wj5Ro5
- V/lzMjvL9FQdy5QnOKilt9ppq2i1F3/jB7QDgvInG3p0MPQkHy0C27ceq64rnPP69wI5tdtW7NZ
- gJaAUHL/9B8oUA8Wvqg/K0JtsO1zFE5DXw6yCZa5L4EPIKKGYm1yvIBbOw7mYZ8O+rwDcDFX7iP
- y3kNqpp4/+U2NyziCBTfFXfiZy4HQPsU5rhqrjDb5LC+ST+eIQn1GeXUZb7mhFVsczsN1Z6WLJN
- 3hqMVhfL26a/n62Oo2EBOXWsB/W89i8BXmjeyxvBMVltbuP8p9emyQ4MLRA/EqETDtOr63MiqGa
- XrJIkCsUHvNltKCj8mOTSF5y1e5t2JsCLi+JtEwvbXr7bIlTPUS4b4+tMDPMdQ1MnYb8cmOeHlu
- 1XNSYsTYtEBDxHQ==
-X-Developer-Key: i=Leo.Lin@amd.com; a=openpgp;
- fpr=33A95E245BECA0BAEA87AF0E5F17B1964A29EE86
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017093:EE_|SJ2PR12MB8784:EE_
-X-MS-Office365-Filtering-Correlation-Id: a3335280-7cd3-4537-ceb5-08de1aae2f5f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|36860700013|1800799024|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?NmorTUtOajZKK2c2Y05qbldkREEzUkhJdGE0QTR1VS9CU25lNVFVSzNBUjc0?=
- =?utf-8?B?ckgrbFZJeGJkNGM0NXVwNm5oTFdqMXd6Tyt2UVRxVUZJUHVpcGg1WTVBeVd6?=
- =?utf-8?B?ODV5ZEx5Mi9iUzV0c1UrTzcxS1h4aGFBZUcyNXplSDJERktIQmRYa2ZneGJx?=
- =?utf-8?B?S3VpdThUS0JVbW1VOVVxTS90Vk1lSVY3N1U2VkdqbWtWcmg3THl5cGZUOHdZ?=
- =?utf-8?B?bEdJOEkvWFhkN2g4L25NZ1l2VWNGMVVaQTM3S0FRc1VKUHVTQVFTQ0hVUEMx?=
- =?utf-8?B?VUUyYVl2UDM5alYrbUhsRmhyMFUvYmlOZDlXdjdwNG9XSFdoM1IvbURWU2tV?=
- =?utf-8?B?dXhkajF5T1o3RnM0R240dVl1c2VCMDFzKzBrL3VnSjNxRG1vVEdRMDhYMTVF?=
- =?utf-8?B?bFUvWXcvV0NMT3ZYQVlGQi83QkNRaVFreklYV2NhUEYyM1hMS1hrNlVnNjlZ?=
- =?utf-8?B?MitaQ0tqYklqaDdjSGI3d2NqcGNESDNhTEFZMTJqS3VzSkZYNUZSY3ZzdGU0?=
- =?utf-8?B?ZElvMkhYR1kwbDBnV2Q0VTk4bXRPdXhNVCtLbGxLeHlxVWZEazJTT0xDYlhU?=
- =?utf-8?B?WXhwcFNMaVdXRDlqOUxLbEFQUEk4SW5Ydm4weUswZzRwZWRVZ1hRUVoveEJK?=
- =?utf-8?B?emMrVC9Nd3VMb3ZIVkd5ZDY4RDNMYlZGM0k5Y3MrWkhpcjRnTkxlRGplUFBz?=
- =?utf-8?B?UVNUTXQvc3JqOFp6L0VIaVNvbHlkalBvU1dtZ01ZbTRyRDZVSUVJT1NVR3Uy?=
- =?utf-8?B?RFFZZ3lUelhESFhncHBCS0pMZGRaa2Z3TnM3TENVTnk4bTUzemVBSk43UE5J?=
- =?utf-8?B?TTRpdVRkUXpUalJvUm80VlNtanRwMTNONTFRbEg2RElsMWRRS0xBNDdXRFN6?=
- =?utf-8?B?eWVCdXplTTRNMnFZazF4SzVnWDlyTXczNlg5ZStTd3dlMkQ3UGZOeHlBRURC?=
- =?utf-8?B?dkdNVWpkY21lUm5jQUo1VVY3VEx3SGh4VHRvbExMa2U4ZjhnNnRZNTc0dnVG?=
- =?utf-8?B?RkpkY002c2JvSUh1Ri9KVUZLa25lNVlhek9ib2kveUVESzhhVjFhZExuanAy?=
- =?utf-8?B?R2dyUnhjRFVSZG1VTzNXTTE3UloraHkxU0I1ZHFsdDZKTXVHZk5YNmlvUUVZ?=
- =?utf-8?B?S1BFOUs4MzJkdU9CSlAzNm9lWTRkY1c2VU4yRXlQakUrNWFheDZPRTdJNDB0?=
- =?utf-8?B?enRCYXdqMENkSTRDTEFKLy9EK2JTSjNkY3h3Y0ZrVzF6cXBIUWx4Ty9kT01r?=
- =?utf-8?B?WDlxYUJiTGoycG85U1FVc1lxTVpXQ0s1Q1BMV0FteDJsM0Q4UTlkU09wa2JY?=
- =?utf-8?B?dk5ZeWtpM2diUjN0OXkvOVI4S3JOSHJUZk5QWHh6aVh0bXI0ZXNmdXRDSjAr?=
- =?utf-8?B?aFkxRkNmTGJJMVc1YUdOaGdoZW13WFo4ZHR3SHN5bm5Dak1pMUpTV3pVVWZr?=
- =?utf-8?B?bzlXcmJyQjNRWGxLNkJYTkxsYTRETVBPeEVuWFBSNm9zSUE4Um1Lckc3dVdn?=
- =?utf-8?B?aVFwTzVHc1F5QXBmdnVWNDkwR1hXS0JQTGYxYk1MTjZuajNCMm14d0xoeVNy?=
- =?utf-8?B?TGFzMVo1K3ZtRzFsWjd3a2twYklNcG9rbUNiQlU3MFFyckowWlBVM09iakNF?=
- =?utf-8?B?ZHFEbmFzdysvdi9JME1MR0xUcHhXbjNJTnRZcldYczhNQVcvYTJlVHZEaWpS?=
- =?utf-8?B?ZmU5UGxtdjZDTzZGNHVuMVFrNzVkUUsraFFuR1kycTB4VTlkZFo2blF1WitS?=
- =?utf-8?B?Vzl3WVh4Z1AzcE5jL2xzdzFhS3lWdkZYeW00SC9SNzJGeVAvVjBXMUF4Wi9N?=
- =?utf-8?B?c0VUQTNLVS83V0prSjBuQ2g4ampvV0JBOGM2MnJ2cUsxa2g1U2FhdGN4azRX?=
- =?utf-8?B?MXRmMVpNekZCUWZKd284UDI3K1BhZHlKZE81Sk44S0VaT1RDSHJOZU9jbXVK?=
- =?utf-8?B?Rmk1cmNkM0dhblREWG41R3R5UCtjY2h4SENsT2pubzlva1VFeDlXeUViMWtG?=
- =?utf-8?B?RFJwM0NMdlZ6aG82V2I1UUVieFZCTktJMW5DN0pOY1hBUS9jZEdxcGZmZkIv?=
- =?utf-8?B?aEMxc0U0Vzc1ck9sK0Z5bmtTa0hHSkFVMWE5YTA3ZzFRcE5wQVpaUkVXOEdw?=
- =?utf-8?Q?G+7E=3D?=
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(36860700013)(1800799024)(82310400026);DIR:OUT;SFP:1101;
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2025 07:54:15.3735
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a3335280-7cd3-4537-ceb5-08de1aae2f5f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DS1PEPF00017093.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8784
+Content-Transfer-Encoding: 8bit
 
-Add documentation for the uma_carveout_options and uma_carveout
-attributes in sysfs
+We observed failures in the 'memcontrol02' test case from the Linux Test
+Project (LTP) [1] when running on a 256-core server with the 6.6.y kernel.
+The test fails due to stale memory.stat values being returned, which is
+caused by the current stats flushing implementation's limitations with large
+core counts.
 
-Signed-off-by: Yo-Jung Leo Lin (AMD) <Leo.Lin@amd.com>
----
- Documentation/gpu/amdgpu/driver-misc.rst     | 26 ++++++++++++++++++++++++++
- drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c | 17 +++++++++++++++++
- 2 files changed, 43 insertions(+)
+This series backports the memcg subtree stats flushing improvements from
+Linux 6.8 to 6.6.y to address the issue. The main goal is to restore
+per-memcg stats flushing with dynamic thresholds, which improves both
+accuracy and performance of memory cgroup statistics, especially on
+high-core-count systems.
 
-diff --git a/Documentation/gpu/amdgpu/driver-misc.rst b/Documentation/gpu/amdgpu/driver-misc.rst
-index 25b0c857816e..5a71fa9c6782 100644
---- a/Documentation/gpu/amdgpu/driver-misc.rst
-+++ b/Documentation/gpu/amdgpu/driver-misc.rst
-@@ -128,3 +128,29 @@ smartshift_bias
- 
- .. kernel-doc:: drivers/gpu/drm/amd/pm/amdgpu_pm.c
-    :doc: smartshift_bias
-+
-+UMA Carveout
-+============
-+
-+Some versions of Atom ROM expose available options for the VRAM carveout sizes,
-+and allow changes to the carveout size via the ATCS function code 0xA on supported
-+BIOS implementation.
-+
-+For those platforms, users can use the following file to set the carveout size,
-+in a way similar to what Windows users can do in the "Tuning" tab in AMD
-+Adrenalin.
-+
-+Note that for BIOS implementations that don't support this, these files will not
-+get created at all.
-+
-+uma_carveout_options
-+--------------------
-+
-+.. kernel-doc:: drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c
-+   :doc: uma_carveout_options
-+
-+uma_carveout
-+--------------------
-+
-+.. kernel-doc:: drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c
-+   :doc: uma_carveout
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c
-index 1ebfd925b761..e9f71888ce57 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_atombios.c
-@@ -1855,6 +1855,17 @@ const struct attribute_group amdgpu_vbios_version_attr_group = {
- 	.is_visible = amdgpu_vbios_version_attrs_is_visible,
- };
- 
-+/**
-+ * DOC: uma_carveout
-+ *
-+ * This file is both readable and writable. When read, it shows the
-+ * index of the current setting. Writing a valid index to this file
-+ * allows users to change the UMA carveout size to the selected option
-+ * on the next boot.
-+ *
-+ * The available options and their corresponding indices can be read
-+ * from the uma_carveout_options file.
-+ */
- static ssize_t uma_carveout_show(struct device *dev,
- 				 struct device_attribute *attr,
- 				 char *buf)
-@@ -1904,6 +1915,12 @@ static ssize_t uma_carveout_store(struct device *dev,
- }
- static DEVICE_ATTR_RW(uma_carveout);
- 
-+/**
-+ * DOC: uma_carveout_options
-+ *
-+ * This is a read-only file that lists all available UMA allocation
-+ * options and their corresponding indices.
-+ */
- static ssize_t uma_carveout_options_show(struct device *dev,
- 					 struct device_attribute *attr,
- 					 char *buf)
+Background
+==========
 
--- 
-2.43.0
+The current stats flushing in 6.6.y flushes the entire memcg hierarchy with
+a global threshold. This is not efficient and can cause stale stats when read
+'memory.stat'.
 
+Dependency Patches
+==================
+
+Patches 1-2 are dependencies required for clean application of the main
+series:
+
+Patch 1: 811244a501b9 "mm: memcg: add THP swap out info for anonymous reclaim"
+
+  This patch adds THP_SWPOUT and THP_SWPOUT_FALLBACK entries to the
+  memcg_vm_event_stat[] array. It is needed because patch 4 (e0bf1dc859fd)
+  moves the vmstats struct definitions, including this array. Without this
+  patch, the array structure would not match between 6.6.y and 6.8, causing
+  context conflicts during cherry-pick.
+
+  The patch is already in mainline (merged in v6.7) but was not included in
+  the stable 6.6.y branch.
+
+Patch 2: 7108cc3f765c "mm: memcg: add per-memcg zswap writeback stat"
+
+  This patch adds the ZSWPWB entry to the memcg_vm_event_stat[] array. Like
+  patch 1, it is required for patch 4 to apply cleanly. The array structure
+  must match the 6.8 state for the code movement to succeed without
+  conflicts.
+
+  This patch is also in mainline (merged in v6.8) but was not backported to
+  6.6.y.
+
+Main Series
+===========
+
+Patches 3-7 are the core memcg stats flushing improvements:
+
+- Patch 3: Renames flush_next_time to flush_last_time for clarity
+- Patch 4: Moves vmstats struct definitions for better code organization
+- Patch 5: Implements per-memcg stats flushing thresholds (key change)
+- Patch 6: Moves stats flush into workingset_test_recent()
+- Patch 7: Restores subtree stats flushing (main feature)
+
+Cherry-Pick Notes for Patch 7
+==============================
+
+Patch 7 (7d7ef0a4686a) requires manual conflict resolution in mm/zswap.c:
+
+The conflict occurs because this patch includes changes to zswap shrinker
+code that was introduced in Linux 6.8. Since this new shrinker
+infrastructure does not exist in 6.6.y, the conflicting code should be
+removed during cherry-pick.
+
+Resolution: Keep the 6.6.y (HEAD) version of mm/zswap.c and discard the
+new shrinker code from the patch. The conflict markers will show:
+
+  <<<<<<< HEAD
+  // existing 6.6.y code
+  =======
+  // new 6.8 shrinker code (shrink_memcg_cb, zswap_shrinker_scan, etc.)
+  >>>>>>> 7d7ef0a4686a
+
+Simply keep the HEAD version and remove everything between the "======="
+and ">>>>>>>" markers. This is safe because the zswap shrinker is a
+separate new feature, not a dependency for the memcg stats changes.
+
+Additionally, if you encounter a conflict in mm/workingset.c, it may be
+due to commit 417dbd7be383 ("mm: ratelimit stat flush from workingset
+shrinker") which was backported to 6.6.y. The resolution is to use:
+  mem_cgroup_flush_stats_ratelimited(sc->memcg)
+which preserves the performance optimization while using the new API.
+
+Testing
+=======
+
+This series has been extensively tested upstream with:
+- 5000 concurrent workers in 500 cgroups doing allocations and reclaim
+- 250k threads reading stats every 100ms in 50k cgroups
+- No performance regressions observed with per-memcg thresholds
+
+The changes improve both stats accuracy and reduce unnecessary flushing
+overhead.
+
+References
+==========
+
+[1] Linux Test Project (LTP): https://github.com/linux-test-project/ltp
+
+Domenico Cerasuolo (1):
+  mm: memcg: add per-memcg zswap writeback stat
+
+Xin Hao (1):
+  mm: memcg: add THP swap out info for anonymous reclaim
+
+Yosry Ahmed (5):
+  mm: memcg: change flush_next_time to flush_last_time
+  mm: memcg: move vmstats structs definition above flushing code
+  mm: memcg: make stats flushing threshold per-memcg
+  mm: workingset: move the stats flush into workingset_test_recent()
+  mm: memcg: restore subtree stats flushing
+
+ Documentation/admin-guide/cgroup-v2.rst |   9 +
+ include/linux/memcontrol.h              |   8 +-
+ include/linux/vm_event_item.h           |   1 +
+ mm/memcontrol.c                         | 266 +++++++++++++-----------
+ mm/page_io.c                            |   8 +-
+ mm/vmscan.c                             |   3 +-
+ mm/vmstat.c                             |   1 +
+ mm/workingset.c                         |  42 ++--
+ mm/zswap.c                              |   4 +
+ 9 files changed, 203 insertions(+), 139 deletions(-)
+
+--
+2.50.1
 
