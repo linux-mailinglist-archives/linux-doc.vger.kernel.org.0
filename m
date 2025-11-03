@@ -1,189 +1,148 @@
-Return-Path: <linux-doc+bounces-65315-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65318-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2A9CC29CD0
-	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 02:47:50 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72104C29D24
+	for <lists+linux-doc@lfdr.de>; Mon, 03 Nov 2025 02:52:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id CE48C4E3D4A
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 01:47:49 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 1F6CE4EBA1C
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Nov 2025 01:51:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0E4B026ED3A;
-	Mon,  3 Nov 2025 01:47:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 535B927FD40;
+	Mon,  3 Nov 2025 01:51:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="SBuBF0Nf";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="h3eUvJrw"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="en+CFps7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BE6E188734
-	for <linux-doc@vger.kernel.org>; Mon,  3 Nov 2025 01:47:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9C0127E1DC
+	for <linux-doc@vger.kernel.org>; Mon,  3 Nov 2025 01:51:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762134466; cv=none; b=pVmSx6uC6I91pyE5FO/Zf5igtY1YyO5i431dqh2WNuOP2B0Oq+acjYnL/IcrMagkn4DZtAdCJZIX7iysd2+vcSHxebp9mJOUbe4huhMwRHpVWMg0NjelmAo9ZRd70iJrplj8FjAmCnpWv3fTrICfxF5llazr0poPleC1udXbrp8=
+	t=1762134667; cv=none; b=k0xnpQTYgC3YrmSX7HOKDBnsKEkvlKPQd3Zn7FV6K4QoqlTdk2Rc9K4OV/zkiIdef4PUM4DxzAsWX2HQknaTnVBH4YFeha7z9d1zOADxIdL6V6xteh5edFNLLMb4Q6OgJSksphZdkMxzdPs32S70I/0z2JnJL4YBE3xErLvTCSc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762134466; c=relaxed/simple;
-	bh=DZ/KiMq7wWJ8uPyNXpIdNz0w5pQFBc9zI5smcnaaiB0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=i0qHSD0RtzOt0e9fmJSblAsg00z0mLmhJ7QrbSwQpzAysoNjWJpxdCminsl1yHhT4Pkk+JKjTqrn+75ngJfitcfoUzmQrVaKcOTPlizLNu+DrvMZ8X5ATjBQEKLhJ5CektlX2cjHkCvyPHiOq2vZMzsj+7b4IJS6ePVtKnJZx0w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=SBuBF0Nf; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=h3eUvJrw; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1762134464;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DS23ySq+vPb5Ayo6+abelT4SHGq2SoMsLQTkVaSuuRo=;
-	b=SBuBF0NfmiEAmskiJ6BG8F9JDWbtoOxdrNWriscf7/qEKzt7DPvjwjmLiJg0e6SK+hcPZi
-	DsWQv9RKinnlZp9eraxIfdlm60faE5wExtJnCmU7inYs8jWTsIcURM1TIOpw3VpEU5IcTq
-	6+oTAZkCkGOsa13Z432l4/1lfsp44Ms=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-260-v6sxtzTbPS-g5pA-QNlEig-1; Sun, 02 Nov 2025 20:47:42 -0500
-X-MC-Unique: v6sxtzTbPS-g5pA-QNlEig-1
-X-Mimecast-MFC-AGG-ID: v6sxtzTbPS-g5pA-QNlEig_1762134461
-Received: by mail-lf1-f72.google.com with SMTP id 2adb3069b0e04-57893a7d7b6so2596637e87.1
-        for <linux-doc@vger.kernel.org>; Sun, 02 Nov 2025 17:47:42 -0800 (PST)
+	s=arc-20240116; t=1762134667; c=relaxed/simple;
+	bh=IguGKpS5VQ/M3vLUdSUXAb+iSeTOTwLAIFBgATkkuRE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=leUBUdi4jJCnaXMmb+9EEfA92o4J4BmljWRRaO5Y9sMqiSdziYyRymWByriaOU234Vm9IH5wJdqWDJMc/WFXyujsc1QCz653hsm83XhDNuOZFx0j6mefWVSxxJbh3pusGbfBZ5S7/s6OLQenCe9wNmCc3NWeol9KSv6o8UV1apc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=en+CFps7; arc=none smtp.client-ip=209.85.210.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-7a435a3fc57so3593568b3a.1
+        for <linux-doc@vger.kernel.org>; Sun, 02 Nov 2025 17:51:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1762134461; x=1762739261; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DS23ySq+vPb5Ayo6+abelT4SHGq2SoMsLQTkVaSuuRo=;
-        b=h3eUvJrw/IrXM943TWCMfLZSG2xXhrrG5N/qweL10nJoVfb0zjbFI20+DHAy6EFOrb
-         Ffl1ym7Ef03Lp5+S0N2CV8Fzma2gr3mIeyvnu7tDkL8Z76z4Sluk22vLRAzUfZb95Zjg
-         /K2cCyo4wGen2yf5cbg1m+PN/P/RNyp5qV02pywmYVFAzF/abLeHstalao/9Yq8sMgyw
-         cn8nNug7tAumBFnP0aoq7x2wstwrbd0e7EqUG94jSOaLPasaeHCTJ3ezZ8UQFlsSGhNc
-         m/NLFRVynESjetZZuiiY6rexzLwK0AUOhsd/a0ZrY5qqeUzHBsFigOzb5sb3aLqNdslE
-         4ZTA==
+        d=gmail.com; s=20230601; t=1762134665; x=1762739465; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=5TaO2MetV3N+eF97av/JpASJddKmaM/RwWRxYKGrZbs=;
+        b=en+CFps7l+qeVjqc+IdUGzSA3/x66dr0QFUyiw5grxY6DydX1cYip4YFNshuURWdYe
+         s/XeQbclH2zoIgWCluQ4uGS7tIdf1nUZ/zxJIcEfHguy8Wq4Td04gFYU8t+RG+8pIU42
+         DeVO0axoH6wC2BFri/Aiqxe5rdlw4y4WtVXqLjbsAW6ZFf8HIyLspIRv5iYJYMIebsfu
+         sR/waFqrxA6EeEibYdP0l70BZGF3EMzQCDjKkQJY7mxici5fkIO9iZV9j2joCJlz/Src
+         bs3GJ+oqC8ehsl+DTOwyDSQv1DzFpVpOt8TW4FUuEX4plexuoacmvebqTHCHFjCJD1ld
+         X1oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762134461; x=1762739261;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=DS23ySq+vPb5Ayo6+abelT4SHGq2SoMsLQTkVaSuuRo=;
-        b=QkiX1swGErSb0bHc/YuuqiBdf1w0kkWDGgwVfxeG2qRgVIqTrmZc2X9IcI53Npr4TX
-         ukVxxlbuTMkw1HXX5smrEMsAuUkG+AMWuuehVkJv5HWKlsaPIU8kIPo5/ZDLJr2Xd026
-         rkeXBlC70wZQAmsHt2+pbhFkDXQXQ6qiZhiw9uEyaG94Gx3khDRsbZVVZiiplCd6leoE
-         b3MrrAbkujruf5VGabyA2ivQX7Rge09k4IwH/9pboEJfTsfP/dznRIv011Xs3sodAJ/E
-         CWMl75BSdPAomQisq/e0MIrcSlHTIyfOjvWOIfy3PRQ+hoLRdaJE8I9qL8qe5BbMWMYF
-         pOGA==
-X-Forwarded-Encrypted: i=1; AJvYcCU607p3SsYZrW7nRXbDljaTAb5Y0oh0sYDnY3VCShmZhDd6i3f36DA38v4BPmwAqmbVVrhcKBdeRuw=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzoJKUqB44ZCR4CxhBEblcviWYKShO+VjbYjLoZNwrk52GGqjXF
-	iDjMLxKcv7/+EpO5jWVupQXjT9vkvXuFssJfqOnPbyRyiN+muJSjN8JwgG/Psuwk7fBNH0jxFX5
-	PlSAs7KTpJivCY0zVKGHxRh4WsSkFeiEzBbAp8p00oEuvuqbq1oYbd2Ry6lChrlVVox0H8T5WHP
-	NrmRkqvabCzvdq/t1qkDGfpg2KyaCm1GBj2McY
-X-Gm-Gg: ASbGncsgoNGkIAea/K+yByZgoPNVAVO+AtnCSzT/obOBKieye7jj8PZbA/flJI+6xGR
-	XB99JLdNS/59QzDY2b/wKz83efHro5MA8ClglQOTb7+w3xa7lx7nsJ5/XCkp2mtCem9dIxN+PRV
-	7PjdIenLGVMqgIv7D0WGTIABiLN29NNhuMVgBKcXolxnkaCvCt4bOrNdo=
-X-Received: by 2002:a05:6512:3e10:b0:594:2c58:978b with SMTP id 2adb3069b0e04-5942c589ad9mr620624e87.51.1762134461223;
-        Sun, 02 Nov 2025 17:47:41 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEHDOR/3/dEMSprdbAr+vGPJpG0WiUEecPksq7/JieZgEHWe+BMjD1gOgOvmjXIa+VsxvCQ+Uz9nvUL4YhsU+c=
-X-Received: by 2002:a05:6512:3e10:b0:594:2c58:978b with SMTP id
- 2adb3069b0e04-5942c589ad9mr620618e87.51.1762134460782; Sun, 02 Nov 2025
- 17:47:40 -0800 (PST)
+        d=1e100.net; s=20230601; t=1762134665; x=1762739465;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=5TaO2MetV3N+eF97av/JpASJddKmaM/RwWRxYKGrZbs=;
+        b=Y4F93kOoudZk9AFAVdVUZ0YpVcBpMmWsUE1XVm5TbwEuK+iGtstyWQ0lKR0x6vHQxb
+         Wyf9kZTFDWV3/ejbdMHy4mcFGmTmA3Ld3uG9EXisxRwdfUpOxllDgq7iq/BpusK4RnrK
+         OaTX9/a/Qju3xM7u0q3dg3oqRsx+L+ar/oaRuRYzzdWBVwAABqc9R9P9GwdYli0fONQF
+         xdV7n1P9tBru8GqbIyeQb2ZBjaEgonWur0RtjkEyjvAM+CcfrUhGwo439XG8s44jVUVY
+         uk1dby2/2v8JcczIiqliwkCTpN+4nPymhq3ms2iLnlKn6A9sG2AoWUUOM5M2DdkfOef0
+         hb9g==
+X-Forwarded-Encrypted: i=1; AJvYcCUulzHDpG/HukULe+kgHigSfBySDxIr6hcytCZXPM0IU+DlhYbIFMpEdM+AW+C5pOvIw5zbcI2dVCI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyUDvNgH+/aOoynXLNnWvLzGAa6HRwa5zs5DNQaLYbzL9MI1Ikf
+	Cz++/3RWzUXSXhUsITR3ik//cWETfvSWA8jnitDGRpXgsgQq0MDUUnGd1DzvN2vSZDA=
+X-Gm-Gg: ASbGncsPmkG+wrtcDJeLJJZ4aRlVvs8GqL+qQI+1Bx7Lk1anuRB6LdwMOQGbsRd9y1K
+	gBlX1NAQ5dfn84jlPvdIsIeIMTEPI/Z60ll0Y1QY1cT4pcNIo1Cv0VI90OyuFcmQzzWaq55RNI6
+	tL63RkA4saYNcbUhVVAxiWCSV7pdt1xJBufDxHeX6FPJfggNsYUuOSA68BE7JCV2RGcK74v+ouN
+	DcsTxSOlnxXRH/8BRSuEmtQF8LXIifNO2tw1L8bDcExvGnLZnvAOab6HRERRXqYTLoBTk+i3fUh
+	yaxiprujyK6CQnXI1JYZP5kxQYjdIXcUeY5KxNvNhwEyb3+fw9Lutkm+9OHVDQvBd8Xa+62I9C+
+	7A6CW8r/v/LpADKuQaj9H/sJC83QAGksgrs6sJidUN5VA3Eb8UNGBIYy+Zrybxt3LM6IzupRPUK
+	o055SBv6DGHiQ=
+X-Google-Smtp-Source: AGHT+IEs7Cde5AmB0FeCkazQwwniG0looNw85gQe5dguOFC5BE6Nn3UEgWK/O7FmBthpdNB3HxhPqw==
+X-Received: by 2002:a05:6a00:2191:b0:7aa:9e4d:b693 with SMTP id d2e1a72fcca58-7aa9e4db99dmr3454695b3a.17.1762134665009;
+        Sun, 02 Nov 2025 17:51:05 -0800 (PST)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7a7db86f0fesm9130423b3a.60.2025.11.02.17.51.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 02 Nov 2025 17:51:01 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id 99D6E42229A6; Mon, 03 Nov 2025 08:50:58 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Networking <netdev@vger.kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Steffen Klassert <steffen.klassert@secunet.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH net-next v3 0/9] xfrm docs update
+Date: Mon,  3 Nov 2025 08:50:21 +0700
+Message-ID: <20251103015029.17018-2-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251030062807.1515356-1-linan666@huaweicloud.com> <20251030062807.1515356-4-linan666@huaweicloud.com>
-In-Reply-To: <20251030062807.1515356-4-linan666@huaweicloud.com>
-From: Xiao Ni <xni@redhat.com>
-Date: Mon, 3 Nov 2025 09:47:28 +0800
-X-Gm-Features: AWmQ_bl8wDMCqnoMJ36yUqoXBMkz_wvMmqiObsyO1YtquNOV0cAL5Eti1U9XmlA
-Message-ID: <CALTww286rYcR1hFk5GtxuwFqtUo3fwNyixd5N-_MwBX3P6UUBA@mail.gmail.com>
-Subject: Re: [PATCH v8 3/4] md/raid0: Move queue limit setup before r0conf initialization
-To: linan666@huaweicloud.com
-Cc: corbet@lwn.net, song@kernel.org, yukuai@fnnas.com, linan122@huawei.com, 
-	hare@suse.de, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-raid@vger.kernel.org, yangerkun@huawei.com, yi.zhang@huawei.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1851; i=bagasdotme@gmail.com; h=from:subject; bh=IguGKpS5VQ/M3vLUdSUXAb+iSeTOTwLAIFBgATkkuRE=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJkcnMWqopF8Z+6ckT2upMNkX1+RNbn+0CrNtNPzGgu5b T6FNXzvKGVhEONikBVTZJmUyNd0epeRyIX2tY4wc1iZQIYwcHEKwEQCljL8lRPKEb04lePDBVO+ xXGLJ9nv3nE6uU5tm81b7ktcJYfnPWZkOJQ7TUnyx25hh7+nNU4stDyocapPyu3T7fz0vtJHe11 /cgMA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 30, 2025 at 2:36=E2=80=AFPM <linan666@huaweicloud.com> wrote:
->
-> From: Li Nan <linan122@huawei.com>
->
-> Prepare for making logical blocksize configurable. This change has no
-> impact until logical block size becomes configurable.
->
-> Move raid0_set_limits() before create_strip_zones(). It is safe as fields
-> modified in create_strip_zones() do not involve mddev configuration, and
-> rdev modifications there are not used in raid0_set_limits().
->
-> 'blksize' in create_strip_zones() fetches mddev's logical block size,
-> which is already the maximum aross all rdevs, so the later max() can be
-> removed.
->
-> Signed-off-by: Li Nan <linan122@huawei.com>
-> ---
->  drivers/md/raid0.c | 16 +++++++---------
->  1 file changed, 7 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/md/raid0.c b/drivers/md/raid0.c
-> index e443e478645a..fbf763401521 100644
-> --- a/drivers/md/raid0.c
-> +++ b/drivers/md/raid0.c
-> @@ -68,7 +68,7 @@ static int create_strip_zones(struct mddev *mddev, stru=
-ct r0conf **private_conf)
->         struct strip_zone *zone;
->         int cnt;
->         struct r0conf *conf =3D kzalloc(sizeof(*conf), GFP_KERNEL);
-> -       unsigned blksize =3D 512;
-> +       unsigned int blksize =3D queue_logical_block_size(mddev->gendisk-=
->queue);
->
->         *private_conf =3D ERR_PTR(-ENOMEM);
->         if (!conf)
-> @@ -84,9 +84,6 @@ static int create_strip_zones(struct mddev *mddev, stru=
-ct r0conf **private_conf)
->                 sector_div(sectors, mddev->chunk_sectors);
->                 rdev1->sectors =3D sectors * mddev->chunk_sectors;
->
-> -               blksize =3D max(blksize, queue_logical_block_size(
-> -                                     rdev1->bdev->bd_disk->queue));
-> -
->                 rdev_for_each(rdev2, mddev) {
->                         pr_debug("md/raid0:%s:   comparing %pg(%llu)"
->                                  " with %pg(%llu)\n",
-> @@ -405,6 +402,12 @@ static int raid0_run(struct mddev *mddev)
->         if (md_check_no_bitmap(mddev))
->                 return -EINVAL;
->
-> +       if (!mddev_is_dm(mddev)) {
-> +               ret =3D raid0_set_limits(mddev);
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
->         /* if private is not null, we are here after takeover */
->         if (mddev->private =3D=3D NULL) {
->                 ret =3D create_strip_zones(mddev, &conf);
-> @@ -413,11 +416,6 @@ static int raid0_run(struct mddev *mddev)
->                 mddev->private =3D conf;
->         }
->         conf =3D mddev->private;
-> -       if (!mddev_is_dm(mddev)) {
-> -               ret =3D raid0_set_limits(mddev);
-> -               if (ret)
-> -                       return ret;
-> -       }
->
->         /* calculate array device size */
->         md_set_array_sectors(mddev, raid0_size(mddev, 0, 0));
-> --
-> 2.39.2
->
+Hi,
 
-Looks good to me.
-Reviewed-by: Xiao Ni <xni@redhat.com>
+Here are xfrm documentation patches. Patches [1-7/9] are formatting polishing;
+[8/9] groups the docs and [9/9] adds MAINTAINERS entries for them.
+
+Enjoy!
+
+Changes since v2 [1]:
+
+  - Also trim trailing colon in xfrm_sysctl section heading (Randy)
+
+[1]: https://lore.kernel.org/linux-doc/20251101094744.46932-1-bagasdotme@gmail.com/
+
+Bagas Sanjaya (9):
+  Documentation: xfrm_device: Wrap iproute2 snippets in literal code
+    block
+  Documentation: xfrm_device: Use numbered list for offloading steps
+  Documentation: xfrm_device: Separate hardware offload sublists
+  Documentation: xfrm_sync: Properly reindent list text
+  Documentation: xfrm_sync: Trim excess section heading characters
+  Documentation: xfrm_sysctl: Trim trailing colon in section heading
+  Documentation: xfrm_sync: Number the fifth section
+  net: Move XFRM documentation into its own subdirectory
+  MAINTAINERS: Add entry for XFRM documentation
+
+ Documentation/networking/index.rst            |  5 +-
+ Documentation/networking/xfrm/index.rst       | 13 +++
+ .../networking/{ => xfrm}/xfrm_device.rst     | 20 ++--
+ .../networking/{ => xfrm}/xfrm_proc.rst       |  0
+ .../networking/{ => xfrm}/xfrm_sync.rst       | 97 ++++++++++---------
+ .../networking/{ => xfrm}/xfrm_sysctl.rst     |  4 +-
+ MAINTAINERS                                   |  1 +
+ 7 files changed, 79 insertions(+), 61 deletions(-)
+ create mode 100644 Documentation/networking/xfrm/index.rst
+ rename Documentation/networking/{ => xfrm}/xfrm_device.rst (95%)
+ rename Documentation/networking/{ => xfrm}/xfrm_proc.rst (100%)
+ rename Documentation/networking/{ => xfrm}/xfrm_sync.rst (64%)
+ rename Documentation/networking/{ => xfrm}/xfrm_sysctl.rst (68%)
+
+
+base-commit: 01cc760632b875c4ad0d8fec0b0c01896b8a36d4
+-- 
+An old man doll... just what I always wanted! - Clara
 
 
