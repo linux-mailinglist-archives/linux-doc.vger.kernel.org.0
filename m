@@ -1,91 +1,127 @@
-Return-Path: <linux-doc+bounces-65427-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65430-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id E292FC2F2B7
-	for <lists+linux-doc@lfdr.de>; Tue, 04 Nov 2025 04:33:06 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5BD91C2F4B3
+	for <lists+linux-doc@lfdr.de>; Tue, 04 Nov 2025 05:18:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id DB3334E0612
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Nov 2025 03:33:05 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id DB88A189D2C7
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Nov 2025 04:19:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 05D612877D9;
-	Tue,  4 Nov 2025 03:33:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B7E5B299AA3;
+	Tue,  4 Nov 2025 04:18:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="REE3ZI+3"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="S+d1io8z"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF0C134D3B6
-	for <linux-doc@vger.kernel.org>; Tue,  4 Nov 2025 03:32:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE58623EA95
+	for <linux-doc@vger.kernel.org>; Tue,  4 Nov 2025 04:18:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762227182; cv=none; b=uwXpYGzhZrD/51roDXqBPy8QVeprWOTic9TomUgQwSXmb5uVJvtIgpV+HVBdIlSTHHoAPa/0yJpz2ZXGHg/jYgXe/x4pulQxHC9lV8lY+oGrBQCaV69oMB1lRpcCBhiPXIXX0DVF71ccqSpp7rYerqVoBc08QgpM+PZLkPKaKKA=
+	t=1762229918; cv=none; b=RJAAeWfbiVAVwb8aRTOITrhL5VCOw5UfZGju/+VScOJ0cl7eGTsTxz6/06Z5JD4AQ3zQGpvb55xE190epV1K0IsHqlrWKKtxr+N941XpIhgau6nKgpJwd5ezqr3CEibqd63BAg/pVd8cm1hNEbKtBDBj5p9+sLYsd6dBR8aga7M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762227182; c=relaxed/simple;
-	bh=+dI8B7nGYhSlPKiAEw7HKg5Y1WJCTINWVrK3YlVwJW4=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:References:
-	 In-Reply-To:Content-Type; b=bu4bERwH5GIJZc9jfhOmvN54y4ztPpKTnErt6ql/n2/+/cv1y1QsN3KGnQSB0tN3jS10PDPm9GfYTTnnWjZMO2f4ndz0WI/xfyqFKgTP0lshZNVSJ9eN7DdmytG7UHTyM/HkxjaaJNPGf9o58bbf1JtKE8/5m8/eMiWgT7S5kEQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=REE3ZI+3; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:References:To:From:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Cc:Content-ID:Content-Description;
-	bh=lulaLUnP967LJmdf3X8OatUvmV6ICsz0KeobNEc5Tag=; b=REE3ZI+3z8WvoMKkNmiz/42OXV
-	hcW3lL1ky2yqRPsUDKT+57AFTI72UC/goeSQUh761/svcNui9PI1yfcrC0lsZ6P3rdFF7wRQZKQl6
-	Egl7oPDDkwfD1E9kKPpINLwPJTKDiDsdAmc1LSIx6IhO/zN1Kuj4uPj85fa68XxUeTBSQCTDYand0
-	gVOVbtNIk5/rBe82QcE5by8DsT2wMILhVQS4sITi+htMtT+7P7e+bSUaRgnDUORSj0mnGv5HbWujA
-	fKTlorRqJEfU8tHSovJ9U3Ag/tqriS6RUyy/Q3sMr36HYpxdHY0VymlaKJtdQ11pq2Z3Qq1yLVs4j
-	VZFtkNaA==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vG7n1-0000000B4D7-0o5G;
-	Tue, 04 Nov 2025 03:32:59 +0000
-Message-ID: <f1914b48-eb9d-400d-aaa1-1346fdaed54e@infradead.org>
-Date: Mon, 3 Nov 2025 19:32:58 -0800
+	s=arc-20240116; t=1762229918; c=relaxed/simple;
+	bh=d3rqa1ult8IYHT+pOGDFjb+rtGvu3JZ7+RJtjJ/9aO8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Kx7/2UW2KtFnb+T3YiwdrnGLnKNIOSkvPsXHZmDsxHtk1G7wLoJzmJhXPwLGCdAPppOswc9cieKK4S3BmrEiXqaS7tf41neHbNUo5PhITJGLPYJeiaJH08QcjE1k8oMaEYFtZgEd4jF/mLBgrBnXZZmVY1N17j508VfDk5wWFZE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=S+d1io8z; arc=none smtp.client-ip=209.85.216.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-33b9dc8d517so4696147a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 03 Nov 2025 20:18:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762229916; x=1762834716; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=sOEzRCysEL4x+FuysJWqjlh6gSnAH1oKrrtDPG6N4YE=;
+        b=S+d1io8z+VGlkDeOegFeVZZ+VZDSYEhBGAmURVgfAjKGhkOWFS9Fdn4i79Cc0uWjm6
+         /V3hUua4Ewz+gx3gO77HjdVfvPEcUdSt17+U3bHHMB6sIdBf3BBgQmNZfihPDDqra+RV
+         ZxUTwqmyjM91AhrTCWP+30mEs/9K68y5fJQARu40ki6E9FWAUYUlbRghI881fQhEvY1U
+         KQZMwa3sIBlqdVVhOzPVizzUjgQvPtASAJuPfy1rHkYTL9xm9+z/QjhrF8AXa16FxQ3y
+         Gz00tP9yDZjaymFS8nxYnhLVUGrkm4E4Snd+JB/cH3LRLm0GGFI7u0yKipNnSS4396Dl
+         v5mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762229916; x=1762834716;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=sOEzRCysEL4x+FuysJWqjlh6gSnAH1oKrrtDPG6N4YE=;
+        b=hvRmvq1qceI0BCdCnOxppylZNRjs8TUvvBh3lprgCHjiNgHS7ZJ0KTmLV4E2YLWv1L
+         YqR98UtRfl2UeKfvKuks4G0sinqDTJPAum+2iURlBwk5MS8Cw90gV6q2KYkAKQCZGRCb
+         Jw23kmo4p8ucp/xj50t1Q1U29xIrrvtIPSfb8ISGYBuFpJR+rpNTR/tzG6OGLGxp2s/q
+         K1Ia+kPKYBuu9u0ugK5R7EBrp4mE/aKmkrvHIh+BkBT84C4j3kwBofDItbUpawyVnfq+
+         pEVAPDA2r3fYYJW+Z2dML4wvTJOEb2Ey4RdWjiWyRoxRlr4yyt4F2bRLCslEudYHwxLh
+         Gg/w==
+X-Forwarded-Encrypted: i=1; AJvYcCUg8rGKXdgEEa9vM9ySy2El1Q4FUIdLyP2vZfEcB4kOKZcqp9xjpYbxfooj8JygLrcW5kr9SIEXivM=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz1y3C7ZZVKlpz8cM5PnjUQdTQi+eWIXFBwyxOFdxmwllASQFgg
+	zxl7sodTKknz5R/kUvECfHpuOPwAtnbBxIO+XnjaF4E4zvtHr7BSZx2Z
+X-Gm-Gg: ASbGncsvkzGafNvGl4L5j99/C27fdCG8e4ZHFtp+HicKrae1+cZfsGcmWRBWtloGIGF
+	MTX+ZxB3KMWGdRWhsuDsFHKHM7xcUtmqzSypwZrmd2ltCqFins8msuwtMm3g9OIe7doBuiUprOy
+	oxkTpP9nKHWhJay4l5D3snPkGEf4wg4oYxkVZmPX01gkFNV+iAgxSq2w+T5GE6haIYnIrX4iiVt
+	4tdG/KNtProS5T1DGd02d/8zqAGIYp1uTT4OvsDok3+MXsEVWnKva6dT2CWZ02LecuCW3L1XT/h
+	UIWKM1r8ewhV3CxoVDsyG943m5tLg/RKMw/r8OPwmcaiHUCZNemFxQEig+Xmi+s5E5sFubHmWT5
+	ynE0j8vAzj34cnUOunaEiljGfDm+mpywV85ucmJnewqN3rEnYbTTRRfkcVHOJoNTsSeHcYAIq+y
+	0fLNgZTrSksvE=
+X-Google-Smtp-Source: AGHT+IF2gVVXIyi2y6ccvDeSRxF3EKmw6lJ5/T5UH+EEDwxXUqwmRvEoqwHDHQlOaSYlJWAumbaTNQ==
+X-Received: by 2002:a17:90b:584b:b0:340:b152:efe7 with SMTP id 98e67ed59e1d1-340b152f234mr16472957a91.11.1762229916164;
+        Mon, 03 Nov 2025 20:18:36 -0800 (PST)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ba1f1831141sm801807a12.4.2025.11.03.20.18.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Nov 2025 20:18:33 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id 604F2420A6B9; Tue, 04 Nov 2025 11:18:21 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Naveen Krishna Chatradhi <naveenkrishna.chatradhi@amd.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Akshay Gupta <akshay.gupta@amd.com>,
+	Srujana Challa <schalla@marvell.com>,
+	Vamsi Attunuru <vattunuru@marvell.com>,
+	Julien Panis <jpanis@baylibre.com>
+Subject: [PATCH 0/3] misc devices formatting devices
+Date: Tue,  4 Nov 2025 11:18:09 +0700
+Message-ID: <20251104041812.31402-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: W1 bad URL
-From: Randy Dunlap <rdunlap@infradead.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Evgeniy Polyakov <zbr@ioremap.net>
-References: <5eb4fa80-7591-422a-9e23-c6661318b705@infradead.org>
-Content-Language: en-US
-In-Reply-To: <5eb4fa80-7591-422a-9e23-c6661318b705@infradead.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=857; i=bagasdotme@gmail.com; h=from:subject; bh=d3rqa1ult8IYHT+pOGDFjb+rtGvu3JZ7+RJtjJ/9aO8=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJmcNb/CZvCyubx5d//cMt2783eYzI/Qblobc6stu3OD8 5f/+w8Ld5SyMIhxMciKKbJMSuRrOr3LSORC+1pHmDmsTCBDGLg4BWAid3kZGQ6vite/Ua5+KCX/ vqOdi/H0KXIncm+IT0radLnX4YJu2WZGhve9z2ZfiPr1VzflO5Ns68dKv2sbXQM/LGL/zcvA/uD uOw4A
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
-[adding Evgeniy Polyakov <zbr@ioremap.net> if that works]
+Hi,
+
+Here is a small docs formatting cleanup for assorted miscellaneous devices.
+Patches [2-3/3] are split from my previous macro references fixup patch [1].
+
+Enjoy!
+
+[1]: https://lore.kernel.org/linux-doc/20251104022242.19224-1-bagasdotme@gmail.com/
+
+Bagas Sanjaya (3):
+  Documentation: amd-sbi: Wrap miscdevice listing snippet in literal
+    code block
+  Documentation: mrvl-cn10k-dpi: Fix macro cross-reference syntax
+  Documentation: tps6594-pfsm: Fix macro cross-reference syntax
+
+ Documentation/misc-devices/amd-sbi.rst        |  6 ++++--
+ Documentation/misc-devices/mrvl_cn10k_dpi.rst |  4 ++--
+ Documentation/misc-devices/tps6594-pfsm.rst   | 12 ++++++------
+ 3 files changed, 12 insertions(+), 10 deletions(-)
 
 
-On 11/3/25 6:45 PM, Randy Dunlap wrote:
-> Hi Krzysztof,
-> 
-> This URL in w1/w1-netlink.rst seems to have disappeared:
-> 
-> 
-> 2. http://www.ioremap.net/archive/w1
-> 
->    This archive includes userspace application w1d.c which uses
->    read/write/search commands for all master/slave devices found on the bus.
-> 
-> 
-> 
-> Are there any other sources of this application for the documentation?
-> 
-> Thanks.
-
+base-commit: 27600b51fbc8b9a4eba18c8d88d7edb146605f3f
 -- 
-~Randy
+An old man doll... just what I always wanted! - Clara
 
 
