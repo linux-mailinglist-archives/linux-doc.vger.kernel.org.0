@@ -1,159 +1,134 @@
-Return-Path: <linux-doc+bounces-65527-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65529-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id A83FDC34083
-	for <lists+linux-doc@lfdr.de>; Wed, 05 Nov 2025 07:08:36 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E39EC340D3
+	for <lists+linux-doc@lfdr.de>; Wed, 05 Nov 2025 07:29:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 9750A4E5BC4
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Nov 2025 06:06:44 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 3EF1B4656FA
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Nov 2025 06:27:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F26FC2BDC29;
-	Wed,  5 Nov 2025 06:06:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 458D92C0F97;
+	Wed,  5 Nov 2025 06:27:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=who-t.net header.i=@who-t.net header.b="vkuw5WQJ";
-	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="SRjH57sT"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bAmB8hzh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fout-b5-smtp.messagingengine.com (fout-b5-smtp.messagingengine.com [202.12.124.148])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF81A34D383;
-	Wed,  5 Nov 2025 06:06:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.148
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FCA02C08B0
+	for <linux-doc@vger.kernel.org>; Wed,  5 Nov 2025 06:27:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762322801; cv=none; b=M2lSVASgNQRBXlBzbVcL7fXL6YHtA/nFUfRXUt6j/WOsbPkvK70uxT30sUBtZ+iEJya7lTe+owXxgK91pmmouQiwhcW0k2Vjy7MpokRR2HZfvA48tkwHRkk4K7ySVWaayHUv7oCjg3egnZhV7VVQbSCbVlhEmjtDOy1H3lYq9+w=
+	t=1762324075; cv=none; b=a16a+NsdDtQHtwk1taF96+S8zsFZpzxrKwVHtw0z7HEnzD7aohggYLLgta08zMVWAeEEeIzu+nf6cdbTcsdKD1ga8QlvhKFtmLqDZQAd/GL/uZ4qsDoQd7Dk6X+FacpyRtVcQAu9cyWs+swjel5Q8VFGaGXM9XmFMhblFJtqAG8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762322801; c=relaxed/simple;
-	bh=qAsXPQ8tPOYOrXJQ+JhV+X3Go8QN3AZCEU3AG+kB7uY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=o2X7vjrkdvvGzogfmbtTO5s2s4KvFjchMidMfD5zEIMQQ/PQ4B+bxb6ejH+iVwKybONTU6tLVijST6q1WRucERWhqbUHyX3DrQoETcqt66f/pcBpTbg2/+ZEgwNi2XFNt4EyewH+aC0lmPAHAz6JdEixzkufMMJQsXuFrvUFEHI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=who-t.net; spf=pass smtp.mailfrom=who-t.net; dkim=pass (2048-bit key) header.d=who-t.net header.i=@who-t.net header.b=vkuw5WQJ; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=SRjH57sT; arc=none smtp.client-ip=202.12.124.148
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=who-t.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=who-t.net
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
-	by mailfout.stl.internal (Postfix) with ESMTP id 740071D0016A;
-	Wed,  5 Nov 2025 01:06:38 -0500 (EST)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
-  by phl-compute-06.internal (MEProxy); Wed, 05 Nov 2025 01:06:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=who-t.net; h=cc
-	:cc:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:subject
-	:subject:to:to; s=fm2; t=1762322798; x=1762409198; bh=Uo/zdGm8+c
-	RvE/8H7Cf5eMs2BH9++xthPjBsEvZkuvo=; b=vkuw5WQJRvKETLhyZwKaP++/LU
-	Gl7hHaqY3hT6HyDxWVB/gl0Cwyu0ImpDss3BdYdS43dZQ3KVzrk3D9BAE1Fbh6yF
-	R6M1ilClvIj+bl3nChk1GFYcIAqZNltJjwhhd6FABbHKeqCwqmI7AGDzW5YJ0Eeu
-	hiDbY3s10kmioQSzYJz3/4FmFVDRD9AKmCRz4VpohdIPsC8vX17IMgIaEA5eJFml
-	+9EtQ5tGxT2nSKOutl/1nYuDdz4g12LRmwNofk7cnYHOLrndbX/SO0ZA7uiHGaV1
-	2CoLFrg0XbcwJ3G92tFlBKoNQLMlB04TPr6iZYSG0a9Ig98ULbCDzWDXdeGg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1762322798; x=1762409198; bh=Uo/zdGm8+cRvE/8H7Cf5eMs2BH9++xthPjB
-	sEvZkuvo=; b=SRjH57sTvxV3NgG67XAJ2R4CiCqAV0fnkRk4NRbpk6pz+3wekfG
-	PXV9O/3hfgigUwgZU1OKi9niFqIByx8ZwV2gHqueVuOfO6FHpSHBUtPtCdt//QK9
-	cGRTSglt3V3chAx9n8A3i1yrKzYhbejiL9TPe/iaEpDqZmwaIX5/Aw8YJz4B3jxi
-	xAUCCMMw8sYsxwWxIncP3q4uc+e19P6c97khtExDPfJ6+VA3OvfkJ1SXnUpt2RFC
-	haq5Yyo9hC4cV3EOWpY3CUWdFCsWQb4ETUYF2dKxqhBHzC90l+gma2oHoy2l5bX0
-	BOAXQAf3OXi+8IJGOQJjVXq7PwOsl3chbkg==
-X-ME-Sender: <xms:bekKaQmYoPboJ4lrQ1tF5j_GI2PaJBSFaXuYIz2SYB1uFA6cXhzR7w>
-    <xme:bekKaX-jQ2zACrZXqcOcSN2sV15jbKce5UXRAe2eYhMXpkwdTpXKaEcsNF3ijKLDM
-    iERTY9JKyBHu2RND25N6Xh8E1r6bePbkSumixhsSMdl5e2emXhB8nI>
-X-ME-Received: <xmr:bekKaeLEXYIoDiEnjDLAdbwNIVT3PBWy4JVDOo4aQQOrtJ4aoStQcL3R1ogO13DgYivGb985DCtiDTFEgVkZUNqxP6yGiijmrQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggddukeefudegucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkfhggtggujgesthdtredttddtvdenucfhrhhomheprfgvthgvrhcu
-    jfhuthhtvghrvghruceophgvthgvrhdrhhhuthhtvghrvghrseifhhhoqdhtrdhnvghtqe
-    enucggtffrrghtthgvrhhnpeekvdekgeehfeejgfdvudffhfevheejffevgfeigfekhfdu
-    ieefudfgtedugfetgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
-    hlfhhrohhmpehpvghtvghrrdhhuhhtthgvrhgvrhesfihhohdqthdrnhgvthdpnhgspghr
-    tghpthhtohepuddvpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegumhhithhrhi
-    drthhorhhokhhhohhvsehgmhgrihhlrdgtohhmpdhrtghpthhtohepjhguvghnohhsvges
-    ghhoohhglhgvrdgtohhmpdhrtghpthhtohepjhhikhhosheskhgvrhhnvghlrdhorhhgpd
-    hrtghpthhtohepsggvnhhtihhssheskhgvrhhnvghlrdhorhhgpdhrtghpthhtoheptgho
-    rhgsvghtsehlfihnrdhnvghtpdhrtghpthhtoheprhihuggsvghrghessghithhmrghthh
-    drohhrghdprhgtphhtthhopehlihhnuhigqdhinhhpuhhtsehvghgvrhdrkhgvrhhnvghl
-    rdhorhhgpdhrtghpthhtoheplhhinhhugidqkhgvrhhnvghlsehvghgvrhdrkhgvrhhnvg
-    hlrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdr
-    ohhrgh
-X-ME-Proxy: <xmx:bekKacheko_TuNKEXY8n0vOd-B12WyVlM7YtgZR_ObLDQCZiYXaDZA>
-    <xmx:bekKaa8syu_Tcf6jB7-yrGWt6k2QsVy8q34WNgVNc8nej_JM8RT_sA>
-    <xmx:bekKaRPg-xUvLTdAtriSWy3WeXi8-KlbCJM4I7aoccYLZqP7kIGHWw>
-    <xmx:bekKaeCE_Utfzz-ZMMq7UoHIrqT3fPsqlDNOpM5hdefD87jm4MjTYQ>
-    <xmx:bukKaf44TMl8lVL2fblallwNYaCNrMvQnVCSWuZ8GRd48n2-slFIN2F0>
-Feedback-ID: i7ce144cd:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 5 Nov 2025 01:06:33 -0500 (EST)
-Date: Wed, 5 Nov 2025 16:03:33 +1000
-From: Peter Hutterer <peter.hutterer@who-t.net>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: Jonathan Denose <jdenose@google.com>, Jiri Kosina <jikos@kernel.org>,
-	Benjamin Tissoires <bentiss@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Henrik Rydberg <rydberg@bitmath.org>, linux-input@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Angela Czubak <aczubak@google.com>,
-	Sean O'Brien <seobrien@google.com>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: Re: [PATCH v2] Documentation: input: expand
- INPUT_PROP_HAPTIC_TOUCHPAD to all pressure pads
-Message-ID: <20251105060333.GA2615904@quokka>
-References: <20251030011735.GA969565@quokka>
- <20251031041245.GA1316325@quokka>
- <ueksimssfw7eqxa5mfmxruj2ghtuncznhbgdxvoorjf6jhjfhk@hsuapbn3kie3>
+	s=arc-20240116; t=1762324075; c=relaxed/simple;
+	bh=jeCq7yHtC5OS5YD2iwjMdqIfwkyzElnJ5GcSaasUr+I=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=F1GYu8AlXIdgyRiuXLdZmu6/V9Wftyhs3r2A1CFww2ZFNOoD2RBCL6/7+GLAqTFSeD88KImU3dcKFRVAmAewTy4rohCCe/nxnO5py2A9yRA3zwaKPavoM9hAoAJWv1PytnGhoQA9RNLdBa+kw8Ser3dvw2J68g8mQ/OkD+5s1qk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bAmB8hzh; arc=none smtp.client-ip=74.125.224.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-633c1b740c5so6007997d50.3
+        for <linux-doc@vger.kernel.org>; Tue, 04 Nov 2025 22:27:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762324070; x=1762928870; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jeCq7yHtC5OS5YD2iwjMdqIfwkyzElnJ5GcSaasUr+I=;
+        b=bAmB8hzheh1D6x4sT7J/wcYSXLztSuWMiWxtsNC1XaO9aI23QWAl/D0usL5rNRJIDn
+         pWVyRatTIWjACN9YcDYcuedkFtFwsOoPSH6u1BLBR5D2MZFyW8m5e6wXUJeaoGsKiyvb
+         Dw5DpMvrhg2BaOC6+6iVa6IKty+HqdcpJq0FESz6hDADickMFfIlEJCOHW3FuE/1Y34z
+         z038RV6NDEtTHOOhNAJi0vi6OAlTxIr7ui52USEuY5iWJoxDTeIAViQfMOl446pR5P1A
+         wERLjaA+rq2HLzRBDo0LTzyo7qx4F85eQ8baa+lzH1DaziR60F3tT/ZUMBssjXVZ7zy5
+         nsgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762324070; x=1762928870;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=jeCq7yHtC5OS5YD2iwjMdqIfwkyzElnJ5GcSaasUr+I=;
+        b=SaOBVWd9Y327kqz+GcIdti/+Bc+f2j5mhkjSLROqx8HKQmegL3OjioxjM74dkKawPC
+         aHL/y21qwzlMioFk+q6iXSHqy91Zbv1Z1neyTxiDY1bDcNi2Gn2y5980PeFo+b8P6saP
+         BXjZkrW6KKmXt883O8QYoaTsmP0GnNdyaXrpudekKEgZ7uaNyNBH205L7wXX703yLXti
+         FNJ8y/Icts2RqelJ87QmWi1B+9C87AAx0pLQ0lDm3/d7eXnNVDBy2HGmdy8Q2uA9PCqk
+         RRETLJUQzGJvgBxg8k+64UJupt6deK7yOHNlIaUkGl5hXHacqQi/sT27QX/+/DZuLVWy
+         xGLA==
+X-Forwarded-Encrypted: i=1; AJvYcCU1HyJLyF1iHokjNLyIhR2flhi2bT28WGrzoWw6QeXLVLUvZy3ZUAqdAoYD+M1A/OpK6TeejwSDp9g=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yya3XqV7eqopEME43VcOV21uHZalduTpLzf7C6+837jNiCwfaJu
+	OxcZHs6CKVsm+6WRgeeOdsr50sDNKUv1hP39Nr88eke3syadaokrBy3/OiAIvUqxwBkNAJV3rZa
+	CIy7uuB76nawCxzLAsaP5F+blqpGJA4Q=
+X-Gm-Gg: ASbGncuF9gTOUTfl1wKyjES1/x0IQdDHfR8AkT9tWG2MVe/uF0EMC9KI0vYgJJS9GKY
+	z08LOCjX7HpnX/7H9BdsjEkMAWuc+hVp9mFcyOHlIS3KabwOJbDySp5NmHkWZAasJ7fjWRrQzeB
+	/qCcTiMDtLXqNB+mZmA/dpy+QRnxQXoKn3r6USB/hJCqloGOkUjCuScj2HVnYEvldo7udscR/zS
+	OdIosYp7ktZoqEC5YuXPwZ8vGEqadpZtUsCP2NEgLCdAFqh2Pp/HjoETLQ=
+X-Google-Smtp-Source: AGHT+IFdiDnyeB/b2R/ETcLVPyA6OCjT4xirxHagJ+oS+nhEajJyKbfrExaD7O6D4NVTjiCeW84j4bp2Z6m2e/DTXUc=
+X-Received: by 2002:a05:690e:159c:20b0:63f:b0ca:dc9e with SMTP id
+ 956f58d0204a3-63fd34bb82amr1456004d50.10.1762324070502; Tue, 04 Nov 2025
+ 22:27:50 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ueksimssfw7eqxa5mfmxruj2ghtuncznhbgdxvoorjf6jhjfhk@hsuapbn3kie3>
+References: <20251105024016.104413-1-zhaochenguang@kylinos.cn>
+In-Reply-To: <20251105024016.104413-1-zhaochenguang@kylinos.cn>
+From: Dongliang Mu <mudongliangabcd@gmail.com>
+Date: Wed, 5 Nov 2025 14:27:23 +0800
+X-Gm-Features: AWmQ_bneg4qAV5dCrFxkdyh-1rRJWVF-MjuTsznf6NxfRswv34cIIYqMoTC59Gk
+Message-ID: <CAD-N9QVgK24ZRz__BEUG3+yPwYqz+-rLoci0frwvjHafR3HVVA@mail.gmail.com>
+Subject: Re: [PATCH linux-next] docs/zh_CN: Sync the translation of changes in kbuild.rst
+To: Chenguang Zhao <zhaochenguang@kylinos.cn>
+Cc: Alex Shi <alexs@kernel.org>, Yanteng Si <si.yanteng@linux.dev>, 
+	Dongliang Mu <dzm91@hust.edu.cn>, Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 
-On Tue, Nov 04, 2025 at 09:09:09PM -0800, Dmitry Torokhov wrote:
-> Hi Peter,
-> 
-> On Fri, Oct 31, 2025 at 02:12:45PM +1000, Peter Hutterer wrote:
-> > Definition: "pressure pad" used here as all touchpads that use physical
-> > pressure to convert to click without physical hinges. Also called haptic
-> > touchpads in general parlance, Synaptics calls them ForcePads.
-> > 
-> > Most (all?) pressure pads are currently advertised as
-> > INPUT_PROP_BUTTONPAD. The suggestion to identify them as pressure pads
-> > by defining the resolution on ABS_MT_PRESSURE has been in the docs since
-> > commit 20ccc8dd38a3 ("Documentation: input: define
-> > ABS_PRESSURE/ABS_MT_PRESSURE resolution as grams") but few devices
-> > provide this information.
-> > 
-> > In userspace it's thus impossible to determine whether a device is a
-> > true pressure pad (pressure equals pressure) or a normal clickpad with
-> > (pressure equals finger size).
-> > 
-> > Commit 7075ae4ac9db ("Input: add INPUT_PROP_HAPTIC_TOUCHPAD") introduces
-> > INPUT_PROP_HAPTIC_TOUCHPAD but restricted it to those touchpads that
-> > have support for userspace-controlled effects. Let's expand that
-> > definition to include all haptic touchpads (pressure pads) since those
-> > that do support FF effects can be identified by the presence of the
-> > FF_HAPTIC bit.
-> > 
-> > This means:
-> > - clickpad: INPUT_PROP_BUTTONPAD
-> > - pressurepad: INPUT_PROP_BUTTONPAD + INPUT_PROP_HAPTIC_TOUCHPAD
-> > - pressurepad with haptics:
-> >   INPUT_PROP_BUTTONPAD + INPUT_PROP_HAPTIC_TOUCHPAD + FF_HAPTIC
-> 
-> Should we maybe rename it to INPUT_PROP_PRESSURE_TOUCHPAD? We are within
-> a release of introducing it, so we should be able to rename it without
-> much fallout.
-
-I'd be happy with a rename too. Want me to send a patch for that or do
-you want to rename it locally during applying?
-
-Cheers,
-  Peter
+T24gV2VkLCBOb3YgNSwgMjAyNSBhdCAxMDo0MOKAr0FNIENoZW5ndWFuZyBaaGFvIDx6aGFvY2hl
+bmd1YW5nQGt5bGlub3MuY24+IHdyb3RlOg0KPg0KPiBTeW5jIHRoZSB0cmFuc2xhdGlvbiBvZiBj
+aGFuZ2VzIGluIGtidWlsZC9rYnVpbGQucnN0IGFib3V0DQo+IEtCVUlMRF9CVUlMRF9USU1FU1RB
+TVAuDQoNClBsZWFzZSBmb2xsb3cgaG93LXRvLnJzdFsxXSB0byByZXZpc2UgeW91ciBjb21taXQg
+bWVzc2FnZSBhcyBmb2xsb3dzOg0KDQror7flj4LogIPku6XkuIvkv6Hmga/ov5vooYzovpPlhaU6
+Og0KDQpkb2NzL3poX0NOOiBBZGQgc2VsZi1wcm90ZWN0aW9uIGluZGV4IENoaW5lc2UgdHJhbnNs
+YXRpb24NCg0KVHJhbnNsYXRlIC4uLi9zZWN1cml0eS9zZWxmLXByb3RlY3Rpb24ucnN0IGludG8g
+Q2hpbmVzZS4NCg0KVXBkYXRlIHRoZSB0cmFuc2xhdGlvbiB0aHJvdWdoIGNvbW1pdCBiMDgwZTUy
+MTEwZWENCigiZG9jczogdXBkYXRlIHNlbGYtcHJvdGVjdGlvbiBfX3JvX2FmdGVyX2luaXQgc3Rh
+dHVzIikNCiMg6K+35omn6KGMIGdpdCBsb2cgLS1vbmVsaW5lIDzmgqjnv7vor5HnmoToi7Hmlofm
+lofmoaPot6/lvoQ+77yM5bm25pu/5o2i5LiK6L+w5YaF5a65DQoNClNpZ25lZC1vZmYtYnk6IFlh
+bnRlbmcgU2kgPHNpLnlhbnRlbmdAbGludXguZGV2Pg0KIyDlpoLmnpzmgqjliY3pnaLnmoTmraXp
+qqTmraPnoa7miafooYzvvIzor6XooYzkvJroh6rliqjmmL7npLrvvIzlkKbliJnor7fmo4Dmn6Ug
+Z2l0Y29uZmlnIOaWh+S7tg0KDQrkv53lrZjlubbpgIDlh7rjgIINCg0KWzFdIGh0dHBzOi8vZ2l0
+Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L3RvcnZhbGRzL2xpbnV4LmdpdC90
+cmVlL0RvY3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2hvdy10by5yc3QNCj4NCj4gU2ln
+bmVkLW9mZi1ieTogQ2hlbmd1YW5nIFpoYW8gPHpoYW9jaGVuZ3VhbmdAa3lsaW5vcy5jbj4NCj4g
+LS0tDQo+ICBEb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9rYnVpbGQva2J1aWxkLnJz
+dCB8IDkgKysrKysrKy0tDQo+ICAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCAyIGRl
+bGV0aW9ucygtKQ0KPg0KPiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMv
+emhfQ04va2J1aWxkL2tidWlsZC5yc3QgYi9Eb2N1bWVudGF0aW9uL3RyYW5zbGF0aW9ucy96aF9D
+Ti9rYnVpbGQva2J1aWxkLnJzdA0KPiBpbmRleCBlNWUyYWViZTFlYmMuLmJhY2YwNTgyNzJjYSAx
+MDA2NDQNCj4gLS0tIGEvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04va2J1aWxkL2ti
+dWlsZC5yc3QNCj4gKysrIGIvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04va2J1aWxk
+L2tidWlsZC5yc3QNCj4gQEAgLTI5MCw4ICsyOTAsMTMgQEAgSUdOT1JFX0RJUlMNCj4gIEtCVUlM
+RF9CVUlMRF9USU1FU1RBTVANCj4gIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gIOWwhuivpeeO
+r+Wig+WPmOmHj+iuvue9ruS4uuaXpeacn+Wtl+espuS4su+8jOWPr+S7peimhuebluWcqCBVVFNf
+VkVSU0lPTiDlrprkuYnkuK3kvb/nlKjnmoTml7bpl7TmiLMNCj4gLe+8iOi/kOihjOWGheaguOaX
+tueahCB1bmFtZSAtdu+8ieOAguivpeWAvOW/hemhu+aYr+S4gOS4quWPr+S7peS8oOmAkue7mSBk
+YXRlIC1kIOeahOWtl+espuS4suOAgum7mOiupOWAvOaYrw0KPiAt5YaF5qC45p6E5bu65p+Q5Liq
+5pe25Yi755qEIGRhdGUg5ZG95Luk6L6T5Ye644CCDQo+ICvvvIjov5DooYzlhoXmoLjml7bnmoQg
+dW5hbWUgLXbvvInjgILor6XlgLzlv4XpobvmmK/kuIDkuKrlj6/ku6XkvKDpgJLnu5kgZGF0ZSAt
+ZCDnmoTlrZfnrKbkuLLjgILkvovlpoI6Og0KPiArDQo+ICsgICAgICAgJCBLQlVJTERfQlVJTERf
+VElNRVNUQU1QPSJNb24gT2N0IDEzIDAwOjAwOjAwIFVUQyAyMDI1IiBtYWtlDQo+ICsNCj4gK+m7
+mOiupOWAvOaYr+WGheaguOaehOW7uuafkOS4quaXtuWIu+eahCBkYXRlIOWRveS7pOi+k+WHuuOA
+guWmguaenOaPkOS+m+ivpeaXtuaIs++8jOWug+i/mOeUqOS6juS7u+S9lWluaXRyYW1mc+W9kuah
+o+aWh+S7tg0KPiAr5Lit55qEbXRpbWXlrZfmrrXjgIJJbml0cmFtZnMgbXRpbWVz5pivMzLkvY3n
+moTvvIzlm6DmraTml6nkuo5Vbml457qq5YWDMTk3MOW5tO+8jOaIluaZmuS6juWNj+iwg+S4lueV
+jOaXtg0KPiArKFVUQykyMTA25bm0MuaciDfml6U25pe2MjjliIYxNeenkueahOaXpeacn+aYr+aX
+oOaViOeahOOAgg0KPg0KPiAgS0JVSUxEX0JVSUxEX1VTRVIsIEtCVUlMRF9CVUlMRF9IT1NUDQo+
+ICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gLS0NCj4gMi4yNS4xDQo+
+DQo+DQo=
 
