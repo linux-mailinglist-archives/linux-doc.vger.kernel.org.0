@@ -1,143 +1,144 @@
-Return-Path: <linux-doc+bounces-65528-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65530-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5351CC340C1
-	for <lists+linux-doc@lfdr.de>; Wed, 05 Nov 2025 07:28:19 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E96AC34112
+	for <lists+linux-doc@lfdr.de>; Wed, 05 Nov 2025 07:38:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 2D541189A7FA
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Nov 2025 06:28:07 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 323FE4E273D
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Nov 2025 06:38:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DFE192C11D8;
-	Wed,  5 Nov 2025 06:27:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F4012882DE;
+	Wed,  5 Nov 2025 06:38:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YctSue6G"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="TxxwByMW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6084F2C08BC
-	for <linux-doc@vger.kernel.org>; Wed,  5 Nov 2025 06:27:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 210A121FF2E;
+	Wed,  5 Nov 2025 06:38:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762324055; cv=none; b=mZCQi81iFAEeBezhXgRrASN22r0SRMmaLaDL2LkNNpf6+iQMpt0y1EKEhDbK6OQ5DhFmD4KW4sFsRjKJgpNyz2oK0dPhrkpQMVcM3g//t9DbaV791rCiup+Ba63oTjPAxq9Ex91EcSpAQ8HkMQOMwUzvzYzrYqMYh6ndPEkvJTE=
+	t=1762324735; cv=none; b=Vb85TGg+LWdrTa23h3hqfMzJymK//ZQQ0y2USJZ3Z306gnOKpQNuDt7nGstv5wuFAHA8JdTP3aSXvK/08f+pYT0AleoMxx16aPnyAQ28yL7mRT4Xg73rukpktRpX8B3Af+NUodWd4DFYi66Iog93dmAx+aa4oeGn24OJYF2KUGA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762324055; c=relaxed/simple;
-	bh=M6FUQeUrV5rYIQp0llWDN3mc7Yy127273TKo86Q9E1o=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=q+LpF9sdLc+jhwjTrPiAWgovzlGcOH8mKlyOK9QHkxX/0eQPUEt5YQikPc6Uoez45vZ/JJONsCzDctlaBi0hSRPHh1EoCRSCWpAnfPCm1dsUakC/gFc4W97Ma96a/CLulUrje547HYEN+461Kdvzusk3pR961NksxEpU6POmmFo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YctSue6G; arc=none smtp.client-ip=209.85.210.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-7aae5f2633dso3086353b3a.3
-        for <linux-doc@vger.kernel.org>; Tue, 04 Nov 2025 22:27:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762324052; x=1762928852; darn=vger.kernel.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=qRgQgDQGc0CtCpQFbq1uegdY2ZYKmCrZ81QG9UF3aXw=;
-        b=YctSue6GHuVbKwzerLpAKfKHFlDkM+OmFKklCH//rfpl1MnUJsO/n9dwzOig9S2Ix3
-         UEw5hivpJUPDueR1c4IW3TsUbp0s4tIJXFMuIEerd3KWfWMJ3dFpsl+BGfO/5imiHMy4
-         VtXaf6lPu0JDs4eoo/8WM0/4DCqBblakFobeKMPqyzXlUq5Hzf4B15cb5Ru2Dm92wmR0
-         IT0mBo/MvzAN3hfdCjKe4WMcHtLatmsVN00+krMgVcrQdoM5DT55brHOaFlJA8hcFG1S
-         Sx9jog7Ho3T9Y5LesfC5lCfP1l8+6/iE7vFHNstIk8EmIiud0XeDxxiiIqMLa4j1WwW/
-         b8Lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762324052; x=1762928852;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=qRgQgDQGc0CtCpQFbq1uegdY2ZYKmCrZ81QG9UF3aXw=;
-        b=c5K8tu3ljbuc2AJF9p2Yq+cCMtCdQibf1H4W1bFLEPlowhfd0is/iwqzX2O5qNlaik
-         6zCJUjn60JU/pXCKUx9pJxmUVWeeW0syuAIYYLq0BVFok5kbaGAE0zj6cTRAPZdxbVDC
-         a2hCqr1HVD0RwbLvMZtOjMTikc8UIs0r7FvLgsiIkibIirunA1iVwxyl2v1B+H56M+qy
-         zYBhTHo9MG/ALf7JAmJxrp+KY2ECTPXWNOOeZLcajkN9+v9vFFX4cajj6b/6TXTyXHfv
-         XJ+JYr6WJt6mGc4VHoqW/s0weYETZzlchfKmUiCY0klf8EXhq1k7B/nvFr/Rp+k9Q1nW
-         EtZA==
-X-Forwarded-Encrypted: i=1; AJvYcCU6eQ4+NEk7P5YYLfDy9eeWnph6PnjRBJQ+IK3ac0m3Blp9NTqRQYCD+rz2EVHN86XGcVTk+hDM8kE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyQkxFlXvsDaK8KXsodv0tRSUvMvWo1C6qyRAF6tVJMCUNO6HqC
-	SF621e5BVO4Gb/xGvcobHmBrJa1ybyaekbomxyyVyYKa5DeNHLlpDqcQ
-X-Gm-Gg: ASbGncss9KlIXsf+8NCC3wH2jErf9UhDvpZ50yN2HSkluQS9dGXwDyxLMNuWMsb5EhQ
-	VsU3lqihOFn4mRAWiWOCj8sIJz7YHM+Jk0jZQPVy0Gu7sqRhHldY7JsdPUbrmGZE1dB8bgZ9gzK
-	bp1p1Xh1B2X93A9KDk6sP86B23p316e5aRu9fXmN0JdqnG/yZso82M/vAxs9nc5vN40wPD+zeHn
-	BLWbSWDT/LuKAizJqN0Ins/0GLBY5R0DO/sHxV+RAbOvEFaCa6qQEU8xgqVzOI55rwNR3xWgK9i
-	BLY8C93IuhlKvht/P/KJ3v8X/Q0I93q85A32ICtFVVDy5WIDpghBV5YbEhpkIdNF9Xv2OSBG8Lc
-	xvZGtT9huAdQz8KN62eioQs0z077XKstbQFcCh+Wra2qF6ZwCQSN9G9MUJKMe7J/CHKzwyYljkm
-	a1Zw8w7HTFwATC/zmLd1qv44Gdr2PrloXFvFrLCi/JcltaWWDx
-X-Google-Smtp-Source: AGHT+IH0CHanNbujuWYsueCqQMvQb7Pe6lyE4kMBe2/tOk0WkpZ70b1GaoCWJdrL37L5RenwOdPqcg==
-X-Received: by 2002:a05:6a00:2382:b0:781:1b5a:95b2 with SMTP id d2e1a72fcca58-7ae1f9856c7mr2725237b3a.28.1762324051551;
-        Tue, 04 Nov 2025 22:27:31 -0800 (PST)
-Received: from ?IPv6:2401:4900:88f4:f6c4:1b8d:9d63:3da2:d477? ([2401:4900:88f4:f6c4:1b8d:9d63:3da2:d477])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7ae9c8e19bfsm669795b3a.65.2025.11.04.22.27.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Nov 2025 22:27:31 -0800 (PST)
-Message-ID: <5bcc00da02d4f5e44a8fabcde406402ca31f0491.camel@gmail.com>
-Subject: Re: [PATCH RESEND v3] checkpatch: add uninitialized pointer with
- __free attribute check
-From: ally heev <allyheev@gmail.com>
-To: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>, Lukas Bulwahn	
- <lukas.bulwahn@gmail.com>, Joe Perches <joe@perches.com>, Jonathan Corbet	
- <corbet@lwn.net>, Andy Whitcroft <apw@canonical.com>,
- workflows@vger.kernel.org, 	linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Dan Carpenter	 <dan.carpenter@linaro.org>,
- David Hunter <david.hunter.linux@gmail.com>,  Shuah Khan
- <skhan@linuxfoundation.org>, Viresh Kumar <vireshk@kernel.org>, Nishanth
- Menon <nm@ti.com>,  Stephen Boyd <sboyd@kernel.org>, linux-pm
- <linux-pm@vger.kernel.org>, dan.j.williams@intel.com
-Date: Wed, 05 Nov 2025 11:57:23 +0530
-In-Reply-To: <CAMuHMdV+12MoAGNHC9kf==Bt0cLuJ39Fs+W61DN67sE_p-u=og@mail.gmail.com>
-References: 
-	<20251104-aheev-checkpatch-uninitialized-free-v3-1-d94ccef4917a@gmail.com>
-	 <CAMuHMdV+12MoAGNHC9kf==Bt0cLuJ39Fs+W61DN67sE_p-u=og@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.1-1+deb13u1 
+	s=arc-20240116; t=1762324735; c=relaxed/simple;
+	bh=fPumA7eDGaOvjZ5e3hO4AGXGDpfqEcmICsMsMtt8SQM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GG3cRUllF1B/vCM53nuHrdjgKEMYMCaT25NaVnUMqf5J0669jxN2C/6i7JY/amTZ1c8iflRXMc3kqcEso4om/fOCfAIegIz4ZFdLG0c2rlIXvTt+gm2MoYH1d/OUP8mbH49lfgDKOXckNNNMhCVlKN4Vco9jbASBrVgenrtgbQc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=TxxwByMW; arc=none smtp.client-ip=198.175.65.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1762324733; x=1793860733;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=fPumA7eDGaOvjZ5e3hO4AGXGDpfqEcmICsMsMtt8SQM=;
+  b=TxxwByMWuNQ9NglFltTLQq+Hg8TKbnw2MUS003gfXSgH8rOGZwu/s+dT
+   ytIOisXuOG8WX/iIPdSwHzTzCZoGONPiN3isZ5sjQHvAecdZGPHAo35Cy
+   R758x+PK7p7eFExisFJMmunUWaPYAQofGC7bGhkvEtJS7biR/cTpiwnIq
+   Ie0Tm3pD43QzodlygfogWoSVgh7rahZNKZI+RNFwrE8E1be16oBZQsk61
+   GfjWMv/pBq+49BJT6p7ZyK7GFzGBUzXYZBMFhq0r3IgTjWwi9TcFVD3J3
+   SackBF0hseo8zKg6O8oHcbg6hUTEz6VvYlSeWeDmPt7/8aS7g3UFu0FFP
+   g==;
+X-CSE-ConnectionGUID: diEMPirLQVybd/uKieUkiQ==
+X-CSE-MsgGUID: NAQ4/EhXRWOuJJcCBd2KRg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11603"; a="68084123"
+X-IronPort-AV: E=Sophos;i="6.19,281,1754982000"; 
+   d="scan'208";a="68084123"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2025 22:38:52 -0800
+X-CSE-ConnectionGUID: BJNVXZDmR7arjquA4TSKhw==
+X-CSE-MsgGUID: v4/ZZh3xSTqLobQrs/fNEA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,281,1754982000"; 
+   d="scan'208";a="218016196"
+Received: from ldmartin-desk2.corp.intel.com (HELO ashevche-desk.local) ([10.124.221.135])
+  by orviesa002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2025 22:38:50 -0800
+Received: from andy by ashevche-desk.local with local (Exim 4.98.2)
+	(envelope-from <andriy.shevchenko@linux.intel.com>)
+	id 1vGXAM-00000005gwS-1Co9;
+	Wed, 05 Nov 2025 08:38:46 +0200
+Date: Wed, 5 Nov 2025 08:38:45 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Randy Dunlap <rdunlap@infradead.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 1/1] kernel-doc: Issue warnings that were silently
+ discarded
+Message-ID: <aQrw9fWt8SS9cE2u@smile.fi.intel.com>
+References: <20251104215502.1049817-1-andriy.shevchenko@linux.intel.com>
+ <0dfa2a07-cc84-4f04-ad2b-ab88cd08d974@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0dfa2a07-cc84-4f04-ad2b-ab88cd08d974@infradead.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Tue, 2025-11-04 at 14:28 +0100, Geert Uytterhoeven wrote:
-> Hi Ally,
->=20
-> On Tue, 4 Nov 2025 at 10:58, Ally Heev <allyheev@gmail.com> wrote:
-> > uninitialized pointers with __free attribute can cause undefined
-> > behaviour as the memory allocated to the pointer is freed
-> > automatically when the pointer goes out of scope.
-> > add check in checkpatch to detect such issues
-> >=20
-> > Suggested-by: Dan Carpenter <dan.carpenter@linaro.org>
-> > Link: https://lore.kernel.org/all/8a4c0b43-cf63-400d-b33d-d9c447b7e0b9@=
-suswa.mountain/
-> > Acked-by: Dan Williams <dan.j.williams@intel.com>
-> > Signed-off-by: Ally Heev <allyheev@gmail.com>
->=20
-> Thanks for your patch!
->=20
-> > --- a/Documentation/dev-tools/checkpatch.rst
-> > +++ b/Documentation/dev-tools/checkpatch.rst
-> > @@ -1009,6 +1009,11 @@ Functions and Variables
-> >=20
-> >        return bar;
-> >=20
-> > +  **UNINITIALIZED_PTR_WITH_FREE**
-> > +    Pointers with __free attribute should be initialized. Not doing so
-> > +    may lead to undefined behavior as the memory allocated (garbage,
-> > +    in case not initialized) to the pointer is freed automatically
-> > +    when the pointer goes out of scope.
->=20
-> I think this is misleading, and can be improved: if the pointer is
-> uninitialized, no memory was allocated?
+On Tue, Nov 04, 2025 at 03:18:18PM -0800, Randy Dunlap wrote:
+> On 11/4/25 1:55 PM, Andy Shevchenko wrote:
+> > When kernel-doc parses the sections for the documentation some errors
+> > may occur. In many cases the warning is simply stored to the current
+> > "entry" object. However, in the most of such cases this object gets
+> > discarded and there is no way for the output engine to even know about
+> > that. To avoid that, check if the "entry" is going to be discarded and
+> > if there warnings have been collected, issue them to the current logger
+> > as is and then flush the "entry". This fixes the problem that original
+> > Perl implementation doesn't have.
+> > 
+> > As of Linux kernel v6.18-rc4 the reproducer can be:
+> > 
+> > $ scripts/kernel-doc -v -none -Wall include/linux/util_macros.h
+> > ...
+> > Info: include/linux/util_macros.h:138 Scanning doc for function to_user_ptr
+> > ...
+> > 
+> > while with the proposed change applied it gives one more line:
+> > 
+> > $ scripts/kernel-doc -v -none -Wall include/linux/util_macros.h
+> > ...
+> > Info: include/linux/util_macros.h:138 Scanning doc for function to_user_ptr
+> > Warning: include/linux/util_macros.h:144 expecting prototype for to_user_ptr(). Prototype was for u64_to_user_ptr() instead
+> > ...
+> > 
+> > And with the original Perl script:
+> > 
+> > $ scripts/kernel-doc.pl -v -none -Wall include/linux/util_macros.h
+> > ...
+> > include/linux/util_macros.h:139: info: Scanning doc for function to_user_ptr
+> > include/linux/util_macros.h:149: warning: expecting prototype for to_user_ptr(). Prototype was for u64_to_user_ptr() instead
+> > ...
+> > 
+> > Fixes: 9cbc2d3b137b ("scripts/kernel-doc.py: postpone warnings to the output plugin")
+> > Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> 
+> Oh, thank you. I knew that I had been missing some warnings
 
-yeah right. Will update in next version
+You're welcome! I Cc'ed to you a couple of 0day reports for the missed
+warnings.
 
-Regards,
-Ally
+> since I still compare outputs from the 2 kernel-docs (perl vs. python).
+
+> Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+> Tested-by: Randy Dunlap <rdunlap@infradead.org>
+
+Thank you! Jon, can we apply this rather sooner to prevent more missing
+warnings, please? If the solution is not good enough, we may amend it
+later.
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
 
 
