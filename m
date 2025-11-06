@@ -1,293 +1,229 @@
-Return-Path: <linux-doc+bounces-65727-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65729-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC36AC3BCB5
-	for <lists+linux-doc@lfdr.de>; Thu, 06 Nov 2025 15:38:05 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 661A0C3BDCE
+	for <lists+linux-doc@lfdr.de>; Thu, 06 Nov 2025 15:50:26 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id CD40D1890ED5
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Nov 2025 14:36:03 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1755E3A6A8F
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Nov 2025 14:45:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF696341640;
-	Thu,  6 Nov 2025 14:33:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E5CB4345CAA;
+	Thu,  6 Nov 2025 14:45:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="wU7eIE/a";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="g92+yCEe";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="wU7eIE/a";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="g92+yCEe"
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="iIYqVCVW";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="cJfUt/5W";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="iIYqVCVW";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="cJfUt/5W"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76967340A52
-	for <linux-doc@vger.kernel.org>; Thu,  6 Nov 2025 14:33:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67A6034574A
+	for <linux-doc@vger.kernel.org>; Thu,  6 Nov 2025 14:45:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762439620; cv=none; b=cabTxaN2vdPTIU425YaAORLFQ9hd3m8gfoYTHKtqC/v7dGqNC58jPbJ6IL/Su798WrvOy89/H4eytEeBkfKSEQuZbVJTokdkd0GZIue1FP6uFcl0HaTRIwMwUK/A0pG/w8buZRYEP1xOKBbaYvzVrkPPlI3n9WDGaXjaAL156TA=
+	t=1762440313; cv=none; b=Vp1bG2jUX6oM7pKDdepbAy3fn40nrpXk2zw6op4iSqfBv+VcXN1Amb9+d/hBMnAS1KENPp1wATd9oeAMwjtHCbXfww6xiwWJvmJvXyjkiUR9NawQgu2a3a52cm8w9qksbTLNARM2O7BuOGogVNYGJp5E4QkWDphtCWAorZeqbLk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762439620; c=relaxed/simple;
-	bh=fQilJNipyxT/q8/9Js36Vv+5fgeLdeP3OrbGvCTyEBE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Is1XtF6TlbyOAZWbHbM4cSLNrxAzZahWHIraDswufvZdNESxI6Mb+HNEu9WOdf94hWgqKS2FCoVukPsmWDhkRwK0wG9UCnsj8meZjJbCQaLcXc0k1M3R9kQpeDlEKSA+SnNtmvw3IDxMfSlQau1S/CT8X5HgxddsbPG4vcYCnwQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=wU7eIE/a; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=g92+yCEe; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=wU7eIE/a; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=g92+yCEe; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	s=arc-20240116; t=1762440313; c=relaxed/simple;
+	bh=rHiQpD6Dguyzhqco5a71e3ZBXppCumTrPP+N3kV916Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=P1PzpMvexoWqHkDTWrnxv9QQQ3xzzC15TStRaQQTydpaumHvullfY8Bqr5uBZgzw191WMZHT1INSmldd004i9rQRGuAmF7VMqwiscG+qPGYDdN4IONQm71zDi7th0CAkogxxOLt4HB+s/4VXjgYyGbfU9fXUKCtwZUx2hKhUg8E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=iIYqVCVW; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=cJfUt/5W; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=iIYqVCVW; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=cJfUt/5W; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 95473211FA;
-	Thu,  6 Nov 2025 14:33:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1762439616; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 9B3741F747;
+	Thu,  6 Nov 2025 14:45:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1762440309; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=pCIJX8/iWnVUuvfe1rGXnP2363EkjNZoIa3wD0HTysg=;
-	b=wU7eIE/awNdBW9X0M+guihUvpSfwGtZp7sB+FdVnnc6rp86D7PwrERWDsdMq2nV0SfheuJ
-	vS9mKCpsNreHzq7FzmTwbH14vUAGfSDnBvcPCAX7tDFa0UUGNH1/VLnRzCEJm0PS+fzlpK
-	6OrczvGIPmpeAZtqXCDUTI8lMGChIyo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1762439616;
+	 in-reply-to:in-reply-to:references:references;
+	bh=nKYZuLb6Nw7zZ6Jj1iayriDsnFotAsi2YnGGy/qZxaE=;
+	b=iIYqVCVW8trouxIau1Jb2p19gyPQLsOzO1T9vdE53k93FoKMpvRHjpW790I82MgSqiM7l5
+	lV9viSF/+SuKgoSxNvpQGlp+lA/4cEM1bu/0spHHY+6hnOEqgK7M3qH1WUoEoJCwdWdEaY
+	GELOWUe6yFpgvaxfGc5iPNviJy8PonQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1762440309;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=pCIJX8/iWnVUuvfe1rGXnP2363EkjNZoIa3wD0HTysg=;
-	b=g92+yCEeQzeK7H/xtQ8RxX0mcYggPveuauVX45NrFsRXUHQWem3OBmr8NhE0PaChlFqnfi
-	DcxekCE+Z6GhaBDA==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b="wU7eIE/a";
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=g92+yCEe
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1762439616; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nKYZuLb6Nw7zZ6Jj1iayriDsnFotAsi2YnGGy/qZxaE=;
+	b=cJfUt/5WY9dWjKauNGghYkyh6CE1i/Bw1taOd7vAPymyisRI4Wv7MWMPFElfXjs27hvHWq
+	FGCwOCOTNY6308CQ==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1762440309; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=pCIJX8/iWnVUuvfe1rGXnP2363EkjNZoIa3wD0HTysg=;
-	b=wU7eIE/awNdBW9X0M+guihUvpSfwGtZp7sB+FdVnnc6rp86D7PwrERWDsdMq2nV0SfheuJ
-	vS9mKCpsNreHzq7FzmTwbH14vUAGfSDnBvcPCAX7tDFa0UUGNH1/VLnRzCEJm0PS+fzlpK
-	6OrczvGIPmpeAZtqXCDUTI8lMGChIyo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1762439616;
+	 in-reply-to:in-reply-to:references:references;
+	bh=nKYZuLb6Nw7zZ6Jj1iayriDsnFotAsi2YnGGy/qZxaE=;
+	b=iIYqVCVW8trouxIau1Jb2p19gyPQLsOzO1T9vdE53k93FoKMpvRHjpW790I82MgSqiM7l5
+	lV9viSF/+SuKgoSxNvpQGlp+lA/4cEM1bu/0spHHY+6hnOEqgK7M3qH1WUoEoJCwdWdEaY
+	GELOWUe6yFpgvaxfGc5iPNviJy8PonQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1762440309;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=pCIJX8/iWnVUuvfe1rGXnP2363EkjNZoIa3wD0HTysg=;
-	b=g92+yCEeQzeK7H/xtQ8RxX0mcYggPveuauVX45NrFsRXUHQWem3OBmr8NhE0PaChlFqnfi
-	DcxekCE+Z6GhaBDA==
+	 in-reply-to:in-reply-to:references:references;
+	bh=nKYZuLb6Nw7zZ6Jj1iayriDsnFotAsi2YnGGy/qZxaE=;
+	b=cJfUt/5WY9dWjKauNGghYkyh6CE1i/Bw1taOd7vAPymyisRI4Wv7MWMPFElfXjs27hvHWq
+	FGCwOCOTNY6308CQ==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 65FC913A31;
-	Thu,  6 Nov 2025 14:33:36 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 52D9C13A31;
+	Thu,  6 Nov 2025 14:45:08 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id EcLNF8CxDGlwSgAAD6G6ig
-	(envelope-from <vbabka@suse.cz>); Thu, 06 Nov 2025 14:33:36 +0000
-Message-ID: <3ba49b47-91a5-4a73-9dbd-b27f3956ae16@suse.cz>
-Date: Thu, 6 Nov 2025 15:33:36 +0100
+	id cLPwEHS0DGnJVQAAD6G6ig
+	(envelope-from <pfalcato@suse.de>); Thu, 06 Nov 2025 14:45:08 +0000
+Date: Thu, 6 Nov 2025 14:45:06 +0000
+From: Pedro Falcato <pfalcato@suse.de>
+To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+	Jonathan Corbet <corbet@lwn.net>, David Hildenbrand <david@redhat.com>, 
+	"Liam R . Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, 
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	Michal Hocko <mhocko@suse.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Jann Horn <jannh@google.com>, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-mm@kvack.org, linux-trace-kernel@vger.kernel.org, 
+	linux-kselftest@vger.kernel.org, Andrei Vagin <avagin@gmail.com>
+Subject: Re: [PATCH v2 2/5] mm: add atomic VMA flags, use VM_MAYBE_GUARD as
+ such
+Message-ID: <y6a4qchmj7jnaogx6u5a3i6lni7v54lj25ipwb7tdtakcudakr@vm6vt7eumxax>
+References: <cover.1762422915.git.lorenzo.stoakes@oracle.com>
+ <94935cf140e3279c234b39e0d976c4718c547c73.1762422915.git.lorenzo.stoakes@oracle.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] mm: implement sticky, copy on fork VMA flags
-Content-Language: en-US
-To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- Jonathan Corbet <corbet@lwn.net>, David Hildenbrand <david@redhat.com>,
- "Liam R . Howlett" <Liam.Howlett@oracle.com>, Mike Rapoport
- <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jann Horn <jannh@google.com>, Pedro Falcato <pfalcato@suse.de>,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-mm@kvack.org,
- linux-trace-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
- Andrei Vagin <avagin@gmail.com>
-References: <cover.1762422915.git.lorenzo.stoakes@oracle.com>
- <9c9e9fb6b767556594b2cef023db01d45d8f8463.1762422915.git.lorenzo.stoakes@oracle.com>
- <3d423848-2b55-4797-bdab-a9b42a373a45@suse.cz>
- <402256c9-8cfe-4943-9b3f-40f21c17292e@lucifer.local>
-From: Vlastimil Babka <vbabka@suse.cz>
-Autocrypt: addr=vbabka@suse.cz; keydata=
- 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
- m6M14QORSWTLRg==
-In-Reply-To: <402256c9-8cfe-4943-9b3f-40f21c17292e@lucifer.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 95473211FA
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-4.51 / 50.00];
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <94935cf140e3279c234b39e0d976c4718c547c73.1762422915.git.lorenzo.stoakes@oracle.com>
+X-Spam-Level: 
+X-Spamd-Result: default: False [-3.80 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	MID_RHS_NOT_FQDN(0.50)[];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[linux-foundation.org,lwn.net,redhat.com,oracle.com,kernel.org,google.com,suse.com,goodmis.org,efficios.com,suse.de,vger.kernel.org,kvack.org,gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[suse.cz:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.cz:mid,suse.cz:dkim]
-X-Rspamd-Action: no action
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_ALL(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[linux-foundation.org,lwn.net,redhat.com,oracle.com,suse.cz,kernel.org,google.com,suse.com,goodmis.org,efficios.com,vger.kernel.org,kvack.org,gmail.com];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo]
 X-Spam-Flag: NO
-X-Spam-Score: -4.51
-X-Spam-Level: 
+X-Spam-Score: -3.80
 
-On 11/6/25 15:18, Lorenzo Stoakes wrote:
-> On Thu, Nov 06, 2025 at 02:46:38PM +0100, Vlastimil Babka wrote:
->> On 11/6/25 11:46, Lorenzo Stoakes wrote:
->> > diff --git a/include/linux/mm.h b/include/linux/mm.h
->> > index 2ea65c646212..4d80eaf4ef3b 100644
->> > --- a/include/linux/mm.h
->> > +++ b/include/linux/mm.h
->> > @@ -527,6 +527,38 @@ extern unsigned int kobjsize(const void *objp);
->> >  #endif
->> >  #define VM_FLAGS_CLEAR	(ARCH_VM_PKEY_FLAGS | VM_ARCH_CLEAR)
->> >
->> > +/* Flags which should result in page tables being copied on fork. */
->> > +#define VM_COPY_ON_FORK VM_MAYBE_GUARD
->> > +
->> > +/*
->> > + * Flags which should be 'sticky' on merge - that is, flags which, when one VMA
->> > + * possesses it but the other does not, the merged VMA should nonetheless have
->> > + * applied to it:
->> > + *
->> > + * VM_COPY_ON_FORK - These flags indicates that a VMA maps a range that contains
->> > + *                   metadata which should be unconditionally propagated upon
->> > + *                   fork. When merging two VMAs, we encapsulate this range in
->> > + *                   the merged VMA, so the flag should be 'sticky' as a result.
->> > + */
->> > +#define VM_STICKY VM_COPY_ON_FORK
->>
->> TBH I don't see why there should be always an implication that copying on
->> fork implies stickiness in merging. Yeah, VM_MAYBE_GUARD is both, but in
->> general, is there any underlying property that makes this a rule?
+On Thu, Nov 06, 2025 at 10:46:13AM +0000, Lorenzo Stoakes wrote:
+> This patch adds the ability to atomically set VMA flags with only the mmap
+> read/VMA read lock held.
 > 
-> Why do you copy on fork? It's because the page tables contain data that won't be
-> reconstructed on fault.
+> As this could be hugely problematic for VMA flags in general given that all
+> other accesses are non-atomic and serialised by the mmap/VMA locks, we
+> implement this with a strict allow-list - that is, only designated flags
+> are allowed to do this.
 > 
-> If that is the case, that applies to any VMA which is merged, and also - since
-> you can't be sure precisely which page tables contain the data we need to
-> propagate - on split too.
+> We make VM_MAYBE_GUARD one of these flags, and then set it under the mmap
+> read flag upon guard region installation.
 > 
-> This is why copy on fork implies sticky IMO.
+> The places where this flag is used currently and matter are:
+> 
+> * VMA merge - performed under mmap/VMA write lock, therefore excluding
+>   racing writes.
+> 
+> * /proc/$pid/smaps - can race the write, however this isn't meaningful as
+>   the flag write is performed at the point of the guard region being
+>   established, and thus an smaps reader can't reasonably expect to avoid
+>   races. Due to atomicity, a reader will observe either the flag being set
+>   or not. Therefore consistency will be maintained.
+> 
+> In all other cases the flag being set is irrelevant and atomicity
+> guarantees other flags will be read correctly.
 
-Hmm I guess that makes some sense.
-> I can update the commit message to make this clear if this makes sense?
+Probably important to write down that the only reason why this doesn't make
+KCSAN have a small stroke is that we are only changing one bit. i.e we can
+only have one bit of atomic flags before annotating every reader.
 
-It would help, thanks. Let's see if future will surprise us with some flag
-where this won't be true :)
+(Source: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/kcsan/permissive.h#n51)
 
->>
->> > +/*
->> > + * VMA flags we ignore for the purposes of merge, i.e. one VMA possessing one
->> > + * of these flags and the other not does not preclude a merge.
->> > + *
->> > + * VM_SOFTDIRTY - Should not prevent from VMA merging, if we match the flags but
->> > + *                dirty bit -- the caller should mark merged VMA as dirty. If
->> > + *                dirty bit won't be excluded from comparison, we increase
->> > + *                pressure on the memory system forcing the kernel to generate
->> > + *                new VMAs when old one could be extended instead.
-> 
-> Note that I'm literally just moving the comment from is_mergeable_vma():
-> 
-> -	 * VM_SOFTDIRTY should not prevent from VMA merging, if we
-> -	 * match the flags but dirty bit -- the caller should mark
-> -	 * merged VMA as dirty. If dirty bit won't be excluded from
-> -	 * comparison, we increase pressure on the memory system forcing
-> -	 * the kernel to generate new VMAs when old one could be
-> -	 * extended instead.
-> 
-> (OK I see you realised that below :P)
-> 
->>
->> So I wonder if VM_SOFTDIRTY should be actually also sticky and not just
->> VM_IGNORE_MERGE. The way I understand the flag suggests it should.
->> Right now AFAICS its rather undefined if the result of vma merge has the
->> flag - depending on which of the two VMA's stays and which is removed by the
->> merge. "the caller should mark merged VMA as dirty" in the comment you're
->> moving here seems not really happening or I'm missing it. __mmap_complete()
-> 
-> No it's not happening, but I can't be blamed for existing incorrect comments :)
-> 
->> and do_brk_flags() do it, so any new areas are marked, but on pure merge of
->> two vma's due to e.g. mprotect() this is really nondetermintic? AFAICT the
->> sticky flag behavior would work perfectly for VM_SOFTDIRTY.
-> 
-> Maybe we inavertantly changed this somehow or maybe it was just wrong, but we're
-> not doing this on merge in general afaict.
+> We additionally update madvise_guard_install() to ensure that
+> anon_vma_prepare() is set for anonymous VMAs to maintain consistency with
+> the assumption that any anonymous VMA with page tables will have an
+> anon_vma set, and any with an anon_vma unset will not have page tables
+> established.
 
-Yeah wouldn't surprised me if we subtly changed it during some refactoring
-and it's not causing such obvious issues to be noticed easily.
+Isn't that what we already had? Or do you mean "*only* set for anonymous VMAs"?
 
-> I think you're right that we should make this sticky, but I'd rather deal with
-> that in a follow-up series/patch as this is out of scope here.
 > 
-> Equally so I'd rather fix the comment in a follow up too for the same reason.
+> Signed-off-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
 
-Sure it's just something I noticed and seems like a good fit for the new
-concept.
+With the nits below and above addressed:
+Reviewed-by: Pedro Falcato <pfalcato@suse.de>
 
+> ---
+>  include/linux/mm.h | 23 +++++++++++++++++++++++
+>  mm/madvise.c       | 22 ++++++++++++++--------
+>  2 files changed, 37 insertions(+), 8 deletions(-)
+> 
+> diff --git a/include/linux/mm.h b/include/linux/mm.h
+> index 2a5516bff75a..2ea65c646212 100644
+> --- a/include/linux/mm.h
+> +++ b/include/linux/mm.h
+> @@ -518,6 +518,9 @@ extern unsigned int kobjsize(const void *objp);
+>  /* This mask represents all the VMA flag bits used by mlock */
+>  #define VM_LOCKED_MASK	(VM_LOCKED | VM_LOCKONFAULT)
+>  
+> +/* These flags can be updated atomically via VMA/mmap read lock. */
+> +#define VM_ATOMIC_SET_ALLOWED VM_MAYBE_GUARD
+> +
+>  /* Arch-specific flags to clear when updating VM flags on protection change */
+>  #ifndef VM_ARCH_CLEAR
+>  # define VM_ARCH_CLEAR	VM_NONE
+> @@ -860,6 +863,26 @@ static inline void vm_flags_mod(struct vm_area_struct *vma,
+>  	__vm_flags_mod(vma, set, clear);
+>  }
+>  
+> +/*
+> + * Set VMA flag atomically. Requires only VMA/mmap read lock. Only specific
+> + * valid flags are allowed to do this.
+> + */
+> +static inline void vma_flag_set_atomic(struct vm_area_struct *vma,
+> +				       int bit)
+> +{
+> +	const vm_flags_t mask = BIT(bit);
+> +
+> +	/* mmap read lock/VMA read lock must be held. */
+> +	if (!rwsem_is_locked(&vma->vm_mm->mmap_lock))
+> +		vma_assert_locked(vma);
+> +
+> +	/* Only specific flags are permitted */
+> +	if (WARN_ON_ONCE(!(mask & VM_ATOMIC_SET_ALLOWED)))
+> +		return;
+
+VM_WARN_ON_ONCE?
+
+-- 
+Pedro
 
