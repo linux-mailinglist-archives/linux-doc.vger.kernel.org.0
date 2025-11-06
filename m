@@ -1,212 +1,100 @@
-Return-Path: <linux-doc+bounces-65642-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65644-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B524C39BBB
-	for <lists+linux-doc@lfdr.de>; Thu, 06 Nov 2025 10:04:58 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC652C3A254
+	for <lists+linux-doc@lfdr.de>; Thu, 06 Nov 2025 11:15:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id E9D611A259E2
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Nov 2025 09:03:54 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 77AF1350908
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Nov 2025 10:15:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 811FF30AACB;
-	Thu,  6 Nov 2025 09:03:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AAF173074A4;
+	Thu,  6 Nov 2025 10:14:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="eTYNA+OR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-il1-f198.google.com (mail-il1-f198.google.com [209.85.166.198])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C69D8309F1F
-	for <linux-doc@vger.kernel.org>; Thu,  6 Nov 2025 09:03:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.198
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 078A624A066;
+	Thu,  6 Nov 2025 10:14:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762419800; cv=none; b=iMN1eqJuDNijTxLTcqg5Wow7zCx7VFIS1obXKPgb09fMafAUk/oU07VRTqxQX0+d1b5Bhi8QIOpEVuY+0Xm+XOThMBD12xjJzUPHwG1GI1kOKHqW1fHMN6iMz02JHM8KSaRa9nVY+a+mSqZzs0mI+SN2b7l/dvvW0boMXeEA2QY=
+	t=1762424071; cv=none; b=hFVPIaioaVeCzxczC37I+VuXemIZy+iacqFooL9nmuIoOBUIht9YEZRM7ZuB5SeAY6pdb1XqNgpmZFOzhAOIzMl81OcxTL28EHH8t3Zp3aByX48Qes6fgrRQVpXTQxf6tYh6zAnfMk8wXUD+N3WLo/yOMNWhyfBW24Gl+SxSaMg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762419800; c=relaxed/simple;
-	bh=3BiETXl/7KYiMgO2xmY43yE1EckvGSBZswtZukHv/ok=;
-	h=MIME-Version:Date:In-Reply-To:Message-ID:Subject:From:To:Cc:
-	 Content-Type; b=Va4DdzCxBr+a6R3fkuBKqUnKo9E0dev6Vi8aYMg8dZpYcVZ+9XM+8KPI4KxpeG8d8whzO44/YvAQY+me6eY2WpXJWibr4tjlLOqxoLvyb4iLaIevi4XhvkJ6KkUVsKwvxblCm7nAlwLEe0RNjAaIXI/ufMQjvmjiNRnwiAp1Aqw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=syzkaller.appspotmail.com; spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com; arc=none smtp.client-ip=209.85.166.198
-Authentication-Results: smtp.subspace.kernel.org; dmarc=fail (p=none dis=none) header.from=syzkaller.appspotmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
-Received: by mail-il1-f198.google.com with SMTP id e9e14a558f8ab-4335b48ad16so622755ab.2
-        for <linux-doc@vger.kernel.org>; Thu, 06 Nov 2025 01:03:18 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762419798; x=1763024598;
-        h=cc:to:from:subject:message-id:in-reply-to:date:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=NM+vtYwd4Q/5mXYOusRezwQD6kU0yTjiwGI1zHoa56s=;
-        b=qXzGkNHlv96hfwUdngdiydE9YvRq29cn6fIHx+aAZoFDk2De5B3q1VFlf/wFythT/+
-         +6g/wW/bp9crUxEc8YCp6iezx+8yXYU73Y5RzhCqTOUYpiARVj7vOpQ7psmNzgyBic4V
-         EVCtQLOrZ6cIERuswI5FiKLBRzSKoNbrdJ4DgMP/Lm4GlSH/yeidn0G0MRIW0rA/QtzB
-         DkjvGidHOzBRozFwf/Wo1imBJv5xH5U/weS1ODS5Fd1FqJaPE2dNR9oNlBEDuNDWK91H
-         RTZx71A6vB/y+I+ALSbQdl6PZRnnI6ZZIdGmwSHxSDqpqp5dAg5sa7VlfOw/vK0qtm4T
-         ygAQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVonBtD2YpzPWE8XjTqbR4ywq31Dtc2S7Nsl1wglmxhlWSQznOiJinNzwm9+dSUC4ZK7qKdfQK55pk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxUbJVC1cYCDNy4tjUQu7qZp3jEejMqsc3wtty53ASShADexiKS
-	GB/GcO2k8IcOZimJhJLEIlV0TsYYdRXvH7jsYore7Rjqfrnqo2hEsLKIU4B5igBjMQftM4TPwv0
-	bx5sjd9X/Fa+qmNnrWyUtSH9ma5eW97LLoTRz7NP0g8Zc6w9iIRTo70m+RwA=
-X-Google-Smtp-Source: AGHT+IHYw6BpNjU970LvwCOmCC6rnyZOB0LxuLx4sUOzoknP7LuxVppDcrNAehHNomEHUHqlUyTcseQg9qNPR0QWUuXPYjfjkyEz
+	s=arc-20240116; t=1762424071; c=relaxed/simple;
+	bh=7M1iZ3rkswdCuq+agy1wdVidfs0s79R5fvdWf58PmJo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=laJ+bDnZcQzn9fufqACtH5fNUgKKnhK0d9AMqx0Tgg4SEbbvi6oAuPUBXW7qCmAXEqBqcm8vz75q1Tay8HhnJKly+XWEko2CiRBpHFku0I2JerLa0KawXbtRW4iGx4DMCiMMoVEKFl8PQIZPH0KdQSU3sXuxL72QrK1pUgP1rNI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=eTYNA+OR; arc=none smtp.client-ip=198.175.65.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1762424070; x=1793960070;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=7M1iZ3rkswdCuq+agy1wdVidfs0s79R5fvdWf58PmJo=;
+  b=eTYNA+ORZEOzszNXCQmwmj+2sSbaYs269dfMPhPemQFO1Lb/VEKQL6tv
+   TaR/wdYSkJ9/xCWR63h7PnMVOLS5qDCaXUvRjUGP7Uc6C1+/DL6t2Ptx7
+   2mziLCowMt118jAElwMGhN2ux30V01eeZgirZ65OiRNZ/DbkUUtZc/wtJ
+   EiXmwRRMxcG/XVnPNaDcmav6J3OQ5aNl+yGhKrPP57Zco75bLHrcYha1b
+   nkaaLXWXWX5HCjmjje+8RLG/7TS/D0sn55xlBqpi/KNDB3QuzuXzoBipw
+   YzU8PhwADE8NCfL6k8dPNE8fRr5MiD22h/AaSNW8cWMbW1fZ8COtWbXmK
+   g==;
+X-CSE-ConnectionGUID: TqUw5X3MQiOIPPcXqaeTzA==
+X-CSE-MsgGUID: RcqR5B67QL6nh4w+SuFihg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11604"; a="76006629"
+X-IronPort-AV: E=Sophos;i="6.19,284,1754982000"; 
+   d="scan'208";a="76006629"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2025 02:14:29 -0800
+X-CSE-ConnectionGUID: csGG4W1HRHGKYYRqfmPPhg==
+X-CSE-MsgGUID: sN3CCagrQVCdLhCLqF0J1A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,284,1754982000"; 
+   d="scan'208";a="188000772"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by fmviesa008.fm.intel.com with ESMTP; 06 Nov 2025 02:14:27 -0800
+Received: by black.igk.intel.com (Postfix, from userid 1003)
+	id 7F88995; Thu, 06 Nov 2025 11:14:26 +0100 (CET)
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Subject: [PATCH v1 0/2] doc: Handle IDTENTRY and fix apic.c
+Date: Thu,  6 Nov 2025 11:12:24 +0100
+Message-ID: <20251106101416.1924707-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:1c08:b0:433:2cdf:6457 with SMTP id
- e9e14a558f8ab-4334079054fmr85278665ab.12.1762419797969; Thu, 06 Nov 2025
- 01:03:17 -0800 (PST)
-Date: Thu, 06 Nov 2025 01:03:17 -0800
-In-Reply-To: <20251105161450.1730216-1-skorodumov.dmitry@huawei.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <690c6455.050a0220.3d0d33.0119.GAE@google.com>
-Subject: [syzbot ci] Re: ipvlan: support mac-nat mode
-From: syzbot ci <syzbot+cia97091be86436383@syzkaller.appspotmail.com>
-To: andrew@lunn.ch, andrey.bokhanko@huawei.com, corbet@lwn.net, 
-	davem@davemloft.net, edumazet@google.com, horms@kernel.org, kuba@kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	netdev@vger.kernel.org, pabeni@redhat.com, skorodumov.dmitry@huawei.com
-Cc: syzbot@lists.linux.dev, syzkaller-bugs@googlegroups.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-syzbot ci has tested the following series
+Handle DEFINE_IDTENTRY_IRQ() and fix apic.c kernel-doc issues.
+Assumed to go via doc Git tree. Please, Ack.
 
-[v3] ipvlan: support mac-nat mode
-https://lore.kernel.org/all/20251105161450.1730216-1-skorodumov.dmitry@huawei.com
-* [PATCH net-next 01/14] ipvlan: Preparation to support mac-nat
-* [PATCH net-next 02/14] ipvlan: Send mcasts out directly in ipvlan_xmit_mode_l2()
-* [PATCH net-next 03/14] ipvlan: Handle rx mcast-ip and unicast eth
-* [PATCH net-next 04/14] ipvlan: Added some kind of MAC NAT
-* [PATCH net-next 05/14] ipvlan: Forget all IP when device goes down
-* [PATCH net-next 06/14] ipvlan: Support GSO for port -> ipvlan
-* [PATCH net-next 07/14] ipvlan: Support IPv6 for learnable l2-bridge
-* [PATCH net-next 08/14] ipvlan: Make the addrs_lock be per port
-* [PATCH net-next 09/14] ipvlan: Take addr_lock in ipvlan_open()
-* [PATCH net-next 10/14] ipvlan: Don't allow children to use IPs of main
-* [PATCH net-next 11/14] ipvlan: const-specifier for functions that use iaddr
-* [PATCH net-next 12/14] ipvlan: Common code from v6/v4 validator_event
-* [PATCH net-next 13/14] ipvlan: common code to handle ipv6/ipv4 address events
-* [PATCH net-next 14/14] ipvlan: Ignore PACKET_LOOPBACK in handle_mode_l2()
+Andy Shevchenko (2):
+  doc: kdoc: Handle DEFINE_IDTENTRY_*() cases
+  x86/apic: Update kernel-doc to avoid warnings
 
-and found the following issue:
-WARNING: suspicious RCU usage in ipvlan_init
+ arch/x86/kernel/apic/apic.c     |  4 +++-
+ scripts/lib/kdoc/kdoc_parser.py | 27 +++++++++++++++++++++++----
+ 2 files changed, 26 insertions(+), 5 deletions(-)
 
-Full report is available here:
-https://ci.syzbot.org/series/349ca33e-4ae2-4720-9a69-17a2a9e17107
+-- 
+2.50.1
 
-***
-
-WARNING: suspicious RCU usage in ipvlan_init
-
-tree:      net-next
-URL:       https://kernel.googlesource.com/pub/scm/linux/kernel/git/netdev/net-next.git
-base:      01cc760632b875c4ad0d8fec0b0c01896b8a36d4
-arch:      amd64
-compiler:  Debian clang version 20.1.8 (++20250708063551+0c9f909b7976-1~exp1~20250708183702.136), Debian LLD 20.1.8
-config:    https://ci.syzbot.org/builds/d6598a0d-2fcb-499d-95fc-30c5096555dc/config
-
-batman_adv: batadv0: Not using interface batadv_slave_1 (retrying later): interface not active
-hsr_slave_0: entered promiscuous mode
-hsr_slave_1: entered promiscuous mode
-=============================
-WARNING: suspicious RCU usage
-syzkaller #0 Not tainted
------------------------------
-./include/linux/inetdevice.h:239 suspicious rcu_dereference_check() usage!
-
-other info that might help us debug this:
-
-
-rcu_scheduler_active = 2, debug_locks = 1
-2 locks held by syz-executor/6496:
- #0: ffffffff8ea2f980 (&ops->srcu#2){.+.+}-{0:0}, at: rtnl_link_ops_get+0x23/0x250
- #1: ffffffff8f2cb3c8 (rtnl_mutex){+.+.}-{4:4}, at: rtnl_newlink+0x8e9/0x1c80
-
-stack backtrace:
-CPU: 1 UID: 0 PID: 6496 Comm: syz-executor Not tainted syzkaller #0 PREEMPT(full) 
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
-Call Trace:
- <TASK>
- dump_stack_lvl+0x189/0x250
- lockdep_rcu_suspicious+0x140/0x1d0
- ipvlan_init+0xff2/0x1260
- register_netdevice+0x6bf/0x1ae0
- ipvlan_link_new+0x57a/0xc70
- rtnl_newlink_create+0x310/0xb00
- rtnl_newlink+0x16e4/0x1c80
- rtnetlink_rcv_msg+0x7cf/0xb70
- netlink_rcv_skb+0x208/0x470
- netlink_unicast+0x82f/0x9e0
- netlink_sendmsg+0x805/0xb30
- __sock_sendmsg+0x21c/0x270
- __sys_sendto+0x3bd/0x520
- __x64_sys_sendto+0xde/0x100
- do_syscall_64+0xfa/0xfa0
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f114c590e03
-Code: 64 89 02 48 c7 c0 ff ff ff ff eb b7 66 2e 0f 1f 84 00 00 00 00 00 90 80 3d 61 77 22 00 00 41 89 ca 74 14 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 75 c3 0f 1f 40 00 55 48 83 ec 30 44 89 4c 24
-RSP: 002b:00007ffecaf08958 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
-RAX: ffffffffffffffda RBX: 00007f114d314620 RCX: 00007f114c590e03
-RDX: 0000000000000058 RSI: 00007f114d314670 RDI: 0000000000000003
-RBP: 0000000000000001 R08: 00007ffecaf08974 R09: 000000000000000c
-R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000003
-R13: 0000000000000000 R14: 00007f114d314670 R15: 0000000000000000
- </TASK>
-
-=============================
-WARNING: suspicious RCU usage
-syzkaller #0 Not tainted
------------------------------
-drivers/net/ipvlan/ipvlan_main.c:238 suspicious rcu_dereference_check() usage!
-
-other info that might help us debug this:
-
-
-rcu_scheduler_active = 2, debug_locks = 1
-2 locks held by syz-executor/6496:
- #0: ffffffff8ea2f980 (&ops->srcu#2){.+.+}-{0:0}, at: rtnl_link_ops_get+0x23/0x250
- #1: ffffffff8f2cb3c8 (rtnl_mutex){+.+.}-{4:4}, at: rtnl_newlink+0x8e9/0x1c80
-
-stack backtrace:
-CPU: 0 UID: 0 PID: 6496 Comm: syz-executor Not tainted syzkaller #0 PREEMPT(full) 
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
-Call Trace:
- <TASK>
- dump_stack_lvl+0x189/0x250
- lockdep_rcu_suspicious+0x140/0x1d0
- ipvlan_init+0x1025/0x1260
- register_netdevice+0x6bf/0x1ae0
- ipvlan_link_new+0x57a/0xc70
- rtnl_newlink_create+0x310/0xb00
- rtnl_newlink+0x16e4/0x1c80
- rtnetlink_rcv_msg+0x7cf/0xb70
- netlink_rcv_skb+0x208/0x470
- netlink_unicast+0x82f/0x9e0
- netlink_sendmsg+0x805/0xb30
- __sock_sendmsg+0x21c/0x270
- __sys_sendto+0x3bd/0x520
- __x64_sys_sendto+0xde/0x100
- do_syscall_64+0xfa/0xfa0
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f114c590e03
-Code: 64 89 02 48 c7 c0 ff ff ff ff eb b7 66 2e 0f 1f 84 00 00 00 00 00 90 80 3d 61 77 22 00 00 41 89 ca 74 14 b8 2c 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 75 c3 0f 1f 40 00 55 48 83 ec 30 44 89 4c 24
-RSP: 002b:00007ffecaf08958 EFLAGS: 00000202 ORIG_RAX: 000000000000002c
-RAX: ffffffffffffffda RBX: 00007f114d314620 RCX: 00007f114c590e03
-RDX: 0000000000000058 RSI: 00007f114d314670 RDI: 0000000000000003
-RBP: 0000000000000001 R08: 00007ffecaf08974 R09: 000000000000000c
-R10: 0000000000000000 R11: 0000000000000202 R12: 0000000000000003
-R13: 0000000000000000 R14: 00007f114d314670 R15: 0000000000000000
- </TASK>
-
-
-***
-
-If these findings have caused you to resend the series or submit a
-separate fix, please add the following tag to your commit message:
-  Tested-by: syzbot@syzkaller.appspotmail.com
-
----
-This report is generated by a bot. It may contain errors.
-syzbot ci engineers can be reached at syzkaller@googlegroups.com.
 
