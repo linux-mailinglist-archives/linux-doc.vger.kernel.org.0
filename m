@@ -1,127 +1,136 @@
-Return-Path: <linux-doc+bounces-65815-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65818-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECDBEC3EDEE
-	for <lists+linux-doc@lfdr.de>; Fri, 07 Nov 2025 09:05:24 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 06FE3C3EE90
+	for <lists+linux-doc@lfdr.de>; Fri, 07 Nov 2025 09:15:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 7E9593A77EB
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Nov 2025 08:05:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9DB403B0DF0
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Nov 2025 08:13:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F00A530F930;
-	Fri,  7 Nov 2025 08:05:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7784F30FF23;
+	Fri,  7 Nov 2025 08:13:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="SKPYMPnN"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NaxeFPhz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 340F030EF63;
-	Fri,  7 Nov 2025 08:05:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC06130F954
+	for <linux-doc@vger.kernel.org>; Fri,  7 Nov 2025 08:13:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762502709; cv=none; b=E3PybkqgGdjui//E5P88WpApfoXXwT577soXMEuE3yO87Jf3SqjfUD5xlXOVxucPVxHtlQPTBqkB2lwR7/misfvhV/ftYoFwfNVN5hKyTVtx9PEsF86g32nlDgsauACDukKQWLhHaBvN+5s96y6+fwONCYJ6cJQFJb2wK1apbsI=
+	t=1762503206; cv=none; b=rkDxWvXkoJFOI9gKWGOUl/aFaKTTrUkT5NqJXws2Gu/vxeyfsXSAVaOVmcsdzzuhqBkBgwFW9KcPZuqb+zBvX6YWXvOEcS5HJ0EJ0iT4I7NllDC8YJJy8ka4VWtHuxR9jjiRQphC0J7C+YUe4zRyeuFCFrEa2zXkOo4cK+og7RY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762502709; c=relaxed/simple;
-	bh=przJ7zVMB3r5mMPHaYCcx2207IRB2F5XNQuAewa3PMk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eyfJAduDtO++Vaqct0LI9snlD9oxr21zh9JApTKAJQrqwkBTQjSl271ONHEyx60P3eFR5Xb3GBE4v9748l2kzQr+4niD8179Snt7n0tIJLIW8lL4hlNt//9MH6z0H8wedU/BWkj7ildRAhx27bNYG2Ptx4ZdSBAScxu0I75yfB0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=SKPYMPnN; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from [172.27.2.41] (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 5A781SNm1539466
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-	Fri, 7 Nov 2025 00:01:29 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 5A781SNm1539466
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025102301; t=1762502491;
-	bh=RvdlJ/9DuH9+09DL76xBKmhvDyDdYgFyini9IoyNZd0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=SKPYMPnNYOwSQ1zwk+IDS2vlz+fF3SGn5VdvJQX4zK+liJvTb/iSfukgv1mbgrHS8
-	 wXg4egBlHORzF8Xa9JKaZHZF9GM1b1qN44qovNbSl5Kc1MOapaYOO0eEG+1ZbmEynD
-	 NeU6Coq3nJ3g5TthmBFPtUOoIuaZ/Hu5B5vVTwr8J/gBBDW/SIuw/3p+J14TvP08cf
-	 vCEXMcQkFQl1+y15isd6KfKasssgSz+bHJNkx9sKmzC2xcAoDKtzHYbFGMT1Uf7RCy
-	 gzzHwhyrTiSFHfKMX4hMuXBgwwYPFcGJEpN7bzKV+Jl5dfCsS9OqXsVJjniarBYZ1h
-	 0vsDlQbdXnOnw==
-Message-ID: <255724be-a6d8-4aa6-94f9-1e6ffba3a3cc@zytor.com>
-Date: Fri, 7 Nov 2025 00:01:28 -0800
+	s=arc-20240116; t=1762503206; c=relaxed/simple;
+	bh=L2WkKVq1YkpsdiT6yHvKw0l7RT+zYDKnfrxQFfdUrw0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=BZCRyQVZXcabdId57fIroEZQOcwASUP9EWCd3QUtdcd3zxwV1j2k9uctpBHbj4k/41ShzIDvdLwz8qIPJ0zfzAWn6rxSrzPh7RNxyArdHcUBFBItIUpazIyWXP93VeYCoZ+U4VPQDguIO/qbuGnrlQAIqZ2PU0q63Lmmk3pQhS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NaxeFPhz; arc=none smtp.client-ip=209.85.208.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-640b4a52950so719119a12.1
+        for <linux-doc@vger.kernel.org>; Fri, 07 Nov 2025 00:13:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762503203; x=1763108003; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iOIIVZmEuR4lMVP1407hIBpNtWT/l6DfS/U3dPctlwM=;
+        b=NaxeFPhznr3qaL/YsC51SpApEyxbOCr4AKR0DlLu6SYd49Td/I3JFK2nU+Wa5BNU/I
+         kqEHvSWZkXaZpXSuYmNIuLI2Bh37i/t0luSL2+D0MKLnS+waiRRViQAluPLEPGmIl3jt
+         gVpkfE/N2DgglXYKH/fMCt4V+vPnz0v/r7ZhD3luhAcOcNs4fYcUcuOEyZSBGHoK0vel
+         WBWVfmR2vtEiKGkjTxFkh89RRNpI4ooHHowKdY5tAf6GcZEvwZvW5xMuWW+QxKWfW8RI
+         lzhRhxKdsZPLQlkI4+gZtOfSqQY0Bb9isYzPL/VlpNlDYrH3U07lQscPUZNRKxkqtDF9
+         BMpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762503203; x=1763108003;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iOIIVZmEuR4lMVP1407hIBpNtWT/l6DfS/U3dPctlwM=;
+        b=X/CGps+msac1okEkV2zDBgejV8yj00zSBe9f0RxvQBcLQqOO4jkBB+pFzScaC0i4eu
+         gHmTngJpRYbF1npd0Kk39Y3oWpWJUaoRCsb0s0rgjko/ZPg2Pt6UdcuKYS4leL3r4qOQ
+         yoYVFbsNPeBybZAq+yY3TVdlrSfhfXcihzbp8WRikZWX2QDNgH0b/UXAs1grAto+2XAS
+         gF+G3NT6Lswp96RZI3a/ad5io5ZS25RBFiZRJ2I041diL3Tlb1zaqDqYUeKaWD+Tlzqa
+         XZPWIbUkz5LsDNkk34vYi1ReJf0tpB7lA686cDXgDY6v9U/Tp77D4nC09hgnyWciVIfP
+         pvjg==
+X-Forwarded-Encrypted: i=1; AJvYcCUB9RLvlOkk3kzPFNtFmuAdtsIuwm1owdqGMX1n5q2ueyeFAd7f/5VN5lwl8QdQcfZkoZbRcBlBVn4=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzm75dDl69pl9g+xgbr6B9g/PZT4pKXTpLY7bEUvOrDcBH3jw12
+	D3aSazda51WaHYOtijUCGhqbmwXjE3+kNJpFHkv/yJ24h07rGN2g/Pyz
+X-Gm-Gg: ASbGncvZvO6v4A4zLJsmpZag81NvHCU8u8u02V0UFJ0YcA8SF1Dj3tmgSOGGvYykyJa
+	Y9cjGpUOVx7b1u81R+O91jxGk/D2Q+DHAPG41ZqyBAk+wAWYygrftsJrivbCC74wC7sLrBWn3LG
+	YeuwRABMAKEGvN2yp2s00qx3qXJ8Hny1Ki4JSu25XnbkVvO4tAuNoODvN1MNao+KWLvqJGtxuwe
+	nMi6A2OGup+5sTfE1ykPlmZGpuxqtpMnVuG1StQnEntrZtvLk+dZnKutjDGVxLtSjh8HiP9TnRl
+	4ThurS1w9Eyjp68TB5KBfGmoDW4p0zXop1dfUvO9qAxmQfGLIdbT36WMSSPID62xwhOLT/iqwTO
+	dM572Q0YutBbHSZdKxIxucCpVQUqSt8sKjM5qKNTcvTKpl//xk5nCUOm8UW7g5L9RMW3VXTKnrS
+	ei
+X-Google-Smtp-Source: AGHT+IG665bW/Iuh/8EXmRznhqf6ur9YSSabWYQHPQ8dXHHX+fgwFkGMvxLWdfgY4F29RVykMMnqWg==
+X-Received: by 2002:a05:6402:3045:10b0:640:af04:d718 with SMTP id 4fb4d7f45d1cf-6413f0771b9mr1621773a12.30.1762503202832;
+        Fri, 07 Nov 2025 00:13:22 -0800 (PST)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6411f6780b7sm3665313a12.0.2025.11.07.00.13.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Nov 2025 00:13:20 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id A7E38420A6A8; Fri, 07 Nov 2025 15:13:12 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux IOMMU <iommu@lists.linux.dev>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Jason Gunthorpe <jgg@ziepe.ca>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Samiullah Khawaja <skhawaja@google.com>,
+	Pasha Tatashin <pasha.tatashin@soleen.com>,
+	Lu Baolu <baolu.lu@linux.intel.com>
+Subject: [PATCH v2 0/2] genpt documentation fixes
+Date: Fri,  7 Nov 2025 15:12:59 +0700
+Message-ID: <20251107081300.13033-2-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.51.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 9/9] x86/cpu: Enable LASS by default during CPU
- initialization
-To: Dave Hansen <dave.hansen@intel.com>, Sohil Mehta <sohil.mehta@intel.com>,
-        x86@kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
-        Borislav Petkov <bp@alien8.de>
-Cc: Jonathan Corbet <corbet@lwn.net>, Andy Lutomirski <luto@kernel.org>,
-        Josh Poimboeuf <jpoimboe@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        "Kirill A . Shutemov" <kas@kernel.org>, Xin Li <xin@zytor.com>,
-        David Woodhouse <dwmw@amazon.co.uk>,
-        Sean Christopherson <seanjc@google.com>,
-        Rick Edgecombe <rick.p.edgecombe@intel.com>,
-        Vegard Nossum <vegard.nossum@oracle.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Geert Uytterhoeven <geert@linux-m68k.org>, Kees Cook <kees@kernel.org>,
-        Tony Luck <tony.luck@intel.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-efi@vger.kernel.org
-References: <20251029210310.1155449-1-sohil.mehta@intel.com>
- <20251029210310.1155449-10-sohil.mehta@intel.com>
- <789ADBB5-F7AC-4B08-B343-F23260FB8FBC@zytor.com>
- <d20a5e9d-dc0b-4bd2-89bb-95dbded8a581@intel.com>
-Content-Language: en-US, sv-SE
-From: "H. Peter Anvin" <hpa@zytor.com>
-In-Reply-To: <d20a5e9d-dc0b-4bd2-89bb-95dbded8a581@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=889; i=bagasdotme@gmail.com; h=from:subject; bh=L2WkKVq1YkpsdiT6yHvKw0l7RT+zYDKnfrxQFfdUrw0=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJm8K7T8b25LFBZc/qP+aoJmfOcx7kTmCJe83VsDpX+uN d+yY1psRykLgxgXg6yYIsukRL6m07uMRC60r3WEmcPKBDKEgYtTACZy5x/DH77TBhliqz7NbmQx erzRocQuhy3w6CX2Uk7Xmf11j67zH2L4zf6sR97r3uS+rqjU1Sw3pm3KOpwp5Jn5YL/WF979yQI XeAA=
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
-On 2025-10-30 09:27, Dave Hansen wrote:
-> On 10/30/25 01:40, H. Peter Anvin wrote:
->> Legacy vsyscalls have been obsolete for how long now?
-> 
-> I asked Sohil to start throwing out all the non-essential bits from this
-> series. My thought was that we could get mainline so that LASS itself
-> could be enabled, even if it was in a somewhat weird config that a
-> distro would probably never do.
-> 
-> After that is merged, we can circle back and decide what to do with the
-> remaining bits like CR pinning and vsyscall emulation. I don't think any
-> of those bits will change the basic desire to have LASS support in the
-> kernel.
-> 
-> Does that sound like a sane approach to everyone?
+Hi,
 
-XONLY vsyscall emulation should be trivial, though (just look for the magic
-RIP values, just like the page fault code does now, too.) The FULL emulation
-mode is completely irrelevant these days, so I don't think it matters at all.
+Here are fixes for two htmldocs warnings in generic radix page table
+documentation. The first one is reported in linux-next [1], and the
+second one is also found when making htmldocs locally to reproduce the
+former.
 
-EFI handling is similarly straightforward: just disable CR4.LASS right before
-calling EFI, and enable it on return. As long as we are *already* in the
-efi_mm context, it is perfectly safe to disable CR4.LASS, because there *is no
-user memory mapped at that point*.
+Enjoy!
 
-These two things should only be a few lines of code each, and I don't see any
-reason to further elaborate them at this time (to handle FULL emulation, or to
-take a LASS trap inside EFI to write a shame-the-vendor message; if we wanted
-to do that, it would be better to make that independent of LASS and empty out
-efi_mm entirely.
+Changes since v1 [2]:
 
-Am I missing something?
+  - s/to set/to read/ (Randy)
 
-	-hpa
+[1]: https://lore.kernel.org/linux-next/20251106143925.578e411b@canb.auug.org.au/
+[2]: https://lore.kernel.org/linux-doc/20251106073845.36445-1-bagasdotme@gmail.com/
 
+Bagas Sanjaya (2):
+  Documentation: genpt: Don't use code block marker before iommu_amdv1.c
+    include listing
+  iommupt: Describe @bitnr parameter
+
+ Documentation/driver-api/generic_pt.rst | 2 +-
+ drivers/iommu/generic_pt/pt_common.h    | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+
+base-commit: 75d9ef7cf1e694e5c0fb387be99f04acc7f864a4
+-- 
+An old man doll... just what I always wanted! - Clara
 
 
