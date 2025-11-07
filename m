@@ -1,80 +1,80 @@
-Return-Path: <linux-doc+bounces-65899-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-65901-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0DB1C41B04
-	for <lists+linux-doc@lfdr.de>; Fri, 07 Nov 2025 22:07:24 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id E79E6C41B61
+	for <lists+linux-doc@lfdr.de>; Fri, 07 Nov 2025 22:09:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 67A9C345A2F
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Nov 2025 21:07:24 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 3769D4F8DAC
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Nov 2025 21:07:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C2DF5340DAC;
-	Fri,  7 Nov 2025 21:05:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8FF1C33FE33;
+	Fri,  7 Nov 2025 21:05:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="N3nULHcE"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="PHmV1+0H"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 942B8340275
-	for <linux-doc@vger.kernel.org>; Fri,  7 Nov 2025 21:05:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8289340DA3
+	for <linux-doc@vger.kernel.org>; Fri,  7 Nov 2025 21:05:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762549557; cv=none; b=P7jYpS08QirV3cL2CBehuo22jTMSWgf8QFr6mbvVVhprGKjub+kRi7zl1Wm+Vglft91Tz2mTkDieiJWDG2iGUTd4qgXgy9bJC6R8pohsVPaCKTxqFXCK4LM2ZGg18wyvKZm9wTp6nmiJefok+MEo4NBu8ScnWqSGuDz0cCDqyxs=
+	t=1762549559; cv=none; b=lQDYNOEAt11nSnTkRnZB7+5S7B+ufvrl31G8GbKrchKf2Y69NditRiWMXkbCb3nh26OvXYseAnlIluZlr1zm5JKTp48tzHUarX91JQl6KQLQfVrGb0Z2nsa+26iR9osIGJY8rRXvedD4Nxtj+DB2l7eE6QMbuQB+Wg7+dcxsYHk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762549557; c=relaxed/simple;
-	bh=uKOjvZQKso7oyRqI+EFwVBOcyaYMS+ZmmItsS5LMjXs=;
+	s=arc-20240116; t=1762549559; c=relaxed/simple;
+	bh=EhnYH4OG1yQcNdExdTlX8DtkF4c1hxEUjRTi3VHc5ZE=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=LHVYNQBsSwg5Z1pyRyRU1PyDZnMKKqazuUMxSBJRiZdJLR0HD1fmVD6WKXzN9+uJ2PF9QzlDxcktpOKCoJN2+K1ZFsOjIiuMbbyJJfNrvCpdm7q2qX0FiJFLF4G0CclbihMI7fYUBUHgTMgEbNxzcITcE5iZbPqhHxBLpT5DVDo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=N3nULHcE; arc=none smtp.client-ip=209.85.128.177
+	 MIME-Version; b=QLIBNIcox4ldU6aUiLuCA1GfnRxPhLUXXbdtFYH8CSpeB7910Pjxbm3dodqLi9l4Km/yapPGBkUIRXuC4sAQuo0c+iSrXFBHkaRcGoWZPMa2LBEYj2Iiq5/OSzzBtTIyVhnlA0JIX6iWVpiRSUs1EKYDp05gU2hoeHDkDagVz0A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=PHmV1+0H; arc=none smtp.client-ip=209.85.128.173
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-78488cdc20aso12735097b3.1
-        for <linux-doc@vger.kernel.org>; Fri, 07 Nov 2025 13:05:54 -0800 (PST)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-786943affbaso9584387b3.0
+        for <linux-doc@vger.kernel.org>; Fri, 07 Nov 2025 13:05:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1762549553; x=1763154353; darn=vger.kernel.org;
+        d=soleen.com; s=google; t=1762549555; x=1763154355; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=eGX1JNngtcEnINGvpjjZOvPiM15RTyTbrS+2qficDEY=;
-        b=N3nULHcEfeJW9vb0K9acHjVYC8tnA7xB98Bn2gv4gK2+UgBeEgiK2dMxzDLMwHON7c
-         es08N7fsAL1V1801m24UcvZ/Wa83Iq2hRAE5dPkLDuf+bV7oLVmb77nuawry8Dmw+7qd
-         sw2DYwiPslgPCcNI3gbBvUIkO4wcnsiTJa90lv5ki74kzSpxxUdmRp2REjhjh6LNSDC7
-         ch5QyN9+L11E1xRNc/PtkTq0iYTZb1ZCudkOozxk03ZECJ9LEjLB5X1YkO6L6l1pjKiv
-         V8JCoU5ni/TiPTx/YxwjOzvDuKnmooWw6hWpfUAUioekHuDP8CU83G2nOButDFevqZzJ
-         Qr2Q==
+        bh=sFdqd9exB0x0hPzLUkgD+8tlEyMvj6WmHDEVMBDy3B0=;
+        b=PHmV1+0HTM4I2RRR9QcPLEkj+0X2mOIPFW/c/iVOIQ+G6lMV+NVL/RE7ppGcfIxdhW
+         0U2jtlN5hjXIMoLjs9CR/aL6Qm7CtCEAOu1+ePqGvVA9m10YXnJ6rLK9gk/wqI9tLPwd
+         nvoQsfv2n0I328Ox6vxQ665eJ1aVcMhdC+4Ui33ojb0dtauuJ+lg2sL6oLulnE1s6FQi
+         xK+dsyDjzxu8D+irAcaw+oX7xa5M0NzXzQ/ZWqFxQ0Hm9P+3NCCwlTtmgvsxfYoYefqF
+         PUwoxvORZLZcZM0CpAomnD8/VOQViGHv3LutaAjgIep/8BOrk7no4IInRZMBmqYBqC8C
+         aNeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762549553; x=1763154353;
+        d=1e100.net; s=20230601; t=1762549555; x=1763154355;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=eGX1JNngtcEnINGvpjjZOvPiM15RTyTbrS+2qficDEY=;
-        b=OEqQvULsu7dc4N69BIk5kpYMLoxXu4wbwXozxVA+8FoR4+BR0RZ20LqKtvBMuOVeHi
-         R4BLCr9FTglScHpvCOmYXaswpSb740ACF52bkuIuAIy3AkRSTFYybSq9UFmXlg0juEAA
-         /0YasiURZGSRe2/WspksON66PQODQFe6lY20vEnZHSfOM1iGo79hFmq5k7bwUT9rq77M
-         N1RUCa/4hdQQcz9vWH1QV23vrwvf60YH3LFEoWEdyGxcN4qW4cYUZgW1h6KJ8EvvJ0yy
-         PKDx3qitMfZaK8Gk6aXiB5YCX/fk9koXVhB0sQ34mfzWpIl64yjtLekvah9kCaiFvUeW
-         lGLA==
-X-Forwarded-Encrypted: i=1; AJvYcCU2E4dMokgLRJze5ZlCnnPN1J2IatTsq1Wg6SnX5iGnBsHuNkKUhPciSz9HL9sTdF3WvKy6diMLB/w=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx9AdFIe86m6pccz+2TTfsKJAsM/YJTJzbXZ09/6Eai9Y/38XX+
-	E3Ucvf+7vL42SMjwDdpuTeB4XdUAFBON59CQ8Ubvo7LKngN1PmXgxwd3wf01AA5u0lk=
-X-Gm-Gg: ASbGnctsyY9OLozCjReE4fgfYQ1IAISO2zx9+Ps7+Co+hHg+ihZvStgLgJdmDagrTVb
-	kVOPP6wKamhe8fvPmao01MgrCsoBGnmjibLR4eySTrHopXzbxM4NwHgmFz4Sm6fi/LNz9SGVCjk
-	LU741DsvmWkPkgBitw+iS9g0qVTZX9BktQmUFpSAtYmiFacGGpORMGWbqVaW+a3l4HbuRiczAP5
-	U3mn5bU9Wzmc8JJgSfLOHOf1WIShe87q3e0mZR3uZKL5C/25ubdOZf2wH18a4St5ot45t+TchGV
-	Z83GpP0F5At1zQp92wFxad5J0c5KuAaZ9SqR9q8wYt9xjK/SJxGpsmIU684v2bEf+sZkKRGEobY
-	FT3wk/oizUjMQxvaPHnDvjE03ETLXI/bk0yh6gNMWuALhNb+RL38N/RFFQmkyyATqXCYnagFF8E
-	AcqF45LlvbYapriTEDok4Wd1ObwRhilgZob/x8zeU/lS3k7fXf1q22wWeZC+rmWAUfCkJnUuwaI
-	g==
-X-Google-Smtp-Source: AGHT+IFbkLlhQosQFQ+WdXArr3gHVo/6dHC8xvUgFjTdDqpIfNT6vGARK5zq5TsgxqtRCa2zCH7RmA==
-X-Received: by 2002:a05:690c:c341:b0:785:ec4f:3c8 with SMTP id 00721157ae682-787d543901cmr7438187b3.48.1762549553481;
-        Fri, 07 Nov 2025 13:05:53 -0800 (PST)
+        bh=sFdqd9exB0x0hPzLUkgD+8tlEyMvj6WmHDEVMBDy3B0=;
+        b=dMMnIfNQ5pIp+OVrBgaatFshUpHvgdvPqlzBi5AEJjnBRhKqwlrv5fERlFQr45uZTd
+         Nife9mC8Ayd2/efYHiCUwozdhF/4liG5uR6SWooZIBcMUmhl9Qec7kDLJHpd5P8aRHNV
+         2t+OVue4XND2k0eLQbJtPrY0CusbL32BNxl8OU5JLsAq6qNLfTONBISX8YPU2n9KRAac
+         XHHmTZA7XMQzbBZ7vaBJ3Fin1cT6lWG8ZwvrB+TtfKRDNprewEc0AHMWSGl7gBztKig5
+         sBTGiNah49sp6bBTA6+aMlxtPePnO2k/Zh0FHDArYSARjoUP1dvoftp6TzsGyTAgousH
+         XJJA==
+X-Forwarded-Encrypted: i=1; AJvYcCW+/hNGGlgViAxnE9jhSCq5//ycTmLJpfMlEW+USuxZba6MiuK3+lfqeRBYLmQDFqCi4nVlI2kP/e0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzrYOe9TCISXhtcGQ6Vf+GlPp01anTbvVZ5YhTSu5buvoEOPHKh
+	Uo9ojWpsnbgHKPbhsmTx3Jzfa8gyB7niLQAbUnjjd8aP9Qvo4iBbbdla9MMdXTBJBjw=
+X-Gm-Gg: ASbGncuiDs8KMmMkN+sftAoZvfUhfcbMROuAaNP9F+y5HVadLtuR0tRJNUdHkKQlBht
+	LP133Lwmz5Y9isZx1H2wRzAeA3a2wn4AHftm7218LygJ6U7uZPo7hpc/eFLXaRfcuOjAE9XXZbq
+	AkfwKeKSjeR7k8BoyGhZTqCzM+iAd3a8TJxozLtz9PniIpzU3OBBsY8bXFoFz/5hA26Ybog5QC3
+	1zO/2P79g9sh1vP7+fFyAR90Vh1udzkw/faFvkjrhSGIyCo7dG6eQisRVC6Igt5CR+zPMF1Iwc0
+	apS0nHsKRfJEyHxMWSOXLLpf/SqQym94CDqUDogysPzOwIJ+aVMlMXGPBU0l9o+FXQ9eV5hX5Vt
+	m84zJSHRzmcBZKuQq8bvo6+DZLkyWtZ3SXrrhdK2ukQPos5W7cEYndBcczm7DPsR6v5/S/jKosD
+	NYg47hsDZcLFoSwaiUq9yItPnz5zXyb49G7Sp+vqGfZxtRLxVen6EKPl+VxKsGqsJtHLkswbo78
+	A==
+X-Google-Smtp-Source: AGHT+IF010PbDrS6Jp4mBjzKbhPzLzB8jkjc+eSVHmds1J2sDdVJ/oNxdwOHlro9GSCJe4RgFsfJuA==
+X-Received: by 2002:a05:690c:c004:b0:786:4860:2226 with SMTP id 00721157ae682-787d5400978mr6003887b3.32.1762549555336;
+        Fri, 07 Nov 2025 13:05:55 -0800 (PST)
 Received: from soleen.c.googlers.com.com (53.47.86.34.bc.googleusercontent.com. [34.86.47.53])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-787d68754d3sm990817b3.26.2025.11.07.13.05.51
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-787d68754d3sm990817b3.26.2025.11.07.13.05.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 07 Nov 2025 13:05:53 -0800 (PST)
+        Fri, 07 Nov 2025 13:05:54 -0800 (PST)
 From: Pasha Tatashin <pasha.tatashin@soleen.com>
 To: pratyush@kernel.org,
 	jasonmiu@google.com,
@@ -150,9 +150,9 @@ To: pratyush@kernel.org,
 	hughd@google.com,
 	skhawaja@google.com,
 	chrisl@kernel.org
-Subject: [PATCH v5 11/22] docs: add luo documentation
-Date: Fri,  7 Nov 2025 16:03:09 -0500
-Message-ID: <20251107210526.257742-12-pasha.tatashin@soleen.com>
+Subject: [PATCH v5 12/22] MAINTAINERS: add liveupdate entry
+Date: Fri,  7 Nov 2025 16:03:10 -0500
+Message-ID: <20251107210526.257742-13-pasha.tatashin@soleen.com>
 X-Mailer: git-send-email 2.51.2.1041.gc1ab5b90ca-goog
 In-Reply-To: <20251107210526.257742-1-pasha.tatashin@soleen.com>
 References: <20251107210526.257742-1-pasha.tatashin@soleen.com>
@@ -164,138 +164,36 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the documentation files for the Live Update Orchestrator
+Add a MAINTAINERS file entry for the new Live Update Orchestrator
+introduced in previous patches.
 
 Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
 ---
- Documentation/core-api/index.rst           |  1 +
- Documentation/core-api/liveupdate.rst      | 64 ++++++++++++++++++++++
- Documentation/userspace-api/index.rst      |  1 +
- Documentation/userspace-api/liveupdate.rst | 20 +++++++
- 4 files changed, 86 insertions(+)
- create mode 100644 Documentation/core-api/liveupdate.rst
- create mode 100644 Documentation/userspace-api/liveupdate.rst
+ MAINTAINERS | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
-index 6cbdcbfa79c3..5eb0fbbbc323 100644
---- a/Documentation/core-api/index.rst
-+++ b/Documentation/core-api/index.rst
-@@ -138,6 +138,7 @@ Documents that don't fit elsewhere or which have yet to be categorized.
-    :maxdepth: 1
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 58c7e3f678d8..11b546168fb1 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14512,6 +14512,17 @@ F:	samples/livepatch/
+ F:	scripts/livepatch/
+ F:	tools/testing/selftests/livepatch/
  
-    librs
-+   liveupdate
-    netlink
- 
- .. only:: subproject and html
-diff --git a/Documentation/core-api/liveupdate.rst b/Documentation/core-api/liveupdate.rst
-new file mode 100644
-index 000000000000..deacc098d024
---- /dev/null
-+++ b/Documentation/core-api/liveupdate.rst
-@@ -0,0 +1,64 @@
-+.. SPDX-License-Identifier: GPL-2.0
++LIVE UPDATE
++M:	Pasha Tatashin <pasha.tatashin@soleen.com>
++L:	linux-kernel@vger.kernel.org
++S:	Maintained
++F:	Documentation/core-api/liveupdate.rst
++F:	Documentation/userspace-api/liveupdate.rst
++F:	include/linux/liveupdate.h
++F:	include/linux/liveupdate/
++F:	include/uapi/linux/liveupdate.h
++F:	kernel/liveupdate/
 +
-+========================
-+Live Update Orchestrator
-+========================
-+:Author: Pasha Tatashin <pasha.tatashin@soleen.com>
-+
-+.. kernel-doc:: kernel/liveupdate/luo_core.c
-+   :doc: Live Update Orchestrator (LUO)
-+
-+LUO Sessions
-+============
-+.. kernel-doc:: kernel/liveupdate/luo_session.c
-+   :doc: LUO Sessions
-+
-+LUO Preserving File Descriptors
-+===============================
-+.. kernel-doc:: kernel/liveupdate/luo_file.c
-+   :doc: LUO File Descriptors
-+
-+LUO File Lifecycle Bound Global Data
-+====================================
-+.. kernel-doc:: kernel/liveupdate/luo_flb.c
-+   :doc: LUO File Lifecycle Bound Global Data
-+
-+Live Update Orchestrator ABI
-+============================
-+.. kernel-doc:: include/linux/liveupdate/abi/luo.h
-+   :doc: Live Update Orchestrator ABI
-+
-+Public API
-+==========
-+.. kernel-doc:: include/linux/liveupdate.h
-+
-+.. kernel-doc:: include/linux/liveupdate/abi/luo.h
-+
-+.. kernel-doc:: kernel/liveupdate/luo_core.c
-+   :export:
-+
-+.. kernel-doc:: kernel/liveupdate/luo_flb.c
-+   :export:
-+
-+.. kernel-doc:: kernel/liveupdate/luo_file.c
-+   :export:
-+
-+Internal API
-+============
-+.. kernel-doc:: kernel/liveupdate/luo_core.c
-+   :internal:
-+
-+.. kernel-doc:: kernel/liveupdate/luo_flb.c
-+   :internal:
-+
-+.. kernel-doc:: kernel/liveupdate/luo_session.c
-+   :internal:
-+
-+.. kernel-doc:: kernel/liveupdate/luo_file.c
-+   :internal:
-+
-+See Also
-+========
-+
-+- :doc:`Live Update uAPI </userspace-api/liveupdate>`
-+- :doc:`/core-api/kho/concepts`
-diff --git a/Documentation/userspace-api/index.rst b/Documentation/userspace-api/index.rst
-index b8c73be4fb11..8a61ac4c1bf1 100644
---- a/Documentation/userspace-api/index.rst
-+++ b/Documentation/userspace-api/index.rst
-@@ -61,6 +61,7 @@ Everything else
-    :maxdepth: 1
- 
-    ELF
-+   liveupdate
-    netlink/index
-    sysfs-platform_profile
-    vduse
-diff --git a/Documentation/userspace-api/liveupdate.rst b/Documentation/userspace-api/liveupdate.rst
-new file mode 100644
-index 000000000000..04210a6cf6d6
---- /dev/null
-+++ b/Documentation/userspace-api/liveupdate.rst
-@@ -0,0 +1,20 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+================
-+Live Update uAPI
-+================
-+:Author: Pasha Tatashin <pasha.tatashin@soleen.com>
-+
-+ioctl interface
-+===============
-+.. kernel-doc:: kernel/liveupdate/luo_ioctl.c
-+   :doc: LUO ioctl Interface
-+
-+ioctl uAPI
-+===========
-+.. kernel-doc:: include/uapi/linux/liveupdate.h
-+
-+See Also
-+========
-+
-+- :doc:`Live Update Orchestrator </core-api/liveupdate>`
+ LLC (802.2)
+ L:	netdev@vger.kernel.org
+ S:	Odd fixes
 -- 
 2.51.2.1041.gc1ab5b90ca-goog
 
