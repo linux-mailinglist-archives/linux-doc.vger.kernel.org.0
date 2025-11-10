@@ -1,115 +1,125 @@
-Return-Path: <linux-doc+bounces-66136-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66138-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEEBAC48FE4
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 20:25:07 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id A28D5C49186
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 20:37:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 6BB1534AF8B
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 19:25:07 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 6B6851883673
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 19:37:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 40B2E33291D;
-	Mon, 10 Nov 2025 19:24:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 77C29337B80;
+	Mon, 10 Nov 2025 19:36:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="LrNdybCn"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="H2VjVHLy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BA6C33290C;
-	Mon, 10 Nov 2025 19:24:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E02730216A
+	for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 19:36:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762802674; cv=none; b=p1Z0lJ6UgN5SHusw8PmFHnFkeXMC5a7xJfcGOWf2kTUkd0yLza8neZjgzDI+X7ZlkihcO/flGX4Qea/utLyCnetDci9bAsUxdcTfGtNa5xVLzVE8l91A2sXsDaXYLSwOyuG12KJmZOomcRNhjDM5RCEtxQ2FKWUOvCt2NBR6vbo=
+	t=1762803408; cv=none; b=G1JCetEwbB2wN8NohD+KvV3mXYCFU94tQnna/5rRvMGDxUJeJNAx7IQf1dKAhucWbfkx/28qAge8fuvCWM3ax2nb5yJvF6gWkqZ1ybO1kL9WdTjc8ZQvjO5oiP0QsxPkd90hnzNx1EHACMXchUXWq6ZGXWGGXL1TymYnaz5xot8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762802674; c=relaxed/simple;
-	bh=jekjcNBy2E4c1c0yPWqzQqES4OUUHGM0AQmpLGpOFqU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=t1OpVBMUhlsOfUBfLeqQUYP9MImPGv1GDglderEmk54zns2GwR+YoV4/M7HwInaIDC4P+lzQhBjnaPExveuAQ9qvo0OSssaFId5HsnoU8OoshgNTqesMyqrgm2T17dCR1rP6BWbY4oLhpRHtvmZGDVFWgfgw6BtP6+lhRkv1ugM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=LrNdybCn; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=zHSN+Mh7ncyx0AYcFN5Z7T7CQcFnHal6f6bYdu4mO7U=; b=LrNdybCneDc8S5CX2nR1LifOsF
-	M/YwjpXSTZpN0JEv2FW1sgH28soA27Pwy/KrS72Fo+dZj+hhWOP3j8hOYrGNwcGcefKB3dX64jLL+
-	l0zFx5XII5TM3WAtx5ItPBrO16j6CZGwOig6CpsLwtTTOUSFvCCz/8itqVVR5DTwsEhcz5XsVYOYA
-	nnCWFuGnumYs3qADGxZI6CGpcJ2EYdjAxonN5XjWWpJrV1ksXYW5J58f1oM1NoCqkvQ9SLpik+pcU
-	zNCeRauXvZgVRW7z6JvXd1jM0FNINoA+nGLIS5GQ4HzLgVnnEOV35V/Ne2ZD74ICXjBpvdPrilMmX
-	jWzg2vjQ==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vIXV8-000000061UF-1p4b;
-	Mon, 10 Nov 2025 19:24:30 +0000
-Message-ID: <b5c1e5ec-0081-4a26-afb2-135d9a0a14bf@infradead.org>
-Date: Mon, 10 Nov 2025 11:24:29 -0800
+	s=arc-20240116; t=1762803408; c=relaxed/simple;
+	bh=uOPdRM2zXUbj0uAF4/Y1KdXhAAYdQVcF5zz7omcQwNA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=uOBlFyC7wSf2hRrOxVvQtreyZ6vOW0ewSeEDFjWVJLrwXBtZ0UBhJbUeb9h+hJqObZWI993hExNF5+EVoadqp7XFS9GiVjw+a47fwPdGspXqz8PYQIRPXzQZKmQlbSJTfR+s4fPdiiUxUnVtaYQOaCwY4hJIdrI9kUE2AFZqCs4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=H2VjVHLy; arc=none smtp.client-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-47728f914a4so20265455e9.1
+        for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 11:36:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1762803403; x=1763408203; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YDpt0zy7PtnsCd6fKg/NI/I37lccoSys25WO0LkUemM=;
+        b=H2VjVHLyJvbeTUJmvaX6D1/Mk5MMIzvGOzaQ0YqgDPSWmjLUWywvO7mHfVQVCldqig
+         FdYnboyQqE7doRR1hyBJx7CVkbvbgNsg3Xz1/fkOoodMaZhFarOWw3geJOxwLGXTnTKc
+         funqi5dWl05SbdIRZ2bWB0GgackLEXXsk8XSH9QPK5PTY5ZXIlOY0v1S2pKYcBi0KZL9
+         u4LEJt1P6dfaUAMwXJgZaVwVN4c4jei3eQes4nZ7cX4eV5mPjJ39f7JcXcm0LqCMkwTK
+         Nll6ntBK/xDWfEyF7iBtf+rK2TOlIfemg+tIQDboywb39uqAWYHQ1QdTCgE5vtqmRosW
+         Axxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762803403; x=1763408203;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YDpt0zy7PtnsCd6fKg/NI/I37lccoSys25WO0LkUemM=;
+        b=BGpTqzgNapsUKNMeQdvijEUfeKJr1/FLvTus0NjCScuEkRVSjLsxZ9dHYZobqCXDjA
+         IdY9Zc15hrtv7whNQkQqCMeAeWrbWKUxS6hDN3VyMaslMHOo2D5/JDGldjrhEKQXFoVd
+         JZ3li4PzAhzB+TRB/wogPhv0GF2KHmRNuLgX6DO2EmRnZPAJ8YLU7E/A1f677yFp8afm
+         5MvIxiSEbtuFsxd1APzj0K4zU9ejmnosOtQCubfWw1esi7LXhSfrGJUp9PghCPqovOZd
+         oNCPYEy1Ox2jovqyxoBsQfRujgJVFa3LahHOvxPqZFlrpGWIDdgZlEKcsIO7U6SPB53V
+         UZkQ==
+X-Gm-Message-State: AOJu0YxI6xOnOswJvB8Flys0YsNqAhCFfGFkz4jZ3qR7Zg/ZsTN6dKEU
+	phGLfM1mbX0O088EQDOALvEHqCUVAr9nyn9Mm1Az3wFr2HmC/6WL0owwfL5qanAhzNwyTFZAiic
+	DmKaR
+X-Gm-Gg: ASbGncsny+EX++f0wsv9f+odTzGdUoHXgM6b7dun69bl5zpe75baMwKVEDNHRayhb16
+	P/GKHKv4h9M/VFlparcoukoiZtMEbsg/sLXLcfOa5b6uHSP0fHURdL48/SvfrF/qa77jNXa+Zfh
+	hGN1ZXR5xZZN/Q52OFiVjM1OTy7M7T1w+fUd+bfzvyGTriSlQBqjztpoU9uFe7XLEMidSX+pv4R
+	G6KxsmOs8OUUjNMco2PzBRSq8HEwcJXkaXXORpqY1uqyt98uxzsm/1FBIodGQMQhD078ETjIHym
+	bkJDZl1yiatJjDzDBshgZ3t0J1FI8RQgHVBucbRPgSTL/Q1hQLWK7M8/znq5mBNBS71JFIr8GEq
+	ISJEmVHdyMZbTRrj/Fvp8fgAKcuHBy4REBn86itZRkK7sM4nXttIqp4Qc1eoyKOq1PrSoPkxhRe
+	032dCRrXs/a5DlBAtJXaWAXm+O7sATrOM=
+X-Google-Smtp-Source: AGHT+IHeuLkKSsH8AzcRusY4bSGEmMJr+yCrFo1Kif3KcLfYiwCAAN+hODaeTCLagsz7hdm8X9yqTQ==
+X-Received: by 2002:a05:600c:3b01:b0:46d:ba6d:65bb with SMTP id 5b1f17b1804b1-47773288bf9mr97918675e9.31.1762803403412;
+        Mon, 10 Nov 2025 11:36:43 -0800 (PST)
+Received: from blackdock.suse.cz (nat2.prg.suse.com. [195.250.132.146])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4775ce32653sm336766725e9.13.2025.11.10.11.36.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Nov 2025 11:36:43 -0800 (PST)
+From: =?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>
+To: linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	cgroups@vger.kernel.org
+Cc: Natalie Vock <natalie.vock@gmx.de>,
+	Maarten Lankhorst <dev@lankhorst.se>,
+	=?UTF-8?q?Michal=20Koutn=C3=BD?= <mkoutny@suse.com>,
+	Tejun Heo <tj@kernel.org>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH RESEND 0/3] Memory reclaim documentation fixes
+Date: Mon, 10 Nov 2025 20:36:32 +0100
+Message-ID: <20251110193638.623208-1-mkoutny@suse.com>
+X-Mailer: git-send-email 2.51.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/3] Docs: iio: Add AD4134
-To: Marcelo Schmitt <marcelo.schmitt@analog.com>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: jic23@kernel.org, nuno.sa@analog.com, dlechner@baylibre.com,
- andy@kernel.org, Michael.Hennerich@analog.com, robh@kernel.org,
- krzk+dt@kernel.org, conor+dt@kernel.org, corbet@lwn.net,
- cosmin.tanislav@analog.com, marcelo.schmitt1@gmail.com
-References: <cover.1762777931.git.marcelo.schmitt@analog.com>
- <bbb702b6e2cad4bf79b1490c4280ce998b46827b.1762777931.git.marcelo.schmitt@analog.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <bbb702b6e2cad4bf79b1490c4280ce998b46827b.1762777931.git.marcelo.schmitt@analog.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+
+I think the reclaim target is a concept that is not just an
+implementation detail and hence it should be documented how it applies
+to protection configuration (the first patch). Second patch is a "best
+practice" bit of information, it may be squashed with the first one. The
+last patch just makes docs indefinite until the idea is implemented.
+
+Originally sent in [1], this is rebased and resent since I still think
+it'd be good to have the concept somewhere documented. (E.g. for the
+guys who are implementing protection for the dmem controller [2] to
+arrive at similar behavior.)
+
+[1] https://lore.kernel.org/lkml/20200729140537.13345-1-mkoutny@suse.com/
+[2] https://lore.kernel.org/r/20251110-dmemcg-aggressive-protect-v3-5-219ffcfc54e9@gmx.de
+
+Michal Koutný (3):
+  docs: cgroup: Explain reclaim protection target
+  docs: cgroup: Note about sibling relative reclaim protection
+  docs: cgroup: No special handling of unpopulated memcgs
+
+ Documentation/admin-guide/cgroup-v2.rst | 31 ++++++++++++++++++++-----
+ 1 file changed, 25 insertions(+), 6 deletions(-)
 
 
-
-On 11/10/25 4:45 AM, Marcelo Schmitt wrote:
-> diff --git a/Documentation/iio/ad4134.rst b/Documentation/iio/ad4134.rst
-> new file mode 100644
-> index 000000000000..fe20ec6f2132
-> --- /dev/null
-> +++ b/Documentation/iio/ad4134.rst
-> @@ -0,0 +1,58 @@
-> +.. SPDX-License-Identifier: GPL-2.0-only
-> +
-> +=============
-> +AD4134 driver
-> +=============
-> +
-> +Device driver for Analog Devices Inc. AD4134 and similar ADCs.
-> +
-> +Supported devices
-> +=================
-> +
-> +* `AD4134 <https://www.analog.com/AD4134>`_
-> +* `AD7134 <https://www.analog.com/AD7134>`_
-> +
-> +Wiring connections
-> +------------------
-> +
-> +AD4134 and similar ADCs can operate in a few different wiring configurations.
-> +
-> +Minimum I/O mode (SPI control mode)
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Fourth level "underlines" should be "~~~~~~~~~~~~~~~~~~~~~~"
-according to Documentation/doc-guide/sphinx.rst.
-
-> +
-> +The minimum I/O mode wiring allows AD4134 register and data access with the
-> +conventional set of SPI bus lines. The hardware configuration settings for using
-> +AD4134 in minimum I/O mode are:
-
+base-commit: 1c353dc8d962de652bc7ad2ba2e63f553331391c
 -- 
-~Randy
+2.51.1
 
 
