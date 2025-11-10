@@ -1,134 +1,124 @@
-Return-Path: <linux-doc+bounces-66084-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66082-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 248BDC481F3
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 17:52:47 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id EC5E5C48356
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 18:08:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id C4ED4344300
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 16:52:46 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 04C654FD4BF
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 16:50:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A21FC326D53;
-	Mon, 10 Nov 2025 16:45:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C0D1A31B127;
+	Mon, 10 Nov 2025 16:40:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nV3j4stb"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="IXXf6n9n"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
+Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9C753148C5
-	for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 16:45:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E573C31BC8F
+	for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 16:40:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762793135; cv=none; b=d33mVnUMz+rGM51uNReW5/K2UCnXjqzsrMLWjVpM2565G1gHdsRCZViJjreOge3UVRsS1POj19KonPWefGmBUgqlvwvy9U/udBDNwsQl6m5WR6mYrc61BBHl5ht+IZZqjS406uv03rxbm2hg4g3NtN6G7xJdwWslbKI1zBDO2TA=
+	t=1762792859; cv=none; b=Np3hKys+IzAZJ77TpYIMymfAmxiOwp9b6EJITM+bgqwdHguKzcZeA+o6ihFaU6x9BimDkoLsv8PpDQQB9EVgmW66W3lgJrc26hW/nIu73nFeKxXY3so+3hdoM9TvVnhlMCiDK7vii9Oa1KqOUpkN8kY5ia4Whckthm0L/A1tUq4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762793135; c=relaxed/simple;
-	bh=bgCzKrhzMsbjtyucE9Wji1o3OOtYybWdKrlZ1ecTWTE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kUOU6+69ars5elKd2KG5soF8QDU+tn5vGxvw1jZAE9LYdaROVTEZUQv+mgMYo/lQ0y8TePwQPy54sE664pyXsUdb3W60atNfv33gtZaWaXCJv1qso8WINZACt11cNmqtLCmpdz8b3myr8bV1F/c4chkXYnfy1kx8o3IMPrVzZtE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nV3j4stb; arc=none smtp.client-ip=209.85.214.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-29568d93e87so28180585ad.2
-        for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 08:45:33 -0800 (PST)
+	s=arc-20240116; t=1762792859; c=relaxed/simple;
+	bh=Nn93pG9GTk907Z5oYvQqtvL4mNR0sTn6esBD4Jp2XFM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=rCRJEPM8j8RUmupZgw9bGw/gGINAoM3z+fFIvL3RmiVEdZULMPXbvMQGj0O1mTAEvIbz+GbylGGKWE+wl9YjcYoWeyDV/O6xTKjCm28JTczoUynDA+RJvip1w0Cbm5p1pnnXivo6M2m/fJiTu8HlV/UaZBlakxxrjRjXt5YL+no=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=IXXf6n9n; arc=none smtp.client-ip=209.85.160.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-4edaeb11634so15344351cf.0
+        for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 08:40:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762793133; x=1763397933; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ejgzWIAmMtwDeIAONVbXRMu0MknYB8VkcpRxQd2rWvU=;
-        b=nV3j4stbm+vcaGq0c5YHStIInJnhL8I54TPjZHDp6q0rY3KJdBeU2LdLBV+A8PMLNd
-         3UDAcZroJ2/4u1ohtPKCixAdo5DMgRp2pTa42z705lK6Wh1wbqoz5w7yKpZlwP+YwK1d
-         FXnwb72f4hCaWLFToIN26L5qlwRTbbqvPDgUPiPgNFY9ZFeg4nRg10UdtOeHyebrPBLV
-         hW8pIVyoJkAu/yL6AeYS3+gn9fIGyx3klbslQG0NE+ySA5owcPBHKAMKkJ6LUUbPA7hq
-         jyAh0y2ElV8g7ZXuLNUfRXPtZ5ThaRkUiYl0HTwaUGr+FTOUYjQdjLUJhmRyo5hoaOms
-         P+sQ==
+        d=google.com; s=20230601; t=1762792857; x=1763397657; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=ARP0s0P8t6lHLXGPK7oqG4hn2hPk4JBv7/AQ4HrLq7Y=;
+        b=IXXf6n9nhmSnymPWmqhjSmnDiR9Up4GTSKZzRllIwT71BVMh/tG5PHzDXfE8YDO62P
+         im2WhPVKJmn1o9X6hlJd21VkAsg4IhHJKDYrgMVzClVLABJHJmHRx+hlwsN90izo5jGx
+         B+pZGOV25MXrrP2znz2IvIYD4uL4+agnoMF9i7Ec4johf9cye4TtsfJSgJTyPow6+Ap2
+         ee6J3qUJ/BirQ83jzYU1221z66ZbqKN1q/Zy1nDzded68tkiuamw4GKbfide35oSdjlu
+         60YLCTC0EcOvqP4PbiQZfmBos3Qs9HgVy5+biHMlixcETr2qxfBFilHO7Yqe4dMxBgIE
+         DEYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762793133; x=1763397933;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ejgzWIAmMtwDeIAONVbXRMu0MknYB8VkcpRxQd2rWvU=;
-        b=Ma+uDOn3U5pFvH5Rw/FjPTA8jOxNObjnRHT8WSSJQ80qaNRwEou+MCgCE+59CjvRF0
-         KP0hL1VuhPPY0+P3eb4imQ8LGJjh4cwk3qaMz5ahFCYuOuvj8iRWtQm3RqZg9ZEtA/Jd
-         K5XEet71wUXUQNTvOrYTi7JZZyTgDyGC5n8YqYivpLOXFgxLMi5z4IfrTsRhvMVgYhec
-         xSVf6OLjUDrTFJDGJTHJ5YqD10B0/ZqV7UiHwYM6L/3/C89vCuKHVC4iiqfXAkBeiTxi
-         qjzKaPb24vOi9PkSK7hMWu1+kpMRtizaLYvwg++BT47VQEQo1flsDGiuU81TP+oWBvYI
-         e2PA==
-X-Forwarded-Encrypted: i=1; AJvYcCXTJRRniC9br8IdHknVJdo7L2ml1Em3v12H+VpGZEu9U/eZ3XEbtlZ0IAt/pAJQwQnDcVBETN5Rsb4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzJPDvix/0h/u5jGFmK0oE54eW3xFKl9LoL4jLQ/7VMopaG8vcb
-	H2hLaHHjRky8beKZMwbT8B0Dk8bUnoUUEtvn/Pn7+1nZQQ99fPOL67+I
-X-Gm-Gg: ASbGncu/AwAOeNNyp6YkPm7UAkvaMnTruvG7oeOUuh032eIO1Q9jVhi8cxt558RzasD
-	CMT0CRB7YUd4slHUBhs8iNwyZKTjHGd7PHf8GCgRMQO5z/RfZbStUAcPhh1Xh9fb4Nk7xOghrEj
-	n/Ch43uBxzxQAMNwO5UnnEihl15+4dFpdvw2SlM/Me05yXE45ZUrHsDT2sbFKP/T9cWwAPerv5g
-	aTbe2khLUk9FwHU8vng5+b7m38xRfLxXnOnO8b6vzKPgi5arl7v89ET7eAuUrGs+IlzrMMTr1P6
-	50Pyymze390EJiBiSZAQpzqoLrNs1ve8mczYOEVQPbyPFnxQhYBKWhqWtufUjiZrB3ngZPcBHxW
-	RiJsLhzKBC2wB+5KC9tnv+krBUSG/KgOBB3fZUm29ClRVb4A6Ts5+K8AIj/uwZLSW7aH4LSMZ6y
-	Cx5E8VJF6FLA==
-X-Google-Smtp-Source: AGHT+IHlDbq/FuhUx5b37jOHHuGk+B4j8Ue7lQztTGR+qjnK+j0oCN6+BEjfuAMoSyUWo5a31EZ/jA==
-X-Received: by 2002:a17:902:da4b:b0:295:24d7:3792 with SMTP id d9443c01a7336-297e54030a4mr120060845ad.1.1762793133088;
-        Mon, 10 Nov 2025 08:45:33 -0800 (PST)
-Received: from localhost ([2804:30c:1661:8a00:578a:911c:ac25:24a6])
-        by smtp.gmail.com with UTF8SMTPSA id d9443c01a7336-29651c7409esm150687835ad.64.2025.11.10.08.45.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Nov 2025 08:45:32 -0800 (PST)
-Date: Mon, 10 Nov 2025 13:46:50 -0300
-From: Marcelo Schmitt <marcelo.schmitt1@gmail.com>
-To: Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
-Cc: Marcelo Schmitt <marcelo.schmitt@analog.com>, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, jic23@kernel.org, nuno.sa@analog.com,
-	dlechner@baylibre.com, andy@kernel.org,
-	Michael.Hennerich@analog.com, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, corbet@lwn.net, cosmin.tanislav@analog.com
-Subject: Re: [PATCH v1 0/3] iio: adc: Add AD4134 minimum I/O support
-Message-ID: <aRIW-tksre10iB1v@debian-BULLSEYE-live-builder-AMD64>
-References: <cover.1762777931.git.marcelo.schmitt@analog.com>
- <5e0ea52e6a77a1d6af861ba5aaeeea5c3d514705.camel@gmail.com>
+        d=1e100.net; s=20230601; t=1762792857; x=1763397657;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ARP0s0P8t6lHLXGPK7oqG4hn2hPk4JBv7/AQ4HrLq7Y=;
+        b=t6yqhv4dN3wpGI6gwtMKZAiU11Ht+aQYydGd9h1Y77x97/ecMH6kkGSkrd7AEoifhx
+         HexKubboHO8uyR0oyMbpzRaknmIn5fh7FogaOXGpzDdUgUVkNmC77tV8/c8UOhefoA8r
+         pdAaxgixc6wxGkvjc4HhWE1tGx0/OCratxyrGbMJCn+uo0nEFbakVIVEHnvM7CaEh/Pl
+         Y+vKmBzXFVyfkngMXRH7nboWwKBy9/VnZZoHretPu5GHoikeBBhlUZfOxV3zUlPc4Jem
+         gXYafaEE009fZ+rQQabXuG3H2GWU8n5Jfhk1MPYvJU0VBrVLIRmg6YiaDcP5BDAlT35R
+         XWgQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUiiNueMCCbBy5lNQQ3HMyqcoBQAKq1qr+LrOh1fXLgudGlgNNceyi77ZYqUyN2hsnfUrpSzStvxXE=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyt2EpE8FCPu31E0bYOK9BJ56AGPgdg0Aq2ZRLLPlOeJrbS45F2
+	05rBQH+gbBzil6+Q/wMRyqLKDAHxmWDK8Je5iCazbkOGwRiTHwWO7MOzK3FGH/88B2Okplp3VGQ
+	M/qYdSPEnCW38d+pKAZ/x/4xvYUAiSUT5DdBlq9Qv
+X-Gm-Gg: ASbGncsvtng7jGjdI8IYPA6y6YRcpzKXHN7Eg5S6Ldeo/8ZAw5WdrVEwdC3f/JHX9uZ
+	eG5mQrx2//0f0G5WkFuM1r3zhuBFIPyKC8L2EGYFCZEc9ZeGHFUPmn9DAzyAf9/hzqV7cy74Ukx
+	ObBdOhcmFF1fGU8AIYV3ZPdVI/6gom2HFcw31BjVPc5FmjtrrbLmCm4Jm1ckzKZrQE4xtTt6c9m
+	ZXORI1xurvXMf4zDrOZ+LQ9qkwYW6Pra5bzK0KGI/brGJtLGKZ1pVpIajlMcw+ShkXzv6KNF6Ta
+	pirKqJZ57v45fs0LTc6A+Zzo8w==
+X-Google-Smtp-Source: AGHT+IFXtIVYv/1akorIwGTU2TyeYWKo/ZKjasuLxC+KldJLVH++s5nwoozhcb1g1AswN8A4ZgMNuJJXiz33fQE7EOA=
+X-Received: by 2002:ac8:5d05:0:b0:4e8:aa15:c96d with SMTP id
+ d75a77b69052e-4eda4fec971mr97364671cf.55.1762792856275; Mon, 10 Nov 2025
+ 08:40:56 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <5e0ea52e6a77a1d6af861ba5aaeeea5c3d514705.camel@gmail.com>
+References: <cover.1761763681.git.m.wieczorretman@pm.me> <932121edc75be8e2038d64ecb4853df2e2b258df.1761763681.git.m.wieczorretman@pm.me>
+In-Reply-To: <932121edc75be8e2038d64ecb4853df2e2b258df.1761763681.git.m.wieczorretman@pm.me>
+From: Alexander Potapenko <glider@google.com>
+Date: Mon, 10 Nov 2025 17:40:19 +0100
+X-Gm-Features: AWmQ_bmi0ifqdxD1pRga8rXt1izLseEvw-FOTscdlGLXMffgSbt_R_kuG7tm2tc
+Message-ID: <CAG_fn=V6pbNdN3w0Jr5rCL=M27-bOBt4AK8rB7UvvwT=3g4m7g@mail.gmail.com>
+Subject: Re: [PATCH v6 02/18] kasan: Unpoison vms[area] addresses with a
+ common tag
+To: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
+Cc: xin@zytor.com, peterz@infradead.org, kaleshsingh@google.com, 
+	kbingham@kernel.org, akpm@linux-foundation.org, nathan@kernel.org, 
+	ryabinin.a.a@gmail.com, dave.hansen@linux.intel.com, bp@alien8.de, 
+	morbo@google.com, jeremy.linton@arm.com, smostafa@google.com, kees@kernel.org, 
+	baohua@kernel.org, vbabka@suse.cz, justinstitt@google.com, 
+	wangkefeng.wang@huawei.com, leitao@debian.org, jan.kiszka@siemens.com, 
+	fujita.tomonori@gmail.com, hpa@zytor.com, urezki@gmail.com, ubizjak@gmail.com, 
+	ada.coupriediaz@arm.com, nick.desaulniers+lkml@gmail.com, ojeda@kernel.org, 
+	brgerst@gmail.com, elver@google.com, pankaj.gupta@amd.com, 
+	mark.rutland@arm.com, trintaeoitogc@gmail.com, jpoimboe@kernel.org, 
+	thuth@redhat.com, pasha.tatashin@soleen.com, dvyukov@google.com, 
+	jhubbard@nvidia.com, catalin.marinas@arm.com, yeoreum.yun@arm.com, 
+	mhocko@suse.com, lorenzo.stoakes@oracle.com, samuel.holland@sifive.com, 
+	vincenzo.frascino@arm.com, bigeasy@linutronix.de, surenb@google.com, 
+	ardb@kernel.org, Liam.Howlett@oracle.com, nicolas.schier@linux.dev, 
+	ziy@nvidia.com, kas@kernel.org, tglx@linutronix.de, mingo@redhat.com, 
+	broonie@kernel.org, corbet@lwn.net, andreyknvl@gmail.com, 
+	maciej.wieczor-retman@intel.com, david@redhat.com, maz@kernel.org, 
+	rppt@kernel.org, will@kernel.org, luto@kernel.org, kasan-dev@googlegroups.com, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	x86@kernel.org, linux-kbuild@vger.kernel.org, linux-mm@kvack.org, 
+	llvm@lists.linux.dev, linux-doc@vger.kernel.org, stable@vger.kernel.org, 
+	Baoquan He <bhe@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Nuno,
+>  void __kasan_unpoison_vmap_areas(struct vm_struct **vms, int nr_vms)
+>  {
+>         int area;
+>
+>         for (area = 0 ; area < nr_vms ; area++) {
+>                 kasan_poison(vms[area]->addr, vms[area]->size,
+> -                            arch_kasan_get_tag(vms[area]->addr), false);
+> +                            arch_kasan_get_tag(vms[0]->addr), false);
+> +               arch_kasan_set_tag(vms[area]->addr, arch_kasan_get_tag(vms[0]->addr));
 
-On 11/10, Nuno Sá wrote:
-> On Mon, 2025-11-10 at 09:44 -0300, Marcelo Schmitt wrote:
-> > This patch series adds basic support for ad4134. AD4134 is a very flexible
-> > device that can be configured in many different ways. This series aims to
-> > support the simplest way of interfacing with AD4134 which is called minimum I/O
-> > mode in data sheet. This is essentially usual SPI with the addition of an ODR
-> > (Output Data Rate) GPIO which functions as conversion start signal in minimum
-> > I/O mode. The CS pin may be connected to a host controller CS pin or grounded.
-> > 
-> > This set provides just one feature:
-> > - Single-shot ADC sample read.
-> > 
-> > [PATCH 1] Device tree documentation for AD4134.
-> > [PATCH 2] IIO Linux driver for AD4134.
-> > [PATCH 3] Initial IIO documentation.
-> > 
-> > There is a driver by Cosmin on ADI Linux tree that supports AD4134 in wiring
-> > configurations suited for high speed data transfers. Even though the minimum I/O
-> > support was initialy based on that high speed transfer driver, the result ended
-> > up becoming entirely different. Also, because the different wiring
-> > configurations are likely going to use different resources and software
-> > interfaces, the code for AD4134 support was split into ad4134-spi.c,
-> > ad4134-common.h, and ad4134-common.c.
-> 
-> I'm familiar with the odd way this part is implemented in ADI tree :). Question is, are
-> you intending to support the high speed bits? I guess so, otherwise having the above split
-> would not make much sense.
-> 
-Yes, the intent is that the common parts may be reusable by the high speed
-driver when we get to upstream that. For now, this only supports conventional SPI.
-We may, at least, get some support for AD4134, though.
+Like set_tag(), arch_kasan_set_tag() does not set the tag value in
+place, so this line is a no-op.
 
