@@ -1,288 +1,447 @@
-Return-Path: <linux-doc+bounces-66051-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66053-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBF9AC47F1E
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 17:30:52 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 30C1DC47FC2
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 17:37:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 4123A34A363
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 16:30:52 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id A70831883805
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 16:37:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 36DC326E6F7;
-	Mon, 10 Nov 2025 16:30:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAACB2848A2;
+	Mon, 10 Nov 2025 16:36:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="SJJxqtq2"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZbOsrV0y"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5132A24A047;
-	Mon, 10 Nov 2025 16:30:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E9282836A3
+	for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 16:36:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762792247; cv=none; b=nFTAwkr0MzOdNMWWv8Aw/559O7nhNvUEBX1dByVr9YS/OGXnpdlVmvzqkdLJf7kJ3RlT7+IZ932gURNrHVLE2VO7/3607p29ycSB97oAFzfuxGOvCEg6iKSH/uSwdDmEviUIXiHJPh5ig6c0t8FT9ol6NRR1FeJS14rsqnUd75U=
+	t=1762792604; cv=none; b=axSN2Fqwv7DLxJvCQDati+LrqR0gZv37IiHVh5n5aEHUEG6kWA1z7i1L/hEe2DjXeLuE84JeeKPi+btVMKbag5iJG7gT7qbHIA8DNLg6uQ/uECLeNdo14LZyjlywCYS/EyYoWXRmEvnUeJUMKhFbLZ4g6apj/fiEi6sG6xX2w3w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762792247; c=relaxed/simple;
-	bh=iK8XFCALGc6e4f7zZ9iu7zB1u7W0l9CGAnuy8SPnocM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=baexp9MpaJph+MaioHbvdKs+6JtXBk1nWb8eYnIdHyOOjpfl02occliRDcHDGOa8RQ72H7tIy0+4unyAcwmbmlyirpp4aLXVE6aSGt/uOI5TvEwVWXjLIwnB1fUplVvHvgkCBpzD4CLh7oCk69USU5NMqdMOWbvWq251p0W1duA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=SJJxqtq2; arc=none smtp.client-ip=198.175.65.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1762792245; x=1794328245;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=iK8XFCALGc6e4f7zZ9iu7zB1u7W0l9CGAnuy8SPnocM=;
-  b=SJJxqtq2aMgXfsOkyhJAGolSlw7Z9jVJAyslZvUnniEJe23HF3ZVnEY8
-   upC6NeFePMfWjnc8uPrWyRx2URGwJgP477hTSz7drY2h0Krwp+/sSzXlw
-   nG6f/DetcYfdRph5CUPETaesXuZxjiFjSzKNCUtq2InqhHv5OxVh+vIUt
-   U/1KDbBxZVxxAwHnVVZVbALR9FFqteuoYsv5cehovdccJMsWv4MzBu48x
-   JBBI1nMMDHd7ioWsm2jOSFVKUcwGX/RGKCbRyUi+O8YRYPxUu8lzaVIj8
-   J+mBtl7ismGgHRFmT5GeUh6NOfmq3l/TJ17RFnU1hnwoZtSnjW0zinq2x
-   Q==;
-X-CSE-ConnectionGUID: HblRJgNTT2O9Az3+se8UUA==
-X-CSE-MsgGUID: CiNx93ZOSQyY4rh4t5K0kQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11609"; a="76295808"
-X-IronPort-AV: E=Sophos;i="6.19,294,1754982000"; 
-   d="scan'208";a="76295808"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Nov 2025 08:30:44 -0800
-X-CSE-ConnectionGUID: eSpEjy7KRDiex35tTq0k7Q==
-X-CSE-MsgGUID: pFUbbmtyStqKLqRsQ5KHXA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,294,1754982000"; 
-   d="scan'208";a="189436364"
-Received: from kniemiec-mobl1.ger.corp.intel.com (HELO ashevche-desk.local) ([10.245.245.235])
-  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Nov 2025 08:30:40 -0800
-Received: from andy by ashevche-desk.local with local (Exim 4.98.2)
-	(envelope-from <andriy.shevchenko@intel.com>)
-	id 1vIUms-00000007Vsw-0rMZ;
-	Mon, 10 Nov 2025 18:30:38 +0200
-Date: Mon, 10 Nov 2025 18:30:37 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: rodrigo.alencar@analog.com
-Cc: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Lars-Peter Clausen <lars@metafoo.de>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH 1/3] iio: frequency: adf41513: driver implementation
-Message-ID: <aRITLaJir-2IoclU@smile.fi.intel.com>
-References: <20251110-adf41513-iio-driver-v1-0-2df8be0fdc6e@analog.com>
- <20251110-adf41513-iio-driver-v1-1-2df8be0fdc6e@analog.com>
+	s=arc-20240116; t=1762792604; c=relaxed/simple;
+	bh=T4ZyLN2I15OGKlBZ6o5rnXat+Ld57Sf3wr/uASHGhAY=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type; b=p9BL4PZi//40xzzxsSaLK2kq5ftUau9MUDuxuUE/VGpkWuUnJl44Ii0PJvWsI7grmbYzCdUO1oap2w+SJTb30f72KGCE5jzb2HTs1IvJe7d1ij9REMN4GMmx4kNldQ0VdINaV2KLI27+OnTnW2D38267OraK+YmUGgMjPKZLgjM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZbOsrV0y; arc=none smtp.client-ip=209.85.216.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-3437c093ef5so1525358a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 08:36:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1762792602; x=1763397402; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=OmF3ZiRo+z3/MUzNtC1wwNg9IEmuUusZSisJNz5BISs=;
+        b=ZbOsrV0y6uQ9aVxG/Ti1vleu1H3KIAdLqniHqf9dLb7dm2PByIoDXfzr2E8irydFr2
+         JOBszP4TPaWQXLRKR62hR7WC9EecX+B7XqFdEjP2U8BfxWkb53W5mwVwJeqtWIO7VAZy
+         5qzTdBLcLkfkL2Q1Ue+/vsk4EeHUonvDivxO+NjYnAnC1UA6DL2oFTXm3wGS9Vyb/4ca
+         b2luMrbxuTyQV7rEk/dqg2bOCAmZscUqgDjeCdRJ4OfWzm9ZhYhOLMznif2EWngJn32l
+         qoAmIG1bILDu1t9utcyQOT6WCmBKEOHCeAHU7v+mrigOfGg0dFIwlEn4Ym9NOLXNaZyM
+         Zn8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1762792602; x=1763397402;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=OmF3ZiRo+z3/MUzNtC1wwNg9IEmuUusZSisJNz5BISs=;
+        b=ELYdwilQFIyLhy61/fgpDDrdNphyBP113cCTQKj4Wf4HUgIZ4dYxg5ffQK7gl5t0hB
+         ZisuO28J3uxyG8Jwjtxz9dPPhzPiUeEz/Yf01pjljypDybwuaZ1qmjNpuCJckncBVrOE
+         lnnnpp5tLBP3AFsumAUisFU7sBvK1Nh1rpL3v/vNE685lBwjNwlCJAzVflBhl0eu4vzE
+         ZOMWXLBRKEnF+k3OwVj9PPj8w/6OyXmWh8SGTcgK+Hr+IjCi4afFQ/pQe5hN9Ps7oDNg
+         wco7p4kGhdy47fnlgoUYGbx4bKaR3gKCrSVAtqgnop2qQvdnZyb83IZgC3eYR8OnX41s
+         CJNQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWH4r9urqd4a4Jd6/EpjeY4pX7RnZAy3BIseCiFr0J1LJoSiK+lKe/vaeK/EpxssPS9Bwm+EhN0K5U=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwGLpIGaYMPoDRqiOLF7k6OCg0LPWx7uo4m44eYxe4KfFoB1+38
+	/D9cQ8UgTQ3wMIaPKhprLUdYRWTy6OaSamZthzIQvmHmVkVJXioaDUEp
+X-Gm-Gg: ASbGncuDK48j8ckjtBeLoYLAjdQmaUhvhEK0VE0y59f+Lrs5YsiShtaLMEfor7hFBTe
+	LYxl+xQfBfyajOXLDOG8wuK6Rjr6ClBAnt5+3bmmhYxmY7hN/1yIJC9GvqaQMFZS81893cVMeoj
+	k0Er7RtJLRaccxWpc7Sz8Pm5P1vxBCP8jCGe04WD6AcNpGs3LktyMyzWwkVm8YD2SHdlpIOob29
+	bGyWQOLglQHEX3EqRrnND40CjCeEtWnHop9jJF9IEeR5gV4j0YLnznUmkS0kCZNBfLGg+DbI5qn
+	9YIt6++Jf2uMsQ6NaZh8zA3I2A7IK6qMpRsihLXxK/9ZOR16ZI4+JXa5N+K+fPosprdNrXhMXdb
+	52Gji/iPmTDTHsIa5tzKDjtxjN7SKHYzLdKDEzTvMqfZKA85BVHtupfHAeg2bqtrgBh3bHUcuYZ
+	5JrkYyXuy0wOE=
+X-Google-Smtp-Source: AGHT+IG4Ijd1mOBZgcS8rSNiAG+x0vPHrGAlLEBJfBng2UjtGnnQoMVk98YfwkoPNv3aujC54bkU+A==
+X-Received: by 2002:a17:90b:2d0d:b0:340:bfcd:6af8 with SMTP id 98e67ed59e1d1-3436cb73a21mr10515621a91.4.1762792601393;
+        Mon, 10 Nov 2025 08:36:41 -0800 (PST)
+Received: from localhost ([103.88.46.62])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ba8faf1dc06sm13055990a12.16.2025.11.10.08.36.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Nov 2025 08:36:40 -0800 (PST)
+From: Jinchao Wang <wangjinchao600@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Marco Elver <elver@google.com>,
+	Mike Rapoport <rppt@kernel.org>,
+	Alexander Potapenko <glider@google.com>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+	Andrii Nakryiko <andrii@kernel.org>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Ben Segall <bsegall@google.com>,
+	Bill Wendling <morbo@google.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	David Hildenbrand <david@redhat.com>,
+	David Kaplan <david.kaplan@amd.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Dietmar Eggemann <dietmar.eggemann@arm.com>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Ian Rogers <irogers@google.com>,
+	Ingo Molnar <mingo@redhat.com>,
+	James Clark <james.clark@linaro.org>,
+	Jinchao Wang <wangjinchao600@gmail.com>,
+	Jinjie Ruan <ruanjinjie@huawei.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Juri Lelli <juri.lelli@redhat.com>,
+	Justin Stitt <justinstitt@google.com>,
+	kasan-dev@googlegroups.com,
+	Kees Cook <kees@kernel.org>,
+	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
+	"Liang Kan" <kan.liang@linux.intel.com>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	linux-perf-users@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org,
+	llvm@lists.linux.dev,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Masahiro Yamada <masahiroy@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Mel Gorman <mgorman@suse.de>,
+	Michal Hocko <mhocko@suse.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Nam Cao <namcao@linutronix.de>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Naveen N Rao <naveen@kernel.org>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	Rong Xu <xur@google.com>,
+	Sami Tolvanen <samitolvanen@google.com>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+	Valentin Schneider <vschneid@redhat.com>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	Vincenzo Frascino <vincenzo.frascino@arm.com>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Will Deacon <will@kernel.org>,
+	workflows@vger.kernel.org,
+	x86@kernel.org
+Subject: [PATCH v8 00/27] mm/ksw: Introduce KStackWatch debugging tool
+Date: Tue, 11 Nov 2025 00:35:55 +0800
+Message-ID: <20251110163634.3686676-1-wangjinchao600@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251110-adf41513-iio-driver-v1-1-2df8be0fdc6e@analog.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 10, 2025 at 03:44:44PM +0000, Rodrigo Alencar via B4 Relay wrote:
-> 
-> - ADF41513: 1 GHz to 26.5 GHz frequency range
-> - ADF41510: 1 GHz to 10 GHz frequency range
-> - Integer-N and fractional-N operation modes
-> - Ultra-low phase noise (-235 dBc/Hz integer-N, -231 dBc/Hz fractional-N)
-> - High maximum PFD frequency (250 MHz integer-N, 125 MHz fractional-N)
-> - 25-bit fixed modulus or 49-bit variable modulus fractional modes
-> - Programmable charge pump currents with 16x range
-> - Digital lock detect functionality
-> - Phase resync capability for consistent output phase
-> - Clock framework integration for system clock generation
+Earlier this year, I debugged a stack corruption panic that revealed the
+limitations of existing debugging tools. The bug persisted for 739 days
+before being fixed (CVE-2025-22036), and my reproduction scenario
+differed from the CVE report—highlighting how unpredictably these bugs
+manifest.
 
-It is like a list from the marketing material. Please
-1) make sure you are writing the commit message;
-2) implement minimum basic functionality and split features to the next
-patches, 1.5kLoCs is hard to review.
+The panic call trace:
 
-...
+<4>[89318.486564]  <TASK>
+<4>[89318.486570]  dump_stack_lvl+0x48/0x70
+<4>[89318.486580]  dump_stack+0x10/0x20
+<4>[89318.486586]  panic+0x345/0x3a0
+<4>[89318.486596]  ? __blk_flush_plug+0x121/0x130
+<4>[89318.486603]  __stack_chk_fail+0x14/0x20
+<4>[89318.486612]  __blk_flush_plug+0x121/0x130
+...27 other frames omitted
+<4>[89318.486824]  ksys_read+0x6b/0xf0
+<4>[89318.486829]  __x64_sys_read+0x19/0x30
+<4>[89318.486834]  x64_sys_call+0x1ada/0x25c0
+<4>[89318.486840]  do_syscall_64+0x7f/0x180
+<4>[89318.486847]  ? exc_page_fault+0x94/0x1b0
+<4>[89318.486855]  entry_SYSCALL_64_after_hwframe+0x73/0x7b
+<4>[89318.486866]  </TASK>
 
-> +#include <linux/bitfield.h>
-> +#include <linux/bits.h>
-> +#include <linux/clk.h>
-> +#include <linux/clk-provider.h>
-> +#include <linux/device.h>
-> +#include <linux/err.h>
-> +#include <linux/gpio/consumer.h>
-> +#include <linux/iio/iio.h>
-> +#include <linux/iio/sysfs.h>
-> +#include <linux/math64.h>
-> +#include <linux/module.h>
-> +#include <linux/mod_devicetable.h>
-> +#include <linux/property.h>
-> +#include <linux/regulator/consumer.h>
-> +#include <linux/spi/spi.h>
+Initially, I enabled KASAN, but the bug did not reproduce. Reviewing the
+code in __blk_flush_plug(), I found it difficult to trace all logic
+paths due to indirect function calls through function pointers.
 
-At least types.h is missing. Follow IWYU. Have you passed internal review? I
-believe we need to start asking Analog Devices to provide a Rb tag of known
-developers on the submitted code to make sure it was passed the internal
-review.
+I added canary-locating code to obtain the canary address and value,
+then inserted extensive debugging code to track canary modifications. I
+observed the canary being corrupted between two unrelated assignments,
+indicating corruption by another thread—a silent stack corruption bug.
 
-...
+I then added hardware breakpoint (hwbp) code, but still failed to catch
+the corruption. After adding PID filters, function parameter filters,
+and depth filters, I discovered the corruption occurred in
+end_buffer_read_sync() via atomic_dec(&bh->b_count), where bh->b_count
+overlapped with __blk_flush_plug()'s canary address. Tracing the bh
+lifecycle revealed the root cause in exfat_get_block()—a function not
+even present in the panic call trace.
 
-> +/* Specifications */
-> +#define ADF41513_MIN_RF_FREQ			1000000000ULL	/* 1 GHz */
-> +#define ADF41510_MAX_RF_FREQ			10000000000ULL	/* 10 GHz */
-> +#define ADF41513_MAX_RF_FREQ			26500000000ULL	/* 26.5 GHz */
+This bug was later assigned CVE-2025-22036
+(https://lore.kernel.org/all/2025041658-CVE-2025-22036-6469@gregkh/).
+The vulnerability was introduced in commit 11a347fb6cef (March 13, 2023)
+and fixed in commit 1bb7ff4204b6 (March 21, 2025)—persisting for 739
+days. Notably, my reproduction scenario differed significantly from that
+described in the CVE report, highlighting how these bugs manifest
+unpredictably across different workloads.
 
-We have HZ_PER_MHZ, also you can move HZ_PER_GHZ to the units.h and use it here.
+This experience revealed how notoriously difficult stack corruption bugs
+are to debug: KASAN cannot reproduce them, call traces are misleading,
+and the actual culprit often lies outside the visible call chain. Manual
+instrumentation with hardware breakpoints and filters was effective but
+extremely time-consuming.
 
-> +
-> +#define ADF41513_MIN_REF_FREQ			10000000U	/* 10 MHz */
-> +#define ADF41513_MAX_REF_FREQ			800000000U	/* 800 MHz */
-> +#define ADF41513_MAX_REF_FREQ_DOUBLER		225000000U	/* 225 MHz */
-> +
-> +#define ADF41513_MAX_PFD_FREQ_INT_N_HZ		250000000U		/* 250 MHz */
-> +#define ADF41513_MAX_PFD_FREQ_FRAC_N_HZ		125000000U		/* 125 MHz */
-> +#define ADF41513_MAX_PFD_FREQ_INT_N_UHZ		250000000000000ULL	/* 250 MHz */
-> +#define ADF41513_MAX_PFD_FREQ_FRAC_N_UHZ	125000000000000ULL	/* 125 MHz */
+This motivated KStackWatch: automating the debugging workflow I manually
+performed, making hardware breakpoint-based stack monitoring readily
+available to all kernel developers facing similar issues.
 
-Ditto.
+KStackWatch is a lightweight debugging tool to detect kernel stack
+corruption in real time. It installs a hardware breakpoint (watchpoint)
+at a function's specified offset using kprobe.post_handler and removes
+it in fprobe.exit_handler. This covers the full execution window and
+reports corruption immediately with time, location, and a call stack.
 
-...
+Beyond automating proven debugging workflows, KStackWatch incorporates
+robust engineering to handle complex scenarios like context switches,
+recursion, and concurrent execution, making it suitable for broad
+debugging use cases.
 
-> +#define ADF41513_MIN_CP_VOLTAGE_MV		810
-> +#define ADF41513_MAX_CP_VOLTAGE_MV		12960
+## Key Features
 
-_mV
+* Immediate and precise stack corruption detection
+* Support for multiple concurrent watchpoints with configurable limits
+* Lockless design, usable in any context
+* Depth filter for recursive calls
+* Low overhead of memory and CPU
+* Flexible debugfs configuration with key=val syntax
+* Architecture support: x86_64 and arm64
+* Auto-canary detection to simplify configuration
 
-...
+## Architecture Support
 
-> +#define ADF41513_MAX_LD_BIAS_UA			40
-> +#define ADF41513_LD_BIAS_STEP_UA		10
+KStackWatch currently supports x86_64 and arm64. The design is
+architecture-agnostic, requiring only:
+* Hardware breakpoint modification in atomic context
 
-_uA
+Arm64 support required only ~20 lines of code(patch 18,19). Future ports
+to other architectures (e.g., riscv) should be straightforward for
+developers familiar with their hardware breakpoint implementations.
 
+## Performance Impact
 
-...
+Runtime overhead was measured on Intel Core Ultra 5 125H @ 3 GHz running
+kernel 6.17, using test4 from patch 24:
 
-> +#define ADF41513_MAX_MOD2			((1 << 24) - 1)	/* 2^24 - 1 */
+     Type                 |   Time (ns)  |  Cycles
+     -----------------------------------------------
+     entry with watch     |     10892    |   32620
+     entry without watch  |       159    |     466
+     exit  with watch     |     12541    |   37556
+     exit  without watch  |       124    |     369
 
-Why not BIT()?
+Comparation with other scenarios:
 
-...
+Mode                        |  CPU Overhead (add)  |  Memory Overhead (add)
+----------------------------+----------------------+-------------------------
+Compiled but not enabled    |  None                |  ~20 B per task
+Enabled, no function hit    |  None                |  ~few hundred B
+Func hit, HWBP not toggled  |  ~140 ns per call    |  None
+Func hit, HWBP toggled      |  ~11–12 µs per call  |  None
 
-> +/* Frequency conversion constants */
-> +#define ADF41513_HZ_TO_UHZ			1000000ULL	/* Convert Hz to uHz */
+The overhead is minimal, making KStackWatch suitable for production
+environments where stack corruption is suspected but kernel rebuilds are not feasible.
 
-Put it to units.h.
+## Validation
 
-...
+To validate the approach, this series includes a self-contained test module and
+a companion shell script. The module provides several test cases covering
+scenarios such as canary overflow, recursive depth tracking, multi-threaded
+silent corruption, retaddr overwriten. A detailed workflow example and usage
+guide are provided in the documentation (patch 26).
 
-> +enum {
-> +	ADF41513_FREQ,
-> +	ADF41513_POWER_DOWN,
-> +	ADF41513_FREQ_RESOLUTION,
-> +	ADF41513_FREQ_REFIN
+While KStackWatch itself is a new tool and has not yet discovered production
+bugs, it automates the exact methodology that I used to manually uncover
+CVE-2025-22036. The tool is designed to make this powerful debugging technique
+readily available to kernel developers, enabling them to efficiently detect and
+diagnose similar stack corruption issues in the future.
 
-Doesn't sound like a terminator to me, add a comma.
+---
+Patches 1–3 of this series are also used in the wprobe work proposed by
+Masami Hiramatsu, so there may be some overlap between our patches.
+Patch 3 comes directly from Masami Hiramatsu (thanks).
+---
 
-> +};
-> +
-> +enum adf41513_pll_mode {
-> +	ADF41513_MODE_INTEGER_N,
-> +	ADF41513_MODE_FIXED_MODULUS,
-> +	ADF41513_MODE_VARIABLE_MODULUS,
-> +	ADF41513_MODE_INVALID
+Changelog:
+v8:
+* Add arm64 support
+  * Implement hwbp_reinstall() for arm64.
+  * Use single-step mode as default in ksw_watch_handler().
+* Add latency measurements for probe handlers.
+* Update configuration options
+  * Introduce explicit auto_canary parameter.
+  * Default watch_len to sizeof(unsigned long) when zero.
+  * Replace panic_on_catch with panic_hit ksw_config option.
+* Enable KStackWatch in non-debug builds.
+* Limit canary search range to the current stack frame when possible.
+* Add automatic architecture detection for test parameters.
+* Move kstackwatch.h to include/linux/.
+* Relocate Kconfig fragments to the kstackwatch/ directory.
 
-Ditto.
+v7:
+  https://lore.kernel.org/all/20251009105650.168917-1-wangjinchao600@gmail.com/
+  * Fix maintainer entry to alphabetical position
 
-> +};
+v6:
+  https://lore.kernel.org/all/20250930024402.1043776-1-wangjinchao600@gmail.com/
+  * Replace procfs with debugfs interface
+  * Fix typos
 
-...
+v5:
+  https://lore.kernel.org/all/20250924115124.194940-1-wangjinchao600@gmail.com/
+  * Support key=value input format
+  * Support multiple watchpoints
+  * Support watching instruction inside loop
+  * Support recursion depth tracking with generation
+  * Ignore triggers from fprobe trampoline
+  * Split watch_on into watch_get and watch_on to fail fast
+  * Handle ksw_stack_prepare_watch error
+  * Rewrite silent corruption test
+  * Add multiple watchpoints test
+  * Add an example in documentation
 
-> +struct adf41513_data {
+v4:
+  https://lore.kernel.org/all/20250912101145.465708-1-wangjinchao600@gmail.com/
+  * Solve the lockdep issues with:
+    * per-task KStackWatch context to track depth
+    * atomic flag to protect watched_addr
+  * Use refactored version of arch_reinstall_hw_breakpoint
 
-Run `pahole` and act accordingly.
+v3:
+  https://lore.kernel.org/all/20250910052335.1151048-1-wangjinchao600@gmail.com/
+  * Use modify_wide_hw_breakpoint_local() (from Masami)
+  * Add atomic flag to restrict /proc/kstackwatch to a single opener
+  * Protect stack probe with an atomic PID flag
+  * Handle CPU hotplug for watchpoints
+  * Add preempt_disable/enable in ksw_watch_on_local_cpu()
+  * Introduce const struct ksw_config *ksw_get_config(void) and use it
+  * Switch to global watch_attr, remove struct watch_info
+  * Validate local_var_len in parser()
+  * Handle case when canary is not found
+  * Use dump_stack() instead of show_regs() to allow module build
+  * Reduce logging and comments
+  * Format logs with KBUILD_MODNAME
+  * Remove unused headers
+  * Add new document
 
-> +	u64 power_up_frequency;
-> +
-> +	u8 ref_div_factor;
-> +	bool ref_doubler_en;
-> +	bool ref_div2_en;
-> +
-> +	u32 charge_pump_voltage_mv;
-> +	bool phase_detector_polarity;
-> +
-> +	u8 muxout_select;
-> +	bool muxout_1v8_en;
-> +
-> +	u8 lock_detect_precision;
-> +	u8 lock_detect_count;
-> +	u8 lock_detect_bias;
-> +	bool fast_lock_en;
-> +
-> +	u16 phase_resync_clk_div[2];
-> +	bool phase_resync_en;
-> +	bool load_enable_sync;
-> +
-> +	u64 freq_resolution_uhz;
-> +};
-> +
-> +struct adf41513_pll_settings {
-> +	enum adf41513_pll_mode mode;
-> +
-> +	u64 target_frequency_uhz;
-> +	u64 actual_frequency_uhz;
-> +	u64 pfd_frequency_uhz;
-> +
-> +	/* pll parameters */
-> +	u16 int_value;
-> +	u32 frac1;
-> +	u32 frac2;
-> +	u32 mod2;
-> +
-> +	/* reference path parameters */
-> +	u8 r_counter;
-> +	u8 ref_doubler;
-> +	u8 ref_div2;
-> +	u8 prescaler;
-> +};
+v2:
+  https://lore.kernel.org/all/20250904002126.1514566-1-wangjinchao600@gmail.com/
+  * Make hardware breakpoint and stack operations
+    architecture-independent.
 
-...
+v1:
+  https://lore.kernel.org/all/20250828073311.1116593-1-wangjinchao600@gmail.com/
+  * Replaced kretprobe with fprobe for function exit hooking, as
+    suggested by Masami Hiramatsu
+  * Introduced per-task depth logic to track recursion across scheduling
+  * Removed the use of workqueue for a more efficient corruption check
+  * Reordered patches for better logical flow
+  * Simplified and improved commit messages throughout the series
+  * Removed initial archcheck which should be improved later
+  * Replaced the multiple-thread test with silent corruption test
+  * Split self-tests into a separate patch to improve clarity.
+  * Added a new entry for KStackWatch to the MAINTAINERS file.
+---
 
-> +static const u32 adf41513_cp_voltage_mv[] = {
-> +	810, 1620, 2430, 3240, 4050, 4860, 5670, 6480, 7290, 8100,
-> +	8910, 9720, 10530, 11340, 12150, 12960
+Jinchao Wang (26):
+  x86/hw_breakpoint: Unify breakpoint install/uninstall
+  x86/hw_breakpoint: Add arch_reinstall_hw_breakpoint
+  mm/ksw: add build system support
+  mm/ksw: add ksw_config struct and parser
+  mm/ksw: add singleton debugfs interface
+  mm/ksw: add HWBP pre-allocation
+  mm/ksw: Add atomic watchpoint management api
+  mm/ksw: ignore false positives from exit trampolines
+  mm/ksw: support CPU hotplug
+  sched/ksw: add per-task context
+  mm/ksw: add entry kprobe and exit fprobe management
+  mm/ksw: add per-task ctx tracking
+  mm/ksw: resolve stack watch addr and len
+  mm/ksw: limit canary search to current stack frame
+  mm/ksw: manage probe and HWBP lifecycle via procfs
+  mm/ksw: add KSTACKWATCH_PROFILING to measure probe cost
+  arm64/hw_breakpoint: Add arch_reinstall_hw_breakpoint
+  arm64/hwbp/ksw: integrate KStackWatch handler support
+  mm/ksw: add self-debug helpers
+  mm/ksw: add test module
+  mm/ksw: add stack overflow test
+  mm/ksw: add recursive depth test
+  mm/ksw: add multi-thread corruption test cases
+  tools/ksw: add arch-specific test script
+  docs: add KStackWatch document
+  MAINTAINERS: add entry for KStackWatch
 
-Make it power-of-two items per line, even with the comments to show
-the indexing, like
+Masami Hiramatsu (Google) (1):
+  HWBP: Add modify_wide_hw_breakpoint_local() API
 
-	810, 1620, 2430, 3240, 4050, 4860, 5670, 6480,	/* 0 - 7 */
+ Documentation/dev-tools/index.rst       |   1 +
+ Documentation/dev-tools/kstackwatch.rst | 377 +++++++++++++++++++++
+ MAINTAINERS                             |   9 +
+ arch/Kconfig                            |  10 +
+ arch/arm64/Kconfig                      |   1 +
+ arch/arm64/include/asm/hw_breakpoint.h  |   1 +
+ arch/arm64/kernel/hw_breakpoint.c       |  12 +
+ arch/x86/Kconfig                        |   1 +
+ arch/x86/include/asm/hw_breakpoint.h    |   8 +
+ arch/x86/kernel/hw_breakpoint.c         | 148 +++++----
+ include/linux/hw_breakpoint.h           |   6 +
+ include/linux/kstackwatch.h             |  68 ++++
+ include/linux/kstackwatch_types.h       |  14 +
+ include/linux/sched.h                   |   5 +
+ kernel/events/hw_breakpoint.c           |  37 +++
+ mm/Kconfig                              |   1 +
+ mm/Makefile                             |   1 +
+ mm/kstackwatch/Kconfig                  |  34 ++
+ mm/kstackwatch/Makefile                 |   8 +
+ mm/kstackwatch/kernel.c                 | 295 +++++++++++++++++
+ mm/kstackwatch/stack.c                  | 416 ++++++++++++++++++++++++
+ mm/kstackwatch/test.c                   | 345 ++++++++++++++++++++
+ mm/kstackwatch/watch.c                  | 309 ++++++++++++++++++
+ tools/kstackwatch/kstackwatch_test.sh   |  85 +++++
+ 24 files changed, 2130 insertions(+), 62 deletions(-)
+ create mode 100644 Documentation/dev-tools/kstackwatch.rst
+ create mode 100644 include/linux/kstackwatch.h
+ create mode 100644 include/linux/kstackwatch_types.h
+ create mode 100644 mm/kstackwatch/Kconfig
+ create mode 100644 mm/kstackwatch/Makefile
+ create mode 100644 mm/kstackwatch/kernel.c
+ create mode 100644 mm/kstackwatch/stack.c
+ create mode 100644 mm/kstackwatch/test.c
+ create mode 100644 mm/kstackwatch/watch.c
+ create mode 100755 tools/kstackwatch/kstackwatch_test.sh
 
-> +};
-
-...
-
-> +static int adf41513_parse_uhz(const char *str, u64 *freq_uhz)
-
-My gosh, please, try to check what kernel already has. We try hard to avoid Yet
-Another Best Parser in the World to happen, really.
-
-...
-
-In any case, I stopped my review here, you have more than enough to fix.
-Please, come next time with a tag from one whose name is in the MAINTAINERS.
-From now on it will be my requirement as a reviewer of IIO subsystem.
-
--- 
-With Best Regards,
-Andy Shevchenko
-
+-* 
+2.43.0
 
 
