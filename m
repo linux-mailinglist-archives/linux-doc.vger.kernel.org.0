@@ -1,145 +1,135 @@
-Return-Path: <linux-doc+bounces-66129-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66131-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 547ACC48E69
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 20:09:43 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BCA6C48F8D
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 20:21:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id CE76D34AC17
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 19:09:42 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 4ACF43AF716
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Nov 2025 19:14:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7ED111553A3;
-	Mon, 10 Nov 2025 19:09:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8EDD332AAB4;
+	Mon, 10 Nov 2025 19:14:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FmwAFKim"
+	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="k/oIyHx5"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A65EF31DD91
-	for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 19:09:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86012223DC0;
+	Mon, 10 Nov 2025 19:14:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762801777; cv=none; b=J32Xc7x52DnQsm/lop0rm/umeDJXcmm4jc7HhOqDKCAsIq7wvbQxBCFADWA1i87HSLiBbAagtb0P8f1s77epLLXmEtzW2l9I3FGoxnqN+CXphdkirqt/e8WnB2+6NkJLSTRTCP5QRIxX82DMXOX1ePimeHV8euhS7ADUJp6CBD0=
+	t=1762802051; cv=none; b=W+FoJipUCOJhj8KLix91XCs9fl95CL3cIepz03rQ0E4T+iG1KUdlF6TKLBntNrddNOEEYfhn1i4+bdp4lojUap6jXMBjfQ6vF2wtW9oMi8tSHdRZhEfsc98CKv/B97Dkq0A6D0MNOA9X1Ll4uKW+OoR942IEKKX5EWmoYwyBqds=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762801777; c=relaxed/simple;
-	bh=pjE8KQuvzc9zkIIqC+ztU2aLEN0NS7tHjOH0lZb2hrY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=IY9kXdEPVMRqwzJW3b0agSJME/apPH2HNc+3JABqkT+KHFCsJQbbwEK5O3zyi+PfgtqTcv6AIBFCB4jm85ZqPqMdb1wbd4MBI29yIRI9YKcaQdW4PS9oYZe8ASYIrmFVfAlb54KE4SZh9wWMcJA7onRi5wBdD0T+8X5L/UgfIQ0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FmwAFKim; arc=none smtp.client-ip=209.85.222.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-89e93741839so250782485a.3
-        for <linux-doc@vger.kernel.org>; Mon, 10 Nov 2025 11:09:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1762801774; x=1763406574; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Kh/pfFXNphB5J8FM7JSKHKBWUvUQumq6jmykYXtU/Fk=;
-        b=FmwAFKimMwtSibfm03rcXaOMGDfo0YF3a65NIcuDu149ThAK3OQobOs6QQc4eSbvWg
-         AOz4Wx/Vi7n+SRe8WmTU3gy6zCvK58F7+8y4f2LXSYrAMJVjt6ju+05MzfCjPcCyyWJa
-         6wwJ6flpxzs+wksqC6o0eY+IfGGEGXV5xI6xc/Hjese0RXEmWS612Uy7o5bQ7PgBpQ7+
-         H7dIWSbPuwtHTFWnQibzIkNjbxMC5WVatKBVnPXEEQrigHOnR5Cz+jQ6/lAJ0wNil0Jb
-         i3QNnZy+lAufOYnOy9NzZLIX6hetk7JjPBx/WZZ48svd7QhWTz199h3fnQHiJO/U8uow
-         +iEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762801774; x=1763406574;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Kh/pfFXNphB5J8FM7JSKHKBWUvUQumq6jmykYXtU/Fk=;
-        b=WTRw8qV8lRrYx9GQrdAbp51bnMi4heHPW7Fe8zrOGrpjmh6suBGSw/UCd/bU+TKYia
-         GIlTlv2vodKhnnwvR/WN1bIdIFuWNUL9OZevDcpHSGhMmmcbdeessgqgc1GIHj53Hrv2
-         pTuR0JxFaCTPKV/zr7xebSiLD+zlzKhT5S1n3cjvwr8yr3/Z/RA+DnRreHYKRmKqTYLx
-         PgHSyc+YRr9WNwnl8CbscCpg17XZzkKQV+4UZiRpRz1DxSVoki/xYvHxLonIhj9mEsUJ
-         e8txMMmypr04N0d3G36E/aLMJDLo88hyQ3xrOFHkzq4Z6JnrcUfmpZOaziZuHtN3Lgw7
-         666A==
-X-Forwarded-Encrypted: i=1; AJvYcCUv8x3S5KfTAY63uh2WWdg6sVGuTh4mapkKm4LVsPIG+isOlxQZay01oEXe9o/qHQ4Wfcd1QFS+/44=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwCXCTu9Kk/wZMAKUppAbr7TMAP5srqsrq2LeZ63vieCZxiAdtV
-	syPnNfSG5wFVpMg9AVYTo+63r4T5/7N6uo863G8UcPAantPWxDeNNaMz
-X-Gm-Gg: ASbGncsGQBNj+MOi2e3/EU2bDRhQlAJWDzL2JYh7XSCQxofkXuEtJZGr/6gb9h54ZVz
-	h8ndKnSDpLGR1e7aiSZJffEOExf4aLEnQPS7QVMhq13ThYiQGutXSdP3D/YSKR7VDYerybSy4di
-	L3iCRE/jsiFB20t6Ct6kjp4JWOPAHXLJctTtXa3fRgHCB5l6Zg+O8Bo4rfMit58IPqfICRy0jm9
-	zn2bS7/7mByyMBo9tP5eoKdVqqmBX98S2vNwIsKSHXg1lu1zy4ctZmLMW/u0FCyjn31Ek7ASf4c
-	7nHnzi4FiOVeh0p3ujn+Hh0cvMUW3s0NL/IOHFXXTonq0LGXkXgGKYAO6CsFKyBdfZVHac4Ppnt
-	aBaIrBIku56zXWMhhxVNVTwUstsiH5xtTiB9qxERcrd5xPMO8X/LfPpy6XnCe2jBlB4nm3U+P+P
-	yNWDF8+ISXKKI2+nye+6tt52yAuz4sz0Y=
-X-Google-Smtp-Source: AGHT+IERCXMjJNRnt0BFVnvUSTvP7ZvwPBkw2ba4rSGkzoC1mJwG61sqECbRHnlBF54bJjOGFPQBbg==
-X-Received: by 2002:a05:620a:c41:b0:8b2:1568:82e8 with SMTP id af79cd13be357-8b257f05374mr1272565485a.35.1762801774300;
-        Mon, 10 Nov 2025 11:09:34 -0800 (PST)
-Received: from ?IPV6:2a03:83e0:1145:4:3280:a85f:e61:4547? ([2620:10d:c091:500::5:432b])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8b23582b0c9sm1066092985a.55.2025.11.10.11.09.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 10 Nov 2025 11:09:33 -0800 (PST)
-Message-ID: <61e1b43c-e8cf-491d-83b0-22ec46784a88@gmail.com>
-Date: Mon, 10 Nov 2025 14:09:31 -0500
+	s=arc-20240116; t=1762802051; c=relaxed/simple;
+	bh=jzAWVx9Su8bAzd56ECW8UvAEYkBkSERr9RuxpW0KqxQ=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
+	 MIME-Version:Content-Type; b=mWh6tjrpzDYctjnNmB/ZCTXLg3CUSWYcq8bL6FO//Rc9IgfHrphDFP0V8iXFaA863JXs0SOHg/qlwMta5212eukblF7+zt031kxtqj4GYcSxZVshYe2uxx4MdTUlu7hbW0yfYyGgqA2LD7eAves3ie3a5ZhiiNqZg0Nuy33HVFk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=k/oIyHx5; arc=none smtp.client-ip=198.137.202.136
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
+Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
+	(authenticated bits=0)
+	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 5AAJ9wVb3760859
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+	Mon, 10 Nov 2025 11:09:58 -0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 5AAJ9wVb3760859
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2025102301; t=1762801800;
+	bh=nnCZfxBBxg3UdNy9fEr4h1ydR7erPjaFEoY0mwQn658=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
+	b=k/oIyHx5SOgXhKqvIMO3vvqjmjL5csppL8LL82kpcvUWyfXhC8znd5pNzJxYRI89C
+	 nnm+ErU5a1rp2Sze4Mg1TwoOJRruFUoZUG6wpSJLkdL8GGJsDn2dOvB7gYQOHbCGeU
+	 AChmNMTP/YEpv9oRNA+4hN43VB1U+Uvdth+VyBLS85hLHt3lPG4wh+l/fZsKr+3qoL
+	 BHT0V4GCgt0rddLv83ZJGRt2KR4UE1py1E+QjE6lUWcYrSOINMyEA+cBXMHhIYEh+o
+	 KsktL1Hz4UyEpL5U0S3uTxXmiJvElZbJBX0rNGe3tYwqF2OevJtoeGyuiW5ATr8pk2
+	 cA+fWOFafrOww==
+Date: Mon, 10 Nov 2025 11:09:56 -0800
+From: "H. Peter Anvin" <hpa@zytor.com>
+To: Sohil Mehta <sohil.mehta@intel.com>, x86@kernel.org,
+        Borislav Petkov <bp@alien8.de>
+CC: Jonathan Corbet <corbet@lwn.net>, Andy Lutomirski <luto@kernel.org>,
+        Josh Poimboeuf <jpoimboe@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        "Kirill A . Shutemov" <kas@kernel.org>, Xin Li <xin@zytor.com>,
+        David Woodhouse <dwmw@amazon.co.uk>,
+        Sean Christopherson <seanjc@google.com>,
+        Rick Edgecombe <rick.p.edgecombe@intel.com>,
+        Vegard Nossum <vegard.nossum@oracle.com>,
+        Andrew Cooper <andrew.cooper3@citrix.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Geert Uytterhoeven <geert@linux-m68k.org>, Kees Cook <kees@kernel.org>,
+        Tony Luck <tony.luck@intel.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-efi@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
+        Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v11_4/9=5D_x86/alternatives=3A_?=
+ =?US-ASCII?Q?Disable_LASS_when_patching_kernel_code?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <29f2d16f-361f-475c-957e-0ebcefcd1a8c@intel.com>
+References: <20251029210310.1155449-1-sohil.mehta@intel.com> <20251029210310.1155449-5-sohil.mehta@intel.com> <29f2d16f-361f-475c-957e-0ebcefcd1a8c@intel.com>
+Message-ID: <404E225C-B6FC-4FCF-B4D9-0D079C72E8B2@zytor.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v3 2/2] net/mlx5: implement swp_l4_csum_mode via
- devlink params
-To: Jiri Pirko <jiri@resnulli.us>, Saeed Mahameed <saeed@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>, Srujana Challa <schalla@marvell.com>,
- Bharat Bhushan <bbhushan2@marvell.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- Brett Creeley <brett.creeley@amd.com>, Andrew Lunn <andrew+netdev@lunn.ch>,
- Michael Chan <michael.chan@broadcom.com>,
- Pavan Chebbi <pavan.chebbi@broadcom.com>,
- Tony Nguyen <anthony.l.nguyen@intel.com>,
- Przemek Kitszel <przemyslaw.kitszel@intel.com>,
- Sunil Goutham <sgoutham@marvell.com>, Linu Cherian <lcherian@marvell.com>,
- Geetha sowjanya <gakula@marvell.com>, Jerin Jacob <jerinj@marvell.com>,
- hariprasad <hkelam@marvell.com>, Subbaraya Sundeep <sbhatta@marvell.com>,
- Tariq Toukan <tariqt@nvidia.com>, Saeed Mahameed <saeedm@nvidia.com>,
- Leon Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>,
- Ido Schimmel <idosch@nvidia.com>, Petr Machata <petrm@nvidia.com>,
- Manish Chopra <manishc@marvell.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Sergey Ryazanov <ryazanov.s.a@gmail.com>,
- Johannes Berg <johannes@sipsolutions.net>,
- Vladimir Oltean <olteanv@gmail.com>,
- Michal Swiatkowski <michal.swiatkowski@linux.intel.com>,
- Aleksandr Loktionov <aleksandr.loktionov@intel.com>,
- Dave Ertman <david.m.ertman@intel.com>,
- Vlad Dumitrescu <vdumitrescu@nvidia.com>,
- "Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>,
- Alexander Sverdlin <alexander.sverdlin@gmail.com>,
- Lorenzo Bianconi <lorenzo@kernel.org>, netdev@vger.kernel.org,
- linux-doc@vger.kernel.org, intel-wired-lan@lists.osuosl.org,
- linux-rdma@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org
-References: <20251107204347.4060542-1-daniel.zahka@gmail.com>
- <20251107204347.4060542-3-daniel.zahka@gmail.com> <aQ7f1T1ZFUKRLQRh@x130>
- <jhmdihtp63rblcjiy2pibhnz2sikvbm6bhnkclq3l2ndxgbqbb@e3t23x2x2r46>
-Content-Language: en-US
-From: Daniel Zahka <daniel.zahka@gmail.com>
-In-Reply-To: <jhmdihtp63rblcjiy2pibhnz2sikvbm6bhnkclq3l2ndxgbqbb@e3t23x2x2r46>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On November 10, 2025 10:15:23 AM PST, Sohil Mehta <sohil=2Emehta@intel=2Eco=
+m> wrote:
+>Hi Boris,
+>
+>On 10/29/2025 2:03 PM, Sohil Mehta wrote:
+>> +/*
+>> + * LASS enforcement is based on bit 63 of the virtual address=2E The
+>> + * kernel is not allowed to touch memory in the lower half of the
+>> + * virtual address space=2E
+>> + *
+>> + * Use lass_disable()/lass_enable() to toggle the AC bit for kernel da=
+ta
+>> + * accesses (!_PAGE_USER) that are blocked by LASS, but not by SMAP=2E
+>> + *
+>> + * Even with the AC bit set, LASS will continue to block instruction
+>> + * fetches from the user half of the address space=2E To allow those,
+>> + * clear CR4=2ELASS to disable the LASS mechanism entirely=2E
+>> + *
+>
+>Based on the EFI discussion, it looks like we would now need to toggle
+>CR4=2ELASS every time we switch to efi_mm=2E The lass_enable()/_disable()
+>naming would be more suitable for those wrappers=2E
+>
+>I am thinking of reverting this back to lass_clac()/lass_stac()=2E
+>
+>lass_clac()/_stac():
+>	Disable enforcement for kernel data accesses similar to SMAP=2E
+>
+>lass_enable()/_disable():
+>	Disable the entire LASS mechanism (Data and instruction fetch)
+>	by toggling CR4=2ELASS
+>
+>Would that work? Any other suggestions?
+>
+>
+>> +
+>> +static __always_inline void lass_enable(void)
+>> +{
+>> +	alternative("", "clac", X86_FEATURE_LASS);
+>> +}
+>> +
+>> +static __always_inline void lass_disable(void)
+>> +{
+>> +	alternative("", "stac", X86_FEATURE_LASS);
+>> +}
+>> +
 
-
-On 11/9/25 5:46 AM, Jiri Pirko wrote:
-> Regardless this patch, since this is param to be reflected on fw reboot
-> (permanent cmode), I think it would be nice to expose indication if
-> param value passed to user currently affects the fw, or if it is going
-> to be applied after fw reboot. Perhaps a simple bool attr would do?
-
-I can add something like this. For permanent cmode params, it might make 
-the most sense to expose current and next values the way mstconfig does, 
-but that would be a more complicated change.
+That would be my suggestion for making, too=2E
 
