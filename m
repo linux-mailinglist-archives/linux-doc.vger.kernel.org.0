@@ -1,186 +1,98 @@
-Return-Path: <linux-doc+bounces-66274-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66278-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43DA6C4E99A
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Nov 2025 15:53:22 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD823C4EAB5
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Nov 2025 16:04:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BEDA53BC907
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Nov 2025 14:42:51 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 27F753BE759
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Nov 2025 14:44:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B6FE33CE91;
-	Tue, 11 Nov 2025 14:39:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 72EC33451C7;
+	Tue, 11 Nov 2025 14:41:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="zydxsuLt"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="JPqkypRX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B94133BBC0
-	for <linux-doc@vger.kernel.org>; Tue, 11 Nov 2025 14:39:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 719EB344046;
+	Tue, 11 Nov 2025 14:41:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762871954; cv=none; b=lkRCBxklz/DMwKR3aPiEUPUCGmgG9Kqx6qlUzQ2RrX5nAk99mWq1nCGOpF5ZxlE6zPJCI7m0Qs9YpVBH01omRrYDQuLfKId9JYRdeGoRUIV35xY7IUKB8GA7U+Aa7NKqjvwIgfUoekCpfsdOgv2fdvh76L2N1CsgDWx9M4v/7lI=
+	t=1762872075; cv=none; b=AyYh8zdkMQjEPGXRsLMkvBD+Sr3754nj1HYCDxO6yLWFazsADhVlOaVKJXYyEddmRuEZgAwUpNrf0IUB4Ih71UM0Vq/eV2Z7Ayw6vCvkYyddZCq8Vo/F6lJ7tjXMauy9f7hmpdLVJbZalg+nuertobCCvjOgHuI8SSz64ncsReI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762871954; c=relaxed/simple;
-	bh=NDXnNMmrl03vXv9oqm07S6qgAhQq+R4B4/0FFECMY6s=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ddJu2pkEoyYZif6FqqWFqZc7yeCQXSXPuUL0t497ZSgi7ZsnM0CLh1CGU3AO7MTmNcpA94ZLSC7D77IrZ/6sQ6MTAaV/o0tPGgh50oje4mSMQCa3Gby0wgD9ukptZ6hvRVnYb3DoE1JYF0aU+8oXMrTGKDN6V1K+0IEwwIlIoH4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=zydxsuLt; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=resnulli.us
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47721743fd0so21351315e9.2
-        for <linux-doc@vger.kernel.org>; Tue, 11 Nov 2025 06:39:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1762871950; x=1763476750; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=BbZiM31j3hF7yHeWrzWbDvWSfA60EWmb9ONaywmv4Bg=;
-        b=zydxsuLtdh2kkOZQG/hKh2nTOHu/pOz5n8UTfDY3URMsOhxICjsTG9nQ2GLZjb95Dz
-         CZFMM+qzmcwXfp9XBLYAiQAMGVp2kX3UOHTd5s1DFN56t7xvDh9SEgFHJvXCijUoZrvJ
-         bzSkFRHZLz6RuthkjdZhi3oOMGjtqx7VpuAXLHStTMVM4jnCvPASd/Tmci22l0gvTc3F
-         sOB1NQMSlBOnhuhMS1m8jpQ/dpfzIEfhkFImwhZhccLCymdcvZOc8TLFMytuBm3tQ/l2
-         /9XN4p6DxjzUvl6S2yXBREJTbzAdyWMDr/8sxuQaQv8GowZWnIvwwY2ebplOB2EmM+zn
-         WiaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762871950; x=1763476750;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BbZiM31j3hF7yHeWrzWbDvWSfA60EWmb9ONaywmv4Bg=;
-        b=g/ZasMLnrmE+56D2owvXZfwkc2sWIPYrVoLvw6DDHmlSHOyN51ZyW+rEbqX2HFJJ6J
-         3i4NnyhY8HDHWYljAGLnco78XBo07jtu+LNHFervQa2YKEzkucwGAnE/unSis10xOQxt
-         owiD+Ku1xCuUN86gXUL3F4Enu6joJJvTh60aO+d98n7q2ouwTJPZzux+Q3LYUuOCnbk8
-         i6IgKG8n1PfLBnPmb6uJ4n9pchAvaUJhwwPkWqph5FAms9ICBfSVtemodaTzXLy0I/uv
-         fCnhzGHeLgR8BaP6CVy9LYUuQ4icni/hyGEhjEm67hluKviFkGfEbSRUlY/gSuYAx9Ei
-         CixA==
-X-Forwarded-Encrypted: i=1; AJvYcCWxCTPHcsctt1rjqR9EAQWfbPcUkg+SGMqybYABOVhxwv/EWAmaoWYpDnV0GkOIdbsxc4rVCKs0W+g=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywz9zNJupfyHMpuO+I0o9caMkSUeT0S3Ps3AJs3tQsCz0tBqhyB
-	wjbF7pBAD78ZEnHbQuJQytWhAb0qLfcG33+l3fMDHCcRPxg7oJ8CeG/ukW9HN2jwQXY=
-X-Gm-Gg: ASbGncvtX9U7ONe2g6cQznfVL3lyWyEuv1TEtn43Gotgjzqi4Cml5Wb9Yoh8hDDGuti
-	1nmu9F2nofwZxiapuiM8jdPRoftIFwf+biz+5TJd/wBVHDNS9cPsVsYLjzx0py6SEu911QFstjF
-	XPCXBsHxYxc6cSTG/SdqUZf3pxgB3zmRIAdsyzyz4/CyI5VUSDB4sbTNgDZ8GcT5C21vnXM+DYZ
-	tGqie+yLiFXkmkR9/b4gMcz1rKn5Ygqv8rsMjc4l9Pav/FZpTHhSIfdnLkvl4C6zJT4BEHl8mPX
-	FFihpl+lYVfxSsftAlRYF1jhiAeGEFiT+iMyryXXHNlRmesVxlrWmVPRcxy8BY28yAaYeImlKx4
-	XLzD1Al2wuUHIWnbBsy4S9VbCcpi9EjHHbvM7Et+3Jx1xllU4wi2oq9OMX8RgAgbuUxH6oZV040
-	JB+kCOQ2kP
-X-Google-Smtp-Source: AGHT+IEWdT0uV5uWHBTGFPHzbW80DutwkV0QHsEFy4zvFBG9BlThbgSAanJ2aRukrqMaWzzZN+v30Q==
-X-Received: by 2002:a05:600c:350b:b0:46e:5100:326e with SMTP id 5b1f17b1804b1-4777327e71bmr107922525e9.23.1762871950232;
-        Tue, 11 Nov 2025 06:39:10 -0800 (PST)
-Received: from jiri-mlt ([140.209.217.211])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477815faadesm21513965e9.0.2025.11.11.06.39.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Nov 2025 06:39:08 -0800 (PST)
-Date: Tue, 11 Nov 2025 15:39:03 +0100
-From: Jiri Pirko <jiri@resnulli.us>
-To: Saeed Mahameed <saeed@kernel.org>
-Cc: Jakub Kicinski <kuba@kernel.org>, 
-	Daniel Zahka <daniel.zahka@gmail.com>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Srujana Challa <schalla@marvell.com>, 
-	Bharat Bhushan <bbhushan2@marvell.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	Brett Creeley <brett.creeley@amd.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	Michael Chan <michael.chan@broadcom.com>, Pavan Chebbi <pavan.chebbi@broadcom.com>, 
-	Tony Nguyen <anthony.l.nguyen@intel.com>, Przemek Kitszel <przemyslaw.kitszel@intel.com>, 
-	Sunil Goutham <sgoutham@marvell.com>, Linu Cherian <lcherian@marvell.com>, 
-	Geetha sowjanya <gakula@marvell.com>, Jerin Jacob <jerinj@marvell.com>, 
-	hariprasad <hkelam@marvell.com>, Subbaraya Sundeep <sbhatta@marvell.com>, 
-	Tariq Toukan <tariqt@nvidia.com>, Saeed Mahameed <saeedm@nvidia.com>, 
-	Leon Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>, Ido Schimmel <idosch@nvidia.com>, 
-	Petr Machata <petrm@nvidia.com>, Manish Chopra <manishc@marvell.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, 
-	Loic Poulain <loic.poulain@oss.qualcomm.com>, Sergey Ryazanov <ryazanov.s.a@gmail.com>, 
-	Johannes Berg <johannes@sipsolutions.net>, Vladimir Oltean <olteanv@gmail.com>, 
-	Michal Swiatkowski <michal.swiatkowski@linux.intel.com>, Aleksandr Loktionov <aleksandr.loktionov@intel.com>, 
-	Dave Ertman <david.m.ertman@intel.com>, Vlad Dumitrescu <vdumitrescu@nvidia.com>, 
-	"Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>, Alexander Sverdlin <alexander.sverdlin@gmail.com>, 
-	Lorenzo Bianconi <lorenzo@kernel.org>, netdev@vger.kernel.org, linux-doc@vger.kernel.org, 
-	intel-wired-lan@lists.osuosl.org, linux-rdma@vger.kernel.org, 
-	linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org
-Subject: Re: [PATCH net-next v3 2/2] net/mlx5: implement swp_l4_csum_mode via
- devlink params
-Message-ID: <cgg6fxjjf6zq6yyzx4njhjmetrlhjgor4lzktwe6nls6rgqd6s@c3abd3ehlzvr>
-References: <20251107204347.4060542-1-daniel.zahka@gmail.com>
- <20251107204347.4060542-3-daniel.zahka@gmail.com>
- <aQ7f1T1ZFUKRLQRh@x130>
- <jhmdihtp63rblcjiy2pibhnz2sikvbm6bhnkclq3l2ndxgbqbb@e3t23x2x2r46>
- <20251110154643.66d15800@kernel.org>
- <aRKs6jXqSvC3G_R0@x130>
+	s=arc-20240116; t=1762872075; c=relaxed/simple;
+	bh=HPsL/tAB194Nvdaf+/kuYpiY3P9Er3Kago6S6vw3LYs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ZWiXerus3Un1HXpmnsll92Ya5arCD7UtqQ4uo0X0XPkzlx+85N8KiYGcbOGhabuyLFLRaCRU+stOlq77yDlkIp+odP+CNkKxcKlIzsCLpz6Jomo4Z+xlch9dA4SBKM/7t2tQ0xvPHIC9qVUiyQYJHEsn/GoshEEdnkeEURl9De0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=JPqkypRX; arc=none smtp.client-ip=192.198.163.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1762872073; x=1794408073;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=HPsL/tAB194Nvdaf+/kuYpiY3P9Er3Kago6S6vw3LYs=;
+  b=JPqkypRX+4vjS2vXWAdmOwbb5BwesLcql0TgRul2cee8mH7EBbB7Um2Z
+   ww+jWOBSVwn449/MBe/2eT5j6tbbmrfrw6PSDE5nLlQhVGo5Rzr/D/H9D
+   3ehs75Ko60jOGZ3i2X12qwisJHkP18MUi54hNKepEB593uXgIQ5s+Kguq
+   p8CHqg5aGMhQjcQhGRUPGj1I062qc/Am7+7LQa9mj4ySqyvhdVqNHMxh0
+   a76e0cBgv93Wcl9BpdLSiL7TqFEwtps9V+khfwqL4BaHr2yph63Cnp3Sr
+   68JWUKgghf8q2y8Gjl5u2DUI4vf1/OFRc/oNhC/vMmbM2tfKEXuXEChWH
+   A==;
+X-CSE-ConnectionGUID: 94pkRG+XTbKWjKF+3pwEzA==
+X-CSE-MsgGUID: fPD9o6bBROy4LIC3Cfsx8w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11610"; a="68793497"
+X-IronPort-AV: E=Sophos;i="6.19,296,1754982000"; 
+   d="scan'208";a="68793497"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2025 06:41:13 -0800
+X-CSE-ConnectionGUID: RN7Ot5xkSRWcK3m6xtcOew==
+X-CSE-MsgGUID: ncabnXqTSAOET6rWzWjSEw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.19,296,1754982000"; 
+   d="scan'208";a="189713187"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by fmviesa010.fm.intel.com with ESMTP; 11 Nov 2025 06:41:06 -0800
+Received: by black.igk.intel.com (Postfix, from userid 1003)
+	id 1E43296; Tue, 11 Nov 2025 15:41:05 +0100 (CET)
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Philipp Stanner <phasta@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>
+Subject: [PATCH v1 0/2] devres: clean up and move percpu allocator
+Date: Tue, 11 Nov 2025 15:39:56 +0100
+Message-ID: <20251111144104.910241-1-andriy.shevchenko@linux.intel.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aRKs6jXqSvC3G_R0@x130>
+Content-Transfer-Encoding: 8bit
 
-Tue, Nov 11, 2025 at 04:26:34AM +0100, saeed@kernel.org wrote:
->On 10 Nov 15:46, Jakub Kicinski wrote:
->> On Sun, 9 Nov 2025 11:46:37 +0100 Jiri Pirko wrote:
->> > >So, I checked a couple of flows internally, and it seems this allows
->> > >some flexibility in the FW to decide later on which mode to pick,
->> > >based on other parameters, which practically means
->> > >"user has no preference on this param". Driver can only find out
->> > >after boot, when it reads the runtime capabilities, but still
->> > >this is a bug, by the time the driver reads this (in devlink), the
->> > >default value should've already been determined by FW, so FW must
->> > >return the actual runtime value. Which can only be one of the following
->> > 
->> > I don't think it is correct to expose the "default" as a value.
->> > 
->> > On read, user should see the configured value, either "full_csum" or
->> > "l4_only". Reporting "default" to the user does not make any sense.
->> > On write, user should pass either "full_csum" or "l4_only". Why we would
->> > ever want to pass "default"?
->> 
->> FWIW I agree that this feels a bit odd. Should the default be a flag
->> attr? On get flag being present means the value is the FW default (no
->> override present). On set passing the flag means user wants to reset
->> to FW default (remove override)?
->> 
->> > Regardless this patch, since this is param to be reflected on fw reboot
->> > (permanent cmode), I think it would be nice to expose indication if
->> > param value passed to user currently affects the fw, or if it is going
->> > to be applied after fw reboot. Perhaps a simple bool attr would do?
->> 
->> IIUC we're basically talking about user having no information that
->> the update is pending? Could this be done by the core? Core can do
->> a ->get prior to calling ->set and if the ->set succeeds and
->> cmode != runtime record that the update is pending?
->> 
->
->Could work if on GET driver reads 'current' value from FW, then it should
->be simpler if GET != SET then 'pending', one problem though is if SET was
->done by external tool or value wasn't applied after reboot, then we loose
->that information, but do we care? I think we shouldn't.
->
->> That feels very separate from the series tho, there are 3 permanent
->> params in mlx5, already. Is there something that makes this one special?
+Clean up and move managed percpu allocator to devres.h.
 
-Agreed. That is why I wrote "regardless this patch". But I think the
-pending indication is definitelly nice to have.
+Andy Shevchenko (2):
+  devres: Remove unused devm_free_percpu()
+  devres: Move devm_alloc_percpu() and related to devres.h
 
+ .../driver-api/driver-model/devres.rst        |  1 -
+ drivers/base/devres.c                         | 25 -------------------
+ include/linux/device.h                        | 19 --------------
+ include/linux/device/devres.h                 | 16 ++++++++++++
+ 4 files changed, 16 insertions(+), 45 deletions(-)
 
->
->In mlx5 they all have the same behavior, devlink sets 'next' value, devlink
->reads 'next' value. The only special thing about the new param
->is that it has a 'device_default' value and when you read that from 'next' it
->will always show 'device_default' as the actual value is only
->known at run time ,e.g. 'next boot'.
->
->I think the only valid solution for permanent and drv_init params is to
->have 'next' and 'current' values reported by driver on read. Or maybe go just
->with  'set' != 'get' then 'pending' as discussed above ?
+-- 
+2.50.1
 
-Hmm, is it possible to rebind the driver without fw going through
-next-boot phase? I'm wondering if it wouldn't be safer to have this
-pending flag set to be responsibility of the driver...
-
-
->
 
