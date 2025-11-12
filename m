@@ -1,139 +1,109 @@
-Return-Path: <linux-doc+bounces-66427-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66429-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 329C1C53A44
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 18:21:48 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 36594C53CA6
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 18:51:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2A03F506180
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 16:30:09 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 297444FE0AA
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 17:15:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E6BD2BF00B;
-	Wed, 12 Nov 2025 16:29:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B09933446CC;
+	Wed, 12 Nov 2025 17:14:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b="Lex7gHuB"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Os9YyjqN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.zytor.com (terminus.zytor.com [198.137.202.136])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7654C33F8A4;
-	Wed, 12 Nov 2025 16:29:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.136
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88D53343D76;
+	Wed, 12 Nov 2025 17:14:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762964988; cv=none; b=OF+27crK6HiBHwwu6svUang67QWwsnX1icYIeoHyBXmA4AKK/D3B+RcF/87dplOBSy4vXZqvkp+eQHegqFL3RiEk+4txhRFSaqTXAhLlOaZqClZFlm3c3JMHY4c907cFdQ4yEkwYSGCptiTDAd8BrcLfA1YX0ikKGjVSYanZhUI=
+	t=1762967694; cv=none; b=bvEa5ox+AjMhzs3DbYl0/2Y7w/vSMHEArbMHY0uXPaY60MYm9OhDlp9J9d26GodE1j3BhWrGERjNoGo6kzyXhFyte2smyFON+b8Fi4wQfZbgILc8TQKRBu40WeBoo10xd8d8qoZSE85sWox7Lu3oGiOZglFjubpRFE88NBnAltE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762964988; c=relaxed/simple;
-	bh=CE16kltFzFqjrddLzR7/Ik/75YYEnP3wOW2uBkiaABM=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type; b=nGn/jF2Qw8IUIkPDwVjwmVkXhcJdOaVj+XXTULhzYbkbFoIsMisx7SjcZgCf5eOhBwNaooKzD1AqGBn4s8iNGXC5zVQ2gs+r0nIMlEf4ZVLLftZHZPPluKNiFNAkemVCmhiIkj9OqdTv5XQZ2UuGxFojbyHRmhID/QtDH/hiTdg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com; spf=pass smtp.mailfrom=zytor.com; dkim=pass (2048-bit key) header.d=zytor.com header.i=@zytor.com header.b=Lex7gHuB; arc=none smtp.client-ip=198.137.202.136
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zytor.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zytor.com
-Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net [76.133.66.138])
-	(authenticated bits=0)
-	by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 5ACGT53V870373
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
-	Wed, 12 Nov 2025 08:29:06 -0800
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 5ACGT53V870373
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2025102301; t=1762964947;
-	bh=CE16kltFzFqjrddLzR7/Ik/75YYEnP3wOW2uBkiaABM=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-	b=Lex7gHuBbvK5cqsPYm7W/VXfOJuAR1NRyMhcQaqPG9PemQgiXgrJYsOmznbsnt3W5
-	 i0YkCz88MeUXYPLmbMaSsOQbG3OJzxfcbEoL+xc1O7IzrvAed+gqC0CDixOS4qlO+c
-	 zUDwJEyxDElDMrBAbF/c4Q8tCp5/u5hANGJqkgQcZoZj+DXQxs/AdnQviySwjSMXOK
-	 KMGoQVXgHDERu+0sinl9ZSqFy0NkpGkG9NVzzcCx+npfx+ilkKyghDSUxT5ugkgqfO
-	 ap8JFS6hXAGK+ALMLR+LkFgJPyx3pZlzFQSCHYobhQqMG+6cdsFyriNEDSO6cV69uX
-	 F/HgSnHyA17GA==
-Date: Wed, 12 Nov 2025 08:29:05 -0800
-From: "H. Peter Anvin" <hpa@zytor.com>
-To: Sohil Mehta <sohil.mehta@intel.com>, Ard Biesheuvel <ardb@kernel.org>
-CC: Dave Hansen <dave.hansen@intel.com>, x86@kernel.org,
-        Borislav Petkov <bp@alien8.de>, Jonathan Corbet <corbet@lwn.net>,
-        Andy Lutomirski <luto@kernel.org>,
-        Josh Poimboeuf <jpoimboe@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "Kirill A . Shutemov" <kas@kernel.org>, Xin Li <xin@zytor.com>,
-        David Woodhouse <dwmw@amazon.co.uk>,
-        Sean Christopherson <seanjc@google.com>,
-        Rick Edgecombe <rick.p.edgecombe@intel.com>,
-        Vegard Nossum <vegard.nossum@oracle.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Geert Uytterhoeven <geert@linux-m68k.org>, Kees Cook <kees@kernel.org>,
-        Tony Luck <tony.luck@intel.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-efi@vger.kernel.org, Dave Hansen <dave.hansen@linux.intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v11_4/9=5D_x86/alternatives=3A_?=
- =?US-ASCII?Q?Disable_LASS_when_patching_kernel_code?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <6ab6e4d3-0caa-41e6-8231-2f3f45949876@intel.com>
-References: <20251029210310.1155449-1-sohil.mehta@intel.com> <20251029210310.1155449-5-sohil.mehta@intel.com> <29f2d16f-361f-475c-957e-0ebcefcd1a8c@intel.com> <CAMj1kXHvfgMqFncvP5A6ed=2qEPkNkS8ecoM6iXMect51Tpz4w@mail.gmail.com> <7c26ae81-3495-457b-9f64-f5b2e169a63b@intel.com> <DDEF6164-D1E6-4003-A251-804738CB59E0@zytor.com> <CAMj1kXGyTo=4Va1PevMQyCauEKSutfSPo6je0Ps09TabhTe4zQ@mail.gmail.com> <E9396874-5D2D-413D-A5D1-A28E4D429C51@zytor.com> <CAMj1kXECkKeDUDdjmrQjcYk=2Y5ydTV2L1Pg73X7uCC-=DC9Ww@mail.gmail.com> <6ab6e4d3-0caa-41e6-8231-2f3f45949876@intel.com>
-Message-ID: <FF519694-C4F5-4843-8E68-FE9C06FDC357@zytor.com>
+	s=arc-20240116; t=1762967694; c=relaxed/simple;
+	bh=0hPBNyo4oNjc7cd3pRNgm/5T/U2NWpO2lwFxU+nsiEc=;
+	h=Date:From:To:Message-ID; b=F20kSHqGJ7QSYBVNBqqEkSxZkpmF+pMg9cIrLc6uOZyWyCVoB0QIXfGb5sQVUueI6LGMWQD7bILQgBBZ2vV3t34aie0bZgAcV36e3NLwCFXNpmGaPeC7uG3e70qkCPxlxJ7YWu07XFGGNQBQy84pmpCcCIZeMmu+Pnk/3HxW+3Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Os9YyjqN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05D4FC16AAE;
+	Wed, 12 Nov 2025 17:14:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1762967694;
+	bh=0hPBNyo4oNjc7cd3pRNgm/5T/U2NWpO2lwFxU+nsiEc=;
+	h=Date:From:To:From;
+	b=Os9YyjqNR62vSBYCiPeckl0mnobkSX5loopfpyMbZe0bQiol6xXCZi/jj/iJmf3Ua
+	 Bip+/r541OKfE69+m1oOx/unWJP+fKMxKBPjEWFM4fM9PGa7Vl0754QZny8F2hgFmh
+	 bY3QwyjgR/nnmoAT1k+4ux7W9lGVxrqFwp1J9iN5XrQv/uulI3o44AOnM9T/X17KBE
+	 P3nFmAXjM0Yq9LtDIL/df9BF/FZUV5Tf7scQxqIzFpC43w3UZRP5Ywf7R/WxcV4Eu9
+	 ZfeRSuyANOfo/WTNRFwB2vxOzVw2AWJl4JkLvHoKKWzdkrrAiJ/tKXIN3QpFLeXmxI
+	 IqHWAi+4JAapw==
+Received: from mchehab by mail.kernel.org with local (Exim 4.98.2)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vJEQm-00000009iKx-0Xuz;
+	Wed, 12 Nov 2025 18:14:52 +0100
+Date: Wed, 12 Nov 2025 18:14:52 +0100
+From: mchehab+huawei@kernel.org
+To: linux-doc@vger.kernel.org, corbet@lwn.net, mchehab+huawei@kernel.org,
+ linux-kernel@vger.kernel.org, rdunlap@infradead.org
+Message-ID: <20251112171452.Y5jX9%mchehab+huawei@kernel.org>
+User-Agent: s-nail v14.9.25
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH] scripts: docs: kdoc_files.py: don't consider symlinks as directories
+Date: Wed, 12 Nov 2025 18:14:49 +0100
+Message-ID: <73c3450f34e2a4b42ef2ef279d7487c47d22e3bd.1762967688.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On November 12, 2025 8:18:20 AM PST, Sohil Mehta <sohil=2Emehta@intel=2Ecom=
-> wrote:
->On 11/12/2025 7:28 AM, Ard Biesheuvel wrote:
->
->>>> d) calling SetVirtualAddressMap() does not result in all 1:1
->>>> references being converted to the new mapping=2E
->>>>
->>>>
->>>> To address d), the x86_64 implementation of efi_map_region() indeed
->>>> maps an 1:1 alias of each remapped runtime regions, so that stray
->>>> accesses don't fault=2E But the code addresses are all remapped, and =
-so
->>>> the firmware routines are always invoked via their remapped aliases i=
-n
->>>> the kernel VA space=2E Not calling SetVirtualAddressMap() at all, or
->>>> calling it with a 1:1 mapping is not feasible, essentially because
->>>> Windows doesn't do that, and that is the only thing that is tested on
->>>> all x86 PCs by the respective OEMs=2E
->>>>
->>>> Given that remapping the code is dealt with by the firmware's PE/COFF
->>>> loader, whereas remapping [dynamically allocated] data requires effor=
-t
->>>> on the part of the programmer, I'd hazard a guess that 99=2E9% of tho=
-se
->>>> bugs do not involve attempts to execute via the lower mapping, but
->>>> stray references to data objects that were not remapped properly=2E
->>>>
->>>> So we might consider
->>>> a) remapping those 1:1 aliases NX, so we don't have those patches of
->>>> RWX memory around
->>>> b) keeping LASS enabled during ordinary EFI runtime calls, as you sug=
-gest=2E
->>>
->>> Unless someone has a code pointer in their code=2E
->>=20
->> That is a good point, especially because the EFI universe is
->> constructed out of GUIDs and so-called protocols, which are just
->> structs with function pointers=2E
->>=20
->> However, EFI protocols are only supported at boot time, and the
->> runtime execution context is much more restricted=2E So I'd still expec=
-t
->> the code pointer case to be much less likely=2E
->
->But, that still leaves the stray data accesses=2E We would still need to
->disable the LASS data access enforcement by toggling RFLAGS=2EAC during
->the runtime calls=2E
->
->Can we rely on EFI to not mess up RFLAGS and keep the AC bit intact?
+As reported by Randy, currently kdoc_files can go into endless
+looks when symlinks are used:
 
-Let's not muck with this now; it is lately pointless and as you can see it=
-'s a rathole=2E
+	$ ln -s . Documentation/peci/foo
+	$ ./scripts/kernel-doc Documentation/peci/
+	...
+	  File "/new_devel/docs/scripts/lib/kdoc/kdoc_files.py", line 52, in _parse_dir
+	    if entry.is_dir():
+	       ~~~~~~~~~~~~^^
+	OSError: [Errno 40] Too many levels of symbolic links: 'Documentation/peci/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo/foo'
+
+Prevent that by not considering symlinks as directories.
+
+Reported-by: Randy Dunlap <rdunlap@infradead.org>
+Closes: https://lore.kernel.org/linux-doc/80701524-09fd-4d68-8715-331f47c969f2@infradead.org/
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ scripts/lib/kdoc/kdoc_files.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/lib/kdoc/kdoc_files.py b/scripts/lib/kdoc/kdoc_files.py
+index 061c033f32da..1fd8d17edb32 100644
+--- a/scripts/lib/kdoc/kdoc_files.py
++++ b/scripts/lib/kdoc/kdoc_files.py
+@@ -49,7 +49,7 @@ class GlobSourceFiles:
+             for entry in obj:
+                 name = os.path.join(dirname, entry.name)
+ 
+-                if entry.is_dir():
++                if entry.is_dir(follow_symlinks=False):
+                     yield from self._parse_dir(name)
+ 
+                 if not entry.is_file():
+-- 
+2.51.1
+
 
