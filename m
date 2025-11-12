@@ -1,243 +1,504 @@
-Return-Path: <linux-doc+bounces-66395-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66397-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6DAEC5334E
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 16:55:58 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46410C53034
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 16:27:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 7C5904F623C
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 15:06:48 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 18675355746
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 15:10:25 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4087634A77F;
-	Wed, 12 Nov 2025 14:59:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3909834251D;
+	Wed, 12 Nov 2025 15:02:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="N9XadKC0"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="WCCay3ud";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="bvrm+/0Y"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB85B34A76A
-	for <linux-doc@vger.kernel.org>; Wed, 12 Nov 2025 14:59:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.53
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762959550; cv=none; b=T65uV2x9LLbkfESmJ3BXq2dibk6uXybJub2orF1TzZyCWlujhUVIEvQLV2/J2aVbPlk5xjGSx2qhccUAaysmLEfbIQwuytTsJghXM7kEzbCtGgB2Qq7LGGspSGGNuXimqBpMEETRfxC91GlSaJZlzX6CGl8WMqo3mzPxwymdKcw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762959550; c=relaxed/simple;
-	bh=IhGmnjkrIabfR44gd9BIvr7pcokhjZi5UFhbngjXwvw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=EWb0fnfoPsgDo6hcWmY4hjAOVQJv9DRLlOtbR1JIf2cL+1+zvo1V1/U+DoQ4RPtryc+EgKKMVzR+0D8IpYRpZiHCgUL6/xkrdJv7fPoDatovtC/llesIISSDTaChcidSuc2R9Wl0v1PDhrcJxRhbQgAXjAp6p6HZ0Sjv/6qNpSw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=N9XadKC0; arc=none smtp.client-ip=209.85.208.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-64074f01a6eso1624324a12.2
-        for <linux-doc@vger.kernel.org>; Wed, 12 Nov 2025 06:59:06 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FA67342514;
+	Wed, 12 Nov 2025 15:02:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1762959760; cv=fail; b=MJcgfeLggjK7EdWp2TdycQwhzyXvvGmcDdpo+TbThDO2dMVGJl8WeSI4d2HGclWoZUutA5OkE124VNqCm83NDWZBRv1EZf6hcc5qX1csGa/3Un8agMGensyVWH127NPQ6B0tP4poN8kDWXBJMDD6uC0drBfhQZb9mWlgtmWC/Ec=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1762959760; c=relaxed/simple;
+	bh=rDwzEIFipp4iKiQKO1/svE34dfYFsX2Oy1pSyrObLx8=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=m+Bni8hnpZ3gZgUQi78ALgdaYrSKsHlcY7TVAAFnEsROwMxAADHLKf9h+/DqVBk8IBCUrSQSXKWJasBzB2vymolZ6b7eZH/updNWX/eN3E7buoeg+bjajOsDr1452RBZUkWDSBQlkDtkoqfsVYzVkMR9tSHOc9XwJ5dWCvAQSqk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=WCCay3ud; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=bvrm+/0Y; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5ACEuH2v017770;
+	Wed, 12 Nov 2025 15:02:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	corp-2025-04-25; bh=wjIzGTXgBx3SxAUvQnG1d6V5tk0hw6RUcBUt3YIHfls=; b=
+	WCCay3udYp8eK+8sjR/2VO9Vqmo3pGg0dSPqaCpV1O75bJ1kIPwNrQlm5fFjg9Cj
+	0dr4unyKXkuaN/CUDChxwLmidRT+Z8fC5LK04uuX9INfgQBq1wrvpeucPPXhUvU2
+	IYkNb1soM/lI5Ucwl+DQnHazRRxGqGEkq0uh95VkPYi8+/XittJOIHeaDIiKYsEU
+	4zeeCs9sd+q61p4XvXj6ihrlkrGhiLe9atp5MtI4r+7UW773bhiUutof0Zl99E+0
+	jAGh9Y0ZFVQiOoHBZJKz9Um5MoiV6KGXXy7dFhAKrIe2egHi67y0glzA+zNtnMRK
+	hwPHIiByYCMYMEaBA0gqHw==
+Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4acv97r1pc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 12 Nov 2025 15:02:12 +0000 (GMT)
+Received: from pps.filterd (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 5ACEG3Rl011369;
+	Wed, 12 Nov 2025 15:02:11 GMT
+Received: from sn4pr0501cu005.outbound.protection.outlook.com (mail-southcentralusazon11011019.outbound.protection.outlook.com [40.93.194.19])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 4a9vaeb0wf-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Wed, 12 Nov 2025 15:02:11 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TO6uyzuUVeLDNMcv3sH7SnquRT7SjWCLXRWNwJ8NkH5b6sOpChWP3PBgfUzEO5XLoV+PyU/nSljcKLYQlHbLQ/G+KB+M/07wtjT46y9149F8kSkZzm0IK47SFaYRWGLzEYPFuQwl60cSGmrU65Rekrpu/bgnhJVEhoCqFT7oUx5xSKSmg8bopRozirHL0LFlKEVx9jVp+ELH+E229VGTtbvI34hEFoDjg1kfDYzU4bD+qf8mcMYd3Mw2D/mYglo0EpeTCTBz3Tml4sl+U/gsNoBK4C2dUnfTjH/ffpwh2hiKHD3uxkdxUuL/I2iwPZBAyxpoz0gcrQFqXmqX+5eBYg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wjIzGTXgBx3SxAUvQnG1d6V5tk0hw6RUcBUt3YIHfls=;
+ b=NTV1XEO85cYtMnZaPa3acGY56/B0ceFXMJKZHAiZfbcnUFtwUJb+v+qMyBScK28mrN8+POKPtLnm+oPeX6Rgq68g/CPVOJm+vfPCAEewsvnlys+jiLgTlu5UwfZYwdmY6II4F1PwJA2z2rgVlo5BeZoy848T0pe3UIkCWGKvV1N/y2hh0XNcBOZJ5dn7oZ2uNiTbi8obzYb3aSJPdXnme+ZmgIAZKrZU36yCnUd48DsOqV3553q3Xk/We0UXcbJG1h4WuPefa3LxMAEG+MR4nvdrK88QengicElYbdslTcby4M93Kphqx9VZ2DxJmlcG8+CQHPOArPAZ4Fn6LiGaUQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1762959545; x=1763564345; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0MTLQ2+KzlbyAQxckoGWY8C9+me/+LObO2aCT3fFijI=;
-        b=N9XadKC0UVxFLkY9jzvuAikB7Hg0mTYRuXtJs27Uw4FgaIFVemvrjszSN4H1dk5vYN
-         KQz09WkCXp2gVgk6yu24Fy+ebuaHwYlnjOukIeAWckKRF6M4WkwEldin3m/4t6aC+Wyi
-         v0lW/V8SjFq7pKaDTPNpRZEeM2au0g1pTRXI/0Yq1mYC5vK2bcVQlWp9xME1Ye4Cu6Cc
-         XO9WJo2hL6vaKBioq/V04Hev39SCnbJxedzYvN0dnC8/p81E/eJWtQtTPRPS5QmrxICh
-         YwiYM/3WwUWX7yTfVYp+x0cT+TPse+XD5MXReIB7NxL4HZoltVE5xfchaBNCBwax4uYD
-         7jcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1762959545; x=1763564345;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=0MTLQ2+KzlbyAQxckoGWY8C9+me/+LObO2aCT3fFijI=;
-        b=Ob8P2Ic+UjHRLMMYbcO156odj4Jwgc0DmgzhSshSW6IRBjyuTgOl2NgVM+kt3ZSRY7
-         zIR6uEYMl4m2tcTC84vRkvn4lp4/fP8sEL+13fYjbtxKnRvvHtmecIg2RVggSNLaZzgR
-         VIVzieaDjEDHMgNSa5UsyncSUYLsu2hYGfTU7z0zdIGdwHlbiYlzCP170C3NcXVagMXm
-         /SKr3uJi/P9asUJiomf/6u+JwBUUJycbzSlAx3cuYhpdEwq/RTZVgDbiX5QVZHzJrdSK
-         N7RH/flZqGqBBZPGCiEeTMMvsQyUwl0HxpPrvpg78OtBW7d6mJ7CiEYE9G5CooiaUC6W
-         eztA==
-X-Forwarded-Encrypted: i=1; AJvYcCUoA2kHguqHwm7NGMhd3VHQZVqEAPX5v63ri7AmbFCA9H/TamcMI0K7cK7waoYl9EAXU3zpj9BR2Mk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyI9kaS9mnXHme7ThQgdgKmptHBJPtXqtjEj7I+sG993JBS2pwr
-	f1xhZHuia7w3naw2Mtb6n/axgpOwFmwh+4twlVbEdfK4xEMjuMiie2FDUEOnbTBUfG0xgRQzgYt
-	uYE5yLuFvltoo02Ykosg5FIR0X4F4NhuoZjZljqHbTA==
-X-Gm-Gg: ASbGncub+xCoE4TRW36lb4VVSK66pffDVFvlq9yXCi0o3a2d0uKLd4IeCMNUxrl+gv3
-	NppRhbS826SmM2UhxA8767ThF51hK2pWMq0L8iOOA97cxWEjfxs2npbUPQrKLfZKFHVMX9peTWs
-	9KPncC6M3okXY+yV+cjAlrkPqEChBBoEcbarbjvftH4v/1lcIBMVL3exlwwnTHA7hen0b50DNmg
-	sYZ4AzIGgOQldwpmrcL4U6PHX09jvOGLWzzKd7SdeLsS5aqOO3P8XEpYg==
-X-Google-Smtp-Source: AGHT+IEdmxSCUrDpzYYdeQ7xGZMZCFuRazVHOEq301lv0Np/o4OtNdmIj/Fd7MlLr72XZf02Ov5bYrL1l7CAevQmQsg=
-X-Received: by 2002:a05:6402:20d5:20b0:640:6650:9173 with SMTP id
- 4fb4d7f45d1cf-6431a5906c4mr2199942a12.33.1762959544759; Wed, 12 Nov 2025
- 06:59:04 -0800 (PST)
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wjIzGTXgBx3SxAUvQnG1d6V5tk0hw6RUcBUt3YIHfls=;
+ b=bvrm+/0YqayNx5ujwT9seppluwLXS341Oyicp1gVs7HIU/5wQwbqeL/NRYa6YvJZIsXgwiVqrpt6UKIzPbRRvTJgafO9NLe8FufFNevJyi2aJmKIx0BZKuutloq4hlF1DzzJKNqQpDJXCvBDj3Nv8FxN+mBuMr9m1M4WI1nFh/M=
+Received: from BN0PR10MB5128.namprd10.prod.outlook.com (2603:10b6:408:117::24)
+ by CH2PR10MB4182.namprd10.prod.outlook.com (2603:10b6:610:7a::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.17; Wed, 12 Nov
+ 2025 15:02:06 +0000
+Received: from BN0PR10MB5128.namprd10.prod.outlook.com
+ ([fe80::743a:3154:40da:cf90]) by BN0PR10MB5128.namprd10.prod.outlook.com
+ ([fe80::743a:3154:40da:cf90%4]) with mapi id 15.20.9298.010; Wed, 12 Nov 2025
+ 15:02:06 +0000
+Message-ID: <265384ab-c2d5-438d-9071-25fdd7ea724c@oracle.com>
+Date: Wed, 12 Nov 2025 10:02:03 -0500
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/6] net/handshake: Store the key serial number on
+ completion
+To: alistair23@gmail.com, hare@kernel.org,
+        kernel-tls-handshake@lists.linux.dev, netdev@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-nvme@lists.infradead.org, linux-nfs@vger.kernel.org
+Cc: kbusch@kernel.org, axboe@kernel.dk, hch@lst.de, sagi@grimberg.me,
+        kch@nvidia.com, hare@suse.de,
+        Alistair Francis <alistair.francis@wdc.com>
+References: <20251112042720.3695972-1-alistair.francis@wdc.com>
+ <20251112042720.3695972-2-alistair.francis@wdc.com>
+Content-Language: en-US
+From: Chuck Lever <chuck.lever@oracle.com>
+In-Reply-To: <20251112042720.3695972-2-alistair.francis@wdc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: CH0PR08CA0013.namprd08.prod.outlook.com
+ (2603:10b6:610:33::18) To BN0PR10MB5128.namprd10.prod.outlook.com
+ (2603:10b6:408:117::24)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251107210526.257742-1-pasha.tatashin@soleen.com>
- <20251107210526.257742-3-pasha.tatashin@soleen.com> <aRHiCxoJnEGmj17q@kernel.org>
- <CA+CK2bCHhbBtSJCx38gxjfR6DM1PjcfsOTD-Pqzqyez1_hXJ7Q@mail.gmail.com>
- <aROZi043lxtegqWE@kernel.org> <CA+CK2bAsrEqpt9d3s0KXpjcO9WPTJjymdwtiiyWVS6uq5KKNgA@mail.gmail.com>
- <aRSKrxfAb_GG_2Mw@kernel.org>
-In-Reply-To: <aRSKrxfAb_GG_2Mw@kernel.org>
-From: Pasha Tatashin <pasha.tatashin@soleen.com>
-Date: Wed, 12 Nov 2025 09:58:27 -0500
-X-Gm-Features: AWmQ_bnbzArXLN8aoATNdiGHp809pzMOSngeRCNP27w6LsiaaRY3i_BJDeNIl5I
-Message-ID: <CA+CK2bAq-0Vz4jSRWnb_ut9AqG3RcH67JQj76GhoH0BaspWs2A@mail.gmail.com>
-Subject: Re: [PATCH v5 02/22] liveupdate: luo_core: integrate with KHO
-To: Mike Rapoport <rppt@kernel.org>
-Cc: pratyush@kernel.org, jasonmiu@google.com, graf@amazon.com, 
-	dmatlack@google.com, rientjes@google.com, corbet@lwn.net, 
-	rdunlap@infradead.org, ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com, 
-	ojeda@kernel.org, aliceryhl@google.com, masahiroy@kernel.org, 
-	akpm@linux-foundation.org, tj@kernel.org, yoann.congal@smile.fr, 
-	mmaurer@google.com, roman.gushchin@linux.dev, chenridong@huawei.com, 
-	axboe@kernel.dk, mark.rutland@arm.com, jannh@google.com, 
-	vincent.guittot@linaro.org, hannes@cmpxchg.org, dan.j.williams@intel.com, 
-	david@redhat.com, joel.granados@kernel.org, rostedt@goodmis.org, 
-	anna.schumaker@oracle.com, song@kernel.org, zhangguopeng@kylinos.cn, 
-	linux@weissschuh.net, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-mm@kvack.org, gregkh@linuxfoundation.org, tglx@linutronix.de, 
-	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, 
-	hpa@zytor.com, rafael@kernel.org, dakr@kernel.org, 
-	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com, 
-	myungjoo.ham@samsung.com, yesanishhere@gmail.com, Jonathan.Cameron@huawei.com, 
-	quic_zijuhu@quicinc.com, aleksander.lobakin@intel.com, ira.weiny@intel.com, 
-	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de, 
-	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com, 
-	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net, 
-	brauner@kernel.org, linux-api@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	saeedm@nvidia.com, ajayachandra@nvidia.com, jgg@nvidia.com, parav@nvidia.com, 
-	leonro@nvidia.com, witu@nvidia.com, hughd@google.com, skhawaja@google.com, 
-	chrisl@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN0PR10MB5128:EE_|CH2PR10MB4182:EE_
+X-MS-Office365-Filtering-Correlation-Id: f153edbb-36f0-4155-7b50-08de21fc71de
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|7416014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?OWkxZ0t2UnI1cFhiU1kzZkppdTBNYXVOQTRQTFJ5OC9vclhTMTZ3S3k3bHZO?=
+ =?utf-8?B?czZxY0hqeDJPb1BKaEVuRlhzSmdxbzUvSTZGNHNvazg1bXIxVFJrNmpzVWJ4?=
+ =?utf-8?B?anZxT0dKSTFjVFhBNU5FSytwclA4Mk9RK0RnMmFFYloxclZONU9tOVY5TUw3?=
+ =?utf-8?B?MWZ4WFFKUDhwSkZvOVdINVEzOHhoVS8rNDg5WmRDNVRJVVVFQjl6ZlJLVzRp?=
+ =?utf-8?B?UjFUVW1tRi9ZaE9xZlZHV3dERDNlVUdNcDQyYWtITjY1V0J3N2h2L014eHNY?=
+ =?utf-8?B?K1ltRy82UEd4dG91NmhVeW4waFQyamowcERibHl6UHNDNE5SZDRwUWJQM1d4?=
+ =?utf-8?B?czFkY2xwY3NNL0NlL0pKQnBRYzB0SUJZK0t0dFQvRElHK1M4eGNxSTVNb3Ja?=
+ =?utf-8?B?dU9qeitUQVQwLzFzUzFvZkZOQXV3NzBQRG5ad3FRK3VIUHpwR1RwT2gvOURF?=
+ =?utf-8?B?NWFjVlFOUVRhSkkxWW5qK0lMNk1rUUY1RVRuVlBJRW9jNlhQeGtkTkdwVE5q?=
+ =?utf-8?B?bk1TTDJHRkdUUmkwTE44ODhyMDlnQUtvbWlRcnViZUs5MmhLZGhtUFFLMWVu?=
+ =?utf-8?B?VFRzR2l1S2E1TmZYOE5Rck0yVXdFSmU0MkczQVppd2pLdHVDUm5vYysxRWJs?=
+ =?utf-8?B?eFpoRFd3bllzaUxlMnM1eHhkNFFhbzN6TlBFVFpXN2ZQYmFmUXViTjVKaHVG?=
+ =?utf-8?B?cG5CeGhBZGozODYxU0lvaEg3cGhmRGNWWXBDVStCVTZCdHpkMjltYmMxc0ww?=
+ =?utf-8?B?UktKT0E3ekZDUDRnZnFhMTkrcVhQMU1CVExkZGlDV2RnNWJRbWpYYVc1SUVs?=
+ =?utf-8?B?bEY2SnFLTVQvbVV2aDIwUlBaLzVaMWlOK045M0hWaTIxYUhXUWJTc0toRlNU?=
+ =?utf-8?B?RGdvWS9TeWNYN1pQamlSVkMyditHbGV1SWtyUFpWUHlOcmI4dkVvSnlVR2dB?=
+ =?utf-8?B?ZVhqMmVmQ3FIOVZQMXJFdXloNjYvUGNrbGNXakVpeUkwamd0cjVyUFV0emZ6?=
+ =?utf-8?B?UDNzejZFaEZQOHdEZXNlNTVmSkttN2k2dUhtbVNLMmtsT3FmSElSdmxBYXB5?=
+ =?utf-8?B?R2JPQ1h1emFPWnRHRjRQZE1SSkx5OHZOS2RMRUdhbHU0R2w1MWV0NEI5eFlU?=
+ =?utf-8?B?OXVxNUtma2lLRnpndjBSbTRKT05YUW9JM1JXazhIZDM4MVI1S0VyOGQ5K21N?=
+ =?utf-8?B?MTRrQ0hzdnBHVDlPRjBiWURSdUw5Mk5Zb0RhU2t2anRITHB1VlNoay9CdUtx?=
+ =?utf-8?B?NHJZYjcrMG1lZW1hM0U0RHpxcXRCdGRzNnJ1enloYjd5SDFoeWFNdnplNktL?=
+ =?utf-8?B?WTNodnpDdlRIWTZ1QzZIdUlQSGd5MWNoQytJTi9CM2w0ZlVEYld1VE1BaVF5?=
+ =?utf-8?B?WS9hLzNmTDk3b3dhRG80MXZ0UVEzNU96eVZleVFuWU9DaCs5MkhCbHdZMlJw?=
+ =?utf-8?B?aGNRTDhJYTVpY1ViTkY2TzEvYzFSREZZWUtoTjdYdU1MeG1wRFZRYnBqVzhP?=
+ =?utf-8?B?aEV6LzBuL3kwbzh0U1c2L3JVSVZqaCthUjlhTWRIUlQ3MXNBaE42aFMrQ1ll?=
+ =?utf-8?B?ZktFUnl6bit6TzVNY1p0MnZOWjBiM25ITnk3MmNzV25DalVZaVArN0tHU29B?=
+ =?utf-8?B?WTJXTitOSG11U2cvaVA1L1BXSU95dEk3a0RMRWZsMW4vd0FrN2t0Y0lMd1ps?=
+ =?utf-8?B?UzRjaHNsekFKS3JyZExGK2hacElHSzZSVXZtQWdQOGhBTUlud2JBb3Njc09L?=
+ =?utf-8?B?MW1OQnExTE5ENzQvV2dSaVZIVEZ6ZmowdTcxMmprOFZKMEk5R2xlZTdIZFdw?=
+ =?utf-8?B?U2RHdWtEZ3FVR2ZPNHNMSkE1eWRGUGM0cUVFaTNBOEdvUVo4ZmZPa05qTGFR?=
+ =?utf-8?B?b1JoL0RicU1yRFd1N01TMzRhZUxGcmtsNVJ3Y2FwRUNsc2psRkFCUFZIY0pw?=
+ =?utf-8?Q?xPZTmICBcr20/PdxeR030wnpJJ/hIbvW?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN0PR10MB5128.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?V21HSjZSTk00aXQ2LzQxZktuZldyeGFMdjdFNDNjVU5WRTVneENueThZYS8z?=
+ =?utf-8?B?YnpFNDBGZWdqRXd6SUNrb2lDaUxTRjN5d0Nobis0bFpRbm5zOEd1SDBxRERk?=
+ =?utf-8?B?VmhUc3l5RnZ1bVUvZ01TVDFxelBteFNaSENBL1lhTXVQYklPVTFNblExTUlT?=
+ =?utf-8?B?L2wwMzNhbitucGx5aldZUkYrUTI1RDcwSlVSOS80WHQ2WXJXTUYxcVAyd20y?=
+ =?utf-8?B?VER5YS9mY2czM1lEbzd0NXRiaERtVTl2QUNUTFpETldHQnJEbzZOZ25WZk54?=
+ =?utf-8?B?d0YvSVYvRUw0TnVsUXlHNlVFcllFd0tnZGpQRTFsUVBZUExyM3l4T2tTZjJ0?=
+ =?utf-8?B?K2hhM0krdW1hdXRjWWU3cXh2QkdLRWh5TkhEQ1RGbzFFTHlvUFlJRjdQYk9s?=
+ =?utf-8?B?UTI3c2JnaFBMeXFZZUdWdFZtcTByazVGYXdXRHBhenNoMHpFdzRGcms0UTNZ?=
+ =?utf-8?B?YUI1SlQwRzhRd1FwbkdHQk52aGJuNjRMMXp3MktYUUVleVhJb0FlQ25kd2VZ?=
+ =?utf-8?B?RVVIQkxoVU1QU09WZVFUV2pBL2huVDVCRWExaVoyUStLU09qL3VIeGRmSDYw?=
+ =?utf-8?B?VmM2QU9nSFVPY0xBeW1YNlJWMW04Vk9TM1AwdS82VG9oZm84RXVtTVZRM2o2?=
+ =?utf-8?B?NERDeFRuVkFvVVh2eFVzalJCcUFXNWlHY2E5MDlxT3NaendpM1JZNW40Zm1l?=
+ =?utf-8?B?Q0pMeWdaR21jREJXNmhEaWJnaWtCUTRvblQ2UStlY2huSDNxNGUySzVTL0tP?=
+ =?utf-8?B?Vy9PUTd3aWo4cHVJeFkyaVpsNzdZUEFzYVZweVBJeWJXQnVjZ0JLMGVIREUx?=
+ =?utf-8?B?Q3dDZzVvVGIxaW1OczM5WlZYTE04eVBVaEdWVmZjbFBpNXpqL3h5VEh4VXFX?=
+ =?utf-8?B?dEZqQys4VFFISStyZzZSc2RZWVFTb04zU1MzWm00bzdPTTNEYkZKSnJFM0Fw?=
+ =?utf-8?B?eXJ4bC9rbGJXekxVaU9ockgzMjNXbzYwMUp3aVhBaHNaa25IQk9rYWVyZFJ4?=
+ =?utf-8?B?MWJVSE1HNm1OVi9uTVFxMHVBQXpCczZQRGR0YUExbUEzK084SnlGT3BUZStu?=
+ =?utf-8?B?TmtnQjNTWWtPT0t2eDEydW93Syt6djVoeWZ6NmpRWFpmNG9zQVJJQjRYZXFm?=
+ =?utf-8?B?R2cwL0txLzVnRGMwc1RIY2wrZVVoc2txSDg1ODZoUXlzbG1MTThYM04ybWEz?=
+ =?utf-8?B?bEt0MjY2OEUyNnNZaXJMZEJEaWhqVWZaRG1aMDcwMm9QWVAzK3hBMTkxUTRN?=
+ =?utf-8?B?UmowYU40UzJXSkpRRERmZ3Y3eDBrWmZKUjJiR1Z4eGYzYmxxblNhNkVpS0Zl?=
+ =?utf-8?B?R3dDOEsvT0M1Nm80d2FhTEExRkp1eGhYWTFpakJxUlFBKzFnWVY1aUg0Ritl?=
+ =?utf-8?B?ZVIwRXFDTzNCSWFJN3FqTVZJaFYxMXQ4bE9uYnFzVmJLSjV4NWVCRWRJUkxK?=
+ =?utf-8?B?TnJVakpDVk9udnB3N1JCcHVyS1hCSXJ1a3JubkFsNC9NMjNMcVhTQ0p2OUx1?=
+ =?utf-8?B?TFVJQ1hGb29VM0RzU0w4UjMweGozRllaSFZ6aVVhUFdtT1BZRGp3KzlsOGFn?=
+ =?utf-8?B?OWluTGZQMmplYzJTT3RBQ2toSko0UklTUFRVUHJkTGNlZVUzUUp5NWpIb25n?=
+ =?utf-8?B?a0QyaHYwcmtPZ2FhVm5iemJZeE9uQ3hJRlhTeUlVVEpMU2w2TkhrdnVrMzV6?=
+ =?utf-8?B?MjhGTkNNMGdZOC82cUlzSWRkSjVsT2JqTE1ETDhNWHVTNGlpcm9YczYzVHo0?=
+ =?utf-8?B?eVRmV0Q4eXV6TWNtSlJwOURES21NSE9SYS9CanVuSnJOSkUvTkFNZTVnYWlq?=
+ =?utf-8?B?Qkx3VlZGdk9iZlJGK0ZXVEswY3pXcU1KU25rTHdPTy9Fd0pSVURwRnZacTFK?=
+ =?utf-8?B?eW5RTytwSlNoc1Z6SEE5dEFuZ1NNM0FkYlFDUjJSTWdSVVR6WnVLOXlPcnNy?=
+ =?utf-8?B?SXdwdVJOSDAwNnZ3R3VJOFkySDZybGtiN3l6aThibVZERldGNW93UHQ1WHZC?=
+ =?utf-8?B?R2NMN2hBVlhaRTVFRWFjQ2N5RE1xbk1KZm4xQm5ncG9VeVl0R2ZqNkgwdXpG?=
+ =?utf-8?B?NnZ2TWc1R0EwdlFOL3hvK2tvVWkxNGF0RXNmalBkT1lIeGZpYTAwaUVCQW1s?=
+ =?utf-8?Q?RCfnBwUEmNvuZs8a9hp9uteGZ?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	HKdFWitF6XXUbml0i7vGca9YUVJBDVll20iikWvlfLGNwl3qh9p7jH5210w7xQTM2V2M1PN/pQ8eLzgsBc1wyKD+Ayyb3Jxwy377JCiwIhBLO0V0ni8zU5P1Y9jghsquNybKRy75azushseWVA8n4IHyYD7Zs+sxaVqjB4YrNPmxUykN2azYo7xGw/GiuknhomaicM32E0mKrIDPYBvl/75fWQWdcksIFjzeMYxuGzl0pjA+EpeQGeRNrkh1PuO+Y9Y3FpK9C5/2v3h6e9JFif+70PkU8sOtLEeeTRq+wNU1MKjKgSu42W6gQTONCE9bL2k4k4nIEkoF6kD8NSMpse1ShoBGwgyRHFwH2La3cqnaW7a/uaJ3JdJgKOXPL4PEWvRrGkNZhvh521ri05EjYz6po20dhNfiPOh3/rtrd1zODNBWHKo/CSeLftIoh3Vwux3IvgdAKGdLhvRmmaoWuUWrmA8NF5TR+Q1SQMR3aWYKScBApMcpvtZUQUDp4BlxAKPqkS3ODKc0MfigoPTZNFzM0M7D6WUNVrENIboRtP7KBnBm84vwUVwQ8CTU7658Cy0lDxJOBQWvO/ZciX2Xhcjs2oWRl30dkL7/yEoYkiE=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f153edbb-36f0-4155-7b50-08de21fc71de
+X-MS-Exchange-CrossTenant-AuthSource: BN0PR10MB5128.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2025 15:02:06.0214
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jK3rvcV8j7KDX51V7zQ/CgE7WzTrmr+8CtTIl13zlFSEbRwu4J8r4i1d6j77bXwQPtiUlBXCDzDskHfSNUg0ZA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR10MB4182
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-11-12_04,2025-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 mlxscore=0 spamscore=0
+ phishscore=0 suspectscore=0 adultscore=0 bulkscore=0 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2510240000
+ definitions=main-2511120121
+X-Authority-Analysis: v=2.4 cv=Cseys34D c=1 sm=1 tr=0 ts=6914a174 b=1 cx=c_pps
+ a=zPCbziy225d3KhSqZt3L1A==:117 a=zPCbziy225d3KhSqZt3L1A==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=6UeiqGixMTsA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=pGLkceISAAAA:8 a=JF9118EUAAAA:8 a=yPCof4ZbAAAA:8 a=zqJBN6IEQoyygF5RKowA:9
+ a=QEXdDO2ut3YA:10 a=xVlTc564ipvMDusKsbsT:22 cc=ntf awl=host:12099
+X-Proofpoint-ORIG-GUID: wFxvcOXfcXbTnNkxIskJ6NJeEv76XWPy
+X-Proofpoint-GUID: wFxvcOXfcXbTnNkxIskJ6NJeEv76XWPy
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTEyMDExOSBTYWx0ZWRfXwe+QbKsF4y6r
+ KE7uvo3ZtgUA74q5+1GP51D8yhWJxex7nA2MzUoou4mfh8/2FhmsZnlnbdaP/dli6J8zCT9l8bN
+ UpapIZgw6Nc+tKk5tgCUiJA5xQGZ0y6BMHNhKpjg2BZNH1Js3aIqND2JBbHMTrOH0yrwkkjwOsq
+ PF960iH7I5R9cOyT7BH2jkGfmj6Z+P7vojKrSPvySq9OZOu5N+1/Es2+wv3fDnSWnHCoJ+invyj
+ VxhR6RvMejQa3BoOA+PhXLXqsmEGZGPckitjytaH8xhkVeBEEjKURDF8vQvYSbE7H/WUUzvX1gB
+ J5ijWrsoEQ11ZOgJ/9Nfhy4iW5DbBBrVja/LLabG3TYqaiMaO5JskJyoZWIIVTtSIQShvnBk2V/
+ PO7hlVY/9tDP8mF3Wr15Nyi24WwEcml2mSqmvICyxdPNGy9NcTM=
 
-On Wed, Nov 12, 2025 at 8:25=E2=80=AFAM Mike Rapoport <rppt@kernel.org> wro=
-te:
->
-> Hi Pasha,
->
-> On Tue, Nov 11, 2025 at 03:57:39PM -0500, Pasha Tatashin wrote:
-> > Hi Mike,
-> >
-> > Thank you for review, my comments below:
-> >
-> > > > This is why this call is placed first in reboot(), before any
-> > > > irreversible reboot notifiers or shutdown callbacks are performed. =
-If
-> > > > an allocation problem occurs in KHO, the error is simply reported b=
-ack
-> > > > to userspace, and the live update update is safely aborted.
->
-> The call to liveupdate_reboot() is just before kernel_kexec(). Why we don=
-'t
-> move it there?
+On 11/11/25 11:27 PM, alistair23@gmail.com wrote:
+> From: Alistair Francis <alistair.francis@wdc.com>
+> 
+> Allow userspace to include a key serial number when completing a
+> handshake with the HANDSHAKE_CMD_DONE command.
+> 
+> We then store this serial number and will provide it back to userspace
+> in the future. This allows userspace to save data to the keyring and
+> then restore that data later.
+> 
+> This will be used to support the TLS KeyUpdate operation, as now
+> userspace can resume information about a established session.
+> 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Hannes Reincke <hare@suse.de>
+> ---
+> v5:
+>  - Change name to "handshake session ID"
+> v4:
+>  - No change
+> v3:
+>  - No change
+> v2:
+>  - Change "key-serial" to "session-id"
+> 
+>  Documentation/netlink/specs/handshake.yaml |  4 ++++
+>  Documentation/networking/tls-handshake.rst |  1 +
+>  drivers/nvme/host/tcp.c                    |  3 ++-
+>  drivers/nvme/target/tcp.c                  |  3 ++-
+>  include/net/handshake.h                    |  4 +++-
+>  include/uapi/linux/handshake.h             |  1 +
+>  net/handshake/genl.c                       |  5 +++--
+>  net/handshake/tlshd.c                      | 15 +++++++++++++--
+>  net/sunrpc/svcsock.c                       |  4 +++-
+>  net/sunrpc/xprtsock.c                      |  4 +++-
+>  10 files changed, 35 insertions(+), 9 deletions(-)
+> 
+> diff --git a/Documentation/netlink/specs/handshake.yaml b/Documentation/netlink/specs/handshake.yaml
+> index 95c3fade7a8d..a273bc74d26f 100644
+> --- a/Documentation/netlink/specs/handshake.yaml
+> +++ b/Documentation/netlink/specs/handshake.yaml
+> @@ -87,6 +87,9 @@ attribute-sets:
+>          name: remote-auth
+>          type: u32
+>          multi-attr: true
+> +      -
+> +        name: session-id
+> +        type: u32
+>  
+>  operations:
+>    list:
+> @@ -123,6 +126,7 @@ operations:
+>              - status
+>              - sockfd
+>              - remote-auth
+> +            - session-id
+>  
+>  mcast-groups:
+>    list:
+> diff --git a/Documentation/networking/tls-handshake.rst b/Documentation/networking/tls-handshake.rst
+> index 6f5ea1646a47..0941b81dde5c 100644
+> --- a/Documentation/networking/tls-handshake.rst
+> +++ b/Documentation/networking/tls-handshake.rst
+> @@ -60,6 +60,7 @@ fills in a structure that contains the parameters of the request:
+>          key_serial_t    ta_my_privkey;
+>          unsigned int    ta_num_peerids;
+>          key_serial_t    ta_my_peerids[5];
+> +        key_serial_t    handshake_session_id;
+>    };
+>  
+>  The @ta_sock field references an open and connected socket. The consumer
+> diff --git a/drivers/nvme/host/tcp.c b/drivers/nvme/host/tcp.c
+> index 9058ea64b89c..024d02248831 100644
+> --- a/drivers/nvme/host/tcp.c
+> +++ b/drivers/nvme/host/tcp.c
+> @@ -1694,7 +1694,8 @@ static void nvme_tcp_set_queue_io_cpu(struct nvme_tcp_queue *queue)
+>  		qid, queue->io_cpu);
+>  }
+>  
+> -static void nvme_tcp_tls_done(void *data, int status, key_serial_t pskid)
+> +static void nvme_tcp_tls_done(void *data, int status, key_serial_t pskid,
+> +			      key_serial_t handshake_session_id)
+>  {
+>  	struct nvme_tcp_queue *queue = data;
+>  	struct nvme_tcp_ctrl *ctrl = queue->ctrl;
+> diff --git a/drivers/nvme/target/tcp.c b/drivers/nvme/target/tcp.c
+> index 470bf37e5a63..7f8516892359 100644
+> --- a/drivers/nvme/target/tcp.c
+> +++ b/drivers/nvme/target/tcp.c
+> @@ -1780,7 +1780,8 @@ static int nvmet_tcp_tls_key_lookup(struct nvmet_tcp_queue *queue,
+>  }
+>  
+>  static void nvmet_tcp_tls_handshake_done(void *data, int status,
+> -					 key_serial_t peerid)
+> +					 key_serial_t peerid,
+> +					 key_serial_t handshake_session_id)
+>  {
+>  	struct nvmet_tcp_queue *queue = data;
+>  
+> diff --git a/include/net/handshake.h b/include/net/handshake.h
+> index 8ebd4f9ed26e..68d7f89e431a 100644
+> --- a/include/net/handshake.h
+> +++ b/include/net/handshake.h
+> @@ -18,7 +18,8 @@ enum {
+>  };
+>  
+>  typedef void	(*tls_done_func_t)(void *data, int status,
+> -				   key_serial_t peerid);
+> +				   key_serial_t peerid,
+> +				   key_serial_t handshake_session_id);
+>  
+>  struct tls_handshake_args {
+>  	struct socket		*ta_sock;
+> @@ -31,6 +32,7 @@ struct tls_handshake_args {
+>  	key_serial_t		ta_my_privkey;
+>  	unsigned int		ta_num_peerids;
+>  	key_serial_t		ta_my_peerids[5];
+> +	key_serial_t		handshake_session_id;
 
-Yes, I can move that call into kernel_kexec().
+Please follow the existing field name convention and add a "ta_"
+prefix.
 
-> And all the liveupdate_reboot() does if kho_finalize() fails it's massagi=
-ng
-> the error value before returning it to userspace. Why kernel_kexec() can'=
-t
-> do the same?
 
-We could do that. It would look something like this:
+>  };
+>  
+>  int tls_client_hello_anon(const struct tls_handshake_args *args, gfp_t flags);
+> diff --git a/include/uapi/linux/handshake.h b/include/uapi/linux/handshake.h
+> index 662e7de46c54..b68ffbaa5f31 100644
+> --- a/include/uapi/linux/handshake.h
+> +++ b/include/uapi/linux/handshake.h
+> @@ -55,6 +55,7 @@ enum {
+>  	HANDSHAKE_A_DONE_STATUS = 1,
+>  	HANDSHAKE_A_DONE_SOCKFD,
+>  	HANDSHAKE_A_DONE_REMOTE_AUTH,
+> +	HANDSHAKE_A_DONE_SESSION_ID,
+>  
+>  	__HANDSHAKE_A_DONE_MAX,
+>  	HANDSHAKE_A_DONE_MAX = (__HANDSHAKE_A_DONE_MAX - 1)
+> diff --git a/net/handshake/genl.c b/net/handshake/genl.c
+> index f55d14d7b726..6cdce7e5dbc0 100644
+> --- a/net/handshake/genl.c
+> +++ b/net/handshake/genl.c
+> @@ -16,10 +16,11 @@ static const struct nla_policy handshake_accept_nl_policy[HANDSHAKE_A_ACCEPT_HAN
+>  };
+>  
+>  /* HANDSHAKE_CMD_DONE - do */
+> -static const struct nla_policy handshake_done_nl_policy[HANDSHAKE_A_DONE_REMOTE_AUTH + 1] = {
+> +static const struct nla_policy handshake_done_nl_policy[HANDSHAKE_A_DONE_SESSION_ID + 1] = {
+>  	[HANDSHAKE_A_DONE_STATUS] = { .type = NLA_U32, },
+>  	[HANDSHAKE_A_DONE_SOCKFD] = { .type = NLA_S32, },
+>  	[HANDSHAKE_A_DONE_REMOTE_AUTH] = { .type = NLA_U32, },
+> +	[HANDSHAKE_A_DONE_SESSION_ID] = { .type = NLA_U32, },
+>  };
+>  
+>  /* Ops table for handshake */
+> @@ -35,7 +36,7 @@ static const struct genl_split_ops handshake_nl_ops[] = {
+>  		.cmd		= HANDSHAKE_CMD_DONE,
+>  		.doit		= handshake_nl_done_doit,
+>  		.policy		= handshake_done_nl_policy,
+> -		.maxattr	= HANDSHAKE_A_DONE_REMOTE_AUTH,
+> +		.maxattr	= HANDSHAKE_A_DONE_SESSION_ID,
+>  		.flags		= GENL_CMD_CAP_DO,
+>  	},
+>  };
+> diff --git a/net/handshake/tlshd.c b/net/handshake/tlshd.c
+> index 081093dfd553..85c5fed690c0 100644
+> --- a/net/handshake/tlshd.c
+> +++ b/net/handshake/tlshd.c
+> @@ -26,7 +26,8 @@
+>  
+>  struct tls_handshake_req {
+>  	void			(*th_consumer_done)(void *data, int status,
+> -						    key_serial_t peerid);
+> +						    key_serial_t peerid,
+> +						    key_serial_t handshake_session_id);
+>  	void			*th_consumer_data;
+>  
+>  	int			th_type;
+> @@ -39,6 +40,8 @@ struct tls_handshake_req {
+>  
+>  	unsigned int		th_num_peerids;
+>  	key_serial_t		th_peerid[5];
+> +
+> +	key_serial_t		handshake_session_id;
 
-if (liveupdate_enabled())
-   kho_finalize();
+Please follow the existing field name convention and add a "th_"
+prefix.
 
-Because we want to do kho_finalize() from kernel_kexec only when we do
-live update.
 
-> > > This is fine. But what I don't like is that we can't use kho without
-> > > liveupdate. We are making debugfs optional, we have a way to call
+>  };
+>  
+>  static struct tls_handshake_req *
+> @@ -55,6 +58,7 @@ tls_handshake_req_init(struct handshake_req *req,
+>  	treq->th_num_peerids = 0;
+>  	treq->th_certificate = TLS_NO_CERT;
+>  	treq->th_privkey = TLS_NO_PRIVKEY;
+> +	treq->handshake_session_id = TLS_NO_PRIVKEY;
 
-This is exactly the fix I proposed:
+Please define a TLS_NO_SESSION_ID symbolic constant for initializing
+this field, which is not a private key.
 
-1. When live-update is enabled, always disable "finalize" debugfs API.
-2. When live-update is disabled, always enable "finalize" debugfs API.
 
-Once KHO is stateless the "finalize" debugfs API is going to be
-removed, and KHO debugfs itself can be optional.
+>  	return treq;
+>  }
+>  
+> @@ -83,6 +87,13 @@ static void tls_handshake_remote_peerids(struct tls_handshake_req *treq,
+>  		if (i >= treq->th_num_peerids)
+>  			break;
+>  	}
+> +
+> +	nla_for_each_attr(nla, head, len, rem) {
+> +		if (nla_type(nla) == HANDSHAKE_A_DONE_SESSION_ID) {
+> +			treq->handshake_session_id = nla_get_u32(nla);
+> +			break;
+> +		}
+> +	}
+>  }
+>  
+>  /**
+> @@ -105,7 +116,7 @@ static void tls_handshake_done(struct handshake_req *req,
+>  		set_bit(HANDSHAKE_F_REQ_SESSION, &req->hr_flags);
+>  
+>  	treq->th_consumer_done(treq->th_consumer_data, -status,
+> -			       treq->th_peerid[0]);
+> +			       treq->th_peerid[0], treq->handshake_session_id);
+>  }
+>  
+>  #if IS_ENABLED(CONFIG_KEYS)
+> diff --git a/net/sunrpc/svcsock.c b/net/sunrpc/svcsock.c
+> index 7b90abc5cf0e..2401b4c757f6 100644
+> --- a/net/sunrpc/svcsock.c
+> +++ b/net/sunrpc/svcsock.c
+> @@ -444,13 +444,15 @@ static void svc_tcp_kill_temp_xprt(struct svc_xprt *xprt)
+>   * @data: address of xprt to wake
+>   * @status: status of handshake
+>   * @peerid: serial number of key containing the remote peer's identity
+> + * @handshake_session_id: serial number of the userspace session ID
+>   *
+>   * If a security policy is specified as an export option, we don't
+>   * have a specific export here to check. So we set a "TLS session
+>   * is present" flag on the xprt and let an upper layer enforce local
+>   * security policy.
+>   */
+> -static void svc_tcp_handshake_done(void *data, int status, key_serial_t peerid)
+> +static void svc_tcp_handshake_done(void *data, int status, key_serial_t peerid,
+> +				   key_serial_t handshake_session_id)
+>  {
+>  	struct svc_xprt *xprt = data;
+>  	struct svc_sock *svsk = container_of(xprt, struct svc_sock, sk_xprt);
+> diff --git a/net/sunrpc/xprtsock.c b/net/sunrpc/xprtsock.c
+> index 3aa987e7f072..5c6e7543f293 100644
+> --- a/net/sunrpc/xprtsock.c
+> +++ b/net/sunrpc/xprtsock.c
+> @@ -2589,9 +2589,11 @@ static int xs_tcp_tls_finish_connecting(struct rpc_xprt *lower_xprt,
+>   * @data: address of xprt to wake
+>   * @status: status of handshake
+>   * @peerid: serial number of key containing the remote's identity
+> + * @handshake_session_id: serial number of the userspace session ID
+>   *
+>   */
+> -static void xs_tls_handshake_done(void *data, int status, key_serial_t peerid)
+> +static void xs_tls_handshake_done(void *data, int status, key_serial_t peerid,
+> +				  key_serial_t handshake_session_id)
+>  {
+>  	struct rpc_xprt *lower_xprt = data;
+>  	struct sock_xprt *lower_transport =
 
-> > Yes you can: you can disable liveupdate (i.e. not supply liveupdate=3D1
-> > via kernel parameter) and use KHO the old way: drive it from the
-> > userspace. However, if liveupdate is enabled, liveupdate becomes the
-> > driver of KHO as unfortunately KHO has these weird states at the
-> > moment.
->
-> The "weird state" is the point where KHO builds its FDT. Replacing the
-> current memory tracker with one that does not require serialization won't
-> change it. We still need a way to tell KHO that "there won't be new nodes
-> in FDT, pack it".
->
+Aside from a few nits:
 
-see my answer below
+Reviewed-by: Chuck Lever <chuck.lever@oracle.com>
 
-> > > kho_finalize() on the reboot path and it does not seem an issue to do=
- it
-> > > even without liveupdate. But then we force kho_finalize() into
-> > > liveupdate_reboot() allowing weird configurations where kho is there =
-but
-> > > it's unusable.
-> >
-> > What do you mean KHO is there but unusable, we should not have such a s=
-tate...
->
-> If you compile a kernel with KEXEC_HANDOVER=3Dy, KEXEC_HANDOVER_DEBUGFS=
-=3Dn and
-> LIVEUPDATE=3Dn and boot with kho=3D1 there is nothing to trigger
-> kho_finalize().
->
-> > > What I'd like to see is that we can finalize KHO on kexec reboot path=
- even
-> > > when liveupdate is not compiled and until then the patch that makes K=
-HO
-> > > debugfs optional should not go further IMO.
-> > >
-> > > Another thing I didn't check in this series yet is how finalization d=
-riven
-> > > from debugfs interacts with liveupdate internal handling?
-> >
-> > I think what we can do is the following:
-> > - Remove "Kconfig: make debugfs optional" from this series, and
-> > instead make that change as part of stateless KHO work.
-> > - This will ensure that when liveupdate=3D0 always KHO finalize is full=
-y
-> > support the old way.
-> > - When liveupdate=3D1 always disable KHO debugfs "finalize" API, and
-> > allow liveupdate to drive it automatically. It would add another
-> > liveupdate_enable() check to KHO, and is going to be removed as part
-> > of stateless KHO work.
->
-> KHO should not call into liveupdate. That's layering violation.
-> And "stateless KHO" does not really make it stateless, it only removes th=
-e
-> memory serialization from kho_finalize(), but it's still required to pack
-> the FDT.
 
-This touches on a point I've raised in the KHO sync meetings: to be
-effective, the "stateless KHO" work must also make subtree add/remove
-stateless. There should not be a separate "finalize" state just to
-finish the FDT. The KHO FDT is tiny (only one page), and there are
-only a handful of subtrees. Adding and removing subtrees is cheap; we
-should be able to open FDT, modify it, and finish FDT on every
-operation. There's no need for a special finalization state at kexec
-time. KHO should be totally stateless.
-
-> I think we should allow kho finalization in some form from kernel_kexec()=
-.
-
-If we achieve that, we wouldn't need a kho_finalize() call from
-kernel_kexec() at all. All KHO operations should be allowed at any
-time once KHO is initialized, and they shouldn't depend on the machine
-state. So, even late in shutdown or early in boot, it should be
-possible to preserve KHO memory or a subtree. I'm not saying it's a
-good idea to do that late in shutdown (as preservation may fail), but
-that should be the caller's problem.
-
-Thanks,
-Pasha
+-- 
+Chuck Lever
 
