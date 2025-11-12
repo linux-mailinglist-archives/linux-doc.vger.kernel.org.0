@@ -1,57 +1,74 @@
-Return-Path: <linux-doc+bounces-66396-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66398-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4342DC531BB
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 16:41:04 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id D1D33C53082
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 16:29:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D93B56200C1
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 15:09:19 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 978CD355D0C
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Nov 2025 15:12:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC5E0340273;
-	Wed, 12 Nov 2025 15:02:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4A06B34402B;
+	Wed, 12 Nov 2025 15:05:21 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD47F33F8C5;
-	Wed, 12 Nov 2025 15:02:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62ECE2857F6
+	for <linux-doc@vger.kernel.org>; Wed, 12 Nov 2025 15:05:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.201.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762959737; cv=none; b=fKQIJA/NlFanNF5M9cNmcGEt+gpp7NTTYycHEjqkn+v72JC1Am6R7XCv+Tq05rgNOPPx29bQXYE7hbZI1pIZDPijMEfN88q3BYDpRAqLifjZ7ko0QkqRnw1v4UcJO+t51dcHTPMdgLuzXaQQA0RVz5N5X89ax3UHzgHl0UCeT1A=
+	t=1762959921; cv=none; b=uLlJ/qQTtNORR3o9hKgvRbUaTR5ofKoMehhS7j7JsfbkHZZmNSjellCamByCaGD2vw/I1pZ2UZ6OXr512SkDo9X+fuPOEwpFN/lj0pUr76m0i5XFK/EJxEA7+Mz7fT7BRf2Osz7e1s5TAighxjvljg0Iqa2epw8xpYD0voNFXVc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762959737; c=relaxed/simple;
-	bh=i2E+NvWCFKrgbyZBUGpLcyxl/p485cSfs6HDgAEg+iU=;
+	s=arc-20240116; t=1762959921; c=relaxed/simple;
+	bh=Oiw3CxTvM1cncQ+TriE+d0MVdoOZK0B04yT6liE6dN4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OMgrXr+sCRa6k1zZq2ep7UMYCBj1PTshwIG37oKASHesGnOWYZ/xaPIMDXXhwNQEOlEVXO0NU7mIe2LQDRqqdvqHqLsKg9E32Lyo1XORqABUdCmdBwwKp5llpuj/fldU7CI4qO0xcv+p2whH/mzgEV7O8Yp/HRT0Fu1t7wgmFJY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8ED001515;
-	Wed, 12 Nov 2025 07:02:07 -0800 (PST)
-Received: from localhost (ionvoi01-desktop.cambridge.arm.com [10.2.80.58])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DCAAE3F66E;
-	Wed, 12 Nov 2025 07:02:14 -0800 (PST)
-Date: Wed, 12 Nov 2025 15:02:13 +0000
-From: Ionela Voinescu <ionela.voinescu@arm.com>
-To: Sumit Gupta <sumitg@nvidia.com>
-Cc: rafael@kernel.org, viresh.kumar@linaro.org, lenb@kernel.org,
-	robert.moore@intel.com, corbet@lwn.net, pierre.gondois@arm.com,
-	zhenglifeng1@huawei.com, rdunlap@infradead.org, ray.huang@amd.com,
-	gautham.shenoy@amd.com, mario.limonciello@amd.com,
-	perry.yuan@amd.com, zhanjie9@hisilicon.com,
-	linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org,
-	linux-doc@vger.kernel.org, acpica-devel@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-tegra@vger.kernel.org,
-	treding@nvidia.com, jonathanh@nvidia.com, vsethi@nvidia.com,
-	ksitaraman@nvidia.com, sanjayc@nvidia.com, nhartman@nvidia.com,
-	bbasu@nvidia.com
-Subject: Re: [PATCH v4 3/8] ACPI: CPPC: extend APIs to support auto_sel and
- epp
-Message-ID: <aRShdY+QNQZdRewN@arm.com>
-References: <20251105113844.4086250-1-sumitg@nvidia.com>
- <20251105113844.4086250-4-sumitg@nvidia.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=Nw1DfYYoy3++AXNwYc4YkEPT9ydABxq74TWOeZTwQVHvrP7P8L4hxSQDwwXeaX6F4bk650/iH/fWFJaekBnIQr1TtLW1eh0GFEtz9UShk8aFxzngunxiXUrwW1r1dtLo9WdCZqAzwtwiaZk0nlwZGIs82HXY2sw+UW0VVNbyy4E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.201.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+	by metis.whiteo.stw.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <mfe@pengutronix.de>)
+	id 1vJCP7-0005AM-QV; Wed, 12 Nov 2025 16:05:01 +0100
+Received: from pty.whiteo.stw.pengutronix.de ([2a0a:edc0:2:b01:1d::c5])
+	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <mfe@pengutronix.de>)
+	id 1vJCP7-0006PJ-14;
+	Wed, 12 Nov 2025 16:05:01 +0100
+Received: from mfe by pty.whiteo.stw.pengutronix.de with local (Exim 4.96)
+	(envelope-from <mfe@pengutronix.de>)
+	id 1vJCP7-00GVCq-0g;
+	Wed, 12 Nov 2025 16:05:01 +0100
+Date: Wed, 12 Nov 2025 16:05:01 +0100
+From: Marco Felsch <m.felsch@pengutronix.de>
+To: Pankaj Gupta <pankaj.gupta@nxp.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"imx@lists.linux.dev" <imx@lists.linux.dev>,
+	"linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+	Frank Li <frank.li@nxp.com>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>
+Subject: Re: [EXT] Re: [PATCH v19 0/7] firmware: imx: driver for NXP
+ secure-enclave
+Message-ID: <20251112150501.qkjclsoq2bg75ed5@pengutronix.de>
+References: <20250927-imx-se-if-v19-0-d1e7e960c118@nxp.com>
+ <20251016114151.jzmapaecsmmnkpt3@pengutronix.de>
+ <AM9PR04MB8604C2AAA70406883320C5C995FCA@AM9PR04MB8604.eurprd04.prod.outlook.com>
+ <20251103190811.wp4o7hlnus6ynn32@pengutronix.de>
+ <AM9PR04MB8604AA80EC97E06AADBF334695C3A@AM9PR04MB8604.eurprd04.prod.outlook.com>
+ <20251111131442.nddhk3475oapf2zh@pengutronix.de>
+ <AM9PR04MB86047231B5320C01759BFCAE95CCA@AM9PR04MB8604.eurprd04.prod.outlook.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -60,144 +77,185 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251105113844.4086250-4-sumitg@nvidia.com>
+In-Reply-To: <AM9PR04MB86047231B5320C01759BFCAE95CCA@AM9PR04MB8604.eurprd04.prod.outlook.com>
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: mfe@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linux-doc@vger.kernel.org
 
-Hi,
+On 25-11-12, Pankaj Gupta wrote:
 
-A small nit that applies to multiple places: let's keep the line length
-under 80 characters - the lines seem easy to split.
+...
 
-On Wednesday 05 Nov 2025 at 17:08:39 (+0530), Sumit Gupta wrote:
-> - Add auto_sel read support in cppc_get_perf_caps().
-> - Add write of both auto_sel and energy_perf in cppc_set_epp_perf().
-> - Remove redundant energy_perf field from 'struct cppc_perf_caps' as
->   the same is available in 'struct cppc_perf_ctrls' which is used.
+> > > Voltage regulation for i.MX93 in Linux kernel, is done by ELE.
+> > >
+> > > During Linux suspend-resume, Secure-enclave (V2X on i.MX95) part of
+> > > wake-up domain, will be managed by secure-enclaves(ELE) part of
+> > > always-on domain.
+> > 
+> > So to sum-up, please correct me if I got it wrong:
+> > 
+> >  - NXP puts the ELE into the non-secure world, in case only one MU
+> >    exists. The reason for this is that the ELE is also used to handle
+> >    power-management.
+>
+> For NXP SoCs with multi-MU(s) too, NXP proposes to put ELE driver into
+> non-secure world.
+
+With the ELE-FW and OP-TEE OS fix applied both worlds can communicate.
+Therefore it doesn't matter and I didn't mentioned it explicit above.
+
+That beeing said, with both worlds capable to talk to ELE and the ELE
+beeing very system critical, both worlds have to agree to the
+responsibilities, e.g. OP-TEE OS is not allow to manipulate the
+power-state behind the back of Linux.
+
+> >  - NXP exposes an uAPI which can be used to send arbitrary commands from
+> >    userspace to the ELE. (no filtering done yet)
+>
+> It is not correct to say that no filtering is done.
+> Before sending as well as after receiving the message, the message header of the buffers
+> are parsed to check:
+> - TX-buffer with Command-tag is allowed to be sent, RX-buffer with response-tag is allowed to be received, without logging errors.
+
+I really don't want to step to deep into this, but that beeing said. If
+you refer to cmd_tag, than this tag is used by your below mentioned
+library also for NVM access. NVM is clearly something we do have a
+linux-framework and uAPI for.
+
+> - TX buffer size & Rx-Buffer size should match the size mentioned in the buffer.
+> - FW version from the header is checked, if required secondary or runtime FW Is loaded, before forwarding the request to ELE.
+> - In certain cases especially for exceptions, the message IDs are also compared.
 > 
-> Signed-off-by: Sumit Gupta <sumitg@nvidia.com>
-> ---
->  drivers/acpi/cppc_acpi.c | 42 ++++++++++++++++++++++++++++++++--------
->  include/acpi/cppc_acpi.h |  1 -
->  2 files changed, 34 insertions(+), 9 deletions(-)
+> > 
+> >  --> Sounds to me that the userpace can influence the system behavior
+> >      very badly.
+> > 
+>
+> Messages created and sent by User-space
+> library(https://github.com/nxp-imx/imx-secure-enclave), are
+> scrutinized as stated above in the kernel driver.
+
+This is uAPI which can be used by everyone and because your library may
+not implement access to power-managment calls doesn't mean that other
+libs do. I'm not sure if your proposed driver will block such attempts
+from userspace.
+
+> Moreover,
+> As part of this library, message creation, send-receive, IOCTLS etc.
+> kernel interface implementation logic, is not exposed to users of this
+> library.
+
+Your library is not the interface, the interface is the uAPI exposed by
+the kernel. This interface/your driver needs to handle valid and invalid
+access, e.g. hsm -> valid, nvm -> not valid since it is abstracted via
+NVMEM.
+
+> With the help of secure-boot and IMA-EVM, rootfs can be restricted to
+> not allow any new application or modified userspace library, to
+> execute.
+>
+> This way bad impact to the system behavior can be prevented.
+
+Sorry but I really have to say that I have to NACK. Your interface is
+the kernel uAPI and not some NXP userspace library.
+
+An attacker could gain runtime system access and poke the ELE with
+arbitrary commands till he finds a fw-bug using the kernel uAPI (not
+your library of course).
+
+> > > > > * Linux HWRNG.
+> > > > > * Loading the secondary runtime fw.
+> > > >
+> > > > What is a secondary runtime-fw?
+> > > ELE FW size is larger than the size of ELE internal secure memory.
+> > > Hence FW is split into two.
+> > >
+> > > Primary FW, is the FW, that enables features that helps for SoC boot-up.
+> > > Secondary runtime FW, is the FW, that enables features like HSM.
+> > 
+> > Ah okay, thanks for the input.
+> > 
+> > > > To conclude this longly discussion:
+> > 
+> > ...
+> > 
+> > > > I still have mixed feeling about the fusing (including the 1-MU
+> > > > case), since it requires a secure-world OS in place once the LOCK_DOWN
+> > fuse was burned.
+> > > > It's fine by me if NXP wants to have and wants to maintain a multi-path
+> > here.
+> > >
+> > > Write fuse API will be added, to allow writing fuses from secure world
+> > > too.
+> > 
+> > This is a device life-cycle problem and if NXP decides to maintain multiple write
+> > paths, depending on the runtime-SoC state, this is fine by me.
+> > 
+> > What needs to be ensured is, that the fuse-issue doesn't exist for the 1-MU
+> > case (i.MX8ULP) as you said.
+>
+> As said above "Write fuse API will be added, to allow writing fuses
+> from secure world too."
+> This will be true for 1 MU or multi-MU.
+
+In your previous mail you just said that there is no such issue with the
+write path. Now you say that the single-MU case needs the same
+workaround.. At least I have read it that way.
+
+> > > > Last but least, the uAPI which can be used to send arbitrary ELE
+> > > > commands seems unusual. But I don't know how secure-enclaves are
+> > > > abstracted within the kernel, so these are just my two cents.
+> > >
+> > > it's not unusual at all. The pattern of userspace sending commands
+> > > directly to the kernel via a queue is quite common like:
+> > >
+> > > GPUs: As you mentioned, userspace drivers (like those in Vulkan or
+> > > CUDA) often build command buffers and submit them directly to the
+> > > kernel or hardware.
+> > 
+> > That's right, but these drivers do at least some filtering on the OPs and check if
+> > they are allowed. According your patchset, you just write
+> > (se_if_fops_write()) the provided userspace buffer.
 > 
-> diff --git a/drivers/acpi/cppc_acpi.c b/drivers/acpi/cppc_acpi.c
-> index 05672c30187c..757e8ce87e9b 100644
-> --- a/drivers/acpi/cppc_acpi.c
-> +++ b/drivers/acpi/cppc_acpi.c
-> @@ -1344,8 +1344,8 @@ int cppc_get_perf_caps(int cpunum, struct cppc_perf_caps *perf_caps)
->  	struct cpc_desc *cpc_desc = per_cpu(cpc_desc_ptr, cpunum);
->  	struct cpc_register_resource *highest_reg, *lowest_reg,
->  		*lowest_non_linear_reg, *nominal_reg, *guaranteed_reg,
-> -		*low_freq_reg = NULL, *nom_freq_reg = NULL;
-> -	u64 high, low, guaranteed, nom, min_nonlinear, low_f = 0, nom_f = 0;
-> +		*low_freq_reg = NULL, *nom_freq_reg = NULL, *auto_sel_reg = NULL;
-> +	u64 high, low, guaranteed, nom, min_nonlinear, low_f = 0, nom_f = 0, auto_sel = 0;
->  	int pcc_ss_id = per_cpu(cpu_pcc_subspace_idx, cpunum);
->  	struct cppc_pcc_data *pcc_ss_data = NULL;
->  	int ret = 0, regs_in_pcc = 0;
-> @@ -1362,11 +1362,12 @@ int cppc_get_perf_caps(int cpunum, struct cppc_perf_caps *perf_caps)
->  	low_freq_reg = &cpc_desc->cpc_regs[LOWEST_FREQ];
->  	nom_freq_reg = &cpc_desc->cpc_regs[NOMINAL_FREQ];
->  	guaranteed_reg = &cpc_desc->cpc_regs[GUARANTEED_PERF];
-> +	auto_sel_reg = &cpc_desc->cpc_regs[AUTO_SEL_ENABLE];
->  
->  	/* Are any of the regs PCC ?*/
->  	if (CPC_IN_PCC(highest_reg) || CPC_IN_PCC(lowest_reg) ||
->  		CPC_IN_PCC(lowest_non_linear_reg) || CPC_IN_PCC(nominal_reg) ||
-> -		CPC_IN_PCC(low_freq_reg) || CPC_IN_PCC(nom_freq_reg)) {
-> +		CPC_IN_PCC(low_freq_reg) || CPC_IN_PCC(nom_freq_reg) || CPC_IN_PCC(auto_sel_reg)) {
->  		if (pcc_ss_id < 0) {
->  			pr_debug("Invalid pcc_ss_id\n");
->  			return -ENODEV;
-> @@ -1414,6 +1415,9 @@ int cppc_get_perf_caps(int cpunum, struct cppc_perf_caps *perf_caps)
->  	perf_caps->lowest_freq = low_f;
->  	perf_caps->nominal_freq = nom_f;
->  
-> +	if (CPC_SUPPORTED(auto_sel_reg))
-> +		cpc_read(cpunum, auto_sel_reg, &auto_sel);
-> +	perf_caps->auto_sel = (bool)auto_sel;
->  
->  out_err:
->  	if (regs_in_pcc)
-> @@ -1555,6 +1559,8 @@ int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable)
->  	struct cpc_register_resource *auto_sel_reg;
->  	struct cpc_desc *cpc_desc = per_cpu(cpc_desc_ptr, cpu);
->  	struct cppc_pcc_data *pcc_ss_data = NULL;
-> +	bool autosel_support_in_ffh_or_sysmem;
-> +	bool epp_support_in_ffh_or_sysmem;
->  	int ret;
->  
->  	if (!cpc_desc) {
-> @@ -1565,6 +1571,11 @@ int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable)
->  	auto_sel_reg = &cpc_desc->cpc_regs[AUTO_SEL_ENABLE];
->  	epp_set_reg = &cpc_desc->cpc_regs[ENERGY_PERF];
->  
-> +	epp_support_in_ffh_or_sysmem = CPC_SUPPORTED(epp_set_reg) &&
-> +				(CPC_IN_FFH(epp_set_reg) || CPC_IN_SYSTEM_MEMORY(epp_set_reg));
-> +	autosel_support_in_ffh_or_sysmem = CPC_SUPPORTED(auto_sel_reg) &&
-> +				(CPC_IN_FFH(auto_sel_reg) || CPC_IN_SYSTEM_MEMORY(auto_sel_reg));
-> +
->  	if (CPC_IN_PCC(epp_set_reg) || CPC_IN_PCC(auto_sel_reg)) {
->  		if (pcc_ss_id < 0) {
->  			pr_debug("Invalid pcc_ss_id for CPU:%d\n", cpu);
-> @@ -1589,14 +1600,29 @@ int cppc_set_epp_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls, bool enable)
->  		/* after writing CPC, transfer the ownership of PCC to platform */
->  		ret = send_pcc_cmd(pcc_ss_id, CMD_WRITE);
->  		up_write(&pcc_ss_data->pcc_lock);
-> -	} else if (osc_cpc_flexible_adr_space_confirmed &&
-> -		   CPC_SUPPORTED(epp_set_reg) && CPC_IN_FFH(epp_set_reg)) {
-> -		ret = cpc_write(cpu, epp_set_reg, perf_ctrls->energy_perf);
-> +	} else if (osc_cpc_flexible_adr_space_confirmed) {
-> +		if (!epp_support_in_ffh_or_sysmem && !autosel_support_in_ffh_or_sysmem) {
-> +			ret = -EOPNOTSUPP;
-> +		} else {
-> +			if (autosel_support_in_ffh_or_sysmem) {
-> +				ret = cpc_write(cpu, auto_sel_reg, enable);
-> +				if (ret)
-> +					return ret;
-> +			}
-> +
-> +			if (epp_support_in_ffh_or_sysmem) {
-> +				ret = cpc_write(cpu, epp_set_reg, perf_ctrls->energy_perf);
-> +				if (ret)
-> +					return ret;
-> +			}
-
-Wouldn't it be more clear to have separate functions for setting auto-sel
-and EPP? I think this is functionally correct, but somewhat unclear, given
-the signature of the function. But I do acknowledge that the function was
-like this to begin with.
-
-> +		}
->  	} else {
-> -		ret = -ENOTSUPP;
-> -		pr_debug("_CPC in PCC and _CPC in FFH are not supported\n");
-> +		ret = -EOPNOTSUPP;
->  	}
->  
-> +	if (ret == -EOPNOTSUPP)
-> +		pr_debug("_CPC in PCC and _CPC in FFH are not supported\n");
-
-This message needs updating.
-
-Thank you,
-Ionela.
-> +
->  	return ret;
->  }
->  EXPORT_SYMBOL_GPL(cppc_set_epp_perf);
-> diff --git a/include/acpi/cppc_acpi.h b/include/acpi/cppc_acpi.h
-> index 7190afeead8b..42e37a84cac9 100644
-> --- a/include/acpi/cppc_acpi.h
-> +++ b/include/acpi/cppc_acpi.h
-> @@ -119,7 +119,6 @@ struct cppc_perf_caps {
->  	u32 lowest_nonlinear_perf;
->  	u32 lowest_freq;
->  	u32 nominal_freq;
-> -	u32 energy_perf;
->  	bool auto_sel;
->  };
->  
-> -- 
-> 2.34.1
+> We are validating the buffer size against the size mentioned in the
+> buffer header.
+> Refer above comments for more details.
 > 
+> > > Secure Enclaves: In systems like Intel SGX or AMD SEV, userspace
+> > > applications interact with enclaves via ioctl or mmap interfaces,
+> > > often sending structured commands or messages.
+> > 
+> > What I'm aware of is, that most secure-enclaves are switching to the standard
+> > TPM API.
+>
+> In case of NXP SoC with ELE HW IP, ELE is considered as on-SoC TPM. No
+> additional or external TPM is needed, if ELE is present on SoC.
+
+I said "TPM API" not "TPM device", may it be fTPM or dTPM. I think AMD
+switched to fTPM, so no special userspace-requirements must be
+fulfilled. However, this is also off-topic.
+
+Regards,
+  Marco
+
+
+> 
+> > 
+> > Regards,
+> >   Marco
+> > 
+> 
+> Regards
+> Pankaj
+> 
+
+-- 
+#gernperDu 
+#CallMeByMyFirstName
+
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | https://www.pengutronix.de/ |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-9    |
 
