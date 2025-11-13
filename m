@@ -1,64 +1,62 @@
-Return-Path: <linux-doc+bounces-66570-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66566-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC089C58DE2
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 17:52:09 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 79A6BC59091
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 18:14:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 38D6E3BD21C
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 16:43:51 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id A6F80508D7E
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 16:30:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 688813590C4;
-	Thu, 13 Nov 2025 16:35:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76A2F2F7456;
+	Thu, 13 Nov 2025 16:22:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="A5kpXaXD"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="sp9ltNr+"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2C57264638;
-	Thu, 13 Nov 2025 16:35:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D57F428725B;
+	Thu, 13 Nov 2025 16:22:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763051703; cv=none; b=sqj1HSw2AFWxOAgL84T3IxmzKuciLK59U+nRzvqc8XOZ+ierYsODYXLkuksJCZw5HOUVVbu1Vk3Ixuo8oomSUM9tBHvn5N4Le21o+60x4fDn1BsoXCRCYKwc3ym06fW3+TBNAX+560jSNwgTQBse4v2gyUMLvAnXjt6iQFHxh/Y=
+	t=1763050964; cv=none; b=KPg6ytXCgAwQuZmNzqb9y4nNx25Ml2bmuiTC4E/U80U9xCfBC71fXuZz5si2wBiylVwRttoGaAQZjHBOfYA5vr40yE/mcIQp3pN8sy8czXC+/usPPN7org2ucb9fSM2YmcK6pw19ZoaFBBQknx0jIPb4Yxt8D/1Mc1Jx52jNsto=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763051703; c=relaxed/simple;
-	bh=CMAdqGs9O7YD1e8meS58RC8wPDRrJOsX5V8KdhRMj28=;
+	s=arc-20240116; t=1763050964; c=relaxed/simple;
+	bh=+eDEtAfsIZWqM55NCONZFNk+30J0WdRc4YvnH5eyqm0=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=Rx9wB7Y1ey7WKqe8tVLNzO8W2dZXlZv1vE4T5TvGr1cguBX9Ekmfrny4+jeD9fqA9U0Bpz4uiJaUD+ovLKQDaH1rCC6BKtc1E8C0KJTf+z+KYzxgqTvP+n11tNuPvwvAcByqwrn/mSW8k17eLAPrzYIBNkoS9AJb3tVXIFGvy9Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=A5kpXaXD; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=Kw5FDgfk8aFfq0thvDzaBbBL3JYFptJUY1IUez2EVFc9+7SfoUpbJk/Kz4eqGWjiaQljoizyt+A348Ujgkh61tWE58rj/QPj3CyI8D4yGGmF16F+EYc1QK1o5XuYK0eKHLMRHTvonwequHCzSMByAYv+53hD2nm3373IprHEko8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=sp9ltNr+; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 2587040AFB
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 2332D40AFB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1763051701; bh=fZeXcstKgjL+57ApjPda20VrBNPiraqZlGEWM7pRe7k=;
+	t=1763050962; bh=mdF9LbRSystwYcUv1PMVYl8XBSKgx8qgBf9HV+OWE8w=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=A5kpXaXDWdnd6JY9aFI7r3dDnnM+muZJ6xOiHSd+mEm6Fg/JAO6jsyn12j4A21aeT
-	 mXMgPb/m/NAXLIYg6jLy6VGzIz0vstm99JBkYxhrppxHzCBjFFiOMZm0W8zWAgzkeY
-	 8FSKjwTXQTj7vmBqR0YducF0Btuc3n+N65q7xjIVDsJaqIHIZMN0b7r8E9FzV84VBL
-	 Vo+T/KEbiHtk2TSipu8sll2fDpb2/U6MaL6fyBjhjVTEn1F3YGoekOgm0hC76Xfr8U
-	 bDOjergrZVynnZl8GG5OhV59KV7dWh2KAdgnaBmnizwvxzaIFo29bGULe4ueyt4wUR
-	 wcriRpQMedWxQ==
+	b=sp9ltNr+t2+l0bhcklwC+BveThtzAuWgKZfIbvhU290Y8ntSlfACN2SiFd+4pvrdp
+	 ERQAG3xKWMyQ7FJMHvSYrephhgd0fSRM6SR6pW7BUdPABD0bR7gxkicIB8n9AAadU9
+	 1ZXYd5ftoboO6w4t2LZelPhoNlFYzwA6QitPpyyFZufm7XAlRpi8jztlduzjny7cD9
+	 Tf/a8V/Wa2gpuT1E46SHm0EdnnC32KencsTjSU5KohVt6N8hEM4+r+nQPXtqBDFv6S
+	 tynxJHtAgojnwrx3XcVP5P+DM7+uF54+xDY6TI1RuC4VWu3Euqsy+EEPfB8d9vTU8o
+	 Fhpss8r9oeKCw==
 Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 2587040AFB;
-	Thu, 13 Nov 2025 16:35:01 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 2332D40AFB;
+	Thu, 13 Nov 2025 16:22:42 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
 To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Linux Doc Mailing
  List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Dongliang Mu
- <dzm91@hust.edu.cn>, Mauro Carvalho Chehab <mchehab@kernel.org>, Randy
- Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/1] docs: parse-headers.rst: remove uneeded parenthesis
-In-Reply-To: <e5de9f7b1f6a963b2912574a65495c47cfbb13ba.1762878176.git.mchehab+huawei@kernel.org>
-References: <cover.1762878176.git.mchehab+huawei@kernel.org>
- <e5de9f7b1f6a963b2912574a65495c47cfbb13ba.1762878176.git.mchehab+huawei@kernel.org>
-Date: Thu, 13 Nov 2025 09:35:00 -0700
-Message-ID: <87jyztsxfv.fsf@trenco.lwn.net>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Jani Nikula
+ <jani.nikula@intel.com>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: Makefile: update SPHINXDIRS documentation
+In-Reply-To: <683469813350214da122c258063dd71803ff700b.1763031632.git.mchehab+huawei@kernel.org>
+References: <683469813350214da122c258063dd71803ff700b.1763031632.git.mchehab+huawei@kernel.org>
+Date: Thu, 13 Nov 2025 09:22:41 -0700
+Message-ID: <874iqxucku.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -69,26 +67,37 @@ Content-Type: text/plain
 
 Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-> As pointed by Randy, the parenthesis there is not needed and it
-> violates the document coding style.
+> Since the beginning, SPHINXDIRS was meant to be used by any
+> subdirectory inside Documentation/ that contains a file named
+> index.rst on it. The typical usecase for SPHINXDIRS is help
+> building subsystem-specific documentation, without needing to
+> wait for the entire building (with can take 3 minutes with
+> Sphinx 8.x and above, and a lot more with older versions).
 >
-> Reported-by: Randy Dunlap <rdunlap@infradead.org>
-> Closes: https://lore.kernel.org/linux-doc/9d709020-03fe-467c-be7f-d5ee251bb79a@infradead.org/
+> Yet, the documentation for such feature was written back in
+> 2016, where almost all index.rst files were at the first
+> level (Documentation/*/index.rst).
+>
+> Update the documentation to reflect the way it works.
+>
 > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 > ---
->  Documentation/doc-guide/parse-headers.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  Documentation/Makefile | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> diff --git a/Documentation/doc-guide/parse-headers.rst b/Documentation/doc-guide/parse-headers.rst
-> index 954f3285ddf6..bd34a6d00ca9 100644
-> --- a/Documentation/doc-guide/parse-headers.rst
-> +++ b/Documentation/doc-guide/parse-headers.rst
-> @@ -89,7 +89,7 @@ defines the C namespace to be used.
->  It is meant to allow having more comprehensive documentation, where
->  uAPI headers will create cross-reference links to the code.
->  
-> -The output is written at the (``FILE_OUT``).
-> +The output is written at the ``FILE_OUT``.
+> diff --git a/Documentation/Makefile b/Documentation/Makefile
+> index d514ab6761dc..c66df29cf0a3 100644
+> --- a/Documentation/Makefile
+> +++ b/Documentation/Makefile
+> @@ -104,7 +104,9 @@ dochelp:
+>  	@echo  '  cleandocs       - clean all generated files'
+>  	@echo
+>  	@echo  '  make SPHINXDIRS="s1 s2" [target] Generate only docs of folder s1, s2'
+> -	@echo  '  valid values for SPHINXDIRS are: $(_SPHINXDIRS)'
+> +	@echo  '  top level values for SPHINXDIRS are: $(_SPHINXDIRS)'
+> +	@echo  '  you may also use a subdirectory like SPHINXDIRS=userspace-api/media,'
+> +	@echo  '  provided that there is an index.rst file at the subdirectory.'
+>  	@echo
 
 Applied, thanks.
 
