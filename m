@@ -1,144 +1,161 @@
-Return-Path: <linux-doc+bounces-66561-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66563-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A14AC58C47
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 17:36:44 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C64FC58BC0
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 17:30:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id AE97E4F16CC
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 15:57:27 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C99414281BA
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 16:05:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4EBF53559FA;
-	Thu, 13 Nov 2025 15:53:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A8B02FC00D;
+	Thu, 13 Nov 2025 16:03:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="UnhyHl5P"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZA9qpnyh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BA7E3559E0
-	for <linux-doc@vger.kernel.org>; Thu, 13 Nov 2025 15:53:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C75942FABE0;
+	Thu, 13 Nov 2025 16:03:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763049192; cv=none; b=P/onFjrtHAaXEcmeKYxoQC5eXO8IRBW5I69clFw7qGHW8OSd++GHw37xGIkESnNaEvPHxrI/WgICwSPZ6XTQ3PEwODoaKc3nQqVHIIV10YSaBwEASUqWxZDNGPUz66l3fJK1qjygrJa1WNj1a8WP/OX4gpNlwR79lQflsnFup2Y=
+	t=1763049785; cv=none; b=VhSeip2r+OSQtY6ns37V1w0TzLmkWwClJQq2E19er3eGCp1OZundaACoK5ZAhGWvH3nPbdmCSEsQBY8Lx5ddzLCAB9UdoxkqLWUIazGbJh2mVBw2su8o42cShS3D92JQpETf60qOXg1RB42D/T43ZmzG8PNvt26OHsuFFYAMTrA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763049192; c=relaxed/simple;
-	bh=OX60sKiYWBPN5NRPN15Ciaf9MOmCSXUCmyYmlQRE8wQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=mOc23oez/9+oGW8oV53VZJj3dFjnR+rDzsG48HFsV52Gk1EKh+1k0Yl7zGtV4G0BdhiYlNw1IsIbbEWlCbFIpvaF77u8Fv8kwddtn7jxJEynIj/gjMvFsXPTw+FUNTtwsBlWb/jsVtek9UJhbUJYMKXSBS2uqbOhBlpesNBYvR4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=UnhyHl5P; arc=none smtp.client-ip=209.85.167.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5943d1d0656so1501138e87.0
-        for <linux-doc@vger.kernel.org>; Thu, 13 Nov 2025 07:53:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1763049188; x=1763653988; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OX60sKiYWBPN5NRPN15Ciaf9MOmCSXUCmyYmlQRE8wQ=;
-        b=UnhyHl5Pnheicwm/Lo3266MWOD40MLGfAm6zN124i5VRXHIGIdAfmPbI+hKGkSA96p
-         23cUzQWcaBUZmknmwMOZAgjabWEFqOzRioN6ooYqxGs6OFBymc6rtli14+wArQeA9aPE
-         DKQOjlpLSjbAreNJZ2gt3t3Xaz17Zue9OeSdXvw1TzoKgmOh1GtwrjqXcXHCtbq1KAJB
-         hzvy+QhJ3JBX+wiPFUPpIoKtPQtPbTSBCkfmLFHlpX8DuJWcgF2RD/4htVqFvzE0QJFm
-         v4QKy6NIleF9eTSPZR4lun5A9FQYImGaCpgtPcVk9/twQEJGfSvLDMCwVgyCeIbxUju1
-         XLTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763049188; x=1763653988;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=OX60sKiYWBPN5NRPN15Ciaf9MOmCSXUCmyYmlQRE8wQ=;
-        b=AObq6PbiyuYZciAgMSqIZmj3G+4VsAYfYN3N3Ui7p8rmgc+Mz0EdmHj6LZh2ZNUesB
-         CL9GuG4ZJWj3pdpvNik7fR8AKSwUjVDk9oHmdeamAdXpkQzEeSSH/eXa1kg6gt+mmvO1
-         tkGnwsx5GbVZZ6iLmdGhY3DaljyhY4j3VFffKv/gR1cxAUaF9RtewY4yEyPWVyLV88SA
-         2j7qsZd72vwYAt4BFttyig6BAPbDp+DcD6MIxFXIgDcWDFHyVdOQFhCDzDTFeQMcyMEn
-         miJIQc3Hhinv5xoXWv1b+XRENiEuSfLidcJ5FKTrGEHBK4arRSeuY9MeBJRLiH50IC7x
-         hI2g==
-X-Forwarded-Encrypted: i=1; AJvYcCUBoV1NoFRo4Po2aR/f/dRPavX5Hl459DJdtFiVFD+aDXlgBi36eqOAll9jWxfBRwoJ2wZymxyMjlY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwpEWStFxyu38qT0xop9iR3jbUeYxUhAJXpDi0BBQnD80nVuft/
-	X+u5SlWezaJ2sRzfZtUdaFSmIL0vCrjHWezyRqUEJPvPFMX4Lae/+TKiIcfpAzxeJh5k6fxw2fw
-	ko+XAODmGX9hJac0bko7dONSaMPaYQLQeypSofznAuA==
-X-Gm-Gg: ASbGnctpx43snZDPLsaWUhFcsNzJZYED3b7Sk7YISfQ8Rd8I0TSKUhZMIIdi2M3xw24
-	e+GA3KxxBcbNOtuoMPti+8cCVDFxsDhDEVdyYh04QB7hsGPXMwD6yw07Nm4mcnnOiBigtEWktFR
-	oMEaMxAOnTSUVXNa2TrtPjoNSTCKvOKiLyIiQF2B/XVDlAsbz1HXGN+2OlJ1BZ6CZrEBvyXRw5Y
-	ID28iQsobDulK9CGGfzFY2ZrsuNKsGwATjJsGQX03P95RIFtben/SWWauZIz2BlQAsDZCbJDLtd
-	NHVhrADxVkkUBA9M
-X-Google-Smtp-Source: AGHT+IGEIHUfqwrlVSTNHLgDVI05vKsEFSndBnbm0aaakSseNyRK8XPAjnLHbbfGqrZ6iuP/tkAMQ67bsZMfd+4juQg=
-X-Received: by 2002:a05:6512:108e:b0:594:34c4:a325 with SMTP id
- 2adb3069b0e04-59576e31216mr2694783e87.46.1763049188065; Thu, 13 Nov 2025
- 07:53:08 -0800 (PST)
+	s=arc-20240116; t=1763049785; c=relaxed/simple;
+	bh=rRvKv1BEPoPU3+9Q7iKmxRtmjJdSj7+9UCKsshojBhg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=kZNiuX6MoFhL2f5+JAXcELqRBuv/fux/1jN4zYHBWEOQusPaUedQ7MSXmpOgPZHn/9jPQVjwmoLFyC0xAV4+T4lsPQ0M3X6rN7LHtP7ff0vvrZRfuS8zBSQH/JWvXvPJOruUS00joQ7dJ+GXSgw1U/DG+VK1ZeY3W1OaASOYFbs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZA9qpnyh; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 107DCC4CEF7;
+	Thu, 13 Nov 2025 16:03:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1763049785;
+	bh=rRvKv1BEPoPU3+9Q7iKmxRtmjJdSj7+9UCKsshojBhg=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=ZA9qpnyhKG6bYSIwToSRzBFTz7OxJc5h2Mz3DANWgwV1OV7O3Vq4JZSv1Yy2/8OFq
+	 8oGy0yF+W8h1Vcn9EAZs48YGVMbyhu60vDYMH8wLxD2Ev7kDuCWrVr4ywFD57M00WX
+	 URgz5zF8ju3Oa2pvoMU9zlGdDMxvjbhJ6AzCaxl3FZJu0A/SLnIKCc6NPCHbh/kdjj
+	 fn9OUaaL75q2Sg0g3sBXfghOScPTWrmWM3aWjbMKtMExJC0VewpEgzF+Ks5B+LH0B1
+	 /6JqBz23ygpVJNeBKPdQ92B0H8b7zWDOum/RY2w4M98pLxCuucTR6dzcGsI1CKsevp
+	 8AKK+4UfElImg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDC08CD6E7A;
+	Thu, 13 Nov 2025 16:03:04 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Subject: [PATCH v8 0/2] Add support for sound profile switching and
+ leverage for OnePlus slider
+Date: Thu, 13 Nov 2025 17:02:57 +0100
+Message-Id: <20251113-op6-tri-state-v8-0-54073f3874bc@ixit.cz>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251106-qcom-qce-cmd-descr-v8-0-ecddca23ca26@linaro.org>
- <20251106-qcom-qce-cmd-descr-v8-1-ecddca23ca26@linaro.org>
- <xozu7tlourkzuclx7brdgzzwomulrbznmejx5d4lr6dksasctd@zngg5ptmedej>
- <CAMRc=MdC7haZ9fkCNGKoGb-8R5iB0P2UA5+Fap8Svjq-WdE-=w@mail.gmail.com> <m4puer7jzmicbjrz54yx3fsrlakz7nwkuhbyfedqwco2udcivp@ctlklvrk3ixg>
-In-Reply-To: <m4puer7jzmicbjrz54yx3fsrlakz7nwkuhbyfedqwco2udcivp@ctlklvrk3ixg>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Thu, 13 Nov 2025 16:52:56 +0100
-X-Gm-Features: AWmQ_blYu02FWethcWw51M6XQQsBTFUfg16XB4nlVnnodZzkOPobVgGS07ncuc4
-Message-ID: <CAMRc=MfkVoRGFLSp6gy0aWe_3iA2G5v0U7yvgwLp5JFjmqkzsw@mail.gmail.com>
-Subject: Re: [PATCH v8 01/11] dmaengine: Add DMA_PREP_LOCK/DMA_PREP_UNLOCK flags
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
-	Daniel Perez-Zoghbi <dperezzo@quicinc.com>, Md Sadre Alam <mdalam@qti.qualcomm.com>, 
-	dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-crypto@vger.kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADEBFmkC/3XO3WoCMRAF4FeRXDdLJn+TeOV7FC9iTN2B4kqSB
+ n/Yd2/cQkXByzOc7zA3VlKmVNh6dWM5NSo0HXtwHysWx3A8JE77npkU0ggNnk8ny2smXmqoiac
+ 9BGECAEjDujnl9EXnZe9z2/NIpU75ssw3fb+yOLWUB7CIQkoNejhQHcp0SXlD+XsYf9gdNvVct
+ s4IB/5N2SzlNz82wwXXWoFEgc4AbujcV+L1z9qHRQWv1nZrrI/SxF10UT5b/LcgQL9a7NYrF6y
+ yCB53DzvP8y+mjsEDegEAAA==
+X-Change-ID: 20250419-op6-tri-state-ed1a05a11125
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+ Jonathan Corbet <corbet@lwn.net>, Jiri Kosina <jikos@kernel.org>, 
+ Benjamin Tissoires <bentiss@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ =?utf-8?q?Guido_G=C3=BCnther?= <agx@sigxcpu.org>
+Cc: linux-input@vger.kernel.org, linux-doc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, phone-devel@vger.kernel.org, 
+ Gergo Koteles <soyer@irl.hu>, David Heidelberg <david@ixit.cz>, 
+ Casey Connolly <casey@connolly.tech>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2102; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=rRvKv1BEPoPU3+9Q7iKmxRtmjJdSj7+9UCKsshojBhg=;
+ b=kA0DAAgBYAI/xNNJIHIByyZiAGkWATahp+QLvY5EbJpC8VGhVDtZLOC4cLheywBEIOy+YgvZa
+ okCMwQAAQgAHRYhBNd6Cc/u3Cu9U6cEdGACP8TTSSByBQJpFgE2AAoJEGACP8TTSSByO5kP+wXy
+ EmuWaWzET8c4cNnuAyL6BN2gCaJyUuz1Uox4XB1k7a1pWrElwGw81BpG90wfQEhjFenO2ivub92
+ yMwVkGiVqw1PLLJGG1y5leEQAJrG0cDH0V1JTsCS2nyCA4F/v8R7KwRQM/KSHwg2iOOKd0kFb+N
+ iQOnW+MxHuf/WAHBjffc7w5Qz9gNUJ0R2M7IdylRGFlU88gZ5560kdds6yjnpHWwPtZpmPy520A
+ XQcN/1t3bCudUNClNnRoBwW6DeP346SZ/dxg0KHb4d5Y1TDqRR3JD9cpumzs2qxBiq5t/dHgSnF
+ RTItqsNptFi2PmkC6SoNMdJQoWis4fDbpK8zcf6MgMaqDzSbmEMjllm2ZOZ33gwnls3KM7Gp7Fa
+ HQQlMP17WK83M0iGQmCvyUCwPXpFgMommp1fLqLQBCWEj8PcXVA86hDYxSfs5JiNwhMptAj7ROg
+ BDZW96yc8HXZtzzyq7UXIaL+DuCY1Q3rqbFb8eJ7WFsRN4oG1JYKAjjTusUHSFlehUMu3pNlrzF
+ xZkpiT0iEyDgax2b2P8Q6w1gKwlTdus8/2DhG+RCfVDYoZ8wm7DQg4IC3UC5ZWZL97WiopIa3MA
+ Q0LpJP48/7mxsdRhMBbD7LoeQBlBj8gHmCT3nc69dJzqqMzAAB5rQyfodjNAIsrysDAw+pVDAW9
+ A0Q0u
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On Thu, Nov 13, 2025 at 1:28=E2=80=AFPM Dmitry Baryshkov
-<dmitry.baryshkov@oss.qualcomm.com> wrote:
->
-> On Thu, Nov 13, 2025 at 11:02:11AM +0100, Bartosz Golaszewski wrote:
-> > On Tue, Nov 11, 2025 at 1:30=E2=80=AFPM Dmitry Baryshkov
-> > <dmitry.baryshkov@oss.qualcomm.com> wrote:
-> > >
-> > > On Thu, Nov 06, 2025 at 12:33:57PM +0100, Bartosz Golaszewski wrote:
-> > > > From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-> > > >
-> > > > Some DMA engines may be accessed from linux and the TrustZone
-> > > > simultaneously. In order to allow synchronization, add lock and unl=
-ock
-> > > > flags for the command descriptor that allow the caller to request t=
-he
-> > > > controller to be locked for the duration of the transaction in an
-> > > > implementation-dependent way.
-> > >
-> > > What is the expected behaviour if Linux "locks" the engine and then T=
-Z
-> > > tries to use it before Linux has a chance to unlock it.
-> > >
-> >
-> > Are you asking about the actual behavior on Qualcomm platforms or are
-> > you hinting that we should describe the behavior of the TZ in the docs
-> > here? Ideally TZ would use the same synchronization mechanism and not
-> > get in linux' way. On Qualcomm the BAM, once "locked" will not fetch
-> > the next descriptors on pipes other than the current one until
-> > unlocked so effectively DMA will just not complete on other pipes.
-> > These flags here however are more general so I'm not sure if we should
-> > describe any implementation-specific details.
-> >
-> > We can say: "The DMA controller will be locked for the duration of the
-> > current transaction and other users of the controller/TrustZone will
-> > not see their transactions complete before it is unlocked"?
->
-> So, basically, we are providing a way to stall TZ's DMA transactions?
-> Doesn't sound good enough to me.
+This series add initial support for OnePlus 6 and 6T, but other OnePlus
+phones contains same mechanism to switch sound profiles.
 
-Can you elaborate because I'm not sure if you're opposed to the idea
-itself or the explanation is not good enough?
+This code was tested for two years within the downstream Snapdragon 845 tree.
+It is now perfectly integrated with feedbackd in the Phosh environment.
 
-Bartosz
+The series is also available (until merged) at
+  https://gitlab.com/sdm845/sdm845-next/-/commits/b4/op6-tri-state
+
+Changes in v8:
+- Rebased against next-20251113
+- Added R-b, T-b trailers from v7.
+- Link to v7: https://lore.kernel.org/r/20251014-op6-tri-state-v7-0-938a6367197b@ixit.cz
+
+Changes in v7:
+- Separated GPIO number fix from the original commit
+  "arm64: dts: qcom: sdm845-oneplus: Add alert-slider"
+- Rebased again next-20251008
+- Link to v6: https://lore.kernel.org/r/20250731-op6-tri-state-v6-0-569c25cbc8c2@ixit.cz
+
+Changes in v6:
+- Rebased again next-20250731, otherwise just a resent.
+- Link to v5: https://lore.kernel.org/r/20250419-op6-tri-state-v5-0-443127078517@ixit.cz
+
+Changes in v5:
+- Dropped merged
+  "Input: gpio-keys - add support for linux,input-value DTS property"
+- Link to v4: https://lore.kernel.org/all/cover.1677022414.git.soyer@irl.hu/
+
+Changes in v4:
+- DTS: use default debounce-interval, order alphabetically
+- Link to v3: https://lore.kernel.org/lkml/cover.1676850819.git.soyer@irl.hu/
+
+Changes in v3:
+- rename tri-state-key to alert-slider, fix DTS warnings,
+
+Changes in v2:
+- rebase to qcom/for-next
+add SND_PROFILE_* identifiers to input-event-codes.h
+
+---
+Gergo Koteles (2):
+      Input: add ABS_SND_PROFILE
+      arm64: dts: qcom: sdm845-oneplus: Add alert-slider
+
+ Documentation/input/event-codes.rst                |  6 ++++
+ .../arm64/boot/dts/qcom/sdm845-oneplus-common.dtsi | 35 ++++++++++++++++++++++
+ drivers/hid/hid-debug.c                            |  1 +
+ include/uapi/linux/input-event-codes.h             |  9 ++++++
+ 4 files changed, 51 insertions(+)
+---
+base-commit: 6d7e7251d03f98f26f2ee0dfd21bb0a0480a2178
+change-id: 20250419-op6-tri-state-ed1a05a11125
+
+Best regards,
+-- 
+David Heidelberg <david@ixit.cz>
+
+
 
