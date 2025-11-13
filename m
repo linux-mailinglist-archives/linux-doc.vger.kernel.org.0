@@ -1,905 +1,508 @@
-Return-Path: <linux-doc+bounces-66472-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66474-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2558C55248
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 01:57:23 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 570E0C55316
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 02:06:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id D595134E4E9
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 00:52:26 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 6BAEA4E5412
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 01:00:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3A572ECE82;
-	Thu, 13 Nov 2025 00:43:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3E6D320F09C;
+	Thu, 13 Nov 2025 00:57:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MvK3WtCG"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="Gtnjnwex"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from SJ2PR03CU001.outbound.protection.outlook.com (mail-westusazon11012052.outbound.protection.outlook.com [52.101.43.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6050B2E972A;
-	Thu, 13 Nov 2025 00:43:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762994625; cv=none; b=Yk/pVcpAKgc9UYg1VGmVNxA0/XyP9XMC2PmmjQo9aNlTb1rGKPD+uOuBIvgnH3GI/InR0D31Xln1zGLcAcjtiqZE6FQX3osuLaHSAvE/EBdh+olZhlwnAcJDZ2AbrML0gOhiT4qbZUYK1/CCCGMwGm4iI50emh00c81cw3El4Cc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762994625; c=relaxed/simple;
-	bh=atVaffTJAq7/wQZLs1egK3jkYkUPHj4HhPL0uo9htAo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SwA8Y/PzEzf8M+zqRy+Nh8HIXsPpnlww0bMr/3OHQF75F69zKGPfbphZIxqt4AvzWAwnRxc7iSOKkQNRBzKhPl0pNRzqpx3r3/MaJOYzZ5Hjv1b6UN7BOSZcOoGhU7683nzbj72kh4socXEFDIl92vPtU2hzKOWi4cOqGIQ711Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MvK3WtCG; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4A896C2BD01;
-	Thu, 13 Nov 2025 00:43:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1762994624;
-	bh=atVaffTJAq7/wQZLs1egK3jkYkUPHj4HhPL0uo9htAo=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=MvK3WtCGbERyar1iYGZZOc9Bn2HIGYsr8UeUOLeFRelDTUEseLR0jdqu4RZCN/+V1
-	 lA9nFNMa5xSxfjwkexKqYrge83n06U9DMkLdn3k/F2inS/xd+gg5Rie2Hd275qMwPt
-	 /eLWJkzyX6H8TXwopunMSY7VCdUHRtdHz/86zNgekpde6vnTmiDEWACkisd+fXLXuq
-	 jr4wZSUDQxrqKHIuruqeFkXvqxmWapIHHBBM32XYUCy2LJUCGpg+EMPf5J5v9bkOTz
-	 g0L42inqBB8Qlvdr29F8n0ff7HJqrEmPKUiJQ34dmXU+aLXwioIYSbb0gDXX38H4JZ
-	 wGIb3G6za+E5A==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 369A5CD4F2C;
-	Thu, 13 Nov 2025 00:43:44 +0000 (UTC)
-From: Deepak Gupta via B4 Relay <devnull+debug.rivosinc.com@kernel.org>
-Date: Wed, 12 Nov 2025 16:43:26 -0800
-Subject: [PATCH v23 28/28] kselftest/riscv: kselftest for user mode cfi
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEC3B2B9A4;
+	Thu, 13 Nov 2025 00:57:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.43.52
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1762995474; cv=fail; b=YFnlEUck12pOSOFTejAk2Fjbi3+4fhFNUo4iCOzoYQ55hllkszeHeNgtrP1k4cHb4nI0O/cxSx2zA1zUEeNDnGQRBs1foKxFHaHA5DUp7vmZ00pdnMDirll8E+E7Bdj043v+sYgBbVkCHmbwpdXJg6+GYTigFJnoXpKoe5QKiqA=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1762995474; c=relaxed/simple;
+	bh=A6/z+yGQbbK9ymuO6SGFgFISJFSag6CoGIhiPJpsg9k=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=FCDbb5eUBb0I15PJ3kWEBUXO7bzLyUqSA0NXQhTkM1aEEiKZYEWVzqjW9RjJySdzTAoRIXXOre/gk6Ed1ZTWoGrrGetuZeJhzN0ClCM6DKkeTMPW3Wl9HbKelyUaixBrjee2HIDrvUYwpBut3gr9OH4ttQmgAS/Tyq9M/nc115c=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=Gtnjnwex; arc=fail smtp.client-ip=52.101.43.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EwtxAR334+mLHtuWht4jatgyEd2K3nmAsxRn4MBAM/rRUW2EjJgYgnH5DvTg2hY1s0y1mXIrtULw14OiFNXPe7t4jV/zvEeXDoPBwkEI9E7/dwbycLxdV+/GKrAURX5VD+Is2ozdd7QcEBngUdVAkYIT2WN85xxXM9xUGRuHHYqcSMLpdM3zwUMWZcb92bUGXlgioeQaVlWJnbH1DdkdhiIQoxyQfYb46/gXA9C02YjHvgK+H3YzwzbnMh4O4K9cQXaP0I4wpB1LuU3zIZDPCEhce3OR1ZV0FmGxRa8FL9zCUsJHzjBNxaDLxg2Kqeyz/CW5kNUmymJz5JjOkwpYWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3QTShY/a2JJ+Ii4mHdpkGrW0QyFO+c0KGyVBS+G65s8=;
+ b=rIC7cmJ/NbmPeFEzdcGntPC5BZrsa5ju+WlOuRr4GcEkdLWkeOS95MeT7F0UhSaTmpknvfSqEH/AOrKIRfMF4+QjuraAeqMM+2Ba45om6DHg6JuIRms1vDlswhP5rQAuwtk6PN7E4TplWEtDI0d63kAbn/VVHCYsxSQCOXzKL8SBpktyR3JHPxYBW+CvXzZjHRJ4wKD56qnTKJsGPf0yxROHX6S4TyTw9mKFt+fnPXCzoPpAQvC8yMUexfdFUxOlDl6MZFQdglDUqD8DpFQtOpKUj+1uHz5tSlLLzn6ocE3beIrC9ywoiSR395t6lSkdqJJmOs7djsUnPwCbyu0s2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=intel.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3QTShY/a2JJ+Ii4mHdpkGrW0QyFO+c0KGyVBS+G65s8=;
+ b=GtnjnwexndPdp/6lKcnr2L1AY9Ry51NEhEwuK0oFkGxNVNPUDbdAUyRj3EAjz91bVh5tO2IQj0WvkgVgZF9jt5mdpW7jCJ3SUwy8mO5URA8ITI4snHN5jS9ETbvh+73vEpv9oUBCNS/+w6PxKnIr2hxtIcjupkQxu9Jf9TUtxY8=
+Received: from CH2PR19CA0009.namprd19.prod.outlook.com (2603:10b6:610:4d::19)
+ by IA4PR12MB9763.namprd12.prod.outlook.com (2603:10b6:208:55a::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.15; Thu, 13 Nov
+ 2025 00:57:43 +0000
+Received: from CH1PEPF0000AD7C.namprd04.prod.outlook.com
+ (2603:10b6:610:4d:cafe::91) by CH2PR19CA0009.outlook.office365.com
+ (2603:10b6:610:4d::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.16 via Frontend Transport; Thu,
+ 13 Nov 2025 00:57:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH1PEPF0000AD7C.mail.protection.outlook.com (10.167.244.84) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 00:57:43 +0000
+Received: from bmoger-ubuntu.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 12 Nov
+ 2025 16:57:42 -0800
+From: Babu Moger <babu.moger@amd.com>
+To: <tony.luck@intel.com>, <reinette.chatre@intel.com>, <tglx@linutronix.de>,
+	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>
+CC: <corbet@lwn.net>, <Dave.Martin@arm.com>, <james.morse@arm.com>,
+	<babu.moger@amd.com>, <x86@kernel.org>, <hpa@zytor.com>,
+	<akpm@linux-foundation.org>, <paulmck@kernel.org>, <rdunlap@infradead.org>,
+	<pmladek@suse.com>, <kees@kernel.org>, <arnd@arndb.de>, <fvdl@google.com>,
+	<seanjc@google.com>, <pawan.kumar.gupta@linux.intel.com>, <xin@zytor.com>,
+	<thomas.lendacky@amd.com>, <sohil.mehta@intel.com>, <jarkko@kernel.org>,
+	<chang.seok.bae@intel.com>, <ebiggers@google.com>,
+	<elena.reshetova@intel.com>, <ak@linux.intel.com>,
+	<mario.limonciello@amd.com>, <perry.yuan@amd.com>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<peternewman@google.com>, <feng.tang@linux.alibaba.com>
+Subject: [PATCH v12 00/10] x86,fs/resctrl: Support L3 Smart Data Cache Injection Allocation Enforcement (SDCIAE)
+Date: Wed, 12 Nov 2025 18:57:26 -0600
+Message-ID: <cover.1762995456.git.babu.moger@amd.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251112-v5_user_cfi_series-v23-28-b55691eacf4f@rivosinc.com>
-References: <20251112-v5_user_cfi_series-v23-0-b55691eacf4f@rivosinc.com>
-In-Reply-To: <20251112-v5_user_cfi_series-v23-0-b55691eacf4f@rivosinc.com>
-To: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Andrew Morton <akpm@linux-foundation.org>, 
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, 
- Vlastimil Babka <vbabka@suse.cz>, 
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
- Paul Walmsley <paul.walmsley@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
- Christian Brauner <brauner@kernel.org>, 
- Peter Zijlstra <peterz@infradead.org>, Oleg Nesterov <oleg@redhat.com>, 
- Eric Biederman <ebiederm@xmission.com>, Kees Cook <kees@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, 
- Jann Horn <jannh@google.com>, Conor Dooley <conor+dt@kernel.org>, 
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, 
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, 
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>, 
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>, 
- Trevor Gross <tmgross@umich.edu>, Benno Lossin <lossin@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
- linux-mm@kvack.org, linux-riscv@lists.infradead.org, 
- devicetree@vger.kernel.org, linux-arch@vger.kernel.org, 
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org, 
- alistair.francis@wdc.com, richard.henderson@linaro.org, jim.shu@sifive.com, 
- andybnac@gmail.com, kito.cheng@sifive.com, charlie@rivosinc.com, 
- atishp@rivosinc.com, evan@rivosinc.com, cleger@rivosinc.com, 
- alexghiti@rivosinc.com, samitolvanen@google.com, broonie@kernel.org, 
- rick.p.edgecombe@intel.com, rust-for-linux@vger.kernel.org, 
- Deepak Gupta <debug@rivosinc.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1762994618; l=22788;
- i=debug@rivosinc.com; s=20251023; h=from:subject:message-id;
- bh=TRx4ZLWV61l7mSSrHVorWcTZpF657jUbWXNcRL00g5k=;
- b=62qzS2FxgpIVdajB67iKvyJjFVF2QCuLIbZ+pu2mgm6IYSzYwR6oUKLH53ehTUsGLxOftjqxK
- PC/IEuTrA4gCQOocTtRBLzlaUTBsn85YpiDQyVtJwWj7Ah2dO3D1UIY
-X-Developer-Key: i=debug@rivosinc.com; a=ed25519;
- pk=O37GQv1thBhZToXyQKdecPDhtWVbEDRQ0RIndijvpjk=
-X-Endpoint-Received: by B4 Relay for debug@rivosinc.com/20251023 with
- auth_id=553
-X-Original-From: Deepak Gupta <debug@rivosinc.com>
-Reply-To: debug@rivosinc.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7C:EE_|IA4PR12MB9763:EE_
+X-MS-Office365-Filtering-Correlation-Id: d75e1f46-c3b9-4c14-361c-08de224fa74b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700013|1800799024|82310400026|7416014|376014|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?gUwbTPgpdFgUfs1dWDuluOifBeysQvZxGO9k+3KHkAXw9gLuh4pl4R6If1ng?=
+ =?us-ascii?Q?kVnklT1TqLkfOessikITfZxMI6MQkdRd41/8vMa3DVggbq/ohuiCFzhb04Hv?=
+ =?us-ascii?Q?EZR8o7+4TB0c6+gokXmfpPT6GRbciLNsBZxGCTiFYwdnmcu2YHtLBE4ihyfQ?=
+ =?us-ascii?Q?1paA3VWQ6UlrTssplxghMqTGGW/UMAbCEVvo7nUeDDytmjTMIl2SMPuodq08?=
+ =?us-ascii?Q?OMx/ws7cJa/JCwk/iiq6bMpYetqlgmPCwnc0qLRxkOU/13iecbUmmHO2v+OU?=
+ =?us-ascii?Q?VELKm/yIOo96efH4ya06RZT2jido56qakbbP6I5f7noi1AAxGgN50Ke4L3Pu?=
+ =?us-ascii?Q?D8bPP6iYFxZ4eqwgcp7ZVMeBanxh/cSceLIUcW+5vMJo8Kr+WE/e4ZjLXa/Z?=
+ =?us-ascii?Q?eq4x94L4jdaT42lfeQUtP38yDnU/hnTizXS1ac6if36W23RQ+0g9iU2cq29z?=
+ =?us-ascii?Q?hvvKb+BojVkWAXNlTRUyiAH0+4IlOSUtIMOLEHj3P4yig9kq9dHcfzHwPIi4?=
+ =?us-ascii?Q?AAe6y7fbXAS+bwbsJWGBjLqANxO0XTV9aKOjC8zRBudq2uHY1HUxvq10Ch39?=
+ =?us-ascii?Q?sRc2JrTDz2jaX2tgl6UOmCVdMJ1JjgsED9QwQh7+RcK6vN4L4YAKcvzBovOc?=
+ =?us-ascii?Q?x7NIkXiN1lM2tadixc4xR19wyoZB3kFgjKlaxFcBsaxPrlPV8Nn6edycrpY3?=
+ =?us-ascii?Q?igDb7HtUJk90do7Rlvy/nqjgdpf3ejG3hed2KLlTfwPrNT5z9smwpYNITC+P?=
+ =?us-ascii?Q?0iRIdojVjXPXOeo6gtKSE+3hikUNtQs/7oGf5KQFEyo8kkduSFZhbfx6BPmY?=
+ =?us-ascii?Q?Zy+vy00yyEv0i8hxw0TDj0Jar/JM41sBHI4jokr/UBPrEgujHFfM+ZiMVnwm?=
+ =?us-ascii?Q?GzWEHDk57zjje2FCnixinyyc6iIiOhw0n1vLVSZr9Pny3pY40+e/RYGg47O6?=
+ =?us-ascii?Q?NkUOaoqregJo0gNDW4lRb/13WCUL6ld7dQx2uscFmZZz0yrtQWlOvih2OXAn?=
+ =?us-ascii?Q?HRu8wf16j76wIQlmoFJkj+fCQV6IkBsP3AivuparPw9YYV/OQZ7h03XGogjy?=
+ =?us-ascii?Q?WmO92D0iNaLdTNkyanTX8aVL3LQID+CP0eNw4xsEAPz3xTdlVRbLWoSwcj+f?=
+ =?us-ascii?Q?C9uXqixG/kkZkdvtGzOJ+n5oMneg+JKOq1Mw5PaGB3YGgHxGFSP7FG6aMfYh?=
+ =?us-ascii?Q?GOAlA7eATYYFCeda6bMmiRDqgDlvyxJ1jAnHOxiPalXd797iwkb+qyXJgLoq?=
+ =?us-ascii?Q?ghXPftMflEqAfhuxL1gqBGIBa3GArhT2x5tBLp3Jocye3uC2eCfLOWirn0Mm?=
+ =?us-ascii?Q?4Rk/kemLFqTbPgUHQ4iV7ftlKTRsCDMW+sqNhLwl2nTgNf2RCyLNyYA4mW4v?=
+ =?us-ascii?Q?x0PtPRXvwmcIDBQdIrHYEzd323PDtGwg6pP2BkJB71VqiBnl+Jq5Zj7gf+e+?=
+ =?us-ascii?Q?AyAyCzbrgstpOLU61zDxyKIcqTrjUdS7WBBKkEn+yZQdsISEAjsUN0mVVde2?=
+ =?us-ascii?Q?aO8e5VCDGvGxEPw/v9Kazr+th/mWDr+QXJ2AhbsQzHCK31YXzi1eNdbISWR6?=
+ =?us-ascii?Q?TA8a8uaM6GsFHqpItl4=3D?=
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(1800799024)(82310400026)(7416014)(376014)(13003099007);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 00:57:43.7146
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d75e1f46-c3b9-4c14-361c-08de224fa74b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0000AD7C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA4PR12MB9763
 
-From: Deepak Gupta <debug@rivosinc.com>
 
-Adds kselftest for RISC-V control flow integrity implementation for user
-mode. There is not a lot going on in kernel for enabling landing pad for
-user mode. cfi selftest are intended to be compiled with zicfilp and
-zicfiss enabled compiler. Thus kselftest simply checks if landing pad /
-shadow stack for the process are enabled or not and executes ptrace
-selftests on cfi. selftest then register a signal handler for SIGSEGV.
-Any control flow violation are reported as SIGSEGV with si_code =
-SEGV_CPERR. Test will fail on receiving any SEGV_CPERR. Shadow stack part
-has more changes in kernel and thus there are separate tests for that
+This series adds the support for L3 Smart Data Cache Injection Allocation
+Enforcement (SDCIAE) to resctrl infrastructure. It is referred to as
+"io_alloc" in resctrl subsystem.
 
-- Exercise `map_shadow_stack` syscall
-- `fork` test to make sure COW works for shadow stack pages
-- gup tests
-  Kernel uses FOLL_FORCE when access happens to memory via
-  /proc/<pid>/mem. Not breaking that for shadow stack.
-- signal test. Make sure signal delivery results in token creation on
-  shadow stack and consumes (and verifies) token on sigreturn
-- shadow stack protection test. attempts to write using regular store
-  instruction on shadow stack memory must result in access faults
-- ptrace test: adds landing pad violation, clears ELP and continues
+Upcoming AMD hardware implements Smart Data Cache Injection (SDCI).
+Smart Data Cache Injection (SDCI) is a mechanism that enables direct
+insertion of data from I/O devices into the L3 cache. By directly caching
+data from I/O devices rather than first storing the I/O data in DRAM, SDCI
+reduces demands on DRAM bandwidth and reduces latency to the processor
+consuming the I/O data.
 
-In case toolchain doesn't support cfi extension, cfi kselftest wont
-get built.
+The SDCIAE (SDCI Allocation Enforcement) PQE feature allows system software
+to control the portion of the L3 cache used for SDCI devices.
 
-Test outut
-==========
+When enabled, SDCIAE forces all SDCI lines to be placed into the L3 cache
+partitions identified by the highest-supported L3_MASK_n register, where n
+is the maximum supported CLOSID.
 
-"""
-TAP version 13
-1..5
-  This is to ensure shadow stack is indeed enabled and working
-  This is to ensure shadow stack is indeed enabled and working
-ok 1 shstk fork test
-ok 2 map shadow stack syscall
-ok 3 shadow stack gup tests
-ok 4 shadow stack signal tests
-ok 5 memory protections of shadow stack memory
-"""
+Since CLOSIDs are managed by resctrl fs it is least invasive to make
+the "io_alloc is supported by maximum supported CLOSID" part of the
+initial resctrl fs support for io_alloc. Take care not to expose this
+use of CLOSID for io_alloc to user space so that this is not required from
+other architectures that may support io_alloc differently in the future.
 
-Suggested-by: Charlie Jenkins <charlie@rivosinc.com>
-Signed-off-by: Charlie Jenkins <charlie@rivosinc.com>
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+The SDCIAE feature details are documented in APM [1] available from [2].
+[1] AMD64 Architecture Programmer's Manual Volume 2: System Programming
+    Publication # 24593 Revision 3.41 section 19.4.7 L3 Smart Data Cache
+    Injection Allocation Enforcement (SDCIAE)
+
+Link: https://bugzilla.kernel.org/show_bug.cgi?id=206537 # [2]
+
+The feature requires linux support of TPH (TLP Processing Hints).
+The support is available in linux kernel after the commit
+48d0fd2b903e3 ("PCI/TPH: Add TPH documentation")
+
+The patches are based on top of commit (v6.18.0-rc5)
+Commit 2f70cdbd7c20 (tip/master) ("Merge branch into tip/master: 'x86/sgx'")
+
+Comments and suggestions are always welcome as usual.
+
+# Linux Implementation
+
+Feature adds following interface files when the resctrl "io_alloc" feature
+is supported on the resource:
+
+/sys/fs/resctrl/info/L3/io_alloc: Report the feature status. Enable/disable the
+				  feature by writing to the interface.
+
+/sys/fs/resctrl/info/L3/io_alloc_cbm:  List the Capacity Bit Masks (CBMs) available
+				       for I/O devices when io_alloc feature is enabled.
+				       Configure the CBM by writing to the interface.
+
+When CDP is enabled, these files are created both in L3CODE and L3DATA.
+
+# Examples:
+
+a. Check if io_alloc feature is available.
+
+	# mount -t resctrl resctrl /sys/fs/resctrl/
+
+	# cat /sys/fs/resctrl/info/L3/io_alloc
+	disabled
+
+b. Enable the io_alloc feature. 
+
+	# echo 1 > /sys/fs/resctrl/info/L3/io_alloc 
+	# cat /sys/fs/resctrl/info/L3/io_alloc
+	enabled
+
+c. Check the CBM values for the io_alloc feature.
+
+	# cat /sys/fs/resctrl/info/L3/io_alloc_cbm 
+	0=ffff;1=ffff
+
+d. Change the CBM value of domain 1.
+	# echo 1=ff > /sys/fs/resctrl/info/L3/io_alloc_cbm
+
+	# cat /sys/fs/resctrl/info/L3/io_alloc_cbm 
+	0=ffff;1=00ff
+
+e. Change the CBM value of domain 0 and 1.
+	# echo "0=ff;1=f" > /sys/fs/resctrl/info/L3/io_alloc_cbm
+
+	# cat /sys/fs/resctrl/info/L3/io_alloc_cbm
+	0=00ff;1=000f
+
+
+f. Disable io_alloc feature and exit.
+
+	# echo 0 > /sys/fs/resctrl/info/L3/io_alloc 
+	# cat /sys/fs/resctrl/info/L3/io_alloc
+	disabled
+
+	# umount /sys/fs/resctrl/
 ---
- tools/testing/selftests/riscv/Makefile          |   2 +-
- tools/testing/selftests/riscv/cfi/.gitignore    |   2 +
- tools/testing/selftests/riscv/cfi/Makefile      |  23 ++
- tools/testing/selftests/riscv/cfi/cfi_rv_test.h |  82 +++++
- tools/testing/selftests/riscv/cfi/cfitests.c    | 173 +++++++++++
- tools/testing/selftests/riscv/cfi/shadowstack.c | 385 ++++++++++++++++++++++++
- tools/testing/selftests/riscv/cfi/shadowstack.h |  27 ++
- 7 files changed, 693 insertions(+), 1 deletion(-)
+v12: 
+   Minor format fix in resctrl.rst (patch 6) and added text about writable files in the info section.
+   Other patches did not change.
+   There were some discussion about adding support to update all the domains of io_alloc_cbm
+   with one command.
+   https://lore.kernel.org/lkml/20251107012401.224515-2-atomlin@atomlin.com/
+   Aaron will be adding that later.
 
-diff --git a/tools/testing/selftests/riscv/Makefile b/tools/testing/selftests/riscv/Makefile
-index 099b8c1f46f8..5671b4405a12 100644
---- a/tools/testing/selftests/riscv/Makefile
-+++ b/tools/testing/selftests/riscv/Makefile
-@@ -5,7 +5,7 @@
- ARCH ?= $(shell uname -m 2>/dev/null || echo not)
+v11:
+   Took care of review commnet on patch 6.
+   Fixed typo CDP_3DATA -> CDP_DATA.
+   Added code to free the CLOSID on resctrl_arch_io_alloc_enable() failure.
+   Fixed the prototype of rdtgroup_name_by_closid().
+   
+   Other patches did not change.
+   Added Reviewed-by: tag for few patches.
+   Took care of few minor conflicts in fs/resctrl/internal.h due to code displacement.
+
+v10:
+  Updated the changelogs in most patches when there is some repetitions in texts. Thanks to Reinette.
+
+  Fixed the minor conflicts in scattered.c and cpufeatures.h.
+
+  Fixed the few conflicts due to recent ABMC feature merge.
+
+  Code comment update to match MSR names correctly.
+
+  Re-arranged the details in resctrl.rst file.
+
+  Changed the text L3CODE to CDP_CODE and L3DATA to CDP_DATA.
+
+  Updated the return code to EINVAL when feature is not enabled in resctrl_io_alloc_cbm_write().
+
+  Few other text changes. Added details in each patch about the specifics.
+
+v9:
+  Major change is related to CDP.
+  The processing and updating CBMs for CDP_CODE and CDP_DATA are done only once.
+  The updated CBMs are copied to the peers using staged_config.
+  
+  Removed resctrl_get_schema(). Not required anymore.
+
+  Updated the "bit_usage" section of resctrl.rst for io_alloc.
+
+  Fixed the tabs in SMBA and BMEC lines in resctrl.rst.
+
+  Improved the changelog for all the patches.
+  
+  Added the code comments about CDP_CODE and CDP_DATA where applicable.
+
+  Added Reviewed-by: tag for couple of patches.
+  
+  Added comments in each patch about the changes.
+
+
+v8:
+  Added Acked-by, Reviewed-by tags to couple of patches.
+
+  Updated Documentation/filesystems/resctrl.rst for each interface.
+   
+  Updated the changelog in most patches. 
+  
+  Moved the patch to update the rdt_bit_usage_show() for io_alloc changes to the end.
  
- ifneq (,$(filter $(ARCH),riscv))
--RISCV_SUBTARGETS ?= abi hwprobe mm sigreturn vector
-+RISCV_SUBTARGETS ?= abi hwprobe mm sigreturn vector cfi
- else
- RISCV_SUBTARGETS :=
- endif
-diff --git a/tools/testing/selftests/riscv/cfi/.gitignore b/tools/testing/selftests/riscv/cfi/.gitignore
-new file mode 100644
-index 000000000000..c1faf7ca4346
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/.gitignore
-@@ -0,0 +1,2 @@
-+cfitests
-+shadowstack
-diff --git a/tools/testing/selftests/riscv/cfi/Makefile b/tools/testing/selftests/riscv/cfi/Makefile
-new file mode 100644
-index 000000000000..96a4dc4b69c3
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/Makefile
-@@ -0,0 +1,23 @@
-+CFLAGS += $(KHDR_INCLUDES)
-+CFLAGS += -I$(top_srcdir)/tools/include
-+
-+CFLAGS += -march=rv64gc_zicfilp_zicfiss -fcf-protection=full
-+
-+# Check for zicfi* extensions needs cross compiler
-+# which is not set until lib.mk is included
-+ifeq ($(LLVM)$(CC),cc)
-+CC := $(CROSS_COMPILE)gcc
-+endif
-+
-+
-+ifeq ($(shell $(CC) $(CFLAGS) -nostdlib -xc /dev/null -o /dev/null > /dev/null 2>&1; echo $$?),0)
-+TEST_GEN_PROGS := cfitests
-+
-+$(OUTPUT)/cfitests: cfitests.c shadowstack.c
-+	$(CC) -o$@ $(CFLAGS) $(LDFLAGS) $^
-+else
-+
-+$(shell echo "Toolchain doesn't support CFI, skipping CFI kselftest." >&2)
-+endif
-+
-+include ../../lib.mk
-diff --git a/tools/testing/selftests/riscv/cfi/cfi_rv_test.h b/tools/testing/selftests/riscv/cfi/cfi_rv_test.h
-new file mode 100644
-index 000000000000..1c8043f2b778
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/cfi_rv_test.h
-@@ -0,0 +1,82 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef SELFTEST_RISCV_CFI_H
-+#define SELFTEST_RISCV_CFI_H
-+#include <stddef.h>
-+#include <sys/types.h>
-+#include "shadowstack.h"
-+
-+#define CHILD_EXIT_CODE_SSWRITE		10
-+#define CHILD_EXIT_CODE_SIG_TEST	11
-+
-+#define my_syscall5(num, arg1, arg2, arg3, arg4, arg5)			\
-+({									\
-+	register long _num  __asm__ ("a7") = (num);			\
-+	register long _arg1 __asm__ ("a0") = (long)(arg1);		\
-+	register long _arg2 __asm__ ("a1") = (long)(arg2);		\
-+	register long _arg3 __asm__ ("a2") = (long)(arg3);		\
-+	register long _arg4 __asm__ ("a3") = (long)(arg4);		\
-+	register long _arg5 __asm__ ("a4") = (long)(arg5);		\
-+									\
-+	__asm__ volatile(						\
-+		"ecall\n"						\
-+		: "+r"							\
-+		(_arg1)							\
-+		: "r"(_arg2), "r"(_arg3), "r"(_arg4), "r"(_arg5),	\
-+		  "r"(_num)						\
-+		: "memory", "cc"					\
-+	);								\
-+	_arg1;								\
-+})
-+
-+#define my_syscall3(num, arg1, arg2, arg3)				\
-+({									\
-+	register long _num  __asm__ ("a7") = (num);			\
-+	register long _arg1 __asm__ ("a0") = (long)(arg1);		\
-+	register long _arg2 __asm__ ("a1") = (long)(arg2);		\
-+	register long _arg3 __asm__ ("a2") = (long)(arg3);		\
-+									\
-+	__asm__ volatile(						\
-+		"ecall\n"						\
-+		: "+r" (_arg1)						\
-+		: "r"(_arg2), "r"(_arg3),				\
-+		  "r"(_num)						\
-+		: "memory", "cc"					\
-+	);								\
-+	_arg1;								\
-+})
-+
-+#ifndef __NR_prctl
-+#define __NR_prctl 167
-+#endif
-+
-+#ifndef __NR_map_shadow_stack
-+#define __NR_map_shadow_stack 453
-+#endif
-+
-+#define CSR_SSP 0x011
-+
-+#ifdef __ASSEMBLY__
-+#define __ASM_STR(x)    x
-+#else
-+#define __ASM_STR(x)    #x
-+#endif
-+
-+#define csr_read(csr)							\
-+({									\
-+	register unsigned long __v;					\
-+	__asm__ __volatile__ ("csrr %0, " __ASM_STR(csr)		\
-+				: "=r" (__v) :				\
-+				: "memory");				\
-+	__v;								\
-+})
-+
-+#define csr_write(csr, val)						\
-+({									\
-+	unsigned long __v = (unsigned long)(val);			\
-+	__asm__ __volatile__ ("csrw " __ASM_STR(csr) ", %0"		\
-+				: : "rK" (__v)				\
-+				: "memory");				\
-+})
-+
-+#endif
-diff --git a/tools/testing/selftests/riscv/cfi/cfitests.c b/tools/testing/selftests/riscv/cfi/cfitests.c
-new file mode 100644
-index 000000000000..79aaa75f25d4
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/cfitests.c
-@@ -0,0 +1,173 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include "../../kselftest.h"
-+#include <sys/signal.h>
-+#include <asm/ucontext.h>
-+#include <linux/prctl.h>
-+#include <errno.h>
-+#include <linux/ptrace.h>
-+#include <sys/wait.h>
-+#include <linux/elf.h>
-+#include <sys/uio.h>
-+#include <asm-generic/unistd.h>
-+
-+#include "cfi_rv_test.h"
-+
-+/* do not optimize cfi related test functions */
-+#pragma GCC push_options
-+#pragma GCC optimize("O0")
-+
-+void sigsegv_handler(int signum, siginfo_t *si, void *uc)
-+{
-+	struct ucontext *ctx = (struct ucontext *)uc;
-+
-+	if (si->si_code == SEGV_CPERR) {
-+		ksft_print_msg("Control flow violation happened somewhere\n");
-+		ksft_print_msg("PC where violation happened %lx\n", ctx->uc_mcontext.gregs[0]);
-+		exit(-1);
-+	}
-+
-+	/* all other cases are expected to be of shadow stack write case */
-+	exit(CHILD_EXIT_CODE_SSWRITE);
-+}
-+
-+bool register_signal_handler(void)
-+{
-+	struct sigaction sa = {};
-+
-+	sa.sa_sigaction = sigsegv_handler;
-+	sa.sa_flags = SA_SIGINFO;
-+	if (sigaction(SIGSEGV, &sa, NULL)) {
-+		ksft_print_msg("Registering signal handler for landing pad violation failed\n");
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+long ptrace(int request, pid_t pid, void *addr, void *data);
-+
-+bool cfi_ptrace_test(void)
-+{
-+	pid_t pid;
-+	int status, ret = 0;
-+	unsigned long ptrace_test_num = 0, total_ptrace_tests = 2;
-+
-+	struct user_cfi_state cfi_reg;
-+	struct iovec iov;
-+
-+	pid = fork();
-+
-+	if (pid == -1) {
-+		ksft_exit_fail_msg("%s: fork failed\n", __func__);
-+		exit(1);
-+	}
-+
-+	if (pid == 0) {
-+		/* allow to be traced */
-+		ptrace(PTRACE_TRACEME, 0, NULL, NULL);
-+		raise(SIGSTOP);
-+		asm volatile ("la a5, 1f\n"
-+			      "jalr a5\n"
-+			      "nop\n"
-+			      "nop\n"
-+			      "1: nop\n"
-+			      : : : "a5");
-+		exit(11);
-+		/* child shouldn't go beyond here */
-+	}
-+
-+	/* parent's code goes here */
-+	iov.iov_base = &cfi_reg;
-+	iov.iov_len = sizeof(cfi_reg);
-+
-+	while (ptrace_test_num < total_ptrace_tests) {
-+		memset(&cfi_reg, 0, sizeof(cfi_reg));
-+		waitpid(pid, &status, 0);
-+		if (WIFSTOPPED(status)) {
-+			errno = 0;
-+			ret = ptrace(PTRACE_GETREGSET, pid, (void *)NT_RISCV_USER_CFI, &iov);
-+			if (ret == -1 && errno)
-+				ksft_exit_fail_msg("%s: PTRACE_GETREGSET failed\n", __func__);
-+		} else {
-+			ksft_exit_fail_msg("%s: child didn't stop, failed\n", __func__);
-+		}
-+
-+		switch (ptrace_test_num) {
-+#define CFI_ENABLE_MASK (PTRACE_CFI_LP_EN_STATE |	\
-+			PTRACE_CFI_SS_EN_STATE |	\
-+			PTRACE_CFI_SS_PTR_STATE)
-+		case 0:
-+			if ((cfi_reg.cfi_status.cfi_state & CFI_ENABLE_MASK) != CFI_ENABLE_MASK)
-+				ksft_exit_fail_msg("%s: ptrace_getregset failed, %llu\n", __func__,
-+						   cfi_reg.cfi_status.cfi_state);
-+			if (!cfi_reg.shstk_ptr)
-+				ksft_exit_fail_msg("%s: NULL shadow stack pointer, test failed\n",
-+						   __func__);
-+			break;
-+		case 1:
-+			if (!(cfi_reg.cfi_status.cfi_state & PTRACE_CFI_ELP_STATE))
-+				ksft_exit_fail_msg("%s: elp must have been set\n", __func__);
-+			/* clear elp state. not interested in anything else */
-+			cfi_reg.cfi_status.cfi_state = 0;
-+
-+			ret = ptrace(PTRACE_SETREGSET, pid, (void *)NT_RISCV_USER_CFI, &iov);
-+			if (ret == -1 && errno)
-+				ksft_exit_fail_msg("%s: PTRACE_GETREGSET failed\n", __func__);
-+			break;
-+		default:
-+			ksft_exit_fail_msg("%s: unreachable switch case\n", __func__);
-+			break;
-+		}
-+		ptrace(PTRACE_CONT, pid, NULL, NULL);
-+		ptrace_test_num++;
-+	}
-+
-+	waitpid(pid, &status, 0);
-+	if (WEXITSTATUS(status) != 11)
-+		ksft_print_msg("%s, bad return code from child\n", __func__);
-+
-+	ksft_print_msg("%s, ptrace test succeeded\n", __func__);
-+	return true;
-+}
-+
-+int main(int argc, char *argv[])
-+{
-+	int ret = 0;
-+	unsigned long lpad_status = 0, ss_status = 0;
-+
-+	ksft_print_header();
-+
-+	ksft_print_msg("Starting risc-v tests\n");
-+
-+	/*
-+	 * Landing pad test. Not a lot of kernel changes to support landing
-+	 * pad for user mode except lighting up a bit in senvcfg via a prctl
-+	 * Enable landing pad through out the execution of test binary
-+	 */
-+	ret = my_syscall5(__NR_prctl, PR_GET_INDIR_BR_LP_STATUS, &lpad_status, 0, 0, 0);
-+	if (ret)
-+		ksft_exit_fail_msg("Get landing pad status failed with %d\n", ret);
-+
-+	if (!(lpad_status & PR_INDIR_BR_LP_ENABLE))
-+		ksft_exit_fail_msg("Landing pad is not enabled, should be enabled via glibc\n");
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &ss_status, 0, 0, 0);
-+	if (ret)
-+		ksft_exit_fail_msg("Get shadow stack failed with %d\n", ret);
-+
-+	if (!(ss_status & PR_SHADOW_STACK_ENABLE))
-+		ksft_exit_fail_msg("Shadow stack is not enabled, should be enabled via glibc\n");
-+
-+	if (!register_signal_handler())
-+		ksft_exit_fail_msg("Registering signal handler for SIGSEGV failed\n");
-+
-+	ksft_print_msg("Landing pad and shadow stack are enabled for binary\n");
-+	cfi_ptrace_test();
-+
-+	execute_shadow_stack_tests();
-+
-+	return 0;
-+}
-+
-+#pragma GCC pop_options
-diff --git a/tools/testing/selftests/riscv/cfi/shadowstack.c b/tools/testing/selftests/riscv/cfi/shadowstack.c
-new file mode 100644
-index 000000000000..53387dbd9cf5
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/shadowstack.c
-@@ -0,0 +1,385 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include "../../kselftest.h"
-+#include <sys/wait.h>
-+#include <signal.h>
-+#include <fcntl.h>
-+#include <asm-generic/unistd.h>
-+#include <sys/mman.h>
-+#include "shadowstack.h"
-+#include "cfi_rv_test.h"
-+
-+static struct shadow_stack_tests shstk_tests[] = {
-+	{ "shstk fork test\n", shadow_stack_fork_test },
-+	{ "map shadow stack syscall\n", shadow_stack_map_test },
-+	{ "shadow stack gup tests\n", shadow_stack_gup_tests },
-+	{ "shadow stack signal tests\n", shadow_stack_signal_test},
-+	{ "memory protections of shadow stack memory\n", shadow_stack_protection_test }
-+};
-+
-+#define RISCV_SHADOW_STACK_TESTS ARRAY_SIZE(shstk_tests)
-+
-+/* do not optimize shadow stack related test functions */
-+#pragma GCC push_options
-+#pragma GCC optimize("O0")
-+
-+void zar(void)
-+{
-+	unsigned long ssp = 0;
-+
-+	ssp = csr_read(CSR_SSP);
-+	ksft_print_msg("Spewing out shadow stack ptr: %lx\n"
-+			"  This is to ensure shadow stack is indeed enabled and working\n",
-+			ssp);
-+}
-+
-+void bar(void)
-+{
-+	zar();
-+}
-+
-+void foo(void)
-+{
-+	bar();
-+}
-+
-+void zar_child(void)
-+{
-+	unsigned long ssp = 0;
-+
-+	ssp = csr_read(CSR_SSP);
-+	ksft_print_msg("Spewing out shadow stack ptr: %lx\n"
-+			"  This is to ensure shadow stack is indeed enabled and working\n",
-+			ssp);
-+}
-+
-+void bar_child(void)
-+{
-+	zar_child();
-+}
-+
-+void foo_child(void)
-+{
-+	bar_child();
-+}
-+
-+typedef void (call_func_ptr)(void);
-+/*
-+ * call couple of functions to test push pop.
-+ */
-+int shadow_stack_call_tests(call_func_ptr fn_ptr, bool parent)
-+{
-+	ksft_print_msg("dummy calls for sspush and sspopchk in context of %s\n",
-+		       parent ? "parent" : "child");
-+
-+	(fn_ptr)();
-+
-+	return 0;
-+}
-+
-+/* forks a thread, and ensure shadow stacks fork out */
-+bool shadow_stack_fork_test(unsigned long test_num, void *ctx)
-+{
-+	int pid = 0, child_status = 0, parent_pid = 0, ret = 0;
-+	unsigned long ss_status = 0;
-+
-+	ksft_print_msg("Exercising shadow stack fork test\n");
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &ss_status, 0, 0, 0);
-+	if (ret) {
-+		ksft_exit_skip("Shadow stack get status prctl failed with errorcode %d\n", ret);
-+		return false;
-+	}
-+
-+	if (!(ss_status & PR_SHADOW_STACK_ENABLE))
-+		ksft_exit_skip("Shadow stack is not enabled, should be enabled via glibc\n");
-+
-+	parent_pid = getpid();
-+	pid = fork();
-+
-+	if (pid) {
-+		ksft_print_msg("Parent pid %d and child pid %d\n", parent_pid, pid);
-+		shadow_stack_call_tests(&foo, true);
-+	} else {
-+		shadow_stack_call_tests(&foo_child, false);
-+	}
-+
-+	if (pid) {
-+		ksft_print_msg("Waiting on child to finish\n");
-+		wait(&child_status);
-+	} else {
-+		/* exit child gracefully */
-+		exit(0);
-+	}
-+
-+	if (pid && WIFSIGNALED(child_status)) {
-+		ksft_print_msg("Child faulted, fork test failed\n");
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+/* exercise `map_shadow_stack`, pivot to it and call some functions to ensure it works */
-+#define SHADOW_STACK_ALLOC_SIZE 4096
-+bool shadow_stack_map_test(unsigned long test_num, void *ctx)
-+{
-+	unsigned long shdw_addr;
-+	int ret = 0;
-+
-+	ksft_print_msg("Exercising shadow stack map test\n");
-+
-+	shdw_addr = my_syscall3(__NR_map_shadow_stack, NULL, SHADOW_STACK_ALLOC_SIZE, 0);
-+
-+	if (((long)shdw_addr) <= 0) {
-+		ksft_print_msg("map_shadow_stack failed with error code %d\n",
-+			       (int)shdw_addr);
-+		return false;
-+	}
-+
-+	ret = munmap((void *)shdw_addr, SHADOW_STACK_ALLOC_SIZE);
-+
-+	if (ret) {
-+		ksft_print_msg("munmap failed with error code %d\n", ret);
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+/*
-+ * shadow stack protection tests. map a shadow stack and
-+ * validate all memory protections work on it
-+ */
-+bool shadow_stack_protection_test(unsigned long test_num, void *ctx)
-+{
-+	unsigned long shdw_addr;
-+	unsigned long *write_addr = NULL;
-+	int ret = 0, pid = 0, child_status = 0;
-+
-+	ksft_print_msg("Exercising shadow stack protection test (WPT)\n");
-+
-+	shdw_addr = my_syscall3(__NR_map_shadow_stack, NULL, SHADOW_STACK_ALLOC_SIZE, 0);
-+
-+	if (((long)shdw_addr) <= 0) {
-+		ksft_print_msg("map_shadow_stack failed with error code %d\n",
-+			       (int)shdw_addr);
-+		return false;
-+	}
-+
-+	write_addr = (unsigned long *)shdw_addr;
-+	pid = fork();
-+
-+	/* no child was created, return false */
-+	if (pid == -1)
-+		return false;
-+
-+	/*
-+	 * try to perform a store from child on shadow stack memory
-+	 * it should result in SIGSEGV
-+	 */
-+	if (!pid) {
-+		/* below write must lead to SIGSEGV */
-+		*write_addr = 0xdeadbeef;
-+	} else {
-+		wait(&child_status);
-+	}
-+
-+	/* test fail, if 0xdeadbeef present on shadow stack address */
-+	if (*write_addr == 0xdeadbeef) {
-+		ksft_print_msg("Shadow stack WPT failed\n");
-+		return false;
-+	}
-+
-+	/* if child reached here, then fail */
-+	if (!pid) {
-+		ksft_print_msg("Shadow stack WPT failed: child reached unreachable state\n");
-+		return false;
-+	}
-+
-+	/* if child exited via signal handler but not for write on ss */
-+	if (WIFEXITED(child_status) &&
-+	    WEXITSTATUS(child_status) != CHILD_EXIT_CODE_SSWRITE) {
-+		ksft_print_msg("Shadow stack WPT failed: child wasn't signaled for write\n");
-+		return false;
-+	}
-+
-+	ret = munmap(write_addr, SHADOW_STACK_ALLOC_SIZE);
-+	if (ret) {
-+		ksft_print_msg("Shadow stack WPT failed: munmap failed, error code %d\n",
-+			       ret);
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+#define SS_MAGIC_WRITE_VAL 0xbeefdead
-+
-+int gup_tests(int mem_fd, unsigned long *shdw_addr)
-+{
-+	unsigned long val = 0;
-+
-+	lseek(mem_fd, (unsigned long)shdw_addr, SEEK_SET);
-+	if (read(mem_fd, &val, sizeof(val)) < 0) {
-+		ksft_print_msg("Reading shadow stack mem via gup failed\n");
-+		return 1;
-+	}
-+
-+	val = SS_MAGIC_WRITE_VAL;
-+	lseek(mem_fd, (unsigned long)shdw_addr, SEEK_SET);
-+	if (write(mem_fd, &val, sizeof(val)) < 0) {
-+		ksft_print_msg("Writing shadow stack mem via gup failed\n");
-+		return 1;
-+	}
-+
-+	if (*shdw_addr != SS_MAGIC_WRITE_VAL) {
-+		ksft_print_msg("GUP write to shadow stack memory failed\n");
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+bool shadow_stack_gup_tests(unsigned long test_num, void *ctx)
-+{
-+	unsigned long shdw_addr = 0;
-+	unsigned long *write_addr = NULL;
-+	int fd = 0;
-+	bool ret = false;
-+
-+	ksft_print_msg("Exercising shadow stack gup tests\n");
-+	shdw_addr = my_syscall3(__NR_map_shadow_stack, NULL, SHADOW_STACK_ALLOC_SIZE, 0);
-+
-+	if (((long)shdw_addr) <= 0) {
-+		ksft_print_msg("map_shadow_stack failed with error code %d\n", (int)shdw_addr);
-+		return false;
-+	}
-+
-+	write_addr = (unsigned long *)shdw_addr;
-+
-+	fd = open("/proc/self/mem", O_RDWR);
-+	if (fd == -1)
-+		return false;
-+
-+	if (gup_tests(fd, write_addr)) {
-+		ksft_print_msg("gup tests failed\n");
-+		goto out;
-+	}
-+
-+	ret = true;
-+out:
-+	if (shdw_addr && munmap(write_addr, SHADOW_STACK_ALLOC_SIZE)) {
-+		ksft_print_msg("munmap failed with error code %d\n", ret);
-+		ret = false;
-+	}
-+
-+	return ret;
-+}
-+
-+volatile bool break_loop;
-+
-+void sigusr1_handler(int signo)
-+{
-+	break_loop = true;
-+}
-+
-+bool sigusr1_signal_test(void)
-+{
-+	struct sigaction sa = {};
-+
-+	sa.sa_handler = sigusr1_handler;
-+	sa.sa_flags = 0;
-+	sigemptyset(&sa.sa_mask);
-+	if (sigaction(SIGUSR1, &sa, NULL)) {
-+		ksft_print_msg("Registering signal handler for SIGUSR1 failed\n");
-+		return false;
-+	}
-+
-+	return true;
-+}
-+
-+/*
-+ * shadow stack signal test. shadow stack must be enabled.
-+ * register a signal, fork another thread which is waiting
-+ * on signal. Send a signal from parent to child, verify
-+ * that signal was received by child. If not test fails
-+ */
-+bool shadow_stack_signal_test(unsigned long test_num, void *ctx)
-+{
-+	int pid = 0, child_status = 0, ret = 0;
-+	unsigned long ss_status = 0;
-+
-+	ksft_print_msg("Exercising shadow stack signal test\n");
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &ss_status, 0, 0, 0);
-+	if (ret) {
-+		ksft_print_msg("Shadow stack get status prctl failed with errorcode %d\n", ret);
-+		return false;
-+	}
-+
-+	if (!(ss_status & PR_SHADOW_STACK_ENABLE))
-+		ksft_print_msg("Shadow stack is not enabled, should be enabled via glibc\n");
-+
-+	/* this should be caught by signal handler and do an exit */
-+	if (!sigusr1_signal_test()) {
-+		ksft_print_msg("Registering sigusr1 handler failed\n");
-+		exit(-1);
-+	}
-+
-+	pid = fork();
-+
-+	if (pid == -1) {
-+		ksft_print_msg("Signal test: fork failed\n");
-+		goto out;
-+	}
-+
-+	if (pid == 0) {
-+		while (!break_loop)
-+			sleep(1);
-+
-+		exit(11);
-+		/* child shouldn't go beyond here */
-+	}
-+
-+	/* send SIGUSR1 to child */
-+	kill(pid, SIGUSR1);
-+	wait(&child_status);
-+
-+out:
-+
-+	return (WIFEXITED(child_status) &&
-+		WEXITSTATUS(child_status) == 11);
-+}
-+
-+int execute_shadow_stack_tests(void)
-+{
-+	int ret = 0;
-+	unsigned long test_count = 0;
-+	unsigned long shstk_status = 0;
-+	bool test_pass = false;
-+
-+	ksft_print_msg("Executing RISC-V shadow stack self tests\n");
-+	ksft_set_plan(RISCV_SHADOW_STACK_TESTS);
-+
-+	ret = my_syscall5(__NR_prctl, PR_GET_SHADOW_STACK_STATUS, &shstk_status, 0, 0, 0);
-+
-+	if (ret != 0)
-+		ksft_exit_fail_msg("Get shadow stack status failed with %d\n", ret);
-+
-+	/*
-+	 * If we are here that means get shadow stack status succeeded and
-+	 * thus shadow stack support is baked in the kernel.
-+	 */
-+	while (test_count < RISCV_SHADOW_STACK_TESTS) {
-+		test_pass = (*shstk_tests[test_count].t_func)(test_count, NULL);
-+		ksft_test_result(test_pass, shstk_tests[test_count].name);
-+		test_count++;
-+	}
-+
-+	ksft_finished();
-+
-+	return 0;
-+}
-+
-+#pragma GCC pop_options
-diff --git a/tools/testing/selftests/riscv/cfi/shadowstack.h b/tools/testing/selftests/riscv/cfi/shadowstack.h
-new file mode 100644
-index 000000000000..0be510167de3
---- /dev/null
-+++ b/tools/testing/selftests/riscv/cfi/shadowstack.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+
-+#ifndef SELFTEST_SHADOWSTACK_TEST_H
-+#define SELFTEST_SHADOWSTACK_TEST_H
-+#include <stddef.h>
-+#include <linux/prctl.h>
-+
-+/*
-+ * a cfi test returns true for success or false for fail
-+ * takes a number for test number to index into array and void pointer.
-+ */
-+typedef bool (*shstk_test_func)(unsigned long test_num, void *);
-+
-+struct shadow_stack_tests {
-+	char *name;
-+	shstk_test_func t_func;
-+};
-+
-+bool shadow_stack_fork_test(unsigned long test_num, void *ctx);
-+bool shadow_stack_map_test(unsigned long test_num, void *ctx);
-+bool shadow_stack_protection_test(unsigned long test_num, void *ctx);
-+bool shadow_stack_gup_tests(unsigned long test_num, void *ctx);
-+bool shadow_stack_signal_test(unsigned long test_num, void *ctx);
-+
-+int execute_shadow_stack_tests(void);
-+
-+#endif
+  Moved resctrl_arch_io_alloc_enable() and its dependancies to
+  arch/x86/kernel/cpu/resctrl/ctrlmondata.c file.
+  
+  Moved resctrl_io_alloc_show() to fs/resctrl/ctrlmondata.c.
+  Added prototype for rdt_kn_parent_priv() in fs/resctrl/internal.h
+  so, it can be uses in other fs/resctrl/ files.
+  
+  Renamed resctrl_io_alloc_init_cat() to resctrl_io_alloc_init_cbm().
+  Moved resctrl_io_alloc_write() and all its dependancies to fs/resctrl/ctrlmondata.c.
+  Added prototypes for all the functions in fs/resctrl/internal.h.
+
+  Moved resctrl_io_alloc_cbm_show() to fs/resctrl/ctrlmondata.c. show_doms remains
+  static with this change.
+
+  Moved resctrl_io_alloc_parse_line() and resctrl_io_alloc_cbm_write()
+  to fs/resctrl/ctrlmondata.c.
+
+  Added resctrl_arch_get_cdp_enabled() check inside resctrl_io_alloc_parse_line().
+  parse_cbm() remains static as everything moved to ctrlmondata.c.
+
+  Simplified the CDT check  in rdt_bit_usage_show() as CDP_DATA and CDP_CODE
+  are in sync with io_alloc enabled.
+
+v7:
+  Fixed few conflicts in
+  arch/x86/include/asm/cpufeatures.h
+  arch/x86/kernel/cpu/scattered.c
+
+  Updated the changelog in most patches. Removed the references of L3 in
+  filesystem related changes.
+
+  Removed the inline for resctrl_arch_get_io_alloc_enabled().
+  Updated the code comment in resctrl.h.
+  Changed the subject to x86,fs/resctrl where applicable.
+ 
+  Split the patches based on the comment.
+  https://lore.kernel.org/lkml/3bec3844-7fda-452b-988f-42b0de9d63ba@intel.com/
+  Separated resctrl_io_alloc_show and bit_usage changes in two separate patches.
+
+  Added new function resctrl_io_alloc_closid_supported() to verify io_alloc CLOSID.
+ 
+  Added the code to initialize/update the schemata for both CDP_DATA and CDP_CODE when CDP is enabled.
+
+  Rephrased the changelog and code comments in all the patches.
+
+v6: 
+   Sorry if you see this series duplicate. Messed up the
+   emails linux-doc@vger.kernel.org and linux-kernel@vger.kernel.org.
+
+   Sent v5 by mistake before completing all testing.
+   Most of the changes are in resctrl.rst user doc.
+   The resource name is no longer printed in io_alloc_cbms.
+   Updated the related documentation accordingly.
+   Resolved conflicts in cpufeatures.h
+   Added lockdep_assert_cpus_held() in _resctrl_sdciae_enable() to protect
+   r->ctrl_domains.
+
+   Added more comments in include/linux/resctrl.h.
+
+   Updated "io_alloc_cbm" details in user doc resctrl.rst. Resource name is
+   not printed in CBM now.
+
+   Updated subjects to fs/resctrl: where applicable.
+
+v5: 
+    Patches are created on top of recent resctrl FS/ARCH code restructure.
+    The files monitor.c/rdtgroup.c have been split between FS and ARCH directories.
+    Resolved the conflict due to the merge.
+
+    Updated bit_usage to reflect the io_alloc CBM as discussed in the thread:
+    https://lore.kernel.org/lkml/3ca0a5dc-ad9c-4767-9011-b79d986e1e8d@intel.com/
+    Modified rdt_bit_usage_show() to read io_alloc_cbm in hw_shareable, ensuring
+    that bit_usage accurately represents the CBMs.
+
+    Moved prototypes of resctrl_arch_io_alloc_enable() and
+    resctrl_arch_get_io_alloc_enabled() to include/linux/resctrl.h.
+
+    Used rdt_kn_name to get the rdtgroup name instead of accesssing it directly
+    while printing group name used by the io_alloc_closid.
+
+    Updated show_doms() to print the resource if only it is valid. Pass NULL while
+    printing io_alloc CBM.
+
+    Changed the code to access io_alloc CBMs via either L3CODE or L3DATA resources.
+
+v4: The "io_alloc" interface will report "enabled/disabled/not supported"
+    instead of 0 or 1..
+
+    Updated resctrl_io_alloc_closid_get() to verify the max closid availability
+    using closids_supported().
+
+    Updated the documentation for "shareable_bits" and "bit_usage".
+
+    NOTE: io_alloc is about specific CLOS. rdt_bit_usage_show() is not designed
+    handle bit_usage for specific CLOS. Its about overall system. So, we cannot
+    really tell the user which CLOS is shared across both hardware and software.
+    This is something we need to discuss.
+
+    Introduced io_alloc_init() to initialize fflags.
+
+    Printed the group name when io_alloc enablement fails to help user.
+    
+    Added rdtgroup_mutex before rdt_last_cmd_puts() in resctrl_io_alloc_cbm_show().
+    Returned -ENODEV when resource type is CDP_DATA.
+
+    Kept the resource name while printing the CBM (L3:0=ffff) that way we dont have
+    to change show_doms() just for this feature and it is consistant across all the
+    schemata display.
+
+    Added new patch to call parse_cbm() directly to avoid code duplication.
+
+    Checked all the series(v1-v3) again to verify if I missed any comment.
+
+v3: Rewrote commit log for the last 3 patches. Changed the text to bit
+    more generic than the AMD specific feature. Added AMD feature
+    specifics in the end.
+
+    Renamed the rdt_get_sdciae_alloc_cfg() to rdt_set_io_alloc_capable().
+    Renamed the _resctrl_io_alloc_enable() to _resctrl_sdciae_enable()
+    as it is arch specific.
+
+    Changed the return to void in _resctrl_sdciae_enable() instead of int.
+ 
+    The number of CLOSIDs is determined based on the minimum supported
+    across all resources (in closid_init). It needs to match the max
+    supported on the resource. Added the check to verify if MAX CLOSID
+    availability on the system.
+
+    Added CDP check to make sure io_alloc is configured in CDP_CODE.
+    Highest CLOSID corresponds to CDP_CODE. 
+
+    Added resctrl_io_alloc_closid_free() to free the io_alloc CLOSID.
+
+    Added errors in few cases when CLOSID allocation fails.
+    Fixes splat reported when info/L3/bit_usage is accesed when io_alloc is enabled.
+    https://lore.kernel.org/lkml/SJ1PR11MB60837B532254E7B23BC27E84FC052@SJ1PR11MB6083.namprd11.prod.outlook.com/
+
+v2: Added dependancy on X86_FEATURE_CAT_L3
+    Removed the "" in CPU feature definition.
+
+    Changed sdciae_capable to io_alloc_capable to make it as generic feature.
+    Moved io_alloc_capable field in struct resctrl_cache.
+
+    Changed the name of few arch functions similar to ABMC series.
+    resctrl_arch_get_io_alloc_enabled()
+    resctrl_arch_io_alloc_enable()
+
+    Renamed the feature to "io_alloc".
+    Added generic texts for the feature in commit log and resctrl.rst doc.
+    Added resctrl_io_alloc_init_cat() to initialize io_alloc to default values
+    when enabled.
+    Fixed io_alloc interface to show only on L3 resource.
+    Added the locks while processing io_alloc CBMs.
+
+Previous versions:
+v11: https://lore.kernel.org/lkml/cover.1761844489.git.babu.moger@amd.com/
+v10: https://lore.kernel.org/lkml/cover.1761090859.git.babu.moger@amd.com/
+ v9: https://lore.kernel.org/lkml/cover.1756851697.git.babu.moger@amd.com/
+ v8: https://lore.kernel.org/lkml/cover.1754436586.git.babu.moger@amd.com/
+ v7: https://lore.kernel.org/lkml/cover.1752167718.git.babu.moger@amd.com/
+ v6: https://lore.kernel.org/lkml/cover.1749677012.git.babu.moger@amd.com/
+ v5: https://lore.kernel.org/lkml/cover.1747943499.git.babu.moger@amd.com/
+ v4: https://lore.kernel.org/lkml/cover.1745275431.git.babu.moger@amd.com/
+ v3: https://lore.kernel.org/lkml/cover.1738272037.git.babu.moger@amd.com/
+ v2: https://lore.kernel.org/lkml/cover.1734556832.git.babu.moger@amd.com/
+ v1: https://lore.kernel.org/lkml/cover.1723824984.git.babu.moger@amd.com/
+
+
+Babu Moger (10):
+  x86/cpufeatures: Add support for L3 Smart Data Cache Injection
+    Allocation Enforcement
+  x86/resctrl: Add SDCIAE feature in the command line options
+  x86,fs/resctrl: Detect io_alloc feature
+  x86,fs/resctrl: Implement "io_alloc" enable/disable handlers
+  fs/resctrl: Introduce interface to display "io_alloc" support
+  fs/resctrl: Add user interface to enable/disable io_alloc feature
+  fs/resctrl: Introduce interface to display io_alloc CBMs
+  fs/resctrl: Modify struct rdt_parse_data to pass mode and CLOSID
+  fs/resctrl: Introduce interface to modify io_alloc capacity bitmasks
+  fs/resctrl: Update bit_usage to reflect io_alloc
+
+ .../admin-guide/kernel-parameters.txt         |   2 +-
+ Documentation/filesystems/resctrl.rst         | 134 ++++++--
+ arch/x86/include/asm/cpufeatures.h            |   1 +
+ arch/x86/kernel/cpu/cpuid-deps.c              |   1 +
+ arch/x86/kernel/cpu/resctrl/core.c            |   9 +
+ arch/x86/kernel/cpu/resctrl/ctrlmondata.c     |  40 +++
+ arch/x86/kernel/cpu/resctrl/internal.h        |   5 +
+ arch/x86/kernel/cpu/scattered.c               |   1 +
+ fs/resctrl/ctrlmondata.c                      | 309 +++++++++++++++++-
+ fs/resctrl/internal.h                         |  17 +
+ fs/resctrl/rdtgroup.c                         |  75 ++++-
+ include/linux/resctrl.h                       |  24 ++
+ 12 files changed, 574 insertions(+), 44 deletions(-)
 
 -- 
-2.43.0
-
+2.34.1
 
 
