@@ -1,88 +1,83 @@
-Return-Path: <linux-doc+bounces-66567-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66569-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C3C4C58DB8
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 17:50:51 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 113DFC58DB5
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 17:50:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 4A0E3560CF9
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 16:41:26 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A2A08423938
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 16:43:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD95633D6EC;
-	Thu, 13 Nov 2025 16:31:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6CEF35CB60;
+	Thu, 13 Nov 2025 16:33:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JN24s2zn"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="idyDQ5Ws"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A793F2FA0DF;
-	Thu, 13 Nov 2025 16:31:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CD7A35C1B4
+	for <linux-doc@vger.kernel.org>; Thu, 13 Nov 2025 16:33:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763051501; cv=none; b=J2re6KXr2X34U20iWI2PXngG1tiOQmX1LV1X/Pmeky7GtT6hekwWumT44q2RKhP36Tp1aBJYKqdxOEZK6AhfiRWZYITr+3ydlaL/D0xTzfr00LWSQE2LW/qjFMa7o9rG/7Z3wpai1haNzbdaQyYdU8Yxv9wGPDxzYMjd2QPgXsk=
+	t=1763051634; cv=none; b=oArPK2vcxeGbM/h7osU91vqfk1GUcqaIrLNelloMOgy0Zuvn2es4YFF2bSg7g7FKI6/pI0/fbhE9bTJmfgO++CWUWqz+XHowSpGXLcIuChLw+C50zeULTx0eBakMTwPyhNb3FdOUWdwUkW21/0/Ku2fMsoc7jTE8Qbe6aLT+gAk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763051501; c=relaxed/simple;
-	bh=kF+kWxPyVh+z5FgM0Q2Did65oYs/q684yfo71ZgaTCs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=thNklratBun+CGAWHDcdma8dMB6v+XVPqYjaoqJhoO0m/OYaHp1nNV/IbpDWxXEOp1c5KFqQKQMfMnmOdCwviYy5WwZxMLuqf522LquidzARchXr6CQ317fTfXcyVrpx+F/G8k8FQ8HM4l6A8aDEoq539u0F3fgQd4O2wnxCznY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JN24s2zn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A0B2C4CEF7;
-	Thu, 13 Nov 2025 16:31:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763051501;
-	bh=kF+kWxPyVh+z5FgM0Q2Did65oYs/q684yfo71ZgaTCs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=JN24s2znNS9vkkaUXTdz1pdutkLld2c5PDgdWXBdkz2Sq7e0VfZMaGPaKYRr6g9En
-	 8BwUWrJ+dgCAngShttKvv0IfksPk3gEcUk2w9LHgz68KiHXhkKtQTitBdJWhoRMOJa
-	 je8OIXGsKp2GgcN/cNlB9qPqt2cs64AVkAd/LMydq41j0Mkjs7qI+GNBh/yMRJgdqg
-	 ZrYPAGRNOsSDSvZOF+BO7v4WFUtdCK67Z53aQDtIpV6yyEVIr/LzeEcZUVapieylXM
-	 KFGENpjL0KYOOdn9OOa4+Bv5/zbglcL75Dsd97o3pVw81bC/Uuj29t0mI0XrGoWds3
-	 7vWSg/gQhbpEw==
-Date: Thu, 13 Nov 2025 06:31:40 -1000
-From: Tejun Heo <tj@kernel.org>
-To: ying chen <yc1082463@gmail.com>
-Cc: corbet@lwn.net, jiangshanlai@gmail.com, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, laoar.shao@gmail.com
-Subject: Re: [PATCH] workqueue: add workqueue.mayday_initial_timeout
-Message-ID: <aRYH7NwIEdC2kM8Q@slm.duckdns.org>
-References: <CAN2Y7hwttMyUn0qsEcSBbrQ1h+aSzNpHMhgAxEbqJZn4vf5hBw@mail.gmail.com>
- <aROfRBGmglPgcPVf@slm.duckdns.org>
- <CAN2Y7hwUmdFMM=mwYq7gsBpbSEBq6n0nXzmES4_=p3fDV=S+Ag@mail.gmail.com>
- <aRSvxyoWiqzcBj-N@slm.duckdns.org>
- <CAN2Y7hzDZxt5tBPeqwKwNNwwGXgmhj_uYDMkxx5_QtoqV97v1A@mail.gmail.com>
+	s=arc-20240116; t=1763051634; c=relaxed/simple;
+	bh=WhcKhZFHPX2mozcKk0S1peIkHSKGDJ65X7HcPESxcD0=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=oxCal2oLHwMmnx/Uqv1ZXu+D0Jx1RjJFlVzhS9QhLsJD6eTNXj1Y3CUz7tgIPqdBiokD/etsWxFa3ClgwxBBShUuCgwNVJharRpyUBcJb0JNMdQ0WbgXlXpcKicBXIcfBCZy+R0sPlQvwHSh4g2JivzAzyRqfei01cBa1/WkfJk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=idyDQ5Ws; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B7FFA40AFB
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1763051632; bh=VPxvlY/vy5gpWfEW0O1MkmAoOvv2+y+/YK5lweFF0Hk=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=idyDQ5WsMsgOKgKbAnB8J6w942Zs4Ab2pscrGhVb/jODfAWX3GE5dukCVREI1Glfm
+	 3oNRVv9vi4p7xBRDxoKIxRpOFLie578zXYVjQYBGVqpoyMUf0zsWnrTglJVIbwID6V
+	 G7SEAX3yh4gJy7dSArJBzvBdi6B5TzO1+OQ0/hy++fP3k0Fs+YGbb5UqE619vzvyKe
+	 0x49TYnRYC1XZ6wUlVlUt/iPS2aXGz3ih8ORISssiSXNTdmI9B5jqavTkkRxTxYEbD
+	 RHRgpSa2vH4lGpvwFS3rWSwEIgsc68b2LShvRDQueny55LoZo82aOL9D1B/tXshxtN
+	 lnwKRJ9H9fDcQ==
+Received: from localhost (unknown [IPv6:2601:280:4600:2da9::1fe])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id B7FFA40AFB;
+	Thu, 13 Nov 2025 16:33:52 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Jani Nikula <jani.nikula@intel.com>, linux-doc@vger.kernel.org
+Cc: jani.nikula@intel.com
+Subject: Re: [PATCH 0/4] Documentation: clean up subproject index boilerplate
+In-Reply-To: <cover.1762948491.git.jani.nikula@intel.com>
+References: <cover.1762948491.git.jani.nikula@intel.com>
+Date: Thu, 13 Nov 2025 09:33:51 -0700
+Message-ID: <87o6p5sxhs.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAN2Y7hzDZxt5tBPeqwKwNNwwGXgmhj_uYDMkxx5_QtoqV97v1A@mail.gmail.com>
+Content-Type: text/plain
 
-Hello,
+Jani Nikula <jani.nikula@intel.com> writes:
 
-On Thu, Nov 13, 2025 at 10:34:43AM +0800, ying chen wrote:
-> Processing work items one-by-one is indeed an excellent solution.
-> However, wouldn't it also be necessary to provide a method for
-> adjusting the mayday initial timeout?
+> Only very lightly tested.
+>
+> Jani Nikula (4):
+>   Documentation: remove subproject index links deep in the structure
+>   Documentation: streamline subproject index link in translations
+>   Documentation: include the boilerplate for SPHINXDIRS index link
+>   Documentation: use a source-read extension to include the index
+>     boilerplate
 
-Adding an interface like that isn't difficult but I'm not sure what that
-would achieve. A rescuer is there to guarantee forward progress when the
-system is under memory pressure and processing work items of the workqueue
-may be required to free up memory. IOW, when that workqueue not making
-forward progress can lead to system deadlock.
+That bit of repeated gunk has been on my list to look at for a while,
+thanks for digging into it.  Looking forward to the second version.
 
-As such, this doesn't have that much system performance implications (aside
-from the serialization effect that you raised). If rescuer is needed, the
-system is in tatters anyway, especially in terms of latency response, so I'm
-not sure what fine-tuning rescuer response time would help with.
+Thanks,
 
-Thanks.
-
--- 
-tejun
+jon
 
