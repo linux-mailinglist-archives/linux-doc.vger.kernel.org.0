@@ -1,61 +1,61 @@
-Return-Path: <linux-doc+bounces-66479-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66482-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EEF7C55351
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 02:12:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B4BEC55334
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 02:10:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id A5D4E4EF866
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 01:01:53 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 67D314F0446
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Nov 2025 01:02:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A10EE1DE2D7;
-	Thu, 13 Nov 2025 00:58:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 29592241139;
+	Thu, 13 Nov 2025 00:59:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="LOsz0ttr"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="F/kXnAla"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CY3PR05CU001.outbound.protection.outlook.com (mail-westcentralusazon11013011.outbound.protection.outlook.com [40.93.201.11])
+Received: from SN4PR2101CU001.outbound.protection.outlook.com (mail-southcentralusazon11012003.outbound.protection.outlook.com [40.93.195.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA2C721C9F9;
-	Thu, 13 Nov 2025 00:58:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.201.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55F832248A5;
+	Thu, 13 Nov 2025 00:59:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.195.3
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1762995520; cv=fail; b=j03Y9adedIKlsWbzvCRKDVaaRry50aWYHmZj5W7mi9Uh6uY01Eh4Te8WqA8S9MNFoL9OYy7jD1a34Z9uyMhX0OyoxPqorpPysx6lB5AnrQnPhNEIB8Kl6kfDJUxDHOxkKjUabjRenNnkFNZQftJP4qUTgUh7X0B8Do/BvmcicA4=
+	t=1762995542; cv=fail; b=nxZPMh+q4bI7hUMOTeM1Bg5AP963QOkvKq3bQvIzttlBxH/LryFkvM9boz2sHg7izg9CL8Tb/71nQvYF0JZEqg/w6h+eoqMd+vbzO8jLjH2LlVAP4srS5Qz5QdhTZuM6sQnXGoFzfV8P0klqIkijd6vh/6TpKSl8XVt98J8ejDI=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1762995520; c=relaxed/simple;
-	bh=Tn1nxpfJZQ9q27VFLrDqqekEmX3wj6jOjuY7pb9pPm8=;
+	s=arc-20240116; t=1762995542; c=relaxed/simple;
+	bh=Hzl1JYxhZqwQbM19y2dZw7p5ZNyWikIGqmkdLfTBy5Q=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=K9AEoGNoJ4aGHDi+o2oWoqVKjGk0q48lhFs4esWNfsXnk0YPBEYNzbJH5e4P512evTQifxEUOTCS1dgBEzxCDuoOWbObgT195hZ9bMELb3txlSdHfpJxm4I/rXLfts8/f7Beft+qrD8vbCEMOpZmISOk2XrlUVDIQmDD12Nhazc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=LOsz0ttr; arc=fail smtp.client-ip=40.93.201.11
+	 MIME-Version:Content-Type; b=IrmCqoaopir693yppgE6BCbLuR0a+J7pVVyQnqzIjGKTQo/OfLVwb0UWyFe85JbgKIkiY9FXmVxKHCaSx00q8JvUcUjo2TBmePBGcn4p8TCtnZ29UMehXwZltxkwdG8z3u5eTc+gDopZ3G5jucIyqnV0Xs6YZLJY1Vds0eOU0dM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=F/kXnAla; arc=fail smtp.client-ip=40.93.195.3
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DyyZ1q6JGxwmmsUfJYZt7YmQOTmEecbtdCEcRyNawlySuc0UIW1qorh3BeAbhJi3ubPemQ4suY9r0P/WaQocRYLEnqDxX7iLJsttcsDXDK3MCRLa+deUEzT7rrmbcqWgbg36VnJhXH8JkTKxs9HDBesdCHJKa9Xw66yFcbmS6+DO8mpSN3NNS/UmMYcCOwJKDcLbesdiefU+T9+x/F2/6o+w+XkLr1u8P5buV3oKGHzV9Z8pTqYbkRcJRnaxhE2VrxGvQxuA0fRSR0vxXoHQDahp1yuqsLlVz8aMN3E4DL5kvVSWyEIjAJEAmpDN1MQytvwFr1glpEw5oaBPtLiYow==
+ b=pbCCR/gahR76QvhELTAHp8qB9Flj1It3EP56LyLr3g34QdQTYyNpqFbBSwucfs7v5+oa/d/+eOlTgrsBLsZ3ZU9oQNqgoDeI1mptiuanphNWG/7O2kjbnpiyINS9XGzqvfw0gjO18hZvWdFmPbnHtGdG/IO3lb3UewXACC+JgeGFypumguimntpMI8X6rXbE94ZyjvYgFzkjEr+2A/1ADgy7sE0TNnyR1M2xdqsCoVa0JGj+9ASIAjOXQtd5bsoojrYDuHoPpCFngs41bpMlMb0tRVGblh75S/GNJip2dvG8z2ex7+lxbCQcVaslt2ZK6vhtik+9XgTGMWujZ/Ce/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NqUzxlwcF4qvJ/d9wQ/PDxPDxMKgei5Ggeo+NxnW9pE=;
- b=Uhs+GV/lPW5hTCV35Uh9B6YaglNIYSP6Kxa7Ni/Q5Ce/4Uc7BIxlwcqxl4dohkdP7Kwrdo29XQncbS86AqiablBWgW+2BwK+p3Vr4hMMhQ1N/fGc4DaOPPZAyB9LLReWQGPEW8YBzXyYnl9YT3vL1FEnx2SUwBlztJXLMI+AG29Su5GNQ6G9HRfdXOb5eiSISus9w91b3hKUKepKZoKZ6s5TEDCMs35NyuASvq+Fn+NQyKF9DJ3EnbCpYLca8PPQkOjQnRaEE+gz+Jh383c53zbcRAFgsRavFg5a+X+cNrD38t0WdGNF0Ne/gO87pfITTMzv4lxRqs0YDY8YVk/wqQ==
+ bh=ipK5PykmwVQ974c378HdCDVGbngHT7J8AihuGjpFDzM=;
+ b=ne9mUXf2/UoPGVejmsne7kYsw3T/wFVJw2TQVmFDlhGhJ914q2TcaIHTOgVISr0LttJBu4dLjbfSmIyhATk2QoSD61q84lFXlTKdlxfR13TERi2/UsczFXb0/KyJ1HkN/rVKLStJXJ4ivllprmh5P9wj245pl37YmkTfYtoTm2/DqVgTsQKiWnyQd8sedP8XQVfwVY9fVMpKSNd4hqv1gx5t8n5t31fybBTr6M6va47sc6NbddJ6xdNG3y9DalKCkRT2lMjY2IRkpBQTjphWjqpcMCUHIEeL1Cu8p1LYXsp3cDjh9sZDb8M40oME2Vlg0WzFMT3HN/SnNnuxCJAjpQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=intel.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NqUzxlwcF4qvJ/d9wQ/PDxPDxMKgei5Ggeo+NxnW9pE=;
- b=LOsz0ttrwHOSWSSO+UgD+Ua2Lyy6YnsB5N308tMWZRRpSb07Y26LMwtkgI5NOQs9J/FRrKLGnN7Wguw1XJ3Kp5FgSEVPtw6xrXKJkI6BrlrHLYggkutfv70jpkLFM02NE9NmBnstmKJVllACqlumwjLcmEKIhKDbPZKfzF92jgw=
-Received: from CH5PR04CA0013.namprd04.prod.outlook.com (2603:10b6:610:1f4::13)
- by PH7PR12MB7820.namprd12.prod.outlook.com (2603:10b6:510:268::8) with
+ bh=ipK5PykmwVQ974c378HdCDVGbngHT7J8AihuGjpFDzM=;
+ b=F/kXnAlabYXlsJyOPek/pZesN/vWniHIwgxFxyK/cAshaepXV306VGOw+s20J5gIhazOM5gVzA3+D1FQxkmBVjG7UH6NbWwc0dgPcBe2Cb2vghKaWhiIPROJlEbm0ciDR22I6K/jKVCKmkgZDCzJAFVDgwTlVtXoyQOMN+CTziM=
+Received: from CH0PR04CA0019.namprd04.prod.outlook.com (2603:10b6:610:76::24)
+ by DM4PR12MB8449.namprd12.prod.outlook.com (2603:10b6:8:17f::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9320.16; Thu, 13 Nov
- 2025 00:58:33 +0000
-Received: from CH1PEPF0000AD7F.namprd04.prod.outlook.com
- (2603:10b6:610:1f4:cafe::2) by CH5PR04CA0013.outlook.office365.com
- (2603:10b6:610:1f4::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.17 via Frontend Transport; Thu,
- 13 Nov 2025 00:58:31 +0000
+ 2025 00:58:56 +0000
+Received: from CH1PEPF0000AD81.namprd04.prod.outlook.com
+ (2603:10b6:610:76:cafe::c7) by CH0PR04CA0019.outlook.office365.com
+ (2603:10b6:610:76::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9320.16 via Frontend Transport; Thu,
+ 13 Nov 2025 00:58:49 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -63,13 +63,13 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 Received: from satlexmb07.amd.com (165.204.84.17) by
- CH1PEPF0000AD7F.mail.protection.outlook.com (10.167.244.88) with Microsoft
+ CH1PEPF0000AD81.mail.protection.outlook.com (10.167.244.89) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 00:58:32 +0000
+ 15.20.9320.13 via Frontend Transport; Thu, 13 Nov 2025 00:58:56 +0000
 Received: from bmoger-ubuntu.amd.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 12 Nov
- 2025 16:58:30 -0800
+ 2025 16:58:54 -0800
 From: Babu Moger <babu.moger@amd.com>
 To: <tony.luck@intel.com>, <reinette.chatre@intel.com>, <tglx@linutronix.de>,
 	<mingo@redhat.com>, <bp@alien8.de>, <dave.hansen@linux.intel.com>
@@ -84,9 +84,9 @@ CC: <corbet@lwn.net>, <Dave.Martin@arm.com>, <james.morse@arm.com>,
 	<mario.limonciello@amd.com>, <perry.yuan@amd.com>,
 	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
 	<peternewman@google.com>, <feng.tang@linux.alibaba.com>
-Subject: [PATCH v12 05/10] fs/resctrl: Introduce interface to display "io_alloc" support
-Date: Wed, 12 Nov 2025 18:57:31 -0600
-Message-ID: <e8b116a8f424128b227734bb1d433c14af478d90.1762995456.git.babu.moger@amd.com>
+Subject: [PATCH v12 08/10] fs/resctrl: Modify struct rdt_parse_data to pass mode and CLOSID
+Date: Wed, 12 Nov 2025 18:57:34 -0600
+Message-ID: <f8ec6ab5cf594d906a3fe75f56793d5fbd63f38f.1762995456.git.babu.moger@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1762995456.git.babu.moger@amd.com>
 References: <cover.1762995456.git.babu.moger@amd.com>
@@ -102,235 +102,176 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7F:EE_|PH7PR12MB7820:EE_
-X-MS-Office365-Filtering-Correlation-Id: 59d84e65-0658-4eca-e502-08de224fc490
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD81:EE_|DM4PR12MB8449:EE_
+X-MS-Office365-Filtering-Correlation-Id: 545eaefe-e079-4bf3-efac-08de224fd277
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|36860700013|82310400026|1800799024;
+	BCL:0;ARA:13230040|82310400026|1800799024|36860700013|7416014|376014;
 X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?tTZxYLH0sSbT4sF7mv0nz/iYkxwJEAJLyGMmXOaTM/gmN+HkK4BnnKqzfcO3?=
- =?us-ascii?Q?BHiLO7v/9dRwUellDwSJu2tW4+D8MJKYfYBoVBkkikOnhwwL7mc8BxfJETtn?=
- =?us-ascii?Q?VTp0moHz73s9Er2uHtp8aODZcKb8nXAo9nNYt3DbouRNkK+ifS60W+6tWh3s?=
- =?us-ascii?Q?Cd2vsQZtgdcZ//2PmPZAZBfBEeF2b/Sqpfurlby1i2vtJQ2F5zr3wpefv2vo?=
- =?us-ascii?Q?9qXzR0Ni/2FmI2VswngjJbksAa73athe7/I86yZmFg9PzjE31QNj/6HpO27k?=
- =?us-ascii?Q?1/DvzAWpW4NsycRNczYG41QuAvnYTHBJ5l7YOBqFOsUOAOZlCQHktIwtzSjB?=
- =?us-ascii?Q?ukpZZU0hc57Cunltd9HGbfJ/nkKgqYkxl9U2zc8tGdEu9yB/SLT9CwEb2Oqv?=
- =?us-ascii?Q?qg5x5mnuuHUbaVNLYlGmpFrHer2xNi4sZcUNQBZuYJ+ytfIv59SUhDB0WGTf?=
- =?us-ascii?Q?FaMOvsoiO4WqL10ekdng2syQtgsVz5pva5xsDVJoqgm8a/qJEyj5wwPshkir?=
- =?us-ascii?Q?FqbAXNMTHMc6Vv9m7qOXzZclAytoER6qjExP3Vl8DfM3dZgvgzWiUFs9g1eL?=
- =?us-ascii?Q?xwK6f5QwzKDEmrZ546i+LF21xk/R3/qgazfIcfbW2XwkfLUAcqqGMhBk8Chh?=
- =?us-ascii?Q?il/VdNU+OICYG4Cm6qTNhPhySZ7Pe3zbh8A5rJXZdrr7nISgSNuB/wVx+Jfg?=
- =?us-ascii?Q?cNrZMfXYcw/cKEhi2OwRu5k9HKTppMxGiBcJsJKm+joBSvJuDjbOyiAIDROj?=
- =?us-ascii?Q?UU1azjpV1UXVJDvDLDJCmxiHS+zkrDYmHqXzCUTAHr0DEjum+WE1vYJ2M+YK?=
- =?us-ascii?Q?XByrLig5qxvKyX3yd93rc9EGLSTk2kgdTMCjRFFTuuCjIMPS2fR46m09BBdJ?=
- =?us-ascii?Q?9ziPy1+0lgYRyYqGCa/02/O3Re5J0TVTtKKpnpyBrAxzBdiELUyE/FyZFG3O?=
- =?us-ascii?Q?L8yMiJog0vyAjdpLYAvwaUsYwPUTStaxuaKYXsqT/tYFywQ0a5QVn7HmYrmm?=
- =?us-ascii?Q?lEF8ecswIolF/uJboGf0qUzQVahXgJMk6UHl6zfqLdeQrk0fyecuGT+ZEBT7?=
- =?us-ascii?Q?MmC9eKMmuLeObVQY6NVLDiyaY5aH5k0PObUP5F5vLHcviYPo5XJI8L0ggR/y?=
- =?us-ascii?Q?iLrpR8x825I4l6F+cdDg9Gjvu2dzUSCtjLLgpOWJlgcUTBcfVQHwsGJw723w?=
- =?us-ascii?Q?VRx9f8wPq5to9BLa0lE2tv2dMBg78QFaGYZQKR0Xfn/bWffQY6gFdvCiBMQH?=
- =?us-ascii?Q?yjnXOKwHxWWue0TvnsH6P7CTmPpY3Iv7WVRUcXF+4x2YGZY2S2Mxm80VBr4b?=
- =?us-ascii?Q?a1fte5ttX0tPOMu5V5mXUSlWJ/EiwymFGj3DqTakLjdUqtLbA5IP3jNEtuIs?=
- =?us-ascii?Q?+507ehXKlHHsC8L/rrQBY4vAs/q66S2Sjwupsp2VRPHOxijX3WHYJx9gFRYa?=
- =?us-ascii?Q?Dx6WflS+4UvMeC9DoqhZLNgAayZwC+WdrIfl5YrcXQuQ/byVrnlFxgQelQck?=
- =?us-ascii?Q?Jwt7dUxWDmAlLsg/2K3VAZJIQYPQ3h/BtvXWbKeTSqCQ8LjAYGPI6/9paynS?=
- =?us-ascii?Q?X2B5Kfin6Cb9/aMrryw=3D?=
+	=?us-ascii?Q?BTr9N9r7gYML874pb59iAsTlPX66bh9hlq2w+0y6lL6E4EPt34BOJjzult00?=
+ =?us-ascii?Q?uYDX0eihBAJNrt0sCXELLqPNY5veTYDhJRUhoNvGzlbTPJqXXnzOQu2WOn59?=
+ =?us-ascii?Q?HR/hcBcFK5dQXmDwgHLt0ohjX5DFqBGlaqTuGqbhJHWy7nyTpRxlnRJ9zTui?=
+ =?us-ascii?Q?1cCt+sBBL0r9eygzOXWd6W7+WQ0uovslHq57SjBUp4g8DrP9iwD/WO1zcQqQ?=
+ =?us-ascii?Q?oYQJRZRnHVrtgQarrc21ZVmsbQjg9nh8rUK6OOXQgLNULQChaZ2tPqaZbvjr?=
+ =?us-ascii?Q?KnZwBPbTTerMjGU4is2iQx3nQ7WpdeMIZpDBBMYaPcvt8v6ydi0BqJMutp/F?=
+ =?us-ascii?Q?kyGx+wUgIBIwJWKx5kVITX5TYj7GS29SMxNqWXuCms2GZuQ5jeO1RgrK9hT7?=
+ =?us-ascii?Q?WYrdOb/WWx3J0DgaTTLwLrvXfLT7SfBhtxCBgefL0fW+nB+Pp2WJDQ2TW2oH?=
+ =?us-ascii?Q?rEGdFTrredsWnn7vh6GIx1bEYd59RCISDnNtd0VNMUbPYcniBTtTgVBTJlTA?=
+ =?us-ascii?Q?Hv5N1tdI/x4ZB/n2tTfuJahVms1CMbmqIROsR/dA/2EWHZqUXAe1WTIRXlMz?=
+ =?us-ascii?Q?OqVQdXAhyixwmXUZgxiX1MBXp5q4k9ib4Hped/QNJ6I4UfiQjUSvgqYx7esS?=
+ =?us-ascii?Q?QzcvOJHbOdS2ireQSSZG3qXTET83iESWNVD6sO+g837m4unJz+eJ9LdqhKrm?=
+ =?us-ascii?Q?pnKJy6dr7sghruWU/noEXfCeJHr+hsDt1o5VEv60ynmOBLr07w67cdj+7icF?=
+ =?us-ascii?Q?9khOj3jbtOgpaabuemFpIgwR/Enz2bQDqGw0HrG7B6fEgtp28rI1uQr8Cf4U?=
+ =?us-ascii?Q?ZWA1C49/Tf5LXrSMMjYqa+iKaHD9Kl0aQYBFVZeK9BM2Sx9Elqnz3VHBsWae?=
+ =?us-ascii?Q?S8dFGsZIphEvcf2TE02Z8EAVj7spSjUMi3zVHHQXL8bO76PYgbew8I4H7ETf?=
+ =?us-ascii?Q?K7ZVZq+bLuIa5K03k9kZ1nOcMTOPser7UbB4BeWdYWbeoVKAxkHFdX/go7gO?=
+ =?us-ascii?Q?kR7Ggampc8kNBM3pmF+8AJxSG4SIKA7WKm4kE+pCozSL2r+3qH+p24nB/fxq?=
+ =?us-ascii?Q?Me4LvZ0hB5zef2qTB6LU3bjtqJ6vIoO5alLCNPpk7KhzyPwIiYOM8qQi4fQk?=
+ =?us-ascii?Q?9fYwJtbUMDdklCGnjgS++4M7JvJtlQ+j4SVwmd1sIW0L43XcTC7UO3hhNM3G?=
+ =?us-ascii?Q?qTKlk0tAJ3TwRGqzcN+GhtaHTAPBpx5vc1YHhbjYfjsuxYR4qE39UDtIgPyi?=
+ =?us-ascii?Q?xcZ/y08UcUH0ekdMByc40ecQlkJDFdrc5hm3gNBs1AdAOjx4TfNVXyJ8dMcv?=
+ =?us-ascii?Q?2yI6eOq6nXUNWZLtejDVuPt/89YMT/ULl/palAuNMp1DBWFsIvsyJ1KJrpzE?=
+ =?us-ascii?Q?HOw7h+38Qb9KAiMYwAP1KPXQefvfsgylUutTPEYrpCAzX8d+RYEUyLHoNcPb?=
+ =?us-ascii?Q?CD2yx6ZbO0wajPr6+DlCjMZSFNFVXkUs6xvtN4N8GI4PFribduBdGib7GMCy?=
+ =?us-ascii?Q?HFDfeJBXBKFxONGaFS6RupIW32xanejDXH+NV04mMYbkvzwa2BSe7sulOBZN?=
+ =?us-ascii?Q?C4XNKVcHkmon6UDRuNc=3D?=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(36860700013)(7416014)(376014);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 00:58:32.8240
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2025 00:58:56.1488
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 59d84e65-0658-4eca-e502-08de224fc490
+X-MS-Exchange-CrossTenant-Network-Message-Id: 545eaefe-e079-4bf3-efac-08de224fd277
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000AD7F.namprd04.prod.outlook.com
+	CH1PEPF0000AD81.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7820
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB8449
 
-Introduce the "io_alloc" resctrl file to the "info" area of a cache
-resource, for example /sys/fs/resctrl/info/L3/io_alloc. "io_alloc"
-indicates support for the "io_alloc" feature that allows direct insertion
-of data from I/O devices into the cache.
+parse_cbm() require resource group mode and CLOSID to validate the capacity
+bitmask (CBM). It is passed via struct rdtgroup in struct rdt_parse_data.
 
-Restrict exposing support for "io_alloc" to the L3 resource that is the
-only resource where this feature can be backed by AMD's L3 Smart Data Cache
-Injection Allocation Enforcement (SDCIAE). With that, the "io_alloc" file
-is only visible to user space if the L3 resource supports "io_alloc". Doing
-so makes the file visible for all cache resources though, for example also
-L2 cache (if it supports cache allocation). As a consequence, add
-capability for file to report expected "enabled" and "disabled", as well as
-"not supported".
+The io_alloc feature also uses CBMs to indicate which portions of cache are
+allocated for I/O traffic. The CBMs are provided by user space and need to
+be validated the same as CBMs provided for general (CPU) cache allocation.
+parse_cbm() cannot be used as-is since io_alloc does not have rdtgroup
+context.
+
+Pass the resource group mode and CLOSID directly to parse_cbm() via struct
+rdt_parse_data, instead of through the rdtgroup struct, to facilitate
+calling parse_cbm() to verify the CBM of the io_alloc feature.
 
 Signed-off-by: Babu Moger <babu.moger@amd.com>
 Reviewed-by: Reinette Chatre <reinette.chatre@intel.com>
 ---
-v12:No changes.
+v12: No changes.
 
-v11:Added Reviewed-by: tag.
+v11: No changes.
 
-v10:Changelog update.
-    Removed the h/w specific details from this patch and will add to the next patch.
+v10: Subject line change. Added Reviewed-by tag.
 
-v9: Minor user doc(resctrl.rst) update.
+v9: Rephrase of changelog.
+    Minor code syntax update.
 
-v8: Updated Documentation/filesystems/resctrl.rst.
-    Moved resctrl_io_alloc_show() to fs/resctrl/ctrlmondata.c.
-    Added prototype for rdt_kn_parent_priv() in fs/resctrl/internal.h
-    so, it can be uses in other fs/resctrl/ files.
-    Added comment for io_alloc_init().
+v8: Rephrase of changelog.
 
-v7: Updated the changelog.
-    Updated user doc for io_alloc in resctrl.rst.
-    Added mutex rdtgroup_mutex in resctrl_io_alloc_show();
+v7: Rephrase of changelog.
 
-v6: Added "io_alloc_cbm" details in user doc resctrl.rst.
-    Resource name is not printed in CBM now. Corrected the texts about it
-    in resctrl.rst.
+v6: Changed the subject line to fs/resctrl.
 
 v5: Resolved conflicts due to recent resctrl FS/ARCH code restructure.
-    Updated show_doms() to print the resource if only it is valid. Pass NULL while
-    printing io_alloc CBM.
-    Changed the code to access the CBMs via either L3CODE or L3DATA resources.
 
-v4: Updated the change log.
-    Added rdtgroup_mutex before rdt_last_cmd_puts().
-    Returned -ENODEV when resource type is CDP_DATA.
-    Kept the resource name while printing the CBM (L3:0=fff) that way
-    I dont have to change show_doms() just for this feature and it is
-    consistant across all the schemata display.
-
-v3: Minor changes due to changes in resctrl_arch_get_io_alloc_enabled()
-    and resctrl_io_alloc_closid_get().
-    Added the check to verify CDP resource type.
-    Updated the commit log.
-
-v2: Fixed to display only on L3 resources.
-    Added the locks while processing.
-    Rename the displat to io_alloc_cbm (from sdciae_cmd).
+v4: New patch to call parse_cbm() directly to avoid code duplication.
 ---
- Documentation/filesystems/resctrl.rst | 15 +++++++++++++++
- fs/resctrl/ctrlmondata.c              | 21 +++++++++++++++++++++
- fs/resctrl/internal.h                 |  1 +
- fs/resctrl/rdtgroup.c                 | 22 ++++++++++++++++++++++
- 4 files changed, 59 insertions(+)
+ fs/resctrl/ctrlmondata.c | 24 +++++++++++++-----------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
 
-diff --git a/Documentation/filesystems/resctrl.rst b/Documentation/filesystems/resctrl.rst
-index d7a51cae6b26..108995640ca5 100644
---- a/Documentation/filesystems/resctrl.rst
-+++ b/Documentation/filesystems/resctrl.rst
-@@ -137,6 +137,21 @@ related to allocation:
- 			"1":
- 			      Non-contiguous 1s value in CBM is supported.
- 
-+"io_alloc":
-+		"io_alloc" enables system software to configure the portion of
-+		the cache allocated for I/O traffic. File may only exist if the
-+		system supports this feature on some of its cache resources.
-+
-+			"disabled":
-+			      Resource supports "io_alloc" but the feature is disabled.
-+			      Portions of cache used for allocation of I/O traffic cannot
-+			      be configured.
-+			"enabled":
-+			      Portions of cache used for allocation of I/O traffic
-+			      can be configured using "io_alloc_cbm".
-+			"not supported":
-+			      Support not available for this resource.
-+
- Memory bandwidth(MB) subdirectory contains the following files
- with respect to allocation:
- 
 diff --git a/fs/resctrl/ctrlmondata.c b/fs/resctrl/ctrlmondata.c
-index 0d0ef54fc4de..78a8e7b4ba24 100644
+index 1ac89b107e6f..c43bedea70d7 100644
 --- a/fs/resctrl/ctrlmondata.c
 +++ b/fs/resctrl/ctrlmondata.c
-@@ -676,3 +676,24 @@ int rdtgroup_mondata_show(struct seq_file *m, void *arg)
- 	rdtgroup_kn_unlock(of->kn);
- 	return ret;
- }
-+
-+int resctrl_io_alloc_show(struct kernfs_open_file *of, struct seq_file *seq, void *v)
-+{
-+	struct resctrl_schema *s = rdt_kn_parent_priv(of->kn);
-+	struct rdt_resource *r = s->res;
-+
-+	mutex_lock(&rdtgroup_mutex);
-+
-+	if (r->cache.io_alloc_capable) {
-+		if (resctrl_arch_get_io_alloc_enabled(r))
-+			seq_puts(seq, "enabled\n");
-+		else
-+			seq_puts(seq, "disabled\n");
-+	} else {
-+		seq_puts(seq, "not supported\n");
-+	}
-+
-+	mutex_unlock(&rdtgroup_mutex);
-+
-+	return 0;
-+}
-diff --git a/fs/resctrl/internal.h b/fs/resctrl/internal.h
-index cf1fd82dc5a9..a18ed8889396 100644
---- a/fs/resctrl/internal.h
-+++ b/fs/resctrl/internal.h
-@@ -426,6 +426,7 @@ int mbm_L3_assignments_show(struct kernfs_open_file *of, struct seq_file *s, voi
+@@ -24,7 +24,8 @@
+ #include "internal.h"
  
- ssize_t mbm_L3_assignments_write(struct kernfs_open_file *of, char *buf, size_t nbytes,
- 				 loff_t off);
-+int resctrl_io_alloc_show(struct kernfs_open_file *of, struct seq_file *seq, void *v);
+ struct rdt_parse_data {
+-	struct rdtgroup		*rdtgrp;
++	u32			closid;
++	enum rdtgrp_mode	mode;
+ 	char			*buf;
+ };
  
- #ifdef CONFIG_RESCTRL_FS_PSEUDO_LOCK
- int rdtgroup_locksetup_enter(struct rdtgroup *rdtgrp);
-diff --git a/fs/resctrl/rdtgroup.c b/fs/resctrl/rdtgroup.c
-index 0320360cd7a6..6d89160ebd11 100644
---- a/fs/resctrl/rdtgroup.c
-+++ b/fs/resctrl/rdtgroup.c
-@@ -1947,6 +1947,12 @@ static struct rftype res_common_files[] = {
- 		.kf_ops		= &rdtgroup_kf_single_ops,
- 		.seq_show	= rdt_thread_throttle_mode_show,
- 	},
-+	{
-+		.name		= "io_alloc",
-+		.mode		= 0444,
-+		.kf_ops		= &rdtgroup_kf_single_ops,
-+		.seq_show	= resctrl_io_alloc_show,
-+	},
- 	{
- 		.name		= "max_threshold_occupancy",
- 		.mode		= 0644,
-@@ -2138,6 +2144,20 @@ static void thread_throttle_mode_init(void)
- 				 RFTYPE_CTRL_INFO | RFTYPE_RES_MB);
- }
- 
-+/*
-+ * The resctrl file "io_alloc" is added using L3 resource. However, it results
-+ * in this file being visible for *all* cache resources (eg. L2 cache),
-+ * whether it supports "io_alloc" or not.
-+ */
-+static void io_alloc_init(void)
-+{
-+	struct rdt_resource *r = resctrl_arch_get_resource(RDT_RESOURCE_L3);
-+
-+	if (r->cache.io_alloc_capable)
-+		resctrl_file_fflags_init("io_alloc", RFTYPE_CTRL_INFO |
-+					 RFTYPE_RES_CACHE);
-+}
-+
- void resctrl_file_fflags_init(const char *config, unsigned long fflags)
+@@ -77,8 +78,8 @@ static int parse_bw(struct rdt_parse_data *data, struct resctrl_schema *s,
+ 		    struct rdt_ctrl_domain *d)
  {
- 	struct rftype *rft;
-@@ -4408,6 +4428,8 @@ int resctrl_init(void)
+ 	struct resctrl_staged_config *cfg;
+-	u32 closid = data->rdtgrp->closid;
+ 	struct rdt_resource *r = s->res;
++	u32 closid = data->closid;
+ 	u32 bw_val;
  
- 	thread_throttle_mode_init();
+ 	cfg = &d->staged_config[s->conf_type];
+@@ -156,9 +157,10 @@ static bool cbm_validate(char *buf, u32 *data, struct rdt_resource *r)
+ static int parse_cbm(struct rdt_parse_data *data, struct resctrl_schema *s,
+ 		     struct rdt_ctrl_domain *d)
+ {
+-	struct rdtgroup *rdtgrp = data->rdtgrp;
++	enum rdtgrp_mode mode = data->mode;
+ 	struct resctrl_staged_config *cfg;
+ 	struct rdt_resource *r = s->res;
++	u32 closid = data->closid;
+ 	u32 cbm_val;
  
-+	io_alloc_init();
-+
- 	ret = resctrl_mon_resource_init();
- 	if (ret)
- 		return ret;
+ 	cfg = &d->staged_config[s->conf_type];
+@@ -171,7 +173,7 @@ static int parse_cbm(struct rdt_parse_data *data, struct resctrl_schema *s,
+ 	 * Cannot set up more than one pseudo-locked region in a cache
+ 	 * hierarchy.
+ 	 */
+-	if (rdtgrp->mode == RDT_MODE_PSEUDO_LOCKSETUP &&
++	if (mode == RDT_MODE_PSEUDO_LOCKSETUP &&
+ 	    rdtgroup_pseudo_locked_in_hierarchy(d)) {
+ 		rdt_last_cmd_puts("Pseudo-locked region in hierarchy\n");
+ 		return -EINVAL;
+@@ -180,8 +182,7 @@ static int parse_cbm(struct rdt_parse_data *data, struct resctrl_schema *s,
+ 	if (!cbm_validate(data->buf, &cbm_val, r))
+ 		return -EINVAL;
+ 
+-	if ((rdtgrp->mode == RDT_MODE_EXCLUSIVE ||
+-	     rdtgrp->mode == RDT_MODE_SHAREABLE) &&
++	if ((mode == RDT_MODE_EXCLUSIVE || mode == RDT_MODE_SHAREABLE) &&
+ 	    rdtgroup_cbm_overlaps_pseudo_locked(d, cbm_val)) {
+ 		rdt_last_cmd_puts("CBM overlaps with pseudo-locked region\n");
+ 		return -EINVAL;
+@@ -191,14 +192,14 @@ static int parse_cbm(struct rdt_parse_data *data, struct resctrl_schema *s,
+ 	 * The CBM may not overlap with the CBM of another closid if
+ 	 * either is exclusive.
+ 	 */
+-	if (rdtgroup_cbm_overlaps(s, d, cbm_val, rdtgrp->closid, true)) {
++	if (rdtgroup_cbm_overlaps(s, d, cbm_val, closid, true)) {
+ 		rdt_last_cmd_puts("Overlaps with exclusive group\n");
+ 		return -EINVAL;
+ 	}
+ 
+-	if (rdtgroup_cbm_overlaps(s, d, cbm_val, rdtgrp->closid, false)) {
+-		if (rdtgrp->mode == RDT_MODE_EXCLUSIVE ||
+-		    rdtgrp->mode == RDT_MODE_PSEUDO_LOCKSETUP) {
++	if (rdtgroup_cbm_overlaps(s, d, cbm_val, closid, false)) {
++		if (mode == RDT_MODE_EXCLUSIVE ||
++		    mode == RDT_MODE_PSEUDO_LOCKSETUP) {
+ 			rdt_last_cmd_puts("Overlaps with other group\n");
+ 			return -EINVAL;
+ 		}
+@@ -262,7 +263,8 @@ static int parse_line(char *line, struct resctrl_schema *s,
+ 	list_for_each_entry(d, &r->ctrl_domains, hdr.list) {
+ 		if (d->hdr.id == dom_id) {
+ 			data.buf = dom;
+-			data.rdtgrp = rdtgrp;
++			data.closid = rdtgrp->closid;
++			data.mode = rdtgrp->mode;
+ 			if (parse_ctrlval(&data, s, d))
+ 				return -EINVAL;
+ 			if (rdtgrp->mode ==  RDT_MODE_PSEUDO_LOCKSETUP) {
 -- 
 2.34.1
 
