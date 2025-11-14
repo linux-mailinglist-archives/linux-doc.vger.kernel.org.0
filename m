@@ -1,56 +1,56 @@
-Return-Path: <linux-doc+bounces-66753-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66755-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC39BC5EC27
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 19:09:21 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id D034BC5EB40
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 19:00:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 33DE14F515F
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 17:56:18 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E2E733A7290
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 17:56:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 25E4834D902;
-	Fri, 14 Nov 2025 17:54:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 458F134678B;
+	Fri, 14 Nov 2025 17:54:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="k1gnBFwP"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="K4tx/2iK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BB0134678B
-	for <linux-doc@vger.kernel.org>; Fri, 14 Nov 2025 17:53:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44D7F34D4C4
+	for <linux-doc@vger.kernel.org>; Fri, 14 Nov 2025 17:53:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763142843; cv=none; b=hi8slmO1JBXK6TFBAOMCDRe8Ypx0OwJDzOdZTG2Fx/upKMkHfVCmLRrfg7t7hdjoaF2+lCUVoB7ygy8nMhscUk1FTLHSm/E9+IUTA05vJzRN4UZGJihfKizQS4VRULRKgSC+cP5nt6I+8dcRxRrzL+vkGNcMt8HA2pl5279MdY0=
+	t=1763142844; cv=none; b=r1YmajP5eJKwUmdgTEAwnBLiDza7EdnEu302mj6IcylCvxUIUd8VFByRlsbcAq8KQoytKDi8Z/xeE/s4XCmTQdOMkWsmPnUxstVbKj7K75tIvw1f+OSAGnAPG4COkp69pbN8HcDDAXcPqwzMidtC5Kgg/7XHpt/RaPHID5y65M8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763142843; c=relaxed/simple;
-	bh=LECpL+34lUo5gv6Vw5d7tauDa2B8JxBSGA+IG+Eo7W8=;
+	s=arc-20240116; t=1763142844; c=relaxed/simple;
+	bh=iaFPE/p1ZbfxgmsrFvjCS+h6izV+Wg0qIV44OBPt0IE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=boX48wYSeK88B/eGkDZCBZqYkbN7M9vaLBqd3BbG7UIbgsFm9KvABRJ2MT5E0vn7jncxFbI0A8A/aCcoTMjooWr/TBUOt18Zekq4JSHzM1rRMdchn8WlvXtfA5xlVEruPRK9QEmF8rCRyUzuo01C71JxtnR2LO5dhyfHOY8/zIw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=k1gnBFwP; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=stJMtEzy9j8uejVVdtMZYkfBvY0e4l7RwAhVO1uZUzthl2dcKVvj9lqdOLgljVBw/OjIUtz8Xga4t1jJumePiQSGFRTuFdZJysbB9DsVA0uuid8h2ZLaDdCphs7yTqzVKTOPacsATIug9l4tFWjEcMwF0f7Nm3pu17mS6hTnKMw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=K4tx/2iK; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 6C18B4E416BA;
-	Fri, 14 Nov 2025 17:53:53 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id C18DD1A1AB0;
+	Fri, 14 Nov 2025 17:53:54 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 2FF616060E;
-	Fri, 14 Nov 2025 17:53:53 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 30EC3103719A2;
-	Fri, 14 Nov 2025 18:53:50 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 90AA36060E;
+	Fri, 14 Nov 2025 17:53:54 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9D53010371990;
+	Fri, 14 Nov 2025 18:53:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1763142832; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1763142833; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=gbHlPo/urpEuGhl8aobjg6DeDbSRcy+KPKJUqpt9iT8=;
-	b=k1gnBFwPNMt4gm/RK3FMGZNc07rAAR71s8EkPqTV0J5vcsvJF6q+J5FUQO8HKVXuNZGuVc
-	W2EH6AP9YG2/oXsDt733f4WOKpIGiMyXHfbeyLSpcicGsCyO8SjS/c06ONZXfEsbdi834k
-	CfPb8MzTrjTftlPvuPS/r3f5dvgizWeslqPmHqRKKLVFR/lycoylGfNzx3W7Ve5/Q7gJjI
-	0YOG6Hahc4s8/MAgipiqNpBc+ewVw8/K30BgHgOrSU11xBlBZ6jsdMJNt619L8Kcf/QS38
-	orucJh8eiUf3D41ekBze7wNawr5TXZ7aQnLhVBhMXYOTs0tWdLIvGfIRSAcnsg==
+	bh=xnptK47IhbJsElmEDQ4s7RdwN9OFRU0DAsaYpYA/R/0=;
+	b=K4tx/2iKZhTsJOWc6AaXgP8mo+vSToGxQT6IaKidwCcvegiYKwT8kVte5P8hftskvcTpSt
+	X51ZSejCPih9hwOijkKrUk3O/7ruICBhOH0mFMQyazq7omuAnSZUoTHdf/aDuRDXfZ4Y9Z
+	7XiYg6EVpCOvaxrwVH4s6D8m/yv2e+RuMmyKrkzFwBue1SrLDTEy4w+6AKUE0Mks98sf5Z
+	L1phRMyIA7nbtD88PHp787p7ogBwMs7iH1ixjk29UXoiHIKGNw8hFdA9RQuWW5WoVisy4R
+	/elMlcDnLQ5ff4xYHnLpn2vfXEZZwchKiid5DhPtT57RTY3ohQHTS68Y7hlTow==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Fri, 14 Nov 2025 18:53:19 +0100
-Subject: [PATCH 18/19] mtd: spi-nor: Add steps for testing locking with CMP
+Date: Fri, 14 Nov 2025 18:53:20 +0100
+Subject: [PATCH 19/19] mtd: spi-nor: winbond: Add CMP locking support
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -59,7 +59,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251114-winbond-v6-18-rc1-spi-nor-swp-v1-18-487bc7129931@bootlin.com>
+Message-Id: <20251114-winbond-v6-18-rc1-spi-nor-swp-v1-19-487bc7129931@bootlin.com>
 References: <20251114-winbond-v6-18-rc1-spi-nor-swp-v1-0-487bc7129931@bootlin.com>
 In-Reply-To: <20251114-winbond-v6-18-rc1-spi-nor-swp-v1-0-487bc7129931@bootlin.com>
 To: Tudor Ambarus <tudor.ambarus@linaro.org>, 
@@ -74,166 +74,64 @@ Cc: Sean Anderson <sean.anderson@linux.dev>,
 X-Mailer: b4 0.14.2
 X-Last-TLS-Session-Version: TLSv1.3
 
-Extend the test coverage by giving guidelines to verify the CMP bit acts
-according to our expectations.
+All W25Q01NWxxIQ, W25Q{01,02}NWxxIM and W25H{512,01,02}NWxxAM chips have
+support for the locking complement (CMP) feature. Add the relevant bit
+to enable it.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
-The instructions listed in this file target people adding support for
-new chips, however here are below extra steps that I also ran with the
-same W25H512NWxxAM chip. They are here to prove core correctness.
-
-    $ flash_lock -u /dev/mtd0
-    $ flash_lock -l /dev/mtd0 0 1008
-    $ show_sectors
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-03efffff |   locked | 1008
-     03f00000-03ffffff | unlocked | 16
-    $ flash_lock -l /dev/mtd0 0 1009
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-03efffff |   locked | 1008
-     03f00000-03ffffff | unlocked | 16
-    $ flash_lock -l /dev/mtd0 0 1015
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-03efffff |   locked | 1008
-     03f00000-03ffffff | unlocked | 16
-    $ flash_lock -l /dev/mtd0 0 1016
-    $ show_sectors # should cover more
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-03f7ffff |   locked | 1016
-     03f80000-03ffffff | unlocked | 8
-    $ flash_lock -u /dev/mtd0 $((1015 * $bs)) 1
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-03f7ffff |   locked | 1016
-     03f80000-03ffffff | unlocked | 8
-    $ flash_lock -u /dev/mtd0 $((1009 * $bs)) 7
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-03f7ffff |   locked | 1016
-     03f80000-03ffffff | unlocked | 8
-    $ flash_lock -u /dev/mtd0 $((1008 * $bs)) 8
-    $ show_sectors # range should reduce down to initial value
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-03efffff |   locked | 1008
-     03f00000-03ffffff | unlocked | 16
-
-    [Similar situations, on the other side of the device]
-
-    $ flash_lock -u /dev/mtd0
-    $ flash_lock -l /dev/mtd0 $((16 * $bs)) 1008
-    $ show_sectors
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-000fffff | unlocked | 16
-     00100000-03ffffff |   locked | 1008
-    $ flash_lock -l /dev/mtd0 $((15 * $bs)) 1009
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-000fffff | unlocked | 16
-     00100000-03ffffff |   locked | 1008
-    $ flash_lock -l /dev/mtd0 $((9 * $bs)) 1015
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-000fffff | unlocked | 16
-     00100000-03ffffff |   locked | 1008
-    $ flash_lock -l /dev/mtd0 $((8 * $bs)) 1016
-    $ show_sectors # should cover more
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-0007ffff | unlocked | 8
-     00080000-03ffffff |   locked | 1016
-    $ flash_lock -u /dev/mtd0 $((8 * $bs)) 1
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-0007ffff | unlocked | 8
-     00080000-03ffffff |   locked | 1016
-    $ flash_lock -u /dev/mtd0 $((8 * $bs)) 7
-    $ show_sectors # should not change
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-0007ffff | unlocked | 8
-     00080000-03ffffff |   locked | 1016
-    $ flash_lock -u /dev/mtd0 $((8 * $bs)) 8
-    $ show_sectors # range should reduce down to initial value
-    software locked sectors
-     region (in hex)   | status   | #blocks
-     ------------------+----------+--------
-     00000000-000fffff | unlocked | 16
-     00100000-03ffffff |   locked | 1008
+The documentation about testing the CMP feature has been written based
+on a W25H512NWxxAM test run. I would like to gather feedback on this
+entire series before providing a very detailed output for the 5 other
+almost identical chips.
 ---
- Documentation/driver-api/mtd/spi-nor.rst | 36 ++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+ drivers/mtd/spi-nor/winbond.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/Documentation/driver-api/mtd/spi-nor.rst b/Documentation/driver-api/mtd/spi-nor.rst
-index d56ff5c42a98af23a65097c9b77cd20ef2504a49..e00ca19e7dd6cb3a118b81f8a1fe36470355fa42 100644
---- a/Documentation/driver-api/mtd/spi-nor.rst
-+++ b/Documentation/driver-api/mtd/spi-nor.rst
-@@ -321,3 +321,39 @@ section, after the ``---`` marker.
-      ------------------+----------+--------
-      00000000-0000ffff |   locked | 1
-      00010000-03ffffff | unlocked | 1023
-+
-+   If the flash features a Complement (CMP) bit, we can protect with
-+   more granularity above half of the capacity. Let's lock all but one
-+   block, then unlock one more block::
-+
-+    root@1:~# all_but_one=$((($size / $bs) - 1))
-+    root@1:~# flash_lock -u /dev/mtd0
-+    root@1:~# flash_lock -l /dev/mtd0 $bs $all_but_one # all but the first
-+    root@1:~# show_sectors
-+    software locked sectors
-+     region (in hex)   | status   | #blocks
-+     ------------------+----------+--------
-+     00000000-0000ffff | unlocked | 1
-+     00010000-03ffffff |   locked | 1023
-+    root@1:~# flash_lock -u /dev/mtd0 $bs 1 # all but the two first
-+    root@1:~# show_sectors
-+    software locked sectors
-+     region (in hex)   | status   | #blocks
-+     ------------------+----------+--------
-+     00000000-0001ffff | unlocked | 2
-+     00020000-03ffffff |   locked | 1022
-+    root@1:~# flash_lock -u /dev/mtd0
-+    root@1:~# flash_lock -l /dev/mtd0 0 $all_but_one # same from the other side
-+    root@1:~# show_sectors
-+    software locked sectors
-+     region (in hex)   | status   | #blocks
-+     ------------------+----------+--------
-+     00000000-03feffff |   locked | 1023
-+     03ff0000-03ffffff | unlocked | 1
-+    root@1:~# flash_lock -u /dev/mtd0 $(($size - (2 * $bs))) 1 # all but two
-+    root@1:~# show_sectors
-+    software locked sectors
-+     region (in hex)   | status   | #blocks
-+     ------------------+----------+--------
-+     00000000-03fdffff |   locked | 1022
-+     03fe0000-03ffffff | unlocked | 2
+diff --git a/drivers/mtd/spi-nor/winbond.c b/drivers/mtd/spi-nor/winbond.c
+index fb855fe44733db5664c200520d19a6be33edc323..22a923e6b9d7d8f1571cd6b45a688c08ff400b63 100644
+--- a/drivers/mtd/spi-nor/winbond.c
++++ b/drivers/mtd/spi-nor/winbond.c
+@@ -346,27 +346,33 @@ static const struct flash_info winbond_nor_parts[] = {
+ 	}, {
+ 		/* W25Q01NWxxIQ */
+ 		.id = SNOR_ID(0xef, 0x60, 0x21),
+-		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
++		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
++			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
+ 	}, {
+ 		/* W25Q01NWxxIM */
+ 		.id = SNOR_ID(0xef, 0x80, 0x21),
+-		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
++		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
++			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
+ 	}, {
+ 		/* W25Q02NWxxIM */
+ 		.id = SNOR_ID(0xef, 0x80, 0x22),
+-		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
++		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
++			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
+ 	}, {
+ 		/* W25H512NWxxAM */
+ 		.id = SNOR_ID(0xef, 0xa0, 0x20),
+-		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
++		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
++			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
+ 	}, {
+ 		/* W25H01NWxxAM */
+ 		.id = SNOR_ID(0xef, 0xa0, 0x21),
+-		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
++		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
++			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
+ 	}, {
+ 		/* W25H02NWxxAM */
+ 		.id = SNOR_ID(0xef, 0xa0, 0x22),
+-		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 | SPI_NOR_4BIT_BP,
++		.flags = SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_TB_SR_BIT6 |
++			 SPI_NOR_4BIT_BP | SPI_NOR_HAS_CMP,
+ 	},
+ };
+ 
 
 -- 
 2.51.0
