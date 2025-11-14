@@ -1,156 +1,182 @@
-Return-Path: <linux-doc+bounces-66728-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66731-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3E21C5E939
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 18:29:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0558C5E945
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 18:30:22 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 20F0D4F3C62
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 17:04:54 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 4D8944E3199
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Nov 2025 17:10:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DBD533C523;
-	Fri, 14 Nov 2025 17:03:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="M8S8xBJE"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 959752C21E6;
+	Fri, 14 Nov 2025 17:10:28 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89E633385A9;
-	Fri, 14 Nov 2025 17:03:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8419F26B2D3;
+	Fri, 14 Nov 2025 17:10:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763139802; cv=none; b=bzIzxYIeg26yXeFVu7m0EjOrtfauUtvxU+m5IVQMx7Evra29ylf8ErPZuqZuRKt6D6AO5KBYDYsLvlDU+RxI04/88g1zyUqUMs2aiyOOCIkwTq9hiaaxGQkmCZJjvIHJQ6eg9l0CtkKO9p6EMss2htzA3Gq6VJSeRFpdhUobQ5w=
+	t=1763140228; cv=none; b=BO2uUG82PEtI/iL2OFr4qNegfxbzrKWGxWcUrZ348cTQ7eppmcV5PRZMAl1EYJBsK+wP7dT8Ww9rn7Y2+DEJ7mLDoqwlTQuPDHG0GcvhtasiLc+scGOl9OyoO1+cC2d8uYlau47CulQuXORcdARAJSsxFBMiO+O9K6zFyNbt0kU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763139802; c=relaxed/simple;
-	bh=40WG8/2e61IMWsDRpUFUHulUyBgQPDILQimEoI6b3o0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=oI+IzLf6Zaim69qJ7qAIQ5dNROgMNwWrl79cXRwzx3u1IZ5LPuokFgY/L+d1ygA3+vy9nMIinouQCQw48T/NnXvfb1s5tE6BlrT6ctXt9hY/9Ktd2/OHPu3urrQ8KDClSm1sDu8K9NbYUyeTesigIy/W+949FDqg5mE3wIiUATE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=M8S8xBJE; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1763139798;
-	bh=40WG8/2e61IMWsDRpUFUHulUyBgQPDILQimEoI6b3o0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=M8S8xBJEF6NP0G6uCcL4pzPuSLINAukvQRezI3HLi/ICTZ6C6p+HUpJ5DhYf9vM9J
-	 exc023mnPyW00DCZMTpHmT/UVdl4iNXruk/yTVBmSKhW2Hiw1F/jtWEkk2ajyqjuTI
-	 res1Ab9odYCMy8hC1Twov3Ge7/dNJQIj4h+kpIbHUmM8OVVm3Z9IKAaeuG+I6m7PTw
-	 C5mu6hvd8dzfamQ4S9gIM4W0YhCvD1AIZKi67gAcbmBH8q/sk/KYNjYp2dt2EP38Gq
-	 Tqkoi3qGgKJQAvLhRkqeQK/uc+OkRlR9rWlHd9D+/8Fq6VaUvoUhFYFR3+yGsQFrwk
-	 qUKwbWO52pcCw==
-Received: from debian-rockchip-rock5b-rk3588.. (unknown [IPv6:2a01:e0a:5e3:6100:826d:bc07:e98c:84a])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: loicmolinari)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 9494817E0927;
-	Fri, 14 Nov 2025 18:03:17 +0100 (CET)
-From: =?UTF-8?q?Lo=C3=AFc=20Molinari?= <loic.molinari@collabora.com>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Boris Brezillon <boris.brezillon@collabora.com>,
-	Rob Herring <robh@kernel.org>,
-	Steven Price <steven.price@arm.com>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Melissa Wen <mwen@igalia.com>,
-	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
-	Hugh Dickins <hughd@google.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	=?UTF-8?q?Lo=C3=AFc=20Molinari?= <loic.molinari@collabora.com>,
-	Al Viro <viro@zeniv.linux.org.uk>,
-	=?UTF-8?q?Miko=C5=82aj=20Wasiak?= <mikolaj.wasiak@intel.com>,
-	Christian Brauner <brauner@kernel.org>,
-	Nitin Gote <nitin.r.gote@intel.com>,
-	Andi Shyti <andi.shyti@linux.intel.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Christopher Healy <healych@amazon.com>,
-	Matthew Wilcox <willy@infradead.org>,
-	Bagas Sanjaya <bagasdotme@gmail.com>
-Cc: linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	kernel@collabora.com
-Subject: [PATCH v9 11/11] Documentation/gpu/drm-mm: Add THP paragraph to GEM mapping section
-Date: Fri, 14 Nov 2025 18:03:02 +0100
-Message-ID: <20251114170303.2800-12-loic.molinari@collabora.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251114170303.2800-1-loic.molinari@collabora.com>
-References: <20251114170303.2800-1-loic.molinari@collabora.com>
+	s=arc-20240116; t=1763140228; c=relaxed/simple;
+	bh=lwuO3l3OhkEYk8WmTHhDZ8zlYyo5zBacqtocE1oArGg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=P+/EaII3obsYoijtv/w5z6gmJ8atY2VLNxUeg8B9u5jbYFsU6mf8Z1Z056mWSyM/U6uLZlGx+fhCQioqS4OoL9OTKWCPLZuk2EwKLiG4IX1zSW6AEaPOtbZIOMK3tgDDAn3AU9AJwMr7MOpuFMEMMREHoYkc6spPyA5LfG+xQhw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D57521063;
+	Fri, 14 Nov 2025 09:10:16 -0800 (PST)
+Received: from localhost (e132581.arm.com [10.1.196.87])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1BBB23F63F;
+	Fri, 14 Nov 2025 09:10:23 -0800 (PST)
+Date: Fri, 14 Nov 2025 17:10:22 +0000
+From: Leo Yan <leo.yan@arm.com>
+To: James Clark <james.clark@linaro.org>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@linaro.org>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jonathan Corbet <corbet@lwn.net>, coresight@lists.linaro.org,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 11/13] coresight: Extend width of timestamp format
+ attribute
+Message-ID: <20251114171022.GL3568724@e132581.arm.com>
+References: <20251112-james-cs-syncfreq-v4-0-165ba21401dc@linaro.org>
+ <20251112-james-cs-syncfreq-v4-11-165ba21401dc@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251112-james-cs-syncfreq-v4-11-165ba21401dc@linaro.org>
 
-Add a paragraph to the GEM objects mapping section explaining how
-transparent huge pages are handled by GEM.
+On Wed, Nov 12, 2025 at 03:22:17PM +0000, James Clark wrote:
+> 'timestamp' is currently 1 bit wide for on/off. To enable setting
+> different intervals in a later commit, extend it to 4 bits wide. Keep
+> the old bit position for backward compatibility but don't publish in the
+> format/ folder. It will be removed from the documentation and can be
+> removed completely after enough time has passed.
+> 
+> ETM3x doesn't support different intervals, so validate that the value is
+> either 0 or 1.
+> 
+> Tools that read the bit positions from the format/ folder will continue
+> to work as before, setting either 0 or 1 for off/on. Tools that
+> incorrectly didn't do this and set the ETM_OPT_TS bit directly will also
+> continue to work because that old bit is still checked.
+> 
+> This avoids adding a second timestamp attribute for setting the
+> interval. This would be awkward to use because tools would have to be
+> updated to ensure that the timestamps are always enabled when an
+> interval is set, and the driver would have to validate that both options
+> are provided together. All this does is implement the semantics of a
+> single enum but spread over multiple fields.
 
-v4:
-- fix wording after huge_pages handler removal
+Just a bit thoughts.  My understanding is that the PMU format would
+clearly represent the PMU characteristics.  I imagine that after reading
+the ETM specification, someone should be able to easily map to the PMU
+formats (enable field and counter field separately).
 
-v6:
-- fix wording after map_pages handler removal
+Alternatively, this patch provides a user-friendly interface that allows
+all settings (enable + counter) in one go.  Users can benefit from it
+without knowing the underlying hardware mechanism, but might need to
+digest its semantics.  As this will be well documented, I am fine for
+current approach:
 
-Signed-off-by: Loïc Molinari <loic.molinari@collabora.com>
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/gpu/drm-mm.rst | 22 +++++++++++++++++-----
- 1 file changed, 17 insertions(+), 5 deletions(-)
+Reviewed-by: Leo Yan <leo.yan@arm.com>
 
-diff --git a/Documentation/gpu/drm-mm.rst b/Documentation/gpu/drm-mm.rst
-index d55751cad67c..d69eab0b4093 100644
---- a/Documentation/gpu/drm-mm.rst
-+++ b/Documentation/gpu/drm-mm.rst
-@@ -290,15 +290,27 @@ The open and close operations must update the GEM object reference
- count. Drivers can use the drm_gem_vm_open() and drm_gem_vm_close() helper
- functions directly as open and close handlers.
- 
--The fault operation handler is responsible for mapping individual pages
--to userspace when a page fault occurs. Depending on the memory
--allocation scheme, drivers can allocate pages at fault time, or can
--decide to allocate memory for the GEM object at the time the object is
--created.
-+The fault operation handler is responsible for mapping pages to
-+userspace when a page fault occurs. Depending on the memory allocation
-+scheme, drivers can allocate pages at fault time, or can decide to
-+allocate memory for the GEM object at the time the object is created.
- 
- Drivers that want to map the GEM object upfront instead of handling page
- faults can implement their own mmap file operation handler.
- 
-+In order to reduce page table overhead, if the internal shmem mountpoint
-+"shm_mnt" is configured to use transparent huge pages (for builds with
-+CONFIG_TRANSPARENT_HUGEPAGE enabled) and if the shmem backing store
-+managed to allocate a huge page for a faulty address, the fault handler
-+will first attempt to insert that huge page into the VMA before falling
-+back to individual page insertion. mmap() user address alignment for GEM
-+objects is handled by providing a custom get_unmapped_area file
-+operation which forwards to the shmem backing store. For most drivers,
-+which don't create a huge mountpoint by default or through a module
-+parameter, transparent huge pages can be enabled by either setting the
-+"transparent_hugepage_shmem" kernel parameter or the
-+"/sys/kernel/mm/transparent_hugepage/shmem_enabled" sysfs knob.
-+
- For platforms without MMU the GEM core provides a helper method
- drm_gem_dma_get_unmapped_area(). The mmap() routines will call this to get a
- proposed address for the mapping.
--- 
-2.47.3
 
+> Signed-off-by: James Clark <james.clark@linaro.org>
+> ---
+>  drivers/hwtracing/coresight/coresight-etm-perf.h   | 13 ++++++++++---
+>  drivers/hwtracing/coresight/coresight-etm3x-core.c |  9 ++++++++-
+>  drivers/hwtracing/coresight/coresight-etm4x-core.c |  4 +++-
+>  3 files changed, 21 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.h b/drivers/hwtracing/coresight/coresight-etm-perf.h
+> index c794087a0e99..24d929428633 100644
+> --- a/drivers/hwtracing/coresight/coresight-etm-perf.h
+> +++ b/drivers/hwtracing/coresight/coresight-etm-perf.h
+> @@ -23,6 +23,9 @@ struct cscfg_config_desc;
+>  #define ATTR_CFG_FLD_preset_CFG			config
+>  #define ATTR_CFG_FLD_preset_LO			0
+>  #define ATTR_CFG_FLD_preset_HI			3
+> +#define ATTR_CFG_FLD_timestamp_CFG		config
+> +#define ATTR_CFG_FLD_timestamp_LO		4
+> +#define ATTR_CFG_FLD_timestamp_HI		7
+>  #define ATTR_CFG_FLD_branch_broadcast_CFG	config
+>  #define ATTR_CFG_FLD_branch_broadcast_LO	8
+>  #define ATTR_CFG_FLD_branch_broadcast_HI	8
+> @@ -35,9 +38,13 @@ struct cscfg_config_desc;
+>  #define ATTR_CFG_FLD_contextid2_CFG		config
+>  #define ATTR_CFG_FLD_contextid2_LO		15
+>  #define ATTR_CFG_FLD_contextid2_HI		15
+> -#define ATTR_CFG_FLD_timestamp_CFG		config
+> -#define ATTR_CFG_FLD_timestamp_LO		28
+> -#define ATTR_CFG_FLD_timestamp_HI		28
+> +/*
+> + * Old position of 'timestamp' and not published in sysfs. Remove at a later
+> + * date if necessary.
+> + */
+> +#define ATTR_CFG_FLD_deprecated_timestamp_CFG	config
+> +#define ATTR_CFG_FLD_deprecated_timestamp_LO	28
+> +#define ATTR_CFG_FLD_deprecated_timestamp_HI	28
+>  #define ATTR_CFG_FLD_retstack_CFG		config
+>  #define ATTR_CFG_FLD_retstack_LO		29
+>  #define ATTR_CFG_FLD_retstack_HI		29
+> diff --git a/drivers/hwtracing/coresight/coresight-etm3x-core.c b/drivers/hwtracing/coresight/coresight-etm3x-core.c
+> index 584d653eda81..d4c04e563bf6 100644
+> --- a/drivers/hwtracing/coresight/coresight-etm3x-core.c
+> +++ b/drivers/hwtracing/coresight/coresight-etm3x-core.c
+> @@ -338,9 +338,16 @@ static int etm_parse_event_config(struct etm_drvdata *drvdata,
+>  	if (ATTR_CFG_GET_FLD(attr, cycacc))
+>  		config->ctrl |= ETMCR_CYC_ACC;
+>  
+> -	if (ATTR_CFG_GET_FLD(attr, timestamp))
+> +	if (ATTR_CFG_GET_FLD(attr, deprecated_timestamp) ||
+> +	    ATTR_CFG_GET_FLD(attr, timestamp))
+>  		config->ctrl |= ETMCR_TIMESTAMP_EN;
+>  
+> +	if (ATTR_CFG_GET_FLD(attr, timestamp) > 1) {
+> +		dev_dbg(&drvdata->csdev->dev,
+> +			"timestamp format attribute should be 0 (off) or 1 (on)\n");
+> +		return -EINVAL;
+> +	}
+> +
+>  	/*
+>  	 * Possible to have cores with PTM (supports ret stack) and ETM (never
+>  	 * has ret stack) on the same SoC. So only enable when it can be honored
+> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-core.c b/drivers/hwtracing/coresight/coresight-etm4x-core.c
+> index 1aa0357a5ce7..d4e294cd48ae 100644
+> --- a/drivers/hwtracing/coresight/coresight-etm4x-core.c
+> +++ b/drivers/hwtracing/coresight/coresight-etm4x-core.c
+> @@ -28,6 +28,7 @@
+>  #include <linux/amba/bus.h>
+>  #include <linux/seq_file.h>
+>  #include <linux/uaccess.h>
+> +#include <linux/perf/arm_pmu.h>
+>  #include <linux/perf_event.h>
+>  #include <linux/perf/arm_pmu.h>
+>  #include <linux/platform_device.h>
+> @@ -800,7 +801,8 @@ static int etm4_parse_event_config(struct coresight_device *csdev,
+>  			cc_threshold = drvdata->ccitmin;
+>  		config->ccctlr = cc_threshold;
+>  	}
+> -	if (ATTR_CFG_GET_FLD(attr, timestamp)) {
+> +	if (ATTR_CFG_GET_FLD(attr, deprecated_timestamp) ||
+> +	    ATTR_CFG_GET_FLD(attr, timestamp)) {
+>  		/*
+>  		 * Configure timestamps to be emitted at regular intervals in
+>  		 * order to correlate instructions executed on different CPUs
+> 
+> -- 
+> 2.34.1
+> 
 
