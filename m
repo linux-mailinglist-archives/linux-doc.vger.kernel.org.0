@@ -1,52 +1,52 @@
-Return-Path: <linux-doc+bounces-66812-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66814-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F287C611DC
-	for <lists+linux-doc@lfdr.de>; Sun, 16 Nov 2025 09:51:21 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 74B36C61200
+	for <lists+linux-doc@lfdr.de>; Sun, 16 Nov 2025 10:17:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id ABF443624C2
-	for <lists+linux-doc@lfdr.de>; Sun, 16 Nov 2025 08:51:20 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 24E443AE09E
+	for <lists+linux-doc@lfdr.de>; Sun, 16 Nov 2025 09:17:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9516C221726;
-	Sun, 16 Nov 2025 08:51:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F93C18D636;
+	Sun, 16 Nov 2025 09:17:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="lS57NlXV"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="iKmH86oV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m15592.qiye.163.com (mail-m15592.qiye.163.com [101.71.155.92])
+Received: from mail-m15591.qiye.163.com (mail-m15591.qiye.163.com [101.71.155.91])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DEBE23EA95
-	for <linux-doc@vger.kernel.org>; Sun, 16 Nov 2025 08:51:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.92
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 139DFEAF9
+	for <linux-doc@vger.kernel.org>; Sun, 16 Nov 2025 09:17:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.91
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763283077; cv=none; b=n8AL1Aq7/80lV7hKqSJn4Qne+bNl5+0dGwGn7tg6fXJ+pScCQOdfLoF2jOD2ytUc+tgzMtm2IOMvGq2pD0g0ASjkA9W7SRhf7pGPSck/RmrBmowQQ8yWBJe/1beTWCOvISVXikqnah57DFA8rJI8UuUZ56HcT507/YzCdS+GQEk=
+	t=1763284673; cv=none; b=P38EGyMjB16tR8IqA0lfLWd2wZC6CmCQVwsexYUfKiPDkJxHhk3h7rzXtvfif8W2jJCQZUm0rVpWLLZ1bqQ8HXBfp8QVj14Q5EhL8I1Y9DPhm8WrFa2skaI9faEBzAZEVFlBhkI86bIzSCMhRJd5ZxKpkpqhtOWLIno+vcNtvJI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763283077; c=relaxed/simple;
+	s=arc-20240116; t=1763284673; c=relaxed/simple;
 	bh=KFOOqqonmQshkmSToomFHPisuar2VI2j8xAV9tpr9ho=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=c7k3udZ9rtC3WydQBlglkVQ4aefw0x/KDNt2qJuOirVf9PzhtgQv6kSiKPjI9VU0bllO14PjgIx4uWWgR7EPFik7icYvXg/SaslI9kRO3n7uFL81xNB+nPI8jQa65207f2z/+Nk5q5nFeCvdApbOO+Gvwk7kbey76WO2YXhKlfc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=lS57NlXV; arc=none smtp.client-ip=101.71.155.92
+	 MIME-Version:Content-Type; b=QCNPhtzDAdsO0vs/WJB3JxuecU473oQRPsN9Ao6+SQrGkKmMJ16Y0XlvoVDaXsmb4SDpFIseS0ULj5nV7vuBIp6GvRkF29Pyu7NEqBi90OglKS7pifHzv6Pf9juhMAKiAp4GYsnrKWzrN/dxw/Rr4NVavnodzub4bh7idbaFlvQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=iKmH86oV; arc=none smtp.client-ip=101.71.155.91
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from localhost.localdomain (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 29ba25734;
-	Sun, 16 Nov 2025 16:51:04 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 29ba56936;
+	Sun, 16 Nov 2025 17:17:39 +0800 (GMT+08:00)
 From: ke zijie <kezijie@leap-io-kernel.com>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev
-Cc: dzm91@hust.edu.cn,
-	corbet@lwn.net,
+To: lkp@intel.com
+Cc: alexs@kernel.org,
+	doubled@leap-io-kernel.com,
 	linux-doc@vger.kernel.org,
-	doubled@leap-io-kernel.com
+	oe-kbuild-all@lists.linux.dev,
+	ke zijie <kezijie@leap-io-kernel.com>
 Subject: [PATCH] docs: zh_CN: scsi: fix broken references in scsi-parameters.rst
-Date: Sun, 16 Nov 2025 16:51:02 +0800
-Message-Id: <20251116085102.1740613-2-kezijie@leap-io-kernel.com>
+Date: Sun, 16 Nov 2025 17:16:56 +0800
+Message-Id: <20251116091656.1788887-1-kezijie@leap-io-kernel.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20251116085102.1740613-1-kezijie@leap-io-kernel.com>
-References: <20251116085102.1740613-1-kezijie@leap-io-kernel.com>
+In-Reply-To: <202511130315.WOiKJQTu-lkp@intel.com>
+References: <202511130315.WOiKJQTu-lkp@intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -55,14 +55,13 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a8bdc54ce09d8kunme4efcb9e325f006
+X-HM-Tid: 0a9a8bf4abf709d8kunm0fae0246329af04
 X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCQhhNVhpOTUMfSksdT0JCSVYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0JKVUpLS1
-	VLWQY+
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDQ0JNVkgYGklMTEkdHh9KHlYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg++
 DKIM-Signature: a=rsa-sha256;
-	b=lS57NlXV3/g0PN2E4wexiKpFQ3P7bZVEyN5ulKDxREvKoUMrFmOeA8nCMB2YDl2+SyrtGm0qbOF4/GaHE/vibLPaLciX3ttrGptTrGlz9sCggCPp6oLT0OYqXVANSZptXxKjTeqjZMV4dJmDfv76LTFYL15ksyDZ5tz3SdmQeL4Uv96AiPSl9cIkwWUrTpmQaV4PUhZZcu1TQSWV29QqbLbonQ8t1He9g+T6aYtVMZXAOpzrMod6G33m38GleSJ2tpnJICgA4S1djcMarlKq8xm/NV/9knb//Gslds7udKLQ0Juv5szlutt86kAOh7713kSqdmHfAsz3aGXcdpW/pQ==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	b=iKmH86oVxhdarER8UNeroYh2+GusAGEsHUqN6ok/+XCfnUvkFlXpbohZTIu5wm3LDbtDld3IeXzeIDflcFDxVR7IyqDor7azdpyOEGe6jOf/nzTYkQG4tmexi2YawTY8SAa5JJkoJL/h3t42ZVQ50IXqJFTFz+Dqc8sG867lihJWsZlR9qpIdCNt7QdoGVlFJYxp1UtDIapd7rtZSXNNTOToN5ltMu4gyuG0TslVkCsNf8UJw1NVqXJpJJBIsysWG9SYPRzlHaiigo37sdVyE2S/OloH1oMxpI7FgUiFRvMTz9j0TMSZ2l48ERz08ZLz1EtwJJ3JZAly5C9ywb3O+Q==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
 	bh=Kk6pZ2Auo5LbAzp2gZb/w4HYA9Nswbh9mg5IA/Vd2KI=;
 	h=date:mime-version:subject:message-id:from;
 
