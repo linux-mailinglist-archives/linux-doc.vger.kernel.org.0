@@ -1,136 +1,192 @@
-Return-Path: <linux-doc+bounces-66939-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66941-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BD62C65333
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 17:40:28 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 79CCAC652B2
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 17:34:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 9C6E1385837
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 16:32:02 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTPS id 51F9529071
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 16:34:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1C6E2D2398;
-	Mon, 17 Nov 2025 16:31:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CKDVwb9C"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BEA0C2D24A9;
+	Mon, 17 Nov 2025 16:34:18 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from cstnet.cn (smtp84.cstnet.cn [159.226.251.84])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A33D514884C;
-	Mon, 17 Nov 2025 16:31:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D29C2C375A;
+	Mon, 17 Nov 2025 16:34:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.84
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763397102; cv=none; b=d8PZLbiI9oNRpxxGFBobRXtm+ercfdO8jkf64bdxcUcuyZ4GlSPqJyF58O+/qQj8B9zmQaSVvk+qoXJVaIOhIl9T9G6CKb2h69POi6OmTzBlcTHM4nKDPE2AXumyu8xjYjcJpNCUHc4U3KBwkJk9gztGA5CXEFI9NzOvQwEdJoo=
+	t=1763397258; cv=none; b=q/kJ8BJdNklMzQ5bvUEAtuVB+6b6fW9ysURmu7oF8FRdLVZhpnAIK6WhOH13i8lypKxJsiUFX/cTNCoXAE0CvVvALTD/1O+f8OZfw2xXetBCZrDKu40OJX/AbApqtcPCLAIhzHlRP+KTxVAwPRefxGYSBzoI0g9PhxKjlSI0MVY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763397102; c=relaxed/simple;
-	bh=V2zY1ETyQRDK01tLZ42mxEb4Ap17uL4fVoksajMATwc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gP/nBAeUH0qqM9TQCaa5Ymb9yUwCu2zOsVGWCfjF54x0qH8IhPdxq95WCZ9LGMY+t3ton3t973+0ZjqHBGfA42X3aHTHHJqXDJFXZ/EJcf3UaOLaNuk9QFOj8si6mKLD4tHWtkJe5D/94BfYqP1Ql1XEtaWhZmq5FHElCPKKQsw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CKDVwb9C; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 851B5C2BC86;
-	Mon, 17 Nov 2025 16:31:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763397102;
-	bh=V2zY1ETyQRDK01tLZ42mxEb4Ap17uL4fVoksajMATwc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=CKDVwb9CzcwhmjtudLLTgZB7LPLtMAvlwnCnnoyive0AGEOjXlhJ6CH3QwCX8ch7M
-	 NmPCc8swx4beqbwsWhu4NFz5rE12EdAnLlh1y0vVmctYtPEhwrXEnhTIT1rR2jLHrG
-	 z5mMtq7E3/eQz5OMG2Kj8+lidHq3ownecRVaEZcPL8OxsoPBPDt7NyDHtRQp213saw
-	 aAm7RVseZz9o43VFPuMDyvl7WQUCDGYRgIug7vU5ok0cGT4cYwrIXFluv6x0bsjgs2
-	 zJzFON19EfznLeLoWOAqSo+YD/ZU7cHgpsJJQRaaaFadnPbNOO+FGn2M89DmpVCGHZ
-	 TuUM5fCGI6YHA==
-Message-ID: <55612b5c-be7d-4176-bb0b-31a32c35c890@kernel.org>
-Date: Mon, 17 Nov 2025 17:31:34 +0100
+	s=arc-20240116; t=1763397258; c=relaxed/simple;
+	bh=QEA58ISPvgLYWLEqr1jJGitDS6An6AkVJmZcob3iw2c=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=s3NqX/WqOJIRZJuihQqZpzWgUP/2e3TXL/4NXYnDY3eP4CQ+JlPevdvU3q7kue3qhGdul/tzIMsxr7N6yBnq2/CBctCdqzyXH37Jw71OzWLmQTQ0V1V2BPbizt+dCVVpjfPgbN8DgeaIl7CzevL51NfmNj/TVuDrN2iCNfhB78M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=isrc.iscas.ac.cn; spf=pass smtp.mailfrom=isrc.iscas.ac.cn; arc=none smtp.client-ip=159.226.251.84
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=isrc.iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=isrc.iscas.ac.cn
+Received: from Mobilestation.localdomain (unknown [183.6.59.216])
+	by APP-05 (Coremail) with SMTP id zQCowABXT2BiThtpY5sTAQ--.27246S3;
+	Tue, 18 Nov 2025 00:33:53 +0800 (CST)
+From: Yao Zihong <zihong.plct@isrc.iscas.ac.cn>
+To: linux-riscv@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Cc: ajones@ventanamicro.com,
+	zihong.plct@isrc.iscas.ac.cn,
+	zihongyao@outlook.com,
+	zhangyin2018@iscas.ac.cn,
+	Jonathan Corbet <corbet@lwn.net>,
+	Paul Walmsley <pjw@kernel.org>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Alexandre Ghiti <alex@ghiti.fr>,
+	=?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+	Cyan Yang <cyan.yang@sifive.com>,
+	Yunhui Cui <cuiyunhui@bytedance.com>,
+	Charlie Jenkins <charlie@rivosinc.com>,
+	=?UTF-8?q?Miquel=20Sabat=C3=A9=20Sol=C3=A0?= <mikisabate@gmail.com>,
+	Nam Cao <namcao@linutronix.de>,
+	Jingwei Wang <wangjingwei@iscas.ac.cn>,
+	Aleksa Paunovic <aleksa.paunovic@htecgroup.com>,
+	Inochi Amaoto <inochiama@gmail.com>,
+	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+	linux-doc@vger.kernel.org (open list:DOCUMENTATION)
+Subject: [PATCH v4 1/2] riscv: hwprobe: Expose Zicbop extension and its block size
+Date: Tue, 18 Nov 2025 00:32:39 +0800
+Message-ID: <20251117163333.31182-2-zihong.plct@isrc.iscas.ac.cn>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20251117163333.31182-1-zihong.plct@isrc.iscas.ac.cn>
+References: <20251117163333.31182-1-zihong.plct@isrc.iscas.ac.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] MAINTAINERS: Add tids driver as maintained
-To: Thomas Marangoni <Thomas.Marangoni@becom-group.com>,
- linux-hwmon@vger.kernel.org
-Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
- linux@roeck-us.net, corbet@lwn.net, Jonathan.Cameron@huawei.com,
- Frank.Li@nxp.com, michal.simek@amd.com, rodrigo.gobbi.7@gmail.com,
- chou.cosmo@gmail.com, wenswang@yeah.net, nuno.sa@analog.com,
- paweldembicki@gmail.com, apokusinski01@gmail.com, eajames@linux.ibm.com,
- vassilisamir@gmail.com, heiko@sntech.de, neil.armstrong@linaro.org,
- prabhakar.mahadev-lad.rj@bp.renesas.com, kever.yang@rock-chips.com,
- mani@kernel.org, dev@kael-k.io, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20251117123809.47488-1-Thomas.Marangoni@becom-group.com>
- <20251117123809.47488-5-Thomas.Marangoni@becom-group.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <20251117123809.47488-5-Thomas.Marangoni@becom-group.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:zQCowABXT2BiThtpY5sTAQ--.27246S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxGw1Utw1DGw17urW5Ar1DWrg_yoWrAw1kpF
+	4DZrsxWFs8Cw4xCFWxt3WkZrn5J3Z7Kw43KF1Uu3yUJFW7trWrXr9xtFsIyr1DtFyFva92
+	gF4agrZYya9rArDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUH2b7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
+	8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF
+	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcV
+	CY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r1j6r4UM28EF7xvwVC2z280aVCY
+	1x0267AKxVW8JVW8Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
+	8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCF
+	s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFI
+	xGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AFwI0_GFv_Wrylc7CjxVAKzI0EY4vE52x0
+	82I5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+	0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y
+	0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+	W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+	IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8Jl1DUUUU
+	U==
+X-CM-SenderInfo: p2lk00vjoszunw6l223fol2u1dvotugofq/
 
-On 17/11/2025 13:38, Thomas Marangoni wrote:
-> I've added myself as maintainer for the tids driver.
-> ---
->  MAINTAINERS | 6 ++++++
->  1 file changed, 6 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index ec635515c0c4..3f981252fa2a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -27965,6 +27965,12 @@ F:	Documentation/ABI/stable/sysfs-platform-wmi-bmof
->  F:	Documentation/wmi/devices/wmi-bmof.rst
->  F:	drivers/platform/x86/wmi-bmof.c
->  
-> +WSEN TIDS DRIVER
+- Add `RISCV_HWPROBE_EXT_ZICBOP` to report the presence of the
+  Zicbop extension.
+- Add `RISCV_HWPROBE_KEY_ZICBOP_BLOCK_SIZE` to expose the block
+  size (in bytes) when Zicbop is supported.
+- Update hwprobe.rst to document the new extension bit and block
+  size key, following the existing Zicbom/Zicboz style.
 
-S > O.
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Yao Zihong <zihong.plct@isrc.iscas.ac.cn>
+---
+ Documentation/arch/riscv/hwprobe.rst  | 8 +++++++-
+ arch/riscv/include/asm/hwprobe.h      | 2 +-
+ arch/riscv/include/uapi/asm/hwprobe.h | 2 ++
+ arch/riscv/kernel/sys_hwprobe.c       | 6 ++++++
+ 4 files changed, 16 insertions(+), 2 deletions(-)
 
-Best regards,
-Krzysztof
+diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/riscv/hwprobe.rst
+index 2f449c9b15bd..52f12af43b9d 100644
+--- a/Documentation/arch/riscv/hwprobe.rst
++++ b/Documentation/arch/riscv/hwprobe.rst
+@@ -275,6 +275,9 @@ The following keys are defined:
+        ratified in commit 49f49c842ff9 ("Update to Rafified state") of
+        riscv-zabha.
+ 
++  * :c:macro:`RISCV_HWPROBE_EXT_ZICBOP`: The Zicbop extension is supported, as
++       ratified in commit 3dd606f ("Create cmobase-v1.0.pdf") of riscv-CMOs.
++
+ * :c:macro:`RISCV_HWPROBE_KEY_CPUPERF_0`: Deprecated.  Returns similar values to
+      :c:macro:`RISCV_HWPROBE_KEY_MISALIGNED_SCALAR_PERF`, but the key was
+      mistakenly classified as a bitmask rather than a value.
+@@ -369,4 +372,7 @@ The following keys are defined:
+ 
+     * :c:macro:`RISCV_HWPROBE_VENDOR_EXT_XSFVFWMACCQQQ`: The Xsfvfwmaccqqq
+         vendor extension is supported in version 1.0 of Matrix Multiply Accumulate
+-	Instruction Extensions Specification.
+\ No newline at end of file
++	Instruction Extensions Specification.
++
++* :c:macro:`RISCV_HWPROBE_KEY_ZICBOP_BLOCK_SIZE`: An unsigned int which
++  represents the size of the Zicbop block in bytes.
+diff --git a/arch/riscv/include/asm/hwprobe.h b/arch/riscv/include/asm/hwprobe.h
+index 58f8dda73259..8c572a464719 100644
+--- a/arch/riscv/include/asm/hwprobe.h
++++ b/arch/riscv/include/asm/hwprobe.h
+@@ -8,7 +8,7 @@
+ 
+ #include <uapi/asm/hwprobe.h>
+ 
+-#define RISCV_HWPROBE_MAX_KEY 14
++#define RISCV_HWPROBE_MAX_KEY 15
+ 
+ static inline bool riscv_hwprobe_key_is_valid(__s64 key)
+ {
+diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/uapi/asm/hwprobe.h
+index 5d30a4fae37a..9cc508be54c5 100644
+--- a/arch/riscv/include/uapi/asm/hwprobe.h
++++ b/arch/riscv/include/uapi/asm/hwprobe.h
+@@ -82,6 +82,7 @@ struct riscv_hwprobe {
+ #define		RISCV_HWPROBE_EXT_ZAAMO		(1ULL << 56)
+ #define		RISCV_HWPROBE_EXT_ZALRSC	(1ULL << 57)
+ #define		RISCV_HWPROBE_EXT_ZABHA		(1ULL << 58)
++#define		RISCV_HWPROBE_EXT_ZICBOP	(1ULL << 59)
+ #define RISCV_HWPROBE_KEY_CPUPERF_0	5
+ #define		RISCV_HWPROBE_MISALIGNED_UNKNOWN	(0 << 0)
+ #define		RISCV_HWPROBE_MISALIGNED_EMULATED	(1 << 0)
+@@ -107,6 +108,7 @@ struct riscv_hwprobe {
+ #define RISCV_HWPROBE_KEY_ZICBOM_BLOCK_SIZE	12
+ #define RISCV_HWPROBE_KEY_VENDOR_EXT_SIFIVE_0	13
+ #define RISCV_HWPROBE_KEY_VENDOR_EXT_MIPS_0	14
++#define RISCV_HWPROBE_KEY_ZICBOP_BLOCK_SIZE	15
+ /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
+ 
+ /* Flags */
+diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwprobe.c
+index 199d13f86f31..6b33fd88bf3e 100644
+--- a/arch/riscv/kernel/sys_hwprobe.c
++++ b/arch/riscv/kernel/sys_hwprobe.c
+@@ -122,6 +122,7 @@ static void hwprobe_isa_ext0(struct riscv_hwprobe *pair,
+ 		EXT_KEY(ZCB);
+ 		EXT_KEY(ZCMOP);
+ 		EXT_KEY(ZICBOM);
++		EXT_KEY(ZICBOP);
+ 		EXT_KEY(ZICBOZ);
+ 		EXT_KEY(ZICNTR);
+ 		EXT_KEY(ZICOND);
+@@ -302,6 +303,11 @@ static void hwprobe_one_pair(struct riscv_hwprobe *pair,
+ 		if (hwprobe_ext0_has(cpus, RISCV_HWPROBE_EXT_ZICBOM))
+ 			pair->value = riscv_cbom_block_size;
+ 		break;
++	case RISCV_HWPROBE_KEY_ZICBOP_BLOCK_SIZE:
++		pair->value = 0;
++		if (hwprobe_ext0_has(cpus, RISCV_HWPROBE_EXT_ZICBOP))
++			pair->value = riscv_cbop_block_size;
++		break;
+ 	case RISCV_HWPROBE_KEY_HIGHEST_VIRT_ADDRESS:
+ 		pair->value = user_max_virt_addr();
+ 		break;
+-- 
+2.47.2
+
 
