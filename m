@@ -1,138 +1,237 @@
-Return-Path: <linux-doc+bounces-66962-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66964-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26F35C65DD4
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 20:07:02 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7056DC65F95
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 20:31:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 6BD104EC2FB
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 19:05:59 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id EB77B4ED5F3
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 19:28:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B607A3321C5;
-	Mon, 17 Nov 2025 19:00:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8D073148BC;
+	Mon, 17 Nov 2025 19:28:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Bb7vhjgo"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="PQil5TVd"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74718303A1D
-	for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 19:00:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3F53284889
+	for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 19:28:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763406054; cv=none; b=jRYU9kXSkfJvD+KrtDzAhKzgj+xj6RZwotFulDZOGoXjJsd826wyPEQiRz3nzX8IoFjmCvo/R4X1okOSkoukxASeDCr+Iwvgk5Skb1qUZVDf8/hOSHiIhWnVLsXuaym50xSXUtfilBVQOX9e3SJUNlJwWxFLQWJZorJ72tXdSNY=
+	t=1763407701; cv=none; b=TvkG59JuuChIWUkc793AbOm5WDg4eFlbxnZ4W2wONQC17sTeOjohJF55o7oro0Uu4j4R2FyDa98yomczwaJVMdMalnGO7TFqnVheRBtcoEFbO3HDDodiQQmqbx37vRJSoIZft6GlHELExr9pE9x59jG5ihYn8pb0w3RGBLrqnTw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763406054; c=relaxed/simple;
-	bh=9LwQ8cgiBx+GR9gi4Ze2NRYHzMsmpVYF+u+bBwx5cCU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TFBSjh8mEy+YV7055T8gGxBuXku7D4cIBHZR1UHMpIRv2du3ZHSGxNg3AtiKIZacUVK2zmN/5jwzjKMaWMqtTydd1ZeK7i8CQKAmebCc5B8+P6MlAn+gbXJyMyv+0i77gx7odKT3GASFNfrTF47TdYEwbsnvtcSQ8KOlHNPILmI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Bb7vhjgo; arc=none smtp.client-ip=209.85.214.178
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2980d9b7df5so48415775ad.3
-        for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 11:00:52 -0800 (PST)
+	s=arc-20240116; t=1763407701; c=relaxed/simple;
+	bh=jMsl51RRcfdYOeK+ixIl6fySL+N2GY9YtwKE3nHyvoA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=UX513Tiix4NWwQTa3y5MbBl56VdnppV3vvUe3Zdy/sXlmJl1uq5KS3B8rAEdpsoM8/I3+0YXOk3qT7IvrANasy9/tIgPy6yR35TcXt1+uHABIbJt6LE9MST8NnZsSvmZvrrDNmtk2UjzKIpO+83c7mgJgJ5nRn1N7lKGq3sK8yk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=PQil5TVd; arc=none smtp.client-ip=209.85.208.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-378e8d10494so61134241fa.2
+        for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 11:28:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763406052; x=1764010852; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=H0lS2cED24LXASEO8Kaw1E9xKUmdy8WEPj1E8PP+Wtk=;
-        b=Bb7vhjgo8i3MdNxVG4EuzsP0kY56sHhKC0hWXy3SNDE+0Ky7g2//Vfq9gp+Z3YGBG2
-         kEV2VMszuPQ4nQazsSKgdPOTiRGD1zm95jdORpTJBag6XwmEn5c2/HvrxvuQ0/2Y921F
-         UvQBWH0YZMZjhyeFp2YU/N52BH0iW//+scsr+miVtegB+9hZP+42GsqTErMJdr37zFTf
-         YF7gzWQjdjmNsm/SlxP/4ZKN6wnkOMpf8uEmxEjzhHoPjE0GreCvD45hd39nEQskXra/
-         bg/GnRKMnZp3vn2z/u0j8s3BNDcw8sZ4BbHamAFyvnzIlSksGSxQ/4P1O7k3ELztEwXd
-         9h3Q==
+        d=google.com; s=20230601; t=1763407698; x=1764012498; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4BRv+8HFratcORC0sQfd604lhFEiEUlZ0QaYy4EdL4s=;
+        b=PQil5TVdSXdRODQeDw7d1JNLeudd69HwwQ+LcXOF7nDM9V5uUsIuhhyi1s7fpTSmq3
+         l2mjJNlzhayCf2oOEwZBT/5FTOe+FrYoLGWy0OM+2u1vwnmAKv9B3tURdOSbvIYgwqRd
+         qUHP9oCs0achz4wpdn2yQOLY1qw2MBLMjFmANH7Z6A0DKYA5XHKOfAbaIuq8FtNY7Dcs
+         xYWidf/NNvAX/8EFMorCY7TcHiFUCsCl3lntji+QSGjpv5237oggdRzsDadyh5pGhcdE
+         zQe/a7pUq8/gFzS37eKMGZWBxXVfDflXBEdEY0crV1ZomrQf1bSwUpUNAkFF0RMBxJfN
+         S70g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763406052; x=1764010852;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=H0lS2cED24LXASEO8Kaw1E9xKUmdy8WEPj1E8PP+Wtk=;
-        b=cP7IQy9jSxuVuxeEL2CREbi0poRPoZcqfCFq4wY3SkpM4vbE5sNSnftEyrhhSRS5IA
-         dNDzocP7jOPkgz/YpP1Sg5AYHwRdGbV3ZtGtbz2ShXpTASBYWiLZECwNMYsp3rwVgVCe
-         3WyluimsVM/sV57JQEPa7m+ZTZkENbkK7jil8xkCchVC8a19Bu90p6nEUtUhpFKgC3yQ
-         rUE8YBGFM35C+UxDwf50wUVgBgvTQ+XpiTGYThZIaGDTwp6ZJIFS37aoTJQzk/Wrv9wf
-         u87KljnyHeTIh5SuxA8dZWNyjrbIRXFqZMDzAqT1raZnPAVnkY2w+wMn+RKt2OTCZzZo
-         VALg==
-X-Forwarded-Encrypted: i=1; AJvYcCUQkohdiLonymljp0Ndki90/oko+DYuSY95AF5UyOobHkCKyWY9v3R7gJB3E9k9HTecotZTkQF19CE=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy6rnXoUH/hLldSH2Cc0PleEgVmxvdnCxG8+chfhwrN9CHDir7L
-	3UeWCo3HKfEWtGBrkeecB0tIs77tsAqeBUWzY39bwUvzXM/jwGSEkiPN
-X-Gm-Gg: ASbGncvcr/5N5jbmyW+mvIPmGPomkroXe1O1/hWKEZs0P8BboVqhBmAcKCGTKf2/iOt
-	iQL2znDFaoX6pr4fr5j3goqx1l6Y2IGbxwM36oZcgC8old898XcVQQZ4mkwpD3Qtr9qZY84EiDl
-	Gh9zAKRDkOPukIUAZ1+cJgiRO2ibJRWz++NrTtPBiMcpP6y0NuC9Qn5aGKc4TYOT3ZKsXI+Ati5
-	4QlYpW3jC9ULO1xqiljoTBhg8AOdRLTUyak/w6fXr9LIESHPuMPfyEccNiuRsyDGxg5PDOt2q/2
-	8BC93wKUvvRRWAq6HUTr8MAahqnOJvv/khwNtMsRXEdhAUyQn1MhLOauqtMO34xkv+t0KmCbDDl
-	1JmoLOtopH1l9DN7aoeWYIC3sNnV+MDBd+al771Z61eabEcjVhmhpx26h1ly9i7UW+7C7Fw+l5M
-	aqw4MxnRMhZYkm0/723DUvCimDBmseeLduhzc9XtbRiBg9
-X-Google-Smtp-Source: AGHT+IGDVNZOalPoeGLRx0StV1WyF6OuSXplI/tFFH2YjaxRb6M+ZouwxCgXlyJ+r8uHMpC01NlQdg==
-X-Received: by 2002:a17:903:198d:b0:298:2af7:8d26 with SMTP id d9443c01a7336-2986a76a26dmr169206325ad.54.1763406050080;
-        Mon, 17 Nov 2025 11:00:50 -0800 (PST)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2985c2376f6sm146281525ad.21.2025.11.17.11.00.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Nov 2025 11:00:49 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Mon, 17 Nov 2025 11:00:48 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: James Calligeros <jcalligeros99@gmail.com>
-Cc: Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>,
-	Alyssa Rosenzweig <alyssa@rosenzweig.io>,
-	Neal Gompa <neal@gompa.dev>, Lee Jones <lee@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Jean Delvare <jdelvare@suse.com>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>, asahi@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-rtc@vger.kernel.org,
-	linux-hwmon@vger.kernel.org, linux-input@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v5 06/11] hwmon: Add Apple Silicon SMC hwmon driver
-Message-ID: <7a445358-ce9e-4180-99dd-1a771c8ffa98@roeck-us.net>
-References: <20251112-macsmc-subdevs-v5-0-728e4b91fe81@gmail.com>
- <20251112-macsmc-subdevs-v5-6-728e4b91fe81@gmail.com>
+        d=1e100.net; s=20230601; t=1763407698; x=1764012498;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=4BRv+8HFratcORC0sQfd604lhFEiEUlZ0QaYy4EdL4s=;
+        b=VnzVAcmufJprqBnZdgmb+DowgEGvbic6Rgg6lFi/ShhbP7gzIuNKyoayhcJTbnzvQF
+         ZND/kAE8SYKLJTcdJwlOYxruNsnJlb5JdRv6vqJHfzbVebsfbzZ8ZEUa7ADTpoEPuvLx
+         oivpt1j02EQOtIiM2oYyyQgcHyX5ftxNpphBuo0LJT5PT7lcUVohQO459sIZwHoM7KiZ
+         TkSniGPgHOSg1qEXCeoXbhXjRv2dGdcGSgHks6u5ox2gh3MFB4pX6xeVBqrq2z1IBoqH
+         nhV21OpK7t0E+O9cKvrvEwxBFK/mG6JA16v0zyKwkHq9gGWigtahBWCZOSltI7Z/9tne
+         Nusg==
+X-Forwarded-Encrypted: i=1; AJvYcCVoJkCRPWCDQW5a/Tu3Blhu4h7zOiRoPhmVMZkoWf3qo+1J41E4isfm4HqzJMzVenJbj4BPOyTYaek=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzX/+KzaNT3KttBD6CjR+k/RXe9Yck70y/bMwttuggoG9av6teq
+	ceD126tIVWyjKFdrjytB/V8/rd3mODIf/TTSRAZvmqRphK69sI50N/WI/WtRFzM/UvQgahUVIMb
+	yOyn+b3dLfsMCC3v1vZ6X2pYlmrxAAcM/zYO9xUsE
+X-Gm-Gg: ASbGncsxiDGmKDSUx748C8gCpQWFLrz9vikhfuh6BASoVa+0FTLo1VWoRgfRLrbj6mt
+	Ap5vhUzCDTSjEOHUnr0GZwNfAittZXcc6tPD3B71V945CEwhFD7ZmVBM5+XHstlgZoMNnEHavN3
+	3OdpSlHiOyiP9uNkLZV2PSqcNsUXwMp/drZ5fmyGjW+ORk+8HHO9G/BjeJjh1Z5ZKZTEhkpWdY0
+	ldQWB7wYTtoJepnDMaZma+QOVfdA0q4kvzhR5Vtyjce4mRYJC4l9KdHQ7+b4t8VVaI9ixBya05L
+	XgKmwA==
+X-Google-Smtp-Source: AGHT+IGG0IuV9djGbvzmPZdLLDSHaSz0ZC8Mlezk0LH8epioFYDWl+Qb1KTas1rmPphaGx6WZjM3247aMHYjmr5MYwI=
+X-Received: by 2002:a05:6512:114f:b0:595:7dc5:165e with SMTP id
+ 2adb3069b0e04-595841a77femr4400958e87.25.1763407697311; Mon, 17 Nov 2025
+ 11:28:17 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251112-macsmc-subdevs-v5-6-728e4b91fe81@gmail.com>
+References: <20251115233409.768044-1-pasha.tatashin@soleen.com> <20251115233409.768044-19-pasha.tatashin@soleen.com>
+In-Reply-To: <20251115233409.768044-19-pasha.tatashin@soleen.com>
+From: David Matlack <dmatlack@google.com>
+Date: Mon, 17 Nov 2025 11:27:44 -0800
+X-Gm-Features: AWmQ_blZR7KFsAxkxa-ZIGOEZap3-3haAeROnQQby7Ige8teO6F_2irScEIZ73g
+Message-ID: <CALzav=edxTsa7uO7XxiUSx+DZiX169T4WL39vYsn3_WcUuVKrg@mail.gmail.com>
+Subject: Re: [PATCH v6 18/20] selftests/liveupdate: Add kexec-based selftest
+ for session lifecycle
+To: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: pratyush@kernel.org, jasonmiu@google.com, graf@amazon.com, rppt@kernel.org, 
+	rientjes@google.com, corbet@lwn.net, rdunlap@infradead.org, 
+	ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com, ojeda@kernel.org, 
+	aliceryhl@google.com, masahiroy@kernel.org, akpm@linux-foundation.org, 
+	tj@kernel.org, yoann.congal@smile.fr, mmaurer@google.com, 
+	roman.gushchin@linux.dev, chenridong@huawei.com, axboe@kernel.dk, 
+	mark.rutland@arm.com, jannh@google.com, vincent.guittot@linaro.org, 
+	hannes@cmpxchg.org, dan.j.williams@intel.com, david@redhat.com, 
+	joel.granados@kernel.org, rostedt@goodmis.org, anna.schumaker@oracle.com, 
+	song@kernel.org, linux@weissschuh.net, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-mm@kvack.org, gregkh@linuxfoundation.org, 
+	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
+	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, rafael@kernel.org, 
+	dakr@kernel.org, bartosz.golaszewski@linaro.org, cw00.choi@samsung.com, 
+	myungjoo.ham@samsung.com, yesanishhere@gmail.com, Jonathan.Cameron@huawei.com, 
+	quic_zijuhu@quicinc.com, aleksander.lobakin@intel.com, ira.weiny@intel.com, 
+	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de, 
+	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com, 
+	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net, 
+	brauner@kernel.org, linux-api@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	saeedm@nvidia.com, ajayachandra@nvidia.com, jgg@nvidia.com, parav@nvidia.com, 
+	leonro@nvidia.com, witu@nvidia.com, hughd@google.com, skhawaja@google.com, 
+	chrisl@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 12, 2025 at 09:16:52PM +1000, James Calligeros wrote:
-> The System Management Controller on Apple Silicon devices is responsible
-> for integrating and exposing the data reported by the vast array of
-> hardware monitoring sensors present on these devices. It is also
-> responsible for fan control, and allows users to manually set fan
-> speeds if they so desire. Add a hwmon driver to expose current,
-> power, temperature, and voltage monitoring sensors, as well as
-> fan speed monitoring and control via the SMC on Apple Silicon devices.
-> 
-> The SMC firmware has no consistency between devices, even when they
-> share an SoC. The FourCC keys used to access sensors are almost
-> random. An M1 Mac mini will have different FourCCs for its CPU core
-> temperature sensors to an M1 MacBook Pro, for example. For this
-> reason, the valid sensors for a given device are specified in a
-> child of the SMC Devicetree node. The driver uses this information
-> to determine which sensors to make available at runtime.
-> 
-> Reviewed-by: Neal Gompa <neal@gompa.dev>
-> Acked-by: Guenter Roeck <linux@roeck-us.net>
-> Co-developed-by: Janne Grunau <j@jannau.net>
-> Signed-off-by: Janne Grunau <j@jannau.net>
-> Signed-off-by: James Calligeros <jcalligeros99@gmail.com>
+On Sat, Nov 15, 2025 at 3:34=E2=80=AFPM Pasha Tatashin
+<pasha.tatashin@soleen.com> wrote:
 
-Applied to hwmon-next.
+> diff --git a/tools/testing/selftests/liveupdate/Makefile b/tools/testing/=
+selftests/liveupdate/Makefile
+> index 2a573c36016e..1563ac84006a 100644
+> --- a/tools/testing/selftests/liveupdate/Makefile
+> +++ b/tools/testing/selftests/liveupdate/Makefile
+> @@ -1,7 +1,39 @@
+>  # SPDX-License-Identifier: GPL-2.0-only
+> +
+> +KHDR_INCLUDES ?=3D -I../../../../usr/include
 
-Note that I can not apply the devicetree patch (2/11), presumably since it depends
-on the first patch of the series.
+You shouldn't need to set this variable and $(OUTPUT). Both should be
+provided by lib.mk. Maybe the include is too far down?
 
-Guenter
+>  CFLAGS +=3D -Wall -O2 -Wno-unused-function
+>  CFLAGS +=3D $(KHDR_INCLUDES)
+> +LDFLAGS +=3D -static
+
+Is static build really required or just for your setup? If it's
+setup-specific, I would recommend letting the user pass in -static via
+EXTRA_CFLAGS. That what we do in the KVM and VFIO selftests.
+
+CFLAGS +=3D $(EXTRA_CFLAGS)
+
+Then the user can pass EXTRA_CFLAGS=3D-static on the command line.
+
+> +OUTPUT ?=3D .
+> +
+> +# --- Test Configuration (Edit this section when adding new tests) ---
+> +LUO_SHARED_SRCS :=3D luo_test_utils.c
+> +LUO_SHARED_HDRS +=3D luo_test_utils.h
+
+I would suggest using the -MD flag and Make's -include directive to
+automatically handle headers. That way you don't need to add every
+header to Makefile for Make to detect changes. See the end of my email
+for how to do this.
+
+> +
+> +LUO_MANUAL_TESTS +=3D luo_kexec_simple
+> +
+> +TEST_FILES +=3D do_kexec.sh
+>
+>  TEST_GEN_PROGS +=3D liveupdate
+>
+> +# --- Automatic Rule Generation (Do not edit below) ---
+> +
+> +TEST_GEN_PROGS_EXTENDED +=3D $(LUO_MANUAL_TESTS)
+> +
+> +# Define the full list of sources for each manual test.
+> +$(foreach test,$(LUO_MANUAL_TESTS), \
+> +       $(eval $(test)_SOURCES :=3D $(test).c $(LUO_SHARED_SRCS)))
+
+This does not build with Google's gbuild wrapper around make. I get
+these errors (after fixing the semi-colon issue below):
+
+clang: error: no such file or directory: 'luo_kexec_simple.c'
+clang: error: no such file or directory: 'luo_test_utils.c'
+clang: error: no such file or directory: 'luo_test_utils.h'
+
+> +
+> +# This loop automatically generates an explicit build rule for each manu=
+al test.
+> +# It includes dependencies on the shared headers and makes the output
+> +# executable.
+> +# Note the use of '$$' to escape automatic variables for the 'eval' comm=
+and.
+> +$(foreach test,$(LUO_MANUAL_TESTS), \
+> +       $(eval $(OUTPUT)/$(test): $($(test)_SOURCES) $(LUO_SHARED_HDRS) \
+> +               $(call msg,LINK,,$$@) ; \
+> +               $(Q)$(LINK.c) $$^ $(LDLIBS) -o $$@ ; \
+> +               $(Q)chmod +x $$@ \
+
+These semi-colons swollow any errors. I would recommend against using
+a foreach and eval. Make supports pattern-based targets so there's
+really no need for loops. See below.
+
+> +       ) \
+> +)
+> +
+>  include ../lib.mk
+
+Putting it all together, here is what I'd recommend for this Makefile
+(drop-in replacement for the current Makefile). This will also make it
+easier for me to share the library code with VFIO selftests, which
+I'll need to do in the VFIO series.
+
+(Sorry in advance for the line wrap. I had to send this through gmail.)
+
+# SPDX-License-Identifier: GPL-2.0-only
+
+LIBLIVEUPDATE_C +=3D luo_test_utils.c
+
+TEST_GEN_PROGS_EXTENDED +=3D luo_kexec_simple
+TEST_GEN_PROGS_EXTENDED +=3D luo_multi_session
+
+TEST_FILES +=3D do_kexec.sh
+
+include ../lib.mk
+
+CFLAGS +=3D $(KHDR_INCLUDES)
+CFLAGS +=3D -Wall -O2 -Wno-unused-function
+CFLAGS +=3D -MD
+CFLAGS +=3D $(EXTRA_CFLAGS)
+
+LIBLIVEUPDATE_O :=3D $(patsubst %.c, $(OUTPUT)/%.o, $(LIBLIVEUPDATE_C))
+TEST_GEN_PROGS_EXTENDED_O +=3D $(patsubst %, %.o, $(TEST_GEN_PROGS_EXTENDED=
+))
+
+TEST_DEP_FILES +=3D $(patsubst %.o, %.d, $(LIBLIVEUPDATE_O))
+TEST_DEP_FILES +=3D $(patsubst %.o, %.d, $(TEST_GEN_PROGS_EXTENDED_O))
+-include $(TEST_DEP_FILES)
+
+$(LIBLIVEUPDATE_O): $(OUTPUT)/%.o: %.c
+        $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c $< -o $@
+
+$(TEST_GEN_PROGS_EXTENDED): %: %.o $(LIBLIVEUPDATE_O)
+        $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH) $<
+$(LIBLIVEUPDATE_O) $(LDLIBS) -o $@
+
+EXTRA_CLEAN +=3D $(LIBLIVEUPDATE_O) $(TEST_GEN_PROGS_EXTENDED_O) $(TEST_DEP=
+_FILES)
 
