@@ -1,167 +1,93 @@
-Return-Path: <linux-doc+bounces-66846-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66848-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D334C6243E
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 04:44:50 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id AB2FAC62444
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 04:46:25 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id AD076358742
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 03:44:43 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 6AE523ACDE1
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 03:46:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C7572ED843;
-	Mon, 17 Nov 2025 03:44:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD1F13BBF0;
+	Mon, 17 Nov 2025 03:46:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="N4CFxSGv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [13.75.44.102])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F043D3148B1;
-	Mon, 17 Nov 2025 03:44:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=13.75.44.102
+Received: from mail-m19731112.qiye.163.com (mail-m19731112.qiye.163.com [220.197.31.112])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88162156661
+	for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 03:46:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.112
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763351070; cv=none; b=c6+VCyOpwRG5VpLEjuxAVT6gADinNX/is8R45dguFHK5FRqG3890CVYdJyNOFViRp94q5WGAOZzKpSp2imYCQqrOU0ftVsX06jnDoMa+Y1URwzKfGKs5psvZSF0jZCGjLAXFrPbmrT9t2y+8Ao+/BctH+qlK6Mtq/e+DmiPPXi4=
+	t=1763351182; cv=none; b=hclaaISCsNoudhFrOvxHvlE11+zaG15xV8RqquvzedoqhiIPCb24sOsWmXCacc32VtE22ETq3VsnTjcffkTPEM0w0RFzL6tEJL0NcWuknWLiTNaYXyZJGYQykywXKOcHCuHRxNFxJX5VF7d9NtvB2/TuYmkYeKyDunAahs3+2GM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763351070; c=relaxed/simple;
-	bh=FhBIa5Voij9yF144obc0n4ylOgEb2hbcuL02Wyp+8ck=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=s0f9uCEjOLVHGLd6MCsKgSaL+uuXZe5azYzhgC/6sX3PojRSnJ6GS9B2M8r9Jnradon+LY6W93Zg6LBBgmYpV6JA48oiiMYY6zU9lg3Dk8hpsEXTWyH31KtVT7CuTMi22sF/UuhFD5hOb3entC3sQuuz6EtwZ2Xo60lb9wRUmzw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=13.75.44.102
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hust.edu.cn
-Received: from hust.edu.cn (unknown [172.16.0.52])
-	by app2 (Coremail) with SMTP id HwEQrABHr2YEmhpp85D9AA--.8570S2;
-	Mon, 17 Nov 2025 11:44:04 +0800 (CST)
-Received: from [10.12.169.45] (unknown [10.12.169.45])
-	by gateway (Coremail) with SMTP id _____wA3Apr7mRppdbYRBA--.26948S2;
-	Mon, 17 Nov 2025 11:43:56 +0800 (CST)
-Message-ID: <77254588-fa2e-4c06-b2f2-530d74c71fc6@hust.edu.cn>
-Date: Mon, 17 Nov 2025 11:43:54 +0800
+	s=arc-20240116; t=1763351182; c=relaxed/simple;
+	bh=YPjgajD213a/fOZlYSC8inbnb722/tQyhb+all0orhI=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=kKuc5W9Gq0q76qxAhCpk1+brA270YKeVC7BH6pRDh0SLO4xBP3sqWLLLmXApQrnCDIkbzVzUA/krB2J4GKF6U+0jwze6x5YrE9gzb/MfarOdpIs0R64hcdnAEPBnKjYiqu6zo36pAcBgkJmzjbSYFFy5/k40OSz2AtOKvTNXu+Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=N4CFxSGv; arc=none smtp.client-ip=220.197.31.112
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
+Received: from localhost.localdomain (unknown [1.203.157.252])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 29c9141db;
+	Mon, 17 Nov 2025 11:46:10 +0800 (GMT+08:00)
+From: ke zijie <kezijie@leap-io-kernel.com>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev
+Cc: dzm91@hust.edu.cn,
+	corbet@lwn.net,
+	linux-doc@vger.kernel.org,
+	wangyuli@aosc.io,
+	doubled@leap-io-kernel.com
+Subject: [PATCH v2 0/3] Add chinese translation for block
+Date: Mon, 17 Nov 2025 11:46:07 +0800
+Message-Id: <cover.1763350407.git.kezijie@leap-io-kernel.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] docs/zh_CN: Update the Chinese translation of
- kbuild.rst
-To: Chenguang Zhao <zhaochenguang@kylinos.cn>, Alex Shi <alexs@kernel.org>,
- Yanteng Si <si.yanteng@linux.dev>, Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20251110080808.388549-1-zhaochenguang@kylinos.cn>
-From: Dongliang Mu <dzm91@hust.edu.cn>
-In-Reply-To: <20251110080808.388549-1-zhaochenguang@kylinos.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:HwEQrABHr2YEmhpp85D9AA--.8570S2
-Authentication-Results: app2; spf=neutral smtp.mail=dzm91@hust.edu.cn;
-X-Coremail-Antispam: 1UD129KBjvJXoWxWr4rWrWDCF15uw13ZFWUJwb_yoWrWrWUp3
-	ZxGry7Jwn8trWF93sFkFWUuF4rGwn3Ga1jqayDC3WxtrnF9rZ2gr1Uta4ktFyxG348GFWD
-	WFy2gFyUCFy7AwUanT9S1TB71UUUUjUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUm0b7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-	v20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK
-	6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1ln4kS14v26r
-	1Y6r17M2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI
-	12xvs2x26I8E6xACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj64x0Y40En7xvr7AKxV
-	W8Jr0_Cr1UMcIj6x8ErcxFaVAv8VW8uFyUJr1UMcIj6xkF7I0En7xvr7AKxVW8Jr0_Cr1U
-	McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCF04k20xvY0x0EwIxGrwCF04k20x
-	vE74AGY7Cv6cx26r4fZr1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_
-	Jrv_JF1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1V
-	AY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAI
-	cVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
-	IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVj
-	vjDU0xZFpf9x07jfpndUUUUU=
-X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
+X-HM-Tid: 0a9a8feb8d3d09d8kunm4b5bfed13c771eb
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGR8ZVkNDTB4ZTUNKSE4fHlYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
+	VLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=N4CFxSGvSQ7gnnMC3bWEjFXIurm0CxUPkT2VkfD1b6GqmmMq12lDivHeppNNUdENUSCM0r/Bnexa9sXgoQpzNIPbOsZB9KJjgsZm1PUaub0odXosa8QlVEJ6WhuroXjiRtmmWEgBj2N6TtkVCczr0tGu4vYJJt3WAOk/q1MSvPq2KniIuZgPRvx3TWk1kGjN1DJr9ot5jhIN0Bk/UMNunt3OhEkc96Fg5vFA4icUe/22nwv93QRtEOiUKZ1SxmAHYHuNn+x4w/QIIRdrQh+KRkHt/NgBJF+I4VBf/nsYt9rOprQeLNjpb4mPIXmvS4JpG92EXLlbsWC6KJUP4hfpqA==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=s+WCJzvM8klU13ijTLvs5Expa49g+P0tJINScu7x9tE=;
+	h=date:mime-version:subject:message-id:from;
 
+This patch set adds chinese translations for the BLOCK documentation.
 
-On 11/10/25 4:08 PM, Chenguang Zhao wrote:
-> Finish the translation of kbuild/kbuild.rst.
->
-> Update to commit 5cbfb4da7e06 ("kbuild: doc: improve
-> KBUILD_BUILD_TIMESTAMP documentation")
->
-> Signed-off-by: Chenguang Zhao <zhaochenguang@kylinos.cn>
-> ---
-> v3:
->   Update Chinese translation to the last commit of kbuild/kbuild.rst
->   add Chinese translation for the following commit:
->    5cbfb4da7e06 kbuild: doc: improve KBUILD_BUILD_TIMESTAMP documentation
->    ceff0757f5da kbuild: rust: add PROCMACROLDFLAGS
->    11b3d5175e6b kbuild: support building external modules in a separate build directory
-> ---
->   .../translations/zh_CN/kbuild/kbuild.rst      | 27 ++++++++++++++++---
->   1 file changed, 24 insertions(+), 3 deletions(-)
->
-> diff --git a/Documentation/translations/zh_CN/kbuild/kbuild.rst b/Documentation/translations/zh_CN/kbuild/kbuild.rst
-> index e5e2aebe1ebc..a0415f3d8b6d 100644
-> --- a/Documentation/translations/zh_CN/kbuild/kbuild.rst
-> +++ b/Documentation/translations/zh_CN/kbuild/kbuild.rst
-> @@ -93,6 +93,16 @@ HOSTRUSTFLAGS
->   -------------
->   在构建主机程序时传递给 $(HOSTRUSTC) 的额外标志。
->   
-> +PROCMACROLDFLAGS
-> +----------------
-> +用于链接 Rust 过程宏的标志。由于过程宏是由 rustc 在构建时加载的，
-> +因此必须以与当前使用的 rustc 工具链兼容的方式进行链接。
-> +
-> +例如，当 rustc 使用的 C 库与用户希望用于主机程序的 C 库不同时，
-> +此设置会非常有用。
-> +
-> +如果未设置，则默认使用链接主机程序时传递的标志。
-> +
->   HOSTLDFLAGS
->   -----------
->   链接主机程序时传递的额外选项。
-> @@ -135,12 +145,18 @@ KBUILD_OUTPUT
->   指定内核构建的输出目录。
->   
->   在单独的构建目录中为预构建内核构建外部模块时，这个变量也可以指向内核输出目录。请注意，
-> -这并不指定外部模块本身的输出目录。
-> +这并不指定外部模块本身的输出目录(使用KBUILD_EXTMOD_OUTPUT来达到这个目的)。
+Changes in v2:
+ - Fix Chinese/English spacing issues (suggested by Wang Yuli)
+ - Fix make htmldocs warning: "Duplicate C declaration"
+ - Adjust blk-mq translation wording
+ - Link to v1: https://lore.kernel.org/linux-doc/cover.1763105050.git.kezijie@leap-io-kernel.com/
 
-Hi Chenguang,
+ke zijie (3):
+  docs/zh_CN: Add block/index.rst translation Translate
+    .../block/index.rst into Chinese and update subsystem-apis.rst
+    translation
+  docs/zh_CN: Add blk-mq.rst translation
+  docs/zh_CN: Add data-integrity.rst translation
 
-if you would like to add space before and after English word, please 
-follow it all the time, e.g., the above KBUILD_EXTMOD_OUTPUT.
+ .../translations/zh_CN/block/blk-mq.rst       | 130 ++++++++++++
+ .../zh_CN/block/data-integrity.rst            | 193 ++++++++++++++++++
+ .../translations/zh_CN/block/index.rst        |  37 ++++
+ .../translations/zh_CN/subsystem-apis.rst     |   1 -
+ 4 files changed, 360 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/block/blk-mq.rst
+ create mode 100644 Documentation/translations/zh_CN/block/data-integrity.rst
+ create mode 100644 Documentation/translations/zh_CN/block/index.rst
 
->   
->   输出目录也可以使用 "O=..." 指定。
->   
->   设置 "O=..." 优先于 KBUILD_OUTPUT。
->   
-> +KBUILD_EXTMOD_OUTPUT
-> +--------------------
-> +指定外部模块的输出目录
-> +
-> +设置 "MO=..."优先于 KBUILD_EXTMOD_OUTPUT.
-need a space after ..." and before 优先
-> +
->   KBUILD_EXTRA_WARN
->   -----------------
->   指定额外的构建检查。也可以通过在命令行传递 "W=..." 来设置相同的值。
-> @@ -290,8 +306,13 @@ IGNORE_DIRS
->   KBUILD_BUILD_TIMESTAMP
->   ----------------------
->   将该环境变量设置为日期字符串，可以覆盖在 UTS_VERSION 定义中使用的时间戳
-> -（运行内核时的 uname -v）。该值必须是一个可以传递给 date -d 的字符串。默认值是
-> -内核构建某个时刻的 date 命令输出。
-> +（运行内核时的 uname -v）。该值必须是一个可以传递给 date -d 的字符串。例如::
-> +
-> +	$ KBUILD_BUILD_TIMESTAMP="Mon Oct 13 00:00:00 UTC 2025" make
-> +
-> +默认值是内核构建某个时刻的date命令输出。如果提供该时戳，它还用于任何initramfs
-> +归档文件中的mtime字段。Initramfs mtimes是32位的，因此早于Unix纪元1970年，或
-> +晚于协调世界时 (UTC)2106年2月7日6时28分15秒的日期是无效的。
-
-As mentioned in v2 patch, this is your own contribution about the 
-content. Please directly revise it in the English documentation and then 
-sync it to our Chinese documentation.
-
-Dongliang Mu
-
->   
->   KBUILD_BUILD_USER, KBUILD_BUILD_HOST
->   ------------------------------------
+--
+2.25.1
 
 
