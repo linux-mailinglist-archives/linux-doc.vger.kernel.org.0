@@ -1,118 +1,284 @@
-Return-Path: <linux-doc+bounces-66945-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66947-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1C37C65A0A
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 18:56:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4BBEC65B15
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 19:21:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 8535D3423AF
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 17:51:31 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 38580345B84
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 18:17:30 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7915E2E92D2;
-	Mon, 17 Nov 2025 17:51:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 464E43126B3;
+	Mon, 17 Nov 2025 18:17:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="oQBqUjSf"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Kq2QDaJ+";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="SQaoHQ0e"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-43191.protonmail.ch (mail-43191.protonmail.ch [185.70.43.191])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 112AA1C84A0
-	for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 17:51:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.191
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B18430275C
+	for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 18:17:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763401887; cv=none; b=QzhAMXop8PnWwLhkcMiEek58UnfYiCMjb5oSp4UId+M4zHuIyX4J55yu7mBQvC3nltpTii4l9MgbJ4oqk1shBNTMNqlmK/TN5HsGY+uQ18QFhk8e1N0NEN1ZqzQnVeBShIxW2GH9/CmJC52nue0M5cjRhUb/fVWPUkKRaZzu5gQ=
+	t=1763403444; cv=none; b=qdcjQ6pxXiIu+9o3LBkDULWEEuilbjEdZh3rKCLzqXRfOf8NCreESX+axc0HtjZtE5IIv+0UWqz8NhUJk04MWhci8fuNgBBz420yKpV/xPquJwKs/54D+kN6+wzajPkKUEkmpNcOC/Bw9I816y0QJ1ydlg49MXIUFEEpmA+lokQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763401887; c=relaxed/simple;
-	bh=dvBUOLItidwfrNQEf4mN9DTt1GLDuvVSAWBtWZ+I3h8=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=GGs91VUI1h7nJpUigzMY/lrRBoG0L8/KS81kw3JHwfOcQbIJSnKybrZvxJcK617JzrAAl0bBsniXBsLxpLn12M/xwTFDQuPE5pgMvw8YL5GLvw8XEBSU8+slSMvvIe6O4jMyByIZ/XRaexX/UWGbT3x2cq22HYYqfHEgzIckdsQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=oQBqUjSf; arc=none smtp.client-ip=185.70.43.191
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1763401880; x=1763661080;
-	bh=8JHRGFc+rtU8gXb3Jyiztx9jQrUCtKtMFdopnkmvtTw=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=oQBqUjSfF7G2kJQrbbupyMiiL3urxY+IOjodFvyRKJ7BeHY/Dcl/doiaaDctJYfkJ
-	 neWOwaOGLUAaNvOOA9Lnkn/V7Zxs46ZLspzWPnHWqsqxS/d+3JQ28pmHZyaP3ROCiP
-	 lPORmcpqbEa/NLboQDALyeNMJy7OAFr681dFCiyvFWO465XYCDffdIMULNoQdGBZG5
-	 LqsCEq8v1qizeghermjOZkDdSKpmudU0KEGcYzC75rPAJEG8nR1gQFIh5UjtYTVp5L
-	 Abt+RNltqCl/40foE++yjpzIs3zTJ+mCRrvbsrD50yTsJZVBuZlmevHhrdCKoaSwyO
-	 yZDKI/Aa1I0hg==
-Date: Mon, 17 Nov 2025 17:51:13 +0000
-To: Alexander Potapenko <glider@google.com>
-From: =?utf-8?Q?Maciej_Wiecz=C3=B3r-Retman?= <m.wieczorretman@pm.me>
-Cc: xin@zytor.com, peterz@infradead.org, kaleshsingh@google.com, kbingham@kernel.org, akpm@linux-foundation.org, nathan@kernel.org, ryabinin.a.a@gmail.com, dave.hansen@linux.intel.com, bp@alien8.de, morbo@google.com, jeremy.linton@arm.com, smostafa@google.com, kees@kernel.org, baohua@kernel.org, vbabka@suse.cz, justinstitt@google.com, wangkefeng.wang@huawei.com, leitao@debian.org, jan.kiszka@siemens.com, fujita.tomonori@gmail.com, hpa@zytor.com, urezki@gmail.com, ubizjak@gmail.com, ada.coupriediaz@arm.com, nick.desaulniers+lkml@gmail.com, ojeda@kernel.org, brgerst@gmail.com, elver@google.com, pankaj.gupta@amd.com, mark.rutland@arm.com, trintaeoitogc@gmail.com, jpoimboe@kernel.org, thuth@redhat.com, pasha.tatashin@soleen.com, dvyukov@google.com, jhubbard@nvidia.com, catalin.marinas@arm.com, yeoreum.yun@arm.com, mhocko@suse.com, lorenzo.stoakes@oracle.com, samuel.holland@sifive.com, vincenzo.frascino@arm.com, bigeasy@linutronix.de, surenb@google.com, ardb@kernel.org,
-	Liam.Howlett@oracle.com, nicolas.schier@linux.dev, ziy@nvidia.com, kas@kernel.org, tglx@linutronix.de, mingo@redhat.com, broonie@kernel.org, corbet@lwn.net, andreyknvl@gmail.com, maciej.wieczor-retman@intel.com, david@redhat.com, maz@kernel.org, rppt@kernel.org, will@kernel.org, luto@kernel.org, kasan-dev@googlegroups.com, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, x86@kernel.org, linux-kbuild@vger.kernel.org, linux-mm@kvack.org, llvm@lists.linux.dev, linux-doc@vger.kernel.org, stable@vger.kernel.org, Baoquan He <bhe@redhat.com>
-Subject: Re: [PATCH v6 01/18] kasan: Unpoison pcpu chunks with base address tag
-Message-ID: <ha5gz3hfjtfrmldzbscrbbtptecyqkwzkwdkjxnc2puqzquurl@nthv7frvqatw>
-In-Reply-To: <CAG_fn=Wj9rB0jHKT3QKjZsPYce1JFcb1e72QBOBP52Ybs3_qgQ@mail.gmail.com>
-References: <cover.1761763681.git.m.wieczorretman@pm.me> <fbce40a59b0a22a5735cb6e9b95c5a45a34b23cb.1761763681.git.m.wieczorretman@pm.me> <CAG_fn=Wj9rB0jHKT3QKjZsPYce1JFcb1e72QBOBP52Ybs3_qgQ@mail.gmail.com>
-Feedback-ID: 164464600:user:proton
-X-Pm-Message-ID: 7b84ae9accb4bc7551e617e5e7661cf28649358a
+	s=arc-20240116; t=1763403444; c=relaxed/simple;
+	bh=YKpLpfQbjFweo5Huh4CKbCJxqw4yu2d6FrCGYDymEfA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Mtxkdb5+1f0e+mK+1pgtdnFz8BMwHLrGZgnBe323mA8nEhBiPqx6Phjf7soxYYntyqFf1B9JLHwFhP1djecrHwcNlcsKUKzwpEROkNy33NLJzFPEb62LrXQM4B60DzfD+otrHM5vuXqVTaxK+tx4PdrRl852f8qNIrBPmlrBEwI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Kq2QDaJ+; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=SQaoHQ0e; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1763403441;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=bLkBFyQphttyBlL0MaxtfpIa2M3df8GEH89TkAXYszg=;
+	b=Kq2QDaJ+8++4msg+4EuZwhC1u2yQuys2/FjUWgL6pCq+kjpSNqNzL3uE65SId+0AMAqUyx
+	94d5Nw5lIJgxbkszpoFAwW3vLnJ+aM6pN8UujZKzxj5aHCqEdLFT13lzQdQwLcGtGIrH4X
+	h0MAj6hi1BaSJtyAPoEAfJCocL7dwto=
+Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com
+ [74.125.224.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-251-9u09nF1sPkOuSoO7rb4FPw-1; Mon, 17 Nov 2025 13:17:20 -0500
+X-MC-Unique: 9u09nF1sPkOuSoO7rb4FPw-1
+X-Mimecast-MFC-AGG-ID: 9u09nF1sPkOuSoO7rb4FPw_1763403440
+Received: by mail-yx1-f71.google.com with SMTP id 956f58d0204a3-63e0c5c5faeso6635142d50.0
+        for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 10:17:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1763403440; x=1764008240; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bLkBFyQphttyBlL0MaxtfpIa2M3df8GEH89TkAXYszg=;
+        b=SQaoHQ0ej+xiRFAgGQ95B3HFbTi0c8M1RQVDUhCOKYyKpgwUon8uPM/zOn8T1SKcQ4
+         dL99Gx82NqszocBxOO8Y/Q6riYDWhL9M9tO01NGC5SD5pbcwsfywqMc1i6GtXRqek+jl
+         dVxrnjm32tDPu1VTMstVSd+z2PvLjMvBHRx4Px6VP/EUcx508zkBxXmN7a6XzzMuRwBn
+         M0yeaQ6LRkWYShJGbITRAB3nupdXLSc6J8ExHU2htZi5pqjH/nn/INUrcPne+hm8cmo1
+         RIiwQArY4ErVr+X/C8DkClzomdbyNnkziCmEKQSXGmAERZhfHSxN4s8ZVvx5dbpa3uT1
+         bI+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763403440; x=1764008240;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=bLkBFyQphttyBlL0MaxtfpIa2M3df8GEH89TkAXYszg=;
+        b=V3RzKGH5c6JdbfYitZXlauXYdLCAOLOxV4Lt/K2Ncpg9N7YJQQCTbaXY/HnjTCocgO
+         YGorAPehMuengHApnbOECJ/AkScl7BVgDg5bOrywL4aUBOCABmRwh9fBLkNzRPmVXDvi
+         iP2iEg3o0jv2Fi6h1jSKY/zvaDzEJoRHcaHsqHWE0+GkezBaWTZ8+2Xvd5gcaHWWLRBt
+         vd2ugcAwl5sX5hndTYIVqrz2e7vlc+RdCOQ/c48s8bBxHm05mV53VzOhXVsRBHWGltpC
+         uz9yoRT6D7QRuDIhun61t6Qb0gbdNdAeRkJAYipveHs0CrwCiyxn7QoU0UDnHurNtB75
+         pxgg==
+X-Forwarded-Encrypted: i=1; AJvYcCUDF/3R2jIpXqIjYpGfBh5xgXreWbSHNZJB0khkVyK3dFKJ1FwIEiL/p3sJvaa/ACDs+eCM8/Rq5Tg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzLLwpsc+BS4yiFQjFW/LZWVd64wHvl98TgjHhC5HnjECUqSO2r
+	+j7F7UB4M8utmx2FwydHuuYoUralCd7r2arIiPptgK+v1uI5Zunave1w+6RZU1HH0mvhBDrFvQl
+	V1hXWFyt+RPtY3viAhwqpve2BxvLing3/XIoya6mqmAD43fQIj0xQrovD4mLhMinoGqar7QU29A
+	x3SDRY+hB+AZkHMFMGF9F9klZ/w7rDDPjG0TOO
+X-Gm-Gg: ASbGncul33bBWEax9vAVSOuCu6Q4L07JPngFZ5qE2AXakDgfxM628rICOtI0W0C3UBP
+	ypOBPXVxJgV2LvLJ48BghZoYbdMnAjXudjnOocT1nrgILW8ZOrloyQZApGwDcOVcOcmiTEZIxYg
+	JvdpS5ocLVOvo1+c/DDyw3ay/GFU8cS2Gfhe1ulDEclJPb83KI40/CB21ffzPoC8J+yKuGww==
+X-Received: by 2002:a05:690e:d8a:b0:629:acb6:d8a with SMTP id 956f58d0204a3-641e7562fd0mr10867481d50.26.1763403439628;
+        Mon, 17 Nov 2025 10:17:19 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGqkBOn29yUwcPzlRUfZrCy2cM1EilWOd6JVaHoD7tCDRXb4G11MerU3OGL9P/y0HInk6+3E4wc78Xi4FqeiDU=
+X-Received: by 2002:a05:690e:d8a:b0:629:acb6:d8a with SMTP id
+ 956f58d0204a3-641e7562fd0mr10867430d50.26.1763403439239; Mon, 17 Nov 2025
+ 10:17:19 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20251022183717.70829-1-npache@redhat.com> <20251022183717.70829-14-npache@redhat.com>
+ <20251109024013.fzt7xxpmxwi75xgr@master>
+In-Reply-To: <20251109024013.fzt7xxpmxwi75xgr@master>
+From: Nico Pache <npache@redhat.com>
+Date: Mon, 17 Nov 2025 11:16:53 -0700
+X-Gm-Features: AWmQ_bnbDA-LvF9eb5QkiR_KgOmDIKODHM2kGY-8vhaQuyICX8DSbvUaiKBYszo
+Message-ID: <CAA1CXcA9zaGqLPHnJWH=fKPUjb02dV+rKgfmsRZOGdeukiC8eg@mail.gmail.com>
+Subject: Re: [PATCH v12 mm-new 13/15] khugepaged: avoid unnecessary mTHP
+ collapse attempts
+To: Wei Yang <richard.weiyang@gmail.com>
+Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+	linux-mm@kvack.org, linux-doc@vger.kernel.org, david@redhat.com, 
+	ziy@nvidia.com, baolin.wang@linux.alibaba.com, lorenzo.stoakes@oracle.com, 
+	Liam.Howlett@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com, 
+	corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org, 
+	mathieu.desnoyers@efficios.com, akpm@linux-foundation.org, baohua@kernel.org, 
+	willy@infradead.org, peterx@redhat.com, wangkefeng.wang@huawei.com, 
+	usamaarif642@gmail.com, sunnanyong@huawei.com, vishal.moola@gmail.com, 
+	thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com, kas@kernel.org, 
+	aarcange@redhat.com, raquini@redhat.com, anshuman.khandual@arm.com, 
+	catalin.marinas@arm.com, tiwai@suse.de, will@kernel.org, 
+	dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org, jglisse@google.com, 
+	surenb@google.com, zokeefe@google.com, hannes@cmpxchg.org, 
+	rientjes@google.com, mhocko@suse.com, rdunlap@infradead.org, hughd@google.com, 
+	lance.yang@linux.dev, vbabka@suse.cz, rppt@kernel.org, jannh@google.com, 
+	pfalcato@suse.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On 2025-11-10 at 18:32:21 +0100, Alexander Potapenko wrote:
->On Wed, Oct 29, 2025 at 8:05=E2=80=AFPM Maciej Wieczor-Retman
-><m.wieczorretman@pm.me> wrote:
->>
->> From: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
->>
->> The problem presented here is related to NUMA systems and tag-based
->> KASAN modes - software and hardware ones. It can be explained in the
->> following points:
->>
->>         1. There can be more than one virtual memory chunk.
->>         2. Chunk's base address has a tag.
->>         3. The base address points at the first chunk and thus inherits
->>            the tag of the first chunk.
->>         4. The subsequent chunks will be accessed with the tag from the
->>            first chunk.
->>         5. Thus, the subsequent chunks need to have their tag set to
->>            match that of the first chunk.
->>
->> Refactor code by moving it into a helper in preparation for the actual
->> fix.
+On Sat, Nov 8, 2025 at 7:40=E2=80=AFPM Wei Yang <richard.weiyang@gmail.com>=
+ wrote:
 >
->The code in the helper function:
+> On Wed, Oct 22, 2025 at 12:37:15PM -0600, Nico Pache wrote:
+> >There are cases where, if an attempted collapse fails, all subsequent
+> >orders are guaranteed to also fail. Avoid these collapse attempts by
+> >bailing out early.
+> >
+> >Signed-off-by: Nico Pache <npache@redhat.com>
+> >---
+> > mm/khugepaged.c | 31 ++++++++++++++++++++++++++++++-
+> > 1 file changed, 30 insertions(+), 1 deletion(-)
+> >
+> >diff --git a/mm/khugepaged.c b/mm/khugepaged.c
+> >index e2319bfd0065..54f5c7888e46 100644
+> >--- a/mm/khugepaged.c
+> >+++ b/mm/khugepaged.c
+> >@@ -1431,10 +1431,39 @@ static int collapse_scan_bitmap(struct mm_struct=
+ *mm, unsigned long address,
+> >                       ret =3D collapse_huge_page(mm, address, reference=
+d,
+> >                                                unmapped, cc, mmap_locke=
+d,
+> >                                                order, offset);
+> >-                      if (ret =3D=3D SCAN_SUCCEED) {
+> >+
+> >+                      /*
+> >+                       * Analyze failure reason to determine next actio=
+n:
+> >+                       * - goto next_order: try smaller orders in same =
+region
+> >+                       * - continue: try other regions at same order
+> >+                       * - break: stop all attempts (system-wide failur=
+e)
+> >+                       */
+> >+                      switch (ret) {
+> >+                      /* Cases were we should continue to the next regi=
+on */
+> >+                      case SCAN_SUCCEED:
+> >                               collapsed +=3D 1UL << order;
+> >+                              fallthrough;
+> >+                      case SCAN_PTE_MAPPED_HUGEPAGE:
+> >                               continue;
+> >+                      /* Cases were lower orders might still succeed */
+> >+                      case SCAN_LACK_REFERENCED_PAGE:
+> >+                      case SCAN_EXCEED_NONE_PTE:
+> >+                      case SCAN_EXCEED_SWAP_PTE:
+> >+                      case SCAN_EXCEED_SHARED_PTE:
+> >+                      case SCAN_PAGE_LOCK:
+> >+                      case SCAN_PAGE_COUNT:
+> >+                      case SCAN_PAGE_LRU:
+> >+                      case SCAN_PAGE_NULL:
+> >+                      case SCAN_DEL_PAGE_LRU:
+> >+                      case SCAN_PTE_NON_PRESENT:
+> >+                      case SCAN_PTE_UFFD_WP:
+> >+                      case SCAN_ALLOC_HUGE_PAGE_FAIL:
+> >+                              goto next_order;
+> >+                      /* All other cases should stop collapse attempts =
+*/
+> >+                      default:
+> >+                              break;
+> >                       }
+> >+                      break;
 >
->> +void __kasan_unpoison_vmap_areas(struct vm_struct **vms, int nr_vms)
->> +{
->> +       int area;
->> +
->> +       for (area =3D 0 ; area < nr_vms ; area++) {
->> +               kasan_poison(vms[area]->addr, vms[area]->size,
->> +                            arch_kasan_get_tag(vms[area]->addr), false)=
-;
->> +       }
->> +}
->
->is different from what was originally called:
->
->> -       for (area =3D 0; area < nr_vms; area++)
->> -               vms[area]->addr =3D kasan_unpoison_vmalloc(vms[area]->ad=
-dr,
->> -                               vms[area]->size, KASAN_VMALLOC_PROT_NORM=
-AL);
->> +       kasan_unpoison_vmap_areas(vms, nr_vms);
->
->, so the patch description is a bit misleading.
->
->Please also ensure you fix the errors reported by kbuild test robot.
+> One question here:
 
-Thanks for looking at the series! Yes, I'll fix these two patches, I've
-split them off into a separate 'fixes' series and I'm trying to make
-sure it's an acutal refactor this time.
+Hi Wei Yang,
+
+Sorry I forgot to get back to this email.
+
+>
+> Suppose we have iterated several orders and not collapse successfully yet=
+. So
+> the mthp_bitmap_stack[] would look like this:
+>
+> [8 7 6 6]
+>        ^
+>        |
+
+so we always pop before pushing. So it would go
+
+[9]
+pop
+if (collapse fails)
+[8 8]
+lets say we pop and successfully collapse a order 8
+[8]
+Then we fail the other order 8
+[7 7]
+now if we succeed the first order 7
+[7 6 6]
+I believe we are now in the state you wanted to describe.
+
+>
+> Now we found this one pass the threshold check, but it fails with other
+> result.
+
+ok lets say we pass the threshold checks, but the collapse fails for
+any reason that is described in the
+/* Cases were lower orders might still succeed */
+In this case we would continue to order 5 (or lower). Once we are done
+with this branch of the tree we go back to the other order 6 collapse.
+and eventually the order 7.
+
+>
+> Current code looks it would give up at all, but we may still have a chanc=
+e to
+> collapse the above 3 range?
+
+for cases under /* All other cases should stop collapse attempts */
+Yes we would bail out and skip some collapses. I tried to think about
+all the cases were we would still want to continue trying, vs cases
+where the system is probably out of resources or hitting some major
+failure, and we should just break out (as others will probably fail
+too).
+
+But this is also why I separated this patch out on its own. I was
+hoping to have some more focus on the different cases, and make sure I
+handled them in the best possible way. So I really appreciate the
+question :)
+
+* I did some digging through old message to find this *
+
+I believe these are the remaining cases. If these are hit I figured
+it's better to abort.
+
+/* cases where we must stop collapse attempts */
+case SCAN_CGROUP_CHARGE_FAIL:
+case SCAN_COPY_MC:
+case SCAN_ADDRESS_RANGE:
+case SCAN_PMD_NULL:
+case SCAN_ANY_PROCESS:
+case SCAN_VMA_NULL:
+case SCAN_VMA_CHECK:
+case SCAN_SCAN_ABORT:
+case SCAN_PMD_NONE:
+case SCAN_PAGE_ANON:
+case SCAN_PMD_MAPPED:
+case SCAN_FAIL:
+
+Please let me know if you think we should move these to either the
+`continue` or `next order` cases.
+
+Cheers,
+-- Nico
+
+>
+> >               }
+> >
+> > next_order:
+> >--
+> >2.51.0
+>
+> --
+> Wei Yang
+> Help you, Help me
+>
 
 
