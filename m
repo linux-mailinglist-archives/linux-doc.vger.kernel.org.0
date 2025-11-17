@@ -1,132 +1,182 @@
-Return-Path: <linux-doc+bounces-66940-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66942-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50F93C6529A
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 17:33:58 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46E17C6579E
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 18:27:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by tor.lore.kernel.org (Postfix) with ESMTPS id 368FF241D3
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 16:33:57 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 83ADF4EF10C
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 17:19:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE3BD2C11F7;
-	Mon, 17 Nov 2025 16:33:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C324309EEE;
+	Mon, 17 Nov 2025 17:16:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hb5vHLop"
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="St0q6+iO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com [209.85.160.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E497299A8A;
-	Mon, 17 Nov 2025 16:33:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98EAC304BDA
+	for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 17:16:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763397231; cv=none; b=tncCWpRXd2btbCxv3IWeSu1CDI7hmVZuI70aBLzHU42VCq3maA/S10DWMTf3V+gumEhSR4m+w7155uB6ywVGMLaxiqJ7+wdlQXfUTeeXlUYvCnj+2g3A8isgagOivPbTsTocqRxlEqrXZaRkxaPTBAP/81ckcYLJJo5RBqf1Cf0=
+	t=1763399785; cv=none; b=CFdK5lXmD+54Ba5oOlsdvoDlB4QJ2PMTIi6AZ3IrlQrnaO95IRFhzNwMq0gA59kKRj+r/IG/mHP1uhxufzwmDDb/pRv92hXHLASIRNVoEywj/K4IuHoErnEC8DNYkD20QkmlhiKzanIk8k0rSG1uN24BSgP2jnFP32hiBPRH6Cs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763397231; c=relaxed/simple;
-	bh=1Q1SOAiDfsnXhnhehY3Ec9ikpjnQmRtfrNFIyqBG+/g=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=XTdRybP+MNhe2JssGBwj5VnhbC9JI0m5JT4RPXmz9sS8j9Xnyysk5OJJppJs9SQjvN8+khz+E5tEzTx15owVTgo7GkJNGq2f8ATiqJKlLlvEB/xlZwPM1JZbb4julA5jPLDLlg8kgUZXzrFmeCIsDbX+HXotPRkSfx47kxREdRE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hb5vHLop; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8448EC113D0;
-	Mon, 17 Nov 2025 16:33:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763397231;
-	bh=1Q1SOAiDfsnXhnhehY3Ec9ikpjnQmRtfrNFIyqBG+/g=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Hb5vHLopLkdVEg1kX2HuACgID15I4SRGl8eSMSJJ62MrnFRgLnblwV6E1kyo/zQbi
-	 5X0fGxpvyBmBBgj4Yx1cNn5Yiebe2SlubUNjhg7qvfOUY49P++hMDweBgwu1rPoWDX
-	 gw/IzLHik44jBVcIFv71tGnPwsr8Cu5Qo/ZAzToEEcPctjufczlNLLabzKLdsOmiXP
-	 Jvcg1iBked2S+ldK/g7QGcSnou/a0cpxVARlaj1AuA7ShHAK1FZukOjLqFUufTXAlQ
-	 nWZgFH79p25BQQGCh0OM/33id18uYJ9+EhjEldgOMcmKKYWyDtYmyYjsnIr2CNLeUM
-	 6Tq9smTRO0AxA==
-Message-ID: <9da933d7-0922-47fe-9e7a-f7ef2d89803a@kernel.org>
-Date: Mon, 17 Nov 2025 17:33:43 +0100
+	s=arc-20240116; t=1763399785; c=relaxed/simple;
+	bh=2sNLnkk8V5VHxiND7V+FoGQrjFZ2T5dAZtQ/cFM2bC8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=evrdp7vDfAwOcCsQknGzGvkfURZzjKjXiCsX0xWD09iEqB3bqdrPwP/OSVCR9qYg3A3sFwXBz9KAywGKbhG6RVOeJdItjc4NlevQrLamgZEcjTNzyU+vXAL26M84QBa6z3LCH4qBK0NMfydlrc35KXk6pnP3BASzqP/2l3SvXok=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=St0q6+iO; arc=none smtp.client-ip=209.85.160.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
+Received: by mail-qt1-f170.google.com with SMTP id d75a77b69052e-4ee04609ffaso9134271cf.3
+        for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 09:16:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1763399780; x=1764004580; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=P1EKuTl21MaZwOVAnrWkECo68IZFcqZRr/UNlppTPmo=;
+        b=St0q6+iOpxbQP/6k4YKopb2b5abxIoNmFDBUjCQhyPHK+h7d8HKH6xaNs1SrXfm6OZ
+         SX3+iU7AfSkVpcl9Oh20UsDOxLGNyrTJJc60M57mpWVYDN6AnVbBn3x/F0Pr/nl/c57p
+         5jOlIOnA23o0k+wKKWoTyTffzSAy9/U+iWg/cLqgA3zQq/msJHRR/LgxbQaTSBBwO6MZ
+         HKzAgSbvvmGmW1PFfxSgqU9DWWWbgWBmTKIdeGJueyBjy9frttHn2vvAydk/HIgrAZxw
+         cGoTxy1YwOwm3TyCYh3mvEIbvhY1xGP7VBnVqBapoxOOhc2WUKsxkMK9G0cuu6VQah0D
+         A6aA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763399780; x=1764004580;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=P1EKuTl21MaZwOVAnrWkECo68IZFcqZRr/UNlppTPmo=;
+        b=Vn2WukhOU4z4JjjnSyMUP28LolheXb6DQ9FQKX6gZuvfmpynVJx0/iq7dTRmfIaYPV
+         EZ3bUac7vLpsVCgDd7StvWVVRMhm5E1WYE4eOoeBVeP0/fNv9WIQhYBlULKNO+T2rB75
+         NZD7p/0dsII0RTLAdZsM+SWT+e0nvyWuZ4KUC1rFkqQeUH51zoNR+TduCrcIheIFCcAO
+         vWZmQ37+Dn4clWRiOiYDLyiQal2TSzsZLJuv4ZdeczU6+W4TqDPpE6SCJv8XOWul3oYy
+         Z2hhZ6bcvVTksVaI1ewwmHqxMs8v3SPK1hHTbT+w5x1PS34QtwDKPKo3R0ulAlfLzWPj
+         knhw==
+X-Forwarded-Encrypted: i=1; AJvYcCWDCzcFVNKUOJLoNA8oji8ylQ7yNJoIO7rLVFl7+2r+IklRdr89EA30Rc9Aot6l2KJv5MKaQEmxM7k=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxFQniNAW9wUL7CQ5oWU1s69faFU4+7u9GMW0w73j47a2C0qwX/
+	sxi4RV8G4cYNm923ApCv9ucjccQ8u6bCu6TuumqJAGfQsMBO4/K2I6nOsUPiaY8dFEA=
+X-Gm-Gg: ASbGncvnZifEf9Sc2iEnoKOpEiGNhTxbf+V7WS+82676m69yZfRVg1OxpsD439cwdh6
+	FXuuLanA86hb7sSZ/aOYy4dWDpkh+FhtC7Ac2ET8p6q725i1Vyj0gEiGFfnLFQtORZ4UMyJ5Iyy
+	DDxFyQTPeeh+YHc6zQR9jWlNtbZXD6RofhOGPKs1Q/P/O0s6ahrzqtYPSXgv32fFoR8t96Uu2iv
+	xrdm0ug71tgjhfKRjBTVvQD9009jTEKTSCKW3JTbdCZPRdl0tHLiz74BjmMC+nu5sHUYbdRukXY
+	qCl5mho+nHOh0WV+mi18RUtQ/7WpA2oUjrfifNuZqaWl4shIXcVc88ZcWF7HddYVzE3U2dwN7Pg
+	v+cU6tNkwQzLIZiVcqsR6vA8HiZc7zwZPjSUcCJAtYlErl1fzJdkdcgovAMY4epAxczYj8G+zjr
+	YacArSRGLBZwRnkqEwdAz0AsUKr2HLCB/ojiyvdsjoNFDlFzhQiomt5GIh
+X-Google-Smtp-Source: AGHT+IHdomOA3fXFLRj5Qifi24Z8ILoy1R2tZQWL9HXByV1pnhKykseLX/aaxM1vhUTUzCoPwrvJjg==
+X-Received: by 2002:a05:622a:22aa:b0:4ec:ef20:ac52 with SMTP id d75a77b69052e-4edfc87511cmr159168241cf.79.1763399780286;
+        Mon, 17 Nov 2025 09:16:20 -0800 (PST)
+Received: from ziepe.ca (hlfxns017vw-47-55-120-4.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.120.4])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-4ee1c21ea34sm32656311cf.30.2025.11.17.09.16.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 Nov 2025 09:16:19 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1vL2pv-000000005PX-0G4a;
+	Mon, 17 Nov 2025 13:16:19 -0400
+Date: Mon, 17 Nov 2025 13:16:19 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Alex Williamson <alex@shazbot.org>
+Cc: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+	Leon Romanovsky <leon@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>,
+	Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sumit Semwal <sumit.semwal@linaro.org>, Kees Cook <kees@kernel.org>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Ankit Agrawal <ankita@nvidia.com>,
+	Yishai Hadas <yishaih@nvidia.com>,
+	Shameer Kolothum <skolothumtho@nvidia.com>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>,
+	linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-block@vger.kernel.org, iommu@lists.linux.dev,
+	linux-mm@kvack.org, linux-doc@vger.kernel.org,
+	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org,
+	linux-hardening@vger.kernel.org, Alex Mastro <amastro@fb.com>,
+	Nicolin Chen <nicolinc@nvidia.com>,
+	Vivek Kasireddy <vivek.kasireddy@intel.com>
+Subject: Re: [PATCH v7 00/11] vfio/pci: Allow MMIO regions to be exported
+ through dma-buf
+Message-ID: <20251117171619.GB17968@ziepe.ca>
+References: <20251106-dmabuf-vfio-v7-0-2503bf390699@nvidia.com>
+ <20251110134218.5e399b0f.alex@shazbot.org>
+ <da399efa-ad5b-4bdc-964d-b6cc4a4fc55d@amd.com>
+ <20251117083620.4660081a.alex@shazbot.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] dt-bindings: Add tids in bindings and wsen as vendor
-To: Thomas Marangoni <Thomas.Marangoni@becom-group.com>,
- linux-hwmon@vger.kernel.org
-Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
- linux@roeck-us.net, corbet@lwn.net, Jonathan.Cameron@huawei.com,
- Frank.Li@nxp.com, michal.simek@amd.com, rodrigo.gobbi.7@gmail.com,
- chou.cosmo@gmail.com, wenswang@yeah.net, nuno.sa@analog.com,
- paweldembicki@gmail.com, apokusinski01@gmail.com, eajames@linux.ibm.com,
- vassilisamir@gmail.com, heiko@sntech.de, neil.armstrong@linaro.org,
- prabhakar.mahadev-lad.rj@bp.renesas.com, kever.yang@rock-chips.com,
- mani@kernel.org, dev@kael-k.io, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20251117123809.47488-1-Thomas.Marangoni@becom-group.com>
- <20251117123809.47488-4-Thomas.Marangoni@becom-group.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <20251117123809.47488-4-Thomas.Marangoni@becom-group.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20251117083620.4660081a.alex@shazbot.org>
 
-On 17/11/2025 13:38, Thomas Marangoni wrote:
-> This patch adds the tids driver to the bindings as trivial-devices
-> and adds the WSEN manufacturer to the vendor-prefixes.
-> ---
+On Mon, Nov 17, 2025 at 08:36:20AM -0700, Alex Williamson wrote:
+> On Tue, 11 Nov 2025 09:54:22 +0100
+> Christian König <christian.koenig@amd.com> wrote:
+> 
+> > On 11/10/25 21:42, Alex Williamson wrote:
+> > > On Thu,  6 Nov 2025 16:16:45 +0200
+> > > Leon Romanovsky <leon@kernel.org> wrote:
+> > >   
+> > >> Changelog:
+> > >> v7:
+> > >>  * Dropped restore_revoke flag and added vfio_pci_dma_buf_move
+> > >>    to reverse loop.
+> > >>  * Fixed spelling errors in documentation patch.
+> > >>  * Rebased on top of v6.18-rc3.
+> > >>  * Added include to stddef.h to vfio.h, to keep uapi header file independent.  
+> > > 
+> > > I think we're winding down on review comments.  It'd be great to get
+> > > p2pdma and dma-buf acks on this series.  Otherwise it's been posted
+> > > enough that we'll assume no objections.  Thanks,  
+> > 
+> > Already have it on my TODO list to take a closer look, but no idea when that will be.
+> > 
+> > This patch set is on place 4 or 5 on a rather long list of stuff to review/finish.
+> 
+> Hi Christian,
+> 
+> Gentle nudge.  Leon posted v8[1] last week, which is not drawing any
+> new comments.  Do you foresee having time for review that I should
+> still hold off merging for v6.19 a bit longer?  Thanks,
 
-You need to run checkpatch...
+I really want this merged this cycle, along with the iommufd part,
+which means it needs to go into your tree by very early next week on a
+shared branch so I can do the iommufd part on top.
 
-Please do not use "This commit/patch/change", but imperative mood. See
-longer explanation here:
-https://elixir.bootlin.com/linux/v6.16/source/Documentation/process/submitting-patches.rst#L94
+It is the last blocking kernel piece to conclude the viommu support
+roll out into qemu for iommufd which quite a lot of people have been
+working on for years now.
 
-Also, do not reference driver. Explain here hardware, why this is a
-trivial device.
+IMHO there is nothing profound in the dmabuf patch, it was written by
+the expert in the new DMA API operation, and doesn't form any
+troublesome API contracts. It is also the same basic code as from the
+v1 in July just moved into dmabuf .c files instead of vfio .c files at
+Christoph's request.
 
-Best regards,
-Krzysztof
+My hope is DRM folks will pick up the baton and continue to improve
+this to move other drivers away from dma_map_resource(). Simona told
+me people have wanted DMA API improvements for ages, now we have them,
+now is the time!
+
+Any remarks after the fact can be addressed incrementally.
+
+If there are no concrete technical remarks please take it. 6 months is
+long enough to wait for feedback.
+
+Thanks,
+Jason
 
