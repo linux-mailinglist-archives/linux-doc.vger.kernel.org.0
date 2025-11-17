@@ -1,115 +1,130 @@
-Return-Path: <linux-doc+bounces-66961-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-66963-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43584C65D98
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 20:03:41 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id E1C21C65DEF
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 20:08:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sea.lore.kernel.org (Postfix) with ESMTPS id F31C42945E
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 19:03:39 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id E3F9B36356F
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Nov 2025 19:06:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5A84433DED0;
-	Mon, 17 Nov 2025 18:58:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 15435335061;
+	Mon, 17 Nov 2025 19:00:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b="aSMS2vsg"
+	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="V4BdmbS2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-06.mail-europe.com (mail-06.mail-europe.com [85.9.210.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F11A032E756;
-	Mon, 17 Nov 2025 18:58:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.9.210.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A34C232E15A
+	for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 19:00:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763405917; cv=none; b=Isto43x3vG/mj6460lDasaKVfYslz0PJFg3+5DiXdR6NsVW/ESueAbFTSRWX5vYYTfyLj5N8DHB3btWBFAAfklDP1EOTv9MC/0x0AjCgZQuNslcQfdVd7M1UNWUDbgvMW3NJiELFroh8uWzCTI7v5PK2LGrqQyrvikr2JeEh1Ek=
+	t=1763406058; cv=none; b=KwpHBVcs8+8B5I4ciEskUNK51kCT+I1XnLxtSarRFizDbdtDrr3wYslx066iZ70TDlvwyBi7+5PW1xSZYEj3srhsfHwKNkJ5UqIs91DG+xnEKIrerfvEJINSkD564wsk51bvj6M1EUaOI0ysYHvx1cF/4P4wAIzgFVlhJpWL1UI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763405917; c=relaxed/simple;
-	bh=bA/G9mt1u4rsjAb46FDifK77cEAdgWvY/zjnEtGtv7U=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=f168BO/xmMci9Wy8WM5n7wkv5S6hhOYIcNyh63SveOIqi9KFgJd+rzKBnkSgLzLatVcrXuMNleOc6+wij3w6yirJU85dGtO+Ym0WMV3rePelP6NBfEbYO7/m0LbaNMzY8RLPmLs8GO1mxns9o8BrmkLTDi64+GD8jWk/2yTM9xM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me; spf=pass smtp.mailfrom=pm.me; dkim=pass (2048-bit key) header.d=pm.me header.i=@pm.me header.b=aSMS2vsg; arc=none smtp.client-ip=85.9.210.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=pm.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pm.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pm.me;
-	s=protonmail3; t=1763405903; x=1763665103;
-	bh=fhxihtRxC0rWih6zRhIQ0MI/4P4VUJvqw2WCiJpsAFs=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=aSMS2vsgjqhABOKKmX+n7L/nYKJ4HsmbQTEgXiTOoY3Cd2FK585onBnDDSJ+D1ZmH
-	 dj6ZPber0hjFh12DL2S+g5C29ScBlcj2WoRImmKPbgy4i8WhVJyy1lvNs9oM4w0oU/
-	 CdnnnUK2oTosOTZImq1kqIdX65kFrGdsMX9ZnjZQ6L7F4kO+aqbkZ1DTfWbTj6eQdK
-	 rjx8bj6r7nJy22ERnAhd4ghyneoMQLaymChmrZsLvuFej+A7MHrbAXuLjU92A95Q/f
-	 87n5KZbG4GiCTECbznvPERG1bGaG3N+iGeAnP03gABCYzQCdmLEbvi1S4rUGkQhQr2
-	 v1Q7mLEQN4nTw==
-Date: Mon, 17 Nov 2025 18:58:12 +0000
-To: Alexander Potapenko <glider@google.com>
-From: =?utf-8?Q?Maciej_Wiecz=C3=B3r-Retman?= <m.wieczorretman@pm.me>
-Cc: xin@zytor.com, peterz@infradead.org, kaleshsingh@google.com, kbingham@kernel.org, akpm@linux-foundation.org, nathan@kernel.org, ryabinin.a.a@gmail.com, dave.hansen@linux.intel.com, bp@alien8.de, morbo@google.com, jeremy.linton@arm.com, smostafa@google.com, kees@kernel.org, baohua@kernel.org, vbabka@suse.cz, justinstitt@google.com, wangkefeng.wang@huawei.com, leitao@debian.org, jan.kiszka@siemens.com, fujita.tomonori@gmail.com, hpa@zytor.com, urezki@gmail.com, ubizjak@gmail.com, ada.coupriediaz@arm.com, nick.desaulniers+lkml@gmail.com, ojeda@kernel.org, brgerst@gmail.com, elver@google.com, pankaj.gupta@amd.com, mark.rutland@arm.com, trintaeoitogc@gmail.com, jpoimboe@kernel.org, thuth@redhat.com, pasha.tatashin@soleen.com, dvyukov@google.com, jhubbard@nvidia.com, catalin.marinas@arm.com, yeoreum.yun@arm.com, mhocko@suse.com, lorenzo.stoakes@oracle.com, samuel.holland@sifive.com, vincenzo.frascino@arm.com, bigeasy@linutronix.de, surenb@google.com, ardb@kernel.org,
-	Liam.Howlett@oracle.com, nicolas.schier@linux.dev, ziy@nvidia.com, kas@kernel.org, tglx@linutronix.de, mingo@redhat.com, broonie@kernel.org, corbet@lwn.net, andreyknvl@gmail.com, maciej.wieczor-retman@intel.com, david@redhat.com, maz@kernel.org, rppt@kernel.org, will@kernel.org, luto@kernel.org, kasan-dev@googlegroups.com, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, x86@kernel.org, linux-kbuild@vger.kernel.org, linux-mm@kvack.org, llvm@lists.linux.dev, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v6 10/18] x86/mm: Physical address comparisons in fill_p*d/pte
-Message-ID: <j6s4vcbtgjas2ktnpx7etguc2nccxa3o5hz3vabes7fn7gfb5e@xxbiwnnps64e>
-In-Reply-To: <CAG_fn=Ut9JUpStLiO+GsoBpn3d_EyyttcuBby=EKzuxkKdcKcw@mail.gmail.com>
-References: <cover.1761763681.git.m.wieczorretman@pm.me> <da6cee1f1e596da12ef6e57202c26ec802f7528a.1761763681.git.m.wieczorretman@pm.me> <CAG_fn=Ut9JUpStLiO+GsoBpn3d_EyyttcuBby=EKzuxkKdcKcw@mail.gmail.com>
-Feedback-ID: 164464600:user:proton
-X-Pm-Message-ID: 5443841a22fdb0cd19c2ceb9e40b8cdbb4f4e884
+	s=arc-20240116; t=1763406058; c=relaxed/simple;
+	bh=W/pP15q1CttsZvUfyX6F2C+iK5S6h3qctb/NEBwupaE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=euV2EoWfq3Ofo33/L5tyNtbJnctv0tqMujc3NzEfvjJr2cJjlLgbq3hoTz1rd6ZZvlxbOrsmxliINivXKB5/kvC6DiYVUgdMPaxqEdd+PvH4AsMwMKj1zsluwouwrUOunKNl1kHm73n/iBCHLbobfnC10txwyC52qdAcLldwx8o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=V4BdmbS2; arc=none smtp.client-ip=209.85.208.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-64080ccf749so6380890a12.2
+        for <linux-doc@vger.kernel.org>; Mon, 17 Nov 2025 11:00:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google; t=1763406053; x=1764010853; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=HPFoc/+4ns3fO2ktzkE/+/lUeXaO04xK8Lezo7jSI84=;
+        b=V4BdmbS2aYVd3zPMLXZ8nNGnKhBWGeLQk1Rmw45vzvGzqb8xoAOlOWeQLht45ONAkU
+         oRlsa8N5dj8Dbap92l9JEemjKwZxJbBu9+MXeeWtPbkMhm1KxXwk7BXyfmjGl0Wm2kNg
+         sBIFQ0J4SVi1SM0ASfD30Gqf0b6Nk+Vb6yJX5MZaZx5oay8nyuaorRTe94iA1YqaGqv7
+         Br+pWhCp7cnFXqj5bs75RyT2Tl8iWRKESqjBkIb13AB25scneGG54OmEGl5G+y3L1q6E
+         HZWahSHEdcC2pkD5fNyhhLXRT+k324xymdsFLV/+g6pZjADxD3ouZ6hXEY/svxUJLKVp
+         AUYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763406053; x=1764010853;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HPFoc/+4ns3fO2ktzkE/+/lUeXaO04xK8Lezo7jSI84=;
+        b=dp29Ptad169S6eskLY09pr9x741sBSSFm+HbwcE1g2eDbfQuloCcb31bPlzpUc61bA
+         DkAGIw0Hhq4Zp5xXRaMrl8CnGkQHT9It7iQYOFDvo9K1q23O+okpZCN5wcV7ScjFZXX/
+         z4LMCz4znIipITnJCMzobrC9cRRLZaTYqJ9eWx5Ob2IcfzH72vZ2cPiOoXaSfShrnwYr
+         slCz2vUjRhTEU9P1bJEFh619QghU1M7YS8KAekrJMFlTUltP9kWpSCKhajltbXeqi81B
+         11KeulAfWV6FawiLmw257hl/EeAWGPcTK4YJObRMJ2UqM7Kjhg8mxhfwnb1d5TVnBkko
+         b5rA==
+X-Forwarded-Encrypted: i=1; AJvYcCULkI24AcA5qeAv7wk6EdIGeHuppTf0XXdd4+k8BItKBULsGBjoksq5bMgR4xSHbRlqu1jGEiUEP58=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw8BddtZjGJ+NAM+W+JJoOGNfzD9xvT1pbFQcoXw6Y1F0TtGIvV
+	J1L27hfqqwMCJ7S6Sq1ufVE1hMOXclHghtkx/l3rTUcnr5WZMiJMfWGyupmbe9eAcC7y97uYRPP
+	IAIkk/Cu+HDtPqWUWbxldMQK46AZudYKaScBBqFDvlA==
+X-Gm-Gg: ASbGnctWQnWgRvChVq4wSDfmkhoh6gc/p+56QcS2nDdpTtVDa4XmEipvf3ESEnB/Dbg
+	zAra5GM0Gk/0QJ5KY+0re48mJ3Peffg7FVkL1pz/76wgT/6uE2uW6ePxxc6elw//4jrTtEFL4hr
+	WWhaD6Nc8r5tzFXIPxH2+Es16DKFDQWyPRTVkPfNEYFAOHMFppJo+Z4B/TGtyqeiHjzv0awntdt
+	pSnHBbE8eDE1zr9aNnvPFaoTh+lrSLdMLLGfF1fAsU72ZpCqHSKEwiYXKv7XQjKKVe7
+X-Google-Smtp-Source: AGHT+IFV4NJXr23fgmib+nZZop8ZpcGlfzValh3mFozDE5HCWs4UKMYvFXIv7w0dSviSfrbdSBGLz4YMmJN++K6QINE=
+X-Received: by 2002:a05:6402:2812:b0:640:bb28:9a28 with SMTP id
+ 4fb4d7f45d1cf-64350e237b9mr14060340a12.15.1763406052900; Mon, 17 Nov 2025
+ 11:00:52 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20251115233409.768044-1-pasha.tatashin@soleen.com>
+ <20251115233409.768044-21-pasha.tatashin@soleen.com> <aRsDb-4bXFQ9Zmtu@kernel.org>
+In-Reply-To: <aRsDb-4bXFQ9Zmtu@kernel.org>
+From: Pasha Tatashin <pasha.tatashin@soleen.com>
+Date: Mon, 17 Nov 2025 14:00:15 -0500
+X-Gm-Features: AWmQ_bm3PVSUD_ScaaBFLOLZ3gtlTTKqmWWQ6wfPBc2TSiFgvBGhnxI_qyTqjOU
+Message-ID: <CA+CK2bCfPeY558f499JHKN7aekDzsxQkZJ9Uz4e+saR0qtXyfg@mail.gmail.com>
+Subject: Re: [PATCH v6 20/20] tests/liveupdate: Add in-kernel liveupdate test
+To: Mike Rapoport <rppt@kernel.org>
+Cc: pratyush@kernel.org, jasonmiu@google.com, graf@amazon.com, 
+	dmatlack@google.com, rientjes@google.com, corbet@lwn.net, 
+	rdunlap@infradead.org, ilpo.jarvinen@linux.intel.com, kanie@linux.alibaba.com, 
+	ojeda@kernel.org, aliceryhl@google.com, masahiroy@kernel.org, 
+	akpm@linux-foundation.org, tj@kernel.org, yoann.congal@smile.fr, 
+	mmaurer@google.com, roman.gushchin@linux.dev, chenridong@huawei.com, 
+	axboe@kernel.dk, mark.rutland@arm.com, jannh@google.com, 
+	vincent.guittot@linaro.org, hannes@cmpxchg.org, dan.j.williams@intel.com, 
+	david@redhat.com, joel.granados@kernel.org, rostedt@goodmis.org, 
+	anna.schumaker@oracle.com, song@kernel.org, linux@weissschuh.net, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-mm@kvack.org, 
+	gregkh@linuxfoundation.org, tglx@linutronix.de, mingo@redhat.com, 
+	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, 
+	rafael@kernel.org, dakr@kernel.org, bartosz.golaszewski@linaro.org, 
+	cw00.choi@samsung.com, myungjoo.ham@samsung.com, yesanishhere@gmail.com, 
+	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com, 
+	aleksander.lobakin@intel.com, ira.weiny@intel.com, 
+	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de, 
+	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com, 
+	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net, 
+	brauner@kernel.org, linux-api@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	saeedm@nvidia.com, ajayachandra@nvidia.com, jgg@nvidia.com, parav@nvidia.com, 
+	leonro@nvidia.com, witu@nvidia.com, hughd@google.com, skhawaja@google.com, 
+	chrisl@kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On 2025-11-10 at 17:24:38 +0100, Alexander Potapenko wrote:
->On Wed, Oct 29, 2025 at 9:07=E2=80=AFPM Maciej Wieczor-Retman
-><m.wieczorretman@pm.me> wrote:
->>
->> From: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
->>
->> Calculating page offset returns a pointer without a tag. When comparing
->> the calculated offset to a tagged page pointer an error is raised
->> because they are not equal.
->>
->> Change pointer comparisons to physical address comparisons as to avoid
->> issues with tagged pointers that pointer arithmetic would create. Open
->> code pte_offset_kernel(), pmd_offset(), pud_offset() and p4d_offset().
->> Because one parameter is always zero and the rest of the function
->> insides are enclosed inside __va(), removing that layer lowers the
->> complexity of final assembly.
->>
->> Signed-off-by: Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>
->> ---
->> Changelog v2:
->> - Open code *_offset() to avoid it's internal __va().
->>
->>  arch/x86/mm/init_64.c | 11 +++++++----
->>  1 file changed, 7 insertions(+), 4 deletions(-)
->>
->> diff --git a/arch/x86/mm/init_64.c b/arch/x86/mm/init_64.c
->> index 0e4270e20fad..2d79fc0cf391 100644
->> --- a/arch/x86/mm/init_64.c
->> +++ b/arch/x86/mm/init_64.c
->> @@ -269,7 +269,10 @@ static p4d_t *fill_p4d(pgd_t *pgd, unsigned long va=
-ddr)
->>         if (pgd_none(*pgd)) {
->>                 p4d_t *p4d =3D (p4d_t *)spp_getpage();
->>                 pgd_populate(&init_mm, pgd, p4d);
->> -               if (p4d !=3D p4d_offset(pgd, 0))
->> +
->> +               if (__pa(p4d) !=3D (pgtable_l5_enabled() ?
->> +                                 __pa(pgd) :
->> +                                 (unsigned long)pgd_val(*pgd) & PTE_PFN=
-_MASK))
+> >  #endif /* _LINUX_LIVEUPDATE_ABI_LUO_H */
+> > diff --git a/kernel/liveupdate/luo_file.c b/kernel/liveupdate/luo_file.c
+> > index df337c9c4f21..9a531096bdb5 100644
+> > --- a/kernel/liveupdate/luo_file.c
+> > +++ b/kernel/liveupdate/luo_file.c
+> > @@ -834,6 +834,8 @@ int liveupdate_register_file_handler(struct liveupdate_file_handler *fh)
+> >       INIT_LIST_HEAD(&fh->flb_list);
+> >       list_add_tail(&fh->list, &luo_file_handler_list);
+> >
+> > +     liveupdate_test_register(fh);
+> > +
 >
->Did you test with both 4- and 5-level paging?
->If I understand correctly, p4d and pgd are supposed to be the same
->under !pgtable_l5_enabled().
+> Why this cannot be called from the test?
 
-Yes, I do test on both paging modes. Looking at p4d_offset() I think I
-got the cases reversed somehow. Weird that it didn't raise any issues
-afterwards. Thanks for pointing it out :)
+Because test does not have access to all file_handlers that are being
+registered with LUO.
 
+Pasha
 
