@@ -1,169 +1,142 @@
-Return-Path: <linux-doc+bounces-67149-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67152-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 037B0C6B884
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 21:11:03 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F0EDC6B919
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 21:19:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 33E70359FC1
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 20:11:02 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTPS id 508B4294E7
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 20:19:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 969E92F5335;
-	Tue, 18 Nov 2025 20:10:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 94B8F306D26;
+	Tue, 18 Nov 2025 20:19:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=shazbot.org header.i=@shazbot.org header.b="dKsiVfIf";
-	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="b4BcgUdY"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iKW4jfDa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from fout-b5-smtp.messagingengine.com (fout-b5-smtp.messagingengine.com [202.12.124.148])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-io1-f44.google.com (mail-io1-f44.google.com [209.85.166.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4164E2877F1;
-	Tue, 18 Nov 2025 20:10:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.148
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C36B92FFF91
+	for <linux-doc@vger.kernel.org>; Tue, 18 Nov 2025 20:19:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763496656; cv=none; b=JCA8g81SQYc2IKA0I1g7eTw79iQbtHdN7NKEmgwS/+v46D2AH+HaDjHVEbtzqzet5LvBWMPzg8f1legDF0a5EMrXcvUL9x69AgZSOvvuBEm+irz7MpfkI5wgi0iL3XH3+xh7BOahCI9+8L0u/Ya2Bzj5HqQTDDcAIfdRzT/dPPM=
+	t=1763497148; cv=none; b=lcd1XOiTBiAaXRbXfxTD8yfrBVBTt/NSH5BPpawkRAac0dwC9LVhXGmMrDBznu6deLqov8Hk9Ww3N7dSq73aGvQVUY+43ScST56nNj6FFHBKTPeDPm00D1yaxlJOVTybvJuuB5oTISdeUHk70of4C15sbMSEidW75R7wvOaYuVY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763496656; c=relaxed/simple;
-	bh=1fth7gGrJVrKK4e+LaBq1u2hD9qEZfqURKPU94apF1o=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=fnulnLqX4/VfICqcm5wv9BtEQc5MZe5zpRTlcW9l7sFqapZDAZ6hf2vXjpB66Y8xCF0wRLmPEc454vPNH4NmqiH8HR3TBCZCpL7LJKPNLF4d3dxsBbC50KgMBXErxlQboS8yhpot4QSG5oqLBh1LSVAXJF0OmqzGmm538l9c5UI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=shazbot.org; spf=pass smtp.mailfrom=shazbot.org; dkim=pass (2048-bit key) header.d=shazbot.org header.i=@shazbot.org header.b=dKsiVfIf; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=b4BcgUdY; arc=none smtp.client-ip=202.12.124.148
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=shazbot.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=shazbot.org
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
-	by mailfout.stl.internal (Postfix) with ESMTP id 7E23D1D00011;
-	Tue, 18 Nov 2025 15:10:50 -0500 (EST)
-Received: from phl-mailfrontend-01 ([10.202.2.162])
-  by phl-compute-05.internal (MEProxy); Tue, 18 Nov 2025 15:10:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=shazbot.org; h=
-	cc:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1763496650;
-	 x=1763583050; bh=JKFcF4a+cNbrtlp+FIdvl2Y5hDbZC7BuoipJJsoD+Xg=; b=
-	dKsiVfIfgRz3kNZHBVLW4w4a09M1An1YvYNcijPZ2AbBFboB1FxX0SwNlWv2rI3m
-	jLV/veDDgOhw9IS/7J8t81UctKoauLfjaXOyWqAp44a4MChEre02HVqGpMlsgIQ5
-	OVDMVHJablLjrzU+B8hL8QqRQ1+FyFvGpkw3BwGVonzwVgBd7NvVAsA+IlLoTNVT
-	kot+Gxju1ZTzga7Bee121GDDqWNUI+lqCGgG89zYk6ckhz8rEtrBbj0mNQhPhOcc
-	4uOd0pLPLZNlB7v3J3DPPBINt8sCnltepxWxkehpeYBA1Harjd8rccj6w8gmbij3
-	nDgGERM8bBQyy2uD5HkTCw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1763496650; x=
-	1763583050; bh=JKFcF4a+cNbrtlp+FIdvl2Y5hDbZC7BuoipJJsoD+Xg=; b=b
-	4BcgUdYcPIovWahMuxFSya7KoSim52uHsgehgqj/ncnPhxE3qTN1l9XUmfH5dLA0
-	nA9E0d7Le0Mc4/Xf7R7J2lQ/+CU38ymtFa6iaGShFA8iMhhJds2uyGYsUrmk0AGZ
-	wwHqhNPuDyy3T1wmEKwJ83vo1u1sv9Rg4GlJkbcIEp90cjcQFPESsb71YSlLcyQd
-	UEAV/QlH64EIJ1lqCiYY4cKUDhQBuK7Z/C878cS9zvqM5xyFNzLBS1ECI4FZmTN2
-	zM7jJStJjqi5FJm842MkyHtQUwl7n/Nil39X0PVzn77HpNlgls3inc0qko2NNjgy
-	yxSKoNtyts9q6kzxUKgCg==
-X-ME-Sender: <xms:yNIcaVSvmDTF8VooyebZ_3iAuWJLF1nEpDYA2SFkLVpCRLI7ry-_yQ>
-    <xme:yNIcaVmEGLCY5Y5fPmoEJKQOT9y5RfkjFiDcjDM82fNtYUukk3d8ZO-gnIlZyOOPP
-    GAmhpj4l6gxq2LE9j06pWjqNlxkgm2Z3bZOzOLp7Twv9NJiGOok>
-X-ME-Received: <xmr:yNIcaTzm8Q6mhtNsmKzPVt9MMUAmwOqIQ5a4gIx8lLQ0mWSG2DA3IJH6>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggddvvddvvdegucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkjghfgggtgfesthejredttddtvdenucfhrhhomheptehlvgigucgh
-    ihhllhhirghmshhonhcuoegrlhgvgiesshhhrgiisghothdrohhrgheqnecuggftrfgrth
-    htvghrnhepteetudelgeekieegudegleeuvdffgeehleeivddtfeektdekkeehffehudet
-    hffhnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomheprg
-    hlvgigsehshhgriigsohhtrdhorhhgpdhnsggprhgtphhtthhopeefgedpmhhouggvpehs
-    mhhtphhouhhtpdhrtghpthhtohepkhgvvhhinhdrthhirghnsehinhhtvghlrdgtohhmpd
-    hrtghpthhtoheplhgvohhnsehkvghrnhgvlhdrohhrghdprhgtphhtthhopegshhgvlhhg
-    rggrshesghhoohhglhgvrdgtohhmpdhrtghpthhtoheplhhoghgrnhhgseguvghlthgrth
-    gvvgdrtghomhdprhgtphhtthhopegrgigsohgvsehkvghrnhgvlhdrughkpdhrtghpthht
-    oheprhhosghinhdrmhhurhhphhihsegrrhhmrdgtohhmpdhrtghpthhtohepjhhorhhose
-    eksgihthgvshdrohhrghdprhgtphhtthhopeifihhllheskhgvrhhnvghlrdhorhhgpdhr
-    tghpthhtohepmhdrshiihihprhhofihskhhisehsrghmshhunhhgrdgtohhm
-X-ME-Proxy: <xmx:yNIcaf26KhFFpsUivmrVFhTObM-rKgDaEfC2zz-v9EkVExJppHMvwg>
-    <xmx:yNIcaSxvHZrLpODSMU140Px8A7i2ec7wW6bLtqhUmriZmnVfLlueSA>
-    <xmx:yNIcaQJG6BeoorANBFQ22bf_jmYfsKJ4ShsrttygfX-HrSPLvyCzdg>
-    <xmx:yNIcaY_XYy0V85f_vM-5tra11pYCLKaPoalvR53bkh_Q_lBlGmVbiA>
-    <xmx:ytIcabAqBX1IJkm5xY2Na7fzL8IPkzZ-PxplGx_6mGsuM1UBrv418EQg>
-Feedback-ID: i03f14258:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 18 Nov 2025 15:10:45 -0500 (EST)
-Date: Tue, 18 Nov 2025 13:10:38 -0700
-From: Alex Williamson <alex@shazbot.org>
-To: "Tian, Kevin" <kevin.tian@intel.com>
-Cc: Leon Romanovsky <leon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
- Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>,
- "Robin Murphy" <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
- Will Deacon <will@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- "Jason Gunthorpe" <jgg@ziepe.ca>,
- Andrew Morton <akpm@linux-foundation.org>,
- Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>,
- Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
- Kees Cook <kees@kernel.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- "Ankit Agrawal" <ankita@nvidia.com>, Yishai Hadas <yishaih@nvidia.com>,
- "Shameer Kolothum" <skolothumtho@nvidia.com>,
- Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>,
- "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
- "iommu@lists.linux.dev" <iommu@lists.linux.dev>,
- "linux-mm@kvack.org" <linux-mm@kvack.org>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "linux-hardening@vger.kernel.org" <linux-hardening@vger.kernel.org>,
- Alex Mastro <amastro@fb.com>, Nicolin Chen <nicolinc@nvidia.com>
-Subject: Re: [PATCH v8 09/11] vfio/pci: Enable peer-to-peer DMA transactions
- by default
-Message-ID: <20251118131038.32b7804d.alex@shazbot.org>
-In-Reply-To: <BN9PR11MB52767F78317AF3AB94A5B7D38CD6A@BN9PR11MB5276.namprd11.prod.outlook.com>
-References: <20251111-dmabuf-vfio-v8-0-fd9aa5df478f@nvidia.com>
-	<20251111-dmabuf-vfio-v8-9-fd9aa5df478f@nvidia.com>
-	<BN9PR11MB52767F78317AF3AB94A5B7D38CD6A@BN9PR11MB5276.namprd11.prod.outlook.com>
+	s=arc-20240116; t=1763497148; c=relaxed/simple;
+	bh=YiavUBFlby9+q7R3jVOye6yVNiX9SzeQZ+DB+RZTe/8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=o1ipMZDZTfpdj9cSCCLSYv3yku3vzwnK9jBi9fnIoqCMSNVdt5o/X0md/7Fa4nPTwh9C7Acs8OsmbehasgMZ1RW8oJ0JQlf7/kvbnzHlxaox3h2MwtyLsWj3xSpEqxb8owF+EgeWlzHuLyp8DbVBjFqe4B4poGzMrfI1YmU4CT0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iKW4jfDa; arc=none smtp.client-ip=209.85.166.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-io1-f44.google.com with SMTP id ca18e2360f4ac-88703c873d5so216686139f.3
+        for <linux-doc@vger.kernel.org>; Tue, 18 Nov 2025 12:19:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763497145; x=1764101945; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LLlQvuuD9MiSXKGka7d4IYEwieMdPmkGOdzcDHTOiMk=;
+        b=iKW4jfDaJowZKfuyuNxHJ4us1Cwfy+9jnmit3sOgYDqRdlKlILwGQNBmgy7vJDLEd/
+         y/Id8FL8VtuBvth+7BpyXX9vaNms4+xPRG2ubFFA34bdiYyWYt/v79bMAqGEau3172NU
+         1TpAhpJjc7Kxl0u/5PJk1VQLH9dUPrr/FH3FAVllw4V5YIugHXjJ5/zWmUKDC8hnDJyQ
+         zWtAfDOtn+zsjU2zNej1mFNqb1TZcDpCXN35MjECtJqyT1Xma+xzvENkQU1Ur39tDbZL
+         tLtzywLnxHF+O3hoyhmU2fVcW7v6nX5Lev+hC6mr+tqtNnE4+bIZJmXnM64hq42qpHqj
+         GnEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763497145; x=1764101945;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=LLlQvuuD9MiSXKGka7d4IYEwieMdPmkGOdzcDHTOiMk=;
+        b=o+2eW8XYRUSd3N3eWaWBiH/CPEv828/MyCxS9Yunpue3gVHnpAM7aglMYwsNq1MOaZ
+         Ysge0XWM6wU/ErKNWE4Lsz+k9EhVb3MhEhhVj2A6+Tlu0AGStyH+PUGqmnWWn3tvu2ng
+         aPG6RLPTNLhiK4s6okjkLgydSmw0HKfI6IaGSNt7y5QDolKwSpzKeXf1x9XsdrDi0wRH
+         qo6lz3oyxX6yNCsp8yZRdoG83lLTphD0wnRuAjEUQRug/5fwGEOAeh5NRQbbp+iFy9gz
+         o93WoworsTdZE6fOJP0E++Zti+TjWJLljoT4G78vhiZwB+qWCEmrbyo1sW/g5qmt/3+B
+         TS9Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUbt0l/4uYszV0i4sgSvpRiYf0SxlEuMf1EcrSZ2EEhSipbUOzptQiwzT5H4CMePCvPF3otJtQp/ZQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyEyzHZK4RyNjRYq7gW3yNqZKcOFQvGkIc43kGJ/V6ik3n1vQub
+	N7x2Lmrd9Kh6n1vg46t5rQA9tbKLUxJvs3Fq35P9PSZGf4WUqaWlZnRr
+X-Gm-Gg: ASbGncsVFziPbji+oUZMqqVdmo0efrvZVBqJGQBQ86IjHO5tChbiYbINnae4Kls61VL
+	i72uAG/4AyoH/sr1EZdybuzH7nXnd80PrwzvwKI9EEV3oa8qeY817gpAq9MKBMtx+XGnm9Is6ac
+	sChoZqrnqYi4bPPw/V7oEirCUpz/IHqfFOI/xM56TSVdMER9utPRnSVicz97/VJhK0clyr4WZ7+
+	kW8kebAnBVGhi6uKBrewHp/hNNiIJdAqtNFkEfxWVmrdWv4rtnulUvlaK0HfUheeCyimJdG6QYy
+	mG+4C509smpgp1cavy+nqzSaJ+/1NasCzSelp2qhZPrcqlt+2SAop39dkgl/gcr9AW2apxQhTE7
+	/hAWR0/eptYB2xWBBxI3IbA+ICXKNI1OwBHRVt8zm0lVYBUgnYWLNoPAqkbnWcPcJAtwJy40U3Z
+	Es94LHt3+034H9XYCmavHn65DfKfgWebVXku1h2SaroISJHMOxZH/ROeQCeZzfmMLm5+4=
+X-Google-Smtp-Source: AGHT+IEIscdoyaRBlf+VL0JUqG2kMnrPA8EkFzQ/Jz5eax8vm0Cs6+BH6q+0DbWPfuhn3YzO7H5xxQ==
+X-Received: by 2002:a05:6602:1587:b0:92f:20b8:7e22 with SMTP id ca18e2360f4ac-948e0de1a6bmr2212655939f.18.1763497144913;
+        Tue, 18 Nov 2025 12:19:04 -0800 (PST)
+Received: from godzilla.raven-morpho.ts.net (c-98-38-17-99.hsd1.co.comcast.net. [98.38.17.99])
+        by smtp.googlemail.com with ESMTPSA id ca18e2360f4ac-948fd4c273bsm419823939f.18.2025.11.18.12.19.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 18 Nov 2025 12:19:04 -0800 (PST)
+From: Jim Cromie <jim.cromie@gmail.com>
+To: linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	gregkh@linuxfoundation.org,
+	jbaron@akamai.com
+Cc: ukaszb@chromium.org,
+	louis.chauvet@bootlin.com,
+	Jim Cromie <jim.cromie@gmail.com>,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v6 04/31] docs/dyndbg: explain flags parse 1st
+Date: Tue, 18 Nov 2025 13:18:14 -0700
+Message-ID: <20251118201842.1447666-5-jim.cromie@gmail.com>
+X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20251118201842.1447666-1-jim.cromie@gmail.com>
+References: <20251118201842.1447666-1-jim.cromie@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Tue, 18 Nov 2025 07:18:36 +0000
-"Tian, Kevin" <kevin.tian@intel.com> wrote:
+When writing queries to >control, flags are parsed 1st, since they are
+the only required field, and they require specific compositions.  So
+if the flags draw an error (on those specifics), then keyword errors
+aren't reported.  This can be mildly confusing/annoying, so explain it
+instead.
 
-> > From: Leon Romanovsky <leon@kernel.org>
-> > Sent: Tuesday, November 11, 2025 5:58 PM
-> > 
-> > From: Leon Romanovsky <leonro@nvidia.com>  
-> 
-> not required with only your own s-o-b
-> 
-> > @@ -2090,6 +2092,9 @@ int vfio_pci_core_init_dev(struct vfio_device
-> > *core_vdev)
-> >  	INIT_LIST_HEAD(&vdev->dummy_resources_list);
-> >  	INIT_LIST_HEAD(&vdev->ioeventfds_list);
-> >  	INIT_LIST_HEAD(&vdev->sriov_pfs_item);
-> > +	ret = pcim_p2pdma_init(vdev->pdev);
-> > +	if (ret && ret != -EOPNOTSUPP)
-> > +		return ret;  
-> 
-> Reading the commit msg seems -EOPNOTSUPP is only returned for fake
-> PCI devices, otherwise it implies regression. better add a comment for it?
+cc: linux-doc@vger.kernel.org
+Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
+Reviewed-by: Louis Chauvet <louis.chauvet@bootlin.com>
+---
+ Documentation/admin-guide/dynamic-debug-howto.rst | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
-I think the commit log is saying that if a device comes along that
-can't support this, we'd quirk the init path to return -EOPNOTSUPP for
-that particular device here.  This path is currently used when
-!CONFIG_PCI_P2PDMA to make this error non-fatal to the device init.
+diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
+index 4ac18c0a1d95..63a511f2337b 100644
+--- a/Documentation/admin-guide/dynamic-debug-howto.rst
++++ b/Documentation/admin-guide/dynamic-debug-howto.rst
+@@ -109,9 +109,18 @@ The match-spec's select *prdbgs* from the catalog, upon which to apply
+ the flags-spec, all constraints are ANDed together.  An absent keyword
+ is the same as keyword "*".
+ 
+-
+-A match specification is a keyword, which selects the attribute of
+-the callsite to be compared, and a value to compare against.  Possible
++Note: because the match-spec can be empty, the flags are checked 1st,
++then the pairs of keyword values.  Flag errs will hide keyword errs:
++
++  bash-5.2# ddcmd mod bar +foo
++  dyndbg: read 13 bytes from userspace
++  dyndbg: query 0: "mod bar +foo" mod:*
++  dyndbg: unknown flag 'o'
++  dyndbg: flags parse failed
++  dyndbg: processed 1 queries, with 0 matches, 1 errs
++
++So a match-spec is a keyword, which selects the attribute of the
++callsite to be compared, and a value to compare against.  Possible
+ keywords are:::
+ 
+   match-spec ::= 'func' string |
+-- 
+2.51.1
 
-I don't see a regression if such a device comes along and while we
-could survive other types of failures by disabling p2pdma here, I think
-all such cases are sufficient rare out of memory cases to consider them
-catastrophic.  Thanks,
-
-Alex
 
