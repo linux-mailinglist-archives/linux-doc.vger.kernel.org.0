@@ -1,273 +1,207 @@
-Return-Path: <linux-doc+bounces-67151-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67156-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F6D1C6B903
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 21:19:36 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9ED0CC6BA32
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 21:35:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by tor.lore.kernel.org (Postfix) with ESMTPS id 28C68294DB
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 20:19:35 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 24175366BC2
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Nov 2025 20:32:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C47543002BD;
-	Tue, 18 Nov 2025 20:19:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5C02A2F6907;
+	Tue, 18 Nov 2025 20:32:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="eTAfL3OU"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YU5xvnam"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FD472F9DAD;
-	Tue, 18 Nov 2025 20:19:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 188A42DE719;
+	Tue, 18 Nov 2025 20:32:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763497146; cv=none; b=nGklBjZ9JDLjEdHaXP51HJb38hwGARjY/LSKaSk+xxpdDhCrSZ+2mw23GAyY6KfQfn4+96tN358kGllb19s9JHpMxit9PWSbAQh9D+iAF6ap/QnxV6aDkCoInM9PI0xq/MnLO2fNfq4fI9BkX0MK00WVa2gohgYKY+h400zc2Eg=
+	t=1763497939; cv=none; b=OBv6fpGQSI71GSbC49PCPnK+47izP3L4E0DaWDzMdWttRhEImZqIx2mE9yrYp5iP/vdrn6deBwl8lRLpGcRESNRo7eXlIrDlKpSIVbeVjYKzmNsvra17962M4BHxiXQ9eJV+CVJdruCaWGfALvn3DkEdHuqvp9fXsCETUedAgtc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763497146; c=relaxed/simple;
-	bh=DxMARyKfJDyqUAKbJFfjf/c6B+plFfSLeUMvIEGnFAk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=G7vS0qkWNqmFviP3031bF7BIjTJtBLq9CRAzIP2Z7LnCGYy0UqtfFXbjhrseoh4ljyA34gnIhNbSgvmVGK3mXUwoMbZHCvarDd30FomgnryrIs29SVayAeJ4hn5sYAk+5A68fR6YfaVaF3UYMC4eQpcTFNDZdZPl1gS7xqvaLRk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=eTAfL3OU; arc=none smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1763497145; x=1795033145;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=DxMARyKfJDyqUAKbJFfjf/c6B+plFfSLeUMvIEGnFAk=;
-  b=eTAfL3OUieRcXqlK0eKb4rbUI4wPimI4zkDJKsGiXTPBiqw3fWWE7bko
-   0el/Z2NpbDKwyeD8XgFUACatN4vVn+pGfGTH5it4eipFVPiUwYZTwlMDj
-   aUzFhrgCEbdB9XTzCIJgBQEymMdXykrQZ/ZU2qqnCWaCqCZpPNxIfvBcC
-   qN0gWznqqEpqM43iewQkVwo5y9kOY5jhQJBbSiiFAQqOEZblN7H+VtYUC
-   LFK8yE1aKmVex4jBF984KNRBas27L37V8zMAy0OpHr7OCqAg4Uzk3PHSC
-   1YcE1vwwQ+eI8Dfn55YQfjqXBUq3O9hul3C/ztEqbWngeSysB1DFnN7WS
-   g==;
-X-CSE-ConnectionGUID: WDs7PqHbRL+NjRGhDMSiWw==
-X-CSE-MsgGUID: fzxCeRkIQaWi+uXKA2odOQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11617"; a="65472869"
-X-IronPort-AV: E=Sophos;i="6.19,314,1754982000"; 
-   d="scan'208";a="65472869"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2025 12:19:03 -0800
-X-CSE-ConnectionGUID: qLJxK4DYRuiKznyaaQ5KIQ==
-X-CSE-MsgGUID: vpegkBsIS4iAGXcrG1QhVQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.19,314,1754982000"; 
-   d="scan'208";a="195988087"
-Received: from dalessan-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.245.97])
-  by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2025 12:18:58 -0800
-Date: Tue, 18 Nov 2025 22:18:56 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Marcelo Schmitt <marcelo.schmitt@analog.com>
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	jic23@kernel.org, nuno.sa@analog.com, dlechner@baylibre.com,
-	andy@kernel.org, Michael.Hennerich@analog.com, robh@kernel.org,
-	krzk+dt@kernel.org, conor+dt@kernel.org, corbet@lwn.net,
-	cosmin.tanislav@analog.com, marcelo.schmitt1@gmail.com
-Subject: Re: [PATCH v2 2/3] iio: adc: Initial support for AD4134
-Message-ID: <aRzUsMb4i3M7HoN7@smile.fi.intel.com>
-References: <cover.1763478299.git.marcelo.schmitt@analog.com>
- <f88fd2bda5b93ca0c0f8a892b501e9ff7ac1574c.1763478299.git.marcelo.schmitt@analog.com>
+	s=arc-20240116; t=1763497939; c=relaxed/simple;
+	bh=ToOHEllmyBQ/WL8ZWLVrVveZilBnMuwncko9SGn4Aw0=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=AsbyYyvcIPbyav9TLqH9lC52ujfVpBiodSxRsIDGTVO7CFQX4JTIu4+zv729mgngTzp4tfGXyjc3N/Mah7wfCtE2Ewk8sNT1w0xcAuW7tIi9+e2JdQkexkcGZbG18V2DivnrmfamQD/y5D0XramMriJW4YyRSGcTgbu4PP3a6BA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YU5xvnam; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CF40C19424;
+	Tue, 18 Nov 2025 20:32:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1763497938;
+	bh=ToOHEllmyBQ/WL8ZWLVrVveZilBnMuwncko9SGn4Aw0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=YU5xvnamvLf67o+cM9H23VTi95T8DmfGcvseL0OWQej2iJqtF1Jg4GK+X1NFHpAVA
+	 N2pzLZl035nP4agl20Fcm17xGpeZkYGjyDamtGA/v8T5P9zkm7A0qUnjOE71d9zwq0
+	 64sG8ZVW+2eM+ZiAMgNUrWVbjYg2Mnu2zx+jG8ravcBH0qbUSOxVFgVfGlRgaIqyF6
+	 t50U0yK92QBo0wcXmZOsb8ku9K22DmabgcETuDeLQseO9tLxK0HZ+IBqNrXfemAvAH
+	 N7mOXQqSto1/RwfBh99R2l1alRr4id5E8dkb3xLqbh2P7eTJr+eyYslbOlOu4HGU57
+	 yUunjzvZ+EBUg==
+Date: Tue, 18 Nov 2025 21:32:10 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>
+Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>, Linux Doc Mailing List
+ <linux-doc@vger.kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Alice
+ Ryhl <aliceryhl@google.com>, Andreas Hindborg <a.hindborg@kernel.org>,
+ Benno Lossin <lossin@kernel.org>, =?UTF-8?B?QmrDtnJu?= Roy Baron
+ <bjorn3_gh@protonmail.com>, Boqun Feng <boqun.feng@gmail.com>, Danilo
+ Krummrich <dakr@kernel.org>, Gary Guo <gary@garyguo.net>, Mauro Carvalho
+ Chehab <mchehab@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Trevor Gross
+ <tmgross@umich.edu>, linux-kernel@vger.kernel.org,
+ rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH 1/1] docs: makefile: move rustdoc check to the build
+ wrapper
+Message-ID: <20251118213210.0e8b173e@foz.lan>
+In-Reply-To: <20251118201152.038e2749@foz.lan>
+References: <cover.1763370163.git.mchehab+huawei@kernel.org>
+	<a9b172c926a4b30360530c34adc44f3789ec2b27.1763370163.git.mchehab+huawei@kernel.org>
+	<CANiq72=bYzj6iU7PCm+VMBTeBbgUcL8nwrvUut9p4ph+3+itaQ@mail.gmail.com>
+	<kjpquyekvw7fwrndoomtge7fnxtfefihqlikj6xcqtazrr6l77@424ufup7v45o>
+	<87seeb47pk.fsf@trenco.lwn.net>
+	<20251118201152.038e2749@foz.lan>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f88fd2bda5b93ca0c0f8a892b501e9ff7ac1574c.1763478299.git.marcelo.schmitt@analog.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 18, 2025 at 02:32:43PM -0300, Marcelo Schmitt wrote:
-> AD4134 is a 24-bit, 4-channel, simultaneous sampling, precision
-> analog-to-digital converter (ADC). The device can be managed through SPI or
-> direct control of pin logical levels (pin control mode). The AD4134 design
-> also features a dedicated bus for ADC sample data output. Though, this
-> initial driver for AD4134 only supports usual SPI connections.
-> 
-> Add basic support for AD4134 that enables single-shot ADC sample read.
+Em Tue, 18 Nov 2025 20:11:52 +0100
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
 
-Thanks for an update! My comments below.
+> Em Tue, 18 Nov 2025 09:38:15 -0700
+> Jonathan Corbet <corbet@lwn.net> escreveu:
+>=20
+> > Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+> >  =20
+> > > On Mon, Nov 17, 2025 at 10:20:46AM +0100, Miguel Ojeda wrote:   =20
+> > >> On Mon, Nov 17, 2025 at 10:13=E2=80=AFAM Mauro Carvalho Chehab
+> > >> <mchehab+huawei@kernel.org> wrote:   =20
+> > >> >
+> > >> > The makefile logic to detect if rust is enabled is not working
+> > >> > the way it was expected. Move it to be inside the wrapper
+> > >> > script.   =20
+> > >>=20
+> > >> Hmm... Could the commit explain a bit why this didn't work and why n=
+ow it does?   =20
+> > >
+> > > I don't know exactly why this was not working.   =20
+> >=20
+> > I would feel a lot better if we knew what the real problem is before
+> > applying fixes for it.  Otherwise something seems certain to come and
+> > bite us at some point. =20
+>=20
+> Me too, but the bug is very annoying ;-)
+>=20
+> I'll try to seek for some time to better understand it, maybe
+> next week.
 
-...
+Btw, at least here (Fedora 43, upgraded from 42), rustdoc doesn't build
+for docs-next.
 
-> +#include <linux/array_size.h>
-> +#include <linux/bitfield.h>
-> +#include <linux/bitops.h>
-> +#include <linux/bits.h>
+Perhaps the issue could be due to some weird things with Fedora 43.
 
-bitops.h implies bits.h and the latter can be omitted. But it's up to you, I'm
-fine with the current way.
+That's what happens after sphinx-build-wrapper finishes handling
+htmldocs (after this patch), when it runs "make LLVM=3D1 rustdoc":
 
-> +#include <linux/clk.h>
-> +#include <linux/crc8.h>
-> +#include <linux/delay.h>
-> +#include <linux/dev_printk.h>
-> +#include <linux/err.h>
-> +#include <linux/export.h>
-> +#include <linux/gpio/consumer.h>
-> +#include <linux/iio/iio.h>
-> +#include <linux/iio/types.h>
-> +#include <linux/module.h>
-> +#include <linux/mod_devicetable.h>
-> +#include <linux/regmap.h>
-> +#include <linux/regulator/consumer.h>
-> +#include <linux/spi/spi.h>
-> +#include <linux/time.h>
-> +#include <linux/types.h>
-> +#include <linux/unaligned.h>
-> +#include <linux/units.h>
+Building rust docs
+  DESCEND objtool
+  INSTALL libsubcmd_headers
+  CALL    scripts/checksyscalls.sh
+  RUSTC L rust/bindings.o
+  RUSTC L rust/build_error.o
+  RUSTC L rust/uapi.o
+error: mixing `-Zsanitizer` will cause an ABI mismatch in crate `build_erro=
+r`
+ --> rust/build_error.rs:3:1
+  |
+3 | //! Build-time error.
+  | ^
+  |
+  =3D help: the `-Zsanitizer` flag modifies the ABI so Rust crates compiled=
+ with different values of this flag cannot be used together safely
+  =3D note: unset `-Zsanitizer` in this crate is incompatible with `-Zsanit=
+izer=3Dkernel-address` in dependency `core`
+  =3D help: set `-Zsanitizer=3Dkernel-address` in this crate or unset `-Zsa=
+nitizer` in `core`
+  =3D help: if you are sure this will not cause problems, you may use `-Cun=
+safe-allow-abi-mismatch=3Dsanitizer` to silence this error
 
-...
+error: mixing `-Zsanitizer` will cause an ABI mismatch in crate `build_erro=
+r`
+ --> rust/build_error.rs:3:1
+  |
+3 | //! Build-time error.
+  | ^
+  |
+  =3D help: the `-Zsanitizer` flag modifies the ABI so Rust crates compiled=
+ with different values of this flag cannot be used together safely
+  =3D note: unset `-Zsanitizer` in this crate is incompatible with `-Zsanit=
+izer=3Dkernel-address` in dependency `compiler_builtins`
+  =3D help: set `-Zsanitizer=3Dkernel-address` in this crate or unset `-Zsa=
+nitizer` in `compiler_builtins`
+  =3D help: if you are sure this will not cause problems, you may use `-Cun=
+safe-allow-abi-mismatch=3Dsanitizer` to silence this error
 
-> +struct ad4134_state {
+error: aborting due to 2 previous errors
 
-> +	struct spi_device *spi;
-> +	struct device *dev;
-> +	struct regmap *regmap;
+make[4]: *** [rust/Makefile:527: rust/build_error.o] Error 1
+make[4]: ** Esperando que outros processos terminem.
+make[3]: *** [Makefile:1286: prepare] Error 2
+Ignored errors when building rustdoc: Command '['make', 'rustdoc']' returne=
+d non-zero exit status 2.. Is RUST enabled?
 
-We have a duplication here, I believe. Either struct device or struct regmap
-may be dropped. If it's not the case, the fields needs a good description /
-justification.
+Relevant Rust configs:
 
-> +	unsigned long sys_clk_hz;
-> +	struct gpio_desc *odr_gpio;
-> +	int refin_mv;
-> +	/*
-> +	 * DMA (thus cache coherency maintenance) requires the transfer buffers
-> +	 * to live in their own cache lines.
-> +	 */
-> +	u8 rx_buf[AD4134_SPI_MAX_XFER_LEN] __aligned(IIO_DMA_MINALIGN);
-> +	u8 tx_buf[AD4134_SPI_MAX_XFER_LEN];
-> +};
-
-...
-
-> +static int ad4134_regulator_setup(struct ad4134_state *st)
-> +{
-> +	struct device *dev = &st->spi->dev;
-> +	bool use_internal_ldo_regulator;
-> +	int ret;
-> +
-> +	/* Required regulators */
-> +	ret = devm_regulator_bulk_get_enable(dev, 3, ad4143_regulator_names);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "failed to enable power supplies\n");
-> +
-> +	/* Required regulator that we need to read the voltage */
-> +	ret = devm_regulator_get_enable_read_voltage(dev, "refin");
-> +	if (ret < 0)
-> +		return dev_err_probe(dev, ret, "failed to get REFIN voltage.\n");
-
-> +	st->refin_mv = ret / MILLI;
-
-I think the divisor should be (MICRO / MILLI). This what Jonathan suggested
-last time I remember (in some other reviews).
-
-> +	/*
-> +	 * If ldoin is not provided, then avdd1v8, dvdd1v8, and clkvdd are
-> +	 * required.
-> +	 */
-> +	ret = devm_regulator_get_enable_optional(dev, "ldoin");
-> +	if (ret < 0 && ret != -ENODEV)
-> +		return dev_err_probe(dev, ret, "failed to enable ldoin supply\n");
-> +
-> +	use_internal_ldo_regulator = ret == 0;
-
-> +	if (!use_internal_ldo_regulator) {
-
-Can it be
-
-	if (use_internal_ldo_regulator)
-		return 0;
-
-with the dropped indentation level for the below?
-
-
-> +		ret = devm_regulator_get_enable(dev, "avdd1v8");
-> +		if (ret < 0)
-> +			return dev_err_probe(dev, ret,
-> +					     "failed to enable avdd1v8 supply\n");
-> +
-> +		ret = devm_regulator_get_enable(dev, "dvdd1v8");
-> +		if (ret < 0)
-> +			return dev_err_probe(dev, ret,
-> +					     "failed to enable dvdd1v8 supply\n");
-> +
-> +		ret = devm_regulator_get_enable(dev, "clkvdd");
-> +		if (ret < 0)
-> +			return dev_err_probe(dev, ret,
-> +					     "failed to enable clkvdd supply\n");
-> +	}
-> +
-> +	return 0;
-> +}
-
-...
-
-> +static int ad4134_clock_select(struct ad4134_state *st)
-> +{
-> +	struct device *dev = &st->spi->dev;
-> +	struct clk *sys_clk;
-> +	int ret;
-
-> +	sys_clk = devm_clk_get_optional_enabled(dev, "xtal1-xtal2");
-
-> +	if (IS_ERR_OR_NULL(sys_clk)) {
-
-I don't understand the choice of _optional() with the _NULL here.
-Also note, we missed the deferred probe case here.
-
-Was it me who suggested this? :-)
-
-One solution may be to check the clock name presence in the clock-names or
-whatever the name of that DT property before trying to get this clock.
-
-> +		ret = PTR_ERR_OR_ZERO(sys_clk);
-> +		sys_clk = devm_clk_get_enabled(dev, "clkin");
-> +		if (IS_ERR(sys_clk))
-
-Yeah, v1 might look better, but I don't remember by heart.
-
-> +			return dev_err_probe(dev, PTR_ERR(sys_clk),
-> +					     "failed to get xtal1-xtal2: %d, clkin: %ld\n",
-> +					     ret, PTR_ERR(sys_clk));
-
-No need to have a duplicated error code being printed.
-
-> +	}
-> +
-> +	st->sys_clk_hz = clk_get_rate(sys_clk);
-> +	if (st->sys_clk_hz != AD4134_EXT_CLOCK_MHZ)
-> +		dev_warn(dev, "invalid external clock frequency %lu\n",
-> +			 st->sys_clk_hz);
-> +
-> +	return 0;
-> +}
-
-...
-
-> +	reset_gpio = devm_gpiod_get_optional(dev, "reset", GPIOD_OUT_HIGH);
-> +	if (IS_ERR(reset_gpio))
-> +		return dev_err_probe(dev, PTR_ERR(reset_gpio),
-> +				     "failed to find reset GPIO\n");
-> +
-> +	if (reset_gpio) {
-> +		fsleep(AD4134_RESET_TIME_US);
-
-> +		gpiod_set_value_cansleep(reset_gpio, 0);
-> +	}
-
-Can we use reset-gpio driver instead of custom implementation?
-
--- 
-With Best Regards,
-Andy Shevchenko
+$ grep RUST .config
+CONFIG_RUSTC_VERSION=3D109100
+CONFIG_RUST_IS_AVAILABLE=3Dy
+CONFIG_RUSTC_LLVM_VERSION=3D210103
+CONFIG_RUSTC_HAS_COERCE_POINTEE=3Dy
+CONFIG_RUSTC_HAS_SPAN_FILE=3Dy
+CONFIG_RUSTC_HAS_UNNECESSARY_TRANSMUTES=3Dy
+CONFIG_RUSTC_HAS_FILE_WITH_NUL=3Dy
+CONFIG_RUSTC_HAS_FILE_AS_C_STR=3Dy
+CONFIG_RUST=3Dy
+CONFIG_RUSTC_VERSION_TEXT=3D"rustc 1.91.0 (f8297e351 2025-10-28) (Fedora 1.=
+91.0-1.fc43)"
+# CONFIG_CPUFREQ_DT_RUST is not set
+CONFIG_HAVE_RUST=3Dy
+# CONFIG_RUST_FW_LOADER_ABSTRACTIONS is not set
+# CONFIG_BLK_DEV_RUST_NULL is not set
+# CONFIG_RUST_PHYLIB_ABSTRACTIONS is not set
+CONFIG_RADIO_TRUST=3Dy
+CONFIG_RADIO_TRUST_PORT=3D350
+CONFIG_HID_THRUSTMASTER=3Dy
+CONFIG_THRUSTMASTER_FF=3Dy
+CONFIG_TRUSTED_KEYS=3Dy
+CONFIG_HAVE_TRUSTED_KEYS=3Dy
+CONFIG_TRUSTED_KEYS_TPM=3Dy
+CONFIG_TRUSTED_KEYS_TEE=3Dy
+CONFIG_TRUSTED_KEYS_CAAM=3Dy
+CONFIG_INTEGRITY_TRUSTED_KEYRING=3Dy
+CONFIG_IMA_SECURE_AND_OR_TRUSTED_BOOT=3Dy
+# CONFIG_RUST_BITMAP_HARDENED is not set
+CONFIG_SYSTEM_TRUSTED_KEYRING=3Dy
+CONFIG_SYSTEM_TRUSTED_KEYS=3D""
+CONFIG_SECONDARY_TRUSTED_KEYRING=3Dy
+CONFIG_SECONDARY_TRUSTED_KEYRING_SIGNED_BY_BUILTIN=3Dy
+# CONFIG_SAMPLES_RUST is not set
+# CONFIG_FIND_BIT_BENCHMARK_RUST is not set
+# CONFIG_RUST_DEBUG_ASSERTIONS is not set
+CONFIG_RUST_OVERFLOW_CHECKS=3Dy
+# CONFIG_RUST_BUILD_ASSERT_ALLOW is not set
+CONFIG_RUST_KERNEL_DOCTESTS=3Dy
 
 
+
+Thanks,
+Mauro
 
