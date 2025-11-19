@@ -1,103 +1,103 @@
-Return-Path: <linux-doc+bounces-67209-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67211-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDDF9C6D03E
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:02:44 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id C9EEEC6D095
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:10:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 50ABD34C959
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 07:00:45 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 2F68A352453
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 07:09:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 400C7315D39;
-	Wed, 19 Nov 2025 07:00:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C7EDC2F5322;
+	Wed, 19 Nov 2025 07:09:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UvIgYsdp"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="BTc4pl7x"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail-m3293.qiye.163.com (mail-m3293.qiye.163.com [220.197.32.93])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C62DC5733E
-	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:00:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2DDD2D3EDF
+	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:09:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.93
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763535641; cv=none; b=J9vkBzI8vn6TUoU4y+3kchaLaas/PbfB5IARhfQNZgizfSBocmfDuYPbzq67czSJnOes/Puxjj09KmDuhqXUPUyGVnjoRO6MOfvy+iIrhdAFSkOcKd2Bj4cntnLLvR9808VjXWcD3+4PbUd3tmGcY/ldItcV7mM+REY/QzJA1Eo=
+	t=1763536194; cv=none; b=MUzV9EvP+srqok+Uj9NmRrx4nrW9SSNwDNxiwPdRKfD1HzuaqBeG1ArJUuD2VxvUr9KfwtQNOSRo76pY1tMQfDm0KvpLbJz5+JWd9Ttou4eHusutptslBlyoSYEPfx/fKj+64L7r78LQHVB2GPCXs42ovStEiz8xR8EFnKjyBjQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763535641; c=relaxed/simple;
-	bh=YTMGjhB1zAPPuWlzrFOlsA10AWeQYE3K6+gSDbBb4jY=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=oI7/jmnCIx/uYewxOnoWS3s+YTFgVHplXgElg7J5uufxAzvglFSV3MYSO3Fpl5fMoywykf2z65vbnE0/1oVnFK2cmvREEpI5L4bardbeYypckqXwwxNXaYTtEKAE43seoP2B/f9/dNxxfsM5wgYScpV7GRUHWX/ID7yPfBnFpMc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UvIgYsdp; arc=none smtp.client-ip=209.85.160.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-3e80c483a13so3518543fac.2
-        for <linux-doc@vger.kernel.org>; Tue, 18 Nov 2025 23:00:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1763535639; x=1764140439; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YTMGjhB1zAPPuWlzrFOlsA10AWeQYE3K6+gSDbBb4jY=;
-        b=UvIgYsdpgZOZWZa5UKTz05bP2IKIuKVaiCV/nkrJH+CNl9tV3Bq/Mh61AMR5QsQDx1
-         Q3UNovwP4Wn3dKynub2QREm4ixZwXP9YN+uIaAVlQe8Sl9DUQmhImFP8239MjR9ywo1w
-         n096DZ6LiQkxZ6/qhz1IauypMgVqCILnnntGPYCqcae6o192gdx+mbALuqVK+c/hkzrf
-         C0lvaX3UN9ZyGBh45J1zbpqZsqE4uXG9GCWV06SrZdd55JMyv0I1zaOJCPiJjygec883
-         1wUp+WzZXhGnOyQM0LuGMh/tyEc+pe5SMOSR+oP2xeNZpciQasGzweQpNmINpHzuisDD
-         xNEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763535639; x=1764140439;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=YTMGjhB1zAPPuWlzrFOlsA10AWeQYE3K6+gSDbBb4jY=;
-        b=ZHbvGhHP5DuQgWcC4QCMcI8WUvJ0zLpJCQ3+0Z3QTYHVHH5ikdEZATjR7PZLqlQfhk
-         iyf+ezhBzPqmvV1R0VK4LwLJFmc6kN6z24k22mi+8XgnaaXESizvAFRANXT63a6KL/xA
-         L419rMWvbqJFpCWJAJE32MnQ4NPuJUu3yJRnkyNO3SoAqzasTBsg7/FXhfmgkNWKNfld
-         z88Z+8BT8guhzpvTF7e+uwzJ9Esev80eIHjXn/XUjg0rl6ZvVVXlbM4qmt3iBfTmnJ8V
-         yJPVJ79MVZzmv9wN6hCpjH7XOQhB2ViTbF6/QcBq7X47QS2A6hlt0CpprLNA9LZNu6DU
-         fsnQ==
-X-Gm-Message-State: AOJu0YylYPWviTJIX7eu4O9EONi1gZwVfGVmuTlR2RwY3lFCfAWKOlSd
-	wh/H/4getRyRjwC4RPaoWjlNowmna3QeT5H7B9cFa64pRd71kUXNOOG1Bu83PdSLCniPUqjwXLy
-	tJ90XRfPxPbhKTo5leoyV1uy4+Z5hp/+SdrSNwJgATyPR
-X-Gm-Gg: ASbGncsNn3uFJYXqOcQNsK+8RkWzcOGC8EHB24ebFtdPSapTZ0kh9Ijn17mE9L5jgHc
-	SegUsYXfaSsWDMqU5ey85oPlZHAG/a+7/Psm7+EdrN01B2WS9Ic64UyBCnZv8+5mCJgI04KfwzE
-	PxKsO9g8wOEtGtK8ux9VndiZ4HIscNB+lQmSciuhdC2P+5bqleYgv1ysx29WT4HApkjEGAxl0iq
-	lfFfljJ4UbbrtD/GNH1T4Z4YfpeFUw2aZNlnPvQ5mCEAVGH4J5iNhraE2z4Rwc2AmDYvn6kxHUh
-	xaSCtdArz6qgjw4=
-X-Google-Smtp-Source: AGHT+IEV46gLBP3XsnjFXPZuHD61dBcXz6WzaKRj+0tLH4a7hgrXhTS3we5SjRUr+g1S4m8HUZTjVlpe0D0o9kISz0g=
-X-Received: by 2002:a05:6870:938a:b0:3ec:355f:7b14 with SMTP id
- 586e51a60fabf-3ec355f7f6amr5530345fac.41.1763535638872; Tue, 18 Nov 2025
- 23:00:38 -0800 (PST)
+	s=arc-20240116; t=1763536194; c=relaxed/simple;
+	bh=V9aPmCUbcEsFukaL+aWeCn+oUrdTl+FlFiXylBu8JwI=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=bPneDr4GZJkmCPpZcFnRGuF6M9YbuOkLeqm7xh0xZP95l2dPbujU6ktNWYRd20KsfHrHIhCaTMoEZmVZup90Qk7M1XWn1cAoxjN2OYhccQKVQJtuavhrBjnysqCRaSYXsNOHsy+hBgi9TfI/HfvoqBh8CQnijfogmiKXigy6jkg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=BTc4pl7x; arc=none smtp.client-ip=220.197.32.93
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
+Received: from localhost.localdomain (unknown [1.203.157.252])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a1aef7de;
+	Wed, 19 Nov 2025 15:09:38 +0800 (GMT+08:00)
+From: ke zijie <kezijie@leap-io-kernel.com>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev
+Cc: dzm91@hust.edu.cn,
+	corbet@lwn.net,
+	linux-doc@vger.kernel.org,
+	wangyuli@aosc.io,
+	doubled@leap-io-kernel.com
+Subject: [PATCH v5 0/3] Add chinese translation for block
+Date: Wed, 19 Nov 2025 15:09:34 +0800
+Message-Id: <cover.1763535919.git.kezijie@leap-io-kernel.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <CAFb8wJvoKtiOA0DZqNJhHALe97=BFkGeLwDYpK=x7L1woLQ6NQ@mail.gmail.com>
- <871plv5mlf.fsf@trenco.lwn.net>
-In-Reply-To: <871plv5mlf.fsf@trenco.lwn.net>
-From: eanut 6 <jiakaipeanut@gmail.com>
-Date: Wed, 19 Nov 2025 15:00:27 +0800
-X-Gm-Features: AWmQ_bm31LQUxIvDrERRhVB3caCouk7s4QDzLe6y8jb0A6QqJhIhdG0z18t6qcw
-Message-ID: <CAFb8wJszWvArRBoMP53TLuHji-0JdSN66TOwRfbgtO9DrUkBSg@mail.gmail.com>
-Subject: Re: [PATCH v2] Documentation/admin-guide: fix typo and comment in
- cscope example
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Randy Dunlap <rdunlap@infradead.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9a9af28c4c09d8kunmdeaeea3a58943e8
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHxhLVkhDSE8ZSENNGh0dGVYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
+	VLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=BTc4pl7xQ3QBgWnTU3Cl5djnbHwxIqsquXU3Nq0qRAVYt+K/2tGMQGNXNyjSF/9QtxpHt1X6rL8Z9vgTJZxT8AR0xLg8xG9y+m6UaqRKhKToPwTKNZqDkdyaiXwMu+sXoYWUjRKenHTrDTsjkGt8DU5mTrh3HzdXNPeIZR+SYXZPzvnJ7HevBVYTz5nru34Nv7buKhAlY2omGRY5cNzX8UY3K41fSY6JMc8X/sbVsYJ/PbqW4gU4Ds5m8AKI/BG05+SitiW5kWA+ZCSIVA+Dmu7a1fIRpRmDM1iVgpOQV3aFXoJJbhZp3fDRWHOqh15x/SoP/61sRQbHFuHiXt7vug==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=sKFSk0LfMWD/uOSnWa/t0VOUoSjTTtrBp+iD8ffukwE=;
+	h=date:mime-version:subject:message-id:from;
 
-Hi Jon,
+This patch set adds chinese translations for the BLOCK documentation.
 
-Thank you for the review and the guidance.
+Changes in v5:
+ - Add Reviewed-by tag from Yanteng Si
+ - Link to v4: https://lore.kernel.org/linux-doc/cover.1763519072.git.kezijie@leap-io-kernel.com/
 
-I=E2=80=99ve sent a v3 of the patch.
+Changes in v4:
+ - Fix formatting and translation issues (reported by Yanteng Si)
+ - Link to v3: https://lore.kernel.org/linux-doc/cover.1763366835.git.kezijie@leap-io-kernel.com/
 
-Thanks again for your help.
+Changes in v3:
+ - Add Reviewed-by tag from Wang Yuli
+ - Link to v2: https://lore.kernel.org/linux-doc/cover.1763350407.git.kezijie@leap-io-kernel.com/
 
-Best regards,
-Jiakai
+Changes in v2:
+ - Fix Chinese/English spacing issues (suggested by Wang Yuli)
+ - Fix make htmldocs warning: "Duplicate C declaration"
+ - Adjust blk-mq translation wording
+ - Link to v1: https://lore.kernel.org/linux-doc/cover.1763105050.git.kezijie@leap-io-kernel.com/
+
+ke zijie (3):
+  docs/zh_CN: Add block/index.rst translation
+  docs/zh_CN: Add blk-mq.rst translation
+  docs/zh_CN: Add data-integrity.rst translation
+
+ .../translations/zh_CN/block/blk-mq.rst       | 130 ++++++++++++
+ .../zh_CN/block/data-integrity.rst            | 192 ++++++++++++++++++
+ .../translations/zh_CN/block/index.rst        |  35 ++++
+ .../translations/zh_CN/subsystem-apis.rst     |   1 -
+ 4 files changed, 357 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/block/blk-mq.rst
+ create mode 100644 Documentation/translations/zh_CN/block/data-integrity.rst
+ create mode 100644 Documentation/translations/zh_CN/block/index.rst
+
+--
+2.25.1
+
 
