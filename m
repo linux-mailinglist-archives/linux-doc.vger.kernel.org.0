@@ -1,38 +1,38 @@
-Return-Path: <linux-doc+bounces-67214-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67210-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80D87C6D168
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:25:12 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 25BCFC6D08F
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:09:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sea.lore.kernel.org (Postfix) with ESMTPS id 95FB029F1D
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 07:25:10 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTPS id 25E032D226
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 07:09:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4B6293191C3;
-	Wed, 19 Nov 2025 07:25:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33A2B3148C6;
+	Wed, 19 Nov 2025 07:09:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="fP5DSgZz"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="YnPPPxoe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m15566.qiye.163.com (mail-m15566.qiye.163.com [101.71.155.66])
+Received: from mail-m32109.qiye.163.com (mail-m32109.qiye.163.com [220.197.32.109])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C4022DBF78
-	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:25:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.66
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D624B288C0E
+	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:09:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.109
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763537108; cv=none; b=XxyctTjtGEMhkrW7RV3N3NSkywjolaJkewwZhdlLtxBCKwvDpLBWq2KBOnLaX1VfdMrwbrp8oLrTaTDxACmxPBhpGg8kqNN8ZbhWyo8SBe7MjteoUkUkp9OrHT2uV1QuBuuPh6UEgzVSHNHV2/zmvPxD1Pk3zC0pvH97G7jqKic=
+	t=1763536188; cv=none; b=mGaBAnnnShs9E0HmEaig7/Nc/ZlHwcG+9haSJLAQO0TntJ6ZildWiIBY2RxN7Ho+vUhTlKj/LaVpz82qdghdZLzFMQJ62KcWvRle4Xu5OzhaTwHcoF6v6x4KTRBQIbzgrk4T0YePD4SvlCwg3GjBJL+ES9Ad3OTQmCV94v4JDnI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763537108; c=relaxed/simple;
-	bh=a0TM6zR3otfDYL77pldlORahf2X9cYYY7u5Gl2UwMFQ=;
+	s=arc-20240116; t=1763536188; c=relaxed/simple;
+	bh=kn8V944dX+uRFWgaiOeA9cwEgyIEwQH8U8p8DI47Yz8=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=dpc/jp4mRicLeVziLQ3Q6uuy75VkG2tMESl5DRnCfUB16HNgh55qgOnfWcMyg0JszdKktvSNYS61Ei6C80p9rD8p/b0rCVpDW3ZhG6bP1+WdxUZqGm5jveEIXokBv9gPfOTxThD079KSLHjFsdtkiVilU6mbkghM+CcnxG2mwF0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=fP5DSgZz; arc=none smtp.client-ip=101.71.155.66
+	 MIME-Version:Content-Type; b=lVH3I7qsGk4o5Vf24uLlF4WoGX0Sc/TJ2mIodzYZqT9X3MKvBUUE8suCoMcOXmQ3c0ep6snq6ukInzQFV9ONA0rNGMbbh3Hv42PPOuzKun+sQRJH/KFRdAXFgXPxgaw4HW+v5nVojN0dTahOO9vbM0/5QQ5y8aem794OuCVsa7A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=YnPPPxoe; arc=none smtp.client-ip=220.197.32.109
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from localhost.localdomain (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a1aef7e5;
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a1aef7e8;
 	Wed, 19 Nov 2025 15:09:39 +0800 (GMT+08:00)
 From: ke zijie <kezijie@leap-io-kernel.com>
 To: alexs@kernel.org,
@@ -42,9 +42,9 @@ Cc: dzm91@hust.edu.cn,
 	linux-doc@vger.kernel.org,
 	wangyuli@aosc.io,
 	doubled@leap-io-kernel.com
-Subject: [PATCH v5 1/3] docs/zh_CN: Add block/index.rst translation
-Date: Wed, 19 Nov 2025 15:09:35 +0800
-Message-Id: <3e4c8bab2c3d5f55daea8dca604981d486256d19.1763535919.git.kezijie@leap-io-kernel.com>
+Subject: [PATCH v5 2/3] docs/zh_CN: Add blk-mq.rst translation
+Date: Wed, 19 Nov 2025 15:09:36 +0800
+Message-Id: <3574ae90ee3ea6fbe00643cf485d4d8b630fb863.1763535919.git.kezijie@leap-io-kernel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1763535919.git.kezijie@leap-io-kernel.com>
 References: <cover.1763535919.git.kezijie@leap-io-kernel.com>
@@ -56,83 +56,183 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a9af28fdd09d8kunmdeaeea3a5894478
+X-HM-Tid: 0a9a9af2930609d8kunmdeaeea3a58944f3
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZGkpCVktLTEJNHk5DTkgaTlYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGB8fVhodTxgdSExLHUsdGFYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
 	VLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=fP5DSgZzdjTUn6ogl6zaDtYbVfdYDHEJ9AdNMrYRUM0Qz4ohWRHiiy/6jBpwMU8mhu6ffrnUpU+I+pxHndVxzbZGfo7/2bjN6XHf3rqx/lCEkHRNSrNojnz7jY4THc9yjTeI3T8pT1d1Tsxj2snwCHU+IOfOTs4p6Z/pdCIC5fYj1fB0UgtAKPIlKsNY0hlUjtpyeW6DtjQUyxbDeKnxvGriVgD2M/MhMabydwTlMVg6r5qG+O5I2grsQqZCIL3mdivE9o8AkhivAcIp68qq3PV8QD4DWeL6duj5t1SFPHI5f7QImOhGyLfgIfKHc2h+EM5lcHwOdS6i1/BPP5in/w==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=46cu+b/whC4Ml+IfrWhdUX5Y9WShOzQE9MWft39E7wY=;
+	b=YnPPPxoegThMnytsNiIHMvTIj3B4Z71KhSEWEYklgajGbYDL6vTeEEFYvxBG+I37/yE3W+LwdvyXLr8MTCkgSJ1PYmUFK6YFc6O7VyBvYR+2Sw+raT5kgVvC4ZhIkVA/t/c9frJ4AKmecKUrW2oT0mm2eseYN/bsMvbAX8kn787+xqW4GsbgZcW7dhqqXxtN+YxeXNGgx+p24K7To+2Oip/oamIghZRynHZq0mGJh3+7w5wRtB+u/eEvHX2dSq071C3BlyGiIEln5uFtpRA6Jo7CYkv/kVctxTz0BFs0pbotL5FjvgtjnscNcgDggUaSvMZSo7HmmXw4zwWM3i71iQ==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=hy2xIfYRcG1MSKD4o7VgTFhNR/Vk78UwnxO90bmqkPM=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../block/index.rst into Chinese and update subsystem-apis.rst
-translation.
+Translate .../block/blk-mq.rst into Chinese.
+Add blk-mq into .../block/index.rst.
 
-Update the translation through commit 56cdea92ed91
-("Documentation/block: drop the request.rst file")
+Update the translation through commit 41bd33df4e18
+("docs: block: blk-mq.rst: correct places -> place")
 
 Reviewed-by: WangYuli <wangyl5933@chinaunicom.cn>
 Signed-off-by: ke zijie <kezijie@leap-io-kernel.com>
 ---
- .../translations/zh_CN/block/index.rst        | 34 +++++++++++++++++++
- .../translations/zh_CN/subsystem-apis.rst     |  1 -
- 2 files changed, 34 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/block/index.rst
+ .../translations/zh_CN/block/blk-mq.rst       | 130 ++++++++++++++++++
+ .../translations/zh_CN/block/index.rst        |   3 +-
+ 2 files changed, 132 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/block/blk-mq.rst
 
-diff --git a/Documentation/translations/zh_CN/block/index.rst b/Documentation/translations/zh_CN/block/index.rst
+diff --git a/Documentation/translations/zh_CN/block/blk-mq.rst b/Documentation/translations/zh_CN/block/blk-mq.rst
 new file mode 100644
-index 000000000000..1a5b214657dc
+index 000000000000..ccc08f76ff97
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/block/index.rst
-@@ -0,0 +1,34 @@
++++ b/Documentation/translations/zh_CN/block/blk-mq.rst
+@@ -0,0 +1,130 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/block/index.rst
++:Original: Documentation/block/blk-mq.rst
 +
 +:翻译:
 +
-+ 柯子杰 ke zijie <kezijie@leap-io-kernel.com>
++ 柯子杰 kezijie <kezijie@leap-io-kernel.com>
 +
 +:校译:
 +
-+=====
-+Block
-+=====
++================================================
++多队列块设备 I/O 排队机制 (blk-mq)
++================================================
 +
-+.. toctree::
-+   :maxdepth: 1
++多队列块设备 I/O 排队机制提供了一组 API，使高速存储设备能够同时在多个队列中
++处理并发的 I/O 请求并将其提交到块设备，从而实现极高的每秒输入/输出操作次数
++(IOPS)，充分发挥现代存储设备的并行能力。
 +
-+TODOList:
-+* bfq-iosched
-+* biovecs
-+* blk-mq
-+* cmdline-partition
-+* data-integrity
-+* deadline-iosched
-+* inline-encryption
-+* ioprio
-+* kyber-iosched
-+* null_blk
-+* pr
-+* stat
-+* switching-sched
-+* writeback_cache_control
-+* ublk
-diff --git a/Documentation/translations/zh_CN/subsystem-apis.rst b/Documentation/translations/zh_CN/subsystem-apis.rst
-index 0f121f9b0f70..830217140fb6 100644
---- a/Documentation/translations/zh_CN/subsystem-apis.rst
-+++ b/Documentation/translations/zh_CN/subsystem-apis.rst
-@@ -75,7 +75,6 @@ TODOList:
++介绍
++====
++
++背景
++----
++
++磁盘从 Linux 内核开发初期就已成为事实上的标准。块 I/O 子系统的目标是尽可能
++为此类设备提供最佳性能，因为它们在进行随机访问时代价极高，性能瓶颈主要在机械
++运动部件上，其速度远低于存储栈中其他任何层。其中一个软件优化例子是根据硬盘磁
++头当前的位置重新排序读/写请求。
++
++然而，随着固态硬盘和非易失性存储的发展，它们没有机械部件，也不存在随机访问代
++码，并能够进行高速并行访问，存储栈的瓶颈从存储设备转移到了操作系统。为了充分
++利用这些设备设计中的并行性，引入了多队列机制。
++
++原来的设计只有一个队列来存储块设备 I/O 请求，并且只使用一个锁。由于缓存中的
++脏数据和多处理器共享单锁的瓶颈，这种设计在 SMP 系统中扩展性不佳。当不同进程
++（或同一进程在不同 CPU 上）同时执行块设备 I/O 时，该单队列模型还会出现严重
++的拥塞问题。为了解决这些问题，blk-mq API 引入了多个队列，每个队列在本地 CPU
++上拥有独立的入口点，从而消除了对全局锁的需求。关于其具体工作机制的更深入说明，
++请参见下一节（ `工作原理`_ ）。
++
++工作原理
++--------
++
++当用户空间执行对块设备的 I/O（例如读写文件）时，blk-mq 便会介入：它将存储和
++管理发送到块设备的 I/O 请求，充当用户空间（文件系统，如果存在的话）与块设备驱
++动之间的中间层。
++
++blk-mq 由两组队列组成：软件暂存队列和硬件派发队列。当请求到达块层时，它会尝
++试最短路径：直接发送到硬件队列。然而，有两种情况下可能不会这样做：如果该层有
++IO 调度器或者是希望合并请求。在这两种情况下，请求将被发送到软件队列。
++
++随后，在软件队列中的请求被处理后，请求会被放置到硬件队列。硬件队列是第二阶段
++的队列，硬件可以直接访问并处理这些请求。然而，如果硬件没有足够的资源来接受更
++多请求，blk-mq 会将请求放置在临时队列中，待硬件资源充足时再发送。
++
++软件暂存队列
++~~~~~~~~~~~~
++
++在这些请求未直接发送到驱动时，块设备 I/O 子系统会将请求添加到软件暂存队列中
++（由 struct blk_mq_ctx 表示）。一个请求可能包含一个或多个 BIO。它们通过 struct bio
++数据结构到达块层。块层随后会基于这些 BIO 构建新的结构体 struct request，用于
++与设备驱动通信。每个队列都有自己的锁，队列数量由每个 CPU 和每个 node 为基础
++来决定。
++
++暂存队列可用于合并相邻扇区的请求。例如，对扇区3-6、6-7、7-9的请求可以合并
++为对扇区3-9的一个请求。即便 SSD 或 NVM 的随机访问和顺序访问响应时间相同，
++合并顺序访问的请求仍可减少单独请求的数量。这种合并请求的技术称为 plugging。
++
++此外，I/O 调度器还可以对请求进行重新排序以确保系统资源的公平性（例如防止某
++个应用出现“饥饿”现象）或是提高 I/O 性能。
++
++I/O 调度器
++^^^^^^^^^^
++
++块层实现了多种调度器，每种调度器都遵循一定启发式规则以提高 I/O 性能。它们是
++“可插拔”的(plug and play)，可在运行时通过 sysfs 选择。你可以在这里阅读更
++多关于 Linux IO 调度器知识 `here
++<https://www.kernel.org/doc/html/latest/block/index.html>`_。调度只发
++生在同一队列内的请求之间，因此无法合并不同队列的请求，否则会造成缓存冲突并需
++要为每个队列加锁。调度后，请求即可发送到硬件。可能选择的调度器之一是 NONE 调
++度器，这是最直接的调度器：它只将请求放到进程所在的软件队列，不进行重新排序。
++当设备开始处理硬件队列中的请求时（运行硬件队列），映射到该硬件队列的软件队列
++会按映射顺序依次清空。
++
++硬件派发队列
++~~~~~~~~~~~~~
++
++硬件队列（由 struct blk_mq_hw_ctx 表示）是设备驱动用来映射设备提交队列
++（或设备 DMA 环缓存）的结构体，它是块层提交路径在底层设备驱动接管请求之前的
++最后一个阶段。运行此队列时，块层会从相关软件队列中取出请求，并尝试派发到硬件。
++
++如果请求无法直接发送到硬件，它们会被加入到请求的链表(``hctx->dispatch``) 中。
++随后，当块层下次运行该队列时，会优先发送位于 ``dispatch`` 链表中的请求，
++以确保那些最早准备好发送的请求能够得到公平调度。硬件队列的数量取决于硬件及
++其设备驱动所支持的硬件上下文数，但不会超过系统的CPU核心数。在这个阶段不
++会发生重新排序，每个软件队列都有一组硬件队列来用于提交请求。
++
++.. note::
++
++        块层和设备协议都不保证请求完成顺序。此问题需由更高层处理，例如文件系统。
++
++基于标识的完成机制
++~~~~~~~~~~~~~~~~~~~
++
++为了指示哪一个请求已经完成，每个请求都会被分配一个整数标识，该标识的取值范围
++是从0到分发队列的大小。这个标识由块层生成，并在之后由设备驱动使用，从而避
++免了为每个请求再单独创建冗余的标识符。当请求在驱动中完成时，驱动会将该标识返
++回给块层，以通知该请求已完成。这样，块层就无需再进行线性搜索来确定是哪一个
++I/O 请求完成了。
++
++更多阅读
++--------
++
++- `Linux 块 I/O：多队列 SSD 并发访问简介 <http://kernel.dk/blk-mq.pdf>`_
++
++- `NOOP 调度器 <https://en.wikipedia.org/wiki/Noop_scheduler>`_
++
++- `Null 块设备驱动程序 <https://www.kernel.org/doc/html/latest/block/null_blk.html>`_
++
++源代码
++======
++
++该API在以下内核代码中:
++
++include/linux/blk-mq.h
++
++block/blk-mq.c
+\ No newline at end of file
+diff --git a/Documentation/translations/zh_CN/block/index.rst b/Documentation/translations/zh_CN/block/index.rst
+index 1a5b214657dc..442ee1025b36 100644
+--- a/Documentation/translations/zh_CN/block/index.rst
++++ b/Documentation/translations/zh_CN/block/index.rst
+@@ -16,10 +16,11 @@ Block
+ .. toctree::
+    :maxdepth: 1
 
++   blk-mq
++
  TODOList:
-
--* block/index
- * cdrom/index
- * target/index
-
+ * bfq-iosched
+ * biovecs
+-* blk-mq
+ * cmdline-partition
+ * data-integrity
+ * deadline-iosched
 --
 2.25.1
 
