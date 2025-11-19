@@ -1,305 +1,231 @@
-Return-Path: <linux-doc+bounces-67215-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67212-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92D92C6D16E
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:25:16 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 712D1C6D0E0
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:16:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id B49E64E7050
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 07:25:14 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id F27CA381F62
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 07:14:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE93C32142A;
-	Wed, 19 Nov 2025 07:25:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7715C32144F;
+	Wed, 19 Nov 2025 07:13:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="UweEAzs0"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="uNvdrnXZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m1973187.qiye.163.com (mail-m1973187.qiye.163.com [220.197.31.87])
+Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com [91.218.175.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90BDB314D0B
-	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:25:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.87
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADB4C313297
+	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:13:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763537111; cv=none; b=WtnO8ZUf2dWc/9faslI1qLPDaf3a67Q6IjdetN7B1+R8Vj44EUDp6Xu08+rMI+agXkZi69Z7uceq6d+8g15q3Y0j2n3Gpp7YaDHfv4n6Y1eihGcC4d2S9ZFXgNjWuMVW1iwIHNcSmYpe1S7GnGqE+FBPLsr4jNRq8Ta1vfFQosU=
+	t=1763536418; cv=none; b=DcJzhFn8zODH5huBke20Jjmu8HiwdVXwjpixM9YHiVFkibbHPiVPoA51qlDTO05Wq/XMYTQEoXzlKQOxdNe3TUIvFpqSiz2uxEsrGrr3a7lrjkMTLqstyHzLvAnRBhCjBOvrhvIXSm35TEohoWuiISecuMJW0zpxInhaDRP+drw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763537111; c=relaxed/simple;
-	bh=PFSc6UbgDTZkeRL0BWbIWw9/Zj8E9GNjAmcSrwJ9HZ0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=QTGr7PsOryvXLGzwduTglAFRy2tPAawRWF47n9dYm34QAhs56RC4OwrQ9JOorhRkybPxFxhjkHOGP3/5rmI5KN2ukA9/Lj5g9d7pYY8PEkLuoCSesuaDsCb6vev0i5/1/PLyt9IQGp92Ul/MThM7d7H2wEXi7wQdWPLZh7VNnZw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=UweEAzs0; arc=none smtp.client-ip=220.197.31.87
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
-Received: from localhost.localdomain (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a1aef7ef;
-	Wed, 19 Nov 2025 15:09:41 +0800 (GMT+08:00)
-From: ke zijie <kezijie@leap-io-kernel.com>
-To: alexs@kernel.org,
-	si.yanteng@linux.dev
-Cc: dzm91@hust.edu.cn,
-	corbet@lwn.net,
-	linux-doc@vger.kernel.org,
-	wangyuli@aosc.io,
-	doubled@leap-io-kernel.com
-Subject: [PATCH v5 3/3] docs/zh_CN: Add data-integrity.rst translation
-Date: Wed, 19 Nov 2025 15:09:37 +0800
-Message-Id: <0a77b351575619cf504c2711753f62893407c605.1763535919.git.kezijie@leap-io-kernel.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1763535919.git.kezijie@leap-io-kernel.com>
-References: <cover.1763535919.git.kezijie@leap-io-kernel.com>
+	s=arc-20240116; t=1763536418; c=relaxed/simple;
+	bh=NUnDgPybvgNXzeSLFQzQvrjiOfD8km93TwoyRmz7LhQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=lbT9MTxm3V83WYMerAlR7I5ocWdneVHIE4goKf9oZh8KErFTSgzXlqf24U9Ek9/PxnGQCXGWCChvlQTrZwkEwccF/wbQ1aRi6pHu17qxMprz09VrJCMQshmZRPXF9236htPgMoxG2m40XIQBSCKhm2qa4tiCMbJMErybl0nLN0c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=uNvdrnXZ; arc=none smtp.client-ip=91.218.175.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <2c0f4bbc-a9ab-4811-ab4c-355139f80076@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1763536411;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5PdwMOysLsZGo2jg+551j+QJoGmC6ayx2b8df/pVTCo=;
+	b=uNvdrnXZWWp6BQm1J/3CouJIhWOwToIx2oZRvumTevBCBCY/4eGM4NwhOBzxtzz8nvF+KG
+	M1XTEVusKgqow/+C7zNozk4pQ6fdkV1AYfOQQ6p1ms0/B3mUR7zDPs4KwFAnn07LoL+jB8
+	zspJL/jYeD2wx1GiQXDAQPuzUMFw7LE=
+Date: Wed, 19 Nov 2025 15:13:25 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v4] docs/zh_CN: Add trace debugging Chinese translation
+To: Frank Cen <focksor@gmail.com>, Alex Shi <alexs@kernel.org>,
+ Dongliang Mu <dzm91@hust.edu.cn>, Jonathan Corbet <corbet@lwn.net>,
+ "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+ open list <linux-kernel@vger.kernel.org>
+References: <20251119062300.596150-1-focksor@gmail.com>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Yanteng Si <si.yanteng@linux.dev>
+In-Reply-To: <20251119062300.596150-1-focksor@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a9af2971109d8kunmdeaeea3a589459f
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaHk1DVktISkgZGklMSx4fH1YVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
-	VLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=UweEAzs0cS1SHaQFbwvJVova321FSmK2NaBXLvrzLTDjh554WAjLZErRdhwvIygGzEGf+CIE9PbhuuB8Y6qXR4qaz5IASs1zn7TBw23mwQBTTj7JwZLchcpGArEICvAjgsU9NdIej7iImmvsi8zsmiMfoe/mlbIPIIms/+S9y8UeN8dpPJtPEvcMT8CB/K81zNXTuNBMoeWlk0lnzycbe6b/1uWyHiz/BggTLK2sr1rP/5Pz02pqpVZZd8ovhWDe5cKdGbnc3eKznpm8TFF/LRObNUMv3SCxWHtwmogkXwM8m1tY21tiBspA8VL78WC5DZv91b7tiFRsYp7nES9Ybg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=CAvXOAB55KJpJBW1mXmXUvSaHS1dLdMs06mzssWifvU=;
-	h=date:mime-version:subject:message-id:from;
+X-Migadu-Flow: FLOW_OUT
 
-Translate .../block/data-integrity.rst into Chinese.
-Add data-integrity into .../block/index.rst.
 
-Update the translation through commit c6e56cf6b2e7
-("block: move integrity information into queue_limits")
+在 2025/11/19 14:22, Frank Cen 写道:
+> Translate .../trace/debugging.rst into Chinese.
+>
+> Update the translation through commit c44a14f216f4
+> ("tracing: Enforce the persistent ring buffer to be page aligned")
+>
+> Signed-off-by: Frank Cen <focksor@gmail.com>
+> ---
+>   .../translations/zh_CN/trace/debugging.rst    | 132 ++++++++++++++++++
+>   1 file changed, 132 insertions(+)
+>   create mode 100644 Documentation/translations/zh_CN/trace/debugging.rst
+>
+> diff --git a/Documentation/translations/zh_CN/trace/debugging.rst b/Documentation/translations/zh_CN/trace/debugging.rst
+> new file mode 100644
+> index 000000000000..dc0006622659
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/trace/debugging.rst
+> @@ -0,0 +1,132 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +.. include:: ../disclaimer-zh_CN.rst
+> +:Original: Documentation/trace/debugging.rst
+> +:翻译:
+> +
+> + 岑发亮 Frank Cen <focksor@gmail.com>
+> +
+> +==================
+> +使用追踪器进行调试
+> +==================
+> +
+> +Copyright 2024 Google LLC.
+> +
+> +:Author:   Steven Rostedt <rostedt@goodmis.org>
+> +:License:  The GNU Free Documentation License, Version 1.2
+> +          (dual licensed under the GPL v2)
+> +
+> +- Written for: 6.12
+> +
+> +引言
+> +----
+> +跟踪框架对于调试 Linux 内核非常有用。本文记录了使用追踪器进行调试的各种方法。
+> +
+> +首先，确保已经挂载了 tracefs 文件系统::
+> +
+> + $ sudo mount -t tracefs tracefs /sys/kernel/tracing
+> +
+> +
+> +使用 trace_printk()
+> +-------------------
+> +
+> +trace_printk() 是一个非常轻量级的工具，可以在内核中除 "noinstr" 部分外的任何上下文使用。
+> +它可以在正常、软中断、硬中断甚至 NMI 上下文中使用。
+> +跟踪数据以无锁的方式写入到环形缓冲区 (tracing ring buffer) 中。
+> +为了使其更轻量，当可能时，它会只记录格式字符串的指针，并将原始参数保存到缓冲区中。格式和参数
+> +将在读取环形缓冲区时再进行处理。这样，格式化处理就不会在热路径（即记录追踪的地方）中完成。
+> +
+> +trace_printk() 只用于调试，绝不应添加到内核的子系统中。如果需要调试跟踪，请添加跟踪事件。
+> +如果在内核中发现 trace_printk()，则 dmesg 中会出现以下内容::
+> +
+> +  **********************************************************
+> +  **   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **
+> +  **                                                      **
+> +  ** trace_printk() being used. Allocating extra memory.  **
+> +  **                                                      **
+> +  ** This means that this is a DEBUG kernel and it is     **
+> +  ** unsafe for production use.                           **
+> +  **                                                      **
+> +  ** If you see this message and you are not debugging    **
+> +  ** the kernel, report this immediately to your vendor!  **
+> +  **                                                      **
+> +  **   NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE   **
+> +  **********************************************************
 
-Reviewed-by: Yanteng Si <siyanteng@cqsoftware.com.cn>
-Reviewed-by: WangYuli <wangyl5933@chinaunicom.cn>
-Signed-off-by: ke zijie <kezijie@leap-io-kernel.com>
----
- .../zh_CN/block/data-integrity.rst            | 192 ++++++++++++++++++
- .../translations/zh_CN/block/index.rst        |   2 +-
- 2 files changed, 193 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/block/data-integrity.rst
+Translate it?
 
-diff --git a/Documentation/translations/zh_CN/block/data-integrity.rst b/Documentation/translations/zh_CN/block/data-integrity.rst
-new file mode 100644
-index 000000000000..b31aa9ef8954
---- /dev/null
-+++ b/Documentation/translations/zh_CN/block/data-integrity.rst
-@@ -0,0 +1,192 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/block/data-integrity.rst
-+
-+:翻译:
-+
-+ 柯子杰 kezijie <kezijie@leap-io-kernel.com>
-+
-+:校译:
-+
-+==========
-+数据完整性
-+==========
-+
-+1. 引言
-+=======
-+
-+现代文件系统对数据和元数据都进行了校验和保护以防止数据损坏。然而，这种损坏的
-+检测是在读取时才进行，这可能发生在数据写入数月之后。到那时，应用程序尝试写入
-+的原始数据很可能已经丢失。
-+
-+解决方案是确保磁盘实际存储的内容就是应用程序想存储的。SCSI 协议族（如 SBC
-+数据完整性字段、SCC 保护提案）以及 SATA/T13（外部路径保护）最近新增的功能，
-+通过在 I/O 中附加完整性元数据的方式，试图解决这一问题。完整性元数据（在
-+SCSI 术语中称为保护信息）包括每个扇区的校验和，以及一个递增计数器，用于确保
-+各扇区按正确顺序被写入盘。在某些保护方案中，还能保证 I/O 写入磁盘的正确位置。
-+
-+当前的存储控制器和设备实现了多种保护措施，例如校验和和数据清理。但这些技术通
-+常只在各自的独立域内工作，或最多仅在 I/O 路径的相邻节点之间发挥作用。DIF 及
-+其它数据完整性拓展有意思的点在于保护格式定义明确，I/O 路径上的每个节点都可以
-+验证 I/O 的完整性，如检测到损坏可直接拒绝。这不仅可以防止数据损坏，还能够隔
-+离故障点。
-+
-+2. 数据完整性拓展
-+=================
-+
-+如上所述，这些协议扩展只保护控制器与存储设备之间的路径。然而，许多控制器实际
-+上允许操作系统与完整性元数据(IMD)交互。我们一直与多家 FC/SAS HBA 厂商合作，
-+使保护信息能够在其控制器与操作系统之间传输。
-+
-+SCSI 数据完整性字段通过在每个扇区后附加8字节的保护信息来实现。数据 + 完整
-+性元数据存储在磁盘的520字节扇区中。数据 + IMD 在控制器与目标设备之间传输
-+时是交错组合在一起的。T13 提案的方式类似。
-+
-+由于操作系统处理520字节（甚至 4104 字节）扇区非常不便，我们联系了多家 HBA
-+厂商，并鼓励它们分离数据与完整性元数据的 scatter-gather lists。
-+
-+控制器在写入时会将数据缓冲区和完整性元数据缓冲区的数据交错在一起，并在读取时
-+会拆分它们。这样，Linux 就能直接通过 DMA 将数据缓冲区传输到主机内存或从主机
-+内存读取，而无需修改页缓存。
-+
-+此外，SCSI 与 SATA 规范要求的16位 CRC 校验在软件中计算代价较高。基准测试发
-+现，计算此校验在高负载情形下显著影响系统性能。一些控制器允许在操作系统接口处
-+使用轻量级校验。例如 Emulex 支持 TCP/IP 校验。操作系统提供的 IP 校验在写入
-+时会转换为16位 CRC，读取时则相反。这允许 Linux 或应用程序以极低的开销生成
-+完整性元数据（与软件 RAID5 相当）。
-+
-+IP 校验在检测位错误方面比 CRC 弱，但关键在于数据缓冲区与完整性元数据缓冲区
-+的分离。只有这两个不同的缓冲区匹配，I/O 才能完成。
-+
-+数据与完整性元数据缓冲区的分离以及校验选择被称为数据完整性扩展。由于这些扩展
-+超出了协议主体(T10、T13)的范围，Oracle 及其合作伙伴正尝试在存储网络行业协
-+会内对其进行标准化。
-+
-+3. 内核变更
-+===========
-+
-+Linux 中的数据完整性框架允许将保护信息固定到 I/O 上，并在支持该功能的控制器
-+之间发送和接收。
-+
-+SCSI 和 SATA 中完整性扩展的优势在于，它们能够保护从应用程序到存储设备的整个
-+路径。然而，这同时也是最大的劣势。这意味着保护信息必须采用磁盘可以理解的格式。
-+
-+通常，Linux/POSIX 应用程序并不关心所访问存储设备的具体细节。虚拟文件系统层
-+和块层会让硬件扇区大小和传输协议对应用程序完全透明。
-+
-+然而，在准备发送到磁盘的保护信息时，就需要这种细节。因此，端到端保护方案的概
-+念实际上违反了层次结构。应用程序完全不应该知道它访问的是 SCSI 还是 SATA 磁盘。
-+
-+Linux 中实现的数据完整性支持尝试将这些细节对应用程序隐藏。就应用程序（以及在
-+某种程度上内核）而言，完整性元数据是附加在 I/O 上的不透明信息。
-+
-+当前实现允许块层自动为任何 I/O 生成保护信息。最终目标是将用户数据的完整性元
-+数据计算移至用户空间。内核中产生的元数据和其他 I/O 仍将使用自动生成接口。
-+
-+一些存储设备允许为每个硬件扇区附加一个16位的标识值。这个标识空间的所有者是
-+块设备的所有者，也就是在多数情况下由文件系统掌控。文件系统可以利用这额外空间
-+按需为扇区附加标识。由于标识空间有限，块接口允许通过交错方式对更大的数据块标
-+识。这样，8*16位的信息可以附加到典型的 4KB 文件系统块上。
-+
-+这也意味着诸如 fsck 和 mkfs 等应用程序需要能够从用户空间访问并操作这些标记。
-+为此，正在开发一个透传接口。
-+
-+4. 块层实现细节
-+===============
-+
-+4.1 Bio
-+--------
-+
-+当启用 CONFIG_BLK_DEV_INTEGRITY 时，数据完整性补丁会在 struct bio 中添加
-+一个新字段。调用 bio_integrity(bio) 会返回一个指向 struct bip 的指针，该
-+结构体包含了该 bio 的完整性负载。本质上，bip 是一个精简版的 struct bio，其
-+中包含一个 bio_vec，用于保存完整性元数据以及所需的维护信息（bvec 池、向量计
-+数等）。
-+
-+内核子系统可以通过调用 bio_integrity_alloc(bio) 来为某个 bio 启用数据完整
-+性保护。该函数会分配并附加一个 bip 到该 bio 上。
-+
-+随后使用 bio_integrity_add_page() 将包含完整性元数据的单独页面附加到该 bio。
-+
-+调用 bio_free() 会自动释放bip。
-+
-+4.2 块设备
-+-----------
-+
-+块设备可以在 queue_limits 结构中的 integrity 子结构中设置完整性信息。
-+
-+对于分层块设备，需要选择一个适用于所有子设备的完整性配置文件。可以使用
-+queue_limits_stack_integrity() 来协助完成该操作。目前，DM 和 MD linear、
-+RAID0 和 RAID1 已受支持。而RAID4/5/6因涉及应用标签仍需额外的开发工作。
-+
-+5.0 块层完整性API
-+==================
-+
-+5.1 普通文件系统
-+-----------------
-+
-+    普通文件系统并不知道其下层块设备具备发送或接收完整性元数据的能力。
-+    在执行写操作时，块层会在调用 submit_bio() 时自动生成完整性元数据。
-+    在执行读操作时，I/O 完成后会触发完整性验证。
-+
-+    IMD 的生成与验证行为可以通过以下开关控制::
-+
-+      /sys/block/<bdev>/integrity/write_generate
-+
-+    and::
-+
-+      /sys/block/<bdev>/integrity/read_verify
-+
-+    flags.
-+
-+5.2 具备完整性感知的文件系统
-+----------------------------
-+
-+    具备完整性感知能力的文件系统可以在准备 I/O 时附加完整性元数据，
-+    并且如果底层块设备支持应用标签空间，也可以加以利用。
-+
-+
-+    `bool bio_integrity_prep(bio);`
-+
-+      要为写操作生成完整性元数据或为读操作设置缓冲区，文件系统必须调用
-+      bio_integrity_prep(bio)。
-+
-+      在调用此函数之前，必须先设置好 bio 的数据方向和起始扇区，并确
-+      保该 bio 已经添加完所有的数据页。调用者需要自行保证，在 I/O 进行
-+      期间 bio 不会被修改。如果由于某种原因准备失败，则应当以错误状态
-+      完成该 bio。
-+
-+5.3 传递已有的完整性元数据
-+--------------------------
-+
-+    能够自行生成完整性元数据或可以从用户空间传输完整性元数据的文件系统，
-+    可以使用如下接口：
-+
-+
-+    `struct bip * bio_integrity_alloc(bio, gfp_mask, nr_pages);`
-+
-+      为 bio 分配完整性负载并挂载到 bio 上。nr_pages 表示需要在
-+      integrity bio_vec list 中存储多少页保护数据（类似 bio_alloc）。
-+
-+      完整性负载将在 bio_free() 被调用时释放。
-+
-+
-+    `int bio_integrity_add_page(bio, page, len, offset);`
-+
-+      将包含完整性元数据的一页附加到已有的 bio 上。该 bio 必须已有 bip，
-+      即必须先调用 bio_integrity_alloc()。对于写操作，页中的完整
-+      性元数据必须采用目标设备可识别的格式，但有一个例外，当请求在 I/O 栈
-+      中传递时，扇区号会被重新映射。这意味着通过此接口添加的页在 I/O 过程
-+      中可能会被修改！完整性元数据中的第一个引用标签必须等于 bip->bip_sector。
-+
-+      只要 bip bio_vec array（nr_pages）有空间，就可以继续通过
-+      bio_integrity_add_page()添加页。
-+
-+      当读操作完成后，附加的页将包含从存储设备接收到的完整性元数据。
-+      接收方需要处理这些元数据，并在操作完成时验证数据完整性
-+
-+
-+----------------------------------------------------------------------
-+
-+2007-12-24 Martin K. Petersen <martin.petersen@oracle.com>
-\ No newline at end of file
-diff --git a/Documentation/translations/zh_CN/block/index.rst b/Documentation/translations/zh_CN/block/index.rst
-index 442ee1025b36..f2ae5096ed68 100644
---- a/Documentation/translations/zh_CN/block/index.rst
-+++ b/Documentation/translations/zh_CN/block/index.rst
-@@ -17,12 +17,12 @@ Block
-    :maxdepth: 1
 
-    blk-mq
-+   data-integrity
+BTW:
 
- TODOList:
- * bfq-iosched
- * biovecs
- * cmdline-partition
--* data-integrity
- * deadline-iosched
- * inline-encryption
- * ioprio
---
-2.25.1
+what  happened between v1 and v4?
 
+
+
+Thanks,
+
+Yanteng
+
+> +
+> +
+> +调试内核崩溃
+> +------------
+> +有多种方法可以在内核崩溃时获取系统状态。你可以通过 printk 中的 oops 消息来实现，也可以使用
+> +kexec/kdump。但是这些方法只能显示崩溃时的情况，而如果能够知道在崩溃发生之前发生了什么则非常
+> +有帮助。tracing ring buffer 默认情况下是一个循环缓冲区，它会用较新的事件覆盖较旧的事件。
+> +当崩溃发生时，ring buffer 的内容会是导致崩溃的所有事件。
+> +
+> +在进行调试时，有一些内核命令行参数非常有用。第一个参数是 ftrace_dump_on_oops，当系统发生
+> +oops 时，它会将 tracing ring buffer 的内容输出到控制台。如果控制台的这些输出能够被记录
+> +下来那将会非常有帮助。但是如果你使用的是串口控制台，建议将环形缓冲区设得相对较小一些，否则可能
+> +需要几分钟甚至数小时才能完成环形缓冲区的转储工作。下面是一个内核命令行示例::
+> +
+> +  ftrace_dump_on_oops trace_buf_size=50K
+> +
+> +注意，tracing buffer 由每个 CPU 的缓冲区组成，每个缓冲区又被划分为默认大小为 PAGE_SIZE
+> +的子缓冲区。上面的 trace_buf_size 选项将每个 CPU 的缓冲区设置为 50K，因此在一台有 8 个
+> +CPU 的机器上，实际上缓冲区总大小是 400K。
+> +
+> +跨重启的持久缓冲区
+> +------------------
+> +如果系统内存允许，可以在内存中的特定位置指定 tracing ring buffer。如果该位置在重启时保持
+> +不变且内存数据未被修改，则该可以在下一次启动后读取该环形缓冲区。有如下两种方法为缓冲区保留内存。
+> +
+> +相对更可靠的方法（在 x86 上）是先使用 memmap 内核命令行选项来保留内存，然后将该内存指定用于
+> +trace_instance。这需要对系统的物理内存布局有一定的了解。使用这种方法的优点是环形缓冲区的内存
+> +位置将始终保持不变::
+> +
+> +  memmap==12M$0x284500000 trace_instance=boot_map@0x284500000:12M
+> +
+> +如上参数中，memmap 选项在物理内存地址 0x284500000 处保留了 12 兆字节的内存。而紧随其后的
+> +trace_instance 选项将在同一位置创建一个名为 "boot_map" 的 trace instance（跟踪实例），
+> +这个实例使用与保留的内存相同的大小。由于环形缓冲区要被划分为每个 CPU 的缓冲区，因此这 12MB
+> +内存将被均匀地分配给所有 CPU。如果你有 8 个 CPU，那么每个 CPU 的环形缓冲区大小将是 1.5MB。
+> +注意这其中还要包括元数据，因此环形缓冲区实际可使用的内存还会稍微小一些。
+> +
+> +另一种更通用但没那么可靠的在启动时分配环形缓冲区映射的方法是使用 reserve_mem 选项::
+> +
+> +  reserve_mem=12M:4096:trace trace_instance=boot_map@trace
+> +
+> +上面的 reserve_mem 会在启动时寻找 12MB 按 4096 字节对齐的可用内存。这块内存会被标记为
+> +"trace" 以供后续的命令行选项使用。
+> +
+> +trace_instance 选项创建了一个名为 "boot_map" 的跟踪实例，并将使用由 reserve_mem 预留
+> +并标记为 "trace" 的内存。这种方法更通用，但不那么可靠。由于 KASLR（内核地址空间布局随机化）
+> +机制的存在，reserve_mem 保留的内存位置可能会有所不同。当这种情况发生时，环形缓冲区将不会是
+> +在上次启动时写入的内容，并且整个缓冲区将会被重置。
+> +
+> +有时我们可以通过指定更大的对齐字节的方式来防止 KASLR 改变 reserve_mem 预留内存的位置。
+> +通过这个方法，你可能会发现缓冲区的位置会更一致::
+> +
+> +  reserve_mem=12M:0x2000000:trace trace_instance=boot_map@trace
+> +
+> +在启动时，为环形缓冲区保留的内存将会经过校验。系统会通过一系列测试以确保缓冲区内包含有效数据。
+> +如果测试通过，该环形缓冲区会被设置为可被实例读取；如果测试未通过，则其会被清空并重新初始化。
+> +
+> +这块内存的布局在不同的内核版本可能也会不同，因此只有相同的内核版本才能保证其工作正常。在不同
+> +的内核版本之间切换时，可能会由于内存布局不同而导致缓冲区被标记为非法。
+> +
+> +注意：映射的地址和大小都必须符合架构的页面对齐要求。
+> +
+> +在启动阶段使用 trace_printk()
+> +-----------------------------
+> +默认情况下， trace_printk() 的内容会进入 top level tracing instance（顶级跟踪实例）。
+> +但这个实例在重启时不会被保留。为了让 trace_printk() 的内容以及一些其它的内部 tracing
+> +能够进入被保留的缓冲区（例如 dump stacks），你可以在内核命令行中为 trace_printk() 指定
+> +目标实例，或者在启动后通过 trace_printk_dest 选项进行设置。
+> +
+> +启动后::
+> +
+> +  echo 1 > /sys/kernel/tracing/instances/boot_map/options/trace_printk_dest
+> +
+> +在内核命令行设置::
+> +
+> +  reserve_mem=12M:4096:trace trace_instance=boot_map^traceprintk^traceoff@trace
+> +
+> +如果在内核命令行中设置，建议同时使用 "traceoff" 标志来禁用追踪，并在启动后再重新启用追踪。
+> +否则，最近一次启动的追踪信息将与上一次启动的追踪信息会混在一起，可能会变得难以阅读。
 
