@@ -1,141 +1,251 @@
-Return-Path: <linux-doc+bounces-67393-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67394-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2467C700D0
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 17:24:10 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id BBCB9C70373
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 17:50:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sin.lore.kernel.org (Postfix) with ESMTPS id 0434B2EDB4
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 16:23:39 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 80CA34F9C9E
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 16:24:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D852E377E9D;
-	Wed, 19 Nov 2025 16:18:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3DB39369210;
+	Wed, 19 Nov 2025 16:19:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="xT0TSeGv"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="G10a9wMa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3420C37374D
-	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 16:18:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E207E369219
+	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 16:19:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763569115; cv=none; b=bEpxJFzbd/7IoFjHVXL/G3njrjSO88vsDDqDNeM9As67A3Arf7DNQmgIV+JqJcBzTyZo9EGgkkNeaPWnAYsr6W79nvGqapurGYd/0FJy1yAnfn+MTtze6lsVW4Vv6awczJFdgNdnLXMjuD3/B1xQqpEIhW9RXRicQMVjJ6Imwz0=
+	t=1763569155; cv=none; b=nvSjakSqHQ6Uch1XTog8einEebSthVCt5mH3GzrJHEODkclr2zy1EoVEsChdLT2VpUymS5AhGgTBB/pJa+vuskJCcokw3dDO7M9rLypWpehRVSn/+ohn7+jis3p05hl7tMP2pkeCcVAeE2MVI6PK0BwM0vGVWDbJ/2VYiq03q8g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763569115; c=relaxed/simple;
-	bh=2gYGham6RcUhZnNfLTEyX5K2IIqX9Oa8+TtMYKSDzf0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=aO5ZFL8SfkZ6grwfh+89FC9E3+N/yGD6nBiEqlZIkZmLGlLdssrXZJNYV2cyN2mSIDo8xV/4SDvus33xlmNrSXBdi184QsiwwqRQvOIdlpdmQAKRUco1r9X089xjrJxjsLKdeMlZ8y0oqLj9dReHnSQ29uEesZPplAg4BRe6bpI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=xT0TSeGv; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47118259fd8so51678045e9.3
-        for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 08:18:32 -0800 (PST)
+	s=arc-20240116; t=1763569155; c=relaxed/simple;
+	bh=TA2fn/MPowLU/Otx4A+G3fody4U0W0BzBMJVKJEuXbc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=V+VqNBqRdL2QqwwRy4O8MRqzSQRsZeOiqd16Q8i0gmQCANGJL8xPYaDbqFFNg2R8dJFaHyanDvK9XZKG78tQng6VTf8iZF990fTQGJUi4XAXsjLNI9ZDh35AY6jtDd0Hq0Ue06SrU6FSbj23m+QHyAxOPl+NjSEIF4zWGa9/JWs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=G10a9wMa; arc=none smtp.client-ip=209.85.214.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-297dc3e299bso68187055ad.1
+        for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 08:19:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1763569111; x=1764173911; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9NYmdp5K7GoriQTdww1h5siZo6lfJrXIe/VnMyhW40E=;
-        b=xT0TSeGv1shStWY8dG2VdnVNTmaOATqx5X4A6etNbikwyUW2v027fqYAP3WksI3Rn5
-         tmfexNiX6XGmm4MGw8i2JSvUOrsuiIkalV/89pCoVnYZJXrD4ExkS9+P0SET4iTknZK9
-         G0bDe4SkP8sQJUvj2fhSG4GA5vVClgfcvk1j8a3wNnEHPGREzrt7wqLsgu0Xt5ssR5Zf
-         u4Hf4eBLiJCHVBEJdZiz3UWyoXwR6zcSSKkQPBVhsQPVQp25/5ond0WTaISog6ExwDQT
-         WjrGVVE1RP1cIYJW6c2PJaR0LAOx3Dh4d1TgoKW/6DgurmV8iRznB/vnJXPgCe6oJlBE
-         mlZA==
+        d=gmail.com; s=20230601; t=1763569152; x=1764173952; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=+6HDqJUm16rryB8P6WaTAzJpsQ5pMTyvGVVzWJ0edS8=;
+        b=G10a9wMabq+2glmFGtjKKzgI3URJ7uhoeNCPvP08hwHPcL0bLpGxWakJ53soG6KVTp
+         DxrXHJW/qqfNdWny1zaYsfLKBn2H8LBQu9qG1JD6jQ8cZL9CaVFA4yJU7XqZu6JU/pxN
+         68r5A33Ogq1ylkOO1iFA+oKV9FY0Ks57F83SCYh+B55WpdYtEmYGwOyVu1D4cOdCeqtM
+         304V9/OhrNVDlVkZ2y3qs11IgqAgOPEGk91/W1CccVPuaup0WvdlEO/i+GSXxM2Q74Ng
+         xZ26XHd3igi3ozyJABH0gmsdyerlD6bC0uT0ISi60Twh/TKgizubPBXtbRs4s+nIo8sZ
+         jBYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763569111; x=1764173911;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=9NYmdp5K7GoriQTdww1h5siZo6lfJrXIe/VnMyhW40E=;
-        b=AAp9UbtlJF+TlPyNnEuOpKaWjZcE+ENWhu3Wjqu2ax7yqgTneUAIDCtM7FrTRL4TMa
-         PRbuGC+lHmsKatUApQWVjDcraj05M+IJrPLxGgBxoYhMs6F1ljKQopbW8zKINAzoUuz7
-         LIRgSJ5EyjyuULjJUktbJEXDO3VMyJA495JH6zgBj0s3fW2vvAUUty3Uaf668srBP4VA
-         IpBpIfeMREsbZRpF+n/vJeaRRtD4um0/EbRDFcDdRfztXjxTrNiQiSsf94h1LEX9SSht
-         VMk/SS7skGd3nollbNbYDOqFvmWTn1qXkdQSVdfjB0UUjqPs8/oKPKjP45/k+Lj12J+/
-         MlGA==
-X-Forwarded-Encrypted: i=1; AJvYcCU54gMJTZt8xqhYi5dJkYu264GCs47SQuwyRfjzRiqKlXGWc25KNgzwXtdat2h+CMX2kEcEySVpPBU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyhIEQa0D8EWLCGxalc78NAQhPPopxNajLZalvMcLanPcmI0Hmx
-	HRZgLlp4TxYRF8HuS/d0iu60QtYF9Xk2V9DS+C/f0urGJfeQcyRsgyf9P51U+Kxwx2s=
-X-Gm-Gg: ASbGncvCzwH2jGqzt95xWV7zhoMHBuHoURclD9a2FELC0cnxar+NQK76IVl3uvIJPwM
-	5xxp364AS/BoQSgX4iV+VH3A2Cdthbt6AreopVC4u4Erx3bZfifyVVF4LaAZSboCZTzRLf3dRb3
-	iCkR8SDBUWpLiDgkotiXb+xoV/8zjhx4w+gBz8Qz1BbuPs5wvzdDTqsSBbBSeE1vAcfCKny6ibB
-	TvOucZtfLNAEtlVSlg0wuecEmBx3YLaUf12xmVJp8PPK27emZTjnA5e1HxVb8vm7KKs3zDwK6OT
-	1hovYvVEARdRzONSo3axtFUPqixxsac2VZXlVAQE9Oa93LryWH8L0ht9vGI2ziUcF6k1BGFsXM5
-	toDyN43awqCuucTWlcrIQ8Mkj2mQZ89RaDsb/aJXsANJKSdpy7ebLtYMYgTc9cNwSKxie4JpWU5
-	cedlLZfNsRijO7MEzHVE+qrBXedyOMnv0=
-X-Google-Smtp-Source: AGHT+IHdpfGKmHi4dDxwCxkPLQGkWAFqU0kact4PGhTMGVixHnJV4SZCke4Dbaosdd52MSthTFvACA==
-X-Received: by 2002:a05:600c:6b47:b0:477:b734:8c22 with SMTP id 5b1f17b1804b1-477b7348cebmr11811715e9.8.1763569111423;
-        Wed, 19 Nov 2025 08:18:31 -0800 (PST)
-Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477b10142d3sm63205425e9.5.2025.11.19.08.18.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Nov 2025 08:18:31 -0800 (PST)
-From: James Clark <james.clark@linaro.org>
-Date: Wed, 19 Nov 2025 16:18:09 +0000
-Subject: [PATCH v6 13/13] coresight: docs: Document etm4x timestamp
- interval option
+        d=1e100.net; s=20230601; t=1763569152; x=1764173952;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=+6HDqJUm16rryB8P6WaTAzJpsQ5pMTyvGVVzWJ0edS8=;
+        b=q4koZFPccqZd9ACs20GLMZbsHuSzllGa+T+gGY7OC5f11kyWOOeHP6ctHI7EpEW4rP
+         TFZ2+EMK1pqPs/FybckJtk/pcUbfLYzy4YvXlHRPecGtUcViKyZIANOtrVHbv+TiStgU
+         DBUGODqNr+7E+H/8YptANJPyJo7DQj8NA4wL1bdJFeOnLbg9N5hXY1YwPl422IEyqW2i
+         0/L2qiJp4gn3hl2QEMgi9HfZjuFq1uYrN+20oNNiBiygp5PAfTg5+8o7fqL+P7sAv1aD
+         B0K99z0Ju3QmrXXV7PznvOUQE/uN51sDMA1zdRHR/QCd70tgn8wwa2Ibu665RKleu+eK
+         63aQ==
+X-Forwarded-Encrypted: i=1; AJvYcCU89t2t+n2vwVXWt/Rf5T1zyp9THBpftZ3VypJR/LAH8jryfHYUlceB3QHO9CnkhwTfuw/D7LC/zV8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw7ULbZ6SkmhVmLTinC0yAye1Jt6i2kIyj6leU5kxxJ8VXxLP96
+	Wk0kIUmqZzmWE6OOhq1RtietC8cd0MoA+71VPv3ul8iyAuIJcR0OhKXz
+X-Gm-Gg: ASbGnctRi6Z8cAqlzUNRhe7NtajTGD8cDBIGeNr6xBr6Sry7ZufFxj4hvG9/5DV2utf
+	w34SP5FaL4dmpEfGt809YFhr/8p72AzztQKEWSZnxsngtrBDZFyvAUQVSDtORlzUcQjoyUhvTAd
+	wS1P/P2+QJ6lFO/GCa5CKuZXDMqV/HIi9AbGi4v5ZVyfkg76emuL3UpF00155hxuSK4K64NuVif
+	8vGt0GV+atysjZ/kLKTE1BBtT93CqTkQSXED84fbR1vtnkS1n1XwMchqFuYdXqdUUKDckw391Qd
+	HNfl/49UCyQji10IZ8wDoxgC8GQgAInHh4irhSwYT00/tYOygzFWLBYbqjunQ+L2cl9N0iD7fEc
+	H6XBPwCGr9GFxCFWIkzmTjuGlxgzxmy7LZrP9mOzzgl/t7Jj5iG1DoCvvJuKvRQPqTxudUropbg
+	td3mZcrwJEgW+8mAs1R1NS+CRzlIae3hK75PiZG3eTsM2fNES5YqTxoGoZHQQt1WrjarTUsPQTT
+	xtcEnm1
+X-Google-Smtp-Source: AGHT+IE30doPMpAYBt7MYn70T78ZfSqhQ5JpdF8FnEk1gF/jJn1jAtJCRLq4lC+btIz3WcyY9hL+jQ==
+X-Received: by 2002:a17:903:3c2b:b0:295:6d30:e25f with SMTP id d9443c01a7336-2986a75e7b9mr230173205ad.53.1763569152013;
+        Wed, 19 Nov 2025 08:19:12 -0800 (PST)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7b9250d24b9sm20095126b3a.17.2025.11.19.08.19.10
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 19 Nov 2025 08:19:11 -0800 (PST)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <9f3e270b-f17f-4442-83ad-40d51ac27598@roeck-us.net>
+Date: Wed, 19 Nov 2025 08:19:09 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/4] hwmon: documentation: add tids
+To: Thomas Marangoni <Thomas.Marangoni@becom-group.com>,
+ linux-hwmon@vger.kernel.org
+Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, corbet@lwn.net,
+ Jonathan.Cameron@huawei.com, michal.simek@amd.com, nuno.sa@analog.com,
+ Frank.Li@nxp.com, wenswang@yeah.net, apokusinski01@gmail.com,
+ dixitparmar19@gmail.com, vassilisamir@gmail.com, paweldembicki@gmail.com,
+ heiko@sntech.de, neil.armstrong@linaro.org, kever.yang@rock-chips.com,
+ prabhakar.mahadev-lad.rj@bp.renesas.com, mani@kernel.org, dev@kael-k.io,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+References: <20251119125145.2402620-1-Thomas.Marangoni@becom-group.com>
+ <20251119125145.2402620-5-Thomas.Marangoni@becom-group.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <20251119125145.2402620-5-Thomas.Marangoni@becom-group.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251119-james-cs-syncfreq-v6-13-740d24a29e51@linaro.org>
-References: <20251119-james-cs-syncfreq-v6-0-740d24a29e51@linaro.org>
-In-Reply-To: <20251119-james-cs-syncfreq-v6-0-740d24a29e51@linaro.org>
-To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
- Mike Leach <mike.leach@linaro.org>, 
- Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
- Jonathan Corbet <corbet@lwn.net>, Leo Yan <leo.yan@arm.com>, 
- Randy Dunlap <rdunlap@infradead.org>
-Cc: coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org, 
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
- James Clark <james.clark@linaro.org>
-X-Mailer: b4 0.14.0
 
-Document how the new field is used, maximum value and the interaction
-with SYNC timestamps.
+On 11/19/25 04:51, Thomas Marangoni wrote:
+> Add tids driver documentation
+> 
+> Signed-off-by: Thomas Marangoni <Thomas.Marangoni@becom-group.com>
+> ---
+>   Documentation/hwmon/tids.rst | 61 ++++++++++++++++++++++++++++++++++++
 
-Signed-off-by: James Clark <james.clark@linaro.org>
----
- Documentation/trace/coresight/coresight.rst | 16 ++++++++++++++--
- 1 file changed, 14 insertions(+), 2 deletions(-)
+Needs to be added to Documentation/hwmon/index.rst.
 
-diff --git a/Documentation/trace/coresight/coresight.rst b/Documentation/trace/coresight/coresight.rst
-index 806699871b80..d461de4e067e 100644
---- a/Documentation/trace/coresight/coresight.rst
-+++ b/Documentation/trace/coresight/coresight.rst
-@@ -613,8 +613,20 @@ They are also listed in the folder /sys/bus/event_source/devices/cs_etm/format/
-      - Session local version of the system wide setting: :ref:`ETM_MODE_RETURNSTACK
-        <coresight-return-stack>`
-    * - timestamp
--     - Session local version of the system wide setting: :ref:`ETMv4_MODE_TIMESTAMP
--       <coresight-timestamp>`
-+     - Controls generation and interval of timestamps.
-+
-+       0 = off, 1 = minimum interval .. 15 = maximum interval.
-+
-+       Values 1 - 14 use a counter that decrements every cycle to generate a
-+       timestamp on underflow. The reload value for the counter is 2 ^ (interval
-+       - 1). If the value is 1 then the reload value is 1, if the value is 11
-+       then the reload value is 1024 etc.
-+
-+       Setting the maximum interval (15) will disable the counter generated
-+       timestamps, freeing the counter resource, leaving only ones emitted when
-+       a SYNC packet is generated. The sync interval is controlled with
-+       TRCSYNCPR.PERIOD which is every 4096 bytes of trace by default.
-+
-    * - cc_threshold
-      - Cycle count threshold value. If nothing is provided here or the provided value is 0, then the
-        default value i.e 0x100 will be used. If provided value is less than minimum cycles threshold
+I'd suggest to combine patches 2, 3, and 4 into a single patch.
 
--- 
-2.34.1
+>   1 file changed, 61 insertions(+)
+>   create mode 100644 Documentation/hwmon/tids.rst
+> 
+> diff --git a/Documentation/hwmon/tids.rst b/Documentation/hwmon/tids.rst
+> new file mode 100644
+> index 000000000000..254c4a90e6f8
+> --- /dev/null
+> +++ b/Documentation/hwmon/tids.rst
+> @@ -0,0 +1,61 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +Kernel driver tids
+> +===================
+> +
+> +Supported Chips:
+> +
+> +  * WSEN TIDS
+> +
+> +    Prefix: 'tids'
+> +
+> +    Addresses scanned: None
+> +
+> +    Datasheet:
+> +
+> +      English: https://www.we-online.com/components/products/manual/Manual-um-wsen-tids-2521020222501%20(rev1.2).pdf
+> +
+> +Author: Thomas Marangoni <Thomas.Marangoni@becom-group.com>
+> +
+> +
+> +Description
+> +-----------
+> +
+> +This driver implements support for the WSEN TIDS chip, a temperature
+
+This driver implements support -> This driver supports
+
+> +sensor. Temperature is measured in degree celsius. In sysfs interface,
+> +all values are scaled by 1000, i.e. the value for 31.5 degrees celsius is 31500.
+> +
+
+This is per ABI and does not need to be mentioned. If you want to mention any
+details, the operating temperature and range and the current consumption (from the
+introduction in the datasheet) would be acceptable.
+
+> +Usage Notes
+> +-----------
+> +
+> +The device communicates with the I2C protocol. Sensors can have the I2C
+> +address 0x38 or 0x3F. See Documentation/i2c/instantiating-devices.rst for methods
+> +to instantiate the device.
+> +
+> +Sysfs entries
+> +-------------
+> +
+> +=============== ============================================
+> +temp1_input     Measured temperature in millidegrees Celsius
+> +update_interval The interval for polling the sensor, in
+> +                milliseconds. Writable. Supported values are
+> +                5, 10, 20 or 40.
+> +temp1_max       The temperature in millidegrees Celsius, that
+> +                is triggering the temp1_max_alarm. Writable.
+> +                The lowest supported value is -39680 and the
+> +                highest supported value is 122880. Values are
+> +                saved in steps of 640.
+> +temp1_min       The temperature in millidegrees Celsius, that
+> +                is triggering the temp1_min_alarm. Writable.
+> +                The lowest supported value is -39680 and the
+> +                highest supported value is 122880. Values are
+> +                saved in steps of 640.
+> +temp1_max_alarm The alarm will be triggered when the level
+> +                reaches the value specified in
+> +                temp1_max. It will reset automatically
+> +                once it has been read.
+
+The datasheet suggests that it should be "exceeds", not "reaches".
+I'd suggest to use "temperature", not "level".
+
+> +temp1_min_alarm The alarm will be triggered when the level
+> +                reaches the value specified in
+
+Same here. Per datasheet: "Temperature is lower than low limit".
+The datasheet says "exceeds the low limit", but that isn't technically
+correct, because that means "higher than". "when the temperature is
+lower than" should work.
+
+> +                temp1_min. It will reset automatically
+> +                once it has been read.
+> +=============== ============================================
 
 
