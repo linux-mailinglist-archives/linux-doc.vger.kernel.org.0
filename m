@@ -1,100 +1,140 @@
-Return-Path: <linux-doc+bounces-67222-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67220-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id F37FCC6D544
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 09:12:31 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC6EEC6D412
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:55:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id C6DD34F5879
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 08:03:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTPS id DA89E2D37D
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Nov 2025 07:55:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4DE58328B47;
-	Wed, 19 Nov 2025 07:57:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C9F932D0FD;
+	Wed, 19 Nov 2025 07:52:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="LFWY06qF"
+	dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b="BcKXW1Mz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m3285.qiye.163.com (mail-m3285.qiye.163.com [220.197.32.85])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5796A30C601
-	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:57:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.85
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C7DB2EFD8C
+	for <linux-doc@vger.kernel.org>; Wed, 19 Nov 2025 07:52:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763539029; cv=none; b=p5dZLPhcux5kwRM5wO3pfopZsONGXa5h+pj+LhX2Gp43d+lUK9/1cL30R7BMkVz3dLcslo71d8ZdhAQokVfwc9E6gDc3oQH2LbpU9NjVC7i86qGiD/FFMrNlVL258nJVxbCDUqqjz0S0o0/b71HG8g8LGbXLsG+cmZ+KE7NDWXQ=
+	t=1763538730; cv=none; b=TUXcUnnWpLZJwnLieCacEzdFysqYKZvkItwlTXxjClCpjlry/PGyKlKdorye9XeALqNDvLUwx/FnnMEmBTnikyy2pNMZPKOd1jhEtpgbpfe1w7tG4XVEdpCw4rkp80xx+BRoyXukR+l7Nrw6fwpHw7s+bUJ7Pujunkk4FDzZt64=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763539029; c=relaxed/simple;
-	bh=hZPh2/FqLJDdfMQ+u48VxQfUx7m4NNuINUQUbhqdzDU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=atCVfqzHGzMCIW4eJKQQRklYOylsnYjyPTMWTWahIG48zMCjJQriXV8kTzgNMIUI0zlRa8oBwbLmo90mte+HZ0JKlv+fWM8xlYN/ZClg2H18D7vRJeCY82xGzvoIfNQHKzYztIKq4daxsybqtp22+XXULfqLjREQRWsvRwP4O5o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=LFWY06qF; arc=none smtp.client-ip=220.197.32.85
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
-Received: from [10.0.66.19] (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a1cbe3b4;
-	Wed, 19 Nov 2025 15:51:54 +0800 (GMT+08:00)
-Message-ID: <2d85a076-b398-4e0b-8376-0bc7f1236708@leap-io-kernel.com>
-Date: Wed, 19 Nov 2025 15:51:53 +0800
+	s=arc-20240116; t=1763538730; c=relaxed/simple;
+	bh=+knjy1mYLTtcSi7oSKXUL41zdpNqO3yYJh2KmNDyZEs=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=us25OU0zI40InHSls9nU+c9+78uxcKuETVRJAwxPBYoPKCi7LHSQxXRKqsTx7kDIOuLfWfDkqIJuLblgs8OolkvYE0NH28jBcr+g7cCuCIYbtlAgQMbVPgU/icjblghQY2KOhl+NY89h/xEMLIf/LQN/Itr1VI6p5f8qiwtH34k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl; spf=none smtp.mailfrom=bgdev.pl; dkim=pass (2048-bit key) header.d=bgdev-pl.20230601.gappssmtp.com header.i=@bgdev-pl.20230601.gappssmtp.com header.b=BcKXW1Mz; arc=none smtp.client-ip=209.85.167.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bgdev.pl
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bgdev.pl
+Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5959105629bso3322315e87.2
+        for <linux-doc@vger.kernel.org>; Tue, 18 Nov 2025 23:52:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1763538726; x=1764143526; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jwU2GYwNQnlMl5NP0rEc93dyZ4Rb4vZCEVrGNl0M5D8=;
+        b=BcKXW1Mz2kS4ad9RUT4V/S/z6gZIUd7ai0/ppQ59wIi5OuDWw7c/SLIeycdzmAxdQs
+         8vmqaWtY+bcXQbQRMLaTm76F+yYdBEbHxLzGdxXB52qpZtDEDaebU6BegYj+zeFWKfko
+         /1qByGQRVBu7ojS9Oitp03BL/mRexA6mpia8sYiBpZAzVW/62O4RK+tHC1IQWeMzCx00
+         PbphROe8glWxwo/94aExA3lNefD1AcZrKFzIqMO/Zqw6YCv9k5qBOMArw75OPfnAdgq1
+         RQrJVhMQSkEh/5Z9+wucWgn8VN7gc3UUoug1R8iDvjVbl/MvGUU/lO3ONS/zRlb6UnBQ
+         W1fA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763538726; x=1764143526;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=jwU2GYwNQnlMl5NP0rEc93dyZ4Rb4vZCEVrGNl0M5D8=;
+        b=gJL2WbmU5hjz7SGDJ0ESlBwcaizXqf5/BC1v8es8NjwTFdzFn9qRVkWkO3lkNkZqGK
+         QsvkS0bIkgIt8CwUNvs6+JrMNwrAz1poO/LarkhePDt+Co6Zfx8BjQgDHqX+N0dcQ4VQ
+         VB54hEheAjOqv5eTxtyebXBAXjfHirdn9VLiuwBdBCchknwscJa7XL1PH0fmF6xcbNWN
+         BuwwhlK0NQ1nJKkV1I0NVyjMIMVbgloO5GGk9fsUuqWTudiPCUX3JNv9v83JLsYaRaDb
+         iC0uCnci8mARIhquHEt9jEPEbya6U7fBx4Bqt4fna7OT6loGRAJnarhOmG4EPFflyMec
+         PpCA==
+X-Forwarded-Encrypted: i=1; AJvYcCXyqkjG/DTHkEJGBZby1aPQGccKY/J6hZVhFwk+yePzem5OAVurL9ptPnac+ZAikMlkiiVtrtairJw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyB4Ccea20trzyxGYtiPztd8Sg7sANpQ9pvaw5Co0riPcLwXu7N
+	UWO7lXoxglBEDsJRrPcbQ1M7q70qJVI8nM6HvJ7L3kqsO5qO7Zsb9UGUCARG7oTSvvl+XIRSf9d
+	bMTpNQtKlHhoxWWK4Xbx3eIDfYh/69a68oHk+hpVZAQ==
+X-Gm-Gg: ASbGnctpXx45h+hD3+3V5KKzLKnWCQoFY/cIrjfY/ppjaDYblGpzI6ekPR0F2FbE0/J
+	zhbBnYdJpGcA9iXf8QWWi5YYYD4V05PAPBHBPkVGUGgKL80dl2Ugc2Ms61pJ9z745daQ9PZMHEl
+	V6UwbSHFm+65Fz0YpMYTvKz1xXaJcZTR+oLvdSEX8YQYxiyWQgQy++z+H0S2RZEyoZ3Cwks/kxf
+	mudz4BAmz3AuWN9PqMo+QOp9Im9Ki9BauyYdDDghuuIOcT+ur0YK6xr6u4doI+7EmbbYx5zsz8i
+	1aB5HCcBrcOpVMIad/0mDixJxZrKqJOWsxXV/g==
+X-Google-Smtp-Source: AGHT+IFA3Go2eF2BwWY09oJ0Cc5G6GOR510iuyfBNrQSzFMWx2OC2w4uzCKM6347Afhcs+F0I7XinNKiUc9fRkF7AiU=
+X-Received: by 2002:a05:6512:2347:b0:595:9d26:f54b with SMTP id
+ 2adb3069b0e04-5959d26f656mr992072e87.41.1763538726125; Tue, 18 Nov 2025
+ 23:52:06 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/3] docs/zh_CN: Add block/index.rst translation
-To: Yanteng Si <si.yanteng@linux.dev>, alexs@kernel.org
-Cc: dzm91@hust.edu.cn, corbet@lwn.net, linux-doc@vger.kernel.org,
- wangyuli@aosc.io, doubled@leap-io-kernel.com
-References: <cover.1763535919.git.kezijie@leap-io-kernel.com>
- <3e4c8bab2c3d5f55daea8dca604981d486256d19.1763535919.git.kezijie@leap-io-kernel.com>
- <e2a979ee-7dcb-424e-893b-e60333259e15@linux.dev>
-From: ke zj <kezijie@leap-io-kernel.com>
-In-Reply-To: <e2a979ee-7dcb-424e-893b-e60333259e15@linux.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a9b193de109d8kunmac7a11d658fd9fc
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCSE1DVkwaSBgZS0pIGU5MT1YVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
-	VLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=LFWY06qFYavghA0nbukOUaqbNSxz8V/2rw1PlAdH73TE+zV8uUoblMK/hzzpCtyzlYtsPijbQJB1ngT5zh1QBwQEvhQspIEF/H9QYyz0IhkOC/MOy+ShAvhkbq2W9yu1MhiNcXZMONWptIQeiv3kw8bjWF1dJdA+17FSuDgTGYwbltd7rgj22q1PiqzXw8ZKDTHWgF3zpdJo9p9dvGtYEzHpPBS4XEQrzt6wILMivEqV6ZTFBKRN0YXoFWw3M+4k5OguN/tWZgfcx2w4rlmDUnyunUXXeru36VqbUjx3bfOCr0viDZu68CtBbyswnv6VkOOq72hCraD8JqQRLansJw==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=GAwSn5kRXMRW/plLwfvoTyDPutgbpgLNR3gUQev72es=;
-	h=date:mime-version:subject:message-id:from;
+References: <20251112224924.2091880-1-andriy.shevchenko@linux.intel.com>
+ <aRfWouKGA7q2ufCV@archie.me> <aRzBGhsLA_s1rJbM@smile.fi.intel.com>
+In-Reply-To: <aRzBGhsLA_s1rJbM@smile.fi.intel.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Wed, 19 Nov 2025 08:51:54 +0100
+X-Gm-Features: AWmQ_bmHzMwCGa44nLscoV9Y_lW3wDvmdoRMJQt6LG4KvSbBvmhm78b506Tofc4
+Message-ID: <CAMRc=Mci_jEp-8TW9+hAyb=viMy69SXDSE99k0Rsss_0b7ZY1w@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] Documentation: gpio: Add a compatibility and
+ feature list for PCA953x
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Bagas Sanjaya <bagasdotme@gmail.com>, =?UTF-8?B?TGV2ZW50ZSBSw6l2w6lzeg==?= <levente.revesz@eilabs.com>, 
+	linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Linus Walleij <linus.walleij@linaro.org>, 
+	Jonathan Corbet <corbet@lwn.net>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-在 2025/11/19 15:21, Yanteng Si 写道:
->> Translate .../block/index.rst into Chinese and update subsystem-apis.rst
->> translation.
->>
->> Update the translation through commit 56cdea92ed91
->> ("Documentation/block: drop the request.rst file")
->>
->> Reviewed-by: WangYuli <wangyl5933@chinaunicom.cn>
->> Signed-off-by: ke zijie <kezijie@leap-io-kernel.com>
-> 
-> So, what happened between v4 and v5?  need a cover letter to write this.
-> 
-> 
-> Thanks,
-> 
-> Yanteng
-Hi Yanteng,
+On Tue, Nov 18, 2025 at 7:55=E2=80=AFPM Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
+>
+> On Sat, Nov 15, 2025 at 08:25:54AM +0700, Bagas Sanjaya wrote:
+> > On Wed, Nov 12, 2025 at 11:48:20PM +0100, Andy Shevchenko wrote:
+>
+> When answering to the long email, please remove unrelated context.
+> Thanks.
+>
+> ...
+>
+> > > +I went through all the datasheets and created this note listing
+> > > +chip functions and register layouts.
+> >
+> > Nit: above first-person intro can be instead edited to:
+> >
+> > This document lists chip functions and register layouts for all chips
+> > supported by PCA953x driver.
+>
+> I believe it's fine to leave author's original text here. Also the propos=
+ed
+> version is not so clear how these document was assembled.
+>
+> ...
+>
+> > > +.. note::
+> > > +     This is followed by all supported chips, except by pcal6534.
+> >
+> > Do you mean aforementioned banks offset arrangement?
+>
+> Yes. The chapters are per the stuff explained in them, so everything in o=
+ne
+> chapter or section is related to the entire chapter or section.
+>
+> ...
+>
+> > The rest LGTM.
+>
+> Thank your for looking into this.
+>
 
-I planned to add your
-"Reviewed-by: Yanteng Si <siyanteng@cqsoftware.com.cn>"
-to every patch in the v5 series, but due to my oversight I only added it 
-to one patch.
+Is there anything else to address or is it good to go?
 
-I’m very sorry for the mistake.
-
-Could you please advise whether I should resend the series as v5 (fixing 
-the tags) or move on to v6 to correct it?
-
-Thanks again for your review and patience.
-
-Best regards,
-Ke Zijie
+Bart
 
