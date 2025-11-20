@@ -1,211 +1,172 @@
-Return-Path: <linux-doc+bounces-67492-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67494-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id F24B2C73344
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 10:34:55 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 37ECDC7334A
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 10:35:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 6893A4ECAAC
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 09:32:48 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTPS id 520352B0C8
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 09:34:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CC06232B9A1;
-	Thu, 20 Nov 2025 09:29:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 31FE931B123;
+	Thu, 20 Nov 2025 09:30:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uO5bvReP"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LkJdHGqH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9241426C39B;
-	Thu, 20 Nov 2025 09:29:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BF302EBBAA
+	for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 09:30:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763630966; cv=none; b=Z9m6FpctkGHJbdVZozikaypp5SIBLztQGUdLnVqgfiM/i5/fvA475NlgaiHgM3XLbKwhPVlkNV89f4tQ53UUvJGSbiblQV7d9oBgFFOovdfZOgRt2ooAshTANdcqm7iTke9JzSdy9fGgJ0RiThIpHJu4Kf6qhOvmsBUlU1CfT10=
+	t=1763631007; cv=none; b=T3f9XPPgDFDTE86VC0e80QNafGWvwH37K9LT/oxWXZdqkvLtjFEW1ouF4wV9J6h88hRW/sGMvp7oDgoQLvXVVAzZR+/y5sfIaCsUmr6JuIuYs28c/MN0wJTSEzIA9cltcKwVgpGoT9sktLmn0ZDg8T5DqzBPCo1yBj+MJ7o1n50=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763630966; c=relaxed/simple;
-	bh=LFSaVFGXyqZ1Ymg7hrWHvuDYaezafYJR42/4yF3AC6Q=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Zq6ULG/GpgC6f0T+YQj/LggkpQxPySBxNSabOrAaa92JkQD7zxc8OtgtNGFfoviMnHsDf2jp4/d4jw6GviEjfcol3xrFImMh6jU0z7WcJG9vfnJrUeGlOcQSnfjwRQ6OIMhFTWNu7kV1IkkHsdDkoWRCLVKtMXZQilLdf1kBFNg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uO5bvReP; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8EE2C116C6;
-	Thu, 20 Nov 2025 09:29:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763630966;
-	bh=LFSaVFGXyqZ1Ymg7hrWHvuDYaezafYJR42/4yF3AC6Q=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=uO5bvReP4vqmF17vp4umydSjwbMPlUEBwrr06wx2F06At0/D21mfaz/7x8ruRvX1v
-	 3Uq6tUwzacon0WOtQFzpZGt0RcDpBSDOHYKNsLthJEbiBNaxV80Ir0z6pZR3p1qV7x
-	 dYAq1ufKqD7WSUWjj2c+VaxFnLI5cuf1bYNHnTmdN6EBNBg1de5v+GG2XKWf9NcHYD
-	 FAzZjictEB2q/huOTMy21YG403zsmAl6hCATZRJReXLB03B8swFxed7wkRnmWjPcT2
-	 6mrCIzwnXTd2Cp6XwJSoeCi2stzNxUdFQ34bfMGdm8qh30x4qLAgam/sJ1wdVrEbvC
-	 SupDOjG80fwmg==
-From: Leon Romanovsky <leon@kernel.org>
-To: Bjorn Helgaas <bhelgaas@google.com>,
-	Logan Gunthorpe <logang@deltatee.com>,
-	Jens Axboe <axboe@kernel.dk>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Leon Romanovsky <leon@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	=?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Ankit Agrawal <ankita@nvidia.com>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <skolothumtho@nvidia.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex@shazbot.org>
-Cc: Krishnakant Jaju <kjaju@nvidia.com>,
-	Matt Ochs <mochs@nvidia.com>,
-	linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org,
-	iommu@lists.linux.dev,
-	linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	kvm@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
-	Alex Mastro <amastro@fb.com>,
-	Nicolin Chen <nicolinc@nvidia.com>
-Subject: [PATCH v9 11/11] vfio/nvgrace: Support get_dmabuf_phys
-Date: Thu, 20 Nov 2025 11:28:30 +0200
-Message-ID: <20251120-dmabuf-vfio-v9-11-d7f71607f371@nvidia.com>
-X-Mailer: git-send-email 2.51.1
-In-Reply-To: <20251120-dmabuf-vfio-v9-0-d7f71607f371@nvidia.com>
-References: <20251120-dmabuf-vfio-v9-0-d7f71607f371@nvidia.com>
+	s=arc-20240116; t=1763631007; c=relaxed/simple;
+	bh=yQl6Am+yjM+jiH0K2AKGK6fLV8tbHJIiZjM0lPoL1lE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mLcpNz3rwPGoJ2YARI8ZYP4So3OTojNwYWdBGf0R1BjYVm4JFhRiQ+UnnQzvIusUz12lg8vUqxoWSXsTthqAe7GjFRETEMI7/xMry5p+7flRXk0cBIgo7+Gr+RYwwqpCMD2ljj/812cjFKcX3z+JPXG9Bg6kZQDVj37FTYAQBd0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LkJdHGqH; arc=none smtp.client-ip=209.85.210.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-7bab7c997eeso767951b3a.0
+        for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 01:30:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1763631004; x=1764235804; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Y0ahZnkbKTq/zXCngVOV5tNUB9eHwQteBjkic4SlaNw=;
+        b=LkJdHGqHa6ld60aK0jwh3vfQDfBL7YvT20Lef9wLzgef2/0kVrbgnn0E9X2FzUySE/
+         mCwQS99km2qsErzS+qX/l6SX1c2zSFbZWrm+aSavnNybRJzkblgyHyUG8E8Ang1OlLhq
+         m3jV9LGxzoXpUdtfAWBsgli08pmT+m11KghmtlsZHNXW5WTKKqeaMSR4F93OWwg1k0aN
+         iJh8Csg8J5SGt0lgGJ8WUT5GJcLoL5RMRVV1Muya1mGZmpk+x7VDmWCDwC7Ucln8HgW7
+         jkrL0IFtJ6uUOsPKUJ22D0h0zzGGVr79PwX66it6nkquXq1hZmI9Q7RzaJU38FZ5i1SG
+         9aRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1763631004; x=1764235804;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Y0ahZnkbKTq/zXCngVOV5tNUB9eHwQteBjkic4SlaNw=;
+        b=YHcw3nF3N8nM9BsCPnwNfVfM5PcCxe741Cn2Eg0vdW+ZRe6Srd4sv7eXFFAaLbb5Gs
+         L3ugQnBfzQyh6K39I1d1sPRZGCrsKrdgTbTmS+XVU4KZYjEDI8JOwA3jdHumapHzrV0i
+         W0UlppN9lWGFFCUX1K9CzEkPtcO8HwQ0kd3qDbKgC11xsBnQzfSQ+a33Dj9C1sIcsJze
+         GVwHPh5n0pbrwPfMsBIeEA4NWKpBpyxaRRzHApmCX71mpvyT7RSwGi+dyp2DsMnkEUkw
+         eOtzF4SnjCnBKjoAjOCnXvf3W91V39zTYOzXLgsNIE6pHgYTFuh3e9Wp9xajhPBbRdbV
+         lzWA==
+X-Forwarded-Encrypted: i=1; AJvYcCUfMvY2ndtCB5VyFEIh9GccticsHCbsVB6Um3L4jT97pK2+uwnlLaiMX/Be/DYNUX0InEDii3aZbu4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyqIhF0pIsSaEsmh8nx0oSle6ayJAO6FsjSw5tJBeYULAJYw71W
+	5xgupixG5JTUsjb+jzYt/IBTtmSU2CPMu4wKM/9xBKmf1JM7+00lLSBueLHpvAqaa6I=
+X-Gm-Gg: ASbGncsKl6ylJ4CvkcbBxAS3c5voRlZFdh27GzTYYBT+uThgEDmzzyS9Y5kCqw84kLG
+	xnsqueooNDaq9ZOAmDmBuuJ438mwhN7vz6kT4Pr+iQbOxA/DhZ2TlDJpae8hSqKHdURTFxkDLhF
+	Zv6NC7K1IREb45nRDA/N/2W/aaDUzMGAJhV2qVF/vCn4Hg3uwyNqJuIhnsxmal+GjxAjgkwuByb
+	cUO+qxnPQvy0LLdFzWPKoxBdadIYtOwHbv5Ziysit1R56sq9GqcujEZ9ikJnlATbfCk24ishC1K
+	P7rXB70WgNIoLLdwpSuPYz+427lczfmrzXHeUFmYEd3y45cVK/wAzT2divcnDewwJkujDIiSu8o
+	5vpL4zRzCy9fp8V59xU+RBAcfkryPbO2PvLk4CkokZLsdeI1wOcDCRFglxwuCVifh32KyEE/s/9
+	hETLGsNQ4Qf+KdHSUcJA58yg==
+X-Google-Smtp-Source: AGHT+IFM1rG6BQ9QLPRgC9WRSoHnGffbzNzuoM89C5S7NauJeRqdu2h4JvYetmK1mXobCaM3XLB4rA==
+X-Received: by 2002:a05:6a00:10ce:b0:7ab:8d8a:1024 with SMTP id d2e1a72fcca58-7c3ee197dfemr2897250b3a.7.1763631004085;
+        Thu, 20 Nov 2025 01:30:04 -0800 (PST)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7c3ed379558sm2106554b3a.25.2025.11.20.01.30.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Nov 2025 01:30:03 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id 5E84A41117C8; Thu, 20 Nov 2025 16:30:01 +0700 (WIB)
+Date: Thu, 20 Nov 2025 16:30:01 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Jim Cromie <jim.cromie@gmail.com>, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, gregkh@linuxfoundation.org,
+	jbaron@akamai.com
+Cc: ukaszb@chromium.org, louis.chauvet@bootlin.com,
+	linux-doc@vger.kernel.org
+Subject: Re: [PATCH v6 04/31] docs/dyndbg: explain flags parse 1st
+Message-ID: <aR7fmRgNmP60RJZz@archie.me>
+References: <20251118201842.1447666-1-jim.cromie@gmail.com>
+ <20251118201842.1447666-5-jim.cromie@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.15-dev-a6db3
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="tNRZFCgC3+laadDu"
+Content-Disposition: inline
+In-Reply-To: <20251118201842.1447666-5-jim.cromie@gmail.com>
 
-From: Jason Gunthorpe <jgg@nvidia.com>
 
-Call vfio_pci_core_fill_phys_vec() with the proper physical ranges for the
-synthetic BAR 2 and BAR 4 regions. Otherwise use the normal flow based on
-the PCI bar.
+--tNRZFCgC3+laadDu
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This demonstrates a DMABUF that follows the region info report to only
-allow mapping parts of the region that are mmapable. Since the BAR is
-power of two sized and the "CXL" region is just page aligned the there can
-be a padding region at the end that is not mmaped or passed into the
-DMABUF.
+On Tue, Nov 18, 2025 at 01:18:14PM -0700, Jim Cromie wrote:
+> -
+> -A match specification is a keyword, which selects the attribute of
+> -the callsite to be compared, and a value to compare against.  Possible
+> +Note: because the match-spec can be empty, the flags are checked 1st,
+> +then the pairs of keyword values.  Flag errs will hide keyword errs:
+> +
+> +  bash-5.2# ddcmd mod bar +foo
+> +  dyndbg: read 13 bytes from userspace
+> +  dyndbg: query 0: "mod bar +foo" mod:*
+> +  dyndbg: unknown flag 'o'
+> +  dyndbg: flags parse failed
+> +  dyndbg: processed 1 queries, with 0 matches, 1 errs
 
-The "CXL" ranges that are remapped into BAR 2 and BAR 4 areas are not PCI
-MMIO, they actually run over the CXL-like coherent interconnect and for
-the purposes of DMA behave identically to DRAM. We don't try to model this
-distinction between true PCI BAR memory that takes a real PCI path and the
-"CXL" memory that takes a different path in the p2p framework for now.
+The snippet above is shown as long-running paragraph instead, so I wrap it
+in literal code block:
 
-Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-Reviewed-by: Kevin Tian <kevin.tian@intel.com>
-Tested-by: Alex Mastro <amastro@fb.com>
-Tested-by: Nicolin Chen <nicolinc@nvidia.com>
-Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
----
- drivers/vfio/pci/nvgrace-gpu/main.c | 52 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 52 insertions(+)
+---- >8 ----
+diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentat=
+ion/admin-guide/dynamic-debug-howto.rst
+index fd3dbae00cfc60..7690287cbe0c79 100644
+--- a/Documentation/admin-guide/dynamic-debug-howto.rst
++++ b/Documentation/admin-guide/dynamic-debug-howto.rst
+@@ -112,8 +112,8 @@ The match-spec's select *prdbgs* from the catalog, upon=
+ which to apply
+ the flags-spec, all constraints are ANDed together.  An absent keyword
+ is the same as keyword "*".
+=20
+-Note: because the match-spec can be empty, the flags are checked 1st,
+-then the pairs of keyword values.  Flag errs will hide keyword errs:
++Note that since the match-spec can be empty, the flags are checked first,
++then the pairs of keyword values.  Flag errs will hide keyword errs::
+=20
+   bash-5.2# ddcmd mod bar +foo
+   dyndbg: read 13 bytes from userspace
+@@ -122,9 +122,9 @@ then the pairs of keyword values.  Flag errs will hide =
+keyword errs:
+   dyndbg: flags parse failed
+   dyndbg: processed 1 queries, with 0 matches, 1 errs
+=20
+-So a match-spec is a keyword, which selects the attribute of the
++Hence, a match-spec is a keyword, which selects the attribute of the
+ callsite to be compared, and a value to compare against.  Possible
+-keywords are:::
++keywords are::
+=20
+   match-spec ::=3D 'func' string |
+ 		 'file' string |
 
-diff --git a/drivers/vfio/pci/nvgrace-gpu/main.c b/drivers/vfio/pci/nvgrace-gpu/main.c
-index e346392b72f6..691e56944882 100644
---- a/drivers/vfio/pci/nvgrace-gpu/main.c
-+++ b/drivers/vfio/pci/nvgrace-gpu/main.c
-@@ -7,6 +7,7 @@
- #include <linux/vfio_pci_core.h>
- #include <linux/delay.h>
- #include <linux/jiffies.h>
-+#include <linux/pci-p2pdma.h>
- 
- /*
-  * The device memory usable to the workloads running in the VM is cached
-@@ -683,6 +684,50 @@ nvgrace_gpu_write(struct vfio_device *core_vdev,
- 	return vfio_pci_core_write(core_vdev, buf, count, ppos);
- }
- 
-+static int nvgrace_get_dmabuf_phys(struct vfio_pci_core_device *core_vdev,
-+				   struct p2pdma_provider **provider,
-+				   unsigned int region_index,
-+				   struct dma_buf_phys_vec *phys_vec,
-+				   struct vfio_region_dma_range *dma_ranges,
-+				   size_t nr_ranges)
-+{
-+	struct nvgrace_gpu_pci_core_device *nvdev = container_of(
-+		core_vdev, struct nvgrace_gpu_pci_core_device, core_device);
-+	struct pci_dev *pdev = core_vdev->pdev;
-+	struct mem_region *mem_region;
-+
-+	/* 
-+	 * if (nvdev->resmem.memlength && region_index == RESMEM_REGION_INDEX) {
-+	 * 	The P2P properties of the non-BAR memory is the same as the
-+	 * 	BAR memory, so just use the provider for index 0. Someday
-+	 * 	when CXL gets P2P support we could create CXLish providers
-+	 * 	for the non-BAR memory.
-+	 * } else if (region_index == USEMEM_REGION_INDEX) {
-+	 * 	This is actually cachable memory and isn't treated as P2P in
-+	 * 	the chip. For now we have no way to push cachable memory
-+	 * 	through everything and the Grace HW doesn't care what caching
-+	 * 	attribute is programmed into the SMMU. So use BAR 0.
-+	 * }
-+	 */
-+	mem_region = nvgrace_gpu_memregion(region_index, nvdev);
-+	if (mem_region) {
-+		*provider = pcim_p2pdma_provider(pdev, 0);
-+		if (!*provider)
-+			return -EINVAL;
-+		return vfio_pci_core_fill_phys_vec(phys_vec, dma_ranges,
-+						   nr_ranges,
-+						   mem_region->memphys,
-+						   mem_region->memlength);
-+	}
-+
-+	return vfio_pci_core_get_dmabuf_phys(core_vdev, provider, region_index,
-+					     phys_vec, dma_ranges, nr_ranges);
-+}
-+
-+static const struct vfio_pci_device_ops nvgrace_gpu_pci_dev_ops = {
-+	.get_dmabuf_phys = nvgrace_get_dmabuf_phys,
-+};
-+
- static const struct vfio_device_ops nvgrace_gpu_pci_ops = {
- 	.name		= "nvgrace-gpu-vfio-pci",
- 	.init		= vfio_pci_core_init_dev,
-@@ -703,6 +748,10 @@ static const struct vfio_device_ops nvgrace_gpu_pci_ops = {
- 	.detach_ioas	= vfio_iommufd_physical_detach_ioas,
- };
- 
-+static const struct vfio_pci_device_ops nvgrace_gpu_pci_dev_core_ops = {
-+	.get_dmabuf_phys = vfio_pci_core_get_dmabuf_phys,
-+};
-+
- static const struct vfio_device_ops nvgrace_gpu_pci_core_ops = {
- 	.name		= "nvgrace-gpu-vfio-pci-core",
- 	.init		= vfio_pci_core_init_dev,
-@@ -965,6 +1014,9 @@ static int nvgrace_gpu_probe(struct pci_dev *pdev,
- 						    memphys, memlength);
- 		if (ret)
- 			goto out_put_vdev;
-+		nvdev->core_device.pci_ops = &nvgrace_gpu_pci_dev_ops;
-+	} else {
-+		nvdev->core_device.pci_ops = &nvgrace_gpu_pci_dev_core_ops;
- 	}
- 
- 	ret = vfio_pci_core_register_device(&nvdev->core_device);
+Thanks.
 
--- 
-2.51.1
+--=20
+An old man doll... just what I always wanted! - Clara
 
+--tNRZFCgC3+laadDu
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaR7flQAKCRD2uYlJVVFO
+ozygAQDeqV2+eAL925SBI3I8R+CQGvz0yTuUJJ9a6KUiNhCDDgEAsMy6wTgxalgk
+ymAwck6TVuSNIyI5PoEJGZv83FrVLgs=
+=wp6p
+-----END PGP SIGNATURE-----
+
+--tNRZFCgC3+laadDu--
 
