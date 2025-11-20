@@ -1,109 +1,105 @@
-Return-Path: <linux-doc+bounces-67498-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67501-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id D338FC7360F
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 11:07:05 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA215C73789
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 11:32:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id EAF3A4E97A4
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 10:03:24 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 63BCF35391D
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 10:32:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 331CE30101E;
-	Thu, 20 Nov 2025 10:03:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9F4C132C31B;
+	Thu, 20 Nov 2025 10:32:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G+hY+OMB"
+	dkim=permerror (0-bit key) header.d=aaront.org header.i=@aaront.org header.b="TRW0jeLS";
+	dkim=pass (2048-bit key) header.d=aaront.org header.i=@aaront.org header.b="Tsl0SJCT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp-out1.aaront.org (smtp-out1.aaront.org [52.0.59.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3E582882D7;
-	Thu, 20 Nov 2025 10:03:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DA1830FC0D;
+	Thu, 20 Nov 2025 10:32:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.0.59.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763632998; cv=none; b=UHB8sytnn18+I0cYSpYryeP5F9EUBSfhyaIwet1aoc5oTZpcfsJS3vdP5ANYHlqCFJkJ7YJY/g6j2obUkbIXGfcJCWTq6gyE9p2vEQVy04w2vEUHmOnWNTuExqzKOv9R7xjElwa2xGI1kq29zrYldIWATV/K1N7ocXXiqAVceLE=
+	t=1763634771; cv=none; b=cQ/2cbYErP3DqBiUBcd+iyy2LlHBc8bqJ1YnD2S1u41MQQls1bkzPAZ2q9DZKB8V3O7mDC94Jgh6vkXTkRq7nAZQN/S/uQ1//qrAAXZGLESQNkzt1aoaXHePFhNrWY/rxqiUgXDVHQmqgrYNqCOidBEsIBbiGHyXRorRyJVKxNA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763632998; c=relaxed/simple;
-	bh=nN18XypDEK4Xp2Uwyzn2CyI2CYU2LLHnqRbvcxN/MOk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=YkZKsxbjmzwFFsnCamzc3TQTNZcIWHIod9adUL8u3eAAIPMVgvjhbnuoBzAjwDVwJdaVwsgNT3AHq5+tPZab6YHJ9fRsLwXo2dQ4g48+vI55UCHla69HfynkA5o/DKyBUTv0OxP1Us5yF5Oft+fm8gtiiTBqiyNBqLQ6ffXguNM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G+hY+OMB; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FB98C4CEF1;
-	Thu, 20 Nov 2025 10:03:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763632997;
-	bh=nN18XypDEK4Xp2Uwyzn2CyI2CYU2LLHnqRbvcxN/MOk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=G+hY+OMBFwxjvW/rHz3D9U5weCHQooOgK8MHfyA01kVMMV+A3AkZ438UHthcqeE9M
-	 /W8sa0sQXGzt/hW+GZKYO9qCVhuYOSwzWyvXmoHLLLXKCC71ccQychOWgBEc9/N4WR
-	 B4hzYRwhJYWOy/XMG9Ee6J/fv3T7TqpQvxDZRmSFypghKchjL3PUHlMTtC4LoafHEg
-	 8gc9esBn2NM5CJ6c+XmHXAeq018QsYls0PqZAWftuB8E+D1BJ3lzNPMBBHus01EitA
-	 yHaQJeOXigJlJYANOS70kHWQFawRWzvBrKbuTNC8S71WbHRGEk1IfIpBp5grsDiqGo
-	 BP3n3eU4f4VgA==
-Date: Thu, 20 Nov 2025 12:03:12 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
-	Logan Gunthorpe <logang@deltatee.com>, Jens Axboe <axboe@kernel.dk>,
-	Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
+	s=arc-20240116; t=1763634771; c=relaxed/simple;
+	bh=Fwlfi8rYxIwQm+nVBQKp7wwhTtWalTiEGbaZv0neBzI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=NewpnomDCzwWqzsZtR3zO6l0hx8089VK0if/2/k2v+exjvkG+5PzYHaaRC3WkVJBC0Fg9w0ZUDhZUS4clj6CeiKE5hPuY6dOFpm8kPhovXCjtsH23Fn4x4qmrDehqBCRpt+cz/AdVz0VbANz3gDyr0Y1nJhgGiLAv0fV5UjkrfU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aaront.org; spf=pass smtp.mailfrom=aaront.org; dkim=permerror (0-bit key) header.d=aaront.org header.i=@aaront.org header.b=TRW0jeLS; dkim=pass (2048-bit key) header.d=aaront.org header.i=@aaront.org header.b=Tsl0SJCT; arc=none smtp.client-ip=52.0.59.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aaront.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aaront.org
+Received: from smtp-send1.aaront.org (localhost [IPv6:::1])
+	by smtp-out1.aaront.org (Postfix) with ESMTP id 4dBvfL5rsVzG0;
+	Thu, 20 Nov 2025 10:26:50 +0000 (UTC)
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/simple; d=aaront.org;
+    h=from:to:cc:subject:date:message-id:mime-version
+    :content-transfer-encoding; s=ckha5xz4; bh=Fwlfi8rYxIwQm+nVBQKp7
+    wwhTtWalTiEGbaZv0neBzI=; b=TRW0jeLSQ0UZGJU8TAm0eSWWiqDmLRz0PgHIk
+    TIxcEHQOrzaIBuF2C22ekmViRuVpJ20G+wo9gstAQxrEtNmCQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aaront.org; h=
+    from:to:cc:subject:date:message-id:mime-version
+    :content-transfer-encoding; s=qvfkgsmx; bh=Fwlfi8rYxIwQm+nVBQKp7
+    wwhTtWalTiEGbaZv0neBzI=; b=Tsl0SJCTB+y3UzF8YacRMLOlUWtuwr7Aa1qOX
+    oV5fiic/BIVwnyvhkL8Zqba7IjDRQWIL7MzwbBbWZ1f5dgJE315ZZ6HKASYEovij
+    JRSC3dTTqmU2UCh5pQtKqzmbPr9mH6kaRP4RZgI670XCqE32v4BHS8rRS7r6KBT9
+    Z5BDkI2bYxhAJnGGhkeX8Mh/YAF37qbXHHX5S/9/y+rsKqBL/m0U07ty5z1u1fOK
+    uztykpw64SjlorH6o/RmdqGreUdeS1pudoKlJ+uF/PqpOuvAve0ICIQL/f0q8XzH
+    W13mt861PyRE0ayaXXlvVlyslVnk56/4aw7a4Y/6o+837PNmQ==
+Received: by smtp-send1.aaront.org (Postfix) id 4dBvfK6zlNzFS;
+	Thu, 20 Nov 2025 10:26:49 +0000 (UTC)
+From: Aaron Thompson <dev@aaront.org>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
 	Andrew Morton <akpm@linux-foundation.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Sumit Semwal <sumit.semwal@linaro.org>, Kees Cook <kees@kernel.org>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
-	Ankit Agrawal <ankita@nvidia.com>,
-	Yishai Hadas <yishaih@nvidia.com>,
-	Shameer Kolothum <skolothumtho@nvidia.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Alex Williamson <alex@shazbot.org>,
-	Krishnakant Jaju <kjaju@nvidia.com>, Matt Ochs <mochs@nvidia.com>,
-	linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org, iommu@lists.linux.dev,
-	linux-mm@kvack.org, linux-doc@vger.kernel.org,
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org, kvm@vger.kernel.org,
-	linux-hardening@vger.kernel.org, Nicolin Chen <nicolinc@nvidia.com>,
-	Alex Mastro <amastro@fb.com>, Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH v9 06/11] dma-buf: provide phys_vec to scatter-gather
- mapping routine
-Message-ID: <20251120100312.GV18335@unreal>
-References: <20251120-dmabuf-vfio-v9-0-d7f71607f371@nvidia.com>
- <20251120-dmabuf-vfio-v9-6-d7f71607f371@nvidia.com>
- <57b8876f-1399-4e4d-a44b-1177787aa17d@amd.com>
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Aaron Thompson <dev@aaront.org>
+Subject: [PATCH 0/2] debugfs: Remove broken no-mount mode
+Date: Thu, 20 Nov 2025 10:26:31 +0000
+Message-ID: <20251120102222.18371-1-dev@null.aaront.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <57b8876f-1399-4e4d-a44b-1177787aa17d@amd.com>
 
-On Thu, Nov 20, 2025 at 10:33:36AM +0100, Christian König wrote:
-> On 11/20/25 10:28, Leon Romanovsky wrote:
-> > From: Leon Romanovsky <leonro@nvidia.com>
-> > 
-> > Add dma_buf_phys_vec_to_sgt() and dma_buf_free_sgt() helpers to convert
-> > an array of MMIO physical address ranges into scatter-gather tables with
-> > proper DMA mapping.
+Hi all,
 
-<...>
+This patch removes the debugfs no-mount mode because it hasn't worked as
+intended for several years. When I noticed that it wasn't working, I first
+started coding a fix, which is straightforward. But after looking into the
+history, it seems pretty clear that this mode isn't being used, so I think it
+makes more sense to remove it.
 
-> > Reviewed-by: Kevin Tian <kevin.tian@intel.com>
-> > Reviewed-by: Nicolin Chen <nicolinc@nvidia.com>
-> > Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-> > Tested-by: Alex Mastro <amastro@fb.com>
-> > Tested-by: Nicolin Chen <nicolinc@nvidia.com>
-> > Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
-> 
-> Could be that this will backfire at some point, but I think we will never know without trying.
-> 
-> Acked-by: Christian König <christian.koenig@amd.com>
+The code could be made a tiny bit simpler and more consistent if we change the
+off mode error code from -EPERM to -ENOENT. That would make the off case and the
+uninitialized case always the same. The documentation for the off mode
+specifically says that the error code is -EPERM however, so I stuck with that
+for now.
 
-Thanks a lot.
+Thanks!
+
+Aaron Thompson (2):
+  debugfs: Remove redundant access mode checks
+  debugfs: Remove broken no-mount mode
+
+ .../admin-guide/kernel-parameters.txt         |  6 +---
+ fs/debugfs/inode.c                            | 36 ++++++-------------
+ fs/debugfs/internal.h                         | 13 -------
+ lib/Kconfig.debug                             |  9 +----
+ 4 files changed, 13 insertions(+), 51 deletions(-)
+
+
+base-commit: 6a23ae0a96a600d1d12557add110e0bb6e32730c
+-- 
+2.47.3
+
 
