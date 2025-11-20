@@ -1,70 +1,70 @@
-Return-Path: <linux-doc+bounces-67571-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67565-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFA86C74EEF
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 16:26:49 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6185AC74E66
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 16:24:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 7FB96364A9A
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 15:19:29 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id AB70D4E35C3
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 15:17:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 73B0735E53A;
-	Thu, 20 Nov 2025 15:14:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB1AC36654C;
+	Thu, 20 Nov 2025 15:13:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="ekSHrE5z"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="iCLMPfCc"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f73.google.com (mail-ed1-f73.google.com [209.85.208.73])
+Received: from mail-wm1-f74.google.com (mail-wm1-f74.google.com [209.85.128.74])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCB0A35F8B5
-	for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 15:13:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.73
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1421D35A934
+	for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 15:13:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.74
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763651649; cv=none; b=T52nchpk2PkxPVVw82sP6gP1Ja1ASXq4+qo4XEGhHJxMuWdcHkI+myYAwkpGTGc0eYaPDANZ9f2d8A0qdW98srkA7aQo32hvhIN3rO6d6RSXCXDt8lI+oeCFMLBPR9K1t3eBTyaC2UlYeF66YeMlUHlbaT/+awpadK9aDm6+KBA=
+	t=1763651620; cv=none; b=QMuKCavokKfNb/SBdu6Y/Izy49cEleh3QKgRAiiq81ZkaWj5xGrYF2rnfMxBEgu3KQTNpi+tO6O3AbKcQ2XsWzfXR6gSyi/J5cdmVWYaFTpXSnioUSQGO7jtHl4n8t/UKRx0brCL65rBbUKz58Qs+JiJWlDLW5GQFRti/59uWyA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763651649; c=relaxed/simple;
-	bh=3Y89mJHosRaENaLb5tk2xkCy/Hd7qH1R9BEoKf0fV0w=;
+	s=arc-20240116; t=1763651620; c=relaxed/simple;
+	bh=JSFE6OXplsVQRasUjLyJp87wPLoBhJo5boc6e5TlRPY=;
 	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=Pr4wU+8tPJtgs7TSNZW0a7v9pom7/8cv+joE371d7mJhemDmznOn2s9tNobj1Ui38WAAV8tZhV5KE2e3Raxg0gqUC3m0mQrtrQtOeBIWyBVsbl8S34/HyV2C9OYTGy6f3tdLrJpRxru+WfrewmSsKh6UnHU6e9UvNxHWJzq0C3w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--elver.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=ekSHrE5z; arc=none smtp.client-ip=209.85.208.73
+	 To:Cc:Content-Type; b=RBN/eI5JZ9MmbFLoGfJYhH57nEI6gvontK4+HdRR5aJZeY6UKhNIsj5ua3KsG5kJmERLyfgJGHgkI6U8Ru/IzSUetxXr8SsV3xLJhxb1Emecxl7hh4lfjou7so77eWtTvp4pukyiknukV+CcZUxx05d+e4+1u+2ZyOVEWWtCTJk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--elver.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=iCLMPfCc; arc=none smtp.client-ip=209.85.128.74
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--elver.bounces.google.com
-Received: by mail-ed1-f73.google.com with SMTP id 4fb4d7f45d1cf-6411fc67650so1381242a12.0
-        for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 07:13:32 -0800 (PST)
+Received: by mail-wm1-f74.google.com with SMTP id 5b1f17b1804b1-477964c22e0so6885045e9.0
+        for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 07:13:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1763651609; x=1764256409; darn=vger.kernel.org;
+        d=google.com; s=20230601; t=1763651613; x=1764256413; darn=vger.kernel.org;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=kN628sGqwThlti0A3ZPE5fg7KLj/Ov6I/vXTKugeedg=;
-        b=ekSHrE5zybqJTGQ6PputajlArki3ecYjV6YbSd28O7uoxhpgNG71RAqFQStJYMZikS
-         jgHJ1a3WUcu8xi6qNBis5i9CC5W8KJwF4TFLQqYNQy/VO1arXQoE1Rwq6Z1XU2aNn9J5
-         Tx8IH9fEqiV9nPZPERqKks6fzr2ysC5FjxS7ugt+7ikp9RiK20XzPodS7N8Q2ZqQsCT+
-         OzAluTJmnfngm0ZQN1+76+zPg/cvrxLuFwFk8ubI7m28RrFPdaL5dU1N1KEBA28UiFMn
-         ITO1qqNUxTJl7VTHWL+Nt81FmuMMFVGU4EdPVZ8VMLn5xQs6l7mAr9JpTwtPsguVFQ0A
-         faxg==
+        bh=xNvl5AadBnBbkNqIZ5ePr/ep+DGb1qTLi02EcnmaTpQ=;
+        b=iCLMPfCc7jWhEpnYhobvI2CKA2SElpM9LR0+higIlNVPix1drSCs++UbXykawgetXH
+         UiK2Mlropxx9wOJeRRbYAassEHRQmIuimGssASlfFCMIHugwhSwj3b/fCzNmiq9VN+nt
+         nfzqFiywxCAnOPudXpRx+zUking//m8pTDAm28RHuO9pbcxIIYZA7l9QX4pAUeSVZbPP
+         eh6Nz4aythN+TVoBhg44bsA9fQEmI3pG42o6MSQ0gaXXDnwhtpTIkNZOQZ7qHP+DY1pe
+         pc31FewAdejDaVASt7E7NmYup1vOHoofrZHC3welUeiAxyB3/Q+FX0BPWg8UOt8wyTVB
+         +5Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763651609; x=1764256409;
+        d=1e100.net; s=20230601; t=1763651613; x=1764256413;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=kN628sGqwThlti0A3ZPE5fg7KLj/Ov6I/vXTKugeedg=;
-        b=r9tX5HZm37CCPf/lBYmUyRud7gwf6Rv5aNuhW3JoSSA+afcC0CrQyiJ184v2xZgxhJ
-         +YGZP5+XwlPT7O53yygB3Uswhws8Z/upjZVOxH1NOU1jW36KfN8Js6aifrX34w8Dvbu2
-         LCj7y8ApfDMYS70+xqIPrPPSO0H9ndXlLj8J2C2F1c6xcR/Dv/ANecEoNdkxX57m2USe
-         FDccSb3Xq3N06y6ke66zTN63eZMjrP/BfKSpt8ZRoC8ef05oSWhtQA1fl/KV+WSutZtn
-         nEY0yab8YG4OyrwmHd4L1ydYYa97iS8ZBTe2fappLmEktrZuPWZey95fpovY8y2kk9we
-         36Aw==
-X-Forwarded-Encrypted: i=1; AJvYcCU/BBzmAZTxzL05ZGufCV2LZprMD/6zekuuf2F7q5U9WWy904zHundPcgtsZVQ+LZUx6x81plqDUTE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzcKli4vE1gGl2T6OCKlQ1Gk6PtlYYfBw7w+uuNrmKHVevPlxhj
-	HRMCsbXW01s3LuNMyFDYYWIJtSZLTh3EwUr+wlUcBeUZhIghW5tAkEQe3yT4O2diuHxH3xMi+F+
-	oVQ==
-X-Google-Smtp-Source: AGHT+IGPQ40L++aTOvA8JIRy1kdoYShFPO1YhmYJSO3OkON5NZw8EMACaSNJB6l90jTWpiXg4l2yJf3kSw==
-X-Received: from ejcwe11.prod.google.com ([2002:a17:907:d64b:b0:b72:63c8:2878])
- (user=elver job=prod-delivery.src-stubby-dispatcher) by 2002:a17:906:6a0d:b0:b76:23b0:7d6f
- with SMTP id a640c23a62f3a-b76554a515bmr362722666b.56.1763651608428; Thu, 20
- Nov 2025 07:13:28 -0800 (PST)
-Date: Thu, 20 Nov 2025 16:09:50 +0100
+        bh=xNvl5AadBnBbkNqIZ5ePr/ep+DGb1qTLi02EcnmaTpQ=;
+        b=rtuazMdv9DU+p4jBYfN6vUYF529a7sVXNluey6AR2GGCSqXS2VDVcuhCNkxny44+v5
+         yvM+oQlkC3wn+lgIMlMRyMQfhpbUsgrdZV+KCoE5buS00L6I9vHLss/JEafbZmwd3VUr
+         w8gQvF8cLc8Y1E+aHZtd5pa5Zw78x6czMUy2b3Y3YKJU7RBVo62L/la7EvF8WUMSUYvS
+         lxSxEJa0781AbTCVFtskLWdoeAmym8gLYsD7Q+3KydhNJzXGwGDdtJieORhZjY6MVTpQ
+         bx7fEQ90YMJ5OCcZJeb8cXs8nff8KkZzMojxB1+NPyzClWSLL4A0c+elgRdxCUjjnvM2
+         gr3Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUElwparr1z+ewU0bMsn/oTaj45FMpyQb2sf7751z8DZ+Lz5J28qc0L1bW/spEgnP36Lpr+jdKAgwE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyVaUOSYi7DfDllUfhseaPk3/UBAGCz884rsYr+OfWYaPeXhb67
+	WXxlNUjzqteCScYmmmugt0R3+kROIpHIJvk1ZRNe4BhQ+HlEJZXZBBcinVf+FonRJdvvQtmgNqo
+	5iw==
+X-Google-Smtp-Source: AGHT+IF9W56E3BCf4ycfyNzV0Jbt7zmYcg646z2GlS6yDnrRg6LpKFxf4hnN1dp2GqjQ6ITkpBqUZJJJqw==
+X-Received: from wmbbd8.prod.google.com ([2002:a05:600c:1f08:b0:470:fd92:351d])
+ (user=elver job=prod-delivery.src-stubby-dispatcher) by 2002:a05:600c:1516:b0:477:14ba:28da
+ with SMTP id 5b1f17b1804b1-477b9ea8f78mr18741385e9.5.1763651612613; Thu, 20
+ Nov 2025 07:13:32 -0800 (PST)
+Date: Thu, 20 Nov 2025 16:09:51 +0100
 In-Reply-To: <20251120151033.3840508-7-elver@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -74,8 +74,8 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 Mime-Version: 1.0
 References: <20251120145835.3833031-2-elver@google.com> <20251120151033.3840508-7-elver@google.com>
 X-Mailer: git-send-email 2.52.0.rc1.455.g30608eb744-goog
-Message-ID: <20251120151033.3840508-26-elver@google.com>
-Subject: [PATCH v4 25/35] compiler: Let data_race() imply disabled context analysis
+Message-ID: <20251120151033.3840508-27-elver@google.com>
+Subject: [PATCH v4 26/35] MAINTAINERS: Add entry for Context Analysis
 From: Marco Elver <elver@google.com>
 To: elver@google.com, Peter Zijlstra <peterz@infradead.org>, 
 	Boqun Feng <boqun.feng@gmail.com>, Ingo Molnar <mingo@kernel.org>, Will Deacon <will@kernel.org>
@@ -102,54 +102,39 @@ Cc: "David S. Miller" <davem@davemloft.net>, Luc Van Oostenryck <luc.vanoostenry
 	linux-wireless@vger.kernel.org, llvm@lists.linux.dev, rcu@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 
-Many patterns that involve data-racy accesses often deliberately ignore
-normal synchronization rules to avoid taking a lock.
-
-If we have a lock-guarded variable on which we do a lock-less data-racy
-access, rather than having to write context_unsafe(data_race(..)),
-simply make the data_race(..) macro imply context-unsafety. The
-data_race() macro already denotes the intent that something subtly
-unsafe is about to happen, so it should be clear enough as-is.
+Add entry for all new files added for Clang's context analysis.
 
 Signed-off-by: Marco Elver <elver@google.com>
+Reviewed-by: Bart Van Assche <bvanassche@acm.org>
 ---
 v4:
 * Rename capability -> context analysis.
-
-v2:
-* New patch.
 ---
- include/linux/compiler.h    | 2 ++
- lib/test_context-analysis.c | 2 ++
- 2 files changed, 4 insertions(+)
+ MAINTAINERS | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/include/linux/compiler.h b/include/linux/compiler.h
-index 5b45ea7dff3e..8ad1d4fd14e3 100644
---- a/include/linux/compiler.h
-+++ b/include/linux/compiler.h
-@@ -186,7 +186,9 @@ void ftrace_likely_update(struct ftrace_likely_data *f, int val,
- #define data_race(expr)							\
- ({									\
- 	__kcsan_disable_current();					\
-+	disable_context_analysis();					\
- 	__auto_type __v = (expr);					\
-+	enable_context_analysis();					\
- 	__kcsan_enable_current();					\
- 	__v;								\
- })
-diff --git a/lib/test_context-analysis.c b/lib/test_context-analysis.c
-index 522769c9586d..4612025a1065 100644
---- a/lib/test_context-analysis.c
-+++ b/lib/test_context-analysis.c
-@@ -92,6 +92,8 @@ static void __used test_raw_spinlock_trylock_extra(struct test_raw_spinlock_data
- {
- 	unsigned long flags;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index e64b94e6b5a9..0445478f74c7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -6029,6 +6029,17 @@ M:	Nelson Escobar <neescoba@cisco.com>
+ S:	Supported
+ F:	drivers/infiniband/hw/usnic/
  
-+	data_race(d->counter++); /* no warning */
++CLANG CONTEXT ANALYSIS
++M:	Marco Elver <elver@google.com>
++R:	Bart Van Assche <bvanassche@acm.org>
++L:	llvm@lists.linux.dev
++S:	Maintained
++F:	Documentation/dev-tools/context-analysis.rst
++F:	include/linux/compiler-context-analysis.h
++F:	lib/test_context-analysis.c
++F:	scripts/Makefile.context-analysis
++F:	scripts/context-analysis-suppression.txt
 +
- 	if (raw_spin_trylock_irq(&d->lock)) {
- 		d->counter++;
- 		raw_spin_unlock_irq(&d->lock);
+ CLANG CONTROL FLOW INTEGRITY SUPPORT
+ M:	Sami Tolvanen <samitolvanen@google.com>
+ M:	Kees Cook <kees@kernel.org>
 -- 
 2.52.0.rc1.455.g30608eb744-goog
 
