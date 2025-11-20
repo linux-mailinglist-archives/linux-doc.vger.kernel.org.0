@@ -1,138 +1,114 @@
-Return-Path: <linux-doc+bounces-67547-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67538-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBFC1C74CCC
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 16:14:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70D8EC74B1D
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 15:59:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 5873F4E6AC7
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 15:05:57 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 9DDFE4E6EB9
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Nov 2025 14:52:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F80D34CFC4;
-	Thu, 20 Nov 2025 15:03:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 430852F6938;
+	Thu, 20 Nov 2025 14:52:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="pRDQkdoJ"
+	dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b="1KgjbmiQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f73.google.com (mail-ed1-f73.google.com [209.85.208.73])
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E431C2E1EFD
-	for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 15:03:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.73
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 902C22135CE
+	for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 14:52:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763651000; cv=none; b=S7bjfsT8nuxCQ/cGrPiJ2FL8ugz04r2oDuE2zcrU7pGDmlj9yzY6rgGzpps+G+Jd9GcwdV+gTK9/PLQS8lAI0lDUN2bEK70lucOR6EjFk8b45jWYme8/WLEy1dNuVp78IgKg2HG+c70m0pNkO5LNzDJcsDl7acPki5GlXTIaC8M=
+	t=1763650361; cv=none; b=pSomTSC8D9sN9/xsuYTe63ZgmzTe0BJeqqZVoz4i70aCjyRn/pRXoEgoymYS/E9VF3VFit9vNNaZf3k0iXAlfnQNnJcU0mQC3NRkfaww47QhdNO+ntZ5USw8sQ7SVeHvL6HfzRsctGHcOUsW+ZZjlX4jnEFd6CkeCZ0nyOJpqfg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763651000; c=relaxed/simple;
-	bh=tTGjUHrfXR5isY+lSEFNNwASkyVwRARVzePML9vCCTo=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=FGjOmUoyzYwwufkqCdnv6k+K8x5ZXadO8z5/ay3eGRPWjzo1GBTgCUtKpUkwfqz67Gh9A67GH57q7BI/utXHxk0LunL07gigL6k8Zfo1z5tNKjY5Oa5++HvxSsW7ecX4scUidlZ2bSGi+syvDlwPsRNQA1d7bxkNNavA3YU0SB4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--elver.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=pRDQkdoJ; arc=none smtp.client-ip=209.85.208.73
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--elver.bounces.google.com
-Received: by mail-ed1-f73.google.com with SMTP id 4fb4d7f45d1cf-640bae7d83aso1130055a12.2
-        for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 07:03:04 -0800 (PST)
+	s=arc-20240116; t=1763650361; c=relaxed/simple;
+	bh=qlVoOV1b0m1EsqTqevKebTa5adC2s2q0Xm1TYQIEY5c=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OXFdBvsLadDgc8e0KqlARcwpTj7dcRV2emPewBvppTCK7rWJY8NZ+QsdXWaoFoGni7ASRFAT3uUqpbcEAhExJ2yxgcaw5Ot5PwvqPYi2kL8oCQv40cTBLVYTiWhGRsdq8A2yTmP4gPgJ2kHgyLz5CWeGnAYlNEaSNq1NEVmRLto=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us; spf=none smtp.mailfrom=resnulli.us; dkim=pass (2048-bit key) header.d=resnulli-us.20230601.gappssmtp.com header.i=@resnulli-us.20230601.gappssmtp.com header.b=1KgjbmiQ; arc=none smtp.client-ip=209.85.218.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=resnulli.us
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=resnulli.us
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b7277324054so153971266b.0
+        for <linux-doc@vger.kernel.org>; Thu, 20 Nov 2025 06:52:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1763650979; x=1764255779; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=QTNBohfvQLfYyJiWHtGyLx9FZqAAISthRH9eXaAWBIw=;
-        b=pRDQkdoJOB8BfljkDcQrj/uje2IXL2T/x5eZ/wk8Uc4x/XefY5p5EFYXDGT51MXa7A
-         I9l55vHaC9zE4/cxhD6UmVf6gV7TpKWoE8cGMDsCdDbQnDkewx6hrqthpt4o94TtQL/u
-         MjbcVlir4o3Ji4GPc4Epv0fpq/JlTGllQX22aOwxrTB0zUpmz3DAEXUZAceGwEEaBHb5
-         lvxujEoCa4QrSLs6V+CUcQRu2XDzktl3P9vyuulCEbS3jrwzJgkkFTVq1OoRAkt1J6aW
-         ekIDBh2nsF6UpK2cJB/ae6naY0w2EbbMIvM2xruXokam9a5643ErVpY8TmJS9Kj3i8CB
-         WEwQ==
+        d=resnulli-us.20230601.gappssmtp.com; s=20230601; t=1763650358; x=1764255158; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=qlVoOV1b0m1EsqTqevKebTa5adC2s2q0Xm1TYQIEY5c=;
+        b=1KgjbmiQcA2RVz54IvXXlSdGGsuG++U7UX4hfHSFB4tLAKJpux6kPxygEldzuHAZkq
+         wdoXebLApjfbrZ+2yY2brZByqzAdbURTMN5OaBc6uVa9cnhwXNHvXB/6mvg4585jXWdo
+         68uGnDjlfRdY2UK8IguwYer+G2pbFtwRfye2PlZ1YIAqq6xWLlt16XlrSBvRrnLMZpNR
+         x9tHhhmEBnj8LPysGf/Ct+Hxxl3JThedC7OTgE2wLqEnKL2vLxLEMUi1aOtGqRoNqVS8
+         gU8ZAR33ebFCTMg+LTGgZTi1D1aV+l7Knc4MDkGddR8GQ3RuRiPAoRbBd2R1CVEAFBx0
+         yNLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1763650979; x=1764255779;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QTNBohfvQLfYyJiWHtGyLx9FZqAAISthRH9eXaAWBIw=;
-        b=GMMKXKUOE+zLIP7Wp2ZWE5MZBEf3frzpnL/lMefBAW5rc9vFX3NcRjFqWB0o0t3njQ
-         mp4HzvxwdA3n2sQYVB477dvsLHjuWGBQ2a0zGU6CCnAqJRl1MorIJsIsuofqfG134oLv
-         LpbwrBI/INAZl1GDqbe1PjJvqYDq6oZSD/aORCn7rZ6yrjkr/IReYiqpKO0diN2C1C0V
-         f4mPorqpWsWifRaYJhXLx0tnTA5L0qflWLQAATLB+h3o9TZevpipyaowAUCnnwDfF4XK
-         YBYxv8WJERFPt3+7OD15PVCpDhY/iWuRj7CdurDzZio0AhPbHdNCJDXT02Jn8EWC8CCj
-         P54w==
-X-Forwarded-Encrypted: i=1; AJvYcCUZGNdQwixHDYRLh52ureUYTsjpKoFXLZlDbptt7f2pdqfOWRHveLePqnF5eBESYZKGlIWx61RVehk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzE2BgzDpOo6Q16LOr1QjqVDpqFH6v3dBBKiPuaC/pIF+dVo4DS
-	uuNRSO+tCjTFrE7WG1ECsUQCr9csvChMVCg9VDKe8h6FLa9WJsCKXWDGTlA5jsKDi3TDC4sHQjR
-	CmQ==
-X-Google-Smtp-Source: AGHT+IF9OaX/QGeSo05eKeUEdCvjlZVpqfgwLf4/MHL/rv8J5uT/4osVo9PFxwafA3Q6L9NfftMIvUQ5OA==
-X-Received: from edb10.prod.google.com ([2002:a05:6402:238a:b0:643:5f58:caa7])
- (user=elver job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6402:268d:b0:640:b1cf:f800
- with SMTP id 4fb4d7f45d1cf-6453d084770mr1885049a12.4.1763650978915; Thu, 20
- Nov 2025 07:02:58 -0800 (PST)
-Date: Thu, 20 Nov 2025 15:49:07 +0100
-In-Reply-To: <20251120145835.3833031-2-elver@google.com>
+        d=1e100.net; s=20230601; t=1763650358; x=1764255158;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=qlVoOV1b0m1EsqTqevKebTa5adC2s2q0Xm1TYQIEY5c=;
+        b=njhi+bECaWka/C10kT1FZMYPcES4g3cNgxLDKb/4VwUMXsi+MCW4+4V/3LlZePnIt2
+         h5No3SfsUXn+a2VpDUbpOIBPjwvtDxDNqH29N/SaPBrDkaTZGFpA/fEt00GgO9dc5Hml
+         0c/c8u5LX53CTcVwWxKXzgXDo0EBwvVC9N8iFX+WzNwfb4Z7Yl1mPFoa2SJCIZMna3wY
+         AZe64xHmsmespv6S6b/g9/7xvNZuefvQ/DWzhUJQgfOge9EGsjGUMH0i1IXehV4ncAFv
+         mfBPgTpkLacLjiJAmBLUjYmR/s0SejZ+45SMekuFHq4eFxmGgGghF3HkdbZX3ZQQBJVU
+         IESA==
+X-Forwarded-Encrypted: i=1; AJvYcCVsmyCVHK9CTplCaHBZdUjE/iQFT0CC6tOOE051+MqbsGKCSzP4jDTvdEH1iPvJtar/SJJUjSrG838=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwGUMP/RPH5xzvNPVgTbaLHF3gN+XOQ/vhNKq79j4b5MCVXU6sP
+	bIm8nuClbRN5hBMNxhpB6MfXZxBp3tY+xDe5TTOAc3qi+fBP7F5MhVGzMnrUhWHqXlU=
+X-Gm-Gg: ASbGncu7xTG7isxgnMoGqA4cpV0BlEyB1ITtziVWPoBrlKbmRXpQ2DOr9cFe1fVQMb5
+	cYT20f0kNDvUtvMpONAyndDGhdHSOoGi6JIMEg4+9SaVaWZ9hawf+rgyxcncskCliybSYoHg/RN
+	zbGdqCVO5fqppTk80X5jmcNp4p1qv0dVhnxLGgQoxqITzzRAm/0hClWdS2faiMvqLcbXSseoONa
+	ZMMXbj7DJa7ntb4Q6X4eFM2CjBbybuJs6L7kY2MBS71AXIW2uGUdSFVDy6hEnpAkuwRxtaE9Qqa
+	zoY6U3aCjjD+Z1+1wOcXZGSfjuH95oLf6NVXBKXn1gDsVQHfKddwRop//XydSw2UlERwi/3fxgs
+	hJhQnC81R8/qGMY2H6e/AXrcqJhteJkTU/63l2+U7r8GYfnuF0d5mG41Q5g2tyrdfQyAzAs+xqx
+	rIGiouEoLgsNjD66Sb0EI=
+X-Google-Smtp-Source: AGHT+IHij78wIttXL5qrzeJ5Fr4uMDiSvsvUdH/MMYd2AuxlJUx0L+zs8iuv/NdnITfidNIJsVOY8Q==
+X-Received: by 2002:a17:906:478b:b0:b6c:38d9:6935 with SMTP id a640c23a62f3a-b76552b9f32mr307984766b.24.1763650357685;
+        Thu, 20 Nov 2025 06:52:37 -0800 (PST)
+Received: from FV6GYCPJ69 ([85.163.81.98])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-645363c56a4sm2255897a12.15.2025.11.20.06.52.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Nov 2025 06:52:37 -0800 (PST)
+Date: Thu, 20 Nov 2025 15:52:33 +0100
+From: Jiri Pirko <jiri@resnulli.us>
+To: Tariq Toukan <tariqt@nvidia.com>
+Cc: Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+	Paolo Abeni <pabeni@redhat.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	"David S. Miller" <davem@davemloft.net>, Donald Hunter <donald.hunter@gmail.com>, 
+	Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed <saeedm@nvidia.com>, 
+	Leon Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>, netdev@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-rdma@vger.kernel.org, 
+	Gal Pressman <gal@nvidia.com>, Moshe Shemesh <moshe@nvidia.com>, 
+	Carolina Jubran <cjubran@nvidia.com>, Cosmin Ratiu <cratiu@nvidia.com>, Jiri Pirko <jiri@nvidia.com>
+Subject: Re: [PATCH net-next 03/14] devlink: Add helpers to lock nested-in
+ instances
+Message-ID: <hj37vfeodmmjpfrfa6vnwm3rwp7an4fzt7bvi4fwyusjzgbtrm@fc6j4szuodq6>
+References: <1763644166-1250608-1-git-send-email-tariqt@nvidia.com>
+ <1763644166-1250608-4-git-send-email-tariqt@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20251120145835.3833031-2-elver@google.com>
-X-Mailer: git-send-email 2.52.0.rc1.455.g30608eb744-goog
-Message-ID: <20251120145835.3833031-7-elver@google.com>
-Subject: [PATCH v4 05/35] checkpatch: Warn about context_unsafe() without comment
-From: Marco Elver <elver@google.com>
-To: elver@google.com, Peter Zijlstra <peterz@infradead.org>, 
-	Boqun Feng <boqun.feng@gmail.com>, Ingo Molnar <mingo@kernel.org>, Will Deacon <will@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>, Luc Van Oostenryck <luc.vanoostenryck@gmail.com>, 
-	Chris Li <sparse@chrisli.org>, "Paul E. McKenney" <paulmck@kernel.org>, 
-	Alexander Potapenko <glider@google.com>, Arnd Bergmann <arnd@arndb.de>, Bart Van Assche <bvanassche@acm.org>, 
-	Christoph Hellwig <hch@lst.de>, Dmitry Vyukov <dvyukov@google.com>, Eric Dumazet <edumazet@google.com>, 
-	Frederic Weisbecker <frederic@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, Ian Rogers <irogers@google.com>, 
-	Jann Horn <jannh@google.com>, Joel Fernandes <joelagnelf@nvidia.com>, 
-	Johannes Berg <johannes.berg@intel.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Josh Triplett <josh@joshtriplett.org>, Justin Stitt <justinstitt@google.com>, 
-	Kees Cook <kees@kernel.org>, Kentaro Takeda <takedakn@nttdata.co.jp>, 
-	Lukas Bulwahn <lukas.bulwahn@gmail.com>, Mark Rutland <mark.rutland@arm.com>, 
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Miguel Ojeda <ojeda@kernel.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
-	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>, Thomas Gleixner <tglx@linutronix.de>, 
-	Thomas Graf <tgraf@suug.ch>, Uladzislau Rezki <urezki@gmail.com>, Waiman Long <longman@redhat.com>, 
-	kasan-dev@googlegroups.com, linux-crypto@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-security-module@vger.kernel.org, linux-sparse@vger.kernel.org, 
-	linux-wireless@vger.kernel.org, llvm@lists.linux.dev, rcu@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1763644166-1250608-4-git-send-email-tariqt@nvidia.com>
 
-Warn about applications of context_unsafe() without a comment, to
-encourage documenting the reasoning behind why it was deemed safe.
+Thu, Nov 20, 2025 at 02:09:15PM +0100, tariqt@nvidia.com wrote:
+>From: Cosmin Ratiu <cratiu@nvidia.com>
+>
+>Upcoming code will need to obtain a reference to locked nested-in
+>devlink instances. Add helpers to lock, obtain an already locked
+>reference and unlock/unref the nested-in instance.
+>
+>Signed-off-by: Cosmin Ratiu <cratiu@nvidia.com>
+>Reviewed-by: Carolina Jubran <cjubran@nvidia.com>
+>Signed-off-by: Tariq Toukan <tariqt@nvidia.com>
 
-Signed-off-by: Marco Elver <elver@google.com>
----
-v4:
-* Rename capability -> context analysis.
-* Avoid nested if.
----
- scripts/checkpatch.pl | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index 92669904eecc..a5db6b583b88 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -6722,6 +6722,13 @@ sub process {
- 			}
- 		}
- 
-+# check for context_unsafe without a comment.
-+		if ($line =~ /\bcontext_unsafe\b/ &&
-+		    !ctx_has_comment($first_line, $linenr)) {
-+			WARN("CONTEXT_UNSAFE",
-+			     "context_unsafe without comment\n" . $herecurr);
-+		}
-+
- # check of hardware specific defines
- 		if ($line =~ m@^.\s*\#\s*if.*\b(__i386__|__powerpc64__|__sun__|__s390x__)\b@ && $realfile !~ m@include/asm-@) {
- 			CHK("ARCH_DEFINES",
--- 
-2.52.0.rc1.455.g30608eb744-goog
-
+Reviewed-by: Jiri Pirko <jiri@nvidia.com>
 
