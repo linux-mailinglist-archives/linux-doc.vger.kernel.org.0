@@ -1,192 +1,133 @@
-Return-Path: <linux-doc+bounces-67628-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67630-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D6D2C78113
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 10:13:00 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1A9EC78237
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 10:25:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by tor.lore.kernel.org (Postfix) with ESMTPS id 2BE262CF41
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 09:12:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTPS id CED3A32FDB
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 09:25:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D9E133FE26;
-	Fri, 21 Nov 2025 09:12:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE5A3340DBC;
+	Fri, 21 Nov 2025 09:23:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mo2AihOL"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="ozJXLhj6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from canpmsgout04.his.huawei.com (canpmsgout04.his.huawei.com [113.46.200.219])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31E3633F8C9;
-	Fri, 21 Nov 2025 09:12:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB0D6340279;
+	Fri, 21 Nov 2025 09:23:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.219
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763716362; cv=none; b=el4iEF7rpRvqKBeYVGV9/vc89XVjAGsvkGfSoVcN6TyRi/OwN9qntRGl+s/4O/51APRWfgcw43X7ic/9ONP5lzhLk9KB22plSdSj0hTJ2QU7or4SpsB2GRFHq0TM4DjPLFs+2KDrsTWC9Tn+CR63xLSnCE/CIKlGoxU9YOxhXxA=
+	t=1763717029; cv=none; b=MlNcyH3d15fhknnXTL1wC67ZLjzRB6QH9SK3QCQLlCqAsofc2mJ3L2HuI3YZ1s3+/iIZ0LdfGRl98f/Ydaobf5ta6yBlsEefneEYeL6S68Z3oQoD1gL0cKSK+s1BgRDiQG2SzHlMvwKOkJgvIbOCgYPzSvIVSb59X9INRPyIHn4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763716362; c=relaxed/simple;
-	bh=15nuVtp2N2stXB8GN4hJJfLJcIi3BWRlytIutu1iCxg=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=oyirGmFTr2lQ84sJ6c4+7TMkZWkvOa+Vq/mX8xyuZs6rHa3YG+J77hXziLZ5lRYnMebVPIbMNEkQ0C1L4oRTPy0FGEmkmBCF1eSo6wf2E10ZWmYhCUbReXddldsmBM+LGmZD7HZxi1hGaDQ6RLsjsUd1D2Jy/AMfFx7ZlKcD+OQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mo2AihOL; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E513BC113D0;
-	Fri, 21 Nov 2025 09:12:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763716361;
-	bh=15nuVtp2N2stXB8GN4hJJfLJcIi3BWRlytIutu1iCxg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=mo2AihOL07n40a/g241i7HyCHx8HhwgCo1lCqzz92ngMoWvkrJP20dBSdOAj5dH0g
-	 NQ/Ias2MHlHK0+laMztgheypK1SAzD9f2aBWx8xbkO6M9cv6PB5inPllwXmCF0ePXS
-	 DpxWnrVBI3iyl/UgKbEHY67FigqLnCEhuhoE/Ry/Mg8wvU8gZ2ygohpKo7o7oKizs3
-	 xvan3MaxDCL79djTYkXWEs+U1EOStJIk14pgqxfM7pXoclzO3xXyfjh4lcyMvwjHJe
-	 XKIMDq+l54nl9yOWfo3J5dU8fdD/i+i7u03KfT1WDsvsncCp5tddTEYR9/cCIzZjJs
-	 AYJu5OqROCmvA==
-Date: Fri, 21 Nov 2025 10:12:36 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Carlos Bilbao <carlos.bilbao.osdev@gmail.com>
-Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>, Carlos Bilbao
- <carlos.bilbao@kernel.org>, Linux Doc Mailing List
- <linux-doc@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, Mauro
- Carvalho Chehab <mchehab@kernel.org>, linux-kernel@vger.kernel.org, Miguel
- Ojeda <ojeda@kernel.org>
-Subject: Re: [PATCH 0/1] fix rustdoc build detection
-Message-ID: <20251121101236.5b1f9989@foz.lan>
-In-Reply-To: <cdadc017-8874-4af0-b62a-62f70ee5d9eb@gmail.com>
-References: <cover.1763370163.git.mchehab+huawei@kernel.org>
-	<CANiq72=79rhJ5Sh+yp2vRSuSLD=nyR2DuQ26hFeBmyszRC3ALA@mail.gmail.com>
-	<6sczezthaixabzw5lddhemrx2yivfdf65zfvpew7tpzl3gqire@vjx4rpju5wxc>
-	<CANiq72m3deG_QsH8-AskTR9LcNL=G6E9o2fu+oi9RVXn1PK_+Q@mail.gmail.com>
-	<cdadc017-8874-4af0-b62a-62f70ee5d9eb@gmail.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1763717029; c=relaxed/simple;
+	bh=LjrNVB/VDqUyL8RfflBobn4bMQWyFHvx8GB+ANFej34=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=UFFub/TnOxfI3oT10svtk08qw/lsn4iG7R2xHmWxBXwbuoYYYp/okn19mEhdtXkTklGZc+OP7hJyxANNl5F9zXTj87W8WNuEkqdwW6xBSdhtaAtz/YjLozDDQiOj0+ozYELa7jFX9O00/+TBaK3U3Npl26nOWMHKkKkXvRsXLvA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=ozJXLhj6; arc=none smtp.client-ip=113.46.200.219
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=2FNmGdRA6WNkSW3gQDN3+WluFUlUMpgBNvvjHe+ozws=;
+	b=ozJXLhj6qKROoOq+Bbf5eCE0ySKbEVe0eFVDWD/2NDiAYI7utwPDBHlEEAzurSA2GkdIXdVXT
+	zKejclK2pnorcdLX5muQcRwK9J4d/+pnoQfVEP6sPTiIopiImF0IP81WLWpiUwUujyavJZPrWwU
+	mTG2AV+Dhxw8dUbY0bLSFqk=
+Received: from mail.maildlp.com (unknown [172.19.163.252])
+	by canpmsgout04.his.huawei.com (SkyGuard) with ESMTPS id 4dCV912sbxz1prkV;
+	Fri, 21 Nov 2025 17:21:57 +0800 (CST)
+Received: from kwepemr100010.china.huawei.com (unknown [7.202.195.125])
+	by mail.maildlp.com (Postfix) with ESMTPS id 369DA180BCF;
+	Fri, 21 Nov 2025 17:23:43 +0800 (CST)
+Received: from huawei.com (10.50.163.32) by kwepemr100010.china.huawei.com
+ (7.202.195.125) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 21 Nov
+ 2025 17:23:42 +0800
+From: Tian Zheng <zhengtian10@huawei.com>
+To: <maz@kernel.org>, <oliver.upton@linux.dev>, <catalin.marinas@arm.com>,
+	<corbet@lwn.net>, <pbonzini@redhat.com>, <will@kernel.org>
+CC: <linux-kernel@vger.kernel.org>, <zhengtian10@huawei.com>,
+	<yuzenghui@huawei.com>, <wangzhou1@hisilicon.com>, <yezhenyu2@huawei.com>,
+	<xiexiangyou@huawei.com>, <zhengchuan@huawei.com>, <linuxarm@huawei.com>,
+	<joey.gouly@arm.com>, <kvmarm@lists.linux.dev>, <kvm@vger.kernel.org>,
+	<linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
+	<suzuki.poulose@arm.com>
+Subject: [PATCH v2 0/5] Support the FEAT_HDBSS introduced in Armv9.5
+Date: Fri, 21 Nov 2025 17:23:37 +0800
+Message-ID: <20251121092342.3393318-1-zhengtian10@huawei.com>
+X-Mailer: git-send-email 2.33.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
+ kwepemr100010.china.huawei.com (7.202.195.125)
 
-Em Tue, 18 Nov 2025 17:23:48 -0600
-Carlos Bilbao <carlos.bilbao.osdev@gmail.com> escreveu:
+This series of patches add support to the Hardware Dirty state tracking
+Structure(HDBSS) feature, which is introduced by the ARM architecture
+in the DDI0601(ID121123) version.
 
-> Hey there,
->=20
-> On 11/17/25 05:22, Miguel Ojeda wrote:
-> > On Mon, Nov 17, 2025 at 11:48=E2=80=AFAM Mauro Carvalho Chehab
-> > <mchehab+huawei@kernel.org> wrote: =20
-> >> Sure, Sphinx (including kernel-doc) build and rust doca build are
-> >> independent. Yet, Makefile "htmldocs" target currently does both.
-> >>
-> >> It could make sense to have a separate target if one want to build
-> >> them both, e.g. something like: =20
-> > My understanding (Cc'ing Carlos) is that the idea was that `htmldocs`
-> > built the Rust docs if possible. =20
->=20
->=20
-> Thanks! I'll also take a look at this, although I fear it'll be complicat=
-ed
-> without a way to reproduce what Mauro experienced.
+The HDBSS feature is an extension to the architecture that enhances
+tracking translation table descriptors' dirty state, identified as
+FEAT_HDBSS. The goal of this feature is to reduce the cost of surveying
+for dirtied granules, with minimal effect on recording when a granule
+has been dirtied.
 
-I was able to get the scenario on linux-next. It is a little bit
-tricky to reproduce.
+The purpose of this feature is to make the execution overhead of live
+migration lower to both the guest and the host, compared to existing
+approaches (write-protect or search stage 2 tables).
 
-1) I did a build with:
+After these patches, users(such as qemu) can use the
+KVM_CAP_ARM_HW_DIRTY_STATE_TRACK ioctl to enable or disable the HDBSS
+feature before and after the live migration.
 
-	$ make distclean
-	$ make SPHINXDIRS=3Dpeci htmldocs
+This feature is similar to Intel's Page Modification Logging (PML),
+offering hardware-assisted dirty tracking to reduce live migration
+overhead. With PML support expanding beyond Intel, HDBSS introduces a
+comparable mechanism for ARM.
 
-   rustdoc was not called.
+eillon (4):
+  arm64/sysreg: Add HDBSS related register information
+  KVM: arm64: Support set the DBM attr during memory abort
+  KVM: arm64: Add support for FEAT_HDBSS
+  KVM: arm64: Enable HDBSS support and handle HDBSSF events
 
-2) copied a .config that has CONFIG_RUST there:
+Tian Zheng (1):
+  KVM: arm64: Document HDBSS ioctl
 
-	$ cp config-rust .config
-	$ make SPHINXDIRS=3Dpeci htmldocs
+ Documentation/virt/kvm/api.rst       |  15 ++++
+ arch/arm64/Kconfig                   |  14 ++++
+ arch/arm64/include/asm/cpucaps.h     |   2 +
+ arch/arm64/include/asm/cpufeature.h  |   5 ++
+ arch/arm64/include/asm/esr.h         |   2 +
+ arch/arm64/include/asm/kvm_arm.h     |   1 +
+ arch/arm64/include/asm/kvm_host.h    |  14 ++++
+ arch/arm64/include/asm/kvm_mmu.h     |  17 +++++
+ arch/arm64/include/asm/kvm_pgtable.h |   4 +
+ arch/arm64/include/asm/sysreg.h      |  12 +++
+ arch/arm64/kernel/cpufeature.c       |   9 +++
+ arch/arm64/kvm/arm.c                 | 107 +++++++++++++++++++++++++++
+ arch/arm64/kvm/handle_exit.c         |  45 +++++++++++
+ arch/arm64/kvm/hyp/pgtable.c         |   6 ++
+ arch/arm64/kvm/hyp/vhe/switch.c      |   1 +
+ arch/arm64/kvm/mmu.c                 |  10 +++
+ arch/arm64/kvm/reset.c               |   3 +
+ arch/arm64/tools/cpucaps             |   1 +
+ arch/arm64/tools/sysreg              |  28 +++++++
+ include/linux/kvm_host.h             |   1 +
+ include/uapi/linux/kvm.h             |   1 +
+ tools/include/uapi/linux/kvm.h       |   1 +
+ 22 files changed, 299 insertions(+)
 
-   rustdoc was not called.
+--
+2.33.0
 
-3) manually called rustdoc:
-
-	$ make rustdoc
-
-   rustdoc was built.
-
-4) now, I re-ran htmldocs:
-
-	$ make SPHINXDIRS=3Dpeci htmldocs
-
-   rustdoc was built.
-
-5) I replaced .config with a config without rust:
-
-	$ make allyesconfig
-	$ make SPHINXDIRS=3Dpeci htmldocs
-	...
-	Using alabaster theme
-	Using Python kernel-doc
-	  SYNC    include/config/auto.conf
-	  HOSTCC  scripts/basic/fixdep
-	  DESCEND objtool
-	  INSTALL libsubcmd_headers
-	  CC      scripts/mod/empty.o
-	  CC      scripts/mod/devicetable-offsets.s
-	  MKELF   scripts/mod/elfconfig.h
-	  HOSTCC  scripts/mod/modpost.o
-	  HOSTCC  scripts/mod/sumversion.o
-	  HOSTCC  scripts/mod/symsearch.o
-	  HOSTCC  scripts/mod/file2alias.o
-	  HOSTLD  scripts/mod/modpost
-	  CC      kernel/bounds.s
-	  CC      arch/x86/kernel/asm-offsets.s
-	  UPD     include/generated/asm-offsets.h
-	  CC      kernel/sched/rq-offsets.s
-	  CALL    scripts/checksyscalls.sh
-	make[4]: *** No rule to make target 'rustdoc'.  Stop.
-	make[3]: *** [Makefile:1855: rustdoc] Error 2
-	Ignored errors when building rustdoc: Command '['make', 'rustdoc']' return=
-ed non-zero exit status 2.. Is RUST enabled?
-
-There are other combinations that produce weird things.
-
-If, instead of step (5), we do:
-
-	$ echo >.config
-	$ LANG=3DC make SPHINXDIRS=3Dpeci htmldocs
-
-it will produce, after building htmldocs from Sphinx:
-
-	Using alabaster theme
-	Using Python kernel-doc
-	  SYNC    include/config/auto.conf
-	  HOSTCC  scripts/basic/fixdep
-	*
-	* Restart config...
-	*
-	*
-	* General setup
-	*
-	Compile also drivers which will not load (COMPILE_TEST) [N/y/?] (NEW)=20
-
----
-
-My understanding is that the issue is caused because (by purpose)
-make htmldocs doesn't sync configuration. It doesn't need, as
-building docs doesn't really depend on any .config flag.
-
-However, this check at the Makefile:
-
-	ifneq ($(wildcard $(srctree)/.config),)
-	ifeq ($(CONFIG_RUST),y)
-        	RUSTDOC=3D--rustdoc
-	endif
-	endif
-
-Uses a cached value of "CONFIG_RUST" from the last build, with may
-or may not be present anymore.
-
-My patch solves this by not using the cached result, but, instead
-checking if CONFIG_RUST is enabled directly at the .config file.
-
-Thanks,
-Mauro
 
