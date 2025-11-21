@@ -1,116 +1,136 @@
-Return-Path: <linux-doc+bounces-67633-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67635-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82847C78234
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 10:25:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E814C78342
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 10:41:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 3E0CE4E197A
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 09:25:43 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 3A1894E89DA
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Nov 2025 09:41:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D720434214A;
-	Fri, 21 Nov 2025 09:23:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F34C33FE12;
+	Fri, 21 Nov 2025 09:41:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="JEy7kf+6"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iMZSz7YG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout11.his.huawei.com (canpmsgout11.his.huawei.com [113.46.200.226])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7715340A73;
-	Fri, 21 Nov 2025 09:23:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.226
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35500306B00;
+	Fri, 21 Nov 2025 09:41:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763717030; cv=none; b=tyLS59LrmoQDiwF+EwDONmjJK6ih+9QlVrXNI0PLdN2nkR6pK747kL1yHqxnZeUL0LtZRs6iHzXWR9cWRBVdyEfEvsgJWx4bpr1A7OhRS4f29zKUlJDELKLy8iUO7ov0YxU73RQwgZOdYRqSzPWq7Rx9grpKMFotO08XawnBDE0=
+	t=1763718063; cv=none; b=etADKwgrPOcjYcRP+05QitILjdXelX6DgVNj8gYgG+4f+vA8pFHvrhojLNslMaOSArM/SL49ytL+Jxea3r02RE7GxT7GGrrxDOVBvVLgHN/52xq44AiB5MpO/mqIyPNhhcB36Ps7Fa4Q/jAUqLRRioF5aVkB5iX8/reWGK+0h6Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763717030; c=relaxed/simple;
-	bh=UrY+pCES8Lr8ar4CYQXHO9RG4hQV+PjFmGgWq4oPIAA=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=lRk20IMsw//VGw/Q/aw1B6cl+qYEkcFlzlMrk8U7zWZk0sk/04jzuxioCPUZjWNTjYqfnCkIAahW2nMwQ9s4WIsyOqmCo8FphYjai87B8FZZ/BJeQYo7BVgTGRmMNpHoLgSv4uV2YSIE9YTtVd2YxrCxebRhB/pqdXwpVYHuzfc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=JEy7kf+6; arc=none smtp.client-ip=113.46.200.226
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=UrY+pCES8Lr8ar4CYQXHO9RG4hQV+PjFmGgWq4oPIAA=;
-	b=JEy7kf+6F/tBqxGKMOknAV8OX/p+URTD23jg7dHml3kKmPLxmWb7Q3OnpmdoOkZ+jXnAhxHe4
-	r6wP+AJNXuTiYE+3it6noIqKNu2gqN2hHYsgSlhxPqOMlYYyxdC7exPJXl7wm94Yp2vdfhHoeKv
-	MqwohDLKTjAXmoxMMMhW5Ao=
-Received: from mail.maildlp.com (unknown [172.19.88.234])
-	by canpmsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4dCV9418fTzKmWx;
-	Fri, 21 Nov 2025 17:22:00 +0800 (CST)
-Received: from kwepemr100010.china.huawei.com (unknown [7.202.195.125])
-	by mail.maildlp.com (Postfix) with ESMTPS id B206614022D;
-	Fri, 21 Nov 2025 17:23:45 +0800 (CST)
-Received: from huawei.com (10.50.163.32) by kwepemr100010.china.huawei.com
- (7.202.195.125) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 21 Nov
- 2025 17:23:44 +0800
-From: Tian Zheng <zhengtian10@huawei.com>
-To: <maz@kernel.org>, <oliver.upton@linux.dev>, <catalin.marinas@arm.com>,
-	<corbet@lwn.net>, <pbonzini@redhat.com>, <will@kernel.org>
-CC: <linux-kernel@vger.kernel.org>, <zhengtian10@huawei.com>,
-	<yuzenghui@huawei.com>, <wangzhou1@hisilicon.com>, <yezhenyu2@huawei.com>,
-	<xiexiangyou@huawei.com>, <zhengchuan@huawei.com>, <linuxarm@huawei.com>,
-	<joey.gouly@arm.com>, <kvmarm@lists.linux.dev>, <kvm@vger.kernel.org>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-doc@vger.kernel.org>,
-	<suzuki.poulose@arm.com>
-Subject: [PATCH v2 5/5] KVM: arm64: Document HDBSS ioctl
-Date: Fri, 21 Nov 2025 17:23:42 +0800
-Message-ID: <20251121092342.3393318-6-zhengtian10@huawei.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20251121092342.3393318-1-zhengtian10@huawei.com>
-References: <20251121092342.3393318-1-zhengtian10@huawei.com>
+	s=arc-20240116; t=1763718063; c=relaxed/simple;
+	bh=63IGMPJ9rbdKC7gRTmcigZvggYT/2YjJE+qUm6zDngs=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=ExDdzTPBdX59ATUjenkpzls8xAwvHGB4ZnkA6s8T3YChCy53+i6jh16BaexN62pc53/46TO3t5h6bErZGuaez0/o6xbajME1hP/lKuYdcxtIyTe0vcXzmROhPXaDoj+wbhFEvRL+RdSIcTDZVkmG+VlmQr2tDukyiU1ksTh0C9M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iMZSz7YG; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E43E2C4CEF1;
+	Fri, 21 Nov 2025 09:41:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1763718062;
+	bh=63IGMPJ9rbdKC7gRTmcigZvggYT/2YjJE+qUm6zDngs=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=iMZSz7YGCFjLRCQyqRmqbjC887tkcAR1U2ARnnjOyAXBJ6dUkw4wM8sNCnbveZM//
+	 BtzBPCdCVooROmRwOU0GfVAn8XTh0GvKD81/DJ4m0XNeDOoyofqo9zHNrJfooFNdDO
+	 iEvM1yxHWkpRxSVHJBBFAU5ZLIOXzBbqHaACeRU5gokR3H2I+C66MvI6ctrmSRTl8t
+	 rgCvtEOdhr69vtY/R4RhFcSP6Y8tdYfMOSPEugBH0Mg6NHMN/r2jgOu0qFGsjDzoft
+	 kjUKq3OitZD2d/JXSFG7hgkQ0SS+FaY9obXwmvzArl96EX0Dvp3O9hRyXqeAB3UQ6S
+	 zeiBKA3OaDKmg==
+Date: Fri, 21 Nov 2025 10:40:57 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc: Carlos Bilbao <carlos.bilbao@kernel.org>, Linux Doc Mailing List
+ <linux-doc@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>, Mauro
+ Carvalho Chehab <mchehab@kernel.org>, linux-kernel@vger.kernel.org, Miguel
+ Ojeda <ojeda@kernel.org>
+Subject: Re: [PATCH 0/1] fix rustdoc build detection
+Message-ID: <20251121104057.5aecce59@foz.lan>
+In-Reply-To: <CANiq72kGvfB2wqAv-d7F9racGoSX+TOmezA=ip-E4ouva-0U=Q@mail.gmail.com>
+References: <cover.1763370163.git.mchehab+huawei@kernel.org>
+	<CANiq72=79rhJ5Sh+yp2vRSuSLD=nyR2DuQ26hFeBmyszRC3ALA@mail.gmail.com>
+	<6sczezthaixabzw5lddhemrx2yivfdf65zfvpew7tpzl3gqire@vjx4rpju5wxc>
+	<CANiq72m3deG_QsH8-AskTR9LcNL=G6E9o2fu+oi9RVXn1PK_+Q@mail.gmail.com>
+	<20251117133203.71b97d47@foz.lan>
+	<CANiq72kGvfB2wqAv-d7F9racGoSX+TOmezA=ip-E4ouva-0U=Q@mail.gmail.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems100001.china.huawei.com (7.221.188.238) To
- kwepemr100010.china.huawei.com (7.202.195.125)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-A new ioctl (KVM_CAP_ARM_HW_DIRTY_STATE_TRACK) provides a mechanism for
-userspace to configure the HDBSS buffer size during live migration,
-enabling hardware-assisted dirty page tracking.
+Em Tue, 18 Nov 2025 23:02:35 +0100
+Miguel Ojeda <miguel.ojeda.sandonis@gmail.com> escreveu:
 
-Signed-off-by: eillon <yezhenyu2@huawei.com>
-Signed-off-by: Tian Zheng <zhengtian10@huawei.com>
----
- Documentation/virt/kvm/api.rst | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+> On Mon, Nov 17, 2025 at 1:32=E2=80=AFPM Mauro Carvalho Chehab
+> <mchehab+huawei@kernel.org> wrote:
+> >
+> > Heh, the same applies to the current usage of htmldocs - specially
+> > when SPHINXDIRS is used, e.g. one doing, for instance:
+> >
+> >         make SPHINXDOCS=3Ddriver-api/<subsystem>
+> >
+> > may not be interested on building rust docs, which, on such case,
+> > may be a lot slower than a partial build. Also, I don't think that
+> > rustdoc currently does something similar to SPHINXDOCS. =20
+>=20
+> If you mean building the Rust docs introduces extra work for people
+> building the HTML docs when that happens automatically, then yeah,
+> definitely.
+>=20
+> Perhaps it could be skipped depending on what folders are requested.
 
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index 57061fa29e6a..25d60ff136e9 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -8703,6 +8703,21 @@ This capability indicate to the userspace whether a PFNMAP memory region
- can be safely mapped as cacheable. This relies on the presence of
- force write back (FWB) feature support on the hardware.
+Yeah, that sounds a good approach: teach rustdoc target to handle
+SPHINXDOCS. If it is empty (or just ".") handle the same way as
+today. Otherwise, do a partial doc build or skip when it doesn't
+make sense.
 
-+7.44 KVM_CAP_ARM_HW_DIRTY_STATE_TRACK
-+:Architectures: arm64
-+:Type: VM
-+:Parameters: args[0] is the allocation order determining HDBSS buffer size
-+:Returns: 0 on success, negative value on failure
-+
-+Enables hardware-assisted dirty page tracking via the Hardware Dirty State
-+Tracking Structure (HDBSS).
-+
-+When live migration is initiated, userspace can enable this feature by
-+setting KVM_CAP_ARM_HW_DIRTY_STATE_TRACK through IOCTL. KVM will allocate
-+per-vCPU HDBSS buffers.
-+
-+The feature is disabled by invoking the ioctl again.
-+
- 8. Other capabilities.
- ======================
+>=20
+> > E.g. you would create a parser_rust.py module there, which would
+> > generate ReST output from the rust code(*). =20
+>=20
+> To clarify, the idea of the "external references map file" in that
+> issue isn't to stop using `rustdoc`,=20
 
---
-2.33.0
+I'm not talking about stop using rustdoc. I'm talking about using
+it to output on a format that Sphinx can understand, and let Sphinx
+do the final output, solving cross-references.
 
+> but rather to allow `rustdoc` to
+> have (at least) the references to C items (e.g. a link to the rendered
+> `printk` docs at least to the source code where it is defined). In
+> other words, it is about allowing developrers to just write something
+> like [`printk()`] and the system would figure out how to link to the
+> right docs automatically.
+>=20
+> We don't plan to stop using `rustdoc` -- its output is specialized for
+> Rust which makes it quite nice.
+>=20
+> `rustdoc` can export JSON and that should be possible to use easily
+> from a Sphinx plugin without having to parse Rust from scratch, to at
+> least get some degree of Sphinx support.=20
+
+There is a JSON Sphinx plugin (although I never used - no idea if
+it would do what it is needed):
+	https://sphinx-jsonschema.readthedocs.io/en/latest/
+
+If this won't work, I guess it wouldn't be hard to use parser_yaml.py as
+an example to write a new plugin to handle rustdoc JSON output.
+
+> That would be nice for the
+> other outputs support like PDF as you mention, yeah, as well as having
+> independent-to-the-config docs. We discussed it a few times, but it
+> has never been a high priority, especially since `rustdoc` does its
+> job quite well.
+
+Thanks,
+Mauro
 
