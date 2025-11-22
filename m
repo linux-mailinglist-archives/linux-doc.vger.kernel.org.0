@@ -1,60 +1,63 @@
-Return-Path: <linux-doc+bounces-67703-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67708-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1920C7CFCC
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 13:38:12 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id 75404C7CFDB
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 13:38:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 877E14E28C3
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 12:38:11 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 2F4903A9132
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 12:38:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D460A1D5154;
-	Sat, 22 Nov 2025 12:38:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2BA642F60B2;
+	Sat, 22 Nov 2025 12:38:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G/VKDz4i"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UR+EQDcI"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC780469D;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0292F2857C1;
 	Sat, 22 Nov 2025 12:38:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763815087; cv=none; b=NrVAJDOYdaHOYY7Rm3aJTP+WPt7GMYlQpIe+eXbgFkZmzBCcBpp+DorGAaGAnEOj/XKBbbCTrG3/g08mWfk+eBviDnHIQPh/HYxu7tYKR2u59QiRZU9ZqRZmqOznstFpusWPZOLIAQ7q3h27ljsxvRRWpJaL7ym5aGAqH5xM1fk=
+	t=1763815088; cv=none; b=TDT+zrBefAJJRde6jpNCZfKHIrCfGFaweVWE5m2FNkgueXRI1iKemkiEYOb3eEys89k2L7Xh4OG5dYvstOTQxgBBdfEXlFfyKZxvVW7J4CyoDpCHDaF9oAGIdiwpO8VCIAZeKQdzVbUFy0ACFPWCweEZXamhOiIAV4Ee8RQyGmQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763815087; c=relaxed/simple;
-	bh=+0gqiYmRyGMvbc4ri5o4JeM7HQTze8xLtNWwu4zX+ZY=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tEMMOgJ+/To34nyWm1le5loTGf5DFmTPw6FNMOYlNzkhDN0TFCbKEHnoyXxEDowgYLF6TCFkTy2RAKO8EuMuPjxuZd9U2XEjghYCOS1b896DwHCQUWOQaXsysdArhM6j6vUqbt/iTYT4d+q3X8R0eKAiUQ4ytktoApTRgLPl5g4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G/VKDz4i; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E9EEC16AAE;
+	s=arc-20240116; t=1763815088; c=relaxed/simple;
+	bh=3mMj2/bpTFkS1JYhOQCrsyMcgLS2GZpq30GUkfbjkfo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=dTRZg7158e8rDGgmAs0Qe/ExWAfGQ7Snag7Ugyz2AEME/kTJEsFv61ZjrbifnfCEB3qncbN6YFJy8BYDQJ8kYzt/ztWCkc613SKFsyNkJ0HqKBPoEgnKAfarqBvNJg5ASaz+3yPlNiuAr1bNqN7RU7knSnS9D189zzAulwlJWhg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UR+EQDcI; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 640EFC116C6;
 	Sat, 22 Nov 2025 12:38:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1763815087;
-	bh=+0gqiYmRyGMvbc4ri5o4JeM7HQTze8xLtNWwu4zX+ZY=;
-	h=From:To:Cc:Subject:Date:From;
-	b=G/VKDz4itLwqeWW8GE2VS7VKb9ztgQyTPzyEJsHUerGZkLLAQTbfvBuMEcMjDouKh
-	 YSu76IiWlVSgyDRjAA6LcM7VyXs6xn9Dlowq6Osq23MaU7NmvkdPHt2tVRBm1Z/wtV
-	 gjlYgIvEDMa+KHZmfJ1dzd2fKFtvwi5nDVgEhfwFHbaHilDuZQX5XGA5MpNtkGOdk7
-	 RK12rAVIPAn+5XFbsyNJVSGf/D3M7x3IQKXE240M/wYwKo+rP9YieyGaRaqYXP85hf
-	 V+P0h21CE9VPYiSw6a2SOZ3tpnjGCQi2KGoqTjmW99NYaGUAQak6ykf9XD9W+E460d
-	 YTcMnj3JO8DDg==
+	bh=3mMj2/bpTFkS1JYhOQCrsyMcgLS2GZpq30GUkfbjkfo=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=UR+EQDcI5GIc4YOZwdFEbVBmIdzDu91RkTp+wn/tRu8GEqmfNKQL5VXmHa6GxNWBv
+	 mxioVClgGtoUyubs7lMFfC7ZHmei+lj+6tgsX3R8Ik10bq03QRpS5owSw0xKp3LS1a
+	 Xvbggl3Xy0a18pOYmW0RBoB6yfTJCMoHz/DLdgiKpyt6MVI8n8C0JG9B6WChAyFpiM
+	 DIHZpJSnTJy638RA/amzPEInTjU/bQ9IPf/bshSS7/vYmWIZqENRcGuMH4ty166FLD
+	 hGmNDIHxnYagw9j4d+T86qYkoARfMBmgDzbnlDLcYohVPUMMRgHzY8jFnLXUAYig6W
+	 NzaeQU3PbKHgQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vMmsP-00000004plz-1ti0;
+	id 1vMmsP-00000004pm2-2140;
 	Sat, 22 Nov 2025 13:38:05 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 	"Jonathan Corbet" <corbet@lwn.net>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	"Randy Dunlap" <rdunlap@infradead.org>
-Subject: [PATCH v4 0/5] kernel-doc: add support for documenting vars
-Date: Sat, 22 Nov 2025 13:37:54 +0100
-Message-ID: <cover.1763814816.git.mchehab+huawei@kernel.org>
+	"Mauro Carvalho Chehab" <mchehab@kernel.org>,
+	"Randy Dunlap" <rdunlap@infradead.org>,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v4 1/5] kernel-doc: add support for handling global variables
+Date: Sat, 22 Nov 2025 13:37:55 +0100
+Message-ID: <c08067e2bfe253e5969076c0fc76dc9cfd7f3d3b.1763814816.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <cover.1763814816.git.mchehab+huawei@kernel.org>
+References: <cover.1763814816.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -64,43 +67,185 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Hi Jon,
+Specially on kAPI, sometimes it is desirable to be able to
+describe global variables that are part of kAPI.
 
-As suggested and discussed with Randy, this small series add support
-for documenting variables using kernel-doc.
+Documenting vars with Sphinx is simple, as we don't need
+to parse a data struct. All we need is the variable
+declaration and use natice C domain ::c:var: to format it
+for us.
 
-- patch 1: add support for the new feature;
-- patch 2: extends to support DEFINE_*;
-- patch 3: document two media vars;
-- patch 4: fix an issue on kernel-doc.rst markups and automarkup;
-- patch 5: document it.
+Add support for it.
 
-On this version, I'm using "c:macro" to describe variables, as it
-avoids Sphinx C domain to try parse the variable. This makes it more
-flexible and easier to maintain in long term.
-
+Link: https://lore.kernel.org/linux-doc/491c3022-cef8-4860-a945-c9c4a3b63c09@infradead.org/T/#m947c25d95cb1d96a394410ab1131dc8e9e5013f1
+Suggested-by: Randy Dunlap <rdunlap@infradead.org>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
+ tools/lib/python/kdoc/kdoc_output.py | 47 +++++++++++++++++++++++
+ tools/lib/python/kdoc/kdoc_parser.py | 56 +++++++++++++++++++++++++++-
+ 2 files changed, 102 insertions(+), 1 deletion(-)
 
-v4: 
-- document the new markup;
-- fix an issue on kernel-doc.rst due to automarkup;
-- add support for DEFINE_* macros
-
-Mauro Carvalho Chehab (5):
-  kernel-doc: add support for handling global variables
-  kernel-doc: add support to handle DEFINE_ variables
-  docs: media: v4l2-ioctl.h: document two global variables
-  docs: kernel-doc.rst: don't let automarkup mangle with consts
-  docs: kernel-doc.rst: document the new "var" kernel-doc markup
-
- Documentation/doc-guide/kernel-doc.rst | 48 +++++++++++------
- include/media/v4l2-ioctl.h             | 15 ++++++
- tools/lib/python/kdoc/kdoc_output.py   | 46 ++++++++++++++++
- tools/lib/python/kdoc/kdoc_parser.py   | 73 +++++++++++++++++++++++++-
- 4 files changed, 166 insertions(+), 16 deletions(-)
-
+diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
+index 14378953301b..8d811c2afaab 100644
+--- a/tools/lib/python/kdoc/kdoc_output.py
++++ b/tools/lib/python/kdoc/kdoc_output.py
+@@ -199,6 +199,10 @@ class OutputFormat:
+             self.out_enum(fname, name, args)
+             return self.data
+ 
++        if dtype == "var":
++            self.out_var(fname, name, args)
++            return self.data
++
+         if dtype == "typedef":
+             self.out_typedef(fname, name, args)
+             return self.data
+@@ -227,6 +231,9 @@ class OutputFormat:
+     def out_enum(self, fname, name, args):
+         """Outputs an enum"""
+ 
++    def out_var(self, fname, name, args):
++        """Outputs a variable"""
++
+     def out_typedef(self, fname, name, args):
+         """Outputs a typedef"""
+ 
+@@ -472,6 +479,25 @@ class RestFormat(OutputFormat):
+         self.lineprefix = oldprefix
+         self.out_section(args)
+ 
++    def out_var(self, fname, name, args):
++        oldprefix = self.lineprefix
++        ln = args.declaration_start_line
++        full_proto = args.other_stuff["full_proto"]
++
++        self.lineprefix = "  "
++
++        self.data += f"\n\n.. c:macro:: {name}\n\n{self.lineprefix}{full_proto}\n\n"
++
++        self.print_lineno(ln)
++        self.output_highlight(args.get('purpose', ''))
++        self.data += "\n"
++
++        if args.other_stuff["default_val"]:
++            self.data += f'{self.lineprefix}**Initialization**\n\n'
++            self.output_highlight(f'default: ``{args.other_stuff["default_val"]}``')
++
++        self.out_section(args)
++
+     def out_typedef(self, fname, name, args):
+ 
+         oldprefix = self.lineprefix
+@@ -773,6 +799,27 @@ class ManFormat(OutputFormat):
+             self.data += f'.SH "{section}"' + "\n"
+             self.output_highlight(text)
+ 
++    def out_var(self, fname, name, args):
++        out_name = self.arg_name(args, name)
++        prototype = args.other_stuff["var_type"]
++        full_proto = args.other_stuff["full_proto"]
++
++        self.data += f'.TH "{self.modulename}" 9 "{out_name}" "{self.man_date}" "API Manual" LINUX' + "\n"
++
++        self.data += ".SH NAME\n"
++        self.data += f"{prototype} \\- {args['purpose']}\n"
++
++        self.data += ".SH SYNOPSIS\n"
++        self.data += f"{full_proto}\n"
++
++        if args.other_stuff["default_val"]:
++            self.data += f'.SH "Initialization"' + "\n"
++            self.output_highlight(f'default: {args.other_stuff["default_val"]}')
++
++        for section, text in args.sections.items():
++            self.data += f'.SH "{section}"' + "\n"
++            self.output_highlight(text)
++
+     def out_typedef(self, fname, name, args):
+         module = self.modulename
+         purpose = args.get('purpose')
+diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
+index c0cc714d4d6f..edb0fb5330e0 100644
+--- a/tools/lib/python/kdoc/kdoc_parser.py
++++ b/tools/lib/python/kdoc/kdoc_parser.py
+@@ -64,7 +64,7 @@ type_param = KernRe(r"@(\w*((\.\w+)|(->\w+))*(\.\.\.)?)", cache=False)
+ # Tests for the beginning of a kerneldoc block in its various forms.
+ #
+ doc_block = doc_com + KernRe(r'DOC:\s*(.*)?', cache=False)
+-doc_begin_data = KernRe(r"^\s*\*?\s*(struct|union|enum|typedef)\b\s*(\w*)", cache = False)
++doc_begin_data = KernRe(r"^\s*\*?\s*(struct|union|enum|typedef|var)\b\s*(\w*)", cache = False)
+ doc_begin_func = KernRe(str(doc_com) +			# initial " * '
+                         r"(?:\w+\s*\*\s*)?" + 		# type (not captured)
+                         r'(?:define\s+)?' + 		# possible "define" (not captured)
+@@ -924,6 +924,58 @@ class KernelDoc:
+         self.output_declaration('enum', declaration_name,
+                                 purpose=self.entry.declaration_purpose)
+ 
++    def dump_var(self, ln, proto):
++        """
++        Store variables that are part of kAPI.
++        """
++        VAR_ATTRIBS = [
++            "extern",
++        ]
++        OPTIONAL_VAR_ATTR = "^(?:" + "|".join(VAR_ATTRIBS) + ")?"
++
++        sub_prefixes = [
++            (KernRe(r"__read_mostly"), ""),
++            (KernRe(r"__ro_after_init"), ""),
++            (KernRe(r"(?://.*)$"), ""),
++            (KernRe(r"(?:/\*.*\*/)"), ""),
++            (KernRe(r";$"), ""),
++            (KernRe(r"=.*"), ""),
++        ]
++
++        #
++        # Store the full prototype before modifying it
++        #
++        full_proto = proto
++
++        #
++        # Drop comments and macros to have a pure C prototype
++        #
++        for search, sub in sub_prefixes:
++            proto = search.sub(sub, proto)
++
++        proto = proto.rstrip()
++
++        #
++        # Variable name is at the end of the declaration
++        #
++
++        r= KernRe(OPTIONAL_VAR_ATTR + r"\w.*\s+(?:\*+)?([\w_]+)\s*[\d\]\[]*\s*(=.*)?")
++        if not r.match(proto):
++           self.emit_msg(ln,f"{proto}: can't parse variable")
++           return
++
++        var_type = r.group(0)
++        declaration_name = r.group(1)
++        default_val = r.group(2)
++        if default_val:
++            default_val = default_val.lstrip("=").strip()
++
++        self.output_declaration("var", declaration_name,
++                                full_proto=full_proto,
++                                var_type=var_type,
++                                default_val=default_val,
++                                purpose=self.entry.declaration_purpose)
++
+     def dump_declaration(self, ln, prototype):
+         """
+         Stores a data declaration inside self.entries array.
+@@ -935,6 +987,8 @@ class KernelDoc:
+             self.dump_typedef(ln, prototype)
+         elif self.entry.decl_type in ["union", "struct"]:
+             self.dump_struct(ln, prototype)
++        elif self.entry.decl_type == "var":
++            self.dump_var(ln, prototype)
+         else:
+             # This would be a bug
+             self.emit_message(ln, f'Unknown declaration type: {self.entry.decl_type}')
 -- 
 2.51.1
-
 
 
