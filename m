@@ -1,297 +1,137 @@
-Return-Path: <linux-doc+bounces-67688-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67691-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A862C7C06A
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 01:49:42 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1569FC7C1A7
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 02:43:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 2B9D04E07F1
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 00:49:41 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EF2D93A6058
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Nov 2025 01:43:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AD942224240;
-	Sat, 22 Nov 2025 00:49:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 18A542C15BC;
+	Sat, 22 Nov 2025 01:43:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="Up+OkTo+"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XBkGrH6X"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E204186294;
-	Sat, 22 Nov 2025 00:49:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD3232C11C9;
+	Sat, 22 Nov 2025 01:43:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763772578; cv=none; b=f/I9WGEOcaLsQje8hSCjnPovnhP6OJ/gp3M98gcaSD+wwcF9sSjKsQzXVpBRa09f45riVhdTsHF5b3M/6ilNdRT9VBTTAFQuU1DJHhzEZKcQ1P1hoqU2sSeNkmu5RJBEgcoP8A3RqOXN5hAPbAKxeta7mAeoaVrL2/K9IrI7EWs=
+	t=1763775786; cv=none; b=FRgUXg0ZWWqyxS7kAaMySijqOTUs4PI6g/crQ2OWht7nFONksbQtIJveWbykDsGCBeGDpMQ9hIjcL/CQA5UnFSg8aq0s6rNw/ucAgOlxhrH78T3I7r5eRJzpeMO9z8+j/aACxMdf8Ol8e59dyp0yIql0yycZm9dq1jjC2NJ8uuk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763772578; c=relaxed/simple;
-	bh=xdPTRstpZiNdC6F5LAofVXhLuMZp09YFbRvr/iYOMo4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RW+7xP/MDYFwqhu09W+x8IJkVPzMNz3nPbwQMiN7k99JWZqvN8y5KFPYo9ffWYEnqkyFUrcNL8dtPI941eNqmACOdFT/OU75gVtCN9cXNDefHebbGn8o27JQu1aK/YqhVW6cqywm7HVrgnwfZzkq54yfRRErI5tgfLQk8xeRrlk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=Up+OkTo+; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=0T7Z0U2cyAkgLHUqKlE8zMZnmB56oi5XByNJfhjEjyM=; b=Up+OkTo+TjoRW3MYpLxr9IX8s7
-	ltLKcZffvtVngI1jJ7cx93M/7+KLmIueZLiQDYWaJI2us+YfwdjOfX19HGekOPWCXaaAPYhF7vOFm
-	X8USUKDLj1lW7iIqTxpsX7mfQW3/kbbIBTwigRUX20Pmh/LXbRrFDNGhTV/ZVzFQcRO5/O6rkyTDt
-	YVtD6f0fs/FaM/UeDb+OkHvl1PyNWA1Dv6in29yWQ9rgs9gT5ngiyzKeM+HjoL8n5ZzNIPxQsyYyG
-	g0BJuIF/oXJ8twneo5g1R5lbaNAMhyBZEkcr8/UMSeNuBVZiw+fxEecpC0ELcBNNzro7tuYmDy7NJ
-	4IjSXz8A==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vMbog-000000096ms-1sqZ;
-	Sat, 22 Nov 2025 00:49:30 +0000
-Message-ID: <bb1ae2da-99d4-4d56-8886-06820f923aad@infradead.org>
-Date: Fri, 21 Nov 2025 16:49:29 -0800
+	s=arc-20240116; t=1763775786; c=relaxed/simple;
+	bh=b0N2+6axFL60SmL5qq5mSm+WP+EAAIDcygJAHAmKD64=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=pDSVU57Jndq3s4vbYZm7v2ZkMBoDr8ipubuXjX68S5a9Bautx1f/OMNDCh7tsOrOfSGRN14fcJBuO8FmlAIhgjVohrhNko0ytBuaY32QzJka0kSIajPD1+b/NIRfPh9ZbuG9sHi+GYPAvZE/EcLuTO1TRcE4bNTNck/iKlUC4Rg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XBkGrH6X; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C603C4AF0D;
+	Sat, 22 Nov 2025 01:43:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1763775785;
+	bh=b0N2+6axFL60SmL5qq5mSm+WP+EAAIDcygJAHAmKD64=;
+	h=From:To:Cc:Subject:Date:From;
+	b=XBkGrH6XQV0rAAPjG07QkiTblZA7Dosnd9q4wS/SttoChQxGFDGEtw3c/+uSX9ZuY
+	 Zx2mkX5+8Vvd3F+p4coxqRU6MmDRdnFZDnhD0K/ihwUfthtQp1OB+lkHvPlOyJiblo
+	 qDiXXQYy33Qn/1cpWVT3qVw/hVt97FJ8DzLC7F4wYtNXuieC8+sRJeu1hTlocj9SXc
+	 8B0tPAW1xtUp1DmjAiTPz+VwljWcYJ1RgJBrMY0uJ63/17zj3HYzaGGTYLhMwVIt4r
+	 c16bOa/gcSLIh7SSrtuBBAw4dQJX11bYYPtbqk3gFpMeDvjQFVN8tOEBQZgIN2D0Pa
+	 DOcl4A+6IXPTg==
+From: Kees Cook <kees@kernel.org>
+To: Vlastimil Babka <vbabka@suse.cz>
+Cc: Kees Cook <kees@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	Christoph Lameter <cl@linux.com>,
+	Marco Elver <elver@google.com>,
+	Vegard Nossum <vegard.nossum@oracle.com>,
+	Pekka Enberg <penberg@kernel.org>,
+	David Rientjes <rientjes@google.com>,
+	Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Roman Gushchin <roman.gushchin@linux.dev>,
+	Harry Yoo <harry.yoo@oracle.com>,
+	Bill Wendling <morbo@google.com>,
+	Justin Stitt <justinstitt@google.com>,
+	Jann Horn <jannh@google.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Sasha Levin <sashal@kernel.org>,
+	linux-mm@kvack.org,
+	Nathan Chancellor <nathan@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Yafang Shao <laoar.shao@gmail.com>,
+	Tony Ambardar <tony.ambardar@gmail.com>,
+	Alexander Lobakin <aleksander.lobakin@intel.com>,
+	Jan Hendrik Farr <kernel@jfarr.cc>,
+	Alexander Potapenko <glider@google.com>,
+	linux-kernel@vger.kernel.org,
+	linux-hardening@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	llvm@lists.linux.dev
+Subject: [PATCH v5 0/4] slab: Introduce kmalloc_obj() and family
+Date: Fri, 21 Nov 2025 17:42:56 -0800
+Message-Id: <20251122014258.do.018-kees@kernel.org>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] Documentation/driver-api/cxl: ACPI PRM Address
- Translation Support and AMD Zen5 enablement
-To: Robert Richter <rrichter@amd.com>,
- Alison Schofield <alison.schofield@intel.com>,
- Vishal Verma <vishal.l.verma@intel.com>, Ira Weiny <ira.weiny@intel.com>,
- Dan Williams <dan.j.williams@intel.com>,
- Jonathan Cameron <jonathan.cameron@huawei.com>,
- Dave Jiang <dave.jiang@intel.com>, Davidlohr Bueso <dave@stgolabs.net>,
- Jonathan Corbet <corbet@lwn.net>
-Cc: linux-cxl@vger.kernel.org, linux-kernel@vger.kernel.org,
- Gregory Price <gourry@gourry.net>,
- "Fabio M. De Francesco" <fabio.m.de.francesco@linux.intel.com>,
- Terry Bowman <terry.bowman@amd.com>, Joshua Hahn <joshua.hahnjy@gmail.com>,
- linux-doc@vger.kernel.org
-References: <20251121121655.338491-1-rrichter@amd.com>
- <20251121121655.338491-2-rrichter@amd.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20251121121655.338491-2-rrichter@amd.com>
-Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1730; i=kees@kernel.org; h=from:subject:message-id; bh=b0N2+6axFL60SmL5qq5mSm+WP+EAAIDcygJAHAmKD64=; b=owGbwMvMwCVmps19z/KJym7G02pJDJmKoko3Vx3sM6x9fsUtUvjBdZOr2T63v3zR+eRSkRXIv f5jmfftjlIWBjEuBlkxRZYgO/c4F4+37eHucxVh5rAygQxh4OIUgIkYKjAyTHHeOCn7oMaEkqul welvZ0wv6WtTfMs5fc0ubUupSt5lxxgZZh0OOdHlxfcnVN1s53SZWb4/bcREDX+7xZ43SV1a+cq TDwA=
+X-Developer-Key: i=kees@kernel.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
+Hi,
 
+Here's a refresh and update on the kmalloc_obj() API proposal for
+discussion here and at LPC[1]. Please see patch 2 for the bulk of the
+details. And note that this is obviously not v6.19 material! :)
 
-On 11/21/25 4:16 AM, Robert Richter wrote:
-> This adds a convetion document for the following patch series:
-> 
+The tree-wide patch for conversions is here:
+https://git.kernel.org/pub/scm/linux/kernel/git/kees/linux.git/commit/?h=dev/v6.18-rc6/alloc_obj/v5&id=f79ee96ad6a3cafdb274fe15d3ae067724e72327
 
-              convention
+Thanks!
 
->  [v7,00/11] cxl: ACPI PRM Address Translation Support and AMD Zen5 enablement
->  https://patchwork.kernel.org/project/cxl/cover/20251114213931.30754-1-rrichter@amd.com/
-> 
-> Signed-off-by: Robert Richter <rrichter@amd.com>
-> ---
->  Documentation/driver-api/cxl/conventions.rst  |   1 +
->  .../driver-api/cxl/conventions/cxl-atl.rst    | 175 ++++++++++++++++++
->  2 files changed, 176 insertions(+)
->  create mode 100644 Documentation/driver-api/cxl/conventions/cxl-atl.rst
-> 
+-Kees
 
+[1] https://lpc.events/event/19/contributions/2136/
 
-> diff --git a/Documentation/driver-api/cxl/conventions/cxl-atl.rst b/Documentation/driver-api/cxl/conventions/cxl-atl.rst
-> new file mode 100644
-> index 000000000000..9c14856e1782
-> --- /dev/null
-> +++ b/Documentation/driver-api/cxl/conventions/cxl-atl.rst
-> @@ -0,0 +1,175 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: <isonum.txt>
-> +
-> +ACPI PRM CXL Address Translation
-> +================================
-> +
-> +Document
-> +--------
-> +
-> +CXL Revision 3.2, Version 1.0
-> +
-> +License
-> +-------
-> +
-> +SPDX-License Identifier: CC-BY-4.0
-> +
-> +Creator/Contributors
-> +--------------------
-> +
-> +- Robert Richter, AMD
-> +
-> +Summary of the Change
-> +---------------------
-> +
-> +The CXL Fixed Memory Window Structure (CFMWS) describes zero or more
-> +Host Physical Address (HPA) windows that are associated with each CXL
-> +Host Bridge. The HPA ranges of an CFMWS may include addresses that are
+ v5:
+  - switch to using assignment with type as first argument (Linus)
+  - fix various comment, commit log, and kern-docs (Randy, Miguel)
+  - renamed flex_counter internal helpers with "__" prefix (Przemek)
+ v4: https://lore.kernel.org/lkml/20250315025852.it.568-kees@kernel.org/
+ v3: https://lore.kernel.org/lkml/20240822231324.make.666-kees@kernel.org/
+ v2: https://lore.kernel.org/lkml/20240807235433.work.317-kees@kernel.org/
+ v1: https://lore.kernel.org/lkml/20240719192744.work.264-kees@kernel.org/
 
-                               of a
+Kees Cook (4):
+  compiler_types: Introduce __flex_counter() and family
+  slab: Introduce kmalloc_obj() and family
+  checkpatch: Suggest kmalloc_obj family for sizeof allocations
+  coccinelle: Add kmalloc_objs conversion script
 
-> +currently assigned to CXL.mem devices, or an OS may assign ranges from
-> +an address window to a device.
-> +
-> +Host-managed Device Memory is Device-attached memory that is mapped to
-> +system coherent address space and accessible to the Host using
-> +standard write-back semantics. The managed address range is configured
-> +in the CXL HDM Decoder registers of the device. An HDM Decoder in a
-> +device is responsible for converting HPA into DPA by stripping off
-> +specific address bits.
-> +
-> +CXL devices and CXL bridges use the same HPA space. It is common
-> +across all components that belong to the same host domain. The view of
-> +the address region must be consistent on the CXL.mem path between the
-> +Host and the Device.
-> +
-> +This is described in the current CXL specification (Table 1-1, 3.3.1,
-> +8.2.4.20, 9.13.1, 9.18.1.3). [#cxl-spec-3.2]_
-> +
-> +Depending on the interconnect architecture of the platform, components
-> +attached to a host may not share the same host physical address space.
-> +Those platforms need address translation to convert an HPA between the
-> +host and the attached component, such as a CXL device. The translation
-> +mechanism is host-specific and implementation dependent.
-> +
-> +E.g., x86 AMD platforms use a Data Fabric that manages access to
-> +physical memory. Devices have an own memory space and can be
-
-                            have their own
-?
-
-> +configured to use 'Normalized addresses' different to System Physical
-> +Addresses (SPA). Address translation is needed then. Details are
-> +described also under x86 AMD
-> +Documentation/admin-guide/RAS/address-translation.rst.
-> +
-> +Those AMD platforms provide PRM handlers in firmware to perform
-> +various types of address translation, including for CXL endpoints.
-> +AMD Zen5 systems implement the ACPI PRM CXL Address Translation
-> +firmware call. The ACPI PRM handler has a specific GUID to uniquely
-> +identify platforms with support of Normalized addressing. This is
-> +documented in the ACPI v6.5 Porting Guide, Address Translation - CXL
-> +DPA to System Physical Address.  [#amd-ppr-58088]_
-> +
-> +When in Normalized address mode, HDM decoder address ranges must be
-> +configured and handled differently. Hardware addresses used in the HDM
-> +decoder configurations of an endpoint are not SPA and need to be
-> +translated from the endpoint's to its CXL host bridge's address range.
-> +This is esp. important to find an endpoint's associated CXL Host
-
-           especially
-
-> +Bridge and HPA window described in the CFMWS. Also, the interleave
-> +decoding is done by the Data Fabric and the endpoint does not perform
-> +decoding when converting HPA to DPA. Instead, interleaving is switched
-> +off for the endpoint (1 way). Finally, address translation might also
-> +be needed to inspect the Endpoint's hardware addresses, such as during
-> +profiling, tracing or error handling.
-> +
-> +For example, with Normalized addressing the HDM decoders could look as
-> +following:
-> +
-> +.. code-block:: none
-> +
-> + /sys/bus/cxl/devices/endpoint5/decoder5.0/interleave_granularity:256
-> + /sys/bus/cxl/devices/endpoint5/decoder5.0/interleave_ways:1
-> + /sys/bus/cxl/devices/endpoint5/decoder5.0/size:0x2000000000
-> + /sys/bus/cxl/devices/endpoint5/decoder5.0/start:0x0
-> + /sys/bus/cxl/devices/endpoint8/decoder8.0/interleave_granularity:256
-> + /sys/bus/cxl/devices/endpoint8/decoder8.0/interleave_ways:1
-> + /sys/bus/cxl/devices/endpoint8/decoder8.0/size:0x2000000000
-> + /sys/bus/cxl/devices/endpoint8/decoder8.0/start:0x0
-> + /sys/bus/cxl/devices/endpoint11/decoder11.0/interleave_granularity:256
-> + /sys/bus/cxl/devices/endpoint11/decoder11.0/interleave_ways:1
-> + /sys/bus/cxl/devices/endpoint11/decoder11.0/size:0x2000000000
-> + /sys/bus/cxl/devices/endpoint11/decoder11.0/start:0x0
-> + /sys/bus/cxl/devices/endpoint13/decoder13.0/interleave_granularity:256
-> + /sys/bus/cxl/devices/endpoint13/decoder13.0/interleave_ways:1
-> + /sys/bus/cxl/devices/endpoint13/decoder13.0/size:0x2000000000
-> + /sys/bus/cxl/devices/endpoint13/decoder13.0/start:0x0
-> +
-> +Note the endpoint interleaving configurations with a direct mapping
-> +(1-way).
-> +
-> +With PRM calls, the kernel can determine the following mappings:
-> +
-> +.. code-block:: none
-> +
-> + cxl decoder5.0: address mapping found for 0000:e2:00.0 (hpa -> spa):
-> +   0x0+0x2000000000 -> 0x850000000+0x8000000000 ways:4 granularity:256
-> + cxl decoder8.0: address mapping found for 0000:e3:00.0 (hpa -> spa):
-> +   0x0+0x2000000000 -> 0x850000000+0x8000000000 ways:4 granularity:256
-> + cxl decoder11.0: address mapping found for 0000:e4:00.0 (hpa -> spa):
-> +   0x0+0x2000000000 -> 0x850000000+0x8000000000 ways:4 granularity:256
-> + cxl decoder13.0: address mapping found for 0000:e1:00.0 (hpa -> spa):
-> +   0x0+0x2000000000 -> 0x850000000+0x8000000000 ways:4 granularity:256
-> +
-> +The corresponding CXL host bridge (HDM) decoders and root decoder
-> +(CFMWS) show and match with the calculated endpoint mappings:
-> +
-> +.. code-block:: none
-> +
-> + /sys/bus/cxl/devices/port1/decoder1.0/interleave_granularity:256
-> + /sys/bus/cxl/devices/port1/decoder1.0/interleave_ways:4
-> + /sys/bus/cxl/devices/port1/decoder1.0/size:0x8000000000
-> + /sys/bus/cxl/devices/port1/decoder1.0/start:0x850000000
-> + /sys/bus/cxl/devices/port1/decoder1.0/target_list:0,1,2,3
-> + /sys/bus/cxl/devices/port1/decoder1.0/target_type:expander
-> + /sys/bus/cxl/devices/root0/decoder0.0/interleave_granularity:256
-> + /sys/bus/cxl/devices/root0/decoder0.0/interleave_ways:1
-> + /sys/bus/cxl/devices/root0/decoder0.0/size:0x8000000000
-> + /sys/bus/cxl/devices/root0/decoder0.0/start:0x850000000
-> + /sys/bus/cxl/devices/root0/decoder0.0/target_list:7
-> +
-> +The following changes of the specification are needed:
-> +
-> +* Allow a CXL device to be in a different HPA space other than the
-> +  host's space.
-> +
-> +* The platform can use implementation-specific address translation
-> +  when crossing memory domains on the CXL.mem path between the Host
-> +  and the Device.
-> +
-> +* The kernel (OSPM) determines Endpoint SPA range and interleaving
-> +  configuration using platform specific address translation methods.
-
-                         platform-specific
-
-> +
-> +Benefits of the Change
-> +----------------------
-> +
-> +Without the change, the OSPM may not determine the memory region and
-> +Root Decoder of an Endpoint and its corresponding HDM decoder. Region
-> +creation would fail. Platforms with a different interconnect
-> +architecture would fail to setup and use CXL.
-> +
-> +References
-> +----------
-> +
-> +.. [#cxl-spec-3.2] Compute Express Link Specification, Revision 3.2, Version 1.0,
-> +   https://www.computeexpresslink.org/
-> +
-> +.. [#amd-ppr-58088] AMD Family 1Ah Models 00h–0Fh and Models 10h–1Fh,
-> +   ACPI v6.5 Porting Guide, Publication # 58088,
-> +   https://www.amd.com/en/search/documentation/hub.html
-> +
-> +Detailed Description of the Change
-> +----------------------------------
-> +
-> +Add the following paragraph in 8.2.4.20 CXL HDM Decoder Capability
-> +Structure of the specification [#cxl-spec-3.2]_ to the end:
-> +
-> +"A device may use a different HPA space that is not common to other
-> +components of the host domain. The platform is responsible for address
-> +translation when crossing HPA spaces. The OSPM must determine the
-> +interleaving configuration and perform address translation to HPA
-> +ranges of the HDM decoders as needed. The translation mechanism is
-> +host-specific and implementation dependent."
+ scripts/checkpatch.pl                     |  39 ++++-
+ scripts/coccinelle/api/kmalloc_objs.cocci | 168 +++++++++++++++++++++
+ Documentation/process/deprecated.rst      |  42 ++++++
+ include/linux/compiler_types.h            |  31 ++++
+ include/linux/overflow.h                  |  40 +++++
+ include/linux/slab.h                      | 172 ++++++++++++++++++++++
+ 6 files changed, 486 insertions(+), 6 deletions(-)
+ create mode 100644 scripts/coccinelle/api/kmalloc_objs.cocci
 
 -- 
-~Randy
+2.34.1
 
 
