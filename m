@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67825-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67823-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id E404AC7E0B5
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:31 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 96FC3C7E0B0
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 5589D4E323A
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:25 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 361574E3191
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DAC454A35;
-	Sun, 23 Nov 2025 11:56:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A688B23F405;
+	Sun, 23 Nov 2025 11:56:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="rIbn3W3t"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="GiadtJpJ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m3274.qiye.163.com (mail-m3274.qiye.163.com [220.197.32.74])
+Received: from mail-m1973179.qiye.163.com (mail-m1973179.qiye.163.com [220.197.31.79])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3316B2C0262
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.74
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 408742D47E8
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.79
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763898983; cv=none; b=kXKAfv7F8EYuYCONGnwx8XzAdEpT9yTz7IrVIkNTJoKPwvvhojnSizmxjlCI7mrEd0yjcBs6XSKtHq3SufkL8q3jpxDsxFtet0vFb0t7hSWBw3xJf22mKup9p7YdcYCjWfGAFJyl8/1GDIHYyfW9Y9n+se/cQkdyi+ir6e7OfAY=
+	t=1763898981; cv=none; b=jLgzKXqlULEETbydmH8znuqwjwQmGgf4HvbsQWUswM69NQ4gAq6PxRnkxWacQhkqnXVyMvPPa8ZdbgCaR8dIAWatTtptChn1zu1s56pPDtAzzbG+csOASjmhpkKdCGDjK2pfT6K5Bqjn25HWDzM2f/Lsc4WKVEVuXnJBE3z0fEo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763898983; c=relaxed/simple;
-	bh=+RhhMdIMMXvdPLT/yFSBcjTZQevYZqTQuxnvdK8ZP8Q=;
+	s=arc-20240116; t=1763898981; c=relaxed/simple;
+	bh=o9tEpGCd4osP+/xFklgI7j3IkbRuwbs7qwMuT+z8aIE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=rDUwN97vvEvDsdzq/zimLDvFFM3NSt7oLbwRggRlicI6ejip4dCM1PG8c1a7UO9DAPnaqxHc7QxJyjeb2ZHKzhh+4KFIY+0Y1qcQVVYodBO7cSNC1VJ8s3QOLNsdL8/p8KTP9HZncxt+RLgxBkOshmtuynrNIY79jfTm8T3T5ag=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=rIbn3W3t; arc=none smtp.client-ip=220.197.32.74
+	 MIME-Version:Content-Type; b=KcirKhRiFe/1OUTXZ+d29gzujk46YGNInm8xhPtUoAo60BbGPx+Pc+nhYefBYlsacc8OcRtfVkcUux5iwccXxllLujAUW9QoF76yhp/W/LhnetlRa0CkSBobO59u20oVWNBQstRNqlZlrPsjkC0FONKxvkgZsCw2O9cjM33Hu0Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=GiadtJpJ; arc=none smtp.client-ip=220.197.31.79
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a902910c;
-	Sun, 23 Nov 2025 19:56:12 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a902910d;
+	Sun, 23 Nov 2025 19:56:13 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 22/25] docs/zh_CN: Add usbmon.rst translation
-Date: Sun, 23 Nov 2025 19:56:20 +0800
-Message-ID: <4cde3f5a488136521b8bfe0603dccd6285c9b6df.1763897036.git.baikefan@leap-io-kernel.com>
+Subject: [PATCH v2 23/25] docs/zh_CN: Add usb-serial.rst translation
+Date: Sun, 23 Nov 2025 19:56:21 +0800
+Message-ID: <5120e3b510313308cedee4dc696aba69b74433df.1763897036.git.baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1763897036.git.baikefan@leap-io-kernel.com>
 References: <cover.1763897036.git.baikefan@leap-io-kernel.com>
@@ -54,38 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab0925a4009d5kunm2b5c8c0429ade2
+X-HM-Tid: 0a9ab0925d6f09d5kunm2b5c8c0429ade5
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCH0hJVhgeTR0aSEpNQkIdGVYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCGElJVh8eHxpOQ0NIHRlISVYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
 	VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=rIbn3W3tfwcB68d9TKDIrdqKJ12EhQeTGswsIuyJhph5Iw2MJjL8jmetBNb3eZJihnskwe/kkCn3N0lVrZ7ZdEAsg8gP/97gLMjqDinK2UFaYHv+Q4MFUmwVFtNiBp/qMmxKx6+IUgaPo+cwaRlM/wnrTsUCmMCe8tYbhaSsAvai6t4FRC07kcRfe9vYkv19iXXmty9seA8HIDXYY/RCsB44loa94G5LJX/ukgPmSyEasKD3JtwJmjQqv4Z91MIJ2JnuyWy0OBveICzrLoFYkj018a3TTZ47tQTQVKpI+gVOxTnetSBZ6gND938LcURnafhPJCFB0cUBxxvyxNqsbQ==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=XEBqyRbz6VtN70K5QieaozbcGA+n655it2WjqAfY1tg=;
+	b=GiadtJpJ6D0eIx56tYO5QBWf+L4zf1tzkoGxWzEMvXVSkqSxFlzfcPOF+1RMhytjgVeM3i8UEHANKMMf9Phox9CAWgk355lJlpL+A9mbGgBA8KQA0nzJRmEoNEPW2LwCpthJ0vmtdenEn/TmCYY4BwNFitPklwSD1T7GilHR64mcoaZcQUSGUAYexBKNQaMjcFDkg/de0qkpdIPhRpJ5Yu16fPfHMugUjBpTDnTTiuhddXSKieMZfGq7sxEAZMeC5yqhGuD16Ee/KF5LF4g0o9cdBS2oe3sUAkftjTLYbNZuMsC+sCw0uetAW+nP4iJ2m7WBNa6LhgRs63XE3XQ9QA==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=j2j1p7dBtLI+ysz22sSVWk6HKuUOeRnFMfWCUMg0R54=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/usbmon.rst into Chinese.
+Translate .../usb/usb-serial.rst into Chinese.
 
-Update the translation through commit 788183a6e8b0
-("docs: usb: fix literal block marker in usbmon verification example")
+Update the translation through commit 9e255e2b9afe
+("Documentation: drop optional BOMs")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/usbmon.rst         | 379 ++++++++++++++++++
- 1 file changed, 379 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/usbmon.rst
+ .../translations/zh_CN/usb/usb-serial.rst     | 451 ++++++++++++++++++
+ 1 file changed, 451 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/usb-serial.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/usbmon.rst b/Documentation/translations/zh_CN/usb/usbmon.rst
+diff --git a/Documentation/translations/zh_CN/usb/usb-serial.rst b/Documentation/translations/zh_CN/usb/usb-serial.rst
 new file mode 100644
-index 000000000000..a3ae68373e12
+index 000000000000..480032530e11
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/usbmon.rst
-@@ -0,0 +1,379 @@
++++ b/Documentation/translations/zh_CN/usb/usb-serial.rst
+@@ -0,0 +1,451 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/usbmon.rst
++:Original: Documentation/usb/usb-serial.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,373 +94,445 @@ index 000000000000..a3ae68373e12
 +
 +
 +
-+======
-+usbmon
-+======
++==========
++USB 串口
++==========
 +
 +简介
 +====
-+小写形式的"usbmon"指的是内核中的一个功能，用于收集USB总线上的I/O追踪信息。
-+这个功能类似于网络监控工具tcpdump(1)或Ethereal所使用的数据包套接字。
-+同样地，我们会使用像usbdump或USBMon（大写形式）这样的工具来检查usbmon
-+生成的原始追踪数据。
 +
-+usbmon报告的是各个外设驱动程序向主机控制器驱动程序（HCD）发出的请求。
-+因此，如果HCD本身有bug，那么usbmon报告的追踪信息可能无法精确对应实际的
-+总线事务。这种情况与tcpdump是完全一样的。
++USB 串口驱动目前支持多种 USB 转串口转换器产品，以及一些通过用户空间串口接口与设备通信的设备。
 +
-+目前实现了两种API：文本和二进制。二进制API通过/dev命名空间中的字符设备提供，
-+并且是一个ABI。文本API自内核2.6.35起废弃，但为了方便仍然可用。
++具体设备的信息请参阅下文各产品部分。
 +
-+如何使用usbmon收集原始文本追踪信息
-+=====================================================
 +
-+与数据包套接字不同，usbmon提供一种接口，可以输出文本格式的追踪信息。
-+这被用于两个目的：第一，在更完善的格式还没最终确定之前，它作为工具间通用的追踪交换格式；
-+第二，在没有工具可用时，人们也可以直接阅读这些信息。
++配置
++====
 +
-+要收集原始文本追踪信息，请按以下步骤进行操作。
++  当前驱动可以同时处理最多 256 个不同的串口接口。
 +
-+1. 准备
-+-------------
++  驱动使用的主设备号是 188，因此要使用该驱动，需要创建如下设备节点：::
 +
-+首先必须在你的内核配置中启用 debugfs，之后挂载 debugfs。
-+如果 usbmon 是作为模块构建的，那么还要加载 usbmon 模块。
-+如果 usbmon 已经编入内核，则无需加载 usbmon 模块。
++	mknod /dev/ttyUSB0 c 188 0
++	mknod /dev/ttyUSB1 c 188 1
++	mknod /dev/ttyUSB2 c 188 2
++	mknod /dev/ttyUSB3 c 188 3
++		.
++		.
++		.
++	mknod /dev/ttyUSB254 c 188 254
++	mknod /dev/ttyUSB255 c 188 255
 +
-+命令示例::
++  当设备连接并被驱动识别后，驱动会打印到系统日志，显示设备绑定到了哪个节点。
 +
-+    # mount -t debugfs none_debugs /sys/kernel/debug
-+    # modprobe usbmon
-+    #
 +
-+确认总线 socket 是否存在::
-+    # ls /sys/kernel/debug/usb/usbmon
-+    0s  0u  1s  1t  1u  2s  2t  2u  3s  3t  3u  4s  4t  4u
-+    #
++支持的具体设备
++===================
 +
-+现在，你可以选择使用 '0u'（用来捕获所有总线上的数据包），并跳到第#3步，
-+或者使用第#2步找到你的设备所在的总线。
-+这样可以过滤掉那些持续输出数据的烦人设备。
 +
++ConnectTech WhiteHEAT 四口转换器
++-------------------------------------------
 +
++  ConnectTech 提供了该设备的详细信息和测试用设备。
 +
-+2. 查找目标设备连接的是哪条总线
-+--------------------------------
++  该驱动由 Connect Tech Inc. 官方支持：
++  http://www.connecttech.com
 +
-+运行"cat /sys/kernel/debug/usb/devices"，找到对应设备的T行。
-+通常你可以通过vendor字符串来查找。如果你有许多类似设备，
-+可以拔掉其中一个设备，并比较前后两次
-+/sys/kernel/debug/usb/devices的输出。
-+T行会包含总线编号。
++  如有问题，请联系 Connect Tech 技术支持：support@connecttech.com
 +
-+示例::
 +
-+  T:  Bus=03 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=12  MxCh= 0
-+  D:  Ver= 1.10 Cls=00(>ifc ) Sub=00 Prot=00 MxPS= 8 #Cfgs=  1
-+  P:  Vendor=0557 ProdID=2004 Rev= 1.00
-+  S:  Manufacturer=ATEN
-+  S:  Product=UC100KM V2.00
++HandSpring Visor, Palm USB, 和 Clié USB驱动
++-------------------------------------------
 +
-+"Bus=03" 表示设备在总线3上。或者，你可以查看lsusb的输出，并从对应行得到总线编号。
++  该驱动适用于所有 HandSpring USB、Palm USB 及 Sony Clié USB 设备。
 +
-+示例：
-+Bus 003 Device 002: ID 0557:2004 ATEN UC100KM V2.00
++  设备尝试连接主机时，才会显示为有效 USB 设备。
++  此时设备会被正确枚举、分配端口，然后通信才可能进行。
++  设备移除或取消连接时，驱动会正确清理。
 +
++  注意：
++    要与设备通信，必须在尝试与设备交互前按下同步按钮。
++	这与现有的 pilot-xfer 等文档描述不同，但这是由于硬件原因的唯一方法。
 +
-+3. 启动 'cat'
++    设备连接后，如果系统中没有其他 USB-串口设备）进行通信，
++	通常通过第二个端口（通常是 /dev/ttyUSB1，。
++	系统日志会显示用于 HotSync 的端口，
++	“Generic”端口可用于其他通信，例如 PPP 链接。
 +
-+::
++    对于部分 Sony Clié 设备，必须使用 /dev/ttyUSB0，
++	尤其是 OS 版本 3.5 或升级过的设备。
++	系统日志会显示正确端口。
 +
-+    # cat /sys/kernel/debug/usb/usbmon/3u > /tmp/1.mon.out
++    如果按下同步按钮后系统日志没有输出，尝试先热复位，再冷复位。部分设备必须这样才能正常与 USB 通信。
 +
-+用于监听单条总线。
++    未编译进内核的设备可以通过模块参数指定，例如：
++     modprobe visor vendor=0x54c product=0x66
 +
-+如果要监听所有总线，则输入::
++    更多信息及邮件列表请访问：http://sourceforge.net/projects/usbvisor/
 +
-+    # cat /sys/kernel/debug/usb/usbmon/0u > /tmp/1.mon.out
++    如有问题，请联系 Greg Kroah-Hartman：greg@kroah.com
 +
-+此进程会一直读取，直到被终止。
-+因为输出通常会非常长，所以更推荐将输出重定向到某个位置。
++PocketPC PDA驱动
++----------------
 +
++  该驱动通过 USB 数据线或底座，用于连接 Compaq iPAQ、HP Jornada、Casio EM500
++  等运行 Windows CE 3.0 或 PocketPC 2002 的 PDA。
 +
-+4. 在USB总线上执行期望的操作
-+-----------------------------
++  支持 ActiveSync 的大多数设备开箱即用。
++  对于其他设备，可通过模块参数指定产品和厂商 ID，
++  例如： modprobe ipaq vendor=0x3f0 product=0x1125
 +
-+此处你需要执行一些会产生USB流量的动作，比如：插入U盘、拷贝文件、操作摄像头等。
++  驱动提供串口接口（通常为 /dev/ttyUSB0），可通过 PPP 建立 TCP/IP 链接与 PDA 通信，
++  进行文件传输、备份、邮件下载等。USB 的优势是速度快，可达 73~113 kB/s。
 +
++  使用 USB 连接还需要其他组件，详情见：http://synce.sourceforge.net
 +
-+5. 停止 cat
-+-----------
++  连接后，可在 PDA 上使用 ftpView、Pocket Outlook，
++  在 Linux 上使用 xcerdisp、synce 工具。
 +
-+这一步通常需要通过键盘中断（Control-C）来完成。
++  使用 Pocket IE 可参考：http://www.tekguru.co.uk/EM500/usbtonet.htm，Linux
++  可直接转发数据包，无需代理。
++  iPAQ 用户需在菜单关闭自动同步，然后启动 usbdial 建立连接。
 +
-+此时输出文件（本例中为 /tmp/1.mon.out）可以保存、通过电子邮件发送，
-+或使用文本编辑器查看。
-+如果使用最后一种方式，请确保文件不会大到编辑器无法打开。
++  若遇问题，可加载 usbserial 和 ipaq 模块并开启调试参数 debug=1，
++  检查系统日志；也可尝试软复位 PDA 后再连接。
 +
++  其他功能取决于 PDA。部分设备可进入 bootloader 模式，
++  通过 /dev/ttyUSB0 终端进行 USB Reflash。
++  此方法未测试，风险自负。
 +
-+原始文本数据格式
-+================
++  问题请联系 Ganesh Varadarajan：ganesh@veritas.com
 +
-+目前支持两种格式：原始格式（即1t格式）和 1u格式。
-+1t格式在内核2.6.21中就已经被废弃。
-+1u格式增加了一些新字段，如ISO帧描述符、interval等。
-+它生成的行稍微长一些，但在格式上是1t的严格超集。
 +
-+如果程序需要区分上述两种格式，可以查看address字段（见下）。
-+若包含两个冒号，则为1t格式，否则为1u。
++Keyspan PDA串口适配器
++------------------------------
 +
-+任何文本格式的数据由一系列事件组成，如URB提交、URB回调、提交错误等。
-+每个事件对应单独的一行文本，由使用空白符间隔的若干字段组成。
-+字段的数量与位置可能取决于事件类型，但以下字段对所有类型都通用：
-+
-+共有字段按照从左到右的顺序依次列出：
-+
-+- URB Tag。用于标识URB，通常是URB结构体在内核中的地址（以十六进制表示），
-+  但也可能是序号或其他合理的唯一字符串。
-+
-+- 时间戳（微秒）。十进制数字。精度取决于可用时钟，因此可能比1微秒更差。
-+
-+- 事件类型。表示事件的格式，而不是URB的类型。
-+  有效类型包括：S - 提交，C - 回调，E - 提交错误。
-+
-+- Address字段（以前称为pipe）。包含四个冒号分隔的字段：
-+  URB类型与方向，总线号，设备地址，端点号。
-+  类型与方向的编码如下：
-+
-+    == ==   =============================
-+    Ci Co   控制input/output
-+    Zi Zo   等时input/output
-+    Ii Io   中断input/output
-+    Bi Bo   批量input/output
-+    == ==   =============================
-+
-+  总线号、设备地址和端点号使用十进制，但可能有前导零。
-+
-+- URB状态字。这个字段可以是一个字母，也可以是由冒号分隔的几个数字：
-+  URB 状态、间隔（interval）、起始帧（start frame）以及错误计数（error count）。
-+  与地址字段不同，除了状态之外，其余所有字段都是可选的。
-+  interval仅在中断和等时URB中打印；
-+  起始帧仅在等时URB中打印；
-+  错误数量仅在等时回调事件中打印。
-+
-+  状态字段是一个十进制数字，有时为负数，对应URB的状态字段。
-+  对于提交（submission），这个字段没有实际意义，
-+  但是为了便于脚本解析，所以依然存在。
-+  当发生错误时，该字段包含错误码。
-+
-+  在提交控制数据包的情况下，该字段包含一个Setup Tag，而不是一组数字。
-+  判断是否存在Setup Tag很容易，因为它从来不是数字。
-+  因此，如果脚本在该字段中发现一组数字，
-+  它们会继续读取数据长度（等时URB除外）。
-+  如果发现的是其他内容，比如一个字母，
-+  那么脚本会在读取数据长度或等时描述符之前，会先读取Setup包。
-+
-+- Setup包由5个字段构成：bmRequestType, bRequest, wValue, wIndex, wLength。
-+  符合 USB 2.0 规范。如果Setup标签为's'，这些字段是安全可解码的。
-+  否则，Setup 数据包虽然存在，但未被捕获，其字段中会填充占位内容。
-+
-+- 等时传输帧描述符数量及其内容：
-+  如果一次同步传输事件包含一组描述符，首先打印URB中描述符的总数，
-+  然后依次打印每个描述符的一个字段，最多打印5个字段。
-+  每个字段由三个用冒号分隔的十进制数字组成，
-+  分别表示状态（status）、偏移（offset）和长度（length）。
-+  对于提交（submission），打印的是初始长度；
-+  对于回调（callback），打印的是实际长度。
++  单端口 DB-9 串口适配器，多用于 iMac PDA，固件为自制。
++  也适用于 Xircom/Entrega 单口适配器。
 +
-+- 数据长度：
-+  对于提交，表示请求的长度；对于回调，表示实际传输的长度。
++  当前状态：
 +
-+- 数据标签：
-+  即使数据长度非零，usbmon也可能不会捕获数据。仅当标签为'='时，才会有数据字段存在。
++   支持功能：
++     - 基本 I/O（可用 'cu' 测试）
++     - 串口阻塞写
++     - 波特率切换（最高 115200）
++     - 调制解调器控制引脚操作（TIOCM{GET,SET,BIS,BIC}）
 +
-+- 数据字段：
-+  按大端十六进制格式显示。
-+  注意，这些并非真正的机器字，而只是将字节流拆分为若干字，
-+  以便阅读。因此最后一个字可能包含1到4个字节。
-+  收集的数据长度是有限的，可能小于数据长度字段中报告的值。
-+  因为数据长度字段只统计实际接收到的字节，而数据字段包含整个传输缓冲区，
-+  所以，在等时输入（Zi）完成且缓冲区中接收到的数据稀疏的情况下，
-+  收集的数据长度可能大于数据长度字段的值。
++发送 break（时长可能不准确）
 +
++   不支持功能：
++     - 设备字符串（内核日志中记录）带有尾随的二进制垃圾
++     - 设备 ID 不正确，可能与其他 Keyspan 产品冲突
++     - 切换波特率时应刷新发送/接收缓冲区以避免字符混乱
 +
++   重要待办事项：
++     - 奇偶校验，7 位与 8 位字符，1 或 2 个停止位
++     - 硬件流控制
++     - 并非所有标准 USB 描述符都被处理：
++       Get_Status, Set_Feature, O_NONBLOCK, select()
 +
-+示例：
++  如有问题，请联系 Brian Warner：warner@lothar.com
 +
-+获取端口状态的输入控制传输::
 +
-+    d5ea89a0 3575914555 S Ci:1:001:0 s a3 00 0000 0003 0004 4 <
-+    d5ea89a0 3575914560 C Ci:1:001:0 0 4 = 01050000
++Keyspan USA-系列串口适配器
++-------------------------------------------
 +
-+向地址为5的存储设备发送31字节 Bulk 封装的 SCSI 命令 0x28（READ_10）的输出批量传输::
++  单、双及四端口适配器，使用 Keyspan 官方固件。
 +
-+    dd65f0e8 4128379752 S Bo:1:005:2 -115 31 = 55534243 ad000000 00800000 80010a28 20000000 20000040 00000000 000000
-+    dd65f0e8 4128379808 C Bo:1:005:2 0 31 >
++  支持设备：USA-18X、USA-28X、USA-19、USA-19W、USA-49W，测试良好。USA-28 尚未支持。
 +
-+原始二进制格式与API
-+============================
-+API的整体架构与上面提到的基本相同，
-+只是事件以二进制格式传输。
-+每个事件使用以下结构发送（名称为自定义，方便引用）::
++  更多信息： http://www.carnationsoftware.com/carnation/Keyspan.html
 +
++  问题请联系 Hugh Blemings：hugh@misc.nu
 +
-+  struct usbmon_packet {
-+	u64 id;			/*  0: URB ID - 从提交到回调 */
-+	unsigned char type;	/*  8: 与文本相同；可扩展 */
-+	unsigned char xfer_type; /*    ISO (0), 中断, 控制, 批量 (3) */
-+	unsigned char epnum;	/*     端点号和传输方向 */
-+	unsigned char devnum;	/*     设备地址 */
-+	u16 busnum;		/* 12: 总线号 */
-+	char flag_setup;	/* 14: 与文本相同 */
-+	char flag_data;		/* 15: 与文本相同；二进制零也可 */
-+	s64 ts_sec;		/* 16: gettimeofday */
-+	s32 ts_usec;		/* 24: gettimeofday */
-+	int status;		/* 28: */
-+	unsigned int length;	/* 32: 数据长度（提交或实际） */
-+	unsigned int len_cap;	/* 36: 实际传输长度 */
-+	union {			/* 40: */
-+		unsigned char setup[SETUP_LEN];	/* 仅用于控制 S类型 */
-+		struct iso_rec {		/* ISO专用 */
-+			int error_count;
-+			int numdesc;
-+		} iso;
-+	} s;
-+	int interval;		/* 48: 仅用于中断和ISO */
-+	int start_frame;	/* 52: ISO专用 */
-+	unsigned int xfer_flags; /* 56: URB的transfer_flags副本 */
-+	unsigned int ndesc;	/* 60: 实际ISO描述符数量 */
-+  };				/* 64 总长度 */
 +
-+可以使用read(2)，ioctl(2)或通过mmap访问缓冲区，从字符设备读取这些事件。
-+然而，出于兼容性原因，使用read(2)只返回前48字节。
++FTDI 单口串口驱动
++-----------------------------------------
 +
-+字符设备通常命名为/dev/usbmonN，其中N是USB总线号。
-+编号为零的设备 (/dev/usbmon0) 表示所有总线。
-+请注意，具体命名策略由Linux发行版设定。
++  支持设备：TripNav TN-200 USB GPS、Navis Engineering CH-4711 USB GPS
 +
-+如果手动创建/dev/usbmon0，确保它归root所有，并且权限为0600。
-+否则，非特权用户将能够监听键盘数据。
++  问题请联系 Bill Ryder。
 +
-+以下MON_IOC_MAGIC为0x92的ioctl可用：
 +
-+  MON_IOCQ_URB_LEN，定义为_IO(MON_IOC_MAGIC, 1)
++ZyXEL omni.net lcd plus ISDN TA
++-----------------------------------------------
 +
-+该调用返回下一个事件的数据长度。注意大多数事件不包含数据，
-+因此如果该调用返回零，并不意味着没有事件。
++  请将使用情况和问题报告给 azummo@towertech.it
 +
-+  MON_IOCG_STATS，定义为_IOR(MON_IOC_MAGIC, 3, struct mon_bin_stats)
 +
-+参数是指向以下结构的指针::
++Cypress M8 CY4601 系列串口驱动
++-----------------------------------------
 +
-+  struct mon_bin_stats {
-+	u32 queued;
-+	u32 dropped;
-+  };
++  该驱动在很大程度上由 Neil “koyama” Whelchel 开发。
++  自之前的版本以来，该驱动已得到改进，以支持动态串口设置并改善线路处理。
++  该驱动总体上是稳定的，并已在 SMP 机器（双 P2）上进行测试。
 +
-+成员queued表示当前缓冲区中排队的事件数量（不是自上次重置以来处理的事件数量）。
++    CY4601 系列支持的芯片组：
 +
-+成员dropped表示自上次调用MON_IOCG_STATS以来丢失的事件数量。
++		CY7C63723, CY7C63742, CY7C63743, CY7C64013
 +
-+  MON_IOCT_RING_SIZE，定义为_IO(MON_IOC_MAGIC, 4)
++    支持的设备：
 +
-+此调用设置缓冲区大小。参数为以字节为单位的缓冲区大小。
-+大小可能会向下取整到下一个块（或页）。
-+如果请求的大小超出该内核的 [未指定] 范围，则调用失败并返回-EINVAL。
++		- DeLorme 的 USB Earthmate GPS（SiRF Star II lp 架构）
++		- Cypress HID->COM RS232 适配器
 +
++		注意：
++			Cypress Semiconductor 声明与该 HID 转 COM 设备无任何关联。
 +
++     大多数使用 CY4601 系列芯片的设备都应该可以使用该驱动，
++	 只要它们遵循 CY4601 的 USB 串口规范。
 +
-+MON_IOCQ_RING_SIZE，定义为_IO(MON_IOC_MAGIC, 5)
++    技术说明：
 +
-+该调用返回缓冲区当前大小（以字节为单位）。
++        Earthmate 默认的初始设置是
++		4800 波特率、8 数据位、无校验、1 停止位（4800 8N1）……
++		驱动启动时会以此设置初始化。
++		usbserial 核心负责其余的 termios 配置，
++		并提供一些自定义的 termios 设置，
++		以保证输出格式正确且可解析。
 +
-+MON_IOCX_GET，定义为_IOW(MON_IOC_MAGIC, 6, struct mon_get_arg)
-+MON_IOCX_GETX，定义为_IOW(MON_IOC_MAGIC, 10, struct mon_get_arg)
++	设备可以通过发送 NMEA 命令进入 sirf 模式::
 +
-+如果内核缓冲区中没有事件时，这些调用会一直等待事件到达，然后返回第一个事件。
-+参数是指向以下结构的指针::
++		$PSRF100,<protocol>,<baud>,<databits>,<stopbits>,<parity>*CHECKSUM
++		$PSRF100,0,9600,8,1,0*0C
 +
-+  struct mon_get_arg {
-+	struct usbmon_packet *hdr;
-+	void *data;
-+	size_t alloc;		/* 数据长度可以为零 */
-+  };
++		之后只需将串口的termios设置改为与之匹配，即可开始通信。
 +
++	据我所知，它几乎支持所有在线文档中列出的 Sirf 命令（适用于固件版本 2.31），
++	但有一些消息 ID 未知。
 +
-+调用前，应填写hdr、data和alloc字段。
-+调用返回后，hdr指向的区域包含下一个事件的结构。
-+如果有数据，那么数据缓冲区包含数据。
-+该次调用会从内核缓冲区中移除该事件。
++	hid->com 适配器的最高波特率为 115200 bps。
++	请注意，该设备在提升线路电压方面存在问题，或者无法正确提升线路电压。
++	在使用 null modem 链接时不会有问题，
++	只要不要尝试将两个设备直接连接在一起而不改装适配器以提升线路电压。
 +
-+MON_IOCX_GET将48字节的数据复制到hdr区域，MON_IOCX_GETX会复制64字节。
++    该驱动支持 SMP（对称多处理器）环境。
++	在使用该驱动进行文件传输时，性能相对较低。
++	目前正在改进中，但我也愿意接受补丁。
++	这里使用 URB 队列或数据包缓冲区可能是一个可行的解决方案。
 +
-+ MON_IOCX_MFETCH，定义为_IOWR(MON_IOC_MAGIC, 7, struct mon_mfetch_arg)
++    如果你有任何问题、遇到的故障、补丁或功能请求等，可以通过电子邮件联系我：
++    dignome@gmail.com（你的问题或补丁也可以提交到 usb-devel 邮件列表）。
 +
-+当应用程序通过mmap(2)访问缓冲区时，主要使用该ioctl。
-+其参数是指向以下结构的指针::
 +
-+  struct mon_mfetch_arg {
-+	uint32_t *offvec;	/* 获取的事件偏移向量 */
-+	uint32_t nfetch;	/* 要获取的事件数量（输出：已获取） */
-+	uint32_t nflush;	/* 要刷新事件数量 */
-+  };
++Digi AccelePort驱动
++--------------------------
 +
++  该驱动支持 Digi AccelePort USB 2 和 4 端口设备，
++  包括 2 端口（外加一个并口）和 4 端口的 USB 串口转换器。
++  该驱动 尚不支持 Digi AccelePort USB 8。
 +
-+ioctl操作分为三个阶段：
++  该驱动在使用 usb-uhci 驱动的 SMP 系统下可以正常工作，
++  但在使用 uhci 驱动的 SMP 系统下无法工作。
 +
-+首先，从内核缓冲区移除并丢弃最多nflush个事件。
-+实际丢弃的事件数量存储在nflush中。
++  总体来说，该驱动功能基本可用，
++  但仍有一些 ioctl 需要实现，并且最终测试和调试尚未完成。
++  USB 2 上的并口被支持为串口到并口的转换器；
++  换句话说，它在 Linux 上表现为另一个 USB 串口，
++  虽然实际上它是一个并口。
++  Digi AccelePort USB 8 尚未支持。
 +
-+其次，除非伪设备以O_NONBLOCK打开，否则会一直等待，直到缓冲区中有事件出现。
++  如对该驱动有任何问题或疑问，请联系 Peter Berger（pberger@brimson.com）或
++  Al Borchers（alborchers@steinerpoint.com）。
 +
-+第三，将最多nfetch个偏移量提取到mmap缓冲区，并存储
-+到offvec中。实际的事件偏移数量存储在nfetch中。
++Belkin USB 串口适配器F5U103
++-------------------------------------------
 +
-+ MON_IOCH_MFLUSH，定义为_IO(MON_IOC_MAGIC, 8)
++  这是 Belkin 出品的单端口 DB-9/PS-2 串口适配器，固件由 eTEK Labs 提供。
++  Peracom 的单端口串口适配器以及 GoHubs 适配器也可使用该驱动。
 +
-+此调用从内核缓冲区移除若干事件。其参数为要移除的事件数量。
-+如果缓冲区中的事件少于请求数量，则移除所有事件，且不报告错误。
-+当没有事件时也可使用。
++  当前状态：
 +
-+ FIONBIO
++    经过测试，以下功能可用：
 +
-+如有需要，将来可能实现ioctl FIONBIO。
++      - 波特率    300-230400
++      - 数据位    5-8
++      - 停止位    1-2
++      - 校验       N,E,O,M,S
++      - 握手       无，软件 (XON/XOFF)，硬件 (CTSRTS,CTSDTR) [1]_
++      - 断开       设置和清除
++      - 行控制 输入/输出查询和控制 [2]_
 +
-+除了ioctl(2)和read(2)，可以使用
-+select(2)和poll(2)轮询二进制API的特殊文件。
-+但lseek(2)无效。
++  .. [1]
++         硬件输入流控仅在固件版本高于 2.06 时启用。
++	     可阅读源码注释了解 Belkin 固件的已知问题。
++		 硬件输出流控在所有固件版本中均可使用。
 +
-+* 二进制API的内核缓冲区内存映射访问
++  .. [2]
++         输入查询（CTS、DSR、CD、RI）显示最后报告的状态。
++		 输出查询（DTR、RTS）显示最后请求的状态，
++		 可能与自动硬件流控设置的当前状态不一致。
 +
-+基本思想很简单：
++  待办事项：
++    - 添加真正的调制解调器控制线查询功能。目前跟踪中断报告的状态和请求的状态。
++    - 添加 UART 错误条件的错误报告回应用程序。
++    - 添加对刷新 ioctl 的支持。
++    - 添加所有其他缺失的功能。
 +
-+准备阶段，获取当前大小并使用mmap(2)映射缓冲区。
-+然后执行类似下面伪代码的循环::
++  如对该驱动有任何问题或疑问，请联系 William
++  Greathouse，邮箱：wgreathouse@smva.com
 +
-+   struct mon_mfetch_arg fetch;
-+   struct usbmon_packet *hdr;
-+   int nflush = 0;
-+   for (;;) {
-+      fetch.offvec = vec; // 有N个32位字
-+      fetch.nfetch = N;   // 或少于N
-+      fetch.nflush = nflush;
-+      ioctl(fd, MON_IOCX_MFETCH, &fetch);   // 同时处理错误
-+      nflush = fetch.nfetch;       // 完成后要刷新这么多包'/
-+      for (i = 0; i < nflush; i++) {
-+         hdr = (struct ubsmon_packet *) &mmap_area[vec[i]];
-+         if (hdr->type == '@')     // 填充包
-+            continue;
-+         caddr_t data = &mmap_area[vec[i]] + 64;
-+         process_packet(hdr, data);
-+      }
-+   }
++Empeg empeg-car Mark I/II驱动
++------------------------------
 +
++  这是一个实验性驱动，用于为 Empeg empeg-car MP3 播放器提供客户端同步工具的连接支持。
 +
++  使用提示：
++    * 不要忘记为 ttyUSB{0,1,2,...} 创建设备节点
++    * modprobe empeg (modprobe 是你的朋友)
++    * emptool --usb /dev/ttyUSB0 (或者你为设备节点命名的其他名称)
 +
-+因此，主要思想是每N个事件只执行一次ioctl。
++  如对该驱动有任何问题或疑问，请联系 Gary
++  Brubaker，邮箱：xavyer@ix.netcom.com
 +
-+虽然缓冲区是环形的，但返回的头和数据不会跨越缓冲区末端，
-+因此上面的伪代码无需任何合并操作。
++
++MCT USB 单端口串口适配器 U232
++-------------------------------------------
++
++  该驱动用于 Magic Control Technology Corp 生产的 MCT USB-RS232 转换器
++  （25 针型号 U232-P25，也有 9 针型号 U232-P9）。
++  更多信息请访问制造商网站：http://www.mct.com.tw。
++
++  该驱动总体上是可用的，尽管仍需进行更多测试。
++  它是从 Belkin USB 串口适配器 F5U103 驱动派生而来，其
++  待办事项列表同样适用于该驱动。
++  该驱动也被发现适用于其他产品，这些产品具有相同的供应商 ID 但产品 ID 不同。
++  Sitecom 的 U232-P25 串口转换器使用产品 ID 0x230 和供应商 ID 0x711，
++  并且可以使用该驱动。
++  D-Link 的 DU-H3SP USB BAY 也可以使用该驱动。
++  如对该驱动有任何问题或疑问，请联系 Wolfgang
++  Grandegger，邮箱：wolfgang@ces.ch
++
++
++Inside Out Networks Edgeport驱动
++-----------------------------------
++
++  该驱动支持 Inside Out Networks 公司生产的所有设备，具体型号如下：
++
++       - Edgeport/4
++       - Rapidport/4
++       - Edgeport/4t
++       - Edgeport/2
++       - Edgeport/4i
++       - Edgeport/2i
++       - Edgeport/421
++       - Edgeport/21
++       - Edgeport/8
++       - Edgeport/8 Dual
++       - Edgeport/2D8
++       - Edgeport/4D8
++       - Edgeport/8i
++       - Edgeport/2 DIN
++       - Edgeport/4 DIN
++       - Edgeport/16 Dual
++
++  如对本驱动有任何问题或疑问，请联系 Greg Kroah-Hartman（greg@kroah.com）。
++
++
++REINER SCT cyberJack pinpad/e-com USB 智能卡读卡器
++--------------------------------------------------
++
++  该设备用于与 ISO 7816 兼容的接触式芯片卡通信，例如 GSM SIM 卡。
++
++  当前状态：
++
++    这是该 USB 智能卡读卡器的内核部分驱动。
++	同时，还提供了用户空间的 CT-API 驱动。
++	下载地址待定，目前可以向维护者（linux-usb@sii.li）请求获取。
++
++    如对本驱动有任何问题或疑问，请联系 linux-usb@sii.li。
++
++
++Prolific PL2303驱动
++----------------------
++
++  该驱动支持任何使用 Prolific PL2303 芯片的设备。
++  这包括多个单口 USB 转串口转换器、2010 年约 70% 的 USB GPS 设备，
++  以及一些 USB UPS。Aten（UC-232）和 IO-Data 的设备也能使用此驱动，
++  DCU-11 手机数据线也支持。
++
++   如对本驱动有任何问题或疑问，
++   请联系 Greg Kroah-Hartman（greg@kroah.com）。
++
++
++KL5KUSB105芯片组 / PalmConnect USB单端口适配器
++--------------------------------------------------------
++
++当前状态：
++
++  该驱动是通过分析 Palm 在 Windows 下的 USB 总线交互而开发的，
++  因此仍有许多功能缺失。
++  特别是串口 ioctl 有时是模拟的，
++  或者尚未实现。
++  不过，对 DSR 和 CTS 线路状态的支持已经实现（虽然不够完美），
++  所以常用的 autopilot 和 pilot-manager 守护程序调用可以正常工作。
++  驱动支持最高 115200 的波特率，
++  但握手（软件或硬件）尚不支持，
++  因此在进行大数据传输时，建议降低波特率以保证稳定性。
++
++  最新的驱动信息请访问：http://www.uuhaus.de/linux/palmconnect.html
++
++Winchiphead CH341 驱动
++------------------------
++
++  该驱动用于 Winchiphead CH341 USB-RS232 转换器。
++  该芯片还支持 IEEE 1284 并口、I2C 和 SPI，但驱动不支持这些功能。
++  协议是通过分析 Windows 驱动的行为得到的，目前没有公开的数据手册。
++
++  厂商官网：http://www.winchiphead.com/
++
++  如对本驱动有任何问题或疑问，请联系 frank@kingswood-consulting.co.uk
++
++Moschip MCS7720, MCS7715 驱动
++-------------------------------
++
++  这些芯片存在于多家厂商销售的设备中，
++  例如 Syba 和 Cables Unlimited，可能还有其他厂商。
++  MCS7720 提供两个串口，MCS7715 提供一个串口和一个标准 PC 并口。
++  对 7715 并口的支持需要通过单独选项启用，
++  该选项只有在设备驱动顶层配置菜单中先启用并口支持时才会出现。
++  目前并口仅支持兼容模式（不支持 ECP/EPP）。
++
++待办事项：
++
++    - 实现并口的 ECP/EPP 模式。
++    - 目前超过 115200 波特率的支持存在问题。
++    - 基于 Moschip MCS7703 的单串口设备可能可以通过在 usb_device_id 表中添加条目来支持该驱动。
++	  但我手头没有这些设备，所以无法确认。
++
++通用串口驱动
++-------------------------------------------
++
++  如果你的设备不属于上面列出的型号，或者不兼容这些型号，
++  可以尝试使用“通用”接口。该接口不会向设备发送任何控制消息，
++  也不支持任何设备流控制。
++  你的设备只需至少有一个 bulk 输入端点或一个 bulk 输出端点即可。
++
++  要让通用驱动识别你的设备，可以执行::
++
++	echo <vid> <pid> >/sys/bus/usb-serial/drivers/generic/new_id
++
++  其中 <vid> 和 <pid> 替换为设备厂商 ID 和产品 ID 的十六进制表示。
++  如果驱动是作为模块编译的，也可以在加载模块时提供一个 ID：::
++
++	insmod usbserial vendor=0x#### product=0x####
++
++  该驱动已成功用于连接 NetChip USB 开发板，
++  提供了一种开发 USB 固件而无需编写自定义驱动的方法。
++
++  如对该驱动有任何问题或疑问，请联系 Greg Kroah-Hartman，邮箱：greg@kroah.com。
++
++
++联系信息
++=====================
++
++  如果在使用上述驱动或任何指定设备时遇到问题，
++  请联系对应驱动的作者（联系方式已在上文列出），
++  或者加入 Linux-USB 邮件列表。
++  邮件列表的加入方式及可搜索的归档链接请见：http://www.linux-usb.org/。
++
++Greg Kroah-Hartman
++greg@kroah.com
 -- 
 2.52.0
 
