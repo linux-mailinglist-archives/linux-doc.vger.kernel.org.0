@@ -1,38 +1,38 @@
-Return-Path: <linux-doc+bounces-67794-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67785-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09F58C7DDB9
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:50:45 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE515C7DDA1
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:46:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id C108B4E162C
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 07:50:43 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id C6C2634B58C
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 07:45:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 311D5231C9F;
-	Sun, 23 Nov 2025 07:50:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 74F13238D52;
+	Sun, 23 Nov 2025 07:45:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="XP+PXPYD"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="ofLiKHV7"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m1973181.qiye.163.com (mail-m1973181.qiye.163.com [220.197.31.81])
+Received: from mail-m32104.qiye.163.com (mail-m32104.qiye.163.com [220.197.32.104])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BA4122D4DD
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 07:50:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.81
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C3A4186E40
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 07:45:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.104
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763884243; cv=none; b=lauHsuaj4vAZDLlZeUktqjyg7sEK/D8f4sZhhn/Y6MGP5nefvL9LbwEBIOaNE/uu0cIGY9irbAdHWi03iLUO74XjOsLSZtAxQnDKsuNxtyNS6JqsG27F0XbYCz/6kr8DYTIc+2u5iCWWyEzEPfh0BU1Vv0Ydsal/kMBZauUyw2Y=
+	t=1763883936; cv=none; b=p7rae2Zw3tm/3hKp9BUdOV81A/kYTAVCN83MVhJVle0yNKZgEEn7HA/wMjpOwtD73tUAItCq5fLdzv9y9wk/GOaKWd5cjys6PjlalwFwReiQJ0+8SgWL0FTYl+GJj6HwnpJqtRyLQM2hiOqV9vvq7LclACje3ysvT9aByIQZ/Do=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763884243; c=relaxed/simple;
-	bh=hUStUanHOrbd4+yNIoJELN7RATouHa4ox9UlRUXGung=;
+	s=arc-20240116; t=1763883936; c=relaxed/simple;
+	bh=QFJqGOwUiwm5yUb6wkGXYIZJyrENOjUilXZ+4rbgAiY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KovbrHgNt+qF634+4eVygsfCoRKeS5n10gaGh7S4xc6zQeJ4h7EtiNFyulVWku52sW0z/MCTPkdRCOR2w15fOGzMiEeSKL7gibx8HkcaY06re2fUScyhxpH4dSJHwMmPKguLxObGf3W7LrAZz0xuor2/i0cUHdnkgmaqjH6oVlE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=XP+PXPYD; arc=none smtp.client-ip=220.197.31.81
+	 MIME-Version:Content-Type; b=qIH4Z7ufiX1g2Z9hx3fqLB3+7tlb8jozLYy4gpKZHJUEhtBBvoEoVl2fdNWAVcWjvEB3KDfjN2Aj7qdXf6v/oCYf7le18viTvVBL4QmML4FrmE7i6DZcKtqPGjUuIT7V7eYJmx2PlyNNevkQdvrcZ6/quOU9FVF8KjCa8eyLj8c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=ofLiKHV7; arc=none smtp.client-ip=220.197.32.104
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99c2;
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99c3;
 	Sun, 23 Nov 2025 15:45:23 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
@@ -40,9 +40,9 @@ To: alexs@kernel.org,
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH 14/25] docs/zh_CN: Add gadget_uvc.rst translation
-Date: Sun, 23 Nov 2025 15:45:29 +0800
-Message-ID: <20251123074540.34161-15-baikefan@leap-io-kernel.com>
+Subject: [PATCH 15/25] docs/zh_CN: Add gadget-testing.rst translation
+Date: Sun, 23 Nov 2025 15:45:30 +0800
+Message-ID: <20251123074540.34161-16-baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
 References: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
@@ -54,38 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9aafacb63c09d5kunm0cca719828664c
+X-HM-Tid: 0a9aafacb98209d5kunm0cca7198286653
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDSUIaVhhCTk1OH0NCTx9NQlYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTUlKVkIaTh8dGU9CHUNCTFYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
 	VLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=XP+PXPYDTNDvmkehvVqk1iRA9MTdcxLyhXsiHNQcfTa5GnNW/IrD2w77GkTqEycu6UXfx0AqNVXrLpqRSovSOhGWMmXAT+W84gsQD4C3OQJDloYUqss2HcxKArtsPvUHPEo7acjgovJwmlDuvlWBLix7zzTRqPGZlCMyaXa2WGD76pendeNRV+oy9cB+QSrQSesNYjXdFvEg1cgidnqU3t6IZql0U185gqqHcvl/UMmIlVavb07O7JSpUKzhEKeJSC+kjAVQYF7e3iRS+ex/bOexLawzJn35dk2P6W5jKR5CFjTksnwZVnBYtof1Hc+3LeLF9Vjs2u4Y2e8apS4wLg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=aaDfUNN4p3scNLTe8T0++gqCK1LffRumO8XAVlwkev4=;
+	b=ofLiKHV7KbUZQi/Wi6Ig8YK/LylaMa39yC+1LirLGa33uEKF+L6GWmRLQMeSMrq7oaAbXmimU9Yr9AZQeVKhx+9etcLBnnHQtiMo4myXGZ9pqrJwZXyKwtzWpogoygpNDSsuGgUKi5wngREgLETK8gnMcAFak2fM+Lt4lxhYWKRa9jjSsvXaJQa8RG17jfd+qDsWISEFPN/I8Y8KdQ9tSFc5HA69U7sE6MAEpBavw8zM/UhRpkufPPP5/ZU3k+pEDWeSoHpoTFdrkeNWEzEA+ky1dWv+koWYjmO2cyCMH9n1oi2dvg8MjJ86dfBiNsv/YDkGuj2gWMrJZGVUdletyg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=YTwTQvS2IKu39CDYL5h7vc/v5TaO9ocRw0KAh2CV+1I=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/gadget_uvc.rst into Chinese.
+Translate .../usb/gadget-testing.rst into Chinese.
 
-Update the translation through commit 16794ed32de9
-("docs: usb: fix reference to nonexistent file in UVC Gadget")
+Update the translation through commit 5194439d70ba
+("Documentation: treewide: Replace remaining spinics links with lore")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/gadget_uvc.rst     | 372 ++++++++++++++++++
- 1 file changed, 372 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_uvc.rst
+ .../translations/zh_CN/usb/gadget-testing.rst | 1068 +++++++++++++++++
+ 1 file changed, 1068 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/gadget-testing.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/gadget_uvc.rst b/Documentation/translations/zh_CN/usb/gadget_uvc.rst
+diff --git a/Documentation/translations/zh_CN/usb/gadget-testing.rst b/Documentation/translations/zh_CN/usb/gadget-testing.rst
 new file mode 100644
-index 000000000000..de53a05a2c76
+index 000000000000..a8ee597d0d37
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/gadget_uvc.rst
-@@ -0,0 +1,372 @@
++++ b/Documentation/translations/zh_CN/usb/gadget-testing.rst
+@@ -0,0 +1,1068 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/gadget_uvc.rst
++:Original: Documentation/usb/gadget-testing.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,366 +94,1062 @@ index 000000000000..de53a05a2c76
 +
 +
 +
++===========
++Gadget 测试
++===========
++
++本文件总结了关于USB gadget提供的基本功能测试的信息。
++
++.. contents
++
++   1. ACM功能
++   2. ECM功能
++   3. ECM子集功能
++   4. EEM功能
++   5. FFS功能
++   6. HID功能
++   7. LOOPBACK功能
++   8. MASS STORAGE功能
++   9. MIDI功能
++   10. NCM功能
++   11. OBEX功能
++   12. PHONET功能
++   13. RNDIS功能
++   14. SERIAL功能
++   15. SOURCESINK功能
++   16. UAC1功能 (旧版实现)
++   17. UAC2功能
++   18. UVC功能
++   19. PRINTER功能
++   20. UAC1功能 (新API)
++   21. MIDI2功能
++
++
++1. ACM功能
++===============
++
++该功能由usb_f_acm.ko模块提供。
++
++功能专用的configfs接口
++-------------------------
++
++创建功能目录时使用的功能名称为"acm"。
++ACM功能在其功能目录中仅提供一个属性：
++
++	port_num
++
++该属性是只读的。
++系统中最多可以有4个ACM/通用串口/OBEX端口。
++
++
++测试ACM功能
++-----------
++
++在主机上::
++
++	cat > /dev/ttyACM<X>
++
++在设备上::
++
++	cat /dev/ttyGS<Y>
++
++然后反过来
++
++在设备上::
++
++	cat > /dev/ttyGS<Y>
++
++在主机上::
++	cat /dev/ttyACM<X>
++
++2. ECM功能
++===============
++
++该功能由usb_f_ecm.ko模块提供。
++
++功能专用的configfs接口
++------------------------------------
++
++创建功能目录时使用的功能名称为"ecm"。
++ECM功能在其功能目录中提供以下属性：
++=============== ==================================================
++ifname          与此功能实例关联的网络设备接口名称
++qmult           高速和超高速的队列长度乘数
++host_addr       主机端的MAC地址（USB以太网链接）
++dev_addr        设备端的MAC地址（USB以太网链接）
++=============== ==================================================
++
++创建 functions/ecm.<实例名> 后，
++这些属性包含默认值：qmult 为 5，dev_addr 和 host_addr 随机选择。
++如果功能尚未绑定，可以写入 ifname。
++写入必须是接口模式，如 "usb%d"，
++这将使网络核心选择下一个可用的 usbX 接口。默认设置为 "usb%d"。
++
++测试ECM功能
++-----------
++
++配置设备和主机的IP地址。然后：
++
++在设备上::
++
++	ping <host's IP>
++
++在主机上::
++	ping <device's IP>
++
++3. ECM子集功能
 +======================
-+Linux UVC Gadget 驱动
-+======================
 +
-+概述
-+------
-+UVC Gadget 驱动是针对 USB 设备端硬件的驱动，
-+适用于在具有 USB 设备端硬件（例如带 OTG 接口的开发板）的 Linux 系统上运行。
++该功能由usb_f_ecm_subset.ko模块提供。
 +
-+在设备系统上，一旦驱动绑定成功，它会以 V4L2 设备的形式出现，并具有输出能力。
++功能专用的configfs接口
++------------------------------------
 +
-+在主机端（通过 USB 连接后），
-+运行 UVC Gadget 驱动的设备（由相应用户空间程序控制）
-+应表现为符合 UVC 规范的摄像头，并能与任何支持 UVC 的程序正常工作。
-+设备端的用户空间程序可以将来自各种源的图像缓冲区排入队列，
-+通过 USB 传输。通常，这意味着转发来自摄像头传感器的缓冲区，
-+但缓冲区的来源完全由用户空间程序决定。
++创建功能目录时使用的功能名称为"geth"。
++ECM子集功能在其功能目录中提供以下属性：
 +
-+配置设备内核
++	=============== ==================================================
++	ifname		与此功能实例关联的网络设备接口名称
++	qmult		高速和超高速的队列长度乘数
++	host_addr	主机端的MAC地址（USB以太网链接）
++	dev_addr	设备端的MAC地址（USB以太网链接）
++	=============== ==================================================
++
++创建 functions/ecm.<实例名> 后，
++这些属性包含默认值：qmult 为 5，dev_addr 和 host_addr 随机选择。
++如果功能尚未绑定，可以写入 ifname。
++写入必须是接口模式，如 "usb%d"，
++这将使网络核心选择下一个可用的 usbX 接口。
++默认设置为 "usb%d"。
++
++测试ECM子集功能
++----------------
++
++配置设备和主机的IP地址。然后：
++
++在设备上::
++
++	ping <host's IP>
++
++在主机上::
++	ping <device's IP>
++
++4. EEM功能
++===============
++
++该功能由usb_f_eem.ko模块提供。
++
++功能专用的configfs接口
++------------------------------------
++
++创建功能目录时使用的功能名称为 "eem"。
++EEM 功能在其功能目录中提供以下属性：
++
++	=============== ==================================================
++	ifname		与该功能实例关联的网络设备接口名称
++	qmult		高速和超高速的队列长度乘数
++	host_addr	主机端的MAC地址（USB以太网链接）
++	dev_addr	设备端的MAC地址（USB以太网链接）
++	=============== ==================================================
++
++创建 functions/eem.<实例名> 后，
++这些属性包含默认值：qmult 为 5，dev_addr 和 host_addr 随机选择。
++如果功能尚未绑定，可以写入 ifname。
++写入必须是接口模式，如 "usb%d"，这将使网络核心选择下一个可用的 usbX 接口。
++默认设置为 "usb%d"。
++
++测试EEM功能
++-----------
++
++配置设备和主机的IP地址。然后：
++
++在设备上::
++
++	ping <host's IP>
++
++在主机上::
++	ping <device's IP>
++
++5. FFS功能
++===============
++
++该功能由usb_f_fs.ko模块提供。
++
++功能专用的configfs接口
++------------------------------------
++
++创建功能目录时使用的功能名称为"ffs"。
++功能目录为空且不可修改。
++
++创建目录后，系统中会出现一个新的FunctionFS实例（一个“设备”）。
++一旦可用，用户应遵循FunctionFS的标准使用流程（挂载它，运行实现功能的用户空间进程）。
++通过向usb_gadget/<gadget>/UDC 写入合适的字符串即可启用gadget。
++
++FFS 功能在其功能目录中仅提供一个属性：
++
++	ready
++
++该属性为只读，用于指示功能是否准备好（1）被使用，
++例如用户空间已向 ep0 写入描述符和字符串，从而可以启用 gadget。
++
++测试FFS功能
++-----------
++
++在设备上：启动功能的用户空间守护进程，启用gadget
++
++在主机上：使用设备提供的USB功能
++
++6. HID功能
++===============
++
++该功能由usb_f_hid.ko模块提供。
++
++功能专用的configfs接口
++------------------------------------
++
++创建功能目录时使用的功能名称为"hid"。
++HID功能在其功能目录中提供以下属性：
++=============== ===========================================
++protocol        HID 使用的协议
++report_desc     用于 HID 报告的数据，除了通过 /dev/hidg<X> 传递的数据
++report_length   HID 报告长度
++subclass        HID 使用的子类
++=============== ===========================================
++
++对于键盘，protocol 和 subclass 为 1，report_length 为 8，report_desc 如下::
++
++  $ hd my_report_desc
++  00000000  05 01 09 06 a1 01 05 07  19 e0 29 e7 15 00 25 01  |..........)...%.|
++  00000010  75 01 95 08 81 02 95 01  75 08 81 03 95 05 75 01  |u.......u.....u.|
++  00000020  05 08 19 01 29 05 91 02  95 01 75 03 91 03 95 06  |....).....u.....|
++  00000030  75 08 15 00 25 65 05 07  19 00 29 65 81 00 c0     |u...%e....)e...|
++  0000003f
++
++可以通过 echo 将该字节序列存储到属性中::
++
++  $ echo -ne \\x05\\x01\\x09\\x06\\xa1.....
++
++测试 HID 功能
 +--------------
-+要启用 UVC Gadget 支持，必须在内核 Kconfig 中选择以下选项:
-+USB_CONFIGFS, USB_LIBCOMPOSITE, USB_CONFIGFS_F_UVC和
-+USB_F_UVC。
-+
-+通过 configfs 配置 Gadget
-+---------------------------
-+UVC Gadget 通过 configfs 使用 UVC 功能进行配置。
-+这种方式提供了很大灵活性，因为 UVC 设备的许多设置可以通过它控制。
-+
-+并非所有可用的属性都在此处描述。有关完整的枚举，
-+请参阅 Documentation/ABI/testing/configfs-usb-gadget-uvc
-+
-+前提条件
-+~~~~~~~~~~~
-+假设你已将 configfs 挂载到 `/sys/kernel/config` 并
-+创建了一个 gadget，路径为 `/sys/kernel/config/usb_gadget/g1`。
-+
-+UVC 功能
-+~~~~~~~~~~~
-+第一步是创建 UVC 功能：
-+
-+.. code-block:: bash
-+
-+	# These variables will be assumed throughout the rest of the document
-+	CONFIGFS="/sys/kernel/config"
-+	GADGET="$CONFIGFS/usb_gadget/g1"
-+	FUNCTION="$GADGET/functions/uvc.0"
-+
-+	mkdir -p $FUNCTION
-+
-+格式与帧
-+~~~~~~~~~~
-+
-+必须告诉 gadget 支持哪些格式，以及每种格式支持的帧大小和帧间隔。
-+当前实现中，gadget 无法拒绝主机要求设置的格式，
-+因此必须准确配置，以确保主机不会请求无法提供的格式。
-+
-+格式在 streaming/uncompressed 和 streaming/mjpeg configfs 分组下创建，
-+帧大小在格式下创建，结构如下：
-+
-+::
-+
-+	uvc.0 +
-+	      |
-+	      + streaming +
-+			  |
-+			  + mjpeg +
-+			  |       |
-+			  |       + mjpeg +
-+			  |	       |
-+			  |	       + 720p
-+			  |	       |
-+			  |	       + 1080p
-+			  |
-+			  + uncompressed +
-+					 |
-+					 + yuyv +
-+						|
-+						+ 720p
-+						|
-+						+ 1080p
-+
-+每个帧都可以配置宽度和高度，以及存储单个帧所需的最大缓冲区大小，
-+最后还可以配置该格式和帧大小所支持的帧间隔。
-+宽度和高度以像素为单位枚举，
-+帧间隔以 100ns 为单位。
-+例如，要为每个帧大小创建上面结构中 2、15 和 100 fps 的帧间隔，
-+可以这样操作：
-+
-+.. code-block:: bash
-+
-+	create_frame() {
-+		# 示例用法:
-+		# create_frame <width> <height> <group> <format name>
-+
-+		WIDTH=$1
-+		HEIGHT=$2
-+		FORMAT=$3
-+		NAME=$4
-+
-+		wdir=$FUNCTION/streaming/$FORMAT/$NAME/${HEIGHT}p
-+
-+		mkdir -p $wdir
-+		echo $WIDTH > $wdir/wWidth
-+		echo $HEIGHT > $wdir/wHeight
-+		echo $(( $WIDTH * $HEIGHT * 2 )) > $wdir/dwMaxVideoFrameBufferSize
-+		cat <<EOF > $wdir/dwFrameInterval
-+	666666
-+	100000
-+	5000000
-+	EOF
-+	}
-+
-+	create_frame 1280 720 uncompressed yuyv
-+	create_frame 1920 1080 uncompressed yuyv
-+
-+目前唯一支持的未压缩格式是YUYV，
-+详细说明请参见Documentation/userspace-api/media/v4l/pixfmt-packed-yuv.rst。
-+
-+颜色匹配描述符
-+~~~~~~~~~~~~~~
-+可以为你创建的每种格式指定一些色彩信息。
-+此步骤为可选操作，如果跳过该步骤，
-+将使用默认信息；
-+这些默认值遵循UVC规范中Color Matching Descriptor部分的定义。
 +
-+要创建颜色匹配描述符，需要先创建一个configfs item，
-+并将其三个属性设置为你期望的值，然后从希望关联的格式中链接到该item：
++设备端：
 +
-+.. code-block:: bash
++- 创建 gadget
++- 将 gadget 连接到主机，最好不是用于控制 gadget 的主机
++- 运行一个向 /dev/hidg<N> 写入数据的程序，例如
++  Documentation/usb/gadget_hid.rst 中的一个用户空间程序::
 +
-+	# Create a new Color Matching Descriptor
++	$ ./hid_gadget_test /dev/hidg0 keyboard
 +
-+	mkdir $FUNCTION/streaming/color_matching/yuyv
-+	pushd $FUNCTION/streaming/color_matching/yuyv
++主机端：
 +
-+	echo 1 > bColorPrimaries
-+	echo 1 > bTransferCharacteristics
-+	echo 4 > bMatrixCoefficients
++- 观察来自 gadget 的按键
 +
-+	popd
++7. LOOPBACK 功能
++====================
 +
-+	# Create a symlink to the Color Matching Descriptor from the format's config item
-+	ln -s $FUNCTION/streaming/color_matching/yuyv $FUNCTION/streaming/uncompressed/yuyv
++该功能由usb_f_ss_lb.ko模块提供。
 +
-+有关有效值的详细信息，请参阅UVC规范。
-+请注意，存在一个默认的Color Matching Descriptor，
-+任何没有链接到其他Color Matching Descriptor的格式都会使用它。
-+可以修改默认描述符的属性设置，但请注意，
-+如果你这样做，就会改变所有未链接到其他描述符的格式的默认设置。
++功能专用的 configfs 接口
++------------------------
 +
++创建功能目录时使用的功能名称为 "Loopback"。
++LOOPBACK 功能在其功能目录中提供以下属性：
 +
-+头部链接
-+~~~~~~~~~~~~~~~
++	=============== =======================
++	qlen		回环队列深度
++	bulk_buflen	缓冲区长度
++	=============== =======================
 +
-+UVC规范要求Format和Frame描述符之前必须有头部（Header），
-+用于描述随后不同Format描述符的数量和累计大小等信息。
-+在configfs中，这类操作是通过将表示头部的
-+configfs item与表示其他描述符的config item进行链接来实现的，方式如下：
++测试 LOOPBACK 功能
++-------------------
 +
-+.. code-block:: bash
++设备端：运行 gadget
 +
-+	mkdir $FUNCTION/streaming/header/h
++主机端：test-usb (tools/usb/testusb.c)
++8. MASS STORAGE 功能
++====================
 +
-+	# This section links the format descriptors and their associated frames
-+	# to the header
-+	cd $FUNCTION/streaming/header/h
-+	ln -s ../../uncompressed/yuyv
-+	ln -s ../../mjpeg/mjpeg
++该功能由usb_f_mass_storage.ko模块提供。
 +
-+	# This section ensures that the header will be transmitted for each
-+	# speed's set of descriptors. If support for a particular speed is not
-+	# needed then it can be skipped here.
-+	cd ../../class/fs
-+	ln -s ../../header/h
-+	cd ../../class/hs
-+	ln -s ../../header/h
-+	cd ../../class/ss
-+	ln -s ../../header/h
-+	cd ../../../control
-+	mkdir header/h
-+	ln -s header/h class/fs
-+	ln -s header/h class/ss
++功能专用的configfs接口
++------------------------------------
 +
++创建功能目录时使用的功能名称为 "mass_storage"。
++MASS STORAGE 功能在其功能目录中提供以下属性：
 +
-+扩展单元支持
-+~~~~~~~~~~~~~~~
++	=============== ==============================================
++	stall		设置是否允许功能暂停 bulk 端点。
++		        在某些已知无法正常工作的 USB 设备上被禁用。
++		        建议设置为 true。
++	num_buffers	管道缓冲区的数量。有效数字为 2..4。仅当
++			     CONFIG_USB_GADGET_DEBUG_FILES 被设置时可用。
++	=============== ==============================================
 +
-+UVC扩展单元（XU）基本上提供了一个独立的单元，
-+可以向其发送控制的set和get请求。
-+这些控制请求的含义完全依赖于具体实现，
-+但可用于控制UVC规范之外的设置（例如启用或禁用视频效果）。
-+XU可以插入到UVC单元链中，也可以保持独立悬挂。
++目录中有默认的 lun.0，对应 SCSI LUN #0。
 +
-+配置扩展单元涉及在相应目录中创建一个条目，并适当地设置其属性，如下所示：
++可以通过 mkdir 添加新的 LUN::
 +
-+.. code-block:: bash
++	$ mkdir functions/mass_storage.0/partition.5
 +
-+	mkdir $FUNCTION/control/extensions/xu.0
-+	pushd $FUNCTION/control/extensions/xu.0
++LUN 编号不必连续，但默认创建的 lun #0 必须存在。
++最多可指定 8 个 LUN，名称必须遵循 <name>.<number> 格式，
++数字可为 0..8。推荐命名约定为 "lun.<number>"，但非强制。
 +
-+	# Set the bUnitID of the Processing Unit as the source for this
-+	# Extension Unit
-+	echo 2 > baSourceID
++每个 LUN 目录中包含以下属性文件：
 +
-+	# Set this XU as the source of the default output terminal. This inserts
-+	# the XU into the UVC chain between the PU and OT such that the final
-+	# chain is IT > PU > XU.0 > OT
-+	cat bUnitID > ../../terminal/output/default/baSourceID
++	=============== ==============================================
++	file			指向 LUN 的后备文件的路径。
++					如果 LUN 未标记为可移动，则为必需。
++	ro				指定对 LUN 的访问应为只读的标志。
++					如果启用了 CD-ROM 仿真，
++					或者无法以读写模式打开 "filename"，则隐含为只读。
++	removable		指定 LUN 应被标记为可移动的标志。
++	cdrom			指定 LUN 应被报告为 CD-ROM 的标志。
++	nofua			指定 SCSI WRITE(10,12) 中的 FUA 标志。
++	forced_eject	仅在功能激活时有用。
++	                写入非零字节会强制将后端文件从 LUN 分离，不管主机是否允许
++	=============== ==============================================
 +
-+	# Flag some controls as being available for use. The bmControl field is
-+	# a bitmap with each bit denoting the availability of a particular
-+	# control. For example to flag the 0th, 2nd and 3rd controls available:
-+	echo 0x0d > bmControls
++测试 MASS STORAGE 功能
++----------------------
 +
-+	# Set the GUID; this is a vendor-specific code identifying the XU.
-+	echo -e -n "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10" > guidExtensionCode
++设备端：连接 gadget 并启用
++主机端：dmesg，查看 USB 驱动器是否出现（如果系统配置为自动挂载）
 +
-+	popd
++9. MIDI 功能
++================
 +
-+bmControls属性和baSourceID属性是多值属性。
-+这意味着你可以向它们写入多个以换行符分隔的值。
-+例如，要标记第1、第2、第9和第10个控制可用，
-+你需要向bmControls写入两个值，如下所示：
++该功能由usb_f_midi.ko模块提供。
 +
-+.. code-block:: bash
++功能专用的 configfs 接口
++------------------------------------
 +
-+	cat << EOF > bmControls
-+	0x03
-+	0x03
-+	EOF
++创建功能目录时使用的功能名称为 "midi"。
++MIDI 功能在其功能目录中提供以下属性：
 +
-+baSourceID属性的多值特性暗示了XU可以有多个输入，但请注意，这目前没有显著影响。
++	=============== ====================================
++	buflen			MIDI 缓冲区长度
++	id				USB MIDI 适配器的 ID 字符串
++	in_ports		MIDI 输入端口数量
++	index			USB MIDI 适配器的索引值
++	out_ports		MIDI 输出端口数量
++	qlen			USB 读取请求队列长度
++	=============== ====================================
 +
-+bControlSize属性表示bmControls属性的大小，
-+类似地，bNrInPins表示baSourceID属性的大小。
-+随着你设置bmControls和baSourceID，这两个属性会自动增减。
-+也可以手动增加或减少bControlSize，
-+这会导致条目被截断到新的大小，或者用0x00填充条目，例如：
++测试 MIDI 功能
++--------------
++有两种情况：从 gadget 播放 mid 到主机，以及从主机播放 mid 到 gadget。
 +
-+::
++1) 从 gadget 播放 mid 到主机：
 +
-+	$ cat bmControls
-+	0x03
-+	0x05
++主机端::
 +
-+	$ cat bControlSize
-+	2
++  $ arecordmidi -l
++   Port    Client name                      Port name
++   14:0    Midi Through                     Midi Through Port-0
++   24:0    MIDI Gadget                      MIDI Gadget MIDI 1
++  $ arecordmidi -p 24:0 from_gadget.mid
 +
-+	$ echo 1 > bControlSize
-+	$ cat bmControls
-+	0x03
++gadget::
 +
-+	$ echo 2 > bControlSize
-+	$ cat bmControls
-+	0x03
-+	0x00
++  $ aplaymidi -l
++   Port    Client name                      Port name
++   20:0    f_midi                           f_midi
 +
-+bNrInPins和baSourceID的功能相同。
++  $ aplaymidi -p 20:0 to_host.mid
 +
-+配置摄像头终端和处理单元的支持控制
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++2) 从主机到gadget播放mid
 +
-+UVC链中的摄像头终端（Camera Terminal）和处理单元（Processing Unit）
-+也具有bmControls属性，其功能与扩展单元（XU）中的相同字段类似。
-+然而，与XU不同的是，这些单元的位标志含义在UVC规范中已有定义；
-+有关标志的枚举，请参阅“Camera Terminal Descriptor”和
-+“Processing Unit Descriptor”部分。
++gadget::
 +
-+.. code-block:: bash
++  $ arecordmidi -l
++   Port    Client name                      Port name
++   20:0    f_midi                           f_midi
 +
-+        # Set the Processing Unit's bmControls, flagging Brightness, Contrast
-+        # and Hue as available controls:
-+        echo 0x05 > $FUNCTION/control/processing/default/bmControls
++  $ arecordmidi -p 20:0 from_host.mid
 +
-+        # Set the Camera Terminal's bmControls, flagging Focus Absolute and
-+        # Focus Relative as available controls:
-+        echo 0x60 > $FUNCTION/control/terminal/camera/default/bmControls
++主机端::
 +
-+如果你不设置这些字段，则默认情况下摄像头终端（Camera Terminal）
-+的自动曝光模式（Auto-Exposure Mode）控制
-+和处理单元（Processing Unit）的亮度（Brightness）控制
-+会被标记为可用；
-+如果不支持这些功能，你应将字段设置为0x00。
++  $ aplaymidi -l
++   Port    Client name                      Port name
++   14:0    Midi Through                     Midi Through Port-0
++   24:0    MIDI Gadget                      MIDI Gadget MIDI 1
 +
-+请注意，摄像头终端或处理单元的bmControls字段大小由UVC规范固定，
-+因此此处的bControlSize属性为只读。
++  $ aplaymidi -p24:0 to_gadget.mid
 +
-+自定义字符串支持
-+~~~~~~~~~~~~~~~~~~~~~~~
++from_gadget.mid 应与 to_host.mid 听起来完全相同。
++from_host.mid 应与 to_gadget.mid 听起来完全相同。
++MIDI 文件可以通过例如安装了 timidity 的方式播放到扬声器或耳机::
 +
-+为USB设备各部分提供文本描述的字符串描述符（String Descriptor）
-+可以在USB configfs的常规位置定义，
-+然后可以从UVC功能根（UVC function root）或
-+扩展单元（Extension Unit）目录中链接这些字符串，
-+以将其作为描述符分配：
++  $ aplaymidi -l
++   Port    Client name                      Port name
++   14:0    Midi Through                     Midi Through Port-0
++   24:0    MIDI Gadget                      MIDI Gadget MIDI 1
++  128:0    TiMidity                         TiMidity port 0
++  128:1    TiMidity                         TiMidity port 1
++  128:2    TiMidity                         TiMidity port 2
++  128:3    TiMidity                         TiMidity port 3
 +
-+.. code-block:: bash
++  $ aplaymidi -p 128:0 file.mid
 +
-+	# 在us-EN中创建一个字符串描述符，并从function root链接到它。
-+	# 链接的名称在这里很重要，因为它声明该描述符用于Interface Association Descriptor。
-+	# function root中其他重要的链接名称包括vs0_desc和vs1_desc，
-+	# 用于VideoStreaming接口0/1描述符。
++MIDI 端口可以使用 aconnect 工具逻辑连接::::
 +
-+	mkdir -p $GADGET/strings/0x409/iad_desc
-+	echo -n "Interface Associaton Descriptor" > $GADGET/strings/0x409/iad_desc/s
-+	ln -s $GADGET/strings/0x409/iad_desc $FUNCTION/iad_desc
++  $ aconnect 24:0 128:0 # 在主机上尝试
 +
-+	# 由于从Extension Unit链接到String Descriptor会明确关联两者，
-+	# 因此该链接的名称不重要，可以自由设置。
++连接后，gadget 端播放的内容可在主机扬声器/耳机中听到。
 +
-+	mkdir -p $GADGET/strings/0x409/xu.0
-+	echo -n "A Very Useful Extension Unit" > $GADGET/strings/0x409/xu.0/s
-+	ln -s $GADGET/strings/0x409/xu.0 $FUNCTION/control/extensions/xu.0
++10. NCM 功能
++============
 +
-+中断端点
-+~~~~~~~~
++该功能由 usb_f_ncm.ko 模块提供。
 +
-+VideoControl接口具有一个可选的中断端点，默认情况下处于禁用状态。
-+该端点用于支持UVC的延迟响应控制设置请求
-+（这些请求应通过中断端点响应，而不是占用端点0）。
-+目前尚不支持通过该端点发送数据，因此默认禁用以避免混淆。
-+如果你希望启用它，可以通过configfs属性进行设置：
++功能专用的 configfs 接口
++--------------------------
 +
-+.. code-block:: bash
++创建功能目录时使用的功能名称为 "ncm"。
++NCM 功能在其功能目录中提供以下属性：
 +
-+	echo 1 > $FUNCTION/control/enable_interrupt_ep
++	======================= ==================================================
++	ifname					与该功能实例关联的网络设备接口名称
++	qmult					高速度和超级速度的队列长度乘数
++	host_addr				主机端的MAC地址（USB以太网链接）
++	dev_addr				设备端的MAC地址（USB以太网链接）
++	max_segment_size		点对点连接所需的分段大小。将MTU设置为14字节
++	======================= ==================================================
 +
-+带宽配置
-+~~~~~~~~
++创建 functions/ncm.<实例名> 后，
++这些属性包含默认值：qmult 为 5，dev_addr 和 host_addr 随机选择。
++如果功能尚未绑定，可以写入 ifname。
++写入必须是接口模式，如 "usb%d"，
++这将使网络核心选择下一个可用的 usbX 接口。
++默认设置为 "usb%d"。
 +
-+有三个属性控制USB连接的带宽。
-+这些属性位于功能根目录中，可以在限制范围内设置：
-+.. code-block:: bash
++测试NCM功能
++-----------
 +
-+	# streaming_interval sets bInterval. Values range from 1..255
-+	echo 1 > $FUNCTION/streaming_interval
++配置设备和主机的 IP 地址，然后：
 +
-+	# streaming_maxpacket sets wMaxPacketSize. Valid values are 1024/2048/3072
-+	echo 3072 > $FUNCTION/streaming_maxpacket
++在设备上::
 +
-+	# streaming_maxburst sets bMaxBurst. Valid values are 1..15
-+	echo 1 > $FUNCTION/streaming_maxburst
++	ping <host's IP>
 +
++在主机上::
++	ping <device's IP>
 +
-+这里传入的值会根据UVC规范限制在有效范围内（其取值依赖于USB连接速度）。
-+要了解这些设置如何影响带宽，应查阅UVC规范，
-+但经验法则是：增加streaming_maxpacket设置将提高带宽（从而提高最大可能的帧率），
-+如果USB连接运行在SuperSpeed模式下，
-+增加streaming_maxburst也有相同效果；
-+增加streaming_interval则会降低带宽和帧率。
++11. OBEX 功能
++=============
 +
-+用户空间应用程序
-+---------------------
-+单独来看，UVC Gadget驱动本身并没有特别有趣的功能。
-+它必须与一个用户空间程序配合使用，该程序负责响应UVC控制请求，
-+并向驱动创建的V4L2设备填充待排队的缓冲区。
-+这些操作的实现方式依赖具体实现，并超出了本文档的范围，
-+但可以在以下位置找到参考应用程序：
-+https://gitlab.freedesktop.org/camera/uvc-gadget
++该功能由 usb_f_obex.ko 模块提供。
++
++功能专用的 configfs 接口
++--------------------------
++
++创建功能目录时使用的功能名称为 "obex"。
++OBEX 功能在其功能目录中仅提供一个属性：
++
++	port_num
++
++该属性为只读。
++
++系统中最多可以有 4 个 ACM/通用串口/OBEX 端口。
++
++测试 OBEX 功能
++--------------
++
++在设备上::
++
++	seriald -f /dev/ttyGS<Y> -s 1024
++
++在主机上::
++
++	serialc -v <vendorID> -p <productID> -i<interface#> -a1 -s1024 \
++                -t<out endpoint addr> -r<in endpoint addr>
++
++seriald和serialc是Felipe提供的工具，可在此获取：
++
++	https://github.com/felipebalbi/usb-tools.git master
++
++12. PHONET功能
++==============
++
++该功能由 usb_f_phonet.ko 模块提供。
++
++功能专用的 configfs 接口
++--------------------------
++
++创建功能目录时使用的功能名称为 "phonet"。
++PHONET 功能在其功能目录中仅提供一个属性：
++
++	=============== ==================================================
++	ifname		与该功能实例关联的网络设备接口名称
++	=============== ==================================================
++
++测试 PHONET 功能
++--------------------------
++在没有特定硬件的情况下无法测试 SOCK_STREAM 协议，因此仅测试了 SOCK_DGRAM。
++为使其工作，过去必须应用相应补丁。
++
++这些工具是必需的：
++
++git://git.gitorious.org/meego-cellular/phonet-utils.git
++
++在主机上::
++
++	$ ./phonet -a 0x10 -i usbpn0
++	$ ./pnroute add 0x6c usbpn0
++	$./pnroute add 0x10 usbpn0
++	$ ifconfig usbpn0 up
++
++在设备上::
++
++	$ ./phonet -a 0x6c -i upnlink0
++	$ ./pnroute add 0x10 upnlink0
++	$ ifconfig upnlink0 up
++
++
++在设备上::
++	$ ./pnxmit -a 0x6c -r
++
++在主机上::
++
++	$ ./pnxmit -a 0x10 -s 0x6c
++
++作为结果，一些数据应该从主机发送到设备。
++然后反过来：
++
++在主机上::
++
++	$ ./pnxmit -a 0x10 -r
++
++在设备上::
++	$ ./pnxmit -a 0x6c -s 0x10
++
++13. RNDIS功能
++=============
++
++该功能由usb_f_rndis.ko模块提供。
++
++功能特定的configfs接口
++--------------------------
++
++创建功能目录时使用的功能名为"rndis"。
++RNDIS功能在其功能目录中提供以下属性：
++
++	=============== ==================================================
++	ifname			与该功能实例关联的网络设备接口名称
++	qmult			高速和超高速模式的队列长度倍增器
++	host_addr		主机端的MAC地址（USB以太网链接）
++	dev_addr		设备端的MAC地址（USB以太网链接）
++	=============== ==================================================
++
++创建functions/rndis.<实例名>后，
++它们包含默认值：qmult为5，dev_addr和host_addr随机选择。
++如果功能尚未绑定，可以写入ifname。
++写入必须是类似"usb%d"的接口模式，
++这将使网络核心选择下一个空闲的usbX接口。
++默认值为"usb%d"。
++
++测试 RNDIS 功能
++------------------
++
++配置设备和主机的IP地址。然后：
++
++在设备上::
++
++	ping <host's IP>
++
++在主机上::
++	ping <device's IP>
++
++14. SERIAL功能
++===================
++
++该功能由usb_f_gser.ko模块提供。
++
++功能专用的configfs接口
++------------------------
++
++创建功能目录时使用的功能名为"gser"。
++SERIAL功能在其功能目录中仅提供一个属性：
++
++	port_num
++
++该属性为只读。
++
++系统中最多可以有4个ACM/通用串口/OBEX端口。
++
++测试 SERIAL 功能
++--------------------
++
++在主机上::
++
++	insmod usbserial
++	echo VID PID >/sys/bus/usb-serial/drivers/generic/new_id
++
++在主机上::
++
++	cat > /dev/ttyUSB<X>
++
++在设备上::
++	cat /dev/ttyGS<Y>
++
++then the other way round
++
++在目标端::
++
++	cat > /dev/ttyGS<Y>
++
++在主机上::
++	cat /dev/ttyUSB<X>
++
++15. SOURCESINK功能
++=======================
++
++该功能由usb_f_ss_lb.ko模块提供。
++
++功能专用的configfs接口
++------------------------------------
++
++创建功能目录时使用的功能名为"SourceSink"。
++SOURCESINK功能在其功能目录中提供以下属性：
++
++	=============== ==================================
++	pattern			0 (全零), 1 (mod63), 2 (无)
++	isoc_interval	1..16
++	isoc_maxpacket	0 - 1023 (fs), 0 - 1024 (hs/ss)
++	isoc_mult		0..2 (hs/ss only)
++	isoc_maxburst	0..15 (ss only)
++	bulk_buflen		缓冲区长度
++	bulk_qlen		块传输队列深度
++	iso_qlen		等时传输队列深度
++	=============== ==================================
++
++测试SOURCESINK功能
++------------------
++
++设备端：运行gadget
++
++主机端：test-usb (tools/usb/testusb.c)
++
++
++16. UAC1功能 (legacy实现)
++=========================
++
++该功能由usb_f_uac1_legacy.ko模块提供。
++
++功能特定的configfs接口
++------------------------
++
++创建功能目录时使用的功能名为"uac1_legacy"。
++uac1功能在其功能目录中提供以下属性：
++
++	=============== ====================================
++	audio_buf_size	audio缓冲区大小
++	fn_cap			捕获pcm设备文件名
++	fn_cntl			控制设备文件名
++	fn_play			播放pcm设备文件名
++	req_buf_size	ISO OUT端点请求缓冲区大小
++	req_count		ISO OUT端点请求计数
++	=============== ====================================
++
++这些属性具有合理的默认值。
++
++测试UAC1功能
++------------
++
++设备端：运行gadget
++
++主机端::
++
++	aplay -l # should list our USB Audio Gadget
++
++17. UAC2功能
++============
++
++该功能由usb_f_uac2.ko模块提供。
++
++功能特定的configfs接口
++------------------------------------
++
++创建功能目录时使用的功能名为"uac2"。
++uac2功能在其功能目录中提供以下属性：
++================ ====================================================
++c_chmask         捕获通道掩码
++c_srate          捕获采样率列表（逗号分隔）
++c_ssize          捕获样本大小（字节）
++c_sync           捕获同步类型（异步/自适应）
++c_mute_present   捕获静音控制启用
++c_volume_present 捕获音量控制启用
++c_volume_min     捕获音量控制最小值（以1/256 dB为单位）
++c_volume_max     捕获音量控制最大值（以1/256 dB为单位）
++c_volume_res     捕获音量控制分辨率（以1/256 dB为单位）
++c_hs_bint        捕获HS/SS的bInterval（1-4：固定，0：自动）
++fb_max           异步模式下的最大额外带宽
++p_chmask         播放通道掩码
++p_srate          播放采样率列表（逗号分隔）
++p_ssize          播放样本大小（字节）
++p_mute_present   播放静音控制启用
++p_volume_present 播放音量控制启用
++p_volume_min     播放音量控制最小值（以1/256 dB为单位）
++p_volume_max     播放音量控制最大值（以1/256 dB为单位）
++p_volume_res     播放音量控制分辨率（以1/256 dB为单位）
++p_hs_bint        播放HS/SS的bInterval（1-4：固定，0：自动）
++req_number       捕获和播放的预分配请求数
++function_name    接口名称
++if_ctrl_name     拓扑控制名称
++clksrc_in_name   输入时钟名称
++clksrc_out_name  输出时钟名称
++p_it_name        播放输入终端名称
++p_it_ch_name     播放输入第一个通道名称
++p_ot_name        播放输出终端名称
++p_fu_vol_name    播放功能单元名称
++c_it_name        捕获输入终端名称
++c_it_ch_name     捕获输入第一个通道名称
++c_ot_name        捕获输出终端名称
++c_fu_vol_name    捕获功能单元名称
++c_terminal_type  捕获终端类型代码
++p_terminal_type  播放终端类型代码
++================ ====================================================
++
++这些属性具有合理的默认值。
++
++测试UAC2功能
++------------
++
++设备端：运行gadget
++主机端：aplay -l # 应列出我们的USB音频Gadget
++
++此功能不需要真实硬件支持，它仅发送音频流到/从主机。
++若要在设备端实际听到声音，可使用类似如下命令::
++
++	$ arecord -f dat -t wav -D hw:2,0 | aplay -D hw:0,0 &
++
++例如::
++
++	$ arecord -f dat -t wav -D hw:CARD=UAC2Gadget,DEV=0 | \
++	  aplay -D default:CARD=OdroidU3
++
++18. UVC功能
++===========
++
++该功能由usb_f_uvc.ko模块提供。
++
++功能特定的configfs接口
++----------------------
++
++创建功能目录时使用的功能名为"uvc"。
++uvc功能在其功能目录中提供以下属性：
++=================== ================================================
++streaming_interval  数据传输轮询端点的间隔
++streaming_maxburst  超速伴随描述符的bMaxBurst
++streaming_maxpacket 端点可发送或接收的最大包大小（选中此配置时）
++function_name       接口名称
++=================== ================================================
++
++还有"control"和"streaming"子目录，每个子目录包含若干子目录。提供了一些合理的默认值，但用户必须提供：
++
++================== ====================================================
++control header     在control/header创建，并从control/class/fs
++	   				和/或control/class/ss链接
++streaming header   在streaming/header创建，并从streaming/class/fs和/或streaming/class/hs和/或
++		   			streaming/class/ss链接
++format description 在streaming/mjpeg和/或
++		   			streaming/uncompressed创建
++frame description  在streaming/mjpeg/<format>和/或在
++		   			streaming/uncompressed/<format>创建
++================== ====================================================
++
++每个frame description包含帧间隔规范，每个规范由若干行间隔值组成。上述规则示例::
++
++  # mkdir functions/uvc.usb0/control/header/h
++  # cd functions/uvc.usb0/control/
++  # ln -s header/h class/fs
++  # ln -s header/h class/ss
++  # mkdir -p functions/uvc.usb0/streaming/uncompressed/u/360p
++  # cat <<EOF > functions/uvc.usb0/streaming/uncompressed/u/360p/dwFrameInterval
++  666666
++  1000000
++  5000000
++  EOF
++  # cd $GADGET_CONFIGFS_ROOT
++  # mkdir functions/uvc.usb0/streaming/header/h
++  # cd functions/uvc.usb0/streaming/header/h
++  # ln -s ../../uncompressed/u
++  # cd ../../class/fs
++  # ln -s ../../header/h
++  # cd ../../class/hs
++  # ln -s ../../header/h
++  # cd ../../class/ss
++  # ln -s ../../header/h
++
++
++测试UVC功能
++-----------
++
++设备端：运行gadget，modprobe vivid::
++
++  # uvc-gadget -u /dev/video<uvc video node #> -v /dev/video<vivid video node #>
++
++其中uvc-gadget程序位于：
++	http://git.ideasonboard.org/uvc-gadget.git
++
++并应用以下补丁：
++
++	https://lore.kernel.org/r/1386675637-18243-1-git-send-email-r.baldyga@samsung.com/
++
++主机端::
++
++	luvcview -f yuv
++
++19. PRINTER功能
++================
++
++该功能由usb_f_printer.ko模块提供。
++
++功能特定的configfs接口
++-------------------------
++
++创建功能目录时使用的功能名为"printer"。
++printer功能在其功能目录中提供以下属性：
++
++==========	===========================================
++pnp_string	传递给主机的即插即用字符串
++q_len		每个端点的请求数
++==========	===========================================
++
++测试PRINTER功能
++------------------
++
++最基本的测试：
++
++设备端：运行gadget::
++
++	# ls -l /devices/virtual/usb_printer_gadget/
++
++应该显示 g_printer<number>。
++
++如果 udev 处于活动状态，则应自动出现 /dev/g_printer<number>。
++
++主机端：
++如果 udev 处于活动状态，则应自动出现例如 /dev/usb/lp0。
++
++主机->设备传输：
++
++设备端：
++
++	# cat /dev/g_printer<number>
++
++主机端：
++	# cat > /dev/usb/lp0
++
++设备->主机传输::
++
++	# cat > /dev/g_printer<number>
++
++主机端::
++	# cat /dev/usb/lp0
++
++更高级的测试可以使用Documentation/usb/gadget_printer.rst中描述的prn_example进行。
++
++
++20. UAC1功能（虚拟ALSA卡，使用u_audio API）
++=============================================
++
++该功能由usb_f_uac1.ko模块提供。
++它将创建一个虚拟ALSA卡，音频流仅仅是
++发送到和接收自它。
++
++功能特定的configfs接口
++-------------------------
++
++创建功能目录时使用的功能名为"uac1"。
++uac1功能在其功能目录中提供以下属性：
++================ ====================================================
++c_chmask         捕获通道掩码
++c_srate          捕获采样率列表（逗号分隔）
++c_ssize          捕获样本大小（字节）
++c_mute_present   捕获静音控制启用
++c_volume_present 捕获音量控制启用
++c_volume_min     捕获音量控制最小值（以1/256 dB为单位）
++c_volume_max     捕获音量控制最大值（以1/256 dB为单位）
++c_volume_res     捕获音量控制分辨率（以1/256 dB为单位）
++p_chmask         播放通道掩码
++p_srate          播放采样率列表（逗号分隔）
++p_ssize          播放样本大小（字节）
++p_mute_present   播放静音控制启用
++p_volume_present 播放音量控制启用
++p_volume_min     播放音量控制最小值（以1/256 dB为单位）
++p_volume_max     播放音量控制最大值（以1/256 dB为单位）
++p_volume_res     播放音量控制分辨率（以1/256 dB为单位）
++req_number       捕获和播放的预分配请求数
++function_name    接口名称
++p_it_name        播放输入端名称
++p_it_ch_name     播放通道名称
++p_ot_name        播放输出端名称
++p_fu_vol_name    播放静音/音量功能单元名称
++c_it_name        捕获输入端名称
++c_it_ch_name     捕获通道名称
++c_ot_name        捕获输出端名称
++c_fu_vol_name    捕获静音/音量功能单元名称
++================ ====================================================
++
++这些属性具有合理的默认值。
++
++测试UAC1功能
++----------------
++
++设备端：运行gadget
++主机端：aplay -l # 应该列出我们的USB音频设备
++
++该功能不需要真实的硬件支持，它只是
++向主机发送和接收音频数据流。为了
++实际上在设备端听到声音，必须在设备端使用类似的命令：
++
++	$ arecord -f dat -t wav -D hw:2,0 | aplay -D hw:0,0 &
++
++例如::
++
++	$ arecord -f dat -t wav -D hw:CARD=UAC1Gadget,DEV=0 | \
++	  aplay -D default:CARD=OdroidU3
++
++
++21. MIDI2功能
++================
++
++该功能由usb_f_midi2.ko模块提供。
++它将创建一个虚拟ALSA卡，其中包含一个UMP rawmidi设备，
++UMP数据包被回环。
++此外，还会创建一个传统的rawmidi设备。
++UMP rawmidi还绑定了ALSA sequencer客户端。
++
++功能特定的configfs接口
++------------------------
++
++创建功能目录时使用的功能名为"midi2"。
++midi2功能在其功能目录中提供以下属性（作为卡顶层信息）：
++
++=============   =================================================
++process_ump     布尔标志，处理UMP Stream消息（0或1）
++static_block    静态块的布尔标志（0或1）
++iface_name      可选的接口名称字符串
++=============   =================================================
++
++目录包含一个子目录"ep.0"，提供UMP端点（USB MIDI端点对）的属性：
++
++=============   =================================================
++protocol_caps   MIDI协议能力；
++                    1：MIDI 1.0，2：MIDI 2.0，或3：两者
++protocol        默认MIDI协议（1或2）
++ep_name         UMP Endpoint名称字符串
++product_id      Product ID字符串
++manufacturer    制造商ID号（24位）
++family          设备系列ID号（16位）
++model           设备型号ID号（16位）
++sw_revision     软件版本号（32位）
++=============   =================================================
++
++每个端点子目录包含子目录"block.0"，表示功能块0的信息，其属性为：
++
++=================   ===============================================
++name                功能块名称字符串
++direction           该功能块的方向
++                        1：输入，2：输出，或3：双向
++first_group         第一个UMP组号（0-15）
++num_groups          该功能块中的组数（1-16）
++midi1_first_group   第一个UMP组号，用于MIDI 1.0（0-15）
++midi1_num_groups    MIDI 1.0的组数（0-16）
++ui_hint             该功能块的UI提示
++                        0：未知，1：接收器，2：发送器，3：两者
++midi_ci_version     支持的MIDI-CI版本号（8位）
++is_midi1            传统MIDI 1.0设备（0-2）
++                        0：MIDI 2.0设备，
++                        1：无限制的MIDI 1.0，或
++                        2：低速的MIDI 1.0
++sysex8_streams      最大SysEx8流数（8位）
++active              功能块活动的布尔标志（0或1）
++=================   ===============================================
++
++如需多个功能块，可创建"block.<num>"子目录（1,2,…），且编号必须连续。
++功能块子目录也可动态删除。
++
++同样，如需多个UMP端点，可创建"ep.<num>"子目录，编号必须连续。
++
++若模拟不支持UMP v1.1的旧MIDI 2.0设备，可将`process_ump`设置为0，
++忽略所有UMP v1.1请求。
++
++测试MIDI2功能
++--------------
++
++在设备端：运行gadget，并执行::
++
++  $ cat /proc/asound/cards
++
++将显示包含MIDI2设备的新声卡。
++
++在主机端::
++
++  $ cat /proc/asound/cards
++
++将显示包含MIDI1或MIDI2设备的新声卡，具体取决于USB音频驱动程序的配置。
++
++在两者上，当主机启用ALSA sequencer时，可以找到
++UMP MIDI客户端，如"MIDI 2.0 Gadget"。
++
++由于驱动程序只是简单地回环数据，因此不需要真实设备进行测试。
++
++要测试从gadget到主机的MIDI输入（例如模拟MIDI键盘），可以发送如下的MIDI流。
++
++在设备端::
++
++  $ aconnect -o
++  ....
++  client 20: 'MIDI 2.0 Gadget' [type=kernel,card=1]
++      0 'MIDI 2.0        '
++      1 'Group 1 (MIDI 2.0 Gadget I/O)'
++  $ aplaymidi -p 20:1 to_host.mid
++
++在主机端::
++
++  $ aconnect -i
++  ....
++  client 24: 'MIDI 2.0 Gadget' [type=kernel,card=2]
++      0 'MIDI 2.0        '
++      1 'Group 1 (MIDI 2.0 Gadget I/O)'
++  $ arecordmidi -p 24:1 from_gadget.mid
++
++如果你有支持UMP的应用程序，也可以使用UMP端口
++发送/接收原始UMP数据包。例如，支持UMP的aseqdump程序
++可以从UMP端口接收数据。在主机端::
++
++  $ aseqdump -u 2 -p 24:1
++  Waiting for data. Press Ctrl+C to end.
++  Source  Group    Event                  Ch  Data
++   24:1   Group  0, Program change          0, program 0, Bank select 0:0
++   24:1   Group  0, Channel pressure        0, value 0x80000000
++
++要测试从主机到gadget的MIDI输出（例如模拟MIDI合成器），则相反。
++
++在设备端::
++
++  $ arecordmidi -p 20:1 from_host.mid
++
++在主机端::
++  $ aplaymidi -p 24:1 to_gadget.mid
++
++在主机端支持对altset 0上的MIDI 1.0的访问，
++并且它在gadget上被翻译为UMP数据包。该功能仅绑定到功能块0。
++
++当前操作模式可通过ALSA控制元素"SND_CTL_IFACE_RAWMIDI"的“Operation Mode”查看。
++例如::
++
++  $ amixer -c1 contents
++  numid=1,iface=RAWMIDI,name='Operation Mode'
++    ; type=INTEGER,access=r--v----,values=1,min=0,max=2,step=0
++    : values=2
++
++其中0 = 未使用，1 = MIDI 1.0（altset 0），2 = MIDI 2.0（altset 1）。
++上述示例显示当前运行模式为2，即MIDI 2.0。
 --
 2.34.1
 
