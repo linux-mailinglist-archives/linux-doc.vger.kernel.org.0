@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67834-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67817-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39BB6C7E0D9
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 13:11:39 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC954C7E09D
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 86844347C57
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:11:38 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 842574E2BA1
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2063015530C;
-	Sun, 23 Nov 2025 12:11:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B23A2D29D6;
+	Sun, 23 Nov 2025 11:56:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="ZVooJdJr"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="nByss7ZO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m49208.qiye.163.com (mail-m49208.qiye.163.com [45.254.49.208])
+Received: from mail-m49224.qiye.163.com (mail-m49224.qiye.163.com [45.254.49.224])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B514485C4A
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 12:11:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.208
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A6774A35
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.224
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763899895; cv=none; b=G87OMmONUyxVH1rgtT7Kdx0uyVx8nrjfOes7PHJOb9J8O2zISZn63u2MxRr+1JwpYEcT3u+vfWoDDk+ykrlk0U1jH4Iakow41e41jNKDV2TMESaQe5jRPvt2dapILFx6CXyV7pw8ST0CiFF0p333ntjZCJhZrq6sRZmKgOY3l58=
+	t=1763898976; cv=none; b=fIVNdoMyZfpV6J05i3ZOrbdLKDXByYdSaSerrSIsd5RhTLYzyxq7wBZv/JzM2Hyh/+tyctWtfnhuoPvhVfajEsxWf9kOIjB63Q7t5azTwFyJK1HcT2TGJniwObsrbxR/jpyYDFk8U9qypes968/kcMkV5h9MYl2RcxE547FCN4M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763899895; c=relaxed/simple;
-	bh=QFjZgEqKCURa5FFVyPsmtFrg/supfsEyubkpLkPcKqI=;
+	s=arc-20240116; t=1763898976; c=relaxed/simple;
+	bh=k+dki6aLl8ur8Jy8UVhCWa+mnXgFjI5i7tL9MW4gj3I=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Ihdv2Zfh+E3Gzri3KUhi1MlR73FI7ylaVQzqRw5C1gXGIThv1poVy6KRSgD7UmXFDx2jS1Dg2knvVT22FuMA9IcirX+wBtrn7c7cd04cbEis6QIcG+CLiq0Od5QTT5TuIAUHe+iuD4RGL7eXymGbkfuc0j+2uCvYzkpkgZObM+4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=ZVooJdJr; arc=none smtp.client-ip=45.254.49.208
+	 MIME-Version:Content-Type; b=lFtWXjgofeA1PrfVeWbdfuMn4/7RdzieQVlfJBer8y5JreaDOpw7qEiWQ2DyIVBdzHk3rjk63+GZTjtcqYtM0tbog27cusxpD873hFRD0BqAbuNkpkJzhLcNVsGMnyPkS7ZFj7YF1+gkBtM0wEhuDiwgSf6glL66fd83aiYZ7qc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=nByss7ZO; arc=none smtp.client-ip=45.254.49.224
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a90290fa;
-	Sun, 23 Nov 2025 19:56:02 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a90290fb;
+	Sun, 23 Nov 2025 19:56:03 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 10/25] docs/zh_CN: Add gadget_hid.rst translation
-Date: Sun, 23 Nov 2025 19:56:08 +0800
-Message-ID: <24670a5803653b6532541f4fe02ecb06f7efec5a.1763897036.git.baikefan@leap-io-kernel.com>
+Subject: [PATCH v2 11/25] docs/zh_CN: Add gadget_multi.rst translation
+Date: Sun, 23 Nov 2025 19:56:09 +0800
+Message-ID: <1138630f7d4ce34d2f7df481b2df08fbec342bea.1763897036.git.baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1763897036.git.baikefan@leap-io-kernel.com>
 References: <cover.1763897036.git.baikefan@leap-io-kernel.com>
@@ -54,38 +54,37 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab09232e509d5kunm2b5c8c0429adb0
+X-HM-Tid: 0a9ab09236a609d5kunm2b5c8c0429adb4
 X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTE8eVk9KGEtKQkpKTx0YGlYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
-	VLWQY+
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTE4eVhpLH0lOTRpPSkJMH1YVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg++
 DKIM-Signature: a=rsa-sha256;
-	b=ZVooJdJrCGTXaq6hX6gnkwCbA03eJxdNLjgAv4RTdQaAJzwaZgJbjbIkZPiGuiqCmshoVKP7JT0VLf060rpBuPUFsAezZGahl8RtL+jZsJX9vKT/yqVPIGjLvL+yspIIxexLIdG2qD/666zj+Ml9JhRSTLI8wo/OM+WiKroeL5f4yX7sz/hD23A9y+HTOmvIOAGjIaFO3qlTiMF8ekd4ooE5lOevCwwdWSqCt8EgQYGktDflDYFDMrVGxG7+Q88K3whKmYwAK3BRZ+92mWps8+YdQT7PkJufif3cODIpazFV5KyVo/3NGgI1Xzv/as3dtSVaukw6GDo5qAyng8zm1w==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=mnVuD6lagK0UI3sZYt3ig49msA/iVj8j4OArmqzpgXM=;
+	b=nByss7ZOACVUoU57MaMh6n7VBIg5OT1z69Te1IPHFk/l8xaKG0LXqXpjNQlBNBEb7Bd6SrUs7y8yZSU7HsvrrKBNWGPHs/jOsfNJOsIHOi8ReXwTGsHBs94fvphEdake4Mo9iLV3us7g5zZFBGlQPZpFkIlcHU+QkhTPD9/4Ttn2F2q88Wh7dddPHs61ngooEvYBaR/w1BvulikLDy0nMaOy+mWPHSJbO8PElB4m81HEZ0wgAIpLaX2l7bDk7V6JWi7D+N1ABIzwlcAb6KpO6CJxB1pfjxeqbjuplxnGdR1rlBUc4Y6I1FILL9+p0yW0HsvCX5SF1k/bIaZZGjLRlw==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=bh6Mkwx+dsM8ptYAfdX7IqQhQusuaqdvwtvjPebRk4c=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/gadget_hid.rst into Chinese.
+Translate .../usb/gadget_multi.rst into Chinese.
 
-Update the translation through commit ffeb1e9e897b
-("USB: Replace HTTP links with HTTPS ones")
+Translate .../usb/gadget_multi.rst into Chinese.
+("Documentation: USB: correct possessive "its" usage")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/gadget_hid.rst     | 462 ++++++++++++++++++
- 1 file changed, 462 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_hid.rst
+ .../translations/zh_CN/usb/gadget_multi.rst   | 154 ++++++++++++++++++
+ 1 file changed, 154 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/gadget_multi.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/gadget_hid.rst b/Documentation/translations/zh_CN/usb/gadget_hid.rst
+diff --git a/Documentation/translations/zh_CN/usb/gadget_multi.rst b/Documentation/translations/zh_CN/usb/gadget_multi.rst
 new file mode 100644
-index 000000000000..3c1fa8ed3979
+index 000000000000..cff16e89b9b4
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/gadget_hid.rst
-@@ -0,0 +1,462 @@
++++ b/Documentation/translations/zh_CN/usb/gadget_multi.rst
+@@ -0,0 +1,154 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/gadget_hid.rst
++:Original: Documentation/usb/gadget_multi.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,456 +93,148 @@ index 000000000000..3c1fa8ed3979
 +
 +
 +
-+===========================
-+Linux USB HID gadget驱动
-+===========================
-+
-+简介
-+====
-+HID Gadget驱动提供USB人机接口设备（HID）的模拟实现。
-+基础的HID处理由内核完成，
-+HID报告可以通过对 /dev/hidgX 字符设备进行I/O来发送/接收。
-+
-+关于HID的更多细节请参考开发者页面：
-+https://www.usb.org/developers/hidpage/
-+
-+配置
-+====
-+g_hid是一个 platform driver，因此要使用它，
-+你需要在平台代码中添加 struct platform_device，
-+定义你想要使用的HID功能描述符 —— 例如如下代码：::
-+
-+  #include <linux/platform_device.h>
-+  #include <linux/usb/g_hid.h>
-+
-+  /* hid descriptor for a keyboard */
-+  static struct hidg_func_descriptor my_hid_data = {
-+	.subclass		= 0, /* 无子类 */
-+	.protocol		= 1, /* 键盘 */
-+	.report_length		= 8,
-+	.report_desc_length	= 63,
-+	.report_desc		= {
-+		0x05, 0x01,	/* USAGE_PAGE (Generic Desktop)	          */
-+		0x09, 0x06,	/* USAGE (Keyboard)                       */
-+		0xa1, 0x01,	/* COLLECTION (Application)               */
-+		0x05, 0x07,	/*   USAGE_PAGE (Keyboard)                */
-+		0x19, 0xe0,	/*   USAGE_MINIMUM (Keyboard LeftControl) */
-+		0x29, 0xe7,	/*   USAGE_MAXIMUM (Keyboard Right GUI)   */
-+		0x15, 0x00,	/*   LOGICAL_MINIMUM (0)                  */
-+		0x25, 0x01,	/*   LOGICAL_MAXIMUM (1)                  */
-+		0x75, 0x01,	/*   REPORT_SIZE (1)                      */
-+		0x95, 0x08,	/*   REPORT_COUNT (8)                     */
-+		0x81, 0x02,	/*   INPUT (Data,Var,Abs)                 */
-+		0x95, 0x01,	/*   REPORT_COUNT (1)                     */
-+		0x75, 0x08,	/*   REPORT_SIZE (8)                      */
-+		0x81, 0x03,	/*   INPUT (Cnst,Var,Abs)                 */
-+		0x95, 0x05,	/*   REPORT_COUNT (5)                     */
-+		0x75, 0x01,	/*   REPORT_SIZE (1)                      */
-+		0x05, 0x08,	/*   USAGE_PAGE (LEDs)                    */
-+		0x19, 0x01,	/*   USAGE_MINIMUM (Num Lock)             */
-+		0x29, 0x05,	/*   USAGE_MAXIMUM (Kana)                 */
-+		0x91, 0x02,	/*   OUTPUT (Data,Var,Abs)                */
-+		0x95, 0x01,	/*   REPORT_COUNT (1)                     */
-+		0x75, 0x03,	/*   REPORT_SIZE (3)                      */
-+		0x91, 0x03,	/*   OUTPUT (Cnst,Var,Abs)                */
-+		0x95, 0x06,	/*   REPORT_COUNT (6)                     */
-+		0x75, 0x08,	/*   REPORT_SIZE (8)                      */
-+		0x15, 0x00,	/*   LOGICAL_MINIMUM (0)                  */
-+		0x25, 0x65,	/*   LOGICAL_MAXIMUM (101)                */
-+		0x05, 0x07,	/*   USAGE_PAGE (Keyboard)                */
-+		0x19, 0x00,	/*   USAGE_MINIMUM (Reserved)             */
-+		0x29, 0x65,	/*   USAGE_MAXIMUM (Keyboard Application) */
-+		0x81, 0x00,	/*   INPUT (Data,Ary,Abs)                 */
-+		0xc0		/* END_COLLECTION                         */
-+	}
-+  };
-+
-+  static struct platform_device my_hid = {
-+	.name			= "hidg",
-+	.id			= 0,
-+	.num_resources		= 0,
-+	.resource		= 0,
-+	.dev.platform_data	= &my_hid_data,
-+  };
-+
-+你可以添加任意数量的HID功能，
-+唯一的限制是gadget驱动所支持的中断端点数量。
-+
-+使用configfs进行配置
++======================
++多功能复合 Gadget
 +======================
 +
-+与其通过添加虚拟的platform device和driver来向内核传递数据，不如这样做：
-+如果HID是由configfs组成的gadget的一部分，
-+hidg_func_descriptor.report_desc可以直接通过
-+向configfs属性写入相应的字节流来传递给内核。
++概述
++====
 +
-+发送和接收HID报告
-+====================
++多功能复合 Gadget（或称 g_multi）是一个复合 Gadget，
++它充分利用复合框架来提供多功能设备。
 +
-+HID报告可以通过对/dev/hidgX字符设备执行
-+read/write来发送或接收。下面是一个示例程序展示如何实现。
++在其标准配置中，它提供一个 USB 配置，包含 RNDIS[1]（即以太网）、
++USB CDC[2] ACM（即串口）以及 USB 大容量存储功能。
 +
-+hid_gadget_test是一个用于测试HID gadget驱动的小型交互程序。
-+使用方式是指定一个hidg设备并设置设备类型（keyboard / mouse / joystick）
-+—— 例如::
++通过 Kconfig 选项，可以启用 CDC ECM（以太网）功能，同时可关闭 RNDIS。
++如果两者都启用，则 Gadget 将有两个配置——一个带 RNDIS，另一个带 CDC ECM[3]。
 +
-+	# hid_gadget_test /dev/hidg0 keyboard
++请注意，如果使用非标准配置（即启用 CDC ECM），可能需要更改厂商 ID 和/或产品 ID。
 +
-+现在你进入了hid_gadget_test的提示界面。
-+你可以输入任意组合的选项和值。
-+可用的选项和值会在程序启动时列出。
-+在键盘模式下，你最多可以发送六个值。
++主机驱动
++========
 +
-+例如输入： g i s t r --left-shift
++要使用该 Gadget，需要在主机端让它正常工作——
++否则 Gadget 无法发挥作用。
++如预期的那样，具体操作因系统而异。
 +
-+按回车后，会由HID gadget发送对应的报告。
++Linux 主机驱动
++--------------
++由于该 Gadget 使用标准复合框架并在 Linux 主机上显示为复合设备，
++Linux 主机端无需额外驱动。所有功能均由各自的驱动处理。
 +
-+另一个有趣的例子是大小写锁定（caps lock）测试。
-+输入--caps-lock 然后回车，gadget 会发送一个报告，
-+并且你将收到主机端的回应，对应于 caps lock LED 的状态::
++对于两个配置的设置（以 RNDIS 配置为第一个配置）也是如此。
++Linux 主机会使用带 CDC ECM 的第二个配置，在 Linux 下通常效果更好。
 +
-+	--caps-lock
-+	recv report:2
++Windows 主机驱动
++--------------------
 +
-+使用以下命令::
++要在 Windows 下使用该 Gadget，需要满足两个条件：
 +
-+	# hid_gadget_test /dev/hidg1 mouse
++作为复合 Gadget 检测
++^^^^^^^^^^^^^^^^^^^^^^^^
++首先，Windows 需要将 Gadget 检测为 USB 复合设备，这本身有一些条件[4]。
++满足这些条件后，Windows 会使用 USB 通用父驱动（USB Generic Parent Driver）[5] 处理设备，
++然后尝试为每个接口匹配相应的驱动（大致如此，不必深入细节）。
 +
-+你可以测试鼠标模拟。数值是两个有符号数。
++好消息是：大部分条件你无需担心！
 +
++唯一需要注意的是 Gadget 必须只有一个配置，因此双 RNDIS 和 CDC ECM 的 Gadget
++除非创建合适的 INF 文件，否则无法工作——当然，如果你提交了 INF 文件的话！
 +
-+示例代码::
++为每个功能安装驱动
++^^^^^^^^^^^^^^^^^^^^
 +
-+    /* hid_gadget_test */
++另一个更棘手的问题是让 Windows 为每个独立功能安装驱动。
 +
-+    #include <pthread.h>
-+    #include <string.h>
-+    #include <stdio.h>
-+    #include <ctype.h>
-+    #include <fcntl.h>
-+    #include <errno.h>
-+    #include <stdio.h>
-+    #include <stdlib.h>
-+    #include <unistd.h>
++对于大容量存储，这是简单的，因为 Windows 会检测它是 USB 大容量存储类接口，
++并选择合适的驱动。
 +
-+    #define BUF_LEN 512
++RNDIS 和 CDC ACM 则比较复杂。
 +
-+    struct options {
-+	const char    *opt;
-+	unsigned char val;
-+  };
++RNDIS
++.....
 +
-+  static struct options kmod[] = {
-+	{.opt = "--left-ctrl",		.val = 0x01},
-+	{.opt = "--right-ctrl",		.val = 0x10},
-+	{.opt = "--left-shift",		.val = 0x02},
-+	{.opt = "--right-shift",	.val = 0x20},
-+	{.opt = "--left-alt",		.val = 0x04},
-+	{.opt = "--right-alt",		.val = 0x40},
-+	{.opt = "--left-meta",		.val = 0x08},
-+	{.opt = "--right-meta",		.val = 0x80},
-+	{.opt = NULL}
-+  };
++为了让 Windows 为 Gadget 的第一个功能选择 RNDIS 驱动，
++需要使用本文档提供的 [[file:linux.inf]] 文件。
++它将 Windows 的 RNDIS 驱动“绑定”到 Gadget 的第一个接口。
 +
-+  static struct options kval[] = {
-+	{.opt = "--return",	.val = 0x28},
-+	{.opt = "--esc",	.val = 0x29},
-+	{.opt = "--bckspc",	.val = 0x2a},
-+	{.opt = "--tab",	.val = 0x2b},
-+	{.opt = "--spacebar",	.val = 0x2c},
-+	{.opt = "--caps-lock",	.val = 0x39},
-+	{.opt = "--f1",		.val = 0x3a},
-+	{.opt = "--f2",		.val = 0x3b},
-+	{.opt = "--f3",		.val = 0x3c},
-+	{.opt = "--f4",		.val = 0x3d},
-+	{.opt = "--f5",		.val = 0x3e},
-+	{.opt = "--f6",		.val = 0x3f},
-+	{.opt = "--f7",		.val = 0x40},
-+	{.opt = "--f8",		.val = 0x41},
-+	{.opt = "--f9",		.val = 0x42},
-+	{.opt = "--f10",	.val = 0x43},
-+	{.opt = "--f11",	.val = 0x44},
-+	{.opt = "--f12",	.val = 0x45},
-+	{.opt = "--insert",	.val = 0x49},
-+	{.opt = "--home",	.val = 0x4a},
-+	{.opt = "--pageup",	.val = 0x4b},
-+	{.opt = "--del",	.val = 0x4c},
-+	{.opt = "--end",	.val = 0x4d},
-+	{.opt = "--pagedown",	.val = 0x4e},
-+	{.opt = "--right",	.val = 0x4f},
-+	{.opt = "--left",	.val = 0x50},
-+	{.opt = "--down",	.val = 0x51},
-+	{.opt = "--kp-enter",	.val = 0x58},
-+	{.opt = "--up",		.val = 0x52},
-+	{.opt = "--num-lock",	.val = 0x53},
-+	{.opt = NULL}
-+  };
++请注意，在测试过程中，如果 RNDIS 不是第一个接口，可能会遇到一些问题[6]。
++除非你在开发自己的 Gadget，否则无需担心此问题。
 +
-+  int keyboard_fill_report(char report[8], char buf[BUF_LEN], int *hold)
-+  {
-+	char *tok = strtok(buf, " ");
-+	int key = 0;
-+	int i = 0;
++CDC ACM
++.......
 +
-+	for (; tok != NULL; tok = strtok(NULL, " ")) {
++同样，[[file:linux-cdc-acm.inf]] 文件用于 CDC ACM。
 +
-+		if (strcmp(tok, "--quit") == 0)
-+			return -1;
++自定义 Gadget
++................
 +
-+		if (strcmp(tok, "--hold") == 0) {
-+			*hold = 1;
-+			continue;
-+		}
++如果你打算修改 g_multi Gadget，请注意重新排列功能会改变每个功能的接口号。
++因此提供的 INF 文件将无法使用，因为接口号已硬编码（不过修改并不困难[7]）。
 +
-+		if (key < 6) {
-+			for (i = 0; kval[i].opt != NULL; i++)
-+				if (strcmp(tok, kval[i].opt) == 0) {
-+					report[2 + key++] = kval[i].val;
-+					break;
-+				}
-+			if (kval[i].opt != NULL)
-+				continue;
-+		}
++这也意味着，在实验 g_multi 并修改提供的功能后，
++应更改 Gadget 的厂商 ID 和/或产品 ID，
++以避免与其他自定义 Gadget 或原始 Gadget 冲突。
 +
-+		if (key < 6)
-+			if (islower(tok[0])) {
-+				report[2 + key++] = (tok[0] - ('a' - 0x04));
-+				continue;
-+			}
++不遵循此建议可能会导致长时间调试无果，最终发现 Windows 缓存了某些驱动信息
++（更换 USB 端口有时有帮助，或者使用 USBDeview[8] 删除虚拟设备）。
 +
-+		for (i = 0; kmod[i].opt != NULL; i++)
-+			if (strcmp(tok, kmod[i].opt) == 0) {
-+				report[0] = report[0] | kmod[i].val;
-+				break;
-+			}
-+		if (kmod[i].opt != NULL)
-+			continue;
++INF 测试
++........
 +
-+		if (key < 6)
-+			fprintf(stderr, "unknown option: %s\n", tok);
-+	}
-+	return 8;
-+  }
++提供的 INF 文件已在 Windows XP SP3、
++Windows Vista 和 Windows 7（32 位版本）测试过。
++应能在 64 位版本上工作。
++在 Windows XP SP2 之前的系统上可能无法使用。
 +
-+  static struct options mmod[] = {
-+	{.opt = "--b1", .val = 0x01},
-+	{.opt = "--b2", .val = 0x02},
-+	{.opt = "--b3", .val = 0x04},
-+	{.opt = NULL}
-+  };
++其他系统
++--------
 +
-+  int mouse_fill_report(char report[8], char buf[BUF_LEN], int *hold)
-+  {
-+	char *tok = strtok(buf, " ");
-+	int mvt = 0;
-+	int i = 0;
-+	for (; tok != NULL; tok = strtok(NULL, " ")) {
++目前尚未测试其他系统的驱动。
++考虑到 macOS 基于 BSD，BSD 是开源系统，
++理论上应能直接工作（读作：“我不确定是否能”）。
 +
-+		if (strcmp(tok, "--quit") == 0)
-+			return -1;
++对于其他较为小众的系统，我更无可奉告……
 +
-+		if (strcmp(tok, "--hold") == 0) {
-+			*hold = 1;
-+			continue;
-+		}
++任何测试和驱动都欢迎贡献！
 +
-+		for (i = 0; mmod[i].opt != NULL; i++)
-+			if (strcmp(tok, mmod[i].opt) == 0) {
-+				report[0] = report[0] | mmod[i].val;
-+				break;
-+			}
-+		if (mmod[i].opt != NULL)
-+			continue;
++Authors
++=======
 +
-+		if (!(tok[0] == '-' && tok[1] == '-') && mvt < 2) {
-+			errno = 0;
-+			report[1 + mvt++] = (char)strtol(tok, NULL, 0);
-+			if (errno != 0) {
-+				fprintf(stderr, "Bad value:'%s'\n", tok);
-+				report[1 + mvt--] = 0;
-+			}
-+			continue;
-+		}
++本文档由 Michal Nazarewicz 编写
++([[mailto:mina86@mina86.com]])。
++INF 文件在 Marek Szyprowski ([[mailto:m.szyprowski@samsung.com
++]])
++和 Xiaofan Chen ([[mailto:xiaofanc@gmail.com]]) 的支持下修改，
++基于 MS RNDIS 模板[9]、Microchip 的 CDC ACM INF 文件以及
++David Brownell ([[mailto:dbrownell@users.sourceforge.net]]) 的原始 INF 文件。
 +
-+		fprintf(stderr, "unknown option: %s\n", tok);
-+	}
-+	return 3;
-+  }
++脚注
++====
 +
-+  static struct options jmod[] = {
-+	{.opt = "--b1",		.val = 0x10},
-+	{.opt = "--b2",		.val = 0x20},
-+	{.opt = "--b3",		.val = 0x40},
-+	{.opt = "--b4",		.val = 0x80},
-+	{.opt = "--hat1",	.val = 0x00},
-+	{.opt = "--hat2",	.val = 0x01},
-+	{.opt = "--hat3",	.val = 0x02},
-+	{.opt = "--hat4",	.val = 0x03},
-+	{.opt = "--hatneutral",	.val = 0x04},
-+	{.opt = NULL}
-+  };
++[1] 远程网络驱动接口规范（Remote Network Driver Interface Specification），
++[[https://msdn.microsoft.com/en-us/library/ee484414.aspx]].
 +
-+  int joystick_fill_report(char report[8], char buf[BUF_LEN], int *hold)
-+  {
-+	char *tok = strtok(buf, " ");
-+	int mvt = 0;
-+	int i = 0;
++[2] 通信设备类抽象控制模型（Communications Device Class Abstract Control Model），
++该 USB 类及其他类规范可查阅
++[[http://www.usb.org/developers/devclass_docs/]].
 +
-+	*hold = 1;
++[3] CDC 以太网控制模型（CDC Ethernet Control Model），
++[[https://msdn.microsoft.com/en-us/library/ff537008(v=VS.85).aspx]].
 +
-+	/* set default hat position: neutral */
-+	report[3] = 0x04;
++[4] [[https://msdn.microsoft.com/en-us/library/ff537109(v=VS.85).aspx]]
 +
-+	for (; tok != NULL; tok = strtok(NULL, " ")) {
++[5] [[https://msdn.microsoft.com/en-us/library/ff539234(v=VS.85).aspx]]
 +
-+		if (strcmp(tok, "--quit") == 0)
-+			return -1;
++[6] 换句话说，Windows 对任何用户输入都未作响应。
 +
-+		for (i = 0; jmod[i].opt != NULL; i++)
-+			if (strcmp(tok, jmod[i].opt) == 0) {
-+				report[3] = (report[3] & 0xF0) | jmod[i].val;
-+				break;
-+			}
-+		if (jmod[i].opt != NULL)
-+			continue;
++[7] 你可能会发现 [[http://www.cygnal.org/ubb/Forum9/HTML/001050.html]]
++有用。
 +
-+		if (!(tok[0] == '-' && tok[1] == '-') && mvt < 3) {
-+			errno = 0;
-+			report[mvt++] = (char)strtol(tok, NULL, 0);
-+			if (errno != 0) {
-+				fprintf(stderr, "Bad value:'%s'\n", tok);
-+				report[mvt--] = 0;
-+			}
-+			continue;
-+		}
++[8] https://www.nirsoft.net/utils/usb_devices_view.html
 +
-+		fprintf(stderr, "unknown option: %s\n", tok);
-+	}
-+	return 4;
-+  }
-+
-+  void print_options(char c)
-+  {
-+	int i = 0;
-+
-+	if (c == 'k') {
-+		printf("	keyboard options:\n"
-+		       "		--hold\n");
-+		for (i = 0; kmod[i].opt != NULL; i++)
-+			printf("\t\t%s\n", kmod[i].opt);
-+		printf("\n	keyboard values:\n"
-+		       "		[a-z] or\n");
-+		for (i = 0; kval[i].opt != NULL; i++)
-+			printf("\t\t%-8s%s", kval[i].opt, i % 2 ? "\n" : "");
-+		printf("\n");
-+	} else if (c == 'm') {
-+		printf("	mouse options:\n"
-+		       "		--hold\n");
-+		for (i = 0; mmod[i].opt != NULL; i++)
-+			printf("\t\t%s\n", mmod[i].opt);
-+		printf("\n	mouse values:\n"
-+		       "		Two signed numbers\n"
-+		       "--quit to close\n");
-+	} else {
-+		printf("	joystick options:\n");
-+		for (i = 0; jmod[i].opt != NULL; i++)
-+			printf("\t\t%s\n", jmod[i].opt);
-+		printf("\n	joystick values:\n"
-+		       "		three signed numbers\n"
-+		       "--quit to close\n");
-+	}
-+  }
-+
-+  int main(int argc, const char *argv[])
-+  {
-+	const char *filename = NULL;
-+	int fd = 0;
-+	char buf[BUF_LEN];
-+	int cmd_len;
-+	char report[8];
-+	int to_send = 8;
-+	int hold = 0;
-+	fd_set rfds;
-+	int retval, i;
-+
-+	if (argc < 3) {
-+		fprintf(stderr, "Usage: %s devname mouse|keyboard|joystick\n",
-+			argv[0]);
-+		return 1;
-+	}
-+
-+	if (argv[2][0] != 'k' && argv[2][0] != 'm' && argv[2][0] != 'j')
-+	  return 2;
-+
-+	filename = argv[1];
-+
-+	if ((fd = open(filename, O_RDWR, 0666)) == -1) {
-+		perror(filename);
-+		return 3;
-+	}
-+
-+	print_options(argv[2][0]);
-+
-+	while (42) {
-+
-+		FD_ZERO(&rfds);
-+		FD_SET(STDIN_FILENO, &rfds);
-+		FD_SET(fd, &rfds);
-+
-+		retval = select(fd + 1, &rfds, NULL, NULL, NULL);
-+		if (retval == -1 && errno == EINTR)
-+			continue;
-+		if (retval < 0) {
-+			perror("select()");
-+			return 4;
-+		}
-+
-+		if (FD_ISSET(fd, &rfds)) {
-+			cmd_len = read(fd, buf, BUF_LEN - 1);
-+			printf("recv report:");
-+			for (i = 0; i < cmd_len; i++)
-+				printf(" %02x", buf[i]);
-+			printf("\n");
-+		}
-+
-+		if (FD_ISSET(STDIN_FILENO, &rfds)) {
-+			memset(report, 0x0, sizeof(report));
-+			cmd_len = read(STDIN_FILENO, buf, BUF_LEN - 1);
-+
-+			if (cmd_len == 0)
-+				break;
-+
-+			buf[cmd_len - 1] = '\0';
-+			hold = 0;
-+
-+			memset(report, 0x0, sizeof(report));
-+			if (argv[2][0] == 'k')
-+				to_send = keyboard_fill_report(report, buf, &hold);
-+			else if (argv[2][0] == 'm')
-+				to_send = mouse_fill_report(report, buf, &hold);
-+			else
-+				to_send = joystick_fill_report(report, buf, &hold);
-+
-+			if (to_send == -1)
-+				break;
-+
-+			if (write(fd, report, to_send) != to_send) {
-+				perror(filename);
-+				return 5;
-+			}
-+			if (!hold) {
-+				memset(report, 0x0, sizeof(report));
-+				if (write(fd, report, to_send) != to_send) {
-+					perror(filename);
-+					return 6;
-+				}
-+			}
-+		}
-+	}
-+
-+	close(fd);
-+	return 0;
-+  }
++[9] [[https://msdn.microsoft.com/en-us/library/ff570620.aspx]]
 -- 
 2.52.0
 
