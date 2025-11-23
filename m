@@ -1,38 +1,38 @@
-Return-Path: <linux-doc+bounces-67821-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67814-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 065FFC7E0AC
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:27 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FB82C7E094
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id D05DF4E2A6A
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:19 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id F334D3AAB6C
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5AA872C11E9;
-	Sun, 23 Nov 2025 11:56:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8670E2D23B8;
+	Sun, 23 Nov 2025 11:56:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="LQnUPY19"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="HM7VXNCp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m49242.qiye.163.com (mail-m49242.qiye.163.com [45.254.49.242])
+Received: from mail-m49247.qiye.163.com (mail-m49247.qiye.163.com [45.254.49.247])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35C8C2C15A5
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.242
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0827D2C0286
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.247
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763898979; cv=none; b=Ein1ixoNoqhMt0Z2wuqgsJ0hOK7+FEro54YRFtJjKhFMXHLmzuZBMZVVkhGTEMFF8szSxylo49YkkMu+ohuLjA5EfLTeifsWEwOcJcuC5dmtzogJCLYTAL5VFXZzzwvM756foo9LA/hGAOLGYtbyhB4rG7vteYtrE2agvTmECac=
+	t=1763898974; cv=none; b=SvWoalZZLOnvf62/6iN88BguTKs+DP29ALIZL/LOPHhSrZYuMHHlVI+fxdxEgHiVAD1paIs2fiyx3Fy/f9GTfXA40WOTriMFVCbiTvlW0QxblABVhS7yh1OvLxwUyK5gtlgwvJULwOweow/HOVFrAVm7tvQ5kCM00LV9itiXSkk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763898979; c=relaxed/simple;
-	bh=P503KP4WTN3FB31R3jHRfRj/d6hamq5aofh1Fw0b7Bk=;
+	s=arc-20240116; t=1763898974; c=relaxed/simple;
+	bh=ZxHv+BhdTGDdIOkVT0m1qRkLNtS9QkSZo72U8jGHofc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=AL2+kqVQlECJfe9re/0PLevdQP+f8hiX8MhsoxjDyJrQa9aWKihzsCFxvpNm/sZlVRgrA7YlSR7wfMIxnL9Uj5/c//KZe21Gy0Lm5ca+qa7+DHGErB8c9L5JZSANAE/BmgNIN757MebKl2f0maX63+7gNOivqU/lvBRncjxIAus=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=LQnUPY19; arc=none smtp.client-ip=45.254.49.242
+	 MIME-Version:Content-Type; b=J2Xfh6E13ewJHjEsTR4JU3LPC5hf9dpXLuNYMBR2H/QUR1CYiy+OI6cEogPxAp8SXpMsRivSkR85H/oBamKEIYaUuH1VjjUkg52A0R1ALaRI27KtzuP6QrAV0ZEkeKwNlr0eOfANF9uEz0qcl9W0FqRKvFEReiiMxJHTl/TWflo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=HM7VXNCp; arc=none smtp.client-ip=45.254.49.247
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a9029104;
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a9029105;
 	Sun, 23 Nov 2025 19:56:08 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
@@ -40,9 +40,9 @@ To: alexs@kernel.org,
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 16/25] docs/zh_CN: Add iuu_phoenix.rst translation
-Date: Sun, 23 Nov 2025 19:56:14 +0800
-Message-ID: <41d6e663b3c9208d5fe0bc7e45e7682845c543f5.1763897036.git.baikefan@leap-io-kernel.com>
+Subject: [PATCH v2 17/25] docs/zh_CN: Add mass-storage.rst translation
+Date: Sun, 23 Nov 2025 19:56:15 +0800
+Message-ID: <2ffd3745eeb3f0fabd26a3666471b6791867e16e.1763897036.git.baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1763897036.git.baikefan@leap-io-kernel.com>
 References: <cover.1763897036.git.baikefan@leap-io-kernel.com>
@@ -54,38 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab09247f409d5kunm2b5c8c0429adc5
+X-HM-Tid: 0a9ab0924b2309d5kunm2b5c8c0429adc8
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZQh1PVkpKTkNOSx9NTxoeS1YVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
-	VLWQY+
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTkIYVkxDH0xCQ0JIGh9MT1YVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
+	VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=LQnUPY190FIHtpfAi/Um9AqQ8xgo88Qf631vvddOyTPu95HAj440p0SSk3VtGN+3+OBArYsKdVXX/1/T+xzErgIbIgbLABJjg12nwFpiAI1YKsxW45sYlsCaQEyXQBkKbg3pmdeEsig0CN2xdLPij4CO+oC1UsoeDMfPvEColPSHFOp1MBGA2q5XVM8A0FazUUwEVkhl2SUd/IUfRPRencFJLO/nOMdU+aSuvu53HHaXrVj+TuOkeozehktEoF1vSdqldwJ2mAnA1pPVG11I1b0H3sGgm8ngygvizHOzpPrU/LLOpZ5j5+RbPnMRboMzpCsyAcpJD85ZyEdM9WdHRQ==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=jqTkSTNIAQXGgSlBPFnP5fajWsgUioiF5+UPGpQxEVs=;
+	b=HM7VXNCp6iPbANDvXcW+Gn9J4GdauEoUQ3tpREMSEI70q7Vpz87jV8/BNTdTlCQdPEyiLLWPDb6NgpaM+uuiMcbpO0IvTFWM/km13oxIZwsB58v7fxhfMnGMIT4M3Na9OS8IbK5eFxyC7X4CwfGlFdWm4BDJdFe2LYykU/AZwjNgVthrc5TS4Si3CdPtnrefJZgBy1Ag9Mwx6AbpemQenyOFnFyctOv+sKisUHeLNBlIgWVjrGQ+PR3LKlEG0ATOxVAHmwvrSK5FuZLE34tIw/UlJ+APQ5xqEAz8ZA3c6bEZAEUh/EVl8qdzim3ERszSCOvhp4fDCFX2wsBF/ArM6w==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=DspfQFnIUQ/C2oyn32cS2dutC7O3I5LLFL0d+SfwoOc=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/iuu_phoenix.rst into Chinese.
+docs/zh_CN: Add mass-storage.rst translation
 
-Update the translation through commit ecefae6db042
-("docs: usb: rename files to .rst and add them to drivers-api")
+Update the translation through commit e4157519ad46
+("Documentation: usb: correct spelling")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/iuu_phoenix.rst    | 100 ++++++++++++++++++
- 1 file changed, 100 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/iuu_phoenix.rst
+ .../translations/zh_CN/usb/mass-storage.rst   | 196 ++++++++++++++++++
+ 1 file changed, 196 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/mass-storage.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/iuu_phoenix.rst b/Documentation/translations/zh_CN/usb/iuu_phoenix.rst
+diff --git a/Documentation/translations/zh_CN/usb/mass-storage.rst b/Documentation/translations/zh_CN/usb/mass-storage.rst
 new file mode 100644
-index 000000000000..f86eef3f16d6
+index 000000000000..2e258ff27af1
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/iuu_phoenix.rst
-@@ -0,0 +1,100 @@
++++ b/Documentation/translations/zh_CN/usb/mass-storage.rst
+@@ -0,0 +1,196 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/iuu_phoenix.rst
++:Original: Documentation/usb/mass-storage.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,94 +94,190 @@ index 000000000000..f86eef3f16d6
 +
 +
 +
-+====================================
-+Infinity Usb Unlimited 说明文档
-+====================================
++=========================
++大容量存储Gadget (MSG)
++=========================
 +
-+大家好，
++概述
++====
 +
-+该模块提供一个串行接口，用于在Phoenix模式下使用你的IUU设备。
-+加载此模块后，会生成一个ttyUSB[0-x]接口。
-+你需要使用自己喜欢的应用程序来控制IUU设备。
++ 大容量存储Gadget（或MSG）作为USB大容量存储设备，对主机表现为磁盘或CD-ROM驱动器。
++ 它支持多个逻辑单元(LUN)。
++ 每个LUN的后端存储由普通文件或块设备提供，
++ 可以限制为只读，
++ 并且Gadget可以指示其可移动和/或为CD-ROM（后者意味着只读访问）。
 +
-+该驱动仍处于测试阶段，因此可能存在漏洞，你的系统可能会冻结。
-+据我所知，我自己使用时从未遇到问题，但我并不是专家，
-+因此如果你的系统不稳定，请不要责怪我。
++  它的需求较低；
++  仅需一个bulk-in和一个bulk-out端点。
++  内存需求为两个16K缓冲区。
++  支持全速、高速和超高速操作。
 +
-+你可以连接多个IUU设备，
-+每个设备都有自己的设备文件（/dev/ttyUSB0、/dev/ttyUSB1……）。
++  注意，该驱动程序在某种程度上具有非移植性，因为它假设
++  一个内存/DMA缓冲区将可用于bulk-in和bulk-out
++  端点。对于大多数设备控制器来说，这不是问题，但
++  可能存在一些硬件限制，一个缓冲区不能
++  被多个端点使用。
 +
++  本文档描述了如何从用户态使用该Gadget，
++  它与大容量存储功能(MSF)及使用它的不同Gadget的关系，
++  以及与文件存储Gadget(FSG，
++  已不再包含于Linux)的区别。
++  仅会简要说明如何在复合Gadget中使用MSF。
 +
-+
-+如何调节读卡器速度？
-+======================
-+
-+可以在加载模块时使用一些参数。
-+要使用参数，请先卸载已加载的模块，然后使用以下命令::
-+
-+    modprobe iuu_phoenix param=value
-+
-+如果是预编译模块，可以使用::
-+
-+    insmod iuu_phoenix param=value
-+
-+示例：::
-+
-+	modprobe iuu_phoenix clockmode=3
-+
-+ 参数包括：
-+
-+clockmode:
-+	1=3Mhz579,2=3Mhz680,3=6Mhz (int)
-+boost:
-+	超频提升百分比 100 到 500 (int)
-+cdmode:
-+	卡检测模式
-+	0=none, 1=CD, 2=!CD, 3=DSR, 4=!DSR, 5=CTS, 6=!CTS, 7=RING, 8=!RING (int)
-+xmas:
-+	是否启用xmas彩色 (bool)
-+debug:
-+	是否启用调试 (bool)
-+
-+-  clockmode 提供三种不同的基础设置，通常由不同软件采用：
-+
-+	1. 3Mhz579
-+	2. 3Mhz680
-+	3. 6Mhz
-+
-+-  boost 提供了一种超频读卡器的方式（我的最爱 :-)）。
-+   例如，要比单纯的clockmode=3获得更高性能，可以使用：
-+
-+      modprobe boost=195
-+
-+   这会将读卡器基频设置为3Mhz579，但提升195%！
-+   实际频率将为6979050 Hz（6Mhz979），速度比单纯的clockmode=3提高约10-20%！
-+
-+
-+-  cdmode 可设置用于通知用户空间（ioctl响应）卡是否存在的信号。有八种信号可选。
-+
-+-  xmas 完全无用，只是为了你的视觉效果。这是我的一个朋友，
-+   他很难过拥有像iuu这样好的设备却看不到所有可用的颜色范围。
-+   所以我添加了这个选项，允许他看到很多颜色（每次活动都会随机改变颜色
-+   和频率）
-+
-+-  debug 会生成大量调试信息。
-+
-+
-+最后说明
++模块参数
 +========
 +
-+无需担心串口设置，串口模拟是抽象的，
-+因此任何速度或奇偶校验设置都可以工作（不会改变任何行为）。
-+以后我可能会利用这些设置来计算boost，但这个功能真的有必要吗？
++  大容量存储Gadget接受以下大容量存储特定模块参数：
 +
-+自动检测功能使用串口CD。如果软件不支持该功能，请在软件中禁用检测机制。
++  - file=filename[,filename...]
 +
-+祝你使用愉快！
++    此参数列出用于每个逻辑单元后端存储的文件或块设备路径。
++	最多可设置FSG_MAX_LUNS(8)个LUN。
++	如果指定更多文件，将被静默忽略。另见“luns”参数。
 +
-+ Alain Degreffe
++    注意 如果使用文件作为后端存储，则该文件不得被其他进程修改。
++	这是因为主机假定数据不会在其不知情的情况下改变。
++	可以读取，但如果逻辑单元可写，由于主机端缓冲，内容未定义。
 +
-+ eczema(at)ecze.com
++    逻辑单元大小将向下舍入为完整逻辑块。
++	逻辑块大小为：模拟CD-ROM的LUN为2048字节，
++	后端文件为块设备则为设备块大小，否则为512字节。
++
++  - removable=b[,b...]
++
++    指定每个逻辑单元是否可移动。b为“y”“Y”“1”为真，“n”“N”“0”为假。
++
++    如果逻辑单元可移动，Gadget将接受“弹出”SCSI请求(Start/Stop Unit)。
++	发送时，将关闭后端文件以模拟弹出，
++	在用户态为设备指定新后端文件之前，该逻辑单元不可被主机挂载。
++
++    如果逻辑单元不可移动(默认)，必须在加载模块时通过“file”参数指定后端文件。
++	内置模块同理，无例外。
++
++    默认值为false，但历史上曾为true。
++	现改为false以更好匹配FSG，并且更合理。
++	为了兼容旧内核，最好显式指定默认值。
++	如果依赖旧默认，现在需要显式指定“n”。
++
++    注意，“removable”表示逻辑单元的介质可被弹出或移除（如CD-ROM或读卡器），
++	不表示整个Gadget可从主机拔出；后者正确术语为“hot-unpluggable”。
++
++  - cdrom=b[,b...]
++
++    指定每个逻辑单元是否模拟CD-ROM，默认false。
++
++  - ro=b[,b...]
++
++    指定每个逻辑单元是否只读。防止主机修改后端文件。
++
++    如果标志为false但后端文件无法以读写模式打开，Gadget仍会回退为只读模式。
++
++    非CD-ROM逻辑单元默认false；模拟CD-ROM的逻辑单元强制为true。
++
++  - nofua=b[,b...]
++
++    指定是否在给定逻辑单元的SCSI Write10和Write12命令中忽略FUA标志。
++
++    Windows默认在“优化移除模式”挂载可移动存储。
++	所有写入为同步写，
++	通过在SCSI Write(10,12)命令中设置FUA(Force Unit Access)位实现。
++	这会强制每次写入等待数据实际写出，阻止块层聚合I/O请求，显著降低性能。
++
++    注意，如果设备从USB供电且用户未卸载就拔出设备，数据可能丢失。
++
++    默认值为false。
++
++  - luns=N
++
++    指定Gadget拥有的逻辑单元数，受FSG_MAX_LUNS(8)限制，超出值将被截断。
++
++    如果提供此参数，且“file”参数指定的文件数大于luns值，多余文件将被忽略。
++
++    若未指定，则逻辑单元数根据“file”参数指定的文件数推断；
++	若file参数也缺失，则假定为1。
++
++  - stall=b
++
++    指定是否允许Gadget停止bulk端点。
++    默认值根据USB设备控制器类型确定，但通常为true。
++
++  除上述参数外，Gadget还接受复合框架定义的参数（所有复合Gadget通用，列出如下）：
++
++  - idVendor      -- USB Vendor ID (16 bit integer)
++  - idProduct     -- USB Product ID (16 bit integer)
++  - bcdDevice     -- USB Device version (BCD) (16 bit integer)
++  - iManufacturer -- USB Manufacturer string (string)
++  - iProduct      -- USB Product string (string)
++  - iSerialNumber -- SerialNumber string (string)
++
++sysfs entries
++=============
++
++  对于每个逻辑单元，Gadget在sysfs层级创建目录。目录内创建以下文件：
++
++  - file
++
++    读取返回逻辑单元的后端文件路径。
++	若无后端文件(仅在逻辑单元可移动时可能)，内容为空。
++
++    写入可更改逻辑单元的后端文件。
++	即使逻辑单元不可移动，也可执行此操作（主机可能认为奇怪）。
++	若主机通过Prevent-Allow Medium Removal SCSI命令禁止介质移除，可能失败。
++
++  - ro
++
++    反映逻辑单元的ro标志状态。随时可读，若逻辑单元无后端文件打开，也可写入。
++
++  - nofua
++
++    反映逻辑单元nofua标志状态，可读可写。
++
++  - forced_eject
++
++写入后，将强制从LUN分离后端文件，无论主机是否允许。
++写入内容无关，写入任意非零字节均会导致弹出。
++不可读取。
++
++  其他参数值可从/sys/module/g_mass_storage/parameters/* 读取。
++
++使用大容量存储功能的其他Gadget设备
++========================================
++
++  大容量存储Gadget使用大容量存储功能(MSF)处理存储协议。
++  作为复合功能，MSF也可被其他Gadget使用（如g_multi和acm_ms）。
++
++  前述信息对使用MSF的其他Gadget有效，但可能不支持大容量存储相关模块参数，
++  或参数带前缀。是否适用需查看Gadget文档或源代码。
++
++  想了解如何在Gadget中包含MSF，
++  可参考mass_storage.c、acm_ms.c和multi.c（按复杂度排序）。
++
++与文件存储 Gadget 的关系
++========================
++
++  大容量存储功能(Mass Storage Function)，从而大容量存储Gadget(MSG)，
++  是基于文件存储Gadget(File Storage Gadget)的。
++  两者的区别在于，MSG是复合Gadget（即使用复合框架），而文件存储Gadget是传统Gadget。
++  从用户态的角度来看，这一区别并不重要，
++  但从内核开发者的角度来看，这意味着：
++  (i) MSG不重复处理基本USB协议命令所需的代码
++  (ii) MSF可以在任何其他复合Gadget中使用。
++
++  因此，文件存储Gadget已在Linux 3.8中被移除。
++  所有用户都需要迁移到大容量存储Gadget。
++  两者从外部行为来看大体相同，唯一的区别如下：
++
++  1. 在FSG中，“removable”和“cdrom”模块参数会对所有逻辑单元统一设置标志，
++     而在MSG中，它们接受每个逻辑单元的y/n值列表。
++     如果只使用单个逻辑单元，这无关紧要；
++     但如果有多个逻辑单元，y/n值需要为每个逻辑单元重复指定。
++  2. FSG的“serial”“vendor”“product”和“release”模块参数，
++     在MSG中由复合层的参数分别处理，
++     对应名称为：“iSerialNumber”“idVendor”“idProduct”和“bcdDevice”。
++
++  3. MSG不支持FSG的测试模式，
++     因此FSG的“transport”“protocol”和“buflen”模块参数不被支持。
++     MSG始终使用SCSI协议，采用仅bulk传输模式和16 KiB缓冲区。
 -- 
 2.52.0
 
