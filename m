@@ -1,61 +1,80 @@
-Return-Path: <linux-doc+bounces-67805-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67807-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EFCFC7DF12
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 10:31:13 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 55ED4C7DFEE
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:12:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CEDBE3AABCC
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 09:29:17 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0A5A63A8B92
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:12:40 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0AD492882CE;
-	Sun, 23 Nov 2025 09:29:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6CC1D2D46A2;
+	Sun, 23 Nov 2025 11:12:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="khHRGrer"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DD70297O"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D645425BEE7;
-	Sun, 23 Nov 2025 09:29:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 353392D3A75;
+	Sun, 23 Nov 2025 11:12:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763890154; cv=none; b=N7vMfXrfUSj/llLexKVCb8236ErkVPD//OsnpMLUOOz3ZJH6jyRArb0sMo7x8k9uKcyPkOUtYR6UUG5LQm+Fl3Tu/K1b+McWiDcsEsu6K+JheGySMlcwWudxIYCz29gskPM6DLsGzwdtMuCcL7AHBuMmLnnbzhTwakxImtq0uRw=
+	t=1763896356; cv=none; b=jYxILhmL8hPcmyyx6Lti1qdtGKkJTqQW8iAT+zO0ha6emvXEUNXuwoWNkJGuUVu+NgCMUPy27L+OcuQXT7s3YL8dAOrt4O6t26j8HCVHQ079YGizuyTk+TwsWXazII1ij6r3G7N5pMJowwkvEs2HFJas+rwhG0fMHzCj4vah514=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763890154; c=relaxed/simple;
-	bh=BsCF5Vo0XWlxKJ/sd2YtUXNzzKo8ijMIlbF7CAcmddQ=;
+	s=arc-20240116; t=1763896356; c=relaxed/simple;
+	bh=Akr26sM3VEhR3kKN7o52n5Q0IG8yNVh9gdExmJrI8ek=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=L/uW4d6RXfK88dF7WIwNwM53BJlbSskPXuCFcsFa01z1/IGv+RVjipuqxHLSKiYtIgnKLiLlQB97Amjngje0wUCXeFTKzlepycabC5Q57celTMWS2Xi9OcFDZVehaHoAxmz+3eAQj/S9sp7b6d3BRFfmiWKUiXEoFF8W/DVV0Fo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=khHRGrer; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9630EC16AAE;
-	Sun, 23 Nov 2025 09:29:08 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=GVBt9oqwW6LsNEBgBTw4S0efT0AJw1W90CBI2rPCib8qbWIdVpKj+GjNQYmS++C19/YDjx680D80DJBdO8JBmozoI3BMoVCTT7GjFFaxZ3Xce178YUT0RgLk5ndQgWJxMHR0OA+/LX+2pDMjexMSnE0a2fDIwl6tFMta8thOASI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DD70297O; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E672EC113D0;
+	Sun, 23 Nov 2025 11:12:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1763890153;
-	bh=BsCF5Vo0XWlxKJ/sd2YtUXNzzKo8ijMIlbF7CAcmddQ=;
+	s=k20201202; t=1763896355;
+	bh=Akr26sM3VEhR3kKN7o52n5Q0IG8yNVh9gdExmJrI8ek=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=khHRGrerO0B4QAeiYUvcoYrCRZ7uhsJTe+ITJfW9iphjYhW1N0sKuW0fM2MRwJw5g
-	 l5TQWitHCTush7XpYYXn86yoAgIkRd9Jwskf2hII2lEiVCE7zf5OOfdvlMrwa8vZjW
-	 Ik5A1AzJIUJHNbsmi9XzwA+YcND1G9ACaXTYc4WHni5+e1Z1jhbXz3uCmnpCgQ2m3H
-	 xVSHgwZBltr02JD/bKnR+CeUVLQl/hSqnsw87N+adQ/1gUneAjaJhpHJc+n/0k18+T
-	 x1fX5UifmLzM5F0ekSp9B9Kvbm9Hhy2/LQg7y3Qe21gYlJvr175L8foN4YrQkfmFk/
-	 c90tmT+r9YtYg==
-Date: Sun, 23 Nov 2025 11:29:04 +0200
+	b=DD70297OscX5jW+1bL2L8Z5+6LxRLvMSuqNcQmzITuFPIzMzmkRtlD/mIf3T2D858
+	 mLjthfkdI3QvX5wzmOddr/fDz3ZYEbjtxPo1YEND1/rowOhEwrqrpzC2boUYmSqpWC
+	 LJa9Y4iSUVo8vPl4T49RkU+H90guNy7wohSE0KXct5W8r9dxLkD1p0m6pifzJ+NS+d
+	 gQ4atTXM+NBkfw97j9VlyFdkIVV9vi3HLQHWP2WLZ7acpq+JnxntA0ebpsXBDISpJN
+	 uF6MX92LSt9PIFptSK1yfDhmlyBzzfbfcjg9RYfN9IA5CBhLECVurLPXjqk1yT2SZV
+	 LiaEhMRjyjibg==
+Date: Sun, 23 Nov 2025 13:12:11 +0200
 From: Mike Rapoport <rppt@kernel.org>
-To: Richard Weinberger <richard@nod.at>
-Cc: linux-mm@kvack.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, corbet@lwn.net, mhocko@suse.com,
-	surenb@google.com, vbabka@suse.cz, Liam.Howlett@oracle.com,
-	lorenzo.stoakes@oracle.com, david@kernel.org,
-	akpm@linux-foundation.org,
-	Vladimir Davydov <vdavydov@virtuozzo.com>,
-	Konstantin Khlebnikov <koct9i@gmail.com>,
-	Naoya Horiguchi <n-horiguchi@ah.jp.nec.com>,
-	Linus Torvalds <torvalds@linux-foundation.org>
-Subject: Re: [PATCH] pagemap: Update BUDDY flag documentation
-Message-ID: <aSLT4J4UNh-0xiXN@kernel.org>
-References: <20251122211920.3410371-1-richard@nod.at>
+To: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: pratyush@kernel.org, jasonmiu@google.com, graf@amazon.com,
+	dmatlack@google.com, rientjes@google.com, corbet@lwn.net,
+	rdunlap@infradead.org, ilpo.jarvinen@linux.intel.com,
+	kanie@linux.alibaba.com, ojeda@kernel.org, aliceryhl@google.com,
+	masahiroy@kernel.org, akpm@linux-foundation.org, tj@kernel.org,
+	yoann.congal@smile.fr, mmaurer@google.com, roman.gushchin@linux.dev,
+	chenridong@huawei.com, axboe@kernel.dk, mark.rutland@arm.com,
+	jannh@google.com, vincent.guittot@linaro.org, hannes@cmpxchg.org,
+	dan.j.williams@intel.com, david@redhat.com,
+	joel.granados@kernel.org, rostedt@goodmis.org,
+	anna.schumaker@oracle.com, song@kernel.org, linux@weissschuh.net,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-mm@kvack.org, gregkh@linuxfoundation.org, tglx@linutronix.de,
+	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
+	x86@kernel.org, hpa@zytor.com, rafael@kernel.org, dakr@kernel.org,
+	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com,
+	myungjoo.ham@samsung.com, yesanishhere@gmail.com,
+	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com,
+	aleksander.lobakin@intel.com, ira.weiny@intel.com,
+	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de,
+	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com,
+	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net,
+	brauner@kernel.org, linux-api@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, saeedm@nvidia.com,
+	ajayachandra@nvidia.com, jgg@nvidia.com, parav@nvidia.com,
+	leonro@nvidia.com, witu@nvidia.com, hughd@google.com,
+	skhawaja@google.com, chrisl@kernel.org
+Subject: Re: [PATCH v7 01/22] liveupdate: luo_core: Live Update Orchestrator
+Message-ID: <aSLsCxLhrnyUlcy4@kernel.org>
+References: <20251122222351.1059049-1-pasha.tatashin@soleen.com>
+ <20251122222351.1059049-2-pasha.tatashin@soleen.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -64,48 +83,86 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251122211920.3410371-1-richard@nod.at>
+In-Reply-To: <20251122222351.1059049-2-pasha.tatashin@soleen.com>
 
-On Sat, Nov 22, 2025 at 10:19:20PM +0100, Richard Weinberger wrote:
-> Since v4.6 the BUDDY flag is set for _all_ pages in the block
-> and no longer just for the first one.
-> This change was introduced by:
-> commit 832fc1de01ae ("/proc/kpageflags: return KPF_BUDDY for "tail" buddy pages")
+On Sat, Nov 22, 2025 at 05:23:28PM -0500, Pasha Tatashin wrote:
+> Introduce LUO, a mechanism intended to facilitate kernel updates while
+> keeping designated devices operational across the transition (e.g., via
+> kexec). The primary use case is updating hypervisors with minimal
+> disruption to running virtual machines. For userspace side of hypervisor
+> update we have copyless migration. LUO is for updating the kernel.
 > 
-> Strictly speaking, this was an ABI change, but as nobody has noticed
-> since 2016, let's just update the documentation.
+> This initial patch lays the groundwork for the LUO subsystem.
 > 
-> Cc: Vladimir Davydov <vdavydov@virtuozzo.com>>
-> Cc: Konstantin Khlebnikov <koct9i@gmail.com>
-> Cc: Naoya Horiguchi <n-horiguchi@ah.jp.nec.com>
-> Cc: Andrew Morton <akpm@linux-foundation.org>
-> Cc: Linus Torvalds <torvalds@linux-foundation.org>
-> Signed-off-by: Richard Weinberger <richard@nod.at>
+> Further functionality, including the implementation of state transition
+> logic, integration with KHO, and hooks for subsystems and file
+> descriptors, will be added in subsequent patches.
+> 
+> Create a character device at /dev/liveupdate.
+> 
+> A new uAPI header, <uapi/linux/liveupdate.h>, will define the necessary
+> structures. The magic number for IOCTL is registered in
+> Documentation/userspace-api/ioctl/ioctl-number.rst.
+> 
+> Signed-off-by: Pasha Tatashin <pasha.tatashin@soleen.com>
+> Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
 
 Reviewed-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 
+with a few nits below
+
 > ---
->  Documentation/admin-guide/mm/pagemap.rst | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/admin-guide/mm/pagemap.rst b/Documentation/admin-guide/mm/pagemap.rst
-> index e60e9211fd9b2..c57e61b5d8aa8 100644
-> --- a/Documentation/admin-guide/mm/pagemap.rst
-> +++ b/Documentation/admin-guide/mm/pagemap.rst
-> @@ -115,7 +115,8 @@ Short descriptions to the page flags
->      A free memory block managed by the buddy system allocator.
->      The buddy system organizes free memory in blocks of various orders.
->      An order N block has 2^N physically contiguous pages, with the BUDDY flag
-> -    set for and _only_ for the first page.
-> +    set for all pages.
-> +    Before 4.6 only the first page of the block had the flag set.
->  15 - COMPOUND_HEAD
->      A compound page with order N consists of 2^N physically contiguous pages.
->      A compound page with order 2 takes the form of "HTTT", where H donates its
-> -- 
-> 2.51.0
-> 
-> 
+
+> diff --git a/kernel/liveupdate/Kconfig b/kernel/liveupdate/Kconfig
+> index a973a54447de..90857dccb359 100644
+> --- a/kernel/liveupdate/Kconfig
+> +++ b/kernel/liveupdate/Kconfig
+> @@ -1,4 +1,10 @@
+>  # SPDX-License-Identifier: GPL-2.0-only
+> +#
+> +# Copyright (c) 2025, Google LLC.
+> +# Pasha Tatashin <pasha.tatashin@soleen.com>
+> +#
+> +# Live Update Orchestrator
+> +#
+
+If you are adding copyrights it should have Amazon and Microsoft as well.
+I believe those from kexec_handover.c would work.
+
+@Alex?
+
+>  menu "Live Update and Kexec HandOver"
+>  	depends on !DEFERRED_STRUCT_PAGE_INIT
+> @@ -51,4 +57,25 @@ config KEXEC_HANDOVER_ENABLE_DEFAULT
+>  	  The default behavior can still be overridden at boot time by
+>  	  passing 'kho=off'.
+>  
+> +config LIVEUPDATE
+> +	bool "Live Update Orchestrator"
+> +	depends on KEXEC_HANDOVER
+> +	help
+> +	  Enable the Live Update Orchestrator. Live Update is a mechanism,
+> +	  typically based on kexec, that allows the kernel to be updated
+> +	  while keeping selected devices operational across the transition.
+> +	  These devices are intended to be reclaimed by the new kernel and
+> +	  re-attached to their original workload without requiring a device
+> +	  reset.
+> +
+> +	  Ability to handover a device from current to the next kernel depends
+> +	  on specific support within device drivers and related kernel
+> +	  subsystems.
+
+Sorry, somehow this slipped during v6 review.
+These days LUO is less about devices and more about file descriptors :) 
+
+> +
+> +	  This feature primarily targets virtual machine hosts to quickly update
+> +	  the kernel hypervisor with minimal disruption to the running virtual
+> +	  machines.
+> +
+> +	  If unsure, say N.
+> +
+>  endmenu
 
 -- 
 Sincerely yours,
