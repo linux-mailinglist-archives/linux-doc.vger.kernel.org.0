@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67811-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67828-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93302C7E08B
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:11 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id CEA51C7E0BE
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 13:01:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 18EE9341409
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:11 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id B62D54E2F3C
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:01:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D52332C11E9;
-	Sun, 23 Nov 2025 11:56:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A0741BFE00;
+	Sun, 23 Nov 2025 12:01:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="LOFdd2v7"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="AVWMVRSp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m15593.qiye.163.com (mail-m15593.qiye.163.com [101.71.155.93])
+Received: from mail-m49245.qiye.163.com (mail-m49245.qiye.163.com [45.254.49.245])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC3C423F405
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.93
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04FBD1F09AD
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 12:01:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.245
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763898968; cv=none; b=ty1AAUOrBI4S25k1b0PnR+6nHKye54jnGlAHyaVbR0sFgNRtLIZO8YVlbgsnVCF2iC1Kdf1aKXjoa+DpVKwWxeBEdBVF7/QEIyE5wHWjM1mcb5CW3ADZyAPaKHYLeATO03V2zzI9qYfsc+hlXDXIZEnkxgxosB4IEA5faYkcQ3I=
+	t=1763899276; cv=none; b=qXSv7kbg3rhIS5zmBzjR11JTU1OX8t7GRG16savfPL6q+5nvptINpWpZc8vZ1DqXsGgWKInukBVqgB/YKgWN8+ThsKkyq/oYT3LA8CKQjLmUWn+/etBN2WhRWtJ5fGISKyqsebXAWGtwFqGDakWUQUnjLuonKSnwRMjW6lDEQn0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763898968; c=relaxed/simple;
-	bh=gx5HjG3/Bs72/hKL5rzmTgc8K7fVbh7NCoNyXzKUT44=;
+	s=arc-20240116; t=1763899276; c=relaxed/simple;
+	bh=WJJ4/YHmfmpIZU9XLIhRGUHBFzGIng7OxhrOqLuLpzA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=sVHlxSsgiFmmyNkzUKeWpXPyq6pk4a3pNhbzlmgMix6eI+rc5pEZO5qnK0tL620woctakp/pdFYjXCfxU1D+K3J/2HSEjZVvTwjo361kzgf8mRMG8eVr930ns+SFY3bplq1bAPuiyCUpt0NdImGA6wYjYoMJdsjz/ezokutkmUQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=LOFdd2v7; arc=none smtp.client-ip=101.71.155.93
+	 MIME-Version:Content-Type; b=sWjGYNifIIFUPLytQ2hh14JvMHGaEVv5SFoFvpTIs9dvf0HdHJYk72Lp1y8q4tU5sLfbkQd4N0G+MEKX8lKQfc2Ff2m/ewPsfrHTwVzxNeFM14bUkNZQpvtbwihpGExj06WEhvacqtSZgu8SAF87QVomn0VvnNgn01XvRS+akeg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=AVWMVRSp; arc=none smtp.client-ip=45.254.49.245
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a90290f2;
-	Sun, 23 Nov 2025 19:55:56 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a90290f3;
+	Sun, 23 Nov 2025 19:55:57 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 03/25] docs/zh_CN: Add authorization.rst translation
-Date: Sun, 23 Nov 2025 19:56:01 +0800
-Message-ID: <e8b70f993cb7356ea80e2979b64596d218240afa.1763897036.git.baikefan@leap-io-kernel.com>
+Subject: [PATCH v2 04/25] docs/zh_CN: Add chipidea.rst translation
+Date: Sun, 23 Nov 2025 19:56:02 +0800
+Message-ID: <d4f1a2564ede84fb7cf65bb36df32de8b0d56174.1763897036.git.baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1763897036.git.baikefan@leap-io-kernel.com>
 References: <cover.1763897036.git.baikefan@leap-io-kernel.com>
@@ -54,38 +54,37 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab0921c1a09d5kunm2b5c8c0429ad8d
+X-HM-Tid: 0a9ab0921f2209d5kunm2b5c8c0429ad94
 X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDSxoaVh8YHUIeT0JNQk4YS1YVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
-	VKQktLWQY+
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHkpLVh0YTEtOT0JMHR9MH1YVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg++
 DKIM-Signature: a=rsa-sha256;
-	b=LOFdd2v7oIAgu/OvpBgcZBigoA1mnDfw5I3YXcOuJnCKm7pqBZxf3dr8fWnyi3pfei8h3NhwMemGybf/RuE5i/YeD3xNR5mFDvfCYHsWweLQ2RaMY3ulqX/FJtQV1bIi4DAzQtf1mP0r6IiqkVJjgku3C3OJexXB2AeOSh/mnZ6Kqyl7KyT06bRtey//YSgFGnU0WH6AFs199zKXJ5Yr/oTR4qd4c8EiMKrDilBp8ROy+YsJ3QdvejADk6SheJvcSn529Nk1fJCcshQA1UT0q9eEa3r7tzQSBGgq3CPn5r6nzJJoqQCf2tRWMB5KxkggrQtJCpOPPP2k264ffGk88g==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=dU0K6YdD7thuGhUZqQUje/Np0RgCMShp7U5FXoOErN4=;
+	b=AVWMVRSpf/tsCX4mz16Kh74biLKwtzhrFZe05ob49kgpF0xCGoLenZJDAPIVTrSVSzd2liCjlsbKdAKzWoUs4wnGizOmmEuATYCunvpbb71EDCnlXDqQLMTuGU/aS4bmFkH8OvxEfSvDz1+XTlMIZM8c1W/5SdkUS6O+Vlf72bSpKkem7xtrvjvAcK5ZcCW8L5ad4R1UJyFIKSSCcCNX34ziZKkqm0ZSqtCFJJjiCKIeEVbjsjq7jHhL+GQmtxzsJGQlHtfu3cRC48u0C9ZnXa4kDGg3e+RXgY7M2kvHds04uqsmz7+Lx5X5WSnrFLtz+3Afsx/ghJbgYl/GSnaBFA==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=li+2egk+YoKTbxcimeGrdSpRt1Ky4Y1I0R55TYo9TQc=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/authorization.rst into Chinese.
+Translate .../usb/chipidea.rst into Chinese.
 
-Update the translation through commit f176638af476
-("USB: Remove Wireless USB and UWB documentation")
+Update the translation through commit e4157519ad46
+("Documentation: usb: correct spelling")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/authorization.rst  | 125 ++++++++++++++++++
- 1 file changed, 125 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/authorization.rst
+ .../translations/zh_CN/usb/chipidea.rst       | 143 ++++++++++++++++++
+ 1 file changed, 143 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/chipidea.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/authorization.rst b/Documentation/translations/zh_CN/usb/authorization.rst
+diff --git a/Documentation/translations/zh_CN/usb/chipidea.rst b/Documentation/translations/zh_CN/usb/chipidea.rst
 new file mode 100644
-index 000000000000..6d5569f3f419
+index 000000000000..226f1f90c0d0
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/authorization.rst
-@@ -0,0 +1,125 @@
++++ b/Documentation/translations/zh_CN/usb/chipidea.rst
+@@ -0,0 +1,143 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/authorization.rst
++:Original: Documentation/usb/chipidea.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -93,120 +92,138 @@ index 000000000000..6d5569f3f419
 +:校译:
 +
 +
-+==============================================================
-+授权（或不授权）USB设备连接到系统
-+==============================================================
 +
-+版权 (C) 2007 Inaky Perez-Gonzalez <inaky@linux.intel.com> 因特尔公司
++=============================
++ChipIdea 高速双角色控制器驱动
++=============================
 +
-+此功能允许你控制系统中USB设备的使用权限。
-+你可以借此实现USB设备的锁定，并由用户空间完全控制。
++1. 如何测试OTG FSM（HNP 和 SRP）
++-----------------------------------
 +
-+目前为止，当USB设备连接时，它会被配置，其接口会立即对用户开放。
-+通过此修改，只有在root授权配置设备后，用户才能使用它。
++To show how to demo OTG HNP and SRP functions via sys input files
++with 2 Freescale i.MX6Q sabre SD boards.
++演示如何在两块Freescale i.MX6Q Sabre SD开发板上，通过sys输入文件来测试OTG的HNP和SRP功能。
 +
++1.1 如何使能OTG FSM
++-------------------------
 +
-+使用方法
-+=========
++1.1.1 在menuconfig中选择CONFIG_USB_OTG_FSM，并重新编译内核
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 +
-+授权设备连接::
++重新编译镜像和模块。如果需要查看OTG FSM的内部变量，可以挂载debugfs，
++会有两个文件用于显示OTG FSM变量和部分控制器寄存器值::
 +
-+	$ echo 1 > /sys/bus/usb/devices/DEVICE/authorized
++	cat /sys/kernel/debug/ci_hdrc.0/otg
++	cat /sys/kernel/debug/ci_hdrc.0/registers
 +
-+取消授权设备连接::
-+	$ echo 0 > /sys/bus/usb/devices/DEVICE/authorized
++1.1.2 在控制器节点的dts文件中添加以下条目
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 +
-+将新连接到hostX的设备默认设置为未授权（即：锁定）::
++::
 +
-+	$ echo 0 > /sys/bus/usb/devices/usbX/authorized_default
++	otg-rev = <0x0200>;
++	adp-disable;
 +
-+解除锁定::
++1.2 测试步骤
++-------------------
 +
-+	$ echo 1 > /sys/bus/usb/devices/usbX/authorized_default
++1) 给两块Freescale i.MX6Q Sabre SD开发板上电，
++   并加载gadget类驱动（例如 g_mass_storage）。
 +
-+默认情况下，所有USB设备都是授权的。
-+向authorized_default属性写入 "2" 会使内核默认只授权连接到内部USB端口的设备。
++2) 用USB线连接两块开发板：一端是micro A插头，另一端是micro B插头。
 +
-+系统锁定示例（简单示例）
-+------------------------------
++   插入micro A插头的一端为A-device，应当枚举另一端的B-device。
 +
-+假设你想实现一个锁定功能，使得只有类型为XYZ的设备可以连接
-+（例如，它是一个带有可见 USB 端口的自助服务终端）::
++3) 角色切换
 +
-+  启动系统
-+  rc.local ->
++   在B设备上执行::
 +
-+   for host in /sys/bus/usb/devices/usb*
-+   do
-+      echo 0 > $host/authorized_default
-+   done
++	echo 1 > /sys/bus/platform/devices/ci_hdrc.0/inputs/b_bus_req
 +
-+将一个脚本挂接到udev，用于新 USB 设备::
++   B-device应切换为host并枚举A设备。
 +
-+ if device_is_my_type $DEV
-+ then
-+   echo 1 > $device_path/authorized
-+ done
++4) 把A设备切换为host
 +
++   在B设备上执行::
 +
-+现在，device_is_my_type() 就是实现锁定的关键所在。
-+仅仅检查class、type 和 protocol是否匹配某个值，
-+是最差的安全验证方式（但对于想要破解的人却是最容易的）。
-+如果你需要真正安全的方案，应使用加密、证书认证等手段。
-+一个针对存储密钥的简单示例::
++	echo 0 > /sys/bus/platform/devices/ci_hdrc.0/inputs/b_bus_req
 +
-+ function device_is_my_type()
-+ {
-+   echo 1 > authorized		# temporarily authorize it
-+                                # FIXME: make sure none can mount it
-+   mount DEVICENODE /mntpoint
-+   sum=$(md5sum /mntpoint/.signature)
-+   if [ $sum = $(cat /etc/lockdown/keysum) ]
-+   then
-+        echo "We are good, connected"
-+        umount /mntpoint
-+        # Other stuff so others can use it
-+   else
-+        echo 0 > authorized
-+   fi
-+ }
++   或者通过HNP轮询机制：B主机可以检测到A外设想成为host的意愿，
++   从而由A外设触发角色切换。在 A-device上执行::
++   或者通过HNP轮询机制：B-Host可以检测到A-peripheral想切换为host角色的意愿，
++   并通过A-peripheral对轮询的响应来触发角色切换。
++   这可以通过在A-device上执行::
 +
++	echo 1 > /sys/bus/platform/devices/ci_hdrc.0/inputs/a_bus_req
 +
-+当然，这种做法很简陋；你实际上应该使用基于PKI的真正证书验证，
-+这样就不会依赖共享密钥之类的东西。不过你明白我的意思。
-+任何拿到设备仿真工具包的人都能伪造描述符和设备信息。
-+千万不要信任这些信息。
++   A-device应切换回host并枚举B-device。
 +
-+接口授权
-+---------
++5) 拔掉 B-device（拔掉 micro B 插头），在10秒内重新插入；
++   A-device 应重新枚举 B-device。
 +
-+也有类似的方法用于允许或拒绝特定 USB 接口。这允许只阻止 USB 设备的一个子集。
++6) 拔掉 B-device（拔掉 micro B 插头），在10秒后重新插入；
++   A-device 不应重新枚举 B-device。
 +
-+授权接口::
++   若A-device想使用总线：
 +
-+	$ echo 1 > /sys/bus/usb/devices/INTERFACE/authorized
++   在A-device上::
 +
-+取消授权接口::
++	echo 0 > /sys/bus/platform/devices/ci_hdrc.0/inputs/a_bus_drop
++	echo 1 > /sys/bus/platform/devices/ci_hdrc.0/inputs/a_bus_req
 +
-+	$ echo 0 > /sys/bus/usb/devices/INTERFACE/authorized
++   若B-device想使用总线：
 +
-+新接口在特定 USB 总线上的默认值也可以更改。
++   在B-device上::
 +
-+默认允许接口::
++	echo 1 > /sys/bus/platform/devices/ci_hdrc.0/inputs/b_bus_req
 +
-+	$ echo 1 > /sys/bus/usb/devices/usbX/interface_authorized_default
++7) A-device关闭总线供电
 +
-+默认拒绝接口::
-+	$ echo 0 > /sys/bus/usb/devices/usbX/interface_authorized_default
++   在A-device上::
 +
-+默认情况下，interface_authorized_default 位为 1。
-+因此，所有接口默认都是授权的。
++	echo 1 > /sys/bus/platform/devices/ci_hdrc.0/inputs/a_bus_drop
 +
-+注意：
-+  如果一个未授权的接口将被授权，则必须通过将INTERFACE写入
-+  /sys/bus/usb/drivers_probe来手动触发驱动程序探测。
-+  对于需要多个接口的驱动程序，所有需要的接口应先被授权。
-+  之后应探测驱动程序。这样可以避免副作用。
++   A-device应断开与B-device的连接并关闭总线供电。
++
++8) B-device 进行SRP数据脉冲唤醒
++
++   在B-device上::
++
++	echo 1 > /sys/bus/platform/devices/ci_hdrc.0/inputs/b_bus_req
++
++   A-device应恢复usb总线并枚举B-device。
++
++1.3 参考文档
++----------------------
++《On-The-Go and Embedded Host Supplement to the USB Revision 2.0 Specification
++July 27, 2012 Revision 2.0 version 1.1a》
++
++2. 如何使能USB作为系统唤醒源
++--------------------------------------------
++下面是在imx6平台上使能USB作为系统唤醒源的示例。
++
++2.1 启用核心控制器的唤醒::
++
++	echo enabled > /sys/bus/platform/devices/ci_hdrc.0/power/wakeup
++
++2.2 启用glue层的唤醒::
++	echo enabled > /sys/bus/platform/devices/2184000.usb/power/wakeup
++
++2.3 启用PHY的唤醒（可选）::
++
++	echo enabled > /sys/bus/platform/devices/20c9000.usbphy/power/wakeup
++
++2.4 启用根集线器的唤醒::
++	echo enabled > /sys/bus/usb/devices/usb1/power/wakeup
++
++2.5 启用相关设备的唤醒::
++
++	echo enabled > /sys/bus/usb/devices/1-1/power/wakeup
++
++如果系统只有一个USB端口，并且你希望在这个端口上启用USB唤醒，
++你可以使用下面的脚本来启用USB唤醒::
++
++	for i in $(find /sys -name wakeup | grep usb);do echo enabled > $i;done;
 -- 
 2.52.0
 
