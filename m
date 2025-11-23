@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67779-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67781-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 69CF1C7DD8C
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:45:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BE45C7DD95
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:45:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id D993C34B25A
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 07:45:31 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id C3C0A34B1C4
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 07:45:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 92E3C2989A2;
-	Sun, 23 Nov 2025 07:45:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 45ABF238D52;
+	Sun, 23 Nov 2025 07:45:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="tkzoUEsR"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="mAZ+cZ+k"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m3278.qiye.163.com (mail-m3278.qiye.163.com [220.197.32.78])
+Received: from mail-m3291.qiye.163.com (mail-m3291.qiye.163.com [220.197.32.91])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A81E253944
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 07:45:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.78
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30F7C29AB11
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 07:45:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.91
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763883927; cv=none; b=DB6+jlC6ARpgDNtCUk1WkR2mjhCuDarI09zvbMq949povEWjtNKK4k6sufIltBb/d4FCMq1kco2/+8iyRf/UhRHcy6Srf59ckS60IahllVvMXiuD7UppVXk0fEVwUTr1nANuPp9UDyFb5N9acP6GWxVjCCsvWJIYfsSOyrqNrAw=
+	t=1763883930; cv=none; b=pVbyNdl7WqjV7ubxX6PMotwxX5RqabGYnLvj7YlRsvpgm+n2T23j4lw8SWU2oZn9BYsbfHJCot5l4lA8sj3xJ8FTSR7K9//Rg0T9MMiSXbOWOiw9U+YtTyv9D8t6TCWRyZwwjrF8NlCt+au3xOU90G6afU0ILxVBLNb9kZgMQv4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763883927; c=relaxed/simple;
-	bh=JmcyM4I//EP6YkEdGrJmKV4gAg1b2IR6q+AnZyiyj+A=;
+	s=arc-20240116; t=1763883930; c=relaxed/simple;
+	bh=r70BpNJEJM2hPUBmaJ1OL/Zab+Ou/Up2T96kj+a07DY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=bdHmWUFxuNzu5Gx4KpGRA9JyL3LqJgTel6vuSOqMSdNMippNfVt7JCOfwlzc3be5IWYXKu22rG8kAeOBRP04L5TxJUqs4CRI23skJaHmykVu6Pf77mDS9ix4YpMKpeXWTQOatNfLCxRCzpDL4YclA96bmHPQvf0vGR7fO+EfJkQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=tkzoUEsR; arc=none smtp.client-ip=220.197.32.78
+	 MIME-Version:Content-Type; b=NlQOnBXEUQjf1q/cpex0Rc0y2WXYBLQGHjgJuNNF5YY22b450gugenF6yab0DnUI+KouuhNdUPOZCdSmdJFo4ecMH23t6F37o6o+vrI+NhF1GyiHvenXmZ2kR2eYL7dXX5FJ9ApXIzcxqK0Ktpq2bo+aDSL15QheizlrKorYOAk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=mAZ+cZ+k; arc=none smtp.client-ip=220.197.32.91
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99b5;
-	Sun, 23 Nov 2025 15:45:16 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99b6;
+	Sun, 23 Nov 2025 15:45:17 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH 07/25] docs/zh_CN: Add functionfs.rst translation
-Date: Sun, 23 Nov 2025 15:45:22 +0800
-Message-ID: <20251123074540.34161-8-baikefan@leap-io-kernel.com>
+Subject: [PATCH 08/25] docs/zh_CN: Add functionfs-desc.rst translation
+Date: Sun, 23 Nov 2025 15:45:23 +0800
+Message-ID: <20251123074540.34161-9-baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
 References: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
@@ -54,38 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9aafac9d2409d5kunm0cca719828661d
+X-HM-Tid: 0a9aafaca0ea09d5kunm0cca7198286622
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGUxIVh5LQh8dTUlJHUhKHVYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGEkYVh4aQk8dGkhOGh9CGlYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
 	VLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=tkzoUEsRpl/Cwn5sCPcACU6EN1dtMoBduy4wkqvOMyFMktDw6xJUmYkR1KnngDAhycgjcFnDSa+T/gAZ4Fw3B8q1oAWaR9GVCSWWJvpZDdNIXZZcUZh46NwPDurixZNe02aDFGSLYde4w7fwFdHvdiGRK8uCr491On8T474Dt1ZOZ6uTJRzwFS9LiDRuHMKLhMgnhzUeUm30Hr6eBNS7PqRYTH4S7V4opLYqdCzjNkK0Uc4mQMcgKe1BhMZ/fDkPRKK5qfX//ahNYGeuRhEWykyLQ966datjKTc4AOkM1x2Ci5IjDuCBagc/MWOsCZY2Z66P9lLCzxCrPrwavo+sfg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=Jt/dHKSTgHx+tnkKEc6oVgdREZIfLtmsksfvCUY4YaQ=;
+	b=mAZ+cZ+khqqMEg6rmUysFO5AzjPMns6nbDCKHVNr1/wKsWt+hk1h7yc7LWgARWUlWgUGMLZ4m+d84esR0biRAsynfAc+JVkVzVarNdMWpQyztdvMNyaYThNpLiaBVXX7boNjkVKGfjH3T09I/ZVONEfNw9c9NGUghRY6HrH/duFJR9gN1AGYC/lJ1dFfgHtfKpbJSyZWhP/x78vwkfiqNlCjlHIYyEl+9fAVvinkPcLBVH96AVFqzA3rUa39IEmh8KKAwXy/lD2JUaKRGEy4TnOrU0FgHW1uT08xFnla3UZWhkDrlArWvQXe72REadESDkXfjoXLSTzja/IXvVZ2zA==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=G2s5YaFH5N1dJtZfQnBuzVKoaNPJZqEplMwPwp97/14=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/functionfs.rst into Chinese.
+Translate .../usb/functionfs-desc.rst into Chinese.
 
 Update the translation through commit c26cee817f8b
 ("usb: gadget: f_fs: add capability for dfu functional descriptor")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/functionfs.rst     | 94 +++++++++++++++++++
- 1 file changed, 94 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/functionfs.rst
+ .../zh_CN/usb/functionfs-desc.rst             | 43 +++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/functionfs-desc.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/functionfs.rst b/Documentation/translations/zh_CN/usb/functionfs.rst
+diff --git a/Documentation/translations/zh_CN/usb/functionfs-desc.rst b/Documentation/translations/zh_CN/usb/functionfs-desc.rst
 new file mode 100644
-index 000000000000..64e50272f9ae
+index 000000000000..cc6d94e5452f
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/functionfs.rst
-@@ -0,0 +1,94 @@
++++ b/Documentation/translations/zh_CN/usb/functionfs-desc.rst
+@@ -0,0 +1,43 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/functionfs.rst
++:Original: Documentation/usb/functionfs-desc.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,88 +94,37 @@ index 000000000000..64e50272f9ae
 +
 +
 +
-+====================
-+FunctionFS的工作原理
-+====================
++=====================
++FunctionFS 描述符
++=====================
 +
-+概述
-+====
++以下介绍了可以写入FFS gadget的部分描述符。
++设备和配置描述符由复合gadget处理，用户不需要向FFS gadget写入这些描述符。
 +
-+从内核角度来看，它只是一个具有特定行为的复合功能。
-+只有在用户空间驱动通过写入描述符和字符串完成注册之后，
-+它才能被添加到USB配置中（用户空间程序必须提供与
-+内核级复合函数在添加到配置时提供的相同信息）。
++描述符写入FFS gadget的ep0文件中，紧跟描述符头之后。
 +
-+这尤其意味着复合初始化函数不能放在init段中（即不能使用__init标签）。
++.. kernel-doc:: include/uapi/linux/usb/functionfs.h
++   :doc: descriptors
 +
++接口描述符
++----------
 +
-+从用户空间的角度来看，它是一个文件系统，挂载后会提供一个ep0文件。
-+用户空间驱动需要向该文件写入描述符和字符串。
-+无需关心端点、接口或字符串编号，只需提供描述符，
-+就像该函数是唯一函数一样（端点和字符串编号从 1 开始，接口编号从 0 开始）。
-+FunctionFS会根据需要自动修改编号，同时处理不同配置中编号不一致的情况。
++可以写入标准USB接口描述符。
++最近写入的接口描述符的类/子类决定了可接受哪种类型的类特定描述符。
 +
-+有关 FunctionFS 描述符的更多信息，请参见 :doc:`functionfs-desc`
++类特定描述符
++------------
 +
-+当描述符和字符串写入后，会出现"ep#"文件（每个声明的端点对应一个文件），
-+用于单个端点的通信处理。
-+同样，FunctionFS会处理实际端点编号及配置变更
-+（这意味着ep1文件可能实际映射到端点3，例如，当配置变化时可能映射到端点2）。
-+ep0用于接收事件和处理setup请求。
++类特定描述符仅接受最近写入的接口描述符所指定的类/子类。
++以下是部分受支持的类特定描述符示例。
 +
-+当所有文件关闭时，该函数会自动禁用自身。
++DFU功能描述符
++~~~~~~~~~~~~~~
 +
-+此外，FunctionFS 的设计允许多次挂载，因此一个 gadget 可以使用多个 FunctionFS 函数。
-+每个 FunctionFS 实例通过挂载时使用的设备名称进行标识。
++当接口类为USB_CLASS_APP_SPEC且接口子类为USB_SUBCLASS_DFU时，
++可以提供DFU功能描述符。
++DFU功能描述符在USB设备固件升级（DFU）规范中有描述，版本为 1.1。
 +
-+例如，一个gadget具有以太网（Ethernet）、MTP和HID接口，其中后两个通过FunctionFS实现。
-+在用户空间层面，操作可能如下所示::
-+
-+  $ insmod g_ffs.ko idVendor=<ID> iSerialNumber=<string> functions=mtp,hid
-+  $ mkdir /dev/ffs-mtp && mount -t functionfs mtp /dev/ffs-mtp
-+  $ ( cd /dev/ffs-mtp && mtp-daemon ) &
-+  $ mkdir /dev/ffs-hid && mount -t functionfs hid /dev/ffs-hid
-+  $ ( cd /dev/ffs-hid && hid-daemon ) &
-+
-+在内核层面，gadget会检查ffs_data->dev_name来识别其FunctionFS是为
-+MTP（"mtp"还是 HID（"hid"）设计的。
-+
-+如果未提供 "functions" 模块参数，驱动只接受一个任意名称的函数。
-+
-+当提供functions模块参数时，只接受列出的名称函数。
-+特别是，如果"functions"参数的值只有一个元素，
-+则行为类似于未提供 "functions" 时；但只接受具有指定名称的函数。
-+
-+只有在所有声明的函数文件系统都已挂载，
-+并且所有函数的USB描述符都已写入各自的ep0后，gadget才会注册。
-+
-+相反，当第一个 USB 函数关闭其端点时，gadget 会注销。
-+
-+DMABUF接口
-+==========
-+
-+FunctionFS还支持基于DMABUF的接口，用户空间可以将外部创建的DMABUF对象附加到端点，
-+并随后使用它们进行数据传输。
-+
-+用户空间应用程序可以使用此接口在多个接口之间共享DMABUF对象，
-+允许它以零拷贝的方式传输数据，例如在IIO和USB栈之间。
-+作为该接口的一部分，添加了三个新的IOCTL。这三个
-+IOCTL必须在数据端点（即非ep0）上执行。它们是：
-+
-+  ``FUNCTIONFS_DMABUF_ATTACH(int)``
-+    将由文件描述符标识的DMABUF对象附加到数据端点。
-+    成功返回0，失败返回负errno值。
-+
-+  ``FUNCTIONFS_DMABUF_DETACH(int)``
-+    从数据端点分离给定的DMABUF对象（由文件描述符标识）。
-+    成功返回0，失败返回负errno值。
-+    注意，关闭端点的文件描述符会自动分离所有已附加的DMABUF。
-+
-+  ``FUNCTIONFS_DMABUF_TRANSFER(struct usb_ffs_dmabuf_transfer_req *)``
-+    将之前附加的DMABUF排入传输队列。
-+    参数是一个结构体，其中封装DMABUF的文件描述符、要传输的字节大小
-+    （通常应与DMABUF的大小相对应），以及一个当前未使用的'flags'字段。
-+    返回0表示成功，返回负errno值表示失败。
 --
 2.34.1
 
