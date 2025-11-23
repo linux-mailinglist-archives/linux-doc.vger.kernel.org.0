@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67797-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67791-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id B390CC7DDD1
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 09:00:45 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F145C7DDB0
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:50:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 8D5AD4E0F26
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:00:44 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 278CD3A911D
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 07:50:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56B5C286D7C;
-	Sun, 23 Nov 2025 08:00:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A338322D4DD;
+	Sun, 23 Nov 2025 07:50:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="P+FPRZEP"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="fBjsHScz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m49246.qiye.163.com (mail-m49246.qiye.163.com [45.254.49.246])
+Received: from mail-m1973170.qiye.163.com (mail-m1973170.qiye.163.com [220.197.31.70])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AFEE204F93
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 08:00:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.246
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40B0A1C695
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 07:50:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.70
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763884842; cv=none; b=sUdVDMM2f3ee0t/GtDcYr+K6OD1Xf6cubUi6Ml6+aTtT+hYQ7jON/Ww7MiMbJGOKFceWoeTvKV3cy9k1O3lgeM6yVM09MKhe8WL58z/LALJ0wqioMMOOf9VwLTfr9sno0j/claaA4Hb4tgAm9I04caJtyoAQ2f8nqEVahb6BHKg=
+	t=1763884231; cv=none; b=MWE3Du9/5QnsjeMXef+Ndkf5uMvyINte98BgX3OGuURc42Mzx9VKMJA5lFTkv8qd1X5ufAa7MQV9ra7YP09YvYBFm0utsKOfTu0bUtNQ8TFkuX2XOtDKoy/CPYxTgatMkIhV5id7BeDgjF7uUF52+bDzMDrWxuipFdCtjDKhns0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763884842; c=relaxed/simple;
-	bh=ApqCkMMDFM5qbY/auSLXcvyyi2FyoMYi20xUlmJOO0Y=;
+	s=arc-20240116; t=1763884231; c=relaxed/simple;
+	bh=52jfqmX/xneNAqUAcD+gw1X0ttXPNNhhaL3KL2qOVXU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=X6mBSigK+/TyijXnvQRx97p6/S6cbR5STqPCHQTSHPBWW5/La/AQd1Q9J/+kYP9PRFnD+PaSYZDgoK0GL7vuAQ42I71QxF+V0EihW7v5d5csL1IEiihdMfdRT4jnIypo/6wGdvCDmgaujjDpmRnDpyLc3sxDoJdJkTvzOmNobKQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=P+FPRZEP; arc=none smtp.client-ip=45.254.49.246
+	 MIME-Version:Content-Type; b=WdrUkgQrYNw3UGI52p76fq8a1j1X5lUJMTDTVDdwXGEdIVgp7SNT6/VSNfVGYj/YAaTMyi8AgoHExUkGZVz3dtx0AeiG6TSL1pCRM2gJ+J/ityN58FEsBYFBPari2enpDgMcTvJn3ZY80bcErSAkoSuDM6MiSljEtQkH30XtzaI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=fBjsHScz; arc=none smtp.client-ip=220.197.31.70
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99ac;
-	Sun, 23 Nov 2025 15:45:12 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99ae;
+	Sun, 23 Nov 2025 15:45:13 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH 02/25] docs/zh_CN: Add acm.rst translation
-Date: Sun, 23 Nov 2025 15:45:17 +0800
-Message-ID: <20251123074540.34161-3-baikefan@leap-io-kernel.com>
+Subject: [PATCH 03/25] docs/zh_CN: Add authorization.rst translation
+Date: Sun, 23 Nov 2025 15:45:18 +0800
+Message-ID: <20251123074540.34161-4-baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
 References: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
@@ -54,39 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9aafac8d9609d5kunm0cca719828660b
+X-HM-Tid: 0a9aafac908a09d5kunm0cca7198286610
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGhlKVkpLTEtOTxhOH05PHVYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQ0wdVk5NSx5NHRpJTE5CGFYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
 	VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=P+FPRZEPAt+f7KskSsIItOTdOAIV81YkPe9Xd34MYVH/BCK5dQ/DYe3GlM0ytAE+3xuRhBRw8z2fzC2c2Q+NRDbt9DOqj1+wcTxOCHgljBm1QsaBwI2dNEO7UzkgmQsQyTOMSgXuQFEyRiOzDDjtx8GoHp/O+O5vlVVLeiNmlEuqtyiA240WbYjIrqgGWUhTY5HjyZfNzomIIDupIC7HIEyg1jZgr5gAY3PVX7mb8bZ1D3WmY1wXugkuCGyLHgGW8AiW8mQsyB2deXXsslB1OJqWIP9o/u2rXIz34nIJ9HkTeJLN0GPD8V6O8uNyyiS1r7QU++MhyWuzwTEN1cxMjg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=Wz3fxbsbDYANHJympmXhN9YjNtAapZRlgLtxJTgUbj4=;
+	b=fBjsHScztpxpokm6NkYT8y8JBbeRy8Xo8XYIQ4/IKUnzcnFdflw/rJTD/YHxHzp+XVApcOQ/wYisIUfsJhj8JzNdr2Nsva49CkpeNkCgreJunf8xQwhl2ksMRvQ6Zrlr0+kxnwAyQijxzJf8q5BE+kNcC4EnC03J6fKugzRYg+05nwoyyBUVUa2MoGPJW58Z0CspExwi8Td14LEs7YeaiigAYw3e9AuuYvlCwYTbCozfyUCVN7iyA1bv8Z/bohYjPguRSZG7LP3RGi665nApJx5IEiFHS9t6oSmUjtwEQi/19nHJlb7rekw730DeAI6YoO+v/ugTp+cSHMbz/SkABw==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=n6CnG8IfbJLUEO0TC+w27tCxsj8X5eQwnVctsxTkt/8=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/acm.rst into Chinese.
+Translate .../usb/authorization.rst into Chinese.
 
-Update the translation through commit ecefae6db042
-("docs: usb: rename files to .rst and add them to drivers-api")
+Update the translation through commit f176638af476
+("USB: Remove Wireless USB and UWB documentation")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- Documentation/translations/zh_CN/usb/acm.rst | 137 +++++++++++++++++++
- 1 file changed, 137 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/acm.rst
+ .../translations/zh_CN/usb/authorization.rst  | 125 ++++++++++++++++++
+ 1 file changed, 125 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/authorization.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/acm.rst b/Documentation/translations/zh_CN/usb/acm.rst
+diff --git a/Documentation/translations/zh_CN/usb/authorization.rst b/Documentation/translations/zh_CN/usb/authorization.rst
 new file mode 100644
-index 000000000000..974654410344
+index 000000000000..6d5569f3f419
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/acm.rst
-@@ -0,0 +1,137 @@
++++ b/Documentation/translations/zh_CN/usb/authorization.rst
+@@ -0,0 +1,125 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/acm.rst
-+
++:Original: Documentation/usb/authorization.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,131 +93,120 @@ index 000000000000..974654410344
 +:校译:
 +
 +
-+======================
-+Linux ACM驱动 v0.16
-+======================
++==============================================================
++授权（或不授权）USB设备连接到系统
++==============================================================
 +
-+版权所有(c) 1999 Vojtech Pavlik <vojtech@suse.cz>
++版权 (C) 2007 Inaky Perez-Gonzalez <inaky@linux.intel.com> 因特尔公司
 +
-+由SuSE赞助
++此功能允许你控制系统中USB设备的使用权限。
++你可以借此实现USB设备的锁定，并由用户空间完全控制。
 +
-+0. 免责声明
-+~~~~~~~~~~~~~
-+本程序是自由软件；您可以依据自由软件基金会发布的GNU通用公共许可证第2版，
-+或（由您选择的）任何更高版本的规定，对本程序进行再发布和/或修改。
++目前为止，当USB设备连接时，它会被配置，其接口会立即对用户开放。
++通过此修改，只有在root授权配置设备后，用户才能使用它。
 +
-+我们希望本程序有用，但不提供任何担保；甚至不包含对适销性或适用于特定目的的默示性担保。
-+更多细节请参阅GNU通用公共许可证。
 +
-+您应该已经随本程序收到GNU通用公共许可证副本；
-+如果没有，请写信至：Free Software Foundation, Inc., 59
-+Temple Place, Suite 330, Boston, MA 02111-1307 USA。
++使用方法
++=========
 +
-+如需联系作者，可通过电子邮件发送消息至 vojtech@suse.cz，
-+或通过纸质邮件寄至：
-+Vojtech Pavlik, Ucitelska 1576, Prague 8, 182 00, Czech Republic。
++授权设备连接::
 +
-+为方便起见，本软件包中已包含GNU通用公共许可证第2版：参见文件COPYING。
++	$ echo 1 > /sys/bus/usb/devices/DEVICE/authorized
 +
-+1. 使用方法
-+~~~~~~~~~~~~~
-+drivers/usb/class/cdc-acm.c驱动可用于USB调制解调器和USB ISDN终端适配器，
-+这些设备符合USB通用串行总线通信设备类（Universal Serial Bus
-+Communication Device Class）的抽象控制模型（Abstract Control Model，
-+USB CDC ACM）规范。
++取消授权设备连接::
++	$ echo 0 > /sys/bus/usb/devices/DEVICE/authorized
 +
-+许多调制解调器支持此驱动，以下是我所知道的一些型号：
++将新连接到hostX的设备默认设置为未授权（即：锁定）::
 +
-+	- 3Com OfficeConnect 56k
-+	- 3Com Voice FaxModem Pro
-+	- 3Com Sportster
-+	- MultiTech MultiModem 56k
-+	- Zoom 2986L FaxModem
-+	- Compaq 56k FaxModem
-+	- ELSA Microlink 56k
++	$ echo 0 > /sys/bus/usb/devices/usbX/authorized_default
 +
-+我知道有一款ISDN终端适配器可以与ACM驱动一起使用：
++解除锁定::
 +
-+	- 3Com USR ISDN Pro TA
++	$ echo 1 > /sys/bus/usb/devices/usbX/authorized_default
 +
-+一些手机也可以通过USB连接。我知道以下机型可以正常工作：
++默认情况下，所有USB设备都是授权的。
++向authorized_default属性写入 "2" 会使内核默认只授权连接到内部USB端口的设备。
 +
-+	- SonyEricsson K800i
++系统锁定示例（简单示例）
++------------------------------
 +
-+不幸的是，许多调制解调器以及大多数ISDN终端适配器使用专有接口，
-+因此无法与此驱动兼容。购买前请确认设备是否符合ACM规范。
++假设你想实现一个锁定功能，使得只有类型为XYZ的设备可以连接
++（例如，它是一个带有可见 USB 端口的自助服务终端）::
 +
-+要使用调制解调器，您需要加载以下模块：
++  启动系统
++  rc.local ->
 +
-+	usbcore.ko
-+	uhci-hcd.ko ohci-hcd.ko or ehci-hcd.ko
-+	cdc-acm.ko
++   for host in /sys/bus/usb/devices/usb*
++   do
++      echo 0 > $host/authorized_default
++   done
 +
-+之后，调制解调器应该可以正常访问。
-+你应该能够使用minicom、ppp和mgetty与它们进行通信。
++将一个脚本挂接到udev，用于新 USB 设备::
 +
-+2. 验证驱动是否正常工作
-+~~~~~~~~~~~~~~~~~~~~~~~~
++ if device_is_my_type $DEV
++ then
++   echo 1 > $device_path/authorized
++ done
 +
-+第一步是检查 /sys/kernel/debug/usb/devices，其内容应类似如下::
 +
-+  T:  Bus=01 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=12  MxCh= 2
-+  B:  Alloc=  0/900 us ( 0%), #Int=  0, #Iso=  0
-+  D:  Ver= 1.00 Cls=09(hub  ) Sub=00 Prot=00 MxPS= 8 #Cfgs=  1
-+  P:  Vendor=0000 ProdID=0000 Rev= 0.00
-+  S:  Product=USB UHCI Root Hub
-+  S:  SerialNumber=6800
-+  C:* #Ifs= 1 Cfg#= 1 Atr=40 MxPwr=  0mA
-+  I:  If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub
-+  E:  Ad=81(I) Atr=03(Int.) MxPS=   8 Ivl=255ms
-+  T:  Bus=01 Lev=01 Prnt=01 Port=01 Cnt=01 Dev#=  2 Spd=12  MxCh= 0
-+  D:  Ver= 1.00 Cls=02(comm.) Sub=00 Prot=00 MxPS= 8 #Cfgs=  2
-+  P:  Vendor=04c1 ProdID=008f Rev= 2.07
-+  S:  Manufacturer=3Com Inc.
-+  S:  Product=3Com U.S. Robotics Pro ISDN TA
-+  S:  SerialNumber=UFT53A49BVT7
-+  C:  #Ifs= 1 Cfg#= 1 Atr=60 MxPwr=  0mA
-+  I:  If#= 0 Alt= 0 #EPs= 3 Cls=ff(vend.) Sub=ff Prot=ff Driver=acm
-+  E:  Ad=85(I) Atr=02(Bulk) MxPS=  64 Ivl=  0ms
-+  E:  Ad=04(O) Atr=02(Bulk) MxPS=  64 Ivl=  0ms
-+  E:  Ad=81(I) Atr=03(Int.) MxPS=  16 Ivl=128ms
-+  C:* #Ifs= 2 Cfg#= 2 Atr=60 MxPwr=  0mA
-+  I:  If#= 0 Alt= 0 #EPs= 1 Cls=02(comm.) Sub=02 Prot=01 Driver=acm
-+  E:  Ad=81(I) Atr=03(Int.) MxPS=  16 Ivl=128ms
-+  I:  If#= 1 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=acm
-+  E:  Ad=85(I) Atr=02(Bulk) MxPS=  64 Ivl=  0ms
-+  E:  Ad=04(O) Atr=02(Bulk) MxPS=  64 Ivl=  0ms
++现在，device_is_my_type() 就是实现锁定的关键所在。
++仅仅检查class、type 和 protocol是否匹配某个值，
++是最差的安全验证方式（但对于想要破解的人却是最容易的）。
++如果你需要真正安全的方案，应使用加密、证书认证等手段。
++一个针对存储密钥的简单示例::
 +
-+其中以下三行（以及 Cls= 'comm' 和 'data' 类）非常重要，它们表示这是一个ACM设备。
-+Driver=acm 表示acm驱动正在处理该设备。
-+如果只看到 Cls=ff(vend.)，那么很不幸，这是一个厂商自定义接口设备::
++ function device_is_my_type()
++ {
++   echo 1 > authorized		# temporarily authorize it
++                                # FIXME: make sure none can mount it
++   mount DEVICENODE /mntpoint
++   sum=$(md5sum /mntpoint/.signature)
++   if [ $sum = $(cat /etc/lockdown/keysum) ]
++   then
++        echo "We are good, connected"
++        umount /mntpoint
++        # Other stuff so others can use it
++   else
++        echo 0 > authorized
++   fi
++ }
 +
-+    D:  Ver= 1.00 Cls=02(comm.) Sub=00 Prot=00 MxPS= 8 #Cfgs=  2
-+    I:  If#= 0 Alt= 0 #EPs= 1 Cls=02(comm.) Sub=02 Prot=01 Driver=acm
-+    I:  If#= 1 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=acm
 +
-+在系统日志中你应该看到::
++当然，这种做法很简陋；你实际上应该使用基于PKI的真正证书验证，
++这样就不会依赖共享密钥之类的东西。不过你明白我的意思。
++任何拿到设备仿真工具包的人都能伪造描述符和设备信息。
++千万不要信任这些信息。
 +
-+  usb.c: USB new device connect, assigned device number 2
-+  usb.c: kmalloc IF c7691fa0, numif 1
-+  usb.c: kmalloc IF c7b5f3e0, numif 2
-+  usb.c: skipped 4 class/vendor specific interface descriptors
-+  usb.c: new device strings: Mfr=1, Product=2, SerialNumber=3
-+  usb.c: USB device number 2 default language ID 0x409
-+  Manufacturer: 3Com Inc.
-+  Product: 3Com U.S. Robotics Pro ISDN TA
-+  SerialNumber: UFT53A49BVT7
-+  acm.c: probing config 1
-+  acm.c: probing config 2
-+  ttyACM0: USB ACM device
-+  acm.c: acm_control_msg: rq: 0x22 val: 0x0 len: 0x0 result: 0
-+  acm.c: acm_control_msg: rq: 0x20 val: 0x0 len: 0x7 result: 7
-+  usb.c: acm driver claimed interface c7b5f3e0
-+  usb.c: acm driver claimed interface c7b5f3f8
-+  usb.c: acm driver claimed interface c7691fa0
++接口授权
++---------
 +
-+如果以上都正常，请启动minicom，将其设置为连接ttyACM设备，然后输入'at'。
-+如果响应 "OK"，则说明一切工作正常。
++也有类似的方法用于允许或拒绝特定 USB 接口。这允许只阻止 USB 设备的一个子集。
++
++授权接口::
++
++	$ echo 1 > /sys/bus/usb/devices/INTERFACE/authorized
++
++取消授权接口::
++
++	$ echo 0 > /sys/bus/usb/devices/INTERFACE/authorized
++
++新接口在特定 USB 总线上的默认值也可以更改。
++
++默认允许接口::
++
++	$ echo 1 > /sys/bus/usb/devices/usbX/interface_authorized_default
++
++默认拒绝接口::
++	$ echo 0 > /sys/bus/usb/devices/usbX/interface_authorized_default
++
++默认情况下，interface_authorized_default 位为 1。
++因此，所有接口默认都是授权的。
++
++注意：
++  如果一个未授权的接口将被授权，则必须通过将INTERFACE写入
++  /sys/bus/usb/drivers_probe来手动触发驱动程序探测。
++  对于需要多个接口的驱动程序，所有需要的接口应先被授权。
++  之后应探测驱动程序。这样可以避免副作用。
 --
 2.34.1
 
