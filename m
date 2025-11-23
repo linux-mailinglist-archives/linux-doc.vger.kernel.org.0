@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67822-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67835-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74D13C7E0AF
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:28 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AA71C7E0DC
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 13:11:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 61B574E310C
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:20 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E529B3ABEAB
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:11:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DA4AE4A35;
-	Sun, 23 Nov 2025 11:56:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C413212B0A;
+	Sun, 23 Nov 2025 12:11:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="iea/GIGh"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="CHFbnMqC"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m1973183.qiye.163.com (mail-m1973183.qiye.163.com [220.197.31.83])
+Received: from mail-m49211.qiye.163.com (mail-m49211.qiye.163.com [45.254.49.211])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C39B2D59F7
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.83
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4ECA385C4A
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 12:11:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.211
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763898979; cv=none; b=A/fWKnXyEtNiLW9p9hAZwJ4r/57UGZTEfdGaLKZd6ybAUl7YsIw073NZICxlLI8g4c/Fr+3spTR5V5h4wRB81OIAOKu512582GCPVCePG0Rj0Miw7kcUVFJPp7nxPe2eECz9i0HBb9A3sdHM21YEd6LvZ31wU/MIZL1wWCw46oU=
+	t=1763899903; cv=none; b=HBnrFAIoLS/DwvYpkPpdwE8IaFy+yX8DwuFWgr3XC/J3wgTU/2X4ST4t7w8gJWHMPpZkzl/UTSxDfYFxsL+53OYVZ9n/cQLhZ845xlaGFkqy0xFwnDE0v0KIcVDYAWF/y9fCiomR/Xa9LJ14UyJXkBmJHUHOT414DUo+PKiTsek=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763898979; c=relaxed/simple;
-	bh=AUBJSDe6sVJi71sOE6Q0lFn2hZD6BDHVXqr8KR7bl2c=;
+	s=arc-20240116; t=1763899903; c=relaxed/simple;
+	bh=DibYznh4Q/hV7nh6LHavsARRKwsJ7+HgIgy5fySdK04=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pAKNqAHrZcCVbtaYojhQjmAsBVJLTjXX/Y2PKVW9BWTxmZ7zqG+SjgY8VdCaNJRYxOqaLxVihL/hdkr93YtbOUodGHo70nrmhKyBoQok45EAS+5GWpRaoUftwjAwQpvxQpkV2sNJNi6QcaB2D+Qa/nmv/PYcklo+4L889A11x6s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=iea/GIGh; arc=none smtp.client-ip=220.197.31.83
+	 MIME-Version:Content-Type; b=ZPwglHToREiU1CUuXp7+jCNeUk2pOpQ39CDxqePFnHP8im1ZPi8feuECReyludmFortyUhciiI+hRQ7I2WSK6hgMcmnd6Pr/n5rY7hrD7ubkG89RuVDkN7TbjMfLrHe3eOojqVxISMCCjzeiQver3oOO4l6kePFxcOTYWwqTF7c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=CHFbnMqC; arc=none smtp.client-ip=45.254.49.211
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a902910f;
-	Sun, 23 Nov 2025 19:56:14 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a9029111;
+	Sun, 23 Nov 2025 19:56:15 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 24/25] docs/zh_CN: Add usb-help.rst translation
-Date: Sun, 23 Nov 2025 19:56:22 +0800
-Message-ID: <ffe2fdccfd43bcd3315d1ea6af65c748f6c44281.1763897036.git.baikefan@leap-io-kernel.com>
+Subject: [PATCH v2 25/25] docs/zh_CN: Add CREDITS.rst translation
+Date: Sun, 23 Nov 2025 19:56:23 +0800
+Message-ID: <5ff9e9f32cb18350346c0bb2c0e2b0c2f5e07cd8.1763897036.git.baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1763897036.git.baikefan@leap-io-kernel.com>
 References: <cover.1763897036.git.baikefan@leap-io-kernel.com>
@@ -54,38 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab09260f409d5kunm2b5c8c0429ade9
+X-HM-Tid: 0a9ab09263c709d5kunm2b5c8c0429adec
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDS0IaVkNNHxpPSk4aSR9OSFYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
-	VKQktLWQY+
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCH0waVh5OHklKQ0ofTUoYHVYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
+	VLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=iea/GIGhl5eFWXwL1rT2SLIW55g8KcshO8ZPCmfJDmXHuw2oXkE5WupYl0U57dNTKJjoA1gDgvyOXfGtJcRfbx1ERGzZNelxMelBNeYQ+cOtTbquWn2r5oCUxAWPB+6xjmIuHDshQB/Oeyvn/oneTYGn9KOMPlkQYBSF9dk5sAWM0zOUPhOqqRH5/ol+Ny440K9P+pjbBvEdlYyh7DSzk3dB1ILNCPt1eIOWng9tsqfsKPeHE3sP7mOJJUNuOLVAogsb2W39mB4GvsBIpgRyTDI+5wIpHLfz0C+rqyR0bvNYOaXyv6PaSy1gfGjHsFXAN/QWwiq6qHsHO59bSCBEhQ==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=q6Nsl5JFjLWPQJduwHqTdufciq9HxWsNSkZtD7A7Bmw=;
+	b=CHFbnMqCqDBxxRBbOgngHZpCtA7X7m1XNX3sRmUiC6XpN3ehTtYrRbVh++IPyZM0YJ9YXY81C3Hji5K8AbjTwKddVZUWwuW/J/nLg/ure17XQQDdAM05P08OM70UAHCnoa/FB5WA/Jy0OH1/QUrl3NSivuhy5BgRpoN9WT8da1bDvuOueHuSQ9rNv7PggKDENJteXsDpwQLF1B8vSvUTelwM1Acqh1mvH7SKxp3sCM+uVMNexxvGu5dyRdrxeWGdVZjkkoo9cYIhWE2YeMVIie9fujZG21vSZVNFyF0PsXdyaTPaVJyQwUEr8tP94jJs+ZbVvY381NdVK/AT9sWk4w==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=GblXU8IaJhX3MDQir0srIzjNan/WPTSDtQhjmAVPrig=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/usb-help.rst into Chinese.
+Translate .../usb/CREDITS.rst into Chinese.
 
-Update the translation through commit ecefae6db042
-("docs: usb: rename files to .rst and add them to drivers-api")
+Update the translation through commit 7b2328c5a009
+("docs: Fix typo in usb/CREDITS")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/usb-help.rst       | 28 +++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/usb-help.rst
+ Documentation/translations/zh_CN/usb/CREDITS | 152 +++++++++++++++++++
+ 1 file changed, 152 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/CREDITS
 
-diff --git a/Documentation/translations/zh_CN/usb/usb-help.rst b/Documentation/translations/zh_CN/usb/usb-help.rst
+diff --git a/Documentation/translations/zh_CN/usb/CREDITS b/Documentation/translations/zh_CN/usb/CREDITS
 new file mode 100644
-index 000000000000..29ca3fbdc276
+index 000000000000..bff8b72e3b82
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/usb-help.rst
-@@ -0,0 +1,28 @@
++++ b/Documentation/translations/zh_CN/usb/CREDITS
+@@ -0,0 +1,152 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/usb-help.rst
++:Original: Documentation/usb/CREDITS
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,22 +94,146 @@ index 000000000000..29ca3fbdc276
 +
 +
 +
-+============
-+USB 参考资料
-+============
++简易版Linux USB驱动致谢名单：
 +
-+2008年3月7日
++以下人员为本代码作出了贡献（按姓氏字母顺序排列）。
++我相信这份名单还应更长一些，但维护起来确实不易。
++如果你希望加入，请提交补丁。
 +
-+除了位于 `Documentation/usb/*` 的说明文件外，如需 USB 相关帮助，请参考以下资源：
++  Georg Acher <acher@informatik.tu-muenchen.de>
++  David Brownell <dbrownell@users.sourceforge.net>
++  Alan Cox <alan@lxorguk.ukuu.org.uk>
++  Randy Dunlap <randy.dunlap@intel.com>
++  Johannes Erdfelt <johannes@erdfelt.com>
++  Deti Fliegl <deti@fliegl.de>
++  ham <ham@unsuave.com>
++  Bradley M Keryan <keryan@andrew.cmu.edu>
++  Greg Kroah-Hartman <greg@kroah.com>
++  Pavel Machek <pavel@suse.cz>
++  Paul Mackerras <paulus@cs.anu.edu.au>
++  Petko Manlolov <petkan@dce.bg>
++  David E. Nelson <dnelson@jump.net>
++  Vojtech Pavlik <vojtech@suse.cz>
++  Bill Ryder <bryder@sgi.com>
++  Thomas Sailer <sailer@ife.ee.ethz.ch>
++  Gregory P. Smith <greg@electricrain.com>
++  Linus Torvalds <torvalds@linux-foundation.org>
++  Roman Weissgaerber <weissg@vienna.at>
++  <Kazuki.Yasumatsu@fujixerox.co.jp>
 +
-+- Linux-USB 项目：     http://www.linux-usb.org
-+  镜像站点：           http://usb.in.tum.de/linux-usb/
-+  以及：               http://it.linux-usb.org
-+- Linux USB 指南：     http://linux-usb.sourceforge.net
-+- Linux-USB 设备概览（工作设备及驱动）：
-+  http://www.qbik.ch/usb/devices/
++特别感谢：
 +
-+Linux-USB 邮件列表： linux-usb@vger.kernel.org
++  Inaky Perez Gonzalez <inaky@peloncho.fis.ucm.es>
++  感谢他发起了Linux USB驱动的开发工作，并编写了
++  大部分早期的 uusbd 驱动。我们从那项工作中学到
++  了很多东西。
++
++  The NetBSD & FreeBSD的USB开发者们
++  感谢他们在Linux USB邮件列表中的建议与经验分享。
++
++附加感谢：
++  以下公司与个人为我们在硬件、支持、时间和开发上的捐赠与帮助
++  （摘自Inaky原始驱动中的THANKS文件）：
++
++    以下公司曾帮助我们开发Linux USB / UUSBD：
++
++        - 3Com GmbH捐赠了一台ISDN Pro TA，并在技术问题和测试设备上提供支持。
++          我从未想到能获得如此慷慨的帮助。
++
++        - USAR Systems提供了优秀的 USB 评估套件，使我们能够
++          测试Linux USB驱动与最新USB规范的兼容性。USAR Systems
++          认识到开源操作系统的重要性，并提供了硬件支持，感谢他们！
++
++        - 感谢英特尔提供的宝贵帮助。
++
++        - 我们与Cherry合作，使Linux成为第一个内建USB支持的操作系统。
++          Cherry是全球最大的键盘制造商之一。
++
++        - CMD Technology, Inc慷慨捐赠了一块CSA-6700 PCI-to-USB控制卡，
++          用于测试OHCI实现。
++
++        - 感谢Keytronic的支持，使其键盘能够被数百万Linux用户使用。
++
++        - ing büro h doran [http://www.ibhdoran.com]!
++          在欧洲几乎买不到主板后置USB接口面板，而我自制的版本很糟糕 ：）。
++          感谢他们提供了漂亮的USB配件！
++
++        - Genius Germany捐赠了一只USB鼠标用于测试鼠标启动协议，并提供了
++          F-23数字摇杆和NetMouse Pro。感谢！
++
++        - AVM GmbH Berlin支持我们开发Linux下的AVM ISDN控制器B1 USB驱动。
++          AVM是领先的ISDN控制器制造商，其主动式设计对包括Linux在内的
++          所有操作系统开放。
++
++        - Thanks to Y-E Data, Inc捐赠了FlashBuster-U USB软驱，
++          使我们能够测试bulk传输代码。
++
++        - 感谢Logitech捐赠了一只三轴USB鼠标。
++
++          Logitech设计、制造并销售各种人机接口设备，
++          如键盘、鼠标、轨迹球、摄像头、扬声器及游戏控制设备。
++
++          感谢他们捐赠了USB鼠标、摇杆和扫描仪，
++          以支持Linux用户使用Logitech及其他USB设备。
++
++          Logitech亦是1999年2月11日维也纳Linux大会的官方赞助商，
++          我们在会上展示了Linux USB的最新进展。
++
++        - 感谢CATC提供了USB Inspector，用于揭示UHCI实现的内部细节。
++
++        - 感谢Entrega提供了PCI-USB转换卡、集线器和转换器产品用于开发。
++
++        - 感谢ConnectTech提供了WhiteHEAT USB转串口转换器及相关文档，
++          使得驱动得以编写。
++
++        - 感谢ADMtek提供了Pegasus与Pegasus II评估板、规格说明和开发建议。
++
++    个人感谢名单（排名不分先后）
++
++        - Oren Tirosh <orenti@hishome.net>,
++          耐心解答了我关于USB的各种疑问，并提出了许多很棒的想法。
++
++        - Jochen Karrer <karrer@wpfd25.physik.uni-wuerzburg.de>,
++          找到了致命的bug并给予了宝贵建议。
++
++        - Edmund Humemberger <ed@atnet.at>, 感谢他为Linux-USB项目
++          在公共关系与管理工作上付出了巨大努力。
++
++        - Alberto Menegazzi <flash@flash.iol.it>开始编写UUSBD文档，加油！
++
++        - Ric Klaren <ia_ric@cs.utwente.nl>编写了优秀的入门文档，
++          与Alberto的作品形成良性竞争：）。
++
++        - Christian Groessler <cpg@aladdin.de>帮助解决了很多麻烦的小问题。
++
++        - Paul MacKerras改进了OHCI实现，并推动了iMac支持，提供了大量改进意见。
++
++        - Fernando Herrera <fherrera@eurielec.etsit.upm.es>
++          负责撰写和维护期待已久的UUSBD FAQ！
++
++        - Rasca Gmelch <thron@gmx.de>重新启用了raw驱动，
++          修复了错误并创建了uusbd-utils包。
++
++        - Peter Dettori <dettori@ozy.dec.com>疯狂地挖掘bug并提出了
++          酷炫的改进建议，太棒了！
++
++        - 自由软件与Linux社区的所有成员，
++          包括FSF、GNU项目、MIT X联盟、TeX社区等等，谢谢你们！
++
++        - 大大的感谢送给Richard Stallman和他的Emacs！
++
++        - 感谢linux-usb邮件列表的所有成员，他们阅读了那么多邮件，
++          并且提出了大量的建议！
++
++        - USB Implementers Forum成员们的帮助与支持。
++
++        - Nathan Myers <ncm@cantrip.org>，感谢他的建议！（希望你喜欢Cibeles的派对）
++
++        - 感谢Linus Torvalds创建、开发并管理Linux。
++
++        - Mike Smith, Craig Keithley, Thierry Giron和Janet Schank
++          感谢他们让我明白标准USB集线器其实并没有那么标准，
++          这有助于我们在标准集线器驱动中加入厂商特定的特性。
 -- 
 2.52.0
 
