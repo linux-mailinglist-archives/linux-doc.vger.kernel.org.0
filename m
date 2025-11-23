@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67831-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67818-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DFDEC7E0C7
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 13:01:25 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id D5F89C7E09E
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id C16293ABB0D
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:01:23 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EA4303AB49A
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 784BC1F09AD;
-	Sun, 23 Nov 2025 12:01:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CBB514A35;
+	Sun, 23 Nov 2025 11:56:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="ZoFqtk2T"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="dAubKx0v"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail-m1973171.qiye.163.com (mail-m1973171.qiye.163.com [220.197.31.71])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40FF41BFE00
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 12:01:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B21E52C15A5
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.71
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763899283; cv=none; b=p2iIPnTiiUHRzkDas2EG7ugntI9IdIdh4r69Qg60NuGn5c0GpmmDPHXC+tjh3O/uiuGMnfmhoZIXNK8bpTLp4h5Cpt+KrhTaEERfS1XGSQSIMT2ZESarK2todkcJFOuOeqDQSK79pv1Jg9BtgNkVCjmiTkOIqp6/8NB4L4YGhpM=
+	t=1763898976; cv=none; b=JI0CENwYIbT1COrgJTD3xSLhC2BCRWl1yc6x3gKrT5TwQEO1n0NNGeRXWd91dtHdvrQu/BQJtXZlBipHaEK77fnEYuHJS8SbLR1Q54iEAAv8Bb8Fxr/awTG2vIvXK3uLXLAFm+z+ljt/Mu5N7sWJaGCFqCkDfb6mRfgg03WrTL0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763899283; c=relaxed/simple;
-	bh=oh4l+mSqj6RALEALbYG40cMSuTp/Bpcoe+epMHq9PjU=;
+	s=arc-20240116; t=1763898976; c=relaxed/simple;
+	bh=yulKJI8SAw5+Y1OXULE+eJWl2MK93uwFvsF1ZCC6jGI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=D/LqN8RcmstJ/TTkbQOuiuwnZGb4+4eN3rI1HHZJFWc2VrMt0JYs34CpfnHOS7fhxNPJouyRt3IHXqb9A8SmbguOcEXjfu6+ii5E1h7SPAsMqTxMJAI2wyQqLNM6E7cSIJi5jaHU5H/7x3t4h+YWQTzbc/twElId458Ut5GSYzY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=ZoFqtk2T; arc=none smtp.client-ip=220.197.31.71
+	 MIME-Version:Content-Type; b=HIG9lHRT+uiL1ADECi5kjCeq2yW+DTQSImqofP9F0xD2XaQNZO8jt08s2DzGEw6Jozz3nh9lCmeGyn7JuxQTICjH+zKE6nS/WctqrYGJH9Nwni8lhXwet8G4xzC4MKhfzBp3GPcmeURLIgPU3R5Pwdz6eASbCFwhGOZkqS/8yxo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=dAubKx0v; arc=none smtp.client-ip=220.197.31.71
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a9029107;
-	Sun, 23 Nov 2025 19:56:10 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a9029108;
+	Sun, 23 Nov 2025 19:56:11 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 19/25] docs/zh_CN: Add mtouchusb.rst translation
-Date: Sun, 23 Nov 2025 19:56:17 +0800
-Message-ID: <35302db68b21031c1ef322e2c9abffedfa8928f6.1763897036.git.baikefan@leap-io-kernel.com>
+Subject: [PATCH v2 20/25] docs/zh_CN: Add ohci.rst translation
+Date: Sun, 23 Nov 2025 19:56:18 +0800
+Message-ID: <7711e5c83d79d7906391480de0b3488837e963af.1763897036.git.baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1763897036.git.baikefan@leap-io-kernel.com>
 References: <cover.1763897036.git.baikefan@leap-io-kernel.com>
@@ -54,38 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab09250e509d5kunm2b5c8c0429add0
+X-HM-Tid: 0a9ab092541909d5kunm2b5c8c0429adda
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSU0ZVk4YQk1DSk1CGkhLSVYVFAkWGhdVEwETFh
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTEpCVkkaGENJTkkfH0lJTlYVFAkWGhdVEwETFh
 	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
 	VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=ZoFqtk2Ts9nV5W+XRBTichxxL0/Qy/ouwEq8izZ3HXvogLv5ZIGUjjRl97ynw4Tbprp4Mve3uRWvIB+WbB7/ybQHtp2BxJay5W0XSX4gYrH61p/tbGPUHeFijI4EWTCfmve9STM7g9U1fR2gqTPhStjriZ0TBZrNxEKMVPXPhvbi4ClUIwcbknHEAHuaMusHFIjRL1waUTi7YfiedtwNklgXhrnF6dlVjh1NAj/Gvp51FDA41PaTF63jYFuSJ6HK2GONCnMVX1231oSZ5Yt+/2pQluHvn7cUe5HI5qAE8AHSXfo/M9C6CQ7LIH/kBESSFkONDsSjCQqXvVUrOvJfBg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=7Nu0+73f1CkTZLKmRIvZp8yiyT4m1Ope/LLrufocV2k=;
+	b=dAubKx0v5eTWI1C2MPrsToY/H0EvArUFjZr8SswLSAUOmjzHcrp0PXgcsFTzm+QH8tIs2c7vqeOIzuMHElCrV/9tjWqOHAD4iKaDR7A4h0qh/tKnwY0AyWd+T7crYAEDUXJIWN4+CL12XzH7dW7Mo++5XTg8mwwWGZ8VoX+RJiA34OyMjrD+kYyJp0EACjCI+T8+ikQV/BcaDZY9A7/9+mjKm3EOauY6v+mrSi0AXFcKhiAj5jh5aFoNd4SWbu1MvyW77s5Cz5t8od/vXaaox2PFBLI+WKR1J/3CzHGWTbnRCgR7Txkj+aqSxUtHfxtgExq9OMc0iiCdZ/uMp2t6vg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=dEV08GvyqoNdTIE3VeoTy5IQF0qF096mWlHtnC8Vu7c=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/mtouchusb.rst into Chinese.
+Translate .../usb/ohci.rst into Chinese.
 
-Update the translation through commit 9e255e2b9afe
-("Documentation: drop optional BOMs")
+Update the translation through commit ecefae6db042
+("docs: usb: rename files to .rst and add them to drivers-api")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/mtouchusb.rst      | 89 +++++++++++++++++++
- 1 file changed, 89 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/mtouchusb.rst
+ Documentation/translations/zh_CN/usb/ohci.rst | 46 +++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/ohci.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/mtouchusb.rst b/Documentation/translations/zh_CN/usb/mtouchusb.rst
+diff --git a/Documentation/translations/zh_CN/usb/ohci.rst b/Documentation/translations/zh_CN/usb/ohci.rst
 new file mode 100644
-index 000000000000..11f847a6b428
+index 000000000000..62bd8070a25e
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/mtouchusb.rst
-@@ -0,0 +1,89 @@
++++ b/Documentation/translations/zh_CN/usb/ohci.rst
+@@ -0,0 +1,46 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/mtouchusb.rst
++:Original: Documentation/usb/ohci.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,83 +94,40 @@ index 000000000000..11f847a6b428
 +
 +
 +
-+=================
-+mtouchusb驱动
-+=================
-+
-+变更记录
-+=============
-+
-+- 0.3 - 基于原始触摸屏驱动的scanner和INSTALL创建
-+  （来源：freecode http://freecode.com/projects/3mtouchscreendriver）
-+
-+- 针对 linux-2.4.18 进行了修改，然后是 2.4.19
-+
-+- 使用 Linux Input 在 2.6.3 下完全重写
-+  不幸的是，目前不支持校准功能
-+
-+- 1.4 - 为支持 EXII 5000UC 进行了多项修改并进行清理工作
-+  将复位方式从标准 USB 设备复位改为厂商复位
-+  将发送到主机的数据从补偿坐标改为原始坐标
-+  删除了 vendor/product 模块参数
-+  使用 EXII-5010UC 进行了多次成功测试
-+
-+所支持的硬件
-+==============
-+
-+::
-+
-+        所有VendorID是0x0596，ProductID是0x0001的控制器
-+
-+
-+        控制器描述                       零件编号
-+        ------------------------------------------------------
-+
-+        USB Capacitive - 珍珠外壳        14-205  (已停产)
-+        USB Capacitive - 黑色外壳        14-124  (已停产)
-+        USB Capacitive - 无外壳          14-206  (已停产)
-+
-+        USB Capacitive - 珍珠外壳        EXII-5010UC
-+        USB Capacitive - 黑色外壳        EXII-5030UC
-+        USB Capacitive - 无外壳          EXII-5050UC
-+
-+驱动说明
-+========
-+
-+安装很简单，只需将Linux Input、Linux USB和驱动添加到内核即可。
-+该驱动也可以选择构建为模块。
-+
-+该驱动似乎是可能存在的两个Linux USB Input触摸屏驱动之一。
-+虽然3M提供了一个仅二进制可下载的驱动，但我坚持更新此驱动，
-+因为我希望在嵌入式应用中使用触摸屏，例如使用QTEmbedded、DirectFB等。
-+因此，我认为逻辑选择是使用Linux Input。
-+
-+目前无法通过此驱动校准设备。即使设备可以校准，驱动也会从控制器获取原始坐标数据。
-+这意味着校准必须在用户态完成。
-+
-+控制器的屏幕分辨率现在为X和Y均为0到16384，用于报告原始触摸数据。
-+对于旧的和新的电容式USB控制器均相同。
-+
-+也许将来会在evdev中放置一个抽象函数，
-+以便可以从用户态请求通用功能，如校准、复位和厂商信息（驱动程序将处理厂商特定任务）。
-+
-+待办事项
-+========
-+
-+一旦可用，再次实现control urb以处理与设备的请求，例如校准等。
-+
-+免责声明
-+========
-+
-+我不是MicroTouch/3M员工，也从未是。
-+3M不支持此驱动！如果只想使用X中支持的触摸驱动，请访问：
-+
-+http://www.3m.com/3MTouchSystems/
-+
-+感谢
++====
++OHCI
 +====
 +
-+非常感谢3M Touch Systems提供的EXII-5010UC控制器进行测试！
++2002年08月23日
++
++“ohci-hcd”驱动是一个USB主控制器驱动（HCD），
++源自2.4内核系列中的“usb-ohci”驱动。
++“usb-ohci”代码主要由Roman Weissgaerber weissg@vienna.at
++编写，但也有许多其他人的贡献（详见其版权/许可头）。
++
++它支持“开放主机控制器接口”（OHCI），
++该接口标准化了用于与USB 1.1主控制器通信的硬件寄存器协议。
++与早期的英特尔“通用主机控制器接口”（UHCI）相比，它将更多智能推入硬件。
++除Intel和VIA之外的USB 1.1控制器通常使用OHCI。
++
++自2.4内核以来的改进包括：
++
++	- 提高了稳定性；修复了漏洞；降低了开销
++	- 支持更新和简化的usbcore API
++	- 中断传输可以更大，并且可以排队
++	- 通过使用上层的"hcd"框架，代码更少
++	- 支持某些非PCI实现的OHCI
++	- ... 更多
++
++“ohci-hcd”驱动处理所有类型的USB 1.1传输。
++所有类型的传输都可以排队。
++这在“usb-ohci”中也适用，但中断传输除外。
++以前，如果使用一个帧周期，会因IRQ处理的开销而有数据丢失的风险。
++当中断传输排队时，
++可以通过确保硬件在操作系统处理相关IRQ时始终有传输任务来最小化这些风险。
++
++- David Brownell
++  <dbrownell@users.sourceforge.net>
 -- 
 2.52.0
 
