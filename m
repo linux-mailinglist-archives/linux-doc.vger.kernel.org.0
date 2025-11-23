@@ -1,155 +1,158 @@
-Return-Path: <linux-doc+bounces-67810-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67826-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97ACAC7E088
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:56:10 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC910C7E0B8
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 13:01:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 789534E1724
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 11:56:09 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 685B44E1BCE
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 12:01:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AB1CE2C0262;
-	Sun, 23 Nov 2025 11:56:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D354C1E98EF;
+	Sun, 23 Nov 2025 12:01:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="RamzK5xZ"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="hAXpQaTv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m19731109.qiye.163.com (mail-m19731109.qiye.163.com [220.197.31.109])
+Received: from mail-m49242.qiye.163.com (mail-m49242.qiye.163.com [45.254.49.242])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03E354A35
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 11:56:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.109
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75F151BFE00
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 12:01:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.242
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763898967; cv=none; b=TdJcOv0ENfDcqmHeOF870P0bvxYb5yrSYCbjRRC6B4hUNgKBtlk4JSCRSet8ft7N8fzQ7LbqXIRkwpPqhBV/23K3CrTsRvDRFTSgaaH0V4ctn1FO6OwhaoA/Sgf6SdxzsSnlT2+lfJczXPgTxixa5wM/8g/vA9lCku2FgIJwby8=
+	t=1763899269; cv=none; b=iuiBHcNZOUDQFMdpNhdqiLY9kLUNDh+j/E0Ipa72HhtJRpXyljHGxbEhY/IEdopBKmReiRSG6leM7QrS5SgIkHd0fYimxLfGIWofCO1PYbJb4OMgHR7rJfNoEapu0Y2eWtURk6xqitGM85tOswY0r3kp+B442WmwX2/ciAVWWCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763898967; c=relaxed/simple;
-	bh=EkmlMt6TmPaJgAfmLTt3GXfYHMcxCvYPySJ5Cq8RdG0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=PbuP7pjRTmJBCL655PCLzldCmjtTOP+vzvXaqpqhiEncA69u9UyA1HiTV3DZEU9DHns3VamLsg7inIJF308TYYicheTjLNmIgm7jMlhM3C2h+Hg2vhzy+rGhsWKEp0N8B823k/5m+KFCaucpEvVjj3KJTrCiwnrivtq71elT3Gw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=RamzK5xZ; arc=none smtp.client-ip=220.197.31.109
+	s=arc-20240116; t=1763899269; c=relaxed/simple;
+	bh=0tPZ7qfiM8mEPv+eeZIrx8pcjeWQq7jDYsJDfKYQokk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=uItv0lBTFsR9569f8k2ZeVlHlXA+W2mVv0nnLOL9+bgBHJASQf8mbao8X3QwlTvapRAZmhirQ7bY0Lg5VTCqswT1lM5jZ5DTVPOJpuCmXYzGeXwL9qVsk+Oe8ay1JBjAhH4nrg422uAU4FXELjeaw4qiP5Zsgs8QiS6c+Jt6Q+0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=hAXpQaTv; arc=none smtp.client-ip=45.254.49.242
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a90290ed;
-	Sun, 23 Nov 2025 19:55:54 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a90290ee;
+	Sun, 23 Nov 2025 19:55:55 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH v2 00/25] Add Chinese translation for USB subsystem
-Date: Sun, 23 Nov 2025 19:55:58 +0800
-Message-ID: <cover.1763897036.git.baikefan@leap-io-kernel.com>
+Subject: [PATCH v2 01/25] docs/zh_CN: Add index.rst translation
+Date: Sun, 23 Nov 2025 19:55:59 +0800
+Message-ID: <97d37d75edeaf8b609911702ec4e563cf414e85a.1763897036.git.baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1763897036.git.baikefan@leap-io-kernel.com>
+References: <cover.1763897036.git.baikefan@leap-io-kernel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab092118409d5kunm2b5c8c0429ad7b
+X-HM-Tid: 0a9ab09215aa09d5kunm2b5c8c0429ad7f
 X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZGUJLVhofGhgdHRlJHxkYSlYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWUtVS1VLVUtZBg++
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGhlLVk9KGRkZH0tCGE0YGFYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
+	VLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=RamzK5xZjdMu7+sLpzjI994kOcvKf8FjzAZpe26lRCsj90qAO1hnuWRejOsM7IkpKShrZTJTEdaS5isJ4r3ERJjJqKRma6OQhXECGO/tIUb3hfPYBJdgm8hirJLNzLj8Sw+gNYU0WG/PiroepYskAnPoshpQjhkow9k9r3W72ylAMas0GkYLyI2ZN4MpPsylUyjrm3DNdbVKNoHJ+yzBO8m4bDtHrSSs5RR9oIo7qhKc0j5RWDRXRnQlvVT7XHzCqhmToHNkXD5rBmnxxdsp8V+AX1kgSqXm5JA3raZ0FEYdYNEPU9zuSPB1b3oUSD49NQW4ThT0luT4JzEgP3xCew==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=9ijWiZHw/TC6UXbTHQwoOp1rxxzpAcCZZPP7oZ0/Z2E=;
+	b=hAXpQaTvmrmGHrOGoPtJbDgHAuUk6PCo/1peUcETjUa8J3ZpVpIfU27elRxOctFFPh5LC7KsXuFM1CHEEPXLDEqdWg6UKoPaU0WEGC1jR22y/W0Mj0P4ns2+GiUipjSzIAyIzpXlu66N9S1S2VnD2KGbKoajs9W5WPPdDgIvd+KCxVxTF9FQ43Zos5RMXBq0FNhYhY4mW4nxIRKCpjzJ3lHQRqG+R6CsCDE9KcvuUFvzl0odpbZLVNtmI3H4PK4LVytwkAt+Sk99JIh36U2HaPwFXJS+ld0sogiep3oADHFMMMEnaTov6wt1j+TjaGIxJTGYJ5wP4QwqMLD9UP/pNg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=m9ademgkom1EB8kgMxF/tjIEKL/L7Q4ohPN0d12pSUU=;
 	h=date:mime-version:subject:message-id:from;
 
-This patch set adds Chinese translations for the USB documentation.
+Translate .../usb/index.rst into Chinese and update subsystem-apis.rst
 
-Changes in v2:
- - Update [PATCH 01/25] docs/zh_CN: Add index.rst translation
-   to include corresponding updates in
-   Documentation/translations/zh_CN/subsystem-apis.rst.
-v1:
- - Link: https://lore.kernel.org/all/20251123074540.34161-1-baikefan@leap-io-kernel.com/
+Update the translation through commit c26cee817f8b
+("usb: gadget: f_fs: add capability for dfu functional descriptor")
 
-macrofun (25):
-  docs/zh_CN: Add index.rst translation
-  docs/zh_CN: Add acm.rst translation
-  docs/zh_CN: Add authorization.rst translation
-  docs/zh_CN: Add chipidea.rst translation
-  docs/zh_CN: Add dwc3.rst translation
-  docs/zh_CN: Add ehci.rst translation
-  docs/zh_CN: Add functionfs.rst translation
-  docs/zh_CN: Add functionfs-desc.rst translation
-  docs/zh_CN: Add gadget_configfs.rst translation
-  docs/zh_CN: Add gadget_hid.rst translation
-  docs/zh_CN: Add gadget_multi.rst translation
-  docs/zh_CN: Add gadget_printer.rst translation
-  docs/zh_CN: Add gadget_serial.rst translation
-  docs/zh_CN: Add gadget_uvc.rst translation
-  docs/zh_CN: Add gadget-testing.rst translation
-  docs/zh_CN: Add iuu_phoenix.rst translation
-  docs/zh_CN: Add mass-storage.rst translation
-  docs/zh_CN: Add misc_usbsevseg.rst translation
-  docs/zh_CN: Add mtouchusb.rst translation
-  docs/zh_CN: Add ohci.rst translation
-  docs/zh_CN: Add raw-gadget.rst translation
-  docs/zh_CN: Add usbmon.rst translation
-  docs/zh_CN: Add usb-serial.rst translation
-  docs/zh_CN: Add usb-help.rst translation
-  docs/zh_CN: Add CREDITS.rst translation
-
- .../translations/zh_CN/subsystem-apis.rst     |    2 +-
- Documentation/translations/zh_CN/usb/CREDITS  |  152 +++
- Documentation/translations/zh_CN/usb/acm.rst  |  137 +++
- .../translations/zh_CN/usb/authorization.rst  |  125 ++
- .../translations/zh_CN/usb/chipidea.rst       |  143 +++
- Documentation/translations/zh_CN/usb/dwc3.rst |   59 +
- Documentation/translations/zh_CN/usb/ehci.rst |  217 ++++
- .../zh_CN/usb/functionfs-desc.rst             |   43 +
- .../translations/zh_CN/usb/functionfs.rst     |   94 ++
- .../translations/zh_CN/usb/gadget-testing.rst | 1068 +++++++++++++++++
- .../zh_CN/usb/gadget_configfs.rst             |  383 ++++++
- .../translations/zh_CN/usb/gadget_hid.rst     |  462 +++++++
- .../translations/zh_CN/usb/gadget_multi.rst   |  154 +++
- .../translations/zh_CN/usb/gadget_printer.rst |  535 +++++++++
- .../translations/zh_CN/usb/gadget_serial.rst  |  259 ++++
- .../translations/zh_CN/usb/gadget_uvc.rst     |  372 ++++++
- .../translations/zh_CN/usb/index.rst          |   50 +
- .../translations/zh_CN/usb/iuu_phoenix.rst    |  100 ++
- .../translations/zh_CN/usb/mass-storage.rst   |  196 +++
- .../translations/zh_CN/usb/misc_usbsevseg.rst |   61 +
- .../translations/zh_CN/usb/mtouchusb.rst      |   89 ++
- Documentation/translations/zh_CN/usb/ohci.rst |   46 +
- .../translations/zh_CN/usb/raw-gadget.rst     |   91 ++
- .../translations/zh_CN/usb/usb-help.rst       |   28 +
- .../translations/zh_CN/usb/usb-serial.rst     |  451 +++++++
- .../translations/zh_CN/usb/usbmon.rst         |  379 ++++++
- 26 files changed, 5695 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/translations/zh_CN/usb/CREDITS
- create mode 100644 Documentation/translations/zh_CN/usb/acm.rst
- create mode 100644 Documentation/translations/zh_CN/usb/authorization.rst
- create mode 100644 Documentation/translations/zh_CN/usb/chipidea.rst
- create mode 100644 Documentation/translations/zh_CN/usb/dwc3.rst
- create mode 100644 Documentation/translations/zh_CN/usb/ehci.rst
- create mode 100644 Documentation/translations/zh_CN/usb/functionfs-desc.rst
- create mode 100644 Documentation/translations/zh_CN/usb/functionfs.rst
- create mode 100644 Documentation/translations/zh_CN/usb/gadget-testing.rst
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_configfs.rst
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_hid.rst
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_multi.rst
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_printer.rst
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_serial.rst
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_uvc.rst
+Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
+---
+ .../translations/zh_CN/subsystem-apis.rst     |  2 +-
+ .../translations/zh_CN/usb/index.rst          | 50 +++++++++++++++++++
+ 2 files changed, 51 insertions(+), 1 deletion(-)
  create mode 100644 Documentation/translations/zh_CN/usb/index.rst
- create mode 100644 Documentation/translations/zh_CN/usb/iuu_phoenix.rst
- create mode 100644 Documentation/translations/zh_CN/usb/mass-storage.rst
- create mode 100644 Documentation/translations/zh_CN/usb/misc_usbsevseg.rst
- create mode 100644 Documentation/translations/zh_CN/usb/mtouchusb.rst
- create mode 100644 Documentation/translations/zh_CN/usb/ohci.rst
- create mode 100644 Documentation/translations/zh_CN/usb/raw-gadget.rst
- create mode 100644 Documentation/translations/zh_CN/usb/usb-help.rst
- create mode 100644 Documentation/translations/zh_CN/usb/usb-serial.rst
- create mode 100644 Documentation/translations/zh_CN/usb/usbmon.rst
 
---
+diff --git a/Documentation/translations/zh_CN/subsystem-apis.rst b/Documentation/translations/zh_CN/subsystem-apis.rst
+index 0f121f9b0f70..6649114b818f 100644
+--- a/Documentation/translations/zh_CN/subsystem-apis.rst
++++ b/Documentation/translations/zh_CN/subsystem-apis.rst
+@@ -91,6 +91,7 @@ TODOList:
+    security/index
+    PCI/index
+    peci/index
++   usb/index
+ 
+ TODOList:
+ 
+@@ -105,6 +106,5 @@ TODOList:
+ * accel/index
+ * crypto/index
+ * bpf/index
+-* usb/index
+ * misc-devices/index
+ * wmi/index
+diff --git a/Documentation/translations/zh_CN/usb/index.rst b/Documentation/translations/zh_CN/usb/index.rst
+new file mode 100644
+index 000000000000..2ef1311a7043
+--- /dev/null
++++ b/Documentation/translations/zh_CN/usb/index.rst
+@@ -0,0 +1,50 @@
++.. SPDX-License-Identifier: GPL-2.0
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/usb/index.rst
++:翻译:
++
++ 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
++
++:校译:
++
++
++
++===========
++USB 支持
++===========
++
++.. toctree::
++    :maxdepth: 1
++
++    acm
++    authorization
++    chipidea
++    dwc3
++    ehci
++    functionfs
++    functionfs-desc
++    gadget_configfs
++    gadget_hid
++    gadget_multi
++    gadget_printer
++    gadget_serial
++    gadget_uvc
++    gadget-testing
++    iuu_phoenix
++    mass-storage
++    misc_usbsevseg
++    mtouchusb
++    ohci
++    raw-gadget
++    usbmon
++    usb-serial
++    usb-help
++
++
++.. only::  subproject and html
++
++   索引
++   =======
++
++   * :ref:`genindex`
+-- 
 2.52.0
 
 
