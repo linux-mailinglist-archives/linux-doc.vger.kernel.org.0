@@ -1,48 +1,48 @@
-Return-Path: <linux-doc+bounces-67784-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67794-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05F26C7DD9E
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:45:59 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 09F58C7DDB9
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 08:50:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 90C7C34B518
-	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 07:45:36 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id C108B4E162C
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Nov 2025 07:50:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F285922CBC6;
-	Sun, 23 Nov 2025 07:45:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 311D5231C9F;
+	Sun, 23 Nov 2025 07:50:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="gD+GcRBS"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="XP+PXPYD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m1973194.qiye.163.com (mail-m1973194.qiye.163.com [220.197.31.94])
+Received: from mail-m1973181.qiye.163.com (mail-m1973181.qiye.163.com [220.197.31.81])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59EBF288520
-	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 07:45:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.94
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BA4122D4DD
+	for <linux-doc@vger.kernel.org>; Sun, 23 Nov 2025 07:50:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.81
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763883933; cv=none; b=lyBzVKTW+cMV8RMibuy3Ux54smXGPZqh5b+K60IiefszBMz+rR4yT81WG95QZu7kkSKHufU8AMq6fg6zb5eD8F93OGmMd+tZHOtKJMaUd3wiuA/6KvhHnq2MWAIeKks+lmuckhcPmyTImSxXDohoDKYMXrEmsUmqvXiZ5+ZyUfA=
+	t=1763884243; cv=none; b=lauHsuaj4vAZDLlZeUktqjyg7sEK/D8f4sZhhn/Y6MGP5nefvL9LbwEBIOaNE/uu0cIGY9irbAdHWi03iLUO74XjOsLSZtAxQnDKsuNxtyNS6JqsG27F0XbYCz/6kr8DYTIc+2u5iCWWyEzEPfh0BU1Vv0Ydsal/kMBZauUyw2Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763883933; c=relaxed/simple;
-	bh=4RMmAcV8iZ3g4zB2831XK07tVc9++WwKyfw3G5kSbyw=;
+	s=arc-20240116; t=1763884243; c=relaxed/simple;
+	bh=hUStUanHOrbd4+yNIoJELN7RATouHa4ox9UlRUXGung=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=G+NJktJGt6e9rzMe0JDb/IgGHUwp77EUe7DtXgmZAg8PRpPtrQHv4FdgXb2tcZr0XQ9nAFdczbDSK8BxVPFWMCqzg24d9LTZ/W6ereVHbeZUboHciR7prygZuetYe3HQDjcxrDNRJrqTjtpsQ1nSV4IvAacUanK9r0E40ZQqC/Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=gD+GcRBS; arc=none smtp.client-ip=220.197.31.94
+	 MIME-Version:Content-Type; b=KovbrHgNt+qF634+4eVygsfCoRKeS5n10gaGh7S4xc6zQeJ4h7EtiNFyulVWku52sW0z/MCTPkdRCOR2w15fOGzMiEeSKL7gibx8HkcaY06re2fUScyhxpH4dSJHwMmPKguLxObGf3W7LrAZz0xuor2/i0cUHdnkgmaqjH6oVlE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=XP+PXPYD; arc=none smtp.client-ip=220.197.31.81
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
 Received: from server001 (unknown [1.203.157.252])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99c1;
-	Sun, 23 Nov 2025 15:45:21 +0800 (GMT+08:00)
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2a8df99c2;
+	Sun, 23 Nov 2025 15:45:23 +0800 (GMT+08:00)
 From: macrofun <baikefan@leap-io-kernel.com>
 To: alexs@kernel.org,
 	si.yanteng@linux.dev
 Cc: dzm91@hust.edu.cn,
 	corbet@lwn.net,
 	linux-doc@vger.kernel.org
-Subject: [PATCH 13/25] docs/zh_CN: Add gadget_serial.rst translation
-Date: Sun, 23 Nov 2025 15:45:28 +0800
-Message-ID: <20251123074540.34161-14-baikefan@leap-io-kernel.com>
+Subject: [PATCH 14/25] docs/zh_CN: Add gadget_uvc.rst translation
+Date: Sun, 23 Nov 2025 15:45:29 +0800
+Message-ID: <20251123074540.34161-15-baikefan@leap-io-kernel.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
 References: <20251123074540.34161-1-baikefan@leap-io-kernel.com>
@@ -54,38 +54,38 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9aafacb1e609d5kunm0cca7198286648
+X-HM-Tid: 0a9aafacb63c09d5kunm0cca719828664c
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCTkpPVh0YTRhMQhlPTBhDS1YVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0hKTkxOVUpLS1
-	VKQktLWQY+
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDSUIaVhhCTk1OH0NCTx9NQlYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlKVUlLSFVKTkxVSU5JWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0NMVUpLS1
+	VLWQY+
 DKIM-Signature: a=rsa-sha256;
-	b=gD+GcRBSIbUjFKf0XQj7o2s8F9FcXtRAhHNdAS+hON7+dO73WlTGPSd5JxVLO+nru5Mo39hc7/lsrVtIvGsITvXMkfapq26t9YGQMWZc95iyY3bmU/FQy/GzGzT4EbXJfSV5/fugIkZv4OD48Dq0V3LIgJSVMMrjLTtZzDk9CdmPVylvqUkA8PfzA/spWdklmmAq+RUkUS+7V3NPEpEhyAwrNfo7gRIFg6A9Jd5XX5ySnTaxuqlmjxCaoI6oH3XDB7YDg8Nbd+FfHVBz8px1UgzxGctLITP8+bkBLi5ouTAbREBjk+4lmFYEyvZOkhnF7c97aRfdMYcBbF2xI0FlSQ==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
-	bh=bNvSz1PkWdAyV9Xc08FNnxJSaFHfK5oPpiMhTYOFYNk=;
+	b=XP+PXPYDTNDvmkehvVqk1iRA9MTdcxLyhXsiHNQcfTa5GnNW/IrD2w77GkTqEycu6UXfx0AqNVXrLpqRSovSOhGWMmXAT+W84gsQD4C3OQJDloYUqss2HcxKArtsPvUHPEo7acjgovJwmlDuvlWBLix7zzTRqPGZlCMyaXa2WGD76pendeNRV+oy9cB+QSrQSesNYjXdFvEg1cgidnqU3t6IZql0U185gqqHcvl/UMmIlVavb07O7JSpUKzhEKeJSC+kjAVQYF7e3iRS+ex/bOexLawzJn35dk2P6W5jKR5CFjTksnwZVnBYtof1Hc+3LeLF9Vjs2u4Y2e8apS4wLg==; c=relaxed/relaxed; s=default; d=leap-io-kernel.com; v=1;
+	bh=aaDfUNN4p3scNLTe8T0++gqCK1LffRumO8XAVlwkev4=;
 	h=date:mime-version:subject:message-id:from;
 
-Translate .../usb/gadget_serial.rst into Chinese.
+Translate .../usb/gadget_uvc.rst into Chinese.
 
-Update the translation through commit ecefae6db042
-("docs: usb: rename files to .rst and add them to drivers-api")
+Update the translation through commit 16794ed32de9
+("docs: usb: fix reference to nonexistent file in UVC Gadget")
 
 Signed-off-by: macrofun <baikefan@leap-io-kernel.com>
 ---
- .../translations/zh_CN/usb/gadget_serial.rst  | 259 ++++++++++++++++++
- 1 file changed, 259 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/usb/gadget_serial.rst
+ .../translations/zh_CN/usb/gadget_uvc.rst     | 372 ++++++++++++++++++
+ 1 file changed, 372 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/usb/gadget_uvc.rst
 
-diff --git a/Documentation/translations/zh_CN/usb/gadget_serial.rst b/Documentation/translations/zh_CN/usb/gadget_serial.rst
+diff --git a/Documentation/translations/zh_CN/usb/gadget_uvc.rst b/Documentation/translations/zh_CN/usb/gadget_uvc.rst
 new file mode 100644
-index 000000000000..9d49d535b0b2
+index 000000000000..de53a05a2c76
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/usb/gadget_serial.rst
-@@ -0,0 +1,259 @@
++++ b/Documentation/translations/zh_CN/usb/gadget_uvc.rst
+@@ -0,0 +1,372 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: Documentation/usb/gadget_serial.rst
++:Original: Documentation/usb/gadget_uvc.rst
 +:翻译:
 +
 + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
@@ -94,253 +94,366 @@ index 000000000000..9d49d535b0b2
 +
 +
 +
-+==========================
-+Linux Gadget 串口驱动 v2.0
-+==========================
-+
-+2004/11/20
-+
-+(v2.3 更新于 2008/05/08)
-+
-+
-+许可证与免责声明
-+-------------------
-+本程序是自由软件；您可以依据自由软件基金会发布的GNU通用公共许可证第2版，
-+或（由您选择的）任何更高版本的规定，对本程序进行再发布和/或修改。
-+
-+我们希望本程序有用，但不提供任何担保；甚至不包含对适销性或适用于特定目的的默示性担保。
-+更多细节请参阅GNU通用公共许可证。
-+
-+您应该已经随本程序收到GNU通用公共许可证副本；
-+如果没有，请写信至：Free Software Foundation, Inc., 59
-+Temple Place, Suite 330, Boston, MA 02111-1307 USA。
-+
-+本文档及Gadget串口驱动版权所有
-+ (C) 2004 Al Borchers (alborchers@steinerpoint.com)。
-+
-+如有问题或建议，请联系Al Borchers（邮箱 alborchers@steinerpoint.com）。
-+
-+
-+前提条件
-+--------
-+Gadget 串口驱动可用于 2.4 Linux 内核版本，
-+但本文档假定使用 2.6 内核上的 2.3 或更高版本。
-+
-+本文档假设你熟悉Linux与Windows，
-+了解如何配置与编译Linux内核、运行标准工具、
-+使用minicom或HyperTerminal，并操作 USB 与串口设备。
-+还假设你将Linux gadget和USB驱动配置为模块。
-+
-+在v2.3版本中，设备节点的主次设备号不再静态定义。
-+基于Linux的系统应挂载sysfs到/sys，
-+并使用mdev（Busybox）或udev来创建匹配/sys/class/tty的/dev节点。
-+
-+
++======================
++Linux UVC Gadget 驱动
++======================
 +
 +概述
-+----
-+Gadget 串口驱动是 Linux USB gadget 驱动，即 USB 设备端驱动。
-+它运行在具有 USB 设备端硬件的 Linux 系统上，
-+例如 PDA、嵌入式 Linux 系统或带 USB 开发卡的 PC。
++------
++UVC Gadget 驱动是针对 USB 设备端硬件的驱动，
++适用于在具有 USB 设备端硬件（例如带 OTG 接口的开发板）的 Linux 系统上运行。
 +
-+驱动通过 USB 与主机上的 CDC ACM 驱动或通用 USB 串口驱动通信：::
++在设备系统上，一旦驱动绑定成功，它会以 V4L2 设备的形式出现，并具有输出能力。
 +
-+   主机端
-+   --------------------------------------
-+  | Host-Side   CDC ACM       USB Host   |
-+  | Operating |   or        | Controller |   USB
-+  | System    | Generic USB | Driver     |--------
-+  | (Linux or | Serial      | and        |        |
-+  | Windows)    Driver        USB Stack  |        |
-+   --------------------------------------         |
-+                                                  |
-+                                                  |
-+                                                  |
-+    Gadget 端                                     |
-+   --------------------------------------         |
-+  | Gadget                   USB Periph. |        |
-+  | Device-Side |  Gadget  | Controller  |        |
-+  | Linux       |  Serial  | Driver      |--------
-+  | Operating   |  Driver  | and         |
-+  | System                   USB Stack   |
-+   --------------------------------------
++在主机端（通过 USB 连接后），
++运行 UVC Gadget 驱动的设备（由相应用户空间程序控制）
++应表现为符合 UVC 规范的摄像头，并能与任何支持 UVC 的程序正常工作。
++设备端的用户空间程序可以将来自各种源的图像缓冲区排入队列，
++通过 USB 传输。通常，这意味着转发来自摄像头传感器的缓冲区，
++但缓冲区的来源完全由用户空间程序决定。
 +
-+在设备端，Gadget 串口驱动表现为一个串口设备。
-+在主机端，它表现为 CDC ACM 兼容类设备或
-+具有 Bulk 输入/输出端点的厂商特定设备，可像普通串口设备一样使用。
++配置设备内核
++--------------
++要启用 UVC Gadget 支持，必须在内核 Kconfig 中选择以下选项:
++USB_CONFIGFS, USB_LIBCOMPOSITE, USB_CONFIGFS_F_UVC和
++USB_F_UVC。
 +
-+在主机端系统上，Gadget 串口设备看起来像一个
-+CDC ACM 兼容类设备或一个简单的厂商特定设备，
-+具有 Bulk 输入和输出端点，并且它的处理方式类似
-+于其他串口设备。
++通过 configfs 配置 Gadget
++---------------------------
++UVC Gadget 通过 configfs 使用 UVC 功能进行配置。
++这种方式提供了很大灵活性，因为 UVC 设备的许多设置可以通过它控制。
 +
-+通过 Gadget 串口驱动和主机端 ACM/通用串口驱动，
-+你可以像使用串口线一样在主机与设备端系统间通信。
++并非所有可用的属性都在此处描述。有关完整的枚举，
++请参阅 Documentation/ABI/testing/configfs-usb-gadget-uvc
 +
-+Gadget 串口驱动只提供简单、不可靠的数据通信，
-+目前不支持流控及常规串口的其他高级功能。
++前提条件
++~~~~~~~~~~~
++假设你已将 configfs 挂载到 `/sys/kernel/config` 并
++创建了一个 gadget，路径为 `/sys/kernel/config/usb_gadget/g1`。
 +
++UVC 功能
++~~~~~~~~~~~
++第一步是创建 UVC 功能：
 +
-+安装 Gadget 串口驱动
-+--------------------
-+要使用 Gadget 串口驱动，
-+您必须为 Linux gadget 端内核配置“支持 USB Gadgets”，
-+为“USB 外设控制器”（例如 net2280）以及“串口 Gadget”驱动程序。
-+所有这些都列在配置内核时的“USB Gadget 支持”下。
-+然后重新构建并安装内核或模块.
++.. code-block:: bash
 +
-+然后，你必须加载 Gadget 串口驱动。
-+要将其作为 ACM 设备（推荐以提高兼容性）加载，请执行以下命令::
++	# These variables will be assumed throughout the rest of the document
++	CONFIGFS="/sys/kernel/config"
++	GADGET="$CONFIGFS/usb_gadget/g1"
++	FUNCTION="$GADGET/functions/uvc.0"
 +
-+  modprobe g_serial
++	mkdir -p $FUNCTION
 +
-+要将其作为厂商特定的 Bulk 输入/输出设备加载，请执行以下命令::
++格式与帧
++~~~~~~~~~~
 +
-+  modprobe g_serial use_acm=0
++必须告诉 gadget 支持哪些格式，以及每种格式支持的帧大小和帧间隔。
++当前实现中，gadget 无法拒绝主机要求设置的格式，
++因此必须准确配置，以确保主机不会请求无法提供的格式。
 +
-+此操作也会自动加载底层的 Gadget 外设控制器驱动。
-+每次重启 Gadget 端 Linux 系统时都必须执行此操作。
-+如果需要，可以将其添加到启动脚本中。
++格式在 streaming/uncompressed 和 streaming/mjpeg configfs 分组下创建，
++帧大小在格式下创建，结构如下：
 +
-+你的系统应使用 mdev（来自 Busybox）或 udev 来创建设备节点。
-+在设置好该 Gadget 驱动后，你应能看到 /dev/ttyGS0 节点::
++::
 +
-+  # ls -l /dev/ttyGS0 | cat
-+  crw-rw----    1 root     root     253,   0 May  8 14:10 /dev/ttyGS0
-+  #
++	uvc.0 +
++	      |
++	      + streaming +
++			  |
++			  + mjpeg +
++			  |       |
++			  |       + mjpeg +
++			  |	       |
++			  |	       + 720p
++			  |	       |
++			  |	       + 1080p
++			  |
++			  + uncompressed +
++					 |
++					 + yuyv +
++						|
++						+ 720p
++						|
++						+ 1080p
 +
-+注意，上述主设备号（253）依系统而异。
-+如果需要手动创建 /dev 节点，
-+正确的主/次设备号可在 /sys/class/tty/ttyGS0/dev 文件中找到。
++每个帧都可以配置宽度和高度，以及存储单个帧所需的最大缓冲区大小，
++最后还可以配置该格式和帧大小所支持的帧间隔。
++宽度和高度以像素为单位枚举，
++帧间隔以 100ns 为单位。
++例如，要为每个帧大小创建上面结构中 2、15 和 100 fps 的帧间隔，
++可以这样操作：
 +
-+如果你希望较早（甚至静态地）链接此 Gadget 驱动，
-+可能需要在 /etc/inittab 中设置一条记录以在该设备上运行 getty。
-+/dev/ttyGS0 行应像其他串口端口一样工作。
++.. code-block:: bash
 +
++	create_frame() {
++		# 示例用法:
++		# create_frame <width> <height> <group> <format name>
 +
-+如果 Gadget 串口以 ACM 设备方式加载，
-+你需要在主机端使用 Windows 或 Linux 的 ACM 驱动。
-+如果 Gadget 串口以 Bulk 输入/输出设备方式加载，
-+你需要在主机端使用 Linux 通用串口驱动。
-+请按照下面的说明安装主机端驱动。
++		WIDTH=$1
++		HEIGHT=$2
++		FORMAT=$3
++		NAME=$4
 +
++		wdir=$FUNCTION/streaming/$FORMAT/$NAME/${HEIGHT}p
 +
-+安装 Windows 主机 ACM 驱动
-+--------------------------
-+要使用 Windows ACM 驱动，你必须拥有 linux-cdc-acm.inf 文件（随本文件提供），
-+支持所有近期版本的 Windows。
++		mkdir -p $wdir
++		echo $WIDTH > $wdir/wWidth
++		echo $HEIGHT > $wdir/wHeight
++		echo $(( $WIDTH * $HEIGHT * 2 )) > $wdir/dwMaxVideoFrameBufferSize
++		cat <<EOF > $wdir/dwFrameInterval
++	666666
++	100000
++	5000000
++	EOF
++	}
 +
-+当加载 Gadget 串口驱动并用 USB 数据线连接设备到 Windows 主机时，
-+Windows 应识别该设备并提示安装驱动。
-+告诉 Windows 在包含 linux-cdc-acm.inf 文件的文件夹中查找驱动。
++	create_frame 1280 720 uncompressed yuyv
++	create_frame 1920 1080 uncompressed yuyv
 +
-+例如，在 Windows XP 上，首次插入 Gadget 串口设备时，会启动“新硬件向导”。
-+选择“从列表或指定位置安装（高级）”，然后在下一屏选择“包括此位置进行搜索”，
-+并输入或浏览到包含 linux-cdc-acm.inf 文件的文件夹。
-+Windows 会提示 Gadget Serial 驱动未通过 Windows Logo 测试，
-+但选择“继续安装”，完成驱动安装。
++目前唯一支持的未压缩格式是YUYV，
++详细说明请参见Documentation/userspace-api/media/v4l/pixfmt-packed-yuv.rst。
 +
-+在 Windows XP 的“设备管理器”（控制面板 → 系统 → 硬件）
-+中展开“端口（COM & LPT）”条目，
-+你应看到“Gadget Serial”列为某个 COM 端口的驱动。
++颜色匹配描述符
++~~~~~~~~~~~~~~
++可以为你创建的每种格式指定一些色彩信息。
++此步骤为可选操作，如果跳过该步骤，
++将使用默认信息；
++这些默认值遵循UVC规范中Color Matching Descriptor部分的定义。
 +
-+要卸载 Windows XP 上的 Gadget Serial 驱动：
-+右键单击设备管理器中的“Gadget Serial”条目，选择“卸载”。
++要创建颜色匹配描述符，需要先创建一个configfs item，
++并将其三个属性设置为你期望的值，然后从希望关联的格式中链接到该item：
 +
++.. code-block:: bash
 +
-+安装 Linux 主机 ACM 驱动
-+------------------------
-+要使用 Linux ACM 驱动，必须在 Linux 主机内核中启用：
-+“Host-side USB 支持”以及“USB Modem (CDC ACM) 支持”。
++	# Create a new Color Matching Descriptor
 +
-+当 Gadget 串口驱动加载且设备通过 USB 连接到 Linux 主机后，
-+主机系统应能识别 Gadget 串口设备。
-+例如，执行命令::
++	mkdir $FUNCTION/streaming/color_matching/yuyv
++	pushd $FUNCTION/streaming/color_matching/yuyv
 +
-+  cat /sys/kernel/debug/usb/devices
++	echo 1 > bColorPrimaries
++	echo 1 > bTransferCharacteristics
++	echo 4 > bMatrixCoefficients
 +
-+输出应类似:::
++	popd
 +
-+  T:  Bus=01 Lev=01 Prnt=01 Port=01 Cnt=02 Dev#=  5 Spd=480 MxCh= 0
-+  D:  Ver= 2.00 Cls=02(comm.) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
-+  P:  Vendor=0525 ProdID=a4a7 Rev= 2.01
-+  S:  Manufacturer=Linux 2.6.8.1 with net2280
-+  S:  Product=Gadget Serial
-+  S:  SerialNumber=0
-+  C:* #Ifs= 2 Cfg#= 2 Atr=c0 MxPwr=  2mA
-+  I:  If#= 0 Alt= 0 #EPs= 1 Cls=02(comm.) Sub=02 Prot=01 Driver=acm
-+  E:  Ad=83(I) Atr=03(Int.) MxPS=   8 Ivl=32ms
-+  I:  If#= 1 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=acm
-+  E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
-+  E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
++	# Create a symlink to the Color Matching Descriptor from the format's config item
++	ln -s $FUNCTION/streaming/color_matching/yuyv $FUNCTION/streaming/uncompressed/yuyv
 +
-+如果主机 Linux 系统配置正确，ACM 驱动应自动加载。
-+执行 lsmod 命令应显示 acm 模块已加载。
-+
-+
-+安装 Linux 主机通用 USB 串口驱动
-+-------------------------------------
-+要使用 Linux 通用 USB 串口驱动，必须在 Linux 主机内核中启用：
-+“Host-side USB 支持”、“USB 串口转换器支持”以及“USB 通用串口驱动”。
-+
-+当 Gadget 串口驱动加载且设备通过 USB 连接到 Linux 主机后，
-+主机系统应能识别 Gadget 串口设备。
-+例如，执行命令::
-+
-+  cat /sys/kernel/debug/usb/devices
-+
-+输出应类似:::
-+  T:  Bus=01 Lev=01 Prnt=01 Port=01 Cnt=02 Dev#=  6 Spd=480 MxCh= 0
-+  D:  Ver= 2.00 Cls=ff(vend.) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
-+  P:  Vendor=0525 ProdID=a4a6 Rev= 2.01
-+  S:  Manufacturer=Linux 2.6.8.1 with net2280
-+  S:  Product=Gadget Serial
-+  S:  SerialNumber=0
-+  C:* #Ifs= 1 Cfg#= 1 Atr=c0 MxPwr=  2mA
-+  I:  If#= 0 Alt= 0 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=serial
-+  E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
-+  E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
-+
-+你必须加载 usbserial 驱动并显式设置其参数
-+以配置其识别 Gadget 串口设备，如下所示::
-+
-+  echo 0x0525 0xA4A6 >/sys/bus/usb-serial/drivers/generic/new_id
-+
-+传统方法是使用模块参数::
-+
-+  modprobe usbserial vendor=0x0525 product=0xA4A6
-+
-+如果一切正常，usbserial 会在系统日志中打印一条消息，
-+类似于 "Gadget Serial converter now attached to ttyUSB0"。
++有关有效值的详细信息，请参阅UVC规范。
++请注意，存在一个默认的Color Matching Descriptor，
++任何没有链接到其他Color Matching Descriptor的格式都会使用它。
++可以修改默认描述符的属性设置，但请注意，
++如果你这样做，就会改变所有未链接到其他描述符的格式的默认设置。
 +
 +
-+使用Minicom或HyperTerminal测试
-+------------------------------
-+一旦 Gadget 串口驱动和主机驱动都安装完成，
-+并且通过 USB 数据线将 Gadget 设备连接到主机，
-+你应该能够在 Gadget 和主机系统之间通过 USB 进行通信。
-+你可以使用 minicom 或 HyperTerminal 来尝试这一点。
-+在 Gadget 端运行 "minicom -s" 来配置一个新的 minicom 会话。
-+在“串口设置”中，将“串口设备”设置为 "/dev/ttygserial"。
-+设置波特率、数据位、校验位和停止位为 9600、8、无和 1——这些设置大多无关紧要。
-+在“调制解调器和拨号”中，清除所有调制解调器和拨号字符串。
++头部链接
++~~~~~~~~~~~~~~~
 +
-+在运行 ACM 驱动的 Linux 主机上，类似地配置 minicom，
-+但将“串口设备”设置为 "/dev/ttyACM0"。（如果连接了其他
-+ACM 设备，请相应地更改设备名称。）
++UVC规范要求Format和Frame描述符之前必须有头部（Header），
++用于描述随后不同Format描述符的数量和累计大小等信息。
++在configfs中，这类操作是通过将表示头部的
++configfs item与表示其他描述符的config item进行链接来实现的，方式如下：
 +
-+在运行 USB 通用串口驱动的 Linux 主机上，类似地配置 minicom，
-+但将“串口设备”设置为 "/dev/ttyUSB0"。（如果连接了其他
-+USB 串口设备，请相应地更改设备名称。）
++.. code-block:: bash
 +
-+在 Windows 主机上，配置一个新的 HyperTerminal 会话，
-+使用分配给 Gadget Serial 的 COM 端口。
-+当 HyperTerminal 连接到 Gadget Serial 设备时，
-+“端口设置”将自动设置，因此你可以保持默认值不变——这些设置大多无关紧要。
++	mkdir $FUNCTION/streaming/header/h
 +
-+当 Gadget 端的 minicom 和主机端的 minicom 或 HyperTerminal 都配置并运行时，
-+你应该能够在 Gadget 端和主机端系统之间通过 USB 发送和接收数据。
-+你在 Gadget 端终端窗口中输入的任何内容都应出现在主机端的终端窗口中，反之亦然。
++	# This section links the format descriptors and their associated frames
++	# to the header
++	cd $FUNCTION/streaming/header/h
++	ln -s ../../uncompressed/yuyv
++	ln -s ../../mjpeg/mjpeg
++
++	# This section ensures that the header will be transmitted for each
++	# speed's set of descriptors. If support for a particular speed is not
++	# needed then it can be skipped here.
++	cd ../../class/fs
++	ln -s ../../header/h
++	cd ../../class/hs
++	ln -s ../../header/h
++	cd ../../class/ss
++	ln -s ../../header/h
++	cd ../../../control
++	mkdir header/h
++	ln -s header/h class/fs
++	ln -s header/h class/ss
++
++
++扩展单元支持
++~~~~~~~~~~~~~~~
++
++UVC扩展单元（XU）基本上提供了一个独立的单元，
++可以向其发送控制的set和get请求。
++这些控制请求的含义完全依赖于具体实现，
++但可用于控制UVC规范之外的设置（例如启用或禁用视频效果）。
++XU可以插入到UVC单元链中，也可以保持独立悬挂。
++
++配置扩展单元涉及在相应目录中创建一个条目，并适当地设置其属性，如下所示：
++
++.. code-block:: bash
++
++	mkdir $FUNCTION/control/extensions/xu.0
++	pushd $FUNCTION/control/extensions/xu.0
++
++	# Set the bUnitID of the Processing Unit as the source for this
++	# Extension Unit
++	echo 2 > baSourceID
++
++	# Set this XU as the source of the default output terminal. This inserts
++	# the XU into the UVC chain between the PU and OT such that the final
++	# chain is IT > PU > XU.0 > OT
++	cat bUnitID > ../../terminal/output/default/baSourceID
++
++	# Flag some controls as being available for use. The bmControl field is
++	# a bitmap with each bit denoting the availability of a particular
++	# control. For example to flag the 0th, 2nd and 3rd controls available:
++	echo 0x0d > bmControls
++
++	# Set the GUID; this is a vendor-specific code identifying the XU.
++	echo -e -n "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10" > guidExtensionCode
++
++	popd
++
++bmControls属性和baSourceID属性是多值属性。
++这意味着你可以向它们写入多个以换行符分隔的值。
++例如，要标记第1、第2、第9和第10个控制可用，
++你需要向bmControls写入两个值，如下所示：
++
++.. code-block:: bash
++
++	cat << EOF > bmControls
++	0x03
++	0x03
++	EOF
++
++baSourceID属性的多值特性暗示了XU可以有多个输入，但请注意，这目前没有显著影响。
++
++bControlSize属性表示bmControls属性的大小，
++类似地，bNrInPins表示baSourceID属性的大小。
++随着你设置bmControls和baSourceID，这两个属性会自动增减。
++也可以手动增加或减少bControlSize，
++这会导致条目被截断到新的大小，或者用0x00填充条目，例如：
++
++::
++
++	$ cat bmControls
++	0x03
++	0x05
++
++	$ cat bControlSize
++	2
++
++	$ echo 1 > bControlSize
++	$ cat bmControls
++	0x03
++
++	$ echo 2 > bControlSize
++	$ cat bmControls
++	0x03
++	0x00
++
++bNrInPins和baSourceID的功能相同。
++
++配置摄像头终端和处理单元的支持控制
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++UVC链中的摄像头终端（Camera Terminal）和处理单元（Processing Unit）
++也具有bmControls属性，其功能与扩展单元（XU）中的相同字段类似。
++然而，与XU不同的是，这些单元的位标志含义在UVC规范中已有定义；
++有关标志的枚举，请参阅“Camera Terminal Descriptor”和
++“Processing Unit Descriptor”部分。
++
++.. code-block:: bash
++
++        # Set the Processing Unit's bmControls, flagging Brightness, Contrast
++        # and Hue as available controls:
++        echo 0x05 > $FUNCTION/control/processing/default/bmControls
++
++        # Set the Camera Terminal's bmControls, flagging Focus Absolute and
++        # Focus Relative as available controls:
++        echo 0x60 > $FUNCTION/control/terminal/camera/default/bmControls
++
++如果你不设置这些字段，则默认情况下摄像头终端（Camera Terminal）
++的自动曝光模式（Auto-Exposure Mode）控制
++和处理单元（Processing Unit）的亮度（Brightness）控制
++会被标记为可用；
++如果不支持这些功能，你应将字段设置为0x00。
++
++请注意，摄像头终端或处理单元的bmControls字段大小由UVC规范固定，
++因此此处的bControlSize属性为只读。
++
++自定义字符串支持
++~~~~~~~~~~~~~~~~~~~~~~~
++
++为USB设备各部分提供文本描述的字符串描述符（String Descriptor）
++可以在USB configfs的常规位置定义，
++然后可以从UVC功能根（UVC function root）或
++扩展单元（Extension Unit）目录中链接这些字符串，
++以将其作为描述符分配：
++
++.. code-block:: bash
++
++	# 在us-EN中创建一个字符串描述符，并从function root链接到它。
++	# 链接的名称在这里很重要，因为它声明该描述符用于Interface Association Descriptor。
++	# function root中其他重要的链接名称包括vs0_desc和vs1_desc，
++	# 用于VideoStreaming接口0/1描述符。
++
++	mkdir -p $GADGET/strings/0x409/iad_desc
++	echo -n "Interface Associaton Descriptor" > $GADGET/strings/0x409/iad_desc/s
++	ln -s $GADGET/strings/0x409/iad_desc $FUNCTION/iad_desc
++
++	# 由于从Extension Unit链接到String Descriptor会明确关联两者，
++	# 因此该链接的名称不重要，可以自由设置。
++
++	mkdir -p $GADGET/strings/0x409/xu.0
++	echo -n "A Very Useful Extension Unit" > $GADGET/strings/0x409/xu.0/s
++	ln -s $GADGET/strings/0x409/xu.0 $FUNCTION/control/extensions/xu.0
++
++中断端点
++~~~~~~~~
++
++VideoControl接口具有一个可选的中断端点，默认情况下处于禁用状态。
++该端点用于支持UVC的延迟响应控制设置请求
++（这些请求应通过中断端点响应，而不是占用端点0）。
++目前尚不支持通过该端点发送数据，因此默认禁用以避免混淆。
++如果你希望启用它，可以通过configfs属性进行设置：
++
++.. code-block:: bash
++
++	echo 1 > $FUNCTION/control/enable_interrupt_ep
++
++带宽配置
++~~~~~~~~
++
++有三个属性控制USB连接的带宽。
++这些属性位于功能根目录中，可以在限制范围内设置：
++.. code-block:: bash
++
++	# streaming_interval sets bInterval. Values range from 1..255
++	echo 1 > $FUNCTION/streaming_interval
++
++	# streaming_maxpacket sets wMaxPacketSize. Valid values are 1024/2048/3072
++	echo 3072 > $FUNCTION/streaming_maxpacket
++
++	# streaming_maxburst sets bMaxBurst. Valid values are 1..15
++	echo 1 > $FUNCTION/streaming_maxburst
++
++
++这里传入的值会根据UVC规范限制在有效范围内（其取值依赖于USB连接速度）。
++要了解这些设置如何影响带宽，应查阅UVC规范，
++但经验法则是：增加streaming_maxpacket设置将提高带宽（从而提高最大可能的帧率），
++如果USB连接运行在SuperSpeed模式下，
++增加streaming_maxburst也有相同效果；
++增加streaming_interval则会降低带宽和帧率。
++
++用户空间应用程序
++---------------------
++单独来看，UVC Gadget驱动本身并没有特别有趣的功能。
++它必须与一个用户空间程序配合使用，该程序负责响应UVC控制请求，
++并向驱动创建的V4L2设备填充待排队的缓冲区。
++这些操作的实现方式依赖具体实现，并超出了本文档的范围，
++但可以在以下位置找到参考应用程序：
++https://gitlab.freedesktop.org/camera/uvc-gadget
 --
 2.34.1
 
