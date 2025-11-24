@@ -1,112 +1,106 @@
-Return-Path: <linux-doc+bounces-67896-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67899-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C3B1C7F106
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 07:30:57 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BE08C7F2D3
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 08:30:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 14BD34E2A62
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 06:30:30 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 86F1C4E1F34
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 07:30:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC22C2C0F7C;
-	Mon, 24 Nov 2025 06:30:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5FA912D97B7;
+	Mon, 24 Nov 2025 07:30:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="P5K9TLZ1"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gjaqjrCA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m49229.qiye.163.com (mail-m49229.qiye.163.com [45.254.49.229])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BD5C2D5A13
-	for <linux-doc@vger.kernel.org>; Mon, 24 Nov 2025 06:30:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.229
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D9F62417F2;
+	Mon, 24 Nov 2025 07:30:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763965825; cv=none; b=argTAmIqqcQwXiBa+5f5C85RdgAtRktQquOhQf40vCsmp3tGaeUu0F+H7seuQh7Eeekb3G+Kw6RLhck15tS5eBrnbi086YqADaGkbynlVRBIZKr+MLp9c/sEIdAtzQ2e/UZuWwF1i80Zlde2NmSccjZ+DxMhf6+NtW7MyudEJYU=
+	t=1763969441; cv=none; b=fn6zzKJpnZWSRm6uK+utGffzKzGKN5UrWj7sLHAzGABSZpWVSPNDiKRTIqHVUb/DeV2EwxDmVO2xxoPvV8UrApjralX4DpfStQBVGfXlXHlTFiJdBV9zzdhroxxPUZK8/Fri8U+yeT+YTjTJ7VIXgldpZvYKbVEac6of2D8Ojz4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1763965825; c=relaxed/simple;
-	bh=tsJblHOIbuZwGYCZxfevUi79Y16xWGFOO1QnPqcbtYg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=C6zTt0jJCLR9JrcQk2KBSD9GJ4bW2fE/CLIzmsVoG9nYm72pn6IGpyUmqWZFDi9Rjz0uhbFSYe5nCWY4LlTR3cJjoiOFfBZugrHija0EdaF5M2M8hjBv8Z6qVI+8mk79CscJld79UBU8Ex1nBNvosFPnpkqjEqGTUF0aYmRmSSY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=P5K9TLZ1; arc=none smtp.client-ip=45.254.49.229
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
-Received: from [10.0.66.10] (unknown [222.130.22.244])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 2aa44dbe3;
-	Mon, 24 Nov 2025 14:30:18 +0800 (GMT+08:00)
-Message-ID: <5d0eb7b4-889a-4519-b470-96d49e418f51@leap-io-kernel.com>
-Date: Mon, 24 Nov 2025 14:30:17 +0800
+	s=arc-20240116; t=1763969441; c=relaxed/simple;
+	bh=LLn6DIVYaobgD3Yzy8q/6nNLmjxkA1iToYHH82eXmJI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qS3v4S8281WrycPTqSOGoxMG5mEXhQREfYi/483mMjcTPlLmXYW4ie/6JNs0LNXIifDDB19aQIDjD/Aw5gbLNMtIz51AixOEvV4PDsiVImNFtsGB8r8Z3OXUUa4LQI2+RdUXMKw9vwZzoQAMpX+A1lRQXft2GBIuUzF2SP+GjbQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gjaqjrCA; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DD82C4CEF1;
+	Mon, 24 Nov 2025 07:30:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1763969440;
+	bh=LLn6DIVYaobgD3Yzy8q/6nNLmjxkA1iToYHH82eXmJI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=gjaqjrCAKud+WZ/S7JbJ5lZVNvU4D4gbiaESnv2RslJyKQJTodRMCj+aoPbHz4HCQ
+	 v1S4dlGUdrLlujCLr7HG2y0NFOx53v86Oo0ZW6Z6+GDdIk7afttSNqJdRs+lz8Kred
+	 c3HFJDIW+bvU0Me/kXWKHRERwTRtKZj69+iVNT09kn4gbwve56TK0YQTTXe6Ipgdsy
+	 8hmQyXXIiDPuVoQqmRrzQc5B1edrwWOThodz9yAyIqI/UnQQIKxXND3kRk+bi04AJm
+	 L7P+bA8yu5Icn8deuWQWKmPjdzs835VTrp/+RirP41bVt0e8fIGyenpWaXgaRx9Mza
+	 4pPVZdzycRcLg==
+Date: Mon, 24 Nov 2025 08:30:38 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Nam Tran <trannamatk@gmail.com>
+Cc: lee@kernel.org, pavel@kernel.org, gregkh@linuxfoundation.org, 
+	rdunlap@infradead.org, christophe.jaillet@wanadoo.fr, krzk+dt@kernel.org, 
+	robh@kernel.org, conor+dt@kernel.org, corbet@lwn.net, linux-leds@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v18 1/3] dt-bindings: leds: add TI/National Semiconductor
+ LP5812 LED Driver
+Message-ID: <20251124-imperial-manul-of-dignity-6ab5ad@kuoka>
+References: <20251123191042.116917-1-trannamatk@gmail.com>
+ <20251123191042.116917-2-trannamatk@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] docs/zh_CN: Add libsas.rst translation
-To: Alex Shi <seakeel@gmail.com>, alexs@kernel.org, si.yanteng@linux.dev
-Cc: dzm91@hust.edu.cn, corbet@lwn.net, linux-doc@vger.kernel.org,
- doubled@leap-io-kernel.com
-References: <cover.1763886358.git.yjzhang@leap-io-kernel.com>
- <6d5747ee48a66ef49f937b3cf97e7716b45ea35a.1763886358.git.yjzhang@leap-io-kernel.com>
- <4768c20a-daa4-4eba-8dbb-2c99d304cafb@gmail.com>
-From: Yujie Zhang <yjzhang@leap-io-kernel.com>
-In-Reply-To: <4768c20a-daa4-4eba-8dbb-2c99d304cafb@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9ab48e579909d6kunm45f9bbf839d482
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHUtNVh4YHktPH08YGEwYGlYVFAkWGhdVEwETFh
-	oSFyQUDg9ZV1kYEgtZQVlJSUlVSkhLVUlJVUlPT1lXWRYaDxIVHRRZQVlPS0hVSktISk5MSVVKS0
-	tVSkJLS1kG
-DKIM-Signature: a=rsa-sha256;
-	b=P5K9TLZ1JxlDtWpaovfS+BTAv4wlvKFsdJ9NZ6jA3nhGtFKOAuuOHh/ceIZqfMYG60SyrzuYuwl8sQg7bActfjN++0Ac/uZs8IozHqqHzjy9oiZhzmnsXHFbB9ibaTeoA4uHxunwuJM5jZLNZ9yZUfbjZYUQDDNmK3NeI8ATY5XIrkX4n8YW59McyHkLfAD05B5YtDayhzLM5TQmLV3rIumA3VmQ/k/LqWox9NYa/mF2yr0I/vJcw0EiE2W1vcbeOQtTaNj+MreSyPavtpwUdyGtkeLE0nvB+tXvSNMgBb2JrQN4gF1Gg4RPhbcSQz5xaaGLAArSVkrC3UMfS3cvrw==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
-	bh=9vzuD2a/q52ee8RnJx8fiwAdWwK3H4rxslC4TbshDx0=;
-	h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20251123191042.116917-2-trannamatk@gmail.com>
 
-Hi Alex,
-﻿
-Thanks for your review.
-The issue with the extra '=' in the heading has been corrected, and the 
-patch has been checked for similar formatting issues.
-I’ve sent out the updated version.
-﻿
+On Mon, Nov 24, 2025 at 02:10:40AM +0700, Nam Tran wrote:
+> The LP5812 is a 4x3 RGB LED driver with an autonomous animation
+> engine and time-cross-multiplexing (TCM) support for up to 12 LEDs
+> or 4 RGB LEDs. It supports both analog (256 levels) and PWM (8-bit)
+> dimming, including exponential PWM for smooth brightness control.
+> 
+> Signed-off-by: Nam Tran <trannamatk@gmail.com>
+
+You received review from me - where did you explain reasons of dropping
+it?
+
+You then received SECOND review from Rob and where did you explain
+reasons of ignoring/dropping it?
+
+You will not get third review, please start respecting our work. Read
+carefully submitting patches document.
+
+<form letter>
+This is a friendly reminder during the review process.
+
+It looks like you received a tag and forgot to add it.
+
+If you do not know the process, here is a short explanation:
+Please add Acked-by/Reviewed-by/Tested-by tags when posting new
+versions of patchset, under or above your Signed-off-by tag, unless
+patch changed significantly (e.g. new properties added to the DT
+bindings). Tag is "received", when provided in a message replied to you
+on the mailing list. Tools like b4 can help here. However, there's no
+need to repost patches *only* to add the tags. The upstream maintainer
+will do that for tags received on the version they apply.
+
+Please read:
+https://elixir.bootlin.com/linux/v6.12-rc3/source/Documentation/process/submitting-patches.rst#L577
+
+If a tag was not added on purpose, please state why and what changed.
+</form letter>
+
 Best regards,
-Yujie Zhang
-
-在 2025/11/24 11:16, Alex Shi 写道:
-> 
-> 
-> On 2025/11/23 16:48, Yujie Zhang wrote:
->> diff --git a/Documentation/translations/zh_CN/scsi/libsas.rst b/ 
->> Documentation/translations/zh_CN/scsi/libsas.rst
->> new file mode 100644
->> index 000000000000..7e1a726a6add
->> --- /dev/null
->> +++ b/Documentation/translations/zh_CN/scsi/libsas.rst
->> @@ -0,0 +1,425 @@
->> +.. SPDX-License-Identifier: GPL-2.0
->> +.. include:: ../disclaimer-zh_CN.rst
->> +
->> +:Original: Documentation/scsi/libsas.rst
->> +
->> +:翻译:
->> +
->> + 张钰杰 Yujie Zhang<yjzhang@leap-io-kernel.com>
->> +
->> +:校译:
->> +
->> +=======
->> +SAS 层
->> +=======
-> 
-> This heading contains an extra '='. Please review your patch for similar 
-> formatting issues and fix them.
-> 
-> Thanks
-> Alex
-> 
-> 
+Krzysztof
 
 
