@@ -1,121 +1,174 @@
-Return-Path: <linux-doc+bounces-68024-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68026-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8C00C82BEF
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 23:54:13 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFCE4C82C27
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Nov 2025 00:02:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 97AF53ACEA7
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 22:54:12 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 6C51334B68F
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 23:02:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9EBE026FA60;
-	Mon, 24 Nov 2025 22:54:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DBDA226D14;
+	Mon, 24 Nov 2025 23:02:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PVbK/YME"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="ucZNos2R"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7033C26E70E;
-	Mon, 24 Nov 2025 22:54:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC4D4158538;
+	Mon, 24 Nov 2025 23:02:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764024849; cv=none; b=AJ57S/TlQT+ShqRaCz0qhbYU9KFCG9OKSmEIx0LsodLygNOuhGW/Dj3sW+V3ONSQqDRRcddmEPTer908PwSKqFRo7gtbURIySRdt+jp6x5UuyUdqjcFRmT/hYSVqHN3166ySTqb4nM1dI8+vhS6L+WgPRSVw7JLDTECX32BqYyY=
+	t=1764025337; cv=none; b=dVgDVQr/yi/OtQrfQ/EBFKbiytp8QFeUMAkL0/BONGdLwiSmvNeCZnaBccIy3GaMGYhi8PF7L+L3/tizuyEo3ZrK6PX8VQSmBleOIG3mydzapmFqG2hqiJrCJ1TXKrolcA01j/DbbQbEXfdyw+siEeLdHp9ugC9bImpTmBX26nI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764024849; c=relaxed/simple;
-	bh=BC240MSG5119oWxbshF7QWyxMleqYZRlgI7AAnOCTdY=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=IEQUKNM/EZBuqfvmJgslHwRdFbNww9fcGKHnq2dOaIqWplmLlKg0NeXFYeCr09udgfHEYKM9IS7Vs6kF521AOYybZS0tuCT6pYUBLEvj/C6ZHFA46zkLigEYmxwnJ1Dyhn6DBoaEg2AdpYJfsiKuUtrwRkNEPYJFDgJ38EAHT24=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PVbK/YME; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1EC06C4CEF1;
-	Mon, 24 Nov 2025 22:54:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764024849;
-	bh=BC240MSG5119oWxbshF7QWyxMleqYZRlgI7AAnOCTdY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:From;
-	b=PVbK/YMEeFuUggJRkgUcS3aXBbXzFLLmnI9Brc13WJokHXTPMhfDuDlBRVQOl6rc5
-	 ZrxqKA1UwL2Cw6SQp3Au8/i6ZF2l9MsRWpKpA53AB4ugMv72ZtgdThE01kKplr9qh1
-	 ZDibUZxdWpGKxUfxJFWaSFnKyk63+JtA/T//NDjKOyJgd3B+ogw1kKlSOL7LlqllBU
-	 BB+OPy6QP8OUNjvFuy7WDO31rgQa4T8KuojwFHwvF4w/qrExQ/AsVtmBfvY5zYyjtW
-	 x2E+Xl+Uh1W+PYrBnnOz8GBwKjEJBz85qUHgu0805EARDNHoNRxbI4Pb0v0EUiFJ2i
-	 pyyLCSNUbFHpQ==
-Date: Mon, 24 Nov 2025 16:54:07 -0600
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Lukas Wunner <lukas@wunner.de>
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Farhan Ali <alifm@linux.ibm.com>,
-	Benjamin Block <bblock@linux.ibm.com>,
-	Niklas Schnelle <schnelle@linux.ibm.com>,
-	Mahesh J Salgaonkar <mahesh@linux.ibm.com>,
-	Oliver OHalloran <oohall@gmail.com>, linuxppc-dev@lists.ozlabs.org,
-	linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
-	Linas Vepstas <linasvepstas@gmail.com>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] Documentation: PCI: Amend error recovery doc with
- pci_save_state() rules
-Message-ID: <20251124225407.GA2722237@bhelgaas>
+	s=arc-20240116; t=1764025337; c=relaxed/simple;
+	bh=DSLLiMuqyJEXQi6w68HGHfvxNP1ssyS17ez06L6BWDc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=h860t0jhoJINr03r6k5m8t0OIQZwtiENe2Eh/dJfCVRhla5azynFkO6ObDF+FBd8CPiEuXVJ+QHNU6r8XL79lCGngjQgXJE1+/t+mQP9bCz/lmZK9H0ys2C5mWa9cGg7iScPg5o6+Uo+vLqEwMljdlMlg3yjv5N0fBNsaMkDaJ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=ucZNos2R; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=phK95OiKQw9Z7woyQUoFP5sDjuUQIt00WZDTIL2asvk=; b=ucZNos2RIgZP6F8n1TZZu5e/Tn
+	K6kqgDgR1ppk63CBfUckQMhWPUedRO+Ya8YVNPRCPad4Y0nbzhc9dCVoKuqXvMJglspdIMBwnSCit
+	PFCj0s+n1os/IJj9Ka3P5DUQRQuo3SdOmKLyjLJqqMDlTKwcKaNwvKmyTGk6HWFTwwM42dOHuGVjC
+	+I7+sKzoKunGQfXXcvRHb34Yh4T3n9w+O8n10aSrRgKGQK8K+Bt8dZiVRJFEaDCkF5kCYA/L5TQ7F
+	iykQnizdzI0oZF09/DXhfJUcxYH9K8jz+/uZDlh3+V47yWJ1f/SmK/cQFhdwAfY3O+UoNDfulb3hm
+	1eeY9c3w==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vNfZR-0000000CQRf-1Yi3;
+	Mon, 24 Nov 2025 23:02:09 +0000
+Message-ID: <e6ad8812-d59b-40ae-8404-4babf88ec14d@infradead.org>
+Date: Mon, 24 Nov 2025 15:02:08 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <077596ba70202be0e43fdad3bb9b93d356cbe4ec.1763746079.git.lukas@wunner.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next V3 02/14] documentation: networking: add shared
+ devlink documentation
+To: Tariq Toukan <tariqt@nvidia.com>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>
+Cc: Donald Hunter <donald.hunter@gmail.com>, Jiri Pirko <jiri@resnulli.us>,
+ Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed <saeedm@nvidia.com>,
+ Leon Romanovsky <leon@kernel.org>, Mark Bloch <mbloch@nvidia.com>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-rdma@vger.kernel.org,
+ Gal Pressman <gal@nvidia.com>, Moshe Shemesh <moshe@nvidia.com>,
+ Carolina Jubran <cjubran@nvidia.com>, Cosmin Ratiu <cratiu@nvidia.com>,
+ Jiri Pirko <jiri@nvidia.com>
+References: <1764023259-1305453-1-git-send-email-tariqt@nvidia.com>
+ <1764023259-1305453-3-git-send-email-tariqt@nvidia.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <1764023259-1305453-3-git-send-email-tariqt@nvidia.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Nov 21, 2025 at 06:31:17PM +0100, Lukas Wunner wrote:
-> After recovering from a PCI error through reset, affected devices are in
-> D0_uninitialized state and need to be brought into D0_active state by
-> re-initializing their Config Space registers (PCIe r7.0 sec 5.3.1.1).
-> 
-> To facilitate that, the PCI core provides pci_restore_state() and
-> pci_save_state() helpers.  Document rules governing their usage.
-> 
-> As Bjorn notes, so far no file in "Documentation/ includes anything about
-> the idea of a driver using pci_save_state() to capture the state it wants
-> to restore after an error", even though it is a common pattern in drivers.
-> So that's obviously a gap that should be closed.
-> 
-> Reported-by: Bjorn Helgaas <helgaas@kernel.org>
-> Closes: https://lore.kernel.org/r/20251113161556.GA2284238@bhelgaas/
-> Signed-off-by: Lukas Wunner <lukas@wunner.de>
 
-Applied with Rafael's ack to pci/err for v6.19, thanks!
 
+On 11/24/25 2:27 PM, Tariq Toukan wrote:
+> From: Jiri Pirko <jiri@nvidia.com>
+> 
+> Document shared devlink instances for multiple PFs on the same chip.
+> 
+> Signed-off-by: Jiri Pirko <jiri@nvidia.com>
+> Reviewed-by: Cosmin Ratiu <cratiu@nvidia.com>
+> Signed-off-by: Tariq Toukan <tariqt@nvidia.com>
 > ---
->  Documentation/PCI/pci-error-recovery.rst | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
+>  .../networking/devlink/devlink-shared.rst     | 66 +++++++++++++++++++
+>  Documentation/networking/devlink/index.rst    |  1 +
+>  2 files changed, 67 insertions(+)
+>  create mode 100644 Documentation/networking/devlink/devlink-shared.rst
 > 
-> diff --git a/Documentation/PCI/pci-error-recovery.rst b/Documentation/PCI/pci-error-recovery.rst
-> index 5df481a..43bc4e3 100644
-> --- a/Documentation/PCI/pci-error-recovery.rst
-> +++ b/Documentation/PCI/pci-error-recovery.rst
-> @@ -326,6 +326,21 @@ be recovered, there is nothing more that can be done;  the platform
->  will typically report a "permanent failure" in such a case.  The
->  device will be considered "dead" in this case.
->  
-> +Drivers typically need to call pci_restore_state() after reset to
-> +re-initialize the device's config space registers and thereby
-> +bring it from D0\ :sub:`uninitialized` into D0\ :sub:`active` state
-> +(PCIe r7.0 sec 5.3.1.1).  The PCI core invokes pci_save_state()
-> +on enumeration after initializing config space to ensure that a
-> +saved state is available for subsequent error recovery.
-> +Drivers which modify config space on probe may need to invoke
-> +pci_save_state() afterwards to record those changes for later
-> +error recovery.  When going into system suspend, pci_save_state()
-> +is called for every PCI device and that state will be restored
-> +not only on resume, but also on any subsequent error recovery.
-> +In the unlikely event that the saved state recorded on suspend
-> +is unsuitable for error recovery, drivers should call
-> +pci_save_state() on resume.
+> diff --git a/Documentation/networking/devlink/devlink-shared.rst b/Documentation/networking/devlink/devlink-shared.rst
+> new file mode 100644
+> index 000000000000..8377d524998f
+> --- /dev/null
+> +++ b/Documentation/networking/devlink/devlink-shared.rst
+> @@ -0,0 +1,66 @@
+> +.. SPDX-License-Identifier: GPL-2.0
 > +
->  Drivers for multi-function cards will need to coordinate among
->  themselves as to which driver instance will perform any "one-shot"
->  or global device initialization. For example, the Symbios sym53cxx2
-> -- 
-> 2.51.0
-> 
+> +============================
+> +Devlink Shared Instances
+> +============================
+> +
+> +Overview
+> +========
+> +
+> +Shared devlink instances allow multiple physical functions (PFs) on the same
+> +chip to share an additional devlink instance for chip-wide operations. This
+> +should be implemented within individual drivers alongside the individual PF
+> +devlink instances, not replacing them.
+> +
+> +The shared devlink instance should be backed by a faux device and should
+> +provide a common interface for operations that affect the entire chip
+> +rather than individual PFs.
+> +
+> +Implementation
+> +==============
+> +
+> +Architecture
+> +------------
+> +
+> +The implementation should use:
+> +
+> +* **Faux device**: Virtual device backing the shared devlink instance
+> +* **Chip identification**: PFs are grouped by chip using a driver-specific identifier
+> +* **Shared instance management**: Global list of shared instances with reference counting
+> +
+> +Initialization Flow
+> +-------------------
+> +
+> +1. **PF calls shared devlink init** during driver probe
+> +2. **Chip identification** using driver-specific method to determine device identity
+> +3. **Lookup existing shared instance** for this chip identifier
+> +4. **Create new shared instance** if none exists:
+> +
+> +   * Create faux device with chip identifier as name
+> +   * Allocate and register devlink instance
+> +   * Add to global shared instances list
+> +
+> +5. **Add PF to shared instance** PF list
+> +6. **Set nested devlink instance** dor the PF devlink instance
+
+s/dor/for/
+
+> +
+> +Cleanup Flow
+> +------------
+> +
+> +1. **Cleanup** when PF is removed; destroy shared instance when last PF is removed
+> +
+> +Chip Identification
+> +-------------------
+> +
+> +PFs belonging to the same chip are identified using a driver-specific method.
+> +The driver is free to choose any identifier that is suitable for determining
+> +whether two PFs are part of the same device. Examples include VPD serial numbers,
+> +device tree properties, or other hardware-specific identifiers.
+> +
+> +Locking
+> +-------
+> +
+> +A global per-driver mutex protects the shared instances list and individual shared
+> +instance PF lists during registration/deregistration.
+> +
+> +Similarly to other nested devlink instance relationships, devlink lock of
+> +the shared instance should be always taken after the devlink lock of PF.
+
+
+-- 
+~Randy
+
 
