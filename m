@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-67930-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67928-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3076BC7FC75
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 10:58:04 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48604C7FC6D
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 10:58:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id F05084E494F
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 09:58:00 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 4B4A44E499F
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 09:57:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6A6AF2F7ACD;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6912A2F7ABB;
 	Mon, 24 Nov 2025 09:57:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pkKUnHB3"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HCn1FAer"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 419C72F7468;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 418442F745B;
 	Mon, 24 Nov 2025 09:57:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763978276; cv=none; b=gw66tsHKjXZTPyn99/AFEP5q1eqIitdice62uF1sUhA1FQC4Nz9NsrUWuZmM0wwvwN/2KWA4F3gIfEok5hddAIckK/2R8LM8fgZau8Wvei2D2eK7OkRU1q8k11Sxv/Y916oNRGiEGmuqk3NJ0sNg7MMcKW2BZJIRVYtqYtdb5Zk=
+	t=1763978276; cv=none; b=nggaabpP96PB+KHxgYP9YrDRdE/sdsf+NcUtbp4ptmi6aQGhwIiKeIFkIz1C8bZ7Ggi/sVwczuwKAgCWDierQjNC+3I4XMCNcfomicDGBqfjrRF8JGWl0kf/38CceXG6utz0vO8uDqnmYjg25y/t4gCar4LmxXXFq/ayj2UTaTU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1763978276; c=relaxed/simple;
-	bh=9Ismxj297GqUp52pxp1UAgRMzcZZT3Gw6Sjv2/ZSBZI=;
+	bh=Ik0bwiscH39XA81eEpRwbrxBFIfeeaIoMwR5sWLhRX0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=fbLFd87l4xOyS4yrkXX2IrOf0zpFwbi+wtkI3pXn3V23zyY92V3uTcxAP4NqbSXhiB4H+oyG3GbqZLstOTk4lMqEvN5/ecUwX4d3zhJgEWafIJ8oyKqq/g94NI2mmOzOmwldmg/G8LzuoPzWohY2HRSKkRrlz0JWUegw+bQ8UdE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pkKUnHB3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0AE0C19423;
+	 MIME-Version; b=BEYgnnhBCMCxvlUElnZUxSBqd+IwEczsqeDHMZj3aFIGz9AqWVxKnJ3KpOecsqF43VuQ0NS0rqslg+jaOdppB0d3y1wNCfJSF7ZzMHJgbMrEjp7FxoGYicAW6j3VeFKtG6nd7uaz6Z4Yj4OTK8R8TCZkVI9lQq8CYFCZBuPloP0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HCn1FAer; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAA92C19421;
 	Mon, 24 Nov 2025 09:57:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1763978276;
-	bh=9Ismxj297GqUp52pxp1UAgRMzcZZT3Gw6Sjv2/ZSBZI=;
+	bh=Ik0bwiscH39XA81eEpRwbrxBFIfeeaIoMwR5sWLhRX0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=pkKUnHB3iB7dcNti78RUUdH0cEwOBdpcp1d++SEF+jQSaaXnggv/nEfd4UXiWHqUX
-	 p0o5OqVHoj5VCSj73PwrnEt8Bu36B9I0b5SvpmxDDecZvhKahHCFGYvG9ongFzbn35
-	 ENzkxZGq2cDc2PAIG7LcYheot0E8CtRn06A3njEljRyaDi+cOgZvvQwOu3bET63J6e
-	 fQ+NCPR7pK7qA5V8Pi3CchA4tw8L2sMQx/GVYQtQPxbWaTQ2rTuLbTqIfvfS82IRuQ
-	 sJNvxeqBFMFJ34hxWKzevVyQTVPj/FH/+ic8Lmk2UIbELnpNqO5M1BNs28MnQSbUCy
-	 IM7EKJYolpOGg==
+	b=HCn1FAeracqS4C5RHH3gtIyy1o4+mdfUbxdO5ZGnc8l6dh9Y3LGt8kBTnHoFH51fF
+	 qPhDuAsobF8jmLaz9Ove1jV/2HyPEb722xX6psuwr/j+Ap3du3JQmvuz08f2s5PLC5
+	 TVzBN4Sy5o8K9HFCGhHJ7lw+GDgpLky33+sV2Y/xGfqjdqXp7pAUNW4P7jvoGbE7v6
+	 KTZb0nPbFgxH60KjiH0pPdqMKvX8wq7rmCavaUdT7A41n1dhkkN5kEru6RLNhP4ei8
+	 E2vTR7mDr0iMoWyWcTChcqw025mvusNdDvsjnwM6AjqjEjoXFXnijN5NaJu6efmcSr
+	 4DuL+z2/+IJrA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vNTKU-000000013c4-0dRz;
+	id 1vNTKU-000000013c8-0kV4;
 	Mon, 24 Nov 2025 10:57:54 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -51,10 +51,11 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab@kernel.org>,
 	"Randy Dunlap" <rdunlap@infradead.org>,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v5 2/5] kernel-doc: add support to handle DEFINE_ variables
-Date: Mon, 24 Nov 2025 10:57:43 +0100
-Message-ID: <a64ce3b4bda7d3010beaa889347ea32af4fd9ee2.1763978209.git.mchehab+huawei@kernel.org>
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org
+Subject: [PATCH v5 3/5] docs: media: v4l2-ioctl.h: document two global variables
+Date: Mon, 24 Nov 2025 10:57:44 +0100
+Message-ID: <8a834e98624795aa02070752d3d49a9ba40a86e7.1763978209.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <cover.1763978209.git.mchehab+huawei@kernel.org>
 References: <cover.1763978209.git.mchehab+huawei@kernel.org>
@@ -67,97 +68,41 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Improve the parser and output plugin to work with macros,
-adding support for the common pattern of using DEFINE_*
-to create variables.
+The media kAPI has two global variables at v4l2-ioctl.h. Document
+them.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_output.py |  5 ++---
- tools/lib/python/kdoc/kdoc_parser.py | 25 +++++++++++++++++++++----
- 2 files changed, 23 insertions(+), 7 deletions(-)
+ include/media/v4l2-ioctl.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
-index 8d811c2afaab..9f09c763a009 100644
---- a/tools/lib/python/kdoc/kdoc_output.py
-+++ b/tools/lib/python/kdoc/kdoc_output.py
-@@ -486,7 +486,7 @@ class RestFormat(OutputFormat):
+diff --git a/include/media/v4l2-ioctl.h b/include/media/v4l2-ioctl.h
+index 6f7a58350441..54c83b18d555 100644
+--- a/include/media/v4l2-ioctl.h
++++ b/include/media/v4l2-ioctl.h
+@@ -663,7 +663,22 @@ void v4l_printk_ioctl(const char *prefix, unsigned int cmd);
+ struct video_device;
  
-         self.lineprefix = "  "
- 
--        self.data += f"\n\n.. c:macro:: {name}\n\n{self.lineprefix}{full_proto}\n\n"
-+        self.data += f"\n\n.. c:macro:: {name}\n\n{self.lineprefix}``{full_proto}``\n\n"
- 
-         self.print_lineno(ln)
-         self.output_highlight(args.get('purpose', ''))
-@@ -801,13 +801,12 @@ class ManFormat(OutputFormat):
- 
-     def out_var(self, fname, name, args):
-         out_name = self.arg_name(args, name)
--        prototype = args.other_stuff["var_type"]
-         full_proto = args.other_stuff["full_proto"]
- 
-         self.data += f'.TH "{self.modulename}" 9 "{out_name}" "{self.man_date}" "API Manual" LINUX' + "\n"
- 
-         self.data += ".SH NAME\n"
--        self.data += f"{prototype} \\- {args['purpose']}\n"
-+        self.data += f"{name} \\- {args['purpose']}\n"
- 
-         self.data += ".SH SYNOPSIS\n"
-         self.data += f"{full_proto}\n"
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index edb0fb5330e0..a3cd1bb0c8e7 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -946,12 +946,27 @@ class KernelDoc:
-         # Store the full prototype before modifying it
-         #
-         full_proto = proto
-+        declaration_name = None
+ /* names for fancy debug output */
 +
-+        #
-+        # Handle macro definitions
-+        #
-+        macro_prefixes = [
-+            KernRe(r"DEFINE_[\w_]+\s*\(([\w_]+)\)"),
-+        ]
++/**
++ * var v4l2_field_names - Helper array mapping ``V4L2_FIELD_*`` to strings.
++ *
++ * Specially when printing debug messages, it is interesting to output
++ * the field order at the V4L2 buffers. This array associates all possible
++ * values of field pix format from V4L2 API into a string.
++ */
+ extern const char *v4l2_field_names[];
 +
-+        for r in macro_prefixes:
-+            match = r.search(proto)
-+            if match:
-+                declaration_name = match.group(1)
-+                break
++/**
++ * var v4l2_type_names - Helper array mapping ``V4L2_BUF_TYPE_*`` to strings.
++ *
++ * When printing debug messages, it is interesting to output the V4L2 buffer
++ * type number with a name that represents its content.
++ */
+ extern const char *v4l2_type_names[];
  
-         #
-         # Drop comments and macros to have a pure C prototype
-         #
--        for search, sub in sub_prefixes:
--            proto = search.sub(sub, proto)
-+        if not declaration_name:
-+            for r, sub in sub_prefixes:
-+                proto = r.sub(sub, proto)
- 
-         proto = proto.rstrip()
- 
-@@ -965,14 +980,16 @@ class KernelDoc:
-            return
- 
-         var_type = r.group(0)
--        declaration_name = r.group(1)
-+
-+        if not declaration_name:
-+            declaration_name = r.group(1)
-+
-         default_val = r.group(2)
-         if default_val:
-             default_val = default_val.lstrip("=").strip()
- 
-         self.output_declaration("var", declaration_name,
-                                 full_proto=full_proto,
--                                var_type=var_type,
-                                 default_val=default_val,
-                                 purpose=self.entry.declaration_purpose)
- 
+ #ifdef CONFIG_COMPAT
 -- 
 2.51.1
 
