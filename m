@@ -1,214 +1,175 @@
-Return-Path: <linux-doc+bounces-68022-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68025-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30F96C82AD2
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 23:37:30 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA5ABC82BF5
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 23:54:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id AC9B034AD77
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 22:37:29 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 614433ACE4B
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 22:54:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61A323358BE;
-	Mon, 24 Nov 2025 22:30:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 123E92EB86A;
+	Mon, 24 Nov 2025 22:54:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="cjhE/5DA"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nSqaSfzM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from BN1PR04CU002.outbound.protection.outlook.com (mail-eastus2azon11010016.outbound.protection.outlook.com [52.101.56.16])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F5DB2F7ACD;
-	Mon, 24 Nov 2025 22:30:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.56.16
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764023417; cv=fail; b=JmY0dkJK0df3Bbimc2d0c1W2lePfKoKA6VjWpFbIZun4eLLguA9bF/5OuRpAuWbfFeik/8v1A6gJJuA7+nGDM9IScotdNsRQvoHUmlD9fIF94PRpXal9ue7YlQO78cooO3+Z05ed3nSL5W8cgcwqK9bKCsKfRqDHaZMXeydAqtE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764023417; c=relaxed/simple;
-	bh=akdES0X+iKGn4rltOupcPwz7Jf/mU/JyeskXjIgx3P4=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=V1EGbRL3ruXnMDzrhgHddjJJj7v1/XgrAGm/7nxjuNkzF1aZRqQK5gaN5Y0RIzjM3ad/kdJ4sm5BsFgXFUsijnK3r+njh0Hpf54bt8pWIvabIBYhmzM2hubpnyYvxI4yOTzAt6ShkMFBnSD2+W8inJVSDUgNOzn2RsLb8q75q4k=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=cjhE/5DA; arc=fail smtp.client-ip=52.101.56.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tor7J4t1+iBDcNHZKu1ukWEpsq2vfozYnK9cB7mHXjuTwF81GFEIwyi3dY4BH3F0otu0exiQLtuOUSl7h8mWQxN0IZUrvpJ+PdEdsUHKVUrtCMXQ9Yow0GMMLTJNDRkDg1cBfljrakDBrFX/2MkEWC04v0jrEDpofW/ysucRK8jUyHWRzPM4mZv7ZuzOpLrPEt4+GsFq/LPeFV8F/MSMbjTW8bbNstqndSupdDOUuIBMom//5mv2hQfNkMyjASAv53Y1ASXjzZltn3DoQovl6mLbWcoZHLt7qviorKloUcGzL2nzhnL9NJ5yfLjixl2QY0ebUwAJ38SHhygLAKMXAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CTEHFT1VQ+M5GMuB3KgAYIkobtSsghZZ7vtK9OdaRq4=;
- b=h3/jDdDOF+WrJtGLzt0EzqSIsYJkphADWubQl/BEQ7vXbMP++ub32GlvFzO8xoO5tu0dvn+n6tnIM8wc3bAxkwKdq09HEQc+vT1gJfNsDs+m6cZ42LVaEB6se6oYqhxa+B7RaKz1ibO48rzyyXkmD9KDQrTOFvFSgcFGNUYqwOA/7kLo+514SLAw2J+K3wdIm6QtHvaOXIkWtyI8prarjfJILmNygJI+0RplU3Z40ci7D8ab7RxUnym7p4iJ4S3YRZLmOpeuEsucwP88cUJ3NdCIrnd5qTurClnE2VDq6+jwUiPNmbr4y8Vz0XaZh9VuSvarWY1QoMXKh+3fd0TFeA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.118.232) smtp.rcpttodomain=google.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CTEHFT1VQ+M5GMuB3KgAYIkobtSsghZZ7vtK9OdaRq4=;
- b=cjhE/5DAHG68Lsmx3/fWU3lR5sAWyz1GKBfI7zit/a5LM8QQGZc6SLsvF00B6jniPF/oSItHkXlxUZluEbrLeEcMfM+fy1OxiL5DuO6VcfSYILnQCSM5dG0ApS2Z7UCwzgFQ5jnr7K9R70L3wXO/GdpAjpCaWgdCPdu/EzlZ2BUX3USzfxnuAN7fYSrOmefCr5L9plYOu3B+qwaq/WY7UD/IQ2ntyXpfq/h9iPcqCyd29qtE5nF/QI/FK3bVDvkQ0VLz7HbX3iC9JXZBKxv6OwAMB0qZqZQV9TsIgO+rooG8HZNMQuErrInJvbAWO+ueJhYMapiVIsQzrahyLIG7Fg==
-Received: from SA9PR13CA0040.namprd13.prod.outlook.com (2603:10b6:806:22::15)
- by BL3PR12MB6402.namprd12.prod.outlook.com (2603:10b6:208:3b2::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9343.17; Mon, 24 Nov
- 2025 22:30:11 +0000
-Received: from SA2PEPF00003AE6.namprd02.prod.outlook.com
- (2603:10b6:806:22:cafe::1e) by SA9PR13CA0040.outlook.office365.com
- (2603:10b6:806:22::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.8 via Frontend Transport; Mon,
- 24 Nov 2025 22:30:11 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.118.232)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.118.232 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.118.232; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.118.232) by
- SA2PEPF00003AE6.mail.protection.outlook.com (10.167.248.6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.7 via Frontend Transport; Mon, 24 Nov 2025 22:30:11 +0000
-Received: from drhqmail201.nvidia.com (10.126.190.180) by mail.nvidia.com
- (10.127.129.5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 24 Nov
- 2025 14:30:01 -0800
-Received: from drhqmail202.nvidia.com (10.126.190.181) by
- drhqmail201.nvidia.com (10.126.190.180) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.20; Mon, 24 Nov 2025 14:30:00 -0800
-Received: from vdi.nvidia.com (10.127.8.10) by mail.nvidia.com
- (10.126.190.181) with Microsoft SMTP Server id 15.2.2562.20 via Frontend
- Transport; Mon, 24 Nov 2025 14:29:55 -0800
-From: Tariq Toukan <tariqt@nvidia.com>
-To: Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>, Andrew Lunn <andrew+netdev@lunn.ch>, "David
- S. Miller" <davem@davemloft.net>
-CC: Donald Hunter <donald.hunter@gmail.com>, Jiri Pirko <jiri@resnulli.us>,
-	Jonathan Corbet <corbet@lwn.net>, Saeed Mahameed <saeedm@nvidia.com>, "Leon
- Romanovsky" <leon@kernel.org>, Tariq Toukan <tariqt@nvidia.com>, Mark Bloch
-	<mbloch@nvidia.com>, <netdev@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-rdma@vger.kernel.org>, Gal Pressman <gal@nvidia.com>, Moshe Shemesh
-	<moshe@nvidia.com>, Carolina Jubran <cjubran@nvidia.com>, Cosmin Ratiu
-	<cratiu@nvidia.com>, Jiri Pirko <jiri@nvidia.com>
-Subject: [PATCH net-next V3 14/14] net/mlx5: Document devlink rates
-Date: Tue, 25 Nov 2025 00:27:39 +0200
-Message-ID: <1764023259-1305453-15-git-send-email-tariqt@nvidia.com>
-X-Mailer: git-send-email 2.8.0
-In-Reply-To: <1764023259-1305453-1-git-send-email-tariqt@nvidia.com>
-References: <1764023259-1305453-1-git-send-email-tariqt@nvidia.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 523DC274FEB
+	for <linux-doc@vger.kernel.org>; Mon, 24 Nov 2025 22:54:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.180
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1764024852; cv=none; b=hi2o7zXpTmqMKUk0ZicTK72NxMxaZ3cNFB2zvAS7y1BtWuLh9E6Su2sPyPKuJBmibgBwUTnxrmFacm4blUtpPuMor49CtqKJ/0gexTmFejkr2Fbk2Xd+RbQHWQo05a7YEBCJ/QvBbhpJxAxVXzJH+7hV9qoyVIMT53cC75OWnhY=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1764024852; c=relaxed/simple;
+	bh=edKq4gtkzxoLJDHJUV/qXOeR42ANjUErbCsec00PxsU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=cXPikltfgkqsTVOYfYPrvsnDoBYN/yrBH1ZlhExhQCl6d0vEAPuTicP59fXmVAnuz7+poMyfq4FoAQq8ijwe0b3v1XvYxb0vjEa5BJ2v916emgnARdQC85rbnILxQaHAz5+GHOaXxs6gdSB5DEFbRcnljy9XHRwTDlvO8tP96Bk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nSqaSfzM; arc=none smtp.client-ip=209.85.128.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-787da30c53dso47154637b3.0
+        for <linux-doc@vger.kernel.org>; Mon, 24 Nov 2025 14:54:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1764024849; x=1764629649; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YWuMPsKKgatyo18s+vz5tnI0IJ4a05j03miER+N0IUE=;
+        b=nSqaSfzMWCA/MKQVhAL2rHeZ+7F6Bg34N15fhC0UJt+c69mhUmbd9ZVhTkVRWm7xGK
+         DqhXgKNnBy77BTXYz3DeGqEGXAhHfqPera0BbXOoHDGJ3GdIUN0ZltPOcslFn1epHfSU
+         E+jb/OAKGmaJ1v+3KihyrceQXeHUG0WHzefsfrpsY6oaGwzrUmr/N6H2zpnqAzh4RGvg
+         KswMV05Kvm8cLmEwagK1TPGFZVoDe13BtOUIA/T6T1LAq357GX/NucpMNdyNGNCBlnop
+         4DnRymuS/GovbMIFAjXCWKskPx6rStjeRA80Ix7m6PbD6Wnez1q/ovsrYQjXONZ6r5tY
+         Cx3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764024849; x=1764629649;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YWuMPsKKgatyo18s+vz5tnI0IJ4a05j03miER+N0IUE=;
+        b=JOZ0mbe9MnFa1rpW9WumHUaSm7tB0C5IztVQAAYd+V4DujG2BjFENfCGTcmj2D4DPX
+         wZ79q2mZNQyc9dGukdMhY7F1Oh2SMLBIcK6bQGA3x2VPytAa99CJTqTzDN85+LafVX92
+         iQaGgSwepGbmhMlsV0QIvK0UG12AaF2LdpDLywCoYdoAJ/ZTXvhBsKJxV9ZBCb/jrDnd
+         04/LxsYqKTXbnbZo0PmgwQkiM7UMCZQU+NaflnwE07r6/AHi3dg8IORGVgEQ+TuUipmt
+         OjyXhtv3naOuqFPf1tqG5Pc5uiZcK6Q7QQ014gM74DlCAy9+INPkqWB+G6LIF7g5Xg+a
+         8DjA==
+X-Forwarded-Encrypted: i=1; AJvYcCVF3aOXInwdKBtw3Vf+hdqiS3A7yyCpAqcsFxYDF+HoxPe8IkFpbLoP3h/nRxS9X3kV5sAcc/iiVvI=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwCJ2rbAMkFYWYnSDx/02lkStcHUkKzhZ2j91gE78zxQ/BkRufk
+	wmJhyu+mud6+1sHrqtAl8Vw5MDwjbcKd5R+bcMwgDTCL4Rt7Gr/rrzFa
+X-Gm-Gg: ASbGncsaztkhWadUP9g6qtPRT93pygdLQAU0dx2G5HH7U4Yvz6CPFo48yGZqQOit41M
+	PxH+eaDndlNekFOotFhUwmxXh1JF7CSBvMXIfPd8Fpw6X8rfzcivLC0uBONCYHVNRaJbB+XMag9
+	Yx5Q7Bjwrtgr/PAZHBOdTSCxUugMh421UQeaeLJGpB2lIlxA2X6S7quXJciX3ilQ9c4YX5seNuE
+	U7bM9Lsc76tG2eRabBmgeKp2L+27WP/c7ttEaJuxV+eHJlRjLhbdI4yHB98RvmHD1YGZ9i9gWSg
+	gr36MtcUEg4tLHtR9+6ds1i7DnIRVqWEc64mJGOYf9jOh6OJeHoBK1OUh4QYqcwxpfx0cW+SCbY
+	J6w4L4hU8CXgZ3ciSjNxG14Mk//9KgA9ep/HCM7Xo+0HaRJWVcpJgAahCArbzjXf29L052VV2in
+	if1aAVLjSo0zAWhvpJA6VzNA==
+X-Google-Smtp-Source: AGHT+IHWNL6nbfpxwuN4vaoDOcaitVPmqOrTZpRhfU4dCtIL5A3x3tBs6D5XV9tHVYVPQP1fZTsyiw==
+X-Received: by 2002:a53:c043:0:20b0:641:f5bc:6962 with SMTP id 956f58d0204a3-64302b3f5afmr8307288d50.78.1764024849231;
+        Mon, 24 Nov 2025 14:54:09 -0800 (PST)
+Received: from localhost ([2a03:2880:25ff:4f::])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-78a79925c85sm49604297b3.37.2025.11.24.14.54.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Nov 2025 14:54:08 -0800 (PST)
+From: Joshua Hahn <joshua.hahnjy@gmail.com>
+To: Andrew Morton <akpm@linux-foundation.org>
+Cc: Vlastimil Babka <vbabka@suse.cz>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mike Rapoport <rppt@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	kernel-team@meta.com
+Subject: [PATCH v2 1/2] mm/mm_init: Introduce a boot parameter for check_pages
+Date: Mon, 24 Nov 2025 14:54:06 -0800
+Message-ID: <20251124225408.2243564-1-joshua.hahnjy@gmail.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-NV-OnPremToCloud: ExternallySecured
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE6:EE_|BL3PR12MB6402:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92b93616-2a4d-4f98-2e87-08de2ba907d3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|7416014|376014|36860700013;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?YW4TdM1HrsSb36+k4pc3rcg3rgQbQUtxo/pOnAFSL97klOnJj2dGKSwWPdcu?=
- =?us-ascii?Q?4izBc10Y9c04DjAQTGXTbp3Ie/Ihim3m7DZqfSQgYnQbgdnWibstFNyQvBOs?=
- =?us-ascii?Q?LUL8/ogPJH5V0aieYICJlhSJg/ZqNMyMw/ioLzrNLPdsJ8ZfBwyKQvccBgv2?=
- =?us-ascii?Q?ntIGRYkgDpzd6RAcnSTBJjOK+xOAKObAbmRgn7OzyY0WEQxiFmEXHZOD9z3/?=
- =?us-ascii?Q?Zved637mDKLbvL2TTcVcmdaANap5NmnWtYy/N+ew2C1upz4RmgezjQImrvFz?=
- =?us-ascii?Q?oeQDsKcUC91aEYjD34QtI/wklsxgWrFw+qwisOnd0j3B3iHKLW8JVnP5Drl+?=
- =?us-ascii?Q?bXLZyAcn151lBxSnrRlFML1+fCdWPdxrBiKEY7LO4woRZVTu4SML2bNl+h2K?=
- =?us-ascii?Q?OI49FsVReIBTdK3bO7lH0YQBLJjs1sJXH3CoqL1SmwB83wQKyIUcVheUGeLs?=
- =?us-ascii?Q?BFsg0uZAv5ds9oIjcOgcnukLcqNxpVh+XXUqlUEiqaTEfY5+Z8w5+TAWcBYa?=
- =?us-ascii?Q?rNP6VVtzSTcF+TeZF8z8zd29uDDuNLpIbkrgXCjbdyuePRUCdFjJkCP2d/JD?=
- =?us-ascii?Q?7Ec8JoXFXAKX6fNpqW825u5Wbw49p1UHe/4rLAX76Y/zIUwv3iruiERiMOV2?=
- =?us-ascii?Q?OqdloIu9K/GH68MmoRUjiUvThkyl3f99J6Mxbb4Af3ScDcmDITZbCvVpfAHv?=
- =?us-ascii?Q?4KK5lZ77Z174GXu7Ft8zDX4OECVW/nI0fQN1pejmxzwZdUsAf4Jse99+4VoR?=
- =?us-ascii?Q?yOCqaVeP1DcuoAcYvTiPRYv6z01W9d6XmCqTffWWdobtj/byTGhOwzFCFXgU?=
- =?us-ascii?Q?WrDJb3BF1Zk95m7XWMLEKHqkjDM2WNzb0ZWv5b2t9A4/SoDzdu7R8gSySv6Y?=
- =?us-ascii?Q?Thee66TEjvxHcVEV8fZkM9DZ+zvE/Bm8HcltpkEL7uLhpC1xMP/iyu4Ced15?=
- =?us-ascii?Q?Zf+UoQyVwpTjIFgSiVEOBjGQnfL0IFy1Nz9mQoP5n0b1NKyG0EVzRQqUQslm?=
- =?us-ascii?Q?iRose0O+M9PPafQPBL/Vwoaaww3pUasU6Id15pnwhKJmB7/wv8U4XR+RNeti?=
- =?us-ascii?Q?RNRhVnKRAdBSQCtCEDrfF3ShNmquGqI0F5Ce/OCpnH1J9jMia6xtSxsfl0HD?=
- =?us-ascii?Q?m8U1S9bTCzPsuEQU4ypmPOZzoyocgXxnUYy51gYNCFRLCkLl0FKxpQPqVPmt?=
- =?us-ascii?Q?eyvo9XFEFw2SbsM3RRm+9vY4ozuZWoPLxAvkqdAX8fMaUaa81C28arPLyJqV?=
- =?us-ascii?Q?5V6LrUoWPWpapHxa6PvEgfOGCpzrvEApXrTFbMglF5cChn24q8cW8Hyc1vQV?=
- =?us-ascii?Q?Tj3eDJcKOnof4oNmY02djavuP4nkZT4kW0F2kZAckq3vmY0yggSY3r0jrFs5?=
- =?us-ascii?Q?cwD1EJeXPKpcjWBZmv2au+28+Pqsci7FXGpnsPJpjeE23FgP7vUgVo9kCHZH?=
- =?us-ascii?Q?HnkQNDAOvH6smnr4qkh2j4kir+5Z6h0xKpIg9ceLkPVGMEC2G08n2PfV6Zde?=
- =?us-ascii?Q?qN+HUOHHuwdfd/M+BUoKj3Qbo/R9RK/cTZfF5wE9PtU6T4d3GUJ4HL9mkb1O?=
- =?us-ascii?Q?9Zo3JVD9mayXdpekgvs=3D?=
-X-Forefront-Antispam-Report:
-	CIP:216.228.118.232;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:dc7edge1.nvidia.com;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(7416014)(376014)(36860700013);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2025 22:30:11.2682
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92b93616-2a4d-4f98-2e87-08de2ba907d3
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.118.232];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SA2PEPF00003AE6.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR12MB6402
+Content-Transfer-Encoding: 8bit
 
-From: Cosmin Ratiu <cratiu@nvidia.com>
+Use-after-free and double-free bugs can be very difficult to track down.
+The kernel is good at tracking these and preventing bad pages from being
+used/created through simple checks gated behind "check_pages_enabled".
 
-It seems rates were not documented in the mlx5-specific file, so add
-examples on how to limit VFs and groups and also provide an example of
-the intended way to achieve cross-esw scheduling.
+Currently, the only ways to enable this flag is by building with
+CONFIG_DEBUG_VM, or as a side effect of other checks such as
+init_on_{alloc, free}, page_poisoning, or debug_pagealloc among others.
+These solutions are powerful, but may often be too coarse in balancing
+the performance vs. safety that a user may want, particularly in
+latency-sensitive production environments.
 
-Signed-off-by: Cosmin Ratiu <cratiu@nvidia.com>
-Reviewed-by: Carolina Jubran <cjubran@nvidia.com>
-Signed-off-by: Tariq Toukan <tariqt@nvidia.com>
+Introduce a new boot parameter "check_pages", which enables page checking
+with no other side effects. It takes kstrbool-able inputs as an argument
+(i.e. 0/1, true/false, on/off, ...). This patch is backwards-compatible;
+setting CONFIG_DEBUG_VM still enables page checking.
+
+Signed-off-by: Joshua Hahn <joshua.hahnjy@gmail.com>
 ---
- Documentation/networking/devlink/mlx5.rst | 33 +++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+v1 --> v2:
+- Changed check_pages from a build config into a boot config, as suggested
+  by Vlastimil.
+- Introduced the second patch, which decouples page checking from 
+  init_on_page_alloc and init_on_page_free.
+---
 
-diff --git a/Documentation/networking/devlink/mlx5.rst b/Documentation/networking/devlink/mlx5.rst
-index 4bba4d780a4a..62c4d7bf0877 100644
---- a/Documentation/networking/devlink/mlx5.rst
-+++ b/Documentation/networking/devlink/mlx5.rst
-@@ -419,3 +419,36 @@ User commands examples:
+ Documentation/admin-guide/kernel-parameters.txt |  8 ++++++++
+ mm/mm_init.c                                    | 11 ++++++++++-
+ 2 files changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 6c42061ca20e..0ba9561440a7 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -669,6 +669,14 @@
+ 			nokmem -- Disable kernel memory accounting.
+ 			nobpf -- Disable BPF memory accounting.
  
- .. note::
-    This command can run over all interfaces such as PF/VF and representor ports.
++	check_pages=	[MM,EARLY] Enable sanity checking of pages after
++			allocations / before freeing. This adds checks to catch
++			double-frees, use-after-frees, and other sources of
++			page corruption by inspecting page internals (flags,
++			mapcount/refcount, memcg_data, etc.).
++			Format: { "0" | "1" }
++			Default: 0 (1 if CONFIG_DEBUG_VM is set)
 +
-+Rates
-+=====
+ 	checkreqprot=	[SELINUX] Set initial checkreqprot flag value.
+ 			Format: { "0" | "1" }
+ 			See security/selinux/Kconfig help text.
+diff --git a/mm/mm_init.c b/mm/mm_init.c
+index c6812b4dbb2e..01d46efc42b4 100644
+--- a/mm/mm_init.c
++++ b/mm/mm_init.c
+@@ -2525,6 +2525,14 @@ early_param("init_on_free", early_init_on_free);
+ 
+ DEFINE_STATIC_KEY_MAYBE(CONFIG_DEBUG_VM, check_pages_enabled);
+ 
++static bool _check_pages_enabled_early __initdata;
 +
-+mlx5 devices can limit transmission of individual VFs or a group of them via
-+the devlink-rate API in switchdev mode.
++static int __init early_check_pages(char *buf)
++{
++	return kstrtobool(buf, &_check_pages_enabled_early);
++}
++early_param("check_pages", early_check_pages);
 +
-+User commands examples:
-+
-+- Print the existing rates::
-+
-+    $ devlink port function rate show
-+
-+- Set a max tx limit on traffic from VF0::
-+
-+    $ devlink port function rate set pci/0000:82:00.0/1 tx_max 10Gbit
-+
-+- Create a rate group with a max tx limit and adding two VFs to it::
-+
-+    $ devlink port function rate add pci/0000:82:00.0/group1 tx_max 10Gbit
-+    $ devlink port function rate set pci/0000:82:00.0/1 parent group1
-+    $ devlink port function rate set pci/0000:82:00.0/2 parent group1
-+
-+- Same scenario, with a min guarantee of 20% of the bandwidth for the first VFs::
-+
-+    $ devlink port function rate add pci/0000:82:00.0/group1 tx_max 10Gbit
-+    $ devlink port function rate set pci/0000:82:00.0/1 parent group1 tx_share 2Gbit
-+    $ devlink port function rate set pci/0000:82:00.0/2 parent group1
-+
-+- Cross-device scheduling::
-+
-+    $ devlink port function rate add pci/0000:82:00.0/group1 tx_max 10Gbit
-+    $ devlink port function rate set pci/0000:82:00.1/32769 parent pci/0000:82:00.0/group1
+ /*
+  * Enable static keys related to various memory debugging and hardening options.
+  * Some override others, and depend on early params that are evaluated in the
+@@ -2591,7 +2599,8 @@ static void __init mem_debugging_and_hardening_init(void)
+ 	 * of struct pages being allocated or freed. With CONFIG_DEBUG_VM it's
+ 	 * enabled already.
+ 	 */
+-	if (!IS_ENABLED(CONFIG_DEBUG_VM) && want_check_pages)
++	if (!IS_ENABLED(CONFIG_DEBUG_VM) && (_check_pages_enabled_early ||
++					     want_check_pages))
+ 		static_branch_enable(&check_pages_enabled);
+ }
+ 
 -- 
-2.31.1
-
+2.47.3
 
