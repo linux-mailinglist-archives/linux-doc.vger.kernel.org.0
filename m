@@ -1,49 +1,49 @@
-Return-Path: <linux-doc+bounces-67929-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-67932-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1ABA0C7FC6C
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 10:58:01 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id D579EC7FC7B
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 10:58:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CD63C3A38A5
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 09:57:59 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 2E9A34E4980
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Nov 2025 09:58:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6970F2F7AC3;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AF2802F8BC3;
 	Mon, 24 Nov 2025 09:57:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dH1yXeHw"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aUwF2xsL"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 418C42F7462;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 851652F7AD7;
 	Mon, 24 Nov 2025 09:57:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1763978276; cv=none; b=ikHAyKTwS6FfDiVdQ5JZ/dyudRKQbfvf778h6VfPtpkz5zZte7yx39K4MYks3d3VVTJ0DT3mmEqWIUAIe8Kuo68RP0/Bils2X+g2ZPmJGI1WlqvjYyCi7Hp15SQH1RGmAd0J4MAQ4HvH5b9LmBJwJzACyG/CMOd5wnwHA1fRJn0=
+	t=1763978276; cv=none; b=Bbw3j8kYajxTPXt/ZUjVwZcsOAspXqklQHC5EUagQjuqsW0O6qkVzbXxMSxkPyyKy332scd5/UzJu3wXYH9wz4q1K9Xm/wT1+L0iMw2vUOlyung96VJPD126+9hvJZZzU3BkW77YScvJiksFUgITxZSe7e2fLmcuiuRkWek7GTM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1763978276; c=relaxed/simple;
-	bh=G398QL1RFc7oMj9o4VEOCqV1JI6qx7V76XAbDiL7j8o=;
+	bh=WiyWZu0I2v9Q5Kn5QLFrux4dYHtK/j2mUZCTGm3fUBY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=sEkxsdw4YCcTcrmV3u//4DQ6nhM58Zfj6RHtXo6QbPrn5H+t3q8P5Oq5DMbgPb+59JZFpRTxexUzn1BrdQuqQCIMKo+e4UaHRnNnbanvuKRwfkeNLIoNEATvtq5OuEHPO4DFh9o254ZM5MsTIuiBw/1f8WQP3wFUSnIRKAMVzbY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dH1yXeHw; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EECEAC116D0;
-	Mon, 24 Nov 2025 09:57:55 +0000 (UTC)
+	 MIME-Version; b=nSb+ccCBX8rctwA8KM4syhn3KIOF73mfHSKhET6BJwfw+EHm/v9WrCc1AHAK6lRn5JSfrwjZj61+W9dNNTormEW+1yiThM7JYvvor4rxdWj5XHGMplswxTKjRxW7PmptTYrFH4QMStclEndAFpH3z4MQXI4TVwXbEPvr3WpSXQw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aUwF2xsL; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F128C2BCB0;
+	Mon, 24 Nov 2025 09:57:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1763978276;
-	bh=G398QL1RFc7oMj9o4VEOCqV1JI6qx7V76XAbDiL7j8o=;
+	bh=WiyWZu0I2v9Q5Kn5QLFrux4dYHtK/j2mUZCTGm3fUBY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=dH1yXeHwCQHXnkl5FmSFjJoF8hf9KVUb1hs3vo9qUuF0mlN4w37L+T8/pWKpX6oit
-	 +uKbjsiuS2MxIt2vtsx75Tb8d8Pc3RzdHShs7r4SAzOFGkXge+3bQBLm3K7lI0yJ/Z
-	 mzfvSccl4OLRkOT6kZ5j0/sAG7CXRQxl8Wj1EY3y7JjmQUOICRuWInfyQnAxhBgesP
-	 oc4+fttanMf0dfPkoUUeMsWVuOk19PAKC72mgzX93wugskUz56eawhei+Oj94K1zq4
-	 0T7xsAc1IVzl0B7RulPe6DOsNvJ1SkWDlv2k71xsbsxwWHhX17AcAzHh26G31d2fbT
-	 41c1TgQ7iHcAw==
+	b=aUwF2xsLXz6xp9s6ey5tbsqum6f8QBDM8Ldnzs99c/BnVd/r73gdFQh+EzbTo8yjw
+	 us5tfFqguhd5x/kOFkogaHaJem6d4L/qPMwNnF3Ft97mNjJTpHMv+dX0cXQLHd9lJS
+	 geqIWRscyvQSV36d90/zogmNRAYYudqCd9wMulyEFWY1UtLDbl0WtJ+wB6VgbTWyMX
+	 9L2CSNsjw5+RhrTT2HBvI+EcSP9FvmfFxZpkBT1HHRMytqRAbaGurW9DPQfiHC/s7S
+	 EKTvYc2CMR5cDlDxf8Xf3sRNaOcFWjiRFlJaW5kyBUcsZTFV1pDMhdU9Hu1lzLN0fG
+	 WndlrTudDdNyw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vNTKU-000000013cC-0reY;
+	id 1vNTKU-000000013cH-0yk3;
 	Mon, 24 Nov 2025 10:57:54 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -52,9 +52,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	"Mauro Carvalho Chehab" <mchehab@kernel.org>,
 	"Randy Dunlap" <rdunlap@infradead.org>,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v5 4/5] docs: kernel-doc.rst: don't let automarkup mangle with consts
-Date: Mon, 24 Nov 2025 10:57:45 +0100
-Message-ID: <03b92bb6a6a482d4e365f2da9011dda9a82a7249.1763978209.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v5 5/5] docs: kernel-doc.rst: document the new "var" kernel-doc markup
+Date: Mon, 24 Nov 2025 10:57:46 +0100
+Message-ID: <5291dedbe9aa0104764a31fe2bf2b08d675295d5.1763978209.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.51.1
 In-Reply-To: <cover.1763978209.git.mchehab+huawei@kernel.org>
 References: <cover.1763978209.git.mchehab+huawei@kernel.org>
@@ -67,93 +67,66 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-This document contains several words that tricks automarkup.
-
-Ensure that all of them will be inside a ``const`` markup,
-avoiding automarkup to touch them.
+Add a description containing the new syntax to document
+variables within kernel-doc markups.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
 ---
- Documentation/doc-guide/kernel-doc.rst | 25 +++++++++++++------------
- 1 file changed, 13 insertions(+), 12 deletions(-)
+ Documentation/doc-guide/kernel-doc.rst | 25 +++++++++++++++++++++----
+ 1 file changed, 21 insertions(+), 4 deletions(-)
 
 diff --git a/Documentation/doc-guide/kernel-doc.rst b/Documentation/doc-guide/kernel-doc.rst
-index fd89a6d56ea9..2e18a810f98b 100644
+index 2e18a810f98b..0de0e344e10d 100644
 --- a/Documentation/doc-guide/kernel-doc.rst
 +++ b/Documentation/doc-guide/kernel-doc.rst
-@@ -174,7 +174,8 @@ named ``Return`` (or ``Returns``).
- Structure, union, and enumeration documentation
- -----------------------------------------------
- 
--The general format of a struct, union, and enum kernel-doc comment is::
-+The general format of a ``struct``, ``union``, and ``enum`` kernel-doc
-+comment is::
- 
-   /**
-    * struct struct_name - Brief description.
-@@ -187,8 +188,8 @@ The general format of a struct, union, and enum kernel-doc comment is::
+@@ -342,6 +342,18 @@ Typedefs with function prototypes can also be documented::
     */
+    typedef void (*type_name)(struct v4l2_ctrl *arg1, void *arg2);
  
- You can replace the ``struct`` in the above example with ``union`` or
--``enum``  to describe unions or enums. ``member`` is used to mean struct
--and union member names as well as enumerations in an enum.
-+``enum``  to describe unions or enums. ``member`` is used to mean ``struct``
-+and ``union`` member names as well as enumerations in an ``enum``.
++Variables documentation
++-----------------------
++
++The general format of a kernel-doc variable comment is::
++
++  /**
++   * var var_name - Brief description.
++   *
++   * Description of the var_name variable.
++   */
++   extern int var_name;
++
+ Object-like macro documentation
+ -------------------------------
  
- The brief description following the structure name may span multiple
- lines, and ends with a member description, a blank comment line, or the
-@@ -201,7 +202,7 @@ Members of structs, unions and enums should be documented the same way
- as function parameters; they immediately succeed the short description
- and may be multi-line.
+@@ -463,14 +475,18 @@ through the following syntax::
  
--Inside a struct or union description, you can use the ``private:`` and
-+Inside a ``struct`` or ``union`` description, you can use the ``private:`` and
- ``public:`` comment tags. Structure fields that are inside a ``private:``
- area are not listed in the generated output documentation.
+ For further details, please refer to the `Sphinx C Domain`_ documentation.
  
-@@ -273,11 +274,11 @@ It is possible to document nested structs and unions, like::
++.. note::
++   Variables aren't automatically cross referenced. For those, you need to
++   explicitly add a C domain cross-reference.
++
+ Overview documentation comments
+ -------------------------------
  
- .. note::
+ To facilitate having source code and comments close together, you can include
+ kernel-doc documentation blocks that are free-form comments instead of being
+-kernel-doc for functions, structures, unions, enums, or typedefs. This could be
+-used for something like a theory of operation for a driver or library code, for
+-example.
++kernel-doc for functions, structures, unions, enums, typedefs or variables.
++This could be used for something like a theory of operation for a driver or
++library code, for example.
  
--   #) When documenting nested structs or unions, if the struct/union ``foo``
--      is named, the member ``bar`` inside it should be documented as
-+   #) When documenting nested structs or unions, if the ``struct``/``union``
-+      ``foo`` is named, the member ``bar`` inside it should be documented as
-       ``@foo.bar:``
--   #) When the nested struct/union is anonymous, the member ``bar`` in it
--      should be documented as ``@bar:``
-+   #) When the nested ``struct``/``union`` is anonymous, the member ``bar`` in
-+      it should be documented as ``@bar:``
+ This is done by using a ``DOC:`` section keyword with a section title.
  
- In-line member documentation comments
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@@ -319,7 +320,7 @@ on a line of their own, like all other kernel-doc comments::
- Typedef documentation
- ---------------------
- 
--The general format of a typedef kernel-doc comment is::
-+The general format of a ``typedef`` kernel-doc comment is::
- 
-   /**
-    * typedef type_name - Brief description.
-@@ -432,8 +433,8 @@ Domain`_ references.
-   Typedef reference.
- 
- ``&struct_name->member`` or ``&struct_name.member``
--  Structure or union member reference. The cross-reference will be to the struct
--  or union definition, not the member directly.
-+  ``struct`` or ``union`` member reference. The cross-reference will be to the
-+  ``struct`` or ``union`` definition, not the member directly.
- 
- ``&name``
-   A generic type reference. Prefer using the full reference described above
-@@ -537,7 +538,7 @@ identifiers: *[ function/type ...]*
+@@ -538,7 +554,8 @@ identifiers: *[ function/type ...]*
    Include documentation for each *function* and *type* in *source*.
    If no *function* is specified, the documentation for all functions
    and types in the *source* will be included.
--  *type* can be a struct, union, enum, or typedef identifier.
-+  *type* can be a ``struct``, ``union``, ``enum``, or ``typedef`` identifier.
+-  *type* can be a ``struct``, ``union``, ``enum``, or ``typedef`` identifier.
++  *type* can be a ``struct``, ``union``, ``enum``, ``typedef`` or ``var``
++  identifier.
  
    Examples::
  
