@@ -1,678 +1,137 @@
-Return-Path: <linux-doc+bounces-68072-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68079-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3818CC850E6
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Nov 2025 13:59:23 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
+	by mail.lfdr.de (Postfix) with ESMTPS id 691DAC851D7
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Nov 2025 14:10:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id EA5C54EA631
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Nov 2025 12:58:32 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id CB5E14EA1EC
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Nov 2025 13:08:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C39D232255C;
-	Tue, 25 Nov 2025 12:58:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 66565321F42;
+	Tue, 25 Nov 2025 13:08:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="PIa+hEUO";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="PvzW5J2u"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="N4XhmBKV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C0212ED870
-	for <linux-doc@vger.kernel.org>; Tue, 25 Nov 2025 12:58:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FB23320CC3;
+	Tue, 25 Nov 2025 13:08:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764075509; cv=none; b=VrLuc7D66s1M/d7vKXj/W47DbVpaSmV6u/3YTUhPxQ+PhRZJkc4wD9yLnLWFqMOK9dgVMtf5nUiRcC8QYIuIULa8fMYsdcYCuwras4wPQEsOiUYeVnw95xWgKh4U9vI/EJa4BtToz5c32rGk6oX1dO7Yt5ZhoDzTZJTtRCHKlhc=
+	t=1764076123; cv=none; b=MVe/ZwjHsxRB49y6dGhFo7uU1Qnkp9b1vDWza3fj+nJu+F2QRnn1J5r5tGlxs8I738hwe+z/IMlP9PZO7RziNXoVj7+E9LZUoiwiJ6RcF+ZIK8XC0fF+s1kQRP0wCjeRXGaBSpOKjIJrqmX2ymo8vZ+M6lniuOfLuHfAvo5PcfU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764075509; c=relaxed/simple;
-	bh=z6xwYMx1ZTgnAf2GsWO1M6tvpH5fITifUCOr17917eE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=jZYtInu9wES9jcULNZRpeT1YetEuDCam5g+5j9mjd2HVYOXAn5bd4hissmLhh1igmz2KOk14AXRrZDM2ZPVT4Z4/NGVBySuUZwvRDkiUDnwci1mNMI5VWUgxbmuNTRGv3eB57enkJDiW0/Cmyc2CoOKXzloR5xYGAs366Gj4euI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=PIa+hEUO; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=PvzW5J2u; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1764075505;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ZobjZoKfwXrzxmqwbkou1OOzeaNCsJasa95pMzw6YlA=;
-	b=PIa+hEUOUF83izjrSrOLHpfemIWjfFTK4iXKmlTy13eXMNE4x3unsIOelqODVFy45EpJ9o
-	mpPFfmC7qC+WNEvoM4baFyBWv3nRrzJXzVWBh+TtkNkQnZDAz1+GPFiLRbrzHNQgejuAI2
-	tprv3qtrK29fSatk+5dS6yJSz4lbgtI=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-564-6Z-HCFj9PretZCQlQo5Cwg-1; Tue, 25 Nov 2025 07:58:24 -0500
-X-MC-Unique: 6Z-HCFj9PretZCQlQo5Cwg-1
-X-Mimecast-MFC-AGG-ID: 6Z-HCFj9PretZCQlQo5Cwg_1764075503
-Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-477563a0c75so29463325e9.1
-        for <linux-doc@vger.kernel.org>; Tue, 25 Nov 2025 04:58:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1764075503; x=1764680303; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ZobjZoKfwXrzxmqwbkou1OOzeaNCsJasa95pMzw6YlA=;
-        b=PvzW5J2u5lWOrn+uc3L+MTK5O5eqQphsR5YaS0nL+UJsI5ZJW6ElREPGGD9y0Cx21A
-         aB0SW/c5Ces1hcPhbS6cdKUNT3u68VqwRuFGgnAS3Qhsms+tfazswjYtUxUJ/bVXU9HT
-         qxz4DNmcHg6YxF0WBML2EVImHCKcWnSsyJJYON5/7YPVH7hxhc0z5APEWlNBJz7FG9kE
-         +RriDW0QuS8Te38l8McGHT7OFc4ka+n2H7hOmuDTov/F1Ado9aFR0A0PR+glezrVvDgN
-         +KD5PUnD3+8ejNGe4Adhvu/+DqQmM/eAVCrW9QToKViXYrn8z1Rg6Dhv5YocZ4v0JXyV
-         o0Kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764075503; x=1764680303;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZobjZoKfwXrzxmqwbkou1OOzeaNCsJasa95pMzw6YlA=;
-        b=NwUI053NodHpjuqrjbJ2coP8PlBn0R/FmB77M5yGndfUJG20XyJkxewAfg2Qdfn+mY
-         LDNbIFjdePWSJ0h/D9W5p/Ltd46hhJHdRKDKgg+H5C4pPjzA+m0zSFGqdc9QZWOn0SHY
-         MKGs54R7KEr/DTHHuvCsH5qN7v9u9tCdndo0xQYlRd56ETe1y47YXzWDRQ4uTNh1heRj
-         GukF1RQGuETxqh98PIrC9Z5rHccwT8mxWV3RT4LRuYO2xpWm17c4tJaLl+WvqyMRIs/r
-         STCfGgBigT+juhyCBR1bxqgFJkhVSvOrTTVyD1e5/1a1QIZrZyJpaDJG+LlaOtLZy8uc
-         oMUg==
-X-Forwarded-Encrypted: i=1; AJvYcCWX/bgF2LE6qc4QuDSwI4YB5Tr4n4U+a5FgQfEvnRqLHolDWIxCAuGOj4VDWdnyRVEQfCw4mg8APuY=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx+0k2BRc39G3n51US2QGnik/3zNp88Eh8G45hAt2+QFQCOmnWh
-	MNLF1pJ+plDS80/EKS8iyuFJuMi24H+JO2kPNoIlZ2A9JGebpAcYeDxgcHpEyUrkIK3oh2nN1z4
-	6SN88rmc2X8SyhGzVPg6fKczT2hrV1CjPpWiftOwVjfUlW/+0CG5yNnwA8ZZBpA==
-X-Gm-Gg: ASbGncvQDYBYxGeEqOPdg7xEbjvzCUU2eslKT+2jXhIVbbYi1QBJFWbvDm78hlr+dl2
-	d0qI/GdvRiawAUDhrxHri/eNGR+qdKVOn1nmuyVyu+U4GqvYa4LFJa06ffpj/4844syPx3o9Zwu
-	Ag7sct3hO+p1PkmzzWQjFvUakwPfx/1SDDJ26Az7N1zSR5CluUUtPekotBlVITzt0LdII8LUS0C
-	TmRWuMP4zlvGrVdmPzWTAgx6RgssFqjMmXUc+q7VpmDc5VyHVcc1u163t88o//JqlXClWuFxBsK
-	nNzzL3Hr+6aQ9224rjaF39cFTxmacwjN3AJSCOQ9o4i5yd/keLwL7irYEgdIGj6HlsfC+z3Sc+h
-	b4l+y3wi4THDBBw==
-X-Received: by 2002:a05:600c:8b37:b0:45d:d97c:236c with SMTP id 5b1f17b1804b1-47904b1ad25mr23227505e9.21.1764075502524;
-        Tue, 25 Nov 2025 04:58:22 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGFWqCm2Z2ZZtdnoQR4DjLUuZTf/8khC3tfCapXFMn8mAe2zhFE5g4zopGYaMg2S7GVJmkt2w==
-X-Received: by 2002:a05:600c:8b37:b0:45d:d97c:236c with SMTP id 5b1f17b1804b1-47904b1ad25mr23226945e9.21.1764075501929;
-        Tue, 25 Nov 2025 04:58:21 -0800 (PST)
-Received: from [192.168.88.32] ([212.105.153.231])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-477c0d85360sm246238125e9.15.2025.11.25.04.58.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 25 Nov 2025 04:58:20 -0800 (PST)
-Message-ID: <3d5ef6e5-cfcc-4994-a8d2-857821b79ed8@redhat.com>
-Date: Tue, 25 Nov 2025 13:58:18 +0100
+	s=arc-20240116; t=1764076123; c=relaxed/simple;
+	bh=dHFz6qR/I9ZFBforH40m7KtLMQ9NhVkinfXAsC6xU+U=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ElNpVTHoxU5DCSdLxk7D1U/oBYO2FuhrqR791FM+N8/PizlCna5ZZEYrRQFt0K/tcOQb84eZSFxAtuRHPZwir4gTzeEVp24WE5ZQUrstoDKBpitqe3Tkp17ahr/E/3J0Ra5yTQ7oz5nA45d0+64fw2zsw7WueuOyw0htK+c+z7A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=N4XhmBKV; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D386C4CEF1;
+	Tue, 25 Nov 2025 13:08:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1764076122;
+	bh=dHFz6qR/I9ZFBforH40m7KtLMQ9NhVkinfXAsC6xU+U=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=N4XhmBKVuKkpuROmmK4pPwB4aDpmhsMmOBJu0LOA/wCbUltTpWw7lpfRbgXtkVoNK
+	 id3bIy5xKOEFBIjmgEe1kTkRjxKMmiSGyf3rMaCLyRMTpTcAdCbogdS5qEflK5wDng
+	 1wlg18Sz2+kvbgjdsfqXEa0bM2ewgVoK3lwH5++i1nTQNlXSpPCMtrTbAYhFzvEdpg
+	 kUcWpe8KPiPktz3FzquYixQAHYMtN5A8B8O7sX3mC9jOBWm4vnIpt8UgASmK2MGA/h
+	 Pod7dUxXsiKWhPvykeECGahNqYUv1GLFELSQV0UJlqclrmAzKqsR/VCIrBpv2WJ5hh
+	 EiEs8aqGz5BLw==
+Date: Tue, 25 Nov 2025 15:08:17 +0200
+From: Mike Rapoport <rppt@kernel.org>
+To: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: pratyush@kernel.org, jasonmiu@google.com, graf@amazon.com,
+	dmatlack@google.com, rientjes@google.com, corbet@lwn.net,
+	rdunlap@infradead.org, ilpo.jarvinen@linux.intel.com,
+	kanie@linux.alibaba.com, ojeda@kernel.org, aliceryhl@google.com,
+	masahiroy@kernel.org, akpm@linux-foundation.org, tj@kernel.org,
+	yoann.congal@smile.fr, mmaurer@google.com, roman.gushchin@linux.dev,
+	chenridong@huawei.com, axboe@kernel.dk, mark.rutland@arm.com,
+	jannh@google.com, vincent.guittot@linaro.org, hannes@cmpxchg.org,
+	dan.j.williams@intel.com, david@redhat.com,
+	joel.granados@kernel.org, rostedt@goodmis.org,
+	anna.schumaker@oracle.com, song@kernel.org, linux@weissschuh.net,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-mm@kvack.org, gregkh@linuxfoundation.org, tglx@linutronix.de,
+	mingo@redhat.com, bp@alien8.de, dave.hansen@linux.intel.com,
+	x86@kernel.org, hpa@zytor.com, rafael@kernel.org, dakr@kernel.org,
+	bartosz.golaszewski@linaro.org, cw00.choi@samsung.com,
+	myungjoo.ham@samsung.com, yesanishhere@gmail.com,
+	Jonathan.Cameron@huawei.com, quic_zijuhu@quicinc.com,
+	aleksander.lobakin@intel.com, ira.weiny@intel.com,
+	andriy.shevchenko@linux.intel.com, leon@kernel.org, lukas@wunner.de,
+	bhelgaas@google.com, wagi@kernel.org, djeffery@redhat.com,
+	stuart.w.hayes@gmail.com, ptyadav@amazon.de, lennart@poettering.net,
+	brauner@kernel.org, linux-api@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, saeedm@nvidia.com,
+	ajayachandra@nvidia.com, jgg@nvidia.com, parav@nvidia.com,
+	leonro@nvidia.com, witu@nvidia.com, hughd@google.com,
+	skhawaja@google.com, chrisl@kernel.org
+Subject: Re: [PATCH v7 02/22] liveupdate: luo_core: integrate with KHO
+Message-ID: <aSWqQWbeijvruDqf@kernel.org>
+References: <20251122222351.1059049-1-pasha.tatashin@soleen.com>
+ <20251122222351.1059049-3-pasha.tatashin@soleen.com>
+ <aSLvo0uXLOaE2JW6@kernel.org>
+ <CA+CK2bCj2OAQjM-0rD+DP0t4v71j70A=HHdQ212ASxX=xoREXw@mail.gmail.com>
+ <aSMXUKMhroThYrlU@kernel.org>
+ <CA+CK2bABbDYfu8r4xG3n30HY4cKFe74_RJP5nYJeOtAOOj+OUQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next 01/12] ipvlan: Support MACNAT mode
-To: Dmitry Skorodumov <skorodumov.dmitry@huawei.com>, netdev@vger.kernel.org,
- Simon Horman <horms@kernel.org>, Kuniyuki Iwashima <kuniyu@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Xiao Liang <shaw.leon@gmail.com>,
- Guillaume Nault <gnault@redhat.com>, Eric Dumazet <edumazet@google.com>,
- Julian Vetter <julian@outer-limits.org>, Stanislav Fomichev
- <sdf@fomichev.me>, Etienne Champetier <champetier.etienne@gmail.com>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: andrey.bokhanko@huawei.com, "David S. Miller" <davem@davemloft.net>,
- Jonathan Corbet <corbet@lwn.net>, Andrew Lunn <andrew+netdev@lunn.ch>
-References: <20251120174949.3827500-1-skorodumov.dmitry@huawei.com>
- <20251120174949.3827500-2-skorodumov.dmitry@huawei.com>
-Content-Language: en-US
-From: Paolo Abeni <pabeni@redhat.com>
-In-Reply-To: <20251120174949.3827500-2-skorodumov.dmitry@huawei.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CA+CK2bABbDYfu8r4xG3n30HY4cKFe74_RJP5nYJeOtAOOj+OUQ@mail.gmail.com>
 
-On 11/20/25 6:49 PM, Dmitry Skorodumov wrote:
-> @@ -90,6 +90,26 @@ works in this mode and hence it is L3-symmetric (L3s). This will have slightly l
->  performance but that shouldn't matter since you are choosing this mode over plain-L3
->  mode to make conn-tracking work.
->  
-> +4.4 L2_MACNAT mode:
-> +-------------------
-> +
-> +This mode extends the L2 mode and is primarily designed for desktop virtual
-> +machines that need to bridge to wireless interfaces. In standard L2 mode,
-> +you must configure IP addresses on slave interfaces to enable frame
-> +multiplexing between slaves and the master.
+On Sun, Nov 23, 2025 at 01:23:51PM -0500, Pasha Tatashin wrote:
+> On Sun, Nov 23, 2025 at 9:17 AM Mike Rapoport <rppt@kernel.org> wrote:
+> > > > > +static int __init liveupdate_early_init(void)
+> > > > > +{
+> > > > > +     int err;
+> > > > > +
+> > > > > +     err = luo_early_startup();
+> > > > > +     if (err) {
+> > > > > +             luo_global.enabled = false;
+> > > > > +             luo_restore_fail("The incoming tree failed to initialize properly [%pe], disabling live update\n",
+> > > > > +                              ERR_PTR(err));
+> > > >
+> > > > What's wrong with a plain panic()?
+> > >
+> > > Jason suggested using the luo_restore_fail() function instead of
+> > > inserting panic() right in code somewhere in LUOv3 or earlier. It
+> > > helps avoid sprinkling panics in different places, and also in case if
+> > > we add the maintenance mode that we have discussed in LUOv6, we could
+> > > update this function as a place where that mode would be switched on.
+> >
+> > I'd agree if we were to have a bunch of panic()s sprinkled in the code.
+> > With a single one it's easier to parse panic() than lookup what
+> > luo_restore_fail() means.
+> 
+> The issue is that removing luo_restore_fail() removes the only
+> dependency on luo_internal.h in this patch. This would require me to
+> move the introduction of that header file to a later patch in the
+> series, which is difficult to handle via a simple fix-up.
+> 
+> Additionally, I still believe the abstraction is cleaner for future
+> extensibility (like the maintenance mode), even if it currently wraps
+> a single panic (which is actually a good thing, I have cleaned-up
+> things substantially to have  a single point  of panic since v2).
+> Therefore, it is my preference to keep it as is, unless a full series
+> is needed to be re-sent.
 
-We should avoid adding more divisive language to the kernel. Here there
-are no uAPI constraints, please use inclusive synonyms.
+Well, let's keep it. If we won't see new users or extensions to
+luo_restore_fail() we can kill it later.
+ 
+> Pasha
 
-Also since you are touching this, please consider an additional patch to
-update the existing ipvlan.rst accordingly.
-
-> @@ -78,11 +80,13 @@ struct ipvl_addr {
->  		struct in6_addr	ip6;	 /* IPv6 address on logical interface */
->  		struct in_addr	ip4;	 /* IPv4 address on logical interface */
->  	} ipu;
-> +	u8			hwaddr[ETH_ALEN];
->  #define ip6addr	ipu.ip6
->  #define ip4addr ipu.ip4
->  	struct hlist_node	hlnode;  /* Hash-table linkage */
->  	struct list_head	anode;   /* logical-interface linkage */
->  	ipvl_hdr_type		atype;
-> +	u64			tstamp;
->  	struct rcu_head		rcu;
->  };
->  
-> @@ -91,6 +95,7 @@ struct ipvl_port {
->  	possible_net_t		pnet;
->  	struct hlist_head	hlhead[IPVLAN_HASH_SIZE];
->  	struct list_head	ipvlans;
-> +	struct packet_type	ipvl_ptype;
->  	u16			mode;
->  	u16			flags;
->  	u16			dev_id_start;
-> @@ -103,6 +108,7 @@ struct ipvl_port {
->  
->  struct ipvl_skb_cb {
->  	bool tx_pkt;
-> +	void *mark;
->  };
->  #define IPVL_SKB_CB(_skb) ((struct ipvl_skb_cb *)&((_skb)->cb[0]))
->  
-> @@ -151,12 +157,34 @@ static inline void ipvlan_clear_vepa(struct ipvl_port *port)
->  	port->flags &= ~IPVLAN_F_VEPA;
->  }
->  
-> +static inline bool ipvlan_is_macnat(struct ipvl_port *port)
-> +{
-> +	return port->mode == IPVLAN_MODE_L2_MACNAT;
-> +}
-> +
-> +static inline void ipvlan_mark_skb(struct sk_buff *skb, struct net_device *dev)
-> +{
-> +	IPVL_SKB_CB(skb)->mark = dev;
-
-Quite unintuitive name to store a device ptr;
-
-> +}
-> +
-> +static inline bool ipvlan_is_skb_marked(struct sk_buff *skb,
-> +					struct net_device *dev)
-> +{
-> +	return (IPVL_SKB_CB(skb)->mark == dev);
-> +}
-> +
->  void ipvlan_init_secret(void);
->  unsigned int ipvlan_mac_hash(const unsigned char *addr);
->  rx_handler_result_t ipvlan_handle_frame(struct sk_buff **pskb);
-> +void ipvlan_skb_crossing_ns(struct sk_buff *skb, struct net_device *dev);
->  void ipvlan_process_multicast(struct work_struct *work);
-> +void ipvlan_multicast_enqueue(struct ipvl_port *port,
-> +			      struct sk_buff *skb, bool tx_pkt);
->  int ipvlan_queue_xmit(struct sk_buff *skb, struct net_device *dev);
->  void ipvlan_ht_addr_add(struct ipvl_dev *ipvlan, struct ipvl_addr *addr);
-> +int ipvlan_add_addr(struct ipvl_dev *ipvlan,
-> +		    void *iaddr, bool is_v6, const u8 *hwaddr);
-> +void ipvlan_del_addr(struct ipvl_dev *ipvlan, void *iaddr, bool is_v6);
->  struct ipvl_addr *ipvlan_find_addr(const struct ipvl_dev *ipvlan,
->  				   const void *iaddr, bool is_v6);
->  bool ipvlan_addr_busy(struct ipvl_port *port, void *iaddr, bool is_v6);
-> diff --git a/drivers/net/ipvlan/ipvlan_core.c b/drivers/net/ipvlan/ipvlan_core.c
-> index dea411e132db..5127f4832a8c 100644
-> --- a/drivers/net/ipvlan/ipvlan_core.c
-> +++ b/drivers/net/ipvlan/ipvlan_core.c
-> @@ -225,6 +225,42 @@ unsigned int ipvlan_mac_hash(const unsigned char *addr)
->  	return hash & IPVLAN_MAC_FILTER_MASK;
->  }
->  
-> +static int ipvlan_macnat_xmit_phydev(struct ipvl_port *port,
-> +				     struct sk_buff *skb,
-> +				     bool lyr3h_valid,
-> +				     void *lyr3h, int addr_type)
-
-Possibly using l3hdr_valid, l3hdr instead of the above will make the
-following more readable.
-
-> +{
-> +	struct sk_buff *orig_skb = skb;
-> +
-> +	skb = skb_unshare(skb, GFP_ATOMIC);
-> +	if (!skb)
-> +		return NET_XMIT_DROP;
-> +
-> +	/* Use eth-addr of main as source. */
-> +	skb_reset_mac_header(skb);
-> +	ether_addr_copy(skb_eth_hdr(skb)->h_source, port->dev->dev_addr);
-> +
-> +	if (!lyr3h_valid) {
-> +		lyr3h = ipvlan_get_L3_hdr(port, skb, &addr_type);
-> +		orig_skb = skb; /* no need to reparse */
-> +	}
-> +
-> +	/* ToDo: Handle ICMPv6 for neighbours discovery.*/
-
-I think we need this feature in the initial submission.
-
-> +	if (lyr3h && addr_type == IPVL_ARP) {
-> +		if (skb != orig_skb)
-> +			lyr3h = ipvlan_get_L3_hdr(port, skb, &addr_type);
-> +
-> +		if (lyr3h) {
-> +			struct arphdr *arph = (struct arphdr *)lyr3h;
-> +
-> +			ether_addr_copy((u8 *)(arph + 1), port->dev->dev_addr);
-> +		}
-> +	}
-> +
-> +	skb->dev = port->dev;
-> +	return dev_queue_xmit(skb);
-> +}
-> +
->  void ipvlan_process_multicast(struct work_struct *work)
->  {
->  	struct ipvl_port *port = container_of(work, struct ipvl_port, wq);
-> @@ -285,9 +321,25 @@ void ipvlan_process_multicast(struct work_struct *work)
->  
->  		if (tx_pkt) {
->  			/* If the packet originated here, send it out. */
-> -			skb->dev = port->dev;
-> -			skb->pkt_type = pkt_type;
-> -			dev_queue_xmit(skb);
-> +			if (ipvlan_is_macnat(port)) {
-> +				/* Inject as rx-packet to main dev. */
-> +				nskb = skb_clone(skb, GFP_ATOMIC);
-> +				if (nskb) {
-
-The more idiomatic form would be:
-
-				if (!nskb)
-					// error handling
-
-> +					consumed = true;
-> +					local_bh_disable();
-> +					nskb->pkt_type = pkt_type;
-> +					nskb->dev = port->dev;
-> +					dev_forward_skb(port->dev, nskb);
-> +					local_bh_enable();
-> +				}
-> +				/* Send out */
-
-Too mant level of indentation, please move to a separate helper.
-
-> +				ipvlan_macnat_xmit_phydev(port, skb, false,
-> +							  NULL, -1);
-
-You should likely drop the packet if clone fails
-
-> +			} else {
-> +				skb->dev = port->dev;
-> +				skb->pkt_type = pkt_type;
-> +				dev_queue_xmit(skb);
-> +			}
->  		} else {
->  			if (consumed)
->  				consume_skb(skb);
-
-[...]> @@ -661,6 +860,61 @@ static int ipvlan_xmit_mode_l2(struct
-sk_buff *skb, struct net_device *dev)
->  	return dev_queue_xmit(skb);
->  }
->  
-> +static int ipvlan_xmit_mode_macnat(struct sk_buff *skb, struct net_device *dev)
-> +{
-> +	struct ipvl_dev *ipvlan = netdev_priv(dev);
-> +	struct ethhdr *eth = skb_eth_hdr(skb);
-> +	struct ipvl_addr *addr;
-> +	int addr_type;
-> +	void *lyr3h;
-> +
-> +	/* Ignore tx-packets from host and don't allow to use main addr. */
-> +	if (ether_addr_equal(eth->h_source, dev->dev_addr) ||
-> +	    ether_addr_equal(eth->h_source, ipvlan->phy_dev->dev_addr))
-> +		goto out_drop;
-> +
-> +	/* Mark SKB in advance */
-> +	skb = skb_share_check(skb, GFP_ATOMIC);
-> +	if (!skb)
-> +		return NET_XMIT_DROP;
-> +	ipvlan_mark_skb(skb, ipvlan->phy_dev);
-This is the xmit path ...
-
-> +
-> +	lyr3h = ipvlan_get_L3_hdr(ipvlan->port, skb, &addr_type);
-> +	if (lyr3h)
-> +		ipvlan_macnat_addr_learn(ipvlan, lyr3h, addr_type,
-> +					 eth->h_source);
-> +
-> +	if (is_multicast_ether_addr(eth->h_dest)) {
-> +		skb_reset_mac_header(skb);
-> +		ipvlan_skb_crossing_ns(skb, NULL);
-> +		ipvlan_multicast_enqueue(ipvlan->port, skb, true);
-> +		return NET_XMIT_SUCCESS;
-> +	} else if (ether_addr_equal(eth->h_dest, ipvlan->phy_dev->dev_addr)) {
-> +		/* It is a packet from child with destination to main port.
-> +		 * Pass it to main.
-> +		 */
-> +		skb->pkt_type = PACKET_HOST;
-> +		skb->dev = ipvlan->phy_dev;
-> +		dev_forward_skb(ipvlan->phy_dev, skb);
-> +		return NET_XMIT_SUCCESS;
-> +	} else if (lyr3h) {
-> +		addr = ipvlan_addr_lookup(ipvlan->port, lyr3h, addr_type, true);
-> +		if (addr) {
-> +			if (ipvlan_is_private(ipvlan->port))
-> +				goto out_drop;
-> +
-> +			ipvlan_rcv_frame(addr, addr_type, &skb, true);
-> +			return NET_XMIT_SUCCESS;
-> +		}
-> +	}
-> +
-> +	return ipvlan_macnat_xmit_phydev(ipvlan->port, skb, true, lyr3h,
-> +					 addr_type);
-> +out_drop:
-> +	consume_skb(skb);
-> +	return NET_XMIT_DROP;
-> +}
-> +
->  int ipvlan_queue_xmit(struct sk_buff *skb, struct net_device *dev)
->  {
->  	struct ipvl_dev *ipvlan = netdev_priv(dev);
-> @@ -675,6 +929,8 @@ int ipvlan_queue_xmit(struct sk_buff *skb, struct net_device *dev)
->  	switch(port->mode) {
->  	case IPVLAN_MODE_L2:
->  		return ipvlan_xmit_mode_l2(skb, dev);
-> +	case IPVLAN_MODE_L2_MACNAT:
-> +		return ipvlan_xmit_mode_macnat(skb, dev);
->  	case IPVLAN_MODE_L3:
->  #ifdef CONFIG_IPVLAN_L3S
->  	case IPVLAN_MODE_L3S:
-> @@ -724,8 +980,7 @@ static rx_handler_result_t ipvlan_handle_mode_l3(struct sk_buff **pskb,
->  
->  	addr = ipvlan_addr_lookup(port, lyr3h, addr_type, true);
->  	if (addr)
-> -		ret = ipvlan_rcv_frame(addr, pskb, false);
-> -
-> +		ret = ipvlan_rcv_frame(addr, addr_type, pskb, false);
->  out:
->  	return ret;
->  }
-> @@ -737,17 +992,23 @@ static rx_handler_result_t ipvlan_handle_mode_l2(struct sk_buff **pskb,
->  	struct ethhdr *eth = eth_hdr(skb);
->  	rx_handler_result_t ret = RX_HANDLER_PASS;
->  
-> -	if (is_multicast_ether_addr(eth->h_dest)) {
-> -		if (ipvlan_external_frame(skb, port)) {
-> -			struct sk_buff *nskb = skb_clone(skb, GFP_ATOMIC);
-> +	/* Ignore already seen packets. */
-> +	if (ipvlan_is_skb_marked(skb, port->dev))
-
-... and this is the receiver path. Nothing guaratees the CB is preserved
-in between and that random data in there will not confuse the above
-check. Also I'm not sure what you are trying to filter out here.
-
-> +		return RX_HANDLER_PASS;
->  
-> +	if (is_multicast_ether_addr(eth->h_dest)) {
-> +		if (ipvlan_external_frame(skb, port) ||
-> +		    ipvlan_is_macnat(port)) {
->  			/* External frames are queued for device local
->  			 * distribution, but a copy is given to master
->  			 * straight away to avoid sending duplicates later
->  			 * when work-queue processes this frame. This is
->  			 * achieved by returning RX_HANDLER_PASS.
->  			 */
-> +			struct sk_buff *nskb = skb_clone(skb, GFP_ATOMIC);
-> +
->  			if (nskb) {
-> +				ipvlan_mark_skb(skb, port->dev);
->  				ipvlan_skb_crossing_ns(nskb, NULL);
->  				ipvlan_multicast_enqueue(port, nskb, false);
->  			}
-> @@ -770,6 +1031,7 @@ rx_handler_result_t ipvlan_handle_frame(struct sk_buff **pskb)
->  
->  	switch (port->mode) {
->  	case IPVLAN_MODE_L2:
-> +	case IPVLAN_MODE_L2_MACNAT:
->  		return ipvlan_handle_mode_l2(pskb, port);
->  	case IPVLAN_MODE_L3:
->  		return ipvlan_handle_mode_l3(pskb, port);
-> diff --git a/drivers/net/ipvlan/ipvlan_main.c b/drivers/net/ipvlan/ipvlan_main.c
-> index 660f3db11766..f27af7709a5b 100644
-> --- a/drivers/net/ipvlan/ipvlan_main.c
-> +++ b/drivers/net/ipvlan/ipvlan_main.c
-> @@ -16,6 +16,15 @@ static int ipvlan_set_port_mode(struct ipvl_port *port, u16 nval,
->  
->  	ASSERT_RTNL();
->  	if (port->mode != nval) {
-> +		/* Don't allow switch off the learnable bridge mode.
-> +		 * Flags also must be set from the first port-link setup.
-> +		 */
-> +		if (port->mode == IPVLAN_MODE_L2_MACNAT ||
-> +		    (nval == IPVLAN_MODE_L2_MACNAT && port->count > 1)) {
-> +			netdev_err(port->dev, "MACNAT mode cannot be changed.\n");
-> +			return -EINVAL;
-> +		}
-> +
->  		list_for_each_entry(ipvlan, &port->ipvlans, pnode) {
->  			flags = ipvlan->dev->flags;
->  			if (nval == IPVLAN_MODE_L3 || nval == IPVLAN_MODE_L3S) {
-> @@ -40,7 +49,10 @@ static int ipvlan_set_port_mode(struct ipvl_port *port, u16 nval,
->  			ipvlan_l3s_unregister(port);
->  		}
->  		port->mode = nval;
-> +		if (port->mode == IPVLAN_MODE_L2_MACNAT)
-> +			dev_add_pack(&port->ipvl_ptype);
->  	}
-> +
->  	return 0;
->  
->  fail:
-> @@ -59,6 +71,67 @@ static int ipvlan_set_port_mode(struct ipvl_port *port, u16 nval,
->  	return err;
->  }
->  
-> +static int ipvlan_macnat_port_rcv(struct sk_buff *skb, struct net_device *wdev,
-> +				  struct packet_type *pt,
-> +				  struct net_device *orig_wdev)
-> +{
-> +	struct ipvl_port *port;
-> +	struct ipvl_addr *addr;
-> +	struct ethhdr *eth;
-> +	int addr_type;
-> +	void *lyr3h;
-> +
-> +	port = container_of(pt, struct ipvl_port, ipvl_ptype);
-> +	/* We are interested only in outgoing packets.
-> +	 * rx-path is handled in rx_handler().
-> +	 */
-> +	if (skb->pkt_type != PACKET_OUTGOING ||
-> +	    ipvlan_is_skb_marked(skb, port->dev))
-> +		goto out;
-> +
-> +	skb = skb_share_check(skb, GFP_ATOMIC);
-> +	if (!skb)
-> +		goto no_mem;
-> +
-> +	/* data should point to eth-header */
-> +	skb_push(skb, skb->data - skb_mac_header(skb));
-> +	skb->dev = port->dev;
-> +	eth = eth_hdr(skb);
-> +
-> +	if (is_multicast_ether_addr(eth->h_dest)) {
-> +		ipvlan_skb_crossing_ns(skb, NULL);
-> +		skb->protocol = eth_type_trans(skb, skb->dev);
-> +		skb->pkt_type = PACKET_HOST;
-> +		ipvlan_mark_skb(skb, port->dev);
-> +		ipvlan_multicast_enqueue(port, skb, false);
-> +		return NET_RX_SUCCESS;
-> +	}
-> +
-> +	lyr3h = ipvlan_get_L3_hdr(port, skb, &addr_type);
-> +	if (!lyr3h)
-> +		goto out;
-> +
-> +	addr = ipvlan_addr_lookup(port, lyr3h, addr_type, true);
-> +	if (addr) {
-
-The `if` condition is supposed to catch the exceptional condition/error
-path, nor the other way around.
-
-> +		struct ipvl_dev *ipvlan = addr->master;
-> +		int ret, len;
-> +
-> +		ipvlan_skb_crossing_ns(skb, ipvlan->dev);
-> +		skb->protocol = eth_type_trans(skb, skb->dev);
-> +		skb->pkt_type = PACKET_HOST;
-> +		ipvlan_mark_skb(skb, port->dev);
-> +		len = skb->len + ETH_HLEN;
-> +		ret = netif_rx(skb);
-> +		ipvlan_count_rx(ipvlan, len, ret == NET_RX_SUCCESS, false);
-> +		return NET_RX_SUCCESS;
-> +	}
-> +
-> +out:
-> +	dev_kfree_skb(skb);
-> +no_mem:
-> +	return NET_RX_DROP;
-> +}
-> +
->  static int ipvlan_port_create(struct net_device *dev)
->  {
->  	struct ipvl_port *port;
-> @@ -84,6 +157,11 @@ static int ipvlan_port_create(struct net_device *dev)
->  	if (err)
->  		goto err;
->  
-> +	port->ipvl_ptype.func = ipvlan_macnat_port_rcv;
-> +	port->ipvl_ptype.type = htons(ETH_P_ALL);
-> +	port->ipvl_ptype.dev = dev;
-> +	port->ipvl_ptype.list.prev = LIST_POISON2;
-
-LIST_HEAD_INIT()
-
-> +
->  	netdev_hold(dev, &port->dev_tracker, GFP_KERNEL);
->  	return 0;
->  
-> @@ -100,6 +178,8 @@ static void ipvlan_port_destroy(struct net_device *dev)
->  	netdev_put(dev, &port->dev_tracker);
->  	if (port->mode == IPVLAN_MODE_L3S)
->  		ipvlan_l3s_unregister(port);
-> +	if (port->ipvl_ptype.list.prev != LIST_POISON2)
-
-!list_empty()
-
-> +		dev_remove_pack(&port->ipvl_ptype);
->  	netdev_rx_handler_unregister(dev);
->  	cancel_work_sync(&port->wq);
->  	while ((skb = __skb_dequeue(&port->backlog)) != NULL) {
-> @@ -189,10 +269,13 @@ static int ipvlan_open(struct net_device *dev)
->  	else
->  		dev->flags &= ~IFF_NOARP;
->  
-> -	rcu_read_lock();
-> -	list_for_each_entry_rcu(addr, &ipvlan->addrs, anode)
-> -		ipvlan_ht_addr_add(ipvlan, addr);
-> -	rcu_read_unlock();
-> +	/* for learnable, addresses will be obtained from tx-packets. */
-> +	if (!ipvlan_is_macnat(ipvlan->port)) {
-> +		rcu_read_lock();
-> +		list_for_each_entry_rcu(addr, &ipvlan->addrs, anode)
-> +			ipvlan_ht_addr_add(ipvlan, addr);
-> +		rcu_read_unlock();
-> +	}
->  
->  	return 0;
->  }
-> @@ -581,11 +664,21 @@ int ipvlan_link_new(struct net_device *dev, struct rtnl_newlink_params *params,
->  	INIT_LIST_HEAD(&ipvlan->addrs);
->  	spin_lock_init(&ipvlan->addrs_lock);
->  
-> -	/* TODO Probably put random address here to be presented to the
-> -	 * world but keep using the physical-dev address for the outgoing
-> -	 * packets.
-> +	/* Flags are per port and latest update overrides. User has
-> +	 * to be consistent in setting it just like the mode attribute.
->  	 */
-> -	eth_hw_addr_set(dev, phy_dev->dev_addr);
-> +	if (data && data[IFLA_IPVLAN_MODE])
-> +		mode = nla_get_u16(data[IFLA_IPVLAN_MODE]);
-> +
-> +	if (mode != IPVLAN_MODE_L2_MACNAT) {
-> +		/* TODO Probably put random address here to be presented to the
-> +		 * world but keep using the physical-dev addr for the outgoing
-> +		 * packets.
-
-Not sure why you trimmed the existing comment
-
-> +		 */
-> +		eth_hw_addr_set(dev, phy_dev->dev_addr);
-> +	} else {
-> +		eth_hw_addr_random(dev);
-> +	}
->  
->  	dev->priv_flags |= IFF_NO_RX_HANDLER;
->  
-> @@ -597,6 +690,9 @@ int ipvlan_link_new(struct net_device *dev, struct rtnl_newlink_params *params,
->  	port = ipvlan_port_get_rtnl(phy_dev);
->  	ipvlan->port = port;
->  
-> +	if (data && data[IFLA_IPVLAN_FLAGS])
-> +		port->flags = nla_get_u16(data[IFLA_IPVLAN_FLAGS]);
-
-This looks like a change of behavior that could potentially break the
-user-space.
-
-> +
->  	/* If the port-id base is at the MAX value, then wrap it around and
->  	 * begin from 0x1 again. This may be due to a busy system where lots
->  	 * of slaves are getting created and deleted.
-> @@ -625,19 +721,13 @@ int ipvlan_link_new(struct net_device *dev, struct rtnl_newlink_params *params,
->  	if (err)
->  		goto remove_ida;
->  
-> -	/* Flags are per port and latest update overrides. User has
-> -	 * to be consistent in setting it just like the mode attribute.
-> -	 */
-> -	if (data && data[IFLA_IPVLAN_FLAGS])
-> -		port->flags = nla_get_u16(data[IFLA_IPVLAN_FLAGS]);
-> -
-> -	if (data && data[IFLA_IPVLAN_MODE])
-> -		mode = nla_get_u16(data[IFLA_IPVLAN_MODE]);
-> -
->  	err = ipvlan_set_port_mode(port, mode, extack);
->  	if (err)
->  		goto unlink_netdev;
->  
-> +	if (ipvlan_is_macnat(port))
-> +		dev_set_allmulti(dev, 1);
-> +
->  	list_add_tail_rcu(&ipvlan->pnode, &port->ipvlans);
->  	netif_stacked_transfer_operstate(phy_dev, dev);
->  	return 0;
-> @@ -657,6 +747,9 @@ void ipvlan_link_delete(struct net_device *dev, struct list_head *head)
->  	struct ipvl_dev *ipvlan = netdev_priv(dev);
->  	struct ipvl_addr *addr, *next;
->  
-> +	if (ipvlan_is_macnat(ipvlan->port))
-> +		dev_set_allmulti(dev, -1);
-> +
->  	spin_lock_bh(&ipvlan->addrs_lock);
->  	list_for_each_entry_safe(addr, next, &ipvlan->addrs, anode) {
->  		ipvlan_ht_addr_del(addr);
-> @@ -793,6 +886,9 @@ static int ipvlan_device_event(struct notifier_block *unused,
->  		break;
->  
->  	case NETDEV_CHANGEADDR:
-> +		if (ipvlan_is_macnat(port))
-> +			break;
-> +
->  		list_for_each_entry(ipvlan, &port->ipvlans, pnode) {
->  			eth_hw_addr_set(ipvlan->dev, dev->dev_addr);
->  			call_netdevice_notifiers(NETDEV_CHANGEADDR, ipvlan->dev);
-> @@ -813,7 +909,8 @@ static int ipvlan_device_event(struct notifier_block *unused,
->  }
->  
->  /* the caller must held the addrs lock */
-> -static int ipvlan_add_addr(struct ipvl_dev *ipvlan, void *iaddr, bool is_v6)
-> +int ipvlan_add_addr(struct ipvl_dev *ipvlan, void *iaddr, bool is_v6,
-> +		    const u8 *hwaddr)
-
-I guess that using a separate new helper with the new argument will make
-the diff smaller and easier to read.
-
-/P
-
+-- 
+Sincerely yours,
+Mike.
 
