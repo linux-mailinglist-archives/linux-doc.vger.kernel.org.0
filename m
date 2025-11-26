@@ -1,166 +1,174 @@
-Return-Path: <linux-doc+bounces-68221-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68223-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C860C8A4C8
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 15:22:44 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 59EDFC8A6EE
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 15:48:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 9417A3B3234
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 14:20:41 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id B12794EDD25
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 14:45:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C66A3009F8;
-	Wed, 26 Nov 2025 14:20:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7EE6D3054F2;
+	Wed, 26 Nov 2025 14:44:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20230601.gappssmtp.com header.i=@riscstar-com.20230601.gappssmtp.com header.b="cfWqkOAz"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lc5j4fBD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4512F2FF676
-	for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 14:20:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75AFC305077
+	for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 14:44:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764166829; cv=none; b=AOnBYzs6gyNbBbFPWg3OU3AAAGNYaxThC2f+YZhY/XWOtXOn1CRwzvJ/ljGEk5rRyA/k41dNw3PsoXU+xy7bIsbRZ2Monvw5aqufSjGs7GUjPiCpamP6IyUdKlCqtOxWqxQCAwnJphR/W/U32++RRy6zp9LF+qHemrU0p6dYO1E=
+	t=1764168287; cv=none; b=hmxPROc4VlGW8dVJZZG/JXdFS1wx3nCtt37G/Am9R2/XgGYcWturt201ND0m7tAFfgpqsgIBbE1ocW9heYLpIX/6x6ir7fRp5kubkk+UFkSLVDr0yXUUtSRcl61SxOe4OspUzH6cBMKLXcVJCa+JXV3UByJTxlXv4s/uItmvRTg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764166829; c=relaxed/simple;
-	bh=kR8KCrtjkrqH0dCBDtoBNt6Co87mHfxvKHk9SsvTfbA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OuH5bJCHkE0te4Qo3MhGxkrmJQyRENpRTM/xYmqGu7wYbqjCdbDYFcOT8g8FiclvyQkE4QfGOySBIlv9Ek8/o2fq8/NvM2esMqq6meqMnsMiTch/GQNFMRUvKogp1rTUmjCQ55S8QjbWamzDTwTgZaWENg4XPNNhF2hTDd7EclY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20230601.gappssmtp.com header.i=@riscstar-com.20230601.gappssmtp.com header.b=cfWqkOAz; arc=none smtp.client-ip=209.85.221.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-42bb288c1bfso3989534f8f.2
-        for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 06:20:27 -0800 (PST)
+	s=arc-20240116; t=1764168287; c=relaxed/simple;
+	bh=UqfRhGC7tcNDSS2rktztnsX08KO4ak4PJrEZQQuVV18=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=GCIDjawy2crhLJJeaVxUTeFwd+Ziqx+QjaYe/7REBc8Jf6AePPBzLdrtU54i6Y930kirZErPB/hheImzX/w3WEjt+3037qp49xgg9lOVxhRGUKMs4exxQoFVlh8jSznh4yhiXO4EvDgHYr0sO7oJrjvmHOP+kYzZPYbnZ8X2RWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lc5j4fBD; arc=none smtp.client-ip=209.85.216.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3434700be69so9523287a91.1
+        for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 06:44:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20230601.gappssmtp.com; s=20230601; t=1764166825; x=1764771625; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=K+mX3K4EZWXpumEvNCBx9+WunDYcwtTk4SgV9tqSlww=;
-        b=cfWqkOAzIgRIvSUFk2ZXxvBtX6kFCDRmxCScKsEwEs/GRFYn151TfESN84/7yH6zHG
-         mHs5ziMnku2mhDGIfMdWabn5I48clydmj/EIL0aoNFr6lqKLq2/oaAJDd8IEYjZBp5c/
-         TDeX8TYXidbaGOt5dkDlSNm41tAQFMLZ5D31FfmrqzkMWDZlaZKF68ejEf4nAnaNBn1s
-         0qL35hVyrbn4/hsiczDrcyBS/lpqzfg/HijqhKS004TA7ACMW2NP4M202zF4tnffR4qe
-         otxi1B7cVo/9JOEDv4tYhVk4+0AK/s/eZ0YLPi+eH9UK6flufCAiryQvgFMjL0C7Jbh9
-         DP0A==
+        d=gmail.com; s=20230601; t=1764168284; x=1764773084; darn=vger.kernel.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=UqfRhGC7tcNDSS2rktztnsX08KO4ak4PJrEZQQuVV18=;
+        b=lc5j4fBDF8Id1M78Dzmuln4YZAw2qb1G+gbNAtfGxND1VZxmFBK9l+tb0PP5oEYNyn
+         TOfm5Ge4dkP/vtlXxtBgdBnzg0/ojrde/e+DubyHilQ16y+yLFcv2Nbzrr40q7z30V4E
+         DghW1yIKP0HICUBxCJDj6rU0exw8yImCWxejHPr1EIquyx9gLZLIo4qNvQXOQFLnOBmD
+         DYF/fQMn6qrjxuia6lV2T6tukk2qnl5S4YzQuvENQjEURtb9SvsRbOEbWTIy8OAYg5gC
+         AeWeotvvyIh9JCoOGgMurEPNWLSg0+vhmXPJ4m0o7kDWHNJvVP5Zs4UqeI3EAtJBNWOI
+         zsgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764166825; x=1764771625;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20230601; t=1764168284; x=1764773084;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=K+mX3K4EZWXpumEvNCBx9+WunDYcwtTk4SgV9tqSlww=;
-        b=hBDYBfQOr4VmGAMoN6BSDmkHRXZnoYKHHPWRcUGBlYoMYcxUO/Xy/rpDqk+mkU4gei
-         HUVXydhEhK73wi/nkMdDdkklT4AQ06Na4t06EIyJWxh090+4f/zXwmXM12WcgFyORUEn
-         PG5hW1w/Lja027WTH0FfjDafQJJysJp1vllg0DN3fY4CO/zHpSV1KlDnZTqpcoYNmQU9
-         XKquB2NygxE+/U9aAenmi5ibKDWtlPzp1jg5uAPKfA1U3+CyEuOMFndSFs5ZJn6FKvfi
-         7AcoYq5ip55g0F334i4DPw9VSxhTut6ykrxKV5a/q583FIiUWFnrD2pToHsdeEAkmAJv
-         Ce9g==
-X-Forwarded-Encrypted: i=1; AJvYcCUhlTkhl6z1xVcWr2+fjF92GaNqCxKdxIKR+2c8KqOc4ujXF4+uDFRAfIBqua64i328oKDGdGBU+48=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxw8RPF+8GlVCnE8j13mRvUyRYuHTaIcRG+/HxEcmPyLcYHr42Q
-	I8KTEVkSXDtmpMNzHhvi7gV7GXuMIsC91cpYQM5Ab7GVItF2anDo7BHP+dwciW26LdE=
-X-Gm-Gg: ASbGncvEYc9gAZFTTsp6p6sGi7OlEdMwCNE1pEW+0egbB1mELj8pWpduumIkEgz+IxA
-	/c4PBOxI6zTPLoEfDGLBFaPGTHoVhTI6mN6Ab+U4h0DoT1S+hu0WvNEU4GKN569a8QmhlhgFHhs
-	t/FjQLCrJ6OMO6Im1DZ03eMYMgOgGNGVZq3Okuq+mGg+6uKzpEbNXoWpb/4gqcnvbYeKrRVFwIR
-	TvJAph+Ytx6eKun7T+MBnmsMTTk0TNoAbP5mt850w4KsRXiANAMUUa6XbtDzmeXEWpb/GiTDpvd
-	nEfZkHnOqqd88RysL+wTqOKOoz6h01m6GQvufrC9QeMplITOWxl9+ambwEa3s1tQuJi1qfwLi3S
-	CASEbf5a2QKuBqnE80y/6jM995/ep4JB2WjpH6SYhN9n8IkZmNAnGHIgUVvMyCMs8KyQFptzpkh
-	0uTN40oNKXT4foXtCd+RoTQ1aoF0+iYjWKZUpVQmw3OroIci1OJyJrMX7MHb0baxggI0Ee0A==
-X-Google-Smtp-Source: AGHT+IHetDpaeSCLD158eeBfnLMa77d0GWcu9KkUU/dpWWOreiarVBFn16/gIezMUQj2z9CZm6a8yQ==
-X-Received: by 2002:a05:6000:40c9:b0:42b:3806:2bb7 with SMTP id ffacd0b85a97d-42e0f1e35c2mr7360017f8f.6.1764166825367;
-        Wed, 26 Nov 2025 06:20:25 -0800 (PST)
-Received: from aspen.lan (aztw-34-b2-v4wan-166919-cust780.vm26.cable.virginm.net. [82.37.195.13])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42cb7fba20esm40814603f8f.37.2025.11.26.06.20.23
+        bh=UqfRhGC7tcNDSS2rktztnsX08KO4ak4PJrEZQQuVV18=;
+        b=nknWclzYt+DWTx4Zrn7Xsyjffjs0sZCluSYmSENKdJleqfKnL0yGdYE5NEu89/eUu/
+         uyFYfy3BRgu3sEq8v9hMPqTTZEl9kzWACQkW5xl83GrOWfmQRenceeVY8S7FvwqN/0OV
+         AjdKSt6dpGaMXe4V998LOm023lZeqbK8jFcMmaQRRbHbzSE89UexxTzvJ4ulVXFmp3lj
+         XbccCjM33oYjnG+6mnK0LcKvNZUG/pKXUG2xHvPLtg9sg1h5IKDIhdmP8AkaZ+wK7sGM
+         DH7L9514zhdyVoyhZ/vRxhnCPAxBEan+gcRPa/GSDfapHDkQR8X2ngiKiau4LDYsSGQg
+         P/4Q==
+X-Forwarded-Encrypted: i=1; AJvYcCXEHvj+En2YxOQh0PL/tsI7fytt6w6b04/jGrWmXm6xNRXi6Vm0/6dNNbfQ7SY8pdqGCuiDX1/OVS8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyS+Qu87dHg9euxWWoxS7m7TaIkIyvyYoIlxOxDZHbG8WHrir3P
+	223NXg/9lror0eUViJIdJxXZJoqLIxc5tRq0sMgkduY15Qi0xj2CmJ/l
+X-Gm-Gg: ASbGnctsX7yjUG/EMWhcdA0FnM1s20qxeeeu1etSgRK6Es8M7W4s73ioTUrZHZ/BIu/
+	wCTxHyQybw3xHIfrXRal4UsoftRDptRl1OSB/Uibrms+gd+DJsRdPv1WrofVBJxmZZx6MeFyO+g
+	n7hj56dvZeuhpgeAh2FHuwolVh+b333qQOIjqnCsbbE8aKTES4PswWCYqlTk85o6PH/jnaIa5MV
+	WRtyIkVsMDWYS24yyUR/zeHLSmdePp9uUSjd/9qu6PPodJwOQr7p2Wzl+uLrfuj6n3PKzXdcfmu
+	0g3koB7gCck6NvnxvViX55yVjvC79/jak09B2ntw84qHWwpx9ijz9Oo7rBUj4kmVSlPT2nCWCZ5
+	PQ2h5A5LmCXcoAu2kHZ170JWnLBA0cQcO1DKkPolBZvLca6bApuKBAdYP7VbSszpk28GPEnaALs
+	yyL1eUe4Feih9d1JQ2tfSsj8nMO9JfsLdx/eiveOaiiO0PK5OLvPIMgX0=
+X-Google-Smtp-Source: AGHT+IHummo04b5kVbBJyoIrPHDE8VmoM3OG1AtPvD6Slv0OYi4AJMuN93Vlql2XFyAQieTb6Wtltg==
+X-Received: by 2002:a17:90b:4d8c:b0:340:f422:fc76 with SMTP id 98e67ed59e1d1-3475eacec4cmr6289074a91.0.1764168284055;
+        Wed, 26 Nov 2025 06:44:44 -0800 (PST)
+Received: from ?IPv6:2401:4900:8fce:eb65:99e9:53c:32e6:4996? ([2401:4900:8fce:eb65:99e9:53c:32e6:4996])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-bd75def6314sm19465405a12.7.2025.11.26.06.44.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Nov 2025 06:20:24 -0800 (PST)
-Date: Wed, 26 Nov 2025 14:20:22 +0000
-From: Daniel Thompson <daniel@riscstar.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Daniel Thompson <danielt@kernel.org>,
-	Doug Anderson <dianders@chromium.org>, simona@ffwll.ch,
-	airlied@gmail.com, alexander.deucher@amd.com,
-	christian.koenig@amd.com, lyude@redhat.com, dakr@kernel.org,
-	deller@gmx.de, mripard@kernel.org,
-	maarten.lankhorst@linux.intel.com, jason.wessel@windriver.com,
-	dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
-	nouveau@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Nir Lichtman <nir@lichtman.org>
-Subject: Re: [PATCH 0/5] drm: Remove remaining support for kdb
-Message-ID: <aScMprMh6Eh4JU5D@aspen.lan>
-References: <20251125130634.1080966-1-tzimmermann@suse.de>
- <CAD=FV=X_-t2AF5osp7Hamoe7WYE_2YWJZCaPaOj=9seSbnwwVA@mail.gmail.com>
- <aSbwWLTLe0bMhOKV@aspen.lan>
- <054f60ca-b898-488f-81f4-14eed0a1360b@suse.de>
+        Wed, 26 Nov 2025 06:44:43 -0800 (PST)
+Message-ID: <ed88d805835d38635899d591148d5daf88f77d7c.camel@gmail.com>
+Subject: Re: [PATCH RESEND v6] checkpatch: add uninitialized pointer with
+ __free attribute check
+From: ally heev <allyheev@gmail.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>, Dwaipayan Ray	
+ <dwaipayanray1@gmail.com>, Lukas Bulwahn <lukas.bulwahn@gmail.com>, Joe
+ Perches	 <joe@perches.com>, Jonathan Corbet <corbet@lwn.net>, Andy
+ Whitcroft	 <apw@canonical.com>
+Cc: workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Dan Carpenter <dan.carpenter@linaro.org>,
+ David Hunter <david.hunter.linux@gmail.com>, Shuah Khan
+ <skhan@linuxfoundation.org>, Viresh Kumar	 <vireshk@kernel.org>, Nishanth
+ Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>,  linux-pm
+ <linux-pm@vger.kernel.org>, dan.j.williams@intel.com, Geert Uytterhoeven	
+ <geert@linux-m68k.org>, James Bottomley
+ <James.Bottomley@hansenpartnership.com>
+Date: Wed, 26 Nov 2025 20:14:34 +0530
+In-Reply-To: <4ef74e2b-74a9-4778-a3f2-d873cf6b7478@kernel.org>
+References: 
+	<20251125-aheev-checkpatch-uninitialized-free-v6-1-70e8bb1e9175@gmail.com>
+	 <58393a1f-272b-41be-9ebd-ae03678cb738@kernel.org>
+	 <43f43063b81da41b693d5eb8178d5c55ebaaa168.camel@gmail.com>
+	 <4ef74e2b-74a9-4778-a3f2-d873cf6b7478@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-0+deb13u1 
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <054f60ca-b898-488f-81f4-14eed0a1360b@suse.de>
 
-On Wed, Nov 26, 2025 at 02:32:32PM +0100, Thomas Zimmermann wrote:
-> Hi
->
-> Am 26.11.25 um 13:19 schrieb Daniel Thompson:
-> > On Tue, Nov 25, 2025 at 07:26:33AM -0800, Doug Anderson wrote:
-> > > On Tue, Nov 25, 2025 at 5:06 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> > > > <snip>
-> > > > Therefore remove the remaining support for kdb from the DRM drivers
-> > > > and from DRM fbdev emulation. Also remove the hooks from fbdev, as
-> > > > there are no fbdev drivers with kdb support.
-> > > >
-> > > > If we ever want to address kdb support within DRM drivers, a place to
-> > > > start would be the scanout buffers used by DRM's panic screen. These
-> > > > use the current display mode. They can be written and flushed without
-> > > > mode setting involved.
-> > > >
-> > > > Note: kdb over serial lines is not affected by this series and continues
-> > > > to work as before.
-> > > >
-> > > > Thomas Zimmermann (5):
-> > > >    drm/amdgpu: Do not implement mode_set_base_atomic callback
-> > > >    drm/nouveau: Do not implement mode_set_base_atomic callback
-> > > >    drm/radeon: Do not implement mode_set_base_atomic callback
-> > > >    drm/fbdev-helper: Remove drm_fb_helper_debug_enter/_leave()
-> > > >    fbcon: Remove fb_debug_enter/_leave from struct fb_ops
-> > > Personally, I've never worked with kdb over anything other than
-> > > serial, so this won't bother any of my normal workflows. That being
-> > > said, at least as of a year ago someone on the lists was talking about
-> > > using kdb with a keyboard and (presumably) a display. You can see a
-> > > thread here:
-> > >
-> > > http://lore.kernel.org/r/20241031192350.GA26688@lichtman.org
-> > >
-> > > Daniel may also have comments here?
-> > TL;DR - I'm pretty relaxed about these changes... but I'd like
-> >          to know how to test the changes.
-> >
-> > Like Doug I only really use kdb via serial but, since I'm maintain
-> > the thing I do occasionally test kdb works on the qemu console. I don't
-> > do it very often though because it's a manual test!
-> >
-> > I'd assume that will still work since it won't involve any of the
-> > drivers above. I'm afraid I can't double check that since patch 4
-> > doesn't apply cleanly in v6.18-rc7 (nor to linux-next... and neither
-> > does the base-commit appear in linux-next).
->
-> To test its effects, ignore this series and simply clear the two calbacks at
-> [1]. This is where the debugger invokes fbcon. The series removes their
-> implementation in the final patch.
->
-> [1] https://elixir.bootlin.com/linux/v6.17.9/source/drivers/video/fbdev/core/fbcon.c#L3202
+On Wed, 2025-11-26 at 09:10 +0100, Krzysztof Kozlowski wrote:
+> On 25/11/2025 17:11, ally heev wrote:
+> > On Tue, 2025-11-25 at 16:09 +0100, Krzysztof Kozlowski wrote:
+> > > On 25/11/2025 14:32, Ally Heev wrote:
+> > > > uninitialized pointers with __free attribute can cause undefined
+> > > > behavior as the memory randomly assigned to the pointer is freed
+> > > > automatically when the pointer goes out of scope.
+> > > > add check in checkpatch to detect such issues.
+> > > >=20
+> > > > Suggested-by: Dan Carpenter <dan.carpenter@linaro.org>
+> > > > Link: https://lore.kernel.org/all/8a4c0b43-cf63-400d-b33d-d9c447b7e=
+0b9@suswa.mountain/
+> > > > Link: https://lore.kernel.org/all/58fd478f408a34b578ee8d949c5c4b4da=
+4d4f41d.camel@HansenPartnership.com/
+> > > > Acked-by: Dan Williams <dan.j.williams@intel.com>
+> > > > Signed-off-by: Ally Heev <allyheev@gmail.com>
+> > >=20
+> > >=20
+> > > <form letter>
+> > > This is a friendly reminder during the review process.
+> > >=20
+> > > It looks like you received a tag and forgot to add it.
+> > >=20
+> > > If you do not know the process, here is a short explanation:
+> > > Please add Acked-by/Reviewed-by/Tested-by tags when posting new versi=
+ons
+> > > of patchset, under or above your Signed-off-by tag, unless patch chan=
+ged
+> > > significantly (e.g. new properties added to the DT bindings). Tag is
+> > > "received", when provided in a message replied to you on the mailing
+> > > list. Tools like b4 can help here. However, there's no need to repost
+> > > patches *only* to add the tags. The upstream maintainer will do that =
+for
+> > > tags received on the version they apply.
+> > >=20
+> > > Please read:
+> > > https://elixir.bootlin.com/linux/v6.12-rc3/source/Documentation/proce=
+ss/submitting-patches.rst#L577
+> > >=20
+> > > If a tag was not added on purpose, please state why and what changed.
+> > > </form letter>
+> > >=20
+> > >=20
+> > > Best regards,
+> > > Krzysztof
+> >=20
+> > Oopsie. I should have sent a new version instead of resending a failed
+> > one. I have updated the `UNINITIALIZED_PTR_WITH_FREE` error description
+> > in the checkpatch doc as outlined in v6 changelog, so, didn't add a
+> > Reviewed-by tag
+>=20
+>=20
+> Again, your changelog should explain the reason. Second, you implemented
+> reviewer suggestion, received the tag so why do you think that Rb tag
+> does not apply?
+>=20
+> Best regards,
+> Krzysztof
 
-Thanks. Explanation in original cover letter was great and there's
-certainly been no harm to QEMU.
+Sorry again :(. I thought the new changes, although minor, would entail
+new comments. I have experienced this in my old patches
 
-Acked-by: Daniel Thompson (RISCstar) <danielt@kernel.org>
-
-
-Daniel.
+Regards,
+Ally
 
