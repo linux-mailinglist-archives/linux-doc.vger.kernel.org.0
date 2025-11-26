@@ -1,83 +1,82 @@
-Return-Path: <linux-doc+bounces-68197-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68199-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB52FC89681
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 11:57:51 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id B675AC8968D
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 11:58:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 96942351986
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 10:57:51 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 787BB4E4AB8
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 10:57:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4DFC731D36B;
-	Wed, 26 Nov 2025 10:57:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7049F31E0EF;
+	Wed, 26 Nov 2025 10:57:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="g4RtKm9t"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="zCc5C6FI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BE0D26FD9B
-	for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 10:57:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F5E8301473
+	for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 10:57:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764154666; cv=none; b=rTxTEbu1XyG32sL/RUvRVNnLWKXOPtsWkeSlP3MjmU/mpvwuD7peZntxoiNKgily4RXfGvZ7YfoXNvQFvNrGzYR0SAvg93SBME5nelgjE09XC/GPPi+9vcUZnB1rAZWNqZKP9jcQEsomOnY14Gm2cj/5mF9J7CnWOkHBh3Rz6OQ=
+	t=1764154667; cv=none; b=oRRM5OzGCy7pDFojN+Beu/kvqBBWOa6DFF43boV6xN0OCrLY6ih4cNva8Z74iWc20Z0W110iG29yE2kS38nVKnzeqlJaqZQ0ligDJ7MeSD5A9MsKtopI7ihNOaK6Cm8U4DuYnABiSBK/aPyAJLAiK3zuWbIjlHJGsxCoKJvT75s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764154666; c=relaxed/simple;
-	bh=N8m12iWNCLQKM0X40bESlfOrttHeXy53V/IFqVWUcrY=;
+	s=arc-20240116; t=1764154667; c=relaxed/simple;
+	bh=17jMP5BXtLnUallPdavwL3MYV4FkLZYfFbmfg88Z2tI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Z7idJWeuIOPbsXUclw6JfOx16HZPjdpN+T9rt5KH4tOsX/BKXp/aW/W74YMpaxty924lPlQwiHCp7Gse9p5vBI+qncDb0UY8DqjcVadL+dPO8UdVotdtpMShnvBUp7Z9hfIOL8zRcDRK0fUbYmi3VHSz7TgXJFitHD8nTbOht3c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=g4RtKm9t; arc=none smtp.client-ip=209.85.128.51
+	 In-Reply-To:To:Cc; b=nUvR4YbW+ab1WOcRnXvqi33kbt0uTABcrhpgs+IT71LquSAAe+DL+ZIM7AjhcnkPF3KKZ7J5iAgFrYUUtM6Ml7nAGxdq7Mifa5nwu8egkqi7L+o72r+q3LtJ52Ojptei/sg2r6Wqsst/ECQQlSe83sN9dAgCJn4HWTDFgW4poL4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=zCc5C6FI; arc=none smtp.client-ip=209.85.128.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4779cc419b2so62713235e9.3
-        for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 02:57:44 -0800 (PST)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47778b23f64so36222145e9.0
+        for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 02:57:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1764154663; x=1764759463; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1764154664; x=1764759464; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tUoArGeF29Uq9ud9txzEkP+4OSzrCHQVStRpO2mMVQU=;
-        b=g4RtKm9tgoXEcGAroskSTTu38MWZWs/65trKNn+/l/HHE++kv39n2IgfzbKutwz86i
-         gk+z24vRSL+ez7QEIPk4+mUzOAe5tm+B9EZUhApK9LRWu3QOFRGO7fOObxkOZX9Hx6gQ
-         xdsdZwoo/SdSbY+YlxQNw28r6a1kdlEkdI7aqVsbRNJHxKctQ2tnuSV1lVXD1u8YqiB/
-         u1HSDtxlY5J4uriCqcXmR7mZ4ikZigKPEM4xSp4K6F/dgmZG81ibqs1sfHYm7uuHyjHK
-         cKuuEGIB0bt5xeMKhg+xs8o0ZPxcBfbHtH6q+/JyO/YFNcQCctPb447O6D5pwXt05zOU
-         H7yA==
+        bh=v1jmfj5dStPh0E5zFa2d+xJLlooTKEzGROAwu7cggvA=;
+        b=zCc5C6FIIJ/v8ZHvc9Uc4Ip6PhPq9z5j+YWVGnn98HOqo0qO/neoBk9jLP4n35d7QX
+         luCQwle9iFENrRKNB9rTlQCaeoDOmdzg4kyXjQzDTUQt3nafTfhRXfSnPUQKlacr/Lk3
+         PJOtqasx11A9ZB2/PIQbFDeUgR4i2W2yEX2Hu7yfzGX2A4toSjpqKlbFWw5d38/D2f76
+         rQndkgxrUcz+hkLNRH+2R0eCT+CaFcGx6wEq4VOMYPje3eSkPNspDsmbC4R1jVvQaU2z
+         tSJUVAF7nFVS4/B8YndgxcVVmYVN44aAJ4DbTZ/GYiAcU3xN/MiWELZkCt+Ud2nvplz7
+         0Liw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764154663; x=1764759463;
+        d=1e100.net; s=20230601; t=1764154664; x=1764759464;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=tUoArGeF29Uq9ud9txzEkP+4OSzrCHQVStRpO2mMVQU=;
-        b=l2Bk3NjRe55kUthpjNTxaGYUBvV3r89hStvjpyYzLDVOAnt2hlde8C2U1IhLfTYNNS
-         dAghlqYwEBmBhDPHOUVktBUSRL/wJgSbeJHs+IoHEmE5dsd59+WyFxSJTCOXEqlzfq2+
-         hgT8JH0QKw5wPgLjGXOj6tP4GuaKr1X5nodUHIZh+m+UIf5EcXi5TJE04G+GzSpUfNuS
-         Hvkb2AnwxBQQmLyTzqCH4G/tjxmycOLQZacx+dkzWAep7zjcypplTe/8+k0kZYNdMqgg
-         FSNt1EVHqerKGGvuM9ufnu77JRlXQfP+9UPq+twzU1ZUWKpT2K6uEzv5I3f6t3at6bGW
-         BAiA==
-X-Forwarded-Encrypted: i=1; AJvYcCWAgp4sPDQix2hDDL4T83I7CTk5q5wv8Ikksl5nAubUSzPZVD8laOb0NHNPCM50O8AR7OjywruizLA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YysnhIJefpXFzLn1rDUEJQIqqVnX3IOyGQccMttq3eolg0socoP
-	vduDJrpYtPDd9pxLs06DOh7/i72Gye5gHM3HIUnHywU0jgwTqGCVAnIbHHwM01uVbYlzUHNv/KS
-	gkyYL8mo=
-X-Gm-Gg: ASbGncv1/rWeBd5VRvYpjLwuiMKhwjrYg+aow8JW1e48SBm09VPukciZ1ctquoH8Gn2
-	1nMxLhd39i1bjyL4Jz6Z9+Gm6AnzY+nQQ5TCWZD+6FAPYKD+F24spvhKBIHhLZ3EMTPzhm5dZiQ
-	npaOKZ4CTQ3+CdGMBaSpwlpUeSR2B5g/0uvWj/dyhvZiYiafEZoUTZe/fw4OCr4COVYZY9a+4Vm
-	JAHFquYmL2GLqYmeg2GI8R4kp0xXCA0lAJRhrCui/4NcWCbxdGbpO4JIFkNwJ45gTJqBxg3LANR
-	lSY645shMH4a83IG3J21jTDmdf9iqtIeuIkNVFy19JYr+9/KGGBE7DwmBVy/sk5G7/LCNTdmkjj
-	nSWqkUR8Nu6jerVGw1VB4JtRiOsASaUjf60EExnI5T2QrgJWlwIFIVff8vAe9A+MsEUglb8XMTJ
-	hUFYBvXS/U578cmSfUBQrq
-X-Google-Smtp-Source: AGHT+IEq2h53SMoGIyD2yFtjfs7hfB7ruA13p+JgzFnAxaZ65GfS0NxroszsNqkmBHF8jKJbq34fpQ==
-X-Received: by 2002:a05:600c:4ece:b0:477:7af8:c8ad with SMTP id 5b1f17b1804b1-477c115db0cmr208004055e9.31.1764154662715;
-        Wed, 26 Nov 2025 02:57:42 -0800 (PST)
+        bh=v1jmfj5dStPh0E5zFa2d+xJLlooTKEzGROAwu7cggvA=;
+        b=ZcZ97nqd69h8FHW3U61z1fMPLz1lreL4bk69f42C9IRzBM8p4QlS56X+PNnb2VxVNz
+         Ai5Zc0kX8YTVVOp3aK/cqWbK6c/82CrppjKJfXIiHCpjsqdecScGnIFocp85jWqGUDjD
+         vLriWrgzXpcEh4ThgJs+ZcVi1AY8eWmujw7sQBzqGAXs/nkTOqAbog4jtEf4aTFZSVwl
+         PXc+zPJzxKqyd5yZUqO1zh7MbfDFHb6V08vxEaIpb1OxF9sp8wvIlbaTu8GHAdEcEqiv
+         ncHvtIhP9vjGqE8GWO7yFBd+kPutz4Uqce4A9ONn7OukYgtM+GDpWfFwGz4Z8xAG8Blp
+         OuBQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUB8LCT4f8QCR+Q0c5Kcd7cKdtF872IVBHYrpnKUTZjwdUe5gS9Ik2liZxQ15O8+0v+Sm72MwFc6jY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzlvyDXRo4LL6bj6h4UaPe6YPRTUO2kFLaIrGuxSOyu0gA6R9sQ
+	gVnDHxy0M9GbyFg6fD5HR8coIzyY+Ztj3L1nbrODbMaY8lVLpr/uD1UUqpuXPga34Aw=
+X-Gm-Gg: ASbGncv2rBPMfIB6hEJ4Nc6gaFQB2e5qmj7Wt0GfgLlQRahytg7VDLyRft6Jzf1JYZJ
+	Uy52lBB5balzwonyMS0pV6XmDZB+whCzIvCT1vmYxjOK4xN3mOG7H8sKX7H84e5ghq7xSBNGMeY
+	zAPxR+MUwy3AVNGQQ2mNaFvJ6GLdgIu0akkmXjEt+sCs3KDMjC4fNLvV6uYE9bn0ZBJ1w0Pc06D
+	2f9IspL117Nc0uI8oIOUH8/vkaRP7IJWvYURTlZsTgSmm5PHEND+0FnSHy2Fcp73mUOvFKv6rpX
+	T0FhncPQnir5bBspOcG8HobDOKWOqf/JyC56keLAWcBd+VxCHgBry470BmIWVxwamc0xmjPZU49
+	G9rvSKZNTe7nHiEpgvlFv/aDh2PKxI5OHxaPimgUIUKjgqG0VP7p4GC12LoG2RnW1bPEKLtsiP6
+	Y0kdEbtdUOJRO2/oAc8mYI
+X-Google-Smtp-Source: AGHT+IH2Dz4/STj3d7ezVk3tlaHON/FWp+B+Izg1b3VZb+Q3ynleHjsb/oSUVp5AOHtWtqMGcn67OQ==
+X-Received: by 2002:a05:600c:4451:b0:459:db7b:988e with SMTP id 5b1f17b1804b1-477c111bab4mr190578555e9.13.1764154663638;
+        Wed, 26 Nov 2025 02:57:43 -0800 (PST)
 Received: from ho-tower-lan.lan ([185.48.77.170])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4790ade13ddsm36991765e9.8.2025.11.26.02.57.41
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4790ade13ddsm36991765e9.8.2025.11.26.02.57.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 26 Nov 2025 02:57:42 -0800 (PST)
+        Wed, 26 Nov 2025 02:57:43 -0800 (PST)
 From: James Clark <james.clark@linaro.org>
-Date: Wed, 26 Nov 2025 10:54:30 +0000
-Subject: [PATCH v7 01/13] coresight: Change syncfreq to be a u8
+Date: Wed, 26 Nov 2025 10:54:31 +0000
+Subject: [PATCH v7 02/13] coresight: Repack struct etmv4_drvdata
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -86,7 +85,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251126-james-cs-syncfreq-v7-1-7fae5e0e5e16@linaro.org>
+Message-Id: <20251126-james-cs-syncfreq-v7-2-7fae5e0e5e16@linaro.org>
 References: <20251126-james-cs-syncfreq-v7-0-7fae5e0e5e16@linaro.org>
 In-Reply-To: <20251126-james-cs-syncfreq-v7-0-7fae5e0e5e16@linaro.org>
 To: Suzuki K Poulose <suzuki.poulose@arm.com>, 
@@ -99,36 +98,66 @@ Cc: coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
  James Clark <james.clark@linaro.org>
 X-Mailer: b4 0.14.0
 
-TRCSYNCPR.PERIOD is the only functional part of TRCSYNCPR and it only
-has 5 valid bits so it can be stored in a u8.
+Fix holes and convert the long list of bools to single bits to save
+some space because there's one of these for each ETM.
 
-Reviewed-by: Mike Leach <mike.leach@linaro.org>
 Reviewed-by: Leo Yan <leo.yan@arm.com>
+Reviewed-by: Mike Leach <mike.leach@linaro.org>
 Signed-off-by: James Clark <james.clark@linaro.org>
 ---
- drivers/hwtracing/coresight/coresight-etm4x.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/hwtracing/coresight/coresight-etm4x.h | 36 +++++++++++++--------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
 
 diff --git a/drivers/hwtracing/coresight/coresight-etm4x.h b/drivers/hwtracing/coresight/coresight-etm4x.h
-index 012c52fd1933..0287d19ce12e 100644
+index 0287d19ce12e..d178d79d9827 100644
 --- a/drivers/hwtracing/coresight/coresight-etm4x.h
 +++ b/drivers/hwtracing/coresight/coresight-etm4x.h
-@@ -825,7 +825,6 @@ struct etmv4_config {
- 	u32				eventctrl1;
- 	u32				stall_ctrl;
- 	u32				ts_ctrl;
--	u32				syncfreq;
- 	u32				ccctlr;
- 	u32				bb_ctrl;
- 	u32				vinst_ctrl;
-@@ -833,6 +832,7 @@ struct etmv4_config {
- 	u32				vissctlr;
- 	u32				vipcssctlr;
- 	u8				seq_idx;
-+	u8				syncfreq;
- 	u32				seq_ctrl[ETM_MAX_SEQ_STATES];
- 	u32				seq_rst;
- 	u32				seq_state;
+@@ -1016,27 +1016,27 @@ struct etmv4_drvdata {
+ 	u8				ns_ex_level;
+ 	u8				q_support;
+ 	u8				os_lock_model;
+-	bool				sticky_enable;
+-	bool				boot_enable;
+-	bool				os_unlock;
+-	bool				instrp0;
+-	bool				q_filt;
+-	bool				trcbb;
+-	bool				trccond;
+-	bool				retstack;
+-	bool				trccci;
+-	bool				trc_error;
+-	bool				syncpr;
+-	bool				stallctl;
+-	bool				sysstall;
+-	bool				nooverflow;
+-	bool				atbtrig;
+-	bool				lpoverride;
++	bool				sticky_enable : 1;
++	bool				boot_enable : 1;
++	bool				os_unlock : 1;
++	bool				instrp0 : 1;
++	bool				q_filt : 1;
++	bool				trcbb : 1;
++	bool				trccond : 1;
++	bool				retstack : 1;
++	bool				trccci : 1;
++	bool				trc_error : 1;
++	bool				syncpr : 1;
++	bool				stallctl : 1;
++	bool				sysstall : 1;
++	bool				nooverflow : 1;
++	bool				atbtrig : 1;
++	bool				lpoverride : 1;
++	bool				skip_power_up : 1;
++	bool				paused : 1;
+ 	u64				trfcr;
+ 	struct etmv4_config		config;
+ 	struct etmv4_save_state		*save_state;
+-	bool				skip_power_up;
+-	bool				paused;
+ 	DECLARE_BITMAP(arch_features, ETM4_IMPDEF_FEATURE_MAX);
+ };
+ 
 
 -- 
 2.34.1
