@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-68163-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68165-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6FD8C87E14
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 03:56:01 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 37FEBC87E11
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 03:55:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 6E29F4EA8BA
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 02:55:47 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id B1C78350EAA
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 02:55:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4F67C30BF70;
-	Wed, 26 Nov 2025 02:55:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CE53130CD9D;
+	Wed, 26 Nov 2025 02:55:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hF1E/efv"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="T4QV7Uqe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 917E330BBB7
-	for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 02:55:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E3A130BF68
+	for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 02:55:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.177
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764125737; cv=none; b=IKIyMxOpvOnvELdADOsKiTC19uXMWpReSx0FAb5XKFNRlZXfpv9lNSvLf0CDDPadLWJtm1TEIQ/voPdvX8+cNsYgBTfefIlv8Iyxqu0onNZqatgSy7Uzcu7uWpAKlEwHqs06uOm6dqOlZwIkbsosbk/zhe6QZ4jjLrdELP49k1w=
+	t=1764125738; cv=none; b=hTUMFw+Len7hOXQe+/TjYdCAc1GzWf/74NRjGrb3JNVTKoQRxhy69J097fa5Gp2RgxKK8zKW+vZTWlWyq8MUAZifEsqbp82D+0RC3uHwV2vvPv8WXZJcRg3ohazEMVdI8GOzjbCd/aIFymBa6RqoTR8sziw/GIDjrN8wxZU5lwI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764125737; c=relaxed/simple;
-	bh=tnimAo44fiTVkBAxrxc3EfZ5uZmHR6v6i5p5yRM5eqM=;
+	s=arc-20240116; t=1764125738; c=relaxed/simple;
+	bh=flQQ+p9EPZBsRnUUjNajnPPbgxqkevBix7E0+4gZ/48=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=YgClnOe9raSSPOgCADA+GqIkqFGyRnFP0Cgh0EZLCiZyAJakKkZbC/xRE+R65sCOJ/U/0jEtYXgqfBYcNuht9glElQqzyYgBjkTN8zMJOwdMycVovYaJAZHiSfyAI4/N4JSINH6JzK8MiweKfcSeTba4GAgJwtTn2Ihj2kYZCHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hF1E/efv; arc=none smtp.client-ip=209.85.210.179
+	 MIME-Version; b=NyMUALNjBaAomTdPRhIRZbLAZsrX7WEQ4ZYQPhN2ffc0sBZMNvma4kiOGve8kx8F91mgioBJIWvFvfw8CwRi6Cg8KJoqUfdrcwIYUYNkI2YttFP350XkigbfO6+9NLeBC3QbTjxhiATqt4mjFr8PFTZk/pSIfyDbd7AZ+FYtgRw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=T4QV7Uqe; arc=none smtp.client-ip=209.85.210.177
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-7ad1cd0db3bso5375430b3a.1
-        for <linux-doc@vger.kernel.org>; Tue, 25 Nov 2025 18:55:35 -0800 (PST)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-7a9cdf62d31so7458966b3a.3
+        for <linux-doc@vger.kernel.org>; Tue, 25 Nov 2025 18:55:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764125735; x=1764730535; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1764125736; x=1764730536; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=B1bXFtvnUO91cmJCzBD7ztE3U01PXxMPuKpzpUua2tk=;
-        b=hF1E/efvIc8jCN4XD7qk8R/aM47plOPvQuFD+lV8m97Z0Q73nKdq5eU0Q1g2cYS0Y+
-         qfdnT3j8J2DISWx8OUj1aGsgC+QPGje4rtvdGEGWrfKypSNYtp3arn09oB3VkdsL3UsG
-         tro347g1D0pPLpFw70OTEboc1+fT5ed7JH6n8Yh2FGE6SRi31cHziFy+DS23G5gxcRw0
-         N42dkt35kY465SCmSWNh/KTr5mYEbDD8kmKHO+uEUjDQU+CWplVPqfJx0xtGSGA5JzJE
-         chBUNRaIn00j8mFbUuaTckalaVisS3vMVze9/TmB64OOZjsWWZY6GK9MG3j2r8kuP9BG
-         zQqA==
+        bh=hOi2SSx6yNBsrEeWui+Quc5HTWSCmGH/Tx4kBkU2ROo=;
+        b=T4QV7UqeAuWhVv+m4paD7HMDCeUXgRkZQSJ2GYPTGV1f3bfTZGZWV8LFXdwPx7nHwm
+         TstgiyAnTdkF4mKe39sxM1sk7cYLW7C5h81/tKsgUxXQ1BV1Koka3z2hkWkRMVvtcufR
+         J9UFwODyZfrYuSckNGcKvR53x1Vl1I/59m5EQRoQItR40XgCoOgv0l09zq0gT1LXsteQ
+         0RDRkFIsGUifz5XGwCV7Oq2z8wiLzAQ6eANreD20J9u6x1p8cjXG/CfqBEHu1DqEhNCF
+         e4i4QFUGw7SzHzRYp7qYmXgUei8MKW/o6lSGksVJF3I21MH1SYpG9qU6cUGRB5CWW2s+
+         Zqmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764125735; x=1764730535;
+        d=1e100.net; s=20230601; t=1764125736; x=1764730536;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=B1bXFtvnUO91cmJCzBD7ztE3U01PXxMPuKpzpUua2tk=;
-        b=k/aIXuWXoVy61Om6vdIYbWoZvn0g+IVAGJ9iPq0CQ3KjeRADTw/5aipoJUrpegCogc
-         YzrZvlfAhwR7ofUtsnujzxg4VKlbo8IMxbOj98XmMS/p27dETFhv7IF9FEbt0yHW7q05
-         6RSr97r/JQpReWdZJwgBk7X/nrGIIu0yh3XfcM9LD1xSCKHmtTV6VwJdqvJW6kXY3xaX
-         J0SUvCCne8jb3ru3qe0nfcaqaPF44tZ89mkdclvwn63XIyMrK34wnlYJgql41x59RR//
-         yx5WP3/qyzlbPuwkbz/azKJ5L2GdPMIWLXqGvVBwd3I19XLulyhdYZ7ua/w4QKUH2Af2
-         TRPA==
-X-Forwarded-Encrypted: i=1; AJvYcCXUQLxzZwAPdnlGdMseZZcPryG9fid3QnqTO/1+vOGfpwymWvTd5BdmHoyHdrPo7Qb5cJDuSqJuQFM=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw2t8Ffe2+T1iBxajb0XGMxPmItSAKHJmf/TO+/EUJkqtYVprot
-	+iDlKu2KjzgusbDuOhz1ynLSSMrl0Z3eq/LcL3W+VkB0+R7LcuTMRdlv
-X-Gm-Gg: ASbGncsgZ3I3L0b1vqvraRB47YimX7dVPSsM1xat8vDRSSLNzcL0vlwdhsuApamWtTz
-	0VID7WZ9zg2NC/lz6SqG4/V7aCIx5+hWGie2TCx5FSK0ZhWRJ6Sqeoc7GbJkXRMr0Y6WbKKoPFW
-	5+hxeQrVFFaVplFKOpK4K5VOa0FMP5YouF+gPAIA/BIhneXbJuSCMK1fzM6txfNrc/HxZernWlM
-	WldSu1jlY67huDSHtEDnkjqfq7LZcDhtNPcy4pL826aaWwzJXucPSrA7B09bhukqcj9RYoVu71L
-	H1ma3pWslN6jPajhkOysfaaPJ0+prqTtMIgpVZh7SHqxTuGQuZjoGnVn8wqHiBGwwIIAMPIV2og
-	ORI96KDazz7fX/R5wrFjQFD3HLyJLRZ7lI33bCv/2QAbDqRzK242E0PJj8l0qQJ2qnR45PvVeVa
-	L+EXA2dtXlbA0=
-X-Google-Smtp-Source: AGHT+IGvzstnc/93j7ZBB0sdQeaLAIx6ZueJYSk+eMit4Kywv6zxm2Ac+UYyPZE8la68lESXl8XFmg==
-X-Received: by 2002:a05:6a00:c83:b0:7b9:7f18:c716 with SMTP id d2e1a72fcca58-7ca8740ef7emr5806307b3a.1.1764125734799;
-        Tue, 25 Nov 2025 18:55:34 -0800 (PST)
+        bh=hOi2SSx6yNBsrEeWui+Quc5HTWSCmGH/Tx4kBkU2ROo=;
+        b=keMLexppDhbwQ0LmwQqqsYtaWzVUAW9JjD+fTdFhaMvcbQjT1qwdoi0D4LSFAI2kVc
+         edXFCdkWm77PXGcDKNc+1EgbjO5h+jPzJU2+RmftNpmgMMZ5mc92piTAvs5TCSlTkTPY
+         ScC9rp9Gs/pnen8nWy7Oz+vWea0tNbT24+WQQ0pfZFUzs6QU/XhBss8AoCCNDDLFrRQj
+         G5ILN9sSzkEM82eNwng00bRjvR/LxDl6tvpV1Lyucc9alN68+e/o8vT3Uzd7ay+1H1CQ
+         ZRB7ta2Qy5JSj8iaLubVBMByUkoMUsN9vFRRnHxmzCJCLAg/UtAYq9Vpz5MdDagDWPOg
+         YKEw==
+X-Forwarded-Encrypted: i=1; AJvYcCXcwtE/2GhxlW+7cYi8WLihMJmLCS5Or2dZSWJwkLnKPcQXaZ+IDgkSO3mYNb4f2P4+rDyXuDjne1M=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyCKgqF3M8VOOGU67cYXKYABWadisTlCrXrcAeJsCFwq9y7T4Vt
+	NLV7AJCWxhs0ce3sHd9sdIuBDQFHBP8k2iz0Y9Q5R+U2yjrRZU1Lj6Nf
+X-Gm-Gg: ASbGncsiQyg2GXSNhGAr26GWWaE6I192jRJ5Yaeq7pNA2X+a406gciaktE/VeXhtiv4
+	li4vWq6D4jzhlXyZZ8tpnFh2nDMeyU8CHn/uOcJ1Zdv0/4nT0640EPsYIUgp4NedDXh9CP4H/A3
+	RCA3Rf32CRlsDyLY9bTSgX5HRLK3+p04JK1hxeVlbT3++b9r20nc1paOWTM/r9qlbZai5mTuiML
+	LCBNNCgJ7jsSty2af2lCnTkHPEiTeo2YiuPghg144bimnp2tPRVh20jQYQ+kx2ph6ywPtYnA3tG
+	APdxGUTS/E1p9cUh1lW+fUXAtnazGtHiCrzCZYcHVYc4uVZDT5AbbCbLgQgJrnGLNhL0IjCEV5H
+	ibAu2yQ7Nlcm3qNt3xRWsBJTB3YiSkia+xPRUsuHfzJ8Jm/um/7/OLrWhSEdKbkyNtP2BAiKbiB
+	CS+2DN8hKD/G0=
+X-Google-Smtp-Source: AGHT+IEHBzWHbK0JtdGRu7LTkyTetWGV8Bp0c9o3CW5NTNaXLf45k4YycOLV9mqvKMkZ9DY6Jmqs4Q==
+X-Received: by 2002:a05:6a20:9186:b0:350:1a0e:7fc5 with SMTP id adf61e73a8af0-3614eeb0d8emr18539845637.60.1764125736418;
+        Tue, 25 Nov 2025 18:55:36 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7c3ed470ff6sm19428018b3a.19.2025.11.25.18.55.33
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-bd775ccabfdsm17407798a12.29.2025.11.25.18.55.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 25 Nov 2025 18:55:34 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id 7BB194754B79; Wed, 26 Nov 2025 09:55:24 +0700 (WIB)
+	id A1EB6476D832; Wed, 26 Nov 2025 09:55:24 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Documentation <linux-doc@vger.kernel.org>,
@@ -92,9 +92,9 @@ Cc: David Howells <dhowells@redhat.com>,
 	Dan Williams <dan.j.williams@intel.com>,
 	Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
 	Daniel Palmer <daniel.palmer@sony.com>
-Subject: [PATCH 1/5] Documentation: afs: Use proper bullet for bullet lists
-Date: Wed, 26 Nov 2025 09:55:07 +0700
-Message-ID: <20251126025511.25188-2-bagasdotme@gmail.com>
+Subject: [PATCH 2/5] Documentation: dax: Coalesce "See also" filesystem pointers into list
+Date: Wed, 26 Nov 2025 09:55:08 +0700
+Message-ID: <20251126025511.25188-3-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251126025511.25188-1-bagasdotme@gmail.com>
 References: <20251126025511.25188-1-bagasdotme@gmail.com>
@@ -104,66 +104,48 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2080; i=bagasdotme@gmail.com; h=from:subject; bh=tnimAo44fiTVkBAxrxc3EfZ5uZmHR6v6i5p5yRM5eqM=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJlq2StviNYourDlNeosNrizdW8cj3kn0/vOxo/c5qd+n vg/4fW/jlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAEzk435GhrMVHexX0ur1ogVk jvcL+xmvvNrn/is86/2tCjuLY5LfQhgZVjFs5T8wZ4Jn7637AS+62YrVf6nfvsV1474106OOFZX TWAE=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1213; i=bagasdotme@gmail.com; h=from:subject; bh=flQQ+p9EPZBsRnUUjNajnPPbgxqkevBix7E0+4gZ/48=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJlq2StvXp4xeUtVu3yxm+XhsunLZZi/K83SU/sTUfXDX q/gzfGTHaUsDGJcDLJiiiyTEvmaTu8yErnQvtYRZg4rE8gQBi5OAZhIygKGf2bGYZ9OLJZ6rnyi mCEv5of5mmu/0kte/71h41Kry7rK5Qkjw36HOxG1ez8uY7oStMN4eTHb389cjny3ry6ePCNm1ir pYi4A
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
 
-The lists use an asterisk in parentheses (``(*)``) as the bullet marker,
-which isn't recognized by Sphinx as the proper bullet. Replace with just
-an asterisk.
+Filesystems for DAX implementation inspiration is listed in "See also"
+admonitions, one for each filesystem (ext2, ext4, and xfs). Coalesce
+them into a bullet list.
+
+While at it, also link to XFS developer documentation in
+Documentation/filesystems/xfs/ instead of user-facing counterpart in
+Docmentation/admin-guide/xfs.rst.
 
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
- Documentation/filesystems/afs.rst | 21 +++++++++------------
- 1 file changed, 9 insertions(+), 12 deletions(-)
+ Documentation/filesystems/dax.rst | 14 +++-----------
+ 1 file changed, 3 insertions(+), 11 deletions(-)
 
-diff --git a/Documentation/filesystems/afs.rst b/Documentation/filesystems/afs.rst
-index f15ba388bbde79..6135d64ada6372 100644
---- a/Documentation/filesystems/afs.rst
-+++ b/Documentation/filesystems/afs.rst
-@@ -23,17 +23,14 @@ This filesystem provides a fairly simple secure AFS filesystem driver. It is
- under development and does not yet provide the full feature set.  The features
- it does support include:
+diff --git a/Documentation/filesystems/dax.rst b/Documentation/filesystems/dax.rst
+index 5b283f3d1eb113..e0631d5f6251d4 100644
+--- a/Documentation/filesystems/dax.rst
++++ b/Documentation/filesystems/dax.rst
+@@ -234,17 +234,9 @@ exposure of uninitialized data through mmap.
  
-- (*) Security (currently only AFS kaserver and KerberosIV tickets).
+ These filesystems may be used for inspiration:
+ 
+-.. seealso::
 -
-- (*) File reading and writing.
+-  ext2: see Documentation/filesystems/ext2.rst
 -
-- (*) Automounting.
+-.. seealso::
 -
-- (*) Local caching (via fscache).
-+ * Security (currently only AFS kaserver and KerberosIV tickets).
-+ * File reading and writing.
-+ * Automounting.
-+ * Local caching (via fscache).
- 
- It does not yet support the following AFS features:
- 
-- (*) pioctl() system call.
-+ * pioctl() system call.
+-  xfs:  see Documentation/admin-guide/xfs.rst
+-
+-.. seealso::
+-
+-  ext4: see Documentation/filesystems/ext4/
++  * :doc:`ext2 <ext2>`
++  * :doc:`ext4 <ext4/index>`
++  * :doc:`xfs <xfs/index>`
  
  
- Compilation
-@@ -146,15 +143,15 @@ Proc Filesystem
- 
- The AFS module creates a "/proc/fs/afs/" directory and populates it:
- 
--  (*) A "cells" file that lists cells currently known to the afs module and
--      their usage counts::
-+  * A "cells" file that lists cells currently known to the afs module and
-+    their usage counts::
- 
- 	[root@andromeda ~]# cat /proc/fs/afs/cells
- 	USE NAME
- 	  3 cambridge.redhat.com
- 
--  (*) A directory per cell that contains files that list volume location
--      servers, volumes, and active servers known within that cell::
-+  * A directory per cell that contains files that list volume location
-+    servers, volumes, and active servers known within that cell::
- 
- 	[root@andromeda ~]# cat /proc/fs/afs/cambridge.redhat.com/servers
- 	USE ADDR            STATE
+ Handling Media Errors
 -- 
 An old man doll... just what I always wanted! - Clara
 
