@@ -1,55 +1,94 @@
-Return-Path: <linux-doc+bounces-68222-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68224-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id 506E7C8A6DF
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 15:48:20 +0100 (CET)
+Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E17BC8A869
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 16:07:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id F2DB84EF2B4
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 14:44:59 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id D2FA14E6EAB
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Nov 2025 15:00:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBD23303A08;
-	Wed, 26 Nov 2025 14:44:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id CFE79305E14;
+	Wed, 26 Nov 2025 15:00:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eSXCaNWK"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AACBB303A19;
-	Wed, 26 Nov 2025 14:44:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7E9A30505C
+	for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 15:00:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764168282; cv=none; b=OjO3UPV8C06hebZCUI1aW6m5VsDphZ4NBQC9VSkZ3N2DDqEwUNhhBRLeipBj1CoSzDYPLSJTx8hGac4Ndtlx8yCwyKhH3GGBFNqFmas3hwJHiXEL6raFsD5Rld6yG5LzwPBvT6alVLtOTa90+sHUqF6EfX5ngjQN38nZT7ZYTIs=
+	t=1764169245; cv=none; b=NQB5glhCHmV997BvtvricddUXwmF8SaTL27NTzvnwF7gTbeG91aId152WdqzoHdtidhFCqiCdjCo06vZ5++3jDiXxk9JHc056bVFgG0yvw/Mj5Hn93cYtkkXvMgccjMX0+9ggQqIZPre8HoL41JPksXaoaJKC7Ra+bDRFUvFTiw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764168282; c=relaxed/simple;
-	bh=2cppOkVKgl0pjKR1U/CqP0UN6xPwA2lHW16XyELe1JI=;
+	s=arc-20240116; t=1764169245; c=relaxed/simple;
+	bh=5QJjkgD4Lg0uyQLZFQujwXLTzVMdno/htIphWOU29XU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KB6LZwcTxMYB+BU80x5kB3oN3pAHv21+NImAmVMnx+NxhMjXx+klCnITl+kuCLHEDCx/u042zU1nu6P+vRNrg8n/1RUZeBdY0Ll+/ZxcqppHwhsLcZxZ5TYC0oZGmqH2KfXtP94K9W0uTd0hdxi0Ubmqu8gru8uQqdLFAVq+QDk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 882F9168F;
-	Wed, 26 Nov 2025 06:44:32 -0800 (PST)
-Received: from localhost (e132581.arm.com [10.1.196.87])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8FFB53F73B;
-	Wed, 26 Nov 2025 06:44:39 -0800 (PST)
-Date: Wed, 26 Nov 2025 14:44:37 +0000
-From: Leo Yan <leo.yan@arm.com>
-To: Mike Leach <mike.leach@linaro.org>
-Cc: James Clark <james.clark@linaro.org>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Randy Dunlap <rdunlap@infradead.org>, coresight@lists.linaro.org,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org
-Subject: Re: [PATCH v7 13/13] coresight: docs: Document etm4x timestamp
- interval option
-Message-ID: <20251126144437.GL724103@e132581.arm.com>
-References: <20251126-james-cs-syncfreq-v7-0-7fae5e0e5e16@linaro.org>
- <20251126-james-cs-syncfreq-v7-13-7fae5e0e5e16@linaro.org>
- <20251126140154.GK724103@e132581.arm.com>
- <CAJ9a7VgcAiw_h=OTxOK0Vcv=9WFCbdb-+RzDKYhigZZhepM7xg@mail.gmail.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=GvStHdrB6yXPXL6jvP0kvbQCRtXDwdSip1xzZf2K98ox6fwmNXlQ1qe+yUvbWMGyUambJshQfUNTnKHuC5Dtk989QkkwEZWCBfZ9xsnF8WD7LAcmASsnKxwkTHwLAwcmc74zSjzEA09XY1BwSIF35SV3EOSWPU/+LlJGPUv48cE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eSXCaNWK; arc=none smtp.client-ip=209.85.208.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-640b0639dabso11822947a12.3
+        for <linux-doc@vger.kernel.org>; Wed, 26 Nov 2025 07:00:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1764169242; x=1764774042; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Yz5EmXohUxVRWC4ev9hUhbYDa/f2qaZaDtF0BMtQeAs=;
+        b=eSXCaNWKVXBLdRoGqRRTeoNawi6aez0fAFM0ZMWOu5P5EKfVFQ/AIRrO0TEt66SF0g
+         Z6sHSuzCuKN0wHb7pDvC6tRgELzwHwzW0VYeEj0WrwnsvBZL1SGysImALIa6DoNQ/GCN
+         cIN7vO/DpOVIGk3+oNC6aQOFKcc7rJNcZgc1dPN6fVYIFhguNuxvSCoiMYElx1AkiXxz
+         gX20di/K/Qr6ZzOEiECB49KChioqmOJzdHy9GPcy1+WT40zNJcOnU9b6VGzk7J1r/guF
+         CEu6j29s9SOVS8qP+dshWPG7juBxGxwCcgAu8tJBmgKLqinoG7AYojTlnldB66c/p/83
+         eOCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764169242; x=1764774042;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Yz5EmXohUxVRWC4ev9hUhbYDa/f2qaZaDtF0BMtQeAs=;
+        b=S8i4fst+kOyvTKznqPK3eZd1awZczLPAMIeDpaaYrRFiLWx2WK4XqBZfDnX29498B2
+         hz59G7DYZouKc7XCTflJUonDOI4nzw2KxwR3spAQ/2e5YN78roJiMixgXQWUB7ikRNeA
+         u4pvZUjUdZTZGopf+DXPyiPN70cmBvpOBAnN5X8iIkZU+JjBPlu9wp7OPqlB6yHBbPoA
+         yXdU5ilexSFLeqZnu77FYay6b8T0vvB9I+aHSlbgHep7IUpiRUNs38vWSqGV6Je44Jvx
+         cA6vSm4Xm5O8o5jIiNuIog8I+k8SD2OcxalnjD263aYsUqD3QHyDUGha1IlHBBfWJxEM
+         6/ig==
+X-Forwarded-Encrypted: i=1; AJvYcCWmLyiYX4AODWRXVnE8YD545gg/MXUf9z17+PJf/ty52QJc8dCEEPGjHpFN4Jfbv3Cgl9JlGMH18UA=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz3b89sWPmAu8XMTaeopqhIaL4akSqtfsNvWhc7qVHXQSOPIAJS
+	Jp5I9B3+VDLd/7a/KWZNFkiDBX2UQ29RWXK5RVsPSlSu4WPCd/b7VMiT
+X-Gm-Gg: ASbGnct8zkb849NafHH61nn31cNL45eqPATnOgHquQJSYCkxn2hsizrB89tgi+6ztcH
+	rXpgvKMMFS4tEJzGDBa8X7aYchzLcW4nqF+KUKeH8jefpIX2kZjCeQJA/7D9/EJPXsl4goK00Ju
+	rMqqAO60arNZXtLndek5v4BbhVskjerA8/XxnSlM9My+/J3wHlFTMy9kRJ63KgW7629lDP/6lwt
+	N6wjJepEGcHGoXv9TNtR4mppLAzjkGMk6xhx2TAWloIE5TDkPP9W3gj/TOBUUjFgcm1H+c9aj6i
+	Te8jzdefEwlCPNukPxoPDf1Is37AeLpZ80u7uVm4yxuzruv1+LVQmm4Mrq14ym4OTEHSULnG4EC
+	1RmTTK7xBFPRnvMDb3Jpm4iZwgZJ4NJEGwTJKL5nUtU8btkdjwBLZcNCUwMLQ2xIHmcKwDAvQ+F
+	vaOR31kbp2VcvUjIWWauh0UPzjJXra5Vww3ph5qZcGt79eXFHDfib9dph+OJAxOgmYjqo=
+X-Google-Smtp-Source: AGHT+IGMLKBPp/nalJhT5vdwB6WP7zzO2EVVFWVnhy2g0Kthf4gY+u8ks4h7NDw/yjwO6Ns9fkv+5w==
+X-Received: by 2002:a05:6402:1ed6:b0:640:9aed:6ab6 with SMTP id 4fb4d7f45d1cf-6455468d38amr15839431a12.24.1764169242005;
+        Wed, 26 Nov 2025 07:00:42 -0800 (PST)
+Received: from HYB-DlYm71t3hSl.ad.analog.com ([2001:a61:123e:4501:1025:ba00:55dc:4ccc])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-64536460ea9sm20379307a12.35.2025.11.26.07.00.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Nov 2025 07:00:39 -0800 (PST)
+Date: Wed, 26 Nov 2025 16:00:36 +0100
+From: Jorge Marques <gastmaier@gmail.com>
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: Jorge Marques <jorge.marques@analog.com>, 
+	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
+	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
+	Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Linus Walleij <linus.walleij@linaro.org>, 
+	Bartosz Golaszewski <brgl@bgdev.pl>, linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-gpio@vger.kernel.org
+Subject: Re: [PATCH v2 7/9] iio: adc: ad4062: Add IIO Events support
+Message-ID: <zzrtxpcxzqcjxhxmp5miov4f3kx5i3fpzmrt55azvktkgowejm@n6ofgzoaxoxb>
+References: <20251124-staging-ad4062-v2-0-a375609afbb7@analog.com>
+ <20251124-staging-ad4062-v2-7-a375609afbb7@analog.com>
+ <aSQ0aM2u49qzIZDm@smile.fi.intel.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -58,81 +97,255 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAJ9a7VgcAiw_h=OTxOK0Vcv=9WFCbdb-+RzDKYhigZZhepM7xg@mail.gmail.com>
+In-Reply-To: <aSQ0aM2u49qzIZDm@smile.fi.intel.com>
 
-On Wed, Nov 26, 2025 at 02:20:14PM +0000, Mike Leach wrote:
-
-[...]
-
-> > >     * - timestamp
-> > > -     - Session local version of the system wide setting: :ref:`ETMv4_MODE_TIMESTAMP
-> > > -       <coresight-timestamp>`
-> > > +     - Controls generation and interval of timestamps.
-> > > +
-> > > +       0 = off, 1 = minimum interval .. 15 = maximum interval.
-> > > +
-> > > +       Values 1 - 14 use a counter that decrements every cycle to generate a
-> > > +       timestamp on underflow. The reload value for the counter is 2 ^ (interval
-> > > +       - 1). If the value is 1 then the reload value is 1, if the value is 11
-> > > +       then the reload value is 1024 etc.
-> > > +
-> > > +       Setting the maximum interval (15) will disable the counter generated
-> > > +       timestamps, freeing the counter resource, leaving only ones emitted when
-> > > +       a SYNC packet is generated. The sync interval is controlled with
-> > > +       TRCSYNCPR.PERIOD which is every 4096 bytes of trace by default.
-> > > +
+On Mon, Nov 24, 2025 at 12:33:12PM +0200, Andy Shevchenko wrote:
+> On Mon, Nov 24, 2025 at 10:18:06AM +0100, Jorge Marques wrote:
+> > Adds support for IIO Events. Optionally, gp0 is assigned as Threshold
+> > Either signal, if not present, fallback to an I3C IBI with the same
+> > role.
 > 
-> What is the default value?
-
-From driver's pespective, the default value is 0 (disabled).  We do
-set default values in perf:
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/perf/arch/arm/util/cs-etm.c#n444
-
-IIUC, the default value would be the same with or without this series.
-
-> As far as I recall when this command line parameter was a bool then:
-> perf -e cs_etm/timestamp/ <program>
-> is sufficient to turn on timestamping.
-
-Hmm... with the latest perf, we must assign value to `timestamp`,
-otherwise perf will report error:
-
-  # /mnt/build/perf record -e cs_etm/timestamp/ -C 0 -- taskset -c 0 ls
-  event syntax error: 'cs_etm/timestamp/'
-                       \___ Bad event or PMU
-  
-  Unable to find PMU or event on a PMU of 'cs_etm'
-  
-  event syntax error: 'cs_etm/timestamp/'
-                       \___ no value assigned for term
-  
-  event syntax error: 'cs_etm/timestamp/'
-                       \___ no value assigned for term
-  Run 'perf list' for a list of valid events
-  
-
-> This is worth mentioning so users can correctly assess what happens
-> for any existing scripts they might have.
+> ...
 > 
-> Based on this then the same command must set the timestamp to 1 -
-> which will have the same effect as before as we do not want to break
-> existing behaviour.
+Hi Andy,
+> > +static ssize_t ad4062_events_frequency_store(struct device *dev,
+> > +					     struct device_attribute *attr,
+> > +					     const char *buf, size_t len)
+> > +{
+> > +	struct iio_dev *indio_dev = dev_to_iio_dev(dev);
+> > +	struct ad4062_state *st = iio_priv(indio_dev);
+> > +	int val, ret;
+> > +
+> > +	if (!iio_device_claim_direct(indio_dev))
+> > +		return -EBUSY;
+> > +	if (st->wait_event) {
+> > +		ret = -EBUSY;
+> > +		goto out_release;
+> > +	}
+> > +
+> > +	ret = kstrtoint(buf, 10, &val);
+> > +	if (ret < 0)
+> > +		goto out_release;
+> > +
+> > +	st->events_frequency = find_closest_descending(val, ad4062_conversion_freqs,
+> > +						       ARRAY_SIZE(ad4062_conversion_freqs));
+> > +	ret = 0;
+> > +
+> > +out_release:
+> > +	iio_device_release_direct(indio_dev);
+> > +	return ret ? ret : len;
 > 
-> Mike
+> 	return ret ?: len;
 > 
+Ack
+> > +}
 > 
-> > >     * - cc_threshold
-> > >       - Cycle count threshold value. If nothing is provided here or the provided value is 0, then the
-> > >         default value i.e 0x100 will be used. If provided value is less than minimum cycles threshold
-> > >
-> > > --
-> > > 2.34.1
-> > >
+> ...
 > 
+> > +static IIO_DEVICE_ATTR(sampling_frequency, 0644, ad4062_events_frequency_show,
+> > +		       ad4062_events_frequency_store, 0);
 > 
+> IIO_DEVICE_ATTR_RW()
+> 
+Sure
+> ...
+> 
+> >  {
+> >  	struct ad4062_state *st = i3cdev_get_drvdata(i3cdev);
+> >  
+> > -	if (iio_buffer_enabled(st->indio_dev))
+> > -		iio_trigger_poll_nested(st->trigger);
+> > -	else
+> > -		complete(&st->completion);
+> > +	if (st->wait_event) {
+> > +		iio_push_event(st->indio_dev,
+> > +			       IIO_UNMOD_EVENT_CODE(IIO_VOLTAGE, 0,
+> > +						    IIO_EV_TYPE_THRESH,
+> > +						    IIO_EV_DIR_EITHER),
+> > +			       iio_get_time_ns(st->indio_dev));
+> > +	} else {
+> > +		if (iio_buffer_enabled(st->indio_dev))
+> > +			iio_trigger_poll_nested(st->trigger);
+> > +		else
+> > +			complete(&st->completion);
+> > +	}
+> 
+> Less ping-pong:ish if you simply add a new code.
+> 
+> 	if (st->wait_event) {
+> 		iio_push_event(st->indio_dev,
+> 			       IIO_UNMOD_EVENT_CODE(IIO_VOLTAGE, 0,
+> 						    IIO_EV_TYPE_THRESH,
+> 						    IIO_EV_DIR_EITHER),
+> 			       iio_get_time_ns(st->indio_dev));
+> 
+> 		return;
+> 	}
+> 
+> >  }
+> 
+Sure.
+> ...
+> 
+> > +static int ad4062_monitor_mode_enable(struct ad4062_state *st, bool enable)
+> > +{
+> > +	int ret = 0;
+> 
+> Unneeded assignment.
+Ack.
+> > +	if (!enable) {
+> > +		pm_runtime_put_autosuspend(&st->i3cdev->dev);
+> > +		return 0;
+> > +	}
+> 
+> Just split to two functions and drop parameter 'enable',
+>
+Sure.
+> > +	ACQUIRE(pm_runtime_active_try_enabled, pm)(&st->i3cdev->dev);
+> > +	ret = ACQUIRE_ERR(pm_runtime_active_try_enabled, &pm);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	ret = ad4062_conversion_frequency_set(st, st->events_frequency);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	ret = ad4062_set_operation_mode(st, AD4062_MONITOR_MODE);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	pm_runtime_get_noresume(&st->i3cdev->dev);
+> > +	return 0;
+> > +}
+> 
+> ...
+> 
+> > +static int ad4062_write_event_config(struct iio_dev *indio_dev,
+> > +				     const struct iio_chan_spec *chan,
+> > +				     enum iio_event_type type,
+> > +				     enum iio_event_direction dir,
+> > +				     bool state)
+> > +{
+> > +	struct ad4062_state *st = iio_priv(indio_dev);
+> > +	int ret;
+> > +
+> > +	if (!iio_device_claim_direct(indio_dev))
+> > +		return -EBUSY;
+> > +	if (st->wait_event == state) {
+> > +		ret = 0;
+> > +		goto out_release;
+> > +	}
+> > +
+> > +	ret = ad4062_monitor_mode_enable(st, state);
+> > +	if (!ret)
+> > +		st->wait_event = state;
+> 
+> Please use regular patter to check for errors first.
+> 
+> 	if (st->wait_event == state)
+> 		ret = 0;
+> 	else
+> 		ret = ad4062_monitor_mode_enable(st, state);
+> 	if (ret)
+> 		goto out_release;
+> 
+> 	st->wait_event = state;
+> 
+> Always think about readability first and then about size of the source code.
+> 
+Sure.
+> > +out_release:
+> > +	iio_device_release_direct(indio_dev);
+> > +	return ret;
+> > +}
+> 
+> ...
+> 
+> > +static int ad4062_read_event_value(struct iio_dev *indio_dev,
+> > +				   const struct iio_chan_spec *chan,
+> > +				   enum iio_event_type type,
+> > +				   enum iio_event_direction dir,
+> > +				   enum iio_event_info info, int *val,
+> > +				   int *val2)
+> > +{
+> > +	struct ad4062_state *st = iio_priv(indio_dev);
+> > +	int ret;
+> > +
+> > +	if (!iio_device_claim_direct(indio_dev))
+> > +		return -EBUSY;
+> > +	if (st->wait_event) {
+> > +		ret = -EBUSY;
+> > +		goto out_release;
+> > +	}
+> > +
+> > +	switch (info) {
+> > +	case IIO_EV_INFO_VALUE:
+> > +		ret = __ad4062_read_event_info_value(st, dir, val);
+> > +		break;
+> > +	case IIO_EV_INFO_HYSTERESIS:
+> > +		ret = __ad4062_read_event_info_hysteresis(st, dir, val);
+> > +		break;
+> > +	default:
+> > +		ret = -EINVAL;
+> > +		break;
+> > +	}
+> > +
+> > +out_release:
+> > +	iio_device_release_direct(indio_dev);
+> > +	return ret ? ret : IIO_VAL_INT;
+> 
+> 	return ret ?: IIO_VAL_INT;
+> 
+> > +}
+Ack.
+> 
+> ...
+> 
+> > +static int __ad4062_write_event_info_value(struct ad4062_state *st,
+> > +					   enum iio_event_direction dir, int val)
+> > +{
+> > +	u8 reg;
+> > +
+> > +	if (val > 2047 || val < -2048)
+> > +		return -EINVAL;
+> 
+> There was already magic '11', perhaps define it and use there and here?
+> 
+> #define x11	11 // needs a good name
+> 
+> 	if (val > BIT(x11) || val < -BIT(x11))
+> 	
+Not magic number, but max and min signed 12-bit, maybe
+
+	if (val != sign_extend32(val, 11))
+		return -EINVAL;
+to not look like magic numbers, or 
+  	if (val < (-BIT(11)) || val > BIT(11) - 1)
+  		return -EINVAL;
+
+For Hysteresis I will change from
+
+	if (val >= BIT(7))
+to 
+	if (val & ~GENMASK(6,0))
+
+I believe iio only passes positive to the hysteresis, but is a little clearer.
+
+> > +	if (dir == IIO_EV_DIR_RISING)
+> > +		reg = AD4062_REG_MAX_LIMIT;
+> > +	else
+> > +		reg = AD4062_REG_MIN_LIMIT;
+> > +	put_unaligned_be16(val, st->buf.bytes);
+> > +
+> > +	return regmap_bulk_write(st->regmap, reg, &st->buf.be16,
+> > +				 sizeof(st->buf.be16));
+> > +}
 > 
 > -- 
-> Mike Leach
-> Principal Engineer, ARM Ltd.
-> Manchester Design Centre. UK
+> With Best Regards,
+> Andy Shevchenko
+> 
+> 
+Best regards,
+Jorge
 
