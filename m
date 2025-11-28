@@ -1,36 +1,36 @@
-Return-Path: <linux-doc+bounces-68359-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68358-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [142.0.200.124])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAA46C90B3C
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 04:10:35 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1AC9C90B39
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 04:10:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id AA59E4E13C3
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 03:10:34 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 57F1A3AABDA
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 03:10:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6465D29ACF6;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 477802857CD;
 	Fri, 28 Nov 2025 03:10:31 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mta21.hihonor.com (mta21.honor.com [81.70.160.142])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8584D199252;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C4B227E7F0;
 	Fri, 28 Nov 2025 03:10:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=81.70.160.142
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764299431; cv=none; b=H3cdYdeg1SJ8k6IqoOh5pOW/Y0vjF08p+ACin5mosdzUrZLNXn0r0p7USwUkBKWi253HFq4n0/vLd3YFMcK4YRXRz7t0CMyAcz7BIzc6tCi8J6vNgQg3p+n3aBusdyTcRbKR2/eig0kXSSuku4zFDF7nNakZgCvGMvzAJLtI4Rg=
+	t=1764299431; cv=none; b=eMtiNw+ninoQtP6+O0yIFAOtIkDu4j1mIG0Ei1wfo1OapZtioIeeUK6tQS54K4135KgreHRU1EF5J6pwmcjOWDWPa8efIwv3u80IHivaaX40iAUsPIHFMuCceyjMP8eBAHw0TBvLwS5ncLeWju8KwaNY94nMHN8sC34Xfa8pQFA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1764299431; c=relaxed/simple;
-	bh=hk9UQh9z/96n9IuZCKnIWje2f+aFL+5nYxKb4bxDZbU=;
+	bh=RvZ0qCmwZ3fJPqm5mLK+MGtwlfZWW35XmWu/Rt1Gxr0=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=X0+l0oRWrcJflI02YzPpcOMKrmiXVsjPPAwrZKVbhjQXXN71FmxsvxXZvpSmb0vfhtxAJ+X57CJdzLfE1i0hmMwNqCMr3zQ9EsOJb9EW9CbfaWxXb1CUBBo9SqHFn75mm5eBUOdbsDlftRcggy9z4iZHliYBPTuzsbAeFoAuzq8=
+	 MIME-Version:Content-Type; b=HaGhZqT9cSFtPM4pDSlo0PcpYILBstRxYbirgoVwdqJc7wuQ1QfybqJzcjphjIMEUjE9r+fpYC3oXzv6C1oeUd/66puNs00J/s9w+OT5qfEM5w/bItwMbZuvyPXRVH4bNth/epEZR6tPIuifXfqdZVLF9BWFzDjmAICxKIqUlUA=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=honor.com; spf=pass smtp.mailfrom=honor.com; arc=none smtp.client-ip=81.70.160.142
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=honor.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=honor.com
 Received: from w002.hihonor.com (unknown [10.68.28.120])
-	by mta21.hihonor.com (SkyGuard) with ESMTPS id 4dHdBy1DhFzYmZ9w;
+	by mta21.hihonor.com (SkyGuard) with ESMTPS id 4dHdBy2jyCzYmZBB;
 	Fri, 28 Nov 2025 10:52:58 +0800 (CST)
 Received: from localhost.localdomain (10.144.5.36) by w002.hihonor.com
  (10.68.28.120) with Microsoft SMTP Server (version=TLS1_2,
@@ -45,9 +45,9 @@ CC: <mhocko@kernel.org>, <zhengqi.arch@bytedance.com>,
 	<surenb@google.com>, <mhocko@suse.com>, <corbet@lwn.net>,
 	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
 	<linux-kernel@vger.kernel.org>, Zicheng Wang <wangzicheng@honor.com>
-Subject: [PATCH 1/3] mm/lru_gen: add procfs support for lru_gen interfaces
-Date: Fri, 28 Nov 2025 10:53:13 +0800
-Message-ID: <20251128025315.3520689-2-wangzicheng@honor.com>
+Subject: [PATCH 2/3] mm/lru_gen: add configuration option to select debugfs/procfs for lru_gen
+Date: Fri, 28 Nov 2025 10:53:14 +0800
+Message-ID: <20251128025315.3520689-3-wangzicheng@honor.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20251128025315.3520689-1-wangzicheng@honor.com>
 References: <20251128025315.3520689-1-wangzicheng@honor.com>
@@ -62,108 +62,32 @@ Content-Type: text/plain
 X-ClientProxiedBy: w012.hihonor.com (10.68.27.189) To w002.hihonor.com
  (10.68.28.120)
 
-This patch refactors the lru_gen and lru_gen_full control files to allow
-their interfaces to be exposed under either debugfs or procfs.
-
-Two main changes:
-1. minimal code modification by reusing the existing seq_operations.
-2. lru_gen file mode update from 0644 to 0664, so that Android's group
-"system" can write to the file when procfs interface is enabled.
-
 Signed-off-by: Zicheng Wang <wangzicheng@honor.com>
 ---
- mm/vmscan.c | 37 +++++++++++++++++++++++++++++++++++--
- 1 file changed, 35 insertions(+), 2 deletions(-)
+ mm/Kconfig | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/mm/vmscan.c b/mm/vmscan.c
-index 674999999..dd30f3949 100644
---- a/mm/vmscan.c
-+++ b/mm/vmscan.c
-@@ -58,6 +58,7 @@
- #include <linux/random.h>
- #include <linux/mmu_notifier.h>
- #include <linux/parser.h>
-+#include <linux/proc_fs.h>
- 
- #include <asm/tlbflush.h>
- #include <asm/div64.h>
-@@ -5324,9 +5325,17 @@ static const struct attribute_group lru_gen_attr_group = {
- };
- 
- /******************************************************************************
-- *                          debugfs interface
-+ *                          lru_gen interface
-  ******************************************************************************/
- 
-+static inline bool lru_gen_show_is_full(const struct file *file)
-+{
-+    /* procfs: i_private = (void *)1 means full
-+     * debugfs: also works because debugfs sets i_private
-+     */
-+	return file->f_inode->i_private != NULL;
-+}
+diff --git a/mm/Kconfig b/mm/Kconfig
+index e443fe8cd..be7efa794 100644
+--- a/mm/Kconfig
++++ b/mm/Kconfig
+@@ -1325,6 +1325,16 @@ config LRU_GEN_STATS
+ config LRU_GEN_WALKS_MMU
+ 	def_bool y
+ 	depends on LRU_GEN && ARCH_HAS_HW_PTE_YOUNG
 +
- static void *lru_gen_seq_start(struct seq_file *m, loff_t *pos)
- {
- 	struct mem_cgroup *memcg;
-@@ -5435,7 +5444,7 @@ static void lru_gen_seq_show_full(struct seq_file *m, struct lruvec *lruvec,
- static int lru_gen_seq_show(struct seq_file *m, void *v)
- {
- 	unsigned long seq;
--	bool full = debugfs_get_aux_num(m->file);
-+	bool full = lru_gen_show_is_full(m->file);
- 	struct lruvec *lruvec = v;
- 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
- 	int nid = lruvec_pgdat(lruvec)->node_id;
-@@ -5671,6 +5680,7 @@ static int lru_gen_seq_open(struct inode *inode, struct file *file)
- 	return seq_open(file, &lru_gen_seq_ops);
- }
++config LRU_GEN_PROCFS_CTRL
++	bool "Move lru_gen files from debugfs to procfs"
++	depends on LRU_GEN && PROC_FS
++	help
++	  Move lru_gen management from debugfs to procfs (/proc/lru_gen).
++	  This production-ready feature provides critical memory reclaim
++	  prediction and control. It is no longer experimental.
++	  The migration ensures availability in commercial products where
++	  debugfs may be disabled.
+ # }
  
-+#ifndef CONFIG_LRU_GEN_PROCFS_CTRL
- static const struct file_operations lru_gen_rw_fops = {
- 	.open = lru_gen_seq_open,
- 	.read = seq_read,
-@@ -5685,6 +5695,22 @@ static const struct file_operations lru_gen_ro_fops = {
- 	.llseek = seq_lseek,
- 	.release = seq_release,
- };
-+#else
-+static const struct proc_ops lru_gen_proc_rw_ops = {
-+	.proc_open    = lru_gen_seq_open,
-+	.proc_read    = seq_read,
-+	.proc_write   = lru_gen_seq_write,
-+	.proc_lseek   = seq_lseek,
-+	.proc_release = seq_release,
-+};
-+
-+static const struct proc_ops lru_gen_proc_ro_ops = {
-+	.proc_open    = lru_gen_seq_open,
-+	.proc_read    = seq_read,
-+	.proc_lseek   = seq_lseek,
-+	.proc_release = seq_release,
-+};
-+#endif
- 
- /******************************************************************************
-  *                          initialization
-@@ -5772,10 +5798,17 @@ static int __init init_lru_gen(void)
- 	if (sysfs_create_group(mm_kobj, &lru_gen_attr_group))
- 		pr_err("lru_gen: failed to create sysfs group\n");
- 
-+#ifndef CONFIG_LRU_GEN_PROCFS_CTRL
- 	debugfs_create_file_aux_num("lru_gen", 0644, NULL, NULL, false,
- 				    &lru_gen_rw_fops);
- 	debugfs_create_file_aux_num("lru_gen_full", 0444, NULL, NULL, true,
- 				    &lru_gen_ro_fops);
-+#else
-+	proc_create_data("lru_gen", 0664, NULL,
-+					&lru_gen_proc_rw_ops, NULL);
-+	proc_create_data("lru_gen_full", 0444, NULL,
-+					&lru_gen_proc_ro_ops, (void *)1);
-+#endif
- 
- 	return 0;
- };
+ config ARCH_SUPPORTS_PER_VMA_LOCK
 -- 
 2.25.1
 
