@@ -1,37 +1,46 @@
-Return-Path: <linux-doc+bounces-68358-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68361-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1AC9C90B39
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 04:10:34 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 43328C90B54
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 04:12:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 57F1A3AABDA
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 03:10:33 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id E0D2D34E296
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Nov 2025 03:12:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 477802857CD;
-	Fri, 28 Nov 2025 03:10:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD1532882B7;
+	Fri, 28 Nov 2025 03:11:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=honor.com header.i=@honor.com header.b="D/ONv38m"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mta21.hihonor.com (mta21.honor.com [81.70.160.142])
+Received: from mta22.hihonor.com (mta22.hihonor.com [81.70.192.198])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C4B227E7F0;
-	Fri, 28 Nov 2025 03:10:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=81.70.160.142
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1780027E7F0;
+	Fri, 28 Nov 2025 03:11:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=81.70.192.198
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764299431; cv=none; b=eMtiNw+ninoQtP6+O0yIFAOtIkDu4j1mIG0Ei1wfo1OapZtioIeeUK6tQS54K4135KgreHRU1EF5J6pwmcjOWDWPa8efIwv3u80IHivaaX40iAUsPIHFMuCceyjMP8eBAHw0TBvLwS5ncLeWju8KwaNY94nMHN8sC34Xfa8pQFA=
+	t=1764299518; cv=none; b=UcGFIyUDwosJZdEx1hoK71Q+UpQ2XCvo0priKZGhaI1psvOHPQxAxVKMrK/F8n1vPDjm1U+7OFHmxoXb32wAZ2HOuX8Qy9lb0ps4Cz8ERpNu+WU3TgNrsTUi26Vu1RAkkEQjIv43jETpkO5uKZ/yuHm+8DGbnRsAN/cVS75B8WE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764299431; c=relaxed/simple;
-	bh=RvZ0qCmwZ3fJPqm5mLK+MGtwlfZWW35XmWu/Rt1Gxr0=;
+	s=arc-20240116; t=1764299518; c=relaxed/simple;
+	bh=gU0jwzK/DYSOitX7LplGaHqyCltgRlPoQldaJbSs83I=;
 	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HaGhZqT9cSFtPM4pDSlo0PcpYILBstRxYbirgoVwdqJc7wuQ1QfybqJzcjphjIMEUjE9r+fpYC3oXzv6C1oeUd/66puNs00J/s9w+OT5qfEM5w/bItwMbZuvyPXRVH4bNth/epEZR6tPIuifXfqdZVLF9BWFzDjmAICxKIqUlUA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=honor.com; spf=pass smtp.mailfrom=honor.com; arc=none smtp.client-ip=81.70.160.142
+	 MIME-Version:Content-Type; b=hEekpy4Vi1MW+DJU42ZyedJgNH3SBphWeDHlJUXck4segNUjgzWVXRj07auHwDQs0NpxJ6+4znikIneWFI6k6oyuBhbeLuwdgX2pyxicDO2yAcJSXKcAJqPgpMb30ZOLvKJOqb7dgH2MbqMSA4tthIKrtizAoYwZKfLJgVbkDsg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=honor.com; spf=pass smtp.mailfrom=honor.com; dkim=pass (1024-bit key) header.d=honor.com header.i=@honor.com header.b=D/ONv38m; arc=none smtp.client-ip=81.70.192.198
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=honor.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=honor.com
+dkim-signature: v=1; a=rsa-sha256; d=honor.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=To:From;
+	bh=ayengAhX69VuLBH0udWTRo6vLW+weVNlnBoDZD4F89Y=;
+	b=D/ONv38mN1pq1e7180jj6fLd5a8259bJluYa3QO18y6zFy5F/tRiYEJP8sym2N7hA863amxvr
+	UmNMVh51G4h4+er9cvTf/XqUjjc4dCIuQNJ6lR9iPwniiE+8aoFvWlI/2gJhYBYcJyOxXcb7XTV
+	KBo6WDRcjPl4ShX19XnFtbQ=
 Received: from w002.hihonor.com (unknown [10.68.28.120])
-	by mta21.hihonor.com (SkyGuard) with ESMTPS id 4dHdBy2jyCzYmZBB;
-	Fri, 28 Nov 2025 10:52:58 +0800 (CST)
+	by mta22.hihonor.com (SkyGuard) with ESMTPS id 4dHdBN5DVfzYmwXH;
+	Fri, 28 Nov 2025 10:52:28 +0800 (CST)
 Received: from localhost.localdomain (10.144.5.36) by w002.hihonor.com
  (10.68.28.120) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Fri, 28 Nov
@@ -45,9 +54,9 @@ CC: <mhocko@kernel.org>, <zhengqi.arch@bytedance.com>,
 	<surenb@google.com>, <mhocko@suse.com>, <corbet@lwn.net>,
 	<linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
 	<linux-kernel@vger.kernel.org>, Zicheng Wang <wangzicheng@honor.com>
-Subject: [PATCH 2/3] mm/lru_gen: add configuration option to select debugfs/procfs for lru_gen
-Date: Fri, 28 Nov 2025 10:53:14 +0800
-Message-ID: <20251128025315.3520689-3-wangzicheng@honor.com>
+Subject: [PATCH 3/3] mm/lru_gen: document procfs interface for lru_gen
+Date: Fri, 28 Nov 2025 10:53:15 +0800
+Message-ID: <20251128025315.3520689-4-wangzicheng@honor.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20251128025315.3520689-1-wangzicheng@honor.com>
 References: <20251128025315.3520689-1-wangzicheng@honor.com>
@@ -64,30 +73,36 @@ X-ClientProxiedBy: w012.hihonor.com (10.68.27.189) To w002.hihonor.com
 
 Signed-off-by: Zicheng Wang <wangzicheng@honor.com>
 ---
- mm/Kconfig | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ Documentation/admin-guide/mm/multigen_lru.rst | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/mm/Kconfig b/mm/Kconfig
-index e443fe8cd..be7efa794 100644
---- a/mm/Kconfig
-+++ b/mm/Kconfig
-@@ -1325,6 +1325,16 @@ config LRU_GEN_STATS
- config LRU_GEN_WALKS_MMU
- 	def_bool y
- 	depends on LRU_GEN && ARCH_HAS_HW_PTE_YOUNG
+diff --git a/Documentation/admin-guide/mm/multigen_lru.rst b/Documentation/admin-guide/mm/multigen_lru.rst
+index 9cb54b4ff..d9927b254 100644
+--- a/Documentation/admin-guide/mm/multigen_lru.rst
++++ b/Documentation/admin-guide/mm/multigen_lru.rst
+@@ -161,3 +161,22 @@ cold pages because of the overestimation, it retries on the next
+ server according to the ranking result obtained from the working set
+ estimation step. This less forceful approach limits the impacts on the
+ existing jobs.
 +
-+config LRU_GEN_PROCFS_CTRL
-+	bool "Move lru_gen files from debugfs to procfs"
-+	depends on LRU_GEN && PROC_FS
-+	help
-+	  Move lru_gen management from debugfs to procfs (/proc/lru_gen).
-+	  This production-ready feature provides critical memory reclaim
-+	  prediction and control. It is no longer experimental.
-+	  The migration ensures availability in commercial products where
-+	  debugfs may be disabled.
- # }
- 
- config ARCH_SUPPORTS_PER_VMA_LOCK
++Procfs Migration
++================
++The multi-gen LRU control interface has been moved from debugfs to procfs
++via ``CONFIG_LRU_GEN_PROCFS_CTRL``:
++
++New Path
++--------
++- Control interface: ``/proc/lru_gen``
++- Replaces debugfs path: ``/sys/kernel/debug/lru_gen``
++
++Key Advantages
++--------------
++1. Production-ready availability (works when debugfs is not allowed)
++2. Maintains identical ABI to original debugfs interface
++3. Preserves all core functionality (working set estimation, proactive reclaim)
++4. Standardized location matching memory management conventions
++
++Note: Requires both ``CONFIG_PROC_FS`` and ``CONFIG_LRU_GEN``
 -- 
 2.25.1
 
