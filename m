@@ -1,217 +1,239 @@
-Return-Path: <linux-doc+bounces-68604-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68606-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3F78C9853B
-	for <lists+linux-doc@lfdr.de>; Mon, 01 Dec 2025 17:41:54 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A19B9C98532
+	for <lists+linux-doc@lfdr.de>; Mon, 01 Dec 2025 17:41:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id AFA704E272A
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Dec 2025 16:40:06 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5B0B73A3A57
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Dec 2025 16:41:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 461F8337B93;
-	Mon,  1 Dec 2025 16:38:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 20B52335096;
+	Mon,  1 Dec 2025 16:41:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nokia-bell-labs.com header.i=@nokia-bell-labs.com header.b="YbWCrDfH"
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="AnfnCLhs";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="gK87lDIX";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="weLu5IwR";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="ZcRQ8KPQ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from AM0PR02CU008.outbound.protection.outlook.com (mail-westeuropeazon11013071.outbound.protection.outlook.com [52.101.72.71])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBB22335558;
-	Mon,  1 Dec 2025 16:38:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.72.71
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764607129; cv=fail; b=OjJ6K+IyLk4QTN25u9NVFotyACejJEhx7TclGz4R+PDB8iZTqbA+gFR4Qj5XedoaQ77fLytJAgobTMERqIeBRK9bn5fZLMlPFvZQp08TfMUgmFKyJLVhoN/WFh/t/Nh1nJ5BGl/px8T0I6141vqbw1e2UnOIN3+oy1ITGbDtt60=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764607129; c=relaxed/simple;
-	bh=K9sp/cKFhO2N1xPzkjJWGMSrD6M/VgnZ8iPjal4WcLM=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Wz7Qp9tKi4yNNGhmYz1VIRugWZF6H9ysiZvzPPqXOkLjEFHlDl0FS8cXyFFw9X4FE6Wct+goX4Ta5h8+qhYvfceR1GPvycMhkj2DdW4fF9jpsQO2iLdPMMyQCysX8J4CEIDF1fuo6sim0MedyzCwFXh68yHYn1L7w/rrGG8n2qA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nokia-bell-labs.com; spf=fail smtp.mailfrom=nokia-bell-labs.com; dkim=pass (2048-bit key) header.d=nokia-bell-labs.com header.i=@nokia-bell-labs.com header.b=YbWCrDfH; arc=fail smtp.client-ip=52.101.72.71
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nokia-bell-labs.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nokia-bell-labs.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gFsLFTvQW4lABRA14W8XmPvR+9K+D0ekie7AkZpNx5gOKv7l3ibEYs2Tk2bmlw0eas/Ec2K1V8FoNZ3MfPWKw5sQm0QOBhKxaqQDshX3rA7jbyJb1Rba6FkjpuBQhNzSPuLOZqfIStxtuNyErifk1KBdC9mC13fHOcq2hhKxQwbn5cYRCrmczgEpbB+DiisJ4ROggndgdsxsjj9hsC6H1y98SdpyRHl+B3HDY3xmPMtl7YCr7H8fXJx7ODu9P+kVwxagkL3lk2R32hZfV6Og2YGr/Wq5eXqGzRw89ZMcRVbSoCSC/m9eqCjAwvVp+8B/WvsSHRzPfjv6Kq8eFPet0g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=utpWZB31jtldMqB4ZA8NQqghWs8Hn3X9j6pkTLcicYI=;
- b=W0M5AaFSwdzDRXzEfQeAvtUfMfW0LCBkRHmjM1ondZoOswJoBQ+FYN2nBTpjGTeK5XjR1FQtsCpUytSCqOOVamDUxIbsOJpyQyZXxEyjT6/oo8ebOeWDTbw7QuKXzjqiLacxQNaiqc9j5gvI5WncTwzdYArkpliQz8Xti7igj/MGc8KApOfMp7LC1YSWU2JDnrFc5Eym5jfaz4/LwWqNsw2Flp0R2eB+8QskTT+yoIuP5qIb7Ng/P080qQapSmvkb/83DFXvcsCFPXIfJ4/pf2JFDnmBJnXwP+Qb+odi8jfpN54iNixANxkHX9Lk+Kp2nAVsX37p5Lvc1A0Rt/rD6A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 131.228.6.100) smtp.rcpttodomain=apple.com smtp.mailfrom=nokia-bell-labs.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none
- header.from=nokia-bell-labs.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia-bell-labs.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=utpWZB31jtldMqB4ZA8NQqghWs8Hn3X9j6pkTLcicYI=;
- b=YbWCrDfH9dFwuFEo2DiSEGN6k7iIoFAbIgzgDX5YoWaeFe5wBJlr5e25wNNZ91JFX/PoJOb8Eq342C40Vf4YTyNFaYWPvZTNW5emofxBktXLeZgAz4ehw0s0WgKbOKbRpQTC+cSVOgAg6ApTPqFc44G6bcogruD1AVI3vCe5YwJjRbkkPzVKyBseyS5gBu+i+SQ4jOF0JHNjkkJvxHRkEQFXYtiwaZ6eiH11eaFX6fWdui74CXMvhXQcv8fUyqqzlg/7nCVN57sjPJAoQvqXg5g/xkM2czoqf3sdaa8jMvc1lLPjUk7PKQVY+oVG1pCaexTaLZ1SGp3KUDEsbcd+vw==
-Received: from DB9PR05CA0015.eurprd05.prod.outlook.com (2603:10a6:10:1da::20)
- by VI1PR07MB6621.eurprd07.prod.outlook.com (2603:10a6:800:18b::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9366.17; Mon, 1 Dec
- 2025 16:38:40 +0000
-Received: from DB1PEPF000509FA.eurprd03.prod.outlook.com
- (2603:10a6:10:1da:cafe::c9) by DB9PR05CA0015.outlook.office365.com
- (2603:10a6:10:1da::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Mon,
- 1 Dec 2025 16:38:30 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 131.228.6.100)
- smtp.mailfrom=nokia-bell-labs.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nokia-bell-labs.com;
-Received-SPF: Pass (protection.outlook.com: domain of nokia-bell-labs.com
- designates 131.228.6.100 as permitted sender)
- receiver=protection.outlook.com; client-ip=131.228.6.100;
- helo=fr711usmtp2.zeu.alcatel-lucent.com; pr=C
-Received: from fr711usmtp2.zeu.alcatel-lucent.com (131.228.6.100) by
- DB1PEPF000509FA.mail.protection.outlook.com (10.167.242.36) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.7
- via Frontend Transport; Mon, 1 Dec 2025 16:38:40 +0000
-Received: from sarah.nbl.nsn-rdnet.net (sarah.nbl.nsn-rdnet.net [10.0.73.150])
-	by fr711usmtp2.zeu.alcatel-lucent.com (Postfix) with ESMTP id A24A668003C;
-	Mon,  1 Dec 2025 18:38:38 +0200 (EET)
-From: chia-yu.chang@nokia-bell-labs.com
-To: pabeni@redhat.com,
-	edumazet@google.com,
-	parav@nvidia.com,
-	linux-doc@vger.kernel.org,
-	corbet@lwn.net,
-	horms@kernel.org,
-	dsahern@kernel.org,
-	kuniyu@google.com,
-	bpf@vger.kernel.org,
-	netdev@vger.kernel.org,
-	dave.taht@gmail.com,
-	jhs@mojatatu.com,
-	kuba@kernel.org,
-	stephen@networkplumber.org,
-	xiyou.wangcong@gmail.com,
-	jiri@resnulli.us,
-	davem@davemloft.net,
-	andrew+netdev@lunn.ch,
-	donald.hunter@gmail.com,
-	ast@fiberby.net,
-	liuhangbin@gmail.com,
-	shuah@kernel.org,
-	linux-kselftest@vger.kernel.org,
-	ij@kernel.org,
-	ncardwell@google.com,
-	koen.de_schepper@nokia-bell-labs.com,
-	g.white@cablelabs.com,
-	ingemar.s.johansson@ericsson.com,
-	mirja.kuehlewind@ericsson.com,
-	cheshire@apple.com,
-	rs.ietf@gmx.at,
-	Jason_Livingood@comcast.com,
-	vidhi_goel@apple.com
-Cc: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
-Subject: [PATCH v7 net-next 13/13] tcp: accecn: enable AccECN
-Date: Mon,  1 Dec 2025 17:38:00 +0100
-Message-Id: <20251201163800.3965-14-chia-yu.chang@nokia-bell-labs.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20251201163800.3965-1-chia-yu.chang@nokia-bell-labs.com>
-References: <20251201163800.3965-1-chia-yu.chang@nokia-bell-labs.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC0BA33506A
+	for <linux-doc@vger.kernel.org>; Mon,  1 Dec 2025 16:41:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1764607288; cv=none; b=AKr1HEZEaaEnt8ta7pmqz8zt8XS2Obxfuy7cX6nPmQLl7PWMRHXqAJBScsQb+j0nCN3SHUZhqdKLkZiREg/fxjElR8NM2dSg02gUSDbxELuOUDZOjey2KUHZ0Zb6uKwizIZh5fagjrHmvgjvweyD44CdP+ZIxfshO5tK/M+9Zu0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1764607288; c=relaxed/simple;
+	bh=NSZBt1RdN90yDkvZmP6halBLdCXKC7DSNb4k2eGyWUM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=F3QZlZyobXUF8ik2BXgi73Ss0tVfoOmrciW1telcAIKfg166ndRDMPbGjNCdGA2BOw1q/kFPi7f3lt0sDXtRN5D4uFT8zjLfg792mDPzjBlrACQqdE/DSOeur8P4SREr5kpDDNBScTgBBkD3vwlmFAsVTqWQ15Xkbr1rxLdV3xc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=AnfnCLhs; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=gK87lDIX; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=weLu5IwR; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=ZcRQ8KPQ; arc=none smtp.client-ip=195.135.223.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id DAF4B336FF;
+	Mon,  1 Dec 2025 16:41:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1764607284; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=wDiBR4Q7ybuHyM6ZkzXOPvizNEbGxQNP9Ce0mkV1K6Q=;
+	b=AnfnCLhs6wM+/O3GKNDu4P/TD/vLQpqznkQqMP2gT9u4NKfGhgPZJBPEL7ZhStIV/dMQ6a
+	Jbgiktj9YhbRcXTKlBjKbyQYip8Us6a2HzOL7QYDibyzKBMMRCv+YL+I2dXX1UoXC5b5fW
+	7ECmRKmY9VVGH8Gv1Z9FT00n0OWRTxY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1764607284;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=wDiBR4Q7ybuHyM6ZkzXOPvizNEbGxQNP9Ce0mkV1K6Q=;
+	b=gK87lDIXCYXfris5Aie/JnlTAkeMjnAtQUSUZlJZGHl/Ze9ZH6I9qX7HUbLMGHsRIpHqgb
+	mU6ySmUXuYko1KDA==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=weLu5IwR;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=ZcRQ8KPQ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1764607282; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=wDiBR4Q7ybuHyM6ZkzXOPvizNEbGxQNP9Ce0mkV1K6Q=;
+	b=weLu5IwRgNOSHzGZ8XbnW3cqXyZt1xugaSaPVugM1GCtvXJtlStL894BCbR4LiSx3V6iEb
+	YSSmTv+FnKNo9kAIqU5vX5CDxZsfBLvGlAU4F9p11pB71uVDkGANKveZXM+QrPIBiYzX10
+	iQvCxOEdroj2NccrQbI6chLqsOK1P7o=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1764607282;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=wDiBR4Q7ybuHyM6ZkzXOPvizNEbGxQNP9Ce0mkV1K6Q=;
+	b=ZcRQ8KPQwfjic6IbsKestp+VP/i2eQFNmB409nfhxbPZaGdNgSTRqhJzUls8iOJTmfM6X2
+	Tyc5IHT6bLFQ5QAA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 61F803EA63;
+	Mon,  1 Dec 2025 16:41:22 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id xs95FjLFLWmYYwAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Mon, 01 Dec 2025 16:41:22 +0000
+Message-ID: <0ffe6198-bd3d-44f7-82bc-225e6dfd69b2@suse.de>
+Date: Mon, 1 Dec 2025 17:41:21 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/5] drm: Remove remaining support for kdb
+To: simona@ffwll.ch, airlied@gmail.com, alexander.deucher@amd.com,
+ christian.koenig@amd.com, lyude@redhat.com, dakr@kernel.org, deller@gmx.de,
+ mripard@kernel.org, maarten.lankhorst@linux.intel.com,
+ jason.wessel@windriver.com, danielt@kernel.org, dianders@chromium.org
+Cc: dri-devel@lists.freedesktop.org, amd-gfx@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20251125130634.1080966-1-tzimmermann@suse.de>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20251125130634.1080966-1-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FA:EE_|VI1PR07MB6621:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 19c6b623-d8cb-44a4-e0ad-08de30f81579
-X-LD-Processed: 5d471751-9675-428d-917b-70f44f9630b0,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
- BCL:0;ARA:13230040|376014|7416014|82310400026|36860700013|1800799024|921020;
-X-Microsoft-Antispam-Message-Info:
- =?us-ascii?Q?IsNrfhraAhoe+D4UvEVPCWk6EE+iOok55ZXNnqXGpe8lKhGEozQVyO6jQvkv?=
- =?us-ascii?Q?B2t6J3W+BbPj4f8/ZLul5wc5yAkzblB03eitk7kFnFHAmZGQJX5htAeCyyhG?=
- =?us-ascii?Q?v8oQFXDpV+bE+W3GF567GluXDqopzujZdVBKlz91dOHI1V3dmf/0Sjq8O2DY?=
- =?us-ascii?Q?UsLBdCKHTq+Pa91EBV8dhQ2fLGPHWCFA/9htZCFeeiBZ+L2HHtMk6XQL+nqB?=
- =?us-ascii?Q?T2E939Y2oVr/FWDbGOjFFOd3pV+NVOxX32BSG0TuIDs7fyhC4yuEkSQdMr4X?=
- =?us-ascii?Q?xqAmEBLwi38WwDXNKYIFQsZl9Dp4M4FDdi9cJNu4W4o1tdbgXAJGqF6gRt0f?=
- =?us-ascii?Q?w3Hb9eHFPBk53Bmj3m8G70PS9QRvetbIXh7GWCG0XqYFSWl6VvEsXTIwQ5Tg?=
- =?us-ascii?Q?bTEEDozaI58BvhqH8oEVWw9JWAUuuU0QKjXR9SzF2y1OSK59iQ+/f1Qrk6Fw?=
- =?us-ascii?Q?r8FELKf8mvqlK8qP/a9otetVlVh5wFSVBMh7pb8ttUeuqjAY+JadQnxOdULE?=
- =?us-ascii?Q?NyccgJF/aPVzD7psmiMQ1pJxCKTJ5YsALa4R6Degs+tcH7S41MY9VpnOJjzH?=
- =?us-ascii?Q?/cZV6QAiGGyTeuwWktNMneF2tHQclquh0QQPRI/f2E3Fjd+DVljWR5xYF7Xd?=
- =?us-ascii?Q?fxMxlTPtwB7wM84LwUTb0ZRTIR1qLCOafzDEb9/YITb9HievScvn5xNuX2Ap?=
- =?us-ascii?Q?LuQyBdrM0KTgBXznPKqmKXpZU26n9YHkQLi6bBIwhfkAbUJCOYk8dwK0hhG5?=
- =?us-ascii?Q?JyNqZTgplCBkPOFm5Q6Jc/UtOnIHAOt53j5dUCHhD8sZhHtfPJG/cJb1x3Jo?=
- =?us-ascii?Q?HPwq0HogawDulRORq2rpQlZfF2KY9P2vFGA+obduF/QVcyfDQgqA0DT3l7im?=
- =?us-ascii?Q?1ZmObJnnZh/iGZho/aEQsaXldjWBseuERy/PVYGkV58pdeqnafOmtPrKCERJ?=
- =?us-ascii?Q?M96YKld1bgZImbr4osELYECRWmeAV+Mjm320p4EvuG+LNDiwV/O6lRSZg/+G?=
- =?us-ascii?Q?L2G0dxKED9Xj8mZUgfJLGDk9T6fmUmTYkLq0L4Y8w0ltAoEDtpL+ASQOnZ/z?=
- =?us-ascii?Q?nt7Q/U5EXOP6PY58Tj10hT9GllSniCfric/MwCgVlpiM1Dqc6Kgi0TCAB14/?=
- =?us-ascii?Q?NyJAVRsojT+WKLVK0ZJLdISohjD9U6q1zhASDuD/B6tfrX4vU0289PmuH1Rj?=
- =?us-ascii?Q?td0VVtg7zrHGc7GEejOhtxHB4zesDuKFm6Whl94kRNIn1NIbj8kGUIbZN6Hm?=
- =?us-ascii?Q?cHYhLkY2b5ajRA9wrp6sDfaLNPyqDNsl60h1ndAoMAEhOO/0q89RppZdHb5Z?=
- =?us-ascii?Q?XqrEdDfWzsNQBX65VesxhEEzD3WaIqIy2rsiLPSpGSVCgv6tXXyTU0dcuge1?=
- =?us-ascii?Q?4md3sFCJR0r/rDBg3dNhIo8rUSOgpwcrCmN+94IfVQTaMgmvDwvPDoXm8s+c?=
- =?us-ascii?Q?6OkcSKEbKP2uHz4aUkcq/KuAxwI0uC/on7yEpSQIY3E3QnA6xj/CbspSljSY?=
- =?us-ascii?Q?YLlUnxGYvqtJ2x6zS80ms8niNwptaLhUgnJtIYe5JByw4AJT9gD7Bog7/BY1?=
- =?us-ascii?Q?LYbhsIji4PIaFISX+wn3cATDYPFxNGdw0gKLg1DN?=
-X-Forefront-Antispam-Report:
- CIP:131.228.6.100;CTRY:FI;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:fr711usmtp2.zeu.alcatel-lucent.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(82310400026)(36860700013)(1800799024)(921020);DIR:OUT;SFP:1101;
-X-OriginatorOrg: nokia-bell-labs.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2025 16:38:40.2708
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19c6b623-d8cb-44a4-e0ad-08de30f81579
-X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0;Ip=[131.228.6.100];Helo=[fr711usmtp2.zeu.alcatel-lucent.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-DB1PEPF000509FA.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR07MB6621
+X-Spamd-Result: default: False [-4.51 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,amd.com,redhat.com,kernel.org,gmx.de,linux.intel.com,windriver.com,chromium.org];
+	MID_RHS_MATCH_FROM(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	RCVD_TLS_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,suse.de:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,suse.com:url];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	TO_DN_NONE(0.00)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	DKIM_TRACE(0.00)[suse.de:+]
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spam-Level: 
+X-Rspamd-Queue-Id: DAF4B336FF
+X-Spam-Flag: NO
+X-Spam-Score: -4.51
 
-From: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
+Series has been acked by Sima via IRC. Patches 4 and 5 have been r-b'ed.
 
-Enable Accurate ECN negotiation and request for incoming and
-outgoing connection by setting sysctl_tcp_ecn:
+https://people.freedesktop.org/~cbrill/dri-log/?channel=dri-devel&highlight_names=&date=2025-12-01&show_html=true
 
-+==============+===========================================+
-|              |  Highest ECN variant (Accurate ECN, ECN,  |
-|   tcp_ecn    |  or no ECN) to be negotiated & requested  |
-|              +---------------------+---------------------+
-|              | Incoming connection | Outgoing connection |
-+==============+=====================+=====================+
-|      0       |        No ECN       |        No ECN       |
-|      1       |         ECN         |         ECN         |
-|      2       |         ECN         |        No ECN       |
-+--------------+---------------------+---------------------+
-|      3       |     Accurate ECN    |     Accurate ECN    |
-|      4       |     Accurate ECN    |         ECN         |
-|      5       |     Accurate ECN    |        No ECN       |
-+==============+=====================+=====================+
 
-Refer Documentation/networking/ip-sysctl.rst for more details.
+Am 25.11.25 um 13:52 schrieb Thomas Zimmermann:
+> Remove the rest of the kbd support from DRM. Driver support has been
+> broken for years without anyone complaining.
+>
+> Kdb cannot use regular DRM mode setting, so DRM drivers have to
+> implement an additional hook to make it work (in theory). As outlined
+> by Sima in commit 9c79e0b1d096 ("drm/fb-helper: Give up on kgdb for
+> atomic drivers") from 2017, kdb is not compatible with DRM atomic mode
+> setting. Non-atomic mode setting meanwhile has become rare.
+>
+> Only 3 DRM drivers implement the hooks for kdb support. Amdgpu and
+> nouveau use non-atomic mode setting on older devices. But both drivers
+> have switched to generic fbdev emulation, which isn't compatible with
+> kdb. Radeon still runs kdb, but it doesn't work in practice. See the
+> commits in this series for details
+>
+> Therefore remove the remaining support for kdb from the DRM drivers
+> and from DRM fbdev emulation. Also remove the hooks from fbdev, as
+> there are no fbdev drivers with kdb support.
+>
+> If we ever want to address kdb support within DRM drivers, a place to
+> start would be the scanout buffers used by DRM's panic screen. These
+> use the current display mode. They can be written and flushed without
+> mode setting involved.
+>
+> Note: kdb over serial lines is not affected by this series and continues
+> to work as before.
+>
+> Thomas Zimmermann (5):
+>    drm/amdgpu: Do not implement mode_set_base_atomic callback
+>    drm/nouveau: Do not implement mode_set_base_atomic callback
+>    drm/radeon: Do not implement mode_set_base_atomic callback
+>    drm/fbdev-helper: Remove drm_fb_helper_debug_enter/_leave()
+>    fbcon: Remove fb_debug_enter/_leave from struct fb_ops
+>
+>   Documentation/process/debugging/kgdb.rst    |  28 -----
+>   drivers/gpu/drm/amd/amdgpu/dce_v10_0.c      |  35 ++-----
+>   drivers/gpu/drm/amd/amdgpu/dce_v6_0.c       |  35 ++-----
+>   drivers/gpu/drm/amd/amdgpu/dce_v8_0.c       |  35 ++-----
+>   drivers/gpu/drm/drm_fb_helper.c             | 108 --------------------
+>   drivers/gpu/drm/nouveau/dispnv04/crtc.c     |  24 +----
+>   drivers/gpu/drm/radeon/atombios_crtc.c      |  74 ++++----------
+>   drivers/gpu/drm/radeon/radeon_legacy_crtc.c |  23 ++---
+>   drivers/gpu/drm/radeon/radeon_mode.h        |  10 +-
+>   drivers/video/fbdev/core/fbcon.c            |  24 -----
+>   drivers/video/fbdev/core/fbcon.h            |   1 -
+>   include/drm/drm_fb_helper.h                 |  21 ----
+>   include/drm/drm_modeset_helper_vtables.h    |  23 -----
+>   include/linux/fb.h                          |   4 -
+>   14 files changed, 63 insertions(+), 382 deletions(-)
+>
+>
+> base-commit: 0a21e96e0b6840d2a4e0b45a957679eeddeb4362
 
-Signed-off-by: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
-Acked-by: Paolo Abeni <pabeni@redhat.com>
----
- net/ipv4/sysctl_net_ipv4.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/net/ipv4/sysctl_net_ipv4.c b/net/ipv4/sysctl_net_ipv4.c
-index 385b5b986d23..643763bc2142 100644
---- a/net/ipv4/sysctl_net_ipv4.c
-+++ b/net/ipv4/sysctl_net_ipv4.c
-@@ -47,7 +47,7 @@ static unsigned int udp_child_hash_entries_max = UDP_HTABLE_SIZE_MAX;
- static int tcp_plb_max_rounds = 31;
- static int tcp_plb_max_cong_thresh = 256;
- static unsigned int tcp_tw_reuse_delay_max = TCP_PAWS_MSL * MSEC_PER_SEC;
--static int tcp_ecn_mode_max = 2;
-+static int tcp_ecn_mode_max = 5;
- static u32 icmp_errors_extension_mask_all =
- 	GENMASK_U8(ICMP_ERR_EXT_COUNT - 1, 0);
- 
 -- 
-2.34.1
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
+GF: Jochen Jaser, Andrew McDonald, Werner Knoblich, (HRB 36809, AG Nürnberg)
+
 
 
