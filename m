@@ -1,307 +1,121 @@
-Return-Path: <linux-doc+bounces-68696-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68708-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id B12C3C9B626
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Dec 2025 12:54:22 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id A7730C9B8EE
+	for <lists+linux-doc@lfdr.de>; Tue, 02 Dec 2025 14:12:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id D7C9A34882F
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Dec 2025 11:53:56 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5D1ED3A6E47
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Dec 2025 13:12:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3CDEC315777;
-	Tue,  2 Dec 2025 11:52:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 429D728853E;
+	Tue,  2 Dec 2025 13:12:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.b="jIyAKH2B"
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="lgP/cryM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-relay-internal-0.canonical.com (smtp-relay-internal-0.canonical.com [185.125.188.122])
+Received: from mail-m32121.qiye.163.com (mail-m32121.qiye.163.com [220.197.32.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25C503148A7
-	for <linux-doc@vger.kernel.org>; Tue,  2 Dec 2025 11:52:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.125.188.122
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4489B1F936
+	for <linux-doc@vger.kernel.org>; Tue,  2 Dec 2025 13:12:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.121
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764676355; cv=none; b=TimquG6XVbhZ/vEyoeFmscoYkvZycIWYI34PiNow50pUorm/6JNCOkWnJEQuB7CWg/fwdhEgqGDhgvK+ZlzBJVETQ4QuFa/Pu49H2SRYHTWbsJlgbW1UpliVdMSY8Lv0L5P65uMEs2EM7k2+osl2VSxzu+nMrQYbjbJeoK+az7I=
+	t=1764681152; cv=none; b=fevNWD6EZOgFYPFFc6Qlr1VsWDQTAcD7XTPhjeNOXsm3A90aNnlwlk+cTqPVRzE14tfKhP+KGfh53Lpt544ra9Up0raFy8W029Jm3ZSiqtBezs/ZZP/5pl+qVj+LiUtSj5lyzqNZfRZOFp6bf3xPL8kTfFb8gAesmuxr9JMv8oM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764676355; c=relaxed/simple;
-	bh=C77QVCaNFi1rF9WKTVN6GD+egWOqsJOFJ8DOWl6QG9I=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=G+ZDDcO023mW1XZScziMVzIa+iZRYqFSxh+CZXwe/wjbhDbASgUsF6kWAH4TdPbmZnOtMsrkFtwyfWbUX44mR1tHFhQhqeMpghp8AJBJK5g4WOYBwBPSBjkHhyWVm9Mjju2jiP82nKx0F5G7x2vu2kOxbcp9m2o2inBHnFd7DmU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=canonical.com; spf=pass smtp.mailfrom=canonical.com; dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.b=jIyAKH2B; arc=none smtp.client-ip=185.125.188.122
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=canonical.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=canonical.com
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com [209.85.218.69])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id F04C23FCCB
-	for <linux-doc@vger.kernel.org>; Tue,  2 Dec 2025 11:52:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
-	s=20251003; t=1764676344;
-	bh=Axv6vUiwWJhlCZhCOlctIB31d1FHH589LkNbghFTla0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type;
-	b=jIyAKH2BUvfF5TXy5g1IuFRWOrFO6x2TEwj3zvJhCUcnzVJOCT0Zr3LF5j74VXrzN
-	 2gu5ciXkP9IiXpdrrKQLEHTKJ2WPyjJIFVsfrR6DbFzbNvU6rHtNhcERpMPbhOne8B
-	 9dWo0Uo98h3Ucc+7FcEtmywU1GcSE3+nWDaxd9ZgUcp6c3gzYnxoP5CbgQBJFSSXcl
-	 8voYjDCJaJxaXnJNuM/xvYkpiSU7aNWofANfhCsQHAJFEbf8Ic1NAImAA5OW8zPImg
-	 NXM0wZ6SppuFeLU8c7jPHtTBiBz+5rx96vpMcSKYgsGwxDjCJizUW801H8rlsph/kA
-	 NV6raNoYiSZuysqHYb+QQaEUjr59YpkK07Fs/pT0l4PyLjXpBR2NqAZhx9gCheZg9/
-	 s2Bwre82Zh7wrquVLdwN0S6tR44OYrB5PGE3aW1RNaLLG7j03eJ73D1EB3sOMQFeiJ
-	 dg0DbM/+NVY+mp6VSBFwKjRxgvUTsK2JKf+f8O7h1SOXiAVRpMrtvGhDJp8ts5OX8c
-	 FAKiG2uv7zY7Q2aU7IxEiniayeeqytRx8/1+XSUi2/PVbgL6UqL9I240TwnByH8Ipu
-	 CR2ecbd0jZXjjrXFEGRYp94OAJWVstpKxXV79FRPZzVFCB4w+LegcIyWL4GZCb7Z/Y
-	 tiZ1j3VQi4CeiQoEJdoFm5to=
-Received: by mail-ej1-f69.google.com with SMTP id a640c23a62f3a-b7387d9bbb2so382580766b.0
-        for <linux-doc@vger.kernel.org>; Tue, 02 Dec 2025 03:52:24 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764676340; x=1765281140;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Axv6vUiwWJhlCZhCOlctIB31d1FHH589LkNbghFTla0=;
-        b=hMMPfYzuJEUo9rf05SHKZFkapT0Rg28QvK+64ArvUv3RnA5hAJtrQ7SDZxL3bPpNzG
-         Sv4sOSP3HbZbNfiuJvu1ngnMEl4ybFi2PyG1LvSeFDOJWWSktVJ52ET8zsFx3dz8KbUU
-         kmCnHh0Qmexnqu4z3PqOdfvTCyAEXn6kTaGB27S/EisBCESuSTahkCLlK7heTsPdgz2R
-         WcAhtZkXzQZsF0xRHPWleqju6D0zQZV3sdgppxY6IxbdHncoUbQk0XcKZFAt4weo9jH9
-         BGeXLNb4UqIjig28eY+j4oliCPyWGvW/8VY91nngEwyWf8ymMfLLLMGt8DXrUyyQGNr0
-         3peQ==
-X-Gm-Message-State: AOJu0Yyp8j04vKheEZRfKElsMArztTL8keC7OyKNpHmwy0gxOToWYcq0
-	gClYP7/fQRMf2QKeK+OCmOm4NipjbShIM0jvWH+n1S7VHC46iyY1bZxqa9rzgAtR1+tUrURKsr1
-	X0y+dRvNA+U6xIxPeFhu13xzgvK94fWDFdtkPgXas8H7thStf7Qo9wQdiof1y+GmDUIzizZ04Lh
-	hPfg==
-X-Gm-Gg: ASbGncvCbyKTbu48VHjZQZ0o+IjaHFYryRfESb7yNWf/Wy4RNcAW8QAFyDkuEPD1fYW
-	02wSXts32w2uS/DwZGjiLs8h5LJ3ntA5FjtcoI9vbF+TaOarHXo3K8hQAaekr5hGS5siY2l4+3v
-	2w7+awnD0xkBEKYZ9eLDFOL4esBqqDQuww7CmKbtyad1EK11iDKcd/1zyBPdav47t2S1gRh0iSY
-	9tleSTyfXbNYNzKdsLRVHcAq7cGNhfYgGPyUFr1lWnwGGGpyqD5kB6zn9OqI1ufsb6IpqDMX386
-	4wySeNrIL24L/D+iSrWOJ3ER64ikCsrpiJqzYEJ4BTtXQ6CHFb4vCTzBddklhu1pZzoNy+Jhl+K
-	wpW2J0LH51WyN6ML810WAToTZ2RRA/Y4Mn8QYPBM3oB186PIDIcCmC18LVG+L6l+0z+GTNS7brF
-	HvfrIjB/zRysFG1dwdNtaIIL8=
-X-Received: by 2002:a17:906:c14a:b0:b6d:3a00:983a with SMTP id a640c23a62f3a-b76c551504dmr3315911666b.38.1764676340074;
-        Tue, 02 Dec 2025 03:52:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEPpx1/rOUbEn0W22PLKyuLu+FnwfRlf+qjfej6kw7xz7j4ARHbtg4setflSyZMmAZJqJtjow==
-X-Received: by 2002:a17:906:c14a:b0:b6d:3a00:983a with SMTP id a640c23a62f3a-b76c551504dmr3315907366b.38.1764676339489;
-        Tue, 02 Dec 2025 03:52:19 -0800 (PST)
-Received: from amikhalitsyn.lan (p200300cf5702200011ee99ed0f378a51.dip0.t-ipconnect.de. [2003:cf:5702:2000:11ee:99ed:f37:8a51])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-647510519efsm15206765a12.29.2025.12.02.03.52.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Dec 2025 03:52:19 -0800 (PST)
-From: Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>
-To: kees@kernel.org
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	bpf@vger.kernel.org,
-	Andy Lutomirski <luto@amacapital.net>,
-	Will Drewry <wad@chromium.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <shuah@kernel.org>,
-	Aleksa Sarai <cyphar@cyphar.com>,
-	Tycho Andersen <tycho@tycho.pizza>,
-	Andrei Vagin <avagin@gmail.com>,
-	Christian Brauner <brauner@kernel.org>,
-	=?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@stgraber.org>,
-	Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>,
-	Alexander Mikhalitsyn <alexander@mihalicyn.com>
-Subject: [PATCH v2 5/6] seccomp: relax has_duplicate_listeners check
-Date: Tue,  2 Dec 2025 12:51:57 +0100
-Message-ID: <20251202115200.110646-6-aleksandr.mikhalitsyn@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251202115200.110646-1-aleksandr.mikhalitsyn@canonical.com>
-References: <20251202115200.110646-1-aleksandr.mikhalitsyn@canonical.com>
+	s=arc-20240116; t=1764681152; c=relaxed/simple;
+	bh=Qc4t50tYaQ/D5pbg7PKgNiL/CUavzBk0gsK3ZtnGRaU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=lUfGOTzjgbk2hlDr+tRCe0uc2+CoC60TBaH5rN7foQe57SPbWH74kTVy3MoCURxN2AAmTRBBl97EGO6M4f7KJQIzT4bAwFypM/pQi+Mgee1Ba8ZKO4RSUunwjn/uAP6c1rA5PH2xEZmxpy9d25nuObhxtLiWohzDyFiC1MeaYSQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=lgP/cryM; arc=none smtp.client-ip=220.197.32.121
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
+Received: from server001 (unknown [222.130.22.244])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2bb0f2e5f;
+	Tue, 2 Dec 2025 19:56:45 +0800 (GMT+08:00)
+From: Kefan Bai <baikefan@leap-io-kernel.com>
+To: alexs@kernel.org,
+	si.yanteng@linux.dev
+Cc: dzm91@hust.edu.cn,
+	corbet@lwn.net,
+	linux-doc@vger.kernel.org,
+	doubled@leap-io-kernel.com
+Subject: [PATCH v4 0/8] Add Chinese translation for USB subsystem
+Date: Tue,  2 Dec 2025 19:56:33 +0800
+Message-ID: <cover.1764674650.git.baikefan@leap-io-kernel.com>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9adeec14bb09d5kunm0f4dae893d3eb8
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCH01IVkwdGhkYSBofTR0eQlYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlJSUlVSkhLVUlJVUlPT1lXWRYaDxIVHRRZQVlPS0hVSktISk5MTlVKS0
+	tVSkJLS1kG
+DKIM-Signature: a=rsa-sha256;
+	b=lgP/cryMoZe1efgzZhmfvis2QBz5UJep695hUadiEGGMYwEw00BsB9+mcwhbO8VsWUSDoaPvHhqqm6h1h32qv1y9VPHkUuJzrHJlXuSJt1UD2K+341mnVFImMxSF/hnlxka7f6nBzl2xfj72H9wYc7mBzsU/bXrs9RVusw63xu1INwiggu4cxZxoPhzQcrDGt4MtE5aCn8tvCrAJmtxyvh21REv1yp5n3lT7a76o9UhH1xNzg7YDcG/1ugDFX9VwiiZRgiIHKpsbeiANCfMU6vEIDUR2iWRAjjRT6v27+2RenPGuRRBX25ob/uR0dxGZN02XlyZn7w5Q9cB0BrPQtg==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
+	bh=mdAZ3kQpOfjD7lAgvfxWvHE1iM3D6+OX/ZthgEu3jRQ=;
+	h=date:mime-version:subject:message-id:from;
 
-Now everything is ready to get rid of "only one listener per tree"
-limitation.
+This patch set adds Chinese translations for the USB documentation.
 
-Let's introduce a new uAPI flag
-SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS, so userspace may explicitly
-allow nested listeners when installing a listener.
+Changes in v4:
+ - shorten those overlong title underline/overline symbols
+ - Remove CREDITS section from index.rst
 
-Note, that to install n-th listener, this flag must be set on all
-the listeners up the tree.
+Changes in v3:
+ - Updated the signoff to my full legal name,
+   as requested by Jonathan Corbet.
+ - Reviewed and fixed the RST syntax to resolve the patch issues
+   noted by Alex Shi.
+ - Kept the number of translated files to eight
+   to make submission and review smoother.
+ - Link to v3: https://lore.kernel.org/all/cover.1763984424.git.baikefan@leap-io-kernel.com/
 
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: bpf@vger.kernel.org
-Cc: Kees Cook <kees@kernel.org>
-Cc: Andy Lutomirski <luto@amacapital.net>
-Cc: Will Drewry <wad@chromium.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Shuah Khan <shuah@kernel.org>
-Cc: Aleksa Sarai <cyphar@cyphar.com>
-Cc: Tycho Andersen <tycho@tycho.pizza>
-Cc: Andrei Vagin <avagin@gmail.com>
-Cc: Christian Brauner <brauner@kernel.org>
-Cc: Stéphane Graber <stgraber@stgraber.org>
-Signed-off-by: Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>
----
- .../userspace-api/seccomp_filter.rst          |  6 +++++
- include/linux/seccomp.h                       |  3 ++-
- include/uapi/linux/seccomp.h                  | 13 ++++++-----
- kernel/seccomp.c                              | 22 +++++++++++++++----
- tools/include/uapi/linux/seccomp.h            | 13 ++++++-----
- 5 files changed, 40 insertions(+), 17 deletions(-)
+Changes in v2:
+ - Update [PATCH 01/25] docs/zh_CN: Add index.rst translation
+   to include corresponding updates in
+   Documentation/translations/zh_CN/subsystem-apis.rst.
+ - Link to v2: https://lore.kernel.org/all/cover.1763897036.git.baikefan@leap-io-kernel.com/
 
-diff --git a/Documentation/userspace-api/seccomp_filter.rst b/Documentation/userspace-api/seccomp_filter.rst
-index cff0fa7f3175..b9633ab1ed47 100644
---- a/Documentation/userspace-api/seccomp_filter.rst
-+++ b/Documentation/userspace-api/seccomp_filter.rst
-@@ -210,6 +210,12 @@ notifications from both tasks will appear on the same filter fd. Reads and
- writes to/from a filter fd are also synchronized, so a filter fd can safely
- have many readers.
- 
-+By default, only one listener within seccomp filters tree is allowed. On attempt
-+to add a new listener when one already exists in the filter tree, the
-+``seccomp()`` call will fail with ``-EBUSY``. To allow multiple listeners, the
-+``SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS`` flag can be passed in addition to
-+the ``SECCOMP_FILTER_FLAG_NEW_LISTENER`` flag.
-+
- The interface for a seccomp notification fd consists of two structures:
- 
- .. code-block:: c
-diff --git a/include/linux/seccomp.h b/include/linux/seccomp.h
-index 9b959972bf4a..9b060946019d 100644
---- a/include/linux/seccomp.h
-+++ b/include/linux/seccomp.h
-@@ -10,7 +10,8 @@
- 					 SECCOMP_FILTER_FLAG_SPEC_ALLOW | \
- 					 SECCOMP_FILTER_FLAG_NEW_LISTENER | \
- 					 SECCOMP_FILTER_FLAG_TSYNC_ESRCH | \
--					 SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV)
-+					 SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV | \
-+					 SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS)
- 
- /* sizeof() the first published struct seccomp_notif_addfd */
- #define SECCOMP_NOTIFY_ADDFD_SIZE_VER0 24
-diff --git a/include/uapi/linux/seccomp.h b/include/uapi/linux/seccomp.h
-index dbfc9b37fcae..de78d8e7a70b 100644
---- a/include/uapi/linux/seccomp.h
-+++ b/include/uapi/linux/seccomp.h
-@@ -18,13 +18,14 @@
- #define SECCOMP_GET_NOTIF_SIZES		3
- 
- /* Valid flags for SECCOMP_SET_MODE_FILTER */
--#define SECCOMP_FILTER_FLAG_TSYNC		(1UL << 0)
--#define SECCOMP_FILTER_FLAG_LOG			(1UL << 1)
--#define SECCOMP_FILTER_FLAG_SPEC_ALLOW		(1UL << 2)
--#define SECCOMP_FILTER_FLAG_NEW_LISTENER	(1UL << 3)
--#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH		(1UL << 4)
-+#define SECCOMP_FILTER_FLAG_TSYNC			(1UL << 0)
-+#define SECCOMP_FILTER_FLAG_LOG				(1UL << 1)
-+#define SECCOMP_FILTER_FLAG_SPEC_ALLOW			(1UL << 2)
-+#define SECCOMP_FILTER_FLAG_NEW_LISTENER		(1UL << 3)
-+#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH			(1UL << 4)
- /* Received notifications wait in killable state (only respond to fatal signals) */
--#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV	(1UL << 5)
-+#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV		(1UL << 5)
-+#define SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS	(1UL << 6)
- 
- /*
-  * All BPF programs must return a 32-bit value.
-diff --git a/kernel/seccomp.c b/kernel/seccomp.c
-index 262390451ff1..a59276afc5b4 100644
---- a/kernel/seccomp.c
-+++ b/kernel/seccomp.c
-@@ -205,6 +205,7 @@ static inline void seccomp_cache_prepare(struct seccomp_filter *sfilter)
-  * @log: true if all actions except for SECCOMP_RET_ALLOW should be logged
-  * @wait_killable_recv: Put notifying process in killable state once the
-  *			notification is received by the userspace listener.
-+ * @allow_nested_listeners: Allow nested seccomp listeners.
-  * @prev: points to a previously installed, or inherited, filter
-  * @prog: the BPF program to evaluate
-  * @notif: the struct that holds all notification related information
-@@ -226,6 +227,7 @@ struct seccomp_filter {
- 	refcount_t users;
- 	bool log;
- 	bool wait_killable_recv;
-+	bool allow_nested_listeners;
- 	struct action_cache cache;
- 	struct seccomp_filter *prev;
- 	struct bpf_prog *prog;
-@@ -984,6 +986,10 @@ static long seccomp_attach_filter(unsigned int flags,
- 	if (flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV)
- 		filter->wait_killable_recv = true;
- 
-+	/* Set nested listeners allow flag, if present. */
-+	if (flags & SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS)
-+		filter->allow_nested_listeners = true;
-+
- 	/*
- 	 * If there is an existing filter, make it the prev and don't drop its
- 	 * task reference.
-@@ -1972,7 +1978,8 @@ static struct file *init_listener(struct seccomp_filter *filter)
- }
- 
- /*
-- * Does @new_child have a listener while an ancestor also has a listener?
-+ * Does @new_child have a listener while an ancestor also has a listener
-+ * and hasn't allowed nesting?
-  * If so, we'll want to reject this filter.
-  * This only has to be tested for the current process, even in the TSYNC case,
-  * because TSYNC installs @child with the same parent on all threads.
-@@ -1990,7 +1997,12 @@ static bool has_duplicate_listener(struct seccomp_filter *new_child)
- 		return false;
- 	for (cur = current->seccomp.filter; cur; cur = cur->prev) {
- 		if (cur->notif)
--			return true;
-+			/*
-+			 * We don't need to go up further, because if there is a
-+			 * listener with nesting allowed, then all the listeners
-+			 * up the tree have allowed nesting as well.
-+			 */
-+			return !cur->allow_nested_listeners;
- 	}
- 
- 	return false;
-@@ -2035,10 +2047,12 @@ static long seccomp_set_mode_filter(unsigned int flags,
- 		return -EINVAL;
- 
- 	/*
--	 * The SECCOMP_FILTER_FLAG_WAIT_KILLABLE_SENT flag doesn't make sense
-+	 * The SECCOMP_FILTER_FLAG_WAIT_KILLABLE_SENT and
-+	 * SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS flags don't make sense
- 	 * without the SECCOMP_FILTER_FLAG_NEW_LISTENER flag.
- 	 */
--	if ((flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV) &&
-+	if (((flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV) ||
-+	     (flags & SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS)) &&
- 	    ((flags & SECCOMP_FILTER_FLAG_NEW_LISTENER) == 0))
- 		return -EINVAL;
- 
-diff --git a/tools/include/uapi/linux/seccomp.h b/tools/include/uapi/linux/seccomp.h
-index dbfc9b37fcae..de78d8e7a70b 100644
---- a/tools/include/uapi/linux/seccomp.h
-+++ b/tools/include/uapi/linux/seccomp.h
-@@ -18,13 +18,14 @@
- #define SECCOMP_GET_NOTIF_SIZES		3
- 
- /* Valid flags for SECCOMP_SET_MODE_FILTER */
--#define SECCOMP_FILTER_FLAG_TSYNC		(1UL << 0)
--#define SECCOMP_FILTER_FLAG_LOG			(1UL << 1)
--#define SECCOMP_FILTER_FLAG_SPEC_ALLOW		(1UL << 2)
--#define SECCOMP_FILTER_FLAG_NEW_LISTENER	(1UL << 3)
--#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH		(1UL << 4)
-+#define SECCOMP_FILTER_FLAG_TSYNC			(1UL << 0)
-+#define SECCOMP_FILTER_FLAG_LOG				(1UL << 1)
-+#define SECCOMP_FILTER_FLAG_SPEC_ALLOW			(1UL << 2)
-+#define SECCOMP_FILTER_FLAG_NEW_LISTENER		(1UL << 3)
-+#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH			(1UL << 4)
- /* Received notifications wait in killable state (only respond to fatal signals) */
--#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV	(1UL << 5)
-+#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV		(1UL << 5)
-+#define SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS	(1UL << 6)
- 
- /*
-  * All BPF programs must return a 32-bit value.
--- 
-2.43.0
+v1:
+ - Link: https://lore.kernel.org/all/20251123074540.34161-1-baikefan@leap-io-kernel.com/
+
+Kefan Bai (8):
+  docs/zh_CN: Add index.rst translation
+  docs/zh_CN: Add acm.rst translation
+  docs/zh_CN: Add authorization.rst translation
+  docs/zh_CN: Add chipidea.rst translation
+  docs/zh_CN: Add dwc3.rst translation
+  docs/zh_CN: Add ehci.rst translation
+  docs/zh_CN: Add usbmon.rst translation
+  docs/zh_CN: Add CREDITS translation
+
+ .../translations/zh_CN/subsystem-apis.rst     |   2 +-
+ Documentation/translations/zh_CN/usb/CREDITS  | 153 +++++++
+ Documentation/translations/zh_CN/usb/acm.rst  | 137 +++++++
+ .../translations/zh_CN/usb/authorization.rst  | 125 ++++++
+ .../translations/zh_CN/usb/chipidea.rst       | 142 +++++++
+ Documentation/translations/zh_CN/usb/dwc3.rst |  60 +++
+ Documentation/translations/zh_CN/usb/ehci.rst | 216 ++++++++++
+ .../translations/zh_CN/usb/index.rst          |  54 +++
+ .../translations/zh_CN/usb/usbmon.rst         | 380 ++++++++++++++++++
+ 9 files changed, 1268 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/usb/CREDITS
+ create mode 100644 Documentation/translations/zh_CN/usb/acm.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/authorization.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/chipidea.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/dwc3.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/ehci.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/index.rst
+ create mode 100644 Documentation/translations/zh_CN/usb/usbmon.rst
+
+--
+2.52.0
 
 
