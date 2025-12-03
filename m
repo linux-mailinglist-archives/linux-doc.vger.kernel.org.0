@@ -1,71 +1,73 @@
-Return-Path: <linux-doc+bounces-68814-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68812-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 222CACA1F2D
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 00:30:57 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 49A9ECA1F24
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 00:30:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id BC30E300ACFA
+	by sto.lore.kernel.org (Postfix) with ESMTP id AE71630019D5
 	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 23:30:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 964A12F5315;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8CF122F3617;
 	Wed,  3 Dec 2025 23:30:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R9nAj91d"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TTSGKzFD"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6263A2EA159;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 624DF2E1EE0;
 	Wed,  3 Dec 2025 23:30:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764804637; cv=none; b=rSQmpm5o5DxKAqr88Sb0+Odqdq1xFXpXF5SJ+rXjErVIoPE0AL2e4wIlWL7p00l27TAPu8ai2QLkN/7Qf5waD4rPVYBlWa+UaPDbkDD3Zd1TzXU4SiQ0bKCx40/24WBdYvxvJVypiUGlBjZy9rK8+cvDdkF/s0IqKb1GpiANftY=
+	t=1764804637; cv=none; b=gsOnaSWDiMlPS6iSbxMW0kjATWffNvrnMeLf9+KbBYT4s9BhoyAUlw523cVC91b9GVCAIO97GbyqbHICofHS2d6RfcSAeTpyVLiwckGC32pHBbSzIbwUIGcbLJFQUd7rP44SmV6/+1v1M0Omw3nGg7dHj3QdXdk9Pdq4cAxYEIU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1764804637; c=relaxed/simple;
-	bh=b70/KGt4+G3yUdizOvICLD5U1fsug4s3g9xHogw1SUE=;
+	bh=+af9Qrl81jzQeC8vw0DiKskxnHYHklRLaViyotNOrs8=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=iHfcLvw+0qO0zB4pxrjAX7EadeStEQpwOkQjtlqcKi+d+1iejYitSLqOX385Ke7SCtO0P4U/L4jzqG16GdA+ueMgAuhAqwmCSGi2LCM1VrN3JK6TNrsT8cVtP2KtDSMZhtcelsrQzhZdhsuNthERP61oBCyRjYTSXgStfq+doN0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R9nAj91d; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0DF8C4CEF5;
-	Wed,  3 Dec 2025 23:30:36 +0000 (UTC)
+	 MIME-Version; b=tBAzT8EOWth7TeNKrdEzWttpFXpMLXmRh7K+gXUzqXpHuNpOXwPqzfQHkUC3gLyGA+zSVVFzRuqDu8kDXVmZSWjbwxSGMBnSe0Rw7MhZ4HkjcwTr4yUEmP94NJ1C5bH1upOJXKYgF8RCoMfpO+29SCfTADdbz//CXdjSEIp+MVo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TTSGKzFD; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CB03C4CEFB;
+	Wed,  3 Dec 2025 23:30:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1764804637;
-	bh=b70/KGt4+G3yUdizOvICLD5U1fsug4s3g9xHogw1SUE=;
+	bh=+af9Qrl81jzQeC8vw0DiKskxnHYHklRLaViyotNOrs8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=R9nAj91dfGyTnOUBJPoJPhGYAxKJ7ud8/GAvnlEj5Knst1Ffx8Vp/swNMKMPimAO0
-	 tXzYYuXUhMqkCZAf1yheWhyqYmdW76P8q/UF1g/ZWOsSKr+Fo5UhjRv6GzxvBj4YL/
-	 DDISbhgsZWTUnQ7MBsxYC4gGatObZQy3JuDkqbh5NdOLhf/XBh5mBm2BUYET34g5Rr
-	 BiFt53ElbYC4DNWYdAz5tkzZc6AykXlQyLWEo5/sB8XA2XmAruOFn72oF0VwkxIx/X
-	 LwRmSKJcalRuK4HTTHLGIBHKNq+IWQuV7zFlrwG+gWnSLf+5PCpDop6HfDnbw9g6ZA
-	 S8GMyd7419nVg==
+	b=TTSGKzFDZcQCzCkHsA0QD/1UM2l83yGCYfNGL2ubDFhu5/qeOqXuKKuQqZE7chn1+
+	 wQUHvKKZWhk93Crwejf1aRATHApj/RIA9T9v2yzKOIfpvzYXlCiX3vuLOg/sG31hSz
+	 JJnA1bl6492zszZWShNQLqIaQkToFRRiUTlckUtfHB6cy1MqEx8EV1bexU9WfrMzer
+	 f/j5Ey+0A5xveVQFv+1s1JAg4qLKxoY3aUF2o4hgNPxf/Z8P7HaTzq4N80gCluMTsU
+	 5iqc0SENnfMz0CvtMWuNavf+s6+0x7XcoVJKjYZM88aWE2M3c4wF5DMMeTylnovfG7
+	 06TNKJfZlbo1w==
 From: Kees Cook <kees@kernel.org>
 To: Vlastimil Babka <vbabka@suse.cz>
 Cc: Kees Cook <kees@kernel.org>,
+	Andy Whitcroft <apw@canonical.com>,
+	Joe Perches <joe@perches.com>,
+	Dwaipayan Ray <dwaipayanray1@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	John Hubbard <jhubbard@nvidia.com>,
 	Christoph Lameter <cl@linux.com>,
+	Marco Elver <elver@google.com>,
+	Vegard Nossum <vegard.nossum@oracle.com>,
 	Pekka Enberg <penberg@kernel.org>,
 	David Rientjes <rientjes@google.com>,
 	Joonsoo Kim <iamjoonsoo.kim@lge.com>,
 	Andrew Morton <akpm@linux-foundation.org>,
 	Roman Gushchin <roman.gushchin@linux.dev>,
-	Hyeonggon Yoo <42.hyeyoo@gmail.com>,
-	"Gustavo A . R . Silva" <gustavoars@kernel.org>,
+	Harry Yoo <harry.yoo@oracle.com>,
 	Bill Wendling <morbo@google.com>,
 	Justin Stitt <justinstitt@google.com>,
 	Jann Horn <jannh@google.com>,
-	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
-	Marco Elver <elver@google.com>,
-	Linus Torvalds <torvalds@linux-foundation.org>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-mm@kvack.org,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Matthew Wilcox <willy@infradead.org>,
-	John Hubbard <jhubbard@nvidia.com>,
-	Joe Perches <joe@perches.com>,
-	Vegard Nossum <vegard.nossum@oracle.com>,
-	Harry Yoo <harry.yoo@oracle.com>,
 	Nathan Chancellor <nathan@kernel.org>,
 	Peter Zijlstra <peterz@infradead.org>,
 	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
@@ -80,9 +82,9 @@ Cc: Kees Cook <kees@kernel.org>,
 	linux-hardening@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	llvm@lists.linux.dev
-Subject: [PATCH v6 1/5] slab: Introduce kmalloc_obj() and family
-Date: Wed,  3 Dec 2025 15:30:31 -0800
-Message-Id: <20251203233036.3212363-1-kees@kernel.org>
+Subject: [PATCH v6 2/5] checkpatch: Suggest kmalloc_obj family for sizeof allocations
+Date: Wed,  3 Dec 2025 15:30:32 -0800
+Message-Id: <20251203233036.3212363-2-kees@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251203233029.it.641-kees@kernel.org>
 References: <20251203233029.it.641-kees@kernel.org>
@@ -92,179 +94,87 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6780; i=kees@kernel.org; h=from:subject; bh=b70/KGt4+G3yUdizOvICLD5U1fsug4s3g9xHogw1SUE=; b=owGbwMvMwCVmps19z/KJym7G02pJDJkGJyRdT0dZKVzbqX/13sW8G0Y9t5792Lj74ccHToeWy B41mzt9b0cpC4MYF4OsmCJLkJ17nIvH2/Zw97mKMHNYmUCGMHBxCsBEMjUYGX61330w888Snyjf LI2QN2cnCX7Wilml9/iFq3CKymy1+2uBKjQWzX5stLx/dUvRkUuCvyed2H75z43s/c4ftt65Z36 FjQ0A
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3354; i=kees@kernel.org; h=from:subject; bh=+af9Qrl81jzQeC8vw0DiKskxnHYHklRLaViyotNOrs8=; b=owGbwMvMwCVmps19z/KJym7G02pJDJkGJyTv9C7XFGXkFdC7we0hu+rcOSf++jRpTnn3BRHPt 5c9zp/eUcrCIMbFICumyBJk5x7n4vG2Pdx9riLMHFYmkCEMXJwCMBGxyQx/xV2+miz81fON7f6+ 2KR5uzQO/j8lw/ym6/hE8ZyDycs+bWNkOPDaslVXY7uKeBQvU9LTrE1t+e7ZKwP3vRKdUnPn5tI /fAA=
 X-Developer-Key: i=kees@kernel.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
-Introduce type-aware kmalloc-family helpers to replace the common
-idioms for single object and arrays of objects allocation:
+To support shifting away from sized allocation towards typed
+allocations, suggest the kmalloc_obj family of macros when a sizeof() is
+present in the argument lists.
 
-	ptr = kmalloc(sizeof(*ptr), gfp);
-	ptr = kmalloc(sizeof(struct some_obj_name), gfp);
-	ptr = kzalloc(sizeof(*ptr), gfp);
-	ptr = kmalloc_array(count, sizeof(*ptr), gfp);
-	ptr = kcalloc(count, sizeof(*ptr), gfp);
-
-These become, respectively:
-
-	ptr = kmalloc_obj(*ptr, gfp);
-	ptr = kmalloc_obj(*ptr, gfp);
-	ptr = kzalloc_obj(*ptr, gfp);
-	ptr = kmalloc_objs(*ptr, count, gfp);
-	ptr = kzalloc_objs(*ptr, count, gfp);
-
-Beyond the other benefits outlined below, the primary ergonomic benefit
-is the elimination of needing "sizeof" nor the type name, and the
-enforcement of assignment types (they do not return "void *", but rather
-a pointer to the type of the first argument). The type name _can_ be
-used, though, in the case where an assignment is indirect (e.g. via
-"return"). This additionally allows[1] variables to be declared via
-__auto_type:
-
-	__auto_type ptr = kmalloc_obj(struct foo, gfp);
-
-Internal introspection of the allocated type now becomes possible,
-allowing for future alignment-aware choices to be made by the allocator
-and future hardening work that can be type sensitive. For example,
-adding __alignof(*ptr) as an argument to the internal allocators so that
-appropriate/efficient alignment choices can be made, or being able to
-correctly choose per-allocation offset randomization within a bucket
-that does not break alignment requirements.
-
-Link: https://lore.kernel.org/all/CAHk-=wiCOTW5UftUrAnvJkr6769D29tF7Of79gUjdQHS_TkF5A@mail.gmail.com/ [1]
 Signed-off-by: Kees Cook <kees@kernel.org>
 ---
-Cc: Vlastimil Babka <vbabka@suse.cz>
-Cc: Christoph Lameter <cl@linux.com>
-Cc: Pekka Enberg <penberg@kernel.org>
-Cc: David Rientjes <rientjes@google.com>
-Cc: Joonsoo Kim <iamjoonsoo.kim@lge.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Roman Gushchin <roman.gushchin@linux.dev>
-Cc: Hyeonggon Yoo <42.hyeyoo@gmail.com>
-Cc: Gustavo A. R. Silva <gustavoars@kernel.org>
-Cc: Bill Wendling <morbo@google.com>
-Cc: Justin Stitt <justinstitt@google.com>
-Cc: Jann Horn <jannh@google.com>
-Cc: Przemek Kitszel <przemyslaw.kitszel@intel.com>
-Cc: Marco Elver <elver@google.com>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Sasha Levin <sashal@kernel.org>
-Cc: linux-mm@kvack.org
+Cc: Andy Whitcroft <apw@canonical.com>
+Cc: Joe Perches <joe@perches.com>
+Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>
+Cc: Lukas Bulwahn <lukas.bulwahn@gmail.com>
 ---
- Documentation/process/deprecated.rst | 24 ++++++++++++
- include/linux/slab.h                 | 58 ++++++++++++++++++++++++++++
- 2 files changed, 82 insertions(+)
+ scripts/checkpatch.pl | 39 +++++++++++++++++++++++++++++++++------
+ 1 file changed, 33 insertions(+), 6 deletions(-)
 
-diff --git a/Documentation/process/deprecated.rst b/Documentation/process/deprecated.rst
-index 1f7f3e6c9cda..91c628fa2d59 100644
---- a/Documentation/process/deprecated.rst
-+++ b/Documentation/process/deprecated.rst
-@@ -372,3 +372,27 @@ The helper must be used::
- 			DECLARE_FLEX_ARRAY(struct type2, two);
- 		};
- 	};
-+
-+Open-coded kmalloc assignments for struct objects
-+-------------------------------------------------
-+Performing open-coded kmalloc()-family allocation assignments prevents
-+the kernel (and compiler) from being able to examine the type of the
-+variable being assigned, which limits any related introspection that
-+may help with alignment, wrap-around, or additional hardening. The
-+kmalloc_obj()-family of macros provide this introspection, which can be
-+used for the common code patterns for single, array, and flexible object
-+allocations. For example, these open coded assignments::
-+
-+	ptr = kmalloc(sizeof(*ptr), gfp);
-+	ptr = kzalloc(sizeof(*ptr), gfp);
-+	ptr = kmalloc_array(count, sizeof(*ptr), gfp);
-+	ptr = kcalloc(count, sizeof(*ptr), gfp);
-+	ptr = kmalloc(sizeof(struct foo, gfp);
-+
-+become, respectively::
-+
-+	ptr = kmalloc_obj(*ptr, gfp);
-+	ptr = kzalloc_obj(*ptr, gfp);
-+	ptr = kmalloc_objs(*ptr, count, gfp);
-+	ptr = kzalloc_objs(*ptr, count, gfp);
-+	__auto_type ptr = kmalloc_obj(struct foo, gfp);
-diff --git a/include/linux/slab.h b/include/linux/slab.h
-index cf443f064a66..726457daedbd 100644
---- a/include/linux/slab.h
-+++ b/include/linux/slab.h
-@@ -12,6 +12,7 @@
- #ifndef _LINUX_SLAB_H
- #define	_LINUX_SLAB_H
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index d58ca9655ab7..a8cdfb502ccc 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -7258,17 +7258,42 @@ sub process {
+ 			    "Prefer $3(sizeof(*$1)...) over $3($4...)\n" . $herecurr);
+ 		}
  
-+#include <linux/bug.h>
- #include <linux/cache.h>
- #include <linux/gfp.h>
- #include <linux/overflow.h>
-@@ -965,6 +966,63 @@ static __always_inline __alloc_size(1) void *kmalloc_noprof(size_t size, gfp_t f
- void *kmalloc_nolock_noprof(size_t size, gfp_t gfp_flags, int node);
- #define kmalloc_nolock(...)			alloc_hooks(kmalloc_nolock_noprof(__VA_ARGS__))
- 
-+/**
-+ * __alloc_objs - Allocate objects of a given type using
-+ * @KMALLOC: which size-based kmalloc wrapper to allocate with.
-+ * @GFP: GFP flags for the allocation.
-+ * @TYPE: type to allocate space for.
-+ * @COUNT: how many @TYPE objects to allocate.
-+ *
-+ * Returns: Newly allocated pointer to (first) @TYPE of @COUNT-many
-+ * allocated @TYPE objects, or NULL on failure.
-+ */
-+#define __alloc_objs(KMALLOC, GFP, TYPE, COUNT)				\
-+({									\
-+	const size_t __obj_size = size_mul(sizeof(TYPE), COUNT);	\
-+	(TYPE *)KMALLOC(__obj_size, GFP);				\
-+})
+-# check for (kv|k)[mz]alloc with multiplies that could be kmalloc_array/kvmalloc_array/kvcalloc/kcalloc
++# check for (kv|k)[mz]alloc that could be kmalloc_obj/kvmalloc_obj/kzalloc_obj/kvzalloc_obj
++		if ($perl_version_ok &&
++		    defined $stat &&
++		    $stat =~ /^\+\s*($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*,/) {
++			my $oldfunc = $3;
++			my $a1 = $4;
++			my $newfunc = "kmalloc_obj";
++			$newfunc = "kvmalloc_obj" if ($oldfunc eq "kvmalloc");
++			$newfunc = "kvzalloc_obj" if ($oldfunc eq "kvzalloc");
++			$newfunc = "kzalloc_obj" if ($oldfunc eq "kzalloc");
 +
-+/**
-+ * kmalloc_obj - Allocate a single instance of the given type
-+ * @VAR_OR_TYPE: Variable or type to allocate.
-+ * @GFP: GFP flags for the allocation.
-+ *
-+ * Returns: newly allocated pointer to a @VAR_OR_TYPE on success, or NULL
-+ * on failure.
-+ */
-+#define kmalloc_obj(VAR_OR_TYPE, GFP)			\
-+	__alloc_objs(kmalloc, GFP, typeof(VAR_OR_TYPE), 1)
++			if ($a1 =~ s/^sizeof\s*\S\(?([^\)]*)\)?$/$1/) {
++				my $cnt = statement_rawlines($stat);
++				my $herectx = get_stat_here($linenr, $cnt, $here);
 +
-+/**
-+ * kmalloc_objs - Allocate an array of the given type
-+ * @VAR_OR_TYPE: Variable or type to allocate an array of.
-+ * @COUNT: How many elements in the array.
-+ * @FLAGS: GFP flags for the allocation.
-+ *
-+ * Returns: newly allocated pointer to array of @VAR_OR_TYPE on success,
-+ * or NULL on failure.
-+ */
-+#define kmalloc_objs(VAR_OR_TYPE, COUNT, GFP)		\
-+	__alloc_objs(kmalloc, GFP, typeof(VAR_OR_TYPE), COUNT)
++				if (WARN("ALLOC_WITH_SIZEOF",
++					 "Prefer $newfunc over $oldfunc with sizeof\n" . $herectx) &&
++				    $cnt == 1 &&
++				    $fix) {
++					$fixed[$fixlinenr] =~ s/\b($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*,/$1 = $newfunc($a1,/;
++				}
++			}
++		}
 +
-+/* All kzalloc aliases for kmalloc_(obj|objs|flex). */
-+#define kzalloc_obj(P, GFP)				\
-+	__alloc_objs(kzalloc, GFP, typeof(P), 1)
-+#define kzalloc_objs(P, COUNT, GFP)			\
-+	__alloc_objs(kzalloc, GFP, typeof(P), COUNT)
 +
-+/* All kvmalloc aliases for kmalloc_(obj|objs|flex). */
-+#define kvmalloc_obj(P, GFP)				\
-+	__alloc_objs(kvmalloc, GFP, typeof(P), 1)
-+#define kvmalloc_objs(P, COUNT, GFP)			\
-+	__alloc_objs(kvmalloc, GFP, typeof(P), COUNT)
-+
-+/* All kvzalloc aliases for kmalloc_(obj|objs|flex). */
-+#define kvzalloc_obj(P, GFP)				\
-+	__alloc_objs(kvzalloc, GFP, typeof(P), 1)
-+#define kvzalloc_objs(P, COUNT, GFP)			\
-+	__alloc_objs(kvzalloc, GFP, typeof(P), COUNT)
-+
- #define kmem_buckets_alloc(_b, _size, _flags)	\
- 	alloc_hooks(__kmalloc_node_noprof(PASS_BUCKET_PARAMS(_size, _b), _flags, NUMA_NO_NODE))
- 
++# check for (kv|k)[mz]alloc with multiplies that could be kmalloc_objs/kvmalloc_objs/kzalloc_objs/kvzalloc_objs
+ 		if ($perl_version_ok &&
+ 		    defined $stat &&
+ 		    $stat =~ /^\+\s*($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*\*\s*($FuncArg)\s*,/) {
+ 			my $oldfunc = $3;
+ 			my $a1 = $4;
+ 			my $a2 = $10;
+-			my $newfunc = "kmalloc_array";
+-			$newfunc = "kvmalloc_array" if ($oldfunc eq "kvmalloc");
+-			$newfunc = "kvcalloc" if ($oldfunc eq "kvzalloc");
+-			$newfunc = "kcalloc" if ($oldfunc eq "kzalloc");
++			my $newfunc = "kmalloc_objs";
++			$newfunc = "kvmalloc_objs" if ($oldfunc eq "kvmalloc");
++			$newfunc = "kvzalloc_objs" if ($oldfunc eq "kvzalloc");
++			$newfunc = "kzalloc_objs" if ($oldfunc eq "kzalloc");
+ 			my $r1 = $a1;
+ 			my $r2 = $a2;
+ 			if ($a1 =~ /^sizeof\s*\S/) {
+@@ -7284,7 +7309,9 @@ sub process {
+ 					 "Prefer $newfunc over $oldfunc with multiply\n" . $herectx) &&
+ 				    $cnt == 1 &&
+ 				    $fix) {
+-					$fixed[$fixlinenr] =~ s/\b($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*\*\s*($FuncArg)/$1 . ' = ' . "$newfunc(" . trim($r1) . ', ' . trim($r2)/e;
++					my $sized = trim($r2);
++					$sized =~ s/^sizeof\s*\S\(?([^\)]*)\)?$/$1/;
++					$fixed[$fixlinenr] =~ s/\b($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*\*\s*($FuncArg)/$1 . ' = ' . "$newfunc(" . $sized . ', ' . trim($r1)/e;
+ 				}
+ 			}
+ 		}
 -- 
 2.34.1
 
