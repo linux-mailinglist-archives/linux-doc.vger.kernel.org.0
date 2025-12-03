@@ -1,38 +1,37 @@
-Return-Path: <linux-doc+bounces-68749-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68751-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD513C9DC41
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Dec 2025 05:54:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8419C9DC51
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Dec 2025 05:54:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 777C83A9BAE
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 04:54:09 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 0C4073A9BBB
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 04:54:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F022C27FB25;
-	Wed,  3 Dec 2025 04:54:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 87AB027F4CA;
+	Wed,  3 Dec 2025 04:54:44 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8121B277CA5;
-	Wed,  3 Dec 2025 04:54:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35481277C81;
+	Wed,  3 Dec 2025 04:54:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764737646; cv=none; b=VtxJ3rDocccT3P8JdM0aYS8QJDg7bfWlXrTaMBzf6l0nhfptUND+zChIv6HOCfqXehWif9jvnS6eVjMiAiHO7vGpp5iK4Z746tt9DqNaD9EUBpTEeFvERvAb4XHcoRaVQUj8xsfJEYMhsysa2ejHd88VAgM/NfcMV0u+bhef4go=
+	t=1764737684; cv=none; b=rawusvzCmyylLCIStVee+Lb9/WWqfwrDR4OVgEo3unLODRPmnIpTbiehNywj0Z6hZqKU4GqclF6GhybiZERHS0c2eH9FtjkgdgibUoZUZtBCJgNML2iEVUHOM9g4Ue9xSbES9+3IWXnJn+FQO+byAAY4DlMTWfQaer4QeTLQlzk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764737646; c=relaxed/simple;
+	s=arc-20240116; t=1764737684; c=relaxed/simple;
 	bh=PpHY91uC6qS2wzc2kIKvhJjsJ0LcH5h48gz1zsAHYro=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=RTNBuQuCcnxc8W9NDCVoZLGOGm5w0GOlGB99oYBIK/pDNyPGpeH+ytfPIBJeIm7XTWjdyPRgbXFN9p0/XNuF1YrT8iP9ZZXa2VwmuWFmrCIXLJFGTmFvv3M6XxUJA90WrF8nW13g06e7TJ2wr8KoX3VOcOHLgKN+yvMX1fTxop0=
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=usjhqIX5gdzj4bBN8OQ3DuZRrmq6/JIJehlB7oRSKngBc0/8oXBaWcj7z5LRVDfqxrJV8LV1vnvYORFZRzSTkhr/Jr9QBbTXATaRmlbgHYVTpYKjVAx1ks2O8BcvRIjA+ytDDwG3x/j0x+ZKYSuY3RZvO0IgNxufyK2B/wkapek=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
 Received: from loongson.cn (unknown [10.40.57.136])
-	by gateway (Coremail) with SMTP id _____8Cx779Owi9pIZcqAA--.23887S3;
-	Wed, 03 Dec 2025 12:53:34 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8BxT_Bowi9pTZcqAA--.25607S3;
+	Wed, 03 Dec 2025 12:54:00 +0800 (CST)
 Received: from localhost.localdomain (unknown [10.40.57.136])
-	by front1 (Coremail) with SMTP id qMiowJDx6sBNwi9p7NpEAQ--.30497S4;
-	Wed, 03 Dec 2025 12:53:33 +0800 (CST)
+	by front1 (Coremail) with SMTP id qMiowJCxocJowi9p_dpEAQ--.49201S2;
+	Wed, 03 Dec 2025 12:54:00 +0800 (CST)
 From: Tianyang Zhang <zhangtianyang@loongson.cn>
 To: chenhuacai@kernel.org,
 	kernel@xen0n.name,
@@ -53,11 +52,9 @@ Cc: loongarch@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
 	Tianyang Zhang <zhangtianyang@loongson.cn>
 Subject: [PATCH v7 4/5] irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep affinity
-Date: Wed,  3 Dec 2025 12:53:30 +0800
-Message-ID: <20251203045331.33035-3-zhangtianyang@loongson.cn>
+Date: Wed,  3 Dec 2025 12:53:56 +0800
+Message-ID: <20251203045357.33071-1-zhangtianyang@loongson.cn>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20251203045331.33035-1-zhangtianyang@loongson.cn>
-References: <20251203045331.33035-1-zhangtianyang@loongson.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,26 +62,26 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJDx6sBNwi9p7NpEAQ--.30497S4
+X-CM-TRANSID:qMiowJCxocJowi9p_dpEAQ--.49201S2
 X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
 X-Coremail-Antispam: 1Uk129KBj93XoW7tF4UCF4rKF4fAryfuryrXwc_yoW8CF4rpF
 	WUCa4qyr4ktFyUWF4DWa18ZFy5Cr95W3y7K3WfC343ZrZ8G3yqgr1Yy34F9FyrCws5C3W2
-	qrsFqrW5ua45AagCm3ZEXasCq-sJn29KB7ZKAUJUUUj5529EdanIXcx71UUUUU7KY7ZEXa
+	qrsFqrW5ua45AagCm3ZEXasCq-sJn29KB7ZKAUJUUUjJ529EdanIXcx71UUUUU7KY7ZEXa
 	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUmYb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	0xBIdaVrnRJUUUmFb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
 	IYs7xG6rWj6s0DM7CIcVAFz4kK6r126r13M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
 	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
 	0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAF
 	wI0_Gr1j6F4UJwAaw2AFwI0_GFv_Wryle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2
 	xF0cIa020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_
-	Wrv_ZF1lYx0Ex4A2jsIE14v26r4UJVWxJr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48Icx
-	kI7VAKI48JM4x0Y40E4IxF1VCIxcxG6Fyj6r4UJwCY1x0262kKe7AKxVW8ZVWrXwCF04k2
-	0xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwCFI7km07C267AKxVW8ZVWrXwC20s
-	026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_
-	GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW7JVWDJwCI42IY6xIIjxv20x
-	vEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv
-	67AKxVW8Jr0_Cr1UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73Uj
-	IFyTuYvjxUPXo2UUUUU
+	ZF0_GryDMcIj6I8E87Iv67AKxVW8Jr0_Cr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0x
+	vY0x0EwIxGrwACjcxG6xCI17CEII8vrVW3JVW8Jr1lc7CjxVAaw2AFwI0_GFv_Wryl42xK
+	82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_GFv_Wrylx2
+	IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v2
+	6r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Ar0_tr1lIxAIcVC0I7IYx2
+	IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280
+	aVAFwI0_Gr1j6F4UJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnU
+	UI43ZEXa7IUOoOJ5UUUUU==
 
 When it is detected in avecintc_set_affinity that the current affinity
 remains valid, the return value is modified to IRQ_SET_MASK_OK_DONE.
