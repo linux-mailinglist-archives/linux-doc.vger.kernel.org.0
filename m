@@ -1,38 +1,37 @@
-Return-Path: <linux-doc+bounces-68745-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68748-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B7CCC9DC2D
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Dec 2025 05:53:20 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
+	by mail.lfdr.de (Postfix) with ESMTPS id 33E3DC9DC3F
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Dec 2025 05:54:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 107503A7350
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 04:53:19 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id DCA36341B4F
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 04:53:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6DF62773E5;
-	Wed,  3 Dec 2025 04:53:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 44F96277C81;
+	Wed,  3 Dec 2025 04:53:57 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E9203274B35;
-	Wed,  3 Dec 2025 04:53:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3006E279DAD;
+	Wed,  3 Dec 2025 04:53:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764737596; cv=none; b=YYeXSzefaouq5aKWCVzlPr0/HuVpkyGAb8SSx/O8vo9YGfg2atVlEp1EfdtmitAnvqQ6fC20gw9us69usbCXZNF7iXShKRT4GAcOOTOaL7iZUMM4na93B3OC8vnuKv409lbha1we0Pc8OX9DuBu76ftrZKRKcTOxhLfx/XcxOtg=
+	t=1764737637; cv=none; b=ZRNdDx2axvZUS7BLc4Uu1ws7xm6UnaEMlRz7APyfpTShV7Z4Ef1nUYtaMwePYjvANbObLwRm9z98ml21A81rTO6olPp+JndC5YaWpkJcl/EN+2KgtajIGu/BVE/ofNgfry8tysVsQB5LDBXJLu2AlBnqvmcqIS02mbvICceoxYQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764737596; c=relaxed/simple;
+	s=arc-20240116; t=1764737637; c=relaxed/simple;
 	bh=RWnfQ6Y1oVsduJGynYYvmZMZGiwwAqlghmD8ss7NNlM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ilINFZiwFegb2wtrYDJUpYDC9PkYWYQCKRTtGGA0TBJvgefYjW0c6WlOcVk9zxoGeegy1yZRttV8ma+ZpyguotfW/0OF7lKuic6m9nRPRXjhb6QRPU0/AQ8bFFzk+/iPoGZt7RsEA6NumaeqHl1j2MOuFiM4UTTDUnHXrV3Jknw=
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=CCNM1gf6eAf7pNqO05VHB/Mz6FS8gPliB2I2bNpr1sjuXBn9oAb3T3BGpz39Kleq7lk3J2P8rWiZF6QxMftaxL3TTTe3D897F7TFYwrcySwJZJN1BX5qfvNkWDBEC9KRbRS7wOHB0quk4mc2RNpHqWL/eGj31BhhRTBuOMtWIAY=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
 Received: from loongson.cn (unknown [10.40.57.136])
-	by gateway (Coremail) with SMTP id _____8AxytEwwi9p0ZYqAA--.21031S3;
-	Wed, 03 Dec 2025 12:53:04 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8CxK9JOwi9pFZcqAA--.23530S3;
+	Wed, 03 Dec 2025 12:53:34 +0800 (CST)
 Received: from localhost.localdomain (unknown [10.40.57.136])
-	by front1 (Coremail) with SMTP id qMiowJDxbMEuwi9p2NpEAQ--.61873S4;
-	Wed, 03 Dec 2025 12:53:03 +0800 (CST)
+	by front1 (Coremail) with SMTP id qMiowJDx6sBNwi9p7NpEAQ--.30497S2;
+	Wed, 03 Dec 2025 12:53:33 +0800 (CST)
 From: Tianyang Zhang <zhangtianyang@loongson.cn>
 To: chenhuacai@kernel.org,
 	kernel@xen0n.name,
@@ -53,11 +52,9 @@ Cc: loongarch@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
 	Tianyang Zhang <zhangtianyang@loongson.cn>
 Subject: [PATCH v7 2/5] LoongArch: Architectural preparation for Redirect irqchip
-Date: Wed,  3 Dec 2025 12:52:55 +0800
-Message-ID: <20251203045300.33004-3-zhangtianyang@loongson.cn>
+Date: Wed,  3 Dec 2025 12:53:28 +0800
+Message-ID: <20251203045331.33035-1-zhangtianyang@loongson.cn>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20251203045300.33004-1-zhangtianyang@loongson.cn>
-References: <20251203045300.33004-1-zhangtianyang@loongson.cn>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,25 +62,26 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJDxbMEuwi9p2NpEAQ--.61873S4
+X-CM-TRANSID:qMiowJDx6sBNwi9p7NpEAQ--.30497S2
 X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
 X-Coremail-Antispam: 1Uk129KBj93XoWxWFWUuF4rurWkJF15KrWkKrX_yoWrGw4Upr
 	yDArWkKrW5KF4xKa4qqrn09r4UWa97Cr42qw47urWUAF1UZ348Xr1ktFZxZFZ0qanxXa4I
-	93Z5Cw1jv3WDZwcCm3ZEXasCq-sJn29KB7ZKAUJUUUjJ529EdanIXcx71UUUUU7KY7ZEXa
+	93Z5Cw1jv3WDZwcCm3ZEXasCq-sJn29KB7ZKAUJUUUbf529EdanIXcx71UUUUU7KY7ZEXa
 	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUBqb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1a6r1DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
-	xVW8Jr0_Cr1UM2kKe7AKxVW8ZVWrXwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
-	AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
-	tVWrXwAv7VC2z280aVAFwI0_Cr0_Gr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x
-	0EwIxGrwCY1x0262kKe7AKxVW8ZVWrXwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkE
-	bVWUJVW8JwCFI7km07C267AKxVW8ZVWrXwC20s026c02F40E14v26r1j6r18MI8I3I0E74
-	80Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0
-	I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04
-	k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26F4j6r4UJwCI42IY6I8E87Iv6xkF
-	7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IUnov3UUUUUU==
+	0xBIdaVrnRJUUUmYb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1q6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAF
+	wI0_Gr1j6F4UJwAaw2AFwI0_Wrv_ZF1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2
+	xF0cIa020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_
+	Wrv_ZF1lYx0Ex4A2jsIE14v26r4UJVWxJr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48Icx
+	kI7VAKI48JM4x0Y40E4IxF1VCIxcxG6Fyj6r4UJwCY1x0262kKe7AKxVWrXVW3AwCF04k2
+	0xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwCFI7km07C267AKxVWrXVW3AwC20s
+	026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_
+	GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW7JVWDJwCI42IY6xIIjxv20x
+	vEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv
+	67AKxVW8Jr0_Cr1UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73Uj
+	IFyTuYvjxU9wSdDUUUU
 
 Add architectural preparation for Redirect irqchip, including:
 1. CPUCFG feature bits definition for Redirect irqchip;
