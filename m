@@ -1,256 +1,128 @@
-Return-Path: <linux-doc+bounces-68731-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68733-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE2C0C9D15B
-	for <lists+linux-doc@lfdr.de>; Tue, 02 Dec 2025 22:27:23 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCA78C9D787
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Dec 2025 02:09:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 4DF3B4E42FC
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Dec 2025 21:27:22 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 782B83A73D2
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 01:09:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14A082F99B5;
-	Tue,  2 Dec 2025 21:27:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E1AFF221FBA;
+	Wed,  3 Dec 2025 01:09:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CXVsryoy"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Kwz0MiEf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 100732F8BFC
-	for <linux-doc@vger.kernel.org>; Tue,  2 Dec 2025 21:27:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 729BA21773F
+	for <linux-doc@vger.kernel.org>; Wed,  3 Dec 2025 01:09:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764710841; cv=none; b=ZreakyQy4PWAizB4DJW8GEdmo8g/VKkA9IR/nBBd+2FMfCUsCXgIeUzBHdCHza0vcmhPBOiVYAWKDIr+ePEG6P6cfxCur7/J+CNAOwhwRSCg3swepA47CC/9Lzs8tAkB00w200mEnrJZBHEbLFadHha7D6VktfNcmx5gCtHpjgc=
+	t=1764724170; cv=none; b=UADLzM+XeAb7SGs/ce1G/EWzbXgXkU2Fxux7VvZtML/a7OccR3fenHfGhByGMRtFKy3i6QrOtSl7h3RrWBYZQvWIq7luVICuSaEgv/ghso8j0tDt2D/K1XMp/F3A+G91lb6Iv/o7VgOra1NlK4j2VNmtz8WOUdE895yOVFDBGf8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764710841; c=relaxed/simple;
-	bh=IF4JIJy9AebTLa+7WBComoEINwMkvEmXkt0dVcdjLmc=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=NnchB5iKAYv4IXJPkSUQ6bep3sqlc0NY7DMPQW+vU6BJbx2wPdqcyq9BhqH9PoCe7VH8E5ce7hPjpbUSodsKdJaR//YWKSECJseSgXX3cqdSOAS6V7IhsLXLkKmCpRNWU3LhqDqrj8if4an3WPA+qNnkECm8gIFrxt4I6mGUCvs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CXVsryoy; arc=none smtp.client-ip=209.85.208.43
+	s=arc-20240116; t=1764724170; c=relaxed/simple;
+	bh=4JY80Jc5VQhDDV7Kh5EhUJuY6+Adwyzi2qDz/1SyuHc=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gppoWQR+jfdAdsJweP8mLb4e1o4VEP0PfQlOyTGKXVY1hXZQg4PQiFMjpgw/IKcm3vl8aw08j9bQFS5KuEbcNCXqK+j74oT2t4potii40UCz7SZAcd5t07+iqf6w4EOm1ZWw+6j6dzO5JQ3CRMJQLafOLApz5buUIn/vaOy+CP8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Kwz0MiEf; arc=none smtp.client-ip=209.85.214.182
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-64312565c10so9238523a12.2
-        for <linux-doc@vger.kernel.org>; Tue, 02 Dec 2025 13:27:18 -0800 (PST)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2984dfae043so53241885ad.0
+        for <linux-doc@vger.kernel.org>; Tue, 02 Dec 2025 17:09:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764710837; x=1765315637; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=izHpBo4KfWQtDeefh6EvIJ4kME03b+71gsYy+yYHuR4=;
-        b=CXVsryoyJi2HlOkTMwa9LOcPick8gz1teoSTDd703cR8EgyKjBOeaLkMNuXPkW6je3
-         /jUUdKHQkjsKniuaezTATRxqWs2uDrS1A9oTWjaEO3faUTVrDTc/Z3y92Gj3ZvTfQdHK
-         PHZR3ENJGhfg3EL2JqFDnR7ZP/iaymyTdO00Y67QZStn3BS6RkOX1wXn989cn2waopDz
-         EMBWQA3TXpHOdDdpb142wfNuKBQLZJ9EAaFufqstJBadFulqoW1TUYJBdC7ILtGKLs62
-         uHn0Jv6YknnznhbC25VYCkRLbmUjfHNT4DvmhRTQj9Ew/DmMKoQCcMRk1MXvkxCuUF/K
-         rkSw==
+        d=gmail.com; s=20230601; t=1764724169; x=1765328969; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1TIaVYC20W3RE8iO6ocjajHpRpv7qVGK5eUmOfQ+3L0=;
+        b=Kwz0MiEfPX5FXCIrbXRYj/0sti3ur304P2MH9rMoHeBK9LDEZCwFWlk9LSdvAKbUyr
+         WkCJADordsIixGFAkyVahS5hmp6WkcG+hmXHpfqweRnySU0koMUG02DLpQ9Nyx9vIlsm
+         fgjXKlqYAD3cEicgcK9/QCaqG3C+GfGKBSdFHDs/OxIBzlvH1t/tTloaHNygNPZdYcOS
+         HLvKSDQw1HeqgpVCxNn7enMXK92LIe/4x2Oe8w+5G9/pQ1YYGPVntV/+N+miqARb6+J4
+         4jsDaBQZ5aQLqRyE8fXnKpuqrRUOIwO5ZvpnO/ItxGjWtVsVkgTLCd0YlcJqcze2HtbP
+         Sbdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764710837; x=1765315637;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=izHpBo4KfWQtDeefh6EvIJ4kME03b+71gsYy+yYHuR4=;
-        b=LBgB59akPcoCB0E7tYfMUFjRuW9UZWQ5ycBPHQkI9O065n5nbRwZte7BAhdQ5sTy2I
-         VAALB8Xtn8EbpsjHjuOtEPx5RqBy4koT9iTtAzGttEf1hAho+XLODQdtranHGenvYWE+
-         wV5bHCjoI76S6iBDGrovQ28+muOG1ihbvn6W9HVpt3V3yZFKIF9FsWFfS3MX9AF3n++B
-         O2c6f20KpcPjjk/i6tt823Y/oH8UUoZ0/VKzRy62gV0Ww7jnla0WT8zzC4/92G6UAiHc
-         FxTpjhtXePC1m3xkVvrSTA7tOtbrF3PRa9QZSlKTS8HJ5wpKwy5ghwRxebLwNCnOgD/9
-         ufsA==
-X-Forwarded-Encrypted: i=1; AJvYcCVW6+J8AnD1DVRpWocBTOe1PjtPdzQgAlG2pXlmr04U0ILKit8DhM2K25unYDukKqJ3NqjJq0kw0Ls=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxx/h6+WYfQR0++zVsW/cRm4nwh+dJOe3atOX+w9oF5hTyE2WVC
-	3ToDIHA+NL1KbLvBJzzmP9Nhjf46OplI1GPPV1fhpxRHqD6p8IBOb2hCVB1ycRnB/+PSYPP9umw
-	RHDVLwlYuJyW5Utprukph7jHMYSQ7Pps=
-X-Gm-Gg: ASbGncsUBu24SngKQ45qqeJTdH2DeJ7UqVLPJzlSRi/v8Gc9g15mpZmu1ehR43yyNUb
-	L3BtSS2p3+bnUP/SK2XdGH9BAjUY3w+qLAL+jZa9UYwVAibCukupR4Ux2cMAEWhmO5MpHTSASc4
-	1kesC4Dp72BnakuRvnG6tH0/8iouUZ02MQ10AS9A7/KeauGPno7RHdqJkRwWmQ7i8XGTPhVWm1+
-	ZrSUVWM5LKcgW2FmoCT6/1/n9gi4oWmBArg7Vxl+3AMJn3FKko+PneUeSxIP7SHw+NLWy36UNl+
-	ewHJeMUPHBpL+YRj74gsE0SrA9vNnxaBtCMJ6cducBDMe7hVI6oPa3Lca8m7ShzloYxeD5vsd8m
-	g2U5lng==
-X-Google-Smtp-Source: AGHT+IFi4VqAeQ6ylauCI6SfoeNuTHJk9Yg/0Yr9DgMxNTCiwD+q5tOWVzR64YvQJS5zYnsWgG+Guc5cp8GP5risKAY=
-X-Received: by 2002:a17:907:7fa2:b0:b70:b3cb:3b30 with SMTP id
- a640c23a62f3a-b76c5595bb8mr3560613866b.59.1764710837088; Tue, 02 Dec 2025
- 13:27:17 -0800 (PST)
+        d=1e100.net; s=20230601; t=1764724169; x=1765328969;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1TIaVYC20W3RE8iO6ocjajHpRpv7qVGK5eUmOfQ+3L0=;
+        b=dAmam4W33kWu37gQ5ztPZbVw8O+yg8FF39iHBZbqpXwsvrUodOZm0K4ph1RTxSu/Ht
+         0wze5KQrFDX9Lh/niNOUbyO8GtDEiV09IfNvgFisH+UJWiqDnbtYi/wLbBxAho7Oszge
+         jY+szgVLdOUia7NZ/PjCW0CcmvKDzoz383wMXvMlwZlb1dUyogHBdnXHjE/8RqliJhd/
+         4Y+RxtnztPmQFzLEsfJYhRmU1acE5z1Z/lWb43BrzRPwpLlP1LRivnr2DSB4d0hH+4tL
+         NQmqBdENJC8iK17/AmG4b3B/Q9XNtCAzDwhJRVpjuAGvkJQm1MnFbOLVNP3Oec0leSxI
+         UjEw==
+X-Forwarded-Encrypted: i=1; AJvYcCWB8IFJsqHOrJqHSL0HdF4bKFpTXniZAJX5WNkODhQjInQ2c2uJyzLnOH6ehbH2krV2GWxCF8m9RPI=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yww2dkQ1OfSnHPcnpENAW+1wijeWOcd+kAFBkjJf71sgosgnw8N
+	lOpnZZ76jKdkqfQOSkv4ZKzfOcRs7q5IfaD2/5/sonnUNH5AXluBJLeJ
+X-Gm-Gg: ASbGncum5xtwqVncilJ85RSOn4RnvyGUL5uX1Zz6KYc6cZDFtQ4OAySz6TvqBm2QQET
+	WRguBYOPRddMKe2phXp7yUvifVcPglKHWWQzZ9Im6zsYpYU6Relo9viclS6Z8d/FkJkq+P5GtGg
+	rADDDB0d251YdkXx8bqbAfwvHh1duywD9GPEGpEmypgf3kE9XDiCj/zrZtB/1BwBFlQqeyH1ao/
+	vcIpB2U6zhfP+WC5iK97P0PJUSoIWSuxxCjZzhzQRsdsXSbzQ6MQYRq/UeCaBM6xqeNTdmwaI74
+	zdDwQpxPTA9SiqY+W9WtPC6AVfmGx/EnlB7IEvOloZ8/F73gw4G49/rMjIgQd2ODP+xN6WODutn
+	gvexTWq46BvM3Y8UAlBzRUOZjg7CHVG0GU8HD/DvnO5ubpaeumtpxGHSj9t9H+HquSBMBZ+VcDz
+	OxOb8axiSlMCY=
+X-Google-Smtp-Source: AGHT+IEwEWQ+iKEzskb8FE6eGD1Bqg5KsYukLRbrEwESQEETNCRQHI55/OPuI8Eu80hzVngbE++2Kw==
+X-Received: by 2002:a17:903:1a2d:b0:295:bedb:8d7 with SMTP id d9443c01a7336-29d683b103fmr6744205ad.48.1764724168620;
+        Tue, 02 Dec 2025 17:09:28 -0800 (PST)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29bce40ab42sm165422675ad.5.2025.12.02.17.09.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Dec 2025 17:09:26 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id 32F404209E4F; Wed, 03 Dec 2025 08:09:20 +0700 (WIB)
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux NFS <linux-nfs@vger.kernel.org>
+Cc: Chuck Lever <chuck.lever@oracle.com>,
+	Jeff Layton <jlayton@kernel.org>,
+	NeilBrown <neil@brown.name>,
+	Olga Kornievskaia <okorniev@redhat.com>,
+	Dai Ngo <Dai.Ngo@oracle.com>,
+	Tom Talpey <tom@talpey.com>,
+	Trond Myklebust <trondmy@kernel.org>,
+	Anna Schumaker <anna@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mike Snitzer <snitzer@kernel.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH 0/3] NFSD IO MODES documentation fixes
+Date: Wed,  3 Dec 2025 08:09:08 +0700
+Message-ID: <20251203010911.14234-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <cover.1764708608.git.marcelo.schmitt@analog.com> <c189c25b1c46f406c3f7942e5ac4cdb0b964ee52.1764708608.git.marcelo.schmitt@analog.com>
-In-Reply-To: <c189c25b1c46f406c3f7942e5ac4cdb0b964ee52.1764708608.git.marcelo.schmitt@analog.com>
-From: Andy Shevchenko <andy.shevchenko@gmail.com>
-Date: Tue, 2 Dec 2025 23:26:38 +0200
-X-Gm-Features: AWmQ_blOI9-8RPZg0XCvO-iUC7cg8_MvPG-sGlHea2wNFEI3gTFMs76_JdYkyUY
-Message-ID: <CAHp75Vf7p=aPy2ofC_zVz1PURA3R9i0WZCG63-dCEXO=xKJ0FA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] iio: adc: Initial support for AD4134
-To: Marcelo Schmitt <marcelo.schmitt@analog.com>
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, jic23@kernel.org, 
-	nuno.sa@analog.com, dlechner@baylibre.com, andy@kernel.org, 
-	Michael.Hennerich@analog.com, robh@kernel.org, krzk+dt@kernel.org, 
-	conor+dt@kernel.org, corbet@lwn.net, marcelo.schmitt1@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Developer-Signature: v=1; a=openpgp-sha256; l=661; i=bagasdotme@gmail.com; h=from:subject; bh=4JY80Jc5VQhDDV7Kh5EhUJuY6+Adwyzi2qDz/1SyuHc=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJn6PS9UPmtLTQgUPqRSsV35+KsNx71aTp14/ab/Pu/pu bbc87TudJSyMIhxMciKKbJMSuRrOr3LSORC+1pHmDmsTCBDGLg4BWAimc2MDE8irT6HTj/qL7oi wHf7hgUX0zQ+yFq9M/z+ac92I152VQaGv4JGkrvrf3zL8bu/QGXh6afTnkY5dn5d/Xu1czT/3vU RnYwA
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
-On Tue, Dec 2, 2025 at 10:55=E2=80=AFPM Marcelo Schmitt
-<marcelo.schmitt@analog.com> wrote:
->
-> AD4134 is a 24-bit, 4-channel, simultaneous sampling, precision
-> analog-to-digital converter (ADC). The device can be managed through SPI =
-or
-> direct control of pin logical levels (pin control mode). The AD4134 desig=
-n
-> also features a dedicated bus for ADC sample data output. Though, this
-> initial driver for AD4134 only supports usual SPI connections.
->
-> Add basic support for AD4134 that enables single-shot ADC sample read.
+Hi,
 
-...
+Here are fixes for NFSD IO modes documentation as reported in linux-next [1].
 
-> I tried using the reset-gpio driver to handle AD4134 reset GPIO. I had ch=
-anged
-> the device tree to set a reset-controller node and had referenced that fr=
-om the
-> ADC node. I also updated the ad4134 driver to use a reset controller to h=
-andle
-> its reset GPIO. Though, after those changes, the AD4134 driver would defe=
-r
-> device initialization forever because it missed a reset-controller. To ma=
-ke the
-> reset-gpio driver probe and instantiate a reset controller, it would take=
- a
-> platform device to be set within a machine-specific, hardcoded platform d=
-ata.
-> AD4134 is not bound to any specific platform, so it doesn't make much sen=
-se to
-> have a reset-gpio platform device for that. Thanks for mentioning reset-g=
-pio. It
-> was interesting looking into the reset-gpio driver and the reset framewor=
-k. It
-> looks cool. But I don't think the reset-gpio driver suits the AD4134 rese=
-t use
-> case.
+Enjoy!
 
-Bart converted it to be an aux driver and it should work. Please, give
-a try after v6.19-rc1 is out.
+[1]: https://lore.kernel.org/linux-next/20251202152506.7a2d2d41@canb.auug.org.au/
 
-...
+Bagas Sanjaya (3):
+  NFSD: Add toctree entry for NFSD IO modes docs
+  NFSD: nfsd-io-modes: Wrap shell snippets in literal code blocks
+  NFSD: nfsd-io-modes: Separate lists
 
-> +       /*
-> +        * To be able to read data from all 4 channels through a single l=
-ine, we
-> +        * set DOUTx output format to 0 in the digital interface config r=
-egister
-> +        * (0x12). With that, data from all four channels is serialized a=
-nd
-> +        * output on DOUT0. During probe, we also set SDO_PIN_SRC_SEL in
+ Documentation/filesystems/nfs/index.rst       |  1 +
+ .../filesystems/nfs/nfsd-io-modes.rst         | 33 ++++++++++++-------
+ 2 files changed, 22 insertions(+), 12 deletions(-)
 
-During the probe
 
-> +        * DEVICE_CONFIG_1 register to duplicate DOUT0 on the SDO pin. Co=
-mbined,
-> +        * those configurations enable ADC data read through a convention=
-al SPI
-> +        * interface. Now we read data from all channels but keep only th=
-e bits
-> +        * from the requested one.
-> +        */
-> +       for (i =3D 0; i < ARRAY_SIZE(ad4134_chan_set); i++) {
-> +               ret =3D spi_write_then_read(st->spi, NULL, 0, st->rx_buf,
-> +                                         BITS_TO_BYTES(AD4134_CHAN_PRECI=
-SION_BITS));
-> +               if (ret)
-> +                       return ret;
-> +
-> +               if (i !=3D AD4134_VREG_CH(reg))
-> +                       continue;
-> +               *val =3D get_unaligned_be24(st->rx_buf);
+base-commit: fa8d4e6784d1b6a6eaa3911bac993181631d2856
+-- 
+An old man doll... just what I always wanted! - Clara
 
-Hmm...
-
-In this case it might be better to  use
-
-  if (i =3D=3D ...)
-    *val =3D ...
-
-but it's still unclear on how many times the conditional can be true
-in the loop.
-
-> +       }
-
-...
-
-> +static int ad4134_clock_select(struct ad4134_state *st)
-> +{
-> +       struct device *dev =3D &st->spi->dev;
-> +       struct clk *sys_clk;
-> +
-> +       /*
-> +        * AD4134 requires one external clock source and only one externa=
-l clock
-> +        * source can be provided at a time. Try get a crystal provided c=
-lock.
-> +        * If that fails, try to get a CMOS clock.
-> +        */
-> +       sys_clk =3D devm_clk_get_optional_enabled(dev, "xtal1-xtal2");
-> +       if (IS_ERR_OR_NULL(sys_clk)) {
-> +               if (PTR_ERR(sys_clk) =3D=3D -EPROBE_DEFER)
-> +                       return -EPROBE_DEFER;
-
-But this will ignore other errors when clock _is_ available.
-
-This should be as simple as
-
-sys_clk =3D devm_clk_get_...(...);
-if (!sys_clk)
-  sys_clk =3D devm_clk_get_enabled(...);
-if (IS_ERR(...))
-  return dev_err_probe(..., PTR_ERR(...), ...);
-
-See how other drivers do in the similar situation (IIRC 8250_dw does this).
-
-> +               /* Try the CMOS clock */
-> +               sys_clk =3D devm_clk_get_enabled(dev, "clkin");
-> +               if (IS_ERR(sys_clk)) {
-> +                       if (PTR_ERR(sys_clk) =3D=3D -EPROBE_DEFER)
-> +                               return -EPROBE_DEFER;
-> +
-> +                       return dev_err_probe(dev, PTR_ERR(sys_clk),
-> +                                            "failed to get external cloc=
-k\n");
-> +               }
-> +       }
-> +
-> +       st->sys_clk_hz =3D clk_get_rate(sys_clk);
-> +       if (st->sys_clk_hz !=3D AD4134_EXT_CLOCK_MHZ)
-> +               dev_warn(dev, "invalid external clock frequency %lu\n",
-> +                        st->sys_clk_hz);
-> +
-> +       return 0;
-> +}
-
-...
-
-> +       reset_gpio =3D devm_gpiod_get_optional(dev, "reset", GPIOD_OUT_HI=
-GH);
-> +       if (IS_ERR(reset_gpio))
-> +               return dev_err_probe(dev, PTR_ERR(reset_gpio),
-> +                                    "failed to find reset GPIO\n");
-> +
-> +       if (reset_gpio) {
-> +               fsleep(AD4134_RESET_TIME_US);
-> +               gpiod_set_value_cansleep(reset_gpio, 0);
-> +       }
-
-I still think that reset-gpio driver is the right way to go (after
-Bart's changes, which should be part of v6.19-rc1).
-
-...
-
-The rest LGTM.
-
---=20
-With Best Regards,
-Andy Shevchenko
 
