@@ -1,221 +1,193 @@
-Return-Path: <linux-doc+bounces-68793-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68795-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34F93CA0925
-	for <lists+linux-doc@lfdr.de>; Wed, 03 Dec 2025 18:42:33 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 12EABCA11A3
+	for <lists+linux-doc@lfdr.de>; Wed, 03 Dec 2025 19:44:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6652730052D1
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 17:42:18 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C7CB030046F5
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 17:57:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1968333B6D2;
-	Wed,  3 Dec 2025 17:42:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D5CB30EF9E;
+	Wed,  3 Dec 2025 17:57:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="miD/O73f"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BztuTuOr"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D96EF33A6FB;
-	Wed,  3 Dec 2025 17:42:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70E6D3019CE
+	for <linux-doc@vger.kernel.org>; Wed,  3 Dec 2025 17:57:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764783737; cv=none; b=QCAab0w72gd6svAYL6nBwXjyb2gAdp1COkt+HLnVmd7aWm2aBO8No/M2qT6qWNcj84znrJo5JrEpe8paeFVVH3+YbvIWZuPsPg4qpYjAfsSCJyakBwEfShy5mHYlbo+YiNgyvPuZk5V1unnT4sCZLO5Kf6zq+GEe7uYqURODgpI=
+	t=1764784641; cv=none; b=ZyUuZowHfxHo5Gv4ODcExpsCd6ab7soNNG5nl/DgxPddpJQ+x+9GVs5khpD2/5CO4bc7L2RbLSKYzzLBJKTPxANqNYUjhzRwhEnM82nQcX6cptkPX4gyftNb/XF8b+Q0tsMM/5EHY7YXUYz5nwaMIdVkRGN5/rPnICkmhby450Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764783737; c=relaxed/simple;
-	bh=0PFD8diImxz9iIbuzHPx6vv4/igLNrwgU6UG5S0Ue64=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=f0bLBKYTwIkGJhCtE3MXCwQqbIP/mX1t15rCzv7JsUwC+7Lm7etHGjHw6XFz9mXxInHShr2uBBWwBgJCCwNQiWDdDtilwr8VLRBPi86YTW6/UZGxNNvQwidsClFf9fAa5KqlDHPx3XFdkfrxHH8/OaHJqhHde1tuDgZMGjP8TrA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=miD/O73f; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83A14C4CEF5;
-	Wed,  3 Dec 2025 17:42:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1764783736;
-	bh=0PFD8diImxz9iIbuzHPx6vv4/igLNrwgU6UG5S0Ue64=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=miD/O73fflM78imiiO7BcAz2xqJOUDcwGHSbdkxoM0weNUQAXdN9kDoG3FWGarMJr
-	 oMoarFhsAsrDZGZVZBofKu/vz4iMH+Pa6QJLFU9WzO0js6PzzErSnaYgGFxTGhDLD/
-	 HlZ+VER72MkNKb9bm+YhBSL7S3oH5vUKrDCPaCvvxfbjjNABRSb59iS7czt4I2OCWC
-	 lJdX69w7JWqtLJzCzfdpAhXAWj5XvH3jlRU3QAQeuLpXqaDPln8WcHn+l89bV2MvvT
-	 ytHFu7Axt6YIfW+9e3wWcY2kAVayX1GS8doiyTBKmu95QabXoCT9UC8ZYwmFilr2Ed
-	 UeBILDnFqvCog==
-Message-ID: <48d5895d-fde0-4795-8049-788fa3171fde@kernel.org>
-Date: Wed, 3 Dec 2025 18:42:11 +0100
+	s=arc-20240116; t=1764784641; c=relaxed/simple;
+	bh=rj3QvZrvvrIbJ5/wLiMNjpxmiA/CbFjLX3oTRE30FBM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=YzK9Z8wlmzr8uX2sD1AH6z3YW0EwU1lLN3ek8mUTUIa9Q5PjJ48DYTVpqRnzmLaRDQ4V47PAFWZgPI+imFBSACcgNMNHvkRxCYM7G2/O0QRTiKu9JDGMhn35nOuKZWnzrkDl9A9JSgu5EALvbAr66EnT1XleZwTLsEnv3TubB7Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BztuTuOr; arc=none smtp.client-ip=209.85.218.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-b739ef3f739so2183166b.1
+        for <linux-doc@vger.kernel.org>; Wed, 03 Dec 2025 09:57:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1764784638; x=1765389438; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+I9vBbVnFNZx3QCSTq1xIAOnL+dBiPfyZ1uzxKTwupA=;
+        b=BztuTuOruRw3DpP4ggP/aYfBzsdrslTbEjWx5fDnkqeo72djUBClcLqqwTdLyc7vBK
+         tG24OQLYfa6mvEUYPAthIhyrzzi5s4B2Z09ONWwrMcIH5mo7QwyZt/D8VZks+0cN4yq/
+         i4JrGhE6Y+89cN+VyMHLMDna7/6R71DIPAYUoGfQzn1aTizM6XW3bNm906G2le7M4uSo
+         kc3U/wSABwNsDqljW3yAOGdl2pHhRI65TaFzHBJzlVj7g+801CC6fY6MYirtlY86KS1P
+         oIA3PfJaWXryhK5VR4UUbi0sHPAvS9t4M+T6ItQjLYUPCL6XZvqWKYC7nXzBvevEdBsx
+         PNxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764784638; x=1765389438;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=+I9vBbVnFNZx3QCSTq1xIAOnL+dBiPfyZ1uzxKTwupA=;
+        b=We7YME9z2oeSecflxTNN/Fy8CZDNPenpx+bhms2VIQTG5Nye8a4DnELH1dMJRwTq/X
+         FN9c3Mvnc1VmsdR+m3GWEflbYbVH7LflMfnkrlFsAN3hOvtKBSJeuViheyYG4DO+b6G5
+         eYo8eljwbxj0PP7AgB+qbvIjDwQksmF4jsrRPvdQQD3ewoOEKst731x7K3rlkrmHB7qa
+         NX/EvTdB7jG/LN1XjHVceOXzCVj3h/4uSApNZXsadEZ4upPLj83jjWTK+aOXolczYUMc
+         HWTwGiCNBko3k08iMl9vharMDb4fMGnuawTLaRyCvIr6Q6C/WkjMOkWEojYDC7tSRcTn
+         3Hrg==
+X-Forwarded-Encrypted: i=1; AJvYcCV53qLsDiKOIfNGEH9kRQS4JPLwyjylcb9ggKFwHJyZsuhEOKGa0MUy0AQsuT+AiN7jtD4gwa+0nxs=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw22l44qLBciwD/12mnefZsJivI4n+Moac0YM+8/4tFkEntrni0
+	D30PtW0UGmVTROX9xrj91BY9j3BB9RgY6OKd2EAaCknnrEjTXNnG4EA8Gwz7rhkTcpl1MLA4UQl
+	4/4Gk+YOVHrjOMzpU4NeuMD9MlSytgqk=
+X-Gm-Gg: ASbGncvuZenxKda070lseReBtKXVmjYcis9rSbK+Kkmn+GG82uIK1oPZ7WVXj0ALOoO
+	WUN2BQ/8Pdxx7Wmvgp2v7Law0AZF7fgEQUPrUc+gpVyww/3QneScOfspIlKyPM6pd42uku8D36i
+	0KWnVRWmRV1bJPI1L+1iA0Ar4HmY/AFZYt9pbbtJDrpeR0rgQt0RxbZfABiYe0xN4k9/8ZDyhBJ
+	XR1xqduEBpBIocYm30917Ne8Ib0sLUc+/oyeZhjpkM3CNwrkHE6RzHCDekx6cZFnk5m
+X-Google-Smtp-Source: AGHT+IGolAUq66Sf1/v3NSKzalmQQj7kPl02udnk7U4Xo9OP2JjIo8pInOmeNbraJNNQ0vDWM/mFH0y3xhNP06Dh6nA=
+X-Received: by 2002:a17:907:7b87:b0:b76:74b6:da78 with SMTP id
+ a640c23a62f3a-b79ec6743f4mr6955266b.35.1764784637530; Wed, 03 Dec 2025
+ 09:57:17 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v20 3/7] firmware: imx: add driver for NXP EdgeLock
- Enclave
-To: Frank Li <Frank.li@nxp.com>
-Cc: Pankaj Gupta <pankaj.gupta@nxp.com>, Jonathan Corbet <corbet@lwn.net>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org
-References: <20251203-imx-se-if-v20-0-a04a25c4255f@nxp.com>
- <20251203-imx-se-if-v20-3-a04a25c4255f@nxp.com>
- <1ee383c7-ccbc-4c90-adf3-bfbe87fb6765@kernel.org>
- <aTBsdW0lpZSCVsgp@lizhi-Precision-Tower-5810>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 a/A=
-In-Reply-To: <aTBsdW0lpZSCVsgp@lizhi-Precision-Tower-5810>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20251121193524.1813200-1-geomatsi@gmail.com>
+In-Reply-To: <20251121193524.1813200-1-geomatsi@gmail.com>
+From: Andy Chiu <andybnac@gmail.com>
+Date: Wed, 3 Dec 2025 11:57:06 -0600
+X-Gm-Features: AWmQ_bkrrlk_PDPxAzDGug-3rsg4IwNXffMJGvryJ06Fa4-F8x1hOmGxYgQgfX8
+Message-ID: <CAFTtA3NVd8HMomd60i=T_S34TSL18==aYRFhg2AH-PbsM=hggw@mail.gmail.com>
+Subject: Re: [PATCH] riscv: hwprobe: expose vector register length in bytes
+To: Sergey Matyukevich <geomatsi@gmail.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, 
+	Charlie Jenkins <charlie@rivosinc.com>, Conor Dooley <conor.dooley@microchip.com>, 
+	Andrew Jones <ajones@ventanamicro.com>, linux-riscv@lists.infradead.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 03/12/2025 17:59, Frank Li wrote:
-> On Wed, Dec 03, 2025 at 08:20:50AM +0100, Krzysztof Kozlowski wrote:
->> On 03/12/2025 07:48, Pankaj Gupta wrote:
->>> Add driver for enabling MU based communication interface to secure-enclave.
->>>
->>> NXP hardware IP(s) for secure-enclaves like Edgelock Enclave(ELE), are
->>> embedded in the SoC to support the features like HSM, SHE & V2X, using
->>> message based communication interface.
->>>
->>> The secure enclave FW communicates with Linux over single or multiple
->>> dedicated messaging unit(MU) based interface(s).
->>> Exists on i.MX SoC(s) like i.MX8ULP, i.MX93, i.MX95 etc.
->>>
->>> For i.MX9x SoC(s) there is at least one dedicated ELE MU(s) for each
->>> world - Linux(one or more) and OPTEE-OS (one or more).
->>>
->>> Other dependent kernel drivers will be:
->>> - NVMEM: that supports non-volatile devices like EFUSES,
->>>          managed by NXP's secure-enclave.
->>>
->>> Signed-off-by: Pankaj Gupta <pankaj.gupta@nxp.com>
->>> Reviewed-by: Frank Li <Frank.Li@nxp.com>
->>> ---
->>>  drivers/firmware/imx/Kconfig        |  13 ++
->>>  drivers/firmware/imx/Makefile       |   2 +
->>>  drivers/firmware/imx/ele_base_msg.c | 269 ++++++++++++++++++++++++
->>>  drivers/firmware/imx/ele_base_msg.h |  95 +++++++++
->>>  drivers/firmware/imx/ele_common.c   | 333 ++++++++++++++++++++++++++++++
->>>  drivers/firmware/imx/ele_common.h   |  45 ++++
->>>  drivers/firmware/imx/se_ctrl.c      | 401 ++++++++++++++++++++++++++++++++++++
->>>  drivers/firmware/imx/se_ctrl.h      |  86 ++++++++
->>>  include/linux/firmware/imx/se_api.h |  14 ++
->>>  9 files changed, 1258 insertions(+)
->>>
->>> diff --git a/drivers/firmware/imx/Kconfig b/drivers/firmware/imx/Kconfig
->>> index 127ad752acf8..5fe96299b704 100644
->>> --- a/drivers/firmware/imx/Kconfig
->>> +++ b/drivers/firmware/imx/Kconfig
->>> @@ -55,3 +55,16 @@ config IMX_SCMI_MISC_DRV
->>>  	  core that could provide misc functions such as board control.
->>>
->>>  	  This driver can also be built as a module.
->>> +
->>> +config IMX_SEC_ENCLAVE
->>> +	tristate "i.MX Embedded Secure Enclave - EdgeLock Enclave Firmware driver."
->>> +	depends on IMX_MBOX && ARCH_MXC && ARM64
->>> +	select FW_LOADER
->>> +	default m if ARCH_MXC
->>> +
->>> +	help
->>> +	  Exposes APIs supported by the iMX Secure Enclave HW IP called:
->>> +	  - EdgeLock Enclave Firmware (for i.MX8ULP, i.MX93),
->>> +	    like base, HSM, V2X & SHE using the SAB protocol via the shared Messaging
->>> +	    Unit. This driver exposes these interfaces via a set of file descriptors
->>> +	    allowing to configure shared memory, send and receive messages.
->>> diff --git a/drivers/firmware/imx/Makefile b/drivers/firmware/imx/Makefile
->>> index 3bbaffa6e347..4412b15846b1 100644
->>> --- a/drivers/firmware/imx/Makefile
->>> +++ b/drivers/firmware/imx/Makefile
->>> @@ -4,3 +4,5 @@ obj-$(CONFIG_IMX_SCU)		+= imx-scu.o misc.o imx-scu-irq.o rm.o imx-scu-soc.o
->>>  obj-${CONFIG_IMX_SCMI_CPU_DRV}	+= sm-cpu.o
->>>  obj-${CONFIG_IMX_SCMI_MISC_DRV}	+= sm-misc.o
->>>  obj-${CONFIG_IMX_SCMI_LMM_DRV}	+= sm-lmm.o
->>> +sec_enclave-objs		= se_ctrl.o ele_common.o ele_base_msg.o
->>> +obj-${CONFIG_IMX_SEC_ENCLAVE}	+= sec_enclave.o
->>> diff --git a/drivers/firmware/imx/ele_base_msg.c b/drivers/firmware/imx/ele_base_msg.c
->>> new file mode 100644
->>> index 000000000000..a070acbd895c
->>> --- /dev/null
->>> +++ b/drivers/firmware/imx/ele_base_msg.c
->>> @@ -0,0 +1,269 @@
->>> +// SPDX-License-Identifier: GPL-2.0+
->>> +/*
->>> + * Copyright 2025 NXP
->>> + */
->>> +
->>> +#include <linux/types.h>
->>> +
->>> +#include <linux/completion.h>
->>> +#include <linux/dma-mapping.h>
->>> +#include <linux/genalloc.h>
->>> +
->>> +#include "ele_base_msg.h"
->>> +#include "ele_common.h"
->>> +
->>> +#define FW_DBG_DUMP_FIXED_STR		"ELE"
->>> +
->>> +int ele_get_info(struct se_if_priv *priv, struct ele_dev_info *s_info)
->>> +{
->>> +	struct se_api_msg *tx_msg __free(kfree) = NULL;
->>> +	struct se_api_msg *rx_msg __free(kfree) = NULL;
->>
->> No, don't use this syntax. This is explicitly discouraged.
->>
->> NAK
-> 
-> Add link for reference.
-> 
-> https://lore.kernel.org/all/CAHk-=whPZoi03ZwphxiW6cuWPtC3nyKYS8_BThgztCdgPWP1WA@mail.gmail.com/
+Hi Sergey,
 
-This is since beginning documented in kernel, so contributor could read
-cleanup docs before using them. Above Linus remark is nothing new, he
-already wrote it ~2 years ago.
+On Fri, Nov 21, 2025 at 1:37=E2=80=AFPM Sergey Matyukevich <geomatsi@gmail.=
+com> wrote:
+>
+> The vector register length can be obtained from the read-only CSR vlenb.
+> However reading this CSR may be undesirable in some cases. XTheadVector
+> extension is one example: existing implementations may not provide this
+> register. On such platforms, vlenb is specified as device-tree property.
 
-Best regards,
-Krzysztof
+I wonder why a hwprobe entry is needed even in this context. If vlenb
+is not available, we can always use a vsetvli and read the destination
+register to infer register length. Isn't that also true for Vector
+0.7, or are you considering anything else?
+
+> Reading vlenb also initializes the application=E2=80=99s vector context, =
+even
+> though the application may decide not to use the vector extension based
+> on the reported length.
+>
+> Meanwhile the kernel already determines vlenb at boot, either from the
+> CSR or from the device tree. So add RISCV_HWPROBE_KEY_VECTOR_REG_LENGTH
+> to expose the vector register length already known to the kernel.
+>
+> Signed-off-by: Sergey Matyukevich <geomatsi@gmail.com>
+> ---
+>  Documentation/arch/riscv/hwprobe.rst  | 3 +++
+>  arch/riscv/include/asm/hwprobe.h      | 2 +-
+>  arch/riscv/include/uapi/asm/hwprobe.h | 1 +
+>  arch/riscv/kernel/sys_hwprobe.c       | 6 ++++++
+>  4 files changed, 11 insertions(+), 1 deletion(-)
+>
+> diff --git a/Documentation/arch/riscv/hwprobe.rst b/Documentation/arch/ri=
+scv/hwprobe.rst
+> index 06c5280b728a..14437fe79276 100644
+> --- a/Documentation/arch/riscv/hwprobe.rst
+> +++ b/Documentation/arch/riscv/hwprobe.rst
+> @@ -379,3 +379,6 @@ The following keys are defined:
+>
+>  * :c:macro:`RISCV_HWPROBE_KEY_ZICBOP_BLOCK_SIZE`: An unsigned int which
+>    represents the size of the Zicbop block in bytes.
+> +
+> +* :c:macro:`RISCV_HWPROBE_KEY_VECTOR_REG_LENGTH`: An unsigned int which
+> +  represents the vector registers length in bytes.
+> diff --git a/arch/riscv/include/asm/hwprobe.h b/arch/riscv/include/asm/hw=
+probe.h
+> index 8c572a464719..b10311c9a44c 100644
+> --- a/arch/riscv/include/asm/hwprobe.h
+> +++ b/arch/riscv/include/asm/hwprobe.h
+> @@ -8,7 +8,7 @@
+>
+>  #include <uapi/asm/hwprobe.h>
+>
+> -#define RISCV_HWPROBE_MAX_KEY 15
+> +#define RISCV_HWPROBE_MAX_KEY 16
+>
+>  static inline bool riscv_hwprobe_key_is_valid(__s64 key)
+>  {
+> diff --git a/arch/riscv/include/uapi/asm/hwprobe.h b/arch/riscv/include/u=
+api/asm/hwprobe.h
+> index 1edea2331b8b..bd6cd97c81f9 100644
+> --- a/arch/riscv/include/uapi/asm/hwprobe.h
+> +++ b/arch/riscv/include/uapi/asm/hwprobe.h
+> @@ -110,6 +110,7 @@ struct riscv_hwprobe {
+>  #define RISCV_HWPROBE_KEY_VENDOR_EXT_SIFIVE_0  13
+>  #define RISCV_HWPROBE_KEY_VENDOR_EXT_MIPS_0    14
+>  #define RISCV_HWPROBE_KEY_ZICBOP_BLOCK_SIZE    15
+> +#define RISCV_HWPROBE_KEY_VECTOR_REG_LENGTH    16
+>  /* Increase RISCV_HWPROBE_MAX_KEY when adding items. */
+>
+>  /* Flags */
+> diff --git a/arch/riscv/kernel/sys_hwprobe.c b/arch/riscv/kernel/sys_hwpr=
+obe.c
+> index 0f701ace3bb9..3007432fbdf1 100644
+> --- a/arch/riscv/kernel/sys_hwprobe.c
+> +++ b/arch/riscv/kernel/sys_hwprobe.c
+> @@ -328,6 +328,12 @@ static void hwprobe_one_pair(struct riscv_hwprobe *p=
+air,
+>                 hwprobe_isa_vendor_ext_mips_0(pair, cpus);
+>                 break;
+>
+> +       case RISCV_HWPROBE_KEY_VECTOR_REG_LENGTH:
+> +               pair->value =3D 0;
+> +               if (has_vector() || has_xtheadvector())
+> +                       pair->value =3D riscv_v_vsize / 32;
+> +               break;
+> +
+>         /*
+>          * For forward compatibility, unknown keys don't fail the whole
+>          * call, but get their element key set to -1 and value set to 0
+> --
+> 2.51.2
+>
+>
+> _______________________________________________
+> linux-riscv mailing list
+> linux-riscv@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/linux-riscv
+
+Thanks,
+Andy
 
