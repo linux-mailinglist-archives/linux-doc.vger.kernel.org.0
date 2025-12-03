@@ -1,60 +1,61 @@
-Return-Path: <linux-doc+bounces-68812-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68815-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49A9ECA1F24
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 00:30:39 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id F177ECA1F30
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 00:31:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id AE71630019D5
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 23:30:38 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 523F8300E785
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Dec 2025 23:30:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8CF122F3617;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A48AF2FB987;
 	Wed,  3 Dec 2025 23:30:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TTSGKzFD"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GkKzzvC5"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 624DF2E1EE0;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72BAA2EB86A;
 	Wed,  3 Dec 2025 23:30:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764804637; cv=none; b=gsOnaSWDiMlPS6iSbxMW0kjATWffNvrnMeLf9+KbBYT4s9BhoyAUlw523cVC91b9GVCAIO97GbyqbHICofHS2d6RfcSAeTpyVLiwckGC32pHBbSzIbwUIGcbLJFQUd7rP44SmV6/+1v1M0Omw3nGg7dHj3QdXdk9Pdq4cAxYEIU=
+	t=1764804637; cv=none; b=lgrwhlQVOiakCzImybHAduntnKHAbGJAsIe39GLBzKOgg+pNgJmo0QOO4qJ6IxlU2/6S1motED7MESbhwNDjiVdQ9yOjrv7FfdLvxFG0UBDaO775MPitQmQRfTp65ctTSOZ0P+pp1jxpN5dVI5Nm3swzIj59pF8LcoNkq1Ns1rU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1764804637; c=relaxed/simple;
-	bh=+af9Qrl81jzQeC8vw0DiKskxnHYHklRLaViyotNOrs8=;
+	bh=MfXbJ6vSs1Dx3b2SfnaSAfowCKIWsMTNjHXn3OinNe8=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=tBAzT8EOWth7TeNKrdEzWttpFXpMLXmRh7K+gXUzqXpHuNpOXwPqzfQHkUC3gLyGA+zSVVFzRuqDu8kDXVmZSWjbwxSGMBnSe0Rw7MhZ4HkjcwTr4yUEmP94NJ1C5bH1upOJXKYgF8RCoMfpO+29SCfTADdbz//CXdjSEIp+MVo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TTSGKzFD; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CB03C4CEFB;
+	 MIME-Version; b=ricgTHyj797pMyE13q77RzMZNILzEPosTA87MbvrA9P9LfSGbWEs+wjEt7dfuKxdNr8pUKJ2Hhxr6foLCBMfAxgLMWgFSxBkEUZgKpU5MFeR0QvrwBjXsmkmg54N8IghGRsukkAs8ntvslDB2hZNr2dWkk/ABr5m5Ge7U9aYCu0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GkKzzvC5; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E903C116C6;
 	Wed,  3 Dec 2025 23:30:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1764804637;
-	bh=+af9Qrl81jzQeC8vw0DiKskxnHYHklRLaViyotNOrs8=;
+	bh=MfXbJ6vSs1Dx3b2SfnaSAfowCKIWsMTNjHXn3OinNe8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=TTSGKzFDZcQCzCkHsA0QD/1UM2l83yGCYfNGL2ubDFhu5/qeOqXuKKuQqZE7chn1+
-	 wQUHvKKZWhk93Crwejf1aRATHApj/RIA9T9v2yzKOIfpvzYXlCiX3vuLOg/sG31hSz
-	 JJnA1bl6492zszZWShNQLqIaQkToFRRiUTlckUtfHB6cy1MqEx8EV1bexU9WfrMzer
-	 f/j5Ey+0A5xveVQFv+1s1JAg4qLKxoY3aUF2o4hgNPxf/Z8P7HaTzq4N80gCluMTsU
-	 5iqc0SENnfMz0CvtMWuNavf+s6+0x7XcoVJKjYZM88aWE2M3c4wF5DMMeTylnovfG7
-	 06TNKJfZlbo1w==
+	b=GkKzzvC57I+ubbzzUXskQZPPGE1GvWjqTiM3d35YfztkY9NIikn9kZ0T5XWf2PxAi
+	 GQ6P4Y3Spf4QUlTwHZJooN9f2Ia6Q2b9h0klqmRNW5/klLd0GuZR3Nu6FoApw+Xin1
+	 DvbMZp62pbv1KK5jklUVk5wCy9maWxe2Ssb9xo8aqvEXedQVjo3AmEi19cUH/8ALvT
+	 Ygp8GmIrVwPmd692LyrycPTdMK6sBy7bIJxNyqc1f0HcrNv8hp8db+TRYQ9VUoU0AQ
+	 qHTcsbtd2ymA2lZ2RdBNlLW+UAD4OTaUBYSWACqvTKz3jPGGk8+ZcV++UUULCi9FaE
+	 e+CZ4JNFFVAxw==
 From: Kees Cook <kees@kernel.org>
 To: Vlastimil Babka <vbabka@suse.cz>
 Cc: Kees Cook <kees@kernel.org>,
-	Andy Whitcroft <apw@canonical.com>,
-	Joe Perches <joe@perches.com>,
-	Dwaipayan Ray <dwaipayanray1@gmail.com>,
-	Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
+	Nathan Chancellor <nathan@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Nick Desaulniers <ndesaulniers@google.com>,
+	Marco Elver <elver@google.com>,
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
+	linux-hardening@vger.kernel.org,
 	Linus Torvalds <torvalds@linux-foundation.org>,
 	Randy Dunlap <rdunlap@infradead.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	Przemek Kitszel <przemyslaw.kitszel@intel.com>,
-	"Gustavo A. R. Silva" <gustavoars@kernel.org>,
 	Matthew Wilcox <willy@infradead.org>,
 	John Hubbard <jhubbard@nvidia.com>,
+	Joe Perches <joe@perches.com>,
 	Christoph Lameter <cl@linux.com>,
-	Marco Elver <elver@google.com>,
 	Vegard Nossum <vegard.nossum@oracle.com>,
 	Pekka Enberg <penberg@kernel.org>,
 	David Rientjes <rientjes@google.com>,
@@ -68,8 +69,6 @@ Cc: Kees Cook <kees@kernel.org>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Sasha Levin <sashal@kernel.org>,
 	linux-mm@kvack.org,
-	Nathan Chancellor <nathan@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
 	Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Jakub Kicinski <kuba@kernel.org>,
@@ -79,12 +78,11 @@ Cc: Kees Cook <kees@kernel.org>,
 	Jan Hendrik Farr <kernel@jfarr.cc>,
 	Alexander Potapenko <glider@google.com>,
 	linux-kernel@vger.kernel.org,
-	linux-hardening@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	llvm@lists.linux.dev
-Subject: [PATCH v6 2/5] checkpatch: Suggest kmalloc_obj family for sizeof allocations
-Date: Wed,  3 Dec 2025 15:30:32 -0800
-Message-Id: <20251203233036.3212363-2-kees@kernel.org>
+Subject: [PATCH v6 3/5] compiler_types: Introduce __flex_counter() and family
+Date: Wed,  3 Dec 2025 15:30:33 -0800
+Message-Id: <20251203233036.3212363-3-kees@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251203233029.it.641-kees@kernel.org>
 References: <20251203233029.it.641-kees@kernel.org>
@@ -94,87 +92,152 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3354; i=kees@kernel.org; h=from:subject; bh=+af9Qrl81jzQeC8vw0DiKskxnHYHklRLaViyotNOrs8=; b=owGbwMvMwCVmps19z/KJym7G02pJDJkGJyTv9C7XFGXkFdC7we0hu+rcOSf++jRpTnn3BRHPt 5c9zp/eUcrCIMbFICumyBJk5x7n4vG2Pdx9riLMHFYmkCEMXJwCMBGxyQx/xV2+miz81fON7f6+ 2KR5uzQO/j8lw/ym6/hE8ZyDycs+bWNkOPDaslVXY7uKeBQvU9LTrE1t+e7ZKwP3vRKdUnPn5tI /fAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5281; i=kees@kernel.org; h=from:subject; bh=MfXbJ6vSs1Dx3b2SfnaSAfowCKIWsMTNjHXn3OinNe8=; b=owGbwMvMwCVmps19z/KJym7G02pJDJkGJ6SyquI9VTrT7K0fRN96M/XBg4q2dqVNr7rUPzbWO P1O3Leto5SFQYyLQVZMkSXIzj3OxeNte7j7XEWYOaxMIEMYuDgFYCLe/Qz/M962TshlVb25WTQ3 YnViltHfjsB5KdXZGiIu2ROm6jhNY2R4Op1R/sq13++vuB0wmvLk3Fpvj8u+a03qGFTK09OCWHb zAgA=
 X-Developer-Key: i=kees@kernel.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
-To support shifting away from sized allocation towards typed
-allocations, suggest the kmalloc_obj family of macros when a sizeof() is
-present in the argument lists.
+Introduce __flex_counter() which wraps __builtin_counted_by_ref(),
+as newly introduced by GCC[1] and Clang[2]. Use of __flex_counter()
+allows access to the counter member of a struct's flexible array member
+when it has been annotated with __counted_by().
+
+Introduce typeof_flex_counter(), overflows_flex_counter_type(), and
+__set_flex_counter() to provide the needed _Generic() wrappers to get
+sane results out of __flex_counter().
+
+For example, with:
+
+	struct foo {
+		int counter;
+		short array[] __counted_by(counter);
+	} *p;
+
+__flex_counter(p->array) will resolve to: &p->counter
+
+typeof_flex_counter(p->array) will resolve to "int". (If p->array was not
+annotated, it would resolve to "size_t".)
+
+overflows_flex_counter_type(typeof(*p), array, COUNT) is the same as:
+
+	COUNT <= type_max(p->counter) && COUNT >= type_min(p->counter)
+
+(If p->array was not annotated it would return true since everything
+fits in size_t.)
+
+__set_flex_counter(p->array, COUNT) is the same as:
+
+	p->counter = COUNT;
+
+(It is a no-op if p->array is not annotated with __counted_by().)
 
 Signed-off-by: Kees Cook <kees@kernel.org>
 ---
-Cc: Andy Whitcroft <apw@canonical.com>
-Cc: Joe Perches <joe@perches.com>
-Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>
-Cc: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Cc: Miguel Ojeda <ojeda@kernel.org>
+Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc: Nathan Chancellor <nathan@kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Nick Desaulniers <ndesaulniers@google.com>
+Cc: Marco Elver <elver@google.com>
+Cc: Przemek Kitszel <przemyslaw.kitszel@intel.com>
+Cc: linux-hardening@vger.kernel.org
 ---
- scripts/checkpatch.pl | 39 +++++++++++++++++++++++++++++++++------
- 1 file changed, 33 insertions(+), 6 deletions(-)
+ include/linux/compiler_types.h | 31 +++++++++++++++++++++++++
+ include/linux/overflow.h       | 42 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
 
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index d58ca9655ab7..a8cdfb502ccc 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -7258,17 +7258,42 @@ sub process {
- 			    "Prefer $3(sizeof(*$1)...) over $3($4...)\n" . $herecurr);
- 		}
+diff --git a/include/linux/compiler_types.h b/include/linux/compiler_types.h
+index c46855162a8a..a31fe3dbf576 100644
+--- a/include/linux/compiler_types.h
++++ b/include/linux/compiler_types.h
+@@ -507,6 +507,37 @@ struct ftrace_likely_data {
+ #define __annotated(var, attr)	__builtin_has_attribute(var, attr)
+ #endif
  
--# check for (kv|k)[mz]alloc with multiplies that could be kmalloc_array/kvmalloc_array/kvcalloc/kcalloc
-+# check for (kv|k)[mz]alloc that could be kmalloc_obj/kvmalloc_obj/kzalloc_obj/kvzalloc_obj
-+		if ($perl_version_ok &&
-+		    defined $stat &&
-+		    $stat =~ /^\+\s*($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*,/) {
-+			my $oldfunc = $3;
-+			my $a1 = $4;
-+			my $newfunc = "kmalloc_obj";
-+			$newfunc = "kvmalloc_obj" if ($oldfunc eq "kvmalloc");
-+			$newfunc = "kvzalloc_obj" if ($oldfunc eq "kvzalloc");
-+			$newfunc = "kzalloc_obj" if ($oldfunc eq "kzalloc");
++/*
++ * Optional: only supported since gcc >= 15, clang >= 19
++ *
++ *   gcc: https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html#index-_005f_005fbuiltin_005fcounted_005fby_005fref
++ * clang: https://clang.llvm.org/docs/LanguageExtensions.html#builtin-counted-by-ref
++ */
++#if __has_builtin(__builtin_counted_by_ref)
++/**
++ * __flex_counter() - Get pointer to counter member for the given
++ *                    flexible array, if it was annotated with __counted_by()
++ * @FAM: Pointer to flexible array member of an addressable struct instance
++ *
++ * For example, with:
++ *
++ *	struct foo {
++ *		int counter;
++ *		short array[] __counted_by(counter);
++ *	} *p;
++ *
++ * __flex_counter(p->array) will resolve to &p->counter.
++ *
++ * Note that Clang may not allow this to be assigned to a separate
++ * variable; it must be used directly.
++ *
++ * If p->array is unannotated, this returns (void *)NULL.
++ */
++#define __flex_counter(FAM)	__builtin_counted_by_ref(FAM)
++#else
++#define __flex_counter(FAM)	((void *)NULL)
++#endif
 +
-+			if ($a1 =~ s/^sizeof\s*\S\(?([^\)]*)\)?$/$1/) {
-+				my $cnt = statement_rawlines($stat);
-+				my $herectx = get_stat_here($linenr, $cnt, $here);
+ /*
+  * Some versions of gcc do not mark 'asm goto' volatile:
+  *
+diff --git a/include/linux/overflow.h b/include/linux/overflow.h
+index 725f95f7e416..f362e155a7ec 100644
+--- a/include/linux/overflow.h
++++ b/include/linux/overflow.h
+@@ -540,4 +540,46 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
+ 	(__member_size((name)->array) / sizeof(*(name)->array) +			\
+ 						__must_be_array((name)->array))
+ 
++/**
++ * typeof_flex_counter() - Return the type of the counter variable of a given
++ *                         flexible array member annotated by __counted_by().
++ * @FAM: Instance of flexible array member within a given struct.
++ *
++ * Returns: "size_t" if no annotation exists.
++ */
++#define typeof_flex_counter(FAM)				\
++	typeof(_Generic(__flex_counter(FAM),			\
++			void *: (size_t)0,			\
++			default: *__flex_counter(FAM)))
 +
-+				if (WARN("ALLOC_WITH_SIZEOF",
-+					 "Prefer $newfunc over $oldfunc with sizeof\n" . $herectx) &&
-+				    $cnt == 1 &&
-+				    $fix) {
-+					$fixed[$fixlinenr] =~ s/\b($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*,/$1 = $newfunc($a1,/;
-+				}
-+			}
-+		}
++/**
++ * overflows_flex_counter_type() - Check if the counter associated with the
++ *				   given flexible array member can represent
++ *				   a value.
++ * @TYPE: Type of the struct that contains the @FAM.
++ * @FAM: Member name of the FAM within @TYPE.
++ * @COUNT: Value to check against the __counted_by annotated @FAM's counter.
++ *
++ * Returns: true if @COUNT can be represented in the @FAM's counter. When
++ * @FAM is not annotated with __counted_by(), always returns true.
++ */
++#define overflows_flex_counter_type(TYPE, FAM, COUNT)		\
++	(!overflows_type(COUNT, typeof_flex_counter(((TYPE *)NULL)->FAM)))
 +
++/**
++ * __set_flex_counter() - Set the counter associated with the given flexible
++ *                        array member that has been annoated by __counted_by().
++ * @FAM: Instance of flexible array member within a given struct.
++ * @COUNT: Value to store to the __counted_by annotated @FAM_PTR's counter.
++ *
++ * This is a no-op if no annotation exists. Count needs to be checked with
++ * overflows_flex_counter_type() before using this function.
++ */
++#define __set_flex_counter(FAM, COUNT)				\
++({								\
++	*_Generic(__flex_counter(FAM),				\
++		  void *:  &(size_t){ 0 },			\
++		  default: __flex_counter(FAM)) = (COUNT);	\
++})
 +
-+# check for (kv|k)[mz]alloc with multiplies that could be kmalloc_objs/kvmalloc_objs/kzalloc_objs/kvzalloc_objs
- 		if ($perl_version_ok &&
- 		    defined $stat &&
- 		    $stat =~ /^\+\s*($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*\*\s*($FuncArg)\s*,/) {
- 			my $oldfunc = $3;
- 			my $a1 = $4;
- 			my $a2 = $10;
--			my $newfunc = "kmalloc_array";
--			$newfunc = "kvmalloc_array" if ($oldfunc eq "kvmalloc");
--			$newfunc = "kvcalloc" if ($oldfunc eq "kvzalloc");
--			$newfunc = "kcalloc" if ($oldfunc eq "kzalloc");
-+			my $newfunc = "kmalloc_objs";
-+			$newfunc = "kvmalloc_objs" if ($oldfunc eq "kvmalloc");
-+			$newfunc = "kvzalloc_objs" if ($oldfunc eq "kvzalloc");
-+			$newfunc = "kzalloc_objs" if ($oldfunc eq "kzalloc");
- 			my $r1 = $a1;
- 			my $r2 = $a2;
- 			if ($a1 =~ /^sizeof\s*\S/) {
-@@ -7284,7 +7309,9 @@ sub process {
- 					 "Prefer $newfunc over $oldfunc with multiply\n" . $herectx) &&
- 				    $cnt == 1 &&
- 				    $fix) {
--					$fixed[$fixlinenr] =~ s/\b($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*\*\s*($FuncArg)/$1 . ' = ' . "$newfunc(" . trim($r1) . ', ' . trim($r2)/e;
-+					my $sized = trim($r2);
-+					$sized =~ s/^sizeof\s*\S\(?([^\)]*)\)?$/$1/;
-+					$fixed[$fixlinenr] =~ s/\b($Lval)\s*\=\s*(?:$balanced_parens)?\s*((?:kv|k)[mz]alloc)\s*\(\s*($FuncArg)\s*\*\s*($FuncArg)/$1 . ' = ' . "$newfunc(" . $sized . ', ' . trim($r1)/e;
- 				}
- 			}
- 		}
+ #endif /* __LINUX_OVERFLOW_H */
 -- 
 2.34.1
 
