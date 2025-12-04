@@ -1,148 +1,142 @@
-Return-Path: <linux-doc+bounces-68873-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68876-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99F48CA4431
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 16:30:48 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99736CA4798
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 17:26:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id A8A783016ECD
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Dec 2025 15:30:47 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6FFEC31313C0
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Dec 2025 16:22:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1993823D2AB;
-	Thu,  4 Dec 2025 15:30:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99E382F25E6;
+	Thu,  4 Dec 2025 16:14:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XIpmek74"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MjrTWd7I"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 890A91E0DD8
-	for <linux-doc@vger.kernel.org>; Thu,  4 Dec 2025 15:30:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60CA92EDD64;
+	Thu,  4 Dec 2025 16:14:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764862246; cv=none; b=fJKpGP5h2xmTBS3dNkUahaDw8WQ+B5LrmC7a/bW1sLHwtyZEqt93vafoAVbOIbD9MsTYChrg2vTbVHDFyYig/wd1kpYM7yokTXSSpyiwIciDnSuPNAs2+V+P3k5d5X5/5vEU4jSxztwzmS2sF0xAcmk2nxnO96dB0yZ+7090muY=
+	t=1764864888; cv=none; b=cz6y1Z/gjK9LfPVrkEqVx7Q3Y0ya2tn6BtuU0Z11YaZ5W/a8mFtFGPMeVn+4Dbw1wP9GRFPmGqVfPyjrtgk8PupIFJ8lPUsIlpWWejtygik8CUvrE13kh9KIPfDH0oYCIn+twSL6O38jMzk950yM4RUwPNGIrtPx+D5Usuf1cYI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764862246; c=relaxed/simple;
-	bh=Zm9ieslCALH/z4AjjiHUD1iIfB2/hgCbdZHjkZ+mjpg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=asf88gtM+y7Qjl65qOPUdaLUCUEI2MWdOvJeAUj2lp7DTe8JtedIJtuXGvQuwE9VJ6nInIS0kOQnOQbvlU+Zh8Y/36yLLvcfkpH7TvSymzNAu8tvxELDpsMYy98tVppZaquCbi8pdepkK3ILISxGeqSwkh593972F8+U+5FntoA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XIpmek74; arc=none smtp.client-ip=209.85.214.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-29555b384acso11238815ad.1
-        for <linux-doc@vger.kernel.org>; Thu, 04 Dec 2025 07:30:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764862244; x=1765467044; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=4eYlycY1hylOTB5YUsmJJW41uY2q4hI0Kj0UWi48gjk=;
-        b=XIpmek74Xd0B78Gu4v2qCnnpgD0WUvFTbGg5TfdL1GtbGpzCTbtk9lAv5s43ivTSj7
-         iaY3yLYTaw2Mo0Why5fDcmzpdA8dqO8InhRTQd6PZYNdTM+BHnhfOxxULWsguqY3pCMa
-         dnMHwdX9RwAFSx7P/ngSaLdLRilOdfT1HTSjBMWkN9hmMHEAsdGV4Tfv/X+ow9QYkJGD
-         omRtLRlAY0MkiOsU3dM/xDOc7guqm9bgbzNvPxdbbj5gQ2jlv2Uu6G0zmRyUuDQcR1fq
-         wGlmqzENa38LMxUb9Hkf/En3tHcRjLRtsUJBFurmT9iQs5VEkfwZFj153osaqroIeWZE
-         HKYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764862244; x=1765467044;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=4eYlycY1hylOTB5YUsmJJW41uY2q4hI0Kj0UWi48gjk=;
-        b=hoDBY1E4pwN2kg7pe6KNgZtT3ppXRtOE0Deq+mKSjVrNFeH8G54b0HkoE7w2t5GpoV
-         pnZAsBgN+CqgBreQ2cq4ZeldqlIfwm4FwSD3DmUGpWzy8uImNZ75+kjuYRZkQeB1NGPT
-         7NC9zBvByGUXSqDY1xAVGP4arD+5WB9VwdbRrp7wwOLvqDyD+wWANbQPSoqQclsm3qpR
-         QS45+mYRdrUrTfFSBf9TZnUKpcd+F2RiTjGX/PzeZ+NWJKGrB5WiM7GFXNt1refQKLJm
-         KwNgw3LwuNnq4+Xw85qCApHjtP32QJQBBlSX51U1CD4lChgnpKWkZhmG+Z3gt0gcgZA7
-         ecSQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWiD8yMhe87Z1XprxUhvcRVo3H0bmpYp/ZCVpUg8vGq858PrDmzrgt5vbxYK5vC4eynSK0g3z/qqd4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwfSA2c3niMyA+hgFpDfEMgSuz5t6SiPCzvABGtPsDNZBQeDSe4
-	EW54vwP8X4zksumyFamJe1fR05OV1c3Nh9QhEkn+k3W4Ir12+CZHKGE7
-X-Gm-Gg: ASbGncummvZGp17mkqHE9XOQTlmBfNJUxi7sbowt66gRjCeb9fP+sgAkQTXwyqYu/X/
-	mpLT+7rFVNgvo4ylsjx+xWZolhbY5BhO9BhfI6vEA4gPGi7mUMRs+bskwYFzzqpViyZVevDWWj/
-	GF4O0ZkHi6MwOPZzUyPPeNIZJDApT1S4A+SqLP5ZrkXqamXh3YQBVvRdkC3ITiD3aOI0h/Tx532
-	Ro4isGWAKf6Y0bv64L1S6GxTJfJ2jXSJW0IW+Y7pJk5YUKKZxR+ptsNCFF9CQ12ZHo/uBm+5vYA
-	58mavJgtKI1ggcwvcl+1Nmj05L3DsV4PKJmxKG+2SR8hGbTyXtsKd/N3qU2YBCTLZrzWL6MP0oS
-	E46mGpuFqjQRwUTeOva+ru1+pUZYM+NbMt50iaN3TO5Aj1ugGSNpFXhUg9FFGeeOHqDo8ZW+FcR
-	2VQ+53AxKwKQ4+967fNtw=
-X-Google-Smtp-Source: AGHT+IGUuxpLqmy4omgL7DayDrCXKB4XMbmLpb2m72M6WfzhzKd/lpFRyfBDddrHoUtvpi7znSaRDQ==
-X-Received: by 2002:a05:7022:e98d:b0:11b:ceee:a469 with SMTP id a92af1059eb24-11df0c2fc19mr4186449c88.22.1764862243599;
-        Thu, 04 Dec 2025 07:30:43 -0800 (PST)
-Received: from localhost ([2804:30c:941:4500:2e30:10b5:73b0:4b74])
-        by smtp.gmail.com with UTF8SMTPSA id a92af1059eb24-11df7552211sm8769605c88.1.2025.12.04.07.30.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Dec 2025 07:30:42 -0800 (PST)
-Date: Thu, 4 Dec 2025 12:32:16 -0300
-From: Marcelo Schmitt <marcelo.schmitt1@gmail.com>
-To: Tomas Melin <tomas.melin@vaisala.com>
-Cc: Marcelo Schmitt <marcelo.schmitt@analog.com>, linux-iio@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, jic23@kernel.org, nuno.sa@analog.com,
-	dlechner@baylibre.com, andy@kernel.org,
-	Michael.Hennerich@analog.com, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, corbet@lwn.net
-Subject: Re: [PATCH v3 3/3] Docs: iio: Add AD4134
-Message-ID: <aTGpgEFew2vP1CTG@debian-BULLSEYE-live-builder-AMD64>
-References: <cover.1764708608.git.marcelo.schmitt@analog.com>
- <69b230190abb4cd76ad9eb25e2bde51caaa23d9a.1764708608.git.marcelo.schmitt@analog.com>
- <19d5c51d-41f3-446a-aced-5be2fe6ec0d2@vaisala.com>
+	s=arc-20240116; t=1764864888; c=relaxed/simple;
+	bh=pAQTPCvFXYrGAotRnk0JwW3gTHvZ0ixKDshwUPXxrK8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=NBQ8OogupZP7Uen4zIp/VixQ3tbN/DBNXFV3yIG8f1VaHUoGHODLBI08rNkR1YmZU7QsBwTEPivnQJIEKBOcQMXtjK0sgEnSajRG8gm+a2QeZHKY3J09J2hwzcM51zsvKQfpXQdYQ31vY8G8dxZWjF4qVpgusiWkYGt8X+93zOs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MjrTWd7I; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E2B36C4CEFB;
+	Thu,  4 Dec 2025 16:14:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1764864888;
+	bh=pAQTPCvFXYrGAotRnk0JwW3gTHvZ0ixKDshwUPXxrK8=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=MjrTWd7IESQq2OaB5iubUwsUjuDu7SzTTl+xi5NHzYGk96AQlLJ0egKjKgELyx6bp
+	 OQnWHPiQXiBr6iIw8IXYevzw7lAC4Bfv68IFaGzXR7665HE7uz9jPMX3keQOMhtzty
+	 QRGw+AxSQ4Rfp501MKgCGIWFQED3tSJJmpoqOMLbd77xNd78lRF6DY+GuoJd8uiPlk
+	 kpilDTgFD0KC209iWiizP7AjznIrjWNFIJH8kiwf7z0A2zM6QjNSGuK4O3B4ud+JYO
+	 RbQ75N2ctTev3T2k53wdQkBOKuBOIq9c3cEICP+CStdBz80xu0jFzh8NlwFArqTaGd
+	 fmAj7E0ND53tQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC346D21693;
+	Thu,  4 Dec 2025 16:14:47 +0000 (UTC)
+From: =?utf-8?q?Nuno_S=C3=A1_via_B4_Relay?= <devnull+nuno.sa.analog.com@kernel.org>
+Subject: [PATCH v4 0/3] hwmon: Add support for the LTC4283 Hot Swap
+ Controller
+Date: Thu, 04 Dec 2025 16:15:25 +0000
+Message-Id: <20251204-ltc4283-support-v4-0-db0197fd7984@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <19d5c51d-41f3-446a-aced-5be2fe6ec0d2@vaisala.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAJ6zMWkC/23OwQ7CIAyA4VdZOIuBwjbw5HsYD4MVJZljgblol
+ r27aKLGzOPfpF87k4TRYyK7YiYRJ5986HPITUHsuelPSH2bmwCDkikOtButBCVoug5DiCOF2io
+ rsdK2MiRvDRGdv73EwzH32acxxPvrwMSf07clV9bEKaNKGbDo6lo42Dd904XT1oYLeWITfAHNx
+ BqADFTGItO85My4FSA+AOfszwciA9JgI3Xlas3bH2BZlgd8uPueMQEAAA==
+X-Change-ID: 20250812-ltc4283-support-27c8c4e69c6b
+To: linux-hwmon@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jean Delvare <jdelvare@suse.com>, 
+ Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Bartosz Golaszewski <brgl@bgdev.pl>, "Rob Herring (Arm)" <robh@kernel.org>, 
+ Bartosz Golaszewski <brgl@kernel.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1764864927; l=2380;
+ i=nuno.sa@analog.com; s=20231116; h=from:subject:message-id;
+ bh=pAQTPCvFXYrGAotRnk0JwW3gTHvZ0ixKDshwUPXxrK8=;
+ b=rnRdWJg2gZbjIbep6IktGTICmCL3KUTRjQh1fqixdCvEtA/d80rvVPRF8MbAvxApjC4N6vMlk
+ w8DGYDag4aLD5+OHcQbdhqN/xoI6qGCeA7VvxO2foozbWObJB1KZwLG
+X-Developer-Key: i=nuno.sa@analog.com; a=ed25519;
+ pk=3NQwYA013OUYZsmDFBf8rmyyr5iQlxV/9H4/Df83o1E=
+X-Endpoint-Received: by B4 Relay for nuno.sa@analog.com/20231116 with
+ auth_id=100
+X-Original-From: =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>
+Reply-To: nuno.sa@analog.com
 
-On 12/03, Tomas Melin wrote:
-> Hi,
-> 
-> On 02/12/2025 22:55, Marcelo Schmitt wrote:
-> > Add initial documentation for the ad4134 IIO driver.
-> 
-> I wonder is there some information in here that is not readily available
-> in the device datasheet? After all, isn't idea with this file to
-> document peculiarities that are not easily found elsewhere?
+This is v3 for the LTC4283 how swap controller. Main change is that I'm
+now using the auxiliary bus for adding the GPIO device (done depending
+on FW properties).
 
-You are correct, these docs are mostly from data sheet info.
-The main idea of having the doc is to make clear what peripheral connection
-schema is currently supported.
-Because AD4134 is both flexible and somewhat extensible in the way it can be
-connected to the host, we could have different wiring configurations, for
-example
+Similar to the LTC4282 device, we're clearing some fault logs in the
+reset_history attributes.
 
-                                                              +-------------+
-  +----------------------+                                    |  DATA HOST  |
-  |       AD4134         |                                    |             |
-  |                      |                                    |             |
-  |Data interface  DOUT0 |----------------------------------->| GPI0        |
-  |for ADC data    DOUT1 |----------------------------------->| GPI1        |
-  |read back       DOUT2 |----------------------------------->| GPI2        |
-  |                DOUT3 |----------------------------------->| GPI3        |
-  |                DCLK  |<--------------+        +---------->| GPI4        |
-  |                ODR   |<------------+ |        | +-------->| GPI5        |
-  |                      |             | |        | | +------>| GPI6        |
-  |                      |             | |        | | | +---->| GPI7        |
-  | SPI interface   CS   |<-------+    | +--------|-|-|-|-----| DCLK        |
-  | for register    SCLK |<-----+ |    |          | | | |     |             |
-  | access          SDI  |<---+ | |    |          | | | |     | TRIGGER     |
-  |                 SDO  |--+ | | |    |          | | | |     +-------------+
-  +----------------------+  | | | |    +----------|-|-|-|---------+
-                            | | | +---------------+ | | |
-                            | | +-------------------+ | |
-                            | +-----------------------+ |
-                            +---------------------------+
+Guenter, in [1] you can find some replies for some questions you had in
+v2 that likely you don't remember anymore.
 
-or even with two devices [1].
-[1]: https://lore.kernel.org/linux-iio/aRIIDTUR5Pyz1Rxi@debian-BULLSEYE-live-builder-AMD64/
+v4 is based in last linux-next (next-20251204) so that we get
+field_prep()/get() for masks that are not compile time constants.
 
-That is not a current use case but it could be possible. I think it's likely we
-will need extra software to support those cases and, when we get to that, we
-would be adding more diagrams to this doc. Still, no strong opinion, we can
-alternatively add the doc only when we get to those more complex cases.
-I'll follow reviewers' preferences if you or anybody else express any.
+[1]: https://lore.kernel.org/linux-hwmon/0765a0b89779331c62a3f136ef030f7f2f40ea47.camel@gmail.com/
+[2]: https://lore.kernel.org/linux-iio/cover.1761588465.git.geert+renesas@glider.be/
 
-Best regards,
-Marcelo
+---
+Changes in v4:
+- Patch 2
+  * Drop driver's own mutex (now handled by the core).
+- Patch 3
+  * Refrased kconfig menu to "Auxiliary Bus GPIO drivers" as suggested;
+  * Add blank line before including the headers;
+  * Fix includes not in alphabetical order;
+  * Dropped custom fied_prep()/get().
+- Link to v3: https://lore.kernel.org/r/20251104-ltc4283-support-v3-0-4bea496f791d@analog.com
+
+Changes in v3:
+- Link to v2: https://lore.kernel.org/r/20250903-ltc4283-support-v2-0-6bce091510bf@analog.com
+
+Changes in v2:
+- Link to v1: https://lore.kernel.org/r/20250814-ltc4283-support-v1-0-88b2cef773f2@analog.com
+
+---
+Nuno Sá (3):
+      dt-bindings: hwmon: Document the LTC4283 Swap Controller
+      hwmon: ltc4283: Add support for the LTC4283 Swap Controller
+      gpio: gpio-ltc4283: Add support for the LTC4283 Swap Controller
+
+ .../devicetree/bindings/hwmon/adi,ltc4283.yaml     |  272 ++++
+ Documentation/hwmon/index.rst                      |    1 +
+ Documentation/hwmon/ltc4283.rst                    |  266 +++
+ MAINTAINERS                                        |    9 +
+ drivers/gpio/Kconfig                               |   15 +
+ drivers/gpio/Makefile                              |    1 +
+ drivers/gpio/gpio-ltc4283.c                        |  215 +++
+ drivers/hwmon/Kconfig                              |   12 +
+ drivers/hwmon/Makefile                             |    1 +
+ drivers/hwmon/ltc4283.c                            | 1719 ++++++++++++++++++++
+ 10 files changed, 2511 insertions(+)
+---
+base-commit: bc04acf4aeca588496124a6cf54bfce3db327039
+change-id: 20250812-ltc4283-support-27c8c4e69c6b
+--
+
+Thanks!
+- Nuno Sá
+
+
 
