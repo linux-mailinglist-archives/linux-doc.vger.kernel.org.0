@@ -1,81 +1,81 @@
-Return-Path: <linux-doc+bounces-68832-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68830-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71432CA2B55
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 08:56:25 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id C3F07CA2B4C
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 08:56:13 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A1CED3073A2E
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Dec 2025 07:55:39 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E024330292D6
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Dec 2025 07:55:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 21BB73101B8;
-	Thu,  4 Dec 2025 07:55:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 432B13128A1;
+	Thu,  4 Dec 2025 07:55:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gMmZMkhV"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EjEBQjxO"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 851FA30F93B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 034E63101A2
 	for <linux-doc@vger.kernel.org>; Thu,  4 Dec 2025 07:55:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764834926; cv=none; b=VRbqobRkec6IZJVT0YsgoQMwsjl/jDsdF+j+kof6SqD8GnyX9J7HXIJYLoKjQBIYyyTyPeYcwCtTiwAjAIMSveXITdEqSWMnMPQ6rpmNgbS+m/1biRebyiO4IpfRxgzykmOFSD7nEqgM3OErmX/SDt0avST5e1q0ePDDKAmungc=
+	t=1764834926; cv=none; b=OiuFAY1/08J6LGU4yKG3GWc5bebpT7ztAfhY2EzbrX6Bmu8vfGXH7cHiacbK1C49ox0NujLg3bMCtfIJr1qqZrQP+P+ktHCIjHe22UsZYFPG4x0n5d6OeSMxXWe3Augd0gr17D2s+Jvtp3fGWdkw0gt/v6rN4FWTuxcOd+gJX4M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1764834926; c=relaxed/simple;
-	bh=djzz99/Nqr+mam54feyNiv1NIFjqDBU6RJYwqgkk4Jc=;
+	bh=gAqTIa/FjG6cAUC+EuJL20860zY+3jWZZY86tAyZUAc=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=pb+GkhG5Z3vJKK+xw8D8vHwVnrs0C0TR7/fvnU3Okgib2SQdgNwkTTCoX0TyPEF4oaiOUfGBWIZNx8ypfBav/rF4l50npxUWGAX5sbWtiKF9W6C5tJyDf94Jj/JwpKv/APg9VWh+/6fjTvvlbJGtmzbgyArvOPNsTCXv6do1qv8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gMmZMkhV; arc=none smtp.client-ip=209.85.167.41
+	 In-Reply-To:To:Cc; b=J/+ojuSwwA+2MjzFnU646ZvueYkj936MB7WPpOpzp0d2GNqErIJR9gExxLWEWCEozoP1I4QH97Amn8m0iOEBvj+RNRmxDsDqjbnVtBQSh3YP1UheNh6eb44V0tNLQPWDDiWjgrvClW/ZpT1wYHMm0cHEYkSCkIcOQlyE8rnHZ74=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EjEBQjxO; arc=none smtp.client-ip=209.85.167.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-594330147efso523320e87.2
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5958187fa55so453850e87.3
         for <linux-doc@vger.kernel.org>; Wed, 03 Dec 2025 23:55:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764834920; x=1765439720; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1764834921; x=1765439721; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Z9GtPr5taZTAzyn89OMPpDe+uAgwZM83gWeHrAtje3E=;
-        b=gMmZMkhV3vs3n0FzsHdafB2Msqyg9ZJ0fYcxNrh6CCd1JJO0wmLYPlkeHxCrOESGxj
-         gpYHcTzstePF3OyQBeLzh4J8xUrUtRPRBHtgbH3q+h0joO1xUGRu8lUbJ2M22LmvojSL
-         Ma9n2w0UdDeDTbZSbSQkxtsJINRMCa3EVdLaEVLdKQJw0ioTg0iWrTJn/Z7QfTRBqXn0
-         8v3aZXApN6JlkNOJ7djlKftiv45U44scS6biKtYhhb6XGb78XeUyiRBvaDPbOEFdx6oh
-         RzixmN6xb/NLTtm4EG8XXxjY32pzmbDJixcaHmRQ3Ta6lvJ0vQmmESwlTlIB2hwRGH6f
-         Y0Tw==
+        bh=FZiwTIA7+3bk0rVcoIpmE4cdhNIriz9fkqfbHGGu2Q8=;
+        b=EjEBQjxOlXOY42LENED3rHo6KrTi3dKuZHtKdl7RHAbEBSVNxco28Ye7K22DbNq3Wx
+         Z4X73LpdkpC0vZtVHOg94Ya0qGfmy1oJCzrmbmuACyTM15nonk66hL3eax2HW3xjtfQb
+         oJDWWuVtVQ0caVp8UPFbe/9RQCwXX0PjXqKtTjQ4QNdJ4OlwSRsQBl2/x/xXEAvYOPkX
+         ubQv/p0W0Bl0lcPpe0umiGlSNgaI9oJb2jfTHUYzFeDd4YLv+BLk3u0Q9uODhE2xb+Pd
+         Jk4lxm0RJMpD1e62UHniX/4cI7NE6mBaPDo5vlf7vFpVD7LNv/Bu9Z+UhGpBkaqoJTPr
+         hUfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764834920; x=1765439720;
+        d=1e100.net; s=20230601; t=1764834921; x=1765439721;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Z9GtPr5taZTAzyn89OMPpDe+uAgwZM83gWeHrAtje3E=;
-        b=qg/SmKEB1gnXF1vniG2Hxz5P6TkC6EZOLjOjefib6yAdYAxbASeR73awKECFuFqqAr
-         vqlyPuY+o1i9MyWhQIptJzUSHlEtmR1q8FTb4iNpIvYY7d5BbMOgCC+8lT5W9GmG47PR
-         ABqpjnyxdVXs9H06wRF1kevGP2cUZTwz2njJfmBEDOM+vhLkAl/9xyhBSaVSxI7jkNBU
-         IgAGi9Vikm0SQtm9moKUsicRUk2lsoc0oimkqSaekTu98jxCDBVAbxggug2Za+QLmaB0
-         vYusdtRwUDIlMRfA5z9iM/0Zdqi/dluWLQHIDpHRk+y+Rd6BNnhV1VE0t9VIZKY/5G4N
-         aNeQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXJwixk2AHCQAGIjhOy6dxxEAHVfO82XBHGnec+nHAmjVgMW9qpinw3dhiUZNdePTQpdD3kzSvKfVg=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwEx5ZiVMvj8TMkWMZM9LNXxmpMBW9GOGRtMRXKpwgumJyAIoV9
-	OZ/0DOa1psJ58CSWYceD2aX+K4GfYF2xLvOso6W2wFJEkLkx7ZA/3HLj
-X-Gm-Gg: ASbGnctFqR20VVim7kWmuslZATMcNBnaxf0sSCMFr03WwryGX837GLbg1yEjWyjzvng
-	lrOJhcdqtJD9tlmIFZZO3G4a0eX7u5xSzQXPt0Xdd4eI4Y9RuaKAkN+YN2MuyMS70zumyPE/Src
-	sVNRHuu/S9IIb+R7NzN37l3sZP3uI/wfmPtq0ixrnLI6cPL82AUEZOBL820ygS2MARaqlxGYBkG
-	rN0ref7jBNgx3YjSINoTSjdLPGmCE8otVHz1nb4SspL5Pi9oCTdm4QIky2fTi8+03uJzQB3aClo
-	JoBhU0qFElFIV1uMUu9FtdJLOWL8gbb9L9TYNrg2eoVWVnjp0W5QWWitPJWGUC+bPhP8c3Bq73G
-	cQwUVq9GdoAIG1OklZTcDPYN2fw73yJTae/1LC7br/DOO77nBWg1Lbz7ye3zeoxU1oSe/3Q==
-X-Google-Smtp-Source: AGHT+IEldMEBa+Y+2+8e9BBmMa+iraf8wmEl/ZT2sdU4A9p2jyG2tZG76w7egCqyyaaevWjMOuPaow==
-X-Received: by 2002:a05:6512:3c9c:b0:595:9d6b:1175 with SMTP id 2adb3069b0e04-597d3f27914mr1982243e87.14.1764834919940;
-        Wed, 03 Dec 2025 23:55:19 -0800 (PST)
+        bh=FZiwTIA7+3bk0rVcoIpmE4cdhNIriz9fkqfbHGGu2Q8=;
+        b=WtDgI7Iv12DYJyBqVM2F5O6pDscXCBsZjtu4U4OhDykjyH0Dg542HQjs5xcWeiM85M
+         cTahmFnNB7TDJ7Cv4uSBWU+t1noGLq5IKp1pQV583gfqNrtkoFF1pFVtolRIzVdHM5Cm
+         VkT4I1jLAEaLET7nVmUljyAKz4X7xTqDagz2LR9XWz9rvkGyb2Q11bzrV79VompyPpF/
+         HM8T7XiRc/hWLK7E2zlj4KR8ztOHd7LZFGRtJOpsuWt4T2z730PcklEU/clnvAZUbGXm
+         LpjfFOBDC+LzTl5brr6Qtgag0QJZVr2d5MH08pl1X5qKz0IpD0yapFK540OzhnpiT3Ls
+         D6Bg==
+X-Forwarded-Encrypted: i=1; AJvYcCVYO9MqIric5BPbA5XDFPFWJXK6sAknUBitU0+lFmBGB1i9QKBW18O2ssbIazP19ZdnXnHwm7tl25w=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwpJTALqfMpRIgjaW1RUMA/5jkDlVFAMO9MW9n/Ff6kevTiM9O2
+	wIzC7Y2nVEhXG3tBUpANu6m/og0Vab7xJvFrHgqGrJdtylr9CujMDctR
+X-Gm-Gg: ASbGncugrAzBaNh1oa5aL2+rlO6bJbNlPGWHGZNVPqsdsyS3zYshMsApjFCrFx+B2Xi
+	11ZeuTVjd/Z457GMgk/VSCCtM6mIn6LwJ/PBKYlVUuFTyi234nAu6Pgx6nSgAs0b0MArI6fprQO
+	nWCoMVhyvNfH5MkEcm+qk9BIx4pprXi8SAEFPY80qHeH3nPxbpqNq95C1rpzXn0WPL3i0lqNvoT
+	YrZKP+2fE+I9VbrMMMzZlMf0wWAkisUI8vbEx7K4LiOaMNgKk/YTIzi3Lgt4EY+hoYFZ79lJzmE
+	ukHmo2YPdWWxiL2rmQqzVweDP37+ROMqL3w+Vd7/nw6sxQRxfA0rbGznOirSJnsXIMn7sr8BHo5
+	sfXIy/SLrEqGP/oAENZYho9sqqg1MzEdRlg9XA5MfYNEtXbqXdIGaPhE5iGzlM8c52sOx8w==
+X-Google-Smtp-Source: AGHT+IGspx1iBq0l/KYW0BPXnBTjQSmqu1QYrFO2QolLF61uEAVSaqBKv7zpWcBgOHbRwa9f2MaI2A==
+X-Received: by 2002:a05:6512:684:b0:55f:4f1f:93fa with SMTP id 2adb3069b0e04-597d66f8a45mr630014e87.42.1764834920536;
+        Wed, 03 Dec 2025 23:55:20 -0800 (PST)
 Received: from minun.felixc.at ([2a01:4f9:6b:1cc4::2])
-        by smtp.googlemail.com with ESMTPSA id 2adb3069b0e04-597d7c28019sm239190e87.69.2025.12.03.23.55.19
+        by smtp.googlemail.com with ESMTPSA id 2adb3069b0e04-597d7c28019sm239190e87.69.2025.12.03.23.55.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Dec 2025 23:55:19 -0800 (PST)
+        Wed, 03 Dec 2025 23:55:20 -0800 (PST)
 From: Asuna Yang <spriteovo@gmail.com>
 X-Google-Original-From: Asuna Yang <SpriteOvO@gmail.com>
-Date: Thu, 04 Dec 2025 08:54:51 +0100
-Subject: [PATCH v5 1/4] rust: export BINDGEN_TARGET from a separate
- Makefile
+Date: Thu, 04 Dec 2025 08:54:52 +0100
+Subject: [PATCH v5 2/4] rust: generate a fatal error if BINDGEN_TARGET is
+ undefined
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -84,7 +84,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251204-gcc-rust-v5-v5-1-2d4f20d86c24@gmail.com>
+Message-Id: <20251204-gcc-rust-v5-v5-2-2d4f20d86c24@gmail.com>
 References: <20251204-gcc-rust-v5-v5-0-2d4f20d86c24@gmail.com>
 In-Reply-To: <20251204-gcc-rust-v5-v5-0-2d4f20d86c24@gmail.com>
 To: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
@@ -109,77 +109,47 @@ X-Mailer: b4 0.14.3
 
 From: Asuna Yang <spriteovo@gmail.com>
 
-A subsequent commit will add a new function `bindgen-option` to
-`scripts/Kconfig.include`. The bindgen backend requires the `--target`
-option for cross compiling, but variable `BINDGEN_TARGET` in
-`rust/Makefile` cannot be exported to `scripts/Kconfig.include`.
+Generate a friendly fatal error if the target triplet is undefined for
+bindgen, rather than having the compiler generate obscure error messages
+during the build stage.
 
-Therefore, move this variable to a separate new `Makefile.rust` file and
-include it from `scripts/Makefile` to make the exported variable
-available for use in Kconfig. Place the include in the `need-compiler`
-branch to avoid including it in irrelevant make targets.
+This piece of code is copied from `scripts/Makefile.clang`.
 
-Since the new file name is `Makefile.rust`, it matches an existing
-MAINTAINERS rule `scripts/*rust*`, so no modification to the MAINTAINERS
-file is needed.
+Before this commit, error messages might look like:
 
+error: unknown argument: '-mno-riscv-attribute'
+error: unsupported argument 'medany' to option '-mcmodel=' for target
+'unknown'
+error: unsupported option '-march=' for target ''
+error: unsupported option '-mno-save-restore' for target ''
+error: unknown target triple 'unknown'
+panicked at bindgen/ir/context.rs:562:15:
+libclang error; possible causes include:
+- Invalid flag syntax
+- Unrecognized flags
+- Invalid flag arguments
+- File I/O errors
+- Host vs. target architecture mismatch
+
+Acked-by: Miguel Ojeda <ojeda@kernel.org>
 Signed-off-by: Asuna Yang <SpriteOvO@gmail.com>
 ---
- Makefile              | 3 ++-
- rust/Makefile         | 8 --------
- scripts/Makefile.rust | 9 +++++++++
- 3 files changed, 11 insertions(+), 9 deletions(-)
+ scripts/Makefile.rust | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/Makefile b/Makefile
-index e61f1300fea0..bdbf2025e68c 100644
---- a/Makefile
-+++ b/Makefile
-@@ -718,9 +718,10 @@ ifneq ($(findstring clang,$(CC_VERSION_TEXT)),)
- include $(srctree)/scripts/Makefile.clang
- endif
- 
-+ifdef need-compiler
-+include $(srctree)/scripts/Makefile.rust
- # Include this also for config targets because some architectures need
- # cc-cross-prefix to determine CROSS_COMPILE.
--ifdef need-compiler
- include $(srctree)/scripts/Makefile.compiler
- endif
- 
-diff --git a/rust/Makefile b/rust/Makefile
-index 5d357dce1704..2603b34f9833 100644
---- a/rust/Makefile
-+++ b/rust/Makefile
-@@ -385,14 +385,6 @@ bindgen_skip_c_flags := -mno-fp-ret-in-387 -mpreferred-stack-boundary=% \
- 	-fzero-init-padding-bits=% -mno-fdpic \
- 	--param=% --param asan-% -fno-isolate-erroneous-paths-dereference
- 
--# Derived from `scripts/Makefile.clang`.
--BINDGEN_TARGET_x86	:= x86_64-linux-gnu
--BINDGEN_TARGET_arm64	:= aarch64-linux-gnu
--BINDGEN_TARGET_arm	:= arm-linux-gnueabi
--BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
--BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
--BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
--
- # All warnings are inhibited since GCC builds are very experimental,
- # many GCC warnings are not supported by Clang, they may only appear in
- # some configurations, with new GCC versions, etc.
 diff --git a/scripts/Makefile.rust b/scripts/Makefile.rust
-new file mode 100644
-index 000000000000..5c12b4b8c8b6
---- /dev/null
+index 5c12b4b8c8b6..b219244cd051 100644
+--- a/scripts/Makefile.rust
 +++ b/scripts/Makefile.rust
-@@ -0,0 +1,9 @@
-+# Derived from `scripts/Makefile.clang`.
-+BINDGEN_TARGET_x86	:= x86_64-linux-gnu
-+BINDGEN_TARGET_arm64	:= aarch64-linux-gnu
-+BINDGEN_TARGET_arm	:= arm-linux-gnueabi
-+BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
-+BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
-+BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
-+
-+export BINDGEN_TARGET
+@@ -6,4 +6,8 @@ BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
+ BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
+ BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
+ 
++ifeq ($(BINDGEN_TARGET),)
++$(error add '--target=' option to scripts/Makefile.rust)
++else
+ export BINDGEN_TARGET
++endif
 
 -- 
 2.51.1
