@@ -1,177 +1,140 @@
-Return-Path: <linux-doc+bounces-68839-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68843-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76C87CA351E
-	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 11:55:06 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id E85F0CA3AA2
+	for <lists+linux-doc@lfdr.de>; Thu, 04 Dec 2025 13:49:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EEFF531365C0
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Dec 2025 10:52:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AF7A23058F98
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Dec 2025 12:46:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDD47331A75;
-	Thu,  4 Dec 2025 10:52:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="YMvxTj7T"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A9B7A340DB9;
+	Thu,  4 Dec 2025 12:46:43 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from dggsgout12.his.huawei.com (dggsgout12.his.huawei.com [45.249.212.56])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A4CF2E8B76
-	for <linux-doc@vger.kernel.org>; Thu,  4 Dec 2025 10:52:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5785233DEF4;
+	Thu,  4 Dec 2025 12:46:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764845526; cv=none; b=a+8MJ82xnPGP6oXeke2ed2fEFenBAOmEf59MRcTo5WvQOZsP7JsgP5Lex1u+lSJFpsI1bxJ2GjMHN6RMuoHl+MF/eWUNBTwbHzMqdI6s3Mp+iQpgJ4WMkfkSFY5yVz06f5NT+MOEeI31++XMAYmpdhonp3+YoLDgl7laGZ/FsXc=
+	t=1764852403; cv=none; b=rZsilw99IoI6FbkYhKFQmXKj3hr1+c1uCGPyW5jrUIpvk9bgi/CqC6paYD+iy4lTQXcAbYQeo5F6x6z8x1cvQUJ/bi0/sa0RhvA1Gp4OwChDBaLbqz2uFnj0JSnkVgkuWuWD66qnEVxbq6lyp69nEdyHSBy3H86MI8p4ySZHxAI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764845526; c=relaxed/simple;
-	bh=G2VymRjHZXe3qyNYINHvi9WbRT5j4d1zO0m+NFNgafE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bVeYH1UVVoiOZ+0I2lTzLgPeyWelpqGB0WYJd3oq0cLwWkoHa6mUtqU/GAJUr13zpLQOdYAtDT2lF4ByE3si52Z6W7nZbFXr8rV+NO7xkWQXT+t1/2J4ccKwBDAjafpIn8r8FSFp0nUZjeEMF+TXcNs/bgJGQ8GmapuaG0r1Nmo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=YMvxTj7T; arc=none smtp.client-ip=209.85.128.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-477619f8ae5so6284075e9.3
-        for <linux-doc@vger.kernel.org>; Thu, 04 Dec 2025 02:52:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1764845522; x=1765450322; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ikuUYmMKKHVhIQyzeW7NNfRK3UsPxb6hcXRzMAgnkDE=;
-        b=YMvxTj7T2MxpxtNAfN8rLMK6eKt9NARsPxcRqKPbthMnh+aO3y1s9uYxw4Q4c20l0D
-         Jj0fGEZ4ZU34JiOifqtMAhiFvy4tOt9kw0LnIljiKX5xDcaSEjbH067p3yIeK0j38RKX
-         NwTXUjHPLlfrBKzQDnmVTO82kxjxbutnmmqPbM5Rik/jT54886szWH0DrBYXYMHKvBL0
-         eB6kvFMh8VBos5UMo/e34kLcWqn5Re/CofGFHyW1eMu/ZE/SCe0n63Sf+QFo6bqyXEv5
-         PzKcCvU26/i2ueIuH6R48ml1e3lGrA/5wBd7el/IQV2wzyQfnY2I/pcXolKkI1bPrT80
-         8cQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764845522; x=1765450322;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ikuUYmMKKHVhIQyzeW7NNfRK3UsPxb6hcXRzMAgnkDE=;
-        b=m5fi40XhqQTAR/8iza1z4nPYtOlfDFRxpHJ1MhmCL4LV3ZumXAppJXRKygo5bFrb/f
-         DROSt/az6osOcdZytkZh87NCh+nvWLNHlcvL5w/rkNWwl5ghu7A5yoBc+Y7/A7n0X5Yj
-         mPIBe2BjspGYmzmQk1n4Hxs6+aBE+FZZqfauF97t0inkBD7nDWV4lbJshI+U7evD80Hf
-         aJ04Z6wEXY/FkhhXw4SSKTN5fXQmHTB7aKd339oi9XoP9TW2+rnGYFlKUrtB+TDv8nsa
-         yHigQp5ZEDo9DdkTjU26ZR84JjrELcMpE0l5Z/KF8dXMiqahj9VAdwz1ncvIe55EdwuY
-         nHFg==
-X-Forwarded-Encrypted: i=1; AJvYcCXtKqKLI7D9PfGOHENmaIYXti9Qp4fHYEPNqeTtc7pF1yLSUTvswkJTBW5LeFFeBDXEVtB41LF+nD0=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz4gtJpoxV31cnrWmAaNTsYtm/yrRAIEmCZBDxBoKBT/6ENA2hx
-	6ala5LTmFvJtmr+gEMS9nYfOMRH9xLE9BnDunCy+9yiLG6Uj8seZAgfBlctkKR5k7ts=
-X-Gm-Gg: ASbGncvHZv3fmC5i/FMdJJWT7dTGCPh3l3B2utgYr/Dsfb6cYAIsCEp0F6OZlkFb6Ol
-	DkpTDFii8Jtj8+Uk7Npm1I5mVOpbadXXOSvgiPZewUMIqNj2PRMTDagrjB2+eFs5oZpNraZ2rX4
-	3OzQwkMYyE3J5tdyJlKRTfUGcBhWq8veiEKYRdTSiGXll0XxwKqMbaBi0/mqNjcyW3Unoe3xrdg
-	e/M7O4vAS+mcfRw7plD7zu9Kx9TwV5dhB8UzH2qVNdmwtejTpwvJTOBL0xXCOoNpDCceQ9wFe8Y
-	4PplBzr8+Cm92DQNKu5jFobv04o0ukaC9H/XWGzJMtdd/TRTEUbrnRUfWXLBa0LrWDN8FDeBNUr
-	O+z1Aa9DJmDifmJ5kKKIL/ab8LD7eJRA3/XwRIMbeh/aFMDWjP9CN9hOMqgWKdqE7mmMnQVU+CT
-	6NmXRusr+lP0pNnw==
-X-Google-Smtp-Source: AGHT+IFg5ESd2o+IvztcBtJ0/wOI4aSHSZlOftAJV5K+ufU+HQ3XjtFJaAZBBsA/B0v7OSUnyh7DWw==
-X-Received: by 2002:a05:6000:430a:b0:429:c711:22d8 with SMTP id ffacd0b85a97d-42f7317d13emr5968584f8f.15.1764845521589;
-        Thu, 04 Dec 2025 02:52:01 -0800 (PST)
-Received: from pathway.suse.cz ([176.114.240.130])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f7ca4f219sm2565843f8f.0.2025.12.04.02.52.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Dec 2025 02:52:01 -0800 (PST)
-Date: Thu, 4 Dec 2025 11:51:58 +0100
-From: Petr Mladek <pmladek@suse.com>
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Breno Leitao <leitao@debian.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>,
-	Shuah Khan <shuah@kernel.org>, Simon Horman <horms@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, netdev@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	linux-doc@vger.kernel.org, gustavold@gmail.com, asantostc@gmail.com,
-	calvin@wbinvd.org, kernel-team@meta.com
-Subject: Re: [PATCH net-next 0/4] (no cover subject)
-Message-ID: <aTFnzmc0ZtBvGg4y@pathway.suse.cz>
-References: <20251128-netconsole_send_msg-v1-0-8cca4bbce9bc@debian.org>
- <20251201163622.4e50bf53@kernel.org>
- <4oybtunobxtemenpg2lg7jv4cyl3xoaxrjlqivbhs6zo72hxpu@fqp6estf5mpc>
- <20251202102442.568f91a7@kernel.org>
- <aTFmew5trILX3RpO@pathway.suse.cz>
+	s=arc-20240116; t=1764852403; c=relaxed/simple;
+	bh=YGVD2szU7T0Z+qZO+qTQxMHDld70oJAJHoQkiOQgl2Y=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=WItxZWDtOODnyzJR/YvL1Lo5QbP8MzfbQrNiEmfuv0N8i/eEO2IxTzCkB+hF+sRNPORJFgoWxH2t1T1z0yWOyqifSznuem41E3Py8m5iWPAnDmYPCf7qdytMYM7n3fq8MCP9MAMEf3mH1l3JZuJ6/CSFcpX03LaC6Ei1Q+fgiiU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
+Received: from mail.maildlp.com (unknown [172.19.163.235])
+	by dggsgout12.his.huawei.com (SkyGuard) with ESMTPS id 4dMZ4C5prPzKHMc1;
+	Thu,  4 Dec 2025 20:45:47 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.75])
+	by mail.maildlp.com (Postfix) with ESMTP id B2BE81A10CC;
+	Thu,  4 Dec 2025 20:46:38 +0800 (CST)
+Received: from hulk-vt.huawei.com (unknown [10.67.174.121])
+	by APP2 (Coremail) with SMTP id Syh0CgB3VlCRgjFp+BRLAg--.31494S2;
+	Thu, 04 Dec 2025 20:46:34 +0800 (CST)
+From: Chen Ridong <chenridong@huaweicloud.com>
+To: akpm@linux-foundation.org,
+	axelrasmussen@google.com,
+	yuanchu@google.com,
+	weixugc@google.com,
+	david@kernel.org,
+	lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com,
+	vbabka@suse.cz,
+	rppt@kernel.org,
+	surenb@google.com,
+	mhocko@suse.com,
+	corbet@lwn.net,
+	hannes@cmpxchg.org,
+	roman.gushchin@linux.dev,
+	shakeel.butt@linux.dev,
+	muchun.song@linux.dev,
+	yuzhao@google.com,
+	zhengqi.arch@bytedance.com
+Cc: linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	cgroups@vger.kernel.org,
+	lujialin4@huawei.com,
+	chenridong@huawei.com
+Subject: [RFC PATCH -next 0/2]  mm/mglru: remove memcg lru
+Date: Thu,  4 Dec 2025 12:31:22 +0000
+Message-Id: <20251204123124.1822965-1-chenridong@huaweicloud.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aTFmew5trILX3RpO@pathway.suse.cz>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:Syh0CgB3VlCRgjFp+BRLAg--.31494S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7tFWfXw4xCw18Wr4DXr4rGrg_yoW8Aw43pF
+	Z3Cay2qw1rJ34xGFs7K3WI934xZa4rGr47XryFgw1xAwsIyFn0vryIkr4rWFWUCryrtF43
+	Xrn0y3W8XryUAw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUv2b4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
+	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
+	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7Cj
+	xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
+	0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
+	6I80ewAv7VC0I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
+	Cjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7MxkF7I0E
+	n4kS14v26r4a6rW5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I
+	0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8
+	ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcV
+	CY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAF
+	wI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa
+	7IU07PEDUUUUU==
+X-CM-SenderInfo: hfkh02xlgr0w46kxt4xhlfz01xgou0bp/
 
-Ah, I have sent it prematurely.
+From: Chen Ridong <chenridong@huawei.com>
 
-On Thu 2025-12-04 11:46:21, Petr Mladek wrote:
-> On Tue 2025-12-02 10:24:42, Jakub Kicinski wrote:
-> > On Tue, 2 Dec 2025 02:18:44 -0800 Breno Leitao wrote:
-> > > On Mon, Dec 01, 2025 at 04:36:22PM -0800, Jakub Kicinski wrote:
-> > > > On Fri, 28 Nov 2025 06:20:45 -0800 Breno Leitao wrote:  
-> > > > > This patch series introduces a new configfs attribute that enables sending
-> > > > > messages directly through netconsole without going through the kernel's logging
-> > > > > infrastructure.
-> > > > > 
-> > > > > This feature allows users to send custom messages, alerts, or status updates
-> > > > > directly to netconsole receivers by writing to
-> > > > > /sys/kernel/config/netconsole/<target>/send_msg, without poluting kernel
-> > > > > buffers, and sending msgs to the serial, which could be slow.
-> > > > > 
-> > > > > At Meta this is currently used in two cases right now (through printk by
-> > > > > now):
-> > > > > 
-> > > > >   a) When a new workload enters or leave the machine.
-> > > > >   b) From time to time, as a "ping" to make sure the netconsole/machine
-> > > > >   is alive.
-> > > > > 
-> > > > > The implementation reuses the existing message transmission functions
-> > > > > (send_msg_udp() and send_ext_msg_udp()) to handle both basic and extended
-> > > > > message formats.
-> > > > > 
-> > > This feature (in this patchset) is just one step ahead, giving some more
-> > > power to netconsole, where extra information could be sent beyond what
-> > > is in dmesg.
-> > 
-> > Having extra metadata makes sense, since the interpretation happens in
-> > a different environment. But here we're talking about having extra
-> > messages, not extra metadata.
-> > 
-> > > > The 2nd point is trivial, the first one is what really gives me pause.
-> > > > Why do we not care about the logs on host? If the serial is very slow
-> > > > presumably it impacts a lot of things, certainly boot speed, so...  
-> > > 
-> > > This is spot-on - slow serial definitely impacts things like boot speed.
-> > > 
-> > > See my constant complains here, about slow boot
-> > > 
-> > > 	https://lore.kernel.org/all/aGVn%2FSnOvwWewkOW@gmail.com/
-> > > 
-> > > And the something similar in reboot/kexec path:
-> > > 
-> > > 	https://lore.kernel.org/all/sqwajvt7utnt463tzxgwu2yctyn5m6bjwrslsnupfexeml6hkd@v6sqmpbu3vvu/
-> > > 
-> > > > perhaps it should be configured to only log messages at a high level?  
-> > > 
-> > > Chris is actually working on per-console log levels to solve exactly
-> > > this problem, so we could filter serial console messages while keeping
-> > > everything in other consoles (aka netconsole):
-> > > 
-> > > 	https://lore.kernel.org/all/cover.1764272407.git.chris@chrisdown.name/
-> > 
-> > Excellent! Unless I'm missing more context Chris does seem to be
-> > attacking the problem at a more suitable layer.
-> 
-> This would help to bypass slow serial consoles. But the extra messages
-> would still get stored into the kernel ring buffer and passed back
-> to user space logs, for example journalctl.
+The memcg LRU was introduced for global reclaim to improve scalability,
+but its implementation has grown complex. Moreover, it can cause
+performance regressions when creating a large number of memory cgroups [1].
 
-It might actually make sense for the "workload enters or leaves" messages.
-But I am not sure about the "ping" messages.
+This series implements mem_cgroup_iter with a reclaim cookie in
+shrink_many() for global reclaim, following the pattern already established
+in shrink_node_memcgs(), an approach suggested by Johannes [1]. The new
+approach provides good fairness across cgroups by preserving iteration
+state between reclaim passes.
 
-> I do not have strong opinion whether adding the
-> /sys/kernel/config/netconsole/<target>/send_msg is a good idea or not.
+Testing was performed using the original stress test from Zhao Yu [2] on a
+1 TB, 4-node NUMA system. The results show:
 
-I just wanted to point out that it is not only about slow serial
-consoles.
+                                            before         after
+    stddev(pgsteal) / mean(pgsteal)            91.2%         75.7%
+    sum(pgsteal) / sum(requested)             216.4%        230.5%
 
-Best Regards,
-Petr
+The new implementation reduces the standard deviation relative to the mean
+by 15.5 percentage points, indicating improved fairness in memory reclaim
+distribution. The total pages reclaimed increased from 85,086,871 to
+90,633,890 (6.5% increase), resulting in a higher ratio of actual to
+requested reclaim.
+
+To simplify review:
+- Patch 1 uses mem_cgroup_iter with reclaim cookie in shrink_many()
+- Patch 2 removes the now-unused memcg LRU code
+
+[1] https://lore.kernel.org/r/20251126171513.GC135004@cmpxchg.org
+[2] https://lore.kernel.org/r/20221222041905.2431096-7-yuzhao@google.com
+
+Chen Ridong (2):
+  mm/mglru: use mem_cgroup_iter for global reclaim
+  mm/mglru: remove memcg lru
+
+ Documentation/mm/multigen_lru.rst |  30 ----
+ include/linux/mmzone.h            |  89 ----------
+ mm/memcontrol-v1.c                |   6 -
+ mm/memcontrol.c                   |   4 -
+ mm/mm_init.c                      |   1 -
+ mm/vmscan.c                       | 270 ++++--------------------------
+ 6 files changed, 37 insertions(+), 363 deletions(-)
+
+-- 
+2.34.1
+
 
