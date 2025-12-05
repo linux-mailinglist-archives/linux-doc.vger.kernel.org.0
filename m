@@ -1,175 +1,123 @@
-Return-Path: <linux-doc+bounces-69071-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69073-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16E28CA8C46
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Dec 2025 19:23:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39823CA8C64
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Dec 2025 19:25:02 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 0F8ED303BCFE
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Dec 2025 18:23:01 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2CAA530194D0
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Dec 2025 18:25:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CB89734845C;
-	Fri,  5 Dec 2025 18:22:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 56399346772;
+	Fri,  5 Dec 2025 18:24:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="agGe/ysz"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pge4oVgX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87975346E7A;
-	Fri,  5 Dec 2025 18:22:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 065F5344052;
+	Fri,  5 Dec 2025 18:24:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764958968; cv=none; b=hHlwYwD3ritzaff774RqI41qWOWaU4fnnANMJj3jJxPf4fdVfEOaK0K7xN3Q54pEDgtmKMhqsEWjgxAyt2zj3ZAxrUk6lv2hFj0Sy2z6r1f0BEja0kDRkW5wI8QxLlFkX2FR52K0OJC37xXezhHJaUOWtUw35DrQFn364IeyM4Q=
+	t=1764959099; cv=none; b=X0O8RGfzQe4iWqQKwPk8+8oXfwDbxsNR1jKqwRCTTAwvMq8/47dMNCr4CWGMjyIfiFQlpVQ0Hz7sgRB2l1TSaqR7hQDoj3bRg31cTHQEuUIwySMro85QnGfDVbsjPHNxpQqyGqSZbwbkLd/gkAR56DJYFUi6kydTFlL5viIfAfg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764958968; c=relaxed/simple;
-	bh=gYX/y+Q9NsyC9DrjRWsLnYa/A4w67M9CU3SA88eKex4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=m/Q4GjIn7Wsf1ktppK97Bw75VtZOV+PScCsj4XpA8OXkdu7V5BMkULnef8MMgZU1E0fext5TdxZbMmF5eIStZJD4Rx/Ti0O/vS5qPJWjHbBWFcP+96YSAvOfB1H1wWHj/pDNEHcjV6EMjjj2bpBqyzVXlLzi66Gb7Khb5AaGYk8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=agGe/ysz; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1764958965;
-	bh=gYX/y+Q9NsyC9DrjRWsLnYa/A4w67M9CU3SA88eKex4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=agGe/yszAxtAeL0Z79lOCMOlzk4A5HHyGFW2JpfKftlHEaw3vngzquY+oOh4S2YQz
-	 PVIaWoB5EOy01x+ZXpDaQjoKf246FCUDtvLx6xEGpww1RyGBwRALdfTcrwHANQtapU
-	 qofByLcCk2Tl/EPFEglJ1jYq786FrbfvkOmfEioXhQBn/lTpX3PbF54tOvl24hTpgC
-	 EhQf8l/EgGhyKF+JKIVu7USxq53kyFOxvRHYXovJN9L9I+v/NK7OSexFI6i41qseNO
-	 ob2piZBkCv/7tGjdCWWc4i2/rS2NPCRq3/Vxz4XIy2/PuOVo6TO10YPvXbtj8Kwi0M
-	 sMEqJC4y6lZyw==
-Received: from debian-rockchip-rock5b-rk3588.. (unknown [IPv6:2a01:e0a:5e3:6100:826d:bc07:e98c:84a])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: loicmolinari)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 2198D17E12D5;
-	Fri,  5 Dec 2025 19:22:44 +0100 (CET)
-From: =?UTF-8?q?Lo=C3=AFc=20Molinari?= <loic.molinari@collabora.com>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	Boris Brezillon <boris.brezillon@collabora.com>,
-	Rob Herring <robh@kernel.org>,
-	Steven Price <steven.price@arm.com>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Melissa Wen <mwen@igalia.com>,
-	=?UTF-8?q?Ma=C3=ADra=20Canal?= <mcanal@igalia.com>,
-	Hugh Dickins <hughd@google.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	=?UTF-8?q?Lo=C3=AFc=20Molinari?= <loic.molinari@collabora.com>,
-	Al Viro <viro@zeniv.linux.org.uk>,
-	=?UTF-8?q?Miko=C5=82aj=20Wasiak?= <mikolaj.wasiak@intel.com>,
-	Christian Brauner <brauner@kernel.org>,
-	Nitin Gote <nitin.r.gote@intel.com>,
-	Andi Shyti <andi.shyti@linux.intel.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Christopher Healy <healych@amazon.com>,
-	Matthew Wilcox <willy@infradead.org>,
-	Bagas Sanjaya <bagasdotme@gmail.com>
-Cc: linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	intel-gfx@lists.freedesktop.org,
-	linux-mm@kvack.org,
-	linux-doc@vger.kernel.org,
-	kernel@collabora.com
-Subject: [PATCH v13 10/10] Documentation/gpu/drm-mm: Add THP paragraph to GEM mapping section
-Date: Fri,  5 Dec 2025 19:22:31 +0100
-Message-ID: <20251205182231.194072-11-loic.molinari@collabora.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251205182231.194072-1-loic.molinari@collabora.com>
-References: <20251205182231.194072-1-loic.molinari@collabora.com>
+	s=arc-20240116; t=1764959099; c=relaxed/simple;
+	bh=r/JH27NDiyw3W5ATKUx6/ZGSbvRvNIzMvvKpuXPXYxk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=e7K1q9oey2MYzwlglTR33TdWZKOMIsGpT8gtzEe3YIM+PFPyX1hxOxNqv5uQdmHOEV1nKKYFyib1ZCHSGZAeZvX49yehERvAjiZQqh8w8DUxQ4rPpThdJJ9rzhLs7BcAvRQBCTJahVojkjjChbdoFqgmEqT8Z3bqlznn42yv6CE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pge4oVgX; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5B05C4CEF1;
+	Fri,  5 Dec 2025 18:24:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1764959098;
+	bh=r/JH27NDiyw3W5ATKUx6/ZGSbvRvNIzMvvKpuXPXYxk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pge4oVgXs8EVQ7NXocjYKUE8BWTnyYnXPrYwu93epdS6UmUQsxobi8bGssXothI0/
+	 5ONjhmsbu1NnNc1wUK41ibAPm7UQTx0i2ofO8piDN7+B+AQCTeMAa5H8gRJpzQ3RCD
+	 SNx8iNx91ZxZh+3dNGGtRxwXs0VV3rszkJPDPBH0nbIpokhkTb9wARYHYEOe4I6Dd9
+	 5tsFraBqTPRDf3sjyGg6DivzsnvKtfToN8FroJMV1osqd3XCwPMyGvwuQVrDYdQSe5
+	 S6CbZfKjeK82qpDeiWOV9oNY58JpZ3H+3n2NJdNGy6dsvhTLb/1aeBQsbuD+jpMJnp
+	 hnQifZ78BncYQ==
+Date: Fri, 5 Dec 2025 11:23:34 -0700
+From: Nathan Chancellor <nathan@kernel.org>
+To: Arnd Bergmann <arnd@arndb.de>
+Cc: Graham Roff <grahamr@qti.qualcomm.com>, Nicolas Schier <nsc@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, linux-kbuild@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Nicolas Pitre <nico@fluxnic.net>
+Subject: Re: [PATCH v2] Support conditional deps using "depends on X if Y"
+Message-ID: <20251205182334.GB3974306@ax162>
+References: <20251118-kconfig_conditional_deps-v2-1-e360792edaed@qti.qualcomm.com>
+ <20251205015352.GA2060615@ax162>
+ <b4be7637-9446-47d0-9a8c-3fd0f55a27b9@app.fastmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b4be7637-9446-47d0-9a8c-3fd0f55a27b9@app.fastmail.com>
 
-Add a paragraph to the GEM Objects Creation section about the
-drm_gem_huge_mnt_create() helper and to the GEM objects mapping
-section explaining how transparent huge pages are handled by GEM.
+On Fri, Dec 05, 2025 at 09:01:51AM +0100, Arnd Bergmann wrote:
+> Agreed, the question is whether a small improvement in
+> readability is worth the complexity of having multiple
+> ways of expressing the same thing.
 
-v4:
-- fix wording after huge_pages handler removal
+I think the biggest thing that this patch has going for this is that
+there is minimal additional complexity within scripts/kconfig and that
+it basically internally converts the 'depends on ... if ...' into the
+simple 'depends on' so there is no behavioral difference. The diff stat
+of the core of the change speaks to that I think.
 
-v6:
-- fix wording after map_pages handler removal
+ scripts/kconfig/lkc.h    |  2 +-
+ scripts/kconfig/menu.c   | 12 +++++++++++-
+ scripts/kconfig/parser.y |  6 +++---
+ 3 files changed, 15 insertions(+), 5 deletions(-)
 
-v11:
-- mention drm_gem_huge_mnt_create() helper
-- add Boris and Maíra R-bs
+> I don't see anything that the new syntax would allow
+> that we were currently missing.
 
-Signed-off-by: Loïc Molinari <loic.molinari@collabora.com>
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-Reviewed-by: Maíra Canal <mcanal@igalia.com>
----
- Documentation/gpu/drm-mm.rst | 29 +++++++++++++++++++++++------
- 1 file changed, 23 insertions(+), 6 deletions(-)
+I see this as syntactic sugar. It is just giving users a different (and
+possibly more intuitive) way of expressing the same thing but I
+understand being concerned about people misusing it (even though I think
+it is already hard enough to get dependencies right sometimes).
 
-diff --git a/Documentation/gpu/drm-mm.rst b/Documentation/gpu/drm-mm.rst
-index d55751cad67c..f22433470c76 100644
---- a/Documentation/gpu/drm-mm.rst
-+++ b/Documentation/gpu/drm-mm.rst
-@@ -155,7 +155,12 @@ drm_gem_object_init() will create an shmfs file of the
- requested size and store it into the struct :c:type:`struct
- drm_gem_object <drm_gem_object>` filp field. The memory is
- used as either main storage for the object when the graphics hardware
--uses system memory directly or as a backing store otherwise.
-+uses system memory directly or as a backing store otherwise. Drivers
-+can call drm_gem_huge_mnt_create() to create, mount and use a huge
-+shmem mountpoint instead of the default one ('shm_mnt'). For builds
-+with CONFIG_TRANSPARENT_HUGEPAGE enabled, further calls to
-+drm_gem_object_init() will let shmem allocate huge pages when
-+possible.
- 
- Drivers are responsible for the actual physical pages allocation by
- calling shmem_read_mapping_page_gfp() for each page.
-@@ -290,15 +295,27 @@ The open and close operations must update the GEM object reference
- count. Drivers can use the drm_gem_vm_open() and drm_gem_vm_close() helper
- functions directly as open and close handlers.
- 
--The fault operation handler is responsible for mapping individual pages
--to userspace when a page fault occurs. Depending on the memory
--allocation scheme, drivers can allocate pages at fault time, or can
--decide to allocate memory for the GEM object at the time the object is
--created.
-+The fault operation handler is responsible for mapping pages to
-+userspace when a page fault occurs. Depending on the memory allocation
-+scheme, drivers can allocate pages at fault time, or can decide to
-+allocate memory for the GEM object at the time the object is created.
- 
- Drivers that want to map the GEM object upfront instead of handling page
- faults can implement their own mmap file operation handler.
- 
-+In order to reduce page table overhead, if the internal shmem mountpoint
-+"shm_mnt" is configured to use transparent huge pages (for builds with
-+CONFIG_TRANSPARENT_HUGEPAGE enabled) and if the shmem backing store
-+managed to allocate a huge page for a faulty address, the fault handler
-+will first attempt to insert that huge page into the VMA before falling
-+back to individual page insertion. mmap() user address alignment for GEM
-+objects is handled by providing a custom get_unmapped_area file
-+operation which forwards to the shmem backing store. For most drivers,
-+which don't create a huge mountpoint by default or through a module
-+parameter, transparent huge pages can be enabled by either setting the
-+"transparent_hugepage_shmem" kernel parameter or the
-+"/sys/kernel/mm/transparent_hugepage/shmem_enabled" sysfs knob.
-+
- For platforms without MMU the GEM core provides a helper method
- drm_gem_dma_get_unmapped_area(). The mmap() routines will call this to get a
- proposed address for the mapping.
--- 
-2.47.3
+> This is the bit that frequently confuses developers with the
+> current syntax, and I agree it would be nice to have a better
+> way,  but I'm not sure the proposal actually helps enough to
+> warrant a mass-conversion of existing Kconfig files.
 
+I do agree that the 'depends on A || !A' syntax is confusing and that
+this does not really address that but I think that is besides the point
+here. I also agree that it is probably not worth converting existing
+users to this syntax (unless there is solid reasoning), I would not want
+to see cleanup patches of that nature, just use in new code.
+
+> With the existing syntax, this could be expressed as
+> 
+>       depends on FOO = BAR
+> 
+> or
+> 
+>       depends on (FOO && BAR) || (!FOO && !BAR)
+> 
+> and I don't see how the new syntax is an improvement
+> over these.
+
+Maybe the "if" syntax could be easier to understand with actual real
+world values? I cannot think of anything off the top of my head but
+real world dependencies might read a bit more naturally with this
+syntax.
+
+> Overall, I'm not convinced by this patch. I have no strong
+> objection to anything in here, but I'm worried that extending
+> the syntax adds more problems than this one solves.
+
+Thanks a lot for the input!
+
+Cheers,
+Nathan
 
