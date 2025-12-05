@@ -1,175 +1,233 @@
-Return-Path: <linux-doc+bounces-69130-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69131-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8F99CA9216
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Dec 2025 20:45:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04825CA92F5
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Dec 2025 21:00:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AE8F4300C6F3
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Dec 2025 19:42:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5A294312E2B3
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Dec 2025 19:55:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86CE72EA16A;
-	Fri,  5 Dec 2025 19:42:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9AFAD3321A6;
+	Fri,  5 Dec 2025 19:44:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="a/bdHesi"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VwQdtITy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 197D923957D;
-	Fri,  5 Dec 2025 19:42:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 032623161B0
+	for <linux-doc@vger.kernel.org>; Fri,  5 Dec 2025 19:43:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764963749; cv=none; b=JixxQdme50sYwIsO05L3XQnYb9/FssZza42QIygruu8uKXn0qUfOTvPSBLX+fT+SOwLybd3xCMcTAewoBgjziF4mTlIaBSEDVVLUDQ3xJ2TJycIudGdMXVe8QbxdgWhrqhledJVl4JNg4UW4cIhTLnVFm5T0+tAVeTKMEQsn6Sc=
+	t=1764963838; cv=none; b=Y+7xQhW/+SjOskTeiNcPyE/us03+2+Hd4JtBENbAFurHh7RcB0cQ+4VbWqEDcKgby2jjG8Qvx+CMxhpUmp5Towisrkqvi9Z0mU9jUFMCs/PuOyOVQRAH/LGQYWAHhz/y1rhFwhb6jmfVtpDkXGpnu/Q535l1+LgrylfA6GHiMv0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764963749; c=relaxed/simple;
-	bh=vUEQfFLArJqRXieg64Trw9f6nQK2lpl/JLVzJLe8ibk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Wc7QwFMWk6b5loMNlhuoxyC6LEBFjj+XQ4B3WjpuUG0y979EDGh62K4dXaNRTtBlBpxqoriTnzvBDk46Bw/IIXBX1VHfBE4/31ySTJafRwuoCRnIpNlpivdvzh5bs5t91rV4miNWB/IvZAJGCcoRtO6/9nrUbxivuPspsf8nuUU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=a/bdHesi; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=Mgm/FMtyke96+ZxY7cquZNmO3PwSewNHSLs9FqvP1Zw=; b=a/bdHesi5AkSwr4bQh57WNPXRe
-	W2wtAQOpBBAlcZei2JB8AuobRhAdof+Qt5iT4owdX6N6cKp4zyn9WbDfOpYDzT6a4wbMcbjERRy12
-	McbStsV5v73E52GB9/rc7S90e6eUxLj64tT9+irQrOTaQqWZC/e24LUKJPnvZBFZ6HvkTS9kfLgk4
-	Pft2YbM1xe5fEaecIe9i1HJXvh21A4BCViEf/hLCVvRBGqzj+HUfRCyR4xP1fBOPLQV+0o6tbuEqE
-	xZi5nZP2QCYLNLhZyw+9MD/Hgr3yKlIa1Am5XQ4AxoIaqDMNKJHO+dzWI+21eiR+BiXKZooCBdUzn
-	3TV/HJlQ==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vRbgm-00000009yBh-3a3v;
-	Fri, 05 Dec 2025 19:42:00 +0000
-Message-ID: <14afa916-565e-4c25-8e19-ddb87644ae8b@infradead.org>
-Date: Fri, 5 Dec 2025 11:41:58 -0800
+	s=arc-20240116; t=1764963838; c=relaxed/simple;
+	bh=IE3A7Bzdjrv2H3PsxZzz8Z5SPq9tyuKSoKo5G47PsRw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=L5hUz/Caz/g20+2WWpInuy/u/LrDQ1Vj1YlLuIUM2zFDs3/dgm5nNG4emBKJV+ZAnwo1bd+4G+I6f3siCNLeJTj9/ieZt/afp+ugoifiG+VEx+y2Te1c2f7/i5spwepS5WeuGfQ5GGvoGwjbA2Q5HkZKZuZu87d2LUk0RaBbdyc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VwQdtITy; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75A41C4CEF1;
+	Fri,  5 Dec 2025 19:43:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1764963836;
+	bh=IE3A7Bzdjrv2H3PsxZzz8Z5SPq9tyuKSoKo5G47PsRw=;
+	h=From:To:Cc:Subject:Date:From;
+	b=VwQdtITySOIrJw3EAMp49mTzaNsUq2+g8p9+k0n8CtvnlqriXPefrlabDfU3qgBcg
+	 pjAG3sU0FstGyPb99LX9JHyiE84mCoWHl6bNoP6osZSBEeAPROaXrBGLC0CwOzxOld
+	 56EUzm8W7D8T6yJmOmx7M4hw45bl2r0TJqf3caNgPhAdCLzbFudHmXr+cgtG6LrLKS
+	 miZr1wcUhVwezji+/u1QsBRXQaboJ7ONWm1OcmLLtSV0TW8O7nR/XE0Xe63j8/r8sG
+	 OqXBgL1xFXoinpr16TDxVIXTNEDfC/j5HPoaonlziRmKKGmkkDpwUovzY6VovXikqx
+	 KK6vesSRRp8ag==
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+	by mailfauth.phl.internal (Postfix) with ESMTP id 9D658F40070;
+	Fri,  5 Dec 2025 14:43:54 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+  by phl-compute-06.internal (MEProxy); Fri, 05 Dec 2025 14:43:54 -0500
+X-ME-Sender: <xms:-jUzaSHOwFvImqw4N7zvllybpT61Jwo3O_80sZ7auoimCZNDbtZttA>
+    <xme:-jUzaXQpbIqDK4I7pCHiU7J3dUhzHIFiOi9LtY_P4dDmucOZtDrhWbqkv8s-lYHm6
+    XeLUUGUEFrRR0U0z123r0olnobO5ybCKB5MTzkcnWyBzblVc4tD8lA>
+X-ME-Received: <xmr:-jUzaQuVMvA9jOjO4grLbJYCCwWS8RcTT7QnG_NFcKiBvmiZSiOnDIHj4AksXw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdelvdehucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceurghi
+    lhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurh
+    ephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepmfhirhihlhcuufhhuhht
+    shgvmhgruhcuoehkrghssehkvghrnhgvlhdrohhrgheqnecuggftrfgrthhtvghrnhepff
+    dvhfdtgfekuddttdffgeeljeehueffvdfgjeejvdetiedtfeefgfetgfffhfffnecuvehl
+    uhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhhirhhilhhlod
+    hmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduieduudeivdeiheehqddvkeeg
+    geegjedvkedqkhgrsheppehkvghrnhgvlhdrohhrghesshhhuhhtvghmohhvrdhnrghmvg
+    dpnhgspghrtghpthhtohepudelpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopegr
+    khhpmheslhhinhhugidqfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohepmhhutg
+    hhuhhnrdhsohhngheslhhinhhugidruggvvhdprhgtphhtthhopegurghvihgusehkvghr
+    nhgvlhdrohhrghdprhgtphhtthhopehoshgrlhhvrgguohhrsehsuhhsvgdruggvpdhrtg
+    hpthhtoheprhhpphhtsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehvsggrsghkrges
+    shhushgvrdgtiidprhgtphhtthhopehlohhrvghniihordhsthhorghkvghssehorhgrtg
+    hlvgdrtghomhdprhgtphhtthhopeifihhllhihsehinhhfrhgruggvrggurdhorhhgpdhr
+    tghpthhtohepiihihiesnhhvihguihgrrdgtohhm
+X-ME-Proxy: <xmx:-jUzaUBhO73Covcu8c31Xr5Q4PA9pFaDUSbBVChHRcFA7rgDkc9FYA>
+    <xmx:-jUzaddFiycSZNK-3Uq35waaAq0L5zZNv5JHjA3QT4fZRxTgig1Uxw>
+    <xmx:-jUzaco4L30e0AIqTXWcvxgU-50cYbMFZ5ZMOSuaf_PPFkg7rvcfjg>
+    <xmx:-jUzaR7iDmVB08dSTGOAajYjCSHLQbaUC4v-RtRFk6ZZEUXXy-9HUQ>
+    <xmx:-jUzaUAvhPi0bZEpd6IPVJYlQvoDzHUKwW5-8o0RxPmfIfNSlsXupVkZ>
+Feedback-ID: i10464835:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 5 Dec 2025 14:43:54 -0500 (EST)
+From: Kiryl Shutsemau <kas@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	Muchun Song <muchun.song@linux.dev>
+Cc: David Hildenbrand <david@kernel.org>,
+	Oscar Salvador <osalvador@suse.de>,
+	Mike Rapoport <rppt@kernel.org>,
+	Vlastimil Babka <vbabka@suse.cz>,
+	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Zi Yan <ziy@nvidia.com>,
+	Baoquan He <bhe@redhat.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Usama Arif <usamaarif642@gmail.com>,
+	kernel-team@meta.com,
+	linux-mm@kvack.org,
+	linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Kiryl Shutsemau <kas@kernel.org>
+Subject: [PATCH 00/11] mm/hugetlb: Eliminate fake head pages from vmemmap optimization
+Date: Fri,  5 Dec 2025 19:43:36 +0000
+Message-ID: <20251205194351.1646318-1-kas@kernel.org>
+X-Mailer: git-send-email 2.51.2
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v24 25/28] riscv: create a config for shadow stack and
- landing pad instr support
-To: Deepak Gupta <debug@rivosinc.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
- <vbabka@suse.cz>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
- Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Christian Brauner <brauner@kernel.org>, Peter Zijlstra
- <peterz@infradead.org>, Oleg Nesterov <oleg@redhat.com>,
- Eric Biederman <ebiederm@xmission.com>, Kees Cook <kees@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
- Jann Horn <jannh@google.com>, Conor Dooley <conor+dt@kernel.org>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Andreas Hindborg <a.hindborg@kernel.org>, Alice Ryhl <aliceryhl@google.com>,
- Trevor Gross <tmgross@umich.edu>, Benno Lossin <lossin@kernel.org>,
- linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- linux-mm@kvack.org, linux-riscv@lists.infradead.org,
- devicetree@vger.kernel.org, linux-arch@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
- alistair.francis@wdc.com, richard.henderson@linaro.org, jim.shu@sifive.com,
- andybnac@gmail.com, kito.cheng@sifive.com, charlie@rivosinc.com,
- atishp@rivosinc.com, evan@rivosinc.com, cleger@rivosinc.com,
- alexghiti@rivosinc.com, samitolvanen@google.com, broonie@kernel.org,
- rick.p.edgecombe@intel.com, rust-for-linux@vger.kernel.org,
- Zong Li <zong.li@sifive.com>, Andreas Korb
- <andreas.korb@aisec.fraunhofer.de>,
- Valentin Haudiquet <valentin.haudiquet@canonical.com>
-References: <20251204-v5_user_cfi_series-v24-0-ada7a3ba14dc@rivosinc.com>
- <20251204-v5_user_cfi_series-v24-25-ada7a3ba14dc@rivosinc.com>
- <b5feba48-7e7c-4ab9-a193-072f3980f525@infradead.org>
- <aTMjS-Ok-DrJJjQY@debug.ba.rivosinc.com>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <aTMjS-Ok-DrJJjQY@debug.ba.rivosinc.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+This series removes "fake head pages" from the HugeTLB vmemmap
+optimization (HVO) by changing how tail pages encode their relationship
+to the head page.
 
+It simplifies compound_head() and page_ref_add_unless(). Both are in the
+hot path.
 
-On 12/5/25 10:24 AM, Deepak Gupta wrote:
-> On Thu, Dec 04, 2025 at 02:17:27PM -0800, Randy Dunlap wrote:
->>
->>
->> On 12/4/25 12:04 PM, Deepak Gupta wrote:
->>> This patch creates a config for shadow stack support and landing pad instr
->>> support. Shadow stack support and landing instr support can be enabled by
->>> selecting `CONFIG_RISCV_USER_CFI`. Selecting `CONFIG_RISCV_USER_CFI` wires
->>> up path to enumerate CPU support and if cpu support exists, kernel will
->>> support cpu assisted user mode cfi.
->>>
->>> If CONFIG_RISCV_USER_CFI is selected, select `ARCH_USES_HIGH_VMA_FLAGS`,
->>> `ARCH_HAS_USER_SHADOW_STACK` and DYNAMIC_SIGFRAME for riscv.
->>>
->>> Reviewed-by: Zong Li <zong.li@sifive.com>
->>> Tested-by: Andreas Korb <andreas.korb@aisec.fraunhofer.de>
->>> Tested-by: Valentin Haudiquet <valentin.haudiquet@canonical.com>
->>> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
->>> ---
->>>  arch/riscv/Kconfig                  | 22 ++++++++++++++++++++++
->>>  arch/riscv/configs/hardening.config |  4 ++++
->>>  2 files changed, 26 insertions(+)
->>>
->>> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
->>> index 0c6038dc5dfd..f5574c6f66d8 100644
->>> --- a/arch/riscv/Kconfig
->>> +++ b/arch/riscv/Kconfig
->>> @@ -1146,6 +1146,28 @@ config RANDOMIZE_BASE
->>>
->>>            If unsure, say N.
->>>
->>> +config RISCV_USER_CFI
->>> +    def_bool y
->>> +    bool "riscv userspace control flow integrity"
->>> +    depends on 64BIT && \
->>> +        $(cc-option,-mabi=lp64 -march=rv64ima_zicfiss_zicfilp -fcf-protection=full)
->>> +    depends on RISCV_ALTERNATIVE
->>> +    select RISCV_SBI
->>> +    select ARCH_HAS_USER_SHADOW_STACK
->>> +    select ARCH_USES_HIGH_VMA_FLAGS
->>> +    select DYNAMIC_SIGFRAME
->>> +    help
->>> +      Provides CPU assisted control flow integrity to userspace tasks.
->>
->>                CPU-assisted
->>
->>> +      Control flow integrity is provided by implementing shadow stack for
->>> +      backward edge and indirect branch tracking for forward edge in program.
->>> +      Shadow stack protection is a hardware feature that detects function
->>> +      return address corruption. This helps mitigate ROP attacks.
->>> +      Indirect branch tracking enforces that all indirect branches must land
->>> +      on a landing pad instruction else CPU will fault. This mitigates against
->>> +      JOP / COP attacks. Applications must be enabled to use it, and old user-
->>> +      space does not get protection "for free".
->>> +      default y.
->>
->>       Default is y if hardware supports it.
->> ?
-> 
-> No default Y means support is built in the kernel for cfi.
+Background
+==========
 
-  (if the compiler supports it?)
+HVO reduces memory overhead by freeing vmemmap pages for HugeTLB pages
+and remapping the freed virtual addresses to a single physical page.
+Previously, all tail page vmemmap entries were remapped to the first
+vmemmap page (containing the head struct page), creating "fake heads" -
+tail pages that appear to have PG_head set when accessed through the
+deduplicated vmemmap.
 
-> If hardware doesn't support CFI instructions, then kernel will do following
-> 
-> - prctls to manage shadow stack/landing pad enable/disable will fail.
-> - vDSO will not have shadow stack instructions in it.
+This required special handling in compound_head() to detect and work
+around fake heads, adding complexity and overhead to a very hot path.
 
-Thanks for the info.
+New Approach
+============
+
+For architectures/configs where sizeof(struct page) is a power of 2 (the
+common case), this series changes how position of the head page is encoded
+in the tail pages.
+
+Instead of storing a pointer to the head page, the ->compound_info
+(renamed from ->compound_head) now stores a mask.
+
+The mask can be applied to any tail page's virtual address to compute
+the head page address. Critically, all tail pages of the same order now
+have identical compound_info values, regardless of which compound page
+they belong to.
+
+This enables a key optimization: instead of remapping tail vmemmap
+entries to the head page (creating fake heads), we remap them to a
+shared, pre-initialized vmemmap_tail page per hstate. The head page
+gets its own dedicated vmemmap page, eliminating fake heads entirely.
+
+Benefits
+========
+
+1. Smaller generated code. On defconfig, I see ~15K reduction of text
+   in vmlinux:
+
+   add/remove: 6/33 grow/shrink: 54/262 up/down: 6130/-21922 (-15792)
+
+2. Simplified compound_head(): No fake head detection needed. The
+   function is now branchless for power-of-2 struct page sizes.
+
+3. Eliminated race condition: The old scheme required synchronize_rcu()
+   to coordinate between HVO remapping and speculative PFN walkers that
+   might write to fake heads. With the head page always in writable
+   memory, this synchronization is unnecessary.
+
+4. Removed static key: hugetlb_optimize_vmemmap_key is no longer needed
+   since compound_head() no longer has HVO-specific branches.
+
+5. Cleaner architecture: The vmemmap layout is now straightforward -
+   head page has its own vmemmap, tails share a read-only template.
+
+I had hoped to see performance improvement, but my testing thus far has
+shown either no change or only a slight improvement within the noise.
+
+Series Organization
+===================
+
+Patches 1-3: Preparatory refactoring
+  - Change prep_compound_tail() interface to take order
+  - Rename compound_head field to compound_info
+  - Move set/clear_compound_head() near compound_head()
+
+Patch 4: Core encoding change
+  - Implement mask-based encoding for power-of-2 struct page
+
+Patches 5-6: HVO restructuring
+  - Refactor vmemmap_walk to support separate head/tail pages
+  - Introduce per-hstate vmemmap_tail, eliminate fake heads
+
+Patches 7-9: Cleanup
+  - Remove fake head checks from compound_head(), PageTail(), etc.
+  - Remove VMEMMAP_SYNCHRONIZE_RCU and synchronize_rcu() calls
+  - Remove hugetlb_optimize_vmemmap_key static key
+
+Patch 10: Optimization
+  - Implement branchless compound_head() for power-of-2 case
+
+Patch 11: Documentation
+  - Update vmemmap_dedup.rst to reflect new architecture
+
+Kiryl Shutsemau (11):
+  mm: Change the interface of prep_compound_tail()
+  mm: Rename the 'compound_head' field in the 'struct page' to
+    'compound_info'
+  mm: Move set/clear_compound_head() to compound_head()
+  mm: Rework compound_head() for power-of-2 sizeof(struct page)
+  mm/hugetlb: Refactor code around vmemmap_walk
+  mm/hugetlb: Remove fake head pages
+  mm: Drop fake head checks and fix a race condition
+  hugetlb: Remove VMEMMAP_SYNCHRONIZE_RCU
+  mm/hugetlb: Remove hugetlb_optimize_vmemmap_key static key
+  mm: Remove the branch from compound_head()
+  hugetlb: Update vmemmap_dedup.rst
+
+ .../admin-guide/kdump/vmcoreinfo.rst          |   2 +-
+ Documentation/mm/vmemmap_dedup.rst            |  62 ++---
+ include/linux/hugetlb.h                       |   3 +
+ include/linux/mm_types.h                      |  20 +-
+ include/linux/page-flags.h                    | 163 +++++-------
+ include/linux/page_ref.h                      |   8 +-
+ include/linux/types.h                         |   2 +-
+ kernel/vmcore_info.c                          |   2 +-
+ mm/hugetlb.c                                  |   8 +-
+ mm/hugetlb_vmemmap.c                          | 245 ++++++++----------
+ mm/hugetlb_vmemmap.h                          |   4 +-
+ mm/internal.h                                 |  11 +-
+ mm/mm_init.c                                  |   2 +-
+ mm/page_alloc.c                               |   4 +-
+ mm/slab.h                                     |   2 +-
+ mm/util.c                                     |  15 +-
+ 16 files changed, 242 insertions(+), 311 deletions(-)
 
 -- 
-~Randy
+2.51.2
 
 
