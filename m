@@ -1,277 +1,193 @@
-Return-Path: <linux-doc+bounces-68988-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-68990-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C441CA6A2D
-	for <lists+linux-doc@lfdr.de>; Fri, 05 Dec 2025 09:14:48 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C3221CA7210
+	for <lists+linux-doc@lfdr.de>; Fri, 05 Dec 2025 11:20:56 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id DC2D23387AC7
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Dec 2025 07:58:47 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 36E443115AB3
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Dec 2025 07:34:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9AC4F3446C9;
-	Fri,  5 Dec 2025 07:21:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B38B34FF70;
+	Fri,  5 Dec 2025 07:25:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b="jExKQL5P"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from invmail4.hynix.com (exvmail4.hynix.com [166.125.252.92])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E7C832937E;
-	Fri,  5 Dec 2025 07:21:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=166.125.252.92
+Received: from mail-m49237.qiye.163.com (mail-m49237.qiye.163.com [45.254.49.237])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DD5434F480
+	for <linux-doc@vger.kernel.org>; Fri,  5 Dec 2025 07:25:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.237
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764919315; cv=none; b=tXijtxUOldl9F5tC7yH2eYmUeEb33WAflRAd5FnjXv0YcSituXz9ryHehOK6FA9nmk6iV0RrCpswybguPAc56hmonDoWpYiJk456lKQVxbQY7ilhP4NxYCgbalcjGfMNuLILOkV1R4e0Vky5Rfnr3AJs4jh/viPxElhEB1fsFZM=
+	t=1764919510; cv=none; b=hJqPsg5Tb6Jk2+M/5osgO9ZDhf8/BeKOhwN0QKg0x5S1/jPCHPL6z6wAD/Wobs6BoWtwk0zScWetAxceIVHA7WCNWzKFQYYUwL3CzQbaspxrct8gr+HoG+SlQyMvO5VZwgFT8kAu7XgE8hl6ZAgDFTS5s7FRbwMiCfz5/v5PvCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764919315; c=relaxed/simple;
-	bh=IVs7UrTREahv4P4gaL8VNCv4Y1x1l3V8HrPMnx32xWM=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=lo1IY2h7RdeB7oEIYTHBk5QPReD8mui+yDP8m4+PqMCB/RoTUbHrfHJQFTU2gXlBzIb6yGa7VAtfePXO0ZiICsKJwYZk5xiafqXCrF/zX4sCCMNVwY3vaWm7pQqxonHH4oDpcjrPhVBlzxVPOMwSAdzyTrGihgTaZGheEUSi/lI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sk.com; spf=pass smtp.mailfrom=sk.com; arc=none smtp.client-ip=166.125.252.92
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sk.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sk.com
-X-AuditID: a67dfc5b-c2dff70000001609-fc-69328776c165
-From: Byungchul Park <byungchul@sk.com>
-To: linux-kernel@vger.kernel.org
-Cc: kernel_team@skhynix.com,
-	torvalds@linux-foundation.org,
-	damien.lemoal@opensource.wdc.com,
-	linux-ide@vger.kernel.org,
-	adilger.kernel@dilger.ca,
-	linux-ext4@vger.kernel.org,
-	mingo@redhat.com,
-	peterz@infradead.org,
-	will@kernel.org,
-	tglx@linutronix.de,
-	rostedt@goodmis.org,
-	joel@joelfernandes.org,
-	sashal@kernel.org,
-	daniel.vetter@ffwll.ch,
-	duyuyang@gmail.com,
-	johannes.berg@intel.com,
-	tj@kernel.org,
-	tytso@mit.edu,
-	willy@infradead.org,
-	david@fromorbit.com,
-	amir73il@gmail.com,
-	gregkh@linuxfoundation.org,
-	kernel-team@lge.com,
-	linux-mm@kvack.org,
-	akpm@linux-foundation.org,
-	mhocko@kernel.org,
-	minchan@kernel.org,
-	hannes@cmpxchg.org,
-	vdavydov.dev@gmail.com,
-	sj@kernel.org,
-	jglisse@redhat.com,
-	dennis@kernel.org,
-	cl@linux.com,
-	penberg@kernel.org,
-	rientjes@google.com,
-	vbabka@suse.cz,
-	ngupta@vflare.org,
-	linux-block@vger.kernel.org,
-	josef@toxicpanda.com,
-	linux-fsdevel@vger.kernel.org,
-	jack@suse.cz,
-	jlayton@kernel.org,
-	dan.j.williams@intel.com,
-	hch@infradead.org,
-	djwong@kernel.org,
-	dri-devel@lists.freedesktop.org,
-	rodrigosiqueiramelo@gmail.com,
-	melissa.srw@gmail.com,
-	hamohammed.sa@gmail.com,
-	harry.yoo@oracle.com,
-	chris.p.wilson@intel.com,
-	gwan-gyeong.mun@intel.com,
-	max.byungchul.park@gmail.com,
-	boqun.feng@gmail.com,
-	longman@redhat.com,
-	yunseong.kim@ericsson.com,
-	ysk@kzalloc.com,
-	yeoreum.yun@arm.com,
-	netdev@vger.kernel.org,
-	matthew.brost@intel.com,
-	her0gyugyu@gmail.com,
-	corbet@lwn.net,
-	catalin.marinas@arm.com,
-	bp@alien8.de,
-	x86@kernel.org,
-	hpa@zytor.com,
-	luto@kernel.org,
-	sumit.semwal@linaro.org,
-	gustavo@padovan.org,
-	christian.koenig@amd.com,
-	andi.shyti@kernel.org,
-	arnd@arndb.de,
-	lorenzo.stoakes@oracle.com,
-	Liam.Howlett@oracle.com,
-	rppt@kernel.org,
-	surenb@google.com,
-	mcgrof@kernel.org,
-	petr.pavlu@suse.com,
-	da.gomez@kernel.org,
-	samitolvanen@google.com,
-	paulmck@kernel.org,
-	frederic@kernel.org,
-	neeraj.upadhyay@kernel.org,
-	joelagnelf@nvidia.com,
-	josh@joshtriplett.org,
-	urezki@gmail.com,
-	mathieu.desnoyers@efficios.com,
-	jiangshanlai@gmail.com,
-	qiang.zhang@linux.dev,
-	juri.lelli@redhat.com,
-	vincent.guittot@linaro.org,
-	dietmar.eggemann@arm.com,
-	bsegall@google.com,
-	mgorman@suse.de,
-	vschneid@redhat.com,
-	chuck.lever@oracle.com,
-	neil@brown.name,
-	okorniev@redhat.com,
-	Dai.Ngo@oracle.com,
-	tom@talpey.com,
-	trondmy@kernel.org,
-	anna@kernel.org,
-	kees@kernel.org,
-	bigeasy@linutronix.de,
-	clrkwllms@kernel.org,
-	mark.rutland@arm.com,
-	ada.coupriediaz@arm.com,
-	kristina.martsenko@arm.com,
-	wangkefeng.wang@huawei.com,
-	broonie@kernel.org,
-	kevin.brodsky@arm.com,
-	dwmw@amazon.co.uk,
-	shakeel.butt@linux.dev,
-	ast@kernel.org,
-	ziy@nvidia.com,
-	yuzhao@google.com,
-	baolin.wang@linux.alibaba.com,
-	usamaarif642@gmail.com,
-	joel.granados@kernel.org,
-	richard.weiyang@gmail.com,
-	geert+renesas@glider.be,
-	tim.c.chen@linux.intel.com,
-	linux@treblig.org,
-	alexander.shishkin@linux.intel.com,
-	lillian@star-ark.net,
-	chenhuacai@kernel.org,
-	francesco@valla.it,
-	guoweikang.kernel@gmail.com,
-	link@vivo.com,
-	jpoimboe@kernel.org,
-	masahiroy@kernel.org,
-	brauner@kernel.org,
-	thomas.weissschuh@linutronix.de,
-	oleg@redhat.com,
-	mjguzik@gmail.com,
-	andrii@kernel.org,
-	wangfushuai@baidu.com,
-	linux-doc@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-media@vger.kernel.org,
-	linaro-mm-sig@lists.linaro.org,
-	linux-i2c@vger.kernel.org,
-	linux-arch@vger.kernel.org,
-	linux-modules@vger.kernel.org,
-	rcu@vger.kernel.org,
-	linux-nfs@vger.kernel.org,
-	linux-rt-devel@lists.linux.dev,
-	2407018371@qq.com,
-	dakr@kernel.org,
-	miguel.ojeda.sandonis@gmail.com,
-	neilb@ownmail.net,
-	bagasdotme@gmail.com,
-	wsa+renesas@sang-engineering.com,
-	dave.hansen@intel.com,
-	geert@linux-m68k.org,
-	ojeda@kernel.org,
-	alex.gaynor@gmail.com,
-	gary@garyguo.net,
-	bjorn3_gh@protonmail.com,
-	lossin@kernel.org,
-	a.hindborg@kernel.org,
-	aliceryhl@google.com,
-	tmgross@umich.edu,
-	rust-for-linux@vger.kernel.org
-Subject: [PATCH v18 42/42] mm: percpu: increase PERCPU_DYNAMIC_SIZE_SHIFT on DEPT and large PAGE_SIZE
-Date: Fri,  5 Dec 2025 16:18:55 +0900
-Message-Id: <20251205071855.72743-43-byungchul@sk.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20251205071855.72743-1-byungchul@sk.com>
-References: <20251205071855.72743-1-byungchul@sk.com>
-X-Brightmail-Tracker: H4sIAAAAAAAAAzWSfUxTZxSHfe/He28ba25qs91pIlpjSNzGhIA5JItiovHGmPhtFrdMuvUG
-	bizVFKRioinRFiTYNGgxlvBRxCIFJquyicyMsVECcdmoH9StDiFS6JBKmgKhlrFS9b8n55zf
-	k5OTw5LKYXoNK+mLRINeo1NjOSWfXtn4qbEsQ9piqVNBYOQlDeauJQoWq7wM2EsRLD3wIpj6
-	NYLgWqiUAkewhoFQ326YHummwfXyPwIWq0/AVPUMhkjoBYK73n8QjNs6SQh3YBh6OIXgwo3b
-	GKprPRR0vbjPwNBUnEjIMCy43Ay4TJsgPpoO3tYJBr6b/oOGkX4LDdHHowS0VQZJePDXx+C0
-	NFFQvhhFYKqZp+H2hJ+AAUcLBXPWtdAebsRwJRxMrDnnIsE1+5oBX08DAcEnFgI6LjoYaKlv
-	RtD5sxlB/+UeAm5GwySUTXZjCFj/pcDS9D0BnranGCYctQRc8TVgeFpVjyHW3Ifg9x8GE5eI
-	l2OoKbUmLH3zDNRG0yHa6sYQtkXpnBzB7FvEQltdGxLexKqQYLYlaLCRF5ouxQihy/GcERo8
-	p4U7tzYLN34KEYIzMksLHvclLDjfTJJC12i24DTZSaFu4MD+lGPyz7WiTioWDZ9ty5Xn+3/z
-	06c6ZWd+LF9iTGiMqUAylucy+fszMfSevY3XqGXGXCrv9y+Qy6zi1vN3LgfpCiRnSe5RCl+2
-	YE02VnMiP1ltwstMcZv49sqBZFjBbeXtobF30hS+taMnOS9brg/Hkqzksvj6ivmklOdqZPxk
-	pZl8G/iI/+WWn7IhRQNa4UZKSV9coJF0mWn5JXrpTNq3Jws8KPFurnPxL++hyJ+HehHHIvVK
-	RY8xXVLSmuLCkoJexLOkWqV4pdsiKRVaTclZ0XDyuOG0TizsRWtZSv2hImPOqFVyeZoi8YQo
-	nhIN77sEK1tjQhmxXN/53KvtK3DLHmPO1yPEhcDhrFlpaOMXAdeqnRu8ewO+5tQhzb76onVs
-	lnG8bHsTMCb7+SPbHubtcB48dlR5zjqWW/csNc+dmaeK+LSvS4/b2nXPbu7/CnYK2YZPxrVp
-	f8/s+kBc/ahfHxg+q3p1L979TYgauH706qBdm31XTRXma9I3k4ZCzf/1TK0/agMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAAzWSa2yLcRTG/d9rVyqvGnszH9CwicxtMTlxJ2FvJERCIi4LxctqbdHabBLs
-	olkNSzXa2boxZSW728VsNGZY3LWG1WXK1Gg2m0y3pe266Sa+nPzOeZ7n5Hw4Alx8mwwXyJRH
-	eJVSKpdQQkK4YUnGnKTMaNn8CnsoaDUn4ZPTRcK7tEYC+jxaAvIrSikImOpo0FblkvC4NZ0A
-	W3kJAmefFsGA34SDpn6YgIC+mQaP9yMNhjQEw9ZmBEa7HgeH7R4OpTVpGPypHKKg80EvAsNX
-	FwU57jQCeixnEeR1mGhwP4qFX847JAy3/cCgtb8LgcU1hIGrMRNBwJgAl83VwbjxNwX+F69w
-	yDHYEFz52oZDr/sLgprmzwisN9Ip+K6rxaHFNR7e9PVQ8MRwhoJf9nwMuispKEy3kmB/3omg
-	wKRH0PHBikHG1QoKjAVVBNR/aaDB3jmIwSejHoOSqvXgtHQQ8ExnxoLnBl03w8CUk4EFy08M
-	DGV3MPBaiumVRYgb0GQTXHH1LYzTvA5QXOmlUsT5fXrEeYoycE6jC7YPunpw7lT1Ua7oWRfF
-	+freUpy1v5DgnppZ7tppH8adfzGHq89rozeu2iZcupeXy5J41bzlu4TxjocO8lBtSHKddphO
-	Re10FgoRsMxCttmcQ4wwxUSyDocXH+FQZhpbfa6DzEJCAc60TGUzvdmjwkSGZ38aU6kRJpiZ
-	bNnZJ6NhEbOINbjb0b+lU9mSysZRf8jIvNU3ymImhr2cNUDqkLAQjSlGoTJlkkIqk8fMVSfE
-	pyhlyXP3HFRUoeA/WY4Pnr+NPC2xTYgRIMk4UePRBTIxKU1SpyiaECvAJaGiLvl8mVi0V5py
-	jFcd3KlKlPPqJjRFQEjCROu28LvEzH7pET6B5w/xqv8qJggJT0WTFIH77pjV3rjT7mX73m+d
-	3ss1dK/1r4xesSb5W/a4qN7N/gNXdksvSmyxm8oPM4P32/s9WkVuuG7D7O113f7oGWz4btOJ
-	6/aauO4hItJ71//YnFtg8/AlLy+caytq3aFR7kkMy4xQRhCzJvgaFua9ipoxdrLhuPremkQn
-	u1hdliAh1PHSBbNxlVr6F6fDGrJLAwAA
-X-CFilter-Loop: Reflected
+	s=arc-20240116; t=1764919510; c=relaxed/simple;
+	bh=Hb25Pr0+3cIkYqoOBqbzp+YjKv7b/zvB1vWPDCKb+x4=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=fM5uVES+HuMZ87rKvF/ZRVAIEtMwXwYUFsXX+ZOZw9iRkKXz3RDU5OYOpGgJRXHnKx+so8ks7ezytT/flCQaOniWvFy7FQk3NF9y+IAeD4SGYGxqhqMiaXiShRWVrVzKUwp72nAm6X9VLMIqpML4R4i+UAHcvGqNjse2AdM/dMc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com; spf=pass smtp.mailfrom=leap-io-kernel.com; dkim=pass (2048-bit key) header.d=leap-io-kernel.com header.i=@leap-io-kernel.com header.b=jExKQL5P; arc=none smtp.client-ip=45.254.49.237
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=leap-io-kernel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leap-io-kernel.com
+Received: from localhost (unknown [222.130.22.244])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 2c1baf804;
+	Fri, 5 Dec 2025 15:24:56 +0800 (GMT+08:00)
+Date: Fri, 5 Dec 2025 15:24:54 +0800
+From: BaiKefan <baikefan@leap-io-kernel.com>
+To: Yanteng Si <si.yanteng@linux.dev>, seakeel@gmail.com
+Cc: alexs@kernel.org, dzm91@hust.edu.cn, corbet@lwn.net,
+ linux-doc@vger.kernel.org, doubled@leap-io-kernel.com
+Subject: Re: [PATCH v4 1/8] docs/zh_CN: Add index.rst translation
+Message-ID: <20251205152454.000001ac@leap-io-kernel.com>
+In-Reply-To: <b6d20fc9-6984-47f5-9726-74eade80a59e@linux.dev>
+References: <cover.1764674650.git.baikefan@leap-io-kernel.com>
+	<a0cb5dc4973db59048e4437cc611b22ff8b4f06e.1764674650.git.baikefan@leap-io-kernel.com>
+	<b6d20fc9-6984-47f5-9726-74eade80a59e@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9aed664fca09d5kunma5b6ca98e456fc
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCT0weVkwdHx9CQhgaT0tJTFYVFAkWGhdVEwETFh
+	oSFyQUDg9ZV1kYEgtZQVlJSUlVSkhLVUlJVUlPT1lXWRYaDxIVHRRZQVlPS0hVSktISk5MSVVKS0
+	tVSkJLS1kG
+DKIM-Signature: a=rsa-sha256;
+	b=jExKQL5PRYU7WLwKWsONNCmUVyEZ7/eZ8o63FipJyadDsttzpfm0c06ct8zT9lEZzL/AKTzuyFWpUuL1bRzS1lMUXWP4FlZh82QRJASVMxcxtnXIk2ZRoXi3rQZyX+5bcP+IfmBuKXJWCz/3tCoyNWZ840YEsKeph/nTWflopM0HjRW8mftrxsah2GxXRieKCx6PL7cHhF9LB0kjHYFQfo/02rmLzO+TPtQtq0iHBOGZzPVOHUE/oocyXzX+TVywz3ChGj70TiFS4/UE9QZORhWiScKK3Wk/JWGva7NN6oyLG3nfxYyoslAaXislUZ0My3rEzwy+JVzdENuaV0RAeg==; s=default; c=relaxed/relaxed; d=leap-io-kernel.com; v=1;
+	bh=cbL/advwNFKojP/AG6XxWYckJ/US3rED8dbzFGDZWNs=;
+	h=date:mime-version:subject:message-id:from;
 
-Yunseong reported a build failure due to the BUILD_BUG_ON() statement in
-alloc_kmem_cache_cpus().  In the following test:
+On Wed, 3 Dec 2025 10:34:20 +0800
+Yanteng Si <si.yanteng@linux.dev> wrote:
 
-  PERCPU_DYNAMIC_EARLY_SIZE < NR_KMALLOC_TYPES * KMALLOC_SHIFT_HIGH * sizeof(struct kmem_cache_cpu)
+> 
+> 在 2025/12/2 19:56, Kefan Bai 写道:
+> > Translate .../usb/index.rst into Chinese and update
+> > subsystem-apis.rst
+> >
+> > Update the translation through commit c26cee817f8b
+> > ("usb: gadget: f_fs: add capability for dfu functional descriptor")
+> >
+> > Signed-off-by: Kefan Bai <baikefan@leap-io-kernel.com>
+> > ---
+> >   .../translations/zh_CN/subsystem-apis.rst     |  2 +-
+> >   .../translations/zh_CN/usb/index.rst          | 54
+> > +++++++++++++++++++ 2 files changed, 55 insertions(+), 1 deletion(-)
+> >   create mode 100644 Documentation/translations/zh_CN/usb/index.rst
+> >
+> > diff --git a/Documentation/translations/zh_CN/subsystem-apis.rst
+> > b/Documentation/translations/zh_CN/subsystem-apis.rst index
+> > 830217140fb6..b52e1feb0167 100644 ---
+> > a/Documentation/translations/zh_CN/subsystem-apis.rst +++
+> > b/Documentation/translations/zh_CN/subsystem-apis.rst @@ -90,6
+> > +90,7 @@ TODOList: security/index
+> >      PCI/index
+> >      peci/index
+> > +   usb/index
+> >
+> >   TODOList:
+> >
+> > @@ -104,6 +105,5 @@ TODOList:
+> >   * accel/index
+> >   * crypto/index
+> >   * bpf/index
+> > -* usb/index
+> >   * misc-devices/index
+> >   * wmi/index
+> > diff --git a/Documentation/translations/zh_CN/usb/index.rst
+> > b/Documentation/translations/zh_CN/usb/index.rst new file mode
+> > 100644 index 000000000000..71e822e464d4
+> > --- /dev/null
+> > +++ b/Documentation/translations/zh_CN/usb/index.rst
+> > @@ -0,0 +1,54 @@
+> > +.. SPDX-License-Identifier: GPL-2.0
+> > +.. include:: ../disclaimer-zh_CN.rst
+> > +
+> > +:Original: Documentation/usb/index.rst
+> > +:翻译:
+> > +
+> > + 白钶凡 Kefan Bai <baikefan@leap-io-kernel.com>
+> > +
+> > +:校译:
+> > +
+> > +
+> > +
+> > +===========
+> > +USB 支持
+> > +===========
+> > +
+> > +.. toctree::
+> > +    :maxdepth: 1
+> > +
+> > +    acm
+> > +    authorization
+> > +    chipidea
+> > +    dwc3
+> > +    ehci
+> > +    usbmon
+> 
+> They shouldn't appear here right now; instead, they should be
+> scattered across the translation patches. If only this patch is
+> applied, a compilation error will occur.
+> 
+> 
+> Thanks,
+> 
+> Yanteng
+> 
 
-The following factors increase the right side of the equation:
+Hi Yanteng,
 
-  1. PAGE_SIZE > 4KiB increases KMALLOC_SHIFT_HIGH.
-  2. DEPT increases the size of the local_lock_t in kmem_cache_cpu.
+I’ll update the content as you suggested, ensuring the entries in
+index.rst—such as acm, authorization, chipidea, dwc3, ehci, and
+usbmon—are properly split across the relevant patches.
 
-Increase PERCPU_DYNAMIC_SIZE_SHIFT to 11 on configs with PAGE_SIZE
-larger than 4KiB and DEPT enabled.
+This should fix the compilation issue when only some of the patches are
+applied.
 
-Reported-by: Yunseong Kim <ysk@kzalloc.com>
-Signed-off-by: Byungchul Park <byungchul@sk.com>
----
- include/linux/percpu.h | 4 ++++
- 1 file changed, 4 insertions(+)
+Let me know if any further changes are needed.
 
-diff --git a/include/linux/percpu.h b/include/linux/percpu.h
-index 85bf8dd9f087..dd74321d4bbd 100644
---- a/include/linux/percpu.h
-+++ b/include/linux/percpu.h
-@@ -43,7 +43,11 @@
- # define PERCPU_DYNAMIC_SIZE_SHIFT      12
- #endif /* LOCKDEP and PAGE_SIZE > 4KiB */
- #else
-+#if defined(CONFIG_DEPT) && !defined(CONFIG_PAGE_SIZE_4KB)
-+#define PERCPU_DYNAMIC_SIZE_SHIFT      11
-+#else
- #define PERCPU_DYNAMIC_SIZE_SHIFT      10
-+#endif /* DEPT and PAGE_SIZE > 4KiB */
- #endif
- 
- /*
--- 
-2.17.1
+Thanks,
+Kefan
+
+> > +
+> > +Todolist:
+> > +
+> > +*   functionfs
+> > +*   functionfs-desc
+> > +*   gadget_configfs
+> > +*   gadget_hid
+> > +*   gadget_multi
+> > +*   gadget_printer
+> > +*   gadget_serial
+> > +*   gadget_uvc
+> > +*   gadget-testing
+> > +*   iuu_phoenix
+> > +*   mass-storage
+> > +*   misc_usbsevseg
+> > +*   mtouchusb
+> > +*   ohci
+> > +*   raw-gadget
+> > +*   usbip_protocol
+> > +*   usb-serial
+> > +*   usb-help
+> > +*   text_files
+> > +
+> > +.. only::  subproject and html
+> > +
+> > +   索引
+> > +   =======
+> > +
+> > +   * :ref:`genindex`
+> > --
+> > 2.52.0
+> >
+> 
+> 
 
 
