@@ -1,311 +1,551 @@
-Return-Path: <linux-doc+bounces-69161-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69163-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F9ABCA9B3D
-	for <lists+linux-doc@lfdr.de>; Sat, 06 Dec 2025 01:25:42 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 49FB5CA9E6F
+	for <lists+linux-doc@lfdr.de>; Sat, 06 Dec 2025 03:23:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DBFB03022F3D
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Dec 2025 00:25:19 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 9E2593027FC5
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Dec 2025 02:23:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0348E320A32;
-	Sat,  6 Dec 2025 00:25:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DF28A20A5F3;
+	Sat,  6 Dec 2025 02:23:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ic7fO696"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jAibNtxW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com [209.85.219.67])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 014E5320A29
-	for <linux-doc@vger.kernel.org>; Sat,  6 Dec 2025 00:25:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED5DE3B8D57
+	for <linux-doc@vger.kernel.org>; Sat,  6 Dec 2025 02:23:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.67
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764980718; cv=none; b=WD5j4dAgcd2/0cdlEkUnh02I7D9FTWfNNXsaPu0EuIMUzXTkZhUqkotq1WV9JXwsVh0TZh+QboyRgXzn1z8AvBTxCz5jap8dOgh7Jezn5PhBdtCtv08flT9eyOrTdCTuPlWtwYkTzVwnTI66uU7aMQCy29r8OGNZWbg/u7BolCs=
+	t=1764987808; cv=none; b=OCJGEsq9k4vEfx78eYT/rYe7a/3eB4hkT+t4+I3TmeKbGuWsGzkOy5FxcLj25SEwYvjGOGQEK5naSlAmTLOSvOa6N44giK7OF8QC29ieMwdbgWCCerY5EFaOirU60UUF5ncvVVH7o9eeX36fSEqu8BOdL+cDIZepZL9yEFOTDsU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764980718; c=relaxed/simple;
-	bh=C9BpUY8Z1WtPYUb6F/WX8Z/jlnJrwMwkcOBbQOMHrvI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Slr1QpcBz2Qph4ouOaBS75/vTB6RrwtqGS0oxM1WnJZinkeArIhGFY1U3+zd0rQrZCwWyjZxyNjXjAXFoJbXPlraBXqIv2V9DusB4+ZOWgT3gSP+N+MnVxz7UWjt8XJvDliUQVSIiLNXivbRxHz/qiJT2FE2GQ41M6NlLbnpPlE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ic7fO696; arc=none smtp.client-ip=209.85.128.44
+	s=arc-20240116; t=1764987808; c=relaxed/simple;
+	bh=Iy/dC9DMvwJJmRWZMLpi4XZSdwVA9s5IWC+8sP211f4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=OeEIsAz8dku90op0oPLXAtNWsQ4jbzGqrMHytb6ROM2J5idriZKKp9s2LXO0JXtqslNFoN0cwO3Y6gYgwIshr8CzsEXDRx+DEv+20odgQP3RBGpUcR9e6dP22SFI02HTejzjK8kukAQTTMJI7aGgVnOrDFIXwywYKtOADl1YEYU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jAibNtxW; arc=none smtp.client-ip=209.85.219.67
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47778b23f64so17046915e9.0
-        for <linux-doc@vger.kernel.org>; Fri, 05 Dec 2025 16:25:16 -0800 (PST)
+Received: by mail-qv1-f67.google.com with SMTP id 6a1803df08f44-8823e39c581so37870806d6.3
+        for <linux-doc@vger.kernel.org>; Fri, 05 Dec 2025 18:23:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764980715; x=1765585515; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Are7xGB9aLuDwLpzYAyGdd0D/mGvP/om3sIgmOgR1cQ=;
-        b=Ic7fO696tIiHNTWhxrySiklA8kVOD1Dz77jLKSWAxAliaofWIsAz1KIOXndB1QeC6I
-         9tgWhH7ZL8xoyici5C++2+U1IPyj8fNOQeZ80YSl1nERljpqzP6XwwKqta/hltT32aOE
-         zUiWd4MC34UVeeao/+kN40KpL28ndM3D0YbQcxd8sKnL63ByiWs02TLZKFcahpbNL7Tk
-         iW2yWzswsyf+Y7rH2m4QKhG79sIgYEggNN9lcS/6/zov1yHf2OyG1uvxHQy5NjaBVNlH
-         NskKGwHIvWX+FcOlYhcJkjroNxP4czOV53sprMx2dq1fsCQYAs2WB9tsKrZ9ZYcdmOYi
-         uWUg==
+        d=gmail.com; s=20230601; t=1764987806; x=1765592606; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=ikbW0KTFV2Hrw3Ofr3+X6/ogNZDuDLj9J6B0i4MyxZI=;
+        b=jAibNtxW6eQn5EMuiejhAYEtVfixV/jN6pi7aRZeJlQUi62fYjnNQCpzhKL92SaGBw
+         4e8LlpRklgQLVC5EM9mp9puCutYGnwGYFLcdj3Tn7lEo0bG8/ypHkvPWvDlc4g8ul5J0
+         wLXHZGvJ73djtNlZ2KI33zXp2lF31MjEvESR7OZgVVmzKL8zeZWBT5BDj3/GIs8V8hQN
+         8Sao8P2cGb1ff9nqhB95eZgshuPIv4ROVSJESKeItuamqgcCtXSg282EY0DktBUOkFwM
+         xd9fBJCAYF+fxSt1qxPcCZGZfuWTpKOFybOI6boruRfeZhpoyH7U6x1zi990pVxhkmP3
+         pObQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764980715; x=1765585515;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Are7xGB9aLuDwLpzYAyGdd0D/mGvP/om3sIgmOgR1cQ=;
-        b=jNo1lRFuUisMQPLZp0GIDgD1IM099K6Z4bKBVYqwGOv4IvKyha5mEDsv1SgmUGAaVm
-         3OtKkzbOg0WHmQ9ajs1LIY9a9Sjw4Y8pZ4zd/AyjT9ZTFEge27ZWsVZNXUVQ9YhrvnQh
-         GdVC2WquZdnBdK33ZwyvkSGusMIKvkqInlxaNF2nphIcGhvI0vqJBcrhYmJ1vvPQ36Wz
-         1tmCuL/+bktH1O2zbV6EStinV4EhFiVuqNWr8b7eEyt/XvWP0o9ZzfnYRU9DGTh8oxC6
-         IXW5K5lz/Tn4mI12k0swktCGrGktefEW1Y2/xgkbGO2W23cPe1OodeDwf8Onpmk4zx2Y
-         vwrQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWi9/098hoaSVIO/VwbNPLBpBNod7jry2HHWosJc32t4zlepDoksz7kEe2l4gYfwRrEh7VkPm9//ew=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyA22PWAKcwkBtFATcI7Qdb8g+21jF9pbeR0/akjIOLx1o+Ifj+
-	+/1CW61Bi6QlmfF8OGFPd/WNpj982a+mIvpycyG5EOj1U1bjlBRBn5kt
-X-Gm-Gg: ASbGncvQVdcktXUkLneUA6ZXHoZuJKfLh1Kj71Jmvx/NtTuoturFsahoxCCtfun6FBJ
-	hs/7W5+ky1uF9MFT0f11flrRx91T4aLK7vUGK5yRRr3UfMkhtm3+i/QQjya8mLNmZMtCGjMIOSP
-	kzO43HknlxxLhlIwd6aI36NIJbmC5rPc61qVGwQWRV5HLbHsxeDA+Fs1rNsqIbSlYS8lMrC944Y
-	TSB41eSjSCj4uoeYSCNMKD9ASlxJxHTSGi/oEbrPGbM+3SxPGXkFzG2qv0isKe1iiPVbh2hW50V
-	/TmFt8hlLTddEzo09RvHcdlxU93HH/RqnongeFHeMSzLLOEUmPTJAefbFT9797cVI/Xvidur4z9
-	eigce8ycNAN7f5Vm0/8AjitX5YyIPhpa2z8NXibEwBs0IMlXLePrisBwxyL5g8puA7pCJd47/cw
-	VTF38qnaWNrCNKvSjk3saYqHNaUySxOU7w4Jc3iCCg9RVb8w0Sz6ZyPQX6oEufbJ4rmUuUi1ZOD
-	KwGNFU/IVNF
-X-Google-Smtp-Source: AGHT+IEG5z5OFfCqSs3UOWXKpnum9NIRAHoICjCwbIml/RX8FyOQJmvNmQOOCV6GaGDvNVOUizI/ow==
-X-Received: by 2002:a05:600c:4f15:b0:477:214f:bd95 with SMTP id 5b1f17b1804b1-47939e3a6dcmr8652175e9.23.1764980714999;
-        Fri, 05 Dec 2025 16:25:14 -0800 (PST)
-Received: from ?IPV6:2a02:6b6f:e750:1800:450:cba3:aec3:a1fd? ([2a02:6b6f:e750:1800:450:cba3:aec3:a1fd])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4792b0d5e55sm112555095e9.2.2025.12.05.16.25.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 05 Dec 2025 16:25:14 -0800 (PST)
-Message-ID: <22609798-e84b-46ca-9cb5-649ffba4a2a4@gmail.com>
-Date: Sat, 6 Dec 2025 00:25:12 +0000
+        d=1e100.net; s=20230601; t=1764987806; x=1765592606;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ikbW0KTFV2Hrw3Ofr3+X6/ogNZDuDLj9J6B0i4MyxZI=;
+        b=CGyXnFIKesTCcFKwH3ptxT9ibgsVnXmRLuWh/hcBaCKTPFzu3Es6+GKXZVjiPrG7du
+         LZN8B7zw9WOn2W28D5Sjv+jo4OCM04ZfVMikPS+29GW4Ia1OoQKjEk0uli1I7IyTNkxa
+         DMxDNHbt7dzcPg0YzPqVrsfw0lusxM28sIaUUB5KLG52rEn9Eq1yMYiLubFrdtjQWlZe
+         208UqIRJEn8qfUQySqujAG0aKrjUPriXcpevM/Tah/jvE9h5gFWlGvPGJnSnXlJ3r4uA
+         Q+s7m0l+moAWV9iVLYHtt9Wfv1Ysry7rzl8iwuXSXPj+5NRO9SpOG7CoxObfR6leddxt
+         fXsw==
+X-Forwarded-Encrypted: i=1; AJvYcCUQzvNqANepw5PR2lWXGcPJcg1Ya8DzQ3qYAXSk4XwQ/GGZu5oo9c9XTgURJWzgfIL2tSDZSwVCIK0=@vger.kernel.org
+X-Gm-Message-State: AOJu0YykVgGOfLotdPG9ASNOqpijQ9PtT0nSa1XJxrjhp99WBfuPNF+0
+	TyUz7kgESrGpRtFCNqvqwszSs0au6X7lL6weNwLKBJo+snZlv2j8tfCb
+X-Gm-Gg: ASbGnctZ6UMvvS3+RZ9ncGmcaM/f75N3Hsaajw3Aupp5rxdMS/r2Xd1zu4HpbpDd1V8
+	UnV4eDz6xa+nUrZxBJIOnSsejthE76zMvnBT/xmGi34sGB2V9BN+HQqx1+9vaWK8w9QuDBw+cfN
+	6C60Fyog0Pu1b/RnEMTpFaOF0aGhLXiAjqTdyUIirBSLUZCXDTaQ9mX5MvF0kD2b6h/xoRpSsO7
+	oPjJu/uDJiEj8ovEgTJjjUby442+yGotSfO8n8NrPkaPr6AJdQ6HU/qjF/K5pmT29IA91bbghm+
+	AC15L0e3wrTdVycb2r8Dv9GQq4eY4xMwjVkIkHQuMJ6Ve4yNqiirwkH51V8HNp/bF/A/YVxy59m
+	V8/Ty+rvzP6hy6BqzEL1/+j5SaFuLdBcc3rFNPFJAMExn1nL0a4xSDOFNf8iWxTsDIHQ+Z04Rqu
+	U0+PtK8grgvZo=
+X-Google-Smtp-Source: AGHT+IGd3Tx8h9j/d0f8+PnHkykV+pzsZzFX2hwgHqZ6hwE3sdFyB+hNtRyQiVIKUkdCjbb/9/d8ZQ==
+X-Received: by 2002:a17:902:d4ce:b0:295:557e:746a with SMTP id d9443c01a7336-29df556fa3cmr5536155ad.13.1764980727315;
+        Fri, 05 Dec 2025 16:25:27 -0800 (PST)
+Received: from archie.me ([210.87.74.117])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29dae49cbdfsm59025545ad.1.2025.12.05.16.25.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Dec 2025 16:25:26 -0800 (PST)
+Received: by archie.me (Postfix, from userid 1000)
+	id C8B35421860F; Sat, 06 Dec 2025 07:25:22 +0700 (WIB)
+Date: Sat, 6 Dec 2025 07:25:22 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Byungchul Park <byungchul@sk.com>, linux-kernel@vger.kernel.org
+Cc: kernel_team@skhynix.com, torvalds@linux-foundation.org,
+	damien.lemoal@opensource.wdc.com, linux-ide@vger.kernel.org,
+	adilger.kernel@dilger.ca, linux-ext4@vger.kernel.org,
+	mingo@redhat.com, peterz@infradead.org, will@kernel.org,
+	tglx@linutronix.de, rostedt@goodmis.org, joel@joelfernandes.org,
+	sashal@kernel.org, daniel.vetter@ffwll.ch, duyuyang@gmail.com,
+	johannes.berg@intel.com, tj@kernel.org, tytso@mit.edu,
+	willy@infradead.org, david@fromorbit.com, amir73il@gmail.com,
+	gregkh@linuxfoundation.org, kernel-team@lge.com, linux-mm@kvack.org,
+	akpm@linux-foundation.org, mhocko@kernel.org, minchan@kernel.org,
+	hannes@cmpxchg.org, vdavydov.dev@gmail.com, sj@kernel.org,
+	jglisse@redhat.com, dennis@kernel.org, cl@linux.com,
+	penberg@kernel.org, rientjes@google.com, vbabka@suse.cz,
+	ngupta@vflare.org, linux-block@vger.kernel.org,
+	josef@toxicpanda.com, linux-fsdevel@vger.kernel.org, jack@suse.cz,
+	jlayton@kernel.org, dan.j.williams@intel.com, hch@infradead.org,
+	djwong@kernel.org, dri-devel@lists.freedesktop.org,
+	rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com,
+	hamohammed.sa@gmail.com, harry.yoo@oracle.com,
+	chris.p.wilson@intel.com, gwan-gyeong.mun@intel.com,
+	max.byungchul.park@gmail.com, boqun.feng@gmail.com,
+	longman@redhat.com, yunseong.kim@ericsson.com, ysk@kzalloc.com,
+	yeoreum.yun@arm.com, netdev@vger.kernel.org,
+	matthew.brost@intel.com, her0gyugyu@gmail.com, corbet@lwn.net,
+	catalin.marinas@arm.com, bp@alien8.de, x86@kernel.org,
+	hpa@zytor.com, luto@kernel.org, sumit.semwal@linaro.org,
+	gustavo@padovan.org, christian.koenig@amd.com,
+	andi.shyti@kernel.org, arnd@arndb.de, lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com, rppt@kernel.org, surenb@google.com,
+	mcgrof@kernel.org, petr.pavlu@suse.com, da.gomez@kernel.org,
+	samitolvanen@google.com, paulmck@kernel.org, frederic@kernel.org,
+	neeraj.upadhyay@kernel.org, joelagnelf@nvidia.com,
+	josh@joshtriplett.org, urezki@gmail.com,
+	mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com,
+	qiang.zhang@linux.dev, juri.lelli@redhat.com,
+	vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
+	bsegall@google.com, mgorman@suse.de, vschneid@redhat.com,
+	chuck.lever@oracle.com, neil@brown.name, okorniev@redhat.com,
+	Dai.Ngo@oracle.com, tom@talpey.com, trondmy@kernel.org,
+	anna@kernel.org, kees@kernel.org, bigeasy@linutronix.de,
+	clrkwllms@kernel.org, mark.rutland@arm.com, ada.coupriediaz@arm.com,
+	kristina.martsenko@arm.com, wangkefeng.wang@huawei.com,
+	broonie@kernel.org, kevin.brodsky@arm.com, dwmw@amazon.co.uk,
+	shakeel.butt@linux.dev, ast@kernel.org, ziy@nvidia.com,
+	yuzhao@google.com, baolin.wang@linux.alibaba.com,
+	usamaarif642@gmail.com, joel.granados@kernel.org,
+	richard.weiyang@gmail.com, geert+renesas@glider.be,
+	tim.c.chen@linux.intel.com, linux@treblig.org,
+	alexander.shishkin@linux.intel.com, lillian@star-ark.net,
+	chenhuacai@kernel.org, francesco@valla.it,
+	guoweikang.kernel@gmail.com, link@vivo.com, jpoimboe@kernel.org,
+	masahiroy@kernel.org, brauner@kernel.org,
+	thomas.weissschuh@linutronix.de, oleg@redhat.com, mjguzik@gmail.com,
+	andrii@kernel.org, wangfushuai@baidu.com, linux-doc@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org,
+	linux-arch@vger.kernel.org, linux-modules@vger.kernel.org,
+	rcu@vger.kernel.org, linux-nfs@vger.kernel.org,
+	linux-rt-devel@lists.linux.dev, 2407018371@qq.com, dakr@kernel.org,
+	miguel.ojeda.sandonis@gmail.com, neilb@ownmail.net,
+	wsa+renesas@sang-engineering.com, dave.hansen@intel.com,
+	geert@linux-m68k.org, ojeda@kernel.org, alex.gaynor@gmail.com,
+	gary@garyguo.net, bjorn3_gh@protonmail.com, lossin@kernel.org,
+	a.hindborg@kernel.org, aliceryhl@google.com, tmgross@umich.edu,
+	rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v18 25/42] dept: add documents for dept
+Message-ID: <aTN38kJjBftxnjm9@archie.me>
+References: <20251205071855.72743-1-byungchul@sk.com>
+ <20251205071855.72743-26-byungchul@sk.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/11] mm: Rework compound_head() for power-of-2
- sizeof(struct page)
-Content-Language: en-GB
-To: Kiryl Shutsemau <kas@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- Muchun Song <muchun.song@linux.dev>
-Cc: David Hildenbrand <david@kernel.org>, Oscar Salvador <osalvador@suse.de>,
- Mike Rapoport <rppt@kernel.org>, Vlastimil Babka <vbabka@suse.cz>,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Matthew Wilcox <willy@infradead.org>, Zi Yan <ziy@nvidia.com>,
- Baoquan He <bhe@redhat.com>, Michal Hocko <mhocko@suse.com>,
- Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
- kernel-team@meta.com, linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-References: <20251205194351.1646318-1-kas@kernel.org>
- <20251205194351.1646318-5-kas@kernel.org>
-From: Usama Arif <usamaarif642@gmail.com>
-In-Reply-To: <20251205194351.1646318-5-kas@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="tsFx90K4YzyOMDd5"
+Content-Disposition: inline
+In-Reply-To: <20251205071855.72743-26-byungchul@sk.com>
 
 
+--tsFx90K4YzyOMDd5
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 05/12/2025 19:43, Kiryl Shutsemau wrote:
-> For tail pages, the kernel uses the 'compound_info' field to get to the
-> head page. The bit 0 of the field indicates whether the page is a
-> tail page, and if set, the remaining bits represent a pointer to the
-> head page.
-> 
-> For cases when size of struct page is power-of-2, change the encoding of
-> compound_info to store a mask that can be applied to the virtual address
-> of the tail page in order to access the head page. It is possible
-> because sturct page of the head page is naturally aligned with regards
-
-nit: s/sturct/struct/
-
-> to order of the page.
-
-Might be good to add to state here that no change expected if the struct page
-is not a power of 2.
-
-> 
-> The significant impact of this modification is that all tail pages of
-> the same order will now have identical 'compound_info', regardless of
-> the compound page they are associated with. This paves the way for
-> eliminating fake heads.
-> 
-> Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
+On Fri, Dec 05, 2025 at 04:18:38PM +0900, Byungchul Park wrote:
+> Add documents describing the concept and APIs of dept.
+>=20
+> Signed-off-by: Byungchul Park <byungchul@sk.com>
 > ---
->  include/linux/page-flags.h | 61 +++++++++++++++++++++++++++++++++-----
->  mm/util.c                  | 15 +++++++---
->  2 files changed, 64 insertions(+), 12 deletions(-)
-> 
-> diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
-> index 11d9499e5ced..eef02fbbb40f 100644
-> --- a/include/linux/page-flags.h
-> +++ b/include/linux/page-flags.h
-> @@ -210,6 +210,13 @@ static __always_inline const struct page *page_fixed_fake_head(const struct page
->  	if (!static_branch_unlikely(&hugetlb_optimize_vmemmap_key))
->  		return page;
->  
-> +	/*
-> +	 * Fake heads only exists if size of struct page is power-of-2.
-> +	 * See hugetlb_vmemmap_optimizable_size().
-> +	 */
-> +	if (!is_power_of_2(sizeof(struct page)))
-> +		return page;
+>  Documentation/dev-tools/dept.rst     | 778 +++++++++++++++++++++++++++
+>  Documentation/dev-tools/dept_api.rst | 125 +++++
+
+You forget to add toctree entries:
+
+---- >8 ----
+diff --git a/Documentation/dev-tools/index.rst b/Documentation/dev-tools/in=
+dex.rst
+index 4b8425e348abd1..02c858f5ed1fa2 100644
+--- a/Documentation/dev-tools/index.rst
++++ b/Documentation/dev-tools/index.rst
+@@ -22,6 +22,8 @@ Documentation/process/debugging/index.rst
+    clang-format
+    coccinelle
+    sparse
++   dept
++   dept_api
+    kcov
+    gcov
+    kasan
+
+> +Lockdep detects a deadlock by checking lock acquisition order.  For
+> +example, a graph to track acquisition order built by lockdep might look
+> +like:
 > +
-
-
-hmm my understanding reviewing up until this patch of the series is that everything works
-the same as old code when struct page is not a power of 2. Returning page here means you dont
-fix page head when sizeof(struct page) is not a power of 2?
-
->  	/*
->  	 * Only addresses aligned with PAGE_SIZE of struct page may be fake head
->  	 * struct page. The alignment check aims to avoid access the fields (
-> @@ -223,10 +230,13 @@ static __always_inline const struct page *page_fixed_fake_head(const struct page
->  		 * because the @page is a compound page composed with at least
->  		 * two contiguous pages.
->  		 */
-> -		unsigned long head = READ_ONCE(page[1].compound_info);
-> +		unsigned long info = READ_ONCE(page[1].compound_info);
->  
-> -		if (likely(head & 1))
-> -			return (const struct page *)(head - 1);
-> +		if (likely(info & 1)) {
-> +			unsigned long p = (unsigned long)page;
+> +.. literal::
 > +
-> +			return (const struct page *)(p & info);
-
-Would it be worth writing a comment over here similar to what you have in set_compound_head
-to explain why this works? i.e. compound_info contains the mask derived from folio order that
-can be applied to the virtual address to get the head page.
-
-Also, it takes a few minutes to wrap your head around the fact that this works because the struct
-page of the head page is aligned wrt to the order. Maybe it might be good to add that somewhere as
-a comment somewhere? I dont see it documented in this patch, if its in a future patch, please ignore
-this comment. 
-
-> +		}
->  	}
->  	return page;
->  }
-> @@ -281,11 +291,27 @@ static __always_inline int page_is_fake_head(const struct page *page)
->  
->  static __always_inline unsigned long _compound_head(const struct page *page)
->  {
-> -	unsigned long head = READ_ONCE(page->compound_info);
-> +	unsigned long info = READ_ONCE(page->compound_info);
->  
-> -	if (unlikely(head & 1))
-> -		return head - 1;
-> -	return (unsigned long)page_fixed_fake_head(page);
-> +	/* Bit 0 encodes PageTail() */
-> +	if (!(info & 1))
-> +		return (unsigned long)page_fixed_fake_head(page);
+> +   A -> B -
+> +           \
+> +            -> E
+> +           /
+> +   C -> D -
 > +
-> +	/*
-> +	 * If the size of struct page is not power-of-2, the rest if
+> +   where 'A -> B' means that acquisition A is prior to acquisition B
+> +   with A still held.
 
-nit: s/if/of
+Use code-block directive for literal code blocks:
 
-> +	 * compound_info is the pointer to the head page.
-> +	 */
-> +	if (!is_power_of_2(sizeof(struct page)))
-> +		return info - 1;
+---- >8 ----
+diff --git a/Documentation/dev-tools/dept.rst b/Documentation/dev-tools/dep=
+t.rst
+index 333166464543d7..8394c4ea81bc2a 100644
+--- a/Documentation/dev-tools/dept.rst
++++ b/Documentation/dev-tools/dept.rst
+@@ -10,7 +10,7 @@ Lockdep detects a deadlock by checking lock acquisition o=
+rder.  For
+ example, a graph to track acquisition order built by lockdep might look
+ like:
+=20
+-.. literal::
++.. code-block::
+=20
+    A -> B -
+            \
+@@ -25,7 +25,7 @@ Lockdep keeps adding each new acquisition order into the =
+graph at
+ runtime.  For example, 'E -> C' will be added when the two locks have
+ been acquired in the order, E and then C.  The graph will look like:
+=20
+-.. literal::
++.. code-block::
+=20
+        A -> B -
+                \
+@@ -41,7 +41,7 @@ been acquired in the order, E and then C.  The graph will=
+ look like:
+=20
+ This graph contains a subgraph that demonstrates a loop like:
+=20
+-.. literal::
++.. code-block::
+=20
+                 -> E -
+                /      \
+@@ -76,7 +76,7 @@ e.g. irq context, normal process context, wq worker conte=
+xt, or so on.
+=20
+ Can lockdep detect the following deadlock?
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -91,7 +91,7 @@ Can lockdep detect the following deadlock?
+=20
+ No.  What about the following?
+=20
+-.. literal::
++.. code-block::
+=20
+    context X		   context Y
+=20
+@@ -116,7 +116,7 @@ What leads a deadlock
+ A deadlock occurs when one or multi contexts are waiting for events that
+ will never happen.  For example:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -148,7 +148,7 @@ In terms of dependency:
+=20
+ Dependency graph reflecting this example will look like:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> C -> A -> B -
+    /                \
+@@ -171,7 +171,7 @@ Introduce DEPT
+ DEPT(DEPendency Tracker) tracks wait and event instead of lock
+ acquisition order so as to recognize the following situation:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -186,7 +186,7 @@ acquisition order so as to recognize the following situ=
+ation:
+ and builds up a dependency graph at runtime that is similar to lockdep.
+ The graph might look like:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> C -> A -> B -
+    /                \
+@@ -199,7 +199,7 @@ DEPT keeps adding each new dependency into the graph at=
+ runtime.  For
+ example, 'B -> D' will be added when event D occurrence is a
+ prerequisite to reaching event B like:
+=20
+-.. literal::
++.. code-block::
+=20
+    context W
+=20
+@@ -211,7 +211,7 @@ prerequisite to reaching event B like:
+=20
+ After the addition, the graph will look like:
+=20
+-.. literal::
++.. code-block::
+=20
+                      -> D
+                     /
+@@ -236,7 +236,7 @@ How DEPT works
+ Let's take a look how DEPT works with the 1st example in the section
+ 'Limitation of lockdep'.
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -256,7 +256,7 @@ event.
+=20
+ Adding comments to describe DEPT's view in detail:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -293,7 +293,7 @@ Adding comments to describe DEPT's view in detail:
+=20
+ Let's build up dependency graph with this example.  Firstly, context X:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X
+=20
+@@ -304,7 +304,7 @@ Let's build up dependency graph with this example.  Fir=
+stly, context X:
+=20
+ There are no events to create dependency.  Next, context Y:
+=20
+-.. literal::
++.. code-block::
+=20
+    context Y
+=20
+@@ -332,7 +332,7 @@ event A cannot be triggered if wait B cannot be awakene=
+d by event B.
+ Therefore, we can say event A depends on event B, say, 'A -> B'.  The
+ graph will look like after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+    A -> B
+=20
+@@ -340,7 +340,7 @@ graph will look like after adding the dependency:
+=20
+ Lastly, context Z:
+=20
+-.. literal::
++.. code-block::
+=20
+    context Z
+=20
+@@ -362,7 +362,7 @@ triggered if wait A cannot be awakened by event A.  The=
+refore, we can
+ say event B depends on event A, say, 'B -> A'.  The graph will look like
+ after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> A -> B -
+    /           \
+@@ -386,7 +386,7 @@ Interpret DEPT report
+=20
+ The following is the same example in the section 'How DEPT works'.
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -425,7 +425,7 @@ We can simplify this by labeling each waiting point wit=
+h [W], each
+ point where its event's context starts with [S] and each event with [E].
+ This example will look like after the labeling:
+=20
+-.. literal::
++.. code-block::
+=20
+    context X	   context Y	   context Z
+=20
+@@ -443,7 +443,7 @@ DEPT uses the symbols [W], [S] and [E] in its report as=
+ described above.
+ The following is an example reported by DEPT for a real problem in
+ practice.
+=20
+-.. literal::
++.. code-block::
+=20
+    Link: https://lore.kernel.org/lkml/6383cde5-cf4b-facf-6e07-1378a485657d=
+@I-love.SAKURA.ne.jp/#t
+    Link: https://lore.kernel.org/lkml/1674268856-31807-1-git-send-email-by=
+ungchul.park@lge.com/
+@@ -646,7 +646,7 @@ practice.
+=20
+ Let's take a look at the summary that is the most important part.
+=20
+-.. literal::
++.. code-block::
+=20
+    ---------------------------------------------------
+    summary
+@@ -669,7 +669,7 @@ Let's take a look at the summary that is the most impor=
+tant part.
+=20
+ The summary shows the following scenario:
+=20
+-.. literal::
++.. code-block::
+=20
+    context A	   context B	   context ?(unknown)
+=20
+@@ -684,7 +684,7 @@ The summary shows the following scenario:
+=20
+ Adding comments to describe DEPT's view in detail:
+=20
+-.. literal::
++.. code-block::
+=20
+    context A	   context B	   context ?(unknown)
+=20
+@@ -711,7 +711,7 @@ Adding comments to describe DEPT's view in detail:
+=20
+ Let's build up dependency graph with this report. Firstly, context A:
+=20
+-.. literal::
++.. code-block::
+=20
+    context A
+=20
+@@ -735,7 +735,7 @@ unlock(&ni->ni_lock:0) depends on folio_unlock(&f1), sa=
+y,
+=20
+ The graph will look like after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+    unlock(&ni->ni_lock:0) -> folio_unlock(&f1)
+=20
+@@ -743,7 +743,7 @@ The graph will look like after adding the dependency:
+=20
+ Secondly, context B:
+=20
+-.. literal::
++.. code-block::
+=20
+    context B
+=20
+@@ -762,7 +762,7 @@ folio_unlock(&f1) depends on unlock(&ni->ni_lock:0), sa=
+y,
+=20
+ The graph will look like after adding the dependency:
+=20
+-.. literal::
++.. code-block::
+=20
+     -> unlock(&ni->ni_lock:0) -> folio_unlock(&f1) -
+    /                                                \
+
+> +Limitation of lockdep
+> +---------------------
 > +
-> +	/*
-> +	 * If the size of struct page is power-of-2 it is set the rest of
-
-nit: remove "it is set"
-
-> +	 * the info encodes the mask that converts the address of the tail
-> +	 * page to the head page.
-> +	 *
-> +	 * No need to clear bit 0 in the mask as 'page' always has it clear.
-> +	 */
-> +	return (unsigned long)page & info;
->  }
->  
->  #define compound_head(page)	((typeof(page))_compound_head(page))
-> @@ -294,7 +320,26 @@ static __always_inline void set_compound_head(struct page *page,
->  					      struct page *head,
->  					      unsigned int order)
->  {
-> -	WRITE_ONCE(page->compound_info, (unsigned long)head + 1);
-> +	unsigned int shift;
-> +	unsigned long mask;
+> +Lockdep deals with a deadlock by typical lock e.g. spinlock and mutex,
+> +that are supposed to be released within the acquisition context.
+> +However, when it comes to a deadlock by folio lock that is not supposed
+> +to be released within the acquisition context or other general
+> +synchronization mechanisms, lockdep doesn't work.
 > +
-> +	if (!is_power_of_2(sizeof(struct page))) {
-> +		WRITE_ONCE(page->compound_info, (unsigned long)head | 1);
-> +		return;
-> +	}
+> +NOTE:  In this document, 'context' refers to any type of unique context
+> +e.g. irq context, normal process context, wq worker context, or so on.
 > +
-> +	/*
-> +	 * If the size of struct page is power-of-2, bits [shift:0] of the
-> +	 * virtual address of compound head are zero.
-> +	 *
-> +	 * Calculate mask that can be applied the virtual address of the
-
-nit: applied to the ..
-
-> +	 * tail page to get address of the head page.
-> +	 */
-> +	shift = order + order_base_2(sizeof(struct page));
-> +	mask = GENMASK(BITS_PER_LONG - 1, shift);
+> +Can lockdep detect the following deadlock?
 > +
-> +	/* Bit 0 encodes PageTail() */
-> +	WRITE_ONCE(page->compound_info, mask | 1);
->  }
->  
->  static __always_inline void clear_compound_head(struct page *page)
-> diff --git a/mm/util.c b/mm/util.c
-> index cbf93cf3223a..6723d2bb7f1e 100644
-> --- a/mm/util.c
-> +++ b/mm/util.c
-> @@ -1234,7 +1234,7 @@ static void set_ps_flags(struct page_snapshot *ps, const struct folio *folio,
->   */
->  void snapshot_page(struct page_snapshot *ps, const struct page *page)
->  {
-> -	unsigned long head, nr_pages = 1;
-> +	unsigned long info, nr_pages = 1;
->  	struct folio *foliop;
->  	int loops = 5;
->  
-> @@ -1244,8 +1244,8 @@ void snapshot_page(struct page_snapshot *ps, const struct page *page)
->  again:
->  	memset(&ps->folio_snapshot, 0, sizeof(struct folio));
->  	memcpy(&ps->page_snapshot, page, sizeof(*page));
-> -	head = ps->page_snapshot.compound_info;
-> -	if ((head & 1) == 0) {
-> +	info = ps->page_snapshot.compound_info;
-> +	if ((info & 1) == 0) {
->  		ps->idx = 0;
->  		foliop = (struct folio *)&ps->page_snapshot;
->  		if (!folio_test_large(foliop)) {
-> @@ -1256,7 +1256,14 @@ void snapshot_page(struct page_snapshot *ps, const struct page *page)
->  		}
->  		foliop = (struct folio *)page;
->  	} else {
-> -		foliop = (struct folio *)(head - 1);
-> +		unsigned long p = (unsigned long)page;
+> +.. literal::
 > +
-> +		/* See compound_head() */
-> +		if (is_power_of_2(sizeof(struct page)))
-> +			foliop = (struct folio *)(p & info);
-> +		else
-> +			foliop = (struct folio *)(info - 1);
+> +   context X	   context Y	   context Z
 > +
+> +		   mutex_lock A
+> +   folio_lock B
+> +		   folio_lock B <- DEADLOCK
+> +				   mutex_lock A <- DEADLOCK
+> +				   folio_unlock B
+> +		   folio_unlock B
+> +		   mutex_unlock A
+> +				   mutex_unlock A
+> +
+> +No.  What about the following?
+> +
+> +.. literal::
+> +
+> +   context X		   context Y
+> +
+> +			   mutex_lock A
+> +   mutex_lock A <- DEADLOCK
+> +			   wait_for_complete B <- DEADLOCK
+> +   complete B
+> +			   mutex_unlock A
+> +   mutex_unlock A
+> +
+> +No.
 
-Would it be better to do below, as you dont need to than declare p if sizeof(struct page) is not
-a power of 2?
+One unanswered question from my v17 review [1]: You explain in "How DEPT wo=
+rks"
+section how DEPT detects deadlock in the first example (the former with thr=
+ee
+contexts). Can you do the same on the second example (the latter with two
+contexts)?
 
-if (!is_power_of_2(sizeof(struct page)))
-	foliop = (struct folio *)(info - 1);
-else {
-	unsigned long p = (unsigned long)page;
-	foliop = (struct folio *)(p & info);
-}
-	
->  		ps->idx = folio_page_idx(foliop, page);
->  	}
->  
+Thanks.
 
+[1]: https://lore.kernel.org/linux-doc/aN84jKyrE1BumpLj@archie.me/
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--tsFx90K4YzyOMDd5
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaTN37QAKCRD2uYlJVVFO
+o40gAP9yWQe507aOQ9xG+y3WznUbz9K0gxVdcJgmBzyPkuLdOAD/SjStuxrT6yQi
+Wd1X9MlzPBf7sPwdNC1xXihj1C/n6go=
+=b9ga
+-----END PGP SIGNATURE-----
+
+--tsFx90K4YzyOMDd5--
 
