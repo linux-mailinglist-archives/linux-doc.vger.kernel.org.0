@@ -1,149 +1,194 @@
-Return-Path: <linux-doc+bounces-69266-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69260-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38EC7CAE2B2
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Dec 2025 21:36:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12BA6CAD98E
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Dec 2025 16:32:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C0C713025FA5
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Dec 2025 20:36:01 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DDDC530198C3
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Dec 2025 15:31:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 271CA2C027B;
-	Mon,  8 Dec 2025 20:36:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 476D51E832A;
+	Mon,  8 Dec 2025 15:31:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DLf97ukF"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="P3rwsFO8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70B9F2BD015
-	for <linux-doc@vger.kernel.org>; Mon,  8 Dec 2025 20:35:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B90EF18DB35
+	for <linux-doc@vger.kernel.org>; Mon,  8 Dec 2025 15:31:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765226161; cv=none; b=ILXaVhAer1/jTyXO1BzRc0+LI6HYWeDpnXwiqpfsVBGqDEMrWt/4e78LSAOfgeeUp15+9dZmOftmlganGdIpS0rcbpR4DI2JLKV6Wamu8+vUdyOSP+a30HKr7PR5RbB33U5yg8N0FyTnx0ks7xXSn9IleiFGqcY1zXpkmOK8Jxw=
+	t=1765207898; cv=none; b=bReZDbfN6Rz3V4oAeX0Z7icInsz/IQVOFJ1A0EbiRyo97IhtiB4gn4OH4PEZ5i71XPjeUh3oWxqMyU8zv+kw61jasjzKj3+xzBaTz/kierP/8coXLBDs8vfZ0MLS0oUapcfx17y9pg1rsGismFbKwepIy2G4+n369LDK4BgdEEo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765226161; c=relaxed/simple;
-	bh=/rKlc0claZ+O+eRC8htCK0yG2YQIyD6b/xLiuB6zLqc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AsNCl7dtNpm+d9N0FB+3JbMFQFa2+gQ1Aauz3kTe0UhxDCvbnC8KFm4xXmwLIoALmNbR/hL7ArIMtPGEZuqRE8298A3vLfZ7gJHaDCUhVkHfgqHHrDopE5I3zwGveJgFh3j/ZUPdOmb1Z+1RzPSvcA8lyphujfcFmIo/iOcsZp0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DLf97ukF; arc=none smtp.client-ip=209.85.167.52
+	s=arc-20240116; t=1765207898; c=relaxed/simple;
+	bh=yFjHybU6jkH/65wlYItO8dl7SQJCxyFvZ2X/km0ngKM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=oRxCgPs+0Lgj8gftIv97uFMMLDD5IC/3yOV8ifPpa6hVMwjmUS8ZrAZEoUhZsQ6qozYG0iddf+7LS9q31YjzF/AAZtgu+Ob5j5WctgoRcDrLmDsBZfHaaHIQ+O7CquhnorvlaOqsYkcidKAbbvwjhtuPCvQ6u9LwVZsXZiSwZ4M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=P3rwsFO8; arc=none smtp.client-ip=209.85.210.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-59583505988so6021338e87.1
-        for <linux-doc@vger.kernel.org>; Mon, 08 Dec 2025 12:35:59 -0800 (PST)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-7ba49f92362so2533077b3a.1
+        for <linux-doc@vger.kernel.org>; Mon, 08 Dec 2025 07:31:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765226158; x=1765830958; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=3D5kD500HpmwSprzmfQML5Kvc15a25K3Hzfpzmghy+0=;
-        b=DLf97ukFW/DgKdOnIgs5DgcN22gDa/hiwmGYkJZu+Q2j6vyxQuAYVQv+EQgkxZcQIL
-         7Nth0mIweq1cz73ERfa9RymQur6PeNpqO1/2B9TDU34Ho2FSQw3Zj4sCo3UK+4SoEWvy
-         TK3m3LIZcKpUdyV5CvPH5tJG92sbvuRmcwGdn92iq77La/QhHBMr/2DzEaG/4qDJJ2cc
-         jAiTQoEdRxkVuQ0sKXYYlSI+qHz8mKp8ngG1NDjqRspQGzENj0lIE+sEsEA8QqiK4Sl4
-         /uMeg1wlwfwdkGxiSbFhXwvP4eEHM/kaaelRywDWGIB2L2vK83Bqsmf829DS0xP+lX0b
-         OnRg==
+        d=gmail.com; s=20230601; t=1765207896; x=1765812696; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4Bex63zNM0dV0NLY9BABQaGQ0KBu7F1kvsYCKz1b3Ds=;
+        b=P3rwsFO8N+484aeun76op5qJafHWhMmU8gdpfqWu6Viu+29auQV6vgJGjI2NKIX0QH
+         8rmByNQjaUlEi/53gJaxLXM7MtCwOYskGlw5ZhmVvoIPG2ovEfRIfnJGJvAHbmlUvv9f
+         9pRBX3uWqBWwt1VNXpY/+aQq5MVVq+4Al3WnP78aJs/BjhkF/AUYVIO+Xo2lgyhytCv2
+         GipIrLEeWV3E0uB9owZFroSXsfACBnSkhHLafpICDeNDrE0WRjWwTak/7k7cLCcv050B
+         omYtbx61+7aOjRk+2mKWWRFJOEeC0pyt+rSx3fE6NnXHC+dMUqfUqjqhwGVjvG/F6O4B
+         62cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765226158; x=1765830958;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3D5kD500HpmwSprzmfQML5Kvc15a25K3Hzfpzmghy+0=;
-        b=VYmxC0rr1eg4zm5igBqsT0khqOjv2uRvBTgqXU2tSt/UaRu8m2Uk1tPFeZUknQDUZ7
-         8G2AgJcrMa05tYRKp++AkHXRuzOSp/3TQ75A15Fxr4GojUAwAQKS5ugOMh97uS0Fe8Uc
-         nprOm4uoLV4Z9tCU9wSt8zVtsAOH1+s62aT5wD482J8dBI0djlAfODnEvVO3nkS9u3NG
-         ReOpm4QgdYrhht/+gSXJbmranp/y+ltdumaEwiWbMIb+hCImZdqYteECAFUfr21ceH8u
-         sYLXoMEz7vJsDXgTQ3C04/5mqgvO1r6g9DwPx59u742dXYt0rm/bQ8QP5APVEIWB3a3n
-         CZZw==
-X-Forwarded-Encrypted: i=1; AJvYcCVtfxEQMqlZhpv9X82TIHy3BbqMJU94SKhzCD+ZVVz6kfhNAU+a9NEKc0MsdONjiRsj1A/OZ4ljmGE=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzvmR+SeiQlFjZ7XYbZXLGqd2mQQ7fJ5lAYau2Lh9ukREwKY8NO
-	s6Pk+wwHQBUvtWovS/cqNfVatNoVc1dCnNKt6Rbg2mLGgyRgGHY5ZGY+
-X-Gm-Gg: ASbGncu6z/IGF4GK5bvIOrY4CxVcmNc5df5oQw9BfiCaVSRtntfmBFXcHa2gOfQ1SRf
-	VzzJJ8bhiaTeJcCCaDVBNu8GckQ1x1EYxVGe6mPH8iXnfUnngueuj3u5vDgDhz/JqpMqg6Hu73A
-	O43x52FxQYHn0xTFQ/dPMiFbBsbn6/CpImiRpyr0NljKWi4902efCoGhiDrPxfdMfzdu7tVdJO6
-	C+81xt2NSDPmETROoWgp7CCil1qLIM5wstRPi5FSl6ugo9Z6C/vbyFq0XruBCSU2cdUr5Mr9P2/
-	TXIiXLsZcw2dL4Zl9NfqczhHULbXbQxEaQQJ8aD0GDn90uIF8oio2KZSwhqDeaBcoKsKBIWDZ4O
-	NGKQyDGY5z59mh3jkdm58tNAnlfNeBAQIt8TBJ1ckjL40uvUtVqTlg1DWwKm940BWCHacsfZucy
-	UVaA==
-X-Google-Smtp-Source: AGHT+IFxD46idyml5mDZecUPUQulSu8KqgMNNDpyRDJrIw18BS9ui+72Y8Bk2CtnjeAWlIFclHhKVw==
-X-Received: by 2002:ac2:51d5:0:b0:595:90ce:df8e with SMTP id 2adb3069b0e04-598e92ac83fmr187477e87.5.1765226157327;
-        Mon, 08 Dec 2025 12:35:57 -0800 (PST)
-Received: from curiosity ([5.188.167.4])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-597d7b1a7dbsm4400878e87.20.2025.12.08.12.35.55
+        d=1e100.net; s=20230601; t=1765207896; x=1765812696;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4Bex63zNM0dV0NLY9BABQaGQ0KBu7F1kvsYCKz1b3Ds=;
+        b=OwzCnllaqq+6a/PHj1NZYVbT7BdwXl+yFEl+kVmAt5EHdBzlaCFFnJkjjQ2JYZwXpt
+         Sshew2m/PQP5Auwet6BZ+uAR5sKRBVLLgstYuJh7AAwoPtKhm8mAds2oPAzeovxBe5B8
+         dT6jT941K8Mu4nMu1JmmJSAQ5+eRxIX+Iic30C4JJz2dQAxvpQGxB/tDerp4DOWp+mfk
+         8Zp+K13iBsk39aSD6PajwNdMheDZ/zGWSQt2yKuXWAWQE8ShmkEvOWs68S2rW6QaRrCK
+         ZEzcfCk0kPU5R3ab2j742vqxR/YJAi9caVjGdr8C83MXGtoKboj34WjELv8fui+QkzC5
+         7Vvg==
+X-Forwarded-Encrypted: i=1; AJvYcCXYLdVnhySvxEvKf5zmKZx/z9irh70BCV5CVjvEIGAwfEeMNj7uZdGr4MFfWFPef1y4ppn4VSc3sPU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyzOb/w2ZvaLeQhZPneauMBu8zvYa+qVIGGlRZ6NyYjb8xSKA8g
+	60Y6NkSG8PLyN3L21UfM78vn7UGkEI7tgYiW8luzzih3U0O38+2qqrkH
+X-Gm-Gg: ASbGnctbUFYBijUfgNso5rK+YGkivE7R9ALp13dKaUxTP4HvZ5FjbkbS/wl+zNb0aZd
+	Ta1MfmrsYOKEl+o3QBnLGUUK4WGQKv9t0LqbefGvZpduwkqQ9oRXkXFCiAsaWnLT6pe8Xolu2tN
+	NUlr6x2dwD0DMCZIIX3KEnTh4nCFU86724s8j4U+JFvvN5FZF158mthTimdrIudRdR7JQqa3hUr
+	kh+wp+13m4j3IhnUL5iysqEXaS+vaguxCS4XPFP0OEvwUQOMNkg/DdlDNl/vMC3bUN1/jQw5zmy
+	I6fH5ttKjv4KArKoLezCD6ghmsE0nzHW3r2o89+w7fMjLlCP/LJ9D6wAvEphs0VyBDg97nb9TNZ
+	dlNuPs2GzUzHzIR84zgCTv6Qp2re/rTdgaPQFsNXxlHNgHYtDok/4c8sNJ7FWUobGniAzkI+Dp+
+	xz7dwpdRgxRmMmBUI7Y3M=
+X-Google-Smtp-Source: AGHT+IF6J0kBEC8FKvJK51K8z5dLkwOeyMrvRtMkX0bAAqgUo81rOgj5u96jbKAPyZpuceYCg7/Uxg==
+X-Received: by 2002:a05:6a20:6a0d:b0:35e:d94:525a with SMTP id adf61e73a8af0-36617e6c82cmr7252847637.13.1765207895651;
+        Mon, 08 Dec 2025 07:31:35 -0800 (PST)
+Received: from LilGuy ([2409:40c2:12af:9b19:45ec:8f6e:22bb:1870])
+        by smtp.googlemail.com with ESMTPSA id 41be03b00d2f7-bf6a274af53sm12511815a12.28.2025.12.08.07.31.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Dec 2025 12:35:56 -0800 (PST)
-Date: Mon, 8 Dec 2025 23:35:53 +0300
-From: Sergey Matyukevich <geomatsi@gmail.com>
-To: Andy Chiu <andybnac@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <pjw@kernel.org>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
-	Charlie Jenkins <charlie@rivosinc.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Andrew Jones <ajones@ventanamicro.com>,
-	linux-riscv@lists.infradead.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] riscv: hwprobe: expose vector register length in bytes
-Message-ID: <aTc2qaf6JxBPLvtH@curiosity>
-References: <20251121193524.1813200-1-geomatsi@gmail.com>
- <CAFTtA3NVd8HMomd60i=T_S34TSL18==aYRFhg2AH-PbsM=hggw@mail.gmail.com>
+        Mon, 08 Dec 2025 07:31:35 -0800 (PST)
+From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+To: Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	linux-kernel@vger.kernel.org (open list:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
+	linux-doc@vger.kernel.org (open list:DOCUMENTATION)
+Cc: skhan@linuxfoundation.org,
+	david.hunter.linux@gmail.com,
+	Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+Subject: [PATCH] Documentation: x86/boot: Fix malformed table in boot.rst
+Date: Mon,  8 Dec 2025 21:01:12 +0000
+Message-ID: <20251208210113.24057-1-swarajgaikwad1925@gmail.com>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFTtA3NVd8HMomd60i=T_S34TSL18==aYRFhg2AH-PbsM=hggw@mail.gmail.com>
 
-Hi Andy
+Building the documentation with make htmldocs previously failed with the
+following error, causing the "Assigned boot loader IDs" table to not
+render at all in the HTML output:
 
-On Wed, Dec 03, 2025 at 11:57:06AM -0600, Andy Chiu wrote:
-> Hi Sergey,
-> 
-> On Fri, Nov 21, 2025 at 1:37 PM Sergey Matyukevich <geomatsi@gmail.com> wrote:
-> >
-> > The vector register length can be obtained from the read-only CSR vlenb.
-> > However reading this CSR may be undesirable in some cases. XTheadVector
-> > extension is one example: existing implementations may not provide this
-> > register. On such platforms, vlenb is specified as device-tree property.
-> 
-> I wonder why a hwprobe entry is needed even in this context. If vlenb
-> is not available, we can always use a vsetvli and read the destination
-> register to infer register length. Isn't that also true for Vector
-> 0.7, or are you considering anything else?
+  Documentation/arch/x86/boot.rst:437: ERROR: Malformed table.
+  Text in column margin in table line 2.
 
-Sure, reading vsetvli works for XTheadVector as well. The primary reason
-for the new hwprobe key is convenience. Vector 1.0 and XTheadVector have
-some differences that complicate that sort of autodetection. For instance,
-an older encoding for vsetvli. Good examples are vstate save and restore
-functions in `arch/riscv/include/asm/vector.h`. Using hwprobe seems more
-convenient than using vector-or-xtheadvector logic with custom opcods,
-especially since the kernel already has all the necessary information.
+This occurred because the ReStructuredText (RST) simple table header
+defined the first column width as 2 characters (==), which is too narrow
+for data entries like 0x10 and 0x13. This dimensional mismatch caused
+the text to spill into the margin, triggering a docutils parsing
+failure.
+This patch fixes the issue by expanding the column width in the table
+header to 4 characters (====) to correctly accommodate the widest
+entries and alignment. After applying this patch, the documentation builds
+successfully and the "Assigned boot loader IDs" table now displays
+correctly in the generated HTML.
 
-> > Reading vlenb also initializes the application’s vector context, even
-> > though the application may decide not to use the vector extension based
-> > on the reported length.
-> >
-> > Meanwhile the kernel already determines vlenb at boot, either from the
-> > CSR or from the device tree. So add RISCV_HWPROBE_KEY_VECTOR_REG_LENGTH
-> > to expose the vector register length already known to the kernel.
-> >
-> > Signed-off-by: Sergey Matyukevich <geomatsi@gmail.com>
-> > ---
-> >  Documentation/arch/riscv/hwprobe.rst  | 3 +++
-> >  arch/riscv/include/asm/hwprobe.h      | 2 +-
-> >  arch/riscv/include/uapi/asm/hwprobe.h | 1 +
-> >  arch/riscv/kernel/sys_hwprobe.c       | 6 ++++++
-> >  4 files changed, 11 insertions(+), 1 deletion(-)
+Build environment: Python 3.13.7 Sphinx 8.2.3 docutils 0.22.3
 
-[snip]...
+Signed-off-by: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+---
+ Documentation/arch/x86/boot.rst | 50 ++++++++++++++++-----------------
+ 1 file changed, 25 insertions(+), 25 deletions(-)
 
-> Thanks,
-> Andy
+diff --git a/Documentation/arch/x86/boot.rst b/Documentation/arch/x86/boot.rst
+index 6d36ce86fd8e..99b42e9d0e1c 100644
+--- a/Documentation/arch/x86/boot.rst
++++ b/Documentation/arch/x86/boot.rst
+@@ -433,30 +433,30 @@ Protocol:	2.00+
 
-Regards,
-Sergey
+   Assigned boot loader IDs:
+
+-	== =======================================
+-	0x0  LILO
+-	     (0x00 reserved for pre-2.00 bootloader)
+-	0x1  Loadlin
+-	0x2  bootsect-loader
+-	     (0x20, all other values reserved)
+-	0x3  Syslinux
+-	0x4  Etherboot/gPXE/iPXE
+-	0x5  ELILO
+-	0x7  GRUB
+-	0x8  U-Boot
+-	0x9  Xen
+-	0xA  Gujin
+-	0xB  Qemu
+-	0xC  Arcturus Networks uCbootloader
+-	0xD  kexec-tools
+-	0xE  Extended (see ext_loader_type)
+-	0xF  Special (0xFF = undefined)
+-	0x10 Reserved
+-	0x11 Minimal Linux Bootloader
+-	     <http://sebastian-plotz.blogspot.de>
+-	0x12 OVMF UEFI virtualization stack
+-	0x13 barebox
+-	== =======================================
++==== ==============================
++0x0  LILO
++      (0x00 reserved for pre-2.00 bootloader)
++0x1  Loadlin
++0x2  bootsect-loader
++      (0x20, all other values reserved)
++0x3  Syslinux
++0x4  Etherboot/gPXE/iPXE
++0x5  ELILO
++0x7  GRUB
++0x8  U-Boot
++0x9  Xen
++0xA  Gujin
++0xB  Qemu
++0xC  Arcturus Networks uCbootloader
++0xD  kexec-tools
++0xE  Extended (see ext_loader_type)
++0xF  Special (0xFF = undefined)
++0x10 Reserved
++0x11 Minimal Linux Bootloader
++      <http://sebastian-plotz.blogspot.de>
++0x12 OVMF UEFI virtualization stack
++0x13 barebox
++==== ==============================
+
+   Please contact <hpa@zytor.com> if you need a bootloader ID value assigned.
+
+@@ -814,7 +814,7 @@ Protocol:	2.09+
+    	__u32 len;
+    	__u8 data[];
+    }
+-
++
+   Where, the next is a 64-bit physical pointer to the next node of
+   linked list, the next field of the last node is 0; the type is used
+   to identify the contents of data; the len is the length of data
+--
+2.52.0
+
 
