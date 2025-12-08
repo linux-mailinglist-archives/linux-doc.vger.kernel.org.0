@@ -1,194 +1,164 @@
-Return-Path: <linux-doc+bounces-69260-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69267-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12BA6CAD98E
-	for <lists+linux-doc@lfdr.de>; Mon, 08 Dec 2025 16:32:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16FC4CAE337
+	for <lists+linux-doc@lfdr.de>; Mon, 08 Dec 2025 22:13:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DDDC530198C3
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Dec 2025 15:31:39 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B89E03066DA5
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Dec 2025 21:12:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 476D51E832A;
-	Mon,  8 Dec 2025 15:31:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DCCEB2D7803;
+	Mon,  8 Dec 2025 21:12:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="P3rwsFO8"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cN1qyvL3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B90EF18DB35
-	for <linux-doc@vger.kernel.org>; Mon,  8 Dec 2025 15:31:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.179
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C91892DEA67
+	for <linux-doc@vger.kernel.org>; Mon,  8 Dec 2025 21:12:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765207898; cv=none; b=bReZDbfN6Rz3V4oAeX0Z7icInsz/IQVOFJ1A0EbiRyo97IhtiB4gn4OH4PEZ5i71XPjeUh3oWxqMyU8zv+kw61jasjzKj3+xzBaTz/kierP/8coXLBDs8vfZ0MLS0oUapcfx17y9pg1rsGismFbKwepIy2G4+n369LDK4BgdEEo=
+	t=1765228370; cv=none; b=ZYDXCZBbQnDkzvlcmCAoZxAKWsEaHvA8J/bNvwR8BVgpX2TQAEAq3FU57Rfs6YxL0527EldoE9eA8v0VOcA4d+80TfK95JvsZF3UyDAQBkUPLo727fYZqBbGT4OJ49m4vhMQ++cLEgms5jG+ED8/8Tg3loIP2Z7wAeojrnLZvp0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765207898; c=relaxed/simple;
-	bh=yFjHybU6jkH/65wlYItO8dl7SQJCxyFvZ2X/km0ngKM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=oRxCgPs+0Lgj8gftIv97uFMMLDD5IC/3yOV8ifPpa6hVMwjmUS8ZrAZEoUhZsQ6qozYG0iddf+7LS9q31YjzF/AAZtgu+Ob5j5WctgoRcDrLmDsBZfHaaHIQ+O7CquhnorvlaOqsYkcidKAbbvwjhtuPCvQ6u9LwVZsXZiSwZ4M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=P3rwsFO8; arc=none smtp.client-ip=209.85.210.179
+	s=arc-20240116; t=1765228370; c=relaxed/simple;
+	bh=/eT67ox63Y2ukyMLEkJ7o4b1T9x/HDKX33n+Cz5ZXX0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mSXJdt+HupjQPlTt+Nub6cEUJEqTFbJQ1aPbmtOfFJwKCBCz7Ke0bQCQed6XIUYL9iCDDZmgIjs0ngUGMmFQckeBXc1u3p02WbSAOJVtlYfeTPql8uiX69JnjSf3JY4PvWKuIaSpCcFLAJzuPgoGUlIi4vEb1vFOyw6/ND3r9As=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cN1qyvL3; arc=none smtp.client-ip=209.85.128.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-7ba49f92362so2533077b3a.1
-        for <linux-doc@vger.kernel.org>; Mon, 08 Dec 2025 07:31:36 -0800 (PST)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-477b5e0323bso30737165e9.0
+        for <linux-doc@vger.kernel.org>; Mon, 08 Dec 2025 13:12:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765207896; x=1765812696; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4Bex63zNM0dV0NLY9BABQaGQ0KBu7F1kvsYCKz1b3Ds=;
-        b=P3rwsFO8N+484aeun76op5qJafHWhMmU8gdpfqWu6Viu+29auQV6vgJGjI2NKIX0QH
-         8rmByNQjaUlEi/53gJaxLXM7MtCwOYskGlw5ZhmVvoIPG2ovEfRIfnJGJvAHbmlUvv9f
-         9pRBX3uWqBWwt1VNXpY/+aQq5MVVq+4Al3WnP78aJs/BjhkF/AUYVIO+Xo2lgyhytCv2
-         GipIrLEeWV3E0uB9owZFroSXsfACBnSkhHLafpICDeNDrE0WRjWwTak/7k7cLCcv050B
-         omYtbx61+7aOjRk+2mKWWRFJOEeC0pyt+rSx3fE6NnXHC+dMUqfUqjqhwGVjvG/F6O4B
-         62cA==
+        d=gmail.com; s=20230601; t=1765228366; x=1765833166; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=rv7pv8F5RO+cWw9DM2GqkbgxyRJgD6vx59IxXgSv8+A=;
+        b=cN1qyvL3CuoYUrWP6lMSGlsWS+dW7HAOaUGuL4MorolNH1Be3bero3WQi4OYnUiCi6
+         5ejAcNsAtpfY3LL1Ce1a8zGNtfJP5k9ojjYZj7NMsT1iLwsvU3BMuq100YSHiPKTAmZ0
+         93aNu+gDtOluYvSNpr+lbIdvLQvweQsyiLOAKcOZCBCD1YXb4MrOS9juZ7c5VSoRwHex
+         8rb2bAXPj6xfEd9MPCyhqVvH8tWV3C0gXvffzoIKf7c9tR2ulcwWzwWDYkKelakMUeeH
+         8Wwxti7Wxxby0wHoXHclTCmFRVrcjX0ygnO74ErBxUbbBlbJbnel6J9lHzXUASrNtP3r
+         TaTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765207896; x=1765812696;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4Bex63zNM0dV0NLY9BABQaGQ0KBu7F1kvsYCKz1b3Ds=;
-        b=OwzCnllaqq+6a/PHj1NZYVbT7BdwXl+yFEl+kVmAt5EHdBzlaCFFnJkjjQ2JYZwXpt
-         Sshew2m/PQP5Auwet6BZ+uAR5sKRBVLLgstYuJh7AAwoPtKhm8mAds2oPAzeovxBe5B8
-         dT6jT941K8Mu4nMu1JmmJSAQ5+eRxIX+Iic30C4JJz2dQAxvpQGxB/tDerp4DOWp+mfk
-         8Zp+K13iBsk39aSD6PajwNdMheDZ/zGWSQt2yKuXWAWQE8ShmkEvOWs68S2rW6QaRrCK
-         ZEzcfCk0kPU5R3ab2j742vqxR/YJAi9caVjGdr8C83MXGtoKboj34WjELv8fui+QkzC5
-         7Vvg==
-X-Forwarded-Encrypted: i=1; AJvYcCXYLdVnhySvxEvKf5zmKZx/z9irh70BCV5CVjvEIGAwfEeMNj7uZdGr4MFfWFPef1y4ppn4VSc3sPU=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyzOb/w2ZvaLeQhZPneauMBu8zvYa+qVIGGlRZ6NyYjb8xSKA8g
-	60Y6NkSG8PLyN3L21UfM78vn7UGkEI7tgYiW8luzzih3U0O38+2qqrkH
-X-Gm-Gg: ASbGnctbUFYBijUfgNso5rK+YGkivE7R9ALp13dKaUxTP4HvZ5FjbkbS/wl+zNb0aZd
-	Ta1MfmrsYOKEl+o3QBnLGUUK4WGQKv9t0LqbefGvZpduwkqQ9oRXkXFCiAsaWnLT6pe8Xolu2tN
-	NUlr6x2dwD0DMCZIIX3KEnTh4nCFU86724s8j4U+JFvvN5FZF158mthTimdrIudRdR7JQqa3hUr
-	kh+wp+13m4j3IhnUL5iysqEXaS+vaguxCS4XPFP0OEvwUQOMNkg/DdlDNl/vMC3bUN1/jQw5zmy
-	I6fH5ttKjv4KArKoLezCD6ghmsE0nzHW3r2o89+w7fMjLlCP/LJ9D6wAvEphs0VyBDg97nb9TNZ
-	dlNuPs2GzUzHzIR84zgCTv6Qp2re/rTdgaPQFsNXxlHNgHYtDok/4c8sNJ7FWUobGniAzkI+Dp+
-	xz7dwpdRgxRmMmBUI7Y3M=
-X-Google-Smtp-Source: AGHT+IF6J0kBEC8FKvJK51K8z5dLkwOeyMrvRtMkX0bAAqgUo81rOgj5u96jbKAPyZpuceYCg7/Uxg==
-X-Received: by 2002:a05:6a20:6a0d:b0:35e:d94:525a with SMTP id adf61e73a8af0-36617e6c82cmr7252847637.13.1765207895651;
-        Mon, 08 Dec 2025 07:31:35 -0800 (PST)
-Received: from LilGuy ([2409:40c2:12af:9b19:45ec:8f6e:22bb:1870])
-        by smtp.googlemail.com with ESMTPSA id 41be03b00d2f7-bf6a274af53sm12511815a12.28.2025.12.08.07.31.30
+        d=1e100.net; s=20230601; t=1765228366; x=1765833166;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rv7pv8F5RO+cWw9DM2GqkbgxyRJgD6vx59IxXgSv8+A=;
+        b=sSncFDaO8OpehbzvhQ4+nyodWohD00dToPk9YrhYrAlHqp5Nfjke1Lis/imfvVz/dP
+         0zcDihoMifHX7RPynZCBAulnbS/fTLAyD3K3yZf9Joi5Wzqob3kgsYup5Qip94eUbUm9
+         cqzhCtby1Hj6gSencOQMJP+Gc170cEJUrbuOdnWX1GClV8OFKyX/in/fyoU+0OajJ68g
+         XmBwj76Bkw0OISKj/7bM4jd5ODoAgYrFksSODWZ76HfEq1u7zk+MI/FDmYmjq6Fs3d0N
+         9Uz8/A+FozvGp3dPwHvd5tQIF0Tfr0MVEpoC6QhUCGz0N99QBs7gBoq4S7EYPvoS74ji
+         iRXQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVNY60vfY10OFaH81uhZDx/+QBABM0OGh8lqk33W/y5+pd24qaM0Gmvp/wZG4iSwJZ1msAxHqL70eU=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzH6BoEiMWliGzGumWx4bKSk+KPVXHq03i2LbP+oQy640rR3eJX
+	jbtMcR0nZySnMNVseXTShQjXkGNDD5/5Mb0Tr9/w78BI4/qrmDGY6Kqg
+X-Gm-Gg: ASbGncupk7MHzCMq+WC1TBDCJLb9wQZ2HIHei4fELwtQNh+VoXIMYLKgzGglkGjogyM
+	ESa4dUvrnyaTNNjgLobS7yqfYjfcbOXyBDoDkv7SFA/TdIFmLtY9mRFnsrUVJFl3a6+lK9LdtWF
+	kYO2/EPrpSnwZ7LNHOdL5QtcPTujZmz37NGh83t1loBX355yXO18+C4cSDb8FNlH+iXtFrA13EC
+	zDGR4TO9KcPFHJdNugnDLWMpg1Qr0Z1/DcxcxP7XqpLIAPkUZBV7Dl1z7PdGQyeA/0wFJKb5xfc
+	KC6dX9dizkJCDTlzs4Mn6RhuAqW3jTgBp3veMhbb23xx7Gz6IIMvxh43yFNbTpcZ0rPpqWFpZFq
+	/pmnpchImrolPd8ab4GadlWSOXGotcwktpbD7exPjEuiWb7U4lmykY60bGUqZCHVXBLKafuFnz6
+	r0pBPDfBM5pyo9MiLMm+Wp3J2DqYcgJdQGeze+55rNTnETApFqueZXJPhzLoSZtCQ3hMg=
+X-Google-Smtp-Source: AGHT+IGziC8WJUD4dISbRmg+IA/4zSrbcv8g/8vcOpn2B+LAP5qj3Xlp2TJThfuKL3AT7cfP8cG91w==
+X-Received: by 2002:a5d:4741:0:b0:429:cacf:1065 with SMTP id ffacd0b85a97d-42f9def752dmr564283f8f.17.1765228366006;
+        Mon, 08 Dec 2025 13:12:46 -0800 (PST)
+Received: from HYB-DlYm71t3hSl.ad.analog.com ([2001:a61:1226:7701:cdbc:9893:8abf:1309])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f7cbfee66sm27548839f8f.11.2025.12.08.13.12.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Dec 2025 07:31:35 -0800 (PST)
-From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
-To: Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-kernel@vger.kernel.org (open list:X86 ARCHITECTURE (32-BIT AND 64-BIT)),
-	linux-doc@vger.kernel.org (open list:DOCUMENTATION)
-Cc: skhan@linuxfoundation.org,
-	david.hunter.linux@gmail.com,
-	Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
-Subject: [PATCH] Documentation: x86/boot: Fix malformed table in boot.rst
-Date: Mon,  8 Dec 2025 21:01:12 +0000
-Message-ID: <20251208210113.24057-1-swarajgaikwad1925@gmail.com>
-X-Mailer: git-send-email 2.52.0
+        Mon, 08 Dec 2025 13:12:45 -0800 (PST)
+Date: Mon, 8 Dec 2025 22:12:43 +0100
+From: Jorge Marques <gastmaier@gmail.com>
+To: Jonathan Cameron <jic23@kernel.org>
+Cc: Jorge Marques <jorge.marques@analog.com>, 
+	Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, 
+	David Lechner <dlechner@baylibre.com>, Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, 
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Linus Walleij <linus.walleij@linaro.org>, 
+	Bartosz Golaszewski <brgl@bgdev.pl>, linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, linux-gpio@vger.kernel.org
+Subject: Re: [PATCH v3 7/9] iio: adc: ad4062: Add IIO Events support
+Message-ID: <trpmhlupu3vwzrulnctewwnfxwtlbr6iovtw6whyzfpjbwnpdh@rcdykddqwoal>
+References: <20251205-staging-ad4062-v3-0-8761355f9c66@analog.com>
+ <20251205-staging-ad4062-v3-7-8761355f9c66@analog.com>
+ <20251206175231.3522233f@jic23-huawei>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251206175231.3522233f@jic23-huawei>
 
-Building the documentation with make htmldocs previously failed with the
-following error, causing the "Assigned boot loader IDs" table to not
-render at all in the HTML output:
+On Sat, Dec 06, 2025 at 05:52:31PM +0000, Jonathan Cameron wrote:
+> On Fri, 5 Dec 2025 16:12:08 +0100
+> Jorge Marques <jorge.marques@analog.com> wrote:
+> 
+> > Adds support for IIO Events. Optionally, gp0 is assigned as Threshold
+> > Either signal, if not present, fallback to an I3C IBI with the same
+> > role.
+> > 
+> > Signed-off-by: Jorge Marques <jorge.marques@analog.com>
+> > ---
+Hi Jonathan,
 
-  Documentation/arch/x86/boot.rst:437: ERROR: Malformed table.
-  Text in column margin in table line 2.
+> > +	if (!iio_device_claim_direct(indio_dev))
+> > +		return -EBUSY;
+> 
+> Similar to below. Consider factoring out this stuff or I guess wait
+> for an ACQUIRE() based standard solution.
+> 
+> > +
+> > +	if (!iio_device_claim_direct(indio_dev))
+> > +		return -EBUSY;
+> 
+> Whilst I do plan to take a look at whether we can do an ACQUIRE pattern
+> like the runtime pm ones, for now (unless you fancy taking that on)
+> I'd be tempt	ed to factor out this stuff under the direct mode claim into
+> a helper that can then do direct returns. That should end up easier to ready
+> that this.
+I will factor out, adding _dispatch() methods to return directly, so
 
-This occurred because the ReStructuredText (RST) simple table header
-defined the first column width as 2 characters (==), which is too narrow
-for data entries like 0x10 and 0x13. This dimensional mismatch caused
-the text to spill into the margin, triggering a docutils parsing
-failure.
-This patch fixes the issue by expanding the column width in the table
-header to 4 characters (====) to correctly accommodate the widest
-entries and alignment. After applying this patch, the documentation builds
-successfully and the "Assigned boot loader IDs" table now displays
-correctly in the generated HTML.
+	if (st->wait_event)
+		return -EBUSY;
 
-Build environment: Python 3.13.7 Sphinx 8.2.3 docutils 0.22.3
+	switch (type) {
+	case IIO_EV_TYPE_THRESH:
+		switch (info) {
+		case IIO_EV_INFO_VALUE:
+			return __ad4062_write_event_info_value(st, dir, val);
+	// ...
 
-Signed-off-by: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
----
- Documentation/arch/x86/boot.rst | 50 ++++++++++++++++-----------------
- 1 file changed, 25 insertions(+), 25 deletions(-)
-
-diff --git a/Documentation/arch/x86/boot.rst b/Documentation/arch/x86/boot.rst
-index 6d36ce86fd8e..99b42e9d0e1c 100644
---- a/Documentation/arch/x86/boot.rst
-+++ b/Documentation/arch/x86/boot.rst
-@@ -433,30 +433,30 @@ Protocol:	2.00+
-
-   Assigned boot loader IDs:
-
--	== =======================================
--	0x0  LILO
--	     (0x00 reserved for pre-2.00 bootloader)
--	0x1  Loadlin
--	0x2  bootsect-loader
--	     (0x20, all other values reserved)
--	0x3  Syslinux
--	0x4  Etherboot/gPXE/iPXE
--	0x5  ELILO
--	0x7  GRUB
--	0x8  U-Boot
--	0x9  Xen
--	0xA  Gujin
--	0xB  Qemu
--	0xC  Arcturus Networks uCbootloader
--	0xD  kexec-tools
--	0xE  Extended (see ext_loader_type)
--	0xF  Special (0xFF = undefined)
--	0x10 Reserved
--	0x11 Minimal Linux Bootloader
--	     <http://sebastian-plotz.blogspot.de>
--	0x12 OVMF UEFI virtualization stack
--	0x13 barebox
--	== =======================================
-+==== ==============================
-+0x0  LILO
-+      (0x00 reserved for pre-2.00 bootloader)
-+0x1  Loadlin
-+0x2  bootsect-loader
-+      (0x20, all other values reserved)
-+0x3  Syslinux
-+0x4  Etherboot/gPXE/iPXE
-+0x5  ELILO
-+0x7  GRUB
-+0x8  U-Boot
-+0x9  Xen
-+0xA  Gujin
-+0xB  Qemu
-+0xC  Arcturus Networks uCbootloader
-+0xD  kexec-tools
-+0xE  Extended (see ext_loader_type)
-+0xF  Special (0xFF = undefined)
-+0x10 Reserved
-+0x11 Minimal Linux Bootloader
-+      <http://sebastian-plotz.blogspot.de>
-+0x12 OVMF UEFI virtualization stack
-+0x13 barebox
-+==== ==============================
-
-   Please contact <hpa@zytor.com> if you need a bootloader ID value assigned.
-
-@@ -814,7 +814,7 @@ Protocol:	2.09+
-    	__u32 len;
-    	__u8 data[];
-    }
--
-+
-   Where, the next is a 64-bit physical pointer to the next node of
-   linked list, the next field of the last node is 0; the type is used
-   to identify the contents of data; the len is the length of data
---
-2.52.0
-
+> > +	if (st->wait_event) {
+> > +		ret = -EBUSY;
+> > +		goto out_release;
+> > +	}
+> > +
+> > +	switch (type) {
+> > +	case IIO_EV_TYPE_THRESH:
+> > +		switch (info) {
+> > +		case IIO_EV_INFO_VALUE:
+> > +			ret = __ad4062_write_event_info_value(st, dir, val);
+> > +			break;
+> > +		case IIO_EV_INFO_HYSTERESIS:
+> > +			ret = __ad4062_write_event_info_hysteresis(st, dir, val);
+> > +			break;
+> > +		default:
+> > +			ret = -EINVAL;
+> > +			break;
+> > +		}
+> > +		break;
+> > +	default:
+> > +		ret = -EINVAL;
+> > +		break;
+> > +	}
+Best regards,
+Jorge
 
