@@ -1,82 +1,91 @@
-Return-Path: <linux-doc+bounces-69298-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69300-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA871CB0305
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 15:09:23 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C781CB02E4
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 15:08:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2FC7D304532A
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 14:03:11 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id ADAAF30840DC
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 14:03:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2B8A52D4B71;
-	Tue,  9 Dec 2025 14:01:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 899152C21C6;
+	Tue,  9 Dec 2025 14:01:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="P/JSIdsY";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="mXI/0sBU";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="P/JSIdsY";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="mXI/0sBU"
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="b4Vju9In";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="x0FwYgQX";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="b4Vju9In";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="x0FwYgQX"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07E232D131A
-	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 14:01:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF12E2D46D6
+	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 14:01:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765288912; cv=none; b=tTQJGCHttZjMKHZa4rUKVh1gPwTUOMQ6b15d4cgmAoVrwwRGMcVlJqMCq9XChzhcEwdS/veqpSczp/dInxF88ldjXhpFT2d4VG/PSN/9dgCG47O0Jz2ikhs1o0ejumFXdurkhmgztAfH5zsaDgfC36ZockOPWqd0vczzwKEdlP8=
+	t=1765288918; cv=none; b=K9hemsxdfx4CmdTKrrd5BHCC3NzTofmeF9ffchAQ+IEKLFn00MeGMlmzNaM5SPdePB+Xx2TuyJ4FehERG2qGananNHG3eZmlCqNyE1b5iDxB9I8OH2H1FM6Yg+v3qjBCF6dsGZrIJmd+qQBJUo6mOgkbei79ye4lk/tEoxSSIQc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765288912; c=relaxed/simple;
-	bh=gSiukLAdE9x+4dA9+ye3yE5ZDTvWOwpt7mS4UpLr9dA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GHSBpYRdx8obvE7KNUFsQKzBUc5sPP6wnr0Eeuh5BC6qDOBXYb3fjZANYQQpPitQlHZem3lr0J8OMQhXrRmZxsXPB8D40RrdtVIfdopyRFZ33F14e/SVhaSA0OYA0kFF+4xSGR3eIfFgPAn3MKQoeph7kL7ietO11bNFiLxa5WY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=P/JSIdsY; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=mXI/0sBU; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=P/JSIdsY; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=mXI/0sBU; arc=none smtp.client-ip=195.135.223.130
+	s=arc-20240116; t=1765288918; c=relaxed/simple;
+	bh=UGOpaOnZ7iP+cZKRzh60BwWZz5+UmNNAF2F5CUXNkiI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=l0B6qzJQprHu30dOrnOk8z+b7WjkKcOvisuqi7tui92b87vh5iuRSAOjDITDnzs5PWoUpMB8dlB8UMb3GTyRmXChkDu0s04i4bwTrrglTWg/jr5k6LauYSLHg0fYEGSOYOEhTtnk1Ot6xRrMWhYnMciNW8QtrsJ+oMMw93Ghf+w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=b4Vju9In; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=x0FwYgQX; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=b4Vju9In; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=x0FwYgQX; arc=none smtp.client-ip=195.135.223.130
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 324CC33818;
-	Tue,  9 Dec 2025 14:01:48 +0000 (UTC)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 53E2133819;
+	Tue,  9 Dec 2025 14:01:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1765288908; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=J36FD1pfwAe4Fxs/reyqMIjLhMl73hbOhupg2nRiSac=;
-	b=P/JSIdsYDrvKSiU3Dl/HmfCDRhm1N7ViNlE2RQeaXnCCarBVR8rmFeT1gd24Tk+i8h6KLG
-	+CyVc7gD9WnQbuc0jcfHx31MY43LOzJvn0fQX7Yi8XL1DzQGJN3mWLJfZFF8So0nFBRdBv
-	3j849aDr9ZQD8aHY+MKunK9hbQR07Bk=
+	t=1765288909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
+	b=b4Vju9InpR/ky2HB1vlZg7WyLX08VXpzuOiH33ECiSsAYaFSo2CALbDG5kinJf8aqU4saz
+	U7f9VhGgGUX20J86yuwhxBuZh+amU2sISZbq0Qp3nS+jp6ECt/nSORZ80WWxCsYLnaiL25
+	yW04PtIgEUq8wgGYecpsfC9PLdmR5Z8=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1765288908;
+	s=susede2_ed25519; t=1765288909;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=J36FD1pfwAe4Fxs/reyqMIjLhMl73hbOhupg2nRiSac=;
-	b=mXI/0sBUoti1nlsP4I4e+9ReoHvVI5hd6YXqOLaDZCoL82aqEIqmR/FPzjP3y1Q5wG3w4H
-	dmAHAMYxx3CfItBg==
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
+	b=x0FwYgQX+yx6SxQ6BoJ7U7Euao2hXuwob5ph700mtQ77rtb3acU1CioVOhC+bn9eGtxqh0
+	wIxk8fO3cf8iz9Aw==
 Authentication-Results: smtp-out1.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1765288908; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=J36FD1pfwAe4Fxs/reyqMIjLhMl73hbOhupg2nRiSac=;
-	b=P/JSIdsYDrvKSiU3Dl/HmfCDRhm1N7ViNlE2RQeaXnCCarBVR8rmFeT1gd24Tk+i8h6KLG
-	+CyVc7gD9WnQbuc0jcfHx31MY43LOzJvn0fQX7Yi8XL1DzQGJN3mWLJfZFF8So0nFBRdBv
-	3j849aDr9ZQD8aHY+MKunK9hbQR07Bk=
+	t=1765288909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
+	b=b4Vju9InpR/ky2HB1vlZg7WyLX08VXpzuOiH33ECiSsAYaFSo2CALbDG5kinJf8aqU4saz
+	U7f9VhGgGUX20J86yuwhxBuZh+amU2sISZbq0Qp3nS+jp6ECt/nSORZ80WWxCsYLnaiL25
+	yW04PtIgEUq8wgGYecpsfC9PLdmR5Z8=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1765288908;
+	s=susede2_ed25519; t=1765288909;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=J36FD1pfwAe4Fxs/reyqMIjLhMl73hbOhupg2nRiSac=;
-	b=mXI/0sBUoti1nlsP4I4e+9ReoHvVI5hd6YXqOLaDZCoL82aqEIqmR/FPzjP3y1Q5wG3w4H
-	dmAHAMYxx3CfItBg==
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
+	b=x0FwYgQX+yx6SxQ6BoJ7U7Euao2hXuwob5ph700mtQ77rtb3acU1CioVOhC+bn9eGtxqh0
+	wIxk8fO3cf8iz9Aw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 754ED3EA63;
-	Tue,  9 Dec 2025 14:01:47 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3A20C3EA65;
+	Tue,  9 Dec 2025 14:01:48 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id LLIzG8srOGm1OgAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Tue, 09 Dec 2025 14:01:47 +0000
+	id wNfxDMwrOGm1OgAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Tue, 09 Dec 2025 14:01:48 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: boris.brezillon@collabora.com,
 	simona@ffwll.ch,
@@ -107,10 +116,12 @@ Cc: dri-devel@lists.freedesktop.org,
 	virtualization@lists.linux.dev,
 	linux-doc@vger.kernel.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [RFC][PATCH 00/13] drm: Introduce GEM-UMA memory management
-Date: Tue,  9 Dec 2025 14:41:57 +0100
-Message-ID: <20251209140141.94407-1-tzimmermann@suse.de>
+Subject: [PATCH 01/13] drm/gem-shmem: Fix typos in documentation
+Date: Tue,  9 Dec 2025 14:41:58 +0100
+Message-ID: <20251209140141.94407-2-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251209140141.94407-1-tzimmermann@suse.de>
+References: <20251209140141.94407-1-tzimmermann@suse.de>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -118,171 +129,58 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-2.80 / 50.00];
+X-Spam-Flag: NO
+X-Spam-Score: -6.80
+X-Spam-Level: 
+X-Spamd-Result: default: False [-6.80 / 50.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.999];
+	NEURAL_HAM_SHORT(-0.20)[-0.998];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.de:email,suse.de:mid];
+	RCPT_COUNT_TWELVE(0.00)[29];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.de:mid];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	FROM_HAS_DN(0.00)[];
 	FREEMAIL_TO(0.00)[collabora.com,ffwll.ch,gmail.com,kernel.org,linux.intel.com,amd.com,tomeuvizoso.net,imgtec.com,arm.com,igalia.com,redhat.com,chromium.org,lwn.net];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	RCVD_TLS_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	R_RATELIMIT(0.00)[to_ip_from(RLzxzh56npx61idbi11ft8b9pb)];
 	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
 	FREEMAIL_ENVRCPT(0.00)[gmail.com]
-X-Spam-Level: 
-X-Spam-Flag: NO
-X-Spam-Score: -2.80
 
-Duplicate GEM-SHMEM to GEM-UMA. Convert all DRM drivers for UMA
-systems if they currently use GEM-SHMEM.
+Fix the compile-time warnings
 
-Many DRM drivers for hardware with Unified Memory Architecture (UMA)
-currently builds upon GEM-SHMEM and extends the helpers with features
-for managing the GPU MMU. This allows the GPU to access the GEM buffer
-content for its operation.
+Warning: drm_gem_shmem_helper.c:104 function parameter 'shmem' not described in 'drm_gem_shmem_init'
+Warning: drm_gem_shmem_helper.c:104 function parameter 'size' not described in 'drm_gem_shmem_init'
 
-There is another, larger, set of DRM drivers that use GEM-SHMEM merely
-as buffer management with no hardware support. These drivers copy the
-buffer content to the GPU on each page flip. The GPU itself has no direct
-access. Hardware of this type is usually in servers, behind slow busses
-(SPI, USB), or provided by firmware (drivers in sysfb/).
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/drm_gem_shmem_helper.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-After some discussion with Boris on the future of GEM-SHMEM, it seems
-to me that both use cases more and more diverge from each other. The
-most prominent example is the implementation of gem_prime_import,
-where both use cases use distinct approaches.
-
-So we discussed the introduction of a GEM-UMA helper library for
-UMA-based hardware. GEM-UMA will remain flexible enough for drivers
-to extend it for their use case. GEM-SHMEM will become focused on the
-simple-hardware use case. The benefit for both libraries is that they
-will be easier to understand and maintain. GEM-SHMEM can be simplified
-signiifcantly, I think.
-
-This RFC series introduces GEM-UMA and converts the UMA-related drivers.
-
-Patches 1 and 2 fix issues in GEM-SHMEM, so that we don't duplicate
-errornous code.
-
-Patch 3 copies GEM-SHMEM to GEM-UMA. Patch 4 then does soem obvious
-cleanups of unnecessary code.
-
-Patches 5 to 13 update the drivers that can be converted to GEM-UMA.
-These changes are just symbol renaming. There are so far no functional
-differences between the memory managers.
-
-A gave GEM-UMA some smoke testing by running virtgpu.
-
-Thomas Zimmermann (13):
-  drm/gem-shmem: Fix typos in documentation
-  drm/gem-shmem: Fix the MODULE_LICENSE() string
-  drm: Add GEM-UMA helpers for memory management
-  drm/gem-uma: Remove unused interfaces
-  drm/imagination: Use GEM-UMA helpers for memory management
-  drm/lima: Use GEM-UMA helpers for memory management
-  drm/panfrost: Use GEM-UMA helpers for memory management
-  drm/panthor: Use GEM-UMA helpers for memory management
-  drm/v3d: Use GEM-UMA helpers for memory management
-  drm/virtgpu: Use GEM-UMA helpers for memory management
-  accel/amdxdna: Use GEM-UMA helpers for memory management
-  accel/ivpu: Use GEM-UMA helpers for memory management
-  accel/rocket: Use GEM-UMA helpers for memory management
-
- Documentation/gpu/drm-mm.rst                  |  12 +
- drivers/accel/amdxdna/Kconfig                 |   2 +-
- drivers/accel/amdxdna/aie2_ctx.c              |   1 -
- drivers/accel/amdxdna/aie2_message.c          |   1 -
- drivers/accel/amdxdna/aie2_pci.c              |   1 -
- drivers/accel/amdxdna/aie2_psp.c              |   1 -
- drivers/accel/amdxdna/aie2_smu.c              |   1 -
- drivers/accel/amdxdna/amdxdna_ctx.c           |   7 +-
- drivers/accel/amdxdna/amdxdna_gem.c           |  49 +-
- drivers/accel/amdxdna/amdxdna_gem.h           |   5 +-
- .../accel/amdxdna/amdxdna_mailbox_helper.c    |   1 -
- drivers/accel/amdxdna/amdxdna_pci_drv.c       |   1 -
- drivers/accel/amdxdna/amdxdna_sysfs.c         |   1 -
- drivers/accel/ivpu/Kconfig                    |   2 +-
- drivers/accel/ivpu/ivpu_gem.c                 |  36 +-
- drivers/accel/ivpu/ivpu_gem.h                 |   4 +-
- drivers/accel/rocket/Kconfig                  |   2 +-
- drivers/accel/rocket/rocket_gem.c             |  46 +-
- drivers/accel/rocket/rocket_gem.h             |   6 +-
- drivers/gpu/drm/Kconfig                       |   9 +
- drivers/gpu/drm/Kconfig.debug                 |   1 +
- drivers/gpu/drm/Makefile                      |   4 +
- drivers/gpu/drm/drm_fbdev_uma.c               | 203 +++++
- drivers/gpu/drm/drm_gem_shmem_helper.c        |   5 +-
- drivers/gpu/drm/drm_gem_uma_helper.c          | 787 ++++++++++++++++++
- drivers/gpu/drm/imagination/Kconfig           |   4 +-
- drivers/gpu/drm/imagination/pvr_drv.c         |   2 +-
- drivers/gpu/drm/imagination/pvr_free_list.c   |   2 +-
- drivers/gpu/drm/imagination/pvr_gem.c         |  74 +-
- drivers/gpu/drm/imagination/pvr_gem.h         |  12 +-
- drivers/gpu/drm/lima/Kconfig                  |   4 +-
- drivers/gpu/drm/lima/lima_drv.c               |   2 +-
- drivers/gpu/drm/lima/lima_gem.c               |  30 +-
- drivers/gpu/drm/lima/lima_gem.h               |   6 +-
- drivers/gpu/drm/panfrost/Kconfig              |   2 +-
- drivers/gpu/drm/panfrost/panfrost_drv.c       |   2 +-
- drivers/gpu/drm/panfrost/panfrost_gem.c       |  30 +-
- drivers/gpu/drm/panfrost/panfrost_gem.h       |   6 +-
- .../gpu/drm/panfrost/panfrost_gem_shrinker.c  |  30 +-
- drivers/gpu/drm/panfrost/panfrost_mmu.c       |   8 +-
- drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |   6 +-
- drivers/gpu/drm/panthor/Kconfig               |   2 +-
- drivers/gpu/drm/panthor/panthor_drv.c         |   2 +-
- drivers/gpu/drm/panthor/panthor_fw.c          |   4 +-
- drivers/gpu/drm/panthor/panthor_gem.c         |  40 +-
- drivers/gpu/drm/panthor/panthor_gem.h         |   8 +-
- drivers/gpu/drm/panthor/panthor_mmu.c         |  10 +-
- drivers/gpu/drm/panthor/panthor_sched.c       |   1 -
- drivers/gpu/drm/tests/Makefile                |   1 +
- drivers/gpu/drm/tests/drm_gem_uma_test.c      | 385 +++++++++
- drivers/gpu/drm/v3d/Kconfig                   |   2 +-
- drivers/gpu/drm/v3d/v3d_bo.c                  |  45 +-
- drivers/gpu/drm/v3d/v3d_drv.h                 |   4 +-
- drivers/gpu/drm/v3d/v3d_mmu.c                 |   9 +-
- drivers/gpu/drm/virtio/Kconfig                |   4 +-
- drivers/gpu/drm/virtio/virtgpu_drv.c          |   4 +-
- drivers/gpu/drm/virtio/virtgpu_drv.h          |  12 +-
- drivers/gpu/drm/virtio/virtgpu_object.c       |  64 +-
- drivers/gpu/drm/virtio/virtgpu_plane.c        |   6 +-
- drivers/gpu/drm/virtio/virtgpu_vq.c           |   6 +-
- include/drm/drm_fbdev_uma.h                   |  20 +
- include/drm/drm_gem_uma_helper.h              | 293 +++++++
- 62 files changed, 2018 insertions(+), 312 deletions(-)
- create mode 100644 drivers/gpu/drm/drm_fbdev_uma.c
- create mode 100644 drivers/gpu/drm/drm_gem_uma_helper.c
- create mode 100644 drivers/gpu/drm/tests/drm_gem_uma_test.c
- create mode 100644 include/drm/drm_fbdev_uma.h
- create mode 100644 include/drm/drm_gem_uma_helper.h
-
-
-base-commit: 0a21e96e0b6840d2a4e0b45a957679eeddeb4362
-prerequisite-patch-id: c67e5d886a47b7d0266d81100837557fda34cb24
-prerequisite-patch-id: a5a973e527c88a5b47053d7a72aefe0b550197cb
-prerequisite-patch-id: 719d09751d38f5da743beed6266585ee063e1e29
-prerequisite-patch-id: 0bbc85bc6b528c32592e07f4ceafa51795c4cad9
-prerequisite-patch-id: c856d9c8a026e3244c44ec829e426e0ad4a685ab
-prerequisite-patch-id: 13441c9ed3062ae1448a53086559dfcbbd578177
-prerequisite-patch-id: 951c039657c1f58e4b6e36bc01c7a1c69ed59767
-prerequisite-patch-id: 4370b8b803ca439666fb9d2beb862f6e78347ce3
-prerequisite-patch-id: ebbaad226ed599f7aad4784fb3f4aaebe34cb110
-prerequisite-patch-id: cb907c3e3e14de7f4d13b429f3a2a88621a8a9fe
-prerequisite-patch-id: 0e243b426742122b239af59e36d742da5795a8b1
-prerequisite-patch-id: 120f97fa1af9891375a0dcf52c51c1907b01fe6a
+diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+index dc94a27710e5..f4e77f75ec81 100644
+--- a/drivers/gpu/drm/drm_gem_shmem_helper.c
++++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+@@ -96,7 +96,8 @@ static int __drm_gem_shmem_init(struct drm_device *dev, struct drm_gem_shmem_obj
+ /**
+  * drm_gem_shmem_init - Initialize an allocated object.
+  * @dev: DRM device
+- * @obj: The allocated shmem GEM object.
++ * @shmem: The allocated shmem GEM object.
++ * @size: Buffer size in bytes
+  *
+  * Returns:
+  * 0 on success, or a negative error code on failure.
 -- 
 2.52.0
 
