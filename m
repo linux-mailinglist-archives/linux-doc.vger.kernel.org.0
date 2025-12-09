@@ -1,288 +1,239 @@
-Return-Path: <linux-doc+bounces-69307-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69312-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40C7DCB0344
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 15:10:54 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id ED4A3CB0449
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 15:25:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id CE0D3301B691
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 14:03:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 8538C301966C
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 14:24:58 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0CB04242D87;
-	Tue,  9 Dec 2025 14:02:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2A0472C235D;
+	Tue,  9 Dec 2025 14:24:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="E+TuWDY4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56B742989BF
-	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 14:02:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16B142C21C0
+	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 14:24:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765288942; cv=none; b=Av7Xak8g9zdsCBlI9shXTOW7vgX7JJiPseG6r0kFJs2rpQVtsdtqQpQMenSL3O/GHTVASPgsARCiRTtpR59po8xh/oCXuUSUyAJbQSK2OsrYv9qxkX9n9oc3aPRisCYN+r2rTAaCIT/OUbMA3YBSzSNU8op4BomvvFlG1nH/1WU=
+	t=1765290298; cv=none; b=EH8lcdP2MtwMDmZ9UbJaTwMjxmgNDZznf2HKfDo1GubUheMVXQS6IfNnM3/L/LFEgwE1j5PpZR+QgsJrHBMfD4kR0WF0sGGQfPqz5xsBTPosNjuTTXqHM5dCEXjWMUTy+QgR2VqmNXxz5EH/ghsCl5GJ0weqj4M/cMdSldr9BH0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765288942; c=relaxed/simple;
-	bh=DOAhFRuNhaPsyXuKfvFz7HE+3Hk3GgDKtMvKCgr4VeA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=J1ChhEWzizGur1mIidupk/R71O4oUwArGqZEq+okJcmQ0Ew9vLTGEDA+lzIhCw1Pe/KQk2px/mMDcsQMeqoVGGMOwkiBoGwSFRyr1nvbSp/6I010Rw9jRyV2uqTwa8gej9O23n6BBQSJVCT5WC0psrL9upgWYwOQED17DtjmWO4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; arc=none smtp.client-ip=195.135.223.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id DB03E5BDAB;
-	Tue,  9 Dec 2025 14:02:04 +0000 (UTC)
-Authentication-Results: smtp-out2.suse.de;
-	none
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8B5973EA65;
-	Tue,  9 Dec 2025 14:02:03 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id mE6QH9srOGm1OgAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Tue, 09 Dec 2025 14:02:03 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: boris.brezillon@collabora.com,
-	simona@ffwll.ch,
-	airlied@gmail.com,
-	mripard@kernel.org,
-	maarten.lankhorst@linux.intel.com,
-	ogabbay@kernel.org,
-	mamin506@gmail.com,
-	lizhi.hou@amd.com,
-	maciej.falkowski@linux.intel.com,
-	karol.wachowski@linux.intel.com,
-	tomeu@tomeuvizoso.net,
-	frank.binns@imgtec.com,
-	matt.coster@imgtec.com,
-	yuq825@gmail.com,
-	robh@kernel.org,
-	steven.price@arm.com,
-	adrian.larumbe@collabora.com,
-	liviu.dudau@arm.com,
-	mwen@igalia.com,
-	kraxel@redhat.com,
-	dmitry.osipenko@collabora.com,
-	gurchetansingh@chromium.org,
-	olvaffe@gmail.com,
-	corbet@lwn.net
-Cc: dri-devel@lists.freedesktop.org,
-	lima@lists.freedesktop.org,
-	virtualization@lists.linux.dev,
-	linux-doc@vger.kernel.org,
-	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 13/13] accel/rocket: Use GEM-UMA helpers for memory management
-Date: Tue,  9 Dec 2025 14:42:10 +0100
-Message-ID: <20251209140141.94407-14-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251209140141.94407-1-tzimmermann@suse.de>
-References: <20251209140141.94407-1-tzimmermann@suse.de>
+	s=arc-20240116; t=1765290298; c=relaxed/simple;
+	bh=AfvpogmHZ1KexEmvBPBIMCX4kQEuv9pvdnvyPo8Coj0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=DteEAOIo8yKqmHtqVhddWpQDw0Td/MCeZTJGUFbLDWYW4MInIV2P5/k8SKJeSVgSyjFDxJ3lkLB/+PA8HkNg+lNXv4gwKDH8JOL6sQ9ZtqmLLGkFBZVr4+KQM2K6Cu/cfxgydhGqx2wJ/rfK4AKR3eeGPvH5KaRBf+uDeLp9JIE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=E+TuWDY4; arc=none smtp.client-ip=198.175.65.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1765290295; x=1796826295;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=AfvpogmHZ1KexEmvBPBIMCX4kQEuv9pvdnvyPo8Coj0=;
+  b=E+TuWDY4pR4oGVpj7o7ML8W6QcviVzBK0DDDyLSytGvfHBgoOe9fbPe3
+   vVPprSP0vCrAtP5n4qkJSQ6zBnnO4CwbidAieW9YqyswpoPythWb5thPN
+   oNxxtJV4RovTWcg0hXLK6UDbX1yzHWkg1SShp87/OD1NJd6WGfLnULrbQ
+   qYLLTDM3yN2pE7rLHGUD7ZvymAUf7/9OAgvecPpX0YiSNJmiIwxeEFXrL
+   bA7Fugia/njj0OAbErGeVPFwUX/4I6pkoJZN8dZGkBr7cWDqNue9PdzaX
+   1Cbqfb2fa3c/ugE9NWfSfaGG2EQ65yRmYV4SZB65x1ByrHnEFRFSxlNL5
+   g==;
+X-CSE-ConnectionGUID: RXjizkvASu2BbirzjsY7ZA==
+X-CSE-MsgGUID: qDoIRJTyTA6bGjMsU9itUw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11637"; a="71105670"
+X-IronPort-AV: E=Sophos;i="6.20,261,1758610800"; 
+   d="scan'208";a="71105670"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Dec 2025 06:24:52 -0800
+X-CSE-ConnectionGUID: cbdcZmFqQe+DX1A1bstKSA==
+X-CSE-MsgGUID: AxFTDtNESUek+uE71wXF9A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.20,261,1758610800"; 
+   d="scan'208";a="195504176"
+Received: from kwachows-mobl.ger.corp.intel.com (HELO [10.246.16.114]) ([10.246.16.114])
+  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Dec 2025 06:24:44 -0800
+Message-ID: <abad95c4-d68f-4c87-8446-6969d66ca99d@linux.intel.com>
+Date: Tue, 9 Dec 2025 15:24:41 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	REPLY(-4.00)[]
-X-Spam-Flag: NO
-X-Spam-Score: -4.00
-X-Rspamd-Queue-Id: DB03E5BDAB
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Level: 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 12/13] accel/ivpu: Use GEM-UMA helpers for memory
+ management
+To: Thomas Zimmermann <tzimmermann@suse.de>, boris.brezillon@collabora.com,
+ simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, ogabbay@kernel.org, mamin506@gmail.com,
+ lizhi.hou@amd.com, maciej.falkowski@linux.intel.com, tomeu@tomeuvizoso.net,
+ frank.binns@imgtec.com, matt.coster@imgtec.com, yuq825@gmail.com,
+ robh@kernel.org, steven.price@arm.com, adrian.larumbe@collabora.com,
+ liviu.dudau@arm.com, mwen@igalia.com, kraxel@redhat.com,
+ dmitry.osipenko@collabora.com, gurchetansingh@chromium.org,
+ olvaffe@gmail.com, corbet@lwn.net
+Cc: dri-devel@lists.freedesktop.org, lima@lists.freedesktop.org,
+ virtualization@lists.linux.dev, linux-doc@vger.kernel.org
+References: <20251209140141.94407-1-tzimmermann@suse.de>
+ <20251209140141.94407-13-tzimmermann@suse.de>
+Content-Language: en-US
+From: Karol Wachowski <karol.wachowski@linux.intel.com>
+Organization: Intel Technology Poland sp. z o.o. - ul. Slowackiego 173, 80-298
+ Gdansk - KRS 101882 - NIP 957-07-52-316
+In-Reply-To: <20251209140141.94407-13-tzimmermann@suse.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Convert rocket from GEM-SHMEM to GEM-UMA. The latter is just a copy,
-so this change it merely renaming symbols. No functional changes.
-
-GEM-SHMEM will become more self-contained for drivers without specific
-memory management. GEM-UMA's interfaces will remain flexible for drivers
-with UMA hardware, such as rocket.
-
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/accel/rocket/Kconfig      |  2 +-
- drivers/accel/rocket/rocket_gem.c | 46 +++++++++++++++----------------
- drivers/accel/rocket/rocket_gem.h |  6 ++--
- 3 files changed, 27 insertions(+), 27 deletions(-)
-
-diff --git a/drivers/accel/rocket/Kconfig b/drivers/accel/rocket/Kconfig
-index 16465abe0660..26f760afdd7a 100644
---- a/drivers/accel/rocket/Kconfig
-+++ b/drivers/accel/rocket/Kconfig
-@@ -6,8 +6,8 @@ config DRM_ACCEL_ROCKET
- 	depends on (ARCH_ROCKCHIP && ARM64) || COMPILE_TEST
- 	depends on ROCKCHIP_IOMMU || COMPILE_TEST
- 	depends on MMU
-+	select DRM_GEM_UMA_HELPER
- 	select DRM_SCHED
--	select DRM_GEM_SHMEM_HELPER
- 	help
- 	  Choose this option if you have a Rockchip SoC that contains a
- 	  compatible Neural Processing Unit (NPU), such as the RK3588. Called by
-diff --git a/drivers/accel/rocket/rocket_gem.c b/drivers/accel/rocket/rocket_gem.c
-index 624c4ecf5a34..1c7b75413065 100644
---- a/drivers/accel/rocket/rocket_gem.c
-+++ b/drivers/accel/rocket/rocket_gem.c
-@@ -29,19 +29,19 @@ static void rocket_gem_bo_free(struct drm_gem_object *obj)
- 	rocket_iommu_domain_put(bo->domain);
- 	bo->domain = NULL;
- 
--	drm_gem_shmem_free(&bo->base);
-+	drm_gem_uma_free(&bo->base);
- }
- 
- static const struct drm_gem_object_funcs rocket_gem_funcs = {
- 	.free = rocket_gem_bo_free,
--	.print_info = drm_gem_shmem_object_print_info,
--	.pin = drm_gem_shmem_object_pin,
--	.unpin = drm_gem_shmem_object_unpin,
--	.get_sg_table = drm_gem_shmem_object_get_sg_table,
--	.vmap = drm_gem_shmem_object_vmap,
--	.vunmap = drm_gem_shmem_object_vunmap,
--	.mmap = drm_gem_shmem_object_mmap,
--	.vm_ops = &drm_gem_shmem_vm_ops,
-+	.print_info = drm_gem_uma_object_print_info,
-+	.pin = drm_gem_uma_object_pin,
-+	.unpin = drm_gem_uma_object_unpin,
-+	.get_sg_table = drm_gem_uma_object_get_sg_table,
-+	.vmap = drm_gem_uma_object_vmap,
-+	.vunmap = drm_gem_uma_object_vunmap,
-+	.mmap = drm_gem_uma_object_mmap,
-+	.vm_ops = &drm_gem_uma_vm_ops,
- };
- 
- struct drm_gem_object *rocket_gem_create_object(struct drm_device *dev, size_t size)
-@@ -61,17 +61,17 @@ int rocket_ioctl_create_bo(struct drm_device *dev, void *data, struct drm_file *
- {
- 	struct rocket_file_priv *rocket_priv = file->driver_priv;
- 	struct drm_rocket_create_bo *args = data;
--	struct drm_gem_shmem_object *shmem_obj;
-+	struct drm_gem_uma_object *uma_obj;
- 	struct rocket_gem_object *rkt_obj;
- 	struct drm_gem_object *gem_obj;
- 	struct sg_table *sgt;
- 	int ret;
- 
--	shmem_obj = drm_gem_shmem_create(dev, args->size);
--	if (IS_ERR(shmem_obj))
--		return PTR_ERR(shmem_obj);
-+	uma_obj = drm_gem_uma_create(dev, args->size);
-+	if (IS_ERR(uma_obj))
-+		return PTR_ERR(uma_obj);
- 
--	gem_obj = &shmem_obj->base;
-+	gem_obj = &uma_obj->base;
- 	rkt_obj = to_rocket_bo(gem_obj);
- 
- 	rkt_obj->driver_priv = rocket_priv;
-@@ -84,7 +84,7 @@ int rocket_ioctl_create_bo(struct drm_device *dev, void *data, struct drm_file *
- 	if (ret)
- 		goto err;
- 
--	sgt = drm_gem_shmem_get_pages_sgt(shmem_obj);
-+	sgt = drm_gem_uma_get_pages_sgt(uma_obj);
- 	if (IS_ERR(sgt)) {
- 		ret = PTR_ERR(sgt);
- 		goto err;
-@@ -98,7 +98,7 @@ int rocket_ioctl_create_bo(struct drm_device *dev, void *data, struct drm_file *
- 
- 	ret = iommu_map_sgtable(rocket_priv->domain->domain,
- 				rkt_obj->mm.start,
--				shmem_obj->sgt,
-+				uma_obj->sgt,
- 				IOMMU_READ | IOMMU_WRITE);
- 	if (ret < 0 || ret < args->size) {
- 		drm_err(dev, "failed to map buffer: size=%d request_size=%u\n",
-@@ -120,7 +120,7 @@ int rocket_ioctl_create_bo(struct drm_device *dev, void *data, struct drm_file *
- 	mutex_unlock(&rocket_priv->mm_lock);
- 
- err:
--	drm_gem_shmem_object_free(gem_obj);
-+	drm_gem_uma_object_free(gem_obj);
- 
- 	return ret;
- }
-@@ -130,7 +130,7 @@ int rocket_ioctl_prep_bo(struct drm_device *dev, void *data, struct drm_file *fi
- 	struct drm_rocket_prep_bo *args = data;
- 	unsigned long timeout = drm_timeout_abs_to_jiffies(args->timeout_ns);
- 	struct drm_gem_object *gem_obj;
--	struct drm_gem_shmem_object *shmem_obj;
-+	struct drm_gem_uma_object *uma_obj;
- 	long ret = 0;
- 
- 	if (args->reserved != 0) {
-@@ -146,9 +146,9 @@ int rocket_ioctl_prep_bo(struct drm_device *dev, void *data, struct drm_file *fi
- 	if (!ret)
- 		ret = timeout ? -ETIMEDOUT : -EBUSY;
- 
--	shmem_obj = &to_rocket_bo(gem_obj)->base;
-+	uma_obj = &to_rocket_bo(gem_obj)->base;
- 
--	dma_sync_sgtable_for_cpu(dev->dev, shmem_obj->sgt, DMA_BIDIRECTIONAL);
-+	dma_sync_sgtable_for_cpu(dev->dev, uma_obj->sgt, DMA_BIDIRECTIONAL);
- 
- 	drm_gem_object_put(gem_obj);
- 
-@@ -158,7 +158,7 @@ int rocket_ioctl_prep_bo(struct drm_device *dev, void *data, struct drm_file *fi
- int rocket_ioctl_fini_bo(struct drm_device *dev, void *data, struct drm_file *file)
- {
- 	struct drm_rocket_fini_bo *args = data;
--	struct drm_gem_shmem_object *shmem_obj;
-+	struct drm_gem_uma_object *uma_obj;
- 	struct rocket_gem_object *rkt_obj;
- 	struct drm_gem_object *gem_obj;
- 
-@@ -172,9 +172,9 @@ int rocket_ioctl_fini_bo(struct drm_device *dev, void *data, struct drm_file *fi
- 		return -ENOENT;
- 
- 	rkt_obj = to_rocket_bo(gem_obj);
--	shmem_obj = &rkt_obj->base;
-+	uma_obj = &rkt_obj->base;
- 
--	dma_sync_sgtable_for_device(dev->dev, shmem_obj->sgt, DMA_BIDIRECTIONAL);
-+	dma_sync_sgtable_for_device(dev->dev, uma_obj->sgt, DMA_BIDIRECTIONAL);
- 
- 	drm_gem_object_put(gem_obj);
- 
-diff --git a/drivers/accel/rocket/rocket_gem.h b/drivers/accel/rocket/rocket_gem.h
-index 240430334509..d5ea539519e7 100644
---- a/drivers/accel/rocket/rocket_gem.h
-+++ b/drivers/accel/rocket/rocket_gem.h
-@@ -4,10 +4,10 @@
- #ifndef __ROCKET_GEM_H__
- #define __ROCKET_GEM_H__
- 
--#include <drm/drm_gem_shmem_helper.h>
-+#include <drm/drm_gem_uma_helper.h>
- 
- struct rocket_gem_object {
--	struct drm_gem_shmem_object base;
-+	struct drm_gem_uma_object base;
- 
- 	struct rocket_file_priv *driver_priv;
- 
-@@ -28,7 +28,7 @@ int rocket_ioctl_fini_bo(struct drm_device *dev, void *data, struct drm_file *fi
- static inline
- struct  rocket_gem_object *to_rocket_bo(struct drm_gem_object *obj)
- {
--	return container_of(to_drm_gem_shmem_obj(obj), struct rocket_gem_object, base);
-+	return container_of(to_drm_gem_uma_obj(obj), struct rocket_gem_object, base);
- }
- 
- #endif
--- 
-2.52.0
-
+On 12/9/2025 2:42 PM, Thomas Zimmermann wrote:
+> Convert ivpu from GEM-SHMEM to GEM-UMA. The latter is just a copy,
+> so this change it merely renaming symbols. No functional changes.
+> 
+> GEM-SHMEM will become more self-contained for drivers without specific
+> memory management. GEM-UMA's interfaces will remain flexible for drivers
+> with UMA hardware, such as ivpu.
+> 
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> ---
+>  drivers/accel/ivpu/Kconfig    |  2 +-
+>  drivers/accel/ivpu/ivpu_gem.c | 36 +++++++++++++++++------------------
+>  drivers/accel/ivpu/ivpu_gem.h |  4 ++--
+>  3 files changed, 21 insertions(+), 21 deletions(-)
+> 
+> diff --git a/drivers/accel/ivpu/Kconfig b/drivers/accel/ivpu/Kconfig
+> index 9e055b5ce03d..49ca139a9d31 100644
+> --- a/drivers/accel/ivpu/Kconfig
+> +++ b/drivers/accel/ivpu/Kconfig
+> @@ -5,8 +5,8 @@ config DRM_ACCEL_IVPU
+>  	depends on DRM_ACCEL
+>  	depends on X86_64 && !UML
+>  	depends on PCI && PCI_MSI
+> +	select DRM_GEM_UMA_HELPER
+>  	select FW_LOADER
+> -	select DRM_GEM_SHMEM_HELPER
+>  	select GENERIC_ALLOCATOR
+>  	select WANT_DEV_COREDUMP
+>  	help
+> diff --git a/drivers/accel/ivpu/ivpu_gem.c b/drivers/accel/ivpu/ivpu_gem.c
+> index ece68f570b7e..7f4aeb482efb 100644
+> --- a/drivers/accel/ivpu/ivpu_gem.c
+> +++ b/drivers/accel/ivpu/ivpu_gem.c
+> @@ -84,7 +84,7 @@ int __must_check ivpu_bo_bind(struct ivpu_bo *bo)
+>  	if (bo->base.base.import_attach)
+>  		sgt = ivpu_bo_map_attachment(vdev, bo);
+>  	else
+> -		sgt = drm_gem_shmem_get_pages_sgt(&bo->base);
+> +		sgt = drm_gem_uma_get_pages_sgt(&bo->base);
+>  	if (IS_ERR(sgt)) {
+>  		ret = PTR_ERR(sgt);
+>  		ivpu_err(vdev, "Failed to map BO in IOMMU: %d\n", ret);
+> @@ -223,7 +223,7 @@ struct drm_gem_object *ivpu_gem_prime_import(struct drm_device *dev,
+>  
+>  	get_dma_buf(dma_buf);
+>  
+> -	obj = drm_gem_shmem_prime_import_sg_table(dev, attach, NULL);
+> +	obj = drm_gem_uma_prime_import_sg_table(dev, attach, NULL);
+>  	if (IS_ERR(obj)) {
+>  		ret = PTR_ERR(obj);
+>  		goto fail_detach;
+> @@ -251,7 +251,7 @@ struct drm_gem_object *ivpu_gem_prime_import(struct drm_device *dev,
+>  
+>  static struct ivpu_bo *ivpu_bo_alloc(struct ivpu_device *vdev, u64 size, u32 flags)
+>  {
+> -	struct drm_gem_shmem_object *shmem;
+> +	struct drm_gem_uma_object *uma;
+>  	struct ivpu_bo *bo;
+>  
+>  	switch (flags & DRM_IVPU_BO_CACHE_MASK) {
+> @@ -262,11 +262,11 @@ static struct ivpu_bo *ivpu_bo_alloc(struct ivpu_device *vdev, u64 size, u32 fla
+>  		return ERR_PTR(-EINVAL);
+>  	}
+>  
+> -	shmem = drm_gem_shmem_create(&vdev->drm, size);
+> -	if (IS_ERR(shmem))
+> -		return ERR_CAST(shmem);
+> +	uma = drm_gem_uma_create(&vdev->drm, size);
+> +	if (IS_ERR(uma))
+> +		return ERR_CAST(uma);
+>  
+> -	bo = to_ivpu_bo(&shmem->base);
+> +	bo = to_ivpu_bo(&uma->base);
+>  	bo->base.map_wc = flags & DRM_IVPU_BO_WC;
+>  	bo->flags = flags;
+>  
+> @@ -330,7 +330,7 @@ static void ivpu_gem_bo_free(struct drm_gem_object *obj)
+>  
+>  	drm_WARN_ON(obj->dev, refcount_read(&bo->base.pages_use_count) > 1);
+>  	drm_WARN_ON(obj->dev, bo->base.base.vma_node.vm_files.rb_node);
+> -	drm_gem_shmem_free(&bo->base);
+> +	drm_gem_uma_free(&bo->base);
+>  }
+>  
+>  static enum drm_gem_object_status ivpu_gem_status(struct drm_gem_object *obj)
+> @@ -347,15 +347,15 @@ static enum drm_gem_object_status ivpu_gem_status(struct drm_gem_object *obj)
+>  static const struct drm_gem_object_funcs ivpu_gem_funcs = {
+>  	.free = ivpu_gem_bo_free,
+>  	.open = ivpu_gem_bo_open,
+> -	.print_info = drm_gem_shmem_object_print_info,
+> -	.pin = drm_gem_shmem_object_pin,
+> -	.unpin = drm_gem_shmem_object_unpin,
+> -	.get_sg_table = drm_gem_shmem_object_get_sg_table,
+> -	.vmap = drm_gem_shmem_object_vmap,
+> -	.vunmap = drm_gem_shmem_object_vunmap,
+> -	.mmap = drm_gem_shmem_object_mmap,
+> +	.print_info = drm_gem_uma_object_print_info,
+> +	.pin = drm_gem_uma_object_pin,
+> +	.unpin = drm_gem_uma_object_unpin,
+> +	.get_sg_table = drm_gem_uma_object_get_sg_table,
+> +	.vmap = drm_gem_uma_object_vmap,
+> +	.vunmap = drm_gem_uma_object_vunmap,
+> +	.mmap = drm_gem_uma_object_mmap,
+>  	.status = ivpu_gem_status,
+> -	.vm_ops = &drm_gem_shmem_vm_ops,
+> +	.vm_ops = &drm_gem_uma_vm_ops,
+>  };
+>  
+>  int ivpu_bo_create_ioctl(struct drm_device *dev, void *data, struct drm_file *file)
+> @@ -435,7 +435,7 @@ ivpu_bo_create(struct ivpu_device *vdev, struct ivpu_mmu_context *ctx,
+>  
+>  	if (flags & DRM_IVPU_BO_MAPPABLE) {
+>  		ivpu_bo_lock(bo);
+> -		ret = drm_gem_shmem_vmap_locked(&bo->base, &map);
+> +		ret = drm_gem_uma_vmap_locked(&bo->base, &map);
+>  		ivpu_bo_unlock(bo);
+>  
+>  		if (ret)
+> @@ -475,7 +475,7 @@ void ivpu_bo_free(struct ivpu_bo *bo)
+>  
+>  	if (bo->flags & DRM_IVPU_BO_MAPPABLE) {
+>  		ivpu_bo_lock(bo);
+> -		drm_gem_shmem_vunmap_locked(&bo->base, &map);
+> +		drm_gem_uma_vunmap_locked(&bo->base, &map);
+>  		ivpu_bo_unlock(bo);
+>  	}
+>  
+> diff --git a/drivers/accel/ivpu/ivpu_gem.h b/drivers/accel/ivpu/ivpu_gem.h
+> index 0c3350f22b55..3e5d1a64deab 100644
+> --- a/drivers/accel/ivpu/ivpu_gem.h
+> +++ b/drivers/accel/ivpu/ivpu_gem.h
+> @@ -6,13 +6,13 @@
+>  #define __IVPU_GEM_H__
+>  
+>  #include <drm/drm_gem.h>
+> -#include <drm/drm_gem_shmem_helper.h>
+> +#include <drm/drm_gem_uma_helper.h>
+>  #include <drm/drm_mm.h>
+>  
+>  struct ivpu_file_priv;
+>  
+>  struct ivpu_bo {
+> -	struct drm_gem_shmem_object base;
+> +	struct drm_gem_uma_object base;
+>  	struct ivpu_mmu_context *ctx;
+>  	struct list_head bo_list_node;
+>  	struct drm_mm_node mm_node;
+Reviewed-by: Karol Wachowski <karol.wachowski@linux.intel.com>
 
