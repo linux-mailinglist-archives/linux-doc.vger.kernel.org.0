@@ -1,207 +1,205 @@
-Return-Path: <linux-doc+bounces-69286-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69288-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CE09CAEA9D
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 02:59:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C09ACAEE67
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 05:43:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B750C301F8EC
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 01:59:50 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0E10B301F26F
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 04:43:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B2E9B301004;
-	Tue,  9 Dec 2025 01:59:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 639942C2364;
+	Tue,  9 Dec 2025 04:43:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="gR4lHXjC"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="Z4RaZnHR"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com [91.218.175.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9E81277026;
-	Tue,  9 Dec 2025 01:59:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 634A1277818
+	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 04:43:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765245589; cv=none; b=DSu3ZeOUFbBMkx7wB0lB1e70hkv7N6S0V3Hq8izq14F6pjP3qHS9Yc155tN/w9jyIqwTGNxptRY8wLAsSLraSQR/PnmmCwrg7maxWW6qqg7UDTZl8JwM95+SwZUyQCD2g53XgZEUkqdCmt0mktCAQACJQMRRwK+djMzFDxCaIeE=
+	t=1765255422; cv=none; b=ZP4mh+NYQD+89SgQLth8w1jDSsKWDcQGwUerxAM9EOhuq6dJ2QxGXOrxoAK1ZOefb+b1phBhiPU1ImXPw4dZRDeM5+qvq9Y+YVcEADWAc2022+s5z07e8IkbWS8Mjhr0obwoSSn+YlT2ZmqitzZ7MLnbZ9CLg6/kwGOpHHwUMoU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765245589; c=relaxed/simple;
-	bh=3VqMdSggJxrHPpmH+5FpuHZQMwjsfWTpiO2SJgzVl1E=;
+	s=arc-20240116; t=1765255422; c=relaxed/simple;
+	bh=S14lmDyrqKiU3c0jVMh9rpoL2TSUlX4wfJCNd6JftvA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=tpdZIuJGI4gy4fasZW/KHdK2Txr1hmE0HJcvjtbqoth9B6PmJ3qe4uV6KzuHK70vt5bZ6GIl+m7hCnIB/L+6jMqC4NKB+KbHct9UT0UTt4nAqLhQcZsyifBPdR9E8RldcoGYtX+BxkS8Ga7Mtf4/0QL9Wo982JjI2KFsKJNdzcI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=gR4lHXjC; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1765245588; x=1796781588;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=3VqMdSggJxrHPpmH+5FpuHZQMwjsfWTpiO2SJgzVl1E=;
-  b=gR4lHXjC7z6ScXQbaLDbITvVpR9fYa3O4C6+IUftiOs9X119Y8zGAmuM
-   E8tQjotcNNY+UwQ1SJgEaxuhWKG0eXkI5wJfcklmwImv5pIhHTEjVfYeG
-   BZKbM7DTnXcbFzo0MzM/VShj+2FH12AQlDNFydim1aEqDJV+O9aEpjta1
-   pJwo4ZgNmQ6aAdb0+2A9rZZkqn5t3Mra7KbjAWLt/hSQZfkjTvCUfma7q
-   YOFz/c1I4+Pfvw60Eq79VwQ2FYvwe1g/r+lKDlU68q26UKx8tXjYo3Dk0
-   E1b5HHU8bFhtLT9QZjYkjyPvJdFZ2E9TcN1zAITDM1XAJ49DF9F0/O8dM
-   Q==;
-X-CSE-ConnectionGUID: sG0LPg/oTv6O/624UufszA==
-X-CSE-MsgGUID: ZCv9ONVJTv+rAv4yvkjfrg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11635"; a="67129951"
-X-IronPort-AV: E=Sophos;i="6.20,256,1758610800"; 
-   d="scan'208";a="67129951"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Dec 2025 17:59:47 -0800
-X-CSE-ConnectionGUID: 5TdfkdsSS9CYHHtagBCGWQ==
-X-CSE-MsgGUID: PeCt+jUsRVKlVClJzGUIVA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.20,260,1758610800"; 
-   d="scan'208";a="201007501"
-Received: from allen-sbox.sh.intel.com (HELO [10.239.159.30]) ([10.239.159.30])
-  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Dec 2025 17:59:43 -0800
-Message-ID: <99b3a5a1-600b-4419-8215-824e7a525f12@linux.intel.com>
-Date: Tue, 9 Dec 2025 09:55:06 +0800
+	 In-Reply-To:Content-Type; b=F0SOXtrrFaN2zys7elSyJbpCEh8gx2tatoAbceU3eVTVHryUEu+MZq2zpKvimmI4S3W7OSJFkUpYikG9fZpWM5MwrpKzBK5vK7yHIg3LhhN19R9f03tqnrQsimsJ12iFqX5vJVQtt5l0l5HIB4FSTH6EdVswIhXb1A07sUAih7w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=Z4RaZnHR; arc=none smtp.client-ip=91.218.175.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+Message-ID: <48d0b46e-2b82-44b6-a717-94bc258a508d@linux.dev>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1765255412;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=oHaNF3NLkUcld+qJXROnyemM10ER7BqRqDwEKLhFDTo=;
+	b=Z4RaZnHR0fIYk8Sv17Zr2mt78F7d5wPSTnieVtot08w35Gl9cmheLnXS1geWFqfwS5eRjd
+	1dTnwFOYF2fDWvGYEP78fX93UW/XAMectuyHfrIbLeXZ/1SUE3Wvlt7Wf38yfm1OVCIGG1
+	TiwkOIHMVpMwzQZpKOK079f7PElyX4c=
+Date: Mon, 8 Dec 2025 20:43:22 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/4] drivers/iommu: Add calls for IOMMU_DEBUG_PAGEALLOC
-To: Mostafa Saleh <smostafa@google.com>
-Cc: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org, corbet@lwn.net, joro@8bytes.org, will@kernel.org,
- robin.murphy@arm.com, akpm@linux-foundation.org, vbabka@suse.cz,
- surenb@google.com, mhocko@suse.com, jackmanb@google.com, hannes@cmpxchg.org,
- ziy@nvidia.com, david@redhat.com, lorenzo.stoakes@oracle.com,
- Liam.Howlett@oracle.com, rppt@kernel.org, xiaqinxin@huawei.com
-References: <20251124200811.2942432-1-smostafa@google.com>
- <20251124200811.2942432-3-smostafa@google.com>
- <07434771-3233-4c88-b505-ee02da72c905@linux.intel.com>
- <aSV-Xi5uMJcMtk1b@google.com>
- <CAFgf54qGdWNB=Oa=vbU1hRN2XOxQSESGO6K0CiG4Qizv=T3+Qw@mail.gmail.com>
-Content-Language: en-US
-From: Baolu Lu <baolu.lu@linux.intel.com>
-In-Reply-To: <CAFgf54qGdWNB=Oa=vbU1hRN2XOxQSESGO6K0CiG4Qizv=T3+Qw@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/10] liveupdate: hugetlb support
+To: Pratyush Yadav <pratyush@kernel.org>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Mike Rapoport <rppt@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka
+ <vbabka@suse.cz>, Suren Baghdasaryan <surenb@google.com>,
+ Michal Hocko <mhocko@suse.com>, Jonathan Corbet <corbet@lwn.net>,
+ Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Alexander Graf <graf@amazon.com>, David Matlack <dmatlack@google.com>,
+ David Rientjes <rientjes@google.com>, Jason Gunthorpe <jgg@nvidia.com>,
+ Samiullah Khawaja <skhawaja@google.com>, Vipin Sharma <vipinsh@google.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ linux-doc@vger.kernel.org, kexec@lists.infradead.org
+References: <20251206230222.853493-1-pratyush@kernel.org>
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Zhu Yanjun <yanjun.zhu@linux.dev>
+In-Reply-To: <20251206230222.853493-1-pratyush@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
 
-On 12/9/25 04:09, Mostafa Saleh wrote:
-> On Tue, Nov 25, 2025 at 10:01 AM Mostafa Saleh<smostafa@google.com> wrote:
->> On Tue, Nov 25, 2025 at 03:35:08PM +0800, Baolu Lu wrote:
->>> On 11/25/25 04:08, Mostafa Saleh wrote:
->>>> Add calls for the new iommu debug config IOMMU_DEBUG_PAGEALLOC:
->>>> - iommu_debug_init: Enable the debug mode if configured by the user.
->>>> - iommu_debug_map: Track iommu pages mapped, using physical address.
->>>> - iommu_debug_unmap_begin: Track start of iommu unmap operation, with
->>>>     IOVA and size.
->>>> - iommu_debug_unmap_end: Track the end of unmap operation, passing the
->>>>     actual unmapped size versus the tracked one at unmap_begin.
->>>>
->>>> We have to do the unmap_begin/end as once pages are unmapped we lose
->>>> the information of the physical address.
->>>> This is racy, but the API is racy by construction as it uses refcounts
->>>> and doesn't attempt to lock/synchronize with the IOMMU API as that will
->>>> be costly, meaning that possibility of false negative exists.
->>>>
->>>> Signed-off-by: Mostafa Saleh<smostafa@google.com>
->>>> ---
->>>>    drivers/iommu/iommu-debug-pagealloc.c | 26 +++++++++++++
->>>>    drivers/iommu/iommu.c                 | 12 +++++-
->>>>    include/linux/iommu-debug-pagealloc.h | 56 +++++++++++++++++++++++++++
->>>>    3 files changed, 92 insertions(+), 2 deletions(-)
->>>>
->>> Remove "drivers/" from the commit title.
->>>
->>> $ git log --oneline drivers/iommu/iommu.c
->> My bad, I will fix it.
->>
->>> [...]
->>>> diff --git a/include/linux/iommu-debug-pagealloc.h b/include/linux/iommu-debug-pagealloc.h
->>>> index 83e64d70bf6c..454303ec09c2 100644
->>>> --- a/include/linux/iommu-debug-pagealloc.h
->>>> +++ b/include/linux/iommu-debug-pagealloc.h
->>>> @@ -8,10 +8,66 @@
->>>>    #ifndef __LINUX_IOMMU_DEBUG_PAGEALLOC_H
->>>>    #define __LINUX_IOMMU_DEBUG_PAGEALLOC_H
->>>> +struct iommu_domain;
->>>> +
->>>>    #ifdef CONFIG_IOMMU_DEBUG_PAGEALLOC
->>>> +DECLARE_STATIC_KEY_FALSE(iommu_debug_initialized);
->>>> +
->>>>    extern struct page_ext_operations page_iommu_debug_ops;
->>>> +void __iommu_debug_map(struct iommu_domain *domain, phys_addr_t phys,
->>>> +                  size_t size);
->>>> +void __iommu_debug_unmap_begin(struct iommu_domain *domain,
->>>> +                          unsigned long iova, size_t size);
->>>> +void __iommu_debug_unmap_end(struct iommu_domain *domain,
->>>> +                        unsigned long iova, size_t size, size_t unmapped);
->>>> +
->>>> +static inline void iommu_debug_map(struct iommu_domain *domain,
->>>> +                              phys_addr_t phys, size_t size)
->>>> +{
->>>> +   if (static_branch_unlikely(&iommu_debug_initialized))
->>>> +           __iommu_debug_map(domain, phys, size);
->>>> +}
->>>> +
->>>> +static inline void iommu_debug_unmap_begin(struct iommu_domain *domain,
->>>> +                                      unsigned long iova, size_t size)
->>>> +{
->>>> +   if (static_branch_unlikely(&iommu_debug_initialized))
->>>> +           __iommu_debug_unmap_begin(domain, iova, size);
->>>> +}
->>>> +
->>>> +static inline void iommu_debug_unmap_end(struct iommu_domain *domain,
->>>> +                                    unsigned long iova, size_t size,
->>>> +                                    size_t unmapped)
->>>> +{
->>>> +   if (static_branch_unlikely(&iommu_debug_initialized))
->>>> +           __iommu_debug_unmap_end(domain, iova, size, unmapped);
->>>> +}
->>>> +
->>>> +void iommu_debug_init(void);
->>>> +
->>>> +#else
->>>> +static inline void iommu_debug_map(struct iommu_domain *domain,
->>>> +                              phys_addr_t phys, size_t size)
->>>> +{
->>>> +}
->>>> +
->>>> +static inline void iommu_debug_unmap_begin(struct iommu_domain *domain,
->>>> +                                      unsigned long iova, size_t size)
->>>> +{
->>>> +}
->>>> +
->>>> +static inline void iommu_debug_unmap_end(struct iommu_domain *domain,
->>>> +                                    unsigned long iova, size_t size,
->>>> +                                    size_t unmapped)
->>>> +{
->>>> +}
->>>> +
->>>> +static inline void iommu_debug_init(void)
->>>> +{
->>>> +}
->>> I suppose that all these should go to drivers/iommu/iommu-priv.h, as
->>> they are for use in other files inside the IOMMU subsystem.
->> It seemed better to have all the feature functions/declarations in one
->> isolated file, as it is included outside of the iommu susbsystem also.
->> I have no strong opinion, I can keep them in drivers/iommu/iommu-priv.h
->> if you think it's better. But then we will have to include also
->> "iommu-debug-pagealloc.h" for the static key to avoid including extra
->> files to linux/mm.h.
->>
->> Thanks,
->> Mostafa
->>
-> Hi Baolu,
-> 
-> I plan to post a new version soon. So far, I only have the commit
-> subject rewrites. Do you have any opinion on the header file split or
-> the unmap size part?
 
-I have no option regarding the unmap size part, as the comments already
-declare the possible cases. For the header file split, I feel it's
-better to put staff that is only used in the IOMMU subsystem in drivers/
-iommu in iommu-pri.h instead of the global ones under include/linux.
+在 2025/12/6 15:02, Pratyush Yadav 写道:
+> This series adds support for live updating hugetlb-backed memfd,
+> including support for 1G huge pages. This allows live updating VMs which
+> use hugepages to back VM memory.
+>
+> Please take a look at this patch series [0] to know more about the Live
+> Update Orchestrator (LUO). It also includes patches for live updating a
+> shmem-backed memfd. This series is a follow up to that, adding huge page
+> support as well.
+>
+> You can also read this LWN article [1] to learn more about KHO and Live
+> Update Orchestrator, though do note that this article is a bit
+> out-of-date. LUO has since evolved. For example, subsystems have been
+> replaced with FLB, and the state machine has been simplified.
+>
+> This series is based on top of mm-non-unstable, which includes the LUO
+> FLB patches [2].
+>
+> This series uses LUO FLB to track how many pages are preserved for each
+> hstate, to ensure the live updated kernel does not over-allocate
+> hugepages.
+
+
+Is this patch serise based on the patches in the link 
+https://lkml.org/lkml/2025/11/26/1665?
 
 Thanks,
-baolu
+
+Yanjun.Zhu
+
+
+>
+> Areas for Discussion
+> ====================
+>
+> Why is this an RFC?
+> -------------------
+>
+> While I believe the code is in decent shape, I have only done some basic
+> testing and have not put it through more intensive testing, including
+> testing on ARM64. I am also not completely confident on the handling of
+> reservations and cgroup charging, even though it appears to work on the
+> surface.
+>
+> The goal of this is to start discussion at high level points so we can
+> at least agree on the general direction. This also gives people some
+> time to see the code, before the session discussing this at LPC 2025
+> [3].
+>
+> Disabling scratch-only earlier in boot
+> --------------------------------------
+>
+> Patch 2 moves KHO memory initialization to earlier in boot. Detailed
+> discussion on the topic is in patch 2's message.
+>
+> Allocating gigantic hugepages after paging_init() on x86
+> --------------------------------------------------------
+>
+> To allow KHO to work with gigantic hugepages on x86, patch 2 moves
+> gigantic huge page allocation after paging_init(). This can have some
+> impact on ability to allocate gigantic pages, but I believe the impact
+> should not be severe. See patch 2 for more detailed discussion and test
+> results.
+>
+> Early-boot access to LUO FLB data
+> ---------------------------------
+>
+> To work with gigantic page allocation, LUO FLB data is needed in early
+> boot, before LUO is fully initialized. Patch 3 adds support for fetching
+> LUO FLB data in early boot.
+>
+> Preserving the entire huge page pool vs only used
+> -------------------------------------------------
+>
+> This series makes a design decision on preserving only the number of
+> preserved huge pages for each hstate, instead of preserving the entire
+> huge page pool. Both approaches were brought up in the Live Update
+> meetings. Patch 6 discusses the reasoning in more detail.
+>
+> [0] https://lore.kernel.org/linux-mm/20251125165850.3389713-1-pasha.tatashin@soleen.com/T/#u
+> [1] https://lwn.net/Articles/1033364/
+> [2] https://lore.kernel.org/linux-mm/20251125225006.3722394-1-pasha.tatashin@soleen.com/T/#u
+> [3] https://lpc.events/event/19/contributions/2044/
+>
+> Pratyush Yadav (10):
+>    kho: drop restriction on maximum page order
+>    kho: disable scratch-only earlier in boot
+>    liveupdate: do early initialization before hugepages are allocated
+>    liveupdate: flb: allow getting FLB data in early boot
+>    mm: hugetlb: export some functions to hugetlb-internal header
+>    liveupdate: hugetlb subsystem FLB state preservation
+>    mm: hugetlb: don't allocate pages already in live update
+>    mm: hugetlb: disable CMA if liveupdate is enabled
+>    mm: hugetlb: allow freezing the inode
+>    liveupdate: allow preserving hugetlb-backed memfd
+>
+>   Documentation/mm/memfd_preservation.rst |   9 +
+>   MAINTAINERS                             |   2 +
+>   arch/x86/kernel/setup.c                 |  19 +-
+>   fs/hugetlbfs/inode.c                    |  14 +-
+>   include/linux/hugetlb.h                 |   8 +
+>   include/linux/kho/abi/hugetlb.h         |  98 ++++
+>   include/linux/liveupdate.h              |  12 +
+>   kernel/liveupdate/Kconfig               |  15 +
+>   kernel/liveupdate/kexec_handover.c      |  13 +-
+>   kernel/liveupdate/luo_core.c            |  30 +-
+>   kernel/liveupdate/luo_flb.c             |  69 ++-
+>   kernel/liveupdate/luo_internal.h        |   2 +
+>   mm/Makefile                             |   1 +
+>   mm/hugetlb.c                            | 113 ++--
+>   mm/hugetlb_cma.c                        |   7 +
+>   mm/hugetlb_internal.h                   |  50 ++
+>   mm/hugetlb_luo.c                        | 699 ++++++++++++++++++++++++
+>   mm/memblock.c                           |   1 -
+>   mm/memfd_luo.c                          |   4 -
+>   mm/mm_init.c                            |  15 +-
+>   20 files changed, 1099 insertions(+), 82 deletions(-)
+>   create mode 100644 include/linux/kho/abi/hugetlb.h
+>   create mode 100644 mm/hugetlb_internal.h
+>   create mode 100644 mm/hugetlb_luo.c
+>
+>
+> base-commit: 55b7d75112c25b3e2a5eadc11244c330a5c00a41
+
+-- 
+Best Regards,
+Yanjun.Zhu
+
 
