@@ -1,91 +1,50 @@
-Return-Path: <linux-doc+bounces-69300-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69302-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C781CB02E4
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 15:08:09 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB8E0CB0311
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 15:09:54 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id ADAAF30840DC
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 14:03:13 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6BD4C304F36A
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 14:03:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 899152C21C6;
-	Tue,  9 Dec 2025 14:01:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="b4Vju9In";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="x0FwYgQX";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="b4Vju9In";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="x0FwYgQX"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 91E972DF144;
+	Tue,  9 Dec 2025 14:02:04 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF12E2D46D6
-	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 14:01:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05E9A2D46D0
+	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 14:02:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765288918; cv=none; b=K9hemsxdfx4CmdTKrrd5BHCC3NzTofmeF9ffchAQ+IEKLFn00MeGMlmzNaM5SPdePB+Xx2TuyJ4FehERG2qGananNHG3eZmlCqNyE1b5iDxB9I8OH2H1FM6Yg+v3qjBCF6dsGZrIJmd+qQBJUo6mOgkbei79ye4lk/tEoxSSIQc=
+	t=1765288924; cv=none; b=PiZcpR+1pOgNaNgfRrYWUjetoV4V+4ECA67bsEGpvQSJdenWRko/R0bejz+Z5y+yOmVgM/y4i31SUWpS6O/J8/M++D3j/oPPhyCaS3H1ZsVEvaCz1FzRfK+N7+9qtgUpW6gzKYcQIp/rDtvM2o//taTSZHgU2i8a+ZXvPNfolT0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765288918; c=relaxed/simple;
-	bh=UGOpaOnZ7iP+cZKRzh60BwWZz5+UmNNAF2F5CUXNkiI=;
+	s=arc-20240116; t=1765288924; c=relaxed/simple;
+	bh=EB3GF21hCFODEkL8s5vnL8Gf8m+eyzre6YoyXgEyUBs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=l0B6qzJQprHu30dOrnOk8z+b7WjkKcOvisuqi7tui92b87vh5iuRSAOjDITDnzs5PWoUpMB8dlB8UMb3GTyRmXChkDu0s04i4bwTrrglTWg/jr5k6LauYSLHg0fYEGSOYOEhTtnk1Ot6xRrMWhYnMciNW8QtrsJ+oMMw93Ghf+w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=b4Vju9In; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=x0FwYgQX; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=b4Vju9In; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=x0FwYgQX; arc=none smtp.client-ip=195.135.223.130
+	 MIME-Version; b=lsxaxT0XPwz+UxVOTd7YQKcm3wCG4xHS/y2YXLR1ZM6nQsjGQm56VgCB0eXoKAhPda0MG6gCBlykB3e9mfkyoL9WnMLmlKv3i8MgaI3bfHQCpzSYwQvcKSFknCxxhV633Pj/wvbwK6HnXngSZnXphLhP5PcaE08Amn9MetUjrPY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; arc=none smtp.client-ip=195.135.223.130
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 53E2133819;
-	Tue,  9 Dec 2025 14:01:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1765288909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
-	b=b4Vju9InpR/ky2HB1vlZg7WyLX08VXpzuOiH33ECiSsAYaFSo2CALbDG5kinJf8aqU4saz
-	U7f9VhGgGUX20J86yuwhxBuZh+amU2sISZbq0Qp3nS+jp6ECt/nSORZ80WWxCsYLnaiL25
-	yW04PtIgEUq8wgGYecpsfC9PLdmR5Z8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1765288909;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
-	b=x0FwYgQX+yx6SxQ6BoJ7U7Euao2hXuwob5ph700mtQ77rtb3acU1CioVOhC+bn9eGtxqh0
-	wIxk8fO3cf8iz9Aw==
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 967DE3381A;
+	Tue,  9 Dec 2025 14:01:50 +0000 (UTC)
 Authentication-Results: smtp-out1.suse.de;
 	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1765288909; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
-	b=b4Vju9InpR/ky2HB1vlZg7WyLX08VXpzuOiH33ECiSsAYaFSo2CALbDG5kinJf8aqU4saz
-	U7f9VhGgGUX20J86yuwhxBuZh+amU2sISZbq0Qp3nS+jp6ECt/nSORZ80WWxCsYLnaiL25
-	yW04PtIgEUq8wgGYecpsfC9PLdmR5Z8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1765288909;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=kccf9J0eGu05ij8FGZanHYBt+u/zqb3825x2uoNnG1Y=;
-	b=x0FwYgQX+yx6SxQ6BoJ7U7Euao2hXuwob5ph700mtQ77rtb3acU1CioVOhC+bn9eGtxqh0
-	wIxk8fO3cf8iz9Aw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3A20C3EA65;
-	Tue,  9 Dec 2025 14:01:48 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 620DE3EA63;
+	Tue,  9 Dec 2025 14:01:49 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id wNfxDMwrOGm1OgAAD6G6ig
-	(envelope-from <tzimmermann@suse.de>); Tue, 09 Dec 2025 14:01:48 +0000
+	id oPjnFc0rOGm1OgAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Tue, 09 Dec 2025 14:01:49 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: boris.brezillon@collabora.com,
 	simona@ffwll.ch,
@@ -116,9 +75,9 @@ Cc: dri-devel@lists.freedesktop.org,
 	virtualization@lists.linux.dev,
 	linux-doc@vger.kernel.org,
 	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 01/13] drm/gem-shmem: Fix typos in documentation
-Date: Tue,  9 Dec 2025 14:41:58 +0100
-Message-ID: <20251209140141.94407-2-tzimmermann@suse.de>
+Subject: [PATCH 02/13] drm/gem-shmem: Fix the MODULE_LICENSE() string
+Date: Tue,  9 Dec 2025 14:41:59 +0100
+Message-ID: <20251209140141.94407-3-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251209140141.94407-1-tzimmermann@suse.de>
 References: <20251209140141.94407-1-tzimmermann@suse.de>
@@ -129,58 +88,44 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Flag: NO
-X-Spam-Score: -6.80
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	REPLY(-4.00)[]
+X-Rspamd-Queue-Id: 967DE3381A
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Spam-Score: -4.00
 X-Spam-Level: 
-X-Spamd-Result: default: False [-6.80 / 50.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.998];
-	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.de:email,suse.de:mid];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[collabora.com,ffwll.ch,gmail.com,kernel.org,linux.intel.com,amd.com,tomeuvizoso.net,imgtec.com,arm.com,igalia.com,redhat.com,chromium.org,lwn.net];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	R_RATELIMIT(0.00)[to_ip_from(RLzxzh56npx61idbi11ft8b9pb)];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spam-Flag: NO
+X-Rspamd-Action: no action
 
-Fix the compile-time warnings
+Replace the bogus "GPL v2" with "GPL" as MODULE_LICNSE() string. The
+value does not declare the module's exact license, but only lets the
+module loader test whether the module is Free Software or not.
 
-Warning: drm_gem_shmem_helper.c:104 function parameter 'shmem' not described in 'drm_gem_shmem_init'
-Warning: drm_gem_shmem_helper.c:104 function parameter 'size' not described in 'drm_gem_shmem_init'
+See commit bf7fbeeae6db ("module: Cure the MODULE_LICENSE "GPL" vs.
+"GPL v2" bogosity") in the details of the issue. The fix is to use
+"GPL" for all modules under any variant of the GPL.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/drm_gem_shmem_helper.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/drm_gem_shmem_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-index dc94a27710e5..f4e77f75ec81 100644
+index f4e77f75ec81..2a67da98da25 100644
 --- a/drivers/gpu/drm/drm_gem_shmem_helper.c
 +++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-@@ -96,7 +96,8 @@ static int __drm_gem_shmem_init(struct drm_device *dev, struct drm_gem_shmem_obj
- /**
-  * drm_gem_shmem_init - Initialize an allocated object.
-  * @dev: DRM device
-- * @obj: The allocated shmem GEM object.
-+ * @shmem: The allocated shmem GEM object.
-+ * @size: Buffer size in bytes
-  *
-  * Returns:
-  * 0 on success, or a negative error code on failure.
+@@ -896,4 +896,4 @@ EXPORT_SYMBOL_GPL(drm_gem_shmem_prime_import_no_map);
+ 
+ MODULE_DESCRIPTION("DRM SHMEM memory-management helpers");
+ MODULE_IMPORT_NS("DMA_BUF");
+-MODULE_LICENSE("GPL v2");
++MODULE_LICENSE("GPL");
 -- 
 2.52.0
 
