@@ -1,116 +1,191 @@
-Return-Path: <linux-doc+bounces-69292-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69287-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9903CAF43B
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 09:18:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DA28CAECDE
+	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 04:26:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id ADB17301339A
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 08:18:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C290F3029B90
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 03:24:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A579021D3CD;
-	Tue,  9 Dec 2025 08:18:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9576A301002;
+	Tue,  9 Dec 2025 03:24:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="J+aaFS9D"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cahidfJj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C65219006B;
-	Tue,  9 Dec 2025 08:18:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F06182BE7AB
+	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 03:24:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765268335; cv=none; b=Jib6McjntIqnceW1Zs66Cyl3NKqtajqbehB9DiRKzj+2MIU5eOL7k9/p1LWGZA60G5AG4vAGME7fIhHAbBVYWBrX09VpIlsd3QW1scjyhobj+DXdMpAx9/7TzoW3996LMpPcj6rrMDl1ZJqm5DXLApc4JrnAtjYciooOthT1n5s=
+	t=1765250687; cv=none; b=cINRCBSijxlbmElTymYbNHLb0dHmmuB9d+EQrLD87tm4C0TCmDWfRXW7f3h0CfyMkUxmhmfo/fGnR8sqXs15+EF+8yV6wh6HVVj9VtwXwRZKy1sqPb+muzo/pSwFW6/ek0+vaGWxQ8ZCWYEk7WtBO/9331D+w35hw/azxN3oI+Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765268335; c=relaxed/simple;
-	bh=aL/hwR8PIWPLlV6uFQBsf2fAQbPmjSBfIHKkmx7HAzw=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=WwLPLVmge6BDWMK9gW2x2AUaHdFocNvlN1YFwgZIUKSny5LkHVLBVWzFh/9u88vu2saQds7IOL2Em0XvZLZGEAk5Mnrdwnd6p1mx7dku4RPDX5tVh2KNgyu3erO6OjUV7s5iNWhURrTY5Ypb3Q0fkt/l+HmsXK2nxFP8Vp3vm9U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=J+aaFS9D; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66519C4CEF5;
-	Tue,  9 Dec 2025 08:18:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1765268335;
-	bh=aL/hwR8PIWPLlV6uFQBsf2fAQbPmjSBfIHKkmx7HAzw=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=J+aaFS9DJjhtBzUXMwjiV1dTctAzbSTgd+qhpLMl5+L/KZvE8jsx3AyT07Pl72FmX
-	 DBXpTNDIbkr0ESOZCipm+oEipaq4Us8aDhRUR89KNBqA+0HaL+Rx/ENO3lxV6x8fuW
-	 zptCYOGL5rXnmjGw26F1L16Wwp931gY+IQ6hg2bslYXpzSAJ9LgoTsnFgsw9jq78ry
-	 1BCC+EnCrO8RFAZGdvmCba4sJVIpSvxSVnHIHT/MVh7fJqJYfQHh7ASXPxCpKc5FTR
-	 5B5vOjVS8NOEHgGq2/S31MnHy6yDdyNJoBZTN7PXj7Rf8Rl7DtrXCXmUHKkDB38QiT
-	 z81VvUd0S+h+A==
-From: Pratyush Yadav <pratyush@kernel.org>
-To: Zhu Yanjun <yanjun.zhu@linux.dev>
-Cc: Pratyush Yadav <pratyush@kernel.org>,  Pasha Tatashin
- <pasha.tatashin@soleen.com>,  Mike Rapoport <rppt@kernel.org>,  Andrew
- Morton <akpm@linux-foundation.org>,  David Hildenbrand <david@kernel.org>,
-  Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,  "Liam R. Howlett"
- <Liam.Howlett@oracle.com>,  Vlastimil Babka <vbabka@suse.cz>,  Suren
- Baghdasaryan <surenb@google.com>,  Michal Hocko <mhocko@suse.com>,
-  Jonathan Corbet <corbet@lwn.net>,  Thomas Gleixner <tglx@linutronix.de>,
-  Ingo Molnar <mingo@redhat.com>,  Borislav Petkov <bp@alien8.de>,  Dave
- Hansen <dave.hansen@linux.intel.com>,  x86@kernel.org,  "H. Peter Anvin"
- <hpa@zytor.com>,  Muchun Song <muchun.song@linux.dev>,  Oscar Salvador
- <osalvador@suse.de>,  Alexander Graf <graf@amazon.com>,  David Matlack
- <dmatlack@google.com>,  David Rientjes <rientjes@google.com>,  Jason
- Gunthorpe <jgg@nvidia.com>,  Samiullah Khawaja <skhawaja@google.com>,
-  Vipin Sharma <vipinsh@google.com>,  linux-kernel@vger.kernel.org,
-  linux-mm@kvack.org,  linux-doc@vger.kernel.org,
-  kexec@lists.infradead.org
-Subject: Re: [RFC PATCH 00/10] liveupdate: hugetlb support
-In-Reply-To: <48d0b46e-2b82-44b6-a717-94bc258a508d@linux.dev> (Zhu Yanjun's
-	message of "Mon, 8 Dec 2025 20:43:22 -0800")
-References: <20251206230222.853493-1-pratyush@kernel.org>
-	<48d0b46e-2b82-44b6-a717-94bc258a508d@linux.dev>
-Date: Tue, 09 Dec 2025 09:18:45 +0100
-Message-ID: <86h5u0ax0a.fsf@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+	s=arc-20240116; t=1765250687; c=relaxed/simple;
+	bh=kb3vJ6UB4YMJ5FVxcnw8Y1Iq2Iyz6h9yRcwHlaiERiY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=AX7NyB5YZVz8ydXFGwUtseNFn2sOdz524t4wEBux8FANE3n0IHWoUP5ThxhrHkpeLvhrXvwfqqI6ztqittNqBY0nBc4EMh57jVzw0W9B9MNP01dQGMDCLo2lKZRs81zchcobPOuLKH5GKPZcdVba0BMovIHBRcKZlELFb7aKxdg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cahidfJj; arc=none smtp.client-ip=209.85.216.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-34374febdefso5340941a91.0
+        for <linux-doc@vger.kernel.org>; Mon, 08 Dec 2025 19:24:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1765250685; x=1765855485; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7Y3JLkwkp4BSFjOFTSB6aXglZIWfTKVg/p0YUgbKz/M=;
+        b=cahidfJjizeCQq0TLnKdw9/yoDca+/N5giMTHxeWmFauJzT40jQcc3eIZ3pyDJGKb9
+         s32jOiQuKFsBvQESJcEt4LpQ7WDmEoESwwbGVXJkbgassaEi96uQUvQJmTIXrjZ6yPWo
+         UBEIbPv1brYEISrJDu5QONPtBRXa78P+RLpiNZUjYONqs03mLhM2JWqzb6iN0OlJngN+
+         cw47CcjwgNe0e1aTAmZWHLKrLKzBIFLSvNWxvXqMAwGbmN9hcpvRt0TM+qCOsH1QaEme
+         pn6UeEkDIKiU0kZZid6m0PtoTV+NQx71YR2bmYLF5hO5iYR2BqbvMT9jgEfNNQSe8AHN
+         zagA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765250685; x=1765855485;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=7Y3JLkwkp4BSFjOFTSB6aXglZIWfTKVg/p0YUgbKz/M=;
+        b=KPBQ8LD+DES0fpbUboW3Fgj4iHfXZInmdAFV+4YjZiRi4U5Rge6GiFbXAJyXNT1TYQ
+         F/GxHhvNosywLiEjTQlVlk1EBF9OJ/pqeWb2d561o0HrC6c3+VOyeGKJx/qicW7BqHyV
+         fhpEzx/yHgVWZu66q1Nar6vUdjOVdTKU2N5Y1lEK2x2xAoLXbm5kXedPBl0XM+BAVBta
+         dT3dNKFwpSkF9G8jneafeMw4fC6CeZGuLsIGf8QcCy/wO1Ef96lD7GJ4SdG2lMgcCXEF
+         wyfqYYRIe2y456EFNl/bRUTVPUZVIwHnAmbQMaIVuNLlE2R0m4OkKO3XEMoaAahLOC16
+         Et9g==
+X-Forwarded-Encrypted: i=1; AJvYcCW6va1M0Jz0uiq+SPGrWPzQQ3wLeq3LbP0KhUeGT9ckO3pPHmfoCz8eVLjw+ALxtBgiS+ZUtb+DkFk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyuAcy4bfIt+nid2ltMr5Oibjs2iIyagapcOd9wvGjqmefYERyE
+	fhwoqX8prz5xthyKxbOilzsCBHV3CJRGe/uaZA4CTBqZ5Y1IVSAA9ZxV
+X-Gm-Gg: ASbGnctSrD9hqgIezgbAFcQfqb4SAejiGgzTWs27MeE1dEzaP+PnF8EW8kyCDj7r7kq
+	SqQxCMU7gfpkk0MEWpR+qWc6SguXmc2D0u5hGFDPhnPcF396lT48FLQEB9xE9EzVmRCeHXWIESe
+	FrSnxrXvVHlOSGcX2FLwyK603XgFwrCOd2yRd9mpVQ/M4hnOw+CjtEzUrPsxN5Rsv2nBPU4v5Wl
+	nqVhdSKfd6l6r9A0/JOigzrWnL6Vjt9/Dp4Jo0k+skbMZOddKqeRJylqjSLL+BuCwl//ROZI4kv
+	X/QFjDZBPgpMPyepT7itkK9XhueIqvI9kSfDCdlY3znJR3o0ci7YZRjyXd3QFQyJpTNfWIhZrOM
+	AHv27g0v7CIR9wq51jCCThZblAmULIM6nXhnc17xtqmjHERRSjpjqeSGO2+uk4fXy7Z0L0dznQW
+	sQLRx6UhYQ3qFnNY5AM6I=
+X-Google-Smtp-Source: AGHT+IHhOVSt0SjhTQ3auM38UGEJYSoFP7wZjQShcl4FYhb4BuTbd0u83ptp6sbGfV/QVPGh5CtOxw==
+X-Received: by 2002:a17:90b:1e53:b0:341:8ac7:39b7 with SMTP id 98e67ed59e1d1-349a25bd90dmr8386564a91.25.1765250685088;
+        Mon, 08 Dec 2025 19:24:45 -0800 (PST)
+Received: from LilGuy ([2409:40c2:1049:337c:5ab7:d5cc:37be:2a0d])
+        by smtp.googlemail.com with ESMTPSA id 98e67ed59e1d1-34a47bfecf8sm456535a91.2.2025.12.08.19.24.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 08 Dec 2025 19:24:44 -0800 (PST)
+From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+To: swarajgaikwad1925@gmail.com
+Cc: bp@alien8.de,
+	corbet@lwn.net,
+	dave.hansen@linux.intel.com,
+	david.hunter.linux@gmail.com,
+	hpa@zytor.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	mingo@redhat.com,
+	skhan@linuxfoundation.org,
+	tglx@linutronix.de,
+	x86@kernel.org,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Bagas Sanjaya <bagasdotme@gmail.com>
+Subject: [PATCH v2] Documentation: x86/boot: Fix malformed table in boot.rst
+Date: Tue,  9 Dec 2025 08:53:30 +0000
+Message-ID: <20251209085330.9124-1-swarajgaikwad1925@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251208210113.24057-1-swarajgaikwad1925@gmail.com>
+References: <20251208210113.24057-1-swarajgaikwad1925@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Sphinx reports htmldocs warnings:
 
-On Mon, Dec 08 2025, Zhu Yanjun wrote:
+  Documentation/arch/x86/boot.rst:437: ERROR: Malformed table.
+  Text in column margin in table line 2.
 
-> =E5=9C=A8 2025/12/6 15:02, Pratyush Yadav =E5=86=99=E9=81=93:
->> This series adds support for live updating hugetlb-backed memfd,
->> including support for 1G huge pages. This allows live updating VMs which
->> use hugepages to back VM memory.
->>
->> Please take a look at this patch series [0] to know more about the Live
->> Update Orchestrator (LUO). It also includes patches for live updating a
->> shmem-backed memfd. This series is a follow up to that, adding huge page
->> support as well.
->>
->> You can also read this LWN article [1] to learn more about KHO and Live
->> Update Orchestrator, though do note that this article is a bit
->> out-of-date. LUO has since evolved. For example, subsystems have been
->> replaced with FLB, and the state machine has been simplified.
->>
->> This series is based on top of mm-non-unstable, which includes the LUO
->> FLB patches [2].
->>
->> This series uses LUO FLB to track how many pages are preserved for each
->> hstate, to ensure the live updated kernel does not over-allocate
->> hugepages.
->
->
-> Is this patch serise based on the patches in the link
-> https://lkml.org/lkml/2025/11/26/1665?
+The table header defined the first column width as 2 characters ("=="),
+which is too narrow for entries like "0x10" and "0x13". This caused the
+text to spill into the margin, triggering a docutils parsing failure.
 
-No. That is an independent series. This series is based on
-mm-nonmm-unstable, which has the base LUO patches and the LUO FLB
-patches, but not the VFIO or IOMMU patches.
+Fix it by extending the first column of assigned boot loader ID to 4
+characters ("====") to fit the widest entries.
 
-[...]
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
+Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+Signed-off-by: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+---
+Changes in v2:
+ - Dropped accidental whitespace changes (the second chunk in v1).
+ - Simplified commit message as suggested by Bagas Sanjaya.
 
---=20
-Regards,
-Pratyush Yadav
+---
+ Documentation/arch/x86/boot.rst | 48 ++++++++++++++++-----------------
+ 1 file changed, 24 insertions(+), 24 deletions(-)
+
+diff --git a/Documentation/arch/x86/boot.rst b/Documentation/arch/x86/boot.rst
+index 6d36ce86fd8e..89e785850f7e 100644
+--- a/Documentation/arch/x86/boot.rst
++++ b/Documentation/arch/x86/boot.rst
+@@ -433,30 +433,30 @@ Protocol:	2.00+
+
+   Assigned boot loader IDs:
+
+-	== =======================================
+-	0x0  LILO
+-	     (0x00 reserved for pre-2.00 bootloader)
+-	0x1  Loadlin
+-	0x2  bootsect-loader
+-	     (0x20, all other values reserved)
+-	0x3  Syslinux
+-	0x4  Etherboot/gPXE/iPXE
+-	0x5  ELILO
+-	0x7  GRUB
+-	0x8  U-Boot
+-	0x9  Xen
+-	0xA  Gujin
+-	0xB  Qemu
+-	0xC  Arcturus Networks uCbootloader
+-	0xD  kexec-tools
+-	0xE  Extended (see ext_loader_type)
+-	0xF  Special (0xFF = undefined)
+-	0x10 Reserved
+-	0x11 Minimal Linux Bootloader
+-	     <http://sebastian-plotz.blogspot.de>
+-	0x12 OVMF UEFI virtualization stack
+-	0x13 barebox
+-	== =======================================
++==== ==============================
++0x0  LILO
++      (0x00 reserved for pre-2.00 bootloader)
++0x1  Loadlin
++0x2  bootsect-loader
++      (0x20, all other values reserved)
++0x3  Syslinux
++0x4  Etherboot/gPXE/iPXE
++0x5  ELILO
++0x7  GRUB
++0x8  U-Boot
++0x9  Xen
++0xA  Gujin
++0xB  Qemu
++0xC  Arcturus Networks uCbootloader
++0xD  kexec-tools
++0xE  Extended (see ext_loader_type)
++0xF  Special (0xFF = undefined)
++0x10 Reserved
++0x11 Minimal Linux Bootloader
++      <http://sebastian-plotz.blogspot.de>
++0x12 OVMF UEFI virtualization stack
++0x13 barebox
++==== ==============================
+
+   Please contact <hpa@zytor.com> if you need a bootloader ID value assigned.
+
+--
+2.52.0
+
 
