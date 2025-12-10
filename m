@@ -1,164 +1,255 @@
-Return-Path: <linux-doc+bounces-69380-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69385-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01A4CCB1D82
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 04:58:39 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id B402CCB29CD
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 10:57:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AAA91304F654
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 03:58:37 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id DF128301A95C
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 09:57:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 37A292773D9;
-	Wed, 10 Dec 2025 03:58:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A6B9F302CD5;
+	Wed, 10 Dec 2025 09:57:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RxrGzlwD"
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="AK3PVh+Z";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="MYadPk56";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="AK3PVh+Z";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="MYadPk56"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1E2522128B
-	for <linux-doc@vger.kernel.org>; Wed, 10 Dec 2025 03:58:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A1DC302159
+	for <linux-doc@vger.kernel.org>; Wed, 10 Dec 2025 09:57:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765339117; cv=none; b=aDD64Uw4CLFB4gP887+cI2NRg3mhLRchEF3Gycw7djvJRBKzDCS+GuqqJsGjhaEV1yyWKVO7LlNkQx/dvLozEIkS+2tSDfXG+u5lm+NwHm/nR9NpoOaBA7Vq+yBJF7HtWZNiydUX/Yyd/r58Y4t2ukBA2hyPbo7Wk4xMNQ4aarI=
+	t=1765360630; cv=none; b=MHFbDv4QZ2MHvRhcyezIQmgfEJcZt0cBRcrPZJof9sILeQKapewahCA0/E2CXX63CuQvWWXijPwE3emdA6Ch5SVxJyFt+CPFVch2t2KxBdXcj0bAwdhrxFm+t8ksK1ugFAV/adVRHN85fT0Ab31JZtpOuD6X3WYS0/VYRFRy6gg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765339117; c=relaxed/simple;
-	bh=lL6U5I7FTZTxDBO2M4GdSI/DZFROdk3+cfKw1PEXvSQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=dsHlaVDtQI/bX0J/tGgpJsI/XO6CVRdy8lvvZ//ht4opiNiz/WmqXIsyXXkRCiAlN5KkyszpTHk9aCz1vINIWxGxpjElDF4OK1mgceA3hLoLH6PvICEdJKy4znpi/A/MWvK8y8p6j8p5VmNaNVLrfSgV7vis3AK73EYMvEnh90k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RxrGzlwD; arc=none smtp.client-ip=209.85.210.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-7bf0ad0cb87so7500079b3a.2
-        for <linux-doc@vger.kernel.org>; Tue, 09 Dec 2025 19:58:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765339115; x=1765943915; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eLTayMZyzyEdMj1XSy9P+nrWbhCMNK8qp29uvdTLWjo=;
-        b=RxrGzlwD6IvREt2rhLkRrFPlOntqzB8M7xMT8apQj5kAr5KCvEZubeBFp3JleASqXI
-         WrgFM2JW6uNCA70nA6SK9S/ezHVPqmeCmTVv7xmRAl6ihkflVxL40ojwU8ha3C6n/PSy
-         JCo1XVnoePvDrV5f0eL409Z1ZeZ5FrdxrXjaf4WBrkFRPogL/Ljr1vBrPs/+QB32u+S3
-         gQmXxBiqR3MgxUBPTOAylKSXJ2xRe/JKhwQvAKuYil2wzEgRo7T/AjBlhZvmiyiaHKTz
-         4c+Xzw5z+Wd/gMj5GFxod5GoKfg06cHzC/hTLZAqZ8HdgfcC/o8ycXF7soWGPN8LMX/t
-         SMmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765339115; x=1765943915;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=eLTayMZyzyEdMj1XSy9P+nrWbhCMNK8qp29uvdTLWjo=;
-        b=uEmoBpKz5xYCYwJmrcpf2d0lhL3vMrGThPzMpESFVER1qFPErn4FgwafKE7V0I9arG
-         Aiiiqd6tlQ1WJMa7D04XdOu3LoXETHeBfDofiuKLywrCwCJQwrg51OHpSWcdgF6MvYQb
-         kHRamw+7Z874VkJIBtIMP7DfATonNF1KcrmeoeuyEUtqdXXPKUSTeGgZ31uVWRPDYnpR
-         K5jWx//xdq9gyurDcguzUIlwizEqTpvPGwxZxaq2XqXGWhQNmCS3IFwe0QrgoN+9M3Uw
-         MGOmFUL57Rgz4FjublAsGe5fMCOGW6XXuYsFe/blOZvHQIkQ5krFkkZpXEmtO0Sqh3W2
-         4n9w==
-X-Forwarded-Encrypted: i=1; AJvYcCV8iPAA0G0kxUsIv/QWExlas6/cERqX2cYErA+hfVtQAKVl/B7I1eE7vfw8eo/QknOvrJCulycLAYY=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy6dl7GLxPhZsYPCmucBiTsnLwCvyfk+4KcLy7vKM6W1KYfcYas
-	p9XUF/6TWmYil+zzc3PcaMIfE9wT2mQyd/k34DXgCPqcazwbHZ9N3ihh
-X-Gm-Gg: ASbGnct1CDhyx6Q+9Ep7rfTvdbtpbv45rVqEq09YMen1+1uK33AYmYwXqRdnPAbP4ir
-	BhbQcjMfn2DsH/MXCCbdtAMHE6/KVC4X1MOJZNvg6Be1wwbjYAJBZQLDFdqllXg7wiA+O8PfRg3
-	AGAjVrmegXb9wQZ2mjJmC3ehD/BsIk5dxRFKo2sJhddxq8169zu/IeE9THdKYOxRdMXHhotrFXT
-	AlZ3H/9Rsd5pGl6Ft+YBgfq4VuQZWnY845AFmCtMlAV+I9ci4TGXTgNQXi6GdPlgjL0FtHiFC9I
-	gP8Mt6lJ43+QhvW6ikko5KzVG5ZMZeYbl9iPgzqDPngtrLngtWiVGjneIjrOxQutakXSkRj1JYj
-	UD7E9J8jHnmvuPV637gVfB3hpQkh5Z5asjAT1HHBid4pLbRRi7DK64xe3dafyGhH39qZV1mhvwZ
-	JN4k5Xs0CdOJCYhPJT6rU=
-X-Google-Smtp-Source: AGHT+IFWwNwz9uWu0CC0l9ch1VCQs0lbE+eC1d/Np3AIjDbTK+dJEy21yqLxbctC7tQRmPjvP/pvxw==
-X-Received: by 2002:a05:6a00:b8e:b0:7e8:43f5:bd19 with SMTP id d2e1a72fcca58-7f22fce6121mr912288b3a.46.1765339114883;
-        Tue, 09 Dec 2025 19:58:34 -0800 (PST)
-Received: from LilGuy ([2409:40c2:1295:13e8:41e8:60cd:6181:4fad])
-        by smtp.googlemail.com with ESMTPSA id d2e1a72fcca58-7e29fb94c05sm17430658b3a.16.2025.12.09.19.58.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Dec 2025 19:58:34 -0800 (PST)
-From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
-To: rdunlap@infradead.org
-Cc: bagasdotme@gmail.com,
-	bp@alien8.de,
-	corbet@lwn.net,
-	dave.hansen@linux.intel.com,
-	david.hunter.linux@gmail.com,
-	hpa@zytor.com,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	mingo@kernel.org,
-	mingo@redhat.com,
-	skhan@linuxfoundation.org,
-	swarajgaikwad1925@gmail.com,
-	tglx@linutronix.de,
-	x86@kernel.org
-Subject: [PATCH v3] Documentation: x86/boot: Fix malformed table in boot.rst
-Date: Wed, 10 Dec 2025 09:28:14 +0000
-Message-ID: <20251210092814.9986-1-swarajgaikwad1925@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <438a873c-0ca8-43cf-b705-e224d5c57d05@infradead.org>
-References: <438a873c-0ca8-43cf-b705-e224d5c57d05@infradead.org>
+	s=arc-20240116; t=1765360630; c=relaxed/simple;
+	bh=TzjJPTIOUaLolrVkfOaake/i1ftJcZN332W/cKYrdr0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=CATRkOsHczlW2vl0NbNf7aBhpo3tAfZUmC1cO0x5l30gmiElZUt7QHzclAUcavsH1uqOTktcmibZU+J8sdhQnJ/NtAALOxMKwk+1/VbcFQL0Eu6hP2YPppFc1yMZPhNs6HFwpFIFWgqZQzp4NN0qMhHc9KKSsd6KLYiJ9gQS8fY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de; spf=pass smtp.mailfrom=suse.de; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=AK3PVh+Z; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=MYadPk56; dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b=AK3PVh+Z; dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b=MYadPk56; arc=none smtp.client-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id C687D5BD21;
+	Wed, 10 Dec 2025 09:57:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1765360626; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=SxPTt3XmlnSFZ18urnZ50SEofQyqnAOgbKd3PNWkJWU=;
+	b=AK3PVh+Zwj1d45yK1/GvPYJxAK682XrE9I+zbNCx/L6JobI+840/FSFejJhJ+jLUo9kRGV
+	nFTArGtXNSz63JaAiuDFbP/G1eha4lh4DDDztb9m7kbXoi4vCB/yySwlNoiSaG2TKPGOZY
+	zU3NXPsox1km1MsIXTfB08GGiEccoLE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1765360626;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=SxPTt3XmlnSFZ18urnZ50SEofQyqnAOgbKd3PNWkJWU=;
+	b=MYadPk5667M/8uxXnmVc7iryhMbhpcfVCR9ISk5bJ/Px7JwcO3eZFRq5S/ZLxt//a9hrh+
+	AKhamL6md6FgQNAw==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1765360626; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=SxPTt3XmlnSFZ18urnZ50SEofQyqnAOgbKd3PNWkJWU=;
+	b=AK3PVh+Zwj1d45yK1/GvPYJxAK682XrE9I+zbNCx/L6JobI+840/FSFejJhJ+jLUo9kRGV
+	nFTArGtXNSz63JaAiuDFbP/G1eha4lh4DDDztb9m7kbXoi4vCB/yySwlNoiSaG2TKPGOZY
+	zU3NXPsox1km1MsIXTfB08GGiEccoLE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1765360626;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=SxPTt3XmlnSFZ18urnZ50SEofQyqnAOgbKd3PNWkJWU=;
+	b=MYadPk5667M/8uxXnmVc7iryhMbhpcfVCR9ISk5bJ/Px7JwcO3eZFRq5S/ZLxt//a9hrh+
+	AKhamL6md6FgQNAw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 069683EA63;
+	Wed, 10 Dec 2025 09:57:06 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+	by imap1.dmz-prg2.suse.org with ESMTPSA
+	id WgwzAPJDOWlIagAAD6G6ig
+	(envelope-from <tzimmermann@suse.de>); Wed, 10 Dec 2025 09:57:06 +0000
+Message-ID: <f7ebd77f-8a30-4e65-8871-ad5915c310f5@suse.de>
+Date: Wed, 10 Dec 2025 10:57:05 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC][PATCH 00/13] drm: Introduce GEM-UMA memory management
+To: Boris Brezillon <boris.brezillon@collabora.com>
+Cc: simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, ogabbay@kernel.org, mamin506@gmail.com,
+ lizhi.hou@amd.com, maciej.falkowski@linux.intel.com,
+ karol.wachowski@linux.intel.com, tomeu@tomeuvizoso.net,
+ frank.binns@imgtec.com, matt.coster@imgtec.com, yuq825@gmail.com,
+ robh@kernel.org, steven.price@arm.com, adrian.larumbe@collabora.com,
+ liviu.dudau@arm.com, mwen@igalia.com, kraxel@redhat.com,
+ dmitry.osipenko@collabora.com, gurchetansingh@chromium.org,
+ olvaffe@gmail.com, corbet@lwn.net, dri-devel@lists.freedesktop.org,
+ lima@lists.freedesktop.org, virtualization@lists.linux.dev,
+ linux-doc@vger.kernel.org
+References: <20251209140141.94407-1-tzimmermann@suse.de>
+ <20251209152734.6851f3ac@fedora>
+ <2b95d76e-2672-4cae-a545-73c407f2b20c@suse.de>
+ <20251209163011.436e613b@fedora>
+ <44d3e6c9-6759-4a76-9016-c9749badab94@suse.de>
+ <20251210102157.76f4ec8f@fedora>
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <20251210102157.76f4ec8f@fedora>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Spam-Flag: NO
+X-Spam-Score: -4.30
+X-Spam-Level: 
+X-Spamd-Result: default: False [-4.30 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-0.997];
+	MIME_GOOD(-0.10)[text/plain];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	FUZZY_RATELIMITED(0.00)[rspamd.com];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	FREEMAIL_CC(0.00)[ffwll.ch,gmail.com,kernel.org,linux.intel.com,amd.com,tomeuvizoso.net,imgtec.com,arm.com,collabora.com,igalia.com,redhat.com,chromium.org,lwn.net,lists.freedesktop.org,lists.linux.dev,vger.kernel.org];
+	RCVD_TLS_ALL(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLzxzh56npx61idbi11ft8b9pb)];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:url,imap1.dmz-prg2.suse.org:helo,suse.de:mid]
 
-Sphinx reports htmldocs warnings:
+Hi
 
-  Documentation/arch/x86/boot.rst:437: ERROR: Malformed table.
-  Text in column margin in table line 2.
+Am 10.12.25 um 10:21 schrieb Boris Brezillon:
+[...]
+> n that, I agree.
+>
+>> Also what stops you from fixing any of this in the context of gem-uma?
+> That's exactly what I want to do, except that, rather than fixing it,
+> I'd like to get it right from the start and progressively move existing
+> GPU/accel drivers using gem-shmem to gem-uma. If you blindly move every
+> GPU/accel drivers currently using gem-shmem to gem-uma (which is just a
+> rebranded gem-shmem), you're just moving the problem, you're not
+> solving it. And all of a sudden, gem-uma, which I wanted to be this
 
-The table header defined the first column width as 2 characters ("=="),
-which is too narrow for entries like "0x10" and "0x13". This caused the
-text to spill into the margin, triggering a docutils parsing failure.
+Just to be clear, I'm trying to get the simple drivers out of the way 
+first. Nothing more. Solving problems with the UMA drivers is out of 
+question wrt this series.
 
-Fix it by extending the first column of assigned boot loader ID to 4
-characters ("====") to fit the widest entries.
+> clean slate with well defined rules, on top of which we can more
+> easily add building blocks for advanced stuff (reclaim, sparse
+> allocation, ...), is back to this far west.
 
-Build environment: Python 3.13.7 Sphinx 8.2.3 docutils 0.22.3
+I've done something similar with GEM VRAM helpers a few years back. We 
+had drivers running TTM on cinsiderably simple hardware. They all went 
+to VRAM helpers at some point Still that took quite some time. With UMA 
+the problem seems more complex and the drivers are moving targets. I 
+feel like this will take years until you see the fruits of that work. 
+All while you have to maintain GEM's UMA and SHMEM code at the same time.
 
-Changes in v3:
- - Minimized the diff to only change the table headers, preserving
-   original indentation and body text, as suggested by Randy Dunlap.
- - No other changes
+>
+>> It should even be easier, as you won't have to keep my use cases in mind.
+> I might be wrong, but KMS use cases are probably not the problematic
+> ones.
+>
+>> In parallel, gem-shmem could go in its own direction.
+> My understanding is that you're primarily targeting KMS drivers, so why
+> don't you fork gem-shem with something called gem-shmem-for-kms (or
+> gem-shmem-dumb) that does just enough for you, and nothing more?
+>
+> I'm saying that with a bit of sarcasm, and I certainly get how painful
+> it is to go and patch all KMS drivers to rename things. But if you think
+> about it for a second, it's just as painful (if not more) to fork
+> gem-uma in all users that might get in the way of a cleaner
+> abstraction. Not only that, but all of a sudden, you need a lot more
+> synchronization to get that approved, and until that happens, you're
+> blocked on the real stuff: designing something that's sounds for
+> more complex use cases GPU/accel drivers care about.
 
-Changes in v2:
- - Dropped accidental whitespace changes (the second chunk in v1).
- - Simplified commit message as suggested by Bagas Sanjaya.
+There's nothing sarcastic about that. Forking from GEM SHMEM in the 
+'opposite direction' would be the other alternative. I can try to 
+provide something like GEM sysmem helpers with a simplified 
+implementation of GEM shmem that provides what the simple drivers need.
 
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
-Tested-by: Randy Dunlap <rdunlap@infradead.org>
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+Best regards
+Thomas
 
-Signed-off-by: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
----
- Documentation/arch/x86/boot.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+>
+>> I'd like to do
+>> some changes and simplifications there, which conflict with where
+>> gem-uma will be heading.
+> Just to be clear, I'm not going to block this if that's the direction
+> people want to take, but I wanted to point out that making it easier for
+> you might mean making others' life harder. When I initially proposed to
+> fork gem-shmem it was not with the goal of pulling all current
+> GPU/accel users in directly, but rather design something that provides
+> the same set of features (with the ability to add more), with better
+> defined rules, so we don't end up in the same situation. What you're
+> doing here is the opposite: gem-uma becomes the gem-shmem's
+> forget-about box, and as a result, it becomes someone else's problem.
+>
+> Regards,
+>
+> Boris
 
-diff --git a/Documentation/arch/x86/boot.rst b/Documentation/arch/x86/boot.rst
-index 6d36ce86fd8e..18574f010d46 100644
---- a/Documentation/arch/x86/boot.rst
-+++ b/Documentation/arch/x86/boot.rst
-@@ -433,7 +433,7 @@ Protocol:	2.00+
-
-   Assigned boot loader IDs:
-
--	== =======================================
-+	==== =======================================
- 	0x0  LILO
- 	     (0x00 reserved for pre-2.00 bootloader)
- 	0x1  Loadlin
-@@ -456,7 +456,7 @@ Protocol:	2.00+
- 	     <http://sebastian-plotz.blogspot.de>
- 	0x12 OVMF UEFI virtualization stack
- 	0x13 barebox
--	== =======================================
-+	==== =======================================
-
-   Please contact <hpa@zytor.com> if you need a bootloader ID value assigned.
-
-
-base-commit: cb015814f8b6eebcbb8e46e111d108892c5e6821
+-- 
 --
-2.52.0
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
+GF: Jochen Jaser, Andrew McDonald, Werner Knoblich, (HRB 36809, AG Nürnberg)
+
 
 
