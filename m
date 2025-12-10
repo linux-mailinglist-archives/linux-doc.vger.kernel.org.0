@@ -1,120 +1,166 @@
-Return-Path: <linux-doc+bounces-69333-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69378-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E51FCCB0F47
-	for <lists+linux-doc@lfdr.de>; Tue, 09 Dec 2025 20:44:51 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 13D49CB1C5C
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 04:10:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 87B733028DA7
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Dec 2025 19:44:50 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AFC63307017D
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 03:10:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D2E66306D40;
-	Tue,  9 Dec 2025 19:44:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 638B8273D6D;
+	Wed, 10 Dec 2025 03:10:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VDsYUDrk"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kNqXwdfA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6269D30649D
-	for <linux-doc@vger.kernel.org>; Tue,  9 Dec 2025 19:44:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77A511F4611
+	for <linux-doc@vger.kernel.org>; Wed, 10 Dec 2025 03:09:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765309489; cv=none; b=ssG4X4omaD3zKhAYgSwSa1vcFBjLREt7PAta4PFl7ycyA4ESq/WkUy31dnrDk+pa1qHVGM535hs1lyYhrQVTwG/DZh6lfvWnPYTtLi3lTWGvd+XlA9WhFyv+oLSkGRNrwt+Ac40gzQ18d03ttibtp+qdnTl7jNJq1KIwUfkjaH4=
+	t=1765336200; cv=none; b=mQLq2dkGxbgWZOnJoVk12VfA2LUpVWpJeb+h+54H8iEzjB4TtE4RYeDlVR7KEBgHINm1l67Kz/PsqjLKgYOYnSf6VqNI3O6Y+xav5piIIN7xZk0L3rxAvRQ94SUHfuUvVza843fWpC0Op+J1yrKvcOeR17fndzigwPKFvv1MR24=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765309489; c=relaxed/simple;
-	bh=eLfvDGu5s4ImYReJmxrx9D5VTM5Uk6aWNcvoNWZtd70=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=HnczPbNnwIYVvLtNfTeNCCDUmA+wmA5KFdw0jyE0Fyf0GSPuDtsM60/F02eiY9VvZmW6Sa3zTuqdTxcbYhlNvwu9BOUpdV0oNu0EfpYWi0egUSOxNLc8SAWK4jp/G6raKT/Qu3qkgL+1S59d2/3bX9/vie9EjH0ShIOuUvQQFm4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VDsYUDrk; arc=none smtp.client-ip=209.85.216.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+	s=arc-20240116; t=1765336200; c=relaxed/simple;
+	bh=B7aH2XS4PZlfh5XVPoWygQZkq+3MH42NPTAX5DhxH0E=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=oV5mnHfoLCINHF1I9mSGsZHho0nzN4lX1IAl0viJy4jReKddEEKJhBJipNjuQ1whQyD0/gQuQ2ThwkzuYUQEdKdvlA7f+ShejKyom27QLpnwQKjWKX2jaO8+866s42rS44bwNObVdin7tK2bPFcHy2zXjY0y9nqB7tTS+Qc+cGA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kNqXwdfA; arc=none smtp.client-ip=209.85.210.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-340e525487eso4780752a91.3
-        for <linux-doc@vger.kernel.org>; Tue, 09 Dec 2025 11:44:48 -0800 (PST)
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-7aad4823079so5717880b3a.0
+        for <linux-doc@vger.kernel.org>; Tue, 09 Dec 2025 19:09:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765309488; x=1765914288; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eLfvDGu5s4ImYReJmxrx9D5VTM5Uk6aWNcvoNWZtd70=;
-        b=VDsYUDrkShBhG2WIZeKRbR4MFsc9rFVJ060zdfj+35PGiQp+3GPrBvIngGdTAv8FZp
-         4Lrx8iUMLmvTbqwtQnBwuuAUUTcXeYlbRfWvvKBYErljTgpGwKxrcDjfm7YJL3oIMy1F
-         7E6NmWokOnGH3XMzORq95DQuAVCh+zWR/4RvLGQYnQvMmqVFBgMNulVnXAmoGNs1v5/Z
-         yzR7sJpl7TIsqGnNFj8mur6iQPxqa/Ro0M2sgSlr7mPbnjLtQVZLurWV3FgjsQPtk2EP
-         a+Jqa5xSVLIAxGY8gSZM7pKLGJFxcI5a9IhhxSfdiT7e79arQ9GVXBWfSYxPo4sZiDl6
-         3aAA==
+        d=gmail.com; s=20230601; t=1765336198; x=1765940998; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+        bh=ianbKooz34rImOXdwQjx9kgMyehj7gRaIoesBFCgQaQ=;
+        b=kNqXwdfAO4qG/hA6UwlV6JErRlgUO3FDSWTWQRjroYeTvd9LOZNxkKHpmitTSUkgt2
+         3qT9K4WEkJvnmCq+Y9vg9Eujho4x3z4NIUgwacZlhiIQ/qQQ+M4XE9iF+xfrTCCBYttA
+         CA+lI1RFL5xpr2JcUyHVN5TPcg5ZtWYPSynooVhZWMU41Nl/2wPSPEI3FaqKt3bwxyCY
+         DivDLmJYTKuczhOMDxKkAn/7UvzQHm4NPPJg5cBYPUxS56glhVKWhc6HgmFB3RqlI40X
+         bVJjUQrbJc9GoFZia28LnQ3wnxa5UuAjd4vWc6PrI6SZPjkHcLVVwty5vSy5wmkocJ+A
+         Vw5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765309488; x=1765914288;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=eLfvDGu5s4ImYReJmxrx9D5VTM5Uk6aWNcvoNWZtd70=;
-        b=LokwZAy+abNs58x0BbMl/QF40WKgqcLWrFfrGHTd0BWGMAu0CqZp+F88tnhHcsiUQC
-         5AbRbxjSil8OqziwapCa8Q9ZmPfHGXtAqYa5mtKepLV6RAEy2xs3Aho5Uj2EXTDSV1bn
-         EkzAh7rSS2VpejLnrCVJOZN/QbYaA059ngXR/PgIR5Rdus1i1sSB/KX88oT8ptpTvkGt
-         vUhHIEHzzRlwYK89aYX8fbM+wtTPf7mDA3g+beOJsa3UNkEJVwMQZtbDF8HhaCzZBe/k
-         4c3NjPFedosujJlIO8bWnLM19akS77WXt1KGMso0+JXYOc4tB3ils4aXDi/4Ko57n+Fa
-         cfaA==
-X-Forwarded-Encrypted: i=1; AJvYcCUZJIYgLo1OZdOZKhaPd/QGQSfRHK4h3woe4APkHIv/m1PdFV9p+hdn4o4gNUv7dtxl2OmFfILBxH8=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzGQGq4by5Al7AVY9l/wqYnu58o6RKi/XD+Co1QBITk31vLfPcK
-	qzXE7inhuJZ4WDIULS6z5DGWFgiLavxDMSEJOfAjd2cRRZTr3fP2U/5S
-X-Gm-Gg: AY/fxX64hZ1xCjZWPMtJMA3RKSASe34VyiMxZFoQatgA8wg4Q3f/JetwSfR0QjFylxS
-	oWpTxk1QIjn+CqWxWbwUI83gUnPT1vOOl4Vrm891cWqzCzY4eRx7bl+5b3Jy6yVIBeqgr13YIbC
-	Hgx4tqUV7rT5bO5ytx+JjVoayGyJmnvRxzySxEXOWwlxRlRmUTqtCI8h36El03r9RRFLUaejt4Q
-	o6NJVAk99fQxee2KJN+lv1NlvHEyKx2dPq64ij+aF+GwlR31D4cPSbbyS2Coi4z2XR3zEBUuOCs
-	tK6C19FlXuPP7nxHamRdjeIzVvkxioT4+YIzfoLSS13rS3nPvVkA9IGOrMN8BWnSsB0cF6x2uzK
-	LGp5RNFi5Dc+/lvtgN1HEXuon8RhP0egZzDQQ+ZZp8tr+KjSQys92JSReGnn1ybD1MONqWE9HlY
-	jsh9czlj4Sly03bN3V6eQ=
-X-Google-Smtp-Source: AGHT+IHSmlXiak5qx7u1HGPsl+hG5bQFTE4+GjA1E5FydBcLB9uUfRw7R0nsErX8uszlOea8oXk8aA==
-X-Received: by 2002:a17:90b:4c50:b0:340:2a16:94be with SMTP id 98e67ed59e1d1-349a24eab31mr11084598a91.4.1765309487645;
-        Tue, 09 Dec 2025 11:44:47 -0800 (PST)
-Received: from LilGuy ([2409:40c2:1295:13e8:41e8:60cd:6181:4fad])
-        by smtp.googlemail.com with ESMTPSA id 98e67ed59e1d1-34a7011d851sm237464a91.8.2025.12.09.11.44.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Dec 2025 11:44:47 -0800 (PST)
-From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
-To: mingo@kernel.org
-Cc: bagasdotme@gmail.com,
-	bp@alien8.de,
-	corbet@lwn.net,
-	dave.hansen@linux.intel.com,
-	david.hunter.linux@gmail.com,
-	hpa@zytor.com,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	mingo@redhat.com,
-	rdunlap@infradead.org,
-	skhan@linuxfoundation.org,
-	swarajgaikwad1925@gmail.com,
-	tglx@linutronix.de,
-	x86@kernel.org
-Subject: Re: [PATCH v2] Documentation: x86/boot: Fix malformed table in boot.rst
-Date: Wed, 10 Dec 2025 01:14:35 +0000
-Message-ID: <20251210011435.6241-1-swarajgaikwad1925@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <aTfjlAKBNeX6my4g@gmail.com>
-References: <aTfjlAKBNeX6my4g@gmail.com>
+        d=1e100.net; s=20230601; t=1765336198; x=1765940998;
+        h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=ianbKooz34rImOXdwQjx9kgMyehj7gRaIoesBFCgQaQ=;
+        b=wcrf/kQkCrRoo/A7kx2hs7Geu+DGjwO4i2WloCCj1xp0/+rCi3PdADuvvxVCNkiS8u
+         1K/F7hYMh5wjlfiW63+d6BVPkj6dGn3nWL7shy239QXTUv5yBMaloMAbdwlqYFWXFtoq
+         SO43oyZ0AIk6/xcSsOMZIISYrq4SJoldjMNupkb/3cVpMpVOqwY74fXtlETXz3upajj6
+         6evc4MFheTEJtjDFwOrkQ/EbIu6tSvjtSYNYSiEqqbI4CNhidBoahNO0bujsdt+ZXiKj
+         XzlxoDzRPNoBG5GNqnOkBKar1Q7sp4F7aEudcR/rvGUbXyQwwJMhxBJQK0jKEY+LLil2
+         6onA==
+X-Forwarded-Encrypted: i=1; AJvYcCX74N7H/zRHCGGewtsqhMU9AI8ikddaaQyNAxudMWIwyRHBNPXovNDAC2R1fFwIs2X9p/VXyWrGo3I=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwhZzEFufWCbXvZ6QdTgw5GgYArf1Dv/19rsuaVZV9rhB9TiyNx
+	iwAevsLO8vU/cJx8YEr2N7+jmTw0C6D5lcoW17OKth9z0DrVE/9Kd69z
+X-Gm-Gg: ASbGncvjPKFek4P6AHZzh8+1EpmrOgQvhriPkLFqsJdZC4IyRiLhgvVGrixK+pyBEYX
+	aTrBYdIiBX91ZP/XBhbcg4kH4gUb0LOud8Vtd9xGMaWKSzvxCCtmgNrtc8j2nRqZX7P7O8yMN7N
+	Jg/CYyn0Y4VJz75IlUSSWmzQy/QhPyhsSbwDnSKkEiXK0i2MB2Rr/Z3a66TZoIlY1tKzQLZRFOB
+	bj3CLj8Dy0IdZb100nquMARmYWcDQr7kResxY1Mo/FFqWX9Q8vljpiROq5BKdtduRE/kPCeHKMj
+	FQC9HeT5C5l5DEqGmH4aIYA4QVL9goP3q25SULtNkIXxzC+JJbxNeI3awMuPP7q5M4fowZK/6yv
+	B+FdN8DLHGiFrBYoAC1EMu6gsGq8fm78uyGha8J9CsxzPavW5BdQXUbVXtdbOwlhSiqTjtgIiqo
+	V9vWKiEqNrrMgwdxIb1qathWscsIR676+mFUlXRZogeWmi+8wIrOAjl/lhX7Y=
+X-Google-Smtp-Source: AGHT+IHykLpwfP6+3LLZJ3743iE3q+tLbmWerWQYn3jraVb76jVa2FrQgMksBu+LhfQZgrjTiE0yAg==
+X-Received: by 2002:a05:7022:69a1:b0:11b:923d:773f with SMTP id a92af1059eb24-11f296467femr842042c88.5.1765336197669;
+        Tue, 09 Dec 2025 19:09:57 -0800 (PST)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11f283d46f1sm5144308c88.16.2025.12.09.19.09.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 09 Dec 2025 19:09:56 -0800 (PST)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <d11e3cf6-3095-46df-a4f2-442d209675b1@roeck-us.net>
+Date: Tue, 9 Dec 2025 19:09:55 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hwmon: (sht3x) add support for SHT85
+From: Guenter Roeck <linux@roeck-us.net>
+To: Antoni Pokusinski <apokusinski01@gmail.com>, jdelvare@suse.com,
+ corbet@lwn.net
+Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20251209175848.5739-1-apokusinski01@gmail.com>
+ <2683b84f-d7d1-4445-b5d3-bed393de34a0@roeck-us.net>
+Content-Language: en-US
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <2683b84f-d7d1-4445-b5d3-bed393de34a0@roeck-us.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Ingo,
+On 12/9/25 13:19, Guenter Roeck wrote:
+> On 12/9/25 09:58, Antoni Pokusinski wrote:
+>> SHT85 is a temperature and humidity sensor with an interface very
+>> similar to SHT3x. However, it does not feature alerts (and therefore
+>> limits).
+>>
+> 
+> The datasheet does suggest that the chip supports both temperature and
+> humidity tracking alert status, which only makes sense if the chip
+> supports alert limits. It does not support an alert _pin_, but that
+> doesn't mean that it does not support limits. I'll want to see definite
+> confirmation that the chip does not support the limit commands.
+> 
 
-I dropped the leading tab/indentation because I noticed that most
-other tables in this file (boot.rst) are left-aligned without indentation.
-I thought it would be better to align this table with the rest of the
-document style while applying the width fix.
-
-However, if the preference is to preserve the original indentation
-to keep the diff minimal and focused solely on the table width fix, I am
-happy to send a v3 that restores the leading tabs.
-
-Please let me know if you would prefer I revert the indentation change.
+Looking closer into the SHT85 datasheet, the sensor chip is actually a SHT35.
+Given that, disabling limit attributes and alarms is neither necessary
+nor acceptable. It isn't even necessary to add "sht85" to the device ID
+table; sht3x works just fine. I don't mind if it is added, but it does
+not need a new chip ID (at least until/unless interrupt support is added
+to the driver).
 
 Thanks,
-Swaraj
+Guenter
+
 
