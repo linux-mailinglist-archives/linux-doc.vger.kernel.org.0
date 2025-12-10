@@ -1,238 +1,164 @@
-Return-Path: <linux-doc+bounces-69384-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69380-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAD73CB287B
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 10:22:11 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 01A4CCB1D82
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 04:58:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 98EA2300644A
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 09:22:10 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AAA91304F654
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Dec 2025 03:58:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9261E302157;
-	Wed, 10 Dec 2025 09:22:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 37A292773D9;
+	Wed, 10 Dec 2025 03:58:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="YamZISxU"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RxrGzlwD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50A5D267729
-	for <linux-doc@vger.kernel.org>; Wed, 10 Dec 2025 09:22:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1E2522128B
+	for <linux-doc@vger.kernel.org>; Wed, 10 Dec 2025 03:58:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765358528; cv=none; b=hpdNbGbVY4B9ws8Wx/mPj9SMgglq70WuNKaQb58d6nh9FP1GGWNXtDS2mXVV/E0E8NZhf0Wd0sqEK7QkwXY92UP6HiJptnLGFog/Fqycvs/veFbd93CGi2rMUaEjp7N1/x6yAX41XFoY0XZog71r5AMlyO0/osIZ2Rm+kzjDvCU=
+	t=1765339117; cv=none; b=aDD64Uw4CLFB4gP887+cI2NRg3mhLRchEF3Gycw7djvJRBKzDCS+GuqqJsGjhaEV1yyWKVO7LlNkQx/dvLozEIkS+2tSDfXG+u5lm+NwHm/nR9NpoOaBA7Vq+yBJF7HtWZNiydUX/Yyd/r58Y4t2ukBA2hyPbo7Wk4xMNQ4aarI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765358528; c=relaxed/simple;
-	bh=YfsF1JLP3HHQTIOiPuocEzd5F4DWI8E+N59UvNMiB/M=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kl2P0cm6y5cQnyly110UKRHgO/drXbgX0a3NL+VmQnbfbU/zaBMkmGqM23ZKKE4CDixr1ckcsuomnnJdPc4lluf2t1JScAOobwUUofLAY+SyyooBbg6ory+b9Tcv/3F4CWS/hPdHuVjN5DAXW7UKEaYJ9TxKQk4S+8/7YOgm8ZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=YamZISxU; arc=none smtp.client-ip=148.251.105.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1765358524;
-	bh=YfsF1JLP3HHQTIOiPuocEzd5F4DWI8E+N59UvNMiB/M=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=YamZISxUJCeNuZQ4cLLLOLIdtVMVe6wgq6Acm3l3SCWc8LBNrAuOdbd9UFFCGGn9D
-	 zLZjxn9tsGDRSS1j4VEUoCPro12h69yrpxcx9gXWyk6fss6BX7wPAQ40U3d9ofpS+m
-	 oM0J7Grk6JDtzM/nDe1x1n38/5ZP77irSVVgBmzIj0B10V0+lqxGs7674zABrO1HNb
-	 bT46PYPJ4UA+tj31f0YTQQ8p2Nirpu1+MHm1/egyY5dIsY7JRyxWkwlaTuWGxYCv4q
-	 nvYFn1obMgZKC6GUQk8eRiToTEjkfdydqz8KHQo/xuvluUGN4fTnKDgeXIuV0/j9w0
-	 nhEKqjDnbuJjQ==
-Received: from fedora (unknown [IPv6:2a01:e0a:2c:6930:d919:a6e:5ea1:8a9f])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bbrezillon)
-	by bali.collaboradmins.com (Postfix) with ESMTPSA id 814D317E04D6;
-	Wed, 10 Dec 2025 10:22:03 +0100 (CET)
-Date: Wed, 10 Dec 2025 10:21:57 +0100
-From: Boris Brezillon <boris.brezillon@collabora.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: simona@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, ogabbay@kernel.org, mamin506@gmail.com,
- lizhi.hou@amd.com, maciej.falkowski@linux.intel.com,
- karol.wachowski@linux.intel.com, tomeu@tomeuvizoso.net,
- frank.binns@imgtec.com, matt.coster@imgtec.com, yuq825@gmail.com,
- robh@kernel.org, steven.price@arm.com, adrian.larumbe@collabora.com,
- liviu.dudau@arm.com, mwen@igalia.com, kraxel@redhat.com,
- dmitry.osipenko@collabora.com, gurchetansingh@chromium.org,
- olvaffe@gmail.com, corbet@lwn.net, dri-devel@lists.freedesktop.org,
- lima@lists.freedesktop.org, virtualization@lists.linux.dev,
- linux-doc@vger.kernel.org
-Subject: Re: [RFC][PATCH 00/13] drm: Introduce GEM-UMA memory management
-Message-ID: <20251210102157.76f4ec8f@fedora>
-In-Reply-To: <44d3e6c9-6759-4a76-9016-c9749badab94@suse.de>
-References: <20251209140141.94407-1-tzimmermann@suse.de>
-	<20251209152734.6851f3ac@fedora>
-	<2b95d76e-2672-4cae-a545-73c407f2b20c@suse.de>
-	<20251209163011.436e613b@fedora>
-	<44d3e6c9-6759-4a76-9016-c9749badab94@suse.de>
-Organization: Collabora
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1765339117; c=relaxed/simple;
+	bh=lL6U5I7FTZTxDBO2M4GdSI/DZFROdk3+cfKw1PEXvSQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=dsHlaVDtQI/bX0J/tGgpJsI/XO6CVRdy8lvvZ//ht4opiNiz/WmqXIsyXXkRCiAlN5KkyszpTHk9aCz1vINIWxGxpjElDF4OK1mgceA3hLoLH6PvICEdJKy4znpi/A/MWvK8y8p6j8p5VmNaNVLrfSgV7vis3AK73EYMvEnh90k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RxrGzlwD; arc=none smtp.client-ip=209.85.210.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-7bf0ad0cb87so7500079b3a.2
+        for <linux-doc@vger.kernel.org>; Tue, 09 Dec 2025 19:58:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1765339115; x=1765943915; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eLTayMZyzyEdMj1XSy9P+nrWbhCMNK8qp29uvdTLWjo=;
+        b=RxrGzlwD6IvREt2rhLkRrFPlOntqzB8M7xMT8apQj5kAr5KCvEZubeBFp3JleASqXI
+         WrgFM2JW6uNCA70nA6SK9S/ezHVPqmeCmTVv7xmRAl6ihkflVxL40ojwU8ha3C6n/PSy
+         JCo1XVnoePvDrV5f0eL409Z1ZeZ5FrdxrXjaf4WBrkFRPogL/Ljr1vBrPs/+QB32u+S3
+         gQmXxBiqR3MgxUBPTOAylKSXJ2xRe/JKhwQvAKuYil2wzEgRo7T/AjBlhZvmiyiaHKTz
+         4c+Xzw5z+Wd/gMj5GFxod5GoKfg06cHzC/hTLZAqZ8HdgfcC/o8ycXF7soWGPN8LMX/t
+         SMmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765339115; x=1765943915;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=eLTayMZyzyEdMj1XSy9P+nrWbhCMNK8qp29uvdTLWjo=;
+        b=uEmoBpKz5xYCYwJmrcpf2d0lhL3vMrGThPzMpESFVER1qFPErn4FgwafKE7V0I9arG
+         Aiiiqd6tlQ1WJMa7D04XdOu3LoXETHeBfDofiuKLywrCwCJQwrg51OHpSWcdgF6MvYQb
+         kHRamw+7Z874VkJIBtIMP7DfATonNF1KcrmeoeuyEUtqdXXPKUSTeGgZ31uVWRPDYnpR
+         K5jWx//xdq9gyurDcguzUIlwizEqTpvPGwxZxaq2XqXGWhQNmCS3IFwe0QrgoN+9M3Uw
+         MGOmFUL57Rgz4FjublAsGe5fMCOGW6XXuYsFe/blOZvHQIkQ5krFkkZpXEmtO0Sqh3W2
+         4n9w==
+X-Forwarded-Encrypted: i=1; AJvYcCV8iPAA0G0kxUsIv/QWExlas6/cERqX2cYErA+hfVtQAKVl/B7I1eE7vfw8eo/QknOvrJCulycLAYY=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy6dl7GLxPhZsYPCmucBiTsnLwCvyfk+4KcLy7vKM6W1KYfcYas
+	p9XUF/6TWmYil+zzc3PcaMIfE9wT2mQyd/k34DXgCPqcazwbHZ9N3ihh
+X-Gm-Gg: ASbGnct1CDhyx6Q+9Ep7rfTvdbtpbv45rVqEq09YMen1+1uK33AYmYwXqRdnPAbP4ir
+	BhbQcjMfn2DsH/MXCCbdtAMHE6/KVC4X1MOJZNvg6Be1wwbjYAJBZQLDFdqllXg7wiA+O8PfRg3
+	AGAjVrmegXb9wQZ2mjJmC3ehD/BsIk5dxRFKo2sJhddxq8169zu/IeE9THdKYOxRdMXHhotrFXT
+	AlZ3H/9Rsd5pGl6Ft+YBgfq4VuQZWnY845AFmCtMlAV+I9ci4TGXTgNQXi6GdPlgjL0FtHiFC9I
+	gP8Mt6lJ43+QhvW6ikko5KzVG5ZMZeYbl9iPgzqDPngtrLngtWiVGjneIjrOxQutakXSkRj1JYj
+	UD7E9J8jHnmvuPV637gVfB3hpQkh5Z5asjAT1HHBid4pLbRRi7DK64xe3dafyGhH39qZV1mhvwZ
+	JN4k5Xs0CdOJCYhPJT6rU=
+X-Google-Smtp-Source: AGHT+IFWwNwz9uWu0CC0l9ch1VCQs0lbE+eC1d/Np3AIjDbTK+dJEy21yqLxbctC7tQRmPjvP/pvxw==
+X-Received: by 2002:a05:6a00:b8e:b0:7e8:43f5:bd19 with SMTP id d2e1a72fcca58-7f22fce6121mr912288b3a.46.1765339114883;
+        Tue, 09 Dec 2025 19:58:34 -0800 (PST)
+Received: from LilGuy ([2409:40c2:1295:13e8:41e8:60cd:6181:4fad])
+        by smtp.googlemail.com with ESMTPSA id d2e1a72fcca58-7e29fb94c05sm17430658b3a.16.2025.12.09.19.58.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 09 Dec 2025 19:58:34 -0800 (PST)
+From: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+To: rdunlap@infradead.org
+Cc: bagasdotme@gmail.com,
+	bp@alien8.de,
+	corbet@lwn.net,
+	dave.hansen@linux.intel.com,
+	david.hunter.linux@gmail.com,
+	hpa@zytor.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	mingo@kernel.org,
+	mingo@redhat.com,
+	skhan@linuxfoundation.org,
+	swarajgaikwad1925@gmail.com,
+	tglx@linutronix.de,
+	x86@kernel.org
+Subject: [PATCH v3] Documentation: x86/boot: Fix malformed table in boot.rst
+Date: Wed, 10 Dec 2025 09:28:14 +0000
+Message-ID: <20251210092814.9986-1-swarajgaikwad1925@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <438a873c-0ca8-43cf-b705-e224d5c57d05@infradead.org>
+References: <438a873c-0ca8-43cf-b705-e224d5c57d05@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Thomas,
+Sphinx reports htmldocs warnings:
 
-On Wed, 10 Dec 2025 08:34:02 +0100
-Thomas Zimmermann <tzimmermann@suse.de> wrote:
+  Documentation/arch/x86/boot.rst:437: ERROR: Malformed table.
+  Text in column margin in table line 2.
 
-> Hi
-> 
-> Am 09.12.25 um 16:30 schrieb Boris Brezillon:
-> > On Tue, 9 Dec 2025 15:51:21 +0100
-> > Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> >  
-> >> Hi
-> >>
-> >> Am 09.12.25 um 15:27 schrieb Boris Brezillon:  
-> >>> On Tue,  9 Dec 2025 14:41:57 +0100
-> >>> Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> >>>     
-> >>>> Duplicate GEM-SHMEM to GEM-UMA. Convert all DRM drivers for UMA
-> >>>> systems if they currently use GEM-SHMEM.
-> >>>>
-> >>>> Many DRM drivers for hardware with Unified Memory Architecture (UMA)
-> >>>> currently builds upon GEM-SHMEM and extends the helpers with features
-> >>>> for managing the GPU MMU. This allows the GPU to access the GEM buffer
-> >>>> content for its operation.
-> >>>>
-> >>>> There is another, larger, set of DRM drivers that use GEM-SHMEM merely
-> >>>> as buffer management with no hardware support. These drivers copy the
-> >>>> buffer content to the GPU on each page flip. The GPU itself has no direct
-> >>>> access. Hardware of this type is usually in servers, behind slow busses
-> >>>> (SPI, USB), or provided by firmware (drivers in sysfb/).
-> >>>>
-> >>>> After some discussion with Boris on the future of GEM-SHMEM, it seems
-> >>>> to me that both use cases more and more diverge from each other. The
-> >>>> most prominent example is the implementation of gem_prime_import,
-> >>>> where both use cases use distinct approaches.
-> >>>>
-> >>>> So we discussed the introduction of a GEM-UMA helper library for
-> >>>> UMA-based hardware. GEM-UMA will remain flexible enough for drivers
-> >>>> to extend it for their use case. GEM-SHMEM will become focused on the
-> >>>> simple-hardware use case. The benefit for both libraries is that they
-> >>>> will be easier to understand and maintain. GEM-SHMEM can be simplified
-> >>>> signiifcantly, I think.
-> >>>>
-> >>>> This RFC series introduces GEM-UMA and converts the UMA-related drivers.
-> >>>>
-> >>>> Patches 1 and 2 fix issues in GEM-SHMEM, so that we don't duplicate
-> >>>> errornous code.
-> >>>>
-> >>>> Patch 3 copies GEM-SHMEM to GEM-UMA. Patch 4 then does soem obvious
-> >>>> cleanups of unnecessary code.  
-> >>> Instead of copying the code as-is, I'd rather take a step back and think
-> >>> about what we need and how we want to handle more complex stuff, like
-> >>> reclaim. I've started working on a shrinker for panthor [1], and as part
-> >>> of this series, I've added a commit implementing just enough to replace
-> >>> what gem-shmem currently provides. Feels like the new GEM-UMA thing
-> >>> could be designed on a composition rather than inheritance model,
-> >>> where we have sub-components (backing, cpu_map, gpu_map) that can be
-> >>> pulled in and re-used by the driver implementation. The common helpers
-> >>> would take those sub-components instead of a plain GEM object. That
-> >>> would leave the drivers free of how their internal gem_object fields are
-> >>> laid out and wouldn't require overloading the ->gem_create_object()
-> >>> function. It seems to be that it would better match the model you were
-> >>> describing the other day.  
-> >> Yeah, I've seen your update to that series. Making individual parts of
-> >> the memory manager freely composable with each other is a fine idea.
-> >>
-> >> But the flipside is that I also want the simple drivers to move away
-> >> from the flexible approach that GEM-SHMEM currently takes. There are
-> >> many drivers that do not need or want that. These drivers benefit from
-> >> something that is self contained. Many of the drivers are also hardly
-> >> maintained, so simplifying things will also be helpful.
-> >>
-> >> I could have added a new GEM implementation for these drivers, but there
-> >> are less UMA drivers to convert and the GEM-UMA naming generally fits
-> >> better than GEM-SHMEM.
-> >>
-> >> I'd rather have GEM-UMA and evolve it from where it stands now; and also
-> >> evolve GEM-SHMEM in a different direction. There's a difference in
-> >> concepts here.  
-> > Problem is, we'll be stuck trying to evolve gem-uma to something
-> > cleaner because of the existing abuse of gem-shmem that you're moving
-> > to gem-uma, so I'm not sure I like the idea to be honest. I'm all for
-> > this gem-uma thing, but I'm not convinced rushing it in is the right
-> > solution.  
-> 
-> The abuse you're talking about is what you mentioned about ivpu? How it 
-> uses the gem-shmem internals, right? Ivpu can get its own copy of 
-> gem-shmem, so that the developers can work it out.
+The table header defined the first column width as 2 characters ("=="),
+which is too narrow for entries like "0x10" and "0x13". This caused the
+text to spill into the margin, triggering a docutils parsing failure.
 
-There's that one, but there's also panfrost/lima manually filling the
-pages array for their on-fault-allocation mechanism, and probably other
-funky stuff I didn't notice yet.
+Fix it by extending the first column of assigned boot loader ID to 4
+characters ("====") to fit the widest entries.
 
-> There's no benefit in 
-> sharing code at all cost. Code sharing only make sense if the callers 
-> are conceptually aligned on what the callee does.
+Build environment: Python 3.13.7 Sphinx 8.2.3 docutils 0.22.3
 
-At this point I think I'm clear on what you think about code sharing,
-and I can pretty safely say I don't fully agree with you on this point
-:P. IMHO, there's benefit in sharing code when the rules are clearly
-defined, but gem-shmem has been so lax that we reached a point where it
-has become the far west, and everyone happily manipulates gem_shmem
-internals without the core helpers knowing. That's when it becomes a
-mess, on that, I agree.
+Changes in v3:
+ - Minimized the diff to only change the table headers, preserving
+   original indentation and body text, as suggested by Randy Dunlap.
+ - No other changes
 
-> 
-> Also what stops you from fixing any of this in the context of gem-uma?
+Changes in v2:
+ - Dropped accidental whitespace changes (the second chunk in v1).
+ - Simplified commit message as suggested by Bagas Sanjaya.
 
-That's exactly what I want to do, except that, rather than fixing it,
-I'd like to get it right from the start and progressively move existing
-GPU/accel drivers using gem-shmem to gem-uma. If you blindly move every
-GPU/accel drivers currently using gem-shmem to gem-uma (which is just a
-rebranded gem-shmem), you're just moving the problem, you're not
-solving it. And all of a sudden, gem-uma, which I wanted to be this
-clean slate with well defined rules, on top of which we can more
-easily add building blocks for advanced stuff (reclaim, sparse
-allocation, ...), is back to this far west.
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
+Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
 
-> It should even be easier, as you won't have to keep my use cases in mind.
+Signed-off-by: Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
+---
+ Documentation/arch/x86/boot.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-I might be wrong, but KMS use cases are probably not the problematic
-ones.
+diff --git a/Documentation/arch/x86/boot.rst b/Documentation/arch/x86/boot.rst
+index 6d36ce86fd8e..18574f010d46 100644
+--- a/Documentation/arch/x86/boot.rst
++++ b/Documentation/arch/x86/boot.rst
+@@ -433,7 +433,7 @@ Protocol:	2.00+
 
-> 
-> In parallel, gem-shmem could go in its own direction.
+   Assigned boot loader IDs:
 
-My understanding is that you're primarily targeting KMS drivers, so why
-don't you fork gem-shem with something called gem-shmem-for-kms (or
-gem-shmem-dumb) that does just enough for you, and nothing more?
+-	== =======================================
++	==== =======================================
+ 	0x0  LILO
+ 	     (0x00 reserved for pre-2.00 bootloader)
+ 	0x1  Loadlin
+@@ -456,7 +456,7 @@ Protocol:	2.00+
+ 	     <http://sebastian-plotz.blogspot.de>
+ 	0x12 OVMF UEFI virtualization stack
+ 	0x13 barebox
+-	== =======================================
++	==== =======================================
 
-I'm saying that with a bit of sarcasm, and I certainly get how painful
-it is to go and patch all KMS drivers to rename things. But if you think
-about it for a second, it's just as painful (if not more) to fork
-gem-uma in all users that might get in the way of a cleaner
-abstraction. Not only that, but all of a sudden, you need a lot more
-synchronization to get that approved, and until that happens, you're
-blocked on the real stuff: designing something that's sounds for
-more complex use cases GPU/accel drivers care about.
+   Please contact <hpa@zytor.com> if you need a bootloader ID value assigned.
 
-> I'd like to do 
-> some changes and simplifications there, which conflict with where 
-> gem-uma will be heading.
 
-Just to be clear, I'm not going to block this if that's the direction
-people want to take, but I wanted to point out that making it easier for
-you might mean making others' life harder. When I initially proposed to
-fork gem-shmem it was not with the goal of pulling all current
-GPU/accel users in directly, but rather design something that provides
-the same set of features (with the ability to add more), with better
-defined rules, so we don't end up in the same situation. What you're
-doing here is the opposite: gem-uma becomes the gem-shmem's
-forget-about box, and as a result, it becomes someone else's problem.
+base-commit: cb015814f8b6eebcbb8e46e111d108892c5e6821
+--
+2.52.0
 
-Regards,
-
-Boris
 
