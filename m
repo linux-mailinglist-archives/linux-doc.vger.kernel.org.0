@@ -1,115 +1,163 @@
-Return-Path: <linux-doc+bounces-69554-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69556-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96332CB7B61
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 03:55:32 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A2AD8CB7F87
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 06:53:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2335B300552E
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 02:55:30 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 91339303D6B8
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 05:53:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 45AA229AB02;
-	Fri, 12 Dec 2025 02:55:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D96A24EF76;
+	Fri, 12 Dec 2025 05:53:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="nPqwZ4+H"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AyO/BSfw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F283299947;
-	Fri, 12 Dec 2025 02:55:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8E823C465;
+	Fri, 12 Dec 2025 05:53:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765508128; cv=none; b=QZS3n2uNO+lG0CnmdrGLQVezOwo4h5WtsRRWMEuUSRLwliIQrzhMOrojjR3hRvSb2gnJHuL6pcsm09HWnmnvd/b5rBqbXLnTu4g6MtxZBdqNLgyzCSWmICBz7unS828J5a8JokoQe3pwv7k5t1YRPVL5mAjl0VAms4xUveMiB3w=
+	t=1765518802; cv=none; b=ls8Bs8YjOTnJtho1gY+NFjisv4S2hK4tY9xBaECDiZmX7moo0eMkFsL+8fxIbY+wVsIz7DMZx2e0vvrESuoXn+dsNbt/MTU8k97SauT0SA67QHsvrYbrytcZt/yIuz+UfMjXd77g0TCj6qIFhBvAYZy7pM6Sxd6+WtVjMQN0+gM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765508128; c=relaxed/simple;
-	bh=t84hamvCTNn8P6GklBvJVrOeaVIe6R0pGBpn8MhDhdA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ph4WmOVc3m1bwtHer7VndEXNrwO/iVMTVSRQV7OsWX4qVre0eH4i2JSx3WdgiIX55z1PW2spUjvDoKHl2B+gxcNf2SAh5ejLkwOM8rQGr70p3qGoeFvgMCN60sOVSE8jmDlld1Eb4sbcVOUcfmRZwj+jsdGuDRw3+6RM3WBEqGo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=nPqwZ4+H; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1765508126; x=1797044126;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=t84hamvCTNn8P6GklBvJVrOeaVIe6R0pGBpn8MhDhdA=;
-  b=nPqwZ4+HHgKLXjPX8+mysUvE5lr94cKjinA0DhHFnKR6qR8kRQmfMiZ4
-   xtx3gdWUEdvnnLyFUpPvArlhQzDuJIudWjEh3tyy/L5knHBxFRid/r6/w
-   g778JxvDC2vVL17vuUr4Upj5HkOICzFxQiQLG7qOUedB//bWmZSidFGrC
-   Uc1/qbjl63yp1H0Z80aNf56AKQK8IeXYKUVrisNbBiPdOYDbxwXnZVvrl
-   C4ErQ+3c0s0Af//Ec9vCQ+auLdzja9YtKQxvcXPkPOqCbLkUI3LCBzlnm
-   aByYX6JWlgcRxkrzOEvfpjgs0eck/g/Mlvv0r2vq+cKaR00UULovneLSL
-   g==;
-X-CSE-ConnectionGUID: e8ItgmSETMmAXRlpgOk/9A==
-X-CSE-MsgGUID: 4Hp3uQpyQEe/ZElHv3bIWw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11635"; a="67429720"
-X-IronPort-AV: E=Sophos;i="6.20,256,1758610800"; 
-   d="scan'208";a="67429720"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Dec 2025 18:55:20 -0800
-X-CSE-ConnectionGUID: 6LZGlbssSyWqRzU6u0sSjQ==
-X-CSE-MsgGUID: yv0vBOInTSuW28cqNqT7qw==
-X-ExtLoop1: 1
-Received: from lkp-server01.sh.intel.com (HELO d335e3c6db51) ([10.239.97.150])
-  by fmviesa003.fm.intel.com with ESMTP; 11 Dec 2025 18:55:13 -0800
-Received: from kbuild by d335e3c6db51 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vTtJG-000000005PB-3q4X;
-	Fri, 12 Dec 2025 02:55:10 +0000
-Date: Fri, 12 Dec 2025 10:55:04 +0800
-From: kernel test robot <lkp@intel.com>
-To: Chen Ridong <chenridong@huaweicloud.com>, akpm@linux-foundation.org,
-	axelrasmussen@google.com, yuanchu@google.com, weixugc@google.com,
-	david@kernel.org, lorenzo.stoakes@oracle.com,
-	Liam.Howlett@oracle.com, vbabka@suse.cz, rppt@kernel.org,
-	surenb@google.com, mhocko@suse.com, corbet@lwn.net,
-	hannes@cmpxchg.org, roman.gushchin@linux.dev,
-	shakeel.butt@linux.dev, muchun.song@linux.dev,
-	zhengqi.arch@bytedance.com
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, linux-mm@kvack.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	cgroups@vger.kernel.org, lujialin4@huawei.com,
-	chenridong@huaweicloud.com, zhongjinji@honor.com
-Subject: Re: [PATCH -next 3/5] mm/mglru: extend shrink_one for both lrugen
- and non-lrugen
-Message-ID: <202512121027.03z9qd08-lkp@intel.com>
-References: <20251209012557.1949239-4-chenridong@huaweicloud.com>
+	s=arc-20240116; t=1765518802; c=relaxed/simple;
+	bh=hqZiXxUv6smJHZEauESfPalDA9+KANqTpadXMEusfNw=;
+	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc; b=UtSESvPkb/iSuX3SpjXZjQYcz5M0VIDGRnSVTJhdoyrs5Bi5tJfutSTpmE0Eixc8gKJ+XepFxKYjQDHI5BQCpqtJasYvaQmOaFN3QgInhQiuuC9pwYnKICIwru0JM+f34FyQLq5I7ynY1OS3eQnlMydMCH/qUQNh2CQLNHU0rZs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AyO/BSfw; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E4EAC4CEF1;
+	Fri, 12 Dec 2025 05:53:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1765518802;
+	bh=hqZiXxUv6smJHZEauESfPalDA9+KANqTpadXMEusfNw=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+	b=AyO/BSfwTPEnPYiKTNe49XE5ReOcZayLHxn1jhIueisyharCn+IGjtVnILr1TyT4G
+	 nKspnHRVYrODD0i8/slxWhZO45GVoryW8+V/nxlc/cl74nTuJRbLhh3ggNHZOEBuYb
+	 QDmLjiWrVjXjswh87/9uwuRkEI8eFewPySbNTeNTwGLTcMN1WG3UEMMW4dyWT3R8WC
+	 usqvWUjSdiWX6RPs7TcBpBmWUvNqIWTkoQltHM7P5Np0sArdIfW5uDHthsrsmogOdO
+	 hIkW5ifAR2CVWEU0QaSLWbDYhAy2B4dDGsH3opzA5PTXmucpnskg1uCN7anY9zjNbX
+	 o+vLEGqelWAfA==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id F34E13809A37;
+	Fri, 12 Dec 2025 05:50:16 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251209012557.1949239-4-chenridong@huaweicloud.com>
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v26 00/28] riscv control-flow integrity for usermode
+From: patchwork-bot+linux-riscv@kernel.org
+Message-Id: 
+ <176551861579.2032148.13920544388182691102.git-patchwork-notify@kernel.org>
+Date: Fri, 12 Dec 2025 05:50:15 +0000
+References: <20251211-v5_user_cfi_series-v26-0-f0f419e81ac0@rivosinc.com>
+In-Reply-To: <20251211-v5_user_cfi_series-v26-0-f0f419e81ac0@rivosinc.com>
+To: Deepak Gupta <debug@rivosinc.com>
+Cc: linux-riscv@lists.infradead.org, tglx@linutronix.de, mingo@redhat.com,
+ bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+ akpm@linux-foundation.org, Liam.Howlett@oracle.com, vbabka@suse.cz,
+ lorenzo.stoakes@oracle.com, paul.walmsley@sifive.com, palmer@dabbelt.com,
+ aou@eecs.berkeley.edu, conor@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+ arnd@arndb.de, brauner@kernel.org, peterz@infradead.org, oleg@redhat.com,
+ ebiederm@xmission.com, kees@kernel.org, corbet@lwn.net, shuah@kernel.org,
+ jannh@google.com, conor+dt@kernel.org, ojeda@kernel.org,
+ alex.gaynor@gmail.com, boqun.feng@gmail.com, gary@garyguo.net,
+ bjorn3_gh@protonmail.com, a.hindborg@kernel.org, aliceryhl@google.com,
+ tmgross@umich.edu, lossin@kernel.org, linux-kernel@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+ devicetree@vger.kernel.org, linux-arch@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ alistair.francis@wdc.com, richard.henderson@linaro.org, jim.shu@sifive.com,
+ andybnac@gmail.com, kito.cheng@sifive.com, charlie@rivosinc.com,
+ atishp@rivosinc.com, evan@rivosinc.com, cleger@rivosinc.com,
+ alexghiti@rivosinc.com, samitolvanen@google.com, broonie@kernel.org,
+ rick.p.edgecombe@intel.com, rust-for-linux@vger.kernel.org,
+ zong.li@sifive.com, david@redhat.com, andreas.korb@aisec.fraunhofer.de,
+ valentin.haudiquet@canonical.com, cmirabil@redhat.com
 
-Hi Chen,
+Hello:
 
-kernel test robot noticed the following build warnings:
+This series was applied to riscv/linux.git (for-next)
+by Paul Walmsley <pjw@kernel.org>:
 
-[auto build test WARNING on akpm-mm/mm-everything]
+On Thu, 11 Dec 2025 09:20:33 -0800 you wrote:
+> v26: CONFIG_RISCV_USER_CFI depends on CONFIG_MMU (dependency of shadow stack
+> on MMU). Used b4 to pick tags, apparantly it messed up some tag picks. Fixing it
+> 
+> v25: Removal of `riscv_nousercfi` from `cpufeature.c` and instead placing
+> it as extern in `usercfi.h` was leading to build error whene cfi config
+> is not selected. Placed `riscv_nousercfi` outside cfi config ifdef block
+> in `usercfi.h`
+> 
+> [...]
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Chen-Ridong/mm-mglru-use-mem_cgroup_iter-for-global-reclaim/20251209-094913
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git mm-everything
-patch link:    https://lore.kernel.org/r/20251209012557.1949239-4-chenridong%40huaweicloud.com
-patch subject: [PATCH -next 3/5] mm/mglru: extend shrink_one for both lrugen and non-lrugen
-config: x86_64-randconfig-004-20251212 (https://download.01.org/0day-ci/archive/20251212/202512121027.03z9qd08-lkp@intel.com/config)
-compiler: clang version 20.1.8 (https://github.com/llvm/llvm-project 87f0227cb60147a26a1eeb4fb06e3b505e9c7261)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251212/202512121027.03z9qd08-lkp@intel.com/reproduce)
+Here is the summary with links:
+  - [v26,01/28] mm: VM_SHADOW_STACK definition for riscv
+    https://git.kernel.org/riscv/c/e53803e4a8c5
+  - [v26,02/28] dt-bindings: riscv: zicfilp and zicfiss in dt-bindings (extensions.yaml)
+    https://git.kernel.org/riscv/c/d6c9672baa77
+  - [v26,03/28] riscv: zicfiss / zicfilp enumeration
+    (no matching commit)
+  - [v26,04/28] riscv: zicfiss / zicfilp extension csr and bit definitions
+    (no matching commit)
+  - [v26,05/28] riscv: usercfi state for task and save/restore of CSR_SSP on trap entry/exit
+    https://git.kernel.org/riscv/c/2acf75f432dc
+  - [v26,06/28] riscv/mm : ensure PROT_WRITE leads to VM_READ | VM_WRITE
+    https://git.kernel.org/riscv/c/813c549f5b08
+  - [v26,07/28] riscv/mm: manufacture shadow stack pte
+    https://git.kernel.org/riscv/c/d3cea05f52a7
+  - [v26,08/28] riscv/mm: teach pte_mkwrite to manufacture shadow stack PTEs
+    https://git.kernel.org/riscv/c/444404ff99bf
+  - [v26,09/28] riscv/mm: write protect and shadow stack
+    https://git.kernel.org/riscv/c/5da46726825d
+  - [v26,10/28] riscv/mm: Implement map_shadow_stack() syscall
+    (no matching commit)
+  - [v26,11/28] riscv/shstk: If needed allocate a new shadow stack on clone
+    (no matching commit)
+  - [v26,12/28] riscv: Implements arch agnostic shadow stack prctls
+    https://git.kernel.org/riscv/c/46f2da262367
+  - [v26,13/28] prctl: arch-agnostic prctl for indirect branch tracking
+    https://git.kernel.org/riscv/c/5b23a2d70976
+  - [v26,14/28] riscv: Implements arch agnostic indirect branch tracking prctls
+    https://git.kernel.org/riscv/c/2b1bd48147c5
+  - [v26,15/28] riscv/traps: Introduce software check exception and uprobe handling
+    (no matching commit)
+  - [v26,16/28] riscv: signal: abstract header saving for setup_sigcontext
+    (no matching commit)
+  - [v26,17/28] riscv/signal: save and restore of shadow stack for signal
+    (no matching commit)
+  - [v26,18/28] riscv/kernel: update __show_regs to print shadow stack register
+    https://git.kernel.org/riscv/c/35d89b5390a9
+  - [v26,19/28] riscv/ptrace: riscv cfi status and state via ptrace and in core files
+    (no matching commit)
+  - [v26,20/28] riscv/hwprobe: zicfilp / zicfiss enumeration in hwprobe
+    (no matching commit)
+  - [v26,21/28] riscv: kernel command line option to opt out of user cfi
+    (no matching commit)
+  - [v26,22/28] riscv: enable kernel access to shadow stack memory via FWFT sbi call
+    https://git.kernel.org/riscv/c/ef83c58ab12f
+  - [v26,23/28] arch/riscv: compile vdso with landing pad and shadow stack note
+    (no matching commit)
+  - [v26,24/28] arch/riscv: dual vdso creation logic and select vdso based on hw
+    https://git.kernel.org/riscv/c/fbe7823a03f1
+  - [v26,25/28] riscv: create a config for shadow stack and landing pad instr support
+    (no matching commit)
+  - [v26,26/28] riscv: Documentation for landing pad / indirect branch tracking
+    (no matching commit)
+  - [v26,27/28] riscv: Documentation for shadow stack on riscv
+    (no matching commit)
+  - [v26,28/28] kselftest/riscv: kselftest for user mode cfi
+    (no matching commit)
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202512121027.03z9qd08-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> mm/vmscan.o: warning: objtool: shrink_one+0xeb2: sibling call from callable instruction with modified stack frame
-
+You are awesome, thank you!
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
