@@ -1,180 +1,313 @@
-Return-Path: <linux-doc+bounces-69593-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69596-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35D48CB8DA9
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 14:03:45 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C63A2CB8EEF
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 14:57:49 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DC6453049B2C
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 13:03:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 13AC3306A06D
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Dec 2025 13:57:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2142931ED7C;
-	Fri, 12 Dec 2025 13:03:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A2C7B26E175;
+	Fri, 12 Dec 2025 13:57:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=phytec.de header.i=@phytec.de header.b="PXbc6xJE"
+	dkim=pass (2048-bit key) header.d=amacapital-net.20230601.gappssmtp.com header.i=@amacapital-net.20230601.gappssmtp.com header.b="vxDyszaG"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11023116.outbound.protection.outlook.com [40.107.162.116])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A843B1F0E32;
-	Fri, 12 Dec 2025 13:03:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.162.116
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765544623; cv=fail; b=cSN7GAzLNcfEBRB9CBZEyyS1q1eab6TBi2v3Va5RiGmxBZLCRIl3N0BJg9VeloXKCWvbyQ68Jw/K+pTOaszn5Zjj9sh3AWqrOWwFDxjC5ESYIIXnEo2MsbWtEpvgk0sKUHlcy0w1lJRq4gSyvT1crjlrTpxfypmXAGeBuRsxeDM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765544623; c=relaxed/simple;
-	bh=JpJRAodAivd1PmSqiDYD3a4jQ9z/mExBJdkGX06g5y8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:References:
-	 In-Reply-To:To:CC; b=bOmFX8xvu1AlFbtjD+noA9esTRKKRrsMIW0UaNTqOSiQyTd+2dawfCTKy8oIqvAMiiC5AWha1JATRe49weRQTVApFF7kmkgTae/PwpDQLU2HU7ljAKTE5NJDEL49oLYVLZanuTHrVA28DitnMgQTh6vMwGzxAF8AMJt1CNUbJ8A=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=phytec.de; spf=pass smtp.mailfrom=phytec.de; dkim=pass (2048-bit key) header.d=phytec.de header.i=@phytec.de header.b=PXbc6xJE; arc=fail smtp.client-ip=40.107.162.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Yl7LTkKFESxZLG6/InqPt95YGVGmK/q5nfg7hTsI347nquteWLoD6IiPp75xaOPlnyoto/tw458F36FFbdvaxsLwpFY21+KjGie+WYsZsxY6I0SzBy6o4qyd/PXZRatznfU+Xd8Or4ZMx7qHwDnK93lPRiJPnM926qS/iKxJN7xb3hFQxo0L5yIt9LBQBrypdR/pcbP64TtH0E7XNydcXdh2iTOhEOFPtpCa1GkFNuyM8+A8TwWGzebW/uZrueoJUTsNpv/aMIEO5gEH+oFTxk9USmz7Gaf2QlmhUJemM3ZfmaZlcZc73o0etmg8DKJdSn7nxhnMc+4EHRqSXhgNDw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DyzWep2w+Bh6EsF/FiPPpHqMF+KGam9JwV0q/uKgapM=;
- b=IzscP7nx56zXfEcsnjDdOo7Oyc8haggreYZ62kDQJKUbFFhudmonKu+L6Fw9Yp20BD3Wd/bLoGg+JJONHko1Up77EP0Z/cv4uvSfp1Va3gimno2GFyOYBGgSa1XJZ0duGei6QoMdGntSXScfyIBkdwv+/GIUQMAMtKl5l/Utl8WI86FSTIUty9/WzuQrwBjtgbZpJwIGpMGssgL+YoiltYaV5xPhxVjnoVyBNgbGGnyk8iCXKKkCo4w9T1j42z2osD4vO6SfG0sruiznLqKb9ZFohUtbw2DmOOvGBdZSH72M3Qnt2tabUN1B+GJf83ZldIfT9hj7D/n88+Gi0rjqbA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=kernel.org smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DyzWep2w+Bh6EsF/FiPPpHqMF+KGam9JwV0q/uKgapM=;
- b=PXbc6xJEjbsj/GOUGc30Qi+8xi5CpA/t6Shp4H/v5BRqk0Nj4/tue+TPetVFOO56riFMG9fk3J4ioosT+E+UivfAaIRJGjz7QcJIx6kLUlv4nW0zB4sxkJVx9kp2MjscjEukugO/XVRCaxrXjc471X9cVEzgQv9aTFD2LA6rVm9XAXX9EK9/9oy6iQBxyH9m0RJLJCSCAqCjaQQdriKTuJeCHgg5nWempN2JkD2r1MiNAkRDQebCyU2hB6nhYjbk4OTL26jla/cuL1Uxw0CaLStc1aTEe2v4SjoyYUC4LX51TZeEHEcAdGChFHIdQh1Tv8/OvSn1C8zfknMB8yNAAQ==
-Received: from DU2PR04CA0233.eurprd04.prod.outlook.com (2603:10a6:10:2b1::28)
- by PA1P195MB2497.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:45b::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.11; Fri, 12 Dec
- 2025 13:03:35 +0000
-Received: from DB5PEPF00014B96.eurprd02.prod.outlook.com
- (2603:10a6:10:2b1:cafe::e3) by DU2PR04CA0233.outlook.office365.com
- (2603:10a6:10:2b1::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9412.9 via Frontend Transport; Fri,
- 12 Dec 2025 13:03:26 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- DB5PEPF00014B96.mail.protection.outlook.com (10.167.8.234) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9412.4 via Frontend Transport; Fri, 12 Dec 2025 13:03:35 +0000
-Received: from llp-jremmet.phytec.de (172.25.39.81) by Postix.phytec.de
- (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Fri, 12 Dec
- 2025 14:03:33 +0100
-From: Jan Remmet <j.remmet@phytec.de>
-Date: Fri, 12 Dec 2025 14:03:18 +0100
-Subject: [PATCH 3/3] dt-bindings: gpio: gpio-pca95xx: Add tcal6408 and
- tcal6416
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 665EF26B08F
+	for <linux-doc@vger.kernel.org>; Fri, 12 Dec 2025 13:57:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.171
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1765547865; cv=none; b=Q6xg1sm0a/+D8ze/hx1p2hvlgsMbNAwSG4JImD5YePGbtMh05m2ydFX8RnyoGgFV+h/QxcbGP3LRUP6w0ujL8tGT4cGGGr1cKtKyepAaDQrNPFbN93AoNRbox0SisMSNrVB054R8Q3r28OJkSVj3P0sehdaEp6Y3dO8WgCxzZZE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1765547865; c=relaxed/simple;
+	bh=icrGdMhjDIagrBu2lgFtkezTQ8WVqwRjwGBoeApRRc8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=KUyDokAWuPAakpIo3vp9ug7ewJK3aAIidAochXoG07+QDmJcmJH3WmxhpoGROUZWSmq6ZvwadSxIOYqN11o7C3KMtDsaD2qHKj6MnQTcfHlpcdFZuW7gqXHkSB+GzDEXyB9PMYGzSfPHyV3YlT1GcXrfyO2yl/xARCJ+I67kpwo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=amacapital.net; spf=pass smtp.mailfrom=amacapital.net; dkim=pass (2048-bit key) header.d=amacapital-net.20230601.gappssmtp.com header.i=@amacapital-net.20230601.gappssmtp.com header.b=vxDyszaG; arc=none smtp.client-ip=209.85.208.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=amacapital.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amacapital.net
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-37d056f5703so11197551fa.0
+        for <linux-doc@vger.kernel.org>; Fri, 12 Dec 2025 05:57:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=amacapital-net.20230601.gappssmtp.com; s=20230601; t=1765547861; x=1766152661; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=BiHiQxteOsa7hHrqGiFGJT3ihKG7RV3tZB23jXSBDsQ=;
+        b=vxDyszaGBZnDbJrj9mXu1QArgLXc2gxenLFFvcZdO0KuWyGDjrvw2xX+VPOr9bzk5p
+         Lz+Jdsb//LaalBSJ8c0tl3Yki2yC1j5uTghJ1agGMGgPFObECQzZLdUXCkeTX1ySPAX9
+         5BWCx1Xj8UhwgKTIh2ca2gGXdmCJ5si4Rwxj95zYgVLIu9PevLBst6h9ifFY5T3X9OKG
+         qD5mLWThyiy/qFHTHTZolpsbfBAcz7vy6bJbZMXzOj/ks0YnF3v4XA0puZ62Z+Akobws
+         pjleJQCeYemzrP6TorBcIrYmG8MDNyF59MCM6ULPF1rxNB55RY94t69f1Yl+JuQxLMfl
+         Mdog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765547861; x=1766152661;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=BiHiQxteOsa7hHrqGiFGJT3ihKG7RV3tZB23jXSBDsQ=;
+        b=RR+GmbRdoHFaznBs2bBiLaciI5N4qN9JefbbaLJmsqnPm07WLOFrq3krMu4r7ggZ6W
+         Jj8XDuqytrHTCz25msxmsJjuCZfAanEsuFARGiFE9mWDjtDuJHbv0AeKMwrdrh5EdLV4
+         tQJox9gGbAvTKm51j3LyZy1dq8XD+CnZrPO0iTcgD5LCfMGfMFb4rgA2OAzwhaNzT3Gj
+         A9cnoo2b5Py2g4r2oswcdVkL21IP95Z0s324Ijb131RNwvMs/Kr2yQ9W59NFZGHZvPLv
+         2YLpPIWsxEzJC7oTHXrNkee+NaxdrRIWaV8QJXSAJsnMSnL1cbvWJlVdgCtLisEh/5BB
+         tbBA==
+X-Forwarded-Encrypted: i=1; AJvYcCVzPHhrkYSdZzl6rXlMHJeruhvQzGy0D3OfPd+zeJjxMQauYwrw7Ahe+ywDwRd+b99roHj52CRFfaw=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxQuztsHUrl18RF6q9DfJH4+1Osrru/Xk7YYmiYDZTGUCkcUjmU
+	43N0aPf+ah+rI6G5zJuxGjji2iVegoAEiLwPOesR+yESbCYp0xBaFPWOQ/rGNuFiTkVoaAf8Vth
+	1yYdb/tgUapSRpHYKN3YMqDcEiuFx2Pu4b7pP56lB
+X-Gm-Gg: AY/fxX5eQX8lsUVyGbYdU0rUR9RByh+FRRlmYQ5k9z1UXBwLyH5PsU2LSkm9tfZQSXA
+	SXz2zNFE5Shps8/Ie5H7NNZ3VwXIl3YSLCLCEGeQyYn1sODI+4afHabpJ/pleJqfF6osLSTByz3
+	B5IBHVZ36kSvkjopfIQr0dyWW2Ii/VZi6Hn1CEtR91gUQ2+FOu0rXIA8NyXXN5b7gpoPdIlta/1
+	O1mqsDTa6ax9XMxi9mhbjOsxMrYAEEEHylEDRqBTUKSWz18lUt0HA9MmcNRGI80b/RHzRKiOQwW
+	TC55Lqge5fvw9RDPbwPC0E3d9/0tHTVtnFlYxwsi
+X-Google-Smtp-Source: AGHT+IHVh8eLKpaijBmtej8JNP9l5BuEt+L1FiZ6GAX1kllnmfaRBgU0fQqDiQkN+GRgB3dNSpIG4t8Wpfj2yQhjknU=
+X-Received: by 2002:a05:651c:3052:b0:37a:3963:cec5 with SMTP id
+ 38308e7fff4ca-37fd1fc33c7mr5353161fa.43.1765547861262; Fri, 12 Dec 2025
+ 05:57:41 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251212-wip-jremmet-tcal6416rtw-v1-3-e5db1b66d4cc@phytec.de>
-References: <20251212-wip-jremmet-tcal6416rtw-v1-0-e5db1b66d4cc@phytec.de>
-In-Reply-To: <20251212-wip-jremmet-tcal6416rtw-v1-0-e5db1b66d4cc@phytec.de>
-To: Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
-	Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-	=?utf-8?q?Levente_R=C3=A9v=C3=A9sz?= <levente.revesz@eilabs.com>
-CC: <linux-gpio@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
-	<devicetree@vger.kernel.org>, <upstream@lists.phytec.de>
-X-Mailer: b4 0.14.2
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B96:EE_|PA1P195MB2497:EE_
-X-MS-Office365-Filtering-Correlation-Id: f57b9dd9-83fb-4e69-b340-08de397edc3b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700013|376014|7416014|1800799024|82310400026;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?N1NsV3docGRMeFlsd2FlOWJWYjFhMEtEbTVSYTBXSkJDcWFFMmdPeUxISzhC?=
- =?utf-8?B?TlExdTRycThETGFHQkt0RjYzaXVvRmlIQjBQdDIyVTRKekhvRnV2TmhiQkE0?=
- =?utf-8?B?QUt4SHRtT1NBME1ZY09aL1didEtVMXJRckcvcW5kVXV1bHFOckFhQks2d2xW?=
- =?utf-8?B?WFM2aWRJSmtPSW5WWXE2Sld0aVBoY3M5TDZZUE4rUVNXN2E4bE9mWTU4dHhs?=
- =?utf-8?B?YVgzWjJ0RnlqQmMvWWdBZUJ1R0NpUHYvYXZJQXdFeVQvUjVjczRJSUhjOTlm?=
- =?utf-8?B?TFI1WkRaMFRTZXZML1c5M0F3ZVRoRW8yZGs2Nnhwd1V2QjJxZVVaUGhBQWw4?=
- =?utf-8?B?UWh4NGhFNFU2UitjYlVzK00xODRWR2E1cTF5WEpjcDJkbUdMZWF2ZlltYUQv?=
- =?utf-8?B?dFZrMSt5NVdVK3ZQRlkxQ3cvcllwQXdPbXo1ZkpKVkdmSVByMExJa01ad2FH?=
- =?utf-8?B?SlczMlM4M0MzSThuRlpQcmNYVklFdFJJSi92cTVBWmJDVnhOWmxxNyt1M29m?=
- =?utf-8?B?ZzR2RzRpZ2lmMy9hNXNwdC82TVFHTDNFNEFvaVBTd0tFS25QL3d4cXpGcVlC?=
- =?utf-8?B?R29XcmtXMjA1ckplVmhHelV4dVFQN3lxTlFQNU1PZkxyVkUxbWpBeFpjR1Qv?=
- =?utf-8?B?c0xQM1Q5cWo4N01nRzFEWmJJY2NNb2RKRGVhak9MeGV2ZjBsYWVVdmFpcjVS?=
- =?utf-8?B?NDc5R0J3dEJyR3NEVm5kdDBFcFBpclBCdGZTekNXcm5Ua3V2b1c3Sm5PZmlL?=
- =?utf-8?B?dnVxbkE5MmNCSHZqekhGNlg5dHZrSjVUUGhjMkNTZG5iOE5IcEtObmhIZWFV?=
- =?utf-8?B?VW4xNWUzdjgwQlJ0ZklqSjRvbk8wVXJQY29ibWRodVV3VkJvWWRWR2p5VjBF?=
- =?utf-8?B?Y25mOXF1MWtabURHTzlWTkQvQURHcGp3ejRsalZXMjArQTBPNlFTRmNrVG1K?=
- =?utf-8?B?K1B5SzFIZ1FsSWFvQXJSd3VJUzJyQkllSjB4dUVIdTNPbWJxMHFJcTlWQ1NZ?=
- =?utf-8?B?N3ZFYTArOUdSaWdkYngrWW1STzJRdHZzNFZINmNlTmFVempCa1BMVXk1TzZF?=
- =?utf-8?B?OHBvaHlibGY2QjNLVTBtY3hoNncxUWtBdFozMklpcDkxWGZhbnFRRFo5RExC?=
- =?utf-8?B?bnYzeTFxV3huazFwb1p1dkZ3V0QwQ3lkZEVKaENRY0hWZGJQV0oweDRyNFlS?=
- =?utf-8?B?dEtwT2hDVTB2K2RNNmJNZitQM24xeDN4L2NMcC9FdEwzV1VidHR2WUlyRDlK?=
- =?utf-8?B?QjZjVEg0a0VyN3p3OHVzM20vc1dtbTVkK0srU0dzVURXVDRSeW1kZEVaKytD?=
- =?utf-8?B?bFdnZ3lxazg3YXp0dHpncDd2YUlOWStObUpPQk13MC92TXhyQVR5Uk1FQmNR?=
- =?utf-8?B?WXE3RUxRWGo5cDhHYzJxclF4ZTdNb1RpUWphZkJVSERSVHFDM1dIVGFaaWJz?=
- =?utf-8?B?bXJMcjVpTGsza3FybHRBUXNkOHdtK2NiNk9CeGlvS01yKzIrMUxyTjY4YXJJ?=
- =?utf-8?B?VmkrN1dPTGE3M2FzR2RiYjJjTDVnWFRwa1hsYzNhUGpPR0JGWXRKeTR5NENs?=
- =?utf-8?B?TTN3a0dLRVBrM3djaHJOc29IdE1ueFV2Y3hJbFdENlhXSUxRVjhGd1B2a2Zi?=
- =?utf-8?B?Q1NrUTJKTmVTNzFKMFQrYjQyUzFBcDdhb0x0VDZBOWhZZDdIdVdRcGxET3lz?=
- =?utf-8?B?N0dvQmdRaEpxallNVnRzTlU4ZE1jcTZNSDlCNWxzdnN6NlFLMFBRb0pCcS9a?=
- =?utf-8?B?c2lObzNPT0JzNzFKdGt3d0FOeUM0QktvTHFBZUZjMnE5WERwcFpuL09SNStl?=
- =?utf-8?B?WFNxOXVQYnZiK21OeWx5bkZqWk9wM2RDNGR1SkxZMFhpTDZjN0F5YUdUVWFq?=
- =?utf-8?B?TEc4NDZoUmo4ZDR5U3RYeGVSZ1lNYUgyT2JvNGtoZFlwSHd4dlBwbGJUSTVY?=
- =?utf-8?B?cERqc3BDMW9QR0NDNENkNENNUnRveDZwSjRYVWUxdkI1NHl3WTdtcG0yMFYx?=
- =?utf-8?B?TlZvNUJEUmp4V2xBQnVqMCsxU00xV3M1eUwvUkoxUmtkYVNKOFhTWFBGZlh2?=
- =?utf-8?B?U0tmZjROcmFUcDJ2Z2ZSY0ZpSXhMT052Rm1aY0hZNjNYY2tKdFNlcmE0SEZa?=
- =?utf-8?Q?vw3k=3D?=
-X-Forefront-Antispam-Report:
-	CIP:91.26.50.189;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:Postix.phytec.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700013)(376014)(7416014)(1800799024)(82310400026);DIR:OUT;SFP:1102;
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 13:03:35.6011
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f57b9dd9-83fb-4e69-b340-08de397edc3b
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29;Ip=[91.26.50.189];Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB5PEPF00014B96.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1P195MB2497
+References: <20251211124614.161900-1-aleksandr.mikhalitsyn@canonical.com> <20251211124614.161900-7-aleksandr.mikhalitsyn@canonical.com>
+In-Reply-To: <20251211124614.161900-7-aleksandr.mikhalitsyn@canonical.com>
+From: Andy Lutomirski <luto@amacapital.net>
+Date: Fri, 12 Dec 2025 21:57:29 +0800
+X-Gm-Features: AQt7F2rm4SChMU9h5dmQ-ozCj4cn936wN8GGgpMwfta-TqLqKnWcMkf_uYnMIVs
+Message-ID: <CALCETrW-u5NzBy4Esdg5J_eDQ-5YLNu86Kt0kdSZ00cPD=FefA@mail.gmail.com>
+Subject: Re: [PATCH v3 6/7] seccomp: allow nested listeners
+To: Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>
+Cc: kees@kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	bpf@vger.kernel.org, Will Drewry <wad@chromium.org>, Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <shuah@kernel.org>, Aleksa Sarai <cyphar@cyphar.com>, Tycho Andersen <tycho@tycho.pizza>, 
+	Andrei Vagin <avagin@gmail.com>, Christian Brauner <brauner@kernel.org>, 
+	=?UTF-8?Q?St=C3=A9phane_Graber?= <stgraber@stgraber.org>, 
+	Alexander Mikhalitsyn <alexander@mihalicyn.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-TCAL6408 and TCAL6416 supports latchable inputs and maskable interrupt.
-add compatibles ti,tcal6408 and ti,tcal6416
+On Thu, Dec 11, 2025 at 8:47=E2=80=AFPM Alexander Mikhalitsyn
+<aleksandr.mikhalitsyn@canonical.com> wrote:
+>
+> Now everything is ready to get rid of "only one listener per tree"
+> limitation.
+>
+> Let's introduce a new uAPI flag
+> SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS, so userspace may explicitly
+> allow nested listeners when installing a listener.
+>
+> Note, that to install n-th listener, this flag must be set on all
+> the listeners up the tree.
 
-Signed-off-by: Jan Remmet <j.remmet@phytec.de>
----
- Documentation/devicetree/bindings/gpio/gpio-pca95xx.yaml | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/gpio/gpio-pca95xx.yaml b/Documentation/devicetree/bindings/gpio/gpio-pca95xx.yaml
-index 12134c737ad8fb85980ecee225b8bcf5d1bf6b41..4f955f855e1ab8ccfcce9f465727b1b095e80ec6 100644
---- a/Documentation/devicetree/bindings/gpio/gpio-pca95xx.yaml
-+++ b/Documentation/devicetree/bindings/gpio/gpio-pca95xx.yaml
-@@ -74,6 +74,8 @@ properties:
-               - ti,tca9538
-               - ti,tca9539
-               - ti,tca9554
-+              - ti,tcal6408
-+              - ti,tcal6416
- 
-   reg:
-     maxItems: 1
+> diff --git a/Documentation/userspace-api/seccomp_filter.rst b/Documentati=
+on/userspace-api/seccomp_filter.rst
+> index cff0fa7f3175..b9633ab1ed47 100644
+> --- a/Documentation/userspace-api/seccomp_filter.rst
+> +++ b/Documentation/userspace-api/seccomp_filter.rst
+> @@ -210,6 +210,12 @@ notifications from both tasks will appear on the sam=
+e filter fd. Reads and
+>  writes to/from a filter fd are also synchronized, so a filter fd can saf=
+ely
+>  have many readers.
+>
+> +By default, only one listener within seccomp filters tree is allowed. On=
+ attempt
+> +to add a new listener when one already exists in the filter tree, the
+> +``seccomp()`` call will fail with ``-EBUSY``. To allow multiple listener=
+s, the
+> +``SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS`` flag can be passed in add=
+ition to
+> +the ``SECCOMP_FILTER_FLAG_NEW_LISTENER`` flag.
+> +
 
--- 
-2.43.0
+I read this, and I contemplated: does this mean that this permits
+additional filters (added later, nested inside) to have listeners or
+does it permit applying a listener when there already is one?  I
+thought it was surely it's the former, but I had to read the code to
+confirm that.
 
+Maybe clarify the text?
+
+(Yes, I realize it's also in the commit message, but that's not a
+great place to hide this info.)
+
+
+>  The interface for a seccomp notification fd consists of two structures:
+>
+>  .. code-block:: c
+> diff --git a/include/linux/seccomp.h b/include/linux/seccomp.h
+> index 9b959972bf4a..9b060946019d 100644
+> --- a/include/linux/seccomp.h
+> +++ b/include/linux/seccomp.h
+> @@ -10,7 +10,8 @@
+>                                          SECCOMP_FILTER_FLAG_SPEC_ALLOW |=
+ \
+>                                          SECCOMP_FILTER_FLAG_NEW_LISTENER=
+ | \
+>                                          SECCOMP_FILTER_FLAG_TSYNC_ESRCH =
+| \
+> -                                        SECCOMP_FILTER_FLAG_WAIT_KILLABL=
+E_RECV)
+> +                                        SECCOMP_FILTER_FLAG_WAIT_KILLABL=
+E_RECV | \
+> +                                        SECCOMP_FILTER_FLAG_ALLOW_NESTED=
+_LISTENERS)
+>
+>  /* sizeof() the first published struct seccomp_notif_addfd */
+>  #define SECCOMP_NOTIFY_ADDFD_SIZE_VER0 24
+> diff --git a/include/uapi/linux/seccomp.h b/include/uapi/linux/seccomp.h
+> index dbfc9b37fcae..de78d8e7a70b 100644
+> --- a/include/uapi/linux/seccomp.h
+> +++ b/include/uapi/linux/seccomp.h
+> @@ -18,13 +18,14 @@
+>  #define SECCOMP_GET_NOTIF_SIZES                3
+>
+>  /* Valid flags for SECCOMP_SET_MODE_FILTER */
+> -#define SECCOMP_FILTER_FLAG_TSYNC              (1UL << 0)
+> -#define SECCOMP_FILTER_FLAG_LOG                        (1UL << 1)
+> -#define SECCOMP_FILTER_FLAG_SPEC_ALLOW         (1UL << 2)
+> -#define SECCOMP_FILTER_FLAG_NEW_LISTENER       (1UL << 3)
+> -#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH                (1UL << 4)
+> +#define SECCOMP_FILTER_FLAG_TSYNC                      (1UL << 0)
+> +#define SECCOMP_FILTER_FLAG_LOG                                (1UL << 1=
+)
+> +#define SECCOMP_FILTER_FLAG_SPEC_ALLOW                 (1UL << 2)
+> +#define SECCOMP_FILTER_FLAG_NEW_LISTENER               (1UL << 3)
+> +#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH                        (1UL << 4=
+)
+>  /* Received notifications wait in killable state (only respond to fatal =
+signals) */
+> -#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV (1UL << 5)
+> +#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV         (1UL << 5)
+> +#define SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS     (1UL << 6)
+>
+>  /*
+>   * All BPF programs must return a 32-bit value.
+> diff --git a/kernel/seccomp.c b/kernel/seccomp.c
+> index 51d0d8adaffb..7667f443ff6c 100644
+> --- a/kernel/seccomp.c
+> +++ b/kernel/seccomp.c
+> @@ -206,6 +206,7 @@ static inline void seccomp_cache_prepare(struct secco=
+mp_filter *sfilter)
+>   * @wait_killable_recv: Put notifying process in killable state once the
+>   *                     notification is received by the userspace listene=
+r.
+>   * @first_listener: true if this is the first seccomp listener installed=
+ in the tree.
+> + * @allow_nested_listeners: Allow nested seccomp listeners.
+>   * @prev: points to a previously installed, or inherited, filter
+>   * @prog: the BPF program to evaluate
+>   * @notif: the struct that holds all notification related information
+> @@ -228,6 +229,7 @@ struct seccomp_filter {
+>         bool log : 1;
+>         bool wait_killable_recv : 1;
+>         bool first_listener : 1;
+> +       bool allow_nested_listeners : 1;
+>         struct action_cache cache;
+>         struct seccomp_filter *prev;
+>         struct bpf_prog *prog;
+> @@ -956,6 +958,10 @@ static long seccomp_attach_filter(unsigned int flags=
+,
+>         if (flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV)
+>                 filter->wait_killable_recv =3D true;
+>
+> +       /* Set nested listeners allow flag, if present. */
+> +       if (flags & SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS)
+> +               filter->allow_nested_listeners =3D true;
+> +
+>         /*
+>          * If there is an existing filter, make it the prev and don't dro=
+p its
+>          * task reference.
+> @@ -1997,7 +2003,8 @@ static struct file *init_listener(struct seccomp_fi=
+lter *filter)
+>  }
+>
+>  /*
+> - * Does @new_child have a listener while an ancestor also has a listener=
+?
+> + * Does @new_child have a listener while an ancestor also has a listener
+> + * and hasn't allowed nesting?
+>   * If so, we'll want to reject this filter.
+>   * This only has to be tested for the current process, even in the TSYNC=
+ case,
+>   * because TSYNC installs @child with the same parent on all threads.
+> @@ -2015,7 +2022,12 @@ static bool check_duplicate_listener(struct seccom=
+p_filter *new_child)
+>                 return false;
+>         for (cur =3D current->seccomp.filter; cur; cur =3D cur->prev) {
+>                 if (!IS_ERR_OR_NULL(cur->notif))
+> -                       return true;
+> +                       /*
+> +                        * We don't need to go up further, because if the=
+re is a
+> +                        * listener with nesting allowed, then all the li=
+steners
+> +                        * up the tree have allowed nesting as well.
+> +                        */
+> +                       return !cur->allow_nested_listeners;
+>         }
+>
+>         /* Mark first listener in the tree. */
+> @@ -2062,10 +2074,12 @@ static long seccomp_set_mode_filter(unsigned int =
+flags,
+>                 return -EINVAL;
+>
+>         /*
+> -        * The SECCOMP_FILTER_FLAG_WAIT_KILLABLE_SENT flag doesn't make s=
+ense
+> +        * The SECCOMP_FILTER_FLAG_WAIT_KILLABLE_SENT and
+> +        * SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS flags don't make se=
+nse
+>          * without the SECCOMP_FILTER_FLAG_NEW_LISTENER flag.
+>          */
+> -       if ((flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV) &&
+> +       if (((flags & SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV) ||
+> +            (flags & SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS)) &&
+>             ((flags & SECCOMP_FILTER_FLAG_NEW_LISTENER) =3D=3D 0))
+>                 return -EINVAL;
+>
+> diff --git a/tools/include/uapi/linux/seccomp.h b/tools/include/uapi/linu=
+x/seccomp.h
+> index dbfc9b37fcae..de78d8e7a70b 100644
+> --- a/tools/include/uapi/linux/seccomp.h
+> +++ b/tools/include/uapi/linux/seccomp.h
+> @@ -18,13 +18,14 @@
+>  #define SECCOMP_GET_NOTIF_SIZES                3
+>
+>  /* Valid flags for SECCOMP_SET_MODE_FILTER */
+> -#define SECCOMP_FILTER_FLAG_TSYNC              (1UL << 0)
+> -#define SECCOMP_FILTER_FLAG_LOG                        (1UL << 1)
+> -#define SECCOMP_FILTER_FLAG_SPEC_ALLOW         (1UL << 2)
+> -#define SECCOMP_FILTER_FLAG_NEW_LISTENER       (1UL << 3)
+> -#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH                (1UL << 4)
+> +#define SECCOMP_FILTER_FLAG_TSYNC                      (1UL << 0)
+> +#define SECCOMP_FILTER_FLAG_LOG                                (1UL << 1=
+)
+> +#define SECCOMP_FILTER_FLAG_SPEC_ALLOW                 (1UL << 2)
+> +#define SECCOMP_FILTER_FLAG_NEW_LISTENER               (1UL << 3)
+> +#define SECCOMP_FILTER_FLAG_TSYNC_ESRCH                        (1UL << 4=
+)
+>  /* Received notifications wait in killable state (only respond to fatal =
+signals) */
+> -#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV (1UL << 5)
+> +#define SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV         (1UL << 5)
+> +#define SECCOMP_FILTER_FLAG_ALLOW_NESTED_LISTENERS     (1UL << 6)
+>
+>  /*
+>   * All BPF programs must return a 32-bit value.
+> --
+> 2.43.0
+>
+
+
+--
+Andy Lutomirski
+AMA Capital Management, LLC
 
