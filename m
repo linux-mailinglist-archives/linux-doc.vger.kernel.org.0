@@ -1,434 +1,233 @@
-Return-Path: <linux-doc+bounces-69663-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69665-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0693ECBC3FD
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Dec 2025 03:27:00 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id B9109CBC555
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Dec 2025 04:35:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 815833006FEB
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Dec 2025 02:26:57 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id B413F3008D6C
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Dec 2025 03:35:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EE2CC2E7F17;
-	Mon, 15 Dec 2025 02:26:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 88D6D2874E9;
+	Mon, 15 Dec 2025 03:35:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Bxy92Rfa"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.monolithicpower.com (unknown [12.33.0.20])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCB89288522;
-	Mon, 15 Dec 2025 02:26:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=12.33.0.20
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 732E528726A;
+	Mon, 15 Dec 2025 03:35:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765765615; cv=none; b=XVZotFFbGGrogekvaMSNXKWeaEd5Ndmt6MXhMCDuSpQZoGern4KNNWZxNbRhT7ABQZlMswwxWObiXk5Yp8BdGZgYPUBnLpDZ6mYvBvL8cfx/1Ci1BgjoXGmJntrFIqGHsrPKxty9tr4dqP/zIL5uJy1H70z6GmFvoeixx9cXSwQ=
+	t=1765769734; cv=none; b=EnABggOCn/53onS85N4/kmJVpoFNqWOnNO3TZjJqedCryZuyajQvuVthQ7XVIIs0efvQin/ExFeOzCMqrjIYKQZOlTHZ5Tq50fO5Os/DzqABwDfumKO9NjeTSuDuoEO0DiYORpOWulwq8C/CxPQb+g/+oJo3kXE5v9NBANspLds=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765765615; c=relaxed/simple;
-	bh=sNFvxUCFzUXLt7rzYsZUhxnmYe93UZVuqdCJlsyljzE=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=E8iGHOjFeXWb1HdN4cinzfw5z2A5A3vOH0Ew56QAnT6pLDK1TW3vN8y08hZ3ZiHRla3uCNrgudmXYKSAtazOLiRGz1phEo34k6aNzVHIoaMiTVqccIbrQzeDkNlFB/EHvNfTXd+06hXTmHMGIV+c36Acu2UnIPLvx9lfwf5x4BI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=monolithicpower.com; spf=pass smtp.mailfrom=monolithicpower.com; arc=none smtp.client-ip=12.33.0.20
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=monolithicpower.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=monolithicpower.com
-Received: from CD-MSH04.monolithicpower.com (10.10.70.213) by
- mps-mslbn03.monolithicpower.com (10.10.10.245) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.6; Sun, 14 Dec 2025 18:26:52 -0800
-Received: from HZ-200D-C0727.monolithicpower.com (10.53.66.137) by
- CD-MSH04.monolithicpower.com (10.10.70.213) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.57; Mon, 15 Dec 2025 10:26:50 +0800
-From: Yuxi Wang <Yuxi.Wang@monolithicpower.com>
-To: <Yuxi.Wang@monolithicpower.com>, <linux@roeck-us.net>, <corbet@lwn.net>,
-	<robh@kernel.org>, <krzk+dt@kernel.org>, <conor+dt@kernel.org>
-CC: <wyx137120466@gmail.com>, <linux-hwmon@vger.kernel.org>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<devicetree@vger.kernel.org>
-Subject: [PATCH v2 RESEND 2/2] hwmon: add mp5926 driver
-Date: Mon, 15 Dec 2025 10:25:05 +0800
-Message-ID: <20251215022505.1602-3-Yuxi.Wang@monolithicpower.com>
-X-Mailer: git-send-email 2.51.0.windows.1
-In-Reply-To: <20251215022505.1602-1-Yuxi.Wang@monolithicpower.com>
-References: <20251215022505.1602-1-Yuxi.Wang@monolithicpower.com>
+	s=arc-20240116; t=1765769734; c=relaxed/simple;
+	bh=k0d0WY5WB86HA23RXY6Mrnj8g+i5RzNN7D6VuIy886k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=qxfL76hlZ5c3oX39ReLzZQ/fBREYV/RTBmnZkjuHSkoOokexckR0rsecEPE+h7eIkuzY6jqNOdQEo8IZmqZs+imsSlzs2wc4Lzs5Hib4mXgkjnFZC4GsXIrXv9fcULMR5JndXeIMSpye1aU833HzEwwZ7RyQZRV16b112r4v6Qk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Bxy92Rfa; arc=none smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1765769732; x=1797305732;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=k0d0WY5WB86HA23RXY6Mrnj8g+i5RzNN7D6VuIy886k=;
+  b=Bxy92RfapGOQ/vBgU5b01sQ16baNSMd5vtPkaR2ZkV6MXhOsfTpVYr08
+   p5Fgw6raMXzUelwaK4e2HB7T4hVKkpl3U+79UblJ3QxU3l3BXRSbpUGXm
+   D1yZp60MdcQnKNqk+MQUgybEAl11CuHXG1ofewEVT80dMVkvxngiGe2pn
+   Mo0G3LGvjSQYInp7AM16AhkpolCAdk4cGijfJLzZ5pkKqEaHmHtw2hkH9
+   LzVB2Mzgga09p2Fb7gqflQiYQmKisXTwplXrgfOPaom0lBVil+g6LHXrk
+   DDkTuLgUMABMyTTEhKgK1EeXW7UYzukj8w6B2wfdoX4QAyH3dviYpyxnI
+   g==;
+X-CSE-ConnectionGUID: N0kVG/r0Q1Kms0EgPFrPzA==
+X-CSE-MsgGUID: lBo3AaDYREiFrQVRQ6E6kA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11642"; a="70247995"
+X-IronPort-AV: E=Sophos;i="6.21,150,1763452800"; 
+   d="scan'208";a="70247995"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Dec 2025 19:35:31 -0800
+X-CSE-ConnectionGUID: Ov4Ez70WS2iVEsI0s1KPLg==
+X-CSE-MsgGUID: xGKqUxKKQH+p43hn9drWLA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,150,1763452800"; 
+   d="scan'208";a="201797741"
+Received: from allen-sbox.sh.intel.com (HELO [10.239.159.30]) ([10.239.159.30])
+  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Dec 2025 19:35:27 -0800
+Message-ID: <7186caa3-13c0-4629-a07f-162c00138ad9@linux.intel.com>
+Date: Mon, 15 Dec 2025 11:30:39 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/4] iommu: Add calls for IOMMU_DEBUG_PAGEALLOC
+To: Mostafa Saleh <smostafa@google.com>
+Cc: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, corbet@lwn.net, joro@8bytes.org, will@kernel.org,
+ robin.murphy@arm.com, akpm@linux-foundation.org, vbabka@suse.cz,
+ surenb@google.com, mhocko@suse.com, jackmanb@google.com, hannes@cmpxchg.org,
+ ziy@nvidia.com, david@redhat.com, lorenzo.stoakes@oracle.com,
+ Liam.Howlett@oracle.com, rppt@kernel.org, xiaqinxin@huawei.com,
+ rdunlap@infradead.org
+References: <20251211125928.3258905-1-smostafa@google.com>
+ <20251211125928.3258905-3-smostafa@google.com>
+ <20e015d7-cb54-4a2a-bf62-a828e10e3126@linux.intel.com>
+ <aTxiefxT08hbUPsd@google.com>
+Content-Language: en-US
+From: Baolu Lu <baolu.lu@linux.intel.com>
+In-Reply-To: <aTxiefxT08hbUPsd@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: CD-MSLBN02.monolithicpower.com (192.168.86.32) To
- CD-MSH04.monolithicpower.com (10.10.70.213)
 
-Add support for mps mp5926.
+On 12/13/25 02:44, Mostafa Saleh wrote:
+> On Fri, Dec 12, 2025 at 10:33:20AM +0800, Baolu Lu wrote:
+>> On 12/11/25 20:59, Mostafa Saleh wrote:
+>>> Add calls for the new iommu debug config IOMMU_DEBUG_PAGEALLOC:
+>>> - iommu_debug_init: Enable the debug mode if configured by the user.
+>>> - iommu_debug_map: Track iommu pages mapped, using physical address.
+>>> - iommu_debug_unmap_begin: Track start of iommu unmap operation, with
+>>>     IOVA and size.
+>>> - iommu_debug_unmap_end: Track the end of unmap operation, passing the
+>>>     actual unmapped size versus the tracked one at unmap_begin.
+>>>
+>>> We have to do the unmap_begin/end as once pages are unmapped we lose
+>>> the information of the physical address.
+>>> This is racy, but the API is racy by construction as it uses refcounts
+>>> and doesn't attempt to lock/synchronize with the IOMMU API as that will
+>>> be costly, meaning that possibility of false negative exists.
+>>>
+>>> Signed-off-by: Mostafa Saleh<smostafa@google.com>
+>>> ---
+>>>    drivers/iommu/iommu-debug-pagealloc.c | 28 +++++++++++++
+>>>    drivers/iommu/iommu-priv.h            | 58 +++++++++++++++++++++++++++
+>>>    drivers/iommu/iommu.c                 | 11 ++++-
+>>>    include/linux/iommu-debug-pagealloc.h |  1 +
+>>>    4 files changed, 96 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/drivers/iommu/iommu-debug-pagealloc.c b/drivers/iommu/iommu-debug-pagealloc.c
+>>> index 4022e9af7f27..1d343421da98 100644
+>>> --- a/drivers/iommu/iommu-debug-pagealloc.c
+>>> +++ b/drivers/iommu/iommu-debug-pagealloc.c
+>>> @@ -5,11 +5,15 @@
+>>>     * IOMMU API debug page alloc sanitizer
+>>>     */
+>>>    #include <linux/atomic.h>
+>>> +#include <linux/iommu.h>
+>>>    #include <linux/iommu-debug-pagealloc.h>
+>>>    #include <linux/kernel.h>
+>>>    #include <linux/page_ext.h>
+>>> +#include "iommu-priv.h"
+>>> +
+>>>    static bool needed;
+>>> +DEFINE_STATIC_KEY_FALSE(iommu_debug_initialized);
+>>>    struct iommu_debug_metadata {
+>>>    	atomic_t ref;
+>>> @@ -25,6 +29,30 @@ struct page_ext_operations page_iommu_debug_ops = {
+>>>    	.need = need_iommu_debug,
+>>>    };
+>>> +void __iommu_debug_map(struct iommu_domain *domain, phys_addr_t phys, size_t size)
+>>> +{
+>>> +}
+>>> +
+>>> +void __iommu_debug_unmap_begin(struct iommu_domain *domain,
+>>> +			       unsigned long iova, size_t size)
+>>> +{
+>>> +}
+>>> +
+>>> +void __iommu_debug_unmap_end(struct iommu_domain *domain,
+>>> +			     unsigned long iova, size_t size,
+>>> +			     size_t unmapped)
+>>> +{
+>>> +}
+>>> +
+>>> +void iommu_debug_init(void)
+>>> +{
+>>> +	if (!needed)
+>>> +		return;
+>>> +
+>>> +	pr_info("iommu: Debugging page allocations, expect overhead or disable iommu.debug_pagealloc");
+>>> +	static_branch_enable(&iommu_debug_initialized);
+>>> +}
+>>> +
+>>>    static int __init iommu_debug_pagealloc(char *str)
+>>>    {
+>>>    	return kstrtobool(str, &needed);
+>>> diff --git a/drivers/iommu/iommu-priv.h b/drivers/iommu/iommu-priv.h
+>>> index c95394cd03a7..aaffad5854fc 100644
+>>> --- a/drivers/iommu/iommu-priv.h
+>>> +++ b/drivers/iommu/iommu-priv.h
+>>> @@ -5,6 +5,7 @@
+>>>    #define __LINUX_IOMMU_PRIV_H
+>>>    #include <linux/iommu.h>
+>>> +#include <linux/iommu-debug-pagealloc.h>
+>>>    #include <linux/msi.h>
+>>>    static inline const struct iommu_ops *dev_iommu_ops(struct device *dev)
+>>> @@ -65,4 +66,61 @@ static inline int iommufd_sw_msi(struct iommu_domain *domain,
+>>>    int iommu_replace_device_pasid(struct iommu_domain *domain,
+>>>    			       struct device *dev, ioasid_t pasid,
+>>>    			       struct iommu_attach_handle *handle);
+>>> +
+>>> +#ifdef CONFIG_IOMMU_DEBUG_PAGEALLOC
+>>> +
+>>> +void __iommu_debug_map(struct iommu_domain *domain, phys_addr_t phys,
+>>> +		       size_t size);
+>>> +void __iommu_debug_unmap_begin(struct iommu_domain *domain,
+>>> +			       unsigned long iova, size_t size);
+>>> +void __iommu_debug_unmap_end(struct iommu_domain *domain,
+>>> +			     unsigned long iova, size_t size, size_t unmapped);
+>>> +
+>>> +static inline void iommu_debug_map(struct iommu_domain *domain,
+>>> +				   phys_addr_t phys, size_t size)
+>>> +{
+>>> +	if (static_branch_unlikely(&iommu_debug_initialized))
+>>> +		__iommu_debug_map(domain, phys, size);
+>>> +}
+>>> +
+>>> +static inline void iommu_debug_unmap_begin(struct iommu_domain *domain,
+>>> +					   unsigned long iova, size_t size)
+>>> +{
+>>> +	if (static_branch_unlikely(&iommu_debug_initialized))
+>>> +		__iommu_debug_unmap_begin(domain, iova, size);
+>>> +}
+>>> +
+>>> +static inline void iommu_debug_unmap_end(struct iommu_domain *domain,
+>>> +					 unsigned long iova, size_t size,
+>>> +					 size_t unmapped)
+>>> +{
+>>> +	if (static_branch_unlikely(&iommu_debug_initialized))
+>>> +		__iommu_debug_unmap_end(domain, iova, size, unmapped);
+>>> +}
+>> I am wondering whether it would be better if we move iommu_debug_map()
+>> to iommu-debug-pagealloc.c,
+>>
+>> void iommu_debug_map(struct iommu_domain *domain,
+>> 		     phys_addr_t phys, size_t size)
+>> {
+>> 	if (static_branch_likely(&iommu_debug_initialized))
+>> 		__iommu_debug_map(domain, phys, size);
+>> }
+>>
+>> (Does it make sense to use static_branch_likely() here? Normally, people
+>>   who enable CONFIG_IOMMU_DEBUG_PAGEALLOC would want to use this
+>>   debugging feature. Or not?)
+>>
+>> So that ...
+> This actually was the v1 implementation [1], but Jörg suggested to move
+> it to a header file as a function call would have an overhead if this
+> feautre is disabled.
+> 
+> I believe the priority would be to keep the performance overhead minimal
+> with CONFIG_IOMMU_DEBUG_PAGEALLOC and the commandline disabled, so people
+> can run with the config in production and only enable the commandline
+> it to debug problems, without having overhead on the typical case.
 
-Signed-off-by: Yuxi Wang <Yuxi.Wang@monolithicpower.com>
----
- Documentation/hwmon/index.rst  |   1 +
- Documentation/hwmon/mp5926.rst |  92 ++++++++++++++++
- MAINTAINERS                    |   7 ++
- drivers/hwmon/pmbus/Kconfig    |   9 ++
- drivers/hwmon/pmbus/Makefile   |   1 +
- drivers/hwmon/pmbus/mp5926.c   | 190 +++++++++++++++++++++++++++++++++
- 6 files changed, 300 insertions(+)
- create mode 100644 Documentation/hwmon/mp5926.rst
- create mode 100644 drivers/hwmon/pmbus/mp5926.c
+Okay, fair enough.
 
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 85d7a686883e..6181c3f62177 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -185,6 +185,7 @@ Hardware Monitoring Kernel Drivers
-    mp2993
-    mp5023
-    mp5920
-+   mp5926
-    mp5990
-    mp9941
-    mp9945
-diff --git a/Documentation/hwmon/mp5926.rst b/Documentation/hwmon/mp5926.rst
-new file mode 100644
-index 000000000000..4b64a7e24ae6
---- /dev/null
-+++ b/Documentation/hwmon/mp5926.rst
-@@ -0,0 +1,92 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+Kernel driver mp5926
-+====================
-+
-+Supported chips:
-+
-+  * MPS mp5926
-+
-+    Prefix: 'mp5926'
-+
-+  * Datasheet
-+    https://www.monolithicpower.com/en/
-+
-+Author:
-+
-+	Yuxi Wang <Yuxi.Wang@monolithicpower.com>
-+
-+Description
-+-----------
-+
-+This driver implements support for Monolithic Power Systems, Inc. (MPS)
-+MP5926 Hot-Swap Controller.
-+
-+Device compliant with:
-+
-+- PMBus rev 1.3 interface.
-+
-+The driver exports the following attributes via the 'sysfs' files
-+for input voltage:
-+
-+**in1_input**
-+
-+**in1_label**
-+
-+**in1_crit**
-+
-+**in1_crit_alarm**
-+
-+The driver provides the following attributes for output voltage:
-+
-+**in2_input**
-+
-+**in2_label**
-+
-+**in2_lcrit**
-+
-+**in2_lcrit_alarm**
-+
-+**in2_rated_max**
-+
-+**in2_rated_min**
-+
-+The driver provides the following attributes for input current:
-+
-+**curr1_input**
-+
-+**curr1_label**
-+
-+**curr1_max**
-+
-+**curr1_max_alarm**
-+
-+The driver provides the following attributes for output current:
-+
-+**curr2_input**
-+
-+**curr2_label**
-+
-+The driver provides the following attributes for input power:
-+
-+**power1_input**
-+
-+**power1_label**
-+
-+The driver provides the following attributes for output power:
-+
-+**power2_input**
-+
-+**power2_label**
-+
-+The driver provides the following attributes for temperature:
-+
-+**temp1_input**
-+
-+**temp1_crit**
-+
-+**temp1_crit_alarm**
-+
-+**temp1_max**
-+
-+**temp1_max_alarm**
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d701a4d5b00e..fea710aab535 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17708,6 +17708,13 @@ S:	Maintained
- F:	Documentation/hwmon/mp2993.rst
- F:	drivers/hwmon/pmbus/mp2993.c
- 
-+MPS MP5926 DRIVER
-+M:	Yuxi Wang <Yuxi.Wang@monolithicpower.com>
-+L:	linux-hwmon@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/hwmon/mp5926.rst
-+F:	drivers/hwmon/pmbus/mp5926.c
-+
- MPS MP9941 DRIVER
- M:	Noah Wang <noahwang.wang@outlook.com>
- L:	linux-hwmon@vger.kernel.org
-diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
-index f3fb94cebf1a..d0aa460abdc9 100644
---- a/drivers/hwmon/pmbus/Kconfig
-+++ b/drivers/hwmon/pmbus/Kconfig
-@@ -472,6 +472,15 @@ config SENSORS_MP5920
- 	  This driver can also be built as a module. If so, the module will
- 	  be called mp5920.
- 
-+config SENSORS_MP5926
-+	tristate "MPS MP5926"
-+	help
-+	  If you say yes here you get hardware monitoring support for Monolithic
-+	  MP5926.
-+
-+	  This driver can also be built as a module. If so, the module will
-+	  be called mp5926.
-+
- config SENSORS_MP5990
- 	tristate "MPS MP5990"
- 	help
-diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
-index 349a89b6d92e..75ec4956ca8d 100644
---- a/drivers/hwmon/pmbus/Makefile
-+++ b/drivers/hwmon/pmbus/Makefile
-@@ -47,6 +47,7 @@ obj-$(CONFIG_SENSORS_MP2975)	+= mp2975.o
- obj-$(CONFIG_SENSORS_MP2993)	+= mp2993.o
- obj-$(CONFIG_SENSORS_MP5023)	+= mp5023.o
- obj-$(CONFIG_SENSORS_MP5920)	+= mp5920.o
-+obj-$(CONFIG_SENSORS_MP5926)	+= mp5926.o
- obj-$(CONFIG_SENSORS_MP5990)	+= mp5990.o
- obj-$(CONFIG_SENSORS_MP9941)	+= mp9941.o
- obj-$(CONFIG_SENSORS_MP9945)	+= mp9945.o
-diff --git a/drivers/hwmon/pmbus/mp5926.c b/drivers/hwmon/pmbus/mp5926.c
-new file mode 100644
-index 000000000000..3122854b07f8
---- /dev/null
-+++ b/drivers/hwmon/pmbus/mp5926.c
-@@ -0,0 +1,190 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+//
-+// mp5926.c  - pmbus driver for mps mp5926
-+//
-+// Copyright 2025 Monolithic Power Systems, Inc
-+//
-+// Author: Yuxi Wang <Yuxi.Wang@monolithicpower.com>
-+
-+#include <linux/bitfield.h>
-+#include <linux/bits.h>
-+#include <linux/i2c.h>
-+#include <linux/module.h>
-+#include <linux/of_device.h>
-+#include <linux/pmbus.h>
-+#include "pmbus.h"
-+
-+#define PAGE	0x01
-+#define EFUSE_CFG	0xCF
-+#define I_SCALE_SEL	0xC6
-+#define MP5926_FUNC	(PMBUS_HAVE_VIN | PMBUS_HAVE_VOUT | \
-+			PMBUS_HAVE_IIN | PMBUS_HAVE_PIN | \
-+			PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_INPUT | \
-+			PMBUS_HAVE_STATUS_TEMP | PMBUS_HAVE_STATUS_VOUT)
-+
-+struct mp5926_data {
-+	struct pmbus_driver_info info;
-+	u8 vout_mode;
-+	u8 vout_linear_exponent;
-+};
-+
-+#define to_mp5926_data(x)  container_of(x, struct mp5926_data, info)
-+
-+static int mp5926_read_byte_data(struct i2c_client *client, int page,
-+				 int reg)
-+{
-+	const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
-+	struct mp5926_data *data = to_mp5926_data(info);
-+	int ret;
-+
-+	switch (reg) {
-+	case PMBUS_VOUT_MODE:
-+		if (data->vout_mode == linear) {
-+			/*
-+			 * The VOUT format used by the chip is linear11,
-+			 * not linear16. Report that VOUT is in linear mode
-+			 * and return exponent value extracted while probing
-+			 * the chip.
-+			 */
-+			return data->vout_linear_exponent;
-+		} else {
-+			return PB_VOUT_MODE_DIRECT;
-+		}
-+		break;
-+	default:
-+		ret = -ENODATA;
-+		break;
-+	}
-+	return ret;
-+}
-+
-+static int mp5926_read_word_data(struct i2c_client *client, int page, int phase,
-+				 int reg)
-+{
-+	const struct pmbus_driver_info *info = pmbus_get_driver_info(client);
-+	struct mp5926_data *data = to_mp5926_data(info);
-+	int ret;
-+	s32 mantissa;
-+
-+	switch (reg) {
-+	case PMBUS_READ_VOUT:
-+		ret = pmbus_read_word_data(client, page, phase, reg);
-+		if (ret < 0)
-+			return ret;
-+		/*
-+		 * Because the VOUT format used by the chip is linear11 and not
-+		 * linear16, we disregard bits[15:11]. The exponent is reported
-+		 * as part of the VOUT_MODE command.
-+		 */
-+		if (data->vout_mode == linear) {
-+			mantissa = ((s16)((ret & 0x7ff) << 5)) >> 5;
-+			ret = mantissa;
-+		}
-+		break;
-+	default:
-+		ret = -ENODATA;
-+		break;
-+	}
-+	return ret;
-+}
-+
-+static struct pmbus_driver_info mp5926_info = {
-+	.pages = PAGE,
-+	.format[PSC_VOLTAGE_IN] = direct,
-+	.format[PSC_CURRENT_IN] = direct,
-+	.format[PSC_VOLTAGE_OUT] = direct,
-+	.format[PSC_TEMPERATURE] = direct,
-+	.format[PSC_POWER] = direct,
-+
-+	.m[PSC_VOLTAGE_IN] = 16,
-+	.b[PSC_VOLTAGE_IN] = 0,
-+	.R[PSC_VOLTAGE_IN] = 0,
-+
-+	.m[PSC_CURRENT_IN] = 16,
-+	.b[PSC_CURRENT_IN] = 0,
-+	.R[PSC_CURRENT_IN] = 0,
-+
-+	.m[PSC_VOLTAGE_OUT] = 16,
-+	.b[PSC_VOLTAGE_OUT] = 0,
-+	.R[PSC_VOLTAGE_OUT] = 0,
-+
-+	.m[PSC_TEMPERATURE] = 4,
-+	.b[PSC_TEMPERATURE] = 0,
-+	.R[PSC_TEMPERATURE] = 0,
-+
-+	.m[PSC_POWER] = 25,
-+	.b[PSC_POWER] = 0,
-+	.R[PSC_POWER] = -2,
-+
-+	.read_word_data = mp5926_read_word_data,
-+	.read_byte_data = mp5926_read_byte_data,
-+	.func[0] = MP5926_FUNC,
-+};
-+
-+static int mp5926_probe(struct i2c_client *client)
-+{
-+	struct mp5926_data *data;
-+	struct pmbus_driver_info *info;
-+	int ret;
-+
-+	data = devm_kzalloc(&client->dev, sizeof(struct mp5926_data),
-+			    GFP_KERNEL);
-+	if (!data)
-+		return -ENOMEM;
-+
-+	memcpy(&data->info, &mp5926_info, sizeof(*info));
-+	info = &data->info;
-+	ret = i2c_smbus_read_word_data(client, EFUSE_CFG);
-+	if (ret < 0)
-+		return ret;
-+	if (ret & BIT(12)) {
-+		data->vout_mode = linear;
-+		data->info.format[PSC_VOLTAGE_IN] = linear;
-+		data->info.format[PSC_CURRENT_IN] = linear;
-+		data->info.format[PSC_VOLTAGE_OUT] = linear;
-+		data->info.format[PSC_TEMPERATURE] = linear;
-+		data->info.format[PSC_POWER] = linear;
-+		ret = i2c_smbus_read_word_data(client, PMBUS_READ_VOUT);
-+		if (ret < 0) {
-+			dev_err(&client->dev, "Can't get vout exponent.");
-+			return ret;
-+		}
-+		data->vout_linear_exponent = (u8)((ret >> 11) & 0x1f);
-+	} else {
-+		data->vout_mode = direct;
-+		ret = i2c_smbus_read_word_data(client, I_SCALE_SEL);
-+		if (ret < 0)
-+			return ret;
-+		if (ret & BIT(6))
-+			data->info.m[PSC_CURRENT_IN] = 4;
-+	}
-+
-+	return pmbus_do_probe(client, info);
-+}
-+
-+static const struct i2c_device_id mp5926_id[] = {
-+	{ "mp5926", 0 },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(i2c, mp5926_id);
-+
-+static const struct of_device_id mp5926_of_match[] = {
-+	{ .compatible = "mps,mp5926" },
-+	{}
-+};
-+MODULE_DEVICE_TABLE(of, mp5926_of_match);
-+
-+static struct i2c_driver mp5926_driver = {
-+	.probe = mp5926_probe,
-+	.driver = {
-+			.name = "mp5926",
-+			.of_match_table = mp5926_of_match,
-+		   },
-+	.id_table = mp5926_id,
-+};
-+
-+module_i2c_driver(mp5926_driver);
-+MODULE_AUTHOR("Yuxi Wang <Yuxi.Wang@monolithicpower.com>");
-+MODULE_DESCRIPTION("MPS MP5926 pmbus driver");
-+MODULE_LICENSE("GPL");
-+MODULE_IMPORT_NS("PMBUS");
--- 
-2.39.2
-
+Thanks,
+baolu
 
