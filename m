@@ -1,224 +1,389 @@
-Return-Path: <linux-doc+bounces-69780-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69782-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37607CC181E
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 09:20:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D11C3CC1D9D
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 10:46:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 84C93301DB85
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 08:18:32 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 24C46304A2A0
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 09:43:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C8F9A347FEB;
-	Tue, 16 Dec 2025 08:12:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B4A583346AA;
+	Tue, 16 Dec 2025 09:43:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="FZ/QWtv8"
+	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="5NS+1V75"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out30-97.freemail.mail.aliyun.com (out30-97.freemail.mail.aliyun.com [115.124.30.97])
+Received: from MW6PR02CU001.outbound.protection.outlook.com (mail-westus2azon11012030.outbound.protection.outlook.com [52.101.48.30])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E764347FC7;
-	Tue, 16 Dec 2025 08:12:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.30.97
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765872755; cv=none; b=fID+mYTRwRw/W7bjTRjRpir/aixLcVplMlofx/ai+YuXY2y4qTsxxhvGKNo7DtITOV7c4O7mzTFNEcWfrsYV8+OnRrKuvZGq3TiAvz0DKal7madqbPHJRxN/988AVKUKV/Lb6mNIeizKoekJFg6V1Tvy4bG5MHhKTtJyOuq7dTQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765872755; c=relaxed/simple;
-	bh=Scb4F+6jcGI2+JEVl1ub9V7VPGd1AaU864dcKlzN5P4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hBcvDNhD27EVTAXaFuo5D24MgfhESJTHXGrzSSmGzPOHWUzUr+DZbbItTUR1O/7Xtm7543mM4wPDWdYiW1teT8bo6haxEMnP2NlQyGtUIU7/CFlY7rpcajt5VgQLn0MHvUU2rTT3vl8B9DQtaijmEcLC9PeFHqg1iSXOj4IEOlM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com; spf=pass smtp.mailfrom=linux.alibaba.com; dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b=FZ/QWtv8; arc=none smtp.client-ip=115.124.30.97
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.alibaba.com
-DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linux.alibaba.com; s=default;
-	t=1765872744; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
-	bh=cHy+HtrbS2UBAVjktv1rULuod/Fzmc5GYewrN5/jhk4=;
-	b=FZ/QWtv87n0Kgd0fNB9NrjWOmK2yn93LaOro6nSCTTZ5N0yLA/euVRF3eEruWfn2mpXOb9sG/bWfVMDhI+zmkBA9BrEvvaxweEOLalhAaWyi2ygorKIKErm1MaWU5Pxb9nZGoLnOI2UeipW1wIDx+HeWpFqFmrMYajPnSZSZA28=
-Received: from 30.74.144.116(mailfrom:baolin.wang@linux.alibaba.com fp:SMTPD_---0WuyV7lv_1765872740 cluster:ay36)
-          by smtp.aliyun-inc.com;
-          Tue, 16 Dec 2025 16:12:21 +0800
-Message-ID: <95b1403f-3ddb-43ff-b481-2ecc6ab8352f@linux.alibaba.com>
-Date: Tue, 16 Dec 2025 16:12:20 +0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2BFB32860A;
+	Tue, 16 Dec 2025 09:43:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.48.30
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1765878221; cv=fail; b=GY4H1PK1B5XZ6luYaupsnf0sWoLekxWOdIilgVn06UMbPO+yTPQ4XyUUw/QnkMkxuwbU9TysTznAeyO4scoOSnHyeNCv2ODQ3Z+IY80zV+5b7izHhKJgA+Vs7qhZNXTo61AjuXE5I7MIqhmMVCXt740VHYFSxgKy2G2jQ/YZmNs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1765878221; c=relaxed/simple;
+	bh=dKYAlB25we805EG3YR11JwJ15YG2lCC0EEnBvOTFpR0=;
+	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=DcJ3xtuWmBGchYBNvIY8fDtjWrVLOYhwIqyxhjBPCCVaIO5SOTkyNv5QlOLOqIArNktw3CDYJISsOfy/pHAKCEP5hZddIc+YMh8Ak4lq/pUDbiRpaKb82JdquIBmpbvOY5OzqSPTwRt8xoO2e0qPjOFYukAES+ysF2AnQPR7ems=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=5NS+1V75; arc=fail smtp.client-ip=52.101.48.30
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aVVLAPI5QZADduJW8N8fbmzPfsV9YSM89XpT/myz2q1vXcBD3BFu040NgJUq1Wr+PwXBn5hCIIQmIQA60rikLqvkz7eToj8/c6AxdfKEtKmZy7wphnN41wRroYoOknbp06O6E62V6dyiAmTzfq4df3xcghaLrelq6fCFNZeaBhrE4FI2rybb4N6sipkhe4bPTgfaX/Lh4HfJnE5vVop5OQ4RObRu00vreecEbGAQd+Pbx7OoB9Z2h1eMfWpIW/nWTY6hr7lk8305UG9yPHau06oNVrIhzmS+oigsUb+rL7I0+Me0p4+Lj5tw6rYDowc2kF0/GaQM/S0sRZwMi8E/3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=de6VYCDKblq46nJjiRvypEAJkLKpNjJokKGCI2pvzDY=;
+ b=Yv3d/f8hDmUqqbtG8HnH150uYSIsPIYWsZBYAQmMkIvd4Zt/1HDyMIvF43km4bck1/ctgvZzVwDsvlcyFW6tFDMwbAmhWivUdO1KB1lkAK/sn/o9HBk1dSpWMXlf1XVK3TQlKrmVpLNN+7JVlVVMJvlksopoiN7opmQk9S28OoiT+x7kBIoSjpKHc89ypjvoPcrWy79KyeaDB9xQgNB58l865D4TdzHh3vLYK3dDKBc7Da4oIA3UmIAzc21IMGC9TY7OP4AIftba68TJf+TXR2aiFk6iTkuSk3wzx+PtC/RvQlnxbv7ZCETIOfSsZf59mb6GWMfTsoium0qvLrylaQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=de6VYCDKblq46nJjiRvypEAJkLKpNjJokKGCI2pvzDY=;
+ b=5NS+1V75H4U2S9uqfeaLGsYAb46gh/mIr49Z9U5f03MlxDBRD0hEiLbwGpqCqZEwsierkmdbO3CDWKc/faopVCdsb2LuAzdzJdMpztf+/BGeOjuDqqykdb2CE/qirS5hoix2Q0iDIUqNgjKYTY9Hx3Q5C+SAK7FX12hwGs6ERuI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SA0PR12MB7091.namprd12.prod.outlook.com (2603:10b6:806:2d5::17)
+ by IA0PPF7D094C5BF.namprd12.prod.outlook.com (2603:10b6:20f:fc04::bd4) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9434.6; Tue, 16 Dec
+ 2025 09:43:36 +0000
+Received: from SA0PR12MB7091.namprd12.prod.outlook.com
+ ([fe80::d759:a62b:f8ba:461d]) by SA0PR12MB7091.namprd12.prod.outlook.com
+ ([fe80::d759:a62b:f8ba:461d%4]) with mapi id 15.20.9412.011; Tue, 16 Dec 2025
+ 09:43:36 +0000
+Message-ID: <1d54ce3b-fbdb-4d1a-bd07-576a6ed85ea5@amd.com>
+Date: Tue, 16 Dec 2025 15:13:27 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 4/5] drm/amdgpu: add UMA allocation interfaces to sysfs
+To: "Yo-Jung Leo Lin (AMD)" <Leo.Lin@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Jonathan Corbet <corbet@lwn.net>
+Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+ "Tsao, Anson" <anson.tsao@amd.com>,
+ "Mario Limonciello (AMD) (kernel.org)" <superm1@kernel.org>
+References: <20251212-vram-carveout-tuning-for-upstream-v6-0-50c02fd180c9@amd.com>
+ <20251212-vram-carveout-tuning-for-upstream-v6-4-50c02fd180c9@amd.com>
+Content-Language: en-US
+From: "Lazar, Lijo" <lijo.lazar@amd.com>
+In-Reply-To: <20251212-vram-carveout-tuning-for-upstream-v6-4-50c02fd180c9@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA5PR01CA0010.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:174::12) To SA0PR12MB7091.namprd12.prod.outlook.com
+ (2603:10b6:806:2d5::17)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 mm-new 07/16] khugepaged: introduce
- collapse_max_ptes_none helper function
-To: Nico Pache <npache@redhat.com>, linux-kernel@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-doc@vger.kernel.org
-Cc: david@redhat.com, ziy@nvidia.com, lorenzo.stoakes@oracle.com,
- Liam.Howlett@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com,
- corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org,
- mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
- baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
- wangkefeng.wang@huawei.com, usamaarif642@gmail.com, sunnanyong@huawei.com,
- vishal.moola@gmail.com, thomas.hellstrom@linux.intel.com,
- yang@os.amperecomputing.com, kas@kernel.org, aarcange@redhat.com,
- raquini@redhat.com, anshuman.khandual@arm.com, catalin.marinas@arm.com,
- tiwai@suse.de, will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz,
- cl@gentwo.org, jglisse@google.com, surenb@google.com, zokeefe@google.com,
- hannes@cmpxchg.org, rientjes@google.com, mhocko@suse.com,
- rdunlap@infradead.org, hughd@google.com, richard.weiyang@gmail.com,
- lance.yang@linux.dev, vbabka@suse.cz, rppt@kernel.org, jannh@google.com,
- pfalcato@suse.de
-References: <20251201174627.23295-1-npache@redhat.com>
- <20251201174627.23295-8-npache@redhat.com>
-From: Baolin Wang <baolin.wang@linux.alibaba.com>
-In-Reply-To: <20251201174627.23295-8-npache@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA0PR12MB7091:EE_|IA0PPF7D094C5BF:EE_
+X-MS-Office365-Filtering-Correlation-Id: 50b42c63-99c0-429d-b92e-08de3c879548
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?eEV6d3BNNnVkOTdmY0xkVGJjazJFMVdBUmpJTmV1WE96WEh4TDFqeFNiakpK?=
+ =?utf-8?B?V09zU0FPR2xGcHZYeUxVdExNZUc4MTRtd0hkWHpqcGNpTlNsekR0MTJtVlJ1?=
+ =?utf-8?B?aC92MCsrZ09yVGZkSkMrWksxNk12UG5JVHBkMnpURlVlOERqdmFocXRvZU1Q?=
+ =?utf-8?B?YXVPc1RFaWtEMWRHK2dFTmhuRTFuZzBqU2J4RTRCbm1OQ3dITWFKdGdkWHdT?=
+ =?utf-8?B?Qi8rSkZWcGRnK281eFZDUUtsZ1kydG8xNDdGU3hUa3lia1lOT3ZWOEttbFVa?=
+ =?utf-8?B?QklDaWdqeThEUGdQbGRrditjOHhRWFhqd3l0VTJGN04xWm00WXdxSDB3dTNI?=
+ =?utf-8?B?MW1relhmUTNKM3M4alJjUmRvZXgxbUNVV25McmdzdlMxdTRiUVF3Z283VVN5?=
+ =?utf-8?B?QlhWTTkwQUhTMmUxcXpJSWk3eFdieGh4MjBYblVQdlMyT3kvWGJpWE1uZEhi?=
+ =?utf-8?B?eDRybngwaWhhTS95RmllcjNOZzRBTTdPQ0owV1p1TU9ENlJHcWJNSkljdXBk?=
+ =?utf-8?B?T3ZUVXNtcjBwdWpFU25jWU5USEtvMDJFcG5FY1ZuQS9kQkEyTUhZYkZrRlRF?=
+ =?utf-8?B?UzVLWHFCNURmdnZZbXhpaThsR3YyeE1uTUFaTit2M0xrWlFqMmgvN2NQcmo5?=
+ =?utf-8?B?aE04K01QOTE0M3BUUHZjYkdMaGM5Y0FBTjRrZ0hnaFAvNDJXeWc1dHlwMEFK?=
+ =?utf-8?B?aUE1bjdxSWYvRFlQQ0xlSGZpYi9DRHpmWjl0cnhQM1g0K1M4NnZ1dTBJRTA2?=
+ =?utf-8?B?ajRMa0YwTFZxazN6enNVUDM0RmtkbjNsT0F1SnZxU1d6OG9mTFR5c2cvcG05?=
+ =?utf-8?B?K0FnbFA3dGlwbllsV1VxbWFudXZ5dEM4QlFzbDdwb1BPaXhtbVlBWE9mQW1B?=
+ =?utf-8?B?bzRNaWkyWGEyak84UVVCN0UxMjJUUFNwWW96MUh2VEpSeWUrSENFbVg2SjlF?=
+ =?utf-8?B?Z2hkOVorUmd4ejFQMUFYODFUbU1jSmJWTXU0MWxKekNmRVgwYjkwa1NCNFpm?=
+ =?utf-8?B?cENOTmQrbHlheXZSRjYxbENFMVZpLzBQV2V6QnN2eDhYMUI0VXRtbkx0NG1r?=
+ =?utf-8?B?SlcvMkI1dnRYYmFwM3hzbGFqV2hsbXZ0VkV4R1ZPM2RmeGdhYnRUUGQ1TGFJ?=
+ =?utf-8?B?Rk9kL1R6QXNjM3VXZ0lJMDFnbmxPT0VyOGxwaGkyak00WVBBcG9FZytTU00y?=
+ =?utf-8?B?UXplakpHanBoZWRQNncrb0I4UnM4VVRUTC9OejJhby95SEI4d0VTL085c3dL?=
+ =?utf-8?B?M0p0c1RJMWtseHRNRWlZY1dnYmpJenp2K084QTJTMjlVWDVzaVhNZDVkNlBy?=
+ =?utf-8?B?QjNHSVViN3RPWlZ0VmdSNm9CZUs0c3lHc21sS3ZXSHZNeXpmamp3UUpBRHdn?=
+ =?utf-8?B?NS9sWXpLYWZvenUzNUg1aGxvWUpFQ01kb0xkd3grVzVqSFl2RFJrV1NtK01t?=
+ =?utf-8?B?MUhiMytpNXNYM2MzU0FWS2paRUsyY1Z0dmNFaGpCT1g2QW1BSEU4cHR3NC9n?=
+ =?utf-8?B?cEY2OGxUYWM1L1VCTVZhNVpuQXRNRmpERm0xQVJkN0lBS1M4MzdZa0dTUmtF?=
+ =?utf-8?B?RTQvZ09NVnJhdHpjZFl2dGx3YUJhby9OZFhKa1VJZDNycUxqcWJza25kU3dU?=
+ =?utf-8?B?WTVGa2ppVlhMNnpXdzkrbTYrMjlzcmt0KzBocTQwN3R1TDA0a0pObkcyb0Jt?=
+ =?utf-8?B?bnlZRlpsMXRXUVVJTzYvUXJ0U0dIeHc0dWxrWGFnRjdkcDNBdC9pVUhsQkpJ?=
+ =?utf-8?B?QnBXa0ErTDFIV0pRY0FKUUJ1VXBMWXZLeGp3bXhSL09XK2xKSGJzS1JqYjM5?=
+ =?utf-8?B?OHhtZy9TWDk4N0NENFVMbFNlMTdJOG16WFB2MExFNC8wbXNFeHZGM1NyUHdZ?=
+ =?utf-8?B?TXAxMjdDYy9QSE1qMXY4UGhwOFhoSGtWUi9ORThRZ3FHYWRYdDZ0dGlPQkky?=
+ =?utf-8?Q?vMoPR91atMU2FppcKDcPM1gCWm5KGnUy?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR12MB7091.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(1800799024);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?YmN2N3d6VG5DUDIwMVlEZldmQjNxS1V6M2pjbmY2SnpuaGhzYWoxdTBWdmw5?=
+ =?utf-8?B?MVJoajB3UVBlZ2dzdWF0SXpHdnVlR0FoV2pHSU10M3ppUWE3TWxtSWptTUdS?=
+ =?utf-8?B?MHEzYjdxbHljVGN0cG14RlhpMFZVc2t3QWJrMFR6MXVOWFVDN3I0N0hZbTBV?=
+ =?utf-8?B?V2dhNnZYcTQ0RXd0SHJnRkJRb1R4VjZrOEFCZytSaDJpZ3J6cHJkNUhCc291?=
+ =?utf-8?B?N2d5UmI5QUs2VGd1ekFBV3M5TjYzWTdUOVB3aDdvTDhRdzJPM0ZJenhuMU5F?=
+ =?utf-8?B?NGJpQ0hkUkhRK2p1dkduTEFwK1lMeExOeUwzUk4xaFdxekZ3N2hiaVVUa3N4?=
+ =?utf-8?B?Y0JsclhWK3pSejB4bjRFYitvVzZhQ0VVM0pGS1pWOVdpaGpDMUtJVGphbSsz?=
+ =?utf-8?B?VEJRR2lxc2hHNEpOWTNxM2tXdDNyeCt1WnRNRHk1ak0yeVJsUjNwK2VhbUNE?=
+ =?utf-8?B?MCtQQzRjM3NMYUE3MzFvYkJyTURjQWo3R0hITERSZ0RaUjEwQkgzejN2VmtB?=
+ =?utf-8?B?czBYNk9mTEZjcFRmRlZpdDJUSE16eEovMGprNHNoWS9Ha0VYVFZBUGlLZitB?=
+ =?utf-8?B?dUt5TUZ1N3JWenNMRFJWclVrUFRnWnVncUVvdjhoa0lBTHd5ZU00RXVYa3dx?=
+ =?utf-8?B?RU0vQ3h0RzN5UWwvU1EvV1M3WWVaUXR4NXB0RUg4Nkd3cDhCQjh4UFJVd1Yy?=
+ =?utf-8?B?THdDZGkxRUprMUxVQnI3cXdlZmhPck0weWVzbm9UVWNLK2E4cmhyamJ2blRW?=
+ =?utf-8?B?K3VXRWlpbkVEV0Y2UUEwVlMxdmJZOFhNZlQzeW04Y0Z6TXFZZmZCVXlUL0Fv?=
+ =?utf-8?B?V3d1VlNsbUdCM1cvTCtJNXFud25iQmJua3Bwd0g1aUtMeVpnbmZ1dXNscGpl?=
+ =?utf-8?B?TkdINmNNbUVmcFpUTWRBNE9LUzFHbTlEMmt2blQvYVc4ZVY2WFpFdG9HL21Y?=
+ =?utf-8?B?L01MYkdLbkNNajVDM3Y5MVZRWE0xdWI0MlVqVmtoWnNZdWFFUks4aEF0RU1l?=
+ =?utf-8?B?NHhsQzkxTjd1T2EwWWhoOFRCU0hjWGpETnNFNEZhWVJNVXZFd2JPanFkSWU2?=
+ =?utf-8?B?M2FMMHRzVDczTFR3TUorT1RlWDJic3hQUURBQXpHZDdMY0pjeW12UUN4Ym5V?=
+ =?utf-8?B?R1RNcEUwSy9ObjI5dk5UV29wYlVjTnFNbzlWS04zOWp5QXpoWnFkZ2Q5RG1n?=
+ =?utf-8?B?dmlKb3Z3VUZRWnd1RnhhbDNXZUJ1dEQ5NDYyaUZKTE1VSDR3SU9CUEFVcTNB?=
+ =?utf-8?B?SStJWVlBejFqMHZOZnNyczRSTlhGNElkbnNPOTlYK1h0WUc4ZHNSeWR4N0Mr?=
+ =?utf-8?B?SDVzeGhxa0JWVVhrR1BFOHM1clB5TVdJbytmTmJsb2xwV2NTV3JLYmszcjFF?=
+ =?utf-8?B?Ykh2NVF4MyticDlhSk9uVzExU2hBUTUvdytBcGkvdWk4SmNOTms0czRsK3Vp?=
+ =?utf-8?B?NC9UTkNtVTB4cy9QcVhnbDlNcU9wZlhVRzdSQXpRUWdDWnNJVDBMYmJlWDNa?=
+ =?utf-8?B?QWoyVGxNL09CYy9UNHpOSzRlOG1oRHR0bWFBa3Y3bHhVUnJNUmtnVmxvV1U1?=
+ =?utf-8?B?Z3VlZGJjMzkxY2NrTU12TDBCNnFmMW9RZkFFK2FyZktTNXZUS0RId21tQ2gw?=
+ =?utf-8?B?RGJjRWZkaGM3RU5qYzVjaE5FYmVWR1NUZUJnTmNaSm9kT1hPbXZ2OGVvYXow?=
+ =?utf-8?B?VnRxdWlabnpPVzBmYnNUQUNqMTdSVWtiUlNybTgybXMwVmtMWWxvc2o1VS85?=
+ =?utf-8?B?UWNJbklkOER1RzhkeEMxUUg5NkE0d3FrYUNDZFdjRTRTRWZvLzhPT2xRZGFX?=
+ =?utf-8?B?TUdBMjZVdnF3V3U4T3QrbmFzNXVOUVpWeFpVUjdKM0h0RncyQ2drTE5OSGNL?=
+ =?utf-8?B?MDYyYW1hdGFPV2FkbjYzV0dRZzQ4K0RXclI0U3l2OFowRzVRQmFTeS9JNmlW?=
+ =?utf-8?B?Ky9STUZIWWNiWE1GeGo5S0dKNStpTTdVNEtSVzdNd0lZdkJIWGZiaDFobjUx?=
+ =?utf-8?B?UkUweEhWYUMrTkdwUFVZeXh5YkxVdnQxSTZucy9TZWhubnF1MFNhWTlBcEtX?=
+ =?utf-8?B?b2w3dUlMazhUQlRhRkF4Z3BHK3ZFSzRuYWtadmlCT25EZVYzVVRPZXZ5NUxj?=
+ =?utf-8?Q?6GUeTeI64mkixApOny0rUKMn/?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 50b42c63-99c0-429d-b92e-08de3c879548
+X-MS-Exchange-CrossTenant-AuthSource: SA0PR12MB7091.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Dec 2025 09:43:35.9554
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6/yYp375Ua5wmbEnHXANCNWVXCdlpD7Q0/Y7WWU8qaFJrBXFPAxbACWRBes0FrBg
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPF7D094C5BF
 
-Hi Nico,
 
-On 2025/12/2 01:46, Nico Pache wrote:
-> The current mechanism for determining mTHP collapse scales the
-> khugepaged_max_ptes_none value based on the target order. This
-> introduces an undesirable feedback loop, or "creep", when max_ptes_none
-> is set to a value greater than HPAGE_PMD_NR / 2.
+
+On 12-Dec-25 1:29 PM, Yo-Jung Leo Lin (AMD) wrote:
+> Add a uma/ directory containing two sysfs files as interfaces to
+> inspect or change UMA carveout size. These files are:
 > 
-> With this configuration, a successful collapse to order N will populate
-> enough pages to satisfy the collapse condition on order N+1 on the next
-> scan. This leads to unnecessary work and memory churn.
+> - uma/carveout_options: a read-only file listing all the available
+>    UMA allocation options and their index.
 > 
-> To fix this issue introduce a helper function that will limit mTHP
-> collapse support to two max_ptes_none values, 0 and HPAGE_PMD_NR - 1.
-> This effectively supports two modes:
+> - uma/carveout: a file that is both readable and writable. On read,
+>    it shows the index of the current setting. Writing a valid index
+>    into this file allows users to change the UMA carveout size to that
+>    option on the next boot.
 > 
-> - max_ptes_none=0: never introduce new none-pages for mTHP collapse.
-> - max_ptes_none=511 (on 4k pagesz): Always collapse to the highest
->    available mTHP order.
-> 
-> This removes the possiblilty of "creep", while not modifying any uAPI
-> expectations. A warning will be emitted if any non-supported
-> max_ptes_none value is configured with mTHP enabled.
-> 
-> The limits can be ignored by passing full_scan=true, this is useful for
-> madvise_collapse (which ignores limits), or in the case of
-> collapse_scan_pmd(), allows the full PMD to be scanned when mTHP
-> collapse is available.
-> 
-> Signed-off-by: Nico Pache <npache@redhat.com>
+> Co-developed-by: Mario Limonciello (AMD) <superm1@kernel.org>
+> Signed-off-by: Mario Limonciello (AMD) <superm1@kernel.org>
+> Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+> Signed-off-by: Yo-Jung Leo Lin (AMD) <Leo.Lin@amd.com>
 > ---
->   mm/khugepaged.c | 43 ++++++++++++++++++++++++++++++++++++++++++-
->   1 file changed, 42 insertions(+), 1 deletion(-)
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_device.c | 143 +++++++++++++++++++++++++++++
+>   1 file changed, 143 insertions(+)
 > 
-> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> index 8dab49c53128..f425238d5d4f 100644
-> --- a/mm/khugepaged.c
-> +++ b/mm/khugepaged.c
-> @@ -463,6 +463,44 @@ void __khugepaged_enter(struct mm_struct *mm)
->   		wake_up_interruptible(&khugepaged_wait);
->   }
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+> index 903c4706040d..e78e6982312c 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+> @@ -36,6 +36,7 @@
+>   #include <linux/pci.h>
+>   #include <linux/pci-p2pdma.h>
+>   #include <linux/apple-gmux.h>
+> +#include <linux/nospec.h>
 >   
-> +/**
-> + * collapse_max_ptes_none - Calculate maximum allowed empty PTEs for collapse
-> + * @order: The folio order being collapsed to
-> + * @full_scan: Whether this is a full scan (ignore limits)
-> + *
-> + * For madvise-triggered collapses (full_scan=true), all limits are bypassed
-> + * and allow up to HPAGE_PMD_NR - 1 empty PTEs.
-> + *
-> + * For PMD-sized collapses (order == HPAGE_PMD_ORDER), use the configured
-> + * khugepaged_max_ptes_none value.
-> + *
-> + * For mTHP collapses, we currently only support khugepaged_max_pte_none values
-> + * of 0 or (HPAGE_PMD_NR - 1). Any other value will emit a warning and no mTHP
-> + * collapse will be attempted
-> + *
-> + * Return: Maximum number of empty PTEs allowed for the collapse operation
-> + */
-> +static unsigned int collapse_max_ptes_none(unsigned int order, bool full_scan)
+>   #include <drm/drm_atomic_helper.h>
+>   #include <drm/drm_client_event.h>
+> @@ -417,6 +418,146 @@ static const struct attribute_group amdgpu_board_attrs_group = {
+>   	.is_visible = amdgpu_board_attrs_is_visible
+>   };
+>   
+> +static ssize_t carveout_options_show(struct device *dev,
+> +				     struct device_attribute *attr,
+> +				     char *buf)
 > +{
-> +	/* ignore max_ptes_none limits */
-> +	if (full_scan)
-> +		return HPAGE_PMD_NR - 1;
+> +	struct drm_device *ddev = dev_get_drvdata(dev);
+> +	struct amdgpu_device *adev = drm_to_adev(ddev);
+> +	struct amdgpu_uma_carveout_info *uma_info = &adev->uma_info;
+> +	uint32_t memory_carved;
+> +	ssize_t size = 0;
 > +
-> +	if (!is_mthp_order(order))
-> +		return khugepaged_max_ptes_none;
+> +	if (!uma_info || !uma_info->num_entries)
+> +		return -ENODEV;
 > +
-> +	/* Zero/non-present collapse disabled. */
-> +	if (!khugepaged_max_ptes_none)
-> +		return 0;
+> +	for (int i = 0; i < uma_info->num_entries; i++) {
+> +		memory_carved = uma_info->entries[i].memory_carved_mb;
+> +		if (memory_carved >= SZ_1G/SZ_1M) {
+> +			size += sysfs_emit_at(buf, size, "%d: %s (%u GB)\n",
+> +					      i,
+> +					      uma_info->entries[i].name,
+> +					      memory_carved >> 10);
+> +		} else {
+> +			size += sysfs_emit_at(buf, size, "%d: %s (%u MB)\n",
+> +					      i,
+> +					      uma_info->entries[i].name,
+> +					      memory_carved);
+> +		}
+> +	}
 > +
-> +	if (khugepaged_max_ptes_none == HPAGE_PMD_NR - 1)
-> +		return (1 << order) - 1;
+> +	return size;
+> +}
+> +static DEVICE_ATTR_RO(carveout_options);
 > +
-> +	pr_warn_once("mTHP collapse only supports max_ptes_none values of 0 or %d\n",
-> +		      HPAGE_PMD_NR - 1);
-> +	return -EINVAL;
+> +static ssize_t carveout_show(struct device *dev,
+> +			     struct device_attribute *attr,
+> +			     char *buf)
+> +{
+> +	struct drm_device *ddev = dev_get_drvdata(dev);
+> +	struct amdgpu_device *adev = drm_to_adev(ddev);
+> +
+> +	return sysfs_emit(buf, "%u\n", adev->uma_info.uma_option_index);
+
+It would be better to show the size along with the index.
+
+Regardless, series is -
+
+	Reviewed-by: Lijo Lazar <lijo.lazar@amd.com>
+
+Thanks,
+Lijo
+
 > +}
 > +
->   void khugepaged_enter_vma(struct vm_area_struct *vma,
->   			  vm_flags_t vm_flags)
->   {
-> @@ -550,7 +588,10 @@ static int __collapse_huge_page_isolate(struct vm_area_struct *vma,
->   	pte_t *_pte;
->   	int none_or_zero = 0, shared = 0, result = SCAN_FAIL, referenced = 0;
->   	const unsigned long nr_pages = 1UL << order;
-> -	int max_ptes_none = khugepaged_max_ptes_none >> (HPAGE_PMD_ORDER - order);
-> +	int max_ptes_none = collapse_max_ptes_none(order, !cc->is_khugepaged);
+> +static ssize_t carveout_store(struct device *dev,
+> +			      struct device_attribute *attr,
+> +			      const char *buf, size_t count)
+> +{
+> +	struct drm_device *ddev = dev_get_drvdata(dev);
+> +	struct amdgpu_device *adev = drm_to_adev(ddev);
+> +	struct amdgpu_uma_carveout_info *uma_info = &adev->uma_info;
+> +	struct amdgpu_uma_carveout_option *opt;
+> +	unsigned long val;
+> +	uint8_t flags;
+> +	int r;
 > +
-> +	if (max_ptes_none == -EINVAL)
-> +		goto out;
-
-After testing your patchset, I hit the following crash. The reason is 
-that when 'max_ptes_none' is -EINVAL here, it shouldn't goto out to call 
-release_pte_pages(), because the '_pte' hasn't been initialized at this 
-point, and there's no need to release folios either.
-
-After applying the fix below, the crash issue is resolved. I'm not sure 
-whether Andrew will help fix this or if you will send a new version to 
-address this issue.
-
-diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-index 8cffaf59ced8..2e8171a6d7df 100644
---- a/mm/khugepaged.c
-+++ b/mm/khugepaged.c
-@@ -646,7 +646,7 @@ static int __collapse_huge_page_isolate(struct 
-vm_area_struct *vma,
-         int max_ptes_none = collapse_max_ptes_none(order, 
-!cc->is_khugepaged);
-
-         if (max_ptes_none == -EINVAL)
--               goto out;
-+               return result;
-
-         for (_pte = pte; _pte < pte + nr_pages;
-              _pte++, addr += PAGE_SIZE) {
-
-"
-[  565.319345] Unable to handle kernel paging request at virtual address 
-fffffffffffffffa
-.......
-[  565.319409] swapper pgtable: 4k pages, 48-bit VAs, pgdp=0000001f8549a000
-[  565.319416] [fffffffffffffffa] pgd=0000001f85f2a403, 
-p4d=0000001f85f2a403, pud=0000001f85f2b403, pmd=0000000000000000
-[  565.319427] Internal error: Oops: 0000000096000006 [#1]  SMP
-.......
-[  565.326733] pc : release_pte_pages+0x68/0x178
-[  565.326960] lr : __collapse_huge_page_isolate+0xc0/0x748
-[  565.327232] sp : ffff800083593910
-.......
-[  565.331476] Call trace:
-[  565.331664]  release_pte_pages+0x68/0x178 (P)
-[  565.331940]  __collapse_huge_page_isolate+0xc0/0x748
-[  565.332249]  collapse_huge_page+0x4cc/0xa70
-[  565.332510]  mthp_collapse+0x254/0x2a8
-[  565.332754]  collapse_scan_pmd+0x5a0/0x6d8
-[  565.333010]  collapse_single_pmd+0x214/0x288
-[  565.333275]  collapse_scan_mm_slot.constprop.0+0x2ac/0x460
-[  565.333617]  khugepaged+0x204/0x2c8
-[  565.333992]  kthread+0xf8/0x110
-[  565.334368]  ret_from_fork+0x10/0x20
-"
-
+> +	r = kstrtoul(buf, 10, &val);
+> +	if (r)
+> +		return r;
+> +
+> +	if (val >= uma_info->num_entries)
+> +		return -EINVAL;
+> +
+> +	val = array_index_nospec(val, uma_info->num_entries);
+> +	opt = &uma_info->entries[val];
+> +
+> +	if (!(opt->flags & AMDGPU_UMA_FLAG_AUTO) &&
+> +	    !(opt->flags & AMDGPU_UMA_FLAG_CUSTOM)) {
+> +		drm_err_once(ddev, "Option %lu not supported due to lack of Custom/Auto flag", val);
+> +		return -EINVAL;
+> +	}
+> +
+> +	flags = opt->flags;
+> +	flags &= ~((flags & AMDGPU_UMA_FLAG_AUTO) >> 1);
+> +
+> +	guard(mutex)(&uma_info->update_lock);
+> +
+> +	r = amdgpu_acpi_set_uma_allocation_size(adev, val, flags);
+> +	if (r)
+> +		return r;
+> +
+> +	uma_info->uma_option_index = val;
+> +
+> +	return count;
+> +}
+> +static DEVICE_ATTR_RW(carveout);
+> +
+> +static struct attribute *amdgpu_uma_attrs[] = {
+> +	&dev_attr_carveout.attr,
+> +	&dev_attr_carveout_options.attr,
+> +	NULL
+> +};
+> +
+> +const struct attribute_group amdgpu_uma_attr_group = {
+> +	.name = "uma",
+> +	.attrs = amdgpu_uma_attrs
+> +};
+> +
+> +static void amdgpu_uma_sysfs_init(struct amdgpu_device *adev)
+> +{
+> +	int rc;
+> +
+> +	if (!(adev->flags & AMD_IS_APU))
+> +		return;
+> +
+> +	if (!amdgpu_acpi_is_set_uma_allocation_size_supported())
+> +		return;
+> +
+> +	rc = amdgpu_atomfirmware_get_uma_carveout_info(adev, &adev->uma_info);
+> +	if (rc) {
+> +		drm_dbg(adev_to_drm(adev),
+> +			"Failed to parse UMA carveout info from VBIOS: %d\n", rc);
+> +		goto out_info;
+> +	}
+> +
+> +	mutex_init(&adev->uma_info.update_lock);
+> +
+> +	rc = devm_device_add_group(adev->dev, &amdgpu_uma_attr_group);
+> +	if (rc) {
+> +		drm_dbg(adev_to_drm(adev), "Failed to add UMA carveout sysfs interfaces %d\n", rc);
+> +		goto out_attr;
+> +	}
+> +
+> +	return;
+> +
+> +out_attr:
+> +	mutex_destroy(&adev->uma_info.update_lock);
+> +out_info:
+> +	return;
+> +}
+> +
+> +static void amdgpu_uma_sysfs_fini(struct amdgpu_device *adev)
+> +{
+> +	struct amdgpu_uma_carveout_info *uma_info = &adev->uma_info;
+> +
+> +	if (!amdgpu_acpi_is_set_uma_allocation_size_supported())
+> +		return;
+> +
+> +	mutex_destroy(&uma_info->update_lock);
+> +	uma_info->num_entries = 0;
+> +}
+> +
+>   static void amdgpu_device_get_pcie_info(struct amdgpu_device *adev);
 >   
->   	for (_pte = pte; _pte < pte + nr_pages;
->   	     _pte++, addr += PAGE_SIZE) {
+>   /**
+> @@ -4492,6 +4633,7 @@ static int amdgpu_device_sys_interface_init(struct amdgpu_device *adev)
+>   	amdgpu_fru_sysfs_init(adev);
+>   	amdgpu_reg_state_sysfs_init(adev);
+>   	amdgpu_xcp_sysfs_init(adev);
+> +	amdgpu_uma_sysfs_init(adev);
+>   
+>   	return r;
+>   }
+> @@ -4507,6 +4649,7 @@ static void amdgpu_device_sys_interface_fini(struct amdgpu_device *adev)
+>   
+>   	amdgpu_reg_state_sysfs_fini(adev);
+>   	amdgpu_xcp_sysfs_fini(adev);
+> +	amdgpu_uma_sysfs_fini(adev);
+>   }
+>   
+>   /**
+> 
 
 
