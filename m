@@ -1,55 +1,54 @@
-Return-Path: <linux-doc+bounces-69841-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69839-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB5AECC4CCF
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 19:05:15 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE7E9CC4C4B
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 19:00:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 132B030D3944
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 18:00:07 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6E527302ACEF
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Dec 2025 17:59:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DB38722FDEC;
-	Tue, 16 Dec 2025 18:00:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 13F7A252906;
+	Tue, 16 Dec 2025 17:59:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="rlEm/gAv"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="Yj4JB5Qj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D59EB2D9EFC;
-	Tue, 16 Dec 2025 18:00:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AFDC23D2AB
+	for <linux-doc@vger.kernel.org>; Tue, 16 Dec 2025 17:59:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765908002; cv=none; b=MCr2AJT0V1M2BqwOoWuuzKnj9DWOMouRKq4TBV3gMLngIaWlr/Fma1jt97+F9eibkGwfztKVkigH7OWMCyVD0hn7uwUv4HnFxg0Z4k06rjrTiDjSRwK0971HW6nlSXXK5cwtwzaRtjfqdrjqA1kFr0pD4S75IjjJN/AXEt8INVc=
+	t=1765907998; cv=none; b=WoTAPaUdcVHPpF/ub15VyAtUuUNvs2LgdQ2cdHXxobwqfDCrlYjtw7rQx6Ok6rNFOcomXztTkBhkzQXoH7n/nIo+pMzUglHL3YhKgNjjg6aSi1GQ8mwQKu2zYqWYLRJ5emZ8CRrJkkuJ3w5K3enS1p1f5GV3TsxKaaYkk+Tamb4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765908002; c=relaxed/simple;
-	bh=emDhk2MMrd8ZT9IWg/kP2hcjE9Z97TjWHRlexkv8XLo=;
+	s=arc-20240116; t=1765907998; c=relaxed/simple;
+	bh=UuH4n7fnC1ntL8K6yhE/4dzmBLTpArEV3BFoZaY9HgI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=FwD13QEKnuMXaOK0k/Fn2yny6CS81Gx5wUxG9mEJbzkf6ehH0QC1Xhg0yaQ1K7ZkF+YKLI5RYKWUnGYwW0eQ/S06+rpudsbCHq90bXCnvRD2NugAEX9/080HPbyNckrwV7CWM1gErmFKqz1iBkEoZat+FV0sJI2qiB/EYTN+2zQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=rlEm/gAv; arc=none smtp.client-ip=185.171.202.116
+	 In-Reply-To:To:Cc; b=Djegcj06rCyuaPDM+HZ0R/ua1n0Dz3LzJkZAcyYT+aoktrc4W7XJMD6140zZwxcAqX6pIVMO0i+vKi8obDbAVV0fiShvpoE/wyBotQuUQEauL5IMi1avF1TjNt1gHQbMwyTZfVA0KoPmgNoJEgjQjJsk4JhgbZkr19NQOQrDLjc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=Yj4JB5Qj; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from smtpout-01.galae.net (unknown [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id A2637C1A582;
-	Tue, 16 Dec 2025 17:59:34 +0000 (UTC)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id E2E641A2254;
+	Tue, 16 Dec 2025 17:59:54 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 1B9576071C;
-	Tue, 16 Dec 2025 17:59:49 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 38D9A119A97D5;
-	Tue, 16 Dec 2025 18:59:44 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id B6D5A6072F;
+	Tue, 16 Dec 2025 17:59:54 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 3A5C2119A97E8;
+	Tue, 16 Dec 2025 18:59:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1765907987; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1765907991; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=GmMyYFYj3nN0WWZncwkj3rSY84I1KnZQTlsrUpqIOyA=;
-	b=rlEm/gAvrMbqr3Pj4NGgu9O+LbFKm4iDqhBczJ0MFSNJklRloeIRAsDfvYUSxHPtjJWmFM
-	6cKCOdkflGuz5f+0Xzgl4l41lVU9rNcFeNpED8pEwgaK5E1Dh0Rx6A+hmEkY7o2ER5tac2
-	iLb7R0CH6J9upYVCg2ct4zQpvQ4DLr1Uu61thZsTh+NsXqpghIXzsPTWE58VzrBsT7RY8m
-	zIbD39BzKVIUskMhJL9ZTmLtiEw1VU1Qae5G5aHZzgeHureeVPrrjAa0hhcNsCXOD4kS4Z
-	thOY1qJd+CovZN8O/Go0lIxNieqk/vbiHGq4dK2f2WiTYpmeMRfXc52pPvzQCA==
+	bh=w07+z7x1px2/5P0sD/KMZgJOKOJk0feHbjhM11jcOSE=;
+	b=Yj4JB5QjxEBsSUUmh/Tyl7o/8qHKSKegodrvvuWZHLUQhO4pBv/ziIOd/jn42KqNj0Mycc
+	JHcGScdowUu9Fs3i3vJr1S8XYxhw8//xtQMQCT4v5qnlzyoXA+HjZgORReIbup5bUbmnwV
+	S2FEN9KrdPMPEUIa5ymnnAMic/E11FQ7McV1OH0CrGamPVt6fmx/kQRD4uJ31xZ8jqd9Di
+	Z4GpR3XfSHYlSlz8V5hBiSz98f2Q9Vd3tK3P4VNdz6KoMsqiSVyjVixpGOV381uuKSKAcl
+	HpblAmiTtrxMovBRTbvqomw+dJeYXiixSn5PvTwMevz0psjPxrbf2xMgFEn80w==
 From: Luca Ceresoli <luca.ceresoli@bootlin.com>
-Date: Tue, 16 Dec 2025 18:58:39 +0100
-Subject: [PATCH v3 06/22] drm/bridge: add next_bridge pointer to struct
- drm_bridge
+Date: Tue, 16 Dec 2025 18:58:40 +0100
+Subject: [PATCH v3 07/22] drm/bridge: ite-it66121: get/put the next bridge
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -58,7 +57,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-6-b5165fab8058@bootlin.com>
+Message-Id: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-7-b5165fab8058@bootlin.com>
 References: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-0-b5165fab8058@bootlin.com>
 In-Reply-To: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-0-b5165fab8058@bootlin.com>
 To: Andrzej Hajda <andrzej.hajda@intel.com>, 
@@ -84,78 +83,50 @@ Cc: Hui Pu <Hui.Pu@gehealthcare.com>,
 X-Mailer: b4 0.14.3
 X-Last-TLS-Session-Version: TLSv1.3
 
-Many bridge drivers store a next_bridge pointer in their private data and
-use it for attach and sometimes other purposes. This is going to be risky
-when bridge hot-unplug is used.
+This driver obtains a bridge pointer from of_drm_find_bridge() in the probe
+function and stores it until driver removal. of_drm_find_bridge() is
+deprecated. Move to of_drm_find_and_get_bridge() for the bridge to be
+refcounted and use bridge->next_bridge to put the reference on
+deallocation.
 
-Considering this example scenario:
-
-  1. pipeline: encoder --> bridge A --> bridge B --> bridge C
-  2. encoder takes a reference to bridge B
-  3. bridge B takes a next_bridge reference to bridge C
-  4. encoder calls (bridge B)->b_foo(), which in turns references
-     next_bridge, e.g.:
-
-       b_foo() {
-           bar(b->next_bridge);
-       }
-
-If bridges B and C are removed, bridge C can be freed but B is still
-allocated because the encoder holds a reference to B. So when step 4
-happens, 'b->next-bridge' would be a use-after-free.
-
-Calling drm_bridge_put() in the B bridge .remove function does not solve
-the problem as it leaves a (potentially long) risk window between B removal
-and the final deallocation of B. A safe moment to put the B reference is in
-__drm_bridge_free(), when the last reference has been put. This can be done
-by drivers in the .destroy func. However to avoid the need for so many
-drivers to implement a .destroy func, just offer a next_bridge pointer to
-all bridges that is automatically put it in __drm_bridge_free(), exactly
-when the .destroy func is called.
-
-Suggested-by: Maxime Ripard <mripard@kernel.org>
-Link: https://lore.kernel.org/all/20251201-thick-jasmine-oarfish-1eceb0@houat/
 Signed-off-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
 ---
- drivers/gpu/drm/drm_bridge.c |  2 ++
- include/drm/drm_bridge.h     | 11 +++++++++++
- 2 files changed, 13 insertions(+)
+ drivers/gpu/drm/bridge/ite-it66121.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_bridge.c b/drivers/gpu/drm/drm_bridge.c
-index 64aa69dcf46f..6dcf8f6d3ecf 100644
---- a/drivers/gpu/drm/drm_bridge.c
-+++ b/drivers/gpu/drm/drm_bridge.c
-@@ -275,6 +275,8 @@ static void __drm_bridge_free(struct kref *kref)
- 	if (bridge->funcs->destroy)
- 		bridge->funcs->destroy(bridge);
+diff --git a/drivers/gpu/drm/bridge/ite-it66121.c b/drivers/gpu/drm/bridge/ite-it66121.c
+index 0185f61e6e59..9246e9c15a6e 100644
+--- a/drivers/gpu/drm/bridge/ite-it66121.c
++++ b/drivers/gpu/drm/bridge/ite-it66121.c
+@@ -298,7 +298,6 @@ struct it66121_chip_info {
+ struct it66121_ctx {
+ 	struct regmap *regmap;
+ 	struct drm_bridge bridge;
+-	struct drm_bridge *next_bridge;
+ 	struct drm_connector *connector;
+ 	struct device *dev;
+ 	struct gpio_desc *gpio_reset;
+@@ -596,7 +595,7 @@ static int it66121_bridge_attach(struct drm_bridge *bridge,
+ 	if (!(flags & DRM_BRIDGE_ATTACH_NO_CONNECTOR))
+ 		return -EINVAL;
  
-+	drm_bridge_put(bridge->next_bridge);
-+
- 	kfree(bridge->container);
- }
+-	ret = drm_bridge_attach(encoder, ctx->next_bridge, bridge, flags);
++	ret = drm_bridge_attach(encoder, ctx->bridge.next_bridge, bridge, flags);
+ 	if (ret)
+ 		return ret;
  
-diff --git a/include/drm/drm_bridge.h b/include/drm/drm_bridge.h
-index 8f10d2fd6016..63660256c4f5 100644
---- a/include/drm/drm_bridge.h
-+++ b/include/drm/drm_bridge.h
-@@ -1278,6 +1278,17 @@ struct drm_bridge {
- 	 * @hpd_cb.
- 	 */
- 	void *hpd_data;
-+
-+	/**
-+	 * @next_bridge: Pointer to the following bridge, automatically put
-+	 * when this bridge is freed (i.e. at destroy time). This is for
-+	 * drivers needing to store a pointer to the next bridge in the
-+	 * chain, and ensures any code still holding a reference to this
-+	 * bridge after its removal cannot use-after-free the next
-+	 * bridge. Any other bridge pointers stored by the driver must be
-+	 * put in the .destroy callback by driver code.
-+	 */
-+	struct drm_bridge *next_bridge;
- };
+@@ -1543,9 +1542,9 @@ static int it66121_probe(struct i2c_client *client)
+ 		return -EINVAL;
+ 	}
  
- static inline struct drm_bridge *
+-	ctx->next_bridge = of_drm_find_bridge(ep);
++	ctx->bridge.next_bridge = of_drm_find_and_get_bridge(ep);
+ 	of_node_put(ep);
+-	if (!ctx->next_bridge) {
++	if (!ctx->bridge.next_bridge) {
+ 		dev_dbg(ctx->dev, "Next bridge not found, deferring probe\n");
+ 		return -EPROBE_DEFER;
+ 	}
 
 -- 
 2.52.0
