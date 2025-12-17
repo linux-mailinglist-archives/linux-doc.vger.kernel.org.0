@@ -1,51 +1,51 @@
-Return-Path: <linux-doc+bounces-69898-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69899-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37479CC7357
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 12:00:37 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id C96B2CC735A
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 12:00:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 31E40300FE23
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 10:55:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 53DCA3027CF9
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 10:55:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B036C36402F;
-	Wed, 17 Dec 2025 10:17:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C83BD36828B;
+	Wed, 17 Dec 2025 10:18:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O8QQZoCT"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H15BsT0e"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8516036402C;
-	Wed, 17 Dec 2025 10:17:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A00EF368267;
+	Wed, 17 Dec 2025 10:18:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765966662; cv=none; b=pxcsn7x2ubwtS7/ltDz2hMjR7MmzEETONIGfiXssp+9yiHSc3vhdRK1hG/aXKZBbNg6ZcUmGAXVwaWA7idJtJRrOl0dlNh+RkPc/LyUIhHNKRvzT2IMX+UMM+fub5AlEPWb+VxZO8arJhq9H8N+kSIvsZocogwyV+jCdlZQJuIE=
+	t=1765966682; cv=none; b=m86wbp2/89WPji7WoqifLgmSrUq7tG33v7jdGzdbjBk3z2/a9gjhbr6yrMSgjzbgoTKSBTOFkHXTAyPDKu9CU4Vxl0iZswNJxLQ+YBCA0HOuG7GuYbtsXuKzUjrI24XYqypEzpGomQzCVUSkEBiOEzDZwGFE65Bp04YZ7jKjCow=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765966662; c=relaxed/simple;
-	bh=8fiVn2ZgRAMxuWDCmDkwSx5n9MWlyH2AXOpyMgeTHX8=;
-	h=Message-ID:Date:From:To:Subject:In-Reply-To:References:Cc; b=ciRvXGFABIbUJiWPUdVHcBoiN0lYqR+Sgc1eDV0/StVIMHk9y9rMRnoixiH3Te6luNv6Pei6Q0/dchu8lc2xgD2RCNtgdyim781ISNQ+HHa/E5fcw825dtiwX89uLTZbQEl+CYhePa8IrbAbi4mymfHg1en6IPAwEMcyXqle6tQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O8QQZoCT; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C3F0C4CEF5;
-	Wed, 17 Dec 2025 10:17:41 +0000 (UTC)
+	s=arc-20240116; t=1765966682; c=relaxed/simple;
+	bh=63wq7cQ07cPk2UFbCtAzGzxdoxkYBSOxCsTLdH1kFZ0=;
+	h=Message-ID:Date:From:To:Subject:In-Reply-To:References:Cc; b=IlHbZsm0Yg0gBiMCf2saYFu1BuxZyaptVseBq2P2Qsq0QQYeIcVI+H+2jbwasFYz6/m4+SqoBKVx6Yt49A8t2XJ7h4Y8Yp7KiKV7NM4K7N9zLD8pXgVNVI3c68w9BhkNffHhytrMhq4U7RtB+soamD5haj/Xz2C9meUsIrtyQyA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H15BsT0e; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FE9CC116B1;
+	Wed, 17 Dec 2025 10:18:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1765966662;
-	bh=8fiVn2ZgRAMxuWDCmDkwSx5n9MWlyH2AXOpyMgeTHX8=;
+	s=k20201202; t=1765966681;
+	bh=63wq7cQ07cPk2UFbCtAzGzxdoxkYBSOxCsTLdH1kFZ0=;
 	h=Date:From:To:Subject:In-Reply-To:References:Cc:From;
-	b=O8QQZoCT+lo88BxSzfhcgkUq6VKTur72pRBybceuQse7jqMKd6FlDzGYkUt7i1AeZ
-	 7LcOhYiaUxuWdL4eSBq9rk/9Y+kqfExxZ9L3YVx9hxYE3S1MFB2LyZ0JaPAntmfxiM
-	 Ce/XNRdPiukqzVKcznZESth9KZuoinj5JdAmcjDWb3pgeU4a147CDYNyJ0YXsFXJLJ
-	 8c0ujjOLNMSfMWpGkWW1BIUXIq01OSt/7OD/TYx2gcuaGFk/u7QMt/ravwFpV16pqD
-	 a2g21PzDbi/Os82PBlGocEX5OMiKj/PA0UPZUyhaFZSWwBtFnAyiOeO9RSt1yC6Nkn
-	 g2oL1QZWYwKTw==
-Message-ID: <c88ececc4692f3b9d8d5284bb398470a@kernel.org>
-Date: Wed, 17 Dec 2025 10:17:39 +0000
+	b=H15BsT0eaQ1D/ebqcBYDmXAEMdfwMhRHNg5Ft0Pb9y4mAQbfuzLUa8KjmKUqQMhqF
+	 +XRVFdfgcosWyhZrYK9yGr/D+xAWGEMkyEJc81MQ6SxQyKSmCK8p4H9aiuXMbAlw/a
+	 mpulpwF5Ar7SptGzBiNgyNtKQgQADBrhVFd+LpPAydtJjvpKNTfeQT34bEApChZnZ5
+	 6AY2Mgbs7XQCh0iiVgKoRwpEsouVmfyQ6p2Un1/F7sNiMgyMVN6ddcxHHOmnLgJzrB
+	 D0Nwqfm9qu3uqpe+nCJwVRpZNRTB9P12Noc0YhpWh0TGsU24IKggSzaVftcX6h6vGY
+	 XaXZoPwwd3n0A==
+Message-ID: <0330f880f446091e7bb31872f69f6de5@kernel.org>
+Date: Wed, 17 Dec 2025 10:17:58 +0000
 From: "Maxime Ripard" <mripard@kernel.org>
 To: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
-Subject: Re: [PATCH v3 08/22] drm/bridge: imx8qxp-pixel-combiner: get/put
- the next bridge
-In-Reply-To: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-8-b5165fab8058@bootlin.com>
-References: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-8-b5165fab8058@bootlin.com>
+Subject: Re: [PATCH v3 10/22] drm/meson: encoder_cvbs: get/put the next
+ bridge
+In-Reply-To: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-10-b5165fab8058@bootlin.com>
+References: <20251216-drm-bridge-alloc-getput-drm_of_find_bridge-v3-10-b5165fab8058@bootlin.com>
 Cc: dri-devel@lists.freedesktop.org, imx@lists.linux.dev, linux-amlogic@lists.infradead.org, linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, "Alexey
  Brodkin" <abrodkin@synopsys.com>, "Andrzej Hajda" <andrzej.hajda@intel.com>, "David
  Airlie" <airlied@gmail.com>, "Fabio Estevam" <festevam@gmail.com>, "Hui Pu" <Hui.Pu@gehealthcare.com>, "Jernej
@@ -65,7 +65,7 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 
-On Tue, 16 Dec 2025 18:58:41 +0100, Luca Ceresoli wrote:
+On Tue, 16 Dec 2025 18:58:43 +0100, Luca Ceresoli wrote:
 > This driver obtains a bridge pointer from of_drm_find_bridge() in the pro=
 be
 > function and stores it until driver removal. of_drm_find_bridge() is
