@@ -1,76 +1,206 @@
-Return-Path: <linux-doc+bounces-69872-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69875-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E742FCC5AAC
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 02:05:02 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E07A4CC5B1C
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 02:24:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9F9F830321C7
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 01:04:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 262093035D00
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Dec 2025 01:23:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 797B023815D;
-	Wed, 17 Dec 2025 01:04:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OToaw9PV"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5765241114;
+	Wed, 17 Dec 2025 01:23:51 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3833D8F7D;
-	Wed, 17 Dec 2025 01:04:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32253242D95;
+	Wed, 17 Dec 2025 01:23:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1765933477; cv=none; b=XVWasUDM7ifabGrAg/bTVMfAow6nPzl4TA4jeHGXfePtV6+UEimAhN9bfrnIym2OPQpEthzzCXjHibcKgaCckxrxprpd/CV3ikE9diu6NOX8TeOvSKtq9MXbDyzWCYvvSGcNE9z/eN5CFFKMTPtUcrOKkjL5JahQKxSceCtnSNY=
+	t=1765934631; cv=none; b=BcPnLXbgtiopdBQDdXaLNatDldFryNErX99C2kYPoNTrnJ0tqMgJ5Wqi+DQlvXlLefovCgKATQQVa/3+g64CDK9RE/JL7P/ugXGL3ImZek4tWa8prF+omdLW3dldUatyAVKfNOok1uwmznDR8AQlcNmqbQ6E35HecbvP4ZWdLfs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1765933477; c=relaxed/simple;
-	bh=ixKtfeI0ji4C5NFVPZEQx+AG/PUyyFjqBAuKeZkf5cI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PZb7FzhhSzHq1Z9GzhGj5sfYWrLP59f+NcE9QeiaXso8QqTThmBhr33/Zyj5LZYXh3Myik6Fc+srXajwCiw3RXAgl+ql0IzPvZU6BzZyUipuzftolNZO2n68XJALvq1ZO4kZnnZEaUTNyW26FFKSBzX9qs5nlz3RguK00913Z4c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OToaw9PV; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A299FC4CEF1;
-	Wed, 17 Dec 2025 01:04:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1765933476;
-	bh=ixKtfeI0ji4C5NFVPZEQx+AG/PUyyFjqBAuKeZkf5cI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=OToaw9PVYV58sKDwl8dMNNDdd3Gt4aKIs2HEzUU/mDkSrf39ddkQPF+5e+94Y71P1
-	 /Oh8aOJgV9nk3KpJOXGuhnHMnmn1oBYlevIHEftUAQfVt4S4IPTDxryeny0uiHf8JS
-	 x/+q6TbTwKffREyJcUMuE2KMAj+Q2Sb+0od+izxUErbtnQFIR+hN1mNHd95XfZvF1Q
-	 m32HPowCAM25ZgIFXkKuiiJvX2Jj5wyboGp16fasbxFfPkbZHZysh9sIJrXiigzMY/
-	 nq+cSYLdYWkEq45NrHvdjZYZFosWu7IDik8MHa1DARY2g/DmXI59Et954PYO43xWtr
-	 kGk9UqGaNK9OQ==
-Date: Tue, 16 Dec 2025 19:04:34 -0600
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Yuxi Wang <Yuxi.Wang@monolithicpower.com>
-Cc: wyx137120466@gmail.com, linux-kernel@vger.kernel.org,
-	linux@roeck-us.net, corbet@lwn.net, krzk+dt@kernel.org,
-	conor+dt@kernel.org, devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-hwmon@vger.kernel.org
-Subject: Re: [PATCH v2 RESEND 1/2] dt-bindings: hwmon: Add mps mp5926 driver
- bindings
-Message-ID: <176593347346.3476686.2888126677750880798.robh@kernel.org>
-References: <20251215022505.1602-1-Yuxi.Wang@monolithicpower.com>
- <20251215022505.1602-2-Yuxi.Wang@monolithicpower.com>
+	s=arc-20240116; t=1765934631; c=relaxed/simple;
+	bh=Wnrn1Kd50cXvshIa77OzrimnwDOv/zQIvEG08s5XoTs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Ht9Re1zfPk97l+H4wwESftKIzvmJvkT017vXwGNTHF/CIfM9NIX/t0bxbQuCMQVQE7rTQT8EeY+zVqeaxiepS9hldhrLVtU4ZVi9BkfrHB19JIjnUHLB6EvtxGbGM27n0YzaX5pSWoCh0bydLzNIzM+FE8k1Ys4UybZBFAZJ9vE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.40.57.136])
+	by gateway (Coremail) with SMTP id _____8Dx_78hBkJpNuAuAA--.35595S3;
+	Wed, 17 Dec 2025 09:23:45 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.40.57.136])
+	by front1 (Coremail) with SMTP id qMiowJBxLMIMBkJpsasAAA--.761S2;
+	Wed, 17 Dec 2025 09:23:24 +0800 (CST)
+From: Tianyang Zhang <zhangtianyang@loongson.cn>
+To: chenhuacai@kernel.org,
+	kernel@xen0n.name,
+	corbet@lwn.net,
+	alexs@kernel.org,
+	si.yanteng@linux.dev,
+	tglx@linutronix.de,
+	jiaxun.yang@flygoat.com,
+	peterz@infradead.org,
+	wangliupu@loongson.cn,
+	lvjianmin@loongson.cn,
+	maobibo@loongson.cn,
+	siyanteng@cqsoftware.com.cn,
+	gaosong@loongson.cn,
+	yangtiezhu@loongson.cn
+Cc: loongarch@lists.linux.dev,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Tianyang Zhang <zhangtianyang@loongson.cn>
+Subject: [PATCH v8 RESEND 0/5] Loongarch irq-redirect support
+Date: Wed, 17 Dec 2025 09:23:15 +0800
+Message-ID: <20251217012322.41701-1-zhangtianyang@loongson.cn>
+X-Mailer: git-send-email 2.41.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251215022505.1602-2-Yuxi.Wang@monolithicpower.com>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJBxLMIMBkJpsasAAA--.761S2
+X-CM-SenderInfo: x2kd0wxwld05hdqjqz5rrqw2lrqou0/
+X-Coremail-Antispam: 1Uk129KBj93XoW3Gr4xZryrZw1kWr17AF13Awc_yoW7Xr48pF
+	W7uas8trs5CrWxG3Z7ua18uFy3CryxGrW3Xa13Cw17C3s8ur1q9F1xKF98XFy8Grs5K3W2
+	qrs0q3yUW3WDAagCm3ZEXasCq-sJn29KB7ZKAUJUUUUD529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUBYb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+	Gr0_Gr1UM2kKe7AKxVWUAVWUtwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYI
+	kI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUtVWr
+	XwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI4
+	8JMxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j
+	6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwV
+	AFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv2
+	0xvE14v26ryj6F1UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4
+	v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AK
+	xVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8XTm3UUUUU==
 
+This series of patches introduces support for interrupt-redirect
+controllers, and this hardware feature will be supported on 3C6000
+for the first time
 
-On Mon, 15 Dec 2025 10:25:04 +0800, Yuxi Wang wrote:
-> Add a device tree bindings for mp5926 device.
-> 
-> Signed-off-by: Yuxi Wang <Yuxi.Wang@monolithicpower.com>
-> ---
->  Documentation/devicetree/bindings/trivial-devices.yaml | 2 ++
->  1 file changed, 2 insertions(+)
-> 
+change log:
+        v0->v1:
+        1.Rename the model names in the document.
+        2.Adjust the code format.
+        3.Remove architecture - specific prefixes.
+        4.Refactor the initialization logic, and IR driver no longer set 
+	  AVEC_ENABLE.
+        5.Enhance compatibility under certain configurations.
 
-Acked-by: Rob Herring (Arm) <robh@kernel.org>
+        v1->v2:
+        1.Fixed an erroneous enabling issue.
+
+        v2->v3
+        1.Replace smp_call with address mapping to access registers
+        2.Fix some code style issues
+
+        v3->v4
+        1.Provide reasonable comments on the modifications made to
+	  IRQ_SET_MASK_OK_DONE
+        2.Replace meaningless empty functions with parent_mask/unmask/ack
+        3.Added and indeed released resources
+        4.Added judgment for data structure initialization completion to 
+          avoid duplicate creation during cpuhotplug
+        5.Fixed the code style and some unnecessary troubles
+
+        v4->v5
+	1.when it is detected in avecintc_set_affinity that the current affinity
+	remains valid, the return value is modified to IRQ_SET_MASK_OK_DONE.
+	  After the introduction of redirect-domain, for each interrupt source, 
+	avecintc-domain only provides the CPU/interrupt vector, while redirect-domain 
+	provides other operations to synchronize interrupt affinity information 
+	among multiple cores. 	  The original intention is to notify the cascaded
+	redirect_set_affinity that multi-core synchronization is not required. 
+	  However, this introduces some compatibility issues, such as the new return
+	value causing msi_domain_set_affinity to no longer perform irq_chip_write_msi_msg.
+	  1) When redirect exist in the system, the msi msg_address and msg_data no 
+	longer changes after the allocation phase, so it does not actually require updating
+	the MSI message info.
+	  2) When only avecintc exists in the system, the irq_domain_activate_irq
+	interface will be responsible for the initial configuration of the MSI message,
+	which is unconditional. After that, if unnecessary, no modification to the MSI
+	message is alse correctly.
+
+	2.Restructured the macro definitions to make them appear more logical.
+
+	3.Adjusted the layout of members struct redirect_queue\struct redirect_table and 
+	struct redirect_item, making redirect_item the primary interface for accessing
+	other members.
+
+	4.The method of accessing registers has been standardized to MMIO.
+
+	5.Initialize variables at declaration whenever possible.
+
+	6.Replaced the the "struct page" in redirect_table and redirect_queue with "struct folio".
+
+	7.Adjusted the initialization process so that all irq_desc configurations are completed
+	during driver initialization, no longer relying on specific CPUs being online.
+
+	8.Refactored portions of the code to make them more concise and logical.
+
+	v5->v6
+	Fix the warning messages reported by the test bot.
+
+	v6->v7:
+	1 Split patch:
+ 	 1) Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+	 2) LoongArch: Architectural preparation for Redirect irqchip
+	 3) irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
+	 4) irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep affinity
+	 5) irqchip/irq-loongarch-ir:Add Redirect irqchip support
+
+	2 Use sizeof() to replace fixed-size macro definitions.
+
+	3 Unify the data types of the parameters for redirect_write/read_reg*.
+
+	4 rename irde_invalid_entry_node to irde_invalid_entry and add comments 
+	  explaining the 'raddr'.
+
+	5 Fix the critical condition check bug in redirect_table_alloc.
+
+	6 Use clear_bit to replace bitmap_release_region
+
+	7 Delete some goto and handle the failure when it occurs.
+
+	8 Removed the check for the `CONFIG_ACPI` macro, as CONFIG_ACPI 
+          is selected by the arch/loongarch/Kconfig.
+
+	9 Fixed the incorrect error flow in redirect_acpi_init.
+
+	v7->v8:
+	1 Apologies for the chaotic email delivery due to some network issues earlier.
+
+	2 redirect_table_alloc now allocates nr_irqs consecutive redirect table entries to 
+	  support multiple MSI devices.
+
+Tianyang Zhang (5):
+  Docs/LoongArch: Add Advanced Extended-Redirect IRQ model description
+  LoongArch: Architectural preparation for Redirect irqchip
+  irqchip/irq-loongson.h:irq-loongson.h preparation for Redirect irqchip
+  irqchip/loongarch-avec.c:return IRQ_SET_MASK_OK_DONE when keep
+    affinity
+  irqchip/irq-loongarch-ir:Add Redirect irqchip support
+
+ .../arch/loongarch/irq-chip-model.rst         |  38 ++
+ .../zh_CN/arch/loongarch/irq-chip-model.rst   |  37 ++
+ arch/loongarch/include/asm/cpu-features.h     |   1 +
+ arch/loongarch/include/asm/cpu.h              |   2 +
+ arch/loongarch/include/asm/loongarch.h        |   6 +
+ arch/loongarch/kernel/cpu-probe.c             |   2 +
+ drivers/irqchip/Makefile                      |   2 +-
+ drivers/irqchip/irq-loongarch-avec.c          |  20 +-
+ drivers/irqchip/irq-loongarch-ir.c            | 528 ++++++++++++++++++
+ drivers/irqchip/irq-loongson.h                |  19 +
+ 10 files changed, 641 insertions(+), 14 deletions(-)
+ create mode 100644 drivers/irqchip/irq-loongarch-ir.c
+
+-- 
+2.41.0
 
 
