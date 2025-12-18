@@ -1,153 +1,218 @@
-Return-Path: <linux-doc+bounces-70044-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70046-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25AAACCD280
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 19:26:16 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id C1743CCD698
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 20:37:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B4CDE3018310
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 18:26:13 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 99638300B9BC
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 19:36:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2FFCE312834;
-	Thu, 18 Dec 2025 18:26:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AAADA32E73E;
+	Thu, 18 Dec 2025 19:36:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="CzXN5l1Z"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="qPWHlBCU"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F65F17BCA
-	for <linux-doc@vger.kernel.org>; Thu, 18 Dec 2025 18:26:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BA9928506A;
+	Thu, 18 Dec 2025 19:36:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766082373; cv=none; b=pnMOmOXsTyJnVn33oly7ttMzPGsg5KjFybRMRdcSuvOganUgZsrV96b1K0cwbrjEkRMv6lm8fijar7TRPs3ZyCardxepupJ0935ucUAYxnihqclX9mMgsuTb7Gt1IrmpDrKn5P1V81RXPMI2UOqn1+EsyP+xwcN3cJ/PMUIhOAQ=
+	t=1766086608; cv=none; b=OCzpsYMLsULezKHYu7KICYN+6GpTerdHAiXqO2/F8kkQkHtn89DhWmK2ct88BG17Mxm2cxGvmB0otsXNKMNCHWqLp5zGRBJCLgEpsxxpSZjDQypKuqesC5dXg0ygod1GtMNaasrpVpAE5+8yP3hHURxCh9rMbdlx7m4UoeTJwm0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766082373; c=relaxed/simple;
-	bh=h4JEy2+nSexXTwRPMMT7RyiOUQeSt8f99+Upc0+2cfM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=i/0ZV2xBkQkVacQPrjXjw7ZYRPMHg2mai3oOY950CNoY7gLb72LjUd06+0YoaXSts+UINY6ftTNWwNNEcnCxVAQRlekYrGajDCjDA4+mT3/1rOxK7kb8KakvLoo1VH0ueJJPNsYyZ7qbk1fBXxpqs2xLGiml0Yrld/RmFDL5qv4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com; spf=pass smtp.mailfrom=soleen.com; dkim=pass (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b=CzXN5l1Z; arc=none smtp.client-ip=209.85.218.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=soleen.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=soleen.com
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b7697e8b01aso164371066b.2
-        for <linux-doc@vger.kernel.org>; Thu, 18 Dec 2025 10:26:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google; t=1766082369; x=1766687169; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GC3r3DONuA6YiYHbbshOdJ1QdT9pjrS4H1t+Tf2/8Dc=;
-        b=CzXN5l1ZD0e3KCsUUKUBKi9TVNnbvAdYtB7JuwLUZzr4dfBSGa2nqCQWpWVTPcBc6/
-         5CPq0RPKrLCkOw9cvsGvyUXGEPAkpxjwiaIHBzuq8DcCa28LLmzYMan22+2ystxbe7pQ
-         aAu1g0/eykPqus/40843k7X7NkRKOz5knzhA/SPahv4/pxdyXkvzneTrSGBqYsbgJ607
-         LFpizd8N6T/IC2OFBunHIn13BiiV8F0yv+fQ39p0wXfusQR1y4PiqyJ1UF081ljlFprU
-         WJ/fseTxZ7qybg1iuPLi00iOszszGP6iggsaKh1WlGMEhdznHpnOdHy5Gb1XVaJOIguV
-         8GQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766082369; x=1766687169;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=GC3r3DONuA6YiYHbbshOdJ1QdT9pjrS4H1t+Tf2/8Dc=;
-        b=V2VJYheZQ15BhnkPTUAkU0B4QZykuVpd+PlHkgdqMsI42K+5U7dVSNmCy1nqaXacq6
-         GXaeSyHQa5EZd4k8wrAKxPrHKUN1LmgRcAX9cPJNTjIzL1Q4RuGq02JTR21UVrLes9T+
-         pZdd+CjTxYGKy/aia5fuc3JzcqtT/aj3qHgKHrsxqv4reSoLFUVLhHKWL7UVfo1i5D1f
-         AlBJnQwSKuy041uYzZM5QkWS6RLga4m08JpOS3nBgfRQnYikSm8IQaPvG+82xn2TUlH9
-         ysgPbKc1zJr1QsbPIJxBgR8JQZMHr8hu7Peajo/wZnX2ABWwZPl483PF9Be6ivtd7NTD
-         g3FQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVh1MjAp4vvBBPMvLMzWjmEMhMwnbziklsMlsCbHZOC5q5CYhjAUGjkX8spamC090RbO+3eYYEBo7g=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxXSab/LQjkqhGUZD3kdahO95Jw224OOqHHO2xyCJIJYh4EErHk
-	qItOiqAMckc6DWxHJr0Ac0C+Bj9n2q6zIviH626y6d3U9eUxeDpJh5NZiG8q9aCH7L2kvRS7z1C
-	FTSv5HmGa9PSNefn3YugD4QnDJlC5jQopaQsFgISsVQ==
-X-Gm-Gg: AY/fxX6PFIjCPBvKN2smvYDs1BteepMi88KrxWsX20lOhlTpz0J7CH+bOxZa4SGvbCG
-	VCgi3ER7loFlr3sYvP3VfXCCVzV0JQjpoppZTQGwkc3/60jHd1fXlDHF+eS9WufFUGOo7MQgc20
-	32Q9U0huOmAbKFTX5XNh9LJE0lwQdMZ0PDf/BocwHUCrXx5zYtQo7vTh197ELE2QHyHLwNaEl4Q
-	1bf73liBRD+kWlzONRuvZzLMfN0ziFPjasANKEvua+ZbChIy+YCuO6frGuZ/FBH/0HXovzttWUn
-	OSFoaXXIOl8PUZ7qvjWQiLlS
-X-Google-Smtp-Source: AGHT+IFh20zE9m6KKsAOG3M+Pqif8xuWAkUFhwAc91SRRrHGiKgAdsW/CjK47Vzc8ueDX+KUR1WPj1KgEP2GVUpEGTU=
-X-Received: by 2002:a17:907:96a7:b0:b7a:1bde:a01c with SMTP id
- a640c23a62f3a-b8037218276mr24148166b.64.1766082368907; Thu, 18 Dec 2025
- 10:26:08 -0800 (PST)
+	s=arc-20240116; t=1766086608; c=relaxed/simple;
+	bh=C38ghsjuQimfuBc48UBJ2Ufk5zJMq7cUdePsSHl094Q=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=T4UP344u26IzPDblxhTDgDfcY9lKlRd/US6c9dRiqnw9GCcjPEWGKjXUQjviKOdIYfiWH3yldtHwPhxJcfmK/Y9ydhvzsyeUVxf5s1yNu8JwjqOWHfTzLbTFmO9dS+KBFEdKwojXt8tvMjLIUrcFDMhWDkFkUex42WwXF5WixmI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=qPWHlBCU; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:References:Cc:To:Subject:From:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=l1xNmQUvehhgwKpE+comx12cHZ+VwWpRWrLfhwMSlHE=; b=qPWHlBCUlrSQp3hLHl0z8x27/t
+	IQoMFuTFaMuBZs/ptJnZCEJoAzFc9oNIsKmUg3QMUBIfwpuPDmFGJHxTPx+rmDzZcXLynIRAW0jl9
+	GIc0U464AwXK0csxTQkjlWjIWEnsnvp1WkxQcHiRnQxL4c2qx9VId/HEw7PSibRzNN1rkiip3yxzs
+	d9U6WdhK43/gaTLHneStKnRTBsSHLW5sVAM64qUdkViJ18UT6z3qIn6cH7Q8b++uYzdw8oIZw/9hA
+	affQSaP8TrRjYoleM1heixc6RzGWGEhYL7yHPDsEeTIPdo/OAcMkK0IGZh71l3KTpCRCz/SZu0EpK
+	4n+iwcug==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vWJnn-000000096PP-0L1q;
+	Thu, 18 Dec 2025 19:36:43 +0000
+Message-ID: <efc86f10-3255-4132-bae3-8fa6c6dc924b@infradead.org>
+Date: Thu, 18 Dec 2025 11:36:41 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251206230222.853493-1-pratyush@kernel.org> <20251206230222.853493-5-pratyush@kernel.org>
-In-Reply-To: <20251206230222.853493-5-pratyush@kernel.org>
-From: Pasha Tatashin <pasha.tatashin@soleen.com>
-Date: Thu, 18 Dec 2025 13:25:32 -0500
-X-Gm-Features: AQt7F2qAhKKkrVYXVy4sUEw468IovytUHMMiamVn3JrQ0uPWSbbBGhs6jJM9oIk
-Message-ID: <CA+CK2bAV1y_LySjyj-wcn1cdSuVBdC+r+zQL7AQTY64nk3OxuQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 04/10] liveupdate: flb: allow getting FLB data in
- early boot
-To: Pratyush Yadav <pratyush@kernel.org>
-Cc: Mike Rapoport <rppt@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, 
-	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
-	"Liam R. Howlett" <Liam.Howlett@oracle.com>, Vlastimil Babka <vbabka@suse.cz>, 
-	Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Muchun Song <muchun.song@linux.dev>, 
-	Oscar Salvador <osalvador@suse.de>, Alexander Graf <graf@amazon.com>, David Matlack <dmatlack@google.com>, 
-	David Rientjes <rientjes@google.com>, Jason Gunthorpe <jgg@nvidia.com>, 
-	Samiullah Khawaja <skhawaja@google.com>, Vipin Sharma <vipinsh@google.com>, 
-	Zhu Yanjun <yanjun.zhu@linux.dev>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-doc@vger.kernel.org, kexec@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+From: Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v2] Documentation/driver-api/cxl: device hotplug section
+To: Gregory Price <gourry@gourry.net>, linux-cxl@vger.kernel.org
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+ kernel-team@meta.com, dave@stgolabs.net, jonathan.cameron@huawei.com,
+ dave.jiang@intel.com, alison.schofield@intel.com, vishal.l.verma@intel.com,
+ ira.weiny@intel.com, dan.j.williams@intel.com, corbet@lwn.net
+References: <20251218170747.1278327-1-gourry@gourry.net>
+Content-Language: en-US
+In-Reply-To: <20251218170747.1278327-1-gourry@gourry.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sat, Dec 6, 2025 at 6:03=E2=80=AFPM Pratyush Yadav <pratyush@kernel.org>=
- wrote:
->
-> To support hugepage preservation using LUO, the hugetlb subsystem needs
-> to get liveupdate data when it allocates the hugepages to find out how
-> many pages are coming from live update. This data is preserved via LUO
-> FLB.
->
-> Since gigantic hugepage allocations happen before LUO (and much of the
-> rest of the system) is initialized, the usual
-> liveupdate_flb_get_incoming() can not work.
->
-> Add a read-only variant that fetches the FLB data but does not trigger
-> its retrieve or do any locking or reference counting. It is the caller's
-> responsibility to make sure there are no side effects of using this data
-> to the proper retrieve call that would happen later.
->
-> Refactor the logic to find the right FLB in the serialized data in a
-> helper that can be used from both luo_flb_retrieve_one() (called from
-> luo_flb_get_incoming()), and from luo_flb_get_incoming_early().
->
-> Signed-off-by: Pratyush Yadav <pratyush@kernel.org>
+Hi,
+
+On 12/18/25 9:07 AM, Gregory Price wrote:
+> Describe cxl memory device hotplug implications, in particular how the
+> platform CEDT CFMWS must be described to support successful hot-add of
+> memory devices.
+> 
+> Signed-off-by: Gregory Price <gourry@gourry.net>
 > ---
->  include/linux/liveupdate.h  |  6 ++++
->  kernel/liveupdate/luo_flb.c | 69 +++++++++++++++++++++++++++++--------
->  2 files changed, 60 insertions(+), 15 deletions(-)
->
-> diff --git a/include/linux/liveupdate.h b/include/linux/liveupdate.h
-> index 78e8c529e4e7..39b429d2c62c 100644
-> --- a/include/linux/liveupdate.h
-> +++ b/include/linux/liveupdate.h
-> @@ -232,6 +232,7 @@ int liveupdate_unregister_flb(struct liveupdate_file_=
-handler *fh,
->
->  int liveupdate_flb_get_incoming(struct liveupdate_flb *flb, void **objp)=
-;
->  int liveupdate_flb_get_outgoing(struct liveupdate_flb *flb, void **objp)=
-;
-> +int liveupdate_flb_incoming_early(struct liveupdate_flb *flb, u64 *datap=
-);
+> v2: Jonathan's clarifications and diagrams.
+> 
+>  Documentation/driver-api/cxl/index.rst        |   1 +
+>  .../cxl/platform/device-hotplug.rst           | 112 ++++++++++++++++++
+>  2 files changed, 113 insertions(+)
+>  create mode 100644 Documentation/driver-api/cxl/platform/device-hotplug.rst
+> 
 
-Hi Pratyush,
+> diff --git a/Documentation/driver-api/cxl/platform/device-hotplug.rst b/Documentation/driver-api/cxl/platform/device-hotplug.rst
+> new file mode 100644
+> index 000000000000..617e340bd556
+> --- /dev/null
+> +++ b/Documentation/driver-api/cxl/platform/device-hotplug.rst
+> @@ -0,0 +1,112 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +==================
+> +CXL Device Hotplug
+> +==================
+> +
+> +Device hotplug refers to *physical* hotplug of a device (addition or removal
+> +of a physical device from the machine).
+> +
+> +Hot-Remove
+> +==========
+> +Hot removal of a device typically requires careful removal of software
+> +constructs (memory regions, associated drivers) which manage these devices.
+> +
+> +Hard-removing a CXL.mem device without carefully tearing down driver stacks
+> +is likely to cause the system to machine-check (or at least SIGBUS if memory
+> +access is limited to user space).
+> +
+> +Memory Device Hot-Add
+> +=====================
+> +A device present at boot will be associated with a CXL Fixed Memory Window
+> +reported in :doc:`CEDT<acpi/cedt>`.  That CFMWS may match the size of the
+> +device, but the construction of the CEDT CFMWS is platform-defined.
+> +
+> +Hot-adding a memory device requires this pre-defined (*static*) CFMWS has
+> +sufficient space to describe that device.
+> +
+> +There are a few common scenarios to consider.
+> +
+> +Single-Endpoint Memory Device Present at Boot
+> +---------------------------------------------
+> +A device present at boot likely had its capacity reported in the
+> +:doc:`CEDT<acpi/cedt>`.  If a device is removed and a new device hotplugged,
+> +the capacity of the new device will be limited to the original CFMWS capacity.
+> +
+> +Adding capacity larger than the original device will cause memory region
+> +creation to fail if the region size is greater than the CFMWS size.
+> +
+> +The CFMWS is *static* and cannot be adjusted.  Platforms which may expect
+> +different sized devices to be hotplugged must allocate sufficient CFMWS space
+> +*at boot time* to cover all future expected devices.
+> +
+> +Multi-Endpoint Memory Device Present at Boot
+> +--------------------------------------------
+> +A hot-plug capable CXL memory device, such as one which presents multiple
+> +expanders as a single large-capacity device, should report the maximum
+> +*possible* capacity for the device at boot. ::
+> +
+> +                  HB0
+> +                  RP0
+> +                   |
+> +     [Multi-Endpoint Memory Device]
+> +              _____|_____
+> +             |          |
+> +        [Endpoint0]   [Empty]
+> +
+> +
+> +Limiting the size to the capacity preset at boot will limit hot-add support
+> +to replacing capacity that was present at boot.
+> +
+> +No CXL Device Present at Boot
+> +-----------------------------
+> +When no CXL memory device is present on boot, some platforms omit the CFMWS
+> +in the :doc:`CEDT<acpi/cedt>`.  When this occurs, hot-add is not possible.
+> +
+> +For a platform to support hot-add of a full memory device, it must allocate
+> +a CEDT CFMWS region with sufficient memory capacity to cover all future
+> +potentially added capacity.
+> +
+> +To support memory hotplug directly on the host bridge, or on a switch
+> +downstream of the host bridge (but not contained within a CXL memory device),
+> +a platform must construct a CEDT CFMWS at boot with sufficient resources to
+> +support the max possible (or expected) hotplug memory capacity. ::
+> +
+> +         HB0                 HB1
+> +      RP0    RP1             RP2
+> +       |      |               |
+> +     Empty  Empty            USP
+> +                      ________|________
+> +                      |    |    |     |
+> +                     DSP  DSP  DSP   DSP
+> +                      |    |    |    |
+> +                         All  Empty
+> +
+> +For example, a BIOS/EFI may expose an option to configure a CEDT CFMWS with
+> +a pre-configured amount of memory capacity (per host bridge, or host bridge
+> +interleave set), even if no device is attached to Root Ports or Downstream
+> +Ports at boot (as depicted in the figure above).
+> +
+> +
+> +Interleave Sets
+> +===============
+> +
+> +Host Bridge Interleave
+> +----------------------
+> +Host-bridge interleaved memory regions are defined *statically* in the
+> +:doc:`CEDT<acpi/cedt>`.  To apply cross-host-bridge interleave, a CFMWS entry
+> +describing that interleave must have been provided *at boot*.  Hotplugged
+> +devices cannot add host-bridge interleave capabilities at hotplug time.
+> +
+> +See the :doc:`Flexible CEDT Configuration<example-configurations/flexible>`
+> +example to see how a platform can provide this kind of flexibility regarding
+> +hotplugged memory devices.  BIOS/EFI software should consider options to
+> +present flexible CEDT configurations with hotplug support.
+> +
+> +HDM Interleave
+> +--------------
+> +Decoder-applied interleave can flexibly handle hotplugged devices, as decoders
+> +can be re-programmed after hotplug.
+> +
+> +To add or remove a device to/from an existing HDM-applied interleaved region,
+> +that region must be torn down an re-created.
 
-[Follow-up from LPC discussion]
+                                 ^s/an/and/
 
-This patch is not needed, you can use liveupdate_flb_get_incoming()
-directly in early boot. The main concern is that we take mutex in that
-function, but that I think is safe. The might_sleep() has the proper
-handling to be called early in boot, it has "system_state =3D=3D
-SYSTEM_BOOTING" check to silence warning during boot.
+and one note: There are several places where you use one asterisk for emphasis,
+e.g., *statically*. This means <italic> in Sphinx/ReST. If you happen
+to mean/want bold, then use **bold text** (double asterisks).
 
-Pasha
+Otherwise it LGTM. Thanks.
+
+Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+Tested-by: Randy Dunlap <rdunlap@infradead.org>
+
+-- 
+~Randy
+
 
