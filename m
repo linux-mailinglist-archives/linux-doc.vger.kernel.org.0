@@ -1,95 +1,197 @@
-Return-Path: <linux-doc+bounces-69969-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-69972-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3C70CCA8FF
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 07:59:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91AAACCAA0C
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 08:23:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B7E0D30AFF2D
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 06:55:49 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id D43BF305EC37
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Dec 2025 07:21:48 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1139330D54;
-	Thu, 18 Dec 2025 06:50:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9AE133121F;
+	Thu, 18 Dec 2025 07:21:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="BJBePF4w";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="cyqy2sk1"
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="hFvxQjnf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 592D2330D30;
-	Thu, 18 Dec 2025 06:50:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE151330B3A
+	for <linux-doc@vger.kernel.org>; Thu, 18 Dec 2025 07:21:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766040612; cv=none; b=ZRf5uo2iAZCsEbHdgS/XO3eyHn56C64dYrcG4R9IpiuO7CNNcr3rnxDHcfiyV4Yu2pPPjH1f/TvUsmZOrMhZ/Z5t8+7t6vXsTndra/4DUqPHESt7bMWHXDOJGKQsR8qpP7u7qukQ00X1XVVoc6/wq7DVTXYLxkyZ2opy2aoLi4Y=
+	t=1766042505; cv=none; b=VrQNtv4D3qGAGmBTvyqgF9xWj+VRMxmMS9+egVVSOcbVnnhUXy+5vJJqS0igkZvUgZRbJbreuVMqUgEqmy++kudZCbYkmMGVp3qSio9KT6L3cFWEhiDOOJ6smfRG3o7MZU1bcIreHCAF8nvOdweWkBeydRohSBaOV6mz24rPd6M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766040612; c=relaxed/simple;
-	bh=sLR5ycW13Ee+BW0II1CaUwlFCxgLKorpCzmXU5oGFKE=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=Gf3AIlPLhgJM7O1vDPsw70kMD0pXKYKTB3aUIfcWlFv8s8RI0Ub/C4oJAcL+8+e9xdPmvy86JIfu59qmjf3V08pflsXw1rtfC6ntAgjv9LNTdPaXjrJPw7hMc2f5hRklm7pW0mdvmdQSRpSgranuq94A+nRemTMnNyalNSQfxL8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=BJBePF4w; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=cyqy2sk1; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
-From: Nam Cao <namcao@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1766040609;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=sLR5ycW13Ee+BW0II1CaUwlFCxgLKorpCzmXU5oGFKE=;
-	b=BJBePF4wUPbXGmABKn9c9RyBLWJvRALhaPEawgpGNG953KcNBtqZusdWP+MPzwZy9BN85Q
-	1fSJ9DMVoDG2Oo6xrt5x/tJtTyxn3/F8v8flysJ1tgoB6pPXqeUTgU5/IkWw4UV8y2hFBR
-	oRZowEAKj6SDHE8X75z6IDs99nVfKD7EdzwwJCLQ8cmUw6403H+4vYingXypWEFQXgR8xJ
-	9drwpg5iZpU/lkP357cSNCjCyLwFeio43kWZ8VVJamkFxQvp//MQm2BD8syAXhwuJoxQ4I
-	HdF/E0bmlUpd1BGEy2Did+A9yVDXGJE+4U9Pj1Cd6O+9nq8IVwv58rIZgB07lw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1766040609;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=sLR5ycW13Ee+BW0II1CaUwlFCxgLKorpCzmXU5oGFKE=;
-	b=cyqy2sk1uox55aquzCmbA0DuUYV05Eu6El+gIeeIOB8HDHFurHCYRz4i0aZ9uvqCzSBEPW
-	r7WgFHKqaMs3oRCw==
-To: Gabriele Monaco <gmonaco@redhat.com>, linux-kernel@vger.kernel.org,
- Steven Rostedt <rostedt@goodmis.org>, Gabriele Monaco
- <gmonaco@redhat.com>, Jonathan Corbet <corbet@lwn.net>, Masami Hiramatsu
- <mhiramat@kernel.org>, linux-trace-kernel@vger.kernel.org,
- linux-doc@vger.kernel.org
-Cc: Tomas Glozar <tglozar@redhat.com>, Juri Lelli <jlelli@redhat.com>, Clark
- Williams <williams@redhat.com>, John Kacur <jkacur@redhat.com>
-Subject: Re: [PATCH v3 07/13] rv: Convert the opid monitor to a hybrid
- automaton
-In-Reply-To: <20251205131621.135513-8-gmonaco@redhat.com>
-References: <20251205131621.135513-1-gmonaco@redhat.com>
- <20251205131621.135513-8-gmonaco@redhat.com>
-Date: Thu, 18 Dec 2025 13:50:01 +0700
-Message-ID: <87qzssi8rq.fsf@yellow.woof>
+	s=arc-20240116; t=1766042505; c=relaxed/simple;
+	bh=oRDVeoSH7AN/+1EKf418Edx8/qjw/FEB71Hmt8IhBro=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ZJIgjNSkw0GtzsmS9npIIzbqR8oui5jz8TiEx4oxdpltIm0jWJjiAp8qZwDci1J0cH8nKC36Gln1hyvOlsPnKS6gYxZq7hi2esqB0RdpfiJj/Ry3gkgMB0fWHg5nS1VCPW1XnxpVlXEFOS4RgtNLwJ2oNvwDDyh2mlsQ++JAzD4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=hFvxQjnf; arc=none smtp.client-ip=209.85.210.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-7c6da42fbd4so121250a34.1
+        for <linux-doc@vger.kernel.org>; Wed, 17 Dec 2025 23:21:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1766042501; x=1766647301; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=u95c9TyT1XdaOnIyGBwMeLSiKMNJeuqg+7XxBfANtKE=;
+        b=hFvxQjnfCf2CUAqy40N2AHyq5MIDA0GgC5LKgr2+oJWxzVnQ/H2BlDj/PRT3fjn6YS
+         6uoMn7+YEL0+8O2LkRt30f+/2R5PDahttu121Fq4t7CeI0ECWbcDX44yZNP52rNK3/eA
+         fPojzuLnONspq5CUtSTCNO3/tkNye7HZkr84BB+Y/ocSOeYeJ03l/SmFCJB5qTJptZdQ
+         RbLfAkSfM0ummJWRnc7E8aYHqgmwBJNI/c/pFs/M401mDi2bS0euznuCTV9DcKpXnQ1t
+         H/xEDBrHcjuX6fA2f9gHgqEpAJVqBMy72GfMnDPZoRbg6fOFBpJbmBiSpijWbwGJ9Uu8
+         +Vxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766042501; x=1766647301;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=u95c9TyT1XdaOnIyGBwMeLSiKMNJeuqg+7XxBfANtKE=;
+        b=Si+h/2FbgBM8QNeeBYbCpFhFuwRGlE9vtBwBfu+ETrL/stZzRGHptFklad/lKi/Cu1
+         lJfaPVcPtzJxKxgrVTWobkAHowTqqAmu0fJhp9rav3r5Zjb2kpCCpwxM8g9E9awCylcc
+         FcCc2hoYxTNFy1yh85lexSA4N0tAdIfGrtKiljBh1Enz91DLKppgxS5J1RHZORVJcw27
+         SFZW3vwP+MmEMf/5FpUPcfUCiB6Xw+GmjGdrVyJvRh1lVzqMYKL19cPopfvADiL7pB43
+         +65H7khvIj1SlsyFH9hTKlQ0C/oK2kUhK02C8l2KpYfKxmUY3KkYOiCCEMfBNC4+CR3+
+         be7Q==
+X-Forwarded-Encrypted: i=1; AJvYcCVeTqiTIhGj6cFNpQqCvluKeJAg/NmJfCkeAibfE7XlhlDgoOIR8hi/YSGyzO4vKMFLhyMdkjohO6s=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyD2KIIOYeRvv/KUL3IJWn3uHMzW06NXm4QbBpCFu8zLLdgG+Xx
+	e54LAtW5ewAratAZst4rqodpOPfYS2eh1tgnfx7ahSGct/v3/kiHI3/qr5YQ+W4Gv8EfshLmybs
+	cnzVS+cHDU+i3SI+E2jPo3Y2AfUjMaTZaschSxaS3jA==
+X-Gm-Gg: AY/fxX68EMyd95lyQ5ioOqkGJAB4f17+R+VG3QYOmvzk1+xKL6XBWh4u61mXYHPY/Lc
+	Bc3+K2XbJGTQiP7RNaRURRVJtEOHDcpGq91EpiERWiacEoSKMK3IxqWLsnBDIehJQtFqkvYuax9
+	9SGfGkvSQ5LCFRLFoRkCJzRfTu6yzPAV+Ye9GsHKnKWLevkLBY1l8ClhlvSzWj6iBTaR+/IudU0
+	HP2N+PVEELy0bof/xYm9KLUeGMTWpSyi54z+l4MyDvu37Zn5APYrgIyhNVvUfBo1f2sDuRPLKpw
+	d7ZHoTNuO0WYAVDTE8SJpbdacw==
+X-Google-Smtp-Source: AGHT+IHdzsrnh67Z+uk7sg0iAMocZMySikku48EGz5g7L5MG+hq7iSRlseyY2l5vM8LHePwozU/hD6rMNUuAq73AgFc=
+X-Received: by 2002:a05:6820:828:b0:65c:f41b:7119 with SMTP id
+ 006d021491bc7-65cf41b750emr1784992eaf.5.1766042500598; Wed, 17 Dec 2025
+ 23:21:40 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <cover.1765791463.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <cover.1765791463.git.u.kleine-koenig@baylibre.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Thu, 18 Dec 2025 08:21:27 +0100
+X-Gm-Features: AQt7F2r_j21Nqcv1IzhOT6jk9UPtvnwA1D3etXiTv5WveGJRYXXMC9qqoGF_Yc4
+Message-ID: <CAHUa44FrDZbvRvfN8obf80_k=Eqxe9YxHpjaE5jU7nkxPUwfag@mail.gmail.com>
+Subject: Re: [PATCH v2 00/17] tee: Use bus callbacks instead of driver callbacks
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Sumit Garg <sumit.garg@kernel.org>, 
+	Olivia Mackall <olivia@selenic.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
+	=?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <clement.leger@bootlin.com>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Ard Biesheuvel <ardb@kernel.org>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+	Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jan Kiszka <jan.kiszka@siemens.com>, 
+	Sudeep Holla <sudeep.holla@arm.com>, Christophe JAILLET <christophe.jaillet@wanadoo.fr>, 
+	=?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, 
+	Michael Chan <michael.chan@broadcom.com>, Pavan Chebbi <pavan.chebbi@broadcom.com>, 
+	James Bottomley <James.Bottomley@hansenpartnership.com>, Jarkko Sakkinen <jarkko@kernel.org>, 
+	Mimi Zohar <zohar@linux.ibm.com>, David Howells <dhowells@redhat.com>, 
+	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>, 
+	"Serge E. Hallyn" <serge@hallyn.com>, Peter Huewe <peterhuewe@gmx.de>, op-tee@lists.trustedfirmware.org, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, linux-rtc@vger.kernel.org, 
+	linux-efi@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-arm-kernel@lists.infradead.org, 
+	Cristian Marussi <cristian.marussi@arm.com>, arm-scmi@vger.kernel.org, 
+	linux-mips@vger.kernel.org, netdev@vger.kernel.org, 
+	linux-integrity@vger.kernel.org, keyrings@vger.kernel.org, 
+	linux-security-module@vger.kernel.org, Jason Gunthorpe <jgg@ziepe.ca>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Gabriele Monaco <gmonaco@redhat.com> writes:
-> The opid monitor validates that wakeup and need_resched events only
-> occur with interrupts and preemption disabled by following the
-> preemptirq tracepoints.
-> As reported in [1], those tracepoints might be inaccurate in some
-> situations (e.g. NMIs).
->
-> Since the monitor doesn't validate other ordering properties, remove the
-> dependency on preemptirq tracepoints and convert the monitor to a hybrid
-> automaton to validate the constraint during event handling.
-> This makes the monitor more robust by also removing the workaround for
-> interrupts missing the preemption tracepoints, which was working on
-> PREEMPT_RT only and allows the monitor to be built on kernels without
-> the preemptirqs tracepoints.
->
-> [1] - https://lore.kernel.org/lkml/20250625120823.60600-1-gmonaco@redhat.com
->
-> Signed-off-by: Gabriele Monaco <gmonaco@redhat.com>
+Hi,
 
-Reviewed-by: Nam Cao <namcao@linutronix.de>
+On Mon, Dec 15, 2025 at 3:17=E2=80=AFPM Uwe Kleine-K=C3=B6nig
+<u.kleine-koenig@baylibre.com> wrote:
+>
+> Hello,
+>
+> the objective of this series is to make tee driver stop using callbacks
+> in struct device_driver. These were superseded by bus methods in 2006
+> (commit 594c8281f905 ("[PATCH] Add bus_type probe, remove, shutdown
+> methods.")) but nobody cared to convert all subsystems accordingly.
+>
+> Here the tee drivers are converted. The first commit is somewhat
+> unrelated, but simplifies the conversion (and the drivers). It
+> introduces driver registration helpers that care about setting the bus
+> and owner. (The latter is missing in all drivers, so by using these
+> helpers the drivers become more correct.)
+>
+> v1 of this series is available at
+> https://lore.kernel.org/all/cover.1765472125.git.u.kleine-koenig@baylibre=
+.com
+>
+> Changes since v1:
+>
+>  - rebase to v6.19-rc1 (no conflicts)
+>  - add tags received so far
+>  - fix whitespace issues pointed out by Sumit Garg
+>  - fix shutdown callback to shutdown and not remove
+>
+> As already noted in v1's cover letter, this series should go in during a
+> single merge window as there are runtime warnings when the series is
+> only applied partially. Sumit Garg suggested to apply the whole series
+> via Jens Wiklander's tree.
+> If this is done the dependencies in this series are honored, in case the
+> plan changes: Patches #4 - #17 depend on the first two.
+>
+> Note this series is only build tested.
+>
+> Uwe Kleine-K=C3=B6nig (17):
+>   tee: Add some helpers to reduce boilerplate for tee client drivers
+>   tee: Add probe, remove and shutdown bus callbacks to tee_client_driver
+>   tee: Adapt documentation to cover recent additions
+>   hwrng: optee - Make use of module_tee_client_driver()
+>   hwrng: optee - Make use of tee bus methods
+>   rtc: optee: Migrate to use tee specific driver registration function
+>   rtc: optee: Make use of tee bus methods
+>   efi: stmm: Make use of module_tee_client_driver()
+>   efi: stmm: Make use of tee bus methods
+>   firmware: arm_scmi: optee: Make use of module_tee_client_driver()
+>   firmware: arm_scmi: Make use of tee bus methods
+>   firmware: tee_bnxt: Make use of module_tee_client_driver()
+>   firmware: tee_bnxt: Make use of tee bus methods
+>   KEYS: trusted: Migrate to use tee specific driver registration
+>     function
+>   KEYS: trusted: Make use of tee bus methods
+>   tpm/tpm_ftpm_tee: Make use of tee specific driver registration
+>   tpm/tpm_ftpm_tee: Make use of tee bus methods
+>
+>  Documentation/driver-api/tee.rst             | 18 +----
+>  drivers/char/hw_random/optee-rng.c           | 26 ++----
+>  drivers/char/tpm/tpm_ftpm_tee.c              | 31 +++++---
+>  drivers/firmware/arm_scmi/transports/optee.c | 32 +++-----
+>  drivers/firmware/broadcom/tee_bnxt_fw.c      | 30 ++-----
+>  drivers/firmware/efi/stmm/tee_stmm_efi.c     | 25 ++----
+>  drivers/rtc/rtc-optee.c                      | 27 ++-----
+>  drivers/tee/tee_core.c                       | 84 ++++++++++++++++++++
+>  include/linux/tee_drv.h                      | 12 +++
+>  security/keys/trusted-keys/trusted_tee.c     | 17 ++--
+>  10 files changed, 164 insertions(+), 138 deletions(-)
+>
+> base-commit: 8f0b4cce4481fb22653697cced8d0d04027cb1e8
+> --
+> 2.47.3
+>
+
+Thank you for the nice cleanup, Uwe.
+
+I've applied patch 1-3 to the branch tee_bus_callback_for_6.20 in my
+tree at https://git.kernel.org/pub/scm/linux/kernel/git/jenswi/linux-tee.gi=
+t/
+
+The branch is based on v6.19-rc1, and I'll try to keep it stable for
+others to depend on, if needed. Let's see if we can agree on taking
+the remaining patches via that branch.
+
+Cheers,
+Jens
 
