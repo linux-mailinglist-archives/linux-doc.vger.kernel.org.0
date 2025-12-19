@@ -1,82 +1,81 @@
-Return-Path: <linux-doc+bounces-70254-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70259-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12D42CD2060
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 22:42:47 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AAEECD22F4
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Dec 2025 00:31:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 80A1E3001BEE
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 21:42:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 87BBC301DBA1
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 23:31:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 35BC2337BA6;
-	Fri, 19 Dec 2025 21:42:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA1EC8634C;
+	Fri, 19 Dec 2025 23:31:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AOj/rZpt"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cWAI0O59"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3729D275B15
-	for <linux-doc@vger.kernel.org>; Fri, 19 Dec 2025 21:42:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.194
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48AB24C92
+	for <linux-doc@vger.kernel.org>; Fri, 19 Dec 2025 23:31:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.196
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766180564; cv=none; b=Cu4b3lLbavJ6FYBDjoVG3/DHotureI8M0eFcAcbQpExzsZdjEUz98dWTlqmgLEfPDQjp/pAUlGttN9/nYM3sWyRlOJYAnWrpDnUV50Lun7s7hTW/E5uJqoKoV6uKHpXkw3nFWK3ihM+sghjltipoDrPvvYuX+HJ2St4+7sul1a0=
+	t=1766187105; cv=none; b=FN0YeMbucO4m5jehxKbpPr44HtA5cLcgDAvZ6a0GAQd1jiu+ZK641Pr5Us3z6FMQBn6ZTPGgvW0pYpGMgh+a1oSqJtZIfmVxMYNlLkAAlQaqzUhRKn5COadHNvKhwGzjHg0RS6hEdeLH8SUjWimF5AljwWWzd3rlecsp6HNlbns=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766180564; c=relaxed/simple;
-	bh=XXvUIRo6jJ9ogO2QQaUCxttK8WosB2XGObI8UYH72+M=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GUNAoFtlfrOIlZUPTkkI6UD84TmnxvEzMci07dTsEJD1YpDXuTA8TRTxJKB7UqM3lGHHwMcu96ZZ8Rw8PDCVZZmhlUz0t0sYRWWF+Ta3v7jFsVpIDhVMr2hkq4ZspmDMY11b0XOakCizLGBCkEUZnCUkdnBdVfc/R+VzaPpDofE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AOj/rZpt; arc=none smtp.client-ip=209.85.215.194
+	s=arc-20240116; t=1766187105; c=relaxed/simple;
+	bh=kqYAQZ609rJygFWC7CbHOEHNatKsPADzGjHUdHPU3XE=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=pCZMbyEWTPPlvcdTiZJ7AXMb0jYCZfEUsr1WJVEoOvFk4i3K8mVU68GWj3NUGJFtf1qoG3GSP9qayH8Pg7E+BVkg3LzpZemxxCo2T75kuxwtxLLyE+TCcCCA+3smrTMOz2AAqoPBcvWmm7s8u3EkEkX3rwkQfCnFA6jzu50i7a0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cWAI0O59; arc=none smtp.client-ip=209.85.215.196
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f194.google.com with SMTP id 41be03b00d2f7-bf1b402fa3cso2257520a12.3
-        for <linux-doc@vger.kernel.org>; Fri, 19 Dec 2025 13:42:41 -0800 (PST)
+Received: by mail-pg1-f196.google.com with SMTP id 41be03b00d2f7-bc274b8b15bso2251469a12.1
+        for <linux-doc@vger.kernel.org>; Fri, 19 Dec 2025 15:31:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766180561; x=1766785361; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=xhB1Fco/aAscGV7BUmHv+KRyMsa6iylEkhRycjuIJTw=;
-        b=AOj/rZptNUFI/4UnRqR9fG5FQ29cGUrYlcJJx2lflJCke/Y/I28A5KMi4N1CfFrm3L
-         ow86AIq0BJG9HpLBXdf0gflqQQC5t8cN2KiV3kkBODaly4qmcOX5yvk80RVXbtRifmoH
-         9sjvd9xJZDmyRyDGilORjblWWQMJNU6Agw7WMpFLYUaBksDg/a+fjRiH+L1qrHNgzxee
-         Jc50o4OHuJWtqRFIa+GTKNf7qG/gwNOG10jYe9HOjwMv4hpHQfmChvlC+4bxyS64Zx7D
-         8j1dm92dY/SjzI8eCA0tkgzlHwdV1ZCIC92qmEFfsCZGLieEWuaYI8kDGDZ5baKWEVWa
-         OFaw==
+        d=gmail.com; s=20230601; t=1766187103; x=1766791903; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Xjhz9NvSIj1nkwStS3EsBbpnWvjG3hzX9yFNjSmaNpQ=;
+        b=cWAI0O591Gv+dba/YfAcSU7vr3T6X/mvNzA4PPUsPf6SyphsBqlqsT6xjeVcdnQiaE
+         wxJUdii/zwpubuF+icsr7gCzTRHSL27lmLSejNJNOdXajr70hbEHv1miSuFv2yckOKi0
+         ZqbyooP37njNz5uqPY08lR3IjhojGNiJiL0Q8CGrsqU4ByHQ97hGFX2k+UugxjPYQSdh
+         +f2wmqv7aagqW9L9u4TThxLVedaMt00AZQVVpHLdURgOH0p4vzyOFr7m59KY9yxB1hrb
+         rB9bggdpi3sq5EUEw2ryihS+o08Xa0yFxZcCf5ivKvQjPnFiCLbu6YCz97hnqb1KgvG+
+         lG5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766180561; x=1766785361;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xhB1Fco/aAscGV7BUmHv+KRyMsa6iylEkhRycjuIJTw=;
-        b=K3rGayLAVHrtMTVn4HcvbTkND5gRfvQZ1ot7RIF7noUQsAiUeW/hoIrbzbrBgN/RNF
-         3vMJryymKX825wBe0zgLGeFgyS3VeDKf/t/YKDq8e3dfLWnaz5R0aIS6R0pqwRiLzOau
-         lq8hNorPwP1yLFwCzYylLlZlShQKiRjW2ZG1+Ch9d0azENCc1dR8avz2FCjH+9K8Zmq2
-         XuMDZqe8rjYOKx6tbatdq1nWMk18XvRhm18YVrC1gTRze0pPnQ8SAYEG0WnAzuIFekmF
-         lAmseKTSj5VUTlFvVGA4FBgh+oi1iJJw8eKBQNgKZc+jXtsknEB0Cy8V3Kq2tmkBt5Nl
-         fIWw==
-X-Forwarded-Encrypted: i=1; AJvYcCUFeoHsi25DNc0Rntw//t+zYBrH0EznrjclPtQi9Ut+xyKx9PzbAujCA0lwUvCO0JJ5r4qH9LD9oI0=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyt3nZIE/d8mkwYfAqnY0UEDR18REay6MIl76+r7rxIQJ+G4Mgd
-	CERhe4V+OPdiEYt+5RhUJt/5zycMu77PZScKIFQw/vA8+ubT+ir4RtqP
-X-Gm-Gg: AY/fxX4i+Jy/HbAofEi0l/YbhaXQ6O0t0PLeMutWJUP+GL7v7fodZXVj+r3759JWB/S
-	DMqbZmjsik/QWHZvyUlAOATdrtnkqdE6byA9k85Wo/2RUfOcKoFLHK/AGs/WgZD3pzmvmCJMV5k
-	u8/fFPmI/FLpb8p0bBjdeJHM2jiAESRKKdNOt8nBa89nBo13BQsvcb6wdurEoQUyiUIG5unQAIS
-	JtDDEz+X2afXcYZ1RfqR+Wk0dOsWi8w6g6GKuVBRhhy28m3K26Ay9siyvvrW0i0CAf32heBKmRw
-	0HJuFwlcYN2G+brrLgiAPqLip7sCLyA/2ABNJJVS35Nt69JybO+NVUnoj3XZftCPIRLiXo1ukP6
-	L7G66O7AT29xSDtsFLGNoqgze+qKCe6438JLY4y8ZKrqmXf109IbWpKFl6YvILOWfhk7FULK9gD
-	3fBqLTdlMt0youpsfrR4cjFzcuGZYWen8cV77UmKZpvxkA7E9kRD4MIB4UGu2bwAq2V6dds5hjc
-	21ne6S2sLSeHa1DZBZGO9s1wNTxzBa1gmnOZRbrXanQd31tVrnec6+gaTjQePtOjC2ZaMolioMO
-	puE=
-X-Google-Smtp-Source: AGHT+IGTM6mjPPfNhqA9HPe48U2bDECheHzAzGuJpcTxojW/wC3VfdWLu4jNEE4Msq7vw7t+QoPUtw==
-X-Received: by 2002:a05:7022:62a9:b0:11b:78e6:8323 with SMTP id a92af1059eb24-121722fd212mr4438541c88.37.1766180561251;
-        Fri, 19 Dec 2025 13:42:41 -0800 (PST)
+        d=1e100.net; s=20230601; t=1766187103; x=1766791903;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Xjhz9NvSIj1nkwStS3EsBbpnWvjG3hzX9yFNjSmaNpQ=;
+        b=BPCVoLO6rCO+XVhH+Z5DyBfRFJC0scNi1UYLX02umr3h668FPxjxg07W99ctQBo1xm
+         PP+amz2lY5L4mexNfQZMphFqsgKvqQcqcjTMWkqyOK25c/PEE5236SrGmcaSruI+C/rg
+         Ngt3/zXfHPYdNwh6dUUTWZtU1vgisOq8Bs3WJoN99iW5HmczSQM9ewo/KpQ5REMqUoS1
+         vTRejCbLMMra5QA66eZUXl0Gxk50FnUOLpUDsL2vFMUIrDFN9VCr3vmhjQ3FwarHQeoC
+         9+NIv5592GBUZxxqrXcrSA6O25JtT7em1bkBMwwEl83rX+zAqTwRVwM1v8BDLokXemZJ
+         2bHA==
+X-Forwarded-Encrypted: i=1; AJvYcCWhzhjDZIQT6ieOaX0lLP8ocQD7h6eR3KiQxFedcKba9XXmOHGSfDFLuWBBoK3iXTe1cT6ORwkRJUM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwULRVYHz8yTegQI+gCHBQQ6tZcs+VrXuCcU7uKQ9aLcIEVfhr2
+	6Xydk/qVrHlTtK/JH8llkiZHPgLNhZCYhYvGq6lvdOQITd99SWXha3H7
+X-Gm-Gg: AY/fxX4VttAwxAqsSW6/IAusF2rU+e36N/CbHzZj1HqzgjDWj86nJeP+5etkQYCHDG4
+	dzj8AE6MmsZe3ZuhjjUldhb7ZkrXoabc3R5YPYi9F3fR/6cP2JCjXulRMsbMN2kucTmaJg8Oqfx
+	OJ8zJifpkVTC+yq7CBR6h3VNqsaA405VBUpJ9jViBPRtyWP4RckOPRpomxuzH3CHh4Y6BNVoK4L
+	uayDrjPTJu/2KnP0sDmX+Ley/kp9H43LhInR81+z6co6yBSaXgf75MzfdLFE5lV0AuyBpY01Klr
+	EfstJ6F2LDYTjFBnZC1r4omrdJKR1dcMRg6f/uNXDwo6fkh7TWHnnMa2ThIiXa+X3F0fCh6QBh1
+	K/mULncK+yWLUPwOMggacEJQlzlgIM3JAjaZK0dzfdvp43P4CBxKg+f34U5LuLNRj1BhHnuVLC1
+	YCW8EJbR6CyH0bR6o+sQ8MLM+7wJs2BC2FA7UOUHXBdQsMK4nYhQAnRvbRAHoG+o8eVWVyiXKFC
+	nRQRHahOJdNiqNCp81EdSig4se4wZZBRzSeOu4O6n0b5EMMRh2PWYt6afMV/G6V25DDJvhkgvX8
+	GRA=
+X-Google-Smtp-Source: AGHT+IFD9VEfhTkWGAUJ+KrkgUpiheofAxrSZVwNtEffu0+8gx+hrdlGu9tKXSDKwQO+mDr4xt9mXg==
+X-Received: by 2002:a05:7022:3a83:b0:11c:b397:2657 with SMTP id a92af1059eb24-121722be81emr4954809c88.22.1766180747284;
+        Fri, 19 Dec 2025 13:45:47 -0800 (PST)
 Received: from ?IPV6:2a00:79e0:2e7c:8:5874:79f3:80da:a7a3? ([2a00:79e0:2e7c:8:5874:79f3:80da:a7a3])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1217254c734sm11636083c88.13.2025.12.19.13.42.39
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b05fe99410sm10260116eec.2.2025.12.19.13.45.45
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 19 Dec 2025 13:42:40 -0800 (PST)
-Message-ID: <9af0d949-45f5-45cd-b49d-d45d53f5d8f6@gmail.com>
-Date: Fri, 19 Dec 2025 14:42:38 -0700
+        Fri, 19 Dec 2025 13:45:46 -0800 (PST)
+Message-ID: <ae957ee5-cb47-433f-b0b3-f4ac8ec7116b@gmail.com>
+Date: Fri, 19 Dec 2025 14:45:45 -0700
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -84,12 +83,12 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 24/36] compiler-context-analysis: Remove __cond_lock()
- function-like helper
-To: Marco Elver <elver@google.com>, Peter Zijlstra <peterz@infradead.org>,
- Boqun Feng <boqun.feng@gmail.com>, Ingo Molnar <mingo@kernel.org>,
- Will Deacon <will@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>,
+From: Bart Van Assche <bart.vanassche@gmail.com>
+Subject: Re: [PATCH v5 08/36] locking/rwlock, spinlock: Support Clang's
+ context analysis
+To: Peter Zijlstra <peterz@infradead.org>, Marco Elver <elver@google.com>
+Cc: Boqun Feng <boqun.feng@gmail.com>, Ingo Molnar <mingo@kernel.org>,
+ Will Deacon <will@kernel.org>, "David S. Miller" <davem@davemloft.net>,
  Luc Van Oostenryck <luc.vanoostenryck@gmail.com>,
  Chris Li <sparse@chrisli.org>, "Paul E. McKenney" <paulmck@kernel.org>,
  Alexander Potapenko <glider@google.com>, Arnd Bergmann <arnd@arndb.de>,
@@ -108,7 +107,7 @@ Cc: "David S. Miller" <davem@davemloft.net>,
  Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
  Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
  Steven Rostedt <rostedt@goodmis.org>,
- Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+ Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
  Thomas Gleixner <tglx@linutronix.de>, Thomas Graf <tgraf@suug.ch>,
  Uladzislau Rezki <urezki@gmail.com>, Waiman Long <longman@redhat.com>,
  kasan-dev@googlegroups.com, linux-crypto@vger.kernel.org,
@@ -117,49 +116,50 @@ Cc: "David S. Miller" <davem@davemloft.net>,
  linux-security-module@vger.kernel.org, linux-sparse@vger.kernel.org,
  linux-wireless@vger.kernel.org, llvm@lists.linux.dev, rcu@vger.kernel.org
 References: <20251219154418.3592607-1-elver@google.com>
- <20251219154418.3592607-25-elver@google.com>
+ <20251219154418.3592607-9-elver@google.com>
+ <17723ae6-9611-4731-905c-60dab9fb7102@acm.org>
+ <CANpmjNO0B_BBse12kAobCRBK0D2pKkSu7pKa5LQAbdzBZa2xcw@mail.gmail.com>
 Content-Language: en-US
-From: Bart Van Assche <bart.vanassche@gmail.com>
-In-Reply-To: <20251219154418.3592607-25-elver@google.com>
+In-Reply-To: <CANpmjNO0B_BBse12kAobCRBK0D2pKkSu7pKa5LQAbdzBZa2xcw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 12/19/25 8:40 AM, Marco Elver wrote:
->   Documentation/dev-tools/context-analysis.rst  |  2 -
->   Documentation/mm/process_addrs.rst            |  6 +-
->   .../net/wireless/intel/iwlwifi/iwl-trans.c    |  4 +-
->   .../net/wireless/intel/iwlwifi/iwl-trans.h    |  6 +-
->   .../intel/iwlwifi/pcie/gen1_2/internal.h      |  5 +-
->   .../intel/iwlwifi/pcie/gen1_2/trans.c         |  4 +-
->   include/linux/compiler-context-analysis.h     | 31 ----------
->   include/linux/lockref.h                       |  4 +-
->   include/linux/mm.h                            | 33 ++--------
->   include/linux/rwlock.h                        | 11 +---
->   include/linux/rwlock_api_smp.h                | 14 ++++-
->   include/linux/rwlock_rt.h                     | 21 ++++---
->   include/linux/sched/signal.h                  | 14 +----
->   include/linux/spinlock.h                      | 45 +++++---------
->   include/linux/spinlock_api_smp.h              | 20 ++++++
->   include/linux/spinlock_api_up.h               | 61 ++++++++++++++++---
->   include/linux/spinlock_rt.h                   | 26 ++++----
->   kernel/signal.c                               |  4 +-
->   kernel/time/posix-timers.c                    | 13 +---
->   lib/dec_and_lock.c                            |  8 +--
->   lib/lockref.c                                 |  1 -
->   mm/memory.c                                   |  4 +-
->   mm/pgtable-generic.c                          | 19 +++---
->   tools/include/linux/compiler_types.h          |  2 -
+On 12/19/25 1:02 PM, Marco Elver wrote:
+> On Fri, 19 Dec 2025 at 21:26, Bart Van Assche <bvanassche@acm.org> wrote:
+>> On 12/19/25 7:39 AM, Marco Elver wrote:
+>>> - extern void do_raw_read_lock(rwlock_t *lock) __acquires(lock);
+>>> + extern void do_raw_read_lock(rwlock_t *lock) __acquires_shared(lock);
+>>
+>> Given the "one change per patch" rule, shouldn't the annotation fixes
+>> for rwlock operations be moved into a separate patch?
+>>
+>>> -typedef struct {
+>>> +context_lock_struct(rwlock) {
+>>>        arch_rwlock_t raw_lock;
+>>>    #ifdef CONFIG_DEBUG_SPINLOCK
+>>>        unsigned int magic, owner_cpu;
+>>> @@ -31,7 +31,8 @@ typedef struct {
+>>>    #ifdef CONFIG_DEBUG_LOCK_ALLOC
+>>>        struct lockdep_map dep_map;
+>>>    #endif
+>>> -} rwlock_t;
+>>> +};
+>>> +typedef struct rwlock rwlock_t;
+>>
+>> This change introduces a new globally visible "struct rwlock". Although
+>> I haven't found any existing "struct rwlock" definitions, maybe it's a
+>> good idea to use a more unique name instead.
+> 
+> This doesn't actually introduce a new globally visible "struct
+> rwlock", it's already the case before.
+> An inlined struct definition in a typedef is available by its struct
+> name, so this is not introducing a new name
+> (https://godbolt.org/z/Y1jf66e1M).
 
-This patch should be split into one patch per subsystem or driver.
-E.g. one patch for the iwlwifi driver, another patch for the mm
-subsystem, one patch for the rwlock primitive, one patch for the
-spinlock primitive, etc.
-
-The tools/include/linux/compiler_types.h change probably should be
-left out because it is user space code instead of kernel code and
-the rest of the series applies to kernel code only.
-
-Thanks,
+Please take another look. The godbolt example follows the pattern
+"typedef struct name { ... } name_t;". The "name" part is missing from
+the rwlock_t definition. This is why I wrote that the above code
+introduces a new global struct name.
 
 Bart.
 
