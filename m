@@ -1,143 +1,91 @@
-Return-Path: <linux-doc+bounces-70249-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70252-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFD77CD1F70
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 22:29:22 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E4CCCD204B
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 22:38:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8F15D305A80F
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 21:28:56 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 536D63020C09
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 21:38:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC3F13242B7;
-	Fri, 19 Dec 2025 21:28:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB17E22256B;
+	Fri, 19 Dec 2025 21:38:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RMtyxVaH"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="EF7n9ibv"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com [209.85.214.196])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2296333B955
-	for <linux-doc@vger.kernel.org>; Fri, 19 Dec 2025 21:28:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.196
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8601A33ADB4;
+	Fri, 19 Dec 2025 21:38:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766179734; cv=none; b=WanPo6n7LF9+qKxob6lncsOm2x4KGsef8mznnhi0qhSLGgeymr8WijE8Wo9v2LCAXBa/kfnAmkl0DzjDVmMT09W+wMxm8Lmvp/4I3YyN/9H+x+4JSnahN7JmB16OhiNLAdSxx1Tr/zYxt+pS9vrFRCTKuNDPe9j1REFx114jeHo=
+	t=1766180317; cv=none; b=khokVXSHMJwOXghums4EvwUorAM1gBZSD+FKTQ5AE2l/fhdDCEJHvE9U4eOqGz3LqDmjItW3bAfieELn1GX3Mh3LfVWuHWOGJ1idxTxQ+xjR9RtSmmlQGjvHGVvZGXSCgvfpzddNMT388oShJ7dEGlVx/iHexpspJjUCr+bge1s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766179734; c=relaxed/simple;
-	bh=9qdyLYhk6D9KpgNEc9lTRHJNMgr66Y5zIziSEMCrXTM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AyiiP+lcKI9VoPhyOHfSNvQ/jfgazDJ5y+2ft85t7ibIJ00CQy9/hyvJIXyCEiRfZkjn6xQpOYcsk3mRCL1keDrf4W0yfOlSxmJtoLkFPs6cfXBPk0l3I3wYeU1Q18mvldexc+/VMGU0W74EK5ISND31rEEOf/Zm2NEVKonHSkI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RMtyxVaH; arc=none smtp.client-ip=209.85.214.196
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f196.google.com with SMTP id d9443c01a7336-2a0834769f0so21291755ad.2
-        for <linux-doc@vger.kernel.org>; Fri, 19 Dec 2025 13:28:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766179731; x=1766784531; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=9qdyLYhk6D9KpgNEc9lTRHJNMgr66Y5zIziSEMCrXTM=;
-        b=RMtyxVaHlb4x5czCBEyOx56xfjT+RNoyzgmUIOLM8rQyyjHAn8b14RHWVg+U9yECU2
-         DNet9BX2LSDx+fbfhj2eagJwVgKFUN3paA/J0jVpzr17MqrPGIkC8uWMpzr25M5n/Svh
-         riLL7VUKYl3lLur1iiIDnUxqZzSyVldJOlWErwA4BYTCmBjZa+IIIv/4tggBwnPyd5N1
-         4sP+EomK5LaRfaouO3drpoA8BG7gNbSc2L4KFhFCx08iZDlPsih1J+3De+KvkTA6nBjx
-         xSBUnB9EV5NlQAOueOI5ovsh9ZrpK2mKI2rYqZMt2HvppVyMTV6Z5xJIcetFL+mvKY9C
-         JWsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766179731; x=1766784531;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9qdyLYhk6D9KpgNEc9lTRHJNMgr66Y5zIziSEMCrXTM=;
-        b=Mi7kc5oDk1HRlH4Oz+TTYA83/bdSViVJd7KSyvk8C3xuDaeVU0x86NTDmY/YJVEeg1
-         UzWpA+Y0Qi4PPdCiTePebX6i6+0/We2+s8NRNZ56eSCECA0seJQENqSY+Z+PvYGF+bpx
-         BvpdC5ZDidkDb43yKum/iDFl2iP6qmBS2xY8p2d9Kgcx/scCvfKlPsstgxP+h3SfPOsx
-         GDyoaJ2ln9Dbi8CHHHU8jp9YlEHrHZgvFu3vO85VIFkSUaR5IslB5xh6yqUQUEF2j3lM
-         i0iMkgZ/VAYLZe1rOR9j/MUaZWEuWvCgqwK9SOdsk/+U2XIZq/AYDuXZog+0kRZsvsGA
-         WAQw==
-X-Forwarded-Encrypted: i=1; AJvYcCWqcaDM/CDouqvJzoKsNNzHemQSJyg8wXlqhnaOQK3gPp3rxZWSF/69O160oCysZm8uF/VEXF08esI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyuTrZi0M746uI3OwzXBqEiDz2iWrEHajrnvorSMb3YMtjGpKDR
-	lat6Q3pnD8FkjRlQ94VCRNTT9eK5pBclEl5eAXEuobtzLngrBlqxD73U
-X-Gm-Gg: AY/fxX7q0htuqRPy839cohTX6JCnf50pT3LCM3bkeOZtfq8f1WZBtFUbb2msw61EFdL
-	6FnMXvg++9OnfnFXekPldUjf5ord5FY7pMmFmLBND3UfSxnZK4c00mmQxnTkgs6F51GI/QPBFXi
-	DCl2JAl7FcJIJlPUJII8L6m5RAparHsuJbhfzMheXE2L0IM/9sNYmKpzRN28rtHdbAl1EYCQ5r0
-	OQgAOmYI1gWIozePMakBhW8SN2wWw9jfEHl1Q8qCwLTvAsptZxpk+TVIFAuFIC5by31rl/yTViG
-	g9WXe6A8Bid5naB6XqlD4UvK9ZybsML3KNxFykV7yUkYQfRW8maLNWIYn6r+A8ILI2tUDJW2Ajz
-	io+PMq6qRXRciOHmQN3NYQWc/BDM2x74J+2Uh+YoklpwFl46putYmvC/oSg4aow9ADGf9eflzNn
-	mpnH0RzizU38A+2laMZCvpQH2K/rfuEgN+8hN5vgkjtmRF7MLP3SRoTnx4cMoUc5mvk0l98stwV
-	lRGwVbrlpPKVf6CauGsCJKQWjFyjXiHmnN7KlRjeIFLwTOMM3rofIJ+kByNYKPaSPa3H/Byv/x/
-	DqE=
-X-Google-Smtp-Source: AGHT+IFntC97OMoIKW8iak4Csi+Sa/wJHZS2qz46SkDovenEuEnw3BILL/ha2LHm12T/rhrLMeYBbA==
-X-Received: by 2002:a05:7022:6988:b0:119:e56b:91ed with SMTP id a92af1059eb24-121722e01c2mr4354548c88.30.1766179731046;
-        Fri, 19 Dec 2025 13:28:51 -0800 (PST)
-Received: from ?IPV6:2a00:79e0:2e7c:8:5874:79f3:80da:a7a3? ([2a00:79e0:2e7c:8:5874:79f3:80da:a7a3])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1217254cd77sm12305503c88.14.2025.12.19.13.28.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 19 Dec 2025 13:28:50 -0800 (PST)
-Message-ID: <ecb35204-ea13-488b-8d60-e21d4812902a@gmail.com>
-Date: Fri, 19 Dec 2025 14:28:48 -0700
+	s=arc-20240116; t=1766180317; c=relaxed/simple;
+	bh=Bc+I+fxymkyjoi3nC3oyY3Hrn+uJmDgkF/cBlwdx4ds=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=Tw0LnBwoFg8jyXSTctVW5uIhy+bmUp2jTb50f+CrfVYk5huwelPSp/8XUFZJKeNmaiF+dP9hfc/RuCfhgrihDdsYGkOJghiIwqu/eew9NRc5KfA34umOcaFodgx5dEJymOEmIU5ogvfnT92BKLbYLzC3yGXxytgYrO4HbtVvCko=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=EF7n9ibv; arc=none smtp.client-ip=45.79.88.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 42DAE40AE7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1766179874; bh=eShDNxwlSi7BYNb0FE+LhvColTXB4St88MfbW/iSuk8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=EF7n9ibvvGwPZ8WeRi6NVxzXvigS7IM9IkqeVG5Qh3PnqLTepm7sI1zA7OdOVQy4s
+	 XxdMg4lHjIzz9u8mD9xGJ/Hqj/adMvaFacZ4GMaN/TIAd8ZNt6FoXS4yaIY4ei/Rr1
+	 ZNUjaZXGnsjNVPkbGDtQiQ3HA0eJxqFzGHVGlv4s2v+rhvxE7GgLKVfMjFs9JMTWip
+	 TNQaaqGO4ghrT7dyATfHe4O9+Z8rh7sS0Nt5CLTZTJCXGtsOTNTDQCumtWLFxFvee2
+	 otNA/ZYpe0OdGRsF6aSWQQ00PEBElJWipUrqXWXF3vZhabRvRugXTT9TMp+b1S39y4
+	 uc1lNg/Qu3d8g==
+Received: from localhost (unknown [IPv6:2607:fb91:7e8:98b9:6989:490e:a537:bfce])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ms.lwn.net (Postfix) with ESMTPSA id 42DAE40AE7;
+	Fri, 19 Dec 2025 21:31:14 +0000 (UTC)
+From: Jonathan Corbet <corbet@lwn.net>
+To: Thorsten Blum <thorsten.blum@linux.dev>
+Cc: Thorsten Blum <thorsten.blum@linux.dev>, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: kernel-hacking: Remove comma
+In-Reply-To: <20251219171827.44015-2-thorsten.blum@linux.dev>
+References: <20251219171827.44015-2-thorsten.blum@linux.dev>
+Date: Fri, 19 Dec 2025 14:31:12 -0700
+Message-ID: <87pl8akvkv.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 07/36] lockdep: Annotate lockdep assertions for context
- analysis
-To: Marco Elver <elver@google.com>
-Cc: Peter Zijlstra <peterz@infradead.org>, Boqun Feng <boqun.feng@gmail.com>,
- Ingo Molnar <mingo@kernel.org>, Will Deacon <will@kernel.org>,
- "David S. Miller" <davem@davemloft.net>,
- Luc Van Oostenryck <luc.vanoostenryck@gmail.com>,
- Chris Li <sparse@chrisli.org>, "Paul E. McKenney" <paulmck@kernel.org>,
- Alexander Potapenko <glider@google.com>, Arnd Bergmann <arnd@arndb.de>,
- Christoph Hellwig <hch@lst.de>, Dmitry Vyukov <dvyukov@google.com>,
- Eric Dumazet <edumazet@google.com>, Frederic Weisbecker
- <frederic@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Herbert Xu <herbert@gondor.apana.org.au>, Ian Rogers <irogers@google.com>,
- Jann Horn <jannh@google.com>, Joel Fernandes <joelagnelf@nvidia.com>,
- Johannes Berg <johannes.berg@intel.com>, Jonathan Corbet <corbet@lwn.net>,
- Josh Triplett <josh@joshtriplett.org>, Justin Stitt
- <justinstitt@google.com>, Kees Cook <kees@kernel.org>,
- Kentaro Takeda <takedakn@nttdata.co.jp>,
- Lukas Bulwahn <lukas.bulwahn@gmail.com>, Mark Rutland
- <mark.rutland@arm.com>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Miguel Ojeda <ojeda@kernel.org>, Nathan Chancellor <nathan@kernel.org>,
- Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
- Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
- Thomas Gleixner <tglx@linutronix.de>, Thomas Graf <tgraf@suug.ch>,
- Uladzislau Rezki <urezki@gmail.com>, Waiman Long <longman@redhat.com>,
- kasan-dev@googlegroups.com, linux-crypto@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-security-module@vger.kernel.org, linux-sparse@vger.kernel.org,
- linux-wireless@vger.kernel.org, llvm@lists.linux.dev, rcu@vger.kernel.org
-References: <20251219154418.3592607-1-elver@google.com>
- <20251219154418.3592607-8-elver@google.com>
- <cdde6c60-7f6f-4715-a249-5aab39438b57@acm.org>
- <CANpmjNPJXVtZgT96PP--eNAkHNOvw1MrYzWt5f2aA0LUeK8iGA@mail.gmail.com>
-Content-Language: en-US
-From: Bart Van Assche <bart.vanassche@gmail.com>
-In-Reply-To: <CANpmjNPJXVtZgT96PP--eNAkHNOvw1MrYzWt5f2aA0LUeK8iGA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 
-On 12/19/25 2:16 PM, Marco Elver wrote:
-> It's basically an escape hatch to defer to dynamic analysis where the
-> limits of the static analysis are reached.
+Thorsten Blum <thorsten.blum@linux.dev> writes:
 
-That's not how lockdep_assert_held() is used in the kernel. This macro
-is more often than not used to document assumptions that can be verified
-at compile time.
+> The comma is wrong, remove it.
+>
+> Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
+> ---
+>  Documentation/kernel-hacking/hacking.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/kernel-hacking/hacking.rst b/Documentation/kernel-hacking/hacking.rst
+> index 0042776a9e17..06fcb7c662d3 100644
+> --- a/Documentation/kernel-hacking/hacking.rst
+> +++ b/Documentation/kernel-hacking/hacking.rst
+> @@ -49,7 +49,7 @@ User Context
+>  
+>  User context is when you are coming in from a system call or other trap:
+>  like userspace, you can be preempted by more important tasks and by
+> -interrupts. You can sleep, by calling :c:func:`schedule()`.
+> +interrupts. You can sleep by calling :c:func:`schedule()`.
 
-This patch seems like a step in the wrong direction to me because it
-*suppresses* compile time analysis compile-time analysis is useful. I
-think that this patch either should be dropped or that the __assume()
-annotations should be changed into __must_hold() annotations.
+That's a fine change, but can I prevail upon you to get rid of the
+usless :c:func: annotation while you're playing with that line?
 
-Bart.
+Thanks,
+
+jon
 
