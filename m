@@ -1,131 +1,122 @@
-Return-Path: <linux-doc+bounces-70235-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70237-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76287CD1D7A
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 21:51:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DB82CD1D98
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 21:52:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 34A8D30EFC3A
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 20:47:59 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 908CA310DFF2
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 20:48:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5EC81341079;
-	Fri, 19 Dec 2025 20:47:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3B1C52DC781;
+	Fri, 19 Dec 2025 20:48:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="OYGJsedu"
+	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="yvRF6QOZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from 013.lax.mailroute.net (013.lax.mailroute.net [199.89.1.16])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB2C32DC781;
-	Fri, 19 Dec 2025 20:47:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EC313242B1;
+	Fri, 19 Dec 2025 20:48:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766177273; cv=none; b=X8FKwmThNve3JgdVxOrYiVg9xwGd5peVPu2bZyJSd84hgV8JBstCRhJJ/IljdRChJfBybYeQX4eUf+HhkjOpUMLwh+hEP0ACTmM4PDKUaHgbIQHWkOAajmxUM+TbufeMx+ekgcxsUB4n8xvsNeVH3zLh4mGVxkVxHYrdaJ9C1OI=
+	t=1766177285; cv=none; b=TBKfFUWSZJHw/oTBwOEGxgaR11MnmGStJnvwF1G6r1UEtGhRmDxX77AeFvR8CEzEGoDBq8i9HEvYlyoGiSB8q9eAqF6LsNpCV7Xzi35tOO9I8bDmx3k2o+f/EQgriacMHCluNXPvT+rMz+LykyVGxuAeT0Q9f39BWKTIxUx72iE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766177273; c=relaxed/simple;
-	bh=3ibPb03/L+VTQdGfz0DVLh1JBNccwUeD2J8ekZodq3I=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Subject:Cc:To:From:
-	 References:In-Reply-To; b=tX0mkwnuVbTS8ks6cQH5WVwCOJsqIRG+ppbbXCG765ioehjS4pEwp8XxghCfRaxi9SxP9wGCB6pqkb2aQC1Pg5ycAsAWGd1u9c9stdPl3T0zl1BBu0u1fnSJoac2dGM7kOsj2H4fcrhdgAF+CGlU4VS93K3SbVarGhkG53o41Vg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=OYGJsedu; arc=none smtp.client-ip=185.246.84.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 70ACE1A22FA;
-	Fri, 19 Dec 2025 20:47:49 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 4779A6071D;
-	Fri, 19 Dec 2025 20:47:49 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CE1F710AA98BF;
-	Fri, 19 Dec 2025 21:47:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1766177264; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=9gXg0kbUoCzWmdPvs9+PPLPaMkPQe5hr/VAOAnA+F0s=;
-	b=OYGJseduHQ8jtvy/DjtZHNn701lAfDiSE6OZKcVWe4UeL1q59fhq6w9j3Q9IV+lEQkcYx8
-	DZhIzQ8ZWDoFGm5ywfKjQna+9AQw3yNM/4U2YVLObQDXmuxX+tEXMQZGXHl5wV8g4vytdG
-	McqpLNvjxAaE3WRewyV5s6qhM8RH1nJH0ucCrTFtEkVABwt4XlkqYVRYsM1idzZPuNqR7u
-	tZ3Uw4cxKf6ZQ5Qbe5GbgrjKTkySOzONmS8R+RC4V3duh8m3EFKbTiTkEeBx7pbRc4QO0t
-	yubsArcIyXn6GghzcPv9jmo2dyDdStwflEmntpX7NizGVUkPbRVs3bfgJfRjcA==
+	s=arc-20240116; t=1766177285; c=relaxed/simple;
+	bh=RpTDLGmqmvX91HRlulscWF8eEEmxcYbVfxnBODEf7Fc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=AaHpgrQ2MjREuDeQNYsgWnyWjTx4G2u4L5DMf1XBZhsu/G1qM8IxQ5NsHN+8m0TwMwawDXOHTJPubNYJDYfy1lK5QafIfCe0qjwnN7m+sGBOHnqQaUHEv/IhM/a/GdOPW6MqKWmFjDdkxsSoLMPIDHOEh0/5fX71hS1FpX0M7nk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=yvRF6QOZ; arc=none smtp.client-ip=199.89.1.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
+Received: from localhost (localhost [127.0.0.1])
+	by 013.lax.mailroute.net (Postfix) with ESMTP id 4dY03k3PBFzlqfwx;
+	Fri, 19 Dec 2025 20:48:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
+	content-transfer-encoding:content-type:content-type:in-reply-to
+	:from:from:content-language:references:subject:subject
+	:user-agent:mime-version:date:date:message-id:received:received;
+	 s=mr01; t=1766177275; x=1768769276; bh=RpTDLGmqmvX91HRlulscWF8e
+	EEmxcYbVfxnBODEf7Fc=; b=yvRF6QOZG6UHkzlDEI+784Z3F6GrQK/qbhDhyH/q
+	M0VmZ1z5qrHfAYDtPV8Dk/4in6+gahQxa1lbZ1Jo6c9wtCyIYJGMKW//Odp+W+WN
+	kP75zw9/8DlRJ+zhV6IQnwokulJ8QNP5RFHBufnRbn7Bu+UomFMF1zl0CcA6lGHQ
+	qNkHLoupGo+gAFxdviBTwFsmv7lpmbSZGX3B0nYorvFBAjGXtIEDutsEekW/XB+L
+	aBqbyKoEpOUB/D4Xqjq9vrPvyll5guVFPGo5cn7XZCahnqCDjsHt/bWPsvysAyBk
+	i+SiyJwUkfkxqvnCbKDjxUarusC1UNbaLpXOezGEXmcqGQ==
+X-Virus-Scanned: by MailRoute
+Received: from 013.lax.mailroute.net ([127.0.0.1])
+ by localhost (013.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
+ id RwSAk9NGYx7Z; Fri, 19 Dec 2025 20:47:55 +0000 (UTC)
+Received: from [100.119.48.131] (unknown [104.135.180.219])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: bvanassche@acm.org)
+	by 013.lax.mailroute.net (Postfix) with ESMTPSA id 4dY03N45hpzlvrT5;
+	Fri, 19 Dec 2025 20:47:44 +0000 (UTC)
+Message-ID: <3b070057-5fda-410e-a047-d9061d56a82f@acm.org>
+Date: Fri, 19 Dec 2025 12:47:43 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 19 Dec 2025 21:47:42 +0100
-Message-Id: <DF2HL59FY4JR.23CL0EHNOQF18@bootlin.com>
-Subject: Re: [PATCH RESEND v2 31/32] drm/vkms: Allow to hot-add connectors
-Cc: <victoria@system76.com>, <sebastian.wick@redhat.com>,
- <thomas.petazzoni@bootlin.com>, <dri-devel@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>
-To: "Louis Chauvet" <louis.chauvet@bootlin.com>, "Haneen Mohammed"
- <hamohammed.sa@gmail.com>, "Simona Vetter" <simona@ffwll.ch>, "Melissa Wen"
- <melissa.srw@gmail.com>, "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
- "Thomas Zimmermann" <tzimmermann@suse.de>, "David Airlie"
- <airlied@gmail.com>, <jose.exposito89@gmail.com>, "Jonathan Corbet"
- <corbet@lwn.net>
-From: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
-X-Mailer: aerc 0.20.1
-References: <20251029-vkms-all-config-v2-0-a49a2d4cba26@bootlin.com>
- <20251029-vkms-all-config-v2-31-a49a2d4cba26@bootlin.com>
-In-Reply-To: <20251029-vkms-all-config-v2-31-a49a2d4cba26@bootlin.com>
-X-Last-TLS-Session-Version: TLSv1.3
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 13/36] bit_spinlock: Support Clang's context analysis
+To: Marco Elver <elver@google.com>, Peter Zijlstra <peterz@infradead.org>,
+ Boqun Feng <boqun.feng@gmail.com>, Ingo Molnar <mingo@kernel.org>,
+ Will Deacon <will@kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>,
+ Luc Van Oostenryck <luc.vanoostenryck@gmail.com>,
+ Chris Li <sparse@chrisli.org>, "Paul E. McKenney" <paulmck@kernel.org>,
+ Alexander Potapenko <glider@google.com>, Arnd Bergmann <arnd@arndb.de>,
+ Christoph Hellwig <hch@lst.de>, Dmitry Vyukov <dvyukov@google.com>,
+ Eric Dumazet <edumazet@google.com>, Frederic Weisbecker
+ <frederic@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Herbert Xu <herbert@gondor.apana.org.au>, Ian Rogers <irogers@google.com>,
+ Jann Horn <jannh@google.com>, Joel Fernandes <joelagnelf@nvidia.com>,
+ Johannes Berg <johannes.berg@intel.com>, Jonathan Corbet <corbet@lwn.net>,
+ Josh Triplett <josh@joshtriplett.org>, Justin Stitt
+ <justinstitt@google.com>, Kees Cook <kees@kernel.org>,
+ Kentaro Takeda <takedakn@nttdata.co.jp>,
+ Lukas Bulwahn <lukas.bulwahn@gmail.com>, Mark Rutland
+ <mark.rutland@arm.com>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Miguel Ojeda <ojeda@kernel.org>, Nathan Chancellor <nathan@kernel.org>,
+ Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
+ Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
+ Steven Rostedt <rostedt@goodmis.org>,
+ Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+ Thomas Gleixner <tglx@linutronix.de>, Thomas Graf <tgraf@suug.ch>,
+ Uladzislau Rezki <urezki@gmail.com>, Waiman Long <longman@redhat.com>,
+ kasan-dev@googlegroups.com, linux-crypto@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ linux-security-module@vger.kernel.org, linux-sparse@vger.kernel.org,
+ linux-wireless@vger.kernel.org, llvm@lists.linux.dev, rcu@vger.kernel.org
+References: <20251219154418.3592607-1-elver@google.com>
+ <20251219154418.3592607-14-elver@google.com>
+Content-Language: en-US
+From: Bart Van Assche <bvanassche@acm.org>
+In-Reply-To: <20251219154418.3592607-14-elver@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed Oct 29, 2025 at 3:37 PM CET, Louis Chauvet wrote:
-> In order to allow creating dynamic connector, add the required
-> infrastructure in vkms_connector.
->
-> Co-developed-by: Jos=C3=A9 Exp=C3=B3sito <jose.exposito89@gmail.com>
-> Signed-off-by: Jos=C3=A9 Exp=C3=B3sito <jose.exposito89@gmail.com>
-> [Louis Chauvet: use drm_atomic_helper_connector_reset instead of
-> drm_mode_config_reset because connector is not yet registered]
-> Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
-
-> --- a/drivers/gpu/drm/vkms/vkms_connector.h
-> +++ b/drivers/gpu/drm/vkms/vkms_connector.h
-> @@ -34,4 +34,36 @@ struct vkms_connector *vkms_connector_init_static(stru=
-ct vkms_device *vkmsdev,
->   */
->  void vkms_trigger_connector_hotplug(struct vkms_device *vkmsdev);
->
-> +/**
-> + * vkms_connector_hot_add() - Create a connector after the device is cre=
-ated
-> + * @vkmsdev: Device to hot-add the connector to
-> + * @connector_cfg: Connector's configuration
-> + *
-> + * Returns:
-> + * The connector or an error on failure.
-
-"A pointer to the newly created connector or a PTR_ERR on failure."
-
+On 12/19/25 7:40 AM, Marco Elver wrote:
+> +/*
+> + * For static context analysis, we need a unique token for each possible bit
+> + * that can be used as a bit_spinlock. The easiest way to do that is to create a
+> + * fake context that we can cast to with the __bitlock(bitnum, addr) macro
+> + * below, which will give us unique instances for each (bit, addr) pair that the
+> + * static analysis can use.
 > + */
-> +struct vkms_connector *vkms_connector_hot_add(struct vkms_device *vkmsde=
-v,
-> +					      struct vkms_config_connector *connector_cfg);
-> +
-> +/**
-> + * vkms_connector_hot_remove() - Remove a connector after a device is cr=
-eated
+> +context_lock_struct(__context_bitlock) { };
+> +#define __bitlock(bitnum, addr) (struct __context_bitlock *)(bitnum + (addr))
 
-Missing kdoc for @vkmsdev:
+Will this cause static analyzers to complain about out-of-bounds
+accesses for (bitnum + (addr)), which is equivalent to &(addr)[bitnum]?
 
-@vkmsdev: Device to containing the connector to be removed
+Thanks,
 
-> + * @connector: The connector to hot-remove
-> + */
-> +void vkms_connector_hot_remove(struct vkms_device *vkmsdev,
-> +			       struct vkms_connector *connector);
-
-With these changes:
-
- Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com>
-
---
-Luca Ceresoli, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+Bart.
 
