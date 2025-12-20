@@ -1,139 +1,145 @@
-Return-Path: <linux-doc+bounces-70258-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70260-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48FCBCD212F
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 23:01:18 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E049CD2625
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Dec 2025 04:26:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0E359303F4D5
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Dec 2025 22:01:17 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 0290E3012450
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Dec 2025 03:26:17 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4D120219A7A;
-	Fri, 19 Dec 2025 22:01:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C57E32BE65F;
+	Sat, 20 Dec 2025 03:26:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="gtS0+pfg"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="phms4Nd6"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0D533B1B3
-	for <linux-doc@vger.kernel.org>; Fri, 19 Dec 2025 22:01:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CB41242D67;
+	Sat, 20 Dec 2025 03:26:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766181676; cv=none; b=iHuaPszuLxgE1z5iwL2Xl6868N2E7XdUzGAYATzSA2qY9Mu2v9zSlTzIqpMd1MmEv2SXzA76nqclQaBRcQHwLK414c5ANZmRGdTGjuk5bArwUV1lHKpMCbcR14bUphhdo0jmYLzgxgLMA2VUlQWMuQIQd6JecWW40WNAyGvCTpo=
+	t=1766201175; cv=none; b=Kh/hdYK3oER9w6lIsACta+5l39gn5gn/xfdq/oZIHkZO4c6oDfY7iF2GKtLhYmWmwN+2Pib+hzd6exraoOWCU5Irqldxiod71KuyuBLoUosXdK1+P4v3r65Ie/vIgh0d/F9FAx+2OjeiixOVgsM0s+05DeeoeQ+E+aiLQ68MHZ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766181676; c=relaxed/simple;
-	bh=3431ox0ZbFQjlMMdoL22e/G2T8QFX+FQBznI2vzsZe8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BTVSLQXyi9VghC5ZLkTzVa3wlekA+7XvWHpi9e2tU/B6aJ+GvKsdrC8w4ZCA+w7T79ATFDmhr9rImC9IOddD25DkuZ5ovHYiyJ9y3EZYOeYNzNW4TDM5gOG0PG3nNeVn9tS41l0Ac5u1wx6pAdjLT2VALS3VVGMySMqcT+LM2Fk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=gtS0+pfg; arc=none smtp.client-ip=185.246.85.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id CAD1F4E41CC2;
-	Fri, 19 Dec 2025 22:01:10 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 8D0956071D;
-	Fri, 19 Dec 2025 22:01:10 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D8F0A10AA90A2;
-	Fri, 19 Dec 2025 23:01:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1766181665; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=Hcf0kFeXH7oqQdJ4h33PEPQp1m05Fo5cD4GMBj4xBKU=;
-	b=gtS0+pfgoBfTSfM9F/q5Z7G1JYvo665vPP3BBhqlA/6Fgg8JOoH8ciosrqWz2XqfoumeDZ
-	SancNmCsbKVYM/Qpqs9ifM3be8rO9U4M30KU7CLfl9XODUA92b26YbB770X9J9F1veL+FJ
-	Ss7s2lYFjP0jwGZLj7m9BUuARtEGFRu3Gn4pHPWuK5OQu3MUlcoplL8kH810zLh74x/XLn
-	pQDFAIla9RBTRICecWBNvYz1vNOuBnf0YpECNwlVMCcKSlwvCSkc62dy27OmP4ZpAQRA1D
-	2ttaYZcGAcSU5moCcSKCGZ0wjDXZg6sZL9PM377hwncs8xHlgLHljHZv5Q2Kbw==
-Message-ID: <5b173e9e-bcff-4b19-b16f-fe57796b99ae@bootlin.com>
-Date: Fri, 19 Dec 2025 23:01:09 +0100
+	s=arc-20240116; t=1766201175; c=relaxed/simple;
+	bh=EnAo8tjl0LeLPwSTVsKJgQguKuTTfJq16l9GOU0BmgI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=JpmVByQ2Q7IMzHlHQ853dreydeVS0VUZuGUfc3E2ViuGwOmE2BfzrkdHa+nolo7PoY5UvaGHR+aC5nt4DpT+ztQlBnGGW2jhcV7QENOcLBKzYreTur09xLQsJJp/bUn4ZR0ucfqr9HuCj5bo2vAAQRz5xgsaQfcvfJxNk1Qatoo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=phms4Nd6; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C15A2C4CEF5;
+	Sat, 20 Dec 2025 03:26:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1766201175;
+	bh=EnAo8tjl0LeLPwSTVsKJgQguKuTTfJq16l9GOU0BmgI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=phms4Nd6aQSaSqIIrs7tdFGtUthysBdYR/4KUwsLEko27qXKr9jeITU/Y660l86gX
+	 dnDJBEWToNz9fEG6IGkuV7uKzIcIKzTF5pnuo52ubwmGMfSHDV4Ab5LQetAx4dhYLU
+	 DQCPur2SWniNGSj6O0YbWfGGYPomemOaisSZyoDKGQhG5uF6ymmvwXdf4cdLCrYrFe
+	 gUtTS33mU/WNSQKk+AeI/8T1+lFeukh+B5DmNx6bFr1a6ihStU+lxVih2azmbAVTie
+	 hS9hWVFX2ObIMZWnGz4wektpS41jHSJ8W+XdOE2HhKwLgZcUrfbZI7EeUm7LkphO5S
+	 Y5ZiABDTgnitQ==
+From: Pratyush Yadav <pratyush@kernel.org>
+To: Pasha Tatashin <pasha.tatashin@soleen.com>
+Cc: Pratyush Yadav <pratyush@kernel.org>,  Mike Rapoport <rppt@kernel.org>,
+  Andrew Morton <akpm@linux-foundation.org>,  David Hildenbrand
+ <david@kernel.org>,  Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,  "Liam
+ R. Howlett" <Liam.Howlett@oracle.com>,  Vlastimil Babka <vbabka@suse.cz>,
+  Suren Baghdasaryan <surenb@google.com>,  Michal Hocko <mhocko@suse.com>,
+  Jonathan Corbet <corbet@lwn.net>,  Thomas Gleixner <tglx@linutronix.de>,
+  Ingo Molnar <mingo@redhat.com>,  Borislav Petkov <bp@alien8.de>,  Dave
+ Hansen <dave.hansen@linux.intel.com>,  x86@kernel.org,  "H. Peter Anvin"
+ <hpa@zytor.com>,  Muchun Song <muchun.song@linux.dev>,  Oscar Salvador
+ <osalvador@suse.de>,  Alexander Graf <graf@amazon.com>,  David Matlack
+ <dmatlack@google.com>,  David Rientjes <rientjes@google.com>,  Jason
+ Gunthorpe <jgg@nvidia.com>,  Samiullah Khawaja <skhawaja@google.com>,
+  Vipin Sharma <vipinsh@google.com>,  Zhu Yanjun <yanjun.zhu@linux.dev>,
+  linux-kernel@vger.kernel.org,  linux-mm@kvack.org,
+  linux-doc@vger.kernel.org,  kexec@lists.infradead.org
+Subject: Re: [RFC PATCH 04/10] liveupdate: flb: allow getting FLB data in
+ early boot
+In-Reply-To: <CA+CK2bAV1y_LySjyj-wcn1cdSuVBdC+r+zQL7AQTY64nk3OxuQ@mail.gmail.com>
+	(Pasha Tatashin's message of "Thu, 18 Dec 2025 13:25:32 -0500")
+References: <20251206230222.853493-1-pratyush@kernel.org>
+	<20251206230222.853493-5-pratyush@kernel.org>
+	<CA+CK2bAV1y_LySjyj-wcn1cdSuVBdC+r+zQL7AQTY64nk3OxuQ@mail.gmail.com>
+Date: Sat, 20 Dec 2025 12:26:05 +0900
+Message-ID: <86wm2hj0ky.fsf@kernel.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND v2 32/32] drm/vkms: Introduce configfs for dynamic
- connector creation
-To: Luca Ceresoli <luca.ceresoli@bootlin.com>,
- Haneen Mohammed <hamohammed.sa@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Melissa Wen <melissa.srw@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, jose.exposito89@gmail.com,
- Jonathan Corbet <corbet@lwn.net>
-Cc: victoria@system76.com, sebastian.wick@redhat.com,
- thomas.petazzoni@bootlin.com, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20251029-vkms-all-config-v2-0-a49a2d4cba26@bootlin.com>
- <20251029-vkms-all-config-v2-32-a49a2d4cba26@bootlin.com>
- <DF2HL69KF83U.GX59AN7IN8L@bootlin.com>
-From: Louis Chauvet <louis.chauvet@bootlin.com>
-Content-Language: en-US
-In-Reply-To: <DF2HL69KF83U.GX59AN7IN8L@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Dec 18 2025, Pasha Tatashin wrote:
 
-
-On 12/19/25 21:47, Luca Ceresoli wrote:
-> On Wed Oct 29, 2025 at 3:37 PM CET, Louis Chauvet wrote:
->> DRM allows the connector to be created after the device. To allows
->> emulating this, add two configfs attributes to connector to allows this.
+> On Sat, Dec 6, 2025 at 6:03=E2=80=AFPM Pratyush Yadav <pratyush@kernel.or=
+g> wrote:
 >>
->> Using the dynamic attribute you can set if a connector will be dynamic or
->> not.
->> Using the enabled attribute, you can set at runtime if a dynamic connector
->> is present or not.
+>> To support hugepage preservation using LUO, the hugetlb subsystem needs
+>> to get liveupdate data when it allocates the hugepages to find out how
+>> many pages are coming from live update. This data is preserved via LUO
+>> FLB.
 >>
->> Co-developed-by: José Expósito <jose.exposito89@gmail.com>
->> Signed-off-by: José Expósito <jose.exposito89@gmail.com>
->> Signed-off-by: Louis Chauvet <louis.chauvet@bootlin.com>
-> 
->> --- a/drivers/gpu/drm/vkms/vkms_configfs.c
->> +++ b/drivers/gpu/drm/vkms/vkms_configfs.c
-> 
->> @@ -1215,8 +1223,10 @@ static ssize_t connector_type_store(struct config_item *item,
->>   	}
+>> Since gigantic hugepage allocations happen before LUO (and much of the
+>> rest of the system) is initialized, the usual
+>> liveupdate_flb_get_incoming() can not work.
 >>
->>   	scoped_guard(mutex, &connector->dev->lock) {
->> -		if (connector->dev->enabled)
->> -			return -EINVAL;
->> +		if (connector->dev->enabled) {
->> +			if (connector_is_enabled(connector->config))
->> +				return -EBUSY;
->> +		}
-> 
-> You are changing from -EINVAL to -EBUSY. Why? Was -EINVAL wrong in the
-> first place?
+>> Add a read-only variant that fetches the FLB data but does not trigger
+>> its retrieve or do any locking or reference counting. It is the caller's
+>> responsibility to make sure there are no side effects of using this data
+>> to the proper retrieve call that would happen later.
+>>
+>> Refactor the logic to find the right FLB in the serialized data in a
+>> helper that can be used from both luo_flb_retrieve_one() (called from
+>> luo_flb_get_incoming()), and from luo_flb_get_incoming_early().
+>>
+>> Signed-off-by: Pratyush Yadav <pratyush@kernel.org>
+>> ---
+>>  include/linux/liveupdate.h  |  6 ++++
+>>  kernel/liveupdate/luo_flb.c | 69 +++++++++++++++++++++++++++++--------
+>>  2 files changed, 60 insertions(+), 15 deletions(-)
+>>
+>> diff --git a/include/linux/liveupdate.h b/include/linux/liveupdate.h
+>> index 78e8c529e4e7..39b429d2c62c 100644
+>> --- a/include/linux/liveupdate.h
+>> +++ b/include/linux/liveupdate.h
+>> @@ -232,6 +232,7 @@ int liveupdate_unregister_flb(struct liveupdate_file=
+_handler *fh,
+>>
+>>  int liveupdate_flb_get_incoming(struct liveupdate_flb *flb, void **objp=
+);
+>>  int liveupdate_flb_get_outgoing(struct liveupdate_flb *flb, void **objp=
+);
+>> +int liveupdate_flb_incoming_early(struct liveupdate_flb *flb, u64 *data=
+p);
+>
+> Hi Pratyush,
+>
+> [Follow-up from LPC discussion]
+>
+> This patch is not needed, you can use liveupdate_flb_get_incoming()
+> directly in early boot. The main concern is that we take mutex in that
+> function, but that I think is safe. The might_sleep() has the proper
+> handling to be called early in boot, it has "system_state =3D=3D
+> SYSTEM_BOOTING" check to silence warning during boot.
 
-EINVAL was wrong in the first place, we try to remove EBUSY when you 
-can't do something because the device is already enabled and EINVAL when 
-the value is false.
+Right. I will give it a try. For hugetlb, this works fine since it
+doesn't really need to do much in FLB retrieve anyway, it just needs to
+parse some data structures.
 
-> 
-> And you can avoid the nested if:
-> 
-> 		if (connector->dev->enabled && connector_is_enabled(connector->config))
-> 			return -E<WHATEVER>;
+If other subsystems end up needing a two-part retrieve, one in early
+boot and one later, then I think it would be a good idea to model that
+properly instead of leaving it up to the subsystem to manage it.
 
-It is probably a remaining of previous implementation, thanks!
+Anyway, that isn't a real problem today so let's look at it when it does
+show up.
 
->> +static ssize_t connector_dynamic_show(struct config_item *item, char *page)
->> +{
->> +	struct vkms_configfs_connector *connector;
->> +	bool enabled;
->               ^^^^^^^
->               dynamic
-> 
-> Luca
-> 
-> --
-> Luca Ceresoli, Bootlin
-> Embedded Linux and Kernel engineering
-> https://bootlin.com
-
+--=20
+Regards,
+Pratyush Yadav
 
