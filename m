@@ -1,209 +1,104 @@
-Return-Path: <linux-doc+bounces-70378-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70380-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC383CD5AC4
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Dec 2025 11:55:05 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D35DCD60C7
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Dec 2025 13:52:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 6975A307C8D0
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Dec 2025 10:51:51 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C334C3010E5D
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Dec 2025 12:51:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C70702DCC04;
-	Mon, 22 Dec 2025 10:51:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D383D30BF6F;
+	Mon, 22 Dec 2025 12:45:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KkIqyOq1"
+	dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b="T8IsI3r2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from www3141.sakura.ne.jp (www3141.sakura.ne.jp [49.212.207.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91F751E2606;
-	Mon, 22 Dec 2025 10:51:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766400701; cv=none; b=Rj4WqcMuelq4pQcpeiD4ItdeBWH7u/4SqPLAyYlaKxNbw83P6sf7SOQqVQFRj6Oxu/4LKaQHXMvWTNLcwbNuY2Rv4t0UGwrK+slS5pwbPcFRDl/6gFhFdwSRXRBQtojh6ILDXCmYc6THPXaRVx8bEtbke/+Lg4wCXFhQY6eZmwo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766400701; c=relaxed/simple;
-	bh=ZhODpW1Vef8fiznT5wKMwY5ksVbGZFsaL/oU3wYQppc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=CZrkB1zgdR7tfrfaYbpSUIBr0iuVDNcPtIfvyhBkoUXPMWZiMoatl0E5T3Fu0UaeWrruz9zQxqvVSgeeFY29doBxeXwi6miubMD9AqN09GH7iNPQ7PLjXjmei1plSwTvxbuDP2w4EKZZUujuZaFqh+lem8CzSYrgKoJ7NECd9cw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KkIqyOq1; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 24C51C4CEF1;
-	Mon, 22 Dec 2025 10:51:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1766400701;
-	bh=ZhODpW1Vef8fiznT5wKMwY5ksVbGZFsaL/oU3wYQppc=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=KkIqyOq1HwU2ELL9MAdM2TI/oj8TzZRtz4r53Zb8E0Ed2NQBziVYRvz9a4nN66zUH
-	 6fx8dwPeeqDOYXhxHT7lvF7Gb90BjxlQ+8QS7/hU5tY4AsbCN9H8ss/CQCIdmAlI13
-	 +iB5cRh9FYX00PziVPjEdbDAF8bWz7x/JOwfuE3ApRAkrMTABns5rOqKkW0NrFALZH
-	 7c0QhMV69rnDZ++YlPaU0lT80ta0L/sox+5wZ9T3fTJSbzj+1Z1flMmnDKmrOPmEVv
-	 87ZcDeEevEbgDSCqhHP7sWIK04T5imXU6a0ZCVqZgUAjpzvkMNZqx32YzRsxB5mbfX
-	 5a/PvAUveVz0w==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 065BDE67482;
-	Mon, 22 Dec 2025 10:51:41 +0000 (UTC)
-From: Cryolitia PukNgae via B4 Relay <devnull+cryolitia.uniontech.com@kernel.org>
-Date: Mon, 22 Dec 2025 18:51:39 +0800
-Subject: [PATCH] hwmon: (gpd-fan) add support for Micro PC 2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CE792F361B;
+	Mon, 22 Dec 2025 12:45:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=49.212.207.181
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1766407509; cv=pass; b=aRh0XH474+2KXty3Vp1LdNyj++pksjbdeOEOj7HS+OdX0hJI78LGbjKSko7v2SC86q4wwJtpf1+On8NZzQOBAKZQvGRvke1zeAWyRbCA/UAdhfiMirxfQ7B2HdURp8BPVELgmn2iG+XD63CTMHgnTybEkDN/EchCYhZ2jGtO3Yw=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1766407509; c=relaxed/simple;
+	bh=r6rcXqUdCoNEDVauW7Jj8K2krZrOBOOFgbuNBlsyND8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rGgqWSq8ySQnTqroHN3LEP9T6GPGdtX1oBbioev4vAPPtlAsik+bLlP06VWg+m5K5f+1cbfjkEosU7Yuwx6B5r/yOx53RHwJZ/e6cYr0f2qcLWpjiVCsvsTHS7eySdw2gflWjUUyzVtLounNwW76DcplLHQ+2O1DYr8/IsZOi4M=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=T8IsI3r2; arc=pass smtp.client-ip=49.212.207.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redadmin.org
+Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+	(authenticated bits=0)
+	by www3141.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 5BMC4KVr083291
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Mon, 22 Dec 2025 21:04:21 +0900 (JST)
+	(envelope-from weibu@redadmin.org)
+Received: from localhost (localhost [127.0.0.1])
+	by www.redadmin.org (Postfix) with ESMTP id 51AA2109D38D1;
+	Mon, 22 Dec 2025 21:04:20 +0900 (JST)
+X-Virus-Scanned: amavis at redadmin.org
+Received: from www.redadmin.org ([127.0.0.1])
+ by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id E3Vt4RFQTgwT; Mon, 22 Dec 2025 21:04:16 +0900 (JST)
+Received: by www.redadmin.org (Postfix, from userid 1000)
+	id C1AA610A0ECCF; Mon, 22 Dec 2025 21:04:16 +0900 (JST)
+Authentication-Results: www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
+ARC-Seal: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space; t=1766405056;
+	cv=none; b=A4uQ22f/H4x1hG8ZiuwmBVj/w9Gh6Xl6H+9ZiyKewBsS8+dyUzTkezeWWfuuMcMH3Vt+gROD8Op3irf0yTvus7SvygYbHRdvESnJDsCaNfm7Nn6jymXClJOoAJkB4k9fBoOVHF/mXkY2sd7C25v9wDIouzflHq/XskIN3JESb0I=
+ARC-Message-Signature: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space;
+	t=1766405056; c=relaxed/relaxed;
+	bh=8OFpXXeyC8oQ2LUH1geZW0L7WQv5zmcGUbqIc0sIfpc=;
+	h=DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding; b=tzkEKZYW8EtqRqGoq3A8CSzLqoZLPOv9eirya9HDg+ASAjkxKiL8JFcRgOpYg0a6cHsEnAdAzaMNjxgsT7ZDJtNcZSTwJXc/Tzju9FtU6yLeaYLnxk7u+CE9bYt79fLDgQLbDnR/mzPcaWBJefK49VoV/bwMGkAASaKMZrPsYxQ=
+ARC-Authentication-Results: i=1; www.redadmin.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org C1AA610A0ECCF
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
+	s=20231208space; t=1766405056;
+	bh=8OFpXXeyC8oQ2LUH1geZW0L7WQv5zmcGUbqIc0sIfpc=;
+	h=From:To:Cc:Subject:Date:From;
+	b=T8IsI3r2dAXIIR6ZHXgxHQ4PEcw8Q+0MG4HxHq1pTUdyc2a72Nw0wznNq8FvJvj9a
+	 n0HXa25lOEgcR33Z/VvGbS5nhAB/qrCnFzGz7Q7RNbx208JdijoGAYQBztZLxZT8PO
+	 ovR9AbQKQB+OXGGb7vzU7uCZwy9w4D0Yk2k16+Ck=
+From: Akiyoshi Kurita <weibu@redadmin.org>
+To: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org, muneendra.kumar@broadcom.com,
+        Akiyoshi Kurita <weibu@redadmin.org>
+Subject: [PATCH] Documentation/ABI: fix typo "upto" -> "up to" in sysfs-class-fc
+Date: Mon, 22 Dec 2025 21:04:14 +0900
+Message-ID: <20251222120414.2422149-1-weibu@redadmin.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251222-mpc2-v1-1-695d8d351cc1@uniontech.com>
-X-B4-Tracking: v=1; b=H4sIALoiSWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDIyMj3dyCZCNdo8QkwyTjJANzM0tjJaDSgqLUtMwKsDHRsbW1AFEuo6Z
- WAAAA
-X-Change-ID: 20251222-mpc2-2ab1b3b07693
-To: Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>
-Cc: linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, zhanjun@uniontech.com, 
- niecheng1@uniontech.com, kylon <3252255+kylon@users.noreply.github.com>, 
- Cryolitia PukNgae <cryolitia@uniontech.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1766400699; l=3503;
- i=cryolitia@uniontech.com; s=20250730; h=from:subject:message-id;
- bh=nv5ngPCWNWl1pWZK/Jsrxlg5PBarThSYyvwaOoZoOns=;
- b=dUI8ap2n210H2jIH6foW8oZ8uJ0m1WIRoV4sc9uvFbUH1MM5LrSnpO+cZQidzg1s43cz3S81w
- S6PVn0xqJK9ALMUa+O+/ZQtVEPiCjcxyI86VlYb1VYxXvRH57QDbs0E
-X-Developer-Key: i=cryolitia@uniontech.com; a=ed25519;
- pk=tZ+U+kQkT45GRGewbMSB4VPmvpD+KkHC/Wv3rMOn/PU=
-X-Endpoint-Received: by B4 Relay for cryolitia@uniontech.com/20250730 with
- auth_id=474
-X-Original-From: Cryolitia PukNgae <cryolitia@uniontech.com>
-Reply-To: cryolitia@uniontech.com
+Content-Transfer-Encoding: quoted-printable
 
-From: Cryolitia PukNgae <cryolitia@uniontech.com>
+Fix a typo in Documentation/ABI/testing/sysfs-class-fc: "upto" should be
+"up to".
 
-GPD Micro PC 2 is a mobile productivity device with 7-inch screen and
-abundant ports.[1]
-
-Link: https://www.gpd.hk/gpdmicropc2345345345 #1
-Co-developed-by: kylon <3252255+kylon@users.noreply.github.com>
-Signed-off-by: kylon <3252255+kylon@users.noreply.github.com>
-Tested-by: kylon <3252255+kylon@users.noreply.github.com>
-Link: https://github.com/Cryolitia/gpd-fan-driver/pull/23
-Signed-off-by: Cryolitia PukNgae <cryolitia@uniontech.com>
+Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
 ---
- Documentation/hwmon/gpd-fan.rst |  3 +++
- drivers/hwmon/gpd-fan.c         | 27 ++++++++++++++++++++++++++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
+ Documentation/ABI/testing/sysfs-class-fc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/hwmon/gpd-fan.rst b/Documentation/hwmon/gpd-fan.rst
-index 0b56b70e6264..29527a77fe88 100644
---- a/Documentation/hwmon/gpd-fan.rst
-+++ b/Documentation/hwmon/gpd-fan.rst
-@@ -28,6 +28,7 @@ Currently the driver supports the following handhelds:
-  - GPD Win Max 2 2025 (HX370)
-  - GPD Win 4 (6800U)
-  - GPD Win 4 (7840U)
-+ - GPD Micro PC 2
- 
- Module parameters
- -----------------
-@@ -50,6 +51,8 @@ gpd_fan_board
-        - GPD Win Mini (HX370)
-        - GPD Pocket 4
-        - GPD Duo
-+   - mpc2
-+       - GPD Micro PC 2
- 
- Sysfs entries
- -------------
-diff --git a/drivers/hwmon/gpd-fan.c b/drivers/hwmon/gpd-fan.c
-index 237f496c4862..1729729b135f 100644
---- a/drivers/hwmon/gpd-fan.c
-+++ b/drivers/hwmon/gpd-fan.c
-@@ -31,6 +31,7 @@ enum gpd_board {
- 	win4_6800u,
- 	win_max_2,
- 	duo,
-+	mpc2,
- };
- 
- enum FAN_PWM_ENABLE {
-@@ -106,6 +107,18 @@ static struct gpd_fan_drvdata gpd_wm2_drvdata = {
- 	.pwm_max		= 184,
- };
- 
-+static struct gpd_fan_drvdata gpd_mpc2_drvdata = {
-+	.board_name		= "mpc2",
-+	.board			= mpc2,
-+
-+	.addr_port		= 0x4E,
-+	.data_port		= 0x4F,
-+	.manual_control_enable	= 0x047A,
-+	.rpm_read		= 0x0476,
-+	.pwm_write		= 0x047A,
-+	.pwm_max		= 244,
-+};
-+
- static const struct dmi_system_id dmi_table[] = {
- 	{
- 		// GPD Win Mini
-@@ -212,11 +225,19 @@ static const struct dmi_system_id dmi_table[] = {
- 		},
- 		.driver_data = &gpd_win_mini_drvdata,
- 	},
-+	{
-+		// GPD Micro PC 2
-+		.matches = {
-+			DMI_MATCH(DMI_SYS_VENDOR, "GPD"),
-+			DMI_MATCH(DMI_PRODUCT_NAME, "G1688-08"),
-+		},
-+		.driver_data = &gpd_mpc2_drvdata,
-+	},
- 	{}
- };
- 
- static const struct gpd_fan_drvdata *gpd_module_drvdata[] = {
--	&gpd_win_mini_drvdata, &gpd_win4_drvdata, &gpd_wm2_drvdata, NULL
-+	&gpd_win_mini_drvdata, &gpd_win4_drvdata, &gpd_wm2_drvdata, &gpd_mpc2_drvdata, NULL
- };
- 
- // Helper functions to handle EC read/write
-@@ -295,6 +316,7 @@ static int gpd_read_rpm(void)
- 	case win4_6800u:
- 	case win_mini:
- 	case duo:
-+	case mpc2:
- 		return gpd_generic_read_rpm();
- 	case win_max_2:
- 		return gpd_wm2_read_rpm();
-@@ -321,6 +343,7 @@ static int gpd_read_pwm(void)
- 	case win_mini:
- 	case duo:
- 	case win4_6800u:
-+	case mpc2:
- 		switch (gpd_driver_priv.pwm_enable) {
- 		case DISABLE:
- 			return 255;
-@@ -376,6 +399,7 @@ static int gpd_write_pwm(u8 val)
- 	case win_mini:
- 	case win4_6800u:
- 	case win_max_2:
-+	case mpc2:
- 		gpd_generic_write_pwm(val);
- 		break;
- 	}
-@@ -443,6 +467,7 @@ static void gpd_set_pwm_enable(enum FAN_PWM_ENABLE enable)
- 	switch (gpd_driver_priv.drvdata->board) {
- 	case win_mini:
- 	case win4_6800u:
-+	case mpc2:
- 		gpd_win_mini_set_pwm_enable(enable);
- 		break;
- 	case duo:
-
----
-base-commit: c6c80820ac5d845c19c4de2e6054e7c246017044
-change-id: 20251222-mpc2-2ab1b3b07693
-
-Best regards,
--- 
-Cryolitia PukNgae <cryolitia@uniontech.com>
-
+diff --git a/Documentation/ABI/testing/sysfs-class-fc b/Documentation/ABI/t=
+esting/sysfs-class-fc
+index 3057a6d3b8cf..786296aeca32 100644
+--- a/Documentation/ABI/testing/sysfs-class-fc
++++ b/Documentation/ABI/testing/sysfs-class-fc
+@@ -15,7 +15,7 @@ Description:
+=20
+ 		The interface expects a string "<cgroupid>:<appid>" where:
+ 		<cgroupid> is inode of the cgroup in hexadecimal
+-		<appid> is user provided string upto 128 characters
++		<appid> is user provided string up to 128 characters
+ 		in length.
+=20
+ 		If an appid_store is done for a cgroup id that already
+--=20
+2.47.3
 
 
