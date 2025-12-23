@@ -1,83 +1,55 @@
-Return-Path: <linux-doc+bounces-70499-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70506-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id E36BDCD9399
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 13:19:16 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8064CCD93ED
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 13:28:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B56CE302A13D
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 12:16:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id CAAC93043F62
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 12:26:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 65162330304;
-	Tue, 23 Dec 2025 12:16:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F4DF33EB0B;
+	Tue, 23 Dec 2025 12:21:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="K8nuZ9y6"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OzAcQwW4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DED3D327C0D
-	for <linux-doc@vger.kernel.org>; Tue, 23 Dec 2025 12:16:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.176
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6781C33E36F;
+	Tue, 23 Dec 2025 12:21:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766492165; cv=none; b=h6MLdSjVH1Ak58tUbqYOXvcXFPqWq+F/Fj+1xNTldE19yDWNFnuyHlh+n/GsZgntknd6Xfh7fWl+exojma03x4Zbu5Q3jIGo0AWbtUR2V3mm63H/WcyKddEOQMXHmEFpTgUIqPVJS5t3osc6lIp9/V1vzJVwMRbeirbNEkP3KhM=
+	t=1766492474; cv=none; b=QyIwUH/kVYkCWZV+OFpiNJZWJvGrDXJAbbs59HYrU+jU1ms7rGdjnxqyR9cdbUd8trZOIyoWfAGxQWzF7TuNW+UoIKlV3rgYwStjXbTq9JF2zsV064bQMYtlKUi4u0Trj47f5rHdwFELTUdiLzVq0anPckeTXurCzSxnSWoRG+0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766492165; c=relaxed/simple;
-	bh=OGLmQSyOMsDoSAfsoCSwoHFdHX5YIQRFf2nOSW2RmGk=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=qef5EuSMXpZR6619KdsVELCgT45Lm894zxRmYfAC+X1OmA22lWRGdVku9+LinZCcp3t1H/iveeWaVWgF1rOSuqWur66G6fwIG0JwRGKNgpyLb2ZmmBVO9q7B6ZJlbjogpren4tAyZvNZQi5EhVknSe1ffwR8lQSFhwAn764UBB4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=K8nuZ9y6; arc=none smtp.client-ip=209.85.214.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2a0fe77d141so52948505ad.1
-        for <linux-doc@vger.kernel.org>; Tue, 23 Dec 2025 04:16:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766492163; x=1767096963; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+MC2Cy/XxfafRlttKtxBQRpcn1uT4eypNUG7Btr0pmc=;
-        b=K8nuZ9y6g2mrj9Pjz4l1B7v/T1taxvF+nh/0EiqqLXOW/bOPAqGLc0vnKGbvieWyXF
-         5hv1tcB2ugbnt7pT0nBVUqlDVjvQm3SFYOnb+nuhLbQ8kHYvn6Uqogb+01xVptfCU1Ve
-         6k9+CaZn/YwPOU+CMA3s6ozVfhlLeXpy6cj4T1mlKb+uxVp1rqBNdPAypcWl0pzXKDLM
-         HuOXW+avTlTH7+9t4KR7Y75cws2hCZ5bFYSd6zMmNpRP4VQAaSw2SLFBa00WJJdKa4+g
-         lbr0Lp+FwO81mxxwxcWJ9I8ULxw0gDT86kEr9EMJ44YBGHsh9JL0x1StJ5GXtUOAH7Fg
-         2T9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766492163; x=1767096963;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+MC2Cy/XxfafRlttKtxBQRpcn1uT4eypNUG7Btr0pmc=;
-        b=heOCr6j+ugdpQK8wXgnr/8XwoZpNdcYTYEsptqnCz86oZSPgtGvsV5CKPqWj68W6wE
-         r7B2PHKWKNwabwjWRVrD80tJRgpnhcce3g39GISfPSqAhz6H7rTbv8oEQEHKf96kgZwn
-         hLP8RYKIjV8a//RhWFrCH+06iTOlOguCHEFtHW+Ktjs+ufaoix2OHzjD8AMYcoA6xbJa
-         hNC/m5n/GI3gtDxb4YmUgexC2SidULALeCZpaLw9ZFXbLo3Wk0/RHPDQdfILqzan5MUC
-         8X387oqV2SbjFOZpomWTJd/zYFGAfY73Ia5MRt7N9wTwJUMdh41vR3tPVMa+Y/tIlBFF
-         RgYA==
-X-Gm-Message-State: AOJu0Ywt0W77Zgq8ReWbRxsZpWQDnd/Z3EYr/ps87deYE6dVqk3Wcc3w
-	cPmSFi/pN/j36Sj1lWrKs16YIlfFH7Pvs8WVLgfyIbm3o3YwdwGVNymT
-X-Gm-Gg: AY/fxX5dTd8izy2hjjE3lzcY8G+RXHC7klTpn+ankpr3bGwLgCUKRPZ84vMXoaMl0O/
-	BQUBL6gaQmVe8Lc6tYq6DkEbtr1laHNtUdBakYikzLqDAEgzCIi3NVJ/8+roDu2JwO6c02a/k1C
-	fz2DQcZmw2BH0AljE677EU5Tdlq6w6iX+l2+hotFWkU3s6E4fkw7ukw6bqIb3/33ip9F+86q9uB
-	u/Y63iDUDpysLJgMC1VUWJ7LWDzobRZZfSnbrg8Bq1gGisy7MvCm6OueliwTd/5c8Doz7Uzznns
-	pYp/nYnFLAEKmMDsry7EztPbQCW/bFV8NTvDBJF9Mo4mIbjncd8Ie+lB7ulnWMtUvBlru7KVYSi
-	6jpMpivkG4KKV5xeoq0UdXfTYNwhA6Ik2LsMrdImXGQGNKf01d9S2hUu67oj90HLjgPI1rtxw6z
-	IYantVANk4J0UvT9SHoikmCvqkBkqEgPNNxlhu
-X-Google-Smtp-Source: AGHT+IH2z5nI5uKG7lcv+7cra9HeGui3TtKmWc1tXlLRbsFRZ+1dUNHMSq63ePV60a7YRtOr+KuQ+g==
-X-Received: by 2002:a17:902:f641:b0:29d:73cc:c9e8 with SMTP id d9443c01a7336-2a2f221285cmr160421115ad.2.1766492163206;
-        Tue, 23 Dec 2025 04:16:03 -0800 (PST)
-Received: from LAPTOP-T7JN4DDU.bbrouter ([117.208.21.173])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a2f3d5d428sm125624285ad.73.2025.12.23.04.16.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Dec 2025 04:16:02 -0800 (PST)
-From: Vishal Singh <vishalrajput96156@gmail.com>
+	s=arc-20240116; t=1766492474; c=relaxed/simple;
+	bh=JlGNBsLe9161u8rdg112J63eiklxCZvOaFs17LzTyRA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=YBhI8KtCvtpwG7Y4FeG4pIHB/XQXL49jhHcUGLZLknF8c6xTOxPtMahCd8JFEM0Jicm/lhdMyDfCC3R7lUUfcEGgl8McalrPSrwVEA6NTQw22n5u4qiTFJTHdt2Jnd3RUmc6VBuvIOhz9JqFEYIqZtAl6/NS8UXytnKn42WjO6s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OzAcQwW4; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BDAB6C113D0;
+	Tue, 23 Dec 2025 12:21:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1766492474;
+	bh=JlGNBsLe9161u8rdg112J63eiklxCZvOaFs17LzTyRA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=OzAcQwW4KFV3fXJoMQS8cUt0acK8+ZSFyx2IHGJvizWcZ4FkuEkPU13OaynnE0Z53
+	 PvNJkw1ETwLCOLM/mV9/jtoPknSNRqTQt38gnhGWouZfmxJp0skQRWa6v7rokv30NN
+	 zPR9vi9VHM63MA/b07pczIi4hyJFJKgTtHkeMRozsJEfwDW6cc2YpctMX/xmfOVE6M
+	 Iavpvh6xJayo31VfPcAJP8cVrz0Wa05bHIIocv64ug8nw3nMh61RzcEAn1L1BYPipx
+	 MZJPMvsWXvc3J0/OgDDx23Xl4cykBGPMzKQn/INJtRctcnFT5v6mowRqv4hjQ9Z7KX
+	 /nVIvRFoMxzGA==
+From: Sasha Levin <sashal@kernel.org>
 To: corbet@lwn.net
-Cc: linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Vishal Singh <vishalrajput96156@gmail.com>
-Subject: [PATCH] docs: conf.py: drop stale FIXME about pdf index size
-Date: Tue, 23 Dec 2025 17:45:43 +0530
-Message-Id: <20251223121543.401133-1-vishalrajput96156@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Sasha Levin <sashal@kernel.org>
+Subject: [PATCH v2] docs: add AI Coding Assistants documentation
+Date: Tue, 23 Dec 2025 07:21:10 -0500
+Message-ID: <20251223122110.2496946-1-sashal@kernel.org>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <877bue18ch.fsf@trenco.lwn.net>
+References: <877bue18ch.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -86,32 +58,135 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The comment describes intentional behavior and does not indicate
-unfinished work. Remove the FIXME marker and keep it as a normal
-explanatory comment.
+Add guidance for AI assistants and developers using AI tools for kernel
+contributions, per the consensus reached at the 2025 Maintainers Summit.
 
-Signed-off-by: Vishal Singh <vishalrajput96156@gmail.com>
+Create Documentation/process/coding-assistants.rst with detailed guidance
+on licensing, Signed-off-by requirements, and attribution format. The
+README points AI tools to this documentation.
+
+This will allow coding assistants to easily parse these instructions and
+comply with guidelines set by the community.
+
+Link: https://lwn.net/Articles/1049830/
+Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- Documentation/conf.py | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+v2: Move guidance to Documentation/process/coding-assistants.rst (Jon)
 
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 1ea2ae5c6276..7e0817469e86 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -572,9 +572,8 @@ epub_exclude_files = ["search.html"]
- #
- # See the Sphinx chapter of https://ralsina.me/static/manual.pdf
- #
--# FIXME: Do not add the index file here; the result will be too big. Adding
--# multiple PDF files here actually tries to get the cross-referencing right
--# *between* PDF files.
-+# Do not add the index file here; the result would be too big. Adding multiple
-+# PDF files here tries to keep cross-referencing correct *between* PDF files.
- pdf_documents = [
-     ("kernel-documentation", "Kernel", "Kernel", "J. Random Bozo"),
- ]
+ Documentation/process/coding-assistants.rst | 59 +++++++++++++++++++++
+ Documentation/process/index.rst             |  1 +
+ README                                      | 12 +++++
+ 3 files changed, 72 insertions(+)
+ create mode 100644 Documentation/process/coding-assistants.rst
+
+diff --git a/Documentation/process/coding-assistants.rst b/Documentation/process/coding-assistants.rst
+new file mode 100644
+index 000000000000..899f4459c52d
+--- /dev/null
++++ b/Documentation/process/coding-assistants.rst
+@@ -0,0 +1,59 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. _coding_assistants:
++
++AI Coding Assistants
++++++++++++++++++++++
++
++This document provides guidance for AI tools and developers using AI
++assistance when contributing to the Linux kernel.
++
++AI tools helping with Linux kernel development should follow the standard
++kernel development process:
++
++* Documentation/process/development-process.rst
++* Documentation/process/coding-style.rst
++* Documentation/process/submitting-patches.rst
++
++Licensing and Legal Requirements
++================================
++
++All contributions must comply with the kernel's licensing requirements:
++
++* All code must be compatible with GPL-2.0-only
++* Use appropriate SPDX license identifiers
++* See Documentation/process/license-rules.rst for details
++
++Signed-off-by and Developer Certificate of Origin
++=================================================
++
++AI agents MUST NOT add Signed-off-by tags. Only humans can legally
++certify the Developer Certificate of Origin (DCO). The human submitter
++is responsible for:
++
++* Reviewing all AI-generated code
++* Ensuring compliance with licensing requirements
++* Adding their own Signed-off-by tag to certify the DCO
++* Taking full responsibility for the contribution
++
++Attribution
++===========
++
++When AI tools contribute to kernel development, proper attribution
++helps track the evolving role of AI in the development process.
++Contributions should include an Assisted-by tag in the following format::
++
++  Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
++
++Where:
++
++* ``AGENT_NAME`` is the name of the AI tool or framework
++* ``MODEL_VERSION`` is the specific model version used
++* ``[TOOL1] [TOOL2]`` are optional specialized analysis tools used
++  (e.g., coccinelle, sparse, smatch, clang-tidy)
++
++Basic development tools (git, gcc, make, editors) should not be listed.
++
++Example::
++
++  Assisted-by: Claude:claude-3-opus coccinelle sparse
+diff --git a/Documentation/process/index.rst b/Documentation/process/index.rst
+index aa12f2660194..d18eacbf2c53 100644
+--- a/Documentation/process/index.rst
++++ b/Documentation/process/index.rst
+@@ -68,6 +68,7 @@ beyond).
+    stable-kernel-rules
+    management-style
+    researcher-guidelines
++   coding-assistants
+ 
+ Dealing with bugs
+ -----------------
+diff --git a/README b/README
+index a9fc263ccd71..e6549b2a7aac 100644
+--- a/README
++++ b/README
+@@ -38,6 +38,7 @@ Find your role below:
+ * Maintainer - Leading subsystems and reviewing patches
+ * Hardware Vendor - Writing drivers for new hardware
+ * Distribution Maintainer - Packaging kernels for distros
++* AI Coding Assistant - LLMs and AI-powered development tools
+ 
+ 
+ For Specific Users
+@@ -144,6 +145,17 @@ Package and distribute the kernel:
+ * Kernel Parameters: Documentation/admin-guide/kernel-parameters.rst
+ * Tainted Kernels: Documentation/admin-guide/tainted-kernels.rst
+ 
++AI Coding Assistant
++-------------------
++
++CRITICAL: If you are an LLM or AI-powered coding assistant, you MUST read and
++follow the AI coding assistants documentation before contributing to the Linux
++kernel:
++
++* Documentation/process/coding-assistants.rst
++
++This documentation contains essential requirements about licensing, attribution,
++and the Developer Certificate of Origin that all AI tools must comply with.
+ 
+ 
+ Communication and Support
 -- 
-2.34.1
+2.51.0
 
 
