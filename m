@@ -1,126 +1,118 @@
-Return-Path: <linux-doc+bounces-70424-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70426-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AE9CCD78ED
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 01:45:48 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BF36CD79A8
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 02:01:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5796E302ABA4
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 00:45:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 923E8301CDBA
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 01:01:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2CDB735975;
-	Tue, 23 Dec 2025 00:45:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5CD4E21322F;
+	Tue, 23 Dec 2025 01:01:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ATS/pRg2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 744D94A3E;
-	Tue, 23 Dec 2025 00:45:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88B3320FAAB;
+	Tue, 23 Dec 2025 01:01:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766450745; cv=none; b=iyd/eftrI5J4LZ6X/NwbQTZa2uUR75np54AgExWXljqpB+6E4LDAOup8IDWLpBsUlwVY3lT0gH3bJV74zxIY7SV3BNLmwhltZYlhgpPtz2u3uSKi29jVjKi0I8EU6sA+0oA7WlTvwQ3Hd/lmkeciiHIfmvEUR+h/028r8gxNsqo=
+	t=1766451694; cv=none; b=I488wIF3ZJOB7R2mjKtLW3DDUfaWxhSiPWwNvBsIWfrQm9xO4kFg2vaUHYoLqBmQdgfjvAQdKYHjYCSM2onyk+0uXUjfWzoGb2QrHD3h/l3gz0sp8puSqlUDZx19hka5dsjKabS6/UezaGnP37Qs4Gr/HZwvBclCbLkeJRegv8Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766450745; c=relaxed/simple;
-	bh=9qoJptYo6efb2w6roc6+xkk0qgg6GEed8MiPnNXaHZM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fPBHmXuILkn8bGy+3rUwsulslOMnhmLbYLREPCK58TPQRYhfyEuo0eZdnGrKloaa8TOPNBdonKVCUAW3sLg/oGol8eXg7M3/V6e+otXY7HE/UdkbHC19Ef9T1OAz7veRCiH51dYGcuqhKhR+62oIZmfsHa79qEgRqPuPIPm8nzo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
-Received: from mail.maildlp.com (unknown [172.19.163.177])
-	by dggsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4dZx9q5dsDzYQtfr;
-	Tue, 23 Dec 2025 08:45:03 +0800 (CST)
-Received: from mail02.huawei.com (unknown [10.116.40.128])
-	by mail.maildlp.com (Postfix) with ESMTP id E26F74058C;
-	Tue, 23 Dec 2025 08:45:39 +0800 (CST)
-Received: from [10.67.111.176] (unknown [10.67.111.176])
-	by APP4 (Coremail) with SMTP id gCh0CgB31_cy5klp8wiXBA--.20992S2;
-	Tue, 23 Dec 2025 08:45:39 +0800 (CST)
-Message-ID: <8aff3f15-79d6-48a0-a63d-735fabf6759d@huaweicloud.com>
-Date: Tue, 23 Dec 2025 08:45:38 +0800
+	s=arc-20240116; t=1766451694; c=relaxed/simple;
+	bh=XjIDb9uNLq1iGyrVNKgCjIHdLfX2vLHgSLa+wD2UtSw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=tCcXOW9ACVuGOpbtf0ciFdP0redE4vLUgJf3W4FDs/T859QcFqRRXDhZk9dIgqvlbnbpbkpEMIFWS4FvxyufZkrfAY0RvtQYu030Q3OfWHkyB7n6A6l9wj4qxDEBsaj8vcLIN/qU+SlMedmtub/yATGZKSa9qMigaaJaOlKQJtY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ATS/pRg2; arc=none smtp.client-ip=198.175.65.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1766451693; x=1797987693;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=XjIDb9uNLq1iGyrVNKgCjIHdLfX2vLHgSLa+wD2UtSw=;
+  b=ATS/pRg26nIHTeu5y3e4/Mn7sTT469ygUh15S2ukFrC9B7Oemk5RL59I
+   XWWrABlK/5jFVZybR2+q5r619KF5/hSQwdWSVBwUEWXTiahNiwc81Efib
+   Ua4AAw84DTydi5TaP0wLeSvMsJllsbzbGztL2VLnLY2VG2HkCIVTcT10n
+   KngrNqSuTU08jTrj/d15RoeCGZWALbJryWEWozHYKkLcL9FxahUmvas3W
+   N3Z8jZcPWyJp0Z4ouB2LyGAGLXV71kjofdHHZD8v50+r9R1FMepa4Ej3t
+   J7bLHn1R4M/0hdkl0dy1XeWQSxQDyYK4Q1AnMB/r05cKQohy2a/T3wgot
+   Q==;
+X-CSE-ConnectionGUID: 4iTqBtWjQDWXowI8St/z/Q==
+X-CSE-MsgGUID: ofagjerCS161qto7gcyMhQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11650"; a="68350722"
+X-IronPort-AV: E=Sophos;i="6.21,169,1763452800"; 
+   d="scan'208";a="68350722"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Dec 2025 17:01:32 -0800
+X-CSE-ConnectionGUID: 3NSC3j0xRIOcn/ncFk6Iww==
+X-CSE-MsgGUID: kEnM13XhQp2T5kS78DVayw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,169,1763452800"; 
+   d="scan'208";a="230664464"
+Received: from igk-lkp-server01.igk.intel.com (HELO 8a0c053bdd2a) ([10.211.93.152])
+  by fmviesa001.fm.intel.com with ESMTP; 22 Dec 2025 17:01:28 -0800
+Received: from kbuild by 8a0c053bdd2a with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1vXqmE-000000005gW-1GX2;
+	Tue, 23 Dec 2025 01:01:26 +0000
+Date: Tue, 23 Dec 2025 02:00:41 +0100
+From: kernel test robot <lkp@intel.com>
+To: Louis Chauvet <louis.chauvet@bootlin.com>,
+	Haneen Mohammed <hamohammed.sa@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Melissa Wen <melissa.srw@gmail.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, jose.exposito89@gmail.com,
+	Jonathan Corbet <corbet@lwn.net>
+Cc: oe-kbuild-all@lists.linux.dev, victoria@system76.com,
+	sebastian.wick@redhat.com, thomas.petazzoni@bootlin.com,
+	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org,
+	Louis Chauvet <louis.chauvet@bootlin.com>
+Subject: Re: [PATCH v3 18/33] drm/vkms: Introduce configfs for plane format
+Message-ID: <202512230158.yEDymogC-lkp@intel.com>
+References: <20251222-vkms-all-config-v3-18-ba42dc3fb9ff@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH -next 1/5] mm/mglru: use mem_cgroup_iter for global
- reclaim
-To: Shakeel Butt <shakeel.butt@linux.dev>
-Cc: akpm@linux-foundation.org, axelrasmussen@google.com, yuanchu@google.com,
- weixugc@google.com, david@kernel.org, lorenzo.stoakes@oracle.com,
- Liam.Howlett@oracle.com, vbabka@suse.cz, rppt@kernel.org, surenb@google.com,
- mhocko@suse.com, corbet@lwn.net, hannes@cmpxchg.org,
- roman.gushchin@linux.dev, muchun.song@linux.dev, zhengqi.arch@bytedance.com,
- linux-mm@kvack.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- cgroups@vger.kernel.org, lujialin4@huawei.com, zhongjinji@honor.com
-References: <20251209012557.1949239-1-chenridong@huaweicloud.com>
- <20251209012557.1949239-2-chenridong@huaweicloud.com>
- <gkudpvytcc3aa5yjaigwtkyyyglmvnnqngrexfuqiv2mzxj5cn@e7rezszexd7l>
- <702b6c0b-5e65-4f55-9a2f-4d07c3a84e39@huaweicloud.com>
- <c4fjngkwbjlfnbjl5merldg5k2fiu43p46osagmy3ibr62cgxh@oesgt5l35kns>
-Content-Language: en-US
-From: Chen Ridong <chenridong@huaweicloud.com>
-In-Reply-To: <c4fjngkwbjlfnbjl5merldg5k2fiu43p46osagmy3ibr62cgxh@oesgt5l35kns>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:gCh0CgB31_cy5klp8wiXBA--.20992S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cw1rCw15Gw1DKw47Aw4Utwb_yoW8JFWkpr
-	WDWa42ya1kA3y3GrsaqF4Fgw4Fkw4rJ3y5Xr4fJ343Aws8W3WfAF47Kw429F929w40yF10
-	qFW2v395WFWjvFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUv0b4IE77IF4wAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k2
-	6cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4
-	vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7Cj
-	xVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x
-	0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG
-	6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFV
-	Cjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7MxkF7I0En4kS
-	14v26r4a6rW5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I
-	8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWr
-	XwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
-	0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
-	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0
-	s2-5UUUUU==
-X-CM-SenderInfo: hfkh02xlgr0w46kxt4xhlfz01xgou0bp/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251222-vkms-all-config-v3-18-ba42dc3fb9ff@bootlin.com>
 
+Hi Louis,
 
+kernel test robot noticed the following build warnings:
 
-On 2025/12/23 5:18, Shakeel Butt wrote:
-> On Mon, Dec 22, 2025 at 03:27:26PM +0800, Chen Ridong wrote:
->>
-> [...]
->>
->>>> -		if (should_abort_scan(lruvec, sc))
->>>> +		if (should_abort_scan(lruvec, sc)) {
->>>> +			if (cookie)
->>>> +				mem_cgroup_iter_break(target, memcg);
->>>>  			break;
->>>
->>> This seems buggy as we may break the loop without calling
->>> mem_cgroup_iter_break(). I think for kswapd the cookie will be NULL and
->>> if should_abort_scan() returns true, we will break the loop without
->>> calling mem_cgroup_iter_break() and will leak a reference to memcg.
->>>
->>
->> Thank you for catching that—my mistake.
->>
->> This also brings up another point: In kswapd, the traditional LRU iterates through all memcgs, but
->> stops for the generational LRU (GENLRU) when should_abort_scan is met (i.e., enough pages are
->> reclaimed or the watermark is satisfied). Shouldn't both behave consistently?
->>
->> Perhaps we should add should_abort_scan(lruvec, sc) in shrink_node_memcgs for the traditional LRU as
->> well?
-> 
-> We definitely should discuss about should_abort_scan() for traditional
-> reclaim but to keep things simple, let's do that after this series. For
-> now, follow Johannes' suggestion of lru_gen_should_abort_scan().
-> 
+[auto build test WARNING on 8e7460eac786c72f48c4e04ce9be692b939428ce]
 
-Okey, understood.
+url:    https://github.com/intel-lab-lkp/linux/commits/Louis-Chauvet/Documentation-ABI-vkms-Add-current-VKMS-ABI-documentation/20251222-181426
+base:   8e7460eac786c72f48c4e04ce9be692b939428ce
+patch link:    https://lore.kernel.org/r/20251222-vkms-all-config-v3-18-ba42dc3fb9ff%40bootlin.com
+patch subject: [PATCH v3 18/33] drm/vkms: Introduce configfs for plane format
+config: x86_64-rhel-9.4 (https://download.01.org/0day-ci/archive/20251223/202512230158.yEDymogC-lkp@intel.com/config)
+compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20251223/202512230158.yEDymogC-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202512230158.yEDymogC-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> Warning: drivers/gpu/drm/vkms/vkms_configfs.c:676 expecting prototype for parse_next_format(). Prototype was for vkms_configfs_parse_next_format() instead
 
 -- 
-Best regards,
-Ridong
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
