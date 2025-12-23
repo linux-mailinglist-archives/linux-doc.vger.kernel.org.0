@@ -1,123 +1,117 @@
-Return-Path: <linux-doc+bounces-70466-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70469-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46801CD7F25
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 04:09:35 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DB3B0CD8063
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 05:06:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 402ED301C890
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 03:09:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C26F630AEF0F
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 04:02:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C078F2D060B;
-	Tue, 23 Dec 2025 03:09:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7EA4B2F2918;
+	Tue, 23 Dec 2025 03:53:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KpI6Q3pn"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZsWlZP9O"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yw1-f195.google.com (mail-yw1-f195.google.com [209.85.128.195])
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 260072D0C7E
-	for <linux-doc@vger.kernel.org>; Tue, 23 Dec 2025 03:09:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 779712DD60F
+	for <linux-doc@vger.kernel.org>; Tue, 23 Dec 2025 03:53:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.194
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766459370; cv=none; b=mzjmjgeYsYsYeuxrBSqiT+aw3XitOD9OqpcgJchx6jmiHS92STnqvUdm9eYXkaU029B4PQ+zEeIH/7gVLaDCrMcqGZdfIVM+gkOlTosWXS1KfzijjYfCAtTFw2sD0m4CISmiCLoEYT3Y/6Wy8W8pC1ON307/EFo+GzjnnLNIGAk=
+	t=1766461996; cv=none; b=QRgFKezDWeKTbDGxH4Frq7covIfm2F4dy0mp8BzLkjrP3eXnXMwfZB5j6wqEBfifxEe2bLZk5U/AvZGV5O9QR44kthPFPaQ/Ba9SECzSXEChNFLO4UcTD++XMMrsqRdesOvtQqCV3HKXkKdJ+ZIF+tAIV8GHQRU+L0U6QREavQc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766459370; c=relaxed/simple;
-	bh=z25X9RJAJcXbGtqIqD5CkXNEq9zX0WGe0qUFOZB7mfs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XzFIFChkPgd3SrrxnbpjU7dkmcemVyoyE3m4uHNNhUyfRmUbE8LCrM0iSqj5Dvbvg+hefw5j6QFySDpHMptV7ToJL0Hwy4wraWM5oFL+sbdU/Q/A/J9LSfgOIj833w1Z0Va8+rMhMiwT96215AWIGJ14kNT3y/A+swepQIQUVOk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KpI6Q3pn; arc=none smtp.client-ip=209.85.128.195
+	s=arc-20240116; t=1766461996; c=relaxed/simple;
+	bh=zL3+iAHw7i0eC3DMTNVs3sFNpbeN9Zcje4E1gx93KDw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GLhCrPVwFLesrniDPDu+aMqBvPjsErpN/kHD9gAxu5zdn5M8lNpFdt3Olpp90j6yh8sKquXGBIbKIVWYlTtJLcrdTqtjuArNXfWnZo06yzMANAasQ23qJO6rVbSIARyv3AvOEOWkqy28WcyXgxcxCJmdTqqqE+mjdg2ybiwT4N0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZsWlZP9O; arc=none smtp.client-ip=209.85.214.194
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-yw1-f195.google.com with SMTP id 00721157ae682-78ab039ddb4so43789677b3.3
-        for <linux-doc@vger.kernel.org>; Mon, 22 Dec 2025 19:09:28 -0800 (PST)
+Received: by mail-pl1-f194.google.com with SMTP id d9443c01a7336-2a0b4320665so69865585ad.1
+        for <linux-doc@vger.kernel.org>; Mon, 22 Dec 2025 19:53:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766459368; x=1767064168; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=z25X9RJAJcXbGtqIqD5CkXNEq9zX0WGe0qUFOZB7mfs=;
-        b=KpI6Q3pncToGQoyFhPBBkzSkRblsEtwWPaMKILI+vhkzUrGuZ2X/yrQPaZiPqx9KhZ
-         hrSLNx/E6xpoGgGw8ju4YJ8haTKX5euAmUjoMTbjCkh7WlMtblKXD8Ebsb7eApxQvBjD
-         oXxLEVsRg2OIYXa7T1e6d3Kgni/4LxNijInaiQ+//aMeGsit9b1CLCy6UElgutOX7Usq
-         wzSsIGKtcSme0p12i9wtA0qU0aSCJPTm7+/4UWslrl5zOV3PqVRHMmT49wllefa+VH3s
-         LDRCemRoAgmCpPFhTNTP8i6ZOdto5EIuMRMx3nG67AsR4R7XHg/nmYRmnw/vgQc3yFpv
-         n7EA==
+        d=gmail.com; s=20230601; t=1766461994; x=1767066794; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8oTVO05racKuXuCQoyM6f9YU0tg6uDpbKgJo8uirwrE=;
+        b=ZsWlZP9OZo0PWIl5iKEYKdxoF7bJGebJeWTFXKJJzCEwHBrQeu/Um65qqKotfKASXG
+         B0mqQ6ocNYz2oLP6+9SD0fZjyzN9Z0qKQ6TWkH0AgLwDcE70Vi5yEmKtE91RAmRocCiy
+         HaxpuFMMYXs32tmY4OAfmuqWeHswjMW9nCcQ16L/2bUmqw1EgoYzCzGP0vW4vGLPPCOU
+         karwXiYL8AODVw+5CY4cE1dUBwNvNrqku/cw2kU8pNBGDzo9n5Q3kkN+6/Y/r0Mo3HNl
+         /8BWZxJpcTUzL0+iUkjRTARGJvSM4DALgH3ibVe0nuvSOvw/Qm4U7PMXVpBG144qZ88P
+         YS5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766459368; x=1767064168;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=z25X9RJAJcXbGtqIqD5CkXNEq9zX0WGe0qUFOZB7mfs=;
-        b=px2QomQK8aRqP6uyupVTC8+g5PRQF4E3ml2J07BZoF4RMLUNvlelmlz15K3B+HbUFD
-         ck/s0BoDomd/4WA7UPfA7wCH2LFg2IBo8Sw9KfkcOdSnTquMDbe0DtasmPP1Pz68q9CE
-         YjblvOr9UPiRlaPP46xNC9D//56/lyniOOwbfgYYQNAQYJA89cUee2dI4lSzlovhw522
-         qKatfYNttBSGzpp4vXGfLWysId4xn2t4dQQDnpK75I7u/LSYT5RcYTWgxNmdmCi05OrM
-         8LW4Du4Pz+uODoiFmE5qj4hWkCPcVdevjJarMhi1Kntl3yKZP/L4+KIAcwcYZ7etcAR2
-         8TGA==
-X-Gm-Message-State: AOJu0YyrimsP+XLStADpYizg2B2b2ibJ6cailF2Zyn3zCjKi6CGuWdoR
-	eo3TU8qF2LC3GyiA6CBX+QQViMOM1cS6gE1Y6Azi9+WAmdEVxyJG875U
-X-Gm-Gg: AY/fxX7p9r9NHStJ/678G47N7bLYlew+hX1va2X4pVLisUFo9xKnkLOmR34LMq0hMgB
-	npusUrr0XKYMSPm/kRwEx+xUhFeNJZF5nKFOgifnA4kBHeklBAdfdsZIzcvMnnK46TOVg2V4M2f
-	9he9wtPI9m5maKu6Ulyq9Yu9xk+J0gUfm54kTA3aU7r3LECNa5VL7B4wccZ2Q5jzH2M2zy79JBO
-	iU21fdZ2YRyhGUEaaAYOM2yNIP4fvnap9RNQ4IqLhrkdnC4P82Um3MyadSBCU19aVHHjKEsxejh
-	+IMFFOnE0bnSCHWeE8o1/jON+qS5k8a92VysZJ+yWKAcnVza7MuAxTrTiTHQ8BKJKZwS0XHQUiV
-	/LrLhl6HNeT/v37N/wJyQsRN1Hm/VFzOZOIiIcZqWJLj6RwQEmw+DcHDVzzawIdg3ny9cviisoF
-	ZkEz2jegNNY8k=
-X-Google-Smtp-Source: AGHT+IHUIUNlXPNJRTAngOEC8ma0w9tcXlKNR/2WPNbxbqc4s+u8xvSoFCu9SCTeGCec7VsCe/0nFg==
-X-Received: by 2002:a05:690c:4483:b0:78f:b044:edbb with SMTP id 00721157ae682-78fb3f28c9cmr113429327b3.22.1766459368064;
-        Mon, 22 Dec 2025 19:09:28 -0800 (PST)
+        d=1e100.net; s=20230601; t=1766461994; x=1767066794;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8oTVO05racKuXuCQoyM6f9YU0tg6uDpbKgJo8uirwrE=;
+        b=Z6fkfIf7WSUkEjxhezVu1IyN/ZfoPlnk4/XiUDG9OAzq8x7A4GBtAOZqkYQygl0Z/V
+         PRQgIXs3eqdu9JMuQhmpm4BLZTDN041gjjOrtM3TaD4A7MYSoR+oPzhG0HrjALUNGFSq
+         /DNxexuAcB6p8+wTpomYXqRb6XjyJMiof3crFLzy3785w80spgj+RhOxc7XOYWge3E1z
+         2IryUBD7DnzstNJ3dwD26QSh+Jd1xn8cwcpzPvOMDxNYYqWyfnhJn59BTwRlk+2yp7QU
+         S1Gq7vHOTjMgHR33AtdzWwScljPGQAlMdi8EVXcj8oBZYLz0Wsz+BuWhQ7cnu6cyY48q
+         RqsA==
+X-Forwarded-Encrypted: i=1; AJvYcCWc3z77Fwca2ea6tNGg4V33PUN6svDAd7IpZEE4j5knaWCj7OMZ7qn0dWk3F0Xv9r3N2U1Th76SjYA=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw26yUNn6mT2FQXjyJqY8QIcROgKJAZCwaVbUw59uAIJQ2tq6uW
+	xlkvrWdBoMXsnCh+WBBugGPj1Cru65Gv8p6n8F+toZ6GCUKcZR+/xJlUtpqmG2ZyFCA=
+X-Gm-Gg: AY/fxX593gD8bgVrKW2Xb81c1FXlpE/B4hy/JE5IM3f0zvLyRTyAcqKVrPbI7bmRLTy
+	wYiDTx9NZu6s4qjlBYdzxeJilAepq0kjm7vJnJz2lctjZHBIS8gRXeYjEYe/VmiI4n2Fg07zop+
+	GfgtQlsECzBQF+pkPDjWYWmq+stKMhkbFCYaE1Vb++Z2SxlHiSqOwv2TRYJzULzRoyQwze+3hxq
+	csDLVLJnPS7LBpAXvrfcbxQdpNM1tbL+Y2MD7+5fFWL6LS+M4YrHig/f5fhuU1a7y4M/ozZaRIl
+	m5KudTh8hLdh+Rr/IsDM8hW+UF+9W3UrfDmly2JJ0h6r8lWhxI2wP0nrLFi9NI7xpMGDFLTvG8o
+	e/OkGd+9H7OWN6fgL3lWo8vpblQuSYDgBahsb/vQvmZZQM3XHSGmac+pFCjmvQjJHAR3h4gB/Sy
+	KEe9sIKT2ZA/0=
+X-Google-Smtp-Source: AGHT+IGN3QrAEj1R6BV4eOuLMFIvhd9iGan6H8R2GFmRUCJcA0eXT1yayPnuLwho5rHsvACSuU7X/g==
+X-Received: by 2002:a17:902:e74c:b0:298:5fde:5a93 with SMTP id d9443c01a7336-2a2f2a354c9mr137134975ad.32.1766461993670;
+        Mon, 22 Dec 2025 19:53:13 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-78fb4377c99sm50053177b3.3.2025.12.22.19.09.25
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a2f3c82bc9sm112488205ad.36.2025.12.22.19.53.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Dec 2025 19:09:26 -0800 (PST)
+        Mon, 22 Dec 2025 19:53:11 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id 4DCD9420B572; Tue, 23 Dec 2025 10:09:23 +0700 (WIB)
-Date: Tue, 23 Dec 2025 10:09:23 +0700
+	id EE471422D8A7; Tue, 23 Dec 2025 10:53:06 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Thorsten Blum <thorsten.blum@linux.dev>,
-	Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] Documentation: kernel-hacking: Remove :c:func:
- annotations
-Message-ID: <aUoH4_rcdNr_YV7h@archie.me>
-References: <20251222232506.2615-2-thorsten.blum@linux.dev>
+To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	Thorsten Blum <thorsten.blum@linux.dev>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH 0/3] kernel-hacking documentation cleanup
+Date: Tue, 23 Dec 2025 10:52:50 +0700
+Message-ID: <20251223035254.22894-1-bagasdotme@gmail.com>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="nRrZtquQWCYHAFwT"
-Content-Disposition: inline
-In-Reply-To: <20251222232506.2615-2-thorsten.blum@linux.dev>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=646; i=bagasdotme@gmail.com; s=Zp7juWIhw0R1; h=from:subject; bh=zL3+iAHw7i0eC3DMTNVs3sFNpbeN9Zcje4E1gx93KDw=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJlegi6rfrgl/9J4/Pb1/viM3f+u+Zx1npgXUSG/6W2xj cvSok37OkpZGMS4GGTFFFkmJfI1nd5lJHKhfa0jzBxWJpAhDFycAjCRsCpGhqU75jwP9n6o3uqR +X6pl938m2Jrzggs+HP5xYIfTR8t+Ocw/LOI8Kw88vWO6uIp/NZp1dGz2z5MkcpITfdvPG65/LZ fMw8A
+X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
+Content-Transfer-Encoding: 8bit
 
+Hi,
 
---nRrZtquQWCYHAFwT
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Here are additional docs cleanup for kernel-hacking documentation. It
+is based on Thorsten's :c:func: annotation removal [1].
 
-On Tue, Dec 23, 2025 at 12:25:04AM +0100, Thorsten Blum wrote:
-> Remove the useless :c:func: annotations.
+Enjoy!
 
-The patch LGTM, thanks!
+[1]: https://lore.kernel.org/linux-doc/20251222232506.2615-2-thorsten.blum@linux.dev/
 
-Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+Bagas Sanjaya (3):
+  Documentation: kernel-hacking: Remove current macro annotation
+  Documentation: kernel-hacking: Do not italicize EXPORT_SYMBOL{,_GPL}()
+    references
+  Documentation: kernel-hacking: Convert internal links
 
---=20
+ Documentation/kernel-hacking/hacking.rst | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+-- 
 An old man doll... just what I always wanted! - Clara
 
---nRrZtquQWCYHAFwT
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaUoH3gAKCRD2uYlJVVFO
-o2GZAP9pgNX4TxrJ1Yu0ylpBfyZv2C/IOXQjG27AF4jfyZFcyAEA/WdgXG7wts0k
-IbSThRZVRryQnnneRbtIN23s68dLBAo=
-=GgDP
------END PGP SIGNATURE-----
-
---nRrZtquQWCYHAFwT--
 
