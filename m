@@ -1,79 +1,79 @@
-Return-Path: <linux-doc+bounces-70470-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70468-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3718BCD8038
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 05:01:56 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC679CD8056
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 05:05:12 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 05DAA300C97A
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 04:01:53 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 76196303F2BA
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Dec 2025 04:02:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED4352F3C3D;
-	Tue, 23 Dec 2025 03:53:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8747E2E7F1E;
+	Tue, 23 Dec 2025 03:53:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CAH8EmE7"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Kl0dIbdh"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com [209.85.214.194])
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com [209.85.216.68])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A06092F12D3
-	for <linux-doc@vger.kernel.org>; Tue, 23 Dec 2025 03:53:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.194
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 732A119C556
+	for <linux-doc@vger.kernel.org>; Tue, 23 Dec 2025 03:53:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.68
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766461997; cv=none; b=qUhtFzKDu62zXyeUl30Jr2SEFfctVjqFReLmAyF2ZFu+jFcsK7EKCcgBQM+8rGo65qFN3Ol4Xq3cPpD+tbVbmtv6+i0sgjAnuH4n686V8FdGKX66IjR6h6ZVMfNMOlL1LZjEL5a2afSv10ekQQFRAwMg40/2co6sqNq6EKk7C54=
+	t=1766461995; cv=none; b=GbDv/8ZZoSrfOFlt5tHFS8u9MLMcUSsEcE4I1Wtzh7XeivYj5lm+EGwvJnFaMaXxkmwhzJcDlXKeZ0If/PtGSRELBVmp/0zn9IIU670ke2uX9yk9V0E1IpDx4W1ZYK3/xoXoiUwlqRlULS/t3tiZuZsU95xO5nsa8jMvEedR8uA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766461997; c=relaxed/simple;
-	bh=DXtpt15ljUJvy4IcaQmZEYk//2HueWPizjkcyHOaAbw=;
+	s=arc-20240116; t=1766461995; c=relaxed/simple;
+	bh=Z8S325YSGyy2PYGufR+TSkk/SxXRq02XTKI01RJgIqc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=CiXwbaRtM8qNttwvdDNGe+vsPg30FRsR8fCImsEnEQKej5uVNvubITCzDzL810eW8vYqE06/JPdcVZUDTf6CHJMyrqQOpC4AW9fEshyduAt/1KKMdw/SLT1GFryyytLLxYnAyS1bT6Sp3yCIeY9wn/sTzxZtdeICxvaQtZcRKVU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CAH8EmE7; arc=none smtp.client-ip=209.85.214.194
+	 MIME-Version; b=dUk0dpqoxp0oyU4Y8/gm6gUQuznKORA27cvi9pht5wRQKz7oAYGaN0eKXBncB8R7AWcIuwSlFvU0kk31Kd0cRnNaF1u7qK06+Q0I6WmUDSJ3oHEepHjJNYzw4Vnz+c9JgL/yCD38OrIcD7tGXdtZnnrLasN1miNXcFg2zbSQw8w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Kl0dIbdh; arc=none smtp.client-ip=209.85.216.68
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pl1-f194.google.com with SMTP id d9443c01a7336-2a0eaf55d58so33280595ad.1
-        for <linux-doc@vger.kernel.org>; Mon, 22 Dec 2025 19:53:15 -0800 (PST)
+Received: by mail-pj1-f68.google.com with SMTP id 98e67ed59e1d1-34c9edf63a7so4843815a91.1
+        for <linux-doc@vger.kernel.org>; Mon, 22 Dec 2025 19:53:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766461995; x=1767066795; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1766461993; x=1767066793; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YmkLhKMIC+Za+LDTK6hTj40JcY3syto03HXeRhDIycY=;
-        b=CAH8EmE7nzeg4Kt2qU3W+8/60AHEVS+IizOXkN4xaQOhAXkKTF+VoENM0HcERz1KWv
-         s1MkvjbPxnu/7TFMMVtb4RvaKm+XxvEZv9W2QvJoVOUnvW/ibr6EO6PH8tJ4RHHNULKF
-         tA48NgC5J7ZoKCobQ+LSr3hbfYPvfiQDAIyp1QP7Pj9gGlscfoJTYPzriC07KHMrjbpH
-         b2CjVMVSGn0bwCFLzI90zB2A0QIgddWhIMeubNyx3UHSB+iB2xchDkQh6zL5cLu5F5fu
-         GglZ7AdD0wzphVxKpsvFJAM1FaZ7lgWGVmWZ04LeTspci8BgyMR0wT7YcTl5VBY6zHl3
-         whqA==
+        bh=RJv9l4/AWT1VU/BvU60pSYc7O+5uRquusb30DTmVBdM=;
+        b=Kl0dIbdh+lq51SQgbkSIYDGOjT/35uHDJP39W8Od5/A3MbJ8NndShTk3u+4Yq1XA0F
+         VMDibzZ2GZG0wYDVHqGYFIgueWlSnUxFBw28uXLFuD5SVO/nCtEF3whWX7zXSITdJmhk
+         MCAKpoO5AkORsrEjzBaMXf46PCYrf4PPvDCZzqZo0m2FMs+WvQZCHepwH67Xb9Q37Tp4
+         5csujdzkNNkXJHvtovCRA/TxaIFUqtlGb61NC33nijV9VDzApe4D8lPG0W19nPT4qg6P
+         gxoAnqsuH832ML1FTTkjWApxUZBOgGb1ooQ+EW4bCz0TL3TZETaL1Xi1eN8yJR7fbD0t
+         DQvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766461995; x=1767066795;
+        d=1e100.net; s=20230601; t=1766461993; x=1767066793;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=YmkLhKMIC+Za+LDTK6hTj40JcY3syto03HXeRhDIycY=;
-        b=EDuAK59rmlgv1Zzjty4ENFX7PK9TfJ+XtKzQYMDU77d3Oiv5DNa1348mX/sFjqWJHr
-         7sP4BXea3d/15ONf+g8L6NLymGF4tNvdxT0dWor50q7CkRA09FhUHc+fTnlUG9ww40BT
-         Mp4/JjCnI1xiDENqTUf/hbiaW+JR3ij/l4uc0yX/yxd/X/ZgIW9ZUZAooVddlFplFTaD
-         Ei+fGctJdI/waCEZe2aMquB+bonP9QOm8c0QHaqKN5L6dHNz2zjrWhYg+HsmT+FCshV6
-         //MYFnUUHeclIq/VQvrXq/dhR/VsULy/39YF0YAGekAjQDL+TPcRgwcJ3BnsjiT2akL7
-         w8xQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWtr4CU2b0gRAYOMWJKhSh6g6640a15yxc9FRhQ3e7wEi3aZBWP184DSEWS761jYA4P4B9NNQa5sT4=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxrhaivu9kvPbQpx1zt7HxDjcPTv6BqzCven3q0X3HzQ/1gOPfc
-	q4ld+BAyOsv7GniyskzcA5tUxk1qg551M1uwROyvqEbZyG7HgkfpEk9k08rOCj9mSfg=
-X-Gm-Gg: AY/fxX5l4qS3OG5CiD6MiLEKPkIdhKTes9SzfM7wocuFMzzO/vuvvs792ZnuriHU+hs
-	K1XqTYsABaVvX1RCvY4I+Ipd9c8y3SgzA8H6xZOjviRxVcd4uaA0Os4aSIEdkeNY8necUc0Sd4O
-	zi56/KUcozFaaf/VW5GJGqYwzKaxHITF8PRC8xZgA8mdjSRq93tvqpEc4pMCBR6hWJ6udaJfOOO
-	2tt502a8tjfQDXfesu4w23DJYMK1Sd3TuohUSVKS1OFXhW9LTK1J0fryDpWSpHKyTMky+R/Le3U
-	TKjROw5HI5RubIw9jwVtrSXCx68ee22xwCC3DlXr+uFV2+RsyrYPiz2z9zVY30Oz4XzyeEIull3
-	FXDBIrZRviU8ahvnORgx4gb9uoAH7zqHBjtS3rqivbnuR0asU9lAePiYeqAESYUWFasNNtSxdvN
-	fflTHHnLC7CG4=
-X-Google-Smtp-Source: AGHT+IF4DD/Tv1svdFQY+LI2jISMEoF/Q+Tq7Q2Acd7iCdDpWJrbex/o5teyZuGdTws3Me+DHNpDnA==
-X-Received: by 2002:a17:903:2307:b0:29f:2734:837d with SMTP id d9443c01a7336-2a2cab74c17mr189203695ad.28.1766461994571;
-        Mon, 22 Dec 2025 19:53:14 -0800 (PST)
+        bh=RJv9l4/AWT1VU/BvU60pSYc7O+5uRquusb30DTmVBdM=;
+        b=lM56flYmaLdTm6sXqLan7UkwPn1HCj2yWleNhzQ2NRfR/bHgd3DGkZSGRMrBviWwMT
+         tvXcPWHT0v2Ot2Kr2Bi7IxnN4dFDuzJCW02xpZ5qDBfSQxhGuUrhG48VDorxLH/w4K5i
+         S/t7Im9aWax3dHhkalxMd684JaxiD8o5+iCW9ZxRlFlSduV28aYhMfdqgF7/uUd7BtYc
+         EO48XzriYcrrNm2D+pUK4iBez+o8FO21HgH203E91WXP8LxUdHIQ6Cx87IXizUp3kK6h
+         GCe32au4AATzcn9nJlbH59SlQhg14TjrVeTqnIAmIjCx3JV7eTBO2DhRoAjliUS6F/d0
+         Vyew==
+X-Forwarded-Encrypted: i=1; AJvYcCW3rm8VD4p/Fivsv1FlzDiyxMxgWiOEYSrcuKIbs4nQPMa14OlAyxfwbc0b/lVSdwKIsJhQW/msMQU=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxuej5hTugIeH6Y568sgyZV9f6NIYPmChXX1krKclF6Rj3Mu1j+
+	iZ6heo9H3jAgBGo95Va0iH/E0xfbMDqHu0XO08zfyCR8dxDbX2vYUhHD
+X-Gm-Gg: AY/fxX73lL1/zm0xY1zKjB4n7MFKjKw7S1CLkpPl+Vm7hOzjVrd6SkbC4xnv91jwEIB
+	QWp3MZT9wbyjo/ciV3a2RygUFehIuAl3Vxv5FuGJQa5aRhgmGZ7nvo5q0wmuw98naNXHl0coXb5
+	zBkvQ3gJxTBPvCq3UHLH7Jt6qjLoo5XrsYkWJtfhK4NMzWfJBgKisGRVmPQ5QUak8629H1kaRi/
+	yZx7SyiAMFRIVzIJTOL3yBtnD3o39zI3btd3Q3qBI9S0K5anArnWLPZuuNOePbjphvg5JKnuThU
+	kmbPyc+XO8qZ7QNw0/DK40YFrGx/TRnMsLZy6reLmijYKhA+12AOOpFKw0MBTMk+fVhPRy3YGrT
+	1ug/if2GspaGwmpgn2WqG8t2PGbBsESwduA4WYz5U7K8OAl/EMxSI690vH1ab1rmG7GYTZEFhDO
+	+zBslkHImra4E=
+X-Google-Smtp-Source: AGHT+IGaHUhug/yM7Wre4n5D6rxDsuUpO2x5TOlCoS3GqPi0UQ+QWs/u0Lp74kF4B7sDmTQnoNwJoQ==
+X-Received: by 2002:a05:6a20:1590:b0:35c:e441:e6d2 with SMTP id adf61e73a8af0-376a81dc13emr13606923637.7.1766461992693;
+        Mon, 22 Dec 2025 19:53:12 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a2f3d76ce3sm112912585ad.90.2025.12.22.19.53.12
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34e9223ae29sm11259416a91.16.2025.12.22.19.53.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Dec 2025 19:53:13 -0800 (PST)
+        Mon, 22 Dec 2025 19:53:11 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id 2811A4272A07; Tue, 23 Dec 2025 10:53:06 +0700 (WIB)
+	id 427A240AF86B; Tue, 23 Dec 2025 10:53:07 +0700 (WIB)
 From: Bagas Sanjaya <bagasdotme@gmail.com>
 To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Documentation <linux-doc@vger.kernel.org>
@@ -81,9 +81,9 @@ Cc: Jonathan Corbet <corbet@lwn.net>,
 	Bagas Sanjaya <bagasdotme@gmail.com>,
 	Thorsten Blum <thorsten.blum@linux.dev>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 1/3] Documentation: kernel-hacking: Remove current macro annotation
-Date: Tue, 23 Dec 2025 10:52:51 +0700
-Message-ID: <20251223035254.22894-2-bagasdotme@gmail.com>
+Subject: [PATCH 2/3] Documentation: kernel-hacking: Do not italicize EXPORT_SYMBOL{,_GPL}() references
+Date: Tue, 23 Dec 2025 10:52:52 +0700
+Message-ID: <20251223035254.22894-3-bagasdotme@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251223035254.22894-1-bagasdotme@gmail.com>
 References: <20251223035254.22894-1-bagasdotme@gmail.com>
@@ -93,11 +93,12 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=773; i=bagasdotme@gmail.com; s=Zp7juWIhw0R1; h=from:subject; bh=DXtpt15ljUJvy4IcaQmZEYk//2HueWPizjkcyHOaAbw=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJlegp7f8nbtCHlT+uyw6QnfOzXun1NCt7cq3A5cXXvj6 8Gf3yandZSyMIhxMciKKbJMSuRrOr3LSORC+1pHmDmsTCBDGLg4BWAiNQsY/oenaVZKdMudCa7c kPfWorjYf86SmyGvT1syNis472WSXMzwP3rrtXt3F+SVJpQfXub7Zc/SdKUNLzbO7GJr7pAR7Dj wiQMA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1273; i=bagasdotme@gmail.com; s=Zp7juWIhw0R1; h=from:subject; bh=Z8S325YSGyy2PYGufR+TSkk/SxXRq02XTKI01RJgIqc=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJlegp78wZ9vH1Z25L2Z2lS3aPnTfguRuu5I5onyyzlkx C/y5NzrKGVhEONikBVTZJmUyNd0epeRyIX2tY4wc1iZQIYwcHEKwESc2xgZ3vzlYXdLVOlKm9+5 rkb61ONSg3tiUr4W0jXruXN2rFlhz/BP/+vtZ7kfdC/ozD+m/vNxmbGl6sTVa42Ctde1nLmeWe7 EBgA=
 X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
 Content-Transfer-Encoding: 8bit
 
-Remove unneeded :c:macro: annotation of current macro.
+Do not italicize EXPORT_SYMBOL() and EXPORT_SYMBOL_GPL() references in
+EXPORT_SYMBOL_NS() and EXPORT_SYMBOL_NS_GPL() subsections.
 
 Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
 ---
@@ -105,19 +106,26 @@ Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/kernel-hacking/hacking.rst b/Documentation/kernel-hacking/hacking.rst
-index bd5401b924427e..a5f7a1df7fb97d 100644
+index a5f7a1df7fb97d..1d120ff80f956c 100644
 --- a/Documentation/kernel-hacking/hacking.rst
 +++ b/Documentation/kernel-hacking/hacking.rst
-@@ -345,8 +345,8 @@ routine.
- Before inventing your own cache of often-used objects consider using a
- slab cache in ``include/linux/slab.h``
+@@ -597,7 +597,7 @@ EXPORT_SYMBOL_NS()
  
--:c:macro:`current`
--------------------
-+current
-+-------
+ Defined in ``include/linux/export.h``
  
- Defined in ``include/asm/current.h``
+-This is the variant of `EXPORT_SYMBOL()` that allows specifying a symbol
++This is the variant of EXPORT_SYMBOL() that allows specifying a symbol
+ namespace. Symbol Namespaces are documented in
+ Documentation/core-api/symbol-namespaces.rst
+ 
+@@ -606,7 +606,7 @@ EXPORT_SYMBOL_NS_GPL()
+ 
+ Defined in ``include/linux/export.h``
+ 
+-This is the variant of `EXPORT_SYMBOL_GPL()` that allows specifying a symbol
++This is the variant of EXPORT_SYMBOL_GPL() that allows specifying a symbol
+ namespace. Symbol Namespaces are documented in
+ Documentation/core-api/symbol-namespaces.rst
  
 -- 
 An old man doll... just what I always wanted! - Clara
