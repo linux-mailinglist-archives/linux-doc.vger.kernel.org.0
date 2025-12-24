@@ -1,191 +1,106 @@
-Return-Path: <linux-doc+bounces-70564-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70568-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0725ACDC826
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 15:22:40 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 15A25CDCC4D
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 16:53:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E941B3034EDC
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 14:21:41 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 0DDEC30076A6
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 15:53:39 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 821E629E0E1;
-	Wed, 24 Dec 2025 14:13:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE75C30CDA2;
+	Wed, 24 Dec 2025 15:53:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pTOSExkU"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="na8tgn2F"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CD492882CD
-	for <linux-doc@vger.kernel.org>; Wed, 24 Dec 2025 14:13:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 700F730C345;
+	Wed, 24 Dec 2025 15:53:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766585611; cv=none; b=URDEBM0UgEj6tED4u2zb6qNqVB2CtGV3e+7JtjNIIzTKcZzv36Ixw3Hunza/fGgfhYq1rcle0yx2od9KaAk0sAmSLUuSE8iWnTSHPH+R4DcosCCebpF7ndVi1Jd3E6Vhr4cCnmFGpZh7XXQcuSbtUPMQg6zeO4WusVZ4Hv+vvtk=
+	t=1766591617; cv=none; b=NXzIm49DAEpIyLr8bLhgdMmjgHZQRShuM+aEHWMofpC2Y3BQxekelNKDrNW1Q0IcTGoTKI2GmkgXuhDWPtI+1POlDoSESbabwZnlAnxu5pnDftY8ohe+P4stMcxDOe/iVhvYkg2rxZjhMuw4P68WP5R4iS5lHW+yfW+xyZVfLek=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766585611; c=relaxed/simple;
-	bh=x8pJJIM/R06HelItOz0mnR+O24PLB75z92hRRpCFFeo=;
+	s=arc-20240116; t=1766591617; c=relaxed/simple;
+	bh=itw1VGsb8caeZEnMIi0mGYNuh+cuyTYEgjoEbrWFsa4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ugc/u4Bhd2I0cbHTWi2dL41wDDAfDI27NhNm7hPYVdT93Nc4MjOOn8sFHy4V/0Tf7AAJzIQkBFkSyUaAI98Of/PaeQ6WMwQf5NX7W6EaFdx10dCQRGxxyqAeOeK6/lDicmv+y+jLoV39QJ6vWa6ZwlUogOPW1meQLibD4I5wYfg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pTOSExkU; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D6FBC4CEF7;
-	Wed, 24 Dec 2025 14:13:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1766585611;
-	bh=x8pJJIM/R06HelItOz0mnR+O24PLB75z92hRRpCFFeo=;
+	 Content-Type:Content-Disposition:In-Reply-To; b=OqRh40R5Z4dZen3XSipccQa39DXqPKGHilr+gPhIXBiAkxtFrDS+YqGI++ChHbsNWDPWA7NZb325AG6b0sLxN9Rw9Otkr6KqQKPtGylF21HM3T92MCU1BtXDTxKyGlDIjNo4TU5PO3fjyjMAXtt0AD9a4kFR/HTMMPf5qVeKR8k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=na8tgn2F; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C2AAC4CEF7;
+	Wed, 24 Dec 2025 15:53:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1766591617;
+	bh=itw1VGsb8caeZEnMIi0mGYNuh+cuyTYEgjoEbrWFsa4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=pTOSExkUKpjzCNkKM4XRqcER33A4BloR9ew66rphUXocMGJtT1hYJrhJBWBepz2jU
-	 0AY0KEJZ3kPgQLrS/wFRJBu4bsmMASBtbLZL3SU4zi9mGY3rKnuNPsHY/S2MPB/AJi
-	 /8L8oavjE728O8UiMQKSlQzpvpMoXF0QN2Nn0vxA9lOcpxzNkMa7qGnCUkr1cu1qyJ
-	 qbx+e4wT81KKmforYbN4cvbgL6u3QU2saJVbtneZqcsyK84eZP94/LzeruJ9nPpFgD
-	 e0sbjBjr6iqlJWoeQM3Q/H0ptY6QcQH+rgafijesN80/gkobrFCCgsHM8RSnN85ZqX
-	 5+rW0aF6lYz6g==
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 834B7F40068;
-	Wed, 24 Dec 2025 09:13:29 -0500 (EST)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-01.internal (MEProxy); Wed, 24 Dec 2025 09:13:29 -0500
-X-ME-Sender: <xms:CfVLac-XX2AxodhMm2mUM5fRSkfYO3sjew5HQLb5H_m7r92kjH_Glw>
-    <xme:CfVLaQG8Kn4K6xiF50TYZCxH_2Uz-uASo_yTsKOi9vkkLfCCYAshPunSctm6b8LvI
-    MgLIUuefwwwIiID7se007ajPfGyu0zELphyntpfFGm-G4OHGgegUqA>
-X-ME-Received: <xmr:CfVLabb4t3iCERwBSA2ye8Xqd2k23DDo9Y_G32SgQqovU6hLGfVGUOwoj8tzJg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdeivdeludcutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
-    ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
-    hrpeffhffvvefukfhfgggtugfgjgestheksfdttddtjeenucfhrhhomhepmfhirhihlhcu
-    ufhhuhhtshgvmhgruhcuoehkrghssehkvghrnhgvlhdrohhrgheqnecuggftrfgrthhtvg
-    hrnhepvddufeetkedvheektdefhfefjeeujeejtdejuedufefhveekkeeffeetvedvffek
-    necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhhirh
-    hilhhlodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduieduudeivdeiheeh
-    qddvkeeggeegjedvkedqkhgrsheppehkvghrnhgvlhdrohhrghesshhhuhhtvghmohhvrd
-    hnrghmvgdpnhgspghrtghpthhtohepfeekpdhmohguvgepshhmthhpohhuthdprhgtphht
-    thhopegurghvihgusehkvghrnhgvlhdrohhrghdprhgtphhtthhopehmuhgthhhunhdrsh
-    honhhgsehlihhnuhigrdguvghvpdhrtghpthhtohepfihilhhlhiesihhnfhhrrgguvggr
-    ugdrohhrghdprhgtphhtthhopehoshgrlhhvrgguohhrsehsuhhsvgdruggvpdhrtghpth
-    htoheprhhpphhtsehkvghrnhgvlhdrohhrghdprhgtphhtthhopehvsggrsghkrgesshhu
-    shgvrdgtiidprhgtphhtthhopehlohhrvghniihordhsthhorghkvghssehorhgrtghlvg
-    drtghomhdprhgtphhtthhopeiiihihsehnvhhiughirgdrtghomhdprhgtphhtthhopegs
-    hhgvsehrvgguhhgrthdrtghomh
-X-ME-Proxy: <xmx:CfVLaUOx-z6rz2cOkZTXqlMD7SVzr_JasznpUOQR_W4nbGIocrSoPw>
-    <xmx:CfVLacyW2XttqkD_f7r3SSyY329K9l__Gd6JRd2zpul-LSdyEFzl1A>
-    <xmx:CfVLadCmlcOXe_qvSVLcH65ZUWmmT7zCnJ_DPdjzrVIXPYfb5aO7Og>
-    <xmx:CfVLad6weKrosgU6y7QTtpOYp-LbHLKKriDGpJvsEcGMVH2be6LVnA>
-    <xmx:CfVLaTIdV2jFWK8oq9ccPbQ88T8QPugBXrDk1urbA8innEyGNP2Nr0Z3>
-Feedback-ID: i10464835:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 24 Dec 2025 09:13:28 -0500 (EST)
-Date: Wed, 24 Dec 2025 14:13:27 +0000
-From: Kiryl Shutsemau <kas@kernel.org>
-To: "David Hildenbrand (Red Hat)" <david@kernel.org>
-Cc: Muchun Song <muchun.song@linux.dev>, 
-	Matthew Wilcox <willy@infradead.org>, Oscar Salvador <osalvador@suse.de>, 
-	Mike Rapoport <rppt@kernel.org>, Vlastimil Babka <vbabka@suse.cz>, 
-	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, Zi Yan <ziy@nvidia.com>, Baoquan He <bhe@redhat.com>, 
-	Michal Hocko <mhocko@suse.com>, Johannes Weiner <hannes@cmpxchg.org>, 
-	Jonathan Corbet <corbet@lwn.net>, kernel-team@meta.com, linux-mm@kvack.org, 
-	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	Andrew Morton <akpm@linux-foundation.org>, Usama Arif <usamaarif642@gmail.com>, 
-	Frank van der Linden <fvdl@google.com>
-Subject: Re: [PATCHv2 02/14] mm/sparse: Check memmap alignment
-Message-ID: <glu3noshgeh7ktwwqofk7xcwkvhek2x3hrbdmyyo56gmctdx3t@adsfih557p7g>
-References: <3b758468-9985-49b8-948a-e5837decf52d@kernel.org>
- <CDAEC896-E3EB-4EAB-9F0F-70BC448B3B9A@linux.dev>
- <4f82b8ef-77de-422b-a9a5-691c4eca24a3@kernel.org>
+	b=na8tgn2Fx1vsIkYcIShFC2kkQs5palK2hGDXUPY3eM7gVuxBBrThBP2xZl+f1Mkns
+	 h03B+oe1jaxFou7L4DW8/u88YXrF4YH6jZnW1ebWjq3V6cBdxJeWhyTHSAsnZV2dGj
+	 IgxQ4vcfM4lrOzcEER2C3fkKnZlutWBSXrYF+rwg=
+Date: Wed, 24 Dec 2025 16:53:34 +0100
+From: Greg KH <gregkh@linuxfoundation.org>
+To: joaopeixoto@osyx.tech
+Cc: linux-kernel@vger.kernel.org, ajd@linux.ibm.com, alex@ghiti.fr,
+	aou@eecs.berkeley.edu, bagasdotme@gmail.com,
+	catalin.marinas@arm.com, conor+dt@kernel.org, corbet@lwn.net,
+	dan.j.williams@intel.com, davidmcerdeira@osyx.tech,
+	devicetree@vger.kernel.org, dev@kael-k.io, haren@linux.ibm.com,
+	heiko@sntech.de, jose@osyx.tech, kever.yang@rock-chips.com,
+	krzk+dt@kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux@armlinux.org.uk, linux-doc@vger.kernel.org,
+	linux-riscv@lists.infradead.org, maddy@linux.ibm.com,
+	mani@kernel.org, nathan@kernel.org, neil.armstrong@linaro.org,
+	palmer@dabbelt.com, pjw@kernel.org,
+	prabhakar.mahadev-lad.rj@bp.renesas.com, robh@kernel.org,
+	will@kernel.org
+Subject: Re: [PATCH 2/5] virt: add Bao IPC shared memory driver
+Message-ID: <2025122459-blimp-bobble-c772@gregkh>
+References: <20251224135217.25350-1-joaopeixoto@osyx.tech>
+ <20251224135217.25350-3-joaopeixoto@osyx.tech>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <4f82b8ef-77de-422b-a9a5-691c4eca24a3@kernel.org>
+In-Reply-To: <20251224135217.25350-3-joaopeixoto@osyx.tech>
 
-On Tue, Dec 23, 2025 at 10:38:26AM +0100, David Hildenbrand (Red Hat) wrote:
-> On 12/22/25 15:55, Muchun Song wrote:
-> > 
-> > 
-> > > On Dec 22, 2025, at 22:18, David Hildenbrand (Red Hat) <david@kernel.org> wrote:
-> > > 
-> > > ï»¿On 12/22/25 15:02, Kiryl Shutsemau wrote:
-> > > > > On Mon, Dec 22, 2025 at 04:34:40PM +0800, Muchun Song wrote:
-> > > > > 
-> > > > > 
-> > > > > On 2025/12/18 23:09, Kiryl Shutsemau wrote:
-> > > > > > The upcoming changes in compound_head() require memmap to be naturally
-> > > > > > aligned to the maximum folio size.
-> > > > > > 
-> > > > > > Add a warning if it is not.
-> > > > > > 
-> > > > > > A warning is sufficient as MAX_FOLIO_ORDER is very rarely used, so the
-> > > > > > kernel is still likely to be functional if this strict check fails.
-> > > > > 
-> > > > > Different architectures default to 2 MB alignment (mainly to
-> > > > > enable huge mappings), which only accommodates folios up to
-> > > > > 128 MB. Yet 1 GB huge pages are still fairly common, so
-> > > > > validating 16 GB (MAX_FOLIO_SIZE) alignment seems likely to
-> > > > > miss the most frequent case.
-> > > > I don't follow. 16 GB check is more strict that anything smaller.
-> > > > How can it miss the most frequent case?
-> > > > > Iâ€™m concerned that this might plant a hidden time bomb: it
-> > > > > could detonate at any moment in later code, silently triggering
-> > > > > memory corruption or similar failures. Therefore, I donâ€™t
-> > > > > think a WARNING is a good choice.
-> > > > We can upgrade it BUG_ON(), but I want to understand your logic here
-> > > > first.
-> > > 
-> > > Definitely no BUG_ON(). I would assume this is something we would find early during testing, so even a VM_WARN_ON_ONCE() should be good enough?
-> > > 
-> > > This smells like a possible problem, though, as soon as some architecture wants to increase the folio size. What would be the expected step to ensure the alignment is done properly?
-> > > 
-> > > But OTOH, as I raised Willy's work will make all of that here obsolete either way, so maybe not worth worrying about that case too much,
-> > 
-> > Hi David,
-> > 
+On Wed, Dec 24, 2025 at 01:52:14PM +0000, joaopeixoto@osyx.tech wrote:
+> From: João Peixoto <joaopeixoto@osyx.tech>
 > 
-> Hi! :)
+> Add a new driver providing an interface for communication with guests
+> hosted by the Bao hypervisor using shared-memory channels. The driver
+> exposes read/write regions defined in device tree and notifies the
+> hypervisor via an architecture-specific hypercall (SMC/HVC on ARM and
+> SBI ecall on RISC-V).
 > 
-> > I hope you're doing well. I must admit I have limited knowledge of Willy's work, and I was wondering if you might be kind enough to share any publicly available links where I could learn more about the future direction of this project. I would be truly grateful for your guidance.
-> > Thank you very much in advance.
+> The patch introduces:
+>   - drivers/bao/ with the initial Bao IPC shared-memory implementation
+>   - Kconfig entry enabling BAO_SHMEM
+>   - Makefile integration for building the driver
+>   - A character device interface supporting mmap(), read(), and write()
+>   - Platform driver support using DT properties for channel layout
 > 
-> There is some information to be had at [1], but more at [2]. Take a look at
-> [2] in "After those projects are complete - Then we can shrink struct page
-> to 32 bytes:"
+> Each device instance maps its assigned shared-memory region, validates
+> read/write channel configuration, and exposes a /dev/baoipc<N> node
+> used by user space to exchange data with Bao guests.
 > 
-> In essence, all pages (belonging to a memdesc) will have a "memdesc" pointer
-> (that replaces the compound_head pointer).
-> 
-> "Then we make page->compound_head point to the dynamically allocated memdesc
-> rather than the first page. Then we can transition to the above layout. "
+> Signed-off-by: João Peixoto <joaopeixoto@osyx.tech>
+> ---
+>  drivers/virt/Kconfig                 |   2 +
+>  drivers/virt/Makefile                |   1 +
+>  drivers/virt/bao/Kconfig             |   3 +
+>  drivers/virt/bao/Makefile            |   3 +
+>  drivers/virt/bao/ipcshmem/Kconfig    |   9 +
+>  drivers/virt/bao/ipcshmem/Makefile   |   3 +
+>  drivers/virt/bao/ipcshmem/ipcshmem.c | 539 +++++++++++++++++++++++++++
 
-I am not sure I understand how it is going to work.
+Why two subdirs deep for a single .c file?  Why not just put this in
+drivers/virt/ instead?
 
-32-byte layout indicates that flags will stay in the statically
-allocated part, but most (all?) flags are in the head page and we would
-need a way to redirect from tail to head in the statically allocated
-pages.
+thanks,
 
-> The "memdesc" could be a pointer to a "struct folio" that is allocated from
-> the slab.
-> 
-> So in the new memdesc world, all pages part of a folio will point at the
-> allocated "struct folio", not the head page where "struct folio" currently
-> overlays "struct page".
-> 
-> That would mean that the proposal in this patch set will have to be reverted
-> again.
-> 
-> 
-> At LPC, Willy said that he wants to have something out there in the first
-> half of 2026.
-
-Okay, seems ambitious to me.
-
-Last time I asked, we had no idea how much performance would additional
-indirection cost us. Do we have a clue?
-
-I like memdesc idea, but indirection cost always bothered me.
-
--- 
-  Kiryl Shutsemau / Kirill A. Shutemov
+greg k-h
 
