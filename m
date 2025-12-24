@@ -1,187 +1,165 @@
-Return-Path: <linux-doc+bounces-70547-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70549-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00334CDB890
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 07:42:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68710CDB9BE
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 08:45:47 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D1D5130181BB
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 06:41:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E99DB301E903
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Dec 2025 07:45:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AA48D329E70;
-	Wed, 24 Dec 2025 06:41:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cDiUnGRg"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 588713101D2;
+	Wed, 24 Dec 2025 07:45:39 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from dggsgout11.his.huawei.com (dggsgout11.his.huawei.com [45.249.212.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 774CB329E54
-	for <linux-doc@vger.kernel.org>; Wed, 24 Dec 2025 06:41:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 100B11D9A5F;
+	Wed, 24 Dec 2025 07:45:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.249.212.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766558502; cv=none; b=k5poLcsQezXFjLCj5jlwhn9YBJZ5OPIvy4ZTXaG3Hyrz1M9hV0tNNkMVkjoSgqEot7KouSpV7m/VIiOVp04W+Wpnx0PxElZUp8Ao2pDHSqqDGghLl/AlKhWb8gIzGVuyba6USIR+ee9z8nVRDFz7wYuGrh2CQWIkmlTxIw7pwU0=
+	t=1766562339; cv=none; b=jAna2kPFwcb22OSC82joqvXj3MzVuwaEtAdGVNW8fHBz5mpJPAeEjSEejwSZr9gNpdirTsHsnqUN7bfY7+4xQWC2ahJo01s4QanKmwp0XBeTvAgH6CvgHcOHLokpnY1qVKZo+iqUMYKp79HfVEDtDQ4NTF/JojCEpwJNb688b6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766558502; c=relaxed/simple;
-	bh=bq+vufCo8wRGet2ZSxB+C5P+sd2ZOC5WrglH1AMUSBc=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=bkita0kqAf+rBK5gx0MSpc3tu2JKPte46s5Hv2Y3/RvBicIttUyuKAAyr+EUogfQ+biadW2ktHa0+OBheeoxO+bzK0f1HG7F9XziDwbPOylyo9QB6nz9S5VbvB5iEUov/Vp5mUfTdpeN3I6gYm+zXMCWfIwlpnjnQwqxpoSv6Xs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cDiUnGRg; arc=none smtp.client-ip=209.85.216.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-34c1d84781bso6476226a91.2
-        for <linux-doc@vger.kernel.org>; Tue, 23 Dec 2025 22:41:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766558500; x=1767163300; darn=vger.kernel.org;
-        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=bq+vufCo8wRGet2ZSxB+C5P+sd2ZOC5WrglH1AMUSBc=;
-        b=cDiUnGRg7gZttst+TV1V9JkD0d1KjPsHPo9O3JXNb9QM+aX7P1r2HTXlRQfeLZfEDf
-         Q/IUXll5UMRLMnBhEhLTLedaR408EpejWcPXSsuaL9ESjoc2k775QWHEssz3XRIAsCYO
-         UJL/2/wk/TYbj+MdF3aYqZdr6KBPdBo8FlohoeMc0xYPBPtp0eOU4Vd8ECZ+si+1eU6m
-         AVX7qqlrY2HFh9WDZ7nbKr0yyBluvEWZla/25PVnzRdbk16uBn/MsKbt7T+qeQZEBLWV
-         1tIhZqqgyiaBy65oLjQ9U4SpwiWG9EQvVHuL3txgaP3cj0gOXpC5LfDbA7PKnySGhzT5
-         F68Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766558500; x=1767163300;
-        h=content-disposition:mime-version:message-id:subject:cc:to:from:date
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bq+vufCo8wRGet2ZSxB+C5P+sd2ZOC5WrglH1AMUSBc=;
-        b=O8u8eSSFgngJsHd85hKCIcAqTJ0vkGRxjbnHLvgOzoC3nRqWz3MNd52Cz5IjiReOfx
-         aHck42sBSw/lXMw0M7b7N63TCBLZubRA4SnbTukR4MKClpzDH5FMHDPmwIxi7GybtwF2
-         eRgjaCU8iaGtbB/Dwi2634ULohTtuijK5q9dvYsighr2Qtz9/dSDlxcemKVz0hBLsOE9
-         6sjDzdB9itlmySlxDUPeNgwLifSMRxAyyFugBtIiLFLz79Mv/nQJ10Czmnka3MWskiNp
-         3ZRiwbL9yr63p1Z9S+hrMtP9cyuXjSVPDyslMMhZNRSnGijv3fvD/HfJEITHzX+nIFrt
-         9YAg==
-X-Forwarded-Encrypted: i=1; AJvYcCVrN0M/Jk8S4yeqrJSItvo6ZV7mVqc064iHsBz3sUQRtFcnkP5Nh9zgR3j3L31yBRPowW8BlElLjDI=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzYgm8y3NLHNRx+J3DVYwmEcNTy0QJBFO4xHakjrLNGUSI4gE1p
-	fP3wYUcgxnlFRjoKuy0CISwO1TyGYWym9k6roxzRTxltB8nc6EvJkPLw
-X-Gm-Gg: AY/fxX7zeLWFvgv0lDAeikDJqTnCpJSJVHkMCvMZmNw4r+Bhb/NhR9F+WkWpKaHbFzz
-	01TMX14eCix8Rpjx7EelOC+a6QDfhPSw1Gv1nnmNh+rw0Xg/HHTTqWcAf9mFmur7sDrSt/5sl8+
-	SnRziq0L4BZ5pSpeQRuI1qYLTqODPsm4pF1IgoJVmXyS3aJuTrcLNaQT/zMvB7RdmaKZj5tF/f5
-	toFDVS6p1TTOuEiGNU2qHBauzptgzaloGrHW9dn/g0fK/tnDnO31ALbAblQtcu+IFb0XHTX5Xcz
-	Nj1KLYvJrPY6JtHwA6+gnFIq0hODB5a7sOT4qkM8PQmoB3AC1E9TRJjtoPeaDXvCcFxKpGeDscZ
-	R1nm2PePhd7X/L/d9NSUs7VhV6/gfnx7nfG+b5hGDWUjgKLoZ4v+eXNjuroenPnkmUgAQ//tlO9
-	YBWWhV2Ocmfwg=
-X-Google-Smtp-Source: AGHT+IEgCZoyx2O75kxoEMfoJk/QK1exkq2h58uTDwsgQiSgm5wW6qFv0Xa6ZtRpSo46krMU5VkaMg==
-X-Received: by 2002:a17:90b:6c7:b0:34c:a29d:992a with SMTP id 98e67ed59e1d1-34e921d6cbamr13205903a91.34.1766558499526;
-        Tue, 23 Dec 2025 22:41:39 -0800 (PST)
-Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34e9223adf5sm14661068a91.14.2025.12.23.22.41.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Dec 2025 22:41:38 -0800 (PST)
-Received: by archie.me (Postfix, from userid 1000)
-	id ECD6A420A81F; Wed, 24 Dec 2025 13:41:35 +0700 (WIB)
-Date: Wed, 24 Dec 2025 13:41:35 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux Regressions <regressions@lists.linux.dev>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: [REGRESSION] Unexpected section title false positive warnings on
- DOC: directive
-Message-ID: <aUuLHzk5jdyBAxD7@archie.me>
+	s=arc-20240116; t=1766562339; c=relaxed/simple;
+	bh=hWW9931UVpm4wcQiwuBsR3ACkuXKyiGAX5Wgol6YIzY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=hoPxvcv1zwsc/JQpZlaRnXum9y3dYCprind/6tktQ9/xnIjuHVLbDKLtoiqwoq9Tm+1mdEHrdEKX7R6D+//vRu4qJXGg5RAWZQmTzbDvT7QAaOf7GXtO9vrWPkyQZfNmKOwnXeDI64NLpVOVW91+/ZYA/QMu0wPeLM8VphewQbg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com; spf=pass smtp.mailfrom=huaweicloud.com; arc=none smtp.client-ip=45.249.212.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=huaweicloud.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huaweicloud.com
+Received: from mail.maildlp.com (unknown [172.19.163.170])
+	by dggsgout11.his.huawei.com (SkyGuard) with ESMTPS id 4dbkRr2GN6zYQtmq;
+	Wed, 24 Dec 2025 15:44:56 +0800 (CST)
+Received: from mail02.huawei.com (unknown [10.116.40.128])
+	by mail.maildlp.com (Postfix) with ESMTP id 95D114056C;
+	Wed, 24 Dec 2025 15:45:34 +0800 (CST)
+Received: from hulk-vt.huawei.com (unknown [10.67.174.121])
+	by APP4 (Coremail) with SMTP id gCh0CgA3l_cMmktp9pcvBQ--.63051S2;
+	Wed, 24 Dec 2025 15:45:33 +0800 (CST)
+From: Chen Ridong <chenridong@huaweicloud.com>
+To: akpm@linux-foundation.org,
+	axelrasmussen@google.com,
+	yuanchu@google.com,
+	weixugc@google.com,
+	david@kernel.org,
+	lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com,
+	vbabka@suse.cz,
+	rppt@kernel.org,
+	surenb@google.com,
+	mhocko@suse.com,
+	corbet@lwn.net,
+	hannes@cmpxchg.org,
+	roman.gushchin@linux.dev,
+	shakeel.butt@linux.dev,
+	muchun.song@linux.dev,
+	zhengqi.arch@bytedance.com,
+	mkoutny@suse.com
+Cc: linux-mm@kvack.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	cgroups@vger.kernel.org,
+	lujialin4@huawei.com,
+	chenridong@huaweicloud.com
+Subject: [PATCH -next v2 0/7] mm/mglru: remove memcg lru
+Date: Wed, 24 Dec 2025 07:30:25 +0000
+Message-Id: <20251224073032.161911-1-chenridong@huaweicloud.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="8ZYU0AtWDRBkFeIb"
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:gCh0CgA3l_cMmktp9pcvBQ--.63051S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxZw18JF4rXFyfKF48Xr48Crg_yoW5XF4xpF
+	Z3Wasrtw4rAFWUXFs7K3W7u34fZa18Aw47WrZYg34fArs0y3WDZr4xtw4ruFW8CrWSqr17
+	Xrn8C3W8XF4UAFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
+	JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+	CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+	2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+	W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+	Y2ka0xkIwI1lc7CjxVAaw2AFwI0_GFv_Wryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
+	0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
+	zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
+	4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
+	CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
+	nIWIevJa73UjIFyTuYvjTRNJ5oDUUUU
+X-CM-SenderInfo: hfkh02xlgr0w46kxt4xhlfz01xgou0bp/
 
+From: Chen Ridong <chenridong@huawei.com>
 
---8ZYU0AtWDRBkFeIb
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The memcg LRU was introduced to improve scalability in global reclaim,
+but its implementation has grown complex and can cause performance
+regressions when creating many memory cgroups [1].
 
-Hi,
+This series implements mem_cgroup_iter with a reclaim cookie in
+shrink_many() for global reclaim, following the pattern already used in
+shrink_node_memcgs(), an approach suggested by Johannes [1]. The new
+design maintains good fairness across cgroups by preserving iteration
+state between reclaim passes.
 
-Building htmldocs on docs-next currenly produces about 50 new warnings; whi=
-ch
-all of them are unexpected section title on DOC: kernel-doc directive, like:
+Testing was performed using the original stress test from Yu Zhao [2] on a
+1 TB, 4-node NUMA system. The results show:
 
-/home/bagas/repo/linux-kernel/Documentation/driver-api/target:25: ./drivers=
-/target/target_core_user.c:35: CRITICAL: Unexpected section title.
+    pgsteal:
+                                        memcg LRU    memcg iter
+    stddev(pgsteal) / mean(pgsteal)     106.03%       93.20%
+    sum(pgsteal) / sum(requested)        98.10%       99.28%
+    
+    workingset_refault_anon:
+                                        memcg LRU    memcg iter
+    stddev(refault) / mean(refault)     193.97%      134.67%
+    sum(refault)                       1,963,229    2,027,567
 
-Userspace I/O
-------------- [docutils]
-WARNING: kernel-doc 'scripts/kernel-doc.py -rst -enable-lineno -function 'U=
-serspace I/O' ./drivers/target/target_core_user.c' processing failed with: =
-SystemMessage('/home/bagas/repo/linux-kernel/Documentation/driver-api/targe=
-t:25: ./drivers/target/target_core_user.c:35: (SEVERE/4) Unexpected section=
- title.\n\nUserspace I/O\n-------------')
-/home/bagas/repo/linux-kernel/Documentation/driver-api/target:28: ./include=
-/uapi/linux/target_core_user.h:14: CRITICAL: Unexpected section title.
+The new implementation shows clear fairness improvements, reducing the
+standard deviation relative to the mean by 12.8 percentage points for
+pgsteal and bringing the pgsteal ratio closer to 100%. Refault counts
+increased by 3.2% (from 1,963,229 to 2,027,567).
 
-Ring Design
------------ [docutils]
-WARNING: kernel-doc 'scripts/kernel-doc.py -rst -enable-lineno -function 'R=
-ing Design' ./include/uapi/linux/target_core_user.h' processing failed with=
-: SystemMessage('/home/bagas/repo/linux-kernel/Documentation/driver-api/tar=
-get:28: ./include/uapi/linux/target_core_user.h:14: (SEVERE/4) Unexpected s=
-ection title.\n\nRing Design\n-----------')
+To simplify review:
+1. Patch 1 uses mem_cgroup_iter with reclaim cookie in shrink_many()
+2. Patch 2 removes the now-unused memcg LRU code
+3. Patches 3–7 combine shrink_many and shrink_node_memcgs
+   (This reorganization is clearer after switching to mem_cgroup_iter)
 
-These turns out to be false-positive as touching the source file in question
-(e.g. drivers/target/target_core_user.c) and making htmldocs again makes the
-regression go away for the corresponding docs.
+[1] https://lore.kernel.org/r/20251126171513.GC135004@cmpxchg.org
+[2] https://lore.kernel.org/r/20221222041905.2431096-7-yuzhao@google.com
 
-Bisection (with git-bisect(1)) points to bea467aa5da1f5 ("docs: media:
-v4l2-ioctl.h: document two global variables") as the first bad commit, even
-though that I suspect that bdd1cf87847ff6 ("kernel-doc: add support to hand=
-le
-DEFINE_ variables") may be the actual culprit (regressor).
+---
 
-The full bisection log:
+Changes in v2:
+1. Patch 1 now aligns more closely with shrink_node_memcgs
+2. Patch 3 separates the flush_reclaim_state() changes into its own patch
+3. Incorporated feedback/suggestions from Johannes and Shakeel.
 
-git bisect start
-# status: waiting for both good and bad commits
-# bad: [7f3c3a0a9103dc92c823f27db3284ac2914e7558] MAINTAINERS: Add doc file=
-s on real-time support to Real-time Linux
-git bisect bad 7f3c3a0a9103dc92c823f27db3284ac2914e7558
-# status: waiting for good commit(s), bad commit known
-# good: [9448598b22c50c8a5bb77a9103e2d49f134c9578] Linux 6.19-rc2
-git bisect good 9448598b22c50c8a5bb77a9103e2d49f134c9578
-# bad: [5188f6bd408f937d81c0c37eb59ddc1035cd912c] docs: admin: devices: /de=
-v/sr<N> for SCSI CD-ROM
-git bisect bad 5188f6bd408f937d81c0c37eb59ddc1035cd912c
-# bad: [bea467aa5da1f51834501da3ac3c40204027a221] docs: media: v4l2-ioctl.h=
-: document two global variables
-git bisect bad bea467aa5da1f51834501da3ac3c40204027a221
-# good: [82e87387f6e2af9f69a7528733e953fd22e815aa] Documentation: kernel-ha=
-cking: Remove comma
-git bisect good 82e87387f6e2af9f69a7528733e953fd22e815aa
-# good: [bdd1cf87847ff6aaadd53a185209d2bb2db72165] kernel-doc: add support =
-to handle DEFINE_ variables
-git bisect good bdd1cf87847ff6aaadd53a185209d2bb2db72165
-# first bad commit: [bea467aa5da1f51834501da3ac3c40204027a221] docs: media:=
- v4l2-ioctl.h: document two global variables
+Changes from RFC series:
+1. Updated the test result data.
+2. Added patches 3–5 to combine shrink_many and shrink_node_memcgs.
 
-Mauro: Since you're the author of regressor, can you please take a look on =
-it?
+Chen Ridong (7):
+  mm/mglru: use mem_cgroup_iter for global reclaim
+  mm/mglru: remove memcg lru
+  mm/mglru: make calls to flush_reclaim_state() similar for MGLRU and
+    non-MGLRU
+  mm/mglru: rename should_abort_scan to lru_gen_should_abort_scan
+  mm/mglru: extend lru_gen_shrink_lruvec to support root reclaim
+  mm/mglru: combine shrink_many into shrink_node_memcgs
+  mm/mglru: remove memcg disable handling from lru_gen_shrink_node
 
-Thanks.
+ Documentation/mm/multigen_lru.rst |  30 ---
+ include/linux/mmzone.h            |  89 ---------
+ mm/memcontrol-v1.c                |   6 -
+ mm/memcontrol.c                   |   4 -
+ mm/mm_init.c                      |   1 -
+ mm/vmscan.c                       | 313 +++---------------------------
+ 6 files changed, 31 insertions(+), 412 deletions(-)
 
-#regzbot introduced: bea467aa5da1f5
+-- 
+2.34.1
 
---=20
-An old man doll... just what I always wanted! - Clara
-
---8ZYU0AtWDRBkFeIb
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaUuLFgAKCRD2uYlJVVFO
-o83XAQCJcTXukZzv0/X0PWBYI57OBqNpUtvshGIWlzzmT8UfxQD+Ip7xjplmoYLi
-6BbKfNq/aBq8OqXAEbKfzatPtLOg+gU=
-=AUip
------END PGP SIGNATURE-----
-
---8ZYU0AtWDRBkFeIb--
 
