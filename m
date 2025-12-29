@@ -1,77 +1,77 @@
-Return-Path: <linux-doc+bounces-70710-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70708-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD5AACE5D58
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 04:19:10 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id EDFC0CE5D82
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 04:20:28 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4B09A30133EB
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 03:18:35 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 5A8CA301637C
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 03:18:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DBAEA292918;
-	Mon, 29 Dec 2025 03:18:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 38F9627467F;
+	Mon, 29 Dec 2025 03:18:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HkP6IAn6"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RHQ0GfPF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44BD427B32D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44269273D84
 	for <linux-doc@vger.kernel.org>; Mon, 29 Dec 2025 03:18:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766978294; cv=none; b=lJ46tn/xPziDIBj2eTRvoV4/34vgyaN95uwUMC3t6wAf5ryK6w4Yt2rED6G9YT68ve5FXBDBSnxm0qhD2CxWdrgfuVjhJe+z7S6XsWiv1qv/+JULrNG2FhQ1fBWFWQCOjI/gDG0EnHtVb+IJR4WwhDLd6OMK9G36KdXda7/a7UE=
+	t=1766978292; cv=none; b=CnXFMH0hUrsMrUg2b+GdpChoeTETxgxTF2Lx9DexO2qJXj4Eo5QbGIFypUt6uQlnJeiM3RDkEYlytkxHpKd2mLTYjz0F38RRwj8A/mVuKbW4Clkb/Io+nVf/RuFTon8xwFL3joYOTKvz36Jee1KVXDsQVXyRocrAg/KauZG4jCE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766978294; c=relaxed/simple;
-	bh=TjcLc8b1McUidwujjfQYTR+PxKrP04JoWpS4YYDWZFQ=;
+	s=arc-20240116; t=1766978292; c=relaxed/simple;
+	bh=oqKm237OssMghJKlQPmco5wSMzp57040uiDrPySMFAA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VAqOh7F94g7i5dQmwTcGIg2KNalgBVS7MkRpK/Vz37r3jIdl5Bg8K83vkZ8gIrykmE+vXSRo6GRly850gjKOr5OrJDsnhvWtsj6wwOAONJpvOojBBmaj1mYcdmusAN83ICff7SWZQb3KEQCMsp0i5MLNiFCq9wDVSXJMD11HuQI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HkP6IAn6; arc=none smtp.client-ip=209.85.215.180
+	 MIME-Version; b=lhquY71cFOCArxpmRc057BhnaUInhWGCmoPsCOq8c6sW1idfqc+UIISvLF/uVZEQU7tUlN9hP0OqXhMV1oyxWM27MedmyC1fvYmdvB8fgsAD1A6qhVxwEyqRWe18ISDR6g3FZG2XC1IW4fRmExhpI7l2IOentHeakoMR4AbrLF0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RHQ0GfPF; arc=none smtp.client-ip=209.85.214.171
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-c0224fd2a92so8061296a12.2
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2a0d5c365ceso114520295ad.3
         for <linux-doc@vger.kernel.org>; Sun, 28 Dec 2025 19:18:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766978287; x=1767583087; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1766978288; x=1767583088; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/SSUxFyBlljVoOkyziM9cW6Mg4NT0OL48ryA8PfVXFE=;
-        b=HkP6IAn6hb8KTMz8wco1lzO4nCbWQg9wRNByiD/OCLaFO5c/Q6RHXszvMAdIyD5BPN
-         1c4GtSurswFEubrW7rFD6QGn7IG9h40VdZPJnSHcOjpaXTkMfiEQUElsko2bvjQWLOBJ
-         U6w5u82xLrOc/JPCBtltuIIrXDZkEWBsOcGa9pEzEIcupjCw/b1cKEl7w55YWXyB4blA
-         /FV/BUYE0EBHyTFJWsrOCImSNdD3lexnVYc1p3Nez0TSVAtnBqGPDu7ZvtAh6N7wgrNc
-         benGBB/fPb5SM//viPfZhLo5+FceDh/5d/P0ijQQiNyrexnr1HbC8oeAuJ8/KmuD5MCV
-         5D5g==
+        bh=miGogj6YnndhpvXP0429HX4qoehDUgcQ4H71U57ueIM=;
+        b=RHQ0GfPFUX7gQgJ/0yz2r6szOKR9Vv9QZo3LxkDoi3Nh6UGNSfolffzF1mnuwLqc7e
+         UpDzCUydWbijSktaICAobi82oPH56MTJOdmWM7drMxb65y8JYWuE6e7zjhHOeuUfZL/p
+         4CphOaqh/NSGTG9cjuViFhEEMPJjZt7xurywhfTcfYG9/goVhPuejDjVAD1Dfh1FCQwP
+         as3tt050GRPIWX8m0VOpz2f7RBPoyRsATw9MA72eLWdUeJ96IbGSpWHNhPOkXU8IXrWZ
+         pQl3GDnfe74ANpvs2+3gZMti/nreVgo3qFcBsNSjJp0iSLCSCWkyixZ/Vc+cwUZ7/0Jj
+         K+PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766978287; x=1767583087;
+        d=1e100.net; s=20230601; t=1766978288; x=1767583088;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=/SSUxFyBlljVoOkyziM9cW6Mg4NT0OL48ryA8PfVXFE=;
-        b=i39rAAM41PwMn0+I3z6lZxAnA49QZ4IDfGGTNgh2MNVXP1q8HqCiCB8PTSlT0dB433
-         K+SVSYh07pmtLa1PnAJ6OU1TgIdMVAKbBvBdiwh8OfWSQgTMwT98zgE455qTaWbE23E2
-         pHljVqCeMXx8CxqKH2BhMLfb5JMJ7Rq8Jm2d5gcqWMRvoXpw6GaAOTqirsO7DjXIdB4n
-         nSignzLWhr8bJRQQ83xiA7opJZzWh+l5+qMSL6o3WG4qVe8du9tU0kGOuLsnSdGstV/x
-         QzeHFH5s46n+UN43cf0luOrrAIITV4GbjD6vuTEIzKgz0r6rpS7Dnh1sCCWa6zyn8zet
-         82Mg==
-X-Forwarded-Encrypted: i=1; AJvYcCXxVzlSaMzD+cNy+nLBzm/8EMa3D/XsGwKvqmu2gtfeevKi04d4JzxMJCXPBJp1BVcyNC7rCvuBtuw=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywy35nE4arDqGASdYrjJr50DMzEdn01XsS6o2EdHKTeb/XfAlR4
-	EKwAUyJHGCkBfou90a63LdNkziR3oCapIOeSbBEeByFS7G9GG8AFXYwK12HKyA==
-X-Gm-Gg: AY/fxX66/cyf4Q00yeSBaqO6jTCiqFuoVva4iH6jRm5pvhogT057r24TQJN5Svvbv5x
-	GYjRMlB4NQzQTO55csNx71NfJaCpOSeNODiG+JRLO/tz/mm0GKPYWx4/THOX4+WMEUkBoY1v4K4
-	im5/BS8doNc6Lmj+TimL3cFloO+7srMUX+h0NcQcXXG7sO4F3ppcxh48w9qIIkyo5E46yGJvVgZ
-	5bW1f4CWXJ6OlSGPFZjIJisZE5y+JTHgnEQyeHOwxxshD4U5aqtMJCSRU7emJrP4jjTIG53hxFJ
-	PlSLmD+2RaqAI0jUsfoGwYwUs3Nq7tMo0B3UNnh4f20/CzIGsEYeqvlfC7jMRr/tXgW49qNBShy
-	LEPX9HLVHHCBA4QPugQZR6eP74DEYKyElsZOksyLV4ZzP09XczLCsT+mtnps28vl7xQybVUFEUo
-	yPyrYU49lRYINhFCLmZKGmDpTpS8EGWuQO7aNwOSYCiZeBzmdAcLk8AtgnmxYPCcE=
-X-Google-Smtp-Source: AGHT+IFy6JlhPUmYZyhP9/6iKZQqnm4h0/gpD7xRl7MJ8NcHJHy2QxB6lQ6mbz7HEpi07optHW5p6Q==
-X-Received: by 2002:a05:7022:eac1:b0:11b:9b9f:426b with SMTP id a92af1059eb24-121722c3d35mr27502722c88.20.1766978287185;
+        bh=miGogj6YnndhpvXP0429HX4qoehDUgcQ4H71U57ueIM=;
+        b=jpPcPVXVWpGeINwmujjMCp8wKJWGLXxsfkGS/gacsmhMrexyr7EpFXjNhilQa0MDYV
+         eLs8vt89kT+dyqTc60ETkys+UnwTa4XiJQlvd3TSyny1jrP2/2XgBrkStoOppV8jZ2oy
+         P7BuwIXwLYoSJ3+2q1xHzdcgRdbVRt4mB8rp+1C1AiAP0w2wM/lCKGCYMjtbaSk9z8Rl
+         2apHmIo8pZGXl5T811WIUKnEJg4ZOA3FPdYffooBVk2W8oNN7xNDUNgfz3YAVcZaLZVC
+         NmI5nITblwdRfVBfse50b+ItK3mW9oiyS0S6PlJk+gE3dwo4kbVFID1qBPolEXCQIBs3
+         6ctQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXnZL2f9xfTEMp9tVe0pTKBpQ/YIih+EUbVEYii+R3ZNIsv76u2O5GQ63W/bUTtuOYwOKUJrA/vKXg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzsjIckeaZfZsUWHKO3w8+y568LBkzUwyQkznzVTo4D6IjLnM2R
+	XfPiggvTwDMs9Rm0CA0J0oaWFuE+5xkGX/mthMbQxeWSPjqtj2gg6GIggzgkug==
+X-Gm-Gg: AY/fxX6DBm+XFSLj9zYw6ea+FEB2rUzKc+A+iUvYMr5mhanJTqrHzkEZqehu3cZbS3u
+	Me5KmtUX0W+gw0EsWv6CfYcUfLOKBfKLuQD3acqXGQwHGjS6CcinvIkLkSCz+7sNA+5bJj8Ffy6
+	OFRTZu1ybbzAPfqxa8tTi5wPff9J86lLYRrFP685JKrdKx5F0ze3Ni/rc4V4ELWVLvbDxx1+qvI
+	HOsS3Twzsn0muMF8CKY1GwoCnI01x2qXpU8EnaeJjDK0rkuxuL9ViEYduxmJgp7bunJAimkRnQP
+	jAJ6MlYee9AQfcJCzfyb68VYmD+Yo0P/AtVphAz0tK+B3Qv5KwzDwL0iYUpE7zI32NQjlbdrl4W
+	oTK6HgIKdA2jazmmFYg/BJJT9d/U14kYUomcVvsC8aImgGgDQbSGr1vk0A5eK2RxHF3HXLlfNow
+	YNHitSChBSaiaOUCh3xPCJiIUZeqYkZgs6Mnlwqy6d52p1S+3nmYDbmU3L64EHxl4=
+X-Google-Smtp-Source: AGHT+IHjwK9SUF/qOruDxO9wu7yjpn2zEeJHGppohIix6cKExalnAY9LGjRftJ0II/rrFdgWUa8T1w==
+X-Received: by 2002:a05:7022:2217:b0:11b:9386:a3c2 with SMTP id a92af1059eb24-121722ff9fbmr29439286c88.45.1766978287954;
         Sun, 28 Dec 2025 19:18:07 -0800 (PST)
 Received: from lappy (108-228-232-20.lightspeed.sndgca.sbcglobal.net. [108.228.232.20])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121724dd7f5sm112992785c88.5.2025.12.28.19.18.06
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121724dd7f5sm112992785c88.5.2025.12.28.19.18.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Dec 2025 19:18:06 -0800 (PST)
+        Sun, 28 Dec 2025 19:18:07 -0800 (PST)
 From: "Derek J. Clark" <derekjohn.clark@gmail.com>
 To: Jiri Kosina <jikos@kernel.org>,
 	Benjamin Tissoires <bentiss@kernel.org>
@@ -84,9 +84,9 @@ Cc: Mario Limonciello <mario.limonciello@amd.com>,
 	linux-input@vger.kernel.org,
 	linux-doc@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 12/16] HID: hid-lenovo-go-s: Add Feature Status Attributes
-Date: Mon, 29 Dec 2025 03:17:49 +0000
-Message-ID: <20251229031753.581664-13-derekjohn.clark@gmail.com>
+Subject: [PATCH v2 13/16] HID: hid-lenovo-go-s: Add Touchpad Mode Attributes
+Date: Mon, 29 Dec 2025 03:17:50 +0000
+Message-ID: <20251229031753.581664-14-derekjohn.clark@gmail.com>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20251229031753.581664-1-derekjohn.clark@gmail.com>
 References: <20251229031753.581664-1-derekjohn.clark@gmail.com>
@@ -98,157 +98,63 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Adds features status attributes for the gamepad, MCU, touchpad/mouse,
-and IMU devices.
+Adds attributes for managing the touchpad operating modes.
 
 Signed-off-by: Derek J. Clark <derekjohn.clark@gmail.com>
 ---
- drivers/hid/hid-lenovo-go-s.c | 524 +++++++++++++++++++++++++++++++++-
- 1 file changed, 523 insertions(+), 1 deletion(-)
+ drivers/hid/hid-lenovo-go-s.c | 142 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 142 insertions(+)
 
 diff --git a/drivers/hid/hid-lenovo-go-s.c b/drivers/hid/hid-lenovo-go-s.c
-index 36cee6c3d4cc..076afdaa9628 100644
+index 076afdaa9628..38425e3d6cb2 100644
 --- a/drivers/hid/hid-lenovo-go-s.c
 +++ b/drivers/hid/hid-lenovo-go-s.c
-@@ -14,6 +14,7 @@
- #include <linux/device.h>
- #include <linux/hid.h>
- #include <linux/jiffies.h>
-+#include <linux/kstrtox.h>
- #include <linux/mutex.h>
- #include <linux/printk.h>
- #include <linux/string.h>
-@@ -35,7 +36,17 @@ struct hid_gos_cfg {
- 	struct completion send_cmd_complete;
- 	struct hid_device *hdev;
- 	struct mutex cfg_mutex; /*ensure single synchronous output report*/
-+	u8 gp_auto_sleep_time;
-+	u8 gp_dpad_mode;
-+	u8 gp_mode;
-+	u8 gp_poll_rate;
-+	u8 imu_bypass_en;
-+	u8 imu_sensor_en;
- 	u8 mcu_id[12];
-+	u8 mouse_step;
-+	u8 os_mode;
-+	u8 rgb_en;
-+	u8 tp_en;
+@@ -47,6 +47,8 @@ struct hid_gos_cfg {
+ 	u8 os_mode;
+ 	u8 rgb_en;
+ 	u8 tp_en;
++	u8 tp_linux_mode;
++	u8 tp_windows_mode;
  } drvdata;
  
  struct gos_cfg_attr {
-@@ -66,7 +77,73 @@ enum mcu_command_index {
- 	GET_PL_TEST = 0xdf,
+@@ -145,6 +147,22 @@ static const char *const dpad_mode_text[] = {
+ 	[DIR4] = "4-way",
  };
  
--#define FEATURE_NONE 0x00
-+enum feature_enabled_index {
-+	FEATURE_DISABLED,
-+	FEATURE_ENABLED,
++enum touchpad_mode_index {
++	TP_REL,
++	TP_ABS,
 +};
 +
-+static const char *const feature_enabled_text[] = {
-+	[FEATURE_DISABLED] = "false",
-+	[FEATURE_ENABLED] = "true",
++static const char *const touchpad_mode_text[] = {
++	[TP_REL] = "relative",
++	[TP_ABS] = "absolute",
 +};
 +
-+enum feature_status_index {
-+	FEATURE_NONE = 0x00,
-+	FEATURE_GAMEPAD_MODE = 0x01,
-+	FEATURE_AUTO_SLEEP_TIME = 0x04,
-+	FEATURE_IMU_BYPASS,
-+	FEATURE_RGB_ENABLE,
-+	FEATURE_IMU_ENABLE,
-+	FEATURE_TOUCHPAD_ENABLE,
-+	FEATURE_OS_MODE = 0x0A,
-+	FEATURE_POLL_RATE = 0x10,
-+	FEATURE_DPAD_MODE,
-+	FEATURE_MOUSE_WHEEL_STEP,
++enum touchpad_config_index {
++	CFG_WINDOWS_MODE = 0x03,
++	CFG_LINUX_MODE,
++
 +};
 +
-+enum gamepad_mode_index {
-+	XINPUT,
-+	DINPUT,
-+};
-+
-+static const char *const gamepad_mode_text[] = {
-+	[XINPUT] = "xinput",
-+	[DINPUT] = "dinput",
-+};
-+
-+enum os_type_index {
-+	WINDOWS,
-+	LINUX,
-+};
-+
-+static const char *const os_type_text[] = {
-+	[WINDOWS] = "windows",
-+	[LINUX] = "linux",
-+};
-+
-+enum poll_rate_index {
-+	HZ125,
-+	HZ250,
-+	HZ500,
-+	HZ1000,
-+};
-+
-+static const char *const poll_rate_text[] = {
-+	[HZ125] = "125",
-+	[HZ250] = "250",
-+	[HZ500] = "500",
-+	[HZ1000] = "1000",
-+};
-+
-+enum dpad_mode_index {
-+	DIR8,
-+	DIR4,
-+};
-+
-+static const char *const dpad_mode_text[] = {
-+	[DIR8] = "8-way",
-+	[DIR4] = "4-way",
-+};
- 
  static int hid_gos_version_event(u8 *data)
  {
-@@ -84,6 +161,57 @@ static int hid_gos_mcu_id_event(struct command_report *cmd_rep)
- 	return 0;
+ 	struct version_report *ver_rep = (struct version_report *)data;
+@@ -204,6 +222,25 @@ static int hid_gos_gamepad_cfg_event(struct command_report *cmd_rep)
+ 	return ret;
  }
  
-+static int hid_gos_gamepad_cfg_event(struct command_report *cmd_rep)
++static int hid_gos_touchpad_event(struct command_report *cmd_rep)
 +{
 +	int ret = 0;
 +
 +	switch (cmd_rep->sub_cmd) {
-+	case FEATURE_GAMEPAD_MODE:
-+		drvdata.gp_mode = cmd_rep->data[0];
++	case CFG_LINUX_MODE:
++		drvdata.tp_linux_mode = cmd_rep->data[0];
 +		break;
-+	case FEATURE_AUTO_SLEEP_TIME:
-+		drvdata.gp_auto_sleep_time = cmd_rep->data[0];
-+		break;
-+	case FEATURE_IMU_BYPASS:
-+		drvdata.imu_bypass_en = cmd_rep->data[0];
-+		break;
-+	case FEATURE_RGB_ENABLE:
-+		drvdata.rgb_en = cmd_rep->data[0];
-+		break;
-+	case FEATURE_IMU_ENABLE:
-+		drvdata.imu_sensor_en = cmd_rep->data[0];
-+		break;
-+	case FEATURE_TOUCHPAD_ENABLE:
-+		drvdata.tp_en = cmd_rep->data[0];
-+		break;
-+	case FEATURE_OS_MODE:
-+		drvdata.os_mode = cmd_rep->data[0];
-+		break;
-+	case FEATURE_POLL_RATE:
-+		drvdata.gp_poll_rate = cmd_rep->data[0];
-+		break;
-+	case FEATURE_DPAD_MODE:
-+		drvdata.gp_dpad_mode = cmd_rep->data[0];
-+		break;
-+	case FEATURE_MOUSE_WHEEL_STEP:
-+		drvdata.mouse_step = cmd_rep->data[0];
++	case CFG_WINDOWS_MODE:
++		drvdata.tp_windows_mode = cmd_rep->data[0];
 +		break;
 +	default:
 +		ret = -EINVAL;
@@ -258,250 +164,104 @@ index 36cee6c3d4cc..076afdaa9628 100644
 +	return ret;
 +}
 +
-+static int hid_gos_set_event_return(struct command_report *cmd_rep)
-+{
-+	if (cmd_rep->data[0] != 0)
-+		return -EIO;
-+
-+	return 0;
-+}
-+
- static u8 get_endpoint_address(struct hid_device *hdev)
+ static int hid_gos_set_event_return(struct command_report *cmd_rep)
  {
- 	struct usb_interface *intf = to_usb_interface(hdev->dev.parent);
-@@ -120,6 +248,12 @@ static int hid_gos_raw_event(struct hid_device *hdev, struct hid_report *report,
- 	case GET_MCU_ID:
- 		ret = hid_gos_mcu_id_event(cmd_rep);
+ 	if (cmd_rep->data[0] != 0)
+@@ -251,7 +288,11 @@ static int hid_gos_raw_event(struct hid_device *hdev, struct hid_report *report,
+ 	case GET_GAMEPAD_CFG:
+ 		ret = hid_gos_gamepad_cfg_event(cmd_rep);
  		break;
-+	case GET_GAMEPAD_CFG:
-+		ret = hid_gos_gamepad_cfg_event(cmd_rep);
++	case GET_TP_PARAM:
++		ret = hid_gos_touchpad_event(cmd_rep);
 +		break;
-+	case SET_GAMEPAD_CFG:
-+		ret = hid_gos_set_event_return(cmd_rep);
-+		break;
+ 	case SET_GAMEPAD_CFG:
++	case SET_TP_PARAM:
+ 		ret = hid_gos_set_event_return(cmd_rep);
+ 		break;
  	default:
- 		ret = -EINVAL;
- 		break;
-@@ -177,17 +311,333 @@ static int mcu_property_out(struct hid_device *hdev, u8 command, u8 index,
- 	return ret;
+@@ -537,6 +578,95 @@ static ssize_t gamepad_property_options(struct device *dev,
+ 	return count;
  }
  
-+static ssize_t gamepad_property_store(struct device *dev,
-+				      struct device_attribute *attr,
-+				      const char *buf, size_t count,
-+				      enum feature_status_index index)
++static ssize_t touchpad_property_store(struct device *dev,
++				       struct device_attribute *attr,
++				       const char *buf, size_t count,
++				       enum touchpad_config_index index)
 +{
 +	size_t size = 1;
 +	u8 val = 0;
 +	int ret;
 +
 +	switch (index) {
-+	case FEATURE_GAMEPAD_MODE:
-+		ret = sysfs_match_string(gamepad_mode_text, buf);
++	case CFG_WINDOWS_MODE:
++		ret = sysfs_match_string(touchpad_mode_text, buf);
 +		if (ret < 0)
 +			return ret;
 +		val = ret;
 +		break;
-+	case FEATURE_AUTO_SLEEP_TIME:
-+		ret = kstrtou8(buf, 10, &val);
-+		if (ret)
-+			return ret;
-+
-+		if (val < 0 || val > 255)
-+			return -EINVAL;
-+		break;
-+	case FEATURE_IMU_ENABLE:
-+		ret = sysfs_match_string(feature_enabled_text, buf);
++	case CFG_LINUX_MODE:
++		ret = sysfs_match_string(touchpad_mode_text, buf);
 +		if (ret < 0)
 +			return ret;
 +		val = ret;
-+		break;
-+	case FEATURE_IMU_BYPASS:
-+		ret = sysfs_match_string(feature_enabled_text, buf);
-+		if (ret < 0)
-+			return ret;
-+		val = ret;
-+		break;
-+	case FEATURE_RGB_ENABLE:
-+		ret = sysfs_match_string(feature_enabled_text, buf);
-+		if (ret < 0)
-+			return ret;
-+		val = ret;
-+		break;
-+	case FEATURE_TOUCHPAD_ENABLE:
-+		ret = sysfs_match_string(feature_enabled_text, buf);
-+		if (ret < 0)
-+			return ret;
-+		val = ret;
-+		break;
-+	case FEATURE_OS_MODE:
-+		ret = sysfs_match_string(os_type_text, buf);
-+		if (ret < 0)
-+			return ret;
-+		val = ret;
-+		drvdata.os_mode = val;
-+		break;
-+	case FEATURE_POLL_RATE:
-+		ret = sysfs_match_string(poll_rate_text, buf);
-+		if (ret < 0)
-+			return ret;
-+		val = ret;
-+		break;
-+	case FEATURE_DPAD_MODE:
-+		ret = sysfs_match_string(dpad_mode_text, buf);
-+		if (ret < 0)
-+			return ret;
-+		val = ret;
-+		break;
-+	case FEATURE_MOUSE_WHEEL_STEP:
-+		ret = kstrtou8(buf, 10, &val);
-+		if (ret)
-+			return ret;
-+		if (val < 1 || val > 127)
-+			return -EINVAL;
 +		break;
 +	default:
 +		return -EINVAL;
 +	}
-+
 +	if (!val)
 +		size = 0;
 +
-+	ret = mcu_property_out(drvdata.hdev, SET_GAMEPAD_CFG, index, &val,
-+			       size);
++	ret = mcu_property_out(drvdata.hdev, SET_TP_PARAM, index, &val, size);
 +	if (ret < 0)
 +		return ret;
 +
 +	return count;
 +}
 +
-+static ssize_t gamepad_property_show(struct device *dev,
-+				     struct device_attribute *attr, char *buf,
-+				     enum feature_status_index index)
++static ssize_t touchpad_property_show(struct device *dev,
++				      struct device_attribute *attr, char *buf,
++				      enum touchpad_config_index index)
 +{
-+	size_t count = 0;
++	int ret = 0;
 +	u8 i;
 +
-+	count = mcu_property_out(drvdata.hdev, GET_GAMEPAD_CFG, index, 0, 0);
-+	if (count < 0)
-+		return count;
++	ret = mcu_property_out(drvdata.hdev, GET_TP_PARAM, index, 0, 0);
++	if (ret < 0)
++		return ret;
 +
 +	switch (index) {
-+	case FEATURE_GAMEPAD_MODE:
-+		i = drvdata.gp_mode;
-+		if (i >= ARRAY_SIZE(gamepad_mode_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", gamepad_mode_text[i]);
++	case CFG_WINDOWS_MODE:
++		i = drvdata.tp_windows_mode;
 +		break;
-+	case FEATURE_AUTO_SLEEP_TIME:
-+		count = sysfs_emit(buf, "%u\n", drvdata.gp_auto_sleep_time);
-+		break;
-+	case FEATURE_IMU_ENABLE:
-+		i = drvdata.imu_sensor_en;
-+		if (i >= ARRAY_SIZE(feature_enabled_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", feature_enabled_text[i]);
-+		break;
-+	case FEATURE_IMU_BYPASS:
-+		i = drvdata.imu_bypass_en;
-+		if (i >= ARRAY_SIZE(feature_enabled_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", feature_enabled_text[i]);
-+		break;
-+	case FEATURE_RGB_ENABLE:
-+		i = drvdata.rgb_en;
-+		if (i >= ARRAY_SIZE(feature_enabled_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", feature_enabled_text[i]);
-+		break;
-+	case FEATURE_TOUCHPAD_ENABLE:
-+		i = drvdata.tp_en;
-+		if (i >= ARRAY_SIZE(feature_enabled_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", feature_enabled_text[i]);
-+		break;
-+	case FEATURE_OS_MODE:
-+		i = drvdata.os_mode;
-+		if (i >= ARRAY_SIZE(os_type_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", os_type_text[i]);
-+		break;
-+	case FEATURE_POLL_RATE:
-+		i = drvdata.gp_poll_rate;
-+		if (i >= ARRAY_SIZE(poll_rate_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", poll_rate_text[i]);
-+		break;
-+	case FEATURE_DPAD_MODE:
-+		i = drvdata.gp_dpad_mode;
-+		if (i >= ARRAY_SIZE(dpad_mode_text))
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%s\n", dpad_mode_text[i]);
-+		break;
-+	case FEATURE_MOUSE_WHEEL_STEP:
-+		i = drvdata.mouse_step;
-+		if (i < 1 || i > 127)
-+			return -EINVAL;
-+		count = sysfs_emit(buf, "%u\n", i);
++	case CFG_LINUX_MODE:
++		i = drvdata.tp_linux_mode;
 +		break;
 +	default:
 +		return -EINVAL;
 +	}
 +
-+	return count;
++	if (i >= ARRAY_SIZE(touchpad_mode_text))
++		return -EINVAL;
++
++	return sysfs_emit(buf, "%s\n", touchpad_mode_text[i]);
 +}
 +
-+static ssize_t gamepad_property_options(struct device *dev,
-+					struct device_attribute *attr,
-+					char *buf,
-+					enum feature_status_index index)
++static ssize_t touchpad_property_options(struct device *dev,
++					 struct device_attribute *attr,
++					 char *buf,
++					 enum touchpad_config_index index)
 +{
 +	size_t count = 0;
 +	unsigned int i;
 +
 +	switch (index) {
-+	case FEATURE_GAMEPAD_MODE:
-+		for (i = 0; i < ARRAY_SIZE(gamepad_mode_text); i++) {
++	case CFG_WINDOWS_MODE:
++	case CFG_LINUX_MODE:
++		for (i = 0; i < ARRAY_SIZE(touchpad_mode_text); i++) {
 +			count += sysfs_emit_at(buf, count, "%s ",
-+					       gamepad_mode_text[i]);
++					       touchpad_mode_text[i]);
 +		}
 +		break;
-+	case FEATURE_AUTO_SLEEP_TIME:
-+		return sysfs_emit(buf, "0-255\n");
-+	case FEATURE_IMU_ENABLE:
-+		for (i = 0; i < ARRAY_SIZE(feature_enabled_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       feature_enabled_text[i]);
-+		}
-+		break;
-+	case FEATURE_IMU_BYPASS:
-+	case FEATURE_RGB_ENABLE:
-+	case FEATURE_TOUCHPAD_ENABLE:
-+		for (i = 0; i < ARRAY_SIZE(feature_enabled_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       feature_enabled_text[i]);
-+		}
-+		break;
-+	case FEATURE_OS_MODE:
-+		for (i = 0; i < ARRAY_SIZE(os_type_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       os_type_text[i]);
-+		}
-+		break;
-+	case FEATURE_POLL_RATE:
-+		for (i = 0; i < ARRAY_SIZE(poll_rate_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       poll_rate_text[i]);
-+		}
-+		break;
-+	case FEATURE_DPAD_MODE:
-+		for (i = 0; i < ARRAY_SIZE(dpad_mode_text); i++) {
-+			count += sysfs_emit_at(buf, count, "%s ",
-+					       dpad_mode_text[i]);
-+		}
-+		break;
-+	case FEATURE_MOUSE_WHEEL_STEP:
-+		return sysfs_emit(buf, "1-127\n");
 +	default:
 +		return count;
 +	}
@@ -515,209 +275,28 @@ index 36cee6c3d4cc..076afdaa9628 100644
  static ssize_t mcu_id_show(struct device *dev, struct device_attribute *attr,
  			   char *buf)
  {
- 	return sysfs_emit(buf, "%*phN\n", 12, &drvdata.mcu_id);
- }
+@@ -666,9 +796,21 @@ struct gos_cfg_attr touchpad_enabled = { FEATURE_TOUCHPAD_ENABLE };
+ LEGOS_DEVICE_ATTR_RW(touchpad_enabled, "enabled", index, gamepad);
+ static DEVICE_ATTR_RO_NAMED(touchpad_enabled_index, "enabled_index");
  
-+#define LEGOS_DEVICE_ATTR_RW(_name, _attrname, _rtype, _group)                 \
-+	static ssize_t _name##_store(struct device *dev,                       \
-+				     struct device_attribute *attr,            \
-+				     const char *buf, size_t count)            \
-+	{                                                                      \
-+		return _group##_property_store(dev, attr, buf, count,          \
-+					       _name.index);                   \
-+	}                                                                      \
-+	static ssize_t _name##_show(struct device *dev,                        \
-+				    struct device_attribute *attr, char *buf)  \
-+	{                                                                      \
-+		return _group##_property_show(dev, attr, buf, _name.index);    \
-+	}                                                                      \
-+	static ssize_t _name##_##_rtype##_show(                                \
-+		struct device *dev, struct device_attribute *attr, char *buf)  \
-+	{                                                                      \
-+		return _group##_property_options(dev, attr, buf, _name.index); \
-+	}                                                                      \
-+	static DEVICE_ATTR_RW_NAMED(_name, _attrname)
++struct gos_cfg_attr touchpad_linux_mode = { CFG_LINUX_MODE };
++LEGOS_DEVICE_ATTR_RW(touchpad_linux_mode, "linux_mode", index, touchpad);
++static DEVICE_ATTR_RO_NAMED(touchpad_linux_mode_index, "linux_mode_index");
 +
-+#define LEGOS_DEVICE_ATTR_RO(_name, _attrname, _group)                        \
-+	static ssize_t _name##_show(struct device *dev,                       \
-+				    struct device_attribute *attr, char *buf) \
-+	{                                                                     \
-+		return _group##_property_show(dev, attr, buf, _name.index);   \
-+	}                                                                     \
-+	static DEVICE_ATTR_RO_NAMED(_name, _attrname)
++struct gos_cfg_attr touchpad_windows_mode = { CFG_WINDOWS_MODE };
++LEGOS_DEVICE_ATTR_RW(touchpad_windows_mode, "windows_mode", index, touchpad);
++static DEVICE_ATTR_RO_NAMED(touchpad_windows_mode_index, "windows_mode_index");
 +
-+/* Gamepad */
-+struct gos_cfg_attr auto_sleep_time = { FEATURE_AUTO_SLEEP_TIME };
-+LEGOS_DEVICE_ATTR_RW(auto_sleep_time, "auto_sleep_time", range, gamepad);
-+static DEVICE_ATTR_RO(auto_sleep_time_range);
-+
-+struct gos_cfg_attr dpad_mode = { FEATURE_DPAD_MODE };
-+LEGOS_DEVICE_ATTR_RW(dpad_mode, "dpad_mode", index, gamepad);
-+static DEVICE_ATTR_RO(dpad_mode_index);
-+
-+struct gos_cfg_attr gamepad_mode = { FEATURE_GAMEPAD_MODE };
-+LEGOS_DEVICE_ATTR_RW(gamepad_mode, "mode", index, gamepad);
-+static DEVICE_ATTR_RO_NAMED(gamepad_mode_index, "mode_index");
-+
-+struct gos_cfg_attr gamepad_poll_rate = { FEATURE_POLL_RATE };
-+LEGOS_DEVICE_ATTR_RW(gamepad_poll_rate, "poll_rate", index, gamepad);
-+static DEVICE_ATTR_RO_NAMED(gamepad_poll_rate_index, "poll_rate_index");
-+
-+static struct attribute *legos_gamepad_attrs[] = {
-+	&dev_attr_auto_sleep_time.attr,
-+	&dev_attr_auto_sleep_time_range.attr,
-+	&dev_attr_dpad_mode.attr,
-+	&dev_attr_dpad_mode_index.attr,
-+	&dev_attr_gamepad_mode.attr,
-+	&dev_attr_gamepad_mode_index.attr,
-+	&dev_attr_gamepad_poll_rate.attr,
-+	&dev_attr_gamepad_poll_rate_index.attr,
-+	NULL,
-+};
-+
-+static const struct attribute_group gamepad_attr_group = {
-+	.name = "gamepad",
-+	.attrs = legos_gamepad_attrs,
-+};
-+
-+/* IMU */
-+struct gos_cfg_attr imu_bypass_enabled = { FEATURE_IMU_BYPASS };
-+LEGOS_DEVICE_ATTR_RW(imu_bypass_enabled, "bypass_enabled", index, gamepad);
-+static DEVICE_ATTR_RO_NAMED(imu_bypass_enabled_index, "bypass_enabled_index");
-+
-+struct gos_cfg_attr imu_sensor_enabled = { FEATURE_IMU_ENABLE };
-+LEGOS_DEVICE_ATTR_RW(imu_sensor_enabled, "sensor_enabled", index, gamepad);
-+static DEVICE_ATTR_RO_NAMED(imu_sensor_enabled_index, "sensor_enabled_index");
-+
-+static struct attribute *legos_imu_attrs[] = {
-+	&dev_attr_imu_bypass_enabled.attr,
-+	&dev_attr_imu_bypass_enabled_index.attr,
-+	&dev_attr_imu_sensor_enabled.attr,
-+	&dev_attr_imu_sensor_enabled_index.attr,
-+	NULL,
-+};
-+
-+static const struct attribute_group imu_attr_group = {
-+	.name = "imu",
-+	.attrs = legos_imu_attrs,
-+};
-+
- /* MCU */
- static DEVICE_ATTR_RO(mcu_id);
- 
-+struct gos_cfg_attr os_mode = { FEATURE_OS_MODE };
-+LEGOS_DEVICE_ATTR_RW(os_mode, "os_mode", index, gamepad);
-+static DEVICE_ATTR_RO(os_mode_index);
-+
- static struct attribute *legos_mcu_attrs[] = {
- 	&dev_attr_mcu_id.attr,
-+	&dev_attr_os_mode.attr,
-+	&dev_attr_os_mode_index.attr,
+ static struct attribute *legos_touchpad_attrs[] = {
+ 	&dev_attr_touchpad_enabled.attr,
+ 	&dev_attr_touchpad_enabled_index.attr,
++	&dev_attr_touchpad_linux_mode.attr,
++	&dev_attr_touchpad_linux_mode_index.attr,
++	&dev_attr_touchpad_windows_mode.attr,
++	&dev_attr_touchpad_windows_mode_index.attr,
  	NULL,
  };
  
-@@ -195,8 +645,44 @@ static const struct attribute_group mcu_attr_group = {
- 	.attrs = legos_mcu_attrs,
- };
- 
-+/* Mouse */
-+struct gos_cfg_attr mouse_wheel_step = { FEATURE_MOUSE_WHEEL_STEP };
-+LEGOS_DEVICE_ATTR_RW(mouse_wheel_step, "step", range, gamepad);
-+static DEVICE_ATTR_RO_NAMED(mouse_wheel_step_range, "step_range");
-+
-+static struct attribute *legos_mouse_attrs[] = {
-+	&dev_attr_mouse_wheel_step.attr,
-+	&dev_attr_mouse_wheel_step_range.attr,
-+	NULL,
-+};
-+
-+static const struct attribute_group mouse_attr_group = {
-+	.name = "mouse",
-+	.attrs = legos_mouse_attrs,
-+};
-+
-+/* Touchpad */
-+struct gos_cfg_attr touchpad_enabled = { FEATURE_TOUCHPAD_ENABLE };
-+LEGOS_DEVICE_ATTR_RW(touchpad_enabled, "enabled", index, gamepad);
-+static DEVICE_ATTR_RO_NAMED(touchpad_enabled_index, "enabled_index");
-+
-+static struct attribute *legos_touchpad_attrs[] = {
-+	&dev_attr_touchpad_enabled.attr,
-+	&dev_attr_touchpad_enabled_index.attr,
-+	NULL,
-+};
-+
-+static const struct attribute_group touchpad_attr_group = {
-+	.name = "touchpad",
-+	.attrs = legos_touchpad_attrs,
-+};
-+
- static const struct attribute_group *top_level_attr_groups[] = {
-+	&gamepad_attr_group,
-+	&imu_attr_group,
- 	&mcu_attr_group,
-+	&mouse_attr_group,
-+	&touchpad_attr_group,
- 	NULL,
- };
- 
-@@ -268,6 +754,27 @@ static void hid_gos_cfg_remove(struct hid_device *hdev)
- 	hid_set_drvdata(hdev, NULL);
- }
- 
-+static int hid_gos_cfg_reset_resume(struct hid_device *hdev)
-+{
-+	u8 os_mode = drvdata.os_mode;
-+	int ret;
-+
-+	ret = mcu_property_out(drvdata.hdev, SET_GAMEPAD_CFG, FEATURE_OS_MODE,
-+			       &os_mode, 1);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = mcu_property_out(drvdata.hdev, GET_GAMEPAD_CFG, FEATURE_OS_MODE, 0,
-+			       0);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (drvdata.os_mode != os_mode)
-+		return -ENODEV;
-+
-+	return 0;
-+}
-+
- static int hid_gos_probe(struct hid_device *hdev,
- 			 const struct hid_device_id *id)
- {
-@@ -326,6 +833,20 @@ static void hid_gos_remove(struct hid_device *hdev)
- 	}
- }
- 
-+static int hid_gos_reset_resume(struct hid_device *hdev)
-+{
-+	int ep = get_endpoint_address(hdev);
-+
-+	switch (ep) {
-+	case GO_S_CFG_INTF_IN:
-+		return hid_gos_cfg_reset_resume(hdev);
-+	default:
-+		break;
-+	}
-+
-+	return 0;
-+}
-+
- static const struct hid_device_id hid_gos_devices[] = {
- 	{ HID_USB_DEVICE(USB_VENDOR_ID_QHE,
- 			 USB_DEVICE_ID_LENOVO_LEGION_GO_S_XINPUT) },
-@@ -340,6 +861,7 @@ static struct hid_driver hid_lenovo_go_s = {
- 	.id_table = hid_gos_devices,
- 	.probe = hid_gos_probe,
- 	.remove = hid_gos_remove,
-+	.reset_resume = hid_gos_reset_resume,
- 	.raw_event = hid_gos_raw_event,
- };
- module_hid_driver(hid_lenovo_go_s);
 -- 
 2.51.2
 
