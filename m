@@ -1,46 +1,46 @@
-Return-Path: <linux-doc+bounces-70694-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70693-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3102CE5CAC
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 04:14:31 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 044D8CE5CC1
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 04:14:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 7C5D9300A9FD
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 03:14:15 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id C4BAC30155EF
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Dec 2025 03:14:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 974A2273803;
-	Mon, 29 Dec 2025 03:14:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5B79025782D;
+	Mon, 29 Dec 2025 03:14:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="V7SNNNpB"
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="xudHUjeP"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from out-173.mta0.migadu.com (out-173.mta0.migadu.com [91.218.175.173])
+Received: from out-174.mta0.migadu.com (out-174.mta0.migadu.com [91.218.175.174])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A799F23EA92
-	for <linux-doc@vger.kernel.org>; Mon, 29 Dec 2025 03:14:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0321A25A65B;
+	Mon, 29 Dec 2025 03:14:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1766978054; cv=none; b=TqsDZvE8ujSOuyEY1ax2jllcDGzuo1Vg+060Br5K9F40/+CwtVWV9jcUQTbjgIhk8dzwZSLJ575tMhXUse8LCoXIJe6MwHDZIFB7Kxc3mrbV46e+MLbYmZyK/Amg/Qp4QvULpQmU/QJmJ0C2gQFSjeMgs56Cx01KJkm76b7OFe0=
+	t=1766978049; cv=none; b=Num6ntAG0id4fQFagz53/xty1H0VPFoTmWEY2b4y3uZ25Xs8yCqRJ5thxAA/yQMVclmVFYdSUQbF2DFlc3mKKYgM6TemZxDDqUKcF7nwy0fUBQBqSFAgtjg7SC59YV8MqLeTDBbfFXCdQ9F3oOg4AjZC0YlAHdcgOdiIb5I0tlQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1766978054; c=relaxed/simple;
+	s=arc-20240116; t=1766978049; c=relaxed/simple;
 	bh=qBCFUDAWRsep9ypsogxegTTrnf54BXOIWdjTbE8EFCs=;
 	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=Y3FZeji5qDWmh9d382AUNLTuG3zz6JbTGIqeS+hlKx0RvjpQLew5KlkRu8/djV1LQscMmV1YnZDK0RBvfpPXmHFLoPVPmz8fOSXmtNrI4X+0X1+SbrAiQgDH7Q5eKgWC5MkO6cZmnAUPnqlJTriN65YeUj7VxbGYIM+FBQRIMdk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=V7SNNNpB; arc=none smtp.client-ip=91.218.175.173
+	 Message-Id:References:To; b=FUowl115DlhFrYFO4sYGLqFmP8ZBeJY+kPNSDLDHSu4mBbZ2gR4AOFj74QeTtV5z3fk1tgq1vjhWWN6dVOJbusPZ0JNQKST9a5zPufBZbePsoC38iA3N+mvHisjiq08R9cJcubpHVfVykMzibziNKpDjETf56zIloQKQW/wxsag=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=xudHUjeP; arc=none smtp.client-ip=91.218.175.174
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Content-Type: text/plain;
 	charset=us-ascii
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1766978038;
+	t=1766978044;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
 	bh=F1afDEBzhkrjAza00g4g2aJTxEIGJdJZw63+C1Fb5ZI=;
-	b=V7SNNNpBsYGA2qklZzdBaZNfC7/nBKX/4NyOPO1tnNJx5hQM9QLpkQX9kzLFRSuM3ibIwq
-	7jR2aveNyt5Zfsuz/R/iMbQL/x1sWvs2mbkhedncCx0OsNKVL/RASXUSpXQaMsdDanbQM/
-	J0REW/LMX1QgauBNDsImcrNeSpymDUQ=
+	b=xudHUjePDfaFRoveEwaIphF8mZs/R5mnH9f47udtH04DIRRrs8+LS6GS4z4/Dl/4eYgJsK
+	oBr6TOGzLIp7T/sxGOQwSW0OgPsC7SNoPYqwaW6LKziESfl/Vb8AEvdBWzNjrGqBebpb8i
+	DehsZ+lJojnmbdQbaGriVFYLNw3k1b4=
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
