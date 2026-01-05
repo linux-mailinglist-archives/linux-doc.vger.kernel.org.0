@@ -1,287 +1,212 @@
-Return-Path: <linux-doc+bounces-70945-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-70947-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96157CF1B92
-	for <lists+linux-doc@lfdr.de>; Mon, 05 Jan 2026 04:18:45 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 777B1CF1C52
+	for <lists+linux-doc@lfdr.de>; Mon, 05 Jan 2026 04:53:09 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 06DA530B40FF
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Jan 2026 03:14:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0651A30422B2
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Jan 2026 03:50:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 275EA322B90;
-	Mon,  5 Jan 2026 03:13:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC10A2C027E;
+	Mon,  5 Jan 2026 03:50:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="zqWVFkzm"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="ERHQUKba";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="r7tg849V"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout10.his.huawei.com (canpmsgout10.his.huawei.com [113.46.200.225])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 768F131ED86;
-	Mon,  5 Jan 2026 03:13:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.225
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA444315D3B
+	for <linux-doc@vger.kernel.org>; Mon,  5 Jan 2026 03:50:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767582826; cv=none; b=eq3Ghsrr9KLhMOCdZCXzXgK0M75CDqk4gzcgIdnfIgSBeYlsu4ZZPkB03Hy6M7E4xA8dXSEpSdXjhO5/nFZV9JQksi3i9l7nfoU6dZQ2E56+1SjV13mCebsgcYA2xZjMCaQUfiam13fIJ0DnkwW3a82tA9ELFTxxJ1awWeqoJxE=
+	t=1767585013; cv=none; b=JwnhYV2wJOgdGVF1Z0jPCUL2QtOaGGaksKIg7qWe87KCzx9qnIYtdsY8kmd9UYXX39U19GTpz+Z+qj2Zpl0Y4id5oTo6ZlHxfOp+XV+orY7bV6EekMp1kKE80cCCojBhVvpYRSyGcS7hEkvre89bbKEdGWVMgf6QL7APY3kQWwo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767582826; c=relaxed/simple;
-	bh=r2f9ZRHXir6J0QiWRdzlTsjFk5YyqX2HRdk8JvGrld8=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=o79vIrWjAWwtdLDwvRru2/uoFTi5gBG8KcLrua5nmKUEQgN7WSeMpPwntcpgdI/YNhgCb16qpFcO7TnGpRh79J1sWUcOttlTE6hsqBMFli6oDI5uERgVmfn5Sw/gaP5LiYFVmIhLawNCb1fZpyxW5Iq37Ja8urFop3SXStBnVdA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=zqWVFkzm; arc=none smtp.client-ip=113.46.200.225
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=lCjV1OtFHnHX37BXhN6xUDWMf6XUABuo00sFqzmQ8Jw=;
-	b=zqWVFkzmWrUy9bQg9604cOtucOhC8AYkWg7xtRIrRji02PRQqCxwQ0EfeML1Zl/X784hH/E01
-	ujn34wIpZ0pOtOgydYuYR+ZniyatnLziInm3V8zHvf1cpETTS02GVUTwDaeXDjM6frmHtDnV+pk
-	rYp70XSiimfWvlKMIqiirow=
-Received: from mail.maildlp.com (unknown [172.19.162.92])
-	by canpmsgout10.his.huawei.com (SkyGuard) with ESMTPS id 4dkznc5DNYz1K97s;
-	Mon,  5 Jan 2026 11:10:28 +0800 (CST)
-Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
-	by mail.maildlp.com (Postfix) with ESMTPS id B152140568;
-	Mon,  5 Jan 2026 11:13:40 +0800 (CST)
-Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
- kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.36; Mon, 5 Jan 2026 11:13:39 +0800
-From: Fan Gong <gongfan1@huawei.com>
-To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
-	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
-	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
-	<andrew+netdev@lunn.ch>, Markus Elfring <Markus.Elfring@web.de>, Pavan Chebbi
-	<pavan.chebbi@broadcom.com>, ALOK TIWARI <alok.a.tiwari@oracle.com>
-CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
-	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Shen Chenyang
-	<shenchenyang1@hisilicon.com>, Zhou Shuai <zhoushuai28@huawei.com>, Wu Like
-	<wulike1@huawei.com>, Shi Jing <shijing34@huawei.com>, Luo Yang
-	<luoyang82@h-partners.com>
-Subject: [PATCH net-next v08 9/9] hinic3: Add HW event handler
-Date: Mon, 5 Jan 2026 11:13:12 +0800
-Message-ID: <f68836913678c74733a669b62427e7483f27d5dc.1767495881.git.zhuyikai1@h-partners.com>
-X-Mailer: git-send-email 2.51.0.windows.1
-In-Reply-To: <cover.1767495881.git.zhuyikai1@h-partners.com>
-References: <cover.1767495881.git.zhuyikai1@h-partners.com>
+	s=arc-20240116; t=1767585013; c=relaxed/simple;
+	bh=nWDhnM5smOejtNjvCY8DuFynO6oN7w520hhjFNQ9W6s=;
+	h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=C/JFDiviBfQ9GCcQB689xkSGv1tfA7VMJ7ad/2i6eL96LBCabqFvTNh1ru/j1w+Xhq4Hlc9PdAQfVNoxFpndzdYeK+auN5iZD96YShO2Dl+ued9XilkU9cf9+A8cxhUR7oAWMdQ89gDRcP40c9iS1FUlfZ749OXcUKBB3X8l+4c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=ERHQUKba; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=r7tg849V; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1767585010;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PD0MEl6rVwz2bUrpGYdOAu4vaIcu3nhZz3+NE6MOYH8=;
+	b=ERHQUKbaL/jmJqvJd1Uy2ceQkAQU4i/KwpfbLhiV/CZF7FuplbrNaBZihJixfRsKskaad9
+	1jvZ8kW01IEToPLoyimN6i86kZ/FH3Z29Ou63ld/V10APcoG/5v3/fECbwgZmmhDGknOzy
+	tTz8ZluW1PSGUxnM9QQDI0XSmPiqxf8=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-13-4JzHzqs1PRaC2FzyzYI_8w-1; Sun, 04 Jan 2026 22:50:09 -0500
+X-MC-Unique: 4JzHzqs1PRaC2FzyzYI_8w-1
+X-Mimecast-MFC-AGG-ID: 4JzHzqs1PRaC2FzyzYI_8w_1767585009
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-4f4a5dba954so364231051cf.0
+        for <linux-doc@vger.kernel.org>; Sun, 04 Jan 2026 19:50:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1767585009; x=1768189809; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=PD0MEl6rVwz2bUrpGYdOAu4vaIcu3nhZz3+NE6MOYH8=;
+        b=r7tg849VtxiEz1alUCg8580Mw7c9KcF9LKwB3jRXqrYaTtJVSbeawh+q009wzS8a5b
+         r8Fw0e84ke0HPPb+5yefau1R9HHxqNsN2TW2u6uspuTUYuJT8B5RDbfilQy5UUOL1xug
+         TVSnvO8r5044GgQybCumZXFoAdWIvi1iivPWjMO1i6MnAGGBc0//ijgicjzK4nWAX5m3
+         IcHfe5AmUJfs3YTKro2kgsR7HnWiAbtKl+zPb5va49qmpkG9KAQzOdqdjHQzwM8rN6fR
+         Ay6naNcrv6/1wqq0APpbNezJtj2M/ggUVjynh9MGhlICvu4CovVxFx3F0IWiQ+7aMpDh
+         77pA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767585009; x=1768189809;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=PD0MEl6rVwz2bUrpGYdOAu4vaIcu3nhZz3+NE6MOYH8=;
+        b=Kh7E2Ha5JtCvyLi4qLWfaZS8dX+KQ48Mr+6r75C5oWLPhqzxtb14qt14XHubKEWOdZ
+         8cCMgJjzLVaCGYyS4UD8cavoIx2LpblZDvlfheDQlXV/YfGhejTFZwCzJHQtKm6rh2sR
+         4Aibmk1Xf7oBMA2MoJU5JEZHIgbRjn8hReRubtfrL2XCi7F871urW7YzEvABfm3+CgLd
+         QHMn4tuIbyvxH+4+MBt777HUA9HZvbiV7YBd3gwaDAaY7rIEifhb3d6tHoQwIhiAQ5CH
+         XfS14zG2HNLl40jVZn43wYkF++ac52JTMGruuBpeV1EiTK7fjdd7mHh/zDt+IdvAdOko
+         cCEw==
+X-Forwarded-Encrypted: i=1; AJvYcCWLtMaTUYAt7Z85KW0GX20XZ+FSw71UT+f4stzM918pPQgDUGH8B/4+2VUZjBgoFi3BHssWaWfQatQ=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwzBZswiBBleTTXROMDNLqM02UQcfjY5e5Id9C0tWiReedWN1rd
+	cYZq2DH1IxskqVAivanj/a8iurQga3DEAf3XfcVrcCRNfMiZ77ayKRorB/J8ZugeaRantI92aPq
+	qkTnCTgBJF54lmB0rVgUppEKzemq9ILsrSyxRRl3u+6LR1SAOmhSG8P96UZAIOg==
+X-Gm-Gg: AY/fxX61DHAOpbyrMLlJ7cQDnK29z+GB948F6le2EB+hhb7raHA+46HcIBhU2FoUYtx
+	Cu0F0KEtdhdNYGbrGLrNzBxoBHRRnTXUceYvvsVoX2ttfrmqPFx+ky9D8Bwg9ZAkbrUaeUteAeu
+	KANNi+SxW9VqBMsiB/YauOq4nscXkiRVR6YB0KCJn4IYVUA9DQa0gLWi9+iYmtv0nCIofCpQYem
+	wschaCrlwWG1KufJbwMPdg0+dW3yBRMnLCLbNBg7Qhr0+0zXIeUKCbLuchP6cgPqcPlXUg7mPzB
+	++cbshP0kI7Jr/mix5oQVMicdeyX2gegzPaWIK9VFmrpNHp/O01CUbuwrmpw2XfWcEf2do+i0C1
+	1hGdHP/NmriFotbyNHXO1CX/QOVd7TPm14Hro7rEhN+275PlzsUDcMsC6
+X-Received: by 2002:ac8:5714:0:b0:4ed:b06b:d67d with SMTP id d75a77b69052e-4f4abd79a65mr582521781cf.45.1767585008722;
+        Sun, 04 Jan 2026 19:50:08 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEkwS8SyehM2DllDrPuVXzQrdiIA0f2H+sYM9WpUbWfA0eRV5XDIe78w7mLls06KQ90bmXcCQ==
+X-Received: by 2002:ac8:5714:0:b0:4ed:b06b:d67d with SMTP id d75a77b69052e-4f4abd79a65mr582521611cf.45.1767585008261;
+        Sun, 04 Jan 2026 19:50:08 -0800 (PST)
+Received: from ?IPV6:2601:188:c102:b180:1f8b:71d0:77b1:1f6e? ([2601:188:c102:b180:1f8b:71d0:77b1:1f6e])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c0973f28b1sm3638887485a.42.2026.01.04.19.50.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 04 Jan 2026 19:50:07 -0800 (PST)
+From: Waiman Long <llong@redhat.com>
+X-Google-Original-From: Waiman Long <longman@redhat.com>
+Message-ID: <ec6e1ee4-b52e-417f-9413-3dfca0ec8eb3@redhat.com>
+Date: Sun, 4 Jan 2026 22:50:06 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [cgroup/for-6.20 PATCH v2 2/4] cgroup/cpuset: Consistently
+ compute effective_xcpus in update_cpumasks_hier()
+To: Chen Ridong <chenridong@huaweicloud.com>, Waiman Long <llong@redhat.com>,
+ Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
+ =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>
+Cc: linux-kernel@vger.kernel.org, cgroups@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
+ Sun Shaojie <sunshaojie@kylinos.cn>
+References: <20260101191558.434446-1-longman@redhat.com>
+ <20260101191558.434446-3-longman@redhat.com>
+ <758f42df-52c2-4660-8ef7-1cbacb9323d2@huaweicloud.com>
+ <f8539426-92b0-42f3-99c4-70962c2db96d@redhat.com>
+ <c17051c3-82ac-4ca5-8823-33327cadd073@huaweicloud.com>
+Content-Language: en-US
+In-Reply-To: <c17051c3-82ac-4ca5-8823-33327cadd073@huaweicloud.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: kwepems200001.china.huawei.com (7.221.188.67) To
- kwepemf100013.china.huawei.com (7.202.181.12)
 
-Add HINIC3_INIT_UP flags to trace netdev open status.
-Add port module event handler.
-Add link status event type(FAULT, PCIE link down, heart lost, mgmt
-watchdog).
+On 1/4/26 8:15 PM, Chen Ridong wrote:
+>
+> On 2026/1/5 5:25, Waiman Long wrote:
+>> On 1/3/26 9:48 PM, Chen Ridong wrote:
+>>> On 2026/1/2 3:15, Waiman Long wrote:
+>>>> Since commit f62a5d39368e ("cgroup/cpuset: Remove remote_partition_check()
+>>>> & make update_cpumasks_hier() handle remote partition"), the
+>>>> compute_effective_exclusive_cpumask() helper was extended to
+>>>> strip exclusive CPUs from siblings when computing effective_xcpus
+>>>> (cpuset.cpus.exclusive.effective). This helper was later renamed to
+>>>> compute_excpus() in commit 86bbbd1f33ab ("cpuset: Refactor exclusive
+>>>> CPU mask computation logic").
+>>>>
+>>>> This helper is supposed to be used consistently to compute
+>>>> effective_xcpus. However, there is an exception within the callback
+>>>> critical section in update_cpumasks_hier() when exclusive_cpus of a
+>>>> valid partition root is empty. This can cause effective_xcpus value to
+>>>> differ depending on where exactly it is last computed. Fix this by using
+>>>> compute_excpus() in this case to give a consistent result.
+>>>>
+>>>> Signed-off-by: Waiman Long <longman@redhat.com>
+>>>> ---
+>>>>    kernel/cgroup/cpuset.c | 14 +++++---------
+>>>>    1 file changed, 5 insertions(+), 9 deletions(-)
+>>>>
+>>>> diff --git a/kernel/cgroup/cpuset.c b/kernel/cgroup/cpuset.c
+>>>> index da2b3b51630e..37d118a9ad4d 100644
+>>>> --- a/kernel/cgroup/cpuset.c
+>>>> +++ b/kernel/cgroup/cpuset.c
+>>>> @@ -2168,17 +2168,13 @@ static void update_cpumasks_hier(struct cpuset *cs, struct tmpmasks *tmp,
+>>>>            spin_lock_irq(&callback_lock);
+>>>>            cpumask_copy(cp->effective_cpus, tmp->new_cpus);
+>>>>            cp->partition_root_state = new_prs;
+>>>> -        if (!cpumask_empty(cp->exclusive_cpus) && (cp != cs))
+>>>> -            compute_excpus(cp, cp->effective_xcpus);
+>>>> -
+>>>>            /*
+>>>> -         * Make sure effective_xcpus is properly set for a valid
+>>>> -         * partition root.
+>>>> +         * Need to compute effective_xcpus if either exclusive_cpus
+>>>> +         * is non-empty or it is a valid partition root.
+>>>>             */
+>>>> -        if ((new_prs > 0) && cpumask_empty(cp->exclusive_cpus))
+>>>> -            cpumask_and(cp->effective_xcpus,
+>>>> -                    cp->cpus_allowed, parent->effective_xcpus);
+>>>> -        else if (new_prs < 0)
+>>>> +        if ((new_prs > 0) || !cpumask_empty(cp->exclusive_cpus))
+>>>> +            compute_excpus(cp, cp->effective_xcpus);
+>>>> +        if (new_prs < 0)
+>>>>                reset_partition_data(cp);
+>>>>            spin_unlock_irq(&callback_lock);
+>>>>    
+>>> The code resets partition data only for new_prs < 0. My understanding is that a partition is invalid
+>>> when new_prs <= 0. Shouldn't reset_partition_data() also be called when new_prs = 0? Is there a
+>>> specific reason to skip the reset in that case?
+>> update_cpumasks_hier() is called when changes in a cpuset or hotplug affects other cpusets in the
+>> hierarchy. With respect to changes in partition state, it is either from valid to invalid or vice
+>> versa. It will not change from a valid partition to member. The only way new_prs = 0 is when old_prs
+>> = 0. Even if the affected cpuset is processed again in update_cpumask_hier(), any state change from
+>> valid partition to member (update_prstate()), reset_partition_data() should have been called there.
+>> That is why we only care about when new_prs != 0.
+>>
+> Thank you for your patience.
+>
+>> The code isn't wrong here. However I can change the condition to (new_prs <= 0) if it makes it
+>> easier to understand.
+>>
+> I agree there's nothing wrong with the current logic. However, for clarity, I suggest changing the
+> condition to (new_prs <= 0). This allows the function's logic to be fully self-consistent and
+> focused on a single responsibility. This approach would allow us to simplify the code to:
+>
+> 	if (new_prs > 0)
+> 		compute_excpus(cp, cp->effective_xcpus);
+> 	else
+> 		reset_partition_data(cp);
+>
+> Since reset_partition_data() already handles cases whether cp->exclusive_cpus is empty or not, this
+> implementation would be more concise while correctly covering all scenarios.
 
-Co-developed-by: Zhu Yikai <zhuyikai1@h-partners.com>
-Signed-off-by: Zhu Yikai <zhuyikai1@h-partners.com>
-Signed-off-by: Fan Gong <gongfan1@huawei.com>
----
- .../net/ethernet/huawei/hinic3/hinic3_hwdev.h |  9 ++++
- .../net/ethernet/huawei/hinic3/hinic3_irq.c   |  3 +-
- .../net/ethernet/huawei/hinic3/hinic3_main.c  | 50 +++++++++++++++++++
- .../huawei/hinic3/hinic3_netdev_ops.c         | 12 +++++
- .../ethernet/huawei/hinic3/hinic3_nic_cfg.h   | 18 +++++++
- .../ethernet/huawei/hinic3/hinic3_nic_dev.h   |  1 +
- 6 files changed, 92 insertions(+), 1 deletion(-)
+effective_xcpus should be set when exclusive_cpus is not empty or when 
+the cpuset is a valid partition root. So just checking new_prs for 
+compute_excpus() is not enough.
 
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.h b/drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.h
-index 58bc561f95b3..9686c2600b46 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.h
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_hwdev.h
-@@ -17,6 +17,15 @@ enum hinic3_event_service_type {
- 	HINIC3_EVENT_SRV_NIC  = 1
- };
- 
-+enum hinic3_comm_event_type {
-+	HINIC3_COMM_EVENT_PCIE_LINK_DOWN = 0,
-+	HINIC3_COMM_EVENT_HEART_LOST = 1,
-+	HINIC3_COMM_EVENT_FAULT = 2,
-+	HINIC3_COMM_EVENT_SRIOV_STATE_CHANGE = 3,
-+	HINIC3_COMM_EVENT_CARD_REMOVE = 4,
-+	HINIC3_COMM_EVENT_MGMT_WATCHDOG = 5,
-+};
-+
- enum hinic3_fault_err_level {
- 	HINIC3_FAULT_LEVEL_SERIOUS_FLR = 3,
- };
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-index 604e09812977..8a47320ffd3f 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_irq.c
-@@ -19,7 +19,8 @@ static void hinic3_net_dim(struct hinic3_nic_dev *nic_dev,
- 	struct hinic3_rxq *rxq = irq_cfg->rxq;
- 	struct dim_sample sample = {};
- 
--	if (!nic_dev->adaptive_rx_coal)
-+	if (!test_bit(HINIC3_INTF_UP, &nic_dev->flags) ||
-+	    !nic_dev->adaptive_rx_coal)
- 		return;
- 
- 	dim_update_sample(irq_cfg->total_events, rxq->rxq_stats.packets,
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_main.c b/drivers/net/ethernet/huawei/hinic3/hinic3_main.c
-index 1308653819ef..8e876aeb1001 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_main.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_main.c
-@@ -331,6 +331,44 @@ static void hinic3_link_status_change(struct net_device *netdev,
- 	}
- }
- 
-+static void hinic3_port_module_event_handler(struct net_device *netdev,
-+					     struct hinic3_event_info *event)
-+{
-+	const char *g_hinic3_module_link_err[LINK_ERR_NUM] = {
-+		"Unrecognized module"
-+	};
-+	struct hinic3_port_module_event *module_event;
-+	enum port_module_event_type type;
-+	enum link_err_type err_type;
-+
-+	module_event = (struct hinic3_port_module_event *)event->event_data;
-+	type = module_event->type;
-+	err_type = module_event->err_type;
-+
-+	switch (type) {
-+	case HINIC3_PORT_MODULE_CABLE_PLUGGED:
-+	case HINIC3_PORT_MODULE_CABLE_UNPLUGGED:
-+		netdev_info(netdev, "Port module event: Cable %s\n",
-+			    type == HINIC3_PORT_MODULE_CABLE_PLUGGED ?
-+			    "plugged" : "unplugged");
-+		break;
-+	case HINIC3_PORT_MODULE_LINK_ERR:
-+		if (err_type >= LINK_ERR_NUM) {
-+			netdev_info(netdev, "Link failed, Unknown error type: 0x%x\n",
-+				    err_type);
-+		} else {
-+			netdev_info(netdev,
-+				    "Link failed, error type: 0x%x: %s\n",
-+				    err_type,
-+				    g_hinic3_module_link_err[err_type]);
-+		}
-+		break;
-+	default:
-+		netdev_err(netdev, "Unknown port module type %d\n", type);
-+		break;
-+	}
-+}
-+
- static void hinic3_nic_event(struct auxiliary_device *adev,
- 			     struct hinic3_event_info *event)
- {
-@@ -344,8 +382,20 @@ static void hinic3_nic_event(struct auxiliary_device *adev,
- 				   HINIC3_NIC_EVENT_LINK_UP):
- 		hinic3_link_status_change(netdev, true);
- 		break;
-+	case HINIC3_SRV_EVENT_TYPE(HINIC3_EVENT_SRV_NIC,
-+				   HINIC3_NIC_EVENT_PORT_MODULE_EVENT):
-+		hinic3_port_module_event_handler(netdev, event);
-+		break;
- 	case HINIC3_SRV_EVENT_TYPE(HINIC3_EVENT_SRV_NIC,
- 				   HINIC3_NIC_EVENT_LINK_DOWN):
-+	case HINIC3_SRV_EVENT_TYPE(HINIC3_EVENT_SRV_COMM,
-+				   HINIC3_COMM_EVENT_FAULT):
-+	case HINIC3_SRV_EVENT_TYPE(HINIC3_EVENT_SRV_COMM,
-+				   HINIC3_COMM_EVENT_PCIE_LINK_DOWN):
-+	case HINIC3_SRV_EVENT_TYPE(HINIC3_EVENT_SRV_COMM,
-+				   HINIC3_COMM_EVENT_HEART_LOST):
-+	case HINIC3_SRV_EVENT_TYPE(HINIC3_EVENT_SRV_COMM,
-+				   HINIC3_COMM_EVENT_MGMT_WATCHDOG):
- 		hinic3_link_status_change(netdev, false);
- 		break;
- 	default:
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c b/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
-index 7f855218fb72..9ca60c691ae6 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_netdev_ops.c
-@@ -435,6 +435,11 @@ static int hinic3_open(struct net_device *netdev)
- 	struct hinic3_dyna_qp_params qp_params;
- 	int err;
- 
-+	if (test_bit(HINIC3_INTF_UP, &nic_dev->flags)) {
-+		netdev_dbg(netdev, "Netdev already open, do nothing\n");
-+		return 0;
-+	}
-+
- 	err = hinic3_init_nicio_res(nic_dev);
- 	if (err) {
- 		netdev_err(netdev, "Failed to init nicio resources\n");
-@@ -462,6 +467,8 @@ static int hinic3_open(struct net_device *netdev)
- 	if (err)
- 		goto err_close_channel;
- 
-+	set_bit(HINIC3_INTF_UP, &nic_dev->flags);
-+
- 	return 0;
- 
- err_close_channel:
-@@ -482,6 +489,11 @@ static int hinic3_close(struct net_device *netdev)
- 	struct hinic3_nic_dev *nic_dev = netdev_priv(netdev);
- 	struct hinic3_dyna_qp_params qp_params;
- 
-+	if (!test_and_clear_bit(HINIC3_INTF_UP, &nic_dev->flags)) {
-+		netdev_dbg(netdev, "Netdev already close, do nothing\n");
-+		return 0;
-+	}
-+
- 	hinic3_vport_down(netdev);
- 	hinic3_close_channel(netdev);
- 	hinic3_uninit_qps(nic_dev, &qp_params);
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.h b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.h
-index f83913e74cb5..c32eaa886e17 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.h
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_cfg.h
-@@ -22,6 +22,7 @@ struct hinic3_nic_dev;
- enum hinic3_nic_event_type {
- 	HINIC3_NIC_EVENT_LINK_DOWN = 0,
- 	HINIC3_NIC_EVENT_LINK_UP   = 1,
-+	HINIC3_NIC_EVENT_PORT_MODULE_EVENT = 2,
- };
- 
- struct hinic3_sq_attr {
-@@ -51,6 +52,23 @@ struct mag_cmd_set_port_enable {
- 	u8                   rsvd1[3];
- };
- 
-+enum link_err_type {
-+	LINK_ERR_MODULE_UNRECOGENIZED,
-+	LINK_ERR_NUM,
-+};
-+
-+enum port_module_event_type {
-+	HINIC3_PORT_MODULE_CABLE_PLUGGED,
-+	HINIC3_PORT_MODULE_CABLE_UNPLUGGED,
-+	HINIC3_PORT_MODULE_LINK_ERR,
-+	HINIC3_PORT_MODULE_MAX_EVENT,
-+};
-+
-+struct hinic3_port_module_event {
-+	enum port_module_event_type type;
-+	enum link_err_type          err_type;
-+};
-+
- int hinic3_get_nic_feature_from_hw(struct hinic3_nic_dev *nic_dev);
- int hinic3_set_nic_feature_to_hw(struct hinic3_nic_dev *nic_dev);
- bool hinic3_test_support(struct hinic3_nic_dev *nic_dev,
-diff --git a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_dev.h b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_dev.h
-index 9bd46541b3e3..29189241f446 100644
---- a/drivers/net/ethernet/huawei/hinic3/hinic3_nic_dev.h
-+++ b/drivers/net/ethernet/huawei/hinic3/hinic3_nic_dev.h
-@@ -16,6 +16,7 @@
- 	(VLAN_N_VID / HINIC3_VLAN_BITMAP_BYTE_SIZE(nic_dev))
- 
- enum hinic3_flags {
-+	HINIC3_INTF_UP,
- 	HINIC3_MAC_FILTER_CHANGED,
- 	HINIC3_RSS_ENABLE,
- 	HINIC3_UPDATE_MAC_FILTER,
--- 
-2.43.0
+Cheers,
+Longman
+
+>
 
 
