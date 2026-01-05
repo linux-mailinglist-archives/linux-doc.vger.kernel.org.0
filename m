@@ -1,251 +1,154 @@
-Return-Path: <linux-doc+bounces-71043-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71047-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5364ECF856C
-	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 13:36:54 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B755CF8C12
+	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 15:23:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D9BCF30704C9
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 12:27:20 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 97F5F3009237
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 14:23:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4A39023EA86;
-	Tue,  6 Jan 2026 12:27:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 478053126B8;
+	Tue,  6 Jan 2026 14:23:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FiohRHXn"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="fHSIUGk4"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C8C71624C5;
-	Tue,  6 Jan 2026 12:27:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB07929AB00
+	for <linux-doc@vger.kernel.org>; Tue,  6 Jan 2026 14:23:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767702440; cv=none; b=gKVbV52hFxZdhMaKcGgnZ+ncJ+9bUGk3jEGHmDz82IzxFcH+iozThvIB/SrOmPmgMriTXl5BksL1DJWWYh5ZtTQRdtBrh0cl72hVPrW8w4O9UUSAg3G1AJ0FqnOm96H1Jmxvoj/mK8Dm0epD+rPl/vBoHYMgH3Ts+dL++dYA6nM=
+	t=1767709425; cv=none; b=g4HdX4yWz1gtOG2M3fqrS7bTboHQ4ntpaSoS5eKSpHWlXjct+nCJyeKMs5TPYLL7cBF3dAr4KpxRDCSImjWEo4wRKT0xmcWwCvMniTVccszsLOys3XyozlK5eLmeSSwa4oUbAeEj0+DrKvAoipLP9e/khps8xDVMZY0mqKbryPo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767702440; c=relaxed/simple;
-	bh=0g0q3+yeUhWNl+UuUZgUuMzE5sKCflZGQ0dod3qEcuM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=emX5rO3aa/So9qBi2ZHo/QroufO1laaE8ijN8V3eikzduDmNxOacJMH9ZtOGCGbVqxV8+9nGwVNj6Zx0GBLzKmFkuWB9po6sPoGVZIqmAApqRctUvcPGyScmQhpEEnKSXiv9aGfvBH+MJ97pvHg/YYPm2Oh/pwymb8JVbDiLdC0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FiohRHXn; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E345C116C6;
-	Tue,  6 Jan 2026 12:27:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767702439;
-	bh=0g0q3+yeUhWNl+UuUZgUuMzE5sKCflZGQ0dod3qEcuM=;
-	h=From:To:Cc:Subject:Date:From;
-	b=FiohRHXn3sEIjh0qmA8patOEkRjPK+inXS2P0IhbnxkA9nJcHEOmdpSHsSkhG9AUY
-	 wvyIZZjYXjJWjp5LsSXNUG+udXd92lxSbaW2lkXkpycQ6Sd77QaZBSzB6NMk+YbScP
-	 8REm3iea/Ug/7tTn4USDnE0ryqihmpquFMmssNlBg+wyi4tQXIDsNTQjSNxgl95ucE
-	 s9/9S3DM3dX3gaRstRb94UDl2eHLh42Q/3PdP5GizRivp2TZ0H/mz7Y0WZiqIR9NIk
-	 EvMMuvK1QHZW0LoOBz5O10PoBgu6vLDE9x40euDRwHimLz7T2XGmTtt8wTpd/9ygdK
-	 hheXKXjyAgUPw==
-From: "Rafael J. Wysocki" <rafael@kernel.org>
-To: Linux ACPI <linux-acpi@vger.kernel.org>
-Cc: LKML <linux-kernel@vger.kernel.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bjorn Helgaas <helgaas@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Hans de Goede <hansg@kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Zhang Rui <rui.zhang@intel.com>, Armin Wolf <w_armin@gmx.de>,
- Danilo Krummrich <dakr@kernel.org>,
- Ilpo Jarvinen <ilpo.jarvinen@linux.intel.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Randy Dunlap <rdunlap@infradead.org>
-Subject:
- [PATCH v2] ACPI: Documentation: driver-api: Disapprove of using ACPI drivers
-Date: Tue, 06 Jan 2026 13:27:14 +0100
-Message-ID: <2396510.ElGaqSPkdT@rafael.j.wysocki>
-Organization: Linux Kernel Development
+	s=arc-20240116; t=1767709425; c=relaxed/simple;
+	bh=lVULV5GfaJFN2tASGfIP17U8gJhLLwXEwGtmS7IVzcI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ip/JMAM2pyp+hkjwazbz8MwUHnLCyDuhdG0hV2cTp1wPOB0K4RrW6WcnCopbpErmMZ0b/AnZgZQ4lp1S9ionTeih1qVQUHCeTs3664lPjvAl7a9c0YQwGrDHsrKRbmZqnY62tbHklDunilk4ID88haX3tL2RfVaEogzz74itzvM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=fHSIUGk4; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1767709422;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=0OqzwyCKSkjy5BfIhkLbUQnq0t0kB+MbQfPUkbaaRNY=;
+	b=fHSIUGk4BKXndz1eg0EM8y8nMKa7oKoUmJJ956M9v+F0TR7eK1X/I34i+rBiStORoIPT/l
+	U3C7I7WrqPl7FfY9PdhA2eJKeydiTVX21gRuUhSiCKYejAmv7H/YsVHM8tTHe7N4nWaJJp
+	Xwta/v41UJK0lfHGkHBk5W5QLLAE6hE=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-119-bni8fjkMOieXIdoRKDxuwg-1; Tue,
+ 06 Jan 2026 09:23:39 -0500
+X-MC-Unique: bni8fjkMOieXIdoRKDxuwg-1
+X-Mimecast-MFC-AGG-ID: bni8fjkMOieXIdoRKDxuwg_1767709416
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 343971955F3E;
+	Tue,  6 Jan 2026 14:23:32 +0000 (UTC)
+Received: from localhost (unknown [10.2.16.158])
+	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id DB52419560AB;
+	Tue,  6 Jan 2026 14:23:29 +0000 (UTC)
+Date: Mon, 5 Jan 2026 13:19:39 -0500
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: linux-kernel@vger.kernel.org, Cong Wang <xiyou.wangcong@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Olivia Mackall <olivia@selenic.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Jason Wang <jasowang@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Stefano Garzarella <sgarzare@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>, Petr Tesarik <ptesarik@suse.com>,
+	Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Bartosz Golaszewski <brgl@kernel.org>, linux-doc@vger.kernel.org,
+	linux-crypto@vger.kernel.org, virtualization@lists.linux.dev,
+	linux-scsi@vger.kernel.org, iommu@lists.linux.dev,
+	kvm@vger.kernel.org, netdev@vger.kernel.org
+Subject: Re: [PATCH v2 10/15] virtio_scsi: fix DMA cacheline issues for events
+Message-ID: <20260105181939.GA59391@fedora>
+References: <cover.1767601130.git.mst@redhat.com>
+ <8801aeef7576a155299f19b6887682dd3a272aba.1767601130.git.mst@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="UTF-8"
-
-From: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-
-Sadly, there is quite a bit of technical debt related to the
-kernel's ACPI support subsystem and one of the most significant
-pieces of it is the existence and use of ACPI drivers represented
-by struct acpi_driver objects.
-
-Those drivers are bound directly to struct acpi_device objects, also
-referred to as "ACPI device nodes", representing device objects in the
-ACPI namespace defined as:
-
- A hierarchical tree structure in OS-controlled memory that contains
- named objects. These objects may be data objects, control method
- objects, bus/device package objects, and so on.
-
-according to the ACPI specification [1].
-
-The above definition implies, although rather indirectly, that the
-objects in question don't really represent hardware.  They are just
-"device package objects" containing some information on the devices
-present in the given platform that is known to the platform firmware.
-
-Although the platform firmware can be the only source of information on
-some devices, the information provided by it alone may be insufficient
-for device enumeration in general.  If that is the case, binding a
-driver directly to a given ACPI device node clearly doesn't make sense.
-If the device in question is enumerated through a hardware interface, it
-will be represented by a device object matching that interface, like
-a struct pci_dev, and the ACPI device node corresponding to it will be
-treated as its "ACPI companions" whose role is to amend the "native"
-enumeratiom mechanism.
-
-For the sake of consistency and confusion avoidance, it is better to
-treat ACPI device nodes in general as ACPI companions of other device
-objects representing hardware.  In some cases though it appeared easier
-to take a shortcut and use an ACPI driver binding directly to an ACPI
-device node.  Moreover, there were corner cases in which that was the
-only choice, but they all have been addressed now.
-
-In all cases in which an ACPI driver might be used, the ACPI device
-node it might bind to is an ACPI companion of another device object
-representing a piece of hardware.  It is thus better to use a driver
-binding to the latter than to use an ACPI driver and leave the other
-device object alone, not just because doing so is more consistent and
-less confusing, but also because using ACPI drivers may lead to
-potential functional deficiencies, like possible ordering issues
-related to power management.
-
-Unfortunately, there are quite a few ACPI drivers in use and, as a rule,
-they bind to ACPI device nodes that are ACPI companions of platform
-devices, so in fact they play the role of platform drivers although in
-a kind of convoluted way.  An effort has been under way to replace them
-with platform drivers, which is relatively straightforward in the vast
-majority of cases, but it has not been pursued very aggressively so far,
-mostly due to the existence of the corner cases mentioned above.
-However, since those corner cases are gone now, it makes sense to spend
-more time on driver conversions with the ultimate goal to get rid of
-struct acpi_driver and the related code from the kernel.
-
-To that end, add a document explaining why using ACPI drivers is not
-a good idea, so it need not be explained from scratch on every attempt
-to convert an ACPI driver to a platform one.
-
-Link: https://uefi.org/specs/ACPI/6.6/02_Definition_of_Terms.html#term-ACPI-Namespace [1]
-Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Reviewed-by: Armin Wolf <W_Armin@gmx.de>
----
-
-v1 -> v2:
-   * Fixed a typo in the changelog (Andy).
-   * Addressed two review comments from Randy ("is questionable either" ->
-     "is also questionable" and "eg." -> "e.g.").
-   * Added R-bys from Andy and Armin.
-
----
-
-Although this patch can be applied independently, it actually depends on
-some ACPI changes in linux-next and on
-
-https://lore.kernel.org/linux-acpi/12824456.O9o76ZdvQC@rafael.j.wysocki/
-
-so it is better to handle it along with that material.
-
----
- Documentation/driver-api/acpi/acpi-drivers.rst |   80 +++++++++++++++++++++++++
- Documentation/driver-api/acpi/index.rst        |    1 
- 2 files changed, 81 insertions(+)
-
---- /dev/null
-+++ b/Documentation/driver-api/acpi/acpi-drivers.rst
-@@ -0,0 +1,80 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: <isonum.txt>
-+
-+=========================================
-+Why using ACPI drivers is not a good idea
-+=========================================
-+
-+:Copyright: |copy| 2026, Intel Corporation
-+
-+:Author: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-+
-+Even though binding drivers directly to struct acpi_device objects, also
-+referred to as "ACPI device nodes", allows basic functionality to be provided
-+at least in some cases, there are problems with it, related to general
-+consistency, sysfs layout, power management operation ordering, and code
-+cleanliness.
-+
-+First of all, ACPI device nodes represent firmware entities rather than
-+hardware and in many cases they provide auxiliary information on devices
-+enumerated independently (like PCI devices or CPUs).  It is therefore generally
-+questionable to assign resources to them because the entities represented by
-+them do not decode addresses in the memory or I/O address spaces and do not
-+generate interrupts or similar (all of that is done by hardware).
-+
-+Second, as a general rule, a struct acpi_device can only be a parent of another
-+struct acpi_device.  If that is not the case, the location of the child device
-+in the device hierarchy is at least confusing and it may not be straightforward
-+to identify the piece of hardware providing functionality represented by it.
-+However, binding a driver directly to an ACPI device node may cause that to
-+happen if the given driver registers input devices or wakeup sources under it,
-+for example.
-+
-+Next, using system suspend and resume callbacks directly on ACPI device nodes
-+is also questionable because it may cause ordering problems to appear.  Namely,
-+ACPI device nodes are registered before enumerating hardware corresponding to
-+them and they land on the PM list in front of the majority of other device
-+objects.  Consequently, the execution ordering of their PM callbacks may be
-+different from what is generally expected.  Also, in general, dependencies
-+returned by _DEP objects do not affect ACPI device nodes themselves, but the
-+"physical" devices associated with them, which potentially is one more source
-+of inconsistency related to treating ACPI device nodes as "real" device
-+representation.
-+
-+All of the above means that binding drivers to ACPI device nodes should
-+generally be avoided and so struct acpi_driver objects should not be used.
-+
-+Moreover, a device ID is necessary to bind a driver directly to an ACPI device
-+node, but device IDs are not generally associated with all of them.  Some of
-+them contain alternative information allowing the corresponding pieces of
-+hardware to be identified, for example represeted by an _ADR object return
-+value, and device IDs are not used in those cases.  In consequence, confusingly
-+enough, binding an ACPI driver to an ACPI device node may even be impossible.
-+
-+When that happens, the piece of hardware corresponding to the given ACPI device
-+node is represented by another device object, like a struct pci_dev, and the
-+ACPI device node is the "ACPI companion" of that device, accessible through its
-+fwnode pointer used by the ACPI_COMPANION() macro.  The ACPI companion holds
-+additional information on the device configuration and possibly some "recipes"
-+on device manipulation in the form of AML (ACPI Machine Language) bytecode
-+provided by the platform firmware.  Thus the role of the ACPI device node is
-+similar to the role of a struct device_node on a system where Device Tree is
-+used for platform description.
-+
-+For consistency, this approach has been extended to the cases in which ACPI
-+device IDs are used.  Namely, in those cases, an additional device object is
-+created to represent the piece of hardware corresponding to a given ACPI device
-+node.  By default, it is a platform device, but it may also be a PNP device, a
-+CPU device, or another type of device, depending on what the given piece of
-+hardware actually is.  There are even cases in which multiple devices are
-+"backed" or "accompanied" by one ACPI device node (e.g. ACPI device nodes
-+corresponding to GPUs that may provide firmware interfaces for backlight
-+brightness control in addition to GPU configuration information).
-+
-+This means that it really should never be necessary to bind a driver directly to
-+an ACPI device node because there is a "proper" device object representing the
-+corresponding piece of hardware that can be bound to by a "proper" driver using
-+the given ACPI device node as the device's ACPI companion.  Thus, in principle,
-+there is no reason to use ACPI drivers and if they all were replaced with other
-+driver types (for example, platform drivers), some code could be dropped and
-+some complexity would go away.
---- a/Documentation/driver-api/acpi/index.rst
-+++ b/Documentation/driver-api/acpi/index.rst
-@@ -7,3 +7,4 @@ ACPI Support
- 
-    linuxized-acpica
-    scan_handlers
-+   acpi-drivers
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="TgzbTybhuc4Vbyp1"
+Content-Disposition: inline
+In-Reply-To: <8801aeef7576a155299f19b6887682dd3a272aba.1767601130.git.mst@redhat.com>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
 
 
+--TgzbTybhuc4Vbyp1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jan 05, 2026 at 03:23:29AM -0500, Michael S. Tsirkin wrote:
+> @@ -61,7 +62,7 @@ struct virtio_scsi_cmd {
+> =20
+>  struct virtio_scsi_event_node {
+>  	struct virtio_scsi *vscsi;
+> -	struct virtio_scsi_event event;
+> +	struct virtio_scsi_event *event;
+>  	struct work_struct work;
+>  };
+> =20
+> @@ -89,6 +90,11 @@ struct virtio_scsi {
+> =20
+>  	struct virtio_scsi_vq ctrl_vq;
+>  	struct virtio_scsi_vq event_vq;
+> +
+> +	__dma_from_device_group_begin();
+> +	struct virtio_scsi_event events[VIRTIO_SCSI_EVENT_LEN];
+> +	__dma_from_device_group_end();
+
+If the device emits two events in rapid succession, could the CPU see
+stale data for the second event because it already holds the cache line
+for reading the first event?
+
+In other words, it's not obvious to me that the DMA warnings are indeed
+spurious and should be silenced here.
+
+It seems safer and simpler to align and pad the struct virtio_scsi_event
+field in struct virtio_scsi_event_node rather than packing these structs
+into a single array here they might share cache lines.
+
+Stefan
+
+--TgzbTybhuc4Vbyp1
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmlcALoACgkQnKSrs4Gr
+c8hxKAgAntRCUOkAR5sJ85qdfsRgS5doxT9/NXPvgLJJuioZ7uhZ5gZoJlDI03Jd
+hAhz7RZQq0egV90TXQcX+aVTCMEoVFBZs9myLPSn3+P2aJI58FiFGQtA0EmzWkA5
+sjTyB+Fn5GvsA5yoatFgYoqr0Fc6xPDTWWkgqMkg2nmMjdbnR9taetiYfcW8FdHu
+eZmLE0d8xc2KhR/HMfz11L+fk1oXF94bZyqM98sOXkzqWgXK0vyd4UK/atflMQMv
+QInPClb3ErPbr27EQixAwC6yR40bvPArKxVFbJEYWYm1uP4fprxUVZD6VfmeTMZZ
+vJCcbmW4I0BK/ICRg+hCVzw3tAAmjg==
+=RvL+
+-----END PGP SIGNATURE-----
+
+--TgzbTybhuc4Vbyp1--
 
 
