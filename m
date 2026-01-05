@@ -1,123 +1,184 @@
-Return-Path: <linux-doc+bounces-71005-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71012-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id E773ACF4EFF
-	for <lists+linux-doc@lfdr.de>; Mon, 05 Jan 2026 18:13:29 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AAD76CF5187
+	for <lists+linux-doc@lfdr.de>; Mon, 05 Jan 2026 18:54:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E3533308C387
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Jan 2026 16:58:48 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7976B303C605
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Jan 2026 17:53:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0F0ED3191A4;
-	Mon,  5 Jan 2026 16:58:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67550314D3E;
+	Mon,  5 Jan 2026 17:53:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YxhbXFH7"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lOnxwGmN"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88C41283FFB;
-	Mon,  5 Jan 2026 16:58:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 408C3309DA5
+	for <linux-doc@vger.kernel.org>; Mon,  5 Jan 2026 17:53:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767632326; cv=none; b=eFfVvbrYuM/S1U0hrYeEpZTDig5sQykOobnCPsWykiW7EF5WbDlCbZHU+sYZNi/56Lu8nMECj3HVYb3OAQvOaGYAQl+goKMswlAuU6SICa8HVGBdZ1sHwK9+evCVB8gs0OH8J7fA/BKmUy8zQ8nIiPUjaC6fy0k5Q/jO5Mwokro=
+	t=1767635607; cv=none; b=uk+fM3PnTx0yNoq4tHDNVMbRRZa3zgcmVmluW25K9uqBNYj6LoHc8IiX6sTlyMywT2P4M8oqd9eaVBF2oo4w5y87HpDjpgzsJ6AJ3SMbMuDL4bmRslITbAwCPBDysyGmpFjpVslTGY9WwwpaW/PZj4GEcK3XiJ0paf9zH38ZnvI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767632326; c=relaxed/simple;
-	bh=mupDn7J1NSAUZ9GV/4Xx6+A3fMSwov+EkCqaBWzjOm0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=jAApAlQTtAd/dpz4fy2ETYnHpW/lkj2vD6M+6XNiezh/z1OHlW9B6jm/vrldsZh2aldflldRckd4XzCxglFP0Vw70EANnre7VNcFbZGxnDNVZv5C5vP14znCBCjCjHdtnY0nBXI13H9DpJ8C20F4HrnBNdz1+Lu+b9b6HDg1gUY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YxhbXFH7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5DF57C116D0;
-	Mon,  5 Jan 2026 16:58:43 +0000 (UTC)
+	s=arc-20240116; t=1767635607; c=relaxed/simple;
+	bh=Ux87hSa/68cLrLbR1ZzCFUiDvj3dhNvAwil2Gxc0MrA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=s0ndZsKdaxBeWj3lF8M3Ue0LMBuKsk9Qraa5VPEncouhNmbQ7wUfGwOEk7hdHhpaMLnQSSm/r46l3vW9Vsu0EM991VzhrTaFzcYndJ2TXk+JsmReP6/1KYyZBRCBsH3gtDr6HEhH1mt1BNZjvDzhX/JbXwi4jp+8nBUvFrzr4vg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lOnxwGmN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C500FC2BC86
+	for <linux-doc@vger.kernel.org>; Mon,  5 Jan 2026 17:53:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767632326;
-	bh=mupDn7J1NSAUZ9GV/4Xx6+A3fMSwov+EkCqaBWzjOm0=;
-	h=From:To:Cc:Subject:Date:From;
-	b=YxhbXFH76Gyi1Q1IeKu6BX24k5shRmCdHTfQU6bcQLC+cFfvY6krzkB7bYUSyKShM
-	 uG3/cpRYYGDTPOIHfDhg2kcFrP5Gp6NamzlQawAXRrOlyltMcby7Mt9b8DBtYbpKto
-	 96jjELOv3zquxG0gGWkrpuk7p0oWRgvwDoo1qoJl3fH6tAs2rYwQ4SqlsRgydOkP3B
-	 NNkzjtmUJXTBdpSoq4sJFo9aigVIYb24zrKwUzbbPMlbk2LV4TRc/U+BGF9XgsMk1M
-	 ASKyg5/3mtBaFz2gwK99f/FbiD3h8zdRbVQp+P3XwjyWFE/ZxoqDI4dziDjI6+yBUY
-	 Qe4yO5QYs0iig==
-From: Mike Rapoport <rppt@kernel.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: Alexander Graf <graf@amazon.com>,
-	Jason Miu <jasonmiu@google.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Mike Rapoport <rppt@kernel.org>,
-	Pasha Tatashin <pasha.tatashin@soleen.com>,
-	Pratyush Yadav <pratyush@kernel.org>,
-	kexec@lists.infradead.org,
-	linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org
-Subject: [PATCH 0/6] kho: ABI headers and Documentation updates
-Date: Mon,  5 Jan 2026 18:58:33 +0200
-Message-ID: <20260105165839.285270-1-rppt@kernel.org>
-X-Mailer: git-send-email 2.51.0
+	s=k20201202; t=1767635606;
+	bh=Ux87hSa/68cLrLbR1ZzCFUiDvj3dhNvAwil2Gxc0MrA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=lOnxwGmNE/bn7/PZzPU//WPUz3UX3w5bnVpfoKqJxfVA2NzpL2i3eR5zTiOFB1CPe
+	 v9aTnFuoxT8JnT77MUcz7cbYw+b1OA9gFcgox32MEVM8zfcMSrA7CjLk7dD2BkJrsk
+	 Jo8hALRXVndzywcJn1nu4RYXl4tUy4H2zPe6aFI6FbvZLsSkiHCpy2N1B0MwwyULhu
+	 luQv3AEs14pQhAeNBqG21lioYtxsGVU5OAP/EOFgi4OifR8XxMx0e5mdblk4Xts8u1
+	 mbZZVopjPYd7FM7OlqRTNo+OTX6HZs2kZByhV6F1IVolFQtPbV5NeEy0ne3curhwua
+	 NTWYSHstqjrsQ==
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-3ece54945d9so88765fac.0
+        for <linux-doc@vger.kernel.org>; Mon, 05 Jan 2026 09:53:26 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCVAIsr4wjenbPjEYkNjNfS04QX/5DtLIZhrsUz8bNemvoLl0n89L3dOxyExlQHPdtkgWn2hDUOpuc8=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzp2nm0Ew6344pTZKMOTPvmnX9g3RRc1ugbyaxlzRtksJP54Li5
+	NRJAUnNEjlIzDn17Ds5Xv7O0FhtskcplhK9J0cK1Ua5aaCHbzUNwFOHDFjzVde3Xsj7bBhJBJDx
+	MVvSSiaY1kUv32aKGE0I+X/OpaFSjld0=
+X-Google-Smtp-Source: AGHT+IFhF5egrl4ZCq8xWFr+RoYVu40Zi1s5l8ky0E1Xv2jtj/ZH7g9+rHUhIzI9ZvmtV4nxRcx3nQAMiifxAdK2cSw=
+X-Received: by 2002:a4a:c3c8:0:b0:65c:fdd9:6f54 with SMTP id
+ 006d021491bc7-65f47a682a6mr105538eaf.69.1767635605624; Mon, 05 Jan 2026
+ 09:53:25 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <5977355.DvuYhMxLoT@rafael.j.wysocki> <2026010553-capable-chip-88d7@gregkh>
+In-Reply-To: <2026010553-capable-chip-88d7@gregkh>
+From: "Rafael J. Wysocki" <rafael@kernel.org>
+Date: Mon, 5 Jan 2026 18:53:13 +0100
+X-Gmail-Original-Message-ID: <CAJZ5v0jnnYyOnc5s4FijXS9sAyu5Mpgc4KLmR6DV-oTUwqttKA@mail.gmail.com>
+X-Gm-Features: AQt7F2r5D6vvyl6-k8-gOfwQtYVwQ1cHwnr-uoTCiiXrBJyk7eWn5JiDgK2rNSA
+Message-ID: <CAJZ5v0jnnYyOnc5s4FijXS9sAyu5Mpgc4KLmR6DV-oTUwqttKA@mail.gmail.com>
+Subject: Re: [PATCH v1] ACPI: Documentation: driver-api: Disapprove of using
+ ACPI drivers
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>, Linux ACPI <linux-acpi@vger.kernel.org>, 
+	LKML <linux-kernel@vger.kernel.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Bjorn Helgaas <helgaas@kernel.org>, 
+	Hans de Goede <hansg@kernel.org>, Linux Documentation <linux-doc@vger.kernel.org>, 
+	Mika Westerberg <mika.westerberg@linux.intel.com>, Zhang Rui <rui.zhang@intel.com>, 
+	Armin Wolf <w_armin@gmx.de>, Danilo Krummrich <dakr@kernel.org>, 
+	Ilpo Jarvinen <ilpo.jarvinen@linux.intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
+On Mon, Jan 5, 2026 at 2:47=E2=80=AFPM Greg Kroah-Hartman
+<gregkh@linuxfoundation.org> wrote:
+>
+> On Mon, Jan 05, 2026 at 12:25:04PM +0100, Rafael J. Wysocki wrote:
+> > From: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+> >
+> > Sadly, there is quite a bit of technical debt related to the
+> > kernel's ACPI support subsystem and one of the most significant
+> > pieces of it is the existence and use of ACPI drivers represented
+> > by struct acpi_driver objects.
+> >
+> > Those drivers are bound directly to struct acpi_device objects, also
+> > referred to as "ACPI device nodes", representing device objects in the
+> > ACPI namespace defined as:
+> >
+> >  A hierarchical tree structure in OS-controlled memory that contains
+> >  named objects. These objects may be data objects, control method
+> >  objects, bus/device package objects, and so on.
+> >
+> > according to the ACPI specification [1].
+> >
+> > The above definition implies, although rather indirectly, that the
+> > objects in question don't really represent hardware.  They are just
+> > "device package objects" containing some information on the devices
+> > present in the given platform that is known to the platform firmware.
+> >
+> > Although the platform firmware can be the only source of information on
+> > some devices, the information provided by it alone may be insufficient
+> > for device enumeration in general.  If that is the case, bindig a drive=
+r
+> > directly to a given ACPI device node clearly doesn't make sense.  If
+> > the device in question is enumerated through a hardware interface, it
+> > will be represented by a device object matching that interface, like
+> > a struct pci_dev, and the ACPI device node corresponding to it will be
+> > treated as its "ACPI companions" whose role is to amend the "native"
+> > enumeration mechanism.
+> >
+> > For the sake of consistency and confusion avoidance, it is better to
+> > treat ACPI device nodes in general as ACPI companions of other device
+> > objects representing hardware.  In some cases though it appeared easier
+> > to take a shortcut and use an ACPI driver binding directly to an ACPI
+> > device node.  Moreover, there were corner cases in which that was the
+> > only choice, but they all have been addressed now.
+> >
+> > In all cases in which an ACPI driver might be used, the ACPI device
+> > node it might bind to is an ACPI companion of another device object
+> > representing a piece of hardware.  It is thus better to use a driver
+> > binding to the latter than to use an ACPI driver and leave the other
+> > device object alone, not just because doing so is more consistent and
+> > less confusing, but also because using ACPI drivers may lead to
+> > potential functional deficiencies, like possible ordering issues
+> > related to power management.
+> >
+> > Unfortunately, there are quite a few ACPI drivers in use and, as a rule=
+,
+> > they bind to ACPI device nodes that are ACPI companions of platform
+> > devices, so in fact they play the role of platform drivers although in
+> > a kind of convoluted way.  An effort has been under way to replace them
+> > with platform drivers, which is relatively straightforward in the vast
+> > majority of cases, but it has not been pursued very aggressively so far=
+,
+> > mostly due to the existence of the corner cases mentioned above.
+> > However, since those corner cases are gone now, it makes sense to spend
+> > more time on driver conversions with the ultimate goal to get rid of
+> > struct acpi_driver and the related code from the kernel.
+> >
+> > To that end, add a document explaining why using ACPI drivers is not
+> > a good idea, so it need not be explained from scratch on every attempt
+> > to convert an ACPI driver to a platform one.
+> >
+> > Link: https://uefi.org/specs/ACPI/6.6/02_Definition_of_Terms.html#term-=
+ACPI-Namespace [1]
+> > Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+> > ---
+> >
+> > Although this patch can be applied independently, it actually depends o=
+n
+> > some ACPI changes in linux-next and on
+> >
+> > https://lore.kernel.org/linux-acpi/12824456.O9o76ZdvQC@rafael.j.wysocki=
+/
+> >
+> > so it is better to handle it along with that material.
+> >
+> > ---
+> >  Documentation/driver-api/acpi/acpi-drivers.rst |   80 ++++++++++++++++=
++++++++++
+> >  Documentation/driver-api/acpi/index.rst        |    1
+> >  2 files changed, 81 insertions(+)
+>
+> Documenting this is fine, but really, just moving all of the existing
+> drivers to not use this and deleting the api entirely might be simplest.
 
-Hi,
+That's the final goal, but there are ~45 ACPI drivers in the tree (as
+of my current linux-next branch) in several different subsystems, so
+it may take a few cycles to convert all of them.
 
-LUO started adding KHO ABI headers to include/linux/kho/abi, but the
-core parts of KHO and memblock are still using the old way for
-descriptions on their ABIs.
+Also, I'm not expecting this doc to ever change, so reverting the
+commit adding it when all of the ACPI drivers have been converted
+should be trivial.
 
-Let's consolidate all things KHO in include/linux/kho/abi.
+> Looks like the only "new" acpi drivers that show up are in the
+> platform/x86/ subsystem, so just tell the maintainers there not to take
+> any new ones?
 
-And while on that, make some documentation updates to have more coherent
-KHO docs.
-
-Jason Miu (2):
-  kho: Introduce KHO FDT ABI header
-  kho: Relocate vmalloc preservation structure to KHO ABI header
-
-Mike Rapoport (Microsoft) (4):
-  kho/abi: luo: make generated documentation more coherent
-  kho/abi: memfd: make generated documentation more coherent
-  kho: docs: combine concepts and FDT documentation
-  kho/abi: add memblock ABI header
-
- Documentation/core-api/kho/abi.rst            |  28 +++
- Documentation/core-api/kho/bindings/kho.yaml  |  43 -----
- .../kho/bindings/memblock/memblock.yaml       |  39 -----
- .../kho/bindings/memblock/reserve-mem.yaml    |  40 -----
- .../core-api/kho/bindings/sub-fdt.yaml        |  27 ---
- Documentation/core-api/kho/concepts.rst       |  74 --------
- Documentation/core-api/kho/fdt.rst            |  80 ---------
- Documentation/core-api/kho/index.rst          |  78 ++++++++-
- Documentation/core-api/liveupdate.rst         |   2 +-
- Documentation/mm/memfd_preservation.rst       |   2 +-
- MAINTAINERS                                   |   1 +
- include/linux/kexec_handover.h                |  27 +--
- include/linux/kho/abi/kexec_handover.h        | 163 ++++++++++++++++++
- include/linux/kho/abi/luo.h                   |   8 +-
- include/linux/kho/abi/memblock.h              |  72 ++++++++
- include/linux/kho/abi/memfd.h                 |   6 +-
- kernel/liveupdate/kexec_handover.c            |  34 +---
- lib/test_kho.c                                |   1 +
- mm/memblock.c                                 |   4 +-
- 19 files changed, 361 insertions(+), 368 deletions(-)
- create mode 100644 Documentation/core-api/kho/abi.rst
- delete mode 100644 Documentation/core-api/kho/bindings/kho.yaml
- delete mode 100644 Documentation/core-api/kho/bindings/memblock/memblock.yaml
- delete mode 100644 Documentation/core-api/kho/bindings/memblock/reserve-mem.yaml
- delete mode 100644 Documentation/core-api/kho/bindings/sub-fdt.yaml
- delete mode 100644 Documentation/core-api/kho/concepts.rst
- delete mode 100644 Documentation/core-api/kho/fdt.rst
- create mode 100644 include/linux/kho/abi/kexec_handover.h
- create mode 100644 include/linux/kho/abi/memblock.h
-
-
-base-commit: f8f9c1f4d0c7a64600e2ca312dec824a0bc2f1da
--- 
-2.51.0
-
+That's one of the goals of this posting. :-)
 
