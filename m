@@ -1,131 +1,227 @@
-Return-Path: <linux-doc+bounces-71035-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71037-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49FF2CF6C92
-	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 06:29:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4A88CF6D02
+	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 06:48:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 72BDC300548D
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 05:28:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A8A1F301338D
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 05:48:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F3C72F3C0A;
-	Tue,  6 Jan 2026 05:28:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="NJ+MFkJy"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 07AFA1FE471;
+	Tue,  6 Jan 2026 05:48:37 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0960621770A
-	for <linux-doc@vger.kernel.org>; Tue,  6 Jan 2026 05:28:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.66
+Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [207.46.229.174])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 38A4A1D8E10;
+	Tue,  6 Jan 2026 05:48:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=207.46.229.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767677306; cv=none; b=iY2O9NDu0J1elgtP7UoC1U5fSJ7gDMXdFrNlajBPP+KSAQdY3i/VgFpL+W2CgG8MzSMSZ+EPnRRni8oSGzdMGCiNnpM6J7o4qIy/1r/oljotXQPct1mStxIw5/IWsO1O6P5NwxQb8v/srZrs3dXClvMloX2juL6J3tDfBuZe0Xw=
+	t=1767678516; cv=none; b=kLPXktnVoUOJrAcB6t9XRah+P+WJFc9XsxjA0wrcB3rTjt0TYMi3t0c6Aab2U8U7ZmRjZKCCaw5DSt3GWGOwct9FzkltyK3Zbq6DqOy1R4TUh0/N051Yr6fxnUyUzw5YmdSRzSe+o3ECdW4CCHGV24Fic3ZEg2Dtc0wMGkMVunU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767677306; c=relaxed/simple;
-	bh=K7A/W1ylrTsIpBtknKm+NSGACkl3Ze+EFt7X+DmIW0E=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=l4OLBxcndECih36Kxi7LYa892MVKFr7wDu/Y4aYIYjAgeNG9BP+vbJfsB/v1JLy+srwB0NR9v9o7bV4PwMejnyYLX8//cGdOi2tZhshA7dgiyxwcOEeE2SsccQq38z308kBty2jV4bcEUQtrYDWtbDNolzdRJA+yv9Zwh3EmnuA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=NJ+MFkJy; arc=none smtp.client-ip=209.85.128.66
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
-Received: by mail-wm1-f66.google.com with SMTP id 5b1f17b1804b1-47d3ffa5f33so2830245e9.2
-        for <linux-doc@vger.kernel.org>; Mon, 05 Jan 2026 21:28:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1767677302; x=1768282102; darn=vger.kernel.org;
-        h=user-agent:content-disposition:mime-version:message-id:subject:cc
-         :to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=oyCImFW2OxUKLK3JD4UOX+w55FuLQcy167IMf21WTEE=;
-        b=NJ+MFkJyydo3fAjFA7GK3+vthWLgp8KLyD9I77/I7Eg4GZNTqcxYaAyMruFOVELCw8
-         7uOlvNVbYcxPIltqOS9Ev18Wm3SwiDYo8l7WbCTbOvRJNtz9+8iMU9x/w3qtv/BzDKqw
-         BV077WgP9ANFMsdSgsxajLo2mBeRXs9i7b3jOITkQmRouXKen2QV+arHml6yD/7x6RSB
-         WQaemJlwt4cWgficf1Q/TnbosCYlJ2M97U1NP2fkI0RdevDaXhN6bT953+YH11fzMjiM
-         mKIwZ5tR9FczAnoAgv4G50z+nKDuhIOSr0z3JPnC5YdOWWHTqHf8b2zTKxpD8jauu33y
-         gnCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767677302; x=1768282102;
-        h=user-agent:content-disposition:mime-version:message-id:subject:cc
-         :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oyCImFW2OxUKLK3JD4UOX+w55FuLQcy167IMf21WTEE=;
-        b=Mktg0lNAW9nyrTjfnJAwEWqEgooAnACAv7LEuQxzUpD+IXo9qUCyQ6DVmghK4sWdUj
-         StFmhVzcrRdfM1jGD4UkUP3hmsMcmPMYVDy3okdwnCb02RaQ74brs2bN6cHYyjOpvTXW
-         FOtpeWv4/oEvjBCpnNXX/8yzMwSs/eXz8bfv5++P596ydV36x+cFshGcURNjRjlgTTW7
-         mPjLrzLHIc4e7p2LbPofGG/d4h/FWF2aZpOp7Nhh0K58tiKfGDT20bk2kYBmxwF4bdnd
-         sowtW/PBTOW5qSWai94Miml+VIM1DaGXtAUlgNh+9lTzJXlzxcgNtzhMx6CD5aTh/81F
-         4pIw==
-X-Forwarded-Encrypted: i=1; AJvYcCUb5SSnpmY5xFYDSHfkuOnR3Tzpcr19v0cgL9qgZfAQ4iummlv1D17CCX/6yXN4MUkpppbDbVqMDKA=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwLgjYTTmEV+dt1i4VKYR92RDrJIB5ow5Mm+UbmAqD4pKm4y3cs
-	V6+h9jQhKe8+TOMiPyqWtLSO8x5jSaH8KuO5Fja9VhiLd+cteAlQvW+wT6bthDUIgWQ=
-X-Gm-Gg: AY/fxX45pOhym8qwmvYb3NEpDrNq72c22ntUX3NCzKH3fYOP+X9ZIVjAwRnkZECXsEY
-	6byIJlRg4K6wErqdzfJC4HnvGDUYA6Ne+OXtkeK//PoZzmI7dZalORmh+BEcMRPeySKPkVZLUVt
-	xhzvKzh5N2bKTqbsBhgcKjFbS+UZqYRrYNLTe/xvDLooPC2OmtFnG0Bf1+/oJqswvkYtbYR3bFC
-	KGxbDdC0RKzLCauDDmHhEc5mWKhw4db1404uUu+LcZyQWikltbjHWTy8JVAFLIAn3kx0f56p0r0
-	NZRPZojRqujNhLu2jp8cOdQIHCqMECTvJJmrlJ8lG5TGf+l4mNkyZC+4rDwusf5QlFplGYgm/LL
-	xOhGEM7W7We+J17C8fhdZN06cItYnAfLXReSbcTFb123leit2mCU/la1oU1DESAyTGt+KIQnPJZ
-	y8raQLmVGbUckp9WDu2BV92ipCGq0C0NWldlqmxA==
-X-Google-Smtp-Source: AGHT+IFYG+NiRZAxtQMP3WVtDu6r9Jmli3zfAlN8gHCFJGQloFxv3FObhkqWk1Hj6h0egUzznoJzrg==
-X-Received: by 2002:a05:600c:4e51:b0:477:7bd2:693f with SMTP id 5b1f17b1804b1-47d7f0650c6mr18640805e9.6.1767677302277;
-        Mon, 05 Jan 2026 21:28:22 -0800 (PST)
-Received: from r1chard (1-164-79-94.dynamic-ip.hinet.net. [1.164.79.94])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3c4795fsm8906855ad.33.2026.01.05.21.28.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Jan 2026 21:28:21 -0800 (PST)
-Date: Tue, 6 Jan 2026 13:28:17 +0800
-From: Richard Lyu <richard.lyu@suse.com>
-To: Jonathan Corbet <corbet@lwn.net>, x86@kernel.org,
-	Borislav Petkov <bp@alien8.de>
-Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H . Peter Anvin" <hpa@zytor.com>, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Richard Lyu <richard.lyu@suse.com>
-Subject: [PATCH] Documentation/x86: Update IOMMU spec references to use
- stable identifiers
-Message-ID: <20260106052815.46114-1-richard.lyu@suse.com>
+	s=arc-20240116; t=1767678516; c=relaxed/simple;
+	bh=KBQwvTSaUIV9GWRhyP/5lfRDCNdl+kQgwpEBCS6IsaM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Kl80/3dc1F+zFFWi+zJufo5h6FgNYzKf9Vj//ap/HSmMQm+ygkwYNrBYCW+Kne/9dqUvJoe+DxOydwk6steDx1GQoF1FBzKAJJCjJvVvE9NbumI/RQ3SGWKAHR9qKxBH+Xyl1dIztFtpKwjlCfT2WlN7NSxgDsAOdZ/QHihJrl8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn; spf=pass smtp.mailfrom=hust.edu.cn; arc=none smtp.client-ip=207.46.229.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=hust.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hust.edu.cn
+Received: from hust.edu.cn (unknown [172.16.0.52])
+	by app1 (Coremail) with SMTP id HgEQrAC3vt4KolxpDFXpAA--.21383S2;
+	Tue, 06 Jan 2026 13:47:54 +0800 (CST)
+Received: from [10.12.169.108] (unknown [10.12.169.108])
+	by gateway (Coremail) with SMTP id _____wCX9qkGolxpd8EgAA--.49096S2;
+	Tue, 06 Jan 2026 13:47:51 +0800 (CST)
+Message-ID: <f10db744-d447-41d2-b9f8-1c137e22e0fa@hust.edu.cn>
+Date: Tue, 6 Jan 2026 13:47:50 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email 2.51.0
-User-Agent: Mutt/2.2.13 (2024-03-09)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/7] docs/zh_CN: Add timers subsystem translation
+To: Xingqiu Xu <hilbertanjou83@gmail.com>, alexs@kernel.org,
+ si.yanteng@linux.dev, corbet@lwn.net
+Cc: linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <cover.1767118457.git.hilbertanjou83@gmail.com>
+From: Dongliang Mu <dzm91@hust.edu.cn>
+In-Reply-To: <cover.1767118457.git.hilbertanjou83@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID:HgEQrAC3vt4KolxpDFXpAA--.21383S2
+Authentication-Results: app1; spf=neutral smtp.mail=dzm91@hust.edu.cn;
+X-Coremail-Antispam: 1UD129KBjvJXoWxtF4DCFy7ur4rtFWkZr43Jrb_yoWfGryrpa
+	yjkr1IqanrJry5Cr4Sqw48Zr13uay8W3y7JFW7K34vkws3JFn5tFZ8tr90qa97XrWfAF17
+	Z3WFyF98Wr4Yy37anT9S1TB71UUUUUJqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUmjb7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
+	cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
+	v20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwA2z4x0Y4vE
+	x4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAaw2AFwI0_Jr
+	v_JF1lnxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF
+	0cIa020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0EF7xvrVAajcxG14v26r
+	4UJVWxJr1lYx0E74AGY7Cv6cx26r4fZr1UJr1lYx0Ec7CjxVAajcxG14v26r4UJVWxJr1l
+	Ox8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxAIw28IcxkI7VAKI48JMxAIw28IcV
+	Cjz48v1sIEY20_GFW3Jr1UJwCFx2IqxVCFs4IE7xkEbVWUJVW8JwCFI7km07C267AKxVWU
+	XVWUAwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67
+	kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY
+	6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0x
+	vEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2Kfnx
+	nUUI43ZEXa7IU0X_-JUUUUU==
+X-CM-SenderInfo: asqsiiirqrkko6kx23oohg3hdfq/
 
-Direct URLs to vendor specifications for Intel VT-d and AMD IOMMU
-are frequently changed by vendors, leading to broken links in the
-documentation.
 
-Replace the fragile URLs with persistent identifiers, providing the
-official document titles and IDs. This ensures users can locate the
-relevant specifications regardless of vendor website restructuring.
+On 12/31/25 3:02 AM, Xingqiu Xu wrote:
+> This patch series translates the complete timers subsystem
+> documentation into Chinese, including:
+>
+> - timers/index.rst: Main index with file structure
+> - timers/timekeeping.rst: Clock sources and events
+> - timers/hpet.rst: High Precision Event Timer driver
+> - timers/hrtimers.rst: High-resolution timer subsystem
+> - timers/highres.rst: High-resolution timers design notes
+> - timers/no_hz.rst: Reducing scheduling-clock ticks
+> - timers/delay_sleep_functions.rst: Delay and sleep mechanisms
+>
+> Also updates subsystem-apis.rst to include timers/index.
+>
+> All translations are based on the latest English documentation.
+>
+> Changes in v2:
+> - Remove trailing blank lines at EOF in all translation files
+>    as pointed out by Dongliang Mu
+>
+> Xingqiu Xu (7):
+>    docs/zh_CN: Add timers directory Chinese translation
+>    docs/zh_CN: Translate timers/timekeeping.rst
+>    docs/zh_CN: Translate timers/hpet.rst
+>    docs/zh_CN: Translate timers/hrtimers.rst
+>    docs/zh_CN: Translate timers/highres.rst
+>    docs/zh_CN: Translate timers/no_hz.rst
+>    docs/zh_CN: Translate timers delay_sleep_functions
 
-Signed-off-by: Richard Lyu <richard.lyu@suse.com>
----
- Documentation/arch/x86/iommu.rst | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Please fix the compilation warnings and send the v3 patch:
 
-diff --git a/Documentation/arch/x86/iommu.rst b/Documentation/arch/x86/iommu.rst
-index 41fbadfe2221..79c33560299b 100644
---- a/Documentation/arch/x86/iommu.rst
-+++ b/Documentation/arch/x86/iommu.rst
-@@ -2,10 +2,11 @@
- x86 IOMMU Support
- =================
- 
--The architecture specs can be obtained from the below locations.
-+The architecture specs can be obtained from the vendor websites.
-+Search for the following documents to obtain the latest versions:
- 
--- Intel: http://www.intel.com/content/dam/www/public/us/en/documents/product-specifications/vt-directed-io-spec.pdf
--- AMD: https://www.amd.com/content/dam/amd/en/documents/processor-tech-docs/specifications/48882_3_07_PUB.pdf
-+- Intel: Intel Virtualization Technology for Directed I/O Architecture Specification (ID: D51397)
-+- AMD: AMD I/O Virtualization Technology (IOMMU) Specification (ID: 48882)
- 
- This guide gives a quick cheat sheet for some basic understanding.
- 
--- 
-2.51.0
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:32: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:32.
+Declaration is '.. c:function:: void udelay(unsigned long usec)'. 
+[duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:32: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:32.
+Declaration is '.. c:None:: unsigned long usec'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:69: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:69.
+Declaration is '.. c:function:: void ndelay(unsigned long nsec)'. 
+[duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:69: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:69.
+Declaration is '.. c:None:: unsigned long nsec'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:35: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:35.
+Declaration is '.. c:macro:: mdelay'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:67: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:67.
+Declaration is '.. c:function:: void usleep_range(unsigned long min, 
+unsigned long max)'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:67: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:67.
+Declaration is '.. c:None:: unsigned long min'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:67: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:67.
+Declaration is '.. c:None:: unsigned long max'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:81: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:81.
+Declaration is '.. c:function:: void usleep_range_idle(unsigned long 
+min, unsigned long max)'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:81: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:81.
+Declaration is '.. c:None:: unsigned long min'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:81: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:81.
+Declaration is '.. c:None:: unsigned long max'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:345: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:345.
+Declaration is '.. c:function:: void usleep_range_state(unsigned long 
+min, unsigned long max, unsigned int state)'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:345: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:345.
+Declaration is '.. c:None:: unsigned long min'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:345: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:345.
+Declaration is '.. c:None:: unsigned long max'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:345: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:345.
+Declaration is '.. c:None:: unsigned int state'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:283: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:283.
+Declaration is '.. c:function:: void msleep(unsigned int msecs)'. 
+[duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:283: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:283.
+Declaration is '.. c:None:: unsigned int msecs'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:323: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:323.
+Declaration is '.. c:function:: unsigned long 
+msleep_interruptible(unsigned int msecs)'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:323: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:323.
+Declaration is '.. c:None:: unsigned int msecs'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:96: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:96.
+Declaration is '.. c:function:: void ssleep(unsigned int seconds)'. 
+[duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:96: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:96.
+Declaration is '.. c:None:: unsigned int seconds'. [duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:110: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:110.
+Declaration is '.. c:function:: void fsleep(unsigned long usecs)'. 
+[duplicate_declaration.c]
+Documentation/translations/zh_CN/timers/delay_sleep_functions.rst:110: 
+WARNING: Duplicate C declaration, also defined at 
+timers/delay_sleep_functions:110.
+Declaration is '.. c:None:: unsigned long usecs'. [duplicate_declaration.c]
+
+Dongliang Mu
+
+>   .../translations/zh_CN/subsystem-apis.rst     |   5 +-
+>   .../zh_CN/timers/delay_sleep_functions.rst    | 135 +++++++
+>   .../translations/zh_CN/timers/highres.rst     | 270 ++++++++++++++
+>   .../translations/zh_CN/timers/hpet.rst        |  43 +++
+>   .../translations/zh_CN/timers/hrtimers.rst    | 187 ++++++++++
+>   .../translations/zh_CN/timers/index.rst       |  30 ++
+>   .../translations/zh_CN/timers/no_hz.rst       | 337 ++++++++++++++++++
+>   .../translations/zh_CN/timers/timekeeping.rst | 202 +++++++++++
+>   8 files changed, 1205 insertions(+), 4 deletions(-)
+>   create mode 100644 Documentation/translations/zh_CN/timers/delay_sleep_functions.rst
+>   create mode 100644 Documentation/translations/zh_CN/timers/highres.rst
+>   create mode 100644 Documentation/translations/zh_CN/timers/hpet.rst
+>   create mode 100644 Documentation/translations/zh_CN/timers/hrtimers.rst
+>   create mode 100644 Documentation/translations/zh_CN/timers/index.rst
+>   create mode 100644 Documentation/translations/zh_CN/timers/no_hz.rst
+>   create mode 100644 Documentation/translations/zh_CN/timers/timekeeping.rst
+>
 
 
