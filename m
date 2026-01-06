@@ -1,174 +1,213 @@
-Return-Path: <linux-doc+bounces-71053-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71056-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id A88B4CF8E73
-	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 15:55:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44E5FCF90F3
+	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 16:28:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 6B796307B3C5
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 14:52:10 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1BD7C303368C
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 15:27:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2EC5333507A;
-	Tue,  6 Jan 2026 14:51:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD10D33CEA9;
+	Tue,  6 Jan 2026 15:27:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Y84Qqx31";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="FM0Ydb5f"
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="ZJV4di2d";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="pysWJJ9K"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F0B0334685
-	for <linux-doc@vger.kernel.org>; Tue,  6 Jan 2026 14:51:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767711118; cv=none; b=HPYjJJZISZAhcfk32vSPlMgHthKSTGifv9ZLMBfWny/Rz3l6MhD3oPliEpS4BWUIUxEztV40mtZZKikGQIVPF+iNZWDadsDsq+zJcIVHpvag7UNvOHsNGYISCE9xZZzKC5vZ/tkU3K1afqxgcO6Rsh0qFlCBriDBzvCU3zzaV3M=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767711118; c=relaxed/simple;
-	bh=OtGN4S8+ZWGuAfn6+2YZp7eQlkz7c6TNLgozVUvUCR0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nTjHeGJYQVUtWKX3FWjojlR+1dV1bOZBZLUcSdYCd04BapyYPZW+Rd8x7xSGn5c6o/UYETiZFCq1IPEl2KWP2nj6cm9/a8vWc/3NFgd9Q46s0nkThfMjAvphyUsoFpdlnhORV5WrylaSqzbENPrGlbHwTrb9sYWNEgoW3fDMAm8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Y84Qqx31; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=FM0Ydb5f; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1767711115;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=v8xGpc9e0AHSzqXJdY4dTy2UmvNhNHIufeUOIUm/LzQ=;
-	b=Y84Qqx31I5wMPYwVs5CMOtq8M+c9qrucIU9n78Lo2w7B1rM14bdeV9HFLtzww6UMT+cZAQ
-	Xa+pSSgZVYvA9JqOmVb0NO3ye1HGgHrgVnPVBbjaKLw4jsswsfgAoh++WDRZYDf/XJrx5E
-	0KBNtav4ZrPKrqi8dPU21J4JDgFZdZY=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-663-aYJ0MEGSOuemHE-UXmmmeg-1; Tue, 06 Jan 2026 09:51:54 -0500
-X-MC-Unique: aYJ0MEGSOuemHE-UXmmmeg-1
-X-Mimecast-MFC-AGG-ID: aYJ0MEGSOuemHE-UXmmmeg_1767711113
-Received: by mail-wr1-f70.google.com with SMTP id ffacd0b85a97d-4310062d97bso687259f8f.0
-        for <linux-doc@vger.kernel.org>; Tue, 06 Jan 2026 06:51:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1767711112; x=1768315912; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=v8xGpc9e0AHSzqXJdY4dTy2UmvNhNHIufeUOIUm/LzQ=;
-        b=FM0Ydb5fdan6x+pkR1pJDikE+5rPe3WwNvtNRo0JY14Evid+8FAayK9PXBBE19NE0V
-         6zmoqhY0DFOh8fYaTQ2w8a69KO0ECm6f9yz6/NSy6/VZS/jtDSpgR87LSsEQVtgtQI6C
-         Bm4swC4PpZaaXSSi+1Oswc7hFfYQjX22ZoqFwC51cURGKJrO06ZoOhjZ5eZZRNVMGH/R
-         j7RZUi/wX1uXswo38RIPdWsCg4iwKcSnQ4YDfJ6vEwh4pq+EaWgBUP7DDSaV301bGKCp
-         3WN9O3bTncPfs2vWtO7odr14bTSpvCTRf7UV8cA+BVh7m6Bzvi2UTfoEFMptn9FMl/Kb
-         oPKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767711112; x=1768315912;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=v8xGpc9e0AHSzqXJdY4dTy2UmvNhNHIufeUOIUm/LzQ=;
-        b=szXtzoSZNpSp+xP2jr9fzwsCMjcTJ4QpqU8pdNni33HqMnAewq2Ghj93tvG1QEU/cw
-         aC5kCpRbJWI/AAG/+dgYbwgCETceOJletwdxMblSZDBGRBS10HvjROHotTJEq4c4+2SF
-         u2m37G8N6wolBXQsufK9TKXD/0r68Pc9cK6s87Wi2HuoTD+2yZkxv+t9aK3XxZz4d6+S
-         /0oP4QlOIp28KEqglH+MMmKDD8Vo6p0uIW9tSoN2WnBrs59/CLA3mdrRzO1kN/AswlGq
-         jfYKHx3Wt0uyebv427O8MixVfBzWYsScuKiFjhYvEbT5PSQhtWNjLowQOqnwdwd2BYkE
-         7seg==
-X-Forwarded-Encrypted: i=1; AJvYcCWD7YszTCV0xfyCQcyFqhvXe6IwNWTikrXiutjPC9KPOQCaZNrmereACGogBclg/4InCUzy6UXcaaM=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw2OV7GxCDCHzPXJJrWz2vtLUh4KeHV9cmOUeoQzLLOkdITi8m1
-	ko90p6EpzLoYoCyF6xqFPXQ6cNmJXfl72V4dbIudJb9SnaJSQ27Aj8yV54QMFg8HwS5Tq+QLLna
-	cMBNXd5I/bbPlQSFhuLFobPkyS+FNsC+HlszAjFT9zNkeheoaoNZ8clVd3CQ3ZUcNivKIhQ==
-X-Gm-Gg: AY/fxX79B4mzmq2pAlG3uUh8CrUWpoYkVgoFITH6jxa8V7NYo5qT50KBluRWVHAwQic
-	IhSSXqwwIKAIlYfczwd9Rx09m5DWLYqfZNZOxIlz3V//aOf4SHktkzngqBK01b785IkAT+15pED
-	MDa/u8kEy07oQcQwiiLNbFuESJhWevBZqJOZ/LNGFhZqRstb/td+azZIwwDB3eZ/pbpNzGsAJ+K
-	KlfFfYGvKf+gRe2GkE29nsXrCC9Arm62DlM8f9nDqC7oJzBvFpBHD9MUDe63N8zLfowNiEpS6N/
-	wPnxX0YhVeq656xHy7iaG95vSil7sbskC5/0F2nVYmpfBbru8tfYQfSlv3EHhfVVjKx0JH/u2vP
-	YxVioiosTJIVmN+f6cTX9eQKD+mUzveuMbQ==
-X-Received: by 2002:a05:6000:200f:b0:431:b6e:8be3 with SMTP id ffacd0b85a97d-432bc9f6dccmr4753179f8f.38.1767711112104;
-        Tue, 06 Jan 2026 06:51:52 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGOynDA9QP29UwN/sUhG6OCzOdNXrD0Y6rHdaimQHcJZW2G3EKin+vfxrhBk6BDORYTgSmwkg==
-X-Received: by 2002:a05:6000:200f:b0:431:b6e:8be3 with SMTP id ffacd0b85a97d-432bc9f6dccmr4753140f8f.38.1767711111656;
-        Tue, 06 Jan 2026 06:51:51 -0800 (PST)
-Received: from redhat.com (IGLD-80-230-31-118.inter.net.il. [80.230.31.118])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5ede7esm4752453f8f.32.2026.01.06.06.51.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Jan 2026 06:51:51 -0800 (PST)
-Date: Tue, 6 Jan 2026 09:51:46 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: linux-kernel@vger.kernel.org, Cong Wang <xiyou.wangcong@gmail.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Olivia Mackall <olivia@selenic.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	Jason Wang <jasowang@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Stefano Garzarella <sgarzare@redhat.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>, Petr Tesarik <ptesarik@suse.com>,
-	Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>,
-	Bartosz Golaszewski <brgl@kernel.org>, linux-doc@vger.kernel.org,
-	linux-crypto@vger.kernel.org, virtualization@lists.linux.dev,
-	linux-scsi@vger.kernel.org, iommu@lists.linux.dev,
-	kvm@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH v2 10/15] virtio_scsi: fix DMA cacheline issues for events
-Message-ID: <20260106095044-mutt-send-email-mst@kernel.org>
-References: <cover.1767601130.git.mst@redhat.com>
- <8801aeef7576a155299f19b6887682dd3a272aba.1767601130.git.mst@redhat.com>
- <20260105181939.GA59391@fedora>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67AF933C50B;
+	Tue,  6 Jan 2026 15:27:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.13
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1767713262; cv=pass; b=oDhY3bu+Df8fu2qKfI8wKhyCBh5kWoXfk3+uxiQJ3aWKOTfMwMjxe1S8TPuoE/E/jDUb32LgburZKaV0keqp2yG2y5Sco3xI+1TiRp0F1GtVI3vbEJdLI4ETP6ZXWAmjpANx8+ksT57LMF2mfnCboAPiL9Iemf1+xio72JakTd4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1767713262; c=relaxed/simple;
+	bh=5RBZj5fiknLzyrEUj0wxw39RQT3sg1+tqKapk21gXJY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=HyNuKDK5DoY+xvKnqeUYgBKOEAg2IMHMBrrGe4MUnrxwF6DDmFtFTCco6Py6NEvuakxann2Ed2s+Lq3+04tSD+Kg4bzupYIJZkKTaySxu8g+r01iHYehpsGLRkfn6SFB3n115abUT3qx/JESa/IAE3AI6wutS2+mXoEYMfw5gRk=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=ZJV4di2d; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=pysWJJ9K; arc=pass smtp.client-ip=185.56.87.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
+ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com; s=arckey; t=1767713260;
+	 b=e7NF8dfSVJgCpQu4wtCoUTNn2BByZHBEAlLfkgYjYaJ0ZFuBK9MrDziLv3QTc1K5zpz8qIdOx2
+	  zzx06BWROP97K5KJn3RoPHXpzpJSGZz7iD0aEhPV2TeytMkCvCfWoRiCWfyuChCCShhe+3ey9O
+	  /4mfs3b4RihuPm+yGumzosY/jSCUSLgV9FFDRNomw5XbpfkNQYUOytbXbMn7Lhxt5iVOubu2iG
+	  bhGZrUlAQ+HplGjmxhTZuxb3ZtIu3D30yMsPL87supSu7lTlvCuPwS1mqpZjvmLEeO1gOOC74W
+	  d5HsX9m71wpWUDscie/dDdSR5y4csf+a+iMzcTJhfaAKOQ==;
+ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
+	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
+	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+	arc=none
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com; s=arckey; t=1767713260;
+	bh=5RBZj5fiknLzyrEUj0wxw39RQT3sg1+tqKapk21gXJY=;
+	h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
+	  Subject:From:DKIM-Signature:DKIM-Signature;
+	b=n3MDDJEPkSNNHUKJHbWIL3hOKchySvpUeeD+GRVXNe4V2laCKMNmzNrzscz3uKhZoSba1ssZxN
+	  zKJdfgjIp5lPWQhbMUuFi+C7TMcuACeS2qny8X5vwq+wdjjiFIGZlWVl0f7gzbKU4/qfRwatWo
+	  /MgTIZIaWdfCKPN7PG+mPQfk//uu7/356xOZxsrVz36uk3t7p1U4Js9UnJbbRNE6zAXFlPia5g
+	  fnyYj4IOVj5eeuvtVuIN4O4HUdeqK5suCCCtZkdeg8Ku9RmU5xYtiIjjYDpDiYpbSggAGb7Aja
+	  PJ+jwrA7HkDvkYH/2iTTFuZ2bkbil+t2fafickGsRAF5RA==;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
+	:Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:
+	Subject:From:Reply-To:List-Unsubscribe;
+	bh=hjiE/vy95miZKmIXOVeCZjg3Col/800s9OhVDa7FJ7I=; b=ZJV4di2dyCB53/Rl6CaciaBjM0
+	xuzBE0AhPnm0yFLgeUwkosI7tEpeK6QBJSXU8M/0CS4+KkrAzfL/qVx/ovsuzOTlFCBRplMSoBvK9
+	a4Uu/JVC982WVt0OqofHofUVOZHY2sNKKVIcd2uiTEitCnmRT3793xwp01xPT/8U2+sk=;
+Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
+	by instance-europe-west4-qrct.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.98.1)
+	(envelope-from <francesco@valla.it>)
+	id 1vd80V-00000007LnT-2nJn;
+	Tue, 06 Jan 2026 14:26:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
+	s=default; h=Cc:To:Date:Subject:From:list-help:list-unsubscribe:
+	list-subscribe:list-post:list-owner:list-archive;
+	bh=hjiE/vy95miZKmIXOVeCZjg3Col/800s9OhVDa7FJ7I=; b=pysWJJ9KhgKk6vhs7nOD76bbaF
+	PZz6G1BIUmBiO/u/dkaL/Kr5Pp3AEEHJg9PYKEl153KSi7Ck5krlGLLv+PZHTaiS6crwIifqQaeqy
+	QySKJCCaiYQZivxPtITXkiTll9RVY49XrorsOtdQ+w2f44GFSkpD6JfG1dqWvXFRfha4=;
+Received: from [95.248.141.113] (port=61315 helo=[192.168.178.65])
+	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.98.1)
+	(envelope-from <francesco@valla.it>)
+	id 1vd80O-00000000MvX-3k3r;
+	Tue, 06 Jan 2026 14:25:52 +0000
+From: Francesco Valla <francesco@valla.it>
+Subject: [PATCH RFC v2 0/3] Add splash DRM client
+Date: Tue, 06 Jan 2026 15:25:39 +0100
+Message-Id: <20260106-drm_client_splash-v2-0-6e86a7434b59@valla.it>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260105181939.GA59391@fedora>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NywrCMBREf6XctZE8NLVdCYIf4FZKic2tvRDbk
+ pSglPy7obh0eWaYMysE9IQB6mIFj5ECTWMGuSugG8z4REY2M0guj4JLzax/tZ0jHJc2zM6EgaH
+ gtrRaKyx7yLvZY0/vzXmH2/UCTQ4HCsvkP9tPFFv1U5Z/lFEwzjjX1alS6qEO5hyNc2ZPCzQpp
+ S98n243tgAAAA==
+X-Change-ID: 20251026-drm_client_splash-e10d7d663e7f
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>, 
+ Javier Martinez Canillas <javierm@redhat.com>
+Cc: Sam Ravnborg <sam@ravnborg.org>, 
+ Mario Limonciello <mario.limonciello@amd.com>, linux-kernel@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
+ linux-embedded@vger.kernel.org, Francesco Valla <francesco@valla.it>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3043; i=francesco@valla.it;
+ h=from:subject:message-id; bh=5RBZj5fiknLzyrEUj0wxw39RQT3sg1+tqKapk21gXJY=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJmx0vmBst9LLTrPL2FLVnujIPlnxsv6yNs7Dy1QPNWrL
+ VxZfWdDRykLgxgXg6yYIkvIuhv39sw1/5a2gfERzBxWJpAhDFycAjAR9yRGhueHNGbcPHawpueT
+ qVZ4oKNqyd6FJ0MEuYM3ns6WcFitfYqRYUHtWgVV3mfNHyxu79i92Gd+IqsCn+7SVfviVojpf6p
+ 7yQ8A
+X-Developer-Key: i=francesco@valla.it; a=openpgp;
+ fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - esm19.siteground.biz
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - valla.it
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SGantispam-id: 3ddd559c7c34731153a7f480692e229a
+AntiSpam-DLS: false
+AntiSpam-DLSP: 
+AntiSpam-DLSRS: 
+AntiSpam-TS: 1.0
+CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
+CFBL-Feedback-ID: 1vd80V-00000007LnT-2nJn-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com;
+	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
+	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+	arc=none
 
-On Mon, Jan 05, 2026 at 01:19:39PM -0500, Stefan Hajnoczi wrote:
-> On Mon, Jan 05, 2026 at 03:23:29AM -0500, Michael S. Tsirkin wrote:
-> > @@ -61,7 +62,7 @@ struct virtio_scsi_cmd {
-> >  
-> >  struct virtio_scsi_event_node {
-> >  	struct virtio_scsi *vscsi;
-> > -	struct virtio_scsi_event event;
-> > +	struct virtio_scsi_event *event;
-> >  	struct work_struct work;
-> >  };
-> >  
-> > @@ -89,6 +90,11 @@ struct virtio_scsi {
-> >  
-> >  	struct virtio_scsi_vq ctrl_vq;
-> >  	struct virtio_scsi_vq event_vq;
-> > +
-> > +	__dma_from_device_group_begin();
-> > +	struct virtio_scsi_event events[VIRTIO_SCSI_EVENT_LEN];
-> > +	__dma_from_device_group_end();
-> 
-> If the device emits two events in rapid succession, could the CPU see
-> stale data for the second event because it already holds the cache line
-> for reading the first event?
-> 
-> In other words, it's not obvious to me that the DMA warnings are indeed
-> spurious and should be silenced here.
-> 
-> It seems safer and simpler to align and pad the struct virtio_scsi_event
-> field in struct virtio_scsi_event_node rather than packing these structs
-> into a single array here they might share cache lines.
-> 
-> Stefan
+Hello,
 
+after quite some time, this is the second RFC version for the DRM-based
+splash screen. Motivation behind the work can be found in v1 [0]. 
 
+Following the advice received on the v1, I stripped away all of the
+user-driven functionalities (i.e.: configurable message and progress
+bar), which can be provided by existing userspace tools, and decided to
+use 24-bits bitmap as image format instead of raw dumps.
 
-To add to what I wrote, that's a lot of overhead: 8 * 128 - about 1K on
-some platforms, and these happen to be low end ones.
+With the addition of EFI BGRT as a new source, this new DRM client is
+now able to draw to screen one of the following:
 
+  - a colored background;
+  - a BMP image loaded as firmware (either built-in or loaded from the
+    filesystem);
+  - the BMP image supplied by the EFI BGRT.
+
+Once compiled inside the kernel, the client can be enabled through the
+command line specifying the drm_client_lib.active=splash parameter.
+
+Two additional command-line parameters can be specified:
+
+  - drm_client_lib.splash_color=0xRRGGBB to modify the default
+    background color (which can in turn be set through a build-time
+    option);
+  - drm_client_lib.splash_bmp=<image.bmp> to set the BMP image loaded in
+    case this is the chosen source (with a fixed default of
+    drm_splash.bmp.
+
+These two parameters were kept against some of the received feedback
+because they fit a specific embedded usecase I want to cover (i.e.:
+hardware model detected and set by the bootloader, along with a custom
+splash for each model).
+
+Additional notes:
+  - Rotation is still not managed.
+  - As for v1, support for tiled screens is untested.
+  - Plain color and BMP sources were tested both on QEMU and on a
+    Beagleplay.
+  - EFI BGRT support was tested using QEMU+OVMF.
+
+Thank you in advance for any feedback you want to leave.
+
+Best regards,
+Francesco
+
+[0] https://lore.kernel.org/all/20251027-drm_client_splash-v1-0-00698933b34a@valla.it
+
+Signed-off-by: Francesco Valla <francesco@valla.it>
+---
+Changes in v2:
+  - Moved from raw dump to BMP format for static image source
+  - Removed support for configurable message
+  - Removed support for progress bar
+  - Added EFI BGRT as image source
+Link to v1: https://lore.kernel.org/r/20251027-drm_client_splash-v1-0-00698933b34a@valla.it
+
+---
+Francesco Valla (3):
+      drm: client: add splash client
+      MAINTAINERS: add entry for DRM splash client
+      drm: docs: remove bootsplash from TODO
+
+ Documentation/gpu/todo.rst                    |  17 -
+ MAINTAINERS                                   |   7 +
+ drivers/gpu/drm/clients/Kconfig               |  79 ++-
+ drivers/gpu/drm/clients/Makefile              |   1 +
+ drivers/gpu/drm/clients/drm_client_internal.h |   9 +
+ drivers/gpu/drm/clients/drm_client_setup.c    |   8 +
+ drivers/gpu/drm/clients/drm_splash.c          | 883 ++++++++++++++++++++++++++
+ 7 files changed, 986 insertions(+), 18 deletions(-)
+---
+base-commit: 7f98ab9da046865d57c102fd3ca9669a29845f67
+change-id: 20251026-drm_client_splash-e10d7d663e7f
+
+Best regards,
 -- 
-MST
+Francesco Valla <francesco@valla.it>
 
 
