@@ -1,169 +1,114 @@
-Return-Path: <linux-doc+bounces-71034-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71036-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8435CF6B66
-	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 05:58:43 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 75FC2CF6CC9
+	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 06:44:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 467EB306EADB
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 04:56:54 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 0137D3016DD5
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 05:44:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CF20E2C08D4;
-	Tue,  6 Jan 2026 04:56:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1EB322E7179;
+	Tue,  6 Jan 2026 05:44:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b="Ss7ckk8R"
+	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="YCBTmcle"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33A3629B8E6
-	for <linux-doc@vger.kernel.org>; Tue,  6 Jan 2026 04:56:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDF4D3A1E63;
+	Tue,  6 Jan 2026 05:44:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=180.181.231.80
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767675409; cv=none; b=GPmqmBhYhta8j3BL/vr9hEkYb3MXry0/pjEKA58WuqDXi3pIBTVXrNxeM6D18Rhc7FFSS23RxAwJYLo8gkYUMh68qw0glUPKryMZCg2O73h78gvgmg7txz6T5FTddHoW5cgCjaQVfZYNiqLI0OdAOWNoH96f6KgZid+KH4jZylw=
+	t=1767678258; cv=none; b=ZRIPWlxvXq5xt4kL6nknmcEsqAloMVkN7WYxC8rYjPxi9iLsS1Skt38vA9WoF9i2dpWZIslRAstOBHQnNVefPa/DSm7GJGQ0giGz3ONV5iW25ipaSI+92APzNrraTnBa178Esmxm4y4soX+BGqwuxVVDTMQfxsXg++aq//hNNeQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767675409; c=relaxed/simple;
-	bh=bPMuOyUg+pCFEpuN7CwHcwhs5rNIMbrQeGA0HQmyckk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=YDtCR6txs7WtwfkES/htzMGKy5+s7A3b47wUPitg9SoU/LiBcAGgruDA6HK0gPNDtv1qvPN6S4YeG/wkD8SwmjzCk4SFdAD3KGTMpKO1WzMbnVInMEQJ5I+MMw8w/kWZyeDJ2qgFX7nLd60lpIJl8Q/mpylY/SkGxFSr6LsI94M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org; spf=none smtp.mailfrom=brainfault.org; dkim=pass (2048-bit key) header.d=brainfault-org.20230601.gappssmtp.com header.i=@brainfault-org.20230601.gappssmtp.com header.b=Ss7ckk8R; arc=none smtp.client-ip=209.85.161.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=brainfault.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=brainfault.org
-Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-65d1bff2abaso359093eaf.1
-        for <linux-doc@vger.kernel.org>; Mon, 05 Jan 2026 20:56:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=brainfault-org.20230601.gappssmtp.com; s=20230601; t=1767675406; x=1768280206; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bXCgyGXdfFw2jhIVzlU19gmITjYf/onAsSkhutvgS3M=;
-        b=Ss7ckk8RVUlxwrFyuqelWPLqIIJuk2Uj4IEjWUM8dXuPOkWWm+lixB4Muz12tiyLpz
-         mH4Vap32W+6b6n/STLcTzIjbzDLaNbuiPZCTCRxGrpbFOQJCn1ZCkEZ7UbWgPQhtnw8B
-         oXpSumQ1Yeu/eSGxc5lYEgzDskB7hoTS0SMh5PbOGqICGpJP6+kmy0264h1lfjUv10B8
-         qA62nRtRXUYA/ElO5yxDxVyWo2HgxNSGMFKoMiTrA9jAeoe5mjKnHjy41nFUnD1Df5/N
-         aIdq/HaNUaJJ62hgsfOMcg+OWc5Xva5wuuO5pfe4/OfigXsOFHkOEuO8NTE04Fv8SXyG
-         8QFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767675406; x=1768280206;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=bXCgyGXdfFw2jhIVzlU19gmITjYf/onAsSkhutvgS3M=;
-        b=kO4ns85kvbkQNYPuGJ/JD903PvJ8HQlPAkGlsN9plhr9gA6hGwdO/8meSuObO+qFKk
-         rZuPnwzG7A+UgIAX5EtfBGWidWPgIfpW57MOuy1ijyDk58sBI8Prkb3agS39YlCVLOKs
-         bvYxNNpzJVpWUwCBw4xLQgiJ1gSRRcVl4n8ss2ZnhXlvfTcWpvDGZJJsxiJQZaZ4bGWc
-         lVGOsUYygyoKhUiY3FzxJG2Q5cFH4Ibhekaws79TmbPY0tR3xTko1Rnl1jap4U+xfX+l
-         Z3iqUciQ0/2+k0oWGzUdfFgfUwC0EZJ3E+JMKZohzpQ4OS2okfXWPEe2/7SOWjLcxyY4
-         D/Xw==
-X-Forwarded-Encrypted: i=1; AJvYcCWfh9RHaoNt/2wXMYsTwHIXhgoRnIhylE9Sop+PAfi+m5NxUiifHWBq+p3pFgG+1ZDDxG8BTEJZtDQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwrrhcSUNKLKYlvXLjOJjw9GHQutrCxUOIGjcQNPmwqoR+/E9ok
-	+eu3Yu435czZW59QH3SoIW2NbMc+Cjywpgc3hAx1zb2VeGAcYNgrAuCkaQzlmmaq4lO2YLGXXvj
-	bqjSvqq620s9HzytEu4tQRC1d54LgPB+8aucvEsURXA==
-X-Gm-Gg: AY/fxX7bJ/heiEXrK9F5vIWkdJIAJ2Rp2OFa/TrpfsXn6cgD203Ecm3j6KWDhk0Bx0w
-	euOjNJPiCNOmjV2KpRLyUKuon/VV2jK/bf3Pro3EgLrYghoX0/Yd3T9r/q/qtC9ewNgxHb2wHyf
-	KovezJ6t8RmZuvIU+auutGEZVbHOAhWx30CKn+mErBC+73FScqdzvVS2QRl3tEYMS+/VFwK6zkO
-	PD2W4dVA8UeiEjBS1bmvFCh0JIu2pjOJXws0IlCe0tmtQ5se29jpwchmJwMLMcbge3ZvXvW8nI4
-	vsordAqiiVh4YJ2ktDP4AEJtrIETpi6OUvS2GYUZgobXlw20xz3b1t3UDA==
-X-Google-Smtp-Source: AGHT+IGq83xsWiBnk8S8Wan7SqZp6GnFrv0pdr0Nor1LjDGkvPMfuowdAk7rc0hTsmwGhsAqXr8Xk0551qnx4JMiq/Y=
-X-Received: by 2002:a05:6820:2202:b0:65e:f37f:93a4 with SMTP id
- 006d021491bc7-65f479d332fmr1135768eaf.8.1767675405972; Mon, 05 Jan 2026
- 20:56:45 -0800 (PST)
+	s=arc-20240116; t=1767678258; c=relaxed/simple;
+	bh=zC+Cn31eJ187+jpwQbmiX49FfleHqGHjrtUyuIePf/4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=nlsfoaARJu1c4IEiCe+LF3i3yAoDW7kUlcyEuDp3hLktfiaE5yTuyr0ufpmaqv9O1nC7MCg3pC7TVvyGYg7QD9aJTedFcrH6jJq3fkECLyEDA+yMnIXgOUAYDYS5dmKAjkRxvrgxs0Ov6MFPVS/CvxAnDAcv8T2RJJCWgGb+Lic=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=YCBTmcle; arc=none smtp.client-ip=180.181.231.80
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=fFZdK8UUvenzvPm6N9koDU/fxnR0ekW5TI24xZDY6kc=; 
+	b=YCBTmcleUU2N0rXwpVT4Xw527tlZr0N7PHGhoRYbFxi0V1yz0MspEiuaUgluwOHJi7UgUWJeaCo
+	aI+V2pDwpQLlu76KzkCMgTJfa8l73o4xERcZiC67fI6SQ38NHKqBernGbeIoTm6iaacIGzGhOr5GY
+	a7chkrDVBcwvZvi4K0hkD8kW9kADwG6VB2ySGSO7s2ZMuzQq0jjPbzgahByLEVKD7zpOn7S8o+0U3
+	CubE9wpUlCoN7q0wO2G+XJMN/qiJZ8rSECQv2HK4BVh6Uiw6J4b5giymeUTqeEWc7scenPFiItIlz
+	iOppOn/L0OnchT/HUMcryCLJmTDYf6itFTjw==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.96 #2 (Debian))
+	id 1vczEy-00EaCi-33;
+	Tue, 06 Jan 2026 13:04:22 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Tue, 06 Jan 2026 13:04:20 +0800
+Date: Tue, 6 Jan 2026 13:04:20 +0800
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Jens Wiklander <jens.wiklander@linaro.org>
+Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sumit Garg <sumit.garg@kernel.org>,
+	Olivia Mackall <olivia@selenic.com>,
+	=?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <clement.leger@bootlin.com>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Sumit Garg <sumit.garg@oss.qualcomm.com>,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	Jan Kiszka <jan.kiszka@siemens.com>,
+	Sudeep Holla <sudeep.holla@arm.com>,
+	Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>,
+	Michael Chan <michael.chan@broadcom.com>,
+	Pavan Chebbi <pavan.chebbi@broadcom.com>,
+	James Bottomley <James.Bottomley@hansenpartnership.com>,
+	Jarkko Sakkinen <jarkko@kernel.org>,
+	Mimi Zohar <zohar@linux.ibm.com>,
+	David Howells <dhowells@redhat.com>,
+	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
+	"Serge E. Hallyn" <serge@hallyn.com>,
+	Peter Huewe <peterhuewe@gmx.de>, op-tee@lists.trustedfirmware.org,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-crypto@vger.kernel.org, linux-rtc@vger.kernel.org,
+	linux-efi@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	arm-scmi@vger.kernel.org, linux-mips@vger.kernel.org,
+	netdev@vger.kernel.org, linux-integrity@vger.kernel.org,
+	keyrings@vger.kernel.org, linux-security-module@vger.kernel.org,
+	Jason Gunthorpe <jgg@ziepe.ca>
+Subject: Re: [PATCH v2 00/17] tee: Use bus callbacks instead of driver
+ callbacks
+Message-ID: <aVyX1GXxdJXv438W@gondor.apana.org.au>
+References: <cover.1765791463.git.u.kleine-koenig@baylibre.com>
+ <CAHUa44FrDZbvRvfN8obf80_k=Eqxe9YxHpjaE5jU7nkxPUwfag@mail.gmail.com>
+ <20251218135332f323fa91@mail.local>
+ <CAHUa44GpW5aO26GDyL9RZub9vVYvVcJ7etwO0yXBN_mUi0W4AA@mail.gmail.com>
+ <CAHUa44HqRbCJTXsrTCm0G5iwtkQtq+Si=yOspCjpAn-N2uVSVg@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251020042904.32096-1-luxu.kernel@bytedance.com>
-In-Reply-To: <20251020042904.32096-1-luxu.kernel@bytedance.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Tue, 6 Jan 2026 10:26:34 +0530
-X-Gm-Features: AQt7F2rV_3WZCrB_VJwYGn79psT6Smtly97t591oPSUibomNxLFKeK19i9dMZfQ
-Message-ID: <CAAhSdy3M8NMF0ojJdoSvtate6FRjS5hno2Wc5i=TeCF84yOK3Q@mail.gmail.com>
-Subject: Re: [PATCH v4 10/10] RISC-V: KVM: selftests: Add Zalasr extensions to
- get-reg-list test
-To: Xu Lu <luxu.kernel@bytedance.com>
-Cc: corbet@lwn.net, paul.walmsley@sifive.com, palmer@dabbelt.com, 
-	aou@eecs.berkeley.edu, alex@ghiti.fr, robh@kernel.org, krzk+dt@kernel.org, 
-	conor+dt@kernel.org, will@kernel.org, peterz@infradead.org, 
-	boqun.feng@gmail.com, mark.rutland@arm.com, atish.patra@linux.dev, 
-	pbonzini@redhat.com, shuah@kernel.org, parri.andrea@gmail.com, 
-	ajones@ventanamicro.com, brs@rivosinc.com, guoren@kernel.org, 
-	linux-doc@vger.kernel.org, linux-riscv@lists.infradead.org, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, kvm@vger.kernel.org, 
-	kvm-riscv@lists.infradead.org, linux-kselftest@vger.kernel.org, 
-	apw@canonical.com, joe@perches.com, lukas.bulwahn@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAHUa44HqRbCJTXsrTCm0G5iwtkQtq+Si=yOspCjpAn-N2uVSVg@mail.gmail.com>
 
-On Mon, Oct 20, 2025 at 9:59=E2=80=AFAM Xu Lu <luxu.kernel@bytedance.com> w=
-rote:
+On Mon, Jan 05, 2026 at 10:16:09AM +0100, Jens Wiklander wrote:
 >
-> The KVM RISC-V allows Zalasr extensions for Guest/VM so add these
-> extensions to get-reg-list test.
->
-> Signed-off-by: Xu Lu <luxu.kernel@bytedance.com>
+> Herbert, you seem happy with the following patches
+> - hwrng: optee - Make use of module_tee_client_driver()
+> - hwrng: optee - Make use of tee bus methods
+> OK if I take them via my tree, or would you rather take them yourself?
 
-LGTM.
-
-Reviewed-by: Anup Patel <anup@brainfault.org>
-
-Queued this patch for Linux-6.20
+Feel free to take them through your tree.
 
 Thanks,
-Anup
-
-
-> ---
->  tools/testing/selftests/kvm/riscv/get-reg-list.c | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/tools/testing/selftests/kvm/riscv/get-reg-list.c b/tools/tes=
-ting/selftests/kvm/riscv/get-reg-list.c
-> index a0b7dabb50406..3020e37f621ba 100644
-> --- a/tools/testing/selftests/kvm/riscv/get-reg-list.c
-> +++ b/tools/testing/selftests/kvm/riscv/get-reg-list.c
-> @@ -65,6 +65,7 @@ bool filter_reg(__u64 reg)
->         case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV=
-_ISA_EXT_ZAAMO:
->         case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV=
-_ISA_EXT_ZABHA:
->         case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV=
-_ISA_EXT_ZACAS:
-> +       case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV=
-_ISA_EXT_ZALASR:
->         case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV=
-_ISA_EXT_ZALRSC:
->         case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV=
-_ISA_EXT_ZAWRS:
->         case KVM_REG_RISCV_ISA_EXT | KVM_REG_RISCV_ISA_SINGLE | KVM_RISCV=
-_ISA_EXT_ZBA:
-> @@ -517,6 +518,7 @@ static const char *isa_ext_single_id_to_str(__u64 reg=
-_off)
->                 KVM_ISA_EXT_ARR(ZAAMO),
->                 KVM_ISA_EXT_ARR(ZABHA),
->                 KVM_ISA_EXT_ARR(ZACAS),
-> +               KVM_ISA_EXT_ARR(ZALASR),
->                 KVM_ISA_EXT_ARR(ZALRSC),
->                 KVM_ISA_EXT_ARR(ZAWRS),
->                 KVM_ISA_EXT_ARR(ZBA),
-> @@ -1112,6 +1114,7 @@ KVM_ISA_EXT_SIMPLE_CONFIG(svvptc, SVVPTC);
->  KVM_ISA_EXT_SIMPLE_CONFIG(zaamo, ZAAMO);
->  KVM_ISA_EXT_SIMPLE_CONFIG(zabha, ZABHA);
->  KVM_ISA_EXT_SIMPLE_CONFIG(zacas, ZACAS);
-> +KVM_ISA_EXT_SIMPLE_CONFIG(zalasr, ZALASR);
->  KVM_ISA_EXT_SIMPLE_CONFIG(zalrsc, ZALRSC);
->  KVM_ISA_EXT_SIMPLE_CONFIG(zawrs, ZAWRS);
->  KVM_ISA_EXT_SIMPLE_CONFIG(zba, ZBA);
-> @@ -1187,6 +1190,7 @@ struct vcpu_reg_list *vcpu_configs[] =3D {
->         &config_zabha,
->         &config_zacas,
->         &config_zalrsc,
-> +       &config_zalasr,
->         &config_zawrs,
->         &config_zba,
->         &config_zbb,
-> --
-> 2.20.1
->
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
 
