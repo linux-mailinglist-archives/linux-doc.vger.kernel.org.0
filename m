@@ -1,213 +1,244 @@
-Return-Path: <linux-doc+bounces-71056-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71054-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44E5FCF90F3
-	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 16:28:06 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A8CCCF908A
+	for <lists+linux-doc@lfdr.de>; Tue, 06 Jan 2026 16:23:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 1BD7C303368C
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 15:27:49 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 65B4D30C9B12
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Jan 2026 15:15:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DD10D33CEA9;
-	Tue,  6 Jan 2026 15:27:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 155FE342151;
+	Tue,  6 Jan 2026 15:15:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="ZJV4di2d";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=valla.it header.i=@valla.it header.b="pysWJJ9K"
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="h5QbmVgf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from delivery.antispam.mailspamprotection.com (delivery.antispam.mailspamprotection.com [185.56.87.13])
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67AF933C50B;
-	Tue,  6 Jan 2026 15:27:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=185.56.87.13
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767713262; cv=pass; b=oDhY3bu+Df8fu2qKfI8wKhyCBh5kWoXfk3+uxiQJ3aWKOTfMwMjxe1S8TPuoE/E/jDUb32LgburZKaV0keqp2yG2y5Sco3xI+1TiRp0F1GtVI3vbEJdLI4ETP6ZXWAmjpANx8+ksT57LMF2mfnCboAPiL9Iemf1+xio72JakTd4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767713262; c=relaxed/simple;
-	bh=5RBZj5fiknLzyrEUj0wxw39RQT3sg1+tqKapk21gXJY=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=HyNuKDK5DoY+xvKnqeUYgBKOEAg2IMHMBrrGe4MUnrxwF6DDmFtFTCco6Py6NEvuakxann2Ed2s+Lq3+04tSD+Kg4bzupYIJZkKTaySxu8g+r01iHYehpsGLRkfn6SFB3n115abUT3qx/JESa/IAE3AI6wutS2+mXoEYMfw5gRk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it; spf=pass smtp.mailfrom=valla.it; dkim=pass (1024-bit key) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b=ZJV4di2d; dkim=pass (1024-bit key) header.d=valla.it header.i=@valla.it header.b=pysWJJ9K; arc=pass smtp.client-ip=185.56.87.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=valla.it
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=valla.it
-ARC-Seal: i=1; cv=none; a=rsa-sha256; d=outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com; s=arckey; t=1767713260;
-	 b=e7NF8dfSVJgCpQu4wtCoUTNn2BByZHBEAlLfkgYjYaJ0ZFuBK9MrDziLv3QTc1K5zpz8qIdOx2
-	  zzx06BWROP97K5KJn3RoPHXpzpJSGZz7iD0aEhPV2TeytMkCvCfWoRiCWfyuChCCShhe+3ey9O
-	  /4mfs3b4RihuPm+yGumzosY/jSCUSLgV9FFDRNomw5XbpfkNQYUOytbXbMn7Lhxt5iVOubu2iG
-	  bhGZrUlAQ+HplGjmxhTZuxb3ZtIu3D30yMsPL87supSu7lTlvCuPwS1mqpZjvmLEeO1gOOC74W
-	  d5HsX9m71wpWUDscie/dDdSR5y4csf+a+iMzcTJhfaAKOQ==;
-ARC-Authentication-Results: i=1; outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com; smtp.remote-ip=35.214.173.214;
-	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
-	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
-	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
-	arc=none
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed; d=outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com; s=arckey; t=1767713260;
-	bh=5RBZj5fiknLzyrEUj0wxw39RQT3sg1+tqKapk21gXJY=;
-	h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
-	  Subject:From:DKIM-Signature:DKIM-Signature;
-	b=n3MDDJEPkSNNHUKJHbWIL3hOKchySvpUeeD+GRVXNe4V2laCKMNmzNrzscz3uKhZoSba1ssZxN
-	  zKJdfgjIp5lPWQhbMUuFi+C7TMcuACeS2qny8X5vwq+wdjjiFIGZlWVl0f7gzbKU4/qfRwatWo
-	  /MgTIZIaWdfCKPN7PG+mPQfk//uu7/356xOZxsrVz36uk3t7p1U4Js9UnJbbRNE6zAXFlPia5g
-	  fnyYj4IOVj5eeuvtVuIN4O4HUdeqK5suCCCtZkdeg8Ku9RmU5xYtiIjjYDpDiYpbSggAGb7Aja
-	  PJ+jwrA7HkDvkYH/2iTTFuZ2bkbil+t2fafickGsRAF5RA==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
-	:Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:
-	Subject:From:Reply-To:List-Unsubscribe;
-	bh=hjiE/vy95miZKmIXOVeCZjg3Col/800s9OhVDa7FJ7I=; b=ZJV4di2dyCB53/Rl6CaciaBjM0
-	xuzBE0AhPnm0yFLgeUwkosI7tEpeK6QBJSXU8M/0CS4+KkrAzfL/qVx/ovsuzOTlFCBRplMSoBvK9
-	a4Uu/JVC982WVt0OqofHofUVOZHY2sNKKVIcd2uiTEitCnmRT3793xwp01xPT/8U2+sk=;
-Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214] helo=esm19.siteground.biz)
-	by instance-europe-west4-qrct.prod.antispam.mailspamprotection.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.98.1)
-	(envelope-from <francesco@valla.it>)
-	id 1vd80V-00000007LnT-2nJn;
-	Tue, 06 Jan 2026 14:26:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
-	s=default; h=Cc:To:Date:Subject:From:list-help:list-unsubscribe:
-	list-subscribe:list-post:list-owner:list-archive;
-	bh=hjiE/vy95miZKmIXOVeCZjg3Col/800s9OhVDa7FJ7I=; b=pysWJJ9KhgKk6vhs7nOD76bbaF
-	PZz6G1BIUmBiO/u/dkaL/Kr5Pp3AEEHJg9PYKEl153KSi7Ck5krlGLLv+PZHTaiS6crwIifqQaeqy
-	QySKJCCaiYQZivxPtITXkiTll9RVY49XrorsOtdQ+w2f44GFSkpD6JfG1dqWvXFRfha4=;
-Received: from [95.248.141.113] (port=61315 helo=[192.168.178.65])
-	by esm19.siteground.biz with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.98.1)
-	(envelope-from <francesco@valla.it>)
-	id 1vd80O-00000000MvX-3k3r;
-	Tue, 06 Jan 2026 14:25:52 +0000
-From: Francesco Valla <francesco@valla.it>
-Subject: [PATCH RFC v2 0/3] Add splash DRM client
-Date: Tue, 06 Jan 2026 15:25:39 +0100
-Message-Id: <20260106-drm_client_splash-v2-0-6e86a7434b59@valla.it>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E568342537;
+	Tue,  6 Jan 2026 15:15:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.17.21
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1767712539; cv=none; b=gVIZ8+4QuFmSDgPqqrkNobaBGySvHBbDgsVpeybiqwWqRl7Kn0zcNQDOID/JSVONNoU/IKtf3EqHWqcjfiPFrg5D4aBSvXRmcsFa52Itf9PZ29wSUwV8AmD2Xh1YaE6YmPrEggi146oMbH5oYRJeXesssEXAddMmkKESIrZx6sk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1767712539; c=relaxed/simple;
+	bh=QsmnXISVYa2pk6hjsYW8EskcSQ9P2G5mLsBWqXfFZHA=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=mIsHfAFhv83o0Pi+wBg/Sn3Xn3I6bFQQNVDRE+eQb+8SuM7wfPU4xIIS3jcFruMro0QlC9RFV36filhVahiIavF+zoT4n1GAlgkBL+k3g42td82K01drk2DAdMaEAeP44u3TCEGcDFfFOiI2eXlIubfpUkn2oV4VEM8iNYKx0DQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=h5QbmVgf; arc=none smtp.client-ip=212.227.17.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1767712527; x=1768317327; i=w_armin@gmx.de;
+	bh=LL48ECBy5NQ8UjaiusNaSiwKQn6MdugiiEWZv2gDUYg=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
+	 Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 cc:content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=h5QbmVgfXN9NR3yDcdp7joPqZtjCxxOayNa73EP1SzYHVPjtEmXWPh8ISFNVvsPG
+	 AXqAIPziA5anGEtKSW+JVa8Zs1WmoZBUuYQQQ3ZZlSceckTWKUwo1MAINVRoPSoMj
+	 oooStWxhubpUTTc9WuRUI9QIaT462sAiCISs6+hoqyndTbrurxYf+Qy0YmXN9I0AT
+	 mX96As6BGmud3NytUisBZ+6u4Den1f5WdOROnd1zexZgxmUW6cWt2FvrHWIwvGme5
+	 LWeczZGKjD/D4trd5BmnfoNbSo8NRXOMQg2QYJWbUxW90ObZAG5XXTQVeDUEzHuq1
+	 Ks+i6zfESzvJSicNsA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.16.90.225] ([141.76.8.161]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MryXN-1wFTkR3RUT-00ph3f; Tue, 06
+ Jan 2026 16:15:27 +0100
+Message-ID: <24598820-dcd8-4e29-9c1b-58b5fdba144d@gmx.de>
+Date: Tue, 6 Jan 2026 16:15:22 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/9] platform/wmi: Introduce marshalling support
+From: Armin Wolf <W_Armin@gmx.de>
+To: hansg@kernel.org, ilpo.jarvinen@linux.intel.com
+Cc: platform-driver-x86@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux@weissschuh.net, Dell.Client.Kernel@dell.com, corbet@lwn.net,
+ linux-doc@vger.kernel.org
+References: <20251220204622.3541-1-W_Armin@gmx.de>
+Content-Language: en-US
+In-Reply-To: <20251220204622.3541-1-W_Armin@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NywrCMBREf6XctZE8NLVdCYIf4FZKic2tvRDbk
- pSglPy7obh0eWaYMysE9IQB6mIFj5ECTWMGuSugG8z4REY2M0guj4JLzax/tZ0jHJc2zM6EgaH
- gtrRaKyx7yLvZY0/vzXmH2/UCTQ4HCsvkP9tPFFv1U5Z/lFEwzjjX1alS6qEO5hyNc2ZPCzQpp
- S98n243tgAAAA==
-X-Change-ID: 20251026-drm_client_splash-e10d7d663e7f
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Jonathan Corbet <corbet@lwn.net>, Jocelyn Falempe <jfalempe@redhat.com>, 
- Javier Martinez Canillas <javierm@redhat.com>
-Cc: Sam Ravnborg <sam@ravnborg.org>, 
- Mario Limonciello <mario.limonciello@amd.com>, linux-kernel@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, 
- linux-embedded@vger.kernel.org, Francesco Valla <francesco@valla.it>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3043; i=francesco@valla.it;
- h=from:subject:message-id; bh=5RBZj5fiknLzyrEUj0wxw39RQT3sg1+tqKapk21gXJY=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDJmx0vmBst9LLTrPL2FLVnujIPlnxsv6yNs7Dy1QPNWrL
- VxZfWdDRykLgxgXg6yYIkvIuhv39sw1/5a2gfERzBxWJpAhDFycAjAR9yRGhueHNGbcPHawpueT
- qVZ4oKNqyd6FJ0MEuYM3ns6WcFitfYqRYUHtWgVV3mfNHyxu79i92Gd+IqsCn+7SVfviVojpf6p
- 7yQ8A
-X-Developer-Key: i=francesco@valla.it; a=openpgp;
- fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - esm19.siteground.biz
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - valla.it
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SGantispam-id: 3ddd559c7c34731153a7f480692e229a
-AntiSpam-DLS: false
-AntiSpam-DLSP: 
-AntiSpam-DLSRS: 
-AntiSpam-TS: 1.0
-CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1vd80V-00000007LnT-2nJn-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-qrct.prod.antispam.mailspamprotection.com;
-	iprev=pass (214.173.214.35.bc.googleusercontent.com) smtp.remote-ip=35.214.173.214;
-	auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
-	dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
-	arc=none
+X-Provags-ID: V03:K1:T/axQS+SmPQo6fxHtf4RVCfeG8X9oP33C/DS+SRgfhuxmeiiBK1
+ aMDokLnRZ5bAXOh6H2XV8muOT0LEoQA6EHqn26w3xVyTk1bBWQhBlmX9wnRxv1KVq/H18sg
+ bNqq5ByGxplSrRo61nDXaBJxbEROCFLAYi/GxHPQUiG8m/yB9BkM+LcRSc1BkmpaARJpGJN
+ nNdpLoCexC9dSyBmH4qSw==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:MP0/g9BWQZc=;SnwndNaKFc9+ZLtCiw6gNvzC5Fs
+ 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
 
-Hello,
+Am 20.12.25 um 21:46 schrieb Armin Wolf:
 
-after quite some time, this is the second RFC version for the DRM-based
-splash screen. Motivation behind the work can be found in v1 [0]. 
+> The Windows WMI-ACPI driver likely uses wmilib [1] to interact with
+> the WMI service in userspace. Said library uses plain byte buffers
+> for exchanging data, so the WMI-ACPI driver has to convert between
+> those byte buffers and ACPI objects returned by the ACPI firmware.
+>
+> The format of the byte buffer is publicly documented [2], and after
+> some reverse eingineering of the WMI-ACPI driver using a set of custom
+> ACPI tables, the following conversion rules have been discovered:
+>
+> - ACPI integers are always converted into a uint32
+> - ACPI strings are converted into special WMI strings
+> - ACPI buffers are copied as-is
+> - ACPI packages are unpacked
+>
+> Extending the ACPI-WMI to perform this kind of marshalling for WMI
+> data blocks, methods and events would give us a number of benefits:
+>
+> - WMI drivers are not restricted to a fixed set of supported ACPI data
+>    types anymore, see dell-wmi-aio (integer vs buffer) and
+>    hp-wmi-sensors (string vs buffer)
+>
+> - correct marshalling of WMI strings when data blocks are marked
+>    as requiring ACPI strings instead of ACPI buffers
+>
+> - development of WMI drivers without having to understand ACPI
+>
+> This eventually should result in better compatibility with some
+> ACPI firmware implementations and in simpler WMI drivers.
+>
+> The first patch extends the WMI driver core to perform said
+> marshalling as well as a new API not based on ACPI objects. The next
+> patch adds a KUnit test for testing the marshalling code. The
+> following two patches then add a set of helper functions for dealing
+> with WMI string data together with another KUnit test.
+>
+> The remaining patches then convert some simple WMI drivers to use the
+> new WMI API and update the driver development guide so that new WMI
+> drivers stop using the ACPI-based API.
+>
+> The series has been tested on multiple machines, with the xiaomi-wmi
+> and intel-wmi-sbl-fw-update being tested using a set of custom ACPI
+> tables loaded over configFS.
+>
+> [1] https://learn.microsoft.com/de-de/windows-hardware/drivers/ddi/wmilib/
 
-Following the advice received on the v1, I stripped away all of the
-user-driven functionalities (i.e.: configurable message and progress
-bar), which can be provided by existing userspace tools, and decided to
-use 24-bits bitmap as image format instead of raw dumps.
+Any thoughts on this? I can split the last five patches into a separate patch series
+when necessary.
 
-With the addition of EFI BGRT as a new source, this new DRM client is
-now able to draw to screen one of the following:
+Thanks,
+Armin Wolf
 
-  - a colored background;
-  - a BMP image loaded as firmware (either built-in or loaded from the
-    filesystem);
-  - the BMP image supplied by the EFI BGRT.
-
-Once compiled inside the kernel, the client can be enabled through the
-command line specifying the drm_client_lib.active=splash parameter.
-
-Two additional command-line parameters can be specified:
-
-  - drm_client_lib.splash_color=0xRRGGBB to modify the default
-    background color (which can in turn be set through a build-time
-    option);
-  - drm_client_lib.splash_bmp=<image.bmp> to set the BMP image loaded in
-    case this is the chosen source (with a fixed default of
-    drm_splash.bmp.
-
-These two parameters were kept against some of the received feedback
-because they fit a specific embedded usecase I want to cover (i.e.:
-hardware model detected and set by the bootloader, along with a custom
-splash for each model).
-
-Additional notes:
-  - Rotation is still not managed.
-  - As for v1, support for tiled screens is untested.
-  - Plain color and BMP sources were tested both on QEMU and on a
-    Beagleplay.
-  - EFI BGRT support was tested using QEMU+OVMF.
-
-Thank you in advance for any feedback you want to leave.
-
-Best regards,
-Francesco
-
-[0] https://lore.kernel.org/all/20251027-drm_client_splash-v1-0-00698933b34a@valla.it
-
-Signed-off-by: Francesco Valla <francesco@valla.it>
----
-Changes in v2:
-  - Moved from raw dump to BMP format for static image source
-  - Removed support for configurable message
-  - Removed support for progress bar
-  - Added EFI BGRT as image source
-Link to v1: https://lore.kernel.org/r/20251027-drm_client_splash-v1-0-00698933b34a@valla.it
-
----
-Francesco Valla (3):
-      drm: client: add splash client
-      MAINTAINERS: add entry for DRM splash client
-      drm: docs: remove bootsplash from TODO
-
- Documentation/gpu/todo.rst                    |  17 -
- MAINTAINERS                                   |   7 +
- drivers/gpu/drm/clients/Kconfig               |  79 ++-
- drivers/gpu/drm/clients/Makefile              |   1 +
- drivers/gpu/drm/clients/drm_client_internal.h |   9 +
- drivers/gpu/drm/clients/drm_client_setup.c    |   8 +
- drivers/gpu/drm/clients/drm_splash.c          | 883 ++++++++++++++++++++++++++
- 7 files changed, 986 insertions(+), 18 deletions(-)
----
-base-commit: 7f98ab9da046865d57c102fd3ca9669a29845f67
-change-id: 20251026-drm_client_splash-e10d7d663e7f
-
-Best regards,
--- 
-Francesco Valla <francesco@valla.it>
-
+> Changes since v1:
+> - fix spelling issues inside the documentation
+> - add Reviewed-by tag for the documentation
+>
+> Armin Wolf (9):
+>    platform/wmi: Introduce marshalling support
+>    platform/wmi: Add kunit test for the marshalling code
+>    platform/wmi: Add helper functions for WMI string conversions
+>    platform/wmi: Add kunit test for the string conversion code
+>    platform/x86: intel-wmi-sbl-fw-update: Use new buffer-based WMI API
+>    platform/x86/intel/wmi: thunderbolt: Use new buffer-based WMI API
+>    platform/x86: xiaomi-wmi: Use new buffer-based WMI API
+>    platform/x86: wmi-bmof: Use new buffer-based WMI API
+>    platform/wmi: Update driver development guide
+>
+>   Documentation/driver-api/wmi.rst              |   3 +
+>   Documentation/wmi/acpi-interface.rst          |  68 +++
+>   .../wmi/driver-development-guide.rst          |  76 ++-
+>   drivers/platform/wmi/Kconfig                  |   3 +
+>   drivers/platform/wmi/Makefile                 |   5 +-
+>   drivers/platform/wmi/core.c                   | 160 ++++++-
+>   drivers/platform/wmi/internal.h               |  14 +
+>   drivers/platform/wmi/marshalling.c            | 233 +++++++++
+>   drivers/platform/wmi/string.c                 |  92 ++++
+>   drivers/platform/wmi/tests/Kconfig            |  27 ++
+>   drivers/platform/wmi/tests/Makefile           |  11 +
+>   .../platform/wmi/tests/marshalling_kunit.c    | 448 ++++++++++++++++++
+>   drivers/platform/wmi/tests/string_kunit.c     | 277 +++++++++++
+>   .../platform/x86/intel/wmi/sbl-fw-update.c    |  43 +-
+>   drivers/platform/x86/intel/wmi/thunderbolt.c  |  26 +-
+>   drivers/platform/x86/wmi-bmof.c               |  34 +-
+>   drivers/platform/x86/xiaomi-wmi.c             |   5 +-
+>   include/linux/wmi.h                           |  44 +-
+>   18 files changed, 1477 insertions(+), 92 deletions(-)
+>   create mode 100644 drivers/platform/wmi/internal.h
+>   create mode 100644 drivers/platform/wmi/marshalling.c
+>   create mode 100644 drivers/platform/wmi/string.c
+>   create mode 100644 drivers/platform/wmi/tests/Kconfig
+>   create mode 100644 drivers/platform/wmi/tests/Makefile
+>   create mode 100644 drivers/platform/wmi/tests/marshalling_kunit.c
+>   create mode 100644 drivers/platform/wmi/tests/string_kunit.c
+>
 
