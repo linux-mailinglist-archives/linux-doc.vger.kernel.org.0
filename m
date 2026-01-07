@@ -1,96 +1,65 @@
-Return-Path: <linux-doc+bounces-71126-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71128-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id E89EFCFB6B5
-	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 01:06:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C76F8CFB897
+	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 02:07:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id D974B3027E12
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 00:06:17 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 4DC9030726B3
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 01:04:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0A18529A1;
-	Wed,  7 Jan 2026 00:06:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8E4620DD52;
+	Wed,  7 Jan 2026 01:04:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="geinxmEC"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="l5hqhDFp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oo1-f67.google.com (mail-oo1-f67.google.com [209.85.161.67])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from canpmsgout03.his.huawei.com (canpmsgout03.his.huawei.com [113.46.200.218])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46EFB800
-	for <linux-doc@vger.kernel.org>; Wed,  7 Jan 2026 00:06:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.67
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5663720ED;
+	Wed,  7 Jan 2026 01:04:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.218
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767744376; cv=none; b=Mfe+KJIpLqXHTD2xtN7tWWklTn/TivC1K6+z+b0Ulw707wtzUECJfE43JUIYqos/PhqKV+A3jVjH2MpapXKzEkEDQbChQju6PH6no/57w/xXwSAqqmX0PvBYGKOim5py+xrhYf+D/DcgH/MPM+qm8bPxSe4LFC23Rf8oczUr6h0=
+	t=1767747881; cv=none; b=tuZDAxubl2CL1RnllDBxLFP+RCaDjLTYKHvnNmBX9XbN6PEjD+dYxKTDkXjRZFPmFWimhlzXX6c22YLgMq2T1u+4qnp8OUkwC8Cjd2iAol2pFUFCW3AGYJn4uBrWgVGERoS54xBwvezqAwgWe25c5hph9c5W/gAr5m3OIkwsqRI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767744376; c=relaxed/simple;
-	bh=L3zGK0vOWDwJ6EPx+wY8qWZHxhitG5NkRkBh/MFlPGA=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=hq9HKh3p5ATmqEF7phpC9mP7aU2xQw92QpOFSFUKhI/McaA8DIz0DYUVs8ZQIbeXT+bxOK44/HN74UcGLNwrH+RL8vfZO+aRNrXJYQOtbCsdsllyPUZyJOLUTIeVSjG+y+gBeUYBmVnFluKa6gY5LvvABSHUZ/ow/1LDpPPxdnc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=geinxmEC; arc=none smtp.client-ip=209.85.161.67
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oo1-f67.google.com with SMTP id 006d021491bc7-6598413b604so905779eaf.0
-        for <linux-doc@vger.kernel.org>; Tue, 06 Jan 2026 16:06:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767744374; x=1768349174; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tgq7GZjchn1EcjfHQ/Ha9eC2PJUmykLGV5Ks1aM6jX8=;
-        b=geinxmECRXk6QF98OZxRxy8waoIQXAxCXFQJLaXL1iKOlYqyqA58LeJswEPKAerVBz
-         DZdy+mcm5qQjkvnx+u7rd4seoLt4TMUYuEc42NoVKl7NmVwZepn/lpjObVjtAQn9mgM4
-         CgVGmuSniPqOQrvomwWriVbyWVeV/28gejCIIQ2U9M3uhh1cFrvxJOrT7/4zDraGpCj8
-         iue8BniEuXaRkyJ2y1NZfbUdwj1t96TR0o/7Eu8Hs6hSCyuKEmO4PdLAACcPs0FQNn3q
-         K4Urv1kq4v/E2c2Kq/JUupFzYGXYHTGk38pi8VDNoKSFBCtS5Z335YeOx6Q51CPE1zwq
-         EDWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767744374; x=1768349174;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tgq7GZjchn1EcjfHQ/Ha9eC2PJUmykLGV5Ks1aM6jX8=;
-        b=PLBZtNCqh54PM/57GDQ8qtZH26jSPBtFgbRI3UjDK8ocN82e8mC/nYABkD03gyXJEy
-         YfFV+vj14lyupQSMaMf5Lo7DsCVtJQqiPXC8Wu0rCogw0P3B3M3Kn+2W5cSL+pEueCpW
-         9rTB9EQ+sv+yAJWMQQQ9p/Z6Rdoq4yykIvs/NVr3p2FQYtV/GJLrDmYyOg1bZzC3Uacw
-         NxzD3k95C6pe9S7UmE3Mtt6ladsvMtrxqWIInOlXf4ehHO57vzjuNyB6qvYqUzw3M+eT
-         R8pyN/u+A4x4odYKf9rQcjCc+luyUnmjhhr9iphKg9TqMz0DH8Cui8TyRLOjnf0spnCV
-         azpw==
-X-Forwarded-Encrypted: i=1; AJvYcCXQjWiQk0Qk+36ck3CCeBjDdBQHzqGG7zi5EIdASZ8ez8Zx3JSLuOYkLz1ULQH/0m5ErwNeDeT1eJs=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywe6BGpgLf3hTWcXGimlQPAxk3lTFwCkQfzSGM250/DvwiNb6Up
-	sgYY2f2hzLG4lInQpF/2QEBNecwBoUzszIdhYeFLVG21X0dx4iWAtdco
-X-Gm-Gg: AY/fxX4auhBuxacqQkwAKPuG7lyMiKApUJKwXTQCCYqO0XZdHxRltPXGYXrGcVSIUBQ
-	x3u+pbcDtXza799EZykQ0CoPB2tgGVDbv1gPksfs8z+RjCQ3Cdyj4/VjDylBa8lsKLv1iexG88m
-	kyg40zCYhjs9XlHd7hhZQQsX3BeNGBO+KjISa3VG3K32PgjWg10VYhHuMLuOXMLfWdcOvMmRHAT
-	Wa7OFYl/1J4u2CXzF/2RVDEJO1IcyEnwS00lEl95ByjpbMAXTvkYXO+lYZukcfo8PV2vTU2n3Qw
-	bsfDl9E870IjECBNZV+0TdAKM60j9GVD8pWov+rkxh0L/yLH6Gtv01nYI+WzvnBdMUjNDemJWFb
-	vBTgz0ZRnO1pRL/EUfksCYu5IytbirK1xEmOPeGRQG1nrBMuuu+Qy+wDKF1Bp/Hxqww+VV/8e0y
-	bC886fW3qcUVbNCcvzp0h3mGqUz6E1
-X-Google-Smtp-Source: AGHT+IHZk6/5mjRHyYCN1+0jYjV5yZCr12a2Qvfp3DAWPnZ9X8yCdldjy8vhbzKeSmmfI2HWux74cA==
-X-Received: by 2002:a05:6820:7511:b0:659:9a49:904d with SMTP id 006d021491bc7-65f54eda43bmr210960eaf.24.1767744374064;
-        Tue, 06 Jan 2026 16:06:14 -0800 (PST)
-Received: from localhost.localdomain ([50.24.139.5])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-3ffbe3a6d8esm609612fac.15.2026.01.06.16.06.11
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 06 Jan 2026 16:06:12 -0800 (PST)
-From: Andy Chiu <andybnac@gmail.com>
-To: linux-riscv@lists.infradead.org,
-	linux-doc@vger.kernel.org,
-	pjw@kernel.org
-Cc: Andy Chiu <andybnac@gmail.com>,
-	Zihong Yao <zihong.plct@isrc.iscas.ac.cn>,
-	linux-kernel@vger.kernel.org,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	paul.walmsley@sifive.com,
-	greentime.hu@sifive.com,
-	nick.hu@sifive.com,
-	nylon.chen@sifive.com,
-	eric.lin@sifive.com,
-	vincent.chen@sifive.com,
-	zong.li@sifive.com,
-	yongxuan.wang@sifive.com,
-	samuel.holland@sifive.com
-Subject: [PATCH v1] Documentation: riscv: update Vector discovery for userspace
-Date: Tue,  6 Jan 2026 18:06:09 -0600
-Message-Id: <20260107000609.63892-1-andybnac@gmail.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-145)
+	s=arc-20240116; t=1767747881; c=relaxed/simple;
+	bh=PFA0JSWuM+BppmK35rAj397fL3UzOFSE6xRoQy98LUk=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=cSxTY83qQQ26p27FZR1NY8CbYyKyJUlLEVhN7FeqMkRWa7AnXXyvX+Q/78DIyyX4UXcbCJ0Qnmn0ixbX1mGBw0ZKdfKGWmACv7as4LT5rgZKYpDbK6qn05Bcp7UDEB5tLy2zxapA79lZszruspJUXejW1DEDKKCyUETdNYBjzgU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=l5hqhDFp; arc=none smtp.client-ip=113.46.200.218
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=7qAVDr6I6PrXbjnSotSv6whKipsTU/ClqjcJ/XCaSjg=;
+	b=l5hqhDFpuU/IOQdG9fEMz77d8/1cDpUaZZBZYVH7Ne8bSH572BcmAb+xy51qP5Oj9lS2HBJdS
+	+RQFWQv1vTkPTmLAQHPtKJOmeZc1HjwJHvvCnJ9OnEwriSbPSxQgd/IGB6K+14OcPkFvCDmchRM
+	qQAmnAkKgjyScW3KX9hH2CQ=
+Received: from mail.maildlp.com (unknown [172.19.162.197])
+	by canpmsgout03.his.huawei.com (SkyGuard) with ESMTPS id 4dm8qV0DfZzpStS;
+	Wed,  7 Jan 2026 09:01:10 +0800 (CST)
+Received: from kwepemf100013.china.huawei.com (unknown [7.202.181.12])
+	by mail.maildlp.com (Postfix) with ESMTPS id 929E64056C;
+	Wed,  7 Jan 2026 09:04:30 +0800 (CST)
+Received: from DESKTOP-62GVMTR.china.huawei.com (10.174.188.120) by
+ kwepemf100013.china.huawei.com (7.202.181.12) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.36; Wed, 7 Jan 2026 09:04:29 +0800
+From: Fan Gong <gongfan1@huawei.com>
+To: Fan Gong <gongfan1@huawei.com>, Zhu Yikai <zhuyikai1@h-partners.com>,
+	<netdev@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni
+	<pabeni@redhat.com>, Simon Horman <horms@kernel.org>, Andrew Lunn
+	<andrew+netdev@lunn.ch>, Markus Elfring <Markus.Elfring@web.de>, Pavan Chebbi
+	<pavan.chebbi@broadcom.com>, ALOK TIWARI <alok.a.tiwari@oracle.com>
+CC: <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>, luosifu
+	<luosifu@huawei.com>, Xin Guo <guoxin09@huawei.com>, Zhou Shuai
+	<zhoushuai28@huawei.com>, Wu Like <wulike1@huawei.com>, Shi Jing
+	<shijing34@huawei.com>, Luo Yang <luoyang82@h-partners.com>
+Subject: [PATCH net-next v09 0/9] net: hinic3: PF initialization
+Date: Wed, 7 Jan 2026 09:04:15 +0800
+Message-ID: <cover.1767707500.git.zhuyikai1@h-partners.com>
+X-Mailer: git-send-email 2.51.0.windows.1
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -98,92 +67,117 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems100002.china.huawei.com (7.221.188.206) To
+ kwepemf100013.china.huawei.com (7.202.181.12)
 
-Make it explicit that users may use both HWCAP and
-PR_RISCV_V_GET_CONTROL for checking the availability of Vector
-extensions. This addresses the ABI usage concern[1] arised from the user
-space community in supporting Vector sub-exts and multiversioning.
+This is [1/3] part of hinic3 Ethernet driver second submission.
+With this patch hinic3 becomes a complete Ethernet driver with
+pf and vf.
 
-[1]: https://bugzilla.kernel.org/show_bug.cgi?id=220795
+The driver parts contained in this patch:
+Add support for PF framework based on the VF code.
+Add PF management interfaces to communicate with HW.
+Add 8 netdev ops to configure NIC features.
+Support mac filter to unicast and multicast.
+Add HW event handler to manage port and link status.
 
-Suggested-by: Zihong Yao <zihong.plct@isrc.iscas.ac.cn>
-Signed-off-by: Andy Chiu <andybnac@gmail.com>
----
- Documentation/arch/riscv/vector.rst | 49 +++++++++++++++++++++++------
- 1 file changed, 39 insertions(+), 10 deletions(-)
+Changes:
 
-diff --git a/Documentation/arch/riscv/vector.rst b/Documentation/arch/riscv/vector.rst
-index 3987f5f76a9d..1fde56ffe85b 100644
---- a/Documentation/arch/riscv/vector.rst
-+++ b/Documentation/arch/riscv/vector.rst
-@@ -13,13 +13,14 @@ order to support the use of the RISC-V Vector Extension.
- Two new prctl() calls are added to allow programs to manage the enablement
- status for the use of Vector in userspace. The intended usage guideline for
- these interfaces is to give init systems a way to modify the availability of V
--for processes running under its domain. Calling these interfaces is not
--recommended in libraries routines because libraries should not override policies
--configured from the parent process. Also, users must note that these interfaces
--are not portable to non-Linux, nor non-RISC-V environments, so it is discourage
--to use in a portable code. To get the availability of V in an ELF program,
--please read :c:macro:`COMPAT_HWCAP_ISA_V` bit of :c:macro:`ELF_HWCAP` in the
--auxiliary vector.
-+for processes running under its domain. Changing Vector policy by calling
-+:c:macro:`PR_RISCV_V_SET_CONTROL` is not recommended in library routines
-+because libraries should not override policies configured by the parent process.
-+Also, users must note that these interfaces are not portable to non-Linux,
-+nor non-RISC-V environments, so their use is discouraged in portable code.
-+To get the availability of V in an ELF program, user code may read the result of
-+:c:macro:`PR_RISCV_V_GET_CONTROL`, or the :c:macro:`COMPAT_HWCAP_ISA_V` bit
-+of :c:macro:`ELF_HWCAP` in the auxiliary vector.
- 
- * prctl(PR_RISCV_V_SET_CONTROL, unsigned long arg)
- 
-@@ -91,9 +92,9 @@ auxiliary vector.
-     Gets the same Vector enablement status for the calling thread. Setting for
-     next execve() call and the inheritance bit are all OR-ed together.
- 
--    Note that ELF programs are able to get the availability of V for itself by
--    reading :c:macro:`COMPAT_HWCAP_ISA_V` bit of :c:macro:`ELF_HWCAP` in the
--    auxiliary vector.
-+    Note that ELF programs are able to get the availability of the standard V
-+    extension for itself by reading :c:macro:`COMPAT_HWCAP_ISA_V` bit of
-+    :c:macro:`ELF_HWCAP` in the auxiliary vector.
- 
-     Return value:
-         * a nonnegative value on success;
-@@ -138,3 +139,31 @@ As indicated by version 1.0 of the V extension [1], vector registers are
- clobbered by system calls.
- 
- 1: https://github.com/riscv/riscv-v-spec/blob/master/calling-convention.adoc
-+
-+4.  Vector Extensions Discovery
-+-------------------------------
-+
-+Existing kernel supports running Vector code in the user space on hardware
-+that only implements zve32x subextension, or 0.7 version of the spec when
-+compiled with c:macro:`RISCV_ISA_V && RISCV_ISA_XTHEADVECTOR`. When the kernel
-+recognizes and supports an extension on a hardware implementation, the
-+kernel indicates its existence on /proc/cpuinfo, and the corresponding bits
-+obtained from riscv_hwprobe(2) is also set.
-+
-+The existence of an extension does not necessary guarantee its availibility to
-+any given process. Traditionally, :c:macro:`ELF_HWCAP` is used for such
-+availibility check. This remains useful for checking the availabilty for standard
-+Vector extension, by referencing the :c:macro:`COMPAT_HWCAP_ISA_V` bit.
-+
-+However, though the kernel provides compatibility for flexible hardware
-+configurations, the kernel does not report the availability of subextension, nor
-+pre-standarized Vector in :c:macro:`ELF_HWCAP` to prevent exagerating the
-+limited bit space.
-+
-+c:macro:`HWCAP` is designed to serve as a quick check to see if the standard
-+Vector is both *pressence* and *available* to the process. For any non-standard
-+Vector extensions, the ABI guaranteed way to identify their existence is by
-+going through the hwprobe(2) interface. Then, the
-+:c:macro:`prctl(PR_RISCV_V_GET_CONTROL)` serves as the availibility
-+check to see if executing any Vector instructions is allowed by the runtime
-+environment.
+PATCH 01 V01: https://lore.kernel.org/netdev/cover.1760502478.git.zhuyikai1@h-partners.com/
+
+PATCH 01 V02: https://lore.kernel.org/netdev/cover.1760685059.git.zhuyikai1@h-partners.com/
+* Change the order of hinic3_netdev_event (Jakub Kicinski)
+* Use netdev_hold/put instead of dev_hold/put (Jakub Kicinski)
+* Remove the semicolon at the end of switch case (Jakub Kicinski)
+* Remove redundant PF judgement in hinic3_rx_tx_flush (Paven Chebbi)
+* change hinic3_send_mbox_to_mgmt errcode to EFAULT (Paven Chebbi)
+* Optimize hinic3_set_bdf_ctxt parameters (Paven Chebbi)
+* Modify main and CC recipients (Markus Elfring)
+
+PATCH 01 V03: https://lore.kernel.org/netdev/cover.1761362580.git.zhuyikai1@h-partners.com/
+* Use disable_delayed_work_sync instead of cancel_delayed_work_sync (Paolo Abeni)
+* Fill in the missing hinic3_sync_time & hinic3_free_ppf_work (Paolo Abeni)
+* Refactor hinic3_mac_filter_sync to implement linux coding style(err label)
+  and improve readability (Paolo Abeni & Markus Elfring)
+
+PATCH 01 V04: https://lore.kernel.org/netdev/cover.1761711549.git.zhuyikai1@h-partners.com/
+* Use linux error value(EADDRINUSE) instead of custom value in set_mac (Simon Horman)
+* Use "hinic3_check_pf_set_vf_already" function instead of macro (Simon Horman)
+
+PATCH 01 V05: https://lore.kernel.org/netdev/cover.1762414088.git.zhuyikai1@h-partners.com/
+* Code format fixes: wrap the code at 80 characters (Jakub Kicinski)
+* Use str_up_down instead of ternary expression (Simon Horman)
+* Remove needless override of error value (Simon Horman)
+
+PATCH 01 V06: https://lore.kernel.org/netdev/cover.1762581665.git.zhuyikai1@h-partners.com/
+* Update dev_err messages (ALOK TIWARI)
+* Remove redundant codes "message from vf" in get_mbox_msg_desc (ALOK TIWARI)
+* Code spell fix (ALOK TIWARI)
+* Modfiy hinic3_uc_sync/unsync to hinic3_filter_mac_sync/unsync (ALOK TIWARI)
+* Modify hinic3_mac_filter_sync_hw to return error code (ALOK TIWARI)
+
+PATCH 01 V07: https://lore.kernel.org/netdev/cover.1763555878.git.zhuyikai1@h-partners.com/
+* Change port_state_sem to mutex (Jakub Kicinski)
+* Use DIM infrastructure to change itr moderation configuration (Jakub Kicinski)
+* Remove redundant TX TIMEOUT counter (Jakub Kicinski)
+* Use txqueue in tx_timeout instead of searching for timeout queue (Jakub Kicinski)
+* Remove redundant initialization to ndev features with more than 1
+  vlan depth. (Jakub Kicinski)
+* Split patch for one single thing and optimize commit information (Jakub Kicinski)
+
+PATCH 01 V08: https://lore.kernel.org/netdev/cover.1767495881.git.zhuyikai1@h-partners.com/
+* Remove netdev notifier interfaces and use ndo_features_check to solve packets
+  with multiple vlan tags instead of using vlan_features (Paolo Abeni)
+
+PATCH 01 V09:
+* Add null check in hinic3_mbox_func_aeqe_handler (AI review)
+* Add disable_delayed_work_sync in err_uninit_nic_feature (AI review)
+* Add vlan_filter's zero initialization (AI review)
+* Add disable_work_sync in hinic3_qps_irq_uninit (AI review)
+* Adjust hinic3_mac_filter_sync_hw params for readability (AI review)
+
+Fan Gong (9):
+  hinic3: Add PF framework
+  hinic3: Add PF management interfaces
+  hinic3: Add .ndo_tx_timeout and .ndo_get_stats64
+  hinic3: Add .ndo_set_features and .ndo_fix_features
+  hinic3: Add .ndo_features_check
+  hinic3: Add .ndo_vlan_rx_add/kill_vid and .ndo_validate_addr
+  hinic3: Add adaptive IRQ coalescing with DIM
+  hinic3: Add mac filter ops
+  hinic3: Add HW event handler
+
+ drivers/net/ethernet/huawei/hinic3/Makefile   |   1 +
+ .../net/ethernet/huawei/hinic3/hinic3_csr.h   |   6 +
+ .../ethernet/huawei/hinic3/hinic3_filter.c    | 417 ++++++++++++++++++
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.c   | 115 +++++
+ .../ethernet/huawei/hinic3/hinic3_hw_comm.h   |   6 +
+ .../ethernet/huawei/hinic3/hinic3_hw_intf.h   |  24 +
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.c |  97 +++-
+ .../net/ethernet/huawei/hinic3/hinic3_hwdev.h |  21 +
+ .../net/ethernet/huawei/hinic3/hinic3_hwif.c  |  90 +++-
+ .../net/ethernet/huawei/hinic3/hinic3_hwif.h  |  23 +
+ .../net/ethernet/huawei/hinic3/hinic3_irq.c   |  97 +++-
+ .../net/ethernet/huawei/hinic3/hinic3_lld.c   |  53 ++-
+ .../net/ethernet/huawei/hinic3/hinic3_main.c  | 182 +++++++-
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.c  |  53 ++-
+ .../net/ethernet/huawei/hinic3/hinic3_mbox.h  |   2 +
+ .../net/ethernet/huawei/hinic3/hinic3_mgmt.c  | 311 ++++++++++++-
+ .../net/ethernet/huawei/hinic3/hinic3_mgmt.h  |  53 +++
+ .../huawei/hinic3/hinic3_mgmt_interface.h     |  69 +++
+ .../huawei/hinic3/hinic3_netdev_ops.c         | 378 ++++++++++++++++
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.c   | 284 +++++++++++-
+ .../ethernet/huawei/hinic3/hinic3_nic_cfg.h   |  47 ++
+ .../ethernet/huawei/hinic3/hinic3_nic_dev.h   |  60 ++-
+ .../net/ethernet/huawei/hinic3/hinic3_rx.h    |  21 +
+ .../net/ethernet/huawei/hinic3/hinic3_tx.h    |  16 +
+ 24 files changed, 2390 insertions(+), 36 deletions(-)
+ create mode 100644 drivers/net/ethernet/huawei/hinic3/hinic3_filter.c
+
+
+base-commit: dbf8fe85a16a33d6b6bd01f2bc606fc017771465
 -- 
-2.39.3 (Apple Git-145)
+2.43.0
 
 
