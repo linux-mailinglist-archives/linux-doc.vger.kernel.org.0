@@ -1,76 +1,118 @@
-Return-Path: <linux-doc+bounces-71247-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71249-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6915CFFA40
-	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 20:06:15 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 90C4ACFFCFD
+	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 20:44:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 315CB3034903
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 19:05:46 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 72F0930559F6
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 18:54:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 02F6B342CB3;
-	Wed,  7 Jan 2026 18:40:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 05083355035;
+	Wed,  7 Jan 2026 18:54:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="UYCXmkKI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0015.hostedemail.com [216.40.44.15])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23AA736D508;
-	Wed,  7 Jan 2026 18:40:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.15
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A95FB352FA4;
+	Wed,  7 Jan 2026 18:54:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767811235; cv=none; b=nrX9f01C0qcUUCE13JEUFl93e2MB1lxPLpmenYwobGgAgxN8j0ZIGa8viXYloC9r/U/ZlmO/UICjJLpr+D/9lyAecyKRtmhH+Xr0bWfhc+T6g9+GufXvx+DVtyqEs2qiAV/4H/GmG6GU21EjAv2B/MHE071oZUWyj3YL4EksWPk=
+	t=1767812062; cv=none; b=mXjcHJsDKUZMGr1A+C05nCeD+cKp35isUpb8vNmXsBTwbZ8++Fi0QI3KqdFYEXHw3BM98e9V9yeuFdXfDnfwYqR3J90i7+RpDDxXXAOuaVLpfdJfYV1Dq/4okJN5rFnWtHEj13GQ7/V+2ZliDsCRTk+/uJOBkRPiblWRctLq1sQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767811235; c=relaxed/simple;
-	bh=KN1F3N76uXgPHxPnP8THwhH7YE/P9z+4GwpB/BokJQQ=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=KwDP/zkuVBnHg5zF0Z5Enmn9pvSYms0vEVT7gsYHe8588RZjD8ApMhqI8Ulx9oFMNYejqVPqy979wRJRqyInU8uuXOc8y8qA/gozAx31SddunCbmhTeuJeXJOXRkiGHnJQ0FtezrOA1sfSmYWmZVGHmTrbh6HD3I+kjSZ5DP+m0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com; spf=pass smtp.mailfrom=perches.com; arc=none smtp.client-ip=216.40.44.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=perches.com
-Received: from omf01.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay06.hostedemail.com (Postfix) with ESMTP id 7B2AA1AAF15;
-	Wed,  7 Jan 2026 18:40:15 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf01.hostedemail.com (Postfix) with ESMTPA id 74C496000F;
-	Wed,  7 Jan 2026 18:40:12 +0000 (UTC)
-Message-ID: <4702253d918c8edb899a91fbd79b40199a013264.camel@perches.com>
-Subject: Re: [PATCH] LICENSES: Explicitly allow SPDX-FileCopyrightText
-From: Joe Perches <joe@perches.com>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Thomas
- Gleixner <tglx@linutronix.de>, Greg Kroah-Hartman
- <gregkh@linuxfoundation.org>, Jonathan Corbet	 <corbet@lwn.net>, Andy
- Whitcroft <apw@canonical.com>, Dwaipayan Ray	 <dwaipayanray1@gmail.com>,
- Lukas Bulwahn <lukas.bulwahn@gmail.com>, 	linux-spdx@vger.kernel.org,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Cc: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Wed, 07 Jan 2026 10:40:11 -0800
-In-Reply-To: <20260107171246.242973-2-krzysztof.kozlowski@oss.qualcomm.com>
-References: <20260107171246.242973-2-krzysztof.kozlowski@oss.qualcomm.com>
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2 (3.56.2-2.fc42) 
+	s=arc-20240116; t=1767812062; c=relaxed/simple;
+	bh=4oUiglibFG4afDebq+S2P2CesQFe49jxQ2qTxawnztM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=LC9e0b/7jkzUQ/kYC7omhwWZEJAAZTXwr9gxJQm7zi7fGCYAZxAqFY30zL9SojHq+AqadE0api+nVTdysVO3Wb7/cBEXGIfVwx1NNc5EHS3fDLKIXIOs4Ajz/wTtzM7wHpqPiLvrROS6/kCjsltRhv9XwWX17/fT76A0AiprUu4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=UYCXmkKI; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=uuSJqpZaH2QhA3iIANu4E7xN2malXmvke17n9OdaCSs=; b=UYCXmkKIK+FFoJqcmLQSEeOBVP
+	yLg8/B4kpjdrbXH1J/zYC8gu+b0/s7zVldWHMfFPjxK9s9c4rFiFCNUDiiS+XZwZ9VtRnbdtU1BQL
+	dXvnbDET5hCrlNu79yXYxPt3ZowrHlGENuxtsL5R7F3oMBTTMc3cp6fuKs1ZKuQ8m9tu9CSfWVXnh
+	ROcrZht9x9ZlUPI4jhTF4ttb+oWAVnyJ2FKQWBGfZ9tIBU5FVe/IN1cv7nBojR+fBV7GGx4Tlc++d
+	0tXx9YI/OfCXpcEmVj5kCCwrXzXPgCDGfaB5N58QIVULeMXWi3RGA1r8c4vytZLYnPDsFhgkp+xRz
+	plZrRg3Q==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vdYff-0000000FV2K-03q8;
+	Wed, 07 Jan 2026 18:54:15 +0000
+Message-ID: <df12062e-27ef-454d-b35b-526a88b5c7fa@infradead.org>
+Date: Wed, 7 Jan 2026 10:54:13 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Stat-Signature: g8ohf9momgfm3jki9cwkkefc8obxb4qm
-X-Rspamd-Server: rspamout04
-X-Rspamd-Queue-Id: 74C496000F
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Session-ID: U2FsdGVkX1/3MA6JS4YuikaxMt97ljJQKz8Fe9uDqnI=
-X-HE-Tag: 1767811212-129184
-X-HE-Meta: U2FsdGVkX1/pKl1HzsBiwxfyNXKtZuphMb2V69o5UcRu4pCC689lw9oLnJ7xxVbTKh7LOw3qpsEz8D1iFFcei14T4KHl7Esfvp7cvjXj7rmV3KJlB0E/7DoDFD32NYsHogVosLeYUYMh5jZ9CAhozK+bK1p2s3b2rFum+oWgDW9+ylrYxieGBNzbooC9J4/EZLGHySL3W2tydl/KAwcl4I9cm+EoG+uf30p5Emzj1pYiG2a4q1xKYA8PkWPRiitgoomk7fDwfqyEFeIKVJ1vhl7twiv8ZN9mVVWBSPuMn9+jATmxJht+2D8lhIT/DAan
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] virt: bao: Add Bao IPC shared memory driver
+To: joaopeixoto@osyx.tech, linux-kernel@vger.kernel.org
+Cc: ajd@linux.ibm.com, alex@ghiti.fr, aou@eecs.berkeley.edu,
+ bagasdotme@gmail.com, catalin.marinas@arm.com, conor+dt@kernel.org,
+ corbet@lwn.net, dan.j.williams@intel.com, davidmcerdeira@osyx.tech,
+ devicetree@vger.kernel.org, dev@kael-k.io, gregkh@linuxfoundation.org,
+ haren@linux.ibm.com, heiko@sntech.de, jose@osyx.tech,
+ kever.yang@rock-chips.com, krzk+dt@kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+ linux-riscv@lists.infradead.org, maddy@linux.ibm.com, mani@kernel.org,
+ nathan@kernel.org, neil.armstrong@linaro.org, palmer@dabbelt.com,
+ pjw@kernel.org, prabhakar.mahadev-lad.rj@bp.renesas.com, robh@kernel.org,
+ will@kernel.org
+References: <20251224135217.25350-1-joaopeixoto@osyx.tech>
+ <20260107162829.416885-1-joaopeixoto@osyx.tech>
+ <20260107162829.416885-3-joaopeixoto@osyx.tech>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20260107162829.416885-3-joaopeixoto@osyx.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, 2026-01-07 at 18:12 +0100, Krzysztof Kozlowski wrote:
-> Sources already have SPDX-FileCopyrightText (~40 instances) and more
-> appear on the mailing list, so document that it is allowed.  On the
-> other hand SPDX defines several other tags like SPDX-FileType, so add
-> checkpatch rule to narrow desired tags only to two of them - license and
-> copyright.  That way no new tags would sneak in to the kernel unnoticed.
 
-I find no value in this tag.  I think it should be discouraged.
 
-How is it different or more useful than a typical Copyright or =A9 symbol ?
+On 1/7/26 8:28 AM, joaopeixoto@osyx.tech wrote:
+> diff --git a/drivers/virt/bao/ipcshmem/Kconfig b/drivers/virt/bao/ipcshmem/Kconfig
+> new file mode 100644
+> index 000000000000..966bb75aa495
+> --- /dev/null
+> +++ b/drivers/virt/bao/ipcshmem/Kconfig
+> @@ -0,0 +1,8 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +config BAO_SHMEM
+> +	tristate "Bao hypervisor shared memory support"
+> +	help
+> +	This enables support for Bao shared memory communication.
+> +	It allows the kernel to interface with guests running under
+> +	the Bao hypervisor, providing a character device interface
+> +	for exchanging data through dedicated shared-memory regions.
+
+Please follow Documentation/process/coding-style.rst:
+
+10) Kconfig configuration files
+-------------------------------
+
+For all of the Kconfig* configuration files throughout the source tree,
+the indentation is somewhat different.  Lines under a ``config`` definition
+are indented with one tab, while help text is indented an additional two
+spaces.  Example::
+
+  config AUDIT
+	bool "Auditing support"
+	depends on NET
+	help
+	  Enable auditing infrastructure that can be used with another
+	  kernel subsystem, such as SELinux (which requires this for
+	  logging of avc messages output).  Does not do system-call
+	  auditing without CONFIG_AUDITSYSCALL.
+
+
+-- 
+~Randy
+
 
