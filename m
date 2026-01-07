@@ -1,204 +1,159 @@
-Return-Path: <linux-doc+bounces-71238-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71243-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFE8ECFF62B
-	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 19:19:51 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5261BCFF908
+	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 19:53:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id A47413546DF4
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 17:21:29 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 48C6632F3D44
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 18:05:42 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2D13038A71A;
-	Wed,  7 Jan 2026 17:12:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N093k1cA";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="a8K1Euzb"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 908C0341077;
+	Wed,  7 Jan 2026 17:55:55 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16AB0332912
-	for <linux-doc@vger.kernel.org>; Wed,  7 Jan 2026 17:12:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 81B1C33BBB8;
+	Wed,  7 Jan 2026 17:55:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767805978; cv=none; b=mLHu/icyVh8h2NRjC4VI4ZBwcegfZqK3/ZSJH4uAo2VWL/d9hcWgARM6XeA4q8LNjT6ZlkusybdqTCPU1dqY77B1eRBgfJTwkct4KQWsVv+46ccC1u+OI85KOEi0OehB4DzjwHWY1lshhATAR9e/m3yobsOy/UIbPWk5RR5jhKU=
+	t=1767808554; cv=none; b=ch8V0N178Rbgg6LMF8DhO6e9C3a+UZckxxBq+GO9MLuu6bHAqXACGszAzY9KWFjzBKbvFaRTEzRwXMkoZ43KokBUE+rxzvck3vd0u/XRRWWarlU4jxnPx7oDZnNaGWlLqCiWq/Z8GEoVbGw/eapgI6FC6HLk20jPu7QQIGmjxUM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767805978; c=relaxed/simple;
-	bh=N0G2ffuDBbq7gpywhPKYxodelqUo83XYdwlcWpXg4Hk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=pboNNZMf0DLTh6NGfR5mqzvAW109sYZdb1Z5XP0C4XUOageIJsM5LjZec04Q5aiWCiebhg7H66ICBtG2M7eeHzSS0eOEZJ8WK+AhBiWBQBeQPEtt9ych7LK4/PAbwx0yfRjXugmyrFBjsSqvt5DXOoTCLS7HRapu4SrPseazdFQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N093k1cA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=a8K1Euzb; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 607CsS8m2239468
-	for <linux-doc@vger.kernel.org>; Wed, 7 Jan 2026 17:12:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=BhnC1bjxr1aLOi+Ek+VPvbB77/IQtQmkLcU
-	O8GRpqt4=; b=N093k1cABGW2OOdeQRvGwlARqfhw4rQpyRh1/2yUxeFxcPGcj0j
-	4iBJMWJZxZHV5GqApW/70CN2AP+O1DH7tNgxdlJ2k+KXRmaE88J2rJiXV2k6rVhc
-	+YBZmDFkx1/zQdcDsX6rc6OXwvEUhozI+uhxHZXr4PIq/ZZCpxRF8W9d55/GSjw8
-	Tbxa8fNZfiWq45QxEVpublEitrIEyO8PIYW7nWoG6iFOFVOBAWovz0tu68vedHy1
-	0QFC+0ohks2uIN0Uvkx+KiCzuGCClMrAEozgADrR5OyMPYTZsw8n3nndeRfv0LR9
-	eP1V1RYr03ZF6jDTh1gTz0L8Pkg+GKUgZow==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhqwg0utf-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 17:12:53 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-8ba026720eeso625961285a.1
-        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 09:12:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1767805973; x=1768410773; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BhnC1bjxr1aLOi+Ek+VPvbB77/IQtQmkLcUO8GRpqt4=;
-        b=a8K1Euzb6KNH+LgPPk9Y4CJiqsHMeNgDiUErYxZgHxxWmiiia3HFY05ODl19ZWDrkf
-         1PGMDnWP+wFBsCxCGloLkaoI+ZOEoT7Y75b8oip5WqZgVxAYLzr14c30I23yPzGIhNcA
-         4wUAHk0wNlmfLYJvvzqjNgQSzQP0H2SPGRaP2Z689JmchlhM5tAd9BzxLo157JuXlk3A
-         uwG7zZq6lthf42bJAcBFO2IrpswmnU6pJ4rI3+N217mUwOEEO4y/pwB1e8m2okv+7Xty
-         hAlpljnsguQdTa1y5P4PORoJdFm+1ZBr8MVs4QH8u+aEbuT/9itfxN+s5ZFe/MqYjHkz
-         Vsyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767805973; x=1768410773;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BhnC1bjxr1aLOi+Ek+VPvbB77/IQtQmkLcUO8GRpqt4=;
-        b=VvZlv1nCaB+4fMEVfznKHEX9dfjX/GjbPEecjGJ3/BzK2mD9xhLxlrhnyUSWy2Ko2/
-         YHsZT/EzhmSTYushj4kXT/gXOAbsYDxlA3fkkQF3iOfw87Co91QzfPkef6B/aR0KOLyw
-         13ctjWaCbQoWOpzIwjGfqhjjE91k98LI1vB5qtsiwpVqhgpFUUgqaaoSbTg7R3GtLvmK
-         p2cxW2ieiDiNSYtEuzgj1BVAxslcAX4Nv/ltQQjjJTXhKKHqOd/QhQ8Iwx2ojv8G4YwC
-         /3jqFDnaQxqwHUK4U+kSdsMVTNI/L4H/8weUUAew1vlgxps+JGCZo+k7haScx+/S9Omt
-         ypmA==
-X-Forwarded-Encrypted: i=1; AJvYcCXSg15Gz0XUdyPPlltNICxZDY/FHpiIL8+zbiZRKZ/DznGQTVCQNDav4mwP1qwdArQJF5+d7U68emc=@vger.kernel.org
-X-Gm-Message-State: AOJu0YxSEYXZeVC4iyywRVQ5C3BneOrQ22nv81uyEWfWr5ft3iBqIuOq
-	ejUTfCZuw9iErzpE6URooxSozHXUln2oaB91BxYLMoxQHjEC7EEC/cbF6Ev7GJVMl35n9ibuUkM
-	WMca0zxmcW15/k2kyFzBXOD9e89X+R4ve6DwJNbSuTgh2Qffde4EX2RznJUSuOXA=
-X-Gm-Gg: AY/fxX420C4p2mEFaDZXi0Q21UeV9MC7YIUE9MwrmQxDGLozrcFw8KGXTJAbTIux2RQ
-	d9Ja4bQsY1MGrhz5Qg0t24oXfUBddZBN9qfNqCX+kkUh7XUTtSU8wYghGGncCR8Gb6Tbf15gge2
-	k1uwTpEOPYAWZRdlNgOEZYagx9y9bPEAdwNvNSSM6AOB3k1xMtR2HqNBJQ6RBEQtFF2cvzONjvt
-	cyxgpZEshAALkH1ZQPSgTtEIMy2/piiLjk9u4paIkVJLQNmbDA+wkDYYOHfzVZtHPD8Qyr6d6LZ
-	fq9mKdhWf70v8MZgFajpeOvIyY9U2vWWeSiIX7NQFvonSRUoFez8KjqhHsE4gMaIhK4ew0Dzgy7
-	hm3j/DqnmK7QApdjiVRGy7yY7Zw==
-X-Received: by 2002:a05:620a:298c:b0:89f:764b:a4aa with SMTP id af79cd13be357-8c389368df1mr410775685a.18.1767805973279;
-        Wed, 07 Jan 2026 09:12:53 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGLq08CZ8nR23ucExLb4CvsXiIo6kX5gKzzk5m3Bnc4mP9c5+jrDXuBenuswHmQfCHvBHgBhQ==
-X-Received: by 2002:a05:620a:298c:b0:89f:764b:a4aa with SMTP id af79cd13be357-8c389368df1mr410770885a.18.1767805972725;
-        Wed, 07 Jan 2026 09:12:52 -0800 (PST)
-Received: from quoll ([178.197.218.229])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6507b9d4c89sm5013433a12.10.2026.01.07.09.12.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Jan 2026 09:12:52 -0800 (PST)
-From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-To: Thomas Gleixner <tglx@linutronix.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Corbet <corbet@lwn.net>, Andy Whitcroft <apw@canonical.com>,
-        Joe Perches <joe@perches.com>, Dwaipayan Ray <dwaipayanray1@gmail.com>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>, linux-spdx@vger.kernel.org,
-        workflows@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: [PATCH] LICENSES: Explicitly allow SPDX-FileCopyrightText
-Date: Wed,  7 Jan 2026 18:12:47 +0100
-Message-ID: <20260107171246.242973-2-krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: git-send-email 2.51.0
+	s=arc-20240116; t=1767808554; c=relaxed/simple;
+	bh=1lRn2piInez3ev2oqRjOMUDIpyzbE0FPizQmQSR2JQY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ElIVBdrhrcLaQuRNJLlrWCiTFQ45cfEZ70i0QesoW88PV4M+gCvpSphLc9iV2ilsOR8ZdkoN/oy1yyzcanGUjUW6GrdeOkT1CXakFSmjckM5WVqUdNg9/5eoOOlovCRPgQXws9XxllVmHwMtE5Dq8glyUVuD1IQEuo+YQi6mgws=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1F046497;
+	Wed,  7 Jan 2026 09:55:38 -0800 (PST)
+Received: from [10.57.48.49] (unknown [10.57.48.49])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A1A763F5A1;
+	Wed,  7 Jan 2026 09:55:42 -0800 (PST)
+Message-ID: <7cd7b4f0-7aa5-4ca0-adc6-44d968c1ed48@arm.com>
+Date: Wed, 7 Jan 2026 17:55:40 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2059; i=krzysztof.kozlowski@oss.qualcomm.com;
- h=from:subject; bh=N0G2ffuDBbq7gpywhPKYxodelqUo83XYdwlcWpXg4Hk=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBpXpQONpIx8JizfVZLFVjxx6DLOMsYGW8KsBkpa
- qAMvsTQAxaJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCaV6UDgAKCRDBN2bmhouD
- 1/LiD/92HMWwthUq97pAgrlmQK2KTUMQjI9xM8nj8LLUUNsUwbFN3r27YcK9rePVTFHJ/zN5sWB
- cly/tUfSL+BxCpmm6bAfN3UYQESDPPl9mXRI7CxoBVxLax0+pyEtUThr3efoWCFDNKfoCMCTOIZ
- M9Uk/bs2QH9zQEXqerzDItocxG3uQmWF97/NFmMWVf5ehWLVjsl7X9IuZ20QnW7gx5WdB7GPalN
- hFNsBnCJTvGXxVBL18k0oAFbBo5w0fTdTt/j+naBjpbv1NA5DrGpyPoe5xfs/wRZZusyX7uOLjU
- N8Q3ULMTn9zGOU3w2itOFTh5cXH1W/11epzr9pDrrF4tJ0TFC6uS+x6kMkClIdfS+ds5DhdPnG5
- J6BrnYHLXWq/Jx/uSVQm4kP68pKhUCevjA5wC+n1DpApFGpgR9J0351hgzmA2Bjqe04OL/P17BL
- bg7plkzZCQWcI07zR3d9Owmp8AGL7YJrE986nITr4A0ienJOxvodLSMQnVclW8UhtbiL4gcMrSx
- hVsDwlB81FUhIbmMqSQzNaaSEFvOZCGYkK/mBr2yI0XljFoZDl+8a9WouxnXzgVTi/214PHmoqF
- s7HzuOJ0C0BIdNlysX4O7GHLRO3oPXsHJt7uTTWgFbAIepIoyyDTuRKobcIHJCWpTHVcS0ROdb/ R4X+yxCv2lZz9Hw==
-X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: zeFSlL0vwT4rRxCj99BtkbRV6RE1Lm01
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA3MDEzNSBTYWx0ZWRfX5X+ab162omke
- rT/4OaRrRYxLrRXYmqKWiVVXi6kn12b97bRQy+qpwd0pipGkhXsR5UI9vTRcd0MBVhePnU7SLJI
- 4IVv1MH6mUMj1kiCe3C6kNI0zYUICcwq/5zkZI6Z2PzuQAj3rGiFPvtDNTjnjTI1gMLitdyYuyR
- tWyqiTrltr/UrkO3CzlJtvqLiqf2Gcl1V8svvS7i/B/zu+ocuYGpmNopG3L4UYytNcKXeiOmSGd
- +8DZR+H50kuTuhoA4VFBvna6jtcHWSOQ8tHRaToAYH9RgaF8hv+cAhZ9CvFC19VI/MXzcfWu+hz
- ItPt/KKtGoQQliNZVZYN3L2g+7ZgQrSTl9CrHGTupysuUelmPWU2nhsscVgSojIfkl/BX0XrWX9
- aySrGsTVebAGL7IdMnQjuDW5QFHQOIdfuESozVuBZ7tXuZeefX+ogGwUk9utpWNGEXLqxNlq54X
- Ghw58pSoXg2s08g3daA==
-X-Authority-Analysis: v=2.4 cv=Pa7yRyhd c=1 sm=1 tr=0 ts=695e9415 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=Eb9f15NH/cHKzfGOmZSO4Q==:17
- a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=EUspDBNiAAAA:8 a=dRIqDbwSeJKetXV8Y-0A:9 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: zeFSlL0vwT4rRxCj99BtkbRV6RE1Lm01
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-07_03,2026-01-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- impostorscore=0 spamscore=0 malwarescore=0 clxscore=1015 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601070135
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] arm64: errata: Workaround for SI L1 downstream
+ coherency issue
+To: Will Deacon <will@kernel.org>, Marc Zyngier <maz@kernel.org>
+Cc: Lucas Wei <lucaswei@google.com>, Catalin Marinas
+ <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>,
+ sjadavani@google.com, kernel test robot <lkp@intel.com>,
+ stable@vger.kernel.org, kernel-team@android.com,
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, smostafa@google.com
+References: <20251229033621.996546-1-lucaswei@google.com>
+ <87o6ndduye.wl-maz@kernel.org> <aV6K7QnUa7jDpKw-@willie-the-truck>
+From: Robin Murphy <robin.murphy@arm.com>
+Content-Language: en-GB
+In-Reply-To: <aV6K7QnUa7jDpKw-@willie-the-truck>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Sources already have SPDX-FileCopyrightText (~40 instances) and more
-appear on the mailing list, so document that it is allowed.  On the
-other hand SPDX defines several other tags like SPDX-FileType, so add
-checkpatch rule to narrow desired tags only to two of them - license and
-copyright.  That way no new tags would sneak in to the kernel unnoticed.
+On 2026-01-07 4:33 pm, Will Deacon wrote:
+> Hey Marc,
+> 
+> On Thu, Jan 01, 2026 at 06:55:05PM +0000, Marc Zyngier wrote:
+>> On Mon, 29 Dec 2025 03:36:19 +0000,
+>> Lucas Wei <lucaswei@google.com> wrote:
+>>> diff --git a/arch/arm64/kernel/cpu_errata.c b/arch/arm64/kernel/cpu_errata.c
+>>> index 8cb3b575a031..5c0ab6bfd44a 100644
+>>> --- a/arch/arm64/kernel/cpu_errata.c
+>>> +++ b/arch/arm64/kernel/cpu_errata.c
+>>> @@ -141,6 +141,30 @@ has_mismatched_cache_type(const struct arm64_cpu_capabilities *entry,
+>>>   	return (ctr_real != sys) && (ctr_raw != sys);
+>>>   }
+>>>   
+>>> +#ifdef CONFIG_ARM64_ERRATUM_4311569
+>>> +static DEFINE_STATIC_KEY_FALSE(arm_si_l1_workaround_4311569);
+>>> +static int __init early_arm_si_l1_workaround_4311569_cfg(char *arg)
+>>> +{
+>>> +	static_branch_enable(&arm_si_l1_workaround_4311569);
+>>> +	pr_info("Enabling cache maintenance workaround for ARM SI-L1 erratum 4311569\n");
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +early_param("arm_si_l1_workaround_4311569", early_arm_si_l1_workaround_4311569_cfg);
+>>> +
+>>> +/*
+>>> + * We have some earlier use cases to call cache maintenance operation functions, for example,
+>>> + * dcache_inval_poc() and dcache_clean_poc() in head.S, before making decision to turn on this
+>>> + * workaround. Since the scope of this workaround is limited to non-coherent DMA agents, its
+>>> + * safe to have the workaround off by default.
+>>> + */
+>>> +static bool
+>>> +need_arm_si_l1_workaround_4311569(const struct arm64_cpu_capabilities *entry, int scope)
+>>> +{
+>>> +	return static_branch_unlikely(&arm_si_l1_workaround_4311569);
+>>> +}
+>>> +#endif
+>>
+>> But this isn't a detection mechanism. That's relying on the user
+>> knowing they are dealing with broken hardware. How do they find out?
+> 
+> Sadly, I'm not aware of a mechanism to detect this reliably at runtime
+> but adding Robin in case he knows of one. Linux generally doesn't need
+> to worry about the SLC, so we'd have to add something to DT to detect
+> it and even then I don't know whether it's something that is typically
+> exposed to non-secure...
+> 
+> We also need the workaround to be up early enough that drivers don't
+> run into issues, so that would probably involve invasive surgery in the
+> DT parsing code.
 
-Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Indeed even if we did happen to know where the interconnect registers 
+are, I'm not sure there's any ID bit for the relevant configuration 
+option, plus that still wouldn't be accurate anyway - it's fine to have 
+a downstream cache/PoS *without* any back-door observers, so the actual 
+problematic condition we need to detect is outside the SI IP altogether. 
+It's a matter of SoC-level integration, so AFAICS the realistic options 
+are likely to be:
 
----
+  - SMCCC SOC_ID (if available early enough)
+  - Match a top-level SoC/platform compatible out of the flat DT
+  - Just trust that affected platforms' bootloaders will know to add the 
+command-line option :/
 
-Other way would be to remove SPDX-FileCopyrightText from existing files
-and disallow this, but one way or another we should be explicit about
-it.  Otherwise people will be sending more of these and each maintainer
-would need to make their own call.
----
- Documentation/process/license-rules.rst | 2 ++
- scripts/checkpatch.pl                   | 9 +++++++++
- 2 files changed, 11 insertions(+)
+>> You don't even call out what platform is actually affected...
+> 
+> Well, it's an Android phone :)
+> 
+> More generally, it's going to be anything with an Arm "SI L1" configured
+> to work with non-coherent DMA agents below it. Christ knows whose bright
+> idea it was to put "L1" in the name of the thing containing the system
+> cache.
 
-diff --git a/Documentation/process/license-rules.rst b/Documentation/process/license-rules.rst
-index 59a7832df7d0..8d7c0214f283 100644
---- a/Documentation/process/license-rules.rst
-+++ b/Documentation/process/license-rules.rst
-@@ -66,6 +66,8 @@ License identifier syntax
-    '#!PATH_TO_INTERPRETER' in the first line.  For those scripts the SPDX
-    identifier goes into the second line.
- 
-+   Identifier line can be followed by another one with SPDX-FileCopyrightText.
-+
- |
- 
- 2. Style:
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index 362a8d1cd327..98261ee97e2b 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -3844,6 +3844,15 @@ sub process {
- 			     "Misplaced SPDX-License-Identifier tag - use line $checklicenseline instead\n" . $herecurr);
- 		}
- 
-+# check for unused SPDX file tags
-+		if ($rawline =~ /\bSPDX-.*:/ &&
-+		    $rawline !~ /\bSPDX-License-Identifier:/ &&
-+		    $rawline !~ /\bSPDX-FileCopyrightText:/) {
-+			WARN("SPDX_LICENSE_TAG",
-+			     "Unsupported SPDX tag\n" . $herecurr);
-+		}
-+
-+
- # line length limit (with some exclusions)
- #
- # There are a few types of lines that may extend beyond $max_line_length:
--- 
-2.51.0
+I'm still thankful the Neoverse product line skipped "MMU S1" and "MMU 
+S2"...
 
+>> The other elephant in the room is virtualisation: how does a guest
+>> performing CMOs deals with this? How does it discover the that the
+>> host is broken? I also don't see any attempt to make KVM handle the
+>> erratum on behalf of the guest...
+> 
+> A guest shouldn't have to worry about the problem, as it only affects
+> clean to PoC for non-coherent DMA agents that reside downstream of the
+> SLC in the interconnect. Since VFIO doesn't permit assigning
+> non-coherent devices to a guest, guests shouldn't ever need to push
+> writes that far (and FWB would cause bigger problems if that was
+> something we wanted to support)
+> 
+> +Mostafa to keep me honest on the VFIO front.
+
+I don't think we actually prevent non-coherent devices being assigned, 
+we just rely on the IOMMU supporting IOMMU_CAP_CACHE_COHERENCY. Thus if 
+there's an I/O-coherent SMMU then it could end up being permitted, 
+however I would hope that either the affected devices are not behind 
+such an SMMU, or at least that if the SMMU imposes cacheable attributes 
+then that prevents traffic from taking the back-door path to RAM.
+
+Thanks,
+Robin.
 
