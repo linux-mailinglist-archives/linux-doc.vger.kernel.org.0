@@ -1,106 +1,121 @@
-Return-Path: <linux-doc+bounces-71244-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71248-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4B09CFF62E
-	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 19:19:52 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E220CFF8F2
+	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 19:52:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id F3EA3300CCDD
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 18:19:41 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id BD39730011B4
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 18:52:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 661D036828E;
-	Wed,  7 Jan 2026 18:19:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B251B35293B;
+	Wed,  7 Jan 2026 18:52:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="jg+H/rb9"
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="uMl3z8Xp"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05785369970;
-	Wed,  7 Jan 2026 18:19:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C63934B1A4;
+	Wed,  7 Jan 2026 18:52:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767809979; cv=none; b=KZVdzNy5duWQgMQho44wZwG0d1Tr6ID82MuqzFly04yFF9+jswL9gLcsRk2onr07Xe+atwZzz9eBRcxAVmXGRmsLSO/EYDs47VYyN+fAJunRaQUdhCBtk3oLUwnB4MZDUugURU8Bu5hphc2QvdqEAeLJMnFygMx/8Un5k55wiIU=
+	t=1767811955; cv=none; b=Y9ZCUxPfHQ09huN/QYEdNgJ7jEwflMkeRx5Xmt70q7pKVbO2CS3vdtt3nC52r3dc3tcvcHalRHDT5f9FyZit1ixpy1bneEsYDaxiB1z3KSPaE9r4dXHpIY4514/a3or35TzwUEL6S2vHyCLU8/7yEUavFVTEan0eGUcFFWoQI5A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767809979; c=relaxed/simple;
-	bh=jsDx8MiquD+czz2s9Ms/jVpvTx9vge38UMcQ1jMaUpo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Q/So1dtjWiAt0HnHxCqFCsAhEStoPxojdUhUFBfYYXqW5whUe39lnLFxMauks837y+EYumAC+vArV0Bc0H2IkvoTC++recZFdAdarM0raaOWo1aB3894lfv/08ByBpeQYcGHCBN180Zf4M9N2DNlE1POHvLklKEMO9sTPxY+IU4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=jg+H/rb9; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=5b3y/tAAigWUAZJfVkbOPKY0nxREoUvePJBzTo29VXE=; b=jg+H/rb9ud+QXrcToBlog3mXq5
-	zhP4xbwTPDEx2b3ePgMs08abmBL9A3mtdPmVwiQj/B8nax+mXiQ9p4V8/Jegv0RjXEOQtbiVPdtZi
-	cXgEjMK0fAh21NyzM/dhgktjvgHB61qLmHs0c8aTSJrb86RklcRZo/fMckk4A9V/UL+ZJ6IZlWsw8
-	NYyB4wZEtLiOHnPocJHQFa558ko0O3aIk0sCxzaP8ImIEKEZEtk+zUR+yPJ7Pn89QyWemJNV57QzQ
-	Iqjhbk59eSG48s8BIVsWSIwDf26r9FK1YmWbwF3cURmmkTh8sGf8s/nezSahl7PDQsu9ouQxvDq78
-	fcdoPj/g==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vdY86-0000000FTMY-1NIT;
-	Wed, 07 Jan 2026 18:19:34 +0000
-Message-ID: <966fffa3-a91b-425e-b915-891299832e36@infradead.org>
-Date: Wed, 7 Jan 2026 10:19:32 -0800
+	s=arc-20240116; t=1767811955; c=relaxed/simple;
+	bh=/3SzDaj+qchgcHL0Vdxso4YvMFLK7lRtDLkUl3jRgXg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=g4hshX16y6K38iF7mLk1slIVfM6zSouAB8EVk8kspL097IXCh4WJ91U72thRoiLyhS3fTaPYoq5M0dA+WhuVvyUbZ2OnuqCPOD/ig9MlSpblT4fMND+kjqZdFE8V/KDDgALAPFzumACUD+4wYRJ/P7ZDo9kQu3Asb4Vxk+iBhyk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=uMl3z8Xp; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BB90C4CEF1;
+	Wed,  7 Jan 2026 18:52:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1767811954;
+	bh=/3SzDaj+qchgcHL0Vdxso4YvMFLK7lRtDLkUl3jRgXg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=uMl3z8XpS0Ju539wrGRBX+FmnPAgEIdhnFuoRGeD67+MamufuVVAx4hAAnu3MX3bD
+	 C9Ynv2tF4OhczGazTmgI9UeoydflpqGqK8NRchKJ7ElZ3ptlqO8CkO0gvn5Wjgg5zF
+	 zRHqgO6YWZM7V3EqRbybEOSA5rZInG3eikPSPC3M=
+Date: Wed, 7 Jan 2026 19:52:31 +0100
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>, Jonathan Corbet <corbet@lwn.net>,
+	Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>,
+	Dwaipayan Ray <dwaipayanray1@gmail.com>,
+	Lukas Bulwahn <lukas.bulwahn@gmail.com>, linux-spdx@vger.kernel.org,
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] LICENSES: Explicitly allow SPDX-FileCopyrightText
+Message-ID: <2026010724-activate-saggy-9c08@gregkh>
+References: <20260107171246.242973-2-krzysztof.kozlowski@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION] Unexpected section title false positive warnings on
- DOC: directive
-To: Bagas Sanjaya <bagasdotme@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Linux Regressions <regressions@lists.linux.dev>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-References: <aUuLHzk5jdyBAxD7@archie.me> <87ikdecsj0.fsf@trenco.lwn.net>
- <aV5a6PCVrkRHwqt3@archie.me>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <aV5a6PCVrkRHwqt3@archie.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260107171246.242973-2-krzysztof.kozlowski@oss.qualcomm.com>
 
-
-
-On 1/7/26 5:08 AM, Bagas Sanjaya wrote:
-> On Tue, Jan 06, 2026 at 02:58:43PM -0700, Jonathan Corbet wrote:
->> Bagas Sanjaya <bagasdotme@gmail.com> writes:
->>
->>> Hi,
->>>
->>> Building htmldocs on docs-next currenly produces about 50 new warnings; which
->>> all of them are unexpected section title on DOC: kernel-doc directive, like:
->>>
->>> /home/bagas/repo/linux-kernel/Documentation/driver-api/target:25: ./drivers/target/target_core_user.c:35: CRITICAL: Unexpected section title.
->>>
->>> Userspace I/O
->>> ------------- [docutils]
->>> WARNING: kernel-doc 'scripts/kernel-doc.py -rst -enable-lineno -function 'Userspace I/O' ./drivers/target/target_core_user.c' processing failed with: SystemMessage('/home/bagas/repo/linux-kernel/Documentation/driver-api/target:25: ./drivers/target/target_core_user.c:35: (SEVERE/4) Unexpected section title.\n\nUserspace I/O\n-------------')
->>> /home/bagas/repo/linux-kernel/Documentation/driver-api/target:28: ./include/uapi/linux/target_core_user.h:14: CRITICAL: Unexpected section title.
->>
->> So I did not, and do not, see any of these errors; are you doing
->> something special to get them?
+On Wed, Jan 07, 2026 at 06:12:47PM +0100, Krzysztof Kozlowski wrote:
+> Sources already have SPDX-FileCopyrightText (~40 instances) and more
+> appear on the mailing list, so document that it is allowed.  On the
+> other hand SPDX defines several other tags like SPDX-FileType, so add
+> checkpatch rule to narrow desired tags only to two of them - license and
+> copyright.  That way no new tags would sneak in to the kernel unnoticed.
 > 
-> Nope.
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 > 
-> I'm running my htmldocs builds on my Arch Linux system (with Sphinx 9.0.4 and
-> Python 3.13.11).
+> ---
 > 
-> Full log (tarred up) attached.
+> Other way would be to remove SPDX-FileCopyrightText from existing files
+> and disallow this, but one way or another we should be explicit about
+> it.  Otherwise people will be sending more of these and each maintainer
+> would need to make their own call.
+> ---
+>  Documentation/process/license-rules.rst | 2 ++
+>  scripts/checkpatch.pl                   | 9 +++++++++
+>  2 files changed, 11 insertions(+)
 > 
-> Thanks.
+> diff --git a/Documentation/process/license-rules.rst b/Documentation/process/license-rules.rst
+> index 59a7832df7d0..8d7c0214f283 100644
+> --- a/Documentation/process/license-rules.rst
+> +++ b/Documentation/process/license-rules.rst
+> @@ -66,6 +66,8 @@ License identifier syntax
+>     '#!PATH_TO_INTERPRETER' in the first line.  For those scripts the SPDX
+>     identifier goes into the second line.
 
-Hi,
-What docutils version, please?
+As you are adding a copyright identifier, this sentence should probably
+be:
+	For those scripts, the SPDX license identifier goes into the
+	second line.
 
--- 
-~Randy
+> +   Identifier line can be followed by another one with SPDX-FileCopyrightText.
 
+How about:
+
+"The license identifier line can then be followed by a
+SPDX-FileCopyrightText line if desired."
+
+
+> +
+>  |
+>  
+>  2. Style:
+> diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+> index 362a8d1cd327..98261ee97e2b 100755
+> --- a/scripts/checkpatch.pl
+> +++ b/scripts/checkpatch.pl
+> @@ -3844,6 +3844,15 @@ sub process {
+>  			     "Misplaced SPDX-License-Identifier tag - use line $checklicenseline instead\n" . $herecurr);
+>  		}
+>  
+> +# check for unused SPDX file tags
+
+# check for unsupported SPDX file tags
+
+thanks,
+
+greg k-h
 
