@@ -1,77 +1,77 @@
-Return-Path: <linux-doc+bounces-71210-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71212-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AB3ACFEB1E
-	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 16:52:07 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C587CFEACD
+	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 16:49:14 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id F0C9E30BBA0E
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 15:46:04 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 854183086E43
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 15:45:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 52C69395DB4;
-	Wed,  7 Jan 2026 15:34:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BA92D39870E;
+	Wed,  7 Jan 2026 15:34:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JleWKWKK"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ERMqzBXV"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E03B396D3D
-	for <linux-doc@vger.kernel.org>; Wed,  7 Jan 2026 15:34:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2CA43986E4
+	for <linux-doc@vger.kernel.org>; Wed,  7 Jan 2026 15:34:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767800079; cv=none; b=dQwuNriOnzc9x1srzdrP7LZ39UiWM/gQEamzXkU8ZBO7CeWUjpp/dtAUkjtt0GL8FJeypHGR5c9FkC1Ppugj5Br2T1vBoLiSC/55ifwDrw4GhpTmoxnGez6W0eQhwta4kuXkfaX1f8p/l3lVMNi+efZCXOD3HgXCFl3qM9S8IoI=
+	t=1767800095; cv=none; b=Kvm++gQheqhK6v98u/vvd8hAT3gWf4Etb8FLeeIDiYAFaN4X1l1aQ9d+fu3lMVIRod/ALor9VvQRM+TKLzzOhgX9CJ+n1kZhhV/WqWAgkBr9I4QRivUKGSF1c0XPOHmyuTmnMaMbQNVvwOsf2yEAlD8GkggOklFpMvwjEvNRfvA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767800079; c=relaxed/simple;
-	bh=zQL6OSWBO4m5+Q/hEBIHqSQry3+21Rl32A58FZEFgEw=;
+	s=arc-20240116; t=1767800095; c=relaxed/simple;
+	bh=rKi3IJhFbcB0WLwepeKv+pU0rou+ccXKzIoDaJEyXMs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ozirkMbOegIVMNQL6qmqbqzastf1VOEF836x7hvQkTT1SxkzMAgUib57ssmdQxC4F76BQozmethYjqwDwkS1MfnTkdW1LS7dWRuvmeqfIxoaQtqgFtbxhyXKundihdUP1HPDHTMCu5p0DiPTBsIF+rIVj6P8Kmt7PGyNIsqFSwk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JleWKWKK; arc=none smtp.client-ip=209.85.167.182
+	 MIME-Version; b=kDI4dFvHHX/V7ciI4wSzGjIRYOtzcuo8J0/b9m/ZX3FndmjoUFkm3MrQNLt7HfJaYy/gPawOj4CBjMaEbRoJ3n8gD44HiJpCbLFvpAYJF94Egw64NWlw4gUEg5sAijZt3PLnAa6iPyFVBqZYIz7UeIpboSRHX3RJJABv9i0J1ZI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ERMqzBXV; arc=none smtp.client-ip=209.85.167.180
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-459993ff4fcso917435b6e.1
-        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 07:34:37 -0800 (PST)
+Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-4510974a8cdso1184265b6e.0
+        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 07:34:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767800076; x=1768404876; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1767800092; x=1768404892; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=BadRqtdIUTjJqSpAIjL5u97iCPqnyeMr+lfViz9uPAM=;
-        b=JleWKWKKZILs4kfdIcm67y4G/+cPmDE8Eh9sSBPGt8bosmO1BQJxYUIciTesaGkZmH
-         k0maEuJOCN1txO0Z7yGlpuIhvRNEsqbFmd1MSV5CW8soCIdpxxaBe86ybTym+zFpyLxS
-         vOZqtX9lPTNxRb2WPcBCecXuBpGFS4wJqaugmG2/Wh2SGPQIR8A4dTj4KdU26/LSYrEI
-         KUpnS2wdi35TkbpjN8hSHcToVQBtSn+585t54AkDJ0l3tCYLn/ZcRjYtr7GzXrxyQlns
-         42Br/b1X8Q6gPMm+2MwNgSjKbgq3skPX0nPs+yNOPlfJcVFHeLi1FlBBFX/seBcp6urb
-         elfA==
+        bh=kBCgapkD0tMSytl4lZx+vzryyZ4HeCqXI7xZ8qhc6V8=;
+        b=ERMqzBXVYH3qzX1YWyUuLaDxMqSFKhoNr2tnqLVy9emLvTrmWbxhrCrbIWf7+O76k1
+         6CZdI3y4kRa5LNnspnGiK7LvCNhsN2MpH96YZ/S8hdMYfeLvot5/Q4XoBm9YbnHO5Equ
+         2QeVHMYiXjosqkc40Ah2qYzhgUcu2pWs/dbq00RhlSGjPQOLtGcgbEQ3DSoFiZ6/eTlM
+         YUk79H7cdB5KtpzpCxXIyK6FbcDkA/iMYf87DOaSo9rXII24W/GWQH5zdjI63rvtewaQ
+         GcQwpcHHw9ZwLu0phgghDv3eQTcmUIOOSJ+eqrfoJe6BoOOjRR889OPmjHoap3BjcspQ
+         XrvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767800076; x=1768404876;
+        d=1e100.net; s=20230601; t=1767800092; x=1768404892;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=BadRqtdIUTjJqSpAIjL5u97iCPqnyeMr+lfViz9uPAM=;
-        b=FH5bFYju2eazXyYdw3vsiB39CPlIhUbss4KYhiSxkqRTiiS/nSag6MZH3xuk4f473U
-         T9I4DBiwroiRljh+A+sB3X58PJ8QyEBt5syLj9OhbwZjwFUU2LjckMBIKBG7jo7bO3YJ
-         1JFvlChW9UZ+p+jcJZuNHtf77vcF2uSrS9Qlr7mZQ020gphIgBKD8Yziz6/ShyjITgwP
-         6S45xSOVfPlRdUuOryBMk1En1B9jFUbotF2SCz+Hq/j1+1UGdb67Zdf9cnw6geqFkXuh
-         Jp5lhiLjn1geL/Xlc7jFV+a9uPHenk7sgQzRPYppwr2JUAGKSvQhasTDSXIpLVHtPmoh
-         9SyQ==
-X-Forwarded-Encrypted: i=1; AJvYcCV0Ncrde+qwxW0amVCWzOxSmyZlA+ZsQiXRed01jO3hpA/Ry6LEqp6NfMI4IA91pEG2StJy0q1gsU4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyZP4Q7NS0JQupZFqbzuuhOFDbshqzCLcJjW4BC3qnK1sOkpGFW
-	J+Cg/8wz5Gdx1DiOivXfp7mRyVdVM1PCAdFwXRt+hrCHtT1d8ToerC/2
-X-Gm-Gg: AY/fxX7HxGLOKdStnq//pLLfoRx9Wdgr8aln+Y6LIqfVFflXis16XpZw+V7N/sBNiik
-	yhYZq/rS1M5+BdnYRRb7U5wVmID0EhRfH3u3DXuAI79z2eDN/BQXm1HfqNP6sFhbQjSRpKLlPlT
-	eFuxcKBep/pFMfYMW5ieusB6hmyyZpfUR4S55RxBDFscVPXTkZSFZtGnSNijAyKZofyJS9LWyl2
-	KkW6D4T3Uf52j1p91yV+DC6sHYFlyEQ0AZw0U3iY/FavehbCKpp62nYsj622T16SBl+tHIgmGxa
-	H2oFkdaap/418bxuNnGvHhI6E1r/kgV9mUEjYlnMqIQo5AHDOOUgU00KKyTGd+Dty8eUUxJplvq
-	vG1FFS87kM20ZHvXwywEMc8jROM7fc1heTLzSYuyh4OUp3EjtY5UT+QPs5qXlPRoEIlbJKWrQSU
-	bAcFpT9A+xUSGxA5xwE0RzIcT4Q1pFrlBUlFzJYxjfOu6d
-X-Google-Smtp-Source: AGHT+IGiBgbbbwZi9OtjHC2lwZve1mJRhadFMJn6qeQ/EHq2CoD4bMYUWvkIfhWahXqGzzsZgFZhkg==
-X-Received: by 2002:a05:6808:2383:b0:45a:156f:dbcd with SMTP id 5614622812f47-45a6bf2a83emr1169537b6e.62.1767800076370;
-        Wed, 07 Jan 2026 07:34:36 -0800 (PST)
+        bh=kBCgapkD0tMSytl4lZx+vzryyZ4HeCqXI7xZ8qhc6V8=;
+        b=OXXr1tg7UVIfPZCRjVmomsAwuqz/6t/gpfPzUWpUOlBwKxqHiZCPhYOCvVsut5lfZb
+         Bg9ub9dyQDf5Z5JHZuhG6jEN37jnJhh0d3OXAuTscjQzqqjKeywyizBkD7JuWgaXM62Q
+         a2qwc6QAHbOpSyMAnw8Mt0f/qM1tNCmhUZWmL+ljx9H7PIxSZ5nSC9aUGnORw9kNyf48
+         tIDbfhtOSMS/YWy9eqT3WFhmsv/fVG+BohXr92FhQFRtq+vh0winh6ttpSZaAA7P8/h2
+         sSEaICGqoYc5tH2zqSmZa6pg9J8BoD7zCVc9MH2QFLZMZtP/lMdcYvIe7zmcjH6hUQNB
+         m+lg==
+X-Forwarded-Encrypted: i=1; AJvYcCWmmmDBhSHL1RZRDx9BZRueb8KqNWksab243j6e4xr/+I1p2OyIdOrYeA0O3s8ZfkncXyY95LQX4Zg=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxMmPYRFbClfghxEJP7EBNmJRPzvumYwzrb4eC0p2mzE0POYJyb
+	y5P0OidqnzmFnfXN0CYka3VRdECaf0SewKO+iug30sfglKDEf7cyb+mr
+X-Gm-Gg: AY/fxX6M+CI+q3AIot+aADi8SmFsyhpSYAeKU+05U4HJwNZ+LIMkQ4uxYkwqa12EGH2
+	mCtQy642sBeGDBf/FuQ9Dae9J7+tYj2rh0Ho728LrtBQ7ukAHSxEMTnVv9EUWdtUqkEblkG86s/
+	5NSwYCLseuUXu+8xHt18eTDA4K43C6qonj7m85vJ99RDoBYUX42AQK5PYMdiakoubFwr1V8Tbjh
+	3jK18gyW/LDpaKAeC9nwX+ldT9iwvg2PJvlf0U00AAp9KWb8+7+yRI+luePs+OB54Nqw358HufU
+	2VoHcUcwEEJmCo6L7zlWaIcxFsq6KtC9MLjMk0gCnsiPOCwYWSvZazeGW/FeI5/CsZsc1M+kXhf
+	zUiUVvK7KkUQ79KwCsu3p9wsYusCWVEKenlorVD0Sxm4y90z8b2YxKu9zP+9/xV2Jt9WiMc/y9m
+	roUP4VlC3v9zIfgr4NwYfl9KLodjzgRxPfREXc4PACc/5/
+X-Google-Smtp-Source: AGHT+IHcdywbJhWbPofmdnwqwy3siWxMKS2ZL8FYrwKJtzA3ot5XniZZCZFcJRodTSEL4vBFeFPTwA==
+X-Received: by 2002:a05:6808:4a52:20b0:45a:76c9:303c with SMTP id 5614622812f47-45a76c9325cmr272281b6e.32.1767800091392;
+        Wed, 07 Jan 2026 07:34:51 -0800 (PST)
 Received: from localhost.localdomain ([2603:8080:1500:3d89:a917:5124:7300:7cef])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-45a5e2f1de5sm2398106b6e.22.2026.01.07.07.34.34
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-45a5e183ac3sm2398424b6e.4.2026.01.07.07.34.49
         (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Wed, 07 Jan 2026 07:34:36 -0800 (PST)
+        Wed, 07 Jan 2026 07:34:50 -0800 (PST)
 Sender: John Groves <grovesaustin@gmail.com>
 From: John Groves <John@Groves.net>
 X-Google-Original-From: John Groves <john@groves.net>
@@ -114,13 +114,13 @@ Cc: John Groves <jgroves@micron.com>,
 	linux-cxl@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org,
 	John Groves <john@groves.net>
-Subject: [PATCH V3 19/21] famfs_fuse: Add DAX address_space_operations with noop_dirty_folio
-Date: Wed,  7 Jan 2026 09:33:28 -0600
-Message-ID: <20260107153332.64727-20-john@groves.net>
+Subject: [PATCH V3 1/4] fuse_kernel.h: bring up to baseline 6.19
+Date: Wed,  7 Jan 2026 09:34:40 -0600
+Message-ID: <20260107153443.64794-2-john@groves.net>
 X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260107153332.64727-1-john@groves.net>
+In-Reply-To: <20260107153443.64794-1-john@groves.net>
 References: <20260107153244.64703-1-john@groves.net>
- <20260107153332.64727-1-john@groves.net>
+ <20260107153443.64794-1-john@groves.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -129,52 +129,55 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: John Groves <John@Groves.net>
-
-Famfs is memory-backed; there is no place to write back to, and no
-reason to mark pages dirty at all.
+This is copied from include/uapi/linux/fuse.h in 6.19 with no changes.
 
 Signed-off-by: John Groves <john@groves.net>
 ---
- fs/fuse/famfs.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ include/fuse_kernel.h | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/fs/fuse/famfs.c b/fs/fuse/famfs.c
-index 4eb87c5c628e..32c3d0c2ec48 100644
---- a/fs/fuse/famfs.c
-+++ b/fs/fuse/famfs.c
-@@ -13,6 +13,7 @@
- #include <linux/mm.h>
- #include <linux/dax.h>
- #include <linux/iomap.h>
-+#include <linux/pagemap.h>
- #include <linux/path.h>
- #include <linux/namei.h>
- #include <linux/string.h>
-@@ -38,6 +39,15 @@ static const struct dax_holder_operations famfs_fuse_dax_holder_ops = {
- 	.notify_failure		= famfs_dax_notify_failure,
+diff --git a/include/fuse_kernel.h b/include/fuse_kernel.h
+index 94621f6..c13e1f9 100644
+--- a/include/fuse_kernel.h
++++ b/include/fuse_kernel.h
+@@ -239,6 +239,7 @@
+  *  7.45
+  *  - add FUSE_COPY_FILE_RANGE_64
+  *  - add struct fuse_copy_file_range_out
++ *  - add FUSE_NOTIFY_PRUNE
+  */
+ 
+ #ifndef _LINUX_FUSE_H
+@@ -680,7 +681,7 @@ enum fuse_notify_code {
+ 	FUSE_NOTIFY_DELETE = 6,
+ 	FUSE_NOTIFY_RESEND = 7,
+ 	FUSE_NOTIFY_INC_EPOCH = 8,
+-	FUSE_NOTIFY_CODE_MAX,
++	FUSE_NOTIFY_PRUNE = 9,
  };
  
-+/*
-+ * DAX address_space_operations for famfs.
-+ * famfs doesn't need dirty tracking - writes go directly to
-+ * memory with no writeback required.
-+ */
-+static const struct address_space_operations famfs_dax_aops = {
-+	.dirty_folio	= noop_dirty_folio,
+ /* The read buffer is required to be at least 8k, but may be much larger */
+@@ -1119,6 +1120,12 @@ struct fuse_notify_retrieve_in {
+ 	uint64_t	dummy4;
+ };
+ 
++struct fuse_notify_prune_out {
++	uint32_t	count;
++	uint32_t	padding;
++	uint64_t	spare;
 +};
 +
- /*****************************************************************************/
+ struct fuse_backing_map {
+ 	int32_t		fd;
+ 	uint32_t	flags;
+@@ -1131,6 +1138,7 @@ struct fuse_backing_map {
+ #define FUSE_DEV_IOC_BACKING_OPEN	_IOW(FUSE_DEV_IOC_MAGIC, 1, \
+ 					     struct fuse_backing_map)
+ #define FUSE_DEV_IOC_BACKING_CLOSE	_IOW(FUSE_DEV_IOC_MAGIC, 2, uint32_t)
++#define FUSE_DEV_IOC_SYNC_INIT		_IO(FUSE_DEV_IOC_MAGIC, 3)
  
- /*
-@@ -657,6 +667,7 @@ famfs_file_init_dax(
- 		}
- 		i_size_write(inode, meta->file_size);
- 		inode->i_flags |= S_DAX;
-+		inode->i_data.a_ops = &famfs_dax_aops;
- 	}
-  unlock_out:
- 	inode_unlock(inode);
+ struct fuse_lseek_in {
+ 	uint64_t	fh;
 -- 
 2.49.0
 
