@@ -1,153 +1,239 @@
-Return-Path: <linux-doc+bounces-71156-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71158-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BAB1CFD2EC
-	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 11:31:11 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76266CFD3BE
+	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 11:42:46 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 65F7D30006ED
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 10:31:08 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 29BF03000B59
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 10:42:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8F6FB2FBE0F;
-	Wed,  7 Jan 2026 10:20:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C93D330640;
+	Wed,  7 Jan 2026 10:42:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HG3UgZmi"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="swlz1z+y"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 419192DBF4B;
-	Wed,  7 Jan 2026 10:20:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12CE032B9BE;
+	Wed,  7 Jan 2026 10:42:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767781244; cv=none; b=ohDY8wpreqv8XGJyVOw7crRkmGcacGRsi+znTE+3GZEwxBDjzfAEvxfQnqAdIxO2Ru4tthTml5Vb8Rxy+wqoqV08FDL7ZCaaUxYYjr4vzf2V/Pn0KBvnF5ywdcWHGav3wy5NbpJ85U6RftgwMX+CxaLKjbrkinQMVruaKIKbJis=
+	t=1767782561; cv=none; b=NjuXxZ2rneTZ3yLUDtFDcPAS92dixx3inrtKpHJM7aXblLhOgdrycjduAs4Md+hhIS/z+uNtMwpqooxqU4v/q6mTWUFbbOisiHuQ/p65kOIYXXh4mDeuXct20ENyNG8VaUyFJHK2Roe0syiPKuy50fbmXse7fN4VY6ym0lsNKdQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767781244; c=relaxed/simple;
-	bh=2N7QgaN9sMjltiFqaQG4UkyiWR5RDDQ2n4IgHLPouW4=;
+	s=arc-20240116; t=1767782561; c=relaxed/simple;
+	bh=B6LPeGHETEyExfI2uLJqTPms6Ad9luivsjg77nS3iB4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eEyua+8T5cp4yjT5z4zsBQOsGjJIQKj+73aTCJ/yqN9jBkezrvLTBPUz2k7AVVbmS58tV2qBCAUMWZnbjFJOhdjAaH6hwqsttMofOP6b871+bmybV+iZcDnI+FAfAXuWD+zbuLfTbqKfVXKybwwMk5YdTmum/RMoj5FGyFUHZyU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HG3UgZmi; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 332F3C4CEF7;
-	Wed,  7 Jan 2026 10:20:26 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=nGpq4CD+Ya26PZM6KubirLt/pbuvWykQ/tVZEdObtW0BT8cyXUuG4zap6GeQ+V5trGEr2rStkrAt7cXtGnB7eYiaCvL2Kx81IYhlKlN0XLHb/Bm6H1PcvuXceKpZQFMSBWS4iBd2qN1yxlJIVhZ3kBKVY265NuT7T1QgZFLkayc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=swlz1z+y; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6AEF4C4CEF7;
+	Wed,  7 Jan 2026 10:42:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767781243;
-	bh=2N7QgaN9sMjltiFqaQG4UkyiWR5RDDQ2n4IgHLPouW4=;
+	s=k20201202; t=1767782560;
+	bh=B6LPeGHETEyExfI2uLJqTPms6Ad9luivsjg77nS3iB4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=HG3UgZmir72YPYFm/emlV/3aORPdbjLAnBvpX04p5XtFP762LStn/wPAzNuqOQyK8
-	 k7OnYBM5tMSwl6jbeHb8PLi19AGtC/53sTnfGuvHRwU1J5fTUCYLII+PuhChCRsuuP
-	 lesNvqozgo8UJHTVTNpJsDervk1O2VsPtftbzvVYNlT5k9C+Ou7zoWZDNLa9w7OL7l
-	 1I+dvThsPPRQrJPx2bNt/P7eQY786Hlh4y2DUZqzVomuI/Tc2vep7bqbTNymx1RDAb
-	 W1AWrPHPHnhn5oDQwiHOAOhH7g90DnMJIt+6Fqkfre323p/NzMyoEh/2zKKa/f4rTg
-	 6GL2C2ybj5rcA==
-Date: Wed, 7 Jan 2026 12:20:23 +0200
-From: Mike Rapoport <rppt@kernel.org>
-To: Ritesh Harjani <ritesh.list@gmail.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, Alex Shi <alexs@kernel.org>,
-	Alexander Gordeev <agordeev@linux.ibm.com>,
-	Andreas Larsson <andreas@gaisler.com>,
-	Borislav Petkov <bp@alien8.de>, Brian Cain <bcain@kernel.org>,
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	David Hildenbrand <david@kernel.org>,
-	Dinh Nguyen <dinguyen@kernel.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Guo Ren <guoren@kernel.org>, Heiko Carstens <hca@linux.ibm.com>,
-	Helge Deller <deller@gmx.de>, Huacai Chen <chenhuacai@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Johannes Berg <johannes@sipsolutions.net>,
-	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
-	Jonathan Corbet <corbet@lwn.net>,
-	"Liam R. Howlett" <Liam.Howlett@oracle.com>,
-	Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
-	Magnus Lindholm <linmag7@gmail.com>,
-	Matt Turner <mattst88@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Michal Hocko <mhocko@suse.com>, Michal Simek <monstr@monstr.eu>,
-	Muchun Song <muchun.song@linux.dev>,
-	Oscar Salvador <osalvador@suse.de>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Pratyush Yadav <pratyush@kernel.org>,
-	Richard Weinberger <richard@nod.at>,
-	Russell King <linux@armlinux.org.uk>,
-	Stafford Horne <shorne@gmail.com>,
-	Suren Baghdasaryan <surenb@google.com>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Vasily Gorbik <gor@linux.ibm.com>, Vineet Gupta <vgupta@kernel.org>,
-	Vlastimil Babka <vbabka@suse.cz>, Will Deacon <will@kernel.org>,
-	x86@kernel.org, linux-alpha@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-csky@vger.kernel.org,
-	linux-cxl@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-hexagon@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
-	linux-mm@kvack.org, linux-openrisc@vger.kernel.org,
-	linux-parisc@vger.kernel.org, linux-riscv@lists.infradead.org,
-	linux-s390@vger.kernel.org, linux-sh@vger.kernel.org,
-	linux-snps-arc@lists.infradead.org, linux-um@lists.infradead.org,
-	linuxppc-dev@lists.ozlabs.org, loongarch@lists.linux.dev,
-	sparclinux@vger.kernel.org
-Subject: Re: [PATCH v2 14/28] powerpc: introduce arch_zone_limits_init()
-Message-ID: <aV4zZ8D5eaLC6K-w@kernel.org>
-References: <20260102070005.65328-1-rppt@kernel.org>
- <20260102070005.65328-15-rppt@kernel.org>
- <87ldia9he1.ritesh.list@gmail.com>
+	b=swlz1z+ypBR0whKuoYOwPqys9jGxgDkUH6FzasyUf9qGoJXkQD6tRIAzAybV5p4Z1
+	 J1t2nwAUITZ/Pn0bmo1zjU7bSss7wu+Jip93eHd+ZgkP1iAHUrYHJZxjQKGuQThdIs
+	 1w+GhyH2bYlmFyYSPQalTnqXIHiHJHKpbwJtrE58wila1xYiYozI0F7X15sRHKfY2k
+	 CbVDCTyGIkOdguR3R/nk8pIa394bdFJUuXj4aLpmgfc9HZQA34fbzcOSetCJ9DH3Dk
+	 XWeTYCHh3UtqD5wGqyAJgUQEProl1OHGcfMZ44+DtNriuJD9spH6x+bNJzApqczTe0
+	 yLVY66Z/loaIA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vdQzu-000000011BT-13ek;
+	Wed, 07 Jan 2026 11:42:38 +0100
+Date: Wed, 7 Jan 2026 11:42:38 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: duchangbin <changbin.du@huawei.com>, Jonathan Corbet <corbet@lwn.net>, 
+	Mauro Carvalho Chehab <mchehab@kernel.org>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, 
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] tools: jobserver: Add validation for jobserver tokens to
+ ensure valid '+' characters
+Message-ID: <aV4zoXfoKJE0Id4e@foz.lan>
+References: <20251225062622.1500046-1-changbin.du@huawei.com>
+ <87zf6qcsu1.fsf@trenco.lwn.net>
+ <bc19bb55bee34abb990c00c3006c6710@huawei.com>
+ <20260107102910.5cad9d7d@foz.lan>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <87ldia9he1.ritesh.list@gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260107102910.5cad9d7d@foz.lan>
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Hi,
+On Wed, Jan 07, 2026 at 10:29:10AM +0100, Mauro Carvalho Chehab wrote:
+> Em Wed, 7 Jan 2026 08:11:29 +0000
+> duchangbin <changbin.du@huawei.com> escreveu:
+> 
+> > On Tue, Jan 06, 2026 at 02:52:06PM -0700, Jonathan Corbet wrote:
+> > > Changbin Du <changbin.du@huawei.com> writes:
+> > >   
+> > > > Add validation for jobserver tokens to prevent infinite loops on invalid fds
+> > > > When using GNU Make's jobserver feature in kernel builds, a bug in MAKEFLAGS
+> > > > propagation caused "--jobserver-auth=3,4" to reference an unintended file
+> > > > descriptor (Here, fd 3 was inherited from a shell command that opened
+> > > > "/etc/passwd" instead of a valid pipe). This led to infinite loops in
+> > > > jobserver-exec's os.read() calls due to empty or corrupted tokens. (The
+> > > > version of my make is 4.3)
+> > > >
+> > > > $ ls -l /proc/self/fd
+> > > > total 0
+> > > > lrwx------ 1 changbin changbin 64 Dec 25 13:03 0 -> /dev/pts/1
+> > > > lrwx------ 1 changbin changbin 64 Dec 25 13:03 1 -> /dev/pts/1
+> > > > lrwx------ 1 changbin changbin 64 Dec 25 13:03 2 -> /dev/pts/1
+> > > > lr-x------ 1 changbin changbin 64 Dec 25 13:03 3 -> /etc/passwd
+> > > > lr-x------ 1 changbin changbin 64 Dec 25 13:03 4 -> /proc/1421383/fd
+> > > >
+> > > > The modified code now explicitly validates tokens:
+> > > > 1. Rejects empty reads (prevents infinite loops on EOF)
+> > > > 2. Checks all bytes are '+' characters (catches fd reuse issues)
+> > > > 3. Raises ValueError with clear diagnostics for debugging
+> > > > This ensures robustness against invalid jobserver configurations, even when
+> > > > external tools (like make) incorrectly pass non-pipe file descriptors.
+> > > >
+> > > > Signed-off-by: Changbin Du <changbin.du@huawei.com>
+> > > > ---
+> > > >  tools/lib/python/jobserver.py | 2 ++
+> > > >  1 file changed, 2 insertions(+)
+> > > >
+> > > > diff --git a/tools/lib/python/jobserver.py b/tools/lib/python/jobserver.py
+> > > > index a24f30ef4fa8..88d005f96bed 100755
+> > > > --- a/tools/lib/python/jobserver.py
+> > > > +++ b/tools/lib/python/jobserver.py
+> > > > @@ -91,6 +91,8 @@ class JobserverExec:
+> > > >              while True:
+> > > >                  try:
+> > > >                      slot = os.read(self.reader, 8)
+> > > > +                    if not slot or any(c != b'+'[0] for c in slot):
+> > > > +                        raise ValueError("empty or unexpected token from jobserver")  
+> > > 
+> > > So I had to stare at this for a while to figure out what it was doing; a
+> > > comment might help.
+> > > 
+> > > But if it finds something that's not b'+', it simply crashes the whole
+> > > thing?  Is that really what we want to do?  It would seem better to
+> > > proceed if we got any slots at all, and to emit a message telling the
+> > > poor user what they might want to do about the situation?
+> > >  
+> > I suspect that in Make versions prior to 4.3, when generating the "--jobserver-auth=r,w"
+> > parameter, the implementation fails to properly handle situations where file descriptor 3
+> > is already occupied by the parent process (as I encountered where fd 3 was actually used to
+> > open /etc/passwd). This appears to force Make to always use fd3 regardless of its
+> > availability (I'm not sure how Make was written). In contrast, Make 4.4+ versions
+> > default to using named pipes, which avoids this issue entirely.
+> 
+> It would be nice if you could provide more details about how to reproduce it. 
+> Are you doing anything special? What distro are you using? what python version?
+> 
+> > When this problem occurs, the current implementation deadlocks because for regular files,
+> > os.read() returns empty bytes after reaching EOF, creating an infinite loop. My workaround
+> > is to ignore this error condition to prevent deadlock, although this means the jobserver
+> > protocol will no longer be honored.
+> 
+> testing if slot is empty makes sense, but why testing if it is "+"?
+> 
+> > 
+> > As you suggested above, We can output an error message to stderr to inform users, but
+> > must not use stdout, as it would corrupt the tool's normal output stream.
+> 
 
-On Wed, Jan 07, 2026 at 09:57:34AM +0530, Ritesh Harjani wrote:
-> Mike Rapoport <rppt@kernel.org> writes:
-> 
-> > From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
-> >
-> > Move calculations of zone limits to a dedicated arch_zone_limits_init()
-> > function.
-> >
-> > Later MM core will use this function as an architecture specific callback
-> > during nodes and zones initialization and thus there won't be a need to
-> > call free_area_init() from every architecture.
-> >
-> > Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
-> > ---
-> >  arch/powerpc/mm/mem.c | 22 ++++++++++++----------
-> >  1 file changed, 12 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/arch/powerpc/mm/mem.c b/arch/powerpc/mm/mem.c
-> > index 3ddbfdbfa941..32c496bfab4f 100644
-> > --- a/arch/powerpc/mm/mem.c
-> > +++ b/arch/powerpc/mm/mem.c
-> > @@ -221,13 +221,23 @@ static int __init mark_nonram_nosave(void)
-> >   * anyway) will take a first dip into ZONE_NORMAL and get otherwise served by
-> >   * ZONE_DMA.
-> >   */
-> > -static unsigned long max_zone_pfns[MAX_NR_ZONES];
-> > +void __init arch_zone_limits_init(unsigned long *max_zone_pfns)
-> > +{
-> > +#ifdef CONFIG_ZONE_DMA
-> > +	max_zone_pfns[ZONE_DMA]	= min(zone_dma_limit, max_low_pfn - 1) + 1;
-> 
-> Hi Mike, 
-> 
-> This doesn't look correct. Isn't the zone_dma_limit value in bytes actually?
-> Shouldn't it be -
-> 
->      max_zone_pfns[ZONE_DMA] = min((zone_dma_limit >> PAGE_SHIFT) + 1, max_low_pfn);
+After thinking a little bit more about this, IMHO the best is to have
+two separate patches (assuming that there is a good reason why ensuring that the
+slot's character is "+"):
 
-You are right, I'll update it for v3. 
- 
-> -ritesh
+> You could do something like (untested):
+> 
+>              while True:
+>                  try:
+>                      slot = os.read(self.reader, 8)
+> +                    if not slot:
+> +                        # Stop at the end of the jobserver queue.
+> +                        break
+
+This would be patch 1, to overcome some issue (probably due to Python
+version) that reading past EOF won't rise an exception. I would very much
+want to see what python version you're using and see if some other
+exception arose (like EOFError), properly described at the patch description.
+
+> +                    # Why do we need this?
+> +                    if any(c != b'+'[0] for c in slot):
+> +                        print("Warning: invalid jobserver slots", file=sys.stderr)
+> +                        break
+
+This seems to be a separate issue. Why do we need to enforce that the slot data
+is "+"? If it doesn't, why this would be a problem?
+
+Btw, reading:
+
+    https://www.gnu.org/software/make/manual/html_node/POSIX-Jobserver.html
+
+We have:
+
+    "In both implementations of the jobserver, the pipe will be pre-loaded with 
+     one single-character token for each available job. To obtain an extra slot
+     you must read a single character from the jobserver; to release a slot you
+     must write a single character back into the jobserver.
+
+     It’s important that when you release the job slot, you write back the same
+     character you read. Don’t assume that all tokens are the same character;
+     different characters may have different meanings to GNU make. The order is
+     not important, since make has no idea in what order jobs will complete anyway."
+
+So, a 100% compliant POSIX jobserver code shall not test for "+", but, instead,
+preserve whatever character is there.
+
+Yet, checking for "+" is really needed, please add a rationale at the patch
+description justifying why. On such case, we should still:
+
+    - release the slot(s) we don't want by writing the character via
+      os.write();
+    - print a warning message about why we rejected the slot(s).
+
+>                      self.jobs += slot
+>                  except (OSError, IOError) as e:
+>                      if e.errno == errno.EWOULDBLOCK:
+>                          # Stop at the end of the jobserver queue.
+>                          break
+>                      # If something went wrong, give back the jobs.
+>                      if self.jobs:
+>                          os.write(self.writer, self.jobs)
+>                      raise e
+> 
+> Yet, if os.read() fails or reaches EOF, I would expect that the "except" block
+> would pick it. It sounds to me that it could be some issue with the python
+> version you're using.
+> 
+> > For
+> > example, in scripts/Makefile.vmlinux_o we have:
+> > 
+> > quiet_cmd_gen_initcalls_lds = GEN     $@
+> >       cmd_gen_initcalls_lds = \
+> >         $(PYTHON3) $(srctree)/scripts/jobserver-exec \
+> >         $(PERL) $(real-prereqs) > $@
+> > 
+> > 
+> > > >                      self.jobs += slot
+> > > >                  except (OSError, IOError) as e:
+> > > >                      if e.errno == errno.EWOULDBLOCK:  
+> > > 
+> > > Thanks,
+> > > 
+> > > jon  
+> > 
+> 
+> 
+> 
+> Thanks,
+> Mauro
 
 -- 
-Sincerely yours,
-Mike.
+Thanks,
+Mauro
 
