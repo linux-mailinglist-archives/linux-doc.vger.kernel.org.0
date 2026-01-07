@@ -1,77 +1,77 @@
-Return-Path: <linux-doc+bounces-71203-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71211-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C846CFFC8E
-	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 20:37:55 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CBC1CFFC7C
+	for <lists+linux-doc@lfdr.de>; Wed, 07 Jan 2026 20:36:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id AF85A3061FE7
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 19:36:30 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 15B2930049DE
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Jan 2026 19:36:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 077A938A73F;
-	Wed,  7 Jan 2026 15:34:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 06663397AD1;
+	Wed,  7 Jan 2026 15:34:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Cgf62Zsk"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TZb+7stT"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com [209.85.167.194])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67BB538A72E
-	for <linux-doc@vger.kernel.org>; Wed,  7 Jan 2026 15:34:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0927A397ABC
+	for <linux-doc@vger.kernel.org>; Wed,  7 Jan 2026 15:34:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.194
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767800052; cv=none; b=gIVwrTBjPpQtVnYKMU47R7VnUWVF1gyWwpUV/o15lor1Ku0aluMWWfY/u5sJ42AFz45F0dvkjxl+0SNsjnE0EKixV6FBHRa1r2DPtucQviVEet0Fl4FD2fwhadbyzx9RrekQ9LvCmmkBz5WFGQLZVYOZG8+QFtcJk8gC4eNWmqc=
+	t=1767800082; cv=none; b=TLh9QyD3GzrL7sdoOQg1w5rGOhD5zD5OqV3aLl+QuUNCuSFISfZzOPsLp8x8amND1y6m9KwrQwr0GYE05SxOKUN/KZcUn8YQkmKMeoJRmI1IbWuBp2iHR8011H8W8OO36tk53CsSb8OGIroZ+7oOb/zdkcBm9hyP2AJxLxDOuus=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767800052; c=relaxed/simple;
-	bh=4TXKGjJAeQJwDyMsPwSGTtB9EZ4t0ayfW9/mqhAX0Rk=;
+	s=arc-20240116; t=1767800082; c=relaxed/simple;
+	bh=+muXBvOeYTMbD8nIPUObSxhKcu4jsEupVVL6nK1rpsA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=m9oF/jKUUJd1dSo/3KEbw2tz8ekBMeVpdtm9PRduMK7SzKNgCjHXBVm59H1x/+ZV7Utlbh4+ZR53nUhJeCthQ7W1pm7vMCLZCLOyJbm6QoSHcSgz4MSIFGvKvVmMH75L6M8EtPD7K/hh5zFu/uF06m+nG4fccHPbTIsOFAUW+Y0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Cgf62Zsk; arc=none smtp.client-ip=209.85.167.182
+	 MIME-Version:Content-Type; b=i6fmZu80R438920xprdWs+A9uZJWQ118P/sto99kn5AAJEKjd+ClIZbXkYFHFdzejPN9aDN0pvF9TLk+0Dt5k8y/iDHlm9eaggHzxrdeMWvFRfd8hTbUKatopd/+fH+uI09P+7DgcBp/ZsFEjJhBzk5OZLHCIj1qvQ9OOh2PDLg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TZb+7stT; arc=none smtp.client-ip=209.85.167.194
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-459ac606f0bso1285333b6e.0
-        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 07:34:11 -0800 (PST)
+Received: by mail-oi1-f194.google.com with SMTP id 5614622812f47-450b5338459so1353892b6e.2
+        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 07:34:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767800050; x=1768404850; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1767800080; x=1768404880; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xsoizNZgLZaDBPInQieK4jd0iMDgMqPyINA++t0nMgM=;
-        b=Cgf62ZskAjdt/2L9b76VksAj77KbHek0naYG1vY1XQe23J4K38Nz1m/K740Rq7OlVo
-         zLrwDRz5pGtWlCx667y+8EAUB273ZdeuzKrbxsBY+oNeTvu0SY49seTPDl4AvCkc8QPB
-         uVImzIVQC82a6q7azDL99a9d/fyPNfahq1bHxWIqZ5uJEJhv9t/1KtKG/fEgSR2DBKbI
-         Zb6q4dOJcfuXVbsGmRwaBLvw0jmpHd/yl3zjhn96IJqrWRWoY6C8HOTfAMH/wye1Rhb7
-         NUlMbF9S8UQ3rFA1t0Y2ei35zezVqIdTn9oGDJu8+NiTbR7w+V0CavvAqeizpWdW2KCX
-         SePQ==
+        bh=WDzXFW8FM/AL7CQLZ1rgjH5BjM6661IE1WdAgak/okg=;
+        b=TZb+7stT7egIVn8Q3MNVj8NKFsrujsEIJMHdzd6hvTgqHjAf5LUoGkWcVXp0Qoq4GG
+         GbSY1Xw+0kTxUCvB/aLPbMrp8COBJrZIOIACT1kNg8tqzbPGdouWHs3fWP3e578wM4nq
+         3sPwXMX9uxDIbixJmPfcEu6g+3NJ0/+/iXtDQUT9cHWUAA73m8v9QfSwegyfKPCff6Un
+         9bX/gX2kI41mrGklyKmpAvqp0yn4QRQRvNnBzFlMIt+SorvoUwl9nnPFWcxvmBRrujIM
+         GaChvhPq8sDb8UZBhxQZWotgFGAZI57iNrSnOxVD3f/G8ShPLB7k3ZG1u5f1yQs4OxGL
+         tMbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767800050; x=1768404850;
+        d=1e100.net; s=20230601; t=1767800080; x=1768404880;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:sender:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=xsoizNZgLZaDBPInQieK4jd0iMDgMqPyINA++t0nMgM=;
-        b=SWlYxomNj0OtMkt5/6G6Wld81mY7BavPUVdgi5ygmU2rRK+atJ7KY3eMgTSwVYIG8I
-         0UEHywrwEypb0lObzY2MCyrsOKEoiGZGm81whrvtzfzDb1/caJrDPzVkAzyJXp8FDmPS
-         H9hdMIHAJvk/imaJOCoy77TB7czISv+Bd9PEqP/zQFKpf0sFnhXJ7QeXbDtpj3mNAbQ+
-         tcWH74Boju5OrQ+LK9wkWYBTzUJab2JI9oyaF/puHq5ajvtfq36zOiQRgisW3qNyajUb
-         T9G/WLfGhqWFLveoNuCGity+ZH8U+H1dH9D9wSXUfAh4SDYUvhqEoPx53A6zaTI5dhld
-         jI7w==
-X-Forwarded-Encrypted: i=1; AJvYcCW72cJbEpF6yaXDiTK51jRWLGpstawlSOAga3lE9kIVo+gZy0bJmkXoD5CVv4cP01XKXeHxnk/yWJU=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw8gwqpCQnBdtKC3297Igi+UmsIwBdGtYU6raOqDzfj0sQJESse
-	ztgz4WC5f/rYqXAIRphEsRWuKvl7BAuN+x8o63eVstHhiKYMkSFae5A1
-X-Gm-Gg: AY/fxX7kQLGv7ymNlZRCcRLsJQheZ8psNTBt9F7k/SYpVvVrDzyvknfehTTZVqFPE5Y
-	AySCUCcLuzBeE4FO47uDf+3qX/jwHKjFQealLqlGpZ/+OeESEobl7jZ1BY0ZgHZzC9xqEtmHwko
-	ya4D4Hwj5/Jw/FXx+emF5+mYnbmJ6pgmb9NXFRtPVq3ljsdxp6C/7AMVU4etpMknavgEvWwthSd
-	zMCISBvvo0EtFxViulv5Qj28U9ytC1WgyY/IzVKWIWPirMbOBsoUrasJbdzgdFiIER7xKlJdHRw
-	QMTWevZCfF/bbUTermi/vBimfdAPWN+f0GakzmYhrsGk3OW7Cp6ldYBD2xB81Ub49ky0nblIVlc
-	y80/2EkE8JFVwE5rjV5xUhzH+aou/PBom2ZA1mjrjmxsxE6nzbPnFmc/SDMMFnUfBgREtWOcOg6
-	TGUw16oHxVaeXxcAL4WSgAu1erXoI8mR7dOJiy/zxMAk2ijjk53Pd5GZ0=
-X-Google-Smtp-Source: AGHT+IFO/ZLxuqaj17abyw10+8CVi9iLvz7AXlLgZerskMOrQo6BFT5caxK0XQr+JNLPJZbm/V9Mbw==
-X-Received: by 2002:a05:6808:1786:b0:44f:f747:f9f with SMTP id 5614622812f47-45a6be3820fmr1144818b6e.36.1767800050216;
-        Wed, 07 Jan 2026 07:34:10 -0800 (PST)
+        bh=WDzXFW8FM/AL7CQLZ1rgjH5BjM6661IE1WdAgak/okg=;
+        b=HrB2wEjJiHDh2dxFMRVrPoNsYOhB4P8YtaOwVfP4IDuwWE6Lg15plK7iCi6Agk54B2
+         e2XoSCe0odDYxUWS702+F5ruFCnYfq29bMElkBBy2G0gVDv4bIGGUXtrGzL7Cdra8kdW
+         HA0ggTp7hHU2KQb1CmVOUoYczEGDnNsvg90+j0qekHpkTZCwqwRMFuxLoLqvakjouNdt
+         DHBDFfa9NjfjvLpmRnijI1R1HRx58wyXg9iq56SYY+KHqZnINmskYS8DQnagaQTpQea1
+         zL5cNxkQlnLijoaepAXe9cjB76tQmKYOFaqWX/4SinuX7TbbqzFfQLUPyRVPAbOwkJtd
+         Mz9Q==
+X-Forwarded-Encrypted: i=1; AJvYcCXaIAZ2eH0nIxsgWBIWY71fvwpj4gzGqmfTEylIFzqCqIAwWDsJgWKia4vy9o9nnpuTLFuAvUm9RK4=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyLN3Q1Z6ZwcJOKw1McvyIlzUwgQHUwmcxEcrtBLbXeRIywUyL7
+	aVYhTy9iDOoqb/C+hPQRG0TmOiBfgejdSr3iPQ6AWzrYuuRVuowPTZIn
+X-Gm-Gg: AY/fxX774XKHIBLGPVpvFLXO/Gl3+HoxeoDZj186EsAZOwQTyNDAN+BEbcHtR9Tbhf6
+	76pWOjaEWO0ESg0a7WjhtIGr+wqCFIWMAfJrdPm/urVJVGssj4qGoglAmiM34HxYsHiWH9+PHgP
+	v4Dzn/XZ6TGO3bXPgiL3HmfqTfr89z637wBV/GULq5pxbK5PgtF+w4eV70pbKIIp8nq+LX2YNY4
+	fr4dov9on4dZFgu0/xyMvvmfibpchv6tcMC/z7jJmf+9ADueTC8A8XyJ7AvUBf5atsBK0/3F/pX
+	gAm7fLhyakfNMkePdnFHNozdVeTugTDfYgJN/9yDjxZgYhc9GqaayJ7aasL52h49Bo+G8fJ+fqG
+	IlV5SFKCiZBJSv0sMbvXyAJGDgA93T6Z7PvzXdn8hocwmJ4oP7o1dW3ki9BKBUjGESGMtfBdIVf
+	m5Jot2ghycvlmkGXidqDMyRLaFRKKh3zZzqeK5adXmNfTV
+X-Google-Smtp-Source: AGHT+IH4P/04LMtWqv8sSwu50eq+akkq0AyxmvD1PnTkrLfjOQ9ju3pd7rvqUnQ/LnpHTBBsjZ04Pw==
+X-Received: by 2002:a05:6808:309a:b0:450:3122:f0a2 with SMTP id 5614622812f47-45a6bccfa88mr1317344b6e.11.1767800079970;
+        Wed, 07 Jan 2026 07:34:39 -0800 (PST)
 Received: from localhost.localdomain ([2603:8080:1500:3d89:a917:5124:7300:7cef])
-        by smtp.gmail.com with ESMTPSA id 5614622812f47-45a5e2f1de5sm2398106b6e.22.2026.01.07.07.34.08
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-45a5e2f1de5sm2398106b6e.22.2026.01.07.07.34.38
         (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Wed, 07 Jan 2026 07:34:09 -0800 (PST)
+        Wed, 07 Jan 2026 07:34:39 -0800 (PST)
 Sender: John Groves <grovesaustin@gmail.com>
 From: John Groves <John@Groves.net>
 X-Google-Original-From: John Groves <john@groves.net>
@@ -114,9 +114,9 @@ Cc: John Groves <jgroves@micron.com>,
 	linux-cxl@vger.kernel.org,
 	linux-fsdevel@vger.kernel.org,
 	John Groves <john@groves.net>
-Subject: [PATCH V3 10/21] famfs_fuse: Kconfig
-Date: Wed,  7 Jan 2026 09:33:19 -0600
-Message-ID: <20260107153332.64727-11-john@groves.net>
+Subject: [PATCH V3 20/21] famfs_fuse: Add famfs fmap metadata documentation
+Date: Wed,  7 Jan 2026 09:33:29 -0600
+Message-ID: <20260107153332.64727-21-john@groves.net>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20260107153332.64727-1-john@groves.net>
 References: <20260107153244.64703-1-john@groves.net>
@@ -127,38 +127,102 @@ List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add FUSE_FAMFS_DAX config parameter, to control compilation of famfs
-within fuse.
+From: John Groves <John@Groves.net>
+
+This describes the fmap metadata - both simple and interleaved
 
 Signed-off-by: John Groves <john@groves.net>
 ---
- fs/fuse/Kconfig | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ fs/fuse/famfs_kfmap.h | 73 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
 
-diff --git a/fs/fuse/Kconfig b/fs/fuse/Kconfig
-index 3a4ae632c94a..3b6d3121fe40 100644
---- a/fs/fuse/Kconfig
-+++ b/fs/fuse/Kconfig
-@@ -76,3 +76,17 @@ config FUSE_IO_URING
+diff --git a/fs/fuse/famfs_kfmap.h b/fs/fuse/famfs_kfmap.h
+index 6a6420bdff48..ac5971d4c63a 100644
+--- a/fs/fuse/famfs_kfmap.h
++++ b/fs/fuse/famfs_kfmap.h
+@@ -7,6 +7,79 @@
+ #ifndef FAMFS_KFMAP_H
+ #define FAMFS_KFMAP_H
  
- 	  If you want to allow fuse server/client communication through io-uring,
- 	  answer Y
++/* KABI version 43 (aka v2) fmap structures
++ *
++ * The location of the memory backing for a famfs file is described by
++ * the response to the GET_FMAP fuse message (defined in
++ * include/uapi/linux/fuse.h
++ *
++ * There are currently two extent formats: Simple and Interleaved.
++ *
++ * Simple extents are just (devindex, offset, length) tuples, where devindex
++ * references a devdax device that must be retrievable via the GET_DAXDEV
++ * message/response.
++ *
++ * The extent list size must be >= file_size.
++ *
++ * Interleaved extents merit some additional explanation. Interleaved
++ * extents stripe data across a collection of strips. Each strip is a
++ * contiguous allocation from a single devdax device - and is described by
++ * a simple_extent structure.
++ *
++ * Interleaved_extent example:
++ *   ie_nstrips = 4
++ *   ie_chunk_size = 2MiB
++ *   ie_nbytes = 24MiB
++ *
++ * ┌────────────┐────────────┐────────────┐────────────┐
++ * │Chunk = 0   │Chunk = 1   │Chunk = 2   │Chunk = 3   │
++ * │Strip = 0   │Strip = 1   │Strip = 2   │Strip = 3   │
++ * │Stripe = 0  │Stripe = 0  │Stripe = 0  │Stripe = 0  │
++ * │            │            │            │            │
++ * └────────────┘────────────┘────────────┘────────────┘
++ * │Chunk = 4   │Chunk = 5   │Chunk = 6   │Chunk = 7   │
++ * │Strip = 0   │Strip = 1   │Strip = 2   │Strip = 3   │
++ * │Stripe = 1  │Stripe = 1  │Stripe = 1  │Stripe = 1  │
++ * │            │            │            │            │
++ * └────────────┘────────────┘────────────┘────────────┘
++ * │Chunk = 8   │Chunk = 9   │Chunk = 10  │Chunk = 11  │
++ * │Strip = 0   │Strip = 1   │Strip = 2   │Strip = 3   │
++ * │Stripe = 2  │Stripe = 2  │Stripe = 2  │Stripe = 2  │
++ * │            │            │            │            │
++ * └────────────┘────────────┘────────────┘────────────┘
++ *
++ * * Data is laid out across chunks in chunk # order
++ * * Columns are strips
++ * * Strips are contiguous devdax extents, normally each coming from a
++ *   different memory device
++ * * Rows are stripes
++ * * The number of chunks is (int)((file_size + chunk_size - 1) / chunk_size)
++ *   (and obviously the last chunk could be partial)
++ * * The stripe_size = (nstrips * chunk_size)
++ * * chunk_num(offset) = offset / chunk_size    //integer division
++ * * strip_num(offset) = chunk_num(offset) % nchunks
++ * * stripe_num(offset) = offset / stripe_size  //integer division
++ * * ...You get the idea - see the code for more details...
++ *
++ * Some concrete examples from the layout above:
++ * * Offset 0 in the file is offset 0 in chunk 0, which is offset 0 in
++ *   strip 0
++ * * Offset 4MiB in the file is offset 0 in chunk 2, which is offset 0 in
++ *   strip 2
++ * * Offset 15MiB in the file is offset 1MiB in chunk 7, which is offset
++ *   3MiB in strip 3
++ *
++ * Notes about this metadata format:
++ *
++ * * For various reasons, chunk_size must be a multiple of the applicable
++ *   PAGE_SIZE
++ * * Since chunk_size and nstrips are constant within an interleaved_extent,
++ *   resolving a file offset to a strip offset within a single
++ *   interleaved_ext is order 1.
++ * * If nstrips==1, a list of interleaved_ext structures degenerates to a
++ *   regular extent list (albeit with some wasted struct space).
++ */
 +
-+config FUSE_FAMFS_DAX
-+	bool "FUSE support for fs-dax filesystems backed by devdax"
-+	depends on FUSE_FS
-+	depends on DEV_DAX
-+	default FUSE_FS
-+	select DEV_DAX_FS
-+	help
-+	  This enables the fabric-attached memory file system (famfs),
-+	  which enables formatting devdax memory as a file system. Famfs
-+	  is primarily intended for scale-out shared access to
-+	  disaggregated memory.
-+
-+	  To enable famfs or other fuse/fs-dax file systems, answer Y
+ /*
+  * The structures below are the in-memory metadata format for famfs files.
+  * Metadata retrieved via the GET_FMAP response is converted to this format
 -- 
 2.49.0
 
