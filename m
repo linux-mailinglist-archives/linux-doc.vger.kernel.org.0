@@ -1,54 +1,55 @@
-Return-Path: <linux-doc+bounces-71438-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71441-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6A4DD04F00
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:26:43 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35FEAD04EEB
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:26:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id AE38933E413D
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 17:01:12 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 05F843400D9F
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 17:01:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90936328B43;
-	Thu,  8 Jan 2026 16:59:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 997CE2F0661;
+	Thu,  8 Jan 2026 16:59:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="h9hHW9U/"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="sEqkTjep"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDAD5327C08;
-	Thu,  8 Jan 2026 16:59:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DABE532ABF1;
+	Thu,  8 Jan 2026 16:59:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767891564; cv=none; b=lcK8wJPMm8PNFoYPS0bciuZEGv4k+VEhGBVSkN+sQX9zNUtXwTU7A3h2lvQi268oip6CsAgaBl5Erj3sTdRclRp0q0PUWiSRenhQ28BiDhdpdIFQM+jGQbX76jNRrGQHduhJV9vgjCVxyJVwjLnw4bpMGsUuIcJ3VNcrtzElc8Y=
+	t=1767891573; cv=none; b=Mx160dBGt4hQMFrLj1qhPzh/1uoRSn7Rmpd9qu79/yhkDHWRyWNPxyk6sssrF2qnSotuhLP5v+GdS7ujqrIzL5qylj4EGpSGy9QeONHa94BpCgYei0Loar0ZnmPmDh0KckvUjuRuBBcNUhQapCJ20vtKjMhW6a9GY3aKFAWdt0w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767891564; c=relaxed/simple;
-	bh=othZ9uEGhlxCmc6L79S7G0WimW789Md/2pzxa21duZA=;
+	s=arc-20240116; t=1767891573; c=relaxed/simple;
+	bh=CfDGuastMJOuxN8t3uMRhNG36tz6y42aN0NN4oRj03E=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Q2SC+YdYkZcnZG9qKsiTRg5xzH63i8vuCZIBa2GGw/uniOtD8CBU4uwzXq9YU4NfS4T2GDbDdfOPo4wXiBUglND9I+twqxJI31TKiHq+PB6WYUSdZ8U9dIndilCFTPBP7AYaZlR/LsVdERgySxIW4aVCkWds2mq9G+87CU8rn78=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=h9hHW9U/; arc=none smtp.client-ip=185.171.202.116
+	 In-Reply-To:To:Cc; b=KEIVFFmlXyAdRJ0GA0E/Pim/R+wth2IIMA2DsqwaBZR2iUSD8cfO955iUOUSBRNO6r8ezgpF28tXYkiv9FIbagZG1mzgFaGN3/g/yxxfxK+32UViyvTNvKFPfH14QhT887bU1n6W7QSXXWPIiww2QApO8PwIQ0aidXs/lfv/CdA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=sEqkTjep; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 59A17C1F6C0;
-	Thu,  8 Jan 2026 16:58:55 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 869234E42000;
+	Thu,  8 Jan 2026 16:59:30 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 8ED976072B;
-	Thu,  8 Jan 2026 16:59:21 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9E129103C88BD;
-	Thu,  8 Jan 2026 17:59:18 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 5A04D6072B;
+	Thu,  8 Jan 2026 16:59:30 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 02ABD103C86ED;
+	Thu,  8 Jan 2026 17:59:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1767891560; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1767891569; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=R21unSfzXWHOBbt64HP6HkJF7cNny7UC0Q5XDAA0ecA=;
-	b=h9hHW9U/ERTF2yyOfkmZse6gw9G0VUb8qBBTNAankEMyG8hu4Et6zLAF4tfGc37ApuSWm0
-	OlTKcVlfekklpwXu3g5jZ+FW7BmAl8QPtu6p+WmJHOQBdeNIi2OJWFU4XuLKtCYueZUPtV
-	WLlD9SMEtp45N6129YjSr0aGoudCl1haQu+pTySeh3A4FAbunRqYcD9I2C3ErxfqOOEKEM
-	B2AA4N7EI2BlyMLzn9uDTbyn78SzuSPTWNMEj703xm4X6HEIw8UwTMBggpMFWysGpTYVHP
-	l7IRS0FWlSgW9K26CHibBG21nV1satKXGv4N4t4Os7yGW0zf84fhJbIpEYVi3g==
+	bh=hhd+i0LUsTLSToudA1/3v4V3xTFwJTwzl9JTAHOOnfs=;
+	b=sEqkTjeph7Y/Qe6jPI1nKBuwVNtPvh6LbFDVrXuqxn7+xzZnHQeaemEyk/vJnHUeZzmkVY
+	+bFZCH6DJaGUJGDwiBhSoyWR5H6VhNu2VQM/PynJJ0QdKOwguylqfUXN+b26+mtLrELmWG
+	refCnaWRV9q6Dlps+dFQn6A5J5wG8LE1bNye6qWK/uEIGofOOudVVUeBNQB/D/P28qkQcE
+	A0rhJ6LrT4hZnyUFvK+sLuPWllKRdWSyXefsA6K4bwJF7Nsc8hhbfUZdYtBQWEIepHBspu
+	YkdJdnesBAFNxpGwq50iGlAE3fY7aodi3CllPc5G8+AXZbs1o1EMRdHW1rpavQ==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 08 Jan 2026 17:57:49 +0100
-Subject: [PATCH v2 16/27] mtd: spi-nor: Create a local SR cache
+Date: Thu, 08 Jan 2026 17:57:52 +0100
+Subject: [PATCH v2 19/27] mtd: spi-nor: Add steps for testing locking
+ support
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,7 +58,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-16-c462ef806130@bootlin.com>
+Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-19-c462ef806130@bootlin.com>
 References: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 In-Reply-To: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 To: Tudor Ambarus <tudor.ambarus@linaro.org>, 
@@ -72,134 +73,156 @@ Cc: Sean Anderson <sean.anderson@linux.dev>,
 X-Mailer: b4 0.14.3
 X-Last-TLS-Session-Version: TLSv1.3
 
-In order to be able to generate debugfs output without having to
-actually reach the flash, create a SPI NOR local cache of the status
-registers. What matters in our case are all the bits related to sector
-locking. As such, in order to make it clear that this cache is not
-intended to be used anywhere else, we zero the irrelevant bits.
+As recently raised on the mailing list, it may be useful to propose a
+list of steps to go through in order to proove the devices have been
+described correctly, especially since all the block protection
+information is not stored in any kind of table and is instead filled
+manually by developpers.
 
-The cache is initialized once during the early init, and then maintained
-every time the write protection scheme is updated.
+Use the debugfs output to ease the comparison between expectations and
+reality.
 
-Suggested-by: Michael Walle <mwalle@kernel.org>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/spi-nor/core.c  |  6 +++++-
- drivers/mtd/spi-nor/core.h  |  1 +
- drivers/mtd/spi-nor/swp.c   | 35 +++++++++++++++++++++++++++++++++--
- include/linux/mtd/spi-nor.h |  2 ++
- 4 files changed, 41 insertions(+), 3 deletions(-)
+ Documentation/driver-api/mtd/spi-nor.rst | 128 +++++++++++++++++++++++++++++++
+ 1 file changed, 128 insertions(+)
 
-diff --git a/drivers/mtd/spi-nor/core.c b/drivers/mtd/spi-nor/core.c
-index 97da30d9f6c1..ca497ea2228c 100644
---- a/drivers/mtd/spi-nor/core.c
-+++ b/drivers/mtd/spi-nor/core.c
-@@ -3328,8 +3328,12 @@ static int spi_nor_init(struct spi_nor *nor)
- 	 */
- 	if (IS_ENABLED(CONFIG_MTD_SPI_NOR_SWP_DISABLE) ||
- 	    (IS_ENABLED(CONFIG_MTD_SPI_NOR_SWP_DISABLE_ON_VOLATILE) &&
--	     nor->flags & SNOR_F_SWP_IS_VOLATILE))
-+	     nor->flags & SNOR_F_SWP_IS_VOLATILE)) {
- 		spi_nor_try_unlock_all(nor);
-+	} else {
-+		/* In the other cases, make sure the debugfs SR cache is up to date */
-+		spi_nor_cache_sr_lock_bits(nor, NULL);
-+	}
- 
- 	if (nor->addr_nbytes == 4 &&
- 	    nor->read_proto != SNOR_PROTO_8_8_8_DTR &&
-diff --git a/drivers/mtd/spi-nor/core.h b/drivers/mtd/spi-nor/core.h
-index 3dc9ba3bc6da..091eb934abe4 100644
---- a/drivers/mtd/spi-nor/core.h
-+++ b/drivers/mtd/spi-nor/core.h
-@@ -674,6 +674,7 @@ int spi_nor_post_bfpt_fixups(struct spi_nor *nor,
- 
- void spi_nor_init_default_locking_ops(struct spi_nor *nor);
- void spi_nor_try_unlock_all(struct spi_nor *nor);
-+void spi_nor_cache_sr_lock_bits(struct spi_nor *nor, u8 *sr);
- void spi_nor_set_mtd_locking_ops(struct spi_nor *nor);
- void spi_nor_set_mtd_otp_ops(struct spi_nor *nor);
- 
-diff --git a/drivers/mtd/spi-nor/swp.c b/drivers/mtd/spi-nor/swp.c
-index c3dbc8832025..7a6c2b8ef921 100644
---- a/drivers/mtd/spi-nor/swp.c
-+++ b/drivers/mtd/spi-nor/swp.c
-@@ -160,6 +160,25 @@ static int spi_nor_build_sr(struct spi_nor *nor, const u8 *old_sr, u8 *new_sr,
- 	return 0;
- }
- 
-+/*
-+ * Keep a local cache containing all lock-related bits for debugfs use only.
-+ * This way, debugfs never needs to access the flash directly.
-+ */
-+void spi_nor_cache_sr_lock_bits(struct spi_nor *nor, u8 *sr)
-+{
-+	u8 bp_mask = spi_nor_get_sr_bp_mask(nor);
-+	u8 tb_mask = spi_nor_get_sr_tb_mask(nor);
+diff --git a/Documentation/driver-api/mtd/spi-nor.rst b/Documentation/driver-api/mtd/spi-nor.rst
+index 148fa4288760..4755eb75fe5e 100644
+--- a/Documentation/driver-api/mtd/spi-nor.rst
++++ b/Documentation/driver-api/mtd/spi-nor.rst
+@@ -203,3 +203,131 @@ section, after the ``---`` marker.
+     mtd.writesize = 1
+     mtd.oobsize = 0
+     regions = 0
 +
-+	if (!sr) {
-+		if (spi_nor_read_sr(nor, nor->bouncebuf))
-+			return;
++5) If your flash supports locking, please go through the following test
++   procedure to make sure it correctly behaves. The below example
++   expects the typical situation where eraseblocks and lock sectors have
++   the same size. In case you enabled MTD_SPI_NOR_USE_4K_SECTORS, you
++   must adapt `bs` accordingly.
 +
-+		sr = nor->bouncebuf;
-+	}
++   Warning: These tests may hard lock your device! Make sure:
++   - The device is not hard locked already (#WP strapped to low and
++     SR_SRWD bit set)
++   - If you have a WPn pin, you may want to set `no-wp` in your DT for
++     the time of the test, to only make use of software protection.
++     Otherwise, clearing the locking state depends on the WPn
++     signal and if it is tied to low, the flash will be permanently
++     locked.
 +
-+	nor->dfs_sr_cache[0] = sr[0] & (bp_mask | tb_mask | SR_SRWD);
-+}
++   Test full chip locking and make sure expectations, the MEMISLOCKED
++   ioctl output, the debugfs output and experimental results are all
++   aligned::
 +
- /*
-  * Lock a region of the flash. Compatible with ST Micro and similar flash.
-  * Supports the block protection bits BP{0,1,2}/BP{0,1,2,3} in the status
-@@ -269,7 +288,13 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	    (ofs_old < ofs_new || (ofs_new + len_new) < (ofs_old + len_old)))
- 		return -EINVAL;
- 
--	return spi_nor_write_sr_and_check(nor, status_new[0]);
-+	ret = spi_nor_write_sr_and_check(nor, status_new[0]);
-+	if (ret)
-+		return ret;
++    root@1:~# alias show_sectors='grep -A4 "locked sectors" /sys/kernel/debug/spi-nor/spi0.0/params'
++    root@1:~# flash_lock -u /dev/mtd0
++    root@1:~# flash_lock -i /dev/mtd0
++    Device: /dev/mtd0
++    Start: 0
++    Len: 0x4000000
++    Lock status: unlocked
++    Return code: 0
++    root@1:~# mtd_debug erase /dev/mtd0 0 2097152
++    Erased 2097152 bytes from address 0x00000000 in flash
++    root@1:~# mtd_debug write /dev/mtd0 0 2097152 spi_test
++    Copied 2097152 bytes from spi_test to address 0x00000000 in flash
++    root@1:~# mtd_debug read /dev/mtd0 0 2097152 spi_read
++    Copied 2097152 bytes from address 0x00000000 in flash to spi_read
++    root@1:~# sha256sum spi*
++    c444216a6ba2a4a66cccd60a0dd062bce4b865dd52b200ef5e21838c4b899ac8  spi_read
++    c444216a6ba2a4a66cccd60a0dd062bce4b865dd52b200ef5e21838c4b899ac8  spi_test
++    root@1:~# show_sectors
++    software locked sectors
++     region (in hex)   | status   | #blocks
++     ------------------+----------+--------
++     00000000-03ffffff | unlocked | 1024
 +
-+	spi_nor_cache_sr_lock_bits(nor, status_new);
++    root@1:~# flash_lock -l /dev/mtd0
++    root@1:~# flash_lock -i /dev/mtd0
++    Device: /dev/mtd0
++    Start: 0
++    Len: 0x4000000
++    Lock status: locked
++    Return code: 1
++    root@1:~# mtd_debug erase /dev/mtd0 0 2097152
++    Erased 2097152 bytes from address 0x00000000 in flash
++    root@1:~# mtd_debug read /dev/mtd0 0 2097152 spi_read
++    Copied 2097152 bytes from address 0x00000000 in flash to spi_read
++    root@1:~# sha256sum spi*
++    c444216a6ba2a4a66cccd60a0dd062bce4b865dd52b200ef5e21838c4b899ac8  spi_read
++    c444216a6ba2a4a66cccd60a0dd062bce4b865dd52b200ef5e21838c4b899ac8  spi_test
++    root@1:~# dd if=/dev/urandom of=./spi_test2 bs=1M count=2
++    2+0 records in
++    2+0 records out
++    root@1:~# mtd_debug write /dev/mtd0 0 2097152 spi_test2
++    Copied 2097152 bytes from spi_test to address 0x00000000 in flash
++    root@1:~# mtd_debug read /dev/mtd0 0 2097152 spi_read2
++    Copied 2097152 bytes from address 0x00000000 in flash to spi_read
++    root@1:~# sha256sum spi*
++    c444216a6ba2a4a66cccd60a0dd062bce4b865dd52b200ef5e21838c4b899ac8  spi_read
++    c444216a6ba2a4a66cccd60a0dd062bce4b865dd52b200ef5e21838c4b899ac8  spi_read2
++    c444216a6ba2a4a66cccd60a0dd062bce4b865dd52b200ef5e21838c4b899ac8  spi_test
++    bea9334df51c620440f86751cba0799214a016329f1736f9456d40cf40efdc88  spi_test2
++    root@1:~# show_sectors
++    software locked sectors
++     region (in hex)   | status   | #blocks
++     ------------------+----------+--------
++     00000000-03ffffff |   locked | 1024
 +
-+	return 0;
- }
- 
- /*
-@@ -351,7 +376,13 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	    (ofs_new < ofs_old || (ofs_old + len_old) < (ofs_new + len_new)))
- 		return -EINVAL;
- 
--	return spi_nor_write_sr_and_check(nor, status_new[0]);
-+	ret = spi_nor_write_sr_and_check(nor, status_new[0]);
-+	if (ret)
-+		return ret;
++   Once we trust the debugfs output we can use it to test various
++   situations. Check top locking/unlocking (end of the device)::
 +
-+	spi_nor_cache_sr_lock_bits(nor, status_new);
++    root@1:~# bs=$(cat /sys/class/mtd/mtd0/erasesize)
++    root@1:~# size=$(cat /sys/class/mtd/mtd0/size)
 +
-+	return 0;
- }
- 
- /*
-diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
-index 90a0cf583512..9ad77f9e76c2 100644
---- a/include/linux/mtd/spi-nor.h
-+++ b/include/linux/mtd/spi-nor.h
-@@ -371,6 +371,7 @@ struct spi_nor_flash_parameter;
-  * @reg_proto:		the SPI protocol for read_reg/write_reg/erase operations
-  * @sfdp:		the SFDP data of the flash
-  * @debugfs_root:	pointer to the debugfs directory
-+ * @dfs_sr_cache:	Status Register cached value for debugfs use only
-  * @controller_ops:	SPI NOR controller driver specific operations.
-  * @params:		[FLASH-SPECIFIC] SPI NOR flash parameters and settings.
-  *                      The structure includes legacy flash parameters and
-@@ -409,6 +410,7 @@ struct spi_nor {
- 	enum spi_nor_cmd_ext	cmd_ext_type;
- 	struct sfdp		*sfdp;
- 	struct dentry		*debugfs_root;
-+	u8			dfs_sr_cache[2];
- 
- 	const struct spi_nor_controller_ops *controller_ops;
- 
++    root@1:~# flash_lock -u /dev/mtd0
++    root@1:~# flash_lock -l /dev/mtd0 $(($size - (2 * $bs))) 2 # last two
++    root@1:~# show_sectors
++    software locked sectors
++     region (in hex)   | status   | #blocks
++     ------------------+----------+--------
++     00000000-03fdffff | unlocked | 1022
++     03fe0000-03ffffff |   locked | 2
++    root@1:~# flash_lock -u /dev/mtd0 $(($size - (2 * $bs))) 1 # last one
++    root@1:~# show_sectors
++    software locked sectors
++     region (in hex)   | status   | #blocks
++     ------------------+----------+--------
++     00000000-03feffff | unlocked | 1023
++     03ff0000-03ffffff |   locked | 1
++
++   If the flash features 4 block protection bits (BP), we can protect
++   more than 4MB (typically 128 64kiB-blocks or more), with a finer
++   grain than locking the entire device::
++
++    root@1:~# flash_lock -u /dev/mtd0
++    root@1:~# flash_lock -l /dev/mtd0 $(($size - (2**7 * $bs))) $((2**7))
++    root@1:~# show_sectors
++    software locked sectors
++     region (in hex)   | status   | #blocks
++     ------------------+----------+--------
++     00000000-037fffff | unlocked | 896
++     03800000-03ffffff |   locked | 128
++
++   If the flash features a Top/Bottom (TB) bit, we can protect the
++   beginning of the flash::
++
++    root@1:~# flash_lock -u /dev/mtd0
++    root@1:~# flash_lock -l /dev/mtd0 0 2 # first two
++    root@1:~# show_sectors
++    software locked sectors
++     region (in hex)   | status   | #blocks
++     ------------------+----------+--------
++     00000000-0001ffff |   locked | 2
++     00020000-03ffffff | unlocked | 1022
++    root@1:~# flash_lock -u /dev/mtd0 $bs 1 # first one
++    root@1:~# show_sectors
++    software locked sectors
++     region (in hex)   | status   | #blocks
++     ------------------+----------+--------
++     00000000-0000ffff |   locked | 1
++     00010000-03ffffff | unlocked | 1023
 
 -- 
 2.51.1
