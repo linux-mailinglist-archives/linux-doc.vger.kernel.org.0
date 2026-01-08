@@ -1,156 +1,121 @@
-Return-Path: <linux-doc+bounces-71297-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71300-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E5B0D02652
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 12:31:24 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F8A9D02D2A
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 14:03:03 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id E3BB63096450
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 11:30:42 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id DA1DA3810574
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:13:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 69C3C337BB5;
-	Thu,  8 Jan 2026 08:45:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 12A6127C866;
+	Thu,  8 Jan 2026 09:36:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QM/zloNZ"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="P20hilnW"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F90F1EB9E1;
-	Thu,  8 Jan 2026 08:45:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68B843C1989
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 09:36:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767861920; cv=none; b=mDEP2I8s9+uRK8IZM0wpchQeu6ZQy4aZfgJ/uaNisfb1O2CUKhhDzueftBCfpP2ZI8EJ2vkOrVwzAUFGCu71B2YaQ9X7Q0CzyByToSUGS1BrmuAvvzYGz6H7t8gcaJ37K0Ah1KIoZKEBxOL/cS5AfyxeHYxtDjmewhCQoG3h1Hc=
+	t=1767865009; cv=none; b=IRydmX2pjhgOxpOAbWCLyEN8L32b6UM50egeLXDFA3UIpdkswl7LAKtSssj/oQksns416XZfe8onYvjDYSNXESgPmTHu5ZI877MDmOmyByLJPAWiMMX5+oAVl7Fdb2A+xz5hvRkHUd08AfXrQIBGgwloN4Qj8VBWTceUYzXt6Ek=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767861920; c=relaxed/simple;
-	bh=jGl0naiTX+/HDHhxWoxiOWiPxFcoAnQa4OUQREfNbl0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Jt8no+5qPmRNXMnAwfZN87tZR/MA3hkwEzy7JFcI0zWAcAERq3BaPrxWcpqTSw5KoFJjfEyAUWdCdJVnQSydiN1jV+t6foOQRj5HACt8BYty3iN1XbT2nIMhlcQ3jWzYFtKVEWWAsLD5mcWesgvqIYTm1DDy2ZcK2S4r3IJh7Jk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QM/zloNZ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6AC04C116D0;
-	Thu,  8 Jan 2026 08:45:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767861918;
-	bh=jGl0naiTX+/HDHhxWoxiOWiPxFcoAnQa4OUQREfNbl0=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=QM/zloNZJrMlXlFOvB50pGGtwBfG/qvcakDAaQi+UgD8iqcuNUPePMMnFjHeLBgV9
-	 +pveU9Uf7q1WgOO4PczxyP6ypah05aIXx8BObBsOlV820Myz5Wy0Z8pJ1ZYYuhLw5M
-	 d4UrmVPbyQxUikjv2oSk/FSGHFD+0lD4OzesXoaSdn8QG9fIHvYQgz5kyi2ieaXeea
-	 PF/aQdjdciekE5QCtjDySQylcGLB59BlYG3JeZxTLPyOBUUF4xlpDRsR4FfYrca9rH
-	 +vwMlqfEJaETzKGP8Y2wDHH0/F/47BtaxwP+SoCfPU72vlksI9SOBfhi9cO48t1qA8
-	 b1iCMiObVscXw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60A06CF6A87;
-	Thu,  8 Jan 2026 08:45:18 +0000 (UTC)
-From: Jihan LIN via B4 Relay <devnull+linjh22s.gmail.com@kernel.org>
-Date: Thu, 08 Jan 2026 08:44:38 +0000
-Subject: [PATCH] Documentation/kbuild: Document gendwarfksyms build
- dependencies
+	s=arc-20240116; t=1767865009; c=relaxed/simple;
+	bh=hfVPLMrLi28OA7B1DWFOfPV5uR4Nz2JZ6lQVyJb0Hyo=;
+	h=From:Date:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=q2L4CAWw8ys24DIFQQ83YYplWOGtNSHr9Bv26rgjfuVL9Y7VuxD8EMyIkisP52Vlts9x1T0MX9+iOpdFosjf0G0tOpYHlrWfhmtlLUUBrWk273By7htD2lqpYLqTKHjBobx1ZNWf1ekVQ4l2C55sEIyiTc2/Nx/OzHqyB0JBQwA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=P20hilnW; arc=none smtp.client-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47a8195e515so21266335e9.0
+        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 01:36:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1767864996; x=1768469796; darn=vger.kernel.org;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:date:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=a5eBrvF8Go/xUS7FM/zhpwrhYosALC7VRUVUOs8jPVU=;
+        b=P20hilnW+sV1kN97yT3AFdTBz8w1oqVeJp3Uqao1SFlZXrhCgio89e68cHOqEU3VUS
+         Q1jn3pUMbZof7CG0ruMd6nQM/JavXsTzj9mibUqqy54N9OKr+PpvPN7rINcJTyrWoF4H
+         5L+Ea+kTjDKz6uMEgYjIimCB5w9OjRk9FzQbclmE+UJMZAsCqJgeu5spdp5J6sJDf9y7
+         zgZbW03eipd38u/mFe4dQYbhCjS0wuZwfU7H7re1qF2O2RZxsCCZc+kp3WhccCogvRxS
+         RLCx2SdaVNeFHbcIM0kHXIFNtjUsuEWq2iPc+d/d/5XbUQo4EyvQkQZPX4MZBEJyOZZY
+         jlbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767864996; x=1768469796;
+        h=user-agent:in-reply-to:content-disposition:mime-version:references
+         :message-id:subject:cc:to:date:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=a5eBrvF8Go/xUS7FM/zhpwrhYosALC7VRUVUOs8jPVU=;
+        b=Kbm0F8GsREv4N+C+uIyQ1wR/Ys4tAhFPUa2VOUy+8XlZpusenmAXlk4Wx2mrxnt02z
+         i6K5jpdxz+mg5sGvyjiK/3mq3JtwMzpQaMMZ3sbWpo7UzRT3P/XCkCxHsq2Axf5T/KGd
+         UwnQEZQxZwrlnPHrUGZdxFiHZvuRfPZvCCWvLjhykVgP7TFxIdu04IveW7a/DzLQ8Fqq
+         TbEWuPsJnq21EVjuevPLxR2l4xBwBUIS8KTlFCaCDnTkN6Fp/6CREAt3+1rzK+obWPRB
+         BWx+BG36m7N9nwawVBpDkaVzsm8l1A1x91Qg9t/0ZMjFIxO7BYhNK2fNaJ+TsM0sLbEn
+         YDFw==
+X-Forwarded-Encrypted: i=1; AJvYcCUyWh2AmdsniKw4tdvyDsgOPJwtoWU36PK8xHvikI2oYm48m888gr58Bn6u3HByT+6af11SbWireBg=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyw27d6RSERxc3XS/NnjroN6cUfkFkfs4m7cbGas7O+GfzlSAAW
+	fxkKWsK4Ia7UvymOIboeEtG87QQb2MwZ7zbxnq16Zr4fJMMB9k/R7+Fjma+HkAzu7p0=
+X-Gm-Gg: AY/fxX7gSvByW0YoH/OvjIjdLiNyH7Zqy7hdsgtxzYLOucUwhA2H1yc8ZRsfV/0BhWd
+	jt4FwRFqQXq9cv2hg0gpB1vPKfsNhCb5S7CVdKtellMNHK+8UHTTFONnCZsuRtWswJuoM1lzdEx
+	6jZ46bw8a6g62UYVENeyulFZyOE6ae9e/B0dTQYCa49gLT3o7i88ClZV9n6WOwt7eplRojvLjOq
+	YGReQtCaF5FdDT6nYHnD9Vk0lp7itr8BqHxaaC9wqjTsnH4bhmmIb+RO5Pu4i7Kr+Jo8RqPItaA
+	qMF5zBuqeDsO22bcPnlUMtVXMTEAUytsWLqgDBs5vi/uArvJDblm3QZBq4yjUsJ3yAw9Cbb6SGn
+	gLLu5gwvMRdfVehY/kuhio2YUso1kKVi/cgOGVnOx82KNKgh484dbZ8F8gtekaZMX2brdB2zEbd
+	TqnNpDp0U1zpSSUJkX5F5lOYWnaoRxMv0qPR3It0PCSWUVtj6TKzMnL9ZYqt3CU9MNvjSZnsV4y
+	im0aA4Jrnx7BYQg5w==
+X-Google-Smtp-Source: AGHT+IECoue4wxlQ5a6yi035COQT2W4Sc/xuMH3TeKve5qebuXBME8i76ZzgIJIwsSb09kCb4/tGRA==
+X-Received: by 2002:a05:600c:a10e:b0:47d:885d:d2ff with SMTP id 5b1f17b1804b1-47d885dd365mr38039725e9.29.1767864995753;
+        Thu, 08 Jan 2026 01:36:35 -0800 (PST)
+Received: from r1chard.home (2001-b011-7007-95ef-189a-1ee2-bf3b-705c.dynamic-ip6.hinet.net. [2001:b011:7007:95ef:189a:1ee2:bf3b:705c])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-819c59e983fsm7174864b3a.55.2026.01.08.01.36.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Jan 2026 01:36:35 -0800 (PST)
+From: Richard Lyu <richard.lyu@suse.com>
+X-Google-Original-From: Richard Lyu <r1chard@r1chard.home>
+Date: Thu, 8 Jan 2026 17:36:29 +0800
+To: Borislav Petkov <bp@alien8.de>
+Cc: Richard Lyu <richard.lyu@suse.com>, Jonathan Corbet <corbet@lwn.net>,
+	x86@kernel.org, Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H . Peter Anvin" <hpa@zytor.com>, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs/x86: Update AMD IOMMU specification locationi
+Message-ID: <aV96nfAx66ef_8tc@r1chard.home>
+References: <20260105150548.73422-1-richard.lyu@suse.com>
+ <20260105151959.GAaVvWnyEonFSjilB_@fat_crate.local>
+ <CANC36oUVpEF1r3JK8Po6a4RwxRQ4qGMLvmWzxn-Zf=W2tF9-eQ@mail.gmail.com>
+ <20260107145301.GDaV5zTU0a6btE25Q_@fat_crate.local>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-documents_gendwarfksyms-v1-1-52b1f9c38c70@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAHVuX2kC/x3MSQqAMAxA0atI1hZqcb6KiBSbahCrNI6Id7e4f
- Iv/H2D0hAx19IDHg5gWF5DEEfSjdgMKMsGgpMplIjNhln6f0W3cDejMqb2d+J5ZVLYsMdWFNsp
- CqFePlq7/3LTv+wEPGta9aQAAAA==
-X-Change-ID: 20260105-documents_gendwarfksyms-9f88e4a7ad2f
-To: Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nsc@kernel.org>, 
- Jonathan Corbet <corbet@lwn.net>, Miguel Ojeda <ojeda@kernel.org>, 
- Boqun Feng <boqun.feng@gmail.com>, Sami Tolvanen <samitolvanen@google.com>, 
- Masahiro Yamada <masahiroy@kernel.org>, Petr Pavlu <petr.pavlu@suse.com>
-Cc: linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Jihan LIN <linjh22s@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767861915; l=2399;
- i=linjh22s@gmail.com; s=linjh22s_machine; h=from:subject:message-id;
- bh=Hr5ycYw2D6CoeYfL5AHxIhIwbrD9nhbsUBykKkGZxFo=;
- b=Qf7URpG3jkcQR7ZRLUMeJndMh+UWQzdYp1YASq18oNDU3mjDFAp9LQQBmrRBn6B5qKFKolmIL
- +SEjVVEX68NCLRcco4z613r1iPXqRGYH03iLsILewSqwGXTGncMdoZg
-X-Developer-Key: i=linjh22s@gmail.com; a=ed25519;
- pk=MnRQAVFy1t4tiGb8ce7ohJwrN2YFXd+dA7XmzR6GmUc=
-X-Endpoint-Received: by B4 Relay for linjh22s@gmail.com/linjh22s_machine
- with auth_id=592
-X-Original-From: Jihan LIN <linjh22s@gmail.com>
-Reply-To: linjh22s@gmail.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260107145301.GDaV5zTU0a6btE25Q_@fat_crate.local>
+User-Agent: Mutt/2.2.13 (2024-03-09)
 
-From: Jihan LIN <linjh22s@gmail.com>
+On 2026/01/07 15:53, Borislav Petkov wrote:
+> 
+> Btw, I see you're new to this. Please read
+> 
+> https://people.kernel.org/tglx/notes-about-netiquette
+> 
+> about how to do public mailing lists and also:
+> 
+> https://kernel.org/doc/html/latest/process/submitting-patches.html
 
-Although dependencies for gendwarfksyms were recently added to the
-packaging rules [1-2], the corresponding documentation was missing.
+Hi Borislav,
 
-Document the required build dependencies for gendwarfksyms, and
-include a few examples for installing these dependencies on some
-distributions.
+Thanks for the pointers. I've realized where I went wrong. I will study 
+the documentation carefully and ensure my future contributions follow the 
+guidelines, and I'll send an updated version.
 
-[1] commit 657f96cb7c06 ("kbuild: deb-pkg: Add libdw-dev:native to
-Build-Depends-Arch")
-[2] commit 5bd6bdd0f76e ("kbuild: rpm-pkg: Add (elfutils-devel or
-libdw-devel) to BuildRequires")
-
-Fixes: f28568841ae0 ("tools: Add gendwarfksyms")
-Signed-off-by: Jihan LIN <linjh22s@gmail.com>
----
-Hi,
-
-I found there is no documentation for build dependencies in gendwarfksyms
-while digging into Rust drivers. Though Yuli added libdw-dev to the build
-dependencies for packaging [1], it seems that there is no documentation
-about it.
-
-This patch documents the build dependencies of gendwarfksyms and adds a few
-examples for installing these dependencies on some distributions.
-
-[1]: https://lore.kernel.org/all/79C925DCE2E963FF+20250422104927.144252-1-wangyuli@uniontech.com/
----
- Documentation/kbuild/gendwarfksyms.rst | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
-
-diff --git a/Documentation/kbuild/gendwarfksyms.rst b/Documentation/kbuild/gendwarfksyms.rst
-index ed366250a54eac3a72c2f529da94a9e803704ae4..85fe9086beb760500250e7539058dce515681378 100644
---- a/Documentation/kbuild/gendwarfksyms.rst
-+++ b/Documentation/kbuild/gendwarfksyms.rst
-@@ -14,6 +14,29 @@ selected, **gendwarfksyms** is used instead to calculate symbol versions
- from the DWARF debugging information, which contains the necessary
- details about the final module ABI.
- 
-+Dependencies
-+-----
-+
-+libelf, libdw and zlib are dependencies of gendwarfksyms.
-+
-+Here are a few examples for installing these dependencies:
-+
-+* Arch Linux and derivatives::
-+
-+    sudo pacman --needed -S zlib libelf
-+
-+* Debian, Ubuntu, and derivatives::
-+
-+    sudo apt install libelf-dev libdw-dev zlib1g-dev
-+
-+* Fedora and derivatives::
-+
-+    sudo dnf install elfutils-libelf-devel elfutils-devel zlib-devel
-+
-+* openSUSE and derivatives::
-+
-+    sudo zypper install libelf-devel libdw-devel zlib-devel
-+
- Usage
- -----
- 
-
----
-base-commit: f0b9d8eb98dfee8d00419aa07543bdc2c1a44fb1
-change-id: 20260105-documents_gendwarfksyms-9f88e4a7ad2f
-
-Best regards,
--- 
-Jihan LIN <linjh22s@gmail.com>
-
-
+Best Regards
+Richard Lyu
 
