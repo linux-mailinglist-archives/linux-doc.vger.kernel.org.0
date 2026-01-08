@@ -1,50 +1,51 @@
-Return-Path: <linux-doc+bounces-71322-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71324-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 195CFD02D8D
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 14:07:08 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3598ED02DF7
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 14:10:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 8CF92312B7E9
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:48:09 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 5333F30FDA54
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:47:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F40372FB97A;
-	Thu,  8 Jan 2026 12:15:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7E99A4A288D;
+	Thu,  8 Jan 2026 12:15:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Yf7Ccz9z"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KkXzmfKF"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D44ED480325;
-	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D69FF4A1A7D;
+	Thu,  8 Jan 2026 12:15:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767874516; cv=none; b=QyXFhSTtbq4vP2tjzxntBEeIyv3A0Ql6OGD5IBSQgNMsKydYIa5r4E/eamqLnTInEpcgIys1PcTECPUHOvFzUyeE5A7ctWlWigRC4HTjqoZEW4aKPk3RYCw0oBiV8TZfYslQOetYUKx20ZwMOgSweIrlZ9pQkDXzIeMhOQGXjy8=
+	t=1767874517; cv=none; b=Mgv+7qT/MetqkymfCmSDQ0+2MupBeL0TX6Dn4yonNWBijphfpKtuEUD1mq363MVvC4ikhtu3nfLOCXSetLmTAjiKrUcvJaUv1GEDv/ccg6tfuFG2zgxDNxRWgnQdNtlJxbSlfXEbPMzrHzuyLpmKG/7azs8gW0EEG7xnQBFnBIQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767874516; c=relaxed/simple;
-	bh=oBDZinY9Nh5D84J1Ns4d7Wu4t/l25XNvaZ8UJ6362WI=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=L9AI0hDH+pw3cgOEiHvY0zf+ry9IyoekXnsAbBUaNV6nvQwg/pOLvZrZgo4LjBHcYh1hEI2KzvJKlEgHFTxGgibKNKIc5ymW0uURbfW1fe9rqOibbkfrxRDdMstnMXk3nTw3AKW3GjBh2iYnQBjoPUEx2BIA7ll/IZqo6jPIyPo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Yf7Ccz9z; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 1C7AEC116C6;
+	s=arc-20240116; t=1767874517; c=relaxed/simple;
+	bh=d+AUQ+0Q0G7xnUBpM4myxGc7BPezAhRHEHHX4yBWl6w=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=VCDAREF+IdZ8zTGIgntgDCkqOdOU991rvTcjRmGn+kONZiAfTKOteECFK9wiSSKiLrCd2q6fKQHi17BrNJ1iOnPZcclAn/t63vvSzHjThIBO24iyj5qqIRVnu7F2x4dkLz+C295KsffQQLgtKYEjsgX/qTtXCFVsjpBm7O1V8fE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KkXzmfKF; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5264DC19424;
 	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1767874515;
-	bh=oBDZinY9Nh5D84J1Ns4d7Wu4t/l25XNvaZ8UJ6362WI=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=Yf7Ccz9zhSKaJnsXZOc6qcXEwG1mOb+vBWFcfQOGl9DrepkBwqufe1TH1Hd9z3tcn
-	 TlcYPqyi7Lrdj6etZq0G4dC7nv84gjee3Np0XAJEdaCy6qjkzF71VssYCaQQ8VQvs8
-	 EaU+C7hgdSgb29gpR9E8NYLWLccWZBaqFBdVO73wrYs/STTxT0arHktD/opZJurXO2
-	 AtowHdgccloFDSomAczkY0T6PnyaBCH6F5Zw3dIL6hSZpI/3MmD6xD+49m6k/35Njm
-	 V/iPOk08g+jQNos7h4SCitWsYlkxikqr666FuKih94sDMarUhYPTWazC8ZUY1twTyp
-	 tA+c8/ngkv6pw==
+	bh=d+AUQ+0Q0G7xnUBpM4myxGc7BPezAhRHEHHX4yBWl6w=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=KkXzmfKFx0WXPrZ0YnCwyvOmjtkAZy5e84sSn6pRvt9Ewd6u0u6m3K10p+hhHOx/v
+	 tT5oX64jadziVPozT2YHyTd1KJ92/KXY8SVhdP3ksKLxg6M+niwV/v4ziZOEuYNwWg
+	 Gb5hROkHxjeaAj6iidLQtkq1daCq/mCY1ts+JsI2XINWH1+X4lUmq7z9142haD9mpj
+	 X/s734CFsrWvXd9yhjQ9iz85EYIbJPK8rHQlKse58PAtvUQlVU888Zi1tKLjGeo5hM
+	 exBbAtKxoYNXsRtLhf+8flHi8neiHS5zoHAffBTCuWHdpJCdVx+UoCUPeT6DeFxrG+
+	 JjfYWsezGwAJw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 117E1D185EB;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46FE5D185E7;
 	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
 From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Subject: [PATCH v3 0/6] ADF41513/ADF41510 PLL frequency synthesizers
-Date: Thu, 08 Jan 2026 12:14:49 +0000
-Message-Id: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
+Date: Thu, 08 Jan 2026 12:14:52 +0000
+Subject: [PATCH v3 3/6] iio: frequency: adf41513: handle LE synchronization
+ feature
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -53,11 +54,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALmfX2kC/33NQQrCMBCF4atI1kYyibWpK+8hLqbNpB3QRhIJS
- undTbsRQVz+D+abSSSKTEkcN5OIlDlxGEuY7UZ0A449SXalhVa6AgAl0fk9VGAkc5AucqYoETu
- 0WHurLIlyeY/k+bmq50vpgdMjxNf6JMOy/vcySCW187Yl5V13oBOOeA39rgs3sYBZfxANzW9EF
- 6Ql3aA1rqob84XM8/wGS2mnQ/wAAAA=
-X-Change-ID: 20251110-adf41513-iio-driver-aaca8a7f808e
+Message-Id: <20260108-adf41513-iio-driver-v3-3-23d1371aef48@analog.com>
+References: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
+In-Reply-To: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
 To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
  devicetree@vger.kernel.org, linux-doc@vger.kernel.org
 Cc: Jonathan Cameron <jic23@kernel.org>, 
@@ -68,11 +67,11 @@ Cc: Jonathan Cameron <jic23@kernel.org>,
  Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
  Rodrigo Alencar <rodrigo.alencar@analog.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767874513; l=2780;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1767874513; l=2933;
  i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=oBDZinY9Nh5D84J1Ns4d7Wu4t/l25XNvaZ8UJ6362WI=;
- b=Qd5KgcRRfQJFn4BzMgxYGSE4nES+ykF2gna/smPyX12Jj5WkQUVtNM8YXlBzFEXzfY9QpuV0y
- /77qAjE0E94CEoFN8lJBYjbTmTYBhkxEZFm1pQXbI3MTlqHGoCdSi4X
+ bh=X9/n4zTkaJgPCbGxxfeWNVQxYgRQ+AOLCLzn3Kd+1lY=;
+ b=M9/lJEnRdexE2rLI5Z5cDbipXXX0TqcrPlQoA7EnXZJ05UYVJBYVtmi3lFqeJhmglc4JTmqKP
+ TLwxh4na/e/ABporUU3NF4DSnkInPtizdOs7vh+2d8jTBFKb9zPxtjK
 X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
  pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
 X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
@@ -80,69 +79,98 @@ X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
 X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 Reply-To: rodrigo.alencar@analog.com
 
-This patch series adds support for the Analog Devices ADF41513 and ADF41510
-ultralow noise PLL frequency synthesizers. These devices are designed for
-implementing local oscillators (LOs) in high-frequency applications.
-The ADF41513 covers frequencies from 1 GHz to 26.5 GHz, while the ADF41510
-operates from 1 GHz to 10 GHz.
+From: Rodrigo Alencar <rodrigo.alencar@analog.com>
 
-Key features supported by this driver:
-- Integer-N and fractional-N operation modes
-- High maximum PFD frequency (250 MHz integer-N, 125 MHz fractional-N)
-- 25-bit fixed modulus or 49-bit variable modulus fractional modes
-- Digital lock detect functionality
-- Phase resync capability for consistent output phase
-- Load Enable vs Reference signal syncronization
-
-The series includes:
-1. PLL driver implementation
-2. Device tree bindings documentation
-3. IIO ABI documentation
+When LE sync is enabled, it is must be set after powering up and must be
+disabled when powering down. It is recommended when using the PLL as
+a frequency synthesizer, where reference signal will always be present
+while the device is being configured.
 
 Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
 ---
-Changes in v3:
-- Use FIELD_MODIFY macro in driver implementation
-- Drop refin_frequency iio attribute
-- Drop muxout-select property from dt-bindings (and rename logic-level property)
-- Use -mhz suffix in power-up frequency property
-- Address documentation issues
-- Link to v2: https://lore.kernel.org/r/20251219-adf41513-iio-driver-v2-0-be29a83d5793@analog.com
+ drivers/iio/frequency/adf41513.c | 32 +++++++++++++++++++++++++++++---
+ 1 file changed, 29 insertions(+), 3 deletions(-)
 
-Changes in v2:
-- separate driver implementation from extra features and improve commit messages
-- use macros from units.h
-- explanation of custom parse function: adf41513_parse_uhz
-- reorganize driver data structures
-- drop clock framework support for now
-- reorganize documentation
-- Link to v1: https://lore.kernel.org/r/20251110-adf41513-iio-driver-v1-0-2df8be0fdc6e@analog.com
+diff --git a/drivers/iio/frequency/adf41513.c b/drivers/iio/frequency/adf41513.c
+index 69dcbbc1f393..0cdf24989c93 100644
+--- a/drivers/iio/frequency/adf41513.c
++++ b/drivers/iio/frequency/adf41513.c
+@@ -220,6 +220,7 @@ struct adf41513_data {
+ 	bool phase_detector_polarity;
+ 
+ 	bool logic_lvl_1v8_en;
++	bool le_sync_en;
+ };
+ 
+ struct adf41513_pll_settings {
+@@ -697,13 +698,25 @@ static int adf41513_set_frequency(struct adf41513_state *st, u64 freq_uhz, u16 s
+ static int adf41513_suspend(struct adf41513_state *st)
+ {
+ 	st->regs[ADF41513_REG6] |= FIELD_PREP(ADF41513_REG6_POWER_DOWN_MSK, 1);
++	st->regs[ADF41513_REG12] &= ~ADF41513_REG12_LE_SELECT_MSK;
+ 	return adf41513_sync_config(st, ADF41513_SYNC_DIFF);
+ }
+ 
+ static int adf41513_resume(struct adf41513_state *st)
+ {
++	int ret;
++
+ 	st->regs[ADF41513_REG6] &= ~ADF41513_REG6_POWER_DOWN_MSK;
+-	return adf41513_sync_config(st, ADF41513_SYNC_DIFF);
++	ret = adf41513_sync_config(st, ADF41513_SYNC_DIFF);
++	if (ret < 0)
++		return ret;
++
++	if (st->data.le_sync_en) {
++		st->regs[ADF41513_REG12] |= ADF41513_REG12_LE_SELECT_MSK;
++		ret = adf41513_sync_config(st, ADF41513_SYNC_DIFF);
++	}
++
++	return ret;
+ }
+ 
+ static ssize_t adf41513_read_uhz(struct iio_dev *indio_dev,
+@@ -994,6 +1007,8 @@ static int adf41513_parse_fw(struct adf41513_state *st)
+ 		st->data.lock_detect_count = tmp;
+ 	}
+ 
++	/* load enable sync */
++	st->data.le_sync_en = device_property_read_bool(dev, "adi,le-sync-enable");
+ 	st->data.freq_resolution_uhz = MICROHZ_PER_HZ;
+ 
+ 	return 0;
+@@ -1001,6 +1016,7 @@ static int adf41513_parse_fw(struct adf41513_state *st)
+ 
+ static int adf41513_setup(struct adf41513_state *st)
+ {
++	int ret;
+ 	u32 tmp;
+ 
+ 	memset(st->regs_hw, 0xFF, sizeof(st->regs_hw));
+@@ -1034,8 +1050,18 @@ static int adf41513_setup(struct adf41513_state *st)
+ 					      st->data.logic_lvl_1v8_en ? 0 : 1);
+ 
+ 	/* perform initialization sequence with power-up frequency */
+-	return adf41513_set_frequency(st, st->data.power_up_frequency_hz * MICROHZ_PER_HZ,
+-				      ADF41513_SYNC_ALL);
++	ret = adf41513_set_frequency(st,
++				     st->data.power_up_frequency_hz * MICROHZ_PER_HZ,
++				     ADF41513_SYNC_ALL);
++	if (ret < 0)
++		return ret;
++
++	if (st->data.le_sync_en) {
++		st->regs[ADF41513_REG12] |= ADF41513_REG12_LE_SELECT_MSK;
++		ret = adf41513_sync_config(st, ADF41513_SYNC_DIFF);
++	}
++
++	return ret;
+ }
+ 
+ static void adf41513_power_down(void *data)
 
----
-Rodrigo Alencar (6):
-      dt-bindings: iio: frequency: add adf41513
-      iio: frequency: adf41513: driver implementation
-      iio: frequency: adf41513: handle LE synchronization feature
-      iio: frequency: adf41513: features on frequency change
-      docs: iio: add documentation for adf41513 driver
-      Documentation: ABI: testing: add common ABI file for iio/frequency
-
- Documentation/ABI/testing/sysfs-bus-iio-frequency  |   11 +
- .../bindings/iio/frequency/adi,adf41513.yaml       |  234 ++++
- Documentation/iio/adf41513.rst                     |  199 +++
- Documentation/iio/index.rst                        |    1 +
- MAINTAINERS                                        |   10 +
- drivers/iio/frequency/Kconfig                      |   10 +
- drivers/iio/frequency/Makefile                     |    1 +
- drivers/iio/frequency/adf41513.c                   | 1295 ++++++++++++++++++++
- 8 files changed, 1761 insertions(+)
----
-base-commit: fb2f4eb29a258145b0336601f00509cab6e93e7c
-change-id: 20251110-adf41513-iio-driver-aaca8a7f808e
-
-Best regards,
 -- 
-Rodrigo Alencar <rodrigo.alencar@analog.com>
+2.43.0
 
 
 
