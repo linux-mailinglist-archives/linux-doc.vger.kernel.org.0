@@ -1,54 +1,54 @@
-Return-Path: <linux-doc+bounces-71424-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71428-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07C32D049C5
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:59:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D075D049DF
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:00:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id D1DF930131E9
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:58:56 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 3C499301C358
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:59:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0136F2E88B0;
-	Thu,  8 Jan 2026 16:58:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8DC272ED873;
+	Thu,  8 Jan 2026 16:59:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="gqtQnL2O"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="bBcXn3k+"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FC0D2DB7BC
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:58:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3FDC2F0C78;
+	Thu,  8 Jan 2026 16:58:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767891530; cv=none; b=qt3CnZPfxVYZbAgxfOqDzs0xZJFt4UXV6LAdGIVWMAMVf59xugFxm+jCP67RdpZLBtdRuxDXOkbKJ+H/7ZFDuX52sX3TEqynAtqSW7cls3JKb0Paz5w3P43loejX3ZX1wtnL3HK9GPVZzyZOKber/cPovDeh4zGvSKqDt9pBR7U=
+	t=1767891541; cv=none; b=rsysUa8xfBFQ65n2HfeHnTywaHVi3PgSuVMxSreQiz1y57uXQx5xvCEvtftBsLbBnZw+loXAuTvndjJ+sn0nRnrBw0XpNws8EOeeIraY05rVxd5KIkPRXZELbmDmi8SP/YyXVwIfc7Xpmd3oZEUgiTNb4xgsreechuyitLYjwh4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767891530; c=relaxed/simple;
-	bh=pDZb0epMDwk6MJdaiEIqcDJe8cxs9bBHkhWkqeoeHyE=;
+	s=arc-20240116; t=1767891541; c=relaxed/simple;
+	bh=1Yo/fOaQdnIL35rS5CVUoPBadwI1OnlcymoKxp3EHp0=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=YJFBeIhcG/HkHHmv3qJ9V3A1RZFRoi1dNlPilHSk70goRtHmGfyOUdUJbbsgvj3Lo6LVlzqi5Nt2MJ1DqxzEuwtbBurn1Q1BE6s3M2qJKOkQJNt9JuER1E8dUy/30Nlt3NY9c6utptlM/cTGqTx01mMpYNZ/+/3nxV0xvtVe08s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=gqtQnL2O; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=r9MYVDfxhpHrlwWr+PFx4ObgndZlHnKRRHTgjyR1B3XTRm+BSo1ku1NhVKa5woIZ6a8BF9NOhmkukRZ/X39QEPKUkX2ZigYkMfJqZPqA0a0dnTg6OsKileABMFd9acWh6gFzDtqD6uodZ1WiZoKmFu5TWb4JrnbujOZ6aetsgTo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=bBcXn3k+; arc=none smtp.client-ip=185.246.85.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id D72DB4E42005;
-	Thu,  8 Jan 2026 16:58:46 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 71D784E42004;
+	Thu,  8 Jan 2026 16:58:56 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id AB1726072B;
-	Thu,  8 Jan 2026 16:58:46 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D6CA6103C86ED;
-	Thu,  8 Jan 2026 17:58:43 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 466436072B;
+	Thu,  8 Jan 2026 16:58:56 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9666D103C8896;
+	Thu,  8 Jan 2026 17:58:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1767891526; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1767891535; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=stZFrqO/Xzy7EKE+3DmnORMCs6+d8LeG2HLgrVddfK8=;
-	b=gqtQnL2OsdXjNBE3M9/quf5kgyFJI+wHYRhHS4X87X5BdpzOWU2QntXQxPTTfkcgMvgPaV
-	cR88U1jJxTHYyfS6poHH1RfMxWnDHfKPR6Mgm2lGDMbYg1vEiZizGk6JWHtCAhk0D40n4F
-	cpEU2DRS+obfm/uqu09+mCDv8kSIMneYX+CHCXiGquQ3Nkqd5M3OUiGw6ZIoFcl9y/Naqm
-	1HFcuTwFrGjgVrIB+rwwXqy1LQlfCyj/yo4GgfUf6L6Wv02UwcyjQVrHfd8vYcQ9nuu9AQ
-	hJi8oNaTUwn6kjzBPcaEQFcCXXrCmijUE0dpUpIb9FUK/HmrbyMlH27i5cj1Rw==
+	bh=ThROAC3RdaD7Vj2qP5V2r7cJLBpFb3GyBt6p16RAuXc=;
+	b=bBcXn3k+vwgCBHh1VTMXcHLEm0ZQAoT+qBglsU85eYt3bBCeHCBFvz/mY4sx+35ktfhr2P
+	T2jJrHwKYLoS47wWWHFMngEymhdQE+BtijG5xUhDBvX3yFUVCLcmqNGiu+P/xCEZ0pmXTt
+	3Kyv+D2EnRVbDXxuw/kc8NqcAgzeu1maPFKDslBcOcThPcNAjgPP+UvdknCl+G3LhpUXpX
+	bUypQnKY8031bL2CbNFsiPJ1jAMOKWeDDWiqcDRu03LTo3kmCIf6Rzai6Hw2ijUOSg+Jb6
+	/toWwG368omBDUZM1uU+TXTpXuOrVznF/PLKTirFbr2W5HeKk+bhwGSjABAMqw==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 08 Jan 2026 17:57:35 +0100
-Subject: [PATCH v2 02/27] mtd: spi-nor: debugfs: Fix the flags list
+Date: Thu, 08 Jan 2026 17:57:39 +0100
+Subject: [PATCH v2 06/27] mtd: spi-nor: debugfs: Enhance output
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -57,7 +57,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-2-c462ef806130@bootlin.com>
+Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-6-c462ef806130@bootlin.com>
 References: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 In-Reply-To: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 To: Tudor Ambarus <tudor.ambarus@linaro.org>, 
@@ -72,30 +72,29 @@ Cc: Sean Anderson <sean.anderson@linux.dev>,
 X-Mailer: b4 0.14.3
 X-Last-TLS-Session-Version: TLSv1.3
 
-As mentioned above the spi_nor_option_flags enumeration in core.h, this
-list should be kept in sync with the one in the core.
+Align the number of dashes to the bigger column width (the title in this
+case) to make the output more pleasant and aligned with what is done
+in the "params" file output.
 
-Add the missing flag.
-
-Fixes: 6a42bc97ccda ("mtd: spi-nor: core: Allow specifying the byte order in Octal DTR mode")
 Reviewed-by: Michael Walle <mwalle@kernel.org>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/spi-nor/debugfs.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/mtd/spi-nor/debugfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/mtd/spi-nor/debugfs.c b/drivers/mtd/spi-nor/debugfs.c
-index fa6956144d2e..d700e0b27182 100644
+index 69830ad43990..d0191eb9f879 100644
 --- a/drivers/mtd/spi-nor/debugfs.c
 +++ b/drivers/mtd/spi-nor/debugfs.c
-@@ -28,6 +28,7 @@ static const char *const snor_f_names[] = {
- 	SNOR_F_NAME(RWW),
- 	SNOR_F_NAME(ECC),
- 	SNOR_F_NAME(NO_WP),
-+	SNOR_F_NAME(SWAP16),
- };
- #undef SNOR_F_NAME
+@@ -144,7 +144,7 @@ static int spi_nor_params_show(struct seq_file *s, void *data)
  
+ 	seq_puts(s, "\nsector map\n");
+ 	seq_puts(s, " region (in hex)   | erase mask | overlaid\n");
+-	seq_puts(s, " ------------------+------------+----------\n");
++	seq_puts(s, " ------------------+------------+---------\n");
+ 	for (i = 0; i < erase_map->n_regions; i++) {
+ 		u64 start = region[i].offset;
+ 		u64 end = start + region[i].size - 1;
 
 -- 
 2.51.1
