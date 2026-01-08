@@ -1,72 +1,71 @@
-Return-Path: <linux-doc+bounces-71390-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71392-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13842D04C36
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:13:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CBDCD04D5F
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:16:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 94933314E8D1
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:06:21 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8C7A732B2AAD
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:09:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17A09225397;
-	Thu,  8 Jan 2026 16:06:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 95D797DA66;
+	Thu,  8 Jan 2026 16:09:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QUWYeBTN"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from relay.hostedemail.com (smtprelay0010.hostedemail.com [216.40.44.10])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DC35204583;
-	Thu,  8 Jan 2026 16:06:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4172022576E;
+	Thu,  8 Jan 2026 16:09:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767888380; cv=none; b=DKEahUzLCK1AbAMTnq71jS+ljR+LHxnIdc3bCxjRJ1mmyq8zHdp1X6tyjL4P6nsqV9SL2nxFlqqabSgWkcrdgf7ZcB0P49EBSZ+Q3o4jDkvDHDCYZ0/bY8DvZvRVV+TP0zycZ/rAfW0XonUzlMTLgLV+Z0ukENW+rmSCUa/Q4Kk=
+	t=1767888558; cv=none; b=gTIP125XkWBW+VkK7/OXMVULXQjlwILh+LUrndlVp2viaw5bU8MJiXK5g0aUF2XiqES7In7UCzbU6v5uj+GB3G70QNF7O5q6d/UVccodgUoXyPdjOrMFWx85yJXI+GhkYNNZDUh5//FfsZN2SSS5M8lGEMm2nywwKncuzKU0pBE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767888380; c=relaxed/simple;
-	bh=UJWiJfJXZGYu0syNYpB3ssxGeGhaiTzlfLuo/sDcIWs=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=XqSsZH5XnmuEiX8HZ3Ic8eWq/ON6WfDqtGg87n61pRMvQnEFzWaO7PKoEyDNlPjNn1+GCIKsC9wIqB0LD7nB+/7xfgwUexrtbaWE2SZgS30XWU5hnpjybP4gxe59xU4jUHJ1l0gCoXzhmZR7YBW5ggAQNCj3sTilmfm0nGTLZrQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; arc=none smtp.client-ip=216.40.44.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
-Received: from omf13.hostedemail.com (a10.router.float.18 [10.200.18.1])
-	by unirelay05.hostedemail.com (Postfix) with ESMTP id D2B3156593;
-	Thu,  8 Jan 2026 16:06:07 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf13.hostedemail.com (Postfix) with ESMTPA id 549DA20010;
-	Thu,  8 Jan 2026 16:06:05 +0000 (UTC)
-Date: Thu, 8 Jan 2026 11:06:33 -0500
-From: Steven Rostedt <rostedt@goodmis.org>
+	s=arc-20240116; t=1767888558; c=relaxed/simple;
+	bh=msr2t2l+9ukvH2irNjs7HLbeF+vRgO7y/8MyvMPNwpY=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To; b=WOW7CnFsrqVdzwE+We/sLf2fEQdc5Bd0fOsAU6RoehyZsldHKBQstI76X3Fxbi4fSz9tBzyGjiq75CdQXTQ41GS07mqr3EVxaQzD0jgzrzqClZJEC4hMqUPkdwUga4/6XnKW9a2P1g8ILl1DGc/hLGwI+yMVluhIeiJ09Qxi8NI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QUWYeBTN; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AC1EC116C6;
+	Thu,  8 Jan 2026 16:09:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1767888557;
+	bh=msr2t2l+9ukvH2irNjs7HLbeF+vRgO7y/8MyvMPNwpY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:From;
+	b=QUWYeBTNVDC1jxwAiSgYz6+1MqvirRKKz5fSaEsO/IyguhYasjurmQxQn7s0iLLhs
+	 KB6CigfuoK1xPsOf2/f64a5JzCveCl3Cm6UZNWr7Y3Dly9AOgAByza2UoVne55iYdy
+	 0j7lAObVMetJ7L7zvtmut983VOaSOFvEPgibIByshnmWQL7v2ml20xllGIRje221hh
+	 t8U/86/0krhwdRjL/TPxsMUEWZ8MEkgxA3OK7uzgfz61jbgI/oB3ERv0Vi6YlVVTFo
+	 9njK/fd3yBozGBxNDVjk1ZRVnis8n0ocPm8saI14vZiWJkw9x08NdVXwLYeA1yZuJu
+	 6WtUT9dWM5WbQ==
+Date: Thu, 8 Jan 2026 10:09:16 -0600
+From: Bjorn Helgaas <helgaas@kernel.org>
 To: Bagas Sanjaya <bagasdotme@gmail.com>
-Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Linux
- Documentation <linux-doc@vger.kernel.org>, Linux Kernel Tracing
- <linux-trace-kernel@vger.kernel.org>, Masami Hiramatsu
- <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jonathan Corbet <corbet@lwn.net>, Shuai Xue <xueshuai@linux.alibaba.com>,
- Bjorn Helgaas <bhelgaas@google.com>, Ilpo =?UTF-8?B?SsOkcnZpbmVu?=
- <ilpo.jarvinen@linux.intel.com>, Swaraj Gaikwad
- <swarajgaikwad1925@gmail.com>
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Linux Documentation <linux-doc@vger.kernel.org>,
+	Linux Kernel Tracing <linux-trace-kernel@vger.kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuai Xue <xueshuai@linux.alibaba.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
+	Swaraj Gaikwad <swarajgaikwad1925@gmail.com>
 Subject: Re: [PATCH 0/2] PCI tracepoint documentation fixes
-Message-ID: <20260108110633.5691a824@gandalf.local.home>
-In-Reply-To: <20260108013956.14351-1-bagasdotme@gmail.com>
-References: <20260108013956.14351-1-bagasdotme@gmail.com>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Message-ID: <20260108160916.GA485396@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 549DA20010
-X-Stat-Signature: 1qpgjedwofunocicakofago1ted71wep
-X-Rspamd-Server: rspamout08
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX1/Z3h8SZQXE23IaSbkjBGAD3lRZkv2KrgI=
-X-HE-Tag: 1767888365-269768
-X-HE-Meta: U2FsdGVkX1/EdKc4TQJTyXm6Nj/rEw3xpLXWHwd8FHWDc1stdE9+plpxOF7WhCqGXf3J/nsDwiKz5b6nEvUUof9NKcTtnhoufAjXXfHIdTdxBh8X4z+o4pgxLTDWnjd6zCfwR7fmKMfTDeMD12JdVm/3qf/q8cbBa2YBBBbl5WYTiDqD+h/QLx96dHySLte8qXhz1AS3zVT3ksq9/6xWy/EJ5xb9VGSemG6JwXrQiVBP5a3qR8M3G1AVLytRG/ApPe4aTbcOef4psexNjbe+Vn2CYLZ1djpoZv3OQOJL1ePbjDf19LMO2kVQyzM9EE9d4FnQmFRG028G1QrI9H8ihNMgnaRNJbpOOo7tAs6+5umrTjzKs+2YfkiqH7xP2ybPjfLR6hi8ZkmjxcohfxLcvj3XP9ejxKjSkW4ulpcKgGzCLSNuvvBoPdVBuow7SfF9FlcBYQ/ZAvIsikpVi50oefI8jvSDJmw6ob+i34QyytY=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260108013956.14351-1-bagasdotme@gmail.com>
 
-On Thu,  8 Jan 2026 08:39:54 +0700
-Bagas Sanjaya <bagasdotme@gmail.com> wrote:
-
+On Thu, Jan 08, 2026 at 08:39:54AM +0700, Bagas Sanjaya wrote:
 > Hi,
 > 
 > Here are two fixes for htmldocs warnings on PCI tracepoint docs as reported in
@@ -83,13 +82,12 @@ Bagas Sanjaya <bagasdotme@gmail.com> wrote:
 >  Documentation/trace/events-pci.rst | 4 ++--
 >  Documentation/trace/index.rst      | 1 +
 >  2 files changed, 3 insertions(+), 2 deletions(-)
-> 
-> 
-> base-commit: 29a77b4897f1a0f40209bee929129d4c3f9c7a4b
 
-Fine with me. Jon feel free to take these patches.
+These are for the pci/trace branch, which has not been merged into
+mainline yet, so I squashed these fixes into the "Documentation:
+tracing: Add PCI tracepoint documentation" patch on that branch.
 
-Acked-by: Steven Rostedt (Google) <rostedt@goodmis.org>
+Thanks!
 
--- Steve
+Bjorn
 
