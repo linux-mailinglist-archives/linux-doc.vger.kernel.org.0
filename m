@@ -1,146 +1,114 @@
-Return-Path: <linux-doc+bounces-71282-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71284-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1A10D00B2F
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 03:39:59 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4380FD00BEB
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 03:57:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 90DBB30552E3
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 02:35:44 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E9A26300DC9F
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 02:56:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6935C2C21FE;
-	Thu,  8 Jan 2026 02:26:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0D7012777FC;
+	Thu,  8 Jan 2026 02:56:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MDTf5oIX"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VO9+Hp/X"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EB19278753
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 02:26:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA912231836;
+	Thu,  8 Jan 2026 02:56:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767839217; cv=none; b=kaW8zcLjhiokGdxv2rUNVWvtw1bfAXeBj6r+J5TAJ2HBVDHx43LTEKh4AFzlV05ak0JgBSwVZBLeN35KHbL8Hdj5wsto56HNrExaXLwz0tqZeF/SHokccmNbxLikm9b7bvFK60lzb8eMKqSAUFC/ooISEEvS+GvQgakdQfKi7RQ=
+	t=1767840994; cv=none; b=oSZlZcklT2Xw7eV4fIcOZBSBcMLPXu0mYP92TjFo/FJGviSfCCS6Wf6Q79hwhHV9BosmChLxf592thXEaKvh2nUZReIvdVNoFyHNhg68YhGHEdxOI+Ioc53RjWmuoXgeEFsKsXf6AQvhNj5njVvm9nzoHPkkBqJRfbPZbcM2O2I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767839217; c=relaxed/simple;
-	bh=KWZZv1BQt+Z+F6V7wM6tmxj/xf27l4eykAm8PwFK978=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=RM1Le7IcXUKZzYdkORvXUPvb8dIji0YjIUVNhGDCE6N7Pke/cuOUIarEbjfRBBXWIllWWt3FtLQYy8/BEv6bADzphjveVfR08Br+PdkyU/sWag4YxYA+KJt+B+dcceX4GzKTu4a+DknloBVBmqlXqX66UcJgyfHqKpyZHtbbh7o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MDTf5oIX; arc=none smtp.client-ip=209.85.167.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-598f81d090cso2742209e87.2
-        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 18:26:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767839213; x=1768444013; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=094/5dtQP8+a+PskAvgq1CpU/l6tgoUM9PsjNOTAIqk=;
-        b=MDTf5oIXTAmVA5cSywD8ouBNQsmBQ68jG4ueRlzoF+nxyTf8oXuETchaZNQCU2KlPt
-         Ygks8L9f6s5sg7DWkNF/Gu2xiM5DeGNmq9ps9NRnntGDgYTdqfstB8dHdmX/hUeZ5KrZ
-         kQRWndsBNtkGn763lporJGYqoE1xIQFVogSlf3S0h6AiBqAE7yW4sIk4odpQguStz3K+
-         nVCOcZtCbbFUIef1ZT1UJ2G8WthLnr1KxVuuQvKgwtPDHW5o+KBk2zf3X8lZtxleZY8S
-         Q5mfLXVJSequjMREZBzhUHuLiWNEKr2FSmHbygyachGGboECxTj4sJ8uG26tub6JJUQ5
-         bH2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767839213; x=1768444013;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=094/5dtQP8+a+PskAvgq1CpU/l6tgoUM9PsjNOTAIqk=;
-        b=cGUotUgY+VbK4WZIMoDfILWTZt5nitgeUQLJNG7KgsN4CVQDxtqJS3wcCIr6DnNUbZ
-         FRR0DuzvFOqvD/plfzMUqfrnhcB6DCrMFbGwWPhQmNW+OHVGacZcrb6uHKVNY2wf3Hlx
-         sPeMk6NUjgjiSHW8gWpa0CbjcYbf52otukCc0st/BuaE8FgEZ6vmnv1wbuq2El/5iLaL
-         oBtijEPlbD2h7JBRldVZ7dUuFqOTNs9b7i8MZzmSo96wrM48c15hjlpV0o/B1pGh5K8g
-         Upgh6PVZR2x0qMGks/lm3NTPLgQrFpEBLs/HfLlXwCGFxqXvZp9LJDxTFQ0u8t/xbQXk
-         9xyg==
-X-Forwarded-Encrypted: i=1; AJvYcCV4fhE3TaBdK/7jBQmF/J7yCzAeX3/YCyiP6Iqu2qUdZi+pkBqjjTAl5P8OHCfOg9MR9EI/hxNaNK8=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy/KwzYDrsYKFEcijN7Yr8qzculq912xamF+mVuw90L2xy3CsZi
-	/0Pk7LkRTxN0SVGcSrZNRZaThCUYp2QQwzk1L3rUeu4CSinh7Cjlwl2uW9JeQkYCF8Y+jSTMR1Q
-	OSSQgdVtaeNEeJrQYvYrTJdR3cNdx0h4=
-X-Gm-Gg: AY/fxX7kDCn7Ctdy43vvyiUFFuPpJcVF5hRpt0+IuprQjJDlYzYMulW4o9pfgWm8g6f
-	mMYs73sxDGhS9iZUrfG7YNYlCmsK3W57eMi8jm6LsE4e8wvGzmAJBiahoULBfcxKnZfIw/6MEpU
-	+dgjXyYbv1+iH8YcwcNVGvu62W9+uY9AuBmhgUWVsiumhYPAa3VkJMiP1JkiSBzXq+H1kQRrSkw
-	YpMaR6KCQ70o9WlnU4TsftRRwCSnHDobJCXA6Kf22tOruqCOEIEQHuP1EKpEUrzSRso
-X-Google-Smtp-Source: AGHT+IGTiAhHfGo82U3FLSG0Akrl+JtcZFd1jQlu35i3v0e7LedXi4rktu4cXT0E5NPwChR299DbhB7Obz7fY0/NA2A=
-X-Received: by 2002:a05:6512:3c8f:b0:59b:7178:15bb with SMTP id
- 2adb3069b0e04-59b71781b06mr1220900e87.17.1767839213010; Wed, 07 Jan 2026
- 18:26:53 -0800 (PST)
+	s=arc-20240116; t=1767840994; c=relaxed/simple;
+	bh=bb09VXEHSGVuDvACYJHsjuF/qKdFpVlUXhZlI58yIwU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=YWeTggRijzeilZTc/TpfnINLHouXg4/4Hktkegy4gpv3zNeGgnLNOnc8mYDhewttnVvw3un6aZeLoNQUV8vl4/efO1Ee36shzqSB/XBSXm1uy2cTOL3ikrfHYt3k239OIPwvyyrVH55BqfbHWl5KiypCOZiNQG0lLOOlzAgxZBE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VO9+Hp/X; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97908C4CEF1;
+	Thu,  8 Jan 2026 02:56:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1767840993;
+	bh=bb09VXEHSGVuDvACYJHsjuF/qKdFpVlUXhZlI58yIwU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=VO9+Hp/XVRs8XQB3IDBstup2R+DaU4I6K4mDp34Wm113uMcakMBKaj2eTx55ExHtE
+	 nBWUzkdaWvlhDxELVvEA3C6puD6nUZG5J+gpcQ61WkLHnhj+M05LSE5AZcHJamwhvc
+	 j/BMfPrbYmdBOqJI5BeEugABP3Mc/vfHCk9GLrpJscoyfLAOJwB+2t8XFPTPsEybag
+	 xGnWNL183qpjfSIH8SOBIaB8sVnhazL4Rw/1WNvWFQdpTNcIdnvnpj/0Brkneg1BPR
+	 7qMuhdE1AoXtCk2F775jaiAkT9nh2gM4h7JiM3GPN+qLCo8vxQs/u1WGbxiPYaxbeg
+	 hV7kgr+lj43kw==
+Message-ID: <dc57f648-524c-4fdc-9fce-73f1bab2fee4@kernel.org>
+Date: Wed, 7 Jan 2026 18:56:29 -0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251222080512.956519-1-vishnuocv@gmail.com> <5n18nonr-5292-60sr-2634-0q0r870n3oq8@xreary.bet>
-In-Reply-To: <5n18nonr-5292-60sr-2634-0q0r870n3oq8@xreary.bet>
-From: Vishnu Sankar <vishnuocv@gmail.com>
-Date: Thu, 8 Jan 2026 11:26:16 +0900
-X-Gm-Features: AQt7F2q-JuPpMNDYUQVjIiRx0DBdFTrkljybmsM1__upp-BjSTrUTz72NlNB0O4
-Message-ID: <CABxCQKuh1+gzm7d38bBaf2WWm2iyfeTv4+zJAqST3PE-KtnfkQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] HID: intel-ish-hid: loader: Add
- PRODUCT_FAMILY-based firmware matching
-To: Jiri Kosina <jikos@kernel.org>
-Cc: srinivas.pandruvada@linux.intel.com, bentiss@kernel.org, corbet@lwn.net, 
-	vsankar@lenovo.com, linux-doc@vger.kernel.org, linux-input@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Mark Pearson <mpearson-lenovo@squebb.ca>, 
-	Richie Roy Jayme <rjayme.jp@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 02/28] arc: introduce arch_zone_limits_init()
+To: Mike Rapoport <rppt@kernel.org>, Andrew Morton <akpm@linux-foundation.org>
+Cc: Alex Shi <alexs@kernel.org>, Alexander Gordeev <agordeev@linux.ibm.com>,
+ Andreas Larsson <andreas@gaisler.com>, Borislav Petkov <bp@alien8.de>,
+ Brian Cain <bcain@kernel.org>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ "David S. Miller" <davem@davemloft.net>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ David Hildenbrand <david@kernel.org>, Dinh Nguyen <dinguyen@kernel.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>, Guo Ren <guoren@kernel.org>,
+ Heiko Carstens <hca@linux.ibm.com>, Helge Deller <deller@gmx.de>,
+ Huacai Chen <chenhuacai@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+ Johannes Berg <johannes@sipsolutions.net>,
+ John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+ Jonathan Corbet <corbet@lwn.net>, "Liam R. Howlett"
+ <Liam.Howlett@oracle.com>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Magnus Lindholm <linmag7@gmail.com>, Matt Turner <mattst88@gmail.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>,
+ Michal Hocko <mhocko@suse.com>, Michal Simek <monstr@monstr.eu>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Pratyush Yadav <pratyush@kernel.org>,
+ Richard Weinberger <richard@nod.at>, Russell King <linux@armlinux.org.uk>,
+ Stafford Horne <shorne@gmail.com>, Suren Baghdasaryan <surenb@google.com>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Thomas Gleixner <tglx@linutronix.de>, Vasily Gorbik <gor@linux.ibm.com>,
+ Vineet Gupta <vgupta@kernel.org>, Vlastimil Babka <vbabka@suse.cz>,
+ Will Deacon <will@kernel.org>, x86@kernel.org, linux-alpha@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-csky@vger.kernel.org,
+ linux-cxl@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-hexagon@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
+ linux-mm@kvack.org, linux-openrisc@vger.kernel.org,
+ linux-parisc@vger.kernel.org, linux-riscv@lists.infradead.org,
+ linux-s390@vger.kernel.org, linux-sh@vger.kernel.org,
+ linux-snps-arc@lists.infradead.org, linux-um@lists.infradead.org,
+ linuxppc-dev@lists.ozlabs.org, loongarch@lists.linux.dev,
+ sparclinux@vger.kernel.org
+References: <20260102070005.65328-1-rppt@kernel.org>
+ <20260102070005.65328-3-rppt@kernel.org>
+Content-Language: en-US
+From: Vineet Gupta <vgupta@kernel.org>
+In-Reply-To: <20260102070005.65328-3-rppt@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Jiri,
-
-Thank you.
 
 
-On Thu, Jan 8, 2026 at 6:06=E2=80=AFAM Jiri Kosina <jikos@kernel.org> wrote=
-:
+On 1/1/26 22:59, Mike Rapoport wrote:
+> From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
 >
-> On Mon, 22 Dec 2025, Vishnu Sankar wrote:
+> Move calculations of zone limits to a dedicated arch_zone_limits_init()
+> function.
 >
-> > Add support for firmware filenames that include the CRC32 checksum of t=
-he
-> > DMI product_family field. Several OEMs ship ISH firmware variants share=
-d
-> > across a product family while product_name or product_sku may differ. T=
-his
-> > intermediate matching granularity reduces duplication and improves firm=
-ware
-> > selection for vendor-customized platforms.
-> >
-> > The newly supported filename forms are checked before existing patterns=
-:
-> >
-> >   ish_${gen}_${vendor}_${family}_${name}_${sku}.bin
-> >   ish_${gen}_${vendor}_${family}_${sku}.bin
-> >   ish_${gen}_${vendor}_${family}_${name}.bin
-> >   ish_${gen}_${vendor}_${family}.bin
-> >
-> > The legacy product_name/product_sku rules remain unchanged and continue
-> > to provide fallback matching.
-> >
-> > ISH_FW_FILENAME_LEN_MAX is changed to 72 to accommodate the product_fam=
-ily.
-> >
-> > Tested with X9 series and X1 series.
-> >
-> > Reviewed-by: Mark Pearson <mpearson-lenovo@squebb.ca>
-> > Tested-by: Richie Roy Jayme <rjayme.jp@gmail.com>
-> > Signed-off-by: Vishnu Sankar <vishnuocv@gmail.com>
+> Later MM core will use this function as an architecture specific callback
+> during nodes and zones initialization and thus there won't be a need to
+> call free_area_init() from every architecture.
 >
-> Applied both to hid.git#for-6.20/intel-ish, thanks.
->
-> --
-> Jiri Kosina
-> SUSE Labs
->
+> Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
 
+Thx !
 
---=20
-
-Regards,
-
-      Vishnu Sankar
-     +817015150407 (Japan)
+Acked-by: Vineet Gupta <vgupta@kernel.org>
 
