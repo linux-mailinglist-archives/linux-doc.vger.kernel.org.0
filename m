@@ -1,152 +1,148 @@
-Return-Path: <linux-doc+bounces-71320-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71322-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4401D033DC
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 15:11:33 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 195CFD02D8D
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 14:07:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DFD7631C4958
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 13:49:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8CF92312B7E9
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:48:09 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD1CB497B00;
-	Thu,  8 Jan 2026 12:05:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F40372FB97A;
+	Thu,  8 Jan 2026 12:15:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="TeCBiu6K";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="P0EB5tUq"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Yf7Ccz9z"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E000498481
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 12:05:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D44ED480325;
+	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767873912; cv=none; b=RFfakxf0InAqUzUnWQMdhjOY2Vp2BycpZj3V9SGJmR/gjaJX8JzDPc2Af4ccgehria3hxSF9kYNPoni7XehoNY5yG+CzvVs+rmvjpccB/QFsdhXOgtXEJkmFXHs/nh6Tj6N0dUWTaoisndS/jOfox+VqlXYficWCMC0OfOglqWM=
+	t=1767874516; cv=none; b=QyXFhSTtbq4vP2tjzxntBEeIyv3A0Ql6OGD5IBSQgNMsKydYIa5r4E/eamqLnTInEpcgIys1PcTECPUHOvFzUyeE5A7ctWlWigRC4HTjqoZEW4aKPk3RYCw0oBiV8TZfYslQOetYUKx20ZwMOgSweIrlZ9pQkDXzIeMhOQGXjy8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767873912; c=relaxed/simple;
-	bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
-	 In-Reply-To:Content-Type; b=OSG2w5gyAMYXfrU0nTb+tPUpuuIilWuHkSfc0UamW0NojHmRGhlv3vLcsYphAZqwi2K4gINSaFg+GMcqtvN0eok52rN5XIURVQGRyGnb65w+TEagJbwpOHJDkdqFaOk9UHWo2gRxa5/8VJe6w6k0Y0HOXfHHG8zg0YBW3DX/1EA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=TeCBiu6K; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=P0EB5tUq; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1767873907;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
-	b=TeCBiu6KuT+jvEFoO6KnAOfRwVFn3oXgMIIf2STTuffzattE39Dkj4kXepVd8hTPwS5ADJ
-	mOWviDjRMNaAOEoAKhoCefY4Z5y0vMDwSmefLCLdMgmjR+4fI0iEBXCv8lPuM/io//DVUZ
-	NpoT+gHv/g3iCnPzIqVCXiBWb3y+Kyc=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-564-XVJ05EpZPx23wfyv6PAAZg-1; Thu, 08 Jan 2026 07:05:05 -0500
-X-MC-Unique: XVJ05EpZPx23wfyv6PAAZg-1
-X-Mimecast-MFC-AGG-ID: XVJ05EpZPx23wfyv6PAAZg_1767873904
-Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-477771366cbso26861715e9.0
-        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 04:05:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1767873904; x=1768478704; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
-        b=P0EB5tUq4gEPbQC8HFtAZIwPhtjivVywhg5mmDspsKEbQaSC/gQpJyyKK5wFGyWw2L
-         07vwoad/3AOiZ2lVzMvR1pO1Neja3nunwK4QhIrY5bACcofo+d9Eyxn2fmH8i0rHhtr2
-         +gN9vbo0QEtstBCtwY0IhqDmtogQGYds4puZcBDlzJKio7HOz6i6sZkjbKiuZb2cCn+L
-         IVqVsjsrelFzg4txGT8ePwrN3yjM12kkjuzGqDrAyuvN15oRPreHd1yctO+wzW9dZk2k
-         pF3behY8G/tY4QmNO+DLPOvJMkczbM3RChQmEVECJPx63iSzS1diTlQOkRMT4uhlOCJw
-         M2IQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767873904; x=1768478704;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
-        b=jWUnl2Avb+NY0TFCPMktGJokwz7nvEYYgJy0gmcwIJLmpcix6lfaBhchLxQZVY7y9z
-         ZOQnePFG/2BbITU9hAQtY2c44G+NAR9Sy8ob/wYj67oq1M0cn+IiDO/LvxTMmcvbkfjq
-         pVEp0Sjs2n+Yap9QhWwY4qY3LfBy88FJmpb2ppZ/STEd/dJhgh8bSUtv+pfsF6B8mPdY
-         v3hfBVe8zpE43hKYFhoQixhmPWaCKyvcB/HM19iWGxnluOCNXrbxpFI/Cfvpuh7lXmWt
-         UgoUbb0+x40ONjTp9ci6+p2PcW7Lt4P7RBwNapeKTfKNI5aAHPHRFwEt1LarYjVpyhs5
-         EAkg==
-X-Forwarded-Encrypted: i=1; AJvYcCV3SwKDhr3l0D40LDH+cNUY4mqW/VgJ9afem3tBwZJN3Tp8j/YhcPwGS/7/q33cXFnGkClUCZEFq/w=@vger.kernel.org
-X-Gm-Message-State: AOJu0YweHrgTSCVYsRcLwzDI4e2ksSrNGonEtcDYlCu5OxOs9gVsYyIL
-	5yDybRtTyGQYtOavt9xy1nB/o2hoE34/h7hoiycIM4xM7+GTfIB7IuiN0iceFWcMbOxJ4ixEWwe
-	evRU3xECD6RRNflcj7TQDUoe0q25nUInkazZgzwT5BN51uudry/BgXJa19yVMTw==
-X-Gm-Gg: AY/fxX4XLucL7AnymH8ptloSV0DgXzf26fRlOwYGyE0tb/yLCDq7os6mj7fu0Ifau3g
-	HbMBcOMB4GWoJBiS+58s0xnT61C7p86qvB+2qfDdpS/S/S9ZyHbdgIe6zJmiRdUCUMMZtcy0OHU
-	Xphu1zDBXkoOdwNgMxkQPPRUuCiR7zZhkxoOe4UzlWcxk03Mz/hO/MbwhnoQQF91o+/wKDtDgR0
-	iqSx2g7EEEi+XERQ+unsGNdiYG+gnNSNUDHinxUAOZYuBNYhU/gFt/c58vvt2vBQBbPwha4B/YE
-	gAOrYGBfUVWnPJ8DArLROLv4h2pMkyHo1P3aHS8hsMQ2GnABAsxCpTlcTKA0rMOm2Hm4z6uMbMC
-	zl7asckWkPz5R/g==
-X-Received: by 2002:a05:600c:4447:b0:477:3e0b:c0e3 with SMTP id 5b1f17b1804b1-47d84b3b8b9mr66671925e9.32.1767873903878;
-        Thu, 08 Jan 2026 04:05:03 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGyd3EobR8+CtqNLr1SJNq4aJtqIFnG4hdPC4+x+J4mPj7mFR2jjmxPx+hGX2qRU6Jn66CAIQ==
-X-Received: by 2002:a05:600c:4447:b0:477:3e0b:c0e3 with SMTP id 5b1f17b1804b1-47d84b3b8b9mr66671435e9.32.1767873903307;
-        Thu, 08 Jan 2026 04:05:03 -0800 (PST)
-Received: from [192.168.88.32] ([212.105.149.145])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d8662ffaasm36179535e9.6.2026.01.08.04.05.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 08 Jan 2026 04:05:02 -0800 (PST)
-Message-ID: <9d64dd7e-273b-4627-ba0c-a3c8aab2dcb1@redhat.com>
-Date: Thu, 8 Jan 2026 13:05:00 +0100
+	s=arc-20240116; t=1767874516; c=relaxed/simple;
+	bh=oBDZinY9Nh5D84J1Ns4d7Wu4t/l25XNvaZ8UJ6362WI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=L9AI0hDH+pw3cgOEiHvY0zf+ry9IyoekXnsAbBUaNV6nvQwg/pOLvZrZgo4LjBHcYh1hEI2KzvJKlEgHFTxGgibKNKIc5ymW0uURbfW1fe9rqOibbkfrxRDdMstnMXk3nTw3AKW3GjBh2iYnQBjoPUEx2BIA7ll/IZqo6jPIyPo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Yf7Ccz9z; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1C7AEC116C6;
+	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1767874515;
+	bh=oBDZinY9Nh5D84J1Ns4d7Wu4t/l25XNvaZ8UJ6362WI=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=Yf7Ccz9zhSKaJnsXZOc6qcXEwG1mOb+vBWFcfQOGl9DrepkBwqufe1TH1Hd9z3tcn
+	 TlcYPqyi7Lrdj6etZq0G4dC7nv84gjee3Np0XAJEdaCy6qjkzF71VssYCaQQ8VQvs8
+	 EaU+C7hgdSgb29gpR9E8NYLWLccWZBaqFBdVO73wrYs/STTxT0arHktD/opZJurXO2
+	 AtowHdgccloFDSomAczkY0T6PnyaBCH6F5Zw3dIL6hSZpI/3MmD6xD+49m6k/35Njm
+	 V/iPOk08g+jQNos7h4SCitWsYlkxikqr666FuKih94sDMarUhYPTWazC8ZUY1twTyp
+	 tA+c8/ngkv6pw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 117E1D185EB;
+	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
+From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
+Subject: [PATCH v3 0/6] ADF41513/ADF41510 PLL frequency synthesizers
+Date: Thu, 08 Jan 2026 12:14:49 +0000
+Message-Id: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 net-next 00/13] AccECN protocol case handling series
-To: "Chia-Yu Chang (Nokia)" <chia-yu.chang@nokia-bell-labs.com>,
- "edumazet@google.com" <edumazet@google.com>,
- "parav@nvidia.com" <parav@nvidia.com>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
- "corbet@lwn.net" <corbet@lwn.net>, "horms@kernel.org" <horms@kernel.org>,
- "dsahern@kernel.org" <dsahern@kernel.org>,
- "kuniyu@google.com" <kuniyu@google.com>,
- "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "dave.taht@gmail.com" <dave.taht@gmail.com>,
- "jhs@mojatatu.com" <jhs@mojatatu.com>, "kuba@kernel.org" <kuba@kernel.org>,
- "stephen@networkplumber.org" <stephen@networkplumber.org>,
- "xiyou.wangcong@gmail.com" <xiyou.wangcong@gmail.com>,
- "jiri@resnulli.us" <jiri@resnulli.us>,
- "davem@davemloft.net" <davem@davemloft.net>,
- "andrew+netdev@lunn.ch" <andrew+netdev@lunn.ch>,
- "donald.hunter@gmail.com" <donald.hunter@gmail.com>,
- "ast@fiberby.net" <ast@fiberby.net>,
- "liuhangbin@gmail.com" <liuhangbin@gmail.com>,
- "shuah@kernel.org" <shuah@kernel.org>,
- "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
- "ij@kernel.org" <ij@kernel.org>, "ncardwell@google.com"
- <ncardwell@google.com>,
- "Koen De Schepper (Nokia)" <koen.de_schepper@nokia-bell-labs.com>,
- "g.white@cablelabs.com" <g.white@cablelabs.com>,
- "ingemar.s.johansson@ericsson.com" <ingemar.s.johansson@ericsson.com>,
- "mirja.kuehlewind@ericsson.com" <mirja.kuehlewind@ericsson.com>,
- cheshire <cheshire@apple.com>, "rs.ietf@gmx.at" <rs.ietf@gmx.at>,
- "Jason_Livingood@comcast.com" <Jason_Livingood@comcast.com>,
- Vidhi Goel <vidhi_goel@apple.com>
-References: <20260103131028.10708-1-chia-yu.chang@nokia-bell-labs.com>
- <56f6f3dd-14a8-44e9-a13d-eeb0a27d81d2@redhat.com>
- <PAXPR07MB798456B62DBAC92A9F5915DAA385A@PAXPR07MB7984.eurprd07.prod.outlook.com>
-Content-Language: en-US
-From: Paolo Abeni <pabeni@redhat.com>
-In-Reply-To: <PAXPR07MB798456B62DBAC92A9F5915DAA385A@PAXPR07MB7984.eurprd07.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALmfX2kC/33NQQrCMBCF4atI1kYyibWpK+8hLqbNpB3QRhIJS
+ undTbsRQVz+D+abSSSKTEkcN5OIlDlxGEuY7UZ0A449SXalhVa6AgAl0fk9VGAkc5AucqYoETu
+ 0WHurLIlyeY/k+bmq50vpgdMjxNf6JMOy/vcySCW187Yl5V13oBOOeA39rgs3sYBZfxANzW9EF
+ 6Ql3aA1rqob84XM8/wGS2mnQ/wAAAA=
+X-Change-ID: 20251110-adf41513-iio-driver-aaca8a7f808e
+To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-doc@vger.kernel.org
+Cc: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
+ Lars-Peter Clausen <lars@metafoo.de>, 
+ Michael Hennerich <Michael.Hennerich@analog.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Rodrigo Alencar <rodrigo.alencar@analog.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1767874513; l=2780;
+ i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
+ bh=oBDZinY9Nh5D84J1Ns4d7Wu4t/l25XNvaZ8UJ6362WI=;
+ b=Qd5KgcRRfQJFn4BzMgxYGSE4nES+ykF2gna/smPyX12Jj5WkQUVtNM8YXlBzFEXzfY9QpuV0y
+ /77qAjE0E94CEoFN8lJBYjbTmTYBhkxEZFm1pQXbI3MTlqHGoCdSi4X
+X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
+ pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
+X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
+ with auth_id=561
+X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+Reply-To: rodrigo.alencar@analog.com
 
-On 1/8/26 9:47 AM, Chia-Yu Chang (Nokia) wrote:
-> Regarding the packetdrill cases for AccECN, shall I can include in this patch series (v8) or is it suggested to submit them in a standalone series?
+This patch series adds support for the Analog Devices ADF41513 and ADF41510
+ultralow noise PLL frequency synthesizers. These devices are designed for
+implementing local oscillators (LOs) in high-frequency applications.
+The ADF41513 covers frequencies from 1 GHz to 26.5 GHz, while the ADF41510
+operates from 1 GHz to 10 GHz.
 
-IMHO can be in a separate series, mainly because this one is already
-quite big.
+Key features supported by this driver:
+- Integer-N and fractional-N operation modes
+- High maximum PFD frequency (250 MHz integer-N, 125 MHz fractional-N)
+- 25-bit fixed modulus or 49-bit variable modulus fractional modes
+- Digital lock detect functionality
+- Phase resync capability for consistent output phase
+- Load Enable vs Reference signal syncronization
 
-/P
+The series includes:
+1. PLL driver implementation
+2. Device tree bindings documentation
+3. IIO ABI documentation
+
+Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
+---
+Changes in v3:
+- Use FIELD_MODIFY macro in driver implementation
+- Drop refin_frequency iio attribute
+- Drop muxout-select property from dt-bindings (and rename logic-level property)
+- Use -mhz suffix in power-up frequency property
+- Address documentation issues
+- Link to v2: https://lore.kernel.org/r/20251219-adf41513-iio-driver-v2-0-be29a83d5793@analog.com
+
+Changes in v2:
+- separate driver implementation from extra features and improve commit messages
+- use macros from units.h
+- explanation of custom parse function: adf41513_parse_uhz
+- reorganize driver data structures
+- drop clock framework support for now
+- reorganize documentation
+- Link to v1: https://lore.kernel.org/r/20251110-adf41513-iio-driver-v1-0-2df8be0fdc6e@analog.com
+
+---
+Rodrigo Alencar (6):
+      dt-bindings: iio: frequency: add adf41513
+      iio: frequency: adf41513: driver implementation
+      iio: frequency: adf41513: handle LE synchronization feature
+      iio: frequency: adf41513: features on frequency change
+      docs: iio: add documentation for adf41513 driver
+      Documentation: ABI: testing: add common ABI file for iio/frequency
+
+ Documentation/ABI/testing/sysfs-bus-iio-frequency  |   11 +
+ .../bindings/iio/frequency/adi,adf41513.yaml       |  234 ++++
+ Documentation/iio/adf41513.rst                     |  199 +++
+ Documentation/iio/index.rst                        |    1 +
+ MAINTAINERS                                        |   10 +
+ drivers/iio/frequency/Kconfig                      |   10 +
+ drivers/iio/frequency/Makefile                     |    1 +
+ drivers/iio/frequency/adf41513.c                   | 1295 ++++++++++++++++++++
+ 8 files changed, 1761 insertions(+)
+---
+base-commit: fb2f4eb29a258145b0336601f00509cab6e93e7c
+change-id: 20251110-adf41513-iio-driver-aaca8a7f808e
+
+Best regards,
+-- 
+Rodrigo Alencar <rodrigo.alencar@analog.com>
+
 
 
