@@ -1,569 +1,197 @@
-Return-Path: <linux-doc+bounces-71451-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71422-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B372D04BA0
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:09:20 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A94BD05373
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:53:53 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 77B3D30256BC
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 17:04:14 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3C3B731CC70A
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:58:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 250502949E0;
-	Thu,  8 Jan 2026 17:03:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F5C92E1EE5;
+	Thu,  8 Jan 2026 16:58:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="Pjtx4N6K";
-	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="tdDug0/4"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="MZ/dyuSy"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 695B028C869;
-	Thu,  8 Jan 2026 17:03:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767891829; cv=fail; b=b2z/RE2Ea+puJqmut0wOpLwFLdB1UMag2qKs88oCq395gdW+M9v9b/OsmerlIrpUi+uSMXn+hxWgFAWG8u0/ndesxvpqX0cjoJ3Y5CLnNVXOHah9GJs+b59v1lWvPUa0MbMrVWwwvhWoMro5VY6i7akUnsk//oF/tqkou3FeQy8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767891829; c=relaxed/simple;
-	bh=ZojI2CNofa68QzbVRXUWnPI05sih/0r44Y05lXrJufg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=pMsT0bQaZtoXtASKYu7YqvrkmDHP+EGYr8LCjsuMF2sJ328IvvCHX6RUqK3kbWeCw4qoJXvPBnNdkUEVh15TIUbD8UqJCQcA/0PRiRDzDcx8YlZvVppC4NNxkjYUGpo0jilPPd3Ae8rGmYmY/f7HG/VlDICGVQNsDezby38Wb38=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=Pjtx4N6K; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=tdDug0/4; arc=fail smtp.client-ip=205.220.177.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 608FnT2l425459;
-	Thu, 8 Jan 2026 16:57:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=corp-2025-04-25; bh=YmIN+Qv4X+AHKLeSm1
-	P6jBtdvx+zHIXhLs5yhQiWn7g=; b=Pjtx4N6KDIyBB+qokpe1G4EThG5WL/iNmg
-	kuBGSo7YCBVqO1erD03F1cDH1huCnQBgb/9kGOB6XSk6YHnvkSMhcPDmlY2K0doC
-	Av/9jyh55wFFkEtTU5hS4zY4CGYjtcdW0jwutAfGo5Ysgb5tpIOK+WGwEf0XhRFP
-	Wfpz9SRngTD1lnQE457CvvzpbCpGibod+V7WzAATmrzCzbzdGtXAad2sh/jKt2WJ
-	o88rI5j/LBp/6OOhz883gTnm3Es2PuyPLwkvtgSq7CTmukb44u7lNg8kfcpK74LR
-	vqH0W9RmCE2E7vox0FSeECrvugnktOcACJOb/zZ1iNVWA5IfhBvg==
-Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
-	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4bjfjd83u6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 08 Jan 2026 16:57:22 +0000 (GMT)
-Received: from pps.filterd (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 608FJnQg030787;
-	Thu, 8 Jan 2026 16:54:31 GMT
-Received: from cy3pr05cu001.outbound.protection.outlook.com (mail-westcentralusazon11013050.outbound.protection.outlook.com [40.93.201.50])
-	by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 4besjfbf0p-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 08 Jan 2026 16:54:31 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xKRGf4mMD9//YMBMkWYicODic+yjtPk+sp4FUDnz1/mTsLpWu+XhBvU76NfIpG7mjZjgVrXcfKS6rx60sktMD6XlJ5YSZTMKigJ2X0AsmBmMY5+DOvsy3PJxY59ZCZQPrD+XWe4zl+V/+bcU0eDy84nbqD8tEez3GFVTQc/3volZyTJgLq6I9aDycGSVpHY7eif34+CHpWwFRG3WGDcAtivJtB/7lhGXignXawbW69fPTgGSprka8we0BYURs380MCef6sVdpUqdSlmlaQfdqiMRVQ+hgLSHnpChFP+FtrVfRUYPR0rLxhS4LrtBu4cCcjpLBiG/CrZPN4xxb1TCbw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YmIN+Qv4X+AHKLeSm1P6jBtdvx+zHIXhLs5yhQiWn7g=;
- b=r7ZeYmQ1h0FeSDmhqnHEuy3ZB4cE2CDOmCCaGvqKkQG/0fS4IpQVPSOQ+2LifrLXOsVler7ZqRwogkTXIvBN7OI3VDyCmgi5qDkdLIQ//gy0q7xUB4CVl11RSTAjb03hlTNi+0w46GxITI4RuKwbgsjJO7tzNXYAsC9OFFBCrlkGrFfV+X13wKG6B7GRK4K3TGfSXgp8MwchYcESJZCpYCBQa5Ocq0oiC0tw+rwi8p/IEaXj3DIbwR0z6RrK4/04rRK74CaRrDLczxdamBfUPKcTY/fWJClDX4A3HBGnGL6fstn50LJZbGIjvfp/vaG9WH8QDFHG1jP5RPCchGlmyA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YmIN+Qv4X+AHKLeSm1P6jBtdvx+zHIXhLs5yhQiWn7g=;
- b=tdDug0/41RbmfR8Y8qmhmuZYG81P4reY8T9PFOTyU6u14Y//9Obp9GdUKmRhI99Fcw0VHIt3MVw4j/k2UkEV8wG0PEbZNRzAFvXdeApHSGlvWH88cwOLcyPZwARNZXQ9wXv4zH0rUkotc7iHHKt3LmbTm7jbZvvXEmn+KXbaQTo=
-Received: from DM4PR10MB8218.namprd10.prod.outlook.com (2603:10b6:8:1cc::16)
- by SN4PR10MB5605.namprd10.prod.outlook.com (2603:10b6:806:208::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.3; Thu, 8 Jan
- 2026 16:54:26 +0000
-Received: from DM4PR10MB8218.namprd10.prod.outlook.com
- ([fe80::f3ea:674e:7f2e:b711]) by DM4PR10MB8218.namprd10.prod.outlook.com
- ([fe80::f3ea:674e:7f2e:b711%6]) with mapi id 15.20.9499.002; Thu, 8 Jan 2026
- 16:54:26 +0000
-Date: Thu, 8 Jan 2026 16:54:29 +0000
-From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-To: Nico Pache <npache@redhat.com>
-Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-doc@vger.kernel.org, david@redhat.com,
-        ziy@nvidia.com, baolin.wang@linux.alibaba.com, Liam.Howlett@oracle.com,
-        ryan.roberts@arm.com, dev.jain@arm.com, corbet@lwn.net,
-        rostedt@goodmis.org, mhiramat@kernel.org,
-        mathieu.desnoyers@efficios.com, akpm@linux-foundation.org,
-        baohua@kernel.org, willy@infradead.org, peterx@redhat.com,
-        wangkefeng.wang@huawei.com, usamaarif642@gmail.com,
-        sunnanyong@huawei.com, vishal.moola@gmail.com,
-        thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com,
-        kas@kernel.org, aarcange@redhat.com, raquini@redhat.com,
-        anshuman.khandual@arm.com, catalin.marinas@arm.com, tiwai@suse.de,
-        will@kernel.org, dave.hansen@linux.intel.com, jack@suse.cz,
-        cl@gentwo.org, jglisse@google.com, surenb@google.com,
-        zokeefe@google.com, hannes@cmpxchg.org, rientjes@google.com,
-        mhocko@suse.com, rdunlap@infradead.org, hughd@google.com,
-        richard.weiyang@gmail.com, lance.yang@linux.dev, vbabka@suse.cz,
-        rppt@kernel.org, jannh@google.com, pfalcato@suse.de
-Subject: Re: [PATCH v13 mm-new 01/16] khugepaged: rename hpage_collapse_* to
- collapse_*
-Message-ID: <46d48e0b-5fae-4275-a770-552188841fd3@lucifer.local>
-References: <20251201174627.23295-1-npache@redhat.com>
- <20251201174627.23295-2-npache@redhat.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251201174627.23295-2-npache@redhat.com>
-X-ClientProxiedBy: LO4P302CA0004.GBRP302.PROD.OUTLOOK.COM
- (2603:10a6:600:2c2::9) To DM4PR10MB8218.namprd10.prod.outlook.com
- (2603:10b6:8:1cc::16)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D00E02E03E3
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:58:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1767891527; cv=none; b=KVyIav8mzhr0qgK7UzeWrJaRoVxM38NkcwizB2/o0JpHaq8A/mzdqsOhnWRni9tYTjBrn+NQYZ8j6u77J+CiIRPLJzYouHENLgqIOAKY/eGt8e6AOaJdC9qmNDVCX3PlNzejh/5KE+wq0WPzX7b65GaQompxGlOJroDs6FoOtoA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1767891527; c=relaxed/simple;
+	bh=4sdiZuFRexWZI+54a8W+WnbOT1IbHWUkfPmCPFSkUZM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ttou1bFKPOawYl7kLZaWZQI5/+ihmetxkx/YQekLkcs9HvxpaUImBYgYyAMAMyKHZGXUwdaXC8JHpM8qbOMgVKh86qib3lRfRfAR8ZmpaIS9o8CNpdgGep6nVoU4tepf7B+LbFwhX5f+S/ka/nmSOBR4LSsBkviXWR/OfAc4Pso=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=MZ/dyuSy; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id C52D84E42000;
+	Thu,  8 Jan 2026 16:58:41 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 96DB66072B;
+	Thu,  8 Jan 2026 16:58:41 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 666D9103C8891;
+	Thu,  8 Jan 2026 17:58:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1767891520; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=E+E90BltAoO+qn8F30WKKOmABemNtGnZLPXKAjs4xnI=;
+	b=MZ/dyuSyCdfnO7r8Z3aYcq+P7lQSXYQT08myG7d7wTE6630zfJ2I15slCXCRz/7JhWTMcn
+	BbEUgkXvj6Q/z1Z5YOcn0BQjQp1JX3eAqh7WsEzjSDkP+JRuhgFKpIyp6CEU2qWFB4wH9I
+	XsdYXe32VMhMMqKjazEqufx3ylFqdrktKZyVd11jqdIVnYDzHrocAF/9JGzRKzgTSnFB5j
+	0sQs4EQPCZ8PBoJh8K0zoWpskcCTvtzkn97wLf05SeR7MeIp06NBAfduP1U0sjRcwXlqYB
+	GIwIXgXhI8KPeKzS8ZBM3+ApAzuPTVNyRSaFGw6skA/WgiD81qluApSFKxHx0g==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH v2 00/27] mtd: spi-nor: Enhance software protection
+Date: Thu, 08 Jan 2026 17:57:33 +0100
+Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR10MB8218:EE_|SN4PR10MB5605:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9f2cd5ef-b6c7-4b67-2eaa-08de4ed69532
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|366016|1800799024|7142099003;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?joX0paMv1tY5BNoY72/NZfVBVKFaCWqKcQU1ukT9IKiJb87S29/+Ltypylc2?=
- =?us-ascii?Q?z1SaBcigMCA2UL6FcjPXeoQ2yKwsbFcVO31nmD6bsIM4nqEXfEmfyT6qsG5x?=
- =?us-ascii?Q?Rs6gGRoT7ybKm5w5RO78pSU8rJ3RPki7whff2UjybBJ13xGllnP3rlXK3daX?=
- =?us-ascii?Q?UT8dXz0TmgXYg1/QYxpD+pGX/wNEuG306Oq04zskXXedrbPF/1TdldIb0SVB?=
- =?us-ascii?Q?K0NeV1LtUOivir3exp9LqzRjRkA8zTSDtmV7k3usibChE1gBYW/j2CqLyamo?=
- =?us-ascii?Q?CBRLf5CY4hb5Tu0k155EWKM8KAa9pSUIn7JEmtBf53gG2dK+f2nxoZ7ip69t?=
- =?us-ascii?Q?7qbfZPd8hjCylm9s06GdlsucQ0YEv3ioVfyaaHgjafcOo/aaFcxx85NxxOPL?=
- =?us-ascii?Q?g9OiJX7VX6UQM8ig1aVZDwbP8HG5m9ydJ4j36SjUo3ATKBNO0TW6LNfFNbKV?=
- =?us-ascii?Q?mhqL6mP2pRUL9wfDkmRUeAfn4aRu8POQjTSq3R90MFRf3ME/SM3rEm4usTB7?=
- =?us-ascii?Q?LSozLDmJI8gBtphYO7otFQjcaf0jiPK2i5oUpi2i/BwnLuzW+eEiGNU38B6R?=
- =?us-ascii?Q?k0tTRi8UXqSUVnhj1fDPiRnykt+PGe3zjAk5Hh38LRQ3kcq4PupwjFhmg2+0?=
- =?us-ascii?Q?+XYHyOHzBiygAgylbUPagcpSQaKS8fDoEdltUdaptGy87YwoQhyEZhRLZctJ?=
- =?us-ascii?Q?jhrmIbwf6ArZk0zKwOTT4nw+qJNSqDx03bHn6gNV1K/tTpl7lmEi32kciYca?=
- =?us-ascii?Q?iSFGpuhIMAnI+GAZ1quDh2sEBXDNHMf9o6F+vYBjBsnxXbEKMxKh7khwVyI2?=
- =?us-ascii?Q?dMEaO25rXvx+NLx+Sn5WZW/aeUsn8pdz6mVPdbrSgV1wGMBKikXrlvHcBXOh?=
- =?us-ascii?Q?MYExE9lwUPfqGlt4+w+HtJDs0/ZgnJk3iEhTVwLZKeeElKZhbKuN5b2Jt0k6?=
- =?us-ascii?Q?iOJT5YflNl524dYTYemtJfYTVtnaFxBbn+3ZnsvbUIHdRH+n9gqCPuLWhrEh?=
- =?us-ascii?Q?a9zotKjKeiqxCXqJ+ej3LfjIDeIU/Mva1qlNFODc2calhfD9JkXguVGvuaAM?=
- =?us-ascii?Q?jr70ZrMP2yY0y+rE6flI21kE54kzdyXvBk9W+D6y2ITIH2i8ZYruF9X8v47d?=
- =?us-ascii?Q?933BGf020Uqrl2ei5QV6Jvor7Z+Y3iYFXJ950s76uJV1/AJDxopTyoSDYGBv?=
- =?us-ascii?Q?9zHkgk2RxO1/zMFxXAlPhrSxTBUqAWNWSflasjaKJujZeWytLC4U52r2KsNO?=
- =?us-ascii?Q?xbmXx59Fd/jjYlu4VXxHyXFRxwYRdhbjhtpRFmOmbfP0IsTAzuVhZY+a1/8E?=
- =?us-ascii?Q?uJJJbr8I9Byq2YqUCc5gORfz7U1A3eo55sMgfOEXCm0EEz0MrePdOXO3P1zX?=
- =?us-ascii?Q?XSks89sYohWWTEvrSslApRB5MpIDXZQb5euziV7j2zkDsQuAqyRP+HhaXuam?=
- =?us-ascii?Q?IUKl4u2UuFlT0si3h4dt4bJUGVxllkvb?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR10MB8218.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(7142099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?C86PSjDiEYkxKa+FmsQpvwgXIklzBT1aRp2omezwK0KmnRyDfOcIesSoyCTN?=
- =?us-ascii?Q?9FYqSwN2evMCum5LwY3yZlf3VZoYsnuJv63OBYO+2EntXtAodGOw7msqBBjK?=
- =?us-ascii?Q?NTYkNzQ16ycvVd4zdpXPoBJA8kAvydhBjNrMIUeYRb90jJvqPn3sONJ9XYJ3?=
- =?us-ascii?Q?UnRI+c8mHiKJnZmrh0MpPMg9HsYmzQ4C5C/aUWtLnkP2w/0FJ5aqHRF7Ezix?=
- =?us-ascii?Q?YF/jMZLdnBm6xJl8xPIRWJVw90mXPbQz2DF2JToqQyvnXHTrF97hRKRp4Asm?=
- =?us-ascii?Q?rxMsM+krzvfzNnrEIGpC7cgz6H8zshUY4AKm2m3AQPMSKh1D2yObQwfm340r?=
- =?us-ascii?Q?yRHgBjDpmb1BLIfwN5naxsxljP2sgppqlBk0sT9NKMxgvbsqs68+PPWzzUnj?=
- =?us-ascii?Q?yZEPfUv9+aQFP3k3+JZzRBXMH5xDVnUeMA2TIFrizyFMfiXW+JYXUaU4OnAn?=
- =?us-ascii?Q?Np0o2uYSnuWupDH0WUm457i4ROIqVD4lFjOhKVkpVBf+jnshgjS8DifC55lJ?=
- =?us-ascii?Q?kq8b3SajlLq9UC+4mvtN8fCgY9mBNjWVdcf1Jfu8ln2TSGMkTmYKNZBJLtwT?=
- =?us-ascii?Q?aIOTpna9+yQM6PBcbxCnynoN+NjPt88gbWuO+uoopYS0Q9Jq7bZerckeDyV9?=
- =?us-ascii?Q?05hyxy7gNLxADaG3b16KTfkz2iyM8mCkb2x1NfYvoPYmizrgwQKXS2hTm+oU?=
- =?us-ascii?Q?bu5+OUZRCph0BMMYKSZpAh1pc908Nb/fRvk3GQlOOgrvIaJnNZffQYr/qaJY?=
- =?us-ascii?Q?+/4j0fUMT0k9uwzgjYiPK2Qz+pRfMJznlz1EgWRtgFvi7MUtbbF75RPv+IbV?=
- =?us-ascii?Q?d66qNuanaGeGLHKbRtSWyKUqKrV2+y9sKMSDJCdoc7DF+LyQW9KV2TC+vQCg?=
- =?us-ascii?Q?iP4dFkpcwMVZ6LoMccwCwYvJ/g5z784MakjQoHRjo+28alYlKnryiNtxNpSo?=
- =?us-ascii?Q?FYQB/ecnARDVEEQ0qwFIRHMssZ43BLYexPywCFh30Ktz4bH1SLryTlWNU9a5?=
- =?us-ascii?Q?AlDDJ6PeAm0l910pwLXbNof/z0QVrhMdEgr0ESrsafR63JCNpjGtDg0gCwYi?=
- =?us-ascii?Q?Hwkv/v4g7c22yeaBUqOCF64j0RhPenM6qd8DO+kbRJwA+PpasRiY7JPT2444?=
- =?us-ascii?Q?UEIedS7ZAKWuEtios8rkYgwAkBc7iiyfixaaLOz77NL1HGOBUFEBCqu9qLFq?=
- =?us-ascii?Q?Vp/alIY6AyED7qLEDfCdl+Wcf/jEbmxy5biHrCP9MhL6+ESD7aNlTmm707TD?=
- =?us-ascii?Q?q4pzZ2EdEIWs7dBq/ZhShMapEcOrlqxKiHtsDbyyl7uokzvubidJB4ekkfR0?=
- =?us-ascii?Q?sOaV86yLYqUCeXjUF3io2bDE2dPCV/rd0cUVlcv6UADHMLJepBByaBYQwUSm?=
- =?us-ascii?Q?b13SS5FuajEnSeq0lHHvPykLDhcmJwQCXZR2rZyCnxeiqCNw3muyscJd5TZs?=
- =?us-ascii?Q?rCducrQb02mvTsATJG9U5sbgKeB2fI5rxFy2SOh4w4uxRnzZeS3/PLoEUd+E?=
- =?us-ascii?Q?3/IeqxVKlSj1+530k8NZGmaUv9l+iusjKNDpJEvrzSRBJ9b+e8Jy9e9TG0cV?=
- =?us-ascii?Q?qNFL/04Hl3K6tYux2QfL9+VjNJmctoQyg7Svb4XjwGQmEpR7MB5Sae+aJZsn?=
- =?us-ascii?Q?Wj0tjHScdZabCT0QXF4id2MNt+3cdyHcXlX55XmTYQ9/PfaqWnq3cpDIw5Xx?=
- =?us-ascii?Q?rJVHUhbgVcsjqeSDHW+71HF9nYvr/ut8LRpYP08YNF59xwGeRvBTxxbl64qY?=
- =?us-ascii?Q?veaxG3SP31hEqUcFR3RLM6s68YbiKYs=3D?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	iJ7Vo4hnZTlGc8A7DpYQb//0lQ6F57mnKvaQpCofh1UsLWkyECg/vQYtGeJUk4GxNc8i1bip9Q458nRh0NiPA/0BARI74pcbFKUCktm9z8uooTQUK88u0pX7GlAw5pokG+Kc6SfEdTf7jv49PW4it7W8H2rI4Ge+g/c4OIh2HlJ+bL20TYrZpu+u18ISQX4WQpRrX/Mt1QtcmY9SWVqbm6IBBddNhCYGkXUxpU2T2n0pBBFm2UvnHmfp1pz1dzzANkRhMp2Op/RmcKYqa1IgtnfTyVncMsxJPu05c5YLM+qldARB7DXTt9iYQUHrkZr5+Qfx39vcPASu9S3WxeZtnR2uFGeKtk09/8b2dBjd76d+y+/D61pW8EPQSG9zG5+Kc577sk3AbskUwUY9wcSLgMxfNW+dDDXURhdi5JbpSBDGDD5sn0TJJ6YRAuyIaoNeamFgfbOpgzGzFds8+E7WR8bfw78BPhCEKOC/Ro5epbTgfbg+j1K/vwfMIeG7XA+wZlA0faApefBpv53V67m1/WbuCZqX8fuo64evL3WjKjGT/hyEFXJdCJ6jTgPqhGGU+ba+AsxKhOmGOlcwW7rVKaJJX+52m7sMkUsJL3zvaFg=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f2cd5ef-b6c7-4b67-2eaa-08de4ed69532
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR10MB8218.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 16:54:26.8740
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sQvvFSqalmEOrgSF5j81teh647EOW5veZ/ooBfPBHxrfVsPWy8c+lohvrH7HuNhEt8ND1dn5y6ncbc0CI8ps0WhaRfxcdA6KkFpos7xvoBY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR10MB5605
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-08_03,2026-01-08_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 phishscore=0 adultscore=0
- malwarescore=0 suspectscore=0 mlxscore=0 spamscore=0 mlxlogscore=984
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2512120000
- definitions=main-2601080124
-X-Proofpoint-ORIG-GUID: lNcnM3Z3_jYP6wbC_RF-C5_Tny2M88p7
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA4MDEyNSBTYWx0ZWRfXwCiGkaH9oLrk
- u1uAscPueyBR4c18lNjCGXZzBchGn59zLjJo/OCQ832GFDoo9NEJ1eagvYvvbDLl5OE0RFbETOK
- 6Naap5d15J4yqyDSuelfqZXCo38tkL/ecDs/PJ56pNjjLWRHvBgJRdxRUh4lqfMzqT5KvgxQitW
- ZCKmGBXxXjZnINEcozPRNKZS6LG2aNFo60721MSL4o01MQqYo4BmbaDRgOnaCy5iFHdWSEQ7hnl
- 3yC4V/R9Ct0aUu+2Y1xC3eibcqk3vzduw2TM/OHs4WDetetuwE0bJSnUNxOCXYiS9m9bnlhaAHj
- yx7imZFgmRsRq8KWjfpvmhDlD6eiDuA81prJj8bYh8f2+BT/zl5A73M8wI6Ah46FCLBfKguyHJ5
- 0oVEg0XI18z964z6PqyG7D28BUYqS21HuA+CfggTCCtHcI7mR1JM3xffSxM0ZEL8M4Mm6bZcsca
- E9L3jdiXfR91ojts0rRowK/48dLKqOWGSv2QHOT8=
-X-Authority-Analysis: v=2.4 cv=MOJtWcZl c=1 sm=1 tr=0 ts=695fe1f2 b=1 cx=c_pps
- a=e1sVV491RgrpLwSTMOnk8w==:117 a=e1sVV491RgrpLwSTMOnk8w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=vUbySO9Y5rIA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=pGLkceISAAAA:8 a=yPCof4ZbAAAA:8 a=Ikd4Dj_1AAAA:8 a=SRrdq9N9AAAA:8
- a=20KFwNOVAAAA:8 a=Cypll0htrsRS82Uaf6kA:9 a=CjuIK1q_8ugA:10 cc=ntf
- awl=host:13654
-X-Proofpoint-GUID: lNcnM3Z3_jYP6wbC_RF-C5_Tny2M88p7
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NQQ6CMBCF4auQWTuGKVDAlfcwLKQUmUQ7pCVFQ
+ 7i7lRO4/N7ifxsE69kGuGQbeBs5sLgEdcrATHf3sMhDMqhcVURU4squFzdg1EgNekMYZkYnHsM
+ 6Y6OrodBjOeq2gtSYvR35ffRvXfLEYRH/Oe4i/dZ/y5Ewx7Kpe1OTatuCrr3I8mR3NvKCbt/3L
+ 3o/I3LMAAAA
+X-Change-ID: 20251114-winbond-v6-18-rc1-spi-nor-swp-865d36f4f695
+To: Tudor Ambarus <tudor.ambarus@linaro.org>, 
+ Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: Sean Anderson <sean.anderson@linux.dev>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Steam Lin <STLin2@winbond.com>, linux-mtd@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, stable@kernel.org
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
 
-FYI there's a merge conflict vs. mm-unstable atm (mm-new is unworkably broken,
-so prefer to base on mm-unstable if possible thanks).
+Hello,
 
-In mm/khugepaged.c:
+As recently raised on the mailing-list (link below), it seems that the
+"locking" support in SPI NOR could benefit from some enhancements. As I
+myself had to dig into it recently, here is a proposal.
 
-<<<<<<< HEAD
-static enum scan_result hpage_collapse_scan_pmd(struct mm_struct *mm,
-						struct vm_area_struct *vma,
-						unsigned long start_addr, bool *mmap_locked,
-						struct collapse_control *cc)
-=======
-static int collapse_scan_pmd(struct mm_struct *mm,
-			     struct vm_area_struct *vma,
-			     unsigned long start_addr, bool *mmap_locked,
-			     struct collapse_control *cc)
->>>>>>> khugepaged: rename hpage_collapse_* to collapse_*
+First issue that I see, the MEMLOCK ioctl is not behaving correctly
+in some cases, as addressed in:
 
-<<<<<<< HEAD
-static enum scan_result hpage_collapse_scan_file(struct mm_struct *mm, unsigned long addr,
-						 struct file *file, pgoff_t start,
-						 struct collapse_control *cc)
-=======
-static int collapse_scan_file(struct mm_struct *mm, unsigned long addr,
-			      struct file *file, pgoff_t start,
-			      struct collapse_control *cc)
->>>>>>> khugepaged: rename hpage_collapse_* to collapse_*
+    mtd: spi-nor: swp: Improve locking user experience
 
-<<<<<<< HEAD
-static unsigned int khugepaged_scan_mm_slot(unsigned int pages, enum scan_result *result,
-=======
-static unsigned int collapse_scan_mm_slot(unsigned int pages, int *result,
->>>>>>> khugepaged: rename hpage_collapse_* to collapse_*
+Then there is no clear explanation of the shortcuts taken by the kernel
+in terms of uAPI, so there is an attempt to list them in:
 
-<<<<<<< HEAD
-static enum scan_result hpage_collapse_scan_file(struct mm_struct *mm, unsigned long addr,
-						 struct file *file, pgoff_t start,
-						 struct collapse_control *cc)
-=======
-static int collapse_scan_file(struct mm_struct *mm, unsigned long addr,
-			      struct file *file, pgoff_t start,
-			      struct collapse_control *cc)
->>>>>>> khugepaged: rename hpage_collapse_* to collapse_*
+    mtd: spi-nor: swp: Explain the MEMLOCK ioctl implementation behaviour
 
-Maybe worth just double-tab indenting the args on subsequent lines to make
-dealing with this kind of thing a bit easier in general? Tab/space alignment to
-function name, while neat, can be a pain when return type changes.
+Plus, Tudor also asked if we could cover locking in the testing
+procedure, which is done in:
 
-On Mon, Dec 01, 2025 at 10:46:12AM -0700, Nico Pache wrote:
-> The hpage_collapse functions describe functions used by madvise_collapse
-> and khugepaged. remove the unnecessary hpage prefix to shorten the
-> function name.
->
-> Reviewed-by: Wei Yang <richard.weiyang@gmail.com>
-> Reviewed-by: Lance Yang <lance.yang@linux.dev>
-> Reviewed-by: Liam R. Howlett <Liam.Howlett@oracle.com>
-> Reviewed-by: Zi Yan <ziy@nvidia.com>
-> Reviewed-by: Baolin Wang <baolin.wang@linux.alibaba.com>
-> Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
-> Acked-by: David Hildenbrand <david@redhat.com>
-> Signed-off-by: Nico Pache <npache@redhat.com>
-> ---
->  mm/khugepaged.c | 73 ++++++++++++++++++++++++-------------------------
->  mm/mremap.c     |  2 +-
->  2 files changed, 37 insertions(+), 38 deletions(-)
->
-> diff --git a/mm/khugepaged.c b/mm/khugepaged.c
-> index 97d1b2824386..959be77f2e65 100644
-> --- a/mm/khugepaged.c
-> +++ b/mm/khugepaged.c
-> @@ -394,14 +394,14 @@ void __init khugepaged_destroy(void)
->  	kmem_cache_destroy(mm_slot_cache);
->  }
->
-> -static inline int hpage_collapse_test_exit(struct mm_struct *mm)
-> +static inline int collapse_test_exit(struct mm_struct *mm)
->  {
->  	return atomic_read(&mm->mm_users) == 0;
->  }
->
-> -static inline int hpage_collapse_test_exit_or_disable(struct mm_struct *mm)
-> +static inline int collapse_test_exit_or_disable(struct mm_struct *mm)
->  {
-> -	return hpage_collapse_test_exit(mm) ||
-> +	return collapse_test_exit(mm) ||
->  		mm_flags_test(MMF_DISABLE_THP_COMPLETELY, mm);
->  }
->
-> @@ -435,7 +435,7 @@ void __khugepaged_enter(struct mm_struct *mm)
->  	int wakeup;
->
->  	/* __khugepaged_exit() must not run from under us */
-> -	VM_BUG_ON_MM(hpage_collapse_test_exit(mm), mm);
-> +	VM_BUG_ON_MM(collapse_test_exit(mm), mm);
->  	if (unlikely(mm_flags_test_and_set(MMF_VM_HUGEPAGE, mm)))
->  		return;
->
-> @@ -489,7 +489,7 @@ void __khugepaged_exit(struct mm_struct *mm)
->  	} else if (slot) {
->  		/*
->  		 * This is required to serialize against
-> -		 * hpage_collapse_test_exit() (which is guaranteed to run
-> +		 * collapse_test_exit() (which is guaranteed to run
->  		 * under mmap sem read mode). Stop here (after we return all
->  		 * pagetables will be destroyed) until khugepaged has finished
->  		 * working on the pagetables under the mmap_lock.
-> @@ -579,7 +579,7 @@ static int __collapse_huge_page_isolate(struct vm_area_struct *vma,
->  		folio = page_folio(page);
->  		VM_BUG_ON_FOLIO(!folio_test_anon(folio), folio);
->
-> -		/* See hpage_collapse_scan_pmd(). */
-> +		/* See collapse_scan_pmd(). */
->  		if (folio_maybe_mapped_shared(folio)) {
->  			++shared;
->  			if (cc->is_khugepaged &&
-> @@ -830,7 +830,7 @@ struct collapse_control khugepaged_collapse_control = {
->  	.is_khugepaged = true,
->  };
->
-> -static bool hpage_collapse_scan_abort(int nid, struct collapse_control *cc)
-> +static bool collapse_scan_abort(int nid, struct collapse_control *cc)
->  {
->  	int i;
->
-> @@ -865,7 +865,7 @@ static inline gfp_t alloc_hugepage_khugepaged_gfpmask(void)
->  }
->
->  #ifdef CONFIG_NUMA
-> -static int hpage_collapse_find_target_node(struct collapse_control *cc)
-> +static int collapse_find_target_node(struct collapse_control *cc)
->  {
->  	int nid, target_node = 0, max_value = 0;
->
-> @@ -884,7 +884,7 @@ static int hpage_collapse_find_target_node(struct collapse_control *cc)
->  	return target_node;
->  }
->  #else
-> -static int hpage_collapse_find_target_node(struct collapse_control *cc)
-> +static int collapse_find_target_node(struct collapse_control *cc)
->  {
->  	return 0;
->  }
-> @@ -905,7 +905,7 @@ static int hugepage_vma_revalidate(struct mm_struct *mm, unsigned long address,
->  	enum tva_type type = cc->is_khugepaged ? TVA_KHUGEPAGED :
->  				 TVA_FORCED_COLLAPSE;
->
-> -	if (unlikely(hpage_collapse_test_exit_or_disable(mm)))
-> +	if (unlikely(collapse_test_exit_or_disable(mm)))
->  		return SCAN_ANY_PROCESS;
->
->  	*vmap = vma = find_vma(mm, address);
-> @@ -978,7 +978,7 @@ static int check_pmd_still_valid(struct mm_struct *mm,
->
->  /*
->   * Bring missing pages in from swap, to complete THP collapse.
-> - * Only done if hpage_collapse_scan_pmd believes it is worthwhile.
-> + * Only done if khugepaged_scan_pmd believes it is worthwhile.
->   *
->   * Called and returns without pte mapped or spinlocks held.
->   * Returns result: if not SCAN_SUCCEED, mmap_lock has been released.
-> @@ -1065,7 +1065,7 @@ static int alloc_charge_folio(struct folio **foliop, struct mm_struct *mm,
->  {
->  	gfp_t gfp = (cc->is_khugepaged ? alloc_hugepage_khugepaged_gfpmask() :
->  		     GFP_TRANSHUGE);
-> -	int node = hpage_collapse_find_target_node(cc);
-> +	int node = collapse_find_target_node(cc);
->  	struct folio *folio;
->
->  	folio = __folio_alloc(gfp, HPAGE_PMD_ORDER, node, &cc->alloc_nmask);
-> @@ -1244,10 +1244,10 @@ static int collapse_huge_page(struct mm_struct *mm, unsigned long address,
->  	return result;
->  }
->
-> -static int hpage_collapse_scan_pmd(struct mm_struct *mm,
-> -				   struct vm_area_struct *vma,
-> -				   unsigned long start_addr, bool *mmap_locked,
-> -				   struct collapse_control *cc)
-> +static int collapse_scan_pmd(struct mm_struct *mm,
-> +			     struct vm_area_struct *vma,
-> +			     unsigned long start_addr, bool *mmap_locked,
-> +			     struct collapse_control *cc)
->  {
->  	pmd_t *pmd;
->  	pte_t *pte, *_pte;
-> @@ -1355,7 +1355,7 @@ static int hpage_collapse_scan_pmd(struct mm_struct *mm,
->  		 * hit record.
->  		 */
->  		node = folio_nid(folio);
-> -		if (hpage_collapse_scan_abort(node, cc)) {
-> +		if (collapse_scan_abort(node, cc)) {
->  			result = SCAN_SCAN_ABORT;
->  			goto out_unmap;
->  		}
-> @@ -1421,7 +1421,7 @@ static void collect_mm_slot(struct mm_slot *slot)
->
->  	lockdep_assert_held(&khugepaged_mm_lock);
->
-> -	if (hpage_collapse_test_exit(mm)) {
-> +	if (collapse_test_exit(mm)) {
->  		/* free mm_slot */
->  		hash_del(&slot->hash);
->  		list_del(&slot->mm_node);
-> @@ -1769,7 +1769,7 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
->  		if (find_pmd_or_thp_or_none(mm, addr, &pmd) != SCAN_SUCCEED)
->  			continue;
->
-> -		if (hpage_collapse_test_exit(mm))
-> +		if (collapse_test_exit(mm))
->  			continue;
->
->  		if (!file_backed_vma_is_retractable(vma))
-> @@ -2285,9 +2285,9 @@ static int collapse_file(struct mm_struct *mm, unsigned long addr,
->  	return result;
->  }
->
-> -static int hpage_collapse_scan_file(struct mm_struct *mm, unsigned long addr,
-> -				    struct file *file, pgoff_t start,
-> -				    struct collapse_control *cc)
-> +static int collapse_scan_file(struct mm_struct *mm, unsigned long addr,
-> +			      struct file *file, pgoff_t start,
-> +			      struct collapse_control *cc)
->  {
->  	struct folio *folio = NULL;
->  	struct address_space *mapping = file->f_mapping;
-> @@ -2342,7 +2342,7 @@ static int hpage_collapse_scan_file(struct mm_struct *mm, unsigned long addr,
->  		}
->
->  		node = folio_nid(folio);
-> -		if (hpage_collapse_scan_abort(node, cc)) {
-> +		if (collapse_scan_abort(node, cc)) {
->  			result = SCAN_SCAN_ABORT;
->  			folio_put(folio);
->  			break;
-> @@ -2392,7 +2392,7 @@ static int hpage_collapse_scan_file(struct mm_struct *mm, unsigned long addr,
->  	return result;
->  }
->
-> -static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
-> +static unsigned int collapse_scan_mm_slot(unsigned int pages, int *result,
->  					    struct collapse_control *cc)
->  	__releases(&khugepaged_mm_lock)
->  	__acquires(&khugepaged_mm_lock)
-> @@ -2427,7 +2427,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
->  		goto breakouterloop_mmap_lock;
->
->  	progress++;
-> -	if (unlikely(hpage_collapse_test_exit_or_disable(mm)))
-> +	if (unlikely(collapse_test_exit_or_disable(mm)))
->  		goto breakouterloop;
->
->  	vma_iter_init(&vmi, mm, khugepaged_scan.address);
-> @@ -2435,7 +2435,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
->  		unsigned long hstart, hend;
->
->  		cond_resched();
-> -		if (unlikely(hpage_collapse_test_exit_or_disable(mm))) {
-> +		if (unlikely(collapse_test_exit_or_disable(mm))) {
->  			progress++;
->  			break;
->  		}
-> @@ -2456,7 +2456,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
->  			bool mmap_locked = true;
->
->  			cond_resched();
-> -			if (unlikely(hpage_collapse_test_exit_or_disable(mm)))
-> +			if (unlikely(collapse_test_exit_or_disable(mm)))
->  				goto breakouterloop;
->
->  			VM_BUG_ON(khugepaged_scan.address < hstart ||
-> @@ -2469,12 +2469,12 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
->
->  				mmap_read_unlock(mm);
->  				mmap_locked = false;
-> -				*result = hpage_collapse_scan_file(mm,
-> +				*result = collapse_scan_file(mm,
->  					khugepaged_scan.address, file, pgoff, cc);
->  				fput(file);
->  				if (*result == SCAN_PTE_MAPPED_HUGEPAGE) {
->  					mmap_read_lock(mm);
-> -					if (hpage_collapse_test_exit_or_disable(mm))
-> +					if (collapse_test_exit_or_disable(mm))
->  						goto breakouterloop;
->  					*result = collapse_pte_mapped_thp(mm,
->  						khugepaged_scan.address, false);
-> @@ -2483,7 +2483,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
->  					mmap_read_unlock(mm);
->  				}
->  			} else {
-> -				*result = hpage_collapse_scan_pmd(mm, vma,
-> +				*result = collapse_scan_pmd(mm, vma,
->  					khugepaged_scan.address, &mmap_locked, cc);
->  			}
->
-> @@ -2516,7 +2516,7 @@ static unsigned int khugepaged_scan_mm_slot(unsigned int pages, int *result,
->  	 * Release the current mm_slot if this mm is about to die, or
->  	 * if we scanned all vmas of this mm.
->  	 */
-> -	if (hpage_collapse_test_exit(mm) || !vma) {
-> +	if (collapse_test_exit(mm) || !vma) {
->  		/*
->  		 * Make sure that if mm_users is reaching zero while
->  		 * khugepaged runs here, khugepaged_exit will find
-> @@ -2567,8 +2567,8 @@ static void khugepaged_do_scan(struct collapse_control *cc)
->  			pass_through_head++;
->  		if (khugepaged_has_work() &&
->  		    pass_through_head < 2)
-> -			progress += khugepaged_scan_mm_slot(pages - progress,
-> -							    &result, cc);
-> +			progress += collapse_scan_mm_slot(pages - progress,
-> +							  &result, cc);
->  		else
->  			progress = pages;
->  		spin_unlock(&khugepaged_mm_lock);
-> @@ -2807,12 +2807,11 @@ int madvise_collapse(struct vm_area_struct *vma, unsigned long start,
->
->  			mmap_read_unlock(mm);
->  			mmap_locked = false;
-> -			result = hpage_collapse_scan_file(mm, addr, file, pgoff,
-> -							  cc);
-> +			result = collapse_scan_file(mm, addr, file, pgoff, cc);
->  			fput(file);
->  		} else {
-> -			result = hpage_collapse_scan_pmd(mm, vma, addr,
-> -							 &mmap_locked, cc);
-> +			result = collapse_scan_pmd(mm, vma, addr,
-> +						   &mmap_locked, cc);
->  		}
->  		if (!mmap_locked)
->  			*lock_dropped = true;
-> diff --git a/mm/mremap.c b/mm/mremap.c
-> index 672264807db6..db31d0231e05 100644
-> --- a/mm/mremap.c
-> +++ b/mm/mremap.c
-> @@ -244,7 +244,7 @@ static int move_ptes(struct pagetable_move_control *pmc,
->  		goto out;
->  	}
->  	/*
-> -	 * Now new_pte is none, so hpage_collapse_scan_file() path can not find
-> +	 * Now new_pte is none, so collapse_scan_file() path can not find
->  	 * this by traversing file->f_mapping, so there is no concurrency with
->  	 * retract_page_tables(). In addition, we already hold the exclusive
->  	 * mmap_lock, so this new_pte page is stable, so there is no need to get
-> --
-> 2.51.1
->
+    mtd: spi-nor: Add steps for testing locking support
+
+In order to simplify this procedure, and because it got very helpful
+during my testing/development, I want to propose additions to the
+debugfs output:
+
+    mtd: spi-nor: debugfs: Add locking support TODO: make the captures again
+
+Finally, I am providing an implementation for the complement (CMP)
+feature in order to allow finer control of the regions locked. This
+feature is for instance available on Winbond chips:
+
+    [core] mtd: spi-nor: swp: Add support for the complement feature
+    [doc]  mtd: spi-nor: Add steps for testing locking with CMP
+    [use]  mtd: spi-nor: winbond: Add CMP locking support
+
+Disclaimer: it was much less straightforward than I initially thought to
+get the CMP feature working correctly. I tested it with as much focus as
+I could, and I am improving the test coverage for the new cases, I am
+also providing extra test cases in the metadata of the commit (which do
+not make sense to test for chip additions, but may be sensible show when
+making core additions like this one), but honestly there are so many
+possibilities, I may still be missing corner cases. I hope this will
+anyway be helpful to others!
+
+All the other patches are misc improvements or style fixes which I faced
+and fixed during my development.
+
+Link: https://lore.kernel.org/linux-mtd/92e99a96-5582-48a5-a4f9-e9b33fcff171@linux.dev/
+
+Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+---
+Changes in v2:
+- Collect tags.
+- Add missing Fixes/Cc: stable tags.
+- Add a comment explaining why can_be_top && can_be_bottom is a specific
+  condition.
+- Fix commit logs following Michael Walle's reviews.
+- Amend the documentation following our discussion with Michael Walle as
+  well.
+- Cache the SR register for debugfs use.
+- Create a locked sector map file instead of dumping it as part of the
+  `params` file output.
+- Improved greatly the output of the map as suggested by Michael.
+- Add a patch fixing a duplicate dependency in Kconfig.
+- Add an important comment in the doc about the small 4kiB erase size
+  choice.
+- Add test runs for each and every chip for which the CMP feature is
+  added. This prove me that testing of each and every chip was needed,
+  as some of them seem to feature a broken BFPT table which does not
+  advertise a working 35h (Read CR) command.
+- Added a condition on which the CMP feature is enabled: RDCR must be
+  possible.
+- Link to v1: https://lore.kernel.org/r/20251114-winbond-v6-18-rc1-spi-nor-swp-v1-0-487bc7129931@bootlin.com
+
+---
+Miquel Raynal (27):
+      mtd: spi-nor: Drop duplicate Kconfig dependency
+      mtd: spi-nor: debugfs: Fix the flags list
+      mtd: spi-nor: swp: Improve locking user experience
+      mtd: spi-nor: Improve opcodes documentation
+      mtd: spi-nor: debugfs: Align variable access with the rest of the file
+      mtd: spi-nor: debugfs: Enhance output
+      mtd: spi-nor: swp: Explain the MEMLOCK ioctl implementation behaviour
+      mtd: spi-nor: swp: Clarify a comment
+      mtd: spi-nor: swp: Use a pointer for SR instead of a single byte
+      mtd: spi-nor: swp: Create a helper that writes SR, CR and checks
+      mtd: spi-nor: swp: Rename a mask
+      mtd: spi-nor: swp: Create a TB intermediate variable
+      mtd: spi-nor: swp: Create helpers for building the SR register
+      mtd: spi-nor: swp: Simplify checking the locked/unlocked range
+      mtd: spi-nor: swp: Cosmetic changes
+      mtd: spi-nor: Create a local SR cache
+      mtd: spi-nor: debugfs: Add locking support
+      mtd: spi-nor: debugfs: Add a locked sectors map
+      mtd: spi-nor: Add steps for testing locking support
+      mtd: spi-nor: swp: Add support for the complement feature
+      mtd: spi-nor: Add steps for testing locking with CMP
+      mtd: spi-nor: winbond: Add W25H512NWxxAM CMP locking support
+      mtd: spi-nor: winbond: Add W25H01NWxxAM CMP locking support
+      mtd: spi-nor: winbond: Add W25H02NWxxAM CMP locking support
+      mtd: spi-nor: winbond: Add W25H01NWxxIQ CMP locking support
+      mtd: spi-nor: winbond: Add W25Q01NWxxIM CMP locking support
+      mtd: spi-nor: winbond: Add W25Q02NWxxIM CMP locking support
+
+ Documentation/driver-api/mtd/spi-nor.rst | 164 ++++++++++++++
+ drivers/mtd/spi-nor/Kconfig              |   1 -
+ drivers/mtd/spi-nor/core.c               |  74 ++++++-
+ drivers/mtd/spi-nor/core.h               |  10 +
+ drivers/mtd/spi-nor/debugfs.c            |  63 +++++-
+ drivers/mtd/spi-nor/swp.c                | 359 ++++++++++++++++++++++++-------
+ drivers/mtd/spi-nor/winbond.c            |  41 +++-
+ include/linux/mtd/spi-nor.h              |   7 +-
+ 8 files changed, 631 insertions(+), 88 deletions(-)
+---
+base-commit: 99bb09369a9eaed5de0e647cc1aab215668ddc6f
+change-id: 20251114-winbond-v6-18-rc1-spi-nor-swp-865d36f4f695
+
+Best regards,
+-- 
+Miquel Raynal <miquel.raynal@bootlin.com>
+
 
