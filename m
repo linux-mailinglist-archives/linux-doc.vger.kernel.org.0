@@ -1,77 +1,77 @@
-Return-Path: <linux-doc+bounces-71397-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71399-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id A68D9D046C3
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:35:02 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40B9FD044EF
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:22:16 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id C853130F2C96
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:14:46 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id C293C301A39A
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:14:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 16A8D2C11CB;
-	Thu,  8 Jan 2026 16:14:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 113B5226D1E;
+	Thu,  8 Jan 2026 16:14:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HItajG15"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ihRIMq3v"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0865627602C
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:13:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE8CC2C3256
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:14:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767888840; cv=none; b=PnQXzOYKuOTfKYEaqYQmUd+7vrOEKjQfu/NrYFo+H7x1sByX2ZeSq8K6VISvQpqNzzeTMb1APAGL9S5Wuk1m10DZu24EbT0AletkgsO1/LCaP410h9IYRW+F31UVgSz3vbF5FDGjb81tnD5G43QF0pReopeYXPH5jtL4J9R67GE=
+	t=1767888843; cv=none; b=MWe7g9oXK/ileL5aIAr88I2fb757b/14iaaYFi4erPcS81r4++izPMjbBwGK5Om8uRtkjanJcGVSDP5TWfl+fxYBq7qHSfoR4+dxzftXuHPJZ4lhY6q/TGRWtVkpQY9jNrjv1EbMU1tDcM5V5ToybcYQVJFqW/4irHFIblAzmzo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767888840; c=relaxed/simple;
-	bh=XNoSHXE6e2aUIwE/0ArkG/YvVxeEgykpYvN+c0ou8BY=;
+	s=arc-20240116; t=1767888843; c=relaxed/simple;
+	bh=cOmSnsgcdbvOYtu2St56gpsAgDXWxM9Yngx2qOyAAwE=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=SnmOB6/l9i2zWg/pCL6+za8aa97xGHf6zLnu6Bvpr1pddFx5vLcIXLZqHNPyKLQZaUGpsxP1c5ayLk5NKDLTK7E0lnKQiDOr1G76Hw9aDnQja+bSILAJNii9ZBQU2e5VUJ3RuDFkpuElwj1z4Fc2itJ3ARcxHAbPAZ+lj0li000=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HItajG15; arc=none smtp.client-ip=209.85.221.43
+	 MIME-Version; b=HZK6ffBIZ0lqsGf0uFHzvqVP06h00Ocpo4LwHDW/aZTljx1P9eGHNBgo8FAPZeCwlsw5UPWYwtioYRVVGaInJ1ngBGksJ7mkCWGpRpAMlUfShKGcCVzmy1ZUdpp8YTTBxy34YWte3emhUuNt4T0LusR/papx9SzwbiadoMvCfYM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ihRIMq3v; arc=none smtp.client-ip=209.85.128.49
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-432d2c96215so581359f8f.3
-        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 08:13:57 -0800 (PST)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so36757415e9.2
+        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 08:14:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767888836; x=1768493636; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1767888839; x=1768493639; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=eRFZkMaDCVBKrn+74q+JiGh38/GRN50SmUXfwLk7rAk=;
-        b=HItajG156Ni5tUm6tWeNaTD/HWeACY76wcG1QV7dLbZ4dIOkZl1RXSI+oM/FdpEGss
-         3sztrQgLDUvAnXWdtr8EpfbcBfuuwv4iRJsL4iKTWvTPFHE9K3O2a0PlCVAL502VnmrY
-         7FjeEf5tw5OwdJkTUjEkUq5coRUMghCXLlu08gf2Y2GGZtEASYk+LV6APgwNfNBKBUCI
-         cZbKRIHHAV7Ez+/3adF2yJsESrQ/sHPI00XDGXfHdU1TV41oWl5YL0qOQuCiaiArWQ2I
-         TLZO1T0w7SRhTGqknI1RVeFryt4AJSgvJfAOzkQPY8aB/K/ICFRHfGYmijQ7SzSSJkiN
-         JkRg==
+        bh=WipEoNK94DApZWeo9c2zUcAvU6XpxC7k7BgCVDnOpZc=;
+        b=ihRIMq3vaQeAJPZEGCk/ETyUzSjlrwFWUWNF/Z9fpwAddGQ9/GbAlHXxkluKLNGkwu
+         GZ4lXbnr4Nczt4NfrUMrxcrOmpth65JZ1zmtjGPI5vhS9At2W6I1KRsl+tCjqXrWIu5f
+         eYzkXdkY2AyFpi5lJkPwEU33I37O6p9E7awHQSAAHZrWOeXgSDz0IKzeKZNTJlcLG3vE
+         YnM0ZT5vfoF7zVRXro8BvxjoB/8Ehs503DWKZq5d6ZfpU8R7SWhf1gb5YXgQBogAfh7w
+         wgsWAQR7HKKBDIkXtMQ422d88DLmfiR3/t9uxS6mysdI74sA2+fSrjYBoh8ZhQZ9Ewe0
+         g3AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767888836; x=1768493636;
+        d=1e100.net; s=20230601; t=1767888839; x=1768493639;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=eRFZkMaDCVBKrn+74q+JiGh38/GRN50SmUXfwLk7rAk=;
-        b=mSVDh10gaDrqHRKGcIbALHj8Cn6/vJ7w+yLq3WI/AWck2316zQK35xVycKFA6+M//+
-         tg9cjVH9lJ1XaN6rbqI+F3SdTOJNSzbkEsi0ZzcICcoc89lFQQw4ROg7pwISjJJjXHe8
-         LAnWaas7roaffdSr1jJrH5/npNOrT4kKqKvA/vunpcudyMDyvbpuvTtE7KR8KwehtMau
-         j/oompL7WIqNLVJQuiJrL2q8mwztEhRmeaUXOMNSiMtwYyPC0TjvZ2YCM9aCFcYiuELk
-         lxdksucai8+w+6QHGqJWbLLxZHNuujLJrMvbBYCzJQqcjXPWtO0HuVxdYq2mUavYlLbi
-         OTMQ==
-X-Forwarded-Encrypted: i=1; AJvYcCX5hWVtM2R9z587P0KlNjXBpHEnMMTWBzbZb6uxk+56rTqb/UBTIWK5kVxcxWF3wPls+dTV4Ud6PU4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzKUnd3eHIGAJCea3NOSxfTNglvcG5zKduSt4xPpT/2iHwBmcUZ
-	SN1Kw+YXhpOyWpgmbYQYU7mL2S2GGQMLBuRAGsMbdWhTOy3Lou7HebeD
-X-Gm-Gg: AY/fxX6DNeqoTh4q3ibg02z9fRvbQraH/zGEaRgJg9JjfQV7oSZ3kJhIkSBHk3nHQwe
-	4nzV1uBuY+FC9ofYIffAb4zsuiOqAPRU0d103LoXbJ9wORfOYOZPwLsmED6q5PbWedGGROoabbV
-	yrq2Fk6wjt7xbSCVtyf+dPR7bYPTr5IW9H2eP3grv92YoCuhQEH+4rvmd/NQMQQ0miVmd67Kt6X
-	MB7Mb4NWk8qdIPwVchNi9x4E7GX/mItVErVUKrbVg7dR9nYbR3dHZhVE2zuUKLNI42qFWox78Nz
-	auJdRrDzeqomydaBhfmEJCpf8W835OK6LA1lJ/9gVerLDrLH/HNj/OZt1LTL2EDqB2+BIzkMyiE
-	oRP1v7LsfOH2HGSx9rkpwDShuDEAnAtUPdO/ZDK0+CqUU6vx8SNE6jJI1nsVZwfgCz4csGG6IcI
-	94b6hLVVvTuiTHzGdUUduLd83o0phqveSzJSSiAnY=
-X-Google-Smtp-Source: AGHT+IF0Ai975hJRDpQBLluIpIUumFGCzYS6iiqlKInfsQuW47vwPpSGDsUl2BtUZZtsEQgTXV08Ow==
-X-Received: by 2002:a05:6000:2289:b0:430:b100:f591 with SMTP id ffacd0b85a97d-432c3794e96mr8391260f8f.28.1767888836253;
-        Thu, 08 Jan 2026 08:13:56 -0800 (PST)
+        bh=WipEoNK94DApZWeo9c2zUcAvU6XpxC7k7BgCVDnOpZc=;
+        b=rMJt40Y5AJ+AzFgK/AtS3PwhFe0otOwPHtpRRXuRzaU5hEtnkYM1k22KSTuIwDFoox
+         goJn8/2J7x6pnp1KWFY5MNKVg1A//Jt52e7N1CI1ImwMCgP+Qf1H6cD93IJnMKkhSFy6
+         MbTipxBHhFh0SXp8onRDviC8nvyKoRQc1Wdg07LugWJVWoDDxWproieTHKKiJlum6akE
+         2X6ES51X+NM5Goq93lwROZCJB2fpt5QrnpFk4R0M0NXxVLpaL/gXO4j/8CrpX8MFNC/e
+         5DYL4yS/9vEKVo2+JWgz9DxsTAH72dpP53PIChrOw4AUTR/VcsAmm8gL6kSTd6siOZU/
+         jcCQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUsCmIJOOssmjpDN6ZF4mkDjSOgZ01QPfpbcIIfibPaMuARDyA1tvvkT0X7SI/PjTTyTl6X/Vm030E=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxFYLZhMhpAuayG3tMlQixIsiPJAk8F80s/gPg8zfbMe0pqKwX6
+	hVAVKc79P+Js51kFiIY9XR/GiSbT+xx/kl//2OSwidHNdcQqVrPZHjoCgHD5lQ==
+X-Gm-Gg: AY/fxX6dDVtDCvCG5e5tGFxkWpI96/txruVqYHc9VEVj2nuPyCB+kJE7PmPoVei5KWU
+	a2DUtZCgBhel6OV+iflNiHwj8Qf1dSjR/VwaiKVxOlTweXHl6HBYybsx2KrNUPdvEJYnt+ox8e6
+	m7qAdG0mz4MDBjMVkqWSKkJzmqMFjHgRjxsjTfIRYCRD2Yk9hFNNoW+fxRL15eRbfRZROxcer6g
+	rprcBkQUbIvN1C2YhnrmsTOmgdVJE9FTkkpGs+DyVX9NNETXftPxlb9j7XhP92JgrZ4/qDo5arq
+	5ABWMYsrHuUX4eXsXthNNknnbXpwHq2Gfk7tylPEV1m+Gh1qVySmBgBUOano++qtxDbJSMd2JJM
+	qKdeViybkaeHuaUbsKxyLmsRfe0n/CTlQicXqSqcSyuYSVpDrXTjgsJ+H/t+JTkRqPlVmOPDQPj
+	BA+jCMna0KPVzXnPiA6NibnMYI3Gtn
+X-Google-Smtp-Source: AGHT+IF0j9wDsCSqQ5oYUYg6umpCnE8B0iFsp9H+p69KlZB8eLUvwY3Mknc/G+kFe44nAnlTQRKmyg==
+X-Received: by 2002:a05:6000:400f:b0:42f:bbc6:eda2 with SMTP id ffacd0b85a97d-432c379824emr8346278f8f.40.1767888838676;
+        Thu, 08 Jan 2026 08:13:58 -0800 (PST)
 Received: from imac.lan ([2a02:8010:60a0:0:8115:84ef:f979:bd53])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5edd51sm17140039f8f.29.2026.01.08.08.13.54
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5edd51sm17140039f8f.29.2026.01.08.08.13.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Jan 2026 08:13:55 -0800 (PST)
+        Thu, 08 Jan 2026 08:13:57 -0800 (PST)
 From: Donald Hunter <donald.hunter@gmail.com>
 To: Donald Hunter <donald.hunter@gmail.com>,
 	Jakub Kicinski <kuba@kernel.org>,
@@ -91,9 +91,9 @@ To: Donald Hunter <donald.hunter@gmail.com>,
 	Jacob Keller <jacob.e.keller@intel.com>,
 	Ruben Wauters <rubenru09@aol.com>,
 	linux-doc@vger.kernel.org
-Subject: [PATCH net-next v2 02/13] tools: ynl: fix pylint redefinition, encoding errors
-Date: Thu,  8 Jan 2026 16:13:28 +0000
-Message-ID: <20260108161339.29166-3-donald.hunter@gmail.com>
+Subject: [PATCH net-next v2 03/13] tools: ynl: fix pylint exception warnings
+Date: Thu,  8 Jan 2026 16:13:29 +0000
+Message-ID: <20260108161339.29166-4-donald.hunter@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260108161339.29166-1-donald.hunter@gmail.com>
 References: <20260108161339.29166-1-donald.hunter@gmail.com>
@@ -107,300 +107,324 @@ Content-Transfer-Encoding: 8bit
 
 Fix pylint warnings for:
 
-- invalid-name
-- arguments-renamed
-- redefined-outer-name
-- unspecified-encoding
-- consider-using-sys-exit
+- broad-exception-raised
+- broad-exception-caught
+- raise-missing-from
 
 Signed-off-by: Donald Hunter <donald.hunter@gmail.com>
 ---
- tools/net/ynl/pyynl/cli.py        | 44 ++++++++++++-------------
- tools/net/ynl/pyynl/lib/nlspec.py | 18 +++++------
- tools/net/ynl/pyynl/lib/ynl.py    | 54 +++++++++++++++----------------
- 3 files changed, 58 insertions(+), 58 deletions(-)
+ tools/net/ynl/pyynl/cli.py          | 10 ++---
+ tools/net/ynl/pyynl/lib/__init__.py |  8 ++--
+ tools/net/ynl/pyynl/lib/nlspec.py   | 11 ++++--
+ tools/net/ynl/pyynl/lib/ynl.py      | 59 +++++++++++++++++------------
+ 4 files changed, 52 insertions(+), 36 deletions(-)
 
 diff --git a/tools/net/ynl/pyynl/cli.py b/tools/net/ynl/pyynl/cli.py
-index 996c76be1403..37efa8c4f0e2 100755
+index 37efa8c4f0e2..5fee45e48bbf 100755
 --- a/tools/net/ynl/pyynl/cli.py
 +++ b/tools/net/ynl/pyynl/cli.py
-@@ -17,8 +17,8 @@ import textwrap
+@@ -15,7 +15,7 @@ import textwrap
+ 
+ # pylint: disable=no-name-in-module,wrong-import-position
  sys.path.append(pathlib.Path(__file__).resolve().parent.as_posix())
- from lib import YnlFamily, Netlink, NlError, SpecFamily
+-from lib import YnlFamily, Netlink, NlError, SpecFamily
++from lib import YnlFamily, Netlink, NlError, SpecFamily, SpecException, YnlException
  
--sys_schema_dir='/usr/share/ynl'
--relative_schema_dir='../../../../Documentation/netlink'
-+SYS_SCHEMA_DIR='/usr/share/ynl'
-+RELATIVE_SCHEMA_DIR='../../../../Documentation/netlink'
- 
- def schema_dir():
-     """
-@@ -26,32 +26,32 @@ def schema_dir():
-     system schema directory.
-     """
-     script_dir = os.path.dirname(os.path.abspath(__file__))
--    schema_dir = os.path.abspath(f"{script_dir}/{relative_schema_dir}")
--    if not os.path.isdir(schema_dir):
--        schema_dir = sys_schema_dir
--    if not os.path.isdir(schema_dir):
--        raise Exception(f"Schema directory {schema_dir} does not exist")
--    return schema_dir
-+    schema_dir_ = os.path.abspath(f"{script_dir}/{RELATIVE_SCHEMA_DIR}")
-+    if not os.path.isdir(schema_dir_):
-+        schema_dir_ = SYS_SCHEMA_DIR
-+    if not os.path.isdir(schema_dir_):
-+        raise Exception(f"Schema directory {schema_dir_} does not exist")
-+    return schema_dir_
+ SYS_SCHEMA_DIR='/usr/share/ynl'
+ RELATIVE_SCHEMA_DIR='../../../../Documentation/netlink'
+@@ -30,7 +30,7 @@ def schema_dir():
+     if not os.path.isdir(schema_dir_):
+         schema_dir_ = SYS_SCHEMA_DIR
+     if not os.path.isdir(schema_dir_):
+-        raise Exception(f"Schema directory {schema_dir_} does not exist")
++        raise YnlException(f"Schema directory {schema_dir_} does not exist")
+     return schema_dir_
  
  def spec_dir():
+@@ -40,7 +40,7 @@ def spec_dir():
      """
-     Return the effective spec directory, relative to the effective
-     schema directory.
-     """
--    spec_dir = schema_dir() + '/specs'
--    if not os.path.isdir(spec_dir):
--        raise Exception(f"Spec directory {spec_dir} does not exist")
--    return spec_dir
-+    spec_dir_ = schema_dir() + '/specs'
-+    if not os.path.isdir(spec_dir_):
-+        raise Exception(f"Spec directory {spec_dir_} does not exist")
-+    return spec_dir_
+     spec_dir_ = schema_dir() + '/specs'
+     if not os.path.isdir(spec_dir_):
+-        raise Exception(f"Spec directory {spec_dir_} does not exist")
++        raise YnlException(f"Spec directory {spec_dir_} does not exist")
+     return spec_dir_
  
  
- class YnlEncoder(json.JSONEncoder):
-     """A custom encoder for emitting JSON with ynl-specific instance types"""
--    def default(self, obj):
--        if isinstance(obj, bytes):
--            return bytes.hex(obj)
--        if isinstance(obj, set):
--            return list(obj)
--        return json.JSONEncoder.default(self, obj)
-+    def default(self, o):
-+        if isinstance(o, bytes):
-+            return bytes.hex(o)
-+        if isinstance(o, set):
-+            return list(o)
-+        return json.JSONEncoder.default(self, o)
+@@ -189,12 +189,12 @@ def main():
+     else:
+         spec = args.spec
+     if not os.path.isfile(spec):
+-        raise Exception(f"Spec file {spec} does not exist")
++        raise YnlException(f"Spec file {spec} does not exist")
  
- 
- def print_attr_list(ynl, attr_names, attr_set, indent=2):
-@@ -196,11 +196,11 @@ def main():
+     if args.validate:
+         try:
              SpecFamily(spec, args.schema)
-         except Exception as error:
+-        except Exception as error:
++        except SpecException as error:
              print(error)
--            exit(1)
-+            sys.exit(1)
+             sys.exit(1)
          return
+diff --git a/tools/net/ynl/pyynl/lib/__init__.py b/tools/net/ynl/pyynl/lib/__init__.py
+index c40dd788fe8a..33a96155fb3b 100644
+--- a/tools/net/ynl/pyynl/lib/__init__.py
++++ b/tools/net/ynl/pyynl/lib/__init__.py
+@@ -3,11 +3,13 @@
+ """ YNL library """
  
-     if args.family: # set behaviour when using installed specs
--        if args.schema is None and spec.startswith(sys_schema_dir):
-+        if args.schema is None and spec.startswith(SYS_SCHEMA_DIR):
-             args.schema = '' # disable schema validation when installed
-         if args.process_unknown is None:
-             args.process_unknown = True
-@@ -224,7 +224,7 @@ def main():
-         op = ynl.msgs.get(args.list_attrs)
-         if not op:
-             print(f'Operation {args.list_attrs} not found')
--            exit(1)
-+            sys.exit(1)
+ from .nlspec import SpecAttr, SpecAttrSet, SpecEnumEntry, SpecEnumSet, \
+-    SpecFamily, SpecOperation, SpecSubMessage, SpecSubMessageFormat
+-from .ynl import YnlFamily, Netlink, NlError
++    SpecFamily, SpecOperation, SpecSubMessage, SpecSubMessageFormat, \
++    SpecException
++from .ynl import YnlFamily, Netlink, NlError, YnlException
  
-         print(f'Operation: {op.name}')
-         print(op.yaml['doc'])
-@@ -259,7 +259,7 @@ def main():
-                 output(msg)
-     except NlError as e:
-         print(e)
--        exit(1)
-+        sys.exit(1)
-     except KeyboardInterrupt:
-         pass
-     except BrokenPipeError:
+ from .doc_generator import YnlDocGenerator
+ 
+ __all__ = ["SpecAttr", "SpecAttrSet", "SpecEnumEntry", "SpecEnumSet",
+            "SpecFamily", "SpecOperation", "SpecSubMessage", "SpecSubMessageFormat",
+-           "YnlFamily", "Netlink", "NlError", "YnlDocGenerator"]
++           "SpecException",
++           "YnlFamily", "Netlink", "NlError", "YnlDocGenerator", "YnlException"]
 diff --git a/tools/net/ynl/pyynl/lib/nlspec.py b/tools/net/ynl/pyynl/lib/nlspec.py
-index 2ffeccf0b99b..c3113952c417 100644
+index c3113952c417..a35f827f09e3 100644
 --- a/tools/net/ynl/pyynl/lib/nlspec.py
 +++ b/tools/net/ynl/pyynl/lib/nlspec.py
-@@ -10,7 +10,7 @@ specifications.
- import collections
- import importlib
- import os
--import yaml
-+import yaml as pyyaml
+@@ -17,6 +17,11 @@ import yaml as pyyaml
+ jsonschema = None
  
  
- # To be loaded dynamically as needed
-@@ -313,11 +313,11 @@ class SpecSubMessage(SpecElement):
++class SpecException(Exception):
++    """Netlink spec exception.
++    """
++
++
+ class SpecElement:
+     """Netlink spec element.
  
-         self.formats = collections.OrderedDict()
-         for elem in self.yaml['formats']:
--            format = self.new_format(family, elem)
--            self.formats[format.value] = format
-+            msg_format = self.new_format(family, elem)
-+            self.formats[msg_format.value] = msg_format
+@@ -385,7 +390,7 @@ class SpecOperation(SpecElement):
+         elif self.is_resv:
+             attr_set_name = ''
+         else:
+-            raise Exception(f"Can't resolve attribute set for op '{self.name}'")
++            raise SpecException(f"Can't resolve attribute set for op '{self.name}'")
+         if attr_set_name:
+             self.attr_set = self.family.attr_sets[attr_set_name]
  
--    def new_format(self, family, format):
--        return SpecSubMessageFormat(family, format)
-+    def new_format(self, family, msg_format):
-+        return SpecSubMessageFormat(family, msg_format)
- 
- 
- class SpecSubMessageFormat(SpecElement):
-@@ -436,7 +436,7 @@ class SpecFamily(SpecElement):
-         kernel_family   dict of kernel family attributes
-     """
-     def __init__(self, spec_path, schema_path=None, exclude_ops=None):
--        with open(spec_path, "r") as stream:
-+        with open(spec_path, "r", encoding='utf-8') as stream:
+@@ -440,7 +445,7 @@ class SpecFamily(SpecElement):
              prefix = '# SPDX-License-Identifier: '
              first = stream.readline().strip()
              if not first.startswith(prefix):
-@@ -444,7 +444,7 @@ class SpecFamily(SpecElement):
+-                raise Exception('SPDX license tag required in the spec')
++                raise SpecException('SPDX license tag required in the spec')
              self.license = first[len(prefix):]
  
              stream.seek(0)
--            spec = yaml.safe_load(stream)
-+            spec = pyyaml.safe_load(stream)
+@@ -555,7 +560,7 @@ class SpecFamily(SpecElement):
+                 req_val_next = req_val + 1
+                 rsp_val_next = rsp_val + rsp_inc
+             else:
+-                raise Exception("Can't parse directional ops")
++                raise SpecException("Can't parse directional ops")
  
-         self._resolution_list = []
- 
-@@ -460,8 +460,8 @@ class SpecFamily(SpecElement):
-         if schema_path:
-             global jsonschema
- 
--            with open(schema_path, "r") as stream:
--                schema = yaml.safe_load(stream)
-+            with open(schema_path, "r", encoding='utf-8') as stream:
-+                schema = pyyaml.safe_load(stream)
- 
-             if jsonschema is None:
-                 jsonschema = importlib.import_module("jsonschema")
+             if req_val == req_val_next:
+                 req_val = None
 diff --git a/tools/net/ynl/pyynl/lib/ynl.py b/tools/net/ynl/pyynl/lib/ynl.py
-index 27169ff8dafc..78579e495351 100644
+index 78579e495351..6e39618e5598 100644
 --- a/tools/net/ynl/pyynl/lib/ynl.py
 +++ b/tools/net/ynl/pyynl/lib/ynl.py
-@@ -155,22 +155,22 @@ class NlAttr:
+@@ -32,6 +32,10 @@ from .nlspec import SpecFamily
+ #
  
-     @classmethod
-     def get_format(cls, attr_type, byte_order=None):
--        format = cls.type_formats[attr_type]
-+        format_ = cls.type_formats[attr_type]
-         if byte_order:
--            return format.big if byte_order == "big-endian" \
--                else format.little
--        return format.native
-+            return format_.big if byte_order == "big-endian" \
-+                else format_.little
-+        return format_.native
  
-     def as_scalar(self, attr_type, byte_order=None):
--        format = self.get_format(attr_type, byte_order)
--        return format.unpack(self.raw)[0]
-+        format_ = self.get_format(attr_type, byte_order)
-+        return format_.unpack(self.raw)[0]
++class YnlException(Exception):
++    pass
++
++
+ # pylint: disable=too-few-public-methods
+ class Netlink:
+     # Netlink socket
+@@ -167,7 +171,7 @@ class NlAttr:
  
      def as_auto_scalar(self, attr_type, byte_order=None):
          if len(self.raw) != 4 and len(self.raw) != 8:
-             raise Exception(f"Auto-scalar len payload be 4 or 8 bytes, got {len(self.raw)}")
+-            raise Exception(f"Auto-scalar len payload be 4 or 8 bytes, got {len(self.raw)}")
++            raise YnlException(f"Auto-scalar len payload be 4 or 8 bytes, got {len(self.raw)}")
          real_type = attr_type[0] + str(len(self.raw) * 8)
--        format = self.get_format(real_type, byte_order)
--        return format.unpack(self.raw)[0]
-+        format_ = self.get_format(real_type, byte_order)
-+        return format_.unpack(self.raw)[0]
+         format_ = self.get_format(real_type, byte_order)
+         return format_.unpack(self.raw)[0]
+@@ -425,7 +429,7 @@ class NetlinkProtocol:
  
-     def as_strz(self):
-         return self.raw.decode('ascii')[:-1]
-@@ -178,9 +178,9 @@ class NlAttr:
-     def as_bin(self):
-         return self.raw
+     def get_mcast_id(self, mcast_name, mcast_groups):
+         if mcast_name not in mcast_groups:
+-            raise Exception(f'Multicast group "{mcast_name}" not present in the spec')
++            raise YnlException(f'Multicast group "{mcast_name}" not present in the spec')
+         return mcast_groups[mcast_name].value
  
--    def as_c_array(self, type):
--        format = self.get_format(type)
--        return [ x[0] for x in format.iter_unpack(self.raw) ]
-+    def as_c_array(self, c_type):
-+        format_ = self.get_format(c_type)
-+        return [ x[0] for x in format_.iter_unpack(self.raw) ]
+     def msghdr_size(self):
+@@ -453,7 +457,7 @@ class GenlProtocol(NetlinkProtocol):
  
-     def __repr__(self):
-         return f"[type:{self.type} len:{self._len}] {self.raw}"
-@@ -256,8 +256,8 @@ class NlMsg:
-         policy = {}
-         for attr in NlAttrs(raw):
-             if attr.type == Netlink.NL_POLICY_TYPE_ATTR_TYPE:
--                type = attr.as_scalar('u32')
--                policy['type'] = Netlink.AttrType(type).name
-+                type_ = attr.as_scalar('u32')
-+                policy['type'] = Netlink.AttrType(type_).name
-             elif attr.type == Netlink.NL_POLICY_TYPE_ATTR_MIN_VALUE_S:
-                 policy['min-value'] = attr.as_scalar('s64')
-             elif attr.type == Netlink.NL_POLICY_TYPE_ATTR_MAX_VALUE_S:
-@@ -612,8 +612,8 @@ class YnlFamily(SpecFamily):
-             elif isinstance(value, dict) and attr.struct_name:
-                 attr_payload = self._encode_struct(attr.struct_name, value)
-             elif isinstance(value, list) and attr.sub_type in NlAttr.type_formats:
--                format = NlAttr.get_format(attr.sub_type)
--                attr_payload = b''.join([format.pack(x) for x in value])
-+                format_ = NlAttr.get_format(attr.sub_type)
-+                attr_payload = b''.join([format_.pack(x) for x in value])
+     def get_mcast_id(self, mcast_name, mcast_groups):
+         if mcast_name not in self.genl_family['mcast']:
+-            raise Exception(f'Multicast group "{mcast_name}" not present in the family')
++            raise YnlException(f'Multicast group "{mcast_name}" not present in the family')
+         return self.genl_family['mcast'][mcast_name]
+ 
+     def msghdr_size(self):
+@@ -475,9 +479,9 @@ class SpaceAttrs:
+                 if name in scope.values:
+                     return scope.values[name]
+                 spec_name = scope.spec.yaml['name']
+-                raise Exception(
++                raise YnlException(
+                     f"No value for '{name}' in attribute space '{spec_name}'")
+-        raise Exception(f"Attribute '{name}' not defined in any attribute-set")
++        raise YnlException(f"Attribute '{name}' not defined in any attribute-set")
+ 
+ 
+ #
+@@ -499,8 +503,8 @@ class YnlFamily(SpecFamily):
+                                                self.yaml['protonum'])
              else:
-                 raise Exception(f'Unknown type for binary attribute, value: {value}')
+                 self.nlproto = GenlProtocol(self.yaml['name'])
+-        except KeyError:
+-            raise Exception(f"Family '{self.yaml['name']}' not supported by the kernel")
++        except KeyError as err:
++            raise YnlException(f"Family '{self.yaml['name']}' not supported by the kernel") from err
+ 
+         self._recv_dbg = False
+         # Note that netlink will use conservative (min) message size for
+@@ -573,8 +577,8 @@ class YnlFamily(SpecFamily):
+     def _add_attr(self, space, name, value, search_attrs):
+         try:
+             attr = self.attr_sets[space][name]
+-        except KeyError:
+-            raise Exception(f"Space '{space}' has no attribute '{name}'")
++        except KeyError as err:
++            raise YnlException(f"Space '{space}' has no attribute '{name}'") from err
+         nl_type = attr.value
+ 
+         if attr.is_multi and isinstance(value, list):
+@@ -615,7 +619,7 @@ class YnlFamily(SpecFamily):
+                 format_ = NlAttr.get_format(attr.sub_type)
+                 attr_payload = b''.join([format_.pack(x) for x in value])
+             else:
+-                raise Exception(f'Unknown type for binary attribute, value: {value}')
++                raise YnlException(f'Unknown type for binary attribute, value: {value}')
          elif attr['type'] in NlAttr.type_formats or attr.is_auto_scalar:
-@@ -622,8 +622,8 @@ class YnlFamily(SpecFamily):
-                 attr_type = attr["type"][0] + ('32' if scalar.bit_length() <= 32 else '64')
-             else:
-                 attr_type = attr["type"]
--            format = NlAttr.get_format(attr_type, attr.byte_order)
--            attr_payload = format.pack(scalar)
-+            format_ = NlAttr.get_format(attr_type, attr.byte_order)
-+            attr_payload = format_.pack(scalar)
-         elif attr['type'] in "bitfield32":
-             scalar_value = self._get_scalar(attr, value["value"])
-             scalar_selector = self._get_scalar(attr, value["selector"])
-@@ -915,8 +915,8 @@ class YnlFamily(SpecFamily):
-                     else:
-                         size += m.len
+             scalar = self._get_scalar(attr, value)
+             if attr.is_auto_scalar:
+@@ -641,9 +645,9 @@ class YnlFamily(SpecFamily):
+                         attr_payload += self._add_attr(msg_format.attr_set,
+                                                        subname, subvalue, sub_attrs)
                  else:
--                    format = NlAttr.get_format(m.type, m.byte_order)
--                    size += format.size
-+                    format_ = NlAttr.get_format(m.type, m.byte_order)
-+                    size += format_.size
-             return size
+-                    raise Exception(f"Unknown attribute-set '{msg_format.attr_set}'")
++                    raise YnlException(f"Unknown attribute-set '{msg_format.attr_set}'")
          else:
-             return 0
-@@ -931,17 +931,17 @@ class YnlFamily(SpecFamily):
-                 offset += m.len
-             elif m.type == 'binary':
-                 if m.struct:
--                    len = self._struct_size(m.struct)
--                    value = self._decode_struct(data[offset : offset + len],
-+                    len_ = self._struct_size(m.struct)
-+                    value = self._decode_struct(data[offset : offset + len_],
-                                                 m.struct)
--                    offset += len
-+                    offset += len_
-                 else:
-                     value = data[offset : offset + m.len]
-                     offset += m.len
-             else:
--                format = NlAttr.get_format(m.type, m.byte_order)
--                [ value ] = format.unpack_from(data, offset)
--                offset += format.size
-+                format_ = NlAttr.get_format(m.type, m.byte_order)
-+                [ value ] = format_.unpack_from(data, offset)
-+                offset += format_.size
-             if value is not None:
-                 if m.enum:
-                     value = self._decode_enum(value, m)
-@@ -970,8 +970,8 @@ class YnlFamily(SpecFamily):
-             else:
-                 if value is None:
-                     value = 0
--                format = NlAttr.get_format(m.type, m.byte_order)
--                attr_payload += format.pack(value)
-+                format_ = NlAttr.get_format(m.type, m.byte_order)
-+                attr_payload += format_.pack(value)
-         return attr_payload
+-            raise Exception(f'Unknown type at {space} {name} {value} {attr["type"]}')
++            raise YnlException(f'Unknown type at {space} {name} {value} {attr["type"]}')
  
-     def _formatted_string(self, raw, display_hint):
+         return self._add_attr_raw(nl_type, attr_payload)
+ 
+@@ -730,7 +734,7 @@ class YnlFamily(SpecFamily):
+                     subattr = self._formatted_string(subattr, attr_spec.display_hint)
+                 decoded.append(subattr)
+             else:
+-                raise Exception(f'Unknown {attr_spec["sub-type"]} with name {attr_spec["name"]}')
++                raise YnlException(f'Unknown {attr_spec["sub-type"]} with name {attr_spec["name"]}')
+         return decoded
+ 
+     def _decode_nest_type_value(self, attr, attr_spec):
+@@ -767,13 +771,13 @@ class YnlFamily(SpecFamily):
+     def _resolve_selector(self, attr_spec, search_attrs):
+         sub_msg = attr_spec.sub_message
+         if sub_msg not in self.sub_msgs:
+-            raise Exception(f"No sub-message spec named {sub_msg} for {attr_spec.name}")
++            raise YnlException(f"No sub-message spec named {sub_msg} for {attr_spec.name}")
+         sub_msg_spec = self.sub_msgs[sub_msg]
+ 
+         selector = attr_spec.selector
+         value = search_attrs.lookup(selector)
+         if value not in sub_msg_spec.formats:
+-            raise Exception(f"No message format for '{value}' in sub-message spec '{sub_msg}'")
++            raise YnlException(f"No message format for '{value}' in sub-message spec '{sub_msg}'")
+ 
+         spec = sub_msg_spec.formats[value]
+         return spec, value
+@@ -790,7 +794,8 @@ class YnlFamily(SpecFamily):
+                 subdict = self._decode(NlAttrs(attr.raw, offset), msg_format.attr_set)
+                 decoded.update(subdict)
+             else:
+-                raise Exception(f"Unknown attribute-set '{msg_format.attr_set}' when decoding '{attr_spec.name}'")
++                raise YnlException(f"Unknown attribute-set '{msg_format.attr_set}' "
++                                   f"when decoding '{attr_spec.name}'")
+         return decoded
+ 
+     # pylint: disable=too-many-statements
+@@ -803,9 +808,10 @@ class YnlFamily(SpecFamily):
+         for attr in attrs:
+             try:
+                 attr_spec = attr_space.attrs_by_val[attr.type]
+-            except (KeyError, UnboundLocalError):
++            except (KeyError, UnboundLocalError) as err:
+                 if not self.process_unknown:
+-                    raise Exception(f"Space '{space}' has no attribute with value '{attr.type}'")
++                    raise YnlException(f"Space '{space}' has no attribute "
++                                       f"with value '{attr.type}'") from err
+                 attr_name = f"UnknownAttr({attr.type})"
+                 self._rsp_add(rsp, attr_name, None, self._decode_unknown(attr))
+                 continue
+@@ -844,7 +850,8 @@ class YnlFamily(SpecFamily):
+                     decoded = self._decode_nest_type_value(attr, attr_spec)
+                 else:
+                     if not self.process_unknown:
+-                        raise Exception(f'Unknown {attr_spec["type"]} with name {attr_spec["name"]}')
++                        raise YnlException(f'Unknown {attr_spec["type"]} '
++                                           f'with name {attr_spec["name"]}')
+                     decoded = self._decode_unknown(attr)
+ 
+                 self._rsp_add(rsp, attr_spec["name"], attr_spec.is_multi, decoded)
+@@ -859,8 +866,9 @@ class YnlFamily(SpecFamily):
+         for attr in attrs:
+             try:
+                 attr_spec = attr_set.attrs_by_val[attr.type]
+-            except KeyError:
+-                raise Exception(f"Space '{attr_set.name}' has no attribute with value '{attr.type}'")
++            except KeyError as err:
++                raise YnlException(
++                    f"Space '{attr_set.name}' has no attribute with value '{attr.type}'") from err
+             if offset > target:
+                 break
+             if offset == target:
+@@ -877,11 +885,12 @@ class YnlFamily(SpecFamily):
+             elif attr_spec['type'] == 'sub-message':
+                 msg_format, value = self._resolve_selector(attr_spec, search_attrs)
+                 if msg_format is None:
+-                    raise Exception(f"Can't resolve sub-message of {attr_spec['name']} for extack")
++                    raise YnlException(f"Can't resolve sub-message of "
++                                       f"{attr_spec['name']} for extack")
+                 sub_attrs = self.attr_sets[msg_format.attr_set]
+                 pathname += f"({value})"
+             else:
+-                raise Exception(f"Can't dive into {attr.type} ({attr_spec['name']}) for extack")
++                raise YnlException(f"Can't dive into {attr.type} ({attr_spec['name']}) for extack")
+             offset += 4
+             subpath = self._decode_extack_path(NlAttrs(attr.raw), sub_attrs,
+                                                offset, target, search_attrs)
+@@ -1008,11 +1017,11 @@ class YnlFamily(SpecFamily):
+                 mac_bytes = [int(x, 16) for x in string.split(':')]
+             else:
+                 if len(string) % 2 != 0:
+-                    raise Exception(f"Invalid MAC address format: {string}")
++                    raise YnlException(f"Invalid MAC address format: {string}")
+                 mac_bytes = [int(string[i:i+2], 16) for i in range(0, len(string), 2)]
+             raw = bytes(mac_bytes)
+         else:
+-            raise Exception(f"Display hint '{attr_spec.display_hint}' not implemented"
++            raise YnlException(f"Display hint '{attr_spec.display_hint}' not implemented"
+                             f" when parsing '{attr_spec['name']}'")
+         return raw
+ 
 -- 
 2.52.0
 
