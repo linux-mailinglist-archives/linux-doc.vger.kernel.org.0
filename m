@@ -1,144 +1,152 @@
-Return-Path: <linux-doc+bounces-71308-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71320-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7451DD03021
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 14:27:14 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E4401D033DC
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 15:11:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 3B5213004EC1
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 13:27:11 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id DFD7631C4958
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 13:49:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B84154A94EC;
-	Thu,  8 Jan 2026 11:05:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BD1CB497B00;
+	Thu,  8 Jan 2026 12:05:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KS0hLR2w"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="TeCBiu6K";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="P0EB5tUq"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBC114A94C9;
-	Thu,  8 Jan 2026 11:05:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E000498481
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 12:05:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767870306; cv=none; b=fBY23nSoZyqliU/6zlzlL59qYXmkx4p0Y24fjl2L4cMUc1NlGyG0My5vwA3iG6/+VDqKBhee079/dcKYDoc7NXCNVoC8LC4kYZeiGO36r9Zvz//cpxdtApdywtwr4LJIz8jzKcZAVZmxTGGuNMjFc2CzZvESf8qjVO1iIOpUego=
+	t=1767873912; cv=none; b=RFfakxf0InAqUzUnWQMdhjOY2Vp2BycpZj3V9SGJmR/gjaJX8JzDPc2Af4ccgehria3hxSF9kYNPoni7XehoNY5yG+CzvVs+rmvjpccB/QFsdhXOgtXEJkmFXHs/nh6Tj6N0dUWTaoisndS/jOfox+VqlXYficWCMC0OfOglqWM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767870306; c=relaxed/simple;
-	bh=23JVHZ0/2OEkjIcgisBJ7Un4pP/D/Hxa/fPIdJ7wvf0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=P4ZZTwdapGhU2J5ufR5SxrDPjFw2jJPp+91ABW5Ti/YEaXS4PtK7MP2j2/OmEVCH++A9/CAqQqK1/lOY/0c0eotpvC1FRnZbL7op1kwGTCT5nVLc+yaiHwC9g6N+dhJRp825j8Nd8blZFB+c4fDB7/uIUOVGcEZfJjNBzvSNjoo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KS0hLR2w; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 47E4FC116C6;
-	Thu,  8 Jan 2026 11:05:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767870305;
-	bh=23JVHZ0/2OEkjIcgisBJ7Un4pP/D/Hxa/fPIdJ7wvf0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=KS0hLR2wWf5XDAL/q5h13/NVyPKY+F5BKNCq8VYqmgn9mw+Hzh/n/YfYT3j65x547
-	 IpFCFrHDp6ubyOZ0KO9R216UX282QLvH7e3UtvxK2APm6IApcPxASfk1nxK5YfV0ZD
-	 /3XiyY1rDIaE/5ILRjvFBwVg1L6mpyjV4XuftLBOGF70VwQ2tDieYm1Qb3rZ8iuTrO
-	 1IkJKD/kuArIZZLIVebbz/YLmejLcO5YDLwErGEa2rBuVEqBy53iW+f84neIyu9cQi
-	 na2qNC+a181hIYgD3wEq7S95TVV9Ahuv4JYbcRNkkMF384DzwMBTGCORltruyojduY
-	 EE605jvqCgrAw==
-Received: from mchehab by mail.kernel.org with local (Exim 4.99)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vdnp9-000000032lG-1LGD;
-	Thu, 08 Jan 2026 12:05:03 +0100
-Date: Thu, 8 Jan 2026 12:05:03 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Changbin Du <changbin.du@huawei.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Subject: Re: [PATCH v2] tools: jobserver: Prevent deadlock caused by
- incorrect jobserver configuration and enhance error reporting
-Message-ID: <aV-ON47dz0aa-wzu@foz.lan>
-References: <20260108100403.2888782-1-changbin.du@huawei.com>
+	s=arc-20240116; t=1767873912; c=relaxed/simple;
+	bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=OSG2w5gyAMYXfrU0nTb+tPUpuuIilWuHkSfc0UamW0NojHmRGhlv3vLcsYphAZqwi2K4gINSaFg+GMcqtvN0eok52rN5XIURVQGRyGnb65w+TEagJbwpOHJDkdqFaOk9UHWo2gRxa5/8VJe6w6k0Y0HOXfHHG8zg0YBW3DX/1EA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=TeCBiu6K; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=P0EB5tUq; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1767873907;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
+	b=TeCBiu6KuT+jvEFoO6KnAOfRwVFn3oXgMIIf2STTuffzattE39Dkj4kXepVd8hTPwS5ADJ
+	mOWviDjRMNaAOEoAKhoCefY4Z5y0vMDwSmefLCLdMgmjR+4fI0iEBXCv8lPuM/io//DVUZ
+	NpoT+gHv/g3iCnPzIqVCXiBWb3y+Kyc=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-564-XVJ05EpZPx23wfyv6PAAZg-1; Thu, 08 Jan 2026 07:05:05 -0500
+X-MC-Unique: XVJ05EpZPx23wfyv6PAAZg-1
+X-Mimecast-MFC-AGG-ID: XVJ05EpZPx23wfyv6PAAZg_1767873904
+Received: by mail-wm1-f70.google.com with SMTP id 5b1f17b1804b1-477771366cbso26861715e9.0
+        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 04:05:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1767873904; x=1768478704; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
+        b=P0EB5tUq4gEPbQC8HFtAZIwPhtjivVywhg5mmDspsKEbQaSC/gQpJyyKK5wFGyWw2L
+         07vwoad/3AOiZ2lVzMvR1pO1Neja3nunwK4QhIrY5bACcofo+d9Eyxn2fmH8i0rHhtr2
+         +gN9vbo0QEtstBCtwY0IhqDmtogQGYds4puZcBDlzJKio7HOz6i6sZkjbKiuZb2cCn+L
+         IVqVsjsrelFzg4txGT8ePwrN3yjM12kkjuzGqDrAyuvN15oRPreHd1yctO+wzW9dZk2k
+         pF3behY8G/tY4QmNO+DLPOvJMkczbM3RChQmEVECJPx63iSzS1diTlQOkRMT4uhlOCJw
+         M2IQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767873904; x=1768478704;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Flh5gm/FG6f2h7+d4LlYOxc+wsoA1WupGU+z5tvQXn4=;
+        b=jWUnl2Avb+NY0TFCPMktGJokwz7nvEYYgJy0gmcwIJLmpcix6lfaBhchLxQZVY7y9z
+         ZOQnePFG/2BbITU9hAQtY2c44G+NAR9Sy8ob/wYj67oq1M0cn+IiDO/LvxTMmcvbkfjq
+         pVEp0Sjs2n+Yap9QhWwY4qY3LfBy88FJmpb2ppZ/STEd/dJhgh8bSUtv+pfsF6B8mPdY
+         v3hfBVe8zpE43hKYFhoQixhmPWaCKyvcB/HM19iWGxnluOCNXrbxpFI/Cfvpuh7lXmWt
+         UgoUbb0+x40ONjTp9ci6+p2PcW7Lt4P7RBwNapeKTfKNI5aAHPHRFwEt1LarYjVpyhs5
+         EAkg==
+X-Forwarded-Encrypted: i=1; AJvYcCV3SwKDhr3l0D40LDH+cNUY4mqW/VgJ9afem3tBwZJN3Tp8j/YhcPwGS/7/q33cXFnGkClUCZEFq/w=@vger.kernel.org
+X-Gm-Message-State: AOJu0YweHrgTSCVYsRcLwzDI4e2ksSrNGonEtcDYlCu5OxOs9gVsYyIL
+	5yDybRtTyGQYtOavt9xy1nB/o2hoE34/h7hoiycIM4xM7+GTfIB7IuiN0iceFWcMbOxJ4ixEWwe
+	evRU3xECD6RRNflcj7TQDUoe0q25nUInkazZgzwT5BN51uudry/BgXJa19yVMTw==
+X-Gm-Gg: AY/fxX4XLucL7AnymH8ptloSV0DgXzf26fRlOwYGyE0tb/yLCDq7os6mj7fu0Ifau3g
+	HbMBcOMB4GWoJBiS+58s0xnT61C7p86qvB+2qfDdpS/S/S9ZyHbdgIe6zJmiRdUCUMMZtcy0OHU
+	Xphu1zDBXkoOdwNgMxkQPPRUuCiR7zZhkxoOe4UzlWcxk03Mz/hO/MbwhnoQQF91o+/wKDtDgR0
+	iqSx2g7EEEi+XERQ+unsGNdiYG+gnNSNUDHinxUAOZYuBNYhU/gFt/c58vvt2vBQBbPwha4B/YE
+	gAOrYGBfUVWnPJ8DArLROLv4h2pMkyHo1P3aHS8hsMQ2GnABAsxCpTlcTKA0rMOm2Hm4z6uMbMC
+	zl7asckWkPz5R/g==
+X-Received: by 2002:a05:600c:4447:b0:477:3e0b:c0e3 with SMTP id 5b1f17b1804b1-47d84b3b8b9mr66671925e9.32.1767873903878;
+        Thu, 08 Jan 2026 04:05:03 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGyd3EobR8+CtqNLr1SJNq4aJtqIFnG4hdPC4+x+J4mPj7mFR2jjmxPx+hGX2qRU6Jn66CAIQ==
+X-Received: by 2002:a05:600c:4447:b0:477:3e0b:c0e3 with SMTP id 5b1f17b1804b1-47d84b3b8b9mr66671435e9.32.1767873903307;
+        Thu, 08 Jan 2026 04:05:03 -0800 (PST)
+Received: from [192.168.88.32] ([212.105.149.145])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d8662ffaasm36179535e9.6.2026.01.08.04.05.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 08 Jan 2026 04:05:02 -0800 (PST)
+Message-ID: <9d64dd7e-273b-4627-ba0c-a3c8aab2dcb1@redhat.com>
+Date: Thu, 8 Jan 2026 13:05:00 +0100
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260108100403.2888782-1-changbin.du@huawei.com>
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 net-next 00/13] AccECN protocol case handling series
+To: "Chia-Yu Chang (Nokia)" <chia-yu.chang@nokia-bell-labs.com>,
+ "edumazet@google.com" <edumazet@google.com>,
+ "parav@nvidia.com" <parav@nvidia.com>,
+ "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+ "corbet@lwn.net" <corbet@lwn.net>, "horms@kernel.org" <horms@kernel.org>,
+ "dsahern@kernel.org" <dsahern@kernel.org>,
+ "kuniyu@google.com" <kuniyu@google.com>,
+ "bpf@vger.kernel.org" <bpf@vger.kernel.org>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "dave.taht@gmail.com" <dave.taht@gmail.com>,
+ "jhs@mojatatu.com" <jhs@mojatatu.com>, "kuba@kernel.org" <kuba@kernel.org>,
+ "stephen@networkplumber.org" <stephen@networkplumber.org>,
+ "xiyou.wangcong@gmail.com" <xiyou.wangcong@gmail.com>,
+ "jiri@resnulli.us" <jiri@resnulli.us>,
+ "davem@davemloft.net" <davem@davemloft.net>,
+ "andrew+netdev@lunn.ch" <andrew+netdev@lunn.ch>,
+ "donald.hunter@gmail.com" <donald.hunter@gmail.com>,
+ "ast@fiberby.net" <ast@fiberby.net>,
+ "liuhangbin@gmail.com" <liuhangbin@gmail.com>,
+ "shuah@kernel.org" <shuah@kernel.org>,
+ "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+ "ij@kernel.org" <ij@kernel.org>, "ncardwell@google.com"
+ <ncardwell@google.com>,
+ "Koen De Schepper (Nokia)" <koen.de_schepper@nokia-bell-labs.com>,
+ "g.white@cablelabs.com" <g.white@cablelabs.com>,
+ "ingemar.s.johansson@ericsson.com" <ingemar.s.johansson@ericsson.com>,
+ "mirja.kuehlewind@ericsson.com" <mirja.kuehlewind@ericsson.com>,
+ cheshire <cheshire@apple.com>, "rs.ietf@gmx.at" <rs.ietf@gmx.at>,
+ "Jason_Livingood@comcast.com" <Jason_Livingood@comcast.com>,
+ Vidhi Goel <vidhi_goel@apple.com>
+References: <20260103131028.10708-1-chia-yu.chang@nokia-bell-labs.com>
+ <56f6f3dd-14a8-44e9-a13d-eeb0a27d81d2@redhat.com>
+ <PAXPR07MB798456B62DBAC92A9F5915DAA385A@PAXPR07MB7984.eurprd07.prod.outlook.com>
+Content-Language: en-US
+From: Paolo Abeni <pabeni@redhat.com>
+In-Reply-To: <PAXPR07MB798456B62DBAC92A9F5915DAA385A@PAXPR07MB7984.eurprd07.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 08, 2026 at 06:04:03PM +0800, Changbin Du wrote:
-> When using GNU Make's jobserver feature in kernel builds, a bug in MAKEFLAGS
-> propagation caused "--jobserver-auth=r,w" to reference an unintended file
-> descriptor. This led to infinite loops in jobserver-exec's os.read() calls
-> due to empty token.
-> 
-> My shell opened /etc/passwd for some reason without closing it, and as a
-> result, all child processes inherited this fd 3.
-> 
-> $ ls -l /proc/self/fd
-> total 0
-> lrwx------ 1 changbin changbin 64 Dec 25 13:03 0 -> /dev/pts/1
-> lrwx------ 1 changbin changbin 64 Dec 25 13:03 1 -> /dev/pts/1
-> lrwx------ 1 changbin changbin 64 Dec 25 13:03 2 -> /dev/pts/1
-> lr-x------ 1 changbin changbin 64 Dec 25 13:03 3 -> /etc/passwd
-> lr-x------ 1 changbin changbin 64 Dec 25 13:03 4 -> /proc/1421383/fd
-> 
-> In this case, the `make` should open a new file descriptor for jobserver
-> control, but clearly, it did not do so and instead still passed fd 3 as
-> "--jobserver-auth=3,4" in MAKEFLAGS. (The version of my gnu make is 4.3)
-> 
-> This update ensures robustness against invalid jobserver configurations,
-> even when `make` incorrectly pass non-pipe file descriptors.
->  * Rejecting empty reads to prevent infinite loops on EOF.
->  * Clearing `self.jobs` to avoid writing to incorrect files if invalid tokens
->    are detected.
->  * Printing detailed error messages to stderr to inform the user.
-> 
-> Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> Signed-off-by: Changbin Du <changbin.du@huawei.com>
-> 
-> ---
->   v2: remove validation for all bytes are '+' characters. (Mauro)
-> ---
->  tools/lib/python/jobserver.py | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/tools/lib/python/jobserver.py b/tools/lib/python/jobserver.py
-> index a24f30ef4fa8..8206e4c1497b 100755
-> --- a/tools/lib/python/jobserver.py
-> +++ b/tools/lib/python/jobserver.py
-> @@ -91,6 +91,10 @@ class JobserverExec:
->              while True:
->                  try:
->                      slot = os.read(self.reader, 8)
-> +                    if not slot:
-> +                        # Clear self.jobs to prevent us from probably writing incorrect file.
-> +                        self.jobs = []
-> +                        raise ValueError("unexpected empty token from jobserver fd, invalid '--jobserver-auth=' setting?")
->                      self.jobs += slot
->                  except (OSError, IOError) as e:
->                      if e.errno == errno.EWOULDBLOCK:
-> @@ -105,7 +109,8 @@ class JobserverExec:
->              # to sit here blocked on our child.
->              self.claim = len(self.jobs) + 1
->  
-> -        except (KeyError, IndexError, ValueError, OSError, IOError):
-> +        except (KeyError, IndexError, ValueError, OSError, IOError) as e:
-> +            print(f"Warning: {e}", file=sys.stderr)
+On 1/8/26 9:47 AM, Chia-Yu Chang (Nokia) wrote:
+> Regarding the packetdrill cases for AccECN, shall I can include in this patch series (v8) or is it suggested to submit them in a standalone series?
 
-I prefer to use, instead, "{repr(e)}", as it will tell the type of exception
-that happened.
+IMHO can be in a separate series, mainly because this one is already
+quite big.
 
->              # Any missing environment strings or bad fds should result in just
->              # not being parallel.
->              self.claim = None
-> -- 
-> 2.43.0
-> 
+/P
 
-With that, feel free to add my:
-
-Reviewed-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
--- 
-Thanks,
-Mauro
 
