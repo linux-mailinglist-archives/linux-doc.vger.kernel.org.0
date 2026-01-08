@@ -1,328 +1,208 @@
-Return-Path: <linux-doc+bounces-71325-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71332-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6986AD02C0D
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 13:52:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD1AED02C07
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 13:52:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id DA49630DD8B8
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:47:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B96CF30D59C9
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:46:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7F2264A288E;
-	Thu,  8 Jan 2026 12:15:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eh02+o44"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A3F044F2FAA;
+	Thu,  8 Jan 2026 12:34:58 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0165F480338;
-	Thu,  8 Jan 2026 12:15:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FC204D2449;
+	Thu,  8 Jan 2026 12:34:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767874517; cv=none; b=mWMrv9OipFRjqaIkDHsg1asDSyuIsExdb3meTfawBazKevg3A/fgN021cPgHzDH7dGPnamH5QmZ9YkFo+0xq7z7DmeV+lWQaRJY1JnXvBnAgdwykLpty+8x52o/yZ9A4KMq5TwLezGnkDd6bktfZGEUSW6jJRJp7Tq9pj0nBY7U=
+	t=1767875698; cv=none; b=XakUHbf8w30bJJj+CbLMjU9NIyFX7rQ08mj5h+toMMXZdrTQvn0rpWWBX7h44+ykBjY9zDQpSXUQqqbI2n3z+JAIOU/xRw+vU1+CciDqlLHIDFpr6K40YJxe8nfg1a0oVZZ8+HbWzQmCLpuFRvMDLG0SvdjUAte6/1O1INxTFAE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767874517; c=relaxed/simple;
-	bh=fLWB07m1q1Xqg38v0MB74PfEXl4fphO0Q77TxkBUxUQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=nKnVufZqfiUYcuJdWo8Zn4oRPCuL6J8Pujy0OvDV1P5SMVrpyQN3Mg1Pz4ryA1QcqWA90nLPsbLCV8l8hrpZ1mEFzDHLbbWfdi2pRvaNPpjSm2DqC/SaXB9Y44BqrXdMg25XDhvLDqiIbd0ODO/nQOlrIecTFjFtJk1xsJh/jwM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eh02+o44; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 70F53C2BCB7;
-	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767874515;
-	bh=fLWB07m1q1Xqg38v0MB74PfEXl4fphO0Q77TxkBUxUQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=eh02+o44isxYzdIn1AqW+vTOYQmdkEEZ6UjiLoo4mihKCR8svUXPUJgKQSTdnzcWe
-	 cWUJSjPBXP6RVzlC/DFAIACcYb2mBGfCXWs4FhZCp6yWP4738/zFuor2OscoCdy+VO
-	 BcciQwbJlKIJ6h5O+UyVm4gEOgpn7HTwcVIGEXlE1I1HzBAjUEPykCrFGIiZSaO8oG
-	 FcEKvUmAVvGcf1mgF2nBLtvpeM3LfcoIxSst+XVNZ5q2zr9r2dOcDDRNVPqDFRt8UW
-	 NZ3ybFjK/r90Lix27wyrUAVr4xURpOWEuSuKI8dY4o0coo28ZfDdZJNRzZh8/yAA1j
-	 puanQEBChqKXA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67B36D185EA;
-	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Thu, 08 Jan 2026 12:14:54 +0000
-Subject: [PATCH v3 5/6] docs: iio: add documentation for adf41513 driver
+	s=arc-20240116; t=1767875698; c=relaxed/simple;
+	bh=sOXOyLTiP/6AAkX4P6ptZI8GTCLwE7Rurc3N6kkkQWE=;
+	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=oqsO3dsFH8w5yDzKbNHc67XaTm6TtgVyKot2TrAej8BBGt2LglOTLcKTxP452ZPAgc++qqGJ1RHQYDzBE4j/QOk2q9q/kccTRbWgQ4Gb/R9LVSNX/1dQEGTsWiBThrT6s8HTbgTL/AyQucUIyqCBeoJWi6hrGTpL7AhGCXdwDw8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.224.150])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4dn49N3W0LzJ468s;
+	Thu,  8 Jan 2026 20:34:48 +0800 (CST)
+Received: from dubpeml100005.china.huawei.com (unknown [7.214.146.113])
+	by mail.maildlp.com (Postfix) with ESMTPS id 5014640539;
+	Thu,  8 Jan 2026 20:34:53 +0800 (CST)
+Received: from localhost (10.203.177.15) by dubpeml100005.china.huawei.com
+ (7.214.146.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.36; Thu, 8 Jan
+ 2026 12:34:51 +0000
+Date: Thu, 8 Jan 2026 12:34:50 +0000
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
+To: John Groves <John@Groves.net>
+CC: Miklos Szeredi <miklos@szeredi.hu>, Dan Williams
+	<dan.j.williams@intel.com>, Bernd Schubert <bschubert@ddn.com>, "Alison
+ Schofield" <alison.schofield@intel.com>, John Groves <jgroves@micron.com>,
+	Jonathan Corbet <corbet@lwn.net>, Vishal Verma <vishal.l.verma@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>, Matthew Wilcox <willy@infradead.org>, Jan
+ Kara <jack@suse.cz>, Alexander Viro <viro@zeniv.linux.org.uk>, "David
+ Hildenbrand" <david@kernel.org>, Christian Brauner <brauner@kernel.org>,
+	"Darrick J . Wong" <djwong@kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
+	Jeff Layton <jlayton@kernel.org>, Amir Goldstein <amir73il@gmail.com>, Stefan
+ Hajnoczi <shajnocz@redhat.com>, Joanne Koong <joannelkoong@gmail.com>, Josef
+ Bacik <josef@toxicpanda.com>, Bagas Sanjaya <bagasdotme@gmail.com>, Chen
+ Linxuan <chenlinxuan@uniontech.com>, "James Morse" <james.morse@arm.com>,
+	Fuad Tabba <tabba@google.com>, "Sean Christopherson" <seanjc@google.com>,
+	Shivank Garg <shivankg@amd.com>, Ackerley Tng <ackerleytng@google.com>,
+	Gregory Price <gourry@gourry.net>, Aravind Ramesh <arramesh@micron.com>, Ajay
+ Joshi <ajayjoshi@micron.com>, <venkataravis@micron.com>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<nvdimm@lists.linux.dev>, <linux-cxl@vger.kernel.org>,
+	<linux-fsdevel@vger.kernel.org>
+Subject: Re: [PATCH V3 07/21] dax: prevent driver unbind while filesystem
+ holds device
+Message-ID: <20260108123450.00004eac@huawei.com>
+In-Reply-To: <20260107153332.64727-8-john@groves.net>
+References: <20260107153244.64703-1-john@groves.net>
+	<20260107153332.64727-1-john@groves.net>
+	<20260107153332.64727-8-john@groves.net>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260108-adf41513-iio-driver-v3-5-23d1371aef48@analog.com>
-References: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
-In-Reply-To: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
-To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Jonathan Cameron <jic23@kernel.org>, 
- David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
- Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767874513; l=8999;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=8oyk+0EMFPwmJHG1OC/3EQ4VesKU+46HXyz+yO6kPUA=;
- b=WEpjUjpcre2FmGpC6a2HuKhGvvpaJEh3FuH4dMCt8EtWyRFQabmSMD4z7cJYTu8xp0K6TIBxF
- e4nl885OJ3BCABOkuEU0vYH8oJpjotMZ3oqTuABifQHAE4smzdEA5Yk
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: lhrpeml500012.china.huawei.com (7.191.174.4) To
+ dubpeml100005.china.huawei.com (7.214.146.113)
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+On Wed,  7 Jan 2026 09:33:16 -0600
+John Groves <John@Groves.net> wrote:
 
-Add documentation for ADF41513 driver which describes the device
-driver files and shows how userspace may consume the ABI for various
-tasks
+> From: John Groves <John@Groves.net>
+> 
+> Add custom bind/unbind sysfs attributes for the dax bus that check
+> whether a filesystem has registered as a holder (via fs_dax_get())
+> before allowing driver unbind.
+> 
+> When a filesystem like famfs mounts on a dax device, it registers
+> itself as the holder via dax_holder_ops. Previously, there was no
+> mechanism to prevent driver unbind while the filesystem was mounted,
+> which could cause some havoc.
+> 
+> The new unbind_store() checks dax_holder() and returns -EBUSY if
+> a holder is registered, giving userspace proper feedback that the
+> device is in use.
+> 
+> To use our custom bind/unbind handlers instead of the default ones,
+> set suppress_bind_attrs=true on all dax drivers during registration.
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/iio/adf41513.rst | 199 +++++++++++++++++++++++++++++++++++++++++
- Documentation/iio/index.rst    |   1 +
- MAINTAINERS                    |   1 +
- 3 files changed, 201 insertions(+)
+Whilst I appreciate that it is painful, so are many other driver unbinds
+where services are provided to another driver.  Is there any precedence
+for doing something like this? If not, I'd like to see a review on this
+from one of the driver core folk. Maybe Greg KH.
 
-diff --git a/Documentation/iio/adf41513.rst b/Documentation/iio/adf41513.rst
-new file mode 100644
-index 000000000000..4193c825b532
---- /dev/null
-+++ b/Documentation/iio/adf41513.rst
-@@ -0,0 +1,199 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===============
-+ADF41513 driver
-+===============
-+
-+This driver supports Analog Devices' ADF41513 and similar SPI PLL frequency
-+synthesizers.
-+
-+1. Supported devices
-+====================
-+
-+* `ADF41510 <https://www.analog.com/ADF41510>`_
-+* `ADF41513 <https://www.analog.com/ADF41513>`_
-+
-+The ADF41513 is an ultralow noise frequency synthesizer that can be used to
-+implement local oscillators (LOs) as high as 26.5 GHz in the upconversion and
-+downconversion sections of wireless receivers and transmitters. The ADF41510
-+is a similar device that supports frequencies up to 10 GHz.
-+
-+Both devices support integer-N and fractional-N operation modes, providing
-+excellent phase noise performance and flexible frequency generation
-+capabilities.
-+
-+Key Features:
-+
-+- **ADF41510**: 1 GHz to 10 GHz frequency range
-+- **ADF41513**: 1 GHz to 26.5 GHz frequency range
-+- Integer-N and fractional-N operation modes
-+- Ultra-low phase noise (-235 dBc/Hz integer-N, -231 dBc/Hz fractional-N)
-+- High maximum PFD frequency (250 MHz integer-N, 125 MHz fractional-N)
-+- 25-bit fixed modulus or 49-bit variable modulus fractional modes
-+- Programmable charge pump currents with 16x range
-+- Digital lock detect functionality
-+- Phase resync capability for consistent output phase
-+
-+2. Device attributes
-+====================
-+
-+The ADF41513 driver provides the following IIO extended attributes for
-+frequency control and monitoring:
-+
-+Each IIO device has a device folder under ``/sys/bus/iio/devices/iio:deviceX``,
-+where X is the IIO index of the device. Under these folders reside a set of
-+device files that provide access to the synthesizer's functionality.
-+
-+The following table shows the ADF41513 related device files:
-+
-++----------------------+-------------------------------------------------------+
-+| Device file          | Description                                           |
-++======================+=======================================================+
-+| frequency            | RF output frequency control and readback (Hz)         |
-++----------------------+-------------------------------------------------------+
-+| frequency_resolution | Target frequency resolution control (Hz)              |
-++----------------------+-------------------------------------------------------+
-+| powerdown            | Power management control (0=active, 1=power down)     |
-++----------------------+-------------------------------------------------------+
-+| phase                | RF output phase adjustment and readback (radians)     |
-++----------------------+-------------------------------------------------------+
-+
-+2.1 Frequency Control
-+----------------------
-+
-+The ``frequency`` attribute controls the RF output frequency with sub-Hz
-+precision. The driver automatically selects between integer-N and fractional-N
-+modes to achieve the requested frequency with the best possible phase noise
-+performance.
-+
-+**Supported ranges:**
-+
-+- **ADF41510**: 1,000,000,000 Hz to 10,000,000,000 Hz (1 GHz to 10 GHz)
-+- **ADF41513**: 1,000,000,000 Hz to 26,500,000,000 Hz (1 GHz to 26.5 GHz)
-+
-+The frequency is specified in Hz, for sub-Hz precision use decimal notation.
-+For example, 12.102 GHz would be written as "12102000000.000000".
-+
-+2.2 Frequency Resolution Control
-+--------------------------------
-+
-+The ``frequency_resolution`` attribute controls the target frequency resolution
-+that the driver attempts to achieve. This affects the choice between integer-N
-+and fractional-N modes, including fixed modulus (25-bit) and variable modulus
-+(49-bit) fractional-N modes:
-+
-+- **Integer-N**: Resolution = f_PFD
-+- **Fixed modulus**: Resolution = f_PFD / 2^25 (~3 Hz with 100 MHz PFD)
-+- **Variable modulus**: Resolution = f_PFD / 2^49 (µHz resolution possible)
-+
-+Default resolution is 1 Hz (1,000,000 µHz).
-+
-+2.3 Phase adjustment
-+--------------------
-+
-+The ``phase`` attribute allows adjustment of the output phase in radians.
-+Setting this attribute enables phase adjustment. It can be set from 0 to 2*pi
-+radians. Reading this attribute returns the current phase offset of the output
-+signal. To create a consistent phase relationship with the reference signal,
-+the phase resync feature needs to be enabled by setting a non-zero value to the
-+``adi,phase-resync-period-ns`` device property, which triggers a phase
-+resynchronization after locking is achieved.
-+
-+3. Operating modes
-+==================
-+
-+3.1 Integer-N Mode
-+------------------
-+
-+When the requested frequency can be achieved as an integer multiple of the PFD
-+frequency (within the specified resolution tolerance), the driver automatically
-+selects integer-N mode for optimal phase noise performance.
-+
-+In integer-N mode:
-+
-+- Phase noise: -235 dBc/Hz normalized floor
-+- Frequency resolution: f_PFD (same as PFD frequency)
-+- Maximum PFD frequency: 250 MHz
-+- Bleed current: Disabled
-+
-+3.2 Fractional-N Mode
-+---------------------
-+
-+When sub-integer frequency steps are required, the driver automatically selects
-+fractional-N mode using either fixed or variable modulus.
-+
-+**Fixed Modulus (25-bit)**:
-+
-+- Used when variable modulus is not required
-+- Resolution: f_PFD / 2^25
-+- Simpler implementation, faster settling
-+
-+**Variable Modulus (49-bit)**:
-+
-+- Used for maximum resolution requirements
-+- Resolution: f_PFD / 2^49 (theoretical)
-+- Exact frequency synthesis capability
-+
-+In fractional-N mode:
-+
-+- Phase noise: -231 dBc/Hz normalized floor
-+- Maximum PFD frequency: 125 MHz
-+- Bleed current: Automatically enabled and optimized
-+- Dithering: Enabled to reduce fractional spurs
-+
-+3.3 Automatic Mode Selection
-+----------------------------
-+
-+The driver automatically selects the optimal operating mode based on:
-+
-+1. **Frequency accuracy requirements**: Determined by frequency_resolution setting
-+2. **Phase noise optimization**: Integer-N preferred when possible
-+3. **PFD frequency constraints**: Different limits for integer vs fractional modes
-+4. **Prescaler selection**: Automatic 4/5 vs 8/9 prescaler selection based on frequency
-+
-+4. Usage examples
-+=================
-+
-+4.1 Basic Frequency Setting
-+----------------------------
-+
-+Set output frequency to 12.102 GHz:
-+
-+.. code-block:: bash
-+
-+    root:/sys/bus/iio/devices/iio:device0> echo 12102000000 > out_altvoltage0_frequency
-+
-+Read current frequency:
-+
-+.. code-block:: bash
-+
-+    root:/sys/bus/iio/devices/iio:device0> cat out_altvoltage0_frequency
-+    12101999999.582767
-+
-+4.2 High Resolution Frequency Control
-+-------------------------------------
-+
-+Configure for sub-Hz resolution and set a precise frequency:
-+
-+.. code-block:: bash
-+
-+    # Set resolution to 0.1 Hz (100,000 µHz)
-+    root:/sys/bus/iio/devices/iio:device0> echo 0.1 > out_altvoltage0_frequency_resolution
-+
-+    # Set frequency to 12.102 GHz (1 µHz precision)
-+    root:/sys/bus/iio/devices/iio:device0> echo 12102000000 > out_altvoltage0_frequency
-+    root:/sys/bus/iio/devices/iio:device0> cat out_altvoltage0_frequency
-+    12101999999.980131
-+
-+4.3 Monitor Lock Status
-+-----------------------
-+
-+When lock detect GPIO is configured, check if PLL is locked:
-+
-+.. code-block:: bash
-+
-+    # Read frequency - will return error if not locked
-+    root:/sys/bus/iio/devices/iio:device0> cat out_altvoltage0_frequency
-+
-+If the PLL is not locked, the frequency read will return ``-EBUSY`` (Device or
-+resource busy).
-diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-index ba3e609c6a13..605871765c78 100644
---- a/Documentation/iio/index.rst
-+++ b/Documentation/iio/index.rst
-@@ -30,6 +30,7 @@ Industrial I/O Kernel Drivers
-    ad7625
-    ad7944
-    ade9000
-+   adf41513
-    adis16475
-    adis16480
-    adis16550
-diff --git a/MAINTAINERS b/MAINTAINERS
-index a5c5f76f47c6..3bb7d9fe7ed8 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1616,6 +1616,7 @@ L:	linux-iio@vger.kernel.org
- S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
- F:	Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml
-+F:	Documentation/iio/adf41513.rst
- F:	drivers/iio/frequency/adf41513.c
- 
- ANALOG DEVICES INC ADF4377 DRIVER
+Might just be a case of calling it something else to avoid userspace
+tooling getting a surprise.
 
--- 
-2.43.0
+> 
+> Signed-off-by: John Groves <john@groves.net>
+> ---
+>  drivers/dax/bus.c | 53 +++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 53 insertions(+)
+> 
+> diff --git a/drivers/dax/bus.c b/drivers/dax/bus.c
+> index 6e0e28116edc..ed453442739d 100644
+> --- a/drivers/dax/bus.c
+> +++ b/drivers/dax/bus.c
+> @@ -151,9 +151,61 @@ static ssize_t remove_id_store(struct device_driver *drv, const char *buf,
+>  }
+>  static DRIVER_ATTR_WO(remove_id);
+>  
+> +static const struct bus_type dax_bus_type;
+> +
+> +/*
+> + * Custom bind/unbind handlers for dax bus.
+> + * The unbind handler checks if a filesystem holds the dax device and
+> + * returns -EBUSY if so, preventing driver unbind while in use.
+> + */
+> +static ssize_t unbind_store(struct device_driver *drv, const char *buf,
+> +		size_t count)
+> +{
+> +	struct device *dev;
+> +	int rc = -ENODEV;
+> +
+> +	dev = bus_find_device_by_name(&dax_bus_type, NULL, buf);
 
+	struct device *dev __free(put_device) = bus_find_device_by_name()...
+
+and you can just return on error.
+
+> +	if (dev && dev->driver == drv) {
+With the __free I'd flip this
+	if (!dev || !dev->driver == drv)
+		return -ENODEV;
+
+	...
+
+> +		struct dev_dax *dev_dax = to_dev_dax(dev);
+> +
+> +		if (dax_holder(dev_dax->dax_dev)) {
+> +			dev_dbg(dev,
+> +				"%s: blocking unbind due to active holder\n",
+> +				__func__);
+> +			rc = -EBUSY;
+> +			goto out;
+> +		}
+> +		device_release_driver(dev);
+> +		rc = count;
+> +	}
+> +out:
+> +	put_device(dev);
+> +	return rc;
+> +}
+> +static DRIVER_ATTR_WO(unbind);
+> +
+> +static ssize_t bind_store(struct device_driver *drv, const char *buf,
+> +		size_t count)
+> +{
+> +	struct device *dev;
+> +	int rc = -ENODEV;
+> +
+> +	dev = bus_find_device_by_name(&dax_bus_type, NULL, buf);
+Use __free magic here as well..
+> +	if (dev) {
+> +		rc = device_driver_attach(drv, dev);
+> +		if (!rc)
+> +			rc = count;
+then this can be
+		if (rc)
+			return rc;
+		return count;
+
+> +	}
+> +	put_device(dev);
+> +	return rc;
+> +}
+> +static DRIVER_ATTR_WO(bind);
+> +
+>  static struct attribute *dax_drv_attrs[] = {
+>  	&driver_attr_new_id.attr,
+>  	&driver_attr_remove_id.attr,
+> +	&driver_attr_bind.attr,
+> +	&driver_attr_unbind.attr,
+>  	NULL,
+>  };
+>  ATTRIBUTE_GROUPS(dax_drv);
+> @@ -1591,6 +1643,7 @@ int __dax_driver_register(struct dax_device_driver *dax_drv,
+>  	drv->name = mod_name;
+>  	drv->mod_name = mod_name;
+>  	drv->bus = &dax_bus_type;
+> +	drv->suppress_bind_attrs = true;
+>  
+>  	return driver_register(drv);
+>  }
 
 
