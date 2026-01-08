@@ -1,53 +1,55 @@
-Return-Path: <linux-doc+bounces-71422-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71425-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A94BD05373
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:53:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10D76D0537F
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:54:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3C3B731CC70A
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:58:49 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id ACC02327B7F7
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:59:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F5C92E1EE5;
-	Thu,  8 Jan 2026 16:58:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1A8012EFD99;
+	Thu,  8 Jan 2026 16:58:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="MZ/dyuSy"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="KjP3WChm"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D00E02E03E3
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:58:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC2B52E5B1B;
+	Thu,  8 Jan 2026 16:58:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767891527; cv=none; b=KVyIav8mzhr0qgK7UzeWrJaRoVxM38NkcwizB2/o0JpHaq8A/mzdqsOhnWRni9tYTjBrn+NQYZ8j6u77J+CiIRPLJzYouHENLgqIOAKY/eGt8e6AOaJdC9qmNDVCX3PlNzejh/5KE+wq0WPzX7b65GaQompxGlOJroDs6FoOtoA=
+	t=1767891532; cv=none; b=o035POV4Pd9fXnDTP7poPYRdo7kyaddgKyFwZLIXf19dh+Hh0nb+6BHww4fLvYVvg2BlyEhzokT7GKBOxe2yGxjZPkpcYqlLaUZzQJvBtr2qGrEL5jA5oNs9AthxWv0YsW9WJn4zPuF8eqmYaHuTanHIIxpOBgPtW2JUOYaNI6Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767891527; c=relaxed/simple;
-	bh=4sdiZuFRexWZI+54a8W+WnbOT1IbHWUkfPmCPFSkUZM=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ttou1bFKPOawYl7kLZaWZQI5/+ihmetxkx/YQekLkcs9HvxpaUImBYgYyAMAMyKHZGXUwdaXC8JHpM8qbOMgVKh86qib3lRfRfAR8ZmpaIS9o8CNpdgGep6nVoU4tepf7B+LbFwhX5f+S/ka/nmSOBR4LSsBkviXWR/OfAc4Pso=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=MZ/dyuSy; arc=none smtp.client-ip=185.246.85.4
+	s=arc-20240116; t=1767891532; c=relaxed/simple;
+	bh=dtFRwS67sy+s/gCELFLE+7OhZ68CG7YOcN0xB6PF2IU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=rSWOUvioa3ntsyEEpCUgoAJhmpFfhkgTiarY50GhQKcsPAxlneePWtxQcxgmX8VhTP9inTm02DacasxGZTER0bBcdsxCUCtrDRbEJN8v8SaXRvgEEDRTTCRGpJ5Lcy2k5BHFiHA6XnHNDXuDxKiSfgPDcXPl9eZ4iPio/gkfpm8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=KjP3WChm; arc=none smtp.client-ip=185.246.84.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id C52D84E42000;
-	Thu,  8 Jan 2026 16:58:41 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 598871A2716;
+	Thu,  8 Jan 2026 16:58:49 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 96DB66072B;
-	Thu,  8 Jan 2026 16:58:41 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 666D9103C8891;
-	Thu,  8 Jan 2026 17:58:33 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 2E09F6072B;
+	Thu,  8 Jan 2026 16:58:49 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 75C0E103C8824;
+	Thu,  8 Jan 2026 17:58:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1767891520; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding; bh=E+E90BltAoO+qn8F30WKKOmABemNtGnZLPXKAjs4xnI=;
-	b=MZ/dyuSyCdfnO7r8Z3aYcq+P7lQSXYQT08myG7d7wTE6630zfJ2I15slCXCRz/7JhWTMcn
-	BbEUgkXvj6Q/z1Z5YOcn0BQjQp1JX3eAqh7WsEzjSDkP+JRuhgFKpIyp6CEU2qWFB4wH9I
-	XsdYXe32VMhMMqKjazEqufx3ylFqdrktKZyVd11jqdIVnYDzHrocAF/9JGzRKzgTSnFB5j
-	0sQs4EQPCZ8PBoJh8K0zoWpskcCTvtzkn97wLf05SeR7MeIp06NBAfduP1U0sjRcwXlqYB
-	GIwIXgXhI8KPeKzS8ZBM3+ApAzuPTVNyRSaFGw6skA/WgiD81qluApSFKxHx0g==
+	t=1767891528; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=q23MpHsjNpx/31GAsCENaWRzQgCj7+jsn8PlbmxRMQo=;
+	b=KjP3WChmpA7LT9vLlui0fjjL/T2dSN1GlXpbudSe17zO5WTgRiAYRj0GTHNyOk+dM/BpHQ
+	OHqVC7bOBnghRybGkzK8mI5lTLIJ/jJW8HK+Xm/FuQPWEEuZgjfIAGEtKVAGtiWosKGRLn
+	t9ZGheIGKKWVRv+x9M0v0sNiPwlFHnMoyLmw6l3cvZFBgDktOW65q291KyzlMQZwkRGSqR
+	6QuN0ZP1/zG5KAwlocQ6RK4oiY+3aEzkB85QMFgme+v7PVlHwFdQ5VTeXNddgqPd5+D86e
+	3ZYnOBIcMhbi5dvKjHgcnCLsufluke40wrX9f9WPbLSOGVlUP3wVwpJJX35rnA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH v2 00/27] mtd: spi-nor: Enhance software protection
-Date: Thu, 08 Jan 2026 17:57:33 +0100
-Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
+Date: Thu, 08 Jan 2026 17:57:36 +0100
+Subject: [PATCH v2 03/27] mtd: spi-nor: swp: Improve locking user
+ experience
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -56,11 +58,9 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NQQ6CMBCF4auQWTuGKVDAlfcwLKQUmUQ7pCVFQ
- 7i7lRO4/N7ifxsE69kGuGQbeBs5sLgEdcrATHf3sMhDMqhcVURU4squFzdg1EgNekMYZkYnHsM
- 6Y6OrodBjOeq2gtSYvR35ffRvXfLEYRH/Oe4i/dZ/y5Ewx7Kpe1OTatuCrr3I8mR3NvKCbt/3L
- 3o/I3LMAAAA
-X-Change-ID: 20251114-winbond-v6-18-rc1-spi-nor-swp-865d36f4f695
+Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-3-c462ef806130@bootlin.com>
+References: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
+In-Reply-To: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 To: Tudor Ambarus <tudor.ambarus@linaro.org>, 
  Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
  Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
@@ -73,125 +73,55 @@ Cc: Sean Anderson <sean.anderson@linux.dev>,
 X-Mailer: b4 0.14.3
 X-Last-TLS-Session-Version: TLSv1.3
 
-Hello,
+In the case of the first block being locked (or the few first blocks),
+if the user want to fully unlock the device it has two possibilities:
+- either it asks to unlock the entire device, and this works;
+- or it asks to unlock just the block(s) that are currently locked,
+  which fails.
 
-As recently raised on the mailing-list (link below), it seems that the
-"locking" support in SPI NOR could benefit from some enhancements. As I
-myself had to dig into it recently, here is a proposal.
+It fails because the conditions "can_be_top" and "can_be_bottom" are
+true. Indeed, in this case, we unlock everything, so the TB bit does not
+matter. However in the current implementation, use_top would be true (as
+this is the favourite option) and lock_len, which in practice should be
+reduced down to 0, is set to "nor->params->size - (ofs + len)" which is
+a positive number. This is wrong.
 
-First issue that I see, the MEMLOCK ioctl is not behaving correctly
-in some cases, as addressed in:
+An easy way is to simply add an extra condition. In the unlock() path,
+if we can achieve the same result from both sides, it means we unlock
+everything and lock_len must simply be 0. A comment is added to clarify
+that logic.
 
-    mtd: spi-nor: swp: Improve locking user experience
-
-Then there is no clear explanation of the shortcuts taken by the kernel
-in terms of uAPI, so there is an attempt to list them in:
-
-    mtd: spi-nor: swp: Explain the MEMLOCK ioctl implementation behaviour
-
-Plus, Tudor also asked if we could cover locking in the testing
-procedure, which is done in:
-
-    mtd: spi-nor: Add steps for testing locking support
-
-In order to simplify this procedure, and because it got very helpful
-during my testing/development, I want to propose additions to the
-debugfs output:
-
-    mtd: spi-nor: debugfs: Add locking support TODO: make the captures again
-
-Finally, I am providing an implementation for the complement (CMP)
-feature in order to allow finer control of the regions locked. This
-feature is for instance available on Winbond chips:
-
-    [core] mtd: spi-nor: swp: Add support for the complement feature
-    [doc]  mtd: spi-nor: Add steps for testing locking with CMP
-    [use]  mtd: spi-nor: winbond: Add CMP locking support
-
-Disclaimer: it was much less straightforward than I initially thought to
-get the CMP feature working correctly. I tested it with as much focus as
-I could, and I am improving the test coverage for the new cases, I am
-also providing extra test cases in the metadata of the commit (which do
-not make sense to test for chip additions, but may be sensible show when
-making core additions like this one), but honestly there are so many
-possibilities, I may still be missing corner cases. I hope this will
-anyway be helpful to others!
-
-All the other patches are misc improvements or style fixes which I faced
-and fixed during my development.
-
-Link: https://lore.kernel.org/linux-mtd/92e99a96-5582-48a5-a4f9-e9b33fcff171@linux.dev/
-
+Fixes: 3dd8012a8eeb ("mtd: spi-nor: add TB (Top/Bottom) protect support")
+Cc: stable@kernel.org
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
-Changes in v2:
-- Collect tags.
-- Add missing Fixes/Cc: stable tags.
-- Add a comment explaining why can_be_top && can_be_bottom is a specific
-  condition.
-- Fix commit logs following Michael Walle's reviews.
-- Amend the documentation following our discussion with Michael Walle as
-  well.
-- Cache the SR register for debugfs use.
-- Create a locked sector map file instead of dumping it as part of the
-  `params` file output.
-- Improved greatly the output of the map as suggested by Michael.
-- Add a patch fixing a duplicate dependency in Kconfig.
-- Add an important comment in the doc about the small 4kiB erase size
-  choice.
-- Add test runs for each and every chip for which the CMP feature is
-  added. This prove me that testing of each and every chip was needed,
-  as some of them seem to feature a broken BFPT table which does not
-  advertise a working 35h (Read CR) command.
-- Added a condition on which the CMP feature is enabled: RDCR must be
-  possible.
-- Link to v1: https://lore.kernel.org/r/20251114-winbond-v6-18-rc1-spi-nor-swp-v1-0-487bc7129931@bootlin.com
+ drivers/mtd/spi-nor/swp.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
----
-Miquel Raynal (27):
-      mtd: spi-nor: Drop duplicate Kconfig dependency
-      mtd: spi-nor: debugfs: Fix the flags list
-      mtd: spi-nor: swp: Improve locking user experience
-      mtd: spi-nor: Improve opcodes documentation
-      mtd: spi-nor: debugfs: Align variable access with the rest of the file
-      mtd: spi-nor: debugfs: Enhance output
-      mtd: spi-nor: swp: Explain the MEMLOCK ioctl implementation behaviour
-      mtd: spi-nor: swp: Clarify a comment
-      mtd: spi-nor: swp: Use a pointer for SR instead of a single byte
-      mtd: spi-nor: swp: Create a helper that writes SR, CR and checks
-      mtd: spi-nor: swp: Rename a mask
-      mtd: spi-nor: swp: Create a TB intermediate variable
-      mtd: spi-nor: swp: Create helpers for building the SR register
-      mtd: spi-nor: swp: Simplify checking the locked/unlocked range
-      mtd: spi-nor: swp: Cosmetic changes
-      mtd: spi-nor: Create a local SR cache
-      mtd: spi-nor: debugfs: Add locking support
-      mtd: spi-nor: debugfs: Add a locked sectors map
-      mtd: spi-nor: Add steps for testing locking support
-      mtd: spi-nor: swp: Add support for the complement feature
-      mtd: spi-nor: Add steps for testing locking with CMP
-      mtd: spi-nor: winbond: Add W25H512NWxxAM CMP locking support
-      mtd: spi-nor: winbond: Add W25H01NWxxAM CMP locking support
-      mtd: spi-nor: winbond: Add W25H02NWxxAM CMP locking support
-      mtd: spi-nor: winbond: Add W25H01NWxxIQ CMP locking support
-      mtd: spi-nor: winbond: Add W25Q01NWxxIM CMP locking support
-      mtd: spi-nor: winbond: Add W25Q02NWxxIM CMP locking support
+diff --git a/drivers/mtd/spi-nor/swp.c b/drivers/mtd/spi-nor/swp.c
+index 9b07f83aeac7..1d50db1ef1a0 100644
+--- a/drivers/mtd/spi-nor/swp.c
++++ b/drivers/mtd/spi-nor/swp.c
+@@ -280,8 +280,15 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
+ 	/* Prefer top, if both are valid */
+ 	use_top = can_be_top;
+ 
+-	/* lock_len: length of region that should remain locked */
+-	if (use_top)
++	/*
++	 * lock_len: length of region that should remain locked.
++	 *
++	 * When can_be_top and can_be_bottom booleans are true, both adjacent
++	 * regions are unlocked, thus the entire flash can be unlocked.
++	 */
++	if (can_be_top && can_be_bottom)
++		lock_len = 0;
++	else if (use_top)
+ 		lock_len = nor->params->size - (ofs + len);
+ 	else
+ 		lock_len = ofs;
 
- Documentation/driver-api/mtd/spi-nor.rst | 164 ++++++++++++++
- drivers/mtd/spi-nor/Kconfig              |   1 -
- drivers/mtd/spi-nor/core.c               |  74 ++++++-
- drivers/mtd/spi-nor/core.h               |  10 +
- drivers/mtd/spi-nor/debugfs.c            |  63 +++++-
- drivers/mtd/spi-nor/swp.c                | 359 ++++++++++++++++++++++++-------
- drivers/mtd/spi-nor/winbond.c            |  41 +++-
- include/linux/mtd/spi-nor.h              |   7 +-
- 8 files changed, 631 insertions(+), 88 deletions(-)
----
-base-commit: 99bb09369a9eaed5de0e647cc1aab215668ddc6f
-change-id: 20251114-winbond-v6-18-rc1-spi-nor-swp-865d36f4f695
-
-Best regards,
 -- 
-Miquel Raynal <miquel.raynal@bootlin.com>
+2.51.1
 
 
