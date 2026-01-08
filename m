@@ -1,151 +1,130 @@
-Return-Path: <linux-doc+bounces-71410-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71414-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77803D04757
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:40:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6287D0483B
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:46:17 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4958C3030221
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:20:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 477B830563E5
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:36:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4E99D2737E0;
-	Thu,  8 Jan 2026 16:20:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 774752D7392;
+	Thu,  8 Jan 2026 16:36:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gNKHl54I"
+	dkim=pass (1024-bit key) header.d=apertussolutions.com header.i=dpsmith@apertussolutions.com header.b="p2vL/Cl3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from sender4-of-o50.zoho.com (sender4-of-o50.zoho.com [136.143.188.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 523B126B95B
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:20:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.53
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767889209; cv=none; b=JvVoQ/8lC95OH6cggTGT+wOBEJh6j8kikiYRyBHe1U6meGShveTDUSUMXeh7s1adoNR78MMK+SX/XXhH5JnUkiO0qshdKNQIy/PpiNbhaP0/xw5Rv6rOUxxWVFO/8slbzW6h4DuQCfMBY9kFKM6tUxhrbFOtpFyGn8nV6kdeaOU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767889209; c=relaxed/simple;
-	bh=yvNU1AvVWUsd+D1YN7GGiy/e4EfmDjtr0T/TuSwjWKQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MjjEZPqSwbexiXv7FYWlNk3BAvpiP6arW7go/NxOTXok5pXRqM7noK4OyF1kdFG7HoX4RDd98oFcDowmEkqwxSnSh/Q1grQaNXGFNnDew2hldagyURrHCxpyYGquHUjbIl0ubrvXwSQBW0cpslfAnZBqwCJhYahb3u+UtpTEs2M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gNKHl54I; arc=none smtp.client-ip=209.85.160.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=groves.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-3ec3cdcda4eso2477162fac.1
-        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 08:20:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767889206; x=1768494006; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=HVhhJuuiBGoK/sFvk0bqtRfj9CRgQvxP/k+MrdnYe6s=;
-        b=gNKHl54IIO9I5g2NH+3g7xsv2nR/Ixg6cUgki8Aaw74Rt/gR0LM2AyWuWsD4mLIIry
-         duuGPRIKgz09CE0Bs6h6GSthtteXS0bqkvzqdYaYUJYtnCi4XpJv+h31rWvn9wyaLU+v
-         tflHiYFxeJVdLFrt6EGAOCTWIetZUyB2zbfcm85J27TiB34NplSLElsVEIbR8f4wu6vz
-         u0KhDPjs2WABFD3dI3cPWkBYb3tgZ/AHtjMhDUNft73hIPuqsuKmSeS/3GSg0UiYPfiS
-         NJuPe1UDBGKfxbVoUTpnQ7wCbx3+dCir9j/bmyXRbe5PppEkcs+KigQFcCM2vvuwNpxS
-         xaUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767889206; x=1768494006;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=HVhhJuuiBGoK/sFvk0bqtRfj9CRgQvxP/k+MrdnYe6s=;
-        b=hJ8D7Oiq6g9Ds2sKeSuAShyntRfxKBctaeYtG+ok2/lDYRsECFmpFk+dr7OHeHeDkp
-         5Q7Vz2zBKK6+5ukt3I6YAdVxcuu7cfFEuzl8pS+mvdRENtKG3j4INi1HHENRLKhaUWFf
-         l4PEMPx5Ocvae9NRsKEf7V/4CucSARhyVaaSRJpBeQ8Wp01Imrc44Q8IB+Skpc93lMzA
-         wXY9llKfWlxFLud88vheXyJsyNducHmXmEvX1CS0ir1MrVIGr4BtwGG5pPjIPHxwzGG8
-         luXsgu8AfgEHiH5QulpYS+72NqWmS4NmU2VhNzeS8zwTP8L/pGJlyghWtwSOnUtQoikj
-         vhHw==
-X-Forwarded-Encrypted: i=1; AJvYcCVPZL+DdC1LflFfZFwqTVQDP3aMy0MVwcEjf/odYs/kqjpsVFESl+bvp8LTWImuW1ArtCMhblvki3I=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwLFj2YJbr+hVH2PVbErejIktUsP0RtBXzzqaoz54eRjy+FswH4
-	VaSvu9txqhV9VMFoF8ayAo8zwR+EtAXpDOiBH2d0ZQCTuA3tlv80/CUi
-X-Gm-Gg: AY/fxX44W4rr9Z9M+juJe8dBh8j354rmK3Ytl+bk/Kcv55p0ThsTeMi0uyW6BT3FxTo
-	IUVgF55X5IddxBxdeU1UfCvdURBEWz/OVcqZlYV5jzJ9Kq+sJcW62v8Nq6iIHXFX417OJAKycnX
-	DDns/hANaOWirMZ1NyiQ6NYT3W3smrqbhsMtmnWvRaFKNYjlVusaaOMdkMCWh9zVm7TIAAnZLtF
-	3xduIplWAhB+7gkIpfLaV3/YWPR6HjpsvGndbCyBJIaD8ZCbVczpSXTePkSsL5QZSYg2in39fTI
-	MAn0gDs5Oa4E7EyO1tSrBglSVSJgmjEUHOHnKhodbsaaxiqEpDzPY8vFt5ImzfmuJx2n5EOuWmD
-	5BD+k6mKvC3yNL80qM4LZU37rxrKCgwsfLFd0yWPtLv/GNZ6FsZFTjb7lw/VcHZNHoBChxVlPfe
-	g+jHZX7a5H10MoSu2bQvdeBxh+QQJHpw==
-X-Google-Smtp-Source: AGHT+IH6THnfmjfea6h0UnYX2fNH0dcgns7iJzl58Bvp4j/zTpmPcfdP7f0qEllI2ONh7EMKMC6yuQ==
-X-Received: by 2002:a05:6820:f002:b0:65d:1e7:9526 with SMTP id 006d021491bc7-65f54f06dfamr2864960eaf.10.1767889206030;
-        Thu, 08 Jan 2026 08:20:06 -0800 (PST)
-Received: from groves.net ([2603:8080:1500:3d89:902b:954a:a912:b0f5])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-65f48bec1c4sm3344121eaf.8.2026.01.08.08.20.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Jan 2026 08:20:05 -0800 (PST)
-Sender: John Groves <grovesaustin@gmail.com>
-Date: Thu, 8 Jan 2026 10:20:03 -0600
-From: John Groves <John@groves.net>
-To: Jonathan Cameron <jonathan.cameron@huawei.com>
-Cc: Miklos Szeredi <miklos@szeredi.hu>, 
-	Dan Williams <dan.j.williams@intel.com>, Bernd Schubert <bschubert@ddn.com>, 
-	Alison Schofield <alison.schofield@intel.com>, John Groves <jgroves@micron.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Vishal Verma <vishal.l.verma@intel.com>, 
-	Dave Jiang <dave.jiang@intel.com>, Matthew Wilcox <willy@infradead.org>, Jan Kara <jack@suse.cz>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, David Hildenbrand <david@kernel.org>, 
-	Christian Brauner <brauner@kernel.org>, "Darrick J . Wong" <djwong@kernel.org>, 
-	Randy Dunlap <rdunlap@infradead.org>, Jeff Layton <jlayton@kernel.org>, 
-	Amir Goldstein <amir73il@gmail.com>, Stefan Hajnoczi <shajnocz@redhat.com>, 
-	Joanne Koong <joannelkoong@gmail.com>, Josef Bacik <josef@toxicpanda.com>, 
-	Bagas Sanjaya <bagasdotme@gmail.com>, Chen Linxuan <chenlinxuan@uniontech.com>, 
-	James Morse <james.morse@arm.com>, Fuad Tabba <tabba@google.com>, 
-	Sean Christopherson <seanjc@google.com>, Shivank Garg <shivankg@amd.com>, 
-	Ackerley Tng <ackerleytng@google.com>, Gregory Price <gourry@gourry.net>, 
-	Aravind Ramesh <arramesh@micron.com>, Ajay Joshi <ajayjoshi@micron.com>, venkataravis@micron.com, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, nvdimm@lists.linux.dev, 
-	linux-cxl@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH V3 05/21] dax: Add dax_set_ops() for setting
- dax_operations at bind time
-Message-ID: <tndv7ezryq5m57r5iyoyr5suq5lliy37ciqluia7gh6znaecry@nfwbtzmsvcyn>
-References: <20260107153244.64703-1-john@groves.net>
- <20260107153332.64727-1-john@groves.net>
- <20260107153332.64727-6-john@groves.net>
- <20260108120619.00001bc5@huawei.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3123D2D73AD;
+	Thu,  8 Jan 2026 16:36:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.50
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1767890216; cv=pass; b=fd7FhDZHWwYBsoeIEknUcRa9a8gRUVWQU6hTgaEmZqHnnrES5q0cRY2DpUIZeXqUaKI/QY+4tFfemw/wxCJSlz40sMRkeNeoS6wPvEeAg+a6UaC7Z+2jzIQNK2B/F0lhjjn5SfRz1T0GI/6pmhT8suVkr6rPvR5df2Nj3RbZ1VI=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1767890216; c=relaxed/simple;
+	bh=L+IPos5MuKL/ZcH5DfXa/EUElh2E3SkLtomLuaukDOE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=iA8yKj2gArosH/vqzTrcjLcks+hs+sSNZkagWYR4IKJx8Ps2ZpOP4gyg/3GdDwna/suSHlN9Blq5urSt5733GMHi03O1sRIvswlnIHxk79caB7uCXSF9BpRsraddm8Oyd0AWK2qjz5z9bYTscCQFEp1eGfyIXmdyUMj4kHZ6ggQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=apertussolutions.com; spf=pass smtp.mailfrom=apertussolutions.com; dkim=pass (1024-bit key) header.d=apertussolutions.com header.i=dpsmith@apertussolutions.com header.b=p2vL/Cl3; arc=pass smtp.client-ip=136.143.188.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=apertussolutions.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=apertussolutions.com
+ARC-Seal: i=1; a=rsa-sha256; t=1767890167; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=Li/kXjANjd65RQe/mTVw6fzSsm+4XzsFNDAoVJc2DH33e5Z3708UttYEjOBRBWiP35libMtJUu1XJQRs3oEXvwqXuZelksks5bbxo2n5mUzkNqEBKZiXTzRHsBJ0ChltIcN4pBng1lra7RrDvS+ORllHGM0jUll0xnhGMJus95o=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1767890167; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=3fgOKlMQMvrdvMk8koNYIZJMH5yGHQCdYZiiHNFjJEw=; 
+	b=LtXrOUVj+ta+dAHw4nMSae0NbI6tIHT8s3vEqH5NLCGCa0QkU40fNXOTzJed0/BX7Rj/hY2tClKd6BDbrZwBpO0qLVniQmIS2WT82lUyob2ZblmmhTV9zCLHGjy5+PSRhCMXmAzWcTeEGSvucrNy82AWRMTYbFzYsSxA8LpMkCQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1767890167;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=3fgOKlMQMvrdvMk8koNYIZJMH5yGHQCdYZiiHNFjJEw=;
+	b=p2vL/Cl3px20lR9/1mhM5GDoWubTVBr7vdIAD9h4UIH/mGNndn3QuLbgOZwiyP7J
+	h6d8nX+r4RvFu8SOvFWPGE4MO9NZLS+/6NebbLzbxNPPKf+IWCfLA0GcCshBOohIRRP
+	MuDRw8u6m4E9AiY1IJLZruEOP7t9ACdbzYWUhXx0=
+Received: by mx.zohomail.com with SMTPS id 1767890164219491.1739791671507;
+	Thu, 8 Jan 2026 08:36:04 -0800 (PST)
+Message-ID: <91fd7e8e-6c64-458c-9d78-d97482d95705@apertussolutions.com>
+Date: Thu, 8 Jan 2026 11:36:01 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260108120619.00001bc5@huawei.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v15 00/28] x86: Secure Launch support for Intel TXT
+Content-Language: en-US
+To: Dave Hansen <dave.hansen@intel.com>,
+ Ross Philipson <ross.philipson@oracle.com>, linux-kernel@vger.kernel.org,
+ x86@kernel.org, linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-crypto@vger.kernel.org, kexec@lists.infradead.org,
+ linux-efi@vger.kernel.org, iommu@lists.linux.dev
+Cc: tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
+ dave.hansen@linux.intel.com, ardb@kernel.org, mjg59@srcf.ucam.org,
+ James.Bottomley@hansenpartnership.com, peterhuewe@gmx.de, jarkko@kernel.org,
+ jgg@ziepe.ca, luto@amacapital.net, nivedita@alum.mit.edu,
+ herbert@gondor.apana.org.au, davem@davemloft.net, corbet@lwn.net,
+ ebiederm@xmission.com, dwmw2@infradead.org, baolu.lu@linux.intel.com,
+ kanth.ghatraju@oracle.com, andrew.cooper3@citrix.com,
+ trenchboot-devel@googlegroups.com
+References: <20251215233316.1076248-1-ross.philipson@oracle.com>
+ <0cff620d-9be4-487d-8eb1-19375ca58a70@intel.com>
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
+ 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
+In-Reply-To: <0cff620d-9be4-487d-8eb1-19375ca58a70@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 
-On 26/01/08 12:06PM, Jonathan Cameron wrote:
-> On Wed,  7 Jan 2026 09:33:14 -0600
-> John Groves <John@Groves.net> wrote:
+On 12/16/25 17:14, Dave Hansen wrote:
+> On 12/15/25 15:32, Ross Philipson wrote:
+>> Patch set based on commit:
+>> torvalds/master/fd57572253bc356330dbe5b233c2e1d8426c66fd
 > 
-> > From: John Groves <John@Groves.net>
-> > 
-> > The dax_device is created (in the non-pmem case) at hmem probe time via
-> > devm_create_dev_dax(), before we know which driver (device_dax,
-> > fsdev_dax, or kmem) will bind - by calling alloc_dax() with NULL ops,
-> > drivers (i.e. fsdev_dax) that need specific dax_operations must set
-> > them later.
-> > 
-> > Add dax_set_ops() exported function so fsdev_dax can set its ops at
-> > probe time and clear them on remove. device_dax doesn't need ops since
-> > it uses the mmap fault path directly.
-> > 
-> > Use cmpxchg() to atomically set ops only if currently NULL, returning
-> > -EBUSY if ops are already set. This prevents accidental double-binding.
-> > Clearing ops (NULL) always succeeds.
-> > 
-> > Signed-off-by: John Groves <john@groves.net>
-> Hi John
-> 
-> This one runs into the fun mess of mixing devm and other calls.
-> I'd advise you just don't do it because it makes code much harder
-> to review and hits the 'smells bad' button.
-> 
-> Jonathan
+> That's an interesting place to pick. What was the reasoning behind it?
 
-If I don't stink up something, I'm not trying hard enough :D
+It was simply that it was the tip of torvalds/master at the time the 
+patch series was prepared. As far as we could find, there is not a lot 
+of guidance on commit selection in the patch guide. If there is a 
+generally accepted convention we should follow, we would be glad to 
+follow it.
 
-Next iteration will be full-devm.
-
-[ ... ]
-
-Thanks,
-John
-
+v/r,
+dps
 
