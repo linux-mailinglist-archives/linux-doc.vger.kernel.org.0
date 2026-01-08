@@ -1,127 +1,209 @@
-Return-Path: <linux-doc+bounces-71328-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71330-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id BFEA7D03985
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 15:58:00 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 174A6D03506
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 15:23:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id B99553257DCD
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 14:27:02 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3AFBA3289B7F
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 14:01:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 097844A4717;
-	Thu,  8 Jan 2026 12:15:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XX/mUYo+"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6151D43DA44;
+	Thu,  8 Jan 2026 12:27:22 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01748482201;
-	Thu,  8 Jan 2026 12:15:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA2B343636D;
+	Thu,  8 Jan 2026 12:27:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767874517; cv=none; b=DUIKpSWBFMjtn/lvcMKaro4+6+vy7uqj5vK1c7LxwZMPMPQBC/WtVf3CqzADTZiIwskYdJRHJPxKnaWrmhuxyjxqYVZyWtQTT4gczJ7NBy6Z88EThMzmHW25ULEmYvD9Zo5FeA0AvDzuNrmajq70YJ4rkdAqnc+7azHUTGOQ2yc=
+	t=1767875242; cv=none; b=RFt6uZpQo379ZcKAQB/GfDLVnmMkd0ZasK8qUqbtuDA2IqvNXVVQjBBklzSTFUrGFjU0TNk5iGsaJw2xnkohDG2nBGY5Hxfl9piS7Yq/ItSIxiuYJgs8YHUZCAoDACGEX6jNEIMxuFj8vdz9nOci+Plrao1AvH9tMUbPNT40qCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767874517; c=relaxed/simple;
-	bh=puoANkdqjUwpAENBzs8EIsrA+jvE2c2p91Sby4FaBTk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=U5ZB+cF3FZ4ao1LZ8RzZ54AYGzXIj7rT2FyhvhvBCll6MsjpDNqIilr/xjHXJNWeNUU35BY80rTmEUljuY8cwVpk6WCuy+9XUwpAots68ycviEK4G88+iT3neRRXWez539Ekp03Uq4iVMA/YcFpmE9U80z0J3OOUuT9hYZ91zmA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XX/mUYo+; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8149AC2BC87;
-	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767874515;
-	bh=puoANkdqjUwpAENBzs8EIsrA+jvE2c2p91Sby4FaBTk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=XX/mUYo+F2eEwHAbwMyNmVn8nE5BMs4wMQLsErlA9zGaerbVq21ZQiZ1gDLdgmr1Y
-	 uQTI8y7dibK4pqSh4COQCtbrfxFDu8JNuFDXCDpZALGoBDe1th6ZJvZweIY0eMAgEK
-	 OHymePtlSF8AGISMOzkb6BdVX7O9BjRb9tv5qq6z+hoA24GbUTznus6xmsLJdfm2l+
-	 JrU8q5Bjh8vZTRqWSt11dS40iekBbFeOT4F8vAc8c8mPGHOAuxMTE+sbSlmfVuEblF
-	 1q4Ug49jjdUJwq8R2hR+Qb0QqfBVE/IIY2KFb43nLQte2TcrwixNxIU+5v/UIkFkhb
-	 yJ5eXr/fRJQTA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77DD9D185ED;
-	Thu,  8 Jan 2026 12:15:15 +0000 (UTC)
-From: Rodrigo Alencar via B4 Relay <devnull+rodrigo.alencar.analog.com@kernel.org>
-Date: Thu, 08 Jan 2026 12:14:55 +0000
-Subject: [PATCH v3 6/6] Documentation: ABI: testing: add common ABI file
- for iio/frequency
+	s=arc-20240116; t=1767875242; c=relaxed/simple;
+	bh=41316vyJ8zu+32cFRFgmU0a/by8Q0n1PdBcpVfQlya8=;
+	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=orsg8AnDm9EW8anlmkAxs2OhFAUTxQIwvz+NsQyqteJEYnnH63PTBEhhGNhP/iZU8kl0TD1TXbP0O3Hat6auXjf8R5TUQGRtDpnCnSVjOlPZK6IpozPqBlRYkrw4w3O42t2oMcanD92WOg811xNrRav+3OLMgliLU+PdSkGkHgY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.224.83])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4dn40c088NzJ46BR;
+	Thu,  8 Jan 2026 20:27:12 +0800 (CST)
+Received: from dubpeml100005.china.huawei.com (unknown [7.214.146.113])
+	by mail.maildlp.com (Postfix) with ESMTPS id CDB3B40569;
+	Thu,  8 Jan 2026 20:27:16 +0800 (CST)
+Received: from localhost (10.203.177.15) by dubpeml100005.china.huawei.com
+ (7.214.146.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.36; Thu, 8 Jan
+ 2026 12:27:15 +0000
+Date: Thu, 8 Jan 2026 12:27:13 +0000
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
+To: John Groves <John@Groves.net>
+CC: Miklos Szeredi <miklos@szeredi.hu>, Dan Williams
+	<dan.j.williams@intel.com>, Bernd Schubert <bschubert@ddn.com>, "Alison
+ Schofield" <alison.schofield@intel.com>, John Groves <jgroves@micron.com>,
+	Jonathan Corbet <corbet@lwn.net>, Vishal Verma <vishal.l.verma@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>, Matthew Wilcox <willy@infradead.org>, Jan
+ Kara <jack@suse.cz>, Alexander Viro <viro@zeniv.linux.org.uk>, "David
+ Hildenbrand" <david@kernel.org>, Christian Brauner <brauner@kernel.org>,
+	"Darrick J . Wong" <djwong@kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
+	Jeff Layton <jlayton@kernel.org>, Amir Goldstein <amir73il@gmail.com>, Stefan
+ Hajnoczi <shajnocz@redhat.com>, Joanne Koong <joannelkoong@gmail.com>, Josef
+ Bacik <josef@toxicpanda.com>, Bagas Sanjaya <bagasdotme@gmail.com>, Chen
+ Linxuan <chenlinxuan@uniontech.com>, "James Morse" <james.morse@arm.com>,
+	Fuad Tabba <tabba@google.com>, "Sean Christopherson" <seanjc@google.com>,
+	Shivank Garg <shivankg@amd.com>, Ackerley Tng <ackerleytng@google.com>,
+	Gregory Price <gourry@gourry.net>, Aravind Ramesh <arramesh@micron.com>, Ajay
+ Joshi <ajayjoshi@micron.com>, <venkataravis@micron.com>,
+	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<nvdimm@lists.linux.dev>, <linux-cxl@vger.kernel.org>,
+	<linux-fsdevel@vger.kernel.org>
+Subject: Re: [PATCH V3 06/21] dax: Add fs_dax_get() func to prepare dax for
+ fs-dax usage
+Message-ID: <20260108122713.00007e54@huawei.com>
+In-Reply-To: <20260107153332.64727-7-john@groves.net>
+References: <20260107153244.64703-1-john@groves.net>
+	<20260107153332.64727-1-john@groves.net>
+	<20260107153332.64727-7-john@groves.net>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="US-ASCII"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-adf41513-iio-driver-v3-6-23d1371aef48@analog.com>
-References: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
-In-Reply-To: <20260108-adf41513-iio-driver-v3-0-23d1371aef48@analog.com>
-To: linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-doc@vger.kernel.org
-Cc: Jonathan Cameron <jic23@kernel.org>, 
- David Lechner <dlechner@baylibre.com>, Andy Shevchenko <andy@kernel.org>, 
- Lars-Peter Clausen <lars@metafoo.de>, 
- Michael Hennerich <Michael.Hennerich@analog.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
- Rodrigo Alencar <rodrigo.alencar@analog.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1767874513; l=1730;
- i=rodrigo.alencar@analog.com; s=default; h=from:subject:message-id;
- bh=G8lkskp439tmkyRoT9F24VAmxHi49pi19EkNAx8s4Mc=;
- b=3wJO6+sacBSehsN32V8hDJVbltIkuZW6oQEBtjzTIHPVBMMZAPW88TZVj39pbuwlb1qMTqhDi
- utJND7YHF5HDjNPZAcL55s0Dny6c5+s1CuuuR7mBLK9q8R1XWDa64R+
-X-Developer-Key: i=rodrigo.alencar@analog.com; a=ed25519;
- pk=ULeHbgU/OYh/PG/4anHDfLgldFItQHAhOktYRVLMFRo=
-X-Endpoint-Received: by B4 Relay for rodrigo.alencar@analog.com/default
- with auth_id=561
-X-Original-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
-Reply-To: rodrigo.alencar@analog.com
+X-ClientProxiedBy: lhrpeml500012.china.huawei.com (7.191.174.4) To
+ dubpeml100005.china.huawei.com (7.214.146.113)
 
-From: Rodrigo Alencar <rodrigo.alencar@analog.com>
+On Wed,  7 Jan 2026 09:33:15 -0600
+John Groves <John@Groves.net> wrote:
 
-Add ABI documentation file for PLL/DDS devices with frequency_resolution
-sysfs entry attribute used by ADF4350 and ADF41513
+> The fs_dax_get() function should be called by fs-dax file systems after
+> opening a fsdev dax device. This adds holder_operations, which provides
+> a memory failure callback path and effects exclusivity between callers
+> of fs_dax_get().
+> 
+> fs_dax_get() is specific to fsdev_dax, so it checks the driver type
+> (which required touching bus.[ch]). fs_dax_get() fails if fsdev_dax is
+> not bound to the memory.
+> 
+> This function serves the same role as fs_dax_get_by_bdev(), which dax
+> file systems call after opening the pmem block device.
+> 
+> This can't be located in fsdev.c because struct dax_device is opaque
+> there.
+> 
+> This will be called by fs/fuse/famfs.c in a subsequent commit.
+> 
+> Signed-off-by: John Groves <john@groves.net>
+Hi John,
 
-Signed-off-by: Rodrigo Alencar <rodrigo.alencar@analog.com>
----
- Documentation/ABI/testing/sysfs-bus-iio-frequency | 11 +++++++++++
- MAINTAINERS                                       |  1 +
- 2 files changed, 12 insertions(+)
+A few passing comments on this one.
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-iio-frequency b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-new file mode 100644
-index 000000000000..1ce8ae578fd6
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-bus-iio-frequency
-@@ -0,0 +1,11 @@
-+What:		/sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency_resolution
-+KernelVersion:	6.20
-+Contact:	linux-iio@vger.kernel.org
-+Description:
-+		Stores channel Y frequency resolution/channel spacing in Hz for PLL
-+		devices. The given value directly influences the operating mode when
-+		fractional-N synthesis is required, as it derives values for
-+		configurable modulus parameters used in the calculation of the output
-+		frequency. It is assumed that the algorithm that is used to compute
-+		the various dividers, is able to generate proper values for multiples
-+		of channel spacing.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 3bb7d9fe7ed8..f0dc0e7c1bbc 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1615,6 +1615,7 @@ M:	Rodrigo Alencar <rodrigo.alencar@analog.com>
- L:	linux-iio@vger.kernel.org
- S:	Supported
- W:	https://ez.analog.com/linux-software-drivers
-+F:	Documentation/ABI/testing/sysfs-bus-iio-frequency
- F:	Documentation/devicetree/bindings/iio/frequency/adi,adf41513.yaml
- F:	Documentation/iio/adf41513.rst
- F:	drivers/iio/frequency/adf41513.c
+Jonathan
 
--- 
-2.43.0
+> ---
 
+>  #define dax_driver_register(driver) \
+> diff --git a/drivers/dax/super.c b/drivers/dax/super.c
+> index ba0b4cd18a77..68c45b918cff 100644
+> --- a/drivers/dax/super.c
+> +++ b/drivers/dax/super.c
+> @@ -14,6 +14,7 @@
+>  #include <linux/fs.h>
+>  #include <linux/cacheinfo.h>
+>  #include "dax-private.h"
+> +#include "bus.h"
+>  
+>  /**
+>   * struct dax_device - anchor object for dax services
+> @@ -121,6 +122,59 @@ void fs_put_dax(struct dax_device *dax_dev, void *holder)
+>  EXPORT_SYMBOL_GPL(fs_put_dax);
+>  #endif /* CONFIG_BLOCK && CONFIG_FS_DAX */
+>  
+> +#if IS_ENABLED(CONFIG_DEV_DAX_FS)
+> +/**
+> + * fs_dax_get() - get ownership of a devdax via holder/holder_ops
+> + *
+> + * fs-dax file systems call this function to prepare to use a devdax device for
+> + * fsdax. This is like fs_dax_get_by_bdev(), but the caller already has struct
+> + * dev_dax (and there is no bdev). The holder makes this exclusive.
+> + *
+> + * @dax_dev: dev to be prepared for fs-dax usage
+> + * @holder: filesystem or mapped device inside the dax_device
+> + * @hops: operations for the inner holder
+> + *
+> + * Returns: 0 on success, <0 on failure
+> + */
+> +int fs_dax_get(struct dax_device *dax_dev, void *holder,
+> +	const struct dax_holder_operations *hops)
+> +{
+> +	struct dev_dax *dev_dax;
+> +	struct dax_device_driver *dax_drv;
+> +	int id;
+> +
+> +	id = dax_read_lock();
+
+Given this is an srcu_read_lock under the hood you could do similar
+to the DEFINE_LOCK_GUARD_1 for the srcu (srcu.h) (though here it's a
+DEFINE_LOCK_GUARD_0 given the lock itself isn't a parameter and then
+use scoped_guard() here.  Might not be worth the hassle and would need
+a wrapper macro to poke &dax_srcu in which means exposing that at least
+a little in a header.
+
+DEFINE_LOCK_GUARD_0(_T->idx = dax_read_lock, dax_read_lock(_T->idx), idx);
+Based loosely on the irqflags.h irqsave one. 
+
+> +	if (!dax_dev || !dax_alive(dax_dev) || !igrab(&dax_dev->inode)) {
+> +		dax_read_unlock(id);
+> +		return -ENODEV;
+> +	}
+> +	dax_read_unlock(id);
+> +
+> +	/* Verify the device is bound to fsdev_dax driver */
+> +	dev_dax = dax_get_private(dax_dev);
+> +	if (!dev_dax || !dev_dax->dev.driver) {
+> +		iput(&dax_dev->inode);
+> +		return -ENODEV;
+> +	}
+> +
+> +	dax_drv = to_dax_drv(dev_dax->dev.driver);
+> +	if (dax_drv->type != DAXDRV_FSDEV_TYPE) {
+> +		iput(&dax_dev->inode);
+> +		return -EOPNOTSUPP;
+> +	}
+> +
+> +	if (cmpxchg(&dax_dev->holder_data, NULL, holder)) {
+> +		iput(&dax_dev->inode);
+> +		return -EBUSY;
+> +	}
+> +
+> +	dax_dev->holder_ops = hops;
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL_GPL(fs_dax_get);
+> +#endif /* DEV_DAX_FS */
+> +
+>  enum dax_device_flags {
+>  	/* !alive + rcu grace period == no new operations / mappings */
+>  	DAXDEV_ALIVE,
+> diff --git a/include/linux/dax.h b/include/linux/dax.h
+> index 3fcd8562b72b..76f2a75f3144 100644
+> --- a/include/linux/dax.h
+> +++ b/include/linux/dax.h
+> @@ -53,6 +53,7 @@ struct dax_holder_operations {
+>  struct dax_device *alloc_dax(void *private, const struct dax_operations *ops);
+>  
+>  #if IS_ENABLED(CONFIG_DEV_DAX_FS)
+> +int fs_dax_get(struct dax_device *dax_dev, void *holder, const struct dax_holder_operations *hops);
+I'd wrap this.  It's rather long and there isn't a huge readability benefit in keeping
+it on one line.
+>  struct dax_device *inode_dax(struct inode *inode);
+>  #endif
+>  void *dax_holder(struct dax_device *dax_dev);
 
 
