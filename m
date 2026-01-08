@@ -1,166 +1,138 @@
-Return-Path: <linux-doc+bounces-71307-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71310-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAB75D02503
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 12:11:51 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 92371D027E5
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 12:49:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C7028304BD37
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 11:02:32 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id BD6B930CE346
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 11:34:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 374674247DD;
-	Thu,  8 Jan 2026 10:50:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E80864C1427;
+	Thu,  8 Jan 2026 11:15:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="usCgKFl5"
+	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="osXt/XjS"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from canpmsgout08.his.huawei.com (canpmsgout08.his.huawei.com [113.46.200.223])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46852225402;
-	Thu,  8 Jan 2026 10:50:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B1B84BF3D2;
+	Thu,  8 Jan 2026 11:15:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.223
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767869408; cv=none; b=bI6Ma0deQoifljGM02Kdh9i83reNucAI2m4cqeSqO2OsAe28LwVf+hgeSFJm39QzTk8S9Sx7HWdnFkizStA62ql4vjJSkYcnDz1XGuXisLYIsIQyfDho+V2CTGz1HscIe/NVfNJbm8e04osGJ5s/022KZvHUqMRFJOLbicodlxc=
+	t=1767870956; cv=none; b=IXKoxT45wSII/LXGD6QOHSGYovz+mbcoA4uYox0T3IgNGjwMUae7KVe9PkVflNgUR6mNrxmmoQUYgT6BVmQqSBYuaeGptzppbStqDVS/fX0iK27ke7rUhPwSLTapD+REwuA3ZotX6PhXXFqcymtfNoq4N5Qv6zkmKMctPDizcFM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767869408; c=relaxed/simple;
-	bh=J3iFiBpJ4MgKicn470iJM8chZLbSii7yJkIc1bWG2e0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GK46VZa3kIPdBtmZ1V+F57PVlJy/zUmf7id305vb+hPBqONCwh3VcUO312vHu41QJWV2H3ViT2OK2QH16VujHYJ6if+9HPUi/qtvrIPi277rIw4Bm0yfMLbrWwKpL6TsbhZqsmQVaKdgnONELOeNj5YUB2PD6UB71W08zqBYN6c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=usCgKFl5; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 746B0C116C6;
-	Thu,  8 Jan 2026 10:50:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1767869407;
-	bh=J3iFiBpJ4MgKicn470iJM8chZLbSii7yJkIc1bWG2e0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=usCgKFl5kg8zlRJFt2DtLBv5AtWjrBNWxhCbANoXoV0dieV8IAVcmgO4ZSVct4KRu
-	 NNBwxgrBeAlXmeAAkUXlojV8lC6pPKuD1XCqkBlkmGxzDbJt8gFRxjBpE2zqZKpxnt
-	 CLbET5n7TY+SOpdplLNx+Qw06IMgYQI2zCI9kUlNN+Rei53g6QbK1s/ryJsHEeC8cM
-	 UUhuOjm1ZmvJPiaSVnR6DQStVjirvW/UEg+3WRFjcPUPmJ3xqLNu2kpAKubYZOno85
-	 U2LTqrlzuQlLJ4olT6oZPXmuH64M9v/Ria2Y+zuaZbWrrrQUKswB5J1D3RZCklQvIK
-	 Akv1QTsSxFVoQ==
-Date: Thu, 8 Jan 2026 11:50:02 +0100
-From: Benjamin Tissoires <bentiss@kernel.org>
-To: Tomasz =?utf-8?Q?Paku=C5=82a?= <tomasz.pakula.oficjalny@gmail.com>
-Cc: dmitry.torokhov@gmail.com, corbet@lwn.net, jikos@kernel.org, 
-	linux-input@vger.kernel.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, 
-	vi@endrift.com, linux-kernel@altimeter.info, peter.hutterer@who-t.net
-Subject: Re: [RFC PATCH 4/6] Input: Assign EV_BTN event to HID Joysticks
-Message-ID: <2vycv2ka2vnuemvkqh4wnrl6iwdbta5c6wkywpbg3p5oecdecr@n7fjhfjvjwuo>
-References: <20260104213132.163904-1-tomasz.pakula.oficjalny@gmail.com>
- <20260104213132.163904-5-tomasz.pakula.oficjalny@gmail.com>
+	s=arc-20240116; t=1767870956; c=relaxed/simple;
+	bh=9fIe5lZB8kXbHGRFkGGf2pipDLr38M/rS7Z1qMa9Kq8=;
+	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=jywWxAO79zL5aj5w1MjmXxL6l2WhczimghUOJ+225ySSbw4ti8gkxIzdp75nVSciU/bTfBQrv4wg/9ak7mQtuQF90Q4zWjfFffKNp/mF5bI1UaH2SSeO52l1idu0wUeaM2j/3vVGgH7XWFvpK1IP/EDQsrzIPuGJyedmm2sQ+Pg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=osXt/XjS; arc=none smtp.client-ip=113.46.200.223
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
+	c=relaxed/relaxed; q=dns/txt;
+	h=From;
+	bh=rR+hPnKXppitFtPVw6bSJCCGCkaLlEVILuJbZIhkRSw=;
+	b=osXt/XjSI6btlihtlMay7q9HooLXHBZoi6oNgSyev5CJ1eMRa2PtNByJ/u1W0XdUpW7Va/V6P
+	3BsLGuHJCVn11hnLsZdvBFE8Tp5YmXimHuzMnovwgQuCYJ6Os2h/+lQiLbd5dK0RsL1H3Ax1Bx/
+	+KmfYM1cXm4hDZZe9qVl3hA=
+Received: from mail.maildlp.com (unknown [172.19.162.92])
+	by canpmsgout08.his.huawei.com (SkyGuard) with ESMTPS id 4dn2LS1CtzzmV6h;
+	Thu,  8 Jan 2026 19:12:32 +0800 (CST)
+Received: from dggemv705-chm.china.huawei.com (unknown [10.3.19.32])
+	by mail.maildlp.com (Postfix) with ESMTPS id D3A3B40565;
+	Thu,  8 Jan 2026 19:15:48 +0800 (CST)
+Received: from kwepemq200002.china.huawei.com (7.202.195.90) by
+ dggemv705-chm.china.huawei.com (10.3.19.32) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 8 Jan 2026 19:15:48 +0800
+Received: from M910t.huawei.com (10.110.54.157) by
+ kwepemq200002.china.huawei.com (7.202.195.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.11; Thu, 8 Jan 2026 19:15:47 +0800
+From: Changbin Du <changbin.du@huawei.com>
+To: Mauro Carvalho Chehab <mchehab@kernel.org>, Jonathan Corbet
+	<corbet@lwn.net>
+CC: <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Changbin Du
+	<changbin.du@huawei.com>, Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Subject: [PATCH v3] tools: jobserver: Prevent deadlock caused by incorrect jobserver configuration and enhance error reporting
+Date: Thu, 8 Jan 2026 19:15:34 +0800
+Message-ID: <20260108111534.2952866-1-changbin.du@huawei.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260104213132.163904-5-tomasz.pakula.oficjalny@gmail.com>
+Content-Type: text/plain
+X-ClientProxiedBy: kwepems500002.china.huawei.com (7.221.188.17) To
+ kwepemq200002.china.huawei.com (7.202.195.90)
 
-On Jan 04 2026, Tomasz Pakuła wrote:
-> Joysticks will now fire EV_BTN for every of their buttons, even buttons
-> that were previously ignored because they were cut off by KEY_MAX. This
-> in turns enables joysticks to finally report buttons above 80 which was
-> the previous limitation.
-> 
-> Signed-off-by: Tomasz Pakuła <tomasz.pakula.oficjalny@gmail.com>
-> ---
->  drivers/hid/hid-input.c | 27 +++++++++++++++++++++------
->  include/linux/input.h   |  2 ++
->  2 files changed, 23 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/hid/hid-input.c b/drivers/hid/hid-input.c
-> index 900a6fc9813e..1c11077b1577 100644
-> --- a/drivers/hid/hid-input.c
-> +++ b/drivers/hid/hid-input.c
-> @@ -760,11 +760,15 @@ static void hidinput_configure_usage(struct hid_input *hidinput, struct hid_fiel
->  		case HID_GD_MOUSE:
->  		case HID_GD_POINTER:  code += BTN_MOUSE; break;
->  		case HID_GD_JOYSTICK:
-> -				if (code <= 0xf)
-> -					code += BTN_JOYSTICK;
-> -				else
-> -					code += BTN_TRIGGER_HAPPY - 0x10;
-> -				break;
-> +			if (input->button_count >= INPUT_MAX_BUTTONS)
-> +				goto ignore;
-> +
-> +			code += BTN_JOYSTICK;
-> +			if (code > BTN_DEAD)
-> +				code += BTN_TRIGGER_HAPPY - BTN_DEAD - 1;
-> +			if (code > KEY_MAX)
-> +				code = KEY_RESERVED;
-> +			break;
->  		case HID_GD_GAMEPAD:
->  				if (code <= 0xf)
->  					code += BTN_GAMEPAD;
-> @@ -1379,7 +1383,6 @@ static void hidinput_configure_usage(struct hid_input *hidinput, struct hid_fiel
->  	}
->  
->  	set_bit(usage->type, input->evbit);
-> -
->  	/*
->  	 * This part is *really* controversial:
->  	 * - HID aims at being generic so we should do our best to export
-> @@ -1390,12 +1393,18 @@ static void hidinput_configure_usage(struct hid_input *hidinput, struct hid_fiel
->  	 *   *_MISC+N to overwrite a legitimate even, which confuses userspace
->  	 *   (for instance ABS_MISC + 7 is ABS_MT_SLOT, which has a different
->  	 *   processing)
-> +	 * - Joysticks can have arbitrary number of buttons without defined
-> +	 *   usages. Buttons that extend beyond KEY_MAX are assigned to
-> +	 *   KEY_RESERVED thus deduplication must be disabled for them.
->  	 *
->  	 * If devices still want to use this (at their own risk), they will
->  	 * have to use the quirk HID_QUIRK_INCREMENT_USAGE_ON_DUPLICATE, but
->  	 * the default should be a reliable mapping.
->  	 */
->  	while (usage->code <= max && test_and_set_bit(usage->code, bit)) {
-> +		if (field->application == HID_GD_JOYSTICK && usage->code == KEY_RESERVED)
-> +			break;
-> +
->  		if (device->quirks & HID_QUIRK_INCREMENT_USAGE_ON_DUPLICATE) {
->  			usage->code = find_next_zero_bit(bit,
->  							 max + 1,
-> @@ -1455,6 +1464,12 @@ static void hidinput_configure_usage(struct hid_input *hidinput, struct hid_fiel
->  	if (usage->type == EV_KEY) {
->  		set_bit(EV_MSC, input->evbit);
->  		set_bit(MSC_SCAN, input->mscbit);
-> +
-> +		if (field->application == HID_GD_JOYSTICK &&
-> +		    (usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
+When using GNU Make's jobserver feature in kernel builds, a bug in MAKEFLAGS
+propagation caused "--jobserver-auth=r,w" to reference an unintended file
+descriptor. This led to infinite loops in jobserver-exec's os.read() calls
+due to empty token.
 
-Too bad we only set up the button ranges for joysticks, when we could do
-this for all HID devices with a button usage page.
+My shell opened /etc/passwd for some reason without closing it, and as a
+result, all child processes inherited this fd 3.
 
-It also makes the code hard to follow because we now enable this at the
-different place than the other mappings.
+$ ls -l /proc/self/fd
+total 0
+lrwx------ 1 changbin changbin 64 Dec 25 13:03 0 -> /dev/pts/1
+lrwx------ 1 changbin changbin 64 Dec 25 13:03 1 -> /dev/pts/1
+lrwx------ 1 changbin changbin 64 Dec 25 13:03 2 -> /dev/pts/1
+lr-x------ 1 changbin changbin 64 Dec 25 13:03 3 -> /etc/passwd
+lr-x------ 1 changbin changbin 64 Dec 25 13:03 4 -> /proc/1421383/fd
 
-Cheers,
-Benjamin
+In this case, the `make` should open a new file descriptor for jobserver
+control, but clearly, it did not do so and instead still passed fd 3 as
+"--jobserver-auth=3,4" in MAKEFLAGS. (The version of my gnu make is 4.3)
 
-> +			set_bit(EV_BTN, input->evbit);
-> +			++input->button_count;
-> +		}
->  	}
->  
->  	return;
-> diff --git a/include/linux/input.h b/include/linux/input.h
-> index f6389de4a4d1..7f39c663fa85 100644
-> --- a/include/linux/input.h
-> +++ b/include/linux/input.h
-> @@ -214,6 +214,8 @@ struct input_dev {
->  };
->  #define to_input_dev(d) container_of(d, struct input_dev, dev)
->  
-> +#define INPUT_MAX_BUTTONS 2048 /* A sane limit of supported device buttons */
-> +
->  /*
->   * Verify that we are in sync with input_device_id mod_devicetable.h #defines
->   */
-> -- 
-> 2.52.0
-> 
+This update ensures robustness against invalid jobserver configurations,
+even when `make` incorrectly pass non-pipe file descriptors.
+ * Rejecting empty reads to prevent infinite loops on EOF.
+ * Clearing `self.jobs` to avoid writing to incorrect files if invalid tokens
+   are detected.
+ * Printing detailed error messages to stderr to inform the user.
+
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Reviewed-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Signed-off-by: Changbin Du <changbin.du@huawei.com>
+
+---
+  v3: format exception with repr(e).
+  v2: remove validation for all bytes are '+' characters. (Mauro)
+---
+ tools/lib/python/jobserver.py | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/tools/lib/python/jobserver.py b/tools/lib/python/jobserver.py
+index a24f30ef4fa8..bd231f847032 100755
+--- a/tools/lib/python/jobserver.py
++++ b/tools/lib/python/jobserver.py
+@@ -91,6 +91,10 @@ class JobserverExec:
+             while True:
+                 try:
+                     slot = os.read(self.reader, 8)
++                    if not slot:
++                        # Clear self.jobs to prevent us from probably writing incorrect file.
++                        self.jobs = []
++                        raise ValueError("unexpected empty token from jobserver fd, invalid '--jobserver-auth=' setting?")
+                     self.jobs += slot
+                 except (OSError, IOError) as e:
+                     if e.errno == errno.EWOULDBLOCK:
+@@ -105,7 +109,8 @@ class JobserverExec:
+             # to sit here blocked on our child.
+             self.claim = len(self.jobs) + 1
+ 
+-        except (KeyError, IndexError, ValueError, OSError, IOError):
++        except (KeyError, IndexError, ValueError, OSError, IOError) as e:
++            print(f"Warning: {repr(e)}", file=sys.stderr)
+             # Any missing environment strings or bad fds should result in just
+             # not being parallel.
+             self.claim = None
+-- 
+2.43.0
+
 
