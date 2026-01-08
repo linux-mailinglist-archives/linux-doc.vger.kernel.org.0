@@ -1,55 +1,54 @@
-Return-Path: <linux-doc+bounces-71436-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71438-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABAD5D04F04
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:27:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6A4DD04F00
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 18:26:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8F11133DB0E1
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 17:00:52 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id AE38933E413D
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 17:01:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C752332573C;
-	Thu,  8 Jan 2026 16:59:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 90936328B43;
+	Thu,  8 Jan 2026 16:59:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="crHhfhBP"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="h9hHW9U/"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 314582E1EE5
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:59:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDAD5327C08;
+	Thu,  8 Jan 2026 16:59:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767891559; cv=none; b=JYg4pXWEmz/CETWJC/5/+RDniy+mhYKdtvNmFvDN3OBMOM/PaqEsX1xs3maGjAi1CV7xdBdvEHLVxrujyi/76uOe7GfQD89JrYItVKe0APTVzEYNuwcqSAko6ZArSCERTmVJ/vtzP0Iuo7gAcFXIpoP/hXj/5F0p9fJvQjYdA9A=
+	t=1767891564; cv=none; b=lcK8wJPMm8PNFoYPS0bciuZEGv4k+VEhGBVSkN+sQX9zNUtXwTU7A3h2lvQi268oip6CsAgaBl5Erj3sTdRclRp0q0PUWiSRenhQ28BiDhdpdIFQM+jGQbX76jNRrGQHduhJV9vgjCVxyJVwjLnw4bpMGsUuIcJ3VNcrtzElc8Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767891559; c=relaxed/simple;
-	bh=Csam+1hyCd0eC0C2z5CMUVnDsUYBJSzkCxmNlH5O7hI=;
+	s=arc-20240116; t=1767891564; c=relaxed/simple;
+	bh=othZ9uEGhlxCmc6L79S7G0WimW789Md/2pzxa21duZA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=fJBFDGxKaIX0ddEKLuuBEZnHX6sDr/Iye7HigrfmR8cBWOUBscZTs0TqaoYxw/IuatyGCIkhP5IA4kYQP8kKnAP5FzsmFMYKXxmCtgS86a5mA6hwTeYUoh8JnkmHAVXD8D4ZTYiZoXaOCY11pUs9mOz9TANuTlMIJODmZrSs5Hs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=crHhfhBP; arc=none smtp.client-ip=185.246.85.4
+	 In-Reply-To:To:Cc; b=Q2SC+YdYkZcnZG9qKsiTRg5xzH63i8vuCZIBa2GGw/uniOtD8CBU4uwzXq9YU4NfS4T2GDbDdfOPo4wXiBUglND9I+twqxJI31TKiHq+PB6WYUSdZ8U9dIndilCFTPBP7AYaZlR/LsVdERgySxIW4aVCkWds2mq9G+87CU8rn78=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=h9hHW9U/; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id DE5024E42000;
-	Thu,  8 Jan 2026 16:59:16 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 59A17C1F6C0;
+	Thu,  8 Jan 2026 16:58:55 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id B1E656072B;
-	Thu,  8 Jan 2026 16:59:16 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 3E345103C889E;
-	Thu,  8 Jan 2026 17:59:14 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 8ED976072B;
+	Thu,  8 Jan 2026 16:59:21 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9E129103C88BD;
+	Thu,  8 Jan 2026 17:59:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1767891555; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1767891560; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=cErOh0nPQq4JaUTOOkelLy8W6h1AXJeJNMbiy0SldGw=;
-	b=crHhfhBP2/DunogaW8ivUXJKzcXKeaGQlnlYho5TAKDEVI/JFCBwmGieUXdSUCIibPllmi
-	hLvGh7K82nDLhUkUF1LdCjkMTrmuWS1YDmyyakPR/KAhx2ku6SilWX1VR9U6Jr+h1or8G7
-	iWRi6MsTg2ZQBdz27xB6zxFJ5NbDaXSOvXI3RmsDoXDwCKjCDzYflJSVhdFfP03H57QjHi
-	PJmSgpTFb05+s944CjjUffqBMQrD18DDRhcjEM3J2X4373aR1gm68dD+o/Yx69BRA4eZJA
-	4J+Icy5QZr/Kr1739G5JOGHSXwIvZcsa9Uj6Y8UMXRt0PDe22M+cladFR6wlXA==
+	bh=R21unSfzXWHOBbt64HP6HkJF7cNny7UC0Q5XDAA0ecA=;
+	b=h9hHW9U/ERTF2yyOfkmZse6gw9G0VUb8qBBTNAankEMyG8hu4Et6zLAF4tfGc37ApuSWm0
+	OlTKcVlfekklpwXu3g5jZ+FW7BmAl8QPtu6p+WmJHOQBdeNIi2OJWFU4XuLKtCYueZUPtV
+	WLlD9SMEtp45N6129YjSr0aGoudCl1haQu+pTySeh3A4FAbunRqYcD9I2C3ErxfqOOEKEM
+	B2AA4N7EI2BlyMLzn9uDTbyn78SzuSPTWNMEj703xm4X6HEIw8UwTMBggpMFWysGpTYVHP
+	l7IRS0FWlSgW9K26CHibBG21nV1satKXGv4N4t4Os7yGW0zf84fhJbIpEYVi3g==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 08 Jan 2026 17:57:47 +0100
-Subject: [PATCH v2 14/27] mtd: spi-nor: swp: Simplify checking the
- locked/unlocked range
+Date: Thu, 08 Jan 2026 17:57:49 +0100
+Subject: [PATCH v2 16/27] mtd: spi-nor: Create a local SR cache
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -58,7 +57,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-14-c462ef806130@bootlin.com>
+Message-Id: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-16-c462ef806130@bootlin.com>
 References: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 In-Reply-To: <20260108-winbond-v6-18-rc1-spi-nor-swp-v2-0-c462ef806130@bootlin.com>
 To: Tudor Ambarus <tudor.ambarus@linaro.org>, 
@@ -73,87 +72,134 @@ Cc: Sean Anderson <sean.anderson@linux.dev>,
 X-Mailer: b4 0.14.3
 X-Last-TLS-Session-Version: TLSv1.3
 
-In both the locking/unlocking steps, at the end we verify whether we do
-not lock/unlock more than requested (in which case an error must be
-returned).
+In order to be able to generate debugfs output without having to
+actually reach the flash, create a SPI NOR local cache of the status
+registers. What matters in our case are all the bits related to sector
+locking. As such, in order to make it clear that this cache is not
+intended to be used anywhere else, we zero the irrelevant bits.
 
-While being possible to do that with very simple mask comparisons, it
-does not scale when adding extra locking features such as the CMP
-possibility. In order to make these checks slightly easier to read and
-more future proof, use existing helpers to read the (future) status
-register, extract the covered range, and compare it with very usual
-algebric comparisons.
+The cache is initialized once during the early init, and then maintained
+every time the write protection scheme is updated.
 
+Suggested-by: Michael Walle <mwalle@kernel.org>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/spi-nor/swp.c | 25 +++++++++++++++++--------
- 1 file changed, 17 insertions(+), 8 deletions(-)
+ drivers/mtd/spi-nor/core.c  |  6 +++++-
+ drivers/mtd/spi-nor/core.h  |  1 +
+ drivers/mtd/spi-nor/swp.c   | 35 +++++++++++++++++++++++++++++++++--
+ include/linux/mtd/spi-nor.h |  2 ++
+ 4 files changed, 41 insertions(+), 3 deletions(-)
 
+diff --git a/drivers/mtd/spi-nor/core.c b/drivers/mtd/spi-nor/core.c
+index 97da30d9f6c1..ca497ea2228c 100644
+--- a/drivers/mtd/spi-nor/core.c
++++ b/drivers/mtd/spi-nor/core.c
+@@ -3328,8 +3328,12 @@ static int spi_nor_init(struct spi_nor *nor)
+ 	 */
+ 	if (IS_ENABLED(CONFIG_MTD_SPI_NOR_SWP_DISABLE) ||
+ 	    (IS_ENABLED(CONFIG_MTD_SPI_NOR_SWP_DISABLE_ON_VOLATILE) &&
+-	     nor->flags & SNOR_F_SWP_IS_VOLATILE))
++	     nor->flags & SNOR_F_SWP_IS_VOLATILE)) {
+ 		spi_nor_try_unlock_all(nor);
++	} else {
++		/* In the other cases, make sure the debugfs SR cache is up to date */
++		spi_nor_cache_sr_lock_bits(nor, NULL);
++	}
+ 
+ 	if (nor->addr_nbytes == 4 &&
+ 	    nor->read_proto != SNOR_PROTO_8_8_8_DTR &&
+diff --git a/drivers/mtd/spi-nor/core.h b/drivers/mtd/spi-nor/core.h
+index 3dc9ba3bc6da..091eb934abe4 100644
+--- a/drivers/mtd/spi-nor/core.h
++++ b/drivers/mtd/spi-nor/core.h
+@@ -674,6 +674,7 @@ int spi_nor_post_bfpt_fixups(struct spi_nor *nor,
+ 
+ void spi_nor_init_default_locking_ops(struct spi_nor *nor);
+ void spi_nor_try_unlock_all(struct spi_nor *nor);
++void spi_nor_cache_sr_lock_bits(struct spi_nor *nor, u8 *sr);
+ void spi_nor_set_mtd_locking_ops(struct spi_nor *nor);
+ void spi_nor_set_mtd_otp_ops(struct spi_nor *nor);
+ 
 diff --git a/drivers/mtd/spi-nor/swp.c b/drivers/mtd/spi-nor/swp.c
-index e2e423b20989..c45a9ddd5788 100644
+index c3dbc8832025..7a6c2b8ef921 100644
 --- a/drivers/mtd/spi-nor/swp.c
 +++ b/drivers/mtd/spi-nor/swp.c
-@@ -198,7 +198,8 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	u64 min_prot_len;
- 	int ret;
- 	u8 status_old[1] = {}, status_new[1] = {};
--	u8 bp_mask = spi_nor_get_sr_bp_mask(nor);
-+	loff_t ofs_old, ofs_new;
-+	u64 len_old, len_new;
- 	loff_t lock_len;
- 	bool can_be_top = true, can_be_bottom = nor->flags & SNOR_F_HAS_SR_TB;
- 	bool use_top;
-@@ -246,10 +247,6 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	if (ret)
- 		return ret;
+@@ -160,6 +160,25 @@ static int spi_nor_build_sr(struct spi_nor *nor, const u8 *old_sr, u8 *new_sr,
+ 	return 0;
+ }
  
--	/* Don't "lock" with no region! */
--	if (!(status_new[0] & bp_mask))
--		return -EINVAL;
--
- 	/*
- 	 * Disallow further writes if WP# pin is neither left floating nor
- 	 * wrongly tied to GND (that includes internal pull-downs).
-@@ -262,8 +259,16 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	if (status_new[0] == status_old[0])
- 		return 0;
- 
-+	spi_nor_get_locked_range_sr(nor, status_old, &ofs_old, &len_old);
-+	spi_nor_get_locked_range_sr(nor, status_new, &ofs_new, &len_new);
++/*
++ * Keep a local cache containing all lock-related bits for debugfs use only.
++ * This way, debugfs never needs to access the flash directly.
++ */
++void spi_nor_cache_sr_lock_bits(struct spi_nor *nor, u8 *sr)
++{
++	u8 bp_mask = spi_nor_get_sr_bp_mask(nor);
++	u8 tb_mask = spi_nor_get_sr_tb_mask(nor);
 +
-+	/* Don't "lock" with no region! */
-+	if (!len_new)
-+		return -EINVAL;
++	if (!sr) {
++		if (spi_nor_read_sr(nor, nor->bouncebuf))
++			return;
 +
- 	/* Only modify protection if it will not unlock other areas */
--	if ((status_new[0] & bp_mask) < (status_old[0] & bp_mask))
-+	if (len_old &&
-+	    (ofs_old < ofs_new || (ofs_new + len_new) < (ofs_old + len_old)))
++		sr = nor->bouncebuf;
++	}
++
++	nor->dfs_sr_cache[0] = sr[0] & (bp_mask | tb_mask | SR_SRWD);
++}
++
+ /*
+  * Lock a region of the flash. Compatible with ST Micro and similar flash.
+  * Supports the block protection bits BP{0,1,2}/BP{0,1,2,3} in the status
+@@ -269,7 +288,13 @@ static int spi_nor_sr_lock(struct spi_nor *nor, loff_t ofs, u64 len)
+ 	    (ofs_old < ofs_new || (ofs_new + len_new) < (ofs_old + len_old)))
  		return -EINVAL;
  
- 	return spi_nor_write_sr_and_check(nor, status_new[0]);
-@@ -279,7 +284,8 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
- 	u64 min_prot_len;
- 	int ret;
- 	u8 status_old[1], status_new[1];
--	u8 bp_mask = spi_nor_get_sr_bp_mask(nor);
-+	loff_t ofs_old, ofs_new;
-+	u64 len_old, len_new;
- 	loff_t lock_len;
- 	bool can_be_top = true, can_be_bottom = nor->flags & SNOR_F_HAS_SR_TB;
- 	bool use_top;
-@@ -344,7 +350,10 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
- 		return 0;
+-	return spi_nor_write_sr_and_check(nor, status_new[0]);
++	ret = spi_nor_write_sr_and_check(nor, status_new[0]);
++	if (ret)
++		return ret;
++
++	spi_nor_cache_sr_lock_bits(nor, status_new);
++
++	return 0;
+ }
  
- 	/* Only modify protection if it will not lock other areas */
--	if ((status_new[0] & bp_mask) > (status_old[0] & bp_mask))
-+	spi_nor_get_locked_range_sr(nor, status_old, &ofs_old, &len_old);
-+	spi_nor_get_locked_range_sr(nor, status_new, &ofs_new, &len_new);
-+	if (len_old && len_new &&
-+	    (ofs_new < ofs_old || (ofs_old + len_old) < (ofs_new + len_new)))
+ /*
+@@ -351,7 +376,13 @@ static int spi_nor_sr_unlock(struct spi_nor *nor, loff_t ofs, u64 len)
+ 	    (ofs_new < ofs_old || (ofs_old + len_old) < (ofs_new + len_new)))
  		return -EINVAL;
  
- 	return spi_nor_write_sr_and_check(nor, status_new[0]);
+-	return spi_nor_write_sr_and_check(nor, status_new[0]);
++	ret = spi_nor_write_sr_and_check(nor, status_new[0]);
++	if (ret)
++		return ret;
++
++	spi_nor_cache_sr_lock_bits(nor, status_new);
++
++	return 0;
+ }
+ 
+ /*
+diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
+index 90a0cf583512..9ad77f9e76c2 100644
+--- a/include/linux/mtd/spi-nor.h
++++ b/include/linux/mtd/spi-nor.h
+@@ -371,6 +371,7 @@ struct spi_nor_flash_parameter;
+  * @reg_proto:		the SPI protocol for read_reg/write_reg/erase operations
+  * @sfdp:		the SFDP data of the flash
+  * @debugfs_root:	pointer to the debugfs directory
++ * @dfs_sr_cache:	Status Register cached value for debugfs use only
+  * @controller_ops:	SPI NOR controller driver specific operations.
+  * @params:		[FLASH-SPECIFIC] SPI NOR flash parameters and settings.
+  *                      The structure includes legacy flash parameters and
+@@ -409,6 +410,7 @@ struct spi_nor {
+ 	enum spi_nor_cmd_ext	cmd_ext_type;
+ 	struct sfdp		*sfdp;
+ 	struct dentry		*debugfs_root;
++	u8			dfs_sr_cache[2];
+ 
+ 	const struct spi_nor_controller_ops *controller_ops;
+ 
 
 -- 
 2.51.1
