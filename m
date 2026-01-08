@@ -1,139 +1,240 @@
-Return-Path: <linux-doc+bounces-71313-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71315-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3057D02995
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 13:24:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68896D02A38
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 13:31:07 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id C7D993141488
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:01:49 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id E44183090980
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 12:09:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17C5B3F23BE;
-	Thu,  8 Jan 2026 11:33:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 26F7C46BBF5;
+	Thu,  8 Jan 2026 11:37:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="0O2/jLuI"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B34D3ED633;
-	Thu,  8 Jan 2026 11:32:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB59147202F
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 11:37:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767871982; cv=none; b=ud9yRoysxY0vhGCiV6mV78m0u7JdSMyhc/MCGEVJPJKxeoER7Znyoz3PFjyzCjfkaHSguZQe84Sa5mvvxeyoQKDM9NOvX7CRpJ7/7sAML5LDJ1kl/aMjeix73MmLO9/PgErpWP6MXxWKFFm4QPldtZjfgax4jiv2PET0jBqfQTY=
+	t=1767872269; cv=none; b=IA+xVYuYTC6oacKnycTvb1nYLFnCAw1fXyU7gW4fbCfDH9ZG0Xsj0HeDTR2kKWStblnAl96v0ZA3xIYdQANbvNVpXxrQ3nvFp+FSxRHg6/tr+duQC5Nl6s05esMR8HTMGoZwJZp9luhOa+CiZ6O+tqWmSzecfe8vZxOMAeVBK+Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767871982; c=relaxed/simple;
-	bh=19yj1ippT+lFgZqkEqVduhYtECDl/VwUE/AFC+VPjZg=;
-	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=JOBDGX9E7fFnttw+CItBU+/Bw4PTiCvMQgDbTCYs70FfnzPTTN8ObiIjFonc5NpKWWv57PqzF9p6cqJ5LBapHhRRv8z1jRhLNuo3R0mJj9PBH9NmFEina2+zR94NHgQb4za6qjOSDJ3xTbxFVuayz1MoC4ccVv98Oj6+IiYffiY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-Received: from mail.maildlp.com (unknown [172.18.224.83])
-	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4dn2nt0fn9zJ46db;
-	Thu,  8 Jan 2026 19:32:50 +0800 (CST)
-Received: from dubpeml100005.china.huawei.com (unknown [7.214.146.113])
-	by mail.maildlp.com (Postfix) with ESMTPS id D070540086;
-	Thu,  8 Jan 2026 19:32:54 +0800 (CST)
-Received: from localhost (10.203.177.15) by dubpeml100005.china.huawei.com
- (7.214.146.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.36; Thu, 8 Jan
- 2026 11:32:53 +0000
-Date: Thu, 8 Jan 2026 11:32:51 +0000
-From: Jonathan Cameron <jonathan.cameron@huawei.com>
-To: John Groves <John@Groves.net>
-CC: Miklos Szeredi <miklos@szeredi.hu>, Dan Williams
-	<dan.j.williams@intel.com>, Bernd Schubert <bschubert@ddn.com>, "Alison
- Schofield" <alison.schofield@intel.com>, John Groves <jgroves@micron.com>,
-	Jonathan Corbet <corbet@lwn.net>, Vishal Verma <vishal.l.verma@intel.com>,
-	Dave Jiang <dave.jiang@intel.com>, Matthew Wilcox <willy@infradead.org>, Jan
- Kara <jack@suse.cz>, Alexander Viro <viro@zeniv.linux.org.uk>, "David
- Hildenbrand" <david@kernel.org>, Christian Brauner <brauner@kernel.org>,
-	"Darrick J . Wong" <djwong@kernel.org>, Randy Dunlap <rdunlap@infradead.org>,
-	Jeff Layton <jlayton@kernel.org>, Amir Goldstein <amir73il@gmail.com>, Stefan
- Hajnoczi <shajnocz@redhat.com>, Joanne Koong <joannelkoong@gmail.com>, Josef
- Bacik <josef@toxicpanda.com>, Bagas Sanjaya <bagasdotme@gmail.com>, Chen
- Linxuan <chenlinxuan@uniontech.com>, "James Morse" <james.morse@arm.com>,
-	Fuad Tabba <tabba@google.com>, "Sean Christopherson" <seanjc@google.com>,
-	Shivank Garg <shivankg@amd.com>, Ackerley Tng <ackerleytng@google.com>,
-	Gregory Price <gourry@gourry.net>, Aravind Ramesh <arramesh@micron.com>, Ajay
- Joshi <ajayjoshi@micron.com>, <venkataravis@micron.com>,
-	<linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<nvdimm@lists.linux.dev>, <linux-cxl@vger.kernel.org>,
-	<linux-fsdevel@vger.kernel.org>
-Subject: Re: [PATCH V3 03/21] dax: Save the kva from memremap
-Message-ID: <20260108113251.00004f1c@huawei.com>
-In-Reply-To: <20260107153332.64727-4-john@groves.net>
-References: <20260107153244.64703-1-john@groves.net>
-	<20260107153332.64727-1-john@groves.net>
-	<20260107153332.64727-4-john@groves.net>
-X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
+	s=arc-20240116; t=1767872269; c=relaxed/simple;
+	bh=hXMtQUgw4lOusUBMYTp6horW7LCwBe3omUVA+LVM/Xs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=eVWT8XLqf0/3IDnxEpK6trFQ9KEzLNIrvsjMVPbvQlkqvAQWC7sE3bMpee8FzR41gZph+5PUwXNo4Bsgazoqqp4y0wxVdvDqazEFMWbEAP/lWKRKGF0SotgXhczb0X5oworMRP6RyvEZ7yppncMIZnUZ4UbeEWON3uq+je0LmXc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=0O2/jLuI; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4779a4fb9bfso121155e9.0
+        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 03:37:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1767872264; x=1768477064; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=SeCkOM2Cu2fdrKkUm4jDLC5UzEO1Q6YJYSDtB9D9vrY=;
+        b=0O2/jLuIIfo+6iPRJBdv2C7IaJWjbgTg3PhDYRutHsExUFAm1LzYBza++EsOJc7SZ1
+         lhWRJ0HfuwcXib7vT74ZvhVA54k7x5be4WcUeDNBB+zzPUDIZ9NgFqEm1tABV/cWpmWF
+         w8sI0SuCAFlQTCsKyCwx1upFoXuaImfrsRNr+FSiyT1DWhAklYCML2as54cE7qtGALvO
+         1RyhQmYv1uU4HWk5sNFWdKxlu6AVnwxeTefGkkkFDxcvTnnWeFF+5yeFyTxkMePv4drZ
+         I7rMkCgIRNc7IPnOuGvfqf4STYiFD4tKnL18KeG193xD1BNx1gARZ3Gky/9UJRwT6Eqy
+         iNYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767872264; x=1768477064;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=SeCkOM2Cu2fdrKkUm4jDLC5UzEO1Q6YJYSDtB9D9vrY=;
+        b=mcEGAv1NzNJ575RC6Aky1V5gHc8Ufg3145sB/jLc9hEkWWHfSwIwqqjcAEbeh4WpPh
+         uqWsS7ePmzTK83c1RkoDlZ66bpqTTdRsw0OhhwWCMibVSfrsDBK8+oHiwfugOR1y1MfG
+         qjSLyq/xzAw6lFnGOxWG8Fre5fdxqwMfJPFxWlEHmGeAfodaZt3jxu70hsexoTEt9EA0
+         Ir8KHrNL6SkGSmqXV52NeEGh3DC0KlZ9r2L5i1D28sZx/rk6XKHAtqR4UIxlV0A26vzQ
+         mYKTW3UlhuNsdKo5AcAioHHwTxf4Q4Ep7hgq0Q0X3sSwZoOd6Yh8AXwliqvcSb9qtLbO
+         QR6w==
+X-Forwarded-Encrypted: i=1; AJvYcCU1mcpTkPajAd797iXqCsV8gBdcrGv2JOTe/Hc/sAq9J9T+XuSP93nfX3pSbn6xmgo0ZMrlvNRfZsg=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy9KYJMYQwqzLHIkXM/oJZn0lWvoKSs1Gd8enbPycRXyk7EENMk
+	4FOcJPjQEVDmuO3NW7J9DJvj6M5hrSJN0JQpp+GasV/7KiWrOSfOfvBDKm8m95zN1w==
+X-Gm-Gg: AY/fxX4X9NTKtOXlo10s9VhXN+6MqBbGCWk3FAsCMRTruqcRR1WCiEmMhUKFfi2KCV9
+	e3w0s5RmAC1SwvNTm8OLgWQcQwVjfBzsWYdz/kKNFy0zF8DgE2+weXWFhPcdnWngIRMzrAekCTU
+	Xo4pE90bFJqYwAzc6UEwvJn44nppAvyKkIAkyjn45wDcz4uz7SV0SB+gp+tHc9J8aOXG67fY9qW
+	Y8TWMZMt6OMU39KT4Hye0WStumbHfgyq06OGlMlQo6KuD0amd683de/+O7NpJrxBdYOzWu1Tvu4
+	5AhRE2WtvYbD12MAWWTpnBeZ7QLPc1do0QGT+V+jrlG0Ihj3k1zOXW0KBqH78WVx0CgLHtWzAnN
+	LFTvGEX/Dj6VMa/3x644OhEUuLpR5r31EPhDc2X6854wyswecmV5+oQiToWUPOiwk7kADhXty0g
+	ik7O9DSL0lh/aU4mPg6FnzwswM90xrCESRRIWLERs7/JcZdEshEwTX
+X-Received: by 2002:a05:600c:4e0c:b0:47d:7428:d00c with SMTP id 5b1f17b1804b1-47d8ac49a26mr553445e9.17.1767872263247;
+        Thu, 08 Jan 2026 03:37:43 -0800 (PST)
+Received: from google.com (171.85.155.104.bc.googleusercontent.com. [104.155.85.171])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd0e16d2sm16560217f8f.13.2026.01.08.03.37.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Jan 2026 03:37:42 -0800 (PST)
+Date: Thu, 8 Jan 2026 11:37:39 +0000
+From: Mostafa Saleh <smostafa@google.com>
+To: Pranjal Shrivastava <praan@google.com>
+Cc: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, corbet@lwn.net, joro@8bytes.org,
+	will@kernel.org, robin.murphy@arm.com, akpm@linux-foundation.org,
+	vbabka@suse.cz, surenb@google.com, mhocko@suse.com,
+	jackmanb@google.com, hannes@cmpxchg.org, ziy@nvidia.com,
+	david@redhat.com, lorenzo.stoakes@oracle.com,
+	Liam.Howlett@oracle.com, rppt@kernel.org, xiaqinxin@huawei.com,
+	baolu.lu@linux.intel.com, rdunlap@infradead.org
+Subject: Re: [PATCH v5 0/4] iommu: Add IOMMU_DEBUG_PAGEALLOC sanitizer
+Message-ID: <aV-XAxCca8qeNVGT@google.com>
+References: <20260106162200.2223655-1-smostafa@google.com>
+ <aV56y9KcAS8mC7Uk@google.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: lhrpeml500011.china.huawei.com (7.191.174.215) To
- dubpeml100005.china.huawei.com (7.214.146.113)
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <aV56y9KcAS8mC7Uk@google.com>
 
-On Wed,  7 Jan 2026 09:33:12 -0600
-John Groves <John@Groves.net> wrote:
-
-> Save the kva from memremap because we need it for iomap rw support.
+On Wed, Jan 07, 2026 at 03:24:59PM +0000, Pranjal Shrivastava wrote:
+> On Tue, Jan 06, 2026 at 04:21:56PM +0000, Mostafa Saleh wrote:
+> > Overview
+> > --------
+> > This patch series introduces a new debugging feature,
+> > IOMMU_DEBUG_PAGEALLOC, designed to catch DMA use-after-free bugs
+> > and IOMMU mapping leaks from buggy drivers.
+> > 
+> > The kernel has powerful sanitizers like KASAN and DEBUG_PAGEALLOC
+> > for catching CPU-side memory corruption. However, there is limited
+> > runtime sanitization for DMA mappings managed by the IOMMU. A buggy
+> > driver can free a page while it is still mapped for DMA, leading to
+> > memory corruption or use-after-free vulnerabilities when that page is
+> > reallocated and used for a different purpose.
+> > 
 > 
-> Prior to famfs, there were no iomap users of /dev/dax - so the virtual
-> address from memremap was not needed.
+> Thanks for this series! This is really helpful!
 > 
-> (also fill in missing kerneldoc comment fields for struct dev_dax)
+> > Inspired by DEBUG_PAGEALLOC, this sanitizer tracks IOMMU mappings on a
+> > per-page basis, as it’s not possible to unmap the pages, because it
+> > requires to lock and walk all domains on every kernel free, instead we
+> > rely on page_ext to add an IOMMU-specific mapping reference count for
+> > each page.
+> > And on each page allocated/freed from the kernel we simply check the
+> > count and WARN if it is not zero, and dumping page owner information
+> > if enabled.
+> > 
+> > Concurrency
+> > -----------
+> > By design this check is racy where one caller can map pages just after
+> > the check, which can lead to false negatives.
+> > In my opinion this is acceptable for sanitizers (for ex KCSAN have
+> > that property).
+> > Otherwise we have to implement locks in iommu_map/unmap for all domains
+> > which is not favourable even for a debug feature.
+> > The sanitizer only guarantees that the refcount itself doesn’t get
+> > corrupted using atomics. And there are no false positives.
+> > 
+> > CPU vs IOMMU Page Size
+> > ----------------------
+> > IOMMUs can use different page sizes and which can be non-homogeneous;
+> > not even all of them have the same page size.
+> > 
+> > To solve this, the refcount is always incremented and decremented in
+> > units of the smallest page size supported by the IOMMU domain. This
+> > ensures the accounting remains consistent regardless of the size of
+> > the map or unmap operation, otherwise double counting can happen.
+> > 
+> > Testing & Performance
+> > ---------------------
+> > This was tested on Morello with Arm64 + SMMUv3
+> > Did some testing Lenovo IdeaCentre X Gen 10 Snapdragon
+> > Did some testing on Qemu including different SMMUv3/CPU page size (arm64).
+> > 
+> > I also ran dma_map_benchmark on Morello:
+> > 
+> > echo dma_map_benchmark > /sys/bus/pci/devices/0000\:06\:00.0/driver_override
+> > echo 0000:06:00.0 >  /sys/bus/pci/devices/0000\:06\:00.0/driver/unbind
+> > echo 0000:06:00.0 > /sys/bus/pci/drivers/dma_map_benchmark/bind
+> > ./dma_map_benchmark -t $threads -g $nr_pages
+> > 
+> > CONFIG refers to "CONFIG_IOMMU_DEBUG_PAGEALLOC"
+> > cmdline refers to "iommu.debug_pagealloc"
+> > Numbers are (map latency)/(unmap latency), lower is better.
+> > 
+> > 			CONFIG=n    CONFIG=y    CONFIG=y
+> > 			            cmdline=0   cmdline=1
+> > 4K - 1 thread		0.1/0.6     0.1/0.6     0.1/0.7
+> > 4K - 4 threads		0.1/1.1     0.1/1.0     0.2/1.1
+> > 1M - 1 thread		0.8/21.2    0.7/21.2    5.4/42.3
+> > 1M - 4 threads		1.1/45.9    1.1/46.0    5.9/45.1
+> > 
+> 
+> Just curious to know if we've also measured the latency for larger
+> mappings? e.g. 1G mapping backed by `n` 4K mappings?
 
-Do that as a precursor that can be picked up ahead of the rest of the series.
+No, the max granule supported by dma_map_benchmark is 1024, which
+is 4M for 4K kernels.
+I thought 1M would be better for my setup, as I am using SMMUv3,
+where 1MB includes many PTEs compared to 4M, and the 4K test will
+cover the single PTE case, so we get more coverage.
+
+Thanks,
+Mostafa
 
 > 
-> Signed-off-by: John Groves <john@groves.net>
-> ---
->  drivers/dax/dax-private.h | 4 ++++
->  drivers/dax/fsdev.c       | 1 +
->  2 files changed, 5 insertions(+)
-> 
-> diff --git a/drivers/dax/dax-private.h b/drivers/dax/dax-private.h
-> index 0867115aeef2..1bb1631af485 100644
-> --- a/drivers/dax/dax-private.h
-> +++ b/drivers/dax/dax-private.h
-> @@ -69,18 +69,22 @@ struct dev_dax_range {
->   * data while the device is activated in the driver.
->   * @region - parent region
->   * @dax_dev - core dax functionality
-> + * @virt_addr - kva from memremap; used by fsdev_dax
-> + * @align - alignment of this instance
->   * @target_node: effective numa node if dev_dax memory range is onlined
->   * @dyn_id: is this a dynamic or statically created instance
->   * @id: ida allocated id when the dax_region is not static
->   * @ida: mapping id allocator
->   * @dev - device core
->   * @pgmap - pgmap for memmap setup / lifetime (driver owned)
-> + * @memmap_on_memory - allow kmem to put the memmap in the memory
->   * @nr_range: size of @ranges
->   * @ranges: range tuples of memory used
->   */
->  struct dev_dax {
->  	struct dax_region *region;
->  	struct dax_device *dax_dev;
-> +	void *virt_addr;
->  	unsigned int align;
->  	int target_node;
->  	bool dyn_id;
-> diff --git a/drivers/dax/fsdev.c b/drivers/dax/fsdev.c
-> index 2a3249d1529c..c5c660b193e5 100644
-> --- a/drivers/dax/fsdev.c
-> +++ b/drivers/dax/fsdev.c
-> @@ -235,6 +235,7 @@ static int fsdev_dax_probe(struct dev_dax *dev_dax)
->  		pr_debug("%s: offset detected phys=%llx pgmap_phys=%llx offset=%llx\n",
->  		       __func__, phys, pgmap_phys, data_offset);
->  	}
-> +	dev_dax->virt_addr = addr + data_offset;
->  
->  	inode = dax_inode(dax_dev);
->  	cdev = inode->i_cdev;
-
+> > Changes in v5:
+> > v4: https://lore.kernel.org/all/20251211125928.3258905-1-smostafa@google.com/
+> > - Fix typo in comment
+> > - Collect Baolu R-bs
+> > 
+> > Main changes in v4:
+> > v3: https://lore.kernel.org/all/20251124200811.2942432-1-smostafa@google.com/
+> > - Update the kernel parameter format in docs based on Randy feedback
+> > - Update commit subjects
+> > - Add IOMMU only functions in iommu-priv.h based on Baolu feedback
+> > 
+> > Main changes in v3: (Most of them addressing Will comments)
+> > v2: https://lore.kernel.org/linux-iommu/20251106163953.1971067-1-smostafa@google.com/
+> > - Reword the Kconfig help
+> > - Use unmap_begin/end instead of unmap/remap
+> > - Use relaxed accessors when refcounting
+> > - Fix a bug with checking the returned address from iova_to_phys
+> > - Add more hardening checks (overflow)
+> > - Add more debug info on assertions (dump_page_owner())
+> > - Handle cases where unmap returns larger size as the core code seems
+> >   to tolerate that.
+> > - Drop Tested-by tags from Qinxin as the code logic changed
+> > 
+> > Main changes in v2:
+> > v1: https://lore.kernel.org/linux-iommu/20251003173229.1533640-1-smostafa@google.com/
+> > - Address Jörg comments about #ifdefs and static keys
+> > - Reword the Kconfig help
+> > - Drop RFC
+> > - Collect t-b from Qinxin
+> > - Minor cleanups
+> > 
+> > Mostafa Saleh (4):
+> >   iommu: Add page_ext for IOMMU_DEBUG_PAGEALLOC
+> >   iommu: Add calls for IOMMU_DEBUG_PAGEALLOC
+> >   iommu: debug-pagealloc: Track IOMMU pages
+> >   iommu: debug-pagealloc: Check mapped/unmapped kernel memory
+> > 
+> >  .../admin-guide/kernel-parameters.txt         |   9 +
+> >  drivers/iommu/Kconfig                         |  19 ++
+> >  drivers/iommu/Makefile                        |   1 +
+> >  drivers/iommu/iommu-debug-pagealloc.c         | 174 ++++++++++++++++++
+> >  drivers/iommu/iommu-priv.h                    |  58 ++++++
+> >  drivers/iommu/iommu.c                         |  11 +-
+> >  include/linux/iommu-debug-pagealloc.h         |  32 ++++
+> >  include/linux/mm.h                            |   5 +
+> >  mm/page_ext.c                                 |   4 +
+> >  9 files changed, 311 insertions(+), 2 deletions(-)
+> >  create mode 100644 drivers/iommu/iommu-debug-pagealloc.c
+> >  create mode 100644 include/linux/iommu-debug-pagealloc.h
+> > 
+> > -- 
+> > 2.52.0.351.gbe84eed79e-goog
+> > 
+> > 
 
