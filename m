@@ -1,220 +1,164 @@
-Return-Path: <linux-doc+bounces-71395-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71398-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D7527D04693
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:33:40 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A22DD044EB
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:22:06 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id A9EE23062766
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:13:29 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 5005B3070A20
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 16:14:49 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D4004238D54;
-	Thu,  8 Jan 2026 16:13:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 388A12C234E;
+	Thu,  8 Jan 2026 16:14:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="Sr4nM87K"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YEXwzTgB"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from CH4PR04CU002.outbound.protection.outlook.com (mail-northcentralusazon11013058.outbound.protection.outlook.com [40.107.201.58])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6790F23370F;
-	Thu,  8 Jan 2026 16:13:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.201.58
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767888796; cv=fail; b=rh5/n3xW7EZ4/olqQQ8Hebggw/LFol6KLBXhStYuOWQpLDEktskt0SYMJtjFvnbJ3xly8Ix0Zc2lC6LEHtpkR9o7l6MNbWvI15CrP0gYCUTdvXc3daA7kZ7nDu+ig5aI2Go79hfo0vB4JbZlBYoLl4lxDpmnIZxTXZ3AA5EHlR4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767888796; c=relaxed/simple;
-	bh=qVx1Pmb9HLkNG7ClGLxQqKnyvErGfcGgXlwYJqfn76g=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=VOjb9OJp3uQMLm2uapTkHh9a+1ZCE0ws19dQwr3ZD+DPFiOKMTf9yiUxKrJz4vJD6m0sorJspksNQaKU+2SdE6/W+DJuoOFOUmr4Qma4n+fUtt7+6hanzGJIYa/WBFd+R4WFwevHHxLwiPjvgiAJZsZr1ZgIkXr0N3+waJp3Szw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=Sr4nM87K; arc=fail smtp.client-ip=40.107.201.58
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wPLY0aGLbBNYQBfJPDpEp6lAhch/8IZAdT7EYB1KwolX0SoynBzuywPWyS5er7+IKabLvXOt1UiRj65bBv4mAtXw19qkowZELNKIUzJNvfb2JLJG5VzK9JRPjc6ch4KUvlAnvXhCaAQeOgtsS+2zjBp9aOaBZV2R5Fp1tT9JaigUgK0964qEdNRGCqKsKgKT8o61hVJRcFHq3Wxc4ivQ1qQYCOY5DE2Lo4eH+QZGmF6mQhM4LIer87u4AlLuSg1/rnQL/rb+P5VjIPXbTRUi7Hp2KhevJhJx3NNcBk6km5xPngmimXagJYIFrRuLurX+Bm328l5jQMynz5a083Wk7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qVx1Pmb9HLkNG7ClGLxQqKnyvErGfcGgXlwYJqfn76g=;
- b=ZRDbtZmA2gXrfFMA6xXWwNBPzS/jq0+PDAymxL1yLeCda74Hb8VuAN1p53jQSiggjf61RRcXx4ukUG8SAxel8lkNpW9xvRHhP477EedAOmM/oJ16P31BjsWWvdrztLfFtRfWJ0IZXCwmZnQEyEWIUzos2a3kJ6wn03DEOg+yTt8Hix+WhfDCXvNjAhw8v0ph6zatRkvyK3y8NyFjCI6vXVJurahKfl+KXREGpxqGOn+1Jw18YHazekMI3W1kUojVUSNIoFxOdQbkyE819pcBtv9Gz4Qmfpul5kyhiMXdnaY3stfdFnrtHOvAnH5LeHkvV+grWpt91Rv5f+NPFdR7OA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qVx1Pmb9HLkNG7ClGLxQqKnyvErGfcGgXlwYJqfn76g=;
- b=Sr4nM87KtHPSTyRcwQdfNPPxEGg1QVp8kFHC2yOaeWB9Ek8CtIltO7UVY1KI3UukixdmlseN0I1U/X/qMQ9hX9mGe8bjD2eo8fv6YCz55qvIXSjPYMpwqr3poF93pX4NOZjunFrBaGRLo3GEP4n135r5RNwGHruade8qOMv3ksA4kxvXl9S8UdoIocl3E2uyinBa0b4AysOsG+ySU92/+KMvjecVici/p+Oerydu1X16sY/zO7RQJn6X657fb2VLBrNIOFrzJemB2gaR3RYov1VIg80DGSP1P3eREv8FbU6ScMJbP5Z/6sqtAuEORBX8a4dHLVghDVrvRDBFoQkTXA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
- by CH1PPFD8936FA16.namprd12.prod.outlook.com (2603:10b6:61f:fc00::624) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.3; Thu, 8 Jan
- 2026 16:13:11 +0000
-Received: from LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::1b59:c8a2:4c00:8a2c]) by LV8PR12MB9620.namprd12.prod.outlook.com
- ([fe80::1b59:c8a2:4c00:8a2c%3]) with mapi id 15.20.9499.002; Thu, 8 Jan 2026
- 16:13:11 +0000
-Date: Thu, 8 Jan 2026 12:13:10 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Will Deacon <will@kernel.org>
-Cc: Robin Murphy <robin.murphy@arm.com>, Marc Zyngier <maz@kernel.org>,
-	Lucas Wei <lucaswei@google.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Jonathan Corbet <corbet@lwn.net>, sjadavani@google.com,
-	kernel test robot <lkp@intel.com>, stable@vger.kernel.org,
-	kernel-team@android.com, linux-arm-kernel@lists.infradead.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	smostafa@google.com
-Subject: Re: [PATCH v2] arm64: errata: Workaround for SI L1 downstream
- coherency issue
-Message-ID: <20260108161310.GE23056@nvidia.com>
-References: <20251229033621.996546-1-lucaswei@google.com>
- <87o6ndduye.wl-maz@kernel.org>
- <aV6K7QnUa7jDpKw-@willie-the-truck>
- <7cd7b4f0-7aa5-4ca0-adc6-44d968c1ed48@arm.com>
- <aV_KqiaDf9-2NcxH@willie-the-truck>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aV_KqiaDf9-2NcxH@willie-the-truck>
-X-ClientProxiedBy: MN2PR02CA0027.namprd02.prod.outlook.com
- (2603:10b6:208:fc::40) To LV8PR12MB9620.namprd12.prod.outlook.com
- (2603:10b6:408:2a1::19)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77792242D79
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 16:13:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1767888840; cv=none; b=CnJADxlXdiP1b0OAblq/KjNN7XZnkBZQ+zkdouRuVrwbgmVTBT++T+y25FSuhKO+wr24NhuCWniE+a5N35SU3bzakKSZxwsUs0FhuLMD3o6q8J6E59eQpqZ4Llkh1hFl6Xo43zPRl772H2BrpX5vdLyM8IMNCbMtr23xLUFbZfo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1767888840; c=relaxed/simple;
+	bh=pfAEOHBnyjiXFEQwRPHC5G8VZWAFvQre8RRODkn9+q0=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=SuJLJ6l8gxCqHqvKpnULfvcWJLkPJ7Yg5WR2E+Nd5J504tpiLxCUyOYcc8Mm49Di1gcwrbFKQr5wwX+pVuwXOCxYDaCtTopbGssKlM/kFLnhkAbAvtmbPkTE9SLcMbISNUexCGFAYSSxjvzJjgZCuiiNcV0esjqv4T6edxi3KB0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YEXwzTgB; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42fb03c3cf2so1814286f8f.1
+        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 08:13:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1767888836; x=1768493636; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/VGGRnLC/Lr7Ss9oUphA/cRoNvZ0xmHMzdG2j/UIxqQ=;
+        b=YEXwzTgBwHmGH/c1MSlMzVijZZnJBXBtW1t5boU3B2AESQbYlWSfildR/O2ZmuYrjQ
+         m3pb6RcxCeEU46hRzeaZeZD+gnEbgEIu2NUsK2cpPQ9w4pD20cms0jBkj58c66r3g+co
+         FHvdWuWEjvYZBj2pUC2fXuRtqGmynAAQG5E+PfEsILXh6ked45j9Ek2U7gt/Y3+NdpHj
+         RD22CsvKbXiOaIpsJ3NpAw06gYAwxGwC5ik1Twkh95va2ubUB0Xu87agUU5FOqg/U5/4
+         LL9lY0Lw7sqGoxmtB/OzTmLaZ3evUpz1g2MeRIpsrwYhn+bGzgUfP0rOhrHkJRwgPNWz
+         q6KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767888836; x=1768493636;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/VGGRnLC/Lr7Ss9oUphA/cRoNvZ0xmHMzdG2j/UIxqQ=;
+        b=GuZTpHgpOU9Zln70aguXq9M6s77j3m9kbipQdSH/m7AmW63aBl2IUUM36WA1Z8hQXs
+         WYvALZ4C5iZO1jwAl4b845kLH0i9A/JB+OAQsxKvd+ZSpzRj6VJ1ukrPPzFYOsHAD1+L
+         1htZ//7Emsh4e/gMXLcfD0O3h+SyNOHJJIC1Vlorzv6WDyPYbhHS5TVqKz0kE40DJVPw
+         WUFcMrI1fF7gvSEDQfscNwpngHeo7NlVC6U2x3r6UZPIYtog0j8uHwd0WjlhdCKbe1Y6
+         UGE9r/8hAYfRQHjWG5Si+6s50RGtwET3jI/07aKpSocnLDv03DYbz3P/hVwcyQ1sF7kq
+         FVYw==
+X-Forwarded-Encrypted: i=1; AJvYcCU9hQ7TYVfT8f7LuOE3KZo4XxQeCrfupf1k9Qy8yuATfS+ULlO/6DYTtO0iemP7Mm0GX/WUnzUuEWA=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx+h9fs3uxsGntElSi6HatjIKeTW1+IIy0Iqqh32pzFkGUY7HDn
+	QNFUOoSTaox0GSLYjJt0Rr3Em7yvH2CzlUYjcy3d/RGrBE1ybh75IL6O
+X-Gm-Gg: AY/fxX6zOYS7vp8wVa3NwT5Xj34Qa1r9RT1Wob8CfVo2C+8M9VExZ8tAwGgA3AhS5YJ
+	8+hXI055e63LCCIEMoEoetcuAuDk96hopVDL92n3QUFNKqcpBrYguQXTofrDb7mOCB8fT2T8meL
+	sX1O2O9lBkng5uqfOtMP/9akl8CzmnWwxON15bN9bAA2n81zuETuImrKAnKhKKrVyMIAcqe51Bc
+	2PcJ90iZZe/zmpHnemY8plOIgKxAPWyDZFC9hh1nk3rQ92I+4du9rKoKejMy6OQ4mOvjrbo7obd
+	Fvmvp4uuuDFXUJT+eRqMD93PLsPDKcP6ya5Gsfz05rfLcRG3jB1BjVcpydbo4jKereaX0ckBo/M
+	aZ/NZxn+oxPhnRZdWvNEZarC5/agQ/jbU1NJxIUte06f6Dsd6lLn35dRcAiJ/6X5KBlE9LjN7gY
+	9UZowpja1h2+vtYb7cjjTXVf0prSkI
+X-Google-Smtp-Source: AGHT+IH0O2YwmBD8Gu7R9D3URmNXYoiVElbVWRS+klDJYvcMlMiQcrcofvkDstlbzoLJHl9Q6TIy1A==
+X-Received: by 2002:a05:6000:40e1:b0:431:488:b9bc with SMTP id ffacd0b85a97d-432c3629b8emr7985479f8f.10.1767888831873;
+        Thu, 08 Jan 2026 08:13:51 -0800 (PST)
+Received: from imac.lan ([2a02:8010:60a0:0:8115:84ef:f979:bd53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5edd51sm17140039f8f.29.2026.01.08.08.13.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Jan 2026 08:13:49 -0800 (PST)
+From: Donald Hunter <donald.hunter@gmail.com>
+To: Donald Hunter <donald.hunter@gmail.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	"Matthieu Baerts (NGI0)" <matttbe@kernel.org>,
+	Gal Pressman <gal@nvidia.com>,
+	Jan Stancek <jstancek@redhat.com>,
+	Hangbin Liu <liuhangbin@gmail.com>,
+	Nimrod Oren <noren@nvidia.com>,
+	netdev@vger.kernel.org,
+	Jonathan Corbet <corbet@lwn.net>,
+	=?UTF-8?q?Asbj=C3=B8rn=20Sloth=20T=C3=B8nnesen?= <ast@fiberby.net>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Jacob Keller <jacob.e.keller@intel.com>,
+	Ruben Wauters <rubenru09@aol.com>,
+	linux-doc@vger.kernel.org
+Subject: [PATCH net-next v2 00/13] tools: ynl: clean up pylint issues
+Date: Thu,  8 Jan 2026 16:13:26 +0000
+Message-ID: <20260108161339.29166-1-donald.hunter@gmail.com>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|CH1PPFD8936FA16:EE_
-X-MS-Office365-Filtering-Correlation-Id: 46214563-5815-4497-8009-08de4ed0d1d6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?TAz+vUgxY8nc/vcDn7HKQ8Qssl6P/UnyeUzwld/XGDrxfRObTGwLmyoFQSjv?=
- =?us-ascii?Q?uANQpFHI2xFK4Y7tgNjKeRPhKe+eVZWuMBBdvFmku1Ory0lZru7rcA5GEwhO?=
- =?us-ascii?Q?AmIXqm6zD/E1XZ/obJfBWkPFP0/JEXax1nJjXOo2Y6aD4wib4A8G5YuJyqri?=
- =?us-ascii?Q?74OzdEPuZfTmw20viNtjDTUm0nb2iBMQDoRVa/9tgzm7x/anZNavV0SYPwt3?=
- =?us-ascii?Q?9dwPmnDH7HeecjIisQxxG0PteihptBh784C7VlPiyTUOpa4sU2TvWyELvSAy?=
- =?us-ascii?Q?0ZqIjgo0dPWj0+XlJOJocLchevuGhNP5Thimve3vOx+62fyI9iBG+g50fPLW?=
- =?us-ascii?Q?nk2QCCpizyOLr+zHJjE2HUVB0V31hKlzN9VN8Un04/hlPKUulH5NX77m/Wo8?=
- =?us-ascii?Q?iAfJ1buFcCzivMTeABeG673fma87JPl72gjJhgLhCtERA8yS7igeT5afzGGk?=
- =?us-ascii?Q?xA4IFYQqXh+pDo37dmzE4nocg98DhF9EgVQKodo0fX0tp+RAb6eCW6VK/a6V?=
- =?us-ascii?Q?Zu5ZSdPrqNon/Eai3GOIBfikqNx+JCL6qzxIRsyEmFt8BGyPjxaclCNwSQi8?=
- =?us-ascii?Q?4cgjRKmikie+N7Cq/f6ZlYH3P0xkYeX9TTfnGfSU0rhPSi0RtfSyPSZfacro?=
- =?us-ascii?Q?ky0JXoA4Og1S1qkAupHYddVQrQfNZLv1rvUYcZkqrU3ai+8+Y87+gAKxDppB?=
- =?us-ascii?Q?IL7Zb+iQZcs7bCCk75AXCD23hbMhuQfJTIXaZjVd6u+udb9TAByjbx5wK1Fd?=
- =?us-ascii?Q?6OLThvhXtl4VpCc3gbUcslIJYtCyTQfpc/qsVd0xbffw+vwHb/2p66foqA/N?=
- =?us-ascii?Q?1YYZgaSp+BQzFd3+ShVGBL2WEjISgXACtAhyIx0udyNfJWq5QTeToXq3DhfZ?=
- =?us-ascii?Q?21hbbVR/AcV+c/FFwlodGQKhDsVF2tGjMrZRuOj3woDcc/PQwIs+jXM5Orff?=
- =?us-ascii?Q?6cAWsb5Emfai2dSSw2MoR6xOeGv58wfg8MDSChKP3jSWeHf0SXtblaX2imqM?=
- =?us-ascii?Q?KIicYeEFL2qqcO15JqkiDFlnUGO7v92SWnpkmRDcGkZ/EdaJ7yZJpG0LiDaC?=
- =?us-ascii?Q?yRtQI1xp4m1UHHXDyORDyQH9IUUvkHzHEYuVZBBMT3DVdSyguXqBqR6N16uR?=
- =?us-ascii?Q?/UB4eFjSiIpRoK8NdZ9m9TZw25SJ6GURdBlQ1AOoB3krY1MgGu8tPb1yXTYL?=
- =?us-ascii?Q?l0crTD4G60o6WIAyXTNEqIeQ0Qw3v7xWXJGDmuxItKp/vU5XkZByDGPUZ6ET?=
- =?us-ascii?Q?TmgYB6kUy6LyDA1zkX4FgEbmySs0yXkP8UKY7E+4bk9DQ/kPPeDdGY7ZbFGo?=
- =?us-ascii?Q?kcj9b7S/Dn3JBgn4NbEMkn1n7gKnHJ5s5TgTw25KX9SymW/JNhCiSmO4gsqh?=
- =?us-ascii?Q?qj9nSmnWhNdn62XVpgtKfJZkvF+t8GGiPvLCsD0G43Mb+JRxTysSl4rRdlcf?=
- =?us-ascii?Q?WOUjU+JsHiFLw6n7zqmFPz2ZgAKN5AZu?=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?vq9mvy1NTi4YRkKBRIXHV4X6XoZbXuuQuevu2ec8wDQj1UGxEAVI3f6XgdSn?=
- =?us-ascii?Q?LzO6L0aq7keJL245+CWEQVKVVKksXFAhZWJS2pkFc0sNAdfJqnLUbZQ54EjX?=
- =?us-ascii?Q?Bu3qMBvugKBnUuZq7j9tC2pfN/JBctWERETHbcnH4vYrEB9bmZeRB1WUc2Sa?=
- =?us-ascii?Q?9YlVzhk5PULJ3xsqADhON6knq5nvhFW6y8+xKaL+LI/G1FZF1l901rSK+lxh?=
- =?us-ascii?Q?EBA3AfR6Ottbj9R9uj8bF/Ac+cd4m77FNh9JRbXM8bpKN9u8/muihD5KAwhI?=
- =?us-ascii?Q?SWeSh7IhQIv2cZKuTPVarLRLs3YwNWdvC3tP+FyyA/delcH+xwp98NhGHs8l?=
- =?us-ascii?Q?g8E9+atSMvObNZglo/KtgL5SHOEOIz+wh1sxaYiPus6JYzv3SSJJBj8tvy1t?=
- =?us-ascii?Q?6jeCgy8somh82oyfvgWc6/qiQVziM0xmRVxw/71xyieI49abk8gMeSV4DjXl?=
- =?us-ascii?Q?IrAh2jKWeGYsVSR8IWT9dfh0anknowt/Jl8xEy6hr2eTjxYYw1SrnuJPd1k+?=
- =?us-ascii?Q?445Ds7uuEAkMr+502CwTpTpu50c0WH6emqWvL18lNuuZXn/oWy82v4/5vWVj?=
- =?us-ascii?Q?BqBzfJ/Pt9vILLfQUzlo2T9oceV9224dnVZ9mNR3l3JS75g1REYtr2cDNUDg?=
- =?us-ascii?Q?AaFpqzMJkQ9gactlb7BWyUZXKpRqo9FLMDrYHvWZzD6QSBQEBAaNA/HBVcyr?=
- =?us-ascii?Q?gIdE3OdmOWT396UACpTKm3q8fXb+YuT+luPR5PKh4NTtEq1Oz+F+SiqyhJge?=
- =?us-ascii?Q?F4o87xCjRBbWTaW5mSx+cVtqY8r16CuKuNClxKURPJTVCSUyqGQ31sX9fQey?=
- =?us-ascii?Q?IPmzFyWgen9Q6B+kqd/+7gETqF3e/gSYL6DuWPZ9pecQNp22CS7jGidew238?=
- =?us-ascii?Q?nUtwsOcXKEkKAhGfk2KpqU/Ooky7eufLa8xzgKtJWDI7pisYkuV+AcLDcz9U?=
- =?us-ascii?Q?eQTbJi5WNIZ3rcykLLBv7vVFOJJTqQk4RXimJZpcMsxJ8s0dCtaaQr6Cm45Z?=
- =?us-ascii?Q?nlLFjed8ccla6Nsghl9cRpFZWEqSFG1JhY1I64R7rplhTixcgQLUnUi1TwXS?=
- =?us-ascii?Q?QwljW4a+E37iHyVcT6S6jdhIC8j8UX/hILBJCIkC+GGZpq5+hAZLz4piq6qq?=
- =?us-ascii?Q?ygGKiAGnGichWxWW9E+84MHQHuE2nXOQ4NFc8rY34apTVTeduiwYgeGpeqbS?=
- =?us-ascii?Q?6UrIAL4qsoR/COqV2okJdbsnr1zp/YpPrPBX5Uv8btZPCjBo6n3mMfjuuB0X?=
- =?us-ascii?Q?qoey0Im5ANvKKwt7dW4quTWHoowTI62/1yGek2o0FYnkXEkNTq6c+U+1d8jq?=
- =?us-ascii?Q?rYxcC3a32qRvPYPGmAP0M/ajdEvh+PmsNrwBEbKJNdOlA7Rh+hwCyQ0lbGyR?=
- =?us-ascii?Q?4WJzYjga3NI4ueOEhuIJsTd63e8RLM6QSnDzu5r9V418Cz2Cuj860AI0oF2J?=
- =?us-ascii?Q?Z+dj4KFSlHdIzqL9iff1fXn6G4dAFB1hWPi2GOTWHiv7VI+PwKA+OGeBej5H?=
- =?us-ascii?Q?Nm96n9CykeJAIO/VtWlT2O+UxjdQoAVOph9umpqknIWKnq6vggQO7h9vnekz?=
- =?us-ascii?Q?uZNspEP8jsuos2Wyjqgv45JcuYUPcwJLCtIhhNIbrwy9NnR1l2NRmsgc3wyQ?=
- =?us-ascii?Q?MAmVUB05mYQ6fp8CJaBBzJ4RyLuhw5nMun0r25zQOB8owSAMjb1Q9sgMcQK+?=
- =?us-ascii?Q?Hp9AHKgMUe0RBK36bjjT+8O4Jh1hyyihrmZehCOAGQyL6tOgkQxRj4WqV4lz?=
- =?us-ascii?Q?BUVp0GwpmA=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 46214563-5815-4497-8009-08de4ed0d1d6
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2026 16:13:11.5596
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BFZEjb4pHRR06BgXHkdisiuI49wgUoSNbZMxIzp3KQfrndsdG8UqjyjH7dBMdTju
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PPFD8936FA16
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 08, 2026 at 03:18:02PM +0000, Will Deacon wrote:
-> I think IOMMU_CAP_CACHE_COHERENCY is supposed to indicate whether or not
-> the endpoint devices are coherent (i.e. whether IOMMU_CACHE makes
-> sense)
+pylint tools/net/ynl/pyynl reports >850 issues, with a rating of
+8.59/10. It's hard to spot new issues or genuine code smells in all that
+noise.
 
-Yes, that's broadly right.
+Fix the easily fixable issues and suppress the noisy warnings.
 
-VFIO/iommufd does not do any cache flushing for their own mappings, so
-if the guest can use DMA to cause cache incoherence for those mappings
-nothing will clean it up and you get the general problems that come
-with that.
+  pylint tools/net/ynl/pyynl
+  ************* Module pyynl.ethtool
+  tools/net/ynl/pyynl/ethtool.py:159:5: W0511: TODO: --show-tunnels        tunnel-info-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:160:5: W0511: TODO: --show-module         module-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:161:5: W0511: TODO: --get-plca-cfg        plca-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:162:5: W0511: TODO: --get-plca-status     plca-get-status (fixme)
+  tools/net/ynl/pyynl/ethtool.py:163:5: W0511: TODO: --show-mm             mm-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:164:5: W0511: TODO: --show-fec            fec-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:165:5: W0511: TODO: --dump-module-eerpom  module-eeprom-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:166:5: W0511: TODO:                       pse-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:167:5: W0511: TODO:                       rss-get (fixme)
+  tools/net/ynl/pyynl/ethtool.py:179:9: W0511: TODO: parse the bitmask (fixme)
+  tools/net/ynl/pyynl/ethtool.py:196:9: W0511: TODO: parse the bitmask (fixme)
+  tools/net/ynl/pyynl/ethtool.py:321:9: W0511: TODO: pass id? (fixme)
+  tools/net/ynl/pyynl/ethtool.py:330:17: W0511: TODO: support passing the bitmask (fixme)
+  tools/net/ynl/pyynl/ethtool.py:459:5: W0511: TODO: wol-get (fixme)
 
-Broadly IOMMU_CACHE (which IOMMU_CAP_CACHE_COHERENCY says works), in
-common non-hostile cases, prevents incoherence.
+  ------------------------------------------------------------------
+  Your code has been rated at 9.97/10 (previous run: 8.59/10, +1.38)
 
-Since it is not complete against hostile guests, we also have
-IOMMU_CAP_ENFORCE_CACHE_COHERENCY which is supposed to mean that if
-VFIO sets IOMMU_CACHE then there is no way for the VM to bypass the
-cache with DMA (including PCI no-snoop TLPs, incomming attributes and
-so on).
+v1 -> v2
+ - Fix f-string compatibility with python 3.9, thanks Jakub
+ - Fix AI review comments
 
-There ARM story here is not great, but with admin care you can create VMs
-that are safe, and CANWBS server HW is just completely safe. Like has
-been said in this thread Linux just can't tell the safe/unsafe cases
-apart in ARM land, so we are punting this on the admin to deal with.
+https://netdev-ai.bots.linux.dev/ai-review.html?id=40420bc1-8119-4977-8062-e2047d90ae91
 
-eg a PCI device that never issues a no-snoop TLP is safe under weaker
-IOMMU_CAP_CACHE_COHERENCY HW, but some integrated GPU masquerading as
-a PCIe device is probably not.
+Donald Hunter (13):
+  tools: ynl: pylint suppressions and docstrings
+  tools: ynl: fix pylint redefinition, encoding errors
+  tools: ynl: fix pylint exception warnings
+  tools: ynl: fix pylint dict, indentation, long lines, uninitialised
+  tools: ynl: fix pylint misc warnings
+  tools: ynl: fix pylint global variable related warnings
+  tools: ynl: fix logic errors reported by pylint
+  tools: ynl: ethtool: fix pylint issues
+  tools: ynl: fix pylint issues in ynl_gen_rst
+  tools: ynl-gen-c: suppress unhelpful pylint messages
+  tools: ynl-gen-c: fix pylint warnings for returns, unused, redefined
+  tools: ynl-gen-c: fix pylint None, type, dict, generators, init
+  tools: ynl-gen-c: Fix remaining pylint warnings
 
-> but it's true that, for the SMMU, we tie this to the coherency of the
-> SMMU itself so it is a bit sketchy. There's an interesting thread between
-> Mostafa and Jason about it:
+ tools/net/ynl/pyynl/cli.py               |  67 +++++---
+ tools/net/ynl/pyynl/ethtool.py           |  47 +++--
+ tools/net/ynl/pyynl/lib/__init__.py      |  10 +-
+ tools/net/ynl/pyynl/lib/doc_generator.py |   3 +-
+ tools/net/ynl/pyynl/lib/nlspec.py        |  77 +++++----
+ tools/net/ynl/pyynl/lib/ynl.py           | 208 +++++++++++++----------
+ tools/net/ynl/pyynl/ynl_gen_c.py         | 178 ++++++++++---------
+ tools/net/ynl/pyynl/ynl_gen_rst.py       |   2 +
+ 8 files changed, 343 insertions(+), 249 deletions(-)
 
-I've tried a few times to inject the ACPI per-PCI device coherency
-flags into the logic and failed every time ..
+-- 
+2.52.0
 
-The stated purpose of VFIO is to not allow incoherent devices in VFIO,
-so if an admin manages to do this through one of the holes we
-don't/can't check then it is admin error :(
-
-> But, that aside, FWB throws a pretty big spanner in the works if we want
-> to assign non-coherent devices.
-
-Yes, at least guest operating under FWB wouldn't have a working
-dma_alloc_coherent() so the VM would be pretty broken. No VMM can set
-the ACPI/DT to mark devices as non-coherent in the VM for this
-reason..
-
-I gather Mostafa is trying to make pkvm support non-coherent devices,
-I assume he is giving up FWB and stuff as well to make it work.
-
-Jason
 
