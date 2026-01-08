@@ -1,162 +1,196 @@
-Return-Path: <linux-doc+bounces-71356-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71365-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB9B1D03CE2
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 16:25:27 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6070CD04391
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 17:13:05 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E1F12318E9DC
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 14:56:14 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id A6E583196157
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 15:57:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5E07D423157;
-	Thu,  8 Jan 2026 14:08:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 70768458CAA;
+	Thu,  8 Jan 2026 14:18:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="JMv34wXl";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="F9sH7pR8"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="LR/nXuzw";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="g7sjFu/e"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9F993A0EB1
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 14:08:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22FE11E51E0
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 14:17:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767881322; cv=none; b=bUL9wxP9zv7Wkk4wJLxHZ/61Zl0/kpaYGGm6NLMzlpYKg5ts4GB285cTNszLrp6Fqe3lVWdGmTKFrq0Ws1JLQQp+EeXm+68SdDviIFk4DgqXR8rXgCjQVPbcewECVjT2dBBKMvE4ydyOKnVxsONnhs2t7ujdF6NxoA4d9xCjKUg=
+	t=1767881880; cv=none; b=OE4H+CrbFHUe4q3zIHtlM12LHbBHKJ1q/WyUl9hJFVG3l4EjrdqAvG5nddWrIbTlVvGN5I3PMOiPB0traB5aMLQ2MlTjwCF8mmr+kY/qvtZG1DAjiZuOPMaKpWXA7UwHtF3kE1W5viC7TDGcTH6YPQBdrQT8WKRxLahqG40wqtA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767881322; c=relaxed/simple;
-	bh=Tv7zh9Hk92kdNn+K2fPlpE9fTBNWYFWSvOonEurgOJc=;
+	s=arc-20240116; t=1767881880; c=relaxed/simple;
+	bh=OyIQ4x46NnhuAF46QiC0P1xvTdYkXW0VaN1yOEbVEDQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QaQS5FmMbRVwKnXpRpP0JzP/HvUuOUIFaR0nonQvXB4RFJ2aQ0eab00NOa4VGHQ88GF3TjiEYVJhUhpHIVwqqK64OPntE0/Iw8vGcOSCA2eYmF7Mu9C00CTQ5HORky/IoFNEKmCICnN2O2mCL2M3D7aJU2eUHAtCLvPlIWruSpI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=JMv34wXl; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=F9sH7pR8; arc=none smtp.client-ip=170.10.129.124
+	 Content-Type:Content-Disposition:In-Reply-To; b=POfTDjyLnbJYvypyuoR3gK6QFP1XQgjTaMV6lZUZm+alB4oYy/LUldP/yqduDjnAtPXrdx53yn7FNDCAFtx6h7WXappZeIXKhbJG1CI6N9kdfVsxPrgMOoDpOuFoFvsF9cS4j61xvYAhLbvBujs9q4X7Wi7+iIHM/6EB4CSoXB4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=LR/nXuzw; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=g7sjFu/e; arc=none smtp.client-ip=170.10.133.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1767881319;
+	s=mimecast20190719; t=1767881877;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=qb0opi0EkMyYcYBrprImauJ5+csaYa0bSdovEgtQBZs=;
-	b=JMv34wXl46/FnDYIPBeZ51sXipwgk6pezAGY39bqTlzPzqGLwhRvYA/iMaoSBPaRx9mLmE
-	WPsMmMtnHKxBdSGceUrsdOCiOOR846ppp2hyrm4iDkWlsJ7yXyPyGNQfRhlC14giF8oheA
-	VeRS8FI//u7LGUMkUMyNIwT1lF2XALc=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=fJ1lT1EolLhB5JifwSURg3jL1WOY3ilSvQ0LTyMqODM=;
+	b=LR/nXuzwop/FXzYCptdu4OOiq9sC3521JW2+LXEkxN/lUr5IwaNlZD/6UimSJt1m6gxeBD
+	lB7QbyX2z8bVdRHRJv6oOFIszLGwLh6VqbO40t9znAg9vBzizZv6dWGSifYoud15A6ovfH
+	ZAqlftreaEAyOM95ouDMq2ilQkrIhak=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-573-XEanE4RzMQ2vpVwnV4-o5g-1; Thu, 08 Jan 2026 09:08:38 -0500
-X-MC-Unique: XEanE4RzMQ2vpVwnV4-o5g-1
-X-Mimecast-MFC-AGG-ID: XEanE4RzMQ2vpVwnV4-o5g_1767881317
-Received: by mail-ej1-f71.google.com with SMTP id a640c23a62f3a-b831e10ba03so499397266b.1
-        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 06:08:38 -0800 (PST)
+ us-mta-374-OrEH-FHeP4a6SGrQiNmPog-1; Thu, 08 Jan 2026 09:17:55 -0500
+X-MC-Unique: OrEH-FHeP4a6SGrQiNmPog-1
+X-Mimecast-MFC-AGG-ID: OrEH-FHeP4a6SGrQiNmPog_1767881875
+Received: by mail-wr1-f72.google.com with SMTP id ffacd0b85a97d-430fc83f58dso1811070f8f.2
+        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 06:17:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1767881317; x=1768486117; darn=vger.kernel.org;
+        d=redhat.com; s=google; t=1767881874; x=1768486674; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=qb0opi0EkMyYcYBrprImauJ5+csaYa0bSdovEgtQBZs=;
-        b=F9sH7pR867jA/rHKxKKU/wpVji4GMqf5bUfz/vL/UajgRxivMXVN1rpc+bMD//MFem
-         1/W8C34QuRmQ49nrCPu280beltecWuHq1ZHRIhey8IRNXFSJwnwFmr3n1XCxadOSXRTW
-         aRQNsTndJZfe/+athyPIXMVHIHuJKSXtdJcQODBjYfw2l1dt7fi3IziyM7jZfem9OIs5
-         Ui5Cc5tJJak48o9XioaoIpsOvshER1DSGt9a+BAUtuf1sUYim4U62vGBvUppT8EKllKD
-         hjquDst3yF/i2CRxsABHhuJZQc8Q7GPqdOXx4evG9W63gV86858VQhDj57XNG8g09u5U
-         QDcw==
+        bh=fJ1lT1EolLhB5JifwSURg3jL1WOY3ilSvQ0LTyMqODM=;
+        b=g7sjFu/eqYd8CduJmJi5LBL/NthqffZdBfVYNP9sT9LiRma1mmPz+uA55dl8r3o+P2
+         9aBN8RtpmX+EPt+OSU70NItWuFCpzVP9lTzO0S3kjaEAW0RFCE4C7CO2Ltl1cdLuMs3p
+         W8sWdOuDHqIBIt0/cnPwvqgIdzHzd87cOZFurOKy2x8JxaKVsuYFUzU7ZK+2zl8wtf9T
+         Tb7WN5/aoUOwSPnXG3rg8+yL4DHPmPSzDFUEmdDn5I8bj2p8nMFEBa2BpHH2YHRdGGOh
+         Et33RI16Zoj2qaq8Cp0r6TJxLtyzonv2QFxTt5Bsh4ILImaEXYrqpadVDKj6B2lb4ABZ
+         4AYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767881317; x=1768486117;
+        d=1e100.net; s=20230601; t=1767881874; x=1768486674;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=qb0opi0EkMyYcYBrprImauJ5+csaYa0bSdovEgtQBZs=;
-        b=kWL6tZJVKpJI3EsPgsT6wtDZm6DVIhXTXf/PR9hzyjN7P+80ZmR37WOKw/c0JKSEzr
-         KfxJ4NxaQt5/TT8E2IfA3kygYE6BXHSwPyEzC8w08aq3bZgDoofruPTyln0YZ9MTml/j
-         9HPK452ChkxOyf9vNRfoPuA5dL5KS46rS6hn4AP2hrbaWDTUQniq7/J4WGCUxDWdsYZH
-         WGdlTu/q2FioKwAmzkJEEFgrOlg29Jfb524v347ik+B8G8wcPlYkD60QatetR7XkBVVN
-         kWc9JALCFACSqupPIdMGWYgaMKLPvic0Q/PZofUIyybPAbBqaGdZ2dK4ESz3UDL5qsf3
-         za/w==
-X-Forwarded-Encrypted: i=1; AJvYcCUEkFz0NZd/N3ShkTQeR+HJnZdBkun+5dgCIefIx8PFFcylwloKf9+bnQvoAwxZWFYC6ydj+bgdWd4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwWD0ElmgvMWj1ao1Kkdk6G2weisTMCKsmGb6T87ExnVDnJSY1D
-	7XYBOwbEauNJakUNVqOvpRIalndziq35hXk78uB2iJz74hGU5XYUTHsD2mps4QSyLAru3A3t1MO
-	TMS0mPV+YYJbk/iskChtV+5o7XFHRyd9SASpRHDuGLKArXD70ct4DaYxhwspuyQ==
-X-Gm-Gg: AY/fxX46b+/oLn0eGSL8Sx74/UmTViIzWXRrOZw18tkK/pAl+T0GuCbUyw9fON3ivFF
-	wj40hhCp573+j75kHP9jG4eHkz/0YbfcPM+BD/qKKhK/31Q82dsIesAyjyUEyQnAqX4jklt4NQd
-	uT0E8Fsqm42RDqldVi/E7mW+Q4c6+/q0xWJXg/mpAPh6Shlm4JFXVIkz455JqkJek6tn9PKXCYy
-	tLVaDEfbpzsj5XmSNRwe0yhe77ASvQ122u6FgeIDfShY+XKC/oXTcI8ZwizppY0E/HRH64Frp9z
-	lz1z8Uaq6FVWr222X9MCScgZwGWRsfTwkFc4wCRD8qH7gBR5UJBb10kbVS0uLw4Ct3E18GxvSr6
-	BPJ1R9xt621lrOhjW
-X-Received: by 2002:a17:907:7b89:b0:b6d:6c1a:31ae with SMTP id a640c23a62f3a-b8444fd453amr620665566b.49.1767881317043;
-        Thu, 08 Jan 2026 06:08:37 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF7HOHiWGYK4xorotJbNX0jMidX1ixXQJJ1VdDBrRK+mMgTkrWVhdGn0FKO7KNa9bc9HZtucg==
-X-Received: by 2002:a17:907:7b89:b0:b6d:6c1a:31ae with SMTP id a640c23a62f3a-b8444fd453amr620660466b.49.1767881316491;
-        Thu, 08 Jan 2026 06:08:36 -0800 (PST)
-Received: from sgarzare-redhat ([193.207.223.215])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b842a2cb447sm843387866b.29.2026.01.08.06.08.33
+        bh=fJ1lT1EolLhB5JifwSURg3jL1WOY3ilSvQ0LTyMqODM=;
+        b=LBwS0Efsxj91gdKidJMXZnIpHGoSI5X+DeUSqlJyV4RD1zvb4XZVpTsyzRaNl70Y6v
+         0HqWp+n1tMoyIBjCjxEIX9Mj1jsSRwzCR1XLxkxnnCXEikAWQefCOjGBn2uL+3mSqB+Z
+         CiIlrletQ8sytLZbiGb+3ypuAgt2YPV1W0v2ERG6jzmI2r6v3KSU3xv9nd9q8UyWREjv
+         0ccd/OAPsFbc0+dM+kftzDVGzvJjGSNMij92Cn7U94uRrzceNuibLM1Zhz2IAhENUWsF
+         SWSk89uR46CRk+PFwKZdokEOoGJ0FMUoyUx6QAXQKQOUlWltgv7P09zLoXwHCjaySqvO
+         vtFw==
+X-Forwarded-Encrypted: i=1; AJvYcCWHIeIeB3JLJvy1IcwuxTMWi4J+S+fL9NCsh8U+kD3MGaNBOLmDe6Bnbbm8n9tyWn4HnWJE2L20Pec=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxtzd56HZuLBoqCNyVD38NTjgyDP5KAT+r5US5P6YCOp6evNOIX
+	6pN9BJsubUu/tvVk5+YRGvAemjgJHP2r+AoGF38+t9PjU1t7mELW10CgSvwOdHg8vkpbbJwiv9E
+	C8OqRh9vaKuMGfGwO/MMPgyfuTBrsEHyctr68XC+EVLcxtGKaiadHwRzjdI9YuQ==
+X-Gm-Gg: AY/fxX5LQjQMvOv4UDgjPEfvDeM22ybgpVnDpk+4cR4/zPlOA/hVCHiZFqI1T4bZXKa
+	RgDm8GH+Y5I4h4RHam10sy7iPdeEWMhflmVRz6jGvXJqJlZNtpoVjPLs6SBRqykD0+pkMvYqi3o
+	e6h5uBKrkfN/HZevKwXLJwoVF6re6Jr2YLOtwPLtfv+oiXc8uPC684sNXiECo81LP5xr+4lr3XY
+	GKxlepFQVCtBugSO9tqWyrsNifSa8YproiYQenx2ULgJO4jVWcIeLxHC0OI+mkwJ8AkCrR2jpwd
+	eaGeBp86tWLuaX4rraKr+vFi1/eC/SbeleufavwygVI4yRfTKmnz7oKs2MfsjQS32RBP1JC4E5W
+	UOmMdYL6K+2qwAmw47BJEMo5kH0QyqHkK4A==
+X-Received: by 2002:a05:6000:2483:b0:42f:b0ab:7b48 with SMTP id ffacd0b85a97d-432c3627fbamr7468061f8f.1.1767881874410;
+        Thu, 08 Jan 2026 06:17:54 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFlUVHuOj7/HPTlOMU0+NpCVpFuCnGhMJ1KC00yBihfngclSciPQ4cpm1QXhZzj17NQ1UZXYA==
+X-Received: by 2002:a05:6000:2483:b0:42f:b0ab:7b48 with SMTP id ffacd0b85a97d-432c3627fbamr7468022f8f.1.1767881873896;
+        Thu, 08 Jan 2026 06:17:53 -0800 (PST)
+Received: from redhat.com (IGLD-80-230-31-118.inter.net.il. [80.230.31.118])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5ee5eesm16735262f8f.34.2026.01.08.06.17.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Jan 2026 06:08:35 -0800 (PST)
-Date: Thu, 8 Jan 2026 15:08:31 +0100
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: linux-kernel@vger.kernel.org, Cong Wang <xiyou.wangcong@gmail.com>, 
-	Jonathan Corbet <corbet@lwn.net>, Olivia Mackall <olivia@selenic.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, Jason Wang <jasowang@redhat.com>, 
-	Paolo Bonzini <pbonzini@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
-	Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>, "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, 
-	"Martin K. Petersen" <martin.petersen@oracle.com>, Gerd Hoffmann <kraxel@redhat.com>, 
-	Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Marek Szyprowski <m.szyprowski@samsung.com>, 
-	Robin Murphy <robin.murphy@arm.com>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Petr Tesarik <ptesarik@suse.com>, Leon Romanovsky <leon@kernel.org>, 
-	Jason Gunthorpe <jgg@ziepe.ca>, Bartosz Golaszewski <brgl@kernel.org>, linux-doc@vger.kernel.org, 
-	linux-crypto@vger.kernel.org, virtualization@lists.linux.dev, linux-scsi@vger.kernel.org, 
-	iommu@lists.linux.dev, kvm@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH v2 08/15] vsock/virtio: use
- virtqueue_add_inbuf_cache_clean for events
-Message-ID: <aV-6UTKChBhiTynA@sgarzare-redhat>
+        Thu, 08 Jan 2026 06:17:53 -0800 (PST)
+Date: Thu, 8 Jan 2026 09:17:49 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Stefano Garzarella <sgarzare@redhat.com>
+Cc: linux-kernel@vger.kernel.org, Cong Wang <xiyou.wangcong@gmail.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Olivia Mackall <olivia@selenic.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Jason Wang <jasowang@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>, Petr Tesarik <ptesarik@suse.com>,
+	Leon Romanovsky <leon@kernel.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Bartosz Golaszewski <brgl@kernel.org>, linux-doc@vger.kernel.org,
+	linux-crypto@vger.kernel.org, virtualization@lists.linux.dev,
+	linux-scsi@vger.kernel.org, iommu@lists.linux.dev,
+	kvm@vger.kernel.org, netdev@vger.kernel.org
+Subject: Re: [PATCH v2 13/15] vsock/virtio: reorder fields to reduce padding
+Message-ID: <20260108091514-mutt-send-email-mst@kernel.org>
 References: <cover.1767601130.git.mst@redhat.com>
- <4b5bf63a7ebb782d87f643466b3669df567c9fe1.1767601130.git.mst@redhat.com>
+ <fdc1da263186274b37cdf7660c0d1e8793f8fe40.1767601130.git.mst@redhat.com>
+ <aV-6gniRnZlNvkwc@sgarzare-redhat>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <4b5bf63a7ebb782d87f643466b3669df567c9fe1.1767601130.git.mst@redhat.com>
+In-Reply-To: <aV-6gniRnZlNvkwc@sgarzare-redhat>
 
-On Mon, Jan 05, 2026 at 03:23:21AM -0500, Michael S. Tsirkin wrote:
->The event_list array contains 8 small (4-byte) events that share
->cachelines with each other. When CONFIG_DMA_API_DEBUG is enabled,
->this can trigger warnings about overlapping DMA mappings within
->the same cacheline.
->
->The previous patch isolated event_list in its own cache lines
->so the warnings are spurious.
->
->Use virtqueue_add_inbuf_cache_clean() to indicate that the CPU does not
->write into these fields, suppressing the warnings.
->
->Reported-by: Cong Wang <xiyou.wangcong@gmail.com>
->Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
->---
-> net/vmw_vsock/virtio_transport.c | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Jan 08, 2026 at 03:11:36PM +0100, Stefano Garzarella wrote:
+> On Mon, Jan 05, 2026 at 03:23:41AM -0500, Michael S. Tsirkin wrote:
+> > Reorder struct virtio_vsock fields to place the DMA buffer (event_list)
+> > last. This eliminates the padding from aligning the struct size on
+> > ARCH_DMA_MINALIGN.
+> > 
+> > Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> > ---
+> > net/vmw_vsock/virtio_transport.c | 8 +++++---
+> > 1 file changed, 5 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
+> > index ef983c36cb66..964d25e11858 100644
+> > --- a/net/vmw_vsock/virtio_transport.c
+> > +++ b/net/vmw_vsock/virtio_transport.c
+> > @@ -60,9 +60,7 @@ struct virtio_vsock {
+> > 	 */
+> > 	struct mutex event_lock;
+> > 	bool event_run;
+> > -	__dma_from_device_group_begin();
+> > -	struct virtio_vsock_event event_list[8];
+> > -	__dma_from_device_group_end();
+> > +
+> > 	u32 guest_cid;
+> > 	bool seqpacket_allow;
+> > 
+> > @@ -76,6 +74,10 @@ struct virtio_vsock {
+> > 	 */
+> > 	struct scatterlist *out_sgs[MAX_SKB_FRAGS + 1];
+> > 	struct scatterlist out_bufs[MAX_SKB_FRAGS + 1];
+> > +
+> 
+> IIUC we would like to have these fields always on the bottom of this struct,
+> so would be better to add a comment here to make sure we will not add other
+> fields in the future after this?
 
-Acked-by: Stefano Garzarella <sgarzare@redhat.com>
+not necessarily - you can add fields after, too - it's just that
+__dma_from_device_group_begin already adds a bunch of padding, so adding
+fields in this padding is cheaper.
 
->
->diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
->index bb94baadfd8b..ef983c36cb66 100644
->--- a/net/vmw_vsock/virtio_transport.c
->+++ b/net/vmw_vsock/virtio_transport.c
->@@ -392,7 +392,7 @@ static int virtio_vsock_event_fill_one(struct virtio_vsock *vsock,
->
-> 	sg_init_one(&sg, event, sizeof(*event));
->
->-	return virtqueue_add_inbuf(vq, &sg, 1, event, GFP_KERNEL);
->+	return virtqueue_add_inbuf_cache_clean(vq, &sg, 1, event, GFP_KERNEL);
-> }
->
-> /* event_lock must be held */
->-- 
->MST
->
+
+do we really need to add comments to teach people about the art of
+struct packing?
+
+> Maybe we should also add a comment about the `event_lock` requirement we
+> have in the section above.
+> 
+> Thanks,
+> Stefano
+
+hmm which requirement do you mean?
+
+> 
+> > +	__dma_from_device_group_begin();
+> > +	struct virtio_vsock_event event_list[8];
+> > +	__dma_from_device_group_end();
+> > };
+> > 
+> > static u32 virtio_transport_get_local_cid(void)
+> > -- 
+> > MST
+> > 
 
 
