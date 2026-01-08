@@ -1,148 +1,182 @@
-Return-Path: <linux-doc+bounces-71278-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71281-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C56AD0091F
-	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 02:40:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54141D009A6
+	for <lists+linux-doc@lfdr.de>; Thu, 08 Jan 2026 03:08:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id E6A3A3010CE7
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 01:40:19 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1A1293030DBA
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Jan 2026 02:06:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8CDF81F419F;
-	Thu,  8 Jan 2026 01:40:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B2A08231836;
+	Thu,  8 Jan 2026 02:06:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="k7u4xzBF"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EyOEAxPu"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com [209.85.215.194])
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1FBB16CD33
-	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 01:40:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.194
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 660D021257E
+	for <linux-doc@vger.kernel.org>; Thu,  8 Jan 2026 02:06:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767836418; cv=none; b=nSFvry2rKGmjGN/5d0nN2v3U8jWOrm3eNHK/lxsflPusBkHqOMXLfDlYdiMhOdXmPr+q+tOWX0KqsJIvJaG/1uNSXPlfYwbr5WvRWOvLRtS3GgirUj7cFpu3r4mAmAT4PONG7Y4CG21XbdeV+eM6TXeaZgwX/YANPjBP/1DVf0M=
+	t=1767837992; cv=none; b=uf5yzHn65gIbvnh+MXP7qLiYNJhxA/bft7mZ3QgXehImk1q1Qf4JU16j/1QHJnqK8e0owkkGoN3wxO5BDVUBZoJ6yPFywPlemCtn2hV1wsiZZcq9tNkubY8VEMWyXFpJA5VS4SVyW/IJ9a81itGunCBrEojf6sG+b+BhMRwU6Eo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767836418; c=relaxed/simple;
-	bh=HHRfH3X41hhCOddhpPOPMeRdNO/jeP7c7O3PwHZ4JSs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bc10BNMwR+ZRmuo3w8yIKxRHRnP+AeVG0Hn8DkEFxJgZ2JvZ+DiQphoKSqaQeWuOapUAfDZGdgG1GgQbhXygw408DsUsuDTSX1eYVA/twz7qfjFFkQHtj+9cRqAEZrusE8LjR7JO/onYvSJyFfbmAkEB9tyWwhGC3oVBKuLfUOY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=k7u4xzBF; arc=none smtp.client-ip=209.85.215.194
+	s=arc-20240116; t=1767837992; c=relaxed/simple;
+	bh=2v2lCPOw1jH2L401Xb6vFxPuNeZejz5XYCd6FEDhu0M=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Nu0Zj1Iis6Qwyw/DIxzundLZfH3Z1gTnCPZpc+9zppEAMSA7MHg5A2DrL3EICO0vXXbOQdxoqQRWE3HIMWAHiK5EGyj3HbgMQBRz41zqec9BgFjBd/eI2YuFxkgNFFIu722jfwMqiwTf1DQFDeR96lNWRgXEyAsMmR5SttXi8g0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EyOEAxPu; arc=none smtp.client-ip=209.85.216.49
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f194.google.com with SMTP id 41be03b00d2f7-c227206e6dcso1820672a12.2
-        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 17:40:16 -0800 (PST)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-34c2f52585fso1871001a91.1
+        for <linux-doc@vger.kernel.org>; Wed, 07 Jan 2026 18:06:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767836416; x=1768441216; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QNPrzm7KtpivJF/6ghwdGmvDMU6ng/7y8+6forJAiAI=;
-        b=k7u4xzBFjHxUrRgkPv0M49zL+4W2rfolS64QKRTyV6O20SDQlxWhnR/TSh3/iUcbDI
-         Xp3VPojQa5EsLx3ARkR2D/hAzmQG9EfRjLWcA7QhN/6TLWWUd7o3UHAOXMq+gyUlNYN2
-         3P6x9kSmRaU0ne1HLr91Ll96+8rRoEV4OL2z+ZnZz544SA7AtUP2PwovlmhoJuYcriCN
-         gEaLf67ToI8yfqWPg5nBsnzIa8yuJ+ZIe3wH2d1hXbVgbT8rMFgj+q+1/KZCLjLzqpa/
-         9wTaUXyNu8nHk7f5ozKeWxc7Bo8czoZwugc99gk6137DPONmefB+laeseCBPiaifavVC
-         fMzw==
+        d=gmail.com; s=20230601; t=1767837988; x=1768442788; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=2v2lCPOw1jH2L401Xb6vFxPuNeZejz5XYCd6FEDhu0M=;
+        b=EyOEAxPu+P1xo/AN3UYaswcs2wnBeKsfjTo9CCRUKXWnBW64YTmEGs7IKLGeygCPLv
+         0e2rgjorBFUif6gUgOA64jCwCF4laPmJTrAVJLj5iB7amB/GD7J6mCtY9gxf0xnpM9F+
+         Ipsh1wR+bksqwLTy4vbjkIsm0VmdhgHa4kT4eF/eubI+G79oJ7n+7RwwR2EOnrJhymIi
+         P/ThYywBpc+kHsS7xbaSgruE6VzqtmYkDH1uqOYCF6ID/bZ5uEZikV6ACnWwVHfPi3Wd
+         6zfsOw8UYeG8SjGEajb62HzHvmp5YLv53vZUU+T4zJ3SIqp/N+IUgVA/gNq2vLXIWXiQ
+         kH2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767836416; x=1768441216;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=QNPrzm7KtpivJF/6ghwdGmvDMU6ng/7y8+6forJAiAI=;
-        b=hSjAFrfJsfkYeg3001+sbxVaqp2nLvez3GZp5BIrjpJtSN9PFMGIlpmlLEjG1Hguel
-         GVDttD+j347+DboHujxiVt75oL9FI4qV2kRNggAVWs09o756hznmCEmxmVfGZVe6snLY
-         FshZZoH6EbDyHAjpAoJfZOpnYOwjj+hTn1j1+ewS6EVgm9V9ASbBAoC4U6SQxym7BT0E
-         FdfBNz9+XDl78zGJzzIv8EdWyFyGy9/yHtN9G1mZS4UEljfctPrBBX9t8lopWF8w9Fc3
-         ZgWI2lUVdLM/6oueBzb6U13qjJ9BREBE8e4WhAxnF+vMr9Gkkwatg8KBdCP2HZu+fsVq
-         G8SA==
-X-Forwarded-Encrypted: i=1; AJvYcCU5puW5geeo++tf8ptDv8rDwHDkQNzjLShdyc4Kc8FbIfVl0tdrZqQntJPOHhQJL4eBgN8DiD5CPZk=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzTgZ7ZXd/680Kkq6JPADNUojNGRqO8xbVL2DltAyJN6VFcTnbx
-	8my/kjzNcoTEgc4epvR8Yffjz9H1z/h1Gsq2Dgx2zCtjLgOVcpmBsuBa
-X-Gm-Gg: AY/fxX5VKP5mIO2ktJUoFyr/GCiSGKrK/FCUOkeQQ04pqQKoX1EwzpEzD3dukw2AUGK
-	jH9Dm9MelGCyr1FM0yrscn1kGr0xIJzTeJ7PTuUpSR7Y2TSbj64XfsO0vKWRISjWfGLt4Z3RGUF
-	H0SjbkqVi3kPXf8gDm0PsZhSsSbAj2j7CdC9P75qdO1W0hEfjqrgaO35O0/vOANAI1AzCnzK5C3
-	jA9dbFivLZs90lzSR4M2eeCd0uptfh8XRKnU+6KggGqb2PhPcd7uTbdtRjMI4q0WeBrz4KZw66F
-	XX5JyOyeLtAwzgeS/JRQu1P4OuemzBG4Zq6buwPuapIE//Sp1n6+Z+n789fFyhUNRTR2qw+4VTX
-	aB9kkuKrQiZcm36phLsv83uG54vzpafSWZzLgbABqElNd1ehvSx57X/x2ztlrJizoHqLvoDNjv5
-	dl/R/jMGn5wkI=
-X-Google-Smtp-Source: AGHT+IEOc00Wl1EkUV014Pbq9GIB5Eq7Iumzjn2kIUXu5uwyutQk6/3jrqjjb47OlaBQPlPTGatplw==
-X-Received: by 2002:a05:6a20:430a:b0:35b:d15f:8fc1 with SMTP id adf61e73a8af0-3898f8d025cmr4029536637.1.1767836415880;
-        Wed, 07 Jan 2026 17:40:15 -0800 (PST)
+        d=1e100.net; s=20230601; t=1767837988; x=1768442788;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2v2lCPOw1jH2L401Xb6vFxPuNeZejz5XYCd6FEDhu0M=;
+        b=XQly7vNhYX5vcJOJxPIN9ojl6uKlZ324X2dVFNtridoqhEkPAxJbc3trMNoLEhe6cH
+         eDy+76Nc9KSEoyt1/ccf2N6CrBI+kV64KBPuD8IS+mGik41XWG8NE+qEsYUDMxcZ030z
+         Z/NsD5YXFzQISeR2UPf67Xfu0bahKGpxs2nq9LnnYmIoLxZlxgdm7McINVsS4vhbc3Bv
+         CndetubSN732T8mO1NbkAY9aM5azq+NTyjFwR51tbwivwqXrxpSXPQ1r4c+ZFgEyI3Mr
+         SEdIcfTVZO4ttcaKe4xAn4PvRYnHihqWT7S1+Xep8eOJ+mI3yBnNZLr03A8YN0U4xoXJ
+         8bIA==
+X-Forwarded-Encrypted: i=1; AJvYcCV/oUOnJCFRpgfahRyt1hgMQyYMNV1X1FiMs6wDD3mhnFFTsaQvKo1dr+7Ou5n2/E8k9Yu91pFmj0I=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyxJ/ZWanDo3o5ypXbXOefiKh8Cp7bRWmZijAzX4EqaqBtok1J/
+	lViIna78OBcHISVCPNClTGn3mc86JDw7Ia48sNsr9uvgMTmRWNzJl3MM
+X-Gm-Gg: AY/fxX6JF8Q4p8VfHlFc51CvdnsCBWbxRuxqNNpB/009U0Cbu3Dvx8QKQdLCaT83BJu
+	/ZBZxA58JVIfwMiVIbJ72hShPUv40M82GZZPkgtza7E5WUrj3kEk5Jlwm4a0Brv19twg0GLrQoF
+	+9n7IaDwSlBJjbVDPWAA1H9PaIvg0sqvajcV0Ch6Gs7Ix7cr3M8YyWyNP3rZS/TuulQBQg7rMIM
+	jprMDMGEJ2v7b0UF6NIpXq+WM6VVR5cUxFhTyruyyIQq5udEGkInKdb95TuH+g8WPbdm89HU6xI
+	f5xkuj7jlIyCQvbQTkz11aF9euBDEh19EqR8a4Oy3pTCA5R6yXQoQeWz8nb1pWOdec7VbXDdv1J
+	LAMhgTjHMjiS4Q4ngTSrOogN2IAsVuJ5E/3LG2xRMj8S0VW8lYkJ/wBaYqHt01IyUAbYoqenriN
+	ZbtLWovc78rmU=
+X-Google-Smtp-Source: AGHT+IEcWA2UfWktZbcCpiIFschO/aHiJi5x2j4q7rHzeCoKFUazByzZ83AOZ3qwppbEh6jaOwNRaw==
+X-Received: by 2002:a17:90a:ec8b:b0:34a:4a8d:2e2e with SMTP id 98e67ed59e1d1-34f68c912a3mr4452690a91.17.1767837988343;
+        Wed, 07 Jan 2026 18:06:28 -0800 (PST)
 Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c4cc8d2932bsm6453659a12.21.2026.01.07.17.40.12
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34f5fa78ebdsm6053921a91.4.2026.01.07.18.06.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Jan 2026 17:40:12 -0800 (PST)
+        Wed, 07 Jan 2026 18:06:27 -0800 (PST)
 Received: by archie.me (Postfix, from userid 1000)
-	id ECD264505E0A; Thu, 08 Jan 2026 08:40:08 +0700 (WIB)
+	id 3A85B42805C9; Thu, 08 Jan 2026 09:06:24 +0700 (WIB)
+Date: Thu, 8 Jan 2026 09:06:23 +0700
 From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+To: Randy Dunlap <rdunlap@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	Linux Documentation <linux-doc@vger.kernel.org>,
-	Linux Kernel Tracing <linux-trace-kernel@vger.kernel.org>
-Cc: Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuai Xue <xueshuai@linux.alibaba.com>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Swaraj Gaikwad <swarajgaikwad1925@gmail.com>,
-	Bagas Sanjaya <bagasdotme@gmail.com>,
-	Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: [PATCH 2/2] Documentation: tracing: Wrap PCI tracepoint examples
-Date: Thu,  8 Jan 2026 08:39:56 +0700
-Message-ID: <20260108013956.14351-3-bagasdotme@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260108013956.14351-1-bagasdotme@gmail.com>
-References: <20260108013956.14351-1-bagasdotme@gmail.com>
+	Linux Regressions <regressions@lists.linux.dev>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Subject: Re: [REGRESSION] Unexpected section title false positive warnings on
+ DOC: directive
+Message-ID: <aV8RH7dW3Vlgne3R@archie.me>
+References: <aUuLHzk5jdyBAxD7@archie.me>
+ <87ikdecsj0.fsf@trenco.lwn.net>
+ <aV5a6PCVrkRHwqt3@archie.me>
+ <966fffa3-a91b-425e-b915-891299832e36@infradead.org>
+ <aV7wTFqQQkGf4efF@archie.me>
+ <863b3969-71eb-4bf1-9e32-895e53d8bf8e@infradead.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1526; i=bagasdotme@gmail.com; s=Zp7juWIhw0R1; h=from:subject; bh=HHRfH3X41hhCOddhpPOPMeRdNO/jeP7c7O3PwHZ4JSs=; b=owGbwMvMwCX2bWenZ2ig32LG02pJDJnxnHu3LhDM+8zyLYXnXcuJaUndF3Tl9X/xsN9qn554e 99SZ2ejjlIWBjEuBlkxRZZJiXxNp3cZiVxoX+sIM4eVCWQIAxenAEzk2laG//5pfRX2kmt5H0rr vpih4TXRU0Pns4Se/bPoNRqHSqdvaWT4H/ByzVK9xYFL77de97y54W76o4VX0oJOBE7e/9F2UtW FNzwA
-X-Developer-Key: i=bagasdotme@gmail.com; a=openpgp; fpr=701B806FDCA5D3A58FFB8F7D7C276C64A5E44A1D
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="qEYf5flkWFVx9elk"
+Content-Disposition: inline
+In-Reply-To: <863b3969-71eb-4bf1-9e32-895e53d8bf8e@infradead.org>
 
-Sphinx reports htmldocs warnings:
 
-Documentation/trace/events-pci.rst:43: ERROR: Unexpected indentation. [docutils]
-Documentation/trace/events-pci.rst:74: ERROR: Unexpected indentation. [docutils]
+--qEYf5flkWFVx9elk
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fix them by wrapping example shell snippets in PCI tracepoint
-documentation in literal code blocks.
+On Wed, Jan 07, 2026 at 04:21:40PM -0800, Randy Dunlap wrote:
+>=20
+>=20
+> On 1/7/26 3:46 PM, Bagas Sanjaya wrote:
+> > On Wed, Jan 07, 2026 at 10:19:32AM -0800, Randy Dunlap wrote:
+> >>
+> >>
+> >> On 1/7/26 5:08 AM, Bagas Sanjaya wrote:
+> >>> On Tue, Jan 06, 2026 at 02:58:43PM -0700, Jonathan Corbet wrote:
+> >>>> Bagas Sanjaya <bagasdotme@gmail.com> writes:
+> >>>>
+> >>>>> Hi,
+> >>>>>
+> >>>>> Building htmldocs on docs-next currenly produces about 50 new warni=
+ngs; which
+> >>>>> all of them are unexpected section title on DOC: kernel-doc directi=
+ve, like:
+> >>>>>
+> >>>>> /home/bagas/repo/linux-kernel/Documentation/driver-api/target:25: .=
+/drivers/target/target_core_user.c:35: CRITICAL: Unexpected section title.
+> >>>>>
+> >>>>> Userspace I/O
+> >>>>> ------------- [docutils]
+> >>>>> WARNING: kernel-doc 'scripts/kernel-doc.py -rst -enable-lineno -fun=
+ction 'Userspace I/O' ./drivers/target/target_core_user.c' processing faile=
+d with: SystemMessage('/home/bagas/repo/linux-kernel/Documentation/driver-a=
+pi/target:25: ./drivers/target/target_core_user.c:35: (SEVERE/4) Unexpected=
+ section title.\n\nUserspace I/O\n-------------')
+> >>>>> /home/bagas/repo/linux-kernel/Documentation/driver-api/target:28: .=
+/include/uapi/linux/target_core_user.h:14: CRITICAL: Unexpected section tit=
+le.
+> >>>>
+> >>>> So I did not, and do not, see any of these errors; are you doing
+> >>>> something special to get them?
+> >>>
+> >>> Nope.
+> >>>
+> >>> I'm running my htmldocs builds on my Arch Linux system (with Sphinx 9=
+=2E0.4 and
+> >>> Python 3.13.11).
+> >>>
+> >>> Full log (tarred up) attached.
+> >>>
+> >>> Thanks.
+> >>
+> >> Hi,
+> >> What docutils version, please?
+> >=20
+> > Mine have:
+> >=20
+> > docutils (Docutils 0.21.2, Python 3.13.11, on linux)
+>=20
+> I'm using docutils-3.13 (Docutils 0.22.3, Python 3.13.11, on linux)
+> and I don't see these warnings.
+> Maybe it's something that has been fixed between 0.21.2 and 0.22.3... ?
 
-Fixes: d0eb853678a21b ("Documentation: tracing: Add PCI tracepoint documentation")
-Reported-by: Stephen Rothwell <sfr@canb.auug.org.au>
-Closes: https://lore.kernel.org/linux-next/20260105160000.0368ec8d@canb.auug.org.au/
-Signed-off-by: Bagas Sanjaya <bagasdotme@gmail.com>
----
- Documentation/trace/events-pci.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I get 100 warnings instead on docutils 0.22.4, unfortunately.
 
-diff --git a/Documentation/trace/events-pci.rst b/Documentation/trace/events-pci.rst
-index c1ad0fc54777e0..03ff4ad30ddfa1 100644
---- a/Documentation/trace/events-pci.rst
-+++ b/Documentation/trace/events-pci.rst
-@@ -33,7 +33,7 @@ state changes.
- * ``CARD_PRESENT`` - Card detected in slot
- * ``CARD_NOT_PRESENT`` - Card removed from slot
- 
--**Example Usage**:
-+**Example Usage**::
- 
-     # Enable the tracepoint
-     echo 1 > /sys/kernel/debug/tracing/events/pci/pci_hp_event/enable
-@@ -64,7 +64,7 @@ Monitors PCIe link speed changes and provides detailed link status information.
-   - ``4`` - Hotplug event
- 
- 
--**Example Usage**:
-+**Example Usage**::
- 
-     # Enable the tracepoint
-     echo 1 > /sys/kernel/debug/tracing/events/pci/pcie_link_event/enable
--- 
+--=20
 An old man doll... just what I always wanted! - Clara
 
+--qEYf5flkWFVx9elk
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaV8RGwAKCRD2uYlJVVFO
+o7y3AP9vdBXVQUhfBnkUwS2EJyKH40eByIN9TeEHkhxDpAjk6QD/Rcg0HryCxxCi
+Pi0yAwe3msr+eCaoGiQ/7pkXxMw0hAo=
+=uGxC
+-----END PGP SIGNATURE-----
+
+--qEYf5flkWFVx9elk--
 
