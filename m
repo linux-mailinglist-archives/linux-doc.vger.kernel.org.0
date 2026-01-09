@@ -1,393 +1,244 @@
-Return-Path: <linux-doc+bounces-71661-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71663-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEC48D0C59B
-	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 22:40:49 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A620D0C5D1
+	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 22:46:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 70570302BB88
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 21:40:48 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 9CB87302105E
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 21:46:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 89D3233E34C;
-	Fri,  9 Jan 2026 21:40:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 452D733E369;
+	Fri,  9 Jan 2026 21:46:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="cRnbtg6n"
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b="rSs5CwTj"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C75D333DEDB
-	for <linux-doc@vger.kernel.org>; Fri,  9 Jan 2026 21:40:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A74F13D539;
+	Fri,  9 Jan 2026 21:46:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.15.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767994847; cv=none; b=tfPy+mX7WeDwKhJkHvWQIry6JO6uszw9VfFx89SBuQHf3vTJ9cfEu3wBou2igH75txbRWFXm/PH1rR5zSLYzV8SN6KC2sofhSLNbqWWV7Z/cnW6vZO2HKM0SbGyLfeV6VmExtZTU5q9R4X54vPVq5yVb5QrEsS8fZS4C8HJ3D0M=
+	t=1767995203; cv=none; b=rnl3WekLnPLH/a0n7qMvG/ebAZhs0bA5OKCid1nPV4rHcVCFo8CNiWBMHLwfmJXLLNFn+zh0sippt4MYyOTM/r5ZdLECN+/byZ6xN2z2PdQ7skN6cG+0XI/RbNROZEPA6NDVqAMT1lcfc1Z8QVdif+hiF2Qr1Vee2LAqopeJfuM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767994847; c=relaxed/simple;
-	bh=rokgdpNlEFvXSrJ3DO0WB3cNAjfaaYjpYXIICls+Z14=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=W5tc2WJ6bSg1n5taw1TguGt+i7/PINBr1GEF/Jy2CpyFnARMFAd3q+wBNWBGAbpIJpsb5v/eDSo4NP5WGLkhS7MPvRPVACgr7g2R7heHkZ7visiVgMolahvFoc7aS7eM1KjpFjUc2MdGx5yoGxTVauk7Kt95OgsjsE9JiO6I71o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=cRnbtg6n; arc=none smtp.client-ip=209.85.222.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
-Received: by mail-qk1-f173.google.com with SMTP id af79cd13be357-8c07bc2ad13so326073785a.2
-        for <linux-doc@vger.kernel.org>; Fri, 09 Jan 2026 13:40:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gourry.net; s=google; t=1767994843; x=1768599643; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=1T5Jfe8diqm3ahhuEtgg+KQ26xQUqcKW5qWJWdj6z0g=;
-        b=cRnbtg6nxRxHPymwel7ryQQxFzD0V6RnfH41PZcSiqDg2O9KwY8mDVQ0kO4e1XRZUK
-         BUwYPE7HarDmXSHC2FcUZtKs5Zp2ot0eQzcfjicbBhbNFBCTK6jQnfEn0F03R0PUsRIU
-         FtvJhxG9J92W69pmFEBaS366yjx7JPFp4j2UislvqbVR2NcOBWYBhnkSLYHr8jqHbN+d
-         sTp6YJ3fo4tnomCPzAdFMjLXZLiI0rDXJETC7D4eWVgjktTo20nf4cz/eHR/6n0/kjsy
-         jszyg24DdEVK3X4fIQRpDBaEqaukJO3d52pNWOEaNnsfsk55ulCJfTybBSi/6rA1WcQZ
-         /hbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767994843; x=1768599643;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1T5Jfe8diqm3ahhuEtgg+KQ26xQUqcKW5qWJWdj6z0g=;
-        b=wmADf31ZwbDwedtz3fCbqjjNYYlOZH3vW1D4R1wAwAQBkC9mqIoLfJYVy9C0qT1LRY
-         rKyBuy5xvopYzkHuFanY7qf5Bugfk9kmCjyv+dLWt6mhkoL/yp+xJdYVFoEzPI2LSuQ6
-         uBOM2FDtcQ5s8WRy4kG4t8avKQxkV0n4/bpuU4H7w8bRJKOtyapg4dxBHkzj7Z2nLl5B
-         Fjs+i4HfC23j/nXzFSevAOpSKhEq4G3HK8lLJE/7bnQQ1CNnflrn9mu+JjgjvwCs0ATJ
-         XUTXu0WVT8nTrbQqaFYGBZ/EwCPwJEgmgvo/3BbEqwHtIEiURZW6zNmmiaHDEPi/2ZEO
-         G03A==
-X-Forwarded-Encrypted: i=1; AJvYcCWxQuusQPt4tg6JCZUcpkxc1SrmpHbfkptXDcD+RlYYdLjTmZDB63I9IqK9Zcj7l6piLf/ko+obB3k=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwXGpIO8QwUAw0+xZNHTcV/ON5wcX1V9EfGb2/8YdFJMm3Bd7Sn
-	sRKXVMFdKkwpzPdGZMlg6BnhfZL3WxmVcWOLMHD/XK2/3SMOl1TVErUfU8/OoJXrdZU=
-X-Gm-Gg: AY/fxX6LEUDPsR0AQ5gWBfgZ4vtcfXNNJzvJqkqss3ALf3CO+RYXuoC0sK1M1uot+nk
-	coeezm22+EOb02cXNJVo8IQYeMGXYqLOtsehkpLn2MKbYmGAREvoz63RHlsxo39BfrmSGBfzAZD
-	7iWXglGuNSB15Ol8MhRlDHu6IInCIfDKvVvnwJHp6QRKqtxgPfriI2bDoforSzhCrU0zhCZj/OX
-	HMh+Gp+7omJXXlrLeLtlRpqum2FgsXlGe/4xjkVNfimTI0Q6akoV7UdvaUjAEhGYqlZVZdtcwy4
-	EBlkziAW1bdZsKQ0/f6UML3j8D30jEaBmtmsfHfwP86RdKzuOmfDJmwNJYGNAtm9CMD4P6R3Oga
-	gKfz6VLhwfV5G6xol8HtGFznHAjBqWt1pJ4bCokyqV6oY7VcXY0jDdbFwwW0XPAJ4J7Ho0C9hbE
-	+7MQor1QKZY0rkKeTiXzGY9NAyELvVnGT+XbPXMo881HivLyICVM9VO4EpG77c3fSnm4/z0g==
-X-Google-Smtp-Source: AGHT+IECZ50vj1hnAePHBzinDlZDGYs+7/mlvEWHygZHTAQz3MseJ7eUXnsVQ1HRY8SD8qWK1C+CIw==
-X-Received: by 2002:a05:620a:1709:b0:8b2:a0cd:90f1 with SMTP id af79cd13be357-8c3893de7c3mr1525931485a.61.1767994843351;
-        Fri, 09 Jan 2026 13:40:43 -0800 (PST)
-Received: from gourry-fedora-PF4VCD3F (pool-96-255-20-138.washdc.ftas.verizon.net. [96.255.20.138])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c37f4ccdf8sm924975985a.23.2026.01.09.13.40.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Jan 2026 13:40:42 -0800 (PST)
-Date: Fri, 9 Jan 2026 16:40:08 -0500
-From: Gregory Price <gourry@gourry.net>
-To: Yosry Ahmed <yosry.ahmed@linux.dev>
-Cc: linux-mm@kvack.org, cgroups@vger.kernel.org, linux-cxl@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, kernel-team@meta.com,
-	longman@redhat.com, tj@kernel.org, hannes@cmpxchg.org,
-	mkoutny@suse.com, corbet@lwn.net, gregkh@linuxfoundation.org,
-	rafael@kernel.org, dakr@kernel.org, dave@stgolabs.net,
-	jonathan.cameron@huawei.com, dave.jiang@intel.com,
-	alison.schofield@intel.com, vishal.l.verma@intel.com,
-	ira.weiny@intel.com, dan.j.williams@intel.com,
-	akpm@linux-foundation.org, vbabka@suse.cz, surenb@google.com,
-	mhocko@suse.com, jackmanb@google.com, ziy@nvidia.com,
-	david@kernel.org, lorenzo.stoakes@oracle.com,
-	Liam.Howlett@oracle.com, rppt@kernel.org, axelrasmussen@google.com,
-	yuanchu@google.com, weixugc@google.com, yury.norov@gmail.com,
-	linux@rasmusvillemoes.dk, rientjes@google.com,
-	shakeel.butt@linux.dev, chrisl@kernel.org, kasong@tencent.com,
-	shikemeng@huaweicloud.com, nphamcs@gmail.com, bhe@redhat.com,
-	baohua@kernel.org, chengming.zhou@linux.dev,
-	roman.gushchin@linux.dev, muchun.song@linux.dev, osalvador@suse.de,
-	matthew.brost@intel.com, joshua.hahnjy@gmail.com, rakie.kim@sk.com,
-	byungchul@sk.com, ying.huang@linux.alibaba.com, apopple@nvidia.com,
-	cl@gentwo.org, harry.yoo@oracle.com, zhengqi.arch@bytedance.com
-Subject: Re: [RFC PATCH v3 7/8] mm/zswap: compressed ram direct integration
-Message-ID: <aWF1uDdP75gOCGLm@gourry-fedora-PF4VCD3F>
-References: <20260108203755.1163107-1-gourry@gourry.net>
- <20260108203755.1163107-8-gourry@gourry.net>
- <i6o5k4xumd5i3ehl6ifk3554sowd2qe7yul7vhaqlh2zo6y7is@z2ky4m432wd6>
+	s=arc-20240116; t=1767995203; c=relaxed/simple;
+	bh=DcILVt9Wmi3JKHQ9pNORheqD6Q9Bs2V+E1fWnmUdMGA=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=pYekMQOQ3CYxyMSqc62NqBOdkdquTccTy8tsXgIrIE9DHEkY3Gvw9dWqKkPZ8b4LJkg8E+3eha07Wwdd2BVMEw4JQWaC1LCaLkP7YH17rui8texBj/SXh/I/XpTEYq3vVW9or6/P3Uj8oXs+jG5dYNTvfFmoJ7rpJgtE4q3LCAU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de; spf=pass smtp.mailfrom=gmx.de; dkim=pass (2048-bit key) header.d=gmx.de header.i=w_armin@gmx.de header.b=rSs5CwTj; arc=none smtp.client-ip=212.227.15.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+	s=s31663417; t=1767995196; x=1768599996; i=w_armin@gmx.de;
+	bh=/m7WXMJRKfu94at+SAU2dqbhC71HnUUW/qMc67OZ27A=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+	 content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=rSs5CwTjo7w1F3fdZCRcefePGdBY5dxJfAO60KHFfV3eiW0/xmjtDRQSZ0B1Sh4J
+	 AKFaBCsUzJjp77jdQUq01I2tMAL5eUjEAhlTdRYqjuOp8Kiu2bE4CF4dkuUMTV/on
+	 MpIWoLjMxgaakOYUEh4BIQVYPSuALj4iyiV1vpIHbBLK5oPSk/MyvdG4UJ6lmA961
+	 5hRZ0FH/+8LzWV1Dg/Au1jigh1N4AN81iSHrBfKNFPWhX1dYniZCRGUzfZaIFwwc5
+	 thrMeMa+XR4h4d4Fn+zVWMsXYZ4xsy48PqlpS12d6DTDRicRcS8euhtJOHbsJsQPA
+	 OrLIdzXIY1CVEnuSjw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from mx-amd-b650.fritz.box ([93.202.247.91]) by mail.gmx.net
+ (mrgmx005 [212.227.17.190]) with ESMTPSA (Nemesis) id
+ 1MAOJV-1vXyNc3H8F-00E0cj; Fri, 09 Jan 2026 22:46:36 +0100
+From: Armin Wolf <W_Armin@gmx.de>
+To: hansg@kernel.org,
+	ilpo.jarvinen@linux.intel.com
+Cc: platform-driver-x86@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux@weissschuh.net,
+	Dell.Client.Kernel@dell.com,
+	corbet@lwn.net,
+	linux-doc@vger.kernel.org
+Subject: [PATCH v3 0/9] platform/wmi: Introduce marshalling support
+Date: Fri,  9 Jan 2026 22:46:10 +0100
+Message-Id: <20260109214619.7289-1-W_Armin@gmx.de>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <i6o5k4xumd5i3ehl6ifk3554sowd2qe7yul7vhaqlh2zo6y7is@z2ky4m432wd6>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OldgGeOsOcBs5Cg4okbc3i7HOyzZ2HwriUMnVgBeCQKeByB275G
+ TEBln5cET4aHCfHmsakDhMTxf/OCiZU/MbTSYzLCtIZ61XbUvCI7FL2tO0u7W/oN3kN803h
+ IX2Js/ZpPiurg+dTQPXcIHHUK9hT4hlqowGH9vVkykkj3oLXY4dTXF4KDbNvrVArAOS7Zot
+ v+J0wZZtAX5iDtOpljKJw==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:00PRGfGm8wI=;Q4v0zSNPce5WEpUZvvynjFkyJ0G
+ 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
+ 3aXTiRCk=
 
-On Fri, Jan 09, 2026 at 04:00:00PM +0000, Yosry Ahmed wrote:
-> On Thu, Jan 08, 2026 at 03:37:54PM -0500, Gregory Price wrote:
-> 
-> If the memory is byte-addressable, using it as a second tier makes it
-> directly accessible without page faults, so the access latency is much
-> better than a swapped out page in zswap.
-> 
-> Are there some HW limitations that allow a node to be used as a backend
-> for zswap but not a second tier?
->
+The Windows WMI-ACPI driver likely uses wmilib [1] to interact with
+the WMI service in userspace. Said library uses plain byte buffers
+for exchanging data, so the WMI-ACPI driver has to convert between
+those byte buffers and ACPI objects returned by the ACPI firmware.
 
-Coming back around - presumably any compressed node capable of hosting a
-proper tier would be compatible with zswap, but you might have hardware
-which is sufficiently slow(er than dram, faster than storage) that using
-it as a proper tier may be less efficient than incurring faults.
+The format of the byte buffer is publicly documented [2], and after
+some reverse eingineering of the WMI-ACPI driver using a set of custom
+ACPI tables, the following conversion rules have been discovered:
 
-The standard I've been using is 500ns+ cacheline fetches, but this is
-somewhat arbitrary.  Even 500ns might be better than accessing multi-us
-storage, but then when you add compression you might hit 600ns-1us.
+- ACPI integers are always converted into a uint32
+- ACPI strings are converted into special WMI strings
+- ACPI buffers are copied as-is
+- ACPI packages are unpacked
 
-This is besides the point, and apologies for the wall of text below,
-feel free to skip this next section - writing out what hardware-specific
-details I can share for the sake of completeness.
+Extending the ACPI-WMI to perform this kind of marshalling for WMI
+data blocks, methods and events would give us a number of benefits:
 
+- WMI drivers are not restricted to a fixed set of supported ACPI data
+  types anymore, see dell-wmi-aio (integer vs buffer) and
+  hp-wmi-sensors (string vs buffer)
 
-Some hardware details
-=====================
-The way every proposed piece of compressed memory hardware I have seen
-would operate is essentially by lying about its capacity to the
-operating system - and then providing mechanisms to determine when the
-compression ratio becomes is dropping to dangerous levels.
+- correct marshalling of WMI strings when data blocks are marked
+  as requiring ACPI strings instead of ACPI buffers
 
-Hardware Says : 8GB
-Hardware Has  : 1GB
-Node Capacity : 8GB
+- development of WMI drivers without having to understand ACPI
 
-The capacity numbers are static.  Even with hotplug, they must be
-considered static - because the runtime compression ratio can change.
+This eventually should result in better compatibility with some
+ACPI firmware implementations and in simpler WMI drivers.=20
 
-If the device fails to achieve a 4:1 compression ratio, and real usage
-starts to exceed real capacity - the system will fail.
-(dropped writes, poisons, machine checks, etc).
+The first patch extends the WMI driver core to perform said
+marshalling as well as a new API not based on ACPI objects. The next
+patch adds a KUnit test for testing the marshalling code. The
+following two patches then add a set of helper functions for dealing
+with WMI string data together with another KUnit test.
 
-We can mitigate this with strong write-controls and querying the device
-for compression ratio data prior to actually migrating a page. 
+The remaining patches then convert some simple WMI drivers to use the
+new WMI API and update the driver development guide so that new WMI
+drivers stop using the ACPI-based API.
 
-Why Zswap to start
-==================
-ZSwap is an existing, clean read and write control path control.
-   - We fault on all accesses.
-   - It otherwise uses system memory under the hood (kmalloc)
+The series has been tested on multiple machines, with the xiaomi-wmi
+and intel-wmi-sbl-fw-update being tested using a set of custom ACPI
+tables loaded over configFS.
 
-I decided to use zswap as a proving ground for the concept.  While the
-design in this patch is simplistic (and as you suggest below, can
-clearly be improved), it demonstrates the entire concept:
+[1] https://learn.microsoft.com/de-de/windows-hardware/drivers/ddi/wmilib/
 
-on demotion:
-- allocate a page from private memory
-- ask the driver if it's safe to use
-- if safe -> migrate
-  if unsafe -> fallback
+Changes since v2:
+- assert that kmallloc aligns buffer on a 8 byte boundary
+- add missing includes
+- fix some code style issues
 
-on memory access:
-- "promote" to a real page
-- inform the driver the page has been released (zero or discard)
+Changes since v1:
+- fix spelling issues inside the documentation
+- add Reviewed-by tag for the documentation
 
-As you point out, the real value in byte-accessible memory is leaving
-the memory mapped, the only difference on cram.c and zswap.c in the
-above pattern would be:
+Armin Wolf (9):
+  platform/wmi: Introduce marshalling support
+  platform/wmi: Add kunit test for the marshalling code
+  platform/wmi: Add helper functions for WMI string conversions
+  platform/wmi: Add kunit test for the string conversion code
+  platform/x86: intel-wmi-sbl-fw-update: Use new buffer-based WMI API
+  platform/x86/intel/wmi: thunderbolt: Use new buffer-based WMI API
+  platform/x86: xiaomi-wmi: Use new buffer-based WMI API
+  platform/x86: wmi-bmof: Use new buffer-based WMI API
+  platform/wmi: Update driver development guide
 
-on demotion:
-- allocate a page from private memory
-- ask the driver if it's safe to use
-- if safe -> migrate and remap the page as RO in page tables
-  if unsafe
-     -> trigger reclaim on cram node
-     -> fallback to another demotion
+ Documentation/driver-api/wmi.rst              |   3 +
+ Documentation/wmi/acpi-interface.rst          |  68 +++
+ .../wmi/driver-development-guide.rst          |  76 ++-
+ drivers/platform/wmi/Kconfig                  |   3 +
+ drivers/platform/wmi/Makefile                 |   5 +-
+ drivers/platform/wmi/core.c                   | 160 ++++++-
+ drivers/platform/wmi/internal.h               |  17 +
+ drivers/platform/wmi/marshalling.c            | 241 ++++++++++
+ drivers/platform/wmi/string.c                 |  92 ++++
+ drivers/platform/wmi/tests/Kconfig            |  27 ++
+ drivers/platform/wmi/tests/Makefile           |  11 +
+ .../platform/wmi/tests/marshalling_kunit.c    | 449 ++++++++++++++++++
+ drivers/platform/wmi/tests/string_kunit.c     | 278 +++++++++++
+ .../platform/x86/intel/wmi/sbl-fw-update.c    |  43 +-
+ drivers/platform/x86/intel/wmi/thunderbolt.c  |  26 +-
+ drivers/platform/x86/wmi-bmof.c               |  34 +-
+ drivers/platform/x86/xiaomi-wmi.c             |   5 +-
+ include/linux/wmi.h                           |  45 +-
+ 18 files changed, 1491 insertions(+), 92 deletions(-)
+ create mode 100644 drivers/platform/wmi/internal.h
+ create mode 100644 drivers/platform/wmi/marshalling.c
+ create mode 100644 drivers/platform/wmi/string.c
+ create mode 100644 drivers/platform/wmi/tests/Kconfig
+ create mode 100644 drivers/platform/wmi/tests/Makefile
+ create mode 100644 drivers/platform/wmi/tests/marshalling_kunit.c
+ create mode 100644 drivers/platform/wmi/tests/string_kunit.c
 
-on *write* access:
-- promote to real page
-- clean up the compressed page
+=2D-=20
+2.39.5
 
-> Or is the idea to make promotions from compressed memory to normal
-> memory fault-driver instead of relying on page hotness?
-> 
-> I also think there are some design decisions that need to be made before
-> we commit to this, see the comments below for more.
->
-
-100% agreed, i'm absolutely not locked into a design, this just gets the
-ball rolling :].
-
-> >  /* RCU-protected iteration */
-> >  static LIST_HEAD(zswap_pools);
-> >  /* protects zswap_pools list modification */
-> > @@ -716,7 +732,13 @@ static void zswap_entry_cache_free(struct zswap_entry *entry)
-> >  static void zswap_entry_free(struct zswap_entry *entry)
-> >  {
-> >  	zswap_lru_del(&zswap_list_lru, entry);
-> > -	zs_free(entry->pool->zs_pool, entry->handle);
-> > +	if (entry->direct) {
-> > +		struct page *page = (struct page *)entry->handle;
-> 
-> Would it be cleaner to add a union in zswap_entry that has entry->handle
-> and entry->page?
-> 
-
-Absolutely. Ack.
-
-> > +		/* Skip nodes we've already tried and failed */
-> > +		if (node_isset(nid, tried_nodes))
-> > +			continue;
-> 
-> Why do we need this? Does for_each_node_mask() iterate each node more
-> than once?
->
-
-This is just me being stupid, i will clean this up.  I think i wrote
-this when i was using a _next nodemask variant that can loop around and
-just left this in when i got it working.
-
-> I think we can drop the 'found' label by moving things around, would
-> this be simpler?
-> 	for_each_node_mask(..) {
-> 		...
-> 		ret = node_private_allocated(dst);
-> 		if (!ret)
-> 			break;
-> 
-> 		__free_page(dst);
-> 		dst = NULL;
-> 	}
-> 
-
-ack, thank you.
-
-> So the CXL code tells zswap what nodes are usable, then zswap tries
-> getting a page from these nodes and checking them using APIs provided by
-> the CXL code.
-> 
-> Wouldn't it be a better abstraction if the nodemask lived in the CXL
-> code and an API was exposed to zswap just to allocate a page to copy to?
-> Or we can abstract the copy as well and provide an API that directly
-> tries to copy the page to the compressible node.
->
-> IOW move zswap_compress_direct() (probably under a different name?) and
-> zswap_direct_nodes into CXL code since it's not really zswap logic.
-> 
-> Also, I am not sure if the zswap_compress_direct() call and check would
-> introduce any latency, since almost all existing callers will pay for it
-> without benefiting.
-> 
-> If we move the function into CXL code, we could probably have an inline
-> wrapper in a header with a static key guarding it to make there is no
-> overhead for existing users.
-> 
-
-
-CXL is also the wrong place to put it - cxl is just one potential
-source of such a node.  We'd want that abstracted...
-
-So this looks like a good use of memor-tiers.c - do dispatch there and
-have it set static branches for various features on node registration.
-
-struct page* mt_migrate_page_to(NODE_TYPE, src, &size);
--> on success return dst page and the size of the page on hardware
-   (target_size would address your accounting notes below)
-
-Then have the migrate function in mt do all the node_private callbacks.
-
-So that would limit the zswap internal change to
-
-if (zswap_node_check()) { /* static branch check */
-    cpage = mt_migrate_page_to(NODE_PRIVATE_ZSWAP, src, &size);
-    if (compressed_page) {
-        entry->page_handle = cpage;
-        entry->length = size;
-        entry->direct = true;
-	return true;
-    }
-}
-/* Fallthrough */
-
-ack. this is all great, thank you.
-
-... snip ...
-> > entry->length = size
->
-> I don't think this works. Setting entry->length = PAGE_SIZE will cause a
-> few problems, off the top of my head:
-> 
-> 1. An entire page of memory will be charged to the memcg, so swapping
-> out the page won't reduce the memcg usage, which will cause thrashing
-> (reclaim with no progress when hitting the limit).
->
-> Ideally we'd get the compressed length from HW and record it here to
-> charge it appropriately, but I am not sure how we actually want to
-> charge memory on a compressed node. Do we charge the compressed size as
-> normal memory? Does it need separate charging and a separate limit?
-> 
-> There are design discussions to be had before we commit to something.
-
-I have a feeling tracking individual page usage would be way too
-granular / inefficient, but I will consult with some folks on whether
-this can be quieried.  If so, we can add way to get that info.
-
-node_private_page_size(page) -> returns device reported page size.
-
-or work it directly into the migrate() call like above
-
---- assuming there isn't a way and we have to deal with fuzzy math ---
-
-The goal should definitely be to leave the charging statistics the same
-from the perspective of services - i.e zswap should charge a whole page,
-because according to the OS it just used a whole page.
-
-What this would mean is memcg would have to work with fuzzy data.
-If 1GB is charged and the compression ratio is 4:1, reclaim should
-operate (by way of callback) like it has used 256MB.
-
-I think this is the best you can do without tracking individual pages.
-
-> 
-> 2. The page will be incorrectly counted in
-> zswap_stored_incompressible_pages.
-> 
-
-If we can track individual page size, then we can fix that.
-
-If we can't, then we'd need zswap_stored_direct_pages and to do the
-accounting a bit differently.  Probably want direct_pages accounting
-anyway, so i might just add that.
-
-> Aside from that, zswap_total_pages() will be wrong now, as it gets the
-> pool size from zsmalloc and these pages are not allocated from zsmalloc.
-> This is used when checking the pool limits and is exposed in stats.
->
-
-This is ignorance of zswap on my part, and yeah good point.  Will look
-into this accounting a little more.
-
-> > +		memcpy_folio(folio, 0, zfolio, 0, PAGE_SIZE);
-> 
-> Why are we using memcpy_folio() here but copy_mc_highpage() on the
-> compression path? Are they equivalent?
-> 
-
-both are in include/linux/highmem.h
-
-I was avoiding page->folio conversions in the compression path because
-I had a struct page already.
-
-tl;dr: I'm still looking for the "right" way to do this.  I originally
-had a "HACK:" tag here previously but seems I definitely dropped it
-prematurely.
-
-(I also think this code can be pushed into mt_ or callbacks)
-
-> > +	if (entry->direct) {
-> > +		struct page *freepage = (struct page *)entry->handle;
-> > +
-> > +		node_private_freed(freepage);
-> > +		__free_page(freepage);
-> > +	} else
-> > +		zs_free(pool->zs_pool, entry->handle);
-> 
-> This code is repeated in zswap_entry_free(), we should probably wrap it
-> in a helper that frees the private page or the zsmalloc entry based on
-> entry->direct.
->
-
-ack.
-
-Thank you again for taking a look, this has been enlightening.  Good
-takeaways for the rest of the N_PRIVATE design.
-
-I think we can minimize zswap changes even further given this.
-
-~Gregory
 
