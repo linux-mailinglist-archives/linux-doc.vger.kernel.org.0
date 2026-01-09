@@ -1,144 +1,146 @@
-Return-Path: <linux-doc+bounces-71597-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71599-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 122B3D09C43
-	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 13:37:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE428D0A19E
+	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 13:58:38 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id EB3AA30270B9
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 12:23:13 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3BFBC304839D
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 12:42:50 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64D882EC54D;
-	Fri,  9 Jan 2026 12:23:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E372C1DF72C;
+	Fri,  9 Jan 2026 12:42:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="q/Se26u3"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a76hO02m"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-vk1-f172.google.com (mail-vk1-f172.google.com [209.85.221.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4229315ADB4;
-	Fri,  9 Jan 2026 12:23:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6246D33D511
+	for <linux-doc@vger.kernel.org>; Fri,  9 Jan 2026 12:42:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767961392; cv=none; b=KVzXuLTW7i0eonndVTIaZbdVOuy3um2llu5RvHdN+7tNOd0TY28hbUDAa5FecGWaZclaw4fYix3Jc4508ZTlDwzHc7krlS/dr7ruyRd1TcpRMwpqSwaktsPttz93LpCec2uz5xMnefdxzYx1enI/NONvIX2caeHrYuw4Jvjz+3I=
+	t=1767962566; cv=none; b=QnFtXBGLokORDwr7GUz/42gEPyPwJzd7QgahrxI43nxVi3fX20VqWf0ftq6i3KaBzH7WGEwi8pzr/QV1G4r1IFP1Nm4UaQEtUXR7Nx1XVlPzxJvIiw1/1CNkVz9moPj3GaH9SrL3HUW/P+1Odv5y5xJNes12Dnh9goKq0hRJBa0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767961392; c=relaxed/simple;
-	bh=sglgP4nrzMf9AieQM4DL+n/6UDGucMH6MJ8uQ8T0/fg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tMLMz2czkei56sody+rrN4vaWnwyFfNWoJuimlubbwptITBJD5sdwdiujE9lxwSjvf4YxNqPgV9ngwhFywzFTsWBfOtANgU2uDbYyqJqLLeSOunWdbdgYUUmPXq/+oj9M4wgBEFKD2lXbnzk06dAdTPGJy971daTyeZy0VWRaJ0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=q/Se26u3; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1ED4C4CEF1;
-	Fri,  9 Jan 2026 12:23:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1767961392;
-	bh=sglgP4nrzMf9AieQM4DL+n/6UDGucMH6MJ8uQ8T0/fg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=q/Se26u3A4laP0HIFVuZRl4034idAhiB/vnYByX/t9ZYD7iZ8LEqxwta3J05K/yDt
-	 B7VA2xabgnXU+ksx+ZdRyJMdN9QNek8Edd+oIpB0sWSCdmloZjVcCNemhKYO4ITnhr
-	 u/XW/n4rlrBoNGhFlpyFI3VppBqoKQXKuy5ADvwE=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: stable@vger.kernel.org
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	patches@lists.linux.dev,
-	"Jiri Slaby (SUSE)" <jirislaby@kernel.org>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	linux-doc@vger.kernel.org
-Subject: [PATCH 6.6 735/737] tty: fix tty_port_tty_*hangup() kernel-doc
-Date: Fri,  9 Jan 2026 12:44:34 +0100
-Message-ID: <20260109112201.755593272@linuxfoundation.org>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260109112133.973195406@linuxfoundation.org>
-References: <20260109112133.973195406@linuxfoundation.org>
-User-Agent: quilt/0.69
-X-stable: review
-X-Patchwork-Hint: ignore
+	s=arc-20240116; t=1767962566; c=relaxed/simple;
+	bh=hZSgLFwm7iWTSCEMlGpJ5EydF3r4Fok2bDOlepHZ5R0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DUnwskXkvbcMBtL1CtbDKwMX0xzxuDw/aQefyV32ZovnLOMUQlobh97RtfKIfFdT5F2ul/y1k8NCzwit4JOTCleukhbogsJBd8FVP0VMXb1O5mIs2oxnU/gVkwZD++iK8C+puObsT9GjG7zojxiVUg9ZNZZ10lp13qJRolHfqsI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a76hO02m; arc=none smtp.client-ip=209.85.221.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-vk1-f172.google.com with SMTP id 71dfb90a1353d-5635f6cb32fso489441e0c.1
+        for <linux-doc@vger.kernel.org>; Fri, 09 Jan 2026 04:42:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1767962564; x=1768567364; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=K3BFu0vu0/p35NSB3GE3KTVvm2WkoyhJD5SPOf/SaeU=;
+        b=a76hO02m2zyU0nn+/0WvJf0A//MgSy24ecK2vgzKwg/rNsXQzflpXEZMsk+Le0Xts+
+         4ei0oXO/MFJG2OzzezPNGz/6+omGmJQ2YYhtRhDOPHpL2csC31xZWDHWf9ClJv117tSE
+         XZ/n9btjige4iDkfmSLcQWYNOR2pBEarYILOOyzRAZhFNRpteCOF52Ti4mpPP4c4z3RF
+         uCTqru6EWkTuyr5qLp6vxVk7ucxz/qhwujUp2g+xIm5AnIBSDsTArBZmn3XcW5kuSEZE
+         /kzYpREkr+bCZ5OKKIkmaMfWTmhv2xI7lzeHl7+1FWmyR3NokEaw8NlnNzM0Ritt4hu0
+         SviQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767962564; x=1768567364;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=K3BFu0vu0/p35NSB3GE3KTVvm2WkoyhJD5SPOf/SaeU=;
+        b=FxElfUsl1szzGq0RwFTbdvb3nW24ldmFWUuB8/1BPBxy3hrSp1oQrZj09WFwZeWx5e
+         wep1/L9VB9waa4Oqqxbg8wyk3rBG2nGBcKHZtK8uXl3tStuo+mFjiDecGvUBBcGqJtiv
+         LyGPsTbs5f9zwK3NLBSMkc/amf8ajHLf4agBe5YIaHUWx24WPwQF2FH6PkKjF5PGCZla
+         ZEY8ZsgCq8zcuWZUXQOxoaGHjz7AsAKsterUbu5UXOvcG2vTtox41HSb1u4xp88V/rdC
+         ZnT252b5B/zhT5DiYWgIbVb1lgRzLa8Urc7OnHzn8394suwzTXdV1YucYk0Z/6939UNs
+         aqRw==
+X-Forwarded-Encrypted: i=1; AJvYcCW1nYWErTuq0WTFJDY6WHaH73UBfbQEOpEct4CEu049wXPpRKbUWEAJqcDSI1nN6iCRtZpUjWc/3YE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxuP7CXMr1HbTnWFYrdoJVy2e6CwTM5Pd0l+Ds0EBaDi6NR767U
+	RfIMRzTTRgnSyaxc6hytKtk4W2EVKGPwp1LcY1QytmUletzmKj80SEKW
+X-Gm-Gg: AY/fxX53kZ+pzIszQIVP6Olnmh9gXh38HbYmV9bha92A5+UfuKTnfmWvYAT0xUm/ig7
+	axhQQlFNqljqPHaSCy56cDNDIqRJ9MQxVVJRERRokHVc8QjhnR2/T8Y7iizYh590Z4MPAqwuOx8
+	kgp5f0anrjrw6cbDXLXdnQsWYb7nzIWESOw77vSl7MstycKLQzibnrwjWLkXESQqM7KzhBKtn/X
+	jl21XtfQpW0OgsOV6dNF6F/+9tuzrlpiQ1s2zo9pSUSW9YuyHlg0NtoRQ8+0h9O3Tz4wVAMXllX
+	d5d63fWtFCQ1oHVIGj3tVb8kXSP3mvLLtA3ZfQDFaHz6MlqEqJvZnc62MeMmmutKyk6fxRnmvD9
+	qVtJXKnED9uy5+x+IZ2dx3LHwzmn+7fD6cbbEAXSUHR2RbEo3+BshUCfWEiJn+NIIenuVN+uMRc
+	if5WpluREPJAcuUfsOW/o=
+X-Google-Smtp-Source: AGHT+IEFwkm7ZUOXNxPhCYhh26Dl1VpJaAPxMviOBBIXzleuSNVqOAzV6ATr3WWYBcee7gd8DzSzGw==
+X-Received: by 2002:a05:6102:50ac:b0:5ee:a184:35c8 with SMTP id ada2fe7eead31-5eea1843ad8mr1950120137.30.1767962562741;
+        Fri, 09 Jan 2026 04:42:42 -0800 (PST)
+Received: from localhost ([2804:30c:2766:a500:b70:8c42:f792:bef6])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-944124c452asm8625479241.13.2026.01.09.04.42.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Jan 2026 04:42:41 -0800 (PST)
+Date: Fri, 9 Jan 2026 09:44:28 -0300
+From: Marcelo Schmitt <marcelo.schmitt1@gmail.com>
+To: Janani Sunil <janani.sunil@analog.com>
+Cc: Lars-Peter Clausen <lars@metafoo.de>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	Alexandru Ardelean <alexandru.ardelean@analog.com>,
+	Jonathan Cameron <jic23@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org, jan.sun97@gmail.com
+Subject: Re: [PATCH v2 1/2] dt-bindings: iio: dac: Add max22007
+Message-ID: <aWD4LA7Y1fl3yvh-@debian-BULLSEYE-live-builder-AMD64>
+References: <20260108-max22007-dev-v2-0-2506c738784f@analog.com>
+ <20260108-max22007-dev-v2-1-2506c738784f@analog.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260108-max22007-dev-v2-1-2506c738784f@analog.com>
 
-6.6-stable review patch.  If anyone has any objections, please let me know.
+Hi Janani,
 
-------------------
+One extra comment in addition to Krzysztof's.
 
-From: Jiri Slaby (SUSE) <jirislaby@kernel.org>
+On 01/08, Janani Sunil wrote:
+> Devicetree bindings for MAX22007 4-channel 12-bit DAC that drives a
+> voltage or current output on each channel
+> 
+> Signed-off-by: Janani Sunil <janani.sunil@analog.com>
+> ---
+...
+> +
+> +patternProperties:
+> +  "^channel@[0-3]$":
+> +    $ref: /schemas/iio/dac/dac.yaml#
+> +    type: object
+> +    description:
+> +      Represents the external channels which are connected to the DAC.
+> +
+> +    properties:
+> +      reg:
+> +        description: Channel number
+> +        items:
+> +          minimum: 0
+> +          maximum: 3
+> +
+> +      adi,ch-func:
+> +        description:
+> +          Channel output type. Use CH_FUNC_VOLTAGE_OUTPUT for voltage
+> +          output or CH_FUNC_CURRENT_OUTPUT for current output.
+> +        $ref: /schemas/types.yaml#/definitions/uint32
+> +        enum: [1, 2]
+adi,ad74413r.yaml has many possibilities for the channel output type.
+max22007 is only either voltage or current.
+Can't we do this with output-range-microamp and output-range-microvolt from dac.yaml?
+Figure out the channel type from the output-range- property?
 
-commit 6241b49540a65a6d5274fa938fd3eb4cbfe2e076 upstream.
+> +
+> +    required:
+> +      - reg
+> +      - adi,ch-func
+> +
+> +    unevaluatedProperties: false
 
-The commit below added a new helper, but omitted to move (and add) the
-corressponding kernel-doc. Do it now.
-
-Signed-off-by: "Jiri Slaby (SUSE)" <jirislaby@kernel.org>
-Fixes: 2b5eac0f8c6e ("tty: introduce and use tty_port_tty_vhangup() helper")
-Link: https://lore.kernel.org/all/b23d566c-09dc-7374-cc87-0ad4660e8b2e@linux.intel.com/
-Reported-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Link: https://lore.kernel.org/r/20250624080641.509959-6-jirislaby@kernel.org
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
----
- Documentation/driver-api/tty/tty_port.rst |    5 +++--
- drivers/tty/tty_port.c                    |    5 -----
- include/linux/tty_port.h                  |    9 +++++++++
- 3 files changed, 12 insertions(+), 7 deletions(-)
-
---- a/Documentation/driver-api/tty/tty_port.rst
-+++ b/Documentation/driver-api/tty/tty_port.rst
-@@ -42,9 +42,10 @@ TTY Refcounting
- TTY Helpers
- -----------
- 
-+.. kernel-doc::  include/linux/tty_port.h
-+   :identifiers: tty_port_tty_hangup tty_port_tty_vhangup
- .. kernel-doc::  drivers/tty/tty_port.c
--   :identifiers: tty_port_tty_hangup tty_port_tty_wakeup
--
-+   :identifiers: tty_port_tty_wakeup
- 
- Modem Signals
- -------------
---- a/drivers/tty/tty_port.c
-+++ b/drivers/tty/tty_port.c
-@@ -409,11 +409,6 @@ void tty_port_hangup(struct tty_port *po
- }
- EXPORT_SYMBOL(tty_port_hangup);
- 
--/**
-- * tty_port_tty_hangup - helper to hang up a tty
-- * @port: tty port
-- * @check_clocal: hang only ttys with %CLOCAL unset?
-- */
- void __tty_port_tty_hangup(struct tty_port *port, bool check_clocal, bool async)
- {
- 	struct tty_struct *tty = tty_port_tty_get(port);
---- a/include/linux/tty_port.h
-+++ b/include/linux/tty_port.h
-@@ -254,11 +254,20 @@ static inline int tty_port_users(struct
- 	return port->count + port->blocked_open;
- }
- 
-+/**
-+ * tty_port_tty_hangup - helper to hang up a tty asynchronously
-+ * @port: tty port
-+ * @check_clocal: hang only ttys with %CLOCAL unset?
-+ */
- static inline void tty_port_tty_hangup(struct tty_port *port, bool check_clocal)
- {
- 	__tty_port_tty_hangup(port, check_clocal, true);
- }
- 
-+/**
-+ * tty_port_tty_vhangup - helper to hang up a tty synchronously
-+ * @port: tty port
-+ */
- static inline void tty_port_tty_vhangup(struct tty_port *port)
- {
- 	__tty_port_tty_hangup(port, false, false);
-
-
+With best regards,
+Marcelo
 
