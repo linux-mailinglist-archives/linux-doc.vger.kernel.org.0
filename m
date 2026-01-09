@@ -1,152 +1,208 @@
-Return-Path: <linux-doc+bounces-71534-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71545-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id E336FD070BD
-	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 04:53:28 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 00718D07177
+	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 05:14:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id CCEF6300D437
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 03:53:27 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id B42AF301FC25
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 04:14:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A350424A058;
-	Fri,  9 Jan 2026 03:53:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 33D912DB7AF;
+	Fri,  9 Jan 2026 04:14:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="T5oxOSI6"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="iJ+3J3Jq";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="TSc44ls3"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com [209.85.215.195])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 705BD78F3E
-	for <linux-doc@vger.kernel.org>; Fri,  9 Jan 2026 03:53:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.195
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5ED62D7DC4
+	for <linux-doc@vger.kernel.org>; Fri,  9 Jan 2026 04:14:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767930804; cv=none; b=dUTQGH6Y3sYBA8nSVY34qXm6GlCLZHGMz0n6sfQ7c1iijAlRTOf9RenjdUgS/cRCaLHuYQA1SlCOY2Ewjpc/szKgDvV1vJlO7hqD3xRXV+aXMENRLkeR9hCdyzArchKgvVWvsRaXaPN/bdufiFX9NWOumZBdyI4Ej11uP/Y67tg=
+	t=1767932077; cv=none; b=YfXhCXusjlMFNX3/Q4ZmsHNe+JOjbx5iGfOrmJ4rNx+HBx1zz1j1HWsw/e7s7wnWpFGIQjopse8TDPgPDzfV2rzGPcsDOTE1bkLF+0Sh6ykhL+aHJtd7Qp9A2+vS2t7x8YSon4KLM7XbJpEmPB/sfhh7icyM8OaAr83sB2wX+yg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767930804; c=relaxed/simple;
-	bh=cjzf1hezxDWR12VFZVi9i8a61PH/8bIfFWYxzgThCic=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JezdFfIFI7mV5fE2uxpZiRocLj0i5F6AJS1iwChw4S95vhIXaOCMmjBLvU4immli+gUj/587xuOeThiiT+0qMMD7RuxVydq4bD+Wp5l4B+xcrxkopXVW7q5XJgJHUCJ5g/N+KCrx+Tp55DtIrjGlrH+DLjMwmlpQ0YsbCWtPH7A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=T5oxOSI6; arc=none smtp.client-ip=209.85.215.195
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f195.google.com with SMTP id 41be03b00d2f7-c026e074373so1987774a12.1
-        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 19:53:23 -0800 (PST)
+	s=arc-20240116; t=1767932077; c=relaxed/simple;
+	bh=i1fLrSbyd81f0S0PiHsOLrXgKUHshwekbk4YumK+lKk=;
+	h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=kkwd5va2bikdMwAF3SXO/AnQBCdXJL/gwOCV8ccSHNhI9qQlCD1piCkfZ+yuCml46EjtWSj7kECLPlV5bMbw+XPYXTEA4dsU5Sj0Xo6ap3j9snrNPt/uJGxz1oBK4Lk+/VZJILlS3goLWU0WolSL3bkbZY8czrPUJxjvMTs8GWg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=iJ+3J3Jq; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=TSc44ls3; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1767932074;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nghXJ/jMMYOZQxSCZgT2jI2VxzkfVAzdpBsOhl57SOs=;
+	b=iJ+3J3JqwZXyutTQStn4nqfkYLaVbxZA0EYTUwDZoQGuZ26TGoB6I4Uu5CPA2uTRXho067
+	T/u3cvxqHRCCfrg8neXmkW1c3sAsjLCF2pKNykfeTtmukN5D7LNDfv21p/tQYhNWiUqD/T
+	4yNnd8ZjwiTsGp4SPb0yWSmdajS/Hik=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-258-pMEZR2HwMXW8ZVLaA7LB-g-1; Thu, 08 Jan 2026 23:14:33 -0500
+X-MC-Unique: pMEZR2HwMXW8ZVLaA7LB-g-1
+X-Mimecast-MFC-AGG-ID: pMEZR2HwMXW8ZVLaA7LB-g_1767932073
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-8b2e2342803so977501885a.3
+        for <linux-doc@vger.kernel.org>; Thu, 08 Jan 2026 20:14:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767930803; x=1768535603; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=h+Aa2YGg7UhZCDl66L6h+JyJSb8ah/8nQF29Auvd56Q=;
-        b=T5oxOSI6i2ZQqvTjeqE3fRjMGUz6yJgOosZfFTd79hRy1+BVyKctGUcnYLGAB1TUED
-         G9hiqGCRxgXY4oK1MN3eVq833nEBBzJLRreIsO8yH2nXMatJXFwG49RCwB7mSZbUGL8H
-         MZm8AyFQ1dG2r1/TyW87UJa0W53gYtOP82XvrPVPxMdrkZioQHo1b/3Fo6T5zH6KnVOX
-         wp/TeQMNg/mDW4eTkE1gcsYzlCkrlj+1XGXyo+yLyau+7jKUwgmAmvAdW6pHyZNIfTG0
-         gUhm7Z+NVLKoxZUGF/3eBLEAgCQ13oTXAeri4rDa9Y2Dtv2pFOL9ztS/DlgaIrp/wXhd
-         BFfg==
+        d=redhat.com; s=google; t=1767932073; x=1768536873; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=nghXJ/jMMYOZQxSCZgT2jI2VxzkfVAzdpBsOhl57SOs=;
+        b=TSc44ls3TAH3YV2Kg6ngUt8IlNeqgthONicsUZm8s+nIAT9mW71/3W8Q+wFFWiF6I8
+         fsH/vn56Gzx2csUgUGccErNsq5jfwC6qdg1gSpJ/U6UsnB4t0nx6Th29hJGBpv59dE/A
+         XhyTBIm/VdQN9VCIat53UbUrjh/5fq63obVKLfFGv3cD3/WKGwN+Wu6Rm1rnfFd5JuvO
+         DrnYEt9N16xsbt2M2MOiPLZjrpPkS5Q0TLAU609yh9nyYn6eDdZvGFzOLUdmG/dWsDoX
+         ymJrTtp22x91QxOEoZ9gwlCL8nWhGQc9PoJfxdIdm/jmYcTRzC00JzXETpN/k9S9K+vm
+         f0yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767930803; x=1768535603;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=h+Aa2YGg7UhZCDl66L6h+JyJSb8ah/8nQF29Auvd56Q=;
-        b=RscGAh0RjW8ypqkHAj2GAc9cjemy4aVC+gl52xAFk8KoI8YEWQY5V3KlMnOrrs5u0S
-         nmRr/9yEEFR4kpS7wxYaO1y9hK5uSJgOC9Xhl8MqKO/qOrvWmWPqdYcISM2wCLLZqsSf
-         u5SJQVXxQ3f0w85nEqDXWP0MaIRFpacO6iq8Xp3fmpVMFn+Coz6SZS5K4kfvtWuvitY8
-         XUBOUWXQQ87ER7UMMCzBKAiRWy5slb+dD8oWxHinTNVsapM9+0ZMR9muLgzL0++1Oj3H
-         7f56WjYKioR19OQToAyKXXHvF1yFDinBJsqZpq/Z7GpM7JvwrTGfagB3DHGQ+R8/FhDU
-         XMpw==
-X-Forwarded-Encrypted: i=1; AJvYcCXH7ii70tPOakxbBqWSq7V87SG+uiAV0o18dAdzfpZpdmjttSKtDZOzw2yxsLUvLkPk+XAJFREMFAo=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyHIrJaljR90kcAqG1dGf1XFOxRQd35urlHlmix4zGqmCTJhpCy
-	PiXGqMYmiQ8I/ryTFACJSpxJ2ow823hQj9HgSFDfdScOQksm0gfdOl9G
-X-Gm-Gg: AY/fxX7HWr/ZCXbhOomWFsVJa68Ot7d+wNqvYs3HusoUYLVZFH1CXRuhphXUUQ3R5IZ
-	gg9Lpksq6SfW8oyF9HIv9mBPB70ynJ7jzlSyF6WQBBBTKxiYdk53g/pmdm0LT9lYSdGrwldCulH
-	YDhsHsQ0ohGa9POTy8aiVcCCIAJ29r92x+xnyJnl9vwgrAbXi5xHe+PRtU5LbcuYcDi7ifxYSTu
-	nsU1994dY2X9l8TlSNY+qSe8MkgaK/2dogN9KZpNm8j+2c2DyWj7uzgNebn21jXC4Y2FhvNOBgJ
-	j8wcKWErOl1wn+t6KM2rntF07R1lJTDU69S4tjOpMxAT/s7t0XHUiDsfncOAJ6TtvJOwYaMFKjB
-	bLCsnKjt8H9dYgtPbJ+U/asXDtLrMzuNGHhhynFbq4x/tXgYUN/NOKplX+a/6P801aLryaRQPwY
-	BSIK2KbOM=
-X-Google-Smtp-Source: AGHT+IG3DbwcRlj4uCjp94O1bayt9ny/rytFl1TUbZvGzdohtEHLlfp1Gg9vbixfjueHNe9CAYoQWQ==
-X-Received: by 2002:a05:6a21:32a5:b0:366:14ac:8c6a with SMTP id adf61e73a8af0-3898f9b549cmr8446525637.64.1767930802586;
-        Thu, 08 Jan 2026 19:53:22 -0800 (PST)
-Received: from archie.me ([210.87.74.117])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3cd2acdsm90501745ad.89.2026.01.08.19.53.20
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Jan 2026 19:53:21 -0800 (PST)
-Received: by archie.me (Postfix, from userid 1000)
-	id 18C0643A9037; Fri, 09 Jan 2026 10:53:14 +0700 (WIB)
-Date: Fri, 9 Jan 2026 10:53:14 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Shawn Lin <shawn.lin@rock-chips.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-rockchip@lists.infradead.org, linux-pci@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>
-Subject: Re: [PATCH v2 2/3] Documentation: tracing: Add PCI controller event
- documentation
-Message-ID: <aWB7qtKhzbEoY8pJ@archie.me>
-References: <1767929389-143957-1-git-send-email-shawn.lin@rock-chips.com>
- <1767929389-143957-3-git-send-email-shawn.lin@rock-chips.com>
+        d=1e100.net; s=20230601; t=1767932073; x=1768536873;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=nghXJ/jMMYOZQxSCZgT2jI2VxzkfVAzdpBsOhl57SOs=;
+        b=BFkyJH6Lwyml9SUWWsl8F7Lx3eRlu6pHtTjAj5bi89YNVlegOcYLdnEkCyZDzUabjG
+         +OVeeVTzr6HPWOmMBpRSLvUYIIhngDcmu0NjgeNR5DIhei7fLsJ8OciVteckIdMITVGA
+         u/y15XfATBJ9PGoChg6ZwIGM4Up6gJBvDF1RXecyHgx/8KMWTxWng9xjU+GZekA1MhxP
+         kyAhGLPRXwcTM23iEOFfSS2ZgFDj4yiD9ZjKmeC8LQmBYRsbaTin7mTk098x/W/9qGGc
+         Bg6ByjWlo3mRtH9YYOEE6L7R4DEVZhMaXJl5rNsI8YKeDzcEJDFzsS0K3rYg2XGHg9oS
+         c1uQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVv47mWEETbVJi38SE8fU41dDLv/K3gcswNRZBGXVYmATHRFYQFfUa7g6FwqZ9nMGEiKHLSM9leCOM=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxlWgKGY+uK+nvSpJR5p9x46LOLIE4KMDTQYJkBxU0ge9GxaMX2
+	+1nVxEK1/ezP1XSvSwG7KT+lvFCY7ygcepdihpqp3gb2KZmvLOED2J2W1ud72uyLB5U5K8Nbz/7
+	PLX5ASclWk3FazXwEVD5AUn7JYK2qFp9jrVof1yF7vWY2DcOVmWvLCw0UtBCYAg==
+X-Gm-Gg: AY/fxX6Lda6gQd1OUJ3V7DF4xXf1eRxaAtPy3mvG0iJCIn0jenN6pTdZueOwlRugPhZ
+	HwHKPobRdlDvt/CjqOSGfi0YsU1G20QpdzFraKz/8Krqvui+ggj549KOhaqjbSQxnzKxjmow2hJ
+	c85DY6GVtjkC/kq1KsMWk4z4kXmgPq6PTILVXClPC0a6Oh5LY/PDsUtyU9+pW0QdPm9206/6v99
+	/257YuTkWq3fMr0HhNrIYRA5iOknmwmhcVtS6htqkwmI2JxNF2uSb+Vxw7Gh8EjMOCzhLbRMR1G
+	VA3Q5bB8b0QR1n8D3drBs8AuaQgHDnP/z2okLy2MHWur8qfiyIjFdSW4QZphtd5dWcNIv5ef2+I
+	DxR+6QtSGdHA3XETD68mX6gjSuz6zlUFlJf3yuubBZ7BBbGkU3otxkLNz
+X-Received: by 2002:a05:620a:4804:b0:8b2:e0ad:eb97 with SMTP id af79cd13be357-8c3894172cbmr1167824785a.83.1767932071821;
+        Thu, 08 Jan 2026 20:14:31 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHfApg85dIzy0/UVGbmmnaqdWN/LcvlttlnRbWN6UZZYR6Gg703S6psJlUfwcLoLX8mA87/aw==
+X-Received: by 2002:a05:620a:4804:b0:8b2:e0ad:eb97 with SMTP id af79cd13be357-8c3894172cbmr1167822485a.83.1767932071381;
+        Thu, 08 Jan 2026 20:14:31 -0800 (PST)
+Received: from ?IPV6:2601:188:c102:b180:1f8b:71d0:77b1:1f6e? ([2601:188:c102:b180:1f8b:71d0:77b1:1f6e])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c37f4a6145sm730500485a.5.2026.01.08.20.14.29
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 08 Jan 2026 20:14:30 -0800 (PST)
+From: Waiman Long <llong@redhat.com>
+X-Google-Original-From: Waiman Long <longman@redhat.com>
+Message-ID: <828377cf-4a64-48b4-887e-8f71ebed502c@redhat.com>
+Date: Thu, 8 Jan 2026 23:14:28 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="tfncDExG7J/FagGI"
-Content-Disposition: inline
-In-Reply-To: <1767929389-143957-3-git-send-email-shawn.lin@rock-chips.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [cgroup/for-6.20 PATCH v2 3/4] cgroup/cpuset: Don't fail
+ cpuset.cpus change in v2
+To: Chen Ridong <chenridong@huaweicloud.com>, Waiman Long <llong@redhat.com>,
+ Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
+ =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>
+Cc: linux-kernel@vger.kernel.org, cgroups@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
+ Sun Shaojie <sunshaojie@kylinos.cn>
+References: <20260101191558.434446-1-longman@redhat.com>
+ <20260101191558.434446-4-longman@redhat.com>
+ <efdcd90c-95ed-4cfc-af9a-3dc0e8f0a488@huaweicloud.com>
+ <6eedf67b-3538-4fd1-903b-b7d8db4ff43d@redhat.com>
+ <7a3ec392-2e86-4693-aa9f-1e668a668b9c@huaweicloud.com>
+ <85f4bca2-e355-49ce-81e9-3b8080082545@redhat.com>
+ <38ab0503-3176-43a0-b6b5-09de0fd9eb75@huaweicloud.com>
+Content-Language: en-US
+In-Reply-To: <38ab0503-3176-43a0-b6b5-09de0fd9eb75@huaweicloud.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+On 1/5/26 2:00 AM, Chen Ridong wrote:
+>
+> On 2026/1/5 11:59, Waiman Long wrote:
+>> On 1/4/26 8:35 PM, Chen Ridong wrote:
+>>> On 2026/1/5 5:48, Waiman Long wrote:
+>>>> On 1/4/26 2:09 AM, Chen Ridong wrote:
+>>>>> On 2026/1/2 3:15, Waiman Long wrote:
+>>>>>> Commit fe8cd2736e75 ("cgroup/cpuset: Delay setting of CS_CPU_EXCLUSIVE
+>>>>>> until valid partition") introduced a new check to disallow the setting
+>>>>>> of a new cpuset.cpus.exclusive value that is a superset of a sibling's
+>>>>>> cpuset.cpus value so that there will at least be one CPU left in the
+>>>>>> sibling in case the cpuset becomes a valid partition root. This new
+>>>>>> check does have the side effect of failing a cpuset.cpus change that
+>>>>>> make it a subset of a sibling's cpuset.cpus.exclusive value.
+>>>>>>
+>>>>>> With v2, users are supposed to be allowed to set whatever value they
+>>>>>> want in cpuset.cpus without failure. To maintain this rule, the check
+>>>>>> is now restricted to only when cpuset.cpus.exclusive is being changed
+>>>>>> not when cpuset.cpus is changed.
+>>>>>>
+>>>>> Hi, Longman,
+>>>>>
+>>>>> You've emphasized that modifying cpuset.cpus should never fail. While I haven't found this
+>>>>> explicitly documented. Should we add it?
+>>>>>
+>>>>> More importantly, does this mean the "never fail" rule has higher priority than the exclusive CPU
+>>>>> constraints? This seems to be the underlying assumption in this patch.
+>>>> Before the introduction of cpuset partition, writing to cpuset.cpus will only fail if the cpu list
+>>>> is invalid like containing CPUs outside of the valid cpu range. What I mean by "never-fail" is that
+>>>> if the cpu list is valid, the write action should not fail. The rule is not explicitly stated in the
+>>>> documentation, but it is a pre-existing behavior which we should try to keep to avoid breaking
+>>>> existing applications.
+>>>>
+>>> There are two conditions that can cause a cpuset.cpus write operation to fail: ENOSPC (No space left
+>>> on device) and EBUSY.
+>>>
+>>> I just want to ensure the behavior aligns with our design intent.
+>>>
+>>> Consider this example:
+>>>
+>>> # cd /sys/fs/cgroup/
+>>> # mkdir test
+>>> # echo 1 > test/cpuset.cpus
+>>> # echo $$ > test/cgroup.procs
+>>> # echo 0 > /sys/devices/system/cpu/cpu1/online
+>>> # echo > test/cpuset.cpus
+>>> -bash: echo: write error: No space left on device
+>>>
+>>> In cgroups v2, if the test cgroup becomes empty, it could inherit the parent's effective CPUs. My
+>>> question is: Should we still fail to clear cpuset.cpus (returning an error) when the cgroup is
+>>> populated?
+>> Good catch. This error is for v1. It shouldn't apply for v2. Yes, I think we should fix that for v2.
+>>
+> The EBUSY check (through cpuset_cpumask_can_shrink) is necessary, correct?
+
+Yes, it is a check needed by the deadline scheduler irrespective of if 
+v1 or v2 is used.
 
 
---tfncDExG7J/FagGI
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+>
+> Since the subsequent patch modifies exclusive checking for v1, should we consolidate all v1-related
+> code into a separate function like cpuset1_validate_change() (maybe come duplicate code)?, it would
+> allow us to isolate v1 logic and avoid having to account for v1 implementation details in future
+> features.
+>
+> In other words:
+>
+> validate_change(...)
+> {
+>      if (!is_in_v2_mode())
+>          return cpuset1_validate_change(cur, trial);
+>      ...
+>      // only v2 code here
+> }
+>
+Yes, we could move the code to cpuset1_validate_change().
 
-On Fri, Jan 09, 2026 at 11:29:48AM +0800, Shawn Lin wrote:
->  Documentation/trace/events-pci-conotroller.rst | 41 ++++++++++++++++++++=
-++++++
+Cheers,
+Longman
 
-Missing toctree entry in Documentation/trace/index.rst.
+cpuset1_validate_change
 
-> +Available Tracepoints
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +pcie_ltssm_state_transition
-> +-----------------------
-
-Please match section underline length.
-
-> +**Example Usage**:
-> +
-> +    # Enable the tracepoint
-> +    echo 1 > /sys/kernel/debug/tracing/events/pci/pcie_ltssm_state_trans=
-ition/enable
-> +
-> +    # Monitor events (the following output is generated when a device is=
- linking)
-> +    cat /sys/kernel/debug/tracing/trace_pipe
-> +       kworker/0:0-9       [000] .....     5.600221: pcie_ltssm_state_tr=
-ansition: dev: a40000000.pcie state: RCVRY_EQ2 rate: 8.0 GT/s
-
-Wrap above example snippets in literal code block (use double colon).
-
-Thanks.
-
---=20
-An old man doll... just what I always wanted! - Clara
-
---tfncDExG7J/FagGI
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCaWB7pQAKCRD2uYlJVVFO
-o5mFAP9FeIBElbvGhzGEGTxXvKkxEhBsgv2Q43GHm7uX5DykmwD+J0p7viA36u/v
-No484hOhG6lBW2aezEIzjzxuZ2BVBg0=
-=UMJa
------END PGP SIGNATURE-----
-
---tfncDExG7J/FagGI--
 
