@@ -1,128 +1,96 @@
-Return-Path: <linux-doc+bounces-71530-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71533-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43A31D06FE2
-	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 04:30:33 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DC808D07037
+	for <lists+linux-doc@lfdr.de>; Fri, 09 Jan 2026 04:42:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0649B301B4BF
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 03:30:30 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2CF823035CFC
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Jan 2026 03:42:54 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51770238C0A;
-	Fri,  9 Jan 2026 03:30:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="GRA+VPa7"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 617DA2673A5;
+	Fri,  9 Jan 2026 03:42:53 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-m3294.qiye.163.com (mail-m3294.qiye.163.com [220.197.32.94])
+Received: from relay.hostedemail.com (smtprelay0014.hostedemail.com [216.40.44.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92D861925BC;
-	Fri,  9 Jan 2026 03:30:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.94
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A949F23EA87;
+	Fri,  9 Jan 2026 03:42:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1767929429; cv=none; b=YGOauPanHur365QfRJErYfmCkXyE234Lf0tXGwm4UdmU3SajoVZV5NutDrwv58rY+6eTYTXzPhnEA0zYuMa1mJutupx0c2ylMyPWu5NyFtCEDU858/aeHw5f8WTwqas6GuAVVqXI1wj9sPApBAPbece+XX+LVZH5nPqWvd44FOo=
+	t=1767930173; cv=none; b=bVpDUdHkrXZp4f3e9m7EGDn+MsKjrrI8m0OC1NsIoNd06G4+r4DRGff9plmdnt3EIHWHe4kritJn1nQ0AfrsDYqfgtLn4W8gkd2ZEXOLdcwhKMsv3VC6Iev4Ktd/N3J3zJpQ3wUMngnKr7ulVpzWY4q3bYu1uC4YVqIo33jiqUc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1767929429; c=relaxed/simple;
-	bh=Z2AOheaRyTKoa4eKdWLKbN6ZlONk4KlQ1HzH3j78jD0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References; b=JhM6h5XpAZpc8sKx50y1DMsX507Dy5grLBs3T1pf1VKLlV9zdSPQDnalBI9ylOgBULT+hfiBy21xcr1DhlRW5TDWG2MPlwQvohFCW6jW/P97oV7RhVNOXCi3E1V9y0YrrcignkItMSyYs9D0CRPW3RN2QoZ94o2wKge7Z78rDU4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=GRA+VPa7; arc=none smtp.client-ip=220.197.32.94
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
-Received: from localhost.localdomain (unknown [58.22.7.114])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 30079383f;
-	Fri, 9 Jan 2026 11:30:20 +0800 (GMT+08:00)
-From: Shawn Lin <shawn.lin@rock-chips.com>
-To: Manivannan Sadhasivam <mani@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-rockchip@lists.infradead.org,
-	linux-pci@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Shawn Lin <shawn.lin@rock-chips.com>
-Subject: [PATCH v2 2/3] Documentation: tracing: Add PCI controller event documentation
-Date: Fri,  9 Jan 2026 11:29:48 +0800
-Message-Id: <1767929389-143957-3-git-send-email-shawn.lin@rock-chips.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1767929389-143957-1-git-send-email-shawn.lin@rock-chips.com>
+	s=arc-20240116; t=1767930173; c=relaxed/simple;
+	bh=4fBZa53/AN1hTKBs44t7KsGQ67w2j3iipZhGC44TkCo=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=afAMpHxs5OgqQffSWy0Ev7wxRPv7e+3RRcZNgsOXOGZJsRh3DImH9OH4lWcIYGiqGte53m2J3dsrvQ5wd2jPRsfo9fXf0bPFSMUn9gfvhzse5JY/LhrdpfduzJePdGkGzaS388aYgmMyQHEEwqVf0A7rIU/np2/qlIcXglhpL78=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org; spf=pass smtp.mailfrom=goodmis.org; arc=none smtp.client-ip=216.40.44.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=goodmis.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goodmis.org
+Received: from omf16.hostedemail.com (a10.router.float.18 [10.200.18.1])
+	by unirelay03.hostedemail.com (Postfix) with ESMTP id 21759B86AB;
+	Fri,  9 Jan 2026 03:42:50 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by omf16.hostedemail.com (Postfix) with ESMTPA id 1CAB32000E;
+	Fri,  9 Jan 2026 03:42:48 +0000 (UTC)
+Date: Thu, 8 Jan 2026 22:42:46 -0500
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Shawn Lin <shawn.lin@rock-chips.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>, Bjorn Helgaas
+ <bhelgaas@google.com>, linux-rockchip@lists.infradead.org,
+ linux-pci@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org, Masami Hiramatsu <mhiramat@kernel.org>
+Subject: Re: [PATCH v2 1/3] PCI: trace: Add PCI controller LTSSM transition
+ tracepoint
+Message-ID: <20260108224246.316e3ee0@fedora>
+In-Reply-To: <1767929389-143957-2-git-send-email-shawn.lin@rock-chips.com>
 References: <1767929389-143957-1-git-send-email-shawn.lin@rock-chips.com>
-X-HM-Tid: 0a9ba0ce18f709cckunm22b4d6c66ba24
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkpPTFZPQ0seSk1PGk5DGUJWFRQJFh
-	oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUJDQ0
-	xVSktLVUtZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=GRA+VPa7x561UGIY01XJaPAMGI6fxMn6JuSCwA9i6CC2NZ+320nr5ZKJBGUr7WyZ93xKVoGm3JRWgyMmIpyLIQVCCWWwQpi0mnCfhy6LaIzyzWk1TeQbq+q2Sh2TSekmdZ6M5HtAn6Z/1G9JfirhEcBMriFqbDl9WmQdJ3osbS4=; s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
-	bh=KJlKjShPuR5n49PnlmzBndjHgapvw97Q1f3mXNv5yPQ=;
-	h=date:mime-version:subject:message-id:from;
+	<1767929389-143957-2-git-send-email-shawn.lin@rock-chips.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 1CAB32000E
+X-Stat-Signature: ixen3nko6phz4ok8ow8qaq99cnwj1w9q
+X-Rspamd-Server: rspamout08
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX1+VwLkx5rS4QfHZ8DMusTQAIQzr8G333kA=
+X-HE-Tag: 1767930168-399124
+X-HE-Meta: U2FsdGVkX18Ltj9i1968eJbmgEAL+747dfB1oVBPxwLb1uXRsYerWn2Rr18GkjXPeyB0dgstmGgCc5Ftp8WbtdC9PisjKj5OIVhhd0ExdcvXyChlc7ORzNPXvrSbuKIWGxQzATADF/bkugHttN//qYQCLYVCBwA5GqUob9gXvwqzhBAUXq0DrGcWiKwY+Vxv4fXw59c7G8bAXph65pmOihRBL+3o4vjRTFWa5FKPiAa6jTyYC2lD2lA6w8CElCc4vkoFfZE4H0Knu0SriyYhugrdLDlpw0sRuzOlnGcf+XNmnzuQyrlELYrZXQwRAF7XbWx3GN85gf6BQfvLTDxj3BLjU0WP+whaVs1MGmMLXKqiuYF4WwHKiaenl3/5mVt7
 
-The available tracepoint, pcie_ltssm_state_transition, monitors the LTSSM state
-transistion for debugging purpose. Add description about it.
+On Fri,  9 Jan 2026 11:29:47 +0800
+Shawn Lin <shawn.lin@rock-chips.com> wrote:
 
-Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
----
+> +	TP_printk("dev: %s state: %s rate: %s",
+> +		__get_str(dev_name), __get_str(state),
+> +		__print_symbolic(__entry->rate,
+> +			{ PCIE_SPEED_2_5GT,  "2.5 GT/s" },
+> +			{ PCIE_SPEED_5_0GT,  "5.0 GT/s" },
+> +			{ PCIE_SPEED_8_0GT,  "8.0 GT/s" },
+> +			{ PCIE_SPEED_16_0GT, "16.0 GT/s" },
+> +			{ PCIE_SPEED_32_0GT, "32.0 GT/s" },
+> +			{ PCIE_SPEED_64_0GT, "64.0 GT/s" },
+> +			{ PCI_SPEED_UNKNOWN, "Unknown" }
 
-Changes in v2: None
+As these values are all enums, you may want to add in this file:
 
- Documentation/trace/events-pci-conotroller.rst | 41 ++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
- create mode 100644 Documentation/trace/events-pci-conotroller.rst
+TRACE_DEFINE_ENUM(PCIE_SPEED_2_5GT);
+TRACE_DEFINE_ENUM(PCIE_SPEED_5_0GT);
+[..]
+TRACE_DEFINE_ENUM(PCIE_SPEED_UNKNOWN);
 
-diff --git a/Documentation/trace/events-pci-conotroller.rst b/Documentation/trace/events-pci-conotroller.rst
-new file mode 100644
-index 0000000..8253d00
---- /dev/null
-+++ b/Documentation/trace/events-pci-conotroller.rst
-@@ -0,0 +1,41 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+======================================
-+Subsystem Trace Points: PCI Controller
-+======================================
-+
-+Overview
-+========
-+The PCI controller tracing system provides tracepoints to monitor controller level
-+information for debugging purpose. The events normally show up here:
-+up here:
-+
-+	/sys/kernel/tracing/events/pci_controller
-+
-+Cf. include/trace/events/pci_controller.h for the events definitions.
-+
-+Available Tracepoints
-+=====================
-+
-+pcie_ltssm_state_transition
-+-----------------------
-+
-+Monitors PCIe LTSSM state transition including state and rate information
-+::
-+
-+    pcie_ltssm_state_transition  "dev: %s state: %s rate: %s\n"
-+
-+**Parameters**:
-+
-+* ``dev`` - PCIe root port name
-+* ``state`` - PCIe LTSSM state
-+* ``rate`` - PCIe bus speed
-+
-+**Example Usage**:
-+
-+    # Enable the tracepoint
-+    echo 1 > /sys/kernel/debug/tracing/events/pci/pcie_ltssm_state_transition/enable
-+
-+    # Monitor events (the following output is generated when a device is linking)
-+    cat /sys/kernel/debug/tracing/trace_pipe
-+       kworker/0:0-9       [000] .....     5.600221: pcie_ltssm_state_transition: dev: a40000000.pcie state: RCVRY_EQ2 rate: 8.0 GT/s
--- 
-2.7.4
+So that this can be parsed by user space tooling such as trace-cmd and
+perf.
 
+-- Steve
+
+
+> +		)
+> +	)
+> +);
+> +
 
