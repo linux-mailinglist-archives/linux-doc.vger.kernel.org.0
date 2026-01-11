@@ -1,203 +1,176 @@
-Return-Path: <linux-doc+bounces-71751-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71753-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1B57D10104
-	for <lists+linux-doc@lfdr.de>; Sun, 11 Jan 2026 23:28:35 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id EAF5AD1014A
+	for <lists+linux-doc@lfdr.de>; Sun, 11 Jan 2026 23:37:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id F1408301E9B1
-	for <lists+linux-doc@lfdr.de>; Sun, 11 Jan 2026 22:28:34 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id C38AD3027824
+	for <lists+linux-doc@lfdr.de>; Sun, 11 Jan 2026 22:37:00 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4ABD72D3228;
-	Sun, 11 Jan 2026 22:28:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC94E2D23B1;
+	Sun, 11 Jan 2026 22:36:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="lT+edgYN";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="9oBR0FHE";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="lT+edgYN";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="9oBR0FHE"
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="MY8hjUuG";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="iFxQL6R6";
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="2CTgqC6O";
+	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="lJ2NMUdw"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D410C241CB2
-	for <linux-doc@vger.kernel.org>; Sun, 11 Jan 2026 22:28:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59C292D47F1
+	for <linux-doc@vger.kernel.org>; Sun, 11 Jan 2026 22:36:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768170514; cv=none; b=QFThvsjNCo3vYHR+40zbHSfrpA/JPtOmmBXarjnG/w5P2EO3K1UNf8olci+/iF6ia6PmoOpCMWf0Yt80ezOBJjdlAzrBG0xGtjHpuCcmIIYU5WkUhYSIjhXORTK0He0HvfkVtFH2Q9WuY7sQh7Zo1DWViwBkZzVxVb7IC5Fziow=
+	t=1768171018; cv=none; b=qh7IJEpx4haU5uCLdLVNCrUdoPfS0C4wsRkxeBiNeQN9rjYfQrTyUX/ZrKd2T5xW5r+zFZYx8PbSQ3G0aYwRwVHyCJbw6JA24k8ZtN5ZW83raOcx7QF3LPRYK773JwBz2wys6zfvGUXOsSyF2SHAt/yRSJ5C9Kr4cKODKCC0dAs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768170514; c=relaxed/simple;
-	bh=tJm1EpnPrgKrpD5XJHLm1EtXZDMxC1fvOPhdoH+znlk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pQzAvMAtTsbpTkHiAMuRrYMfHHEiJzC7gzj/ULkfoibWd9fPeIU9lMbpcE9g0Gj4l9NPt1Ep7znBBYCuw59wJ2rKNkEqhI2vQgOmuLVnvKtTGYw2Yi1Hc1p1NN2WKCyOzqF0WK9S32N1UlKv6BE3jTI7X82hcTBKFitO8t415Mw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=lT+edgYN; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=9oBR0FHE; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=lT+edgYN; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=9oBR0FHE; arc=none smtp.client-ip=195.135.223.131
+	s=arc-20240116; t=1768171018; c=relaxed/simple;
+	bh=Lk7AEljevLdvQ+AfRaWdbdrUzzJ4Ltm9cstGhqPCmHQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=h7Tii7c88FSLI582TNvdKVfRUwFDSoR+e71e+p5ZTFDvBMjQZrampQN2YqwNX4R4qDRXAZ4jZyup3TxoGZZB72NdZHGSHHwZ6UFsTgEz9NYb03vGloAIFFWJXyEgHkmIiO+DHxwpJPFkSFiYsG0+TiwrOW1eZ8jxM0XwZ/LYF70=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=MY8hjUuG; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=iFxQL6R6; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=2CTgqC6O; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=lJ2NMUdw; arc=none smtp.client-ip=195.135.223.130
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 1464B5BCFB;
-	Sun, 11 Jan 2026 22:28:31 +0000 (UTC)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id C7CA3336B3;
+	Sun, 11 Jan 2026 22:36:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768170511;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zxFUq/xQOjmXmTPklpnBxVPywpgodvS1JSdXJDlVEw8=;
-	b=lT+edgYNsQ7EwRiOfrq2pAnib1a2IlwNahYwX0lqAkk15z/V7SEFM7U7oyOh6LGhJr2Hjr
-	cST25u6cKctowpOKGUwEH3BXfU212gtED9AIGEd7qeMjmg++JU8dMdyHFTyeIyBhumM1pO
-	NbFdFdFlLoTt7F5/zcbyI2GCsOTncPc=
+	t=1768171010; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=O4UOj40rIMM0FJzGyx8ppWK13TD8lcTV5zVZDQAHYXo=;
+	b=MY8hjUuGJ6/0oAQ37vshcXxQ3fCNF8zmmadsfnw9WxyRsIOhgR70LuYq3guQMTQliHFhQ5
+	DWcnkPTCU2QJhcvgue1Ss2KcFfQmebqEgoHNO7Vz27Bi+3fhu83JEYRLZ/ycv5apkcdPDH
+	xmQqZ6mx6k0Nt4gK896uR9dwkIZbvN0=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768170511;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zxFUq/xQOjmXmTPklpnBxVPywpgodvS1JSdXJDlVEw8=;
-	b=9oBR0FHEozX1QTTHt6gnRw+LZzxpJon9/j3RQQtTiX5W2V7ZztaQTkNiJVio/OowJm+VEq
-	U/UY2C1wcPd6OXAw==
-Authentication-Results: smtp-out2.suse.de;
-	none
+	s=susede2_ed25519; t=1768171010;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=O4UOj40rIMM0FJzGyx8ppWK13TD8lcTV5zVZDQAHYXo=;
+	b=iFxQL6R60bUsMTKkosfT0WETaCrnUCJ0rb6ZsGurc0kTyFRd9veZWOAe/LVoKoIXa6AX/X
+	OBqdjoM6syQoiNBg==
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=2CTgqC6O;
+	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=lJ2NMUdw
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768170511;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zxFUq/xQOjmXmTPklpnBxVPywpgodvS1JSdXJDlVEw8=;
-	b=lT+edgYNsQ7EwRiOfrq2pAnib1a2IlwNahYwX0lqAkk15z/V7SEFM7U7oyOh6LGhJr2Hjr
-	cST25u6cKctowpOKGUwEH3BXfU212gtED9AIGEd7qeMjmg++JU8dMdyHFTyeIyBhumM1pO
-	NbFdFdFlLoTt7F5/zcbyI2GCsOTncPc=
+	t=1768171009; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=O4UOj40rIMM0FJzGyx8ppWK13TD8lcTV5zVZDQAHYXo=;
+	b=2CTgqC6OyW0cxCum9Cgaf0I/iIGf3pFWENYZ5DagqUpzyPrVxMV2C3s/nviA8Rqo4cVKl3
+	KxSTBpiH7xE8psdwouymh+6mef32HGlvO2/do6P1oaxX/SM2LFqmiHKXyO4SKVA+WaCXIB
+	z2NXpAEJMY6355Gm+wuJ8E/XpP5uZYM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768170511;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zxFUq/xQOjmXmTPklpnBxVPywpgodvS1JSdXJDlVEw8=;
-	b=9oBR0FHEozX1QTTHt6gnRw+LZzxpJon9/j3RQQtTiX5W2V7ZztaQTkNiJVio/OowJm+VEq
-	U/UY2C1wcPd6OXAw==
+	s=susede2_ed25519; t=1768171009;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=O4UOj40rIMM0FJzGyx8ppWK13TD8lcTV5zVZDQAHYXo=;
+	b=lJ2NMUdwAzxkVR/pMs+bSOCdY7lXq4EVPfr8FIbsk8aOlRDY4sx6zu7sWFg70pD6+5GUAI
+	paHn3p6FOqyRPXAQ==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id E22C63EA63;
-	Sun, 11 Jan 2026 22:28:30 +0000 (UTC)
+	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7EF053EA63;
+	Sun, 11 Jan 2026 22:36:49 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
 	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id nDx1NA4kZGnkWQAAD6G6ig
-	(envelope-from <pvorel@suse.cz>); Sun, 11 Jan 2026 22:28:30 +0000
-Date: Sun, 11 Jan 2026 23:28:25 +0100
+	id +mpxHQEmZGnIYQAAD6G6ig
+	(envelope-from <pvorel@suse.cz>); Sun, 11 Jan 2026 22:36:49 +0000
 From: Petr Vorel <pvorel@suse.cz>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Subject: Re: [PATCH 1/2] Documentation: bug-hunting.rst: Remove wrong 'file:'
- syntax
-Message-ID: <20260111222825.GA170559@pevik>
-Reply-To: Petr Vorel <pvorel@suse.cz>
-References: <20260109152336.84674-1-pvorel@suse.cz>
- <874iou4wde.fsf@trenco.lwn.net>
- <20260109172517.GA102040@pevik>
- <87sece34f8.fsf@trenco.lwn.net>
+To: linux-doc@vger.kernel.org
+Cc: Petr Vorel <pvorel@suse.cz>,
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH v2 1/2] Documentation: bug-hunting.rst: Remove wrong 'file:' syntax
+Date: Sun, 11 Jan 2026 23:36:42 +0100
+Message-ID: <20260111223643.174812-1-pvorel@suse.cz>
+X-Mailer: git-send-email 2.51.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <87sece34f8.fsf@trenco.lwn.net>
-X-Spamd-Result: default: False [-3.50 / 50.00];
+X-Spam-Score: -3.01
+X-Spamd-Result: default: False [-3.01 / 50.00];
 	BAYES_HAM(-3.00)[100.00%];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_RHS_NOT_FQDN(0.50)[];
-	HAS_REPLYTO(0.30)[pvorel@suse.cz];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
 	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	MISSING_XM_UA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MX_GOOD(-0.01)[];
 	ARC_NA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.cz:dkim,suse.cz:mid,suse.cz:email];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	REPLYTO_EQ_FROM(0.00)[]
-X-Spam-Flag: NO
-X-Spam-Score: -3.50
+	RCPT_COUNT_THREE(0.00)[3];
+	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	DKIM_TRACE(0.00)[suse.cz:+]
 X-Spam-Level: 
+X-Rspamd-Action: no action
+X-Rspamd-Queue-Id: C7CA3336B3
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spam-Flag: NO
 
-> Petr Vorel <pvorel@suse.cz> writes:
+Link to another document does not require 'file:', therefore it was
+shown in generated html.
 
-> > Hi Jonathan, all,
+Preformatted text requires just ``...``.
 
-> >> Thanks for working to improve our docs
+Signed-off-by: Petr Vorel <pvorel@suse.cz>
+---
+Changes v1->v2:
+* Remove backticks (Jonathan Corbet)
 
-> >> Petr Vorel <pvorel@suse.cz> writes:
+Link to v1:
+https://lore.kernel.org/linux-doc/20260109152336.84674-1-pvorel@suse.cz/
 
-> >> > Link to another document does not require 'file:', therefore it was
-> >> > shown in generated html.
+ Documentation/admin-guide/bug-hunting.rst | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-> >> > Preformatted text requires just ``...``.
+diff --git a/Documentation/admin-guide/bug-hunting.rst b/Documentation/admin-guide/bug-hunting.rst
+index 7da0504388ece..3901b43c96df1 100644
+--- a/Documentation/admin-guide/bug-hunting.rst
++++ b/Documentation/admin-guide/bug-hunting.rst
+@@ -52,14 +52,14 @@ line is usually required to identify and handle the bug. Along this chapter,
+ we'll refer to "Oops" for all kinds of stack traces that need to be analyzed.
+ 
+ If the kernel is compiled with ``CONFIG_DEBUG_INFO``, you can enhance the
+-quality of the stack trace by using file:`scripts/decode_stacktrace.sh`.
++quality of the stack trace by using ``scripts/decode_stacktrace.sh``.
+ 
+ Modules linked in
+ -----------------
+ 
+ Modules that are tainted or are being loaded or unloaded are marked with
+ "(...)", where the taint flags are described in
+-file:`Documentation/admin-guide/tainted-kernels.rst`, "being loaded" is
++Documentation/admin-guide/tainted-kernels.rst, "being loaded" is
+ annotated with "+", and "being unloaded" is annotated with "-".
+ 
+ 
+@@ -235,7 +235,7 @@ Dave Miller)::
+          mov        0x8(%ebp), %ebx         ! %ebx = skb->sk
+          mov        0x13c(%ebx), %eax       ! %eax = inet_sk(sk)->opt
+ 
+-file:`scripts/decodecode` can be used to automate most of this, depending
++``scripts/decodecode`` can be used to automate most of this, depending
+ on what CPU architecture is being debugged.
+ 
+ Reporting the bug
+-- 
+2.51.0
 
-> >> > Signed-off-by: Petr Vorel <pvorel@suse.cz>
-> >> > ---
-> >> >  Documentation/admin-guide/bug-hunting.rst | 6 +++---
-> >> >  1 file changed, 3 insertions(+), 3 deletions(-)
-
-> >> > diff --git a/Documentation/admin-guide/bug-hunting.rst b/Documentation/admin-guide/bug-hunting.rst
-> >> > index 7da0504388ece..32b1b0c3d7ee4 100644
-> >> > --- a/Documentation/admin-guide/bug-hunting.rst
-> >> > +++ b/Documentation/admin-guide/bug-hunting.rst
-> >> > @@ -52,14 +52,14 @@ line is usually required to identify and handle the bug. Along this chapter,
-> >> >  we'll refer to "Oops" for all kinds of stack traces that need to be analyzed.
-
-> >> >  If the kernel is compiled with ``CONFIG_DEBUG_INFO``, you can enhance the
-> >> > -quality of the stack trace by using file:`scripts/decode_stacktrace.sh`.
-> >> > +quality of the stack trace by using ``scripts/decode_stacktrace.sh``.
-
-> >> >  Modules linked in
-> >> >  -----------------
-
-> >> >  Modules that are tainted or are being loaded or unloaded are marked with
-> >> >  "(...)", where the taint flags are described in
-> >> > -file:`Documentation/admin-guide/tainted-kernels.rst`, "being loaded" is
-> >> > +`Documentation/admin-guide/tainted-kernels.rst`, "being loaded" is
-
-> >> Can I ask you to remove the `quotes` too?  They aren't needed and can
-> >> prevent the automarkup code from doing its thing.
-
-> > Do you mean to really show the name of the file (no html link)?
-
-> > Documentation/admin-guide/tainted-kernels.rst, "being loaded" is
-
-> > This shows Documentation/admin-guide/tainted-kernels.rst in generated html.
-
-> > But `Documentation/admin-guide/tainted-kernels.rst` will have link:
-
-> > Text:
-> > Tainted kernels, “being loaded”
-
-> Not true - the quotes are not needed for the automarkup code to do its
-> thing.  The backticks will just have the effect of setting the title in
-> italics, and may interfere with the automarkup.  Better to leave them
-> out.
-
-I'm sorry, I got confused by doc:`file.rst` syntax. Sure, I'll remove them in
-v2.
-
-Kind regards,
-Petr
-
-> Thanks,
-
-> jon
 
