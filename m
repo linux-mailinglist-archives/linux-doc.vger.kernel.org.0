@@ -1,86 +1,132 @@
-Return-Path: <linux-doc+bounces-71864-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71866-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACA33D1419E
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 17:40:09 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 11A52D14204
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 17:44:32 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 67B5B304A8CC
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 16:35:34 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8BEE13034A27
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 16:39:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7B0052E265A;
-	Mon, 12 Jan 2026 16:35:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8D362FFF90;
+	Mon, 12 Jan 2026 16:39:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="DWjAM93u"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="AvnBTXWb"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CC0924A07C
-	for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 16:35:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66A5414A60F
+	for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 16:39:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768235733; cv=none; b=QLFaLkFds6rgpdMT7CufKzSWiQGu7ZtBl64JE1zccsGFFrRTrIhOWlgqNLWEO8Ooocus0wHyDG9YwSwbmQoERjIf4kroywvSPRxwecFYgP1Juv7a1j0kXxiXp4DQ9THB1CvttKn87r6MgKufKVKy2Dd0YRSoJCBpdDdcL96Lv/w=
+	t=1768235954; cv=none; b=HJerJWM74/75Yjp/NKeAWVbMYOCY+DFARJS66nH3FFGkUm8bRVfX3TcJ6HzHZXMJ45vG60FaxjlAoH/GIvTfEJATX3MsFrCcsu4z4YTUEatogV3yKtXS80f0QG548lMfsHq0EpBY1pMoldDJUrGXODBDBj71LZWbod9XBBrmuDg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768235733; c=relaxed/simple;
-	bh=12qkblN5d+CktOgDC03FN7fleSYDgpupxB5ZwYoXDx0=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=i1lbTkiADLwY3loP+VduumZY71IGmsgdKerk0jmo7wTw97EnxhLDPtWC2wKjJf6cGP6Zv/WmlUpboR3RiWm3+iEyDV4IL2v+cBTMVMbyo12SlWPDRHlHH01RHidDTFzDzxEEvWaw1I6q/lvt+m4Fb6BdUOO1G9irCnflO+y+ZVE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=DWjAM93u; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9296E40C42
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1768235731; bh=P2aiE2nA5jQN3YZw1hLMLxPPBXg1B+AYjlklENJe+lk=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=DWjAM93ubf/79JGif1jW+EuKAI0ypT80gC9eMYJ5R/X3yvIvj9n95tgbnxw0jjwGN
-	 O+sjFUI9eeqiv2r8NKf8D0mbDw9DdPs1J/SwAoMImKuWVA4DhPYJzF6r9nC2ZTSagV
-	 G/isrqLkGcDimG39403Zi4+dQQtJkEAHFAvint+zaP6JCSnseHKQYKAnaJwcjKIQaS
-	 ZS46bV2cRC/So4r2U314oZPKRiHEptyiZrb4xQAEbr3YRyWsDJ1LEScz9Y1nsBqyIw
-	 NAin/cPLk+PbonvZfCgjJuQz8eZJlPolSfGgtD4KlheMPvncAF5rsgeR2aCwjj79pQ
-	 aBAIpTk4AaCFw==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 9296E40C42;
-	Mon, 12 Jan 2026 16:35:31 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Petr Vorel <pvorel@suse.cz>, linux-doc@vger.kernel.org
-Cc: Petr Vorel <pvorel@suse.cz>
-Subject: Re: [PATCH v2 1/2] Documentation: bug-hunting.rst: Remove wrong
- 'file:' syntax
-In-Reply-To: <20260111223643.174812-1-pvorel@suse.cz>
-References: <20260111223643.174812-1-pvorel@suse.cz>
-Date: Mon, 12 Jan 2026 09:35:30 -0700
-Message-ID: <87ikd623hp.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1768235954; c=relaxed/simple;
+	bh=erja+tGEOoieSn3gQddPlTcrGJpm++f+5LenW+r01q8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QkD1DcEcOhVXDwnLSsOoPmAUIQ/bGjzD+PUhZSm4sFv2oAAYEGSAsKXsr/XkNFtMR5+5NC91XuHeIhv56zxKj1Our9+hrkF+IPxXNMVOVb2XtkEjs1zseITPq1G3PQRAEPr/frt9ssAQxz4T1ezQmNmpaHkn5aBkAzOlIFttov8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=AvnBTXWb; arc=none smtp.client-ip=209.85.128.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-47d59da3d81so24790555e9.0
+        for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 08:39:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1768235952; x=1768840752; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8FaWdf88CSHRz/WgwAyqrABJFJ2+0VdsXLY6ZcZUEv8=;
+        b=AvnBTXWboPPVLSTW1qr1Sh7yHSSfe9JsYuXyk363cwHQ09Eam7JnmeSaqElUMddDFx
+         6TMycex40TCHzaKBcrAWCKgsHgHvA1PCxqYtmhPwvVCE/ELvZskpSV9K91mewhGdHx4C
+         IQt/9oATJyUAFAnCWVXODDjxtyyUslE2kz/Rr6YM2Qe+CqnEGkP8HO1/1mToxPoLqTRl
+         dTSGa3zopWtobeu62gc9VGXw0AH3EaLKLj5Dx4G3nxPY9oSytFo4rfrADOLY4sVQlaMW
+         ZohbEWrTTPmRnbam27fwjjhqxfJMl2kgIv3ouL0TxXGu58DlQAKQxfBP6HVvdoR/KfdX
+         //fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768235952; x=1768840752;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8FaWdf88CSHRz/WgwAyqrABJFJ2+0VdsXLY6ZcZUEv8=;
+        b=EfmLf/OoTI0f0ofq/CszH5KAatgRJzLDXTOM7aR9+KnCvVzHtH+NlWHeG7dc1e6HCq
+         Am7KFMyuZebWfRz0d+ROeAYWappbphX4DDHa3jIwUHdaFaaCKfyFp5J3TdxVV76Du2KY
+         Hs4rw9vWoL3cjPSzTaz0aT/tQL9EyCe7HUBDb+P6RWo2T2SWdQzF+APzGLSQg5bwDJwB
+         9ToG6G5S8D0fFChnhQsyDGEKUao+R0f6YWmA0eKhGFxEWr12qq6twpvevreVNJVeQhD5
+         1xiRCnXwtPIfBpGScbamF3Lpo/XrfI3kOdVDI1soZFm60yv7zlQoG9HR4chEsGNVzKyO
+         TBPg==
+X-Forwarded-Encrypted: i=1; AJvYcCUK+/4myJI/Qy4cB3N5RjQkb7GNRU0PYSpxLoVG3KVsDKLF6DNbevIwAFhgUWAnVubZ0UpJby2ZbCc=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz/RhTNI+krGgPyIwmVUzqFNllVuOJzShZ1JKvTH0w9K/pO0XDD
+	Ct4cZxFYAixXUeznssW5iqX7l6hMsewQwTvoqq8vzmOou0KXAQLYzwCAE2iPvwUJrCk=
+X-Gm-Gg: AY/fxX5pyPeQoARc94svGI7LGmQpWMz1uAyCSny/N3XzuLV13MHlhpudb913AvPhdDO
+	BaUXmuu6Zlsta/NBbFxl1/Yej5HVSjtezjpymTbSgPGATIKJYLZ+P+ZhaanxkfSl7cuyXwiDQg+
+	4lK9LulSUEsu9r5iVtITGDlW0gh94DbwKYCA271tcSiLWaIVgb5BPjeBZevAm4/sEDo1R13lmAr
+	XWO0p4UJED25P6eZvTSA/KPV+xOMlP8W9v05/Qc1ElXmG/BHnEwEEjYLhml2gdvZUSp5Iq1296y
+	qrjMNjBRnCX/wCCnc1dQzDiaLqcmmRe43DNlUN7tEUKweiMKKIM9OUVGPb59NHE1GV57/3vHk9e
+	UGzyicbZdoG3AMs1JJT8vI7G6WHqdDy03TIxjJwZuVj8mr4YwQ3ROJystY1RyXSnJjRnd06KLJn
+	GelDigH/f4nvAC0ENqazwLj4yuEa7CikaQ5A==
+X-Google-Smtp-Source: AGHT+IEMvv7Vt71tk1jmghUnGOF6+DNjtrPqNmfzUQbCrl2hekYujJ8kAz+RUDRTWNE/l7YWLIvMBg==
+X-Received: by 2002:a05:600c:c48f:b0:47d:403a:277 with SMTP id 5b1f17b1804b1-47ed7bfd511mr510915e9.4.1768235951707;
+        Mon, 12 Jan 2026 08:39:11 -0800 (PST)
+Received: from localhost.localdomain ([2a00:6d43:105:c401:e307:1a37:2e76:ce91])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d7f4184e1sm352101385e9.4.2026.01.12.08.39.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Jan 2026 08:39:11 -0800 (PST)
+From: Marco Crivellari <marco.crivellari@suse.com>
+To: linux-kernel@vger.kernel.org,
+	linux-doc@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>,
+	Frederic Weisbecker <frederic@kernel.org>,
+	Michal Hocko <mhocko@suse.com>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Marco Crivellari <marco.crivellari@suse.com>
+Subject: [PATCH] doc: Update residual 1Hz handling description
+Date: Mon, 12 Jan 2026 17:39:01 +0100
+Message-ID: <20260112163901.338596-1-marco.crivellari@suse.com>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-Petr Vorel <pvorel@suse.cz> writes:
+When a CPU is nohz there is a residual 1Hz that must be handled.
+Accordingly to the documentation, this should be manually affined to
+housekeeping.
 
-> Link to another document does not require 'file:', therefore it was
-> shown in generated html.
->
-> Preformatted text requires just ``...``.
->
-> Signed-off-by: Petr Vorel <pvorel@suse.cz>
-> ---
-> Changes v1->v2:
-> * Remove backticks (Jonathan Corbet)
->
-> Link to v1:
-> https://lore.kernel.org/linux-doc/20260109152336.84674-1-pvorel@suse.cz/
->
->  Documentation/admin-guide/bug-hunting.rst | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+This is no longer the case: the residual 1Hz is automatically offloaded
+to workqueues already affined to housekeeping CPUs.
 
-Both patches applied, thanks.
+So change the documentation accordingly.
 
-jon
+Signed-off-by: Marco Crivellari <marco.crivellari@suse.com>
+---
+ Documentation/admin-guide/kernel-parameters.txt | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 902ecd92a29f..414fb42786c7 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -2368,15 +2368,8 @@
+ 			nohz
+ 			  Disable the tick when a single task runs.
+ 
+-			  A residual 1Hz tick is offloaded to workqueues, which you
+-			  need to affine to housekeeping through the global
+-			  workqueue's affinity configured via the
+-			  /sys/devices/virtual/workqueue/cpumask sysfs file, or
+-			  by using the 'domain' flag described below.
+-
+-			  NOTE: by default the global workqueue runs on all CPUs,
+-			  so to protect individual CPUs the 'cpumask' file has to
+-			  be configured manually after bootup.
++			  A residual 1Hz tick is offloaded to workqueues, already
++			  affined to housekeeping CPUs.
+ 
+ 			domain
+ 			  Isolate from the general SMP balancing and scheduling
+-- 
+2.52.0
+
 
