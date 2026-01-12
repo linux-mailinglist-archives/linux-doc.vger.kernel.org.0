@@ -1,60 +1,58 @@
-Return-Path: <linux-doc+bounces-71812-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71810-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBD2CD1246C
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 12:24:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC4FFD12466
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 12:24:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 7C1A330200AB
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 11:24:05 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 92856301FD6F
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 11:24:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 70120356A2E;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6ECBE356A2B;
 	Mon, 12 Jan 2026 11:23:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VJ2PCPpZ"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="M7XbkGCE"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49C00356A1E;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49CFB356A1F;
 	Mon, 12 Jan 2026 11:23:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768217036; cv=none; b=CiKO5UCmatu7dZol0C9rMnzOgWDvCWZ/H/aGBMvlyk++w0hZLo56h9yNpFDjZIWNyp9+ewxBB6DnLQ17XVOfV4TgEHZ4rtSiCF6L1i+85wySRKr5gNAH6zVXSntVt6cWSKtNuAV/7sg7nCsV8X9WEmAK2vBI5/D/vhTMYzOxu70=
+	t=1768217036; cv=none; b=sWrd977JUaaGXjJauyz/aQkaQRwFg/AbaWPfy9Uj2zjU6xNSv3GYh0/i8jBUpvyiEWBNXEn9N18tf/WKC7gV/4ma4tWlFJBQoVhZxHnX7v5+cd21qnniySn7JsI71LMljUvKv1u8DEPsSHqa2N2kVplmfQwgLpaEisJKxlZ2IU4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768217036; c=relaxed/simple;
-	bh=M8CQBtXD5x5BId0iNs+suDaY/SBqip9p2vko/lQ8Y1M=;
+	bh=+lKeuLhTf7AU/sOR7BZ3YNtBXxJWLuRjIlJ5L7U7ggc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KHQ3e/IKVZtGxRyQ6KNALRVyZlcDL4sNlSFeHIHwphdye25aqxcEHZmovrUJI0wr8soJHCoinKW8G3seIzfWIQY7CrBInWpOg2r40r8iuURAAiQF7jcd0UbkjqGZN7r3Cq9A+FHPGPTTHth1yPd+p5zJ/QayU81D1WItN5nbssw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VJ2PCPpZ; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04916C19421;
+	 MIME-Version:Content-Type; b=f6NmwvxsqFunitup+PwgcvHc3IE+M/rUhIJ+XwsEeF32qEbHRVvbjSjBvpFZKOPnqJL7oQsrkLBuYPIaghYgxUpCbWwJv9HhPwEZnoc4CahuNxGWgAscU+jStmBkEP213RpMNsYeibPNQ6TJyVqRUzBwO+1cjhZ7jBwxqe7HPGI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=M7XbkGCE; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04944C19422;
 	Mon, 12 Jan 2026 11:23:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768217036;
-	bh=M8CQBtXD5x5BId0iNs+suDaY/SBqip9p2vko/lQ8Y1M=;
+	bh=+lKeuLhTf7AU/sOR7BZ3YNtBXxJWLuRjIlJ5L7U7ggc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=VJ2PCPpZKwRx9Og7IO00VWIwe1CvaMFO8ve5wY1lHDK67zVQs4WAU/jcGqVLUW+2T
-	 Ibd7bk7LepDx3o/gYDnxpSfe/vexxZy5qdUl00v2QETyZ+4qBg2FJdHZRK9sylYDPQ
-	 wsVEGBRDnUQ6CrnghxwLoNo2vUOWC9ru3mN0K3xjeZDFhNfR+5pU/fxnTcfO2JEI/K
-	 7i/w4eOTxFYP2/QpXd0eqwEcfxTKokJlYPbqSDgY0Pzm5k/sWau9pUdQDThigkvYsX
-	 uSxWLFCrDR8sr1mrI/PO7Pe3FU7Xt3TATYJ23OhI2BiWaReG5Y3Vj/63KNyMbNPO/v
-	 ql0x5FnxyAqdw==
+	b=M7XbkGCEWSXWUsXDuonazQSbzqRGmb1S75byvKBLVhq+byuOdBs3LxpvRVO7OKchb
+	 cHCejjzGwB0c5PYDQtkoDNvkuXuPTL191EJJpC6LFW257rDKQrnNAV80zg5mvWRFLn
+	 T8caJaYDeSJQMfZuwW/RDsZUrzYyDhn9yLC+H53VFDGB8u7hH/QFUbNcCmESooyrCt
+	 WAqvaqXN5XLCn28U8Xje2Rcrgiy4BkocXq6/1nWJXcr1zG8+j0XYorY52nQ85ZL6AU
+	 mgMa6Lx4WAeVLOvfrojoP2ZVH2CV1lbomXXgf+5Bh5969IqaiLcOaB5CW8g4nRO64m
+	 XZjcfc+E1Yy1g==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vfG1a-00000000DTi-0mD3;
+	id 1vfG1a-00000000DTm-0sz9;
 	Mon, 12 Jan 2026 12:23:54 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
 	Jani Nikula <jani.nikula@intel.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 1/4] scripts/kernel-doc: fix logic to handle unissued warnings
-Date: Mon, 12 Jan 2026 12:23:23 +0100
-Message-ID: <914b07e496fd204d7082c6e1b138d99d8488da9b.1768216455.git.mchehab+huawei@kernel.org>
+	Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 2/4] scripts/kernel-doc: avoid error_count overflows
+Date: Mon, 12 Jan 2026 12:23:24 +0100
+Message-ID: <bb0bd9ecbf38f8d28749ea15f8d04fb640e0c76d.1768216455.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768216455.git.mchehab+huawei@kernel.org>
 References: <cover.1768216455.git.mchehab+huawei@kernel.org>
@@ -68,59 +66,67 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Changeset 469c1c9eb6c9 ("kernel-doc: Issue warnings that were silently discarded")
-didn't properly addressed the missing messages behavior, as
-it was calling directly python logger low-level function,
-instead of using the expected method to emit warnings.
+The glibc library limits the return code to 8 bits. We need to
+stick to this limit when using sys.exit(error_count).
 
-Basically, there are two methods to log messages:
-
-- self.config.log.warning() - This is the raw level to emit a
-  warning. It just writes the a message at stderr, via python
-  logging, as it is initialized as:
-
-    self.config.log = logging.getLogger("kernel-doc")
-
-- self.config.warning() - This is where we actually consider a
-  message as a warning, properly incrementing error count.
-
-Due to that, several parsing error messages are internally considered
-as success, causing -Werror to not work on such messages.
-
-While here, ensure that the last ignored entry will also be handled
-by adding an extra check at the end of the parse handler.
-
-Fixes: 469c1c9eb6c9 ("kernel-doc: Issue warnings that were silently discarded")
-Closes: https://lore.kernel.org/linux-doc/20260112091053.00cee29a@foz.lan/
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_parser.py | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ scripts/kernel-doc.py | 32 ++++++++++++++++++++++----------
+ 1 file changed, 22 insertions(+), 10 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index a9a37519145d..aed07fdaa561 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -459,7 +459,7 @@ class KernelDoc:
-         #
-         if self.entry and self.entry not in self.entries:
-             for log_msg in self.entry.warnings:
--                self.config.log.warning(log_msg)
-+                self.config.warning(log_msg)
+diff --git a/scripts/kernel-doc.py b/scripts/kernel-doc.py
+index 7a1eaf986bcd..600bdfea6a96 100755
+--- a/scripts/kernel-doc.py
++++ b/scripts/kernel-doc.py
+@@ -176,7 +176,14 @@ class MsgFormatter(logging.Formatter):
+         return logging.Formatter.format(self, record)
  
-         self.entry = KernelEntry(self.config, self.fname, ln)
+ def main():
+-    """Main program"""
++    """
++    Main program
++    By default, the return value is zero on parsing errors or when the
++    Python version is not compatible with kernel-doc. The rationale is
++    to not break Linux compilation on such cases.
++    If -Werror is used, it will return the number of parse errors, up to
++    255 errors, as this is the maximum value allowed by glibc.
++    """
  
-@@ -1741,6 +1741,10 @@ class KernelDoc:
-                         # Hand this line to the appropriate state handler
-                         self.state_actions[self.state](self, ln, line)
+     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
+                                      description=DESC)
+@@ -321,18 +328,23 @@ def main():
+     if not error_count:
+         sys.exit(0)
  
-+            if self.entry and self.entry not in self.entries:
-+                for log_msg in self.entry.warnings:
-+                    self.config.warning(log_msg)
++    if args.verbose:
++        print("%s errors" % error_count)                # pylint: disable=C0209
 +
-         except OSError:
-             self.config.log.error(f"Error: Cannot open file {self.fname}")
++
+     if args.werror:
+         print("%s warnings as errors" % error_count)    # pylint: disable=C0209
++
++        #
++        # Return code is 8-bits, as seen at:
++        #   https://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
++        # Truncate to avoid overflow
++        #
++        if error_count > 255:
++            error_count = 255
++
+         sys.exit(error_count)
+-
+-    if args.verbose:
+-        print("%s errors" % error_count)                # pylint: disable=C0209
+-
+-    if args.none:
+-        sys.exit(0)
+-
+-    sys.exit(error_count)
+-
++    sys.exit(0)
  
+ # Call main method
+ if __name__ == "__main__":
 -- 
 2.52.0
 
