@@ -1,175 +1,118 @@
-Return-Path: <linux-doc+bounces-71809-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71814-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id F380BD124AC
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 12:28:16 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id B5014D125A6
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 12:44:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8219230F6419
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 11:24:05 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 092E93049F3C
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 11:43:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 714D6356A2F;
-	Mon, 12 Jan 2026 11:23:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1D80A356A1E;
+	Mon, 12 Jan 2026 11:43:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mTrGV1f5"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="I3PNv5fe"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49E2B356A22;
-	Mon, 12 Jan 2026 11:23:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A180427FD68;
+	Mon, 12 Jan 2026 11:43:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768217036; cv=none; b=SPsOzbWUZPoVEcgsqHnuBpCLPobocesvU2gxeVuqkfcnz9ZooGah1fjoCP+n1MwPJLhtZw02FXl3zld2KRTH0aew/thFtm22xXM5vlhiiDMO6JbY89DXH5gIgzXwrRSSr89f/AY2tX8ji34rHd/XRbBCBDdyhowZpkVV7aRag5Y=
+	t=1768218223; cv=none; b=ptQAa/YBdw2p1DIEd/q0557ooYf8/YhOGAe4u/i8t84nHE5iPVbpWtPcYWlmZ2PpFFsglIf+EVfpYEfCxbdDIIoNac37Ia7B54PvsXiwHanrMjIa98pO45ft8Uf0EQnvwCd4/SamGTYlDQ7VXfMAF8ovHmlsbyyN+ZSo1JfRpN8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768217036; c=relaxed/simple;
-	bh=b7TCaIVKIIOx690781eq+Ut++2/njLJoNV6BCi2juqc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=WSe2Fw4rmbORdq/MDsOt8EmogKgt6vbSBzn2Dh55HksiqiXtP+o/e0tYo1rj39b3nB415Oe/Rfv0kt/SGMMfYkGL0ebghvXTkL6v5y+3+T9OY1AYBkA6+adDfHJ4IpTH/Q/LuAefll+Q1J0oPw2GoG61y4oyml3ce9nrm0Y7h3E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mTrGV1f5; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D752C19424;
-	Mon, 12 Jan 2026 11:23:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768217036;
-	bh=b7TCaIVKIIOx690781eq+Ut++2/njLJoNV6BCi2juqc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=mTrGV1f5ePDMoVaQ3k1cAOJl65R0X6JYtcGKNUKyK6gaX4WMdZK6ywbOHZI3Tfth+
-	 y34Z7w/j8zq3Cnft/xGA3931BqG6huwynxlzq6qRJQd5oi+QFxnEiNi+9rt1L7vytZ
-	 DWgyLwOawGV66B4BCltI9Otucn3mRef4p1D62u8UgD4KOAzhNu34yna/I/Oxv1Bo3/
-	 nTOKv0bemH1W+d/1JQGlxckatqz6GPxTDGjsGx17F1pySQjMjmVL/7bqs/8DwH4VSZ
-	 qsseGPrO2I/LMgUQrITqcIwoe5Vl2nPbJYTE7kbh51OFaB+W3Hxwm4O5nXnc3omnIt
-	 NJaCEubGzIAvQ==
-Received: from mchehab by mail.kernel.org with local (Exim 4.99)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vfG1a-00000000DTu-16QV;
-	Mon, 12 Jan 2026 12:23:54 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	Jani Nikula <jani.nikula@intel.com>,
-	Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 4/4] scripts/kernel-doc: some fixes to kernel-doc comments
-Date: Mon, 12 Jan 2026 12:23:26 +0100
-Message-ID: <de2a70da3c1e3df8ca74196bcc7e44c041ff205b.1768216455.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1768216455.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1768218223; c=relaxed/simple;
+	bh=8+Vfb3rIuq1hoWBJzer7yRN7W56QTljUarZDw4zbL0Y=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GzmMqI1m/ggphMaBHINz1g4DP567iAskY+agimA4KdtLJKLff1BXwmDTJAoWOoFzqyWUzhE5aB5mvA5CT0xYSu8ip5r54P6f7Jr+iqnuzcwmXGKrtiaaEgcPJpRl2zncAHHEvDGm4DFRX2f8r4K+MPu9zfK2lQGcmBv/xZMUgBE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=I3PNv5fe; arc=none smtp.client-ip=192.198.163.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1768218221; x=1799754221;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=8+Vfb3rIuq1hoWBJzer7yRN7W56QTljUarZDw4zbL0Y=;
+  b=I3PNv5feMkotlxRyg7YDzL1xG7rihGAR8ZmQQ+1JwqcNwWZKO9ekX834
+   Bcu6c/hxS/0/zl1j5by+ET6evZXkAvj4croj8gU8+4b8ZUUVZkhlwdVzM
+   m/ouA4ZDixh2B5kd7Kdg+DyZB4bbNHFlzG8xla5bvifLscgDBaMnqlI4l
+   bOeCdvZo66MrL14boFxZ3CXJfjXWdhTR9ooW3zZgyPK3R8IQnA9Dh68uZ
+   OGVVA3yc3gvhpFneJ+oJOm9fmXuXC/sUQ3AU8MaN+89VrNgPc+ezWIT2g
+   Mos7R4JWGwVvYOGHv3EuzIpICIMrgGN7nG1JsVGLviKnMr7Bz/4sISEMg
+   g==;
+X-CSE-ConnectionGUID: 9m833cVFS+yv3kT9tE2lmg==
+X-CSE-MsgGUID: EQddhCczREqVH0vhohxiig==
+X-IronPort-AV: E=McAfee;i="6800,10657,11668"; a="68695263"
+X-IronPort-AV: E=Sophos;i="6.21,219,1763452800"; 
+   d="scan'208";a="68695263"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jan 2026 03:43:40 -0800
+X-CSE-ConnectionGUID: MnfdciqcQMyqGDw1CeQiuQ==
+X-CSE-MsgGUID: IHJveOvkRwiPPDZBJ9Klzw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,219,1763452800"; 
+   d="scan'208";a="208596515"
+Received: from dhhellew-desk2.ger.corp.intel.com (HELO localhost) ([10.245.245.37])
+  by orviesa004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jan 2026 03:43:39 -0800
+Date: Mon, 12 Jan 2026 13:43:36 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+	linux-kernel@vger.kernel.org, Jani Nikula <jani.nikula@intel.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH 1/4] scripts/kernel-doc: fix logic to handle unissued
+ warnings
+Message-ID: <aWTeaEHm8n_pDQhr@smile.fi.intel.com>
 References: <cover.1768216455.git.mchehab+huawei@kernel.org>
+ <914b07e496fd204d7082c6e1b138d99d8488da9b.1768216455.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <914b07e496fd204d7082c6e1b138d99d8488da9b.1768216455.git.mchehab+huawei@kernel.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-There are some typos and English errors at the kernel-doc.py comments.
+On Mon, Jan 12, 2026 at 12:23:23PM +0100, Mauro Carvalho Chehab wrote:
+> Changeset 469c1c9eb6c9 ("kernel-doc: Issue warnings that were silently discarded")
+> didn't properly addressed the missing messages behavior, as
+> it was calling directly python logger low-level function,
+> instead of using the expected method to emit warnings.
+> 
+> Basically, there are two methods to log messages:
+> 
+> - self.config.log.warning() - This is the raw level to emit a
+>   warning. It just writes the a message at stderr, via python
+>   logging, as it is initialized as:
+> 
+>     self.config.log = logging.getLogger("kernel-doc")
+> 
+> - self.config.warning() - This is where we actually consider a
+>   message as a warning, properly incrementing error count.
+> 
+> Due to that, several parsing error messages are internally considered
+> as success, causing -Werror to not work on such messages.
+> 
+> While here, ensure that the last ignored entry will also be handled
+> by adding an extra check at the end of the parse handler.
 
-Locate them with the help of LLM (gpt-oss 14B), locally excecuted
-with this prompt:
+Thanks for addressing these issues, Mauro!
 
-    review English grammar andsyntax at the comments on the code
-    below:
-    <cat scripts/kernel-doc.py>
+I am not promising I will test this soon, but from code perspective it looks
+good to me,
+Acked-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 
-Not all results are flowers, although it caught several minor
-issues there. Add the pertinent fixes, discarding the bad ones.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- scripts/kernel-doc.py | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
-
-diff --git a/scripts/kernel-doc.py b/scripts/kernel-doc.py
-index bcb60136fc9c..5086248ee532 100755
---- a/scripts/kernel-doc.py
-+++ b/scripts/kernel-doc.py
-@@ -9,10 +9,10 @@
- #       The rationale is that it shall fail gracefully during Kernel
- #       compilation with older Kernel versions. Due to that:
- #       - encoding line is needed here;
--#       - no f-strings can be used on this file.
--#       - the libraries that require newer versions can only be included
--#         after Python version is checked.
--
-+#       - f‑strings cannot be used in this file.
-+#       - libraries that require newer versions can only be included
-+#         after the Python version has been checked.
-+#
- # Converted from the kernel-doc script originally written in Perl
- # under GPLv2, copyrighted since 1998 by the following authors:
- #
-@@ -132,13 +132,13 @@ May be used multiple times.
- """
- 
- EXPORT_DESC = """
--Only output documentation for the symbols that have been
-+Only output documentation for symbols that have been
- exported using EXPORT_SYMBOL() and related macros in any input
- FILE or -export-file FILE.
- """
- 
- INTERNAL_DESC = """
--Only output documentation for the symbols that have NOT been
-+Only output documentation for symbols that have NOT been
- exported using EXPORT_SYMBOL() and related macros in any input
- FILE or -export-file FILE.
- """
-@@ -161,7 +161,7 @@ Header and C source files to be parsed.
- """
- 
- WARN_CONTENTS_BEFORE_SECTIONS_DESC = """
--Warns if there are contents before sections (deprecated).
-+Warn if there are contents before sections (deprecated).
- 
- This option is kept just for backward-compatibility, but it does nothing,
- neither here nor at the original Perl script.
-@@ -169,7 +169,7 @@ neither here nor at the original Perl script.
- 
- 
- class MsgFormatter(logging.Formatter):
--    """Helper class to format warnings on a similar way to kernel-doc.pl"""
-+    """Helper class to format warnings in a similar way to kernel-doc.pl."""
- 
-     def format(self, record):
-         record.levelname = record.levelname.capitalize()
-@@ -268,7 +268,7 @@ def main():
-                         help=NOSYMBOL_DESC)
- 
-     parser.add_argument("-D", "-no-doc-sections", "--no-doc-sections",
--                        action='store_true', help="Don't outputt DOC sections")
-+                        action='store_true', help="Don't output DOC sections")
- 
-     parser.add_argument("files", metavar="FILE",
-                         nargs="+", help=FILES_DESC)
-@@ -297,12 +297,12 @@ def main():
-     python_ver = sys.version_info[:2]
-     if python_ver < (3,6):
-         #
--        # Depending on Kernel configuration, kernel-doc --none is called at
-+        # Depending on the Kernel configuration, kernel-doc --none is called at
-         # build time. As we don't want to break compilation due to the
-         # usage of an old Python version, return 0 here.
-         #
-         if args.none:
--            logger.error("Python 3.6 or later is required by kernel-doc. skipping checks")
-+            logger.error("Python 3.6 or later is required by kernel‑doc. Skipping checks")
-             sys.exit(0)
- 
-         sys.exit("Python 3.6 or later is required by kernel-doc. Aborting.")
-@@ -311,7 +311,7 @@ def main():
-         logger.warning("Python 3.7 or later is required for correct results")
- 
-     #
--    # Import kernel-doc libraries only after checking Python version
-+    # Import kernel-doc libraries only after checking the Python version
-     #
-     from kdoc.kdoc_files import KernelFiles             # pylint: disable=C0415
-     from kdoc.kdoc_output import RestFormat, ManFormat  # pylint: disable=C0415
 -- 
-2.52.0
+With Best Regards,
+Andy Shevchenko
+
 
 
