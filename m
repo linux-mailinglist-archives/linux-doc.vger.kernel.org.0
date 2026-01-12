@@ -1,175 +1,136 @@
-Return-Path: <linux-doc+bounces-71835-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71840-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0992AD1399A
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 16:20:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4211ED139E0
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 16:22:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 647053024E65
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 15:08:08 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2F7773124C2D
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 15:08:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CD6EE2DCF43;
-	Mon, 12 Jan 2026 15:08:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 61A972DCF72;
+	Mon, 12 Jan 2026 15:08:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jRrIoLMC"
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b="DP6dRaIZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA9F320010C;
-	Mon, 12 Jan 2026 15:08:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3A3420D4FC
+	for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 15:08:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768230487; cv=none; b=YToR5LAD4gG5qYLCi9dBUXjhMUtmeDzwP9qEVI8eFW0gbOqEc6khcZyZ3+gcCgQpiGI/KZVqPiYGFb3hTBtNzdRhfL33VP+3iNLgEvBw0wCEhUe8KzGBo0zCcAmdLN9zhD7KGlsDD1QYL7c+TTsOgjrIRVX9JUa1NS/57j6eVCg=
+	t=1768230515; cv=none; b=f8ihMm/Vo/3pG5hUBq88nqAKE7+vcuKkQwUx8BIuCX+QpbyH1FZ9Zm+fHDe+b93qLuL/+MeGtliOcFQCzw9C777EWAbPOLSCqvCJWcv8lnEQaqJkoaJkCD+jv3m/ulHL4Yl5cKq7Ze1gVr+lyvwtqeHKt6dfQiA3u4KNeInzJ0g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768230487; c=relaxed/simple;
-	bh=hQU7ILU8FGfaXvaPKyg+910Nis+bE1Jn3QGzXcDLK6c=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ryihij1y9TT5kxrkbU9MG4B0li81wgP4nyI4eSqGUPgolMcdlATYqe2BXXTTTGogrG4RWj5K3bE1Uqs7XR5StoT2TT5yUQg0Ud1UL2D5BUkbuZkmT8eUpYKaObfP8N6sVJafBSZOLZfNEKq8dl4o2ewvgv8mtvSkXfoktqJM75Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jRrIoLMC; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B899C2BC87;
-	Mon, 12 Jan 2026 15:08:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768230487;
-	bh=hQU7ILU8FGfaXvaPKyg+910Nis+bE1Jn3QGzXcDLK6c=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=jRrIoLMCKVWEGF9ZRLav5Ao9MtRvcKlYYwVveu0mddM32Fx/HVZqU6n5jq9X51qIU
-	 GJUBXOAIDaUj718bGbXEBT2rPwGmJQTZAJWb7NNq7Hmrn5/ttGvTg3lZcPKYpZ4Inh
-	 b1KtlH7Kt15I5Av2Pq09Aum3hv0G9cJTQNZC4uuZyKAVB/giA+a6gIR+2a/GckPJS1
-	 W3eZOXZpfc8OONHx9YouLECadzlHciS21hfz35CBf+fYi2h4ce46hdWrakjgqx639+
-	 j5l8GloXnqTUtb1n0DLdlDWDgVAwprp/0NTZw4+ezVsY4Uxq1o2uvOQOACOPMExZ/A
-	 ZgL0YDlHIwisw==
-Received: from mchehab by mail.kernel.org with local (Exim 4.99)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vfJWX-00000000JWy-39ts;
-	Mon, 12 Jan 2026 16:08:05 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>,
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	Jani Nikula <jani.nikula@intel.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH v2 4/4] scripts/kernel-doc: some fixes to kernel-doc comments
-Date: Mon, 12 Jan 2026 16:06:53 +0100
-Message-ID: <1ea812db44c941dcbdead57cd34ccd807261c436.1768229902.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <cover.1768229902.git.mchehab+huawei@kernel.org>
-References: <cover.1768229902.git.mchehab+huawei@kernel.org>
+	s=arc-20240116; t=1768230515; c=relaxed/simple;
+	bh=2LlAdcFOMuNXqy8VLk9nvlKy5s1t5Qbb33Ri0Pt3etU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=beHzX0CZRQf82GKzXY+JG7GM1uWWEf4wMWFEpw8O3c32rVb1z3Jx14HQhz25vkPgtx6J9T+U0ry0KdPEccxQNhp8uEVGJ/mXNGNeeVGxg/M42paMxQ5qHK33qdi2T4wxhYN4UCcaLuEGQIeCnld6Do8eLoQbggi4c6yQffHBlBo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com; spf=pass smtp.mailfrom=suse.com; dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.b=DP6dRaIZ; arc=none smtp.client-ip=209.85.221.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.com
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-42fb2314eb0so5437636f8f.2
+        for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 07:08:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1768230512; x=1768835312; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=2LlAdcFOMuNXqy8VLk9nvlKy5s1t5Qbb33Ri0Pt3etU=;
+        b=DP6dRaIZSrMKN4qVhz6g/WgTf35PDGl+VFZw/EDha+a+cA+3myVw7WOKXDS2So94Py
+         DA2TSiGdlx7nLSwpNWFFEcPXM0d7rfzwJP2IyDsx/sH4NBl75K3RnJD2wt5JjtTLn6We
+         bqm965mwxDAZwKLgGKNK6h03qUwhbedVdPgBW+EGOpWDW73Iiy8NXxB9WFcNGeMEC4on
+         /qGWZMeZzRuPnsd/VGPHYkacC+hziO3XR+tY3flqQ2Hbmqm7RPaAya5r57Ag3Nm26T41
+         Hhbf1O1W8scP3LJR8TtakvX2HMOvGOU78+A4KwNEzQ3VdDcqb/D0ivWaaWyNTcASpOL3
+         8ANA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768230512; x=1768835312;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=2LlAdcFOMuNXqy8VLk9nvlKy5s1t5Qbb33Ri0Pt3etU=;
+        b=fo6GNx0FKhhfWL03vrloxFxxQOn5nCLP5luBp8jbakLPRRhjvgHd66thJwJ3jPWo2C
+         ugUghrx+0H//qf1qnbwZDO61H6LRFNOUf7ZPdJWLfJecmE1uWebXuk5ULX+Ii3egMjL6
+         gbmTKp1hztSZwUqmPMvNlee/YXY0pMRljV/6CAHkUcnU7qmIUVy76IcgM1LyB+cw2XPs
+         kB/iotQsuxvqwTeT3d5mjGmWQkZ0kWN/R+nayeBD7jcPfEyFclibSJKmh8ROeqnugr5q
+         SFhQB9+JBfiGT9HP9D0n8mJUqRagJZoK9okrBuz5UmD/HuTZRi5Mpqch/v/dxR9xQ9HW
+         r3+A==
+X-Forwarded-Encrypted: i=1; AJvYcCWWEfFwLi3jRycex9s4Ma+IQ7uKH/dWE9uijcusn/HOvmCB/c1ZpX9DIcNu7OJDaS2OXysxOhFuP7g=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyvEkJoT/ZMjvrOt34+tKdbggsTGMNTzkO+QOzAf0hMD+Np2ycz
+	AasKtHU6I8VgXoTnSH+5+Q0UgyKfAryYeL6l4qd3A3IFDMY+bidNdKJhvdEzjR6+dDc=
+X-Gm-Gg: AY/fxX6HjZy9g4Nrq5Uk9LZ4Jwe4dM2grPVvpiIBCOl3DnjHUw9iMU7CaeHjA5IHmAd
+	IIe3MFAS9RULB5hClQ5+kMSlJPzSgTDi2S59GEj6tTBqP8iwFmOXCDIK97vGkrB7aksMKul7SIX
+	6lJ9ODWWLRrakaPwiXKn35yXri9MkOFOXjJssWAvkp1Z/ZGxZ/aAex5ySNqboZZ37nSBFt18NO2
+	iG8Qhp0AjAAXxVa/aq6GPG0AJZ3/7sohB/nKzDprfnE3faBwz4kY4RmrVGlsShab0PPqWNsUbhZ
+	CF7LWy9gfnelJRUu5QmQ+OIEP+4ilLzk31rKJGJr3BivAzV4Pq1o+8AXLzNL8X/uHW1GXNJ9I1u
+	NctwnoqwiVv/Qmj3Qw1qT2ilBxR5ka/ngWZYgSN2OdPIg0Zl3muWpk/a8WV/iD/vUINuhLOLMjT
+	hScenDaz/5V6iaGa3N7z8/0JPcmLk42Dhqb69BJQUZ+Q==
+X-Google-Smtp-Source: AGHT+IHKV1LEX2Kg3/u/Laf0CuUnSDbfVay62iMr9BZEu/EkpT7Nz24/p9OPfOdHBurpeZ+kYCwV8Q==
+X-Received: by 2002:a05:6000:2311:b0:42f:b707:56dd with SMTP id ffacd0b85a97d-432c37c878bmr22055424f8f.33.1768230512058;
+        Mon, 12 Jan 2026 07:08:32 -0800 (PST)
+Received: from blackdock.suse.cz (nat2.prg.suse.com. [195.250.132.146])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd0e16f4sm40089995f8f.11.2026.01.12.07.08.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Jan 2026 07:08:31 -0800 (PST)
+Date: Mon, 12 Jan 2026 16:08:30 +0100
+From: Michal =?utf-8?Q?Koutn=C3=BD?= <mkoutny@suse.com>
+To: Waiman Long <llong@redhat.com>
+Cc: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>, 
+	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>, linux-kernel@vger.kernel.org, 
+	cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org, 
+	Sun Shaojie <sunshaojie@kylinos.cn>, Chen Ridong <chenridong@huaweicloud.com>, 
+	Chen Ridong <chenridong@huawei.com>
+Subject: Re: [PATCH cgroup/for-6.20 v4 4/5] cgroup/cpuset: Don't invalidate
+ sibling partitions on cpuset.cpus conflict
+Message-ID: <uogjuuvcu7vsazm53xztqg2tiqeeestcfxwjyopeapoi3nji3d@7dsxwvynzcah>
+References: <20260112040856.460904-1-longman@redhat.com>
+ <20260112040856.460904-5-longman@redhat.com>
+ <2naek52bbrod4wf5dbyq2s3odqswy2urrwzsqxv3ozrtugioaw@sjw5m6gizl33>
+ <f33eb2b3-c2f4-48ae-b2cd-67c0fc0b4877@redhat.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="57d4b62ug42tsq4v"
+Content-Disposition: inline
+In-Reply-To: <f33eb2b3-c2f4-48ae-b2cd-67c0fc0b4877@redhat.com>
 
-There are some typos and English errors at the kernel-doc.py comments.
 
-Locate them with the help of LLM (gpt-oss 14B), locally excecuted
-with this prompt:
+--57d4b62ug42tsq4v
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Subject: Re: [PATCH cgroup/for-6.20 v4 4/5] cgroup/cpuset: Don't invalidate
+ sibling partitions on cpuset.cpus conflict
+MIME-Version: 1.0
 
-    review English grammar andsyntax at the comments on the code
-    below:
-    <cat scripts/kernel-doc.py>
+On Mon, Jan 12, 2026 at 09:51:28AM -0500, Waiman Long <llong@redhat.com> wrote:
+> Sorry, I might have missed this comment of yours. The
+> "cpuset.cpus.exclusive" file lists all the CPUs that can be granted to its
+> children as exclusive CPUs. The cgroup root is an implicit partition root
+> where all its CPUs can be granted to its children whether they are online or
+> offline. "cpuset.cpus.effective" OTOH ignores the offline CPUs as well as
+> exclusive CPUs that have been passed down to existing descendant partition
+> roots so it may differ from the implicit "cpuset.cpus.exclusive".
 
-Not all results are flowers, although it caught several minor
-issues there. Add the pertinent fixes, discarding the bad ones.
+Howewer, there's no "cpuset.cpus" configurable nor visible on the root
+cgroup. So possibly drop this hunk altogether for simplicity?
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- scripts/kernel-doc.py | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/scripts/kernel-doc.py b/scripts/kernel-doc.py
-index 7ccee4626478..28ec5500f664 100755
---- a/scripts/kernel-doc.py
-+++ b/scripts/kernel-doc.py
-@@ -9,10 +9,10 @@
- #       The rationale is that it shall fail gracefully during Kernel
- #       compilation with older Kernel versions. Due to that:
- #       - encoding line is needed here;
--#       - no f-strings can be used on this file.
--#       - the libraries that require newer versions can only be included
--#         after Python version is checked.
--
-+#       - f-strings cannot be used in this file.
-+#       - libraries that require newer versions can only be included
-+#         after the Python version has been checked.
-+#
- # Converted from the kernel-doc script originally written in Perl
- # under GPLv2, copyrighted since 1998 by the following authors:
- #
-@@ -134,13 +134,13 @@ May be used multiple times.
- """
- 
- EXPORT_DESC = """
--Only output documentation for the symbols that have been
-+Only output documentation for symbols that have been
- exported using EXPORT_SYMBOL() and related macros in any input
- FILE or -export-file FILE.
- """
- 
- INTERNAL_DESC = """
--Only output documentation for the symbols that have NOT been
-+Only output documentation for symbols that have NOT been
- exported using EXPORT_SYMBOL() and related macros in any input
- FILE or -export-file FILE.
- """
-@@ -163,7 +163,7 @@ Header and C source files to be parsed.
- """
- 
- WARN_CONTENTS_BEFORE_SECTIONS_DESC = """
--Warns if there are contents before sections (deprecated).
-+Warn if there are contents before sections (deprecated).
- 
- This option is kept just for backward-compatibility, but it does nothing,
- neither here nor at the original Perl script.
-@@ -171,7 +171,7 @@ neither here nor at the original Perl script.
- 
- 
- class MsgFormatter(logging.Formatter):
--    """Helper class to format warnings on a similar way to kernel-doc.pl"""
-+    """Helper class to format warnings in a similar way to kernel-doc.pl."""
- 
-     def format(self, record):
-         record.levelname = record.levelname.capitalize()
-@@ -277,7 +277,7 @@ def main():
-                         help=NOSYMBOL_DESC)
- 
-     parser.add_argument("-D", "-no-doc-sections", "--no-doc-sections",
--                        action='store_true', help="Don't outputt DOC sections")
-+                        action='store_true', help="Don't output DOC sections")
- 
-     parser.add_argument("files", metavar="FILE",
-                         nargs="+", help=FILES_DESC)
-@@ -306,12 +306,12 @@ def main():
-     python_ver = sys.version_info[:2]
-     if python_ver < (3,6):
-         #
--        # Depending on Kernel configuration, kernel-doc --none is called at
-+        # Depending on the Kernel configuration, kernel-doc --none is called at
-         # build time. As we don't want to break compilation due to the
-         # usage of an old Python version, return 0 here.
-         #
-         if args.none:
--            logger.error("Python 3.6 or later is required by kernel-doc. skipping checks")
-+            logger.error("Python 3.6 or later is required by kernel-doc. Skipping checks")
-             sys.exit(0)
- 
-         sys.exit("Python 3.6 or later is required by kernel-doc. Aborting.")
-@@ -320,7 +320,7 @@ def main():
-         logger.warning("Python 3.7 or later is required for correct results")
- 
-     #
--    # Import kernel-doc libraries only after checking Python version
-+    # Import kernel-doc libraries only after checking the Python version
-     #
-     from kdoc.kdoc_files import KernelFiles             # pylint: disable=C0415
-     from kdoc.kdoc_output import RestFormat, ManFormat  # pylint: disable=C0415
--- 
-2.52.0
+Michal
 
+--57d4b62ug42tsq4v
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iJEEABYKADkWIQRCE24Fn/AcRjnLivR+PQLnlNv4CAUCaWUObBsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMSwyLDIACgkQfj0C55Tb+AgfBQD+LRMv2fmPFzKZKYK7xH07
+xkhePTg1NW33sf1/vTxdhDQBAOhjME1GIwRPEdrHWZa/OJA8akS3jrgvjUc32oNZ
+W/AE
+=x6DT
+-----END PGP SIGNATURE-----
+
+--57d4b62ug42tsq4v--
 
