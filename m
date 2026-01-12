@@ -1,60 +1,61 @@
-Return-Path: <linux-doc+bounces-71865-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71867-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01FABD14201
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 17:44:31 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id BFAE2D141E6
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 17:43:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4216630B6C0B
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 16:39:09 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 63492300019C
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 16:41:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id DDF12366DC9;
-	Mon, 12 Jan 2026 16:39:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 513BA24A07C;
+	Mon, 12 Jan 2026 16:41:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="IrPCAygc"
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="ETSQ3pfe"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B7AF362156
-	for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 16:39:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A165362156
+	for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 16:41:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768235947; cv=none; b=XBMgdQwVSk5CpccwZBB6UqnYYzfMgm25z+h7vB6i/d2zXXJeHfPaqPL+CV92G0XbaT7tNVsKC8XN6Isfs5hjhLgMJrAPXYseX77Pkljrtynfr4+mo8yj3vN9bKzI3/6/7S4W+9jbnmV8mi0PZsgRGYqGiloMmRI9Nx0TmQhPeMk=
+	t=1768236074; cv=none; b=JH7f+6LNtadgbPOVhv7+SmvTav+ufJjkJdewn4Mvx9Evgt0NH4xPhWrSO6UVQoXI2Bs1arsy71kuEad/eWH7KE1cCJpbgcwDvGe7skKlYxZXtZQXnKznnjJkfK/yOfFq/qROmhTdqvxljmPxci0XiHC7vEGYW8d7KEsmnOpbcd4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768235947; c=relaxed/simple;
-	bh=1U7nwB7NB3cgEbxAyz7PCm4JBmU9EAkuaaDsRLIuTw0=;
+	s=arc-20240116; t=1768236074; c=relaxed/simple;
+	bh=eg9OwO/7+Eof8fWU/apRyqC/GxqUZ6yykMrcQj8oVbw=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=OeoZmo5CcBh54BscJl5XBoAR3CpEsIDMFsE9uqvJoqoDCkzNF3C/SFOtHi1BO+XLNq/TiKb/lGi/gLdjKXjBBt8GCbhBA1eODGMbZzJguVlxRGtvxAUnkDyL2j8OaH452v+ErdW2GQNCONbAijLOCfViLroYv5mZ567DJIy2NC8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=IrPCAygc; arc=none smtp.client-ip=45.79.88.28
+	 MIME-Version:Content-Type; b=ks10smmR2Aw9NCGTDHK7UBu3E3zFSohANgTAcAOBEwEC8O3dYWzXhascpgzuP830uga54wmoQVQiLgW2Bw8ISbyMSWvvBFA1kV+L8W2N8fp51zeORTKrJmk4k7EXGOmOZnSA8UMJUSXTOU5OmrxRFNvZzTkE80K5900slSYi0Wg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=ETSQ3pfe; arc=none smtp.client-ip=45.79.88.28
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 948B740C42
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 4F84240C42
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1768235945; bh=NJ+LC/IGba2jtiExqnG8n0XxirHLnw52tr08OzBCnmE=;
+	t=1768236072; bh=gOkcyIxg+e2795XtCf4OxcPw1bJPhmUFUxb1/1cI0pI=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=IrPCAygc6iUyF/dYtrIKe75PwYfW/4X41YwX1nxFV4JMS7VmY0/pmuBFPiXiUHw+M
-	 DPX7FPlzRZyyUFC97SbUDWgoONDC4Xm37pS8Zj+vctMkZjWDXP2B65Nwkee64NqYH1
-	 0izk73NVWcyDCoTMF3iFHYv9ILm31Cpn3RpDl3dTQH4pIo2Tmc3KhWGz/hth/PWb48
-	 vglPlBscg3u92kqd2rbCxLmw3mr7/PPjnYJ5AUUOjDLXcbkxjFg5yNoYay9KKuWO4G
-	 vrxkCjNxkXWJJ8+pRvtpu6tf9p7xzPXYKpsmEZC4PW1XkKQGnMshwJWEwdTRR/QHm+
-	 2OiiPJ19rbtNw==
+	b=ETSQ3pfeM4kw5qtiz5SRgOdTLiQtGjmclbM+TP7YjqmUo4qbPoty2HHDuMFUmW91u
+	 dgDdHMXkY3VKFcNQuHbzH6mgh9UESYIH1AVhoAAvQ5pBAo72/29RaMBA7yhwSThwR5
+	 8Ts0JB/TLU3X5CcBBBHX1kam/jwhPRnnhCofNL8m0DHnCmgVEGKQYaSz6n0zokM04T
+	 zisS80o1xSnj/tfjJS/K+QeZH6sQgnhg14sDJWeDP4wl0dUVI8z9JJxhj7Dl4vl08M
+	 8wCFl/xMBZmYUkCiMwwsAkA21jvF4cTn3EunwV0VMQWFJcarsc0UBWRL/fAEvx+Rrq
+	 xrvTLVlvOHE3Q==
 Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 948B740C42;
-	Mon, 12 Jan 2026 16:39:05 +0000 (UTC)
+	by ms.lwn.net (Postfix) with ESMTPSA id 4F84240C42;
+	Mon, 12 Jan 2026 16:41:12 +0000 (UTC)
 From: Jonathan Corbet <corbet@lwn.net>
 To: Petr Vorel <pvorel@suse.cz>, linux-doc@vger.kernel.org
 Cc: Petr Vorel <pvorel@suse.cz>, Michael Kerrisk <mtk@man7.org>, Alejandro
  Colomar <alx@kernel.org>, man-pages@man7.org
-Subject: Re: [PATCH v2 1/3] Documentation: sp_SP: Add missing man page section
-In-Reply-To: <20260111233534.183272-2-pvorel@suse.cz>
+Subject: Re: [PATCH v2 2/3] Documentation: Remove :manpage: from
+ non-existing man pages
+In-Reply-To: <20260111233534.183272-3-pvorel@suse.cz>
 References: <20260111233534.183272-1-pvorel@suse.cz>
- <20260111233534.183272-2-pvorel@suse.cz>
-Date: Mon, 12 Jan 2026 09:39:04 -0700
-Message-ID: <87bjiy23br.fsf@trenco.lwn.net>
+ <20260111233534.183272-3-pvorel@suse.cz>
+Date: Mon, 12 Jan 2026 09:41:11 -0700
+Message-ID: <877btm2388.fsf@trenco.lwn.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -65,27 +66,39 @@ Content-Type: text/plain
 
 Petr Vorel <pvorel@suse.cz> writes:
 
+> Removing :manpage: from non-existing man pages (xyzzy(2), xyzzyat(2),
+> fxyzzy(3) in adding-syscalls.rst, including translations) prevent
+> adding link to nonexisting man pages when using manpages_url in next
+> commit.
+>
 > Signed-off-by: Petr Vorel <pvorel@suse.cz>
 > ---
 > New in v2.
 >
->  Documentation/translations/sp_SP/process/adding-syscalls.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  Documentation/process/adding-syscalls.rst          | 14 +++++++-------
+>  .../translations/it_IT/process/adding-syscalls.rst | 14 +++++++-------
+>  .../translations/sp_SP/process/adding-syscalls.rst | 14 +++++++-------
+>  3 files changed, 21 insertions(+), 21 deletions(-)
 >
-> diff --git a/Documentation/translations/sp_SP/process/adding-syscalls.rst b/Documentation/translations/sp_SP/process/adding-syscalls.rst
-> index f21504c612b25..28f680652383d 100644
-> --- a/Documentation/translations/sp_SP/process/adding-syscalls.rst
-> +++ b/Documentation/translations/sp_SP/process/adding-syscalls.rst
-> @@ -172,7 +172,7 @@ describiendo un describiendo un movimiento dentro de un archivo, ponga de
->  tipo ``loff_t`` para que movimientos de 64-bit puedan ser soportados
->  incluso en arquitecturas de 32-bit.
+> diff --git a/Documentation/process/adding-syscalls.rst b/Documentation/process/adding-syscalls.rst
+> index fc0b0bbcd34df..1f61d0b114120 100644
+> --- a/Documentation/process/adding-syscalls.rst
+> +++ b/Documentation/process/adding-syscalls.rst
+> @@ -111,7 +111,7 @@ should use a file descriptor as the handle for that object -- don't invent a
+>  new type of userspace object handle when the kernel already has mechanisms and
+>  well-defined semantics for using file descriptors.
 >  
-> -Si su nueva llamada de sistema  :manpage:`xyzzy` involucra una
-> +Si su nueva llamada de sistema :manpage:`xyzzy(2)` involucra una
->  funcionalidad privilegiada, esta necesita ser gobernada por la capability
+> -If your new :manpage:`xyzzy(2)` system call does return a new file descriptor,
+> +If your new `xyzzy(2)` system call does return a new file descriptor,
 
-I would just fix that while changing the line in the next patch anyway,
-but whatever...
+Here, once again, you're retaining the backticks.  If we need to mark up
+those references at all, they should be ``literal``.
+
+(If you simply remove the backticks, you might run into conflict with
+automarkup, though I *think* that the section number will evade its
+regexp).
+
+Thanks,
 
 jon
 
