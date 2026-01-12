@@ -1,149 +1,149 @@
-Return-Path: <linux-doc+bounces-71830-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71832-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDDEFD1356C
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 15:55:59 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D971D136D5
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 16:04:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 94443303EB6E
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 14:39:47 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3898930B2756
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Jan 2026 14:51:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 64CD7257855;
-	Mon, 12 Jan 2026 14:39:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7B2E61E4AF;
+	Mon, 12 Jan 2026 14:51:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m6X4ajr7"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="PiwfhH08";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="H1hFfSdX"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4257524BBFD;
-	Mon, 12 Jan 2026 14:39:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05B3D2BE7DB
+	for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 14:51:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768228785; cv=none; b=ZA+h/yTg0cM3muxZT1DiLlWz+2++RT5j1qrbbgzHVPhIZ5gt8xp9Sq+hPR0n0Q8ySm/fvrIQIqT8Oy4KZuQKPbXgyNxbD31p9fm5N+cIj6+eUNfcilGiCE/r4236TpzrERHTGO5jZNelnGlSj1Z/myWD+GJ67fGy7v4msExkpPE=
+	t=1768229500; cv=none; b=KwhBOzn4gS4qahdOdQ9/NfEn9MiXlWvmfy66IZgAoPXDp2vd3ZX1/eUTAEsmEe7NxjNuiBaJR9482s9MXm16EvfiEdHeXh7NZb8N/GcHis0phSPqk1PfMGe1mugzuDijnuwmUUEkl71tfIlC3QYKkBQOHn7Wzm8FDUckwWlo6+I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768228785; c=relaxed/simple;
-	bh=SX7QAvT6621s02/hOC2GvAnjCmUc4TqiSigWuEXOA2Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QSDf+SOUGZ0X2ncRvKJjgOIZ7IRYVvibJHUqFgD+cGVcNXHZrs78hn5oQPoVIN5dtNOtzLBHATxwvm5v5BuwWU5Ys6+9iNIUIhLE2cVAL18WK7qx2mgsG4kLxhmG9Y91OifupSG54Xwt52WaMaqrBSPcCJpGK1D62hZwYpcRQUY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m6X4ajr7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3E5EC16AAE;
-	Mon, 12 Jan 2026 14:39:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768228784;
-	bh=SX7QAvT6621s02/hOC2GvAnjCmUc4TqiSigWuEXOA2Q=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=m6X4ajr7lQm5o1s5xncEMjoEmvQeZ4QgqFaloWzXXGY7E5j6tqjI2MOsbqLBceRHv
-	 ikng8wzxjlEZpAXX3W24zzJ/YEbuiMj27N3A29q4vOcA9zcYggpqJlrkWYZiFU1pPr
-	 BC9VikiXWTfHAPhIqGEy2m9mGaR6qN2FL+mhNn/9ecZkSZqx9SNCtuXTVed0ofQK/R
-	 bcrMJ8ZZT4g+MPqYie3LYhMA8aH3t8ZjkaceUUQhM5fIdXJsMqHw+UuyAkvIMew1Kl
-	 Ll8XnKxnSKYuKsWiH54POtGSesGeXC8oUtrEtBJ4DIKjwoofl6KpeilZYrX01IzYF3
-	 F72HZ7Pm8/BJg==
-Received: from mchehab by mail.kernel.org with local (Exim 4.99)
-	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vfJ54-00000000IZe-3Pbh;
-	Mon, 12 Jan 2026 15:39:42 +0100
-Date: Mon, 12 Jan 2026 15:39:42 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jani Nikula <jani.nikula@intel.com>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
-	Linux Doc Mailing List <linux-doc@vger.kernel.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH 2/4] scripts/kernel-doc: avoid error_count overflows
-Message-ID: <aWUE2afYSMrKG4Kx@foz.lan>
-References: <cover.1768216455.git.mchehab+huawei@kernel.org>
- <bb0bd9ecbf38f8d28749ea15f8d04fb640e0c76d.1768216455.git.mchehab+huawei@kernel.org>
- <ea13b9a9b0fbd4272db4b09564a60545eda871b3@intel.com>
+	s=arc-20240116; t=1768229500; c=relaxed/simple;
+	bh=KfleazqhiYVtUyRFQa0Rnp9RAnsfoqSNonzAP4I3m2w=;
+	h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=Ta9enIaefhnoSZSf/gKL8zjEgk2v/Ct7E7TN43Rtzry9umKcjlDBnHGW6Qoa7+NLKD4hQcffi/VLhISJuGGT2s4iYOvwexETNru5Np6SHxgojpIbN0jnGv7iuT/WnKOL9T/8DAp0Qxd2kB2PdQE/EwmTKPuWBgJ582lct11zjcw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=PiwfhH08; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=H1hFfSdX; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1768229498;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=sA5gJz/+vgMSarS6A+nPZ5R89JHYOj2EYgVc9sCvFKA=;
+	b=PiwfhH08NkQtuL2py8b2I8TFyJ6JBanQff77WDxklHFRxQnqhSYqzNTRw9l3QiIkst6QGz
+	0cFDc08qd2ENqYUq1/tDe2+oLbQ/5bjY5kK5klsjQXrFOZsukr+Jt+Dv9rbKdLJD29aX3H
+	CCktVkBvEWPUd6BDLddUMMa0Wa6LcQY=
+Received: from mail-vk1-f198.google.com (mail-vk1-f198.google.com
+ [209.85.221.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-376-V0WLLe6cMSmjBG4FTMgpVw-1; Mon, 12 Jan 2026 09:51:36 -0500
+X-MC-Unique: V0WLLe6cMSmjBG4FTMgpVw-1
+X-Mimecast-MFC-AGG-ID: V0WLLe6cMSmjBG4FTMgpVw_1768229496
+Received: by mail-vk1-f198.google.com with SMTP id 71dfb90a1353d-5635063cc48so4226117e0c.0
+        for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 06:51:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1768229496; x=1768834296; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=sA5gJz/+vgMSarS6A+nPZ5R89JHYOj2EYgVc9sCvFKA=;
+        b=H1hFfSdX03LD81cp6Q7aFhUHsu77TxhwUI5hoyrzyrVKVw+wB8s3rkOaK6ruiAIwnj
+         qrZSzjguhTTCIAVqRkDCF8OEd6lIuJ9cZTjrK9UNmxI1IwBE/wNDhNid1cz6oyajh2AS
+         dAEEzO98unRnWCI4ynw2PHooBoFR+1NZ8OgYkolGhPMpMKAJ39OyxMgR8giluj4F0nZu
+         yzF4EamLTF5Le8GD5Bc02fvPk1E9fostNDqawdGLk10+wk7be0NPmW4Kx7ZXC04gXzio
+         BoMDgWMnNjU4hp0QeyuhZ1o/zUQGBRL9FumPOwU0WxJgsvDSLTtvWnfl1ZUn/rU4dalc
+         /C9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768229496; x=1768834296;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=sA5gJz/+vgMSarS6A+nPZ5R89JHYOj2EYgVc9sCvFKA=;
+        b=ac2BinGZ1jVy+20nz2sdUC5F2YWFXOY3d8IPmTN6EX8qEJKP2oA0Q1SNRNq5Ar2inr
+         /FQHzt+lpcqppR3fWWwXCHQfV5X0Vgik0wnuJ9Jo0k4orjm4/tt853ZbiULGJh+ZMtpp
+         EUIBh+xLDWhXitxsgV/sKTdnKgF6TYJ+GByCiV5XwiBjznWMv71NifFuweK/lCfSVDXg
+         YnLcFefa5Kew0DYq+RAlKt+Akf5uAaAL2jtccNME77TmJmthKuNnMj47F26mt8hq9EhW
+         HTgAjrCHeOO7r6EhbYwoRdiRr3n08qfC0ecZqRiPuIEF5O7uUUSeqHd8r8a1OsdhO2kt
+         yVew==
+X-Forwarded-Encrypted: i=1; AJvYcCVSWkaRtBYnAqW+bA7CRBpLDxzMelTrxTQbHpLpBu8jPHJdgTzZ+UXEPtKh7P/EQOPOVuf3UxlAfZ8=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzcB3ZA/W2y9zeq/FPzH1tgio95agrZID3oCMRv6qNZSLL6tmdw
+	wfEKiG8VkSZmgjgui0GpPowyRtu0mi1sZ9GJ6UdDSd2HKi/jVn+Td0OKQaFoGErzktDQURbwq6B
+	lG4Zy2bRKjpho7J/bXmsBEvnrsqT09mnBd936qFZ1SYaqANpJHFspHOr8Zx7a0Q==
+X-Gm-Gg: AY/fxX4tiOitSiyOTJ2z1uZxuLgZQIUJGkQ9c2nqdgzuVa/E/2Oxmn+AHGj3pWKnhS6
+	muT0OS1OS1oiCm6/9r8Pa+ggZWWLEGziBfIrhW4W//MVEuZ6l72b8AJ35h3tArvPjJbwYSgCldd
+	GwhFhsN1CeTXzPfz8Se5VLBjYyoRnFBDqaMcpEDu65B3ovndxRfor9i/hJ35+Qm7cqGwUS84sF5
+	vobp13CQxbGrAwLCx4KHKDwdI1GEkE+BeSLU2XoLyg3w1yXmw+tfNC4u2QFbkdPku/uG/S4FolP
+	hecws/E2BHfnWbhHes+n5JRn+hc2Pnk2dgxF0UYlUuPCpF2HzYNJFUpH3D6keWPcEFiKXiW5iya
+	wP55m8OPNSDjTR9OOhdA+D8oFKOT+8IKxpGEruuOCnCNL7YIZccuKDDil
+X-Received: by 2002:a05:6122:8b8d:b0:55b:7494:1737 with SMTP id 71dfb90a1353d-56347fd2b6bmr4913665e0c.15.1768229496021;
+        Mon, 12 Jan 2026 06:51:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGMkEp2BHK2L7pl73R9OM4XWJTWqWIN5qUtiLpa/I4atEkU0kDVexMtW/lTi8Ub6jSdOpy+uw==
+X-Received: by 2002:a05:6122:8b8d:b0:55b:7494:1737 with SMTP id 71dfb90a1353d-56347fd2b6bmr4913647e0c.15.1768229495568;
+        Mon, 12 Jan 2026 06:51:35 -0800 (PST)
+Received: from ?IPV6:2601:188:c102:b180:1f8b:71d0:77b1:1f6e? ([2601:188:c102:b180:1f8b:71d0:77b1:1f6e])
+        by smtp.gmail.com with ESMTPSA id a1e0cc1a2514c-944124c452asm16438567241.13.2026.01.12.06.51.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 12 Jan 2026 06:51:35 -0800 (PST)
+From: Waiman Long <llong@redhat.com>
+X-Google-Original-From: Waiman Long <longman@redhat.com>
+Message-ID: <f33eb2b3-c2f4-48ae-b2cd-67c0fc0b4877@redhat.com>
+Date: Mon, 12 Jan 2026 09:51:28 -0500
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ea13b9a9b0fbd4272db4b09564a60545eda871b3@intel.com>
-Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH cgroup/for-6.20 v4 4/5] cgroup/cpuset: Don't invalidate
+ sibling partitions on cpuset.cpus conflict
+To: =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>
+Cc: Tejun Heo <tj@kernel.org>, Johannes Weiner <hannes@cmpxchg.org>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <shuah@kernel.org>,
+ linux-kernel@vger.kernel.org, cgroups@vger.kernel.org,
+ linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
+ Sun Shaojie <sunshaojie@kylinos.cn>, Chen Ridong
+ <chenridong@huaweicloud.com>, Chen Ridong <chenridong@huawei.com>
+References: <20260112040856.460904-1-longman@redhat.com>
+ <20260112040856.460904-5-longman@redhat.com>
+ <2naek52bbrod4wf5dbyq2s3odqswy2urrwzsqxv3ozrtugioaw@sjw5m6gizl33>
+Content-Language: en-US
+In-Reply-To: <2naek52bbrod4wf5dbyq2s3odqswy2urrwzsqxv3ozrtugioaw@sjw5m6gizl33>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jan 12, 2026 at 02:02:10PM +0200, Jani Nikula wrote:
-> On Mon, 12 Jan 2026, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> > The glibc library limits the return code to 8 bits. We need to
-> > stick to this limit when using sys.exit(error_count).
-> >
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> > ---
-> >  scripts/kernel-doc.py | 32 ++++++++++++++++++++++----------
-> >  1 file changed, 22 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/scripts/kernel-doc.py b/scripts/kernel-doc.py
-> > index 7a1eaf986bcd..600bdfea6a96 100755
-> > --- a/scripts/kernel-doc.py
-> > +++ b/scripts/kernel-doc.py
-> > @@ -176,7 +176,14 @@ class MsgFormatter(logging.Formatter):
-> >          return logging.Formatter.format(self, record)
-> >  
-> >  def main():
-> > -    """Main program"""
-> > +    """
-> > +    Main program
-> > +    By default, the return value is zero on parsing errors or when the
-> > +    Python version is not compatible with kernel-doc. The rationale is
-> > +    to not break Linux compilation on such cases.
-> > +    If -Werror is used, it will return the number of parse errors, up to
-> > +    255 errors, as this is the maximum value allowed by glibc.
-> > +    """
-> >  
-> >      parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
-> >                                       description=DESC)
-> > @@ -321,18 +328,23 @@ def main():
-> >      if not error_count:
-> >          sys.exit(0)
-> >  
-> > +    if args.verbose:
-> > +        print("%s errors" % error_count)                # pylint: disable=C0209
-> > +
-> > +
-> >      if args.werror:
-> >          print("%s warnings as errors" % error_count)    # pylint: disable=C0209
-> > +
-> > +        #
-> > +        # Return code is 8-bits, as seen at:
-> > +        #   https://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
-> > +        # Truncate to avoid overflow
-> > +        #
-> > +        if error_count > 255:
-> > +            error_count = 255
-> 
-> What's the point in returning the error count anyway?
+On 1/12/26 5:51 AM, Michal Koutný wrote:
+> On Sun, Jan 11, 2026 at 11:08:55PM -0500, Waiman Long <longman@redhat.com> wrote:
+>> diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+> ...
+>> @@ -2632,6 +2641,9 @@ Cpuset Interface Files
+>>   
+>>   	The root cgroup is always a partition root and its state cannot
+>>   	be changed.  All other non-root cgroups start out as "member".
+>> +	Even though the "cpuset.cpus.exclusive*" control files are not
+>> +	present in the root cgroup, they are implicitly the same as
+>> +	"cpuset.cpus".
+> cpuset.cpus.effective (that one is on root cpuset cg)
+>
+> (This was likely lost among my v2 comments.)
 
-Mostly historical reasons. I used the return value during the conversion
-to help verifying if the Python version was doing the right thing.
+Sorry, I might have missed this comment of yours. The 
+"cpuset.cpus.exclusive" file lists all the CPUs that can be granted to 
+its children as exclusive CPUs. The cgroup root is an implicit partition 
+root where all its CPUs can be granted to its children whether they are 
+online or offline. "cpuset.cpus.effective" OTOH ignores the offline CPUs 
+as well as exclusive CPUs that have been passed down to existing 
+descendant partition roots so it may differ from the implicit 
+"cpuset.cpus.exclusive".
 
-> I'd rather see some error/warning classification in the exit code than a
-> count. Like, the argparser uses exit code 2 by default, so you can't
-> even trust the exit code to return the count anyway.
+Cheers,
+Longman
 
-Right now, python can exit with:
-
-1. argparse errors;
-
-2. sys.exit() with messages like:
-    sys.exit(f"Error running fc-list: {repr(exc)}")
-
-3. eventually unhandled errors that would rise
-
-4. sys.exit(0) if:
-    - No warnings;
-    - the -Werror is not used and warnings were issued;
-    - Python version < 3.6 (we want kernel to keep building)
-
-5. error count > 0
-
-(2) and (3) returns 1; argparse returns 2.
-
-So, maybe we can use sys.exit(3) for warnings.
-
--- 
-Thanks,
-Mauro
 
