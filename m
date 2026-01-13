@@ -1,89 +1,88 @@
-Return-Path: <linux-doc+bounces-71914-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71920-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EDDFD15EAC
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 01:05:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC4CFD1634C
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 02:47:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 3D13A301503C
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 00:05:28 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 408673024B66
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 01:47:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F063510785;
-	Tue, 13 Jan 2026 00:05:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E5C11163;
+	Tue, 13 Jan 2026 01:47:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="W3Zxm7KM"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UGY93orx"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
+Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com [209.85.217.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82EC36FBF
-	for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 00:05:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AD84267B89
+	for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 01:47:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.217.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768262724; cv=none; b=sldN5N1cY5pyHCCkM7AePMwUzMT5U3syvACIWdoi2hdzHliAQn7R8mFDbgVrNOybgajkwmNvw7SrdDY0O9vHtLK6IhH4gnGPNdkA7wrVeLO0NHQpMmitkwJirp51F4LiVVNCONUM7y7Us5JPZdP9ox/pmD283wOmFJPaAcA5YBs=
+	t=1768268862; cv=none; b=QgH0DDw+Phd3b6FMgBpnjHB3H/M5AwSIn3U89KzMmRmN177FXT4CCbB10hJhipm1ivw6elr2Kj2dmffPtj6TOIqin28aloftXpxFeMSf2YphFuys8xOxdtKT8JYCEEqqwzNvVoAdQvR1LLfrNVS04BjGbmHAFMWhD21tp+hTqGg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768262724; c=relaxed/simple;
-	bh=TBQZ706dz2v4czmT9bidyuALkagvTVYafuXaqgUtD1A=;
+	s=arc-20240116; t=1768268862; c=relaxed/simple;
+	bh=ad32iXyTi4EbZ1XO99xfmDWdXhUVYTE5uI1F/YJLopw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JZ2cQD0RrZYTyEyprKeos2KOuAR8qM3PMH0sClG7lmoTM06+1f3Xm3NhDyKjkiP+opi5bMaCW9ZTEyi5J78hOwf1/K52XyuaKizdhOF/yjPX8ajAtx1jvJrnFkSfA+bKei4A8i5vacjtcGTQexFYIytCQ4COqH35+CZeVTo9cgc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=W3Zxm7KM; arc=none smtp.client-ip=74.125.82.48
+	 Content-Type:Content-Disposition:In-Reply-To; b=QJLNIlVEyiFcQXI3pbZPVvIiBhxBs7+FTvroV+kTlaDHBUaKcEMFmmy8lQaLiZ7iMUyrCfk36pKNIVPMKzYgt5HctOZ/FVB9ZGdqjKIDzZp01ZGt/isGd/73Ui90WrVGvQuT41ELsV9oEcCN0Z/uvaz8TPSOyGH99HM24nLIjjI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UGY93orx; arc=none smtp.client-ip=209.85.217.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-11b992954d4so7420280c88.1
-        for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 16:05:23 -0800 (PST)
+Received: by mail-vs1-f42.google.com with SMTP id ada2fe7eead31-5eeaae0289bso3038440137.2
+        for <linux-doc@vger.kernel.org>; Mon, 12 Jan 2026 17:47:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768262723; x=1768867523; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1768268856; x=1768873656; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=GncgElqiq32w9qexfmBMBu8AFPxia/UeTgvOHBdx+u0=;
-        b=W3Zxm7KM/4R8zViV7ZSa89zGO8HTGUCNGQmS4FI7s17a1bs4qo0ylv5Z2j/shLpGzR
-         plrEvnAM2klVglrUaI83dIjGu41lC25Mrc2AuNoM770yUvCmHDg+PkT5LbLYbjq8l5F4
-         WbfrGQ4ZIvAAQMNvNFxrFDutJz2e1wk2Qv5l9Vo3ioAs49BC4uKiLIpLfbie3nhlWyFw
-         voaEghDLE5SaDgEWcC9wwwLFifH2V5H4z+eTJ5K+IZJ9W/RP9fT1ZBF5bMvg51a2jVwW
-         Gs+O1pYQ+a79ED8wtpWpvvxJUbxK01VosjOc+COsmJcq0esKcLllHEy+2xEJwvD7HrYY
-         j4VA==
+        bh=M/HecYQMpzSx+pKogOGD9AgS/QaSSY95HkqZjIA46rM=;
+        b=UGY93orxyww8SaDXOIhFKxUVnOQHhKpOCYsW6KSauR2wX/dGdXmxyZNEmSdvD4054U
+         qxJQF+mbklobXr/TJArPwmFZDO1rXPZquOgz/lJ9T3TfCAvKtyfR0eopehhluWFnjzk4
+         x4AX4W7/XOEJ8Jz9Ca+BywVfXQBPk/jj4qmK1nQxNpWze8cKa9qJM9zhVyzAA/GN6CGJ
+         OKGA8CSAU6H+DsxZ9dCTw3nmGay+qiOgaeW6RsxGxxf+ZcvpUYARMdQrT23ED6IYZ2na
+         kYXCXJ6+AG6A71QjGnNfF37CvxMHyhMVz4xJZUZ1c7B8CfU05Cq4DRnZCjqZEYe8nnbz
+         +Qeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768262723; x=1768867523;
+        d=1e100.net; s=20230601; t=1768268856; x=1768873656;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:sender:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=GncgElqiq32w9qexfmBMBu8AFPxia/UeTgvOHBdx+u0=;
-        b=n3yc7/fhT4xnrwXyjhJ7F9PSESAIgKhxvKR41NCHcJTjVEThhiiujDM+a8IV5uy24y
-         oObFTdumkTa6oyg3oR04qFe/oq77WKWjPRV7oNfp4o6A/5thcbQLXrxwxcGZ4xjyWiNM
-         WEVwyT9NTGxislc8bctB1HY78JGcUf8KK+LixMjm5W8NAY9/uA2JeizBSMMmtT+ayI19
-         IwPIS/rukL6qBhY+VtZAIkX4VUxiA6N8sMvk3b5KVW9iGShHAQH8H2pWEhc3KM5mMXI4
-         AoUC+fOqOudZl6LavpEn0yWBUm4KlX6j+UdjGwRywgqTK4NPdT5z6xiDXdnFo44JB/4b
-         YGZA==
-X-Forwarded-Encrypted: i=1; AJvYcCX8CbwUR8iPo6RVOUmLMf+omA/wTonMkpU6/q/5uqThKjCXGJVSSyE5AQ2FFMLSg5PwVR0vJAznsig=@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywi+XV1GhoGZ/LG7oLxuPE71RhpsEg39IO8b0VvKOUwHfXvGhzw
-	UuInqJm3rfSKSZrm1+xweqF4VNb3C3REy0vEu6YzkSfdxriZpun3isVH
-X-Gm-Gg: AY/fxX56i98TsRwpraktmFy0bYixVvKWiH6Chu4U5A16pb/pbxVLl9HauunV5fOYPA0
-	QUEd0byJ1oydLPUU/3F3vw4toQT7PXlqyUXwIXy2mtSHx9S2ee3mOp05rbiIM5b3Gzn9GfP8WvF
-	PrRz+7UVt4+QQa2/D7QMoIKtXJ3GK4u8eNyj7TGmPYafIJMoYtLYyDAa46NhIvdWINMLa8CBO6i
-	D5i8E5j/A+OqbpSjrzwyUx+X32zfSaGETYjES1BdhTzXakKETImKKE0+O6DJsSUc8Gs4LW8Uosa
-	j4/FvTKEbGsu2rzelhy+x9vdfgJ2cZ2YLED3Gh1IfBlJyIcm1nPpiVDt7TkVspDk/ZpKPgkzO4w
-	5P2rqncVGgCpvyQv6yb+XLbvudqc8jrA5zvkTX+z+l7cjLRI9emb1TTHW9mr19py6m0iaFE8QYc
-	rZXEOtKi9Q8IEkBlqyBwXNEWe1
-X-Google-Smtp-Source: AGHT+IH2st110NI9ogLDebj2HC2DR5r6GB93sOZj+ArBjQ5xYxHE/S9g7UoPc+q/6FHGx3twpcufbg==
-X-Received: by 2002:a05:7022:eacb:b0:119:e56c:18b3 with SMTP id a92af1059eb24-121f8b7bb53mr13709063c88.27.1768262722658;
-        Mon, 12 Jan 2026 16:05:22 -0800 (PST)
+        bh=M/HecYQMpzSx+pKogOGD9AgS/QaSSY95HkqZjIA46rM=;
+        b=q+L5fKtgqH2eTXd8zZKwY5HLSpNaFNDuqRgm690KtyB4c1Ija/fHIscgz5jSLifVeh
+         QSf1O2EP5x29T8BVmxH9iSX5/c8UTxEwXmX19lcKJqXQjlMxomyPyfn43mYRkk0d3n6B
+         4DIE30PqRKoYNVxUpD4dZ8ts6bJyFei14x2OXhGCDGQOOoU6DP98x/WzNOCXLmZhvnH1
+         NUw6as4bqnI6YsSGyaCGM/owlb6YLPhzJVdVRHN5fIi8KW9OJJ8Oak7Qc0szGpwQ//sb
+         EqC60ISfEvVjsFcZoJjA3PHHIT2jm8WlKqBWqorfziXp6yAnlvgKkPL2HBTsQM/7vvL+
+         7GpQ==
+X-Forwarded-Encrypted: i=1; AJvYcCVZpsFtnugLiy5X42ytaHaf7UPJipaOu7lVgJ/ds2HcPn7q70M6Deo84w3Ssvuu6FnZXBBaSiJ9epA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YyvkVAwgtQcXyBZL+UgRjFldU1VZqHa2Q5tyba76341u5TYHkmE
+	7dKZYknGxkXWCZa62XpNVoVgAhWEgRAjsudv0G8qkX/3O49GABFhYpojKUv0IQ==
+X-Gm-Gg: AY/fxX4Gdmio68yvaIkYTg8DvvFVetSBuAstp+6vgY0szEZbBmRotS462037Z+irX5f
+	UjagSFzCkePFpQcxqw47NEByif9L7XoWZ+/X/s0C2NpoLWgmsqW27C09PaRyQPhJf/doMaVEJw0
+	Q/cxOGCtm1OhAG6VwWZpgaya1+Z9bA17CWCshRUxTivN9Wbl36U3HCPIbV+dFboH4zGj04ZeiE/
+	DZJ4xBqYnshjDy5z1YpNlJIPQmWUtRrX2/I7xhJjJoAgt8s8I/ZYyOuU3e2T0ytT+O6JEaQWfCf
+	NeOV/yi1JAuAlfAdaNPu1EebcepNagvIYh1qmA+O5WC8QDNF/PsVakKd8sPT1K9ly222fGJjK0Q
+	IDINzBnwtN5npIuQa8MvFbLU9rfJmktKNI+0WKIqhatD0GR2ZO6nAxYyEK/9VGLQLJHumnXjCWf
+	ZQF0GquQAHRM+agDCOV8D79QDc
+X-Google-Smtp-Source: AGHT+IGq7SH/P29EOxwJv+i4U56r7yzSOhU39ES1wZYIBI+ODZJsWgoNszRhwOG326pCJxzPcgjgSw==
+X-Received: by 2002:a05:693c:4151:10b0:2a4:8576:abf5 with SMTP id 5a478bee46e88-2b17d2b0af0mr12747919eec.23.1768262565381;
+        Mon, 12 Jan 2026 16:02:45 -0800 (PST)
 Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121f243f6c7sm20613445c88.7.2026.01.12.16.05.22
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b1707b0b2bsm16475727eec.23.2026.01.12.16.02.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Jan 2026 16:05:22 -0800 (PST)
+        Mon, 12 Jan 2026 16:02:44 -0800 (PST)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Mon, 12 Jan 2026 16:05:21 -0800
+Date: Mon, 12 Jan 2026 16:02:44 -0800
 From: Guenter Roeck <linux@roeck-us.net>
-To: Yuxi Wang <Yuxi.Wang@monolithicpower.com>
-Cc: corbet@lwn.net, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, wyx137120466@gmail.com,
-	linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v4 1/2] dt-bindings: hwmon: Add mps mp5926 driver bindings
-Message-ID: <90dd6919-562a-4697-843e-cca988806cf6@roeck-us.net>
-References: <20251223012231.1701-1-Yuxi.Wang@monolithicpower.com>
- <20251223012231.1701-2-Yuxi.Wang@monolithicpower.com>
+To: Cryolitia PukNgae <cryolitia@uniontech.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	zhanjun@uniontech.com, niecheng1@uniontech.com,
+	kylon <3252255+kylon@users.noreply.github.com>
+Subject: Re: [PATCH] hwmon: (gpd-fan) add support for Micro PC 2
+Message-ID: <2892cfa4-f033-41b3-bc8d-b849dcbd1a07@roeck-us.net>
+References: <20251222-mpc2-v1-1-695d8d351cc1@uniontech.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -92,13 +91,21 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251223012231.1701-2-Yuxi.Wang@monolithicpower.com>
+In-Reply-To: <20251222-mpc2-v1-1-695d8d351cc1@uniontech.com>
 
-On Tue, Dec 23, 2025 at 09:22:30AM +0800, Yuxi Wang wrote:
-> Add a device tree bindings for mp5926 device.
+On Mon, Dec 22, 2025 at 06:51:39PM +0800, Cryolitia PukNgae wrote:
+> From: Cryolitia PukNgae <cryolitia@uniontech.com>
 > 
-> Acked-by: Rob Herring (Arm) <robh@kernel.org>
-> Signed-off-by: Yuxi Wang <Yuxi.Wang@monolithicpower.com>
+> GPD Micro PC 2 is a mobile productivity device with 7-inch screen and
+> abundant ports.[1]
+> 
+> Link: https://www.gpd.hk/gpdmicropc2345345345 #1
+> Co-developed-by: kylon <3252255+kylon@users.noreply.github.com>
+> Signed-off-by: kylon <3252255+kylon@users.noreply.github.com>
+> Tested-by: kylon <3252255+kylon@users.noreply.github.com>
+> Link: https://github.com/Cryolitia/gpd-fan-driver/pull/23
+> Signed-off-by: Cryolitia PukNgae <cryolitia@uniontech.com>
+> ---
 
 Applied.
 
