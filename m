@@ -1,205 +1,285 @@
-Return-Path: <linux-doc+bounces-72076-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72078-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF84BD1B79A
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 22:49:51 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 519A3D1B806
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 22:59:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id E11C330119A3
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 21:49:50 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id E0408300503C
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 21:58:57 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C6EC34F482;
-	Tue, 13 Jan 2026 21:49:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C999350D49;
+	Tue, 13 Jan 2026 21:58:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="p30rYLmW"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="TpymwicU";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="bREaPn/N"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 685E834F256;
-	Tue, 13 Jan 2026 21:49:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE03734F499
+	for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 21:58:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768340988; cv=none; b=unwwc7rs+w0BZlKmJM82STUEQ2fW/ef3vfSUNOhyeymDHOToqZRoabZD+GOKa3FAiI8jnHHPTHrq67yoOstJRkQZbDeexbnP0Ft6ANBwJfMjCDqbgk6Q76vOc+jIPRvla6q/NyHgm5PdbAUuGh4lDUMj2SMIZfdozWT5q5Jheus=
+	t=1768341535; cv=none; b=XxuoXHhn7TYdYereRAdJfppgX7uZ6qdsg4Pmx9dbuQyyrVchcZMXHLemJsGP8KNyivqXO0eyP8QbpcGWcG0DqWPvmU19uoVLrBmBF5jzuWrugxOFj1NRYFF9FdHmOD+JgRQouaiocKyfvkQWui+tR2ahX+4tK6pQSkG4azGObm0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768340988; c=relaxed/simple;
-	bh=+pubfcq/fHKvX+Jxi5hGDgx8nbfdO4yelnz7e6o6ytA=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=nQLH0Hqc7kpt/VPmpQAmbMUmKxUUzQ9Zq1RbfWtI61ncWUBfbknSAdo0LjhuFjfuooSlg2m068UBAY5xVeGPT2yS4fuKrVYqoZ/rO+hs6KL0szUCUwh/x4GQpmgmG8EuDa7ohpSe6cZZJYlwF31nupNJEMtcLLYiWPeymMrJDdo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=p30rYLmW; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C889EC116C6;
-	Tue, 13 Jan 2026 21:49:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768340988;
-	bh=+pubfcq/fHKvX+Jxi5hGDgx8nbfdO4yelnz7e6o6ytA=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=p30rYLmWhAGyFGwrARGUWdRgJOdoqhH/CVyC67IEPD+oNOwkyxnjrLFW14NOAVIJG
-	 0gZR54xkIEuUpvYS7UJYaTAhDyd/zwGu2PR+rUhRPDi7IvoEx0oTxS6+i1SzwPKyQz
-	 0V7BKGvtveRf6Hh5FJ6DFJ3spg0NZZG+NGvI3//Z6CIlugqQUgqFwgQLRzQc/Igse0
-	 jTRwS6tdfFwh75FbHcqtldYHSpk4MHRHP3wUGT/X0/LXBLMZwosvBWxEUic2SC57tG
-	 teVBxC0sJdGDL2DS2yPl7pfUn1HwEK1PFZdjmL5m96uDQa5OfMXq9ZZ17/vde9W6Kf
-	 8hFGyxtPYGE9A==
-Date: Tue, 13 Jan 2026 22:49:43 +0100
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
- linux-kernel@vger.kernel.org, Jani Nikula <jani.nikula@intel.com>, Mauro
- Carvalho Chehab <mchehab@kernel.org>, Shuah Khan
- <skhan@linuxfoundation.org>
-Subject: Re: [PATCH v3 4/4] scripts/kernel-doc: some fixes to kernel-doc
- comments
-Message-ID: <20260113224943.3e8b014c@foz.lan>
-In-Reply-To: <87sec9w7ux.fsf@trenco.lwn.net>
-References: <cover.1768324572.git.mchehab+huawei@kernel.org>
-	<434e60e7868ef4e001e81e8cfa872dec711ddd34.1768324572.git.mchehab+huawei@kernel.org>
-	<87sec9w7ux.fsf@trenco.lwn.net>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.51; x86_64-redhat-linux-gnu)
+	s=arc-20240116; t=1768341535; c=relaxed/simple;
+	bh=xBiv4ywg1u8Bx3Lq3F3bVw76wUqOpNRYrihpD/TVJ6A=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=imtrlO2tWJ2zIeDUYDKSwhb0mmOFmoh7F+rbpWBc5th29fN25UjTvu/90YJOPQJ2lwkHhNIdqOMyEvNmTN1A8ywtQsVo/j1BMeQ5/J6usdU9JAl9ekjJAy7hhQvJE2qyAuKT6CaA/MfBYAY9SnBIXS/yFYIObKrn8gbUt9nYcbc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=TpymwicU; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=bREaPn/N; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1768341532;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Aszg6VHdGxbQOUkAIqtJEqZsCMcdfPcXY7mWtBsu0l0=;
+	b=TpymwicUmpeLQEQ+Ufjtr/NNU/yM/OHVdCUk/qcXL7E5tNzJbR34OWYBIdslo3yfS554uj
+	Di5kShJLW8gR3Cy6esgLzcviJo3fiholPthGc64r2xoWPKVQHufUynWikQMQjIOrSE73tt
+	2jdErVosxLVth3s6lsvUdCZkP8+WtYc=
+Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
+ [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-302-yKsWWAbfP_WjI4iakXjPsA-1; Tue, 13 Jan 2026 16:58:51 -0500
+X-MC-Unique: yKsWWAbfP_WjI4iakXjPsA-1
+X-Mimecast-MFC-AGG-ID: yKsWWAbfP_WjI4iakXjPsA_1768341531
+Received: by mail-yw1-f199.google.com with SMTP id 00721157ae682-78e602d09a7so81843367b3.3
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 13:58:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1768341531; x=1768946331; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Aszg6VHdGxbQOUkAIqtJEqZsCMcdfPcXY7mWtBsu0l0=;
+        b=bREaPn/NlEaDnvAmnoNdO8f1Hszv4gDNlZGsFqLMAGOpJxauHu2qxjz8q+hjGw0tTr
+         XfwO0Bo2rRfjrbM54aq6j1qT2yHs6aSHVwrRvkuqRhf7jWs8QrxZcIXRaQcKnhK399o5
+         +tjntqyTmNfoPFYbJ2T5FrZgktDmOztn2AEHrl0s7yzLRA8ZWrF36SbfWqdHBM94lFcr
+         yB5w7ODA5ZQGVqFdS18icy0LJb4S7/Jt3clTz0JjojIT36T/0OlKycGUCKRMccBMJKln
+         rWjw2ZqbRoiMb693bUWi9TmXgok7n1MLxm5EfwKoXYgJgMUwZQcypk0ejW6J8Njq9IfK
+         q+eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768341531; x=1768946331;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Aszg6VHdGxbQOUkAIqtJEqZsCMcdfPcXY7mWtBsu0l0=;
+        b=l9j5L0VZA9duUm2w1k8jVf0Q5WAxQSYVbDju8fEoIOKPXCyBxlfSbLlnZC+fz2tr4E
+         zrtUFxDp2EjyewRfeKGgccoWmcAn6w7BL+Iy7OFgsHHueCTRxA8AgiBwyJ2kWZmX2RNR
+         4bZfZuRA9V6Gzd7cuvWBcVzeYk+oQPhOeZ38Q2ODoSHIBkxoZZl5j8Q4i30QbiUZ1BFu
+         Rf8Ia03jJP+t7Z8AP4RrTBD1ng5AgJ39w08dD0iuFZV2kZAQeP6691fgS17qhITeveTk
+         v/UeUvjHVFhT7Td5ZZj/xyxNTSou/3UTm2hCFUsCKLacJh2auZmEzMa9vqyg8bNT9ULa
+         f91A==
+X-Forwarded-Encrypted: i=1; AJvYcCX9fCkoUAhb6nO5o5YVv/zGeWmeZBe2EztmYVdcKMqj+eXKLlrQJykHRwmhf4YnA0h9APfLD+n/Y1k=@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz3jycNaVGT56Hicvk6o7jH/5K1ZpuwYkVdmK0oT6mbaLB2etL7
+	hk1mv2devxH/MmghNEw8iFe4mjoJDyM0gDRlabHF13TrjHSlsguASiSLDLsug88BKMh6yDOWhXy
+	/GDzRsDcHvIEbH5HboK7qaq+/Q9OYinEsHYZT17IK2Rh6juFtfhdD0CLbnwquLhwMDixcrRk5Zh
+	So5mGLeBenadMyqa1FHr10OfCURz73Op/dL723
+X-Gm-Gg: AY/fxX4otsjgIn7XlNSjPkyF2NIq67K6oTyDAWem243xQytVCs9ouPWx0lFQ351MkgY
+	ViAd1q6I/Ls92MQEOyuPKwH5Bu7CpLYju6uCmOjx61rDe8N8dhZ1QgMWCq0tpLlrjE30/+VzI+8
+	tEmfwDxbdfae4OG2nYF4IntyhF/xTxqZkBNCZNElhMpZTgsR2nVol7s8higVW/cDBo+9KIZUkwk
+	+BqXEMC
+X-Received: by 2002:a05:690e:4195:b0:63e:17d8:d985 with SMTP id 956f58d0204a3-64901b06d01mr670072d50.53.1768341530672;
+        Tue, 13 Jan 2026 13:58:50 -0800 (PST)
+X-Received: by 2002:a05:690e:4195:b0:63e:17d8:d985 with SMTP id
+ 956f58d0204a3-64901b06d01mr670028d50.53.1768341530229; Tue, 13 Jan 2026
+ 13:58:50 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <20251201174627.23295-1-npache@redhat.com> <e54b6ade-e2a0-4a68-93c4-23af85479567@lucifer.local>
+In-Reply-To: <e54b6ade-e2a0-4a68-93c4-23af85479567@lucifer.local>
+From: Nico Pache <npache@redhat.com>
+Date: Tue, 13 Jan 2026 14:58:24 -0700
+X-Gm-Features: AZwV_Qi-DwUQqcw_55ZPNTuKOVRySMeatqOYhgcJmeNszHAwF1Q0M7_BZf-QJkQ
+Message-ID: <CAA1CXcAP6bX2=g-S-zqPrAQq6kJbQVOvx2cYYrXSCCL4R8UPpQ@mail.gmail.com>
+Subject: Re: [PATCH v13 mm-new 00/16] khugepaged: mTHP support
+To: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+Cc: linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+	linux-mm@kvack.org, linux-doc@vger.kernel.org, david@redhat.com, 
+	ziy@nvidia.com, baolin.wang@linux.alibaba.com, Liam.Howlett@oracle.com, 
+	ryan.roberts@arm.com, dev.jain@arm.com, corbet@lwn.net, rostedt@goodmis.org, 
+	mhiramat@kernel.org, mathieu.desnoyers@efficios.com, 
+	akpm@linux-foundation.org, baohua@kernel.org, willy@infradead.org, 
+	peterx@redhat.com, wangkefeng.wang@huawei.com, usamaarif642@gmail.com, 
+	sunnanyong@huawei.com, vishal.moola@gmail.com, 
+	thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com, kas@kernel.org, 
+	aarcange@redhat.com, raquini@redhat.com, anshuman.khandual@arm.com, 
+	catalin.marinas@arm.com, tiwai@suse.de, will@kernel.org, 
+	dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org, jglisse@google.com, 
+	surenb@google.com, zokeefe@google.com, hannes@cmpxchg.org, 
+	rientjes@google.com, mhocko@suse.com, rdunlap@infradead.org, hughd@google.com, 
+	richard.weiyang@gmail.com, lance.yang@linux.dev, vbabka@suse.cz, 
+	rppt@kernel.org, jannh@google.com, pfalcato@suse.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Em Tue, 13 Jan 2026 13:55:18 -0700
-Jonathan Corbet <corbet@lwn.net> escreveu:
+On Thu, Jan 8, 2026 at 10:20=E2=80=AFAM Lorenzo Stoakes
+<lorenzo.stoakes@oracle.com> wrote:
+>
+> (Sorry for multiple mails replying to same, lei/lore are broken again so =
+my
+> setup isn't working properly).
+>
+> I tried to fixup the conflicts here to run tests locally but there's too =
+many
+> and I messed it up.
+>
+> Could you please resend this series rebased on mm-unstable please?
 
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
->=20
-> > There are some typos and English errors at the kernel-doc.py comments.
+Yes ofc! fixed all the conflicts yesterday, just finalizing my
+testing. Should be out tomorrow or Thursday.
+
+>
+> Thanks, Lorenzo
+>
+> On Mon, Dec 01, 2025 at 10:46:11AM -0700, Nico Pache wrote:
+> > The following series provides khugepaged with the capability to collaps=
+e
+> > anonymous memory regions to mTHPs.
 > >
-> > Locate them with the help of LLM (gpt-oss 14B), locally excecuted
-> > with this prompt:
+> > To achieve this we generalize the khugepaged functions to no longer dep=
+end
+> > on PMD_ORDER. Then during the PMD scan, we use a bitmap to track indivi=
+dual
+> > pages that are occupied (!none/zero). After the PMD scan is done, we us=
+e
+> > the bitmap to find the optimal mTHP sizes for the PMD range. The
+> > restriction on max_ptes_none is removed during the scan, to make sure w=
+e
+> > account for the whole PMD range in the bitmap. When no mTHP size is
+> > enabled, the legacy behavior of khugepaged is maintained.
 > >
-> >     review English grammar andsyntax at the comments on the code
-> >     below:
-> >     <cat scripts/kernel-doc.py>
+> > We currently only support max_ptes_none values of 0 or HPAGE_PMD_NR - 1
+> > (ie 511). If any other value is specified, the kernel will emit a warni=
+ng
+> > and no mTHP collapse will be attempted. If a mTHP collapse is attempted=
+,
+> > but contains swapped out, or shared pages, we don't perform the collaps=
+e.
+> > It is now also possible to collapse to mTHPs without requiring the PMD =
+THP
+> > size to be enabled. These limitiations are to prevent collapse "creep"
+> > behavior. This prevents constantly promoting mTHPs to the next availabl=
+e
+> > size, which would occur because a collapse introduces more non-zero pag=
+es
+> > that would satisfy the promotion condition on subsequent scans.
 > >
-> > Not all results are flowers, although it caught several minor
-> > issues there. Add the pertinent fixes, discarding the bad ones. =20
->=20
-> "flowers"?  Did the LLM put that out too? :)
+> > Patch 1:     Refactor/rename hpage_collapse
+> > Patch 2:     Refactoring to combine madvise_collapse and khugepaged
+> > Patch 3-8:   Generalize khugepaged functions for arbitrary orders and
+> >            introduce some helper functions
+> > Patch 9:     skip collapsing mTHP to smaller orders
+> > Patch 10-11: Add per-order mTHP statistics and tracepoints
+> > Patch 12:    Introduce collapse_allowable_orders
+> > Patch 13-15: Introduce bitmap and mTHP collapse support, fully enabled
+> > Patch 16:    Documentation
+> >
+> > ---------
+> >  Testing
+> > ---------
+> > - Built for x86_64, aarch64, ppc64le, and s390x
+> > - selftests mm
+> > - I created a test script that I used to push khugepaged to its limits
+> >    while monitoring a number of stats and tracepoints. The code is
+> >    available here[1] (Run in legacy mode for these changes and set mthp
+> >    sizes to inherit)
+> >    The summary from my testings was that there was no significant
+> >    regression noticed through this test. In some cases my changes had
+> >    better collapse latencies, and was able to scan more pages in the sa=
+me
+> >    amount of time/work, but for the most part the results were consiste=
+nt.
+> > - redis testing. I tested these changes along with my defer changes
+> >   (see followup [2] post for more details). We've decided to get the mT=
+HP
+> >   changes merged first before attempting the defer series.
+> > - some basic testing on 64k page size.
+> > - lots of general use.
+> >
+> > V13 Changes:
+> > - Lots of minor nits, cleanups, comments, and renames
+> > - Bitmap function simplification and more helpers (Wei, Lorenzo)
+> > - Max_ptes_none (0 or 511) restriction
+> > - commit description expansion
+> > - list all reachable enum values in mthp_collapse()
+> > - Fix ppc64 compile error due to using HPAGE_PMD_ORDER (replace with
+> >   ilog2(MAX_PTRS_PER_PTE))
+> >
+> > V12: https://lore.kernel.org/lkml/20251022183717.70829-1-npache@redhat.=
+com/
+> > V11: https://lore.kernel.org/lkml/20250912032810.197475-1-npache@redhat=
+.com/
+> > V10: https://lore.kernel.org/lkml/20250819134205.622806-1-npache@redhat=
+.com/
+> > V9 : https://lore.kernel.org/lkml/20250714003207.113275-1-npache@redhat=
+.com/
+> > V8 : https://lore.kernel.org/lkml/20250702055742.102808-1-npache@redhat=
+.com/
+> > V7 : https://lore.kernel.org/lkml/20250515032226.128900-1-npache@redhat=
+.com/
+> > V6 : https://lore.kernel.org/lkml/20250515030312.125567-1-npache@redhat=
+.com/
+> > V5 : https://lore.kernel.org/lkml/20250428181218.85925-1-npache@redhat.=
+com/
+> > V4 : https://lore.kernel.org/lkml/20250417000238.74567-1-npache@redhat.=
+com/
+> > V3 : https://lore.kernel.org/lkml/20250414220557.35388-1-npache@redhat.=
+com/
+> > V2 : https://lore.kernel.org/lkml/20250211003028.213461-1-npache@redhat=
+.com/
+> > V1 : https://lore.kernel.org/lkml/20250108233128.14484-1-npache@redhat.=
+com/
+> >
+> > A big thanks to everyone that has reviewed, tested, and participated in
+> > the development process. Its been a great experience working with all o=
+f
+> > you on this endeavour.
+> >
+> > [1] - https://gitlab.com/npache/khugepaged_mthp_test
+> > [2] - https://lore.kernel.org/lkml/20250515033857.132535-1-npache@redha=
+t.com/
+> >
+> > Baolin Wang (1):
+> >   khugepaged: run khugepaged for all orders
+> >
+> > Dev Jain (1):
+> >   khugepaged: generalize alloc_charge_folio()
+> >
+> > Nico Pache (14):
+> >   khugepaged: rename hpage_collapse_* to collapse_*
+> >   introduce collapse_single_pmd to unify khugepaged and madvise_collaps=
+e
+> >   khugepaged: generalize hugepage_vma_revalidate for mTHP support
+> >   khugepaged: introduce is_mthp_order helper
+> >   khugepaged: generalize __collapse_huge_page_* for mTHP support
+> >   khugepaged: introduce collapse_max_ptes_none helper function
+> >   khugepaged: generalize collapse_huge_page for mTHP collapse
+> >   khugepaged: skip collapsing mTHP to smaller orders
+> >   khugepaged: add per-order mTHP collapse failure statistics
+> >   khugepaged: improve tracepoints for mTHP orders
+> >   khugepaged: introduce collapse_allowable_orders helper function
+> >   khugepaged: Introduce mTHP collapse support
+> >   khugepaged: avoid unnecessary mTHP collapse attempts
+> >   Documentation: mm: update the admin guide for mTHP collapse
+> >
+> >  Documentation/admin-guide/mm/transhuge.rst |  80 ++-
+> >  include/linux/huge_mm.h                    |   5 +
+> >  include/trace/events/huge_memory.h         |  34 +-
+> >  mm/huge_memory.c                           |  11 +
+> >  mm/khugepaged.c                            | 696 +++++++++++++++------
+> >  mm/mremap.c                                |   2 +-
+> >  6 files changed, 618 insertions(+), 210 deletions(-)
+> >
+> > --
+> > 2.51.1
+> >
+>
 
-No, you should blame me for the description ;-) I didn't ask LLM
-to write it for me. On past experiments, LLM is not great writing
-texts - specially with open models that run fine with 16GB VRAM.
-I might have asked it to review(*).
-
-I was trying to say that: while LLM worked fine for the task of
-doing an English grammar review for the strings, being able to
-distinguish them from the actual code, it was not is perfect:=20
-some things required manual work to fix.
-
-(*) asking it to review with this prompt:
-
-	"review the test below and produce a version with English spelling fixed:
-	 <patch description>"
-
-Gave:
-
-	"There are some typos and English errors in the comments of kernel=E2=80=
-=91doc.py.
-
-	 Locate them with the help of an LLM (gpt=E2=80=91oss 14B), executed local=
-ly with this prompt:
-=20
-	review English grammar and syntax at the comments on the code below:
-	<cat scripts/kernel-doc.py>
-
-	Not all results are perfect, although the LLM caught several minor issues.
-	Add the relevant fixes, discarding the incorrect ones."
-
-Asking it to explain what changed with:
-
-	"what changes you did? why?"  (**)
-
-using ollama with gpt-oss:latest (14B) gave:
-
-<llm_output>
-Changes I made to the test text
--------------------------------
-
-+---+---------------------+-----------------+--------------------------+
-| # | Original phrase     | Fixed phrase    | Why it was changed       |
-+=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D+
-| 1 | ``excecuted``       | ``executed``    | Misspelling of           |
-|   |                     |                 | *executed*.              |
-+---+---------------------+-----------------+--------------------------+
-| 2 | ``synatx``          | ``syntax``      | Misspelling of *syntax*. |
-+---+---------------------+-----------------+--------------------------+
-| 3 | ``review English    | ``review        | Added a space between    |
-|   | grammar andsyntax`` | English grammar | *grammar* and *syntax*   |
-|   |                     | and syntax``    | and kept the             |
-|   |                     |                 | capitalization           |
-|   |                     |                 | consistent.              |
-+---+---------------------+-----------------+--------------------------+
-| 4 | ``there.``          | ``there.`` (no  | The original had an      |
-|   |                     | change needed)  | extraneous period after  |
-|   |                     |                 | =E2=80=9Cthere=E2=80=9D.     =
-            |
-+---+---------------------+-----------------+--------------------------+
-| 5 | ``Not all results   | *Unchanged*     | The phrase is            |
-|   | are flowers``       | (this is a      | intentional (=E2=80=9Cflowers=
-=E2=80=9D   |
-|   |                     | playful phrase; | as a metaphor).          |
-|   |                     | kept as=E2=80=91is.)    |                      =
-    |
-+---+---------------------+-----------------+--------------------------+
-| 6 | ``although it       | ``although      | No change=E2=80=94just added =
-the |
-|   | caught several minor| it caught       | missing period at the    |
-|   | issues there.``     |  several minor  | end for completeness.    |
-|   |                     | issues there.`` |                          |
-+---+---------------------+-----------------+--------------------------+
-| 7 | ``Add the pertinent | ``Add the       | No spelling/grammar      |
-|   | fixes, discard      | pertinent fixes,| issue; kept for clarity. |
-|   | ing the bad ones.`` | discarding      |                          |
-|   |                     | the bad ones.`` |                          |
-+---+---------------------+-----------------+--------------------------+
-
-Why these changes were made
----------------------------
-
-  - Spelling =E2=80=93 The text contained a handful of typographical errors=
-=20
-    (excecuted, synatx). Fixing them prevents confusion and gives=20
-    the reader confidence in the quality of the documentation. =20
-
-  - Punctuation =E2=80=93 Adding a period after the final sentence makes the
-    paragraph a complete statement. =20
-
-  - Clarity =E2=80=93 Adding a space between grammar and syntax keeps the=20
-    instruction legible. =20
-
-  - Professional tone =E2=80=93 Corrected wording preserves the informal =
-=E2=80=9Cflowers=E2=80=9D
-    metaphor while ensuring that the rest of the instruction reads cleanly.
-</llm_output>
-
-Not a bad review.
-
-Funny enough, on (5) it understood my metaphor, but it ended replacing
-it to "Not all results are perfect", probably to give a "professional
-tone".
-
-(**) Yeah, that prompt is grammatically incorrect: I should have used=20
-     "did you do?" but, as I'm playing with LLM, I like to write prompts
-     with typos and other problems to see how well a 14B or less models
-     would get it right :-D
-
-     Sometimes I even change my language during prompts... it is funny
-     that sometimes it follows my lead and change the language as well,
-     while, on others, it keeps using the initial language... I even got
-     a case were it randomly switched to a completely different language.
-    =20
-> The changes themselves look fine.
-
-Good! want me to send a new version to improve description?
-
-Thanks,
-Mauro
 
