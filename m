@@ -1,226 +1,373 @@
-Return-Path: <linux-doc+bounces-71977-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71979-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34C4AD1842D
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 11:59:00 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id A7159D18518
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 12:05:10 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 78F383087B6B
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 10:54:02 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id A2B6A3003FF3
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 11:05:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C6FF838A729;
-	Tue, 13 Jan 2026 10:53:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 55A5F38E11D;
+	Tue, 13 Jan 2026 11:03:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nN6MMGMs"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC51E3806DD;
-	Tue, 13 Jan 2026 10:53:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6C7238E103
+	for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 11:03:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768301584; cv=none; b=Aac6RN4vgrPMwqsjSdbGYPUiiNkqVJAmL1/L+uaO0tS6mU5pXVUO6IKhk9Q5PPZOC5OGpytiUpf+3+BdSF08QWeKGNkZRrVWZ0Jhrb/7+zmCYqezOQ41Gw0PvMmZtJzXi8bw9PAUcK2cfn0r8IZLcgK/NLFKGZDnCp9TapWz7/M=
+	t=1768302236; cv=none; b=W6/mlsuqpTbdFWszw6bPK6Gzb+1Vd8pJ0yj/27XwEqBpW0ExbxdjUp9bQMSrstMLyQ7Ln27PazWD8Imi7Vs86Jsh3gcR5BjVgarfesGLS/vidXuPUuPKeNsSa53m/GbIRTtQCRZi3/NsPmuMmnnDngDW0rM/XoLhISzMzQ7jams=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768301584; c=relaxed/simple;
-	bh=4ud7s/x//wWO9M9VSXwDrnbrgUVZaWyUIXKR42pioi8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=jnr4s0bzFAg/ZUOHTNrQaokF/0maCukABjfC9ENCBYa6Avq6rCXCBtVLk1Twj+Xu3H7tj6iLVtwXL1IZm5srCxp9ZPDRCU7rgskWEbfRvhJyjbB7153bBRY/XpJMDj8siaTzRlWPLyGAnIDs3Wwlx4DvoGZovTkoMrhMLwYJMWA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6D8BD497;
-	Tue, 13 Jan 2026 02:52:55 -0800 (PST)
-Received: from [10.1.196.46] (e134344.arm.com [10.1.196.46])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E56233F5A1;
-	Tue, 13 Jan 2026 02:52:58 -0800 (PST)
-Message-ID: <75ea1f3d-7589-4946-bffe-406459ee77d2@arm.com>
-Date: Tue, 13 Jan 2026 10:52:57 +0000
+	s=arc-20240116; t=1768302236; c=relaxed/simple;
+	bh=GOvkA9ym2haRJ7rSmdC68mW+NnCwyKF6uappndPGnv8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=SZV+81NPxWKCjgUBp/rjKsCuO0z8/yvwqfhVHcaSfxkxth7hdZL9Ns9wy88SihAL+nCs2bB1mVk61ZRpZL436xtfXFpupq+s+duFYU6FODzRRO86swuAmJ5HwgjTRPutnV5KhcTiGvkjahMKdTNRpb6W+x3G06xkjzCwWLe2vOk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nN6MMGMs; arc=none smtp.client-ip=209.85.208.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-6505d141d02so11870172a12.3
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 03:03:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768302230; x=1768907030; darn=vger.kernel.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=1yKl/Pgo7Raivop2OmRTYwMbcW+Kn23aOzS6HQ4S0N8=;
+        b=nN6MMGMsY4+YnodqJJrV6Jdg8tDEi7C5dMQ7zTn/qpbzoZ5ps2oxcoLvDvLH/p703Q
+         KtniUbvq1O9YuxdfUboJoxIkw6Pwt00M/EPJgkc5yHODKcm56YN0rVeTg4iJi8rGrMRf
+         JZyaN7vCW5HxVjStPU/3CA65at0FydI80IE45PjfBzrhLtauDwRPIRC8o6YPNBcZDbwz
+         r9wuwRK8q3FVjJftt91QI6+Yh+7BLuOs3usGCsKS0/MfmCFHGXbHie4T6TLQZaU4LXnH
+         ukKu5g+LvSt/+OIpy8PNYS8p6GETBzzSU3w7xeMSMrJe48ZQ9Gzd6IMcqhCJNc7ibJzH
+         dKag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768302230; x=1768907030;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1yKl/Pgo7Raivop2OmRTYwMbcW+Kn23aOzS6HQ4S0N8=;
+        b=lK1mk/hnWCS0OcKxGutfj2fIP9gLue3eZ1GJPWXVN6NsyDMhI90d1PRBSXh/OW1iz8
+         bzOR38XG7nk+b5JCru0S9+VrIqbUBIzVmmRrkKf/qaEzQiyGX8yErtctlUVP6QaaBJyO
+         4CQh5/xdH3KDzkwzfJBSF3a5OaA+EhOaSgyvSL+HGx2enxZIAynEDuiTLwI6KXTdNIx9
+         enMP2Oa7cwxfqIqN2D5FuUCVjq34RbeGcExOwwLvb5hVykcE9cJXH29FrjGyolnRVB77
+         7BNaHxSB8nrQOMJAMLlRZowsLabSSv+tx5IGphcN314l78eF+fjd6YA9zNTS/fazuQl6
+         6YXw==
+X-Forwarded-Encrypted: i=1; AJvYcCVMpePCIOH+S51Y/zlgBrSxOuFncKU8LASe0EUIgbqp1WHxTkA/L57gqRWg1Crtnhxw8ZVcZU93voE=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwEZQV/avCL4KwVOgmk+ZRWgq8kmFT1G+x9lV0+sz+7Z0fKrVYD
+	9nvPsE9OUh18LZopfhWZuizbc/AwSZk3nHqRRDwLTi2ExtuSjI5bFURhJES03XjCh3oovjn8PRg
+	Atg9UL87BArAcErrNNJ9Zy+U15wvBF9E=
+X-Gm-Gg: AY/fxX4iFVxDRNVD2AXTb19EMIs77cSk47NKK2h8HtoMNPj4vSeW/qbuUJv/s2APPJ/
+	Mt/FXjXY3c8yYQVJt+mZnq6FfkEeRxjBS+4Sb6sSatFhwiaICIG+5kUVPkMwn9untMRN5UuOgB6
+	TCFMSrxjXyM1pSr4HLPqG6aAR1qgFCULTooSMmoMPNOt6A8w8tiFJihi8PU0JoaZ2f2mnWO1kGZ
+	Oh/ROjmld14wmKt3RKwo2ykVWz9J+TAnB+XNrOiON+QbGHTk8h+zpK7dalF2RWZihUaiT9hlljn
+	GaTrusmf05jLS+tICt2+dcDD4L5fpdhsT2BU2+dS
+X-Google-Smtp-Source: AGHT+IGHaEgIcl6O956q/oR3KprTKLrAIzwQWNnZW6GHFV/gOuiO6RLC6EZuQAaL35CmbUpNO9gUAoXWjlG3/ZomGCY=
+X-Received: by 2002:a05:6402:2110:b0:64d:170:79a3 with SMTP id
+ 4fb4d7f45d1cf-65097e59bfemr21502908a12.20.1768302229797; Tue, 13 Jan 2026
+ 03:03:49 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 28/30] KVM: arm64: selftests: Skip impossible invalid
- value tests
-To: Mark Brown <broonie@kernel.org>, Marc Zyngier <maz@kernel.org>,
- Joey Gouly <joey.gouly@arm.com>, Catalin Marinas <catalin.marinas@arm.com>,
- Suzuki K Poulose <suzuki.poulose@arm.com>, Will Deacon <will@kernel.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <shuah@kernel.org>, Oliver Upton <oupton@kernel.org>
-Cc: Dave Martin <Dave.Martin@arm.com>, Fuad Tabba <tabba@google.com>,
- Mark Rutland <mark.rutland@arm.com>, linux-arm-kernel@lists.infradead.org,
- kvmarm@lists.linux.dev, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
- Peter Maydell <peter.maydell@linaro.org>, Eric Auger <eric.auger@redhat.com>
-References: <20251223-kvm-arm64-sme-v9-0-8be3867cb883@kernel.org>
- <20251223-kvm-arm64-sme-v9-28-8be3867cb883@kernel.org>
-From: Ben Horgan <ben.horgan@arm.com>
-Content-Language: en-US
-In-Reply-To: <20251223-kvm-arm64-sme-v9-28-8be3867cb883@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260108-setlease-6-20-v1-0-ea4dec9b67fa@kernel.org>
+ <m3mywef74xhcakianlrovrnaadnhzhfqjfusulkcnyioforfml@j2xnk7dzkmv4>
+ <8af369636c32b868f83669c49aea708ca3b894ac.camel@kernel.org>
+ <CAOQ4uxgD+Sgbbg9K2U0SF9TyUOBb==Z6auShUWc4FfPaDCQ=rg@mail.gmail.com>
+ <ec78bf021fa1f6243798945943541ba171e337e7.camel@kernel.org>
+ <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com> <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
+ <20260113-mondlicht-raven-82fc4eb70e9d@brauner>
+In-Reply-To: <20260113-mondlicht-raven-82fc4eb70e9d@brauner>
+From: Amir Goldstein <amir73il@gmail.com>
+Date: Tue, 13 Jan 2026 12:03:37 +0100
+X-Gm-Features: AZwV_QgaTvXrJUOdIQ16Jho9rlbp9FwpQ0OxyPEQ1mLXrbEA1iJpt9y0FKtnu9k
+Message-ID: <CAOQ4uxhkaGFtQRzTj2xaf2GJucoAY5CGiyUjB=8YA2zTbOtFvw@mail.gmail.com>
+Subject: Re: [PATCH 00/24] vfs: require filesystems to explicitly opt-in to
+ lease support
+To: Christian Brauner <brauner@kernel.org>
+Cc: Jeff Layton <jlayton@kernel.org>, Chuck Lever <chuck.lever@oracle.com>, Jan Kara <jack@suse.cz>, 
+	Luis de Bethencourt <luisbg@kernel.org>, Salah Triki <salah.triki@gmail.com>, 
+	Nicolas Pitre <nico@fluxnic.net>, Christoph Hellwig <hch@infradead.org>, Anders Larsen <al@alarsen.net>, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, David Sterba <dsterba@suse.com>, Chris Mason <clm@fb.com>, 
+	Gao Xiang <xiang@kernel.org>, Chao Yu <chao@kernel.org>, Yue Hu <zbestahu@gmail.com>, 
+	Jeffle Xu <jefflexu@linux.alibaba.com>, Sandeep Dhavale <dhavale@google.com>, 
+	Hongbo Li <lihongbo22@huawei.com>, Chunhai Guo <guochunhai@vivo.com>, Jan Kara <jack@suse.com>, 
+	"Theodore Ts'o" <tytso@mit.edu>, Andreas Dilger <adilger.kernel@dilger.ca>, 
+	Jaegeuk Kim <jaegeuk@kernel.org>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>, 
+	David Woodhouse <dwmw2@infradead.org>, Richard Weinberger <richard@nod.at>, Dave Kleikamp <shaggy@kernel.org>, 
+	Ryusuke Konishi <konishi.ryusuke@gmail.com>, Viacheslav Dubeyko <slava@dubeyko.com>, 
+	Konstantin Komarov <almaz.alexandrovich@paragon-software.com>, Mark Fasheh <mark@fasheh.com>, 
+	Joel Becker <jlbec@evilplan.org>, Joseph Qi <joseph.qi@linux.alibaba.com>, 
+	Mike Marshall <hubcap@omnibond.com>, Martin Brandenburg <martin@omnibond.com>, 
+	Miklos Szeredi <miklos@szeredi.hu>, Phillip Lougher <phillip@squashfs.org.uk>, 
+	Carlos Maiolino <cem@kernel.org>, Hugh Dickins <hughd@google.com>, 
+	Baolin Wang <baolin.wang@linux.alibaba.com>, Andrew Morton <akpm@linux-foundation.org>, 
+	Namjae Jeon <linkinjeon@kernel.org>, Sungjong Seo <sj1557.seo@samsung.com>, 
+	Yuezhang Mo <yuezhang.mo@sony.com>, Alexander Aring <alex.aring@gmail.com>, 
+	Andreas Gruenbacher <agruenba@redhat.com>, Jonathan Corbet <corbet@lwn.net>, 
+	"Matthew Wilcox (Oracle)" <willy@infradead.org>, Eric Van Hensbergen <ericvh@kernel.org>, 
+	Latchesar Ionkov <lucho@ionkov.net>, Dominique Martinet <asmadeus@codewreck.org>, 
+	Christian Schoenebeck <linux_oss@crudebyte.com>, Xiubo Li <xiubli@redhat.com>, 
+	Ilya Dryomov <idryomov@gmail.com>, Trond Myklebust <trondmy@kernel.org>, 
+	Anna Schumaker <anna@kernel.org>, Steve French <sfrench@samba.org>, Paulo Alcantara <pc@manguebit.org>, 
+	Ronnie Sahlberg <ronniesahlberg@gmail.com>, Shyam Prasad N <sprasad@microsoft.com>, 
+	Tom Talpey <tom@talpey.com>, Bharath SM <bharathsm@microsoft.com>, 
+	Hans de Goede <hansg@kernel.org>, linux-kernel@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, linux-btrfs@vger.kernel.org, 
+	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org, 
+	linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org, 
+	jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org, 
+	ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org, 
+	linux-unionfs@vger.kernel.org, linux-xfs@vger.kernel.org, linux-mm@kvack.org, 
+	gfs2@lists.linux.dev, linux-doc@vger.kernel.org, v9fs@lists.linux.dev, 
+	ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org, 
+	linux-cifs@vger.kernel.org, samba-technical@lists.samba.org
+Content-Type: multipart/mixed; boundary="0000000000004374d1064842f2b9"
 
-Hi Mark,
+--0000000000004374d1064842f2b9
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 12/23/25 01:21, Mark Brown wrote:
-> The set_id_regs test currently assumes that there will always be invalid
-> values available in bitfields for it to generate but this may not be the
-> case if the architecture has defined meanings for every possible value for
-> the bitfield. An assert added in commit bf09ee918053e ("KVM: arm64:
-> selftests: Remove ARM64_FEATURE_FIELD_BITS and its last user") refuses to
-> run for single bit fields which will show the issue most readily but there
-> is no reason wider ones can't show the same issue.
-> 
-> Rework the tests for invalid value to check if an invalid value can be
-> generated and skip the test if not, removing the assert.
-> 
-> Signed-off-by: Mark Brown <broonie@kernel.org>
-> ---
->  tools/testing/selftests/kvm/arm64/set_id_regs.c | 58 ++++++++++++++++++++-----
->  1 file changed, 46 insertions(+), 12 deletions(-)
-> 
-> diff --git a/tools/testing/selftests/kvm/arm64/set_id_regs.c b/tools/testing/selftests/kvm/arm64/set_id_regs.c
-> index 322cd13b9352..641194c5005a 100644
-> --- a/tools/testing/selftests/kvm/arm64/set_id_regs.c
-> +++ b/tools/testing/selftests/kvm/arm64/set_id_regs.c
-> @@ -318,11 +318,12 @@ uint64_t get_safe_value(const struct reg_ftr_bits *ftr_bits, uint64_t ftr)
->  }
->  
->  /* Return an invalid value to a given ftr_bits an ftr value */
-> -uint64_t get_invalid_value(const struct reg_ftr_bits *ftr_bits, uint64_t ftr)
-> +uint64_t get_invalid_value(const struct reg_ftr_bits *ftr_bits, uint64_t ftr,
-> +			   bool *skip)
->  {
->  	uint64_t ftr_max = ftr_bits->mask >> ftr_bits->shift;
->  
-> -	TEST_ASSERT(ftr_max > 1, "This test doesn't support single bit features");
-> +	*skip = false;
->  
->  	if (ftr_bits->sign == FTR_UNSIGNED) {
->  		switch (ftr_bits->type) {
-> @@ -330,42 +331,72 @@ uint64_t get_invalid_value(const struct reg_ftr_bits *ftr_bits, uint64_t ftr)
->  			ftr = max((uint64_t)ftr_bits->safe_val + 1, ftr + 1);
+On Tue, Jan 13, 2026 at 9:54=E2=80=AFAM Christian Brauner <brauner@kernel.o=
+rg> wrote:
+>
+> On Mon, Jan 12, 2026 at 09:50:20AM -0500, Jeff Layton wrote:
+> > On Mon, 2026-01-12 at 09:31 -0500, Chuck Lever wrote:
+> > > On 1/12/26 8:34 AM, Jeff Layton wrote:
+> > > > On Fri, 2026-01-09 at 19:52 +0100, Amir Goldstein wrote:
+> > > > > On Thu, Jan 8, 2026 at 7:57=E2=80=AFPM Jeff Layton <jlayton@kerne=
+l.org> wrote:
+> > > > > >
+> > > > > > On Thu, 2026-01-08 at 18:40 +0100, Jan Kara wrote:
+> > > > > > > On Thu 08-01-26 12:12:55, Jeff Layton wrote:
+> > > > > > > > Yesterday, I sent patches to fix how directory delegation s=
+upport is
+> > > > > > > > handled on filesystems where the should be disabled [1]. Th=
+at set is
+> > > > > > > > appropriate for v6.19. For v7.0, I want to make lease suppo=
+rt be more
+> > > > > > > > opt-in, rather than opt-out:
+> > > > > > > >
+> > > > > > > > For historical reasons, when ->setlease() file_operation is=
+ set to NULL,
+> > > > > > > > the default is to use the kernel-internal lease implementat=
+ion. This
+> > > > > > > > means that if you want to disable them, you need to explici=
+tly set the
+> > > > > > > > ->setlease() file_operation to simple_nosetlease() or the e=
+quivalent.
+> > > > > > > >
+> > > > > > > > This has caused a number of problems over the years as some=
+ filesystems
+> > > > > > > > have inadvertantly allowed leases to be acquired simply by =
+having left
+> > > > > > > > it set to NULL. It would be better if filesystems had to op=
+t-in to lease
+> > > > > > > > support, particularly with the advent of directory delegati=
+ons.
+> > > > > > > >
+> > > > > > > > This series has sets the ->setlease() operation in a pile o=
+f existing
+> > > > > > > > local filesystems to generic_setlease() and then changes
+> > > > > > > > kernel_setlease() to return -EINVAL when the setlease() ope=
+ration is not
+> > > > > > > > set.
+> > > > > > > >
+> > > > > > > > With this change, new filesystems will need to explicitly s=
+et the
+> > > > > > > > ->setlease() operations in order to provide lease and deleg=
+ation
+> > > > > > > > support.
+> > > > > > > >
+> > > > > > > > I mainly focused on filesystems that are NFS exportable, si=
+nce NFS and
+> > > > > > > > SMB are the main users of file leases, and they tend to end=
+ up exporting
+> > > > > > > > the same filesystem types. Let me know if I've missed any.
+> > > > > > >
+> > > > > > > So, what about kernfs and fuse? They seem to be exportable an=
+d don't have
+> > > > > > > .setlease set...
+> > > > > > >
+> > > > > >
+> > > > > > Yes, FUSE needs this too. I'll add a patch for that.
+> > > > > >
+> > > > > > As far as kernfs goes: AIUI, that's basically what sysfs and re=
+sctrl
+> > > > > > are built on. Do we really expect people to set leases there?
+> > > > > >
+> > > > > > I guess it's technically a regression since you could set them =
+on those
+> > > > > > sorts of files earlier, but people don't usually export kernfs =
+based
+> > > > > > filesystems via NFS or SMB, and that seems like something that =
+could be
+> > > > > > used to make mischief.
+> > > > > >
+> > > > > > AFAICT, kernfs_export_ops is mostly to support open_by_handle_a=
+t(). See
+> > > > > > commit aa8188253474 ("kernfs: add exportfs operations").
+> > > > > >
+> > > > > > One idea: we could add a wrapper around generic_setlease() for
+> > > > > > filesystems like this that will do a WARN_ONCE() and then call
+> > > > > > generic_setlease(). That would keep leases working on them but =
+we might
+> > > > > > get some reports that would tell us who's setting leases on the=
+se files
+> > > > > > and why.
+> > > > >
+> > > > > IMO, you are being too cautious, but whatever.
+> > > > >
+> > > > > It is not accurate that kernfs filesystems are NFS exportable in =
+general.
+> > > > > Only cgroupfs has KERNFS_ROOT_SUPPORT_EXPORTOP.
+> > > > >
+> > > > > If any application is using leases on cgroup files, it must be so=
+me
+> > > > > very advanced runtime (i.e. systemd), so we should know about the
+> > > > > regression sooner rather than later.
+> > > > >
+> > > >
+> > > > I think so too. For now, I think I'll not bother with the WARN_ONCE=
+().
+> > > > Let's just leave kernfs out of the set until someone presents a rea=
+l
+> > > > use-case.
+> > > >
+> > > > > There are also the recently added nsfs and pidfs export_operation=
+s.
+> > > > >
+> > > > > I have a recollection about wanting to be explicit about not allo=
+wing
+> > > > > those to be exportable to NFS (nsfs specifically), but I can't se=
+e where
+> > > > > and if that restriction was done.
+> > > > >
+> > > > > Christian? Do you remember?
+> > > > >
+> > > >
+> > > > (cc'ing Chuck)
+> > > >
+> > > > FWIW, you can currently export and mount /sys/fs/cgroup via NFS. Th=
+e
+> > > > directory doesn't show up when you try to get to it via NFSv4, but =
+you
+> > > > can mount it using v3 and READDIR works. The files are all empty wh=
+en
+> > > > you try to read them. I didn't try to do any writes.
+> > > >
+> > > > Should we add a mechanism to prevent exporting these sorts of
+> > > > filesystems?
+> > > >
+> > > > Even better would be to make nfsd exporting explicitly opt-in. What=
+ if
+> > > > we were to add a EXPORT_OP_NFSD flag that explicitly allows filesys=
+tems
+> > > > to opt-in to NFS exporting, and check for that in __fh_verify()? We=
+'d
+> > > > have to add it to a bunch of existing filesystems, but that's fairl=
+y
+> > > > simple to do with an LLM.
+> > >
+> > > What's the active harm in exporting /sys/fs/cgroup ? It has to be don=
+e
+> > > explicitly via /etc/exports, so this is under the NFS server admin's
+> > > control. Is it an attack surface?
+> > >
+> >
+> > Potentially?
+> >
+> > I don't see any active harm with exporting cgroupfs. It doesn't work
+> > right via nfsd, but it's not crashing the box or anything.
+> >
+> > At one time, those were only defined by filesystems that wanted to
+> > allow NFS export. Now we've grown them on filesystems that just want to
+> > provide filehandles for open_by_handle_at() and the like. nfsd doesn't
+> > care though: if the fs has export operations, it'll happily use them.
+> >
+> > Having an explicit "I want to allow nfsd" flag see ms like it might
+> > save us some headaches in the future when other filesystems add export
+> > ops for this sort of filehandle use.
+>
+> So we are re-hashing a discussion we had a few months ago (Amir was
+> involved at least).
+>
+> I don't think we want to expose cgroupfs via NFS that's super weird.
+> It's like remote partial resource management and it would be very
+> strange if a remote process suddenly would be able to move things around
+> in the cgroup tree. So I would prefer to not do this.
+>
+> So my preference would be to really sever file handles from the export
+> mechanism so that we can allow stuff like pidfs and nsfs and cgroupfs to
+> use file handles via name_to_handle_at() and open_by_handle_at() without
+> making them exportable.
+>
+> Somehow I thought that Amir had already done that work a while ago but
+> maybe it was really just about name_to_handle_at() and not also
+> open_by_handle_at()...
 
-Don't you want the check you've got in the signed case here to deal with
-safe_val or ftr being equal to ftr_max. In the 1 bit case we there won't
-be any invalid values if the safe_val and ftr are different.
+I don't recall doing anything except talking ;)
 
->  			break;
->  		case FTR_LOWER_SAFE:
-> +			if (ftr == ftr_max)
-> +				*skip = true;
->  			ftr++;
->  			break;
->  		case FTR_HIGHER_SAFE:
-> +			if (ftr == 0)
-> +				*skip = true;
->  			ftr--;
->  			break;
->  		case FTR_HIGHER_OR_ZERO_SAFE:
-> -			if (ftr == 0)
-> +			switch (ftr) {
-> +			case 0:
->  				ftr = ftr_max;
-> -			else
-> +				break;
-> +			case 1:
-> +				*skip = true;
-> +				break;
-> +			default:
->  				ftr--;
-> -			break;
-> +				break;
-> +			}
+How about something like this to safeguard against exporting
+the new pidfs/nsfs.
 
-Missing break for the outer switch statement.
-
->  		default:
-> +			*skip = true;
->  			break;
->  		}
->  	} else if (ftr != ftr_max) {
->  		switch (ftr_bits->type) {
->  		case FTR_EXACT:
->  			ftr = max((uint64_t)ftr_bits->safe_val + 1, ftr + 1);
-> +			if (ftr > ftr_max)
-> +				*skip = true;
->  			break;
->  		case FTR_LOWER_SAFE:
-> -			ftr++;
-> +			if (ftr == ftr_max)
-> +				*skip = true;
-
-This is the opposite condition of the enclosing else if.
-
-> +			else
-> +				ftr++;
->  			break;
->  		case FTR_HIGHER_SAFE:
-> -			ftr--;
-> -			break;
-> -		case FTR_HIGHER_OR_ZERO_SAFE:
->  			if (ftr == 0)
-> -				ftr = ftr_max - 1;
-> +				*skip = true;
-
-Isn't ftr_max, -1, invalid in FTR_HIGHER_SAFE case when ftr is 0. Also,
-need to check for the actual highest.
-
->  			else
->  				ftr--;
->  			break;
-> +		case FTR_HIGHER_OR_ZERO_SAFE:
-> +			switch (ftr) {
-> +			case 0:
-> +				if (ftr_max > 1)
-> +					ftr = ftr_max - 1;
-> +				else
-> +					*skip = true;
-> +				break;
-> +			case 1:
-> +				*skip = true;
-> +				break;
-> +			default:
-> +				ftr--;
-> +				break;
-> +			break;
-> +			}
->  		default:
-> +			*skip = true;
->  			break;
->  		}
->  	} else {
-> -		ftr = 0;
-> +		*skip = true;
-
-Why do we always skip when signed and ftr is -1? Wouldn't 0 be an
-invalid in the FTR_LOWER_SAFE case.
-
->  	}
->  
->  	return ftr;
-> @@ -400,12 +431,15 @@ static void test_reg_set_fail(struct kvm_vcpu *vcpu, uint64_t reg,
->  	uint8_t shift = ftr_bits->shift;
->  	uint64_t mask = ftr_bits->mask;
->  	uint64_t val, old_val, ftr;
-> +	bool skip;
->  	int r;
->  
->  	val = vcpu_get_reg(vcpu, reg);
->  	ftr = (val & mask) >> shift;
->  
-> -	ftr = get_invalid_value(ftr_bits, ftr);
-> +	ftr = get_invalid_value(ftr_bits, ftr, &skip);
-> +	if (skip)
-> +		return;
->  
->  	old_val = val;
->  	ftr <<= shift;
-> 
-
+Regarding cgroupfs, we could either use a EXPORT_OP_ flag
+or maybe it should have a custom open/permission as well?
 
 Thanks,
+Amir.
 
-Ben
+--0000000000004374d1064842f2b9
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-nfsd-do-not-allow-exporting-of-special-kernel-filesy.patch"
+Content-Disposition: attachment; 
+	filename="0001-nfsd-do-not-allow-exporting-of-special-kernel-filesy.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_mkchdddy0>
+X-Attachment-Id: f_mkchdddy0
 
+RnJvbSBiYTRjYjhlZTBiYzIwYWZhNzRiZDY4OWVjY2FmMTFiOGQ2MDYyMTNhIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbWlyIEdvbGRzdGVpbiA8YW1pcjczaWxAZ21haWwuY29tPgpE
+YXRlOiBUdWUsIDEzIEphbiAyMDI2IDExOjQzOjU1ICswMTAwClN1YmplY3Q6IFtSRkNdW1BBVENI
+XSBuZnNkOiBkbyBub3QgYWxsb3cgZXhwb3J0aW5nIG9mIHNwZWNpYWwga2VybmVsIGZpbGVzeXN0
+ZW1zCgpwaWRmcyBhbmQgbnNmcyByZWNlbnRseSBnYWluZWQgc3VwcG9ydCBmb3IgZW5jb2RlL2Rl
+Y29kZSBvZiBmaWxlIGhhbmRsZXMKdmlhIG5hbWVfdG9faGFuZGxlX2F0KDIpL29wYW5fYnlfaGFu
+ZGxlX2F0KDIpLgoKVGhlc2Ugc3BlY2lhbCBrZXJuZWwgZmlsZXN5c3RlbXMgaGF2ZSBjdXN0b20g
+LT5vcGVuKCkgYW5kIC0+cGVybWlzc2lvbigpCmV4cG9ydCBtZXRob2RzLCB3aGljaCBuZnNkIGRv
+ZXMgbm90IHJlc3BlY3QgYW5kIGl0IHdhcyBuZXZlciBtZWFudCB0byBiZQp1c2VkIGZvciBleHBv
+cnRpbmcgdGhvc2UgZmlsZXN5c3RlbXMgYnkgbmZzZC4KClRoZXJlZm9yZSwgZG8gbm90IGFsbG93
+IG5mc2QgdG8gZXhwb3J0IGZpbGVzeXN0ZW1zIHdpdGggY3VzdG9tIC0+b3BlbigpCm9yIC0+cGVy
+bWlzc2lvbigpIG1ldGhvZHMuCgpGaXhlczogYjNjYWJhOGY3YTM0YSAoInBpZGZzOiBpbXBsZW1l
+bnQgZmlsZSBoYW5kbGUgc3VwcG9ydCIpCkZpeGVzOiA1MjIyNDcwYjJmYmIzICgibnNmczogc3Vw
+cG9ydCBmaWxlIGhhbmRsZXMiKQpTaWduZWQtb2ZmLWJ5OiBBbWlyIEdvbGRzdGVpbiA8YW1pcjcz
+aWxAZ21haWwuY29tPgotLS0KIGZzL25mc2QvZXhwb3J0LmMgICAgICAgICB8IDUgKysrLS0KIGlu
+Y2x1ZGUvbGludXgvZXhwb3J0ZnMuaCB8IDkgKysrKysrKysrCiAyIGZpbGVzIGNoYW5nZWQsIDEy
+IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvbmZzZC9leHBv
+cnQuYyBiL2ZzL25mc2QvZXhwb3J0LmMKaW5kZXggMmExNDk5ZjJhZDE5Ni4uOTJhYzhjYjBiZGVj
+ZCAxMDA2NDQKLS0tIGEvZnMvbmZzZC9leHBvcnQuYworKysgYi9mcy9uZnNkL2V4cG9ydC5jCkBA
+IC00MzcsOCArNDM3LDkgQEAgc3RhdGljIGludCBjaGVja19leHBvcnQoY29uc3Qgc3RydWN0IHBh
+dGggKnBhdGgsIGludCAqZmxhZ3MsIHVuc2lnbmVkIGNoYXIgKnV1aWQKIAkJcmV0dXJuIC1FSU5W
+QUw7CiAJfQogCi0JaWYgKCFleHBvcnRmc19jYW5fZGVjb2RlX2ZoKGlub2RlLT5pX3NiLT5zX2V4
+cG9ydF9vcCkpIHsKLQkJZHByaW50aygiZXhwX2V4cG9ydDogZXhwb3J0IG9mIGludmFsaWQgZnMg
+dHlwZS5cbiIpOworCWlmICghZXhwb3J0ZnNfbWF5X25mc19leHBvcnQoaW5vZGUtPmlfc2ItPnNf
+ZXhwb3J0X29wKSkgeworCQlkcHJpbnRrKCJleHBfZXhwb3J0OiBleHBvcnQgb2YgaW52YWxpZCBm
+cyB0eXBlICglcykuXG4iLAorCQkJaW5vZGUtPmlfc2ItPnNfdHlwZS0+bmFtZSk7CiAJCXJldHVy
+biAtRUlOVkFMOwogCX0KIApkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9leHBvcnRmcy5oIGIv
+aW5jbHVkZS9saW51eC9leHBvcnRmcy5oCmluZGV4IGYwY2YyNzE0ZWM1MmQuLjNlYzc4MDgwMmMx
+NGUgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgvZXhwb3J0ZnMuaAorKysgYi9pbmNsdWRlL2xp
+bnV4L2V4cG9ydGZzLmgKQEAgLTMxNyw2ICszMTcsMTUgQEAgc3RhdGljIGlubGluZSBib29sIGV4
+cG9ydGZzX2Nhbl9kZWNvZGVfZmgoY29uc3Qgc3RydWN0IGV4cG9ydF9vcGVyYXRpb25zICpub3Ap
+CiAJcmV0dXJuIG5vcCAmJiBub3AtPmZoX3RvX2RlbnRyeTsKIH0KIAorc3RhdGljIGlubGluZSBi
+b29sIGV4cG9ydGZzX21heV9uZnNfZXhwb3J0KGNvbnN0IHN0cnVjdCBleHBvcnRfb3BlcmF0aW9u
+cyAqbm9wKQoreworCS8qCisJICogRG8gbm90IGFsbG93IGV4cG9ydGluZyB0byBORlMgZmlsZXN5
+c3RlbXMgd2l0aCBjdXN0b20gLT5vcGVuKCkgYW5kCisJICogLT5wZXJtaXNzaW9uKCkgb3BzLCB3
+aGljaCBuZnNkIGRvZXMgbm90IHJlc3BlY3QgKGUuZy4gcGlkZnMsIG5zZnMpLgorCSAqLworCXJl
+dHVybiBleHBvcnRmc19jYW5fZGVjb2RlX2ZoKG5vcCkgJiYgIW5vcC0+b3BlbiAmJiAhbm9wLT5w
+ZXJtaXNzaW9uOworfQorCiBzdGF0aWMgaW5saW5lIGJvb2wgZXhwb3J0ZnNfY2FuX2VuY29kZV9m
+aChjb25zdCBzdHJ1Y3QgZXhwb3J0X29wZXJhdGlvbnMgKm5vcCwKIAkJCQkJICBpbnQgZmhfZmxh
+Z3MpCiB7Ci0tIAoyLjUyLjAKCg==
+--0000000000004374d1064842f2b9--
 
