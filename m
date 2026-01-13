@@ -1,203 +1,145 @@
-Return-Path: <linux-doc+bounces-71978-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-71980-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD9EED18596
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 12:09:22 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F860D185BA
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 12:11:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 6F7243037655
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 11:03:50 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 3346C3005005
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 11:11:16 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6883438F241;
-	Tue, 13 Jan 2026 11:00:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7C4EF36C5BA;
+	Tue, 13 Jan 2026 11:11:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="QX2ufmJc";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="CJho0nAO";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="d0e0qvtG";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="SED9F9Mj"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="r/a7y2WD"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF2B03816EE
-	for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 11:00:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768302058; cv=none; b=TRHqewuk4Jm6elkKur1VTW/lY3/4yCkgnhjnaIxwgBaTaVgyb9gAbcanwO4CpAkRaGJbtrpc/dj0jCI84XjFxQr1xA61LUGX2GlLbkGSpXa4EIoGVdeEpaIiSeCuYAQJgwq/yUx5JMfGsSdTK5FSQ3yMFpUsFsU/3DADbrtNhPM=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768302058; c=relaxed/simple;
-	bh=WiwQjWugRhk7kpSn8K7lpjlBaN+MQGbiBQVWkN1twpY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uw7ApeNRiWIRl3UVonNU33c6Y2cOi5MxipCZ5nBT1Cc9LzSKnMDQBFi4YoqXx2cPeKtz5dCGdgsz810oQHhKxGTgPo/8CCXyOlIzve3aIMUxdrByHU9wUSKvyaMxVyFMfEfQKpa+oS88rEcd+34bWUDrcvqupXJOc1MT/tDwo0Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=QX2ufmJc; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=CJho0nAO; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=d0e0qvtG; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=SED9F9Mj; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id E126833684;
-	Tue, 13 Jan 2026 11:00:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768302055;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ggc2Jp4TAzGqHUNJ156vzhpLuR5CExJb4jyEdujNCbY=;
-	b=QX2ufmJcuybsJXHDO8NaPQnTPjI015GW+WlHx6h6f5jkwmFQ77MTnVMU8V+LhUs233snqh
-	9d3fyQW8cefdKkSIPLrIPxThOx7f5m1IqYEHiFe3j1pcl7gnV1rHNS3jYbDAf2AF6hPIdd
-	UfZijxbqFLoA+ycIDNHlpZjFKhSulUc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768302055;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ggc2Jp4TAzGqHUNJ156vzhpLuR5CExJb4jyEdujNCbY=;
-	b=CJho0nAOLVVWSfGNUaTIZbcVkC8/ro4+g6XUAnk/3qflQwholFd7WTpCVy7c10ddg/9KHH
-	63KyWjYSNM07l7DQ==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=d0e0qvtG;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=SED9F9Mj
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1768302054;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ggc2Jp4TAzGqHUNJ156vzhpLuR5CExJb4jyEdujNCbY=;
-	b=d0e0qvtGSQ0+vKp+tt2pX0swPxuWWfMsJpV5BtK5Hcv4fb4LzaTpKLKmPr4sW7d5gYfZWa
-	RMYoQch+ym/uHYGKnJqcRz8y9mpLN4MItTAQS+s8xpNZSyAaAxa2lRt5JlaPTVJt2hlCwz
-	zbAZBRwyi4YsHhRqukUbzgk82tx/nNg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1768302054;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Ggc2Jp4TAzGqHUNJ156vzhpLuR5CExJb4jyEdujNCbY=;
-	b=SED9F9MjGCccpMvoS4co+C9ZjblBSbNKRJDudZXUoNunT7WXrysztVcMFUpnkW8uMhuYCU
-	JKpjhYRiLoioOSBA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A92F83EA63;
-	Tue, 13 Jan 2026 11:00:54 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id iQqgKOYlZml0ewAAD6G6ig
-	(envelope-from <pvorel@suse.cz>); Tue, 13 Jan 2026 11:00:54 +0000
-Date: Tue, 13 Jan 2026 12:00:53 +0100
-From: Petr Vorel <pvorel@suse.cz>
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org, Michael Kerrisk <mtk@man7.org>,
-	Alejandro Colomar <alx@kernel.org>, man-pages@man7.org
-Subject: Re: [PATCH v2 2/3] Documentation: Remove :manpage: from non-existing
- man pages
-Message-ID: <20260113110053.GA306468@pevik>
-Reply-To: Petr Vorel <pvorel@suse.cz>
-References: <20260111233534.183272-1-pvorel@suse.cz>
- <20260111233534.183272-3-pvorel@suse.cz>
- <877btm2388.fsf@trenco.lwn.net>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF5723803C7
+	for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 11:11:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.52
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768302673; cv=pass; b=DD5VRHXs1+bawTW9GU76Eqj+z4rL3yE3wsdsY8Ccyt6/FHApCT3f1dQxRAWbvN/LoTArFORsBcfb6zi4D7TZ/o65WOjmaCNxknk5e84yEDebR3/O4Jc38EtW2tHcTq0eSdCoQuZMbXgOL6apzffSI/SyA9UDCbwGY4oN7tz4QXE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768302673; c=relaxed/simple;
+	bh=ewyYSu4U4rDrQ6g5eP349UtA4V/L3pb9prshEHmDFQA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=HszU3xLWrtdt9P4VsPoVDNKfEFWKR1Tpxf+PqcuXxeRV35XzN2a+TTjzFUEJWsmjTFUFQjktwSQdw1O2+nXkz3caIjAWd3MetHF2IemmakLp2e0TneuvjT92UULOZdd2NC+F8gma25iTzqiUWk/R7Cs4qA/kFCMoFT+XM9canv8=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=r/a7y2WD; arc=pass smtp.client-ip=209.85.208.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-64baa44df99so8091a12.0
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 03:11:11 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768302670; cv=none;
+        d=google.com; s=arc-20240605;
+        b=dH3bxBbf+OzjdFgNetVs7bHQ0n0zSiK0XVIgfPM6mGqiwkEqLzMOyFy9gQKfJLS4tR
+         BwpFtkcDTsTlsYbfIiAXA2vRI8UbJQGTzaDZL6OnDks/InA7K4M1B9tWZYpTcuEQT91S
+         94NEexl8zuPwk4gtn3Hun/ViBsZ268SVvDiRwVHFiwXeg5Z43KxF9XFRCxrnYRTkiW19
+         vu5VMjyQMms5SHLY8k4DaWEE5YFTvaiBPc8bHXVat4bxEmXnPLwZnQ8M6YFSmVUcm2+z
+         FpyymeK14IV9+U6Btd01A2ApKPMDfxaiYW4mq/YlQy7zT+inlQZ/YA/rMUz2Nz9rT/VE
+         SL2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=KDqRWolsacePh3UOFidtjakTxzNfCPsnv6damvWujAo=;
+        fh=mgws61OpaewN0Fvvt+Ndka9CCejy6Nl8M3iBN/0J53o=;
+        b=HAB/8CxgjAHlKqKSig4DuoJeWuQ15tN2MWAMu/dftSIQKuiUpTJ1TTIrC0bPjhw9LS
+         H1BJWK21xpTyHSnKWXXJWa2uk5kbLDIJXgvLFaXzZWSLNwhXrMjCGT/H0mWcq/9Nwkpw
+         9LrpLzGQvE0EJ8VSq5uNC0QO88OVUd2NGVdDENlEJdkz4O8S1jG+BBfqjHmhTob+V9Lc
+         NdRimrGo31eAmQ9VkGD9QMpSaIl9RBZ1BZRvz6kPhcSLcQ7/h9GsoKKl7B/ZaFoRkSO8
+         cRJ9HYtnpW9Knro9Pb6nRYtyHi7l5BxfuJY+6Rc/ONHgndN7TQzlUlwNbKofRPSunA9m
+         aqBg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1768302670; x=1768907470; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KDqRWolsacePh3UOFidtjakTxzNfCPsnv6damvWujAo=;
+        b=r/a7y2WDAO+oF55D+S3QKY05ijRaJbIT5oOIwI59GfasqXfGQXDyAQF78TMtzF6dO0
+         SPR1HMepDIkXcSMvPWeDxtfr+Mrnu3QAPskTsRiAOsP8RIb3H3ZwqomaIU7pSraMU6BI
+         YOXG3kPmvvw9V+UyH/JVSl5nBj96lQSlxgkQDhPBh+XYt1pl/npth/CP0mvd346mCmW2
+         KTBu3+otejTvshGMagsxqgYkloxZ9w5vRRii4ijemo+lSd7UFEy8AIAsD0IQqPlhiaJg
+         OsKaqDFM1BtA/9L01/VrxofkjEB86C+GpCrmpMzzaT4vliWFwgoXGDsQB9fO+fRqalMe
+         VpEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768302670; x=1768907470;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=KDqRWolsacePh3UOFidtjakTxzNfCPsnv6damvWujAo=;
+        b=ZjPLq+Eh6u8R/a8GpwfKQ32lbOtNrNU6aeeMPbWubyW7cnNX6e/ATE8+eVqQlkxqkk
+         UyEIhJSTVWjHa09W6XcrW0YinWIxTi6dbMozkZ6dxPVdSbSr3tBIWB7PIGjAOnUHGHU8
+         G6oXmO6S6qGqyA3axLFhS5A8IRIcvacri64qZ21LXAhmyfmAUPigv1dinGUQxgAqrRFT
+         VdDEdVDwUwHayZljU62SEpBi0hsOWebXeeHEHNr9oijBJnBhrg+VrzNFPtZ63l2krZyV
+         Xd+zbOxhHPn9b+mUVHAb8Kvw0eQP9mW9bb12nJq4/t15kYZxY5hYanyKlUsCJV+2XOsN
+         WZiw==
+X-Forwarded-Encrypted: i=1; AJvYcCUSg13FZnzwtHHTcPKZ+yEZ+kr4B6tHSkkrP5wHQkF0qfAls0z+R81OfDVikv7ZRgRbEt03s1CqoMs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxviaopZA+kIIj9cXKlhpZDWoh/jDCKs1ewD3PHWPLMn77qQ2VT
+	3DMI7BNn0/PqArkij01PTzCrbunCh0wxdOf2HiDNkj7fbeJDD8KmhXBwW/ML+/yf2BUp9v7mTzk
+	VKYF1jHlk884rihcyXVaR69E42kxgESbD0fvlmk16
+X-Gm-Gg: AY/fxX4uKJOcuGbghtlHLdUWyikKsIkx5q669+dbw5vYa77FNXPddEJbVp82KSx3W4c
+	n+9QNbXmevCPFz7Cu7K9fV2cmjS7au4qcfEG5FKf4qGnWtAIfsyp2C7bKkaKS+Q5ZvYa6fxV8Vm
+	93S4+RQ/Fh5kbcwJ7Bf8FtCbXFmb7aOLtTNArd8SnORmbcI+9LzIQ812LVnc8+al56uhO3l15dV
+	7KJA/WiXcWMgbIT49h/L0hKb1rAMZNIUBTG8gLvsZTWPXS4eIiD2w1CWRQHS2zdrMpdjPXlDVpY
+	S+bWIZFsZUMf4C7KnvYWHtKEHA==
+X-Received: by 2002:aa7:cf05:0:b0:64b:53a1:7b09 with SMTP id
+ 4fb4d7f45d1cf-652f503ee6bmr32524a12.14.1768302669759; Tue, 13 Jan 2026
+ 03:11:09 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <877btm2388.fsf@trenco.lwn.net>
-X-Spamd-Result: default: False [-3.71 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_RHS_NOT_FQDN(0.50)[];
-	HAS_REPLYTO(0.30)[pvorel@suse.cz];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	TO_DN_SOME(0.00)[];
-	FUZZY_RATELIMITED(0.00)[rspamd.com];
-	ARC_NA(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	MIME_TRACE(0.00)[0:+];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	DKIM_TRACE(0.00)[suse.cz:+];
-	MISSING_XM_UA(0.00)[];
-	REPLYTO_EQ_FROM(0.00)[]
-X-Spam-Flag: NO
-X-Spam-Score: -3.71
-X-Rspamd-Queue-Id: E126833684
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spam-Level: 
+References: <20260109171805.901995-1-smostafa@google.com> <hf3gfmaq673tvz6lc7mgip3m4y4o62b3nyqlofas252qr5776y@6oekozsrwea3>
+In-Reply-To: <hf3gfmaq673tvz6lc7mgip3m4y4o62b3nyqlofas252qr5776y@6oekozsrwea3>
+From: Mostafa Saleh <smostafa@google.com>
+Date: Tue, 13 Jan 2026 11:10:56 +0000
+X-Gm-Features: AZwV_QgEqIamUf-ZRcxgt46xlqga3cO4Nf6E12yZEj_ySpaNDevCFdZsj-pUJ20
+Message-ID: <CAFgf54opD5qveK7njnCgkWeNYWSwiPHTxPBL2ouQYFEAL_kYKQ@mail.gmail.com>
+Subject: Re: [PATCH v6 0/4] iommu: Add page_ext for IOMMU_DEBUG_PAGEALLOC
+To: =?UTF-8?B?SsO2cmcgUsO2ZGVs?= <joro@8bytes.org>
+Cc: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, corbet@lwn.net, will@kernel.org, 
+	robin.murphy@arm.com, akpm@linux-foundation.org, vbabka@suse.cz, 
+	surenb@google.com, mhocko@suse.com, jackmanb@google.com, hannes@cmpxchg.org, 
+	ziy@nvidia.com, david@redhat.com, lorenzo.stoakes@oracle.com, 
+	Liam.Howlett@oracle.com, rppt@kernel.org, xiaqinxin@huawei.com, 
+	baolu.lu@linux.intel.com, rdunlap@infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Petr Vorel <pvorel@suse.cz> writes:
+On Sat, Jan 10, 2026 at 9:53=E2=80=AFAM J=C3=B6rg R=C3=B6del <joro@8bytes.o=
+rg> wrote:
+>
+> On Fri, Jan 09, 2026 at 05:18:01PM +0000, Mostafa Saleh wrote:
+> > Mostafa Saleh (4):
+> >   iommu: Add page_ext for IOMMU_DEBUG_PAGEALLOC
+> >   iommu: Add calls for IOMMU_DEBUG_PAGEALLOC
+> >   iommu: debug-pagealloc: Track IOMMU pages
+> >   iommu: debug-pagealloc: Check mapped/unmapped kernel memory
+> >
+> >  .../admin-guide/kernel-parameters.txt         |   9 +
+> >  drivers/iommu/Kconfig                         |  19 ++
+> >  drivers/iommu/Makefile                        |   1 +
+> >  drivers/iommu/iommu-debug-pagealloc.c         | 167 ++++++++++++++++++
+> >  drivers/iommu/iommu-priv.h                    |  58 ++++++
+> >  drivers/iommu/iommu.c                         |  11 +-
+> >  include/linux/iommu-debug-pagealloc.h         |  32 ++++
+> >  include/linux/mm.h                            |   5 +
+> >  mm/page_ext.c                                 |   4 +
+> >  9 files changed, 304 insertions(+), 2 deletions(-)
+> >  create mode 100644 drivers/iommu/iommu-debug-pagealloc.c
+> >  create mode 100644 include/linux/iommu-debug-pagealloc.h
+>
+> Applied, thanks.
 
-> > Removing :manpage: from non-existing man pages (xyzzy(2), xyzzyat(2),
-> > fxyzzy(3) in adding-syscalls.rst, including translations) prevent
-> > adding link to nonexisting man pages when using manpages_url in next
-> > commit.
+Thanks a lot! Based on the discussion on patch 3, I might need to
+respin a new version.
 
-> > Signed-off-by: Petr Vorel <pvorel@suse.cz>
-> > ---
-> > New in v2.
-
-> >  Documentation/process/adding-syscalls.rst          | 14 +++++++-------
-> >  .../translations/it_IT/process/adding-syscalls.rst | 14 +++++++-------
-> >  .../translations/sp_SP/process/adding-syscalls.rst | 14 +++++++-------
-> >  3 files changed, 21 insertions(+), 21 deletions(-)
-
-> > diff --git a/Documentation/process/adding-syscalls.rst b/Documentation/process/adding-syscalls.rst
-> > index fc0b0bbcd34df..1f61d0b114120 100644
-> > --- a/Documentation/process/adding-syscalls.rst
-> > +++ b/Documentation/process/adding-syscalls.rst
-> > @@ -111,7 +111,7 @@ should use a file descriptor as the handle for that object -- don't invent a
-> >  new type of userspace object handle when the kernel already has mechanisms and
-> >  well-defined semantics for using file descriptors.
-
-> > -If your new :manpage:`xyzzy(2)` system call does return a new file descriptor,
-> > +If your new `xyzzy(2)` system call does return a new file descriptor,
-
-> Here, once again, you're retaining the backticks.  If we need to mark up
-> those references at all, they should be ``literal``.
-
-I'm sorry to keep the same mistake. BTW I did not notice because both real man
-pages a) without manpages_url:
-
-<em class="manpage">read(2)</em>
-
-b) with manpages_url:
-
-<em class="manpage">
-<a class="manpage reference external" href="https://man7.org/linux/man-pages/man8/auditctl.8.html">auditctl(8)</a>
-</em>
-
-don't have specified CSS. And because my browser default has font-style: italic
-for <em>, I don't see any difference for :manpage:`read(2)` and `read(2)`.
-
-BTW I'll add in v3 CSS font-family: ..., monospace for manpages.
-
-> (If you simply remove the backticks, you might run into conflict with
-> automarkup, though I *think* that the section number will evade its
-> regexp).
-
-In my local build plain fxyzzy(3) without backticks works. I slightly prefer to
-not use double ``.
-
-Kind regards,
-Petr
-
-> Thanks,
-
-> jon
+Thanks,
+Mostafa
 
