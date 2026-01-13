@@ -1,160 +1,150 @@
-Return-Path: <linux-doc+bounces-72077-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72079-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 896D4D1B800
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 22:58:40 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 02541D1B82D
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 23:01:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id A3A3730057D7
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 21:58:37 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 7A2723012A9C
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 22:01:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 312F83502B9;
-	Tue, 13 Jan 2026 21:58:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 91E4C3033C1;
+	Tue, 13 Jan 2026 22:01:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jEq/PnhO"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="A3Agh0L/";
+	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="jt0dwKrH"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DA78274B37;
-	Tue, 13 Jan 2026 21:58:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 332C42ED164
+	for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 22:01:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768341514; cv=none; b=IbGMLIojIM1p0mjtb8uT9jLvljBrKcip7+la1/JcTJD6wbMcI3OP4kaq7ibNVYqxLmViXZcjiHAy7Xs3CyIH1gmag1OMGCfXAMQsvyp+Wepm0GkzkNBWLR3+p/8eYb74PJeKDFRRDJrLWwr0UnpGo7QHhRvWGuaHcdNS+n3NxMM=
+	t=1768341683; cv=none; b=JzFvq09QRKQ8/LlwdaqZfTT3XPdwUmzBwexfR+xPK0nxvtuu5qSeC/6H6pIrk03N4Yp6a7AK2ag5lAPOSS25DhG0w0ZZmUGQX5Gm5dm+pH4hZ/oAddbkeIxP3MVgJCjsTmySDZ0NPH0Vau17YkTd1mYN7XkDeVlPIMlORjP/lPU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768341514; c=relaxed/simple;
-	bh=EhNf0DB6H+D52wFq+xxqhoJVJAJcADLsXCmy5OCFbdw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=g/lT3Fdxk7YjHc1+sokuYjd+OmWeJHdPOcl2Q/CsDDMuFhuncoXgjJxl1D2BdbvYHXEqBzIf/KmJjm1UH1pAFue7+6E29fhrtoUD+r4KpN1O1SNGSi5W6uP4LK+j47+YpzNyIuUz7naAZXEgdXvmUHw7eV/3FJ46mRJOZBzceWs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jEq/PnhO; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14A54C116C6;
-	Tue, 13 Jan 2026 21:58:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768341513;
-	bh=EhNf0DB6H+D52wFq+xxqhoJVJAJcADLsXCmy5OCFbdw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=jEq/PnhOQk0cKOidyojdOU1SLO7t36aR8NukvcVkV68EGokKYxD16lcntgpqeFSz6
-	 AlLyq4UIu8v3DzsEEJttS79EYC1naCAkxjkb7//Hx2SdRUAspIm0rLGF9M45Bwjw0Q
-	 CHePUK89t44fXhB6Krm9yIAP5muucGeZqK2cgsDXKURI8PPEpHxozFa0sbhSjHDy0f
-	 LFXhsOrjZrZFeTMWlFwQOPu5WHPKVdAWGa4KcfJde4wYc7dk6tj6sBcy9sWIOc84uf
-	 G7QtKgFEiTV9Zc11cMTwds6lU8VUYY1ssMShI71jmHrzUqRXpAgFflW5+ggKKIcGYj
-	 pXpCF7cFMGVjw==
-Message-ID: <cfe29b78-93c1-423f-930d-10e4fcda6987@kernel.org>
-Date: Tue, 13 Jan 2026 15:58:30 -0600
+	s=arc-20240116; t=1768341683; c=relaxed/simple;
+	bh=LFZYRedxA/dOfRqaPpVPaG9kpYZqtR6uMO2q1QSkh70=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=IDlvgJLKWLz5MOVtZ/oEDBzF27wibFyn1Ea5w+lqovmLIkwb8d7g4BkUw+fjml7wIJExhX5rrHOudRZGk3+4HA9VywU9DjuL5ENoWb9UeYp6vgbxo6SPXY2+qH6Gccsc0g5c89ucIza3QZMgLNdKT95sZPvwN0Sj4rO6rMAiAvE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=A3Agh0L/; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=jt0dwKrH; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1768341681;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LFZYRedxA/dOfRqaPpVPaG9kpYZqtR6uMO2q1QSkh70=;
+	b=A3Agh0L//2UhUMAMGWmRAiQ6Spe4S+KKcxNmG73VoGddK+ayVoNiT6wzPQq4fCS+AzUbQB
+	Ran9TSUhKmIXWxr8s1OtpW+ZPTfe55kkg1q1uBSqgBRXyK69kC8ET6lczGTO2gJAAo0kY6
+	M0w+T931Dr89cujqvGP5cZb1dBN+sK8=
+Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com
+ [74.125.224.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-443-x-5-9twNN2GtTh-QfJu1Kg-1; Tue, 13 Jan 2026 17:01:20 -0500
+X-MC-Unique: x-5-9twNN2GtTh-QfJu1Kg-1
+X-Mimecast-MFC-AGG-ID: x-5-9twNN2GtTh-QfJu1Kg_1768341680
+Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-647119b06a3so11142844d50.2
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 14:01:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=redhat.com; s=google; t=1768341680; x=1768946480; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LFZYRedxA/dOfRqaPpVPaG9kpYZqtR6uMO2q1QSkh70=;
+        b=jt0dwKrH2snhzYWLvwH75MksqHQbDV0wUGUi1FuF04vyWMFas/oPD7KuU99/usCi1t
+         KxI3yVqh+wp0/RKoQIUP8cWG0BNawaUSzio72tEkMAo1swd0NaFeZQeTJY3VBiBzqT8R
+         omQ1N/ZW4rEZAsjaBGg8f71gDQbfZz+rBLKlHQrqXaiIQZDES9gGYu0MAScWiZhHHcMS
+         XhGPEzFMUax8Gz9nm0Kg+Ym4WaOHEa7Hfw25e5EqiutJ/R5JEdeI2CQs2ucwlNTEtXde
+         vOo8PnZk3zyaUdgXgu4FvfzonBeIM4ItseEHMVuQdgPC3F6VQXRGPl+5+90CxHbC48b2
+         0sWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768341680; x=1768946480;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=LFZYRedxA/dOfRqaPpVPaG9kpYZqtR6uMO2q1QSkh70=;
+        b=Zfzb/oX3T7NJ60DVE9q45KHr+/zzQ6sS+TyIACSNVz8cUfQBI/dC9Nlw0ve+6Kz2PT
+         t0T6R/IaA+PO3Sauz04Tv2AX+RdbZPnm2btJdTWdK1lrx7xaP2DxqFb2lU0/S3Rl1Vnn
+         Q5h+oV2Ihk7M6BwSu2YWNPBvQl12VGQzUNITQy7ey8q2uoWYY++sGVEfxyvooVpFwU2U
+         ozdjGH2ORrxqAlKRF2s9QENJJFsjSI4c/pk3P7mO1LgSHX1dxU36T5SGxrTL8tIIrIEk
+         exWpzt1S9Dem/sl+QK3tCOZmazKHIhpfUIZh3JbeB98SX8hE54bzKGlMSlLoVYGTgElJ
+         pYbA==
+X-Forwarded-Encrypted: i=1; AJvYcCUcG1RpgRhyJ3xs7CZohfCi8eCQaPSKtp07qoWLH0ugpQz6cWq5jGShvxfxOEgLOQwCxLzjGbKLXNk=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzNAnzRBZqCZNF4f8woglJUncPrWAYVDEvA2gJFpX5zkvhU0+KA
+	wDfEmq23pQTIfNF/jQMbdusLjrt8vI24qwPH0aHMXk0eoMv3mQxC4tCVwJj7gPjfSjpv2dsmeUa
+	N9rjKJWBO7Vxi5tuUyNdx1EZp9r1TiLG0p04nyXaxUKTmPnFARBirW69GhsGpy3iBANxIbyixqW
+	wvtepvClMx3DoCXesiw4ry0SAcSfj1zEhVL5iC
+X-Gm-Gg: AY/fxX79uZarEUPx+jkMb/Tb2LFV5xMoY/wWCR3b40Jxh6HsVXTUS3assp9aUGZ3W0s
+	2HJttpWlXeZn5YKe9XXI06nHMpzF3qxmMJ5ksd8CuiSr8EheV5xtFc52jmhR8n3gH8YmYXGPaZN
+	pNaKvcBcypSD+vupRP1nuTBN31qLDx6XSyhUnv9WJC9rHsQ0gciJmBOd0rs7dxT/EEFv8WX3hHd
+	0otuF3k
+X-Received: by 2002:a53:e21b:0:b0:63f:55de:63cc with SMTP id 956f58d0204a3-64903b0533dmr47275d50.31.1768341679498;
+        Tue, 13 Jan 2026 14:01:19 -0800 (PST)
+X-Received: by 2002:a53:e21b:0:b0:63f:55de:63cc with SMTP id
+ 956f58d0204a3-64903b0533dmr47240d50.31.1768341679129; Tue, 13 Jan 2026
+ 14:01:19 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] ACPI: Documentation: driver-api: Disapprove of using
- ACPI drivers
-To: "Rafael J. Wysocki" <rafael@kernel.org>
-Cc: Linux ACPI <linux-acpi@vger.kernel.org>,
- LKML <linux-kernel@vger.kernel.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bjorn Helgaas <helgaas@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Hans de Goede <hansg@kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Zhang Rui <rui.zhang@intel.com>, Armin Wolf <w_armin@gmx.de>,
- Danilo Krummrich <dakr@kernel.org>,
- Ilpo Jarvinen <ilpo.jarvinen@linux.intel.com>,
- Randy Dunlap <rdunlap@infradead.org>
-References: <2396510.ElGaqSPkdT@rafael.j.wysocki>
- <65c7a296-7dc7-4368-9b2d-6fadd0dbf9c6@kernel.org>
- <CAJZ5v0ihuu_9G7N5UkHAGwRq=BN1spkXmdOuUTxRFwn3acdfbw@mail.gmail.com>
-Content-Language: en-US
-From: "Mario Limonciello (AMD) (kernel.org)" <superm1@kernel.org>
-In-Reply-To: <CAJZ5v0ihuu_9G7N5UkHAGwRq=BN1spkXmdOuUTxRFwn3acdfbw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20251201174627.23295-1-npache@redhat.com> <e54b6ade-e2a0-4a68-93c4-23af85479567@lucifer.local>
+ <4cfb49a2-f0fc-4796-83a6-91db3a0f2a97@kernel.org>
+In-Reply-To: <4cfb49a2-f0fc-4796-83a6-91db3a0f2a97@kernel.org>
+From: Nico Pache <npache@redhat.com>
+Date: Tue, 13 Jan 2026 15:00:52 -0700
+X-Gm-Features: AZwV_QhqB272ApR0iCFfYvM28UwTr7qE89tJbFmOhDFMYK8UOvjuB2zu6RzyXUE
+Message-ID: <CAA1CXcCP6yrYNAWjo2vsXC959Yi7GPq11uWB-eEv-Qvv+zmw7A@mail.gmail.com>
+Subject: Re: [PATCH v13 mm-new 00/16] khugepaged: mTHP support
+To: "David Hildenbrand (Red Hat)" <david@kernel.org>
+Cc: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, linux-kernel@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, linux-mm@kvack.org, 
+	linux-doc@vger.kernel.org, ziy@nvidia.com, baolin.wang@linux.alibaba.com, 
+	Liam.Howlett@oracle.com, ryan.roberts@arm.com, dev.jain@arm.com, 
+	corbet@lwn.net, rostedt@goodmis.org, mhiramat@kernel.org, 
+	mathieu.desnoyers@efficios.com, akpm@linux-foundation.org, baohua@kernel.org, 
+	willy@infradead.org, peterx@redhat.com, wangkefeng.wang@huawei.com, 
+	usamaarif642@gmail.com, sunnanyong@huawei.com, vishal.moola@gmail.com, 
+	thomas.hellstrom@linux.intel.com, yang@os.amperecomputing.com, kas@kernel.org, 
+	aarcange@redhat.com, raquini@redhat.com, anshuman.khandual@arm.com, 
+	catalin.marinas@arm.com, tiwai@suse.de, will@kernel.org, 
+	dave.hansen@linux.intel.com, jack@suse.cz, cl@gentwo.org, jglisse@google.com, 
+	surenb@google.com, zokeefe@google.com, hannes@cmpxchg.org, 
+	rientjes@google.com, mhocko@suse.com, rdunlap@infradead.org, hughd@google.com, 
+	richard.weiyang@gmail.com, lance.yang@linux.dev, vbabka@suse.cz, 
+	rppt@kernel.org, jannh@google.com, pfalcato@suse.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Jan 9, 2026 at 6:57=E2=80=AFAM David Hildenbrand (Red Hat)
+<david@kernel.org> wrote:
+>
+> On 1/8/26 18:19, Lorenzo Stoakes wrote:
+> > (Sorry for multiple mails replying to same, lei/lore are broken again s=
+o my
+> > setup isn't working properly).
+> >
+> > I tried to fixup the conflicts here to run tests locally but there's to=
+o many
+> > and I messed it up.
+> >
+> > Could you please resend this series rebased on mm-unstable please?
+>
+>
+> And maybe send out the two cleanups that can be applied earlier separatel=
+y?
 
+Yeah I can do that. I'll just add a `dependent line` when I post the v14.
 
-On 1/7/2026 6:22 AM, Rafael J. Wysocki wrote:
-> On Tue, Jan 6, 2026 at 4:47 PM Mario Limonciello (AMD) (kernel.org)
-> <superm1@kernel.org> wrote:
->>
->>
->>
->> On 1/6/2026 6:27 AM, Rafael J. Wysocki wrote:
->>> From: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
->>>
->>> Sadly, there is quite a bit of technical debt related to the
->>> kernel's ACPI support subsystem and one of the most significant
->>> pieces of it is the existence and use of ACPI drivers represented
->>> by struct acpi_driver objects.
->>>
->>> Those drivers are bound directly to struct acpi_device objects, also
->>> referred to as "ACPI device nodes", representing device objects in the
->>> ACPI namespace defined as:
->>>
->>>    A hierarchical tree structure in OS-controlled memory that contains
->>>    named objects. These objects may be data objects, control method
->>>    objects, bus/device package objects, and so on.
->>>
->>> according to the ACPI specification [1].
->>>
->>> The above definition implies, although rather indirectly, that the
->>> objects in question don't really represent hardware.  They are just
->>> "device package objects" containing some information on the devices
->>> present in the given platform that is known to the platform firmware.
->>>
->>> Although the platform firmware can be the only source of information on
->>> some devices, the information provided by it alone may be insufficient
->>> for device enumeration in general.  If that is the case, binding a
->>> driver directly to a given ACPI device node clearly doesn't make sense.
->>> If the device in question is enumerated through a hardware interface, it
->>> will be represented by a device object matching that interface, like
->>> a struct pci_dev, and the ACPI device node corresponding to it will be
->>> treated as its "ACPI companions" whose role is to amend the "native"
->>> enumeratiom mechanism.
->>>
->>> For the sake of consistency and confusion avoidance, it is better to
->>> treat ACPI device nodes in general as ACPI companions of other device
->>> objects representing hardware.  In some cases though it appeared easier
->>> to take a shortcut and use an ACPI driver binding directly to an ACPI
->>> device node.  Moreover, there were corner cases in which that was the
->>> only choice, but they all have been addressed now.
->>>
->>> In all cases in which an ACPI driver might be used, the ACPI device
->>> node it might bind to is an ACPI companion of another device object
->>> representing a piece of hardware.  It is thus better to use a driver
->>> binding to the latter than to use an ACPI driver and leave the other
->>> device object alone, not just because doing so is more consistent and
->>> less confusing, but also because using ACPI drivers may lead to
->>> potential functional deficiencies, like possible ordering issues
->>> related to power management.
->>>
->>> Unfortunately, there are quite a few ACPI drivers in use and, as a rule,
->>> they bind to ACPI device nodes that are ACPI companions of platform
->>> devices, so in fact they play the role of platform drivers although in
->>> a kind of convoluted way.  An effort has been under way to replace them
->>> with platform drivers, which is relatively straightforward in the vast
->>> majority of cases, but it has not been pursued very aggressively so far,
->>> mostly due to the existence of the corner cases mentioned above.
->>
->> This is the same as Danilo's comment; but could you leave a few examples
->> of conversions that have been done successfully?  Commit hashes that can
->> demonstrate what it actually takes to convert an acpi driver to a
->> platform driver and might make it easier for people to reference when
->> this comes up.
-> 
-> The purpose of this posting and the new document is to grow awareness
-> rather than to tell people how to convert drivers.
-> 
-> I'll start posting driver conversion patches at one point and the
-> motivation for all of them is basically the same, so I thought it
-> would be better to document it in on place and then refer to it
-> instead of repeating the same information every time a conversion
-> patch is posted.
-
-Thanks for explaining.  Makes sense to me.  If you didn't already commit 
-feel free to add my tag (no need to spin it if you already did).
-
-Reviewed-by: Mario Limonciello (AMD) <superm1@kernel.org>
+>
+> --
+> Cheers
+>
+> David
+>
 
 
