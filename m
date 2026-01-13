@@ -1,172 +1,109 @@
-Return-Path: <linux-doc+bounces-72042-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72044-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3723ED1A150
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 17:07:45 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EA58D1A1C3
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 17:11:31 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id DF1513002517
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 16:07:41 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id CE2493010E70
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Jan 2026 16:11:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8B42C30B525;
-	Tue, 13 Jan 2026 16:07:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 130013815D0;
+	Tue, 13 Jan 2026 16:11:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="Cjf3p+/n"
+	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="LE51GYz2"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [80.237.130.52])
+Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF24B182B7;
-	Tue, 13 Jan 2026 16:07:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.237.130.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ACCF2C236B;
+	Tue, 13 Jan 2026 16:11:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768320458; cv=none; b=UcUPoLA6MOTzKuAH9LFgwzu2ZbherbzgGxQIk5pxAlu7z5cnfeahZ6HHRnu+ZBku18PGxqOgSnwl39lxi3eUT/Mh9mAibez05rgF2JBeawF2+AduLKTY2yvRWSZ10ukhjXlRPFcvGigf1NdyzUTnt6DJbRNu0spkXgSnzmvD+pk=
+	t=1768320675; cv=none; b=YHgqAjpN+OFpYa2ml5Hq0C4ddJarGej7fy9+cu4Fq0yEn067b/yMoJvdkDbS7IWGaj7EdJmkvhEd3YITD2U+zwQWDOBnKJd9HZcNEN/MGb5a8qvQh06wIrA3nA7G5sa4rMw1S3lDAAaL5N9Nv82f9ghX0XkJ4qijILU6cw/+Avg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768320458; c=relaxed/simple;
-	bh=zg0ft9cqjmRzYW+X3fu1ewNm7MEFWIpOC9I7fuZGvp8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=r0qCxhuFtCWw1hxwaAwPIQgcfxNl7C64IzkrDlyoPoCfzYFC2e40BFTbz/nRfLsRvcMB9jW12DmsiPkz1oWZF+qv00Eiu02EE5pOawYYE6SgfcTXK2fs4zgk1RzHLc3jtkqEJ48iCh4oshR7HUp5ib9pSOqPHhqvyNnlNbHhCwY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=Cjf3p+/n; arc=none smtp.client-ip=80.237.130.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=leemhuis.info; s=he214686; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:From:
-	Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
-	Content-Transfer-Encoding:Content-ID:Content-Description:In-Reply-To:
-	References; bh=r06C6AWdFEQD76hIS2J6dGSm+E9B95HsJIQN08cNVHQ=; t=1768320456;
-	x=1768752456; b=Cjf3p+/nJYfWguPUBDrkiD47zd9roRA+eA7Un1DxWtW8JKdAyCh9oWM48pxu4
-	yMtVEbxt9sgcqY0l9HxX2pARTAnIwDTkhIo8SBc0cD348iWuHvsmz+qSWnd9CwXOV3pm7XcJtN1oj
-	S0cPehwkcDyxmpkvstDSbau/XgYR3fVhU7RxCiqEshom11zK5VbUV6m4lheY2L4zUr4n2zmYMwOMU
-	DtLzM1iexONuB26h1ENWuVCU/U8rx70sRL0Lb4yE0hUGkxCtCikOrz2sX3m9o4z9fVuWISL9HXUMW
-	DUl5J5QpW8r9DQGWXGY0pnfexVpXWGzilwrdnhjfz02SlkVAlg==;
-Received: from [2a02:8108:8984:1d00:a0cf:1912:4be:477f]; authenticated
-	by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128)
-	id 1vfgve-00959d-1C;
-	Tue, 13 Jan 2026 17:07:34 +0100
-Message-ID: <ae9a3fec-4872-4cb7-9e9f-dbeafb4daab7@leemhuis.info>
-Date: Tue, 13 Jan 2026 17:07:33 +0100
+	s=arc-20240116; t=1768320675; c=relaxed/simple;
+	bh=3WCmnmF9kWNfqsWhsoDfNg8qyj9qzP7SnFC6UiFAAoc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=C9vUWQcydY1tZIYf1pm8u1u5JoDbjonp4JoYpcnNLhf35R1hhdvg3XSkBnz4nul8moMFP3A3nNBehHbI1WBkOfTSAEa38AL6qkulVlB9+lrRPIiKL6K9pep6e957xdwNciqlRx/QFtFcErTbL9EIVGQJoxKCrcxa4Sz7UHy/9zs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=LE51GYz2; arc=none smtp.client-ip=65.109.113.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id EA9DE40E0252;
+	Tue, 13 Jan 2026 16:11:10 +0000 (UTC)
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
+	header.d=alien8.de
+Received: from mail.alien8.de ([127.0.0.1])
+	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id AbHLtSQcmX6m; Tue, 13 Jan 2026 16:11:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1768320667; bh=5I3NLHg1N9Vs+cPMd8JSUsoS7ZWc7H5v0Q1JxudllUs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=LE51GYz2J63/fCbecbhBrahwlb81dFvqJo+oSmOn8mSbptMaxioZMZIMFT3co5wDx
+	 ayxOF2VQ5sJ8HuWl+MqO2a1G3MdRP9FYCt3TV2ZOiJikw2OGdsejm6dmn3PqNA8pkH
+	 aXkZnqct8tfltUfuRnsjqFgvr5HCBPohZgLKMcMM8gDEwDF7T4QrPZhd/p2+jEGknb
+	 rV05XBA6YFolWKK1Fnudl4+NoxmzqsHSoRxRfZHQkgwh9i0X6YZpyCWAyMMimwIQoh
+	 SgRXAOsiHjACMqzYErUTQFqhp90ypliDEAHRhHK/faYw/MgB8THXmorqisH/SNojbB
+	 iI+dZrIfLIc5dpr+G5IvMFP9DhuI+QxIJ/F54JMbh5kCu+1HujRJiIMQZ9fr8EeTob
+	 pcFi1XPBYBH7zk/AZrXpCZHEj3yuysYIurRb9HRVvJdVLy2ZuYSIrxBEnsB7o2x/kw
+	 bIgkd6zkH995aYdTGJi6YNypkZo6VJ+EIt5tgq6D94x1SiIB6WAonz1Hpybi9oGnX5
+	 hmGnhzPyFpQqJiOrEo/cOwg0N+ZlEvc+pkn+854pfOd5oKCDHgab3/Rw0Z2uM5ygwZ
+	 EnTjXqRdj48U+PcG3RX7OqXL4RlIJCOwX+Zp4qB4l8YJVve5WSjith03XQXTONB2Pu
+	 1YVS/peFA8MjXiFge1mITYNE=
+Received: from zn.tnic (pd953023b.dip0.t-ipconnect.de [217.83.2.59])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
+	(No client certificate requested)
+	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with UTF8SMTPSA id 592E140E0028;
+	Tue, 13 Jan 2026 16:10:48 +0000 (UTC)
+Date: Tue, 13 Jan 2026 17:10:47 +0100
+From: Borislav Petkov <bp@alien8.de>
+To: Maciej Wieczor-Retman <m.wieczorretman@pm.me>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+	Alexander Potapenko <glider@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Dmitry Vyukov <dvyukov@google.com>,
+	Vincenzo Frascino <vincenzo.frascino@arm.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Maciej Wieczor-Retman <maciej.wieczor-retman@intel.com>,
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+	kasan-dev@googlegroups.com
+Subject: Re: [PATCH v8 14/14] x86/kasan: Make software tag-based kasan
+ available
+Message-ID: <20260113161047.GNaWZuh21aoxqtTNXS@fat_crate.local>
+References: <cover.1768233085.git.m.wieczorretman@pm.me>
+ <5b46822936bf9bf7e5cf5d1b57f936345c45a140.1768233085.git.m.wieczorretman@pm.me>
+ <20260113114539.GIaWYwY9q4QuC-J66e@fat_crate.local>
+ <aWZlpjwMXgdtZGMQ@wieczorr-mobl1.localdomain>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 05/30] docs: reporting-issues: outline why reporting is
- complicated
-To: Jonathan Corbet <corbet@lwn.net>
-Cc: workflows@vger.kernel.org, linux-doc@vger.kernel.org,
- regressions@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <cover.1761481839.git.linux@leemhuis.info>
- <a6704ef5b3a8dcbaf645ddb5407e8f13553502b0.1761481839.git.linux@leemhuis.info>
- <87ecqonsse.fsf@trenco.lwn.net>
-From: Thorsten Leemhuis <linux@leemhuis.info>
-Content-Language: de-DE, en-US
-Autocrypt: addr=linux@leemhuis.info; keydata=
- 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 MEK4
-In-Reply-To: <87ecqonsse.fsf@trenco.lwn.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1768320456;27a130ca;
-X-HE-SMSGID: 1vfgve-00959d-1C
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <aWZlpjwMXgdtZGMQ@wieczorr-mobl1.localdomain>
 
-On 10/27/25 18:44, Jonathan Corbet wrote:
-> Thorsten Leemhuis <linux@leemhuis.info> writes:
-> 
->> Replace the closing words with a section that describes why reporting
->> Linux kernel bugs is more complicated than in other FLOSS projects.
->>
->> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
->> ---
->>  .../admin-guide/reporting-issues.rst          | 67 ++++++++++++++++---
->>  1 file changed, 59 insertions(+), 8 deletions(-)
-> 
-> So the text is OK but ... this is now the second section that is
-> essentially a long apology for the kernel process being so difficult.
-> It seems redundant with the other text, and I'm not convinced we need
-> it.
-> 
-> Again, length is an impediment to getting people to actually read this
-> stuff; we should be trying to be as concise as we can.  Do we really
-> need this?
+On Tue, Jan 13, 2026 at 04:00:47PM +0000, Maciej Wieczor-Retman wrote:
+> The two added lines are two alternative ranges based on which mode is chosen
+> during compile time. Is there some neater way to note this down here?
 
-I thought about this for a while, but in the end I this section and the
-one from 4/30 are worth it. Let me explain my line of thought:
+Explain it with words. Perhaps put a footnote or so. Say that those are
+alternative ranges so that it is perfectly clear to readers.
 
-* Yes, they make the document a longer, but it's in an appendix, which
-makes it relatively obvious that these are optional background details
-you don't have to read.
+Thx.
 
-* You in your reply to 3/30 asked to "Consider also soliciting patches
-to improve it" -- something I in the context had found obvious and not
-worth mentioning, as I thought, "everybody that knows how to send
-patches will do so without us mentioning it here". But for these two
-sections it's different: is stuff that is obvious for us, but not
-obvious for many non-developers (at least from what I see when
-processing bugs/regressions reports= and relevant for them. That's
-because the kernel IMHO is not "an open-source program like any other",
-as you mentioned in a reply to 4/30:
+-- 
+Regards/Gruss,
+    Boris.
 
-- Other FLOSS software is relatively independent, but the kernel is
-mostly drivers -- so without the right hardware, there sometimes is
-nothing that developers can do in case of bugs. We also normally don't
-remove orphaned code due to the "no regressions" rule, unless it's
-getting really old and/or in the way, so there is nothing anybody will
-do about a bug report -- which is unusual. The stuff in 4/30 explains
-such aspects.
-
-- The kernel development model is different in some important aspects,
-which can be even confusing for people familiar with FLOSS practices.
-Like the "mainline developers might not care about bugs in
-stable/longterm kernels, while the stable team will leave things to the
-mainline developers if the problem happens there, too". This is rare and
-IMHO needs to be explained somewhere, as then we can point people to
-this explanation that otherwise will just feel pushed around and become
-annoyed by the kernel (some obviously will nevertheless feel that, but
-that way we can get at least some people to understand things and/or on
-our side).
-
-Ciao, Thorsten
+https://people.kernel.org/tglx/notes-about-netiquette
 
