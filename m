@@ -1,122 +1,136 @@
-Return-Path: <linux-doc+bounces-72180-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72184-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2BFBD1EA7F
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 13:09:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AA19D1EECB
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 13:57:43 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5961E30402EC
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 12:09:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 3765C3030931
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 12:57:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 62C2C396B70;
-	Wed, 14 Jan 2026 12:09:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9BCD439900D;
+	Wed, 14 Jan 2026 12:57:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ccZ62Qnt"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aLnNx2Xz"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD064343D8F;
-	Wed, 14 Jan 2026 12:09:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7227A3803E9;
+	Wed, 14 Jan 2026 12:57:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768392548; cv=none; b=nQRUd2M9jmOOpolDi2XvEvsGZjru72G21UILHrxbVidL7tbmK5JCm/zroy3pzP02rCvKTajcqLomoVxVEU7iCJ0BbNaM/N3RhxkVZ8c/V5ukRJxNN6Ehw7vp4LfhH8r5tpGkXf/pmVuELHi/TzsCgMmF+tnkDc4glRVsx9vGMo4=
+	t=1768395456; cv=none; b=jaFBGJnU4EokP0rLWU1If6nosNos9werk10Z5OEkJYLsbRDL4rNfZspAVStBRYTzLTzucJIzSDNWaTWS5zjhr1jfHwLmhlCQIfYQByf975bBFarTh/vW9c3SnmzmFKJ10EDlZBT7lH7Zn6l2SZMn6AH2lI/hV5/bLL9K77nk9/8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768392548; c=relaxed/simple;
-	bh=EYswg02gjuvqs73LUDwN0ChfKC/BQKKnQB+oeLlaqiM=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=V7aEuIFTxk2JemItOkMxuVwKbGoMbYylcDddyVSZi1lARWFEM4AmhoMZCBlHa72ZMGZSczYBCJgKCreD0E6pltfFblrjEr+JnuZ6fcS3QbO8/4meLE65mZWljK6SZecohCIcZgs+UnpLAuDMmLjxUHKnqwgLqFFAjh04qln6vnc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ccZ62Qnt; arc=none smtp.client-ip=192.198.163.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768392547; x=1799928547;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version;
-  bh=EYswg02gjuvqs73LUDwN0ChfKC/BQKKnQB+oeLlaqiM=;
-  b=ccZ62QnttDIQuKNRrPINyW3NcuVpRv7Tb/nL9yvhw60jFURL4IIPnyZU
-   8kWpTYW/vlPhIvBbpDD+++HqzmWWqe/3OpRIkvLxyxHJ4hGZa9dfdEWx0
-   wYpCkEcNUAaVvfuhxUK6iOgyc6Fw9I019VndSt8rYXUEbaHVosvECmSQv
-   7ZfArwOTMAf/Dt1tOu3rMMCv9xtWyjQEnANaHH+IUQLHbDemOvjjKL+j9
-   e52jPr+DvyEIr1BRoiIsnPFesTUCp2sbesyKpnjg1U9HbwDEO7lZ5XKvC
-   G5rVsuIfN9Ot8MkKdwwz0qD35LwUVK50zAdJMdG6/xaNt52AlUTQt4n/z
-   g==;
-X-CSE-ConnectionGUID: C787EWblTDK4etiLJX6TPQ==
-X-CSE-MsgGUID: XOF3j2onS8q0q8j6lPql9A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11670"; a="68697369"
-X-IronPort-AV: E=Sophos;i="6.21,225,1763452800"; 
-   d="scan'208";a="68697369"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:09:06 -0800
-X-CSE-ConnectionGUID: YfId4127RIiRbKbn/2MR/A==
-X-CSE-MsgGUID: voMxLI1LSL+SxXySXk3osg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,225,1763452800"; 
-   d="scan'208";a="204943430"
-Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.246.94])
-  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 04:08:59 -0800
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Nishanth Menon <nm@ti.com>,
- "Andrew F. Davis" <afd@ti.com>, Randolph Sapp <rs@ti.com>, Jonathan
- Humphreys <j-humphreys@ti.com>, Andrei Aldea <a-aldea@ti.com>, Chirag
- Shilwant <c-shilwant@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Tero
- Kristo <kristo@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Oded
- Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, Sumit
- Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?Q?K=C3=B6nig?=
- <christian.koenig@amd.com>
-Cc: linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, Tomeu Vizoso <tomeu@tomeuvizoso.net>
-Subject: Re: [PATCH 2/5] accel/thames: Add driver for the C7x DSPs in TI SoCs
-In-Reply-To: <20260113-thames-v1-2-99390026937c@tomeuvizoso.net>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park,
- 6 krs Bertel Jungin Aukio 5, 02600 Espoo, Finland
-References: <20260113-thames-v1-0-99390026937c@tomeuvizoso.net>
- <20260113-thames-v1-2-99390026937c@tomeuvizoso.net>
-Date: Wed, 14 Jan 2026 14:08:56 +0200
-Message-ID: <5d2167dd7c898afdb374429a9dca8d262967d125@intel.com>
+	s=arc-20240116; t=1768395456; c=relaxed/simple;
+	bh=nDks388HnNY14MLdMvtYPp7AF6DwiFtLPZJ0gLotD50=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:
+	 Content-Type; b=peL8CZFEGVL75fBD46mHAf2NNHZpQFe6CWmwhXnIEn0FSLvMkDcI/sP5gSAR22SKO/Qk7SCHKY7avHsjePf5pYx3+NEPyaAh01L9bP7bpLdNPHNgTYwbUyB5SmTKeNjBSiqin0dtqaVtsBVdfdTB/qX/YSvwUl78BtlCy1rIPao=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aLnNx2Xz; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26749C16AAE;
+	Wed, 14 Jan 2026 12:57:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768395456;
+	bh=nDks388HnNY14MLdMvtYPp7AF6DwiFtLPZJ0gLotD50=;
+	h=From:To:Cc:Subject:Date:From;
+	b=aLnNx2XzyZBFoXS0d5D7FrIzMw02TZ11uAOBCvf9vi4xdgPSiOpclsjNdz+A9oK55
+	 +BIQerNVSmV/FJ7HnAsQMtASyGwh2QHpAO4DKOk4ePEKf1iTXHzPQtvBGN65IF5jw4
+	 ioIo3JKiwyusZHGJ2rU6MkXqhAotLWlaiELPHQCgz781ytK4AEcNhMlRdeASmPTb9c
+	 3hmRhin23UU7/AINH0/FuKNJ9PU2TBKUQNPHA5otNlSHleSh7YmScED7MsgA395kO9
+	 oSeIDWxjhTLNag/XzswWMPn71JZ0v/wsnsrQLNsKWoEd6gYWvJGK2UeA67WUFZVp0h
+	 YCskwDxq7f+GQ==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vg0RK-00000002lxx-0ya9;
+	Wed, 14 Jan 2026 13:57:34 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v4 0/4] fix -Werror issues
+Date: Wed, 14 Jan 2026 13:57:21 +0100
+Message-ID: <cover.1768395332.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-On Tue, 13 Jan 2026, Tomeu Vizoso <tomeu@tomeuvizoso.net> wrote:
-> diff --git a/drivers/accel/Makefile b/drivers/accel/Makefile
-> index 1d3a7251b950f39e2ae600a2fc07a3ef7e41831e..8472989cbe22746f1e7292d2401fa0f7424a6c15 100644
-> --- a/drivers/accel/Makefile
-> +++ b/drivers/accel/Makefile
-> @@ -5,4 +5,5 @@ obj-$(CONFIG_DRM_ACCEL_ARM_ETHOSU)	+= ethosu/
->  obj-$(CONFIG_DRM_ACCEL_HABANALABS)	+= habanalabs/
->  obj-$(CONFIG_DRM_ACCEL_IVPU)		+= ivpu/
->  obj-$(CONFIG_DRM_ACCEL_QAIC)		+= qaic/
-> -obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> \ No newline at end of file
-> +obj-$(CONFIG_DRM_ACCEL_ROCKET)		+= rocket/
-> +obj-$(CONFIG_DRM_ACCEL_THAMES)		+= thames/
-> \ No newline at end of file
+Hi Jon,
 
-Maybe add the newline while at it.
+As pointed by Jani, and previously by Randy, several warnings
+are currently not considered as errors. The issue is related
+to changeset 469c1c9eb6c9 ("kernel-doc: Issue warnings that were silently
+discarded"), which was using directly a low-level interface.
 
-> diff --git a/drivers/accel/thames/thames_core.c b/drivers/accel/thames/thames_core.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..92af1d68063116bcfa28a33960cbe829029fc1bf
-> --- /dev/null
-> +++ b/drivers/accel/thames/thames_core.c
-> @@ -0,0 +1,155 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/* Copyright 2026 Texas Instruments Incorporated - https://www.ti.com/ */
-> +
-> +#include "linux/remoteproc.h"
+Patch 1 fix that.
+Patch 2 fixes a related issue: when there are more than 255
+errors, the return code with -Werror can be 0 even on errors,
+because of glibc behavior: programs can only use 8 bits for
+error codes.
 
-Ditto here about <> not "".
+Patches 3 and 4 are not directly related, and touches only
+on comments inside python-doc.py script itself:
 
+- patch 3 is just a coding style change to match the comment
+  style we agreed;
+
+- patch 4 fixes some English issues on comments. The issues
+  were pointed by LLM, which was used as any other spelling
+  tool: I picked just the relevant changes, ignoring the ones
+  that were false positives. I also didn't agree with one of
+  the changes, replacing it by something else.
+
+  I wrote it more as an experiment about how to properly use
+  LLM. IMO, it could be useful to use LLM to review spelling
+  on docs, provided that the one using the tool will filter
+  out LLM-generated trash - just like one does when using any
+  other spelling tool. Yet, based on Jani feedback, extra
+  care is needed with regards to LLM abuse of UTF-8 chars.
+
+---
+
+v4:
+  - improved description on patch 4;
+  - fixed some typos and problems at patch2 comments;
+  - fixed a potential sphinx.ext.autodoc issue.
+
+v3:
+  - did some cleanups at patch 1, placing the code on a new
+    function;
+  - removed extra blank line after comments
+
+v2:
+  - on patch 2, I changed the -Werror return code to "3". This
+    way, it is easier for a script to identify what happened;
+  - removed UTF-8 unbreakable whitespaces from patch 4.
+    Heh, it seems that LLM-produced stuff can suffer with
+    unwanted UTF-8 chars... On one of the strings it replaced
+    0x20 with 0xa0...
+
+
+Mauro Carvalho Chehab (4):
+  scripts/kernel-doc: fix logic to handle unissued warnings
+  scripts/kernel-doc: avoid error_count overflows
+  scripts/kernel-doc: ensure that comments are using our coding style
+  scripts/kernel-doc: some fixes to kernel-doc comments
+
+ scripts/kernel-doc.py                | 73 ++++++++++++++++++----------
+ tools/lib/python/kdoc/kdoc_parser.py | 31 +++++++++---
+ 2 files changed, 73 insertions(+), 31 deletions(-)
 
 -- 
-Jani Nikula, Intel
+2.52.0
+
 
