@@ -1,226 +1,151 @@
-Return-Path: <linux-doc+bounces-72235-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72226-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 015B9D20173
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 17:10:39 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63E07D1F9BF
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 16:06:23 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 59B5A30011A3
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 16:10:38 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 36135301B667
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 15:06:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 564242D6611;
-	Wed, 14 Jan 2026 16:10:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BCFE4314B88;
+	Wed, 14 Jan 2026 15:05:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Qb7eD4xH"
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="2aGkR9+G"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com [209.85.160.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 567D536BCEC
-	for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 16:10:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E94C92550A3;
+	Wed, 14 Jan 2026 15:05:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768407036; cv=none; b=u+I7UhFR+KEDKHO78VB2qvFfDQs80DH4Mv1rFGp9XEJgoRzdC7LpNjWFHV4Tn7gMYKBU/knv+D/20uj2CR6fdfuEjuTv64Dj1CbuHpmbxhNCWfJJAr67sdTp8Fh3oQ9y+JfJRHLdiQynzuR1idmjXoPytsZqqbN9LOeptEZ4drI=
+	t=1768403159; cv=none; b=c2qvk+fuUVL5eKapVnw7SZM+axGX0E39ewGrMhCoyDbk8hxm0M/CFKU9sHEeCVX1zdOcRa/OzKt564SmY3lsfb3fDaaFy67effjMfu9g93x/cERvZWAkjsBZzcuFxiI25KdirLI9LSyCzuiWKl/+5dheWiPkzFK2JOWDvZeTGC0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768407036; c=relaxed/simple;
-	bh=fyFkPzA7jD86HDqzxLlGJw1nUhjO3+Q6huQ4gYgSwK8=;
-	h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:
-	 Mime-Version:Content-Type; b=EXmkvbMXYrQm953TqJqeS3H2Ya2sfnHTi9GFqeY8mWjrKFkMxTbZTeqjEWczAwAf1HCcqxfg1pUGqdzDEusVl3pwSxWcGLHT5iI834sGBCgwEOKUKse6pm10c2rG+shu+BXyUzm6gLqK5vp0c+5/fMTudzzkW9Z4WaXoaetHDok=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Qb7eD4xH; arc=none smtp.client-ip=209.85.160.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qt1-f173.google.com with SMTP id d75a77b69052e-4ffbea7fdf1so48299791cf.1
-        for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 08:10:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768407033; x=1769011833; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:subject:references
-         :in-reply-to:message-id:cc:to:from:date:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fyFkPzA7jD86HDqzxLlGJw1nUhjO3+Q6huQ4gYgSwK8=;
-        b=Qb7eD4xHT9jGuwayrTyZvBWPmT271w6HvaJfWvoyjnn/XqpFaNCZrQRRfL+5E5xCc8
-         EU+KKfI8Z+X1iBsyBusNqg+sZOyWxOVwU0KXbHKQtyfERkVqurpLEnKWVXILWmW95H28
-         mp2s5A+Cx1t0X0/c0JbYG4Wqf2pRwTHpY3DoS+v9SpRD0n2UURwD0uQG+C4O/H5E+Mfr
-         5igcCA0Roki6SJZSCKQJSgfJVS/H22mHqx3RSJVwSRLvzuieh08eSIlwKRm6M+3Lx40z
-         uuwycI+ymtIQXg/8NUVDDhoxcoOosYLsbK+qcvIU+GXcENmMpwTJbn9PB4k1ihLqdxFj
-         mC8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768407033; x=1769011833;
-        h=content-transfer-encoding:mime-version:subject:references
-         :in-reply-to:message-id:cc:to:from:date:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=fyFkPzA7jD86HDqzxLlGJw1nUhjO3+Q6huQ4gYgSwK8=;
-        b=JYjLM6OpaF620If+WlCRx9XO+mfGWUOk4JVfLusGk5DZjULAXnyjW5omWhEa4NMyqm
-         GEHcbS3Ld1mleJTOfCpD4zkKm16+rLFHItrXJydFRvXZEiXurAe53G9f6skUYhZUXejV
-         9ygrR87SaKkwIDyCAt06tvRmevuy34jpug3gUehpKHHItAK5AcHkPWcfPD5y01UnVEvV
-         YxLhwJl2Ta82MFn3fbpojKA09xkxXv5c3ArZhMcNvTKy6sMvGCT/FsnmAsuaMeAb+4K9
-         AdA2wGJVAPgCTLi421yv1dqkkuWhp4D1Ff+hXTs+kzWV1TiM0tUwIgY+JKgx6+2dfiT/
-         hK1g==
-X-Forwarded-Encrypted: i=1; AJvYcCWcZR63G5sKWdYyH/AWLfC82dXV7mlxivtc+g66C5wb2xpUwBShHVWqoHRagtFATTKJ7+j3o0+C9rY=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzfepSjV9Vu4AnCVcCnCVbe3YZaVWsMvOb28yhM//L0qTQUgTP7
-	28//+twN1r4ZBnvDsJBuix/28T4Trrycwq5ZoRRxuX1RYK6T1Rit0hlsMY0aWw==
-X-Gm-Gg: AY/fxX7jmhy+bg27b+ziosQatUIBN4FzfCIrFZrrPI6q8FemTAlZWQt4cf3XIb4E13T
-	mJxT8OyHCteNfkeFVJNQRJ3jM1YgU4NtowUX6ZyRgLP1hwAMdeojAVgR7P7p/pPYLL7U+7wR6ur
-	put1vcXHT75gjBvNmYkQneXDKEdC0Yx0kDwLquWR3dZDBdcAmXzCMcgwALXI6pYMmp98TS9jn9G
-	V1mAJminu5580QeTixDhatN5r6G318QPGpJFFdBGL0lzpUrnxn9UPASqfyRHkqhDM8Ct45CWm7+
-	ypSer3KStx33NwgZ/FAvMSucMJTQLaI0N+qdORhUlSArWWHYimymeYS0QmLhVic0a5vaDGu+G9L
-	qHItO/3gGXFKC7GX5jktNppPRjr1evJxl2MimhPjC24iNwyUYElnSs/W9CE20icG3BHMGMYH16P
-	i91EFQ5KC1a5oVaKlPP/UFT3VqXbpSQ+5UkJcFd3clmPB7Es+QH9ywGlwHZTg=
-X-Received: by 2002:a05:690c:9c0a:b0:78c:25fa:1bb7 with SMTP id 00721157ae682-793a1d6fa34mr22055957b3.60.1768400306350;
-        Wed, 14 Jan 2026 06:18:26 -0800 (PST)
-Received: from gmail.com (250.4.48.34.bc.googleusercontent.com. [34.48.4.250])
-        by smtp.gmail.com with UTF8SMTPSA id 00721157ae682-790aa670ec0sm91265417b3.36.2026.01.14.06.18.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jan 2026 06:18:25 -0800 (PST)
-Date: Wed, 14 Jan 2026 09:18:25 -0500
-From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-To: "Chia-Yu Chang (Nokia)" <chia-yu.chang@nokia-bell-labs.com>, 
- Neal Cardwell <ncardwell@google.com>
-Cc: "pabeni@redhat.com" <pabeni@redhat.com>, 
- "edumazet@google.com" <edumazet@google.com>, 
- "parav@nvidia.com" <parav@nvidia.com>, 
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, 
- "corbet@lwn.net" <corbet@lwn.net>, 
- "horms@kernel.org" <horms@kernel.org>, 
- "dsahern@kernel.org" <dsahern@kernel.org>, 
- "kuniyu@google.com" <kuniyu@google.com>, 
- "bpf@vger.kernel.org" <bpf@vger.kernel.org>, 
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>, 
- "dave.taht@gmail.com" <dave.taht@gmail.com>, 
- "jhs@mojatatu.com" <jhs@mojatatu.com>, 
- "kuba@kernel.org" <kuba@kernel.org>, 
- "stephen@networkplumber.org" <stephen@networkplumber.org>, 
- "xiyou.wangcong@gmail.com" <xiyou.wangcong@gmail.com>, 
- "jiri@resnulli.us" <jiri@resnulli.us>, 
- "davem@davemloft.net" <davem@davemloft.net>, 
- "andrew+netdev@lunn.ch" <andrew+netdev@lunn.ch>, 
- "donald.hunter@gmail.com" <donald.hunter@gmail.com>, 
- "ast@fiberby.net" <ast@fiberby.net>, 
- "liuhangbin@gmail.com" <liuhangbin@gmail.com>, 
- "shuah@kernel.org" <shuah@kernel.org>, 
- "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>, 
- "ij@kernel.org" <ij@kernel.org>, 
- "Koen De Schepper (Nokia)" <koen.de_schepper@nokia-bell-labs.com>, 
- "g.white@cablelabs.com" <g.white@cablelabs.com>, 
- "ingemar.s.johansson@ericsson.com" <ingemar.s.johansson@ericsson.com>, 
- "mirja.kuehlewind@ericsson.com" <mirja.kuehlewind@ericsson.com>, 
- cheshire <cheshire@apple.com>, 
- "rs.ietf@gmx.at" <rs.ietf@gmx.at>, 
- "Jason_Livingood@comcast.com" <Jason_Livingood@comcast.com>, 
- Vidhi Goel <vidhi_goel@apple.com>, 
- Willem de Bruijn <willemb@google.com>
-Message-ID: <willemdebruijn.kernel.a2eb52bfa5d5@gmail.com>
-In-Reply-To: <PAXPR07MB7984F8BDC1261BD144D20DCFA38FA@PAXPR07MB7984.eurprd07.prod.outlook.com>
-References: <20260108155816.36001-1-chia-yu.chang@nokia-bell-labs.com>
- <20260108155816.36001-2-chia-yu.chang@nokia-bell-labs.com>
- <CADVnQykTJWJf7kjxWrdYMYaeamo20JDbd_SijTejLj1ES37j7Q@mail.gmail.com>
- <PAXPR07MB7984F8BDC1261BD144D20DCFA38FA@PAXPR07MB7984.eurprd07.prod.outlook.com>
-Subject: RE: [PATCH net-next 1/1] selftests/net: Add packetdrill packetdrill
- cases
+	s=arc-20240116; t=1768403159; c=relaxed/simple;
+	bh=FHu9QC6aUntevDtu9b89ECBHcIAGyW7+M4M/0IVXo6w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=d5lo4y5b5xR703tUpNw6g8vwbXExavFEH1n3/uPEEu+QW79+cJYb0zowmQpvy7XudnlUswuCEdc8+lVDBFXst2x8C4alV0dB0QjFqOWGA8mVIaJ/PBVxhc73nSlm/CJWBZY+htRn3fW8xHU2A18zCJe0saA164NRy0hi9N7E1O0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=2aGkR9+G; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=p/1eVpMenCIWXkmi+LWs4qBDeJZQRhQ1Mo2xBG1d6m0=; b=2aGkR9+Gq07Pqsr81YJxBM46lt
+	pC2tFopI1k2CQN/EQyBvUMbN685on8x5U4CpdjMpkFZFWeBtSU1OM84Ciw+y3szFcelfmqTyyg3Vm
+	y2DbB7FtxibRk5XBq6sH9x7jaP/v3yPQ2Ob6mTE3lbJs+jMPsrwoZFGtqfkkexkKI90sVyqCbvrKN
+	zpFbi2ZET+fTj2fii5dhkiKqKWNVPeKcG3n8jccbhPTVNNeRCqGKQRlyNUdLbE0ua8zYfilMENTNi
+	ksLGJd1DFd0SiHbXxA8bZhed6Je0ZmYu3Fr0+QZKywruGLSgXGNe8uS3svWfCZcAVQ+74djzH6mhe
+	QKhXyQqw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
+	id 1vg2Qx-00000009cKq-2YJq;
+	Wed, 14 Jan 2026 15:05:19 +0000
+Date: Wed, 14 Jan 2026 07:05:19 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Amir Goldstein <amir73il@gmail.com>
+Cc: Jeff Layton <jlayton@kernel.org>, Christoph Hellwig <hch@infradead.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Chuck Lever <chuck.lever@oracle.com>, Jan Kara <jack@suse.cz>,
+	Luis de Bethencourt <luisbg@kernel.org>,
+	Salah Triki <salah.triki@gmail.com>,
+	Nicolas Pitre <nico@fluxnic.net>, Anders Larsen <al@alarsen.net>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	David Sterba <dsterba@suse.com>, Chris Mason <clm@fb.com>,
+	Gao Xiang <xiang@kernel.org>, Chao Yu <chao@kernel.org>,
+	Yue Hu <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>,
+	Sandeep Dhavale <dhavale@google.com>,
+	Hongbo Li <lihongbo22@huawei.com>,
+	Chunhai Guo <guochunhai@vivo.com>, Jan Kara <jack@suse.com>,
+	Theodore Ts'o <tytso@mit.edu>,
+	Andreas Dilger <adilger.kernel@dilger.ca>,
+	Jaegeuk Kim <jaegeuk@kernel.org>,
+	OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Richard Weinberger <richard@nod.at>,
+	Dave Kleikamp <shaggy@kernel.org>,
+	Ryusuke Konishi <konishi.ryusuke@gmail.com>,
+	Viacheslav Dubeyko <slava@dubeyko.com>,
+	Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
+	Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>,
+	Joseph Qi <joseph.qi@linux.alibaba.com>,
+	Mike Marshall <hubcap@omnibond.com>,
+	Martin Brandenburg <martin@omnibond.com>,
+	Miklos Szeredi <miklos@szeredi.hu>,
+	Phillip Lougher <phillip@squashfs.org.uk>,
+	Carlos Maiolino <cem@kernel.org>, Hugh Dickins <hughd@google.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Namjae Jeon <linkinjeon@kernel.org>,
+	Sungjong Seo <sj1557.seo@samsung.com>,
+	Yuezhang Mo <yuezhang.mo@sony.com>,
+	Alexander Aring <alex.aring@gmail.com>,
+	Andreas Gruenbacher <agruenba@redhat.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	"Matthew Wilcox (Oracle)" <willy@infradead.org>,
+	Eric Van Hensbergen <ericvh@kernel.org>,
+	Latchesar Ionkov <lucho@ionkov.net>,
+	Dominique Martinet <asmadeus@codewreck.org>,
+	Christian Schoenebeck <linux_oss@crudebyte.com>,
+	Xiubo Li <xiubli@redhat.com>, Ilya Dryomov <idryomov@gmail.com>,
+	Trond Myklebust <trondmy@kernel.org>,
+	Anna Schumaker <anna@kernel.org>, Steve French <sfrench@samba.org>,
+	Paulo Alcantara <pc@manguebit.org>,
+	Ronnie Sahlberg <ronniesahlberg@gmail.com>,
+	Shyam Prasad N <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>,
+	Bharath SM <bharathsm@microsoft.com>,
+	Hans de Goede <hansg@kernel.org>, linux-kernel@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-btrfs@vger.kernel.org,
+	linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
+	linux-f2fs-devel@lists.sourceforge.net,
+	linux-mtd@lists.infradead.org, jfs-discussion@lists.sourceforge.net,
+	linux-nilfs@vger.kernel.org, ntfs3@lists.linux.dev,
+	ocfs2-devel@lists.linux.dev, devel@lists.orangefs.org,
+	linux-unionfs@vger.kernel.org, linux-xfs@vger.kernel.org,
+	linux-mm@kvack.org, gfs2@lists.linux.dev, linux-doc@vger.kernel.org,
+	v9fs@lists.linux.dev, ceph-devel@vger.kernel.org,
+	linux-nfs@vger.kernel.org, linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Subject: Re: [PATCH 00/24] vfs: require filesystems to explicitly opt-in to
+ lease support
+Message-ID: <aWewryHrESHgXGoL@infradead.org>
+References: <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com>
+ <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
+ <20260113-mondlicht-raven-82fc4eb70e9d@brauner>
+ <aWZcoyQLvbJKUxDU@infradead.org>
+ <ce418800f06aa61a7f47f0d19394988f87a3da07.camel@kernel.org>
+ <aWc3mwBNs8LNFN4W@infradead.org>
+ <CAOQ4uxhMjitW_DC9WK9eku51gE1Ft+ENhD=qq3uehwrHO=RByA@mail.gmail.com>
+ <aWeUv2UUJ_NdgozS@infradead.org>
+ <c40862cd65a059ad45fa88f5473722ea5c5f70a5.camel@kernel.org>
+ <CAOQ4uxhDwR7dteLaqURX+9CooGM1hA7PL6KnVmSwX11ZdKxZTA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAOQ4uxhDwR7dteLaqURX+9CooGM1hA7PL6KnVmSwX11ZdKxZTA@mail.gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Chia-Yu Chang (Nokia) wrote:
-> > -----Original Message-----
-> > From: Neal Cardwell <ncardwell@google.com> =
+On Wed, Jan 14, 2026 at 03:14:13PM +0100, Amir Goldstein wrote:
+> Very well then.
+> How about EXPORT_OP_PERSISTENT_HANDLES?
 
-> > Sent: Thursday, January 8, 2026 11:47 PM
-> > To: Chia-Yu Chang (Nokia) <chia-yu.chang@nokia-bell-labs.com>
-> > Cc: pabeni@redhat.com; edumazet@google.com; parav@nvidia.com; linux-d=
-oc@vger.kernel.org; corbet@lwn.net; horms@kernel.org; dsahern@kernel.org;=
- kuniyu@google.com; bpf@vger.kernel.org; netdev@vger.kernel.org; dave.tah=
-t@gmail.com; jhs@mojatatu.com; kuba@kernel.org; stephen@networkplumber.or=
-g; xiyou.wangcong@gmail.com; jiri@resnulli.us; davem@davemloft.net; andre=
-w+netdev@lunn.ch; donald.hunter@gmail.com; ast@fiberby.net; liuhangbin@gm=
-ail.com; shuah@kernel.org; linux-kselftest@vger.kernel.org; ij@kernel.org=
-; Koen De Schepper (Nokia) <koen.de_schepper@nokia-bell-labs.com>; g.whit=
-e@cablelabs.com; ingemar.s.johansson@ericsson.com; mirja.kuehlewind@erics=
-son.com; cheshire <cheshire@apple.com>; rs.ietf@gmx.at; Jason_Livingood@c=
-omcast.com; Vidhi Goel <vidhi_goel@apple.com>; Willem de Bruijn <willemb@=
-google.com>
-> > Subject: Re: [PATCH net-next 1/1] selftests/net: Add packetdrill pack=
-etdrill cases
-> > =
+Sure.
 
-> > =
+> > The problem there is that we very much do want to keep tmpfs
+> > exportable, but it doesn't have stable handles (per-se).
+> 
+> Thinking out loud -
+> It would be misguided to declare tmpfs as
+> EXPORT_OP_PERSISTENT_HANDLES
+> and regressing exports of tmpfs will surely not go unnoticed.
 
-> > CAUTION: This is an external email. Please be very careful when click=
-ing links or opening attachments. See the URL nok.it/ext for additional i=
-nformation.
-> > =
+tmpfs handles are stable.  It's the tmpfs files that don't survive an
+unmount or reboot..
 
-> > =
-
-> > =
-
-> > On Thu, Jan 8, 2026 at 10:58=E2=80=AFAM <chia-yu.chang@nokia-bell-lab=
-s.com> wrote:
-> > >
-> > > From: Chia-Yu Chang <chia-yu.chang@nokia-bell-labs.com>
-> > >
-> > > Linux Accurate ECN test sets using ACE counters and AccECN options =
-to =
-
-> > > cover several scenarios: Connection teardown, different ACK =
-
-> > > conditions, counter wrapping, SACK space grabbing, fallback schemes=
-, =
-
-> > > negotiation retransmission/reorder/loss, AccECN option drop/loss, =
-
-> > > different handshake reflectors, data with marking, and different sy=
-sctl values.
-> > >
-> > > Co-developed-by: Ilpo J=C3=A4rvinen <ij@kernel.org>
-> > > Signed-off-by: Ilpo J=C3=A4rvinen <ij@kernel.org>
-> > > Co-developed-by: Neal Cardwell <ncardwell@google.com>
-> > > Signed-off-by: Neal Cardwell <ncardwell@google.com>
-> > > ---
-> > =
-
-> > Chia-Yu, thank you for posting the packetdrill tests.
-> > =
-
-> > A couple thoughts:
-> > =
-
-> > (1) These tests are using the experimental AccECN packetdrill support=
- that is not in mainline packetdrill yet. Can you please share the github=
- URL for the version of packetdrill you used? I will work on merging the =
-appropriate experimental AccECN packetdrill support into the Google packe=
-tdrill mainline branch.
-> > =
-
-> > (2) The last I heard, the tools/testing/selftests/net/packetdrill/
-> > infrastructure does not run tests in subdirectories of that packetdri=
-ll/ directory, and that is why all the tests in tools/testing/selftests/n=
-et/packetdrill/ are in a single directory.
-> > When you run these tests, do all the tests actually get run? Just wan=
-ted to check this. :-)
-> > =
-
-> > Thanks!
-> > neal
-> =
-
-> Hi Neal,
-> =
-
-> Regards (2), I will put all ACCECN cases in the tools/testing/selftests=
-/net/packetdrill/
-> But I would like to include another script to avoid running these AccEC=
-N tests one-by-one manually, does it make sense to you?
-> Thanks.
-
-All scripts under tools/testing/selftests/net/packetdrill are already
-picked up for automated testing in kselftests:
-
-https://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next.git/commi=
-t/?id=3D8a405552fd3b
 
