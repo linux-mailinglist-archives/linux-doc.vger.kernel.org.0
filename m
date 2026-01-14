@@ -1,89 +1,114 @@
-Return-Path: <linux-doc+bounces-72135-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72137-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 678F3D1C8A9
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 06:06:54 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D561D1CA19
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 07:05:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 1DD29308E9BF
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 04:55:42 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 6D5B4301AE50
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 06:05:31 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D4AA328634;
-	Wed, 14 Jan 2026 04:55:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E8F6036AB47;
+	Wed, 14 Jan 2026 06:05:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="UNu7wGro"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ky4WE6V+"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dl1-f68.google.com (mail-dl1-f68.google.com [74.125.82.68])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EAC217BED0;
-	Wed, 14 Jan 2026 04:55:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D014A36BCCF
+	for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 06:05:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.82.68
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768366540; cv=none; b=BI/mvxb/xHV31Maid++XxEx/Qyob1Frg1vWTlUC3ZdVBaB5heCvKCqUAj+RYHxcV61MP4RB8swWE6AlRVkj/cOTkZPKR6JQ0LtyKgAw3RUJH8bN8gm99dJ00RroaOgF+1gUXi0NJT9pdwIUaB10qTwZ7nvILIBEPU0qCmpjSOVA=
+	t=1768370728; cv=none; b=qv1kHzG+FsVNTcue5U9aejnYjhQtv4rEG9cG3FMb1ITb0d/hXaHb2lx24TKgcLHd6tY3g0idF7qHaOo2uYHBc7yu5VewBL42uTm5DvpnlEJiC7KerupNrbDBzm7u4EIumo13LtwzUqRku2FRmSr0tMMGTpW18A8oUhgDGNGITqE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768366540; c=relaxed/simple;
-	bh=6bNoNhfGSawoIKXS0GSRGO73y2CDDuS0JxbIvtmRn4Q=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RU2j6pmjonYU0ff8yar+z10oYTqHYYtNHCNW2Rfj24NO8EaPQGfj7UP5ft4yUQkEZd+SDkuRE2UhQ9MKM8jqXw4/x9y9+/i9qE+Bhz2ZAck7+6aCShcUfxt3XUkJdnANtz2iRuHTdUF6KwfEvJBwa4cfVpztmSco7XOT/p4+66A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=UNu7wGro; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=qu6FVIzdAduCducxkqgiM7xxeKYjyI46yVkhQYKvzVk=; b=UNu7wGroxpAGSENIcX7Qjab27w
-	qC+kDF8lWCs/xdzaEtQYkj1gMqX+74ICvCeqDyZ4jJDF32u/XB5szyP1+5IYs6Ejq0gjmcNJkLtwX
-	hCl+vzpKxtDnG80fNwnXIBpNOZyG8pgXcgcqmOEL9934N7GVJEfp8SkglWq+1QO2ziHQw2mUcV9Jz
-	MlCqzhWdFkeu697572EJnL3tuftJ4ZtHFq/8zad0JNXGNDV/9/esM+QJf3nV5nn9Cn+nYollhDafY
-	nYZVGPJJnPWoawvQVNKUEfqw6vjeZ739+VZw/v0XPyVjd3KsinxtiaNVaHTGOZ1zKwe6Aa0nCphAf
-	kMSzbKZg==;
-Received: from [50.53.43.113] (helo=[192.168.254.34])
-	by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vfsug-000000084St-1dj1;
-	Wed, 14 Jan 2026 04:55:22 +0000
-Message-ID: <d82c0b7a-b568-4085-b1a8-0eb21bacdd79@infradead.org>
-Date: Tue, 13 Jan 2026 20:55:21 -0800
+	s=arc-20240116; t=1768370728; c=relaxed/simple;
+	bh=UuOoBajVj0wkg0g4yo/s1ny3PHf3Yl5+HedHG//0BQQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ZAY9H1OncbwkPYi77MoG8w6Bvu9K2b36v7UVugBrOVzAd6osH5Bi2gN5csxN3Kq3ggOCfZFrxJ0mot9UKieR128vyctXzjsyGXczm3Hyf1II5RgHqI9M4KlSKmsShQsUOsIk4DYjwrFYWIYsr4s1hqOIRzDvC7R7N+AL0dui58w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ky4WE6V+; arc=none smtp.client-ip=74.125.82.68
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dl1-f68.google.com with SMTP id a92af1059eb24-11f1fb91996so78537c88.1
+        for <linux-doc@vger.kernel.org>; Tue, 13 Jan 2026 22:05:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768370718; x=1768975518; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UuOoBajVj0wkg0g4yo/s1ny3PHf3Yl5+HedHG//0BQQ=;
+        b=ky4WE6V+Q/0NbmNkS8bmd9Tb7TyHOka9DAYHvuE7uuU1YPkzsj+st5lHIW6LPlK5zp
+         KZUd40QP58RcTHzT59kr2cKL6dkXWhqHQWQwLFn5U317uSKCiMiCZV+OgtrU0IDLz7WC
+         JyMf6GCzGFHuxajIekqEaTIhLCEb/jAFjphrTsZbXXX46Rott3eEzT8gtzmywu86xfeb
+         3v+q5z/dUYj9c9ZTdHxTh9K7UhKQmIrmfuQPpwRkV6ooolIWLjzZTmlmHqRntIeYaWYe
+         rhWUdHcgw1b8ncg9a+TT6l048pN1IFW3OjVhIeMpAQgP1qtUMg/CFUKDYDAaZluZ4mX9
+         oq4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768370718; x=1768975518;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=UuOoBajVj0wkg0g4yo/s1ny3PHf3Yl5+HedHG//0BQQ=;
+        b=aACKUBCzC2NJz1Z0nHmI1uybvXVENwfpZDoWU3ndS3hRqeERQyxrQoiQd93jJf2udJ
+         Bui+/qEiHke5xOQwE6bfPZnC90t3IimnBzIHl+nZVn2CLfJQapDoWIuc0mik9xPlyELJ
+         KYUkZPZyuMuv+3tYvYJ9Gt1acTnKQKwUbWmOGxuLGjTXYuIwPPRI8VOkNHvil43DZ2G0
+         +rTUkhkRgeOrtl+Sl9RJnN70Vy4PdHIwBKP16MENA3ABdBWETL6GooRTlZ7o1H0x5OAW
+         eeQjpOnczrxnr7u3qWGbDTffBc1te0xVwXQEESZK+wL9KdI1g85ighPScZciVVBHo7wu
+         d7qw==
+X-Forwarded-Encrypted: i=1; AJvYcCVSjMWdUPi4hEVk52WSuorzkGFOCe+rxHZ87rD8FaiTTN9/tYXaaz1zrvU41eyrIw8TFgzV4tpfqWs=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzPB2vtqwePWJRD6jIck4+UBvPVOEaaqFJeR2k7lIxlYHgXIYyM
+	1nIyZEPPflLoA0DBuqvFiywrZ7uqQP7tcyE0RLeCfWWSIzdewY9vzcX0
+X-Gm-Gg: AY/fxX4pYnkJ/DqfvfHJqP9PZrYtWjZbVopofnigxktpHskoVIN7XrUAO2Pc7OZT3rZ
+	hfqvnGC9J+Go8q8cK+N6wU9Pt9SaKRccPJ7wP6bKlGyjPr1Y79tU+V0C18+CAOZAdr/coLeEJLN
+	ow4rxcWSzZH6mqD46Q734ew6GYGpgFjbAOIJmipIMNG9t1E0QmvcZK1ztRE2LUD+ZII/hpN+ebW
+	WzaiT0hULF4XbwQoCmYUr2IV8uRMbbV/6HGpQvm2YkxafaZCfS8+dU7ByzgBPK86VfYdEwhDi2n
+	i3PkY0avEl3JZbOlTWOlZAeKAzsFzzFd5cnqCUAxGBoYWfcGTAgLdJOLoJo0SI1T34L9VrJRJIF
+	Fr69XONeB3+i/0dHEuRZwaUCxZEFev4TihqwcVi6vChC3rHn6OJSqHbfPHcf8ajlYs/4Ek4LsWF
+	Be
+X-Received: by 2002:a05:7023:906:b0:11a:4ffb:9825 with SMTP id a92af1059eb24-12336a47f3cmr1905143c88.6.1768370718015;
+        Tue, 13 Jan 2026 22:05:18 -0800 (PST)
+Received: from localhost.localdomain ([2607:f130:0:11a::31])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121f248c239sm24911154c88.9.2026.01.13.22.05.13
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Tue, 13 Jan 2026 22:05:17 -0800 (PST)
+From: wang lian <lianux.mm@gmail.com>
+To: sj@kernel.org
+Cc: Liam.Howlett@oracle.com,
+	akpm@linux-foundation.org,
+	corbet@lwn.net,
+	damon@lists.linux.dev,
+	david@kernel.org,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-mm@kvack.org,
+	lorenzo.stoakes@oracle.com,
+	mhocko@suse.com,
+	rppt@kernel.org,
+	surenb@google.com,
+	vbabka@suse.cz,
+	wang lian <lianux.mm@gmail.com>
+Subject: Re: [PATCH 09/11] Docs/admin-guide/mm/damon/lru_sort: document active_mem_bp parameter
+Date: Wed, 14 Jan 2026 14:05:04 +0800
+Message-ID: <20260114060504.87119-1-lianux.mm@gmail.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20260113152717.70459-10-sj@kernel.org>
+References: <20260113152717.70459-10-sj@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION] Unexpected section title false positive warnings on
- DOC: directive
-To: Bagas Sanjaya <bagasdotme@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Linux Documentation <linux-doc@vger.kernel.org>,
- Linux Regressions <regressions@lists.linux.dev>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-References: <aUuLHzk5jdyBAxD7@archie.me> <87ikdecsj0.fsf@trenco.lwn.net>
- <aV5a6PCVrkRHwqt3@archie.me>
- <966fffa3-a91b-425e-b915-891299832e36@infradead.org>
- <aV7wTFqQQkGf4efF@archie.me>
- <863b3969-71eb-4bf1-9e32-895e53d8bf8e@infradead.org>
- <aWcHeGPUfS6nE2sC@archie.me>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <aWcHeGPUfS6nE2sC@archie.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 
+> Document a newly added DAMON_LRU_SORT parameter for doing auto-tuning
+> aiming an active to inactive memory size ratio.
 
-On 1/13/26 7:03 PM, Bagas Sanjaya wrote:
-> On Wed, Jan 07, 2026 at 04:21:40PM -0800, Randy Dunlap wrote:
->> I'm using docutils-3.13 (Docutils 0.22.3, Python 3.13.11, on linux)
->> and I don't see these warnings.
-> 
-> What Sphinx version? Mine is 9.1.0.
-> 
+> Signed-off-by: SeongJae Park <sj@kernel.org>
 
-I'm using 8.2.3.
-
--- 
-~Randy
-
+Acked-by: wang lian <lianux.mm@gmail.com>
+--
+Best Regards,
+wang lian
 
