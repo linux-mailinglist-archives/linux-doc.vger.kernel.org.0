@@ -1,174 +1,80 @@
-Return-Path: <linux-doc+bounces-72259-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72261-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23ACCD20759
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 18:13:26 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E036BD208A7
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 18:28:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id B1F1A303DABA
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 17:10:12 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id EFF4D3047D9A
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 17:28:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4CFB32E2DD2;
-	Wed, 14 Jan 2026 17:09:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=shenghaoyang.info header.i=@shenghaoyang.info header.b="EvnJ18aU"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3C0093033F3;
+	Wed, 14 Jan 2026 17:28:00 +0000 (UTC)
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from frasgout.his.huawei.com (frasgout.his.huawei.com [185.176.79.56])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B24962BFC85
-	for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 17:09:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22F863009F6;
+	Wed, 14 Jan 2026 17:27:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.176.79.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768410595; cv=none; b=YolfK/qU/ZXxFpjlQ6Z34q79YX88nsKfW4KNNmEnK0e5KgxLqoCdCQ+bOQu0Bxx/1nAuNfkdJL4grRr1fyGh6FgtJwTlXwAm2pKuBQr3QdvXBo/ZSmG75Q0xDpQVZX7QsxvtEruA4lBelLOKrpxqyshQCShpkSSLIgEBnB7A0wA=
+	t=1768411680; cv=none; b=cwuQdMmWt8eiSU2NhlOKYp8wBkBQ37Dade6XOW3sTSFBRIabKu9x2ls2Tnk6+SjkVSmBjArQx8W0Mioc4g2kcMYzFV6DF2egbYCwKlkl78biueahsRpfKmO8qY/A6w4twmYwSOgHR7lc7FLOpjk3J/OPQhavLi/qYq3ta9zc5JA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768410595; c=relaxed/simple;
-	bh=PM6sHi1aQfy0NtK9ko2ZFgH/OijvhK/kCkUnfQiolAs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UGyrCnGj4N/aMjd3VgMvg6pp3qDQ59F3IkXo16oU9sQLRYEfzGyJ+1jdJSVHbHRUxy5c0KQIEcD/zAYO24m1GlynOtzzJfkU78UXDbx6i1oY1wttuNOHTh5LV9h9DBdF29yp2IyNNmf8KxIrXmEZAg3rMJOquLxE6Yq/4DOFHjQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=shenghaoyang.info; spf=pass smtp.mailfrom=shenghaoyang.info; dkim=pass (2048-bit key) header.d=shenghaoyang.info header.i=@shenghaoyang.info header.b=EvnJ18aU; arc=none smtp.client-ip=209.85.216.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=shenghaoyang.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=shenghaoyang.info
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-34abca71f9cso406077a91.3
-        for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 09:09:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=shenghaoyang.info; s=google; t=1768410593; x=1769015393; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=S7mzYYJYLlSKoW+IZetZsbxI9tBQZKOvmgPmXcCAqdY=;
-        b=EvnJ18aUOj8QfcPfJ3/s1L7bK3/408J1P7VDM9KmmWQYvJTjvJnPm4YqTliIQtGvSq
-         wton5eObUlJ1S8iboCnS2l0R5pEF9coWuxbtOzQL6WAvANp20SmSESejFVLb25J2LrNO
-         0vdOAog4zgn4DEdwfmgU5/wTyAMSc7viT06AgV80csm66iSejYaIgmNFTobz1kxwUdmK
-         5DAaDQD9HOvee+2HxMapiuus2tJlVF57NZUta3Gdv2Eds0qDGLXrm16y5uP1CHiCcyU2
-         ortQd9+t1bEDQbezoIjwYDFoh3VSZUUuwgaVUm54SmEIhOdDGtR3/82Qcyd7kwP+spcg
-         zADw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768410593; x=1769015393;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=S7mzYYJYLlSKoW+IZetZsbxI9tBQZKOvmgPmXcCAqdY=;
-        b=BsyCFM+yG54MDEnlql6E+mjd7fvHWjdcX0CSYvLN7iBe08E5CiIUNzmqkn591EeWwp
-         wh70i4sQ/1Rg67s3kJJrqWXPVANSzILZZZD+Ugse2ZZLij8sy/aryd5jSTDWjdNl49oJ
-         qCN19n2o9VetcZt+euARIJmtwzOpxt72OaV6plF2rSe+x3dvj6lO1RF5FcmXS6llwuED
-         IAcqXe35XqKTL3YwPyTzjlmgmhgKxNPCDbxfruXIt3qA286TKlqmL8umOe0dMBApdUBu
-         fndTU0YUMmk7gkT48eLUf6A4SZc35S4oNqzYaDl8rVRLCupLlUMXu7YlRIqxHjYydJwH
-         m45A==
-X-Forwarded-Encrypted: i=1; AJvYcCVoWcs/6AXYJ0GryGtFFClktxaFRKlLUZpEmZXlEEPKoxzSGVhOjgSWQPwvkEWhPECkZ9a5VFneLxM=@vger.kernel.org
-X-Gm-Message-State: AOJu0YyU3VPwjVhdjVM57CzzSW/VQBQfaliOKKlDWuvsaulkeYoZGZRd
-	bsPdgguhHESJAZ73ks7SkVTA5pOkGacWRXuvlIDP5ik2iPaJ5hXes7VAP4e/AVEM6tQ=
-X-Gm-Gg: AY/fxX5YsDEjhqSD09/xK+84Ll/QpanJGw2mjYZkibceawWLFO2iqijFUOGo+MYOmPQ
-	n23AL+dlYzJ+NBtChO2fpM0xNSKCNl+D+Wzf/aiXHb6kJGbR37C5qLS9vIk+xr1bXbQax7apCWb
-	yxXmXZE/2Dskz8KzDIkLuNPkddxWDUDpG9BQtj2oZG9M3J6VkiOF7Fcl4MbrDk5WlmswkMTUQdp
-	AqibuJZjf+f0xoHLgNn0ArktJEY8pTigqb9UH4Bjzw7R2dXp6RaTqrzUYp48jomywuA5VqCuHYl
-	VspfCQQVU8c+w/Rn4lYexZpIxv++QWRlub9+xBncz5n7D0QD+BKvZm2Jl4hGHJg2b0x4JXxUtLs
-	6TZBv5cgZyt7U/9LJsLyEI0aNknj+z1FppSwaxmv5G8JCveUl6CSi69aJGi76zxFKPZTEPEWc2V
-	bE8q7j97nj0lEb
-X-Received: by 2002:a17:90a:fc4c:b0:34f:4416:33b5 with SMTP id 98e67ed59e1d1-3510918d67bmr2365054a91.8.1768410593040;
-        Wed, 14 Jan 2026 09:09:53 -0800 (PST)
-Received: from [10.0.0.178] ([132.147.84.99])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3510691b655sm1211536a91.2.2026.01.14.09.09.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 14 Jan 2026 09:09:52 -0800 (PST)
-Message-ID: <b5d54942-f280-40ab-b445-00b6dc610a8e@shenghaoyang.info>
-Date: Thu, 15 Jan 2026 01:09:40 +0800
+	s=arc-20240116; t=1768411680; c=relaxed/simple;
+	bh=m+SYEh/IiGmnEgrdEv27uXtqymbTpeuiTu/N6f3F940=;
+	h=Date:From:To:CC:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=D4R12N1fv3A7iUGJt/u1ahBXq5ikOgIJkBeBHjfWOnNKtNanZNyKeZVx4i1qTvfbkzoIeJskrxZWeRaitQK4LL9fwnIHb9jqydAS5G6fwOhsbXGpuvcUCCBgFSKjp2nQQLwpFb1UZmgLCDRjDI2+pNNODKutzrEEB1dkeBz+er0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; arc=none smtp.client-ip=185.176.79.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
+Received: from mail.maildlp.com (unknown [172.18.224.83])
+	by frasgout.his.huawei.com (SkyGuard) with ESMTPS id 4drtNX314NzJ46CZ;
+	Thu, 15 Jan 2026 01:27:40 +0800 (CST)
+Received: from dubpeml100005.china.huawei.com (unknown [7.214.146.113])
+	by mail.maildlp.com (Postfix) with ESMTPS id 61C9940572;
+	Thu, 15 Jan 2026 01:27:55 +0800 (CST)
+Received: from localhost (10.203.177.15) by dubpeml100005.china.huawei.com
+ (7.214.146.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.36; Wed, 14 Jan
+ 2026 17:27:54 +0000
+Date: Wed, 14 Jan 2026 17:27:53 +0000
+From: Jonathan Cameron <jonathan.cameron@huawei.com>
+To: Robert Richter <rrichter@amd.com>
+CC: Alison Schofield <alison.schofield@intel.com>, Vishal Verma
+	<vishal.l.verma@intel.com>, Ira Weiny <ira.weiny@intel.com>, Dan Williams
+	<dan.j.williams@intel.com>, Dave Jiang <dave.jiang@intel.com>, "Davidlohr
+ Bueso" <dave@stgolabs.net>, Jonathan Corbet <corbet@lwn.net>,
+	<linux-cxl@vger.kernel.org>, <linux-kernel@vger.kernel.org>, Gregory Price
+	<gourry@gourry.net>, "Fabio M. De Francesco"
+	<fabio.m.de.francesco@linux.intel.com>, Terry Bowman <terry.bowman@amd.com>,
+	Joshua Hahn <joshua.hahnjy@gmail.com>, <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v3 1/3] cxl, doc: Remove isonum.txt inclusion
+Message-ID: <20260114172753.00003f71@huawei.com>
+In-Reply-To: <20260112111707.794526-1-rrichter@amd.com>
+References: <20260112111707.794526-1-rrichter@amd.com>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] x86/acpi: Add acpi=spcr to use SPCR-provided default
- console
-To: Borislav Petkov <bp@alien8.de>
-Cc: x86@kernel.org, Jonathan Corbet <corbet@lwn.net>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Len Brown <lenb@kernel.org>,
- Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-acpi@vger.kernel.org
-References: <20251228092222.130954-1-me@shenghaoyang.info>
- <20260114154656.GDaWe6cFCruAGbJbhe@fat_crate.local>
-Content-Language: en-US
-From: Shenghao Yang <me@shenghaoyang.info>
-In-Reply-To: <20260114154656.GDaWe6cFCruAGbJbhe@fat_crate.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: lhrpeml100009.china.huawei.com (7.191.174.83) To
+ dubpeml100005.china.huawei.com (7.214.146.113)
 
-Hi,
+On Mon, 12 Jan 2026 12:16:43 +0100
+Robert Richter <rrichter@amd.com> wrote:
 
-On 14/1/26 23:46, Borislav Petkov wrote:
-> On Sun, Dec 28, 2025 at 05:22:22PM +0800, Shenghao Yang wrote:
->> Commit 0231d00082f6 ("ACPI: SPCR: Make SPCR available to x86")
->> made SPCR available as an earlycon option on x86 but did not add
->> it as a preferred console to avoid breaking existing setups -
-> 
-> No one has noticed AFAICT since 2018 (this commit's date).
-> 
-> Also:
-> 
->         /* Do not enable ACPI SPCR console by default */
->         acpi_parse_spcr(earlycon_acpi_spcr_enable, false);
-> 
-> Looks nicely conservative to me.
-> 
-
-Thanks for taking a look.
-
->> users have to round trip the dumped console options
->> ("SPCR: console: uart,io,0x3f8,115200") back via their
->> bootloader.
-> 
-> I don't know what that means.
-
-The kernel decodes the SPCR table and dumps the settings to use
-the firmware preferred console in the kernel log:
-
-[    0.005091] ACPI: SPCR 0x000000007FFB5000 000059 (v04 ALASKA A M I    01072009 INTL 20250404)
-[    0.073387] ACPI: SPCR: console: uart,io,0x3f8,115200
-
-We've been inserting the dumped config into the kernel command 
-line and rebooting on first boot (e.g. console=uart,io,0x3f8,115200),
-but would love to avoid this loop.
-
-> 
->> Let users opt in so serial console configuration can be made
->> automatic.
-> 
-> Why?
-
-It's easier this way for larger fleets - we don't want to manage
-hardware specific serial console settings on the kernel command line
-if the firmware is already capable of telling us the correct ones.
-
-> 
-> Text says:
-> 
-> 	[X86] When used with no options the early console is
-> 	determined by the ACPI SPCR table.
-> 
-> But the code doesn't enable the SPCR console by default.
-
-If earlycon is specified on the command line the console from SPCR
-is used, but only as a boot console. It's not present in
-/proc/consoles.
-
-It is possible to retain it with keep_bootcon, but that uses the
-less efficient (in the 8250 case) 8250_early driver.
-
-> 
-> I have no clue what this patch is trying to do.
-> 
-
-In 0231d00082f6 ("ACPI: SPCR: Make SPCR available to x86") the SPCR
-console is only added as an option for earlycon but not as an ordinary
-console so users don't see console output changes.  
-
-The patch adds an opt in so we can get the SPCR console added as
-an ordinary console.
-
-Thanks,
-
-Shenghao
+> This patch removes the line to include:: <isonum.txt>. From Jon:
+>=20
+> "This include has been cargo-culted around the docs...the only real
+> use of it is to write |copy| rather than =A9, but these docs don't even
+> do that. It can be taken out."
+>=20
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Reviewed-by: Dave Jiang <dave.jiang@intel.com>
+> Signed-off-by: Robert Richter <rrichter@amd.com>
+Reviewed-by: Jonathan Cameron <jonathan.cameron@huawei.com>
 
