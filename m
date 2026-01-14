@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-72198-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72199-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CA81D1F0AB
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id ED3D7D1F0AE
 	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 14:20:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 3529430A599B
+	by sea.lore.kernel.org (Postfix) with ESMTP id 45D1D30A650B
 	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 13:17:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 28CBC39C638;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2AF7939C639;
 	Wed, 14 Jan 2026 13:17:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nxRyHydP"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K539fdIo"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E581639B4BD;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFA9639C621;
 	Wed, 14 Jan 2026 13:17:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768396653; cv=none; b=rpKnENtIL6wfbbcIAqK9w9Lprmj5amqqgY37SXuqeFpQrqrC6WnRiHVFzvNKbHXieeSC5kO2Z7RJK3gM3xiI3lqvNLZchEanYmvIt+GPfXN01XNyML+YzBKYbElS6cNkxmSQcPjnWmFXYMJBmVgL/QlL0Nb+FppCfQW6Uo4ctwI=
+	t=1768396653; cv=none; b=TnCya1M2v0AFbIoJ/oad+3KxCDEu6ZQpFIhwUBKRtfrzNiEsL5/gAp5otFPSrbPeRm+hxRg44pCi/InB75/0j8EVe530amWLYsaa2twxu2WDRHI7Ph6gcxb5KO5dzUqIwmTdxT/kgNh/A2DUr24SaDCzJ6BEvpYH+UZE+oOR0C0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768396653; c=relaxed/simple;
-	bh=qeD2CxushaNmzGduOrZz2GnZPSRsopACODszEDevkew=;
+	bh=s1mjnTzuhsFarODXcVZv6x/pyTkp3qp8CK9/urSRqTw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HrPWAXu78/s4Lqv0WEsHpaQANa1PNlTsHVeiFCZGrrDHJ+DX48Yi1fXXv0ac3TNO9Aimlb6aUSrOukdSijDHR0pjh3A/YeP/nByW11BYnffDev/iQU7z6k81j0qmkE3pFr7iJopFrh/N/ZULv6fLSy5Q6USAbHknwQZSOKmqVKY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nxRyHydP; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ABBE5C4AF0C;
+	 MIME-Version:Content-Type; b=Z/R3yIy30EbG2tZ71M66wLzvSA24jY8HnFSWuXZcvXcoqGZwtYjPeLq/WDYPIgPr9rvbrIlBKEJlOAJnM9/+j8SkM3QahngYYifNIhO03FhT2u7M6jvSI3RQdm4vmcyCTEaSFIMqQtZp5MF/qJ5teiX/fRj8sGyGDV3ay0WFAFA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K539fdIo; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3776C2BCC4;
 	Wed, 14 Jan 2026 13:17:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768396652;
-	bh=qeD2CxushaNmzGduOrZz2GnZPSRsopACODszEDevkew=;
+	bh=s1mjnTzuhsFarODXcVZv6x/pyTkp3qp8CK9/urSRqTw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=nxRyHydPtCXWNMVn+k9Nv4QXcZEY+FngSC6plZr4STdEr8EuDSZrLxYSLBM2uFGhw
-	 9yT2HkeUcxkQlMrGIXfvA7/Ubx3y2WK3myulNYcYtH0Y36/Qu49PKXp+FlewEcTCUC
-	 qygjlFQilUM+Mtc2oulnPCKc42p5UUji45xoEo3diz8aLDOgyeada/wq4ahEtRoOld
-	 XVrtH/M9ndjcBEj2LUj5YOrvcvElcxdX+0s2qILS8OLdi9Mo78I0zCBEFupC1Vo8bm
-	 lVtiouHD/2JqWa5Vq3rMQcD0vDOue0XKM1J92Q+8r9qLMtcRE3PA4gHhk/N9VoV/Sv
-	 MNu20iSUHPonQ==
+	b=K539fdIoltpS8MpyRvr1shx6RFNu3ILQcG0NcCi9SHSh9VzLqag+IHVlTDJHJb35J
+	 yZ1A4Kvugydu+/z9rYwocogz7FwhSNZ6JLurD2nKjH+4rwTTPOMX0x5IqInRLiDujC
+	 hR22cX26fl6LS0/aBawoFddzcMfIEh8vu6CAy7+sbpqBPoYznm7U0PE4tIAKaR8wIe
+	 L7sIy1iPbZoJGfqSbJxHw9h0YZ/EPQ7/VCVj/M20Jxeavs31SKOAqqtJnJTNSQBl5q
+	 00SxDkPTpqC5ygwCLjLmjZpZs6dSszSmDF3uAiGVn2FD+wi8snGBYlwe7rzNhIm+5s
+	 /hHkllzB+3lAA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vg0kc-00000002myG-475X;
-	Wed, 14 Jan 2026 14:17:30 +0100
+	id 1vg0kd-00000002myK-01Ze;
+	Wed, 14 Jan 2026 14:17:31 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Jonathan Corbet <corbet@lwn.net>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH 12/13] docs: kdoc: python_version: Improve docstrings and comments
-Date: Wed, 14 Jan 2026 14:17:25 +0100
-Message-ID: <340032ca56db393a2a10dd828bedf5e63c7983ca.1768396023.git.mchehab+huawei@kernel.org>
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 13/13] docs: add kernel-doc modules documentation
+Date: Wed, 14 Jan 2026 14:17:26 +0100
+Message-ID: <feae2c28b694f2136607d9d5dc65a4503cefd685.1768396023.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768396023.git.mchehab+huawei@kernel.org>
 References: <cover.1768396023.git.mchehab+huawei@kernel.org>
@@ -66,64 +66,176 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-In preparation to document kernel-doc module, improve its
-documentation.
+Place kernel-doc modules documentation at Linux Kernel docs.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/python_version.py | 20 ++++++++++++++++----
- 1 file changed, 16 insertions(+), 4 deletions(-)
+ Documentation/tools/index.rst          |  1 +
+ Documentation/tools/kdoc.rst           | 12 +++++++
+ Documentation/tools/kdoc_ancillary.rst | 46 ++++++++++++++++++++++++++
+ Documentation/tools/kdoc_output.rst    | 14 ++++++++
+ Documentation/tools/kdoc_parser.rst    | 29 ++++++++++++++++
+ Documentation/tools/python.rst         | 10 ++++++
+ 6 files changed, 112 insertions(+)
+ create mode 100644 Documentation/tools/kdoc.rst
+ create mode 100644 Documentation/tools/kdoc_ancillary.rst
+ create mode 100644 Documentation/tools/kdoc_output.rst
+ create mode 100644 Documentation/tools/kdoc_parser.rst
+ create mode 100644 Documentation/tools/python.rst
 
-diff --git a/tools/lib/python/kdoc/python_version.py b/tools/lib/python/kdoc/python_version.py
-index e83088013db2..4ddb7ead5f56 100644
---- a/tools/lib/python/kdoc/python_version.py
-+++ b/tools/lib/python/kdoc/python_version.py
-@@ -33,21 +33,31 @@ class PythonVersion:
-     """
+diff --git a/Documentation/tools/index.rst b/Documentation/tools/index.rst
+index 80488e290e10..89b81a13c6a1 100644
+--- a/Documentation/tools/index.rst
++++ b/Documentation/tools/index.rst
+@@ -12,6 +12,7 @@ more additions are needed here:
  
-     def __init__(self, version):
--        """Ïnitialize self.version tuple from a version string"""
-+        """
-+        Ïnitialize self.version tuple from a version string.
-+        """
-         self.version = self.parse_version(version)
+    rtla/index
+    rv/index
++   python
  
-     @staticmethod
-     def parse_version(version):
--        """Convert a major.minor.patch version into a tuple"""
-+        """
-+        Convert a major.minor.patch version into a tuple.
-+        """
-         return tuple(int(x) for x in version.split("."))
+ .. only::  subproject and html
  
-     @staticmethod
-     def ver_str(version):
--        """Returns a version tuple as major.minor.patch"""
-+        """
-+        Returns a version tuple as major.minor.patch.
-+        """
-         return ".".join([str(x) for x in version])
- 
-     @staticmethod
-     def cmd_print(cmd, max_len=80):
-+        """
-+        Outputs a command line, repecting maximum width.
-+        """
+diff --git a/Documentation/tools/kdoc.rst b/Documentation/tools/kdoc.rst
+new file mode 100644
+index 000000000000..e51ba159d8c4
+--- /dev/null
++++ b/Documentation/tools/kdoc.rst
+@@ -0,0 +1,12 @@
++.. SPDX-License-Identifier: GPL-2.0
 +
-         cmd_line = []
- 
-         for w in cmd:
-@@ -66,7 +76,9 @@ class PythonVersion:
-         return "\n  ".join(cmd_line)
- 
-     def __str__(self):
--        """Returns a version tuple as major.minor.patch from self.version"""
-+        """
-+        Return a version tuple as major.minor.patch from self.version.
-+        """
-         return self.ver_str(self.version)
- 
-     @staticmethod
++==================
++Kernel-doc modules
++==================
++
++.. toctree::
++   :maxdepth: 2
++
++   kdoc_parser
++   kdoc_output
++   kdoc_ancillary
+diff --git a/Documentation/tools/kdoc_ancillary.rst b/Documentation/tools/kdoc_ancillary.rst
+new file mode 100644
+index 000000000000..3950d0a3f104
+--- /dev/null
++++ b/Documentation/tools/kdoc_ancillary.rst
+@@ -0,0 +1,46 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=================
++Ancillary classes
++=================
++
++Argparse formatter class
++========================
++
++.. automodule:: lib.python.kdoc.enrich_formatter
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Regular expression class handler
++================================
++
++.. automodule:: lib.python.kdoc.kdoc_re
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++
++Chinese, Japanese and Korean variable fonts handler
++===================================================
++
++.. automodule:: lib.python.kdoc.latex_fonts
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Kernel C file include logic
++===========================
++
++.. automodule:: lib.python.kdoc.parse_data_structs
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Python version ancillary methods
++================================
++
++.. automodule:: lib.python.kdoc.python_version
++   :members:
++   :show-inheritance:
++   :undoc-members:
+diff --git a/Documentation/tools/kdoc_output.rst b/Documentation/tools/kdoc_output.rst
+new file mode 100644
+index 000000000000..08fd271ec556
+--- /dev/null
++++ b/Documentation/tools/kdoc_output.rst
+@@ -0,0 +1,14 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=======================
++Kernel-doc output stage
++=======================
++
++Output handler for man pages and ReST
++=====================================
++
++.. automodule:: lib.python.kdoc.kdoc_output
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
+diff --git a/Documentation/tools/kdoc_parser.rst b/Documentation/tools/kdoc_parser.rst
+new file mode 100644
+index 000000000000..03ee54a1b1cc
+--- /dev/null
++++ b/Documentation/tools/kdoc_parser.rst
+@@ -0,0 +1,29 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=======================
++Kernel-doc parser stage
++=======================
++
++File handler classes
++====================
++
++.. automodule:: lib.python.kdoc.kdoc_files
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Parsed item data class
++======================
++
++.. automodule:: lib.python.kdoc.kdoc_item
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Parser classes and methods
++==========================
++
++.. automodule:: lib.python.kdoc.kdoc_parser
++   :members:
++   :show-inheritance:
++   :undoc-members:
+diff --git a/Documentation/tools/python.rst b/Documentation/tools/python.rst
+new file mode 100644
+index 000000000000..e826787ce9dd
+--- /dev/null
++++ b/Documentation/tools/python.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++================
++Python libraries
++================
++
++.. toctree::
++   :maxdepth: 4
++
++   kdoc
 -- 
 2.52.0
 
