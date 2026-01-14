@@ -1,148 +1,201 @@
-Return-Path: <linux-doc+bounces-72223-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72225-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20849D1F5DD
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 15:18:59 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D1F7D1F8AA
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 15:53:11 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 8F13F3043793
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 14:16:21 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 3475E301691E
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 14:53:05 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id E50652D94AD;
-	Wed, 14 Jan 2026 14:16:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99CF030DD36;
+	Wed, 14 Jan 2026 14:53:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="htk+x4Na"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DZ4y7792"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64BD7231829;
-	Wed, 14 Jan 2026 14:16:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71B3330C353;
+	Wed, 14 Jan 2026 14:53:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768400180; cv=none; b=fh3aja0plzHBvsRzOHb/tH5X5xjqEP473PO3OUJ9LzXjzix9oWWXorcHaTazV4scSAMt1tIvnpKu+63CpKTpnqxyhBICSleC9S1BFjre3HbFIpiB6WfDIaWDkKPPrYDV0BIn1aqDCgS9XMzezQiznRNjD28TmLfU9b3anO48FQ0=
+	t=1768402384; cv=none; b=djbru0v6EVlR8oJZyOhXNchLMX8Nb2+hCMsevEpzhsF33yY+mNoek/CfPY2ycMyZuFFztoYxMwPGoUQgPcWvMq5D9Zx0eHExcVfLstvlt1g4eyqgCDfAqz2Hb8rJMamFPRMUR80Rf81X8H3fwq9tjwXeYmRDwcnsuWvAEBlJGsw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768400180; c=relaxed/simple;
-	bh=Zk+X0U0nP+GtJI9b23g7B8znsodnQPS5UKylro1oFwE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Xzvx485fnRh2JGtEFiuptTHurs0GfvWU1eBPIToOL46OYfuPGOEHpW1n53ICgoo7UxJANeLDI7oOvZIyzwqxG8R9RCTQXEI9S4pihgaguxXdkujjdtZgnWvl+5Wn11eI2DW0jLlhJoL4+CKZSRU23tzCUNYzuhCSvZw7NBCvAOM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=fail (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=htk+x4Na reason="signature verification failed"; arc=none smtp.client-ip=65.109.113.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 628C540E0194;
-	Wed, 14 Jan 2026 14:16:17 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=fail (4096-bit key)
-	reason="fail (body has been altered)" header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id U9i6nnOD5eUv; Wed, 14 Jan 2026 14:16:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1768400172; bh=VRoSE/2YTwFhEpBBl9wXpY8ydPU6I1xxtgwmqqKape0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=htk+x4Natx08his9bWPcyT1eRR2E8mDo6r0Ufv6M7oX9I1xf/5nuKcRZPOt5JxFil
-	 0DvrlAz0d2fonr1AfsbmuosW50C8y8AmnD9ABkAVcz/irfYQKSMHS3Y9ltalVds6wU
-	 DTuRZk1RmrxFdRMrSl+9eeEWHB+qnXrGlJIW18D40BH0Xy6VF5Du6dcAqHL/QItIOG
-	 RhFxknDK9aKTwPtwPZsc81Qo0JEgFJCxA1h/UwnEh/jQkCQG/L+NJn8fXYLTBuk/W4
-	 1VKxEB5pqHN7dp5Cq1iwvaQ+uh/YYx/6aGXFad82Mh4WYRT2IpNSty94gOwXqUgk88
-	 iKFWzxUOws2xTDEzs8v7XzGbqOe+Rd6ucImcyNSW4ZQGj+KdtHAiOrbA+YGgScbR2t
-	 QRL7tKqgCCIA+X48lHwrFW3P4rqDumjugBJINl8I0z+W59xVpbdlcDhJ7sg2om9sb/
-	 Vg8KkN7bmGqZdrjoBMYFo9BhQESYLdHsRAMR4uvUmD7lK3Qrl/6CiaGP0QSHTxCdwJ
-	 ql6xe/rslfuUVQk11RN3dRitXJxteJ/bvPvKYj3QndGFsiI8Z/9qcxMUg+EWW7qpZX
-	 VtDCCiOy6v1ID7knmO7TX5qxIvsynDRvzdk0cPpkA4nPPz7chJwTdXHX3AZ2hHoj8I
-	 Smbu6S3Z1aBrY+pY/st1NB+g=
-Received: from zn.tnic (pd953023b.dip0.t-ipconnect.de [217.83.2.59])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
-	(No client certificate requested)
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with UTF8SMTPSA id 5C64E40E0280;
-	Wed, 14 Jan 2026 14:15:58 +0000 (UTC)
-Date: Wed, 14 Jan 2026 15:15:51 +0100
-From: Borislav Petkov <bp@alien8.de>
-To: Ahmed Tiba <ahmed.tiba@arm.com>
-Cc: linux-acpi@vger.kernel.org, devicetree@vger.kernel.org,
-	tony.luck@intel.com, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, catalin.marinas@arm.com, will@kernel.org,
-	linux-arm-kernel@lists.infradead.org, rafael@kernel.org,
-	linux-doc@vger.kernel.org, Dmitry.Lamerov@arm.com,
-	Michael.Zhao2@arm.com
-Subject: Re: [PATCH 00/12] ras: share firmware-first estatus handling
-Message-ID: <20260114141551.GKaWelF-Gsvzr71LUs@fat_crate.local>
-References: <20251221013534.GAaUdO5vWqMWAdbWbd@renoirsky.local>
- <20251229115440.2734800-1-ahmed.tiba@arm.com>
+	s=arc-20240116; t=1768402384; c=relaxed/simple;
+	bh=xKp2mRX639Xrl1hAH25cMUgzI8E+8kaOkrWTmDZ9gJI=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=YMmya/k8dSEAnCSie24RsVRkb2damN2yIE+Mee+yAAb743cqIc6k7NuTzmHOJGL9Vsmg9quykgnFpBsmjtGImafLlIZyOFVHlr6STsKURmT4mb+NhgG7LwG+onz4B5yKF51v478RU/dfmnl481NpDh8wgu3cvpwu50mK03SdHRc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DZ4y7792; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 570D6C2BC86;
+	Wed, 14 Jan 2026 14:53:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768402384;
+	bh=xKp2mRX639Xrl1hAH25cMUgzI8E+8kaOkrWTmDZ9gJI=;
+	h=Date:From:To:Cc:In-Reply-To:References:Subject:From;
+	b=DZ4y7792kI2/4eE5VVTlEy1lwDXzIzeNr2iEGyaqqLMYTsvcSbwt8Bo54fNz4FJrn
+	 0CjwDI0jj4BZuie48fZ7X8+pogo2m9xuuz5ZkTKqUIWIWMb2aIahe3YDQ1OihTAsyY
+	 /kSWP/W66gnEfc8gA/3bKKHjBBbzoJWIQmXxEVECLl86oIEVeZwN3rPLewdZXpBLNQ
+	 4fSATB6J5Q9DEK8WPOow5IHJKdW2q5kckZv1zfwvc/Rackn2AgyYEGYSEHyTHq4m0k
+	 xzDo6EcWHnQhpPR7xCjV8fvC1tdohxaCsjAOcYPGoYZ1/+HzD4MzDToJBxFdCh/tru
+	 OSjQsEWq0CzTg==
+Received: from phl-compute-10.internal (phl-compute-10.internal [10.202.2.50])
+	by mailfauth.phl.internal (Postfix) with ESMTP id 32C9EF4006B;
+	Wed, 14 Jan 2026 09:53:02 -0500 (EST)
+Received: from phl-imap-15 ([10.202.2.104])
+  by phl-compute-10.internal (MEProxy); Wed, 14 Jan 2026 09:53:02 -0500
+X-ME-Sender: <xms:zq1naRMKLB-vQH7IFdq2onnRojQkLatu-C-zvbT0T438TRsV4tP_4A>
+    <xme:zq1naewv4HVLitXOfBmI7UE_Y2gurDnKovxNhXptVvlpsUh9pO0bvYw7t9SjEJlzT
+    sLy2LuSF83BZ36FBNWcuJt0cuqdzsP2xJUgTbLRAhgnTSmlJulk9m0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdefgeejucetufdoteggodetrf
+    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
+    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
+    gurhepofggfffhvfevkfgjfhfutgfgsehtqhertdertdejnecuhfhrohhmpedfvehhuhgt
+    khcunfgvvhgvrhdfuceotggvlheskhgvrhhnvghlrdhorhhgqeenucggtffrrghtthgvrh
+    hnpefghfeguedtieeiveeugfevtdejfedukeevgfeggfeugfetgfeltdetueelleelteen
+    ucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegthhhutg
+    hklhgvvhgvrhdomhgvshhmthhprghuthhhphgvrhhsohhnrghlihhthidqudeifeegleel
+    leehledqfedvleekgeegvdefqdgtvghlpeepkhgvrhhnvghlrdhorhhgsehfrghsthhmrg
+    hilhdrtghomhdpnhgspghrtghpthhtohepfeeipdhmohguvgepshhmthhpohhuthdprhgt
+    phhtthhopehlihhnuhigqdhfvdhfshdquggvvhgvlheslhhishhtshdrshhouhhrtggvfh
+    horhhgvgdrnhgvthdprhgtphhtthhopegtohhrsggvtheslhifnhdrnhgvthdprhgtphht
+    thhopehhihhrohhfuhhmihesmhgrihhlrdhprghrkhhnvghtrdgtohdrjhhppdhrtghpth
+    htohepphgtsehmrghnghhuvggsihhtrdhorhhgpdhrtghpthhtohepsghhrghrrghthhhs
+    mhesmhhitghrohhsohhfthdrtghomhdprhgtphhtthhopehsphhrrghsrggusehmihgtrh
+    hoshhofhhtrdgtohhmpdhrtghpthhtohepthihthhsohesmhhithdrvgguuhdprhgtphht
+    thhopehrihgthhgrrhgusehnohgurdgrthdprhgtphhtthhopehhuhgstggrphesohhmnh
+    hisghonhgurdgtohhm
+X-ME-Proxy: <xmx:zq1naTkRbv9ZdmB81QztDlnhdErqtX9JaPCkPbhVF7A2EF4siXWTKA>
+    <xmx:zq1naQMdIxjnxtmT6iFO3dvBra_cikPt2rs9udjIX9hM3quVc1o8wg>
+    <xmx:zq1naSyL6jo-51wpIBye7R4H1uQkRJTayNYX4HLBSWa4OjKE3tRIjg>
+    <xmx:zq1naen3U34rfR84UbpLxCNVQHHeUcJBEJes8dFgznAte5TxzT705Q>
+    <xmx:zq1nab_H0tCK8W4yIFxCou46A5ZL-g9ECWVg-JI1en9AksHOVnvPNIgI>
+Feedback-ID: ifa6e4810:Fastmail
+Received: by mailuser.phl.internal (Postfix, from userid 501)
+	id F2C75780070; Wed, 14 Jan 2026 09:53:01 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+X-ThreadId: ArEQL-Tet5yZ
+Date: Wed, 14 Jan 2026 09:52:34 -0500
+From: "Chuck Lever" <cel@kernel.org>
+To: "Amir Goldstein" <amir73il@gmail.com>, "Jeff Layton" <jlayton@kernel.org>
+Cc: "Christoph Hellwig" <hch@infradead.org>,
+ "Christian Brauner" <brauner@kernel.org>,
+ "Chuck Lever" <chuck.lever@oracle.com>, "Jan Kara" <jack@suse.cz>,
+ "Luis de Bethencourt" <luisbg@kernel.org>,
+ "Salah Triki" <salah.triki@gmail.com>,
+ "Nicolas Pitre" <nico@fluxnic.net>, "Anders Larsen" <al@alarsen.net>,
+ "Alexander Viro" <viro@zeniv.linux.org.uk>,
+ "David Sterba" <dsterba@suse.com>, "Chris Mason" <clm@fb.com>,
+ "Gao Xiang" <xiang@kernel.org>, "Chao Yu" <chao@kernel.org>,
+ "Yue Hu" <zbestahu@gmail.com>, "Jeffle Xu" <jefflexu@linux.alibaba.com>,
+ "Sandeep Dhavale" <dhavale@google.com>,
+ "Hongbo Li" <lihongbo22@huawei.com>, "Chunhai Guo" <guochunhai@vivo.com>,
+ "Jan Kara" <jack@suse.com>, "Theodore Tso" <tytso@mit.edu>,
+ "Andreas Dilger" <adilger.kernel@dilger.ca>,
+ "Jaegeuk Kim" <jaegeuk@kernel.org>,
+ "OGAWA Hirofumi" <hirofumi@mail.parknet.co.jp>,
+ "David Woodhouse" <dwmw2@infradead.org>,
+ "Richard Weinberger" <richard@nod.at>,
+ "Dave Kleikamp" <shaggy@kernel.org>,
+ "Ryusuke Konishi" <konishi.ryusuke@gmail.com>,
+ "Viacheslav Dubeyko" <slava@dubeyko.com>,
+ "Konstantin Komarov" <almaz.alexandrovich@paragon-software.com>,
+ "Mark Fasheh" <mark@fasheh.com>, "Joel Becker" <jlbec@evilplan.org>,
+ "Joseph Qi" <joseph.qi@linux.alibaba.com>,
+ "Mike Marshall" <hubcap@omnibond.com>,
+ "Martin Brandenburg" <martin@omnibond.com>,
+ "Miklos Szeredi" <miklos@szeredi.hu>,
+ "Phillip Lougher" <phillip@squashfs.org.uk>,
+ "Carlos Maiolino" <cem@kernel.org>, "Hugh Dickins" <hughd@google.com>,
+ "Baolin Wang" <baolin.wang@linux.alibaba.com>,
+ "Andrew Morton" <akpm@linux-foundation.org>,
+ "Namjae Jeon" <linkinjeon@kernel.org>,
+ "Sungjong Seo" <sj1557.seo@samsung.com>,
+ "Yuezhang Mo" <yuezhang.mo@sony.com>,
+ "Alexander Aring" <alex.aring@gmail.com>,
+ "Andreas Gruenbacher" <agruenba@redhat.com>,
+ "Jonathan Corbet" <corbet@lwn.net>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ "Eric Van Hensbergen" <ericvh@kernel.org>,
+ "Latchesar Ionkov" <lucho@ionkov.net>,
+ "Dominique Martinet" <asmadeus@codewreck.org>,
+ "Christian Schoenebeck" <linux_oss@crudebyte.com>,
+ "Xiubo Li" <xiubli@redhat.com>, "Ilya Dryomov" <idryomov@gmail.com>,
+ "Trond Myklebust" <trondmy@kernel.org>,
+ "Anna Schumaker" <anna@kernel.org>, "Steve French" <sfrench@samba.org>,
+ "Paulo Alcantara" <pc@manguebit.org>,
+ "Ronnie Sahlberg" <ronniesahlberg@gmail.com>,
+ "Shyam Prasad N" <sprasad@microsoft.com>, "Tom Talpey" <tom@talpey.com>,
+ "Bharath SM" <bharathsm@microsoft.com>,
+ "Hans de Goede" <hansg@kernel.org>, linux-kernel@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-btrfs@vger.kernel.org,
+ linux-erofs@lists.ozlabs.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mtd@lists.infradead.org,
+ jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org,
+ ntfs3@lists.linux.dev, ocfs2-devel@lists.linux.dev,
+ devel@lists.orangefs.org, linux-unionfs@vger.kernel.org,
+ linux-xfs@vger.kernel.org, linux-mm@kvack.org, gfs2@lists.linux.dev,
+ linux-doc@vger.kernel.org, v9fs@lists.linux.dev,
+ ceph-devel@vger.kernel.org, linux-nfs@vger.kernel.org,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org
+Message-Id: <5a1730f3-30ff-403c-a460-09a81f9616c5@app.fastmail.com>
+In-Reply-To: 
+ <CAOQ4uxhDwR7dteLaqURX+9CooGM1hA7PL6KnVmSwX11ZdKxZTA@mail.gmail.com>
+References: <8af369636c32b868f83669c49aea708ca3b894ac.camel@kernel.org>
+ <CAOQ4uxgD+Sgbbg9K2U0SF9TyUOBb==Z6auShUWc4FfPaDCQ=rg@mail.gmail.com>
+ <ec78bf021fa1f6243798945943541ba171e337e7.camel@kernel.org>
+ <cb5d2da6-2090-4639-ad96-138342bba56d@oracle.com>
+ <ce700ee20834631eceededc8cd15fc5d00fee28e.camel@kernel.org>
+ <20260113-mondlicht-raven-82fc4eb70e9d@brauner>
+ <aWZcoyQLvbJKUxDU@infradead.org>
+ <ce418800f06aa61a7f47f0d19394988f87a3da07.camel@kernel.org>
+ <aWc3mwBNs8LNFN4W@infradead.org>
+ <CAOQ4uxhMjitW_DC9WK9eku51gE1Ft+ENhD=qq3uehwrHO=RByA@mail.gmail.com>
+ <aWeUv2UUJ_NdgozS@infradead.org>
+ <c40862cd65a059ad45fa88f5473722ea5c5f70a5.camel@kernel.org>
+ <CAOQ4uxhDwR7dteLaqURX+9CooGM1hA7PL6KnVmSwX11ZdKxZTA@mail.gmail.com>
+Subject: Re: [PATCH 00/24] vfs: require filesystems to explicitly opt-in to lease
+ support
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20251229115440.2734800-1-ahmed.tiba@arm.com>
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 29, 2025 at 11:54:36AM +0000, Ahmed Tiba wrote:
-> By =E2=80=9Cerror status=E2=80=9D I=E2=80=99m referring to the UEFI CPE=
-R Generic Error Status block,
-> which is the standard firmware-produced error payload that Linux alread=
-y
 
-Standard, schmandard - a bunch of fw crap.
 
-That's UEFI's understanding of a common platform error record, no?
+On Wed, Jan 14, 2026, at 9:14 AM, Amir Goldstein wrote:
+> On Wed, Jan 14, 2026 at 2:41=E2=80=AFPM Jeff Layton <jlayton@kernel.or=
+g> wrote:
 
-So why is this a generic estatus and not part of CPER-something?
+> Very well then.
+> How about EXPORT_OP_PERSISTENT_HANDLES?
+>
+> This terminology is from the NFS protocol spec and it is also used
+> to describe the same trait in SMB protocol.
+>
+>> The problem there is that we very much do want to keep tmpfs
+>> exportable, but it doesn't have stable handles (per-se).
+>
+> Thinking out loud -
+> It would be misguided to declare tmpfs as
+> EXPORT_OP_PERSISTENT_HANDLES
+> and regressing exports of tmpfs will surely not go unnoticed.
+>
+> How about adding an exportfs option "persistent_handles",
+> use it as default IFF neither options fsid=3D, uuid=3D are used,
+> so that at least when exporting tmpfs, exportfs -v will show
+> "no_persistent_handles" explicitly?
 
-You're calling something "estatus" which sounds like a generic thing but =
-it is
-simply a subset of functionality you need to make it work on ARM without
-ACPI and have packaged whatever you need under the name "estatus".
+I think we need to be careful. tmpfs filehandles align quite
+well with the traditional definition of persistent filehandles.
+tmpfs filehandles live as long as tmpfs files do, and that is
+all that is required to be considered "persistent".
 
-Why does this thing need to be called an "estatus core"?
-
-I'd expect to see a compilation unit which contains shared functionality,=
- gets
-linked to your stuff and that's it. No "fanfares", no CONFIG symbols, no
-nothing.
-
-> consumes via GHES on ACPI systems. I=E2=80=99m not introducing a new er=
-ror model
-> here; the intent is to reuse the existing CPER decoding and handling on=
-ce
-> that payload exists.
-
-So why aren't you doing only that? Why are you doing all that extra stuff=
-?
-
-> The practical use case is firmware-first RAS platforms that emit CPER
-> records but do not use ACPI/APEI GHES for discovery or notification. To=
-day,
-> those platforms either have to duplicate CPER parsing logic or miss out=
- on
-> the common Linux RAS handling (standard logging, memory failure flow,
-> vendor notification paths). As a result, the full firmware-first RAS
-> pipeline effectively only works when CPER arrives through GHES.
-
-Yah, got it.
-
-But see above.
-
-Please do not "over-design" this into a separate thing but simply carve o=
-ut
-the functionality and share it. And leave it where it belongs
-- drivers/firmware/efi/ is not the right place as this isn't really EFI. =
-This
-is a piece of APEI/GHES crap you need.
-
-Later, when there's need to make it more sophisticated, then we can talk
-again.
-
-Thx.
 
 --=20
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+Chuck Lever
 
