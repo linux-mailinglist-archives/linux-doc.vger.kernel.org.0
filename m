@@ -1,77 +1,76 @@
-Return-Path: <linux-doc+bounces-72331-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72333-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC221D21853
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 23:14:25 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35F7ED2186E
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 23:15:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id A64CB3016236
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 22:13:59 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 8653230318D3
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 22:14:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1DF423AEF4B;
-	Wed, 14 Jan 2026 22:13:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E01EC3B5304;
+	Wed, 14 Jan 2026 22:14:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="m4h4GaQm"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Erf8d9oF"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B0DB3AEF52
-	for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 22:13:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 809FD3B5313
+	for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 22:13:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768428838; cv=none; b=iqds7dkClKg3lXmK+iyQ5CW1Wf5MLy8XcAdQtua9PESQOQ/fDJoF93nLlqGHSb9e3ILyAMj2oUwbWvc798VB1gjC9Tu+jbLc4g0qI2WU6PTjIh/dMya4USMZTRWxgANnfo4OtH1Dv4g0J6xauvLJAMApa2a5FHiDXkmemJFnjTg=
+	t=1768428843; cv=none; b=h7TGzuqxArnGfpMCV3mW460y09Edgh7E+hPvmdvR0WRKDwUg1cSGiBtTuHbZdDGDRES5A/pLIQNGXpYLJS4xuU+MprtnzkRAHLqmGF4LuOwq5lJxBzMprslhBZW0FH2Rvwpmc/z1DWVSrjBIWaUerbFtRlLQC+i2uZjYxODiXE4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768428838; c=relaxed/simple;
-	bh=v/6ny77OEhOTDZTQ79j46inEoAHozIzSVLV54SqB5XU=;
+	s=arc-20240116; t=1768428843; c=relaxed/simple;
+	bh=Frl8g7gPNJZnVuF1cortnAJ5yPmXpbnchhHZccoy5S8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hy7f9S5jQCZP2HImBI5C1O7Wm31Ncx5icKsKP/ikbTmNzrKuqpXg3OlUj7EF9MvBnzqE/gyCfGMX0LhhiYs87s5K6ussZZep90jnsV3YO+jtQUZw3sNIHnc5b5UgyTkLVPwpsCucGtx6ONA82At4Av2yyr6xG2FswCBeDWa2y/M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=m4h4GaQm; arc=none smtp.client-ip=209.85.222.174
+	 MIME-Version; b=IfZ+t86lhYKJ7YbWo7a0HpV5yhSMBz9/Si0VxuQ0rp829B9Ln706VNLXJScX0586Nh2RQfln7628NxmVYg2OZO7ZI+fdxACofNlsgGX2Ga5wE9WH5IjVqTmppEwn9uvHdjAVH6KU4dj8WTuU67wQTfwIU+k52yt3pNB05ygo62U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Erf8d9oF; arc=none smtp.client-ip=209.85.222.172
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-8b2f0f9e4cbso20871585a.0
-        for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 14:13:47 -0800 (PST)
+Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-8c52f15c5b3so29785885a.3
+        for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 14:13:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768428824; x=1769033624; darn=vger.kernel.org;
+        d=gmail.com; s=20230601; t=1768428825; x=1769033625; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ckc2PkyYWXkN9ubnJOQKa6sgkDYo191+Pf3SF4+RdaY=;
-        b=m4h4GaQmLps4eYd+p4N8j6XD1Cn4yDY+z9viJPYK/P+7okqaz4kgiHMQVVLTpYl7sz
-         Vin+8Oo9UpDsZ3/tdYEkI9Py1gE1HcvaO7yMETh1JSO+9Z4B26oquOgunOjvWnMaDNk9
-         xAPjkEds2ZuXntNuS7WHeS4jYhh+BuTKuOqkn67bUgGZdPFCxtHBSf+vjO/UnaMWSYyZ
-         1BPPXCp7y6xPsm7SFLbfFbzzY7hr3fRsEWPHohX+/gr+kpIdga+RcYbfIxP61168F4+Y
-         wKQ0d1Is3/aPyE7mTZhHua2wI/suXEBtiFaRzAj9TN5t69EcbZTnfkhTJmc59V+TEoFm
-         ruGg==
+        bh=5gG/T9PvlN7aaWKP3v8uvJnzLqAaoC9Sf8EP4s01LO0=;
+        b=Erf8d9oFtq6hQp6TsprMFlAAV1Rp4tW/kqQykHoOoyI5xunoLIPFIqPXZ5i3ILFtBF
+         q5Gt+QRNqs29RFYUr0kvQcqHbiu4nw/umjhIKNk2V1a4/BdQ0xTuJ6XCA3e/91vpahVS
+         gOLh0PvCdJoJPoKf4MAR8nvca9eV63Ca46gGxNq7Sln3dpNI87bBKR3roy8NlhHKtjog
+         rLxMyNXLoCKq+7c8UCh1nzANmsqiuL36JNqEv9LTfL6BM5vQiCQpIhLeneaLZD5p3Aks
+         1L/ainQw23HM3nVDwVfPw0Qmo92Om/EmrvViLBWt2Bv0FDwStI81fA47g/giKbJHbOEx
+         pKrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768428824; x=1769033624;
+        d=1e100.net; s=20230601; t=1768428825; x=1769033625;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ckc2PkyYWXkN9ubnJOQKa6sgkDYo191+Pf3SF4+RdaY=;
-        b=I16X/QtPbVUraF8vFxx2Y9CL1aPhkwc36d2jCdSlSB3wKX45hvvt+vSFdWzui3YaEZ
-         qnCPzJGGMNPlHV9AFtRNDyhuUo9+KvVyRa97WIfI6OY5QZ6ScwlgsU4/YofXVjtfLH5M
-         wOBPyUyXKm0CPphKnxqFte+EpuFCRkCNAOP62YAcPjcate9YYr3cQm7n7KGZ4X/zqIuj
-         PFp8swh61k/vA0vih3sfxUGiVzjFs3gsJUR9NmW731FI8CT0KXON7M8m3kza25mOvwWH
-         fORCOtFmmPQaKFqG2TmyeSXCSUizC7H1q9XIFxieN73kBGekkV9i+knJyN9CUBoOu1wy
-         Me9w==
-X-Forwarded-Encrypted: i=1; AJvYcCVf0ohR0L83hY0dyAqMErVl51OCikTn5wPEACEjb90joBdkO5rZ/iEzTtCBLUcL/mDSaURs92/VEQs=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzdui55hRSQu2mYkAmLCcauI4B+HbKUh39Sh5nKifsRKLbh0oQi
-	NbMCu1HpM2yepR+eDyv7Q5UVRqCYlj438Hoa4GN7vNqKS5Vnu9JTyvLi
-X-Gm-Gg: AY/fxX5KGbmHPs8vh2+Lwj01sgnoVJrGW+MSILgNagUFfGgh6tt2kxCLJzKH0QavPNz
-	74GhOEOPGORIh3J7iCL6PgautQqdC3zVcZ1TZ6Oa9DgE8S8DHucqfkDerrWeNA9Vj3N7LIh9g4a
-	/C8UFw+XOZvU1TWS24Ctzj+IyjVWV5HjkmoIFNctot5IRa6lSpPtEPWYO7B4NsatVTrGghK4lst
-	i7w1r3n9YD/4q790/WFfwMcupyXRM9kvjzB8c1yi0VaGAPsJKJlLTDW5BgrmqGbbk92P5VskTVR
-	k+mXOkzLkl1A7Z5PtAeDzDdN65YAG/NwEMIbq3f6Ws30OigiN0A+p8Dc7iDKZQRClXWZ3K5ne2t
-	B9P2P68ddOGmhGnJ30Dcqs9uaSZBCoKPZN8i6XHhuvfc2RDrYhisyIgeDPIyyk4wdi9IwFZ2WzE
-	dZ8Ghh76vf0LAmwYRmV6bkU3FNtlCmq0Z4ybuIJzvQ/oBg8BTi2sla3q0aY8Z33ZJcg+I0t9K78
-	HSTdgow3Q==
-X-Received: by 2002:a05:620a:4052:b0:8b2:e5da:d312 with SMTP id af79cd13be357-8c591a02e83mr164610885a.39.1768428823769;
-        Wed, 14 Jan 2026 14:13:43 -0800 (PST)
+        bh=5gG/T9PvlN7aaWKP3v8uvJnzLqAaoC9Sf8EP4s01LO0=;
+        b=K1rOoAmPrf+6xuTofTd/VZUvorcPfMHHu91PtzHaMWR4QZ4S2JiO2BXr6LZaB8b42J
+         38YyRNaHKRSHuqTnzP2NIK/FYVu4vh4KAW35gyMKXva0Ra6VfHjG8U7bpouxgLNsX7RR
+         3i0FBeBk09rzDBhGc8RraP9zUZvmnSVQsBl2VfLNxdX6FUMdNSUtKCA9Q759fc7mnvUG
+         fvXSZhnJvpEFRImLZaUr56XtTnUXpzVOpAj0xxFuUY/yvk4TBosdp8WGipIYk/5hAncM
+         DOsMjRBZJ2UH6pQRPuA5eFUBh7y4EKbY67ARLunDmWp1WzFwkfcYTkuA+g4BLb3rtWMt
+         9Y3g==
+X-Forwarded-Encrypted: i=1; AJvYcCVccu2AYw5h7JRRk5nAYcPV1BFe21VcxDafJPDDzFO2lVqFoIwosGDpFReBhksbWul3sgzor6tEd/A=@vger.kernel.org
+X-Gm-Message-State: AOJu0YzgcfFf4Nd92++TIo8lz32eJA0PZEXlQRQChI5PNHoala3lqmos
+	eYNFTodacISL1xReYbrsXu52b77nL40Kmae7XGx/Jq1EqhtU/hHnXTbl
+X-Gm-Gg: AY/fxX4SgbSB0WSiV1R0zpllqvWZZ4F7sP7eaub6WekR6B+busF3P/s85p9JqAAZhCN
+	LvGqBFzAz4c27LensFAgaqhN/ia+rnqmOy7cCny4gzZUV1wXVY7iL/6tAXGR8NjKw8cRQdQoC64
+	o/FTV3eicFG2OD/ge5fkBBT6B9dXyywiSIaa8cnarCU6qHXZDG+L9Z9whjO82REQSUtQXHjGBZT
+	4vdVu87arIQ1o5l+QDNAk3t7l1DccerAUYwsOUDIghYFfGZ3JSiJ/7GrPBTGDiJzS6oTv0br8HN
+	RQagRyEqdVU56jLR3gaedQDDbffUCzW/vfLOgMBzmg1Vf4GGtN6cSp0HQhxVplcpK40vQrOx3tg
+	XCofEWCnJrU1y9at7fd2kOi5+B5Ykwu7UI4DamCrVenor9l01pc7UptcY6UDk1y+DqaxPiMvoEQ
+	bFVylG8FYODA/0TPP3IvImA2rU71P0oJVxIiBPobmMJd3laWF9Oot0Z5lN+SqrBs5U4XSFSfE=
+X-Received: by 2002:a05:620a:708a:b0:8b5:222d:ce3b with SMTP id af79cd13be357-8c52fbdce95mr670335885a.52.1768428825363;
+        Wed, 14 Jan 2026 14:13:45 -0800 (PST)
 Received: from pc.mynetworksettings.com ([2600:4041:4491:2000:c1bc:6046:8762:e96])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c530bb685fsm250007785a.44.2026.01.14.14.13.42
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-8c530bb685fsm250007785a.44.2026.01.14.14.13.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jan 2026 14:13:43 -0800 (PST)
+        Wed, 14 Jan 2026 14:13:44 -0800 (PST)
 From: "Seokwoo Chung (Ryan)" <seokwoo.chung130@gmail.com>
 To: rostedt@goodmis.org,
 	mhiramat@kernel.org,
@@ -83,12 +82,13 @@ Cc: mathieu.desnoyers@efficios.com,
 	linux-doc@vger.kernel.org,
 	linux-kselftest@vger.kernel.org,
 	"Seokwoo Chung (Ryan)" <seokwoo.chung130@gmail.com>
-Subject: [PATCH v5 0/3] tracing/fprobe: Support comma-separated symbols and :entry/:exit
-Date: Wed, 14 Jan 2026 17:13:37 -0500
-Message-ID: <20260114221341.128038-1-seokwoo.chung130@gmail.com>
+Subject: [PATCH v5 1/3] tracing/fprobe: Support comma-separated symbols and :entry/:exit
+Date: Wed, 14 Jan 2026 17:13:38 -0500
+Message-ID: <20260114221341.128038-2-seokwoo.chung130@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251126184110.72241-1-seokwoo.chung130@gmail.com>
+In-Reply-To: <20260114221341.128038-1-seokwoo.chung130@gmail.com>
 References: <20251126184110.72241-1-seokwoo.chung130@gmail.com>
+ <20260114221341.128038-1-seokwoo.chung130@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -97,60 +97,164 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This series extends fprobe dynamic events to accept a comma-separated list of
-symbols and explicit/suffixes.
+Signed-off-by: Seokwoo Chung (Ryan) <seokwoo.chung130@gmail.com>
+---
+ kernel/trace/trace.c        |  4 +--
+ kernel/trace/trace_fprobe.c | 49 ++++++++++++++++++++-----------------
+ kernel/trace/trace_probe.h  |  2 ++
+ 3 files changed, 31 insertions(+), 24 deletions(-)
 
-Currently, fprobe only supports a single symbol (or wildcard) per event. This
-series allow users to specify a comma-separated list of symbols, including
-exclusions, and to select entry/exit explicitly using /
-
-Examples:
-- f:[GRP/][EVENT] func1,func2,func3
-- f:[GRP/][EVENT] func1,!func2,func3 (exclude with '!')
-
-Logic changes:
-- Refactor parsing logic into parse_fprobe_spec()
-- Support comma-separated lists and '!' exclusions
-- Add / suffixes for explicit entry/exit selection
-- Preserve legacy single-symbol behavior (single symbols still accept %return)
-- Disable BTF-based signature lookup when list/wildcard is used, since one
-  function signature cannot apply to multiple functions
-- Reject mixed legacy/new syntax where applicable (e.g. list + %return)
-- Update tracefs/README and fprobe documentation
-- Add ftrace selftests covering accepted list syntax cases
-
-*Patch order is adjusted: code first, then docs, then selftest
-
-Changes in v5:
-- Reordered patches (code->docs->selftests) as suggested
-- Addressed review feedback on README help text to show both legacy and list
-  syntaxes
-- Added missing traceprobe error IDs used by the new validation and fixed
-  parsing/bracing issues found by automated builds
-- Removed the dedicated list_mode field and infer list behavior from presence of
-  filter/nofilter and keep struct trace_probe as the last member
-- Link to v4: https://lore.kernel.org/linux-trace-kernel/20251127151218.4763b25c751bb2aac4b1ee36@kernel.org/
-
-I am not fully confident the runtime testing coverage that I did is sufficient
-across configs/architectures, so additional verification would be appreciated.
-
-Best regards,
-Ryan Chung
-
-Seokwoo Chung (Ryan) (3):
-  tracing/fprobe: Support comma-separated symbols and :entry/:exit
-  docs: tracing/fprobe: Document list filters and :entry/:exit
-  selftests/ftrace: Add accept cases for fprobe list syntax
-
- Documentation/trace/fprobetrace.rst           | 18 +++++--
- kernel/trace/trace.c                          |  4 +-
- kernel/trace/trace_fprobe.c                   | 49 ++++++++++---------
- kernel/trace/trace_probe.h                    |  2 +
- .../ftrace/test.d/dynevent/fprobe_list.tc     |  2 +-
- 5 files changed, 47 insertions(+), 28 deletions(-)
-
-
-base-commit: f0c13b210e4366e03bd9e8967347b06b227e20a4
+diff --git a/kernel/trace/trace.c b/kernel/trace/trace.c
+index 10cdcc7b194e..73b59d47dfe7 100644
+--- a/kernel/trace/trace.c
++++ b/kernel/trace/trace.c
+@@ -5578,8 +5578,8 @@ static const char readme_msg[] =
+ 	"\t           r[maxactive][:[<group>/][<event>]] <place> [<args>]\n"
+ #endif
+ #ifdef CONFIG_FPROBE_EVENTS
+-	"\t           f[:[<group>/][<event>]] <func-name>[:entry|:exit] [<args>]\n"
+-	"\t		(single symbols still accept %return)\n"
++	"\t           f[:[<group>/][<event>]] <func-name>[%return] [<args>]\n"
++	"\t	      f[:[<group>/][<event>]] <func-list>[:entry|:exit] [<args>]\n" 
+ 	"\t           t[:[<group>/][<event>]] <tracepoint> [<args>]\n"
+ #endif
+ #ifdef CONFIG_HIST_TRIGGERS
+diff --git a/kernel/trace/trace_fprobe.c b/kernel/trace/trace_fprobe.c
+index 5a2a41eea603..1663c341ddb4 100644
+--- a/kernel/trace/trace_fprobe.c
++++ b/kernel/trace/trace_fprobe.c
+@@ -187,16 +187,23 @@ DEFINE_FREE(tuser_put, struct tracepoint_user *,
+  */
+ struct trace_fprobe {
+ 	struct dyn_event	devent;
+-	char			*filter;
++
+ 	struct fprobe		fp;
+-	bool			list_mode;
+-	char			*nofilter;
+ 	const char		*symbol;
+-	struct trace_probe	tp;
++	char			*filter;
++	char			*nofilter;
++
+ 	bool			tprobe;
+ 	struct tracepoint_user	*tuser;
++
++	struct trace_probe tp;
+ };
+ 
++static inline bool trace_fprobe_has_list(const struct trace_fprobe *tf)
++{
++	return tf->filter || tf->nofilter;
++}
++
+ static bool is_trace_fprobe(struct dyn_event *ev)
+ {
+ 	return ev->ops == &trace_fprobe_ops;
+@@ -847,7 +854,7 @@ static int __register_trace_fprobe(struct trace_fprobe *tf)
+ 	 * - list_mode: pass filter/nofilter
+ 	 * - single: pass symbol only (legacy)
+ 	 */
+-	if (tf->list_mode)
++	if (trace_fprobe_has_list(tf))
+ 		return register_fprobe(&tf->fp, tf->filter, tf->nofilter);
+ 	return register_fprobe(&tf->fp, tf->symbol, NULL);
+ }
+@@ -1188,11 +1195,18 @@ static int parse_fprobe_spec(const char *in, bool is_tracepoint,
+ 	*base = NULL; *filter = NULL; *nofilter = NULL;
+ 	*is_return = false; *list_mode = false;
+ 
+-	if (is_tracepoint) {
++	if (is_tracepoint) 
++	{
+ 		if (strchr(in, ',') || strchr(in, ':'))
++		{
++			trace_probe_log_err(0, BAD_TP_NAME);
+ 			return -EINVAL;
++		}
+ 		if (strstr(in, "%return"))
++		{
++			trace_probe_log_err(p - in, BAD_TP_NAME);
+ 			return -EINVAL;
++		}
+ 		for (p = in; *p; p++)
+ 			if (!isalnum(*p) && *p != '_')
+ 				return -EINVAL;
+@@ -1225,6 +1239,7 @@ static int parse_fprobe_spec(const char *in, bool is_tracepoint,
+ 			} else if (!strcmp(p, ":entry")) {
+ 				*(char *)p = '\0';
+ 			} else {
++				trace_probe_log_err(p - work, BAD_LIST_SUFFIX);
+ 				return -EINVAL;
+ 			}
+ 		}
+@@ -1233,6 +1248,7 @@ static int parse_fprobe_spec(const char *in, bool is_tracepoint,
+ 	list = !!strchr(work, ',');
+ 	
+ 	if (list && legacy_ret) {
++		trace_probe_log_err(p - work, BAD_LEGACY_RET);
+ 		return -EINVAL;
+ 	}
+ 
+@@ -1245,12 +1261,9 @@ static int parse_fprobe_spec(const char *in, bool is_tracepoint,
+ 
+ 	if (list) {
+ 		char *tmp = b, *tok;
+-		size_t fsz, nfsz;
+ 
+-		fsz = nfsz = strlen(b) + 1;
+-
+-		f = kzalloc(fsz, GFP_KERNEL);
+-		nf = kzalloc(nfsz, GFP_KERNEL);
++		f = kzalloc(strlen(b) + 1, GFP_KERNEL);
++		nf = kzalloc(strlen(b) + 1, GFP_KERNEL);
+ 		if (!f || !nf)
+ 			return -ENOMEM;
+ 
+@@ -1261,6 +1274,7 @@ static int parse_fprobe_spec(const char *in, bool is_tracepoint,
+ 			if (*tok == '\0') {
+ 				trace_probe_log_err(tmp - b - 1, BAD_TP_NAME);
+ 				return -EINVAL;
++			}
+ 
+ 			if (neg)
+ 				tok++;
+@@ -1455,17 +1469,8 @@ static int trace_fprobe_create_internal(int argc, const char *argv[],
+ 
+ 	/* carry list parsing result into tf */
+ 	if (!is_tracepoint) {
+-		tf->list_mode = list_mode;
+-		if (parsed_filter) {
+-			tf->filter = kstrdup(parsed_filter, GFP_KERNEL);
+-			if (!tf->filter)
+-				return -ENOMEM;
+-		}
+-		if (parsed_nofilter) {
+-			tf->nofilter = kstrdup(parsed_nofilter, GFP_KERNEL);
+-			if (!tf->nofilter)
+-				return -ENOMEM;
+-		}
++		tf->filter = no_free_ptr(parsed_filter);
++		tf->nofilter = no_free_ptr(parsed_nofilter);
+ 	}
+ 
+ 	/* parse arguments */
+diff --git a/kernel/trace/trace_probe.h b/kernel/trace/trace_probe.h
+index 9fc56c937130..b8b0544eb7cd 100644
+--- a/kernel/trace/trace_probe.h
++++ b/kernel/trace/trace_probe.h
+@@ -494,9 +494,11 @@ extern int traceprobe_define_arg_fields(struct trace_event_call *event_call,
+ 	C(BAD_PROBE_ADDR,	"Invalid probed address or symbol"),	\
+ 	C(NON_UNIQ_SYMBOL,	"The symbol is not unique"),		\
+ 	C(BAD_RETPROBE,		"Retprobe address must be an function entry"), \
++	C(BAD_LEGACY_RET,	"Legacy %return not allowed with list"), \
+ 	C(NO_TRACEPOINT,	"Tracepoint is not found"),		\
+ 	C(BAD_TP_NAME,		"Invalid character in tracepoint name"),\
+ 	C(BAD_ADDR_SUFFIX,	"Invalid probed address suffix"), \
++	C(BAD_LIST_SUFFIX,	"Bad list suffix"), \
+ 	C(NO_GROUP_NAME,	"Group name is not specified"),		\
+ 	C(GROUP_TOO_LONG,	"Group name is too long"),		\
+ 	C(BAD_GROUP_NAME,	"Group name must follow the same rules as C identifiers"), \
 -- 
 2.43.0
 
