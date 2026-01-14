@@ -1,57 +1,58 @@
-Return-Path: <linux-doc+bounces-72200-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72194-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DAC9D1F0B7
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 14:20:55 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 074DFD1F04C
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 14:17:39 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5EFCA30AF56F
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 13:17:37 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id D5290300D562
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 13:17:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5511839C649;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2138439C632;
 	Wed, 14 Jan 2026 13:17:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="d49fDsPy"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RaEmenRi"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CA8239C63A;
-	Wed, 14 Jan 2026 13:17:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9BEA39B4B8;
+	Wed, 14 Jan 2026 13:17:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768396653; cv=none; b=RmT8iku6ld+W0QKVuMKBSLJiLzFtr3spTGfVZDq/ARZpc/F4a+zKWb5BkUHkoc18gWKk1dyad52jeY4xvWUTt8WEOxXeCJL6TODbbZ3Xt00p09kGOpsrsDq0wdLkzHplC6C937uaHLRToa01GngDH7vPidq9ptrT9S4qTB/kW3k=
+	t=1768396652; cv=none; b=OTpOsmoe5QXfnywEjkZrOO44HOK+VApmWSX6ai2sizSl+1mW4Uj4FZUngbUN/tuN7wcnSZOX0XkT5WoIfVmGsF7EUsRx8wTMKpmaYnaxSP85PwBWuLRbYLJ384ZgjU2US43zUNgXjyPXFue/8vZa/SyAAh2KNyZc9uPpHsdwMv8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768396653; c=relaxed/simple;
-	bh=PjcXX+7VF4mUhL09sKoUs37UXwFoFKowe+ZEsFz/zRs=;
+	s=arc-20240116; t=1768396652; c=relaxed/simple;
+	bh=FI+Dh9Iu2wtKz8NU+WdlvdtlEUg2nNsIV9O2y+kNbi8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=oab1cClwDfBYlq2V2iCPiJzTH2dFZQag5KwoysC3R1NPXIEZSjJTkE49ql7t2msmoQqsXF017hFSCWwETLzrSwJZYhi2u3zYMuqLGLMlFigtL+T5A2CchT7orEKbyTMGp78zBDbQRggMu6YxdvjZLedVsR2ZCpYmhlqnK2oX7LM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=d49fDsPy; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8CD3CC4AF09;
+	 MIME-Version:Content-Type; b=oU4hzxR66rjUlKF+TqaO08mpZV43uscHmQ7DGGQfiN6TsCb5b8q7hzKor0DhPRCVariiCSEwEoSaGTH0nY0QEbruL0q114UbLV4TENXGVFweHqRV2M+RAdXCk4fZwGifW2sOtvX3fb+9Ws7OWIRxuuud056TKmh8M3sGAKabP90=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RaEmenRi; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FE01C4AF0B;
 	Wed, 14 Jan 2026 13:17:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768396652;
-	bh=PjcXX+7VF4mUhL09sKoUs37UXwFoFKowe+ZEsFz/zRs=;
+	bh=FI+Dh9Iu2wtKz8NU+WdlvdtlEUg2nNsIV9O2y+kNbi8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=d49fDsPy+bMTT4WNVm6gxOdmAXvAZJ4MT3+xTZ3Bu02EFZhdTWgfW+Kj2ataHGnlN
-	 0rn/TXH3ozN5B7b+KbhoK3WrKGF6A88liqQZZK8QeYgFRIiyuHNLj9bPdt1EBdz00k
-	 +4aU/PQLQxO+Vm9CZJ3gItDCR5BJ8G0qq1hMMN6Et2q+agkOecUBBC7+2rqeELunqT
-	 e2LYx2wDSgUbYahoNtpGE9RaSVgLn1rujKlJe7s0T7EcJt34C2c1dmF0H17A4eD0Qc
-	 YIDRzP6qH0YPnWFL06bLRyzCZnyzqBIxK8PoTA1HJZpj7+swC0bQ1+ErcRQsIHPnFv
-	 lK78dMOLh13Dw==
+	b=RaEmenRiqRiN5RDw7J9rKnkvjSK41QYQPQXNO6sN0ipLgUTRtmMvt8c3TbA3S5FNd
+	 ZSoWsSPr/M/TDlTD6FVDeAeQNtyA6m8ZXt5gIzN59bie5GqRloFWIRTVjjFMUq2m7x
+	 Fw/u0tn0XTr2lxJrvPs+AhRhriQt99wYfTyPVo0r7MI4yxbfYCnSaO5+FmAeF/E4fk
+	 GtfesHjy3hplVQppJ+eQqwKtH4eF5HKNKS/uQfQ3xJgwLrrP6Np++zzYwjyviO40gB
+	 k90jn01vsW7S8choSEopJC8oOx4YI0qOkcq4ATVKFTKlA77dRvRLYZ2QbLHVbD7PHa
+	 av84NWtlheOyA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vg0kc-00000002mxw-3aet;
+	id 1vg0kc-00000002my0-3hJO;
 	Wed, 14 Jan 2026 14:17:30 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Jonathan Corbet <corbet@lwn.net>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 07/13] docs: kdoc_parser: Improve docstrings and comments
-Date: Wed, 14 Jan 2026 14:17:20 +0100
-Message-ID: <f349f42e1eb0c13093fd1e5d24238c281f004384.1768396023.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>
+Subject: [PATCH 08/13] docs: kdoc_output: Improve docstrings and comments
+Date: Wed, 14 Jan 2026 14:17:21 +0100
+Message-ID: <45ef9017d7385a86c0048c5a4e66bd39a1a099b1.1768396023.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768396023.git.mchehab+huawei@kernel.org>
 References: <cover.1768396023.git.mchehab+huawei@kernel.org>
@@ -70,440 +71,192 @@ documentation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_parser.py | 175 +++++++++++++++------------
- 1 file changed, 96 insertions(+), 79 deletions(-)
+ tools/lib/python/kdoc/kdoc_output.py | 60 ++++++++++++++++------------
+ 1 file changed, 35 insertions(+), 25 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/kdoc_parser.py b/tools/lib/python/kdoc/kdoc_parser.py
-index 4ad7ce0b243e..fd57944ae907 100644
---- a/tools/lib/python/kdoc/kdoc_parser.py
-+++ b/tools/lib/python/kdoc/kdoc_parser.py
-@@ -5,11 +5,8 @@
- # pylint: disable=C0301,C0302,R0904,R0912,R0913,R0914,R0915,R0917,R1702
+diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
+index d2bf94275d65..4210b91dde5f 100644
+--- a/tools/lib/python/kdoc/kdoc_output.py
++++ b/tools/lib/python/kdoc/kdoc_output.py
+@@ -5,14 +5,16 @@
+ # pylint: disable=C0301,R0902,R0911,R0912,R0913,R0914,R0915,R0917
  
  """
--kdoc_parser
--===========
--
--Read a C language source or header FILE and extract embedded
--documentation comments
-+Classes and functions related to reading a C language source or header FILE
-+and extract embedded documentation comments from it.
- """
+-Implement output filters to print kernel-doc documentation.
++Classes to implement output filters to print kernel-doc documentation.
  
- import sys
-@@ -195,25 +192,28 @@ function_xforms  = [
- ]
+-The implementation uses a virtual base class (OutputFormat) which
++The implementation uses a virtual base class ``OutputFormat``. It
+ contains dispatches to virtual methods, and some code to filter
+ out output messages.
  
- #
--# Apply a set of transforms to a block of text.
-+# Ancillary functions
- #
+ The actual implementation is done on one separate class per each type
+-of output. Currently, there are output classes for ReST and man/troff.
++of output, e.g. ``RestFormat`` and ``ManFormat`` classes.
 +
- def apply_transforms(xforms, text):
-+    """
-+    Apply a set of transforms to a block of text.
-+    """
-     for search, subst in xforms:
-         text = search.sub(subst, text)
-     return text
++Currently, there are output classes for ReST and man/troff.
+ """
  
--#
--# A little helper to get rid of excess white space
--#
- multi_space = KernRe(r'\s\s+')
- def trim_whitespace(s):
-+    """
-+    A little helper to get rid of excess white space.
-+    """
-     return multi_space.sub(' ', s.strip())
- 
--#
--# Remove struct/enum members that have been marked "private".
--#
- def trim_private_members(text):
--    #
-+    """
-+    Remove ``struct``/``enum`` members that have been marked "private".
-+    """
-     # First look for a "public:" block that ends a private region, then
-     # handle the "private until the end" case.
-     #
-@@ -226,20 +226,21 @@ def trim_private_members(text):
- 
- class state:
-     """
--    State machine enums
-+    States used by the parser's state machine.
+ import os
+@@ -54,16 +56,19 @@ class OutputFormat:
      """
  
-     # Parser states
--    NORMAL        = 0        # normal code
--    NAME          = 1        # looking for function name
--    DECLARATION   = 2        # We have seen a declaration which might not be done
--    BODY          = 3        # the body of the comment
--    SPECIAL_SECTION = 4      # doc section ending with a blank line
--    PROTO         = 5        # scanning prototype
--    DOCBLOCK      = 6        # documentation block
--    INLINE_NAME   = 7        # gathering doc outside main block
--    INLINE_TEXT   = 8	     # reading the body of inline docs
-+    NORMAL        = 0        #: Normal code.
-+    NAME          = 1        #: Looking for function name.
-+    DECLARATION   = 2        #: We have seen a declaration which might not be done.
-+    BODY          = 3        #: The body of the comment.
-+    SPECIAL_SECTION = 4      #: Doc section ending with a blank line.
-+    PROTO         = 5        #: Scanning prototype.
-+    DOCBLOCK      = 6        #: Documentation block.
-+    INLINE_NAME   = 7        #: Gathering doc outside main block.
-+    INLINE_TEXT   = 8	     #: Reading the body of inline docs.
+     # output mode.
+-    OUTPUT_ALL          = 0 # output all symbols and doc sections
+-    OUTPUT_INCLUDE      = 1 # output only specified symbols
+-    OUTPUT_EXPORTED     = 2 # output exported symbols
+-    OUTPUT_INTERNAL     = 3 # output non-exported symbols
++    OUTPUT_ALL          = 0 #: Output all symbols and doc sections.
++    OUTPUT_INCLUDE      = 1 #: Output only specified symbols.
++    OUTPUT_EXPORTED     = 2 #: Output exported symbols.
++    OUTPUT_INTERNAL     = 3 #: Output non-exported symbols.
  
-+    #: Names for each parser state.
-     name = [
-         "NORMAL",
-         "NAME",
-@@ -253,9 +254,12 @@ class state:
+-    # Virtual member to be overridden at the inherited classes
++    #: Highlights to be used in ReST format.
+     highlights = []
+ 
++    #: Blank line character.
++    blankline = ""
++
+     def __init__(self):
+-        """Declare internal vars and set mode to OUTPUT_ALL"""
++        """Declare internal vars and set mode to ``OUTPUT_ALL``."""
+ 
+         self.out_mode = self.OUTPUT_ALL
+         self.enable_lineno = None
+@@ -128,7 +133,7 @@ class OutputFormat:
+             self.config.warning(log_msg)
+ 
+     def check_doc(self, name, args):
+-        """Check if DOC should be output"""
++        """Check if DOC should be output."""
+ 
+         if self.no_doc_sections:
+             return False
+@@ -177,7 +182,7 @@ class OutputFormat:
+ 
+     def msg(self, fname, name, args):
+         """
+-        Handles a single entry from kernel-doc parser
++        Handles a single entry from kernel-doc parser.
+         """
+ 
+         self.data = ""
+@@ -220,30 +225,31 @@ class OutputFormat:
+     # Virtual methods to be overridden by inherited classes
+     # At the base class, those do nothing.
+     def set_symbols(self, symbols):
+-        """Get a list of all symbols from kernel_doc"""
++        """Get a list of all symbols from kernel_doc."""
+ 
+     def out_doc(self, fname, name, args):
+-        """Outputs a DOC block"""
++        """Outputs a DOC block."""
+ 
+     def out_function(self, fname, name, args):
+-        """Outputs a function"""
++        """Outputs a function."""
+ 
+     def out_enum(self, fname, name, args):
+-        """Outputs an enum"""
++        """Outputs an enum."""
+ 
+     def out_var(self, fname, name, args):
+-        """Outputs a variable"""
++        """Outputs a variable."""
+ 
+     def out_typedef(self, fname, name, args):
+-        """Outputs a typedef"""
++        """Outputs a typedef."""
+ 
+     def out_struct(self, fname, name, args):
+-        """Outputs a struct"""
++        """Outputs a struct."""
+ 
+ 
+ class RestFormat(OutputFormat):
+-    """Consts and functions used by ReST output"""
++    """Consts and functions used by ReST output."""
+ 
++    #: Highlights to be used in ReST format
+     highlights = [
+         (type_constant, r"``\1``"),
+         (type_constant2, r"``\1``"),
+@@ -263,9 +269,13 @@ class RestFormat(OutputFormat):
+         (type_fallback, r":c:type:`\1`"),
+         (type_param_ref, r"**\1\2**")
      ]
- 
- 
--SECTION_DEFAULT = "Description"  # default section
-+SECTION_DEFAULT = "Description"  #: Default section.
- 
- class KernelEntry:
-+    """
-+    Encapsulates a Kernel documentation entry.
-+    """
- 
-     def __init__(self, config, fname, ln):
-         self.config = config
-@@ -288,14 +292,16 @@ class KernelEntry:
-     # Management of section contents
-     #
-     def add_text(self, text):
-+        """Add a new text to the entry contents list."""
-         self._contents.append(text)
- 
-     def contents(self):
-+        """Returns a string with all content texts that were added."""
-         return '\n'.join(self._contents) + '\n'
- 
-     # TODO: rename to emit_message after removal of kernel-doc.pl
-     def emit_msg(self, ln, msg, *, warning=True):
--        """Emit a message"""
-+        """Emit a message."""
- 
-         log_msg = f"{self.fname}:{ln} {msg}"
- 
-@@ -309,10 +315,10 @@ class KernelEntry:
-         self.warnings.append(log_msg)
-         return
- 
--    #
--    # Begin a new section.
--    #
-     def begin_section(self, line_no, title = SECTION_DEFAULT, dump = False):
-+        """
-+        Begin a new section.
-+        """
-         if dump:
-             self.dump_section(start_new = True)
-         self.section = title
-@@ -366,11 +372,13 @@ class KernelDoc:
-     documentation comments.
-     """
- 
--    # Section names
--
-+    #: Name of context section.
-     section_context = "Context"
 +
-+    #: Name of return section.
-     section_return = "Return"
+     blankline = "\n"
  
-+    #: String to write when a parameter is not described.
-     undescribed = "-- undescribed --"
- 
-     def __init__(self, config, fname):
-@@ -416,7 +424,7 @@ class KernelDoc:
- 
-     def dump_section(self, start_new=True):
-         """
--        Dumps section contents to arrays/hashes intended for that purpose.
-+        Dump section contents to arrays/hashes intended for that purpose.
-         """
- 
-         if self.entry:
-@@ -425,9 +433,9 @@ class KernelDoc:
-     # TODO: rename it to store_declaration after removal of kernel-doc.pl
-     def output_declaration(self, dtype, name, **args):
-         """
--        Stores the entry into an entry array.
-+        Store the entry into an entry array.
- 
--        The actual output and output filters will be handled elsewhere
-+        The actual output and output filters will be handled elsewhere.
-         """
- 
-         item = KdocItem(name, self.fname, dtype,
-@@ -456,7 +464,9 @@ class KernelDoc:
- 
-         Ensure that those warnings are not lost.
- 
--        NOTE: Because we are calling `config.warning()` here, those
-+        .. note::
++    #: Sphinx literal block regex.
+     sphinx_literal = KernRe(r'^[^.].*::$', cache=False)
 +
-+              Because we are calling `config.warning()` here, those
-               warnings are not filtered by the `-W` parameters: they will all
-               be produced even when `-Wreturn`, `-Wshort-desc`, and/or
-               `-Wcontents-before-sections` are used.
-@@ -680,10 +690,12 @@ class KernelDoc:
-             self.emit_msg(ln,
-                           f"No description found for return value of '{declaration_name}'")
++    #: Sphinx code block regex.
+     sphinx_cblock = KernRe(r'^\.\.\ +code-block::', cache=False)
  
--    #
--    # Split apart a structure prototype; returns (struct|union, name, members) or None
--    #
-     def split_struct_proto(self, proto):
-+        """
-+        Split apart a structure prototype; returns (struct|union, name,
-+        members) or ``None``.
-+        """
-+
-         type_pattern = r'(struct|union)'
-         qualifiers = [
-             "__attribute__",
-@@ -702,21 +714,26 @@ class KernelDoc:
-             if r.search(proto):
-                 return (r.group(1), r.group(3), r.group(2))
-         return None
--    #
--    # Rewrite the members of a structure or union for easier formatting later on.
--    # Among other things, this function will turn a member like:
--    #
--    #  struct { inner_members; } foo;
--    #
--    # into:
--    #
--    #  struct foo; inner_members;
--    #
-+
-     def rewrite_struct_members(self, members):
-+        """
-+        Process ``struct``/``union`` members from the most deeply nested
-+        outward.
-+
-+        Rewrite the members of a ``struct`` or ``union`` for easier formatting
-+        later on. Among other things, this function will turn a member like::
-+
-+          struct { inner_members; } foo;
-+
-+        into::
-+
-+          struct foo; inner_members;
-+        """
-+
-         #
--        # Process struct/union members from the most deeply nested outward.  The
--        # trick is in the ^{ below - it prevents a match of an outer struct/union
--        # until the inner one has been munged (removing the "{" in the process).
-+        # The trick is in the ``^{`` below - it prevents a match of an outer
-+        # ``struct``/``union`` until the inner one has been munged
-+        # (removing the ``{`` in the process).
-         #
-         struct_members = KernRe(r'(struct|union)'   # 0: declaration type
-                                 r'([^\{\};]+)' 	    # 1: possible name
-@@ -794,11 +811,12 @@ class KernelDoc:
-             tuples = struct_members.findall(members)
-         return members
+     def __init__(self):
+@@ -280,7 +290,7 @@ class RestFormat(OutputFormat):
+         self.lineprefix = ""
  
--    #
--    # Format the struct declaration into a standard form for inclusion in the
--    # resulting docs.
--    #
-     def format_struct_decl(self, declaration):
-+        """
-+        Format the ``struct`` declaration into a standard form for inclusion
-+        in the resulting docs.
-+        """
-+
-         #
-         # Insert newlines, get rid of extra spaces.
-         #
-@@ -832,7 +850,7 @@ class KernelDoc:
+     def print_lineno(self, ln):
+-        """Outputs a line number"""
++        """Outputs a line number."""
  
-     def dump_struct(self, ln, proto):
+         if self.enable_lineno and ln is not None:
+             ln += 1
+@@ -289,7 +299,7 @@ class RestFormat(OutputFormat):
+     def output_highlight(self, args):
          """
--        Store an entry for a struct or union
-+        Store an entry for a ``struct`` or ``union``
-         """
-         #
-         # Do the basic parse to get the pieces of the declaration.
-@@ -874,7 +892,7 @@ class KernelDoc:
- 
-     def dump_enum(self, ln, proto):
-         """
--        Stores an enum inside self.entries array.
-+        Store an ``enum`` inside self.entries array.
-         """
-         #
-         # Strip preprocessor directives.  Note that this depends on the
-@@ -1021,7 +1039,7 @@ class KernelDoc:
- 
-     def dump_declaration(self, ln, prototype):
-         """
--        Stores a data declaration inside self.entries array.
-+        Store a data declaration inside self.entries array.
+         Outputs a C symbol that may require being converted to ReST using
+-        the self.highlights variable
++        the self.highlights variable.
          """
  
-         if self.entry.decl_type == "enum":
-@@ -1038,7 +1056,7 @@ class KernelDoc:
+         input_text = args
+@@ -570,7 +580,7 @@ class RestFormat(OutputFormat):
  
-     def dump_function(self, ln, prototype):
-         """
--        Stores a function or function macro inside self.entries array.
-+        Store a function or function macro inside self.entries array.
-         """
  
-         found = func_macro = False
-@@ -1139,7 +1157,7 @@ class KernelDoc:
+ class ManFormat(OutputFormat):
+-    """Consts and functions used by man pages output"""
++    """Consts and functions used by man pages output."""
  
-     def dump_typedef(self, ln, proto):
-         """
--        Stores a typedef inside self.entries array.
-+        Store a ``typedef`` inside self.entries array.
-         """
-         #
-         # We start by looking for function typedefs.
-@@ -1193,7 +1211,7 @@ class KernelDoc:
-     @staticmethod
-     def process_export(function_set, line):
-         """
--        process EXPORT_SYMBOL* tags
-+        process ``EXPORT_SYMBOL*`` tags
+     highlights = (
+         (type_constant, r"\1"),
+@@ -587,6 +597,7 @@ class ManFormat(OutputFormat):
+     )
+     blankline = ""
  
-         This method doesn't use any variable from the class, so declare it
-         with a staticmethod decorator.
-@@ -1224,7 +1242,7 @@ class KernelDoc:
++    #: Allowed timestamp formats.
+     date_formats = [
+         "%a %b %d %H:%M:%S %Z %Y",
+         "%a %b %d %H:%M:%S %Y",
+@@ -653,7 +664,7 @@ class ManFormat(OutputFormat):
+         self.symbols = symbols
  
-     def process_normal(self, ln, line):
+     def out_tail(self, fname, name, args):
+-        """Adds a tail for all man pages"""
++        """Adds a tail for all man pages."""
+ 
+         # SEE ALSO section
+         self.data += f'.SH "SEE ALSO"' + "\n.PP\n"
+@@ -689,7 +700,7 @@ class ManFormat(OutputFormat):
+     def output_highlight(self, block):
          """
--        STATE_NORMAL: looking for the /** to begin everything.
-+        STATE_NORMAL: looking for the ``/**`` to begin everything.
-         """
- 
-         if not doc_start.match(line):
-@@ -1314,10 +1332,10 @@ class KernelDoc:
-         else:
-             self.emit_msg(ln, f"Cannot find identifier on line:\n{line}")
- 
--    #
--    # Helper function to determine if a new section is being started.
--    #
-     def is_new_section(self, ln, line):
-+        """
-+        Helper function to determine if a new section is being started.
-+        """
-         if doc_sect.search(line):
-             self.state = state.BODY
-             #
-@@ -1349,10 +1367,10 @@ class KernelDoc:
-             return True
-         return False
- 
--    #
--    # Helper function to detect (and effect) the end of a kerneldoc comment.
--    #
-     def is_comment_end(self, ln, line):
-+        """
-+        Helper function to detect (and effect) the end of a kerneldoc comment.
-+        """
-         if doc_end.search(line):
-             self.dump_section()
- 
-@@ -1371,7 +1389,7 @@ class KernelDoc:
- 
-     def process_decl(self, ln, line):
-         """
--        STATE_DECLARATION: We've seen the beginning of a declaration
-+        STATE_DECLARATION: We've seen the beginning of a declaration.
-         """
-         if self.is_new_section(ln, line) or self.is_comment_end(ln, line):
-             return
-@@ -1400,7 +1418,7 @@ class KernelDoc:
- 
-     def process_special(self, ln, line):
-         """
--        STATE_SPECIAL_SECTION: a section ending with a blank line
-+        STATE_SPECIAL_SECTION: a section ending with a blank line.
-         """
-         #
-         # If we have hit a blank line (only the " * " marker), then this
-@@ -1490,7 +1508,7 @@ class KernelDoc:
- 
-     def syscall_munge(self, ln, proto):         # pylint: disable=W0613
-         """
--        Handle syscall definitions
-+        Handle syscall definitions.
+         Outputs a C symbol that may require being highlighted with
+-        self.highlights variable using troff syntax
++        self.highlights variable using troff syntax.
          """
  
-         is_void = False
-@@ -1529,7 +1547,7 @@ class KernelDoc:
+         contents = self.highlight_block(block)
+@@ -720,7 +731,6 @@ class ManFormat(OutputFormat):
+             self.output_highlight(text)
  
-     def tracepoint_munge(self, ln, proto):
-         """
--        Handle tracepoint definitions
-+        Handle tracepoint definitions.
-         """
+     def out_function(self, fname, name, args):
+-        """output function in man"""
  
-         tracepointname = None
-@@ -1565,7 +1583,7 @@ class KernelDoc:
-         return proto
+         out_name = self.arg_name(args, name)
  
-     def process_proto_function(self, ln, line):
--        """Ancillary routine to process a function prototype"""
-+        """Ancillary routine to process a function prototype."""
- 
-         # strip C99-style comments to end of line
-         line = KernRe(r"//.*$", re.S).sub('', line)
-@@ -1610,7 +1628,9 @@ class KernelDoc:
-             self.reset_state(ln)
- 
-     def process_proto_type(self, ln, line):
--        """Ancillary routine to process a type"""
-+        """
-+        Ancillary routine to process a type.
-+        """
- 
-         # Strip C99-style comments and surrounding whitespace
-         line = KernRe(r"//.*$", re.S).sub('', line).strip()
-@@ -1664,7 +1684,7 @@ class KernelDoc:
-             self.process_proto_type(ln, line)
- 
-     def process_docblock(self, ln, line):
--        """STATE_DOCBLOCK: within a DOC: block."""
-+        """STATE_DOCBLOCK: within a ``DOC:`` block."""
- 
-         if doc_end.search(line):
-             self.dump_section()
-@@ -1676,7 +1696,7 @@ class KernelDoc:
- 
-     def parse_export(self):
-         """
--        Parses EXPORT_SYMBOL* macros from a single Kernel source file.
-+        Parses ``EXPORT_SYMBOL*`` macros from a single Kernel source file.
-         """
- 
-         export_table = set()
-@@ -1693,10 +1713,7 @@ class KernelDoc:
- 
-         return export_table
- 
--    #
--    # The state/action table telling us which function to invoke in
--    # each state.
--    #
-+    #: The state/action table telling us which function to invoke in each state.
-     state_actions = {
-         state.NORMAL:			process_normal,
-         state.NAME:			process_name,
 -- 
 2.52.0
 
