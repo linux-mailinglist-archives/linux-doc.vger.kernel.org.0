@@ -1,156 +1,160 @@
-Return-Path: <linux-doc+bounces-72335-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72344-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A11BD21AB2
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 23:55:50 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC8F4D21C3C
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 00:29:00 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 4CBC2304765F
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 22:55:15 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 8F166302D29A
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Jan 2026 23:28:51 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9A53E38A9A1;
-	Wed, 14 Jan 2026 22:55:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8333B38BF9B;
+	Wed, 14 Jan 2026 23:28:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar-com.20230601.gappssmtp.com header.i=@riscstar-com.20230601.gappssmtp.com header.b="ULLpnZ13"
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Mb9cw3ui"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0767D354AF3
-	for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 22:55:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFBE6355020
+	for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 23:28:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768431313; cv=none; b=OHiYZJj8azvdw2tKVKDp7ymqIQxKYHBWfXR6DaH7qDO4PuQ6Q/NR9ipNnQ9s/6L8XFYQVn+K03GK5nzlmDPX+RBs5N/23+IoPj9nhm8MSEx2Idebuo2nnzJw3QRUau3O35jqGDNvgUaeCYOP7m7vDEkD9V+882YlbQHYxm5Dtvg=
+	t=1768433328; cv=none; b=A7//dENKvWgEVaxM4CoYD+bcFl8oFfB+XSLosOHWUB44CZ0WqdnQW/cMrSkBA0k7L51T0XyidUPTSMY7uxrvlpi2iIlce7IfA18gmNpy/Ena04J/SZ+iCJvhw5Qsof8JcGz/GtiPJmCP15RLLK1jhzAT0YWay6Q1BbNNxVLSxHM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768431313; c=relaxed/simple;
-	bh=V1py82AjhxEE3vmI27KtbVxIIIMpzO9ROtiUPz6KBIM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZeqnAR/a8QBmiY/HpU1Fz6kI6xNq862DUBmFUziLPR/JOIL/2Y1TuO0alFqY+Bk1bLfn+CJE8rQEVUAGvuHiYcryaowe14yBSh+K8kglwBVZT+HCAWTPi1lnbDrYDB/JdNO8sTMD1QCELzjCiblnul7w8TMDGd5IpCtsdrjjsmA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20230601.gappssmtp.com header.i=@riscstar-com.20230601.gappssmtp.com header.b=ULLpnZ13; arc=none smtp.client-ip=74.125.224.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-64472ea7d18so175052d50.2
-        for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 14:55:09 -0800 (PST)
+	s=arc-20240116; t=1768433328; c=relaxed/simple;
+	bh=zG2TyLnXjDP5W7454KU8fBzg3dWWFM4U6U41q0cfD0M=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=RM4odV1VzYrNEihvkJFzal8pxkWxWGfQOfe1Ir9+jBVRL26QUloBrzSfUEAiX4XeqiUiXM5oE05S9wpPx8PnKY9G6ao6skx1l9IBmmlEcj9kG5p8TOPADydzP6P380W0C91DPPZVp1KOqfyw0hr5Wrtn5Ir3rCDW7tctAx0E42U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Mb9cw3ui; arc=none smtp.client-ip=209.85.222.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=Groves.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-8ba0d6c68a8so40213685a.1
+        for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 15:28:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar-com.20230601.gappssmtp.com; s=20230601; t=1768431308; x=1769036108; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=R3aA2X7iGQsnnel6fRLVe4SLr2+v2d/5zouhV3Vlqcs=;
-        b=ULLpnZ13u0uAWoBNOyx2pQX7xk573XQRxshqnkDODrBfdlOGHdBLeiGjQUMMJ7e0MT
-         yaxOaIMTKucIcX4OfsR6gfN1eFNdXT1pWQSb1rBy3+hTxxs8BpHH9ujUcKvWGon++zOc
-         frasvVhgblBEFDQvNS4s+VdZbgKRWfLOdyvLVXZKdXMyjGooin++rQelFJ+Ai0cyIWdj
-         3nXmWjRLOcdLlDhMrPX1xyFazfSpsNB1YbCdAwXXgzGP0dxA0Aj6b1/FYPc28C0wygDL
-         gFBm5ONEJLhsh0on5iB1eim+lHgZygUTwvX5PlvB8Fv7BYrr1aiO4p1zyYFyQKfiKHOu
-         f66w==
+        d=gmail.com; s=20230601; t=1768433311; x=1769038111; darn=vger.kernel.org;
+        h=content-transfer-encoding:libfuse:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:sender:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=UUX1Xqe9Ih33TiO90xcxWEJ1pXhMadrkogKYy+yJV2U=;
+        b=Mb9cw3ui2YFfi0lZD5Y9bvck0kQwdr5KlGUiEvknn5wlxEs6KwxHGnUaTjqJlpF49P
+         ajdSfDDMGHf7uPOcXr70aPnnVDKHTiB58Vb0ftjfKs6mvx8R/ch5C1Oh5cCQj2pLgJWH
+         wf4F0Kfd4v8RMQMTjToYZfadrjzfwUBAHYH9KwepsWapnuBjJavp/VbiqfN47DNC+brb
+         m5TjPgtP+ktEe864NGO5IeobRGzlPmUFxcxR1fnTfuH8aM/hIxYOgeWKQ0FOgXYFU9H4
+         9amOVnY+hPHTbtiXEwLECD5xDofzKjMa+4/Fhry+j98MKiywBTyeQw9qNypKr7G4mca/
+         juSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768431308; x=1769036108;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=R3aA2X7iGQsnnel6fRLVe4SLr2+v2d/5zouhV3Vlqcs=;
-        b=UBlKk1M1shFYS/gPNcP1qWCMHfO+2ArT2TjBa6MEwmJxWjStjLLSEjBL0QIWJgsHEh
-         whLNGr2aFp4ZwpC2tDKMNVmqnnE0YY9a84yZW1tVMw4r7TFH+o2YLUhp2s1F0PG0vWwl
-         /qKTbBeImSva3eDq8WxZ9IOloHjTdaz5fHwD4FVS5Um6ZKYwtAkjhs5kZzBakzaGCTH9
-         j5W05t++xv2rzh+tnsupfKsNv1U3HTjWYOYhHPHI08lSS6JTFUzQknpAGPk+Nv5U6+m/
-         FAYK7+Qi22ogaK4Haxc3C7Jt+eEbVQf/mBVlY3yPBm2mvkIlO5DzVtsD7AU2Bf9wQh5B
-         gZTA==
-X-Forwarded-Encrypted: i=1; AJvYcCUCSY5R20Vc13N1WkmzKtbwb6NWGMZ/8T2rkfXmsnDFm7C1SsKWSc4yx+7y6VX+vNz0qGmjw2gT/sQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzVppkNPpB8xlo/yvuX/q/jQGnARZaVxpr9Bfu7SljtyldfSPyv
-	WKXI6N04C2e2w8qN1kh32akaEyWqHgzKb8Hg33LnCIcZLopAZh1u8TCp2hHUOYEOHSazQyzugE4
-	tLQVxirEYBObUoALM0LYypOMnw8ahFtDo8onSsqTHdQ==
-X-Gm-Gg: AY/fxX4POuZZjP+eQ8MTd6McE3n+CGQmrdEjsbx4j02AQO7y3DMoEcdH0u0lnSv807c
-	sVMSjPz/Hhyxyu/aoYP2h/Qbwg5Bxlkthj1IB3TSUU+lfSPhZdg54rUk7tQpG469G4hjzMMujTK
-	nk+FTBkXiSCQeJ/ZNMwX53n95weLqPqjTgg2VLi2DS3+voofU5BXhyPOxDhPsMg+KygRpWOPd+U
-	VTAVL2awD1B3nwkj5s0j9Q57+IcejPsYGtf62rDg+dx1NbWrS33NOpmJ5nOBnmRgubCPYWDwq0A
-	elYntV59/HH+68ofs0g0rCnrMoF6n0ft78zWrg==
-X-Received: by 2002:a05:690e:b8d:b0:644:77bb:5705 with SMTP id
- 956f58d0204a3-64903b55ebbmr2982962d50.77.1768431307959; Wed, 14 Jan 2026
- 14:55:07 -0800 (PST)
+        d=1e100.net; s=20230601; t=1768433311; x=1769038111;
+        h=content-transfer-encoding:libfuse:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:sender:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=UUX1Xqe9Ih33TiO90xcxWEJ1pXhMadrkogKYy+yJV2U=;
+        b=lCogu4eQlovWsfb3Hfhr3Xh5sqlpmkf6kZTbIHD6bxInpV8WdWm+PfV7CWWlB7KnCs
+         LkTVbdLESqmezJqfOOEYsros+s4Zn+9wM0EShusHhAkbAzupNwnXtYQSFcaRkQmYi01e
+         NubyZEQA4upd0v36B8rIvhO46CJa3mLeEji4DsdKFksDTq5NMf4Ht4x+Gk82m8XgN4RL
+         ZlDU+Q3xh3ezs2SaBbz0EvlQZqYfACYgKzBGHEDVfNTcT7e47DzXb8wQM0lHKRyHCxHF
+         Vdm6eMnvX1GagzOwci6iwLSsDIE7du2/AIAbBMkI3vcUY5M2X45bvJ+QYmusFvkAI/P1
+         gNgg==
+X-Forwarded-Encrypted: i=1; AJvYcCUFRCh71jM5kbshiPHM9wU+dbDjKdWqethXwXTQ43pe6b0T9gfs/3i/xaNxXMP0lOYk6I1pYRyUJzY=@vger.kernel.org
+X-Gm-Message-State: AOJu0YwuuJJE8csSjlvPAfrQ733hMTW1HjtOi7Dn5ZWqWHhC0SPYC7gg
+	T6U/wvH+oHoWjSMsYWLxjN88j3m8JsssQUpBSPe82NIU1zs9xSXc2KJu7rILqw==
+X-Gm-Gg: AY/fxX5yVxTE2uhlNOlYPjLzE5zDqCk4SdxyEdDq+k1yI2qJs+by3ptuJc/YeRM5OVp
+	vx/Njuv4VhcHbEa5NuQh8uiC4lBxCzjLdyPJeW/JRgYpk3emxj1Kg/Ko/mxssYsro7XGbcl7KG0
+	tmuRRIxlAAxvNt+FKIuDdqUzDW8jHv+n7T1C3MqeIkHaTeXqXslL+xbTRsxw+ImHaMcePlQFunB
+	leqAtHT8w+bZGX+Le/5luO5eeICGr/WMax9iyI89jnXpwS5f+4am3oBC+DZMM9HGFt8BCA2LdIi
+	bsQZDdmnGMIwGMy+M805JavsTGix6lLxk3glDMx7DamtKjxRlkOHGXNWWDPHWMqMp79JvOhuXAh
+	cSZr7fMwasHkSYcNCiu4jkpROrOoCA/NqhJ3aqYA+oCITQZ36m5ifbq6YkMDiKt8gQ9frzHveU8
+	3ldBIMV9Aml116PP1Ury6C7zXjMWtHPlHxjb/YX+rh2CXlJ1fMwzjbv3w=
+X-Received: by 2002:a05:6808:f8a:b0:450:d833:6bb6 with SMTP id 5614622812f47-45c73d65f1amr2396599b6e.30.1768426990473;
+        Wed, 14 Jan 2026 13:43:10 -0800 (PST)
+Received: from localhost.localdomain ([2603:8080:1500:3d89:4c85:2962:e438:72c4])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-45a5e1b0779sm11316868b6e.7.2026.01.14.13.43.08
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Wed, 14 Jan 2026 13:43:10 -0800 (PST)
+Sender: John Groves <grovesaustin@gmail.com>
+From: John Groves <John@Groves.net>
+X-Google-Original-From: John Groves <john@groves.net>
+To: John Groves <John@Groves.net>,
+	Miklos Szeredi <miklos@szeredi.hu>,
+	Dan Williams <dan.j.williams@intel.com>,
+	Bernd Schubert <bschubert@ddn.com>,
+	Alison Schofield <alison.schofield@intel.com>
+Cc: John Groves <jgroves@micron.com>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Vishal Verma <vishal.l.verma@intel.com>,
+	Dave Jiang <dave.jiang@intel.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Jan Kara <jack@suse.cz>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	David Hildenbrand <david@kernel.org>,
+	Christian Brauner <brauner@kernel.org>,
+	"Darrick J . Wong" <djwong@kernel.org>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Jeff Layton <jlayton@kernel.org>,
+	Amir Goldstein <amir73il@gmail.com>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+	Stefan Hajnoczi <shajnocz@redhat.com>,
+	Joanne Koong <joannelkoong@gmail.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Bagas Sanjaya <bagasdotme@gmail.com>,
+	James Morse <james.morse@arm.com>,
+	Fuad Tabba <tabba@google.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Shivank Garg <shivankg@amd.com>,
+	Ackerley Tng <ackerleytng@google.com>,
+	Gregory Price <gourry@gourry.net>,
+	Aravind Ramesh <arramesh@micron.com>,
+	Ajay Joshi <ajayjoshi@micron.com>,
+	venkataravis@micron.com,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	nvdimm@lists.linux.dev,
+	linux-cxl@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org
+Subject: [PATCH V4 0/3]
+Date: Wed, 14 Jan 2026 15:43:04 -0600
+Message-ID: <20260114214307.29893-1-john@groves.net>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260114153133.29420.compound@groves.net>
+References: <20260114153133.29420.compound@groves.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260113-adding-b-dtsi-v1-0-22d6e55d19df@riscstar.com>
- <20260113-adding-b-dtsi-v1-2-22d6e55d19df@riscstar.com> <20260113075339-GYA25466@gentoo.org>
- <CAH1PCMarzrZJ072iyAQthB-i-LHFCSJ+tZLx6HcWiVcUrQeafw@mail.gmail.com> <20260114-evergreen-gluten-b1c8558e7684@spud>
-In-Reply-To: <20260114-evergreen-gluten-b1c8558e7684@spud>
-From: Guodong Xu <guodong@riscstar.com>
-Date: Thu, 15 Jan 2026 06:54:57 +0800
-X-Gm-Features: AZwV_Qhkxzj_Y9cwaD4tSP0GMlfoxTMZyhjGCrw4ED-TcUztP4RUDmlAh8THzag
-Message-ID: <CAH1PCMZAEwO4Vg=TdZ9SR1uwm3OOw_y79iCRC+E+SZiVRNtp+w@mail.gmail.com>
-Subject: Re: [PATCH 2/2] riscv: dts: Add "b" ISA extension to existing devicetrees
-To: Conor Dooley <conor@kernel.org>
-Cc: Yixun Lan <dlan@gentoo.org>, Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <pjw@kernel.org>, 
-	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
-	Alexandre Ghiti <alex@ghiti.fr>, Conor Dooley <conor.dooley@microchip.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Chen Wang <unicorn_wang@outlook.com>, Inochi Amaoto <inochiama@gmail.com>, 
-	Junhui Liu <junhui.liu@pigmoral.tech>, linux-doc@vger.kernel.org, 
-	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org, sophgo@lists.linux.dev, spacemit@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+libfuse: add basic famfs support to libfuse
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 15, 2026 at 4:42=E2=80=AFAM Conor Dooley <conor@kernel.org> wro=
-te:
->
-> On Wed, Jan 14, 2026 at 10:33:34AM +0800, Guodong Xu wrote:
-> > Hi, Conor, Yixun
-> >
-> > On Tue, Jan 13, 2026 at 3:53=E2=80=AFPM Yixun Lan <dlan@gentoo.org> wro=
-te:
-> > >
-> > > Hi Guodong,
-> > >
-> > >
-> > > On 15:45 Tue 13 Jan     , Guodong Xu wrote:
-> > > > "b" is ratified (Apr/2024) much later than its components zba/zbb/z=
-bs
-> > > > (Jun/2021). With "b" added into riscv/extensions.yaml, a dependency
-> > > > checking rule is now enforced, which requires that when zba, zbb, a=
-nd zbs
-> > > > are all specified, "b" must be added as well. Failing to do this wi=
-ll
-> > > > cause dtbs_check schema check warnings.
-> > > >
-> > > > According to uabi.rst, as a single-letter extension, "b" should be =
-added
-> > > > after "c" in canonical order.
-> > > >
-> > > > Update existing devicetree files to conform to this rule. Line bala=
-ncing
-> > > > is performed where needed to improve readability.
-> > > >
-> > > > Signed-off-by: Guodong Xu <guodong@riscstar.com>
-> > > > ---
-> > > >  arch/riscv/boot/dts/anlogic/dr1v90.dtsi     |   5 +-
-> > > >  arch/riscv/boot/dts/sophgo/sg2044-cpus.dtsi | 256 ++++++++++++++--=
-------------
-> > > >  arch/riscv/boot/dts/spacemit/k1.dtsi        |  32 ++--
-> > > >  3 files changed, 147 insertions(+), 146 deletions(-)
-> > > please have separated patch for different SoCs, so they can go via
-> >
-> > Understand your concern.
-> >
-> > > their own SoC tree.. thanks
-> >
-> > Conor, is it possible to take this as one patch instead?
-> >
-> > It fixes the same dtbs_check warnings from riscv/extensions.yaml across=
- three
-> > SoCs. Keeping them together maintains readability and clear tracking, I=
-MHO.
-> >
-> > Happy to split if needed, but wanted to check first.
->
-> I'd rather you split it, sorry.
+This short series adds adds the necessary support for famfs to libfuse.
 
-Sure, will do.
-Thank you both.
+This series is also a pull request at [1].
 
-BR
-Guodong Xu
+Changes since V3:
+- The patch "add API to set kernel mount options" has been dropped. I found
+  a way to accomplish the same thing via getxattr.
+
+References
+
+[1] - https://github.com/libfuse/libfuse/pull/1414
+
+
+John Groves (3):
+  fuse_kernel.h: bring up to baseline 6.19
+  fuse_kernel.h: add famfs DAX fmap protocol definitions
+  fuse: add famfs DAX fmap support
+
+ include/fuse_common.h   |  5 +++
+ include/fuse_kernel.h   | 98 ++++++++++++++++++++++++++++++++++++++++-
+ include/fuse_lowlevel.h | 37 ++++++++++++++++
+ lib/fuse_lowlevel.c     | 31 ++++++++++++-
+ patch/maintainers.txt   |  0
+ 5 files changed, 169 insertions(+), 2 deletions(-)
+ create mode 100644 patch/maintainers.txt
+
+
+base-commit: 6278995cca991978abd25ebb2c20ebd3fc9e8a13
+-- 
+2.52.0
+
 
