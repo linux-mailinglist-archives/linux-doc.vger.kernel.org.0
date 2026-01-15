@@ -1,212 +1,162 @@
-Return-Path: <linux-doc+bounces-72577-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72579-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 182D1D27EF5
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 20:07:16 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B38BD27F63
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 20:13:27 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7EC583097C1D
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 18:58:48 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 7D9203009C34
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 19:13:26 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 197793D1CC2;
-	Thu, 15 Jan 2026 18:58:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id ACD153AEF2F;
+	Thu, 15 Jan 2026 19:13:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Sasjx5xa"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NsvKt4sd"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA6283D1CC1;
-	Thu, 15 Jan 2026 18:58:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C55EA2E11DC;
+	Thu, 15 Jan 2026 19:13:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768503528; cv=none; b=uqQI7WBgdT4O0xQgJQOqQalSaYti/it9Z4aA0Z46UrQ79IN1HuabY+6Xv4wud9DkEdE7od/JlEdUtwz8HUqTK2ctWDnaEv5lOE8pu+6CaOeYO9LBmY0fX5ohtdlizw4kHqpFZioVMwtQog44IouZVhmrV5hzVUz9gB7SDKQLuhU=
+	t=1768504403; cv=none; b=bVXlADu8DIg2kYuDxPfV06LaBkFctsZsKAPFKY/p7ClgzO7h0vbywrXee8+uVXZ+WO3Cr98d7j6Ku2pTBGJYjt3epY7WNmgd5TReFDSEQnc0muWTkoAVQnNN2UyIfGKbYqsdL825Sr5Jy+KNbyngtydse4zetsDtVp3OskIEdg0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768503528; c=relaxed/simple;
-	bh=br/WucxsQfWbv74JcngU4crhnn9648apyx4EMg51Nd0=;
+	s=arc-20240116; t=1768504403; c=relaxed/simple;
+	bh=6ERhtSOK4Q4fZaqgucSIqkZPcyHf8nMO3hzMy9j2wWo=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=p2CwYgJu9/Aoc1T3mSlFiND/PQpNe9uHcEhRiMYUT5GRMrPoGCOKy1aLuhKDLzJzvIWdhY2HJL+TaNeeTqvF2ZHgrXx8rMLJeLENCU2VYPWI1ZWB4jX63//KVeTE6Bf4Zs32pMDw+aGxLJ+IwIXCth1AfD64KfN1hwMnqzCZM4s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Sasjx5xa; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F39DC4AF0B;
-	Thu, 15 Jan 2026 18:58:46 +0000 (UTC)
+	 Content-Type:Content-Disposition:In-Reply-To; b=QuwB7Ltn1mny6R0B4khpgRR4mpdPBXoyfKPGXjZ+BtBx/Zn2YBIwhCKps8LZjGSkTBkX548QIbvTW5bjzzz+L6nR9QLGWQml7iAZdenI3SmNGGUxqeN55+asOfjzkum9UBVtgKlZzH/qKoRHfxj9CgHfTU8b4XL08s4fY536JUo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NsvKt4sd; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 590A7C116D0;
+	Thu, 15 Jan 2026 19:13:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768503527;
-	bh=br/WucxsQfWbv74JcngU4crhnn9648apyx4EMg51Nd0=;
+	s=k20201202; t=1768504403;
+	bh=6ERhtSOK4Q4fZaqgucSIqkZPcyHf8nMO3hzMy9j2wWo=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Sasjx5xawln9vY0ejx/Uss1AiypYRhOzfEiYuYsXYHgmxP1CZhZ5XKDisjnbSeCEy
-	 iJCxGE8JUkucMT8+AkTDkl7l8pbbjbU+ruToN9zlbEeiX0f0UEzWTj35jnQgVQMtOE
-	 oJGSR2HdswH353jNfh6vK9Rqwug/Zz9V5EtqP2UVFpmW1guZixlvmbJYgpTg0w7Nzs
-	 4ZzenwSYW7smbsxXPW4Ao+VJnm4OcheGsD/4AE+uhXAimMKHBgBJb/zrON86F4NlAe
-	 cERjuNHflUlC6ZmfPypxdSLbDth4mDkKDZ+isK/yShOqJNN+lzuWNJTvdQbqWc3ovg
-	 Vjyui/wfh216w==
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 28396F4006A;
-	Thu, 15 Jan 2026 13:58:46 -0500 (EST)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-05.internal (MEProxy); Thu, 15 Jan 2026 13:58:46 -0500
-X-ME-Sender: <xms:5jhpaYljaUC2SCIpcZhjINK3IWcygkTtXXm5YnhRvkOJ6He9vERSvA>
-    <xme:5jhpaZ59SdkBvcEhx7rssChPoYX-6jwLyns5j8G8ftrrUGHiVNDKaDfXRB8DxQNIj
-    JY5j9bUSxa-d1NAMZTc3b5VJka1qu5jvE33uiL4IIBJamffO-VjwJE>
-X-ME-Received: <xmr:5jhpaQu4OdAaxKToHrVdSVLsP8LNFZY5Pu1UvgT7VODI3wD8Q8Q3TEUq_I-nSQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdeikeegucetufdoteggodetrf
-    dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
-    rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
-    gurhepfffhvfevuffkfhggtggujgesthdtredttddtvdenucfhrhhomhepmfhirhihlhcu
-    ufhhuhhtshgvmhgruhcuoehkrghssehkvghrnhgvlhdrohhrgheqnecuggftrfgrthhtvg
-    hrnhepueeijeeiffekheeffffftdekleefleehhfefhfduheejhedvffeluedvudefgfek
-    necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhhirh
-    hilhhlodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduieduudeivdeiheeh
-    qddvkeeggeegjedvkedqkhgrsheppehkvghrnhgvlhdrohhrghesshhhuhhtvghmohhvrd
-    hnrghmvgdpnhgspghrtghpthhtohepfeekpdhmohguvgepshhmthhpohhuthdprhgtphht
-    thhopegurghvihgusehkvghrnhgvlhdrohhrghdprhgtphhtthhopegrkhhpmheslhhinh
-    hugidqfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtohepmhhutghhuhhnrdhsohhn
-    gheslhhinhhugidruggvvhdprhgtphhtthhopeifihhllhihsehinhhfrhgruggvrggurd
-    horhhgpdhrtghpthhtohepuhhsrghmrggrrhhifheigedvsehgmhgrihhlrdgtohhmpdhr
-    tghpthhtohepfhhvughlsehgohhoghhlvgdrtghomhdprhgtphhtthhopehoshgrlhhvrg
-    guohhrsehsuhhsvgdruggvpdhrtghpthhtoheprhhpphhtsehkvghrnhgvlhdrohhrghdp
-    rhgtphhtthhopehvsggrsghkrgesshhushgvrdgtii
-X-ME-Proxy: <xmx:5jhpafQpur2MUHsJnl9IgGl8z4rr86fNZdJpZzybljnSDNuGcWlirg>
-    <xmx:5jhpadg-Su3xLTcrQyGKa84e-l9Hjym4yOqmPhbdBnVxAA0b3pdIYw>
-    <xmx:5jhpaUacVMQOKqaibJXYkrZib5k9GCV-SvVDhJM72bFDZ9n9N7HZjg>
-    <xmx:5jhpaXrIWTSyMdhOaisIzLbbdEIM5bqqChKe7u1d-ElYx_QK9ZsVOQ>
-    <xmx:5jhpacxaOhipCeqCiezQ_fX_5p0ajN4ZLqSEISktNIGyaFOzWnNQTMuM>
-Feedback-ID: i10464835:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 15 Jan 2026 13:58:44 -0500 (EST)
-Date: Thu, 15 Jan 2026 18:58:39 +0000
-From: Kiryl Shutsemau <kas@kernel.org>
-To: "David Hildenbrand (Red Hat)" <david@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	Muchun Song <muchun.song@linux.dev>, Matthew Wilcox <willy@infradead.org>, 
-	Usama Arif <usamaarif642@gmail.com>, Frank van der Linden <fvdl@google.com>, 
-	Oscar Salvador <osalvador@suse.de>, Mike Rapoport <rppt@kernel.org>, 
-	Vlastimil Babka <vbabka@suse.cz>, Lorenzo Stoakes <lorenzo.stoakes@oracle.com>, 
-	Zi Yan <ziy@nvidia.com>, Baoquan He <bhe@redhat.com>, Michal Hocko <mhocko@suse.com>, 
-	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>, kernel-team@meta.com, 
-	linux-mm@kvack.org, linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCHv3 10/15] mm/hugetlb: Remove fake head pages
-Message-ID: <aWk1tZyFZOOkF0AH@thinkstation>
-References: <20260115144604.822702-1-kas@kernel.org>
- <20260115144604.822702-11-kas@kernel.org>
- <30ae1623-63f9-4729-9c19-9b0a9a0ae9f1@kernel.org>
- <aWkhbWR-3fWjeTaE@thinkstation>
- <b10e3b2a-b298-4d27-b8ce-63327864c220@kernel.org>
+	b=NsvKt4sd05QKOUaPz2q6BkE1QSNszgX8p8G6nz1F55VMcfHQpEdOWVCIHKu/GKeeR
+	 3M3YkKAadYREkVOiMlmwcBYalZdwftWcycDbHUR2TBfHY2kWE/Bnm2RE1dzyVTgJL0
+	 tZ6LzUVFDZagq8YZFCDk0UhW9XDgOIciRVlpG4p10ycqwJueivh8NbDjqHSmv9R1E2
+	 XMmgAM2ucb8XKGfEevA5Pf3ImuXQXpPr9esn9U/b7jnn9ANaIZyRJNS+1UCRL1FQU/
+	 KXMesoIe2rQ5d5Kl1vwXkPLBoMDwOG/JbqXKUDNh5Sjiyj7iKUtsJEGxZ/xf6RPrfu
+	 JrHci5Xp+FyKQ==
+Date: Thu, 15 Jan 2026 19:13:17 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Guodong Xu <guodong@riscstar.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Paul Walmsley <pjw@kernel.org>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+	Conor Dooley <conor.dooley@microchip.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Chen Wang <unicorn_wang@outlook.com>,
+	Inochi Amaoto <inochiama@gmail.com>, Yixun Lan <dlan@gentoo.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Junhui Liu <junhui.liu@pigmoral.tech>, linux-doc@vger.kernel.org,
+	linux-riscv@lists.infradead.org, linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org, sophgo@lists.linux.dev,
+	spacemit@lists.linux.dev
+Subject: Re: [PATCH v2 0/4] riscv: dts: Add "b" ISA extension to existing
+ devicetrees
+Message-ID: <20260115-phonics-reversal-80541ca1f2df@spud>
+References: <20260115-adding-b-dtsi-v2-0-254dd61cf947@riscstar.com>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="sP0KQQHEFQVHHdeO"
+Content-Disposition: inline
+In-Reply-To: <20260115-adding-b-dtsi-v2-0-254dd61cf947@riscstar.com>
+
+
+--sP0KQQHEFQVHHdeO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <b10e3b2a-b298-4d27-b8ce-63327864c220@kernel.org>
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 15, 2026 at 06:41:44PM +0100, David Hildenbrand (Red Hat) wrote:
-> On 1/15/26 18:23, Kiryl Shutsemau wrote:
-> > On Thu, Jan 15, 2026 at 05:49:43PM +0100, David Hildenbrand (Red Hat) wrote:
-> > > On 1/15/26 15:45, Kiryl Shutsemau wrote:
-> > > > HugeTLB Vmemmap Optimization (HVO) reduces memory usage by freeing most
-> > > > vmemmap pages for huge pages and remapping the freed range to a single
-> > > > page containing the struct page metadata.
-> > > > 
-> > > > With the new mask-based compound_info encoding (for power-of-2 struct
-> > > > page sizes), all tail pages of the same order are now identical
-> > > > regardless of which compound page they belong to. This means the tail
-> > > > pages can be truly shared without fake heads.
-> > > > 
-> > > > Allocate a single page of initialized tail struct pages per NUMA node
-> > > > per order in the vmemmap_tails[] array in pglist_data. All huge pages
-> > > > of that order on the node share this tail page, mapped read-only into
-> > > > their vmemmap. The head page remains unique per huge page.
-> > > > 
-> > > > This eliminates fake heads while maintaining the same memory savings,
-> > > > and simplifies compound_head() by removing fake head detection.
-> > > > 
-> > > > Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
-> > > > ---
-> > > >    include/linux/mmzone.h | 16 ++++++++++++++-
-> > > >    mm/hugetlb_vmemmap.c   | 44 ++++++++++++++++++++++++++++++++++++++++--
-> > > >    mm/sparse-vmemmap.c    | 44 ++++++++++++++++++++++++++++++++++--------
-> > > >    3 files changed, 93 insertions(+), 11 deletions(-)
-> > > > 
-> > > > diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
-> > > > index 322ed4c42cfc..2ee3eb610291 100644
-> > > > --- a/include/linux/mmzone.h
-> > > > +++ b/include/linux/mmzone.h
-> > > > @@ -82,7 +82,11 @@
-> > > >     * currently expect (see CONFIG_HAVE_GIGANTIC_FOLIOS): with hugetlb, we expect
-> > > >     * no folios larger than 16 GiB on 64bit and 1 GiB on 32bit.
-> > > >     */
-> > > > -#define MAX_FOLIO_ORDER		get_order(IS_ENABLED(CONFIG_64BIT) ? SZ_16G : SZ_1G)
-> > > > +#ifdef CONFIG_64BIT
-> > > > +#define MAX_FOLIO_ORDER		(34 - PAGE_SHIFT)
-> > > > +#else
-> > > > +#define MAX_FOLIO_ORDER		(30 - PAGE_SHIFT)
-> > > > +#endif
-> > > 
-> > > Where do these magic values stem from, and how do they related to the
-> > > comment above that clearly spells out 16G vs. 1G ?
-> > 
-> > This doesn't change the resulting value: 1UL << 34 is 16GiB, 1UL << 30
-> > is 1G. Subtract PAGE_SHIFT to get the order.
-> > 
-> > The change allows the value to be used to define NR_VMEMMAP_TAILS which
-> > is used specify size of vmemmap_tails array.
-> 
-> get_order(IS_ENABLED(CONFIG_64BIT) ? SZ_16G : SZ_1G) should evaluate to a
-> constant by the compiler.
->
-> See __builtin_constant_p handling in get_order().
-> 
-> If that is not working then we have to figure out why.
+On Thu, Jan 15, 2026 at 07:18:56AM +0800, Guodong Xu wrote:
+> The RISC-V "b" (Bit-manipulation) extension was ratified in April 2024,
+> much later than its component extensions zba/zbb/zbs (June 2021). Recent
+> updates to the device tree bindings [2] enforce that when all three
+> component extensions are present, "b" must also be specified. Related
+> discussion can also be found in [1].
+>=20
+> Patch 1 clarifies the ISA spec version for canonical ordering in uabi.rst.
+> It is a trivial update, but can help readers reference the correct
+> document version. Acked-by Paul Walmsley in v1.
+>=20
+> Patch 2, 3 and 4 adds "b" after "c" in 3 different device tree files
+> respectivly, anlogic, sophgo and spacemit, fixing the related dtbs_check
+> warnings.
+>=20
+> This patchset is based on top of linux-next, tag: next-20260109, and
+> depends on [2].
+>=20
+> Link: https://lore.kernel.org/all/20251230-imprison-sleet-6b5a1e26d34b@sp=
+ud/ [1]
+> Link: https://lore.kernel.org/all/20260110-k3-basic-dt-v4-0-d492f3a30ffa@=
+riscstar.com/ [2]
+>=20
+> Changes in v2:
+> - Patch 1: Add Acked-by from Paul Walmsley.
+> - Patch 2/3/4: These are splits from the v1 Patch 2. Split into three
+>     different patches for each SoC.
+> - Link to v1: https://lore.kernel.org/r/20260113-adding-b-dtsi-v1-0-22d6e=
+55d19df@riscstar.com
+>=20
+> Signed-off-by: Guodong Xu <guodong@riscstar.com>
+> ---
+> Guodong Xu (4):
+>       Documentation: riscv: uabi: Clarify ISA spec version for canonical =
+order
+>       riscv: dts: anlogic: dr1v90: Add "b" ISA extension
+>       riscv: dts: sophgo: sg2044: Add "b" ISA extension
+>       riscv: dts: spacemit: k1: Add "b" ISA extension
+>=20
+>  Documentation/arch/riscv/uabi.rst           |   4 +-
+>  arch/riscv/boot/dts/anlogic/dr1v90.dtsi     |   5 +-
+>  arch/riscv/boot/dts/sophgo/sg2044-cpus.dtsi | 256 ++++++++++++++--------=
+------
+>  arch/riscv/boot/dts/spacemit/k1.dtsi        |  32 ++--
+>  4 files changed, 150 insertions(+), 147 deletions(-)
+> ---
+> base-commit: 31d167f54de93f14fa8e4bc6cbc4adaf7019fd94
+> change-id: 20260113-adding-b-dtsi-148714533f07
+> prerequisite-message-id: <20260110-k3-basic-dt-v4-0-d492f3a30ffa@riscstar=
+=2Ecom>
+> prerequisite-patch-id: 0c859b4d131b3360875c795c6148c6176b55fb91
+> prerequisite-patch-id: 2ed98dc1ab0f5ed923cc252415c345dc8caf6f17
+> prerequisite-patch-id: 1be1a031763fac029076a768f012af31e455be66
+> prerequisite-patch-id: 21bb8387c946e050910440e7a7622305d46d946d
+> prerequisite-patch-id: f3bdc2c74b230663710086bd770a755d56cb8b9c
+> prerequisite-patch-id: 1f162c02f8bdb5bbc8ce52ead4fcb76258f5c2b9
+> prerequisite-patch-id: 76e1ff26c2f1fe4019cfa574942b568000e6ca1f
+> prerequisite-patch-id: 77ddc9e5dc85495adc803cdc605bdda2ddc7fa47
+> prerequisite-patch-id: a75c798383b46a14d40436357c769c3671184768
+> prerequisite-patch-id: 781fc10dcae2c38c84c25bee887ef7474786dd36
+> prerequisite-patch-id: 5be5d3e62aa73024bf9e1de6aad155be6d618f40
 
-asm-offsets.s compilation fails:
+FWIW, this kind of prereq-patch-id stuff isn't really helpful, because I
+don't think there's actually any dependencies on that work. It actually
+trips up some parts of b4 that think they're needed.
 
-../include/linux/mmzone.h:1574:16: error: fields must have a constant size:
-      'variable length array in structure' extension will never be supported
- 1574 |         unsigned long vmemmap_tails[NR_VMEMMAP_TAILS];
+I applied the Anlogic patch.
 
-Here's how preprocessor dump of vmemmap_tails looks like:
+Thanks,
+Conor.
 
- unsigned long vmemmap_tails[(get_order(1 ? (0x400000000ULL) : 0x40000000) - (( __builtin_constant_p(2 * ((1UL) << 12) / sizeof(struct page)) ? ((2 * ((1UL) << 12) / sizeof(struct page)) < 2 ? 0 : 63 - __builtin_clzll(2 * ((1UL) << 12) / sizeof(struct page))) : (sizeof(2 * ((1UL) << 12) / sizeof(struct page)) <= 4) ? __ilog2_u32(2 * ((1UL) << 12) / sizeof(struct page)) : __ilog2_u64(2 * ((1UL) << 12) / sizeof(struct page)) )) + 1)];
+--sP0KQQHEFQVHHdeO
+Content-Type: application/pgp-signature; name="signature.asc"
 
-And here's get_order():
+-----BEGIN PGP SIGNATURE-----
 
-static inline __attribute__((__gnu_inline__)) __attribute__((__unused__)) __attribute__((no_instrument_function)) __attribute__((__always_inline__)) __attribute__((__const__)) int get_order(unsigned long size)
-{
- if (__builtin_constant_p(size)) {
-  if (!size)
-   return 64 - 12;
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaWk8TAAKCRB4tDGHoIJi
+0qJXAP9BAi/JL4BUX4v3frtYl233RdCgXONa5Aa6sLWiDuldrAD+LoenY5vTUJMs
+2yqbA1IH2zP1CkI5ysicbD/YYaQMtww=
+=HTet
+-----END PGP SIGNATURE-----
 
-  if (size < (1UL << 12))
-   return 0;
-
-  return ( __builtin_constant_p((size) - 1) ? (((size) - 1) < 2 ? 0 : 63 - __builtin_clzll((size) - 1)) : (sizeof((size) - 1) <= 4) ? __ilog2_u32((size) - 1) : __ilog2_u64((size) - 1) ) - 12 + 1;
- }
-
- size--;
- size >>= 12;
-
-
-
- return fls64(size);
-
-}
-
-I am not sure why it is not compile-time constant. I have not dig
-deeper.
-
-Switching to ilog2(IS_ENABLED(CONFIG_64BIT) ? SZ_16G : SZ_1G) - PAGE_SHIFT works,
-but I personally find my variant more readable.
-
-Do you want me to dig deeper to check if making get_order() work
-possible?
-
-> Was this only a specific config in where you ran into compile-time problems?
-
-I am not aware about any particular config dependency. Seems to be
-everywhere.
-
--- 
-  Kiryl Shutsemau / Kirill A. Shutemov
+--sP0KQQHEFQVHHdeO--
 
