@@ -1,58 +1,58 @@
-Return-Path: <linux-doc+bounces-72533-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72535-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99EA4D256F4
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:41:55 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40034D25709
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:42:20 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9CB10303E01C
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:40:45 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6EDA63090B65
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:40:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BE75F3B8BA1;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1C753B8BC9;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="s4qL0sM5"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AyGDhR6X"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E9463ACF12;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A10003B52ED;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768491642; cv=none; b=POsk1x2Y6C5OyNXPxQX3tReaoJW1P2weFdQulWRXGFseZ7P8iB746alR+rDSh6lqBFCmJ54gduqdERA13WmE+gr5okziUrq1pSLfTLsq2fQyi/LXqL3Zw7/8KkCf2YyJ0SJG4vFfkX+iG8lQRuWGxZD1yju7R/lPZEj3IICB1+k=
+	t=1768491642; cv=none; b=QWT+UWond5ZQd27dhzjK3QVPP5hpjkziwTz/CE83iQ1abDPgiK8pDZ672R7kEucLUxBtdtAInDYSIunn6lb+FnPD8ZjK2iXv7SrYm0Vpn7e9usxp3MEkeZyODIsPywEv3cyJKi/OP9r0fWJxtK46y7OUzVVmEwIZXFSDWtD+HK0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768491642; c=relaxed/simple;
-	bh=qeD2CxushaNmzGduOrZz2GnZPSRsopACODszEDevkew=;
+	bh=s1mjnTzuhsFarODXcVZv6x/pyTkp3qp8CK9/urSRqTw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=JLIzrtdKbhQfUeAOOgL3bVjjDcVlbjDJEQ02QoWhfalzXuibMMA3dsxRuVDFUGXrNp24wEvVbJG5yOfvWfStQ6ihzKMJBhvjwigupUbQE3uS/BUyzT6cpw/NWBh7HcMXFPa4uXiRAs1gZ04XMd/e+JvM5nOqH10vhYh57KaC96I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=s4qL0sM5; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 325F1C4AF0D;
+	 MIME-Version:Content-Type; b=UCLMB0mENSNfgDpmwgN1v6JGifAc2hben79a/oqcA+uyUCN1tbCIYhxraLjVzQ8kBeGkEtpZlG2350iErnpp0iQ3/7HKs16RqgesVl4PoZtUE4K/Pzlh6voEFwxyO+prvL17ek8k1iY8fUpyb/qiBrrKIF6oLQoZ6C/U7Ef1D9k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AyGDhR6X; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39B1BC2BCF4;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768491642;
-	bh=qeD2CxushaNmzGduOrZz2GnZPSRsopACODszEDevkew=;
+	bh=s1mjnTzuhsFarODXcVZv6x/pyTkp3qp8CK9/urSRqTw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=s4qL0sM5okyH0oUGSgP0m0xmk89HRsmoIily9HKJ5uMw8QDdMkrhbBJX4PWTCRY3v
-	 5+mqr+xjtshQA1zfAS/rfeXBkhj5oTTVEsga7aIiWPBXwQtmMEU5A9lHeteBCKpW0t
-	 oS7GTKb5MRsZQp89op3SsDMGRf2MrWxdVUdxUrV/Drb8Cf9LMhtIyZVqrufCWDoTKe
-	 AtSZTRMOQ71gJYlwBBJP0Cx5NJOaES+WNmdTtgHBuFLRJ0pk0cFbl8ZZheXqZyaT1K
-	 uicznAnWAlj6ONTjmtRKfus3gnfgRpqKbgiCEMxRuACNd2paAnKk82BQxCOST5bIH+
-	 QjTZefIwU84oA==
+	b=AyGDhR6Xc0NypbnxoAy9EeWvLcMs+49KdrlslDyGpkqgSmVkaZ+xRFuztBQk2ZQSW
+	 9i9PL82IvRUC8j44AfiR77JpVhcK5+BA4A1abmWrQhvY3idtPeFJg7LuelT6tJk6Qt
+	 Qsd6tGH/3/g5P9o6+hpxTnfV6MiV75UzWhmeOG2H+kWP4XD3cUQGqB21W3s1xMho77
+	 yFs7/TIHSt2ARKoTCind5eD9vDza/44IbY8uSLv9KAq1T0rTEVNqxV4bo9le4u1HC4
+	 vwy+UCWXQckLfZBE29VgKJjC79C+wgy+bCsb8haUG5Z+rRj3/EdIRqyEI5+kQj+g24
+	 vkRFUEuD+z/BA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vgPSi-000000043J1-1woA;
+	id 1vgPSi-000000043J5-23g0;
 	Thu, 15 Jan 2026 16:40:40 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
-	Jonathan Corbet <corbet@lwn.net>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 14/15] docs: kdoc: python_version: Improve docstrings and comments
-Date: Thu, 15 Jan 2026 16:40:35 +0100
-Message-ID: <d89acbc1a1e3c97a336b58934e56299f17e265ed.1768488832.git.mchehab+huawei@kernel.org>
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v2 15/15] docs: add kernel-doc modules documentation
+Date: Thu, 15 Jan 2026 16:40:36 +0100
+Message-ID: <aff5634c95f388be7a7bef56b7bea7564ea4a501.1768488832.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768488832.git.mchehab+huawei@kernel.org>
 References: <cover.1768488832.git.mchehab+huawei@kernel.org>
@@ -66,64 +66,176 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-In preparation to document kernel-doc module, improve its
-documentation.
+Place kernel-doc modules documentation at Linux Kernel docs.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/python_version.py | 20 ++++++++++++++++----
- 1 file changed, 16 insertions(+), 4 deletions(-)
+ Documentation/tools/index.rst          |  1 +
+ Documentation/tools/kdoc.rst           | 12 +++++++
+ Documentation/tools/kdoc_ancillary.rst | 46 ++++++++++++++++++++++++++
+ Documentation/tools/kdoc_output.rst    | 14 ++++++++
+ Documentation/tools/kdoc_parser.rst    | 29 ++++++++++++++++
+ Documentation/tools/python.rst         | 10 ++++++
+ 6 files changed, 112 insertions(+)
+ create mode 100644 Documentation/tools/kdoc.rst
+ create mode 100644 Documentation/tools/kdoc_ancillary.rst
+ create mode 100644 Documentation/tools/kdoc_output.rst
+ create mode 100644 Documentation/tools/kdoc_parser.rst
+ create mode 100644 Documentation/tools/python.rst
 
-diff --git a/tools/lib/python/kdoc/python_version.py b/tools/lib/python/kdoc/python_version.py
-index e83088013db2..4ddb7ead5f56 100644
---- a/tools/lib/python/kdoc/python_version.py
-+++ b/tools/lib/python/kdoc/python_version.py
-@@ -33,21 +33,31 @@ class PythonVersion:
-     """
+diff --git a/Documentation/tools/index.rst b/Documentation/tools/index.rst
+index 80488e290e10..89b81a13c6a1 100644
+--- a/Documentation/tools/index.rst
++++ b/Documentation/tools/index.rst
+@@ -12,6 +12,7 @@ more additions are needed here:
  
-     def __init__(self, version):
--        """Ïnitialize self.version tuple from a version string"""
-+        """
-+        Ïnitialize self.version tuple from a version string.
-+        """
-         self.version = self.parse_version(version)
+    rtla/index
+    rv/index
++   python
  
-     @staticmethod
-     def parse_version(version):
--        """Convert a major.minor.patch version into a tuple"""
-+        """
-+        Convert a major.minor.patch version into a tuple.
-+        """
-         return tuple(int(x) for x in version.split("."))
+ .. only::  subproject and html
  
-     @staticmethod
-     def ver_str(version):
--        """Returns a version tuple as major.minor.patch"""
-+        """
-+        Returns a version tuple as major.minor.patch.
-+        """
-         return ".".join([str(x) for x in version])
- 
-     @staticmethod
-     def cmd_print(cmd, max_len=80):
-+        """
-+        Outputs a command line, repecting maximum width.
-+        """
+diff --git a/Documentation/tools/kdoc.rst b/Documentation/tools/kdoc.rst
+new file mode 100644
+index 000000000000..e51ba159d8c4
+--- /dev/null
++++ b/Documentation/tools/kdoc.rst
+@@ -0,0 +1,12 @@
++.. SPDX-License-Identifier: GPL-2.0
 +
-         cmd_line = []
- 
-         for w in cmd:
-@@ -66,7 +76,9 @@ class PythonVersion:
-         return "\n  ".join(cmd_line)
- 
-     def __str__(self):
--        """Returns a version tuple as major.minor.patch from self.version"""
-+        """
-+        Return a version tuple as major.minor.patch from self.version.
-+        """
-         return self.ver_str(self.version)
- 
-     @staticmethod
++==================
++Kernel-doc modules
++==================
++
++.. toctree::
++   :maxdepth: 2
++
++   kdoc_parser
++   kdoc_output
++   kdoc_ancillary
+diff --git a/Documentation/tools/kdoc_ancillary.rst b/Documentation/tools/kdoc_ancillary.rst
+new file mode 100644
+index 000000000000..3950d0a3f104
+--- /dev/null
++++ b/Documentation/tools/kdoc_ancillary.rst
+@@ -0,0 +1,46 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=================
++Ancillary classes
++=================
++
++Argparse formatter class
++========================
++
++.. automodule:: lib.python.kdoc.enrich_formatter
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Regular expression class handler
++================================
++
++.. automodule:: lib.python.kdoc.kdoc_re
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++
++Chinese, Japanese and Korean variable fonts handler
++===================================================
++
++.. automodule:: lib.python.kdoc.latex_fonts
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Kernel C file include logic
++===========================
++
++.. automodule:: lib.python.kdoc.parse_data_structs
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Python version ancillary methods
++================================
++
++.. automodule:: lib.python.kdoc.python_version
++   :members:
++   :show-inheritance:
++   :undoc-members:
+diff --git a/Documentation/tools/kdoc_output.rst b/Documentation/tools/kdoc_output.rst
+new file mode 100644
+index 000000000000..08fd271ec556
+--- /dev/null
++++ b/Documentation/tools/kdoc_output.rst
+@@ -0,0 +1,14 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=======================
++Kernel-doc output stage
++=======================
++
++Output handler for man pages and ReST
++=====================================
++
++.. automodule:: lib.python.kdoc.kdoc_output
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
+diff --git a/Documentation/tools/kdoc_parser.rst b/Documentation/tools/kdoc_parser.rst
+new file mode 100644
+index 000000000000..03ee54a1b1cc
+--- /dev/null
++++ b/Documentation/tools/kdoc_parser.rst
+@@ -0,0 +1,29 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=======================
++Kernel-doc parser stage
++=======================
++
++File handler classes
++====================
++
++.. automodule:: lib.python.kdoc.kdoc_files
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Parsed item data class
++======================
++
++.. automodule:: lib.python.kdoc.kdoc_item
++   :members:
++   :show-inheritance:
++   :undoc-members:
++
++Parser classes and methods
++==========================
++
++.. automodule:: lib.python.kdoc.kdoc_parser
++   :members:
++   :show-inheritance:
++   :undoc-members:
+diff --git a/Documentation/tools/python.rst b/Documentation/tools/python.rst
+new file mode 100644
+index 000000000000..e826787ce9dd
+--- /dev/null
++++ b/Documentation/tools/python.rst
+@@ -0,0 +1,10 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++================
++Python libraries
++================
++
++.. toctree::
++   :maxdepth: 4
++
++   kdoc
 -- 
 2.52.0
 
