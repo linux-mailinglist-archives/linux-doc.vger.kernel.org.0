@@ -1,47 +1,47 @@
-Return-Path: <linux-doc+bounces-72524-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72522-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A5A5D256BD
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:40:46 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FF16D256DF
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:41:35 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 4AB42300F18D
+	by sea.lore.kernel.org (Postfix) with ESMTP id 2278530145A0
 	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:40:44 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 76D843A7F5B;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 764753A7DEA;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dQpcTweP"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dGxa6w1K"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51E6D3570AE;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51EF936C0BB;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768491642; cv=none; b=uSNd0REL+KUK1eXG78ZseTsWsm/Featu3QMdUh/OPHpe1dV0KWMc3bgGBSGNJPxRyscoYfp/aKDXCUSVl3xmMkfeEKniw6yJwkBrpK64FJzbMD+ozcd+CXTemAw+eWeBuzuDqBIVTcNt5C2zhqNyrHQgE+3jkrWFYANMztRVuac=
+	t=1768491642; cv=none; b=JnmDTFOT0eYyDMehGOW1RIxcJ6KJWdNRZKvjzcysiLRmrkeI/Gbq91SGUPXSsQWpdGd231lgqr2BrmA+hONMy3Kv5I0aDz59Dt87VcMkG9uMgUgiM+Cbfq4kfGnSKCOoNiifIkTxQhx6fT/wzHnYk0fxm+CJn8P4HnVOwLebBfM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768491642; c=relaxed/simple;
-	bh=TCHwfk8ThCkFaLgmH3fFwJfEQHJ1oXz9bzKs/OW/Myg=;
+	bh=X8zMAMrZ2rBw2/CZgBSnLB3g6EePAZnuEoYA7VDGxVw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=eGHqszTO22rc5u6jLu30z0sq4XSlzQARxrxI19WtZGR9x0745848zkCW6WiivDVIxo/IZJoiEp1+i+qjW4Bt+7Xa4Y2q1S7SzZM09saREZ87uyEl0/aMoBfNXAX26l0savjVDylCYlyneZGvqHjVMgnpG1gvKB/fahboGQtXfsg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dQpcTweP; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0ABCFC16AAE;
+	 MIME-Version:Content-Type; b=Ie3TJdgtOsh76I+uOAjjGIYnRQeUx++DpcsDksR0lji3yjSNjKvvq8R7CP7fydXt8eXtNW7vCIiyp4JGZFY8LUwh1KCVDkwx2GjuMU3WzPszwPPDos3lD84SNx1FIxb+EK73ENjXrax2iVZkiMlsSvlo5W8cbAt69fSDRybq27s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dGxa6w1K; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02F83C116D0;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768491642;
-	bh=TCHwfk8ThCkFaLgmH3fFwJfEQHJ1oXz9bzKs/OW/Myg=;
+	bh=X8zMAMrZ2rBw2/CZgBSnLB3g6EePAZnuEoYA7VDGxVw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=dQpcTwePp0HWy37rz5HnMQzk/fEX5PE24Pmo5QExdQbmd4ZVUwPD1J8+jau1s40mi
-	 w9/i1/T6bwDmP4INdUw5BXgEOcEHI1x2TQxt6BAOFdvSgzulWRg/Vy/A5c2W9rY7CL
-	 9BIe4/Ma107GQ1G3MRxzS/WRyU8W2m09Myzas1td9OLEA1EQSxafX47zY/zHpogTsA
-	 6WJRAYHen6DPuJ2DIwJsClUR6HJbdRDDlfeZ/4bRfjUYizquj8jPHqGdYXUZPEvI9A
-	 TYyTeKckemUOFgrL30YV/fOEHg62WO0/GF2lPTwmKhl2Aq6zK6LrDG9ym1oUXmMc3N
-	 I9wPfu+NnJGpw==
+	b=dGxa6w1KOdMP9L1iYgISs4fmGMEFr5/LoYZ9S+c6KKAEDLx2tbiAcfUOrPZCwqf+m
+	 u1suTMmt+YKt3Vd8shGPkQkGIM9qDf2WPPXZnZMQ29d/nOvaHaHqofRgP51QKYyluP
+	 ffQwaeAECmYxqX9ARplfuKs8E1ma20YcuSqXrfoeo9R/WQXz1k807hnB0qm3t9rtoS
+	 YHFsenebMhw3ecot8GqhIFnmgOFAeaFrW5DOufKT25xqC2KMQLWo7IE3Lqv+pHbRfd
+	 xO5zlhzeq4cmn5SsYN91qpAHKB/PdDds56jIaZAG/oX9S0o1LngTfwd8f3l7gvk0i9
+	 RL3425TpA6F1g==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vgPSi-000000043IF-0cno;
+	id 1vgPSi-000000043IJ-0jbf;
 	Thu, 15 Jan 2026 16:40:40 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -51,9 +51,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Shuah Khan <skhan@linuxfoundation.org>,
 	Jani Nikula <jani.nikula@linux.intel.com>
-Subject: [PATCH v2 02/15] docs: conf.py: don't use doctree with a different meaning
-Date: Thu, 15 Jan 2026 16:40:23 +0100
-Message-ID: <34a3b676b2eaa58058a2578f5aa1427274fc633e.1768488832.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 03/15] docs: conf: don't rely on cwd to get documentation location
+Date: Thu, 15 Jan 2026 16:40:24 +0100
+Message-ID: <57823e4d8d025ad34e4891215e387778564fcdcb.1768488832.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768488832.git.mchehab+huawei@kernel.org>
 References: <cover.1768488832.git.mchehab+huawei@kernel.org>
@@ -67,56 +67,44 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-At Sphinx, doctree is a directory where doc build cache is stored.
-Use a better name.
-
-No functional changes.
+Instead of relying that Sphinx will be called from Documentation/
+dir, pick the location based on __file__.
 
 Suggested-by: Jani Nikula <jani.nikula@linux.intel.com>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/conf.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ Documentation/conf.py | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
 diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 1ea2ae5c6276..548e57b1fb01 100644
+index 548e57b1fb01..f62982f83501 100644
 --- a/Documentation/conf.py
 +++ b/Documentation/conf.py
-@@ -33,7 +33,7 @@ else:
+@@ -13,10 +13,11 @@ from  textwrap import dedent
+ 
+ import sphinx
+ 
+-# If extensions (or modules to document with autodoc) are in another directory,
+-# add these directories to sys.path here. If the directory is relative to the
+-# documentation root, use os.path.abspath to make it absolute, like shown here.
+-sys.path.insert(0, os.path.abspath("sphinx"))
++# Location of Documentation/ directory
++kern_doc_dir = os.path.dirname(os.path.abspath(__file__))
++
++# Add location of Sphinx extensions
++sys.path.insert(0, os.path.join(kern_doc_dir, "sphinx"))
+ 
+ # Minimal supported version
+ needs_sphinx = "3.4.3"
+@@ -32,9 +33,6 @@ else:
+     # Include patterns that don't contain directory names, in glob format
      include_patterns = ["**.rst"]
  
- # Location of Documentation/ directory
--doctree = os.path.abspath(".")
-+kern_doc_dir = os.path.abspath(".")
- 
+-# Location of Documentation/ directory
+-kern_doc_dir = os.path.abspath(".")
+-
  # Exclude of patterns that don't contain directory names, in glob format.
  exclude_patterns = []
-@@ -70,7 +70,7 @@ def config_init(app, config):
-     # setup include_patterns dynamically
-     if has_include_patterns:
-         for p in dyn_include_patterns:
--            full = os.path.join(doctree, p)
-+            full = os.path.join(kern_doc_dir, p)
- 
-             rel_path = os.path.relpath(full, start=app.srcdir)
-             if rel_path.startswith("../"):
-@@ -80,7 +80,7 @@ def config_init(app, config):
- 
-     # setup exclude_patterns dynamically
-     for p in dyn_exclude_patterns:
--        full = os.path.join(doctree, p)
-+        full = os.path.join(kern_doc_dir, p)
- 
-         rel_path = os.path.relpath(full, start=app.srcdir)
-         if rel_path.startswith("../"):
-@@ -92,7 +92,7 @@ def config_init(app, config):
-     # of the app.srcdir. Add them here
- 
-     # Handle the case where SPHINXDIRS is used
--    if not os.path.samefile(doctree, app.srcdir):
-+    if not os.path.samefile(kern_doc_dir, app.srcdir):
-         # Add a tag to mark that the build is actually a subproject
-         tags.add("subproject")
  
 -- 
 2.52.0
