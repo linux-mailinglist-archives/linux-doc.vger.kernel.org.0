@@ -1,70 +1,97 @@
-Return-Path: <linux-doc+bounces-72362-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72364-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3FCDD22780
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 06:57:35 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 31339D22831
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 07:15:36 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9BB2D3011EC9
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 05:57:34 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 86DFD3019A42
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 06:15:35 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1294B267B90;
-	Thu, 15 Jan 2026 05:57:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E033239E9D;
+	Thu, 15 Jan 2026 06:15:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="GLsVxRdl"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="W1W8bEql"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB4BD1FC8;
-	Thu, 15 Jan 2026 05:57:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=90.155.50.34
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F36D91E9B12;
+	Thu, 15 Jan 2026 06:15:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768456654; cv=none; b=I6BjuSz6tdlVRM+M1BBHvWXXoaRwQHPhZKNkL2naXI+xkvn7Fwv16RLliBZ3c41PMn9dP4gx7Gg0LnOBzuG0tacunlN7Qpc3NtID0euU9PGWxdfZX5Ao7ogcKYPq4JsfS5HTbYtiTWFW7YaDFtjPtCMn7f3bxScplpxtyBcNLc8=
+	t=1768457734; cv=none; b=UDY9+SeJfu4Tq1mQaZAgn6Gcwd7mS8H4n+ctZjrDZssQFdcx3WTviO3xX6s6UnGwiBEKP6BuMFQgDiDjnIU13rcFwofFxq8byVpzrkn89aZxa2U4N3rxfmJrN2bLvJAo2XcPrCX1PpB9nx87d02RznPLSSdZK+3FUaS725YTUNc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768456654; c=relaxed/simple;
-	bh=qa/591coTB/6k+u6J/aC/Wx1kILLrBPmfxuxKkf+6KU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=gIUX+gJgHyXVdThTxXqKddS2V0INaJ7/YocTquUr3ifGTb2URqp/yxAckdWkVFn/DG3VZ86IQrGrh/X1hErawxHmjKuP5hZdfXyvJ7KGQrK+8xi81RCU/kEaJBSGrw8MkY+050fKqO1czbpwyZ0rR0WUyuUWUDw2vnAGr5Qmk40=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=GLsVxRdl; arc=none smtp.client-ip=90.155.50.34
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=infradead.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=aO8IjEV3AqaUA0VAtyH8dY/Ue4Mm0DNZe+SgvViKDiA=; b=GLsVxRdlINgsZk8FkEJlY5nY1L
-	pockPlKwDJGFY6IYuwUcG8wytD9keK+kxdBhlyowFAGYqkf7+vP2dlbA0GDAeBi6PUTOD8mDKLzVQ
-	ihdt4lIZfZnjl25nQosn1LR5St0WHx2jSZvsxnbFrlq3BRCvrLOQTBY+MXPLLCUPM+NY3bMz6ky6a
-	8ekt7ybnielyOFl6c7kVnoMuwaPtLqJQE3Lx6qB8MUTrn+xaQiywvEuwEZbKEVjcZXAid1Ul82332
-	6Lrodjb4XaYIjnQTbFpVFCpceorf4cP4WhVivwqevRVss1wCn2DKr7cxSN8qJLRFtvc4v3Ru5dVEr
-	Muy6BCGQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.98.2 #2 (Red Hat Linux))
-	id 1vgGMB-00000007HBi-29MT;
-	Thu, 15 Jan 2026 05:57:19 +0000
-Date: Thu, 15 Jan 2026 05:57:19 +0000
-From: Matthew Wilcox <willy@infradead.org>
-To: Suren Baghdasaryan <surenb@google.com>
-Cc: akpm@linux-foundation.org, kent.overstreet@linux.dev, corbet@lwn.net,
-	ranxiaokai627@163.com, ran.xiaokai@zte.com.cn,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-mm@kvack.org, stable@vger.kernel.org
-Subject: Re: [PATCH 1/1] Docs/mm/allocation-profiling: describe sysctrl
- limitations in debug mode
-Message-ID: <aWiBv4A4QGJ1pr1l@casper.infradead.org>
-References: <20260115054557.2127777-1-surenb@google.com>
+	s=arc-20240116; t=1768457734; c=relaxed/simple;
+	bh=3J7tIy8k8Bcf/iUPBVTRCC72t2DHrr8dVnhgEH9Q9ug=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Dg4etf6C6ool1OY+zans4nAFovJBHxvR1wF21PBkg5+Z+6EftzQGqkDE6t9qNs4rqRw4txm5CEuB1mUncnSpxyiHlBRzes1WJmD/qXtwZODTR4WPd2Ti7ouB3PZBPAJnf0q35e6viGCkdClLGavgPLOn8Hw/wSk8V3wtuOXAF84=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=W1W8bEql; arc=none smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1768457733; x=1799993733;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=3J7tIy8k8Bcf/iUPBVTRCC72t2DHrr8dVnhgEH9Q9ug=;
+  b=W1W8bEql1RsFhagCeHJPZeBGiD69KF7oHoQmX1mNy2dJ/xzkeSj95Mza
+   I6IkX8m7uurU01biSaNM26SYd3NvRGMW9NmKvwuPTyUswkaPk6zNL5/ry
+   KGDRUCZs9+uuv34JblqJRxrH0+zhpD6YOMzxLx6ovmUWfUvfhxJYkcoYm
+   WpJgAjynalJsoZ5+ALQUJ7t16Vpea9YQCBCUZFeRKzT1fltBE1wsvwNbc
+   4Pd2dQ2Bw67sNltzT/OXnOL9gEYYHpFHggKkRnYfLt+4u1N8z1yAPeMDH
+   KD5P8MRcFEvAd1/trYb2aMEOXqd8J8Pts8sQWOLwPfh0WOMau1uRhgmXb
+   w==;
+X-CSE-ConnectionGUID: TtpFdSkKT62/n6o/W6+b3Q==
+X-CSE-MsgGUID: jxgF89++RRmK91AZc8xIBw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11671"; a="72345738"
+X-IronPort-AV: E=Sophos;i="6.21,226,1763452800"; 
+   d="scan'208";a="72345738"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 22:15:32 -0800
+X-CSE-ConnectionGUID: Pj1GQVOFRsqZrvJuRHsaaw==
+X-CSE-MsgGUID: DapuPcptS7yR3gSSG93FjQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,226,1763452800"; 
+   d="scan'208";a="236129327"
+Received: from allen-sbox.sh.intel.com (HELO [10.239.159.30]) ([10.239.159.30])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jan 2026 22:15:28 -0800
+Message-ID: <f3ab0156-3d7c-470d-9c1e-922195ea27af@linux.intel.com>
+Date: Thu, 15 Jan 2026 14:15:32 +0800
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260115054557.2127777-1-surenb@google.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/5] iommu: Add page_ext for IOMMU_DEBUG_PAGEALLOC
+To: Mostafa Saleh <smostafa@google.com>, linux-mm@kvack.org,
+ iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+ linux-doc@vger.kernel.org
+Cc: corbet@lwn.net, joro@8bytes.org, will@kernel.org, robin.murphy@arm.com,
+ akpm@linux-foundation.org, vbabka@suse.cz, surenb@google.com,
+ mhocko@suse.com, jackmanb@google.com, hannes@cmpxchg.org, ziy@nvidia.com,
+ david@redhat.com, lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com,
+ rppt@kernel.org, xiaqinxin@huawei.com, rdunlap@infradead.org
+References: <20260114164322.787125-1-smostafa@google.com>
+Content-Language: en-US
+From: Baolu Lu <baolu.lu@linux.intel.com>
+In-Reply-To: <20260114164322.787125-1-smostafa@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 14, 2026 at 09:45:57PM -0800, Suren Baghdasaryan wrote:
-> +  warnings produces by allocations made while profiling is disabled and freed
+On 1/15/26 00:43, Mostafa Saleh wrote:
+> Changes in v7:
+> v6:https://lore.kernel.org/linux-iommu/20260109171805.901995-1- 
+> smostafa@google.com/
+> - Add a new function page_ext_get_phys() and use it instead of
+>    pfn_valid() + phys_to_page().
+> - Drop R-bs on patch 4.
 
-"produced"
+This series has been applied. If you have any further fixups, it's
+better to submit them as follow-up patches.
+
+Thanks,
+baolu
 
