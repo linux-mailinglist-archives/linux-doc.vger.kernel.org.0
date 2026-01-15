@@ -1,47 +1,47 @@
-Return-Path: <linux-doc+bounces-72527-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72525-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D7ADD256FA
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:41:59 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF528D256C8
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:40:50 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0A0A5305A74B
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:40:46 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 299F23009F3A
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:40:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B5F573B530C;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B48D03B5301;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V5ssH+Ux"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WRpK3+QW"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C4773A8FE5;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C3D33A89AC;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768491642; cv=none; b=KcwfYLN3aJr6DIJoIHLHuo0piEx+XBr6BNvfpxdu9hGZxsGOxCQ5xkgNJypDGZXTZr2NgWgfz75pCrA3+AYlpegjJMGdyODOJCaHnwaaZS7r7ZMS9AJ0YdLl0g41VnhZxp/C7TSZYBaHM5NNMUF1Hjpns2dVe4vUVeNr5y1cGOw=
+	t=1768491642; cv=none; b=H7ESJHvu3SNpsj4FCQqPlsa0QzwS8H7VN6moYg3aGn3dbCyy3LzMP+c2OhYK6Snh4aHQ7gnRnlSbzk80APUG9J8rrhKe2hCWppR2PVf1uOn72oMW6rOR0fJYPo1fAKSzgsq1ZfFgzlo09yDyFTkgXPbAcKF4NnVW5zrZEVM2Fxs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768491642; c=relaxed/simple;
-	bh=FI+Dh9Iu2wtKz8NU+WdlvdtlEUg2nNsIV9O2y+kNbi8=;
+	bh=AT9QRc72PaX75+hy9TLUQhCbT/HxXyi982eiR6wBTwU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=rJbZlTI2zvJAxJ6pkVGm4ESUHoAioTvTesHwIR6S6GtXTgU3cd2dtEVsO3bqXX0parifzQ8bp+7lYOsXUsup5hPiawxszfktTx4LNMJwktZwvjRRG7rCUzPx7gZk0K0OYeMnbkyotNfAI240kzhjn88uiJbAPu2rcCD5U1ZMDUs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V5ssH+Ux; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 131C5C2BC86;
+	 MIME-Version:Content-Type; b=Uw8WQCVywI73oYuML3P4J8uAHi3/GqWVorEUqJZ8Wiq4kaawz801U72EzKfvPO4LIo7UFwCpnidAYEQQZ9F/SBSojUEYADwXHhceWIvYOHhpqrLmpPvuxZuq9ExDy7jOel4QmAdtEH7WFYyVueN1rCs0mLxTdMPgyeYyuZDAHEg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WRpK3+QW; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20DACC4AF0C;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768491642;
-	bh=FI+Dh9Iu2wtKz8NU+WdlvdtlEUg2nNsIV9O2y+kNbi8=;
+	bh=AT9QRc72PaX75+hy9TLUQhCbT/HxXyi982eiR6wBTwU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=V5ssH+UxPd3GxI86XybH9H4yQzOqokD2CoYlfRslYava5v5DyG0KxGwB1L2AjIoM7
-	 Y1lL/HPrHQaUkE+ymGeBL2YF9cTuPcMB0aXzxrNY7FXiFddjRTgAAo+7UrHek3RQn/
-	 CR8Qtnd1isKTMPOquMIbCyB5EFTKeRowOwtfXmJEmK5HBY8uFkZ8iQv3fEoqNqvoDo
-	 CRpo1qryl/n67ebdbrN8ui5iqwY2RsfzrX94Q8wWx/LQ8Z0UnihJZWpS2hSD0yAkZw
-	 77OeIGTZUrQuU/OuxqYGVeh7RkNkQOSVQZxyVr1+tvsa6WCSChnqirVyOAdWHDviOK
-	 F3npl2dTsmCdw==
+	b=WRpK3+QWOy6MVTdxcWdq0iU9jXh75g7sTejc5OrEPYor/vKF9iOb7M+5plYxoQ6+y
+	 6QJH9MLmWJEALUZ5dNPraJVwXAiWKcBvvV0NPyv8/88HbGX0VaJ0Jw/GlK9xpe89Fb
+	 om/FQhzS1Cni6eXc3+41JQAxob+JYvvFFOOJb7AH0GDYVQxO5KArsyoialeMxzFC7H
+	 f7vascmuu8ANKkqY/3I5en1853LyIsSvO/qKWiTKaAIFrECpeDYJup+6cfY8ZYgRJ2
+	 HARIOnJXETZ6AlO7YyBVy2e/6mKUJfBv8UkpVVwSqNQU1rVf0CAk4mH+j3oMPZzr28
+	 6sFyJ8jbXoRxA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vgPSi-000000043Il-1VZH;
+	id 1vgPSi-000000043Ip-1cKG;
 	Thu, 15 Jan 2026 16:40:40 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
@@ -50,9 +50,9 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 10/15] docs: kdoc_output: Improve docstrings and comments
-Date: Thu, 15 Jan 2026 16:40:31 +0100
-Message-ID: <4b1dbe22622af93982b451a4c6b459f49f9d2bb5.1768488832.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2 11/15] docs: kdoc_re: Improve docstrings and comments
+Date: Thu, 15 Jan 2026 16:40:32 +0100
+Message-ID: <2303354f22b1630975f1fc907b651ee336f022bb.1768488832.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768488832.git.mchehab+huawei@kernel.org>
 References: <cover.1768488832.git.mchehab+huawei@kernel.org>
@@ -71,192 +71,91 @@ documentation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_output.py | 60 ++++++++++++++++------------
- 1 file changed, 35 insertions(+), 25 deletions(-)
+ tools/lib/python/kdoc/kdoc_re.py | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
 
-diff --git a/tools/lib/python/kdoc/kdoc_output.py b/tools/lib/python/kdoc/kdoc_output.py
-index d2bf94275d65..4210b91dde5f 100644
---- a/tools/lib/python/kdoc/kdoc_output.py
-+++ b/tools/lib/python/kdoc/kdoc_output.py
-@@ -5,14 +5,16 @@
- # pylint: disable=C0301,R0902,R0911,R0912,R0913,R0914,R0915,R0917
+diff --git a/tools/lib/python/kdoc/kdoc_re.py b/tools/lib/python/kdoc/kdoc_re.py
+index 2dfa1bf83d64..2816bd9f90f8 100644
+--- a/tools/lib/python/kdoc/kdoc_re.py
++++ b/tools/lib/python/kdoc/kdoc_re.py
+@@ -51,6 +51,9 @@ class KernRe:
+         """
+         return self.regex.pattern
  
- """
--Implement output filters to print kernel-doc documentation.
-+Classes to implement output filters to print kernel-doc documentation.
- 
--The implementation uses a virtual base class (OutputFormat) which
-+The implementation uses a virtual base class ``OutputFormat``. It
- contains dispatches to virtual methods, and some code to filter
- out output messages.
- 
- The actual implementation is done on one separate class per each type
--of output. Currently, there are output classes for ReST and man/troff.
-+of output, e.g. ``RestFormat`` and ``ManFormat`` classes.
++    def __repr__(self):
++        return f're.compile("{self.regex.pattern}")'
 +
-+Currently, there are output classes for ReST and man/troff.
- """
+     def __add__(self, other):
+         """
+         Allows adding two regular expressions into one.
+@@ -61,7 +64,7 @@ class KernRe:
  
- import os
-@@ -54,16 +56,19 @@ class OutputFormat:
-     """
+     def match(self, string):
+         """
+-        Handles a re.match storing its results
++        Handles a re.match storing its results.
+         """
  
-     # output mode.
--    OUTPUT_ALL          = 0 # output all symbols and doc sections
--    OUTPUT_INCLUDE      = 1 # output only specified symbols
--    OUTPUT_EXPORTED     = 2 # output exported symbols
--    OUTPUT_INTERNAL     = 3 # output non-exported symbols
-+    OUTPUT_ALL          = 0 #: Output all symbols and doc sections.
-+    OUTPUT_INCLUDE      = 1 #: Output only specified symbols.
-+    OUTPUT_EXPORTED     = 2 #: Output exported symbols.
-+    OUTPUT_INTERNAL     = 3 #: Output non-exported symbols.
+         self.last_match = self.regex.match(string)
+@@ -69,7 +72,7 @@ class KernRe:
  
--    # Virtual member to be overridden at the inherited classes
-+    #: Highlights to be used in ReST format.
-     highlights = []
+     def search(self, string):
+         """
+-        Handles a re.search storing its results
++        Handles a re.search storing its results.
+         """
  
-+    #: Blank line character.
-+    blankline = ""
+         self.last_match = self.regex.search(string)
+@@ -77,28 +80,28 @@ class KernRe:
+ 
+     def findall(self, string):
+         """
+-        Alias to re.findall
++        Alias to re.findall.
+         """
+ 
+         return self.regex.findall(string)
+ 
+     def split(self, string):
+         """
+-        Alias to re.split
++        Alias to re.split.
+         """
+ 
+         return self.regex.split(string)
+ 
+     def sub(self, sub, string, count=0):
+         """
+-        Alias to re.sub
++        Alias to re.sub.
+         """
+ 
+         return self.regex.sub(sub, string, count=count)
+ 
+     def group(self, num):
+         """
+-        Returns the group results of the last match
++        Returns the group results of the last match.
+         """
+ 
+         return self.last_match.group(num)
+@@ -110,7 +113,7 @@ class NestedMatch:
+     even harder on Python with its normal re module, as there are several
+     advanced regular expressions that are missing.
+ 
+-    This is the case of this pattern:
++    This is the case of this pattern::
+ 
+             '\\bSTRUCT_GROUP(\\(((?:(?>[^)(]+)|(?1))*)\\))[^;]*;'
+ 
+@@ -121,6 +124,7 @@ class NestedMatch:
+     replace nested expressions.
+ 
+     The original approach was suggested by:
 +
-     def __init__(self):
--        """Declare internal vars and set mode to OUTPUT_ALL"""
-+        """Declare internal vars and set mode to ``OUTPUT_ALL``."""
+         https://stackoverflow.com/questions/5454322/python-how-to-match-nested-parentheses-with-regex
  
-         self.out_mode = self.OUTPUT_ALL
-         self.enable_lineno = None
-@@ -128,7 +133,7 @@ class OutputFormat:
-             self.config.warning(log_msg)
- 
-     def check_doc(self, name, args):
--        """Check if DOC should be output"""
-+        """Check if DOC should be output."""
- 
-         if self.no_doc_sections:
-             return False
-@@ -177,7 +182,7 @@ class OutputFormat:
- 
-     def msg(self, fname, name, args):
-         """
--        Handles a single entry from kernel-doc parser
-+        Handles a single entry from kernel-doc parser.
-         """
- 
-         self.data = ""
-@@ -220,30 +225,31 @@ class OutputFormat:
-     # Virtual methods to be overridden by inherited classes
-     # At the base class, those do nothing.
-     def set_symbols(self, symbols):
--        """Get a list of all symbols from kernel_doc"""
-+        """Get a list of all symbols from kernel_doc."""
- 
-     def out_doc(self, fname, name, args):
--        """Outputs a DOC block"""
-+        """Outputs a DOC block."""
- 
-     def out_function(self, fname, name, args):
--        """Outputs a function"""
-+        """Outputs a function."""
- 
-     def out_enum(self, fname, name, args):
--        """Outputs an enum"""
-+        """Outputs an enum."""
- 
-     def out_var(self, fname, name, args):
--        """Outputs a variable"""
-+        """Outputs a variable."""
- 
-     def out_typedef(self, fname, name, args):
--        """Outputs a typedef"""
-+        """Outputs a typedef."""
- 
-     def out_struct(self, fname, name, args):
--        """Outputs a struct"""
-+        """Outputs a struct."""
- 
- 
- class RestFormat(OutputFormat):
--    """Consts and functions used by ReST output"""
-+    """Consts and functions used by ReST output."""
- 
-+    #: Highlights to be used in ReST format
-     highlights = [
-         (type_constant, r"``\1``"),
-         (type_constant2, r"``\1``"),
-@@ -263,9 +269,13 @@ class RestFormat(OutputFormat):
-         (type_fallback, r":c:type:`\1`"),
-         (type_param_ref, r"**\1\2**")
-     ]
-+
-     blankline = "\n"
- 
-+    #: Sphinx literal block regex.
-     sphinx_literal = KernRe(r'^[^.].*::$', cache=False)
-+
-+    #: Sphinx code block regex.
-     sphinx_cblock = KernRe(r'^\.\.\ +code-block::', cache=False)
- 
-     def __init__(self):
-@@ -280,7 +290,7 @@ class RestFormat(OutputFormat):
-         self.lineprefix = ""
- 
-     def print_lineno(self, ln):
--        """Outputs a line number"""
-+        """Outputs a line number."""
- 
-         if self.enable_lineno and ln is not None:
-             ln += 1
-@@ -289,7 +299,7 @@ class RestFormat(OutputFormat):
-     def output_highlight(self, args):
-         """
-         Outputs a C symbol that may require being converted to ReST using
--        the self.highlights variable
-+        the self.highlights variable.
-         """
- 
-         input_text = args
-@@ -570,7 +580,7 @@ class RestFormat(OutputFormat):
- 
- 
- class ManFormat(OutputFormat):
--    """Consts and functions used by man pages output"""
-+    """Consts and functions used by man pages output."""
- 
-     highlights = (
-         (type_constant, r"\1"),
-@@ -587,6 +597,7 @@ class ManFormat(OutputFormat):
-     )
-     blankline = ""
- 
-+    #: Allowed timestamp formats.
-     date_formats = [
-         "%a %b %d %H:%M:%S %Z %Y",
-         "%a %b %d %H:%M:%S %Y",
-@@ -653,7 +664,7 @@ class ManFormat(OutputFormat):
-         self.symbols = symbols
- 
-     def out_tail(self, fname, name, args):
--        """Adds a tail for all man pages"""
-+        """Adds a tail for all man pages."""
- 
-         # SEE ALSO section
-         self.data += f'.SH "SEE ALSO"' + "\n.PP\n"
-@@ -689,7 +700,7 @@ class ManFormat(OutputFormat):
-     def output_highlight(self, block):
-         """
-         Outputs a C symbol that may require being highlighted with
--        self.highlights variable using troff syntax
-+        self.highlights variable using troff syntax.
-         """
- 
-         contents = self.highlight_block(block)
-@@ -720,7 +731,6 @@ class ManFormat(OutputFormat):
-             self.output_highlight(text)
- 
-     def out_function(self, fname, name, args):
--        """output function in man"""
- 
-         out_name = self.arg_name(args, name)
- 
+     Although I re-implemented it to make it more generic and match 3 types
 -- 
 2.52.0
 
