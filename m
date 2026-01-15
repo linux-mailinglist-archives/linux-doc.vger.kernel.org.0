@@ -1,58 +1,57 @@
-Return-Path: <linux-doc+bounces-72521-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72530-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03853D256B8
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:40:45 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0074CD256FD
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 16:41:59 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id F2A63300E7F2
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:40:43 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 1E29330693FC
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:40:46 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 760B13A0E91;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B9B643B5314;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="chRPCMEA"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VOChNeqZ"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51CFD34575A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D8C03A9DA3;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768491642; cv=none; b=slN8wIurFbDInND9ettdqZJTwLk0N/TDe7xJdi4TtXUYSU/C2tmcLQAQW8ulGzfR78lZ3GOOr1yXuw9iYZHW5EJStEPzbF/O16pqTr6HuqLKudN6AlSFTPLEYynZ1vyGh7CsBpkINc++c9Fzw9laYKjbQum2E1S9mxs1eQnu6Mo=
+	t=1768491642; cv=none; b=dGaWvafYG2TGUC9hhKAm4uMsUL1pltDnLL+0MFWJlaXjnpkJnpnJNLjKsI97Qj/EjSLKhy+IpIHZCJG04T0Rjzju/V6D6MIogSmsYoiHoqLpdeDzFZEE5kX8pxP7TaSH/i7ny5MOZjZBl9ZKLgwv4h6ZUaH5NMqGbiSuBqNWdiY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768491642; c=relaxed/simple;
-	bh=D20byBH6Dc3S8kqec0afWoBETHqoICKqefEL4fRTSCc=;
+	bh=kmk1GvA8qQBm6LrMB53lcAYigASy9DuUwFJjdBAuCYA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=FICCqs8G633+Ez7XJpX5T9xGu3hmi//v2mn7tHSGBB1nmAmDFDb+NyovT9QWZFfrUFisRNAn4fGAqUPZJ1kHRYYqASvXfQkIPj/HsO/SY0FFmVQZRo7dqdgL4fwSftqWqwAM+Rz0ic5yUtimeKZrkQF14AieYYJct2eZ7jzNu/o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=chRPCMEA; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1509BC2BC87;
+	 MIME-Version:Content-Type; b=AXURSySrZK8smMWjs690xwpfMt6YMaqKyFTKt7fsAQm8ultOv8P1J59YunARlorWL4C31Mza1MdPOkRYGeTTWI6K1hfCazjzoZJMwqf3OaRcoicLvqGsJwZTR3O09u1boc3+zRXX79kj7MvxO4x92SLK/dV+ywuhsU4MssyRBU4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VOChNeqZ; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19ACAC2BC9E;
 	Thu, 15 Jan 2026 15:40:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768491642;
-	bh=D20byBH6Dc3S8kqec0afWoBETHqoICKqefEL4fRTSCc=;
+	bh=kmk1GvA8qQBm6LrMB53lcAYigASy9DuUwFJjdBAuCYA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=chRPCMEA/qk4UuU036GaQNrBNwXGrhP0dcFpd9iZtppyTFdzbbEhlYvL219bqWVd3
-	 q5ln/JkpORaXYLe1hiuV9PlArR0cxWHaxSzyqbGMiGUzyjlVM8x9Ja6amfSMdrIHIG
-	 UY+gqnVCQ3gkv+8U5uQiZwyF0HQxZeXGMUnBGqhG6ZAHUsOYGOEfynV4Mxsdy0tdMk
-	 USqE8KmM9ayEzShFYUh4O65y/zsNZUZadrHxj/HkvcqHvQ2fqVRXT4mWbHwxElfg6X
-	 2HbTkOk8mBfZMzvCmdSc7CN5I/Vq2zHaCu5+ujnVWojgC5kRRqRproEML7LulvhGF1
-	 vQI1AoOPaB5aQ==
+	b=VOChNeqZjsMGc4p/t/QMppcsIXTzVj80ELNAdbuL0Zpkm2NAAaw7ZFf5qBz4bHxYv
+	 YSsFyurw46vk0QQtyOOnVPMfvEVztOgyG/Fxzqi8+STYqAA493Wl4yGA9+E/0IW18C
+	 g9nSCWYwOoiHxSM6wXwczSL79KRMJxUtT6uizJh611mIcBdku5nNwxLEM1sZ9mzdUa
+	 HzQT2TCT1tRRcwwR30w+BHbvAB9+vLohgDm3e7I3XtO02/erG6RopCP/7UnXOPXcEe
+	 9ZYhmORr0eghmh3MW7B1DA6bggrl+7+enRsCf/gh1hahj35MKOzYlyG1kurkVbv8Oa
+	 BX5ER/4NRIzMg==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vgPSi-000000043IZ-1B5k;
+	id 1vgPSi-000000043Id-1Hsl;
 	Thu, 15 Jan 2026 16:40:40 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Jonathan Corbet <corbet@lwn.net>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2 07/15] docs: kdoc_files: Improve docstrings and comments
-Date: Thu, 15 Jan 2026 16:40:28 +0100
-Message-ID: <003d4df10446d545113c6361755da99915bcf321.1768488832.git.mchehab+huawei@kernel.org>
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Subject: [PATCH v2 08/15] docs: kdoc_item: Improve docstrings and comments
+Date: Thu, 15 Jan 2026 16:40:29 +0100
+Message-ID: <a68daefd2db512f220b615e0d2e3be30fbf49d1e.1768488832.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768488832.git.mchehab+huawei@kernel.org>
 References: <cover.1768488832.git.mchehab+huawei@kernel.org>
@@ -71,100 +70,57 @@ documentation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/kdoc/kdoc_files.py | 23 ++++++++++++-----------
- 1 file changed, 12 insertions(+), 11 deletions(-)
+ tools/lib/python/kdoc/kdoc_item.py | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/tools/lib/python/kdoc/kdoc_files.py b/tools/lib/python/kdoc/kdoc_files.py
-index bfe02baf1606..022487ea2cc6 100644
---- a/tools/lib/python/kdoc/kdoc_files.py
-+++ b/tools/lib/python/kdoc/kdoc_files.py
-@@ -5,7 +5,8 @@
- # pylint: disable=R0903,R0913,R0914,R0917
+diff --git a/tools/lib/python/kdoc/kdoc_item.py b/tools/lib/python/kdoc/kdoc_item.py
+index 19805301cb2c..2b8a93f79716 100644
+--- a/tools/lib/python/kdoc/kdoc_item.py
++++ b/tools/lib/python/kdoc/kdoc_item.py
+@@ -4,7 +4,16 @@
+ # then pass into the output modules.
+ #
  
- """
--Parse lernel-doc tags on multiple kernel source files.
-+Classes for navigating through the files that kernel-doc needs to handle
-+to generate documentation.
- """
++"""
++Data class to store a kernel-doc Item.
++"""
++
+ class KdocItem:
++    """
++    A class that will, eventually, encapsulate all of the parsed data that we
++    then pass into the output modules.
++    """
++
+     def __init__(self, name, fname, type, start_line, **other_stuff):
+         self.name = name
+         self.fname = fname
+@@ -24,6 +33,9 @@ class KdocItem:
+         self.other_stuff = other_stuff
  
- import argparse
-@@ -43,7 +44,7 @@ class GlobSourceFiles:
-         self.srctree = srctree
+     def get(self, key, default = None):
++        """
++        Get a value from optional keys.
++        """
+         return self.other_stuff.get(key, default)
  
-     def _parse_dir(self, dirname):
--        """Internal function to parse files recursively"""
-+        """Internal function to parse files recursively."""
+     def __getitem__(self, key):
+@@ -33,10 +45,16 @@ class KdocItem:
+     # Tracking of section and parameter information.
+     #
+     def set_sections(self, sections, start_lines):
++        """
++        Set sections and start lines.
++        """
+         self.sections = sections
+         self.section_start_lines = start_lines
  
-         with os.scandir(dirname) as obj:
-             for entry in obj:
-@@ -65,7 +66,7 @@ class GlobSourceFiles:
-     def parse_files(self, file_list, file_not_found_cb):
-         """
-         Define an iterator to parse all source files from file_list,
--        handling directories if any
-+        handling directories if any.
-         """
- 
-         if not file_list:
-@@ -91,18 +92,18 @@ class KernelFiles():
- 
-     There are two type of parsers defined here:
-         - self.parse_file(): parses both kernel-doc markups and
--          EXPORT_SYMBOL* macros;
--        - self.process_export_file(): parses only EXPORT_SYMBOL* macros.
-+          ``EXPORT_SYMBOL*`` macros;
-+        - self.process_export_file(): parses only ``EXPORT_SYMBOL*`` macros.
-     """
- 
-     def warning(self, msg):
--        """Ancillary routine to output a warning and increment error count"""
-+        """Ancillary routine to output a warning and increment error count."""
- 
-         self.config.log.warning(msg)
-         self.errors += 1
- 
-     def error(self, msg):
--        """Ancillary routine to output an error and increment error count"""
-+        """Ancillary routine to output an error and increment error count."""
- 
-         self.config.log.error(msg)
-         self.errors += 1
-@@ -128,7 +129,7 @@ class KernelFiles():
- 
-     def process_export_file(self, fname):
-         """
--        Parses EXPORT_SYMBOL* macros from a single Kernel source file.
-+        Parses ``EXPORT_SYMBOL*`` macros from a single Kernel source file.
-         """
- 
-         # Prevent parsing the same file twice if results are cached
-@@ -157,7 +158,7 @@ class KernelFiles():
-                  wcontents_before_sections=False,
-                  logger=None):
-         """
--        Initialize startup variables and parse all files
-+        Initialize startup variables and parse all files.
-         """
- 
-         if not verbose:
-@@ -213,7 +214,7 @@ class KernelFiles():
- 
-     def parse(self, file_list, export_file=None):
-         """
--        Parse all files
-+        Parse all files.
-         """
- 
-         glob = GlobSourceFiles(srctree=self.config.src_tree)
-@@ -242,7 +243,7 @@ class KernelFiles():
-             filenames=None, export_file=None):
-         """
-         Interacts over the kernel-doc results and output messages,
--        returning kernel-doc markups on each interaction
-+        returning kernel-doc markups on each interaction.
-         """
- 
-         self.out_style.set_config(self.config)
+     def set_params(self, names, descs, types, starts):
++        """
++        Set parameter list: names, descriptions, types and start lines.
++        """
+         self.parameterlist = names
+         self.parameterdescs = descs
+         self.parametertypes = types
 -- 
 2.52.0
 
