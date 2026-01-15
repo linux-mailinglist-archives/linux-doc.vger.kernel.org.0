@@ -1,54 +1,54 @@
-Return-Path: <linux-doc+bounces-72497-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72498-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02D07D250F4
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:51:06 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 609AAD2505B
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 15:46:42 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 397FF30CAD35
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 14:46:13 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 654C2300647C
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 14:46:20 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 008DA352FB5;
-	Thu, 15 Jan 2026 14:46:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 83F9A3A0B39;
+	Thu, 15 Jan 2026 14:46:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i9Netuif"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lRTf9nDk"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D07C03A1A22
-	for <linux-doc@vger.kernel.org>; Thu, 15 Jan 2026 14:46:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F3713A0E84;
+	Thu, 15 Jan 2026 14:46:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768488372; cv=none; b=IpYgHhPlwYJ1zpNPz5XJpHDSWOfB7Onh51OZki2AmdQ4xBxYPgRAPSw3tjKJDkrAeWOzZrd2FeTbPnzeyMOx7bYUBB42uSDHeziY2YPNXVRF4q+p/o7hE6TWR69Wl/nUaTXlBWZ+KuDjwJC5x5+3ccUvwuFi+ezMf9L8tjqvoLg=
+	t=1768488377; cv=none; b=rM/nH4WOhbxUbKJ/PMQTz2cz51n0dqTmQIOjrodcYJ4GpYI3z7fgb5w5g0f8HeAEEfKoKaYSgGldejQnOwpozmKsJfcw+OG2asOeoCGRDbeBdsAAdlBjlNWGypgogtG3MuyKxtlK3twJuovxadOU8ueM+OVgadY/aZoHdIMPxWk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768488372; c=relaxed/simple;
-	bh=h2aVQ3ENQjj9ztxIwRYvM4dkt+By0RfpKKj6zYgSlLw=;
+	s=arc-20240116; t=1768488377; c=relaxed/simple;
+	bh=USgADkH2vXFF+KeppM0w/kcZpZeTOtI5OuFJPC+VuNA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=lIpqFphaUI3RM9v1KMRzYXil84OwlcIqtrTr0nRC/nno+LsHOQTLwno6wL33MXBwGwnix96R1QIZ6w43CqJeZiwACbndz9ku0JymfGlpcQiGcong32bKUceH49i59A3zD93mUHDeDMxsIc1EqVj1lgOKGaHw6dn9kuBLh3C/+DY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i9Netuif; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 01AC1C19423;
-	Thu, 15 Jan 2026 14:46:11 +0000 (UTC)
+	 MIME-Version; b=S+ppGzgiuv7FRAwrIe4Sm1cBK+9coVuedlNcBLsDoM0fEEUKRWJyv+uNay7QaNQVCDecy5tDhhOF79zDOcE6u+aAdY4ogNLP8svM1ImJC/uZKJbkhutHJbJT/QOQom1jAcfdEoZmsMIMwIk5XbCoAF1Z14jUhxNSSCoXKN71dFU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lRTf9nDk; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B44AC4AF09;
+	Thu, 15 Jan 2026 14:46:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768488372;
-	bh=h2aVQ3ENQjj9ztxIwRYvM4dkt+By0RfpKKj6zYgSlLw=;
+	s=k20201202; t=1768488374;
+	bh=USgADkH2vXFF+KeppM0w/kcZpZeTOtI5OuFJPC+VuNA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=i9Netuifl0YR/4BxtFdfMrYyCXF4B/jBbWTmhyyatFuOJHTRs/w5mpC1sU+GxeFMJ
-	 0Woll9vOjlUOQDO0geV9OwfhU8/PPo8qQqtxi7HRNU582F5opZ7VBJvpXzBJ/Er7yU
-	 jYZSIN5Ohlw8AvEj+efT20/UcXoQofWQpzxErBIo8V7elS/IWalbVLDuGpLqpMIqLh
-	 EaHKqFXPESFncv/Eb+IChWRHIyFUjS3fNvw5bzxxw0lRykHswxGEVelSYnhxP5Eqax
-	 Y8vcmnDm0t2vPFmYjo77hqhBGN1k8ob6LClc3Z4aL+kVDmQ87e0cd9FYW2ePYomBPV
-	 WHpp/3MqDEs/g==
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
-	by mailfauth.phl.internal (Postfix) with ESMTP id 19F0EF4006B;
-	Thu, 15 Jan 2026 09:46:11 -0500 (EST)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-04.internal (MEProxy); Thu, 15 Jan 2026 09:46:11 -0500
-X-ME-Sender: <xms:s_1oabPvP328C8QJhsdvftsXZlxBDY07Rg49HK8Kl0k_aWs3P3Tv4w>
-    <xme:s_1oaUXLCkyOVxELPOHQMsMDp-y-_m_zmiDommX40jaij8aAkgB-TTRlHshJdAy5r
-    2Ba1s4z8cAMNYy6dhJLPAJyWP6d6_CR78F9Cb1am5XYL8yu73KzYxk>
-X-ME-Received: <xmr:s_1oaWRDQMgWadXE4IzlHNRqYBj4Fo67GGiWtdmapI5FCfSEy1kyY4dYPXviqg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdeifeegucetufdoteggodetrf
+	b=lRTf9nDkDZh3WnVifpgG0nhelTmx/1Uky6SnoMxTaWq3FZxYnhkVheRyuzDybzdRU
+	 hCRseGVBIhmX0BH3gkJCZiUvpLTmfz/G9mlI5gxLwZ1wAAp4tzbq0BsbKURTFK0a+M
+	 X9gfv2n4AWVdMVYUeBTMmZJOnDYn5xqigmsOVtPPEKz9EGhCdyBMUtkWEn+O4UdXVr
+	 oZZct2Xkyuzw2nuqObAXVOQVkVsMjTKTUbgTK8jAZvwgJSomDG+89389S1xZwCO+1g
+	 X6lyL1AKbotHT0M4zxlnghKSaWBFYOedvWNYvB3MIUE/KtHVn1EVkDyL2lczPqcBd5
+	 6jVNvw/MBK/Ww==
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+	by mailfauth.phl.internal (Postfix) with ESMTP id A959BF40068;
+	Thu, 15 Jan 2026 09:46:12 -0500 (EST)
+Received: from phl-frontend-03 ([10.202.2.162])
+  by phl-compute-06.internal (MEProxy); Thu, 15 Jan 2026 09:46:12 -0500
+X-ME-Sender: <xms:tP1oaTY5klSGv1-91UejVGUPsbuMmlt6AYetHd1EHaNcNjf72AYcLw>
+    <xme:tP1oaRoYJxjkyYjOUF4iOVq8cN2dq4KR0UvSz-vGaAdceWEGi7T6rIriOehF1RNvI
+    ssNlA5gQCIztAZUCbhj2zjPBpDf_TAIH78xU929iDm1_Jyn4KhOAJw>
+X-ME-Received: <xmr:tP1oaYyTo0bhkFe3YCDgGgQtNmJ_bmZ7IB7ORyAlJYKTRVFwEDp-iDmUSLUTvw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdeifeefucetufdoteggodetrf
     dotffvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfurfetoffkrfgpnffqhgenuceu
     rghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujf
     gurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhirhihlhcu
@@ -57,7 +57,7 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdeifeegucetufdote
     necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepkhhirh
     hilhhlodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduieduudeivdeiheeh
     qddvkeeggeegjedvkedqkhgrsheppehkvghrnhgvlhdrohhrghesshhhuhhtvghmohhvrd
-    hnrghmvgdpnhgspghrtghpthhtohepvddupdhmohguvgepshhmthhpohhuthdprhgtphht
+    hnrghmvgdpnhgspghrtghpthhtohepvddtpdhmohguvgepshhmthhpohhuthdprhgtphht
     thhopegrkhhpmheslhhinhhugidqfhhouhhnuggrthhiohhnrdhorhhgpdhrtghpthhtoh
     epmhhutghhuhhnrdhsohhngheslhhinhhugidruggvvhdprhgtphhtthhopegurghvihgu
     sehkvghrnhgvlhdrohhrghdprhgtphhtthhopeifihhllhihsehinhhfrhgruggvrggurd
@@ -65,14 +65,14 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefgedrtddtgdduvdeifeegucetufdote
     tghpthhtohepfhhvughlsehgohhoghhlvgdrtghomhdprhgtphhtthhopehoshgrlhhvrg
     guohhrsehsuhhsvgdruggvpdhrtghpthhtoheprhhpphhtsehkvghrnhgvlhdrohhrghdp
     rhgtphhtthhopehvsggrsghkrgesshhushgvrdgtii
-X-ME-Proxy: <xmx:s_1oaS0gdJic4XkVgirKJOx43tM6uDjXzLTdYzibAHljfROdktH3nw>
-    <xmx:s_1oabhCoPfzxxc1mRLqYBISskW1uFcCd453tURSDP8S08srym2GLQ>
-    <xmx:s_1oaYZs3EZ9P06fRUDUmnNaSo1DtW5Kl5eqSDwmEC_Sr2RlM__uKg>
-    <xmx:s_1oacOmnPNPQeXa9nu3Cij79UQOq0l3SC1gAHNrscl7o-OUexZQAg>
-    <xmx:s_1oaUTkG-v00HfMZ7Cs7AORxD71IgJYQPXFdJGFHa_yCAW5AfNFcIbA>
+X-ME-Proxy: <xmx:tP1oaRJyF_RWzK6sYzgnN30z2SiS68QHb6_i6bws2z4hIoLDoMnLeA>
+    <xmx:tP1oaS4GXPYT3zRWd6AslaWjoqZWmPGVXMhBMYSCGemQorIFVmlXYg>
+    <xmx:tP1oaXxEJwXWWcFVS7cgt85H7GKTCQnz4x9nPKKnpI-ILUJ0kDlQqQ>
+    <xmx:tP1oac93oyxgFlrmypkaQ_lPhsx2mnlUNdx9uGpKW90XWHzp9prH-A>
+    <xmx:tP1oaTHnhCehTBjgF2wvEerzyqwPOUYudc59YC8SK_IfopJi8n6NfC2j>
 Feedback-ID: i10464835:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 15 Jan 2026 09:46:10 -0500 (EST)
+ 15 Jan 2026 09:46:12 -0500 (EST)
 From: Kiryl Shutsemau <kas@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>,
 	Muchun Song <muchun.song@linux.dev>,
@@ -93,11 +93,10 @@ Cc: Oscar Salvador <osalvador@suse.de>,
 	linux-mm@kvack.org,
 	linux-kernel@vger.kernel.org,
 	linux-doc@vger.kernel.org,
-	Kiryl Shutsemau <kas@kernel.org>,
-	x86@kernel.org
-Subject: [PATCHv3 01/15] x86/vdso32: Prepare for <linux/pgtable.h> inclusion
-Date: Thu, 15 Jan 2026 14:45:47 +0000
-Message-ID: <20260115144604.822702-2-kas@kernel.org>
+	Kiryl Shutsemau <kas@kernel.org>
+Subject: [PATCHv3 02/15] mm: Move MAX_FOLIO_ORDER definition to mmzone.h
+Date: Thu, 15 Jan 2026 14:45:48 +0000
+Message-ID: <20260115144604.822702-3-kas@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260115144604.822702-1-kas@kernel.org>
 References: <20260115144604.822702-1-kas@kernel.org>
@@ -109,41 +108,118 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The 32-bit vDSO for 64-bit kernels is built by faking a 32-bit environment
-through various #undefs and #defines in fake_32bit_build.h.
+Move MAX_FOLIO_ORDER definition from mm.h to mmzone.h.
 
-Upcoming change will include <linux/pgtable.h> in <linux/mmzone.h>.
-Without preparation, it breaks build of 32-bit vDSO because of exposure
-to more 64-bit things.
-
-CONFIG_PHYS_ADDR_T_64BIT triggers "Missing MAX_POSSIBLE_PHYSMEM_BITS
-definition" error in <linux/pgtable.h>.
-
-And CONFIG_X86_INTEL_MEMORY_PROTECTION_KEYS leads to "shift count >=
-width of type" errors in pte_flags_pkey().
-
-Undefine CONFIG_PHYS_ADDR_T_64BIT and CONFIG_X86_INTEL_MEMORY_PROTECTION_KEYS
-in fake_32bit_build.h to fix the problem.
+This is preparation for adding the vmemmap_tails array to struct
+pglist_data, which requires MAX_FOLIO_ORDER to be available in mmzone.h.
 
 Signed-off-by: Kiryl Shutsemau <kas@kernel.org>
-Cc: x86@kernel.org
 ---
- arch/x86/entry/vdso/vdso32/fake_32bit_build.h | 2 ++
- 1 file changed, 2 insertions(+)
+ include/linux/mm.h     | 31 -------------------------------
+ include/linux/mmzone.h | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+), 31 deletions(-)
 
-diff --git a/arch/x86/entry/vdso/vdso32/fake_32bit_build.h b/arch/x86/entry/vdso/vdso32/fake_32bit_build.h
-index db1b15f686e3..900cdcde1029 100644
---- a/arch/x86/entry/vdso/vdso32/fake_32bit_build.h
-+++ b/arch/x86/entry/vdso/vdso32/fake_32bit_build.h
-@@ -13,6 +13,8 @@
- #undef CONFIG_SPARSEMEM_VMEMMAP
- #undef CONFIG_NR_CPUS
- #undef CONFIG_PARAVIRT_XXL
-+#undef CONFIG_PHYS_ADDR_T_64BIT
-+#undef CONFIG_X86_INTEL_MEMORY_PROTECTION_KEYS
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 7c79b3369b82..2c409f583569 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -26,7 +26,6 @@
+ #include <linux/page-flags.h>
+ #include <linux/page_ref.h>
+ #include <linux/overflow.h>
+-#include <linux/sizes.h>
+ #include <linux/sched.h>
+ #include <linux/pgtable.h>
+ #include <linux/kasan.h>
+@@ -2074,36 +2073,6 @@ static inline unsigned long folio_nr_pages(const struct folio *folio)
+ 	return folio_large_nr_pages(folio);
+ }
  
- #define CONFIG_X86_32 1
- #define CONFIG_PGTABLE_LEVELS 2
+-#if !defined(CONFIG_HAVE_GIGANTIC_FOLIOS)
+-/*
+- * We don't expect any folios that exceed buddy sizes (and consequently
+- * memory sections).
+- */
+-#define MAX_FOLIO_ORDER		MAX_PAGE_ORDER
+-#elif defined(CONFIG_SPARSEMEM) && !defined(CONFIG_SPARSEMEM_VMEMMAP)
+-/*
+- * Only pages within a single memory section are guaranteed to be
+- * contiguous. By limiting folios to a single memory section, all folio
+- * pages are guaranteed to be contiguous.
+- */
+-#define MAX_FOLIO_ORDER		PFN_SECTION_SHIFT
+-#elif defined(CONFIG_HUGETLB_PAGE)
+-/*
+- * There is no real limit on the folio size. We limit them to the maximum we
+- * currently expect (see CONFIG_HAVE_GIGANTIC_FOLIOS): with hugetlb, we expect
+- * no folios larger than 16 GiB on 64bit and 1 GiB on 32bit.
+- */
+-#define MAX_FOLIO_ORDER		get_order(IS_ENABLED(CONFIG_64BIT) ? SZ_16G : SZ_1G)
+-#else
+-/*
+- * Without hugetlb, gigantic folios that are bigger than a single PUD are
+- * currently impossible.
+- */
+-#define MAX_FOLIO_ORDER		PUD_ORDER
+-#endif
+-
+-#define MAX_FOLIO_NR_PAGES	(1UL << MAX_FOLIO_ORDER)
+-
+ /*
+  * compound_nr() returns the number of pages in this potentially compound
+  * page.  compound_nr() can be called on a tail page, and is defined to
+diff --git a/include/linux/mmzone.h b/include/linux/mmzone.h
+index 7fb7331c5725..6a2f3696068e 100644
+--- a/include/linux/mmzone.h
++++ b/include/linux/mmzone.h
+@@ -21,8 +21,10 @@
+ #include <linux/atomic.h>
+ #include <linux/mm_types.h>
+ #include <linux/page-flags.h>
++#include <linux/pgtable.h>
+ #include <linux/local_lock.h>
+ #include <linux/zswap.h>
++#include <linux/sizes.h>
+ #include <asm/page.h>
+ 
+ /* Free memory management - zoned buddy allocator.  */
+@@ -61,6 +63,36 @@
+  */
+ #define PAGE_ALLOC_COSTLY_ORDER 3
+ 
++#if !defined(CONFIG_HAVE_GIGANTIC_FOLIOS)
++/*
++ * We don't expect any folios that exceed buddy sizes (and consequently
++ * memory sections).
++ */
++#define MAX_FOLIO_ORDER		MAX_PAGE_ORDER
++#elif defined(CONFIG_SPARSEMEM) && !defined(CONFIG_SPARSEMEM_VMEMMAP)
++/*
++ * Only pages within a single memory section are guaranteed to be
++ * contiguous. By limiting folios to a single memory section, all folio
++ * pages are guaranteed to be contiguous.
++ */
++#define MAX_FOLIO_ORDER		PFN_SECTION_SHIFT
++#elif defined(CONFIG_HUGETLB_PAGE)
++/*
++ * There is no real limit on the folio size. We limit them to the maximum we
++ * currently expect (see CONFIG_HAVE_GIGANTIC_FOLIOS): with hugetlb, we expect
++ * no folios larger than 16 GiB on 64bit and 1 GiB on 32bit.
++ */
++#define MAX_FOLIO_ORDER		get_order(IS_ENABLED(CONFIG_64BIT) ? SZ_16G : SZ_1G)
++#else
++/*
++ * Without hugetlb, gigantic folios that are bigger than a single PUD are
++ * currently impossible.
++ */
++#define MAX_FOLIO_ORDER		PUD_ORDER
++#endif
++
++#define MAX_FOLIO_NR_PAGES	(1UL << MAX_FOLIO_ORDER)
++
+ enum migratetype {
+ 	MIGRATE_UNMOVABLE,
+ 	MIGRATE_MOVABLE,
 -- 
 2.51.2
 
