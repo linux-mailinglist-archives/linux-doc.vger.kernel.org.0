@@ -1,290 +1,267 @@
-Return-Path: <linux-doc+bounces-72472-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72475-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 827AFD2484F
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 13:33:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF5DCD24882
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 13:34:33 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id EF03A300A908
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 12:32:50 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 6564D3001181
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 12:33:36 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D0B4B396D19;
-	Thu, 15 Jan 2026 12:32:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F3AC39447C;
+	Thu, 15 Jan 2026 12:33:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b="sWEDDI3o"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="l5tOK4AR";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="nf5iH2QZ"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from canpmsgout02.his.huawei.com (canpmsgout02.his.huawei.com [113.46.200.217])
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com [205.220.177.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A19A636D507;
-	Thu, 15 Jan 2026 12:32:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=113.46.200.217
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768480369; cv=none; b=TwDBoMIkg/PPjo5UPZ2sZlYkxI9D5mEY7ulhy6XJmHYv+uMotelXYK3rnN70Fo4EODiPm8T9HBlFps+ALQDSYGOkMgRlM0+z5j3F5jCccpgmDvZtzeO5m1AfztL0bgrhGRyo3m5QbdTBFqjkBwKXw8fk+IXjLeLWzYZagciKWgI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768480369; c=relaxed/simple;
-	bh=qM3ack70Dp4/06hOyaIehHJ+0/Zax0TbmaCqfMwt6oM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=YCwXgHyU3OEvxa/wkUYQS9OV7xqWXwuZyWdBcbPaxE4eMt2dfjjZYgU1GHBE0Mq7AEWt4xSZJNFrlFIVYa81nhtCeimAMmSue8qTD2nYrJdClveC+Z+PazJnVLAKEtyao8KTL8zGVFhSjY5UYnzXXS9u0exUNxs59gEcrZoJPlU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com; spf=pass smtp.mailfrom=huawei.com; dkim=pass (1024-bit key) header.d=huawei.com header.i=@huawei.com header.b=sWEDDI3o; arc=none smtp.client-ip=113.46.200.217
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=huawei.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=huawei.com
-dkim-signature: v=1; a=rsa-sha256; d=huawei.com; s=dkim;
-	c=relaxed/relaxed; q=dns/txt;
-	h=From;
-	bh=ODPddeF010lfuUEUkRqhVe8w5VlmaVFHJmKvQxtERpA=;
-	b=sWEDDI3okoWq4IynNrjDPJVVw/BrNyVxPNePW6AsTlEaQVRY7052BBsV89prrjI5k/m0bV38t
-	8yTRZWr6YX3TFV5BzE14JqVrgAA1GbJyPqT0Q1s79f0jV974tUSJYHSISwDHxnOlq/Uw3Ae2wBj
-	mYhB0UDTZp3av1PwjJGZVA0=
-Received: from mail.maildlp.com (unknown [172.19.162.144])
-	by canpmsgout02.his.huawei.com (SkyGuard) with ESMTPS id 4dsMjN25pXzcb45;
-	Thu, 15 Jan 2026 20:28:56 +0800 (CST)
-Received: from kwepemf200001.china.huawei.com (unknown [7.202.181.227])
-	by mail.maildlp.com (Postfix) with ESMTPS id DD30940538;
-	Thu, 15 Jan 2026 20:32:42 +0800 (CST)
-Received: from [10.67.121.90] (10.67.121.90) by kwepemf200001.china.huawei.com
- (7.202.181.227) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1544.11; Thu, 15 Jan
- 2026 20:32:41 +0800
-Message-ID: <27750fe9-8b0e-4687-bc5f-21e4ec38bf66@huawei.com>
-Date: Thu, 15 Jan 2026 20:32:41 +0800
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D73DE36B07F;
+	Thu, 15 Jan 2026 12:33:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.177.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768480414; cv=fail; b=pBRM4kNAi63qtwWiyl0DBRn1y+eRBTAF5ZMroi7fr5VzFwYpfCxKzCbnke0iOzk/WOd/DdiCwYeOj2VoaA4yxaLWXT2DraEaTwkQwbw63KX4RI5ijaZ8FRd29APWkkmX3IeBCM4TBup7yUUPhBMl8vMWSeCKBuhB6BvzpApzewg=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768480414; c=relaxed/simple;
+	bh=Nw0IUimdsVmDlbLdzhWznn2ZVVhEU4xfT2WQmfx6sUI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=aHnoJzm0y8s7t/Z/d8YQkiJ2JtMtjtxP/WczwJkCXBFRwM8+G1FazF0QrohrWcUJkGVNrnIggvCC5xV7tzoiRZuj1DHJkb3k2lWK02W6mok/WJGcpdrWpwm5SoGfxmtHHkQSR8VhVVyrwoUvBTFh0Qyyn++8LetAAWoxNuRnTqE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=l5tOK4AR; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=nf5iH2QZ; arc=fail smtp.client-ip=205.220.177.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60FB04Ej1361981;
+	Thu, 15 Jan 2026 12:32:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=qQm0smqaFKTlz4zPJm
+	dRlTK985Yzhr4QyPY+I4yrB0M=; b=l5tOK4ARff2IHlE/nzl5ARcVkBd96Ivv4F
+	vjdNmud7FcoI/m0SDQX77lvTCypmfNjcot0JR9fBc7OwW7MZmURxC67iAjeVkbX1
+	2UFAg1oXUF8QNF9wXLivFsI8jKrnqLfvqzga5BIWTJPkUq0gQn3EiYSBalXAxG6G
+	5V9acm0vo5Cn7w7DbrQjh/Jn7t8O6urF2Z1zSQPCymJpHcX9UeNEeT9kje7qXrCI
+	21m2tuno+/Niij2T6GRbbaLbnTibFB3eyy1vf5fWJXMwnvAqxaiVk9VJnvz1qXfA
+	BBgi8qbFORVghhISojoGAhQc5jBOlhWMtQyAVIoORX9ALIiuPlpw==
+Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4bp5vp2wn9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 15 Jan 2026 12:32:51 +0000 (GMT)
+Received: from pps.filterd (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 60FCLQeF029350;
+	Thu, 15 Jan 2026 12:32:51 GMT
+Received: from sn4pr2101cu001.outbound.protection.outlook.com (mail-southcentralusazon11012053.outbound.protection.outlook.com [40.93.195.53])
+	by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id 4bkd7n2bpq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 15 Jan 2026 12:32:51 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ELY/qp62z/PWRhZcPQvNX8iAY6fxwSXBl5Asz0M1At/kHQm8NDKtcYJfUoGSBRw44I+OepPPxfduLbrnK+mPvM/4V37Stsj7dJLzNr4lJyN6lWzD6IzPd6ozQ+rK/C2VFfuKEnBmKTO0pGWH0LvaHxG6xHMbwL2gPFwc2k0uYuypeX5X7/hAfa3Swc6dXEUTbBhwnifmzgedyF7tuKHqsDDbH7hfg6KfLjCZ1af+6txhFf58tDt53evfeCM/y/+WW41LoHBlzSS5fTt1BUjyU+XINzoMgYNBGym3sVurv/R/Ylu9xo1nGL8ZswxFDnohlaF1RWiw4IczjkmUv0vViA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qQm0smqaFKTlz4zPJmdRlTK985Yzhr4QyPY+I4yrB0M=;
+ b=nmDWdZ1aOV6qtVfOMamVWzpfgYYiF2oC8M2ghRgOd6mkFbGZKr+8lA404kjxP3OHn7eJfE04dLNk7yD4SuI/0p/7Y/SYscLXnjxKKOrJ5G9DjpN6hyCzWE/e6QRNKPiDcXnWhmx/F8pIsRE6q5RkQe2y/Wz3QNKfBn+f+LQZOctkDwTWJ39drh8hNmfJn9Gy87q12SuKRKTu/KVuaE33Xwbkj8VmbeqgWZTkqjb10XANyGyjMIhpGFZhR7HjSfwMp0sMhc3g9Do6BJVH3cpjhX0G38iBItk8PcZKv9CVF7S+ju5ZA64aXSmigf2V2uFC+61KQwX3fXG7eY1hFk1oww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qQm0smqaFKTlz4zPJmdRlTK985Yzhr4QyPY+I4yrB0M=;
+ b=nf5iH2QZMVFfapjbYzlRTosbfZQo/iS6wBAAVS6mu7JmBdfGcCj7UtkOPshj+oeA/2TIy25y7e4TZX0UESExHMzijPpt2TZnRV/szGUc5F10lCHw/+YXRI+atndMdGYXbF01KF5J/g4SLPlif1cHx89w0i6+CKVasyQe/o7qjWg=
+Received: from BL4PR10MB8229.namprd10.prod.outlook.com (2603:10b6:208:4e6::14)
+ by SA3PR10MB7072.namprd10.prod.outlook.com (2603:10b6:806:31d::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Thu, 15 Jan
+ 2026 12:32:47 +0000
+Received: from BL4PR10MB8229.namprd10.prod.outlook.com
+ ([fe80::552b:16d2:af:c582]) by BL4PR10MB8229.namprd10.prod.outlook.com
+ ([fe80::552b:16d2:af:c582%6]) with mapi id 15.20.9520.005; Thu, 15 Jan 2026
+ 12:32:47 +0000
+Date: Thu, 15 Jan 2026 12:32:50 +0000
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: "David Hildenbrand (Red Hat)" <david@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linuxppc-dev@lists.ozlabs.org,
+        Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+        linux-doc@vger.kernel.org, virtualization@lists.linux.dev,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Oscar Salvador <osalvador@suse.de>,
+        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+        Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jerrin Shaji George <jerrin.shaji-george@broadcom.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+        Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>,
+        Zi Yan <ziy@nvidia.com>
+Subject: Re: [PATCH v2 15/23] mm/balloon_compaction: assert that the
+ balloon_pages_lock is held
+Message-ID: <b19ef19f-7e11-4aa8-86a5-daf88d9df48a@lucifer.local>
+References: <20260115092015.3928975-1-david@kernel.org>
+ <20260115092015.3928975-16-david@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260115092015.3928975-16-david@kernel.org>
+X-ClientProxiedBy: LO4P123CA0403.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:189::12) To BL4PR10MB8229.namprd10.prod.outlook.com
+ (2603:10b6:208:4e6::14)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 10/11] cpufreq: CPPC: make scaling_min/max_freq
- read-only when auto_sel enabled
-To: Pierre Gondois <pierre.gondois@arm.com>, Sumit Gupta <sumitg@nvidia.com>,
-	<rafael@kernel.org>, <viresh.kumar@linaro.org>
-CC: <linux-tegra@vger.kernel.org>, <linux-pm@vger.kernel.org>,
-	<ray.huang@amd.com>, <corbet@lwn.net>, <robert.moore@intel.com>,
-	<lenb@kernel.org>, <acpica-devel@lists.linux.dev>,
-	<mario.limonciello@amd.com>, <rdunlap@infradead.org>,
-	<linux-kernel@vger.kernel.org>, <gautham.shenoy@amd.com>,
-	<zhanjie9@hisilicon.com>, <ionela.voinescu@arm.com>, <perry.yuan@amd.com>,
-	<linux-doc@vger.kernel.org>, <linux-acpi@vger.kernel.org>,
-	<treding@nvidia.com>, <jonathanh@nvidia.com>, <vsethi@nvidia.com>,
-	<ksitaraman@nvidia.com>, <sanjayc@nvidia.com>, <nhartman@nvidia.com>,
-	<bbasu@nvidia.com>
-References: <20251223121307.711773-1-sumitg@nvidia.com>
- <20251223121307.711773-11-sumitg@nvidia.com>
- <ed9015a3-42b5-4c0e-af6f-2b4d65c34cd5@arm.com>
- <0fe78528-db0c-494d-8d5e-b89abdc993b2@nvidia.com>
- <f85ce68a-91cb-4b8e-b67e-413e5b62cd03@arm.com>
-From: "zhenglifeng (A)" <zhenglifeng1@huawei.com>
-In-Reply-To: <f85ce68a-91cb-4b8e-b67e-413e5b62cd03@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: kwepems200002.china.huawei.com (7.221.188.68) To
- kwepemf200001.china.huawei.com (7.202.181.227)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL4PR10MB8229:EE_|SA3PR10MB7072:EE_
+X-MS-Office365-Filtering-Correlation-Id: 65dc6e24-9fbd-40a2-4203-08de5432306c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|7053199007;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?z+WK35gvoGGHA4DWT6H1CITaZ54JoVcTaBR8EaiHU2D80qnJL8NzrbZeRlhO?=
+ =?us-ascii?Q?EUBBk33/crZuP8QBOtiLaRorypAEggAKB0t2eJgJ/Mn1deoD1L1Yc67/tBFJ?=
+ =?us-ascii?Q?qA3YRZ2EdrpU+37IlJIs6vWHF/qTQYC3HyBT0h84vy9NAuENa86tpSyItHWO?=
+ =?us-ascii?Q?UDiyG2/b7OVsQcFnN0w8kfC41l4yCqNdbJMqZbqgg2Z0UgGRySE1I9qL+hfg?=
+ =?us-ascii?Q?2yBwjTU+egkLK5b+LIqhGURTbkGa19hLA96qcaJTSN1ICBeILFuUJhsmiZT7?=
+ =?us-ascii?Q?WQE4IXvI7yKoNWk1t7nFLnSMkAqmhp7cu7wkowcBaX8Z+t93RuxUpf3499Os?=
+ =?us-ascii?Q?M0X7EyoPyEacoIp6166dqF3Ar+v7fu6DUzvHRlDI1na+J8Q3ye808xFyQmXw?=
+ =?us-ascii?Q?zxbYFilpLmPcR2IWKM5UXBwQuLVZOC4gE8tn7lesECT/WN8SHbo7DecezRZr?=
+ =?us-ascii?Q?q0+3AnT+A0gbjlXlHr+1QW1ZgS+q4RdHc2UQgQrGiQDONHm3q2iDk6t2CRAj?=
+ =?us-ascii?Q?ZjdIA6SP2UiGbmexKbAy1LMbV4xiH8ftQkxelu8r15zxO8prdrLK2kkpftEg?=
+ =?us-ascii?Q?8b1cTHZlt/UkWb/kefcRBKwNGVZRiJn3Rkpgr4h86t+ddTbCum9I3niU4wVz?=
+ =?us-ascii?Q?DHwhtCDsq794nvW03490Raec6W86Oixw6tZcUKH1qUHDcnuopAsWogZVqT1Z?=
+ =?us-ascii?Q?TlMagOy/BPkFW1vk9TMKc1uSttYx5q5He/nWgMorsIznx45eCllxsGITYX91?=
+ =?us-ascii?Q?WrIxy7Ny4JdPhzrQOCtsVX8rp5l02TMrvJNoZ592nMCCxAhKORljvm1Qg12J?=
+ =?us-ascii?Q?FCCfckoRUjAGX+X7PZAG8GMfhJEAqYZK0ZGl1BtqGSKgVP+bu81wbnb4wWfE?=
+ =?us-ascii?Q?FEVGNmwSx/U660pbVUCdqF6tIkhQsns388lOk09AGEHAi8BuLp45wxF9hY3q?=
+ =?us-ascii?Q?sLRBAwG9uG4CawpxemDsGkybUdp/PwKcAKuzrWHWDSFmMXCcHotM7Balyx+/?=
+ =?us-ascii?Q?2Q4vDBvFbY7oBI6YaL+9/Iz6F8FaQMVMqdFRslRyVJn5WAI8ThcQKrIwQRPd?=
+ =?us-ascii?Q?Ny3KhTO8PYeb+wiRjXZeAM1clL44ruH7WqFdqp9slSat1ommQsiQUnE7dCjX?=
+ =?us-ascii?Q?WoZtlDWM/UjUbbIS7lr49RO3yYaaZxX3K95MdrUCsBI6tZbhBP7g07a6vLHn?=
+ =?us-ascii?Q?5TxBjX1/K8V5VQdWXB8MA+9vJANB/Br5rR5R0NcwPfOV6CcSFI9PwDyAjqhU?=
+ =?us-ascii?Q?HZHrBeGSyMPBf6soEunztd+8Oy/FeyUk/BiqDlwUsZZy17o13lTxfQAhgFVy?=
+ =?us-ascii?Q?/k4Xl6eu1QRYTwpiaMDO57hW2rldhl1eg4FeAeGhuk9r2DK8h/K2/OrdRJk+?=
+ =?us-ascii?Q?MRPyU/Huf9BbuaFxrgKAJahY0ApjYcYhw6bfJ8nuLxcI9/LUccwc54bgyDo1?=
+ =?us-ascii?Q?8enemKfnXjd85ahd0MIJgwo/XOmwqeBzfIg28REuse5THBz2odMb6VjwWLQo?=
+ =?us-ascii?Q?r+T7R7YWIYqqp/JmMnpOw/TmDnkr0vX7zM/FHtX8jBCUHQ3EAlAz9cuvtczJ?=
+ =?us-ascii?Q?o0cexzdpqsS4ZizKUzg=3D?=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL4PR10MB8229.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?L94XtKjPO4xXgmohYjdgb2MMKZxRlqGQA7xdv660Iun3csyXxNxeVNldHavo?=
+ =?us-ascii?Q?uerQQjI8Jue15AvtL4OPfnbNwTYMk0/INqkuSP+Cb3+OiWw+T8UD0BdjIMP5?=
+ =?us-ascii?Q?gX0gceEVLDzDUAOE0jgy2Mh72TIWiiqdibRBJV8rIaZC1jgbMyypfGqDAmF4?=
+ =?us-ascii?Q?/l9rR+/uFz/J4nleQxBFeRfvuZAY+AfzbCGbkHhwD45haBSJnanSAch+sRUK?=
+ =?us-ascii?Q?D2sGwYyE1cRNP+8eob6NLNH6u+33tTg3qs/pZYiCa64C4R3kh1bjemK1lQ1/?=
+ =?us-ascii?Q?tR3ZXmazmnnh8Q5OEujYoKNnBYax2HOg0KcSgiAQ6m8FT4S0PL0smkEeQI0H?=
+ =?us-ascii?Q?HP39JncxbXgMtbn8ZGDuj+6jIf+oYZrlrCpory+pDuyWMcpBuVCnRv0a0vn4?=
+ =?us-ascii?Q?NNcoc7WnyLJQCBPz0/jvA3r1Syg933ig6lLfRPW6sd6nPmn9aWGjiAJdEeky?=
+ =?us-ascii?Q?WlzcdhnPOp4JipPi7Y/SoEdTH7hCrFVkHkpnKy2PSg6IJepA46IpBHqpElOf?=
+ =?us-ascii?Q?AEeAPBqbaj595wiUwSOUCpfTbtcWvBl11Da6npJ14X28E6gWUZujCp4e0gcM?=
+ =?us-ascii?Q?VBRN1jbFeLovZUyoF+2G5FQKa2G1O95cfOH20ONOcFR3RD6ylVqQq6e/wXyY?=
+ =?us-ascii?Q?zfZZNtEggq4hEksX/Kmfr9DOvRUIPYksB8cgxweOr3Oja3pmaE8Ojve197rI?=
+ =?us-ascii?Q?Dcx6jNXs2zo4/lqlHvF51uAaFYHMqi2917fRU/bNKMPEPUc5/H1hcJsvAuvb?=
+ =?us-ascii?Q?0aoozZTZ6mqFE/3h/Ls8NpgZJLVKKQR2QvjPgqL6qiEYKUCBg3lZVDXyhXWa?=
+ =?us-ascii?Q?UPWlAoDv0IvQ3nKJuAnVZPDZFi1b5RM/wUcr+lLKhpAnvNdeVfzZRuRgvh4Q?=
+ =?us-ascii?Q?6bcSzwQr3NYvlpQSy2VxeZTDF6VMZH5WqvDrstNpYbUWQLU0afDCz+9RuynC?=
+ =?us-ascii?Q?sA9cv+y8wIX8r4BrkHeYGeHKWb46GUs1RniDbOVTUH89ulQhKsPjg05GM8EJ?=
+ =?us-ascii?Q?R365FJ7w71z8fGYBiO7sqzBaVnh09DH6HBNaRQhrlQ5W5exFYCu374ml5K0C?=
+ =?us-ascii?Q?9u7uDon5xnDDWAXDvsyOHMsEpndiN6nwb5O4PKxhWiz7Voskqwiltnd/cK7y?=
+ =?us-ascii?Q?melQ1RSNI/CEKHF5EbE9+34j5UMoEUAPUffMb0zauFE28YFq1cckCImzl3eR?=
+ =?us-ascii?Q?tjFME0Sg2M2D4+dKXcA6w8rX3P1yIzxFqS1nlsuAvRmHaLmT0dwewz/xyyIO?=
+ =?us-ascii?Q?CdrSX1pj4EHW+0t2jlyuoxtgiNMvQ1c0VS1UA7qy1DB8NmnYiUAnqKEPGEpy?=
+ =?us-ascii?Q?CxJu9kCzJ449RQk0XviWG9RdBwq8RPdZHFnSBk6i6AULDb+rFw23v4oD2rPS?=
+ =?us-ascii?Q?Lyn02zZOHocQX8kVc8H/XOmL+vE9QnKqZGyjm03cq379Y6BMeQMMtq6f9qPx?=
+ =?us-ascii?Q?bVcPLWqAB0HV883pGKHdtLHJIDS2F01F+kCN2+tIAnv/I6IAu9HBny5cuZfm?=
+ =?us-ascii?Q?xdsEyPgp6Box3BHKXEhZs+EdLYT6fugJTgdlVJEKC+ecX13EibC4DroydkT1?=
+ =?us-ascii?Q?o6W+oyYEWxx11F2pEckY0sfyMOuhFI3DLZyE4IWjykKlK3QYF017mAVFz8dI?=
+ =?us-ascii?Q?bRGnYQ/D25F8fRyUB06oPDjTgL3HYStOwQHDPLI45M6UeVvwWSKTrXrTFMl8?=
+ =?us-ascii?Q?oXWAkF+1X7b7Yb6cWqdWecBTvGWnyAsNColztmbmZQLkwk9xap4kO84NCH8H?=
+ =?us-ascii?Q?Jxs8tSjujBG4TzhcyvrzewEgYcm6rEE=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	4mvHxSeSmdGnJYM3UxkbrCRQMhuKuDuqEmEI9ioY8r/tv7yFRVlmnff6E8AVR7nYlrDzTlKIMnWmmaVipG9PzYq6xVsZ9BV7ySWN25AWGM1ZrXFYLemfM1Y3hdc1V06a071Pbo88utQ/jbUxy0u4Ppsz1F6QlN35MxZwHGjm/trpisTQlQeVGr6LYDs+qFOk0R8ZVHjwwBkQ2RSoyHNhfZWMTLqpbrVhCWpPc/fLnnQfcjnaWP1rxhVJeKuvIbRzdUJ8atNw26JsAwwi0vE4NRYJeT2T4D+1N1uqp6LIFjjUjjTliskmqB3E1UuCZX2q4UYbk5jhnr/B+DWsy7UlIMx6B36vL9ZQyovIUPUl9atHS0xtLkakZfygzx7isXOqPkiR8Cq3jJ1QMbxnireCI+2rz8/cU2MQVg51J90XhkTXuuf4BRDXnHHZmhaZKUYTN6jdIw23IVCDhFlxji3wzg7vfsP5k6DWZ33EvYcQYXDl0SemNCA7onbzQUmVLnxg2rrqLsKVvegA56Oe26Tf4NFi0LJlXNzSXyLIc6d9DKPIx5YgztuP5+LERiw8qpPqLQK3UKOSQJyKO+ogKf/3c1NJ8LC6vkusThonbvXLOLo=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 65dc6e24-9fbd-40a2-4203-08de5432306c
+X-MS-Exchange-CrossTenant-AuthSource: BL4PR10MB8229.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 12:32:47.1430
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: o3u4gbw7SliC4kIIxHFYd5BbICej0ZWs6E/qwRD9RDjUXi3Ck2ZM7guzkRBlSlFitvA7YY51ywuT8rxM8jbFxZOTCSsRWXI7c7oGJp7r1Hk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR10MB7072
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-15_03,2026-01-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 malwarescore=0
+ mlxlogscore=999 suspectscore=0 mlxscore=0 phishscore=0 adultscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2512120000 definitions=main-2601150092
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTE1MDA5MyBTYWx0ZWRfX3yh5dT4IVX1k
+ aDv/B2mQptVwVxjyD17h+LSb81jU/jJKNW3I+yIvxxVQ5Y3j22Ou8L1noE/MnH3s4+g6K5R0lyy
+ 4U7Res3OS0a33cLRGDsDKoBuOZYgeK7UcG65MLByHIfj5mX8wLfC0r9K02Il/8NSPpAacgyJYaA
+ xNUBddmupMG5leohETpSZ7yPclwHzlH7vylvP+a/hWi3QlZ0m/mg4Wvfybt7HMfRFXk+zFD8m0A
+ TAaFFrfv5o5gTzYs8lZwOzP60YBrT1qw8WRmt14ABAaIqr/WXLIDvmPMInPEhC9bEYwcvJuurdG
+ +V4FrYbPkECcLJb+GVVNYhoW7Vlzf9paP29g3H6OlgWs3oDPVx1hjtl2yZs7p7hhTLFiTfgjOsI
+ Cz7B6kTTWFKRNX7XyPimaIteCsmqZF6gfFH1irqTjveL4H9xcDxAfs6lWVSH424CcnLupSQgay7
+ wRDsHuNY5vegWfX3ts3t8/PblLrlGhjbsACNuJAs=
+X-Proofpoint-GUID: v1rN1q0eqsu-TfYexc4T7ciMW4RfY0nY
+X-Authority-Analysis: v=2.4 cv=aZtsXBot c=1 sm=1 tr=0 ts=6968de74 b=1 cx=c_pps
+ a=zPCbziy225d3KhSqZt3L1A==:117 a=zPCbziy225d3KhSqZt3L1A==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=vUbySO9Y5rIA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=VwQbUJbxAAAA:8 a=yPCof4ZbAAAA:8 a=b96Zw3UuhIaTbHaz3U8A:9 a=CjuIK1q_8ugA:10
+ cc=ntf awl=host:12109
+X-Proofpoint-ORIG-GUID: v1rN1q0eqsu-TfYexc4T7ciMW4RfY0nY
 
-Hello Pierre,
+On Thu, Jan 15, 2026 at 10:20:05AM +0100, David Hildenbrand (Red Hat) wrote:
+> Let's add some sanity checks for holding the balloon_pages_lock when
+> we're effectively inflating/deflating a page.
+>
+> Signed-off-by: David Hildenbrand (Red Hat) <david@kernel.org>
 
-On 2026/1/12 19:44, Pierre Gondois wrote:
-> Hello Sumit,
-> 
-> On 1/9/26 15:37, Sumit Gupta wrote:
->>
->> On 08/01/26 22:16, Pierre Gondois wrote:
->>> External email: Use caution opening links or attachments
->>>
->>>
->>> Hello Sumit, Lifeng,
->>>
->>> On 12/23/25 13:13, Sumit Gupta wrote:
->>>> When autonomous selection (auto_sel) is enabled, the hardware controls
->>>> performance within min_perf/max_perf register bounds making the
->>>> scaling_min/max_freq effectively read-only.
->>>
->>> If auto_sel is set, the governor associated to the policy will have no
->>> actual control.
->>>
->>> E.g.:
->>> If the schedutil governor is used, attempts to set the
->>> frequency based on CPU utilization will be periodically
->>> sent, but they will have no effect.
->>>
->>> The same thing will happen for the ondemand, performance,
->>> powersave, userspace, etc. governors. They can only work if
->>> frequency requests are taken into account.
->>>
->>> ------------
->>>
->>> This looks like the intel_pstate governor handling where it is possible
->>> not to have .target() or .target_index() callback and the hardware is in
->>> charge (IIUC).
->>> For this case, only 2 governor seem available: performance and powersave.
->>>
+Seems reasonable to me, so:
 
-As you mentioned in [2], 'it still makes sense to have cpufreq requesting a
-certain performance level even though autonomous selection is enabled'. So I
-think it's OK to have a governor when auto_selection is enabled.
+Reviewed-by: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
 
-[2] https://lore.kernel.org/all/9f46991d-98c3-41f5-8133-6612b397e33a@arm.com/
-
->>
-> Thanks for pointing me to the first version, I forgot how your
-> first implementation was.
-> 
-> 
->> In v1 [1], I added a separate cppc_cpufreq_epp_driver instance without
->> target*() hooks, using setpolicy() instead (similar to AMD pstate).
->> However, this approach doesn't allow per-CPU control: if we boot with the
->> EPP driver, we can't dynamically disable auto_sel for individual CPUs and
->> return to OS governor control (no target hook available). AMD and Intel
->> pstate drivers seem to set HW autonomous mode for all CPUs globally,
->> not per-CPU. So, changed it in v2.
->> [1] https://lore.kernel.org/lkml/20250211103737.447704-6-sumitg@nvidia.com/
->>
-> Ok right.
-> This is something I don't really understand in the current intel/amd cpufreq
-> drivers. FWIU:
-> - the cpufreq drivers abstractions allow to access different hardware
-> - the governor abstraction allows to switch between different algorithms
-> to select the 'correct' frequency.
-> 
-> So IMO switching to autonomous selection should be done by switching
-> to another governor and the 'auto_sel' file should not be accessible to users.
-> 
-> ------------
-> 
-> Being able to enable/disable the autonomous selection on a per-policy
-> base seems a valid use-case. It also seems to fit the per-policy governor
-> capabilities.
-
-I'm OK with adding an auto-selection governor. It's better to keep this
-governor only in cppc_cpufreq for now I think.
-
-> However toggling the auto_sel on different CPUs inside the same policy
-> seems inappropriate (this is is not what is done in  this patchset IIUC).
-> 
-
-I think Sumit means per-policy when he said per-CPU.
-
-> 
->>
->>> ------------
->>>
->>> In our case, I think it is desired to unload the scaling governor
->>> currently in
->>> use if auto_sel is selected. Letting the rest of the system think it has
->>> control
->>> over the freq. selection seems incorrect.
->>> I am not sure what to replace it with:
->>> -
->>> There are no specific performance/powersave modes for CPPC.
->>> There is a range of values between 0-255
->>> -
->>> A firmware auto-selection governor could be created just for this case.
->>> Being able to switch between OS-driven and firmware driven freq. selection
->>> is not specific to CPPC (for the future).
->>> However I am not really able to say the implications of doing that.
->>>
->>> ------------
->>>
->>> I think it would be better to split your patchset in 2:
->>> 1. adding APIs for the CPPC spec.
->>> 2. using the APIs, especially for auto_sel
->>>
->>> 1. is likely to be straightforward as the APIs will still be used
->>> by the driver at some point.
->>> 2. is likely to bring more discussion.
->>>
->>
->> We discussed adding a hw_auto_sel governor as a second step, though the
->> approach may need refinement during implementation.
-> 
-> I didn't find in the thread adding a new governor was discussed in the
-> threads, in case you have a direct link.
-> 
->>
->> Deferred it (to second step) because adding a new governor requires
->> broader discussion.
->>
->> This issue already exists in current code - store_auto_select() enables
->> auto_sel without any governor awareness. These patches improve the
->> situation by:
->> - Updating scaling_min/max_freq when toggling auto_sel mode
->> - Syncing policy limits with actual HW min/max_perf bounds
->> - Making scaling_min/max_freq read-only in auto_sel mode
->>
->> Would it be acceptable to merge this as a first step, with the governor
->> handling as a follow-up?
->> If not and you prefer splitting, which grouping works better:
->>   A) Patches 1-8 then 9-11.
->>   B) "ACPI: CPPC *" patches then "cpufreq: CPPC *" patches.
->>
-> If it's possible I would like to understand what the end result should
-> look like. If ultimately enabling auto_sel implies switching governor
-> I understand, but I didn't find the thread that discussed about that
-> unfortunately.
-> 
-> 
->>
->>>
->>>> Enforce this by setting policy limits to min/max_perf bounds in
->>>> cppc_verify_policy(). Users must use min_perf/max_perf sysfs interfaces
->>>> to change performance limits in autonomous mode.
->>>>
->>>> Signed-off-by: Sumit Gupta <sumitg@nvidia.com>
->>>> ---
->>>>   drivers/cpufreq/cppc_cpufreq.c | 32 +++++++++++++++++++++++++++++++-
->>>>   1 file changed, 31 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/drivers/cpufreq/cppc_cpufreq.c b/drivers/cpufreq/cppc_cpufreq.c
->>>> index b1f570d6de34..b3da263c18b0 100644
->>>> --- a/drivers/cpufreq/cppc_cpufreq.c
->>>> +++ b/drivers/cpufreq/cppc_cpufreq.c
->>>> @@ -305,7 +305,37 @@ static unsigned int cppc_cpufreq_fast_switch(struct cpufreq_policy *policy,
->>>>
->>>>   static int cppc_verify_policy(struct cpufreq_policy_data *policy)
->>>>   {
->>>> -     cpufreq_verify_within_cpu_limits(policy);
->>>> +     unsigned int min_freq = policy->cpuinfo.min_freq;
->>>> +     unsigned int max_freq = policy->cpuinfo.max_freq;
->>>> +     struct cpufreq_policy *cpu_policy;
->>>> +     struct cppc_cpudata *cpu_data;
->>>> +     struct cppc_perf_caps *caps;
->>>> +
->>>> +     cpu_policy = cpufreq_cpu_get(policy->cpu);
->>>> +     if (!cpu_policy)
->>>> +             return -ENODEV;
->>>> +
->>>> +     cpu_data = cpu_policy->driver_data;
->>>> +     caps = &cpu_data->perf_caps;
->>>> +
->>>> +     if (cpu_data->perf_ctrls.auto_sel) {
->>>> +             u32 min_perf, max_perf;
->>>> +
->>>> +             /*
->>>> +              * Set policy limits to HW min/max_perf bounds. In autonomous
->>>> +              * mode, scaling_min/max_freq is effectively read-only.
->>>> +              */
->>>> +             min_perf = cpu_data->perf_ctrls.min_perf ?:
->>>> +                        caps->lowest_nonlinear_perf;
->>>> +             max_perf = cpu_data->perf_ctrls.max_perf ?: caps->nominal_perf;
->>>> +
->>>> +             policy->min = cppc_perf_to_khz(caps, min_perf);
->>>> +             policy->max = cppc_perf_to_khz(caps, max_perf);
->>>
->>> policy->min/max values are overwritten, but the governor which is
->>> supposed to use them to select the most fitting frequency will be
->>> ignored by the firmware I think.
->>>
->>
->> Yes.
->>
->>>> +     } else {
->>>> +             cpufreq_verify_within_limits(policy, min_freq, max_freq);
->>>> +     }
->>>> +
->>>> +     cpufreq_cpu_put(cpu_policy);
->>>>       return 0;
->>>>   }
->>>>
-> 
-
+> ---
+>  mm/balloon_compaction.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
+> index 717bc43732d09..f6e0582bd7ffe 100644
+> --- a/mm/balloon_compaction.c
+> +++ b/mm/balloon_compaction.c
+> @@ -33,6 +33,7 @@ static inline struct balloon_dev_info *balloon_page_device(struct page *page)
+>  static inline void balloon_page_insert(struct balloon_dev_info *balloon,
+>  				       struct page *page)
+>  {
+> +	lockdep_assert_held(&balloon_pages_lock);
+>  	__SetPageOffline(page);
+>  	if (IS_ENABLED(CONFIG_BALLOON_COMPACTION)) {
+>  		SetPageMovableOps(page);
+> @@ -50,6 +51,7 @@ static inline void balloon_page_insert(struct balloon_dev_info *balloon,
+>   */
+>  static inline void balloon_page_finalize(struct page *page)
+>  {
+> +	lockdep_assert_held(&balloon_pages_lock);
+>  	if (IS_ENABLED(CONFIG_BALLOON_COMPACTION))
+>  		set_page_private(page, 0);
+>  	/* PageOffline is sticky until the page is freed to the buddy. */
+> --
+> 2.52.0
+>
 
