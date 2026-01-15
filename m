@@ -1,148 +1,205 @@
-Return-Path: <linux-doc+bounces-72360-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72363-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2193D225C1
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 05:12:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9760AD227CE
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 07:07:57 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 9DFB1302AFFC
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 04:11:56 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 6093E3021F8C
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 06:07:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 048B42BE05F;
-	Thu, 15 Jan 2026 04:11:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC9D12BEC2A;
+	Thu, 15 Jan 2026 06:07:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NjBBA6I8"
+	dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b="B9NQurF8"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com [209.85.216.65])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from www3141.sakura.ne.jp (www3141.sakura.ne.jp [49.212.207.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B079C2BEC27
-	for <linux-doc@vger.kernel.org>; Thu, 15 Jan 2026 04:11:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.65
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768450315; cv=none; b=gLe8DhKBMBCQvW3XRbB5L7ucDpy8SCVsp3ta8mowEBmUvATONub03Y2E3cIo9jDR8DtQr/bDUJADH7YnIhc30HR8PVbayoVnBYxcz2a6+SrQFNplOxHaNx1pcqtyMXh1G2rwvlACqb7Vy13kt/fZo2ubCmI7Z2owal41cD/WdIs=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768450315; c=relaxed/simple;
-	bh=eH05iNFww19kcMZ0contcs3Ur4Aq0Uioewvs0Ol8TEA=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=RrtmZhBQrWxagh7z4vDMCrSOhyfasahKTut4AEYrroINP5FQj0yZcoSSOcIy/dkdzySko6DZJLeVg/PfAeIO2gSi8azIfpU8jeZlqvpPjRMCcYEsnPH2JGMxrI/Y6fjSFeZ5+c0dsnyb+Pev6WXUNqfJs+QYLsFWsTYdJdNQcK0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NjBBA6I8; arc=none smtp.client-ip=209.85.216.65
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pj1-f65.google.com with SMTP id 98e67ed59e1d1-34e90f7b49cso210565a91.3
-        for <linux-doc@vger.kernel.org>; Wed, 14 Jan 2026 20:11:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768450314; x=1769055114; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bInY6G+fRPU4N4S6clAbFXdycHArb+K858x2QHnaCgU=;
-        b=NjBBA6I8zTjR+COaFg4APBqhFb9KxKXmTsf+mmmk029wc0laJtRNRxybaRYW2oeJwU
-         EEDTvo/ZzKUloYLMqwLXvGpFDGMPor8ovCmtxWVppkMsEoEsQ/9N+qRnm09k6g1paFko
-         XLz4u+PcEav30JWiCrBB9azJm2ktXvDL67a4BP8IyU7+aRfogXPVzZi1pGQ4sK8jk1lI
-         iu//9GagC0pDm+FUr4gErOWug8JaQYZAD39sNL9jh2ANJH/7KB8ynKj8mBRyXkCCEVkJ
-         eQI4aYYNPuYo2v/DIwalqjG+zEw8GPBu+m9lhQDECfmGqDhIWZOM/dd7U0EpDYdXP6nc
-         yLoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768450314; x=1769055114;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bInY6G+fRPU4N4S6clAbFXdycHArb+K858x2QHnaCgU=;
-        b=H+VY9whkq77RHbWnQqNHy9KYzfVspKtof+zTGh1tvcI7Ivnagnsqq51dqSvqslYsw+
-         5gXr478AZCRgIfS7ZdrI7DyqV0o5qP13NAMn3vLtYSZBWlXz7Aw9AJrZOGy4jbCl3+Eq
-         KfgTklz7WxG0SJNgZIUy20Nh74OAhrBb3Z3DA5hDpOyJawSqp8MaEtTBPIq8uQHZawH+
-         gFR5ZLjT/qSNjYqJOFpRFbHJiFpTHjNQAW13LOIl859LKyLPswJeCvh/Pbphy1Cs8aC1
-         ghhcOeT3+8u0dEygMpI3wLP2b9q1y6wSkgd8F6ydfUeICbxAU+1gy1Upsuxnso5EvDox
-         TUjQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXyMezYnPRjLNaPXunnAyP2jEKowbO7nyZ4mSTgQbA0bdYOCS0DDdPMf9OxQObZlTBfBjclr2UnRYI=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy2fwOrVpDXzQ5CtL0mtoyagZHcN31jcMTZMRnCRyj7SY9h4HJ2
-	xNiWvpYDv0QCXb/pUIkqDRyeAo2mhE/bmAfiNf8X6fpSmf6pBUWD2cYx
-X-Gm-Gg: AY/fxX5LGE15gA2oCt8YFPnYgxWTVn+5iYQsJnB+6vQc+w3IDxZV/04He2mrx872okc
-	r0W0BTkTa0kgQWY6Uu6pilf+ukz1J23xb+YQLJFOUo0oCS30mKamDMkPhAihMk8K5FUVZnoMANL
-	S7aMeBuKxEw2icID+ZlSrIxOzSvcMCcGslxERFxemb1lBsXNqPv/xq0dH8tY7mKTlGwaohwRzoe
-	/vRWFBATaXtQByH836ooileLuzb47OsQO/y7hqzVf2nxpAJ+5IXGHQzFsl0H5FMfgJyowfah2D6
-	rxfT5t6IWv+F58f6KUmHE/gpa1Th+rZl9yAu+Nt30e4Y6LyF0lFq+htbypo/iAIWdk9bLCFkuwY
-	bbWCSM7+duo3nmo59L+rIm/HlNSYwlP+JeklrHrAinHWFLoM/j56LSgs4RUpJTy80ZbVk0xCqFQ
-	lTSAx9JLc0palq8x+43FInJ2K0P1I7e+Tk4OWhsChjx7W1/JH1
-X-Received: by 2002:a17:90b:3806:b0:34c:635f:f855 with SMTP id 98e67ed59e1d1-351090bde3cmr5297541a91.7.1768450313919;
-        Wed, 14 Jan 2026 20:11:53 -0800 (PST)
-Received: from fric.. ([210.73.43.101])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-351099e2fbesm1626399a91.3.2026.01.14.20.11.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jan 2026 20:11:53 -0800 (PST)
-From: Jiakai Xu <jiakaipeanut@gmail.com>
-X-Google-Original-From: Jiakai Xu <jiakaiPeanut@gmail.com>
-To: linux-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	kvm@vger.kernel.org
-Cc: Jonathan Corbet <corbet@lwn.net>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Jiakai Xu <xujiakai2025@iscas.ac.cn>
-Subject: [PATCH] RISC-V: KVM: Document scounteren and senvcfg in CSRs
-Date: Thu, 15 Jan 2026 04:11:46 +0000
-Message-Id: <20260115041146.807967-1-jiakaiPeanut@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCCE427A916;
+	Thu, 15 Jan 2026 06:07:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=49.212.207.181
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768457275; cv=pass; b=uoVlqZiKW9nneaD/RYyACs4Bz60ufTOSkfzFF967/3KJjbQfWwlqyfoAfDOpATdQ1qhvn8Q4pk7PlGAfN5KmrPzjA+4yq8Es2hwmWplY4gO39+fiwS+ggjd84nhiinuslDftfrQAujXaRuOhPD9t9nBLqTFV+k0VODC/wrK5tgM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768457275; c=relaxed/simple;
+	bh=54UhD/RcrcGZKGX87+QZr+EqKwHD+oWDT+VsmErAnsQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=STy21clT+Kt6dr3TqLoX0SO5+Azz8gvotO96UBrZpTpNpomLQFq6tSL0p4tzVZ1dDhKR+jj2FICKzHRaYWcOCXDrceFgh3rR0HLnYcfT+yzn3OUwOl/yYciwTNFEGcxOjweLWvasl7ciNuq+Yxx2ThIeJt67ZqWJARz3+FxS/i4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org; spf=pass smtp.mailfrom=redadmin.org; dkim=pass (1024-bit key) header.d=redadmin.org header.i=@redadmin.org header.b=B9NQurF8; arc=pass smtp.client-ip=49.212.207.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redadmin.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redadmin.org
+Received: from www.redadmin.org (bc043154.ppp.asahi-net.or.jp [222.228.43.154])
+	(authenticated bits=0)
+	by www3141.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 60F4xnf9021004
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+	Thu, 15 Jan 2026 13:59:50 +0900 (JST)
+	(envelope-from weibu@redadmin.org)
+Received: from localhost (localhost [127.0.0.1])
+	by www.redadmin.org (Postfix) with ESMTP id 9D5C5109D6CBD;
+	Thu, 15 Jan 2026 13:59:49 +0900 (JST)
+X-Virus-Scanned: amavis at redadmin.org
+Received: from www.redadmin.org ([127.0.0.1])
+ by localhost (redadmin.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1k_F9jaSElpM; Thu, 15 Jan 2026 13:59:44 +0900 (JST)
+Received: by www.redadmin.org (Postfix, from userid 1000)
+	id C1130109F288A; Thu, 15 Jan 2026 13:59:44 +0900 (JST)
+Authentication-Results: www.redadmin.org; arc=none smtp.remote-ip=127.0.0.1
+ARC-Seal: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space; t=1768453184;
+	cv=none; b=wb+fkZDl8j+zMasWwwO279izW+S4tz0l/Uu8pUZ3Hu68g+1cidmjww7q/th2vwxss7DciiwtaN448ASM+Lgn62yzPQJgRxB6zU+qPNpzZRU3jSv45bUkKx4vLigU1GVOgqVtvhe7ae/AGp3iAluYi8V+AUTVZgkr5DUgf+PqcA8=
+ARC-Message-Signature: i=1; a=rsa-sha256; d=redadmin.org; s=20231208space;
+	t=1768453184; c=relaxed/relaxed;
+	bh=zzX6ibUA06Ohfdr9WAFDLgu+G2JkEBb09LzfaPOyh7E=;
+	h=DKIM-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding; b=ZAS524FEwECTVdS0DJL8AFXqfrgD7VUbzdkL29JT0t46+H6mh9rQ//NOzpWiaDshZzP4AWw+9bsl54WB5f0T8IMeAYbpPl7+aA2WibX7+QzGBVrPURsuQ70ybfUaV49JpYc9gMAz+K4PDbA3oMOS/KDmlP7GchRucQ63iC7CyVc=
+ARC-Authentication-Results: i=1; www.redadmin.org
+DKIM-Filter: OpenDKIM Filter v2.11.0 www.redadmin.org C1130109F288A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redadmin.org;
+	s=20231208space; t=1768453184;
+	bh=zzX6ibUA06Ohfdr9WAFDLgu+G2JkEBb09LzfaPOyh7E=;
+	h=From:To:Cc:Subject:Date:From;
+	b=B9NQurF8eAUW5MWMAVeQyDaQVrzDgNsUdvxH4Asmk7JYGvHrQRiBihCmEU0ZiWbmO
+	 0uaiPc5LzOWOSzj5cZ7LDxM/SROdf/bGcegPGjo12KLbnQVk+II9ApKwGx3oHIq3ZH
+	 gJmk07Pm3viXb7iiJ+P6gJeGn1LExHuXzJUOjELk=
+From: Akiyoshi Kurita <weibu@redadmin.org>
+To: corbet@lwn.net
+Cc: akiyks@gmail.com, shibata@linuxfoundation.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, weibu@redadmin.org
+Subject: [PATCH v2] docs: ja_JP: Start translation of submitting-patches
+Date: Thu, 15 Jan 2026 13:59:41 +0900
+Message-ID: <20260115045941.161458-1-weibu@redadmin.org>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Jiakai Xu <xujiakai2025@iscas.ac.cn>
+Start a new Japanese translation of
+Documentation/process/submitting-patches.rst.
 
-Extend the documentation of guest supervisor-mode CSRs to include
-scounteren and senvcfg.
+As suggested by Akira Yokosawa, instead of moving the outdated 2011
+translation (SubmittingPatches), we are starting a fresh translation of
+the current English document.
 
-These registers are part of the RISC-V supervisor CSR set but were
-previously missing from the documented encoding table. Also adjust
-the table formatting to keep column alignment consistent.
+This patch adds the initial file structure, the warning about the
+document being under construction, and the translation of the
+introduction section.
 
-Signed-off-by: Jiakai Xu <xujiakai2025@iscas.ac.cn>
+The translation work will be done incrementally.
+
+Suggested-by: Akira Yokosawa <akiyks@gmail.com>
+Link: https://lore.kernel.org/298d3a9c-41c1-4cbd-b4ab-d3009df9388c@gmail.co=
+m/
+Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
 ---
- Documentation/virt/kvm/api.rst | 28 +++++++++++++++-------------
- 1 file changed, 15 insertions(+), 13 deletions(-)
+ Documentation/translations/ja_JP/index.rst    |  1 +
+ .../ja_JP/process/submitting-patches.rst      | 36 +++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 Documentation/translations/ja_JP/process/submitting-pat=
+ches.rst
 
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index 01a3abef8abb..6dab20637c7b 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -2837,19 +2837,21 @@ of a Guest VCPU and it has the following id bit patterns::
- 
- Following are the RISC-V csr registers:
- 
--======================= ========= =============================================
--    Encoding            Register  Description
--======================= ========= =============================================
--  0x80x0 0000 0300 0000 sstatus   Supervisor status
--  0x80x0 0000 0300 0001 sie       Supervisor interrupt enable
--  0x80x0 0000 0300 0002 stvec     Supervisor trap vector base
--  0x80x0 0000 0300 0003 sscratch  Supervisor scratch register
--  0x80x0 0000 0300 0004 sepc      Supervisor exception program counter
--  0x80x0 0000 0300 0005 scause    Supervisor trap cause
--  0x80x0 0000 0300 0006 stval     Supervisor bad address or instruction
--  0x80x0 0000 0300 0007 sip       Supervisor interrupt pending
--  0x80x0 0000 0300 0008 satp      Supervisor address translation and protection
--======================= ========= =============================================
-+======================= ========== =============================================
-+    Encoding            Register   Description
-+======================= ========== =============================================
-+  0x80x0 0000 0300 0000 sstatus    Supervisor status
-+  0x80x0 0000 0300 0001 sie        Supervisor interrupt enable
-+  0x80x0 0000 0300 0002 stvec      Supervisor trap vector base
-+  0x80x0 0000 0300 0003 sscratch   Supervisor scratch register
-+  0x80x0 0000 0300 0004 sepc       Supervisor exception program counter
-+  0x80x0 0000 0300 0005 scause     Supervisor trap cause
-+  0x80x0 0000 0300 0006 stval      Supervisor bad address or instruction
-+  0x80x0 0000 0300 0007 sip        Supervisor interrupt pending
-+  0x80x0 0000 0300 0008 satp       Supervisor address translation and protection
-+  0x80x0 0000 0300 0009 scounteren Supervisor counter-enable
-+  0x80x0 0000 0300 000a senvcfg    Supervisor environment configuration
-+======================= ========== =============================================
- 
- RISC-V timer registers represent the timer state of a Guest VCPU and it has
- the following id bit patterns::
--- 
-2.34.1
+diff --git a/Documentation/translations/ja_JP/index.rst b/Documentation/tra=
+nslations/ja_JP/index.rst
+index 4159b417bfdd..5d47d588e368 100644
+--- a/Documentation/translations/ja_JP/index.rst
++++ b/Documentation/translations/ja_JP/index.rst
+@@ -13,6 +13,7 @@
+=20
+    disclaimer-ja_JP
+    process/howto
++   process/submitting-patches
+    process/submit-checklist
+=20
+ .. raw:: latex
+diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rs=
+t b/Documentation/translations/ja_JP/process/submitting-patches.rst
+new file mode 100644
+index 000000000000..7d3edf1ff87a
+--- /dev/null
++++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
+@@ -0,0 +1,36 @@
++.. _jp_process_submitting_patches:
++
++=E3=83=91=E3=83=83=E3=83=81=E3=81=AE=E6=8A=95=E7=A8=BF: =E3=82=AB=E3=83=BC=
+=E3=83=8D=E3=83=AB=E3=81=AB=E3=82=B3=E3=83=BC=E3=83=89=E3=82=92=E5=85=A5=E3=
+=82=8C=E3=82=8B=E3=81=9F=E3=82=81=E3=81=AE=E5=BF=85=E9=A0=88=E3=82=AC=E3=82=
+=A4=E3=83=89
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D
++
++.. note::
++
++   =E3=81=93=E3=81=AE=E3=83=89=E3=82=AD=E3=83=A5=E3=83=A1=E3=83=B3=E3=83=
+=88=E3=81=AF :ref:`Documentation/process/submitting-patches.rst <submitting=
+patches>` =E3=81=AE=E6=97=A5=E6=9C=AC=E8=AA=9E=E8=A8=B3=E3=81=A7=E3=81=99=
+=E3=80=82
++
++   =E5=85=8D=E8=B2=AC=E4=BA=8B=E9=A0=85: :ref:`translations_ja_JP_disclaim=
+er`
++
++.. warning::
++
++   **UNDER CONSTRUCTION!!**
++
++   =E3=81=93=E3=81=AE=E6=96=87=E6=9B=B8=E3=81=AF=E7=BF=BB=E8=A8=B3=E6=9B=
+=B4=E6=96=B0=E3=81=AE=E4=BD=9C=E6=A5=AD=E4=B8=AD=E3=81=A7=E3=81=99=E3=80=82=
+=E6=9C=80=E6=96=B0=E3=81=AE=E5=86=85=E5=AE=B9=E3=81=AF=E5=8E=9F=E6=96=87=E3=
+=82=92=E5=8F=82=E7=85=A7=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=
+=84=E3=80=82
++
++Linux =E3=82=AB=E3=83=BC=E3=83=8D=E3=83=AB=E3=81=AB=E5=A4=89=E6=9B=B4=E3=
+=82=92=E5=8A=A0=E3=81=88=E3=81=9F=E3=81=84=E3=81=A8=E6=80=9D=E3=81=A3=E3=81=
+=A6=E3=81=84=E3=82=8B=E5=80=8B=E4=BA=BA=E3=82=84=E4=BC=81=E6=A5=AD=E3=81=AB=
+=E3=81=A8=E3=81=A3=E3=81=A6=E3=80=81
++=E3=81=9D=E3=81=AE=E3=80=8C=E4=BB=95=E7=B5=84=E3=81=BF=E3=80=8D=E3=81=AB=
+=E6=85=A3=E3=82=8C=E3=81=A6=E3=81=84=E3=81=AA=E3=81=91=E3=82=8C=E3=81=B0=E3=
+=80=81=E6=8A=95=E7=A8=BF=E3=81=AE=E3=83=97=E3=83=AD=E3=82=BB=E3=82=B9=E3=81=
+=AF=E6=99=82=E3=81=AB=E6=B0=97=E5=BE=8C=E3=82=8C=E3=81=99=E3=82=8B=E3=82=82=
+=E3=81=AE=E3=81=A7=E3=81=97=E3=82=87=E3=81=86=E3=80=82
++=E3=81=93=E3=81=AE=E6=96=87=E6=9B=B8=E3=81=AF=E3=80=81=E3=82=B3=E3=83=BC=
+=E3=83=89=E3=82=92=E3=82=AB=E3=83=BC=E3=83=8D=E3=83=AB=E3=81=AB=E5=85=A5=E3=
+=82=8C=E3=82=8B=E3=81=9F=E3=82=81=E3=81=AE=E3=80=81=E4=B8=BB=E3=81=AB=E6=8A=
+=80=E8=A1=93=E7=9A=84=E3=81=8B=E3=81=A4=E6=89=8B=E7=B6=9A=E3=81=8D=E7=9A=84=
+=E3=81=AA
++=E6=89=8B=E9=A0=86=E3=81=AE=E6=A6=82=E8=A6=81=E3=82=92=E8=AA=AC=E6=98=8E=
+=E3=81=99=E3=82=8B=E3=81=93=E3=81=A8=E3=82=92=E7=9B=AE=E7=9A=84=E3=81=A8=E3=
+=81=97=E3=81=A6=E3=81=84=E3=81=BE=E3=81=99=E3=80=82
++
++=E3=82=82=E3=81=97=E3=81=93=E3=81=AE=E6=96=87=E6=9B=B8=E3=82=92=E8=AA=AD=
+=E3=82=93=E3=81=A7=E3=81=84=E3=82=8B=E3=81=82=E3=81=AA=E3=81=9F=E3=81=AE=E7=
+=9B=AE=E7=9A=84=E3=81=8C=E3=80=81=E5=8D=98=E3=81=AB=E3=83=90=E3=82=B0=E5=A0=
+=B1=E5=91=8A=E3=82=92=E9=80=81=E4=BF=A1=E3=81=99=E3=82=8B=E3=81=93=E3=81=A8=
+=E3=81=A7=E3=81=82=E3=82=8C=E3=81=B0=E3=80=81
++Documentation/admin-guide/reporting-issues.rst
++=E3=82=92=E5=8F=82=E7=85=A7=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=
+=E3=81=84=E3=80=82
++
++=E3=81=93=E3=81=AE=E6=96=87=E6=9B=B8=E8=87=AA=E4=BD=93=E3=82=82=E9=95=B7=
+=E5=A4=A7=E3=81=A7=E3=81=99=E3=81=8C=E3=80=81=E8=A9=B3=E7=B4=B0=E3=81=AA=E6=
+=89=8B=E9=A0=86=E6=9B=B8=E3=81=A8=E3=81=84=E3=81=86=E3=82=8F=E3=81=91=E3=81=
+=A7=E3=81=AF=E3=81=82=E3=82=8A=E3=81=BE=E3=81=9B=E3=82=93=E3=80=82
++=E8=A9=B3=E7=B4=B0=E3=81=AB=E3=81=A4=E3=81=84=E3=81=A6=E3=81=AF :ref:`Docu=
+mentation/process/submit-checklist.rst <submitchecklist>`
++=E3=82=92=E5=8F=82=E7=85=A7=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=
+=E3=81=84=E3=80=82
++
++=E3=81=93=E3=81=AE=E6=96=87=E6=9B=B8=E3=81=AF=E5=A4=9A=E6=95=B0=E3=81=AE=
+=E3=82=BB=E3=82=AF=E3=82=B7=E3=83=A7=E3=83=B3=E3=81=8B=E3=82=89=E6=A7=8B=E6=
+=88=90=E3=81=95=E3=82=8C=E3=81=A6=E3=81=84=E3=81=BE=E3=81=99=E3=80=82=E3=81=
+=93=E3=82=8C=E3=82=89=E3=81=AF=E6=AF=94=E8=BC=83=E7=9A=84=E7=8B=AC=E7=AB=8B=
+=E3=81=97=E3=81=A6=E3=81=84=E3=81=BE=E3=81=99=E3=81=8C=E3=80=81
++=E9=A0=86=E3=81=AB=E8=AA=AD=E3=82=80=E3=81=93=E3=81=A8=E3=82=92=E6=8E=A8=
+=E5=A5=A8=E3=81=97=E3=81=BE=E3=81=99=E3=80=82
++
++.. _jp_submittingpatches_common_mistakes:
++
++   * :ref:`=E6=8A=95=E7=A8=BF=E6=99=82=E3=81=AB=E3=82=88=E3=81=8F=E3=81=82=
+=E3=82=8B=E9=96=93=E9=81=95=E3=81=84 <submittingpatches_common_mistakes>`
+--=20
+2.47.3
 
 
