@@ -1,303 +1,572 @@
-Return-Path: <linux-doc+bounces-72446-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72448-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6429ED246B4
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 13:18:36 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id DB073D246CC
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 13:19:21 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 5B81A30194D0
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 12:18:35 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 119A83008DCB
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Jan 2026 12:19:15 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A511E387561;
-	Thu, 15 Jan 2026 12:18:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 17C062848A1;
+	Thu, 15 Jan 2026 12:19:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="LedpObgB";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="LedpObgB"
+	dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="cpBmpsYI";
+	dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b="UklLze31"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from DU2PR03CU002.outbound.protection.outlook.com (mail-northeuropeazon11011011.outbound.protection.outlook.com [52.101.65.11])
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54451327C05;
-	Thu, 15 Jan 2026 12:18:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.65.11
-ARC-Seal:i=3; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768479512; cv=fail; b=TnfsINj5OOgAVN1IT5pO65+p7RjDdanvfVEMJNVCNyLu+7Jf1LOsFljFhpbw1NbEsNA651qdj5Ye8CQsf35TkYjstpbh/mLhVgwjQbsANUQpBL+aGC9/rJk9WPmeV1Kb4tYWOUdzcFBz5u5UYVMxr+34xfGpwOrZleH028XA7i8=
-ARC-Message-Signature:i=3; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768479512; c=relaxed/simple;
-	bh=PvNcKKPpgp6pDONwlMDnPapW4HqxL6EfC1QynTWJSTU=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=uVfksfnux/tJ/q0k7Iwa2qJ4orhLLRa1bCoqnQXbnZJvmOkFn6F0QVHZRbcXMvT18rCkAW2ERYHEDzVCCPOR24ZgUFUt7OfxXMoc7OJapV4TFW0FZE0mh0NRsgEvZnhjl768fXfjkmwmJbjrpThlLNuqM8+/rYgfSLwf5YzJq2s=
-ARC-Authentication-Results:i=3; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=LedpObgB; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=LedpObgB; arc=fail smtp.client-ip=52.101.65.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=olVgyjpCrLXtLjW2jFdbq5+wQDyRWHQQhnbgCYVX61Bac3YB7yJDVit3r7gr4Zm0A/sma/DMYPvR7BwEI6Q5VUsbPSYM5huxTDQR5iAW4KLswgPO6XL3iNXp07F+wtFZ6kaRacl7Fmt3vYiy0KFNvXozbnobk6Bp7EqDFeWSXmTFiYEU8HmL65JTQU1gHYwrdU56M+vDJFl/nipUN1Cdh1cyMUFoJTHTAq9Nu+gyHuEE9Kp6eXkRG7kTSzuNznOJ1pcFplJXx7he/pyk1RyTZtnT+1hhnPmQ+ilfAW+6uTL8KB6u67V/JQUlMylXD6Zgh1uWMBBnlOi2IoWerMzQuA==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=acmnvqUX5n4urxyM6FJqHr4KhlJgEVAxE9soFFSMhck=;
- b=AZ7Gf1kjJatnis555c3Bi+8Y6GaieK/l9xS5DJPntFyg8t0/NDvHncZTDbIP5CCpuMyK3ibv3xN5YIIz4HBbNqgysIN2GDafkz2Ync0Xx8x1fc50pbV4gKQ6mYQkxmnzgETlgjGg2DIj1+ybPWkCmRrMVCNBrrALbQCuY9B4gl6V6Nrr6Z49BrQvHbJtjMw8RmY9NFvVh9gvfhfJu1QRzEZbvvA8rBZwECHfOFqbkn0nctbfRQYgPSlakAj+anvXQ0OVfhnDD3TS5GTm0ujU+/a0UO640FmAHmMR1QmKrG1OJg4t/Df3X046whTisr2BJjrQ1K3Bm94JSxHrtOT+7g==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=alien8.de smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=acmnvqUX5n4urxyM6FJqHr4KhlJgEVAxE9soFFSMhck=;
- b=LedpObgBztQoCPp9czkDKRBVwMgnXM6NMpOJlyQ4B9wUkGrUmV3L9pjq/Val+lbbIA9rnQVS15CFgulz1mG0C4PVtw7QO3ou3dlCsNuVGaYLFhGKinmsqf0I/EDt2WHrxLhk7c5SivLdmUgspwEySDl/VLk/zPmPktpsH7uIE9c=
-Received: from AS4P190CA0021.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:5d0::6)
- by DBBPR08MB6123.eurprd08.prod.outlook.com (2603:10a6:10:20a::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Thu, 15 Jan
- 2026 12:18:24 +0000
-Received: from AM4PEPF00027A6A.eurprd04.prod.outlook.com
- (2603:10a6:20b:5d0:cafe::f2) by AS4P190CA0021.outlook.office365.com
- (2603:10a6:20b:5d0::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9520.6 via Frontend Transport; Thu,
- 15 Jan 2026 12:18:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AM4PEPF00027A6A.mail.protection.outlook.com (10.167.16.88) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9542.4
- via Frontend Transport; Thu, 15 Jan 2026 12:18:23 +0000
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3708833DEEB;
+	Thu, 15 Jan 2026 12:19:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=205.220.165.32
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768479554; cv=fail; b=NtWJBHLYMl+ciruYBXmGiCntGCF73HN1tb9lP5BGPqK6fvTc2NKV4qriSNq8RHoVN8C84A1A1ljDHkgktmS1hwbzzn+w/YT5VAQBAaKGu6bChULP4jW78sN2+Ti6vaoaU0L3UE9m3CjeXYVNUD67mYEWGsJKq7GVVZVBTY29iqc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768479554; c=relaxed/simple;
+	bh=nEi25ATFHKARGAmtWV+la4npF1OCXq1FaUQlY30J6bc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=PNgaxBow0F4iKO9YYQAlSMBhggPlx2VApMcfcm+u9bZ59I4suStRA5UzMNgiGm8MiCp833nTM9yaseoN4z+OiiF6Ny/zzUdFY8dOf36OKKKXV8Rxhd/6IZYv4o4hkzQloSMbMB83Px58frS+m+LzSOZtwL/mqINE1r31g4Wo6/E=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com; spf=pass smtp.mailfrom=oracle.com; dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b=cpBmpsYI; dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.b=UklLze31; arc=fail smtp.client-ip=205.220.165.32
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oracle.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oracle.com
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+	by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60FBqUgJ2753003;
+	Thu, 15 Jan 2026 12:18:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=corp-2025-04-25; bh=6UQjMYcSSfYtxpik1r
+	GhFAg/leAU2gp5+vP7gbFbj3Y=; b=cpBmpsYIODf7szikBswxNc5KVpJ9nBLdbS
+	f4KmojMjt6GahVONlgYUtjfVEBjnVXBWSiHWzP4eDsJ8s25TM6rS4xrziP4DXsvf
+	99ibZsSIVthJOS0C8tFwjF8ycHCIVDxaUXvu0FMZBRnilNdXcllu/Ieh4q6GHiNy
+	I2YnqnzkGe9v63Ree3swJh+/1wYyz92FFSQYnpZp0Goe/OHB4sXWCDBjKrO06Osv
+	OVbg7vXdxR7DlxYBs1qCjY0rrlpJwimVAM7fYLFavUxw2luXdy+6Sm6WRrlutz2R
+	ojDhMRduY3pVYO+aPK/u8MSLhvQiyWfqadewCK2Lkd0+ds+w3xpg==
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+	by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4bkpwgqkmh-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 15 Jan 2026 12:18:27 +0000 (GMT)
+Received: from pps.filterd (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+	by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2) with ESMTP id 60FBQKRr008355;
+	Thu, 15 Jan 2026 12:18:26 GMT
+Received: from sn4pr0501cu005.outbound.protection.outlook.com (mail-southcentralusazon11011055.outbound.protection.outlook.com [40.93.194.55])
+	by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id 4bkd7b165a-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+	Thu, 15 Jan 2026 12:18:26 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GfsqXWPcMw8xQkX5ogmgoDJ0bv+fg+E9wzHG2NbQ36LV4aJ4Hc1QxUCjM48/g8D4k66Sj2IRlcfAEn5rSJUdmFC9h4xGo0P12zDKwr/vBGYfJW9MXgsiIU3XOPuvlttTDyI0nh42nkqnyvxsdclwD72tRhgTUGMEeoEMGgwpRFQLPW56We+TuIic0qYxug66vLHC1bLGwV7GdSqAWyvlhWENQ/j6wirNpdl+Jqj/UvGvrrSlgVsPdw6i2TTQkmEUbfpKRHaSF455Ild5cvmfupORpTTemc35UtN3MjKpueu6uwXSVqK1e8OCsg9/QfbsFTMO9XTzz2dl/AtdYCN4cg==
+ b=tohOKyDM+aSkX+tbw06FN0WAhJV17HhK1xQlnz4EN6novVLlOIiGtN2LW2ucECYW7SmejqPTtFQdIWBcG0+EGctmEQOgQC0N8zBfzQ2X+kU+h3bFeHAWBY4OXe5jb65pdMBqXnAwLX1WfhE8qpGERfBE76Jl5eXq9KJuLTe35E5GWUsEHGW9tF2UA0nSln0fBdJAniUDK5Kanvz2fKDLpRvzcTM98bAvIGZZI9ffDfN8x2whqMu8Jzbd538Na9bi/C+25OhiLlDB2OQ6z5S5zctvf4Eyalp7u7BYBfQGZNHo1JeE2ixbXomhzrw3Uw9kN/uyM1y5acXFvp3bariZvQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=acmnvqUX5n4urxyM6FJqHr4KhlJgEVAxE9soFFSMhck=;
- b=xd/x+drfwlnPdLhP9vPTSPYzsnam3IGZk7L/4a5M4pYkTFFwLekz2Owoh66Gq5r9DcnAhj4dnnt2NStdz5pd0S3J3IPYpatSfPRaiV+HTqDPY4x/CktMKto+ecCJ188+kPrTDg5FuOfAOuVh3MQlQLHOQFTk4iTcxpOZNM24XM3SrTdT1SbGINiJNQjhIYMDBrQCJ1yZY3szQ3L7JrH98/0z4azIxHb7ZdBnEd3oR/Kv+iciRs5vftM4iDTiu/+BJTjjbdDvA3BTvKOerdm7FRKD51OqsaSQK2gHYFrrf15wYSNfx/jpFS5YRdjZxEAPE2aati3vwJTpU8/mulJEXA==
+ bh=6UQjMYcSSfYtxpik1rGhFAg/leAU2gp5+vP7gbFbj3Y=;
+ b=IXWgjOJPCU2AwDYsDebXvMdScdxJ3HWaS5fmuqwcnQgYIH1prE/mkQRUWNDon4HovcN/20gGjr+3C9MLa3snRZdg+W3ez5SsETuJTriV8/QBLv6lwYypd02dQ7GGtmU80LtIUpmGWSaNSYxCubpJCR7S7iMGH+BnMoZoCAAU/7SSuUEfilwjTEhG/K3Rl/iOVVmWFC4BsSgHpVp7d8wXkqXMQR8Tl6mUky0jfTFFcjE1WRqK7j8DrJCH106HerxRhwQ4pFlwTBaDYb146gslm/XsUe7jkABsU5KeJ2ruC3KVs6rhi009ubgDYuWhDYv78TtqJy24ngFabSdL1Qoo+A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=acmnvqUX5n4urxyM6FJqHr4KhlJgEVAxE9soFFSMhck=;
- b=LedpObgBztQoCPp9czkDKRBVwMgnXM6NMpOJlyQ4B9wUkGrUmV3L9pjq/Val+lbbIA9rnQVS15CFgulz1mG0C4PVtw7QO3ou3dlCsNuVGaYLFhGKinmsqf0I/EDt2WHrxLhk7c5SivLdmUgspwEySDl/VLk/zPmPktpsH7uIE9c=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from AM9PR08MB6884.eurprd08.prod.outlook.com (2603:10a6:20b:305::9)
- by DU0PR08MB9322.eurprd08.prod.outlook.com (2603:10a6:10:41d::13) with
+ bh=6UQjMYcSSfYtxpik1rGhFAg/leAU2gp5+vP7gbFbj3Y=;
+ b=UklLze31YLt46xnuKXIZOlVqidU+gSmKyguF0Nu54+ZP27D5SiZ7pn2mQNtD3TbPptK5I6xluqtk8iqtyDXpJZUlic4+YtXcCeQZqCSXXtIghpTHsP0E81rtszz3/NX9zJ5/LgQVKHrQeJf66N0IpFLeCncpBD6jvIoKMxZOfGc=
+Received: from BL4PR10MB8229.namprd10.prod.outlook.com (2603:10b6:208:4e6::14)
+ by DS4PPF509E676A9.namprd10.prod.outlook.com (2603:10b6:f:fc00::d1d) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.5; Thu, 15 Jan
- 2026 12:17:19 +0000
-Received: from AM9PR08MB6884.eurprd08.prod.outlook.com
- ([fe80::3d93:3e2a:1a1f:95de]) by AM9PR08MB6884.eurprd08.prod.outlook.com
- ([fe80::3d93:3e2a:1a1f:95de%6]) with mapi id 15.20.9499.005; Thu, 15 Jan 2026
- 12:17:19 +0000
-Message-ID: <dc2f3dd7-b9db-4a2d-b431-f70738cefcfd@arm.com>
-Date: Thu, 15 Jan 2026 12:17:17 +0000
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/12] ras: share firmware-first estatus handling
-Content-Language: en-GB
-To: Borislav Petkov <bp@alien8.de>
-Cc: linux-acpi@vger.kernel.org, devicetree@vger.kernel.org,
- tony.luck@intel.com, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, catalin.marinas@arm.com, will@kernel.org,
- linux-arm-kernel@lists.infradead.org, rafael@kernel.org,
- linux-doc@vger.kernel.org, Dmitry.Lamerov@arm.com, Michael.Zhao2@arm.com
-References: <20251221013534.GAaUdO5vWqMWAdbWbd@renoirsky.local>
- <20251229115440.2734800-1-ahmed.tiba@arm.com>
- <20260114141551.GKaWelF-Gsvzr71LUs@fat_crate.local>
-From: Ahmed Tiba <ahmed.tiba@arm.com>
-In-Reply-To: <20260114141551.GKaWelF-Gsvzr71LUs@fat_crate.local>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO2P265CA0487.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:13a::12) To AM9PR08MB6884.eurprd08.prod.outlook.com
- (2603:10a6:20b:305::9)
+ 2026 12:18:00 +0000
+Received: from BL4PR10MB8229.namprd10.prod.outlook.com
+ ([fe80::552b:16d2:af:c582]) by BL4PR10MB8229.namprd10.prod.outlook.com
+ ([fe80::552b:16d2:af:c582%6]) with mapi id 15.20.9520.005; Thu, 15 Jan 2026
+ 12:18:00 +0000
+Date: Thu, 15 Jan 2026 12:18:02 +0000
+From: Lorenzo Stoakes <lorenzo.stoakes@oracle.com>
+To: "David Hildenbrand (Red Hat)" <david@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linuxppc-dev@lists.ozlabs.org,
+        Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+        linux-doc@vger.kernel.org, virtualization@lists.linux.dev,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Oscar Salvador <osalvador@suse.de>,
+        "Liam R. Howlett" <Liam.Howlett@oracle.com>,
+        Vlastimil Babka <vbabka@suse.cz>, Mike Rapoport <rppt@kernel.org>,
+        Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Christophe Leroy <christophe.leroy@csgroup.eu>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jerrin Shaji George <jerrin.shaji-george@broadcom.com>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+        Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>,
+        Zi Yan <ziy@nvidia.com>
+Subject: Re: [PATCH v2 04/23] mm/balloon_compaction: centralize basic page
+ migration handling
+Message-ID: <821926db-2cbd-41a6-bc40-bdc80a0e2499@lucifer.local>
+References: <20260115092015.3928975-1-david@kernel.org>
+ <20260115092015.3928975-5-david@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260115092015.3928975-5-david@kernel.org>
+X-ClientProxiedBy: LO4P265CA0021.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2ae::22) To BL4PR10MB8229.namprd10.prod.outlook.com
+ (2603:10b6:208:4e6::14)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic:
-	AM9PR08MB6884:EE_|DU0PR08MB9322:EE_|AM4PEPF00027A6A:EE_|DBBPR08MB6123:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6bd7891c-c3f9-48ca-a244-08de54302df3
-x-checkrecipientrouted: true
-NoDisclaimer: true
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL4PR10MB8229:EE_|DS4PPF509E676A9:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0cd608a-b7ee-43a8-2aa8-08de54301f75
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info-Original:
- =?utf-8?B?b2xuSWp5aDVCNmlZbjhQUjZKeWtpTzAwNHdRd0F5OWpWQTZ4OEJUTDg5QU5S?=
- =?utf-8?B?SEJkbXd3bVM3cFg2eXF6RzFYMWprM0ZsMHRJakVYMnNHRUNxc0NOVGhUMFlH?=
- =?utf-8?B?SndWem1HdlcwczNIZVJzTE9mZ1dNaFZQRXhHVXBkUTR5Q3VBNXZ1QTh1bTQx?=
- =?utf-8?B?S3dqT2R1SG0xdWtNSjlRWktlYXZPZ1J2VjZIZ0twWWdzZndlSUhqdXRFZEVv?=
- =?utf-8?B?VHNOalVBSnpUNElNVmNNMzg5TUFVTGRzUmMrSGNkWXFPSElIVGpCZldUT09m?=
- =?utf-8?B?R3NzQTdwem9qUjRySnk2UTNkR1hRZm10S3hvR1ZRb3hJZVMyWk0xYXN3Z1A2?=
- =?utf-8?B?SGdnbFMzaGZ4NnZYa0NlbnpyamZPaklXTlBqeENJcHdkY0F0a2t0ZWpFQkdS?=
- =?utf-8?B?cDBDOGNMMnh6dFk5RVlJMURwUFJQbUh2bEdHTGhUZWk5MXBsQWl6QVN6N3JP?=
- =?utf-8?B?UXhjdFNVdUMwMFI0L0s1S2RQbFF4OGRmOWYrSUVabHp1TzZQTFZTa1pmNlVv?=
- =?utf-8?B?R0lJQlZiRnFpRGo4ZFR6SmxnUmZSdy9EakdUcUFXb0N1NUZEb2hhN3plK1o5?=
- =?utf-8?B?dGxBTEEreDdJeE12Wnd3RnhFYzRRUi9PUFMxSTNZYmhKMnlOR21sdFNBaklv?=
- =?utf-8?B?Zlc0eEljWm93ZnhiaUpVRkFHbWtaMy9UWFZrOXlsdnlFd2I4ajErYmVjeHF4?=
- =?utf-8?B?dnQ2djlUSXVEUXU1emJiYjBoSFBwWHlLdkpnVjlHeEF1UUdqS3YzK1RKVi9x?=
- =?utf-8?B?bGNHVG9KV3hrY1hoTEJTVnhPUFZYa1FmdW9uUFBvTHFKRTJpRVFVT1ByYk95?=
- =?utf-8?B?aDV1RGFyTkk3SzR4WHRuU3F4NkFtUk5JTVhKQ1NKL04zcUpMdHN1QVNUTXgz?=
- =?utf-8?B?M3JERzJLa0NZVzFBS0xETmZiNGdSMVlqRy9tY0N0U3NvdWZwa3J6U09ucGNS?=
- =?utf-8?B?NmVaNi9sVVhqTDU0YjFTdXRHazJ2em9PSlVWSi9ad0NGUDNydnlNYnJiR1li?=
- =?utf-8?B?Mk5HYWNQeWxTamhLS2h6Z29zK0kyLzJXVmdFdEdldE52bE8xMjZGb3c2MUV3?=
- =?utf-8?B?RGRhOU1jYjFJbGV4WXp6bERYOU1aNnRjWEREUlFrM3RTL3hiQkw3Rm12bEVm?=
- =?utf-8?B?TFM0TDJqc1BjQzdXVWpWdHBJaFhwckFNYXpUWWNOdmlxT0s2eW9IWWpmSGVD?=
- =?utf-8?B?bWlIbmpjd1ZDWnd1U292bHNXSVIySkF2MmNBTlZUQ1ZrZC9QVTVNcHBJSldX?=
- =?utf-8?B?S3ozenY2eFk5TFRHUkE5elI4aFM3SGxPSFRxbmE5QnFHaEFoT3ZYRUlKV25E?=
- =?utf-8?B?aTUzSElDU042MnBzaGE5d3YvVnlpZVlKS25NQ3d4a1BTTHNpZFJSdWNJcWV1?=
- =?utf-8?B?UTRjdDg0ZCtLSEFIYjFNU0xPZWFEcjByRzZ1YXJmbm5vY3QrWnF2Z294ZjNt?=
- =?utf-8?B?WXBhNEVyUDkraWYzL3R3OE53U3ltK20yOVBMVkFSQkJhQnlHR0x1RzZ5K01K?=
- =?utf-8?B?R0taVUg5ckNSUTZYb2llVFJPaHpEWEp4UGljNXpIZGlmQmxnRUxaaHhndk1v?=
- =?utf-8?B?Qy9xc3lwYkwrdkppSlorcVN6YWFnbWxPT1VIMEZuQTVlbzRVem1JQ3RmdHJp?=
- =?utf-8?B?Zlo4dEE0Qm9wc2owKzlDd2IyZU1teDEwVXZEbW9icWxxcU1KRTlKRDJwQ21M?=
- =?utf-8?B?bFREWUdhQkltZDN5bWh4SXRHMDdEOW9jcU9LSm92bXZIY2NXbTg2aW5mNnFX?=
- =?utf-8?B?a0EyKzI0czJTVVlGbEZTNm1jOGsvcXBQUk9NMHQyVXdhb3ZmY1RianJ5bkox?=
- =?utf-8?B?MlgxZ3Jmc0JsOGxRcTR4UXRGK0pRMlJUR25Fb3F6WlJsOUpHQW9xTjlkVnd6?=
- =?utf-8?B?VWx5VmtWekRMMjBmN21FcjBhMkxQZHgxT0pTbk5QSVhDRWpZUUpqK0oxY0dv?=
- =?utf-8?B?UUliL2E0L3BabVpJczZhQjhnSFp3L3RxYjBPbTZCVVBoSTcxZW1xV2EzcW5n?=
- =?utf-8?B?RHRIYTRtTjY4MkovanFuRWk4L2UyTGtrUXBka2xWaHcvS240bTNheTJwVmFR?=
- =?utf-8?B?S0lndm0yVUY5YlcwWDhxQXpEaUN1SU5wZnJFcWc2U0xlbW1OeXJwa2JaZ2hJ?=
- =?utf-8?Q?7PwQ=3D?=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR08MB6884.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9322
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM4PEPF00027A6A.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	9ac1501c-9218-44ac-14e4-08de54300703
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|14060799003|376014|36860700013|7416014|82310400026|35042699022|1800799024;
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|7053199007;
 X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?cmpIWVhyS2p4R1YwdzQybDdhZDBVUFpHK3lxVHRMYUF1cGRlZ0cvTmg4SEt3?=
- =?utf-8?B?bEZscnliNElGaDlTNGQxdnVhYmplSDJLa0FuaEZKSGVnekdxc2YrcmFjaEhP?=
- =?utf-8?B?UGZIQlcvY1FVeXBjRVhIYTFhTWRGanVKYUJsNmtUdWZrcUFXVXhsdHVmVmhM?=
- =?utf-8?B?dnh6YmlqZ1E4bmkxYkhYeWhaZ3pWL0dnNU1JNlRlbmo5aU5pbDVWY0s3Tnl2?=
- =?utf-8?B?bHZzTlV3UW9jc2x2akR6K3hCbzRhWEpnTG04VGpZZkhFUFI3L2ZBdnVlT1Y2?=
- =?utf-8?B?QUFoMnZsSWJzMHd0UzYyQWhOaGN5bVZwcml5TmVrRDhzb0x5eG9mMlJ1YmlE?=
- =?utf-8?B?b3A4bmQxV0dhN05VRDJGQkpveW1wNDM1MkpSRXVCYklSVllpbmFWc1ZDNGtx?=
- =?utf-8?B?V0loZlZHSE5hbVhzb1JhempvdlNCNWdIdVFUNHlVemNUcXoxTlVweDlVMDZ1?=
- =?utf-8?B?c1I5aGtDdE9RRktKZUNzb3hUL2o5VUlkRXhnQWVJSzhoVUFwYWRDVU1wQkFF?=
- =?utf-8?B?dXpMTXcyS1lsNFIrU1hXU0tUeFFqalFuR0F3Q1Uyd1BFNmJ1ZkR5WG5kSDBk?=
- =?utf-8?B?SVBjb1JhcVFlUmM0NVdxTjVKY24xWndKY0NOUzVUVkR6OG9uNU83RHRUUWVS?=
- =?utf-8?B?c2psWGpxSW1SM204ZGRaV0RoTUtMU1JHVXpvRk95cW8vdXlxRnlaeXRFQ3Bo?=
- =?utf-8?B?WjY2NUZCOExlUmlSd0VSNjRaQXIyajJMdFg3WlV5NlVuNGgvaEVKR3lwenFm?=
- =?utf-8?B?Y1JFOEp5dE16TEkyZWo4Zm9zY1RBNkJvdTF6T0lXMVJRdFlwamFTRFNtWjZD?=
- =?utf-8?B?M2ZnQWJOTTFZRFBPSTk5OG1zUmVkZFd1TjI5VUorWGZCcHFLQkduMlBZcUJ0?=
- =?utf-8?B?ZHZUc2ozWjBpaS8rMzNtdlBSekNzYWpra00xNDdvd2MwK2pRTTJ5dnowVFZC?=
- =?utf-8?B?K01SaWt6ZDJTekQrQUkraEcyTG44Y0dWakt3eldMbkc5aSttYklIVTh5TEU5?=
- =?utf-8?B?NjF6Znk1TUJnZU9lODNVeEUyUmEzeE1va2VpMnhYTytXZnprSm5sUzFSaWly?=
- =?utf-8?B?TTVheGNuUDE0ZDJLZ0N3bkFZVFdoc1BjYUFGOHJJQ29NY1B6cml5OGNIUGlH?=
- =?utf-8?B?STdhTnprVDBvTHJaTkFUbEUvTW9SU0gzOTQyR2EwMUYxNE9kUm9Vc0VKV1BH?=
- =?utf-8?B?RUdzeEdZa0lNSzdtbWZnZUxQVXRuak5zRXE4azZzNjZvNEx4WFk3RnZFYldS?=
- =?utf-8?B?dUEreFY3SGZmUE9yN3RWZlc2bGNxT2k3UnVqRnc3aHhjVWloay92TFNlRkZW?=
- =?utf-8?B?MnE5WjNtbFFBTUIyN2l6ZE0wZ0RPR0Z4cVhQd2RGY1M5ZTMxcmhOekJaTFZZ?=
- =?utf-8?B?ZUxLZGV4QlhMMXdrditHTGthdU1TcFUwQ094eHlWb2NFOVhPR29GV3Izbzkw?=
- =?utf-8?B?MGltT1NwQ3lETWwzY0g0Q05LUUdwOGh1aFZmWmtqNGxhYjdHMnFtRVFkVVdl?=
- =?utf-8?B?M09va2Z5Y1R3VHJVUWwvbWh1UnVWSnNtY00yY0RabFpOa2t0NUZZa1FJVk96?=
- =?utf-8?B?d0d3c0xENURzUXdnTkp1djhZSHVpSGtHL1p0MVh6VnZBRm4wQ1ovdi9yUDFZ?=
- =?utf-8?B?aDN4aGFaMGdpdW5DK2l5WStsUWplYTRENmIvM1RpZWFhZE9pQXFaNWFXaFVv?=
- =?utf-8?B?Z3ZxdzBuL3FDbStVcjFIdDlGQ205bWZyU0pnSmpCMXA3ZXB4dlNwa1Uydk1F?=
- =?utf-8?B?ci9WcURFNFgxMlhIQ0VYbDZFdnY5QWJsYkNCUElVeHQ0VnBTcFFkZUdRMVlD?=
- =?utf-8?B?VnRuaUo4SFZtckQ3YThuTU5jS3R1MkdxTFdQMGlldlhVeUw2ZG00YWlGMUNK?=
- =?utf-8?B?b2hmTTBiTHpVYXdlYytWQ1QwQ3RVNnVTd1ZHT0VBR3N2eEJYbHNEZ2dpYzFm?=
- =?utf-8?B?RXI2NFN0Z2dCdGZXOFpIelNZemhtYkdaV2hpNE9zWU1FbDJsOTdRM2pKcTl2?=
- =?utf-8?B?UTROc2xaQWtUbEk4VlhUekh5VFIwSFhpVnA3VGFTWDYwb3d6TmVEbG5UZnVG?=
- =?utf-8?B?TzFaKzR2cmQ0RDJrb25kd2JSZ1N2SkF5RFJpdlhCMGpTSUF2TUk3cG1nNXo4?=
- =?utf-8?B?WWJnYlZFS3FOMGI5aGtONDBQM0JmVXF5M0ZGaXAzMHVXa3J2eTBPdENUT0ts?=
- =?utf-8?B?MUdZUmNOY24zVGYwdk94a3dMR0NaRy9jaGQ5VTJXU1lyTGFEd1NxZFR5Qi9s?=
- =?utf-8?B?ZzlkZXVOUHRkci9uV2lIRnVDQklnPT0=?=
+	=?us-ascii?Q?VjDg2pJzrfqpbcnWIxEyFETAzXKYL2p6RHkgWJ16YSddfPlTsI2V7bWrrw7J?=
+ =?us-ascii?Q?3KBUWpI0nJz0UJnQwVkny6xY5TfHkELy9LdvzIxVM1Kj2VbfL3uZYgJB1erl?=
+ =?us-ascii?Q?VrjYlEpUPLqZATOBbZTk75uoRyTHRQmvkFcqbkAqCbm2W/kzenXNev2Fxyh3?=
+ =?us-ascii?Q?cpFC8cYwqVEOA+Hl0GcWawGT3HvsjJUc8FlT3821uQOft6nHf4i8VrUGMTBa?=
+ =?us-ascii?Q?N/q+kuziyU7NiPvuFCdIj4x5cr7fyTOcEXs7y2qXknb1VQnUk094/9Q1JP8C?=
+ =?us-ascii?Q?lioM++QYAMn2xS+iJKw9XpPSSmy5pdcb4FRn9/Fvgv4T2RPXlpIf+khL4ZvS?=
+ =?us-ascii?Q?ZjzJGChicZcnm5xfxpIyApEvcCU9wqEd1bBNmG6449JJpGekmdd1k8riKHSC?=
+ =?us-ascii?Q?no+7zrgh5barHHr8lyzk2JHb5oOkAEWcE0ZyX70G+VkK5zhsS89TMqB4O1yC?=
+ =?us-ascii?Q?WSzj8JiGNBCmgeRZOZqX9qsP+Rr7bd47ht5SQS1WRJUquHx1HIRRWEfL9xcL?=
+ =?us-ascii?Q?d+sp3A9GZwx81UpyNc8DAihMcLfShJ0JV0aPRnAZ3e6mv8AC7gKWITjjL1iU?=
+ =?us-ascii?Q?9pGafcDkKhv9MZmY4o6+2jPUCpv6NEp9mDBT7nPSOJKjKaVVlmu5vLQbYZh5?=
+ =?us-ascii?Q?dzRdP5nEUlJySo4uAdSZk1myuqHYUxoCakBNFsYNs5LBCbdmg3wVO486gWrp?=
+ =?us-ascii?Q?HxS0yzFSOZoInmp5de/LIUGyBtkpITHRwS84SsyuXn6gygofproDEOrC+eWQ?=
+ =?us-ascii?Q?TmcHRpaPqyfu7GKWPp7M6O51vVrKdUly/pqWq5LO40Gyg/5EEFWSElH8cqze?=
+ =?us-ascii?Q?PFrNnb4+FHJjX8S3VBgMGK6y8sa+4KYOeCCsiqOdFx8gOS2Lc8r3fFbEQT+R?=
+ =?us-ascii?Q?8aNE179/t2dafynkv7Bqdj28vOCagQs4yqiDvvyrDcOEZg/l2tNoGhWKySMn?=
+ =?us-ascii?Q?oTuYob3yX8F73Dil/qnXdNbUb5a2qtnyuldBA76r6CeHXDYgobQR7YnOGtEM?=
+ =?us-ascii?Q?PEyzoCzVKQ24jbQYGCMrTW/KkV77oOtaIG7wJYEOJHrbh1aWXh+TUvbO7+qr?=
+ =?us-ascii?Q?0D5a6H3A/0FGvf5s9wBcChxN/kmr3sgi/lemt25fCCP4289sOSlQVVjeZTbF?=
+ =?us-ascii?Q?N0Pa4PMHLGQA1tyb3G0wTZ4QdhVeC65BtEffOqKRfDRgjVPS3V8z9Yl0V2ne?=
+ =?us-ascii?Q?DBV3bOyNJFh944wkXDO+dZMWfPm050qL9TjfiQ5Flh8JelWF/8upgZqRoXYg?=
+ =?us-ascii?Q?/ZVWI8Zkk72MMkiroYD3KoE7MeO63/9XZDArWnSfCCiqD1dwlWoA12WND1c8?=
+ =?us-ascii?Q?pVcXFYDv8O4ZhmLaXauzyM6o7xVWZnPZ+p7owe039kYfA2RlZzFvgqi94hme?=
+ =?us-ascii?Q?YT7wq0HRWWdqtX2TOCuODQK2tHtQuUSPiE+NKux7sWO3/A/KNNizOWLNt7ni?=
+ =?us-ascii?Q?SVcGhpL6pF7VlYXCv258FDElcbOoUgUCaXs1FK8hcDw0myJu9WZX5YW/J1SF?=
+ =?us-ascii?Q?xevCQEzHUY2GptFnYALqtYtrnyoUBfkqFeIUhCILKHnMoPVR8utnNDl6NBdD?=
+ =?us-ascii?Q?E4wHCWwG1YGSM9STerc=3D?=
 X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(14060799003)(376014)(36860700013)(7416014)(82310400026)(35042699022)(1800799024);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 12:18:23.8417
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL4PR10MB8229.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?KuqN3U67k3hWYxnpKjg3BC3QCbBZ2eFzZzk9PZf4qyK6E05N6fp/zyopoHB8?=
+ =?us-ascii?Q?Bq+svUq/bQ/QmKAcpsNAiGTFuKKafQwFt4GcjC7EdEgfP68W3R5pngpXSoKq?=
+ =?us-ascii?Q?cUNjxkAGyVnAjpVNrXXCOWtgXafbmvIsqbwCJJ8XHsdu1gwkpsjE7XIWPxr9?=
+ =?us-ascii?Q?uOJL0F6dP/myj2yEd2yh26ozUE3Z/eSD31DjE0CUBhv8xmcmdEby43ZKhf5H?=
+ =?us-ascii?Q?vGaoljoPAvN2iIfviwbcn58kY/Ej3AJnOeAVgFcy0mbAImogkSC6Ipw3v7Ty?=
+ =?us-ascii?Q?odlu5duCmE336ui/Vq96XHDuE2b7xUU+4CLV56zwH9zdY8UFI23baT8k6Bj2?=
+ =?us-ascii?Q?fpX87Z0nXN52zJu2a4Yo9JxGfwkJSMlRfTpyw06Pq1tEQJa4zs9tj42rg5Xe?=
+ =?us-ascii?Q?yDAbOxlZXmM5BPdt9iMOiSOQ6txj31eEHTpMOAXhvlYsRAx53idklY7qzO8r?=
+ =?us-ascii?Q?OrO9sgVAGu6MJFvdxz3NvYEXsRpor+4WrbgZpwEjYZtNTxXk9R1jDpqqOz9b?=
+ =?us-ascii?Q?KjEZC3GlFVkJGATiirudOsh2MmKQ+0AHzMdCkBwcUN8FyxsxfFy+B+Wist32?=
+ =?us-ascii?Q?/dLpPNW3zXUPFOkDKmW+RoMQdlRKO/qFCJKsNl/xm5XWZ65xgmRnMG+KLsCQ?=
+ =?us-ascii?Q?i9n3ynWJhmBoFbPGqdEC6/OITsCnyP3dYjxkFIOb/0Z7qvPI8tE9pRMSRkSZ?=
+ =?us-ascii?Q?ybJrxcNL7WOK2WTcu61/TAfC8IOCfuW/fheyBUVCXMHDKmoSxCgACZCmvp3k?=
+ =?us-ascii?Q?mD0eh1IuuAU8vx4R9h0yg4weZ8c2gYKHg7ZDxFoSVf18d09XX939F6CIhho3?=
+ =?us-ascii?Q?0gMi+LvxKfZQjKPUk5lwaj0ZjoP9kWcQ0a1J9wcbU2QGwcnlhwtU9A8AcuDM?=
+ =?us-ascii?Q?tN/xIoqvQG9RHt/w7TT7OzIASv6uHgPovRUZtFFJrKZflspXpiQJwubKz0G4?=
+ =?us-ascii?Q?HAHr75WMd0Z6ab9I2MQlyG0MP04WxMrxcBjZofp6fJVWVXFOU6RTBWW4ySYW?=
+ =?us-ascii?Q?mRZDQKDkYaZiOohzdO3HMSy7sK35ZCkyTkAbTc8cZYRnUJXNa7OqY8nfEwdx?=
+ =?us-ascii?Q?tKkQAVGi99KGWJdL4mRMU1+gMdsIPebS+pBxsYrugCQ4vDjlQZPojAJEH5O6?=
+ =?us-ascii?Q?SX3507R4grejwJUuiThCJnIDhLKRvWJVqKyprD8OMEpGIDUNuPMynTvGknWW?=
+ =?us-ascii?Q?CeBGqCIFFMbFLR9B0bne3XOhMCBrqa1hkAJ92HGYzUI89vdxYLpyVOqN4Mj0?=
+ =?us-ascii?Q?fR2mCdf8HerahZE093oy/93czELF0KY+1UHoVRYsORqbc1gr6sRHLoKCCmW8?=
+ =?us-ascii?Q?Z3W/ghEkVkagG8hKUz3mmUH+8D7R6zDteudXVt9G2O4slMPtdALV/gGGVqjO?=
+ =?us-ascii?Q?CPYJW1H6HGHJlxCtqBZnA/yYuglfoRZ7LXDfs38NJSTIZ4s38HwVY5FWCrlB?=
+ =?us-ascii?Q?whA+ohJSYQmeXSF5H9CfY6KBWJJAMTi+R6f1COdPG72LOKw3bl8FkiotLR/H?=
+ =?us-ascii?Q?TK+mMDO2hDSe23fNZ+6sdxQWII1r5vlQuuua36x1wNJ7dXmS7LbuMjT0N997?=
+ =?us-ascii?Q?1FrCpPpHs6bfydbCnzCBhN0c9O2Xm+LB20r5dccz0GnfhWO428e9/w+xd6Og?=
+ =?us-ascii?Q?ePCk9i9qbi7z6DlbOcwAbkeXly7OY/jQylhCX+Ps3wPJY/uY8FNmWbSUblED?=
+ =?us-ascii?Q?yu94N+vDeIun93ioB/kh5bPi1wqqUUyFBUryabl9NxLNzKXEk5EXkRQvhVW0?=
+ =?us-ascii?Q?Ta4bsR+22Gnn6186shqfI2HqNuXlsjs=3D?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	W9p/P16MMsfOBQLDSf8YVQMohtKAkS3/cIznimsxxzuFg2aeBZL6GXJK1GzpInn1zdE4RgEoddQfeAOli0McH3FdjAetwYvQSyVKcZXfHq1uv8TALppEfa8vxpp3ScDEcP2aNZSoGlVEGeS9xBx+ApcBSEJ7yb1U8ApkJNMnzb4pMrm6zszvpOK8fvYjoY/58DAnloru05O/2/fjKenyDUSVAOGg4NcpQPIqOsPG7ETyz/a6mfbA4L59dlSGjSKvaQ9Rn+TOKzuE7+mkPzE4DUNnc/m0fsPI2TooT5l7eq1cshc8WreHfogaHzP8W3U7icekU/2+YDgf6m86tOT/Wu6VkoUw2CZyOwjHIVphergyCA2AisK7jPuCizWfC9VZJx5oqbwzG/h4nmxBcQu22wQxVrpDmRFK2LGe+znbWp3DEr4VG24ScE7jdIeINw1sOC2JXk1H05ph/gh38tYpC2VvlHjylc/ceT9W7NY3yIqLgY9pjyo7X75GxwMWkK40oX25RAionPv8osKK6gj/mWI4PmxIKnXJWtT4Cj0CLTja7Ef0+4jFGmncjL6H3VthVgpnpjBECBiXFnLaEL+jgryjnB+duU+UoqgxhLBQ6Cg=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0cd608a-b7ee-43a8-2aa8-08de54301f75
+X-MS-Exchange-CrossTenant-AuthSource: BL4PR10MB8229.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2026 12:18:00.2859
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6bd7891c-c3f9-48ca-a244-08de54302df3
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AM4PEPF00027A6A.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB6123
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ty4K5ZpGUYFkQ3nM8FCOyiGZs88dSY71OVMj59HJs6ZWXFX30V2UTk2qFTUzmjdYfCczJGTHQivhKwXfFvQ4RlQci562mA69AtPT5Fgd4Uk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PPF509E676A9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-15_03,2026-01-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 suspectscore=0
+ mlxscore=0 adultscore=0 phishscore=0 malwarescore=0 bulkscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2512120000 definitions=main-2601150091
+X-Proofpoint-GUID: Y2-nap6QGaLk4Geco0BdY7MojNIItv-4
+X-Proofpoint-ORIG-GUID: Y2-nap6QGaLk4Geco0BdY7MojNIItv-4
+X-Authority-Analysis: v=2.4 cv=ZtLg6t7G c=1 sm=1 tr=0 ts=6968db13 cx=c_pps
+ a=XiAAW1AwiKB2Y8Wsi+sD2Q==:117 a=XiAAW1AwiKB2Y8Wsi+sD2Q==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=vUbySO9Y5rIA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=VwQbUJbxAAAA:8 a=VDBE-ABgvQpKTPO6jUEA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTE1MDA5MCBTYWx0ZWRfX6zZiO6orGJy0
+ o23iyUJgNCsJI2osEEq+wbwngu+8zSlo/0uI66bvcHBN9YlDpTnxeYHsHPlnULSw+TQp6u6LIsB
+ tmdC245A90+ltw2c4IQ9MB3/g/QwWi8GAmiWlZKa1ry9Hhn29saNsoLAXNGB1J5m+kkVCrkINVs
+ xUDDx/WkCK50Q+taZpyYx6pss5lDuCzlgHOv3N+AZ21428ea3USo/dfErF7vs81N6FXB5iLx62H
+ NP5mjTsi/Z9Raontq7hY6aEWs1eZeP5dU9Zn3hZrBFcMeANJnvfaieYfeWX0QFUW/yLmVLVc7F7
+ JR5n+DltVK9dH07x0ejMdKnJIqtuBEjsUOOF6PQ/a/C3DkibywdnX7Zb4aBQ/oXD5Wq13iDhwhp
+ uiPzXTNNOS51FE/de+4pSPlG69Z43BU/mNNNpo0eX/dYz6u1EaJecyiDrgrsBKWZQJer6Iqfovz
+ LRubYh/3k48LVTSUlYQ==
 
-On 14/01/2026 14:15, Borislav Petkov wrote:
-> On Mon, Dec 29, 2025 at 11:54:36AM +0000, Ahmed Tiba wrote:
->> By “error status” I’m referring to the UEFI CPER Generic Error Status block,
->> which is the standard firmware-produced error payload that Linux already
-> 
-> Standard, schmandard - a bunch of fw crap.
-> 
-> That's UEFI's understanding of a common platform error record, no?
-> 
-> So why is this a generic estatus and not part of CPER-something?
-> 
-> You're calling something "estatus" which sounds like a generic thing but it is
-> simply a subset of functionality you need to make it work on ARM without
-> ACPI and have packaged whatever you need under the name "estatus".
-> 
-> Why does this thing need to be called an "estatus core"?
+On Thu, Jan 15, 2026 at 10:19:54AM +0100, David Hildenbrand (Red Hat) wrote:
+> Let's update the balloon page references, the balloon page list, the
+> BALLOON_MIGRATE counter and the isolated-pages counter in
+> balloon_page_migrate(), after letting the balloon->migratepage()
+> callback deal with the actual inflation+deflation.
+>
+> Note that we now perform the balloon list modifications outside of any
+> implementation-specific locks: which is fine, there is nothing special
+> about these page actions that the lock would be protecting.
+>
+> The old page is already no longer in the list (isolated) and the new page
+> is not yet in the list.
+>
+> Let's use -ENOENT to communicate the special "inflation of new page
+> failed after already deflating the old page" to balloon_page_migrate() so
+> it can handle it accordingly.
+>
+> While at it, rename balloon->b_dev_info to make it match the other
+> functions. Also, drop the comment above balloon_page_migrate(), which
+> seems unnecessary.
+>
+> Signed-off-by: David Hildenbrand (Red Hat) <david@kernel.org>
+> ---
+>  arch/powerpc/platforms/pseries/cmm.c | 16 ---------
+>  drivers/misc/vmw_balloon.c           | 49 +++++-----------------------
+>  drivers/virtio/virtio_balloon.c      | 12 -------
+>  mm/balloon_compaction.c              | 37 ++++++++++++++++++---
+>  4 files changed, 41 insertions(+), 73 deletions(-)
+>
+> diff --git a/arch/powerpc/platforms/pseries/cmm.c b/arch/powerpc/platforms/pseries/cmm.c
+> index 9a6efbc80d2ad..15f873f733a41 100644
+> --- a/arch/powerpc/platforms/pseries/cmm.c
+> +++ b/arch/powerpc/platforms/pseries/cmm.c
+> @@ -501,8 +501,6 @@ static int cmm_migratepage(struct balloon_dev_info *b_dev_info,
+>  			   struct page *newpage, struct page *page,
+>  			   enum migrate_mode mode)
+>  {
+> -	unsigned long flags;
+> -
+>  	/*
+>  	 * loan/"inflate" the newpage first.
+>  	 *
+> @@ -517,9 +515,6 @@ static int cmm_migratepage(struct balloon_dev_info *b_dev_info,
+>  		return -EBUSY;
+>  	}
+>
+> -	/* balloon page list reference */
+> -	get_page(newpage);
+> -
+>  	/*
+>  	 * When we migrate a page to a different zone, we have to fixup the
+>  	 * count of both involved zones as we adjusted the managed page count
+> @@ -530,22 +525,11 @@ static int cmm_migratepage(struct balloon_dev_info *b_dev_info,
+>  		adjust_managed_page_count(newpage, -1);
+>  	}
+>
+> -	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
+> -	balloon_page_insert(b_dev_info, newpage);
+> -	__count_vm_event(BALLOON_MIGRATE);
+> -	b_dev_info->isolated_pages--;
+> -	spin_unlock_irqrestore(&b_dev_info->pages_lock, flags);
+> -
+>  	/*
+>  	 * activate/"deflate" the old page. We ignore any errors just like the
+>  	 * other callers.
+>  	 */
+>  	plpar_page_set_active(page);
+> -
+> -	balloon_page_finalize(page);
+> -	/* balloon page list reference */
+> -	put_page(page);
+> -
+>  	return 0;
+>  }
+>  #else /* CONFIG_BALLOON_COMPACTION */
+> diff --git a/drivers/misc/vmw_balloon.c b/drivers/misc/vmw_balloon.c
+> index 07e60a4b846aa..52b8c0f1eead7 100644
+> --- a/drivers/misc/vmw_balloon.c
+> +++ b/drivers/misc/vmw_balloon.c
+> @@ -1724,18 +1724,17 @@ static inline void vmballoon_debugfs_exit(struct vmballoon *b)
+>   * @page: a ballooned page that should be migrated.
+>   * @mode: migration mode, ignored.
+>   *
+> - * This function is really open-coded, but that is according to the interface
+> - * that balloon_compaction provides.
+> - *
+>   * Return: zero on success, -EAGAIN when migration cannot be performed
+> - *	   momentarily, and -EBUSY if migration failed and should be retried
+> - *	   with that specific page.
+> + *	   momentarily, -EBUSY if migration failed and should be retried
+> + *	   with that specific page, and -ENOENT when deflating @page
+> + *	   succeeded but inflating @newpage failed, effectively deflating
+> + *	   the balloon.
+>   */
+>  static int vmballoon_migratepage(struct balloon_dev_info *b_dev_info,
+>  				 struct page *newpage, struct page *page,
+>  				 enum migrate_mode mode)
+>  {
+> -	unsigned long status, flags;
+> +	unsigned long status;
+>  	struct vmballoon *b;
+>  	int ret = 0;
+>
+> @@ -1773,14 +1772,6 @@ static int vmballoon_migratepage(struct balloon_dev_info *b_dev_info,
+>  		goto out_unlock;
+>  	}
+>
+> -	/*
+> -	 * The page is isolated, so it is safe to delete it without holding
+> -	 * @pages_lock . We keep holding @comm_lock since we will need it in a
+> -	 * second.
+> -	 */
+> -	balloon_page_finalize(page);
+> -	put_page(page);
+> -
+>  	/* Inflate */
+>  	vmballoon_add_page(b, 0, newpage);
+>  	status = vmballoon_lock_op(b, 1, VMW_BALLOON_4K_PAGE,
+> @@ -1799,36 +1790,12 @@ static int vmballoon_migratepage(struct balloon_dev_info *b_dev_info,
+>  		 * change.
+>  		 */
+>  		atomic64_dec(&b->size);
+> -	} else {
+>  		/*
+> -		 * Success. Take a reference for the page, and we will add it to
+> -		 * the list after acquiring the lock.
+> +		 * Tell the core that we're deflating the old page and don't
+> +		 * need the new page.
+>  		 */
+> -		get_page(newpage);
+> -	}
+> -
+> -	/* Update the balloon list under the @pages_lock */
+> -	spin_lock_irqsave(&b->b_dev_info.pages_lock, flags);
+> -
+> -	/*
+> -	 * On inflation success, we already took a reference for the @newpage.
+> -	 * If we succeed just insert it to the list and update the statistics
+> -	 * under the lock.
+> -	 */
+> -	if (status == VMW_BALLOON_SUCCESS) {
+> -		balloon_page_insert(&b->b_dev_info, newpage);
+> -		__count_vm_event(BALLOON_MIGRATE);
+> -	} else {
+> -		__count_vm_event(BALLOON_DEFLATE);
+> +		ret = -ENOENT;
+>  	}
+> -
+> -	/*
+> -	 * We deflated successfully, so regardless to the inflation success, we
+> -	 * need to reduce the number of isolated_pages.
+> -	 */
+> -	b->b_dev_info.isolated_pages--;
+> -	spin_unlock_irqrestore(&b->b_dev_info.pages_lock, flags);
+> -
+>  out_unlock:
+>  	up_read(&b->conf_sem);
+>  	return ret;
+> diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+> index 74fe59f5a78c6..df2756c071dae 100644
+> --- a/drivers/virtio/virtio_balloon.c
+> +++ b/drivers/virtio/virtio_balloon.c
+> @@ -827,7 +827,6 @@ static int virtballoon_migratepage(struct balloon_dev_info *vb_dev_info,
+>  {
+>  	struct virtio_balloon *vb = container_of(vb_dev_info,
+>  			struct virtio_balloon, vb_dev_info);
+> -	unsigned long flags;
+>
+>  	/*
+>  	 * In order to avoid lock contention while migrating pages concurrently
+> @@ -840,8 +839,6 @@ static int virtballoon_migratepage(struct balloon_dev_info *vb_dev_info,
+>  	if (!mutex_trylock(&vb->balloon_lock))
+>  		return -EAGAIN;
+>
+> -	get_page(newpage); /* balloon reference */
+> -
+>  	/*
+>  	  * When we migrate a page to a different zone and adjusted the
+>  	  * managed page count when inflating, we have to fixup the count of
+> @@ -854,11 +851,6 @@ static int virtballoon_migratepage(struct balloon_dev_info *vb_dev_info,
+>  	}
+>
+>  	/* balloon's page migration 1st step  -- inflate "newpage" */
+> -	spin_lock_irqsave(&vb_dev_info->pages_lock, flags);
+> -	balloon_page_insert(vb_dev_info, newpage);
+> -	vb_dev_info->isolated_pages--;
+> -	__count_vm_event(BALLOON_MIGRATE);
+> -	spin_unlock_irqrestore(&vb_dev_info->pages_lock, flags);
+>  	vb->num_pfns = VIRTIO_BALLOON_PAGES_PER_PAGE;
+>  	set_page_pfns(vb, vb->pfns, newpage);
+>  	tell_host(vb, vb->inflate_vq);
+> @@ -869,10 +861,6 @@ static int virtballoon_migratepage(struct balloon_dev_info *vb_dev_info,
+>  	tell_host(vb, vb->deflate_vq);
+>
+>  	mutex_unlock(&vb->balloon_lock);
+> -
+> -	balloon_page_finalize(page);
+> -	put_page(page); /* balloon reference */
+> -
+>  	return 0;
+>  }
+>  #endif /* CONFIG_BALLOON_COMPACTION */
+> diff --git a/mm/balloon_compaction.c b/mm/balloon_compaction.c
+> index 03c5dbabb1565..5444c61bb9e76 100644
+> --- a/mm/balloon_compaction.c
+> +++ b/mm/balloon_compaction.c
+> @@ -232,20 +232,49 @@ static void balloon_page_putback(struct page *page)
+>  	spin_unlock_irqrestore(&b_dev_info->pages_lock, flags);
+>  }
+>
+> -/* move_to_new_page() counterpart for a ballooned page */
+>  static int balloon_page_migrate(struct page *newpage, struct page *page,
+>  		enum migrate_mode mode)
 
-The CPER records are defined as part of UEFI specs, but its primary way 
-to report it is via APEI/GHES.
+I honestly wonder if page should be 'oldpage', or rather we should just match
+args to the struct movable_operations e.g. dst, src?
 
-In drivers/acpi/apei/ghes.c, this subset of CPER handling
-is already implemented using a number of helpers mostly named
-estatus_* rather than cper_*. The naming therefore originates
-from the existing GHES implementation, not from a new abstraction.
+>  {
+> -	struct balloon_dev_info *balloon = balloon_page_device(page);
+> +	struct balloon_dev_info *b_dev_info = balloon_page_device(page);
+> +	unsigned long flags;
+> +	int rc;
+>
+>  	VM_BUG_ON_PAGE(!PageLocked(page), page);
+>  	VM_BUG_ON_PAGE(!PageLocked(newpage), newpage);
+>
+>  	/* Isolated balloon pages cannot get deflated. */
 
-What I did was lift that existing estatus_* logic so it can be reused by 
-a non-ACPI provider, rather than duplicating the CPER handling
-in a parallel DT path.
+Hmm, I'm a bit confused by this comment, isn't 'page' isolated?
 
-> I'd expect to see a compilation unit which contains shared functionality, gets
-> linked to your stuff and that's it. No "fanfares", no CONFIG symbols, no
-> nothing.
+This comment reads like !b_dev_info implies page isolated and thus a
+WARN_ON_ONCE() issue, but later you say 'Free the now-deflated page we isolated
+in balloon_page_isolate().' in reference to page?
 
-That’s a reasonable expectation, and I’m fine aligning with it.The 
-approach mirrors drivers/firmware/efi/cper.c, which factors out shared 
-functionality for reuse without adding extra fanfare.
+So both can't be true.
 
->> consumes via GHES on ACPI systems. I’m not introducing a new error model
->> here; the intent is to reuse the existing CPER decoding and handling once
->> that payload exists.
-> 
-> So why aren't you doing only that? Why are you doing all that extra stuff?
+> -	if (WARN_ON_ONCE(!balloon))
+> +	if (WARN_ON_ONCE(!b_dev_info))
+>  		return -EAGAIN;
+>
+> -	return balloon->migratepage(balloon, newpage, page, mode);
+> +	rc = b_dev_info->migratepage(b_dev_info, newpage, page, mode);
+> +	switch (rc) {
+> +	case 0:
+> +		spin_lock_irqsave(&b_dev_info->pages_lock, flags);
+> +
+> +		/* Insert the new page into the balloon list. */
 
-Because the DT-based path still needs a clean way to call into the 
-shared logic without dragging in ACPI plumbing.
+Slightly weird to put this comment next to the pageref update then a newline
+hten the actual insertion bit.
 
->> The practical use case is firmware-first RAS platforms that emit CPER
->> records but do not use ACPI/APEI GHES for discovery or notification. Today,
->> those platforms either have to duplicate CPER parsing logic or miss out on
->> the common Linux RAS handling (standard logging, memory failure flow,
->> vendor notification paths). As a result, the full firmware-first RAS
->> pipeline effectively only works when CPER arrives through GHES.
-> 
-> Yah, got it.
-> 
-> But see above.
-> 
-> Please do not "over-design" this into a separate thing but simply carve out
-> the functionality and share it. And leave it where it belongs
-> - drivers/firmware/efi/ is not the right place as this isn't really EFI. This
-> is a piece of APEI/GHES crap you need.
+> +		get_page(newpage);
+> +
+> +		balloon_page_insert(b_dev_info, newpage);
+> +		__count_vm_event(BALLOON_MIGRATE);
+> +		break;
+> +	case -ENOENT:
+> +		spin_lock_irqsave(&b_dev_info->pages_lock, flags);
+> +
+> +		/* Old page was deflated but new page not inflated. */
 
-As it stands, that code is coupled to APEI/GHES and ACPI assumptions. 
-Reusing it directly from a DT-based path would implicitly require ACPI, 
-which defeats the purpose of supporting firmware-first RAS
-on non-ACPI platforms.
+Weird reference to old page and new page when old page is 'page', with dst, src
+we could just say destination/source?
 
-Thanks for the discussion.
+> +		__count_vm_event(BALLOON_DEFLATE);
+> +		break;
+> +	default:
+> +		return rc;
 
-Regards,
-Ahmed
+Don't we need to change the isolate stats etc. if we simply fail here? Or does
+the movable ops logic correctly handle this for us?
+
+Ah I guess baloon_page_putback() would be invoked :) Fun!
+
+> +	}
+
+It's subjective and pedantic but I don't love this use of the switch here, it
+really makes it seem like 'just another case' to do the _key_ action here of
+migrating a balloon page. Also could compress things a bit, that's even more
+subjective :)
+
+Also it's kind of horrible to have the spin lock line duplicated like that,
+that's more important and not clear on quick glance to see whether matching
+lock/unlock.
+
+So maybe change to something like:
+
+	rc = b_dev_info->migratepage(b_dev_info, newpage, page, mode);
+	if (rc < 0 && rc != -ENOENT)
+		return rc;
+	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
+	if (rc == -ENOENT) {
+		/* Old page was deflated but new page not inflated. */
+		__count_vm_event(BALLOON_DEFLATE);
+	} else {
+		get_page(newpage);
+		/* Insert the new page into the balloon list. */
+		balloon_page_insert(b_dev_info, newpage);
+		__count_vm_event(BALLOON_MIGRATE);
+	}
+
+Or even could be:
+
+	rc = b_dev_info->migratepage(b_dev_info, newpage, page, mode);
+	if (rc < 0 && rc != -ENOENT)
+		return rc;
+
+	spin_lock_irqsave(&b_dev_info->pages_lock, flags);
+	b_dev_info->isolated_pages--;
+	if (!rc) {
+		get_page(newpage);
+		/* Insert the new page into the balloon list. */
+		balloon_page_insert(b_dev_info, newpage);
+		__count_vm_event(BALLOON_MIGRATE);
+	}
+	spin_unlock_irqrestore(&b_dev_info->pages_lock, flags);
+	/* If -ENOENT, old page was deflated but new page not inflated. */
+	__count_vm_event(rc ? BALLOON_DEFLATE : BALLOON_MIGRATE);
+
+To only lock over the operations that actually need it and to really highlight
+the 'success' path?
+
+> +
+> +	b_dev_info->isolated_pages--;
+> +	spin_unlock_irqrestore(&b_dev_info->pages_lock, flags);
+> +
+> +	/* Free the now-deflated page we isolated in balloon_page_isolate(). */
+> +	balloon_page_finalize(page);
+> +	put_page(page);
+
+OK so we get on migrate, but put the source page which would have got gotten
+previously I guess?
+
+> +
+> +	return 0;
+>  }
+>
+>  const struct movable_operations balloon_mops = {
+> --
+> 2.52.0
+>
+
+Thanks, Lorenzo
 
