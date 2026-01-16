@@ -1,99 +1,201 @@
-Return-Path: <linux-doc+bounces-72733-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72735-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20D60D37AB3
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Jan 2026 18:50:06 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
+	by mail.lfdr.de (Postfix) with ESMTPS id 700F0D37AC9
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Jan 2026 18:53:01 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id F164A307D614
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Jan 2026 17:49:09 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id B2B6730205B2
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Jan 2026 17:52:07 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 58DDE39B48F;
-	Fri, 16 Jan 2026 17:48:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D8BFD3A0B09;
+	Fri, 16 Jan 2026 17:51:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b="q4FOfOUz"
+	dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b="ATajx2eA"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from ms.lwn.net (ms.lwn.net [45.79.88.28])
+Received: from fra-out-004.esa.eu-central-1.outbound.mail-perimeter.amazon.com (fra-out-004.esa.eu-central-1.outbound.mail-perimeter.amazon.com [3.74.81.189])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CC573659E4;
-	Fri, 16 Jan 2026 17:48:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.79.88.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B6BF39C634;
+	Fri, 16 Jan 2026 17:51:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=3.74.81.189
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768585734; cv=none; b=t/4lSblrQeAmczGVVsQ3IIoLeU9I/P3CgIPS8iSjrbubf67m0o616yZhtjU3gnqLd4JBmi9mcOhSJvfKsT9iaRzX0N+IilcjJ0pVS7U4WIol/7n9WJ+SUMUe9X0lOWRDp2EOiiApsOyEk6lDD6BXTpM5D1046UUVsfkJkKPPr6E=
+	t=1768585912; cv=none; b=a431GF7gvfVbmyT7I/NDpxIXUG8L9+pURiy+XYdBH0+T4UPnP+QuUF8BsphNCGD4BSOp+RJZONWMKqpfC/GwIRyuO7bZ7T2bPiabXc9U6V0ecJONWbBl8nftj4+lVa7DVJQOHXmvQniEPQQSmI46BBycCkuLE9m6Z6sIk/u1bYQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768585734; c=relaxed/simple;
-	bh=gMQ3Kn6duO5K4C+v13NxvvgOle96l26rtjp76iy9njw=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=kY7HchwPUAxcdACQOPF+cSs7xSDVgf+85ntkPnOwSfMhxnyRN4IrKcjXim11IfPiELhVlq+i3zdJeHKZpTlP6eZgbgrbhqokOZFtXYwwtMyozrlVc3z4cCBygytYz24Xip/fIl0B4DJj39A6btVgDPW8SEqD8WjiKXvdvTp+RWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net; spf=pass smtp.mailfrom=lwn.net; dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.b=q4FOfOUz; arc=none smtp.client-ip=45.79.88.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lwn.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lwn.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 6731840425
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1768585732; bh=SJhFVedYpxbiqojAAn+OWSPvu8sRuqq5A+kGvQ23Ick=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=q4FOfOUzkjKXnDUiYNHoV0VCVNY1ywkBeKP6R+1vz70Gg/qFYQQT4d1PiACm3hg19
-	 dPdqFNqcc9XzsRzA77PpsJW2B2cvharr3dHRRGTVToiExqGpPGB8aocsqjE4wQc3ke
-	 DuFHU5TZu4QUMrySsNgEXzHnxPNfduzLUKhae0VrfjGmIXW7c1wfTdC8h1oVu9x97u
-	 9fJl0dJzgz80Qv4AklpBPBgQNWB0FF8NYqSTNZYOg81dkgr/G7G40OhuEBVzf2te/m
-	 VK4dJNkqa00frih2OZh1DtV+vngUg29CDXxlll0OijjhhUIrX42l5G/cyLjD2W1nUi
-	 I21WHmZR9P51g==
-Received: from localhost (unknown [IPv6:2601:280:4600:27b::1fe])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by ms.lwn.net (Postfix) with ESMTPSA id 6731840425;
-	Fri, 16 Jan 2026 17:48:52 +0000 (UTC)
-From: Jonathan Corbet <corbet@lwn.net>
-To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, Akira Yokosawa <akiyks@gmail.com>, Shuah
- Khan <shuah@kernel.org>, Jani Nikula <jani.nikula@linux.intel.com>
-Subject: Re: [PATCH 0/2] Move kernel-doc to tools/docs
-In-Reply-To: <20260114212558.1aeb1b17@foz.lan>
-References: <20260114164146.532916-1-corbet@lwn.net>
- <813cd0b6-e23b-4571-91fa-224106d3ad54@infradead.org>
- <87zf6gt2ts.fsf@trenco.lwn.net> <20260114212558.1aeb1b17@foz.lan>
-Date: Fri, 16 Jan 2026 10:48:51 -0700
-Message-ID: <87wm1ho3cs.fsf@trenco.lwn.net>
+	s=arc-20240116; t=1768585912; c=relaxed/simple;
+	bh=pH0sjRk5QHkFsF7GNqODJXSxVQ1zsneslUTGuhZpomA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
+	 In-Reply-To:Content-Type; b=b50cTB+2Tw4br9C8n3fte439QvVJmWOjIAoRr91vb7UKtbxG83yA/eXzpzUKttWrUdcgocvrQWQszBM/IaqPhO+B3CU5kt1m8viuGo7JAACvHTQn2Q4mDyOkkfnp40eb9yK33Gmmkhybi194F6p9W+M78z+t8//3MVBWwzafJd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.co.uk; dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b=ATajx2eA; arc=none smtp.client-ip=3.74.81.189
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.co.uk
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
+  t=1768585911; x=1800121911;
+  h=message-id:date:mime-version:reply-to:subject:to:cc:
+   references:from:in-reply-to:content-transfer-encoding;
+  bh=n3dU03TxGYY3gXB5y1WjelwjMhwgBHF8SdzzakH2Vf0=;
+  b=ATajx2eA22WDfxXGaqIYpQE6LlDeXf6ZrUgI/bqm9epugjnxg3HDKyOd
+   LQlcYnXiEWo/uXMsw7HC0K5bvpIu+ZYfjdCTJGYQLQtdgc4luFxcycG1W
+   7PW6Ny/hcS2Eg2w6AuYJbHJ78KajIuCDGu5YfmOlutOjvzYtDL5Ta4HL3
+   yOQ2lTSW/f1rLyLkuCA4UuR6a2vLiOeI9t9HLgYB7liJcLdB61HS28oMo
+   ifqTDAKVhmURIaVvBfHY08dxtb3glq/v9EpB0kCxOtrPTHVco/bjIKm7p
+   smfuF+HkrxXNCLJeXipY+YiFAXlt/Bd2I1tqRTS+vREPRUFpi7R3jN0eF
+   A==;
+X-CSE-ConnectionGUID: 0QIKAWpmQ6KIzk2q7ONlfg==
+X-CSE-MsgGUID: 557UGuZhT/aa8eVdXv+XUw==
+X-IronPort-AV: E=Sophos;i="6.21,231,1763424000"; 
+   d="scan'208";a="8036550"
+Received: from ip-10-6-11-83.eu-central-1.compute.internal (HELO smtpout.naws.eu-central-1.prod.farcaster.email.amazon.dev) ([10.6.11.83])
+  by internal-fra-out-004.esa.eu-central-1.outbound.mail-perimeter.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jan 2026 17:51:32 +0000
+Received: from EX19MTAEUB002.ant.amazon.com [54.240.197.232:20138]
+ by smtpin.naws.eu-central-1.prod.farcaster.email.amazon.dev [10.0.45.189:2525] with esmtp (Farcaster)
+ id 3df24bb3-7aa4-4217-abc1-e8fb9f5e98f8; Fri, 16 Jan 2026 17:51:32 +0000 (UTC)
+X-Farcaster-Flow-ID: 3df24bb3-7aa4-4217-abc1-e8fb9f5e98f8
+Received: from EX19D005EUB003.ant.amazon.com (10.252.51.31) by
+ EX19MTAEUB002.ant.amazon.com (10.252.51.79) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.35;
+ Fri, 16 Jan 2026 17:51:30 +0000
+Received: from [192.168.12.13] (10.106.82.9) by EX19D005EUB003.ant.amazon.com
+ (10.252.51.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.35; Fri, 16 Jan 2026
+ 17:51:25 +0000
+Message-ID: <98b8ea1e-3bdd-4987-8acc-58112076d451@amazon.com>
+Date: Fri, 16 Jan 2026 17:51:24 +0000
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Reply-To: <kalyazin@amazon.com>
+Subject: Re: [PATCH v9 07/13] KVM: guest_memfd: Add flag to remove from direct
+ map
+To: "Edgecombe, Rick P" <rick.p.edgecombe@intel.com>, "kernel@xen0n.name"
+	<kernel@xen0n.name>, "linux-riscv@lists.infradead.org"
+	<linux-riscv@lists.infradead.org>, "linux-s390@vger.kernel.org"
+	<linux-s390@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>,
+	"linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+	"linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>,
+	"kalyazin@amazon.co.uk" <kalyazin@amazon.co.uk>, "kvmarm@lists.linux.dev"
+	<kvmarm@lists.linux.dev>, "linux-arm-kernel@lists.infradead.org"
+	<linux-arm-kernel@lists.infradead.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+	"bpf@vger.kernel.org" <bpf@vger.kernel.org>, "loongarch@lists.linux.dev"
+	<loongarch@lists.linux.dev>, "linux-doc@vger.kernel.org"
+	<linux-doc@vger.kernel.org>
+CC: "david@kernel.org" <david@kernel.org>, "svens@linux.ibm.com"
+	<svens@linux.ibm.com>, "catalin.marinas@arm.com" <catalin.marinas@arm.com>,
+	"palmer@dabbelt.com" <palmer@dabbelt.com>, "jgross@suse.com"
+	<jgross@suse.com>, "surenb@google.com" <surenb@google.com>, "vbabka@suse.cz"
+	<vbabka@suse.cz>, "riel@surriel.com" <riel@surriel.com>, "pfalcato@suse.de"
+	<pfalcato@suse.de>, "x86@kernel.org" <x86@kernel.org>, "rppt@kernel.org"
+	<rppt@kernel.org>, "thuth@redhat.com" <thuth@redhat.com>,
+	"borntraeger@linux.ibm.com" <borntraeger@linux.ibm.com>, "maz@kernel.org"
+	<maz@kernel.org>, "peterx@redhat.com" <peterx@redhat.com>, "ast@kernel.org"
+	<ast@kernel.org>, "Annapurve, Vishal" <vannapurve@google.com>,
+	"pjw@kernel.org" <pjw@kernel.org>, "alex@ghiti.fr" <alex@ghiti.fr>,
+	"dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+	"tglx@linutronix.de" <tglx@linutronix.de>, "hca@linux.ibm.com"
+	<hca@linux.ibm.com>, "willy@infradead.org" <willy@infradead.org>,
+	"wyihan@google.com" <wyihan@google.com>, "ryan.roberts@arm.com"
+	<ryan.roberts@arm.com>, "jolsa@kernel.org" <jolsa@kernel.org>,
+	"yang@os.amperecomputing.com" <yang@os.amperecomputing.com>,
+	"jmattson@google.com" <jmattson@google.com>, "aneesh.kumar@kernel.org"
+	<aneesh.kumar@kernel.org>, "luto@kernel.org" <luto@kernel.org>,
+	"haoluo@google.com" <haoluo@google.com>, "patrick.roy@linux.dev"
+	<patrick.roy@linux.dev>, "akpm@linux-foundation.org"
+	<akpm@linux-foundation.org>, "coxu@redhat.com" <coxu@redhat.com>,
+	"mhocko@suse.com" <mhocko@suse.com>, "mlevitsk@redhat.com"
+	<mlevitsk@redhat.com>, "jgg@ziepe.ca" <jgg@ziepe.ca>, "hpa@zytor.com"
+	<hpa@zytor.com>, "song@kernel.org" <song@kernel.org>, "oupton@kernel.org"
+	<oupton@kernel.org>, "maobibo@loongson.cn" <maobibo@loongson.cn>,
+	"peterz@infradead.org" <peterz@infradead.org>, "Liam.Howlett@oracle.com"
+	<Liam.Howlett@oracle.com>, "lorenzo.stoakes@oracle.com"
+	<lorenzo.stoakes@oracle.com>, "jhubbard@nvidia.com" <jhubbard@nvidia.com>,
+	"martin.lau@linux.dev" <martin.lau@linux.dev>, "jthoughton@google.com"
+	<jthoughton@google.com>, "Jonathan.Cameron@huawei.com"
+	<Jonathan.Cameron@huawei.com>, "Yu, Yu-cheng" <yu-cheng.yu@intel.com>,
+	"eddyz87@gmail.com" <eddyz87@gmail.com>, "yonghong.song@linux.dev"
+	<yonghong.song@linux.dev>, "chenhuacai@kernel.org" <chenhuacai@kernel.org>,
+	"shuah@kernel.org" <shuah@kernel.org>, "prsampat@amd.com" <prsampat@amd.com>,
+	"kevin.brodsky@arm.com" <kevin.brodsky@arm.com>,
+	"shijie@os.amperecomputing.com" <shijie@os.amperecomputing.com>,
+	"itazur@amazon.co.uk" <itazur@amazon.co.uk>, "suzuki.poulose@arm.com"
+	<suzuki.poulose@arm.com>, "pbonzini@redhat.com" <pbonzini@redhat.com>,
+	"dev.jain@arm.com" <dev.jain@arm.com>, "yuzenghui@huawei.com"
+	<yuzenghui@huawei.com>, "gor@linux.ibm.com" <gor@linux.ibm.com>,
+	"jackabt@amazon.co.uk" <jackabt@amazon.co.uk>, "daniel@iogearbox.net"
+	<daniel@iogearbox.net>, "agordeev@linux.ibm.com" <agordeev@linux.ibm.com>,
+	"andrii@kernel.org" <andrii@kernel.org>, "mingo@redhat.com"
+	<mingo@redhat.com>, "aou@eecs.berkeley.edu" <aou@eecs.berkeley.edu>,
+	"joey.gouly@arm.com" <joey.gouly@arm.com>, "derekmn@amazon.com"
+	<derekmn@amazon.com>, "xmarcalx@amazon.co.uk" <xmarcalx@amazon.co.uk>,
+	"kpsingh@kernel.org" <kpsingh@kernel.org>, "sdf@fomichev.me"
+	<sdf@fomichev.me>, "jackmanb@google.com" <jackmanb@google.com>,
+	"bp@alien8.de" <bp@alien8.de>, "corbet@lwn.net" <corbet@lwn.net>,
+	"ackerleytng@google.com" <ackerleytng@google.com>, "jannh@google.com"
+	<jannh@google.com>, "john.fastabend@gmail.com" <john.fastabend@gmail.com>,
+	"kas@kernel.org" <kas@kernel.org>, "will@kernel.org" <will@kernel.org>,
+	"seanjc@google.com" <seanjc@google.com>
+References: <20260114134510.1835-1-kalyazin@amazon.com>
+ <20260114134510.1835-8-kalyazin@amazon.com>
+ <e619ded526a2f9a4cec4f74383cef31519624935.camel@intel.com>
+ <294bca75-2f3e-46db-bb24-7c471a779cc1@amazon.com>
+ <bb58a21f91113ca39f8888d718d4450a5fd72808.camel@intel.com>
+ <318407ba-ecb6-4691-8911-645fb8c20250@amazon.com>
+ <c42cc00f3902673b1a964c3d098b8c3f236cf9a1.camel@intel.com>
+Content-Language: en-US
+From: Nikita Kalyazin <kalyazin@amazon.com>
+Autocrypt: addr=kalyazin@amazon.com; keydata=
+ xjMEY+ZIvRYJKwYBBAHaRw8BAQdA9FwYskD/5BFmiiTgktstviS9svHeszG2JfIkUqjxf+/N
+ JU5pa2l0YSBLYWx5YXppbiA8a2FseWF6aW5AYW1hem9uLmNvbT7CjwQTFggANxYhBGhhGDEy
+ BjLQwD9FsK+SyiCpmmTzBQJnrNfABQkFps9DAhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQr5LK
+ IKmaZPOpfgD/exazh4C2Z8fNEz54YLJ6tuFEgQrVQPX6nQ/PfQi2+dwBAMGTpZcj9Z9NvSe1
+ CmmKYnYjhzGxzjBs8itSUvWIcMsFzjgEY+ZIvRIKKwYBBAGXVQEFAQEHQCqd7/nb2tb36vZt
+ ubg1iBLCSDctMlKHsQTp7wCnEc4RAwEIB8J+BBgWCAAmFiEEaGEYMTIGMtDAP0Wwr5LKIKma
+ ZPMFAmes18AFCQWmz0MCGwwACgkQr5LKIKmaZPNTlQEA+q+rGFn7273rOAg+rxPty0M8lJbT
+ i2kGo8RmPPLu650A/1kWgz1AnenQUYzTAFnZrKSsXAw5WoHaDLBz9kiO5pAK
+In-Reply-To: <c42cc00f3902673b1a964c3d098b8c3f236cf9a1.camel@intel.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: EX19D005EUA004.ant.amazon.com (10.252.50.241) To
+ EX19D005EUB003.ant.amazon.com (10.252.51.31)
 
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-> Em Wed, 14 Jan 2026 12:24:31 -0700
-> Jonathan Corbet <corbet@lwn.net> escreveu:
->
->> Randy Dunlap <rdunlap@infradead.org> writes:
->> 
->> > I do many of these on a regular basis:
->> >
->> > $ ./scripts/kernel-doc -none -Wall <path_to_source_file>
->> >
->> > Will I still be able to do that (by using ./tools/doc/kernel-doc ...)?  
->> 
->> Yes.  The tool moves, but its functionality remains unchanged.
->
-> That's actually a good point: should we preserve a link on scripts
-> pointing to ../tools/doc/kernel-doc? I suspect that a change like
-> that could break some machinery on several CI tools and scripts
-> out there. If so, it could be useful to keep a link - at least for
-> a couple of kernel releases.
 
-So is the location of kernel-doc part of our ABI, or an internal detail?
-:)
+On 16/01/2026 17:36, Edgecombe, Rick P wrote:
+> On Fri, 2026-01-16 at 17:28 +0000, Nikita Kalyazin wrote:
+>>>
+>>> I imagine this feature is really targeted towards machines running
+>>> a bunch of untrusted VMs, so cloud hypervisors really. In that case
+>>> the direct map will probably be carved up pretty quick. Did you
+>>> consider just breaking the full direct map to 4k at the start when
+>>> it's in use?
+>>
+>> That's an interesting point, I haven't thought about it from this
+>> perspective.  We should run some tests internally to see if it'd
+>> help.  This will likely change with support for huge pages coming in
+>> though.
+> 
+> The thing is, those no_flush() helpers actually still flush if they
+> need to split a page. Plus if they need to clear out lazy vmalloc
+> aliases it could be another flush. There are probably a lot of
+> opportunities to reduce flushing even beyond pre-split.
+> 
+> Just curious... as far as performance, have you tested this on a big
+> multi-socket system, where that flushing will hurt more? It's something
+> that has always been a fear for these directmap unmapping solutions
 
-I'm not deeply opposed to maintaining the symlink, though I'd rather
-not.  It won't be for "a couple of releases", though; if the symlink is
-there, nothing will ever change.
+Yes, this is a problem that we'd like to address.  We have been 
+discussing it in [1].  The effect of flushing on memory population that 
+we see on x86 is 5-7x elongation.  We are thinking of making use of the 
+no-direct-map memory allocator that Brendan is working on [2].
 
-Thanks,
+[1] 
+https://lore.kernel.org/lkml/d1b58114-9b88-4535-b28c-09d9cc1ff3be@amazon.com
+[2] https://lore.kernel.org/kvm/DDVS9ITBCE2Z.RSTLCU79EX8G@google.com
+> 
 
-jon
 
