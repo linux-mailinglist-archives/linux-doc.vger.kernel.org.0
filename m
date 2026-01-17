@@ -1,47 +1,47 @@
-Return-Path: <linux-doc+bounces-72834-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72833-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49C60D38D59
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 10:29:47 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF8BFD38D5C
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 10:29:51 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 31DC5301F5F5
+	by sea.lore.kernel.org (Postfix) with ESMTP id BC19D3020375
 	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 09:29:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86E52333729;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BC1A92DFA32;
 	Sat, 17 Jan 2026 09:29:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ytg0q7Sd"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BO/lpMzw"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 340B8332EB4;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19D993328EC;
 	Sat, 17 Jan 2026 09:29:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768642173; cv=none; b=OwyxacYervPF5ddJwI29lg4J2fBH4EJtesORxTJZNrglD1NUsYeUbtczGsQL4htMqk3Yvff+jsCYZQwsahMIho4P9dXd/MrrPGtyuDFK+TtKtXR1gpjwh/3NZ//5AtUqtTSp4DemcwRDR6l/btTjlreqpoLvic00uLQGvkKzNyc=
+	t=1768642173; cv=none; b=uQROCJkiVTG1udalEzMwzy2IVDn3aHLW3Tj1yZP/PBFvoJXoxxBHyOeD219rVGxBzlIT4YrmnbSQQqbizYCy9cLPhkNfx8PsCQKC/nPR8xW/A3d8e5ImL5sSW/rVw77RsJ5RB1gry6LvtDV09cxr2JVt3lND6XAhp7H9Gt4PKO0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768642173; c=relaxed/simple;
-	bh=gswQgvIkCvCKkiNyrJA/gedBlbjViDDQyImQR0Lwtf4=;
+	bh=gIlHO7b2dpX1yT61k9PtOOKZE0nPF7btslse5y1Pu2s=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Ao5yoP8Gb9NtSNVMfUUmfC/FTjumgbqYql+SshXlWIjO6i6Px32XvVi8dAEy/pOBDm8Zfsf6aYFf2c64qbys1CgRXdtxjrEhBUpEMQBlTOcG7Dqy86taKMVwz1Xjw65A3uzJPFtMJ3KqHwxgvL8uy9ONVtAudabC5uE/Cy+nWgE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ytg0q7Sd; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E7DFC4AF0C;
+	 MIME-Version:Content-Type; b=iBAkRTQvtTpN2HXjj0jz+8Bq/D037ttdKRr4WRwi/V5VVpoFF9XJWuo5f0cyWm3neTLSvWFCDLcgBt0QDGhvpstiFT35sU6DeTFRGGJ9CvTr8vi5uQiMDBIo7PMleNGO2i3oPLzEN/yDPpAqIhVVYZp4+tvxsnOwCZUH25ast3o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BO/lpMzw; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20914C19423;
 	Sat, 17 Jan 2026 09:29:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768642172;
-	bh=gswQgvIkCvCKkiNyrJA/gedBlbjViDDQyImQR0Lwtf4=;
+	bh=gIlHO7b2dpX1yT61k9PtOOKZE0nPF7btslse5y1Pu2s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Ytg0q7Sda8Jtsy2t6IOq0BjFLwvPDF54IHLZ9fCwaHf8qcu+VB1SinYReE8s8cJi+
-	 Bui5o/NsgKTA4NJ7pzpT3NsDDN4YnNkfaAvJ5L2ybgxLZ+t6j2m0Kp8wuO9jPyUxod
-	 QqqZASSVpoh5yBGTC8rbE1Z9/doqBfw2Wsb3kHcFIsAXe4sSx9i2Ireu/UXakua0ty
-	 GoAv/HJMA9GistLkQSau04Iw0PfFTFj/H43WwGx+kPViEvWEv2YWYP9IqtlbO1e5e+
-	 +7Mi+KsXD/0wF+55gJyFwCiWCZkdBr7FYEiStR42BSd96kuXddZOIV3oJJNXbMgg60
-	 wJQOKnX9m4f9w==
+	b=BO/lpMzw43rE83lYrKTAmtMkYhL5xVLJzHxs3lDTTghR49KXZM8AApGZKCzsgAJGx
+	 0HBU5TYotMfJ5lKs5Xzd8cvd2lS/dh65S2sx99ExtWZi5bpG08/giNCbRWoUaqv3Gb
+	 t9MvAw/sqPvz/OpFqdjTXVLMu3qF61moQKN+WgTwtzq3sX1H6sJtgnUnTXdJS5+XHf
+	 ePtzmGg/a0y6ia/Q5G3DloKiEUxnkHK8oBhNDUZRzm/PWEETnd6gk98/p2ZsJmiEsW
+	 I65RFBGlXfmBrXj+XO5LToWgYxwSvWemB+JqDOD9RyyhR9QWS2stG14G8/UB0pph9e
+	 HZBlxyWFZQxvQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vh2cc-00000000fo2-0OzK;
+	id 1vh2cc-00000000fo6-0Vya;
 	Sat, 17 Jan 2026 10:29:30 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -49,11 +49,10 @@ To: Linux Doc Mailing List <linux-doc@vger.kernel.org>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	stable@vger.kernel.org
-Subject: [PATCH v5 2/4] scripts/kernel-doc: avoid error_count overflows
-Date: Sat, 17 Jan 2026 10:29:24 +0100
-Message-ID: <23206b5bc44601d0a0bce30adb77cc0f58b49234.1768642102.git.mchehab+huawei@kernel.org>
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v5 3/4] scripts/kernel-doc: ensure that comments are using our coding style
+Date: Sat, 17 Jan 2026 10:29:25 +0100
+Message-ID: <a26b24193ce22b6d3d6e1c13e18c3942800f2f42.1768642102.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768642102.git.mchehab+huawei@kernel.org>
 References: <cover.1768642102.git.mchehab+huawei@kernel.org>
@@ -67,70 +66,121 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-The glibc library limits the return code to 8 bits. We need to
-stick to this limit when using sys.exit(error_count).
+Along kernel-doc libs, we opted to have all comments starting/ending
+with a blank comment line. Use the same style here.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: stable@vger.kernel.org
 ---
- scripts/kernel-doc.py | 26 +++++++++++++++++++-------
- 1 file changed, 19 insertions(+), 7 deletions(-)
+ scripts/kernel-doc.py | 24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
 
 diff --git a/scripts/kernel-doc.py b/scripts/kernel-doc.py
-index 7a1eaf986bcd..1ebb16b9bb08 100755
+index 1ebb16b9bb08..f1f3f56edeb5 100755
 --- a/scripts/kernel-doc.py
 +++ b/scripts/kernel-doc.py
-@@ -116,6 +116,8 @@ SRC_DIR = os.path.dirname(os.path.realpath(__file__))
- 
- sys.path.insert(0, os.path.join(SRC_DIR, LIB_DIR))
- 
-+WERROR_RETURN_CODE = 3
-+
- DESC = """
- Read C language source or header FILEs, extract embedded documentation comments,
- and print formatted documentation to standard output.
-@@ -176,7 +178,21 @@ class MsgFormatter(logging.Formatter):
-         return logging.Formatter.format(self, record)
- 
- def main():
--    """Main program"""
-+    """
-+    Main program.
-+
-+    By default, the return value is:
-+
-+    - 0: success or Python version is not compatible with
-+      kernel-doc.  If -Werror is not used, it will also
-+      return 0 if there are issues at kernel-doc markups;
-+
-+    - 1: an abnormal condition happened;
-+
-+    - 2: argparse issued an error;
-+
-+    - 3: -Werror is used, and one or more unfiltered parse warnings happened.
-+    """
- 
+@@ -3,7 +3,7 @@
+ # Copyright(c) 2025: Mauro Carvalho Chehab <mchehab@kernel.org>.
+ #
+ # pylint: disable=C0103,R0912,R0914,R0915
+-
++#
+ # NOTE: While kernel-doc requires at least version 3.6 to run, the
+ #       command line should work with Python 3.2+ (tested with 3.4).
+ #       The rationale is that it shall fail gracefully during Kernel
+@@ -12,7 +12,7 @@
+ #       - no f-strings can be used on this file.
+ #       - the libraries that require newer versions can only be included
+ #         after Python version is checked.
+-
++#
+ # Converted from the kernel-doc script originally written in Perl
+ # under GPLv2, copyrighted since 1998 by the following authors:
+ #
+@@ -197,8 +197,9 @@ def main():
      parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
                                       description=DESC)
-@@ -323,16 +339,12 @@ def main():
  
-     if args.werror:
-         print("%s warnings as errors" % error_count)    # pylint: disable=C0209
--        sys.exit(error_count)
-+        sys.exit(WERROR_RETURN_CODE)
- 
-     if args.verbose:
-         print("%s errors" % error_count)                # pylint: disable=C0209
- 
--    if args.none:
--        sys.exit(0)
++    #
+     # Normal arguments
 -
--    sys.exit(error_count)
--
-+    sys.exit(0)
++    #
+     parser.add_argument("-v", "-verbose", "--verbose", action="store_true",
+                         help="Verbose output, more warnings and other information.")
  
+@@ -213,8 +214,9 @@ def main():
+                         action="store_true",
+                         help="Enable line number output (only in ReST mode)")
+ 
++    #
+     # Arguments to control the warning behavior
+-
++    #
+     parser.add_argument("-Wreturn", "--wreturn", action="store_true",
+                         help="Warns about the lack of a return markup on functions.")
+ 
+@@ -235,8 +237,9 @@ def main():
+     parser.add_argument("-export-file", "--export-file", action='append',
+                         help=EXPORT_FILE_DESC)
+ 
++    #
+     # Output format mutually-exclusive group
+-
++    #
+     out_group = parser.add_argument_group("Output format selection (mutually exclusive)")
+ 
+     out_fmt = out_group.add_mutually_exclusive_group()
+@@ -248,8 +251,9 @@ def main():
+     out_fmt.add_argument("-N", "-none", "--none", action="store_true",
+                          help="Do not output documentation, only warnings.")
+ 
++    #
+     # Output selection mutually-exclusive group
+-
++    #
+     sel_group = parser.add_argument_group("Output selection (mutually exclusive)")
+     sel_mut = sel_group.add_mutually_exclusive_group()
+ 
+@@ -262,7 +266,9 @@ def main():
+     sel_mut.add_argument("-s", "-function", "--symbol", action='append',
+                          help=FUNCTION_DESC)
+ 
++    #
+     # Those are valid for all 3 types of filter
++    #
+     parser.add_argument("-n", "-nosymbol", "--nosymbol", action='append',
+                         help=NOSYMBOL_DESC)
+ 
+@@ -295,9 +301,11 @@ def main():
+ 
+     python_ver = sys.version_info[:2]
+     if python_ver < (3,6):
++        #
+         # Depending on Kernel configuration, kernel-doc --none is called at
+         # build time. As we don't want to break compilation due to the
+         # usage of an old Python version, return 0 here.
++        #
+         if args.none:
+             logger.error("Python 3.6 or later is required by kernel-doc. skipping checks")
+             sys.exit(0)
+@@ -307,7 +315,9 @@ def main():
+     if python_ver < (3,7):
+         logger.warning("Python 3.7 or later is required for correct results")
+ 
++    #
+     # Import kernel-doc libraries only after checking Python version
++    #
+     from kdoc.kdoc_files import KernelFiles             # pylint: disable=C0415
+     from kdoc.kdoc_output import RestFormat, ManFormat  # pylint: disable=C0415
+ 
+@@ -346,6 +356,8 @@ def main():
+ 
+     sys.exit(0)
+ 
++#
  # Call main method
++#
  if __name__ == "__main__":
+     main()
 -- 
 2.52.0
 
