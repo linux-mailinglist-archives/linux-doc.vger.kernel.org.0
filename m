@@ -1,45 +1,45 @@
-Return-Path: <linux-doc+bounces-72853-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72855-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8D36D391A2
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Jan 2026 00:27:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35BC4D391A8
+	for <lists+linux-doc@lfdr.de>; Sun, 18 Jan 2026 00:28:08 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 0F7AA3022180
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 23:27:09 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 292093033732
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 23:27:12 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 996202F1FE9;
-	Sat, 17 Jan 2026 23:27:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D89F2F6586;
+	Sat, 17 Jan 2026 23:27:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b="sfzaN0PW"
+	dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b="eX5xZY3s"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from todd.t-8ch.de (todd.t-8ch.de [159.69.126.157])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 274AA2EC0B0;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 274342EB87D;
 	Sat, 17 Jan 2026 23:27:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.126.157
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768692427; cv=none; b=fxnNqyUh7izD9CMzRDpmEkMn14Q06PFlODdAxm7vnPfge2v3kqqoGap8bPOhvf4Oi4F1mPBbNkOhmYIpxAhdw9bpMKYRQlMR9RZe/2bsWjBf1Q9K6jkRz0a/k3AzWMoiHGaj+vY5dPbW/39PCbLLTlh/rrIEHJmy4G3nZTtiCuQ=
+	t=1768692428; cv=none; b=S95z3qOMat9+HqhhuxnY4T44jEBPgOdUvymOvIkwPm8xs24tVtVZ/exMk9g8IllQIw+Pj0bNWfrbOZ5xQt9boZv0T7JyYtUk3zoc49moxMco/dna258shL2JkK6iR/ZbCsYc13r3SBIa5+DfcsePFEWszf4N3f2CWzkDcGQPiZ0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768692427; c=relaxed/simple;
-	bh=jVwVOTQBl/8pg8Q675QHinGDembb460plAvRVUlOeJ4=;
+	s=arc-20240116; t=1768692428; c=relaxed/simple;
+	bh=iu/Nqtn8dRHZka2LF2nKKKy85TSJtks1y7TCW8Th124=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=BtSG8cj05yF05n28MVGZl9lztXqxPMQjfyF+KEX/vmbe2qDJmnwFsxE0/UG9jF79zN0gK+xPF1e2qmGhbqXnbLJnY8FbjKM2z0x+UfdWWSnlu9JLBsSRBeP9wWQdHGcAuUgNiHy15yl4A59S7BcZoxpOIbZuF5kJ2Yqrr86B/Nk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net; spf=pass smtp.mailfrom=weissschuh.net; dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b=sfzaN0PW; arc=none smtp.client-ip=159.69.126.157
+	 In-Reply-To:To:Cc; b=nTF91VO9h8t9j6xPG0UUFFmU2XOpnn8k08mONtSK3jz20hPzyOKIKNJt8APg4foIcn0fhZkmDm6F7dtqLn3j+Tg8zs5M10xC/fmDs/uZYw+lsIXRgeDPFJ204eAF5Gviivz18mKQ7qr7GRtiBxtXYdqC2eIOf6FXGBdQ+R32JFE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net; spf=pass smtp.mailfrom=weissschuh.net; dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b=eX5xZY3s; arc=none smtp.client-ip=159.69.126.157
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=weissschuh.net
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=weissschuh.net;
 	s=mail; t=1768692418;
-	bh=jVwVOTQBl/8pg8Q675QHinGDembb460plAvRVUlOeJ4=;
+	bh=iu/Nqtn8dRHZka2LF2nKKKy85TSJtks1y7TCW8Th124=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=sfzaN0PW/VCHvFbpI7JqhG/4LEfODtgO8+x9AsOuKX1ocgKGOraipCjkTR/3H7QbS
-	 u1KG8XugVt2LeoShRY/2jlI2LCN4tmmAx98K9NamTO1s6LKS8lf4o/h3UGiVwjpEnn
-	 PpxvTQf910UvCrD/cm3PY7SYyA/A7RXlAVr1lJGw=
+	b=eX5xZY3sWyPyYTNGvJbMLmgGiFh9EpZlKnWtuqWjKd8LnTXDnfCO3likfmF4B86EV
+	 ReLJliukwII2tdxTFY9NYV45oS/vg49ZIc7gxPwjwuCWZs6q6h9h1RCo0AwNE1hE5E
+	 7Nuh4bJPDANr4SoE/LWaxf+mjUm3oKpFi36TSBWI=
 From: =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
-Date: Sun, 18 Jan 2026 00:26:22 +0100
-Subject: [PATCH 2/4] tools/docs: sphinx-build-wrapper: make 'rustdoc' a
- local variable
+Date: Sun, 18 Jan 2026 00:26:23 +0100
+Subject: [PATCH 3/4] tools/docs: sphinx-build-wrapper: compute
+ sphinxdirs_list earlier
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
@@ -48,7 +48,7 @@ List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260118-docs-spurious-rust-v1-2-998e14b9ed9e@weissschuh.net>
+Message-Id: <20260118-docs-spurious-rust-v1-3-998e14b9ed9e@weissschuh.net>
 References: <20260118-docs-spurious-rust-v1-0-998e14b9ed9e@weissschuh.net>
 In-Reply-To: <20260118-docs-spurious-rust-v1-0-998e14b9ed9e@weissschuh.net>
 To: Mauro Carvalho Chehab <mchehab@kernel.org>, 
@@ -57,85 +57,75 @@ Cc: Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
  linux-kernel@vger.kernel.org, 
  =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1768692417; l=2248;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1768692417; l=2099;
  i=linux@weissschuh.net; s=20221212; h=from:subject:message-id;
- bh=jVwVOTQBl/8pg8Q675QHinGDembb460plAvRVUlOeJ4=;
- b=Ph5skPcHPojUYZ672d+uOXWvp9aPeFNjhkENu4bZ5euGJvsZUW/WvERslLz3ru2anrNaDCNLR
- R3RIDyieyZcCNxv+F9Nvh+LEvE4CyDKRqqbjT0MXKxjX0MPES5RH6IJ
+ bh=iu/Nqtn8dRHZka2LF2nKKKy85TSJtks1y7TCW8Th124=;
+ b=zXEe6SzFXRWnNwB4HN3W+DDTGVVMHeECkvCg8P3tXadQlS+RIDtCXGP5H12Oy2praJKD82xc1
+ w6XvSVoDu5SCk7BI0TGidiqsNConUaAZ3GMkbaSU1PhjmXyJSKQGbbT
 X-Developer-Key: i=linux@weissschuh.net; a=ed25519;
  pk=KcycQgFPX2wGR5azS7RhpBqedglOZVgRPfdFSPB1LNw=
 
-All users of this variable are now in the same method.
+An upcoming patch will require sphinxdirs_list to be available before
+the call to check_rust().
 
-Demote the instance variable to a local one.
+Move it up in the function.
 
 Signed-off-by: Thomas Weißschuh <linux@weissschuh.net>
 ---
- tools/docs/sphinx-build-wrapper | 17 ++++++++---------
- 1 file changed, 8 insertions(+), 9 deletions(-)
+ tools/docs/sphinx-build-wrapper | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/tools/docs/sphinx-build-wrapper b/tools/docs/sphinx-build-wrapper
-index 4ce655a31061..5f956c289c02 100755
+index 5f956c289c02..a3cca4634355 100755
 --- a/tools/docs/sphinx-build-wrapper
 +++ b/tools/docs/sphinx-build-wrapper
-@@ -123,12 +123,10 @@ class SphinxBuilder:
-         """
-         Checks if Rust is enabled
-         """
--        self.rustdoc = False
--
-         config = os.path.join(self.srctree, ".config")
+@@ -670,6 +670,19 @@ class SphinxBuilder:
+         if kerneldoc.startswith(self.srctree):
+             kerneldoc = os.path.relpath(kerneldoc, self.srctree)
  
-         if not os.path.isfile(config):
--            return
-+            return False
- 
-         re_rust = re.compile(r"CONFIG_RUST=(m|y)")
- 
-@@ -136,11 +134,13 @@ class SphinxBuilder:
-             with open(config, "r", encoding="utf-8") as fp:
-                 for line in fp:
-                     if re_rust.match(line):
--                        self.rustdoc = True
--                        return
-+                        return True
- 
-         except OSError as e:
-             print(f"Failed to open {config}", file=sys.stderr)
-+            return False
++        if not sphinxdirs:
++            sphinxdirs = os.environ.get("SPHINXDIRS", ".")
 +
-+        return False
++        #
++        # sphinxdirs can be a list or a whitespace-separated string
++        #
++        sphinxdirs_list = []
++        for sphinxdir in sphinxdirs:
++            if isinstance(sphinxdir, list):
++                sphinxdirs_list += sphinxdir
++            else:
++                sphinxdirs_list += sphinxdir.split()
++
+         args = [ "-b", builder, "-c", docs_dir ]
  
-     def get_sphinx_extra_opts(self, n_jobs):
-         """
-@@ -259,8 +259,6 @@ class SphinxBuilder:
- 
-         self.get_sphinx_extra_opts(n_jobs)
- 
--        self.check_rust()
--
-         #
-         # If venv command line argument is specified, run Sphinx from venv
-         #
-@@ -680,7 +678,8 @@ class SphinxBuilder:
- 
-             args.extend(["-D", f"latex_elements.papersize={paper}paper"])
- 
--        if self.rustdoc:
-+        rustdoc = self.check_rust()
-+        if rustdoc:
+         if builder == "latex":
+@@ -682,9 +695,6 @@ class SphinxBuilder:
+         if rustdoc:
              args.extend(["-t", "rustdoc"])
  
-         if not sphinxdirs:
-@@ -769,7 +768,7 @@ class SphinxBuilder:
-         elif target == "infodocs":
-             self.handle_info(output_dirs)
+-        if not sphinxdirs:
+-            sphinxdirs = os.environ.get("SPHINXDIRS", ".")
+-
+         #
+         # The sphinx-build tool has a bug: internally, it tries to set
+         # locale with locale.setlocale(locale.LC_ALL, ''). This causes a
+@@ -695,16 +705,6 @@ class SphinxBuilder:
+         except locale.Error:
+             self.env["LC_ALL"] = "C"
  
--        if self.rustdoc and target in ["htmldocs", "epubdocs"]:
-+        if rustdoc and target in ["htmldocs", "epubdocs"]:
-             print("Building rust docs")
-             if "MAKE" in self.env:
-                 cmd = [self.env["MAKE"]]
+-        #
+-        # sphinxdirs can be a list or a whitespace-separated string
+-        #
+-        sphinxdirs_list = []
+-        for sphinxdir in sphinxdirs:
+-            if isinstance(sphinxdir, list):
+-                sphinxdirs_list += sphinxdir
+-            else:
+-                sphinxdirs_list += sphinxdir.split()
+-
+         #
+         # Step 1:  Build each directory in separate.
+         #
 
 -- 
 2.52.0
