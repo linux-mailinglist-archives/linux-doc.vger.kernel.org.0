@@ -1,190 +1,138 @@
-Return-Path: <linux-doc+bounces-72829-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72830-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EE2ED38D51
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 10:20:40 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CF4DD38D5B
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 10:29:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id EE0493016CF3
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 09:20:31 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 55BAB301FB73
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Jan 2026 09:29:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 96DA3329C79;
-	Sat, 17 Jan 2026 09:20:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8C2D533374B;
+	Sat, 17 Jan 2026 09:29:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="d4Sd+3lh"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Dd5JQsPY"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8FE026A1B9
-	for <linux-doc@vger.kernel.org>; Sat, 17 Jan 2026 09:20:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F307330320;
+	Sat, 17 Jan 2026 09:29:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768641631; cv=none; b=jIlN5X//sfjVGpnU4ZFjSVGBkFSCUOGrVV5v9q08V7/iArhY7ixdVBV7/MeS9y7mhbNbUzaLlnB91S/cXDRs4FPjNDOBzeRASffdXlioII827sDFLAy2oj2RPYlVW/nG64/loBkOIaMmotjbSzNlpcpoK7Oe3OtTrRv4ojuozOE=
+	t=1768642172; cv=none; b=aLkYPXGjshvfa1qY4mHNTDBWgprV/FPadUWu7rr4OoMefW+2EgdqwVCu3BUsy/gTPYZQvR5U4CfDzt9DF9x1oaVU/Xmq92g57cJz+Xc/ZV3OeA+BnM5k0P62Qq3cOSexA7ks51HDcFraMiuiP/sL2H5HN7nOjxqkPF81A2hkZ4A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768641631; c=relaxed/simple;
-	bh=gz6BV8tw8Oz+NJoE/mdJk6KO7jxFVqwpG8SmJj2tJoI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nogP/eu6Nc3pchm4loQrWlw3zn2GMV16TN4PnHlamoKPJK4IjNQOKE96JIcVoWQLryEW6nQirsQFih7PncWVJ5tmMdZlW0KgYgOa6SIuQ/P/JB/Vp1HLDZhjW+Ox/v8hmJVuz2IMHjOldSKIhrfKE8Hkk+mDuQ8ngAc5ao2jwsU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=d4Sd+3lh; arc=none smtp.client-ip=209.85.215.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-bcfd82f55ebso1623888a12.1
-        for <linux-doc@vger.kernel.org>; Sat, 17 Jan 2026 01:20:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768641628; x=1769246428; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=KCh6+wrwiwo+hw9O3OXXzaJvUbFQwMN6FO3NIwgcTk4=;
-        b=d4Sd+3lhVGCn23i2KDpwbJnmiVwqKCyLi7BqP05KBr8AAioJw/iJ8AcR1uSoMGVH06
-         hxxSP27lPDbl3GkovL4oyA6V0V6AoE04KdlXudb42lQwgvPB+8jMcXeM2ijgO7e4Xirz
-         2B9SJRZj32nVzwi56xQkUPVkIYLigflvxGFKD0Gxgk1KceoovzpLP7lKKFD+gNwzdqYr
-         2QlJKEKFCgN+SYuaJlZp2JIK6P46Elj9n4wfuSBCFjxQNiqnmYj6KLWEHHuMAHSaqasb
-         /Mby/wR95B3VToiOG1GFcWGOZq7x58bx0D3mD/XwPTG11BY7+r+SDNn+ylzfu2g2wEVb
-         w9eQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768641628; x=1769246428;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=KCh6+wrwiwo+hw9O3OXXzaJvUbFQwMN6FO3NIwgcTk4=;
-        b=De6+omZNiI96dkOko5/euKg2oH4GhtuOc9EWWbNYxQstHTOoh8IrtqaN1KOXlef4kN
-         i/oKcz7cvaG/oAuKCXkseOweJ3zS4dM+raKAAZK6c2azDThykmea8MK1Umbhm7BkgNO6
-         kwbiD1VqqnEkw/Ec8Ea/3w07sreW4mGmGTs31/Wh+VGBB5x0haiw+4JIHJoQmlK8e3ky
-         tpK06sVAV18MSD8/teOz5pxSv4lPyWt2oAecUCp1ObAaPX5nVtBcbCmqF6S7LzP1NBIj
-         b1kN07I6+cSD5iR2CMaMqT14QnTqZyqjlTCjuu6puDn1P9Jhn7mu5P/Mc3qR6/2QQ1y4
-         VBSg==
-X-Forwarded-Encrypted: i=1; AJvYcCV0AMN+ffwWwrE37jHIWG3ZNVXkYKv5BkDKRclmYSjHTAhor9XRCftIqvSuIm0P9qBDSkSEXxSMO2s=@vger.kernel.org
-X-Gm-Message-State: AOJu0YzHVLSCp74Dzf39ti2l4LkCf1wxv7NIinOc0arNk0c0SJjl4DuR
-	uYdayhm423jQueCY1IGKnkxM8OkMnLMGYh3CPISoop5eTNgrBrZbvcpO5+CAUA==
-X-Gm-Gg: AY/fxX5WCxA4yAuLg5KOBoOJDnNgga8+e9cpEXcfZiapGoyYAS4RlYcsPkVG1xtsmOq
-	8iJfOlMlK7GeZySjnBNyUZiNZT2ATw2H9J3AV0FCqOIykJXQaXNW1u0YlLAb+1IZYtx7ouiHAXF
-	bUSWyNpN45/iAz24Vw318/lhznSqZAkrOYnpK3jGDoCv6lplprxq/AnAvoMkhjQRi8VmnQFE272
-	ipaaUoN0B3C0iWZmFWUl+UqkxKTu5zdjK3gH69omEZB+4sBrPUNGMROBYtb2vFj6SulG/t4utjC
-	roIqdTZ3f2UqMAzenjpwvPhaH9mCZFbsQh4+Q7IDnVfdFiMWqUcUj2tI3DNbGm+T0IUCvc9lJ/S
-	b7uyDM3FgBGn9egdS48TXW+4vcDM3EmTy5g+jl2+BT/OjOnRhpPya9g+61d58qNyhX4VKALjIHZ
-	UjjIW/fc6BGhJJLbkZtnQPQRkZbXHt8SASijXtxXVR3qdsOb/33waDtGTa
-X-Received: by 2002:a17:90b:5405:b0:34c:ab9b:76c4 with SMTP id 98e67ed59e1d1-35272a535b7mr4938347a91.0.1768641628045;
-        Sat, 17 Jan 2026 01:20:28 -0800 (PST)
-Received: from [10.0.2.15] (KD106167137155.ppp-bb.dion.ne.jp. [106.167.137.155])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-352677ec7a8sm6351061a91.7.2026.01.17.01.20.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 17 Jan 2026 01:20:27 -0800 (PST)
-Message-ID: <71156e02-e7c5-42a3-87f5-cfad7a8fe907@gmail.com>
-Date: Sat, 17 Jan 2026 18:20:25 +0900
+	s=arc-20240116; t=1768642172; c=relaxed/simple;
+	bh=RXo2T4uT7vY3LJPjTvycgMKgkAkgjklF/1tyBtWAow8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:
+	 Content-Type; b=KVVBjLxY1ApRpp5E4eaTXwQJ5p0hFDzcQ78HEb9F92khaOgJuNkUekx9gfaVLskKVikq8nOyvQCryjJQtZcI/zsj+HCIuotu306CmCBXeYQORZaauje5g7+RDB1T2UBDdCzg2e4oJ3eR+gPCzscg88m6XiBbiVDcLWdMH4yNpc8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Dd5JQsPY; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18E67C4CEF7;
+	Sat, 17 Jan 2026 09:29:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768642172;
+	bh=RXo2T4uT7vY3LJPjTvycgMKgkAkgjklF/1tyBtWAow8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=Dd5JQsPYv9o4j5iD9wl3SCBALXAdaMeNpBeHjZj88GsVDNATCzTuBUSxu/s2CFdsy
+	 dYwvTgPkBfQs+R3TlM70OkOjajOzDEbhviL1Uis4LoFXNmoPOmLRyGnvwb/GTuu6pP
+	 zzKLxXEPfSJcPXNTfL3TIxOsrFEaDtebQJg7H8rebeNTTEfZWHJfi0AVooNYWseIIo
+	 3NnwXiqjT+0MjGu1g33hsoTpfAIOjLy4Il+DB15h3Xnb6/Rwvr2nX/SPYFV+GfwxZJ
+	 ieh1cT3iWAoTOffnqTKnTrtDli1vKV/KJtl9FZShnfvZLzizGIdxDmsLlwmh3F5Luv
+	 4Mf48wBpwnCcw==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vh2cc-00000000fnt-0ACp;
+	Sat, 17 Jan 2026 10:29:30 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH v5 0/4] fix -Werror issues
+Date: Sat, 17 Jan 2026 10:29:22 +0100
+Message-ID: <cover.1768642102.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] docs: ja_JP: Start translation of submitting-patches
-To: Akiyoshi Kurita <weibu@redadmin.org>
-Cc: shibata@linuxfoundation.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, corbet@lwn.net
-References: <20260115045941.161458-1-weibu@redadmin.org>
-Content-Language: en-US
-From: Akira Yokosawa <akiyks@gmail.com>
-In-Reply-To: <20260115045941.161458-1-weibu@redadmin.org>
 Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Hi Kurita-san,
+Hi Jon,
 
-On Thu, 15 Jan 2026 13:59:41 +0900, Akiyoshi Kurita wrote:
-> Start a new Japanese translation of
-> Documentation/process/submitting-patches.rst.
-> 
-> As suggested by Akira Yokosawa, instead of moving the outdated 2011
-> translation (SubmittingPatches), we are starting a fresh translation of
-> the current English document.
-> 
-> This patch adds the initial file structure, the warning about the
-> document being under construction, and the translation of the
-> introduction section.
-> 
-> The translation work will be done incrementally.
-> 
-> Suggested-by: Akira Yokosawa <akiyks@gmail.com>
-> Link: https://lore.kernel.org/298d3a9c-41c1-4cbd-b4ab-d3009df9388c@gmail.com/
-> Signed-off-by: Akiyoshi Kurita <weibu@redadmin.org>
-> ---
->  Documentation/translations/ja_JP/index.rst    |  1 +
->  .../ja_JP/process/submitting-patches.rst      | 36 +++++++++++++++++++
->  2 files changed, 37 insertions(+)
->  create mode 100644 Documentation/translations/ja_JP/process/submitting-patches.rst
-> 
-> diff --git a/Documentation/translations/ja_JP/index.rst b/Documentation/translations/ja_JP/index.rst
-> index 4159b417bfdd..5d47d588e368 100644
-> --- a/Documentation/translations/ja_JP/index.rst
-> +++ b/Documentation/translations/ja_JP/index.rst
-> @@ -13,6 +13,7 @@
->  
->     disclaimer-ja_JP
->     process/howto
-> +   process/submitting-patches
->     process/submit-checklist
->  
->  .. raw:: latex
-> diff --git a/Documentation/translations/ja_JP/process/submitting-patches.rst b/Documentation/translations/ja_JP/process/submitting-patches.rst
-> new file mode 100644
-> index 000000000000..7d3edf1ff87a
-> --- /dev/null
-> +++ b/Documentation/translations/ja_JP/process/submitting-patches.rst
-> @@ -0,0 +1,36 @@
-> +.. _jp_process_submitting_patches:
-> +
-> +パッチの投稿: カーネルにコードを入れるための必須ガイド
-> +======================================================
-> +
-> +.. note::
-> +
-> +   このドキュメントは :ref:`Documentation/process/submitting-patches.rst <submittingpatches>` の日本語訳です。
-> +
-> +   免責事項: :ref:`translations_ja_JP_disclaimer`
-> +
-> +.. warning::
-> +
-> +   **UNDER CONSTRUCTION!!**
-> +
-> +   この文書は翻訳更新の作業中です。最新の内容は原文を参照してください。
-> +
-> +Linux カーネルに変更を加えたいと思っている個人や企業にとって、
-> +その「仕組み」に慣れていなければ、投稿のプロセスは時に気後れするものでしょう。
-> +この文書は、コードをカーネルに入れるための、主に技術的かつ手続き的な
-> +手順の概要を説明することを目的としています。
-> +
-> +もしこの文書を読んでいるあなたの目的が、単にバグ報告を送信することであれば、
-> +Documentation/admin-guide/reporting-issues.rst
-> +を参照してください。
-> +
-> +この文書自体も長大ですが、詳細な手順書というわけではありません。
-> +詳細については :ref:`Documentation/process/submit-checklist.rst <submitchecklist>`
-> +を参照してください。
-> +
-> +この文書は多数のセクションから構成されています。これらは比較的独立していますが、
-> +順に読むことを推奨します。
-> +
-> +.. _jp_submittingpatches_common_mistakes:
-> +
-> +   * :ref:`投稿時によくある間違い <submittingpatches_common_mistakes>`
+As pointed by Jani, and previously by Randy, several warnings
+are currently not considered as errors. The issue is related
+to changeset 469c1c9eb6c9 ("kernel-doc: Issue warnings that were silently
+discarded"), which was using directly a low-level interface.
 
-Hmm...
+Patch 1 fix that.
+Patch 2 fixes a related issue: when there are more than 255
+errors, the return code with -Werror can be 0 even on errors,
+because of glibc behavior: programs can only use 8 bits for
+error codes.
 
-I'd really like to make more positive response, but ..., this doesn't
-address my review comment near the bottom of my reply at [1]:
+Patches 3 and 4 are not directly related, and touches only
+on comments inside python-doc.py script itself:
 
-    "I expected to see a full translation of leader paragraphs up to
-     Line 26 of the original.  Can you do it?"
+- patch 3 is just a coding style change to match the comment
+  style we agreed;
 
-[1]: https://lore.kernel.org/6c156080-04ac-48be-b0ae-5b784883188b@gmail.com/
+- patch 4 fixes some English issues on comments. The issues
+  were pointed by LLM, which was used as any other spelling
+  tool: I picked just the relevant changes, ignoring the ones
+  that were false positives. I also didn't agree with one of
+  the changes, replacing it by something else.
 
-Honestly speaking, it is hard for me to relate your "translation" to the
-original text.
+  I wrote it more as an experiment about how to properly use
+  LLM. IMO, it could be useful to use LLM to review spelling
+  on docs, provided that the one using the tool will filter
+  out LLM-generated trash - just like one does when using any
+  other spelling tool. Yet, based on Jani feedback, extra
+  care is needed with regards to LLM abuse of UTF-8 chars.
 
-Thanks, Akira
+---
+
+v5:
+  - fixed some kernel-doc docstrings on patch 2 and 4.
+
+v4:
+  - improved description on patch 4;
+  - fixed some typos and problems at patch2 comments;
+  - fixed a potential sphinx.ext.autodoc issue.
+
+v3:
+  - did some cleanups at patch 1, placing the code on a new
+    function;
+  - removed extra blank line after comments
+
+v2:
+  - on patch 2, I changed the -Werror return code to "3". This
+    way, it is easier for a script to identify what happened;
+  - removed UTF-8 unbreakable whitespaces from patch 4.
+    Heh, it seems that LLM-produced stuff can suffer with
+    unwanted UTF-8 chars... On one of the strings it replaced
+    0x20 with 0xa0...
+
+Mauro Carvalho Chehab (4):
+  scripts/kernel-doc: fix logic to handle unissued warnings
+  scripts/kernel-doc: avoid error_count overflows
+  scripts/kernel-doc: ensure that comments are using our coding style
+  scripts/kernel-doc: some fixes to kernel-doc comments
+
+ scripts/kernel-doc.py                | 79 ++++++++++++++++++----------
+ tools/lib/python/kdoc/kdoc_parser.py | 35 +++++++++---
+ 2 files changed, 78 insertions(+), 36 deletions(-)
+
+-- 
+2.52.0
 
 
