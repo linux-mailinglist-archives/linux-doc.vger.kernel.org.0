@@ -1,213 +1,111 @@
-Return-Path: <linux-doc+bounces-72864-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-72866-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50036D3930A
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Jan 2026 07:36:18 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id E5286D39397
+	for <lists+linux-doc@lfdr.de>; Sun, 18 Jan 2026 10:46:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id D10C6300348E
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Jan 2026 06:36:15 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 20C233005016
+	for <lists+linux-doc@lfdr.de>; Sun, 18 Jan 2026 09:46:11 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A84EF1F03D9;
-	Sun, 18 Jan 2026 06:36:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D44392D59FA;
+	Sun, 18 Jan 2026 09:46:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Zee7kwuB"
+	dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b="JsIn2dj1"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
+Received: from todd.t-8ch.de (todd.t-8ch.de [159.69.126.157])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A79517D6;
-	Sun, 18 Jan 2026 06:36:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7127C2627F9;
+	Sun, 18 Jan 2026 09:46:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.126.157
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768718174; cv=none; b=T7X3NLpotNtC+8asSXHQgwBkGGlB48iXkjoGjkMrVC49tFiUhW6ygefTP33UsLeZ1k96pH2h+MCJFOu0Vxizz+eCZ2k14B1TrB8fpDEj4zRR6RJQpTLYkvHlXWiDvqpSi0xZIqmnJ1kKyt0vO/mjuLVWe+Bq19LxYXkSqS7A8mo=
+	t=1768729566; cv=none; b=Y0sRz2hEKWAKAFGJ20AC3x0OxzCQfeO1/Wbi8T303tS8dYwuJKVvGhTAYYqC0+xlt1tJQnHIHsOe3UPI0wdwUL7MAcmTawidMzpTOBi1SJqj02AEY895SaG//JoUvoHoJBBrawuim2FFHl5aR2nfvHoA6SKrcUMXp0OXbzSeEpA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768718174; c=relaxed/simple;
-	bh=aKLCKvaFUBdlP+9DOV2yYz6au92+CHN/1gNqOaUJJBw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eYyywrd65tJBH68DfARUUs8nfcWzRr6YCC4/Tq307RBIlULc2oE6TxDPm4XpPB5Nc1YKO1e7YJ6/Sm6y1jteFYpY5+pREA0aAx7Uxog6e9viTmrIvPDcsONXOripPzcIUAYBjYNYN3GPfmBWGfyq8aNDDnkPzhxGoO3xAsQ1pIw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Zee7kwuB; arc=none smtp.client-ip=192.198.163.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1768718172; x=1800254172;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=aKLCKvaFUBdlP+9DOV2yYz6au92+CHN/1gNqOaUJJBw=;
-  b=Zee7kwuBTH0z0TLAJV/NuGEofMzRh7y1wFn/F/d6SIqO/Emng9f3CDvq
-   dl4yBpFrfY/b1euhMVgnvmsM0azMSB6ZUkrqq+yySndcd0TNONVLTXpKd
-   kRHDciW8GQaNRznq+5IelkQp+CuTuqgjStjXsYdMG2uqoS7dSQVFZ4ZuN
-   kLiQB3Qb9x3ZoBSrBN0aO0J0pFzo8q99SxdFFEUK7DvYTF+qHSchHP0xd
-   +iY7+9ITzZsYQRe5vmzxMsM8z0Nk4uk0XFz+Ya4IJsgCpROEjNdrYAJMC
-   +Jt4CgxBZ1uxEWy14a2Mo8xh6+K92DJtEIFaiBJSSiGw25UdrgxG/kEdy
-   g==;
-X-CSE-ConnectionGUID: Km32jQg8TmGIXQnmpmGnBQ==
-X-CSE-MsgGUID: NNiWPGzgQwW/FF+/fpyWdQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11674"; a="73821862"
-X-IronPort-AV: E=Sophos;i="6.21,235,1763452800"; 
-   d="scan'208";a="73821862"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jan 2026 22:36:12 -0800
-X-CSE-ConnectionGUID: BPpWmG+ISj6n4H7uIA0V8g==
-X-CSE-MsgGUID: fZ4T/Se/QxyYisLOhJurYA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,235,1763452800"; 
-   d="scan'208";a="236270915"
-Received: from lkp-server01.sh.intel.com (HELO 765f4a05e27f) ([10.239.97.150])
-  by orviesa002.jf.intel.com with ESMTP; 17 Jan 2026 22:36:08 -0800
-Received: from kbuild by 765f4a05e27f with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1vhMOL-00000000MjQ-42l9;
-	Sun, 18 Jan 2026 06:36:05 +0000
-Date: Sun, 18 Jan 2026 14:36:04 +0800
-From: kernel test robot <lkp@intel.com>
-To: "Seokwoo Chung (Ryan)" <seokwoo.chung130@gmail.com>,
-	rostedt@goodmis.org, mhiramat@kernel.org, corbet@lwn.net,
-	shuah@kernel.org
-Cc: oe-kbuild-all@lists.linux.dev, mathieu.desnoyers@efficios.com,
-	linux-kernel@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kselftest@vger.kernel.org,
-	"Seokwoo Chung (Ryan)" <seokwoo.chung130@gmail.com>
-Subject: Re: [PATCH v5 v5 2/3] tracing/fprobe: Support comma-separated
- symbols and :entry/:exit
-Message-ID: <202601181443.vv7qeHyx-lkp@intel.com>
-References: <20260118011815.56516-3-seokwoo.chung130@gmail.com>
+	s=arc-20240116; t=1768729566; c=relaxed/simple;
+	bh=j9teSg/CW499Ay/SXpjrSx3XeprimzCE6iPiqSHY5uw=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VTgLaAvNaMT5IdYi8rKlq0AfCEOn7g2yEkC1Z54TRRj3NUlUgb8F0nw4IXCfFOeNx8RbqdXb0pixo3WacUVh43FYmwbMT9ylUy2EneDu7RV3EFHIg2cuzSoMZkNu+aTFvFFwyxpEnZePU38nW9TXqrygYpVER9N4i1OOw0fjJtw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net; spf=pass smtp.mailfrom=weissschuh.net; dkim=pass (1024-bit key) header.d=weissschuh.net header.i=@weissschuh.net header.b=JsIn2dj1; arc=none smtp.client-ip=159.69.126.157
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=weissschuh.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=weissschuh.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=weissschuh.net;
+	s=mail; t=1768729562;
+	bh=j9teSg/CW499Ay/SXpjrSx3XeprimzCE6iPiqSHY5uw=;
+	h=From:Subject:Date:To:Cc:From;
+	b=JsIn2dj1eVs7wxwkmFSDAdFDG2owyfVUyuYmFdwSqTkIi3IUsK+uCGYif7LONKkSS
+	 oeXEVgi+r/eVDTBBluCGh/gYkqAMiR0NAXqvX+NJmGDfA3Ztub1dEshnXxXNpc0kgc
+	 auvO/2w1bdrOJag02TtaWtZZ2TdbshI7GA7AmSSM=
+From: =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
+Subject: [PATCH v2 0/4] hwmon: (cros_ec) Fan target and temperature
+ thresholds
+Date: Sun, 18 Jan 2026 10:45:54 +0100
+Message-Id: <20260118-cros_ec-hwmon-pwm-v2-0-77eb1709b031@weissschuh.net>
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260118011815.56516-3-seokwoo.chung130@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22NwQ6CMBBEf4Xs2ZpSlYgn/8MQA9vF7oGWdJFqC
+ P9uxau3eZPMmwWEIpPApVgg0szCwWcwuwLQtf5Bim1mMNoc9cnUCmOQO6FyaQhejWlQ2iJWpe7
+ aHCDvxkg9vzbnrcnsWKYQ39vFXH7bn63S5z+2uVRaWVPbHk3Vd3i4JmIRQfd0e08TNOu6fgCGn
+ XLBtwAAAA==
+X-Change-ID: 20240529-cros_ec-hwmon-pwm-0dcc610ba0dc
+To: Benson Leung <bleung@chromium.org>, Tzung-Bi Shih <tzungbi@kernel.org>, 
+ Guenter Roeck <groeck@chromium.org>, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas@weissschuh.net>, 
+ Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, 
+ Jonathan Corbet <corbet@lwn.net>
+Cc: Dustin Howett <dustin@howett.net>, 
+ Mario Limonciello <mario.limonciello@amd.com>, 
+ Stephen Horvath <s.horvath@outlook.com.au>, chrome-platform@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+ Sung-Chi Li <lschyi@chromium.org>, linux-doc@vger.kernel.org, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <linux@weissschuh.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1768729562; l=1238;
+ i=linux@weissschuh.net; s=20221212; h=from:subject:message-id;
+ bh=j9teSg/CW499Ay/SXpjrSx3XeprimzCE6iPiqSHY5uw=;
+ b=2c7QAb4fz3t66wC76dHGvWktEERqTCgx83zFd9mc3kCI7c0jVp7l4cB7YTyAtI5JRvgmXcIHc
+ PaycsLbme2uCk+agQ/SldM/p/3TkRASVt6xWCAQs2P3HWaGv+LdEMRu
+X-Developer-Key: i=linux@weissschuh.net; a=ed25519;
+ pk=KcycQgFPX2wGR5azS7RhpBqedglOZVgRPfdFSPB1LNw=
 
-Hi Seokwoo,
+Add read-only support to cros_ec_hwmon for
+* fan target speed for fan 1
+* fan temperature thresholds  for all temp sensors
 
-kernel test robot noticed the following build errors:
+This series is meant to be merged through the hwmon tree.
 
-[auto build test ERROR on trace/for-next]
-[also build test ERROR on linus/master v6.19-rc5 next-20260116]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Tested on a Framework 13 AMD.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Seokwoo-Chung-Ryan/docs-tracing-fprobe-Document-list-filters-and-entry-exit/20260118-092055
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace for-next
-patch link:    https://lore.kernel.org/r/20260118011815.56516-3-seokwoo.chung130%40gmail.com
-patch subject: [PATCH v5 v5 2/3] tracing/fprobe: Support comma-separated symbols and :entry/:exit
-config: x86_64-randconfig-012-20260118 (https://download.01.org/0day-ci/archive/20260118/202601181443.vv7qeHyx-lkp@intel.com/config)
-compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260118/202601181443.vv7qeHyx-lkp@intel.com/reproduce)
+Signed-off-by: Thomas Weißschuh <linux@weissschuh.net>
+---
+Changes in v2:
+- Rebase onto hwmon-next
+- Drop already applied cros_ec_cmd_versions().
+- Drop PWM control patch as it is already implemented.
+- Drop write-access to temperature thresholds.
+- Link to v1: https://lore.kernel.org/r/20240608-cros_ec-hwmon-pwm-v1-0-d29dfc26fbc3@weissschuh.net
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202601181443.vv7qeHyx-lkp@intel.com/
+---
+Thomas Weißschuh (4):
+      hwmon: (cros_ec) Split up supported features in the documentation
+      hwmon: (cros_ec) Add support for fan target speed
+      hwmon: (cros_ec) Move temperature channel params to a macro
+      hwmon: (cros_ec) Add support for temperature thresholds
 
-All errors (new ones prefixed by >>):
+ Documentation/hwmon/cros_ec_hwmon.rst |  29 ++++++--
+ drivers/hwmon/cros_ec_hwmon.c         | 133 +++++++++++++++++++++++++++-------
+ 2 files changed, 129 insertions(+), 33 deletions(-)
+---
+base-commit: cd9625d235b6e42b0430f828f1d2a0b688923872
+change-id: 20240529-cros_ec-hwmon-pwm-0dcc610ba0dc
 
-   kernel/trace/trace_fprobe.c: In function 'parse_fprobe_spec':
-   kernel/trace/trace_fprobe.c:1282:12: error: invalid storage class for function 'trace_fprobe_create_internal'
-    1282 | static int trace_fprobe_create_internal(int argc, const char *argv[],
-         |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1513:12: error: invalid storage class for function 'trace_fprobe_create_cb'
-    1513 | static int trace_fprobe_create_cb(int argc, const char *argv[])
-         |            ^~~~~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1530:12: error: invalid storage class for function 'trace_fprobe_create'
-    1530 | static int trace_fprobe_create(const char *raw_command)
-         |            ^~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1535:12: error: invalid storage class for function 'trace_fprobe_release'
-    1535 | static int trace_fprobe_release(struct dyn_event *ev)
-         |            ^~~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1545:12: error: invalid storage class for function 'trace_fprobe_show'
-    1545 | static int trace_fprobe_show(struct seq_file *m, struct dyn_event *ev)
-         |            ^~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1572:12: error: invalid storage class for function 'enable_trace_fprobe'
-    1572 | static int enable_trace_fprobe(struct trace_event_call *call,
-         |            ^~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1608:12: error: invalid storage class for function 'disable_trace_fprobe'
-    1608 | static int disable_trace_fprobe(struct trace_event_call *call,
-         |            ^~~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1653:12: error: invalid storage class for function 'fprobe_register'
-    1653 | static int fprobe_register(struct trace_event_call *event,
-         |            ^~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1683:19: error: invalid storage class for function 'init_fprobe_trace_early'
-    1683 | static __init int init_fprobe_trace_early(void)
-         |                   ^~~~~~~~~~~~~~~~~~~~~~~
-   In file included from include/linux/fprobe.h:6,
-                    from kernel/trace/trace_fprobe.c:8:
->> include/linux/compiler.h:284:51: error: initializer element is not constant
-     284 |         __UNIQUE_ID(__PASTE(addressable_, sym)) = (void *)(uintptr_t)&sym;
-         |                                                   ^
-   include/linux/compiler.h:287:9: note: in expansion of macro '___ADDRESSABLE'
-     287 |         ___ADDRESSABLE(sym, __section(".discard.addressable"))
-         |         ^~~~~~~~~~~~~~
-   include/linux/init.h:251:9: note: in expansion of macro '__ADDRESSABLE'
-     251 |         __ADDRESSABLE(fn)
-         |         ^~~~~~~~~~~~~
-   include/linux/init.h:256:9: note: in expansion of macro '__define_initcall_stub'
-     256 |         __define_initcall_stub(__stub, fn)                      \
-         |         ^~~~~~~~~~~~~~~~~~~~~~
-   include/linux/init.h:269:9: note: in expansion of macro '____define_initcall'
-     269 |         ____define_initcall(fn,                                 \
-         |         ^~~~~~~~~~~~~~~~~~~
-   include/linux/init.h:275:9: note: in expansion of macro '__unique_initcall'
-     275 |         __unique_initcall(fn, id, __sec, __initcall_id(fn))
-         |         ^~~~~~~~~~~~~~~~~
-   include/linux/init.h:277:35: note: in expansion of macro '___define_initcall'
-     277 | #define __define_initcall(fn, id) ___define_initcall(fn, id, .initcall##id)
-         |                                   ^~~~~~~~~~~~~~~~~~
-   include/linux/init.h:295:41: note: in expansion of macro '__define_initcall'
-     295 | #define core_initcall(fn)               __define_initcall(fn, 1)
-         |                                         ^~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1702:1: note: in expansion of macro 'core_initcall'
-    1702 | core_initcall(init_fprobe_trace_early);
-         | ^~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1702:1: error: expected declaration or statement at end of input
-   kernel/trace/trace_fprobe.c: At top level:
-   kernel/trace/trace_fprobe.c:28:12: warning: 'trace_fprobe_create' used but never defined
-      28 | static int trace_fprobe_create(const char *raw_command);
-         |            ^~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:29:12: warning: 'trace_fprobe_show' used but never defined
-      29 | static int trace_fprobe_show(struct seq_file *m, struct dyn_event *ev);
-         |            ^~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:30:12: warning: 'trace_fprobe_release' used but never defined
-      30 | static int trace_fprobe_release(struct dyn_event *ev);
-         |            ^~~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:741:12: warning: 'fprobe_register' used but never defined
-     741 | static int fprobe_register(struct trace_event_call *event,
-         |            ^~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1653:12: warning: 'fprobe_register' defined but not used [-Wunused-function]
-    1653 | static int fprobe_register(struct trace_event_call *event,
-         |            ^~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1545:12: warning: 'trace_fprobe_show' defined but not used [-Wunused-function]
-    1545 | static int trace_fprobe_show(struct seq_file *m, struct dyn_event *ev)
-         |            ^~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1535:12: warning: 'trace_fprobe_release' defined but not used [-Wunused-function]
-    1535 | static int trace_fprobe_release(struct dyn_event *ev)
-         |            ^~~~~~~~~~~~~~~~~~~~
-   kernel/trace/trace_fprobe.c:1530:12: warning: 'trace_fprobe_create' defined but not used [-Wunused-function]
-    1530 | static int trace_fprobe_create(const char *raw_command)
-         |            ^~~~~~~~~~~~~~~~~~~
-
-
-vim +284 include/linux/compiler.h
-
-0ef8047b737d74 Juergen Gross  2024-11-29  275  
-7290d58095712a Ard Biesheuvel 2018-08-21  276  /*
-7290d58095712a Ard Biesheuvel 2018-08-21  277   * Force the compiler to emit 'sym' as a symbol, so that we can reference
-7290d58095712a Ard Biesheuvel 2018-08-21  278   * it from inline assembler. Necessary in case 'sym' could be inlined
-7290d58095712a Ard Biesheuvel 2018-08-21  279   * otherwise, or eliminated entirely due to lack of references that are
-7290d58095712a Ard Biesheuvel 2018-08-21  280   * visible to the compiler.
-7290d58095712a Ard Biesheuvel 2018-08-21  281   */
-92efda8eb15295 Sami Tolvanen  2022-09-08  282  #define ___ADDRESSABLE(sym, __attrs)						\
-92efda8eb15295 Sami Tolvanen  2022-09-08  283  	static void * __used __attrs						\
-9f14f1f91883aa Josh Poimboeuf 2025-09-17 @284  	__UNIQUE_ID(__PASTE(addressable_, sym)) = (void *)(uintptr_t)&sym;
-0ef8047b737d74 Juergen Gross  2024-11-29  285  
-
+Best regards,
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Thomas Weißschuh <linux@weissschuh.net>
+
 
