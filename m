@@ -1,171 +1,134 @@
-Return-Path: <linux-doc+bounces-73014-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73016-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1E97D3ABC1
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 15:25:04 +0100 (CET)
+Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
+	by mail.lfdr.de (Postfix) with ESMTPS id 65655D3AC4E
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 15:39:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id B5D783059988
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 14:23:20 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 006EE3137222
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 14:26:41 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B8E8E3803C4;
-	Mon, 19 Jan 2026 14:22:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 67A1837C0FC;
+	Mon, 19 Jan 2026 14:25:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="vtQokKD3"
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="f9vbwFAf"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-wm1-f73.google.com (mail-wm1-f73.google.com [209.85.128.73])
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BA4737F0F4
-	for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 14:22:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.73
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768832576; cv=none; b=A4Vf4ZUigZJcrWvcGgixRkMhpAnre2GSn0B+xMlZWaKhUpHfk0rSCYzePE12vbpdIGvwse8KvnYxAv5G0ZumTeVCINr0BJQ59llHi0+X2w2fKsY/lR8N8LqD3j00zuV0l6bUPLXkCEJLxu1KJ1KrHFpGj91TMzOtvpEIyb3+CGo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768832576; c=relaxed/simple;
-	bh=etOSXYsmYRMQFELu3qc1hkWPdFr4xMVn+jE7/2P81kE=;
-	h=Date:In-Reply-To:Mime-Version:References:Message-ID:Subject:From:
-	 To:Cc:Content-Type; b=Q4Ft3R+LLNlGf4mrC9n62p2CFG0EW8yJ7in4oawPyP9mCPspE1uVcrfKKchq+8tdcYGon1ybkOrHgq92q/seDEQ2YJ7J2U4N6qyAWjFEQt1UxZU5l5sL0cw8zdapxrGhSAapS41YQmZK0XcjIIxeuQ6srCFr3kOhymmX/mxUeJQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=flex--smostafa.bounces.google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=vtQokKD3; arc=none smtp.client-ip=209.85.128.73
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C34F837BE81
+	for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 14:25:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.47
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768832728; cv=pass; b=fE3Mjlg8CA2CZJFvzwa/ZlGNgx2A+JR6KVc6waVWUy9Ce13f7qU4+RsCqpeSeBwq1H7NKy7EyqujihlaiJHQqj43vCUhuwz0Jv/78Cvf/fSsOAjj+DQ0SkE+pRgGxBKnvx/00P9qXJt+4TDe19EzbPIilav4EHEg7MdmxqGTT5s=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768832728; c=relaxed/simple;
+	bh=yWfpM57Ov0hDYx5aY7CnSscsAijAfja4kjPeN0VMSfk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=JuIivJv7v1bJR+TBQqJ+cXuPXysysIuHaGWLl9vGmQkTjKXW6DvAqUFivPTwApeIxO6a5JoVH+ctyF5d8Ew0rOgmiW4XhIwkEV5p1IaOr8R1C/8gghr5j9i7SztQ7YrXNG0JcJYOz6w/rRWt0LQYyzw2sM0xEmXhAlbWcDAo0L4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=f9vbwFAf; arc=pass smtp.client-ip=209.85.208.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--smostafa.bounces.google.com
-Received: by mail-wm1-f73.google.com with SMTP id 5b1f17b1804b1-47d28e7960fso46557345e9.0
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 06:22:54 -0800 (PST)
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-6505d147ce4so11120a12.0
+        for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 06:25:26 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768832725; cv=none;
+        d=google.com; s=arc-20240605;
+        b=c92b2G6bm0mzTKN7amJ5VMhcp4ZBZhuI39A0yiA8snLzkl1q8PgA2l4g3j74cox/B8
+         vA+BIMtE+o3EWcd4g9MY1JH9R9q3cIxp383A/5QokNsXzaXh0SB7WQUcKu/utxwX24VG
+         jP0161xvi0zwNbswZSQkcEogN3LH1bPJ/PL8rGqNIPj1CBAvcgTaYj4aLQYJoN0gVjIO
+         y2pw7R/llcWZow9s9vnrVnBhClIZuLLj0B1zF4O5xC4nV22cyBc/2k4o/mC1sOhUNd+v
+         Bv7usGwcOpgiyf2YrIdNfEhiwM0QdBdGodgwICIwaTpibJ07TsoHDdulDDCVQoFQkIdt
+         GADQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=yWfpM57Ov0hDYx5aY7CnSscsAijAfja4kjPeN0VMSfk=;
+        fh=6kzXbLSKLd1XpfTbExZzRF/eREQ8JzBU5GYttgbV37M=;
+        b=d49j6RPeYScFClEykgnRZY7zgVd0Rm8PsQhhpAHYQGBeydVmUBev0MvovvPnuLQjhW
+         nlPp7uUn+8pPFBV+V6CvGRQ6oNRml2XmQX1QSpwZWsK2X9P0KO4Zb4+fEV8HKvXu9/xV
+         JuZt0+80z3rbQLeBiRByN2ijhJxNjhIQom2bRJhM58qoXoxOUpAb4Eu9UbXAHJZPpNKo
+         2J2g8qdeaxJn/bvnvZ4B6+drD1bFEZX0mPPJahMXuuPN/HUOl2up/JJWxGkrCi6CRNlQ
+         khotfAgTlklxISdEiEFEyBstDsdJDmKQz/ssnrSfbzYzypXeEvuIVZa6nTEdJEmTO4WV
+         zPPg==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1768832573; x=1769437373; darn=vger.kernel.org;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ctFjNYhvimSO0VVR6mHcQICH1dILW4P6822Kd8ujTu4=;
-        b=vtQokKD3GjkIALNjxl7uyYlDFN16vJZBvPzxsuIjEC4rm+5GdytAeNJnsfCUeBJ4Wn
-         shKbkPYwJE4kgG6hUd7L1HNIU62ltUM/kAjg2+TUR+ZunT7B91hO7lMLA0OVMrRMRQ5y
-         Iu1roPpaWs1edOot+Cz2o53QiCUA1DUmh5jY9R5VVx9xR6/Hp9rvkx3SUKbK1+DBrbhI
-         S8EF8Mkh+PpZyX/R72CIgN0H0z8rWDnNTWcjewtnse9sNIvAtd5vaFDENQshg9qadQUD
-         auWRnKhzW7400Wx2WObBPfZh50ivGa3UkD/oKRTNhHu1BjDP1dcryvfwTPrKWyWRvhz8
-         lEsg==
+        d=google.com; s=20230601; t=1768832725; x=1769437525; darn=vger.kernel.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=yWfpM57Ov0hDYx5aY7CnSscsAijAfja4kjPeN0VMSfk=;
+        b=f9vbwFAfi3MxgC50GvHv3PPEUNS7knePmO/YuVWCJrAO45RgmcG3TojzDY4fjvbzHm
+         Y2vR3/zSwNwb+cI1qo+P+i9K96KqMesDM0bpvT0kiz3QbYPE2AnQ+waYN7tkCwPr0mwg
+         FWBcuYWLrN0kAQhcgCxnvWgjO/CtFZ8UlZQEuxJJ0hnQNBJCGtX7ZMp4x7AgP3vYjfov
+         5Xs3BSgv9/7t3Yf558bnTIO/c4emE3MBXpd6uF2VoLWOgwSNksZVHJLpPM3m/gmp/N9h
+         CqQVj3g+4KwS59XCTy4kQwiZ7KNCmAf+DpwTOmGUC0vzry+37BIhQ/qwcZdpVhXTyCO6
+         7fIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768832573; x=1769437373;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ctFjNYhvimSO0VVR6mHcQICH1dILW4P6822Kd8ujTu4=;
-        b=WYCdzZjx24bN6EK9QLuZGJM06iJWimmCuMa2j+QzBb4KpAnz/6i4BjrTKizDHh2tYH
-         uZSW5bKqW3a+NU6emthlRbB1r2GCQ7l1hOtG7MjXCk0/1ijFLZMa67bkw/HREV4C49vM
-         JbaOeBaXVzzS8i4HZ4QCUUm45Z0AqHcyqwwWjsr2+NDQz3gGFX/gEuZ1ksLfYaP0X9t/
-         GnfCDwQGfhz1/jiaAVK1tE8O6lWRtD5QuHqQ0h7RRy0uoRxIo4lddz1w+nA8BwiU6NL/
-         QF8iNHsI5ymPQXBvZIaGaUrSSXM5htSCtyaRjEu2lanWnU6EkoZ1ChDKVRrigi9k1YLZ
-         sHsQ==
-X-Forwarded-Encrypted: i=1; AJvYcCW6ws3SI16m0ohSx3fbml9nboilUNLTigirS43zAMrAVoHt7ZWHH6AYrdCDsrndT+rA6DACR2WmmxQ=@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx66pvA0QcE+tcWEp2wWPatNWDW/zq9JogzSBNZ8XfkW41MAsy4
-	71BEEeN0TFnc98hQ/8D4OSQXfIKdx31RNg+nkS7g5aHHBX/55Q6SuD3tMV2N2xn/WDZMGCO9xnC
-	6EVbLSn8LqD5JmQ==
-X-Received: from wrwj14.prod.google.com ([2002:a5d:564e:0:b0:432:85e9:432f])
- (user=smostafa job=prod-delivery.src-stubby-dispatcher) by
- 2002:a05:600c:8b81:b0:477:9a28:b0a4 with SMTP id 5b1f17b1804b1-4801e2a2176mr148484965e9.0.1768832572948;
- Mon, 19 Jan 2026 06:22:52 -0800 (PST)
-Date: Mon, 19 Jan 2026 14:22:46 +0000
-In-Reply-To: <20260119142246.3821052-1-smostafa@google.com>
+        d=1e100.net; s=20230601; t=1768832725; x=1769437525;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=yWfpM57Ov0hDYx5aY7CnSscsAijAfja4kjPeN0VMSfk=;
+        b=MbAqWW4snTrCMBeJKiXQMayln8ybnYxMU1IA78oWOjiEH5KM4buHj8nh0aIVQyq+LY
+         oW7M3pUAd/OELDwnlj8iPvv2glfWTdRzt+qgUhsGNdwLHM0vPZ3+b80NdKRwH888z+zX
+         PosZ+pfxWnVwOUgBGnE9TFdd7kqyxovyKLNxvTv90BPJNLunH7qfxc5OawkkaG4rCczC
+         jxIf5NvtmqWOVoX3aJsA/kmliWxh2LOh+V8ySJ5nZmDa+P/udJkma3uBQTEpx3MmU1bk
+         8dz8sB9qS2itVq//9vCIZ+EM9lqEL7hS6nTeTuSMhwGue/dyxmITrbY2ZvbcjO+ysvA1
+         SCIw==
+X-Forwarded-Encrypted: i=1; AJvYcCWURx2B6xgElMMxAmcvxZezra3A/DKAcLaSrxjJaSwb8rme5V11vTFMObXDE7ok2aldLb2Q3fKiUwA=@vger.kernel.org
+X-Gm-Message-State: AOJu0YxYzNbogNW+l6uWO/5oRmdmf3b88l1h6ql8GyUqxjsiPBBMblrX
+	xBI/nnA9A3J8IsaAUYml6XvEnhDR+siXkKUrZoAUSbl6lUrNaC2w7zOhPKkT9/exfGitCpPNxXk
+	96ODGPvSuwJ7U4CzvEf2V7QegcIVP/f7FtTGTuQvJ
+X-Gm-Gg: AZuq6aK8SX4XU18XYKoYDteE1v413ViEw1JJOoew++UUNWT30bKCe1fMT9/cLjTASmP
+	NX7tJLqdsOgQpqWBdYZRjv1/l+zQYsh3YydDr9WEWCgzAcXQoS/ZXqNRAMrisVu0VcbAxWMYpdz
+	Caen7vqnN7n2PSy+h1ikFfEN9N421TVnVc7zMgZs5AWce41mY6smq+39m2esK7WcsomrS8XX0bY
+	HX6Xs85+bzji60vh6ILe7WbJMdgEfQA/jsqTeuwJlC3TIXPIll9nBdkaV4NxwmbXh2av1g=
+X-Received: by 2002:aa7:d914:0:b0:645:21c1:97e1 with SMTP id
+ 4fb4d7f45d1cf-6560b37891fmr63399a12.18.1768832724914; Mon, 19 Jan 2026
+ 06:25:24 -0800 (PST)
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-References: <20260119142246.3821052-1-smostafa@google.com>
-X-Mailer: git-send-email 2.52.0.457.g6b5491de43-goog
-Message-ID: <20260119142246.3821052-3-smostafa@google.com>
-Subject: [PATCH 2/2] iommu: debug-pagealloc: Use page_ext_get_phys()
+MIME-Version: 1.0
+References: <20260114164322.787125-1-smostafa@google.com> <f3ab0156-3d7c-470d-9c1e-922195ea27af@linux.intel.com>
+ <CAFgf54rVPaUgbouXWQkczCyFQvXkrei_x6FYY6n1X5NkSSwYfA@mail.gmail.com> <aWos4aIxKpqWuHoK@willie-the-truck>
+In-Reply-To: <aWos4aIxKpqWuHoK@willie-the-truck>
 From: Mostafa Saleh <smostafa@google.com>
-To: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org
-Cc: corbet@lwn.net, joro@8bytes.org, will@kernel.org, robin.murphy@arm.com, 
-	akpm@linux-foundation.org, vbabka@suse.cz, surenb@google.com, mhocko@suse.com, 
-	jackmanb@google.com, hannes@cmpxchg.org, ziy@nvidia.com, david@redhat.com, 
+Date: Mon, 19 Jan 2026 14:25:11 +0000
+X-Gm-Features: AZwV_QgGzbNYGrxymBlNJ_B6_tKEdbujc-QXDCatHQBzV6r02BmVWWZUnnYdT0I
+Message-ID: <CAFgf54r+RW0ot2Pmv6z6yvb90ADheWeRkxDsa503vOw7nXpZQQ@mail.gmail.com>
+Subject: Re: [PATCH v7 0/5] iommu: Add page_ext for IOMMU_DEBUG_PAGEALLOC
+To: Will Deacon <will@kernel.org>
+Cc: Baolu Lu <baolu.lu@linux.intel.com>, linux-mm@kvack.org, iommu@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org, corbet@lwn.net, 
+	joro@8bytes.org, robin.murphy@arm.com, akpm@linux-foundation.org, 
+	vbabka@suse.cz, surenb@google.com, mhocko@suse.com, jackmanb@google.com, 
+	hannes@cmpxchg.org, ziy@nvidia.com, david@redhat.com, 
 	lorenzo.stoakes@oracle.com, Liam.Howlett@oracle.com, rppt@kernel.org, 
-	xiaqinxin@huawei.com, baolu.lu@linux.intel.com, rdunlap@infradead.org, 
-	Mostafa Saleh <smostafa@google.com>
+	xiaqinxin@huawei.com, rdunlap@infradead.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Instead of calling pfn_valid() and then getting the page, call
-the newly added function page_ext_get_phys(), which would also
-check for MMIO and offline memory and return NULL in that case.
+On Fri, Jan 16, 2026 at 12:19=E2=80=AFPM Will Deacon <will@kernel.org> wrot=
+e:
+>
+> On Fri, Jan 16, 2026 at 09:08:42AM +0000, Mostafa Saleh wrote:
+> > Sorry I was travelling all day yesterday. I see Jorg hasn't done the
+> > pull request yet, so I was hoping we can still change it.
+> > But I can send the fix separately also.
+>
+> iommu/core is a stable (non-rebasing) branch, so patches on top, please.
+>
 
-Signed-off-by: Mostafa Saleh <smostafa@google.com>
----
- drivers/iommu/iommu-debug-pagealloc.c | 31 ++++++++++++---------------
- 1 file changed, 14 insertions(+), 17 deletions(-)
+I see, I posted the fix separately in:
+https://lore.kernel.org/linux-iommu/20260119142246.3821052-1-smostafa@googl=
+e.com/
 
-diff --git a/drivers/iommu/iommu-debug-pagealloc.c b/drivers/iommu/iommu-debug-pagealloc.c
-index c080a38f45a4..9343af3bdbb6 100644
---- a/drivers/iommu/iommu-debug-pagealloc.c
-+++ b/drivers/iommu/iommu-debug-pagealloc.c
-@@ -30,14 +30,6 @@ struct page_ext_operations page_iommu_debug_ops = {
- 	.need = need_iommu_debug,
- };
- 
--static struct page_ext *get_iommu_page_ext(phys_addr_t phys)
--{
--	struct page *page = phys_to_page(phys);
--	struct page_ext *page_ext = page_ext_get(page);
--
--	return page_ext;
--}
--
- static struct iommu_debug_metadata *get_iommu_data(struct page_ext *page_ext)
- {
- 	return page_ext_data(page_ext, &page_iommu_debug_ops);
-@@ -45,18 +37,26 @@ static struct iommu_debug_metadata *get_iommu_data(struct page_ext *page_ext)
- 
- static void iommu_debug_inc_page(phys_addr_t phys)
- {
--	struct page_ext *page_ext = get_iommu_page_ext(phys);
--	struct iommu_debug_metadata *d = get_iommu_data(page_ext);
-+	struct page_ext *page_ext = page_ext_get_phys(phys);
-+	struct iommu_debug_metadata *d;
-+
-+	if (!page_ext)
-+		return;
- 
-+	d = get_iommu_data(page_ext);
- 	WARN_ON(atomic_inc_return_relaxed(&d->ref) <= 0);
- 	page_ext_put(page_ext);
- }
- 
- static void iommu_debug_dec_page(phys_addr_t phys)
- {
--	struct page_ext *page_ext = get_iommu_page_ext(phys);
--	struct iommu_debug_metadata *d = get_iommu_data(page_ext);
-+	struct page_ext *page_ext = page_ext_get_phys(phys);
-+	struct iommu_debug_metadata *d;
-+
-+	if (!page_ext)
-+		return;
- 
-+	d = get_iommu_data(page_ext);
- 	WARN_ON(atomic_dec_return_relaxed(&d->ref) < 0);
- 	page_ext_put(page_ext);
- }
-@@ -104,11 +104,8 @@ void __iommu_debug_map(struct iommu_domain *domain, phys_addr_t phys, size_t siz
- 	if (WARN_ON(!phys || check_add_overflow(phys, size, &end)))
- 		return;
- 
--	for (off = 0 ; off < size ; off += page_size) {
--		if (!pfn_valid(__phys_to_pfn(phys + off)))
--			continue;
-+	for (off = 0 ; off < size ; off += page_size)
- 		iommu_debug_inc_page(phys + off);
--	}
- }
- 
- static void __iommu_debug_update_iova(struct iommu_domain *domain,
-@@ -123,7 +120,7 @@ static void __iommu_debug_update_iova(struct iommu_domain *domain,
- 	for (off = 0 ; off < size ; off += page_size) {
- 		phys_addr_t phys = iommu_iova_to_phys(domain, iova + off);
- 
--		if (!phys || !pfn_valid(__phys_to_pfn(phys)))
-+		if (!phys)
- 			continue;
- 
- 		if (inc)
--- 
-2.52.0.457.g6b5491de43-goog
+Thanks,
+Mostafa
 
+> Will
 
