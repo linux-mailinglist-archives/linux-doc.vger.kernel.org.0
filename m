@@ -1,47 +1,47 @@
-Return-Path: <linux-doc+bounces-73047-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73048-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE4B8D3B081
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:24:15 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id E0024D3B097
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:25:18 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 894003010FB0
+	by tor.lore.kernel.org (Postfix) with ESMTP id 915AF3035AB5
 	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:47 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 32B4F31197E;
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34F63311C06;
 	Mon, 19 Jan 2026 16:23:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GvCJSL7f"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sRp1g37/"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC8B52FE05D;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF9362FFDD6;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768839814; cv=none; b=WbvhmiAI+soPtoPE/cPslUCVAhzDEYdm/HbBOFt1bM//wqFfxBAHrmFj9Ep+eUuIlNBhbAtWbH0jKAh+LyVieTbHdh0RpwkS96J4eowRPrlinHIa/fopM/iLoBhILwMSxZFuxGBOQJ52DYZ8GV+BPb+vKYBn1guRy8rwI6IkupM=
+	t=1768839814; cv=none; b=hQ9+dkMPxHSAlA3G5Cp4NsQJdKaHK2xWEvtK0JVGXuT8gai0XD2jkAhJcG/PbsJpNTiyNrSoQzkmxpMr9OoSohntgKtmEVVqzgzN9R5ct5M1XapkpPJcdUKuv9dna5iKrql+p5GQfwoZYQ7L9R0vK6w4euKJsLpigZpo8kFiFMA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768839814; c=relaxed/simple;
-	bh=8E4r/s6Y7smA5NIglr3ktHdSZHhdGR4bBEvyzy03zT8=;
+	bh=vD2wOczQTMyK8eBInsPg/A/L1CMB+IhGbdrLcMRyq0M=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=QyD+nmunfv8lDfQ2uSLrhk//iy7Z4bZB5qlM2CyhAWg25/SqCv/Fngia/eVg51c8iJihB3cytiYKO1kmZUrpBkdbNjwd7wjJqHMmUHYcMG60Qw6YUXZ2wkDk509YquYm2ElSUiPcPhrHEicJjmpC+iblY95O78rMh80OVIoBzis=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GvCJSL7f; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DB7AC2BCFC;
+	 MIME-Version:Content-Type; b=DsAhLYv2ThThOKWJEUUKfK5sBi6d95AJywFNR8121Z8kvOm+i8BvsN6pSJ44GYV7yUYaab6A//qD5FHJFsJf/HbTsiQzgmCTakvikNJ1WWe/M3UU3Fli9JWQLE10fM9C+bVRIehkJNp727qEJkJnkkoJOUICk1yssyVBgR6Z7ic=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sRp1g37/; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B4BEC2BCB6;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768839814;
-	bh=8E4r/s6Y7smA5NIglr3ktHdSZHhdGR4bBEvyzy03zT8=;
+	bh=vD2wOczQTMyK8eBInsPg/A/L1CMB+IhGbdrLcMRyq0M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=GvCJSL7fFUz/LtAB3A2ZK+UEpWTUHPg6vLV92P46b+XbI5ddHsZfGM8GnXJ46wd0R
-	 IjWlQXqOhDalkiv2OuAeQwODkSTtp0qXfdGSZSD+lc4m+WChCYQ0IjGJ9f7YgbCMfy
-	 IhLUPxZ/ceIWwy6k0H7jDQMAbIfmcbi8tx0sQbY2DHplmhaEmHljQ8jyQUMZVTNm0Q
-	 yrmBInbPWsk8SrKofn4VXBtX2WPPb2ip5EraC2XWYPBcKpNhpRkTM2KdvDL8oRDIsk
-	 UPbaP4LVIbYCz3M//Tze12gZsOQGZO65cQvWxa5rD8ktsPnj/ngHTZ/xTJ3zsNHKtY
-	 l3AkJ8xSna+nA==
+	b=sRp1g37/1JO2xhTb25DKM8UcASOgLnA+U+o3wzGw0oLvlDJ5+p9SYowXD7+6CSGRP
+	 HVVSBIUy5EbUtexKNaBQyZ/BWAJxe38rUZZdPZkrwcqEZTiQh7/8Y4l6bZfzDzeK22
+	 IJ1brBdMAw/iuHL6l0VWzClzMzMBlUrI8Nmb2X7ES9dKl/URIlRO4SwU9RKnwDAiAJ
+	 w9TuIuxFc/wGmy0rwTzwzfFwxjMh2fDLC/HPvnLzVeuH8V5DM35sKE/lHqwzJTQcDe
+	 HQyL6zLoEXRwRBEPcAAVnM43nWQurOzZAoEAlNPITpoltANQ7FzNdLN3HexfGz9xBu
+	 9/YRhlkqc/KSA==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vhs2O-00000001j2W-2Lkp;
+	id 1vhs2O-00000001j2a-2SU2;
 	Mon, 19 Jan 2026 17:23:32 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -49,9 +49,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 18/25] docs: python: abi_regex: do some improvements at documentation
-Date: Mon, 19 Jan 2026 17:23:21 +0100
-Message-ID: <5419ad89a5042c1571198c2f055866674808579b.1768838938.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 19/25] docs: kabi: system_symbols: end docstring phrases with a dot
+Date: Mon, 19 Jan 2026 17:23:22 +0100
+Message-ID: <efd0e150d8e12d8ea2665f54a96b1997f32897b7.1768838938.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768838938.git.mchehab+huawei@kernel.org>
 References: <cover.1768838938.git.mchehab+huawei@kernel.org>
@@ -65,71 +65,77 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Add documentation for two consts and ensure that all sentenses
-will end with a dot.
+Some docstring classes are not ending with a dot. Fix to make it
+more uniform.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/abi/abi_regex.py | 26 ++++++++++++++++++++------
- 1 file changed, 20 insertions(+), 6 deletions(-)
+ tools/lib/python/abi/system_symbols.py | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/tools/lib/python/abi/abi_regex.py b/tools/lib/python/abi/abi_regex.py
-index d5553206de3c..d0c5e3ede6b5 100644
---- a/tools/lib/python/abi/abi_regex.py
-+++ b/tools/lib/python/abi/abi_regex.py
-@@ -16,10 +16,22 @@ from abi.abi_parser import AbiParser
+diff --git a/tools/lib/python/abi/system_symbols.py b/tools/lib/python/abi/system_symbols.py
+index 4a2554da217b..7bbefd274ea2 100644
+--- a/tools/lib/python/abi/system_symbols.py
++++ b/tools/lib/python/abi/system_symbols.py
+@@ -18,11 +18,11 @@ from random import shuffle
  from abi.helpers import AbiDebug
  
- class AbiRegex(AbiParser):
--    """Extends AbiParser to search ABI nodes with regular expressions"""
-+    """
-+    Extends AbiParser to search ABI nodes with regular expressions.
+ class SystemSymbols:
+-    """Stores arguments for the class and initialize class vars"""
++    """Stores arguments for the class and initialize class vars."""
  
--    # Escape only ASCII visible characters
-+    There some optimizations here to allow a quick symbol search:
-+    instead of trying to place all symbols altogether an doing linear
-+    search which is very time consuming, create a tree with one depth,
-+    grouping similar symbols altogether.
-+
-+    Yet, sometimes a full search will be needed, so we have a special branch
-+    on such group tree where other symbols are placed.
-+    """
-+
-+    #: Escape only ASCII visible characters.
-     escape_symbols = r"([\x21-\x29\x2b-\x2d\x3a-\x40\x5c\x60\x7b-\x7e])"
-+
-+    #: Special group for other nodes.
-     leave_others = "others"
- 
-     # Tuples with regular expressions to be compiled and replacement data
-@@ -88,13 +100,15 @@ class AbiRegex(AbiParser):
-         # Recover plus characters
-         (re.compile(r"\xf7"), "+"),
-     ]
-+
-+    #: Regex to check if the symbol name has a number on it.
-     re_has_num = re.compile(r"\\d")
- 
--    # Symbol name after escape_chars that are considered a devnode basename
-+    #: Symbol name after escape_chars that are considered a devnode basename.
-     re_symbol_name =  re.compile(r"(\w|\\[\.\-\:])+$")
- 
--    # List of popular group names to be skipped to minimize regex group size
--    # Use AbiDebug.SUBGROUP_SIZE to detect those
-+    #: List of popular group names to be skipped to minimize regex group size
-+    #: Use AbiDebug.SUBGROUP_SIZE to detect those.
-     skip_names = set(["devices", "hwmon"])
- 
-     def regex_append(self, what, new):
-@@ -148,7 +162,7 @@ class AbiRegex(AbiParser):
-     def get_regexes(self, what):
+     def graph_add_file(self, path, link=None):
          """
-         Given an ABI devnode, return a list of all regular expressions that
--        may match it, based on the sub-groups created by regex_append()
-+        may match it, based on the sub-groups created by regex_append().
+-        add a file path to the sysfs graph stored at self.root
++        add a file path to the sysfs graph stored at self.root.
          """
  
-         re_list = []
+         if path in self.files:
+@@ -43,7 +43,7 @@ class SystemSymbols:
+         self.files.add(path)
+ 
+     def print_graph(self, root_prefix="", root=None, level=0):
+-        """Prints a reference tree graph using UTF-8 characters"""
++        """Prints a reference tree graph using UTF-8 characters."""
+ 
+         if not root:
+             root = self.root
+@@ -173,7 +173,7 @@ class SystemSymbols:
+         self._walk(sysfs)
+ 
+     def check_file(self, refs, found):
+-        """Check missing ABI symbols for a given sysfs file"""
++        """Check missing ABI symbols for a given sysfs file."""
+ 
+         res_list = []
+ 
+@@ -214,7 +214,7 @@ class SystemSymbols:
+         return res_list
+ 
+     def _ref_interactor(self, root):
+-        """Recursive function to interact over the sysfs tree"""
++        """Recursive function to interact over the sysfs tree."""
+ 
+         for k, v in root.items():
+             if isinstance(v, dict):
+@@ -232,7 +232,7 @@ class SystemSymbols:
+ 
+ 
+     def get_fileref(self, all_refs, chunk_size):
+-        """Interactor to group refs into chunks"""
++        """Interactor to group refs into chunks."""
+ 
+         n = 0
+         refs = []
+@@ -250,7 +250,7 @@ class SystemSymbols:
+ 
+     def check_undefined_symbols(self, max_workers=None, chunk_size=50,
+                                 found=None, dry_run=None):
+-        """Seach ABI for sysfs symbols missing documentation"""
++        """Seach ABI for sysfs symbols missing documentation."""
+ 
+         self.abi.parse_abi()
+ 
 -- 
 2.52.0
 
