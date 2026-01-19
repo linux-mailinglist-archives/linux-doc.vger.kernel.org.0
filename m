@@ -1,47 +1,47 @@
-Return-Path: <linux-doc+bounces-73048-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73042-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0024D3B097
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:25:18 +0100 (CET)
+Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 57D5DD3B079
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:23:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id 915AF3035AB5
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:47 +0000 (UTC)
+	by sto.lore.kernel.org (Postfix) with ESMTP id 8E09C300A999
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 34F63311C06;
-	Mon, 19 Jan 2026 16:23:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E339930B512;
+	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sRp1g37/"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZG3re5R9"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF9362FFDD6;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBEFC2FBE0A;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768839814; cv=none; b=hQ9+dkMPxHSAlA3G5Cp4NsQJdKaHK2xWEvtK0JVGXuT8gai0XD2jkAhJcG/PbsJpNTiyNrSoQzkmxpMr9OoSohntgKtmEVVqzgzN9R5ct5M1XapkpPJcdUKuv9dna5iKrql+p5GQfwoZYQ7L9R0vK6w4euKJsLpigZpo8kFiFMA=
+	t=1768839814; cv=none; b=EVz/UXJXUO77Jw+Oe7a9fJmsRwlv045yHSdFS0Y/bYM1DYrWkqzIHunijrjuY7X0FhYjo/t4+0ergrop0ORhBMBO3v/C8YnNow6M8DttAWicIAeROllZiB/fWqa2aKc4nOU4uMRjVlo81xjdvYRBdRU9gp6NIPPH0tMTMRtt/7Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1768839814; c=relaxed/simple;
-	bh=vD2wOczQTMyK8eBInsPg/A/L1CMB+IhGbdrLcMRyq0M=;
+	bh=6uS4eQG9ngB34Mkx8eLKHA6/k7ERydcb0HVTVQ6Jz0M=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=DsAhLYv2ThThOKWJEUUKfK5sBi6d95AJywFNR8121Z8kvOm+i8BvsN6pSJ44GYV7yUYaab6A//qD5FHJFsJf/HbTsiQzgmCTakvikNJ1WWe/M3UU3Fli9JWQLE10fM9C+bVRIehkJNp727qEJkJnkkoJOUICk1yssyVBgR6Z7ic=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sRp1g37/; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B4BEC2BCB6;
+	 MIME-Version:Content-Type; b=r6jgaZivQtmSuHfbzRqKbiNzxi6aSuwzBkvpg0SzHSMyCFGf4ALoPxyHMN9JrNPtYjc23DJMNCokc3Mx/BNTzo+Qx7U5GRwDp2PoxcoW7UfavO0L3w5UMf7RxdkFLhkcDqI8a2vH2jpkvQOiOZkkxzQVrZR0LOZQmCXLdFDIrPs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZG3re5R9; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52950C32781;
 	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1768839814;
-	bh=vD2wOczQTMyK8eBInsPg/A/L1CMB+IhGbdrLcMRyq0M=;
+	bh=6uS4eQG9ngB34Mkx8eLKHA6/k7ERydcb0HVTVQ6Jz0M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=sRp1g37/1JO2xhTb25DKM8UcASOgLnA+U+o3wzGw0oLvlDJ5+p9SYowXD7+6CSGRP
-	 HVVSBIUy5EbUtexKNaBQyZ/BWAJxe38rUZZdPZkrwcqEZTiQh7/8Y4l6bZfzDzeK22
-	 IJ1brBdMAw/iuHL6l0VWzClzMzMBlUrI8Nmb2X7ES9dKl/URIlRO4SwU9RKnwDAiAJ
-	 w9TuIuxFc/wGmy0rwTzwzfFwxjMh2fDLC/HPvnLzVeuH8V5DM35sKE/lHqwzJTQcDe
-	 HQyL6zLoEXRwRBEPcAAVnM43nWQurOzZAoEAlNPITpoltANQ7FzNdLN3HexfGz9xBu
-	 9/YRhlkqc/KSA==
+	b=ZG3re5R95+lkt/qNBGewr4f9dnG2u+CFq1LXLJWWiQ/UU/d9iygGnyZA68b/SoDZ/
+	 v/N+LuKNo+iJUVHKpqlXiPuoFU6r2H22rnXIY4J2Diw6xKlDGR4I0ulOU2xCUvkz0f
+	 zMQ64pUYkj6fYP5k0bT+Z3J7vpHmtzkbo1SmZOBERPypt9WFs+XAGTzuK4XYes1G2Q
+	 Ah/6q2GPQRqYOaWE6iv4fZG8rV/E4wA/pu2v5hfUzXx0fdAWE5qbGkdfv13BVTHEEW
+	 wID5eBU3fdM/qp2UbJBtzrLxqYHWtK3RH+mZpni/Y/GEzgpdo1uVcguMfU885yvmZK
+	 yPPZFedrvkDvQ==
 Received: from mchehab by mail.kernel.org with local (Exim 4.99)
 	(envelope-from <mchehab+huawei@kernel.org>)
-	id 1vhs2O-00000001j2a-2SU2;
+	id 1vhs2O-00000001j2e-2ZI9;
 	Mon, 19 Jan 2026 17:23:32 +0100
 From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To: Jonathan Corbet <corbet@lwn.net>,
@@ -49,9 +49,9 @@ To: Jonathan Corbet <corbet@lwn.net>,
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
 	linux-kernel@vger.kernel.org,
 	Mauro Carvalho Chehab <mchehab@kernel.org>
-Subject: [PATCH 19/25] docs: kabi: system_symbols: end docstring phrases with a dot
-Date: Mon, 19 Jan 2026 17:23:22 +0100
-Message-ID: <efd0e150d8e12d8ea2665f54a96b1997f32897b7.1768838938.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 20/25] docs: kabi: helpers: add helper for debug bits 7 and 8
+Date: Mon, 19 Jan 2026 17:23:23 +0100
+Message-ID: <60e99b9060396eac8621954d6b8a73af45df90fb.1768838938.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <cover.1768838938.git.mchehab+huawei@kernel.org>
 References: <cover.1768838938.git.mchehab+huawei@kernel.org>
@@ -65,77 +65,25 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Some docstring classes are not ending with a dot. Fix to make it
-more uniform.
+The kabi logic supports 8 debug bits, but only 6 are currently
+documented. Document the remaining ones.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- tools/lib/python/abi/system_symbols.py | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ tools/lib/python/abi/helpers.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/tools/lib/python/abi/system_symbols.py b/tools/lib/python/abi/system_symbols.py
-index 4a2554da217b..7bbefd274ea2 100644
---- a/tools/lib/python/abi/system_symbols.py
-+++ b/tools/lib/python/abi/system_symbols.py
-@@ -18,11 +18,11 @@ from random import shuffle
- from abi.helpers import AbiDebug
- 
- class SystemSymbols:
--    """Stores arguments for the class and initialize class vars"""
-+    """Stores arguments for the class and initialize class vars."""
- 
-     def graph_add_file(self, path, link=None):
-         """
--        add a file path to the sysfs graph stored at self.root
-+        add a file path to the sysfs graph stored at self.root.
-         """
- 
-         if path in self.files:
-@@ -43,7 +43,7 @@ class SystemSymbols:
-         self.files.add(path)
- 
-     def print_graph(self, root_prefix="", root=None, level=0):
--        """Prints a reference tree graph using UTF-8 characters"""
-+        """Prints a reference tree graph using UTF-8 characters."""
- 
-         if not root:
-             root = self.root
-@@ -173,7 +173,7 @@ class SystemSymbols:
-         self._walk(sysfs)
- 
-     def check_file(self, refs, found):
--        """Check missing ABI symbols for a given sysfs file"""
-+        """Check missing ABI symbols for a given sysfs file."""
- 
-         res_list = []
- 
-@@ -214,7 +214,7 @@ class SystemSymbols:
-         return res_list
- 
-     def _ref_interactor(self, root):
--        """Recursive function to interact over the sysfs tree"""
-+        """Recursive function to interact over the sysfs tree."""
- 
-         for k, v in root.items():
-             if isinstance(v, dict):
-@@ -232,7 +232,7 @@ class SystemSymbols:
- 
- 
-     def get_fileref(self, all_refs, chunk_size):
--        """Interactor to group refs into chunks"""
-+        """Interactor to group refs into chunks."""
- 
-         n = 0
-         refs = []
-@@ -250,7 +250,7 @@ class SystemSymbols:
- 
-     def check_undefined_symbols(self, max_workers=None, chunk_size=50,
-                                 found=None, dry_run=None):
--        """Seach ABI for sysfs symbols missing documentation"""
-+        """Seach ABI for sysfs symbols missing documentation."""
- 
-         self.abi.parse_abi()
- 
+diff --git a/tools/lib/python/abi/helpers.py b/tools/lib/python/abi/helpers.py
+index 639b23e4ca33..b8c8dfb1272e 100644
+--- a/tools/lib/python/abi/helpers.py
++++ b/tools/lib/python/abi/helpers.py
+@@ -35,4 +35,6 @@ DEBUG_HELP = """
+ 16 - enable debug for what to regex conversion
+ 32 - enable debug for symbol regex subgroups
+ 64 - enable debug for sysfs graph tree variable
++128 - enable debug of search groups
++256 - enable displaying refrence tree graphs for undefined symbols.
+ """
 -- 
 2.52.0
 
