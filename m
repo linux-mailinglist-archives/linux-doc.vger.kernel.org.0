@@ -1,166 +1,219 @@
-Return-Path: <linux-doc+bounces-73027-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73029-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [172.232.135.74])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AD8AD3AFB3
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:56:01 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F24BD3B08C
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 17:24:45 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id 06DF230055A1
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 15:56:00 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 2BB06303BF8B
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 16:23:38 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A11323148A8;
-	Mon, 19 Jan 2026 15:55:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8E3BC2E7F32;
+	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="eJsm2F2c"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hH1COFGM"
 X-Original-To: linux-doc@vger.kernel.org
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3886438B7D9
-	for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 15:55:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.160.175
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768838159; cv=pass; b=u/oDy3MHfjGhFBBREJ2JVOdmlg9pCEBmcrCufr7I8elj0aYG4nhj6EEkAUDPGD/RSR4fxSDgShLhQ+ylgPoWgBmqCnWKyHB2Gzqmq+0+wEOyW/iyaooCcdjgqi1c1+Skh0IcBuX5NjqATLUj1T4jEnW1Re5BtSzivVrefJrI9rw=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768838159; c=relaxed/simple;
-	bh=oerooPL/kgCTBDoz7+mJmsEkb926v0K+H8Qy8IVf610=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=o30MAgZd28ZijYGc7g2trb/TJgfnAd55uoT/ghDdRze1rkb3PJvFRCU7YR2gBSOU8+GbGrZlsvkAG9RZAjc1uHP7pXp6o8OD2c13BU5ZWuHerq+zgw8KXb2emVC/iQsDBUG/1u9aCZs/zYhPYNXSZIg2BCii4Pk1ZQWg5Hcd2p0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=eJsm2F2c; arc=pass smtp.client-ip=209.85.160.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
-Received: by mail-qt1-f175.google.com with SMTP id d75a77b69052e-5014acad6f2so19371cf.1
-        for <linux-doc@vger.kernel.org>; Mon, 19 Jan 2026 07:55:54 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768838153; cv=none;
-        d=google.com; s=arc-20240605;
-        b=E2di5MJgqdIPvoQ7MQFWptB3CaKWoCUaDBAwGBohK8QMbu7fbffaQuETIsYEajkg7G
-         zlWlJFWMFYT030isvI42lMwGxYhZRtmKtlQlo9U5arKMQ2FtqnM+NHV60w9PcPvWOLcf
-         Crym6opLiDRZMM9+k4dhvBF3eGajDc0d0Virh5LCe6KCg8E62UjkFKtULlvpZH781eXy
-         KjgxpxVl5ys0JaML+YVAkBdr6RJVtE1MyKgjyNrKcTpK4VDexNbLCDS/hxF4SL4gzfBN
-         1AGWNMDNCgndTxNgH85dTZz8NIxmw6Uxf9gfLglhiCrIGwUO9uQYnzQTW4slIGrhufzg
-         Q14A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=t+CVQOz4f4pv4FZJxEWXVriYAxqFNoe7HY/c+6oYXd4=;
-        fh=R+yhDQOru+Erl+tNNCbwK8We7bYbeQM4DbLYqQu9cko=;
-        b=VXcZheaCYquTDK+BMCmj2o25Hgb1xOjDbf/yJFkFzoQREh4h0KFbDFfjdLj/DXAZvl
-         3wYj3JoNGMSGCTF/99xpxLBGSPRba54MGAAKbeHs5BBSM5QyY/BYlm1st2+ff48RjaHb
-         WS9aISIVr8OsXCA3Mz/QMzKc1uqEbZiGREsMiTxSGKqTXxorLItz+WYo1NmDX3GPAHXo
-         8n2TLndcsh6F0u/tW0Fmrbaj25I0w9YuehsvaxdbWc0STGM17a4PBkh60rdA6FkJXLh/
-         3uCn3E27Z9e+0aJxnBYVv2c/KIQj+TlCRdKmZvfEQ9oajsXsD1QODhfI6rBrC/uLZD2W
-         G12Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1768838153; x=1769442953; darn=vger.kernel.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=t+CVQOz4f4pv4FZJxEWXVriYAxqFNoe7HY/c+6oYXd4=;
-        b=eJsm2F2ccX7gDDVhbDxhPRzTVqrAe2fEmMzWyGbU1QIrRDD3biOY207owNHb3pGH2k
-         KAdBZqpBdSQd5RyJNMK4mTH5gw89EXI2ASPrkKysVCzh55b/jwObCrWtN1maQPnuUeMO
-         XSn38S5sZ1slp1An5c1i58YyD3GCuC/y0hVVfw2+qpF1IAxf8zxvxQT3L+jrZZACAKIo
-         fpLWqgI/hlMeZmQMptlNf0KsPJvunfhoQ3EDHBnraio27iVcgQIGbvoKbhZy6LPQMhTc
-         JPXnFUD/CXkFB4a0UxIkqDElzs5uGDR1Naek/nWGBPXE0xfEL1xmmwBRKMl5keeXimZr
-         lbJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768838153; x=1769442953;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=t+CVQOz4f4pv4FZJxEWXVriYAxqFNoe7HY/c+6oYXd4=;
-        b=fGbcUgkEC/pg/MO/YuFsnocbTcCk5FdkZFDWgfQejrPtzK2rgDHPqdp6aiom/djxzK
-         X3CZqwxv3k1nmC9iR+BoI+EdtEOPpH/OREXbWntAKQ9WioHjNprnGmjWpM9xluu7oPxa
-         DbaXr8+RTeRiEbfuq9UzJeviwcyjDDqbp5xHTv1MtFMyN4dfuLry/uxW891PVE7tDn8Z
-         Fj5flUYgyAKfmvWmTw/DTAkXnJ6xaaGVb0Y4GUN0VnIFYmte+J1aV/quU/G4MfEsDG48
-         cqqze6+uQmEId97D3+SEwEMHKSQxS3U+XnSIeV+LYQ1qEYrO++PU3nNiEaTWeu3cgmD4
-         WMfg==
-X-Forwarded-Encrypted: i=1; AJvYcCUPhA15SK6dRz9GoRpDHHmAHCUL/wbsofyDiwEPQLjtBseCFEgZJ2h7crZPEfffBaTOMwCROlHW3b4=@vger.kernel.org
-X-Gm-Message-State: AOJu0YwJobdezqQXZ1W+mPCibp/s/CKG9QgJ6abj71PRCRQ1hwAhBvEk
-	qFfbi4nurwSp3j+mnoUKoETOCmcpvJwNhkmpHEV9F8af7IqbZro6Ch0k+xG0vwLVnvRxWU5HIXx
-	NXXMAf6+I7XC2asoioWYcAzZFlzYf872ClkkOxuGG
-X-Gm-Gg: AY/fxX6uAe1PczCAZVjPOVtIKSoi43E489bcuuaXrtVhXdJypTw1QRnAATlf+x7WbYV
-	+XPzEPH6sX+LsCjwiV9vbjsQubU5U6KKigjq2HCz33tCZWC6LiOp2m+VzexMCPFlqHo0KnbbP+C
-	0/73BhqU2yboewn+0kfWULDc8E7+LrURe32A4faFfYWo8y1Aiz5u/uEJqxoL1MVe6Zple/VQv+4
-	pu28qAuyBHSgzgr6VCSmJ3DLIaJwmjLfR/KzdcmX+G66V9v3B4rOdbc1URi57t6vUYOG2Q=
-X-Received: by 2002:ac8:57cc:0:b0:4f3:5475:6b10 with SMTP id
- d75a77b69052e-502afaa0b9emr21378741cf.8.1768838152806; Mon, 19 Jan 2026
- 07:55:52 -0800 (PST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A4552DCBF2;
+	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1768839814; cv=none; b=dut3wseYOotH7hbMdNmewU52TeQfeY7H5+l+k+h6tecQXHDrG7SmpnN9pddb3t4nCIx28MlYsiXdtLyyjQkLCBR/I8Hvo9HWIzPhjdHLkvx4iuImbWw86hJNxHuDdpHCw1yukyIB6WVL03x+dT1Z3GH2aHOdNd06DWCIkmDtCpE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1768839814; c=relaxed/simple;
+	bh=CbT9W7kjxqMTDt7gP2oqff7b5O437PLlcjqYfbAgISA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=QxkGeDKYiqCba2kva6wMFtdMdgURtCJAJXfRC9hDVf+hhzjqlPgeBoyvp3DCJDt47zYHwb0EW7wA1uGsD6LoUjL1/bahmhLPRDI37Wf86ZaeqYLNUZ/Nxg7UmRNQLiBgkwv6U24kIvRUKwtc8W3eSecrYG0bglRtqmJ+tLBRV+g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hH1COFGM; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16E87C116C6;
+	Mon, 19 Jan 2026 16:23:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1768839814;
+	bh=CbT9W7kjxqMTDt7gP2oqff7b5O437PLlcjqYfbAgISA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=hH1COFGMylm5aFzvTlPr3moA9LAUjFt3X4uuj0brYTnJkq9yj2lavqfagTVWmPmIE
+	 WUvUfgyunKSkInts+qvCbsQGqZBz4sF/WRPYr2Ft5p2NncWEUJ1p6cok0KpO4Kpyjo
+	 AtHXvdB8PRvNaz/ldtbSsXXpPwVAkR2IW99otvYTc98IOA+1tq/94ltUDJCFEJJ2Fc
+	 JjgZe+dK5uuQYUoz9OfdyQpLnDnltHPm+t1ZiuSVvgNJf7zARB+oPYxnIlY4g1Xo5z
+	 9iExOgGzwak3WVSbwgnsRglKCD4iNFWeQfvJXFGIRHyolkVGGOO/CD3/mJcKNxIOHZ
+	 Q3fD8BSeYmp6w==
+Received: from mchehab by mail.kernel.org with local (Exim 4.99)
+	(envelope-from <mchehab+huawei@kernel.org>)
+	id 1vhs2O-00000001j1N-0Lz6;
+	Mon, 19 Jan 2026 17:23:32 +0100
+From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Jonathan Corbet <corbet@lwn.net>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	=?UTF-8?q?N=C3=ADcolas=20F=2E=20R=2E=20A=2E=20Prado?= <nfraprado@collabora.com>,
+	Petr Vorel <pvorel@suse.cz>,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Shuah Khan <skhan@linuxfoundation.org>
+Subject: [PATCH 00/25] Add tools/lib/python modules to Documentation/tools
+Date: Mon, 19 Jan 2026 17:23:03 +0100
+Message-ID: <cover.1768838938.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
 List-Id: <linux-doc.vger.kernel.org>
 List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260119142246.3821052-1-smostafa@google.com> <20260119142246.3821052-2-smostafa@google.com>
- <qu5oksvcaytolppeeale6rwf4bzvckvfdg3iw77kowrg4fn24a@p4hmieukkttu>
-In-Reply-To: <qu5oksvcaytolppeeale6rwf4bzvckvfdg3iw77kowrg4fn24a@p4hmieukkttu>
-From: Mostafa Saleh <smostafa@google.com>
-Date: Mon, 19 Jan 2026 15:55:41 +0000
-X-Gm-Features: AZwV_Qiw2HdJaRcL1F81HFaiwCNZCPdmUTScO3KLcBRCPXV-fWTgDvtVV_i5AzY
-Message-ID: <CAFgf54pFzyAj5MKBx8xcuME-BGGWS1ZZLkw5vSgN8sGPftq88A@mail.gmail.com>
-Subject: Re: [PATCH 1/2] mm/page_ext: Add page_ext_get_phys()
-To: =?UTF-8?B?SsO2cmcgUsO2ZGVs?= <joro@8bytes.org>
-Cc: linux-mm@kvack.org, iommu@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, corbet@lwn.net, will@kernel.org, 
-	robin.murphy@arm.com, akpm@linux-foundation.org, vbabka@suse.cz, 
-	surenb@google.com, mhocko@suse.com, jackmanb@google.com, hannes@cmpxchg.org, 
-	ziy@nvidia.com, david@redhat.com, lorenzo.stoakes@oracle.com, 
-	Liam.Howlett@oracle.com, rppt@kernel.org, xiaqinxin@huawei.com, 
-	baolu.lu@linux.intel.com, rdunlap@infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-On Mon, Jan 19, 2026 at 3:49=E2=80=AFPM J=C3=B6rg R=C3=B6del <joro@8bytes.o=
-rg> wrote:
->
-> On Mon, Jan 19, 2026 at 02:22:45PM +0000, Mostafa Saleh wrote:
-> > +static inline struct page_ext *page_ext_get_phys(phys_addr_t phys)
->
-> The name is misleading as it indicates that the function returns a physic=
-al
-> address. Maybe name it page_ext_from_phys()?
+Hi Jon,
 
-I will update it.
+This is an extended version of:
+    https://lore.kernel.org/linux-doc/cover.1768488832.git.mchehab+huawei@kernel.org/
 
->
-> > +{
-> > +     return NULL;
-> > +}
-> > +
-> >  static inline void page_ext_put(struct page_ext *page_ext)
-> >  {
-> >  }
-> > diff --git a/mm/page_ext.c b/mm/page_ext.c
-> > index 297e4cd8ce90..5fe65a0ac4f3 100644
-> > --- a/mm/page_ext.c
-> > +++ b/mm/page_ext.c
-> > @@ -538,6 +538,29 @@ struct page_ext *page_ext_get(const struct page *p=
-age)
-> >       return page_ext;
-> >  }
-> >
-> > +/**
-> > + * page_ext_get_phys() - Get the page_ext structure for a physical add=
-ress.
-> > + * @phys: The physical address to query.
-> > + *
-> > + * This function safely gets the `struct page_ext` associated with a g=
-iven
-> > + * physical address. It performs validation to ensure the address corr=
-esponds
-> > + * to a valid, online struct page before attempting to access it.
-> > + * It should return NULL for (MMIO, ZONE_DEVICE, holes, offline memory=
-)
->
-> It should?
->
+It basically adds everything we currently have inside libs/tool/python
+to "tools" book inside documentation.
 
-Yes, I can make it more definitive as "it returns"
+This version should be independent of the other series yet to be merged,
+(including the jobserver one).
 
-Thanks,
-Mostafa
+The vast amount of changes here are docstring cleanups and additions.
+They mainly consists on:
 
-> -Joerg
+- ensuring that every phrase will end with a period, making it uniform
+  along all files;
+- cleaning ups to better uniform docstrings;
+- variable descriptions now use "#:" markup, as it allows autodoc to
+  add them inside the documentation;
+- added some missing docstrings;
+- some new blank lines at comments to make ReST syntax parser happy;
+- add a couple of sphinx markups (mainly, code blocks).
+
+Most of those are minor changes, affecting only comments.
+
+It also has one patch per libarary type, adding them to docs.
+
+For kernel-doc, I did the cleanups first, as there is one code block
+inside tools/lib/python/kdoc/latex_fonts.py that would cause a Sphinx
+crash without such markups.
+
+The series actually starts with 3 fixes:
+
+- avoid "*" markups on indexes with deep> 3 to override text
+- a variable rename to stop abusing doctree name
+- don't rely on cwd to get Documentation/ location
+
+patch 4 adds support to document scripts either at:
+    - tools/
+    - scripts/
+
+patch 5 contains a CSS to better display autodoc html output.
+
+For those who want to play with documentation, documenting a python
+file is very simple. All it takes is to use:
+
+    .. automodule:: lib.python.<dir+name>
+
+Usually, we add a couple of control members to it to adjust
+the desired documentation scope (add/remove members, showing class
+inheritance, showing members that currently don't have
+docstrings, etc). That's why we're using:
+
+    .. automodule:: lib.python.kdoc.enrich_formatter
+       :members:
+       :show-inheritance:
+       :undoc-members:
+
+(and similar) inside tools/kdoc*.rst.
+
+autodoc allows filtering in/out members, file docstrings, etc.
+
+It also allows documenting just some members or functions with
+directives like:
+
+    ..autofunction:
+    ..automember:
+
+Sphinx also has a helper script to generate .rst files with
+documentation:
+
+    $ sphinx-apidoc -o foobar tools/lib/python/
+
+which can be helpful to discover what should be documented,
+although changes are needed to use what it produces.
+
+Mauro Carvalho Chehab (25):
+  docs: custom.css: prevent li marker to override text
+  docs: conf.py: don't use doctree with a different meaning
+  docs: conf: don't rely on cwd to get documentation location
+  docs: enable Sphinx autodoc extension to allow documenting python
+  docs: custom.css: add CSS for python
+  docs: kdoc: latex_fonts: Improve docstrings and comments
+  docs: kdoc_files: Improve docstrings and comments
+  docs: kdoc_item: Improve docstrings and comments
+  docs: kdoc_parser: Improve docstrings and comments
+  docs: kdoc_output: Improve docstrings and comments
+  docs: kdoc_re: Improve docstrings and comments
+  docs: kdoc: parse_data_structs: Improve docstrings and comments
+  docs: kdoc: enrich_formatter: Improve docstrings and comments
+  docs: kdoc: python_version: Improve docstrings and comments
+  docs: add kernel-doc modules documentation
+  docs: add kabi modules documentation
+  docs: python: abi_parser: do some improvements at documentation
+  docs: python: abi_regex: do some improvements at documentation
+  docs: kabi: system_symbols: end docstring phrases with a dot
+  docs: kabi: helpers: add helper for debug bits 7 and 8
+  docs: kabi: helpers: add documentation for each "enum" value
+  docs: add jobserver module documentation
+  docs: jobserver: do some documentation improvements
+  docs: add parse_features module documentation
+  docs: parse_features: make documentation more consistent
+
+ Documentation/conf.py                       |  23 +--
+ Documentation/sphinx-static/custom.css      |  12 ++
+ Documentation/tools/feat.rst                |  10 ++
+ Documentation/tools/index.rst               |   1 +
+ Documentation/tools/jobserver.rst           |  10 ++
+ Documentation/tools/kabi.rst                |  13 ++
+ Documentation/tools/kabi_helpers.rst        |  11 ++
+ Documentation/tools/kabi_parser.rst         |  10 ++
+ Documentation/tools/kabi_regex.rst          |  10 ++
+ Documentation/tools/kabi_symbols.rst        |  10 ++
+ Documentation/tools/kdoc.rst                |  12 ++
+ Documentation/tools/kdoc_ancillary.rst      |  46 ++++++
+ Documentation/tools/kdoc_output.rst         |  14 ++
+ Documentation/tools/kdoc_parser.rst         |  29 ++++
+ Documentation/tools/python.rst              |  13 ++
+ tools/lib/python/abi/abi_parser.py          |  33 ++--
+ tools/lib/python/abi/abi_regex.py           |  26 ++-
+ tools/lib/python/abi/helpers.py             |  42 ++---
+ tools/lib/python/abi/system_symbols.py      |  14 +-
+ tools/lib/python/feat/parse_features.py     |  27 +++-
+ tools/lib/python/jobserver.py               |  20 ++-
+ tools/lib/python/kdoc/enrich_formatter.py   |  20 ++-
+ tools/lib/python/kdoc/kdoc_files.py         |  23 +--
+ tools/lib/python/kdoc/kdoc_item.py          |  18 +++
+ tools/lib/python/kdoc/kdoc_output.py        |  60 ++++---
+ tools/lib/python/kdoc/kdoc_parser.py        | 169 +++++++++++---------
+ tools/lib/python/kdoc/kdoc_re.py            |  18 ++-
+ tools/lib/python/kdoc/latex_fonts.py        |  95 ++++++-----
+ tools/lib/python/kdoc/parse_data_structs.py |  62 ++++---
+ tools/lib/python/kdoc/python_version.py     |  20 ++-
+ 30 files changed, 607 insertions(+), 264 deletions(-)
+ create mode 100644 Documentation/tools/feat.rst
+ create mode 100644 Documentation/tools/jobserver.rst
+ create mode 100644 Documentation/tools/kabi.rst
+ create mode 100644 Documentation/tools/kabi_helpers.rst
+ create mode 100644 Documentation/tools/kabi_parser.rst
+ create mode 100644 Documentation/tools/kabi_regex.rst
+ create mode 100644 Documentation/tools/kabi_symbols.rst
+ create mode 100644 Documentation/tools/kdoc.rst
+ create mode 100644 Documentation/tools/kdoc_ancillary.rst
+ create mode 100644 Documentation/tools/kdoc_output.rst
+ create mode 100644 Documentation/tools/kdoc_parser.rst
+ create mode 100644 Documentation/tools/python.rst
+
+-- 
+2.52.0
+
 
