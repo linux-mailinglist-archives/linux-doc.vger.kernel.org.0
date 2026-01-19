@@ -1,47 +1,47 @@
-Return-Path: <linux-doc+bounces-73011-lists+linux-doc=lfdr.de@vger.kernel.org>
+Return-Path: <linux-doc+bounces-73015-lists+linux-doc=lfdr.de@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id C85E2D3ABD5
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 15:26:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C090ED3ABF0
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 15:30:41 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 5002E3109230
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 14:22:06 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id 05C24314227F
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Jan 2026 14:24:28 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7870D37C108;
-	Mon, 19 Jan 2026 14:22:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 847AF38B98D;
+	Mon, 19 Jan 2026 14:23:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LMmrHQY7"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LnT13sNO"
 X-Original-To: linux-doc@vger.kernel.org
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43D6A37BE8A;
-	Mon, 19 Jan 2026 14:22:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6091837F0EC;
+	Mon, 19 Jan 2026 14:23:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1768832523; cv=none; b=nf0tNftp27mq1ueH7TYhIVLoS6Q4tTwEqMjzmacZYi2VBXlvVKktZuqZOjLDDX92qJMhbZBwerB8xDTP+kophMXnjOi7jQCs+MBdWrGREcYlL/BSpjfDX42M6N27IfpFOtkGRHGDqFeLTi9RuXAToDUNhj1HP5Ktnto7ivCkGbw=
+	t=1768832586; cv=none; b=q/ax1m0TLOm1kilGnY/gkMzQvLo7RkE/JjzcvOijbBRsje0P/j/I5TJnP1kCMCstHyS3AX6AiRxvlB1/8YH+Kr7hl9X9wBpjkCwpvKMKGE3BozrV8t2Vn19s8LtulimkH7g4rt2eM9fBnaYcdreiJvLH6ivF9o1WolkIX7b4Rbc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1768832523; c=relaxed/simple;
-	bh=WBVpoKw8o9yBTcLvYiB2MF9kp550pzlScPkaZSf4FHo=;
+	s=arc-20240116; t=1768832586; c=relaxed/simple;
+	bh=ZYiZ725tfFyrW20mX2KvJ82kGFOCy/TZaBcAEBaIHWw=;
 	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=h2oRM3pYm8cXxfXd2yCTTafJq9Y0c1ERubn3p/SN8Jg93+eZ//wq1VLTliUkVVaTUuMJ3cuoMmJdvmk8NUHRy0pEdTC8cHeZmUL4afl8iMFJEAAMnQxyFMjLYv+W57J4bMMdovNia/CMppwAI6mUhhoohY7WFEfO3UXTo468xW4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LMmrHQY7; arc=none smtp.client-ip=10.30.226.201
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4928FC116C6;
-	Mon, 19 Jan 2026 14:22:00 +0000 (UTC)
+	 In-Reply-To:To:Cc; b=eccXkFzTHmFarvmxAvSepTctPPGJFjE+5RZd8dDhqE8RYdJJbsLl02D9RHehqqX2LEdH2YOv7D5H8w5L3zbmCWQSbEcnf8VLLNZtRzEGTp7MJp5V8kFpIyckvx+GmaO6daCD/rjPVU/m6XPgVvm5E/Wd3k5I0xZgzmiHLsAB++s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LnT13sNO; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3F03C116C6;
+	Mon, 19 Jan 2026 14:23:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1768832520;
-	bh=WBVpoKw8o9yBTcLvYiB2MF9kp550pzlScPkaZSf4FHo=;
+	s=k20201202; t=1768832586;
+	bh=ZYiZ725tfFyrW20mX2KvJ82kGFOCy/TZaBcAEBaIHWw=;
 	h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-	b=LMmrHQY75YP81mnTbne6AYMWH2t5+SXGO+KcQdm33ygwcjN5TrprexEO0Nqant2mm
-	 DacPvdxfx0G7NEpn+FxcKQ2Q3d2PTBcsRH8+HLG8StXnFzHqHGP/7jcaCGXJUkiIj6
-	 jeUp1k3XyPBZ9IIU+i0ufTPAhIPAWUJhHszmIAZfsHkl5iTPVUmaN/OekbGd707DTh
-	 ALvDrVbaHZpsvYNRcUE9wsqR2xdYPPqc2sfqa3CoYWNsf48fNZbD8dF0ugv5GiztOs
-	 PoDcXpf88Teo5iQha79Vc+qksB91FocSmo2DrOGluVzjDby1WU6K2FbTOgk91q8itf
-	 cpeWlzqUwiijg==
+	b=LnT13sNOcWqWByS5RO0YGVt82nVbnP+wZsG/aCjXeI1ioMhc5oyvrLjGPE1vYaTqu
+	 heNtwwIfy4laWbagrtQcd5TZEsIFp8i+Ca+uXIeQWvhLepq+Cvcp1ejCOS0cyd6cx/
+	 wA6aWGLSVlGogcSL4Qnt1wJDM9yqDKU8rg7oI8AAlkYP9fQ4eODybk7h2EdheUhIjv
+	 XetPvntEXzBcdhL4s/oTJXtqHUnTxoXUF6gO4POG19hC0tAbz9RXclGujbjgdRSTAz
+	 F7nq8n4RO/CYBxroemd8HeVNURTZB57g95Zm8J/rHGnCd56zYm8J7PjW2h8I6rzr7n
+	 B8ijRgEeyO/9w==
 Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 3BADA3A55FAF;
-	Mon, 19 Jan 2026 14:18:31 +0000 (UTC)
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id F2DCA3A55FAF;
+	Mon, 19 Jan 2026 14:19:36 +0000 (UTC)
 Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-doc@vger.kernel.org
@@ -50,39 +50,39 @@ List-Subscribe: <mailto:linux-doc+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-doc+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v2] docs: netdev: refine 15-patch limit
+Subject: Re: [PATCH net-next V2] docs: tls: Enhance TLS resync async process
+ documentation
 From: patchwork-bot+netdevbpf@kernel.org
 Message-Id: 
- <176883230977.1426077.11179349834998989169.git-patchwork-notify@kernel.org>
-Date: Mon, 19 Jan 2026 14:18:29 +0000
-References: <20260115-15-minutes-of-fame-v2-1-70cbf0883aff@kernel.org>
-In-Reply-To: <20260115-15-minutes-of-fame-v2-1-70cbf0883aff@kernel.org>
-To: Simon Horman <horms@kernel.org>
-Cc: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
- pabeni@redhat.com, corbet@lwn.net, netdev@vger.kernel.org,
- workflows@vger.kernel.org, linux-doc@vger.kernel.org
+ <176883237568.1426077.9228549068251064160.git-patchwork-notify@kernel.org>
+Date: Mon, 19 Jan 2026 14:19:35 +0000
+References: <1768298883-1602599-1-git-send-email-tariqt@nvidia.com>
+In-Reply-To: <1768298883-1602599-1-git-send-email-tariqt@nvidia.com>
+To: Tariq Toukan <tariqt@nvidia.com>
+Cc: edumazet@google.com, kuba@kernel.org, pabeni@redhat.com,
+ andrew+netdev@lunn.ch, davem@davemloft.net, corbet@lwn.net,
+ netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org, mbloch@nvidia.com, gal@nvidia.com,
+ bagasdotme@gmail.com, sd@queasysnail.net, shshitrit@nvidia.com
 
 Hello:
 
-This patch was applied to netdev/net.git (main)
+This patch was applied to netdev/net-next.git (main)
 by Jakub Kicinski <kuba@kernel.org>:
 
-On Thu, 15 Jan 2026 13:54:00 +0000 you wrote:
-> The 15 patch limit is intended by the maintainers to cover
-> all outstanding patches on the mailing list on a per-tree basis.
-> Not just those in a single patchset. Document this practice accordingly.
+On Tue, 13 Jan 2026 12:08:03 +0200 you wrote:
+> From: Shahar Shitrit <shshitrit@nvidia.com>
 > 
-> Signed-off-by: Simon Horman <horms@kernel.org>
-> ---
-> Changes in v2:
-> - Clarify that the limit is per-tree. (Jakub)
-> - Link to v1: https://lore.kernel.org/r/20260113-15-minutes-of-fame-v1-1-0806b418c6fd@kernel.org
+> Expand the tls-offload.rst documentation to provide a more detailed
+> explanation of the asynchronous resync process, including the role
+> of struct tls_offload_resync_async in managing resync requests on
+> the kernel side.
 > 
 > [...]
 
 Here is the summary with links:
-  - [v2] docs: netdev: refine 15-patch limit
-    https://git.kernel.org/netdev/net/c/ff7737946812
+  - [net-next,V2] docs: tls: Enhance TLS resync async process documentation
+    https://git.kernel.org/netdev/net-next/c/8fc807104125
 
 You are awesome, thank you!
 -- 
